@@ -1,0 +1,60 @@
+<div class="office_background">
+<div id="sabrina_data" class="grid5col1 grid5offset1"></div>
+<div id="data_start" class="grid5col2">
+
+  <div class="question">
+    <div class="arrow"></div>
+    <div class="text">
+      How do you want to access the data?
+    </div>
+  </div>
+
+  <div class="decision" name="query">
+    <div class="text">
+      <h2>Database</h2>
+      <p>Custom data queries of our database.</p>
+    </div>
+    <div class="arrow"></div>
+  </div>
+
+  <div class="decision" name="api">
+    <div class="text">
+      <h2>API</h2>
+      <p>Access the data directly.</p>
+    </div>
+    <div class="arrow"></div>
+  </div>
+
+  <div class="decision" name="classifications">
+    <div class="text">
+      <h2>Source List</h2>
+      <p>Browse the various classifications.</p>
+    </div>
+    <div class="arrow"></div>
+  </div>
+
+  <div class="help" name="help">
+    <div class="text">
+      <h2>Help</h2>
+      <p>Let me help you figure it out!</p>
+    </div>
+    <div class="arrow"></div>
+  </div>
+
+</div>
+</div>
+<script>
+
+  dataminas.sabrina({
+    "div": d3.select("#sabrina_data"),
+    "outfit": "lab",
+    "emotion": "smirk"
+  })
+
+  d3.selectAll("div.decision, div.help").on(vizwhiz.evt.click,function(){
+    var name = d3.select(this).attr("name")
+    if (name == "help") window.location = "/guide/"
+    else load_page("/data/"+name+"/");
+  })
+
+</script>

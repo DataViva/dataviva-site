@@ -1,0 +1,96 @@
+<div id="sabrina_industry_select" class="grid5col1 grid5offset1"></div>
+<div id="industry_options" class="grid5col2">
+  
+  <div class="question">
+    <div class="arrow"></div>
+    <div class="text">
+      What would you like to know about my industry?
+    </div>
+  </div>
+  
+  <div id="hs">
+
+    <div class="decision" name="destinations">
+      <div class="text">
+        Which <b>countries</b> import them?
+      </div>
+      <div class="arrow"></div>
+    </div>
+  
+    <div class="decision" name="potential">
+      <div class="text">
+        Which <b>locations</b> produce them?
+      </div>
+      <div class="arrow"></div>
+    </div>
+    
+  </div>
+  
+  <div id="isic">
+  
+    <div class="decision" name="workforce">
+      <div class="text">
+        Who do they <b>employ</b>?
+      </div>
+      <div class="arrow"></div>
+    </div>
+  
+    <div class="decision" name="potential">
+      <div class="text">
+        Where do they <b>locate</b>?
+      </div>
+      <div class="arrow"></div>
+    </div>
+  
+  </div>
+  
+  <div class="decision" name="diversification">
+    <div class="text">
+      Which industries <b>co-locate</b> with them?
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+  <div class="decision" name="location">
+    <div class="text">
+      What is the <b>production potential</b> of a location?
+    </div>
+    <div class="arrow"></div>
+  </div>
+
+</div>
+
+<script>
+
+  dataminas.sabrina({
+    "div": d3.select("#sabrina_industry_select"),
+    "outfit": "worker",
+    "emotion": "smirk",
+    "hat": "worker"
+  })
+  
+  if ([1,5].indexOf(current_path[1].length) >= 0) {
+    d3.select("#hs").remove();
+    var type = "isic"
+  }
+  else {
+    d3.select("#isic").remove();
+    var type = "hs"
+  }
+    
+  d3.json("/attrs/"+type+"/"+current_path[1], function(data){
+    d3.selectAll("div.question")
+      .each(function(){
+        var text = d3.select(this).html();
+        text = text.replace("my industry",data.data[0].name)
+        d3.select(this).html(text)
+      })
+  })
+  
+  d3.selectAll("div.decision")
+    .on(vizwhiz.evt.click, function() {
+      var name = d3.select(this).attr("name")
+      update_path(name);
+    })
+
+</script>

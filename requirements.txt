@@ -1,6 +1,9 @@
 # Flask framework
 flask
 
+# Helper lib for running scripts locally without server
+Flask-Script
+
 # Make managing logged in users easier
 flask-login
 

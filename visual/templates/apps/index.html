@@ -1,0 +1,37 @@
+<!-- extend from base layout -->
+{% extends "site.html" %}
+
+{% block title %}: Apps{% endblock %}
+
+{% block js %}
+
+  <script>
+  
+    function load_page(path){
+
+      if (d3.select("div#slide_container")[0][0]) {
+        dataminas.slide.remove();
+      }
+      
+      d3.html(path+"?ajax=true",function(content){
+        window.history.pushState({"html":'html',"pageTitle":'pageTitle'}, "", path);
+        dataminas.slide.load(content);
+      })
+      
+    }
+    
+    // Stuff to do only once, on page load
+    window.onload = function(){
+      
+      if ("{{ category }}" != "None") {
+        var path = "/apps/{{ category }}/";
+      }
+      else {
+        var path = "/apps/";
+      }
+      load_page(path);
+    }  
+
+  </script>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+<!-- extend admin_template -->
+{% extends "admin/admin_template.html" %}
+
+
+{% block admin_content %}
+<h4>Your Replies</h4>
+{% if replies|length %}
+  {% for r in replies %}
+    <p class="reply"><i class="icon-comments-alt"></i> {{ r.body|safe }}</p>
+    <div class="in-reply">
+      <h3>In reply to...</h2>
+      <a href="#">
+        <div class="decision">
+          <div class="text">
+            <h3>{{ r.question.question }}</h3>
+          </div>
+          <div class="arrow"></div>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+  {% else %}
+  <p><i>You have not made any replies yet!</i></p>
+  {% endif %}
+{% endblock %}

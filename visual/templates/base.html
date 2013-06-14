@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>
+      Data Minas {% block title %}{% endblock %}
+    </title>
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.reset.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/dataminas.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.inputs.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.grid.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.nav.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/vizwhiz.d3.css" />
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/libs/font-awesome/font-awesome-ie7.min.css?v=3">
+    <![endif]-->
+    
+    <script src="/static/js/libs/modernizr.custom.js"></script>
+    <script src="/static/js/libs/d3.v3.min.js"></script>
+    <script src="/static/js/libs/vizwhiz.d3.min.js"></script>
+    <script src="/static/js/libs/moment.min.js"></script>
+    <script>moment.lang("{{g.locale}}")</script>
+    <script src="/static/js/utils/utils.general.js"></script>
+    <script src="/static/js/utils/utils.dataminas.js"></script>
+    
+    {% block head %}
+    {% endblock %}
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    
+  </head>
+  <body>
+    
+    {% block content %}
+    {% endblock %}
+    
+    <script type="text/javascript">
+    
+      function login() {
+        var width = 680,
+            height = 480,
+            left = window.screenX+(window.innerWidth/2)-(width/2),
+            top = window.screenY+(window.innerHeight/2)-(height/2)
+        window.open('/account/login/','','width='+width+',height='+height+',\
+                                        left='+left+',top='+top+',\
+                                        scrollbars=no,resizable=no,\
+                                        location=no,menubar=no,toolbar=no')
+      }
+    
+      // Google Analytics Tracking Code
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-37318006-2', 'growth-ventures.com');
+      ga('send', 'pageview');
+    
+      // Take control of page resizing!
+      window.onresize = function(event) {
+        dataminas.resize();
+      }
+      dataminas.resize();
+    
+    </script>
+    
+    {% block js %}
+    {% endblock %}
+    
+  </body>
+</html>

@@ -1,0 +1,439 @@
+{% block head %}
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
+{% endblock %}
+
+{% block body %}
+<div class="grid4col1">
+  <div id="data_toggle">
+    <legend>Dataset</legend>
+    <label for="rais">RAIS</label>
+    <input type="radio" name="dataset" value="rais" onclick="change_dataset(this.value)" checked="checked">
+    <label for="secex">SECEX</label>
+    <input type="radio" name="dataset" value="secex" onclick="change_dataset(this.value)">
+  </div>
+  
+  <div id="years-dropdown">
+      <label for="year_filter">Years</label>
+      <select id="year_filter" onchange="">
+        <option value="all">All Years</option>
+        <option value="2002">2002</option>
+        <option value="2003">2003</option>
+        <option value="2004">2004</option>
+        <option value="2005">2005</option>
+        <option value="2006">2006</option>
+        <option value="2007">2007</option>
+        <option value="2008">2008</option>
+        <option value="2009">2009</option>
+        <option value="2010">2010</option>
+        <option value="2011">2011</option>
+      </select>
+  </div>
+  
+    <a id="location_filter" class="filter button active">
+      <p><i>filter by </i><b>LOCATION</b></p>
+    </a>
+    <div id="location_add" class="filter add" style="display: block">
+      <p id="{{ geo_location.id }}" class="filter_item" style="font-size: 18.568421052631578px;">
+        <span class="list_icon" title="{{ geo_location.id }}" style="background-color: rgb(255, 0, 0); width: 21.221052631578946px; height: 21.221052631578946px;"></span>
+        <span class="filter_title" style="margin-left: 0px;">{{ geo_location.name_en }}</span>
+        <a><i class="icon-remove-sign" style="margin-left: -5px;"></i></a>
+      </p>
+      <a name="bra" class="add_filter button"><p>+ filter</p></a>
+    </div>
+  
+  <div id="rais_on">
+      <a id="industry_filter" class="filter button">
+        <p><i>filter by </i><b>INDUSTRY</b></p>
+      </a>
+      <div id="industry_add" class="filter add">
+        <span class="filler">Including all industries...</span>
+        <a name="isic" class="add_filter button"><p>+ filter</p></a>
+      </div>
+     
+      <a id="occupation_filter" class="filter button">
+        <p><i>filter by </i><b>OCCUPATION</b></p>
+      </a>
+      <div id="occupation_add" class="filter add">
+        <span class="filler">Including all occupations...</span>
+        <a name="cbo" class="add_filter button"><p>+ filter</p></a>
+      </div>
+
+    
+      <div id="rais_go" class="decision">
+        <div class="text">Build</div>
+        <div class="arrow"></div>
+      </div>
+      
+  </div>
+  
+  <div id="secex_on">
+      <a id="product_filter" class="filter button">
+        <p><i>filter by </i><b>PRODUCT</b></p>
+      </a>
+      <div id="product_add" class="filter add">
+        <span class="filler">Including all products...</span>
+        <a name="hs" class="add_filter button"><p>+ filter</p></a>
+      </div>
+    
+      <a id="country_filter" class="filter button">
+        <p><i>filter by </i><b>COUNTRY</b></p>
+      </a>
+      
+      <div id="country_add" class="filter add">
+        <span class="filler">Including all countries...</span>
+        <a name="wld" class="add_filter button"><p>+ filter</p></a>
+      </div>
+    
+      <div id="secex_go" class="decision">
+        <div class="text">Build</div>
+        <div class="arrow"></div>
+      </div>
+      
+  </div>
+</div>
+
+<div class="grid4col3">
+  <div id="table_container">
+    <div id="results">
+      <table>
+        <thead>
+          <tr>
+            <!-- <th><a href="#"></a></th>
+            <th><a href="#">ID</a></th>
+            <th><a href="#">Category</a></th>
+            <th><a href="#">Name (English)</a></th>
+            <th><a href="#">Name (Portuguese)</a></th> -->
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var CURRENT_PAGE = 1;
+  var CURRENT_DATASET = 'rais';
+  var ORDER_DIRECTIONS = ["desc", "asc", ""]
+  var COLUMNS = ["year", "bra_id", "isic_id", "hs_id", "cbo_id", "wld_id", "wage", "num_emp", "num_est", "val_usd", "val_kg", "val_qty", "rca", "growth_pct", "growth_pct_total", "growth_val", "growth_val_total"]
+
+  // add icons to tags!
+  d3.selectAll(".list_icon")
+    .style("background-image", function(){
+      var tag_el = d3.select(this);
+      return "url('"+ dataminas.icon(tag_el.attr("title"), "bra") + "')"
+    })
+  d3.select(d3.select(".icon-remove-sign").node().parentNode).on("click", function(){
+    d3.select(this.parentNode).remove();
+  })
+
+  dataminas.toggle("dataset");
+  dataminas.dropdown("#year_filter");
+
+  d3.selectAll("#secex_on").style("display", "none")
+  d3.selectAll("#rais_on").style("display", "block")
+
+  dataminas.resize();
+  
+  
+  // default load page with data
+  update_table(CURRENT_DATASET);
+  
+  // Toggling between datasets (RAIS & SECEX)
+  function change_dataset(value){
+    if(value == "secex"){
+      d3.selectAll("#secex_on").style("display", "block")
+      d3.selectAll("#rais_on").style("display", "none")
+    }
+    else if(value == "rais"){
+      d3.selectAll("#secex_on").style("display", "none")
+      d3.selectAll("#rais_on").style("display", "block")
+    }
+    dataminas.resize();
+  }
+  
+  // Turning on button filters
+  d3.selectAll(".filter.button").on(vizwhiz.evt.click, function(){
+    
+    var classes = d3.select(this).attr("class");
+    var add_container = d3.select("#" + this.id.split("_")[0] + "_add")
+    
+    if(classes.indexOf("active") > -1){
+      d3.select(this).attr("class", classes.replace("active"))
+      add_container.style("display", "none")
+    }
+    else {
+      d3.select(this).attr("class", classes + " active")
+      add_container.style("display", "block")
+    }
+    
+
+    dataminas.resize();
+    
+  })
+  
+  // adding a filter
+  dataminas.popover.create({
+    "id": "popover",
+    "type": "bra",
+    "width": "50%",
+    "height": "80%"
+  })
+  var nd = d3.select("#popover")
+    .append("div")
+    .style("height", "100%")
+
+  var selector = Selector()
+    .callback("add_filter")
+    .language("en");
+
+  d3.selectAll(".add_filter").on(vizwhiz.evt.click, function(){
+    var selector_type = d3.select(this).attr("name")
+    nd.call(selector.type(selector_type));
+    dataminas.popover.show("#popover");
+  })
+  
+  function add_filter(obj){
+    var add_btn = "a[name='" + obj.type + "']"
+    var cont = d3.select(add_btn).node().parentNode;
+    dataminas.popover.hide();
+    
+    // remove filler text
+    d3.select(cont).selectAll("span.filler").remove()
+    
+    var p = d3.select(cont)
+      .insert("p", add_btn)
+      .attr("id", obj.id)
+      .attr("class", "filter_item")
+    p.append("span")
+      .attr("class","list_icon")
+      .style("background-image", "url('"+obj.icon+"')")
+      .style("background-color", obj.color)
+    p.append("span")
+      .attr("class","filter_title")
+      .text(obj.name)
+    p.append("a")
+      .on(vizwhiz.evt.click, function(){
+        d3.select(this.parentNode).remove();
+      })
+      .append("i")
+      .attr("class", "icon-remove-sign")
+    
+      dataminas.resize();
+    
+  }
+  
+  function is_active(selection){
+    if(selection.attr("class").indexOf("active") > -1){
+      return true;
+    }
+    return false;
+  }
+  
+  // retrieving new data
+  function update_table(dataset, order){
+    
+    // based on the dataset provided determine which filters we are interested in
+    var filters = {"location":"all", "industry":"all", "occupation":"all"}
+    if(dataset == "secex"){
+      filters = {"location":"all", "product":"all", "country":"all"}
+    }
+    
+    // go through each filter and see what's on the page (what the user's added)
+    d3.keys(filters).forEach(function(fname){
+      
+      // has the button been selected? if so we'll at least need to add this
+      // to the api call as 'show'
+      fdata = is_active(d3.select("#"+fname+"_filter")) ? "show" : filters[fname];
+      
+      // if this filter is active, we also need to check if items have been added
+      if(fdata == "show"){
+        
+        // are there any added filters?
+        var filter_items = d3.selectAll("#"+fname+"_add > p.filter_item");
+        if(!filter_items.empty()){
+          
+          // there are filter, lets add them to a list
+          fdata = []
+          filter_items.each(function(fi){
+            fdata.push(this.id)
+          })
+          
+          // concatenate filters using plus sign
+          fdata = fdata.join("+")
+        }
+      }
+      
+      // set the original filters object to our new filter
+      filters[fname] = fdata;
+      
+    })
+    
+    // set year
+    var year_dropdown = document.getElementById("year_filter");
+    var year_i = year_dropdown.selectedIndex
+    filters["year"] = year_dropdown.options[year_i].value
+      
+    if(dataset == "rais"){
+      var api_url = "/rais/" + [filters["year"], filters["location"], filters["industry"], filters["occupation"]].join("/")
+    }
+    else {
+      var api_url = "/secex/"+ [filters["year"], filters["location"], filters["product"], filters["country"]].join("/")
+    }
+    api_url += "?page=" + CURRENT_PAGE;
+    // console.log(api_url)
+    
+    d3.json(api_url, function(resp){
+      make_table(resp.data)
+      make_pages(resp.pagination)
+    })
+
+    // prevent page from submitting form
+    if(d3.event) d3.event.preventDefault();
+  }
+  
+  d3.select("#rais_go").on(vizwhiz.evt.click, function(){
+    CURRENT_PAGE = 1;
+    CURRENT_DATASET = 'rais';
+    update_table(CURRENT_DATASET);
+  })
+  d3.select("#secex_go").on(vizwhiz.evt.click, function(){
+    CURRENT_PAGE = 1;
+    CURRENT_DATASET = 'secex';
+    update_table(CURRENT_DATASET);
+  })
+  
+  function make_pages(pagination){
+    
+    d3.select(".grid4col3 div.pagination").remove()
+    
+    if(pagination.pages.length < 2){
+      return;
+    }
+    
+    var pagination_div = d3.select(".grid4col3")
+                          .append("div").attr("class", "pagination")
+    
+    if(pagination.has_prev){
+      pagination_div.append("a")
+        .attr("class", "button")
+        .html("&laquo; Previous")
+        .on(vizwhiz.evt.click, function(){
+          CURRENT_PAGE--;
+          update_table(CURRENT_DATASET);
+          d3.event.preventDefault();
+        })
+    }
+    
+    pagination.pages.forEach(function(p){
+      
+      if(!p){
+        pagination_div.append("span")
+          .attr("class", "ellipsis")
+          .text("…")
+      }
+      else if(p != pagination.page){
+        pagination_div.append("a")
+          .attr("class", "button")
+          .text(p)
+          .on(vizwhiz.evt.click, function(){
+            CURRENT_PAGE = parseInt(p);
+            update_table(CURRENT_DATASET);
+            d3.event.preventDefault();
+          })
+      }
+      else {
+        pagination_div.append("strong")
+          .attr("class", "button current_page")
+          .text(p)
+      }
+      
+
+    })
+    
+    if(pagination.has_next){
+      pagination_div.append("a")
+        .attr("class", "button")
+        .html("Next &raquo;")
+        .on(vizwhiz.evt.click, function(){
+          CURRENT_PAGE++;
+          update_table(CURRENT_DATASET);
+          d3.event.preventDefault();
+        })
+    }
+  }
+  
+  function make_table(dataset){
+  
+    // the columns we'd like to display
+    var columns = d3.keys(dataset[0]);
+    var ordered_columns = COLUMNS.filter(function(i) {return (columns.indexOf(i) > -1);});
+
+    // var table = d3.select("#results").append("table"),
+    //   thead = table.append("thead"),
+    //   tbody = table.append("tbody");
+    var selection = d3.select("#results")
+    
+    selection.selectAll('table').data([0]).enter().append('table');
+    var table = selection.select('table');
+    
+    table.selectAll('thead').data([0]).enter().append('thead').append('tr');
+    var thead = table.select('thead tr');
+
+    table.selectAll('tbody').data([0]).enter().append('tbody');
+    var tbody = table.select('tbody');
+    
+    // enter new header rows
+    var th = thead.selectAll("th").data(ordered_columns)
+    var th_enter = th.enter().append("th").text(function(column) { return column; })
+    
+    // th_enter.append("a")
+    //   .attr("href", "#")
+    
+    th.text(function(column) { return format_name(column, "en"); })
+    
+    // update header text
+    // th.selectAll("a")
+    //   .text(function(column) { return column; })
+      
+      
+      // .on("click", function(column, i){
+      //   console.log(column)
+      //   var current_direction = column.split(".")[1] ? column.split(".")[1] : "";
+      //   column = column.split(".")[0]
+      //   var current_direction_index = ORDER_DIRECTIONS.indexOf(current_direction) + 1
+      //   current_direction = ORDER_DIRECTIONS[current_direction_index % ORDER_DIRECTIONS.length]
+      //   column = column+"."+current_direction
+      //   
+      //   d3.select(this).datum(column)
+      //   update_table(CURRENT_DATASET, [column]);
+      //             
+      // });
+    
+    // remove old header columns
+    th.exit().remove()
+    
+    
+    // create a row for each object in the data
+    var rows = tbody.selectAll("tr").data(dataset)    
+    var rows_enter = rows.enter().append("tr");
+    
+    // create cells for each datum
+    var cells = rows.selectAll("td").data(function(row){
+        return ordered_columns.map(function(column) {
+          return {"column": column, "value": row[column]};
+        });
+    })
+    
+    cells.enter().append("td").style("padding", "2px 5px")
+    rows.selectAll("td").text(function(d) { return d.value; });
+    
+    // remove old cells
+    cells.exit().remove()
+    rows.exit().remove()
+  }
+
+</script>
+{% endblock %}

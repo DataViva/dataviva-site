@@ -1,0 +1,85 @@
+{% extends "help.html" %}
+
+{% block title %}Network{% endblock %}
+
+{% block body %}
+
+<h2>What is a network?</h2>
+<p>The network visualization is an app used to show the relatedness of industrial or export production. There are two different versions of this app, corresponding to the different outputs.</p>
+
+<h2>Product Space</h2>
+<p>In the product space, each node (circles) corresponds to one of the 866 products found in the Harmonized System product classification at the four digit level (HS4). The edges can be thought of as connecting the most similar products. For example, in the image below we see that “cocoa butter, fat, oil” (HS ID 1804) is connected to “cocoa powder, unsweetened” (HS ID 1805), “cocoa paste, not defatted” (HS ID 1803) and “cocoa bean whole” (HS ID 1801).</p>
+<img id="cocoa" src="/static/img/help/network/cocoa.jpg">
+
+<p>This similarity is not just an intuitive measure, but one that can be calculated and found empirically in the data. We have calculated this layout based on word trade data. To estimate how close two products are we count the number of countries that export both of them with Revealed Comparative Advatage (RCA) and divide this by the number of countries that export the most ubiquitous product in the pair. Let us take the following two products as an example: “cork” (HS ID 4502) and “wood pulp” (HS ID 4705).</p>
+<img id="proximity_hs" src="/static/img/help/network/proximity_hs.jpg">
+
+<h2>Industry Space</h2>
+<p>In the industry space, each node corresponds to one of the 410 industries found in the International Standard Industrial Classification at the four digit level (ISIC4). The industry space is calculated in a very similar way to the Product Space, but instead of using countries and products (world export data), we use industries and the occupations they employ from the Brazilian dataset. Looking at the example below we see two industries along with the occupations employed with Revealed Comparative Advantage (RCA). Again the best way of explaining this measure of proximity is with an example, take for instance the two industries: Trust and Funds (ISIC ID 6430) and Hunting (ISIC ID 0170)</p>
+<img id="proximity_isic" src="/static/img/help/network/proximity_isic.jpg">
+
+<h2>Sizing</h2>
+<p>The size of each node can be mapped to a few different data points. For the Industry Space, we can size by total monthly wages, number of employees, or number of establishments (as seen below).</p>
+<div class="ui_group">
+  <legend>Sizing</legend>
+  <input type="radio" name="sizing_isic" value="wage" checked>
+  <label for="wage">wage</label>
+  <input type="radio" name="sizing_isic" value="num_emp">
+  <label for="num_emp">num_emp</label>
+  <input type="radio" name="sizing_isic" value="num_est">
+  <label for="num_est">num_est</label>
+</div>
+
+<p>In the Product Space, we can size the nodes by total weight (in kg) of the product traded, or total trade value (in $USD).</p>
+<div class="ui_group">
+  <legend>Sizing</legend>
+  <input type="radio" name="sizing_hs" value="val_kg" checked>
+  <label for="val_kg">val_kg</label>
+  <input type="radio" name="sizing_hs" value="val_usd">
+  <label for="val_usd">val_usd</label>
+</div>
+
+<p>The sizing selector is located in the app controls, and can be shown by clicking "Show App Controls" in the menu on the top right of the interface.</p>
+
+<h2>Color</h2>
+<p>The color of the different nodes is used to differentiate between the different category groupings of the items being shown. For example, when viewing the <a href="/builder/network/mte/mg/all/all/isic/" target="_blank">Industry Space of Minas Gerais</a> the colors correspond to the various industry categories:</p>
+<img id="key_isic" src="/static/img/help/key/key_isic.jpg">
+
+<h2>Spotlight</h2>
+<p>In each network, you have the ability to turn on and off the coloring of nodes that the current location does not have RCA in. This functionality is called the "Spotlight", and helps to better differentiate between the two different types of nodes. It defaults to "on" when loading a network and can be accessed from the App Controls panel on the bottom of the screen.</p>
+<div class="ui_group">
+  <legend>Spotlight</legend>
+  <input type="radio" name="spotlight" value="true" checked>
+  <label for="true">true</label>
+  <input type="radio" name="spotlight" value="false">
+  <label for="false">false</label>
+</div>
+
+
+<h2>RCA</h2>
+<p>For the Product Space, you have the ability to change how the RCA is calculated. You can pick between using only Brazilian data, or using world data for exports of all countries (to see how a particular area stacks up against the rest of the world).</p>
+<div class="ui_group">
+  <legend>RCA</legend>
+  <input type="radio" name="rca" value="bra" checked>
+  <label for="bra">bra</label>
+  <input type="radio" name="rca" value="wld">
+  <label for="wld">wld</label>
+</div>
+
+
+
+{% endblock %}
+
+{% block js %}
+
+  <script type="text/javascript">
+  
+    dataminas.toggle("sizing_isic");
+    dataminas.toggle("sizing_hs");
+    dataminas.toggle("spotlight");
+    dataminas.toggle("rca");
+    dataminas.resize();
+    
+  </script>
+  
+{% endblock %}

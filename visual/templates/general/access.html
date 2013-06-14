@@ -1,0 +1,145 @@
+<html>
+  <head>
+    <title>Data Minas : Login</title>
+
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome/font-awesome.min.css" />
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/libs/font-awesome/font-awesome-ie7.min.css?v=3">
+    <![endif]-->
+    <style>
+    
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-align: center;
+      }
+      
+      div.login_container {
+        color: #333;
+        left: 50%;
+        margin-left: -114px;
+        margin-top: -110px;
+        position: absolute;
+        top: 50%;
+        width: 228px;
+      }
+      
+      div.logo {
+        background-image: url("/static/img/nav/logo.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: top center;
+        width: 189px;
+        height: 20px;
+        display: inline-block;
+        margin-bottom: 15px;
+      }
+      
+      div.input-prepend {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 0;
+        white-space: nowrap;
+      }
+      
+      span.add-on {
+        display: inline-block;
+        width: auto;
+        height: 16px;
+        min-width: 16px;
+        padding: 6px 5px;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 20px;
+        text-align: center;
+        text-shadow: 0 1px 0 #fff;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        -webkit-border-radius: 3px 0 0 3px;
+        -moz-border-radius: 3px 0 0 3px;
+        border-radius: 3px 0 0 3px;
+        margin-right: -1px;
+        vertical-align: top;
+      }
+      
+      form {
+        margin-bottom: 0px;
+      }
+    
+      input {
+        height: 30px;
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        float: center;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: normal;
+        padding: 5px;
+        margin: 0px;
+        width: 200px;
+        -webkit-border-radius: 0px;
+           -moz-border-radius: 0px;
+                border-radius: 0px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+           -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border linear .2s, box-shadow linear .2s;
+           -moz-transition: border linear .2s, box-shadow linear .2s;
+             -o-transition: border linear .2s, box-shadow linear .2s;
+                transition: border linear .2s, box-shadow linear .2s;
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+      }
+
+      input:focus {
+        border-color: #cc0000;
+        outline: 0;
+        outline: thin dotted \9;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px rgba(204, 0, 0, .6);
+           -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px rgba(204, 0, 0, .6);
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px rgba(204, 0, 0, .6);
+      }
+      
+      div.text {
+        font-size: 12px;
+        padding: 0px 5px;
+        text-align: left;
+      }
+      
+      a {
+        text-decoration: none;
+        color: #75665e;
+      }
+
+      a:hover {
+        text-decoration: none;
+        cursor: pointer;
+        color: #cc0000;
+      }
+    
+    </style>
+    
+  </head>
+  <body>
+    <div class="login_container">
+      <div class="logo"></div>
+      <div class="text">
+      Until we are able to complete extensive cross-browser compatibility, please use <b>Google Chrome</b> to view this site.
+      <br><br>
+      </div>
+      <form action="" method="post" name="">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-key"></i></span>
+          {{ form.pw() }}
+        </div>
+      </form>
+      <div class="text">
+      <br>
+      <b>Note:</b> This site is a work in progress. We are working hard everyday to fix bugs and improve the user experience.
+      <br><br>
+      If you have any questions, e-mail:
+      <br><a href="mailto:help@growth-ventures.com?Subject=Data%20Minas%20Help">help@growth-ventures.com</a>
+      </div>
+    </div>
+  </body>
+</head>

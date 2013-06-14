@@ -1,0 +1,66 @@
+{% extends "site.html" %}
+
+{% block head %}
+
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/vizwhiz.d3.css" />
+
+{% endblock %}
+
+{% block js %}
+
+  <script src="/static/js/utils/utils.selector.js"></script>
+
+  <script>
+  
+  var lang = "{{ g.locale }}"
+
+  // Stuff to do only once, on page load
+  window.onload = function(){
+    
+    if ("{{ category }}" != "None") {
+      load_selector("{{ category }}")
+    }
+    else {
+      d3.html("/explore/?ajax=true",function(content){
+        dataminas.slide.load(content);
+      })
+    }
+    
+    dataminas.breadcrumbs();
+  
+  }
+  
+  function update_path(name) {
+
+    var new_path = window.location.pathname+name+"/";
+    window.history.pushState({"html":'html',"pageTitle":'pageTitle'}, "", new_path);
+      
+    if (window.location.pathname.split("/").length == 4) {
+      dataminas.breadcrumbs(lang);
+    
+      load_selector(name);
+      
+    }
+    else {
+      window.location = new_path;
+    }
+  }
+  
+  function load_selector(name) {
+    dataminas.slide.remove();
+    var cat = {
+      "occupation": "cbo",
+      "location": "bra",
+      "industry": "isic",
+      "product": "hs",
+      "partner": "wld"
+    }
+    d3.html("/selector/"+cat[name]+"/",function(content){
+      dataminas.slide.load(content);
+    })
+  }
+
+  </script>
+  
+{% endblock %}

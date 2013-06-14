@@ -1,0 +1,87 @@
+.grid1 {
+  width: 98%;
+  margin: 0px 0.75%;
+  display: inline-block;
+  position: relative;
+}
+
+.grid4col1 {
+  width: 23%;
+  margin: 0px 0.75%;
+  display: inline-block;
+  position: relative;
+}
+
+.grid4col2 {
+  width: 48%;
+  margin: 0px 0.75%;
+  display: inline-block;
+  position: relative;
+}
+
+.grid4col3 {
+  width: 73%;
+  margin: 0px 0.75%;
+  display: inline-block;
+  position: relative;
+}
+
+.grid4offset1 {
+  margin-left: 24.5%;
+}
+
+.grid4offset2 {
+  margin-left: 49%;
+}
+
+.grid4offset3 {
+  margin-left: 73.5%;
+}
+
+.grid5col1 {
+  width: 18%;
+  margin: 0px 0.75%;
+  display: inline-block;
+  position: relative;
+}
+
+.grid5col2 {
+  width: 38%;
+  margin: 0px 0.75%;
+  display: inline-block;
+  position: relative;
+}
+
+.grid5col3 {
+  width: 58%;
+  margin: 0px 0.75%;
+  display: inline-block;
+  position: relative;
+}
+
+.grid5col4 {
+  width: 78%;
+  margin: 0px 0.75%;
+  display: inline-block;
+  position: relative;
+}
+
+.grid5offsethalf {
+  margin-left: 10.5%;
+}
+
+.grid5offset1 {
+  margin-left: 18.75%;
+}
+
+.grid5offset2 {
+  margin-left: 39%;
+}
+
+.grid5offset3 {
+  margin-left: 48.5%;
+}
+
+.grid5offset4 {
+  margin-left: 68%;
+}

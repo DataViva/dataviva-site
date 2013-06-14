@@ -1,0 +1,46 @@
+<div id="sabrina_location" class="grid5col1 grid5offset1"></div>
+<div id="location" class="grid5col2">
+  
+  <div class="question">
+    <div class="arrow"></div>
+    <div class="text">
+      Do you have a location in mind?
+    </div>
+  </div>
+  
+  <div class="decision">
+    <div class="text">
+      <h2>Yes</h2>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+  <div class="decision" name="all">
+    <div class="text">
+      <h2>No</h2>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+</div>
+
+<script>
+
+  dataminas.sabrina({
+    "div": d3.select("#sabrina_location"),
+    "outfit": "travel",
+    "emotion": "smile"
+  });
+  
+  d3.selectAll("div.decision").on(vizwhiz.evt.click,function(){
+    var name = d3.select(this).attr("name")
+    if (name) update_path(name);
+    else {
+      dataminas.slide.remove();
+      d3.html("/selector/bra/",function(content){
+        dataminas.slide.load(content);
+      })
+    }
+  })
+
+</script>

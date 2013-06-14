@@ -1,0 +1,25 @@
+<!-- extend from about base layout -->
+{% extends "about.html" %}
+
+{% block title %}: About :: App Documentation{% endblock %}
+
+{% block about_content %}
+<h1>Apps</h1>
+
+{% if app %}
+  {% include "about/apps/"+app+".html" %}
+{% else %}
+<aside>
+  <div class="about-tip">
+    Learn about each of our apps and what they do here!
+    <div class="sabrina-tip worker_tip"></div>
+  </div>
+</aside>
+
+<p>We have invested our time into making each app the absolute best it can be.
+  We have gone through countless iterations of each app, refining their 
+  interactions, design, and functionality. We are proud to present them to you. 
+  Learn more about each app, <b>what they can do</b> and <b>how to use them</b> 
+  here.</p>
+{% endif %}
+{% endblock %}

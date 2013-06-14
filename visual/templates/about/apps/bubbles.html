@@ -1,0 +1,61 @@
+{% extends "help.html" %}
+
+{% block title %}Occugrid{% endblock %}
+
+{% block body %}
+
+<h2>What is the Occugrid?</h2>
+
+<p>The Occugrid looks at what occupations are generally required for a given industry, and creates a circle to represent each one of those occupations. To determine if an occupation is required, we looked at the ubiquity of an occupation in an industry across all regions in Brazil that have RCA in that industry. If every successful instance of a specific industry employs the same classification of worker, we can say that that occupations is generally required for that industry to be successful.</p>
+
+<h2>Sizing</h2>
+<p>The size of each occupation (circle) can be mapped to a few different data points: importance, total monthly wages, average monthly wage, number of employees, or number of establishments (as seen below).</p>
+<div class="ui_group">
+  <legend>Sizing</legend>
+  <input type="radio" name="sizing" value="importance" checked>
+  <label for="importance">importance</label>
+  <input type="radio" name="sizing" value="wage">
+  <label for="wage">wage</label>
+  <input type="radio" name="sizing" value="wage_avg">
+  <label for="wage_avg">wage_avg</label>
+  <input type="radio" name="sizing" value="num_emp">
+  <label for="num_emp">num_emp</label>
+  <input type="radio" name="sizing" value="num_est">
+  <label for="num_est">num_est</label>
+</div>
+
+<h2>Importance</h2>
+<p>Importance is calculated by looking at the overall ubiquity of an occupation throughout every industry in Brazil. The more important an occupation is to a specific industry, the less likely it will appear in other industries.</p>
+
+<h2>Grouping</h2>
+<p>Occupations can be grouped to help better distinguish between all of the circles shown. The grid view lays all of the occupations out 1 by 1, with their names displayed underneath. Category view groups the circles into each occupation's parent category (as shown in the key). The "Available" grouping groups the circles based on whether or not the current location employs that occupation or not.</p>
+<div class="ui_group">
+  <legend>Color</legend>
+  <input type="radio" name="grouping" value="id" checked>
+  <label for="id">id</label>
+  <input type="radio" name="grouping" value="category">
+  <label for="category">category</label>
+  <input type="radio" name="grouping" value="available">
+  <label for="available">available</label>
+</div>
+
+<p>Importance is calculated by looking at the overall ubiquity of an occupation throughout every industry in Brazil. The more important an occupation is to a specific industry, the less likely it will be that it appears in other industries.</p>
+
+<h2>Color</h2>
+<p>The color of the different occupations illustrates which occupation category that occupation belongs to. In addition, if the circle is filled in, that location currently employs that occupation. The non-filled in circles are the "missing" occupations needed by that location to create more success in the given industry.
+<img id="key_cbo" src="/static/img/help/key/key_cbo.jpg">
+
+
+{% endblock %}
+
+{% block js %}
+
+  <script type="text/javascript">
+
+    dataminas.toggle("sizing");
+    dataminas.toggle("grouping");
+    dataminas.resize();
+    
+  </script>
+  
+{% endblock %}

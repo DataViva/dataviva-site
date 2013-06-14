@@ -1,0 +1,35 @@
+<form action="" method="post" id="admin">
+    {{form.hidden_tag()}}
+    
+    <p>
+        <h3></h3>
+        
+        <div id="wysihtml5-toolbar" style="display: none;">
+          <div id="text-field-options">
+            <a class="button square" data-wysihtml5-command="bold"><i class="icon-bold"></i></a>
+            <a class="button square" data-wysihtml5-command="italic"><i class="icon-italic"></i></a>
+          
+            <a class="button square" data-wysihtml5-command="insertUnorderedList"><i class="icon-list-ul"></i></a>
+            <a class="button square" data-wysihtml5-command="insertOrderedList"><i class="icon-list-ol"></i></a>
+
+            <!-- Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href) -->
+            <a class="button square" data-wysihtml5-command="createLink"><i class="icon-link"></i></a>
+            <div data-wysihtml5-dialog="createLink" style="display: none;">
+              <label>
+                Link:
+                <input data-wysihtml5-dialog-field="href" value="http://" type="text" class="link">
+              </label>
+              <a class="button square" data-wysihtml5-dialog-action="save"><i class="icon-ok"></i></a> 
+              <a class="button square" data-wysihtml5-dialog-action="cancel"><i class="icon-remove"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        {{ form.status_notes(id="wysihtml5-textarea", class="reply", placeholder="Enter your text...") }}<br />
+        {% for error in form.errors.status_notes %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}
+    </p>
+
+    <p><input class="button submit_answer" type="submit" value="Submit"></p>
+</form>

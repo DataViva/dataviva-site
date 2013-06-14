@@ -1,0 +1,95 @@
+<!-- extend admin_template -->
+{% extends "admin/admin_template.html" %}
+
+
+{% block admin_content %}
+<h4>Questions Asked</h4>
+{% if questions|length %}
+  {% for q in questions %}
+    <a href="{{ url_for('ask.answer', slug=q.slug) }}">
+      <div class="decision">
+        <div class="text">
+          <h2>{{ q.question }}</h2>
+          {% if q.status_notes %}
+            <p>{{ q.status_notes|safe }}</p>
+          {% else %}
+            <p><i>Sabrina has not answered your question yet!</i></p>
+          {% endif %}
+        </div>
+        <div class="arrow"></div>
+      </div>
+    </a>
+  {% endfor %}
+{% else %}
+<p><i>You have not asked any questions yet!</i></p>
+{% endif %}
+
+<!-- wysihtml5 parser rules -->
+<script src="/static/js/libs/wysihtml5-parser_rules-advanced.js"></script>
+<!-- wysihtml5 library -->
+<script src="/static/js/libs/wysihtml5-0.3.0.min.js"></script>
+
+
+<script>
+
+/*
+ * Override update link functionality [AJAX]:
+ *  - if user selects edit, load edit form
+ *  - if user selects delete, make them confirm, then delete on server-side
+ *  - if user approved, return true which will set question to approved status
+ *      and redirect back to this page
+ */
+var update_links = document.querySelectorAll(".update a")
+for(var i = 0; i < update_links.length; i++){
+  
+  // attack onclick event
+  update_links[i].onclick = function(){
+    
+    // save "this" element from future scope
+    var _this = this;
+    
+    // if user clicked edit...
+    if(this.href.indexOf("edit") >= 0){
+      
+      // has the form already been loaded?
+      var edit_form = d3.select(this.parentNode.parentNode).select("form");
+      if(edit_form.empty()){
+        
+        // make AJAX call to server to fetch form + question data
+        d3.html(this.href, function(question_form_html){
+          
+          // append form to page
+          _this.parentNode.parentNode.appendChild(question_form_html)
+          // set action attribute
+          d3.select("form").attr("action", _this.href);
+          
+          // set up wysihtml5 editor (rich text) on text area
+          var editor = new wysihtml5.Editor("wysihtml5-textarea", { // id of textarea element
+            toolbar:      "wysihtml5-toolbar", // id of toolbar element
+            parserRules:  wysihtml5ParserRules, // defined in parser rules set 
+            stylesheets: ["/static/css/libs/wysihtml5.stylesheet.css"]
+          });
+        })
+      }
+      else {
+        
+        // if form has already been loaded, then remove it (toggle)
+        edit_form.remove();
+      }
+      return false;
+    }
+    else if(this.href.indexOf("delete") >= 0){
+      
+      // prompt user to confirm they would like to delete...
+      if(!confirm("Are you sure you want to delete this question?")){
+        return false;
+      }
+      
+    }
+    
+    // allow link to follow href
+    return true;
+  }
+}
+</script>
+{% endblock %}

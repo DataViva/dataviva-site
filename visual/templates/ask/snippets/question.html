@@ -1,0 +1,21 @@
+<a href="{{ url_for('ask.answer', slug=q.slug) }}">
+  <div class="decision" {% if q.user.is_admin() %}class="admin_response"{% endif %}>
+    <div class="text">
+      <div class="number_votes">
+        {% if q.votes.all()|length %}
+        <span class="vote_count">{{ q.votes.count() }}{% else %}0</span>
+        {% endif %}
+        <p class="vote_label">{% if q.votes.count() == 1 %}vote{% else %}votes{% endif %}</p>
+  
+      </div>
+      <div class="question_preview">
+        <h2>{{ q.question }}</h2>
+        {% if q.status_notes %}
+        <p>{{ q.status_notes|strip_html|truncate(140)|safe }}</p>
+        {% endif %}
+        <div class="posted">Asked by {{q.user.nickname}} {{momentjs(q.timestamp).fromNow()}}</div>
+      </div>
+    </div>
+    <div class="arrow"></div>
+  </div>
+</a>

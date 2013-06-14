@@ -1,0 +1,55 @@
+{% extends "help.html" %}
+
+{% block title %}Tree Map{% endblock %}
+
+{% block body %}
+
+<h2>What is a Tree Map?</h2>
+
+<p>A tree map is a type of visualization that enables a user to view a hierarchical dataset at a glace. The size of each box relates to its proportional size out of the whole, thus the entire area of the visualization is equal to 100% of the total value.</p>
+
+<h2>Sizing</h2>
+<p>The value (or size) of each box can be mapped to a few different data points. For industry/occupation data, we can size by total monthly wages, number of employees, or number of establishments (as seen below).</p>
+<div class="ui_group">
+  <legend>Size</legend>
+  <input type="radio" name="size_rais" value="wage" checked>
+  <label for="wage">wage</label>
+  <input type="radio" name="size_rais" value="num_emp">
+  <label for="num_emp">num_emp</label>
+  <input type="radio" name="size_rais" value="num_est">
+  <label for="num_est">num_est</label>
+</div>
+<p>For product export data, we can size the boxes by total weight (in kg) of the product traded, or total trade value (in $USD).</p>
+<div class="ui_group">
+  <legend>Size</legend>
+  <input type="radio" name="size_secex" value="val_kg" checked>
+  <label for="val_kg">val_kg</label>
+  <input type="radio" name="size_secex" value="val_usd">
+  <label for="val_usd">val_usd</label>
+</div>
+
+<p>The sizing selector is located in the app controls, and can be shown by clicking "Show App Controls" in the menu on the top right of the interface.</p>
+
+<h2>Color</h2>
+<p>The color of the different boxes is used to differentiate between the different category groupings of the items being shown (this varies with the question being asked). For example, when viewing a tree map of the question <a href="/builder/tree_map/mte/mg/all/all/isic/" target="_blank">What industries locate in Minas Gerais?</a> the colors correspond to the various industry categories:</p>
+<img id="key_isic" src="/static/img/help/key/key_isic.jpg">
+<p>Whereas if we were to choose instead the question of <a href="/builder/tree_map/mte/all/all/all/munic/" target="_blank">Where are Industries located in Brazil?</a> we would see the colors now corresponding to the different states of Brazil, as shown in the key:</p>
+<img id="key_munic" src="/static/img/help/key/key_munic.jpg">
+
+<h2>Nesting</h2>
+<p>Another important part of any tree map visualization, and its most distinguished feature, is its ability to show the nestedness (or hierarchy) of a dataset. Here we leverage the interactivity of the web platform to show the children of any parent category on click. This is best understood when visualizing a geographic output, for example in <a href="/builder/tree_map/mte/all/all/all/munic/" target="_blank">Where are Industries located in Brazil?</a>, the top or parent level is the 27 Brazilian states. By clicking one of these we see the sub categories or children, which in this case are municipalities found in the selected state.</p>
+<img id="tree_map_states" src="/static/img/help/tree_map/states.jpg">
+
+{% endblock %}
+
+{% block js %}
+
+  <script type="text/javascript">
+  
+    dataminas.toggle("size_rais");
+    dataminas.toggle("size_secex");
+    dataminas.resize();
+    
+  </script>
+  
+{% endblock %}

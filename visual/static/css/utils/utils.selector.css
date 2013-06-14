@@ -1,0 +1,162 @@
+div.selector {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Header Div */
+div.selector_header {
+  padding: 3%;
+}
+
+div.selector_header div.selector_header_icon {
+  background-position: top center;
+  background-repeat: no-repeat;
+  width: 15%;
+  height: 0;
+  padding-bottom: 15%;
+  background-size: 100% 100% !important;
+  display: inline-block;
+  margin-right: 3%;
+}
+
+div.selector_header div.selector_title_block {
+  display: inline-block;
+  width: 77%;
+}
+
+div.selector_header div.selector_title {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 21px;
+  width: 72%;
+}
+
+div.selector_header a.selector_submit {
+  position: absolute;
+  right: 9px;
+  top: 9px;
+}
+
+div.selector_header div#proximity {
+  font-size: 10px;
+  line-height: 16px;
+}
+
+span.road_sign {
+  display: inline-block !important;
+  margin-left: 3px;
+  margin-bottom: 3px;
+  margin-right: 2px;
+  color: black;
+  border: 1px solid black;
+  background-color: white;
+  font-size: 10px !important;
+  padding: 0px 2px 4px 2px !important;
+  height: 8px;
+  font-weight: bold !important;
+  line-height: 11px !important;
+  vertical-align: middle !important;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 1);
+     -moz-box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 1);
+      -ms-box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 1);
+       -o-box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 1);
+          box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 1);
+}
+
+/* Nav Div */
+div.selector_nav {
+  position: relative;
+  padding: 3%;
+  margin: 0px;
+  border-width: 0px 1px;
+  border-color: #d4d4d4;
+  border-style: solid;
+  background-color: #fafafa;
+  background-image: -ms-linear-gradient(top, #FFFFFF 0%, #F2F2F2 100%);
+  background-image: -moz-linear-gradient(top, #FFFFFF 0%, #F2F2F2 100%);
+  background-image: -o-linear-gradient(top, #FFFFFF 0%, #F2F2F2 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #F2F2F2));
+  background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #F2F2F2 100%);
+  background-image: linear-gradient(to bottom, #FFFFFF 0%, #F2F2F2 100%);
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+      -ms-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+       -o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+}
+
+div.selector_nav > ul.breadcrumb {
+  font-size: 10px;
+  color: #999999;
+  width: 72%;
+  height: 0;
+  padding-bottom: 3%;
+}
+
+ul.breadcrumb > li {
+  display: inline-block;
+}
+
+div.selector_nav > input.selector_search {
+  font-size: 10px;
+  line-height: 16px;
+  position: absolute;
+  right: 1.5%;
+  top: 18%;
+  width: 25%;
+}
+
+/* Body Div */
+
+div.selector_body {
+  background-color: #efefef;
+  border: 1px solid #d4d4d4;
+  font-size: 10px;
+  line-height: 16px;
+  overflow-y: auto;
+  padding: 1.5%;
+}
+
+div.selector_body > div.search_result {
+  margin: 1.5%;
+  display: block;
+  border: 1px solid #dddddd;
+  position: relative;
+  overflow: hidden;
+  color: #333333;
+  background-color: #efefef;
+}
+
+div.search_result > div.search_link {
+  cursor: pointer;
+  background-color: #ffffff;
+  position: relative;
+}
+
+div.search_link > div.search_icon {
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 7.25%;
+  padding-bottom: 7.25%;
+  height: 0;
+  background-size: 100% 100%;
+}
+
+span.search_title {
+  position: absolute;
+  top: 10%;
+  left: 9%;
+  width: 75%;
+}
+
+span.search_id {
+  position: absolute;
+  top: 10%;
+  right: 2%;
+  opacity: 0.25;
+  font-weight: bold;
+}

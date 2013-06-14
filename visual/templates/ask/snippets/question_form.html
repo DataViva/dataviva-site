@@ -1,0 +1,55 @@
+<form id="ask_sabrina_form" action="" method="post">
+  {{form.hidden_tag()}}
+  <p>
+    <h3>Question:</h3>
+    {{ form.question(size=80, class="ask", placeholder="Ex. Where does the data come from?") }}<br />
+    {% for error in form.errors.question %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+  </p>
+  
+  <p>
+  <h3>Description:</h3>
+
+    <div id="wysihtml5-toolbar" style="display: none;">
+      <div id="text-field-options">
+        <a class="button square" data-wysihtml5-command="bold"><i class="icon-bold"></i></a>
+        <a class="button square" data-wysihtml5-command="italic"><i class="icon-italic"></i></a>
+
+        <a class="button square" data-wysihtml5-command="insertUnorderedList"><i class="icon-list-ul"></i></a>
+        <a class="button square" data-wysihtml5-command="insertOrderedList"><i class="icon-list-ol"></i></a>
+
+        <a class="button square" data-wysihtml5-command="createLink"><i class="icon-link"></i></a>
+        <!-- Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href) -->
+        <div data-wysihtml5-dialog="createLink" style="display: none;">
+          <label class="link">
+            Link:
+            <input data-wysihtml5-dialog-field="href" value="http://" type="text" class="link">
+          </label>
+          <a class="button square link" data-wysihtml5-dialog-action="save"><i class="icon-ok"></i></a>
+          <a class="button square link" data-wysihtml5-dialog-action="cancel"><i class="icon-remove"></i></a>
+        </div>
+      </div>
+    </div>
+    {{ form.body(id="wysihtml5-textarea", class="ask", placeholder="Enter your text...") }}<br />
+    {% for error in form.errors.body %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+  </p>
+  
+  <p>
+    <h3>App:</h3>
+    {{ form.app(size=80, class="ask", placeholder="Ex. /tree_map/secex/mg/show/show") }}
+  </p>
+  <p>
+    <h3>Tags:</h3>
+    {{ form.tags(size=80, class="ask", id="tag_field") }}
+    <div id="tag_input"></div>
+  </p>
+  <a href="javascript:{}" onclick="document.getElementById('ask_sabrina_form').submit(); return false;">
+    <div class="decision submit">
+      <div class="text">Ask Sabrina!</div>
+      <div class="arrow"></div>
+    </div>
+  </a>
+</form>

@@ -1,0 +1,391 @@
+/***********************/
+/* Default Anchor Tags */
+/***********************/
+
+a {
+  text-decoration: none;
+  color: #75665e;
+}
+
+a:hover {
+  text-decoration: none;
+  cursor: pointer;
+  color: #cc0000;
+}
+
+/************************/
+/* Inputs and Textareas */
+/************************/
+
+input[type=text], textarea {
+  height: 0;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 16px;
+  padding: 3% 1.5%;
+  margin: 0px;
+  -webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear .2s, box-shadow linear .2s;
+     -moz-transition: border linear .2s, box-shadow linear .2s;
+       -o-transition: border linear .2s, box-shadow linear .2s;
+          transition: border linear .2s, box-shadow linear .2s;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+input[type=text]:focus, textarea:focus {
+  border-color: #cc0000;
+  outline: 0;
+  outline: thin dotted \9;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px rgba(204, 0, 0, .6);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px rgba(204, 0, 0, .6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px rgba(204, 0, 0, .6);
+}
+
+input[type=text].ask, textarea.ask, textarea.reply, input.link {
+  width: 100%;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+       -o-border-radius: 6px;
+       border-radius: 6px;
+}
+
+textarea.ask, textarea.reply {
+  height: 180px;
+  padding: 1.5%;
+}
+
+input.link {
+  width: 84%;
+  padding: 11.5px 9.5px;
+  vertical-align: middle;
+  margin-top: 1px;
+  margin-bottom: 4px;
+}
+
+input#search input#question.ask {
+  padding-bottom: 20px;
+}
+
+/*******************/
+/* Standard Button */
+/*******************/
+
+.button {
+  height: 16px;
+  background-color: white;
+  display: inline-block;
+  text-align: center;
+  color: #444;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 5px 5px 0px;
+  position: relative;
+  white-space: nowrap;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+          
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  border: 1px solid #bbbbbb;
+  border-bottom-color: #a2a2a2;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+  border-color: #c5c5c5;
+  border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
+}
+
+.button:hover {
+  color: #333;
+  text-decoration: none;
+  background-position: 0 -15px;
+  background-color: #e6e6e6;
+  -webkit-transition: background-position 0.1s linear;
+     -moz-transition: background-position 0.1s linear;
+          transition: background-position 0.1s linear;
+}
+
+.square {
+  width: 21px;
+  height: 21px;
+  padding: 0px;
+  margin-bottom: 5px;
+}
+
+.square > i {
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.button_label {
+  color: #ccc;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  line-height: 18px;
+  margin: 3px 3px;
+  text-transform: uppercase;
+}
+
+.button.submit_answer {
+  padding: 1% 1.5% 2.5% 1.5% !important;
+  width: auto;
+}
+
+.button.active,
+.button.active:hover {
+  background-color: #e6e6e6;
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+     -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+          box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+}
+
+/******************/
+/* Toggle Buttons */
+/******************/
+
+div.toggle_group {
+  display: inline;
+}
+
+div.toggle_group > .button {
+  -webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
+}
+
+div.toggle_group > .button:first-child {
+  -webkit-border-top-left-radius: 3px;
+      -moz-border-radius-topleft: 3px;
+          border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+      -moz-border-radius-bottomleft: 3px;
+          border-bottom-left-radius: 3px;
+}
+
+div.toggle_group > .button:last-child {
+  -webkit-border-top-right-radius: 3px;
+      -moz-border-radius-topright: 3px;
+          border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+      -moz-border-radius-bottomright: 3px;
+          border-bottom-right-radius: 3px;
+}
+
+/**********************/
+/* Arrow Button Setup */
+/**********************/
+
+.question, .decision, .help, .menu {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  font-size: 0;
+  white-space: nowrap;
+}
+
+.question > *, .decision > *, .help > *, .menu > * {
+  display: inline-block;
+  position: relative;
+}
+
+.question > .text, .decision > .text,
+.help > .text, .menu > .text {
+  z-index: 1;
+  white-space: normal;
+}
+
+.question > .arrow, .decision > .arrow,
+.help > .arrow, .menu > .arrow {
+  z-index: 0;
+  -webkit-transform: rotate(45deg); 
+     -moz-transform: rotate(45deg); 
+      -ms-transform: rotate(45deg); 
+          transform: rotate(45deg); 
+  -webkit-transform-origin: 0% 0%; 
+     -moz-transform-origin: 0% 0%; 
+      -ms-transform-origin: 0% 0%; 
+          transform-origin: 0% 0%; 
+}
+
+/*****************************/
+/* Sabrina "Question" Bubble */
+/*****************************/
+
+.question > * {
+  border-style: solid;
+  border-color: #ccc;
+}
+
+.question > .text {
+  line-height: 120%;
+  background-color: white;
+  font-weight: bold;
+}
+
+.question > .arrow {
+  background-color: white;
+}
+
+/*************************/
+/* Red "Decision" Button */
+/*************************/
+
+.decision > .text {
+  line-height: 115%;
+}
+
+.decision > .text > h2 {
+  margin-bottom: 0%;
+}
+
+.decision > .text > p {
+  margin-top: 3%;
+}
+
+.decision > * {
+  background-color: #be1e2d;
+  color: white;
+  -webkit-transition: background-color 0.1s linear;
+     -moz-transition: background-color 0.1s linear;
+          transition: background-color 0.1s linear;
+}
+
+.decision:hover > * {
+  background-color: #ec1c24;
+  cursor: pointer;
+}
+
+.submit {
+  margin-top: 2%;
+  width: 240px;
+}
+
+/***********************/
+/* Brown "Help" Button */
+/***********************/
+
+.help > .text {
+  line-height: 115%;
+  background-color: white;
+}
+
+.help > .arrow {
+  z-index: 2;
+  background-color: white;
+}
+
+.help > * {
+  border-style: dashed;
+  border-color: #75665e;
+  color: #75665e;
+  -webkit-transition: color 0.1s linear, border-color 0.1s linear;
+     -moz-transition: color 0.1s linear, border-color 0.1s linear;
+          transition: color 0.1s linear, border-color 0.1s linear;
+}
+
+.help:hover > * {
+  border-color: #ec1c24;
+  color: #ec1c24;
+  cursor: pointer;
+}
+
+/***********************/
+/* Brown "Menu" Button */
+/***********************/
+
+.menu > * {
+  border-style: solid;
+  border-color: #75665e;
+  color: #75665e;
+  background-color: white;
+  font-weight: bold;
+  -webkit-transition: color 0.1s linear, background-color 0.1s linear;
+     -moz-transition: color 0.1s linear, background-color 0.1s linear;
+          transition: color 0.1s linear, background-color 0.1s linear;
+}
+
+.menu.active > * {
+  color: white;
+  background-color: #75665e;
+  -webkit-transition: color 0s linear, background-color 0s linear;
+     -moz-transition: color 0s linear, background-color 0s linear;
+          transition: color 0s linear, background-color 0s linear;
+}
+
+.menu:hover > * {
+  background-color: #75665e;
+  color: white;
+  cursor: pointer;
+}
+
+.menu.active:hover > * {
+  cursor: default;
+}
+
+/*****************/
+/* Dropdown Menu */
+/*****************/
+
+div.dropdown_group {
+  position: relative;
+}
+
+div.dropdown_group > a.button > i {
+  margin: 0px 3%;
+  opacity: 0.75;
+  display: inline;
+}
+
+div.dropdown_group > div.dropdown {
+  background-color: #eeeeee;
+  border-width: 1px;
+  font-size: 12px;
+  margin-top: 3px;
+  opacity: 0;
+  padding: 5px 5px 0px;
+  position: absolute;
+  visibility: hidden;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  -webkit-transition: opacity 0.1s, margin-top 0.1s;
+     -moz-transition: opacity 0.1s, margin-top 0.1s;
+          transition: opacity 0.1s, margin-top 0.1s;
+  z-index: 1000;
+}
+
+div.dropdown_group > div.dropdown > a {
+  display: block;
+  margin-bottom: 6px;
+  clear: both;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+div.dropdown_group > div.dropdown > a.selected {
+  opacity: 0.5;
+  color: #ccc;
+  cursor: default;
+}

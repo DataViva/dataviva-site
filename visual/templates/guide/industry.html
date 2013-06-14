@@ -1,0 +1,49 @@
+<div id="sabrina_industry" class="grid5col1 grid5offset1"></div>
+<div id="industry" class="grid5col2">
+  
+  <div class="question">
+    <div class="arrow"></div>
+    <div class="text">
+      Are you interested in product exports or local industries?
+    </div>
+  </div>
+  
+  <div class="decision" name="hs">
+    <div class="text">
+      <h2>Exports</h2>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+  <div class="decision" name="isic">
+    <div class="text">
+      <h2>Industries</h2>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+</div>
+
+<script>
+
+  dataminas.sabrina({
+    "div": d3.select("#sabrina_industry"),
+    "outfit": "worker",
+    "emotion": "smile"
+  })
+  
+  d3.selectAll("div.decision").on(vizwhiz.evt.click,function(){
+    var name = d3.select(this).attr("name")
+    if (current_path.length == 1 || current_path[2] == "attract") {
+      dataminas.slide.remove();
+      d3.html("/selector/"+name+"/",function(content){
+        dataminas.slide.load(content);
+      })
+    }
+    else {
+      if (name == "isic") update_path("industries");
+      else if (name == "hs") update_path("exports");
+    }
+  })
+
+</script>

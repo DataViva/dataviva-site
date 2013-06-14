@@ -1,0 +1,46 @@
+<div id="sabrina_career" class="grid5col1 grid5offset1"></div>
+<div id="career" class="grid5col2">
+  
+  <div class="question">
+    <div class="arrow"></div>
+    <div class="text">
+      Do you have an occupation in mind?
+    </div>
+  </div>
+  
+  <div class="decision">
+    <div class="text">
+      <h2>Yes</h2>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+  <div class="decision" name="all">
+    <div class="text">
+      <h2>No</h2>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+</div>
+
+<script>
+
+  dataminas.sabrina({
+    "div": d3.select("#sabrina_career"),
+    "outfit": "preppy",
+    "emotion": "smile"
+  })
+  
+  d3.selectAll("div.decision").on(vizwhiz.evt.click,function(){
+    var name = d3.select(this).attr("name")
+    if (name) update_path(name);
+    else {
+      dataminas.slide.remove();
+      d3.html("/selector/cbo/",function(content){
+        dataminas.slide.load(content);
+      })
+    }
+  })
+
+</script>
