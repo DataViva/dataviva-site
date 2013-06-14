@@ -1,0 +1,19 @@
+# ipython a WAY better interactive python shell
+ipython
+readline
+
+# helpful library for advanced math / data manipulation similar to matlab
+# required for pandas
+numpy
+
+# charting library also similar to matlab
+matplotlib
+
+# scipy for calculations and regressions
+# required for pandas
+scikits.statsmodels
+scipy
+
+# Pandas library for doing matrix math, dataframes etc. similar to R
+pandas
+patsy
