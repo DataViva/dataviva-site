@@ -433,6 +433,7 @@ div.rec_value {
 .vote_up.big {
   margin-left: -74px !important;
   margin-top: -5px;
+  padding-top: 1px;
 }
 
 .vote_count.big {
@@ -473,11 +474,11 @@ div.rec_value {
 
 #responses .vote_up {
   margin-left: -60px;
-  margin-top: -4px;
+  margin-top: -5px;
 }
 
 #responses ol > li {
-  margin: 1.2% 0 1.2% 4.2%;
+  margin: 10px 0 10px 32px;
   padding: .5% 1%;
   border-top: 5px solid #666;
   background-color: #f6f6f6;
@@ -485,7 +486,7 @@ div.rec_value {
 }
 
 #responses ol > li.child {
-  margin-left: 14%;
+  margin-left: 64px;
 }
 
 #responses ol > li:before {
@@ -501,7 +502,7 @@ div.rec_value {
   padding: .5%;
   position: absolute;
   text-align: center;
-  width: 4%;
+  width: 12px;
 }
 
 #responses ol > li .reply_form {
