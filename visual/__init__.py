@@ -12,8 +12,11 @@ from flaskext.babel import Babel
 # for new filters, redis sessions
 from utils import Momentjs, strip_html, jinja_split, RedisSessionInterface
 
+''' Base directory of where the site is held '''
+visualdir = os.path.abspath(os.path.dirname(__file__))
+
 # Initialize app
-app = Flask(__name__)
+app = Flask(__name__, template_folder=os.path.join(visualdir, 'html'))
 
 # Load default configuration from config.py
 app.config.from_object('config')

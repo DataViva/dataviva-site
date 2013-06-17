@@ -1,0 +1,39 @@
+<!-- extend from base layout -->
+{% extends "templates/site.html" %}
+
+{% block title %}: Data{% endblock %}
+
+{% block js %}
+
+  <script src="/static/js/utils/utils.selector.js"></script>
+
+  <script>
+  
+    function load_page(path){
+
+      if (d3.select("div#slide_container")[0][0]) {
+        dataminas.slide.remove();
+      }
+      
+      d3.html(path+"?ajax=true",function(content){
+        window.history.pushState({"html":'html',"pageTitle":'pageTitle'}, "", path);
+        dataminas.slide.load(content);
+      })
+      
+    }
+    
+    // Stuff to do only once, on page load
+    window.onload = function(){
+      
+      if ("{{ category }}" != "None") {
+        var path = "/data/{{ category }}/";
+      }
+      else {
+        var path = "/data/";
+      }
+      load_page(path);
+    }  
+
+  </script>
+
+{% endblock %}

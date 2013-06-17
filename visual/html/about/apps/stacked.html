@@ -1,0 +1,45 @@
+{% extends "templates/help.html" %}
+
+{% block title %}Stacked{% endblock %}
+
+{% block body %}
+
+<h2>What is the Stacked app?</h2>
+<p>The Stacked app uses a visualization commonly referred to as a stacked area chart. It is a visualization used to show the change in values over time. Since the two datasets being show (exports and employment) have data ranging several years, this is a particularly useful app. At a glance we are able to see the overall trend of values as well as individual categories.</p>
+
+<h2>Color</h2>
+<p>The color of the different areas is used to differentiate between the different category groupings of the items being shown (this varies with the question being asked). For example, when viewing a Stacked app of the question <a href="/builder/stacked/mte/mg/all/all/isic/" target="_blank">What industries locate in Minas Gerais?</a> the colors correspond to the various industry categories:</p>
+<img id="key_isic" src="/static/img/help/key/key_isic.jpg">
+<p>Whereas if we were to choose instead the question of <a href="/builder/stacked/mte/all/all/all/munic/" target="_blank">Where are Industries located in Brazil?</a> we would see the colors now corresponding to the different states of Brazil, as shown in the key:</p>
+<img id="key_munic" src="/static/img/help/key/key_munic.jpg">
+
+<h2>Sorting</h2>
+<p>Each area can be vertically sorted by 3 different data points: Category classification ID, alphabetical name, and overall size (as seen below).</p>
+<div class="ui_group">
+  <legend>Sorting</legend>
+  <input type="radio" name="sorting" value="key" checked>
+  <label for="key">key</label>
+  <input type="radio" name="sorting" value="name">
+  <label for="name">name</label>
+  <input type="radio" name="sorting" value="total">
+  <label for="total">total</label>
+</div>
+
+
+<h2>Nesting</h2>
+<p>Another important part of any stacked visualization is its ability to show the nestedness (or hierarchy) of a dataset. Here we leverage the interactivity of the web platform to show the children of any parent category on click. This is best understood when visualizing a geographic output, for example in <a href="/builder/stacked/mte/all/all/all/munic/" target="_blank">Where are Industries located in Brazil?</a>, the top or parent level is the 27 Brazilian states. By clicking one of these we see the sub categories or children, which in this case are municipalities found in the selected state.</p>
+<img id="stacked_states" src="/static/img/help/stacked/states.jpg">
+
+
+{% endblock %}
+
+{% block js %}
+
+  <script type="text/javascript">
+  
+    dataminas.toggle("sorting");
+    dataminas.resize();
+  
+  </script>
+  
+{% endblock %}

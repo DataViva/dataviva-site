@@ -1,0 +1,27 @@
+<!-- extend base layout -->
+{% extends "templates/base.html" %}
+
+{% block body %}
+<h1>Edit Your Profile</h1>
+<form action="" method="post" name="edit">
+    {{form.hidden_tag()}}
+    <table>
+        <tr>
+            <td>Your nickname:</td>
+            <td>{{form.nickname(size = 24)}}</td>
+        </tr>
+        <tr>
+            <td>About yourself:</td>
+            <td>{{form.bio(cols = 32, rows = 4)}}</td>
+        </tr>
+        <tr>
+            <td>Website:</td>
+            <td>{{form.website(size = 24)}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Save Changes"></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}
