@@ -18,13 +18,13 @@ def before_request():
     cache_id = request.path
     # first lets test if this query is cached
     cached_q = cached_query(cache_id)
-    if cached_q:
+    if cached_q and request.is_xhr:
         return cached_q
     g.lang = "en"
 
 @mod.after_request
 def after_request(response):
-    if response.status_code != 302:
+    if response.status_code != 302 and request.is_xhr:
         cache_id = request.path
         # test if this query was cached, if not add it
         cached_q = cached_query(cache_id)
@@ -64,11 +64,17 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_merge
     # if an ID is supplied only return that
     if Attr_id:
         
-        # the '.' indicates that we are looking for a specific nesting
+        # the '.show' indicates that we are looking for a specific nesting
         if "show." in Attr_id:
             ret["nesting_level"] = Attr_id.split(".")[1]
             # filter table by requested nesting level
             attrs = Attr.query.filter(func.char_length(Attr.id) == ret["nesting_level"]).all()
+        
+        # the '.' here means we want to see all attrs within a certain distance
+        elif "." in Attr_id:
+            this_attr, distance = Attr_id.split(".")
+            this_attr = Attr.query.get_or_404(this_attr)
+            attrs = this_attr.get_neighbors(distance)
         
         else:
             attrs = [Attr.query.get_or_404(Attr_id)]
