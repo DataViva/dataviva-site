@@ -15,7 +15,7 @@ from visual.admin.forms import StatusNotesForm, StatusForm
 # utils
 from visual.utils import exist_or_404, Pagination
 # login types
-from visual.admin.login_providers import facebook, twitter, google
+from visual.account.login_providers import facebook, twitter, google
 
 mod = Blueprint('account', __name__, url_prefix='/account')
 
