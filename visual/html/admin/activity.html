@@ -3,17 +3,109 @@
 
 
 {% block admin_content %}
+<h5>History</h5>
+<hr class="bold"/>
 <h5>Starred <i class=" icon-star-empty"></i></h5>
 <hr class="bold"/>
 <div class="feed">
   {% if starred %}
     {% for s in starred %}
     {% set app_type = s.app_id|split("/") %}
-    <p>
-      <a class="feed-item button" href="/apps/embed/{{ s.app_id }}"><img src="/static/img/icons/tiles/{{ app_type[0] }}_tile.png" width="5%" padding-bottom="5%">{{ s.app_name }}</a>
-    </p>
+    <a href="/apps/embed/{{ s.app_id }}">
+      <div class="feed-item">
+        <div class="feed_title">
+          <img src="/static/img/icons/tiles/{{ app_type[0] }}_tile.png" width="23px" padding-bottom="23px">
+          {{ s.app_name }}
+        </div>
+        <div class="feed_date">12/25/2012</div>
+    </div>
+    </a>
+    <a href="/apps/embed/{{ s.app_id }}">
+      <div class="feed-item">
+        <div class="feed_title">
+          <img src="/static/img/icons/tiles/{{ app_type[0] }}_tile.png" width="23px" padding-bottom="23px">
+          {{ s.app_name }}
+        </div>
+        <div class="feed_date">12/25/2012</div>
+    </div>
+    </a>
+    <a href="/apps/embed/{{ s.app_id }}">
+      <div class="feed-item">
+        <div class="feed_title">
+          <img src="/static/img/icons/tiles/{{ app_type[0] }}_tile.png" width="23px" padding-bottom="23px">
+          {{ s.app_name }}
+        </div>
+        <div class="feed_date">12/25/2012</div>
+      </div>
+    </a>
     {% endfor %}
   {% else %}
   <p>You haven't starred any apps yet!</p>
   {% endif %}
+</div>
+  
+<h5>Questions</h5>
+<hr class="bold"/>
+<div class="feed">
+  <a href="#">
+    <div class="feed-item">
+      <div class="feed_title">
+        <img src="/static/img/icons/tiles/ask_sabrina_tile.png" width="23px" padding-bottom="23px">
+        Where does your data come from?
+      </div>
+      <div class="feed_date">12/25/2012</div>
+  </div>
+  </a>
+  <a href="#">
+    <div class="feed-item">
+      <div class="feed_title">
+        <img src="/static/img/icons/tiles/ask_sabrina_tile.png" width="23px" padding-bottom="23px">
+        Where does your data come from?
+      </div>
+      <div class="feed_date">12/25/2012</div>
+  </div>
+  </a>
+  <a href="#">
+    <div class="feed-item">
+      <div class="feed_title">
+        <img src="/static/img/icons/tiles/ask_sabrina_tile.png" width="23px" padding-bottom="23px">
+        Where does your data come from?
+      </div>
+      <div class="feed_date">12/25/2012</div>
+  </div>
+  </a>
+</div>
+
+<h5>Replies</h5>
+<hr class="bold"/>
+<div class="feed">
+  <a href="#">
+    <div class="feed-item">
+      <div class="feed_title">
+        <img src="/static/img/icons/tiles/ask_sabrina_tile.png" width="23px" padding-bottom="23px">
+       I agree!
+      </div>
+      <div class="feed_date">12/25/2012</div>
+  </div>
+  </a>
+  <a href="#">
+    <div class="feed-item">
+      <div class="feed_title">
+        <img src="/static/img/icons/tiles/ask_sabrina_tile.png" width="23px" padding-bottom="23px">
+        I agree!
+      </div>
+      <div class="feed_date">12/25/2012</div>
+  </div>
+  </a>
+  <a href="#">
+    <div class="feed-item">
+      <div class="feed_title">
+        <img src="/static/img/icons/tiles/ask_sabrina_tile.png" width="23px" padding-bottom="23px">
+        I agree!
+      </div>
+      <div class="feed_date">12/25/2012</div>
+  </div>
+  </a>
+</div>
+</div>
 {% endblock %}

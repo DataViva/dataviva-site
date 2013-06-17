@@ -1,5 +1,5 @@
 <!-- extend base layout -->
-{% extends "site.html" %}
+{% extends "templates/site.html" %}
 
 {% block head %}
 <style>
@@ -32,7 +32,7 @@ form textarea {
     {% endif %}
   </div>
 </div>
-<div class="grid5col2">
+<div id="account_filters" class="grid5col2">
   <a href="{{ url_for('account.activity') }}">Starred</a> |
   <a href="{{ url_for('account.questions') }}">Questions</a> |
   <a href="{{ url_for('account.replies') }}">Replies</a>
@@ -55,12 +55,12 @@ form textarea {
   {% endif %}
 </div>
 
-<div class="grid5col4">
+<div class="grid5col5">
   <div id="admin-content">
     
     {% block admin_content %}
     {% endblock %}
-    
+
   </div>
 </div>
 

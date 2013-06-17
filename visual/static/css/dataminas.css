@@ -538,6 +538,17 @@ a.button.square.link {
 }
 
 /************************/
+/* Apps Page Specific */
+/************************/
+
+.app_arrow p {
+  line-height: 0;
+  padding-top: 0px;
+  padding-bottom: 7px;
+  font-weight: bold;
+}
+
+/************************/
 /* App Builder Specific */
 /************************/
 iframe.app_builder {
@@ -811,6 +822,13 @@ div.popover {
   font-size: 30px;
 }
 
+#account_filters {
+  color: #cccccc;
+  font-size: 12px;
+  text-align: right;
+  margin-top: 28px;
+}
+
 p.reply {
   margin-bottom: 3%;
 }
@@ -831,16 +849,37 @@ p.reply {
 
 .feed-item {
   width: 96%;
-  text-align: left !important;
-  margin-bottom: 2.2%;
-  padding: 1.6% 2% .8% 2%!important;
+  height: 20px;
+  padding: 10px 8px 6px 30px!important;
   font-size: 15px;
+  background-color: #cccccc;
+  color: #ffffff;
+  margin-bottom: 12px;
+  -webkit-transition: opacity 0.1s linear;
+     -moz-transition: opacity 0.1s linear;
+          transition: opacity 0.1s linear;
+}
+
+.feed-item:hover {
+  color: #333333;
+  opacity: .7;
+}
+
+.feed_title {
+  width: 68%;
+  display: inline-block;
 }
 
 .feed-item img {
   margin-right: 1%;
-  margin-top: -1.8%;
-  margin-left: -2.4%;
+  margin-top: -3px;
+  margin-left: -22px;
+}
+
+.feed_date {
+  display: inline-block;
+  width: 31%;
+  text-align: right !important;
 }
 
 .question_body, .question_answer {
