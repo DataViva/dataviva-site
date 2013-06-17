@@ -787,6 +787,9 @@ div.popover {
 /********************/
 /* Admin Specific */
 /********************/
+#admin-content {
+  margin-top: 16px;
+}
 
 #user-info {
   margin-bottom: 2%;
@@ -805,6 +808,7 @@ div.popover {
   float: left;
   position: absolute;
   display: inline-block;
+  font-size: 30px;
 }
 
 p.reply {

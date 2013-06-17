@@ -7,34 +7,18 @@
   <div id="docs-nav">
     <a href="{{ url_for('about.about') }}">
       <div class="menu{% if page == 'dataminas' %} active{% endif %}">
-        <div class="text">Data Minas</div>
+        <div class="text">General</div>
         <div class="arrow"></div>
       </div>
     </a>
-    <a href="{{ url_for('about.sabrina') }}">
-      <div class="menu{% if page == 'sabrina' %} active{% endif %}">
-        <div class="text">Sabrina</div>
-        <div class="arrow"></div>
-      </div>
-    </a>
-    <a href="{{ url_for('about.minas') }}">
-      <div class="menu{% if page == 'minas' %} active{% endif %}">
-        <div class="text">Minas Gerais</div>
-        <div class="arrow"></div>
-      </div>
-    </a>
-    <a href="{{ url_for('about.credits') }}">
-      <div class="menu{% if page == 'credits' %} active{% endif %}">
-        <div class="text">Credits</div>
-        <div class="arrow"></div>
-      </div>
-    </a>
+    
     <a href="{{ url_for('about.apps') }}">
       <div class="menu{% if page == 'apps' %} active{% endif %}">
         <div class="text">Apps</div>
         <div class="arrow"></div>
       </div>
     </a>
+    
     {% if page == "apps" %}
       <div id="apps-links">
         <p><a class="link{% if app == 'network' %} active{% endif %}" href="{{ url_for('about.apps', app='network')}}">Network</a></p>
@@ -46,21 +30,31 @@
         <p><a class="link{% if app == 'bubbles' %} active{% endif %}" href="{{ url_for('about.apps', app='bubbles')}}">Occugrid</a></p>
       </div>
     {% endif %}
-    <a href="{{ url_for('about.data') }}">
-      <div class="menu{% if page == 'data' %} active{% endif %}">
-        <div class="text">Data</div>
+    
+    <a href="{{ url_for('about.credits') }}">
+      <div class="menu{% if page == 'credits' %} active{% endif %}">
+        <div class="text">Credits</div>
         <div class="arrow"></div>
       </div>
     </a>
-    {% if page == "data" %}
-      <div id="data-links">
-        <p><a class="link{% if page_attr == 'bra' %} active{% endif %}" href="{{ url_for('about.data_attr', attr='bra') }}">Brazilian Geography</a></p>
-        <p><a class="link{% if page_attr == 'wld' %} active{% endif %}" href="{{ url_for('about.data_attr', attr='wld') }}">Countries</a></p>
-        <p><a class="link{% if page_attr == 'isic' %} active{% endif %}" href="{{ url_for('about.data_attr', attr='isic') }}">Industries</a></p>
-        <p><a class="link{% if page_attr == 'cbo' %} active{% endif %}" href="{{ url_for('about.data_attr', attr='cbo') }}">Occupations</a></p>
-        <p><a class="link{% if page_attr == 'hs' %} active{% endif %}" href="{{ url_for('about.data_attr', attr='hs') }}">Products</a></p>
-      </div>
-    {% endif %}
+    
+    <!--
+    <a href="{{ url_for('about.data') }}">
+          <div class="menu{% if page == 'data' %} active{% endif %}">
+            <div class="text">Data</div>
+            <div class="arrow"></div>
+          </div>
+        </a>
+        {% if page == "data" %}
+          <div id="data-links">
+            <p><a class="link{% if page_attr == 'bra' %} active{% endif %}" href="{{ url_for('about.data_attr', attr='bra') }}">Brazilian Geography</a></p>
+            <p><a class="link{% if page_attr == 'wld' %} active{% endif %}" href="{{ url_for('about.data_attr', attr='wld') }}">Countries</a></p>
+            <p><a class="link{% if page_attr == 'isic' %} active{% endif %}" href="{{ url_for('about.data_attr', attr='isic') }}">Industries</a></p>
+            <p><a class="link{% if page_attr == 'cbo' %} active{% endif %}" href="{{ url_for('about.data_attr', attr='cbo') }}">Occupations</a></p>
+            <p><a class="link{% if page_attr == 'hs' %} active{% endif %}" href="{{ url_for('about.data_attr', attr='hs') }}">Products</a></p>
+          </div>
+        {% endif %}-->
+    
   </div>
 </div>
 

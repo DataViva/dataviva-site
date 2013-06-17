@@ -17,9 +17,9 @@ form textarea {
 {% endblock %}
 
 {% block body %}
-<div class="grid5col5">
+<div class="grid5col3">
   <div id="user-info">
-    <img src="{{ g.user.avatar(120) }}">
+    <img src="{{ g.user.avatar(36) }}">
   
     {% if g.user.fullname %}
     <h1>{{ g.user.fullname }}</h1>
@@ -32,25 +32,10 @@ form textarea {
     {% endif %}
   </div>
 </div>
-<div class="grid5col1">
-  <a href="{{ url_for('account.activity') }}">
-    <div id="activity" class="menu">
-      <div class="text">Activity</div>
-      <div class="arrow"></div>
-    </div>
-  </a>
-  <a href="{{ url_for('account.questions') }}">
-    <div id="questions" class="menu">
-      <div class="text">Questions</div>
-      <div class="arrow"></div>
-    </div>
-  </a>
-  <a href="{{ url_for('account.replies') }}">
-    <div id="replies" class="menu">
-      <div class="text">Replies</div>
-      <div class="arrow"></div>
-    </div>
-  </a>
+<div class="grid5col2">
+  <a href="{{ url_for('account.activity') }}">Starred</a> |
+  <a href="{{ url_for('account.questions') }}">Questions</a> |
+  <a href="{{ url_for('account.replies') }}">Replies</a>
   
   {% if g.user.is_admin() %}
   <!-- <a href="{{ url_for('admin.questions') }}">
