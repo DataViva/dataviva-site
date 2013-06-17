@@ -1,0 +1,111 @@
+<!-- extend from site layout -->
+{% extends "templates/site.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<div id="docs-body">
+
+  <div class="grid5col5">
+    
+    <a href="{{ url_for('data.classifications', attr='hs', category=category) }}all/?per_page={{ pagination.per_page }}">Products</a> | 
+    <a href="{{ url_for('data.classifications', attr='isic', category=category) }}all/?per_page={{ pagination.per_page }}">Industries</a> | 
+    <a href="{{ url_for('data.classifications', attr='cbo', category=category) }}all/?per_page={{ pagination.per_page }}">Occupations</a> | 
+    <a href="{{ url_for('data.classifications', attr='bra', category=category) }}all/?per_page={{ pagination.per_page }}">Brazilian Locations</a> | 
+    <a href="{{ url_for('data.classifications', attr='wld', category=category) }}all/?per_page={{ pagination.per_page }}">Countries</a>
+    
+    <h1>{{ title }}</h1>
+    
+    <div class="data-dropdown">
+      <select id="per_page" onchange="update_per_page(this.options[this.selectedIndex].value);">
+        {% for per_page in pagination.get_per_page_options() %}
+        <option value="{{ per_page }}" {% if pagination.per_page == per_page %}selected="selected"{% endif %}>{{ per_page }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="data-dropdown">
+      <select id="category" onchange="update_depth(this.options[this.selectedIndex].value);">
+        <option value="all">All</option>
+        {% for cat_name, cat_digit in category_lookup.iteritems() %}
+        <option value="{{ cat_name }}" {% if cat_name == category %}selected="selected"{% endif %}>{{ cat_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>ID</th>
+          <th>Category</th>
+          <th>Name (English)</th>
+          <th>Name (Portuguese)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for attr in attrs %}
+        <tr>
+          <td class="icon">
+            <div style="background-color: {{ attr.color }}" title="{{ attr.id }}"></div>
+          </td>
+          <td>{{ attr.id }}</td>
+          <td><script>document.write(format_name("{{ page_attr }}_{{ attr.id|length }}", "{{ g.locale }}"))</script></td>
+          <td>{{ attr.name_en }}</td>
+          <td>{{ attr.name_pt }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% if pagination and pagination.total_count > pagination.per_page %}
+    <div class="pagination">
+      {% if pagination.has_prev %} <a class="button" href="{{ url_for('data.classifications', attr=page_attr, category=category, page=pagination.page-1) }}?per_page={{pagination.per_page}}">&laquo; Previous</a> {% endif %}
+      {% for page in pagination.iter_pages() %}
+        {% if page %}
+          {% if page != pagination.page %}
+            <a class="button" href="{{ url_for('data.classifications', attr=page_attr, category=category, page=page) }}?per_page={{pagination.per_page}}">{{ page }}</a>
+          {% else %}
+            <strong class="button current_page">{{ page }}</strong>
+          {% endif %}
+        {% else %}
+          <span class=ellipsis>…</span>
+        {% endif %}
+      {% endfor %}
+      {% if pagination.has_next %}
+        <a class="button" href="{{ url_for('data.classifications', attr=page_attr, category=category, page=pagination.page+1) }}?per_page={{pagination.per_page}}">Next &raquo;</a>
+      {% endif %}
+    </div>
+    {% endif %}
+    
+  </div>
+
+</div>
+
+
+<script>
+// dropdown for changing number of items per page
+function update_per_page(per_page){
+  window.location = "{{ url_for('data.classifications', attr=page_attr, category=category) }}?per_page=" + per_page;
+}
+
+// dropdown for changing the category
+d3.select("#category").on("change", function(){
+  var new_page_url = "{{ url_for('data.classifications', attr=page_attr) }}all/?per_page={{ pagination.per_page }}";
+  new_page_url = new_page_url.replace("all", this.value)
+  window.location = new_page_url
+})
+function update_depth(depth){
+  // window.location = "{{ url_for('data.classifications', attr=page_attr, category=category) }}?per_page=" + per_page;
+  var new_page_url = "{{ url_for('data.classifications', attr=page_attr) }}all/?per_page={{ pagination.per_page }}";
+  new_page_url = new_page_url.replace("all", depth)
+  window.location = new_page_url
+}
+
+dataminas.dropdown("#per_page");
+dataminas.dropdown("#category");
+
+d3.selectAll("td.icon > div").style("background-image", function(){
+  return "url('"+dataminas.icon(this.title, "{{ page_attr }}") + "')"
+})
+</script>
+
+{% endblock %}
