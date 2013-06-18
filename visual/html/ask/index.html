@@ -97,7 +97,7 @@
     }
   
     d3.json("{{ url_for('ask.question_search') }}?q="+search_term, function(results){
-      console.log(results)
+      
       // clear previous results
       document.getElementById("results").innerHTML = ""
     

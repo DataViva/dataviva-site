@@ -3,7 +3,7 @@ import urllib2
 import json
 from datetime import datetime
 from sqlalchemy import func
-from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify
+from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, redirect, url_for
 
 from visual import db
 from visual.data.forms import DownloadForm
@@ -73,10 +73,14 @@ def guide(category = None):
         category = category,
         geo_location = geo_location)
 
+@mod.route('/classifications/', defaults={"category": "all", "page":1})
 @mod.route('/classifications/<attr>/', defaults={"category": "all", "page":1})
 @mod.route('/classifications/<attr>/<category>/', defaults={"page":1})
 @mod.route('/classifications/<attr>/<category>/<int:page>/')
-def classifications(attr, category, page):
+def classifications(category, page, attr=None):
+    if not attr:
+        return redirect(url_for('data.classifications', attr='hs'))
+    
     per_page = request.args.get("per_page", "25")
     
     if attr == "bra":

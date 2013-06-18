@@ -8,11 +8,27 @@
 
   <div class="grid5col5">
     
-    <a href="{{ url_for('data.classifications', attr='hs', category=category) }}all/?per_page={{ pagination.per_page }}">Products</a> | 
+    <!-- <a href="{{ url_for('data.classifications', attr='hs', category=category) }}all/?per_page={{ pagination.per_page }}">Products</a> | 
     <a href="{{ url_for('data.classifications', attr='isic', category=category) }}all/?per_page={{ pagination.per_page }}">Industries</a> | 
     <a href="{{ url_for('data.classifications', attr='cbo', category=category) }}all/?per_page={{ pagination.per_page }}">Occupations</a> | 
     <a href="{{ url_for('data.classifications', attr='bra', category=category) }}all/?per_page={{ pagination.per_page }}">Brazilian Locations</a> | 
-    <a href="{{ url_for('data.classifications', attr='wld', category=category) }}all/?per_page={{ pagination.per_page }}">Countries</a>
+    <a href="{{ url_for('data.classifications', attr='wld', category=category) }}all/?per_page={{ pagination.per_page }}">Countries</a> -->
+    <div id="attr_toggle">
+      <input type="radio" name="attr" value="hs" onclick="window.location='{{ url_for('data.classifications', attr='hs', category=category) }}all/?per_page={{ pagination.per_page }}'" {% if page_attr == "hs" %}checked{% endif %}>
+      <label for="hs">Products</label>
+      
+      <input type="radio" name="attr" value="cbo" onclick="window.location='{{ url_for('data.classifications', attr='cbo', category=category) }}all/?per_page={{ pagination.per_page }}'" {% if page_attr == "cbo" %}checked{% endif %}>
+      <label for="cbo">Occupations</label>
+      
+      <input type="radio" name="attr" value="isic" onclick="window.location='{{ url_for('data.classifications', attr='isic', category=category) }}all/?per_page={{ pagination.per_page }}'" {% if page_attr == "isic" %}checked{% endif %}>
+      <label for="isic">Industries</label>
+      
+      <input type="radio" name="attr" value="bra" onclick="window.location='{{ url_for('data.classifications', attr='bra', category=category) }}all/?per_page={{ pagination.per_page }}'" {% if page_attr == "bra" %}checked{% endif %}>
+      <label for="bra">Brazilian Locations</label>
+      
+      <input type="radio" name="attr" value="wld" onclick="window.location='{{ url_for('data.classifications', attr='wld', category=category) }}all/?per_page={{ pagination.per_page }}'" {% if page_attr == "wld" %}checked{% endif %}>
+      <label for="wld">Countries</label>
+    </div>
     
     <h1>{{ title }}</h1>
     
@@ -102,6 +118,8 @@ function update_depth(depth){
 
 dataminas.dropdown("#per_page");
 dataminas.dropdown("#category");
+
+dataminas.toggle("attr");
 
 d3.selectAll("td.icon > div").style("background-image", function(){
   return "url('"+dataminas.icon(this.title, "{{ page_attr }}") + "')"
