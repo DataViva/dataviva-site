@@ -1,3 +1,5 @@
+{% extends "templates/site.html" %}
+
 {% block head %}
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
 {% endblock %}
@@ -113,6 +115,7 @@
   </div>
 </div>
 
+<script src="/static/js/utils/utils.selector.js"></script>
 <script type="text/javascript">
   var CURRENT_PAGE = 1;
   var CURRENT_DATASET = 'rais';
@@ -234,6 +237,9 @@
   
   // retrieving new data
   function update_table(dataset, order){
+    
+    console.log(dataset, order)
+    // return
     
     // based on the dataset provided determine which filters we are interested in
     var filters = {"location":"all", "industry":"all", "occupation":"all"}
