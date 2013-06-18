@@ -799,25 +799,20 @@ div.popover {
 /* Admin Specific */
 /********************/
 #admin-content {
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 #user-info {
-  margin-bottom: 2%;
-  margin-left: 1%;
   display: inline-block;
 }
 
 #user-info img {
-  position: relative;
   float: left;
-  margin: 0 8% 8% 0;
 }
 
 #user-info h1 {
-  margin-left: 2%;
+  margin-left: 18px;
   float: left;
-  position: absolute;
   display: inline-block;
   font-size: 30px;
 }
