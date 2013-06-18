@@ -44,6 +44,7 @@
   d3.selectAll("div.decision, div.help").on(vizwhiz.evt.click,function(){
     var name = d3.select(this).attr("name")
     if (name == "help") window.location = "/guide/"
+    if (name == "help") window.location = "/guide/"
     else load_page("/data/"+name+"/");
   })
 
