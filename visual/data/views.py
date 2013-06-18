@@ -44,8 +44,11 @@ def get_geo_location(ip):
     return None
 
 @mod.route('/')
-@mod.route('/<category>/')
-def guide(category = None):
+def index():
+    return render_template("data/index.html")
+
+@mod.route('/query/')
+def query():
     
     # try getting the user's ip address, since the live server is using a proxy
     # nginx, we need to use the "X-Forwarded-For" remote address otherwise
@@ -62,16 +65,7 @@ def guide(category = None):
     if not geo_location:
         geo_location = Bra.query.get("mg030000")
     
-    ajax = request.args.get("ajax")
-    if ajax == "true":
-        if category:
-            return render_template("data/{0}.html".format(category), geo_location = geo_location)
-        else:
-            return render_template("data/home.html")
-            
-    return render_template("data/index.html",
-        category = category,
-        geo_location = geo_location)
+    return render_template("data/query.html", geo_location = geo_location)
 
 @mod.route('/classifications/', defaults={"category": "all", "page":1})
 @mod.route('/classifications/<attr>/', defaults={"category": "all", "page":1})
