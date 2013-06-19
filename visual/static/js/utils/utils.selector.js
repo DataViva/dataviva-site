@@ -2,6 +2,7 @@ function Selector() {
   
   var callback,
       type = "bra",
+      name = "bra",
       initial_value = "all",
       distance = 0,
       language = "en",
@@ -77,8 +78,8 @@ function Selector() {
               var obj = distance > 0
                 ? vizwhiz.utils.merge({"distance": distance},selected)
                 : selected;
-              obj.type = type;
-              window[callback](obj,type);
+              obj.type = name;
+              window[callback](obj,name);
             }
           });
       
@@ -90,11 +91,11 @@ function Selector() {
         var bread = nav.append("ul").attr("class","breadcrumb")
         nav.append("input")
           .attr("type","text")
-          .attr("id",type+"_search")
+          .attr("id",name+"_search")
           .attr("class","selector_search")
           .attr("placeholder","Search");
                   
-        document.getElementById(type+"_search")
+        document.getElementById(name+"_search")
           .oninput = function() { populate_list(selected) };
           
       }
@@ -263,7 +264,7 @@ function Selector() {
       }
       
       function update_proximities() {
-
+        
         if (distance == 0) {
           proximity_list.html("")
         }
@@ -337,7 +338,7 @@ function Selector() {
         
         if (depths.length > 1) {
           // Get current search box value
-          search = d3.select("#"+type+"_search").node()
+          search = d3.select("#"+name+"_search").node()
             .value.toLowerCase().removeAccents();
             
           // If search box value is less than 3 characters, don't use it!
@@ -464,7 +465,7 @@ function Selector() {
               })
               .on(vizwhiz.evt.click,function(){
                 if (type == "file") {
-                  window[callback](v,type);
+                  window[callback](v,name);
                 }
                 else {
                   select_value(v);
@@ -531,8 +532,9 @@ function Selector() {
   }
   
   util.type = function(value) {
-    if (!arguments.length) return type;
-    type = value;    
+    if (!arguments.length) return name;
+    name = value
+    type = name == "bra2" ? "bra" : name;
     return util;
   }
   

@@ -166,62 +166,6 @@ function format_name(name, l) {
     "wld_2": {"en": "Continent", "pt": "Continente"},
     "wld_5": {"en": "Country", "pt": "Pa\u00eds"},
     
-    
-    "network-rais-isic": {"en": "Industry Space", "pt": "Industry Space"},
-    "network-rais-cbo": {"en": "Occupation Space", "pt": "Occupation Space"},
-    "network-secex-hs": {"en": "Product Space", "pt": "Product Space"},
-    
-    "rings-rais-isic-isic": {"en": "Industry Connections", "pt": "Industry Connections"},
-    "rings-rais-cbo-cbo": {"en": "Occupation Connections", "pt": "Occupation Connections"},
-    "rings-secex-hs-hs": {"en": "Product Connections", "pt": "Product Connections"},
-    
-    "bubbles-rais-cbo-isic": {"en": "Occupations Required for an Industry", "pt": "Occupations Required for an Industry"},
-    
-    "pie_scatter-secex-hs": {"en": "Product Distance and Complexity", "pt": "Product Distance and Complexity"},
-    "pie_scatter-secex-hs-wld": {"en": "Product Distance and Complexity with Trade Partner", "pt": "Product Distance and Complexity with Trade Partner"},
-    "pie_scatter-rais-isic": {"en": "Industry Distance and Complexity", "pt": "Industry Distance and Complexity"},
-    "pie_scatter-rais-isic-cbo": {"en": "Industry Distance and Complexity with Occupation", "pt": "Industry Distance and Complexity with Occupation"},
-    
-    "stacked-secex-hs": {"en": "Exports", "pt": "Exports"},
-    "stacked-secex-hs-wld": {"en": "Exports with Trade Partner", "pt": "Exports with Trade Partner"},
-    "stacked-secex-wld": {"en": "Trade Partners", "pt": "Trade Partners"},
-    "stacked-secex-wld-hs": {"en": "Trade Partners with Product", "pt": "Trade Partners with Product"},
-    "stacked-secex-bra": {"en": "Export Origins", "pt": "Export Origins"},
-    "stacked-secex-bra-hs": {"en": "Export Origin of Product", "pt": "Export Origin of Product"},
-    "stacked-secex-bra-hs-wld": {"en": "Export Origin of Product with Trade Partner", "pt": "Export Origin of Product with Trade Partner"},
-    "stacked-rais-isic": {"en": "Industries", "pt": "Industries"},
-    "stacked-rais-isic-cbo": {"en": "Industries with Occupation", "pt": "Industries with Occupation"},
-    "stacked-rais-cbo": {"en": "Occupations", "pt": "Occupations"},
-    "stacked-rais-cbo-isic": {"en": "Industry Employees", "pt": "Industry Employees"},
-    "stacked-rais-bra": {"en": "Industry Locations", "pt": "Industry Locations"},
-    "stacked-rais-bra-isic": {"en": "Locations with specific Industry", "pt": "Locations with specific Industry"},
-    "stacked-rais-bra-cbo": {"en": "Locations with specific Occupation", "pt": "Locations with specific Occupation"},
-    "stacked-rais-bra-isic-cbo": {"en": "Locations with specific Occupation in Industry", "pt": "Locations with specific Occupation in Industry"},
-    
-    "tree_map-secex-hs": {"en": "Exports", "pt": "Exports"},
-    "tree_map-secex-hs-wld": {"en": "Exports with Trade Partner", "pt": "Exports with Trade Partner"},
-    "tree_map-secex-wld": {"en": "Trade Partners", "pt": "Trade Partners"},
-    "tree_map-secex-wld-hs": {"en": "Trade Partners with Product", "pt": "Trade Partners with Product"},
-    "tree_map-secex-bra": {"en": "Export Origins", "pt": "Export Origins"},
-    "tree_map-secex-bra-hs": {"en": "Export Origin of Product", "pt": "Export Origin of Product"},
-    "tree_map-secex-bra-hs-wld": {"en": "Export Origin of Product with Trade Partner", "pt": "Export Origin of Product with Trade Partner"},
-    "tree_map-rais-isic": {"en": "Industries", "pt": "Industries"},
-    "tree_map-rais-isic-cbo": {"en": "Industries with Occupation", "pt": "Industries with Occupation"},
-    "tree_map-rais-cbo": {"en": "Occupations", "pt": "Occupations"},
-    "tree_map-rais-cbo-isic": {"en": "Industry Employees", "pt": "Industry Employees"},
-    "tree_map-rais-bra": {"en": "Industry Locations", "pt": "Industry Locations"},
-    "tree_map-rais-bra-isic": {"en": "Locations with specific Industry", "pt": "Locations with specific Industry"},
-    "tree_map-rais-bra-cbo": {"en": "Locations with specific Occupation", "pt": "Locations with specific Occupation"},
-    "tree_map-rais-bra-isic-cbo": {"en": "Locations with specific Occupation in Industry", "pt": "Locations with specific Occupation in Industry"},
-    
-    "geo_map-secex-bra": {"en": "Export Origins", "pt": "Export Origins"},
-    "geo_map-secex-bra-hs": {"en": "Export Origin of Product", "pt": "Export Origin of Product"},
-    "geo_map-secex-bra-hs-wld": {"en": "Export Origin of Product with Trade Partner", "pt": "Export Origin of Product with Trade Partner"},
-    "geo_map-rais-bra": {"en": "Industry Locations", "pt": "Industry Locations"},
-    "geo_map-rais-bra-isic": {"en": "Locations with specific Industry", "pt": "Locations with specific Industry"},
-    "geo_map-rais-bra-cbo": {"en": "Locations with specific Occupation", "pt": "Locations with specific Occupation"},
-    "geo_map-rais-bra-isic-cbo": {"en": "Locations with specific Occupation in Industry", "pt": "Locations with specific Occupation in Industry"}
-    
   }
   
   if (!name) return name;
