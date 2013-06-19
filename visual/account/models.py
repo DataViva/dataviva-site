@@ -1,5 +1,7 @@
 from visual import db
 from hashlib import md5
+from visual.utils import AutoSerialize
+from os import urandom
 
 ROLE_USER = 0
 ROLE_ADMIN = 1
@@ -44,7 +46,10 @@ class User(db.Model):
         return unicode(self.id)
     
     def avatar(self, size):
-        return 'http://www.gravatar.com/avatar/' + md5(self.email).hexdigest() + '?d=mm&s=' + str(size)
+        if self.email:
+            return 'http://www.gravatar.com/avatar/' + md5(self.email).hexdigest() + '?d=mm&s=' + str(size)
+        else:
+            return 'http://www.gravatar.com/avatar/{0}?s=36&d=identicon'.format(self.nickname.encode('hex'))
     
     def __repr__(self):
         return '<User %r>' % (self.nickname)
@@ -61,7 +66,7 @@ class User(db.Model):
             version += 1
         return new_nickname
         
-class Starred(db.Model):
+class Starred(db.Model, AutoSerialize):
 
     __tablename__ = 'account_starred'
     app_id = db.Column(db.String(80), primary_key = True)

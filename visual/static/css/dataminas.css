@@ -865,18 +865,14 @@ p.reply {
   background-color: #cccccc;
   color: #ffffff;
   margin-bottom: 12px;
-  -webkit-transition: opacity 0.1s linear;
-     -moz-transition: opacity 0.1s linear;
-          transition: opacity 0.1s linear;
 }
 
 .feed-item:hover {
-  color: #333333;
   opacity: .7;
 }
 
 .feed_title {
-  width: 68%;
+  width: 79%;
   display: inline-block;
 }
 
@@ -886,9 +882,17 @@ p.reply {
   margin-left: -22px;
 }
 
+.feed-item p {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 700px;
+}
+
 .feed_date {
   display: inline-block;
-  width: 31%;
+  width: 20%;
   text-align: right !important;
 }
 

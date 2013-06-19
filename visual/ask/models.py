@@ -112,7 +112,7 @@ class Status(db.Model):
     def __unicode__(self):
         return '%s' % (self.name)
 
-class Reply(db.Model):
+class Reply(db.Model, AutoSerialize):
 
     __tablename__ = 'ask_reply'
     id = db.Column(db.Integer, primary_key = True)
