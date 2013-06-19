@@ -73,7 +73,11 @@ def question_search():
 @mod.route('/question/<slug>', methods=['GET', 'POST'])
 def answer(slug):
     reply_form = ReplyForm()
-    question = Question.query.filter_by(slug=slug).first_or_404()
+    question = Question.query.filter_by(slug=slug).first()
+    if not question:
+        question = Question.query.filter_by(id=slug).first_or_404()
+        return redirect(url_for("ask.answer", slug=question.slug))
+    
     if reply_form.validate_on_submit():
         if g.user is None or not g.user.is_authenticated():
             flash('You need to be signed in for this.')
