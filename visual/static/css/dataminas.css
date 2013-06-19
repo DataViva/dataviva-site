@@ -194,6 +194,17 @@ table td.icon > div{
   padding-bottom: 10%;
 }
 
+.lab_background {
+  background-image: url('/static/img/home/lab_background.png');
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: 100% 100%;
+  width: 100%;
+}
+
+.tall_background {
+  padding-bottom: 8%;
+}
 
 .list_icon {
   background-position: center;
