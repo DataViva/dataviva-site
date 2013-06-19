@@ -112,7 +112,7 @@
       "Querying<br>Database"
     ]
   
-    dataminas.sabrina({
+    visual.sabrina({
       "div": d3.select("#sabrina_guide"),
       "outfit": "{{ outfit }}",
       "emotion": "smile"
@@ -131,7 +131,7 @@
         }
       })
     
-    dataminas.breadcrumbs();
+    visual.breadcrumbs();
     
     var switching = false;
     
@@ -192,7 +192,7 @@
         .text(function(){
           return format_name(d3.select(this).text(),lang)+" Recommendations"
         })
-      dataminas.toggle("recs")
+      visual.toggle("recs")
       function change_recs(value) {
         d3.selectAll(".recommendations")
           .style("display","none")
@@ -206,7 +206,7 @@
         switch_apps(d3.select(this.parentNode));
       })
     
-    dataminas.resize();
+    visual.resize();
     
     d3.select("#container")
       .style("height",d3.select("#computer").style("padding-bottom"))
@@ -218,7 +218,7 @@
       .style("background-image",function(){
         var type = this.id.split("_")[0],
             id = this.id.split("_")[1]
-        return "url('"+dataminas.icon(id,type)+"')"
+        return "url('"+visual.icon(id,type)+"')"
       })
       .style("background-size",function(){
         var type = this.id.split("_")[0],

@@ -295,14 +295,16 @@ vizwhiz.utils.drop_shadow = function(defs) {
 vizwhiz.tooltip.create = function(params) {
   
   params.width = params.width ? params.width : 200
+  params.max_width = params.max_width ? params.max_width : 386
   params.id = params.id ? params.id : "default"
   params.html = params.html ? params.html : null
   params.size = params.fullscreen ? "large" : "small"
   params.offset = params.offset ? params.offset : 0
-  params.arrow_offset = params.arrow ? 10 : 0
+  params.arrow_offset = params.arrow ? 5 : 0
   params.mouseevents = params.mouseevents === undefined ? true : params.mouseevents
   params.x = params.x ? params.x : 0
   params.y = params.y ? params.y : 0
+  params.color = params.color ? params.color : "#333"
   
   params.anchor = {}
   if (params.fullscreen) {
@@ -319,10 +321,10 @@ vizwhiz.tooltip.create = function(params) {
   }
   else {
     params.anchor.x = "center"
-    params.anchor.y = "bottom"
+    params.anchor.y = "top"
   }
   
-  var title_width = params.fullscreen && params.html ? window.innerWidth*0.75 - 18 : params.width - 18
+  var title_width = params.width - 30
   
   if (params.fullscreen) {
     var curtain = d3.select("body").append("div")
@@ -336,57 +338,55 @@ vizwhiz.tooltip.create = function(params) {
     .datum(params)
     .attr("id","vizwhiz_tooltip_id_"+params.id)
     .attr("class","vizwhiz_tooltip vizwhiz_tooltip_"+params.size)
-    
-  if (params.title || params.description || params.icon) {
-    var header = tooltip.append("div")
-      .attr("class","vizwhiz_tooltip_header")
-      .style("color",vizwhiz.utils.text_color(params.color))
-      
-    if (params.color) {
-      header
-        .style("background-color",params.color)
-    }
-    if (!params.data && !params.footer) {
-      header
-        .style("-webkit-border-radius","2px")
-        .style("-moz-border-radius","2px")
-        .style("border-radius","2px")
-    }
-    if (params.id != "default" && params.size == "small") {
-      var title_id = header.append("div")
-        .attr("class","vizwhiz_tooltip_id")
-        .text(params.id)
-      title_width -= title_id.node().offsetWidth+6
-    }
-    else if (params.fullscreen) {
-      var close = header.append("div")
-        .attr("class","vizwhiz_tooltip_close")
-        .text("x")
-        .on(vizwhiz.evt.click,function(){
-          vizwhiz.tooltip.remove(params.id)
-        })
-    }
-  }
+  
+  var container = tooltip.append("div")
+    .datum(params)
+    .attr("class","vizwhiz_tooltip_container")
   
   if (params.fullscreen && params.html) {
     
-    tooltip
+    container
       .style("height",(window.innerHeight*0.75)+"px")
       .style("width",(window.innerWidth*0.75)+"px")
       
-    var body = tooltip.append("div")
+    var body = container.append("div")
       .attr("class","vizwhiz_tooltip_body")
       .style("width",params.width+"px")
       
   }
   else {
+    
+    if (params.width == "auto") {
+      var w = "auto"
+      container.style("max-width",params.max_width+"px")
+    }
+    else var w = params.width-14+"px"
 
-    if (params.width == "auto") var w = "auto"
-    else var w = params.width+"px"
-
-    var body = tooltip
+    var body = container
       .style("width",w)
       
+  }
+    
+  if (params.title || params.icon) {
+    var header = body.append("div")
+      .attr("class","vizwhiz_tooltip_header")
+      
+    if (params.id != "default") {
+      var title_id = header.append("div")
+        .attr("class","vizwhiz_tooltip_id")
+        .text(params.id)
+      title_width -= title_id.node().offsetWidth+6
+    }
+  }
+  
+  if (params.fullscreen) {
+    var close = tooltip.append("div")
+      .attr("class","vizwhiz_tooltip_close")
+      .style("color",vizwhiz.utils.darker_color(params.color))
+      .text("Close")
+      .on(vizwhiz.evt.click,function(){
+        vizwhiz.tooltip.remove(params.id)
+      })
   }
   
   if (!params.mouseevents) {
@@ -395,14 +395,18 @@ vizwhiz.tooltip.create = function(params) {
   }
     
   if (params.arrow) {
-    var arrow = body.append("div")
+    var arrow = tooltip.append("div")
       .attr("class","vizwhiz_tooltip_arrow")
+      
+    container.append("div")
+      .attr("class","vizwhiz_tooltip_arrow cover")
   }
   
   if (params.icon) {
     var title_icon = header.append("div")
       .attr("class","vizwhiz_tooltip_icon")
       .style("background-image","url("+params.icon+")")
+      .style("background-color",params.color)
     title_width -= title_icon.node().offsetWidth
   }
   
@@ -414,27 +418,23 @@ vizwhiz.tooltip.create = function(params) {
   }
   
   if (params.description) {
-    var description = header.append("div")
+    var description = body.append("div")
       .attr("class","vizwhiz_tooltip_description")
-      .style("width",title_width+"px")
       .text(params.description)
-    if (params.icon) {
-      description
-        .style("margin-left",(title_icon.node().offsetWidth+3)+"px")
-    }
   }
   
   if (params.data) {
     var data_container = body.append("div")
       .attr("class","vizwhiz_tooltip_data_container")
       
-    params.data.forEach(function(d){
+    params.data.forEach(function(d,i){
       var block = data_container.append("div")
         .attr("class","vizwhiz_tooltip_data_block")
         .text(d.name)
       if (d.highlight) {
         block
-          .attr("class","vizwhiz_tooltip_data_block vizwhiz_tooltip_data_block_highlight")
+          .style("font-weight","bold")
+          .style("color",vizwhiz.utils.darker_color(params.color))
       }
       var format = d.format ? d.format : ",f"
       if (typeof format == "string" && typeof d.value == "number") {
@@ -449,13 +449,21 @@ vizwhiz.tooltip.create = function(params) {
       block.append("div")
           .attr("class","vizwhiz_tooltip_data_value")
           .text(value)
+          
+      if (i != params.data.length-1) {
+        data_container.append("div")
+          .attr("class","vizwhiz_tooltip_data_seperator")
+      }
+          
     })
-    d3.select(".vizwhiz_tooltip_data_block").style("margin-top","0px")
     
-    if (params.html && !params.fullscreen) {
-      data_container.html(data_container.html()+params.html)
-    }
+  }
     
+  if (params.html && !params.fullscreen) {
+    body.append("div")
+      .style("padding","3px")
+      .style("margin-bottom","3px")
+      .html(params.html)
   }
   
   if (params.footer) {
@@ -466,15 +474,14 @@ vizwhiz.tooltip.create = function(params) {
   
   params.height = tooltip.node().offsetHeight
   
-  if (params.html) {
-    if (params.fullscreen) {
-      var h = params.height-header.node().offsetHeight-14
-      tooltip.append("div")
-        .attr("class","vizwhiz_tooltip_html")
-        .style("width",(tooltip.node().offsetWidth-params.width-14)+"px")
-        .style("height",h+"px")
-        .html(params.html)
-    }
+  if (params.html && params.fullscreen) {
+    var h = params.height-38
+    var w = tooltip.node().offsetWidth-params.width-44
+    container.append("div")
+      .attr("class","vizwhiz_tooltip_html")
+      .style("width",w+"px")
+      .style("height",h+"px")
+      .html(params.html)
   }
   
   params.width = tooltip.node().offsetWidth
@@ -483,9 +490,12 @@ vizwhiz.tooltip.create = function(params) {
   else params.width += params.arrow_offset
       
   if (params.data) {
-    var h = params.height-8
+    var h = params.height-20
     if (header) h -= header.node().offsetHeight
-    if (footer) h -= footer.node().offsetHeight
+    if (footer) {
+      h -= footer.node().offsetHeight
+      footer.style("margin-top","6px")
+    }
     data_container
       .style("max-height",h+"px")
   }
@@ -496,34 +506,28 @@ vizwhiz.tooltip.create = function(params) {
 
 vizwhiz.tooltip.arrow = function(arrow) {
   arrow
-    .style("background-color", function(d){
-      if (((d.flip || (!d.data && !d.footer)) && d.anchor.y != "center")
-      || (d.anchor.y == "center" && !d.data && !d.footer) && d.color) {
-        return d.color
-      }
-      else {
-        return "#ddd"
-      }
-    })
     .style("bottom", function(d){
-      if (d.anchor.y != "center" && !d.flip) return "-9px"
+      if (d.anchor.y != "center" && !d.flip) return "-4.5px"
       else return "auto"
     })
     .style("top", function(d){
-      if (d.anchor.y != "center" && d.flip) return "-9px"
+      if (d.anchor.y != "center" && d.flip) return "-4.5px"
       else if (d.anchor.y == "center") return "50%"
       else return "auto"
     })
     .style("left", function(d){
-      if (d.anchor.y == "center" && d.flip) return "-9px"
+      if (d.anchor.y == "center" && d.flip) return "-4.5px"
       else if (d.anchor.y != "center") return "50%"
       else return "auto"
     })
     .style("right", function(d){
-      if (d.anchor.y == "center" && !d.flip) return "-9px"
+      if (d.anchor.y == "center" && !d.flip) return "-4.5px"
       else return "auto"
     })
     .style("border-color", function(d){
+      if (d3.select(this).style("z-index") == "-1") {
+        return "transparent"
+      }
       if (d.anchor.y == "center") {
         if (d.flip) return "border-color","transparent transparent #888 #888"
         else return "#888 #888 transparent transparent"
@@ -538,22 +542,22 @@ vizwhiz.tooltip.arrow = function(arrow) {
         return "auto"
       }
       else {
-        if (d.anchor.x == "left") {
-          var arrow_x = -d.width/2+d.arrow_offset/2 - 1
+        if (d.anchor.x == "right") {
+          var arrow_x = -d.width/2+d.arrow_offset/2
         }
-        else if (d.anchor.x == "right") {
-          var arrow_x = d.width/2-d.arrow_offset*2 - 2
+        else if (d.anchor.x == "left") {
+          var arrow_x = d.width/2-d.arrow_offset*2 - 4.5
         }
         else {
-          var arrow_x = -9
+          var arrow_x = -4.5
         }
         if (d.cx-d.width/2-d.arrow_offset < arrow_x) {
           arrow_x = d.cx-d.width/2-d.arrow_offset
-          if (arrow_x < 4-d.width/2) arrow_x = 4-d.width/2
+          if (arrow_x < 2-d.width/2) arrow_x = 2-d.width/2
         }
         else if (-(window.innerWidth-d.cx-d.width/2+d.arrow_offset) > arrow_x) {
           var arrow_x = -(window.innerWidth-d.cx-d.width/2+d.arrow_offset)
-          if (arrow_x > d.width/2-22) arrow_x = d.width/2-22
+          if (arrow_x > d.width/2-11) arrow_x = d.width/2-11
         }
         return arrow_x+"px"
       }
@@ -563,10 +567,10 @@ vizwhiz.tooltip.arrow = function(arrow) {
         return "auto"
       }
       else {
-        if (d.anchor.y == "top") {
+        if (d.anchor.y == "bottom") {
           var arrow_y = -d.height/2+d.arrow_offset/2 - 1
         }
-        else if (d.anchor.y == "bottom") {
+        else if (d.anchor.y == "top") {
           var arrow_y = d.height/2-d.arrow_offset*2 - 2
         }
         else {
@@ -623,29 +627,25 @@ vizwhiz.tooltip.move = function(x,y,id) {
       // Set initial values, based off of anchor
       if (d.anchor.y != "center") {
 
-        if (d.anchor.x == "left") {
+        if (d.anchor.x == "right") {
           d.x = d.cx - d.arrow_offset - 4
         }
         else if (d.anchor.x == "center") {
           d.x = d.cx - d.width/2
         }
-        else if (d.anchor.x == "right") {
+        else if (d.anchor.x == "left") {
           d.x = d.cx - d.width + d.arrow_offset + 2
         }
 
         // Determine whether or not to flip the tooltip
-        if (d.anchor.y == "top") {
+        if (d.anchor.y == "bottom") {
           d.flip = d.cy + d.height + d.offset <= window.innerHeight
         }
-        else if (d.anchor.y == "bottom") {
+        else if (d.anchor.y == "top") {
           d.flip = d.cy - d.height - d.offset < 0
         }
-
-        if (d.anchor.y == "center") {
-          d.flip = false
-          d.y = d.cy - d.height/2
-        }
-        else if (d.flip) {
+        
+        if (d.flip) {
           d.y = d.cy + d.offset + d.arrow_offset
         }
         else {
@@ -655,21 +655,13 @@ vizwhiz.tooltip.move = function(x,y,id) {
       }
       else {
 
-        if (d.anchor.y == "top") {
-          d.y = d.cy - d.arrow_offset - 4
-        }
-        else if (d.anchor.y == "center") {
-          d.y = d.cy - d.height/2
-        }
-        else if (d.anchor.y == "right") {
-          d.y = d.cy - d.height + d.arrow_offset + 2
-        }
-
+        d.y = d.cy - d.height/2
+        
         // Determine whether or not to flip the tooltip
-        if (d.anchor.x == "left") {
+        if (d.anchor.x == "right") {
           d.flip = d.cx + d.width + d.offset <= window.innerWidth
         }
-        else if (d.anchor.x == "right") {
+        else if (d.anchor.x == "left") {
           d.flip = d.cx - d.width - d.offset < 0
         }
     
@@ -720,7 +712,7 @@ vizwhiz.tooltip.move = function(x,y,id) {
       .style("left",d.x+"px")
   
     if (d.arrow) {
-      tooltip.select(".vizwhiz_tooltip_arrow")
+      tooltip.selectAll(".vizwhiz_tooltip_arrow")
         .call(vizwhiz.tooltip.arrow)
     }
     
@@ -863,7 +855,7 @@ vizwhiz.viz = function() {
         
         if (vizwhiz.dev) console.log("[viz-whiz] New Data Detected")
         // Copy data to "raw_data" variable
-        var data = {}
+        data_obj = {}
         data_obj.raw = data_passed
         vars.parent = d3.select(this)
         
@@ -897,6 +889,10 @@ vizwhiz.viz = function() {
           })
         }
         
+      }
+      
+      if (vars.type == "stacked") {
+        vars.yaxis_var = vars.value_var
       }
       
       if (filter_change || 
@@ -936,7 +932,7 @@ vizwhiz.viz = function() {
                   var filtered_data = filter_check(data_obj.year[y])
                   if (spotlight) {
                     filtered_data = filtered_data.filter(function(d){
-                      return d[vars.active_var] == spotlight
+                      return d[vars.active_var] != spotlight
                     })
                   }
                   data_obj[data_type[vars.type]][depth][b][y] = nest(filtered_data,level)
@@ -977,10 +973,29 @@ vizwhiz.viz = function() {
         }
         
       }
+      
+      if (nested_apps.indexOf(vars.type) >= 0) {
+        
+        if (!vars.depth) vars.depth = vars.nesting[vars.nesting.length-1]
+        
+        if (vars.type == "stacked") {
+          vars.data = data_obj[data_type[vars.type]][vars.depth]
+        }
+        else if (vars.type == "pie_scatter") {
+          vars.data = data_obj[data_type[vars.type]][vars.depth][vars.spotlight][vars.year]
+        }
+        else {
+          vars.data = data_obj[data_type[vars.type]][vars.depth][vars.year]
+        }
+        
+      }
+      else {
+        vars.data = data_obj[data_type[vars.type]][vars.year];
+      }
 
       vizwhiz.tooltip.remove();
       
-      vars.svg = vars.parent.selectAll("svg").data([data]);
+      vars.svg = vars.parent.selectAll("svg").data([vars.data]);
       
       vars.svg_enter = vars.svg.enter().append("svg")
         .attr('width',vars.svg_width)
@@ -1020,25 +1035,6 @@ vizwhiz.viz = function() {
         vars.connections = get_connections(vars.links)
       }
       
-      if (nested_apps.indexOf(vars.type) >= 0) {
-        
-        if (!vars.depth) vars.depth = vars.nesting[vars.nesting.length-1]
-        
-        if (vars.type == "stacked") {
-          vars.data = data_obj[data_type[vars.type]][vars.depth]
-        }
-        else if (vars.type == "pie_scatter") {
-          vars.data = data_obj[data_type[vars.type]][vars.depth][vars.spotlight][vars.year]
-        }
-        else {
-          vars.data = data_obj[data_type[vars.type]][vars.depth][vars.year]
-        }
-        
-      }
-      else {
-        vars.data = data_obj[data_type[vars.type]][vars.year];
-      }
-      
       vars.width = vars.svg_width;
       
       if (vars.type == "pie_scatter") {
@@ -1076,6 +1072,7 @@ vizwhiz.viz = function() {
       if (vars.svg_width < 300 || vars.svg_height < 200) {
         vars.small = true;
         vars.graph.margin = {"top": 0, "right": 0, "bottom": 0, "left": 0}
+        vars.graph.width = vars.width
         make_title(null,"title");
         make_title(null,"sub_title");
         make_title(null,"total_bar");
@@ -1083,7 +1080,7 @@ vizwhiz.viz = function() {
       else {
         if (vizwhiz.dev) console.log("[viz-whiz] Creating/Updating Titles")
         vars.small = false;
-        vars.graph.margin = {"top": 5, "right": 10, "bottom": 55, "left": 45}
+        vars.graph.margin = {"top": 5, "right": 10, "bottom": 40, "left": 40}
         vars.graph.width = vars.width-vars.graph.margin.left-vars.graph.margin.right
         make_title(vars.title,"title");
         make_title(vars.sub_title,"sub_title");
@@ -1387,6 +1384,7 @@ vizwhiz.viz = function() {
     
     if (typeof id == "object") {
       var dat = id
+      id = dat[vars.id_var]
     }
     else {
       if (vars.data instanceof Array) {
@@ -1807,7 +1805,8 @@ vizwhiz.viz = function() {
   
   var tick_style = {
     "stroke": "#ccc",
-    "stroke-width": 1
+    "stroke-width": 1,
+    "shape-rendering": "crispEdges"
   }
   
   var axis_style = {
@@ -1831,16 +1830,29 @@ vizwhiz.viz = function() {
     .orient('bottom')
     .tickFormat(function(d, i) {
       
-      if (vars.xaxis_var == vars.year_var) var text = d;
-      else var text = vars.number_format(d);
+      if ((vars.xscale_type == "log" && d.toString().charAt(0) == "1")
+          || vars.xscale_type != "log") {
       
-      d3.select(this)
-        .style(axis_style)
-        .attr("transform","translate(-22,8)rotate(-65)")
-        .text(text)
+        if (vars.xaxis_var == vars.year_var) var text = d;
+        else {
+          var obj = {"name": vars.xaxis_var, "value": d}
+          var text = vars.number_format(obj);
+        }
+      
+        d3.select(this)
+          .style(axis_style)
+          .attr("transform","translate(-22,3)rotate(-65)")
+          .text(text)
         
-      var height = (Math.cos(25)*this.getBBox().width)-10
-      if (height > vars.graph.yoffset) vars.graph.yoffset = height
+        var height = (Math.cos(25)*this.getBBox().width)
+        if (height > vars.graph.yoffset && !vars.small) vars.graph.yoffset = height
+        
+        tick_offset = 10
+      }
+      else {
+        text = null
+        tick_offset = 5
+      }
       
       var bgtick = d3.select(this.parentNode).selectAll("line.tick")
         .data([i])
@@ -1849,35 +1861,51 @@ vizwhiz.viz = function() {
         .attr("class","tick")
         .attr("x1", 0)
         .attr("x2", 0)
-        .attr("y1", 15)
+        .attr("y1", tick_offset)
         .attr("y2", -vars.graph.height)
         .attr(tick_style)
         
       bgtick.transition().duration(vizwhiz.timing) 
         .attr("y2", -vars.graph.height)
-        
+      
       return text;
     });
   
   vars.y_axis = d3.svg.axis()
     .tickSize(0)
-    .tickPadding(20)
+    .tickPadding(15)
     .orient('left')
     .tickFormat(function(d, i) {
       
-      d3.select(this)
-        .style(axis_style)
-        .text(vars.number_format(d))
+      if ((vars.yscale_type == "log" && d.toString().charAt(0) == "1")
+          || vars.yscale_type != "log") {
+      
+        if (vars.yaxis_var == vars.year_var) var text = d;
+        else {
+          var obj = {"name": vars.yaxis_var, "value": d}
+          var text = vars.number_format(obj);
+        }
+      
+        d3.select(this)
+          .style(axis_style)
+          .text(text)
         
-      var width = this.getBBox().width
-      if (width > vars.graph.offset) vars.graph.offset = width
+        var width = this.getBBox().width
+        if (width > vars.graph.offset && !vars.small) vars.graph.offset = width
+        
+        tick_offset = -10
+      }
+      else {
+        text = null
+        tick_offset = -5
+      }
       
       var bgtick = d3.select(this.parentNode).selectAll("line.tick")
         .data([i])
         
       bgtick.enter().append("line")
         .attr("class","tick")
-        .attr("x1", -15)
+        .attr("x1", tick_offset)
         .attr("x2", vars.graph.width)
         .attr("y1", 0)
         .attr("y2", 0)
@@ -1885,11 +1913,16 @@ vizwhiz.viz = function() {
         
       bgtick.transition().duration(vizwhiz.timing) 
         .attr("x2", vars.graph.width)
-        
-      return vars.number_format(d);
+      
+      return text;
+      
     });
     
   graph_update = function() {
+
+    // create label group
+    var axes = vars.parent_enter.append("g")
+      .attr("class","axes_labels")
     
     // Enter Graph
     vars.chart_enter = vars.parent_enter.append("g")
@@ -1913,6 +1946,7 @@ vizwhiz.viz = function() {
       .attr('height', vars.graph.height)
       .attr("stroke-width",1)
       .attr("stroke","#ccc")
+      .attr("shape-rendering","crispEdges")
 
     // Create X axis
     vars.chart_enter.append("g")
@@ -1924,10 +1958,6 @@ vizwhiz.viz = function() {
     vars.chart_enter.append("g")
       .attr("class", "yaxis")
       .call(vars.y_axis.scale(vars.y_scale))
-
-    // create label group
-    var axes = vars.parent_enter.append("g")
-      .attr("class","axes_labels")
       
     // create X axis label
     axes.append('text')
@@ -2501,7 +2531,7 @@ vizwhiz.network = function(vars) {
           
           var tooltip_data = get_tooltip_data(vars.highlight)
           
-          var tooltip_appends = "<div class='vizwhiz_tooltip_footer'>Primary Connections</div>"
+          var tooltip_appends = "<div class='vizwhiz_network_title'>Primary Connections</div>"
       
           prim_nodes.forEach(function(n){
             
@@ -2754,7 +2784,7 @@ vizwhiz.stacked = function(vars) {
     .offset("zero")
     .values(function(d) { return d.values; })
     .x(function(d) { return d[vars.year_var]; })
-    .y(function(d) { return d[vars.value_var]; });
+    .y(function(d) { return d[vars.yaxis_var]; });
   
   //===================================================================
       
@@ -2766,7 +2796,7 @@ vizwhiz.stacked = function(vars) {
   var xaxis_sums = d3.nest()
     .key(function(d){return d[vars.xaxis_var] })
     .rollup(function(leaves){
-      return d3.sum(leaves, function(d){return d[vars.value_var];})
+      return d3.sum(leaves, function(d){return d[vars.yaxis_var];})
     })
     .entries(vars.data)
   
@@ -2783,8 +2813,6 @@ vizwhiz.stacked = function(vars) {
   vars.y_scale = d3.scale[vars.yscale_type]()
     .domain([0, data_max])
     .range([vars.graph.height, 0]);
-    
-  vars.yaxis_var = vars.value_var
     
   graph_update()
   
@@ -3095,9 +3123,10 @@ vizwhiz.stacked = function(vars) {
           if(years_available.indexOf(y) < 0){
             var obj = {}
             obj[vars.xaxis_var] = y
-            obj[vars.value_var] = 0
+            obj[vars.yaxis_var] = 0
             if (leaves[0][vars.id_var]) obj[vars.id_var] = leaves[0][vars.id_var]
             if (leaves[0][vars.text_var]) obj[vars.text_var] = leaves[0][vars.text_var]
+            if (leaves[0][vars.color_var]) obj[vars.color_var] = leaves[0][vars.color_var]
             leaves.push(obj)
           }
         })
@@ -3110,7 +3139,7 @@ vizwhiz.stacked = function(vars) {
       .entries(vars.data)
     
     nested.forEach(function(d, i){
-      d.total = d3.sum(d.values, function(dd){ return dd[vars.value_var]; })
+      d.total = d3.sum(d.values, function(dd){ return dd[vars.yaxis_var]; })
       d[vars.text_var] = d.values[0][vars.text_var]
       d[vars.id_var] = d.values[0][vars.id_var]
     })
@@ -3245,10 +3274,10 @@ vizwhiz.tree_map = function(vars) {
       var footer_text = html ? vars.text_format("click box for more info") : null
       
       vizwhiz.tooltip.create({
-        "title": find_variable(d[vars.id_var],vars.text_var),
-        "color": find_variable(d[vars.id_var],vars.color_var),
-        "icon": find_variable(d[vars.id_var],"icon"),
-        "id": find_variable(d[vars.id_var],vars.id_var),
+        "title": find_variable(d,vars.text_var),
+        "color": find_variable(d,vars.color_var),
+        "icon": find_variable(d,"icon"),
+        "id": find_variable(d,vars.id_var),
         "x": d3.event.pageX,
         "y": d3.event.pageY,
         "offset": 5,
@@ -3260,7 +3289,7 @@ vizwhiz.tree_map = function(vars) {
       
     })
     .on(vizwhiz.evt.move,function(d){
-      var id = find_variable(d[vars.id_var],vars.id_var)
+      var id = find_variable(d,vars.id_var)
       vizwhiz.tooltip.move(d3.event.pageX,d3.event.pageY,id)
     })
     .on(vizwhiz.evt.out,function(d){
@@ -3285,10 +3314,10 @@ vizwhiz.tree_map = function(vars) {
         tooltip_data.push({"name": vars.text_format("share"), "value": d.share});
         
         vizwhiz.tooltip.create({
-          "title": find_variable(d[vars.id_var],vars.text_var),
-          "color": find_variable(d[vars.id_var],vars.color_var),
-          "icon": find_variable(d[vars.id_var],"icon"),
-          "id": find_variable(d[vars.id_var],vars.id_var),
+          "title": find_variable(d,vars.text_var),
+          "color": find_variable(d,vars.color_var),
+          "icon": find_variable(d,"icon"),
+          "id": find_variable(d,vars.id_var),
           "fullscreen": true,
           "html": html,
           "footer": vars.data_source,
@@ -3423,6 +3452,7 @@ vizwhiz.geo_map = function(vars) {
       info_width = vars.small ? 0 : 300,
       scale_height = 10,
       scale_padding = 20,
+      scale_width = 250,
       path = d3.geo.path().projection(vars.projection),
       tile = d3.geo.tile().size([vars.width, vars.height]),
       old_scale = vars.projection.scale()*2*Math.PI,
@@ -3514,7 +3544,7 @@ vizwhiz.geo_map = function(vars) {
   
   if (!vars.small) {
     var gradient = defs
-      .append("svg:linearGradient")
+      .append("linearGradient")
       .attr("id", "gradient")
       .attr("x1", "0%")
       .attr("y1", "0%")
@@ -3532,54 +3562,84 @@ vizwhiz.geo_map = function(vars) {
     var scale = vars.parent_enter.append('g')
       .attr('class','scale')
       .style("opacity",0)
-      .attr("transform","translate("+(vars.width-info_width-5)+","+5+")");
+      .attr("transform","translate(30,5)");
+      
+    var shadow = defs.append("filter")
+      .attr("id", "shadow")
+      .attr("x", "-50%")
+      .attr("y", "0")
+      .attr("width", "200%")
+      .attr("height", "200%");
+      
+    shadow.append("feGaussianBlur")
+      .attr("in","SourceAlpha")
+      .attr("result","blurOut")
+      .attr("stdDeviation","3")
+      
+    shadow.append("feOffset")
+      .attr("in","blurOut")
+      .attr("result","the-shadow")
+      .attr("dx","0")
+      .attr("dy","1")
+      
+    shadow.append("feColorMatrix")
+      .attr("in","the-shadow")
+      .attr("result","colorOut")
+      .attr("type","matrix")
+      .attr("values","0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0")
+      
+    shadow.append("feBlend")
+      .attr("in","SourceGraphic")
+      .attr("in2","colorOut")
+      .attr("mode","normal")
     
     scale.append("rect")
-      .attr("width", info_width+"px")
-      .attr("height", (scale_height*6)+"px")
+      .attr("width", scale_width+"px")
+      .attr("height", "45px")
       .attr("fill","#ffffff")
-      .attr("rx",3)
-      .attr("ry",3)
+      .attr("opacity",0.75)
       .attr("stroke","#888")
-      .attr("stroke-width",1)
+      .attr("stroke-weight",1)
+      .attr("filter","url(#shadow)")
+      .attr("shape-rendering","crispEdges")
         
     scale.append("text")
       .attr("id","scale_title")
-      .attr("x",(info_width/2)+"px")
+      .attr("x",(scale_width/2)+"px")
       .attr("y","0px")
       .attr("dy","1.25em")
       .attr("text-anchor","middle")
       .attr("fill","#333")
-      .style("font-weight","bold")
-      .attr("font-size","12px")
+      .attr("font-size","10px")
       .attr("font-family","Helvetica")
        
     data_range.forEach(function(v,i){
       if (i == data_range.length-1) {
-        var x = scale_padding+Math.round((i/(data_range.length-1))*(info_width-(scale_padding*2)))-1
+        var x = scale_padding+Math.round((i/(data_range.length-1))*(scale_width-(scale_padding*2)))-1
       } else if (i != 0) {
-        var x = scale_padding+Math.round((i/(data_range.length-1))*(info_width-(scale_padding*2)))-1
+        var x = scale_padding+Math.round((i/(data_range.length-1))*(scale_width-(scale_padding*2)))-1
       } else {
-        var x = scale_padding+Math.round((i/(data_range.length-1))*(info_width-(scale_padding*2)))
+        var x = scale_padding+Math.round((i/(data_range.length-1))*(scale_width-(scale_padding*2)))
       }
       scale.append("rect")
         .attr("x", x+"px")
-        .attr("y", (scale_height*2.5)+"px")
+        .attr("y", (scale_height*1.75)+"px")
         .attr("width", 1)
-        .attr("height", (scale_height*1.5)+"px")
+        .attr("height", ((scale_height*0.75)+3)+"px")
         .style("fill", "#333")
+        .attr("opacity",0.25)
     
       scale.append("rect")
         .attr("x",scale_padding+"px")
-        .attr("y",(scale_height*2.5)+"px")
-        .attr("width", (info_width-(scale_padding*2))+"px")
-        .attr("height", scale_height+"px")
+        .attr("y",(scale_height*1.75)+"px")
+        .attr("width", (scale_width-(scale_padding*2))+"px")
+        .attr("height", scale_height*0.75+"px")
         .style("fill", "url(#gradient)")
         
       scale.append("text")
         .attr("id","scale_"+i)
         .attr("x",x+"px")
-        .attr("y", ((scale_height*3.5)+5)+"px")
+        .attr("y", (scale_height*2.75)+"px")
         .attr("dy","1em")
         .attr("text-anchor","middle")
         .attr("fill","#333")
@@ -3592,11 +3652,10 @@ vizwhiz.geo_map = function(vars) {
       d3.select("g.scale").style("opacity",0)
     }
     else {
-
       data_range.forEach(function(v,i){
-        scale.select("text#scale_"+i).text(vars.number_format(v))
+        d3.select("g.scale").select("text#scale_"+i).text(vars.number_format(v))
       })
-      scale.select("text#scale_title").text(vars.text_format(vars.value_var))
+      d3.select("g.scale").select("text#scale_title").text(vars.text_format(vars.value_var))
       d3.select("g.scale").style("opacity",1)
     }
     
@@ -3683,9 +3742,6 @@ vizwhiz.geo_map = function(vars) {
     .call(color_paths);
   
   info();
-    
-  d3.select("g.scale").transition().duration(vizwhiz.timing)
-    .attr("transform","translate("+(vars.width-info_width-5)+","+5+")");
     
   //===================================================================
   
@@ -3881,7 +3937,7 @@ vizwhiz.geo_map = function(vars) {
         "color": color,
         "footer": footer,
         "x": vars.width-info_width-5+vars.margin.left+vars.parent.node().offsetLeft,
-        "y": (scale_height*6)+10+vars.margin.top+vars.parent.node().offsetTop,
+        "y": vars.margin.top+vars.parent.node().offsetTop+5,
         "fixed": true,
         "width": info_width
       })
@@ -4144,7 +4200,6 @@ vizwhiz.pie_scatter = function(vars) {
     .attr("stroke-width", 1)
   
   // UPDATE      
-  console.log(ticks)
   ticks.select(".ytick").transition().duration(vizwhiz.timing)
     .attr("x1", -10)
     .attr("x2", 0)
@@ -4227,6 +4282,10 @@ vizwhiz.pie_scatter = function(vars) {
           .attr("stroke", color)
           .attr("stroke-width", 2)
       
+        var xtext = vars.number_format({
+          "value": d[vars.xaxis_var],
+          "name": vars.xaxis_var
+        })
         // xvalue text element
         viz.append("text")
           .attr("class", "axis_hover")
@@ -4238,7 +4297,7 @@ vizwhiz.pie_scatter = function(vars) {
           .attr("font-size","12px")
           .attr("font-family","Helvetica")
           .attr("fill","#4c4c4c")
-          .text(vars.number_format(d[vars.xaxis_var]))
+          .text(xtext)
       
         // y-axis value box
         viz.append("rect")
@@ -4251,6 +4310,10 @@ vizwhiz.pie_scatter = function(vars) {
           .attr("stroke", color)
           .attr("stroke-width", 2)
       
+        var ytext = vars.number_format({
+          "value": d[vars.yaxis_var],
+          "name": vars.yaxis_var
+        })
         // xvalue text element
         viz.append("text")
           .attr("class", "axis_hover")
@@ -4262,7 +4325,7 @@ vizwhiz.pie_scatter = function(vars) {
           .attr("font-size","12px")
           .attr("font-family","Helvetica")
           .attr("fill","#4c4c4c")
-          .text(vars.number_format(d[vars.yaxis_var]))
+          .text(ytext)
       
         var tooltip_data = get_tooltip_data(d)
       
@@ -5058,9 +5121,9 @@ vizwhiz.rings = function(vars) {
       "html": html,
       "footer": vars.data_source,
       "data": tooltip_data,
-      "x": vars.parent.node().offsetLeft+vars.width-5,
+      "x": vars.parent.node().offsetLeft+vars.width-tooltip_width-5,
       "y": vars.parent.node().offsetTop+vars.margin.top+5,
-      "align": "top right",
+      "fixed": true,
       "width": tooltip_width
     })
     

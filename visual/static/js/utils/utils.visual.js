@@ -1,14 +1,36 @@
-var dataminas = {};
-dataminas.slide = {};
-dataminas.popover = {};
-dataminas.slide.timing = 0.75, // timing of page slides, in seconds
+var visual = {};
+visual.slide = {};
+visual.popover = {};
+visual.slide.timing = 0.75, // timing of page slides, in seconds
+
+visual.ui = {}
+
+visual.ui.tooltip = function(id,kill) {
+  if (kill) {
+    vizwhiz.tooltip.remove(id);
+  }
+  else {
+    var item = document.getElementById(id),
+        size = item.getBoundingClientRect()
+    vizwhiz.tooltip.remove(id);
+    vizwhiz.tooltip.create({
+      "x": size.left+size.width/2,
+      "y": size.top+size.height/2,
+      "offset": size.height/2,
+      "arrow": true,
+      "description": id,
+      "width": "auto",
+      "id": id
+    })
+  }
+}
 
 // Returns a random number between the min and max passed to the function
-dataminas.random = function(min,max) {
+visual.random = function(min,max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-dataminas.download = function(type, title) {
+visual.download = function(type, title) {
   
   var form = document.getElementById("svgform");
   
@@ -42,7 +64,7 @@ dataminas.download = function(type, title) {
   form.submit();
 }
 
-dataminas.displayID = function(id,type) {
+visual.displayID = function(id,type) {
 
   if (id) {
     if (["hs","wld"].indexOf(type) >= 0 && id.length > 2) {
@@ -57,10 +79,10 @@ dataminas.displayID = function(id,type) {
   
 }
 
-dataminas.icon = function(id,type) {
+visual.icon = function(id,type) {
   
   if (["isic","cbo","hs","bra"].indexOf(type) >= 0 && id != "all"){
-    var depth = dataminas.depths(type)[0],
+    var depth = visual.depths(type)[0],
         id = id.slice(0,depth);
   }
   else {
@@ -71,7 +93,7 @@ dataminas.icon = function(id,type) {
   
 }
 
-dataminas.depths = function(type,flatten) {
+visual.depths = function(type,flatten) {
   if (type == "isic") var array = [1,3,5];
   else if (type == "cbo") var array = [1,2,3,4];
   else if (type == "hs") var array = [2,4,6];
@@ -93,7 +115,7 @@ dataminas.depths = function(type,flatten) {
 CUSTOM RADIO TOGGLE CREATOR
 Creates a custom toggle menu, when passed the name of a radio button group
 */
-dataminas.toggle = function(name) {
+visual.toggle = function(name) {
 
   var radios = Array.prototype.slice.call( document.getElementsByName(name) ),
       parent = d3.select(radios[0].parentNode),
@@ -153,7 +175,7 @@ dataminas.toggle = function(name) {
 CUSTOM DROPDOWN MENU CREATOR
 Creates a custom dropdown menu, when passed the id of a <select> input
 */
-dataminas.dropdown = function(id) {
+visual.dropdown = function(id) {
   
   var select = document.getElementById(id.slice(1)),
       initial = select.options[select.selectedIndex],
@@ -280,7 +302,7 @@ dataminas.dropdown = function(id) {
   
 }
 
-dataminas.popover.create = function(params) {
+visual.popover.create = function(params) {
   
   var id = params.id ? params.id : "popover",
       pop_width = params.width ? params.width : "50%",
@@ -290,7 +312,7 @@ dataminas.popover.create = function(params) {
     d3.select("body").append("div")
       .attr("id","popover_mask")
       .on(vizwhiz.evt.click,function(){
-        dataminas.popover.hide();
+        visual.popover.hide();
       })
   }
   
@@ -321,7 +343,7 @@ dataminas.popover.create = function(params) {
   
 }
 
-dataminas.popover.show = function(id) {
+visual.popover.show = function(id) {
   
   d3.select("#popover_mask")
     .style("display","block")
@@ -331,11 +353,11 @@ dataminas.popover.show = function(id) {
     .style("display","block")
     .style("opacity",1);
   
-  dataminas.resize();
+  visual.resize();
   
 }
 
-dataminas.popover.hide = function(id) {
+visual.popover.hide = function(id) {
   
   if (id) var popover = d3.select(id)
   else var popover = d3.selectAll(".popover")
@@ -368,7 +390,7 @@ presenting = true,false
 emotion = "smile","smirk","scared","surprised"
 blink = true,false
 */
-dataminas.sabrina = function(params) {
+visual.sabrina = function(params) {
   // Available styles
   var outfits = ["casual","worker","travel","preppy","lab"],
       hats = ["glasses","santa","worker"],
@@ -435,12 +457,10 @@ dataminas.sabrina = function(params) {
   // Makes Sabrina blink, if blink = true
   if (blink) {
     
-    blink_timer();
-    
     // Gets called immediately, and then calls itself based on a random interval
     function blink_timer() {
       // Set random interval between 3 and 6 seconds (time between blinks)
-      var time = dataminas.random(3000,6000)
+      var time = visual.random(3000,6000)
       setTimeout(function(){
         // Call blink_image to actual make her blink
         blink_image();
@@ -448,6 +468,8 @@ dataminas.sabrina = function(params) {
         blink_timer();
       },time)
     }
+    
+    blink_timer();
     
     function blink_image() {
       // Close her eyes!
@@ -458,7 +480,7 @@ dataminas.sabrina = function(params) {
         eyes.style("background-image",
           "url('/static/img/sabrina/eyes_"+emotion+".png')")
         // She has a 1 in 5 chance of blinking a second time
-        var second = dataminas.random(1,5)
+        var second = visual.random(1,5)
         if(second == 1) {
           setTimeout(function(){
             eyes.style("background-image",
@@ -476,7 +498,7 @@ dataminas.sabrina = function(params) {
       
 }
 
-dataminas.breadcrumbs = function() {
+visual.breadcrumbs = function() {
   
   var path_array = window.location.pathname.split("/"),
       window_path = path_array.slice(1,path_array.length-1),
@@ -607,7 +629,7 @@ dataminas.breadcrumbs = function() {
 }
 
 // Resize all the text on the page based off of a percentage
-dataminas.resize = function () {
+visual.resize = function () {
   
   // If pages are sliding in, only check that new page
   if (d3.select("div#slide_container").node()) {
@@ -773,9 +795,9 @@ dataminas.resize = function () {
 
 // Called after content has been fetched from the server
 // If back = true, reverse the direction of the slide
-dataminas.slide.load = function(content, back) {
+visual.slide.load = function(content, back) {
   
-  var prefix = dataminas.slide.back(back);
+  var prefix = visual.slide.back(back);
   
   // If there is no slide_buffer on the page, add one.
   // This keeps the page footer at the bottom, because slide_container
@@ -793,20 +815,20 @@ dataminas.slide.load = function(content, back) {
   // Load content into new slide_container
   new_div.node().appendChild(content);
   
-  dataminas.resize();
+  visual.resize();
 
   // move new slide_container back onto the page
   new_div
-    .style("-webkit-transition-duration",dataminas.slide.timing+"s")
-    .style("-moz-transition-duration",dataminas.slide.timing+"s")
-    .style("transition-duration",dataminas.slide.timing+"s")
+    .style("-webkit-transition-duration",visual.slide.timing+"s")
+    .style("-moz-transition-duration",visual.slide.timing+"s")
+    .style("transition-duration",visual.slide.timing+"s")
     .style("left","0%")
     
 }
 
-dataminas.slide.remove = function(back) {
+visual.slide.remove = function(back) {
   
-  var prefix = dataminas.slide.back(!back);
+  var prefix = visual.slide.back(!back);
   
   // move container off of page
   var old_divs = d3.selectAll("div#slide_container")
@@ -815,10 +837,10 @@ dataminas.slide.remove = function(back) {
   // wait for container to move off of page
   setTimeout(function(){
     old_divs.remove();
-  },dataminas.slide.timing*1000)
+  },visual.slide.timing*1000)
   
 }
 
-dataminas.slide.back = function(back) {
+visual.slide.back = function(back) {
   return back ? "-" : "";
 }

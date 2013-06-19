@@ -141,7 +141,7 @@ d3.selectAll(".flag").on(vizwhiz.evt.click, function(){
 // add icons to tags!
 d3.selectAll(".tag-icon").style("background-image", function(){
   var tag_el = d3.select(this);
-  return "url('"+dataminas.icon(tag_el.attr("title"), tag_el.attr("rel").toLowerCase()) + "')"
+  return "url('"+visual.icon(tag_el.attr("title"), tag_el.attr("rel").toLowerCase()) + "')"
 })
 
 // show/hide reply form

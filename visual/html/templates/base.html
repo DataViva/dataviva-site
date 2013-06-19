@@ -8,7 +8,7 @@
     </title>
     <link rel="shortcut icon" href="/static/img/favicon.ico">
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.reset.css" />
-    <link type="text/css" rel="stylesheet" media="all" href="/static/css/dataminas.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/visual.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.inputs.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.grid.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.nav.css" />
@@ -24,7 +24,7 @@
     <script src="/static/js/libs/moment.min.js"></script>
     <script>moment.lang("{{g.locale}}")</script>
     <script src="/static/js/utils/utils.general.js"></script>
-    <script src="/static/js/utils/utils.dataminas.js"></script>
+    <script src="/static/js/utils/utils.visual.js"></script>
     
     {% block head %}
     {% endblock %}
@@ -60,9 +60,9 @@
     
       // Take control of page resizing!
       window.onresize = function(event) {
-        dataminas.resize();
+        visual.resize();
       }
-      dataminas.resize();
+      visual.resize();
     
     </script>
     

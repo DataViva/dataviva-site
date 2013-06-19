@@ -116,13 +116,13 @@ function update_depth(depth){
   window.location = new_page_url
 }
 
-dataminas.dropdown("#per_page");
-dataminas.dropdown("#category");
+visual.dropdown("#per_page");
+visual.dropdown("#category");
 
-dataminas.toggle("attr");
+visual.toggle("attr");
 
 d3.selectAll("td.icon > div").style("background-image", function(){
-  return "url('"+dataminas.icon(this.title, "{{ page_attr }}") + "')"
+  return "url('"+visual.icon(this.title, "{{ page_attr }}") + "')"
 })
 </script>
 

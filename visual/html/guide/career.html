@@ -26,7 +26,7 @@
 
 <script>
 
-  dataminas.sabrina({
+  visual.sabrina({
     "div": d3.select("#sabrina_career"),
     "outfit": "preppy",
     "emotion": "smile"
@@ -36,9 +36,9 @@
     var name = d3.select(this).attr("name")
     if (name) update_path(name);
     else {
-      dataminas.slide.remove();
+      visual.slide.remove();
       d3.html("/selector/cbo/",function(content){
-        dataminas.slide.load(content);
+        visual.slide.load(content);
       })
     }
   })

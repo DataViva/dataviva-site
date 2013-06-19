@@ -73,7 +73,7 @@
   
   <script>
   
-  dataminas.sabrina({
+  visual.sabrina({
     "div": d3.select("#sabrina_ask"),
     "outfit": "lab",
     "emotion": "surprised",
@@ -92,7 +92,7 @@
     if(search_term == ""){
       d3.select("#recent").style("display", "block")
       d3.selectAll(".hide").style("display", "none")
-      dataminas.resize()
+      visual.resize()
       return;
     }
   
@@ -123,11 +123,11 @@
                   .html("Asked by " + match.user + " " + moment(match.timestamp).fromNow())
             decision.append("div").attr("class", "arrow")
        })
-       dataminas.resize()
+       visual.resize()
     })
   }
-  dataminas.toggle("order");
-  dataminas.resize()
+  visual.toggle("order");
+  visual.resize()
 </script>
 
 {% endblock %}

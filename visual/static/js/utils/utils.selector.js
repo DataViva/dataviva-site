@@ -13,7 +13,7 @@ function Selector() {
     selection.each(function(data) {
       
       var distance_url = "/attrs/bra/munic.value/",
-          depths = dataminas.depths(type,true),
+          depths = visual.depths(type,true),
           list = [],
           search = ""
           selected = null,
@@ -196,7 +196,7 @@ function Selector() {
         for (d in data) {
           
           if (!data[d].display_id) {
-            data[d].display_id = dataminas.displayID(d,type);
+            data[d].display_id = visual.displayID(d,type);
           }
           
           if (data[d].id.length > depths[1]) {
@@ -209,7 +209,7 @@ function Selector() {
             data[d].parent = d.slice(0,depths[0]);
           }
           
-          data[d].icon = dataminas.icon(d,type)
+          data[d].icon = visual.icon(d,type)
         }
         
         select_value(data[initial_value]);
