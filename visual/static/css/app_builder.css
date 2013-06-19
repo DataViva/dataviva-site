@@ -135,7 +135,7 @@ div.build_section a.button {
 /*******************/
 
 div#ui_bottom {
-  margin: 0px 0px 5px 0px;
+  margin: 5px;
   display: block;
   position: absolute;
   bottom: -300px;

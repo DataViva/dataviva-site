@@ -652,6 +652,7 @@ iframe.app_builder {
   width: 98%;
   min-height: 700px;
   background-color: #eee;
+  overflow-x: scroll;
 }
 
 #results a {

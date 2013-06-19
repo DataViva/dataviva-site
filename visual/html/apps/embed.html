@@ -1,5 +1,5 @@
 <!-- extend from base layout -->
-{% extends "templates/base.html" %}
+{% extends "base.html" %}
 
 {% block head %}
 
@@ -103,7 +103,9 @@
         app_name = "{{ app_name }}",
         data_type = "{{ data_type }}",
         bra = {"id": "all", "distance": 0},
+        bra2 = {"id": "all", "distance": 0},
         distance_seperator = ".",
+        combo_seperator = "+",
         wld = {"id": "all"},
         isic = {"id": "all"},
         cbo = {"id": "all"},
@@ -121,7 +123,8 @@
           'network': {
             "color": "#c8140a",
             "bra": true,
-            "format": "network",
+            "viz-whiz": "network",
+            "format": "default",
             "vars": { "year": [],
                       "value_var": ["wage","wage_avg","val_usd","complexity"],
                       "spotlight": ["true","false"],
@@ -134,7 +137,8 @@
           'rings': {
             "color": "#17bcef",
             "bra": true,
-            "format": "network",
+            "viz-whiz": "rings",
+            "format": "default",
             "vars": { "year": []
                     },
             "outputs":{ "secex":[["hs","hs"]],
@@ -144,6 +148,7 @@
           'bubbles': {
             "color": "#e87600",
             "bra": false,
+            "viz-whiz": "bubbles",
             "format": "bubbles",
             "vars": { "year": [],
                       "value_var": ["none","importance","required_wage_avg","total"],
@@ -156,22 +161,38 @@
           'pie_scatter': {
             "color": "#0b1097",
             "bra": true,
-            "format": "flat",
+            "viz-whiz": "pie_scatter",
+            "format": "default",
             "vars": { "year": [],
                       "depth": [],
-                      "value_var": ["num_emp","wage","num_est","val_usd"],
+                      "value_var": ["num_emp","wage","wage_avg","num_est","val_usd"],
                       "spotlight": ["true","false"]
                     },
             "outputs":{ "secex":[["hs"],["hs","wld"]],
                         "rais":[["isic"],["isic","cbo"]]
                       }
           },
+          'compare': {
+            "color": "#0b1097",
+            "bra": true,
+            "viz-whiz": "pie_scatter",
+            "format": "compare",
+            "vars": { "year": [],
+                      "depth": [],
+                      "axes": ["num_emp","wage","wage_avg","num_est","val_usd"],
+                      "value_var": ["val_usd","num_emp"]
+                    },
+            "outputs":{ "secex":[["hs","bra2"]],
+                        "rais":[["isic","bra2"],["cbo","bra2"]]
+                      }
+          },
           'stacked': {
             "color": "#752277",
             "bra": false,
-            "format": "flat",
+            "viz-whiz": "stacked",
+            "format": "default",
             "vars": { "depth": [],
-                      "value_var": ["num_emp","wage","num_est","val_usd"],
+                      "value_var": ["num_emp","wage","wage_avg","num_est","val_usd"],
                       "sort": ["name","total","category"],
                       "layout": ["value","share"],
                       "order": ["asc","desc"]
@@ -191,7 +212,8 @@
           'tree_map': {
             "color": "#ffc41c",
             "bra": false,
-            "format": "flat",
+            "viz-whiz": "tree_map",
+            "format": "default",
             "vars": { "year": [],
                       "depth": [],
                       "value_var": ["num_emp","wage","num_est","val_usd"]
@@ -211,7 +233,8 @@
           'geo_map': {
             "color": "#00923f",
             "bra": true,
-            "format": "geo",
+            "viz-whiz": "geo_map",
+            "format": "default",
             "vars": { "year": [],
                       "value_var": ["num_emp","wage","wage_avg","num_est","val_usd"]
                     },
@@ -225,41 +248,119 @@
           "cbo": dataminas.depths("cbo"),
           "hs": dataminas.depths("hs"),
           "bra": dataminas.depths("bra"),
+          "bra2": dataminas.depths("bra"),
           "wld": dataminas.depths("wld")
         },
-        app = null,
         selector = null,
         tooltip_info = [
-          format_name("display_id",lang),
-          format_name("rca",lang),
-          format_name("rca_wld",lang),
-          format_name("wage",lang),
-          format_name("wage_avg",lang),
-          format_name("num_emp",lang),
-          format_name("num_est",lang),
-          format_name("val_usd",lang),
-          format_name("distance",lang),
-          format_name("complexity",lang),
-          format_name("employed",lang),
-          format_name("elsewhere",lang),
-          format_name("total",lang),
-          format_name("required",lang),
-          format_name("importance",lang)
+          "display_id",
+          "rca",
+          "rca_wld",
+          "wage",
+          "wage_avg",
+          "num_emp",
+          "num_est",
+          "val_usd",
+          "distance",
+          "complexity",
+          "cp_bra_wage",
+          "cp_bra_wage_avg",
+          "cp_bra_num_emp",
+          "cp_bra_num_est",
+          "cp_bra_val_usd",
+          "cp_bra_distance",
+          "cp_bra_complexity",
+          "cp_bra2_wage",
+          "cp_bra2_wage_avg",
+          "cp_bra2_num_emp",
+          "cp_bra2_num_est",
+          "cp_bra2_val_usd",
+          "cp_bra2_distance",
+          "cp_bra2_complexity",
+          "employed",
+          "elsewhere",
+          "total",
+          "required",
+          "importance"
         ],
         total_labels = {
           "val_usd": ["$"," USD"],
           "wage": ["$"," BRL"],
           "total": [""," employees"]
+        },
+        nesting_aggs = {
+          "distance": "mean",
+          "complexity": "mean",
+          "rca": "mean",
+          "wage_avg": "mean"
         };
         
-    var nesting_aggs = {}
-    nesting_aggs[format_name("distance",lang)] = "mean"
-    nesting_aggs[format_name("complexity",lang)] = "mean"
-    nesting_aggs[format_name("rca",lang)] = "mean"
+    text_formatting = function(text) {
+      if (text.indexOf("cp_bra") == 0) {
+        var arr = text.split("_")
+        arr.shift()
+        var loc = arr.shift()
+        text = arr.join("_")
+        return window[loc].name + " ("+format_name(text,lang)+")"
+      }
+      else {
+        return format_name(text,lang)
+      }
+    }
+
+    number_formatting = function(obj) {
+      if (typeof obj === "number") {
+        var value = obj, name = ""
+      }
+      else {
+        var value = obj.value, name = obj.name
+      }
+      
+      var smalls = ["rca","rca_bra","rca_wld","distance","complexity"]
+      smalls.forEach(function(s,i){
+        smalls[i] = format_name(s,lang)
+      })
+      
+      if (smalls.indexOf(name) >= 0) {
+        return d3.round(value,2)
+      }
+      else if (value.toString().split(".")[0].length > 4) {
+        var symbol = d3.formatPrefix(value).symbol
+        symbol = symbol.replace("G", "B") // d3 uses G for giga
+        
+        // Format number to precision level using proper scale
+        value = d3.formatPrefix(value).scale(value)
+        value = parseFloat(d3.format(".3g")(value))
+        value = value + symbol;
+      }
+      else {
+        value = d3.format(",f")(value)
+      }
+      
+      return value
+      
+    }
+        
+    var app = vizwhiz.viz()
+      .name_array(["name","display_id"])
+      .nesting_aggs(nesting_aggs)
+      .text_var("name")
+      .id_var("id")
+      .year_var("year")
+      .tooltip_info(tooltip_info)
+      .total_bar(get_total_label())
+      .text_format(text_formatting)
+      .number_format(number_formatting)
     
-    var bra_id = "{{ bra_id }}".split(distance_seperator)
+    var bras = "{{ bra_id }}".split(combo_seperator)
+    var bra_id = bras[0].split(distance_seperator)
     bra.id = bra_id[0]
     if (bra_id[1]) bra.distance = bra_id[1]
+    if (bras[1]) {
+      var bra_id = bras[1].split(distance_seperator)
+      bra2.id = bra_id[0]
+      if (bra_id[1]) bra2.distance = bra_id[1]
+    }
     
     // Get filters being used in the url
     if (data_type == "rais") {
@@ -281,6 +382,7 @@
       else return f;
     }).sort(function (a, b) { return b.length - a.length; })[0]
     
+    if (bra2.id == "all") bra2.id = "sp"
     if (wld.id == "all") wld.id = "aschn"
     if (isic.id == "all") isic.id = "c1410"
     if (cbo.id == "all") cbo.id = "1210"
@@ -290,7 +392,7 @@
       
     function load_filters() {
       
-      if (global_vars.builder != "false") var fs = ["bra","wld","hs","isic","cbo"]
+      if (global_vars.builder != "false") var fs = ["bra","bra2","wld","hs","isic","cbo"]
       else var fs = current_build.concat(["bra"])
       
       var loaded_filters = []
@@ -300,13 +402,16 @@
           finish_load(f)
         }
         else {
+          
+          var type = f == "bra2" ? "bra" : f
+          
           var url = attr_url_id
-            .replace("filter",f)
+            .replace("filter",type)
             .replace("id",window[f].id)
         
           d3.json(url,function(temp_attr){
             var obj = temp_attr.data[0]
-            obj.icon = dataminas.icon(obj.id,f)
+            obj.icon = dataminas.icon(obj.id,type)
             window[f] = obj
             
             if (f == "bra") select_filter(obj,f);
@@ -335,10 +440,13 @@
       
     }
     
-    function check_attrs(type,callback) {
+    function check_attrs(filter,callback) {
+      
+      var type = "bra2" == filter ? "bra" : filter
+      
       if (attrs[type] != "loading") {
         if (attrs[type]) {
-          window[callback](type);
+          window[callback](filter);
         }
         else {
           attrs[type] = "loading"
@@ -354,7 +462,7 @@
             // Store attribute list in public dictionary
             attrs[type] = temp_dict;
 
-            window[callback](type);
+            window[callback](filter);
 
           })
         }
@@ -488,7 +596,7 @@
     
     // Creates a filter button for the specified type
     function create_filter(type) {
-
+      
       var a = d3.select("#filter_section").append("a")
         .attr("id",type+"_select")
         .attr("class","button")
@@ -543,8 +651,8 @@
             callback = "select_filter"
       }
       
-      if (id == "bra") {
-        var dist = bra.distance
+      if (window[id].distance) {
+        var dist = window[id].distance
       }
       else {
         var dist = 0
@@ -565,12 +673,14 @@
       
     }
 
-    function popover_ready(id) {
+    function popover_ready(filter) {
+      
+      var type = "bra2" == filter ? "bra" : filter
       
       d3.select("#popover")
-        .datum(attrs[id])
+        .datum(attrs[type])
         .call(selector);
-  
+        
       // Show popover
       dataminas.popover.show("#popover");
       
@@ -595,7 +705,7 @@
       }
       else {
         var url = window.location.pathname.replace("embed","star"),
-            title = escape(app_title(current_build,data_type))
+            title = app_title(current_build,data_type)
             
         d3.json(url)
           .header("Content-type","application/x-www-form-urlencoded")
@@ -615,13 +725,17 @@
       
       dataminas.popover.hide("#popover");
 
-      if (!obj.icon) obj.icon = dataminas.icon(obj.id,type)
+      var cat = "bra2" == type ? "bra" : type
+      
+      if (cat == "bra" && !obj.distance) obj.distance = 0
+
+      if (!obj.icon) obj.icon = dataminas.icon(obj.id,cat)
 
       d3.select("#"+type+"_select .list_icon")
        .style("background-image","url("+obj.icon+")")
        .style("background-color","transparent")
 
-      if (["wld","bra"].indexOf(type) < 0) {
+      if (["wld","bra"].indexOf(cat) < 0) {
         d3.select("#"+type+"_select .list_icon")
          .style("background-color",obj.color)
       }
@@ -629,8 +743,8 @@
       d3.select("#"+type+"_select .list_text")
        .text(obj.name.truncate(20))
         
-      d3.select("#"+type+"_select .road_sign").remove();
-      if (obj.distance && obj.distance > 0) {
+      if (obj.distance > 0) {
+        d3.select("#"+type+"_select .road_sign").remove();
         d3.select("#"+type+"_select")
           .append("span")
             .attr("class","road_sign")
@@ -638,8 +752,8 @@
       }
       
       if (window[type].id != obj.id || 
-         (type == "bra" && obj.distance != bra.distance && obj.distance)) {
-        bra.distance = obj.distance ? obj.distance : bra.distance;
+         (cat == "bra" && obj.distance != window[type].distance && obj.distance)) {
+        if (cat == "bra") window[type].distance = obj.distance ? obj.distance : window[type].distance;
         window[type] = obj
         start_app();
       }
@@ -678,15 +792,19 @@
     
     function update_url() {
       
-      var window_url = app_name+'/'+data_type+'/'+bra.id+'/filter1/filter2/output/'
-      if (bra.distance > 0) window_url = window_url.replace(bra.id,bra.id+distance_seperator+bra.distance)
+      var geo = bra.distance > 0 ? bra.id+distance_seperator+bra.distance : bra.id
+      if (current_build.indexOf("bra2") >= 0) {
+        geo += "+"
+        geo += bra2.distance > 0 ? bra2.id+distance_seperator+bra2.distance : bra2.id
+      }
+      var window_url = app_name+'/'+data_type+'/'+geo+'/filter1/filter2/output/'
       
       current_build.forEach(function(r,i){
         if (i == 0) window_url = window_url.replace("output",r)
         else {
           if (r == "isic" || r == "hs") {
             window_url = window_url.replace("filter1",window[r].id)
-          } else {
+          } else if (r == "cbo" || r == "wld") {
             window_url = window_url.replace("filter2",window[r].id)
           }
         }
@@ -765,17 +883,18 @@
 
         update_url();
 
-        if (current_build[0] == "bra") var location = "show.8";
-        else var location = bra.id;
+        if (current_build[0] == "bra") var location = "show.8"
+        else {
+          var location = bra.distance > 0 ? bra.id+distance_seperator+bra.distance : bra.id
+          if (current_build.indexOf("bra2") >= 0) {
+            location += "+"
+            location += bra2.distance > 0 ? bra2.id+distance_seperator+bra2.distance : bra2.id
+          }
+        }
         
         current_url =  data_url
           .replace("bra",location)
           .replace("data_type",data_type);
-      
-        if (bra.distance > 0 && app_name != "geo_map") {
-          current_url = current_url
-            .replace(location,location+distance_seperator+bra.distance)
-        }
 
         current_build.forEach(function(r,i){
           if (i > 0 || (i == 0 && r != "bra")) {
@@ -784,7 +903,7 @@
             if (r == "isic" || r == "hs") {
               var field = "filter1";
             } 
-            else {
+            else if (r == "cbo" || r == "wld") {
               var field = "filter2";
             }
             current_url = current_url.replace(field,string)
@@ -1035,8 +1154,9 @@
             if (!global_vars.depth) {
               global_vars.depth = current_build[0]+"_"+depths[current_build[0]][default_depth]
             }
+            var type = global_vars.depth.split("_")[0]
             var d = parseFloat(global_vars.depth.split("_")[1])
-            if (depths[current_build[0]].indexOf(d) < 0) {
+            if (depths[current_build[0]].indexOf(d) < 0 || type != current_build[0]) {
               global_vars.depth = current_build[0]+"_"+depths[current_build[0]][default_depth]
             }
             var data_array = []
@@ -1048,6 +1168,22 @@
           else if (v == "rca_scope" && current_build[0] != "hs") {
             var data_array = []
             delete global_vars[v]
+          }
+          else if (v == "axes") {
+            
+            var available_values = app_data[current_url].keys
+          
+            var app_values = apps[app_name].vars[v];
+    
+            var data_array = [];
+            app_values.forEach(function(v){
+              if (available_values.indexOf(v) >= 0) data_array.push(v);
+            })
+            
+            if(!global_vars[v] || data_array.indexOf(global_vars[v]) < 0) {
+              global_vars[v] = data_array[0]
+            }
+            
           }
           else {
             if(!global_vars[v]) global_vars[v] = apps[app_name].vars[v][0]
@@ -1080,27 +1216,21 @@
         nesting.push(current_build[0]+"_"+d)
       })
 
-      app = vizwhiz.viz()
-        .type(app_name)
+      app.type(apps[app_name]["viz-whiz"])
+        .title(title)
+        .attrs(attrs[current_build[0]])
         .name_array(["name","display_id"])
         .spotlight(global_vars.spotlight)
         .nesting(nesting)
-        .nesting_aggs(nesting_aggs)
         .depth(global_vars.depth)
         .sort(global_vars.sort)
         .grouping(global_vars.grouping)
         .order(global_vars.order)
         .layout(global_vars.layout)
-        .value_var(format_name(global_vars.value_var,lang))
-        .text_var("name")
-        .id_var("id")
-        .year_var(format_name("year",lang))
+        .value_var(global_vars.value_var)
         .width(app_width)
         .height(app_height)
-        .tooltip_info(tooltip_info)
         .total_bar(get_total_label())
-        
-      if (global_vars.builder == "false") app.title(title)
         
       /********************/
       /* Network Specific */
@@ -1109,6 +1239,7 @@
         var av = current_build[0] == "hs" ? global_vars.rca_scope : "bra_rca";
         app
           .links(networks[current_build[0]].links)
+          .nodes(networks[current_build[0]].nodes)
           .active_var(av)
       } 
       
@@ -1135,19 +1266,38 @@
       /********************/
       else if (app_name == "stacked") {
         app
-          .xaxis_var(format_name("year",lang))
+          .xaxis_var("year")
       } 
 
       /********************/
       /* Scatter Specific */
       /********************/
       else if (app_name == "pie_scatter") {
+      
         app
-          .xaxis_var(format_name("distance",lang))
+          .xaxis_var("distance")
           .xaxis_domain(d3.extent(app_data[current_url].raw,function(d){return d.distance}))
-          .yaxis_var(format_name("complexity",lang))
+          .yaxis_var("complexity")
           .yaxis_domain(d3.extent(app_data[current_url].raw,function(d){return d.complexity}).reverse())
+            
       } 
+      
+      /******************/
+      /* Compare Specific */
+      /******************/
+      else if (app_name == "compare") {
+
+        var xvar = "cp_bra2_"+global_vars.axes
+        var yvar = "cp_bra_"+global_vars.axes
+        
+        app
+          .xaxis_var(xvar)
+          .xaxis_domain(d3.extent(app_data[current_url].compare,function(d){return d[xvar]}))
+          .yaxis_var(yvar)
+          .yaxis_domain(d3.extent(app_data[current_url].compare,function(d){return d[yvar]}).reverse())
+          .spotlight(false)
+        
+      }
       
       /******************/
       /* Rings Specific */
@@ -1155,6 +1305,7 @@
       else if (app_name == "rings") {
         app
           .links(networks[current_build[0]].links)
+          .nodes(networks[current_build[0]].nodes)
           .highlight(window[current_build[1]].id)
           .active_var("active")
       }
@@ -1188,38 +1339,8 @@
       
       var data_obj = []
       
-      if (format == "network") {
-        years.forEach(function(year){
-    
-          var year_data = app_data[current_url].raw.filter(function(d){ return d.year == year; });
-          
-          networks[out].nodes.forEach(function(d){
-            
-            var x = year_data.filter(function(f){ return f[out+"_id"] == d.id; })[0]
-            var obj = vizwhiz.utils.merge(x,d)
-            obj.year = year
-            obj.display_id = dataminas.displayID(d.id,out)
-            
-            var attributes = attr[d.id]
-            
-            obj.color = attributes.color
-            obj.name = attributes.name
-            
-            obj.active = obj.rca >=1 ? true : false;
-            
-            obj.bra_rca = obj.rca >=1 ? true : false;
-            obj.wld_rca = obj.rca_wld >=1 ? true : false;
-
-            obj = set_nesting(obj)
-            obj = format_titles(obj)
-            
-            data_obj.push(obj)
-            
-          })
-          
-        })
-      }
-      else if ("bubbles" == format) {
+      if ("bubbles" == format) {
+        
         years.forEach(function(year){
           
           var year_data = app_data[current_url].raw.filter(function(d){ return d.year == year; });
@@ -1238,10 +1359,7 @@
             
           req_filtered.forEach(function(d){
       
-            var attributes = attr[d[current_build[0]+"_id"]]
-            d.color = attributes.color
-            d.name = attributes.name
-            d.id = attributes.id
+            d.id = d[current_build[0]+"_id"]
       
             var temp_obj = year_data.filter(function(dd){ return dd[current_build[0]+"_id"] == d[current_build[0]+"_id"] })[0]
             if (!temp_obj) {
@@ -1269,9 +1387,12 @@
             d.elsewhere = elsewhere-d.employed
       
             d.display_id = dataminas.displayID(d.id,out)
+            d.icon = dataminas.icon(d.id,out)
+            
+            if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp;
 
             d = set_nesting(d)
-            d = format_titles(d)
+            get_keys(d)
           
             data_obj.push(d)
             
@@ -1280,52 +1401,66 @@
         })
     
       }
-      else if (format == "geo") {
-        years.forEach(function(year){
-          
-          var year_data = app_data[current_url].raw.filter(function(d){ return d.year == year; });
-          
-          for (var i in attr) {
-            if (i.substr(0,2) == bra.id.substr(0,2) && i.length == 8) {
-            
-              var obj = year_data.filter(function(f){return f[current_build[0]+"_id"] == i})[0]
-          
-              var attributes = attr[i]
-              obj.color = attributes.color
-              obj.name = attributes.name
-              obj.id = attributes.id
+      else if ("compare" == format) {
+        
+        d3.nest()
+          .key(function(d){return d.year})
+          .key(function(d){return d[out+"_id"]})
+          .rollup(function(leaves){
+            if (leaves.length == 2) {
+              var d = {}
+              d.year = leaves[0].year
+              d.id = leaves[0][out+"_id"]
+              d.display_id = dataminas.displayID(d.id,out)
+              d.icon = dataminas.icon(d.id,out)
+              d.active = true
+              
+              leaves.forEach(function(leaf){
+                if (leaf.wage && leaf.num_emp) leaf.wage_avg = leaf.wage/leaf.num_emp;
+                for (key in leaf) {
+                  if (key != "bra_id" && key != out+"_id") {
+                    if (typeof leaf[key] === "number" && key != "year") {
+                      if (!d[key]) d[key] = 0
+                      d[key] += leaf[key]
+                    }
+                    if (leaf.bra_id == bra.id) var k = "cp_bra_"+key
+                    else if (leaf.bra_id == bra2.id) var k = "cp_bra2_"+key
+                    d[k] = leaf[key]
+                  }
+                }
+              })
 
-              obj.display_id = dataminas.displayID(obj.id,out)
-              obj.year = year
-
-              obj = set_nesting(obj)
-              obj = format_titles(obj)
-            
-              data_obj.push(obj)
-          
+              d = set_nesting(d)
+              get_keys(d)
+              
+              data_obj.push(d)
+              
             }
-          
-          }
-          
-        })
+          })
+          .entries(app_data[current_url].raw)
       }
       else {
+        
         app_data[current_url].raw.forEach(function(d){
           
-          var attributes = attr[d[out+"_id"]]
-          d.color = attributes.color
-          d.name = attributes.name
-          d.id = attributes.id
+          d.id = d[out+"_id"]
+          d.display_id = dataminas.displayID(d.id,out)
+          d.icon = dataminas.icon(d.id,out)
+          
+          if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp;
           
           d.active = d.rca >=1 ? true : false;
-
-          d.display_id = dataminas.displayID(d.id,out)
           
+          d.bra_rca = d.rca >=1 ? true : false;
+          d.wld_rca = d.rca_wld >=1 ? true : false;
+
           d = set_nesting(d)
-          d = format_titles(d)
+          get_keys(d)
           
           data_obj.push(d)
+          
         })
+        
       }
       
       app_data[current_url][format] = data_obj;
@@ -1337,9 +1472,7 @@
         return obj;
       }
       
-      function format_titles(d) {
-        if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp;
-        var obj = {}
+      function get_keys(d) {
         if (!app_data[current_url].keys) app_data[current_url].keys = []
         if (!app_data[current_url].categories) app_data[current_url].categories = {}
         if (!app_data[current_url].categories[d.year]) app_data[current_url].categories[d.year] = []
@@ -1351,11 +1484,7 @@
             if (app_data[current_url].categories[d.year].indexOf(parent) < 0) app_data[current_url].categories[d.year].push(parent);
             if (app_data[current_url].categories.all.indexOf(parent) < 0) app_data[current_url].categories.all.push(parent);
           }
-          if (key == "name") obj.name = d.name.toTitleCase();
-          else obj[format_name(key,lang)] = d[key]; 
-          obj[key] = d[key];
         }
-        return obj;
       }
       
     }
@@ -1369,8 +1498,7 @@
       if (exclusions.indexOf(val) >= 0) return false;
 
       var total_obj = {
-        "prefix": format_name(val,lang)+": ",
-        "format": ",f"
+        "prefix": format_name(val,lang)+": "
       }
       
       if (total_labels[val]) {
@@ -1383,7 +1511,9 @@
     }
     
     function app_title(build,data) {
+      
       var out = build[0];
+      
       if (lang == "en") {
         if (app_name == "network") {
           if (out == "hs") var type = "Product"
@@ -1429,12 +1559,19 @@
               else if (f == "wld") {
                 title += " to " + wld.name
               }
+              else if (f == "bra2") {
+                title += " and " + bra2.name
+              }
             }
           })
           return title;
         }
       }
-      return null;
+      else if (lang == "pt") {
+        
+      }
+      
+      return app_name;
     }
     
     function update_key() {
@@ -1497,6 +1634,22 @@
     /************************/
     /* UI Control Functions */
     /************************/
+
+    function axes(value) { 
+      global_vars.axes = value
+      update_url();
+      
+      var xvar = "cp_bra2_"+global_vars.axes
+      var yvar = "cp_bra_"+global_vars.axes
+      
+      d3.select("#app").call(app
+        .xaxis_var(xvar)
+        .xaxis_domain(d3.extent(app_data[current_url].compare,function(d){return d[xvar]}))
+        .yaxis_var(yvar)
+        .yaxis_domain(d3.extent(app_data[current_url].compare,function(d){return d[yvar]}).reverse())
+      );
+      
+    }
     
     function change_year(value) {
       global_vars.year = value;
@@ -1569,7 +1722,7 @@
       global_vars.value_var = value;
       update_url();
       d3.select("#app").call(app
-        .value_var(format_name(global_vars.value_var,lang))
+        .value_var(global_vars.value_var)
         .total_bar(get_total_label())) 
     }
     
@@ -1606,11 +1759,11 @@
       d3.select("#ui_bottom").style("bottom",function(d){
         if (global_vars.controls != "false") var u = 0
         else var u = 1
-        return "-"+(this.offsetHeight*u)+"px"
+        return "-"+((this.offsetHeight+5)*u)+"px"
       })
       
       if (global_vars.controls == "false") var y_offset = 0;
-      else var y_offset = d3.select("#ui_bottom").node().offsetHeight;
+      else var y_offset = d3.select("#ui_bottom").node().offsetHeight+5;
 
       app_height = height-5-y_offset;
       if (global_vars.builder != "false") app_height -= d3.select("#builder").node().offsetHeight

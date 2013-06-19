@@ -67,6 +67,7 @@ class Starred(db.Model):
     app_id = db.Column(db.String(80), primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), primary_key = True)
     app_name = db.Column(db.String(255))
+    timestamp = db.Column(db.DateTime)
 
     def __repr__(self):
         return '<App %r starred by %r>' % (self.app_id, self.user.nickname)
