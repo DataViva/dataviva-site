@@ -153,7 +153,7 @@ def ask():
     if form.validate_on_submit():
         if g.user is None or not g.user.is_authenticated():
             flash('You need to be signed in for this.')
-            return redirect(url_for('admin.login'))
+            return redirect(url_for('account.login'))
         timestamp = datetime.utcnow()
         slug = Question.make_unique_slug(form.question.data)
         question = Question(question=form.question.data, body=form.body.data, timestamp=timestamp, user=g.user, slug=slug)

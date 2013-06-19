@@ -1,4 +1,5 @@
 # Flask framework
+Jinja2==2.6
 Werkzeug==0.8.3
 flask==0.9
 

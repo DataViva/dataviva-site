@@ -433,6 +433,7 @@ div.rec_value {
 .vote_up.big {
   margin-left: -74px !important;
   margin-top: -5px;
+  padding-top: 1px;
 }
 
 .vote_count.big {
@@ -473,11 +474,11 @@ div.rec_value {
 
 #responses .vote_up {
   margin-left: -60px;
-  margin-top: -4px;
+  margin-top: -5px;
 }
 
 #responses ol > li {
-  margin: 1.2% 0 1.2% 4.2%;
+  margin: 10px 0 10px 32px;
   padding: .5% 1%;
   border-top: 5px solid #666;
   background-color: #f6f6f6;
@@ -485,7 +486,7 @@ div.rec_value {
 }
 
 #responses ol > li.child {
-  margin-left: 14%;
+  margin-left: 64px;
 }
 
 #responses ol > li:before {
@@ -501,7 +502,7 @@ div.rec_value {
   padding: .5%;
   position: absolute;
   text-align: center;
-  width: 4%;
+  width: 12px;
 }
 
 #responses ol > li .reply_form {
@@ -534,6 +535,17 @@ label.link {
 
 a.button.square.link {
   margin-top: 1px !important;
+}
+
+/************************/
+/* Apps Page Specific */
+/************************/
+
+.app_arrow p {
+  line-height: 0;
+  padding-top: 0px;
+  padding-bottom: 7px;
+  font-weight: bold;
 }
 
 /************************/
@@ -629,6 +641,7 @@ iframe.app_builder {
   width: 98%;
   min-height: 700px;
   background-color: #eee;
+  overflow-x: scroll;
 }
 
 #results a {
@@ -786,24 +799,30 @@ div.popover {
 /********************/
 /* Admin Specific */
 /********************/
+#admin-content {
+  margin-top: 18px;
+}
 
 #user-info {
-  margin-bottom: 2%;
-  margin-left: 1%;
   display: inline-block;
 }
 
 #user-info img {
-  position: relative;
   float: left;
-  margin: 0 8% 8% 0;
 }
 
 #user-info h1 {
-  margin-left: 2%;
+  margin-left: 18px;
   float: left;
-  position: absolute;
   display: inline-block;
+  font-size: 30px;
+}
+
+#account_filters {
+  color: #cccccc;
+  font-size: 12px;
+  text-align: right;
+  margin-top: 28px;
 }
 
 p.reply {
@@ -826,16 +845,37 @@ p.reply {
 
 .feed-item {
   width: 96%;
-  text-align: left !important;
-  margin-bottom: 2.2%;
-  padding: 1.6% 2% .8% 2%!important;
+  height: 20px;
+  padding: 10px 8px 6px 30px!important;
   font-size: 15px;
+  background-color: #cccccc;
+  color: #ffffff;
+  margin-bottom: 12px;
+  -webkit-transition: opacity 0.1s linear;
+     -moz-transition: opacity 0.1s linear;
+          transition: opacity 0.1s linear;
+}
+
+.feed-item:hover {
+  color: #333333;
+  opacity: .7;
+}
+
+.feed_title {
+  width: 68%;
+  display: inline-block;
 }
 
 .feed-item img {
   margin-right: 1%;
-  margin-top: -1.8%;
-  margin-left: -2.4%;
+  margin-top: -3px;
+  margin-left: -22px;
+}
+
+.feed_date {
+  display: inline-block;
+  width: 31%;
+  text-align: right !important;
 }
 
 .question_body, .question_answer {
@@ -1001,7 +1041,7 @@ a.login_button#Twitter {
 
 .data-dropdown {
   float: left !important;
-  margin: -2% 2% 1.5% 0;
+  margin: 0% 2% 1.5% 0;
 }
 
 /********************/

@@ -1,0 +1,62 @@
+{% extends "templates/site.html" %}
+
+{% block body %}
+<div class="office_background">
+  <div id="sabrina" class="grid5col1 grid5offset1">
+  </div>
+  <div class="grid5col2">
+    
+    <div class="question">
+      <div class="arrow"></div>
+      <div class="text">
+        How do you want to access the data?
+      </div>
+    </div>
+    
+    <a href="{{ url_for('data.query') }}" >
+      <div class="decision">
+        <div class="text">
+          <h2>Database</h2>
+          <p>Custom data queries of our database.</p>
+        </div>
+        <div class="arrow"></div>
+      </div>
+    </a>
+    
+    <a href="{{ url_for('about.api') }}" >
+      <div class="decision">
+        <div class="text">
+          <h2>API</h2>
+          <p>Access the data directly.</p>
+        </div>
+        <div class="arrow"></div>
+      </div>
+    </a>
+    
+    <a href="{{ url_for('data.classifications', attr='hs') }}" >
+      <div class="decision">
+        <div class="text">
+          <h2>Source List</h2>
+          <p>Browse the various classifications.</p>
+        </div>
+        <div class="arrow"></div>
+      </div>
+    </a>
+  
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+
+  <script>
+
+    dataminas.sabrina({
+      "div": d3.select("#sabrina"),
+      "outfit": "lab",
+      "emotion": "smirk"
+    })
+    
+  </script>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+<div id="sabrina_data" class="grid5col1 grid5offset1"></div>
+<div id="data_start" class="grid5col2">
+
+  <div class="question">
+    <div class="arrow"></div>
+    <div class="text app_arrow">
+      Which app would you like to build?
+    </div>
+  </div>
+
+  <div class="decision" name="#">
+    <div class="text app_arrow">
+      <p>Network</p>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+  <div class="decision" name="#">
+    <div class="text app_arrow">
+      <p>Rings</p>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+  <div class="decision" name="#">
+    <div class="text app_arrow">
+      <p>Occugrid</p>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+  <div class="decision" name="#">
+    <div class="text app_arrow">
+      <p>Scatter Plot</p>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+  <div class="decision" name="#">
+    <div class="text app_arrow">
+      <p>Stacked</p>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+  <div class="decision" name="#">
+    <div class="text app_arrow">
+      <p>Tree Map</p>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+  <div class="decision" name="#">
+    <div class="text app_arrow">
+      <p>Geo Map</p>
+    </div>
+    <div class="arrow"></div>
+  </div>
+  
+  <div class="decision" name="builder">
+    <div class="text app_arrow">
+      <p>Or skip straight to the app builder!</p>
+    </div>
+    <div class="arrow"></div>
+  </div>
+
+</div>
+
+<script>
+
+  dataminas.sabrina({
+    "div": d3.select("#sabrina_data"),
+    "outfit": "lab",
+    "emotion": "smirk"
+  })
+
+  d3.selectAll("div.decision, div.help").on(vizwhiz.evt.click,function(){
+    var name = d3.select(this).attr("name")
+    if (name == "help") window.location = "/guide/"
+    else load_page("/apps/"+name+"/");
+  })
+
+</script>

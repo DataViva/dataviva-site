@@ -61,10 +61,14 @@ def app_star(app_name, data_type, bra_id, filter1, filter2, output):
         else:
             app_name = None
             if 'title' in request.form:
-                app_name = request.form['title']
-            new_star = Starred(user=g.user, app_id=app_id, app_name=app_name)
+                app_name = request.form['title'].encode('utf-8')
+                # print app_name
+                # app_name = "Uberlândia"
+            timestamp = datetime.utcnow()
+            new_star = Starred(user=g.user, app_id=app_id, app_name=app_name, timestamp=timestamp)
             db.session.add(new_star)
             db.session.commit()
+            return jsonify({"success": app_name})
     if starred:
         return jsonify({"success": -1})
     else:

@@ -3,12 +3,16 @@ import urllib2
 import json
 from datetime import datetime
 from sqlalchemy import func
-from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify
+from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, redirect, url_for
 
 from visual import db
 from visual.data.forms import DownloadForm
 from visual.account.models import User, Starred
-from visual.attrs.models import Bra
+from visual.attrs.models import Bra, Wld
+from visual.rais.models import Isic, Cbo
+from visual.secex.models import Hs
+
+from visual.utils import Pagination
 
 import json
 
@@ -40,8 +44,11 @@ def get_geo_location(ip):
     return None
 
 @mod.route('/')
-@mod.route('/<category>/')
-def guide(category = None):
+def index():
+    return render_template("data/index.html")
+
+@mod.route('/query/')
+def query():
     
     # try getting the user's ip address, since the live server is using a proxy
     # nginx, we need to use the "X-Forwarded-For" remote address otherwise
@@ -58,16 +65,63 @@ def guide(category = None):
     if not geo_location:
         geo_location = Bra.query.get("mg030000")
     
-    ajax = request.args.get("ajax")
-    if ajax == "true":
-        if category:
-            return render_template("data/{0}.html".format(category), geo_location = geo_location)
-        else:
-            return render_template("data/home.html")
-            
-    return render_template("data/index.html",
+    return render_template("data/query.html", geo_location = geo_location)
+
+@mod.route('/classifications/', defaults={"category": "all", "page":1})
+@mod.route('/classifications/<attr>/', defaults={"category": "all", "page":1})
+@mod.route('/classifications/<attr>/<category>/', defaults={"page":1})
+@mod.route('/classifications/<attr>/<category>/<int:page>/')
+def classifications(category, page, attr=None):
+    if not attr:
+        return redirect(url_for('data.classifications', attr='hs'))
+    
+    per_page = request.args.get("per_page", "25")
+    
+    if attr == "bra":
+        attr_table = Bra
+        category_lookup = {"state":2, "mesoregion":4, "microregion":4, "municipality":8}
+        title = "Brazilian Geography"
+    elif attr == "wld":
+        attr_table = Wld
+        category_lookup = {"continent":2, "country":5}
+        title = "Countries"
+    elif attr == "isic":
+        attr_table = Isic
+        category_lookup = {"top category":1, "isic":5}
+        title = "Industries by ISIC Classification"
+    elif attr == "cbo":
+        attr_table = Cbo
+        category_lookup = {"top category":1, "cbo":4}
+        title = "Occupations by CBO Classification"
+    elif attr == "hs":
+        attr_table = Hs
+        category_lookup = {"top category":2, "hs":6}
+        title = "Products by HS Classification"
+    
+    attrs = attr_table.query
+    
+    if category == "all":
+        possible_nestings = category_lookup.values()
+        attrs = attrs.filter(func.char_length(attr_table.id).in_(possible_nestings))
+    else:
+        attrs = attrs.filter(func.char_length(attr_table.id) == category_lookup[category])
+    
+    total = attrs.count()
+    if per_page.isdigit():
+        pagination = Pagination(page, int(per_page), total)
+        attrs = attrs.paginate(page, int(per_page), False).items
+    else:
+        pagination = Pagination(page, per_page, total)
+        attrs = attrs.all()
+    
+    return render_template("data/classifications.html",
+        title = title,
+        page = "data",
+        page_attr = attr,
         category = category,
-        geo_location = geo_location)
+        category_lookup = category_lookup,
+        attrs = attrs,
+        pagination = pagination)
 
 @mod.route('/download/', methods=['GET', 'POST'])
 def download():

@@ -1,0 +1,1640 @@
+<!-- extend from base layout -->
+{% extends "templates/base.html" %}
+
+{% block head %}
+
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/app_builder.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.slider.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.key.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
+  
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="/static/js/libs/aight.d3.min.js?v=3"></script>
+  <![endif]-->
+
+{% endblock %}
+
+{% block content %}
+
+  <div id="loading">
+    <i class="icon-cog icon-spin icon-4x"></i>
+  </div>
+
+  <div id="builder">
+
+    <div id="apps" class="build_section">
+      <div class="button_label">App</div>
+      <select id="app_select" 
+        onchange="select_app(this.options[this.selectedIndex].id)">
+      </select>
+    </div>
+
+    <div class="build_section">
+      <div class="button_label">Location</div>
+      <a id="bra_select" class="button" onclick="show_selector(this.id)">
+        <span class="list_icon"></span>
+        <span class="list_text"></span>
+      </a>
+    </div>
+
+    <div class="build_section" id="filter_section">
+      <div class="button_label">Filters</div>
+    </div>
+
+    <div class="build_section">
+      <div class="button_label">Output</div>
+      <select id="output_select" 
+        onchange="select_output(this.options[this.selectedIndex].id)">
+      </select>
+    </div>
+  
+  </div>
+
+  <div id="settings">
+
+    <div class="button_label">Settings</div>
+    <a id="refresh" class="button square" onclick="start_app()"><i class="icon-refresh"></i></a>
+    <a id="starred" class="button square" onclick="toggle_star()"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
+    <a id="help_select" class="button square" onclick="show_selector(this.id)"><i class="icon-question-sign"></i></a>
+    <a id="file_select" class="button square" onclick="show_selector(this.id)"><i class="icon-save"></i></a>
+    <a id="full_screen" class="button square" onclick="window.open(window.location.href,"_blank")"><i class="icon-fullscreen"></i></a>
+    <a id="controls_toggle" class="button square" onclick="toggle_controls()"><i class="icon-cogs"></i></a>
+  
+  </div>
+
+  <div id="app"></div>
+  <div id="ui_bottom"></div>
+  
+  <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it 
+       to SVG/PDF/PNG downloadable file. -->
+  <form id="svgform" action="/data/download/" method="post">
+    {{ form.hidden_tag() }}
+  </form>
+
+{% endblock %}
+
+{% block js %}
+
+  <script src="/static/js/libs/d3.geo.tile.js"></script>
+  <script src="/static/js/libs/topojson.js"></script>
+  <script src="/static/js/utils/utils.slider.js"></script>
+  <script src="/static/js/utils/utils.key.js"></script>
+  <script src="/static/js/utils/utils.selector.js"></script>
+  
+  <script type="text/javascript">
+  
+    var global_vars = {{ global_vars|safe }},
+        app_data = {},
+        networks = {},
+        years = [],
+        lang = "{{ g.locale }}",
+        attr_url = "/attrs/filter/",
+        attr_url_id = "/attrs/filter/id/",
+        data_url = "/data_type/all/bra/filter1/filter2/",
+        network_url = "/static/json/networks/network_output.json",
+        coord_url = "/static/json/coords/state_munic.json",
+        required_url = "/rais/all/all/isic/show/",
+        width,
+        app_width,
+        height,
+        app_height,
+        app_filters = [],
+        app_solos = [],
+        app_name = "{{ app_name }}",
+        data_type = "{{ data_type }}",
+        bra = {"id": "all", "distance": 0},
+        distance_seperator = ".",
+        wld = {"id": "all"},
+        isic = {"id": "all"},
+        cbo = {"id": "all"},
+        hs = {"id": "all"},
+        filters = [],
+        solos = [],
+        geo_coords = {},
+        geo_land,
+        bubbles_required,
+        bubbles_elsewhere,
+        current_build = null,
+        current_url = null,
+        attrs = {},
+        apps = {
+          'network': {
+            "color": "#c8140a",
+            "bra": true,
+            "format": "network",
+            "vars": { "year": [],
+                      "value_var": ["wage","wage_avg","val_usd","complexity"],
+                      "spotlight": ["true","false"],
+                      "rca_scope": ["bra_rca","wld_rca"]
+                    },
+            "outputs":{ "secex":[["hs"]],
+                        "rais":[["isic"],["cbo"]]
+                      }
+          },
+          'rings': {
+            "color": "#17bcef",
+            "bra": true,
+            "format": "network",
+            "vars": { "year": []
+                    },
+            "outputs":{ "secex":[["hs","hs"]],
+                        "rais":[["isic","isic"],["cbo","cbo"]]
+                      }
+                    },
+          'bubbles': {
+            "color": "#e87600",
+            "bra": false,
+            "format": "bubbles",
+            "vars": { "year": [],
+                      "value_var": ["none","importance","required_wage_avg","total"],
+                      "grouping": ["name","category","active"],
+                      "sort": ["name","value","category"]
+                    },
+            "outputs":{ "rais":[["cbo","isic"]]
+                      }
+          },
+          'pie_scatter': {
+            "color": "#0b1097",
+            "bra": true,
+            "format": "flat",
+            "vars": { "year": [],
+                      "depth": [],
+                      "value_var": ["num_emp","wage","num_est","val_usd"],
+                      "spotlight": ["true","false"]
+                    },
+            "outputs":{ "secex":[["hs"],["hs","wld"]],
+                        "rais":[["isic"],["isic","cbo"]]
+                      }
+          },
+          'stacked': {
+            "color": "#752277",
+            "bra": false,
+            "format": "flat",
+            "vars": { "depth": [],
+                      "value_var": ["num_emp","wage","num_est","val_usd"],
+                      "sort": ["name","total","category"],
+                      "layout": ["value","share"],
+                      "order": ["asc","desc"]
+                    },
+            "outputs":{ "secex":[
+                                ["hs"],["hs","wld"],
+                                ["wld"],["wld","hs"],
+                                ["bra"],["bra","hs"],["bra","hs","wld"]
+                              ],
+                        "rais":[
+                                ["isic"],["isic","cbo"],
+                                ["cbo"],["cbo","isic"],
+                                ["bra"],["bra","isic"],["bra","cbo"],["bra","isic","cbo"]
+                              ]
+                      }
+          },
+          'tree_map': {
+            "color": "#ffc41c",
+            "bra": false,
+            "format": "flat",
+            "vars": { "year": [],
+                      "depth": [],
+                      "value_var": ["num_emp","wage","num_est","val_usd"]
+                    },
+            "outputs":{ "secex":[
+                                ["hs"],["hs","wld"],
+                                ["wld"],["wld","hs"],
+                                ["bra"],["bra","hs"],["bra","hs","wld"]
+                              ],
+                        "rais":[
+                                ["isic"],["isic","cbo"],
+                                ["cbo"],["cbo","isic"],
+                                ["bra"],["bra","isic"],["bra","cbo"],["bra","isic","cbo"]
+                              ]
+                      }
+          },
+          'geo_map': {
+            "color": "#00923f",
+            "bra": true,
+            "format": "geo",
+            "vars": { "year": [],
+                      "value_var": ["num_emp","wage","wage_avg","num_est","val_usd"]
+                    },
+            "outputs":{ "secex":[["bra"],["bra","hs"],["bra","hs","wld"]],
+                        "rais":[["bra"],["bra","isic"],["bra","cbo"],["bra","isic","cbo"]]
+                      }
+          }
+        },
+        depths = {
+          "isic": dataminas.depths("isic"), 
+          "cbo": dataminas.depths("cbo"),
+          "hs": dataminas.depths("hs"),
+          "bra": dataminas.depths("bra"),
+          "wld": dataminas.depths("wld")
+        },
+        app = null,
+        selector = null,
+        tooltip_info = [
+          format_name("display_id",lang),
+          format_name("rca",lang),
+          format_name("rca_wld",lang),
+          format_name("wage",lang),
+          format_name("wage_avg",lang),
+          format_name("num_emp",lang),
+          format_name("num_est",lang),
+          format_name("val_usd",lang),
+          format_name("distance",lang),
+          format_name("complexity",lang),
+          format_name("employed",lang),
+          format_name("elsewhere",lang),
+          format_name("total",lang),
+          format_name("required",lang),
+          format_name("importance",lang)
+        ],
+        total_labels = {
+          "val_usd": ["$"," USD"],
+          "wage": ["$"," BRL"],
+          "total": [""," employees"]
+        };
+        
+    var nesting_aggs = {}
+    nesting_aggs[format_name("distance",lang)] = "mean"
+    nesting_aggs[format_name("complexity",lang)] = "mean"
+    nesting_aggs[format_name("rca",lang)] = "mean"
+    
+    var bra_id = "{{ bra_id }}".split(distance_seperator)
+    bra.id = bra_id[0]
+    if (bra_id[1]) bra.distance = bra_id[1]
+    
+    // Get filters being used in the url
+    if (data_type == "rais") {
+      if ("{{ filter1 }}" != "all") isic.id = "{{ filter1 }}"
+      if ("{{ filter2 }}" != "all") cbo.id = "{{ filter2 }}"
+    } 
+    else if (data_type == "secex") {
+      if ("{{ filter1 }}" != "all") hs.id = "{{ filter1 }}"
+      if ("{{ filter2 }}" != "all") wld.id = "{{ filter2 }}"
+    }
+    
+    // Determine current build
+    current_build = apps[app_name].outputs[data_type].filter(function(f){
+      var match = true;
+      f.forEach(function(x,i){
+        if (window[x].id == "all" && i != 0) match = false;
+      })
+      if (f[0] != "{{ output }}" || !match) return;
+      else return f;
+    }).sort(function (a, b) { return b.length - a.length; })[0]
+    
+    if (wld.id == "all") wld.id = "aschn"
+    if (isic.id == "all") isic.id = "c1410"
+    if (cbo.id == "all") cbo.id = "1210"
+    if (hs.id == "all") hs.id = "178703"
+    
+    check_attrs(current_build[0],"load_filters")
+      
+    function load_filters() {
+      
+      if (global_vars.builder != "false") var fs = ["bra","wld","hs","isic","cbo"]
+      else var fs = current_build.concat(["bra"])
+      
+      var loaded_filters = []
+      fs.forEach(function(f,i){
+        if (attrs[f]) {
+          window[f] = attrs[f][window[f].id]
+          finish_load(f)
+        }
+        else {
+          var url = attr_url_id
+            .replace("filter",f)
+            .replace("id",window[f].id)
+        
+          d3.json(url,function(temp_attr){
+            var obj = temp_attr.data[0]
+            obj.icon = dataminas.icon(obj.id,f)
+            window[f] = obj
+            
+            if (f == "bra") select_filter(obj,f);
+            
+            finish_load(f)
+        
+          })
+        }
+      })
+      
+      function finish_load(filter) {
+        loaded_filters.push(filter)
+        if (loaded_filters.length == fs.length) {
+          if (global_vars.builder != "false") {
+            populate_apps();
+            populate_outputs();
+          }
+          else {
+            d3.select("#builder").style("display","none")
+            d3.select("#settings .button_label").style("display","none")
+            resize_page();
+            start_app();
+          }
+        }
+      }
+      
+    }
+    
+    function check_attrs(type,callback) {
+      if (attrs[type] != "loading") {
+        if (attrs[type]) {
+          window[callback](type);
+        }
+        else {
+          attrs[type] = "loading"
+          var url = attr_url.replace("filter",type)
+          d3.json(url,function(temp_attr){
+
+            // Get display IDs for each attribute
+            var temp_dict = {};
+            temp_attr.data.forEach(function(d){
+              d.display_id = dataminas.displayID(d.id,type);
+              temp_dict[d.id] = d;
+            })
+            // Store attribute list in public dictionary
+            attrs[type] = temp_dict;
+
+            window[callback](type);
+
+          })
+        }
+      }
+      
+    }
+    
+    // Populates the app_select dropdown and creates help popovers
+    function populate_apps() {
+
+      for (var app in apps) {
+      
+        var option = d3.select("select#app_select").append("option")
+          .attr("id",app)
+          
+        if (app_name == app) {
+          option.attr("selected","selected")
+        }
+      
+        option.append("span")
+          .attr("class","list_icon")
+          .style("background-color",apps[app].color)
+          .style("background-image","url("+dataminas.icon(app,"app")+")")
+        option.append("span")
+          .attr("class","list_text")
+          .text(format_name(app, lang))
+      
+      }
+      
+      dataminas.dropdown("#app_select");
+      
+    }
+    
+    if (parent.location.pathname.indexOf("embed") >= 0) {
+      d3.select("#full_screen").remove();
+    }
+      
+    // Toggles app controls on and off
+    function toggle_controls() {
+      if (global_vars.controls == "false") {
+        global_vars.controls = "true"
+      } else {
+        global_vars.controls = "false"
+      }
+      update_url();
+      resize_page();
+    }
+    
+    // Changes app_select button and rebuilds app if applicable
+    function select_app(id) {
+      
+      if (app_name != id) {
+
+        for (v in global_vars) {
+          if (Object.keys(apps[id].vars).indexOf(v) < 0
+              && ["controls","builder"].indexOf(v) < 0) {
+            delete global_vars[v];
+          }
+        }
+    
+        app_name = id;
+    
+        populate_outputs();
+        
+      }
+      
+    }
+    
+    // Populates the output_select dropdown
+    function populate_outputs() {
+    
+      d3.select("#output_select").selectAll("option").remove()
+      d3.select("#output_select_dropdown").remove()
+      
+      var present = false;
+    
+      for (var dt in apps[app_name].outputs) {
+      
+        apps[app_name].outputs[dt].forEach(function(o){
+          if (o.join("-") == current_build.join("-")) present = true;
+          d3.select("select#output_select").append("option")
+            .attr("id",dt+"_"+o.join("-"))
+            .text(app_title(o,dt))
+        
+        })
+      
+      }
+    
+      // Set the initial output
+      if (!present) {
+        data_type = Object.keys(apps[app_name].outputs)[0]
+        current_build = apps[app_name].outputs[data_type][0]
+      }
+      
+      d3.select("option#"+data_type+"_"+current_build.join("-"))
+        .attr("selected","selected")
+        
+      dataminas.dropdown("#output_select");
+      
+      select_output(data_type+"_"+current_build.join("-"));
+    
+    }
+    
+    // Used when the app is changed
+    function select_output(build) {
+        
+      data_type = build.split("_")[0]
+      var id = build.split("_")[1].split("-")
+      
+      d3.selectAll("#filter_section a").remove();
+  
+      if (id.length > 1) {
+        d3.selectAll("#filter_section")
+          .style("display","inline-block")
+  
+        id.forEach(function(o,i){
+          if (i != 0) {
+            create_filter(o);
+          }
+        })
+      }
+      else {
+        d3.selectAll("#filter_section")
+          .style("display","none")
+      }
+      
+      current_build = id;
+      start_app();
+      
+    }
+    
+    // Creates a filter button for the specified type
+    function create_filter(type) {
+
+      var a = d3.select("#filter_section").append("a")
+        .attr("id",type+"_select")
+        .attr("class","button")
+        .attr("onclick","show_selector(this.id)")
+        
+      a.append("span").attr("class","list_icon");
+      a.append("span").attr("class","list_text");
+      
+      select_filter(window[type],type);
+        
+    }
+    
+    function create_selector() {
+
+      selector = Selector()
+        .language(lang);
+      
+      dataminas.popover.create({
+        "id": "popover",
+        "width": "50%",
+        "height": "80%"
+      })
+      
+    }
+    
+    
+    function show_selector(button_id) {
+      
+      var id = button_id.split("_")[0]
+      // If popover selector does not exist, create it
+      if (!selector) {
+        create_selector();
+      }
+
+      if (id == "help") {
+        var init = app_name,
+            callback = null
+        attrs[id] = [{
+          "id": app_name,
+          "name": format_name(app_name,lang),
+          "color": apps[app_name].color,
+          "icon": dataminas.icon(app_name,"app")
+        }]
+      }
+      else if (id == "file") {
+        var init = "all",
+            callback = "download"
+        attrs[id] = null
+      }
+      else {
+        var init = window[id].id,
+            callback = "select_filter"
+      }
+      
+      if (id == "bra") {
+        var dist = bra.distance
+      }
+      else {
+        var dist = 0
+      }
+      
+      selector
+        .callback(callback)
+        .distance(dist)
+        .initial_value(init)
+        .type(id)
+
+      if (id == "help" || id == "file") {
+        popover_ready(id)
+      }
+      else {
+        check_attrs(id,"popover_ready")
+      }
+      
+    }
+
+    function popover_ready(id) {
+      
+      d3.select("#popover")
+        .datum(attrs[id])
+        .call(selector);
+  
+      // Show popover
+      dataminas.popover.show("#popover");
+      
+    }
+    
+    function download(obj) {
+      
+      var title = [app_name]
+      current_build.forEach(function(f){
+        title.push(window[f].id)
+      })
+      
+      dataminas.download(obj.id,title);
+      
+    }
+    
+    function toggle_star() {
+      var id = d3.select("#starred > i").attr("id")
+      var status = parseInt(id.split("_")[1],10)
+      if (status == 0) {
+        login();
+      }
+      else {
+        var url = window.location.pathname.replace("embed","star"),
+            // title = escape(app_title(current_build,data_type))
+            title = app_title(current_build,data_type)
+            
+        d3.json(url)
+          .header("Content-type","application/x-www-form-urlencoded")
+          .post("title="+title, function(error,data) {
+            var status = data.success
+            d3.select("#starred > i")
+              .attr("id","status_"+status)
+              .attr("class",function() {
+                return status == 1 ? "icon-star" : "icon-star-empty";
+              })
+          })
+      }
+    }
+    
+    // Used whenever any filter is changed
+    function select_filter(obj,type) {
+      
+      dataminas.popover.hide("#popover");
+
+      if (!obj.icon) obj.icon = dataminas.icon(obj.id,type)
+
+      d3.select("#"+type+"_select .list_icon")
+       .style("background-image","url("+obj.icon+")")
+       .style("background-color","transparent")
+
+      if (["wld","bra"].indexOf(type) < 0) {
+        d3.select("#"+type+"_select .list_icon")
+         .style("background-color",obj.color)
+      }
+
+      d3.select("#"+type+"_select .list_text")
+       .text(obj.name.truncate(20))
+        
+      d3.select("#"+type+"_select .road_sign").remove();
+      if (obj.distance && obj.distance > 0) {
+        d3.select("#"+type+"_select")
+          .append("span")
+            .attr("class","road_sign")
+            .text(obj.distance+"km")
+      }
+      
+      if (window[type].id != obj.id || 
+         (type == "bra" && obj.distance != bra.distance && obj.distance)) {
+        bra.distance = obj.distance ? obj.distance : bra.distance;
+        window[type] = obj
+        start_app();
+      }
+      
+    }
+
+    function create_radios(obj) {
+      
+      var div = d3.select("#ui_bottom").append("div")
+        .attr("class","ui_group")
+        .attr("id",obj.title)
+    
+      div.append("legend")
+        .html(format_name(obj.title,lang))
+        
+      obj.data.forEach(function(v,i){
+        
+        var button = div.append("input")
+          .attr("type","radio")
+          .attr("name",obj.title)
+          .attr("value",v)
+          .attr("onclick",obj.callback+"(this.value)")
+        div.append("label")
+          .attr("for",v)
+          .text(format_name(v,lang))
+      
+        if (v == obj.initial) {
+          button.node().checked = true
+        }
+        
+      })
+      
+      dataminas.toggle(obj.title);
+      
+    }
+    
+    function update_url() {
+      
+      var window_url = app_name+'/'+data_type+'/'+bra.id+'/filter1/filter2/output/'
+      if (bra.distance > 0) window_url = window_url.replace(bra.id,bra.id+distance_seperator+bra.distance)
+      
+      current_build.forEach(function(r,i){
+        if (i == 0) window_url = window_url.replace("output",r)
+        else {
+          if (r == "isic" || r == "hs") {
+            window_url = window_url.replace("filter1",window[r].id)
+          } else {
+            window_url = window_url.replace("filter2",window[r].id)
+          }
+        }
+      })
+                          
+      window_url = window_url.replace("filter1","all").replace("filter2","all")
+
+      concat_vars();
+      
+      if (Modernizr.history) {
+        if(parent.change_url) parent.change_url("/apps/"+window_url)
+        else window.history.pushState({'prev_request': "/apps/embed/"+window_url}, 'Title', "/apps/embed/"+window_url)
+      } 
+      else if (window.location.href.indexOf(window_url) < 0) {
+        if (parent.location.pathname.indexOf("apps") >= 0) {
+          window.location = "/apps/embed/"+window_url
+        } else {
+          if(parent.change_url) parent.change_url("/apps/"+window_url)
+        }
+      }
+      
+      function concat_vars() {
+        url_vars = []
+        for (v in global_vars) {
+          if ( ("builder" == v && global_vars[v] != "true") ||
+               ("year" == v && app_name != "stacked") || 
+               (["builder","year"].indexOf(v) < 0)
+             ) {
+               url_vars.push(v + "=" + global_vars[v])
+             }
+        }
+        if (url_vars.length > 0) window_url = window_url + "?" + url_vars.join("&");
+      }
+      
+    }
+    
+    function loading(state) {
+      var div = d3.select("#loading")
+      if (state == true) {
+        div
+          .style("display","block")
+          .style("opacity",1)
+      }
+      else {
+         div
+          .style("opacity",0)
+        var timing = parseFloat(div.style("transition-duration"),10)*1000
+        setTimeout(function(){
+          div
+            .style("display","none")
+        },timing)
+      }
+    }
+    
+    // Thing that actually embeds the app!
+    function start_app() {
+      
+      loading(true);
+                          
+      d3.selectAll("#ui_bottom div").remove();
+      d3.selectAll("#ui_bottom br").remove();
+      
+      if (app_name == "rings" && window[current_build[0]].id.length == depths[current_build[0]][0]) {
+        
+        d3.select("#app").html("").datum("Not available for Parent Categories").call(no_data())
+        build_complete();
+        
+      }
+      else if (app_name == "geo_map" && bra.id == "all") {
+        
+        d3.select("#app").html("").datum("Geo Map only available for States").call(no_data())
+        build_complete();
+        
+      }
+      else {
+
+        update_url();
+
+        if (current_build[0] == "bra") var location = "show.8";
+        else var location = bra.id;
+        
+        current_url =  data_url
+          .replace("bra",location)
+          .replace("data_type",data_type);
+      
+        if (bra.distance > 0 && app_name != "geo_map") {
+          current_url = current_url
+            .replace(location,location+distance_seperator+bra.distance)
+        }
+
+        current_build.forEach(function(r,i){
+          if (i > 0 || (i == 0 && r != "bra")) {
+            if (i == 0) var string = "show."+depths[r][depths[r].length-1];
+            else var string = window[r].id;
+            if (r == "isic" || r == "hs") {
+              var field = "filter1";
+            } 
+            else {
+              var field = "filter2";
+            }
+            current_url = current_url.replace(field,string)
+          }
+        })
+      
+        current_url = current_url.replace("filter1","all").replace("filter2","all")
+        
+        if (app_data[current_url]) {
+          data_loaded();
+        } else {
+          d3.json(current_url, function(data) {
+          
+            app_data[current_url] = {};
+            if (location == "show.8" && bra.id != "all") {
+              app_data[current_url].raw = data.data.filter(function(d){
+                return d.bra_id.substr(0,2) == bra.id.substr(0,2);
+              });
+            }
+            else {
+              app_data[current_url].raw = data.data;
+            }
+          
+            data_loaded();
+      
+          })
+        
+        }
+      }
+      
+      function data_loaded() {
+
+        // Check if data has distances
+        var distances = app_data[current_url].raw.filter(function(d){return d.distance})
+        var complexities = app_data[current_url].raw.filter(function(d){return d.complexity})
+      
+        // If there is no data and app is not Bubbles, or there no distances and app is Scatter, no data!
+        if (app_data[current_url].raw.length == 0 && app_name != "bubbles") {
+          d3.select("#app").html('').datum("No Data Available for Current Selection").call(no_data())
+          build_complete();
+        } 
+        else if (app_name == "pie_scatter" && complexities.length == 0) {
+          d3.select("#app").html('').datum("No Complexities Available").call(no_data())
+          build_complete();
+        }
+        else if (app_name == "pie_scatter" && distances.length == 0) {
+          d3.select("#app").html('').datum("No Distances Available for Location").call(no_data())
+          build_complete();
+        }
+      
+        // Else, check for other files to load!
+        else {
+      
+          if ((app_name == "network" || app_name == "rings") && !networks[current_build[0]]) {
+            load_network();
+          } 
+          else if (app_name == "rings") {
+            check_node();
+          }
+          else if (app_name == "geo_map") {
+            load_coords();
+          } 
+          else if (app_name == "bubbles") {
+            var url = required_url.replace("isic",isic.id)
+            d3.json(url, function(required) {
+              bubbles_required = required.data
+              
+              var else_url = "/rais/all/"+bra.id+"/all/show/"
+              
+              d3.json(else_url, function(elsewhere){
+                bubbles_elsewhere = elsewhere.data;
+                check_attrs(current_build[0],"create_app");
+              })
+              
+            })
+          } 
+          else {
+            check_attrs(current_build[0],"create_app");
+          }
+          
+          function load_network() {
+      
+            networks[current_build[0]] = {};
+            var url = network_url.replace("output",current_build[0])
+            d3.json(url, function(temp_network) {
+              networks[current_build[0]].nodes = temp_network.nodes
+                temp_network.edges.forEach(function(link){
+                  if (["hs","isic"].indexOf(current_build[0]) >= 0) {
+                    link.source = temp_network.nodes[link.source]
+                    link.target = temp_network.nodes[link.target]
+                  }
+                  else {
+                    link.source = temp_network.nodes.filter(function(e){ return e.id == link.source })[0]
+                    link.target = temp_network.nodes.filter(function(e){ return e.id == link.target })[0]
+                  }
+                })
+              networks[current_build[0]].links = temp_network.edges
+              if (app_name == "rings") check_node();
+              else check_attrs(current_build[0],"create_app");
+            })
+      
+          }
+    
+          function load_coords() {
+            if (geo_coords[bra.id.substr(0,2)]) {
+              load_land();
+            }
+            else {
+              var url = coord_url.replace("state",bra.id.substr(0,2));
+              d3.json(url, function(coords){
+    
+                geo_coords[bra.id.substr(0,2)] = coords;
+        
+                if (geo_land) check_attrs(current_build[0],"create_app");
+                else load_land();
+    
+              })
+            }
+      
+          }
+    
+          function load_land() {
+      
+            if (geo_land) {
+              check_attrs(current_build[0],"create_app");
+            }
+            else {
+              var url = coord_url.replace("state_munic","wld_land");
+              d3.json(url, function(land){
+
+                geo_land = land;
+                check_attrs(current_build[0],"create_app");
+    
+              })
+            }
+      
+          }
+    
+          function check_node() {
+            var node = networks[current_build[0]].nodes.filter(function(n){return n.id == window[current_build[1]].id})[0]
+            if (node) check_attrs(current_build[0],"create_app");
+            else {
+              d3.select("#app").html('').datum("No Connections Available").call(no_data())
+              build_complete();
+            }
+          }
+                
+        }
+      }
+      
+                
+    }
+    
+    function create_app() {
+      
+      // Initialize available years and value_names
+      if (app_name == "bubbles") {
+        years = vizwhiz.utils.uniques(bubbles_required,"year");
+      } else {
+        years = vizwhiz.utils.uniques(app_data[current_url].raw,"year");
+      }
+
+      // Format the data, if it hasn't been already
+      if (!app_data[current_url][apps[app_name].format]) {
+        format_data();
+      }
+      
+      // Create Key for every app except geo_map and specific municipalities
+      if (app_name != "geo_map" && (current_build[0] != "bra" || bra.id == "all")) {
+        
+        var key_data = d3.values(attrs[current_build[0]]).filter(function(d){
+          return d.id.length == depths[current_build[0]][0]
+        })
+        
+        d3.select("#ui_bottom").append("div")
+          .attr("id","key")
+          .datum(key_data)
+          .call(Key().type(current_build[0]))
+            
+      }
+      
+      // Set global_vars and create controls
+      for (v in apps[app_name].vars) {
+        if (v == "year" && years.length > 1) {
+          
+          // Determine current year
+          if (!global_vars.year) {
+            global_vars.year = years[years.length-1];
+          }
+          else if (years.indexOf(global_vars.year) < 0) {
+            var closest = null;
+            years.forEach(function(y){
+              if (!closest || Math.abs(y-global_vars.year) < Math.abs(closest-global_vars.year)) closest = y;
+            })
+            global_vars.year = closest;
+          }
+          
+          var timeline = Slider()
+            .callback("change_year")
+            .initial_value(global_vars.year)
+          
+          d3.select("#ui_bottom").append("div")
+            .attr("class","slider")
+            .datum(years)
+            .call(timeline)
+          
+          d3.select("#ui_bottom").append("br")
+          
+        }
+        else {
+          
+          var values = apps[app_name].vars[v]
+          
+          // Custom Titles
+          if (v == "value_var") {
+            if (app_name == "geo_map") var title = "color"
+            else var title = "sizing"
+          }
+          else var title = v
+          
+          // Set Global Vars
+          if (v == "value_var") {
+            
+            // Determine available values
+            if (app_name == "bubbles") {
+              var data_array = apps[app_name].vars.value_var;
+            }
+            else {
+              var available_values = app_data[current_url].keys
+            
+              var app_values = apps[app_name].vars.value_var;
+      
+              var data_array = [];
+              app_values.forEach(function(v){
+                if (available_values.indexOf(v) >= 0) data_array.push(v);
+              })
+            }
+            
+            if (!global_vars.value_var || data_array.indexOf(global_vars.value_var) < 0) {
+              if (app_name == "bubbles") global_vars.value_var = "importance"      
+              else if (data_array.indexOf("val_usd") >= 0) global_vars.value_var = "val_usd"
+              else if (data_array.indexOf("wage") >= 0) global_vars.value_var = "num_emp"
+              else global_vars.value_var = data_array[0]
+            }
+          }
+          else if (v == "depth") {
+            var default_depth = app_name == "tree_map" ? depths[current_build[0]].length-1 : 0
+            if (!global_vars.depth) {
+              global_vars.depth = current_build[0]+"_"+depths[current_build[0]][default_depth]
+            }
+            var d = parseFloat(global_vars.depth.split("_")[1])
+            if (depths[current_build[0]].indexOf(d) < 0) {
+              global_vars.depth = current_build[0]+"_"+depths[current_build[0]][default_depth]
+            }
+            var data_array = []
+            depths[current_build[0]].forEach(function(depth){
+              data_array.push(current_build[0]+"_"+depth)
+            })
+            
+          }
+          else if (v == "rca_scope" && current_build[0] != "hs") {
+            var data_array = []
+            delete global_vars[v]
+          }
+          else {
+            if(!global_vars[v]) global_vars[v] = apps[app_name].vars[v][0]
+            var data_array = apps[app_name].vars[v];
+          }
+          
+          if (data_array.length > 1) {
+            create_radios({
+              "data": data_array,
+              "title": title,
+              "initial": global_vars[v],
+              "callback": v
+            })
+          }
+          
+        }
+      }
+      
+      update_key();
+      d3.select("#app").html("");
+      resize_page();
+      update_url();
+      
+      var title = app_title(current_build,data_type)
+
+      document.title = "Data Minas : "+title;
+      
+      var nesting = []
+      depths[current_build[0]].forEach(function(d){
+        nesting.push(current_build[0]+"_"+d)
+      })
+
+      app = vizwhiz.viz()
+        .type(app_name)
+        .name_array(["name","display_id"])
+        .spotlight(global_vars.spotlight)
+        .nesting(nesting)
+        .nesting_aggs(nesting_aggs)
+        .depth(global_vars.depth)
+        .sort(global_vars.sort)
+        .grouping(global_vars.grouping)
+        .order(global_vars.order)
+        .layout(global_vars.layout)
+        .value_var(format_name(global_vars.value_var,lang))
+        .text_var("name")
+        .id_var("id")
+        .year_var(format_name("year",lang))
+        .width(app_width)
+        .height(app_height)
+        .tooltip_info(tooltip_info)
+        .total_bar(get_total_label())
+        
+      if (global_vars.builder == "false") app.title(title)
+        
+      /********************/
+      /* Network Specific */
+      /********************/  
+      if (app_name == "network") {
+        var av = current_build[0] == "hs" ? global_vars.rca_scope : "bra_rca";
+        app
+          .links(networks[current_build[0]].links)
+          .active_var(av)
+      } 
+      
+      /********************/
+      /* Geo Map Specific */
+      /********************/
+      else if (app_name == "geo_map") {
+        app
+          .coords(geo_coords[bra.id.substr(0,2)])
+          .map(geo_land)
+          .tiles(false)
+      } 
+      
+      /********************/
+      /* Bubbles Specific */
+      /********************/
+      else if (app_name == "bubbles") {
+        app
+          .active_var("employed")
+      } 
+
+      /********************/
+      /* Stacked Specific */
+      /********************/
+      else if (app_name == "stacked") {
+        app
+          .xaxis_var(format_name("year",lang))
+      } 
+
+      /********************/
+      /* Scatter Specific */
+      /********************/
+      else if (app_name == "pie_scatter") {
+        app
+          .xaxis_var(format_name("distance",lang))
+          .xaxis_domain(d3.extent(app_data[current_url].raw,function(d){return d.distance}))
+          .yaxis_var(format_name("complexity",lang))
+          .yaxis_domain(d3.extent(app_data[current_url].raw,function(d){return d.complexity}).reverse())
+      } 
+      
+      /******************/
+      /* Rings Specific */
+      /******************/
+      else if (app_name == "rings") {
+        app
+          .links(networks[current_build[0]].links)
+          .highlight(window[current_build[1]].id)
+          .active_var("active")
+      }
+      
+      d3.select("#app")
+        .datum(app_data[current_url][apps[app_name].format])
+        .call(app)
+      
+      if (app_name == "geo_map" && bra.id.length == 8) d3.select("#app").call(app.highlight(bra.id));
+      
+      build_complete();
+           
+    }
+    
+    function build_complete() {
+
+      loading(false);
+
+      resize_page();
+      if (window.parent["embed_finish"]) {
+        window.parent["embed_finish"](window.location.pathname);
+      }
+      
+    }
+    
+    function format_data() {
+      
+      var format = apps[app_name].format,
+          out = current_build[0], 
+          attr = attrs[out];
+      
+      var data_obj = []
+      
+      if (format == "network") {
+        years.forEach(function(year){
+    
+          var year_data = app_data[current_url].raw.filter(function(d){ return d.year == year; });
+          
+          networks[out].nodes.forEach(function(d){
+            
+            var x = year_data.filter(function(f){ return f[out+"_id"] == d.id; })[0]
+            var obj = vizwhiz.utils.merge(x,d)
+            obj.year = year
+            obj.display_id = dataminas.displayID(d.id,out)
+            
+            var attributes = attr[d.id]
+            
+            obj.color = attributes.color
+            obj.name = attributes.name
+            
+            obj.active = obj.rca >=1 ? true : false;
+            
+            obj.bra_rca = obj.rca >=1 ? true : false;
+            obj.wld_rca = obj.rca_wld >=1 ? true : false;
+
+            obj = set_nesting(obj)
+            obj = format_titles(obj)
+            
+            data_obj.push(obj)
+            
+          })
+          
+        })
+      }
+      else if ("bubbles" == format) {
+        years.forEach(function(year){
+          
+          var year_data = app_data[current_url].raw.filter(function(d){ return d.year == year; });
+          
+          var req_filtered = bubbles_required.filter(function(d){ return d.year == year && d.required >= 0.6 }),
+              req_ids = []
+        
+          req_filtered.forEach(function(d){
+            req_ids.push(d[current_build[0]+"_id"])
+          })
+        
+          var industry_size = d3.sum(d3.values(req_filtered),function(d){ return Math.ceil(d.num_emp_med); }),
+              location_total = d3.sum(d3.values(year_data),function(d){ 
+                return req_ids.indexOf(d[current_build[0]+"_id"]) >= 0 ? d.num_emp : null; 
+              });
+            
+          req_filtered.forEach(function(d){
+      
+            var attributes = attr[d[current_build[0]+"_id"]]
+            d.color = attributes.color
+            d.name = attributes.name
+            d.id = attributes.id
+      
+            var temp_obj = year_data.filter(function(dd){ return dd[current_build[0]+"_id"] == d[current_build[0]+"_id"] })[0]
+            if (!temp_obj) {
+              temp_obj = {"num_emp": 0, "wage": 0, "num_est": 0}
+            }
+            d.required_wage_avg = d.wage/d.num_emp
+            d = vizwhiz.utils.merge(d,temp_obj)
+          
+            d.none = 1;
+            d.category = attr[d.id.slice(0,depths[out][0])].id+" | "+attr[d.id.slice(0,depths[out][0])].name
+
+          
+            if (location_total >= industry_size) d.total = Math.ceil((d.num_emp_med/industry_size)*location_total);
+            else d.total = Math.ceil(d.num_emp_med);
+          
+            d.employed = d.num_emp ? d.num_emp : 0;
+            if (d.employed/d.total >= 1) d.active = true;
+            else d.active = false;
+          
+            var elsewhere = bubbles_elsewhere.filter(function(e){ return e.year == year && e[current_build[0]+"_id"] == d.id })[0]
+          
+            if (!elsewhere) elsewhere = 0;
+            else elsewhere = elsewhere.num_emp;
+          
+            d.elsewhere = elsewhere-d.employed
+      
+            d.display_id = dataminas.displayID(d.id,out)
+
+            d = set_nesting(d)
+            d = format_titles(d)
+          
+            data_obj.push(d)
+            
+          })
+          
+        })
+    
+      }
+      else if (format == "geo") {
+        years.forEach(function(year){
+          
+          var year_data = app_data[current_url].raw.filter(function(d){ return d.year == year; });
+          
+          for (var i in attr) {
+            if (i.substr(0,2) == bra.id.substr(0,2) && i.length == 8) {
+            
+              var obj = year_data.filter(function(f){return f[current_build[0]+"_id"] == i})[0]
+          
+              var attributes = attr[i]
+              obj.color = attributes.color
+              obj.name = attributes.name
+              obj.id = attributes.id
+
+              obj.display_id = dataminas.displayID(obj.id,out)
+              obj.year = year
+
+              obj = set_nesting(obj)
+              obj = format_titles(obj)
+            
+              data_obj.push(obj)
+          
+            }
+          
+          }
+          
+        })
+      }
+      else {
+        app_data[current_url].raw.forEach(function(d){
+          
+          var attributes = attr[d[out+"_id"]]
+          d.color = attributes.color
+          d.name = attributes.name
+          d.id = attributes.id
+          
+          d.active = d.rca >=1 ? true : false;
+
+          d.display_id = dataminas.displayID(d.id,out)
+          
+          d = set_nesting(d)
+          d = format_titles(d)
+          
+          data_obj.push(d)
+        })
+      }
+      
+      app_data[current_url][format] = data_obj;
+      
+      function set_nesting(obj) {
+        depths[out].forEach(function(d){
+          obj[out+"_"+d] = {"name":attr[obj.id.slice(0, d)].name, "id":obj.id.slice(0, d)}
+        })
+        return obj;
+      }
+      
+      function format_titles(d) {
+        if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp;
+        var obj = {}
+        if (!app_data[current_url].keys) app_data[current_url].keys = []
+        if (!app_data[current_url].categories) app_data[current_url].categories = {}
+        if (!app_data[current_url].categories[d.year]) app_data[current_url].categories[d.year] = []
+        if (!app_data[current_url].categories.all) app_data[current_url].categories.all = []
+        for (var key in d) { 
+          if (app_data[current_url].keys.indexOf(key) < 0) app_data[current_url].keys.push(key);
+          if (key == "id") {
+            var parent = d[key].slice(0,depths[current_build[0]][0])
+            if (app_data[current_url].categories[d.year].indexOf(parent) < 0) app_data[current_url].categories[d.year].push(parent);
+            if (app_data[current_url].categories.all.indexOf(parent) < 0) app_data[current_url].categories.all.push(parent);
+          }
+          if (key == "name") obj.name = d.name.toTitleCase();
+          else obj[format_name(key,lang)] = d[key]; 
+          obj[key] = d[key];
+        }
+        return obj;
+      }
+      
+    }
+    
+
+    function get_total_label() {
+
+      var exclusions = ["complexity","none","importance","wage_avg","required_wage_avg",undefined],
+          val = global_vars.value_var;
+          
+      if (exclusions.indexOf(val) >= 0) return false;
+
+      var total_obj = {
+        "prefix": format_name(val,lang)+": ",
+        "format": ",f"
+      }
+      
+      if (total_labels[val]) {
+        total_obj.prefix += total_labels[val][0]
+        total_obj.suffix = total_labels[val][1]
+      }
+      
+      return total_obj;
+      
+    }
+    
+    function app_title(build,data) {
+      var out = build[0];
+      if (lang == "en") {
+        if (app_name == "network") {
+          if (out == "hs") var type = "Product"
+          else if (out == "isic") var type = "Industry"
+          else var type = "Occupation"
+          return type + " Space for " + bra.name
+        }
+        else if (app_name == "rings") {
+            return "Connections for " + window[out].name + " in " + bra.name
+        }
+        else if (app_name == "bubbles") {
+          return "Available and required employment for "+isic.name+" in "+bra.name;
+        }
+        else {
+          var title = format_name(out+"_plural",lang)
+          if (out == "isic" || out == "cbo" || out == "bra") {
+            title += " in "
+          }
+          if (out == "hs" || out == "wld") {
+            title += " of "
+          }
+          title += bra.name
+          if (out == "bra" && build.length == 1) {
+            title += " with " + format_name(data,lang)
+          }
+          build.forEach(function(f,i){
+            if (i != 0) {
+              if (f == "isic") {
+                if (out == "cbo") var article = "employed in"
+                else var article = "that have"
+                title += " " + article + " the " + isic.name + " industry"
+              }
+              else if (f == "cbo") {
+                if (i == 1) var article = "that"
+                else var article = "and"
+                title += " " + article + " employ " + cbo.name
+              }
+              else if (f == "hs") {
+                if (out == "wld") var trade = "import"
+                else var trade = "export"
+                title += " that " + trade + " " + hs.name
+              }
+              else if (f == "wld") {
+                title += " to " + wld.name
+              }
+            }
+          })
+          return title;
+        }
+      }
+      return null;
+    }
+    
+    function update_key() {
+      d3.selectAll("div.key_icon_container")
+        .style("display",function(){
+          var id = this.id.slice(3)
+          if (app_name != "stacked") {
+            cats = app_data[current_url].categories[global_vars.year]
+          }
+          else {
+            cats = app_data[current_url].categories.all
+          }
+          return cats.indexOf(id) < 0 ? "none" : "inline-block";
+        })
+    }
+
+    function app_filtering() {
+
+      var ids = []
+      if (app_solos.length >= 1 && app_solos.length <= cats.length/2) {
+        var prefix = "Showing only "
+        ids = app_solos
+      }
+      else if (app_solos.length > cats.length/2) {
+        var prefix = "Excluding "
+        cats.forEach(function(c){
+          if (app_solos.indexOf(c) < 0) ids.push(c)
+        })
+      }
+      else if (app_filters.length >= 1 && app_filters.length <= cats.length/2) {
+        var prefix = "Excluding "
+        ids = app_filters
+      }
+      else if (app_filters.length > cats.length/2) {
+        var prefix = "Showing only "
+        cats.forEach(function(c){
+          if (app_filters.indexOf(c) < 0) ids.push(c)
+        })
+      }
+      
+      var names = []
+      ids.forEach(function(id){
+        names.push(attrs[current_build[0]][id].name)
+      })
+      
+      if (names.length > 0) {
+        var text = prefix
+        names.forEach(function(n,i){
+          if (i != 0 && names.length != 2) text += ", "
+          if (i == names.length-1 && i != 0) text += " and "
+          text += n
+        })
+        d3.select("#app").call(app.sub_title(text))
+      }
+      else {
+        d3.select("#app").call(app.sub_title(""))
+      }
+    }
+
+    /************************/
+    /* UI Control Functions */
+    /************************/
+    
+    function change_year(value) {
+      global_vars.year = value;
+      update_url();
+      update_key();
+      d3.select("#app").call(app.year(global_vars.year));
+    }
+    
+    function depth(value) { 
+      global_vars.depth = value
+      update_url();
+      d3.select("#app").call(app.depth(global_vars.depth));
+    }
+    
+    function app_filter(value) { 
+      app_filters = value
+      app_filtering();
+      d3.select("#app").call(app.filter(value)) 
+    }
+    
+    function group_bgs(value) { 
+      global_vars.group_bgs = value;
+      update_url();
+      d3.select("#app").call(app.group_bgs(global_vars.group_bgs)) 
+    }
+    
+    function grouping(value) { 
+      global_vars.grouping = value;
+      update_url();
+      d3.select("#app").call(app.grouping(global_vars.grouping)) 
+    }
+    
+    function layout(value) { 
+      global_vars.layout = value;
+      update_url();
+      d3.select("#app").call(app.layout(global_vars.layout)) 
+    }
+    
+    function order(value) { 
+      global_vars.order = value;
+      update_url();
+      d3.select("#app").call(app.order(global_vars.order)) 
+    }
+      
+    function rca_scope(value) {
+      global_vars.rca_scope = value;
+      update_url();
+      d3.select("#app").call(app.active_var(global_vars.rca_scope)) 
+    }
+    
+    function solo(value) {
+      app_solos = value
+      app_filtering();
+      d3.select("#app").call(app.solo(value)) 
+    }
+    
+    function sort(value) { 
+      global_vars.sort = value;
+      update_url();
+      d3.select("#app").call(app.sort(global_vars.sort)) 
+    }
+    
+    function spotlight(value) { 
+      global_vars.spotlight = value;
+      update_url();
+      d3.select("#app").call(app.spotlight(global_vars.spotlight)) 
+    }
+    
+    function value_var(value) { 
+      global_vars.value_var = value;
+      update_url();
+      d3.select("#app").call(app
+        .value_var(format_name(global_vars.value_var,lang))
+        .total_bar(get_total_label())) 
+    }
+    
+    /*****************/
+    /* Page Resizing */
+    /*****************/
+
+    function resize_page() {
+      
+      width = window.innerWidth;
+      height = window.innerHeight;
+      
+      d3.select("body").style("height",height+"px");
+      var children = d3.select("#ui_bottom").node().childNodes,
+          min_width = 0;
+          
+      for (i = 0; i < children.length; i++) {
+        var w = children[i].offsetWidth;
+        if (w > min_width) min_width = w;
+      }
+      
+      if (width < min_width || height <= 400) {
+        global_vars.controls = "false";
+        d3.select("#ui_bottom").style("display","none")
+        d3.select("#settings").style("display","none")
+        if (global_vars.builder != "false") d3.select("#builder").style("display","none")
+      }
+      else {
+        d3.select("#ui_bottom").style("display","block")
+        d3.select("#settings").style("display","block")
+        if (global_vars.builder != "false") d3.select("#builder").style("display","block")
+      }
+
+      d3.select("#ui_bottom").style("bottom",function(d){
+        if (global_vars.controls != "false") var u = 0
+        else var u = 1
+        return "-"+(this.offsetHeight*u)+"px"
+      })
+      
+      if (global_vars.controls == "false") var y_offset = 0;
+      else var y_offset = d3.select("#ui_bottom").node().offsetHeight;
+
+      app_height = height-5-y_offset;
+      if (global_vars.builder != "false") app_height -= d3.select("#builder").node().offsetHeight
+      app_width = width-10;
+
+      d3.select("#app")
+        .style("height",app_height+"px")
+        .style("width",app_width+"px")
+        
+      if (d3.select("#app").html() != "" && d3.select("#app #error").empty()) {
+        d3.select("#app")
+          .call(app.height(app_height).width(app_width))
+      }
+      
+    }
+    
+    window.onresize = function() {
+      if(this.resizeTO) clearTimeout(this.resizeTO);
+      this.resizeTO = setTimeout(function() {
+        resize_page();
+      },500)
+    }
+  
+  </script>
+
+{% endblock %}
