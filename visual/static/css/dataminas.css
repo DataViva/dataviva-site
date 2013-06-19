@@ -169,7 +169,6 @@ table td.icon > div{
   -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
   -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
   box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
-
 }
 
 .pagination .button {
@@ -198,8 +197,12 @@ table td.icon > div{
   background-image: url('/static/img/home/lab_background.png');
   background-repeat: no-repeat;
   background-position: left top;
-  background-size: 100% 100%;
+  background-size: 920px 575px;
   width: 100%;
+}
+
+.noshadow {
+  background-image: url('/static/img/home/lab_background_noshadow.png');
 }
 
 .tall_background {
