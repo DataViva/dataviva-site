@@ -50,20 +50,29 @@ def account_home():
     # return render_template('admin/my_questions.html', 
     #     questions_pending = questions_pending)
 
-@mod.route('/my_questions/')
-def questions():
-    questions = Question.query.filter_by(user=g.user).all()
-    return render_template("admin/my_questions.html", questions=questions)
-
-@mod.route('/replies/')
-def replies():
-    replies = Reply.query.filter_by(user=g.user).all()
-    return render_template("admin/replies.html", replies=replies)
-
 @mod.route('/activity/')
-def activity():
-    starred_apps = Starred.query.filter_by(user=g.user).limit(5).all()
-    return render_template("admin/activity.html", starred=starred_apps)
+@mod.route('/activity/<activity_type>/')
+def activity(activity_type=None):
+    
+    activity_dict = {}
+    activity_list = []
+    
+    if not activity_type or activity_type == "starred":
+        activity_dict["star"] = Starred.query.filter_by(user=g.user).order_by("timestamp desc").limit(5).all()
+    if not activity_type or activity_type == "questions":
+        activity_dict["question"] = Question.query.filter_by(user=g.user).limit(5).all()
+    if not activity_type or activity_type == "replies":
+        activity_dict["reply"] = Reply.query.filter_by(user=g.user).limit(5).all()
+    
+    # add each items as a tuple with its type (star, question, reply)
+    for kind, activities in activity_dict.items():
+        for a in activities:
+            activity_list.append((kind, a))
+    
+    # sort this list in place by timestamp
+    activity_list.sort(key=lambda tup: tup[1].timestamp, reverse=True)
+
+    return render_template("admin/activity.html", activity=activity_list, activity_type=activity_type)
 
 @mod.route('/logout/')
 def logout():

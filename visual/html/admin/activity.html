@@ -3,6 +3,48 @@
 
 
 {% block admin_content %}
+
+  {% if activity_type == "starred" %}
+  <h5>Starred <i class=" icon-star-empty"></i></h5>
+  {% elif activity_type == "questions" %}
+  <h5>Questions</h5>
+  {% elif activity_type == "replies" %}
+  <h5>Replies</h5>
+  {% else %}
+  <h5>History</h5>
+  {% endif %}
+  <hr class="bold"/>
+  
+  <div class="feed">
+    {% for a in activity %}
+    {% with %}
+    {% set a_type = a[0] %}
+    {% set a = a[1] %}
+    {% if a_type == "star" %}
+    {% set app_type = a.app_id|split("/") %}
+    {% endif %}
+    <a href="#">
+      <div class="feed-item">
+        <div class="feed_title">
+          {% if a_type == "star" %}
+          <img src="/static/img/icons/tiles/{{ app_type[0] }}_tile.png" width="23px" padding-bottom="23px">
+          {{ a.app_name }}
+          {% else %}
+          <img src="/static/img/icons/tiles/ask_sabrina_tile.png" width="23px" padding-bottom="23px">
+            {% if a_type == "question" %}
+            {{ a.question|strip_html|truncate(100)|safe }}
+            {% else %}
+            {{ a.body|strip_html|truncate(100)|safe }}
+            {% endif %}
+          {% endif %}
+        </div>
+        <div class="feed_date"><time>{{ momentjs(a.timestamp).calendar() }}</time></div>
+    </div>
+    </a>
+    {% endwith %}
+    {% endfor %}
+  </div>
+<!--
 <h5>History</h5>
 <hr class="bold"/>
 <h5>Starred <i class=" icon-star-empty"></i></h5>
@@ -43,7 +85,7 @@
   <p>You haven't starred any apps yet!</p>
   {% endif %}
 </div>
-  
+
 <h5>Questions</h5>
 <hr class="bold"/>
 <div class="feed">
@@ -108,4 +150,5 @@
   </a>
 </div>
 </div>
+-->
 {% endblock %}

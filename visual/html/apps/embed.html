@@ -595,7 +595,8 @@
       }
       else {
         var url = window.location.pathname.replace("embed","star"),
-            title = escape(app_title(current_build,data_type))
+            // title = escape(app_title(current_build,data_type))
+            title = app_title(current_build,data_type)
             
         d3.json(url)
           .header("Content-type","application/x-www-form-urlencoded")
