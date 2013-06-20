@@ -33,7 +33,6 @@ form textarea {
   </div>
 </div>
 <div id="account_filters" class="grid5col2">
-  <a href="{{ url_for('account.activity') }}">All</a> |
   <a href="{{ url_for('account.activity', activity_type='starred') }}">Starred</a> |
   <a href="{{ url_for('account.activity', activity_type='questions') }}">Questions</a> |
   <a href="{{ url_for('account.activity', activity_type='replies') }}">Replies</a>

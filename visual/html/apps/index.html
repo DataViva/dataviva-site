@@ -10,12 +10,12 @@
     function load_page(path){
 
       if (d3.select("div#slide_container")[0][0]) {
-        dataminas.slide.remove();
+        visual.slide.remove();
       }
       
       d3.html(path+"?ajax=true",function(content){
         window.history.pushState({"html":'html',"pageTitle":'pageTitle'}, "", path);
-        dataminas.slide.load(content);
+        visual.slide.load(content);
       })
       
     }

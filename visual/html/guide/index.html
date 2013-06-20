@@ -21,7 +21,7 @@
   function load_page(back) {
     
     if (d3.select("div#slide_container")[0][0]) {
-      dataminas.slide.remove(back);
+      visual.slide.remove(back);
     }
     
     var url = null;
@@ -47,8 +47,8 @@
         var page_requested = current_path.length > 0 ? current_path.join("/")+"/" : "";
         var new_path = "/guide/"+page_requested;
         window.history.pushState({"html":'html',"pageTitle":'pageTitle'}, "", new_path);
-        dataminas.breadcrumbs();
-        dataminas.slide.load(content,back);
+        visual.breadcrumbs();
+        visual.slide.load(content,back);
     
       })
       

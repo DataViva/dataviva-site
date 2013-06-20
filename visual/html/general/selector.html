@@ -30,7 +30,7 @@
   d3.select("#selector_container .question .text")
     .html(text)
 
-  dataminas.sabrina({
+  visual.sabrina({
     "div": d3.select("#sabrina_selector"),
     "outfit": outfit,
     "emotion": "smile",
@@ -45,7 +45,7 @@
   d3.select("#selector")
     .call(selector);
     
-  dataminas.resize();
+  visual.resize();
   
   function selector_return(value) {
     update_path(value.id);

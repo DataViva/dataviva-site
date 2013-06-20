@@ -54,25 +54,29 @@ def account_home():
 @mod.route('/activity/<activity_type>/')
 def activity(activity_type=None):
     
+    if not activity_type:
+        return redirect(url_for('account.activity', activity_type="starred"))
+    
+    offset = request.args.get('offset', 0)
     activity_dict = {}
     activity_list = []
+    limit = 50
     
-    if not activity_type or activity_type == "starred":
-        activity_dict["star"] = Starred.query.filter_by(user=g.user).order_by("timestamp desc").limit(5).all()
-    if not activity_type or activity_type == "questions":
-        activity_dict["question"] = Question.query.filter_by(user=g.user).limit(5).all()
-    if not activity_type or activity_type == "replies":
-        activity_dict["reply"] = Reply.query.filter_by(user=g.user).limit(5).all()
+    if request.is_xhr:
+        
+        if activity_type == "starred":
+            query = Starred.query
+        elif activity_type == "questions":
+            query = Question.query
+        elif activity_type == "replies":
+            query = Reply.query
+        
+        items = query.filter_by(user=g.user).order_by("timestamp desc").limit(limit).offset(offset).all()
+        items = [(activity_type, i.serialize()) for i in items]
+        
+        return jsonify({"activities":items})
     
-    # add each items as a tuple with its type (star, question, reply)
-    for kind, activities in activity_dict.items():
-        for a in activities:
-            activity_list.append((kind, a))
-    
-    # sort this list in place by timestamp
-    activity_list.sort(key=lambda tup: tup[1].timestamp, reverse=True)
-
-    return render_template("admin/activity.html", activity=activity_list, activity_type=activity_type)
+    return render_template("admin/activity.html", activity_type=activity_type)
 
 @mod.route('/logout/')
 def logout():

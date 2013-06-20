@@ -23,11 +23,11 @@
     }
     else {
       d3.html("/explore/?ajax=true",function(content){
-        dataminas.slide.load(content);
+        visual.slide.load(content);
       })
     }
     
-    dataminas.breadcrumbs();
+    visual.breadcrumbs();
   
   }
   
@@ -37,7 +37,7 @@
     window.history.pushState({"html":'html',"pageTitle":'pageTitle'}, "", new_path);
       
     if (window.location.pathname.split("/").length == 4) {
-      dataminas.breadcrumbs(lang);
+      visual.breadcrumbs(lang);
     
       load_selector(name);
       
@@ -48,7 +48,7 @@
   }
   
   function load_selector(name) {
-    dataminas.slide.remove();
+    visual.slide.remove();
     var cat = {
       "occupation": "cbo",
       "location": "bra",
@@ -57,7 +57,7 @@
       "partner": "wld"
     }
     d3.html("/selector/"+cat[name]+"/",function(content){
-      dataminas.slide.load(content);
+      visual.slide.load(content);
     })
   }
 

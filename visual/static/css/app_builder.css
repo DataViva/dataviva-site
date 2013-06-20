@@ -21,12 +21,11 @@ iframe {
   width: 100%;
   text-align: center;
   top: 50%;
-  margin-top: -50px;
+  margin-top: -30px;
 }
 
 #error #title {
   font-size: 24px;
-  font-weight: bold;
   margin-bottom: 10px;
 }
 

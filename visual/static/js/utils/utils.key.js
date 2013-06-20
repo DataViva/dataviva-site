@@ -28,7 +28,7 @@ function Key() {
       })
       
       data.forEach(function(d,i){
-        d.icon = dataminas.icon(d.id,attr_type)
+        d.icon = visual.icon(d.id,attr_type)
         var cat = d3.select(key).append("div")
           .attr("id","key"+d.id)
           .attr("class","key_icon_container")

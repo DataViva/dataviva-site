@@ -48,7 +48,7 @@
 <script src="/static/js/utils/utils.selector.js"></script>
 <script>
 
-  dataminas.sabrina({
+  visual.sabrina({
     "div": d3.select("#sabrina_ask"),
     "outfit": "lab",
     "emotion": "smirk",
@@ -65,7 +65,7 @@
   
   // Used whenever any filter is changed
   function select_filter(obj) {
-    dataminas.popover.hide();
+    visual.popover.hide();
     
     // add this to the input (for submission)
     d3.select("#tag_field").attr("value", function(){
@@ -105,7 +105,7 @@
     var selection_type = val ? val : "bra";
     d3.select("#"+select_id)
       .call(selector.type(selection_type));
-    dataminas.resize();
+    visual.resize();
   }
   
   function multi_selector(d){
@@ -130,7 +130,7 @@
       if (i == 0) radio.attr("checked","checked")
     })
     
-    dataminas.toggle("select_radios")
+    visual.toggle("select_radios")
     
     this.append("div")
       .attr("id", select_id)
@@ -142,7 +142,7 @@
   var id = "popover"
   if (d3.select("#"+id).empty()) {
     
-    dataminas.popover.create({
+    visual.popover.create({
       "id": id,
       "width": "50%",
       "height": "80%"
@@ -157,7 +157,7 @@
   }
   
   d3.select("#tag_input").on(vizwhiz.evt.click, function(){
-    dataminas.popover.show("#"+id);    
+    visual.popover.show("#"+id);    
   })
 
 

@@ -126,19 +126,19 @@
   d3.selectAll(".list_icon")
     .style("background-image", function(){
       var tag_el = d3.select(this);
-      return "url('"+ dataminas.icon(tag_el.attr("title"), "bra") + "')"
+      return "url('"+ visual.icon(tag_el.attr("title"), "bra") + "')"
     })
   d3.select(d3.select(".icon-remove-sign").node().parentNode).on("click", function(){
     d3.select(this.parentNode).remove();
   })
 
-  dataminas.toggle("dataset");
-  dataminas.dropdown("#year_filter");
+  visual.toggle("dataset");
+  visual.dropdown("#year_filter");
 
   d3.selectAll("#secex_on").style("display", "none")
   d3.selectAll("#rais_on").style("display", "block")
 
-  dataminas.resize();
+  visual.resize();
   
   
   // default load page with data
@@ -154,7 +154,7 @@
       d3.selectAll("#secex_on").style("display", "none")
       d3.selectAll("#rais_on").style("display", "block")
     }
-    dataminas.resize();
+    visual.resize();
   }
   
   // Turning on button filters
@@ -173,12 +173,12 @@
     }
     
 
-    dataminas.resize();
+    visual.resize();
     
   })
   
   // adding a filter
-  dataminas.popover.create({
+  visual.popover.create({
     "id": "popover",
     "type": "bra",
     "width": "50%",
@@ -195,13 +195,13 @@
   d3.selectAll(".add_filter").on(vizwhiz.evt.click, function(){
     var selector_type = d3.select(this).attr("name")
     nd.call(selector.type(selector_type));
-    dataminas.popover.show("#popover");
+    visual.popover.show("#popover");
   })
   
   function add_filter(obj){
     var add_btn = "a[name='" + obj.type + "']"
     var cont = d3.select(add_btn).node().parentNode;
-    dataminas.popover.hide();
+    visual.popover.hide();
     
     // remove filler text
     d3.select(cont).selectAll("span.filler").remove()
@@ -224,7 +224,7 @@
       .append("i")
       .attr("class", "icon-remove-sign")
     
-      dataminas.resize();
+      visual.resize();
     
   }
   
