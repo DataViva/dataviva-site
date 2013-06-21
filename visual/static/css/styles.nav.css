@@ -57,15 +57,41 @@
 }
 
 #header > a.link {
-  margin: 0px 22px;
-  border-bottom-width: 2px;
-  border-color: white;
-  border-style: solid;
-  font-size: 11px;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: 35px 35px;
   color: #cccccc;
+  font-size: 11px;
+  padding-top: 40px;
+  text-align: center;
+  width: 80px;
   -webkit-transition: border-color linear .2s, color linear .2s;
      -moz-transition: border-color linear .2s, color linear .2s;
           transition: border-color linear .2s, color linear .2s;
+}
+
+#header a#guide {
+  background-image: url("/static/img/nav/icons/guide.png");
+}
+
+#header a#profiles {
+  background-image: url("/static/img/nav/icons/profiles.png");
+}
+
+#header a#apps {
+  background-image: url("/static/img/nav/icons/apps.png");
+}
+
+#header a#data {
+  background-image: url("/static/img/nav/icons/data.png");
+}
+
+#header a#ask {
+  background-image: url("/static/img/nav/icons/ask.png");
+}
+
+#header a#about {
+  background-image: url("/static/img/nav/icons/learn.png");
 }
 
 #header a.active,
@@ -73,33 +99,39 @@
   color: #cc0000;
 }
 
-body.guide #header a.active,
+#header a#guide.link.active,
 #header a#guide:hover {
-  color: #cc0000 !important; /* red */
+  background-image: url("/static/img/nav/icons/guide_active.png");
+  color: #af1f24 !important; /* red */
 }
 
-body.profiles #header a.active,
+#header a#profiles.link.active,
 #header a#profiles:hover {
+  background-image: url("/static/img/nav/icons/profiles_active.png");
   color: #e0902d !important; /* orange */
 }
 
-body.apps #header a.active,
+#header a#apps.link.active,
 #header a#apps:hover {
+  background-image: url("/static/img/nav/icons/apps_active.png");
   color: #3daf49 !important; /* green */
 }
 
-body.data #header a.active,
+#header a#data.link.active,
 #header a#data:hover {
+  background-image: url("/static/img/nav/icons/data_active.png");
   color: #1abbee !important; /* blue */
 }
 
-body.ask #header a.active,
+#header a#ask.link.active,
 #header a#ask:hover {
+  background-image: url("/static/img/nav/icons/ask_active.png");
   color: #742777 !important; /* purple */
 }
 
-body.about #header a.active,
+#header a#about.link.active,
 #header a#about:hover {
+  background-image: url("/static/img/nav/icons/learn_active.png");
   color: #d67ab0 !important; /* pink */
 }
 
@@ -110,45 +142,6 @@ body.about #header a.active,
 #language a.active {
   color: #333333;
   font-weight: normal;
-}
-
-.icon {
-  width: 35px;
-  height: 35px;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: top center;
-  margin-top: -4px;
-}
-
-#guide > .icon {
-  background-image: url("/static/img/nav/icons/guide.png");
-  margin-left: -2px;
-}
-
-#explore > .icon {
-  background-image: url("/static/img/nav/icons/profiles.png");
-  margin-left: 2px;
-}
-
-#apps > .icon {
-  background-image: url("/static/img/nav/icons/apps.png");
-  margin-left: -4px;
-}
-
-#data > .icon {
-  background-image: url("/static/img/nav/icons/data.png");
-  margin-left: -6px;
-}
-
-#ask_sabrina > .icon {
-  background-image: url("/static/img/nav/icons/ask.png");
-  margin-left: 12px;
-}
-
-#about > .icon {
-  background-image: url("/static/img/nav/icons/learn.png");
-  margin-left: 11px;
 }
 
 /***********************/

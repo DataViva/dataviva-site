@@ -715,16 +715,23 @@ visual.resize = function () {
     var outer_height = height+(padding*2)+(border/2),
         arrow_height = Math.sqrt((outer_height*outer_height)/2);
         
-    container.selectAll("."+obj.name+" > .arrow")
-      .style("border-width", arrow_border)
-      .style("height",arrow_height+"px")
-      .style("width",arrow_height+"px")
-      .style("margin-right",function(){
-        return obj.point == "left" ? -arrow_height-(border*0.75)+"px" : "0px";
-      })
-      .style("margin-left",function(){
-        return obj.point == "left" ? arrow_height+(border*0.75)+"px" : "0px";
-      })
+    if (obj.name == "decision") {
+      container.selectAll("."+obj.name+" > .arrow")
+        .style("height",outer_height+"px")
+        .style("width",outer_height/2+"px")
+    }
+    else {
+      container.selectAll("."+obj.name+" > .arrow")
+        .style("border-width", arrow_border)
+        .style("height",arrow_height+"px")
+        .style("width",arrow_height+"px")
+        .style("margin-right",function(){
+          return obj.point == "left" ? -arrow_height-(border*0.75)+"px" : "0px";
+        })
+        .style("margin-left",function(){
+          return obj.point == "left" ? arrow_height+(border*0.75)+"px" : "0px";
+        })
+    }
 
     container.selectAll("."+obj.name+" > .text")
       .style("border-width", text_border)

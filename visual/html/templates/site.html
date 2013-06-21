@@ -10,12 +10,12 @@
   <div id="header_container">
     <div id="header">
       <a id="logo" href="{{ url_for('general.home') }}"></a>
-      <a id="guide" href="{{ url_for('guide.guide') }}" class="link"><div class="icon"></div>Guide</a>
-      <a id="explore" href="{{ url_for('explore.explore') }}" class="link"><div class="icon"></div>Explore</a>
-      <a id="apps" href="{{ url_for('apps.guide') }}" class="link"><div class="icon"></div>Apps</a>
-      <a id="data" href="{{ url_for('data.index') }}" class="link"><div class="icon"></div>Data</a>
-        <a id="ask_sabrina" href="{{ url_for('ask.index') }}" class="link"><div class="icon"></div>Ask Sabrina</a>
-      <a id="about" href="{{ url_for('about.about') }}" class="link"><div class="icon"></div>Learn More</a>
+      <a id="guide" href="{{ url_for('guide.guide') }}" class="link">Guide</a>
+      <a id="profiles" href="{{ url_for('profiles.profiles') }}" class="link">Explore</a>
+      <a id="apps" href="{{ url_for('apps.guide') }}" class="link">Apps</a>
+      <a id="data" href="{{ url_for('data.index') }}" class="link">Data</a>
+      <a id="ask" href="{{ url_for('ask.index') }}" class="link">Ask Sabrina</a>
+      <a id="about" href="{{ url_for('about.about') }}" class="link">Learn More</a>
       <div id="language">
         <input type="radio" name="language_select" onclick="change_language(this.value)" 
           value="en"{% if g.locale == 'en' %} checked{% endif %}>

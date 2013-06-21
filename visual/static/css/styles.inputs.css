@@ -216,7 +216,7 @@ div.toggle_group > .button:last-child {
   white-space: normal;
 }
 
-.question > .arrow, .decision > .arrow,
+.question > .arrow,
 .help > .arrow, .menu > .arrow {
   z-index: 0;
   -webkit-transform: rotate(45deg); 
@@ -254,6 +254,8 @@ div.toggle_group > .button:last-child {
 
 .decision > .text {
   line-height: 115%;
+  background-color: #be1e2d;
+  color: white;
 }
 
 .decision > .text > h2 {
@@ -265,8 +267,6 @@ div.toggle_group > .button:last-child {
 }
 
 .decision > * {
-  background-color: #be1e2d;
-  color: white;
   opacity: 0.8;
   -webkit-transition: opacity 0.1s linear;
      -moz-transition: opacity 0.1s linear;
@@ -280,28 +280,58 @@ div.toggle_group > .button:last-child {
 
 
 
-body.guide .decision > * {
-  background-color: #cc0000 !important; /* red */
+body.guide .decision > .text {
+  background-color: #af1f24 !important; /* red */
 }
 
-body.profiles .decision > * {
+body.profiles .decision > .text {
   background-color: #e0902d !important; /* orange */
 }
 
-body.apps .decision > * {
+body.apps .decision > .text {
   background-color: #3daf49 !important; /* green */
 }
 
-body.data .decision > * {
+body.data .decision > .text {
   background-color: #1abbee !important; /* blue */
 }
 
-body.ask .decision > * {
+body.ask .decision > .text {
   background-color: #742777 !important; /* purple */
 }
 
-body.about .decision > * {
+body.about .decision > .text {
   background-color: #d67ab0 !important; /* pink */
+}
+
+.decision > .arrow {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+}
+
+body.guide .decision > .arrow {
+  background-image: url("/static/img/triangles/triangle_red.png");
+}
+
+body.profiles .decision > .arrow {
+  background-image: url("/static/img/triangles/triangle_orange.png");
+}
+
+body.apps .decision > .arrow {
+  background-image: url("/static/img/triangles/triangle_green.png");
+}
+
+body.data .decision > .arrow {
+  background-image: url("/static/img/triangles/triangle_blue.png");
+}
+
+body.ask .decision > .arrow {
+  background-image: url("/static/img/triangles/triangle_purple.png");
+}
+
+body.about .decision > .arrow {
+  background-image: url("/static/img/triangles/triangle_pink.png");
 }
 
 .submit {
