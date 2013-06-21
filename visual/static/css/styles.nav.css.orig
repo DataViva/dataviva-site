@@ -68,6 +68,7 @@
           transition: border-color linear .2s, color linear .2s;
 }
 
+<<<<<<< HEAD
 #header a.active,
 #header a:hover {
   color: #cc0000;
@@ -101,6 +102,11 @@ body.ask #header a.active,
 body.about #header a.active,
 #header a#about:hover {
   color: #d67ab0 !important; /* pink */
+=======
+#header a.active {
+  color: #cc0000;
+  font-weight: bold;
+>>>>>>> 1074f4ef78fd26546c6b0a727f06f2ad14eaf24d
 }
 
 #language {

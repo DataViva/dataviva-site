@@ -122,7 +122,7 @@ table td.icon > div{
 
 #container {
   width: 90%;
-  margin: 3% 5%;
+  margin: 64px 5% 8px 5%;
   position: relative;
   min-width: 950px;
   max-width: 950px;
@@ -184,25 +184,12 @@ table td.icon > div{
   padding-bottom: 5%;
 }
 
-.office_background {
-  background-image: url('/static/img/home/office_background.png');
-  background-repeat: no-repeat;
-  background-position: left top;
-  background-size: 105% 100%;
-  width: 100%;
-  padding-bottom: 10%;
-}
-
 .lab_background {
   background-image: url('/static/img/home/lab_background.png');
   background-repeat: no-repeat;
-  background-position: left top;
-  background-size: 920px 575px;
+  background-position: middle top;
+  background-size: 910px 565px;
   width: 100%;
-}
-
-.noshadow {
-  background-image: url('/static/img/home/lab_background_noshadow.png');
 }
 
 .tall_background {
