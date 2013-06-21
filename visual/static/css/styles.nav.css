@@ -39,9 +39,6 @@
   width: 870px;
   padding: 8px 90px;
   height: 40px;
-  font-size: 11px;
-  font-weight: bold;
-  letter-spacing: 1px;
 }
 
 #header > a {
@@ -64,24 +61,26 @@
   border-bottom-width: 2px;
   border-color: white;
   border-style: solid;
+  font-size: 11px;
   color: #cccccc;
-  font-weight: normal;
   -webkit-transition: border-color linear .2s, color linear .2s;
      -moz-transition: border-color linear .2s, color linear .2s;
        -o-transition: border-color linear .2s, color linear .2s;
           transition: border-color linear .2s, color linear .2s;
 }
 
-#header a:hover {
-  border-color: #cc0000;
-}
-
 #header a.active {
   color: #cc0000;
+  font-weight: bold;
 }
 
 #language {
   top: 16px;
+}
+
+#language a.active {
+  color: #333333;
+  font-weight: normal;
 }
 
 .icon {
@@ -91,31 +90,36 @@
   background-size: 100% 100%;
   background-position: top center;
   margin-top: -4px;
-  margin-left: -2px;
 }
 
 #guide > .icon {
   background-image: url("/static/img/nav/icons/guide.png");
+  margin-left: -2px;
 }
 
-#profiles > .icon {
+#explore > .icon {
   background-image: url("/static/img/nav/icons/profiles.png");
+  margin-left: 2px;
 }
 
 #apps > .icon {
   background-image: url("/static/img/nav/icons/apps.png");
+  margin-left: -4px;
 }
 
 #data > .icon {
   background-image: url("/static/img/nav/icons/data.png");
+  margin-left: -6px;
 }
 
-#ask > .icon {
+#ask_sabrina > .icon {
   background-image: url("/static/img/nav/icons/ask.png");
+  margin-left: 12px;
 }
 
 #about > .icon {
   background-image: url("/static/img/nav/icons/learn.png");
+  margin-left: 11px;
 }
 
 /***********************/
