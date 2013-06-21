@@ -94,8 +94,9 @@ class Wld(db.Model, AutoSerialize):
 class Bra(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_bra'
-    __public__ = ('id', 'name_en', 'name_pt', 'color')
+    __public__ = ('id', 'id_ibge', 'name_en', 'name_pt', 'color')
     id = db.Column(db.String(10), primary_key=True)
+    id_ibge = db.Column(db.Integer(7))
     name_en = db.Column(db.String(200))
     name_pt = db.Column(db.String(200))
     color = db.Column(db.String(7))
