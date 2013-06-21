@@ -6,6 +6,8 @@ html {
 body {
   width: 100%;
   margin: 0 auto;
+  background-color: #fafafa;
+  color: #333333;
 }
 
 hr {
@@ -122,7 +124,7 @@ table td.icon > div{
 
 #container {
   width: 90%;
-  margin: 64px 5% 8px 5%;
+  margin: 68px 5% 48px 5%;
   position: relative;
   min-width: 950px;
   max-width: 950px;
@@ -156,14 +158,12 @@ table td.icon > div{
 }
 
 .pagination {
-  font-size: 24px;
   padding: 2% 0;;
-  color: #75665e;
+  color: #333333;
 }
 
 .pagination .button.current_page {
-  border: 1px solid #be1e2d;
-  color: #be1e2d;
+  color: #333333;
   background-position: 0 -15px;
   background-color: #e6e6e6;
   -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
@@ -185,10 +185,11 @@ table td.icon > div{
 }
 
 .lab_background {
-  background-image: url('/static/img/home/lab_background.png');
+  background-image: url('/static/img/home/lab_background_blur.png');
   background-repeat: no-repeat;
-  background-position: middle top;
-  background-size: 910px 565px;
+  background-position: center top;
+ /* background-size: 910px 565px;*/
+ background-size: 810px 530px;
   width: 100%;
 }
 

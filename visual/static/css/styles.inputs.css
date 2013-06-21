@@ -4,13 +4,13 @@
 
 a {
   text-decoration: none;
-  color: #75665e;
+  color: #333333;
 }
 
 a:hover {
   text-decoration: none;
   cursor: pointer;
-  color: #cc0000;
+  color: #cccccc;
 }
 
 /************************/
@@ -278,8 +278,7 @@ div.toggle_group > .button:last-child {
   cursor: pointer;
 }
 
-
-
+body.general .decision > .text,
 body.guide .decision > .text {
   background-color: #af1f24 !important; /* red */
 }
@@ -310,6 +309,7 @@ body.about .decision > .text {
   display: inline-block;
 }
 
+body.general .decision > .arrow,
 body.guide .decision > .arrow {
   background-image: url("/static/img/triangles/triangle_red.png");
 }
@@ -369,13 +369,13 @@ body.about .decision > .arrow {
 }
 
 /***********************/
-/* Brown "Menu" Button */
+/* "Menu" Button */
 /***********************/
 
 .menu > * {
   border-style: solid;
-  border-color: #75665e;
-  color: #75665e;
+  border-color: #d67ab0;
+  color: #d67ab0;
   background-color: white;
   font-weight: bold;
   -webkit-transition: color 0.1s linear, background-color 0.1s linear;
@@ -385,14 +385,14 @@ body.about .decision > .arrow {
 
 .menu.active > * {
   color: white;
-  background-color: #75665e;
+  background-color: #d67ab0;
   -webkit-transition: color 0s linear, background-color 0s linear;
      -moz-transition: color 0s linear, background-color 0s linear;
           transition: color 0s linear, background-color 0s linear;
 }
 
 .menu:hover > * {
-  background-color: #75665e;
+  background-color: #d67ab0;
   color: white;
   cursor: pointer;
 }

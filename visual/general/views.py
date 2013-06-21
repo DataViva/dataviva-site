@@ -79,6 +79,10 @@ def get_timezone():
 ###############################
 # General views 
 # ---------------------------
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
+
 @mod.route('/', methods=['GET', 'POST'])
 def home():
     return render_template("home.html")

@@ -36,7 +36,7 @@
 #header {
   margin: 0 auto;
   margin-top: 0px;
-  width: 870px;
+  width: 800px;
   padding: 8px 90px;
   height: 40px;
 }
@@ -53,7 +53,7 @@
   background-position: top center;
   width: 153px;
   height: 40px;
-  margin-right: 22px;
+  margin-right: 24px;
 }
 
 #header > a.link {
@@ -62,12 +62,19 @@
   background-size: 35px 35px;
   color: #cccccc;
   font-size: 11px;
-  padding-top: 40px;
+  margin-top: -4px;
+  padding-top: 34px;
   text-align: center;
-  width: 80px;
-  -webkit-transition: border-color linear .2s, color linear .2s;
-     -moz-transition: border-color linear .2s, color linear .2s;
-          transition: border-color linear .2s, color linear .2s;
+  width: 94px;
+  -webkit-transition: color linear .2s, color linear .2s;
+     -moz-transition: color linear .2s, color linear .2s;
+          transition: color linear .2s, color linear .2s;
+  -webkit-transition: font-weight linear .2s, color linear .2s;
+     -moz-transition: font-weight linear .2s, color linear .2s;
+          transition: font-weight linear .2s, color linear .2s;
+  -webkit-transition: background-image linear .2s, color linear .2s;
+     -moz-transition: background-image .2s, color linear .2s;
+          transition: background-image linear .2s, color linear .2s;
 }
 
 #header a#guide {
@@ -97,6 +104,7 @@
 #header a.active,
 #header a:hover {
   color: #cc0000;
+  font-weight: bold;
 }
 
 #header a#guide.link.active,
@@ -135,11 +143,20 @@
   color: #d67ab0 !important; /* pink */
 }
 
+#profile.button.square {
+  padding: 2px;
+  font-size: 18px !important;
+  margin-top: 7px;
+  margin-left: 30px;
+}
 #language {
-  top: 16px;
+  top: 9px;
+  margin-left: 10px;
 }
 
-#language a.active {
+#language a.active, 
+#language a:hover,
+#profile.button.square:hover {
   color: #333333;
   font-weight: normal;
 }
@@ -151,7 +168,7 @@
 #site_breadcrumbs {
   position: absolute;
   top: 67px;
-  left: 274px;
+  left: 296px;
 }
 
 #site_breadcrumbs > .site_crumb {
