@@ -8,41 +8,29 @@
 
   <div class="grid5col5">
     
-    <!-- <a href="{{ url_for('data.classifications', attr='hs', category=category) }}all/?per_page={{ pagination.per_page }}">Products</a> | 
-    <a href="{{ url_for('data.classifications', attr='isic', category=category) }}all/?per_page={{ pagination.per_page }}">Industries</a> | 
-    <a href="{{ url_for('data.classifications', attr='cbo', category=category) }}all/?per_page={{ pagination.per_page }}">Occupations</a> | 
-    <a href="{{ url_for('data.classifications', attr='bra', category=category) }}all/?per_page={{ pagination.per_page }}">Brazilian Locations</a> | 
-    <a href="{{ url_for('data.classifications', attr='wld', category=category) }}all/?per_page={{ pagination.per_page }}">Countries</a> -->
     <div id="attr_toggle">
-      <input type="radio" name="attr" value="hs" onclick="window.location='{{ url_for('data.classifications', attr='hs', category=category) }}all/?per_page={{ pagination.per_page }}'" {% if page_attr == "hs" %}checked{% endif %}>
+      <input type="radio" name="attr" value="hs" onclick="window.location='{{ url_for('data.classifications', attr='hs', category=category) }}all/'" {% if page_attr == "hs" %}checked{% endif %}>
       <label for="hs">Products</label>
       
-      <input type="radio" name="attr" value="cbo" onclick="window.location='{{ url_for('data.classifications', attr='cbo', category=category) }}all/?per_page={{ pagination.per_page }}'" {% if page_attr == "cbo" %}checked{% endif %}>
+      <input type="radio" name="attr" value="cbo" onclick="window.location='{{ url_for('data.classifications', attr='cbo', category=category) }}all/'" {% if page_attr == "cbo" %}checked{% endif %}>
       <label for="cbo">Occupations</label>
       
-      <input type="radio" name="attr" value="isic" onclick="window.location='{{ url_for('data.classifications', attr='isic', category=category) }}all/?per_page={{ pagination.per_page }}'" {% if page_attr == "isic" %}checked{% endif %}>
+      <input type="radio" name="attr" value="isic" onclick="window.location='{{ url_for('data.classifications', attr='isic', category=category) }}all/'" {% if page_attr == "isic" %}checked{% endif %}>
       <label for="isic">Industries</label>
       
-      <input type="radio" name="attr" value="bra" onclick="window.location='{{ url_for('data.classifications', attr='bra', category=category) }}all/?per_page={{ pagination.per_page }}'" {% if page_attr == "bra" %}checked{% endif %}>
+      <input type="radio" name="attr" value="bra" onclick="window.location='{{ url_for('data.classifications', attr='bra', category=category) }}all/'" {% if page_attr == "bra" %}checked{% endif %}>
       <label for="bra">Brazilian Locations</label>
       
-      <input type="radio" name="attr" value="wld" onclick="window.location='{{ url_for('data.classifications', attr='wld', category=category) }}all/?per_page={{ pagination.per_page }}'" {% if page_attr == "wld" %}checked{% endif %}>
+      <input type="radio" name="attr" value="wld" onclick="window.location='{{ url_for('data.classifications', attr='wld', category=category) }}all/'" {% if page_attr == "wld" %}checked{% endif %}>
       <label for="wld">Countries</label>
     </div>
     
     <h1>{{ title }}</h1>
     
     <div class="data-dropdown">
-      <select id="per_page" onchange="update_per_page(this.options[this.selectedIndex].value);">
-        {% for per_page in pagination.get_per_page_options() %}
-        <option value="{{ per_page }}" {% if pagination.per_page == per_page %}selected="selected"{% endif %}>{{ per_page }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="data-dropdown">
       <select id="category" onchange="update_depth(this.options[this.selectedIndex].value);">
         <option value="all">All</option>
-        {% for cat_name, cat_digit in category_lookup.iteritems() %}
+        {% for cat_digit, cat_name in category_lookup.iteritems() %}
         <option value="{{ cat_name }}" {% if cat_name == category %}selected="selected"{% endif %}>{{ cat_name }}</option>
         {% endfor %}
       </select>
@@ -71,26 +59,8 @@
         {% endfor %}
       </tbody>
     </table>
-
-    {% if pagination and pagination.total_count > pagination.per_page %}
-    <div class="pagination">
-      {% if pagination.has_prev %} <a class="button" href="{{ url_for('data.classifications', attr=page_attr, category=category, page=pagination.page-1) }}?per_page={{pagination.per_page}}">&laquo; Previous</a> {% endif %}
-      {% for page in pagination.iter_pages() %}
-        {% if page %}
-          {% if page != pagination.page %}
-            <a class="button" href="{{ url_for('data.classifications', attr=page_attr, category=category, page=page) }}?per_page={{pagination.per_page}}">{{ page }}</a>
-          {% else %}
-            <strong class="button current_page">{{ page }}</strong>
-          {% endif %}
-        {% else %}
-          <span class=ellipsis>…</span>
-        {% endif %}
-      {% endfor %}
-      {% if pagination.has_next %}
-        <a class="button" href="{{ url_for('data.classifications', attr=page_attr, category=category, page=pagination.page+1) }}?per_page={{pagination.per_page}}">Next &raquo;</a>
-      {% endif %}
-    </div>
-    {% endif %}
+    
+    <div class="loading">Loading; one moment please…</div>
     
   </div>
 
@@ -105,18 +75,17 @@ function update_per_page(per_page){
 
 // dropdown for changing the category
 d3.select("#category").on("change", function(){
-  var new_page_url = "{{ url_for('data.classifications', attr=page_attr) }}all/?per_page={{ pagination.per_page }}";
+  var new_page_url = "{{ url_for('data.classifications', attr=page_attr) }}all/";
   new_page_url = new_page_url.replace("all", this.value)
   window.location = new_page_url
 })
 function update_depth(depth){
   // window.location = "{{ url_for('data.classifications', attr=page_attr, category=category) }}?per_page=" + per_page;
-  var new_page_url = "{{ url_for('data.classifications', attr=page_attr) }}all/?per_page={{ pagination.per_page }}";
+  var new_page_url = "{{ url_for('data.classifications', attr=page_attr) }}all/";
   new_page_url = new_page_url.replace("all", depth)
   window.location = new_page_url
 }
 
-visual.dropdown("#per_page");
 visual.dropdown("#category");
 
 visual.toggle("attr");
@@ -124,6 +93,179 @@ visual.toggle("attr");
 d3.selectAll("td.icon > div").style("background-image", function(){
   return "url('"+visual.icon(this.title, "{{ page_attr }}") + "')"
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Initialize variables
+var formatDate = d3.time.format("%B %-d, %Y"),
+    parseDate = d3.time.format.iso.parse,
+    offset = 50,
+    fetching;
+
+// The item we're going to listen on for scrolling
+d3.select(window)
+    .on("scroll", maybe_fetch)
+
+// Check if we need to fetch
+function maybe_fetch() {
+  
+  // get the position of the loading div
+  var loading_div_y = !d3.select(".loading").empty() ? d3.select(".loading").node().getBoundingClientRect().top : NaN;
+  
+  // if we're not currently fetching and offset if not NaN and the loader y pos
+  // is less than the height of the page then fetch new items
+  if (!fetching && offset >= 0 && loading_div_y < innerHeight) {
+    fetch();
+  }
+  
+}
+
+// Call the server for more acitivities
+function fetch() {
+  fetching = true;
+  
+  // Here we set the header X-Requested-With to XMLHttpRequest so the 
+  // server knows it's an AJAX call
+  d3.json(window.location+"?offset="+offset).header("X-Requested-With", "XMLHttpRequest").get(display);
+}
+
+// The meat and potatoes, this function get called after we've made the call
+// to the server
+function display(error, data) {
+  
+  // clean up data into one nice array of activities
+  attrs = data.attrs.map(function(d){
+    d["category"] = data.category_lookup[d.id.length]
+    return d
+  });
+  
+  // we're obviously no longer fetching
+  fetching = false;
+  
+  // if the server returned an empty list, return and get rid of loading div
+  if (!attrs.length) {
+    if(offset == 0){
+      // no attrs message
+    }
+    offset = NaN;
+    d3.select(".loading").remove();
+    return;
+  }
+  
+  // increment offset by number of items received from server
+  offset += attrs.length;
+  
+  // using d3's helpful enter/update/exit paradigm add new items from server
+  x = 1
+  var attrs_enter = d3.select("table > tbody").selectAll("tr")
+    .data(attrs, function(d){ x++; return d ? d.id : x })
+    .enter().append("tr")
+    
+  // return
+  //     x.attr("class", "activity")
+  //     .attr("href", function(d){
+  //       url = "#"
+  //       if(d.activity_type == "starred"){
+  //         url = "/embed/" + d.app_id;
+  //       }
+  //       else if(d.activity_type == "questions"){
+  //         url = "/ask_sabrina/question/" + d.slug;
+  //       }
+  //       else if(d.activity_type == "replies"){
+  //         url = "/ask_sabrina/question/" + d.question_id;
+  //       }
+  //       return url;
+  //     })
+  //     .append("div")
+  //     .attr("class", "feed-item")
+  
+  /*
+  <td class="icon">
+    <div style="background-color: attr.color" title="attr.id"></div>
+  </td>
+  <td>attr.id</td>
+  <td>cat_id</td>
+  <td>attr.name_en </td>
+  <td>attr.name_pt </td>
+  */
+  
+  attrs_enter.append("td")
+    .attr("class", "icon")
+    .append("div")
+      .style("background-image", function(d){
+        return "url('"+visual.icon(d.id, data.attr_type) + "')"
+      })
+      .style("background-color", function(d){ return d.color })
+      .attr("title", function(d){ return d.id; })
+
+  attrs_enter.append("td").text(function(d){ return d.id; })
+  attrs_enter.append("td").text(function(d){ return d.category; })
+  attrs_enter.append("td").text(function(d){ return d.name_en; })
+  attrs_enter.append("td").text(function(d){ return d.name_pt; })
+  
+  
+  return
+  
+  // the title div housing the icon and title
+  var title_div = activities_enter.append("div")
+      .attr("class", "feed_title")
+  
+  // add icon
+  title_div.append("img")
+      .attr("src", function(d){
+        var img_url = "/static/img/icons/tiles/";
+        
+        // if this is a starred app, we need to figure out which app it is
+        // and use this app's icon
+        if(d.activity_type == "starred"){
+          var app_type = d.app_id.split("/")[0]
+          img_url += app_type+"_tile.png";
+        }
+        
+        // otherwise it's an ask sabrina question/reply
+        else {
+          img_url += "ask_sabrina_tile.png";
+        }
+        return img_url
+      })
+      .attr("width", "23px")
+      .attr("padding-bottom", "23px")
+  
+  // the title (strip out HTML!)
+  title_div.append("p")
+    .html(function(d){
+      return d.title.replace(/(<([^>]+)>)/ig,"");
+    })
+  
+  // lastly, the div that holds the data
+  activities_enter.append("div")
+      .attr("class", "feed_date")
+      .text(function(d) { return formatDate(d.timestamp); });
+  
+  // maybe the user has a super dooper tall screen (or high resolution)
+  // so we need to check if we're already at the bottem, even though we
+  // just added new items
+  setTimeout(maybe_fetch, 50);
+}
+
+// call this on page load
+maybe_fetch();
 </script>
 
 {% endblock %}

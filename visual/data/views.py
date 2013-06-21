@@ -75,7 +75,8 @@ def classifications(category, page, attr=None):
     if not attr:
         return redirect(url_for('data.classifications', attr='hs'))
     
-    per_page = request.args.get("per_page", "25")
+    per_page = 50
+    offset = request.args.get("offset", 0)
     
     if attr == "bra":
         attr_table = Bra
@@ -106,13 +107,20 @@ def classifications(category, page, attr=None):
     else:
         attrs = attrs.filter(func.char_length(attr_table.id) == category_lookup[category])
     
-    total = attrs.count()
-    if per_page.isdigit():
-        pagination = Pagination(page, int(per_page), total)
-        attrs = attrs.paginate(page, int(per_page), False).items
-    else:
-        pagination = Pagination(page, per_page, total)
-        attrs = attrs.all()
+    attrs = attrs.limit(per_page).offset(offset)
+    category_lookup = {v:k for k, v in category_lookup.items()}
+    
+    # total = attrs.count()
+    # if per_page.isdigit():
+    #     pagination = Pagination(page, int(per_page), total)
+    #     attrs = attrs.paginate(page, int(per_page), False).items
+    # else:
+    #     pagination = Pagination(page, per_page, total)
+    #     attrs = attrs.all()
+    
+    if request.is_xhr:
+        attrs_json = [a.serialize() for a in attrs]
+        return jsonify({"attrs": attrs_json, "attr_type": attr, "category_lookup":category_lookup})
     
     return render_template("data/classifications.html",
         title = title,
@@ -120,8 +128,7 @@ def classifications(category, page, attr=None):
         page_attr = attr,
         category = category,
         category_lookup = category_lookup,
-        attrs = attrs,
-        pagination = pagination)
+        attrs = attrs)
 
 @mod.route('/download/', methods=['GET', 'POST'])
 def download():
