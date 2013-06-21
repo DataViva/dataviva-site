@@ -6,10 +6,14 @@ from visual.attrs import models as attrs
 from visual.rais import models as rais
 from visual.secex import models as secex
 
-mod = Blueprint('explore', __name__, url_prefix='/explore')
+mod = Blueprint('profiles', __name__, url_prefix='/profiles')
+
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
 
 @mod.route('/occupation/<cbo_id>/')
-def explore_cbo(cbo_id = None):
+def profiles_cbo(cbo_id = None):
     
     names = get_names({ "cbo_id": cbo_id })
     
@@ -30,7 +34,7 @@ def explore_cbo(cbo_id = None):
         primary = apps[:1][0], secondaries = apps[1:], rec = rec)
 
 @mod.route('/industry/<isic_id>/')
-def explore_isic(isic_id = None):
+def profiles_isic(isic_id = None):
     
     names = get_names({ "isic_id": isic_id })
     
@@ -52,7 +56,7 @@ def explore_isic(isic_id = None):
         primary = apps[:1][0], secondaries = apps[1:], rec = rec)
 
 @mod.route('/product/<hs_id>/')
-def explore_hs(hs_id = None):
+def profiles_hs(hs_id = None):
     
     names = get_names({ "hs_id": hs_id })
     
@@ -73,7 +77,7 @@ def explore_hs(hs_id = None):
         primary = apps[:1][0], secondaries = apps[1:], rec = rec)
 
 @mod.route('/location/<bra_id>/')
-def explore_bra(bra_id = None):
+def profiles_bra(bra_id = None):
     
     names = get_names({ "bra_id": bra_id })
     
@@ -96,7 +100,7 @@ def explore_bra(bra_id = None):
         primary = apps[:1][0], secondaries = apps[1:], rec = rec)
 
 @mod.route('/partner/<wld_id>/')
-def explore_wld(wld_id = None):
+def profiles_wld(wld_id = None):
     
     names = get_names({ "wld_id": wld_id })
     
@@ -118,11 +122,11 @@ def explore_wld(wld_id = None):
 
 @mod.route('/')
 @mod.route('/<category>/')
-def explore(category = None):
+def profiles(category = None):
     ajax = request.args.get("ajax")
     if ajax == "true":
-        return render_template("explore/home.html")
-    return render_template("explore/index.html", category = category)
+        return render_template("profiles/home.html")
+    return render_template("profiles/index.html", category = category)
     
     
     
@@ -316,7 +320,7 @@ def app_text(params,text):
                 cat = "location"
             elif type == "wld":
                 cat = "partner"
-            names.append(u"<a href='/explore/{0}/{1}') }}'>{2}</a>".format(cat,getattr(l,type).id,getattr(l,type).name_en))
+            names.append(u"<a href='/profiles/{0}/{1}') }}'>{2}</a>".format(cat,getattr(l,type).id,getattr(l,type).name_en))
         
         list_txt = ", ".join(names)
         

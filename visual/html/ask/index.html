@@ -52,7 +52,7 @@
       </div>        
     </div>
     <div class="hide">
-     <a href="/ask_sabrina/ask/">
+     <a href="/ask/ask/">
        <div class="help">
          <div class="text">
            <h2>Cannot find your answer here?</h2>
@@ -107,7 +107,7 @@
       results.matches.forEach(function(match){
         var match_el = d3.select("#results")
         var anchor = match_el.append("a")
-            anchor.attr("href", "/ask_sabrina/question/" + match.slug)
+            anchor.attr("href", "/ask/question/" + match.slug)
             var decision = anchor.append("div")
                   .attr("class", "decision")
             var text = decision.append("div").attr("class", "text")

@@ -9,6 +9,10 @@ from visual.secex import models as secex
 
 mod = Blueprint('guide', __name__, url_prefix='/guide')
 
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
+
 ###############################
 # Final Guide Page Views
 # ---------------------------

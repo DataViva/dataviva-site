@@ -13,6 +13,10 @@ from visual.attrs.models import Bra
 import json
 
 mod = Blueprint('apps', __name__, url_prefix='/apps')
+
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
     
 @mod.route('/embed/')
 @mod.route('/embed/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/')

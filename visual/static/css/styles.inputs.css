@@ -267,14 +267,41 @@ div.toggle_group > .button:last-child {
 .decision > * {
   background-color: #be1e2d;
   color: white;
-  -webkit-transition: background-color 0.1s linear;
-     -moz-transition: background-color 0.1s linear;
-          transition: background-color 0.1s linear;
+  opacity: 0.8;
+  -webkit-transition: opacity 0.1s linear;
+     -moz-transition: opacity 0.1s linear;
+          transition: opacity 0.1s linear;
 }
 
 .decision:hover > * {
-  background-color: #ec1c24;
+  opacity: 1;
   cursor: pointer;
+}
+
+
+
+body.guide .decision > * {
+  background-color: #cc0000 !important; /* red */
+}
+
+body.profiles .decision > * {
+  background-color: #e0902d !important; /* orange */
+}
+
+body.apps .decision > * {
+  background-color: #3daf49 !important; /* green */
+}
+
+body.data .decision > * {
+  background-color: #1abbee !important; /* blue */
+}
+
+body.ask .decision > * {
+  background-color: #742777 !important; /* purple */
+}
+
+body.about .decision > * {
+  background-color: #d67ab0 !important; /* pink */
 }
 
 .submit {

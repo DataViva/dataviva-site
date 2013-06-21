@@ -96,10 +96,10 @@ function display(error, activities) {
           url = "/embed/" + d.app_id;
         }
         else if(d.activity_type == "questions"){
-          url = "/ask_sabrina/question/" + d.slug;
+          url = "/ask/question/" + d.slug;
         }
         else if(d.activity_type == "replies"){
-          url = "/ask_sabrina/question/" + d.question_id;
+          url = "/ask/question/" + d.question_id;
         }
         return url;
       })

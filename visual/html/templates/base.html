@@ -31,7 +31,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     
   </head>
-  <body>
+  <body{% if g.page_type %} class="{{g.page_type}}"{% endif %}>
     
     {% block content %}
     {% endblock %}

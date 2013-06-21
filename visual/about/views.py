@@ -8,6 +8,10 @@ from visual.utils import Pagination
 
 mod = Blueprint('about', __name__, url_prefix='/about')
 
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
+
 @mod.route('/')
 def about():
     return render_template("about/visual.html", page = "dataminas")

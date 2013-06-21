@@ -22,7 +22,7 @@
       load_selector("{{ category }}")
     }
     else {
-      d3.html("/explore/?ajax=true",function(content){
+      d3.html("/profiles/?ajax=true",function(content){
         visual.slide.load(content);
       })
     }

@@ -53,7 +53,7 @@ from visual.guide.views import mod as guide_module
 from visual.data.views import mod as data_module
 from visual.ask.views import mod as ask_module
 from visual.about.views import mod as about_module
-from visual.explore.views import mod as explore_module
+from visual.profiles.views import mod as profiles_module
 
 ''' Register these modules as blueprints '''
 app.register_blueprint(attrs_module)
@@ -68,4 +68,4 @@ app.register_blueprint(guide_module)
 app.register_blueprint(data_module)
 app.register_blueprint(ask_module)
 app.register_blueprint(about_module)
-app.register_blueprint(explore_module)
+app.register_blueprint(profiles_module)

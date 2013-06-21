@@ -8,7 +8,11 @@ from visual.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE
 from visual.ask.forms import AskForm, ReplyForm, SearchForm
 from visual.utils import Pagination, strip_html
 
-mod = Blueprint('ask', __name__, url_prefix='/ask_sabrina')
+mod = Blueprint('ask', __name__, url_prefix='/ask')
+
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
 
 RESULTS_PER_PAGE = 10
 

@@ -61,16 +61,42 @@
   letter-spacing: 1px;
   -webkit-transition: border-color linear .2s, color linear .2s;
      -moz-transition: border-color linear .2s, color linear .2s;
-       -o-transition: border-color linear .2s, color linear .2s;
           transition: border-color linear .2s, color linear .2s;
 }
 
+#header a.active,
 #header a:hover {
-  border-color: #cc0000;
+  color: #cc0000;
 }
 
-#header a.active {
-  color: #cc0000;
+body.guide #header a.active,
+#header a#guide:hover {
+  color: #cc0000 !important; /* red */
+}
+
+body.profiles #header a.active,
+#header a#profiles:hover {
+  color: #e0902d !important; /* orange */
+}
+
+body.apps #header a.active,
+#header a#apps:hover {
+  color: #3daf49 !important; /* green */
+}
+
+body.data #header a.active,
+#header a#data:hover {
+  color: #1abbee !important; /* blue */
+}
+
+body.ask #header a.active,
+#header a#ask:hover {
+  color: #742777 !important; /* purple */
+}
+
+body.about #header a.active,
+#header a#about:hover {
+  color: #d67ab0 !important; /* pink */
 }
 
 #language {

@@ -502,7 +502,7 @@ visual.breadcrumbs = function() {
   
   var path_array = window.location.pathname.split("/"),
       window_path = path_array.slice(1,path_array.length-1),
-      attr_lookup = ["guide","explore"].indexOf(window_path[0]) >= 0 ? true : false,
+      attr_lookup = ["guide","profiles"].indexOf(window_path[0]) >= 0 ? true : false,
       crumbs = [],
       waiting = [];
       

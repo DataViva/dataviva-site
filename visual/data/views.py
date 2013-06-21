@@ -18,6 +18,10 @@ import json
 
 mod = Blueprint('data', __name__, url_prefix='/data')
 
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
+
 def get_geo_location(ip):
     req = urllib2.Request("http://freegeoip.net/json/" + ip)
     opener = urllib2.build_opener()
