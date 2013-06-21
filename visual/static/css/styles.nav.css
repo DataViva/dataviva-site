@@ -26,13 +26,20 @@
   font-weight: normal;
 }
 
+#header_container {
+    width: 100%;
+    height: 56px;
+    -webkit-box-shadow:0px 3px 7px #dddddd;
+            box-shadow: 0px 3px 7px #dddddd;
+}
+
 #header {
   margin: 0 auto;
-  margin-top: 12px;
-  width: 800px;
-  padding: 0px 90px;
-  height: 28px;
-  font-size: 14px;
+  margin-top: 0px;
+  width: 870px;
+  padding: 8px 90px;
+  height: 40px;
+  font-size: 11px;
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -43,22 +50,22 @@
 }
 
 #header > a#logo {
-  background-image: url("/static/img/nav/logo.png");
+  background-image: url("/static/img/nav/visual.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: top center;
-  width: 189px;
-  height: 20px;
-  margin-right: 16px;
+  width: 153px;
+  height: 40px;
+  margin-right: 22px;
 }
 
 #header > a.link {
-  margin: 0px 13px;
+  margin: 0px 22px;
   border-bottom-width: 2px;
   border-color: white;
   border-style: solid;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  color: #cccccc;
+  font-weight: normal;
   -webkit-transition: border-color linear .2s, color linear .2s;
      -moz-transition: border-color linear .2s, color linear .2s;
        -o-transition: border-color linear .2s, color linear .2s;
@@ -74,20 +81,41 @@
 }
 
 #language {
-  position: absolute;
-  right: 92px;
-  top: 7px;
+  top: 16px;
 }
 
-#stroke {
-  background-image: url("/static/img/nav/stroke.png");
+.icon {
+  width: 35px;
+  height: 35px;
   background-repeat: no-repeat;
-  background-position: top center;
   background-size: 100% 100%;
-  height: 36px;
-  margin: 0px auto;
-  width: 950px;
-  position: relative;
+  background-position: top center;
+  margin-top: -4px;
+  margin-left: -2px;
+}
+
+#guide > .icon {
+  background-image: url("/static/img/nav/icons/guide.png");
+}
+
+#profiles > .icon {
+  background-image: url("/static/img/nav/icons/profiles.png");
+}
+
+#apps > .icon {
+  background-image: url("/static/img/nav/icons/apps.png");
+}
+
+#data > .icon {
+  background-image: url("/static/img/nav/icons/data.png");
+}
+
+#ask > .icon {
+  background-image: url("/static/img/nav/icons/ask.png");
+}
+
+#about > .icon {
+  background-image: url("/static/img/nav/icons/learn.png");
 }
 
 /***********************/
@@ -96,8 +124,8 @@
 
 #site_breadcrumbs {
   position: absolute;
-  top: 2px;
-  left: 74px;
+  top: 67px;
+  left: 274px;
 }
 
 #site_breadcrumbs > .site_crumb {
