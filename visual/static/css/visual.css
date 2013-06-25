@@ -123,13 +123,12 @@ table td.icon > div{
 }
 
 #container {
-  width: 90%;
-  margin: 68px 5% 48px 5%;
+  width: 980px;
+  margin: 68px 0px 38px 0px;
   position: relative;
-  min-width: 950px;
-  max-width: 950px;
   text-align: left;
   display: inline-block;
+  min-height: 574px;
   -webkit-transition: height 0.5s;
      -moz-transition: height 0.5s;
           transition: height 0.5s;
@@ -140,7 +139,7 @@ table td.icon > div{
   position: absolute;
   min-width: 950px;
   max-width: 950px;
-  top: 0px;
+  top: 6px;
   left: 150%;
   -webkit-transition-property: left;
      -moz-transition-property: left;
@@ -425,6 +424,7 @@ div.rec_value {
 /* Answer */
 #question h1 {
   margin-bottom: 8px;
+  margin-top: -32px;
 }
 
 .big {
@@ -469,19 +469,19 @@ div.rec_value {
 }
 
 #responses .vote_count {
-  margin-left: -7px;
+  margin-left: -5px;
   padding: 7px 9px;
   font-size: 10px;
 }
 
 #responses .vote_up {
-  margin-left: -60px;
+  margin-left: -62px;
   margin-top: -5px;
 }
 
 #responses ol > li {
-  margin: 10px 0 10px 32px;
-  padding: .5% 1%;
+  margin: 14px 0;
+  padding: 2px 5px 6px 5px;
   border-top: 5px solid #666;
   background-color: #f6f6f6;
   list-style:none;
@@ -500,8 +500,8 @@ div.rec_value {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  margin-right: 1%;
-  padding: .5%;
+  margin-right: 5px;
+  padding: 1px;
   position: absolute;
   text-align: center;
   width: 12px;
@@ -514,13 +514,13 @@ div.rec_value {
 .response {
   padding-left: 4%;
   margin-top: -5%;
+  font-size: 12px;
 }
 
 .answer.vote_count {
   background-color: #666;
   color: #ffffff;
   font-weight: bold;
-  
 }
 
 .flag {
@@ -851,7 +851,7 @@ p.reply {
   padding: 10px 8px 6px 30px!important;
   font-size: 15px;
   background-color: #cccccc;
-  color: #ffffff;
+  color: #333333;
   margin-bottom: 12px;
 }
 
@@ -1067,7 +1067,7 @@ a.login_button#Twitter {
   padding: 6px 1px 0px 6px;
   overflow-y: auto;
   text-align: left;
-  width: 100%;
+  width: 98.8%;
 }
 .tag-icon {
   background-size: 100% 100%;

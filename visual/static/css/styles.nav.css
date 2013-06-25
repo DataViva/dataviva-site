@@ -66,15 +66,8 @@
   padding-top: 34px;
   text-align: center;
   width: 94px;
-  -webkit-transition: color linear .2s, color linear .2s;
-     -moz-transition: color linear .2s, color linear .2s;
-          transition: color linear .2s, color linear .2s;
-  -webkit-transition: font-weight linear .2s, color linear .2s;
-     -moz-transition: font-weight linear .2s, color linear .2s;
-          transition: font-weight linear .2s, color linear .2s;
-  -webkit-transition: background-image linear .2s, color linear .2s;
-     -moz-transition: background-image .2s, color linear .2s;
-          transition: background-image linear .2s, color linear .2s;
+  -webkit-transition: color .2s, font-weight .2s, background-image .2s;
+          transition: color .2s, font-weight .2s, background-image .2s;
 }
 
 #header a#guide {
@@ -167,8 +160,8 @@
 
 #site_breadcrumbs {
   position: absolute;
-  top: 67px;
-  left: 296px;
+  top: -57px;
+  left: 88px;
 }
 
 #site_breadcrumbs > .site_crumb {
@@ -281,10 +274,10 @@
   overflow: auto; /* For clearing this container */
   text-align: center;
   width: 100%;
-  height: 30px;
+  height: 60px;
   color: #cccccc;
   font-size: 10px;
-  padding: 3% 0px;
+  margin-top: 50px;
   min-width: 950px;
 } 
 

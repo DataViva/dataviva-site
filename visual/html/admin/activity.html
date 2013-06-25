@@ -124,7 +124,12 @@ function display(error, activities) {
         
         // otherwise it's an ask sabrina question/reply
         else {
-          img_url += "ask_sabrina_tile.png";
+          if(d.activity_type == "questions"){
+            img_url += "question_tile.png";
+          }
+          else {
+            img_url += "reply_tile.png";
+          }
         }
         return img_url
       })

@@ -32,7 +32,6 @@
     
   </div>
 
-  <div id="site_breadcrumbs"></div>
 
   {% for category, msg in get_flashed_messages(with_categories=true) %}
   <div id="server_message">
@@ -42,7 +41,7 @@
   {% endfor %}
   <div id="outside_container">
     <div id="container">
-  
+      <div id="site_breadcrumbs"></div>
       {% block body %}
       {% endblock %}
 

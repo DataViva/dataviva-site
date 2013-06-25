@@ -44,12 +44,12 @@ input[type=text], textarea {
 }
 
 input[type=text]:focus, textarea:focus {
-  border-color: #cc0000;
+  border-color: #90278e;
   outline: 0;
   outline: thin dotted \9;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px rgba(204, 0, 0, .6);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px rgba(204, 0, 0, .6);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px rgba(204, 0, 0, .6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px #90278e;
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px #90278e;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px #90278e;
 }
 
 input[type=text].ask, textarea.ask, textarea.reply, input.link {
