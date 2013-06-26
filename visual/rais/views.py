@@ -172,6 +172,9 @@ def get_query(data_table, url_args, **kwargs):
     # raise Exception(page)
     return ret
 
+def get_recommended(data_table, url_args, **kwargs):
+    x =4
+
 ############################################################
 # ----------------------------------------------------------
 # 2 variable views
@@ -209,6 +212,10 @@ def rais_ybi(**kwargs):
                         "on": ('year', 'isic_id')
                     }
     return make_response(get_query(Ybi, request.args, **kwargs))
+
+@mod.route('/recommended/<bra_id>/<isic_id>/all/')
+def rais_ybi_recommended(**kwargs):
+    raise Exception(get_recommended(Ybi, request.args, **kwargs))
 
 @mod.route('/all/<bra_id>/all/<cbo_id>/')
 @mod.route('/<year>/<bra_id>/all/<cbo_id>/')
