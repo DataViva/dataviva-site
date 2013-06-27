@@ -175,7 +175,7 @@ table td.icon > div{
 }
 
 .hill_background {
-  background-image: url('/static/img/home/hills_background.png');
+  background-image: url('/static/img/backgrounds/hills_background.png');
   background-repeat: no-repeat;
   background-position: left top;
   background-size: 100% 100%;
@@ -184,7 +184,7 @@ table td.icon > div{
 }
 
 .lab_background {
-  background-image: url('/static/img/home/lab_background_blur.png');
+  background-image: url('/static/img/backgrounds/lab_background_blur.png');
   background-repeat: no-repeat;
   background-position: center top;
   background-size: 810px 530px;
@@ -192,7 +192,7 @@ table td.icon > div{
 }
 
 .road_background {
-  background-image: url('/static/img/home/road_background.png');
+  background-image: url('/static/img/backgrounds/road_background.png');
   background-repeat: no-repeat;
   background-position: center top;
   background-size: 100% 100%;
@@ -852,11 +852,12 @@ p.reply {
 }
 
 .feed-item {
-  width: 96%;
+  width: 95.8%;
   height: 20px;
   padding: 10px 8px 6px 30px!important;
   font-size: 15px;
-  background-color: #cccccc;
+  background-color: #ffffff;
+  border: #cccccc 2px solid;
   color: #333333;
   margin-bottom: 12px;
 }
