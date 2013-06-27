@@ -2,13 +2,14 @@
 import urllib2
 import json
 from datetime import datetime
+from collections import defaultdict
 from sqlalchemy import func
-from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify
+from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, url_for
 
 from visual import db
 from visual.data.forms import DownloadForm
 from visual.account.models import User, Starred
-from visual.attrs.models import Bra
+from visual.attrs.models import Bra, Isic, Hs, Cbo, Wld
 
 import json
 
@@ -17,18 +18,153 @@ mod = Blueprint('apps', __name__, url_prefix='/apps')
 @mod.before_request
 def before_request():
     g.page_type = mod.name
+
+def get_title(url):
     
-@mod.route('/embed/')
+    app, data_type, bra, f1, f2, output = url.split("/")
+    
+    bra = Bra.query.get_or_404(bra)
+    filters = []
+    if f1 != "all":
+        f1 = Isic.query.get_or_404(f1) if data_type == "rais" else Hs.query.get_or_404(f1)
+        filters.append(f1)
+    if f2 != "all":
+        f2 = Cbo.query.get_or_404(f2) if data_type == "rais" else Wld.query.get_or_404(f2)
+        filters.append(f2)
+    
+    if output == "hs": output_name = "Product"; output_name_pl = "Products"
+    if output == "isic": output_name = "Industry"; output_name_pl = "Industries"
+    if output == "cbo": output_name = "Occupation"; output_name_pl = "Occupations"
+    if output == "wld": output_name = "Country"; output_name_pl = "Countries"
+    if output == "bra": output_name = "Location"; output_name_pl = "Locations"
+    
+    if data_type == "rais": items = "Local Industries"
+    if data_type == "secex": items = "Product Exports"
+    
+    if g.locale == "en":
+        if app == "network":
+            return output_name + " Space for " + bra.name_en
+        elif app == "rings":
+            return "Connections for " + filters[0].name_en + " in " + bra.name_en
+        elif app == "bubbles":
+            return "Available and required employment for " + filters[0].name_en + " in " + bra.name_en;
+        else:
+            # var title = format_name(out+"_plural",lang)
+            title = output_name_pl
+            if output == "isic" or output == "cbo" or output == "bra":
+                title += " in "
+            if output == "hs" or output == "wld":
+                title += " of "
+            title += bra.name_en
+            if output == "bra" and len(filters) == 1:
+                title += " with " + items
+            
+            for i, f in enumerate(filters):
+                if i != 0:
+                    if f == "isic":
+                        article = "employed in" if output == "cbo" else "that have"
+                        title += " " + article + " the " + isic.name_en + " industry"
+                elif f == "cbo":
+                    article = "that" if i == 1 else "and"
+                    title += " " + article + " employ " + filter[0].name_en
+                elif f == "hs":
+                  trade = "import" if out == "wld" else "export"
+                  title += " that " + trade + " " + hs.name_en
+                elif f == "wld":
+                  title += " to " + wld.name_en
+                elif f == "bra2":
+                  title += " and " + bra2.name_en
+            
+            
+            return title
+    elif g.locale == "pt":
+        pass
+
+def get_urls(app=None, data_type=None, bra="mg", f1=None, f2=None, output=None):
+    
+    app = None if app == "all" else app
+    data_type = None if data_type == "all" else data_type
+    # Determine which data set we're looking at
+    rais = True if data_type == "rais" or data_type == None else None
+    secex = True if data_type == "secex" or data_type == None else None
+    # The dictionary we'll return indexed by app_type and data_type
+    apps = defaultdict(lambda: defaultdict(list))
+    defaults = {"cbo":"1210", "hs":"178703", "isic":"c1410", "wld":"aschn", "bra":"mg"}
+    
+    potential_apps = {
+        "network": {
+            "rais": ["all/all/isic", "all/all/cbo"],
+            "secex": ["all/all/hs"]
+        },
+        "rings": {
+            "rais": ["{isic}/all/isic", "all/{cbo}/cbo"],
+            "secex": ["{hs}/all/hs"]
+        },
+        "bubbles": {
+            "rais": ["{isic}/all/isic"],
+        },
+        "pie_scatter": {
+            "rais": ["all/all/isic", "all/{cbo}/isic"],
+            "secex": ["all/all/hs", "all/{wld}/hs"]
+        },
+        "stacked": {
+            "rais": ["all/all/isic", "all/{cbo}/isic", 
+                        "all/all/cbo", "{isic}/all/cbo",
+                        "all/all/bra", "{isic}/all/bra", "all/{cbo}/bra",
+                        "{isic}/{cbo}/bra"],
+            "secex": ["all/all/hs", "all/{wld}/hs",
+                        "all/all/wld", "{hs}/all/wld",
+                        "all/all/bra", "{hs}/all/bra", "all/{wld}/bra",
+                        "{hs}/{wld}/bra"]
+        },
+        "tree_map": {
+            "rais": ["all/all/isic", "all/{cbo}/isic", 
+                        "all/all/cbo", "{isic}/all/cbo",
+                        "all/all/bra", "{isic}/all/bra", "all/{cbo}/bra",
+                        "{isic}/{cbo}/bra"],
+            "secex": ["all/all/hs", "all/{wld}/hs",
+                        "all/all/wld", "{hs}/all/wld",
+                        "all/all/bra", "{hs}/all/bra", "all/{wld}/bra",
+                        "{hs}/{wld}/bra"]
+        },
+        "geo_map": {
+            "rais": ["all/all/bra", "{isic}/all/bra", "all/{cbo}/bra",
+                        "{isic}/{cbo}/bra"],
+            "secex": ["all/all/bra", "{hs}/all/bra", "all/{wld}/bra",
+                        "{hs}/{wld}/bra"]
+        },
+    }
+    
+    for app_type in potential_apps.keys():
+        
+        # check if user specified app_type
+        if not app or app == app_type:
+            
+            # go through each data_type
+            for dt in potential_apps[app_type].keys():
+                
+                # if the user DID specify a data_type and it's not this one, skip
+                if not data_type or dt == data_type:
+                    
+                    # go through each potential app
+                    for pa in potential_apps[app_type][dt]:
+                        this_output = pa.split("/")[-1]
+                        isic = f1 if data_type == "rais" and f1 else defaults["isic"]
+                        cbo = f2 if data_type == "rais" and f2 else defaults["cbo"]
+                        hs = f1 if data_type == "secex" and f1 else defaults["hs"]
+                        wld = f2 if data_type == "secex" and f2 else defaults["wld"]
+                        pa = pa.format(isic=isic, cbo=cbo, hs=hs, wld=wld)
+                        
+                        if not output or this_output == output:
+                            url = "/".join([app_type, dt, bra]) + "/" + pa
+                            # raise Exception(get_title(url))
+                            apps[app_type][dt].append({"title": get_title(url), "url": url})
+    
+    return apps
+
+@mod.route('/embed/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
 @mod.route('/embed/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/')
 def embed(app_name=None,data_type=None,bra_id=None,filter1=None,filter2=None,output=None):
-
-    if app_name == None:
-      app_name = "tree_map"
-      data_type = "rais"
-      bra_id = "mg"
-      filter1 = "all"
-      filter2 = "all"
-      output = "cbo"
     
     # init variables
     global_vars = {x[0]:x[1] for x in request.args.items()}
@@ -77,6 +213,10 @@ def app_star(app_name, data_type, bra_id, filter1, filter2, output):
         return jsonify({"success": -1})
     else:
         return jsonify({"success": 1})
+
+@mod.route('/recommend/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
+def recommend(app_name, data_type, bra_id, filter1, filter2, output):    
+    return jsonify(get_urls(app=app_name, data_type=data_type, bra=bra_id, f1=filter1, f2=filter2, output=output))
 
 def get_geo_location(ip):
     req = urllib2.Request("http://freegeoip.net/json/" + ip)
