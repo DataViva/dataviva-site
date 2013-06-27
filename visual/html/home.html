@@ -1,7 +1,7 @@
 {% extends "templates/site.html" %}
 
 {% block body %}
-<div class="home_background">
+<div class="hill_background">
   <div id="sabrina" class="grid5col1 grid5offset1">
   </div>
   <div class="grid5col2">
@@ -10,14 +10,14 @@
       <div class="text">
         <h2>Welcome!</h2>
         <p>
-          My name is Sabrina, and I will help guide you in learning more about the economy of Minas Gerais.
+          My name is Sabrina, and I will be your guide throughout the site.
         </p>
       </div>
     </div>
     <a href="{{ url_for('guide.guide') }}" >
       <div class="decision">
         <div class="text">
-          <h2>Guide</h2>
+          <h2><img src="/static/img/nav/icons/guide_white.png" width="28px" height="28px"> Guide</h2>
           <p>
             Generate a report based on what you are looking for.
           </p>
@@ -28,7 +28,7 @@
     <a href="{{ url_for('apps.guide') }}" >
       <div class="decision">
         <div class="text">
-          <h2>Apps</h2>
+          <h2><img src="/static/img/nav/icons/apps_white.png" width="28px" height="28px"> Apps</h2>
           <p>
             Go straight for the visualizations.
           </p>
