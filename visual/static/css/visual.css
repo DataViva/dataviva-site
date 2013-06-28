@@ -1052,9 +1052,14 @@ a.login_button#Twitter {
   background-image: url('../img/docs/worker_tip.png');
 }
 
-.data-dropdown {
+#attr_toggle {
   float: left !important;
-  margin: 0% 2% 1.5% 0;
+  margin: 1% 2% 1.5% 0;
+}
+
+.data-dropdown {
+  margin-top: 1%;
+  float: left;
 }
 
 /********************/

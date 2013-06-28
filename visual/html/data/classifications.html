@@ -4,68 +4,66 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block body %}
-<div id="docs-body">
-
-  <div class="grid5col5">
+<div class="grid5col5">
+  
+  
+  
+  <h1>{{ title }}</h1>
+  
+  <div id="attr_toggle">
+    <input type="radio" name="attr" value="hs" onclick="window.location='{{ url_for('data.classifications', attr='hs', category=category) }}all/'" {% if page_attr == "hs" %}checked{% endif %}>
+    <label for="hs">Products</label>
     
-    <div id="attr_toggle">
-      <input type="radio" name="attr" value="hs" onclick="window.location='{{ url_for('data.classifications', attr='hs', category=category) }}all/'" {% if page_attr == "hs" %}checked{% endif %}>
-      <label for="hs">Products</label>
-      
-      <input type="radio" name="attr" value="cbo" onclick="window.location='{{ url_for('data.classifications', attr='cbo', category=category) }}all/'" {% if page_attr == "cbo" %}checked{% endif %}>
-      <label for="cbo">Occupations</label>
-      
-      <input type="radio" name="attr" value="isic" onclick="window.location='{{ url_for('data.classifications', attr='isic', category=category) }}all/'" {% if page_attr == "isic" %}checked{% endif %}>
-      <label for="isic">Industries</label>
-      
-      <input type="radio" name="attr" value="bra" onclick="window.location='{{ url_for('data.classifications', attr='bra', category=category) }}all/'" {% if page_attr == "bra" %}checked{% endif %}>
-      <label for="bra">Brazilian Locations</label>
-      
-      <input type="radio" name="attr" value="wld" onclick="window.location='{{ url_for('data.classifications', attr='wld', category=category) }}all/'" {% if page_attr == "wld" %}checked{% endif %}>
-      <label for="wld">Countries</label>
-    </div>
+    <input type="radio" name="attr" value="cbo" onclick="window.location='{{ url_for('data.classifications', attr='cbo', category=category) }}all/'" {% if page_attr == "cbo" %}checked{% endif %}>
+    <label for="cbo">Occupations</label>
     
-    <h1>{{ title }}</h1>
+    <input type="radio" name="attr" value="isic" onclick="window.location='{{ url_for('data.classifications', attr='isic', category=category) }}all/'" {% if page_attr == "isic" %}checked{% endif %}>
+    <label for="isic">Industries</label>
     
-    <div class="data-dropdown">
-      <select id="category" onchange="update_depth(this.options[this.selectedIndex].value);">
-        <option value="all">All</option>
-        {% for cat_digit, cat_name in category_lookup.iteritems() %}
-        <option value="{{ cat_name }}" {% if cat_name == category %}selected="selected"{% endif %}>{{ cat_name }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>ID</th>
-          <th>Category</th>
-          <th>Name (English)</th>
-          <th>Name (Portuguese)</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for attr in attrs %}
-        <tr>
-          <td class="icon">
-            <div style="background-color: {{ attr.color }}" title="{{ attr.id }}"></div>
-          </td>
-          <td>{{ attr.id }}</td>
-          <td><script>document.write(format_name("{{ page_attr }}_{{ attr.id|length }}", "{{ g.locale }}"))</script></td>
-          <td>{{ attr.name_en }}</td>
-          <td>{{ attr.name_pt }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <input type="radio" name="attr" value="bra" onclick="window.location='{{ url_for('data.classifications', attr='bra', category=category) }}all/'" {% if page_attr == "bra" %}checked{% endif %}>
+    <label for="bra">Brazilian Locations</label>
     
-    <div class="loading">Loading; one moment please…</div>
-    
+    <input type="radio" name="attr" value="wld" onclick="window.location='{{ url_for('data.classifications', attr='wld', category=category) }}all/'" {% if page_attr == "wld" %}checked{% endif %}>
+    <label for="wld">Countries</label>
+  </div>
+  
+  <div class="data-dropdown">
+    <select id="category" onchange="update_depth(this.options[this.selectedIndex].value);">
+      <option value="all">All</option>
+      {% for cat_digit, cat_name in category_lookup.iteritems() %}
+      <option value="{{ cat_name }}" {% if cat_name == category %}selected="selected"{% endif %}>{{ cat_name }}</option>
+      {% endfor %}
+    </select>
   </div>
 
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>ID</th>
+        <th>Category</th>
+        <th>Name (English)</th>
+        <th>Name (Portuguese)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for attr in attrs %}
+      <tr>
+        <td class="icon">
+          <div style="background-color: {{ attr.color }}" title="{{ attr.id }}"></div>
+        </td>
+        <td>{{ attr.id }}</td>
+        <td><script>document.write(format_name("{{ page_attr }}_{{ attr.id|length }}", "{{ g.locale }}"))</script></td>
+        <td>{{ attr.name_en }}</td>
+        <td>{{ attr.name_pt }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  <div class="loading">Loading; one moment please…</div>
+  
 </div>
-
 
 <script>
 // dropdown for changing number of items per page
