@@ -4,7 +4,7 @@ body {
   width: auto;
   height: auto;
   overflow: hidden;
-  background-color: #ffffff !important;
+  background-color: #fafafa !important;
   background-color: white;
   position: relative;
 }
@@ -44,8 +44,11 @@ iframe {
 
 #app {
   margin: 0px 5px;
-  background-color: #ffffff;
-  position: relative;
+  background-color: #fafafa;
+  position: absolute;
+  -webkit-transition: top 0.6s;
+     -moz-transition: top 0.6s;
+          transition: top 0.6s;
 }
 
 /******************/
@@ -61,10 +64,9 @@ div#loading {
   z-index: 10000;
   background-color: white;
   opacity: 1;
-  -webkit-transition: opacity 0.25s ease-in-out;
-     -moz-transition: opacity 0.25s ease-in-out;
-       -o-transition: opacity 0.25s ease-in-out;
-          transition: opacity 0.25s ease-in-out;
+  -webkit-transition: opacity 0.6s;
+     -moz-transition: opacity 0.6s;
+          transition: opacity 0.6s;
 }
 
 div#loading > i {
@@ -80,41 +82,62 @@ div#loading > i {
 /* Top Controls */
 /****************/
 
+div#toggles,
 div#settings,
 div#builder {
   top: 0px;
 }
 
-div#settings .button_label,
-div#builder .button_label {
-  display: block;
-}
-
 div#settings { 
   position: absolute; 
   right: 5px;
-  text-align: right;
   top: 0px;
   z-index: 5000;
 }
 
-div.build_section a.button {
+div#toggles { 
+  position: absolute; 
+  left: 5px;
+  top: 0px;
+  z-index: 5000;
+}
+
+div#settings > .leon.button.square {
+  margin: 6px 0px 6px 3px;
+}
+
+div#toggles > .leon.button.square {
+  margin: 6px 3px 6px 0px;
+}
+
+div#builder {
+  position: absolute;
+  text-align: center;
+  -webkit-transition: top 0.6s;
+     -moz-transition: top 0.6s;
+          transition: top 0.6s;
+  width: 100%;
+  -webkit-user-select: none;
+}
+
+div#builder > div#output_select,
+div#builder > div#app_controls {
+  margin-top: -6px;
+}
+
+div.filter_button {
+  display: inline-block;
+  margin: 6px 6px 6px 0px;
+}
+
+div.filter_button div.button {
+  margin: 0px;
   text-align: left;
 }
 
-#builder .build_section {
-  display: inline-block;
-  border-left: 1px solid #ddd;
-  padding-left: 5px;
-}
-
-#builder #apps {
-  border-left: 0px;
-}
-
-#settings #settings_toggles {
-  float: right;
-  border-left: 0px;
+.leon.button > i.icon-list-alt {
+  margin-left: 2px;
+  opacity: 0.5;
 }
 
 #settings > #starred > #status_-1 {
@@ -134,22 +157,18 @@ div.build_section a.button {
 /*******************/
 
 div#ui_bottom {
-  margin: 5px;
+  padding: 5px 0px;
   display: block;
   position: absolute;
-  bottom: -300px;
+  bottom: 0px;
   width: 100%;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #fafafa;
   z-index: 500;
-  -webkit-user-select: none;
-  -webkit-transition: bottom 0.25s ease-in-out;
-     -moz-transition: bottom 0.25s ease-in-out;
-          transition: bottom 0.25s ease-in-out;
 }
 
 .ui_group {
   display: inline-block;
-  padding: 0px 5px;
-  margin-top: 5px;
+/*  padding: 0px 5px;*/
+/*  margin-top: 5px;*/
 }

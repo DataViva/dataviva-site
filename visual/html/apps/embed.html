@@ -4,7 +4,6 @@
 {% block head %}
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/app_builder.css" />
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.slider.css" />
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.key.css" />
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
   
@@ -22,43 +21,39 @@
 
   <div id="builder">
 
-    <div id="apps" class="build_section">
-      <div class="button_label">App</div>
-      <select id="app_select" 
-        onchange="select_app(this.options[this.selectedIndex].id)">
-      </select>
-    </div>
+    <label for="app_select">App</label>
+    <select id="app_select" 
+      onchange="select_app(this.options[this.selectedIndex].id)">
+    </select>
 
-    <div class="build_section">
-      <div class="button_label">Location</div>
-      <a id="bra_select" class="button" onclick="show_selector(this.id)">
-        <span class="list_icon"></span>
+    <div id="bra_select" class="filter_button">
+      <div class="leon label">Location</div>
+      <div id="bra_select" class="leon button" onclick="show_selector(this.id)">
+        <div class="leon icon"></div>
         <span class="list_text"></span>
-      </a>
+        <i class="icon-list-alt"></i>
+      </div>
     </div>
 
-    <div class="build_section" id="filter_section">
-      <div class="button_label">Filters</div>
-    </div>
+    <div id="output_select"></div>
+    
+    <div id="app_controls"></div>
+  
+  </div>
 
-    <div class="build_section">
-      <div class="button_label">Output</div>
-      <select id="output_select" 
-        onchange="select_output(this.options[this.selectedIndex].id)">
-      </select>
-    </div>
+  <div id="toggles">
+
+    <a id="controls_toggle" class="leon button square" onclick="toggle_controls()"><i class="icon-cogs"></i></a>
+    <a id="refresh" class="leon button square" onclick="start_app()" onmouseover="visual.ui.tooltip(this.id)" onmouseout="visual.ui.tooltip(this.id,true)"><i class="icon-refresh"></i></a>
   
   </div>
 
   <div id="settings">
 
-    <div class="button_label">Settings</div>
-    <a id="refresh" class="button square" onclick="start_app()" onmouseover="visual.ui.tooltip(this.id)" onmouseout="visual.ui.tooltip(this.id,true)"><i class="icon-refresh"></i></a>
-    <a id="starred" class="button square" onclick="toggle_star()"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
-    <a id="help_select" class="button square" onclick="show_selector(this.id)"><i class="icon-question-sign"></i></a>
-    <a id="file_select" class="button square" onclick="show_selector(this.id)"><i class="icon-save"></i></a>
-    <a id="full_screen" class="button square" onclick="window.open(window.location.href,'_blank')"><i class="icon-fullscreen"></i></a>
-    <a id="controls_toggle" class="button square" onclick="toggle_controls()"><i class="icon-cogs"></i></a>
+    <a id="file_select" class="leon button square" onclick="show_selector(this.id)"><i class="icon-save"></i></a>
+    <a id="starred" class="leon button square" onclick="toggle_star()"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
+    <a id="help_select" class="leon button square" onclick="show_selector(this.id)"><i class="icon-question-sign"></i></a>
+    <a id="full_screen" class="leon button square" onclick="window.open(window.location.href,'_blank')"><i class="icon-fullscreen"></i></a>
   
   </div>
 
@@ -77,7 +72,6 @@
 
   <script src="/static/js/libs/d3.geo.tile.js"></script>
   <script src="/static/js/libs/topojson.js"></script>
-  <script src="/static/js/utils/utils.slider.js"></script>
   <script src="/static/js/utils/utils.key.js"></script>
   <script src="/static/js/utils/utils.selector.js"></script>
   
@@ -355,6 +349,7 @@
       .tooltip_info(tooltip_info)
       .text_format(text_formatting)
       .number_format(number_formatting)
+      .background("#fafafa")
     
     var bras = "{{ bra_id }}".split(combo_seperator)
     var bra_id = bras[0].split(distance_seperator)
@@ -396,8 +391,7 @@
       
     function load_filters() {
       
-      if (global_vars.builder != "false") var fs = ["bra","bra2","wld","hs","isic","cbo"]
-      else var fs = current_build.concat(["bra"])
+      var fs = ["bra","bra2","wld","hs","isic","cbo"]
       
       var loaded_filters = []
       fs.forEach(function(f,i){
@@ -409,12 +403,18 @@
           
           var type = f == "bra2" ? "bra" : f
           
+          var id = window[f].id
+          
+          if (type == "bra" && window[f].id == "all") {
+            type = "wld", id = "sabra"
+          }
+          
           var url = attr_url_id
             .replace("filter",type)
-            .replace("id",window[f].id)
+            .replace("id",id)
         
           d3.json(url,function(temp_attr){
-            console.log(url,temp_attr)
+            
             var obj = temp_attr.data[0]
             obj.icon = visual.icon(obj.id,type)
             window[f] = obj
@@ -430,16 +430,8 @@
       function finish_load(filter) {
         loaded_filters.push(filter)
         if (loaded_filters.length == fs.length) {
-          if (global_vars.builder != "false") {
-            populate_apps();
-            populate_outputs();
-          }
-          else {
-            d3.select("#builder").style("display","none")
-            d3.select("#settings .button_label").style("display","none")
-            resize_page();
-            start_app();
-          }
+          populate_apps();
+          populate_outputs();
         }
       }
       
@@ -477,27 +469,23 @@
     
     // Populates the app_select dropdown and creates help popovers
     function populate_apps() {
-
+      
       for (var app in apps) {
       
         var option = d3.select("select#app_select").append("option")
           .attr("id",app)
+          .attr("value",app)
+          .attr("color",apps[app].color)
+          .attr("icon","url("+visual.icon(app,"app")+")")
+          .html(format_name(app, lang))
           
         if (app_name == app) {
           option.attr("selected","selected")
         }
       
-        option.append("span")
-          .attr("class","list_icon")
-          .style("background-color",apps[app].color)
-          .style("background-image","url("+visual.icon(app,"app")+")")
-        option.append("span")
-          .attr("class","list_text")
-          .text(format_name(app, lang))
-      
       }
       
-      visual.dropdown("#app_select");
+      leon.start("#app_select");
       
     }
     
@@ -540,8 +528,16 @@
     // Populates the output_select dropdown
     function populate_outputs() {
     
-      d3.select("#output_select").selectAll("option").remove()
-      d3.select("#output_select_dropdown").remove()
+      var parent = d3.select("#output_select")
+      parent.selectAll("*").remove()
+      
+      parent.append("label")
+        .attr("for","output_selector")
+        .html("Output")
+      
+      var select = parent.append("select")
+        .attr("id","output_selector")
+        .attr("onchange","select_output(this.options[this.selectedIndex].id)")
       
       var present = false;
     
@@ -549,7 +545,7 @@
       
         apps[app_name].outputs[dt].forEach(function(o){
           if (o.join("-") == current_build.join("-")) present = true;
-          d3.select("select#output_select").append("option")
+          select.append("option")
             .attr("id",dt+"_"+o.join("-"))
             .text(app_title(o,dt))
         
@@ -566,9 +562,9 @@
       d3.select("option#"+data_type+"_"+current_build.join("-"))
         .attr("selected","selected")
         
-      visual.dropdown("#output_select");
+      leon.start("#output_selector")
       
-      select_output(data_type+"_"+current_build.join("-"));
+      select_output(data_type+"_"+current_build.join("-"))
     
     }
     
@@ -736,13 +732,13 @@
       if (cat == "bra" && !obj.distance) obj.distance = 0
 
       if (!obj.icon) obj.icon = visual.icon(obj.id,cat)
-
-      d3.select("#"+type+"_select .list_icon")
+      
+      d3.select("#"+type+"_select .icon")
        .style("background-image","url("+obj.icon+")")
        .style("background-color","transparent")
 
       if (["wld","bra"].indexOf(cat) < 0) {
-        d3.select("#"+type+"_select .list_icon")
+        d3.select("#"+type+"_select .icon")
          .style("background-color",obj.color)
       }
 
@@ -768,11 +764,12 @@
 
     function create_radios(obj) {
       
-      var div = d3.select("#ui_bottom").append("div")
+      var div = d3.select("#app_controls").append("div")
         .attr("class","ui_group")
         .attr("id",obj.title)
     
       div.append("legend")
+        .attr("id",obj.title)
         .html(format_name(obj.title,lang))
         
       obj.data.forEach(function(v,i){
@@ -781,7 +778,9 @@
           .attr("type","radio")
           .attr("name",obj.title)
           .attr("value",v)
+          .attr("id",v)
           .attr("onclick",obj.callback+"(this.value)")
+          
         div.append("label")
           .attr("for",v)
           .text(format_name(v,lang))
@@ -791,8 +790,8 @@
         }
         
       })
-      
-      visual.toggle(obj.title);
+
+      leon.start("$"+obj.title)
       
     }
     
@@ -870,8 +869,8 @@
       
       loading(true);
                           
-      d3.selectAll("#ui_bottom div").remove();
-      d3.selectAll("#ui_bottom br").remove();
+      d3.select("#ui_bottom").selectAll("*").remove();
+      d3.select("#app_controls").selectAll("*").remove();
       vizwhiz.tooltip.remove();
       
       if (app_name == "rings" && window[current_build[0]].id.length == depths[current_build[0]][0]) {
@@ -1102,16 +1101,24 @@
             global_vars.year = closest;
           }
           
-          var timeline = Slider()
-            .callback("change_year")
-            .initial_value(global_vars.year)
+          var year = d3.select("#ui_bottom").append("div")
+            .attr("id","year_slider")
           
-          d3.select("#ui_bottom").append("div")
-            .attr("class","slider")
-            .datum(years)
-            .call(timeline)
+          year.append("input")
+            .attr("type","range")
+            .attr("onchange","change_year(this.value)")
+            .attr("id","year")
+            .attr("name","year")
+            .attr("min",years[0]+"")
+            .attr("max",years[years.length-1]+"")
+            .attr("value",global_vars.year+"")
+            .attr("step","1")
           
-          d3.select("#ui_bottom").append("br")
+          year.append("label")
+            .attr("for","year")
+            .html(format_name("year",lang))
+            
+          leon.start("#year")
           
         }
         else {
@@ -1752,6 +1759,7 @@
       height = window.innerHeight;
       
       d3.select("body").style("height",height+"px");
+      
       var children = d3.select("#ui_bottom").node().childNodes,
           min_width = 0;
           
@@ -1764,30 +1772,43 @@
         global_vars.controls = "false";
         d3.select("#ui_bottom").style("display","none")
         d3.select("#settings").style("display","none")
-        if (global_vars.builder != "false") d3.select("#builder").style("display","none")
+        d3.select("#toggles").style("display","none")
+        d3.select("#builder").style("display","none")
       }
       else {
         d3.select("#ui_bottom").style("display","block")
         d3.select("#settings").style("display","block")
-        if (global_vars.builder != "false") d3.select("#builder").style("display","block")
+        d3.select("#toggles").style("display","block")
+        d3.select("#builder").style("display","block")
       }
 
-      d3.select("#ui_bottom").style("bottom",function(d){
+      d3.select("#builder").style("top",function(d){
         if (global_vars.controls != "false") var u = 0
         else var u = 1
         return "-"+((this.offsetHeight+5)*u)+"px"
       })
       
-      if (global_vars.controls == "false") var y_offset = 0;
-      else var y_offset = d3.select("#ui_bottom").node().offsetHeight+5;
+      if (global_vars.controls == "true") {
+        console.log("here")
+        d3.select("#controls_toggle").attr("class","leon button square active")
+      }
+      else {
+        d3.select("#controls_toggle").attr("class","leon button square")
+      }
 
-      app_height = height-5-y_offset;
-      if (global_vars.builder != "false") app_height -= d3.select("#builder").node().offsetHeight
+      app_height = height;
+      app_height -= d3.select("#ui_bottom").node().offsetHeight
+      if (global_vars.controls != "false") app_height -= d3.select("#builder").node().offsetHeight
       app_width = width-10;
 
       d3.select("#app")
         .style("height",app_height+"px")
         .style("width",app_width+"px")
+        .style("top",function(d){
+        if (global_vars.controls != "false") var u = 1
+        else var u = 0
+        return ((d3.select("#builder").node().offsetHeight)*u)+"px"
+      })
       
     }
     

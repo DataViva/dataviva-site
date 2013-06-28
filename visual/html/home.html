@@ -1,54 +1,96 @@
 {% extends "templates/site.html" %}
 
 {% block body %}
+  <!--
 <div class="home_background">
   <div id="sabrina" class="grid5col1 grid5offset1">
   </div>
-  <div class="grid5col2">
-    <div class="question">
-      <div class="arrow"></div>
+</div>
+    -->
+    <div class="home_fullscreen"></div>
+
+<div class="grid5col2">
+    <div class="home_sabrina"></div>
+</div>
+<div class="grid5col2">
+  <div class="question">
+    <div class="arrow"></div>
+    <div class="text">
+      <h2>Welcome!</h2>
+      <p>
+        My name is Sabrina, and I will help guide you in learning more about the economy of Minas Gerais.
+      </p>
+    </div>
+  </div>
+  <a href="{{ url_for('guide.guide') }}" >
+    <div class="decision">
       <div class="text">
-        <h2>Welcome!</h2>
+        <h2>Guide</h2>
         <p>
-          My name is Sabrina, and I will help guide you in learning more about the economy of Minas Gerais.
+          Generate a report based on what you are looking for.
         </p>
       </div>
+      <div class="arrow"></div>
     </div>
-    <a href="{{ url_for('guide.guide') }}" >
-      <div class="decision">
-        <div class="text">
-          <h2>Guide</h2>
-          <p>
-            Generate a report based on what you are looking for.
-          </p>
-        </div>
-        <div class="arrow"></div>
+  </a>
+  <a href="{{ url_for('apps.guide') }}" >
+    <div class="decision">
+      <div class="text">
+        <h2>Apps</h2>
+        <p>
+          Go straight for the visualizations.
+        </p>
       </div>
-    </a>
-    <a href="{{ url_for('apps.guide') }}" >
-      <div class="decision">
-        <div class="text">
-          <h2>Apps</h2>
-          <p>
-            Go straight for the visualizations.
-          </p>
-        </div>
-        <div class="arrow"></div>
-      </div>
-    </a>
-  </div>
+      <div class="arrow"></div>
+    </div>
+  </a>
 </div>
 {% endblock %}
 
 {% block js %}
 
   <script>
+  
+    // d3.select("#footer")
+    //   .style("min-height",function(){
+    //     var h = this.offsetHeight
+    //     h -= parseFloat(d3.select(this).style("padding"))*2
+    //     return h+"px"
+    //   })
+  
+    resizebg = function() {
+      
+      // d3.select("#footer")
+      //   .style("height",function(){
+      //     var h = window.innerHeight - this.offsetTop
+      //     h -= parseFloat(d3.select(this).style("padding"))*2
+      //     return h + "px"
+      //   })
+      
+      var w = window.innerWidth, 
+          h = window.innerHeight,
+          aspect = w/h
+          
+      if (aspect > 1.5) {
+        d3.select(".home_fullscreen")
+        .style("background-size",w+"px "+(w/1.5)+"px")
+      }
+      else {
+        d3.select(".home_fullscreen")
+        .style("background-size",(h*1.5)+"px "+h+"px")
+      }
+    }
+    
+    window.onresize = function() {
+      resizebg()
+    }
 
-    visual.sabrina({
-      "div": d3.select("#sabrina"),
-      "outfit": "casual",
-      "emotion": "smile"
-    })
+    resizebg()
+    // visual.sabrina({
+//       "div": d3.select("#sabrina"),
+//       "outfit": "casual",
+//       "emotion": "smile"
+//     })
     
   </script>
 

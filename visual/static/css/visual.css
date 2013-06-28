@@ -117,21 +117,13 @@ table td.icon > div{
   opacity: 1;
 }
 
-#outside_container {
-  width: 100%;
-  text-align: center;
-}
-
 #container {
+  left: 50%;
+  margin-left: -490px;
   width: 980px;
-  margin: 68px 0px 38px 0px;
   position: relative;
   text-align: left;
   display: inline-block;
-  min-height: 574px;
-  -webkit-transition: height 0.5s;
-     -moz-transition: height 0.5s;
-          transition: height 0.5s;
 }
 
 #slide_container {
@@ -183,6 +175,29 @@ table td.icon > div{
   padding-bottom: 5%;
 }
 
+.home_fullscreen {
+  background-image: url('/static/img/home/home.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: -1;
+}
+
+.home_sabrina {
+  background-image: url('/static/img/home/sabrina.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  float: right;
+  height: 556px;
+  width: 280.5px;
+}
+
 .lab_background {
   background-image: url('/static/img/home/lab_background_blur.png');
   background-repeat: no-repeat;
@@ -194,23 +209,6 @@ table td.icon > div{
 
 .tall_background {
   padding-bottom: 8%;
-}
-
-.list_icon {
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 12px;
-  height: 12px;
-  background-size: 100% 100%;
-  display: inline-block;
-}
-
-#app_select_dropdown .list_icon, #filter_section .list_icon {
-  margin-right: 3px;
-}
-
-.list_text {
-  display: inline-block;
 }
 
 /*****************/
@@ -247,7 +245,7 @@ div.secondary_app {
 
 div.guide_app_description {
   font-size: 14px;
-  margin-bottom: 3%;
+  margin: 10px 0px 5px 0px;
 }
 
 div.guide_app_description > span {
@@ -927,8 +925,9 @@ a.login_button {
   background-repeat: no-repeat;
   background-size: 95% 95%;
   display: inline-block;
-  height: 64px;
-  width: 64px;
+  height: 50px;
+  margin: 12px;
+  width: 50px;
   -webkit-transition: background-size 0.1s;
      -moz-transition: background-size 0.1s;
        -o-transition: background-size 0.1s;

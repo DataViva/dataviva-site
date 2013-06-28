@@ -574,52 +574,29 @@ visual.breadcrumbs = function() {
   function create_breadcrumb() {
 
     var breadcrumbs = d3.select("#site_breadcrumbs")
-    breadcrumbs.selectAll("*").remove();
+    breadcrumbs.html("")
   
     crumbs.forEach(function(c,i){
-    
-      var crumb = breadcrumbs.append("div")
-        .attr("id","crumb_"+c.id)
-        .attr("class","site_crumb")
-        .attr("name",c.name)
-      
-      if (i == 0 && crumbs.length == 1) {
-        crumb.append("div").attr("class","site_crumb_back_red")
-      }
-      else if (i == 0) {
-        crumb.append("div").attr("class","site_crumb_back_brown")
-      }
-      else if (i == crumbs.length-1) {
-        crumb.append("div").attr("class","site_crumb_tail_red")
-      }
-      else {
-        crumb.append("div").attr("class","site_crumb_tail_brown")
-      }
-    
+
       if (i == crumbs.length-1) {
-        crumb.append("div").attr("class","site_crumb_body_red")
-          .html(c.text.truncate(25))
-        crumb.append("div").attr("class","site_crumb_arrow_red")
+        breadcrumbs.append("span")
+          .attr("class","site_crumb")
+          .html(c.text)
+          
       }
       else {
-        crumb.append("div").attr("class","site_crumb_body_brown")
-          .html(c.text.truncate(25))
-        crumb.append("div").attr("class","site_crumb_arrow_brown")
-      
-        crumb
-          .style("cursor","pointer")
-          .on(vizwhiz.evt.click,function(){
-            var name = d3.select(this).attr("name")
-            if (window["breadcrumb_click"]) window["breadcrumb_click"](name)
-            if (window["load_page"]) {
-              current_path = window_path.slice(1,i+1)
-              load_page(true);
-            }
-            else {
-              var new_path = window_path.slice(0,i+1)
-              window.location = "/"+new_path.join("/")+"/";
-            }
-          })
+        
+        var new_path = window_path.slice(0,i+1)
+        new_path = "/"+new_path.join("/")+"/";
+        breadcrumbs.append("a")
+          .attr("class","site_crumb")
+          .attr("href",new_path)
+          .html(c.text)
+          
+        breadcrumbs.append("span")
+          .attr("class","site_crumb_divider")
+          .html("/")
+          
       }
     
     })
