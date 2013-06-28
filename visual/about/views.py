@@ -83,6 +83,10 @@ def sabrina():
 @mod.route('/minas/')
 def minas():
     return render_template("about/minas.html", page = "minas")
+
+@mod.route('/glossary/')
+def glossary():
+    return render_template("about/glossary.html", page = "glossary")
     
 @mod.route('/growthventures/')
 def growthventures():
