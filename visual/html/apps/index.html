@@ -3,34 +3,43 @@
 
 {% block title %}: Apps{% endblock %}
 
+{% block body %}
+
+<div id="sabrina_data" class="grid5col1 grid5offset1"></div>
+
+<div id="data_start" class="grid5col2">
+
+  <div class="title">Which app would you like to build?</div>
+  
+  <a class="help" href="/apps/builder/">Skip straight to the app builder!</a>
+
+  <a class="decision" href="/apps/network/">Network</a>
+  
+  <a class="decision" href="/apps/rings/">Rings</a>
+  
+  <a class="decision" href="/apps/occugrid/">Occugrid</a>
+  
+  <a class="decision" href="/apps/pie_scatter/">Scatter Plot</a>
+  
+  <a class="decision" href="/apps/stacked/">Stacked</a>
+  
+  <a class="decision" href="/apps/tree_map/">Tree Map</a>
+  
+  <a class="decision" href="/apps/geo_map/">Geo Map</a>
+
+</div>
+
+{% endblock %}
+
 {% block js %}
 
   <script>
-  
-    function load_page(path){
 
-      if (d3.select("div#slide_container")[0][0]) {
-        visual.slide.remove();
-      }
-      
-      d3.html(path+"?ajax=true",function(content){
-        window.history.pushState({"html":'html',"pageTitle":'pageTitle'}, "", path);
-        visual.slide.load(content);
-      })
-      
-    }
-    
-    // Stuff to do only once, on page load
-    window.onload = function(){
-      
-      if ("{{ category }}" != "None") {
-        var path = "/apps/{{ category }}/";
-      }
-      else {
-        var path = "/apps/";
-      }
-      load_page(path);
-    }  
+    visual.sabrina({
+      "div": d3.select("#sabrina_data"),
+      "outfit": "lab",
+      "emotion": "smirk"
+    })
 
   </script>
 

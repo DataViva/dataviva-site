@@ -12,6 +12,10 @@ function Key() {
           key_filters = [],
           key_solos = [];
           
+      d3.select(key).append("div")
+        .attr("class","leon label")
+        .text(attr_type)
+          
       data.sort(function(a, b){
         if (attr_type == "geo" || attr_type == "country") {
           var a_name = a.name

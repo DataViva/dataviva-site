@@ -1,7 +1,7 @@
 <div id="sabrina_selector" class="grid5col1 grid5offset1"></div>
 <div id="selector_container" class="grid5col2">
   
-  <div class="question">
+  <div class="title">
     <div class="arrow"></div>
     <div class="text">
       Please choose an option.
@@ -45,7 +45,7 @@
   d3.select("#selector")
     .call(selector);
     
-  visual.resize();
+  
   
   function selector_return(value) {
     update_path(value.id);

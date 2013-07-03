@@ -52,7 +52,7 @@
             <div style="background-color: {{ attr.color }}" title="{{ attr.id }}"></div>
           </td>
           <td>{{ attr.id }}</td>
-          <td><script>document.write(format_name("{{ page_attr }}_{{ attr.id|length }}", "{{ g.locale }}"))</script></td>
+          <td><script>document.write(visual.format.text("{{ page_attr }}_{{ attr.id|length }}"))</script></td>
           <td>{{ attr.name_en }}</td>
           <td>{{ attr.name_pt }}</td>
         </tr>

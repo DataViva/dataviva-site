@@ -62,7 +62,7 @@ div#loading {
   bottom: 0px;
   left: 0px;
   z-index: 10000;
-  background-color: white;
+  background-color: #fafafa;
   opacity: 1;
   -webkit-transition: opacity 0.6s;
      -moz-transition: opacity 0.6s;

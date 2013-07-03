@@ -12,6 +12,7 @@
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.inputs.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.grid.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.nav.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.main.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome.min.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/vizwhiz.d3.css" />
     <!--[if IE 7]>
@@ -24,8 +25,8 @@
     <script src="/static/js/libs/leon.js"></script>
     <script src="/static/js/libs/moment.min.js"></script>
     <script>moment.lang("{{g.locale}}")</script>
-    <script src="/static/js/utils/utils.general.js"></script>
     <script src="/static/js/utils/utils.visual.js"></script>
+    <script src="/static/js/utils/utils.general.js"></script>
     
     {% block head %}
     {% endblock %}
@@ -38,6 +39,8 @@
     {% endblock %}
     
     <script type="text/javascript">
+    
+      visual.language = "{{ g.locale }}"
     
       function login() {
         var width = 400,
@@ -61,9 +64,9 @@
     
       // Take control of page resizing!
       window.onresize = function(event) {
-        visual.resize();
+        
       }
-      visual.resize();
+      
     
     </script>
     

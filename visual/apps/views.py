@@ -49,7 +49,7 @@ def get_title(url):
         elif app == "bubbles":
             return "Available and required employment for " + filters[0].name_en + " in " + bra.name_en;
         else:
-            # var title = format_name(out+"_plural",lang)
+            # var title = visual.format.text(out+"_plural")
             title = output_name_pl
             if output == "isic" or output == "cbo" or output == "bra":
                 title += " in "
@@ -168,7 +168,8 @@ def embed(app_name=None,data_type=None,bra_id=None,filter1=None,filter2=None,out
     
     # init variables
     global_vars = {x[0]:x[1] for x in request.args.items()}
-    global_vars["controls"] = "true"
+    if "controls" not in global_vars:
+        global_vars["controls"] = "true"
     starred = 0
     app_id = "/".join([app_name, data_type, bra_id, filter1, filter2, output])
     
@@ -242,36 +243,10 @@ def get_geo_location(ip):
             return bra_cities.filter(Bra.id.like(bra_state.id+'%')).first()
         return None
     return None
-
-@mod.route('/')
-@mod.route('/<category>/')
-def guide(category = None):
-    
-    # try getting the user's ip address, since the live server is using a proxy
-    # nginx, we need to use the "X-Forwarded-For" remote address otherwise
-    # this will always be 127.0.0.1 ie localhost
-    if not request.headers.getlist("X-Forwarded-For"):
-        ip = request.remote_addr
-    else:
-        ip = request.headers.getlist("X-Forwarded-For")[0]
-    
-    # next try geolocating the user's ip
-    geo_location = get_geo_location(ip) or None
-    
-    # if the city or region is not found in the db use Belo Horizonte as default
-    if not geo_location:
-        geo_location = Bra.query.get("mg030000")
-    
-    ajax = request.args.get("ajax")
-    if ajax == "true":
-        if category:
-            return render_template("apps/{0}.html".format(category), geo_location = geo_location)
-        else:
-            return render_template("apps/home.html")
-            
-    return render_template("apps/index.html",
-        category = category,
-        geo_location = geo_location)
+        
+@mod.route('/builder/')
+def builder():
+    return render_template("apps/builder.html")
 
 @mod.route('/download/', methods=['GET', 'POST'])
 def download():
@@ -311,3 +286,7 @@ def download():
     return Response(response_data, 
                         mimetype=mimetype, 
                         headers={"Content-Disposition": content_disposition})
+
+@mod.route('/')
+def guide():
+    return render_template("apps/index.html")

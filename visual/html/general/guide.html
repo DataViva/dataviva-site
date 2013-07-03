@@ -99,12 +99,12 @@
     if (d3.select(".recommendations")[0][0]) {
       d3.selectAll("label.rec_label")
         .text(function(){
-          return format_name(d3.select(this).text(),lang)
+          return visual.format.text(d3.select(this).text())
         })
     
       d3.selectAll("#rec_stroke .site_crumb_body_red")
         .text(function(){
-          return format_name(d3.select(this).text(),lang)+" Recommendations"
+          return visual.format.text(d3.select(this).text())+" Recommendations"
         })
       visual.toggle("recs")
       function change_recs(value) {
@@ -115,7 +115,7 @@
       }
     }
     
-    visual.resize();
+    
     
     d3.select("#container")
       .style("height",d3.select("#computer").style("padding-bottom"))

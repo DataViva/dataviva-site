@@ -17,7 +17,10 @@
       <a id="data" href="{{ url_for('data.index') }}" class="link{% if g.page_type == 'data' %} active{% endif %}">Data</a>
       <a id="ask" href="{{ url_for('ask.index') }}" class="link{% if g.page_type == 'ask' %} active{% endif %}">Ask Sabrina</a>
       <a id="about" href="{{ url_for('about.about') }}" class="link{% if g.page_type == 'about' %} active{% endif %}">Learn More</a>
-      <div id="account" class="leon button square"><i class="icon-user"></i></div>
+      <div id="account" class="leon button">
+        <i class="icon-user"></i>
+        <span class="leon arrow">&#8227</span>
+      </div>
      
       <div id="account_tooltip" style="display:none;">
         {% if g.user.is_authenticated() %}
@@ -85,13 +88,21 @@
       },timing)
     });
     
-    account_show = function() {
-      d3.select("#account").attr("class","leon button square active")
+    account_toggle = function() {
+      var account_button = d3.select("#account")
+      if (account_button.node().className.indexOf("active") < 0) {
+      }
+      else {
+      }
+    }
+    
+    show_toggle = function() {
+      d3.select("#account").attr("class","leon button active")
       d3.select("#vizwhiz_tooltip_id_account").style("display","block")
     }
     
-    account_hide = function() {
-      d3.select("#account").attr("class","leon button square")
+    hide_toggle = function() {
+      d3.select("#account").attr("class","leon button")
       d3.select("#vizwhiz_tooltip_id_account").style("display","none")
     }
     
@@ -99,8 +110,9 @@
     d3.select("div#account_tooltip").remove()
     
     var w = d3.select("#account").node().offsetWidth,
+        h = d3.select("#account").node().offsetHeight,
         x = d3.select("#account").node().offsetLeft+w/2,
-        y = d3.select("#account").node().offsetTop+w
+        y = d3.select("#account").node().offsetTop+h
       
     vizwhiz.tooltip.create({
       "id": "account",
@@ -114,17 +126,25 @@
     })
     
     leon.start("$language_select")
-    
-    account_hide()
+
+    d3.select("#vizwhiz_tooltip_id_account")
+      .style("display","none")
+      .on(vizwhiz.evt.click,function(){
+        d3.event.stopPropagation()
+      })
     
     d3.select("#account").on(vizwhiz.evt.click,function(){
       if (this.className.indexOf("active") < 0) {
-        account_show()
+        show_toggle()
       }
       else {
-        this.className = "leon button square"
-        account_hide()
+        hide_toggle()
       }
+      d3.event.stopPropagation()
+    })
+    
+    d3.select("body").on(vizwhiz.evt.click,function(){
+      hide_toggle()
     })
     
   </script>

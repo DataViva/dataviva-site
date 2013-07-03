@@ -144,6 +144,11 @@
   float: right;
 }
 
+div#account > i {
+  display: inline-block;
+  float: left;
+}
+
 a.account {
   display: block;
   padding: 0px 9px 0px 6px;

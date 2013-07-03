@@ -83,7 +83,6 @@
         app_data = {},
         networks = {},
         years = [],
-        lang = "{{ g.locale }}",
         attr_url = "/attrs/filter/",
         attr_url_id = "/attrs/filter/id/",
         data_url = "/data_type/all/bra/filter1/filter2/",
@@ -94,6 +93,7 @@
         app_width,
         height,
         app_height,
+        title_width = 300,
         app_filters = [],
         app_solos = [],
         app_name = "{{ app_name }}",
@@ -292,54 +292,6 @@
           "wage_avg": "mean"
         };
         
-    text_formatting = function(text) {
-      if (text.indexOf("cp_bra") == 0) {
-        var arr = text.split("_")
-        arr.shift()
-        var loc = arr.shift()
-        text = arr.join("_")
-        return window[loc].name + " ("+format_name(text,lang)+")"
-      }
-      else {
-        return format_name(text,lang)
-      }
-    }
-
-    number_formatting = function(obj) {
-      if (typeof obj === "number") {
-        var value = obj, name = ""
-      }
-      else {
-        var value = obj.value, name = obj.name
-      }
-      
-      var smalls = ["rca","rca_bra","rca_wld","distance","complexity"]
-      var adds = []
-      smalls.forEach(function(s,i){
-        adds.push(format_name(s,lang))
-      })
-      smalls = smalls.concat(adds)
-      
-      if (smalls.indexOf(name) >= 0) {
-        return d3.round(value,2)
-      }
-      else if (value.toString().split(".")[0].length > 4) {
-        var symbol = d3.formatPrefix(value).symbol
-        symbol = symbol.replace("G", "B") // d3 uses G for giga
-        
-        // Format number to precision level using proper scale
-        value = d3.formatPrefix(value).scale(value)
-        value = parseFloat(d3.format(".3g")(value))
-        value = value + symbol;
-      }
-      else {
-        value = d3.format(",f")(value)
-      }
-      
-      return value
-      
-    }
-        
     var app = vizwhiz.viz()
       .name_array(["name","display_id"])
       .nesting_aggs(nesting_aggs)
@@ -347,8 +299,8 @@
       .id_var("id")
       .year_var("year")
       .tooltip_info(tooltip_info)
-      .text_format(text_formatting)
-      .number_format(number_formatting)
+      .text_format(visual.format.text)
+      .number_format(visual.format.number)
       .background("#fafafa")
     
     var bras = "{{ bra_id }}".split(combo_seperator)
@@ -417,9 +369,11 @@
             
             var obj = temp_attr.data[0]
             obj.icon = visual.icon(obj.id,type)
-            window[f] = obj
+            window[f] = vizwhiz.utils.merge(window[f],obj)
             
-            if (f == "bra") select_filter(obj,f);
+            if (f == "bra") {
+              select_filter(window[f],f);
+            }
             
             finish_load(f)
         
@@ -467,7 +421,7 @@
       
     }
     
-    // Populates the app_select dropdown and creates help popovers
+    // Populates the app_select dropdown
     function populate_apps() {
       
       for (var app in apps) {
@@ -477,7 +431,7 @@
           .attr("value",app)
           .attr("color",apps[app].color)
           .attr("icon","url("+visual.icon(app,"app")+")")
-          .html(format_name(app, lang))
+          .html(format_name(app))
           
         if (app_name == app) {
           option.attr("selected","selected")
@@ -614,11 +568,11 @@
     function create_selector() {
 
       selector = Selector()
-        .language(lang);
+        .popover(true);
       
       visual.popover.create({
         "id": "popover",
-        "width": "50%",
+        "width": 600,
         "height": "80%"
       })
       
@@ -638,7 +592,7 @@
             callback = null
         attrs[id] = [{
           "id": app_name,
-          "name": format_name(app_name,lang),
+          "name": format_name(app_name),
           "color": apps[app_name].color,
           "icon": visual.icon(app_name,"app")
         }]
@@ -660,27 +614,15 @@
         var dist = 0
       }
       
+      var id = "bra2" == id ? "bra" : id
+      
       selector
         .callback(callback)
         .distance(dist)
         .initial_value(init)
         .type(id)
-
-      if (id == "help" || id == "file") {
-        popover_ready(id)
-      }
-      else {
-        check_attrs(id,"popover_ready")
-      }
-      
-    }
-
-    function popover_ready(filter) {
-      
-      var type = "bra2" == filter ? "bra" : filter
       
       d3.select("#popover")
-        .datum(attrs[type])
         .call(selector);
         
       // Show popover
@@ -742,16 +684,14 @@
          .style("background-color",obj.color)
       }
 
-      d3.select("#"+type+"_select .list_text")
-       .text(obj.name.truncate(20))
+      var name = obj.name
         
       if (obj.distance > 0) {
-        d3.select("#"+type+"_select .road_sign").remove();
-        d3.select("#"+type+"_select")
-          .append("span")
-            .attr("class","road_sign")
-            .text(obj.distance+"km")
+        name += " ("+obj.distance+"km)"
       }
+      
+      d3.select("#"+type+"_select .list_text")
+       .text(name)
       
       if (window[type].id != obj.id || 
          (cat == "bra" && obj.distance != window[type].distance && obj.distance)) {
@@ -770,7 +710,7 @@
     
       div.append("legend")
         .attr("id",obj.title)
-        .html(format_name(obj.title,lang))
+        .html(format_name(obj.title))
         
       obj.data.forEach(function(v,i){
         
@@ -783,7 +723,7 @@
           
         div.append("label")
           .attr("for",v)
-          .text(format_name(v,lang))
+          .text(format_name(v))
       
         if (v == obj.initial) {
           button.node().checked = true
@@ -1116,7 +1056,7 @@
           
           year.append("label")
             .attr("for","year")
-            .html(format_name("year",lang))
+            .html(format_name("year"))
             
           leon.start("#year")
           
@@ -1517,7 +1457,7 @@
       if (exclusions.indexOf(val) >= 0) return false;
 
       var total_obj = {
-        "prefix": format_name(val,lang)+": "
+        "prefix": format_name(val)+": "
       }
       
       if (total_labels[val]) {
@@ -1533,7 +1473,7 @@
       
       var out = build[0];
       
-      if (lang == "en") {
+      if (visual.language == "en") {
         if (app_name == "network") {
           if (out == "hs") var type = "Product"
           else if (out == "isic") var type = "Industry"
@@ -1547,7 +1487,7 @@
           return "Available and required employment for "+isic.name+" in "+bra.name;
         }
         else {
-          var title = format_name(out+"_plural",lang)
+          var title = format_name(out+"_plural")
           if (out == "isic" || out == "cbo" || out == "bra") {
             title += " in "
           }
@@ -1556,7 +1496,7 @@
           }
           title += bra.name
           if (out == "bra" && build.length == 1) {
-            title += " with " + format_name(data,lang)
+            title += " with " + format_name(data)
           }
           build.forEach(function(f,i){
             if (i != 0) {
@@ -1586,7 +1526,7 @@
           return title;
         }
       }
-      else if (lang == "pt") {
+      else if (visual.language == "pt") {
         
       }
       
@@ -1789,7 +1729,6 @@
       })
       
       if (global_vars.controls == "true") {
-        console.log("here")
         d3.select("#controls_toggle").attr("class","leon button square active")
       }
       else {
@@ -1800,7 +1739,10 @@
       app_height -= d3.select("#ui_bottom").node().offsetHeight
       if (global_vars.controls != "false") app_height -= d3.select("#builder").node().offsetHeight
       app_width = width-10;
-
+      
+      title_width = app_width
+      title_width -= (d3.max([d3.select("#toggles").node().offsetHeight,d3.select("#settings").node().offsetHeight])*5)
+      
       d3.select("#app")
         .style("height",app_height+"px")
         .style("width",app_width+"px")
@@ -1813,9 +1755,9 @@
     }
     
     function refresh_app() {
-       
+      
       d3.select("#app")
-        .call(app.height(app_height).width(app_width))
+        .call(app.height(app_height).width(app_width).title_width(title_width))
         
     }
     

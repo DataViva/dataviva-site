@@ -5,7 +5,7 @@
 
 var leon = {}
 
-leon.debug = true;
+leon.debug = false;
 leon.autohide = true;
 leon.version = 0.1
 
@@ -1037,7 +1037,8 @@ leon.select = function(obj) {
     },leon.time.fade*1000)
   }
   
-  button.node.addEventListener("click", function(d){
+  button.node.addEventListener("click", function(e){
+    e.stopPropagation()
     if (button.open) {
       button.hide()
     }
@@ -1061,7 +1062,8 @@ leon.select = function(obj) {
     else if (i == obj.items.length-1) option.addclass("last")
     else option.addclass("middle")
     
-    option.node.addEventListener("click", function(d){
+    option.node.addEventListener("click", function(e){
+      e.stopPropagation()
       if (obj.items.value != option.item.value) {
         set_select(option)
         obj.items.onchange()
