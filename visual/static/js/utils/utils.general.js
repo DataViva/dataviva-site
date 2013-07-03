@@ -61,7 +61,7 @@ function no_data() {
 // Inputs: the name to be formatted
 ////////////////////////////////////////////////////////////////////////////////
 
-function format_name(name, l) {
+function format_name(name) {
   
   var labels = {
     "active": {"en": "Available", "pt": "Dispon\u00edvel"},
@@ -165,12 +165,32 @@ function format_name(name, l) {
     "hs_8": {"en": "HS6", "pt": "HS6"},
     "wld_2": {"en": "Continent", "pt": "Continente"},
     "wld_5": {"en": "Country", "pt": "Pa\u00eds"},
+
+    "bra_2_plural": {"en": "States", "pt": "Estado"},
+    "bra_4_plural": {"en": "Mesoregions", "pt": "Mesorregi\u00e3o"},
+    "bra_6_plural": {"en": "Microregions", "pt": "Microregi\u00e3o"},
+    "bra_8_plural": {"en": "Municipalities", "pt": "Municipalidade"},
+    "cbo_1_plural": {"en": "Categories", "pt": "Categoria"},
+    "cbo_2_plural": {"en": "2 Digit", "pt": "2 D\u00edgito"},
+    "cbo_3_plural": {"en": "3 Digit", "pt": "3 D\u00edgito"},
+    "cbo_4_plural": {"en": "4 Digit", "pt": "4 D\u00edgito"},
+    "cbo_6_plural": {"en": "6 Digit", "pt": "4 D\u00edgito"},
+    "isic_1_plural": {"en": "Categories", "pt": "Categoria"},
+    "isic_3_plural": {"en": "2 Digit", "pt": "2 D\u00edgito"},
+    "isic_4_plural": {"en": "3 Digit", "pt": "3 D\u00edgito"},
+    "isic_5_plural": {"en": "4 Digit", "pt": "4 D\u00edgito"},
+    "hs_2_plural": {"en": "Categories", "pt": "Categoria"},
+    "hs_4_plural": {"en": "HS2", "pt": "HS2"},
+    "hs_6_plural": {"en": "HS4", "pt": "HS4"},
+    "hs_8_plural": {"en": "HS6", "pt": "HS6"},
+    "wld_2_plural": {"en": "Continents", "pt": "Continente"},
+    "wld_5_plural": {"en": "Countries", "pt": "Pa\u00eds"},
     
   }
   
   if (!name) return name;
   else if(labels[name]){
-    if (labels[name][l]) return labels[name][l];
+    if (labels[name][visual.language]) return labels[name][visual.language];
     else return name.toTitleCase();
   } 
   else return name.toTitleCase();

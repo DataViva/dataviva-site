@@ -4,7 +4,7 @@ from visual.utils import AutoSerialize
 class Isic(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_isic'
-    __public__ = ('id', 'name_en', 'name_pt', 'color')
+    __public__ = ('id', 'name_en', 'name_pt', 'desc_en', 'desc_pt', 'keywords_en', 'keywords_pt', 'color')
     id = db.Column(db.String(5), primary_key=True)
     name_en = db.Column(db.String(200))
     name_pt = db.Column(db.String(200))
@@ -25,7 +25,7 @@ class Isic(db.Model, AutoSerialize):
 class Cbo(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_cbo'
-    __public__ = ('id', 'name_en', 'name_pt', 'color')
+    __public__ = ('id', 'name_en', 'name_pt', 'desc_en', 'desc_pt', 'keywords_en', 'keywords_pt', 'color')
     id = db.Column(db.String(6), primary_key=True)
     name_en = db.Column(db.String(200))
     name_pt = db.Column(db.String(200))
@@ -46,7 +46,7 @@ class Cbo(db.Model, AutoSerialize):
 class Hs(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_hs'
-    __public__ = ('id', 'name_en', 'name_pt', 'color')
+    __public__ = ('id', 'name_en', 'name_pt', 'desc_en', 'desc_pt', 'keywords_en', 'keywords_pt', 'color')
     id = db.Column(db.String(8), primary_key=True)
     name_en = db.Column(db.String(200))
     name_pt = db.Column(db.String(200))

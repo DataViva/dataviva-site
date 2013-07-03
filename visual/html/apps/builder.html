@@ -1,10 +1,40 @@
-<iframe class="app_builder" src="/apps/embed/"></iframe>
+<!-- extend from base layout -->
+{% extends "templates/site.html" %}
 
-<script>
+{% block title %}: App Builder{% endblock %}
 
-  d3.select("iframe")
-    .style("height",function(){
-      return this.offsetWidth*(4/6)+"px"
-    })
+{% block body %}
 
-</script>
+  <div id="app_buffer"></div>
+  <iframe class="app_builder" src="/apps/embed/"></iframe>
+
+{% endblock %}
+
+{% block js %}
+
+  <script>
+  
+    var w = window.innerWidth-20,
+        h = window.innerHeight-100,
+        aspect = w/h
+        
+        console.log(aspect,4/6)
+        
+    if (aspect >= 6/4) {
+      var height = h, width = h*(6/4)
+    }
+    else {
+      var height = w/(6/4), width = w
+    }
+
+    d3.select("iframe.app_builder")
+      .style("height",height+"px")
+      .style("width",width+"px")
+      .style("margin-left",-(width/2)+"px")
+    d3.select("div#app_buffer")
+      .style("height",height+"px")
+      .style("display","block")
+
+  </script>
+
+{% endblock %}

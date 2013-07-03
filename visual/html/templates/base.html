@@ -12,7 +12,8 @@
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.inputs.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.grid.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.nav.css" />
-    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.main.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome.min.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/vizwhiz.d3.css" />
     <!--[if IE 7]>
     <link rel="stylesheet" href="{{STATIC_URL}}css/libs/font-awesome/font-awesome-ie7.min.css?v=3">
@@ -21,10 +22,11 @@
     <script src="/static/js/libs/modernizr.custom.js"></script>
     <script src="/static/js/libs/d3.v3.min.js"></script>
     <script src="/static/js/libs/vizwhiz.d3.js"></script>
+    <script src="/static/js/libs/leon.js"></script>
     <script src="/static/js/libs/moment.min.js"></script>
     <script>moment.lang("{{g.locale}}")</script>
-    <script src="/static/js/utils/utils.general.js"></script>
     <script src="/static/js/utils/utils.visual.js"></script>
+    <script src="/static/js/utils/utils.general.js"></script>
     
     {% block head %}
     {% endblock %}
@@ -38,9 +40,11 @@
     
     <script type="text/javascript">
     
+      visual.language = "{{ g.locale }}"
+    
       function login() {
-        var width = 680,
-            height = 480,
+        var width = 400,
+            height = 300,
             left = window.screenX+(window.innerWidth/2)-(width/2),
             top = window.screenY+(window.innerHeight/2)-(height/2)
         window.open('/account/login/','','width='+width+',height='+height+',\
@@ -60,9 +64,9 @@
     
       // Take control of page resizing!
       window.onresize = function(event) {
-        visual.resize();
+        
       }
-      visual.resize();
+      
     
     </script>
     

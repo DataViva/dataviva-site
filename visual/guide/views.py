@@ -651,7 +651,7 @@ def app_url(params):
     # Get embedded url based off of variables
     url = url_for("apps.embed", app_name = params["app_name"], \
         data_type = params["data_type"], bra_id = params["bra_id"], filter1 = fs[0], \
-        filter2 = fs[1], output = params["output"])
+        filter2 = fs[1], output = params["output"], builder = "false")
     
     return url
     

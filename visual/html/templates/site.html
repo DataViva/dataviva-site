@@ -2,35 +2,54 @@
 {% extends "templates/base.html" %}
 
 {% block content %}
-
+<!--
   <div id="dev_banner">
     Development Site<br />
     <a href="/access/logout/">Click here to Logout</a>
   </div>
+-->
   <div id="header_container">
     <div id="header">
       <a id="logo" href="{{ url_for('general.home') }}"></a>
-      <a id="guide" href="{{ url_for('guide.guide') }}" class="link">Guide</a>
-      <a id="profiles" href="{{ url_for('profiles.profiles') }}" class="link">Profiles</a>
-      <a id="apps" href="{{ url_for('apps.guide') }}" class="link">Apps</a>
-      <a id="data" href="{{ url_for('data.index') }}" class="link">Data</a>
-      <a id="ask" href="{{ url_for('ask.index') }}" class="link">Ask Sabrina</a>
-      <a id="about" href="{{ url_for('about.about') }}" class="link">Learn More</a>
-      <a id="profile" class="button square"><i class="icon-user"></i></a>
-      <!--
-      <div id="language">
-              <input type="radio" name="language_select" onclick="change_language(this.value)" 
-                value="en"{% if g.locale == 'en' %} checked{% endif %}>
-              <label for="en">English</label>
-              <input type="radio" name="language_select" onclick="change_language(this.value)" 
-                value="pt"{% if g.locale == 'pt' %} checked{% endif %}>
-              <label for="pt">Portuguese</label>
-            </div>-->
-      
+      <a id="guide" href="{{ url_for('guide.guide') }}" class="link{% if g.page_type == 'guide' %} active{% endif %}">Guide</a>
+      <a id="profiles" href="{{ url_for('profiles.profiles') }}" class="link{% if g.page_type == 'profiles' %} active{% endif %}">Profiles</a>
+      <a id="apps" href="{{ url_for('apps.guide') }}" class="link{% if g.page_type == 'apps' %} active{% endif %}">Apps</a>
+      <a id="data" href="{{ url_for('data.index') }}" class="link{% if g.page_type == 'data' %} active{% endif %}">Data</a>
+      <a id="ask" href="{{ url_for('ask.index') }}" class="link{% if g.page_type == 'ask' %} active{% endif %}">Ask Sabrina</a>
+      <a id="about" href="{{ url_for('about.about') }}" class="link{% if g.page_type == 'about' %} active{% endif %}">Learn More</a>
+      <div id="account" class="leon button">
+        <i class="icon-user"></i>
+        <span class="leon arrow">&#8227</span>
+      </div>
+     
+      <div id="account_tooltip" style="display:none;">
+        {% if g.user.is_authenticated() %}
+        <a class="account" href="{{ url_for('account.activity') }}"><i class="icon-user"></i>{{g.user.fullname}}</a>
+          {% if g.user.is_admin() %}
+            <a class="account" href="{{ url_for('admin.admin') }}"><i class="icon-gears"></i>Admin Panel</a>
+          {% endif %}
+        {% else %}
+        <a class="account" onclick="login()"><i class="icon-key"></i>Click here to login</a>
+        {% endif %}
+        <input type="radio" name="language_select" onclick="change_language(this.value)" 
+          id="en" value="en"{% if g.locale == 'en' %} checked{% endif %}>
+        <label for="en">English</label>
+        <input type="radio" name="language_select" onclick="change_language(this.value)" 
+          id="pt" value="pt"{% if g.locale == 'pt' %} checked{% endif %}>
+        <label for="pt">Portuguese</label>
+        
+
+        {% if g.user.is_authenticated() %}
+        <a class="account" href="{{ url_for('account.logout') }}">Logout</a>
+        {% endif %}
+        
+      </div>
     
     </div>
     
   </div>
+  
+  <div id="site_breadcrumbs"></div>
 
 
   {% for category, msg in get_flashed_messages(with_categories=true) %}
@@ -39,46 +58,26 @@
     <i id="close_message" class="icon-remove-sign"></i>
   </div>
   {% endfor %}
-  <div id="outside_container">
-    <div id="container">
-      <div id="site_breadcrumbs"></div>
-      {% block body %}
-      {% endblock %}
+  <div id="container">
+    {% block body %}
+    {% endblock %}
 
-    </div>
   </div>
   
   <div id="footer">
-    <div id="account">
-      <p>
-        {% if g.user.is_authenticated() %}
-          {% if g.user.is_admin() %}
-          <a href="{{ url_for('admin.admin') }}">Admin</a> | 
-          {% endif %}
-        <a href="{{ url_for('account.activity') }}">Your Profile</a>
-        | <a href="{{ url_for('account.logout') }}">Logout</a>
-        {% else %}
-        <a id="login" onclick="login()">Login</a>
-        {% endif %}
-      </p>
-    </div>
-    <p>&copy; 2013 Governo de Minas Gerais</p>
-    <p>Created by Growth Ventures</p>
+    <a href="http://www.escritorio.mg.gov.br/" class="logo governo" target="_blank"></a>
+    <a href="http://www.fapemig.br/" class="logo fapemig" target="_blank"></a>
   </div>
   
   <script type="text/javascript">
+  
+    // leon.start("$language_select")
   
     function change_language(l) {
       console.log(l);
     }
   
-    var path = window.location.pathname.split("/"),
-        page = path[1],
-        lang = "{{ g.locale }}"
-        
-    if (page) {
-      d3.select("a#"+page).attr("class","link active")
-    }
+    var lang = "{{ g.locale }}"
     
     d3.select("#close_message").on(vizwhiz.evt.click,function(){
       var div = d3.select("#server_message")
@@ -89,7 +88,64 @@
       },timing)
     });
     
-    visual.toggle("language_select");
+    account_toggle = function() {
+      var account_button = d3.select("#account")
+      if (account_button.node().className.indexOf("active") < 0) {
+      }
+      else {
+      }
+    }
+    
+    show_toggle = function() {
+      d3.select("#account").attr("class","leon button active")
+      d3.select("#vizwhiz_tooltip_id_account").style("display","block")
+    }
+    
+    hide_toggle = function() {
+      d3.select("#account").attr("class","leon button")
+      d3.select("#vizwhiz_tooltip_id_account").style("display","none")
+    }
+    
+    var language_html = d3.select("div#account_tooltip").html()
+    d3.select("div#account_tooltip").remove()
+    
+    var w = d3.select("#account").node().offsetWidth,
+        h = d3.select("#account").node().offsetHeight,
+        x = d3.select("#account").node().offsetLeft+w/2,
+        y = d3.select("#account").node().offsetTop+h
+      
+    vizwhiz.tooltip.create({
+      "id": "account",
+      "x": x+2,
+      "y": y,
+      "arrow": true,
+      "align": "bottom center",
+      "mouseevents": true,
+      "html": language_html,
+      "width": "auto"
+    })
+    
+    leon.start("$language_select")
+
+    d3.select("#vizwhiz_tooltip_id_account")
+      .style("display","none")
+      .on(vizwhiz.evt.click,function(){
+        d3.event.stopPropagation()
+      })
+    
+    d3.select("#account").on(vizwhiz.evt.click,function(){
+      if (this.className.indexOf("active") < 0) {
+        show_toggle()
+      }
+      else {
+        hide_toggle()
+      }
+      d3.event.stopPropagation()
+    })
+    
+    d3.select("body").on(vizwhiz.evt.click,function(){
+      hide_toggle()
+    })
     
   </script>
     

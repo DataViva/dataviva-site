@@ -1,4 +1,4 @@
-from sqlalchemy import func
+from sqlalchemy import func, distinct
 from flask import Blueprint, request, jsonify, abort, g
 
 from visual import db
@@ -37,7 +37,8 @@ def after_request(response):
 
 def fix_name(attr):
     name_lang = "name_" + g.lang
-    desc_lang = "name_" + g.lang
+    desc_lang = "desc_" + g.lang
+    key_lang = "keywords_" + g.lang
     if "desc_en" in attr:
         attr["desc"] = attr[desc_lang]
         del attr["desc_en"]
@@ -48,6 +49,11 @@ def fix_name(attr):
         del attr["name_en"]
         if "name_pt" in attr:
             del attr["name_pt"]
+    if "keywords_en" in attr:
+        attr["keywords"] = attr[key_lang]
+        del attr["keywords_en"]
+        if "keywords_pt" in attr:
+            del attr["keywords_pt"]
     return attr
 
 ############################################################
@@ -92,6 +98,10 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_merge
         attrs_in_db = attrs_in_db \
                         .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id) \
                         .filter(func.char_length(Attr.id) == Attr_id_lens[-1]).group_by(Attr)
+                        
+        if Attr_weight_col == "population":
+            max_year = db.session.query(Attr_weight_tbl.year.distinct()).order_by(Yb.year.desc()).all()[0]
+            attrs_in_db = attrs_in_db.filter(Attr_weight_tbl.year == max_year[0])
         # attrs_in_db = {a[0].id: a for a in attrs_in_db.all()}
         
         

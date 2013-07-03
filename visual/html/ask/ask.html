@@ -13,7 +13,7 @@
 {% block body %}
 <div id="sabrina_ask" class="grid5col1"></div>
 <div id="submit_column" class="grid5col4">
-  <div class="question">
+  <div class="title">
     <div class="arrow"></div>
     {% if g.user.is_authenticated() %}
     <div class="text">What would you like to know?</div>
@@ -105,7 +105,7 @@
     var selection_type = val ? val : "bra";
     d3.select("#"+select_id)
       .call(selector.type(selection_type));
-    visual.resize();
+    
   }
   
   function multi_selector(d){
@@ -121,7 +121,7 @@
     btns.forEach(function(b,i){
       btn_cont.append("label")
         .attr("for",b)
-        .text(format_name(b,lang))
+        .text(visual.format.text(b))
       var radio = btn_cont.append("input")
         .attr("value",b)
         .attr("type","radio")

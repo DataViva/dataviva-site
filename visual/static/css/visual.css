@@ -117,23 +117,6 @@ table td.icon > div{
   opacity: 1;
 }
 
-#outside_container {
-  width: 100%;
-  text-align: center;
-}
-
-#container {
-  width: 980px;
-  margin: 68px 0px 38px 0px;
-  position: relative;
-  text-align: left;
-  display: inline-block;
-  min-height: 574px;
-  -webkit-transition: height 0.5s;
-     -moz-transition: height 0.5s;
-          transition: height 0.5s;
-}
-
 #slide_container {
   width: 100%;
   position: absolute;
@@ -174,49 +157,31 @@ table td.icon > div{
   padding: .7% 1.1% .15% .9% !important;
 }
 
-.hill_background {
-  background-image: url('/static/img/backgrounds/hills_background.png');
+.home_fullscreen {
+  background-image: url('/static/img/home/home.jpg');
   background-repeat: no-repeat;
-  background-position: left top;
+  background-position: center;
   background-size: 100% 100%;
-  width: 100%;
-  padding-bottom: 5%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: -1;
 }
 
-.lab_background {
-  background-image: url('/static/img/backgrounds/lab_background_blur.png');
+.home_sabrina {
+  background-image: url('/static/img/home/sabrina.png');
   background-repeat: no-repeat;
-  background-position: center top;
-  background-size: 810px 530px;
-  width: 100%;
-}
-
-.road_background {
-  background-image: url('/static/img/backgrounds/road_background.png');
-  background-repeat: no-repeat;
-  background-position: center top;
+  background-position: center;
   background-size: 100% 100%;
+  float: right;
+  height: 556px;
+  width: 280.5px;
 }
 
 .tall_background {
   padding-bottom: 8%;
-}
-
-.list_icon {
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 12px;
-  height: 12px;
-  background-size: 100% 100%;
-  display: inline-block;
-}
-
-#app_select_dropdown .list_icon, #filter_section .list_icon {
-  margin-right: 3px;
-}
-
-.list_text {
-  display: inline-block;
 }
 
 /*****************/
@@ -253,7 +218,7 @@ div.secondary_app {
 
 div.guide_app_description {
   font-size: 14px;
-  margin-bottom: 3%;
+  margin: 10px 0px 5px 0px;
 }
 
 div.guide_app_description > span {
@@ -560,8 +525,9 @@ a.button.square.link {
 /* App Builder Specific */
 /************************/
 iframe.app_builder {
-  width: 80%;
-  margin: 0px 10%;
+  left: 50%;
+  position: absolute;
+  top: 0px;
 }
 
 /**************************/
@@ -676,100 +642,6 @@ iframe.app_builder {
   margin: 10px 0px;
 }
 
-/****************/
-/* 404 Specific */
-/****************/
-
-div#computer, div#computer_broken,
-div#computer_terminal, div#computer_smoke,
-div#computer_lights, div#computer_sabrina {
-  background-position: left top;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  display: block;
-  height: 0;
-  position: absolute;
-  z-index: -5;
-}
-
-div#computer_broken, div#computer_terminal, div#computer_smoke {
-  margin: 0px 25%;
-  padding-bottom: 39.17%;
-  top: 15%;
-  width: 50%;
-}
-
-div#computer, div#computer_lights, div#computer_sabrina {
-  margin: 0px 12.5%;
-  padding-bottom: 59.7%;
-  top: 15%;
-  width: 75%;
-}
-
-div#computer_broken {
-  background-image: url('/static/img/computer/computer_broken.png');
-}
-
-div#computer_terminal {
-  background-image: url('/static/img/computer/computer_terminal.png');
-}
-
-div#computer_sabrina {
-  background-image: url('/static/img/computer/computer_sabrina.png');
-}
-
-div#computer {
-  background-image: url('/static/img/computer/computer.png');
-}
-
-div#computer_lights {
-  background-image: url('/static/img/computer/computer_lights.gif');
-}
-
-div#computer_smoke {
-  background-image: url('/static/img/computer/computer_smoke.png');
-}
-
-@-webkit-keyframes smoke_fade {
-  0%    { opacity: 0.25; }
-  100%  { opacity: 1; }
-}
-@-moz-keyframes smoke_fade {
-  0%    { opacity: 0.25; }
-  100%  { opacity: 1; }
-}
-@-ms-keyframes smoke_fade {
-  0%    { opacity: 0.25; }
-  100%  { opacity: 1; }
-}
-@keyframes smoke_fade {
-  0%    { opacity: 0.25; }
-  100%  { opacity: 1; }
-}
-
-div#computer_guide > div#screen_text {
-  color: #cc0000;
-  opacity: 0.5;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 22px;
-  position: absolute;
-  padding-top: 27.6%;
-  padding-left: 36.3%;
-  width: 12%;
-  text-align: center;
-}
-
-div#error_404 {
-  color: white;
-  opacity: 0.20;
-  font-weight: bold;
-  font-size: 40px;
-  position: absolute;
-  top: 51.25%;
-  left: 42.2%;
-}
-
 /*******************/
 /* Popover Styling */
 /*******************/
@@ -782,26 +654,29 @@ div#popover_mask {
   bottom: 0px;
   left: 0px;
   z-index: 5000;
-  background-color: white;
+  background-color: #fafafa;
   opacity: 0;
-  -webkit-transition: opacity 0.25s ease-in-out;
-     -moz-transition: opacity 0.25s ease-in-out;
-       -o-transition: opacity 0.25s ease-in-out;
-          transition: opacity 0.25s ease-in-out;
+  -webkit-transition: opacity 0.6s;
+     -moz-transition: opacity 0.6s;
+       -o-transition: opacity 0.6s;
+          transition: opacity 0.6s;
 }
 
 div.popover {
+  background-color: white;
+  -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+          box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
   display: none;
-  width: 40%;
+  left: 30%;
+  opacity: 0;
   position: absolute;
   top: 10%;
-  left: 30%;
+  -webkit-transition: opacity 0.6s;
+     -moz-transition: opacity 0.6s;
+       -o-transition: opacity 0.6s;
+          transition: opacity 0.6s;
+  width: 40%;
   z-index: 6000;
-  opacity: 0;
-  -webkit-transition: opacity 0.25s ease-in-out;
-     -moz-transition: opacity 0.25s ease-in-out;
-       -o-transition: opacity 0.25s ease-in-out;
-          transition: opacity 0.25s ease-in-out;
 }
 
 /********************/
@@ -852,12 +727,11 @@ p.reply {
 }
 
 .feed-item {
-  width: 95.8%;
+  width: 96%;
   height: 20px;
   padding: 10px 8px 6px 30px!important;
   font-size: 15px;
-  background-color: #ffffff;
-  border: #cccccc 2px solid;
+  background-color: #cccccc;
   color: #333333;
   margin-bottom: 12px;
 }
@@ -934,8 +808,9 @@ a.login_button {
   background-repeat: no-repeat;
   background-size: 95% 95%;
   display: inline-block;
-  height: 64px;
-  width: 64px;
+  height: 50px;
+  margin: 12px;
+  width: 50px;
   -webkit-transition: background-size 0.1s;
      -moz-transition: background-size 0.1s;
        -o-transition: background-size 0.1s;
@@ -1052,14 +927,9 @@ a.login_button#Twitter {
   background-image: url('../img/docs/worker_tip.png');
 }
 
-#attr_toggle {
-  float: left !important;
-  margin: 1% 2% 1.5% 0;
-}
-
 .data-dropdown {
-  margin-top: 1%;
-  float: left;
+  float: left !important;
+  margin: 0% 2% 1.5% 0;
 }
 
 /********************/

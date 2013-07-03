@@ -10,6 +10,7 @@ from visual import db
 from visual.data.forms import DownloadForm
 from visual.account.models import User, Starred
 from visual.attrs.models import Bra, Isic, Hs, Cbo, Wld
+from visual.apps.models import Build, UI
 
 import json
 
@@ -49,7 +50,7 @@ def get_title(url):
         elif app == "bubbles":
             return "Available and required employment for " + filters[0].name_en + " in " + bra.name_en;
         else:
-            # var title = format_name(out+"_plural",lang)
+            # var title = visual.format.text(out+"_plural")
             title = output_name_pl
             if output == "isic" or output == "cbo" or output == "bra":
                 title += " in "
@@ -162,13 +163,14 @@ def get_urls(app=None, data_type=None, bra="mg", f1=None, f2=None, output=None):
     
     return apps
 
-@mod.route('/embed/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
+# @mod.route('/embed/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
 @mod.route('/embed/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/')
 def embed(app_name=None,data_type=None,bra_id=None,filter1=None,filter2=None,output=None):
     
     # init variables
     global_vars = {x[0]:x[1] for x in request.args.items()}
-    global_vars["controls"] = "true"
+    if "controls" not in global_vars:
+        global_vars["controls"] = "true"
     starred = 0
     app_id = "/".join([app_name, data_type, bra_id, filter1, filter2, output])
     
@@ -186,6 +188,59 @@ def embed(app_name=None,data_type=None,bra_id=None,filter1=None,filter2=None,out
         filter1 = filter1,
         filter2 = filter2,
         output = output,
+        global_vars = json.dumps(global_vars))
+
+# @mod.route('/embed2/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
+@mod.route('/embed2/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/'
+            '<output>/')
+def embed2(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
+            output=None):
+    
+    '''Since the "builds" are held in the database with placeholders for 
+    attributes i.e. <cbo>, <hs>, <isic> we need to convert the IDs given
+    in the URL to these placeholders. i.e. 
+         - a0111    = <isic>
+         - 010101   = <hs>
+         - all      = all
+    '''
+    build_filter1 = filter1
+    if dataset == "rais" and build_filter1 != "all":
+        build_filter1 = "<isic>"
+    if dataset == "secex" and build_filter1 != "all":
+        build_filter1 = "<hs>"
+
+    build_filter2 = filter2
+    if dataset == "rais" and build_filter2 != "all":
+        build_filter2 = "<cbo>"
+    if dataset == "secex" and build_filter2 != "all":
+        build_filter2 = "<wld>"
+
+    '''This is an instance of the Build class for the selected app, 
+    determined by the combination of app_type, dataset, filters and output.
+    '''
+    current_build = Build.query.filter_by(type=app_name, dataset=dataset, filter1=build_filter1, filter2=build_filter2, output=output).first()
+    
+    '''Every possible build, required by the embed page for building the build
+    dropdown.
+    '''
+    all_builds = Build.query.all()
+    
+    '''Get URL query parameters from reqest.args object to return to the view.
+    '''
+    global_vars = {x[0]:x[1] for x in request.args.items()}
+    global_vars["controls"] = "true"
+
+    '''If user is logged in see if they have starred this app.'''
+    starred = 0
+    if g.user and g.user.is_authenticated():
+        is_starred = Starred.query.filter_by(user=g.user, app_id=app_id).first()
+        starred = 1 if is_starred else -1
+
+    return render_template("apps/embed2.html",
+        all_builds = all_builds,
+        starred = starred,
+        form = DownloadForm(),
+        current_build = current_build,
         global_vars = json.dumps(global_vars))
 
 @mod.route('/star/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
@@ -214,8 +269,9 @@ def app_star(app_name, data_type, bra_id, filter1, filter2, output):
     else:
         return jsonify({"success": 1})
 
+@mod.route('/recommend/', methods=['GET', 'POST'])
 @mod.route('/recommend/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
-def recommend(app_name, data_type, bra_id, filter1, filter2, output):    
+def recommend(app_name=None, data_type=None, bra_id="mg", filter1=None, filter2=None, output=None):
     return jsonify(get_urls(app=app_name, data_type=data_type, bra=bra_id, f1=filter1, f2=filter2, output=output))
 
 def get_geo_location(ip):
@@ -242,36 +298,10 @@ def get_geo_location(ip):
             return bra_cities.filter(Bra.id.like(bra_state.id+'%')).first()
         return None
     return None
-
-@mod.route('/')
-@mod.route('/<category>/')
-def guide(category = None):
-    
-    # try getting the user's ip address, since the live server is using a proxy
-    # nginx, we need to use the "X-Forwarded-For" remote address otherwise
-    # this will always be 127.0.0.1 ie localhost
-    if not request.headers.getlist("X-Forwarded-For"):
-        ip = request.remote_addr
-    else:
-        ip = request.headers.getlist("X-Forwarded-For")[0]
-    
-    # next try geolocating the user's ip
-    geo_location = get_geo_location(ip) or None
-    
-    # if the city or region is not found in the db use Belo Horizonte as default
-    if not geo_location:
-        geo_location = Bra.query.get("mg030000")
-    
-    ajax = request.args.get("ajax")
-    if ajax == "true":
-        if category:
-            return render_template("apps/{0}.html".format(category), geo_location = geo_location)
-        else:
-            return render_template("apps/home.html")
-            
-    return render_template("apps/index.html",
-        category = category,
-        geo_location = geo_location)
+        
+@mod.route('/builder/')
+def builder():
+    return render_template("apps/builder.html")
 
 @mod.route('/download/', methods=['GET', 'POST'])
 def download():
@@ -311,3 +341,7 @@ def download():
     return Response(response_data, 
                         mimetype=mimetype, 
                         headers={"Content-Disposition": content_disposition})
+
+@mod.route('/')
+def guide():
+    return render_template("apps/index.html")

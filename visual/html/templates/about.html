@@ -31,6 +31,13 @@
       </div>
     {% endif %}
     
+    <a href="{{ url_for('about.glossary') }}">
+      <div class="menu{% if page == 'glossary' %} active{% endif %}">
+        <div class="text">Glossary</div>
+        <div class="arrow"></div>
+      </div>
+    </a>
+    
     <a href="{{ url_for('about.credits') }}">
       <div class="menu{% if page == 'credits' %} active{% endif %}">
         <div class="text">Credits</div>

@@ -11,47 +11,17 @@
   
     <div class="primary_app grid5col4">
       <div id="guide_title">{{ title }}</div>
+      
+      <div class="guide_app_description">
+        {{ primary.text_long|safe }}
+      </div>
       <iframe class="guide_app" src="{{ primary.url|safe }}"></iframe>
-      <div class="guide_app_description">
-        <span class="short">{{ primary.text_short|safe }}</span>
-        <span class="long">{{ primary.text_long|safe }}</span>
-      </div>
-    </div>
-  
-    <div class="secondary_app grid4col1">
-      <iframe class="guide_app" src="{% if secondaries[0] is defined %}{{ secondaries[0].url|safe }}{% endif %}"></iframe>
-      <div class="guide_app_switcher">Click to Enlarge</div>
-      <div class="guide_app_description">
-        <span class="short">{% if secondaries[0] is defined %}{{ secondaries[0].text_short|safe }}{% endif %}</span>
-        <span class="long">{% if secondaries[0] is defined %}{{ secondaries[0].text_long|safe }}{% endif %}</span>
-      </div>
-    </div>
-  
-    <div class="secondary_app grid4col1">
-      <iframe class="guide_app" src="{% if secondaries[1] is defined %}{{ secondaries[1].url|safe }}{% endif %}"></iframe>
-      <div class="guide_app_switcher">Click to Enlarge</div>
-      <div class="guide_app_description">
-        <span class="short">{% if secondaries[1] is defined %}{{ secondaries[1].text_short|safe }}{% endif %}</span>
-        <span class="long">{% if secondaries[1] is defined %}{{ secondaries[1].text_long|safe }}{% endif %}</span>
-      </div>
-    </div>
-  
-    <div class="secondary_app grid4col1">
-      <iframe class="guide_app" src="{% if secondaries[2] is defined %}{{ secondaries[2].url|safe }}{% endif %}"></iframe>
-      <div class="guide_app_switcher">Click to Enlarge</div>
-      <div class="guide_app_description">
-        <span class="short">{% if secondaries[2] is defined %}{{ secondaries[2].text_short|safe }}{% endif %}</span>
-        <span class="long">{% if secondaries[2] is defined %}{{ secondaries[2].text_long|safe }}{% endif %}</span>
-      </div>
-    </div>
-  
-    <div class="secondary_app grid4col1">
-      <iframe class="guide_app" src="{% if secondaries[3] is defined %}{{ secondaries[3].url|safe }}{% endif %}"></iframe>
-      <div class="guide_app_switcher">Click to Enlarge</div>
-      <div class="guide_app_description">
-        <span class="short">{% if secondaries[3] is defined %}{{ secondaries[3].text_short|safe }}{% endif %}</span>
-        <span class="long">{% if secondaries[3] is defined %}{{ secondaries[3].text_long|safe }}{% endif %}</span>
-      </div>
+      
+      {% for app in secondaries %}
+        <div class="guide_app_description">{{ app.text_long|safe }}</div>
+        <iframe class="guide_app" src="{{ app.url|safe }}"></iframe>
+      {% endfor %}
+      
     </div>
 
     {% if recs %}
@@ -118,79 +88,23 @@
       "emotion": "smile"
     })
     
-    var apps = 0;
-    d3.selectAll(".primary_app, .secondary_app")
-      .each(function(){
-        var src = d3.select(this).select("iframe").attr("src")
-        if (src == "") {
-          d3.select(this).remove();
-          d3.select(".secondary_app").attr("class","secondary_app grid4col1 grid4offset1")
-        }
-        else {
-          apps++;
-        }
-      })
+    var apps = 0
+    d3.selectAll("iframe.guide_app")
+    .each(function(){
+      apps++;
+    })
     
     visual.breadcrumbs();
-    
-    var switching = false;
-    
-    function switch_apps(div_sec) {
-      if (!switching) {
-        
-        switching = true;
-        
-        var div_prim = d3.select(".primary_app")
-        
-        var desc_sec = div_sec.select("div.guide_app_description")
-        var desc_prim = d3.select("div.primary_app div.guide_app_description")
-        
-        var app_sec = div_sec.select("iframe")
-        var app_prim = d3.select("div.primary_app iframe")
-        
-        var timing = parseFloat(div_prim.style("transition-duration"),10)*1000
-        
-        div_prim.style("opacity",0);
-        div_sec.style("opacity",0);
-        
-        setTimeout(function(){
-        
-          // Switch Apps
-          var prim_link = app_prim.attr("src");
-          var sec_link = app_sec.attr("src");
-          app_prim.attr("src",sec_link);
-          app_sec.attr("src",prim_link);
-          
-          // Switch Descriptions
-          var prim_text = desc_prim.html();
-          var sec_text = desc_sec.html();
-          desc_prim.html(sec_text);
-          desc_sec.html(prim_text);
-        
-          // Show/hide long descriptions
-          desc_prim.select("span.long").style("display","inline")
-          desc_sec.select("span.long").style("display","none")
-        
-          div_prim.style("opacity",1);
-          div_sec.style("opacity",1);
-        
-          setTimeout(function(){
-            switching = false;
-          },timing)
-          
-        },timing*1.5)
-      }
-    }
     
     if (d3.select(".recommendations")[0][0]) {
       d3.selectAll("label.rec_label")
         .text(function(){
-          return format_name(d3.select(this).text(),lang)
+          return visual.format.text(d3.select(this).text())
         })
     
       d3.selectAll("#rec_stroke .site_crumb_body_red")
         .text(function(){
-          return format_name(d3.select(this).text(),lang)+" Recommendations"
+          return visual.format.text(d3.select(this).text())+" Recommendations"
         })
       visual.toggle("recs")
       function change_recs(value) {
@@ -201,12 +115,7 @@
       }
     }
     
-    d3.selectAll(".guide_app_switcher")
-      .on(vizwhiz.evt.click,function(){
-        switch_apps(d3.select(this.parentNode));
-      })
     
-    visual.resize();
     
     d3.select("#container")
       .style("height",d3.select("#computer").style("padding-bottom"))
