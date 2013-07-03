@@ -163,7 +163,7 @@ def get_urls(app=None, data_type=None, bra="mg", f1=None, f2=None, output=None):
     
     return apps
 
-# @mod.route('/embed/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
+@mod.route('/embed/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
 @mod.route('/embed/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/')
 def embed(app_name=None,data_type=None,bra_id=None,filter1=None,filter2=None,output=None):
     
@@ -190,7 +190,7 @@ def embed(app_name=None,data_type=None,bra_id=None,filter1=None,filter2=None,out
         output = output,
         global_vars = json.dumps(global_vars))
 
-# @mod.route('/embed2/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
+@mod.route('/embed2/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
 @mod.route('/embed2/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/'
             '<output>/')
 def embed2(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
@@ -219,11 +219,18 @@ def embed2(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     determined by the combination of app_type, dataset, filters and output.
     '''
     current_build = Build.query.filter_by(type=app_name, dataset=dataset, filter1=build_filter1, filter2=build_filter2, output=output).first()
+    current_build.set_filter1(filter1)
+    current_build.set_filter2(filter2)
+    current_build.set_bra(bra_id)
     
     '''Every possible build, required by the embed page for building the build
     dropdown.
     '''
     all_builds = Build.query.all()
+    for build in all_builds:
+        build.set_filter1(filter1)
+        build.set_filter2(filter2)
+        build.set_bra(bra_id)
     
     '''Get URL query parameters from reqest.args object to return to the view.
     '''
@@ -232,10 +239,16 @@ def embed2(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
 
     '''If user is logged in see if they have starred this app.'''
     starred = 0
+    app_id = "/".join([app_name, dataset, bra_id, filter1, filter2, output])
     if g.user and g.user.is_authenticated():
         is_starred = Starred.query.filter_by(user=g.user, app_id=app_id).first()
         starred = 1 if is_starred else -1
-
+    
+    if request.is_xhr:
+        return jsonify({
+            "current_build": current_build.serialize()
+        })
+        
     return render_template("apps/embed2.html",
         all_builds = all_builds,
         starred = starred,

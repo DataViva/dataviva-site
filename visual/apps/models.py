@@ -8,16 +8,18 @@ build_ui = db.Table('apps_build_ui',
          db.Column('ui_id', db.Integer,db.ForeignKey('apps_ui.id'))
 )
 
-class Build(db.Model):
+class Build(db.Model, AutoSerialize):
 
     __tablename__ = 'apps_build'
+    __public__ = ('id', 'type', 'bra', 'filter1', 'filter2', 'output', 'viz_whiz', 'name', 'color', 'dataset')
     
     id = db.Column(db.Integer, primary_key = True)
-    viz_whiz = db.Column(db.String(20))
+    type = db.Column(db.String(20))
+    bra = db.Column(db.String(20))
     filter1 = db.Column(db.String(20))
     filter2 = db.Column(db.String(20))
     output = db.Column(db.String(20))
-    type = db.Column(db.String(20))
+    viz_whiz = db.Column(db.String(20))
     name = db.Column(db.String(20))
     color = db.Column(db.String(7))
     dataset = db.Column(db.String(20))
@@ -52,15 +54,52 @@ class Build(db.Model):
         
         return result
     
+    def get_bra(self, **kwargs):
+        filters = self.get_bra_and_filters(**kwargs)
+        bra = Bra.query.get(filters["bra"])
+        return bra
+
+    def set_bra(self, bra_id):
+        self.bra = Bra.query.get(bra_id)
+
+    def set_filter1(self, filter):
+        if self.filter1 == "all":
+            self.filter1 = "all"
+        elif self.dataset == "rais":
+            if Isic.query.get(filter):
+                self.filter1 = Isic.query.get(filter)
+            else:
+                self.filter1 = Isic.query.get('c1410')
+        elif self.dataset == "secex":
+            if Hs.query.get(filter):
+                self.filter1 = Hs.query.get(filter)
+            else:
+                self.filter1 = Hs.query.get('178703')
+    
+    def set_filter2(self, filter):
+        if self.filter2 == "all":
+            self.filter2 = "all"
+        elif self.dataset == "rais":
+            if Cbo.query.get(filter):
+                self.filter2 = Cbo.query.get(filter)
+            else:
+                self.filter2 = Cbo.query.get('1210')
+        elif self.dataset == "secex":
+            if Wld.query.get(filter):
+                self.filter2 = Wld.query.get(filter)
+            else:
+                self.filter2 = Wld.query.get('aschn')
+        
     '''Returns the URL for the specific build.'''
     def url(self, **kwargs):
         
-        filters = self.get_bra_and_filters(**kwargs)
-        bra = filters["bra"]
-        if filters["filter1"] == "all": filter1 = "all"
-        else: filters["filter1"]["id"]
-        if filters["filter2"] == "all": filter2 = "all"
-        else: filters["filter2"]["id"]
+        # filters = self.get_bra_and_filters(**kwargs)
+        # bra = filters["bra"]
+        bra = self.bra.id
+        if self.filter1 == "all": filter1 = "all"
+        else: filter1 = self.filter1.id
+        if self.filter2 == "all": filter2 = "all"
+        else: filter2 = self.filter2.id
         
         url = '{0}/{1}/{2}/{3}/{4}/{5}'.format(self.viz_whiz, 
                                                 self.dataset, bra, 
@@ -72,32 +111,31 @@ class Build(db.Model):
     data required for building a viz of this app.
     '''
     def data_url(self, **kwargs):
-
-        filters = self.get_bra_and_filters(**kwargs)
+        # filters = self.get_bra_and_filters(**kwargs)
         
-        bra = filters["bra"]
+        bra = self.bra.id
         if self.output == "bra":
             bra = bra + ".8"
         
-        filter1 = filters["filter1"]
+        filter1 = self.filter1
         if filter1 == "all":
             if self.output == "isic":
                 filter1 = "show.5"
             elif self.output == "hs":
                 filter1 = "show.6"
         else:
-            filter1 = filters["filter1"]["id"]
+            filter1 = self.filter1.id
         
-        filter2 = filters["filter2"]
+        filter2 = self.filter2
         if filter2 == "all":
             if self.output == "cbo":
                 filter2 = "show.4"
             elif self.output == "wld":
                 filter2 = "show.5"
         else:
-            filter2 = filters["filter2"]["id"]
+            self.filter2.id
 
-        filter2 = "all" if filters["filter2"] == "all" else filters["filter2"]["id"]
+        filter2 = "all" if self.filter2 == "all" else self.filter2.id
         filter2 = "show" if self.output == "cbo" or self.output == "wld" else filter2
 
         data_url = '{0}/all/{1}/{2}/{3}/'.format(self.dataset, bra, filter1, filter2)
@@ -105,19 +143,16 @@ class Build(db.Model):
     
     '''Returns the english language title of this build.'''
     def title(self, **kwargs):
+
+        bra = self.bra
+        f1 = self.filter1
+        f2 = self.filter2
         
-        filters = self.get_bra_and_filters(**kwargs)
-        bra = filters["bra"]
-        f1 = filters["filter1"]
-        f2 = filters["filter2"]
-        
-        bra = Bra.query.get_or_404(bra)
+        # bra = Bra.query.get_or_404(bra)
         filters = []
         if f1 != "all":
-            f1 = Isic.query.get_or_404(f1["id"]) if self.dataset == "rais" else Hs.query.get_or_404(f1["id"])
             filters.append(f1)
         if f2 != "all":
-            f2 = Cbo.query.get_or_404(f2["id"]) if self.dataset == "rais" else Wld.query.get_or_404(f2["id"])
             filters.append(f2)
         
         if self.output == "hs": 
@@ -169,6 +204,14 @@ class Build(db.Model):
                 return title
         elif g.locale == "pt":
             pass
+
+    def serialize(self, **kwargs):
+        auto_serialized = super(Build, self).serialize()
+        filters = self.get_bra_and_filters(**kwargs)
+        auto_serialized["bra"] = self.get_bra().serialize()
+        auto_serialized["filter1"] = "all" if self.filter1 == "all" else self.get_filter1().serialize()
+        auto_serialized["filter2"] = "all" if self.filter2 == "all" else self.get_filter2().serialize()
+        return auto_serialized
 
     def __repr__(self):
         return '<Build %r/%r/%r/%r>' % (self.viz_whiz, self.filter1, 
