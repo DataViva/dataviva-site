@@ -1,0 +1,93 @@
+<!-- extend from base layout -->
+{% extends "templates/base.html" %}
+
+{% block head %}
+
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/app_builder.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.key.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
+  
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="/static/js/libs/aight.d3.min.js?v=3"></script>
+  <![endif]-->
+
+{% endblock %}
+
+{% block content %}
+
+{% set pre_app = 44 %}
+{% for ab in all_builds %}
+
+  {% if pre_app != ab.type %}
+  <h3>{{ pre_app }}</h3>
+  {% endif %}
+  {% set pre_app = ab.type %}
+
+{% endfor %}
+
+  <!-- <div id="loading">
+    <i class="icon-cog icon-spin icon-4x"></i>
+  </div> -->
+
+  <div id="builder">
+
+    <label for="app_select">App</label>
+    <select id="app_select" 
+      onchange="select_app(this.options[this.selectedIndex].id)">
+    </select>
+
+    <div id="bra_select" class="filter_button">
+      <div class="leon label">Location</div>
+      <div id="bra_select" class="leon button" onclick="show_selector(this.id)">
+        <div class="leon icon"></div>
+        <span class="list_text"></span>
+        <i class="icon-list-alt"></i>
+      </div>
+    </div>
+
+    <div id="output_select"></div>
+    
+    <div id="app_controls"></div>
+  
+  </div>
+
+  <div id="toggles">
+
+    <a id="controls_toggle" class="leon button square" onclick="toggle_controls()"><i class="icon-cogs"></i></a>
+    <a id="refresh" class="leon button square" onclick="start_app()" onmouseover="visual.ui.tooltip(this.id)" onmouseout="visual.ui.tooltip(this.id,true)"><i class="icon-refresh"></i></a>
+  
+  </div>
+
+  <div id="settings">
+
+    <a id="file_select" class="leon button square" onclick="show_selector(this.id)"><i class="icon-save"></i></a>
+    <a id="starred" class="leon button square" onclick="toggle_star()"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
+    <a id="help_select" class="leon button square" onclick="show_selector(this.id)"><i class="icon-question-sign"></i></a>
+    <a id="full_screen" class="leon button square" onclick="window.open(window.location.href,'_blank')"><i class="icon-fullscreen"></i></a>
+  
+  </div>
+
+  <div id="app"></div>
+  <div id="ui_bottom"></div>
+  
+  <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it 
+       to SVG/PDF/PNG downloadable file. -->
+  <form id="svgform" action="/data/download/" method="post">
+    {{ form.hidden_tag() }}
+  </form>
+
+{% endblock %}
+
+{% block js %}
+
+  <script src="/static/js/libs/d3.geo.tile.js"></script>
+  <script src="/static/js/libs/topojson.js"></script>
+  <script src="/static/js/utils/utils.key.js"></script>
+  <script src="/static/js/utils/utils.selector.js"></script>
+  
+  <script type="text/javascript">
+  
+  
+  </script>
+
+{% endblock %}
