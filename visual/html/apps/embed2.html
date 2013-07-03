@@ -13,17 +13,22 @@
 
 {% endblock %}
 
+
 {% block content %}
 
-{% set pre_app = 44 %}
+<br /><br /><br />
+{% set pre_app = all_builds[0].type %}
 {% for ab in all_builds %}
 
   {% if pre_app != ab.type %}
   <h3>{{ pre_app }}</h3>
   {% endif %}
   {% set pre_app = ab.type %}
+  
+  {{ ab.title() }}<br />
 
 {% endfor %}
+<br /><br /><br />
 
   <!-- <div id="loading">
     <i class="icon-cog icon-spin icon-4x"></i>
