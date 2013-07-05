@@ -607,7 +607,13 @@ function Selector() {
   
   util.type = function(value) {
     if (!arguments.length) return name;
-    name = value
+    if (value == "export") name = "hs"
+    else if (value == "establishment") name = "isic"
+    else if (value == "career") name = "cbo"
+    else if (value == "location") name = "bra"
+    else if (value == "partner") name = "wld"
+    else name = value
+    console.log(value,name)
     type = name == "bra2" ? "bra" : name;
     return util;
   }

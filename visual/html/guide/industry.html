@@ -1,49 +1,24 @@
-<div id="sabrina_industry" class="grid5col1 grid5offset1"></div>
-<div id="industry" class="grid5col2">
-  
-  <div class="title">
-    <div class="arrow"></div>
-    <div class="text">
-      Are you interested in product exports or local industries?
-    </div>
-  </div>
-  
-  <div class="decision" name="hs">
-    <div class="text">
-      <h2>Exports</h2>
-    </div>
-    <div class="arrow"></div>
-  </div>
-  
-  <div class="decision" name="isic">
-    <div class="text">
-      <h2>Industries</h2>
-    </div>
-    <div class="arrow"></div>
-  </div>
-  
-</div>
+{% extends "templates/site.html" %}
 
-<script>
+{% block title %}: Generate a Guide{% endblock %}
 
-  visual.sabrina({
-    "div": d3.select("#sabrina_industry"),
-    "outfit": "worker",
-    "emotion": "smile"
-  })
+{% block body %}
+
+  <div class="grid5col1 grid5offset1">
+    <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
+  </div>
+  <div id="guide_start" class="grid5col2">
   
-  d3.selectAll("div.decision").on(vizwhiz.evt.click,function(){
-    var name = d3.select(this).attr("name")
-    if (current_path.length == 1 || current_path[2] == "attract") {
-      visual.slide.remove();
-      d3.html("/selector/"+name+"/",function(content){
-        visual.slide.load(content);
-      })
-    }
-    else {
-      if (name == "isic") update_path("industries");
-      else if (name == "hs") update_path("exports");
-    }
-  })
+    <div class="title">What are you interested in?</div>
+  
+    <a class="decision" href="/guide/export/select">
+      <h2>Product Exports</h2>
+    </a>
+  
+    <a class="decision" href="/guide/establishment/select">
+      <h2>Establishments and Employement</h2>
+    </a>
+  
+  </div>
 
-</script>
+{% endblock %}

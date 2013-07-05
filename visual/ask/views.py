@@ -13,6 +13,11 @@ mod = Blueprint('ask', __name__, url_prefix='/ask')
 @mod.before_request
 def before_request():
     g.page_type = mod.name
+    
+    g.sabrina = {}
+    g.sabrina["outfit"] = "lab"
+    g.sabrina["face"] = "smirk"
+    g.sabrina["hat"] = "glasses"
 
 RESULTS_PER_PAGE = 10
 

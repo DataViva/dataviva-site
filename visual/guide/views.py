@@ -749,17 +749,69 @@ def rec_list(filters,output,lists):
 @mod.route('/<category>/<category_id>/')
 @mod.route('/<category>/<category_id>/<option>/')
 def guide(category = None, category_id = None, option = None):
-    ajax = request.args.get("ajax")
-    if ajax == "true":
-        if category:
-            if category_id:
-                return render_template("guide/{0}_selected.html".format(category))
-            else:
-                return render_template("guide/{0}.html".format(category))
+    
+    item = None
+    article = None
+    
+    if option:
+        page = "guide/location.html"
+    elif category_id:
+        if category_id == "select":
+            page = "general/selector.html".format(category)
         else:
-            return render_template("guide/home.html")
+            if category_id != "all":
+                if category == "establishment":
+                    item = attrs.Isic.query.get_or_404(category_id)
+                elif category == "export":
+                    item = attrs.Hs.query.get_or_404(category_id)
+                elif category == "career":
+                    item = attrs.Cbo.query.get_or_404(category_id)
+                elif category == "location":
+                    item = attrs.Bra.query.get_or_404(category_id)
+            elif category == "location":
+                item = attrs.Wld.query.get_or_404("sabra")
+            page = "guide/{0}.html".format(category)
+    elif category == "industry":
+        page = "guide/industry.html"
+    elif category:
+        page = "guide/choice.html"
+    else:
+        page = "guide/index.html"
+        
+    if category == "career":
+        article = "an occupation"
+    elif category == "establishment":
+        article = "an industry"
+    elif category == "export":
+        article = "a product"
+    elif category == "location":
+        article = "a location"
+        
+    sabrina = {}
+    sabrina["outfit"] = "casual"
+    sabrina["face"] = "smile"
+    sabrina["hat"] = None
+    
+    if category != None:
+        sabrina["face"] = "smirk"
+    
+    if category == "career":
+        sabrina["outfit"] = "preppy"
+    elif category == "industry" or category == "export" or category == "establishment":
+        sabrina["outfit"] = "worker"
+        if category == "export" or category == "establishment":
+            sabrina["hat"] = "hardhat"
+    elif category == "location":
+        sabrina["outfit"] = "travel"
+        
+    if category_id == "select":
+        sabrina["outfit"] = sabrina["outfit"]+"_presenting"
             
-    return render_template("guide/index.html",
+    return render_template(page,
         category = category,
         category_id = category_id,
-        option = option)
+        option = option,
+        path = request.path,
+        sabrina = sabrina,
+        item = item,
+        article = article)

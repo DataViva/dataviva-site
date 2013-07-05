@@ -1,66 +1,39 @@
 {% extends "templates/site.html" %}
 
-{% block head %}
+{% block title %}: Generate a Profile{% endblock %}
 
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/vizwhiz.d3.css" />
+{% block body %}
 
-{% endblock %}
-
-{% block js %}
-
-  <script src="/static/js/utils/utils.selector.js"></script>
-
-  <script>
+  <div class="grid5col1 grid5offset1">
+    <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
+  </div>
   
-  var lang = "{{ g.locale }}"
+  <div class="grid5col2">
+  
+    <div class="title">
+      What would you like to learn more about?
+    </div>
+  
+    <a class="decision" href="/profiles/location/select/">
+      Brazilian Location
+    </a>
+  
+    <a class="decision" href="/profiles/career/select/">
+      Career
+    </a>
+  
+    <a class="decision" href="/profiles/establishment/select/">
+      Establishments and Employment
+    </a>
+  
+    <a class="decision" href="/profiles/export/select/">
+      Product Export
+    </a>
+  
+    <a class="decision" href="/profiles/partner/select/">
+      World Trade Partner
+    </a>
+  
+  </div>
 
-  // Stuff to do only once, on page load
-  window.onload = function(){
-    
-    if ("{{ category }}" != "None") {
-      load_selector("{{ category }}")
-    }
-    else {
-      d3.html("/profiles/?ajax=true",function(content){
-        visual.slide.load(content);
-      })
-    }
-    
-    visual.breadcrumbs();
-  
-  }
-  
-  function update_path(name) {
-
-    var new_path = window.location.pathname+name+"/";
-    window.history.pushState({"html":'html',"pageTitle":'pageTitle'}, "", new_path);
-      
-    if (window.location.pathname.split("/").length == 4) {
-      visual.breadcrumbs(lang);
-    
-      load_selector(name);
-      
-    }
-    else {
-      window.location = new_path;
-    }
-  }
-  
-  function load_selector(name) {
-    visual.slide.remove();
-    var cat = {
-      "occupation": "cbo",
-      "location": "bra",
-      "industry": "isic",
-      "product": "hs",
-      "partner": "wld"
-    }
-    d3.html("/selector/"+cat[name]+"/",function(content){
-      visual.slide.load(content);
-    })
-  }
-
-  </script>
-  
 {% endblock %}

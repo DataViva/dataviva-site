@@ -163,7 +163,7 @@ def get_urls(app=None, data_type=None, bra="mg", f1=None, f2=None, output=None):
     
     return apps
 
-# @mod.route('/embed/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
+@mod.route('/embed/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
 @mod.route('/embed/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/')
 def embed(app_name=None,data_type=None,bra_id=None,filter1=None,filter2=None,output=None):
     
@@ -344,4 +344,8 @@ def download():
 
 @mod.route('/')
 def guide():
-    return render_template("apps/index.html")
+    sabrina = {}
+    sabrina["outfit"] = "lab"
+    sabrina["face"] = "smirk"
+    sabrina["hat"] = "glasses"
+    return render_template("apps/index.html",sabrina = sabrina)

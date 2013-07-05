@@ -11,8 +11,8 @@
 
 body.guide > #container {
   background-image: url('/static/img/bgs/hills.png');
-  background-position: center 55px;
-  background-size: 60%;
+  background-position: center top;
+  background-size: 70%;
 }
 
 body.profiles > #container,

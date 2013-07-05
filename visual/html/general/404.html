@@ -2,25 +2,14 @@
 
 {% block body %}
 
-  <div id="sabrina_404" class="grid5col1 grid5offset1"></div>
+  <div class="grid5col1 grid5offset1">
+    <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
+  </div>
+
   <div id="question_404" class="grid5col2">
     <div class="title">
         Oh no! The page you've requested does not exist.
     </div>
   </div>
-
-{% endblock %}
-
-{% block js %}
-
-  <script>
-    
-    visual.sabrina({
-      "div": d3.select("#sabrina_404"),
-      "outfit": "lab",
-      "emotion": "scared"
-    });
-    
-  </script>
 
 {% endblock %}

@@ -5,7 +5,9 @@
 
 {% block body %}
 
-<div id="sabrina_data" class="grid5col1 grid5offset1"></div>
+<div class="grid5col1 grid5offset1">
+  <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
+</div>
 
 <div id="data_start" class="grid5col2">
 
@@ -28,19 +30,5 @@
   <a class="decision" href="/apps/geo_map/">Geo Map</a>
 
 </div>
-
-{% endblock %}
-
-{% block js %}
-
-  <script>
-
-    visual.sabrina({
-      "div": d3.select("#sabrina_data"),
-      "outfit": "lab",
-      "emotion": "smirk"
-    })
-
-  </script>
 
 {% endblock %}

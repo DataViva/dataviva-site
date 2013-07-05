@@ -12,7 +12,37 @@ mod = Blueprint('profiles', __name__, url_prefix='/profiles')
 def before_request():
     g.page_type = mod.name
 
-@mod.route('/occupation/<cbo_id>/')
+@mod.route('/')
+@mod.route('/<category>/select/')
+def profiles(category = None):
+    article = None
+    sabrina = {}
+    sabrina["outfit"] = "lab"
+    sabrina["face"] = "smirk"
+    sabrina["hat"] = None
+    if category != None:
+
+        if category == "career":
+            article = "an occupation"
+        elif category == "establishment":
+            article = "an industry"
+        elif category == "export":
+            article = "a product"
+        elif category == "location":
+            article = "a location"
+        elif category == "partner":
+            article = "a trade partner"
+            
+        page = "general/selector.html"
+    else:
+        page = "profiles/index.html"
+    return render_template(page, 
+        category = category,
+        sabrina = sabrina,
+        article = article,
+        path = request.path)
+
+@mod.route('/career/<cbo_id>/')
 def profiles_cbo(cbo_id = None):
     
     names = get_names({ "cbo_id": cbo_id })
@@ -33,7 +63,7 @@ def profiles_cbo(cbo_id = None):
     return render_template("general/guide.html", outfit = outfit, title = title, 
         primary = apps[:1][0], secondaries = apps[1:], rec = rec)
 
-@mod.route('/industry/<isic_id>/')
+@mod.route('/establishment/<isic_id>/')
 def profiles_isic(isic_id = None):
     
     names = get_names({ "isic_id": isic_id })
@@ -55,7 +85,7 @@ def profiles_isic(isic_id = None):
     return render_template("general/guide.html", outfit = outfit, title = title, 
         primary = apps[:1][0], secondaries = apps[1:], rec = rec)
 
-@mod.route('/product/<hs_id>/')
+@mod.route('/export/<hs_id>/')
 def profiles_hs(hs_id = None):
     
     names = get_names({ "hs_id": hs_id })
@@ -119,18 +149,7 @@ def profiles_wld(wld_id = None):
     
     return render_template("general/guide.html", outfit = outfit, title = title, 
         primary = apps[:1][0], secondaries = apps[1:], rec = rec)
-
-@mod.route('/')
-@mod.route('/<category>/')
-def profiles(category = None):
-    ajax = request.args.get("ajax")
-    if ajax == "true":
-        return render_template("profiles/home.html")
-    return render_template("profiles/index.html", category = category)
     
-    
-    
-
 ###############################
 # Get names from available ids
 # ---------------------------
@@ -357,7 +376,7 @@ def app_url(params):
             fs[i] = "all"
 
     # Get embedded url based off of variables
-    url = url_for("data.embed", app_name = params["app_name"], \
+    url = url_for("apps.embed", app_name = params["app_name"], \
         data_type = params["data_type"], bra_id = params["bra_id"], filter1 = fs[0], \
         filter2 = fs[1], output = params["output"], builder = "false")
 

@@ -110,12 +110,11 @@ def set_lang(lang):
 @app.errorhandler(404)
 def page_not_found(e):
     g.page_type = "error404"
-    return render_template('general/404.html', error = e), 404
+
+    sabrina = {}
+    sabrina["outfit"] = "lab"
+    sabrina["face"] = "scared"
+    sabrina["hat"] = None
     
-###############################
-# Selector Snippit
-# ---------------------------
-@mod.route('selector/<category>/')
-def guide_selector(category = None):        
-    return render_template("general/selector.html",
-        category = category)
+    return render_template('general/404.html', 
+        error = e, sabrina = sabrina), 404

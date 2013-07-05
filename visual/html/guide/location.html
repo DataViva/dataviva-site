@@ -1,46 +1,43 @@
-<div id="sabrina_location" class="grid5col1 grid5offset1"></div>
-<div id="location" class="grid5col2">
-  
-  <div class="title">
-    <div class="arrow"></div>
-    <div class="text">
-      Do you have a location in mind?
-    </div>
+{% extends "templates/site.html" %}
+
+{% block title %}: Generate a Guide{% endblock %}
+
+{% block body %}
+
+  <div class="grid5col1 grid5offset1">
+    <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
   </div>
   
-  <div class="decision">
-    <div class="text">
-      <h2>Yes</h2>
+  <div class="grid5col2">
+  
+    <div class="title">
+      What would you like to know about {{ item.name_en }}?
     </div>
-    <div class="arrow"></div>
+
+    <a class="decision" href="{{path}}opportunity">
+      What are the <b>industrial opportunities</b>?
+    </a>
+  
+    <a class="decision" href="{{path}}attract">
+      How can I <b>attract an industry</b>?
+    </a>
+
+    <a class="decision" href="{{path}}growth">
+      Which industries are <b>growing</b>?
+    </a>
+
+    <a class="decision" href="{{path}}shrink">
+      Which industries are <b>shrinking</b>?
+    </a>
+
+    <a class="decision" href="{{path}}workforce">
+      What is the available <b>workforce</b>?
+    </a>
+
+    <a class="decision" href="{{path}}industry">
+      What are the present <b>industries</b>?
+    </a>
+  
   </div>
-  
-  <div class="decision" name="all">
-    <div class="text">
-      <h2>No</h2>
-    </div>
-    <div class="arrow"></div>
-  </div>
-  
-</div>
 
-<script>
-
-  visual.sabrina({
-    "div": d3.select("#sabrina_location"),
-    "outfit": "travel",
-    "emotion": "smile"
-  });
-  
-  d3.selectAll("div.decision").on(vizwhiz.evt.click,function(){
-    var name = d3.select(this).attr("name")
-    if (name) update_path(name);
-    else {
-      visual.slide.remove();
-      d3.html("/selector/bra/",function(content){
-        visual.slide.load(content);
-      })
-    }
-  })
-
-</script>
+{% endblock %}

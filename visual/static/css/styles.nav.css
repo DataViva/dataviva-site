@@ -240,17 +240,32 @@ body.general #footer {
   background-size: 100% 100%;
   background-position: center center;
   display: inline-block;
-  height: 96px;
+  height: 75px;
   margin: 5px 10px;
-  width: 155px;
+  opacity: 0.6;
+  width: 120px;
 }
 
 #footer a.logo.governo {
-  background-image: url("/static/img/nav/logo_governo.jpg");
+  background-image: url("/static/img/nav/logo_governo_bw.jpg");
+  -webkit-transition: background-image .1s, opacity .1s;
+          transition: background-image .1s, opacity .1s;
+}
+
+#footer a.logo.governo:hover {
+  background-image: url("/static/img/nav/logo_governo_color.jpg");
+  opacity: 1;
 }
 
 #footer a.logo.fapemig {
-  background-image: url("/static/img/nav/logo_fapemig.jpg");
+  background-image: url("/static/img/nav/logo_fapemig_bw.jpg");
+  -webkit-transition: background-image .1s, opacity .1s;
+          transition: background-image .1s, opacity .1s;
+}
+
+#footer a.logo.fapemig:hover {
+  background-image: url("/static/img/nav/logo_fapemig_color.jpg");
+  opacity: 1;
 }
 
 #account {

@@ -8,62 +8,65 @@
 {% endblock %}
 
 {% block body %}
-<div class="lab_background">
-<div id="sabrina_ask" class="grid5col1"></div>
-<div class="grid5col4">
-  <div class="title">
-    <div class="arrow"></div>
-    <div class="text">What can I help you with?</div>
+  
+  <div class="grid5col1">
+    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
   </div>
-    {{ search_form.search(size=80, id='search', class='ask', placeholder="Search here...") }}
-    <div class="hide"><h3>Search Results</h3></div>
-    <div id="results"></div>
-      
-    <div id="recent">
-      <div id="order_toggle">
-        <legend>Order by</legend>
-        <input type="radio" name="order" value="votes" onclick="change_order(this.value)" {% if pagination.order == "votes" %}checked{% endif %}>
-        <label for="votes">Top Rated</label>
-        <input type="radio" name="order" value="newest" onclick="change_order(this.value)" {% if pagination.order == "newest" %}checked{% endif %}>
-        <label for="newest">Newest</label>
-      </div>
-      <h3>{% if pagination.order == "newest" %}Most Recent{% else %}Top Rated{% endif %} Questions</h3>
-      
-      {% for q in questions %}
-      {% include 'ask/snippets/question.html' %}
-      {% endfor %}
 
-      <div class="pagination">
-        {% if pagination.has_prev %} <a class="button" href="{{ url_for('ask.index', page=pagination.page-1) }}?results_per_page={{pagination.per_page}}&order={{pagination.order}}">&laquo; Previous</a> {% endif %}
-        {% for page in pagination.iter_pages() %}
-          {% if page %}
-            {% if page != pagination.page %}
-              <a class="button" href="{{ url_for('ask.index', page=page) }}?results_per_page={{pagination.per_page}}&order={{pagination.order}}">{{ page }}</a>
-            {% else %}
-              <strong class="button current_page">{{ page }}</strong>
-            {% endif %}
-          {% else %}
-            <span class=ellipsis>…</span>
-          {% endif %}
+  <div class="grid5col4">
+    <div class="title">
+      <div class="arrow"></div>
+      <div class="text">What can I help you with?</div>
+    </div>
+      {{ search_form.search(size=80, id='search', class='ask', placeholder="Search here...") }}
+      <div class="hide"><h3>Search Results</h3></div>
+      <div id="results"></div>
+      
+      <div id="recent">
+        <div id="order_toggle">
+          <legend>Order by</legend>
+          <input type="radio" name="order" value="votes" onclick="change_order(this.value)" {% if pagination.order == "votes" %}checked{% endif %}>
+          <label for="votes">Top Rated</label>
+          <input type="radio" name="order" value="newest" onclick="change_order(this.value)" {% if pagination.order == "newest" %}checked{% endif %}>
+          <label for="newest">Newest</label>
+        </div>
+        <h3>{% if pagination.order == "newest" %}Most Recent{% else %}Top Rated{% endif %} Questions</h3>
+      
+        {% for q in questions %}
+        {% include 'ask/snippets/question.html' %}
         {% endfor %}
-        {% if pagination.has_next %}
-        <a class="button" href="{{ url_for('ask.index', page=pagination.page+1) }}?results_per_page={{pagination.per_page}}&order={{pagination.order}}">Next &raquo;</a>
-        {% endif %}
-      </div>        
-    </div>
-    <div class="hide">
-     <a href="/ask/ask/">
-       <div class="help">
-         <div class="text">
-           <h2>Cannot find your answer here?</h2>
-           <p>Submit your question to Escritorio!</p>
+
+        <div class="pagination">
+          {% if pagination.has_prev %} <a class="button" href="{{ url_for('ask.index', page=pagination.page-1) }}?results_per_page={{pagination.per_page}}&order={{pagination.order}}">&laquo; Previous</a> {% endif %}
+          {% for page in pagination.iter_pages() %}
+            {% if page %}
+              {% if page != pagination.page %}
+                <a class="button" href="{{ url_for('ask.index', page=page) }}?results_per_page={{pagination.per_page}}&order={{pagination.order}}">{{ page }}</a>
+              {% else %}
+                <strong class="button current_page">{{ page }}</strong>
+              {% endif %}
+            {% else %}
+              <span class=ellipsis>…</span>
+            {% endif %}
+          {% endfor %}
+          {% if pagination.has_next %}
+          <a class="button" href="{{ url_for('ask.index', page=pagination.page+1) }}?results_per_page={{pagination.per_page}}&order={{pagination.order}}">Next &raquo;</a>
+          {% endif %}
+        </div>        
+      </div>
+      <div class="hide">
+       <a href="/ask/ask/">
+         <div class="help">
+           <div class="text">
+             <h2>Cannot find your answer here?</h2>
+             <p>Submit your question to Escritorio!</p>
+           </div>
+           <div class="arrow"></div>
          </div>
-         <div class="arrow"></div>
-       </div>
-     </a>
-    </div>
-</div>
-</div>
+       </a>
+      </div>
+  </div>
+
 {% endblock %}
 
 {% block js %}

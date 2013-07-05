@@ -49,7 +49,13 @@ def get_geo_location(ip):
 
 @mod.route('/')
 def index():
-    return render_template("data/index.html")
+    
+    sabrina = {}
+    sabrina["outfit"] = "lab"
+    sabrina["face"] = "smirk"
+    sabrina["hat"] = "glasses"
+    
+    return render_template("data/index.html", sabrina = sabrina)
 
 @mod.route('/query/')
 def query():

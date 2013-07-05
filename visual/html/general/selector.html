@@ -1,54 +1,37 @@
-<div id="sabrina_selector" class="grid5col1 grid5offset1"></div>
-<div id="selector_container" class="grid5col2">
-  
-  <div class="title">
-    <div class="arrow"></div>
-    <div class="text">
-      Please choose an option.
-    </div>
+{% extends "templates/site.html" %}
+
+{% block title %}: Select{% endblock %}
+
+{% block body %}
+
+  <div class="grid5col1 grid5offset1">
+    <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
   </div>
   
-  <div id="selector"></div>
-  
-</div>
+  <div class="grid5col2">
+    <div class="title">Please choose {{ article }}.</div>
+    <div id="selector"></div>
+  </div>
 
-<script>
+{% endblock %}
 
-  if ("{{ category }}" == "cbo") {
-    var outfit = "preppy",
-        text = "Please choose an occupation."
-  }
-  else if ("{{ category }}" == "bra") {
-    var outfit = "travel",
-        text = "Please choose a location."
-  }
-  else if (["hs","isic"].indexOf("{{ category }}") >= 0) {
-    var outfit = "worker",
-        text = "Please choose an industry."
-  }
-  
-  d3.select("#selector_container .question .text")
-    .html(text)
+{% block js %}
 
-  visual.sabrina({
-    "div": d3.select("#sabrina_selector"),
-    "outfit": outfit,
-    "emotion": "smile",
-    "presenting": true
-  })
-    
-  var selector = Selector()
-    .callback("selector_return")
-    .language(lang)
-    .type("{{ category }}");
-    
-  d3.select("#selector")
-    .call(selector);
-    
-  
-  
-  function selector_return(value) {
-    update_path(value.id);
-  }
+  <script src="/static/js/utils/utils.selector.js"></script>
 
-</script>
+  <script>
+  
+    var selector = Selector()
+      .callback("selector_return")
+      .type("{{ category }}");
+  
+    d3.select("#selector")
+      .call(selector);
+  
+    function selector_return(value) {
+      window.location = "{{ path }}".replace("select",value.id)
+    }
+
+  </script>
+  
+{% endblock %}

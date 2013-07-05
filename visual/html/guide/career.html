@@ -1,46 +1,49 @@
-<div id="sabrina_career" class="grid5col1 grid5offset1"></div>
-<div id="career" class="grid5col2">
-  
-  <div class="title">
-    <div class="arrow"></div>
-    <div class="text">
-      Do you have an occupation in mind?
-    </div>
+{% extends "templates/site.html" %}
+
+{% block title %}: Generate a Guide{% endblock %}
+
+{% block body %}
+
+  <div class="grid5col1 grid5offset1">
+    <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
   </div>
   
-  <div class="decision">
-    <div class="text">
-      <h2>Yes</h2>
-    </div>
-    <div class="arrow"></div>
+  <div class="grid5col2">
+  
+    {% if category_id == "all" %}
+  
+      <div class="title">
+        What would you like to know?
+      </div>
+  
+      <a class="decision" href="{{path}}growth">
+        What are the fastest <b>growing</b> jobs?
+      </a>
+  
+      <a class="decision" href="{{path}}wages">
+        What are the best <b>paid</b> occupations?
+      </a>
+  
+    {% else %}
+    
+      <div class="title">
+        What would you like to know about {{ item.name_en }}?
+      </div>
+
+      <a class="decision" href="{{path}}industries">
+        Which <b>industries</b> employ them?
+      </a>
+
+      <a class="decision" href="{{path}}growth">
+        Where is their employment <b>growing</b> the fastest?
+      </a>
+
+      <a class="decision" href="{{path}}paths">
+        What are their <b>career alternatives</b>?
+      </a>
+  
+    {% endif %}
+
   </div>
-  
-  <div class="decision" name="all">
-    <div class="text">
-      <h2>No</h2>
-    </div>
-    <div class="arrow"></div>
-  </div>
-  
-</div>
 
-<script>
-
-  visual.sabrina({
-    "div": d3.select("#sabrina_career"),
-    "outfit": "preppy",
-    "emotion": "smile"
-  })
-  
-  d3.selectAll("div.decision").on(vizwhiz.evt.click,function(){
-    var name = d3.select(this).attr("name")
-    if (name) update_path(name);
-    else {
-      visual.slide.remove();
-      d3.html("/selector/cbo/",function(content){
-        visual.slide.load(content);
-      })
-    }
-  })
-
-</script>
+{% endblock %}
