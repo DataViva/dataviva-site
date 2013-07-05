@@ -28,36 +28,6 @@ class Build(db.Model, AutoSerialize):
     
     def get_ui(self, ui_type):
         return self.ui.filter(UI.type == ui_type).first()
-    
-    def get_bra_and_filters(self, **kwargs):
-        defaults = {"cbo":"1210", "hs":"178703", "isic":"c1410", "wld":"aschn", "bra":"mg"}
-        result = {"bra":None, "filter1":None, "filter2":None}
-        
-        for f in result.keys():
-            if f == "bra":
-                if 'bra' in kwargs:
-                    bra = kwargs['bra'] or defaults['bra']
-                else:
-                    bra = defaults['bra']
-                result['bra'] = bra
-            
-            else:
-                filter_type = getattr(self, f)
-                if "all" not in filter_type:
-                    filter_type = filter_type[filter_type.find("<")+1:filter_type.find(">")]
-                    if filter_type in kwargs:
-                        result[f] = {"filter_type":filter_type, "id":kwargs[filter_type] or defaults[filter_type]}
-                    else:
-                        result[f] = {"filter_type":filter_type, "id":defaults[filter_type]}
-                else:
-                    result[f] = filter_type
-        
-        return result
-    
-    def get_bra(self, **kwargs):
-        filters = self.get_bra_and_filters(**kwargs)
-        bra = Bra.query.get(filters["bra"])
-        return bra
 
     def set_bra(self, bra_id):
         self.bra = Bra.query.get(bra_id)
@@ -207,10 +177,13 @@ class Build(db.Model, AutoSerialize):
 
     def serialize(self, **kwargs):
         auto_serialized = super(Build, self).serialize()
-        filters = self.get_bra_and_filters(**kwargs)
-        auto_serialized["bra"] = self.get_bra().serialize()
-        auto_serialized["filter1"] = "all" if self.filter1 == "all" else self.get_filter1().serialize()
-        auto_serialized["filter2"] = "all" if self.filter2 == "all" else self.get_filter2().serialize()
+        # filters = self.get_bra_and_filters(**kwargs)
+        auto_serialized["bra"] = self.bra.serialize()
+        auto_serialized["filter1"] = "all" if self.filter1 == "all" else self.filter1.serialize()
+        auto_serialized["filter2"] = "all" if self.filter2 == "all" else self.filter2.serialize()
+        auto_serialized["title"] = self.title()
+        auto_serialized["data_url"] = self.data_url()
+        auto_serialized["url"] = self.url()
         return auto_serialized
 
     def __repr__(self):

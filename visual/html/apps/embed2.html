@@ -161,7 +161,7 @@
   <script src="/static/js/utils/utils.selector.js"></script>
   
   <script type="text/javascript">
-
+  
     leon.start("#app_select")
     leon.start("#output_tree_map")
     
@@ -172,10 +172,13 @@
         .get(function(error,data){
           console.log(error,data)
         });
-      // d3.json("http://localhost:5000/rais/all/mg/show/all/", function(d){
-      //   console.log(d)
-      // })
     }
+    
+    d3.json("/{{current_build.data_url()}}")
+        .header("X-Requested-With", "XMLHttpRequest")
+        .get(function(error,data){
+          console.log(error,data)
+        });
   
   </script>
 
