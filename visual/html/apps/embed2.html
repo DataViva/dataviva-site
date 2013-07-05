@@ -10,25 +10,16 @@
   <!--[if lt IE 9]>
   <script type="text/javascript" src="/static/js/libs/aight.d3.min.js?v=3"></script>
   <![endif]-->
+   <style> 
+    body {
+      overflow: visible;
+    }
+    </style>
 
 {% endblock %}
 
 
 {% block content %}
-
-<br /><br /><br />
-{% set pre_app = all_builds[0].type %}
-{% for ab in all_builds %}
-
-  {% if pre_app != ab.type %}
-  <h3>{{ pre_app }}</h3>
-  {% endif %}
-  {% set pre_app = ab.type %}
-  
-  {{ ab.title() }}<br />
-
-{% endfor %}
-<br /><br /><br />
 
   <!-- <div id="loading">
     <i class="icon-cog icon-spin icon-4x"></i>
@@ -36,21 +27,100 @@
 
   <div id="builder">
 
-    <label for="app_select">App</label>
-    <select id="app_select" 
-      onchange="select_app(this.options[this.selectedIndex].id)">
-    </select>
+    <div id="app_selector">
+      <label for="app_select">App</label>
+      <select id="app_select" onchange="select_app(this.options[this.selectedIndex].id)">
+        {% set pre_app = None %}
+        {% for build in all_builds %}
+
+          {% if pre_app != build.type %}
+            {% set pre_app = build.type %}
+            <option icon="url('/static/img/icons/app/app_{{build.type}}.png')" color="{{build.color}}" value="{{build.type}}" id="{{build.type}}"{% if build.type == current_build.type %} selected="selected"{% endif %}>
+                {{ build.name }}
+            </option>
+          {% endif %}
+
+        {% endfor %}
+      </select>
+    </div>
 
     <div id="bra_select" class="filter_button">
       <div class="leon label">Location</div>
-      <div id="bra_select" class="leon button" onclick="show_selector(this.id)">
-        <div class="leon icon"></div>
-        <span class="list_text"></span>
+      <div id="bra" class="leon button" onclick="show_selector(this.id)">
+        {% set bra = current_build.bra %}
+        <div class="leon icon" style="background-color:{{ bra.color }}; background-image:url('/static/img/icons/bra/bra_{{ bra.id[:2] }}.png')"></div>
+        <span class="list_text">{{ bra.name_en }}</span>
         <i class="icon-list-alt"></i>
       </div>
     </div>
 
-    <div id="output_select"></div>
+    {% if current_build.dataset == "rais" and current_build.filter1 != "all" %}
+    {% set isic = current_build.filter1 %}
+    {% endif %}
+    <div id="isic_select" class="filter_button">
+      <div class="leon label">Industry</div>
+      <div id="isic" class="leon button" onclick="show_selector(this.id)">
+        <div class="leon icon"{% if isic %} style="background-color:{{ isic.color }}; background-image:url('/static/img/icons/isic/isic_{{ isic.id[:1] }}.png')"{% endif %}></div>
+        <span class="list_text">{% if isic %}{{ isic.name_en }}{% endif %}</span>
+        <i class="icon-list-alt"></i>
+      </div>
+    </div>
+
+    {% if current_build.dataset == "rais" and current_build.filter2 != "all" %}
+    {% set cbo = current_build.filter2 %}
+    {% endif %}
+    <div id="cbo_select" class="filter_button">
+      <div class="leon label">Occupation</div>
+      <div id="cbo" class="leon button" onclick="show_selector(this.id)">
+        <div class="leon icon"{% if cbo %} style="background-color:{{ cbo.color }}; background-image:url('/static/img/icons/cbo/cbo_{{ cbo.id[:1] }}.png')"{% endif %}></div>
+        <span class="list_text">{% if cbo %}{{ cbo.name_en }}{% endif %}</span>
+        <i class="icon-list-alt"></i>
+      </div>
+    </div>
+
+    {% if current_build.dataset == "secex" and current_build.filter1 != "all" %}
+    {% set hs = current_build.filter1 %}
+    {% endif %}
+    <div id="hs_select" class="filter_button">
+      <div class="leon label">Product Export</div>
+      <div id="hs" class="leon button" onclick="show_selector(this.id)">
+        <div class="leon icon"{% if hs %} style="background-color:{{ hs.color }}; background-image:url('/static/img/icons/hs/hs_{{ hs.id[:2] }}.png')"{% endif %}></div>
+        <span class="list_text">{% if hs %}{{ hs.name_en }}{% endif %}</span>
+        <i class="icon-list-alt"></i>
+      </div>
+    </div>
+
+    {% if current_build.dataset == "secex" and current_build.filter2 != "all" %}
+    {% set wld = current_build.filter2 %}
+    {% endif %}
+    <div id="wld_select" class="filter_button">
+      <div class="leon label">Trade Partner</div>
+      <div id="wld" class="leon button" onclick="show_selector(this.id)">
+        <div class="leon icon"{% if wld %} style="background-color:{{ wld.color }}; background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
+        <span class="list_text">{% if wld %}{{ wld.name_en }}{% endif %}</span>
+        <i class="icon-list-alt"></i>
+      </div>
+    </div>
+    
+    {% set pre_app = None %}
+    {% for build in all_builds %}
+
+      {% if pre_app != build.type %}
+        {% if pre_app != None %}
+          </select></div>
+        {% endif %}
+        {% set pre_app = build.type %}
+        <div id="{{ build.type }}_output_div">
+        <label for="output_{{ build.type }}">Output</label>
+        <select id="output_{{ build.type }}" onchange="app.update(this.options[this.selectedIndex].id)">
+      {% endif %}
+
+      <option value="{{ build.url() }}" id="{{ build.url() }}" {% if build.id == current_build.id %} selected="selected"{% endif %}>
+        {{ build.title() }}
+      </option>
+
+    {% endfor %}
+    </select></div>
     
     <div id="app_controls"></div>
   
@@ -92,6 +162,23 @@
   
   <script type="text/javascript">
   
+    leon.start("#app_select")
+    leon.start("#output_tree_map")
+    
+    var app = {}
+    app.update = function(url) {
+      d3.json("/apps/embed2/"+url)
+        .header("X-Requested-With", "XMLHttpRequest")
+        .get(function(error,data){
+          console.log(error,data)
+        });
+    }
+    
+    d3.json("/{{current_build.data_url()}}")
+        .header("X-Requested-With", "XMLHttpRequest")
+        .get(function(error,data){
+          console.log(error,data)
+        });
   
   </script>
 
