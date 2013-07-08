@@ -36,23 +36,6 @@ form textarea {
   <a href="{{ url_for('account.activity', activity_type='starred') }}">Starred</a> |
   <a href="{{ url_for('account.activity', activity_type='questions') }}">Questions</a> |
   <a href="{{ url_for('account.activity', activity_type='replies') }}">Replies</a>
-  
-  {% if g.user.is_admin() %}
-  <!-- <a href="{{ url_for('admin.questions') }}">
-    <div id="questions" class="menu">
-      <div class="text">Admin</div>
-      <div class="arrow"></div>
-    </div>
-  </a>
-
-  <div id="admin-links">
-    <p><a id="pending" href="{{ url_for('admin.questions', status='pending') }}">Pending Approval</a></p>
-    <p><a id="approved" href="{{ url_for('admin.questions', status='approved') }}">Approved</a></p>
-    <p><a id="rejected" href="{{ url_for('admin.questions', status='rejected') }}">Rejected</a></p>
-    <p><a id="duplicate" href="{{ url_for('admin.questions', status='duplicate') }}">Duplicate</a></p>
-  </div> -->
-  
-  {% endif %}
 </div>
 
 <div class="grid5col5">

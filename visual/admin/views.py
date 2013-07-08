@@ -1,26 +1,18 @@
-from flask import Blueprint, request, render_template, g, redirect, url_for, abort
+from flask import Blueprint, render_template, g, redirect, url_for, flash
 from flask.ext.login import login_required
 from visual import db
 from datetime import datetime
 # models
-from visual.ask.models import Question, Status, Reply
-# forms
-from visual.admin.forms import StatusNotesForm, StatusForm
-# utils
-from visual.utils import exist_or_404, Pagination
+from visual.account.models import User
 
 mod = Blueprint('admin', __name__, url_prefix='/admin')
 
-RESULTS_PER_PAGE = 10
 
 @mod.before_request
 def before_request():
     if not g.user.is_admin():
-        return redirect(url_for('account.my_questions'))
-
-@mod.errorhandler(404)
-def page_not_found(error):
-    return error, 404
+        flash('You need admin privledges for this section of the site!')
+        return redirect(url_for('account.activity'))
 
 ###############################
 # Views for ALL logged in users
@@ -28,9 +20,17 @@ def page_not_found(error):
 @mod.route('/')
 @login_required
 def admin():
-    return "LOGGED IN TO SECRET ADMIN SECTION!"
-    return redirect(url_for('admin.my_questions'))
+    return redirect(url_for('.admin_users'))
 
+@mod.route('/users/')
+@login_required
+def admin_users():
+    # get all users EXCEPT the logged in user
+    all_users = User.query.filter(User.id != g.user.id).all()
+    return render_template("admin/admin_users.html", all_users=all_users)
+
+
+'''
 ###############################
 # Views for ADMIN logged in users
 # ---------------------------
@@ -81,4 +81,4 @@ def question_edit(question_id, action=None):
     form.status_notes.data = q.status_notes
     return render_template('admin/snippets/status_notes_form.html', form=form)
     return render_template('admin/snippets/status_notes_form.html', form=form)
-
+'''

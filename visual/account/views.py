@@ -34,7 +34,7 @@ def load_user(id):
 
 @mod.route('/complete_login/')
 def complete_login():
-    return render_template('admin/complete_login.html')
+    return render_template('account/complete_login.html')
 
 ###############################
 # Views for ALL logged in users
@@ -43,12 +43,6 @@ def complete_login():
 @login_required
 def account_home():
     return redirect(url_for('account.activity'))
-    # questions_pending = None
-    # if g.user.is_admin():
-    #     s = Status.query.filter_by(name="Pending").first()
-    #     questions_pending = Question.query.filter_by(status=s).all()
-    # return render_template('admin/my_questions.html', 
-    #     questions_pending = questions_pending)
 
 @mod.route('/activity/')
 @mod.route('/activity/<activity_type>/')
@@ -76,7 +70,7 @@ def activity(activity_type=None):
         
         return jsonify({"activities":items})
     
-    return render_template("admin/activity.html", activity_type=activity_type)
+    return render_template("account/activity.html", activity_type=activity_type)
 
 @mod.route('/logout/')
 def logout():
@@ -85,36 +79,6 @@ def logout():
     session.pop('facebook_token', None)
     logout_user()
     return redirect('/')
-
-@mod.route('/user/<nickname>/')
-@login_required
-def user(nickname):
-    user = User.query.filter_by(nickname = nickname).first()
-    if user == None:
-        flash('User ' + nickname + ' does not exist.')
-        return redirect(url_for('general.home'))
-    questions_asked = Question.query.filter_by(user=user).all()
-    return render_template('admin/user.html',
-        user = user,
-        questions = questions_asked)
-
-@mod.route('/user/edit/', methods=['GET', 'POST'])
-@login_required
-def user_edit():
-    form = UserEditForm()
-    if form.validate_on_submit():
-        g.user.nickname = form.nickname.data
-        g.user.bio = form.bio.data
-        g.user.website = form.website.data
-        db.session.add(g.user)
-        db.session.commit()
-        flash('User updated.')
-        return redirect(url_for('account.user_edit'))
-    else:
-        form.nickname.data = g.user.nickname
-        form.bio.data = g.user.bio
-        form.website.data = g.user.website
-    return render_template('admin/user_edit.html', form=form)
 
 @mod.route('/login/', methods=['GET', 'POST'])
 def login():
@@ -139,7 +103,7 @@ def login():
                 _external=True)
             return facebook.authorize(callback=callback)
     
-    return render_template('admin/login.html', 
+    return render_template('account/login.html', 
         form = form,
         providers = providers)
 
