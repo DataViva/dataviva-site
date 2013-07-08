@@ -90,7 +90,6 @@ function Selector() {
         }
         
         selected = x;
-        update_header(x);
         
         if (popover) close.style("background-color",vizwhiz.utils.darker_color(x.color))
 
@@ -119,7 +118,7 @@ function Selector() {
         
       }
       
-      var close, header, header_select, bread, icon, title, search, body;
+      var close, header, header_select, bread, icon, title, search, body, sort_toggles;
       
       create_elements = function() {
       
@@ -133,14 +132,16 @@ function Selector() {
         }
 
         header = container.append("div").attr("class","selector_header")
-      
-        bread = header.append("div").attr("class","breadcrumb")
         
         icon = header.append("div").attr("class","selector_header_icon")
+        
+        title_div = header.append("div").attr("class","selector_title_div")
                 
-        title = header.append("div").attr("class","selector_title")
+        title = title_div.append("div").attr("class","selector_title")
       
-        var sort_toggles = header.append("div").attr("class","selector_toggles")
+        bread = title_div.append("div").attr("class","breadcrumb")
+      
+        sort_toggles = header.append("div").attr("class","selector_toggles")
       
         if (sorts.length > 1) {
         
@@ -167,6 +168,7 @@ function Selector() {
 
         header_select = sort_toggles.append("div")
           .attr("class","leon button")
+          .html("Select")
       
         search = header.append("input")
           .attr("type","text")
@@ -191,7 +193,7 @@ function Selector() {
       }
       
       var distance_url = "/attrs/bra/munic.value/",
-          depths = visual.depths(type),
+          depths = visual.depths(type,true),
           list = [],
           search_term = ""
           selected = null,
@@ -309,16 +311,14 @@ function Selector() {
           title.text("Searching for \""+x+"\"")
         }
         else {
-
           icon
             .style("display","inline-block")
             .style("background-image","url('"+x.icon+"')")
-            .style("background-color","url('"+x.color+"')")
+            .style("background-color",x.color)
           
-          if (!limit || v.id.length >= limit) {
+          if ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all")) {
             header_select
               .style("display","inline-block")
-              .html("Select "+x.name)
               .on(vizwhiz.evt.click,function(){
                 window[callback](data[x.id],name);
               })
@@ -326,16 +326,28 @@ function Selector() {
           else {
             header_select.style("display","none")
           }
-        
+          
           if (name == "bra") {
             var d = depths.indexOf(x.id.length)
             var length = depths[d+1]
             var prefix = visual.format.text("bra_"+length+"_plural")
           }
           else var prefix = visual.format.text(name+"_plural")
-          title.text(prefix+" in "+x.name.toTitleCase())
+          if (x.id == "all" && name != "bra") {
+            title.text(prefix)
+          }
+          else {
+            title.text(prefix+" in "+x.name.toTitleCase())
+          }
           
         }
+        
+        var hw = header.node().offsetWidth
+        hw -= icon.node().offsetWidth
+        hw -= sort_toggles.node().offsetWidth
+        hw -= 36
+        
+        title.style("max-width",hw+"px")
 
         // Set height, now that the header is completely updated
         set_height();
@@ -607,13 +619,7 @@ function Selector() {
   
   util.type = function(value) {
     if (!arguments.length) return name;
-    if (value == "export") name = "hs"
-    else if (value == "establishment") name = "isic"
-    else if (value == "career") name = "cbo"
-    else if (value == "location") name = "bra"
-    else if (value == "partner") name = "wld"
-    else name = value
-    console.log(value,name)
+    name = value
     type = name == "bra2" ? "bra" : name;
     return util;
   }

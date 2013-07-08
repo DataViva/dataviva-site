@@ -5,94 +5,65 @@
 
 {% block body %}
 
-  <div id="slide_container">
-
-    <div id="sabrina_guide" class="grid5col1"></div>
+  <div class="grid5col1">
+    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
+  </div>
   
-    <div class="primary_app grid5col4">
-      <div id="guide_title">{{ title }}</div>
-      
-      <div class="guide_app_description">
-        {{ primary.text_long|safe }}
-      </div>
-      <iframe class="guide_app" src="{{ primary.url|safe }}"></iframe>
-      
-      {% for app in secondaries %}
-        <div class="guide_app_description">{{ app.text_long|safe }}</div>
-        <iframe class="guide_app" src="{{ app.url|safe }}"></iframe>
-      {% endfor %}
-      
+  <div class="primary_app grid5col4">
+    <div id="guide_title">{{ title }}</div>
+    
+    <div class="guide_app_description">
+      {{ primary.text_long|safe }}
     </div>
+    <iframe class="guide_app" src="{{ primary.url|safe }}"></iframe>
+    
+    {% for app in secondaries %}
+      <div class="guide_app_description">{{ app.text_long|safe }}</div>
+      <iframe class="guide_app" src="{{ app.url|safe }}"></iframe>
+    {% endfor %}
+    
+  </div>
 
-    {% if recs %}
-      <div id="rec_stroke">
-        <div id="site_breadcrumbs">
-          <div id="crumb_guide" class="site_crumb">
-            <div class="site_crumb_back_red"></div>
-            <div class="site_crumb_body_red">{{recs.type|safe}}</div>
-            <div class="site_crumb_arrow_red"></div>
+  {% if recs %}
+    <div id="rec_stroke">
+      <div id="site_breadcrumbs">
+        <div id="crumb_guide" class="site_crumb">
+          <div class="site_crumb_back_red"></div>
+          <div class="site_crumb_body_red">{{recs.type|safe}}</div>
+          <div class="site_crumb_arrow_red"></div>
+        </div>
+      </div>
+    </div>
+    {% for r in recs.lists %}
+    <div id="{{r}}" class="recommendations"{% if loop.first %} style="display:block"{% endif %}>
+      <div class="recommendation_scroll">
+      {% for obj in recs.lists[r] %}
+        <a href="{{obj.url}}">
+          <div id="{{recs.type}}_{{obj.id}}" class="recommendation_block" style="background-color:{{obj.color}}">
+            <div class="rec_title">{{obj.name}}</div>
+            <div class="rec_value">{{obj.value}}</div>
           </div>
-        </div>
-      </div>
-      {% for r in recs.lists %}
-      <div id="{{r}}" class="recommendations"{% if loop.first %} style="display:block"{% endif %}>
-        <div class="recommendation_scroll">
-        {% for obj in recs.lists[r] %}
-          <a href="{{obj.url}}">
-            <div id="{{recs.type}}_{{obj.id}}" class="recommendation_block" style="background-color:{{obj.color}}">
-              <div class="rec_title">{{obj.name}}</div>
-              <div class="rec_value">{{obj.value}}</div>
-            </div>
-          </a>
-        {% endfor %}
-        </div>
-        <div class="recommendation_cover left"></div>
-        <div class="recommendation_cover right"></div>
-      </div>
+        </a>
       {% endfor %}
-  
-      <div class="recommendation_toggles">
-        {% for r in recs.lists %}
-        <label class="rec_label" for="{{r}}">{{r}}</label>
-        <input type="radio" name="recs" onclick="change_recs(this.value)" value="{{r}}"{% if loop.first %} checked{% endif %}>
-        {% endfor %}
       </div>
-    {% endif %}
-  
-  </div>
-  
-  <div id="computer_guide">
-    <div id="computer"></div>
-    <div id="computer_lights"></div>
-    <div id="computer_sabrina"></div>
-    <div id="screen_text">Loading...</div>
-  </div>
+      <div class="recommendation_cover left"></div>
+      <div class="recommendation_cover right"></div>
+    </div>
+    {% endfor %}
+
+    <div class="recommendation_toggles">
+      {% for r in recs.lists %}
+      <label class="rec_label" for="{{r}}">{{r}}</label>
+      <input type="radio" name="recs" onclick="change_recs(this.value)" value="{{r}}"{% if loop.first %} checked{% endif %}>
+      {% endfor %}
+    </div>
+  {% endif %}
 
 {% endblock %}
 
 {% block js %}
 
   <script>
-  
-    var loading_text = [
-      "Finishing<br>Guide",
-      "Building<br>Page",
-      "Constructing<br>Apps",
-      "Formatting<br>Data",
-      "Querying<br>Database"
-    ]
-  
-    visual.sabrina({
-      "div": d3.select("#sabrina_guide"),
-      "outfit": "{{ outfit }}",
-      "emotion": "smile"
-    })
-    
-    var apps = 0
-    d3.selectAll("iframe.guide_app")
-    .each(function(){
-      apps++;
-    })
     
     visual.breadcrumbs();
     
@@ -114,11 +85,6 @@
           .style("display","block")
       }
     }
-    
-    
-    
-    d3.select("#container")
-      .style("height",d3.select("#computer").style("padding-bottom"))
       
     d3.selectAll(".recommendation_block")
       .style("color",function(){
@@ -135,21 +101,6 @@
         if (["wld","bra"].indexOf(type) >= 0) return "50% 50%"
         else return "100% 100%"
       })
-
-    d3.select("#screen_text").html(loading_text[apps])
-    function embed_finish(path) {
-      apps--;
-      d3.select("#screen_text").html(loading_text[apps])
-      if (apps == 0) {
-        d3.select("#computer_guide").style("left","-150%")
-        d3.select("#slide_container").style("left","0%")
-        setTimeout(function(){
-          d3.select("#computer_guide").remove();
-          d3.select("#container").style("height","auto")
-          d3.select("#slide_container").style("position","relative")
-        },750)
-      }
-    }
 
   </script>
   

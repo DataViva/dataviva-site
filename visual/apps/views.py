@@ -21,6 +21,11 @@ mod = Blueprint('apps', __name__, url_prefix='/apps')
 @mod.before_request
 def before_request():
     g.page_type = mod.name
+    
+    g.sabrina = {}
+    g.sabrina["outfit"] = "lab"
+    g.sabrina["face"] = "smirk"
+    g.sabrina["hat"] = "glasses"
 
 @mod.route('/embed/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
 @mod.route('/embed/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/')

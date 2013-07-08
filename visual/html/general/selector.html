@@ -2,13 +2,19 @@
 
 {% block title %}: Select{% endblock %}
 
+{% block head %}
+
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
+
+{% endblock %}
+
 {% block body %}
 
-  <div class="grid5col1 grid5offset1">
-    <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
+  <div class="grid5col1 grid5offsethalf">
+    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
   </div>
   
-  <div class="grid5col2">
+  <div class="grid5col3">
     <div class="title">Please choose {{ article }}.</div>
     <div id="selector"></div>
   </div>
@@ -21,15 +27,39 @@
 
   <script>
   
+    var value = "{{ category }}"
+    
+    if (value == "export") {
+      value = "hs"
+      var limit = 2
+    }
+    else if (value == "establishment") {
+      value = "isic"
+      var limit = 1
+    }
+    else if (value == "career") {
+      value = "cbo"
+      var limit = 1
+    }
+    else if (value == "location") {
+      value = "bra"
+      var limit = 2
+    }
+    else if (value == "partner") {
+      value = "wld"
+      var limit = 2
+    }
+  
     var selector = Selector()
       .callback("selector_return")
-      .type("{{ category }}");
+      .type(value)
+      .limit(limit);
   
     d3.select("#selector")
       .call(selector);
   
     function selector_return(value) {
-      window.location = "{{ path }}".replace("select",value.id)
+      window.location = "{{ g.path }}".replace("select",value.id)
     }
 
   </script>

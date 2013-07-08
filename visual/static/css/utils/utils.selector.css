@@ -12,7 +12,6 @@ div.selector_header {
   display: block;
   min-height: 26px;
   padding: 12px;
-  text-align: center;
 }
 
 div.selector_header > div.selector_header_icon {
@@ -20,15 +19,32 @@ div.selector_header > div.selector_header_icon {
   background-repeat: no-repeat;
   background-size: 100%;
   display: inline-block;
-  height: 20px;
-  margin-right: 6px;
-  width: 20px;
+  height: 50px;
+  margin-bottom: 12px;
+  margin-right: 12px;
+  width: 50px;
 }
 
-div.selector_header > div.selector_title {
+div.selector_title_div {
+  display: inline-block;
+}
+
+div.selector_title_div > div.selector_title {
   display: inline-block;
   font-size: 18px;
   line-height: 20px;
+}
+
+div.selector_toggles {
+  display: inline-block;
+  float: right;
+}
+
+div.selector_toggles > div.leon.button {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 div.selector_header > input {
@@ -69,6 +85,13 @@ div.selector_body > div.search_result {
   display: block;
   padding: 6px;
   position: relative ;
+}
+
+div.selector_body > div.search_result:after { 
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;
 }
 
 div.search_result > div.search_icon {
@@ -112,9 +135,8 @@ div.search_text > div.search_data {
 }
 
 div.search_result > div.search_buttons {
-  position: absolute;
-  right: 6px;
-  top: 6px;
+  display: inline-block;
+  float: right;
 }
 
 div.search_buttons > div.leon.button {

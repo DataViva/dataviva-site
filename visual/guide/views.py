@@ -12,6 +12,13 @@ mod = Blueprint('guide', __name__, url_prefix='/guide')
 @mod.before_request
 def before_request():
     g.page_type = mod.name
+    
+    g.sabrina = {}
+    g.sabrina["outfit"] = "casual"
+    g.sabrina["face"] = "smile"
+    g.sabrina["hat"] = None
+    
+    g.path = request.path
 
 ###############################
 # Final Guide Page Views
@@ -787,31 +794,24 @@ def guide(category = None, category_id = None, option = None):
     elif category == "location":
         article = "a location"
         
-    sabrina = {}
-    sabrina["outfit"] = "casual"
-    sabrina["face"] = "smile"
-    sabrina["hat"] = None
-    
     if category != None:
-        sabrina["face"] = "smirk"
+        g.sabrina["face"] = "smirk"
     
     if category == "career":
-        sabrina["outfit"] = "preppy"
+        g.sabrina["outfit"] = "preppy"
     elif category == "industry" or category == "export" or category == "establishment":
-        sabrina["outfit"] = "worker"
+        g.sabrina["outfit"] = "worker"
         if category == "export" or category == "establishment":
-            sabrina["hat"] = "hardhat"
+            g.sabrina["hat"] = "hardhat"
     elif category == "location":
-        sabrina["outfit"] = "travel"
+        g.sabrina["outfit"] = "travel"
         
     if category_id == "select":
-        sabrina["outfit"] = sabrina["outfit"]+"_presenting"
+        g.sabrina["outfit"] = g.sabrina["outfit"]+"_presenting"
             
     return render_template(page,
         category = category,
         category_id = category_id,
         option = option,
-        path = request.path,
-        sabrina = sabrina,
         item = item,
         article = article)

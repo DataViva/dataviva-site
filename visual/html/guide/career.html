@@ -5,7 +5,7 @@
 {% block body %}
 
   <div class="grid5col1 grid5offset1">
-    <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
+    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
   </div>
   
   <div class="grid5col2">
@@ -16,11 +16,11 @@
         What would you like to know?
       </div>
   
-      <a class="decision" href="{{path}}growth">
+      <a class="decision" href="{{g.path}}growth">
         What are the fastest <b>growing</b> jobs?
       </a>
   
-      <a class="decision" href="{{path}}wages">
+      <a class="decision" href="{{g.path}}wages">
         What are the best <b>paid</b> occupations?
       </a>
   
@@ -30,15 +30,15 @@
         What would you like to know about {{ item.name_en }}?
       </div>
 
-      <a class="decision" href="{{path}}industries">
+      <a class="decision" href="{{g.path}}industries">
         Which <b>industries</b> employ them?
       </a>
 
-      <a class="decision" href="{{path}}growth">
+      <a class="decision" href="{{g.path}}growth">
         Where is their employment <b>growing</b> the fastest?
       </a>
 
-      <a class="decision" href="{{path}}paths">
+      <a class="decision" href="{{g.path}}paths">
         What are their <b>career alternatives</b>?
       </a>
   

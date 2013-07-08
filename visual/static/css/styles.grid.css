@@ -1,87 +1,67 @@
-.grid1 {
-  width: 98%;
-  margin: 0px 0.75%;
+.grid1, .grid4col1, .grid4col2, .grid4col3, 
+.grid5col1, .grid5col2, .grid5col3, .grid5col4 {
   display: inline-block;
+  float: left;
+  margin: 0px 10px;
   position: relative;
 }
 
+.grid1 {
+  width: 960px;
+}
+
+/*****************/
+/* 4 Column Grid */
+/*****************/
+
 .grid4col1 {
-  width: 23%;
-  margin: 0px 0.75%;
-  display: inline-block;
-  position: relative;
+  width: 225px;
 }
 
 .grid4col2 {
-  width: 48%;
-  margin: 0px 0.75%;
-  display: inline-block;
-  position: relative;
+  width: 470px;
 }
 
 .grid4col3 {
-  width: 73%;
-  margin: 0px 0.75%;
-  display: inline-block;
-  position: relative;
+  width: 715px;
+}
+
+.grid4offsethalf {
+  margin-left: 127.5px;
 }
 
 .grid4offset1 {
-  margin-left: 24.5%;
+  margin-left: 255px;
 }
 
-.grid4offset2 {
-  margin-left: 49%;
-}
-
-.grid4offset3 {
-  margin-left: 73.5%;
-}
+/*****************/
+/* 4 Column Grid */
+/*****************/
 
 .grid5col1 {
-  width: 18%;
-  margin: 0px 0.75%;
-  display: inline-block;
-  position: relative;
+  width: 176px;
 }
 
 .grid5col2 {
-  width: 38%;
-  margin: 0px 0.75%;
-  display: inline-block;
-  position: relative;
+  width: 372px;
 }
 
 .grid5col3 {
-  width: 58%;
-  margin: 0px 0.75%;
-  display: inline-block;
-  position: relative;
+  width: 566px;
 }
 
 .grid5col4 {
-  width: 78%;
-  margin: 0px 0.75%;
-  display: inline-block;
-  position: relative;
+  width: 764px;
 }
 
 .grid5offsethalf {
-  margin-left: 10.5%;
+  margin-left: 103px;
 }
 
 .grid5offset1 {
-  margin-left: 18.75%;
+  margin-left: 206px;
 }
 
 .grid5offset2 {
-  margin-left: 39%;
-}
-
-.grid5offset3 {
-  margin-left: 48.5%;
-}
-
-.grid5offset4 {
-  margin-left: 68%;
+  margin-left: 402px;
 }

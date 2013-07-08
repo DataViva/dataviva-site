@@ -11,144 +11,175 @@ mod = Blueprint('profiles', __name__, url_prefix='/profiles')
 @mod.before_request
 def before_request():
     g.page_type = mod.name
+    
+    g.sabrina = {}
+    g.sabrina["outfit"] = "lab"
+    g.sabrina["face"] = "smirk"
+    g.sabrina["hat"] = None
+    
+    g.path = request.path
 
 @mod.route('/')
-@mod.route('/<category>/select/')
-def profiles(category = None):
-    article = None
-    sabrina = {}
-    sabrina["outfit"] = "lab"
-    sabrina["face"] = "smirk"
-    sabrina["hat"] = None
-    if category != None:
-
-        if category == "career":
-            article = "an occupation"
-        elif category == "establishment":
-            article = "an industry"
-        elif category == "export":
-            article = "a product"
-        elif category == "location":
-            article = "a location"
-        elif category == "partner":
-            article = "a trade partner"
-            
-        page = "general/selector.html"
-    else:
-        page = "profiles/index.html"
-    return render_template(page, 
-        category = category,
-        sabrina = sabrina,
-        article = article,
-        path = request.path)
+def profiles():
+    return render_template("profiles/index.html")
 
 @mod.route('/career/<cbo_id>/')
 def profiles_cbo(cbo_id = None):
     
-    names = get_names({ "cbo_id": cbo_id })
+    if cbo_id == "select":
+
+        article = "an occupation"
+        
+        return render_template("general/selector.html", 
+            category = "career",
+            article = article)
+        
+    else:
     
-    title = u"{cbo_id}".format(**names)
-    outfit = "preppy"
+        names = get_names({ "cbo_id": cbo_id })
     
-    apps = app_obj(
-        [
-            { "app_name": "rings", "cbo_id": cbo_id },
-            { "app_name": "tree_map", "cbo_id": cbo_id, "output": "bra" },
-            { "app_name": "tree_map", "cbo_id": cbo_id, "output": "isic" }
-        ],names
-    )
+        title = u"{cbo_id}".format(**names)
+        outfit = "preppy"
     
-    rec = False
+        apps = app_obj(
+            [
+                { "app_name": "rings", "cbo_id": cbo_id },
+                { "app_name": "tree_map", "cbo_id": cbo_id, "output": "bra" },
+                { "app_name": "tree_map", "cbo_id": cbo_id, "output": "isic" }
+            ],names
+        )
     
-    return render_template("general/guide.html", outfit = outfit, title = title, 
-        primary = apps[:1][0], secondaries = apps[1:], rec = rec)
+        rec = False
+    
+        return render_template("general/guide.html", outfit = outfit, title = title, 
+            primary = apps[:1][0], secondaries = apps[1:], rec = rec)
 
 @mod.route('/establishment/<isic_id>/')
 def profiles_isic(isic_id = None):
     
-    names = get_names({ "isic_id": isic_id })
+    if isic_id == "select":
+
+        article = "an industry"
+        
+        return render_template("general/selector.html", 
+            category = "establishment",
+            article = article)
+        
+    else:
     
-    title = u"{isic_id}".format(**names)
-    outfit = "worker"
+        names = get_names({ "isic_id": isic_id })
     
-    apps = app_obj(
-        [
-            { "app_name": "rings", "isic_id": isic_id },
-            { "app_name": "tree_map", "isic_id": isic_id, "output": "bra" },
-            { "app_name": "bubbles", "isic_id": isic_id },
-            { "app_name": "tree_map", "isic_id": isic_id, "output": "cbo" }
-        ],names
-    )
+        title = u"{isic_id}".format(**names)
+        outfit = "worker"
     
-    rec = False
+        apps = app_obj(
+            [
+                { "app_name": "rings", "isic_id": isic_id },
+                { "app_name": "tree_map", "isic_id": isic_id, "output": "bra" },
+                { "app_name": "bubbles", "isic_id": isic_id },
+                { "app_name": "tree_map", "isic_id": isic_id, "output": "cbo" }
+            ],names
+        )
     
-    return render_template("general/guide.html", outfit = outfit, title = title, 
-        primary = apps[:1][0], secondaries = apps[1:], rec = rec)
+        rec = False
+    
+        return render_template("general/guide.html", outfit = outfit, title = title, 
+            primary = apps[:1][0], secondaries = apps[1:], rec = rec)
 
 @mod.route('/export/<hs_id>/')
 def profiles_hs(hs_id = None):
     
-    names = get_names({ "hs_id": hs_id })
+    if hs_id == "select":
+
+        article = "a product"
+        
+        return render_template("general/selector.html", 
+            category = "export",
+            article = article)
+        
+    else:
     
-    title = u"{hs_id}".format(**names)
-    outfit = "worker"
+        names = get_names({ "hs_id": hs_id })
     
-    apps = app_obj(
-        [
-            { "app_name": "rings", "hs_id": hs_id },
-            { "app_name": "tree_map", "hs_id": hs_id, "output": "bra" },
-            { "app_name": "tree_map", "hs_id": hs_id, "output": "wld" }
-        ],names
-    )
+        title = u"{hs_id}".format(**names)
+        outfit = "worker"
     
-    rec = False
+        apps = app_obj(
+            [
+                { "app_name": "rings", "hs_id": hs_id },
+                { "app_name": "tree_map", "hs_id": hs_id, "output": "bra" },
+                { "app_name": "tree_map", "hs_id": hs_id, "output": "wld" }
+            ],names
+        )
     
-    return render_template("general/guide.html", outfit = outfit, title = title, 
-        primary = apps[:1][0], secondaries = apps[1:], rec = rec)
+        rec = False
+    
+        return render_template("general/guide.html", outfit = outfit, title = title, 
+            primary = apps[:1][0], secondaries = apps[1:], rec = rec)
 
 @mod.route('/location/<bra_id>/')
 def profiles_bra(bra_id = None):
     
-    names = get_names({ "bra_id": bra_id })
+    if bra_id == "select":
+
+        article = "a location"
+        
+        return render_template("general/selector.html", 
+            category = "location",
+            article = article)
+        
+    else:
     
-    title = u"{bra_id}".format(**names)
-    outfit = "travel"
+        names = get_names({ "bra_id": bra_id })
     
-    apps = app_obj(
-        [
-            { "app_name": "network", "bra_id": bra_id, "output": "hs" },
-            { "app_name": "network", "bra_id": bra_id, "output": "isic" },
-            { "app_name": "tree_map", "bra_id": bra_id, "output": "cbo" },
-            { "app_name": "pie_scatter", "bra_id": bra_id, "output": "hs" },
-            { "app_name": "tree_map", "bra_id": bra_id, "output": "isic" }
-        ],names
-    )
+        title = u"{bra_id}".format(**names)
+        outfit = "travel"
     
-    rec = False
+        apps = app_obj(
+            [
+                { "app_name": "network", "bra_id": bra_id, "output": "hs" },
+                { "app_name": "network", "bra_id": bra_id, "output": "isic" },
+                { "app_name": "tree_map", "bra_id": bra_id, "output": "cbo" },
+                { "app_name": "pie_scatter", "bra_id": bra_id, "output": "hs" },
+                { "app_name": "tree_map", "bra_id": bra_id, "output": "isic" }
+            ],names
+        )
     
-    return render_template("general/guide.html", outfit = outfit, title = title, 
-        primary = apps[:1][0], secondaries = apps[1:], rec = rec)
+        rec = False
+    
+        return render_template("general/guide.html", outfit = outfit, title = title, 
+            primary = apps[:1][0], secondaries = apps[1:], rec = rec)
 
 @mod.route('/partner/<wld_id>/')
 def profiles_wld(wld_id = None):
     
-    names = get_names({ "wld_id": wld_id })
+    if wld_id == "select":
+
+        article = "a trade partner"
+        
+        return render_template("general/selector.html", 
+            category = "partner",
+            article = article)
+        
+    else:
     
-    title = u"{wld_id}".format(**names)
-    outfit = "travel"
+        names = get_names({ "wld_id": wld_id })
     
-    apps = app_obj(
-        [
-            { "app_name": "tree_map", "wld_id": wld_id, "output": "hs" },
-            { "app_name": "tree_map", "wld_id": wld_id, "output": "bra" },
-            { "app_name": "stacked", "wld_id": wld_id, "output": "hs" }
-        ],names
-    )
+        title = u"{wld_id}".format(**names)
+        outfit = "travel"
     
-    rec = False
+        apps = app_obj(
+            [
+                { "app_name": "tree_map", "wld_id": wld_id, "output": "hs" },
+                { "app_name": "tree_map", "wld_id": wld_id, "output": "bra" },
+                { "app_name": "stacked", "wld_id": wld_id, "output": "hs" }
+            ],names
+        )
     
-    return render_template("general/guide.html", outfit = outfit, title = title, 
-        primary = apps[:1][0], secondaries = apps[1:], rec = rec)
+        rec = False
+    
+        return render_template("general/guide.html", outfit = outfit, title = title, 
+            primary = apps[:1][0], secondaries = apps[1:], rec = rec)
     
 ###############################
 # Get names from available ids

@@ -5,23 +5,23 @@
 {% block body %}
 
   <div class="grid5col1 grid5offset1">
-    <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
+    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
   </div>
   <div id="guide_start" class="grid5col2">
   
     <div class="title">Olá! What can I help you with?</div>
   
-    <a class="decision" href="{{ path }}location">
+    <a class="decision" href="{{g.path}}location">
       <h2>Location</h2>
       Learn about the potential of a location.
     </a>
   
-    <a class="decision" href="{{ path }}industry">
+    <a class="decision" href="{{g.path}}industry">
       <h2>Industry</h2>
       Learn about industrial opportunities.
     </a>
   
-    <a class="decision" href="{{ path }}career">
+    <a class="decision" href="{{g.path}}career">
       <h2>Career</h2>
       Learn about job opportunities.
     </a>

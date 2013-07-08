@@ -5,7 +5,7 @@
 {% block body %}
 
   <div class="grid5col1 grid5offset1">
-    <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
+    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
   </div>
   
   <div class="grid5col2">
@@ -14,19 +14,19 @@
       What would you like to know about {{ item.name_en }}?
     </div>
   
-    <a class="decision" href="{{path}}destinations">
+    <a class="decision" href="{{g.path}}destinations">
       Which <b>countries</b> import them?
     </a>
 
-    <a class="decision" href="{{path}}potential">
+    <a class="decision" href="{{g.path}}potential">
       Which <b>locations</b> produce them?
     </a>
   
-    <a class="decision" href="{{path}}diversification">
+    <a class="decision" href="{{g.path}}diversification">
       Which industries <b>co-locate</b> with them?
     </a>
   
-    <a class="decision" href="{{path}}location">
+    <a class="decision" href="{{g.path}}location">
       What is the <b>production potential</b> of a location?
     </a>
 

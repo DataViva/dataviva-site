@@ -5,13 +5,13 @@
 {% block body %}
 
   <div class="grid5col1 grid5offset1">
-    <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
+    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
   </div>
   <div class="grid5col2">
   
     <div class="title">Do you have {{ article }} in mind?</div>
-    <a class="decision" href="{{ path }}select">Yes</a>
-    <a class="decision" href="{{ path }}all">No</a>
+    <a class="decision" href="{{g.path}}select">Yes</a>
+    <a class="decision" href="{{g.path}}all">No</a>
   
   </div>
 
