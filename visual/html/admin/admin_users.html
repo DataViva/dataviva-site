@@ -1,13 +1,90 @@
 <!-- extend admin_template -->
 {% extends "templates/site.html" %}
 
+{% block head %}
+<style>
+table > tbody td > img {
+  width: 30px;
+  text-align: center;
+}
+</style>
+{% endblock %}
 
 {% block body %}
 
 Welcome Admin!
 
+<div class="feed">
+  
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Email</th>
+        <th>Full Name</th>
+        <th>Nick Name</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</div>
+
+<script src="/static/js/utils/utils.infinite_scroll.js"></script>
 <script>
 
+function item_formatter(container_el, activities){
+  
+  roles = {0: "user", 1: "admin", 2: "super admin"}
+  
+  var attrs_enter = d3.select(container_el).select("tbody").selectAll("tr")
+    .data(activities, function(d){ return d.nickname; })
+    .enter().append("tr")
+    
+  attrs_enter.append("td")
+    .append("img")
+    .attr("src", function(d){
+      if(d.image) return d.image;
+    })
+
+  attrs_enter.append("td").text(function(d){ return d.email; })
+  attrs_enter.append("td").text(function(d){ return d.fullname; })
+  attrs_enter.append("td").text(function(d){ return d.nickname; })
+  var role_select = attrs_enter
+    .append("td")
+    .append("select")
+    .attr("id", "role_select")
+  
+  role_select.selectAll("option")
+    .data(d3.values(roles))
+    .enter().append("option")
+    .text(function(d){ return d; })
+    .attr("selected", function(d){
+      var parent_data = d3.select(this.parentNode).datum();
+      if(roles[parent_data.role] == d){
+        return "selected"
+      }
+    })
+
+  leon.start("#role_select")
+
+}
+
+// function(d){ 
+//       var role = "User";
+//       if(d.role){
+//         if(parseInt(d.role) > 1) role = "Super Admin";
+//         return role = "Admin";
+//       }
+//   }
+
+var is = infinite_scroll().format_items(item_formatter);
+
+d3.select(".feed")
+  .call(is)
+  
 </script>
 
 {% endblock %}

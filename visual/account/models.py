@@ -5,10 +5,13 @@ from os import urandom
 
 ROLE_USER = 0
 ROLE_ADMIN = 1
+ROLE_SUPER_ADMIN = 2
 
-class User(db.Model):
+class User(db.Model, AutoSerialize):
 
     __tablename__ = 'account_user'
+    __public__ = ("nickname", "email", "fullname", "image", "role")
+    
     id = db.Column(db.Integer, primary_key = True)
     google_id = db.Column(db.String(120), unique = True)
     twitter_id = db.Column(db.String(120), unique = True)

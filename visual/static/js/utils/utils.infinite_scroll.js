@@ -1,5 +1,6 @@
 function infinite_scroll(selection){
-  var url = window.location.href;
+  var url = window.location.href,
+      format_items = function(d){ return d };
   
   // Initialize variables
   var formatDate = d3.time.format("%B %-d, %Y"),
@@ -9,6 +10,7 @@ function infinite_scroll(selection){
   
   scroll = function(selection) {
     selection.each(function(data_passed) {
+      
       var container_el = this;
       
       // On first time add
@@ -50,14 +52,7 @@ function infinite_scroll(selection){
       // call to the server
       function display(error, new_data) {
         
-        // clean up data into one nice array of activities
-        activities = new_data.activities.map(function(d){
-          return_obj = d[1]
-          return_obj["activity_type"] = d[0]
-          return_obj["title"] = d[1].app_name ? d[1].app_name : d[1].question ? d[1].question : d[1].body;
-          return_obj["timestamp"] = parseDate(d[1].timestamp);
-          return return_obj
-        });
+        activities = new_data.activities
   
         // we're obviously no longer fetching
         fetching = false;
@@ -68,7 +63,7 @@ function infinite_scroll(selection){
           if(offset == 0){
             d3.select(container_el)
               .append("p")
-              .text("No activity yet!")
+              .text("No items here.")
           }
           offset = NaN;
           d3.select(".loading").remove();
@@ -80,66 +75,7 @@ function infinite_scroll(selection){
   
         // using d3's helpful enter/update/exit paradigm add new items from
         // the server
-        var activities_enter = d3.select(container_el).selectAll(".activity")
-          .data(activities, function(d){ return d.app_id })
-          .enter().insert("a", "div.loading")
-            .attr("class", "activity")
-            .attr("href", function(d){
-              var url = "#"
-              if(d.activity_type == "starred"){
-                url = "/embed/" + d.app_id;
-              }
-              else if(d.activity_type == "questions"){
-                url = "/ask/question/" + d.slug;
-              }
-              else if(d.activity_type == "replies"){
-                url = "/ask/question/" + d.question_id;
-              }
-              return url;
-            })
-            .append("div")
-            .attr("class", "feed-item")
-  
-        // the title div housing the icon and title
-        var title_div = activities_enter.append("div")
-            .attr("class", "feed_title")
-  
-        // add icon
-        title_div.append("img")
-            .attr("src", function(d){
-              var img_url = "/static/img/icons/tiles/";
-        
-              // if this is a starred app, we need to figure out which app it is
-              // and use this app's icon
-              if(d.activity_type == "starred"){
-                var app_type = d.app_id.split("/")[0]
-                img_url += app_type+"_tile.png";
-              }
-        
-              // otherwise it's an ask sabrina question/reply
-              else {
-                if(d.activity_type == "questions"){
-                  img_url += "question_tile.png";
-                }
-                else {
-                  img_url += "reply_tile.png";
-                }
-              }
-              return img_url
-            })
-            .attr("width", "23px")
-            .attr("padding-bottom", "23px")
-  
-        // the title (strip out HTML!)
-        title_div.append("p")
-          .html(function(d){
-            return d.title.replace(/(<([^>]+)>)/ig,"");
-          })
-  
-        // lastly, the div that holds the data
-        activities_enter.append("div")
-            .attr("class", "feed_date")
-            .text(function(d) { return formatDate(d.timestamp); });
+        format_items(container_el, activities)
   
         // maybe the user has a super dooper tall screen (or high resolution)
         // so we need to check if we're already at the bottem, even though we
@@ -157,6 +93,12 @@ function infinite_scroll(selection){
   scroll.url = function(value) {
     if(!arguments.length) return url;
     url = value;
+    return scroll;
+  }
+  
+  scroll.format_items = function(value) {
+    if(!arguments.length) return format_items;
+    format_items = value;
     return scroll;
   }
   

@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, g, redirect, url_for, flash
+from flask import Blueprint, render_template, g, redirect, url_for, \
+    flash, request, jsonify
 from flask.ext.login import login_required
 from visual import db
 from datetime import datetime
@@ -8,11 +9,11 @@ from visual.account.models import User
 mod = Blueprint('admin', __name__, url_prefix='/admin')
 
 
-@mod.before_request
-def before_request():
-    if not g.user.is_admin():
-        flash('You need admin privledges for this section of the site!')
-        return redirect(url_for('account.activity'))
+# @mod.before_request
+# def before_request():
+#     if not g.user.is_admin():
+#         flash('You need admin privledges for this section of the site!')
+#         return redirect(url_for('account.activity'))
 
 ###############################
 # Views for ALL logged in users
@@ -25,10 +26,35 @@ def admin():
 @mod.route('/users/')
 @login_required
 def admin_users():
-    # get all users EXCEPT the logged in user
-    all_users = User.query.filter(User.id != g.user.id).all()
-    return render_template("admin/admin_users.html", all_users=all_users)
+    
+    offset = request.args.get('offset', 0)
+    limit = 50
+    
+    if request.is_xhr:
+        
+        # get all users EXCEPT the logged in user
+        query = User.query.filter(User.id != g.user.id)
+        
+        items = query.limit(limit).offset(offset).all()
+        items = [i.serialize() for i in items]
+        
+        return jsonify({"activities":items})
+    
+    return render_template("admin/admin_users.html")
 
+@mod.route('/user/<int:user_id>/', methods = ['PUT'])
+@login_required
+def update_user(user_id):
+    # test with:
+    # curl -i -H "Content-Type: application/json" -X POST 
+    #   -d '{"role":2}' http://localhost:5000/admin/user/1
+    
+    user = User.query.get(user_id)
+    user.role = request.json.get('role', user.role)
+    db.session.add(user)
+    db.session.commit()
+    
+    return jsonify( {'user': user.serialize()} )
 
 '''
 ###############################
