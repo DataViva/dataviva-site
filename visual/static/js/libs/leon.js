@@ -82,14 +82,111 @@ leon.font.size = 12
 leon.font.weight = "normal"
 
 leon.border = 0
-
-leon.start = function(name) {
+// Finds all elements that match the passed ID or Class
+leon.get = function(name) {
   
   if (!name) var name = "all"
   
-  leon.get(name).forEach(function(obj){
-    leon[obj.type.split("-")[0]](obj)
+  var objs = []
+  
+  var labellist = document.getElementsByTagName('LABEL');
+  var labels = []
+  for(var i = labellist.length; i--; labels.unshift(labellist[i]));
+  labels.forEach(function(label){
+    if (label.htmlFor != '') {
+      var elem = document.getElementById(label.htmlFor);
+      if (elem) {
+        elem.label = label;
+      }
+    }
   })
+  
+  if (name == "all") {
+    var tags = ["SELECT","INPUT"]
+    tags.forEach(function(tag){
+      var nodelist = document.getElementsByTagName(tag)
+      for(var i = nodelist.length; i--; objs.unshift(nodelist[i]));
+    })
+  }
+  else {
+    var prefixes = ["#",".","$"]
+    if (prefixes.indexOf(name.charAt(0)) >= 0) {
+      if (name.indexOf("$") == 0) {
+        var nodelist = document.getElementsByName(name.substr(1))
+      }
+      else {
+        var nodelist = document.querySelectorAll(name)
+      }
+    } 
+    else {
+      var nodelist = document.getElementsByTagName(name)
+    }
+    for(var i = nodelist.length; i--; objs.unshift(nodelist[i]));
+  }
+  
+  var others = objs.filter(function(obj) {
+    return obj.type != "radio"
+  })
+  
+  var radios = objs.filter(function(obj) {
+    return obj.type == "radio"
+  })
+  
+  var radio_groups = [], return_radios = []
+  radios.forEach(function(radio,i){
+    if (return_radios.length) {
+      var prev_group = return_radios[return_radios.length-1],
+          prev_node = prev_group[prev_group.length-1]
+      if (prev_node.name == radio.name) {
+        prev_group.push(radio)
+      }
+      else {
+        return_radios.push([radio])
+      }
+    }
+    else {
+      return_radios.push([radio])
+    }
+  })
+  
+  var objs = []
+  others.forEach(function(obj) {
+    objs.push({
+      "items": obj,
+      "type": obj.type
+    })
+  })
+  
+  return_radios.forEach(function(radio_group) {
+    
+    var temp_obj = {
+          "items": radio_group,
+          "type": "radio",
+          "name": radio_group[0].name
+        }
+    
+    objs.push(temp_obj)
+  })
+
+  
+  var legendlist = document.getElementsByTagName('LEGEND');
+  var legends = []
+  for(var i = legendlist.length; i--; legends.unshift(legendlist[i]));
+  objs.forEach(function(obj){
+    for (var i = 0; i < legends.length; i++) {
+      if (legends[i].id == obj.name) {
+        obj.legend = legends[i]
+      }
+    }
+  })
+  
+  var returns = {}
+  objs.forEach(function(obj){
+    returns[obj.items.id] = new leon[obj.type.split("-")[0]](obj)
+  })
+  if (Object.keys(returns).length == 1) returns = returns[Object.keys(returns)[0]]
+  
+  return returns
   
 }
 leon.style = {}
@@ -205,7 +302,9 @@ style.innerHTML = "\
     display: inline-block;\
     margin: "+leon.padding+"px;\
     position: relative;\
-    z-index: 1001;\
+  }\
+  .leon.select.active {\
+    z-index: 1005;\
   }\
   .leon.select > .leon.button {\
     margin: 0px;\
@@ -380,107 +479,35 @@ style.innerHTML = "\
   }\
 "
 head.appendChild(style)
-// Finds all elements that match the passed ID or Class
-leon.get = function(name) {
+/*
+CUSTOM BUTTON CREATOR
+Creates a custom button when passed an item
+*/
+leon.label = function(item,parent) {
   
-  if (leon.debug == true) console.log("[leon] leon.get("+name+")")
-  
-  var objs = []
-  
-  var labellist = document.getElementsByTagName('LABEL');
-  var labels = []
-  for(var i = labellist.length; i--; labels.unshift(labellist[i]));
-  labels.forEach(function(label){
-    if (label.htmlFor != '') {
-      var elem = document.getElementById(label.htmlFor);
-      if (elem) {
-        elem.label = label;
-      }
-    }
-  })
-  
-  if (name == "all") {
-    var tags = ["SELECT","INPUT"]
-    tags.forEach(function(tag){
-      var nodelist = document.getElementsByTagName(tag)
-      for(var i = nodelist.length; i--; objs.unshift(nodelist[i]));
-    })
-  }
-  else {
-    var prefixes = ["#",".","$"]
-    if (prefixes.indexOf(name.charAt(0)) >= 0) {
-      if (name.indexOf("$") == 0) {
-        var nodelist = document.getElementsByName(name.substr(1))
+    var html = item.innerHTML ? item.innerHTML : item.id
+    if (item.label) {
+      if (typeof item.label != "string") {
+        html = item.label.innerHTML
+        if (leon.autohide) item.label.style.display = "none"
       }
       else {
-        var nodelist = document.querySelectorAll(name)
-      }
-    } 
-    else {
-      var nodelist = document.getElementsByTagName(name)
-    }
-    for(var i = nodelist.length; i--; objs.unshift(nodelist[i]));
-  }
-  
-  var others = objs.filter(function(obj) {
-    return obj.type != "radio"
-  })
-  
-  var radios = objs.filter(function(obj) {
-    return obj.type == "radio"
-  })
-  
-  var radio_groups = [], return_radios = []
-  radios.forEach(function(radio,i){
-    if (return_radios.length) {
-      var prev_group = return_radios[return_radios.length-1],
-          prev_node = prev_group[prev_group.length-1]
-      if (prev_node.name == radio.name) {
-        prev_group.push(radio)
-      }
-      else {
-        return_radios.push([radio])
+        html = item.label
       }
     }
-    else {
-      return_radios.push([radio])
-    }
-  })
-  
-  var objs = []
-  others.forEach(function(obj) {
-    objs.push({
-      "items": obj,
-      "type": obj.type
-    })
-  })
-  
-  return_radios.forEach(function(radio_group) {
     
-    var temp_obj = {
-          "items": radio_group,
-          "type": "radio",
-          "name": radio_group[0].name
-        }
+    if (leon.autohide) item.style.display = "none"
     
-    objs.push(temp_obj)
-  })
-
+    var label = document.createElement("div")
+    label.className = "leon label"
+    label.innerHTML = html
+    
+    if (parent) parent.appendChild(label)
+    else item.parentNode.insertBefore(label,item)
+    
+    this.item = item
+    this.node = label
   
-  var legendlist = document.getElementsByTagName('LEGEND');
-  var legends = []
-  for(var i = legendlist.length; i--; legends.unshift(legendlist[i]));
-  objs.forEach(function(obj){
-    for (var i = 0; i < legends.length; i++) {
-      if (legends[i].id == obj.name) {
-        obj.legend = legends[i]
-      }
-    }
-  })
-  
-  if (leon.debug == true) console.log(objs)
-  
-  return objs
 }
 /*
 CUSTOM BUTTON CREATOR
@@ -519,6 +546,7 @@ leon.button = function(item,parent) {
     }
     
     button.innerHTML = button.innerHTML + html
+    button.id = "leon_button_"+item.value
     button.value = item.value
     
     if (parent) {
@@ -536,6 +564,7 @@ leon.button = function(item,parent) {
     
     this.item = item
     this.node = button
+    this.id = button.id
     
     this.class = function(name) {
       if (name) {
@@ -605,36 +634,6 @@ leon.checkbox = function(obj) {
   buttongroup.style.height = button.offsetHeight+"px"
   
   if (obj.items.checked) enable()
-  
-}
-/*
-CUSTOM BUTTON CREATOR
-Creates a custom button when passed an item
-*/
-leon.label = function(item,parent) {
-  
-    var html = item.innerHTML ? item.innerHTML : item.id
-    if (item.label) {
-      if (typeof item.label != "string") {
-        html = item.label.innerHTML
-        if (leon.autohide) item.label.style.display = "none"
-      }
-      else {
-        html = item.label
-      }
-    }
-    
-    if (leon.autohide) item.style.display = "none"
-    
-    var label = document.createElement("div")
-    label.className = "leon label"
-    label.innerHTML = html
-    
-    if (parent) parent.appendChild(label)
-    else item.parentNode.insertBefore(label,item)
-    
-    this.item = item
-    this.node = label
   
 }
 /*
@@ -994,56 +993,70 @@ Creates a custom toggle menu, when passed the name of a radio button group
 */
 leon.select = function(obj) {
   
-  var divgroup = document.createElement("div")
-  divgroup.className = "leon select"
-  obj.items.parentNode.insertBefore(divgroup,obj.items)
+  var self = this
   
-  if (obj.items.label) {
-    var label = new leon.label(obj.items.label,divgroup)
+  this.set = function(value) {
+    var option = options.filter(function(o){
+      return o.id == "leon_button_"+value;
+    })[0]
+    obj.items.value = value
+    button.node.innerHTML = option.node.innerHTML + arrow
   }
   
-  var arrow = "<span class='leon arrow'>&#8227</span>"
-  
-  obj.items.label = obj.items.selectedOptions[0].label + arrow
-  
-  var button = new leon.button(obj.items,divgroup)
-  button.open = false
-  
-  var dropdown = document.createElement("div")
-  dropdown.className = "leon select dropdown"
-  dropdown.style.left = button.node.offsetLeft+"px"
-  divgroup.appendChild(dropdown)
-  
-  var options = []
-  for (var i = 0; i < obj.items.length; i++) {
-    options.push(new leon.button(obj.items[i],dropdown))
-  }
-  
-  button.show = function() {
+  this.show = function() {
     button.addclass("active")
+    self.node.className = "leon select active"
     dropdown.style.visibility = "visible"
     dropdown.style.opacity = 1
     dropdown.style.top = button.node.offsetHeight+"px"
     button.open = true
   }
   
-  button.hide = function() {
+  this.hide = function() {
     button.removeclass("active")
     dropdown.style.opacity = 0
     dropdown.style.top = "0px"
     setTimeout(function() {
       dropdown.style.visibility = "hidden"
+      self.node.className = "leon select"
       button.open = false
     },leon.time.fade*1000)
+  }
+  
+  self.node = document.createElement("div")
+  self.node.className = "leon select"
+  self.node.id = "leon_"+obj.items.id
+  obj.items.parentNode.insertBefore(self.node,obj.items)
+  
+  if (obj.items.label) {
+    var label = new leon.label(obj.items.label,self.node)
+  }
+  
+  var arrow = "<span class='leon arrow'>&#8227</span>"
+  
+  obj.items.label = obj.items.selectedOptions[0].label + arrow
+  
+  var button = new leon.button(obj.items,self.node)
+  button.open = false
+  
+  var dropdown = document.createElement("div")
+  dropdown.className = "leon select dropdown"
+  dropdown.id = "leon_dropdown_"+obj.items.id
+  dropdown.style.left = button.node.offsetLeft+"px"
+  self.node.appendChild(dropdown)
+  
+  var options = []
+  for (var i = 0; i < obj.items.length; i++) {
+    options.push(new leon.button(obj.items[i],dropdown))
   }
   
   button.node.addEventListener("click", function(e){
     e.stopPropagation()
     if (button.open) {
-      button.hide()
+      self.hide()
     }
     else {
-      button.show()
+      self.show()
     }
   })
   
@@ -1056,7 +1069,7 @@ leon.select = function(obj) {
     if (width > w) w = width
     option.node.innerHTML = html
     
-    if (option.item.selected) set_select(option)
+    if (option.item.selected) self.set(option.item.value)
     
     if (i == 0) option.addclass("first")
     else if (i == obj.items.length-1) option.addclass("last")
@@ -1065,18 +1078,12 @@ leon.select = function(obj) {
     option.node.addEventListener("click", function(e){
       e.stopPropagation()
       if (obj.items.value != option.item.value) {
-        set_select(option)
+        self.set(option.item.value)
         obj.items.onchange()
       }
-      button.hide()
+      self.hide()
     })
   })
-  
-  function set_select(option) {
-    obj.items.value = option.item.value
-    button.item = option.item
-    button.node.innerHTML = option.node.innerHTML + arrow
-  }
   
   button.node.style.width = w+"px"
   dropdown.style.width = (w+leon.padding*2+leon.border*2)+"px"

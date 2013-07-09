@@ -18,22 +18,20 @@ visual.format.text = function(text) {
 }
 
 visual.format.number = function(obj) {
-  if (typeof obj === "number") {
-    var value = obj, name = ""
+  if (typeof obj === "object") {
+    var value = obj.value, name = obj.name
   }
   else {
-    var value = obj.value, name = obj.name
+    var value = obj, name = ""
   }
   
   var smalls = ["rca","rca_bra","rca_wld","distance","complexity"]
-  var adds = []
-  smalls.forEach(function(s,i){
-    adds.push(visual.format.text(s))
-  })
-  smalls = smalls.concat(adds)
   
   if (smalls.indexOf(name) >= 0) {
     return d3.round(value,2)
+  }
+  else if (name == "year") {
+    return value
   }
   else if (value.toString().split(".")[0].length > 4) {
     var symbol = d3.formatPrefix(value).symbol
@@ -42,23 +40,29 @@ visual.format.number = function(obj) {
     // Format number to precision level using proper scale
     value = d3.formatPrefix(value).scale(value)
     value = parseFloat(d3.format(".3g")(value))
-    value = value + symbol;
+    return value + symbol;
   }
   else {
-    value = d3.format(",f")(value)
+    return d3.format(",f")(value)
   }
-  
-  return value
   
 }
 
 visual.ui = {}
 
-visual.ui.tooltip = function(id,kill) {
-  if (kill) {
-    vizwhiz.tooltip.remove(id);
-  }
-  else {
+visual.ui.tooltip = function(id,state) {
+  if (state) {
+    
+    var text = {
+      "controls_toggle": "Show/Hide Controls",
+      "file_select": "Download this App",
+      "help_select": "Show App Tutorial",
+      "refresh": "Refresh the App",
+      "starred": "Save this App"
+    }
+    
+    var desc = text[id] ? text[id] : id
+    
     var item = document.getElementById(id),
         size = item.getBoundingClientRect()
     vizwhiz.tooltip.remove(id);
@@ -67,10 +71,13 @@ visual.ui.tooltip = function(id,kill) {
       "y": size.top+size.height/2,
       "offset": size.height/2,
       "arrow": true,
-      "description": id,
+      "description": desc,
       "width": "auto",
       "id": id
     })
+  }
+  else {
+    vizwhiz.tooltip.remove(id);
   }
 }
 

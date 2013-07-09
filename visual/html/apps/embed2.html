@@ -10,26 +10,21 @@
   <!--[if lt IE 9]>
   <script type="text/javascript" src="/static/js/libs/aight.d3.min.js?v=3"></script>
   <![endif]-->
-   <style> 
-    body {
-      overflow: visible;
-    }
-    </style>
 
 {% endblock %}
 
 
 {% block content %}
 
-  <!-- <div id="loading">
+  <div id="loading">
     <i class="icon-cog icon-spin icon-4x"></i>
-  </div> -->
+  </div>
 
   <div id="builder">
 
     <div id="app_selector">
       <label for="app_select">App</label>
-      <select id="app_select" onchange="select_app(this.options[this.selectedIndex].id)">
+      <select id="app_select" class="leon_object" onchange="builder.app(this.options[this.selectedIndex].id)">
         {% set pre_app = None %}
         {% for build in all_builds %}
 
@@ -110,9 +105,9 @@
           </select></div>
         {% endif %}
         {% set pre_app = build.type %}
-        <div id="{{ build.type }}_output_div">
+        <div id="{{ build.type }}_output_div" class="output_div">
         <label for="output_{{ build.type }}">Output</label>
-        <select id="output_{{ build.type }}" onchange="app.update(this.options[this.selectedIndex].id)">
+        <select id="output_{{ build.type }}" class="leon_object" onchange="app.start(this.options[this.selectedIndex].id)">
       {% endif %}
 
       <option value="{{ build.url() }}" id="{{ build.url() }}" {% if build.id == current_build.id %} selected="selected"{% endif %}>
@@ -128,17 +123,17 @@
 
   <div id="toggles">
 
-    <a id="controls_toggle" class="leon button square" onclick="toggle_controls()"><i class="icon-cogs"></i></a>
-    <a id="refresh" class="leon button square" onclick="start_app()" onmouseover="visual.ui.tooltip(this.id)" onmouseout="visual.ui.tooltip(this.id,true)"><i class="icon-refresh"></i></a>
+    <a id="controls_toggle" class="leon button square" onclick="toggle_controls()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-cogs"></i></a>
+    <a id="refresh" class="leon button square" onclick="start_app()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-refresh"></i></a>
   
   </div>
 
   <div id="settings">
 
-    <a id="file_select" class="leon button square" onclick="show_selector(this.id)"><i class="icon-save"></i></a>
-    <a id="starred" class="leon button square" onclick="toggle_star()"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
-    <a id="help_select" class="leon button square" onclick="show_selector(this.id)"><i class="icon-question-sign"></i></a>
-    <a id="full_screen" class="leon button square" onclick="window.open(window.location.href,'_blank')"><i class="icon-fullscreen"></i></a>
+    <a id="file_select" class="leon button square" onclick="show_selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-save"></i></a>
+    <a id="starred" class="leon button square" onclick="toggle_star()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
+    <a id="help_select" class="leon button square" onclick="show_selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-question-sign"></i></a>
+    <a id="full_screen" class="leon button square" onclick="window.open(window.location.href,'_blank')" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-fullscreen"></i></a>
   
   </div>
 
@@ -157,28 +152,887 @@
 
   <script src="/static/js/libs/d3.geo.tile.js"></script>
   <script src="/static/js/libs/topojson.js"></script>
+  <script src="/static/js/libs/queue.min.js"></script>
   <script src="/static/js/utils/utils.key.js"></script>
   <script src="/static/js/utils/utils.selector.js"></script>
   
   <script type="text/javascript">
   
-    leon.start("#app_select")
-    leon.start("#output_tree_map")
-    
-    var app = {}
-    app.update = function(url) {
-      d3.json("/apps/embed2/"+url)
-        .header("X-Requested-With", "XMLHttpRequest")
-        .get(function(error,data){
-          console.log(error,data)
-        });
+    // App Data Formatting
+    var format = {
+      "bubbles": "bubbles",
+      "compare": "compare",
+      "geo_map": "default",
+      "pie_scatter": "default",
+      "network": "default",
+      "rings": "default",
+      "tree_map": "default",
+      "stacked": "default"
     }
     
-    d3.json("/{{current_build.data_url()}}")
+    // Get various depth levels
+    var depths = {
+      "isic": visual.depths("isic"), 
+      "cbo": visual.depths("cbo"),
+      "hs": visual.depths("hs"),
+      "bra": visual.depths("bra"),
+      "bra2": visual.depths("bra"),
+      "wld": visual.depths("wld")
+    }
+  
+    // Stylize SELECT menus
+    var selects = leon.get(".leon_object")
+    
+    // Hide full-screen button while in full-screen
+    if (parent.location.pathname.indexOf("embed") >= 0) {
+      d3.select("#full_screen").remove();
+    }
+    
+    // Set the max-width for the builder div
+    var settings_width = d3.select("#settings").node().offsetWidth,
+        toggles_width = d3.select("#toggles").node().offsetWidth
+        
+    var w = window.innerWidth
+        w -= d3.max([settings_width,toggles_width])*2
+        w -= 12
+        
+    d3.select("#builder")
+      .style("margin-left",-w/2+"px")
+      .style("max-width",w+"px")
+    
+    /*******************************/
+    /* App Functions and Variables */
+    /*******************************/
+    
+    var app = {}
+    app.build = null
+    app.url = "{{ current_build.url() }}"
+    app.data = {}
+    app.networks = {}
+    app.coords = {}
+    app.attrs = {}
+    app.vars = {{ global_vars|safe }}
+    
+    // Define global viz-whiz app parameters
+    app.viz = vizwhiz.viz()
+      .name_array(["name","display_id"])
+      .nesting_aggs({
+          "distance": "mean",
+          "complexity": "mean",
+          "rca": "mean",
+          "wage_avg": "mean"
+        })
+      .text_var("name")
+      .id_var("id")
+      .year_var("year")
+      .tooltip_info([
+          "display_id",
+          "rca",
+          "rca_wld",
+          "wage",
+          "wage_avg",
+          "num_emp",
+          "num_est",
+          "val_usd",
+          "distance",
+          "complexity",
+          "cp_bra_wage",
+          "cp_bra_wage_avg",
+          "cp_bra_num_emp",
+          "cp_bra_num_est",
+          "cp_bra_val_usd",
+          "cp_bra_distance",
+          "cp_bra_complexity",
+          "cp_bra2_wage",
+          "cp_bra2_wage_avg",
+          "cp_bra2_num_emp",
+          "cp_bra2_num_est",
+          "cp_bra2_val_usd",
+          "cp_bra2_distance",
+          "cp_bra2_complexity",
+          "employed",
+          "elsewhere",
+          "total",
+          "required",
+          "importance"
+        ])
+      .text_format(visual.format.text)
+      .number_format(visual.format.number)
+      .name_array(["name","display_id"])
+      .background("#fafafa")
+    
+    // Start building a new app
+    app.start = function(new_url) {
+      
+      app.loading(true)
+      
+      if (new_url) app.url = new_url
+      
+      d3.json("/apps/embed2/"+app.url)
         .header("X-Requested-With", "XMLHttpRequest")
         .get(function(error,data){
-          console.log(error,data)
+          
+          if (error) {
+            app.error(error)
+          }
+          else {
+            
+            // Set public current build variable
+            app.build = data.current_build
+            
+            // Show/hide filters depending on build requirements
+            if (app.build.dataset == "rais") {
+              if (app.build.filter1 != "all") {
+                d3.select("#isic_select").style("display","inline-block")
+                builder.filter(app.build.filter1,"isic")
+              }
+              else {
+                d3.select("#isic_select").style("display","none")
+              }
+              if (app.build.filter2 != "all") {
+                d3.select("#cbo_select").style("display","inline-block")
+                builder.filter(app.build.filter2,"cbo")
+              }
+              else {
+                d3.select("#cbo_select").style("display","none")
+              }
+              d3.select("#hs_select").style("display","none")
+              d3.select("#wld_select").style("display","none")
+            }
+            else if (app.build.dataset == "secex") {
+              if (app.build.filter1 != "all") {
+                d3.select("#hs_select").style("display","inline-block")
+                builder.filter(app.build.filter1,"hs")
+              }
+              else {
+                d3.select("#hs_select").style("display","none")
+              }
+              if (app.build.filter2 != "all") {
+                d3.select("#wld_select").style("display","inline-block")
+                builder.filter(app.build.filter2,"wld")
+              }
+              else {
+                d3.select("#wld_select").style("display","none")
+              }
+              d3.select("#isic_select").style("display","none")
+              d3.select("#cbo_select").style("display","none")
+            }
+            
+            // Remove unused global_vars
+            uis = []
+            app.build.ui.forEach(function(ui){
+              uis.push(ui.type)
+            })
+            for (v in app.vars) {
+              if (uis.indexOf(v) < 0 && ["controls","builder"].indexOf(v) < 0) {
+                delete app.vars[v];
+              }
+            }
+            
+            var q = queue()
+            
+            if (!app.data[app.build.data_url]) {
+              q.defer(function(u,callback){
+                d3.json(u,function(d){
+                  app.data[app.build.data_url] = {}
+                  app.data[app.build.data_url].raw = d.data
+                  callback(error,d)
+                })
+              },"/"+app.build.data_url)
+            }
+            
+            if (!app.attrs[app.build.output]) {
+              q.defer(function(u,callback){
+                d3.json(u,function(d){
+                  app.attrs[app.build.output] = {}
+                  d.data.forEach(function(a){
+                    app.attrs[app.build.output][a.id] = a
+                  })
+                  callback(error,d)
+                })
+              },"/attrs/"+app.build.output)
+            }
+            
+            if (["network","rings"].indexOf(app.build.type) >= 0 
+                && !app.networks[app.build.output]) {
+              q.defer(function(u,callback){
+                d3.json(u,function(d){
+                  app.networks[app.build.output] = d
+                  callback(error,d)
+                })
+              },"/static/json/networks/network_"+app.build.output+".json")
+            }
+            
+            if (app.build.type == "geo_map") {
+              
+              if (!app.land) {
+                q.defer(function(u,callback){
+                  d3.json(u,function(d){
+                    app.land = d
+                    callback(error,d)
+                  })
+                },"/static/json/coords/wld_land.json")
+              }
+              
+              var state = app.build.bra.id.substr(0,2)
+              if (!app.coords[state]) {
+                q.defer(function(u,callback){
+                  d3.json(u,function(d){
+                    app.coords[state] = d
+                    callback(error,d)
+                  })
+                },"/static/json/coords/"+state+"_munic.json")
+              }
+              
+            }
+            
+            q.awaitAll(app.finish)
+            
+          }
         });
+        
+    }
+    
+    app.error = function(error) {
+      console.log("[visual] ERROR: "+error)
+      app.loading(false)
+      d3.select("#app").html("").datum(error).call(no_data())
+    }
+    
+    app.resize = function() {
+      
+    }
+    
+    app.finish = function() {
+      
+      if (app.data[app.build.data_url].raw.length == 0) {
+        app.error("No Data Available")
+      }
+      else {
+        
+        // Format Data if it hasn't already been formatted
+        if (!app.data[app.build.data_url][format[app.build.type]]) {
+          app.format_data()
+        }
+        
+        // Create Key
+        d3.select("#ui_bottom").append("div")
+          .attr("id","key")
+          .datum(app.attrs[app.build.output])
+          .call(Key().type(app.build.output))
+        
+        app.build.ui.forEach(function(ui){
+          if (ui.type == "years") {
+            
+            // Determine current year
+            if (!app.vars.year) {
+              app.vars.year = ui.values[ui.values.length-1];
+            }
+            else if (ui.values.indexOf(app.vars.year) < 0) {
+              var closest = null;
+              ui.values.forEach(function(y){
+                if (!closest || Math.abs(y-app.vars.year) 
+                    < Math.abs(closest-app.vars.year)) {
+                  closest = y;
+                }
+              })
+              app.vars.year = closest;
+            }
+            
+            var year = d3.select("#ui_bottom").append("div")
+              .attr("id","year_slider")
+          
+            year.append("input")
+              .attr("type","range")
+              .attr("onchange","app.update('year',this.value)")
+              .attr("id","year")
+              .attr("name","year")
+              .attr("min",ui.values[0]+"")
+              .attr("max",ui.values[ui.values.length-1]+"")
+              .attr("value",app.vars.year+"")
+              .attr("step","1")
+          
+            year.append("label")
+              .attr("for","year")
+              .html(visual.format.text("year"))
+            
+            leon.get("#year")
+            
+          }
+          else {
+            
+            // Custom Titles
+            if (ui.type == "value_var") {
+              if (app.build.type == "geo_map") var title = "color"
+              else var title = "sizing"
+            }
+            else var title = ui.type
+          
+            // Set Global Vars
+            if (ui.type == "value_var") {
+              if (app.build.type == "bubbles") var default_value = "importance"      
+              else if (ui.values.indexOf("val_usd") >= 0) var default_value = "val_usd"
+              else if (ui.values.indexOf("num_emp") >= 0) var default_value = "num_emp"
+            }
+            else if (ui.type == "depth" && app.build.type == "tree_map") {
+              var default_value = ui.values[ui.values.length-1]
+            }
+            else {
+              var default_value = ui.values[0]
+            }
+            
+            if(!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0) {
+              app.vars[ui.type] = default_value
+            }
+          
+            if (ui.values.length > 1) {
+              builder.radios({
+                "data": ui.values,
+                "title": title,
+                "initial": app.vars[ui.type],
+                "type": ui.type
+              })
+            }
+            
+          }
+          
+        })
+        
+        var nesting = app.build.ui.filter(function(f){return f.type == "depth"})[0].values
+        
+        app.viz.type(app.build.viz_whiz)
+          .title(app.build.title)
+          .attrs(app.attrs[app.build.output])
+          .spotlight(app.vars.spotlight)
+          .nesting(nesting)
+          .depth(app.vars.depth)
+          .sort(app.vars.sort)
+          .grouping(app.vars.grouping)
+          .order(app.vars.order)
+          .layout(app.vars.layout)
+          .value_var(app.vars.value_var)
+          .year(app.vars.year)
+          .total_bar(app.total())
+          
+        /********************/
+        /* Network Specific */
+        /********************/  
+        if (app.build.type == "network") {
+          var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca";
+          app.viz
+            .links(app.networks[app.build.output].links)
+            .nodes(app.networks[app.build.output].nodes)
+            .active_var(av)
+        } 
+    
+        /******************/
+        /* Rings Specific */
+        /******************/
+        else if (app.build.type == "rings") {
+          app.viz
+            .links(app.networks[app.build.output].links)
+            .nodes(app.networks[app.build.output].nodes)
+            .highlight(app.build.filter1.id)
+            .active_var("active")
+        }
+    
+        /********************/
+        /* Geo Map Specific */
+        /********************/
+        else if (app.build.type == "geo_map") {
+          app.viz
+            .coords(app.coords[app.build.bra.id.substr(0,2)])
+            .map(app.land)
+            .tiles(false)
+        
+          if (app.build.bra.id.length == 8) app.viz.highlight(app.build.bra.id)
+      
+        } 
+    
+        /********************/
+        /* Bubbles Specific */
+        /********************/
+        else if (app.build.type == "bubbles") {
+          app.viz
+            .active_var("employed")
+        } 
+
+        /********************/
+        /* Stacked Specific */
+        /********************/
+        else if (app.build.type == "stacked") {
+          app.viz
+            .xaxis_var("year")
+            .xaxis_scale("linear")
+            .yaxis_scale("linear")
+            .total_bar("")
+        } 
+
+        /********************/
+        /* Scatter Specific */
+        /********************/
+        else if (app.build.type == "pie_scatter") {
+    
+          app.viz
+            .xaxis_var("distance")
+            .yaxis_var("complexity")
+            .xaxis_scale("linear")
+            .yaxis_scale("linear")
+          
+        } 
+    
+        /******************/
+        /* Compare Specific */
+        /******************/
+        else if (app.build.type == "compare") {
+      
+          app.viz
+            .xaxis_var("cp_bra2_"+app.vars.axes)
+            .xaxis_scale(app.vars.scale)
+            .yaxis_var("cp_bra_"+app.vars.axes)
+            .yaxis_scale(app.vars.scale)
+            .spotlight(false)
+      
+        }
+        
+      }
+      
+      d3.select("#app")
+        .html("")
+        .datum(app.data[app.build.data_url][format[app.build.type]])
+        
+      builder.url()
+      app.resize()
+      builder.key()
+      app.loading(false)
+      
+    }
+    
+    app.loading = function(state) {
+      
+      var div = d3.select("#loading")
+      if (state == true) {
+        div
+          .style("display","block")
+          .style("opacity",1)
+            
+        d3.select("#ui_bottom").selectAll("*").remove();
+        d3.select("#app_controls").selectAll("*").remove();
+        vizwhiz.tooltip.remove();
+          
+      }
+      else {
+         div
+          .style("opacity",0)
+        var timing = parseFloat(div.style("transition-duration"),10)*1000
+        setTimeout(function(){
+          div
+            .style("display","none")
+        },timing)
+      }
+    }
+    
+    app.update = function(variable,value) {
+      console.log(variable,value)
+      app.vars[variable] = value
+      builder.url()
+      d3.select("#app").call(app.viz[variable](app.vars[variable])) 
+    }
+    
+    app.format_data = function() {
+      
+      var data_obj = [],
+          data = app.data[app.build.data_url],
+          out = app.build.output,
+          attr = app.attrs[out]
+      
+      if ("bubbles" == format[app.build.type]) {
+        
+        years.forEach(function(year){
+          
+          var year_data = app_data[current_url].raw.filter(function(d){ return d.year == year; });
+          
+          var req_filtered = bubbles_required.filter(function(d){ return d.year == year && d.required >= 0.6 }),
+              req_ids = []
+        
+          req_filtered.forEach(function(d){
+            req_ids.push(d[current_build[0]+"_id"])
+          })
+        
+          var industry_size = d3.sum(d3.values(req_filtered),function(d){ return Math.ceil(d.num_emp_med); }),
+              location_total = d3.sum(d3.values(year_data),function(d){ 
+                return req_ids.indexOf(d[current_build[0]+"_id"]) >= 0 ? d.num_emp : null; 
+              });
+            
+          req_filtered.forEach(function(d){
+      
+            d.id = d[current_build[0]+"_id"]
+      
+            var temp_obj = year_data.filter(function(dd){ return dd[current_build[0]+"_id"] == d[current_build[0]+"_id"] })[0]
+            if (!temp_obj) {
+              temp_obj = {"num_emp": 0, "wage": 0, "num_est": 0}
+            }
+            d.required_wage_avg = d.wage/d.num_emp
+            d = vizwhiz.utils.merge(d,temp_obj)
+          
+            d.none = 1;
+            d.category = attr[d.id.slice(0,depths[out][0])].id+" | "+attr[d.id.slice(0,depths[out][0])].name
+
+          
+            if (location_total >= industry_size) d.total = Math.ceil((d.num_emp_med/industry_size)*location_total);
+            else d.total = Math.ceil(d.num_emp_med);
+          
+            d.employed = d.num_emp ? d.num_emp : 0;
+            if (d.employed/d.total >= 1) d.active = true;
+            else d.active = false;
+          
+            var elsewhere = bubbles_elsewhere.filter(function(e){ return e.year == year && e[current_build[0]+"_id"] == d.id })[0]
+          
+            if (!elsewhere) elsewhere = 0;
+            else elsewhere = elsewhere.num_emp;
+          
+            d.elsewhere = elsewhere-d.employed
+      
+            d.display_id = visual.displayID(d.id,out)
+            d.icon = visual.icon(d.id,out)
+            
+            if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp;
+
+            d = set_nesting(d)
+            get_keys(d)
+          
+            data_obj.push(d)
+            
+          })
+          
+        })
+    
+      }
+      else if ("compare" == format[app.build.type]) {
+        
+        d3.nest()
+          .key(function(d){return d.year})
+          .key(function(d){return d[out+"_id"]})
+          .rollup(function(leaves){
+            if (leaves.length == 2) {
+              var d = {}
+              d.year = leaves[0].year
+              d.id = leaves[0][out+"_id"]
+              d.display_id = visual.displayID(d.id,out)
+              d.icon = visual.icon(d.id,out)
+              d.active = true
+              
+              leaves.forEach(function(leaf){
+                if (leaf.wage && leaf.num_emp) leaf.wage_avg = leaf.wage/leaf.num_emp;
+                for (key in leaf) {
+                  if (key != "bra_id" && key != out+"_id") {
+                    if (typeof leaf[key] === "number" && key != "year") {
+                      if (!d[key]) d[key] = 0
+                      d[key] += leaf[key]
+                    }
+                    if (leaf.bra_id == bra.id) var k = "cp_bra_"+key
+                    else if (leaf.bra_id == bra2.id) var k = "cp_bra2_"+key
+                    d[k] = leaf[key]
+                  }
+                }
+              })
+
+              d = set_nesting(d)
+              get_keys(d)
+              
+              data_obj.push(d)
+              
+            }
+          })
+          .entries(app_data[current_url].raw)
+      }
+      else {
+        
+        data.raw.forEach(function(d){
+          
+          var obj = d
+          
+          obj.id = obj[out+"_id"]
+          obj.display_id = visual.displayID(obj.id,out)
+          obj.icon = visual.icon(obj.id,out)
+          
+          if (obj.wage && obj.num_emp) obj.wage_avg = obj.wage/obj.num_emp;
+          
+          obj.active = obj.rca >=1 ? true : false;
+          
+          obj.bra_rca = obj.rca >=1 ? true : false;
+          obj.wld_rca = obj.rca_wld >=1 ? true : false;
+
+          obj = set_nesting(obj)
+          get_keys(obj)
+          
+          data_obj.push(obj)
+          
+        })
+        
+      }
+      
+      data[format[app.build.type]] = data_obj;
+      
+      function set_nesting(obj) {
+        depths[out].forEach(function(d){
+          obj[out+"_"+d] = {"name":attr[obj.id.slice(0, d)].name, "id":obj.id.slice(0, d)}
+        })
+        return obj;
+      }
+      
+      function get_keys(d) {
+        if (!data.categories) data.categories = {}
+        if (!data.categories[d.year]) data.categories[d.year] = []
+        if (!data.categories.all) data.categories.all = []
+        for (var key in d) { 
+          if (key == "id") {
+            var parent = d[key].slice(0,depths[out][0])
+            if (data.categories[d.year].indexOf(parent) < 0) data.categories[d.year].push(parent);
+            if (data.categories.all.indexOf(parent) < 0) data.categories.all.push(parent);
+          }
+        }
+      }
+      
+    }
+    
+    app.total = function() {
+
+      var exclusions = [
+            "complexity",
+            "none",
+            "importance",
+            "wage_avg",
+            "required_wage_avg",
+            undefined
+          ],
+          val = app.vars.value_var,
+          total_labels = {
+            "val_usd": ["$"," USD"],
+            "wage": ["$"," BRL"],
+            "total": [""," employees"]
+          }
+        
+      if (exclusions.indexOf(val) >= 0) return false;
+
+      var total_obj = {
+        "prefix": format_name(val)+": "
+      }
+    
+      if (total_labels[val]) {
+        total_obj.prefix += total_labels[val][0]
+        total_obj.suffix = total_labels[val][1]
+      }
+    
+      return total_obj;
+        
+    }
+    
+    app.resize = function() {
+      
+      var children = d3.select("#ui_bottom").node().childNodes,
+          min_width = 0;
+          
+      for (i = 0; i < children.length; i++) {
+        var w = children[i].offsetWidth;
+        if (w > min_width) min_width = w;
+      }
+      
+      if (window.innerWidth < min_width || window.innerHeight <= 400) {
+        app.vars.controls = "false";
+        d3.select("#ui_bottom").style("display","none")
+        d3.select("#settings").style("display","none")
+        d3.select("#toggles").style("display","none")
+        d3.select("#builder").style("display","none")
+      }
+      else {
+        d3.select("#ui_bottom").style("display","block")
+        d3.select("#settings").style("display","block")
+        d3.select("#toggles").style("display","block")
+        d3.select("#builder").style("display","block")
+      }
+
+      d3.select("#builder").style("top",function(d){
+        if (app.vars.controls != "false") var u = 0
+        else var u = 1
+        return "-"+((this.offsetHeight+5)*u)+"px"
+      })
+      
+      if (app.vars.controls == "true") {
+        d3.select("#controls_toggle").attr("class","leon button square active")
+      }
+      else {
+        d3.select("#controls_toggle").attr("class","leon button square")
+      }
+
+      app.height = window.innerHeight;
+      app.height -= d3.select("#ui_bottom").node().offsetHeight
+      if (app.vars.controls != "false") app.height -= d3.select("#builder").node().offsetHeight
+      app.width = window.innerWidth-10;
+      
+      app.title_width = app.width
+      app.title_width -= (d3.max([d3.select("#toggles").node().offsetHeight,d3.select("#settings").node().offsetHeight])*5)
+      
+      d3.select("#app")
+        .style("height",app.height+"px")
+        .style("width",app.width+"px")
+        .style("top",function(d){
+          if (app.vars.controls != "false") var u = 1
+          else var u = 0
+          return ((d3.select("#builder").node().offsetHeight)*u)+"px"
+        })
+        .call(app.viz.height(app.height).width(app.width).title_width(app.title_width))
+      
+    }
+    
+    /*********************/
+    /* Builder Functions */
+    /*********************/
+    
+    var builder = {}
+    builder.filter = function(obj,type) {
+      
+      var cat = "bra2" == type ? "bra" : type,
+          button = d3.select("#"+type+"_select")
+      
+      if (cat == "bra" && !obj.distance) obj.distance = 0
+
+      if (!obj.icon) obj.icon = visual.icon(obj.id,cat)
+      
+      button.select(".icon")
+       .style("background-image","url("+obj.icon+")")
+       .style("background-color",obj.color)
+
+      var name = obj.name_en
+        
+      if (obj.distance > 0) {
+        name += " ("+obj.distance+"km)"
+      }
+      
+      button.select(".list_text")
+       .text(name)
+    }
+    
+    builder.app = function(app_name) {
+      
+      var match = null
+      
+      d3.selectAll(".output_div").style("display","none")
+      d3.select("#"+app_name+"_output_div")
+        .style("display","inline-block")
+        .selectAll("option")
+        .each(function(d){
+          var a = app.url.split("/")
+          a.shift()
+          a = a.join("/")
+          var s = this.id.split("/")
+          s.shift()
+          s = s.join("/")
+          if (a == s) match = this.id
+        })
+      
+      if (!match) match = d3.select("#"+app_name+"_output_div option").node().id
+      
+      selects["output_"+app_name].set(match)
+      
+      app.start(match)
+      
+    }
+    
+    builder.radios = function(obj) {
+      
+      var div = d3.select("#app_controls").append("div")
+        .attr("class","ui_group")
+        .attr("id",obj.title)
+    
+      div.append("legend")
+        .attr("id",obj.title)
+        .html(format_name(obj.title))
+        
+      obj.data.forEach(function(v,i){
+        
+        var button = div.append("input")
+          .attr("type","radio")
+          .attr("name",obj.title)
+          .attr("value",v)
+          .attr("id",v)
+          .attr("onclick","app.update('"+obj.type+"',this.value)")
+          
+        div.append("label")
+          .attr("for",v)
+          .text(format_name(v))
+      
+        if (v == obj.initial) {
+          button.node().checked = true
+        }
+        
+      })
+
+      leon.get("$"+obj.title)
+      
+    }
+    
+    builder.url = function() {
+      
+      document.title = "Data Minas : "+app.build.title;
+                        
+      window_url = app.url
+      
+      if (Object.keys(app.vars).length > 0) {
+        window_url += "/?"
+        url_vars = []
+        for (v in app.vars) {
+          url_vars.push(v + "=" + app.vars[v])
+        }
+        window_url += url_vars.join("&");
+      }
+    
+      if (Modernizr.history) {
+        if(parent.change_url) parent.change_url("/apps/"+window_url)
+        else window.history.pushState({'prev_request': "/apps/embed2/"+window_url}, 'Title', "/apps/embed2/"+window_url)
+      } 
+      else if (window.location.href.indexOf(window_url) < 0) {
+        if (parent.location.pathname.indexOf("apps") >= 0) {
+          window.location = "/apps/embed2/"+window_url
+        } else {
+          if(parent.change_url) parent.change_url("/apps/"+window_url)
+        }
+      }
+        
+    }
+    
+    builder.key = function() {
+      
+      d3.selectAll("div.key_icon_container")
+        .style("display",function(){
+          var id = this.id.slice(3)
+          if (app.build.type != "stacked") {
+            cats = app.data[app.build.data_url].categories[app.vars.year]
+          }
+          else {
+            cats = app.data[app.build.data_url].categories.all
+          }
+          return cats.indexOf(id) < 0 ? "none" : "inline-block";
+        })
+        
+    }
+    
+    /*****************/
+    /* Page Resizing */
+    /*****************/
+    
+    window.onresize = function() {
+      if(this.resizeTO) clearTimeout(this.resizeTO);
+      this.resizeTO = setTimeout(function() {
+        app.resize()
+      },500)
+    }
+    
+    /************************/
+    /* Initialize First App */
+    /************************/
+    
+    builder.app("{{ current_build.type }}")
   
   </script>
 

@@ -4,13 +4,18 @@ function Key() {
       
   function util(selection) {
     
-    selection.each(function(data) {
+    selection.each(function(raw_data) {
       
       var key = this,
           margin = 2,
           size = 30,
           key_filters = [],
-          key_solos = [];
+          key_solos = [],
+          depth = visual.depths(attr_type)[0];
+          
+      var data = d3.values(raw_data).filter(function(d){
+        return d.id.length == depth
+      })
           
       d3.select(key).append("div")
         .attr("class","leon label")

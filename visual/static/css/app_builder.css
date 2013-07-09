@@ -1,18 +1,10 @@
 body {
+  background-color: #fafafa !important;
+  height: 100%;
   margin: 0px;
   padding: 0px;
-  width: auto;
-  height: auto;
-  overflow: hidden;
-  background-color: #fafafa !important;
-  background-color: white;
-  position: relative;
-}
-
-iframe {
-  padding: 0px;
-  border: 0px;
-  overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 #error {
@@ -111,6 +103,7 @@ div#toggles > .leon.button.square {
 }
 
 div#builder {
+  left: 50%;
   position: absolute;
   text-align: center;
   -webkit-transition: top 0.6s;
@@ -120,19 +113,20 @@ div#builder {
   -webkit-user-select: none;
 }
 
-div#builder > div#output_select,
-div#builder > div#app_controls {
-  margin-top: -6px;
+div#builder > div {
+  display: inline-block;
+}
+
+div#builder div.leon.label {
+  padding-left: 0px;
 }
 
 div.filter_button {
-  display: inline-block;
-  margin: 6px 6px 6px 0px;
+  margin: 6px;
 }
 
-div.filter_button div.button {
+div.filter_button > div.leon.button {
   margin: 0px;
-  text-align: left;
 }
 
 .leon.button > i.icon-list-alt {

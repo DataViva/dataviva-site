@@ -99,7 +99,8 @@ def embed2(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     '''Get URL query parameters from reqest.args object to return to the view.
     '''
     global_vars = {x[0]:x[1] for x in request.args.items()}
-    global_vars["controls"] = "true"
+    if "controls" not in global_vars:
+        global_vars["controls"] = "true"
 
     '''If user is logged in see if they have starred this app.'''
     starred = 0

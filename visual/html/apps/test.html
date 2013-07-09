@@ -1,0 +1,450 @@
+{% block content %}
+
+  <div id="loading">
+    <i class="icon-cog icon-spin icon-4x"></i>
+  </div>
+
+  <div id="builder">
+
+    <label for="app_select">App</label>
+    <select id="app_select" 
+      onchange="select_app(this.options[this.selectedIndex].id)">
+    </select>
+
+    <div id="bra_select" class="filter_button">
+      <div class="leon label">Location</div>
+      <div id="bra_select" class="leon button" onclick="show_selector(this.id)">
+        <div class="leon icon"></div>
+        <span class="list_text"></span>
+        <i class="icon-list-alt"></i>
+      </div>
+    </div>
+
+    <div id="output_select"></div>
+    
+    <div id="app_controls"></div>
+  
+  </div>
+
+  <div id="toggles">
+
+    <a id="controls_toggle" class="leon button square" onclick="toggle_controls()"><i class="icon-cogs"></i></a>
+    <a id="refresh" class="leon button square" onclick="start_app()" onmouseover="visual.ui.tooltip(this.id)" onmouseout="visual.ui.tooltip(this.id,true)"><i class="icon-refresh"></i></a>
+  
+  </div>
+
+  <div id="settings">
+
+    <a id="file_select" class="leon button square" onclick="show_selector(this.id)"><i class="icon-save"></i></a>
+    <a id="starred" class="leon button square" onclick="toggle_star()"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
+    <a id="help_select" class="leon button square" onclick="show_selector(this.id)"><i class="icon-question-sign"></i></a>
+    <a id="full_screen" class="leon button square" onclick="window.open(window.location.href,'_blank')"><i class="icon-fullscreen"></i></a>
+  
+  </div>
+
+  <div id="app"></div>
+  <div id="ui_bottom"></div>
+  
+  <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it 
+       to SVG/PDF/PNG downloadable file. -->
+  <form id="svgform" action="/data/download/" method="post">
+    {{ form.hidden_tag() }}
+  </form>
+
+{% endblock %}
+
+{% block js %}
+
+  <script src="/static/js/libs/d3.geo.tile.js"></script>
+  <script src="/static/js/libs/topojson.js"></script>
+  <script src="/static/js/utils/utils.key.js"></script>
+  <script src="/static/js/utils/utils.selector.js"></script>
+  
+  <script type="text/javascript">
+  
+    var debug = true;
+  
+    var required_url = "/rais/all/all/isic/show/",
+        width,
+        app_width,
+        height,
+        app_height,
+        title_width = 300,
+        app_filters = [],
+        app_solos = [],
+        distance_seperator = ".",
+        combo_seperator = "+",
+        filters = [],
+        solos = [],
+        bubbles_required,
+        bubbles_elsewhere,
+        selector = null
+    
+    // Toggles app controls on and off
+    function toggle_controls() {
+      if (global_vars.controls == "false") {
+        global_vars.controls = "true"
+      } else {
+        global_vars.controls = "false"
+      }
+      update_url()
+      resize_page()
+      refresh_app()
+    }
+    
+    function create_selector() {
+
+      selector = Selector()
+        .popover(true);
+      
+      visual.popover.create({
+        "id": "popover",
+        "width": 600,
+        "height": "80%"
+      })
+      
+    }
+    
+    
+    function show_selector(button_id) {
+      
+      var id = button_id.split("_")[0]
+      // If popover selector does not exist, create it
+      if (!selector) {
+        create_selector();
+      }
+
+      if (id == "help") {
+        var init = app_name,
+            callback = null
+        attrs[id] = [{
+          "id": app_name,
+          "name": format_name(app_name),
+          "color": apps[app_name].color,
+          "icon": visual.icon(app_name,"app")
+        }]
+      }
+      else if (id == "file") {
+        var init = "all",
+            callback = "download"
+        attrs[id] = null
+      }
+      else {
+        var init = window[id].id,
+            callback = "select_filter"
+      }
+      
+      if (window[id].distance) {
+        var dist = window[id].distance
+      }
+      else {
+        var dist = 0
+      }
+      
+      var id = "bra2" == id ? "bra" : id
+      
+      selector
+        .callback(callback)
+        .distance(dist)
+        .initial_value(init)
+        .type(id)
+      
+      d3.select("#popover")
+        .call(selector);
+        
+      // Show popover
+      visual.popover.show("#popover");
+      
+    }
+    
+    function download(obj) {
+      
+      var title = [app_name]
+      current_build.forEach(function(f){
+        title.push(window[f].id)
+      })
+      
+      visual.download(obj.id,title);
+      
+    }
+    
+    function toggle_star() {
+      var id = d3.select("#starred > i").attr("id")
+      var status = parseInt(id.split("_")[1],10)
+      if (status == 0) {
+        login();
+      }
+      else {
+        var url = window.location.pathname.replace("embed","star"),
+            title = app_title(current_build,data_type)
+            
+        d3.json(url)
+          .header("Content-type","application/x-www-form-urlencoded")
+          .post("title="+title, function(error,data) {
+            var status = data.success
+            d3.select("#starred > i")
+              .attr("id","status_"+status)
+              .attr("class",function() {
+                return status == 1 ? "icon-star" : "icon-star-empty";
+              })
+          })
+      }
+    }
+    
+    // Used whenever any filter is changed
+    function select_filter(obj,type) {
+      
+      visual.popover.hide("#popover");
+
+      var cat = "bra2" == type ? "bra" : type
+      
+      if (cat == "bra" && !obj.distance) obj.distance = 0
+
+      if (!obj.icon) obj.icon = visual.icon(obj.id,cat)
+      
+      d3.select("#"+type+"_select .icon")
+       .style("background-image","url("+obj.icon+")")
+       .style("background-color","transparent")
+
+      if (["wld","bra"].indexOf(cat) < 0) {
+        d3.select("#"+type+"_select .icon")
+         .style("background-color",obj.color)
+      }
+
+      var name = obj.name
+        
+      if (obj.distance > 0) {
+        name += " ("+obj.distance+"km)"
+      }
+      
+      d3.select("#"+type+"_select .list_text")
+       .text(name)
+      
+      if (window[type].id != obj.id || 
+         (cat == "bra" && obj.distance != window[type].distance && obj.distance)) {
+        if (cat == "bra") window[type].distance = obj.distance ? obj.distance : window[type].distance;
+        window[type] = obj
+        start_app();
+      }
+      
+    }
+    
+    // Thing that actually embeds the app!
+    function start_app() {
+      
+      if (app_name == "rings" && window[current_build[0]].id.length == depths[current_build[0]][0]) {
+        
+        build_complete("Not available for Parent Categories");
+        
+      }
+      else if (app_name == "geo_map" && bra.id == "all") {
+        
+        build_complete("Geo Map only available for States");
+        
+      }
+      else {
+
+        update_url();
+        
+        data_loaded()
+      }
+      
+      function data_loaded() {
+
+        // Check if data has distances
+        var distances = app_data[current_url].raw.filter(function(d){return d.distance})
+        var complexities = app_data[current_url].raw.filter(function(d){return d.complexity})
+      
+        // If there is no data and app is not Bubbles, or there no distances and app is Scatter, no data!
+        if (app_data[current_url].raw.length == 0 && app_name != "bubbles") {
+          build_complete("No Data Available for Current Selection");
+        } 
+        else if (app_name == "pie_scatter" && complexities.length == 0) {
+          build_complete("No Complexities Available");
+        }
+        else if (app_name == "pie_scatter" && distances.length == 0) {
+          build_complete("No Distances Available for Location");
+        }
+      
+        // Else, check for other files to load!
+        else {
+          
+          function check_node() {
+            var node = networks[current_build[0]].nodes.filter(function(n){return n.id == window[current_build[1]].id})[0]
+            if (node) check_attrs(current_build[0],"create_app");
+            else {
+              build_complete("No Connections Available");
+            }
+          }
+      
+          if (app_name == "rings") {
+            check_node();
+          }
+          else if (app_name == "bubbles") {
+            var url = required_url.replace("isic",isic.id)
+            d3.json(url, function(required) {
+              bubbles_required = required.data
+              
+              var else_url = "/rais/all/"+bra.id+"/all/show/"
+              
+              d3.json(else_url, function(elsewhere){
+                bubbles_elsewhere = elsewhere.data;
+                check_attrs(current_build[0],"create_app");
+              })
+              
+            })
+          } 
+          else {
+            check_attrs(current_build[0],"create_app");
+          }
+                
+        }
+      }
+      
+                
+    }
+    
+    
+    function app_title(build,data) {
+      
+      var out = build[0];
+      
+      if (visual.language == "en") {
+        if (app_name == "network") {
+          if (out == "hs") var type = "Product"
+          else if (out == "isic") var type = "Industry"
+          else var type = "Occupation"
+          return type + " Space for " + bra.name
+        }
+        else if (app_name == "rings") {
+            return "Connections for " + window[out].name + " in " + bra.name
+        }
+        else if (app_name == "bubbles") {
+          return "Available and required employment for "+isic.name+" in "+bra.name;
+        }
+        else {
+          var title = format_name(out+"_plural")
+          if (out == "isic" || out == "cbo" || out == "bra") {
+            title += " in "
+          }
+          if (out == "hs" || out == "wld") {
+            title += " of "
+          }
+          title += bra.name
+          if (out == "bra" && build.length == 1) {
+            title += " with " + format_name(data)
+          }
+          build.forEach(function(f,i){
+            if (i != 0) {
+              if (f == "isic") {
+                if (out == "cbo") var article = "employed in"
+                else var article = "that have"
+                title += " " + article + " the " + isic.name + " industry"
+              }
+              else if (f == "cbo") {
+                if (i == 1) var article = "that"
+                else var article = "and"
+                title += " " + article + " employ " + cbo.name
+              }
+              else if (f == "hs") {
+                if (out == "wld") var trade = "import"
+                else var trade = "export"
+                title += " that " + trade + " " + hs.name
+              }
+              else if (f == "wld") {
+                title += " to " + wld.name
+              }
+              else if (f == "bra2") {
+                title += " and " + bra2.name
+              }
+            }
+          })
+          return title;
+        }
+      }
+      else if (visual.language == "pt") {
+        
+      }
+      
+      return app_name;
+    }
+
+    function app_filtering() {
+
+      var ids = []
+      if (app_solos.length >= 1 && app_solos.length <= cats.length/2) {
+        var prefix = "Showing only "
+        ids = app_solos
+      }
+      else if (app_solos.length > cats.length/2) {
+        var prefix = "Excluding "
+        cats.forEach(function(c){
+          if (app_solos.indexOf(c) < 0) ids.push(c)
+        })
+      }
+      else if (app_filters.length >= 1 && app_filters.length <= cats.length/2) {
+        var prefix = "Excluding "
+        ids = app_filters
+      }
+      else if (app_filters.length > cats.length/2) {
+        var prefix = "Showing only "
+        cats.forEach(function(c){
+          if (app_filters.indexOf(c) < 0) ids.push(c)
+        })
+      }
+      
+      var names = []
+      ids.forEach(function(id){
+        names.push(attrs[current_build[0]][id].name)
+      })
+      
+      if (names.length > 0) {
+        var text = prefix
+        names.forEach(function(n,i){
+          if (i != 0 && names.length != 2) text += ", "
+          if (i == names.length-1 && i != 0) text += " and "
+          text += n
+        })
+        d3.select("#app").call(app.sub_title(text))
+      }
+      else {
+        d3.select("#app").call(app.sub_title(""))
+      }
+    }
+
+    /************************/
+    /* UI Control Functions */
+    /************************/
+
+    function axes(value) { 
+      global_vars.axes = value
+      update_url();
+      
+      var xvar = "cp_bra2_"+global_vars.axes
+      var yvar = "cp_bra_"+global_vars.axes
+      
+      d3.select("#app").call(app
+        .xaxis_var(xvar)
+        .yaxis_var(yvar)
+      );
+      
+    }
+    
+    function change_year(value) {
+      global_vars.year = value;
+      update_url();
+      update_key();
+      d3.select("#app").call(app.year(global_vars.year));
+    }
+    
+    function value_var(value) { 
+      global_vars.value_var = value;
+      update_url();
+      d3.select("#app").call(app
+        .value_var(global_vars.value_var)
+        .total_bar(get_total_label())) 
+    }
+  
+  </script>
+
+{% endblock %}

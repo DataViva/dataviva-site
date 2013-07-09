@@ -3,6 +3,8 @@ from visual import db
 from visual.utils import AutoSerialize
 from visual.attrs.models import Bra, Isic, Hs, Cbo, Wld
 
+import ast
+
 build_ui = db.Table('apps_build_ui',
          db.Column('build_id', db.Integer,db.ForeignKey('apps_build.id')),
          db.Column('ui_id', db.Integer,db.ForeignKey('apps_ui.id'))
@@ -184,19 +186,26 @@ class Build(db.Model, AutoSerialize):
         auto_serialized["title"] = self.title()
         auto_serialized["data_url"] = self.data_url()
         auto_serialized["url"] = self.url()
+        auto_serialized["ui"] = [ui.serialize() for ui in self.ui.all()]
         return auto_serialized
 
     def __repr__(self):
         return '<Build %r/%r/%r/%r>' % (self.viz_whiz, self.filter1, 
                                             self.filter2, self.output)
 
-class UI(db.Model):
+class UI(db.Model, AutoSerialize):
 
     __tablename__ = 'apps_ui'
+    __public__ = ("type","values")
 
     id = db.Column(db.Integer, db.ForeignKey(Build.id), primary_key = True)
     type = db.Column(db.String(20))
     values = db.Column(db.String(255))
+    
+    def serialize(self, **kwargs):
+        auto_serialized = super(UI, self).serialize()
+        auto_serialized["values"] = ast.literal_eval(self.values)
+        return auto_serialized
     
     def __repr__(self):
         return '<Build %r: %r>' % (self.type, self.values)
