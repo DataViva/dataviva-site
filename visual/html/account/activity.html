@@ -1,5 +1,5 @@
 <!-- extend admin_template -->
-{% extends "templates/admin.html" %}
+{% extends "templates/account.html" %}
 
 {% block admin_content %}
 
@@ -18,15 +18,6 @@
 
 <script src="/static/js/utils/utils.infinite_scroll.js"></script>
 <script>
-
-// clean up data into one nice array of activities
-// activities = new_data.activities.map(function(d){
-//   return_obj = d[1]
-//   return_obj["activity_type"] = d[0]
-//   return_obj["title"] = d[1].app_name ? d[1].app_name : d[1].question ? d[1].question : d[1].body;
-//   return_obj["timestamp"] = parseDate(d[1].timestamp);
-//   return return_obj
-// });
 
 
 function item_formatter(container_el, activities){

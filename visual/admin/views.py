@@ -5,6 +5,7 @@ from visual import db
 from datetime import datetime
 # models
 from visual.account.models import User
+from visual.ask.models import Question, Status
 
 mod = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -46,7 +47,7 @@ def admin_users():
 @login_required
 def update_user(user_id):
     # test with:
-    # curl -i -H "Content-Type: application/json" -X POST 
+    # curl -i -H "Content-Type: application/json" -X PUT 
     #   -d '{"role":2}' http://localhost:5000/admin/user/1
     
     user = User.query.get(user_id)
@@ -55,6 +56,27 @@ def update_user(user_id):
     db.session.commit()
     
     return jsonify( {'user': user.serialize()} )
+
+@mod.route('/questions/', defaults={'status': 'pending'})
+@mod.route('/questions/<status>/')
+@login_required
+def admin_questions(status):
+    offset = request.args.get('offset', 0)
+    limit = 50
+    
+    if request.is_xhr:
+        
+        # get all users EXCEPT the logged in user
+        status = status.capitalize()
+        curr_status = Status.query.filter_by(name=status).first_or_404()
+        query = Question.query.filter_by(status = curr_status)
+        
+        items = query.limit(limit).offset(offset).all()
+        items = [i.serialize() for i in items]
+        
+        return jsonify({"activities":items})
+    
+    return render_template("admin/admin_questions.html")
 
 '''
 ###############################

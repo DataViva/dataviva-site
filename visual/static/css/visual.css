@@ -1008,3 +1008,17 @@ a.tag span {
    opacity: 1;
    display: block;
 }
+
+/********************/
+/* Admin Styles     */
+/********************/
+
+nav ul#navigation li {
+  list-style-type: none;
+}
+nav ul#navigation li.active a {
+  color: red;
+}
+nav ul#navigation ul {
+  margin: 0 0 0 20px;
+}

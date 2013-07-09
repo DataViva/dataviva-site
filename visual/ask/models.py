@@ -83,6 +83,11 @@ class Question(db.Model, AutoSerialize):
     
     def __repr__(self):
         return '<Question %r>' % (self.question)
+    
+    def serialize(self):
+        auto_serialized = super(Question, self).serialize()
+        auto_serialized["user"] = self.user.serialize()
+        return auto_serialized
 
 class Tag(db.Model):
 

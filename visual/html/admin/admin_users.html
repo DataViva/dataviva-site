@@ -1,5 +1,5 @@
 <!-- extend admin_template -->
-{% extends "templates/site.html" %}
+{% extends "templates/admin.html" %}
 
 {% block head %}
 <style>
@@ -10,7 +10,7 @@ table > tbody td > img {
 </style>
 {% endblock %}
 
-{% block body %}
+{% block admin_content %}
 
 Welcome Admin!
 
@@ -46,7 +46,7 @@ function item_formatter(container_el, activities){
   attrs_enter.append("td")
     .append("img")
     .attr("src", function(d){
-      if(d.image) return d.image;
+      if(d.avatar) return d.avatar;
     })
 
   attrs_enter.append("td").text(function(d){ return d.email; })
@@ -55,20 +55,30 @@ function item_formatter(container_el, activities){
   var role_select = attrs_enter
     .append("td")
     .append("select")
-    .attr("id", "role_select")
+    .attr("class", "role_select")
+    .on("change", function(d){
+      var selected_role = this.options[this.selectedIndex];
+      selected_role = d3.select(selected_role).attr("value")
+      d3.json("/admin/user/"+d.id+"/")
+        .header("Content-type", "application/json")
+        .send("PUT", '{"role": '+selected_role+'}', function(error, text) { console.log(error, text); });
+    })
   
   role_select.selectAll("option")
-    .data(d3.values(roles))
+    .data(d3.entries(roles))
     .enter().append("option")
-    .text(function(d){ return d; })
+    .text(function(d){ return d.value; })
+    .attr("value", function(d){ 
+      return d.key;
+    })
     .attr("selected", function(d){
       var parent_data = d3.select(this.parentNode).datum();
-      if(roles[parent_data.role] == d){
+      if(parent_data.role == d.key){
         return "selected"
       }
     })
 
-  leon.start("#role_select")
+  // leon.get(".role_select")
 
 }
 

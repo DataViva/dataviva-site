@@ -10,7 +10,7 @@ ROLE_SUPER_ADMIN = 2
 class User(db.Model, AutoSerialize):
 
     __tablename__ = 'account_user'
-    __public__ = ("nickname", "email", "fullname", "image", "role")
+    __public__ = ("id", "nickname", "email", "fullname", "role")
     
     id = db.Column(db.Integer, primary_key = True)
     google_id = db.Column(db.String(120), unique = True)
@@ -68,6 +68,12 @@ class User(db.Model, AutoSerialize):
                 break
             version += 1
         return new_nickname
+    
+    def serialize(self):
+        auto_serialized = super(User, self).serialize()
+        auto_serialized["avatar"] = self.avatar(50)
+
+        return auto_serialized
         
 class Starred(db.Model, AutoSerialize):
 
