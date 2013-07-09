@@ -128,13 +128,13 @@ class Build(db.Model, AutoSerialize):
             filters.append(f2)
         
         if self.output == "hs": 
-            output_name = "Product";    output_name_pl = "Products"
+            output_name = "Product";    output_name_pl = "Product Exports"
         if self.output == "isic": 
-            output_name = "Industry";   output_name_pl = "Industries"
+            output_name = "Industry";   output_name_pl = "Local Industries"
         if self.output == "cbo": 
             output_name = "Occupation"; output_name_pl = "Occupations"
         if self.output == "wld": 
-            output_name = "Country";    output_name_pl = "Countries"
+            output_name = "Trade Partner";    output_name_pl = "Trade Partners"
         if self.output == "bra": 
             output_name = "Location";   output_name_pl = "Locations"
 

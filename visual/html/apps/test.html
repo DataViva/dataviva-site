@@ -228,146 +228,6 @@
       }
       
     }
-    
-    // Thing that actually embeds the app!
-    function start_app() {
-      
-      if (app_name == "rings" && window[current_build[0]].id.length == depths[current_build[0]][0]) {
-        
-        build_complete("Not available for Parent Categories");
-        
-      }
-      else if (app_name == "geo_map" && bra.id == "all") {
-        
-        build_complete("Geo Map only available for States");
-        
-      }
-      else {
-
-        update_url();
-        
-        data_loaded()
-      }
-      
-      function data_loaded() {
-
-        // Check if data has distances
-        var distances = app_data[current_url].raw.filter(function(d){return d.distance})
-        var complexities = app_data[current_url].raw.filter(function(d){return d.complexity})
-      
-        // If there is no data and app is not Bubbles, or there no distances and app is Scatter, no data!
-        if (app_data[current_url].raw.length == 0 && app_name != "bubbles") {
-          build_complete("No Data Available for Current Selection");
-        } 
-        else if (app_name == "pie_scatter" && complexities.length == 0) {
-          build_complete("No Complexities Available");
-        }
-        else if (app_name == "pie_scatter" && distances.length == 0) {
-          build_complete("No Distances Available for Location");
-        }
-      
-        // Else, check for other files to load!
-        else {
-          
-          function check_node() {
-            var node = networks[current_build[0]].nodes.filter(function(n){return n.id == window[current_build[1]].id})[0]
-            if (node) check_attrs(current_build[0],"create_app");
-            else {
-              build_complete("No Connections Available");
-            }
-          }
-      
-          if (app_name == "rings") {
-            check_node();
-          }
-          else if (app_name == "bubbles") {
-            var url = required_url.replace("isic",isic.id)
-            d3.json(url, function(required) {
-              bubbles_required = required.data
-              
-              var else_url = "/rais/all/"+bra.id+"/all/show/"
-              
-              d3.json(else_url, function(elsewhere){
-                bubbles_elsewhere = elsewhere.data;
-                check_attrs(current_build[0],"create_app");
-              })
-              
-            })
-          } 
-          else {
-            check_attrs(current_build[0],"create_app");
-          }
-                
-        }
-      }
-      
-                
-    }
-    
-    
-    function app_title(build,data) {
-      
-      var out = build[0];
-      
-      if (visual.language == "en") {
-        if (app_name == "network") {
-          if (out == "hs") var type = "Product"
-          else if (out == "isic") var type = "Industry"
-          else var type = "Occupation"
-          return type + " Space for " + bra.name
-        }
-        else if (app_name == "rings") {
-            return "Connections for " + window[out].name + " in " + bra.name
-        }
-        else if (app_name == "bubbles") {
-          return "Available and required employment for "+isic.name+" in "+bra.name;
-        }
-        else {
-          var title = format_name(out+"_plural")
-          if (out == "isic" || out == "cbo" || out == "bra") {
-            title += " in "
-          }
-          if (out == "hs" || out == "wld") {
-            title += " of "
-          }
-          title += bra.name
-          if (out == "bra" && build.length == 1) {
-            title += " with " + format_name(data)
-          }
-          build.forEach(function(f,i){
-            if (i != 0) {
-              if (f == "isic") {
-                if (out == "cbo") var article = "employed in"
-                else var article = "that have"
-                title += " " + article + " the " + isic.name + " industry"
-              }
-              else if (f == "cbo") {
-                if (i == 1) var article = "that"
-                else var article = "and"
-                title += " " + article + " employ " + cbo.name
-              }
-              else if (f == "hs") {
-                if (out == "wld") var trade = "import"
-                else var trade = "export"
-                title += " that " + trade + " " + hs.name
-              }
-              else if (f == "wld") {
-                title += " to " + wld.name
-              }
-              else if (f == "bra2") {
-                title += " and " + bra2.name
-              }
-            }
-          })
-          return title;
-        }
-      }
-      else if (visual.language == "pt") {
-        
-      }
-      
-      return app_name;
-    }
 
     function app_filtering() {
 
@@ -415,34 +275,17 @@
     /************************/
     /* UI Control Functions */
     /************************/
-
-    function axes(value) { 
-      global_vars.axes = value
-      update_url();
-      
-      var xvar = "cp_bra2_"+global_vars.axes
-      var yvar = "cp_bra_"+global_vars.axes
-      
-      d3.select("#app").call(app
-        .xaxis_var(xvar)
-        .yaxis_var(yvar)
-      );
-      
+    
+    function app_filter(value) { 
+      app_filters = value
+      app_filtering();
+      d3.select("#app").call(app.filter(value)) 
     }
     
-    function change_year(value) {
-      global_vars.year = value;
-      update_url();
-      update_key();
-      d3.select("#app").call(app.year(global_vars.year));
-    }
-    
-    function value_var(value) { 
-      global_vars.value_var = value;
-      update_url();
-      d3.select("#app").call(app
-        .value_var(global_vars.value_var)
-        .total_bar(get_total_label())) 
+    function solo(value) {
+      app_solos = value
+      app_filtering();
+      d3.select("#app").call(app.solo(value)) 
     }
   
   </script>
