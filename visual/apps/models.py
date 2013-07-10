@@ -31,6 +31,8 @@ class Build(db.Model, AutoSerialize):
     filter1 = db.Column(db.String(20))
     filter2 = db.Column(db.String(20))
     output = db.Column(db.String(20))
+    title_en = db.Column(db.String(120))
+    title_pt = db.Column(db.String(120))
     app_id = db.Column(db.Integer, db.ForeignKey(App.id))
     
     ui = db.relationship('UI', secondary=build_ui, 
@@ -127,67 +129,28 @@ class Build(db.Model, AutoSerialize):
     
     '''Returns the english language title of this build.'''
     def title(self, **kwargs):
-
-        bra = self.bra
-        f1 = self.filter1
-        f2 = self.filter2
+        lang = "en"
+        if "lang" in kwargs:
+            lang =  kwargs["lang"]
         
-        # bra = Bra.query.get_or_404(bra)
-        filters = []
-        if f1 != "all":
-            filters.append(f1)
-        if f2 != "all":
-            filters.append(f2)
+        title_lang = "title_en" if lang == "en" else "title_pt"
+        name_lang = "name_en" if lang == "en" else "name_pt"
         
-        if self.output == "hs": 
-            output_name = "Product";    output_name_pl = "Product Exports"
-        if self.output == "isic": 
-            output_name = "Industry";   output_name_pl = "Local Industries"
-        if self.output == "cbo": 
-            output_name = "Occupation"; output_name_pl = "Occupations"
-        if self.output == "wld": 
-            output_name = "Trade Partner";    output_name_pl = "Trade Partners"
-        if self.output == "bra": 
-            output_name = "Location";   output_name_pl = "Locations"
-
-        if self.dataset == "rais":  items = "Local Industries"
-        if self.dataset == "secex": items = "Product Exports"
-
-        # if g.locale == "en":
-        if True:
-            if self.app.type == "network":
-                return output_name + " Space for " + bra.name_en
-            elif self.app.type == "rings":
-                return "Connections for " + filters[0].name_en + " in " + bra.name_en
-            elif self.app.type == "bubbles":
-                return "Available and required employment for " + filters[0].name_en + " in " + bra.name_en;
-            else:
-                title = output_name_pl
-                if self.output == "isic" or self.output == "cbo" or self.output == "bra":
-                    title += " in "
-                if self.output == "hs" or self.output == "wld":
-                    title += " of "
-                title += bra.name_en
-                if self.output == "bra" and len(filters) == 1:
-                    title += " with " + items
-
-                for i, f in enumerate(filters):
-                    if isinstance(f, Isic):
-                        article = "employed in" if self.output == "cbo" else "that have"
-                        title += " " + article + " the " + f.name_en + " industry"
-                    elif isinstance(f, Cbo):
-                        article = "that" if i == 0 else "and"
-                        title += " " + article + " employ " + f.name_en
-                    elif isinstance(f, Hs):
-                      trade = "import" if self.output == "wld" else "export"
-                      title += " that " + trade + " " + f.name_en
-                    elif isinstance(f, Wld):
-                      title += " to " + f.name_en
-                    elif isinstance(f, Bra):
-                      title += " and " + bra2.name_en
-                return title
-        elif g.locale == "pt":
-            pass
+        title = getattr(self, title_lang)
+        
+        if "<bra>" in title:
+            title = title.replace("<bra>", getattr(self.bra, name_lang))
+        if "<isic>" in title:
+            title = title.replace("<isic>", getattr(self.filter1, name_lang))
+        elif "<hs>" in title:
+            title = title.replace("<hs>", getattr(self.filter1, name_lang))
+        if "<cbo>" in title:
+            title = title.replace("<cbo>", getattr(self.filter2, name_lang))
+        elif "<wld>" in title:
+            title = title.replace("<wld>", getattr(self.filter2, name_lang))
+        
+        return title
+            
 
     def serialize(self, **kwargs):
         auto_serialized = super(Build, self).serialize()
