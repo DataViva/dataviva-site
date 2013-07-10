@@ -295,14 +295,14 @@
             if (app.build.dataset == "rais") {
               if (app.build.filter1 != "all") {
                 d3.select("#isic_select").style("display","inline-block")
-                builder.filter(app.build.filter1,"isic")
+                builder.filter(app.build.filter1,"isic",true)
               }
               else {
                 d3.select("#isic_select").style("display","none")
               }
               if (app.build.filter2 != "all") {
                 d3.select("#cbo_select").style("display","inline-block")
-                builder.filter(app.build.filter2,"cbo")
+                builder.filter(app.build.filter2,"cbo",true)
               }
               else {
                 d3.select("#cbo_select").style("display","none")
@@ -313,14 +313,14 @@
             else if (app.build.dataset == "secex") {
               if (app.build.filter1 != "all") {
                 d3.select("#hs_select").style("display","inline-block")
-                builder.filter(app.build.filter1,"hs")
+                builder.filter(app.build.filter1,"hs",true)
               }
               else {
                 d3.select("#hs_select").style("display","none")
               }
               if (app.build.filter2 != "all") {
                 d3.select("#wld_select").style("display","inline-block")
-                builder.filter(app.build.filter2,"wld")
+                builder.filter(app.build.filter2,"wld",true)
               }
               else {
                 d3.select("#wld_select").style("display","none")
@@ -1032,7 +1032,7 @@
     /*********************/
     
     var builder = {}
-    builder.filter = function(obj,type) {
+    builder.filter = function(obj,type,static) {
       
       // Hide popover
       visual.popover.hide("#popover");
@@ -1072,17 +1072,19 @@
        .style("background-image","url("+obj.icon+")")
        .style("background-color",obj.color)
 
-      var name = obj.name
+      var name = obj.name ? obj.name : obj.name_en
         
       if (obj.distance > 0) name += " ("+obj.distance+"km)"
-      
+
       button.select(".list_text").text(name)
 
-      var url = app.url.split("/")
-      url[index] = obj.id
-      url = url.join("/")
+      if (!static) {
+        var url = app.url.split("/")
+        url[index] = obj.id
+        url = url.join("/")
        
-      app.start(url)
+        app.start(url)
+      }
        
     }
     
