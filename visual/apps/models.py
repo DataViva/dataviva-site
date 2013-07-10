@@ -44,53 +44,66 @@ class Build(db.Model, AutoSerialize):
         return self.ui.filter(UI.type == ui_type).first()
 
     def set_bra(self, bra_id):
+        self.bra = []
         if bra_id == "all":
-            self.bra = Wld.query.get("sabra")
-            self.bra.id = "all"
-            self.bra.icon = "/static/img/icons/wld/wld_sabra.png"
+            self.bra.append(Wld.query.get("sabra"))
+            self.bra[0].id = "all"
+            self.bra[0].icon = "/static/img/icons/wld/wld_sabra.png"
         else:
-            self.bra = Bra.query.get(bra_id)
-            self.bra.icon = "/static/img/icons/bra/bra_{0}.png".format(bra_id[:2])
+            for i, b in enumerate(bra_id.split("+")):
+                self.bra.append(Bra.query.get(b))
+                self.bra[i].icon = "/static/img/icons/bra/bra_{0}.png".format(b[:2])
 
     def set_filter1(self, filter):
         if self.filter1 == "all":
             self.filter1 = "all"
         elif self.dataset == "rais":
-            if Isic.query.get(filter):
-                self.filter1 = Isic.query.get(filter)
-            else:
-                self.filter1 = Isic.query.get('c1410')
+            self.isic = []
+            for i, f in enumerate(filter.split("+")):
+                if Isic.query.get(f):
+                    self.isic.append(Isic.query.get(f))
+                else:
+                    self.isic.append(Isic.query.get('c1410'))
         elif self.dataset == "secex":
-            if Hs.query.get(filter):
-                self.filter1 = Hs.query.get(filter)
-            else:
-                self.filter1 = Hs.query.get('178703')
+            self.hs = []
+            for i, f in enumerate(filter.split("+")):
+                if Hs.query.get(f):
+                    self.hs.append(Hs.query.get(f))
+                else:
+                    self.hs.append(Hs.query.get('178703'))
+        self.filter1 = filter
     
     def set_filter2(self, filter):
         if self.filter2 == "all":
             self.filter2 = "all"
         elif self.dataset == "rais":
-            if Cbo.query.get(filter):
-                self.filter2 = Cbo.query.get(filter)
-            else:
-                self.filter2 = Cbo.query.get('1210')
+            self.cbo = []
+            for i, f in enumerate(filter.split("+")):
+                if Cbo.query.get(f):
+                    self.cbo.append(Cbo.query.get(f))
+                else:
+                    self.cbo.append(Cbo.query.get('1210'))
         elif self.dataset == "secex":
-            if Wld.query.get(filter):
-                self.filter2 = Wld.query.get(filter)
-            else:
-                self.filter2 = Wld.query.get('aschn')
+            self.wld = []
+            for i, f in enumerate(filter.split("+")):
+                if Wld.query.get(f):
+                    self.wld.append(Wld.query.get(f))
+                else:
+                    self.wld.append(Wld.query.get('aschn'))
+        self.filter2 = filter
         
     '''Returns the URL for the specific build.'''
     def url(self, **kwargs):
         
-        bra = self.bra.id
-        if self.filter1 == "all": filter1 = "all"
-        else: filter1 = self.filter1.id
-        if self.filter2 == "all": filter2 = "all"
-        else: filter2 = self.filter2.id
+        # bra = self.bra.id
+        # if self.filter1 == "all": filter1 = "all"
+        # else: filter1 = self.filter1.id
+        # if self.filter2 == "all": filter2 = "all"
+        # else: filter2 = self.filter2.id
+        bra_id = "+".join([b.id for b in self.bra])
         
         url = '{0}/{1}/{2}/{3}/{4}/{5}'.format(self.app.viz_whiz, 
-                self.dataset, bra, filter1, filter2, self.output)
+                self.dataset, bra_id, self.filter1, self.filter2, self.output)
         return url
 
     '''Returns the data URL for the specific build. This URL will return the 
@@ -99,7 +112,8 @@ class Build(db.Model, AutoSerialize):
     def data_url(self, **kwargs):
         # filters = self.get_bra_and_filters(**kwargs)
         
-        bra = self.bra.id
+        # bra = self.bra.id
+        bra = "+".join([b.id for b in self.bra])
         if self.output == "bra":
             bra = bra + ".8"
         
@@ -110,7 +124,8 @@ class Build(db.Model, AutoSerialize):
             elif self.output == "hs":
                 filter1 = "show.6"
         else:
-            filter1 = self.filter1.id
+            filter1 = self.filter1
+            # filter1 = self.filter1.id
         
         filter2 = self.filter2
         if filter2 == "all":
@@ -119,12 +134,14 @@ class Build(db.Model, AutoSerialize):
             elif self.output == "wld":
                 filter2 = "show.5"
         else:
-            self.filter2.id
+            self.filter2
+            # self.filter2.id
 
-        filter2 = "all" if self.filter2 == "all" else self.filter2.id
-        filter2 = "show" if self.output == "cbo" or self.output == "wld" else filter2
+        # filter2 = "all" if self.filter2 == "all" else self.filter2.id
+        # filter2 = "show" if self.output == "cbo" or self.output == "wld" else filter2
 
-        data_url = '{0}/all/{1}/{2}/{3}/'.format(self.dataset, bra, filter1, filter2)
+        data_url = '{0}/all/{1}/{2}/{3}/'.format(self.dataset, bra, 
+            self.filter1, self.filter2)
         return data_url
     
     '''Returns the english language title of this build.'''
@@ -139,30 +156,37 @@ class Build(db.Model, AutoSerialize):
         title = getattr(self, title_lang)
         
         if "<bra>" in title:
-            title = title.replace("<bra>", getattr(self.bra, name_lang))
+            title = title.replace("<bra>", ", ".join([getattr(b, name_lang) for b in self.bra]))
         if "<isic>" in title:
-            title = title.replace("<isic>", getattr(self.filter1, name_lang))
-        elif "<hs>" in title:
-            title = title.replace("<hs>", getattr(self.filter1, name_lang))
+            title = title.replace("<isic>", ", ".join([getattr(i, name_lang) for i in self.isic]))
+        if "<hs>" in title:
+            title = title.replace("<hs>", ", ".join([getattr(h, name_lang) for h in self.hs]))
         if "<cbo>" in title:
-            title = title.replace("<cbo>", getattr(self.filter2, name_lang))
-        elif "<wld>" in title:
-            title = title.replace("<wld>", getattr(self.filter2, name_lang))
-        
+            title = title.replace("<cbo>", ", ".join([getattr(c, name_lang) for c in self.cbo]))
+        if "<wld>" in title:
+            title = title.replace("<wld>", ", ".join([getattr(w, name_lang) for w in self.wld]))
+
         return title
             
 
     def serialize(self, **kwargs):
         auto_serialized = super(Build, self).serialize()
-        # filters = self.get_bra_and_filters(**kwargs)
-        auto_serialized["bra"] = self.bra.serialize()
-        auto_serialized["filter1"] = "all" if self.filter1 == "all" else self.filter1.serialize()
-        auto_serialized["filter2"] = "all" if self.filter2 == "all" else self.filter2.serialize()
+
+        auto_serialized["bra"] = [b.serialize() for b in self.bra]
+        if hasattr(self, "isic"):
+            auto_serialized["isic"] = [i.serialize() for i in self.isic]
+        if hasattr(self, "hs"):
+            auto_serialized["hs"] = [h.serialize() for h in self.hs]
+        if hasattr(self, "cbo"):
+            auto_serialized["cbo"] = [c.serialize() for c in self.cbo]
+        if hasattr(self, "wld"):
+            auto_serialized["wld"] = [w.serialize() for w in self.wld]
         auto_serialized["title"] = self.title()
         auto_serialized["data_url"] = self.data_url()
         auto_serialized["url"] = self.url()
         auto_serialized["ui"] = [ui.serialize() for ui in self.ui.all()]
         auto_serialized["app"] = self.app.serialize()
+        
         return auto_serialized
 
     def __repr__(self):
