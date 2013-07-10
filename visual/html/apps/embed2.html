@@ -16,10 +16,6 @@
 
 {% block content %}
 
-  <div id="loading">
-    <i class="icon-cog icon-spin icon-4x"></i>
-  </div>
-
   <div id="builder">
 
     <div id="app_selector">
@@ -180,6 +176,8 @@
       "wld": visual.depths("wld")
     }
     
+    var loading = visual.ui.loading("body")
+    
     // Create Filter Selector
     var selector = Selector()
       .popover(true);
@@ -274,7 +272,11 @@
     // Start building a new app
     app.start = function(new_url) {
       
-      app.loading(true)
+      loading.text("Building App").show()
+          
+      d3.select("#ui_bottom").selectAll("*").remove();
+      d3.select("#app_controls").selectAll("*").remove();
+      vizwhiz.tooltip.remove();
       
       if (new_url) app.url = new_url
       
@@ -512,7 +514,7 @@
     app.error = function(error) {
       console.log("[visual] ERROR: "+error)
       app.resize(error)
-      app.loading(false)
+      loading.hide()
       d3.select("#app").html("").datum(error).call(no_data())
     }
     
@@ -717,32 +719,8 @@
         
       app.resize()
       builder.key()
-      app.loading(false)
+      loading.hide()
       
-    }
-    
-    app.loading = function(state) {
-      
-      var div = d3.select("#loading")
-      if (state == true) {
-        div
-          .style("display","block")
-          .style("opacity",1)
-            
-        d3.select("#ui_bottom").selectAll("*").remove();
-        d3.select("#app_controls").selectAll("*").remove();
-        vizwhiz.tooltip.remove();
-          
-      }
-      else {
-         div
-          .style("opacity",0)
-        var timing = parseFloat(div.style("transition-duration"),10)*1000
-        setTimeout(function(){
-          div
-            .style("display","none")
-        },timing)
-      }
     }
     
     app.update = function(type,value) {
@@ -1048,15 +1026,18 @@
       else {
         var index = 4,
             name = app.build.filter2.name_en
+            console.log(obj)
       }
+      
+      var n = obj.name ? obj.name : obj.name_en
       
       d3.selectAll("select.output > option")
         .each(function(){
           var url = this.id.split("/")
-          url[index] = obj.id
+          if (index == 2 || url[index] != "all") url[index] = obj.id
           this.id = url.join("/")
           this.value = url.join("/")
-          this.innerHTML = this.innerHTML.replace(name,obj.name)
+          this.innerHTML = this.innerHTML.replace(name,n)
         })
       
       leon.touch("select")
@@ -1093,9 +1074,15 @@
       var match = null
       
       d3.selectAll(".output_div").style("display","none")
-      d3.select("#"+app_name+"_output_div")
-        .style("display","inline-block")
-        .selectAll("option")
+      
+      var options = d3.select("#"+app_name+"_output_div").selectAll("option")
+      
+      if (options[0].length > 1) {
+        d3.select("#"+app_name+"_output_div")
+          .style("display","inline-block")
+      }
+      
+      options
         .each(function(d){
           var a = app.url.split("/")
           a.shift()
@@ -1105,7 +1092,7 @@
           s = s.join("/")
           if (a == s) match = this.id
         })
-      
+        
       if (!match) match = d3.select("#"+app_name+"_output_div option").node().id
       
       selects["output_"+app_name].set(match)
@@ -1129,12 +1116,12 @@
         var button = div.append("input")
           .attr("type","radio")
           .attr("name",obj.title)
-          .attr("value",v)
-          .attr("id",v)
-          .attr("onclick","app.update('"+obj.type+"',this.value)")
+          .attr("value",obj.title+"+"+v)
+          .attr("id",obj.title+"+"+v)
+          .attr("onclick","app.update('"+obj.type+"',this.value.split('+')[1])")
           
         div.append("label")
-          .attr("for",v)
+          .attr("for",obj.title+"+"+v)
           .text(format_name(v))
       
         if (v == obj.initial) {

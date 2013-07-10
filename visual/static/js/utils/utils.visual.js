@@ -81,6 +81,49 @@ visual.ui.tooltip = function(id,state) {
   }
 }
 
+visual.ui.loading = function(parent) {
+  
+  var self = this
+  
+  this.div = d3.select(parent).append("div")
+    .attr("class","loading")
+    
+  this.icon = self.div.append("i")
+    .attr("class","icon-certificate icon-4x")
+    
+  this.words = self.div.append("div")
+    .attr("class","text")
+    
+  this.show = function() {
+
+    self.div
+      .style("display","block")
+      .style("opacity",1)
+      
+    return self
+  }
+    
+  this.hide = function() {
+    
+    self.div.style("opacity",0)
+    var timing = parseFloat(self.div.style("transition-duration"),10)*1000
+    setTimeout(function(){
+      self.div.style("display","none")
+    },timing)
+    
+    return self
+      
+  }
+    
+  this.text = function(text) {
+    self.words.html(text)
+    return self
+  }
+  
+  return this
+  
+}
+
 // Returns a random number between the min and max passed to the function
 visual.random = function(min,max) {
   return Math.floor(Math.random() * (max - min + 1)) + min

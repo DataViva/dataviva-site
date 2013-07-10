@@ -40,7 +40,7 @@ function Selector() {
   function util(selection) {
     
     selection.each(function(data) {
-              
+          
       update_distance = function(dist,id) {
         
         data[id].distance = dist
@@ -81,285 +81,6 @@ function Selector() {
         }
       }
       
-      select_value = function(x) {
-        
-        search.node().value = ""
-        
-        if (depths.indexOf(x.id.length) == depths.length-1) {
-          x = data[x.parent]
-        }
-        
-        selected = x;
-        
-        if (popover) close.style("background-color",vizwhiz.utils.darker_color(x.color))
-
-        if (depths.length > 1) {
-          
-          bread.select("a").remove()
-          if (x.id != "all") {
-            bread.append("a")
-              .attr("class","site_crumb")
-              .html("&laquo; Back")
-              .on(vizwhiz.evt.click,function(){
-                search.node().value = ""
-                select_value(data[selected.parent]);
-              })
-              .on(vizwhiz.evt.over,function(){
-                this.style.color = vizwhiz.utils.darker_color(x.color)
-              })
-              .on(vizwhiz.evt.out,function(){
-                this.style.color = "#888"
-              })
-          }
-          
-        }
-        
-        populate_list(x);
-        
-      }
-      
-      var close, header, header_select, bread, icon, title, search, body, sort_toggles;
-      
-      create_elements = function() {
-      
-        if (popover) {
-          close = container.append("div")
-            .attr("class","vizwhiz_tooltip_close")
-            .html("\&times;")
-            .on(vizwhiz.evt.click,function(){
-              visual.popover.hide("#popover");
-            })
-        }
-
-        header = container.append("div").attr("class","selector_header")
-        
-        icon = header.append("div").attr("class","selector_header_icon")
-        
-        title_div = header.append("div").attr("class","selector_title_div")
-                
-        title = title_div.append("div").attr("class","selector_title")
-      
-        bread = title_div.append("div").attr("class","breadcrumb")
-      
-        sort_toggles = header.append("div").attr("class","selector_toggles")
-      
-        if (sorts.length > 1) {
-        
-          sort_toggles.append("legend")
-            .attr("id","selector_sort")
-            .html(visual.format.text("sort"))
-      
-          sorts.forEach(function(s){
-            var input = sort_toggles.append("input")
-              .attr("type","radio")
-              .attr("id",s)
-              .attr("value",s)
-              .attr("name","selector_sort")
-              .attr("onclick","populate_list(selected,this.value)")
-            if (s == sorting) input.attr("checked","checked")
-            sort_toggles.append("label")
-              .attr("for",s)
-              .html(visual.format.text(s))
-          })
-        
-          leon.touch("$selector_sort")
-        }
-        
-
-        header_select = sort_toggles.append("div")
-          .attr("class","leon button")
-          .html("Select")
-      
-        search = header.append("input")
-          .attr("type","text")
-          .attr("id",name+"_search")
-          .attr("class","leon text")
-          .attr("placeholder","Search");
-                
-        search.node().oninput = function() { populate_list(selected) };
-          
-        if (type == "help") {
-          body = container.append("iframe")
-            .attr("class","selector_body")
-            .attr("width","100%")
-            .style("height","auto");
-        }
-        else {
-          body = container.append("div")
-            .attr("class","selector_body")
-            .style("height","auto");
-        }
-        
-      }
-      
-      var distance_url = "/attrs/bra/munic.value/",
-          depths = visual.depths(type,true),
-          list = [],
-          search_term = ""
-          selected = null,
-          proximities = [0,30,60,90],
-          sort_types = {
-            "bra": "population",
-            "hs": "val_usd",
-            "wld": "val_usd",
-            "cbo": "num_emp",
-            "isic": "num_emp",
-          },
-          value = sort_types[name] ? sort_types[name] : null,
-          sorts = ["name"]
-          
-      if (value) {
-        sorts.push(value)
-        var sorting = value
-      }
-      else {
-        var sorting = "name"
-      }
-          
-      var container = d3.select(this)
-        .html("")
-        .append("div")
-          .attr("class","selector")
-      
-      if (type == "help") {
-        create_elements();
-        update_header({
-          "id": app.build.type,
-          "name": app.build.name,
-          "color": app.build.color,
-          "icon": visual.icon(app.build.type,"app")
-        })
-        body.attr("src","/about/apps/"+data[0].id+"/?ajax=true")
-      }
-      else if (data) {
-        clean_data();
-      }
-      else if (lists[type]) {
-        data = lists[type];
-        create_elements();
-        select_value(data[initial_value]);
-      }
-      else {
-        
-        d3.json("/attrs/"+type+"/",function(attrs) {
-          data = attrs.data
-          clean_data();
-        })
-        
-      }
-      
-      function clean_data() {
-
-        if (data instanceof Array) {
-          data = data.filter(function(d){
-            return d.available;
-          })
-        
-          var temp_dict = {};
-          data.forEach(function(d){
-            temp_dict[d.id] = d;
-          })
-          data = temp_dict;
-        }
-        else {
-          var temp_dict = {};
-          for (var d in data) {
-            if (d.available) temp_dict[d] = data[d]
-          }
-          data = temp_dict;
-        }
-        
-        if (!data.all) {
-          if (type == "bra") var c = "#009b3a";
-          else var c = "#768593";
-          var title = type == "bra" ? "brazil" : type
-          data.all = {
-            "color": c,
-            "id": "all",
-            "display_id": "All",
-            "name": visual.format.text(title)
-          };
-        }
-      
-        for (d in data) {
-          
-          if (!data[d].display_id) {
-            data[d].display_id = visual.displayID(d,type);
-          }
-          
-          var depth = depths.indexOf(data[d].id.length)
-          
-          if (data[d].id == "all") {
-            data[d].parent = "none"
-          }
-          else if (depth == 0) {
-            data[d].parent = "all"
-          }
-          else {
-            data[d].parent = d.slice(0,depths[depth-1]);
-          }
-          
-          if (!data[d].icon) data[d].icon = visual.icon(d,type)
-        }
-        
-        lists[type] = data
-        create_elements();
-        select_value(data[initial_value]);
-        
-      }
-      
-      function update_header(x) {
-        
-        if (typeof x == "string") {
-          header_select.style("display","none")
-          icon.style("display","none")
-          title.text("Searching for \""+x+"\"")
-        }
-        else {
-          icon
-            .style("display","inline-block")
-            .style("background-image","url('"+x.icon+"')")
-            .style("background-color",x.color)
-          
-          if ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all")) {
-            header_select
-              .style("display","inline-block")
-              .on(vizwhiz.evt.click,function(){
-                callback(data[x.id],name);
-              })
-          }
-          else {
-            header_select.style("display","none")
-          }
-          
-          if (name == "bra") {
-            var d = depths.indexOf(x.id.length)
-            var length = depths[d+1]
-            var prefix = visual.format.text("bra_"+length+"_plural")
-          }
-          else var prefix = visual.format.text(name+"_plural")
-          if (x.id == "all" && name != "bra") {
-            title.text(prefix)
-          }
-          else {
-            title.text(prefix+" in "+x.name.toTitleCase())
-          }
-          
-        }
-        
-        var hw = header.node().offsetWidth
-        hw -= icon.node().offsetWidth
-        hw -= sort_toggles.node().offsetWidth
-        hw -= 36
-        
-        title.style("max-width",hw+"px")
-
-        // Set height, now that the header is completely updated
-        set_height();
-        
-      }
-      
-      // Used whenever a filter list needs to be re-populated
       populate_list = function(parent,sort) {
         
         if (sort) sorting = sort
@@ -447,7 +168,228 @@ function Selector() {
        
       }
       
-      function add_results(amount) {
+      select_value = function(x) {
+        
+        search.node().value = ""
+        
+        if (depths.indexOf(x.id.length) == depths.length-1) {
+          x = data[x.parent]
+        }
+        
+        selected = x;
+        
+        if (popover) close.style("background-color",vizwhiz.utils.darker_color(x.color))
+
+        if (depths.length > 1) {
+          
+          bread.select("a").remove()
+          if (x.id != "all") {
+            bread.append("a")
+              .attr("class","site_crumb")
+              .html("&laquo; Back")
+              .on(vizwhiz.evt.click,function(){
+                search.node().value = ""
+                select_value(data[selected.parent]);
+              })
+              .on(vizwhiz.evt.over,function(){
+                this.style.color = vizwhiz.utils.darker_color(x.color)
+              })
+              .on(vizwhiz.evt.out,function(){
+                this.style.color = "#888"
+              })
+          }
+          
+        }
+        
+        populate_list(x);
+        
+      }
+      
+      create_elements = function() {
+      
+        if (popover) {
+          close = container.append("div")
+            .attr("class","vizwhiz_tooltip_close")
+            .html("\&times;")
+            .on(vizwhiz.evt.click,function(){
+              visual.popover.hide("#popover");
+            })
+        }
+
+        header = container.append("div").attr("class","selector_header")
+        
+        icon = header.append("div").attr("class","selector_header_icon")
+        
+        title_div = header.append("div").attr("class","selector_title_div")
+                
+        title = title_div.append("div").attr("class","selector_title")
+      
+        bread = title_div.append("div").attr("class","breadcrumb")
+      
+        sort_toggles = header.append("div").attr("class","selector_toggles")
+      
+        if (sorts.length > 1) {
+        
+          sort_toggles.append("legend")
+            .attr("id","selector_sort")
+            .html(visual.format.text("sort"))
+      
+          sorts.forEach(function(s){
+            var input = sort_toggles.append("input")
+              .attr("type","radio")
+              .attr("id","selector_sort_"+s)
+              .attr("value","selector_sort_"+s)
+              .attr("name","selector_sort")
+              .attr("onclick","populate_list(selected,this.value)")
+            if (s == sorting) input.attr("checked","checked")
+            sort_toggles.append("label")
+              .attr("for","selector_sort_"+s)
+              .html(visual.format.text(s))
+          })
+        
+          leon.touch("$selector_sort")
+        }
+        
+
+        header_select = sort_toggles.append("div")
+          .attr("class","leon button")
+          .html("Select")
+      
+        search = header.append("input")
+          .attr("type","text")
+          .attr("id",name+"_search")
+          .attr("class","leon text")
+          .attr("placeholder","Search");
+                
+        search.node().oninput = function() { populate_list(selected) };
+          
+        if (type == "help") {
+          body = container.append("iframe")
+            .attr("class","selector_body")
+            .attr("width","100%")
+            .style("height","auto");
+        }
+        else {
+          body = container.append("div")
+            .attr("class","selector_body")
+            .style("height","auto");
+        }
+        
+        if (type != "help") select_value(data[initial_value]);
+        
+      }
+
+      clean_data = function() {
+        
+        if (data instanceof Array) {
+          data = data.filter(function(d){
+            return d.available;
+          })
+        
+          var temp_dict = {};
+          data.forEach(function(d){
+            temp_dict[d.id] = d;
+          })
+          data = temp_dict;
+        }
+        else {
+          var temp_dict = {};
+          for (var d in data) {
+            if (d.available) temp_dict[d] = data[d]
+          }
+          data = temp_dict;
+        }
+        
+        if (!data.all) {
+          if (type == "bra") var c = "#009b3a";
+          else var c = "#768593";
+          var title = type == "bra" ? "brazil" : type
+          data.all = {
+            "color": c,
+            "id": "all",
+            "display_id": "All",
+            "name": visual.format.text(title)
+          };
+        }
+      
+        for (d in data) {
+          
+          if (!data[d].display_id) {
+            data[d].display_id = visual.displayID(d,type);
+          }
+          
+          var depth = depths.indexOf(data[d].id.length)
+          
+          if (data[d].id == "all") {
+            data[d].parent = "none"
+          }
+          else if (depth == 0) {
+            data[d].parent = "all"
+          }
+          else {
+            data[d].parent = d.slice(0,depths[depth-1]);
+          }
+          
+          if (!data[d].icon) data[d].icon = visual.icon(d,type)
+        }
+        
+        lists[type] = data
+        create_elements()
+        
+      }
+      
+      update_header = function(x) {
+        
+        if (typeof x == "string") {
+          header_select.style("display","none")
+          icon.style("display","none")
+          title.text("Searching for \""+x+"\"")
+        }
+        else {
+          icon
+            .style("display","inline-block")
+            .style("background-image","url('"+x.icon+"')")
+            .style("background-color",x.color)
+          
+          if ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all")) {
+            header_select
+              .style("display","inline-block")
+              .on(vizwhiz.evt.click,function(){
+                callback(data[x.id],name);
+              })
+          }
+          else {
+            header_select.style("display","none")
+          }
+          
+          if (name == "bra") {
+            var d = depths.indexOf(x.id.length)
+            var length = depths[d+1]
+            var prefix = visual.format.text("bra_"+length+"_plural")
+          }
+          else var prefix = visual.format.text(name+"_plural")
+          if (x.id == "all" && name != "bra") {
+            title.text(prefix)
+          }
+          else {
+            title.text(prefix+" in "+x.name.toTitleCase())
+          }
+          
+        }
+        
+        var hw = header.node().offsetWidth
+        hw -= icon.node().offsetWidth
+        hw -= sort_toggles.node().offsetWidth
+        hw -= 36
+        
+        title.style("max-width",hw+"px")
+
+        // Set height, now that the header is completely updated
+        set_height();
+        
+      }
+      
+      add_results = function(amount) {
       
         var results = []
         for (var i = 0; i < amount; i++) {
@@ -574,20 +516,90 @@ function Selector() {
     
       }
   
-      function set_height() {
+      set_height = function() {
         // Set height for selector_body, based off of the title height
-        var display = container.style("display")
-        if (display == "none") container.style("visibility","hidden").style("display","block")
-        
+        var parent = container.node().parentNode,
+            display = parent.style.display
+        if (display == "none") {
+          parent.style.visibility = "hidden"
+          parent.style.display = "block"
+        }
         var max_height = container.node().offsetHeight
         max_height -= body.node().offsetTop
         max_height -= parseFloat(body.style("padding-top"),10)
         max_height -= parseFloat(body.style("padding-bottom"),10)
         max_height = Math.floor(max_height)
-        if (display == "none") container.style("visibility","visible").style("display","none")
+        if (display == "none") {
+          parent.style.visibility = "visible"
+          parent.style.display = "none"
+        }
         body.style("height",max_height+"px")
       }
       
+      d3.select(this).selectAll("*").remove()
+      
+      var close = null,
+          header = null,
+          header_select = null, 
+          bread = null, 
+          icon = null, 
+          title = null, 
+          search = null, 
+          body = null, 
+          sort_toggles = null;
+          
+      var distance_url = "/attrs/bra/munic.value/",
+          depths = visual.depths(type,true),
+          list = [],
+          search_term = ""
+          selected = null,
+          proximities = [0,30,60,90],
+          sort_types = {
+            "bra": "population",
+            "hs": "val_usd",
+            "wld": "val_usd",
+            "cbo": "num_emp",
+            "isic": "num_emp",
+          },
+          value = sort_types[name] ? sort_types[name] : null,
+          sorts = ["name"]
+          
+      if (value) {
+        sorts.push(value)
+        var sorting = value
+      }
+      else {
+        var sorting = "name"
+      }
+          
+      var container = d3.select(this)
+        .html("")
+        .append("div")
+          .attr("class","selector")
+      
+      if (type == "help") {
+        create_elements();
+        update_header({
+          "id": app.build.type,
+          "name": app.build.name,
+          "color": app.build.color,
+          "icon": visual.icon(app.build.type,"app")
+        })
+        body.attr("src","/about/apps/"+data[0].id+"/?ajax=true")
+      }
+      else if (data) {
+        clean_data()
+      }
+      else if (lists[type]) {
+        data = lists[type]
+        create_elements()
+      }
+      else {
+        d3.json("/attrs/"+type+"/",function(attrs) {
+          data = attrs.data
+          clean_data()
+        })
+      }
       
     })
   }
