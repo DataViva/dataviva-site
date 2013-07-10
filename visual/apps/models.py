@@ -116,16 +116,13 @@ class Build(db.Model, AutoSerialize):
         bra = "+".join([b.id for b in self.bra])
         if self.output == "bra":
             bra = bra + ".8"
-        
+            
         filter1 = self.filter1
         if filter1 == "all":
             if self.output == "isic":
                 filter1 = "show.5"
             elif self.output == "hs":
                 filter1 = "show.6"
-        else:
-            filter1 = self.filter1
-            # filter1 = self.filter1.id
         
         filter2 = self.filter2
         if filter2 == "all":
@@ -133,15 +130,12 @@ class Build(db.Model, AutoSerialize):
                 filter2 = "show.4"
             elif self.output == "wld":
                 filter2 = "show.5"
-        else:
-            self.filter2
-            # self.filter2.id
 
         # filter2 = "all" if self.filter2 == "all" else self.filter2.id
         # filter2 = "show" if self.output == "cbo" or self.output == "wld" else filter2
 
         data_url = '{0}/all/{1}/{2}/{3}/'.format(self.dataset, bra, 
-            self.filter1, self.filter2)
+            filter1, filter2)
         return data_url
     
     '''Returns the english language title of this build.'''

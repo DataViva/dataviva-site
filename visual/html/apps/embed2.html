@@ -35,58 +35,70 @@
       </select>
     </div>
 
-    <div id="bra_select" class="filter_button">
+    <div id="bra_0_select" class="filter_button">
       <div class="leon label">Location</div>
-      <div id="bra" class="leon button" onclick="builder.selector(this.id)">
-        {% set bra = current_build.bra %}
+      <div id="bra_0" class="leon button" onclick="builder.selector(this.id)">
+        {% set bra = current_build.bra[0] %}
         <div class="leon icon" style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"></div>
         <span class="list_text">{{ bra.name_en }}</span>
         <i class="icon-list-alt"></i>
       </div>
     </div>
-
-    {% if current_build.dataset == "rais" and current_build.filter1 != "all" %}
-    {% set isic = current_build.filter1 %}
+    
+    {% if current_build.bra[1] %}
+    {% set bra = current_build.bra[1] %}
     {% endif %}
-    <div id="isic_select" class="filter_button">
+    <div id="bra_1_select" class="filter_button">
+      <div class="leon label">Location</div>
+      <div id="bra_1" class="leon button" onclick="builder.selector(this.id)">
+        <div class="leon icon"{% if bra %} style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"{% endif %}></div>
+        <span class="list_text">{% if bra %}{{ bra.name_en }}{% endif %}</span>
+        <i class="icon-list-alt"></i>
+      </div>
+    </div>
+    
+    {% if current_build.isic %}
+    {% set isic = current_build.isic[0] %}
+    {% endif %}
+    <div id="isic_0_select" class="filter_button">
       <div class="leon label">Industry</div>
-      <div id="isic" class="leon button" onclick="builder.selector(this.id)">
+      <div id="isic_0" class="leon button" onclick="builder.selector(this.id)">
         <div class="leon icon"{% if isic %} style="background-color:{{ isic.color }}; background-image:url('/static/img/icons/isic/isic_{{ isic.id[:1] }}.png')"{% endif %}></div>
         <span class="list_text">{% if isic %}{{ isic.name_en }}{% endif %}</span>
         <i class="icon-list-alt"></i>
       </div>
     </div>
 
-    {% if current_build.dataset == "rais" and current_build.filter2 != "all" %}
-    {% set cbo = current_build.filter2 %}
+    {% if current_build.cbo %}
+    {% set cbo = current_build.cbo[0] %}
     {% endif %}
-    <div id="cbo_select" class="filter_button">
+    <div id="cbo_0_select" class="filter_button">
       <div class="leon label">Occupation</div>
-      <div id="cbo" class="leon button" onclick="builder.selector(this.id)">
+      <div id="cbo_0" class="leon button" onclick="builder.selector(this.id)">
         <div class="leon icon"{% if cbo %} style="background-color:{{ cbo.color }}; background-image:url('/static/img/icons/cbo/cbo_{{ cbo.id[:1] }}.png')"{% endif %}></div>
         <span class="list_text">{% if cbo %}{{ cbo.name_en }}{% endif %}</span>
         <i class="icon-list-alt"></i>
       </div>
     </div>
 
-    {% if current_build.dataset == "secex" and current_build.filter1 != "all" %}
-    {% set hs = current_build.filter1 %}
+    {% if current_build.hs %}
+    {% set hs = current_build.hs[0] %}
     {% endif %}
-    <div id="hs_select" class="filter_button">
+    <div id="hs_0_select" class="filter_button">
       <div class="leon label">Product Export</div>
-      <div id="hs" class="leon button" onclick="builder.selector(this.id)">
+      <div id="hs_0" class="leon button" onclick="builder.selector(this.id)">
         <div class="leon icon"{% if hs %} style="background-color:{{ hs.color }}; background-image:url('/static/img/icons/hs/hs_{{ hs.id[:2] }}.png')"{% endif %}></div>
         <span class="list_text">{% if hs %}{{ hs.name_en }}{% endif %}</span>
         <i class="icon-list-alt"></i>
       </div>
     </div>
 
-    {% if current_build.dataset == "secex" and current_build.filter2 != "all" %}
-    {% set wld = current_build.filter2 %}
+    {% if current_build.wld %}
+    {% set wld = current_build.wld[0] %}
     {% endif %}
-    <div id="wld_select" class="filter_button">
+    <div id="wld_0_select" class="filter_button">
       <div class="leon label">Trade Partner</div>
-      <div id="wld" class="leon button" onclick="builder.selector(this.id)">
+      <div id="wld_0" class="leon button" onclick="builder.selector(this.id)">
         <div class="leon icon"{% if wld %} style="background-color:{{ wld.color }}; background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
         <span class="list_text">{% if wld %}{{ wld.name_en }}{% endif %}</span>
         <i class="icon-list-alt"></i>
@@ -296,42 +308,18 @@
             builder.url()
             
             // Show/hide filters depending on build requirements
-            if (app.build.dataset == "rais") {
-              if (app.build.filter1 != "all") {
-                d3.select("#isic_select").style("display","inline-block")
-                builder.filter(app.build.filter1,"isic",true)
+            var filters = ["bra_1","isic_0","cbo_0","hs_0","wld_0"]
+            filters.forEach(function(filter){
+              var type = filter.split("_")[0],
+                  index = filter.split("_")[1]
+              if (app.build[type] && app.build[type][index]) {
+                d3.select("#"+filter+"_select").style("display","inline-block")
+                builder.filter(app.build[type][index],filter,true)
               }
               else {
-                d3.select("#isic_select").style("display","none")
+                d3.select("#"+filter+"_select").style("display","none")
               }
-              if (app.build.filter2 != "all") {
-                d3.select("#cbo_select").style("display","inline-block")
-                builder.filter(app.build.filter2,"cbo",true)
-              }
-              else {
-                d3.select("#cbo_select").style("display","none")
-              }
-              d3.select("#hs_select").style("display","none")
-              d3.select("#wld_select").style("display","none")
-            }
-            else if (app.build.dataset == "secex") {
-              if (app.build.filter1 != "all") {
-                d3.select("#hs_select").style("display","inline-block")
-                builder.filter(app.build.filter1,"hs",true)
-              }
-              else {
-                d3.select("#hs_select").style("display","none")
-              }
-              if (app.build.filter2 != "all") {
-                d3.select("#wld_select").style("display","inline-block")
-                builder.filter(app.build.filter2,"wld",true)
-              }
-              else {
-                d3.select("#wld_select").style("display","none")
-              }
-              d3.select("#isic_select").style("display","none")
-              d3.select("#cbo_select").style("display","none")
-            }
+            })
             
             // Remove unused global_vars
             uis = []
@@ -917,6 +905,7 @@
           
           obj.id = obj[out+"_id"]
           obj.display_id = visual.displayID(obj.id,out)
+          
           obj.icon = visual.icon(obj.id,out)
           
           if (obj.wage && obj.num_emp) obj.wage_avg = obj.wage/obj.num_emp;
@@ -1091,53 +1080,51 @@
     /*********************/
     
     var builder = {}
-    builder.filter = function(obj,type,static) {
+    builder.filter = function(obj,id,static) {
+      
+      var type = id.split("_")[0],
+          index = id.split("_")[1],
+          old_name = app.build[type][index].name_en,
+          new_name = obj.name ? obj.name : obj.name_en
       
       // Hide popover
       visual.popover.hide("#popover");
       
       if (type == "bra") {
-        var index = 2,
-            name = app.build.bra.name_en
+        var url_index = 2
       }
       else if (["hs","isic"].indexOf(type) >= 0) {
-        var index = 3,
-            name = app.build.filter1.name_en
+        var url_index = 3
       }
       else {
-        var index = 4,
-            name = app.build.filter2.name_en
+        var url_index = 4
       }
-      
-      var n = obj.name ? obj.name : obj.name_en
       
       d3.selectAll("select.output > option")
         .each(function(){
           var url = this.id.split("/")
-          if (index == 2 || url[index] != "all") url[index] = obj.id
+          if (url_index == 2 || url[url_index] != "all") url[url_index] = obj.id
           this.id = url.join("/")
           this.value = url.join("/")
-          this.innerHTML = this.innerHTML.replace(name,n)
+          console.log(this.id)
+          this.innerHTML = this.innerHTML.replace(old_name,new_name)
         })
       
       leon.touch("select")
       
-      var cat = "bra2" == type ? "bra" : type,
-          button = d3.select("#"+type+"_select")
+      var button = d3.select("#"+id+"_select")
       
-      if (cat == "bra" && !obj.distance) obj.distance = 0
+      if (type == "bra" && !obj.distance) obj.distance = 0
 
-      if (!obj.icon) obj.icon = visual.icon(obj.id,cat)
+      if (!obj.icon) obj.icon = visual.icon(obj.id,type)
       
       button.select(".icon")
        .style("background-image","url("+obj.icon+")")
        .style("background-color",obj.color)
-
-      var name = obj.name ? obj.name : obj.name_en
         
-      if (obj.distance > 0) name += " ("+obj.distance+"km)"
+      if (obj.distance > 0) new_name += " ("+obj.distance+"km)"
 
-      button.select(".list_text").text(name)
+      button.select(".list_text").text(new_name)
 
       if (!static) {
         var url = app.url.split("/")
