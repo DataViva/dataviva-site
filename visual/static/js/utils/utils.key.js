@@ -6,6 +6,15 @@ function Key() {
     
     selection.each(function(raw_data) {
       
+      reset_check = function() {
+        if (key_solos.length || key_filters.length) {
+          reset_button.style("visibility","visible")
+        }
+        else {
+          reset_button.style("visibility","hidden")
+        }
+      }
+      
       var key = this,
           margin = 2,
           size = 30,
@@ -41,69 +50,67 @@ function Key() {
         var cat = d3.select(key).append("div")
           .attr("id","key"+d.id)
           .attr("class","key_icon_container")
-          .on(vizwhiz.evt.click, function(e){
+          .on(vizwhiz.evt.over, function(e){
             
-            if (d3.event.shiftKey) {
-              if (key_solos.indexOf(d.id) < 0) key_solos.push(d.id)
-              else key_solos.splice(key_solos.indexOf(d.id),1)
-              if (key_filters.indexOf(d.id) >= 0) {
-                key_filters.splice(key_filters.indexOf(d.id),1)
-                app_filter(key_filters)
-              }
-              solo(key_solos)
-            }
-            else {
+            var x_pos = this.offsetLeft+(this.offsetWidth/2)
+            var y_pos = key.parentNode.offsetTop+key.offsetTop+this.offsetTop+(this.offsetHeight/2)
+            
+            key_filter = function() {
               if (key_filters.indexOf(d.id) < 0) key_filters.push(d.id)
               else key_filters.splice(key_filters.indexOf(d.id),1)
               if (key_solos.indexOf(d.id) >= 0) {
                 key_solos.splice(key_solos.indexOf(d.id),1)
-                solo(key_solos)
+                app.update("solo",key_solos)
               }
-              app_filter(key_filters)
+              app.update("filter",key_filters)
+              reset_check()
             }
             
-            data.forEach(function(k){
-              if (key_solos.indexOf(k.id) >= 0 && app.solo) {
-                d3.select("div#key_icon"+k.id)
-                  .style("margin","0px")
-                  .style("width",(size+(margin*2))+"px")
-                  .style("height",(size+(margin*2))+"px")
-                  .style("background-size",(size+(margin*2))+"px")
-              } else if (key_filters.indexOf(k.id) >= 0 && app.filter) {
-                d3.select("div#key_icon"+k.id)
-                  .style("margin",(margin+(size/4))+"px")
-                  .style("width",(size/2)+"px")
-                  .style("height",(size/2)+"px")
-                  .style("background-size",(size/2)+"px")
-              } else {
-                d3.select("div#key_icon"+k.id)
-                  .style("margin",margin+"px")
-                  .style("width",size+"px")
-                  .style("height",size+"px")
-                  .style("background-size",size+"px")
+            key_solo = function() {
+              if (key_solos.indexOf(d.id) < 0) key_solos.push(d.id)
+              else key_solos.splice(key_solos.indexOf(d.id),1)
+              if (key_filters.indexOf(d.id) >= 0) {
+                key_filters.splice(key_filters.indexOf(d.id),1)
+                app.update("filter",key_filters)
               }
-            })
-          })
-          .on(vizwhiz.evt.over, function(e){
-            var x_pos = this.offsetLeft+(this.offsetWidth/2)
-            var y_pos = key.parentNode.offsetTop+key.offsetTop+this.offsetTop
-            var data = [
-              {"name": "Click", "value": "toggle this category"},
-              {"name": "ShiftClick", "value": "solo this category"}
-            ]
+              app.update("solo",key_solos)
+              reset_check()
+            }
+            
+            if (key_filters.indexOf(d.id) >= 0) {
+              var filter_class = "leon button active"
+            }
+            else {
+              var filter_class = "leon button"
+            }
+            
+            if (key_solos.indexOf(d.id) >= 0) {
+              var solo_class = "leon button active"
+            }
+            else {
+              var solo_class = "leon button"
+            }
+            
+            var html = "<div class='filter_buttons'>\
+                <div onclick='key_filter()' class='"+filter_class+"'>Hide Group</div>\
+                <div onclick='key_solo()' class='"+solo_class+"'>Solo Group</div>\
+              </div>"
+            
             vizwhiz.tooltip.create({
               "title": d.name,
               "color": d.color,
-              "data": data,
+              "icon": d.icon,
+              "html": html,
+              "id": attr_type.toUpperCase(),
               "x": x_pos,
-              "y": y_pos,
+              "y": y_pos-3,
               "offset": 0,
               "arrow": true,
-              "mouseevents": true
+              "mouseevents": this
             })
           })
           .on(vizwhiz.evt.out, function(e){
-            vizwhiz.tooltip.remove()
+            vizwhiz.tooltip.remove(attr_type.toUpperCase())
           })
           .append("div")
             .attr("id","key_icon"+d.id)
@@ -112,6 +119,39 @@ function Key() {
             .style("background-color",d.color)
         
       })
+       
+      var reset_button = d3.select(key).append("div")
+        .attr("class","leon button square")
+        .on(vizwhiz.evt.over,function(){
+          
+          var x_pos = this.offsetLeft+(this.offsetWidth/2)
+          var y_pos = key.parentNode.offsetTop+key.offsetTop+this.offsetTop
+            
+          vizwhiz.tooltip.create({
+            "id": "key_reset",
+            "x": x_pos,
+            "y": y_pos,
+            "offset": 0,
+            "arrow": true,
+            "description": "Click to Reset all Filters"
+          })
+        })
+        .on(vizwhiz.evt.out,function(){
+          vizwhiz.tooltip.remove("key_reset")
+        })
+        .on(vizwhiz.evt.click,function(){
+          key_filters = []
+          key_solos = []
+          app.update("filter",key_filters)
+          app.update("solo",key_solos)
+          vizwhiz.tooltip.remove("key_reset")
+          reset_check()
+        })
+      
+      reset_button.append("i")
+        .attr("class","icon-remove")
+        
+      reset_check()
       
     })
   }

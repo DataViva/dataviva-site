@@ -146,7 +146,7 @@ def app_star(app_name, data_type, bra_id, filter1, filter2, output):
             new_star = Starred(user=g.user, app_id=app_id, app_name=app_name, timestamp=timestamp)
             db.session.add(new_star)
             db.session.commit()
-            return jsonify({"success": app_name})
+            return jsonify({"success": 1})
     if starred:
         return jsonify({"success": -1})
     else:

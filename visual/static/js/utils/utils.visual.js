@@ -55,8 +55,8 @@ visual.ui.tooltip = function(id,state) {
     
     var text = {
       "controls_toggle": "Show/Hide Controls",
-      "file_select": "Download this App",
-      "help_select": "Show App Tutorial",
+      "file": "Download this App",
+      "help": "Show App Tutorial",
       "refresh": "Refresh the App",
       "starred": "Save this App"
     }

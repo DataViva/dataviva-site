@@ -127,7 +127,7 @@
   <div id="settings">
 
     <a id="file" class="leon button square" onclick="builder.selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-save"></i></a>
-    <a id="starred" class="leon button square" onclick="toggle_star()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
+    <a id="starred" class="leon button square" onclick="app.star()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
     <a id="help" class="leon button square" onclick="builder.selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-question-sign"></i></a>
     <a id="full_screen" class="leon button square" onclick="window.open(window.location.href,'_blank')" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-fullscreen"></i></a>
   
@@ -220,6 +220,8 @@
     app.coords = {}
     app.attrs = {}
     app.vars = {{ global_vars|safe }}
+    app.solos = []
+    app.filters = []
     
     // Define global viz-whiz app parameters
     app.viz = vizwhiz.viz()
@@ -285,7 +287,7 @@
         .get(function(error,data){
           
           if (error) {
-            app.error(error)
+            app.error("Build Not Available")
           }
           else {
             
@@ -420,7 +422,7 @@
               
               app.build.req_url = app.build.data_url
                 .replace(app.build.bra.id,"all")
-                console.log(app.build.data_url)
+                
               if (!app.data[app.build.req_url]) {
                 q.defer(function(u,callback){
                   d3.json(u,function(d){
@@ -612,8 +614,10 @@
         
       })
       
-      var nesting = app.build.ui.filter(function(f){return f.type == "depth"})
-      if (nesting.length) nesting = nesting[0].values
+      var nesting = []
+      depths[app.build.output].forEach(function(d){
+        nesting.push(app.build.output+"_"+d)
+      })
         
       /************************/
       /* Gloabl App Variables */
@@ -724,24 +728,75 @@
     }
     
     app.update = function(type,value) {
-      app.vars[type] = value
-      builder.url()
-      if (type == "year") builder.key();
       
-      if (type == "axes") {
-        d3.select("#app").call(app.xaxis_var("cp_bra2_"+value).yaxis_var("cp_bra_"+value))
-      }
-      else if (type == "scale") {
-        d3.select("#app").call(app.xaxis_scale(value).yaxis_scale(value)) 
-      }
-      else if (type == "rca_scope") {
-        d3.select("#app").call(app.viz.active_var(value))
-      }
-      else if (type == "value_var") {
-        d3.select("#app").call(app.viz[type](value).total_bar(app.total()))
+      if (type == "solo" || type == "filter") {
+        
+        app[type+"s"] = value
+        
+        var ids = []
+        if (app.solos.length >= 1 && app.solos.length <= cats.length/2) {
+          var prefix = "Showing only "
+          ids = app.solos
+        }
+        else if (app.solos.length > cats.length/2) {
+          var prefix = "Excluding "
+          cats.forEach(function(c){
+            if (app.solos.indexOf(c) < 0) ids.push(c)
+          })
+        }
+        else if (app.filters.length >= 1 && app.filters.length <= cats.length/2) {
+          var prefix = "Excluding "
+          ids = app.filters
+        }
+        else if (app.filters.length > cats.length/2) {
+          var prefix = "Showing only "
+          cats.forEach(function(c){
+            if (app.filters.indexOf(c) < 0) ids.push(c)
+          })
+        }
+      
+        var names = []
+        ids.forEach(function(id){
+          names.push(app.attrs[app.build.output][id].name)
+        })
+      
+        if (names.length > 0) {
+          var text = prefix
+          names.forEach(function(n,i){
+            if (i != 0 && names.length != 2) text += ", "
+            if (i == names.length-1 && i != 0) text += " and "
+            text += n
+          })
+          var sub = text
+        }
+        else {
+          var sub = ""
+        }
+        
+        d3.select("#app").call(app.viz[type](app[type+"s"]).sub_title(sub))
+        
       }
       else {
-        d3.select("#app").call(app.viz[type](value))
+        
+        app.vars[type] = value
+        builder.url()
+        if (type == "year") builder.key();
+
+        if (type == "axes") {
+          d3.select("#app").call(app.xaxis_var("cp_bra2_"+value).yaxis_var("cp_bra_"+value))
+        }
+        else if (type == "scale") {
+          d3.select("#app").call(app.xaxis_scale(value).yaxis_scale(value)) 
+        }
+        else if (type == "rca_scope") {
+          d3.select("#app").call(app.viz.active_var(value))
+        }
+        else if (type == "value_var") {
+          d3.select("#app").call(app.viz[type](value).total_bar(app.total()))
+        }
+        else {
+          d3.select("#app").call(app.viz[type](value))
+        }
       }
     }
     
@@ -1005,6 +1060,32 @@
       
     }
     
+    app.star = function() {
+
+      var id = d3.select("#starred > i").attr("id")
+      var status = parseInt(id.split("_")[1],10)
+      if (status == 0) {
+        login();
+      }
+      else {
+        
+        var url = window.location.pathname.replace("embed2","star")
+          
+        d3.json(url)
+          .header("Content-type","application/x-www-form-urlencoded")
+          .post("title="+app.build.title, function(error,data) {
+            console.log(data)
+            var status = data.success
+            d3.select("#starred > i")
+              .attr("id","status_"+status)
+              .attr("class",function() {
+                return status == 1 ? "icon-star" : "icon-star-empty";
+              })
+          })
+      }
+        
+    }
+    
     /*********************/
     /* Builder Functions */
     /*********************/
@@ -1026,7 +1107,6 @@
       else {
         var index = 4,
             name = app.build.filter2.name_en
-            console.log(obj)
       }
       
       var n = obj.name ? obj.name : obj.name_en

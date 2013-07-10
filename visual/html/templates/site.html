@@ -109,11 +109,12 @@
     var language_html = d3.select("div#account_tooltip").html()
     d3.select("div#account_tooltip").remove()
     
-    var w = d3.select("#account").node().offsetWidth,
-        h = d3.select("#account").node().offsetHeight,
-        x = d3.select("#account").node().offsetLeft+w/2,
-        y = d3.select("#account").node().offsetTop+h
-      
+    var acct = d3.select("#account").node(),
+        w = acct.offsetWidth,
+        h = acct.offsetHeight,
+        x = acct.offsetLeft+w/2+parseFloat(d3.select(acct).style("padding-left"),10)-2,
+        y = acct.offsetTop+h
+        
     vizwhiz.tooltip.create({
       "id": "account",
       "x": x+2,

@@ -275,6 +275,8 @@ function Selector() {
             .style("height","auto");
         }
         
+        selector_load.hide()
+        
         if (type != "help") select_value(data[initial_value]);
         
       }
@@ -536,8 +538,6 @@ function Selector() {
         body.style("height",max_height+"px")
       }
       
-      d3.select(this).selectAll("*").remove()
-      
       var close = null,
           header = null,
           header_select = null, 
@@ -576,6 +576,9 @@ function Selector() {
         .html("")
         .append("div")
           .attr("class","selector")
+      
+      var selector_load = visual.ui.loading(container.node())
+      selector_load.text("Loading Attribute List").show()
       
       if (type == "help") {
         create_elements();
