@@ -32,7 +32,13 @@ class Build(db.Model, AutoSerialize):
         return self.ui.filter(UI.type == ui_type).first()
 
     def set_bra(self, bra_id):
-        self.bra = Bra.query.get(bra_id)
+        if bra_id == "all":
+            self.bra = Wld.query.get("sabra")
+            self.bra.id = "all"
+            self.bra.icon = "/static/img/icons/wld/wld_sabra.png"
+        else:
+            self.bra = Bra.query.get(bra_id)
+            self.bra.icon = "/static/img/icons/bra/bra_{0}.png".format(bra_id[:2])
 
     def set_filter1(self, filter):
         if self.filter1 == "all":

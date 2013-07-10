@@ -77,7 +77,7 @@ leon.color.accent.highlight = "#aaaaaa"
 leon.color.accent.dark = "#888888"
 
 leon.font = {}
-leon.font.family = "Helvetica, Arial, sans-serif"
+leon.font.family = '"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif'
 leon.font.size = 12
 leon.font.weight = "normal"
 

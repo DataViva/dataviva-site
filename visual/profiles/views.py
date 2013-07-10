@@ -35,6 +35,7 @@ def profiles_cbo(cbo_id = None):
             article = article)
         
     else:
+        g.page_type = "profile"
     
         names = get_names({ "cbo_id": cbo_id })
     
@@ -66,6 +67,7 @@ def profiles_isic(isic_id = None):
             article = article)
         
     else:
+        g.page_type = "profile"
     
         names = get_names({ "isic_id": isic_id })
     
@@ -98,6 +100,7 @@ def profiles_hs(hs_id = None):
             article = article)
         
     else:
+        g.page_type = "profile"
     
         names = get_names({ "hs_id": hs_id })
     
@@ -129,6 +132,7 @@ def profiles_bra(bra_id = None):
             article = article)
         
     else:
+        g.page_type = "profile"
     
         names = get_names({ "bra_id": bra_id })
     
@@ -162,6 +166,7 @@ def profiles_wld(wld_id = None):
             article = article)
         
     else:
+        g.page_type = "profile"
     
         names = get_names({ "wld_id": wld_id })
     

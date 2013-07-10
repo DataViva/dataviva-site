@@ -41,9 +41,9 @@
 
     <div id="bra_select" class="filter_button">
       <div class="leon label">Location</div>
-      <div id="bra" class="leon button" onclick="show_selector(this.id)">
+      <div id="bra" class="leon button" onclick="builder.selector(this.id)">
         {% set bra = current_build.bra %}
-        <div class="leon icon" style="background-color:{{ bra.color }}; background-image:url('/static/img/icons/bra/bra_{{ bra.id[:2] }}.png')"></div>
+        <div class="leon icon" style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"></div>
         <span class="list_text">{{ bra.name_en }}</span>
         <i class="icon-list-alt"></i>
       </div>
@@ -54,7 +54,7 @@
     {% endif %}
     <div id="isic_select" class="filter_button">
       <div class="leon label">Industry</div>
-      <div id="isic" class="leon button" onclick="show_selector(this.id)">
+      <div id="isic" class="leon button" onclick="builder.selector(this.id)">
         <div class="leon icon"{% if isic %} style="background-color:{{ isic.color }}; background-image:url('/static/img/icons/isic/isic_{{ isic.id[:1] }}.png')"{% endif %}></div>
         <span class="list_text">{% if isic %}{{ isic.name_en }}{% endif %}</span>
         <i class="icon-list-alt"></i>
@@ -66,7 +66,7 @@
     {% endif %}
     <div id="cbo_select" class="filter_button">
       <div class="leon label">Occupation</div>
-      <div id="cbo" class="leon button" onclick="show_selector(this.id)">
+      <div id="cbo" class="leon button" onclick="builder.selector(this.id)">
         <div class="leon icon"{% if cbo %} style="background-color:{{ cbo.color }}; background-image:url('/static/img/icons/cbo/cbo_{{ cbo.id[:1] }}.png')"{% endif %}></div>
         <span class="list_text">{% if cbo %}{{ cbo.name_en }}{% endif %}</span>
         <i class="icon-list-alt"></i>
@@ -78,7 +78,7 @@
     {% endif %}
     <div id="hs_select" class="filter_button">
       <div class="leon label">Product Export</div>
-      <div id="hs" class="leon button" onclick="show_selector(this.id)">
+      <div id="hs" class="leon button" onclick="builder.selector(this.id)">
         <div class="leon icon"{% if hs %} style="background-color:{{ hs.color }}; background-image:url('/static/img/icons/hs/hs_{{ hs.id[:2] }}.png')"{% endif %}></div>
         <span class="list_text">{% if hs %}{{ hs.name_en }}{% endif %}</span>
         <i class="icon-list-alt"></i>
@@ -90,7 +90,7 @@
     {% endif %}
     <div id="wld_select" class="filter_button">
       <div class="leon label">Trade Partner</div>
-      <div id="wld" class="leon button" onclick="show_selector(this.id)">
+      <div id="wld" class="leon button" onclick="builder.selector(this.id)">
         <div class="leon icon"{% if wld %} style="background-color:{{ wld.color }}; background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
         <span class="list_text">{% if wld %}{{ wld.name_en }}{% endif %}</span>
         <i class="icon-list-alt"></i>
@@ -107,7 +107,7 @@
         {% set pre_app = build.type %}
         <div id="{{ build.type }}_output_div" class="output_div">
         <label for="output_{{ build.type }}">Output</label>
-        <select id="output_{{ build.type }}" class="leon_object" onchange="app.start(this.options[this.selectedIndex].id)">
+        <select id="output_{{ build.type }}" class="leon_object output" onchange="app.start(this.options[this.selectedIndex].id)">
       {% endif %}
 
       <option value="{{ build.url() }}" id="{{ build.url() }}" {% if build.id == current_build.id %} selected="selected"{% endif %}>
@@ -123,16 +123,16 @@
 
   <div id="toggles">
 
-    <a id="controls_toggle" class="leon button square" onclick="toggle_controls()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-cogs"></i></a>
-    <a id="refresh" class="leon button square" onclick="start_app()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-refresh"></i></a>
+    <a id="controls_toggle" class="leon button square" onclick="builder.controls()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-cogs"></i></a>
+    <a id="refresh" class="leon button square" onclick="app.start()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-refresh"></i></a>
   
   </div>
 
   <div id="settings">
 
-    <a id="file_select" class="leon button square" onclick="show_selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-save"></i></a>
+    <a id="file" class="leon button square" onclick="builder.selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-save"></i></a>
     <a id="starred" class="leon button square" onclick="toggle_star()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
-    <a id="help_select" class="leon button square" onclick="show_selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-question-sign"></i></a>
+    <a id="help" class="leon button square" onclick="builder.selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-question-sign"></i></a>
     <a id="full_screen" class="leon button square" onclick="window.open(window.location.href,'_blank')" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-fullscreen"></i></a>
   
   </div>
@@ -179,6 +179,16 @@
       "bra2": visual.depths("bra"),
       "wld": visual.depths("wld")
     }
+    
+    // Create Filter Selector
+    var selector = Selector()
+      .popover(true);
+    
+    visual.popover.create({
+      "id": "popover",
+      "width": 600,
+      "height": "80%"
+    })
   
     // Stylize SELECT menus
     var selects = leon.get(".leon_object")
@@ -279,6 +289,7 @@
             
             // Set public current build variable
             app.build = data.current_build
+            builder.url()
             
             // Show/hide filters depending on build requirements
             if (app.build.dataset == "rais") {
@@ -500,6 +511,7 @@
     
     app.error = function(error) {
       console.log("[visual] ERROR: "+error)
+      app.resize(error)
       app.loading(false)
       d3.select("#app").html("").datum(error).call(no_data())
     }
@@ -703,7 +715,6 @@
         .html("")
         .datum(app.data[app.build.data_url][format[app.build.type]])
         
-      builder.url()
       app.resize()
       builder.key()
       app.loading(false)
@@ -947,41 +958,45 @@
         
     }
     
-    app.resize = function() {
+    app.resize = function(error) {
       
-      var children = d3.select("#ui_bottom").node().childNodes,
-          min_width = 0;
-          
-      for (i = 0; i < children.length; i++) {
-        var w = children[i].offsetWidth;
-        if (w > min_width) min_width = w;
-      }
-      
-      if (window.innerWidth < min_width || window.innerHeight <= 400) {
-        app.vars.controls = "false";
-        d3.select("#ui_bottom").style("display","none")
-        d3.select("#settings").style("display","none")
-        d3.select("#toggles").style("display","none")
-        d3.select("#builder").style("display","none")
-      }
-      else {
-        d3.select("#ui_bottom").style("display","block")
-        d3.select("#settings").style("display","block")
-        d3.select("#toggles").style("display","block")
-        d3.select("#builder").style("display","block")
-      }
+      if (!error) {
 
-      d3.select("#builder").style("top",function(d){
-        if (app.vars.controls != "false") var u = 0
-        else var u = 1
-        return "-"+((this.offsetHeight+5)*u)+"px"
-      })
+        var children = d3.select("#ui_bottom").node().childNodes,
+            min_width = 0;
+          
+        for (i = 0; i < children.length; i++) {
+          var w = children[i].offsetWidth;
+          if (w > min_width) min_width = w;
+        }
       
-      if (app.vars.controls == "true") {
-        d3.select("#controls_toggle").attr("class","leon button square active")
-      }
-      else {
-        d3.select("#controls_toggle").attr("class","leon button square")
+        if (window.innerWidth < min_width || window.innerHeight <= 400) {
+          app.vars.controls = "false";
+          d3.select("#ui_bottom").style("display","none")
+          d3.select("#settings").style("display","none")
+          d3.select("#toggles").style("display","none")
+          d3.select("#builder").style("display","none")
+        }
+        else {
+          d3.select("#ui_bottom").style("display","block")
+          d3.select("#settings").style("display","block")
+          d3.select("#toggles").style("display","block")
+          d3.select("#builder").style("display","block")
+        }
+
+        d3.select("#builder").style("top",function(d){
+          if (app.vars.controls != "false") var u = 0
+          else var u = 1
+          return "-"+((this.offsetHeight+5)*u)+"px"
+        })
+      
+        if (app.vars.controls == "true") {
+          d3.select("#controls_toggle").attr("class","leon button square active")
+        }
+        else {
+          d3.select("#controls_toggle").attr("class","leon button square")
+        }
+        
       }
 
       app.height = window.innerHeight;
@@ -1000,7 +1015,15 @@
           else var u = 0
           return ((d3.select("#builder").node().offsetHeight)*u)+"px"
         })
-        .call(app.viz.height(app.height).width(app.width).title_width(app.title_width))
+        
+      if (!error) {
+        d3.select("#app").call(
+          app.viz
+            .height(app.height)
+            .width(app.width)
+            .title_width(app.title_width)
+          )
+      }
       
     }
     
@@ -1010,6 +1033,33 @@
     
     var builder = {}
     builder.filter = function(obj,type) {
+      
+      // Hide popover
+      visual.popover.hide("#popover");
+      
+      if (type == "bra") {
+        var index = 2,
+            name = app.build.bra.name_en
+      }
+      else if (["hs","isic"].indexOf(type) >= 0) {
+        var index = 3,
+            name = app.build.filter1.name_en
+      }
+      else {
+        var index = 4,
+            name = app.build.filter2.name_en
+      }
+      
+      d3.selectAll("select.output > option")
+        .each(function(){
+          var url = this.id.split("/")
+          url[index] = obj.id
+          this.id = url.join("/")
+          this.value = url.join("/")
+          this.innerHTML = this.innerHTML.replace(name,obj.name)
+        })
+      
+      leon.update(".output")
       
       var cat = "bra2" == type ? "bra" : type,
           button = d3.select("#"+type+"_select")
@@ -1022,14 +1072,18 @@
        .style("background-image","url("+obj.icon+")")
        .style("background-color",obj.color)
 
-      var name = obj.name_en
+      var name = obj.name
         
-      if (obj.distance > 0) {
-        name += " ("+obj.distance+"km)"
-      }
+      if (obj.distance > 0) name += " ("+obj.distance+"km)"
       
-      button.select(".list_text")
-       .text(name)
+      button.select(".list_text").text(name)
+
+      var url = app.url.split("/")
+      url[index] = obj.id
+      url = url.join("/")
+       
+      app.start(url)
+       
     }
     
     builder.app = function(app_name) {
@@ -1133,6 +1187,64 @@
           }
           return cats.indexOf(id) < 0 ? "none" : "inline-block";
         })
+        
+    }
+    
+    builder.controls = function() {
+      
+      if (app.vars.controls == "false") {
+        app.vars.controls = "true"
+      } else {
+        app.vars.controls = "false"
+      }
+      builder.url()
+      app.resize()
+      
+    }
+    
+    builder.selector = function(id) {
+
+      if (id == "help") {
+        var init = app_name,
+            callback = null
+      }
+      else if (id == "file") {
+        var init = "all",
+            callback = "app.download"
+      }
+      else if (id == "bra") {
+        var init = app.build.bra.id,
+            callback = builder.filter
+      }
+      else if (id == "hs" || id == "isic") {
+        var init = app.build.filter1.id,
+            callback = builder.filter
+      }
+      else {
+        var init = app.build.filter.id,
+            callback = builder.filter
+      }
+    
+      // if (app.build.bra.distance) {
+//         var dist = app.build.bra.distance
+//       }
+//       else {
+//         var dist = 0
+//       }
+    
+      var id = "bra2" == id ? "bra" : id
+    
+      selector
+        .callback(callback)
+        // .distance(dist)
+        .initial_value(init)
+        .type(id)
+    
+      d3.select("#popover")
+        .call(selector);
+      
+      // Show popover
+      visual.popover.show("#popover");
         
     }
     

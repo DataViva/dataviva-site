@@ -186,11 +186,13 @@ span.site_crumb_divider {
 }
 
 body.guide span.site_crumb,
+body.plan span.site_crumb,
 body.guide a.site_crumb:hover {
   color: #af1f24;
 }
 
 body.profiles span.site_crumb,
+body.profile span.site_crumb,
 body.profiles a.site_crumb:hover {
   color: #e0902d;
 }

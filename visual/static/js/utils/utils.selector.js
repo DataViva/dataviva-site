@@ -223,7 +223,12 @@ function Selector() {
       
       if (type == "help") {
         create_elements();
-        update_header(data[0]);
+        update_header({
+          "id": app.build.type,
+          "name": app.build.name,
+          "color": app.build.color,
+          "icon": visual.icon(app.build.type,"app")
+        })
         body.attr("src","/about/apps/"+data[0].id+"/?ajax=true")
       }
       else if (data) {
@@ -320,7 +325,7 @@ function Selector() {
             header_select
               .style("display","inline-block")
               .on(vizwhiz.evt.click,function(){
-                window[callback](data[x.id],name);
+                callback(data[x.id],name);
               })
           }
           else {
@@ -461,7 +466,7 @@ function Selector() {
                   select_value(v);
                 }
                 else {
-                  window[callback](data[v.id],name);
+                  callback(data[v.id],name);
                 }
               })
               
@@ -554,7 +559,7 @@ function Selector() {
                 .attr("class","leon button")
                 .html("Select")
                 .on(vizwhiz.evt.click,function(){
-                  window[callback](data[v.id],name);
+                  callback(data[v.id],name);
                 });
             }
           

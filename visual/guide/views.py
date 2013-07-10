@@ -25,6 +25,7 @@ def before_request():
 # ---------------------------
 @mod.route('/industry/<ind_id>/workforce/')
 def guide_industry_workforce(ind_id = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": "all", "ind_id": ind_id })
     
@@ -46,6 +47,7 @@ def guide_industry_workforce(ind_id = None):
 
 @mod.route('/industry/<ind_id>/potential/<bra_id>/')
 def guide_industry_potential(ind_id = None, bra_id = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": bra_id, "ind_id": ind_id })
     
@@ -83,6 +85,7 @@ def guide_industry_potential(ind_id = None, bra_id = None):
 
 @mod.route('/industry/<ind_id>/diversification/')
 def guide_industry_diversification(ind_id = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": "all", "ind_id": ind_id })
     
@@ -114,6 +117,7 @@ def guide_industry_diversification(ind_id = None):
 @mod.route('/industry/<ind_id>/location/<bra_id>/')
 @mod.route('/location/<bra_id>/attract/<ind_id>/')
 def guide_industry_location(bra_id = None, ind_id = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": bra_id, "ind_id": ind_id })
     outfit = "worker"
@@ -154,6 +158,7 @@ def guide_industry_location(bra_id = None, ind_id = None):
 
 @mod.route('/industry/<ind_id>/destinations/')
 def guide_industry_destinations(ind_id = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": "all", "ind_id": ind_id })
     
@@ -177,6 +182,7 @@ def guide_industry_destinations(ind_id = None):
 
 @mod.route('/location/<bra_id>/workforce/')
 def guide_location_workforce(bra_id = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": bra_id })
     
@@ -199,6 +205,7 @@ def guide_location_workforce(bra_id = None):
 
 @mod.route('/location/<bra_id>/industry/<ind_type>/')
 def guide_location_industry(bra_id = None, ind_type = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": bra_id })
     outfit = "travel"
@@ -229,6 +236,7 @@ def guide_location_industry(bra_id = None, ind_type = None):
 
 @mod.route('/location/<bra_id>/growth/<ind_type>/')
 def guide_location_growth(bra_id = None, ind_type = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": bra_id })
     outfit = "travel"
@@ -261,6 +269,7 @@ def guide_location_growth(bra_id = None, ind_type = None):
 
 @mod.route('/location/<bra_id>/shrink/<ind_type>/')
 def guide_location_shrink(bra_id = None, ind_type = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": bra_id })
     outfit = "travel"
@@ -293,6 +302,7 @@ def guide_location_shrink(bra_id = None, ind_type = None):
 
 @mod.route('/location/<bra_id>/opportunity/<ind_type>/')
 def guide_location_opportunity(bra_id = None, ind_type = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": bra_id })
     outfit = "travel"
@@ -326,6 +336,7 @@ def guide_location_opportunity(bra_id = None, ind_type = None):
 
 @mod.route('/career/all/growth/<bra_id>/')
 def guide_career_growth_all(bra_id = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": bra_id })
     outfit = "preppy"
@@ -345,6 +356,7 @@ def guide_career_growth_all(bra_id = None):
 
 @mod.route('/career/all/wages/<bra_id>/')
 def guide_career_wages(bra_id = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": bra_id })
     outfit = "preppy"
@@ -364,6 +376,7 @@ def guide_career_wages(bra_id = None):
 
 @mod.route('/career/<cbo_id>/industries/<bra_id>/')
 def guide_career_industries(bra_id = None, cbo_id = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": bra_id, "cbo_id": cbo_id })
     outfit = "preppy"
@@ -389,6 +402,7 @@ def guide_career_industries(bra_id = None, cbo_id = None):
 
 @mod.route('/career/<cbo_id>/paths/<bra_id>/')
 def guide_career_paths(cbo_id = None, bra_id = None):
+    g.page_type = "plan"
     
     names = get_names({ "cbo_id": cbo_id, "bra_id": bra_id })
     outfit = "preppy"
@@ -409,6 +423,7 @@ def guide_career_paths(cbo_id = None, bra_id = None):
 
 @mod.route('/career/<cbo_id>/growth/<bra_id>/')
 def guide_career_growth(bra_id = None, cbo_id = None):
+    g.page_type = "plan"
     
     names = get_names({ "bra_id": bra_id, "cbo_id": cbo_id })
     outfit = "preppy"
