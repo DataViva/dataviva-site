@@ -10,23 +10,33 @@ build_ui = db.Table('apps_build_ui',
          db.Column('ui_id', db.Integer,db.ForeignKey('apps_ui.id'))
 )
 
+class App(db.Model, AutoSerialize):
+
+    __tablename__ = 'apps_app'
+    
+    id = db.Column(db.Integer, primary_key = True)
+    type = db.Column(db.String(20))
+    title = db.Column(db.String(20))
+    viz_whiz = db.Column(db.String(20))
+    color = db.Column(db.String(7))
+
 class Build(db.Model, AutoSerialize):
 
     __tablename__ = 'apps_build'
     __public__ = ('id', 'type', 'bra', 'filter1', 'filter2', 'output', 'viz_whiz', 'name', 'color', 'dataset')
     
     id = db.Column(db.Integer, primary_key = True)
-    type = db.Column(db.String(20))
+    dataset = db.Column(db.String(20))
     bra = db.Column(db.String(20))
     filter1 = db.Column(db.String(20))
     filter2 = db.Column(db.String(20))
     output = db.Column(db.String(20))
-    viz_whiz = db.Column(db.String(20))
-    name = db.Column(db.String(20))
-    color = db.Column(db.String(7))
-    dataset = db.Column(db.String(20))
+    app_id = db.Column(db.Integer, db.ForeignKey(App.id))
     
-    ui = db.relationship('UI', secondary=build_ui, backref=db.backref('Builds'), lazy='dynamic')
+    ui = db.relationship('UI', secondary=build_ui, 
+            backref=db.backref('Builds'), lazy='dynamic')
+    app = db.relationship('App',
+            backref=db.backref('Builds', lazy='dynamic'))
     
     def get_ui(self, ui_type):
         return self.ui.filter(UI.type == ui_type).first()
@@ -71,18 +81,14 @@ class Build(db.Model, AutoSerialize):
     '''Returns the URL for the specific build.'''
     def url(self, **kwargs):
         
-        # filters = self.get_bra_and_filters(**kwargs)
-        # bra = filters["bra"]
         bra = self.bra.id
         if self.filter1 == "all": filter1 = "all"
         else: filter1 = self.filter1.id
         if self.filter2 == "all": filter2 = "all"
         else: filter2 = self.filter2.id
         
-        url = '{0}/{1}/{2}/{3}/{4}/{5}'.format(self.viz_whiz, 
-                                                self.dataset, bra, 
-                                                filter1, filter2, 
-                                                self.output)
+        url = '{0}/{1}/{2}/{3}/{4}/{5}'.format(self.app.viz_whiz, 
+                self.dataset, bra, filter1, filter2, self.output)
         return url
 
     '''Returns the data URL for the specific build. This URL will return the 
@@ -193,11 +199,11 @@ class Build(db.Model, AutoSerialize):
         auto_serialized["data_url"] = self.data_url()
         auto_serialized["url"] = self.url()
         auto_serialized["ui"] = [ui.serialize() for ui in self.ui.all()]
+        auto_serialized["app"] = self.app.serialize()
         return auto_serialized
 
     def __repr__(self):
-        return '<Build %r/%r/%r/%r>' % (self.viz_whiz, self.filter1, 
-                                            self.filter2, self.output)
+        return '<Build %r/%r/%r>' % (self.filter1, self.filter2, self.output)
 
 class UI(db.Model, AutoSerialize):
 
