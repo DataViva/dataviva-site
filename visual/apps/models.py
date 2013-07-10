@@ -44,6 +44,9 @@ class Build(db.Model, AutoSerialize):
         return self.ui.filter(UI.type == ui_type).first()
 
     def set_bra(self, bra_id):
+        '''If build requires 2 bras and only 1 is given, supply a 2nd'''
+        if "+" in self.bra and "+" not in bra_id:
+            bra_id = bra_id + "+sp"
         self.bra = []
         if bra_id == "all":
             self.bra.append(Wld.query.get("sabra"))
@@ -94,15 +97,9 @@ class Build(db.Model, AutoSerialize):
         
     '''Returns the URL for the specific build.'''
     def url(self, **kwargs):
-        
-        # bra = self.bra.id
-        # if self.filter1 == "all": filter1 = "all"
-        # else: filter1 = self.filter1.id
-        # if self.filter2 == "all": filter2 = "all"
-        # else: filter2 = self.filter2.id
         bra_id = "+".join([b.id for b in self.bra])
         
-        url = '{0}/{1}/{2}/{3}/{4}/{5}'.format(self.app.viz_whiz, 
+        url = '{0}/{1}/{2}/{3}/{4}/{5}'.format(self.app.type, 
                 self.dataset, bra_id, self.filter1, self.filter2, self.output)
         return url
 
@@ -110,7 +107,6 @@ class Build(db.Model, AutoSerialize):
     data required for building a viz of this app.
     '''
     def data_url(self, **kwargs):
-        # filters = self.get_bra_and_filters(**kwargs)
         
         # bra = self.bra.id
         bra = "+".join([b.id for b in self.bra])
@@ -130,9 +126,6 @@ class Build(db.Model, AutoSerialize):
                 filter2 = "show.4"
             elif self.output == "wld":
                 filter2 = "show.5"
-
-        # filter2 = "all" if self.filter2 == "all" else self.filter2.id
-        # filter2 = "show" if self.output == "cbo" or self.output == "wld" else filter2
 
         data_url = '{0}/all/{1}/{2}/{3}/'.format(self.dataset, bra, 
             filter1, filter2)
