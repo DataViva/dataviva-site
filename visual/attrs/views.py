@@ -70,8 +70,16 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_merge
     # if an ID is supplied only return that
     if Attr_id:
         
-        # the '.show' indicates that we are looking for a specific nesting
-        if "show." in Attr_id:
+        # the '.show.' indicates that we are looking for a specific nesting
+        if ".show." in Attr_id:
+            this_attr, ret["nesting_level"] = Attr_id.split(".show.")
+            # filter table by requested nesting level
+            attrs = Attr.query \
+                    .filter(Attr.id.startswith(this_attr)) \
+                    .filter(func.char_length(Attr.id) == ret["nesting_level"]).all()
+
+        # the 'show.' indicates that we are looking for a specific nesting
+        elif "show." in Attr_id:
             ret["nesting_level"] = Attr_id.split(".")[1]
             # filter table by requested nesting level
             attrs = Attr.query.filter(func.char_length(Attr.id) == ret["nesting_level"]).all()

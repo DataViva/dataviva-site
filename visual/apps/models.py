@@ -111,7 +111,7 @@ class Build(db.Model, AutoSerialize):
         # bra = self.bra.id
         bra = "+".join([b.id for b in self.bra])
         if self.output == "bra":
-            bra = bra + ".8"
+            bra = bra + ".show.8"
             
         filter1 = self.filter1
         if filter1 == "all":
