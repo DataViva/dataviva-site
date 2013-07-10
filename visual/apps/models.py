@@ -55,42 +55,42 @@ class Build(db.Model, AutoSerialize):
                 self.bra[i].icon = "/static/img/icons/bra/bra_{0}.png".format(b[:2])
 
     def set_filter1(self, filter):
-        if self.filter1 == "all":
-            self.filter1 = "all"
-        elif self.dataset == "rais":
-            self.isic = []
-            for i, f in enumerate(filter.split("+")):
-                if Isic.query.get(f):
-                    self.isic.append(Isic.query.get(f))
-                else:
-                    self.isic.append(Isic.query.get('c1410'))
-        elif self.dataset == "secex":
-            self.hs = []
-            for i, f in enumerate(filter.split("+")):
-                if Hs.query.get(f):
-                    self.hs.append(Hs.query.get(f))
-                else:
-                    self.hs.append(Hs.query.get('178703'))
-        self.filter1 = filter
+        if self.filter1 != "all":
+            if self.dataset == "rais":
+                self.isic = []
+                for i, f in enumerate(filter.split("+")):
+                    if Isic.query.get(f):
+                        self.isic.append(Isic.query.get(f))
+                    else:
+                        self.isic.append(Isic.query.get('c1410'))
+                self.filter1 = "+".join([i.id for i in set(self.isic)])
+            elif self.dataset == "secex":
+                self.hs = []
+                for i, f in enumerate(filter.split("+")):
+                    if Hs.query.get(f):
+                        self.hs.append(Hs.query.get(f))
+                    else:
+                        self.hs.append(Hs.query.get('178703'))
+                self.filter1 = "+".join([h.id for h in set(self.hs)])
     
     def set_filter2(self, filter):
-        if self.filter2 == "all":
-            self.filter2 = "all"
-        elif self.dataset == "rais":
-            self.cbo = []
-            for i, f in enumerate(filter.split("+")):
-                if Cbo.query.get(f):
-                    self.cbo.append(Cbo.query.get(f))
-                else:
-                    self.cbo.append(Cbo.query.get('1210'))
-        elif self.dataset == "secex":
-            self.wld = []
-            for i, f in enumerate(filter.split("+")):
-                if Wld.query.get(f):
-                    self.wld.append(Wld.query.get(f))
-                else:
-                    self.wld.append(Wld.query.get('aschn'))
-        self.filter2 = filter
+        if self.filter2 != "all":
+            if self.dataset == "rais":
+                self.cbo = []
+                for i, f in enumerate(filter.split("+")):
+                    if Cbo.query.get(f):
+                        self.cbo.append(Cbo.query.get(f))
+                    else:
+                        self.cbo.append(Cbo.query.get('1210'))
+                self.filter2 = "+".join([c.id for c in set(self.cbo)])
+            elif self.dataset == "secex":
+                self.wld = []
+                for i, f in enumerate(filter.split("+")):
+                    if Wld.query.get(f):
+                        self.wld.append(Wld.query.get(f))
+                    else:
+                        self.wld.append(Wld.query.get('aschn'))
+                self.filter2 = "+".join([w.id for w in set(self.wld)])
         
     '''Returns the URL for the specific build.'''
     def url(self, **kwargs):
