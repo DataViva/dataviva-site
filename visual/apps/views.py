@@ -10,7 +10,7 @@ from visual import db
 from visual.data.forms import DownloadForm
 from visual.account.models import User, Starred
 from visual.attrs.models import Bra, Isic, Hs, Cbo, Wld
-from visual.apps.models import Build, UI
+from visual.apps.models import Build, UI, App
 
 from visual.rais.views import rais_ybi
 
@@ -82,7 +82,8 @@ def embed2(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     '''This is an instance of the Build class for the selected app, 
     determined by the combination of app_type, dataset, filters and output.
     '''
-    current_build = Build.query.filter_by(type=app_name, dataset=dataset, filter1=build_filter1, filter2=build_filter2, output=output).first()
+    current_app = App.query.filter_by(type=app_name).first_or_404()
+    current_build = Build.query.filter_by(app=current_app, dataset=dataset, filter1=build_filter1, filter2=build_filter2, output=output).first_or_404()
     current_build.set_filter1(filter1)
     current_build.set_filter2(filter2)
     current_build.set_bra(bra_id)

@@ -155,11 +155,11 @@ class Build(db.Model, AutoSerialize):
 
         # if g.locale == "en":
         if True:
-            if self.type == "network":
+            if self.app.type == "network":
                 return output_name + " Space for " + bra.name_en
-            elif self.type == "rings":
+            elif self.app.type == "rings":
                 return "Connections for " + filters[0].name_en + " in " + bra.name_en
-            elif self.type == "bubbles":
+            elif self.app.type == "bubbles":
                 return "Available and required employment for " + filters[0].name_en + " in " + bra.name_en;
             else:
                 title = output_name_pl
