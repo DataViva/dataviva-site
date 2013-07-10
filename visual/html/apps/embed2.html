@@ -1106,7 +1106,6 @@
           if (url_index == 2 || url[url_index] != "all") url[url_index] = obj.id
           this.id = url.join("/")
           this.value = url.join("/")
-          console.log(this.id)
           this.innerHTML = this.innerHTML.replace(old_name,new_name)
         })
       
@@ -1259,25 +1258,21 @@
     }
     
     builder.selector = function(id) {
-
-      if (id == "help") {
+      
+      var s = id.split("_")
+      var type = s[0]
+      if (s[1]) var index = s[1]
+      
+      if (type == "help") {
         var init = app_name,
             callback = null
       }
-      else if (id == "file") {
+      else if (type == "file") {
         var init = "all",
             callback = "app.download"
       }
-      else if (id == "bra") {
-        var init = app.build.bra.id,
-            callback = builder.filter
-      }
-      else if (id == "hs" || id == "isic") {
-        var init = app.build.filter1.id,
-            callback = builder.filter
-      }
       else {
-        var init = app.build.filter.id,
+        var init = app.build[type][index].id,
             callback = builder.filter
       }
     
@@ -1287,14 +1282,12 @@
 //       else {
 //         var dist = 0
 //       }
-    
-      var id = "bra2" == id ? "bra" : id
-    
+
       selector
         .callback(callback)
         // .distance(dist)
         .initial_value(init)
-        .type(id)
+        .type(type)
     
       d3.select("#popover")
         .call(selector);

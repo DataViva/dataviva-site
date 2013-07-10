@@ -261,13 +261,11 @@ visual.popover.show = function(id) {
   
   d3.select("#popover_mask")
     .style("display","block")
-    .style("opacity",0.8);
+    .style("opacity",0.8)
     
   d3.select(id)
     .style("display","block")
-    .style("opacity",1);
-  
-  
+    .style("opacity",1)
   
 }
 
