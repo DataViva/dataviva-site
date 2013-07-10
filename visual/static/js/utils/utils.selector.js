@@ -162,7 +162,7 @@ function Selector() {
               .html(visual.format.text(s))
           })
         
-          leon.get("$selector_sort")
+          leon.touch("$selector_sort")
         }
         
 
@@ -550,7 +550,7 @@ function Selector() {
                 }
               })
       
-              leon.get("#distance"+v.id)
+              leon.touch("#distance"+v.id)
               
             }
               

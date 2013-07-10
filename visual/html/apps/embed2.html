@@ -28,10 +28,10 @@
         {% set pre_app = None %}
         {% for build in all_builds %}
 
-          {% if pre_app != build.type %}
-            {% set pre_app = build.type %}
-            <option icon="url('/static/img/icons/app/app_{{build.type}}.png')" color="{{build.color}}" value="{{build.type}}" id="{{build.type}}"{% if build.type == current_build.type %} selected="selected"{% endif %}>
-                {{ build.name }}
+          {% if pre_app != build.app.type %}
+            {% set pre_app = build.app.type %}
+            <option icon="url('/static/img/icons/app/app_{{build.app.type}}.png')" color="{{build.app.color}}" value="{{build.app.type}}" id="{{build.app.type}}"{% if build.app.type == current_build.app.type %} selected="selected"{% endif %}>
+                {{ build.app.title }}
             </option>
           {% endif %}
 
@@ -100,14 +100,14 @@
     {% set pre_app = None %}
     {% for build in all_builds %}
 
-      {% if pre_app != build.type %}
+      {% if pre_app != build.app.type %}
         {% if pre_app != None %}
           </select></div>
         {% endif %}
-        {% set pre_app = build.type %}
-        <div id="{{ build.type }}_output_div" class="output_div">
-        <label for="output_{{ build.type }}">Output</label>
-        <select id="output_{{ build.type }}" class="leon_object output" onchange="app.start(this.options[this.selectedIndex].id)">
+        {% set pre_app = build.app.type %}
+        <div id="{{ build.app.type }}_output_div" class="output_div">
+        <label for="output_{{ build.app.type }}">Output</label>
+        <select id="output_{{ build.app.type }}" class="leon_object output" onchange="app.start(this.options[this.selectedIndex].id)">
       {% endif %}
 
       <option value="{{ build.url() }}" id="{{ build.url() }}" {% if build.id == current_build.id %} selected="selected"{% endif %}>
@@ -191,7 +191,7 @@
     })
   
     // Stylize SELECT menus
-    var selects = leon.get(".leon_object")
+    var selects = leon.touch(".leon_object")
     
     // Hide full-screen button while in full-screen
     if (parent.location.pathname.indexOf("embed") >= 0) {
@@ -369,7 +369,7 @@
               },"/attrs/"+app.build.output)
             }
             
-            if (["network","rings"].indexOf(app.build.type) >= 0 
+            if (["network","rings"].indexOf(app.build.app.type) >= 0 
                 && !app.networks[app.build.output]) {
               q.defer(function(u,callback){
                 d3.json(u,function(d){
@@ -391,7 +391,7 @@
               },"/static/json/networks/network_"+app.build.output+".json")
             }
             
-            if (app.build.type == "geo_map") {
+            if (app.build.app.type == "geo_map") {
               
               if (!app.land) {
                 q.defer(function(u,callback){
@@ -414,7 +414,7 @@
               
             }
             
-            if (app.build.type == "bubbles") {
+            if (app.build.app.type == "bubbles") {
               
               app.build.req_url = app.build.data_url
                 .replace(app.build.bra.id,"all")
@@ -451,7 +451,7 @@
               if (app.data[app.build.data_url].raw.length == 0) {
                 app.error("No Data Available")
               }
-              else if (app.build.type == "rings") {
+              else if (app.build.app.type == "rings") {
                 
                 if (app.build.output == "cbo") {
                   var node_id = app.build.filter2.id
@@ -475,10 +475,10 @@
                 }
                 
               }
-              else if (app.build.type == "geo_map" && app.bra.id == "all") {
+              else if (app.build.app.type == "geo_map" && app.bra.id == "all") {
                 app.error("Geo Map only available for States");
               }
-              else if (app.build.type == "pie_scatter") {
+              else if (app.build.app.type == "pie_scatter") {
 
                 var complexities = app.data[app.build.data_url].raw
                   .filter(function(d){return d.complexity})
@@ -519,7 +519,7 @@
     app.finish = function() {
       
       // Format Data if it hasn't already been formatted
-      if (!app.data[app.build.data_url][format[app.build.type]]) {
+      if (!app.data[app.build.data_url][format[app.build.app.type]]) {
         app.format_data()
       }
       
@@ -567,26 +567,26 @@
             .attr("for","year")
             .html(visual.format.text("year"))
           
-          leon.get("#year")
+          leon.touch("#year")
           
         }
         else {
           
           // Custom Titles
           if (ui.type == "value_var") {
-            if (app.build.type == "geo_map") var title = "color"
+            if (app.build.app.type == "geo_map") var title = "color"
             else var title = "sizing"
           }
           else var title = ui.type
         
           // Set Global Vars
           if (ui.type == "value_var") {
-            if (app.build.type == "bubbles") var default_value = "importance"      
+            if (app.build.app.type == "bubbles") var default_value = "importance"      
             else if (ui.values.indexOf("val_usd") >= 0) var default_value = "val_usd"
             else if (ui.values.indexOf("num_emp") >= 0) var default_value = "num_emp"
             else var default_value = ui.values[0]
           }
-          else if (ui.type == "depth" && app.build.type == "tree_map") {
+          else if (ui.type == "depth" && app.build.app.type == "tree_map") {
             var default_value = ui.values[ui.values.length-1]
           }
           else {
@@ -616,7 +616,7 @@
       /************************/
       /* Gloabl App Variables */
       /************************/  
-      app.viz.type(app.build.viz_whiz)
+      app.viz.type(app.build.app.viz_whiz)
         .title(app.build.title)
         .attrs(app.attrs[app.build.output])
         .spotlight(app.vars.spotlight)
@@ -633,7 +633,7 @@
       /******************************/
       /* Network Specific Variables */
       /******************************/  
-      if (app.build.type == "network") {
+      if (app.build.app.type == "network") {
         var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca";
         app.viz
           .links(app.networks[app.build.output].edges)
@@ -644,7 +644,7 @@
       /****************************/
       /* Rings Specific Variables */
       /****************************/
-      else if (app.build.type == "rings") {
+      else if (app.build.app.type == "rings") {
         app.viz
           .links(app.networks[app.build.output].edges)
           .nodes(app.networks[app.build.output].nodes)
@@ -655,7 +655,7 @@
       /******************************/
       /* Geo Map Specific Variables */
       /******************************/
-      else if (app.build.type == "geo_map") {
+      else if (app.build.app.type == "geo_map") {
         app.viz
           .coords(app.coords[app.build.bra.id.substr(0,2)])
           .map(app.land)
@@ -668,7 +668,7 @@
       /******************************/
       /* Bubbles Specific Variables */
       /******************************/
-      else if (app.build.type == "bubbles") {
+      else if (app.build.app.type == "bubbles") {
         app.viz
           .active_var("employed")
       } 
@@ -676,7 +676,7 @@
       /******************************/
       /* Stacked Specific Variables */
       /******************************/
-      else if (app.build.type == "stacked") {
+      else if (app.build.app.type == "stacked") {
         app.viz
           .xaxis_var("year")
           .xaxis_scale("linear")
@@ -687,7 +687,7 @@
       /******************************/
       /* Scatter Specific Variables */
       /******************************/
-      else if (app.build.type == "pie_scatter") {
+      else if (app.build.app.type == "pie_scatter") {
   
         app.viz
           .xaxis_var("distance")
@@ -700,7 +700,7 @@
       /******************************/
       /* Compare Specific Variables */
       /******************************/
-      else if (app.build.type == "compare") {
+      else if (app.build.app.type == "compare") {
     
         app.viz
           .xaxis_var("cp_bra2_"+app.vars.axes)
@@ -713,7 +713,7 @@
       
       d3.select("#app")
         .html("")
-        .datum(app.data[app.build.data_url][format[app.build.type]])
+        .datum(app.data[app.build.data_url][format[app.build.app.type]])
         
       app.resize()
       builder.key()
@@ -774,7 +774,7 @@
           out = app.build.output,
           attr = app.attrs[out]
       
-      if ("bubbles" == format[app.build.type]) {
+      if ("bubbles" == format[app.build.app.type]) {
         
         var years = app.build.ui.filter(function(f){return f.type == "years"})[0].values
         
@@ -838,7 +838,7 @@
         })
     
       }
-      else if ("compare" == format[app.build.type]) {
+      else if ("compare" == format[app.build.app.type]) {
         
         d3.nest()
           .key(function(d){return d.year})
@@ -902,7 +902,7 @@
         
       }
       
-      data[format[app.build.type]] = data_obj;
+      data[format[app.build.app.type]] = data_obj;
       
       function set_nesting(obj) {
         depths[out].forEach(function(d){
@@ -1059,7 +1059,7 @@
           this.innerHTML = this.innerHTML.replace(name,obj.name)
         })
       
-      leon.update(".output")
+      leon.touch("select")
       
       var cat = "bra2" == type ? "bra" : type,
           button = d3.select("#"+type+"_select")
@@ -1141,7 +1141,7 @@
         
       })
 
-      leon.get("$"+obj.title)
+      leon.touch("$"+obj.title)
       
     }
     
@@ -1179,7 +1179,7 @@
       d3.selectAll("div.key_icon_container")
         .style("display",function(){
           var id = this.id.slice(3)
-          if (app.build.type != "stacked") {
+          if (app.build.app.type != "stacked") {
             cats = app.data[app.build.data_url].categories[app.vars.year]
           }
           else {
@@ -1263,7 +1263,7 @@
     /* Initialize First App */
     /************************/
     
-    builder.app("{{ current_build.type }}")
+    builder.app("{{ current_build.app.type }}")
   
   </script>
 

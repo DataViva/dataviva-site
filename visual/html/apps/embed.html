@@ -439,7 +439,7 @@
       
       }
       
-      leon.get("#app_select");
+      leon.touch("#app_select");
       
     }
     
@@ -516,7 +516,7 @@
       d3.select("option#"+data_type+"_"+current_build.join("-"))
         .attr("selected","selected")
         
-      leon.get("#output_selector")
+      leon.touch("#output_selector")
       
       select_output(data_type+"_"+current_build.join("-"))
     
@@ -731,7 +731,7 @@
         
       })
 
-      leon.get("$"+obj.title)
+      leon.touch("$"+obj.title)
       
     }
     
@@ -1058,7 +1058,7 @@
             .attr("for","year")
             .html(format_name("year"))
             
-          leon.get("#year")
+          leon.touch("#year")
           
         }
         else {

@@ -83,7 +83,7 @@ leon.font.weight = "normal"
 
 leon.border = 0
 // Finds all elements that match the passed ID or Class
-leon.get = function(name) {
+leon.touch = function(name) {
   
   if (!name) var name = "all"
   
@@ -182,7 +182,17 @@ leon.get = function(name) {
   
   var returns = {}
   objs.forEach(function(obj){
+    var node = document.getElementById("leon_"+obj.items.id)
+    if (node) {
+      node.parentNode.removeChild(node)
+      node = null
+    }
+    if (obj.items instanceof Array) var parent = obj.items[0].parentNode
+    else var parent = obj.items.parentNode
+    var display = parent.style.display
+    if (display == "none") parent.style.display = "block"
     returns[obj.items.id] = new leon[obj.type.split("-")[0]](obj)
+    if (display == "none") parent.style.display = "none"
   })
   if (Object.keys(returns).length == 1) returns = returns[Object.keys(returns)[0]]
   
@@ -290,13 +300,9 @@ style.innerHTML = "\
   }\
   .leon.label {\
     border: "+leon.border+"px solid transparent;\
-    color: "+leon.color.main.dark+";\
+    color: "+leon.color.accent.dark+";\
     float: left;\
-    font-weight: bold;\
     padding: "+leon.padding+"px;\
-  }\
-  label.leon.label {\
-    margin: "+leon.padding+"px -"+leon.padding+"px "+leon.padding+"px "+leon.padding+"px;\
   }\
   .leon.select {\
     display: inline-block;\
@@ -995,64 +1001,67 @@ leon.select = function(obj) {
   
   var self = this
   
+  this.input = obj
+  
   this.set = function(value) {
-    var option = options.filter(function(o){
+    var option = self.options.filter(function(o){
       return o.id == "leon_button_"+value;
     })[0]
-    obj.items.value = value
-    button.node.innerHTML = option.node.innerHTML + arrow
+    if (!option) var option = self.options[0]
+    self.input.items.value = value
+    self.selected.node.innerHTML = option.node.innerHTML + arrow
   }
   
   this.show = function() {
-    button.addclass("active")
+    self.selected.addclass("active")
     self.node.className = "leon select active"
-    dropdown.style.visibility = "visible"
-    dropdown.style.opacity = 1
-    dropdown.style.top = button.node.offsetHeight+"px"
-    button.open = true
+    self.dropdown.style.visibility = "visible"
+    self.dropdown.style.opacity = 1
+    self.dropdown.style.top = self.selected.node.offsetHeight+"px"
+    self.selected.open = true
   }
   
   this.hide = function() {
-    button.removeclass("active")
-    dropdown.style.opacity = 0
-    dropdown.style.top = "0px"
+    self.selected.removeclass("active")
+    self.dropdown.style.opacity = 0
+    self.dropdown.style.top = "0px"
     setTimeout(function() {
-      dropdown.style.visibility = "hidden"
+      self.dropdown.style.visibility = "hidden"
       self.node.className = "leon select"
-      button.open = false
+      self.selected.open = false
     },leon.time.fade*1000)
   }
   
   self.node = document.createElement("div")
   self.node.className = "leon select"
-  self.node.id = "leon_"+obj.items.id
-  obj.items.parentNode.insertBefore(self.node,obj.items)
+  self.node.id = "leon_"+self.input.items.id
+  self.input.items.parentNode.insertBefore(self.node,self.input.items)
   
-  if (obj.items.label) {
-    var label = new leon.label(obj.items.label,self.node)
+  if (self.input.items.label) {
+    var label = new leon.label(self.input.items.label,self.node)
   }
   
   var arrow = "<span class='leon arrow'>&#8227</span>"
   
-  obj.items.label = obj.items.selectedOptions[0].label + arrow
+  self.input.items.label = self.input.items.selectedOptions[0].label + arrow
   
-  var button = new leon.button(obj.items,self.node)
-  button.open = false
+  this.selected = new leon.button(self.input.items,self.node)
+  self.selected.open = false
   
-  var dropdown = document.createElement("div")
-  dropdown.className = "leon select dropdown"
-  dropdown.id = "leon_dropdown_"+obj.items.id
-  dropdown.style.left = button.node.offsetLeft+"px"
-  self.node.appendChild(dropdown)
+  this.dropdown = document.createElement("div")
+  self.dropdown.className = "leon select dropdown"
+  self.dropdown.id = "leon_dropdown_"+self.input.items.id
+  self.dropdown.style.left = self.selected.node.offsetLeft+"px"
+  self.node.appendChild(self.dropdown)
   
-  var options = []
-  for (var i = 0; i < obj.items.length; i++) {
-    options.push(new leon.button(obj.items[i],dropdown))
+  this.options = []
+  for (var i = 0; i < self.input.items.length; i++) {
+    self.options.push(new leon.button(self.input.items[i],self.dropdown))
   }
   
-  button.node.addEventListener("click", function(e){
+  self.selected.node.addEventListener("click", function(e){
     e.stopPropagation()
-    if (button.open) {
+    if (self.selected.open) {
       self.hide()
     }
     else {
@@ -1061,7 +1070,7 @@ leon.select = function(obj) {
   })
   
   var w = 0
-  options.forEach(function(option,i){
+  self.options.forEach(function(option,i){
     
     var html = option.node.innerHTML
     option.node.innerHTML = html + arrow
@@ -1072,21 +1081,21 @@ leon.select = function(obj) {
     if (option.item.selected) self.set(option.item.value)
     
     if (i == 0) option.addclass("first")
-    else if (i == obj.items.length-1) option.addclass("last")
+    else if (i == self.input.items.length-1) option.addclass("last")
     else option.addclass("middle")
     
     option.node.addEventListener("click", function(e){
       e.stopPropagation()
-      if (obj.items.value != option.item.value) {
+      if (self.input.items.value != option.item.value) {
         self.set(option.item.value)
-        obj.items.onchange()
+        self.input.items.onchange()
       }
       self.hide()
     })
   })
   
-  button.node.style.width = w+"px"
-  dropdown.style.width = (w+leon.padding*2+leon.border*2)+"px"
+  self.selected.node.style.width = w+"px"
+  self.dropdown.style.width = (w+leon.padding*2+leon.border*2)+"px"
   
 }
 /*
