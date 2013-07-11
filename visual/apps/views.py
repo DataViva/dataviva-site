@@ -54,7 +54,8 @@ def embed(app_name=None,data_type=None,bra_id=None,filter1=None,filter2=None,out
         output = output,
         global_vars = json.dumps(global_vars))
 
-@mod.route('/embed2/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
+@mod.route('/embed2/', defaults={"app_name": "tree_map", "data_type": "rais", 
+            "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
 @mod.route('/embed2/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/'
             '<output>/')
 def embed2(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
@@ -153,9 +154,70 @@ def app_star(app_name, data_type, bra_id, filter1, filter2, output):
         return jsonify({"success": 1})
 
 @mod.route('/recommend/', methods=['GET', 'POST'])
-@mod.route('/recommend/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
-def recommend(app_name=None, data_type=None, bra_id="mg", filter1=None, filter2=None, output=None):
-    return jsonify(get_urls(app=app_name, data_type=data_type, bra=bra_id, f1=filter1, f2=filter2, output=output))
+@mod.route('/recommend/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
+def recommend(app_name=None, dataset=None, bra_id="mg", filter1=None, filter2=None, output=None):
+    
+    recommended = {}
+    
+    '''Since the "builds" are held in the database with placeholders for 
+    attributes i.e. <cbo>, <hs>, <isic> we need to convert the IDs given
+    in the URL to these placeholders. i.e. 
+         - a0111    = <isic>
+         - 010101   = <hs>
+         - all      = all
+    '''
+    build_filter1 = filter1
+    if dataset == "rais" and build_filter1 != "all":
+        build_filter1 = "<isic>"
+    if dataset == "secex" and build_filter1 != "all":
+        build_filter1 = "<hs>"
+
+    build_filter2 = filter2
+    if dataset == "rais" and build_filter2 != "all":
+        build_filter2 = "<cbo>"
+    if dataset == "secex" and build_filter2 != "all":
+        build_filter2 = "<wld>"
+
+    '''First get the MOST relevent builds (ones that use all filters)'''
+    if build_filter1 != "all" and build_filter2 != "all":
+        builds = Build.query.filter_by(dataset=dataset, filter1=build_filter1, 
+                    filter2=build_filter2).all()
+        recommended['both_filters'] = []
+        for b in builds:
+            b.set_bra(bra_id)
+            b.set_filter1(filter1)
+            b.set_filter2(filter2)
+            recommended['both_filters'].append(b.serialize())
+
+    '''Add any builds that rely strictly on the second filter'''
+    if build_filter2 != "all":
+        builds = Build.query.filter_by(dataset=dataset, filter1="all", 
+                    filter2=build_filter2).all()
+        recommended['filter2'] = []
+        for b in builds:
+            b.set_bra(bra_id)
+            b.set_filter2(filter2)
+            recommended['filter2'].append(b.serialize())
+    
+    '''Add any builds that rely strictly on the first filter'''
+    if build_filter1 != "all":
+        builds = Build.query.filter_by(dataset=dataset, filter1=build_filter1, 
+                    filter2="all").all()
+        recommended['filter1'] = []
+        for b in builds:
+            b.set_bra(bra_id)
+            b.set_filter1(filter1)
+            recommended['filter1'].append(b.serialize())
+
+    '''Lastly get the rest of the relevent builds'''
+    builds = Build.query.filter_by(dataset=dataset, filter1="all", filter2="all").all()
+    recommended['no_filters'] = []
+    for b in builds:
+        b.set_bra(bra_id)
+        recommended['no_filters'].append(b.serialize())
+    
+    return jsonify(recommended)
+    
 
 def get_geo_location(ip):
     req = urllib2.Request("http://freegeoip.net/json/" + ip)
