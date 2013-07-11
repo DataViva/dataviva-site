@@ -4,8 +4,10 @@ visual.popover = {};
 visual.slide.timing = 0.75, // timing of page slides, in seconds
 
 visual.format = {};
-visual.format.text = function(text) {
-  if (text.indexOf("cp_bra") == 0) {
+visual.format.text = function(text,name) {
+  
+  if (name == "id") return text
+  else if (text.indexOf("cp_bra") == 0) {
     var arr = text.split("_")
     arr.shift()
     var loc = arr.shift()
@@ -15,36 +17,45 @@ visual.format.text = function(text) {
   else {
     return format_name(text)
   }
+  
 }
 
-visual.format.number = function(obj) {
-  if (typeof obj === "object") {
-    var value = obj.value, name = obj.name
-  }
-  else {
-    var value = obj, name = ""
-  }
+visual.format.number = function(value,name) {
   
   var smalls = ["rca","rca_bra","rca_wld","distance","complexity"]
   
   if (smalls.indexOf(name) >= 0) {
-    return d3.round(value,2)
+    var return_value = d3.round(value,2)
   }
   else if (name == "year") {
-    return value
+    var return_value = value
   }
   else if (value.toString().split(".")[0].length > 4) {
+    
     var symbol = d3.formatPrefix(value).symbol
     symbol = symbol.replace("G", "B") // d3 uses G for giga
     
     // Format number to precision level using proper scale
     value = d3.formatPrefix(value).scale(value)
     value = parseFloat(d3.format(".3g")(value))
-    return value + symbol;
+    var return_value = value + symbol;
   }
   else {
-    return d3.format(",f")(value)
+    var return_value = d3.format(",f")(value)
   }
+  
+  var total_labels = {
+        "val_usd": ["$"," USD"],
+        "wage": ["$"," BRL"],
+        "total": [""," employees"]
+      }
+
+  if (total_labels[name]) {
+    var labels = total_labels[name]
+    return_value = labels[0] + return_value + labels[1]
+  }
+
+  return return_value
   
 }
 
@@ -95,10 +106,12 @@ visual.ui.loading = function(parent) {
     .attr("class","text")
     
   this.show = function() {
-
-    self.div
-      .style("display","block")
-      .style("opacity",1)
+    
+    self.div.style("display","block")
+      
+    setTimeout(function(){
+      self.div.style("opacity",1)
+    },5)
       
     return self
   }

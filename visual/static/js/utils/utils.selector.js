@@ -364,13 +364,13 @@ function Selector() {
             header_select.style("display","none")
           }
           
-          if (name == "bra") {
+          if (type == "bra") {
             var d = depths.indexOf(x.id.length)
             var length = depths[d+1]
             var prefix = visual.format.text("bra_"+length+"_plural")
           }
-          else var prefix = visual.format.text(name+"_plural")
-          if (x.id == "all" && name != "bra") {
+          else var prefix = visual.format.text(type+"_plural")
+          if (x.id == "all" && type != "bra") {
             title.text(prefix)
           }
           else {
@@ -437,12 +437,12 @@ function Selector() {
           
             text.append("div")
               .attr("class","search_sub")
-              .html(visual.format.text(name+"_"+v.id.length))
+              .html(visual.format.text(type+"_"+v.id.length))
                
             if (v[value]) {
               text.append("div")
                 .attr("class","search_data")
-                .text(visual.format.text(value)+": "+visual.format.number({"value": v[value], "name": value}))
+                .text(visual.format.text(value)+": "+visual.format.number(v[value],value))
             }
             
             var buttons = item.append("div")
@@ -452,7 +452,7 @@ function Selector() {
               
               var d = depths.indexOf(v.id.length)
               var length = depths[d+1]
-              var suffix = visual.format.text(name+"_"+length+"_plural")
+              var suffix = visual.format.text(type+"_"+length+"_plural")
               
               buttons.append("div")
                 .attr("class","leon button")
@@ -461,7 +461,7 @@ function Selector() {
                   select_value(v);
                 });
             }
-            else if (name == "bra" && v.id.length == depths[depths.length-1]) {
+            else if (type == "bra" && v.id.length == depths[depths.length-1]) {
 
               text.append("div")
                 .attr("id","withins"+v.id)
@@ -561,7 +561,7 @@ function Selector() {
             "cbo": "num_emp",
             "isic": "num_emp",
           },
-          value = sort_types[name] ? sort_types[name] : null,
+          value = sort_types[type] ? sort_types[type] : null,
           sorts = ["name"]
           
       if (value) {
@@ -640,7 +640,7 @@ function Selector() {
   util.type = function(value) {
     if (!arguments.length) return name;
     name = value
-    type = name == "bra2" ? "bra" : name;
+    type = value.split("_")[0]
     return util;
   }
   

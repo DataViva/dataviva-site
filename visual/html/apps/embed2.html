@@ -234,6 +234,19 @@
     app.vars = {{ global_vars|safe }}
     app.solos = []
     app.filters = []
+
+    app.html = function(obj,list) {
+      if (app.build.app.type == "rings" && list) {
+        var cats = []
+        list.forEach(function(n){
+          var id = n.id.slice(0,depths[app.build.output][0])
+          if (cats.indexOf(id) < 0) cats.push(id)
+        })
+        builder.key(cats)
+      }
+      console.log(obj)
+      return "Recommended Apps Coming Soon..."
+    }
     
     // Define global viz-whiz app parameters
     app.viz = vizwhiz.viz()
@@ -282,6 +295,7 @@
       .number_format(visual.format.number)
       .name_array(["name","display_id"])
       .background("#fafafa")
+      .click_function(app.html)
     
     // Start building a new app
     app.start = function(new_url) {
@@ -394,7 +408,7 @@
                 },"/static/json/coords/wld_land.json")
               }
               
-              var state = app.build.bra.id.substr(0,2)
+              var state = app.build.bra[0].id.substr(0,2)
               if (!app.coords[state]) {
                 q.defer(function(u,callback){
                   d3.json(u,function(d){
@@ -409,7 +423,7 @@
             if (app.build.app.type == "bubbles") {
               
               app.build.req_url = app.build.data_url
-                .replace(app.build.bra.id,"all")
+                .replace(app.build.bra[0].id,"all")
                 
               if (!app.data[app.build.req_url]) {
                 q.defer(function(u,callback){
@@ -422,7 +436,7 @@
               }
                 
               app.build.else_url = app.build.data_url
-                .replace(app.build.filter1.id,"all")
+                .replace(app.build.isic[0].id,"all")
                 
               if (!app.data[app.build.else_url]) {
                 q.defer(function(u,callback){
@@ -445,18 +459,11 @@
               }
               else if (app.build.app.type == "rings") {
                 
-                if (app.build.output == "cbo") {
-                  var node_id = app.build.filter2.id
-                }
-                else {
-                  var node_id = app.build.filter1.id
-                }
-                
                 var node = app.networks[app.build.output].nodes.filter(function(n){
-                  return n.id == node_id
+                  return n.id == app.build[app.build.output][0].id
                 })[0]
                 
-                if (app.build.filter1 != "all" && node_id.length == depths[app.build.output[0]]) {
+                if (app.build[app.build.output][0].id.length == depths[app.build.output[0]]) {
                   app.error("Not available for Parent Categories")
                 }
                 else if (!node) {
@@ -467,7 +474,7 @@
                 }
                 
               }
-              else if (app.build.app.type == "geo_map" && app.bra.id == "all") {
+              else if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
                 app.error("Geo Map only available for States");
               }
               else if (app.build.app.type == "pie_scatter") {
@@ -519,10 +526,13 @@
       d3.select("#app_controls").selectAll("*").remove()
       
       // Create Key
-      d3.select("#ui_bottom").append("div")
-        .attr("id","key")
-        .datum(app.attrs[app.build.output])
-        .call(Key().type(app.build.output))
+      if (app.build.app.type != "geo_map") {
+
+        d3.select("#ui_bottom").append("div")
+          .attr("id","key")
+          .datum(app.attrs[app.build.output])
+          .call(Key().type(app.build.output))
+      }
       
       app.build.ui.forEach(function(ui){
         if (ui.type == "years") {
@@ -642,7 +652,7 @@
         app.viz
           .links(app.networks[app.build.output].edges)
           .nodes(app.networks[app.build.output].nodes)
-          .highlight(app.build.filter1.id)
+          .highlight(app.build[app.build.output][0].id)
           .active_var("active")
       }
   
@@ -651,11 +661,11 @@
       /******************************/
       else if (app.build.app.type == "geo_map") {
         app.viz
-          .coords(app.coords[app.build.bra.id.substr(0,2)])
+          .coords(app.coords[app.build.bra[0].id.substr(0,2)])
           .map(app.land)
           .tiles(false)
       
-        if (app.build.bra.id.length == 8) app.viz.highlight(app.build.bra.id)
+        if (app.build.bra[0].id.length == 8) app.viz.highlight(app.build.bra[0].id)
     
       } 
   
@@ -675,7 +685,6 @@
           .xaxis_var("year")
           .xaxis_scale("linear")
           .yaxis_scale("linear")
-          .total_bar("")
       } 
 
       /******************************/
@@ -710,7 +719,7 @@
         .datum(app.data[app.build.data_url][format[app.build.app.type]])
         
       app.resize()
-      builder.key()
+      if (app.build.app.type != "rings") builder.key()
       loading.hide()
       
     }
@@ -722,21 +731,21 @@
         app[type+"s"] = value
         
         var ids = []
-        if (app.solos.length >= 1 && app.solos.length <= cats.length/2) {
+        if (app.solos.length >= 1 && app.solos.length <= app.categories.length/2) {
           var prefix = "Showing only "
           ids = app.solos
         }
-        else if (app.solos.length > cats.length/2) {
+        else if (app.solos.length > app.categories.length/2) {
           var prefix = "Excluding "
           cats.forEach(function(c){
             if (app.solos.indexOf(c) < 0) ids.push(c)
           })
         }
-        else if (app.filters.length >= 1 && app.filters.length <= cats.length/2) {
+        else if (app.filters.length >= 1 && app.filters.length <= app.categories.length/2) {
           var prefix = "Excluding "
           ids = app.filters
         }
-        else if (app.filters.length > cats.length/2) {
+        else if (app.filters.length > app.categories.length/2) {
           var prefix = "Showing only "
           cats.forEach(function(c){
             if (app.filters.indexOf(c) < 0) ids.push(c)
@@ -768,7 +777,7 @@
         
         app.vars[type] = value
         builder.url()
-        if (type == "year") builder.key();
+        if (type == "year" && app.build.app.type != "rings") builder.key();
 
         if (type == "axes") {
           d3.select("#app").call(app.xaxis_var("cp_bra2_"+value).yaxis_var("cp_bra_"+value))
@@ -881,8 +890,8 @@
                       if (!d[key]) d[key] = 0
                       d[key] += leaf[key]
                     }
-                    if (leaf.bra_id == bra.id) var k = "cp_bra_"+key
-                    else if (leaf.bra_id == bra2.id) var k = "cp_bra2_"+key
+                    if (leaf.bra_id == app.build.bra[0].id) var k = "cp_bra_"+key
+                    else if (leaf.bra_id == app.build.bra[1].id) var k = "cp_bra2_"+key
                     d[k] = leaf[key]
                   }
                 }
@@ -909,6 +918,7 @@
           obj.icon = visual.icon(obj.id,out)
           
           if (obj.wage && obj.num_emp) obj.wage_avg = obj.wage/obj.num_emp;
+          else obj.wage_avg = 0
           
           obj.active = obj.rca >=1 ? true : false;
           
@@ -958,25 +968,11 @@
             "required_wage_avg",
             undefined
           ],
-          val = app.vars.value_var,
-          total_labels = {
-            "val_usd": ["$"," USD"],
-            "wage": ["$"," BRL"],
-            "total": [""," employees"]
-          }
+          val = app.vars.value_var
         
       if (exclusions.indexOf(val) >= 0) return false;
-
-      var total_obj = {
-        "prefix": format_name(val)+": "
-      }
-    
-      if (total_labels[val]) {
-        total_obj.prefix += total_labels[val][0]
-        total_obj.suffix = total_labels[val][1]
-      }
-    
-      return total_obj;
+      
+      return {"prefix": format_name(val)+": ", "suffix": ""};
         
     }
     
@@ -1127,9 +1123,8 @@
 
       if (!static) {
         var url = app.url.split("/")
-        url[index] = obj.id
+        url[url_index] = obj.id
         url = url.join("/")
-       
         app.start(url)
       }
        
@@ -1229,19 +1224,36 @@
         
     }
     
-    builder.key = function() {
+    builder.key = function(cats) {
       
-      d3.selectAll("div.key_icon_container")
-        .style("display",function(){
-          var id = this.id.slice(3)
-          if (app.build.app.type != "stacked") {
-            cats = app.data[app.build.data_url].categories[app.vars.year]
+      if (["network","geo_map"].indexOf(app.build.app.type) < 0) {
+        if (!cats) {
+          if (app.build.app.type != "network") {
+            if (app.build.app.type != "stacked") {
+              var cats = app.data[app.build.data_url].categories[app.vars.year]
+            }
+            else {
+              var cats = app.data[app.build.data_url].categories.all
+            }
           }
           else {
-            cats = app.data[app.build.data_url].categories.all
+            var cats = []
+            app.networks[app.build.output].nodes.forEach(function(n){
+              var id = n.id.slice(0,depths[app.build.output][0])
+              if (cats.indexOf(id) < 0) cats.push(id)
+            })
           }
-          return cats.indexOf(id) < 0 ? "none" : "inline-block";
-        })
+        }
+      
+        d3.selectAll("div.key_icon_container")
+          .style("display",function(){
+            var id = this.id.slice(3)
+            return cats.indexOf(id) < 0 ? "none" : "inline-block";
+          })
+      
+        app.categories = cats
+        
+      }
         
     }
     
@@ -1276,8 +1288,8 @@
             callback = builder.filter
       }
     
-      // if (app.build.bra.distance) {
-//         var dist = app.build.bra.distance
+      // if (app.build.bra[0].distance) {
+//         var dist = app.build.bra[0].distance
 //       }
 //       else {
 //         var dist = 0
@@ -1287,7 +1299,7 @@
         .callback(callback)
         // .distance(dist)
         .initial_value(init)
-        .type(type)
+        .type(id)
     
       d3.select("#popover")
         .call(selector);
