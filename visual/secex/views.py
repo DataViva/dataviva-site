@@ -24,7 +24,15 @@ def per_request_callbacks(response):
 ''' Given a "bra" string from URL, turn this into an array of Bra
     objects'''
 def parse_bras(bra_str):
-    if "." in bra_str:
+    if ".show." in bra_str:
+        # the '.show.' indicates that we are looking for a specific nesting
+        bar_id, nesting = bra_str.split(".show.")
+        # filter table by requested nesting level
+        bras = Bra.query \
+                .filter(Bra.id.startswith(bra_id)) \
+                .filter(func.char_length(Attr.id) == nesting).all()
+        bras = [b.serialize() for b in bras]
+    elif "." in bra_str:
         # the '.' indicates we are looking for bras within a given distance
         bra_id, distance = bra_str.split(".")
         bras = exist_or_404(Bra, bra_id)
@@ -73,9 +81,12 @@ def make_query(data_table, url_args, **kwargs):
     if "bra_id" in kwargs:
         if "show." in kwargs["bra_id"]:
             # the '.' indicates that we are looking for a specific bra nesting
-            ret["bra_level"] = kwargs["bra_id"].split(".")[1]
+            ret["bra_level"] = kwargs["bra_id"].split("show.")[1]
             # filter table by requested nesting level
             query = query.filter(func.char_length(data_table.bra_id) == ret["bra_level"])
+            if ".show." in kwargs["bra_id"]:
+                bra_filter = kwargs["bra_id"].split(".show.")[0]
+                query = query.filter(data_table.bra_id.startswith(bra_filter))
         elif "show" not in kwargs["bra_id"]:
             # otherwise we have been given specific bra(s)
             ret["location"] = parse_bras(kwargs["bra_id"])
