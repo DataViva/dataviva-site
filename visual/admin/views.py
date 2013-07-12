@@ -6,6 +6,8 @@ from datetime import datetime
 # models
 from visual.account.models import User
 from visual.ask.models import Question, Status
+# forms
+from visual.admin.forms import AdminQuestionUpdateForm
 
 mod = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -57,17 +59,20 @@ def update_user(user_id):
     
     return jsonify( {'user': user.serialize()} )
 
-@mod.route('/questions/', defaults={'status': 'pending'})
+@mod.route('/questions/')
 @mod.route('/questions/<status>/')
 @login_required
-def admin_questions(status):
+def admin_questions(status=None):
+    
+    if not status:
+        return redirect(url_for(".admin_questions", status="pending"))
+    
     offset = request.args.get('offset', 0)
     limit = 50
     
     if request.is_xhr:
         
         # get all users EXCEPT the logged in user
-        status = status.capitalize()
         curr_status = Status.query.filter_by(name=status).first_or_404()
         query = Question.query.filter_by(status = curr_status)
         
@@ -77,6 +82,28 @@ def admin_questions(status):
         return jsonify({"activities":items})
     
     return render_template("admin/admin_questions.html")
+
+@mod.route('/questions/<status>/<int:question_id>/', methods=['GET', 'POST'])
+@login_required
+def admin_questions_edit(status, question_id):
+    q = Question.query.get_or_404(question_id)
+    s = Status.query.filter_by(name=status).first_or_404()
+    form = AdminQuestionUpdateForm()
+    
+    if form.validate_on_submit():
+        q.status = form.status.data
+        q.status_notes = form.answer.data
+        db.session.add(q)
+        db.session.commit()
+        flash('This question has now been updated.')
+        return redirect(url_for('.admin_questions', status=q.status.name))
+    
+    # set defaults
+    form.status.data = s
+    form.answer.data = q.status_notes
+    
+    return render_template("admin/admin_questions_edit.html", 
+                            question=q, status=status, form=form)
 
 '''
 ###############################

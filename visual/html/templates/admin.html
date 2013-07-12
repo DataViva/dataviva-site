@@ -13,6 +13,8 @@
     {% set question_navigation_bar = [
         ('pending', 'Pending'),
         ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+        ('duplicate', 'Duplicate')
     ] -%}
     {% set active_page = request.endpoint -%}
     {% set active_question_page = request.view_args.status -%}

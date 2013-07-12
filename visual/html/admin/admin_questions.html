@@ -3,8 +3,6 @@
 
 {% block admin_content %}
 
-Welcome Admin!
-
 <div class="feed">
   
   <table>
@@ -13,6 +11,7 @@ Welcome Admin!
         <th>Question</th>
         <th>User</th>
         <th>Date</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -35,16 +34,14 @@ function item_formatter(container_el, activities){
   attrs_enter.append("td").text(function(d){ return d.question; })
   attrs_enter.append("td").text(function(d){ return d.user.fullname; })
   attrs_enter.append("td").text(function(d){ return moment(d.timestamp).calendar(); })
+  attrs_enter.append("td")
+    .append("a")
+    .attr("href", function(d){
+      return window.location + d.id;
+    })
+    .text("Edit")
 
 }
-
-// function(d){ 
-//       var role = "User";
-//       if(d.role){
-//         if(parseInt(d.role) > 1) role = "Super Admin";
-//         return role = "Admin";
-//       }
-//   }
 
 var is = infinite_scroll().format_items(item_formatter);
 

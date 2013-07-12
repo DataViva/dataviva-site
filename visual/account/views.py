@@ -11,7 +11,6 @@ from visual.account.models import User, Starred, ROLE_USER, ROLE_ADMIN
 from visual.ask.models import Question, Status, Reply
 # forms
 from visual.ask.forms import AskForm
-from visual.admin.forms import StatusNotesForm, StatusForm
 # utils
 from visual.utils import exist_or_404, Pagination
 # login types
