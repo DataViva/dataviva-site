@@ -27,38 +27,11 @@ def before_request():
     g.sabrina["face"] = "smirk"
     g.sabrina["hat"] = "glasses"
 
-@mod.route('/embed/', defaults={"app_name": "tree_map", "data_type": "rais", "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
-@mod.route('/embed/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/')
-def embed(app_name=None,data_type=None,bra_id=None,filter1=None,filter2=None,output=None):
-    
-    # init variables
-    global_vars = {x[0]:x[1] for x in request.args.items()}
-    if "controls" not in global_vars:
-        global_vars["controls"] = "true"
-    starred = 0
-    app_id = "/".join([app_name, data_type, bra_id, filter1, filter2, output])
-    
-    # if user is logged in see if they have starred this app
-    if g.user and g.user.is_authenticated():
-        is_starred = Starred.query.filter_by(user=g.user, app_id=app_id).first()
-        starred = 1 if is_starred else -1
-    
-    return render_template("apps/embed.html",
-        starred = starred,
-        form = DownloadForm(),
-        app_name = app_name,
-        data_type = data_type,
-        bra_id = bra_id,
-        filter1 = filter1,
-        filter2 = filter2,
-        output = output,
-        global_vars = json.dumps(global_vars))
-
-@mod.route('/embed2/', defaults={"app_name": "tree_map", "data_type": "rais", 
+@mod.route('/embed/', defaults={"app_name": "tree_map", "dataset": "rais", 
             "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
-@mod.route('/embed2/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/'
+@mod.route('/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/'
             '<output>/')
-def embed2(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
+def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             output=None):
     
     '''Since the "builds" are held in the database with placeholders for 
@@ -120,7 +93,7 @@ def embed2(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             "current_build": current_build.serialize()
         })
         
-    return render_template("apps/embed2.html",
+    return render_template("apps/embed.html",
         all_builds = all_builds,
         starred = starred,
         form = DownloadForm(),
@@ -245,7 +218,10 @@ def get_geo_location(ip):
     return None
         
 @mod.route('/builder/')
-def builder():
+@mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/'
+            '<output>/')
+def builder(app_name=None, dataset=None, bra_id=None, filter1=None, 
+                filter2=None, output=None):
     return render_template("apps/builder.html")
 
 @mod.route('/download/', methods=['GET', 'POST'])

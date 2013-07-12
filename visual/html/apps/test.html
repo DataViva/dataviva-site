@@ -11,11 +11,6 @@
 {% block js %}
 
   <script type="text/javascript">
-  
-    var app_filters = [],
-        app_solos = [],
-        distance_seperator = ".",
-        combo_seperator = "+"
     
     function download(obj) {
       
@@ -26,22 +21,6 @@
       
       visual.download(obj.id,title);
       
-    }
-
-    /************************/
-    /* UI Control Functions */
-    /************************/
-    
-    function app_filter(value) { 
-      app_filters = value
-      app_filtering();
-      d3.select("#app").call(app.filter(value)) 
-    }
-    
-    function solo(value) {
-      app_solos = value
-      app_filtering();
-      d3.select("#app").call(app.solo(value)) 
     }
   
   </script>
