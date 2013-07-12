@@ -85,6 +85,7 @@ def before_request():
 
 @mod.route('/', methods=['GET', 'POST'])
 def home():
+    g.page_type = "home"
     return render_template("home.html")
 
 @mod.route('access/')

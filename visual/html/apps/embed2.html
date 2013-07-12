@@ -3,7 +3,7 @@
 
 {% block head %}
 
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/app_builder.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.apps.css" />
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.key.css" />
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
   
@@ -271,20 +271,20 @@
           "val_usd",
           "distance",
           "complexity",
-          "cp_bra_wage",
-          "cp_bra_wage_avg",
-          "cp_bra_num_emp",
-          "cp_bra_num_est",
-          "cp_bra_val_usd",
-          "cp_bra_distance",
-          "cp_bra_complexity",
-          "cp_bra2_wage",
-          "cp_bra2_wage_avg",
-          "cp_bra2_num_emp",
-          "cp_bra2_num_est",
-          "cp_bra2_val_usd",
-          "cp_bra2_distance",
-          "cp_bra2_complexity",
+          "cp_bra_0_wage",
+          "cp_bra_0_wage_avg",
+          "cp_bra_0_num_emp",
+          "cp_bra_0_num_est",
+          "cp_bra_0_val_usd",
+          "cp_bra_0_distance",
+          "cp_bra_0_complexity",
+          "cp_bra_1_wage",
+          "cp_bra_1_wage_avg",
+          "cp_bra_1_num_emp",
+          "cp_bra_1_num_est",
+          "cp_bra_1_val_usd",
+          "cp_bra_1_distance",
+          "cp_bra_1_complexity",
           "employed",
           "elsewhere",
           "total",
@@ -710,9 +710,9 @@
       else if (app.build.app.type == "compare") {
     
         app.viz
-          .xaxis_var("cp_bra2_"+app.vars.axes)
+          .xaxis_var("cp_bra_1_"+app.vars.axes)
           .xaxis_scale(app.vars.scale)
-          .yaxis_var("cp_bra_"+app.vars.axes)
+          .yaxis_var("cp_bra_0_"+app.vars.axes)
           .yaxis_scale(app.vars.scale)
           .spotlight(false)
     
@@ -721,9 +721,9 @@
       d3.select("#app")
         .html("")
         .datum(app.data[app.build.data_url][format[app.build.app.type]])
-        
-      app.resize()
+
       if (app.build.app.type != "rings") builder.key()
+      app.resize()
       loading.hide()
       
     }
@@ -781,13 +781,16 @@
         
         app.vars[type] = value
         builder.url()
-        if (type == "year" && app.build.app.type != "rings") builder.key();
+        if (type == "year" && app.build.app.type != "rings") {
+          builder.key()
+          app.resize()
+        }
 
         if (type == "axes") {
-          d3.select("#app").call(app.xaxis_var("cp_bra2_"+value).yaxis_var("cp_bra_"+value))
+          d3.select("#app").call(app.viz.xaxis_var("cp_bra_1_"+value).yaxis_var("cp_bra_0_"+value))
         }
         else if (type == "scale") {
-          d3.select("#app").call(app.xaxis_scale(value).yaxis_scale(value)) 
+          d3.select("#app").call(app.viz.xaxis_scale(value).yaxis_scale(value)) 
         }
         else if (type == "rca_scope") {
           d3.select("#app").call(app.viz.active_var(value))
@@ -814,9 +817,9 @@
         
         years.forEach(function(year){
           
-          var year_data = app.data[app.build.data_url].raw.filter(function(d){ return d.year == year; });
+          var year_data = data.raw.filter(function(d){ return d.year == year; });
           
-          var req_filtered = app.data[app.build.req_url].raw.filter(function(d){ return d.year == year && d.required >= 0.6 }),
+          var req_filtered = data.raw.filter(function(d){ return d.year == year && d.required >= 0.6 }),
               req_ids = []
               
           req_filtered.forEach(function(d){
@@ -894,8 +897,8 @@
                       if (!d[key]) d[key] = 0
                       d[key] += leaf[key]
                     }
-                    if (leaf.bra_id == app.build.bra[0].id) var k = "cp_bra_"+key
-                    else if (leaf.bra_id == app.build.bra[1].id) var k = "cp_bra2_"+key
+                    if (leaf.bra_id == app.build.bra[0].id) var k = "cp_bra_0_"+key
+                    else if (leaf.bra_id == app.build.bra[1].id) var k = "cp_bra_1_"+key
                     d[k] = leaf[key]
                   }
                 }
@@ -908,7 +911,7 @@
               
             }
           })
-          .entries(app_data[current_url].raw)
+          .entries(data.raw)
       }
       else {
         
@@ -1102,11 +1105,17 @@
       
       d3.selectAll("select.output > option")
         .each(function(){
-          var url = this.id.split("/")
-          if (url_index == 2 || url[url_index] != "all") url[url_index] = obj.id
+          var url = this.id.split("/"),
+              old_ids = url[url_index].split("+")
+              console.log(old_ids,index,obj.id)
+          if (old_ids[index] && (url_index == 2 || old_ids[index] != "all")) old_ids[index] = obj.id
+          url[url_index] = old_ids.join("+")
           this.id = url.join("/")
           this.value = url.join("/")
-          this.innerHTML = this.innerHTML.replace(old_name,new_name)
+          console.log(url)
+          if (this.innerHTML.indexOf(old_name) >= 0) {
+            this.innerHTML = this.innerHTML.replace(old_name,new_name)
+          }
         })
       
       leon.touch("select")
@@ -1248,12 +1257,19 @@
             })
           }
         }
+        
+        if (cats.length == 1) {
+          d3.select("div#key").style("display","none")
+        }
+        else {
+          d3.select("div#key").style("display","block")
       
-        d3.selectAll("div.key_icon_container")
-          .style("display",function(){
-            var id = this.id.slice(3)
-            return cats.indexOf(id) < 0 ? "none" : "inline-block";
-          })
+          d3.selectAll("div.key_icon_container")
+            .style("display",function(){
+              var id = this.id.slice(3)
+              return cats.indexOf(id) < 0 ? "none" : "inline-block";
+            })
+        }
       
         app.categories = cats
         
@@ -1280,7 +1296,7 @@
       if (s[1]) var index = s[1]
       
       if (type == "help") {
-        var init = app_name,
+        var init = app.build.app.type,
             callback = null
       }
       else if (type == "file") {

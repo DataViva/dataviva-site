@@ -7,12 +7,13 @@ visual.format = {};
 visual.format.text = function(text,name) {
   
   if (name == "id") return text
-  else if (text.indexOf("cp_bra") == 0) {
+  else if (text.indexOf("cp_bra_") == 0) {
     var arr = text.split("_")
     arr.shift()
-    var loc = arr.shift()
+    arr.shift()
+    var index = arr.shift()
     text = arr.join("_")
-    return window[loc].name + " ("+format_name(text)+")"
+    return app.build.bra[index].name_en + " ("+format_name(text)+")"
   }
   else {
     return format_name(text)

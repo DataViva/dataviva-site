@@ -33,15 +33,22 @@ a:hover {
   color: #888;
   display: block;
   font-size: 20px;
-  margin: 12px;
+  line-height: 22px;
+  margin: 10px;
   opacity: 0.8;
   padding: 12px;
   position: relative;
+  text-align: left;
+}
+
+.title.square, .decision.square, .help.square {
+  display: inline-block;
+  min-height: 136px;
+  width: 136px;
 }
 
 .title {
   opacity: 1;
-  margin-left: 0px;
   text-shadow: 0px 1px white;
 }
 
@@ -66,17 +73,8 @@ a:hover {
           box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
 }
 
-.title > h2, .decision > h2,
-.help > h2, .menu > h2 {
-  margin-bottom: 0px;
-}
-
-.title > p, .decision > p,
-.help > p, .menu > p {
-  margin-bottom: 6px;
-}
-
 body.general .decision,
+body.home .decision,
 body.guide .decision {
   background-color: #af1f24 !important; /* red */
 }

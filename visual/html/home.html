@@ -1,77 +1,60 @@
 {% extends "templates/site.html" %}
 
+{% block head %}
+
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.home.css" />
+
+{% endblock %}
+
 {% block body %}
 
-<div class="home_fullscreen"></div>
+<div id="fullscreen"></div>
+  
+<img id="big_sabrina" src="/static/img/home/sabrina.png">
 
-<div class="grid5col2">
-    <div class="home_sabrina"></div>
-</div>
-<div class="grid5col2">
+<div id="welcome" class="grid5col3">
+  
   <div class="title">
-    <div class="arrow"></div>
-    <div class="text">
-      <h2>Welcome!</h2>
-      <p>
-        My name is Sabrina, and I will help guide you in learning more about the economy of Minas Gerais.
-      </p>
-    </div>
+    <h2>Welcome!</h2>
+    My name is Sabrina, and I will help guide you learn more about the economy of Minas Gerais. Here are some good places to start:
   </div>
-  <a href="{{ url_for('guide.guide') }}" >
-    <div class="decision">
-      <div class="text">
-        <h2>Guide</h2>
-        <p>
-          Generate a report based on what you are looking for.
-        </p>
-      </div>
-      <div class="arrow"></div>
-    </div>
+  
+  <a class="decision square" href="{{ url_for('guide.guide') }}">
+    <div id="guide" class="icon"></div>
+    <h2>Guide</h2>
+    Generate a report based on what you are looking for.
   </a>
-  <a href="{{ url_for('apps.guide') }}" >
-    <div class="decision">
-      <div class="text">
-        <h2>Apps</h2>
-        <p>
-          Go straight for the visualizations.
-        </p>
-      </div>
-      <div class="arrow"></div>
-    </div>
+  
+  <a class="decision square" href="{{ url_for('apps.guide') }}">
+    <div id="apps" class="icon"></div>
+    <h2>Apps</h2>
+    Go straight for the visualizations.
   </a>
+  <br>
+  <div class="logo sponsor">Sponsored By:</div>
+  <a href="http://www.escritorio.mg.gov.br/" class="logo governo" target="_blank"></a>
+  <a href="http://www.fapemig.br/" class="logo fapemig" target="_blank"></a>
+  
 </div>
+
 {% endblock %}
 
 {% block js %}
 
   <script>
   
-    // d3.select("#footer")
-    //   .style("min-height",function(){
-    //     var h = this.offsetHeight
-    //     h -= parseFloat(d3.select(this).style("padding"))*2
-    //     return h+"px"
-    //   })
-  
     resizebg = function() {
-      
-      // d3.select("#footer")
-      //   .style("height",function(){
-      //     var h = window.innerHeight - this.offsetTop
-      //     h -= parseFloat(d3.select(this).style("padding"))*2
-      //     return h + "px"
-      //   })
       
       var w = window.innerWidth, 
           h = window.innerHeight,
           aspect = w/h
           
       if (aspect > 1.5) {
-        d3.select(".home_fullscreen")
+        d3.select("#fullscreen")
         .style("background-size",w+"px "+(w/1.5)+"px")
       }
       else {
-        d3.select(".home_fullscreen")
+        d3.select("#fullscreen")
         .style("background-size",(h*1.5)+"px "+h+"px")
       }
     }
@@ -81,11 +64,6 @@
     }
 
     resizebg()
-    // visual.sabrina({
-//       "div": d3.select("#sabrina"),
-//       "outfit": "casual",
-//       "emotion": "smile"
-//     })
     
   </script>
 

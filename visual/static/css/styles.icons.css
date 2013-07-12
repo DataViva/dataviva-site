@@ -1,0 +1,34 @@
+div.icon {
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: 35px 35px;
+  display: inline-block;
+  float: left;
+  height: 35px;
+  margin-right: 6px;
+  width: 35px;
+}
+
+div#guide.icon {
+  background-image: url("/static/img/nav/icons/guide_white.png");
+}
+
+div#profiles.icon {
+  background-image: url("/static/img/nav/icons/profiles_white.png");
+}
+
+div#apps.icon {
+  background-image: url("/static/img/nav/icons/apps_white.png");
+}
+
+div#data.icon {
+  background-image: url("/static/img/nav/icons/data_white.png");
+}
+
+div#ask.icon {
+  background-image: url("/static/img/nav/icons/ask_white.png");
+}
+
+div#learn.icon {
+  background-image: url("/static/img/nav/icons/learn_white.png");
+}

@@ -1,5 +1,7 @@
 #dev_banner {
   background-color: #333;
+  -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.5);
+          box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.5);
   color: white;
   display: block;
   font-size: 14px;
@@ -14,8 +16,6 @@
      -moz-transform: rotate(30deg);
       -ms-transform: rotate(30deg);
           transform: rotate(30deg);
-  -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.5);
-          box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.5);
   z-index: 5000;
 
 }
@@ -27,11 +27,14 @@
 }
 
 #header_container {
-  background-color: rgba(255,255,255,0.8);
-  width: 100%;
-  height: 56px;
+  background-color: rgba(255,255,255,0.9);
   -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
           box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+  height: 58px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 4000;
 }
 
 #header {
@@ -65,14 +68,15 @@
   background-position: top center;
   background-repeat: no-repeat;
   background-size: 35px 35px;
-  color: #cccccc;
+  color: black;
   font-size: 11px;
   margin-top: -4px;
+  opacity: 0.25;
   padding-top: 34px;
   text-align: center;
   width: 94px;
-  -webkit-transition: color .2s, background-image .2s;
-          transition: color .2s, background-image .2s;
+/*  -webkit-transition: color .2s, background-image .2s, opacity .2s;
+          transition: color .2s, background-image .2s, opacity .2s;*/
 }
 
 #header a#guide {
@@ -102,6 +106,7 @@
 #header a.active,
 #header a:hover {
   color: #cc0000;
+  opacity: 1;
 }
 
 #header a#guide.link.active,
@@ -170,6 +175,7 @@ a.account:hover {
 #site_breadcrumbs {
   font-size: 11px;
   margin: 10px auto;
+  margin-top: 60px;
   text-shadow: 0px 1px white;
   width: 800px;
 }
@@ -223,21 +229,21 @@ body.about a.site_crumb:hover {
 
 #footer {
   text-align: center;
-  color: #cccccc;
   font-size: 10px;
   padding: 10px;
-} 
-
-body.general #footer {
-  background-color: white;
-  -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
-          box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
-  margin: 0 auto;
-  opacity: 0.8;
-  width: 800px;
 }
 
-#footer a.logo {
+div.logo.sponsor {
+  color: #888;
+  display: inline-block;
+  font-size: 20px;
+  height: 75px;
+  line-height: 74px;
+  margin: 5px 10px;
+  text-shadow: 0px 1px white;
+}
+
+a.logo {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
@@ -248,24 +254,24 @@ body.general #footer {
   width: 120px;
 }
 
-#footer a.logo.governo {
+a.logo.governo {
   background-image: url("/static/img/nav/logo_governo_bw.jpg");
   -webkit-transition: background-image .1s, opacity .1s;
           transition: background-image .1s, opacity .1s;
 }
 
-#footer a.logo.governo:hover {
+a.logo.governo:hover {
   background-image: url("/static/img/nav/logo_governo_color.jpg");
   opacity: 1;
 }
 
-#footer a.logo.fapemig {
+a.logo.fapemig {
   background-image: url("/static/img/nav/logo_fapemig_bw.jpg");
   -webkit-transition: background-image .1s, opacity .1s;
           transition: background-image .1s, opacity .1s;
 }
 
-#footer a.logo.fapemig:hover {
+a.logo.fapemig:hover {
   background-image: url("/static/img/nav/logo_fapemig_color.jpg");
   opacity: 1;
 }

@@ -37,6 +37,39 @@ div#selector {
   height: 450px;
 }
 
+/*****************/
+/* Title Styling */
+/*****************/
+
+h2 {
+  display: block;
+  font-size: 30px;
+  font-weight: normal;
+  margin: 6px 0px 12px 0px;
+  opacity: 1;
+}
+
+h3 {
+  margin: 1% 0;
+  font-size: 16px;
+}
+
+h4 {
+  text-transform: uppercase;
+  color: #cccccc;
+  font-size: 30px;
+  margin-bottom: 1.2%;
+  letter-spacing: 1px;
+}
+
+h5 {
+  text-transform: uppercase;
+  color: #cccccc;
+  font-size: 30px;
+  margin-bottom: -1.8%;
+  letter-spacing: 1px;
+}
+
 /******************/
 /* Loader Styling */
 /******************/

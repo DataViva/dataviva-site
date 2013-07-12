@@ -27,32 +27,6 @@ hr.bold {
   display: none;
 }
 
-h2 {
-  margin-bottom: 2%;
-  line-height: 110%;
-}
-
-h3 {
-  margin: 1% 0;
-  font-size: 16px;
-}
-
-h4 {
-  text-transform: uppercase;
-  color: #cccccc;
-  font-size: 30px;
-  margin-bottom: 1.2%;
-  letter-spacing: 1px;
-}
-
-h5 {
-  text-transform: uppercase;
-  color: #cccccc;
-  font-size: 30px;
-  margin-bottom: -1.8%;
-  letter-spacing: 1px;
-}
-
 table {
   border-collapse: collapse;
   width: 100%;
@@ -155,29 +129,6 @@ table td.icon > div{
 
 .pagination .button {
   padding: .7% 1.1% .15% .9% !important;
-}
-
-.home_fullscreen {
-  background-image: url('/static/img/home/home.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  z-index: -1;
-}
-
-.home_sabrina {
-  background-image: url('/static/img/home/sabrina.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
-  float: right;
-  height: 556px;
-  width: 280.5px;
 }
 
 .tall_background {

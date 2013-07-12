@@ -8,10 +8,10 @@ function Key() {
       
       reset_check = function() {
         if (key_solos.length || key_filters.length) {
-          reset_button.style("visibility","visible")
+          reset_button.style("display","inline-block")
         }
         else {
-          reset_button.style("visibility","hidden")
+          reset_button.style("display","none")
         }
       }
       
