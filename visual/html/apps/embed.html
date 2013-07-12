@@ -16,6 +16,8 @@
 
 {% block content %}
 
+  <div id="mask" class="loading"></div>
+
   <div id="builder">
 
     <div id="app_selector">
@@ -165,6 +167,12 @@
   <script src="/static/js/utils/utils.selector.js"></script>
   
   <script type="text/javascript">
+    
+    var loading = visual.ui.loading("body")
+  
+    loading.text("Initializing App").show()
+    
+    d3.select("#mask").remove()
   
     // App Data Formatting
     var format = {
@@ -187,8 +195,6 @@
       "bra2": visual.depths("bra"),
       "wld": visual.depths("wld")
     }
-    
-    var loading = visual.ui.loading("body")
     
     // Create Filter Selector
     var selector = Selector()
