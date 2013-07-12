@@ -47,6 +47,8 @@ class Build(db.Model, AutoSerialize):
         '''If build requires 2 bras and only 1 is given, supply a 2nd'''
         if "+" in self.bra and "+" not in bra_id:
             bra_id = bra_id + "+sp"
+        elif "+" not in self.bra and "+" in bra_id:
+            bra_id = bra_id.split("+")[0]
         self.bra = []
         if bra_id == "all":
             self.bra.append(Wld.query.get("sabra"))
