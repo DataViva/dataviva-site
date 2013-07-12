@@ -105,12 +105,19 @@ visual.ui.loading = function(parent) {
   this.words = self.div.append("div")
     .attr("class","text")
     
-  this.show = function() {
+  this.timing = parseFloat(self.div.style("transition-duration"),10)*1000
+    
+  this.show = function(callback) {
     
     self.div.style("display","block")
       
     setTimeout(function(){
       self.div.style("opacity",1)
+
+      if (callback) {
+        setTimeout(callback,self.timing)
+      }
+      
     },5)
       
     return self
@@ -119,10 +126,10 @@ visual.ui.loading = function(parent) {
   this.hide = function() {
     
     self.div.style("opacity",0)
-    var timing = parseFloat(self.div.style("transition-duration"),10)*1000
+    
     setTimeout(function(){
       self.div.style("display","none")
-    },timing)
+    },self.timing)
     
     return self
       

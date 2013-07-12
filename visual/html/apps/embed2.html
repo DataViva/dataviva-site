@@ -300,13 +300,17 @@
     // Start building a new app
     app.start = function(new_url) {
       
-      loading.text("Building App").show()
+      if (new_url) app.url = new_url
+      
+      loading.text("Building App").show(app.create)
+      
+    }
+    
+    app.create = function() {
           
       d3.select("#ui_bottom").selectAll("*").remove();
       d3.select("#app_controls").selectAll("*").remove();
       vizwhiz.tooltip.remove();
-      
-      if (new_url) app.url = new_url
       
       d3.json("/apps/embed2/"+app.url)
         .header("X-Requested-With", "XMLHttpRequest")
