@@ -3,15 +3,7 @@
 
 {% block admin_content %}
 
-{% if activity_type == "starred" %}
 <h5>Starred <i class=" icon-star-empty"></i></h5>
-{% elif activity_type == "questions" %}
-<h5>Questions</h5>
-{% elif activity_type == "replies" %}
-<h5>Replies</h5>
-{% else %}
-<h5>History</h5>
-{% endif %}
 <hr class="bold"/>
 
 <div class="feed"></div>
@@ -26,21 +18,11 @@ function item_formatter(container_el, activities){
       parseDate = d3.time.format.iso.parse;
   
   var activities_enter = d3.select(container_el).selectAll(".activity")
-    .data(activities, function(d){ return d[1].app_id; })
+    .data(activities, function(d){ return d.app_id; })
     .enter().insert("a", "div.loading")
       .attr("class", "activity")
       .attr("href", function(d){
-        var url = "#"
-        if(d[0] == "starred"){
-          url = "/embed/" + d[1].app_id;
-        }
-        else if(d[0] == "questions"){
-          url = "/ask/question/" + d[1].slug;
-        }
-        else if(d[0] == "replies"){
-          url = "/ask/question/" + d[1].question_id;
-        }
-        return url;
+        return "/embed/" + d.app_id;
       })
       .append("div")
       .attr("class", "feed-item")
@@ -52,25 +34,8 @@ function item_formatter(container_el, activities){
   // add icon
   title_div.append("img")
     .attr("src", function(d){
-      var img_url = "/static/img/icons/tiles/";
-  
-      // if this is a starred app, we need to figure out which app it is
-      // and use this app's icon
-      if(d[0] == "starred"){
-        var app_type = d[1].app_id.split("/")[0]
-        img_url += app_type+"_tile.png";
-      }
-
-      // otherwise it's an ask sabrina question/reply
-      else {
-        if(d[0] == "questions"){
-          img_url += "question_tile.png";
-        }
-        else {
-          img_url += "reply_tile.png";
-        }
-      }
-      return img_url
+      var app_type = d.app_id.split("/")[0]
+      return "/static/img/icons/tiles/"+app_type+"_tile.png";
     })
     .attr("width", "23px")
     .attr("padding-bottom", "23px")
@@ -78,15 +43,14 @@ function item_formatter(container_el, activities){
     // the title (strip out HTML!)
     title_div.append("p")
       .html(function(d){
-        var title = d[1].app_name ? d[1].app_name : d[1].question ? d[1].question : d[1].body;
-        return title.replace(/(<([^>]+)>)/ig,"");
+        return d.app_name;
       })
       
     // lastly, the div that holds the data
     activities_enter.append("div")
         .attr("class", "feed_date")
         .text(function(d) { 
-          return formatDate(parseDate(d[1].timestamp)); 
+          return formatDate(parseDate(d.timestamp)); 
         });
 
 }

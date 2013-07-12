@@ -1,4 +1,4 @@
-<!-- extend base layout -->
+<!-- extend from site layout -->
 {% extends "templates/site.html" %}
 
 {% block head %}
@@ -17,48 +17,45 @@ form textarea {
 {% endblock %}
 
 {% block body %}
-<div class="grid5col3">
-  <div id="user-info">
-    <img src="{{ g.user.avatar(36) }}">
-  
-    {% if g.user.fullname %}
-    <h1>{{ g.user.fullname }}</h1>
-    {% else %}
-    <h1>{{ g.user.nickname }}</h1>
-    {% endif %}
-  
-    {% if g.user.bio %}
-    <p>{{ g.user.bio|safe }}</p>
-    {% endif %}
-  </div>
-</div>
-<div id="account_filters" class="grid5col2">
-  <a href="{{ url_for('account.activity', activity_type='starred') }}">Starred</a> |
-  <a href="{{ url_for('account.activity', activity_type='questions') }}">Questions</a> |
-  <a href="{{ url_for('account.activity', activity_type='replies') }}">Replies</a>
-</div>
-
-<div class="grid5col5">
-  <div id="admin-content">
+<div>
+  <div class="grid5col1">
     
-    {% block admin_content %}
-    {% endblock %}
+    {% set navigation_bar = [
+        ('account.starred', 'Starred Apps'),
+        ('account.questions', 'Questions'),
+        ('account.replies', 'Replies'),
+    ] -%}
+    {% set question_navigation_bar = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+        ('duplicate', 'Duplicate')
+    ] -%}
+    {% set active_page = request.endpoint -%}
+    {% set active_question_page = request.view_args.status -%}
 
+    <nav>
+      <ul id="navigation">
+      {% for id, caption in navigation_bar %}
+        <li{% if id == active_page %} class="active"{% endif %}><a href="{{ url_for(id) }}">{{ caption|e }}</a></li>
+        {% if active_page == 'account.questions' and id == 'account.questions' %}
+          <ul>
+          {% for q_id, q_caption in question_navigation_bar %}
+            <li{% if q_id == active_question_page %} class="active"{% endif %}><a href="{{ url_for(id, status=q_id) }}">{{ q_caption|e }}</a></li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endfor %}
+      </ul>
+    </nav>
+    
   </div>
 </div>
 
+<div id="admin-content" class="grid5col4">
+{% block admin_content %}
 {% endblock %}
+</div>
 
-{% block js %}
-<script type="text/javascript">
-
-  var path = window.location.pathname.split("/")
-  var page = path[2]
-  if (page == "") page = "activity"
-  d3.select("div#"+page).attr("class",function(){
-    return this.className+" active";
-  })
-  
-</script>
+</div>
 {% endblock %}
-

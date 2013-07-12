@@ -756,7 +756,7 @@ p.reply {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 700px;
+/*  width: 700px;*/
 }
 
 .feed_date {

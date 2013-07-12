@@ -43,6 +43,65 @@ def complete_login():
 def account_home():
     return redirect(url_for('account.activity'))
 
+@mod.route('/starred/')
+def starred():
+    
+    offset = request.args.get('offset', 0)
+    activity_dict = {}
+    activity_list = []
+    limit = 50
+    
+    if request.is_xhr:
+        items = Starred.query.filter_by(user=g.user) \
+                    .order_by("timestamp desc") \
+                    .limit(limit).offset(offset).all()
+        items = [i.serialize() for i in items]
+        
+        return jsonify({"activities":items})
+    
+    return render_template("account/starred.html")
+
+@mod.route('/questions/')
+@mod.route('/questions/<status>/')
+def questions(status=None):
+    
+    offset = request.args.get('offset', 0)
+    activity_dict = {}
+    activity_list = []
+    limit = 50
+    
+    if request.is_xhr:
+        status = Status.query.filter_by(name=status).first()
+        qs = Question.query
+        if status:
+            qs = qs.filter_by(status=status)
+        qs = qs.filter_by(user=g.user) \
+                    .order_by("timestamp desc") \
+                    .limit(limit).offset(offset)
+        items = [q.serialize() for q in qs.all()]
+    
+        return jsonify({"activities":items})
+    
+    return render_template("account/questions.html")
+
+@mod.route('/replies/')
+def replies():
+    
+    offset = request.args.get('offset', 0)
+    activity_dict = {}
+    activity_list = []
+    limit = 50
+    
+    if request.is_xhr:
+        items = Reply.query.filter_by(user=g.user) \
+                    .order_by("timestamp desc") \
+                    .limit(limit).offset(offset).all()
+        items = [i.serialize() for i in items]
+        
+        return jsonify({"activities":items})
+    
+    return render_template("account/replies.html")
+
 @mod.route('/activity/')
 @mod.route('/activity/<activity_type>/')
 def activity(activity_type=None):

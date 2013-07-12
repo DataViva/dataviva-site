@@ -1,0 +1,63 @@
+<!-- extend admin_template -->
+{% extends "templates/account.html" %}
+
+{% block admin_content %}
+
+<h5>Questions</h5>
+<hr class="bold"/>
+
+<div class="feed"></div>
+
+<script src="/static/js/utils/utils.infinite_scroll.js"></script>
+<script>
+
+
+function item_formatter(container_el, activities){
+  
+  var formatDate = d3.time.format("%B %-d, %Y"),
+      parseDate = d3.time.format.iso.parse;
+  
+  var activities_enter = d3.select(container_el).selectAll(".activity")
+    .data(activities, function(d){ return d.app_id; })
+    .enter().insert("a", "div.loading")
+      .attr("class", "activity")
+      .attr("href", function(d){
+        return "/ask/question/" + d.slug;
+      })
+      .append("div")
+      .attr("class", "feed-item")
+  
+  // the title div housing the icon and title
+  var title_div = activities_enter.append("div")
+      .attr("class", "feed_title")
+  
+  // add icon
+  title_div.append("img")
+    .attr("src", "/static/img/icons/tiles/question_tile.png")
+    .attr("width", "23px")
+    .attr("padding-bottom", "23px")
+
+    // the title (strip out HTML!)
+    title_div.append("p")
+      .html(function(d){
+        return d.question;
+      })
+      
+    // lastly, the div that holds the data
+    activities_enter.append("div")
+        .attr("class", "feed_date")
+        .text(function(d) { 
+          return formatDate(parseDate(d.timestamp)); 
+        });
+
+}
+
+var is = infinite_scroll()
+          .format_items(item_formatter);
+
+d3.select(".feed")
+  .call(is)
+
+</script>
+
+{% endblock %}
