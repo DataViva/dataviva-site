@@ -12,19 +12,19 @@
       How do you want to access the data?
     </div>
     
-    <a href="{{ url_for('data.query') }}" class="decision">
+    <a href="{{ url_for('data.query') }}" class="decision square">
       <h2>Database</h2>
-      <p>Custom data queries of our database.</p>
+      Custom data queries of our database.
     </a>
     
-    <a href="{{ url_for('about.api') }}" class="decision">
+    <a href="{{ url_for('about.api') }}" class="decision square">
       <h2>API</h2>
-      <p>Access the data directly.</p>
+      Access the data directly.
     </a>
     
-    <a href="{{ url_for('data.classifications', attr='hs') }}" class="decision">
+    <a href="{{ url_for('data.classifications', attr='hs') }}" class="decision square">
       <h2>Source List</h2>
-      <p>Browse the various classifications.</p>
+      Browse the various classifications.
     </a>
   
   </div>

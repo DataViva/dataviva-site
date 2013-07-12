@@ -43,8 +43,20 @@ a:hover {
 
 .title.square, .decision.square, .help.square {
   display: inline-block;
-  min-height: 136px;
-  width: 136px;
+}
+
+.grid5col2 > .title.square,
+.grid5col2 > .decision.square,
+.grid5col2 > .help.square {
+  min-height: 140px;
+  width: 140px;
+}
+
+.grid5col4 > .title.square,
+.grid5col4 > .decision.square,
+.grid5col4 > .help.square {
+  min-height: 144px;
+  width: 144px;
 }
 
 .title {
