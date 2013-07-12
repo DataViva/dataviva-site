@@ -26,42 +26,37 @@ RESULTS_PER_PAGE = 10
 @mod.route('/questions/<int:page>/', methods=['GET', 'POST'])
 def index(page):
     # get URL parameters for results per page and ordering options
-    order = request.args.get("order", "votes") # options = 'votes' or 'newest'
-    results_per_page = int(request.args.get("results_per_page", RESULTS_PER_PAGE))
+    order = request.args.get('order', 'votes') # options = 'votes' or 'newest'
+    offset = request.args.get('offset', 0)
+    limit = 25
     
     # load forms for submitting new question or for searching
     search_form = SearchForm()
     
-    # lets find the questions to load in the page
-    # only the approved questions
-    approved = Status.query.filter_by(name='Approved').first()
-    questions = Question.query.filter_by(status = approved)
-    # for pagination, we need to know the total num of questions
-    count = questions.count()
-    offset = (page - 1) * results_per_page
+    if request.is_xhr:
+        # lets find the questions to load in the page
+        # only the approved questions
+        approved = Status.query.filter_by(name='Approved').first()
+        questions = Question.query.filter_by(status = approved)
+
+        # if we are ordering the questions by newest get them ordered chronologically
+        if order == "newest":
+            questions = questions.order_by(Question.timestamp.desc()).limit(limit).offset(offset)
+            questions = [q.serialize() for q in questions.all()]
+
+        # otherwise we are ordering the questions by votes
+        else:
+            votes_subq = db.session.query(Vote, func.count('*').label('vote_count')).group_by(Vote.type_id).subquery()
+            votes_questions = db.session.query(Question, votes_subq.c.vote_count) \
+                .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
+                .filter(Question.status == approved).order_by(votes_subq.c.vote_count.desc()) \
+                .limit(limit).offset(offset)
+            questions = [q[0].serialize() for q in votes_questions]
     
-    # if we are ordering the questions by newest get them ordered chronologically
-    if order == "newest":
-        questions = questions.order_by(Question.timestamp.desc()) \
-                        .paginate(page, RESULTS_PER_PAGE, False).items
+        return jsonify({"activities":questions})
     
-    # otherwise we are ordering the questions by votes
-    else:
-        votes_subq = db.session.query(Vote, func.count('*').label('vote_count')).group_by(Vote.type_id).subquery()
-        votes_questions = db.session.query(Question, votes_subq.c.vote_count) \
-            .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
-            .filter(Question.status == approved).order_by(votes_subq.c.vote_count.desc()) \
-            .limit(results_per_page).offset(offset)
-        questions = [q[0] for q in votes_questions]
-            
-    if not questions and page != 1:
-        abort(404)
-    pagination = Pagination(page, results_per_page, count, order)
-    
-    return render_template("ask/index.html",
-        search_form = search_form,
-        questions = questions,
-        pagination = pagination)
+    return render_template("ask/questions.html",
+        search_form = search_form)
 
 @mod.route('/question/search')
 def question_search():

@@ -1,0 +1,170 @@
+<!-- extend site layout -->
+{% extends "templates/site.html" %}
+
+{% block title %}: Ask Sabrina{% endblock %}
+
+{% block head %}
+<link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/wysihtml5.stylesheet.css" />
+{% endblock %}
+
+{% block body %}
+  
+  <div class="grid5col1">
+    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
+  </div>
+
+  <div class="grid5col4">
+    <div class="title">
+      What can I help you with?
+    </div>
+    
+    {{ search_form.search(size=80, id='search', class='ask', placeholder="Search here...") }}
+    <div class="hide"><h3>Search Results</h3></div>
+    <div id="results"></div>
+      
+    <div id="recent">
+      <div id="order_toggle">
+        <legend>Order by</legend>
+        <input type="radio" name="order" value="votes" onclick="change_order(this.value)">
+        <label for="votes">Top Rated</label>
+        <input type="radio" name="order" value="newest" onclick="change_order(this.value)">
+        <label for="newest">Newest</label>
+      </div>
+      <h3>Questions</h3>
+
+      <div class="question_feed"></div>
+
+      <a href="/ask/ask/" class="help">
+        <div>
+          <h2>Cannot find your answer here?</h2>
+          <p>Submit your question to Escritorio!</p>
+        </div>
+      </a>
+      
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block js %}
+
+  <!-- wysihtml5 parser rules -->
+  <script src="/static/js/libs/wysihtml5-parser_rules-advanced.js"></script>
+  <!-- wysihtml5 library -->
+  <script src="/static/js/libs/wysihtml5-0.3.0.min.js"></script>
+  
+  <script>
+  
+  // function change_order(order) {
+  //   window.location = "{{ url_for('ask.index') }}?order="+order;
+  // }
+  // 
+  // document.getElementById("search").oninput = function(e){
+  //   var search_term = this.value;
+  // 
+  //   d3.select("#recent").style("display", "none")
+  //   d3.selectAll(".hide").style("display", "block")
+  //   if(search_term == ""){
+  //     d3.select("#recent").style("display", "block")
+  //     d3.selectAll(".hide").style("display", "none")
+  //     
+  //     return;
+  //   }
+  // 
+  //   d3.json("{{ url_for('ask.question_search') }}?q="+search_term, function(results){
+  //     
+  //     // clear previous results
+  //     document.getElementById("results").innerHTML = ""
+  //   
+  //     // loop through each result and append to page
+  //     results.matches.forEach(function(match){
+  //       var match_el = d3.select("#results")
+  //       var anchor = match_el.append("a")
+  //           anchor.attr("href", "/ask/question/" + match.slug)
+  //           var decision = anchor.append("div")
+  //                 .attr("class", "decision")
+  //           var text = decision.append("div").attr("class", "text")
+  //           var votes = text.append("div").attr("class", "number_votes") 
+  //               votes.append("span").attr("class", "vote_count")
+  //               .text(match.votes)
+  //               votes.append("div").attr("class", "vote_label")
+  //               .html("votes")
+  //           var question_prev = text.append("div").attr("class", "question_preview")
+  //               question_prev.append("h2")
+  //                 .html(match.question)
+  //               question_prev.append("p")
+  //                 .html(match.status_notes)
+  //           var posted = question_prev.append("div").attr("class", "posted")
+  //                 .html("Asked by " + match.user + " " + moment(match.timestamp).fromNow())
+  //           decision.append("div").attr("class", "arrow")
+  //      })
+  //      
+  //   })
+  // }
+  
+</script>
+
+<script src="/static/js/utils/utils.infinite_scroll.js"></script>
+<script>
+
+function item_formatter(container_el, activities){
+  
+  var formatDate = d3.time.format("%B %-d, %Y"),
+      parseDate = d3.time.format.iso.parse;
+  
+  var activities_enter = d3.select(container_el).selectAll(".activity")
+    .data(activities, function(d){ return d.id; })
+    .enter().insert("a", "div.infinite_loading")
+      .attr("class", "decision")
+      .attr("href", function(d){
+        return "/ask/question/" + d.slug;
+      })
+  
+  var votes_div = activities_enter.append("div")
+    .attr("class", "number_votes")
+
+  votes_div.append("span")
+    .attr("class", "vote_count")
+    .text(function(d){
+      console.log(d)
+      return "4";
+    })
+  votes_div.append("p")
+    .attr("class", "vote_label")
+    .text("votes")
+
+      
+  // lastly, the div that holds the data
+  var question_div = activities_enter.append("div")
+    .attr("class", "question_preview")
+  
+  question_div.append("h2")
+    .text(function(d){ return d.question })
+  
+  question_div.each(function(d){
+      if(d.status_notes){
+        d3.select(this).append("p")
+          .text(function(){
+            return d.status_notes.replace(/<\/?[^>]+(>|$)/g, "");
+          })
+      }
+    })
+
+  question_div.append("div")
+    .attr("class", "posted")
+    .text(function(d){ 
+      return "Asked by " + d.user.nickname + " " + moment(d.timestamp).fromNow();
+    })
+
+}
+
+var is = infinite_scroll()
+          .format_items(item_formatter);
+
+d3.select(".question_feed")
+  .call(is)
+
+</script>
+
+
+{% endblock %}
