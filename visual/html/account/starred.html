@@ -13,13 +13,13 @@
 
 
 function item_formatter(container_el, activities){
-  
+
   var formatDate = d3.time.format("%B %-d, %Y"),
       parseDate = d3.time.format.iso.parse;
   
   var activities_enter = d3.select(container_el).selectAll(".activity")
     .data(activities, function(d){ return d.app_id; })
-    .enter().insert("a", "div.loading")
+    .enter().insert("a", "div.infinite_loading")
       .attr("class", "activity")
       .attr("href", function(d){
         return "/embed/" + d.app_id;

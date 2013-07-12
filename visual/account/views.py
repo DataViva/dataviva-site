@@ -82,7 +82,7 @@ def questions(status=None):
     
         return jsonify({"activities":items})
     
-    return render_template("account/questions.html")
+    return render_template("account/questions.html", status=status)
 
 @mod.route('/replies/')
 def replies():
@@ -101,34 +101,6 @@ def replies():
         return jsonify({"activities":items})
     
     return render_template("account/replies.html")
-
-@mod.route('/activity/')
-@mod.route('/activity/<activity_type>/')
-def activity(activity_type=None):
-    
-    if not activity_type:
-        return redirect(url_for('account.activity', activity_type="starred"))
-    
-    offset = request.args.get('offset', 0)
-    activity_dict = {}
-    activity_list = []
-    limit = 50
-    
-    if request.is_xhr:
-        
-        if activity_type == "starred":
-            query = Starred.query
-        elif activity_type == "questions":
-            query = Question.query
-        elif activity_type == "replies":
-            query = Reply.query
-        
-        items = query.filter_by(user=g.user).order_by("timestamp desc").limit(limit).offset(offset).all()
-        items = [(activity_type, i.serialize()) for i in items]
-        
-        return jsonify({"activities":items})
-    
-    return render_template("account/activity.html", activity_type=activity_type)
 
 @mod.route('/logout/')
 def logout():

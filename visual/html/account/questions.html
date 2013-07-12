@@ -3,7 +3,7 @@
 
 {% block admin_content %}
 
-<h5>Questions</h5>
+<h5>{% if status %}{{ status}}{% endif %} Questions</h5>
 <hr class="bold"/>
 
 <div class="feed"></div>
@@ -18,8 +18,8 @@ function item_formatter(container_el, activities){
       parseDate = d3.time.format.iso.parse;
   
   var activities_enter = d3.select(container_el).selectAll(".activity")
-    .data(activities, function(d){ return d.app_id; })
-    .enter().insert("a", "div.loading")
+    .data(activities, function(d){ return d.id; })
+    .enter().insert("a", "div.infinite_loading")
       .attr("class", "activity")
       .attr("href", function(d){
         return "/ask/question/" + d.slug;

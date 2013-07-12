@@ -14,10 +14,10 @@ function infinite_scroll(selection){
       var container_el = this;
       
       // On first time add
-      d3.select(container_el).selectAll(".loading")
+      d3.select(container_el).selectAll(".infinite_loading")
         .data([container_el])
         .enter().append("div")
-        .attr("class", "loading")
+        .attr("class", "infinite_loading")
       
       // The item we're going to listen on for scrolling
       d3.select(window)
@@ -27,7 +27,7 @@ function infinite_scroll(selection){
       function maybe_fetch() {
 
         // get the position of the loading div
-        var loading_div_y = !d3.select(".loading").empty() ? d3.select(".loading").node().getBoundingClientRect().top : NaN;
+        var loading_div_y = !d3.select(".infinite_loading").empty() ? d3.select(".infinite_loading").node().getBoundingClientRect().top : NaN;
 
         // if we're not currently fetching and offset if not NaN and the loader
         // y pos is less than the height of the page then fetch new items
@@ -66,7 +66,7 @@ function infinite_scroll(selection){
               .text("No items here.")
           }
           offset = NaN;
-          d3.select(".loading").remove();
+          d3.select(".infinite_loading").remove();
           return;
         }
   
