@@ -6,7 +6,7 @@
 {% block body %}
 
   <div id="app_buffer"></div>
-  <iframe class="app_builder" src="/apps/embed/"></iframe>
+  <iframe class="app_builder"></iframe>
 
 {% endblock %}
 
@@ -29,6 +29,7 @@
       .style("height",height+"px")
       .style("width",width+"px")
       .style("margin-left",-(width/2)+"px")
+      .attr("src",window.location.pathname.replace("builder","embed"))
     d3.select("div#app_buffer")
       .style("height",height+"px")
       .style("display","block")
