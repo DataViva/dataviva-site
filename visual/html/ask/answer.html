@@ -28,7 +28,7 @@
       {% endfor %}
     </div>
     {% endif %}
-    <div class="posted"><img src="{{ q.user.avatar(22) }}"> Asked by {{q.user.nickname}} {{ momentjs(q.timestamp).fromNow() }}</div>
+    <div class="posted"><img src="{{ q.user.avatar(22) }}"> Asked by <a href="{{ url_for('account.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a> {{ momentjs(q.timestamp).fromNow() }}</div>
     <br /><br />
     <p><span class="vote_count answer big" style="font-size: 16px">{% if q.votes.all()|length %}{{ q.votes.count() }}{% else %}0{% endif %}</span>
       <a class="vote_up button square answer big" href="{{ url_for('ask.question_vote', slug=q.slug) }}">
@@ -61,7 +61,7 @@
         <p><a class="flag button square" href="{{ url_for('ask.reply_flag', id=r.id) }}"><i class="icon-flag"></i></a></p>
         <div class="response">
         <p>{{ r.body|safe }}</p>
-        <div class="posted"><img class="avatar" src="{{ r.user.avatar(20) }}"> Added by {{r.user.nickname}} {{ momentjs(r.timestamp).fromNow() }}</div>
+        <div class="posted"><img class="avatar" src="{{ r.user.avatar(20) }}"> Added by <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a> {{ momentjs(r.timestamp).fromNow() }}</div>
         <hr />
         {% if r.id == r.parent_id %}
         <button class="reply">Reply</button>

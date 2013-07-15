@@ -74,7 +74,7 @@ def login():
         providers = providers)
 
 @mod.route('/<nickname>/')
-def account_home(nickname):
+def user(nickname):
     user = User.query.filter_by(nickname=nickname).first_or_404()
     return render_template("account/user_home.html", user=user)
 
@@ -87,11 +87,18 @@ def questions(nickname, status=None):
     activity_list = []
     limit = 50
     
+    this_status = Status.query.filter_by(name=status).first()
+    approved_status = Status.query.filter_by(name='approved').first()
+    if g.user != user and this_status:
+        return redirect(url_for(".questions", nickname=user.nickname))
+    
     if request.is_xhr:
-        status = Status.query.filter_by(name=status).first()
+        
         qs = Question.query
-        if status:
-            qs = qs.filter_by(status=status)
+        if this_status and g.user == user:
+            qs = qs.filter_by(status=this_status)
+        elif g.user != user:
+            qs = qs.filter_by(status=approved_status)
         qs = qs.filter_by(user=user) \
                     .order_by("timestamp desc") \
                     .limit(limit).offset(offset)

@@ -59,8 +59,10 @@
   //   window.location = "{{ url_for('ask.index') }}?order="+order;
   // }
   // 
-  // document.getElementById("search").oninput = function(e){
+  // d3.select("#search").on("input", function(e){
+  // 
   //   var search_term = this.value;
+  //   console.log(search_term)
   // 
   //   d3.select("#recent").style("display", "none")
   //   d3.selectAll(".hide").style("display", "block")
@@ -100,25 +102,27 @@
   //      })
   //      
   //   })
-  // }
+  // })
   
 </script>
 
 <script src="/static/js/utils/utils.infinite_scroll.js"></script>
 <script>
 
-function item_formatter(container_el, activities){
+function item_formatter(container_el, activities, offset){
   
   var formatDate = d3.time.format("%B %-d, %Y"),
       parseDate = d3.time.format.iso.parse;
   
-  var activities_enter = d3.select(container_el).selectAll(".activity")
+  var acts = d3.select(container_el).selectAll(".activity")
     .data(activities, function(d){ return d.id; })
+    
+  var activities_enter = acts
     .enter().insert("a", "div.infinite_loading")
-      .attr("class", "decision")
-      .attr("href", function(d){
-        return "/ask/question/" + d.slug;
-      })
+    .attr("class", "decision activity")
+    .attr("href", function(d){
+      return "/ask/question/" + d.slug;
+    })
   
   var votes_div = activities_enter.append("div")
     .attr("class", "number_votes")
@@ -126,8 +130,7 @@ function item_formatter(container_el, activities){
   votes_div.append("span")
     .attr("class", "vote_count")
     .text(function(d){
-      console.log(d)
-      return "4";
+      return d.votes;
     })
   votes_div.append("p")
     .attr("class", "vote_label")
@@ -152,17 +155,29 @@ function item_formatter(container_el, activities){
 
   question_div.append("div")
     .attr("class", "posted")
-    .text(function(d){ 
-      return "Asked by " + d.user.nickname + " " + moment(d.timestamp).fromNow();
+    .html(function(d){ 
+      var user_link = "<a href='/account/" + d.user.nickname + "'>" + d.user.fullname + "</a>"
+      return "Asked by " + user_link + " " + moment(d.timestamp).fromNow();
     })
+
+  acts.exit().remove()
 
 }
 
 var is = infinite_scroll()
+          .url(window.location.href)
           .format_items(item_formatter);
 
 d3.select(".question_feed")
   .call(is)
+
+d3.select("#search").on("input", function(e){
+
+  var search_term = this.value;
+  d3.select(".question_feed")
+    .call(is.url(window.location.href + "?q=" + search_term).remove(true))
+
+})
 
 </script>
 

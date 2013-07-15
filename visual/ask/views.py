@@ -28,6 +28,7 @@ def index(page):
     # get URL parameters for results per page and ordering options
     order = request.args.get('order', 'votes') # options = 'votes' or 'newest'
     offset = request.args.get('offset', 0)
+    search_term = request.args.get('q', None)
     limit = 25
     
     # load forms for submitting new question or for searching
@@ -38,41 +39,29 @@ def index(page):
         # only the approved questions
         approved = Status.query.filter_by(name='Approved').first()
         questions = Question.query.filter_by(status = approved)
+    
+        # if the user has submitted a search, filter by that term
+        if search_term:
+            questions = questions.whoosh_search(search_term)
 
         # if we are ordering the questions by newest get them ordered chronologically
-        if order == "newest":
-            questions = questions.order_by(Question.timestamp.desc()).limit(limit).offset(offset)
-            questions = [q.serialize() for q in questions.all()]
+        # if order == "newest":
+        questions = questions.order_by(Question.timestamp.desc()).limit(limit).offset(offset)
+        questions = [q.serialize() for q in questions.all()]
 
         # otherwise we are ordering the questions by votes
-        else:
-            votes_subq = db.session.query(Vote, func.count('*').label('vote_count')).group_by(Vote.type_id).subquery()
-            votes_questions = db.session.query(Question, votes_subq.c.vote_count) \
-                .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
-                .filter(Question.status == approved).order_by(votes_subq.c.vote_count.desc()) \
-                .limit(limit).offset(offset)
-            questions = [q[0].serialize() for q in votes_questions]
-    
+        # else:
+        #     votes_subq = db.session.query(Vote, func.count('*').label('vote_count')).group_by(Vote.type_id).subquery()
+        #     votes_questions = db.session.query(Question, votes_subq.c.vote_count) \
+        #         .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
+        #         .filter(Question.status == approved).order_by(votes_subq.c.vote_count.desc()) \
+        #         .limit(limit).offset(offset)
+        #     questions = [q[0].serialize() for q in votes_questions]
+
         return jsonify({"activities":questions})
     
     return render_template("ask/questions.html",
         search_form = search_form)
-
-@mod.route('/question/search')
-def question_search():
-    search_term = request.args.get('q')
-    approved = Status.query.filter_by(name='Approved').first()
-    questions_matched = Question.query.whoosh_search(search_term).filter_by(status = approved).all()
-    matches = []
-    for q in questions_matched:
-        user = {"user": q.user.nickname}
-        votes = {"votes": q.votes.count()}
-        result = dict(q.serialize().items() + user.items() + votes.items())
-        if "status_notes" in result:
-            result["status_notes"] = strip_html(result["status_notes"])
-        matches.append(result)
-    return jsonify({"matches": matches})
-    # return jsonify({"matches": [dict(q.serialize().items() + {"votes": q.votes.count()}.items()) for q in questions_matched]})
 
 @mod.route('/question/<slug>', methods=['GET', 'POST'])
 def answer(slug):
@@ -170,6 +159,6 @@ def ask():
             question.str_tags(tags)
         db.session.add(question)
         db.session.commit()
-        flash('Your question has been submitted and is pending approval by a site administrator.')
+        flash('Your question has been submitted and is <a href="' + url_for('account.questions', nickname=g.user.nickname, status='pending') + '">pending approval</a> by a site administrator.')
         return redirect(url_for('ask.index'))
     return render_template("ask/ask.html", form = form)

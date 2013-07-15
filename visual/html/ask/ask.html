@@ -48,13 +48,6 @@
 <script src="/static/js/utils/utils.selector.js"></script>
 <script>
 
-  visual.sabrina({
-    "div": d3.select("#sabrina_ask"),
-    "outfit": "lab",
-    "emotion": "smirk",
-    "hat": "glasses"
-  })
-
   var editor = new wysihtml5.Editor("wysihtml5-textarea", { // id of textarea element
     toolbar:      "wysihtml5-toolbar", // id of toolbar element
     parserRules:  wysihtml5ParserRules, // defined in parser rules set 
@@ -98,7 +91,7 @@
   var select_id = "current_selector"
   var selector = Selector()
     .callback("select_filter")
-    .language("en")
+    // .language("en")
     .type("bra");
   
   function update_selector(val){
@@ -130,7 +123,7 @@
       if (i == 0) radio.attr("checked","checked")
     })
     
-    visual.toggle("select_radios")
+    // visual.toggle("select_radios")
     
     this.append("div")
       .attr("id", select_id)
