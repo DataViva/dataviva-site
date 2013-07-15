@@ -472,15 +472,6 @@ a.button.square.link {
   font-weight: bold;
 }
 
-/************************/
-/* App Builder Specific */
-/************************/
-iframe.app_builder {
-  left: 50%;
-  position: absolute;
-  top: 0px;
-}
-
 /**************************/
 /* Data Explorer Specific */
 /**************************/

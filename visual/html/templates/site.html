@@ -149,6 +149,10 @@
       hide_toggle()
     })
     
+    if (["guide","profiles"].indexOf(window.location.pathname.split("/")[1]) >= 0) {
+      visual.breadcrumbs();
+    }
+    
   </script>
     
 {% endblock %}

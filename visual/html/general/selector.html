@@ -50,17 +50,17 @@
       var limit = 2
     }
   
+    selector_return = function(value) {
+      window.location = "{{ g.path }}".replace("select",value.id)
+    }
+  
     var selector = Selector()
-      .callback("selector_return")
+      .callback(selector_return)
       .type(value)
       .limit(limit);
   
     d3.select("#selector")
       .call(selector);
-  
-    function selector_return(value) {
-      window.location = "{{ g.path }}".replace("select",value.id)
-    }
 
   </script>
   

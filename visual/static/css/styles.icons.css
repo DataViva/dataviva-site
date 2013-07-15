@@ -1,34 +1,208 @@
-div.icon {
-  background-position: top center;
+.decision.square:before {
+  background-position: 50%;
   background-repeat: no-repeat;
-  background-size: 35px 35px;
-  display: inline-block;
-  float: left;
-  height: 35px;
-  margin-right: 6px;
-  width: 35px;
+  background-size: 100%;
+  color: white;
+  content: "";
+  display: block;
+  text-decoration: inherit;
+  font-family: FontAwesome;
+  font-size: 120px;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  height: 100%;
+  line-height: 160px;
+  margin: -12px;
+  opacity: 0.25;
+  position: absolute;
+  text-align: center;
+  width: 100%;
 }
 
-div#guide.icon {
+/*******/
+/* Nav */
+/*******/
+
+.decision.square.guide:before,
+.decision.square.profiles:before,
+.decision.square.apps:before,
+.decision.square.data:before,
+.decision.square.ask:before,
+.decision.square.learn:before {
+  background-size: 75%;
+}
+
+.decision.square.guide:before {
   background-image: url("/static/img/nav/icons/guide_white.png");
 }
 
-div#profiles.icon {
+.decision.square.profiles:before {
   background-image: url("/static/img/nav/icons/profiles_white.png");
 }
 
-div#apps.icon {
+.decision.square.apps:before {
   background-image: url("/static/img/nav/icons/apps_white.png");
 }
 
-div#data.icon {
+.decision.square.data:before {
   background-image: url("/static/img/nav/icons/data_white.png");
 }
 
-div#ask.icon {
+.decision.square.ask:before {
   background-image: url("/static/img/nav/icons/ask_white.png");
 }
 
-div#learn.icon {
+.decision.square.learn:before {
   background-image: url("/static/img/nav/icons/learn_white.png");
+}
+
+/***********/
+/* Filters */
+/***********/
+
+.decision.square.location:before {
+  background-image: url("/static/img/icons/bra/bra_all_alt.png");
+}
+
+.decision.square.establishment:before {
+  background-image: url("/static/img/icons/isic/isic_all.png");
+}
+
+.decision.square.export:before {
+  background-image: url("/static/img/icons/hs/hs_all.png");
+}
+
+.decision.square.career:before {
+  background-image: url("/static/img/icons/cbo/cbo_all.png");
+}
+
+.decision.square.partner:before {
+  background-image: url("/static/img/icons/wld/wld_all.png");
+}
+
+/********/
+/* Apps */
+/********/
+
+.decision.square.tree_map {
+  background-color: #ffc41c !important;
+}
+.decision.square.tree_map:before {
+  background-image: url("/static/img/icons/app/app_tree_map.png");
+}
+
+.decision.square.stacked {
+  background-color: #752277 !important;
+}
+.decision.square.stacked:before {
+  background-image: url("/static/img/icons/app/app_stacked.png");
+}
+
+.decision.square.network {
+  background-color: #c8140a !important;
+}
+.decision.square.network:before {
+  background-image: url("/static/img/icons/app/app_network.png");
+}
+
+.decision.square.rings {
+  background-color: #e377c2 !important;
+}
+.decision.square.rings:before {
+  background-image: url("/static/img/icons/app/app_rings.png");
+}
+
+.decision.square.scatter {
+  background-color: #0b1097 !important;
+}
+.decision.square.scatter:before {
+  background-image: url("/static/img/icons/app/app_scatter.png");
+}
+
+.decision.square.compare {
+  background-color: #17bcef !important;
+}
+.decision.square.compare:before {
+  background-image: url("/static/img/icons/app/app_compare.png");
+}
+
+.decision.square.geo_map {
+  background-color: #00923f !important;
+}
+.decision.square.geo_map:before {
+  background-image: url("/static/img/icons/app/app_geo_map.png");
+}
+
+.decision.square.occugrid {
+  background-color: #e87600 !important;
+}
+.decision.square.occugrid:before {
+  background-image: url("/static/img/icons/app/app_occugrid.png");
+}
+
+/****************/
+/* Plan Buttons */
+/****************/
+
+.decision.square.industry:before {
+  content:"\f085";
+}
+
+.decision.square.yes:before {
+  content:"\f00c";
+}
+
+.decision.square.no:before {
+  content:"\f128";
+}
+
+.decision.square.growth:before {
+  content:"\f062";
+}
+
+.decision.square.shrink:before {
+  content:"\f063";
+}
+
+.decision.square.paths:before,
+.decision.square.workforce:before {
+  content:"\f0c0";
+}
+
+.decision.square.attract:before {
+  content:"\f0c0";
+}
+
+.decision.square.opportunity:before {
+  content:"\f140";
+}
+
+.decision.square.wages:before {
+  content:"\f0d6";
+}
+
+.decision.square.destinations:before {
+  content:"\f0ac";
+}
+
+.decision.square.diversification:before {
+  content:"\f074";
+}
+
+/****************/
+/* Data Buttons */
+/****************/
+
+.decision.square.database:before {
+  content:"\f022";
+  line-height: 180px;
+}
+
+.decision.square.api:before {
+  content:"\f0ad";
+}
+
+.decision.square.source:before {
+  content:"\f14e";
 }

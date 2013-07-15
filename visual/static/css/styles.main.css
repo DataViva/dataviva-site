@@ -46,7 +46,7 @@ h2 {
   font-size: 30px;
   font-weight: normal;
   line-height: 32px;
-  margin: 6px 0px 12px 0px;
+  margin-bottom: 6px;
   opacity: 1;
 }
 
@@ -145,4 +145,14 @@ div.loading > .text {
   text-shadow: 0px 0px 6px #efefef;
   top: 50%;
   width: 100%;
+}
+
+iframe.app_builder {
+  left: 50%;
+  position: absolute;
+  top: 70px;
+}
+
+div#app_buffer {
+  display: block;
 }

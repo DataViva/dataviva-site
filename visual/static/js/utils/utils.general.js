@@ -138,10 +138,10 @@ function format_name(name) {
     "wld_rca": {"en": "International", "pt": "Internacional"},
     "year": {"en": "Year", "pt": "Ano"},
     
-    "bubbles": {"en": "Occugrid", "pt": "Occugrid"},
+    "occugrid": {"en": "Occugrid", "pt": "Occugrid"},
     "geo_map": {"en": "Geo Map", "pt": "Mapa"},
     "network": {"en": "Network", "pt": "Network"},
-    "pie_scatter": {"en": "Scatter Plot", "pt": "Dispers\u00e3o"},
+    "scatter": {"en": "Scatter Plot", "pt": "Dispers\u00e3o"},
     "rings": {"en": "Rings", "pt": "An\u00e9is"},
     "stacked": {"en": "Stacked", "pt": "Stacked"},
     "tree_map": {"en": "Tree Map", "pt": "Tree Map"},

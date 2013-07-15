@@ -34,7 +34,7 @@ def guide_industry_workforce(ind_id = None):
     
     apps = app_obj(
         [
-            { "app_name": "bubbles", "isic_id": ind_id },
+            { "app_name": "occugrid", "isic_id": ind_id },
             { "app_name": "stacked", "isic_id": ind_id, "output": "cbo" },
             { "app_name": "tree_map", "isic_id": ind_id, "output": "cbo" }
         ],names
@@ -63,7 +63,7 @@ def guide_industry_potential(ind_id = None, bra_id = None):
         apps = app_obj(
             [
                 { "app_name": "geo_map", "bra_id": bra_id, "isic_id": ind_id },
-                { "app_name": "bubbles", "bra_id": bra_id, "isic_id": ind_id },
+                { "app_name": "occugrid", "bra_id": bra_id, "isic_id": ind_id },
                 { "app_name": "network", "bra_id": bra_id, "output": "isic" },
                 { "app_name": "stacked", "bra_id": bra_id, "output": "isic" },
                 { "app_name": "rings", "bra_id": bra_id, "isic_id": ind_id }
@@ -97,7 +97,7 @@ def guide_industry_diversification(ind_id = None):
             [
                 { "app_name": "rings", "isic_id": ind_id },
                 { "app_name": "stacked", "output": "isic" },
-                { "app_name": "bubbles", "isic_id": ind_id }
+                { "app_name": "occugrid", "isic_id": ind_id }
             ],names
         )
     else:
@@ -130,7 +130,7 @@ def guide_industry_location(bra_id = None, ind_id = None):
     if len(ind_id) in [1,5]:
         apps = app_obj(
             [
-                { "app_name": "bubbles", "bra_id": bra_id, "isic_id": ind_id },
+                { "app_name": "occugrid", "bra_id": bra_id, "isic_id": ind_id },
                 { "app_name": "rings", "bra_id": bra_id, "isic_id": ind_id },
                 { "app_name": "tree_map", "bra_id": bra_id, "isic_id": ind_id, "output": "bra" },
                 { "app_name": "geo_map", "bra_id": bra_id[:2], "isic_id": ind_id },
@@ -312,7 +312,7 @@ def guide_location_opportunity(bra_id = None, ind_type = None):
         apps = app_obj(
             [
                 { "app_name": "network", "bra_id": bra_id, "output": "isic" },
-                { "app_name": "pie_scatter", "bra_id": bra_id, "output": "isic" },
+                { "app_name": "scatter", "bra_id": bra_id, "output": "isic" },
                 { "app_name": "tree_map", "bra_id": bra_id, "output": "isic" },
                 { "app_name": "stacked", "bra_id": bra_id, "output": "cbo" },
                 { "app_name": "tree_map", "bra_id": bra_id, "output": "cbo" }
@@ -323,7 +323,7 @@ def guide_location_opportunity(bra_id = None, ind_type = None):
         apps = app_obj(
             [
                 { "app_name": "network", "bra_id": bra_id, "output": "hs" },
-                { "app_name": "pie_scatter", "bra_id": bra_id, "output": "hs" },
+                { "app_name": "scatter", "bra_id": bra_id, "output": "hs" },
                 { "app_name": "tree_map", "bra_id": bra_id, "output": "hs" },
                 { "app_name": "tree_map", "bra_id": bra_id, "output": "wld" }
             ],names
@@ -485,7 +485,7 @@ def app_obj(apps,text):
         if params.get("output") == None:
             if params["app_name"] == "geo_map":
                 params["output"] = "bra"
-            elif params["app_name"] == "bubbles":
+            elif params["app_name"] == "occugrid":
                 params["output"] = "cbo"
             elif params["app_name"] == "rings":
                 if "isic_id" in params:
@@ -537,11 +537,11 @@ def app_text(params,text):
             "short": u"<b>Geo Map</b> showing {category_pl} in {bra_id}.",
             "long": u"Here, we see that the top {list_number} {category_pl} are {list}"
         },
-        "bubbles": {
+        "occugrid": {
             "short": u"<b>Occugrid</b> showing workforce needed for {ind_id}.",
             "long": u"Here, we see that the top {list_number} {category_pl} are: {list}"
         },
-        "pie_scatter": {
+        "scatter": {
             "short": u"<b>Scatter Plot</b> showing {category} distance and complexity for {bra_id}.",
             "long": u"Here, we see that the top {list_number} {category_pl} are: {list}"
         }

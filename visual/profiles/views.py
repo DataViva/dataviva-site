@@ -78,7 +78,7 @@ def profiles_isic(isic_id = None):
             [
                 { "app_name": "rings", "isic_id": isic_id },
                 { "app_name": "tree_map", "isic_id": isic_id, "output": "bra" },
-                { "app_name": "bubbles", "isic_id": isic_id },
+                { "app_name": "occugrid", "isic_id": isic_id },
                 { "app_name": "tree_map", "isic_id": isic_id, "output": "cbo" }
             ],names
         )
@@ -144,7 +144,7 @@ def profiles_bra(bra_id = None):
                 { "app_name": "network", "bra_id": bra_id, "output": "hs" },
                 { "app_name": "network", "bra_id": bra_id, "output": "isic" },
                 { "app_name": "tree_map", "bra_id": bra_id, "output": "cbo" },
-                { "app_name": "pie_scatter", "bra_id": bra_id, "output": "hs" },
+                { "app_name": "scatter", "bra_id": bra_id, "output": "hs" },
                 { "app_name": "tree_map", "bra_id": bra_id, "output": "isic" }
             ],names
         )
@@ -228,7 +228,7 @@ def app_obj(apps,text):
         if params.get("output") == None:
             if params["app_name"] == "geo_map":
                 params["output"] = "bra"
-            elif params["app_name"] == "bubbles":
+            elif params["app_name"] == "occugrid":
                 params["output"] = "cbo"
             elif params["app_name"] == "rings":
                 if "isic_id" in params:
@@ -280,11 +280,11 @@ def app_text(params,text):
             "short": u"<b>Geo Map</b> showing {category_pl} in {bra_id}.",
             "long": u"Here, we see that the top {list_number} {category_pl} are {list}"
         },
-        "bubbles": {
+        "occugrid": {
             "short": u"<b>Occugrid</b> showing workforce needed for {ind_id}.",
             "long": u"Here, we see that the top {list_number} {category_pl} are: {list}"
         },
-        "pie_scatter": {
+        "scatter": {
             "short": u"<b>Scatter Plot</b> showing {category} distance and complexity for {bra_id}.",
             "long": u"Here, we see that the top {list_number} {category_pl} are: {list}"
         }

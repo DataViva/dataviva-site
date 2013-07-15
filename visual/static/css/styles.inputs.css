@@ -32,8 +32,8 @@ a:hover {
 .title, .decision, .help {
   color: #888;
   display: block;
-  font-size: 20px;
-  line-height: 22px;
+  font-size: 17px;
+  line-height: 19px;
   margin: 10px;
   opacity: 0.8;
   padding: 12px;
@@ -50,6 +50,13 @@ a:hover {
 .grid5col2 > .help.square {
   min-height: 140px;
   width: 140px;
+}
+
+.grid5col3 > .title.square,
+.grid5col3 > .decision.square,
+.grid5col3 > .help.square {
+  min-height: 142px;
+  width: 142px;
 }
 
 .grid5col4 > .title.square,

@@ -5,7 +5,8 @@
 
 {% block body %}
 
-  <div id="app_buffer"></div>
+  </div>
+  <div id="app_buffer">
   <iframe class="app_builder"></iframe>
 
 {% endblock %}
@@ -30,9 +31,13 @@
       .style("width",width+"px")
       .style("margin-left",-(width/2)+"px")
       .attr("src",window.location.pathname.replace("builder","embed"))
+      
     d3.select("div#app_buffer")
       .style("height",height+"px")
-      .style("display","block")
+      
+    update_url = function(url) {
+      console.log(url)
+    }
 
   </script>
 

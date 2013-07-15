@@ -15,22 +15,20 @@
 <div id="welcome" class="grid5col3">
   
   <div class="title">
-    <h2>Welcome!</h2>
-    My name is Sabrina, and I will help guide you learn more about the economy of Minas Gerais. Here are some good places to start:
+    <h2>Visualizing Brazil</h2>
+    Olá! My name is Sabrina. I'm here to help you discover new meaning from economic data about Minas Gerais. Here are some good places to start:
   </div>
   
-  <a class="decision square" href="{{ url_for('guide.guide') }}">
-    <div id="guide" class="icon"></div>
+  <a class="decision square guide" href="{{ url_for('guide.guide') }}">
     <h2>Guide</h2>
-    Generate a report based on what you are looking for.
+    Generate multiple apps into a report.
   </a>
   
-  <a class="decision square" href="{{ url_for('apps.guide') }}">
-    <div id="apps" class="icon"></div>
+  <a class="decision square apps" href="{{ url_for('apps.guide') }}">
     <h2>Apps</h2>
-    Go straight for the visualizations.
+    Go straight to the visualization builder.
   </a>
-  <br>
+  <br><br>
   <div class="logo sponsor">Sponsored By:</div>
   <a href="http://www.escritorio.mg.gov.br/" class="logo governo" target="_blank"></a>
   <a href="http://www.fapemig.br/" class="logo fapemig" target="_blank"></a>

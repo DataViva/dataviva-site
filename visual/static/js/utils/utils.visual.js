@@ -400,7 +400,7 @@ visual.breadcrumbs = function() {
 
     var breadcrumbs = d3.select("#site_breadcrumbs")
     breadcrumbs.html("")
-  
+    
     crumbs.forEach(function(c,i){
 
       if (i == crumbs.length-1) {

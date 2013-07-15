@@ -176,10 +176,10 @@
   
     // App Data Formatting
     var format = {
-      "bubbles": "bubbles",
+      "occugrid": "occugrid",
       "compare": "compare",
       "geo_map": "default",
-      "pie_scatter": "default",
+      "scatter": "default",
       "network": "default",
       "rings": "default",
       "tree_map": "default",
@@ -430,7 +430,7 @@
               
             }
             
-            if (app.build.app.type == "bubbles") {
+            if (app.build.app.type == "occugrid") {
               
               app.build.req_url = app.build.data_url
                 .replace(app.build.bra[0].id,"all")
@@ -487,7 +487,7 @@
               else if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
                 app.error("Geo Map only available for States");
               }
-              else if (app.build.app.type == "pie_scatter") {
+              else if (app.build.app.type == "scatter") {
 
                 var complexities = app.data[app.build.data_url].raw
                   .filter(function(d){return d.complexity})
@@ -593,7 +593,7 @@
         
           // Set Global Vars
           if (ui.type == "value_var") {
-            if (app.build.app.type == "bubbles") var default_value = "importance"      
+            if (app.build.app.type == "occugrid") var default_value = "importance"      
             else if (ui.values.indexOf("val_usd") >= 0) var default_value = "val_usd"
             else if (ui.values.indexOf("num_emp") >= 0) var default_value = "num_emp"
             else var default_value = ui.values[0]
@@ -682,7 +682,7 @@
       /******************************/
       /* Bubbles Specific Variables */
       /******************************/
-      else if (app.build.app.type == "bubbles") {
+      else if (app.build.app.type == "occugrid") {
         app.viz
           .active_var("employed")
       } 
@@ -700,7 +700,7 @@
       /******************************/
       /* Scatter Specific Variables */
       /******************************/
-      else if (app.build.app.type == "pie_scatter") {
+      else if (app.build.app.type == "scatter") {
   
         app.viz
           .xaxis_var("distance")
@@ -817,7 +817,7 @@
           out = app.build.output,
           attr = app.attrs[out]
       
-      if ("bubbles" == format[app.build.app.type]) {
+      if ("occugrid" == format[app.build.app.type]) {
         
         var years = app.build.ui.filter(function(f){return f.type == "years"})[0].values
         
@@ -825,13 +825,13 @@
           
           var year_data = data.raw.filter(function(d){ return d.year == year; });
           
-          var req_filtered = data.raw.filter(function(d){ return d.year == year && d.required >= 0.6 }),
+          var req_filtered = app.data[app.build.req_url].raw.filter(function(d){ return d.year == year && d.required >= 0.6 }),
               req_ids = []
               
           req_filtered.forEach(function(d){
             req_ids.push(d[app.build.output+"_id"])
           })
-        
+          
           var industry_size = d3.sum(d3.values(req_filtered),function(d){ return Math.ceil(d.num_emp_med); }),
               location_total = d3.sum(d3.values(year_data),function(d){ 
                 return req_ids.indexOf(d[app.build.output+"_id"]) >= 0 ? d.num_emp : null; 
@@ -1113,12 +1113,10 @@
         .each(function(){
           var url = this.id.split("/"),
               old_ids = url[url_index].split("+")
-              console.log(old_ids,index,obj.id)
           if (old_ids[index] && (url_index == 2 || old_ids[index] != "all")) old_ids[index] = obj.id
           url[url_index] = old_ids.join("+")
           this.id = url.join("/")
           this.value = url.join("/")
-          console.log(url)
           if (this.innerHTML.indexOf(old_name) >= 0) {
             this.innerHTML = this.innerHTML.replace(old_name,new_name)
           }
@@ -1230,8 +1228,16 @@
       }
     
       if (Modernizr.history) {
-        if(parent.change_url) parent.change_url("/apps/"+window_url)
-        else window.history.pushState({'prev_request': "/apps/embed/"+window_url}, 'Title', "/apps/embed/"+window_url)
+        window.history.pushState(
+          {'prev_request': "/apps/embed/"+window_url}, 
+          "Visual : "+app.build.title, "/apps/embed/"+window_url
+        )
+        if (window != window.parent) {
+          window.parent.history.pushState(
+            {'prev_request': "/apps/builder/"+window_url}, 
+            "Visual : "+app.build.title, "/apps/builder/"+window_url
+          )
+        }
       } 
       else if (window.location.href.indexOf(window_url) < 0) {
         if (parent.location.pathname.indexOf("apps") >= 0) {

@@ -110,8 +110,8 @@
         solos = [],
         geo_coords = {},
         geo_land,
-        bubbles_required,
-        bubbles_elsewhere,
+        occugrid_required,
+        occugrid_elsewhere,
         current_build = null,
         current_url = null,
         attrs = {},
@@ -141,11 +141,11 @@
                         "rais":[["isic","isic"],["cbo","cbo"]]
                       }
                     },
-          'bubbles': {
+          'occugrid': {
             "color": "#e87600",
             "bra": false,
-            "viz-whiz": "bubbles",
-            "format": "bubbles",
+            "viz-whiz": "occugrid",
+            "format": "occugrid",
             "vars": { "year": [],
                       "value_var": ["none","importance","required_wage_avg","total"],
                       "grouping": ["name","category","active"],
@@ -154,10 +154,10 @@
             "outputs":{ "rais":[["cbo","isic"]]
                       }
           },
-          'pie_scatter': {
+          'scatter': {
             "color": "#0b1097",
             "bra": true,
-            "viz-whiz": "pie_scatter",
+            "viz-whiz": "scatter",
             "format": "default",
             "vars": { "year": [],
                       "depth": [],
@@ -171,7 +171,7 @@
           'compare': {
             "color": "#0b1097",
             "bra": true,
-            "viz-whiz": "pie_scatter",
+            "viz-whiz": "scatter",
             "format": "compare",
             "vars": { "year": [],
                       "depth": [],
@@ -885,13 +885,13 @@
         var complexities = app_data[current_url].raw.filter(function(d){return d.complexity})
       
         // If there is no data and app is not Bubbles, or there no distances and app is Scatter, no data!
-        if (app_data[current_url].raw.length == 0 && app_name != "bubbles") {
+        if (app_data[current_url].raw.length == 0 && app_name != "occugrid") {
           build_complete("No Data Available for Current Selection");
         } 
-        else if (app_name == "pie_scatter" && complexities.length == 0) {
+        else if (app_name == "scatter" && complexities.length == 0) {
           build_complete("No Complexities Available");
         }
-        else if (app_name == "pie_scatter" && distances.length == 0) {
+        else if (app_name == "scatter" && distances.length == 0) {
           build_complete("No Distances Available for Location");
         }
       
@@ -973,15 +973,15 @@
           else if (app_name == "geo_map") {
             load_coords();
           } 
-          else if (app_name == "bubbles") {
+          else if (app_name == "occugrid") {
             var url = required_url.replace("isic",isic.id)
             d3.json(url, function(required) {
-              bubbles_required = required.data
+              occugrid_required = required.data
               
               var else_url = "/rais/all/"+bra.id+"/all/show/"
               
               d3.json(else_url, function(elsewhere){
-                bubbles_elsewhere = elsewhere.data;
+                occugrid_elsewhere = elsewhere.data;
                 check_attrs(current_build[0],"create_app");
               })
               
@@ -1000,8 +1000,8 @@
     function create_app() {
       
       // Initialize available years and value_names
-      if (app_name == "bubbles") {
-        years = vizwhiz.utils.uniques(bubbles_required,"year");
+      if (app_name == "occugrid") {
+        years = vizwhiz.utils.uniques(occugrid_required,"year");
       } else {
         years = vizwhiz.utils.uniques(app_data[current_url].raw,"year");
       }
@@ -1076,7 +1076,7 @@
           if (v == "value_var") {
             
             // Determine available values
-            if (app_name == "bubbles") {
+            if (app_name == "occugrid") {
               var data_array = apps[app_name].vars.value_var;
             }
             else {
@@ -1091,7 +1091,7 @@
             }
             
             if (!global_vars.value_var || data_array.indexOf(global_vars.value_var) < 0) {
-              if (app_name == "bubbles") global_vars.value_var = "importance"      
+              if (app_name == "occugrid") global_vars.value_var = "importance"      
               else if (data_array.indexOf("val_usd") >= 0) global_vars.value_var = "val_usd"
               else if (data_array.indexOf("num_emp") >= 0) global_vars.value_var = "num_emp"
               else global_vars.value_var = data_array[0]
@@ -1209,7 +1209,7 @@
       /********************/
       /* Bubbles Specific */
       /********************/
-      else if (app_name == "bubbles") {
+      else if (app_name == "occugrid") {
         app
           .active_var("employed")
       } 
@@ -1228,7 +1228,7 @@
       /********************/
       /* Scatter Specific */
       /********************/
-      else if (app_name == "pie_scatter") {
+      else if (app_name == "scatter") {
       
         app
           .xaxis_var("distance")
@@ -1299,13 +1299,13 @@
       
       var data_obj = []
       
-      if ("bubbles" == format) {
+      if ("occugrid" == format) {
         
         years.forEach(function(year){
           
           var year_data = app_data[current_url].raw.filter(function(d){ return d.year == year; });
           
-          var req_filtered = bubbles_required.filter(function(d){ return d.year == year && d.required >= 0.6 }),
+          var req_filtered = occugrid_required.filter(function(d){ return d.year == year && d.required >= 0.6 }),
               req_ids = []
         
           req_filtered.forEach(function(d){
@@ -1339,7 +1339,7 @@
             if (d.employed/d.total >= 1) d.active = true;
             else d.active = false;
           
-            var elsewhere = bubbles_elsewhere.filter(function(e){ return e.year == year && e[current_build[0]+"_id"] == d.id })[0]
+            var elsewhere = occugrid_elsewhere.filter(function(e){ return e.year == year && e[current_build[0]+"_id"] == d.id })[0]
           
             if (!elsewhere) elsewhere = 0;
             else elsewhere = elsewhere.num_emp;
@@ -1483,7 +1483,7 @@
         else if (app_name == "rings") {
             return "Connections for " + window[out].name + " in " + bra.name
         }
-        else if (app_name == "bubbles") {
+        else if (app_name == "occugrid") {
           return "Available and required employment for "+isic.name+" in "+bra.name;
         }
         else {
