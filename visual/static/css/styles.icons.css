@@ -1,3 +1,22 @@
+.decision:after,
+.help:after {
+  content: "\f105";
+  display: block;
+  font-family: FontAwesome;
+  font-size: 20px;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+
+.decision.square:after,
+.help.square:after {
+  content: "";
+}
+
 .decision.square:before {
   background-position: 50%;
   background-repeat: no-repeat;
@@ -146,48 +165,48 @@
 /****************/
 
 .decision.square.industry:before {
-  content:"\f085";
+  content: "\f085";
 }
 
 .decision.square.yes:before {
-  content:"\f00c";
+  content: "\f00c";
 }
 
 .decision.square.no:before {
-  content:"\f128";
+  content: "\f128";
 }
 
 .decision.square.growth:before {
-  content:"\f062";
+  content: "\f062";
 }
 
 .decision.square.shrink:before {
-  content:"\f063";
+  content: "\f063";
 }
 
 .decision.square.paths:before,
 .decision.square.workforce:before {
-  content:"\f0c0";
+  content: "\f0c0";
 }
 
 .decision.square.attract:before {
-  content:"\f0c0";
+  content: "\f0c0";
 }
 
 .decision.square.opportunity:before {
-  content:"\f140";
+  content: "\f140";
 }
 
 .decision.square.wages:before {
-  content:"\f0d6";
+  content: "\f0d6";
 }
 
 .decision.square.destinations:before {
-  content:"\f0ac";
+  content: "\f0ac";
 }
 
 .decision.square.diversification:before {
-  content:"\f074";
+  content: "\f074";
 }
 
 /****************/
@@ -195,14 +214,14 @@
 /****************/
 
 .decision.square.database:before {
-  content:"\f022";
+  content: "\f022";
   line-height: 180px;
 }
 
 .decision.square.api:before {
-  content:"\f0ad";
+  content: "\f0ad";
 }
 
 .decision.square.source:before {
-  content:"\f14e";
+  content: "\f14e";
 }
