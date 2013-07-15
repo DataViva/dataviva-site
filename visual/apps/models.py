@@ -50,12 +50,12 @@ class Build(db.Model, AutoSerialize):
         elif "+" not in self.bra and "+" in bra_id:
             bra_id = bra_id.split("+")[0]
         self.bra = []
-        if bra_id == "all":
-            self.bra.append(Wld.query.get("sabra"))
-            self.bra[0].id = "all"
-            self.bra[0].icon = "/static/img/icons/wld/wld_sabra.png"
-        else:
-            for i, b in enumerate(bra_id.split("+")):
+        for i, b in enumerate(bra_id.split("+")):
+            if b == "all":
+                self.bra.append(Wld.query.get("sabra"))
+                self.bra[i].id = "all"
+                self.bra[i].icon = "/static/img/icons/wld/wld_sabra.png"
+            else:
                 self.bra.append(Bra.query.get(b))
                 self.bra[i].icon = "/static/img/icons/bra/bra_{0}.png".format(b[:2])
 
