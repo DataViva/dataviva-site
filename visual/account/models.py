@@ -52,7 +52,7 @@ class User(db.Model, AutoSerialize):
         if self.email:
             return 'http://www.gravatar.com/avatar/' + md5(self.email).hexdigest() + '?d=mm&s=' + str(size)
         else:
-            return 'http://www.gravatar.com/avatar/{0}?s=36&d=identicon'.format(self.nickname.encode('hex'))
+            return 'http://www.gravatar.com/avatar/{0}?s=' + str(size) + '&d=identicon'.format(self.nickname.encode('hex'))
     
     def __repr__(self):
         return '<User %r>' % (self.nickname)

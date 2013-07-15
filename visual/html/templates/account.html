@@ -20,6 +20,9 @@ form textarea {
 <div>
   <div class="grid5col1">
     
+    <img class="account_user" src="{{ user.avatar(150) }}" alt="{{ user.fullname }} icon" />
+    <h2>{{ user.fullname }}</h2>
+    
     {% set navigation_bar = [
         ('account.starred', 'Starred Apps'),
         ('account.questions', 'Questions'),
@@ -37,11 +40,11 @@ form textarea {
     <nav>
       <ul id="navigation">
       {% for id, caption in navigation_bar %}
-        <li{% if id == active_page %} class="active"{% endif %}><a href="{{ url_for(id) }}">{{ caption|e }}</a></li>
-        {% if active_page == 'account.questions' and id == 'account.questions' %}
+        <li{% if id == active_page %} class="active"{% endif %}><a href="{{ url_for(id, nickname=user.nickname) }}">{{ caption|e }}</a></li>
+        {% if active_page == 'account.questions' and id == 'account.questions' and g.user == user %}
           <ul>
           {% for q_id, q_caption in question_navigation_bar %}
-            <li{% if q_id == active_question_page %} class="active"{% endif %}><a href="{{ url_for(id, status=q_id) }}">{{ q_caption|e }}</a></li>
+            <li{% if q_id == active_question_page %} class="active"{% endif %}><a href="{{ url_for(id, nickname=user.nickname, status=q_id) }}">{{ q_caption|e }}</a></li>
           {% endfor %}
           </ul>
         {% endif %}

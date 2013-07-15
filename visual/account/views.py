@@ -38,70 +38,6 @@ def complete_login():
 ###############################
 # Views for ALL logged in users
 # ---------------------------
-@mod.route('/')
-@login_required
-def account_home():
-    return redirect(url_for('account.activity'))
-
-@mod.route('/starred/')
-def starred():
-    
-    offset = request.args.get('offset', 0)
-    activity_dict = {}
-    activity_list = []
-    limit = 50
-    
-    if request.is_xhr:
-        items = Starred.query.filter_by(user=g.user) \
-                    .order_by("timestamp desc") \
-                    .limit(limit).offset(offset).all()
-        items = [i.serialize() for i in items]
-        
-        return jsonify({"activities":items})
-    
-    return render_template("account/starred.html")
-
-@mod.route('/questions/')
-@mod.route('/questions/<status>/')
-def questions(status=None):
-    
-    offset = request.args.get('offset', 0)
-    activity_dict = {}
-    activity_list = []
-    limit = 50
-    
-    if request.is_xhr:
-        status = Status.query.filter_by(name=status).first()
-        qs = Question.query
-        if status:
-            qs = qs.filter_by(status=status)
-        qs = qs.filter_by(user=g.user) \
-                    .order_by("timestamp desc") \
-                    .limit(limit).offset(offset)
-        items = [q.serialize() for q in qs.all()]
-    
-        return jsonify({"activities":items})
-    
-    return render_template("account/questions.html", status=status)
-
-@mod.route('/replies/')
-def replies():
-    
-    offset = request.args.get('offset', 0)
-    activity_dict = {}
-    activity_list = []
-    limit = 50
-    
-    if request.is_xhr:
-        items = Reply.query.filter_by(user=g.user) \
-                    .order_by("timestamp desc") \
-                    .limit(limit).offset(offset).all()
-        items = [i.serialize() for i in items]
-        
-        return jsonify({"activities":items})
-    
-    return render_template("account/replies.html")
-
 @mod.route('/logout/')
 def logout():
     session.pop('twitter_token', None)
@@ -136,6 +72,76 @@ def login():
     return render_template('account/login.html', 
         form = form,
         providers = providers)
+
+@mod.route('/<nickname>/')
+def account_home(nickname):
+    user = User.query.filter_by(nickname=nickname).first_or_404()
+    return render_template("account/user_home.html", user=user)
+
+@mod.route('/<nickname>/questions/')
+@mod.route('/<nickname>/questions/<status>/')
+def questions(nickname, status=None):
+    user = User.query.filter_by(nickname=nickname).first_or_404()    
+    offset = request.args.get('offset', 0)
+    activity_dict = {}
+    activity_list = []
+    limit = 50
+    
+    if request.is_xhr:
+        status = Status.query.filter_by(name=status).first()
+        qs = Question.query
+        if status:
+            qs = qs.filter_by(status=status)
+        qs = qs.filter_by(user=user) \
+                    .order_by("timestamp desc") \
+                    .limit(limit).offset(offset)
+        items = [q.serialize() for q in qs.all()]
+    
+        return jsonify({"activities":items})
+    
+    return render_template("account/questions.html", 
+                status=status,
+                user=user)
+
+@mod.route('/<nickname>/starred/')
+def starred(nickname):
+    user = User.query.filter_by(nickname=nickname).first_or_404()        
+    offset = request.args.get('offset', 0)
+    activity_dict = {}
+    activity_list = []
+    limit = 50
+    
+    if request.is_xhr:
+        items = Starred.query.filter_by(user=user) \
+                    .order_by("timestamp desc") \
+                    .limit(limit).offset(offset).all()
+        items = [i.serialize() for i in items]
+        
+        return jsonify({"activities":items})
+    
+    return render_template("account/starred.html",
+                user=user)
+
+
+@mod.route('/<nickname>/replies/')
+def replies(nickname):
+    user = User.query.filter_by(nickname=nickname).first_or_404()    
+    offset = request.args.get('offset', 0)
+    activity_dict = {}
+    activity_list = []
+    limit = 50
+    
+    if request.is_xhr:
+        items = Reply.query.filter_by(user=user) \
+                    .order_by("timestamp desc") \
+                    .limit(limit).offset(offset).all()
+        items = [i.serialize() for i in items]
+        
+        return jsonify({"activities":items})
+    
+    return render_template("account/replies.html",
+                user=user)
+
 
 def after_login(**user_fields):
     # Remove None values
