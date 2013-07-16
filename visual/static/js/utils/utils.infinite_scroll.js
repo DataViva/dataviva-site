@@ -70,7 +70,7 @@ function infinite_scroll(selection){
       // call to the server
       function display(error, new_data) {
         
-        activities = new_data.activities
+        activities = new_data.activities || new_data.data;
   
         // we're obviously no longer fetching
         fetching = false;
@@ -118,8 +118,10 @@ function infinite_scroll(selection){
   
   scroll.url = function(value) {
     if(!arguments.length) return url;
+    if(value.split("?")[0] != url.split("?")[0]){
+      refresh = true;
+    }
     url = value;
-    refresh = true;
     return scroll;
   }
   

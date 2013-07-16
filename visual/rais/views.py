@@ -46,16 +46,18 @@ def parse_bras(bra_str):
 def get_query(data_table, url_args, **kwargs):
     query = data_table.query
     order = url_args.get("order", None)
-    results_per_page = int(url_args.get("per_page", RESULTS_PER_PAGE))
     if order:
         order = url_args.get("order").split(" ")
-    page = url_args.get("page", None)
+    offset = url_args.get("offset", None)
+    limit = url_args.get("limit", None)
+    if offset:
+        limit = limit or 50
     join = kwargs["join"] if "join" in kwargs else False
     cache_id = request.path
     ret = {}
     
     # first lets test if this query is cached
-    if page is None and order is None:
+    if limit is None:
         cached_q = cached_query(cache_id)
         if cached_q:
             return cached_q
@@ -153,11 +155,8 @@ def get_query(data_table, url_args, **kwargs):
     if join:
         # items = query.paginate(int(kwargs["page"]), RESULTS_PER_PAGE, False).items
         ret["data"] = []
-        if page:
-            count = query.count()
-            pagination = Pagination(int(page), results_per_page, count)
-            items = query.limit(results_per_page).offset(results_per_page * (pagination.page - 1)).all()
-            ret["pagination"] = pagination.serialize()
+        if limit:
+            items = query.limit(limit).offset(offset).all()
         else:
             items = query.all()
         for row in items:
@@ -167,17 +166,15 @@ def get_query(data_table, url_args, **kwargs):
                 extra[col_name] = value
                 datum = dict(datum.items() + extra.items())
             ret["data"].append(datum)
-    elif page:
-        count = query.count()
-        ret["pagination"] = Pagination(int(page), results_per_page, count).serialize()
-        ret["data"] = [d.serialize() for d in query.paginate(int(page), results_per_page, False).items]
+    elif limit:
+        ret["data"] = [d.serialize() for d in query.limit(limit).offset(offset).all()]
     else:
         ret["data"] = [d.serialize() for d in query.all()]
     
     # gzip and jsonify result
     ret = gzip_data(jsonify(ret).data)
     
-    if page is None and order is None:
+    if limit is None:
         cached_query(cache_id, ret)
     
     # raise Exception(page)

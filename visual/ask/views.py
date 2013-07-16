@@ -74,7 +74,7 @@ def answer(slug):
     if reply_form.validate_on_submit():
         if g.user is None or not g.user.is_authenticated():
             flash('You need to be signed in for this.')
-            return redirect(url_for('admin.login'))
+            return redirect(url_for('.answer', slug=question.slug))
         timestamp = datetime.utcnow()
         reply = Reply(body=reply_form.reply.data, timestamp=timestamp, 
                         user=g.user, question=question, parent_id=reply_form.parent.data)

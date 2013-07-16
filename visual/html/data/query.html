@@ -116,8 +116,8 @@
 </div>
 
 <script src="/static/js/utils/utils.selector.js"></script>
+<script src="/static/js/utils/utils.infinite_scroll.js"></script>
 <script type="text/javascript">
-  var CURRENT_PAGE = 1;
   var CURRENT_DATASET = 'rais';
   var ORDER_DIRECTIONS = ["desc", "asc", ""]
   var COLUMNS = ["year", "bra_id", "isic_id", "hs_id", "cbo_id", "wld_id", "wage", "num_emp", "num_est", "val_usd", "val_kg", "val_qty", "rca", "growth_pct", "growth_pct_total", "growth_val", "growth_val_total"]
@@ -132,17 +132,14 @@
     d3.select(this.parentNode).remove();
   })
 
-  visual.toggle("dataset");
-  visual.dropdown("#year_filter");
+  // visual.toggle("dataset");
+  // visual.dropdown("#year_filter");
 
   d3.selectAll("#secex_on").style("display", "none")
   d3.selectAll("#rais_on").style("display", "block")
 
   
-  
-  
-  // default load page with data
-  update_table(CURRENT_DATASET);
+
   
   // Toggling between datasets (RAIS & SECEX)
   function change_dataset(value){
@@ -189,8 +186,7 @@
     .style("height", "100%")
 
   var selector = Selector()
-    .callback("add_filter")
-    .language("en");
+    .callback("add_filter");
 
   d3.selectAll(".add_filter").on(vizwhiz.evt.click, function(){
     var selector_type = d3.select(this).attr("name")
@@ -237,11 +233,10 @@
   
   // retrieving new data
   function update_table(dataset, order){
+
     
-    console.log(dataset, order)
-    // return
-    
-    // based on the dataset provided determine which filters we are interested in
+    // based on the dataset provided determine which filters we are interested
+    // in
     var filters = {"location":"all", "industry":"all", "occupation":"all"}
     if(dataset == "secex"){
       filters = {"location":"all", "product":"all", "country":"all"}
@@ -254,7 +249,8 @@
       // to the api call as 'show'
       fdata = is_active(d3.select("#"+fname+"_filter")) ? "show" : filters[fname];
       
-      // if this filter is active, we also need to check if items have been added
+      // if this filter is active, we also need to check if items have been
+      // added
       if(fdata == "show"){
         
         // are there any added filters?
@@ -288,88 +284,15 @@
     else {
       var api_url = "/secex/"+ [filters["year"], filters["location"], filters["product"], filters["country"]].join("/")
     }
-    api_url += "?page=" + CURRENT_PAGE;
-    // console.log(api_url)
     
-    d3.json(api_url, function(resp){
-      make_table(resp.data)
-      make_pages(resp.pagination)
-    })
+    d3.select("#results").selectAll("tbody > tr").remove()
+    d3.select("#results")
+      .call(is.url(api_url))
 
     // prevent page from submitting form
     if(d3.event) d3.event.preventDefault();
   }
   
-  d3.select("#rais_go").on(vizwhiz.evt.click, function(){
-    CURRENT_PAGE = 1;
-    CURRENT_DATASET = 'rais';
-    update_table(CURRENT_DATASET);
-  })
-  d3.select("#secex_go").on(vizwhiz.evt.click, function(){
-    CURRENT_PAGE = 1;
-    CURRENT_DATASET = 'secex';
-    update_table(CURRENT_DATASET);
-  })
-  
-  function make_pages(pagination){
-    
-    d3.select(".grid4col3 div.pagination").remove()
-    
-    if(pagination.pages.length < 2){
-      return;
-    }
-    
-    var pagination_div = d3.select(".grid4col3")
-                          .append("div").attr("class", "pagination")
-    
-    if(pagination.has_prev){
-      pagination_div.append("a")
-        .attr("class", "button")
-        .html("&laquo; Previous")
-        .on(vizwhiz.evt.click, function(){
-          CURRENT_PAGE--;
-          update_table(CURRENT_DATASET);
-          d3.event.preventDefault();
-        })
-    }
-    
-    pagination.pages.forEach(function(p){
-      
-      if(!p){
-        pagination_div.append("span")
-          .attr("class", "ellipsis")
-          .text("…")
-      }
-      else if(p != pagination.page){
-        pagination_div.append("a")
-          .attr("class", "button")
-          .text(p)
-          .on(vizwhiz.evt.click, function(){
-            CURRENT_PAGE = parseInt(p);
-            update_table(CURRENT_DATASET);
-            d3.event.preventDefault();
-          })
-      }
-      else {
-        pagination_div.append("strong")
-          .attr("class", "button current_page")
-          .text(p)
-      }
-      
-
-    })
-    
-    if(pagination.has_next){
-      pagination_div.append("a")
-        .attr("class", "button")
-        .html("Next &raquo;")
-        .on(vizwhiz.evt.click, function(){
-          CURRENT_PAGE++;
-          update_table(CURRENT_DATASET);
-          d3.event.preventDefault();
-        })
-    }
-  }
   
   function make_table(dataset){
   
@@ -395,28 +318,7 @@
     var th = thead.selectAll("th").data(ordered_columns)
     var th_enter = th.enter().append("th").text(function(column) { return column; })
     
-    // th_enter.append("a")
-    //   .attr("href", "#")
-    
     th.text(function(column) { return visual.format.text(column); })
-    
-    // update header text
-    // th.selectAll("a")
-    //   .text(function(column) { return column; })
-      
-      
-      // .on("click", function(column, i){
-      //   console.log(column)
-      //   var current_direction = column.split(".")[1] ? column.split(".")[1] : "";
-      //   column = column.split(".")[0]
-      //   var current_direction_index = ORDER_DIRECTIONS.indexOf(current_direction) + 1
-      //   current_direction = ORDER_DIRECTIONS[current_direction_index % ORDER_DIRECTIONS.length]
-      //   column = column+"."+current_direction
-      //   
-      //   d3.select(this).datum(column)
-      //   update_table(CURRENT_DATASET, [column]);
-      //             
-      // });
     
     // remove old header columns
     th.exit().remove()
@@ -440,6 +342,71 @@
     cells.exit().remove()
     rows.exit().remove()
   }
+  
+  function item_formatter(container_el, dataset){
+  
+    // the columns we'd like to display
+    var columns = d3.keys(dataset[0]).concat(d3.keys(dataset[dataset.length-1]));
+    columns = columns.filter(function(itm, i){
+        return columns.indexOf(itm)== i; 
+    });
+    var ordered_columns = COLUMNS.filter(function(i) {return (columns.indexOf(i) > -1);});
+    
+    
+    var selection = d3.select(container_el)
+    selection.selectAll('table').data([0]).enter().append('table');
+    var table = selection.select('table');
+    
+    table.selectAll('thead').data([0]).enter().append('thead').append('tr');
+    var thead = table.select('thead tr');
+
+    table.selectAll('tbody').data([0]).enter().append('tbody');
+    var tbody = table.select('tbody');
+    
+    // enter new header rows
+    var th = thead.selectAll("th").data(ordered_columns)
+    var th_enter = th.enter().append("th").text(function(column) { return column; })
+    
+    th.text(function(column) { return visual.format.text(column); })
+    
+    // remove old header columns
+    th.exit().remove()
+    
+    
+    // create a row for each object in the data
+    var rows = tbody.selectAll("tr").data(dataset, JSON.stringify)  
+    var rows_enter = rows.enter().append("tr");
+    
+    // create cells for each datum
+    var cells = rows.selectAll("td").data(function(row){
+        return ordered_columns.map(function(column) {
+          return {"column": column, "value": row[column]};
+        });
+    })
+    
+    cells.enter().append("td").style("padding", "2px 5px")
+    rows.selectAll("td").text(function(d) { return d.value; });
+    
+    // remove old cells
+    // cells.exit().remove()
+    // rows.exit().remove()
+
+  }
+
+  var is = infinite_scroll().format_items(item_formatter);
+  
+  // default load page with data
+  update_table(CURRENT_DATASET);
+  
+  // attache click event listeners to build buttons
+  d3.select("#rais_go").on(vizwhiz.evt.click, function(){
+    CURRENT_DATASET = 'rais';
+    update_table(CURRENT_DATASET);
+  })
+  d3.select("#secex_go").on(vizwhiz.evt.click, function(){
+    CURRENT_DATASET = 'secex';
+    update_table(CURRENT_DATASET);
+  })
 
 </script>
 {% endblock %}
