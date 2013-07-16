@@ -154,58 +154,6 @@ div#computer_guide {
           transition-duration: 0.75s;
 }
 
-div#guide_title {
-  font-weight: bold;
-  font-size: 28px;
-  margin-bottom: 3%;
-}
-
-div.primary_app,
-div.secondary_app {
-  -webkit-transition: opacity ease-in-out .5s;
-     -moz-transition: opacity ease-in-out .5s;
-          transition: opacity ease-in-out .5s;
-}
-
-div.guide_app_description {
-  font-size: 14px;
-  margin: 10px 0px 5px 0px;
-}
-
-div.guide_app_description > span {
-  display: inline;
-}
-
-div.secondary_app > div.guide_app_description > span.long {
-  display: none;
-}
-
-iframe.guide_app {
-  width: 100%;
-  margin-bottom: 1.5%;
-}
-
-div.guide_app_switcher {
-  opacity: 0;
-  width: 100%;
-  background-color: rgba(0,0,0,0.5);
-  color: white;
-  position: absolute;
-  top: 0px;
-  font-weight: bold;
-  font-size: 18px;
-  text-align: center;
-  line-height: 1.5%;
-  -webkit-transition: opacity linear .1s;
-     -moz-transition: opacity linear .1s;
-          transition: opacity linear .1s;
-}
-
-div.guide_app_switcher:hover {
-  opacity: 1;
-  cursor: pointer;
-}
-
 div#rec_stroke {
   background-image: url("/static/img/nav/rec_stroke.png");
   background-repeat: no-repeat;

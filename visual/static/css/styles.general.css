@@ -71,6 +71,26 @@ h5 {
   letter-spacing: 1px;
 }
 
+/***************************/
+/* Final Plan Page Styling */
+/***************************/
+
+div#guide_title {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+
+iframe.guide_app {
+  height: 573px;
+  width: 764px;
+  margin-bottom: 12px;
+}
+
+div.guide_app_description {
+  font-size: 14px;
+  margin: 10px 0px 5px 0px;
+}
+
 /******************/
 /* Loader Styling */
 /******************/

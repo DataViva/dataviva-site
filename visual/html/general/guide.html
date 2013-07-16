@@ -1,7 +1,7 @@
 {% extends "templates/site.html" %}
 
 <!-- set the title -->
-{% block title %}: Generate a Guide{% endblock %}
+{% block title %}: {{ plan.title }}{% endblock %}
 
 {% block body %}
 
@@ -10,20 +10,19 @@
   </div>
   
   <div class="primary_app grid5col4">
-    <div id="guide_title">{{ title }}</div>
     
-    <div class="guide_app_description">
-      {{ primary.text_long|safe }}
-    </div>
-    <iframe class="guide_app" src="{{ primary.url|safe }}"></iframe>
+    <div id="guide_title">{{ plan.title }}</div>
     
-    {% for app in secondaries %}
-      <div class="guide_app_description">{{ app.text_long|safe }}</div>
-      <iframe class="guide_app" src="{{ app.url|safe }}"></iframe>
+    {% for app in plan.builds %}
+    
+    <!--<div class="guide_app_description"></div>-->
+    <iframe class="guide_app" src="{{ app.url }}"></iframe>
     {% endfor %}
     
   </div>
 
+  <!--
+    
   {% if recs %}
     <div id="rec_stroke">
       <div id="site_breadcrumbs">
@@ -58,6 +57,8 @@
       {% endfor %}
     </div>
   {% endif %}
+    
+  -->
 
 {% endblock %}
 

@@ -1232,7 +1232,8 @@
           {'prev_request': "/apps/embed/"+window_url}, 
           "Visual : "+app.build.title, "/apps/embed/"+window_url
         )
-        if (window != window.parent) {
+        if (window != window.parent &&
+            window.parent.location.pathname.indexOf("builder") >= 0) {
           window.parent.history.pushState(
             {'prev_request': "/apps/builder/"+window_url}, 
             "Visual : "+app.build.title, "/apps/builder/"+window_url
@@ -1240,10 +1241,10 @@
         }
       } 
       else if (window.location.href.indexOf(window_url) < 0) {
-        if (parent.location.pathname.indexOf("apps") >= 0) {
+        if (window.parent.location.pathname.indexOf("embed") >= 0) {
           window.location = "/apps/embed/"+window_url
         } else {
-          if(parent.change_url) parent.change_url("/apps/"+window_url)
+          window.location = "/apps/buuilder/"+window_url
         }
       }
         

@@ -27,27 +27,27 @@
 
   <script>
   
-    var value = "{{ category }}"
+    var value = "{{ selector }}"
     
     if (value == "export") {
       value = "hs"
-      var limit = 2
+      var limit = 6
     }
     else if (value == "establishment") {
       value = "isic"
-      var limit = 1
+      var limit = 5
     }
     else if (value == "career") {
       value = "cbo"
-      var limit = 1
+      var limit = 4
     }
     else if (value == "location") {
       value = "bra"
-      var limit = 2
+      var limit = 8
     }
     else if (value == "partner") {
       value = "wld"
-      var limit = 2
+      var limit = 5
     }
   
     selector_return = function(value) {

@@ -179,7 +179,7 @@ class Build(db.Model, AutoSerialize):
         return auto_serialized
 
     def __repr__(self):
-        return '<Build %r: %s/%s/%s>' % (self.app.type, self.filter1, self.filter2, self.output)
+        return '<Build %s:%r: %s/%s/%s>' % (self.id, self.app.type, self.filter1, self.filter2, self.output)
 
 class UI(db.Model, AutoSerialize):
 

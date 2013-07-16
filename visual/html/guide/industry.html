@@ -11,14 +11,38 @@
   
     <div class="title">What are you interested in?</div>
   
-    <a class="decision square export" href="/guide/export/select">
+    <a id="export" class="decision square export" onclick="linker(this.id)">
       Product Exports
     </a>
   
-    <a class="decision square establishment" href="/guide/establishment/select">
+    <a id="establishment" class="decision square establishment" onclick="linker(this.id)">
       Establishments and Employement
     </a>
   
   </div>
+
+{% endblock %}
+
+{% block js %}
+
+  <script>
+  
+    path = "{{g.path}}".split("/")
+
+    function linker(id) {
+      if (path[2] == "location") {
+        if (path[4] == "attract") window.location = path.join("/")+id+"/select/"
+        else if (path[4] == "industry") {
+          path[4] = id
+          window.location = path.join("/")
+        }
+        else window.location = path.join("/")+id+"/"
+      }
+      else {
+        window.location = "/guide/"+id+"/select/"
+      }
+    }
+  
+  </script>
 
 {% endblock %}
