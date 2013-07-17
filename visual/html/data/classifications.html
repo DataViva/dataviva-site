@@ -4,26 +4,24 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block body %}
-<div class="grid5col5">
+<div class="grid5col1">
   
-  
-  
-  <h1>{{ title }}</h1>
+  <h2>{{ title }}</h2>
   
   <div id="attr_toggle">
-    <input type="radio" name="attr" value="hs" onclick="window.location='{{ url_for('data.classifications', attr='hs', category=category) }}all/'" {% if page_attr == "hs" %}checked{% endif %}>
+    <input type="radio" name="attr" value="hs" onclick="window.location='{{ url_for('data.classifications', attr='hs') }}all/'" {% if page_attr == "hs" %}checked{% endif %}>
     <label for="hs">Products</label>
     
-    <input type="radio" name="attr" value="cbo" onclick="window.location='{{ url_for('data.classifications', attr='cbo', category=category) }}all/'" {% if page_attr == "cbo" %}checked{% endif %}>
+    <input type="radio" name="attr" value="cbo" onclick="window.location='{{ url_for('data.classifications', attr='cbo') }}all/'" {% if page_attr == "cbo" %}checked{% endif %}>
     <label for="cbo">Occupations</label>
     
-    <input type="radio" name="attr" value="isic" onclick="window.location='{{ url_for('data.classifications', attr='isic', category=category) }}all/'" {% if page_attr == "isic" %}checked{% endif %}>
+    <input type="radio" name="attr" value="isic" onclick="window.location='{{ url_for('data.classifications', attr='isic') }}all/'" {% if page_attr == "isic" %}checked{% endif %}>
     <label for="isic">Industries</label>
     
-    <input type="radio" name="attr" value="bra" onclick="window.location='{{ url_for('data.classifications', attr='bra', category=category) }}all/'" {% if page_attr == "bra" %}checked{% endif %}>
+    <input type="radio" name="attr" value="bra" onclick="window.location='{{ url_for('data.classifications', attr='bra') }}all/'" {% if page_attr == "bra" %}checked{% endif %}>
     <label for="bra">Brazilian Locations</label>
     
-    <input type="radio" name="attr" value="wld" onclick="window.location='{{ url_for('data.classifications', attr='wld', category=category) }}all/'" {% if page_attr == "wld" %}checked{% endif %}>
+    <input type="radio" name="attr" value="wld" onclick="window.location='{{ url_for('data.classifications', attr='wld') }}all/'" {% if page_attr == "wld" %}checked{% endif %}>
     <label for="wld">Countries</label>
   </div>
   
@@ -35,36 +33,41 @@
       {% endfor %}
     </select>
   </div>
-
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>ID</th>
-        <th>Category</th>
-        <th>Name (English)</th>
-        <th>Name (Portuguese)</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for attr in attrs %}
-      <tr>
-        <td class="icon">
-          <div style="background-color: {{ attr.color }}" title="{{ attr.id }}"></div>
-        </td>
-        <td>{{ attr.id }}</td>
-        <td><script>document.write(format_name("{{ page_attr }}_{{ attr.id|length }}", "{{ g.locale }}"))</script></td>
-        <td>{{ attr.name_en }}</td>
-        <td>{{ attr.name_pt }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
   
-  <div class="loading">Loading; one moment please…</div>
+</div>
+<div class="grid5col4">
+
+  <div id="results">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>ID</th>
+          <th>Category</th>
+          <th>Name (English)</th>
+          <th>Name (Portuguese)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- {% for attr in attrs %}
+        <tr>
+          <td class="icon">
+            <div style="background-color: {{ attr.color }}" title="{{ attr.id }}"></div>
+          </td>
+          <td>{{ attr.id }}</td>
+          <td><script>document.write(format_name("{{ page_attr }}_{{ attr.id|length }}", "{{ g.locale }}"))</script></td>
+          <td>{{ attr.name_en }}</td>
+          <td>{{ attr.name_pt }}</td>
+        </tr>
+        {% endfor %} -->
+      </tbody>
+    </table>
+  </div>
+  
   
 </div>
 
+<script src="/static/js/utils/utils.infinite_scroll.js"></script>
 <script>
 // dropdown for changing number of items per page
 function update_per_page(per_page){
@@ -84,64 +87,9 @@ function update_depth(depth){
   window.location = new_page_url
 }
 
-visual.dropdown("#category");
-
-visual.toggle("attr");
-
-d3.selectAll("td.icon > div").style("background-image", function(){
-  return "url('"+visual.icon(this.title, "{{ page_attr }}") + "')"
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Initialize variables
-var formatDate = d3.time.format("%B %-d, %Y"),
-    parseDate = d3.time.format.iso.parse,
-    offset = 50,
-    fetching;
-
-// The item we're going to listen on for scrolling
-d3.select(window)
-    .on("scroll", maybe_fetch)
-
-// Check if we need to fetch
-function maybe_fetch() {
-  
-  // get the position of the loading div
-  var loading_div_y = !d3.select(".loading").empty() ? d3.select(".loading").node().getBoundingClientRect().top : NaN;
-  
-  // if we're not currently fetching and offset if not NaN and the loader y pos
-  // is less than the height of the page then fetch new items
-  if (!fetching && offset >= 0 && loading_div_y < innerHeight) {
-    fetch();
-  }
-  
-}
-
-// Call the server for more acitivities
-function fetch() {
-  fetching = true;
-  
-  // Here we set the header X-Requested-With to XMLHttpRequest so the 
-  // server knows it's an AJAX call
-  d3.json(window.location+"?offset="+offset).header("X-Requested-With", "XMLHttpRequest").get(display);
-}
+// d3.selectAll("td.icon > div").style("background-image", function(){
+//   return "url('"+visual.icon(this.title, "{{ page_attr }}") + "')"
+// })
 
 // The meat and potatoes, this function get called after we've made the call
 // to the server
@@ -174,34 +122,7 @@ function display(error, data) {
   var attrs_enter = d3.select("table > tbody").selectAll("tr")
     .data(attrs, function(d){ x++; return d ? d.id : x })
     .enter().append("tr")
-    
-  // return
-  //     x.attr("class", "activity")
-  //     .attr("href", function(d){
-  //       url = "#"
-  //       if(d.activity_type == "starred"){
-  //         url = "/embed/" + d.app_id;
-  //       }
-  //       else if(d.activity_type == "questions"){
-  //         url = "/ask/question/" + d.slug;
-  //       }
-  //       else if(d.activity_type == "replies"){
-  //         url = "/ask/question/" + d.question_id;
-  //       }
-  //       return url;
-  //     })
-  //     .append("div")
-  //     .attr("class", "feed-item")
-  
-  /*
-  <td class="icon">
-    <div style="background-color: attr.color" title="attr.id"></div>
-  </td>
-  <td>attr.id</td>
-  <td>cat_id</td>
-  <td>attr.name_en </td>
-  <td>attr.name_pt </td>
-  */
+
   
   attrs_enter.append("td")
     .attr("class", "icon")
@@ -262,8 +183,49 @@ function display(error, data) {
   setTimeout(maybe_fetch, 50);
 }
 
-// call this on page load
-maybe_fetch();
+function item_formatter(container_el, dataset){
+  
+  var tbody = d3.select(container_el).select("tbody")
+  // create a row for each object in the data
+  var x = 1;
+  var rows = tbody.selectAll("tr").data(dataset, function(d){ x++; return d ? d.id : x })
+  var rows_enter = rows.enter().append("tr");
+  // 
+  // // create cells for each datum
+  // var cells = rows.selectAll("td").data(function(row){
+  //     return ordered_columns.map(function(column) {
+  //       return {"column": column, "value": row[column]};
+  //     });
+  // })
+  // 
+  // cells.enter().append("td").style("padding", "2px 5px")
+  // rows.selectAll("td").text(function(d) { return d.value; });
+
+  rows_enter.append("td")
+    .attr("class", "icon")
+    .append("div")
+      .style("background-image", function(d){
+        return "url('"+visual.icon(d.id, d.attr_type) + "')"
+      })
+      .style("background-color", function(d){ return d.color })
+      .attr("title", function(d){ return d.id; })
+
+  rows_enter.append("td").text(function(d){ return d.id; })
+  rows_enter.append("td").text(function(d){ return d.category; })
+  rows_enter.append("td").text(function(d){ return d.name_en; })
+  rows_enter.append("td").text(function(d){ return d.name_pt; })
+  
+
+}
+
+
+
+
+var is = infinite_scroll().format_items(item_formatter);
+d3.select("#results")
+  .call(is)
+
+
 </script>
 
 {% endblock %}

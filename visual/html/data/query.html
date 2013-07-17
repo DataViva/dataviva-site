@@ -293,56 +293,6 @@
     if(d3.event) d3.event.preventDefault();
   }
   
-  
-  function make_table(dataset){
-  
-    // the columns we'd like to display
-    var columns = d3.keys(dataset[0]);
-    var ordered_columns = COLUMNS.filter(function(i) {return (columns.indexOf(i) > -1);});
-
-    // var table = d3.select("#results").append("table"),
-    //   thead = table.append("thead"),
-    //   tbody = table.append("tbody");
-    var selection = d3.select("#results")
-    
-    selection.selectAll('table').data([0]).enter().append('table');
-    var table = selection.select('table');
-    
-    table.selectAll('thead').data([0]).enter().append('thead').append('tr');
-    var thead = table.select('thead tr');
-
-    table.selectAll('tbody').data([0]).enter().append('tbody');
-    var tbody = table.select('tbody');
-    
-    // enter new header rows
-    var th = thead.selectAll("th").data(ordered_columns)
-    var th_enter = th.enter().append("th").text(function(column) { return column; })
-    
-    th.text(function(column) { return visual.format.text(column); })
-    
-    // remove old header columns
-    th.exit().remove()
-    
-    
-    // create a row for each object in the data
-    var rows = tbody.selectAll("tr").data(dataset)    
-    var rows_enter = rows.enter().append("tr");
-    
-    // create cells for each datum
-    var cells = rows.selectAll("td").data(function(row){
-        return ordered_columns.map(function(column) {
-          return {"column": column, "value": row[column]};
-        });
-    })
-    
-    cells.enter().append("td").style("padding", "2px 5px")
-    rows.selectAll("td").text(function(d) { return d.value; });
-    
-    // remove old cells
-    cells.exit().remove()
-    rows.exit().remove()
-  }
-  
   function item_formatter(container_el, dataset){
   
     // the columns we'd like to display

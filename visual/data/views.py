@@ -90,7 +90,7 @@ def classifications(category, page, attr=None):
     
     if attr == "bra":
         attr_table = Bra
-        category_lookup = {"state":2, "mesoregion":4, "microregion":4, "municipality":8}
+        category_lookup = {"state":2, "mesoregion":4, "microregion":6, "municipality":8}
         title = "Brazilian Geography"
     elif attr == "wld":
         attr_table = Wld
@@ -120,17 +120,9 @@ def classifications(category, page, attr=None):
     attrs = attrs.limit(per_page).offset(offset)
     category_lookup = {v:k for k, v in category_lookup.items()}
     
-    # total = attrs.count()
-    # if per_page.isdigit():
-    #     pagination = Pagination(page, int(per_page), total)
-    #     attrs = attrs.paginate(page, int(per_page), False).items
-    # else:
-    #     pagination = Pagination(page, per_page, total)
-    #     attrs = attrs.all()
-    
     if request.is_xhr:
-        attrs_json = [a.serialize() for a in attrs]
-        return jsonify({"attrs": attrs_json, "attr_type": attr, "category_lookup":category_lookup})
+        attrs_json = [dict(a.serialize().items() + [("attr_type",attr)]) for a in attrs]
+        return jsonify({"data": attrs_json, "attr_type": attr, "category_lookup":category_lookup})
     
     return render_template("data/classifications.html",
         title = title,
