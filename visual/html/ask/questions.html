@@ -25,8 +25,8 @@
     <div id="recent">
       <div id="order_toggle">
         <legend>Order by</legend>
-        <input type="radio" name="order" value="votes" onclick="change_order(this.value)">
-        <label for="votes">Top Rated</label>
+        <input type="radio" name="order" value="votes" onclick="change_order(this.value)" checked="checked">
+        <label for="votes">Top Voted</label>
         <input type="radio" name="order" value="newest" onclick="change_order(this.value)">
         <label for="newest">Newest</label>
       </div>
@@ -56,7 +56,21 @@
 <script src="/static/js/utils/utils.infinite_scroll.js"></script>
 <script>
 
+var order = d3.select('input[name="order"]:checked').attr("value"),
+    search_term = null;
+
+function change_order(new_order){
+  order = new_order;
+  var url = window.location.href + "?order=" + order;
+  if(search_term){
+    url += "&q=" + search_term;
+  }
+  d3.select(".question_feed").html('')
+    .call(is.url(url).offset(0).remove(true))
+}
+
 function item_formatter(container_el, activities, offset){
+  console.log(container_el)
   
   var formatDate = d3.time.format("%B %-d, %Y"),
       parseDate = d3.time.format.iso.parse;
@@ -120,9 +134,11 @@ d3.select(".question_feed")
 
 d3.select("#search").on("input", function(e){
 
-  var search_term = this.value;
-  d3.select(".question_feed")
-    .call(is.url(window.location.href + "?q=" + search_term).remove(true))
+  search_term = this.value;
+  console.log(search_term)
+  var url = window.location.href + "?q=" + search_term + "&order=" + order;
+  d3.select(".question_feed").html('')
+    .call(is.url(url).offset(0).remove(true))
 
 })
 

@@ -2,6 +2,7 @@ function infinite_scroll(selection){
   var url = window.location.href,
       refresh = false,
       remove = false,
+      offset = 0,
       format_items = function(d){ return d };
   
   // Initialize variables
@@ -36,6 +37,10 @@ function infinite_scroll(selection){
 
         // if we're not currently fetching and offset if not NaN and the loader
         // y pos is less than the height of the page then fetch new items
+        if(isNaN(offset)){
+          offset = 0;
+        }
+        // console.log(fetching, offset, loading_div_y, innerHeight, refresh)
         if ((!fetching && offset >= 0 && loading_div_y < innerHeight) || refresh) {
           fetch();
         }
@@ -46,10 +51,6 @@ function infinite_scroll(selection){
       function fetch() {
         fetching = true;
         refresh = false;
-        
-        if(isNaN(offset)){
-          offset = 0;
-        }
   
         // conver url to Location object
         var a = document.createElement('a');
@@ -138,6 +139,12 @@ function infinite_scroll(selection){
   scroll.remove = function(value) {
     if(!arguments.length) return remove;
     remove = value;
+    return scroll;
+  }
+  
+  scroll.offset = function(value) {
+    if(!arguments.length) return offset;
+    offset = value;
     return scroll;
   }
   

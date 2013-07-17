@@ -39,24 +39,32 @@ def index(page):
         # only the approved questions
         approved = Status.query.filter_by(name='Approved').first()
         questions = Question.query.filter_by(status = approved)
-    
+
         # if the user has submitted a search, filter by that term
         if search_term:
             questions = questions.whoosh_search(search_term)
 
         # if we are ordering the questions by newest get them ordered chronologically
-        # if order == "newest":
-        questions = questions.order_by(Question.timestamp.desc()).limit(limit).offset(offset)
-        questions = [q.serialize() for q in questions.all()]
+        if order == "newest":
+            questions = questions.order_by(Question.timestamp.desc())
+            questions = questions.limit(limit).offset(offset)
+            questions = [q.serialize() for q in questions.all()]
 
         # otherwise we are ordering the questions by votes
-        # else:
-        #     votes_subq = db.session.query(Vote, func.count('*').label('vote_count')).group_by(Vote.type_id).subquery()
-        #     votes_questions = db.session.query(Question, votes_subq.c.vote_count) \
-        #         .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
-        #         .filter(Question.status == approved).order_by(votes_subq.c.vote_count.desc()) \
-        #         .limit(limit).offset(offset)
-        #     questions = [q[0].serialize() for q in votes_questions]
+        else:
+            questions = questions.limit(limit).offset(offset)
+            ids = [q.id for q in questions]
+            # raise Exception(ids)
+            votes_subq = db.session.query(Vote, func.count('*').label('vote_count')).group_by(Vote.type_id).subquery()
+            questions = db.session.query(Question, votes_subq.c.vote_count) \
+                .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
+                .filter(Question.status == approved) \
+                .filter(Question.id.in_(ids)) \
+                .order_by(votes_subq.c.vote_count.desc()) \
+                # .limit(limit).offset(offset)
+            # raise Exception(votes_questions.all())
+        
+            questions = [q[0].serialize() for q in questions]
 
         return jsonify({"activities":questions})
     
