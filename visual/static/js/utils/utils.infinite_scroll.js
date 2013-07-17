@@ -15,10 +15,14 @@ function infinite_scroll(selection){
       var container_el = this;
       
       // On first time add
-      d3.select(container_el).selectAll(".infinite_loading")
-        .data([container_el])
+      var inf_loading_div = d3.select(container_el).selectAll(".infinite_loading")
+
+      inf_loading_div.data([container_el])
         .enter().append("div")
         .attr("class", "infinite_loading")
+      
+      var loading = visual.ui.loading(".infinite_loading")
+      loading.text("Loading more items").show()
       
       // The item we're going to listen on for scrolling
       d3.select(window)
@@ -89,7 +93,7 @@ function infinite_scroll(selection){
             }
           }
           offset = NaN;
-          // d3.select(".infinite_loading").remove();
+          d3.select(".infinite_loading").remove();
           return;
         }
   

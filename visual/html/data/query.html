@@ -36,7 +36,7 @@
     </a>
     <div id="location_add" class="filter add" style="display: block">
       <p id="{{ geo_location.id }}" class="filter_item" style="font-size: 18.568421052631578px;">
-        <span class="list_icon" title="{{ geo_location.id }}" style="background-color: rgb(255, 0, 0); width: 12px; height: 12px;"></span>
+        <span class="list_icon" title="{{ geo_location.id }}"></span>
         <span class="filter_title" style="margin-left: 0px;">{{ geo_location.name_en }}</span>
         <a><i class="icon-remove-sign" style="margin-left: -5px;"></i></a>
       </p>
@@ -186,7 +186,7 @@
     .style("height", "100%")
 
   var selector = Selector()
-    .callback("add_filter");
+    .callback(add_filter);
 
   d3.selectAll(".add_filter").on(vizwhiz.evt.click, function(){
     var selector_type = d3.select(this).attr("name")
@@ -195,7 +195,7 @@
   })
   
   function add_filter(obj){
-    var add_btn = "a[name='" + obj.type + "']"
+    var add_btn = "a[name='" + selector.type() + "']"
     var cont = d3.select(add_btn).node().parentNode;
     visual.popover.hide();
     

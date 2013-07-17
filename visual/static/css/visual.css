@@ -427,6 +427,16 @@ a.button.square.link {
   margin-bottom: 13px;
 }
 
+span.list_icon {
+  display: inline-block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin: 3px 0 0 0;
+  width: 15px;
+  height: 15px;
+}
+
 .filter {
   font-size: 14px !important;
   font-weight: normal;
@@ -504,7 +514,7 @@ a.button.square.link {
 #table_container {
   width: 98%;
   min-height: 700px;
-  background-color: #eee;
+  background-color: rgba(255, 255, 255, .8);
   overflow-x: scroll;
 }
 
@@ -920,4 +930,12 @@ a.tag span {
   width: 150px;
   height: 150px;
   border: 1px solid #ddd;
+}
+
+/********************/
+/* Infinite Loading */
+/********************/
+div.infinite_loading {
+  height: 100px;
+  position: relative;
 }
