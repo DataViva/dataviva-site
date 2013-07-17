@@ -131,10 +131,6 @@ def guide(category = None, category_id = None, option = None, subject = None, op
     recs = False
     plan = None
     
-    bra_id = "all"
-    filter1 = None
-    filter2 = None
-    
     category_type = category_id
     option_type = option_id
     extra_type = extra_id
@@ -150,7 +146,7 @@ def guide(category = None, category_id = None, option = None, subject = None, op
             option_type = "<bra>"
     elif category == "establishment":
         category_type = "<isic>"
-        if option == "potential":
+        if option == "potential" and option_id and option_id != "select":
             option_type = "<bra>"
     elif category == "location":
         category_type = "<bra>"
@@ -162,8 +158,10 @@ def guide(category = None, category_id = None, option = None, subject = None, op
             extra_type = "<isic>"
     elif category == "partner":
         category_type = "<wld>"
+        
     # raise Exception(category,category_type,option,option_type,extra_type)
-    plan = Plan.query.filter_by(category=category, category_type=category_type, option=option, option_type=option_type, option_id=extra_type).first()
+    if option:
+        plan = Plan.query.filter_by(category=category, category_type=category_type, option=option, option_type=option_type, option_id=extra_type).first()
     # raise Exception(plan)
     if plan:
         
@@ -172,39 +170,28 @@ def guide(category = None, category_id = None, option = None, subject = None, op
         
         if category == "career":
             plan.set_attr(category_id,"cbo")
-            filter2 = category_id
         elif category == "export":
             plan.set_attr(category_id,"hs")
-            filter1 = category_id
         elif category == "establishment":
             plan.set_attr(category_id,"isic")
-            filter1 = category_id
         elif category == "partner":
             plan.set_attr(category_id,"wld")
-            filter2 = category_id
 
         if category == "location":
             plan.set_attr(category_id,"bra")
             if option_id == "export" and extra_id:
                 plan.set_attr(extra_id,"hs")
-                filter1 = extra_id
             elif option_id == "establishment" and extra_id:
                 plan.set_attr(extra_id,"isic")
-                filter1 = extra_id
             bra_id = category_id    
         elif option_type == "<bra>":
             plan.set_attr(option_id,"bra")
-            bra_id = option_id
+        else:
+            plan.set_attr("all","bra")
             
         builds = [0]*len(plan.builds.all())
         for pb in plan.builds.all():
             build = {}
-            pb.build.all()[0].set_bra(bra_id)
-            if filter1:
-                pb.build.all()[0].set_filter1(filter1)
-            if filter2:
-                pb.build.all()[0].set_filter2(filter2)
-                
             build["url"] = "/apps/embed/{0}{1}".format(pb.build.all()[0].url(),pb.variables)
             builds[pb.position-1] = build
             
@@ -222,7 +209,7 @@ def guide(category = None, category_id = None, option = None, subject = None, op
             page = "guide/choice.html"
         elif category == "location":
             page = "guide/industry.html"
-        elif category == "export" and option == "potential":
+        elif category == "export" or category == "establishment" and option == "potential":
             selector = "location"
             page = "guide/choice.html"
     elif category_id:

@@ -71,22 +71,41 @@ class Plan(db.Model, AutoSerialize):
                     self.bra[i].id = "all"
                 else:
                     self.bra.append(Bra.query.get(f))
+
+            for pb in self.builds.all():
+                pb.build.all()[0].set_bra(id)
+                
         elif type == "cbo":
             self.cbo = []
             for i, f in enumerate(id.split("+")):
                 self.cbo.append(Cbo.query.get(f))
+
+            for pb in self.builds.all():
+                pb.build.all()[0].set_filter2(f)
+                
         elif type == "isic":
             self.isic = []
             for i, f in enumerate(id.split("+")):
                 self.isic.append(Isic.query.get(f))
+
+            for pb in self.builds.all():
+                pb.build.all()[0].set_filter1(f)
+                
         elif type == "wld":
             self.wld = []
             for i, f in enumerate(id.split("+")):
                 self.wld.append(Wld.query.get(f))
+
+            for pb in self.builds.all():
+                pb.build.all()[0].set_filter2(f)
+                
         elif type == "hs":
             self.hs = []
             for i, f in enumerate(id.split("+")):
                 self.hs.append(Hs.query.get(f))
+
+            for pb in self.builds.all():
+                pb.build.all()[0].set_filter1(f)
 
     def __repr__(self):
         return '<Plan "%s": %s>' % (self.id,self.builds.all())

@@ -145,7 +145,7 @@ class Build(db.Model, AutoSerialize):
         title = getattr(self, title_lang)
         
         if "<bra>" in title:
-            title = title.replace("<bra>", ", ".join([getattr(b, name_lang) for b in self.bra]))
+            title = title.replace("<bra>", " and ".join([getattr(b, name_lang) for b in self.bra]))
         if "<isic>" in title:
             title = title.replace("<isic>", ", ".join([getattr(i, name_lang) for i in self.isic]))
         if "<hs>" in title:

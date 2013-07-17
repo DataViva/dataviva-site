@@ -241,17 +241,45 @@
     app.solos = []
     app.filters = []
 
-    app.html = function(obj,list) {
-      if (app.build.app.type == "rings" && list) {
-        var cats = []
-        list.forEach(function(n){
-          var id = n.id.slice(0,depths[app.build.output][0])
-          if (cats.indexOf(id) < 0) cats.push(id)
-        })
-        builder.key(cats)
+    app.html = function(id,list) {
+      
+      var obj = app.attrs[app.build.output][id]
+      
+      if (app.build.app.type == "rings") {
+        if (list) {
+          var cats = []
+          list.forEach(function(n){
+            var id = n.id.slice(0,depths[app.build.output][0])
+            if (cats.indexOf(id) < 0) cats.push(id)
+          })
+          builder.key(cats)
+        }
+        builder.filter(obj,app.build.output+"_0",true)
+        builder.url()
+        var rec_url = app.url
       }
-      console.log(obj)
-      return "Recommended Apps Coming Soon..."
+      
+      rec_format = function(data) {
+        
+        var priority = ["both_filters","filter2","filter1","no_filters"],
+            html_return = "<br><div class='vizwhiz_network_title'>Related Apps</div>"
+        
+        priority.forEach(function(p){
+          if (data[p]) {
+            data[p].forEach(function(a){
+              html_return += "<div id='"+a.url+"' class='decision "+a.app.type+"'>"
+              html_return += a.title
+              html_return += "</div>"
+            })
+          }
+        })
+      
+        return html_return
+        
+      }
+      
+      return {"url": "/apps/recommend/"+rec_url, "callback": rec_format}
+      
     }
     
     // Define global viz-whiz app parameters
@@ -1093,9 +1121,10 @@
       
       var type = id.split("_")[0],
           index = id.split("_")[1],
-          old_name = app.build[type][index].name_en,
+          old_obj = app.build[type][index]
+          old_name = old_obj.name ? old_obj.name : old_obj.name_en,
           new_name = obj.name ? obj.name : obj.name_en
-      
+          
       // Hide popover
       visual.popover.hide("#popover");
       
@@ -1123,6 +1152,12 @@
         })
       
       leon.touch("select")
+      app.build[type][index] = obj
+      
+      var url = app.url.split("/")
+      url[url_index] = obj.id
+      url = url.join("/")
+      app.url = url
       
       var button = d3.select("#"+id+"_select")
       
@@ -1134,14 +1169,11 @@
        .style("background-image","url("+obj.icon+")")
        .style("background-color",obj.color)
         
-      if (obj.distance > 0) new_name += " ("+obj.distance+"km)"
+      if (obj.distance > 0 && type == "bra") new_name += " ("+obj.distance+"km)"
 
       button.select(".list_text").text(new_name)
 
       if (!static) {
-        var url = app.url.split("/")
-        url[url_index] = obj.id
-        url = url.join("/")
         app.start(url)
       }
        
