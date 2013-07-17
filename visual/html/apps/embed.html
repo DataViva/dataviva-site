@@ -163,6 +163,7 @@
   <script src="/static/js/libs/d3.geo.tile.js"></script>
   <script src="/static/js/libs/topojson.js"></script>
   <script src="/static/js/libs/queue.min.js"></script>
+  <script src="/static/js/libs/jfont-minified.js"></script>
   <script src="/static/js/utils/utils.key.js"></script>
   <script src="/static/js/utils/utils.selector.js"></script>
   
@@ -240,6 +241,12 @@
     app.vars = {{ global_vars|safe }}
     app.solos = []
     app.filters = []
+    
+    app.font = null
+    var fonts = ["HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"]
+    fonts.forEach(function(font){
+      if (checkfont(font) && !app.font) app.font = font
+    })
 
     app.html = function(id,list) {
       
@@ -258,22 +265,44 @@
         builder.url()
         var rec_url = app.url
       }
+      else {
+        var u = app.url.split("/")
+        if (["hs","isic"].indexOf(app.build.output) >= 0) {
+          var i = 3
+        }
+        else if (["wld","cbo"].indexOf(app.build.output) >= 0) {
+          var i = 4
+        }
+        else {
+          var i = 2
+        }
+        u[i] = id
+        var rec_url = u.join("/")
+      }
       
       rec_format = function(data) {
-        
+
         var priority = ["both_filters","filter2","filter1","no_filters"],
-            html_return = "<br><div class='vizwhiz_network_title'>Related Apps</div>"
+            html_return = "",
+            title = false
         
-        priority.forEach(function(p){
+        priority.forEach(function(p,i){
           if (data[p]) {
+            if (!title) {
+              html_return += "<div class='title'>Related Apps</div>"
+              title = true
+            }
+            else if (i == priority.length-1) {
+              html_return += "<div class='title'>Other Apps</div>"
+            }
             data[p].forEach(function(a){
-              html_return += "<div id='"+a.url+"' class='decision "+a.app.type+"'>"
+              html_return += "<div id='"+a.url+"' class='decision icon "+a.app.type+"' "
+              html_return += "onclick='app.start(this.id)'>"
               html_return += a.title
               html_return += "</div>"
             })
           }
         })
-      
         return html_return
         
       }
@@ -282,19 +311,7 @@
       
     }
     
-    // Define global viz-whiz app parameters
-    app.viz = vizwhiz.viz()
-      .name_array(["name","display_id"])
-      .nesting_aggs({
-          "distance": "mean",
-          "complexity": "mean",
-          "rca": "mean",
-          "wage_avg": "mean"
-        })
-      .text_var("name")
-      .id_var("id")
-      .year_var("year")
-      .tooltip_info([
+    app.tooltip = {"short": [], "long": [
           "display_id",
           "rca",
           "rca_wld",
@@ -324,12 +341,28 @@
           "total",
           "required",
           "importance"
-        ])
+        ]}
+    
+    // Define global viz-whiz app parameters
+    app.viz = vizwhiz.viz()
+      .name_array(["name","display_id"])
+      .nesting_aggs({
+          "distance": "mean",
+          "complexity": "mean",
+          "rca": "mean",
+          "wage_avg": "mean"
+        })
+      .text_var("name")
+      .id_var("id")
+      .year_var("year")
+      .tooltip_info(app.tooltip)
       .text_format(visual.format.text)
       .number_format(visual.format.number)
       .name_array(["name","display_id"])
       .background("#fafafa")
       .click_function(app.html)
+      .font(app.font)
+      .font_weight("lighter")
     
     // Start building a new app
     app.start = function(new_url) {
@@ -355,6 +388,9 @@
           }
           else {
             
+            if (app.build && app.build.app.type != data.current_build.app.type) {
+              builder.app(data.current_build.app.type,true)
+            }
             // Set public current build variable
             app.build = data.current_build
             builder.url()
@@ -671,6 +707,7 @@
         .value_var(app.vars.value_var)
         .year(app.vars.year)
         .total_bar(app.total())
+        .highlight(null)
         
       /******************************/
       /* Network Specific Variables */
@@ -1179,7 +1216,7 @@
        
     }
     
-    builder.app = function(app_name) {
+    builder.app = function(app_name,static) {
       
       var match = null
       
@@ -1207,7 +1244,7 @@
       
       selects["output_"+app_name].set(match)
       
-      app.start(match)
+      if (!static) app.start(match)
       
     }
     

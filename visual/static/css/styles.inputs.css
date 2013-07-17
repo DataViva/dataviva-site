@@ -95,50 +95,50 @@ a:hover {
 body.general .decision,
 body.home .decision,
 body.guide .decision {
-  background-color: #af1f24 !important; /* red */
+  background-color: #af1f24; /* red */
 }
 
 body.profiles .decision {
-  background-color: #e0902d !important; /* orange */
+  background-color: #e0902d; /* orange */
 }
 
 body.apps .decision {
-  background-color: #3daf49 !important; /* green */
+  background-color: #3daf49; /* green */
 }
 
 body.data .decision {
-  background-color: #1abbee !important; /* blue */
+  background-color: #1abbee; /* blue */
 }
 
 body.ask .decision {
-  background-color: #742777 !important; /* purple */
+  background-color: #742777; /* purple */
 }
 
 body.about .decision {
-  background-color: #d67ab0 !important; /* pink */
+  background-color: #d67ab0; /* pink */
 }
 
 body.general .help,
 body.guide .help {
-  color: #af1f24 !important; /* red */
+  color: #af1f24; /* red */
 }
 
 body.profiles .help {
-  color: #e0902d !important; /* orange */
+  color: #e0902d; /* orange */
 }
 
 body.apps .help {
-  color: #3daf49 !important; /* green */
+  color: #3daf49; /* green */
 }
 
 body.data .help {
-  color: #1abbee !important; /* blue */
+  color: #1abbee; /* blue */
 }
 
 body.ask .help {
-  color: #742777 !important; /* purple */
+  color: #742777; /* purple */
 }
 
 body.about .help {
-  color: #d67ab0 !important; /* pink */
+  color: #d67ab0; /* pink */
 }

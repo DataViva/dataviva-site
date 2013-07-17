@@ -27,50 +27,38 @@ def before_request():
 def profiles(category = None, id = None):
     
     selector = category
-    category_type = None
-        
-    bra_id = "all"
-    filter1 = None
-    filter2 = None
     
     article = None
-        
-    if category == "career":
+    if category == "cbo":
         article = "an occupation"
-        if id and id != "select":
-            category_type = "<cbo>"
-    elif category == "establishment":
+        g.sabrina["outfit"] = "preppy"
+    elif category == "isic":
         article = "an industry"
-        if id and id != "select":
-            category_type = "<isic>"
-    elif category == "export":
+        g.sabrina["outfit"] = "worker"
+        g.sabrina["hat"] = "hardhat"
+    elif category == "hs":
         article = "a product"
-        if id and id != "select":
-            category_type = "<hs>"
-    elif category == "location":
+        g.sabrina["outfit"] = "worker"
+        g.sabrina["hat"] = "hardhat"
+    elif category == "bra":
         article = "a location"
-        if id and id != "select":
-            category_type = "<bra>"
-    elif category == "partner":
+        g.sabrina["outfit"] = "travel"
+    elif category == "wld":
         article = "a trade partner"
-        if id and id != "select":
-            category_type = "<wld>"
+        g.sabrina["outfit"] = "travel"
+
+    category_type = None
+    if id and id != "select":
+        category_type = "<"+category+">"
         
     plan = Plan.query.filter_by(category=category, category_type=category_type, option=None, option_type=None, option_id=None).first()
     # raise Exception(plan)
     if plan:
         page = "general/guide.html"
         
-        if category == "career":
-            plan.set_attr(id,"cbo")
-        elif category == "establishment":
-            plan.set_attr(id,"isic")
-        elif category == "export":
-            plan.set_attr(id,"hs")
-        elif category == "partner":
-            plan.set_attr(id,"wld")
+        plan.set_attr(id,category)
             
-        if category == "location":
+        if category == "bra":
             plan.set_attr(id,"bra")
         else:
             plan.set_attr("all","bra")
@@ -87,14 +75,6 @@ def profiles(category = None, id = None):
         page = "general/selector.html"
     else:
         page = "profiles/index.html"
-        
-    if category == "career":
-        g.sabrina["outfit"] = "preppy"
-    elif category == "export" or category == "establishment":
-        g.sabrina["outfit"] = "worker"
-        g.sabrina["hat"] = "hardhat"
-    elif category == "location" or category == "partner":
-        g.sabrina["outfit"] = "travel"
         
     return render_template(page,
         selector = selector,

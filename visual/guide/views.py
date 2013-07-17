@@ -135,28 +135,28 @@ def guide(category = None, category_id = None, option = None, subject = None, op
     option_type = option_id
     extra_type = extra_id
         
-    if category == "career":
+    if category == "cbo":
         if category_id != "all":
             category_type = "<cbo>"
         if option_id and option_id != "select":
             option_type = "<bra>"
-    elif category == "export":
+    elif category == "hs":
         category_type = "<hs>"
         if option == "potential" and option_id and option_id != "select":
             option_type = "<bra>"
-    elif category == "establishment":
+    elif category == "isic":
         category_type = "<isic>"
         if option == "potential" and option_id and option_id != "select":
             option_type = "<bra>"
-    elif category == "location":
+    elif category == "bra":
         category_type = "<bra>"
-        if option == "establishment" and option_id:
+        if option == "isic" and option_id:
             option_type = "<isic>"
-        if option_id == "export" and extra_id and extra_id != "select":
+        if option_id == "hs" and extra_id and extra_id != "select":
             extra_type = "<hs>"
-        elif option_id == "establishment" and extra_id and extra_id != "select":
+        elif option_id == "isic" and extra_id and extra_id != "select":
             extra_type = "<isic>"
-    elif category == "partner":
+    elif category == "wld":
         category_type = "<wld>"
         
     # raise Exception(category,category_type,option,option_type,extra_type)
@@ -168,20 +168,20 @@ def guide(category = None, category_id = None, option = None, subject = None, op
         g.page_type = "plan"
         page = "general/guide.html"
         
-        if category == "career":
+        if category == "cbo":
             plan.set_attr(category_id,"cbo")
-        elif category == "export":
+        elif category == "hs":
             plan.set_attr(category_id,"hs")
-        elif category == "establishment":
+        elif category == "isic":
             plan.set_attr(category_id,"isic")
-        elif category == "partner":
+        elif category == "wld":
             plan.set_attr(category_id,"wld")
 
-        if category == "location":
+        if category == "bra":
             plan.set_attr(category_id,"bra")
-            if option_id == "export" and extra_id:
+            if option_id == "hs" and extra_id:
                 plan.set_attr(extra_id,"hs")
-            elif option_id == "establishment" and extra_id:
+            elif option_id == "isic" and extra_id:
                 plan.set_attr(extra_id,"isic")
             bra_id = category_id    
         elif option_type == "<bra>":
@@ -202,30 +202,30 @@ def guide(category = None, category_id = None, option = None, subject = None, op
         selector = option_id
     elif option_id == "select":
         page = "general/selector.html"
-        selector = "location"
+        selector = "bra"
     elif option:
-        if category == "career":
-            selector = "location"
+        if category == "cbo":
+            selector = "bra"
             page = "guide/choice.html"
-        elif category == "location":
+        elif category == "bra":
             page = "guide/industry.html"
-        elif category == "export" or category == "establishment" and option == "potential":
-            selector = "location"
+        elif category == "hs" or category == "isic" and option == "potential":
+            selector = "bra"
             page = "guide/choice.html"
     elif category_id:
         if category_id == "select":
             page = "general/selector.html"
         else:
             if category_id != "all":
-                if category == "establishment":
+                if category == "isic":
                     item = attrs.Isic.query.get_or_404(category_id)
-                elif category == "export":
+                elif category == "hs":
                     item = attrs.Hs.query.get_or_404(category_id)
-                elif category == "career":
+                elif category == "cbo":
                     item = attrs.Cbo.query.get_or_404(category_id)
-                elif category == "location":
+                elif category == "bra":
                     item = attrs.Bra.query.get_or_404(category_id)
-            elif category == "location":
+            elif category == "bra":
                 item = attrs.Wld.query.get_or_404("sabra")
             page = "guide/{0}.html".format(category)
     elif category == "industry":
@@ -235,25 +235,25 @@ def guide(category = None, category_id = None, option = None, subject = None, op
     else:
         page = "guide/index.html"
         
-    if selector == "career":
+    if selector == "cbo":
         article = "an occupation"
-    elif selector == "establishment":
+    elif selector == "isic":
         article = "an industry"
-    elif selector == "export":
+    elif selector == "hs":
         article = "a product"
-    elif selector == "location":
-        article = "a location"
+    elif selector == "bra":
+        article = "a bra"
         
     if category != None:
         g.sabrina["face"] = "smirk"
     
-    if category == "career":
+    if category == "cbo":
         g.sabrina["outfit"] = "preppy"
-    elif category == "industry" or category == "export" or category == "establishment":
+    elif category == "industry" or category == "hs" or category == "isic":
         g.sabrina["outfit"] = "worker"
-        if category == "export" or category == "establishment":
+        if category == "hs" or category == "isic":
             g.sabrina["hat"] = "hardhat"
-    elif category == "location":
+    elif category == "bra":
         g.sabrina["outfit"] = "travel"
         
     if category_id == "select":

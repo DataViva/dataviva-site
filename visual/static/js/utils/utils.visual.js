@@ -25,8 +25,12 @@ visual.format.number = function(value,name) {
   
   var smalls = ["rca","rca_bra","rca_wld","distance","complexity"]
   
-  if (smalls.indexOf(name) >= 0) {
-    var return_value = d3.round(value,2)
+  if (smalls.indexOf(name) >= 0 || value < 1) {
+    var r = value.toString().split(""), l = false
+    r.forEach(function(n,i){
+      if (n != "0" && n != "." && !l) l = i
+    })
+    var return_value = d3.round(value,l)
   }
   else if (name == "year") {
     var return_value = value
@@ -55,7 +59,7 @@ visual.format.number = function(value,name) {
     var labels = total_labels[name]
     return_value = labels[0] + return_value + labels[1]
   }
-
+  
   return return_value
   
 }
@@ -340,7 +344,7 @@ visual.breadcrumbs = function() {
     
     if (attr_lookup && [2,4].indexOf(i) >= 0) {
       
-      if (["location","potential","growth","industries","wages"].indexOf(window_path[i-1]) >= 0) {
+      if (["bra","potential","growth","industries","wages"].indexOf(window_path[i-1]) >= 0) {
         var type = "bra";
         if (p == "all") {
           var type = "wld", id = "sabra";
@@ -354,13 +358,13 @@ visual.breadcrumbs = function() {
         else var type = "hs";
         var id = p;
       }
-      else if (["career","occupation"].indexOf(window_path[i-1]) >= 0) {
+      else if (["cbo","occupation"].indexOf(window_path[i-1]) >= 0) {
         var type = "cbo", id = p;
       }
       else if (["product"] == window_path[i-1]) {
         var type = "hs", id = p;
       }
-      else if (["partner"] == window_path[i-1]) {
+      else if (["wld"] == window_path[i-1]) {
         var type = "wld", id = p;
       }
 

@@ -11,11 +11,11 @@
   
     <div class="title">What are you interested in?</div>
   
-    <a id="export" class="decision square export" onclick="linker(this.id)">
+    <a id="hs" class="decision icon square hs" onclick="linker(this.id)">
       Product Exports
     </a>
   
-    <a id="establishment" class="decision square establishment" onclick="linker(this.id)">
+    <a id="isic" class="decision icon square isic" onclick="linker(this.id)">
       Establishments and Employement
     </a>
   
@@ -30,7 +30,7 @@
     path = "{{g.path}}".split("/")
 
     function linker(id) {
-      if (path[2] == "location") {
+      if (path[2] == "bra") {
         if (path[4] == "attract") window.location = path.join("/")+id+"/select/"
         else if (path[4] == "industry") {
           path[4] = id
