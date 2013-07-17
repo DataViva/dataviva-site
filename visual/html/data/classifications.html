@@ -91,98 +91,6 @@ function update_depth(depth){
 //   return "url('"+visual.icon(this.title, "{{ page_attr }}") + "')"
 // })
 
-// The meat and potatoes, this function get called after we've made the call
-// to the server
-function display(error, data) {
-  
-  // clean up data into one nice array of activities
-  attrs = data.attrs.map(function(d){
-    d["category"] = data.category_lookup[d.id.length]
-    return d
-  });
-  
-  // we're obviously no longer fetching
-  fetching = false;
-  
-  // if the server returned an empty list, return and get rid of loading div
-  if (!attrs.length) {
-    if(offset == 0){
-      // no attrs message
-    }
-    offset = NaN;
-    d3.select(".loading").remove();
-    return;
-  }
-  
-  // increment offset by number of items received from server
-  offset += attrs.length;
-  
-  // using d3's helpful enter/update/exit paradigm add new items from server
-  x = 1
-  var attrs_enter = d3.select("table > tbody").selectAll("tr")
-    .data(attrs, function(d){ x++; return d ? d.id : x })
-    .enter().append("tr")
-
-  
-  attrs_enter.append("td")
-    .attr("class", "icon")
-    .append("div")
-      .style("background-image", function(d){
-        return "url('"+visual.icon(d.id, data.attr_type) + "')"
-      })
-      .style("background-color", function(d){ return d.color })
-      .attr("title", function(d){ return d.id; })
-
-  attrs_enter.append("td").text(function(d){ return d.id; })
-  attrs_enter.append("td").text(function(d){ return d.category; })
-  attrs_enter.append("td").text(function(d){ return d.name_en; })
-  attrs_enter.append("td").text(function(d){ return d.name_pt; })
-  
-  
-  return
-  
-  // the title div housing the icon and title
-  var title_div = activities_enter.append("div")
-      .attr("class", "feed_title")
-  
-  // add icon
-  title_div.append("img")
-      .attr("src", function(d){
-        var img_url = "/static/img/icons/tiles/";
-        
-        // if this is a starred app, we need to figure out which app it is
-        // and use this app's icon
-        if(d.activity_type == "starred"){
-          var app_type = d.app_id.split("/")[0]
-          img_url += app_type+"_tile.png";
-        }
-        
-        // otherwise it's an ask sabrina question/reply
-        else {
-          img_url += "ask_sabrina_tile.png";
-        }
-        return img_url
-      })
-      .attr("width", "23px")
-      .attr("padding-bottom", "23px")
-  
-  // the title (strip out HTML!)
-  title_div.append("p")
-    .html(function(d){
-      return d.title.replace(/(<([^>]+)>)/ig,"");
-    })
-  
-  // lastly, the div that holds the data
-  activities_enter.append("div")
-      .attr("class", "feed_date")
-      .text(function(d) { return formatDate(d.timestamp); });
-  
-  // maybe the user has a super dooper tall screen (or high resolution)
-  // so we need to check if we're already at the bottem, even though we
-  // just added new items
-  setTimeout(maybe_fetch, 50);
-}
-
 function item_formatter(container_el, dataset){
   
   var tbody = d3.select(container_el).select("tbody")
@@ -210,7 +118,10 @@ function item_formatter(container_el, dataset){
       .style("background-color", function(d){ return d.color })
       .attr("title", function(d){ return d.id; })
 
-  rows_enter.append("td").text(function(d){ return d.id; })
+  rows_enter.append("td")
+    .append("a")
+    .attr("href", function(d){ return "/profiles/" + d.attr_type + "/" + d.id; })
+    .text(function(d){ return d.id; })
   rows_enter.append("td").text(function(d){ return d.category; })
   rows_enter.append("td").text(function(d){ return d.name_en; })
   rows_enter.append("td").text(function(d){ return d.name_pt; })

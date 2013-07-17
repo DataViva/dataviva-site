@@ -334,8 +334,19 @@
         });
     })
     
-    cells.enter().append("td").style("padding", "2px 5px")
-    rows.selectAll("td").text(function(d) { return d.value; });
+    cells.enter().append("td")
+    rows.selectAll("td")
+      .each(function(d){
+        if(d.column.indexOf("_id") >= 0){
+          var attr_type = d.column.split("_")[0]
+          d3.select(this).append("a")
+            .attr("href", "/profiles/" + attr_type + "/" + d.value)
+            .text(d.value)
+        }
+        else {
+          d3.select(this).text(function(d) { return d.value; })
+        }
+      })
     
     // remove old cells
     // cells.exit().remove()
