@@ -170,7 +170,6 @@ div.loading > .text {
 iframe.app_builder {
   left: 50%;
   position: absolute;
-  top: 70px;
 }
 
 div#app_buffer {

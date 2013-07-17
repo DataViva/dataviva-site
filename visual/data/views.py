@@ -59,7 +59,7 @@ def index():
 
 @mod.route('/query/')
 def query():
-    
+    g.page_type = "query"
     # try getting the user's ip address, since the live server is using a proxy
     # nginx, we need to use the "X-Forwarded-For" remote address otherwise
     # this will always be 127.0.0.1 ie localhost
@@ -82,6 +82,7 @@ def query():
 @mod.route('/classifications/<attr>/<category>/', defaults={"page":1})
 @mod.route('/classifications/<attr>/<category>/<int:page>/')
 def classifications(category, page, attr=None):
+    g.page_type = "classifications"
     if not attr:
         return redirect(url_for('data.classifications', attr='hs'))
     

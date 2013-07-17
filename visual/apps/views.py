@@ -222,6 +222,7 @@ def get_geo_location(ip):
             '<output>/')
 def builder(app_name=None, dataset=None, bra_id=None, filter1=None, 
                 filter2=None, output=None):
+    g.page_type = "builder"
     return render_template("apps/builder.html")
 
 @mod.route('/download/', methods=['GET', 'POST'])
