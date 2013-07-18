@@ -4,62 +4,35 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block body %}
-<div class="grid5col1">
+<div class="grid5col5">
   
-  <h2>{{ title }}</h2>
+  <div id="dynamic_header">
+    
+    <h2>{{ title }}</h2>
   
-  <div id="attr_toggle">
-    <input type="radio" name="attr" value="hs" onclick="window.location='{{ url_for('data.classifications', attr='hs') }}all/'" {% if page_attr == "hs" %}checked{% endif %}>
-    <label for="hs">Products</label>
-    
-    <input type="radio" name="attr" value="cbo" onclick="window.location='{{ url_for('data.classifications', attr='cbo') }}all/'" {% if page_attr == "cbo" %}checked{% endif %}>
-    <label for="cbo">Occupations</label>
-    
-    <input type="radio" name="attr" value="isic" onclick="window.location='{{ url_for('data.classifications', attr='isic') }}all/'" {% if page_attr == "isic" %}checked{% endif %}>
-    <label for="isic">Industries</label>
-    
-    <input type="radio" name="attr" value="bra" onclick="window.location='{{ url_for('data.classifications', attr='bra') }}all/'" {% if page_attr == "bra" %}checked{% endif %}>
-    <label for="bra">Brazilian Locations</label>
-    
-    <input type="radio" name="attr" value="wld" onclick="window.location='{{ url_for('data.classifications', attr='wld') }}all/'" {% if page_attr == "wld" %}checked{% endif %}>
-    <label for="wld">Countries</label>
-  </div>
-  
-  <div class="data-dropdown">
-    <select id="category" onchange="update_depth(this.options[this.selectedIndex].value);">
-      <option value="all">All</option>
-      {% for cat_digit, cat_name in category_lookup.iteritems() %}
-      <option value="{{ cat_name }}" {% if cat_name == category %}selected="selected"{% endif %}>{{ cat_name }}</option>
+    <div class="data_depth">
+      <legend id="depth">Depth</legend>
+      {% for d in depths %}
+        <input type="radio" name="depth" id="{{ d }}" value="{{ d }}" onclick="update_depth(this.value)"{% if d == depth %} checked{% endif %}>
+        <label for="{{ d }}"></label>
       {% endfor %}
-    </select>
-  </div>
-  
-</div>
-<div class="grid5col4">
+    </div>
+    
 
-  <div id="results">
     <table>
       <thead>
         <tr>
-          <th></th>
-          <th>ID</th>
-          <th>Category</th>
-          <th>Name (English)</th>
-          <th>Name (Portuguese)</th>
         </tr>
       </thead>
       <tbody>
-        <!-- {% for attr in attrs %}
-        <tr>
-          <td class="icon">
-            <div style="background-color: {{ attr.color }}" title="{{ attr.id }}"></div>
-          </td>
-          <td>{{ attr.id }}</td>
-          <td><script>document.write(format_name("{{ page_attr }}_{{ attr.id|length }}", "{{ g.locale }}"))</script></td>
-          <td>{{ attr.name_en }}</td>
-          <td>{{ attr.name_pt }}</td>
-        </tr>
-        {% endfor %} -->
+      </tbody>
+    </table>
+  
+  </div>
+
+  <div id="results">
+    <table>
+      <tbody>
       </tbody>
     </table>
   </div>
@@ -67,76 +40,88 @@
   
 </div>
 
-<script src="/static/js/utils/utils.infinite_scroll.js"></script>
-<script>
-// dropdown for changing number of items per page
-function update_per_page(per_page){
-  window.location = "{{ url_for('data.classifications', attr=page_attr, category=category) }}?per_page=" + per_page;
-}
+{% endblock %}
 
-// dropdown for changing the category
-d3.select("#category").on("change", function(){
-  var new_page_url = "{{ url_for('data.classifications', attr=page_attr) }}all/";
-  new_page_url = new_page_url.replace("all", this.value)
-  window.location = new_page_url
-})
-function update_depth(depth){
-  // window.location = "{{ url_for('data.classifications', attr=page_attr, category=category) }}?per_page=" + per_page;
-  var new_page_url = "{{ url_for('data.classifications', attr=page_attr) }}all/";
-  new_page_url = new_page_url.replace("all", depth)
-  window.location = new_page_url
-}
+{% block js %}
 
-// d3.selectAll("td.icon > div").style("background-image", function(){
-//   return "url('"+visual.icon(this.title, "{{ page_attr }}") + "')"
-// })
+  <script src="/static/js/utils/utils.infinite_scroll.js"></script>
 
-function item_formatter(container_el, dataset){
+  <script>
   
-  var tbody = d3.select(container_el).select("tbody")
-  // create a row for each object in the data
-  var x = 1;
-  var rows = tbody.selectAll("tr").data(dataset, function(d){ x++; return d ? d.id : x })
-  var rows_enter = rows.enter().append("tr");
-  // 
-  // // create cells for each datum
-  // var cells = rows.selectAll("td").data(function(row){
-  //     return ordered_columns.map(function(column) {
-  //       return {"column": column, "value": row[column]};
-  //     });
-  // })
-  // 
-  // cells.enter().append("td").style("padding", "2px 5px")
-  // rows.selectAll("td").text(function(d) { return d.value; });
-
-  rows_enter.append("td")
-    .attr("class", "icon")
-    .append("div")
-      .style("background-image", function(d){
-        return "url('"+visual.icon(d.id, d.attr_type) + "')"
+    // console.log("{{classification}}")
+  
+    d3.select(".data_depth").selectAll("label")
+      .html(function(){
+        return visual.format.text("{{page_attr}}_"+this.getAttribute("for"))
       })
-      .style("background-color", function(d){ return d.color })
-      .attr("title", function(d){ return d.id; })
+  
+    leon.touch("$depth")
+    
+    var keys = ["icon","id","name_en","name_pt","color"]
+    
+    function update_depth(depth){
+      var new_page_url = "{{ url_for('data.classifications', attr=page_attr) }}all/";
+      new_page_url = new_page_url.replace("all", depth)
+      window.location = new_page_url
+    }
 
-  rows_enter.append("td")
-    .append("a")
-    .attr("href", function(d){ return "/profiles/" + d.attr_type + "/" + d.id; })
-    .text(function(d){ return d.id; })
-  rows_enter.append("td").text(function(d){ return d.category; })
-  rows_enter.append("td").text(function(d){ return d.name_en; })
-  rows_enter.append("td").text(function(d){ return d.name_pt; })
+    function item_formatter(container_el, dataset){
+  
+      var tbody = d3.select(container_el).select("tbody")
+      
+      var headers = []
+      
+      // create a row for each object in the data
+      var x = 1;
+      var rows = tbody.selectAll("tr").data(dataset, function(d){ x++; return d ? d.id : x })
+      var rows_enter = rows.enter().append("tr").attr("class","link")
+        .each(function(d){
+          var row = d3.select(this)
+            .on(vizwhiz.evt.click,function(){
+              window.location = "/profiles/"+d.attr_type+"/"+d.id
+            })
+          keys.forEach(function(key){
+            var col = row.append("td")
+              .attr("class",key)
+            
+            if (key == "icon") {
+              col.append("div")
+                .style("background-image","url('"+visual.icon(d.id, d.attr_type) + "')")
+                .style("background-color", d.color)
+                .attr("title", d.id)
+            }
+            else {
+              col.text(d[key])
+            }
+            
+          })
+          
+        });
+      
+      d3.select("tbody tr").selectAll("td")
+        .each(function(d){
+          var key = this.className,
+              width = parseFloat(d3.select(this).style("width"),10)
+          headers.push({"width": width, "id": key})
+        })
+      
+
+      var ths = d3.select("thead").select("tr").selectAll("th")
+        .data(headers, function(d){return d.id})
+        
+      ths.enter().append("th")
+      
+      ths
+        .style("width",function(d){return d.width+"px"})
+        .attr("class",function(d){return d.id})
+        .text(function(d){return visual.format.text(d.id)})
   
 
-}
+    }
 
+    var is = infinite_scroll().format_items(item_formatter);
+    d3.select("#results").call(is)
 
-
-
-var is = infinite_scroll().format_items(item_formatter);
-d3.select("#results")
-  .call(is)
-
-
-</script>
+  </script>
 
 {% endblock %}

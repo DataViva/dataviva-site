@@ -1,0 +1,83 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: transparent;
+  padding: 10px;
+}
+
+table thead {
+  display: block;
+  height: 36px;
+}
+
+table th {
+  color: #aaa;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: lighter;
+  padding: 9px;
+  text-align: left;
+  -webkit-transition: width .2s;
+          transition: width .2s;
+}
+
+body.classifications table th,
+body.query table th {
+  color: #1abbee;
+}
+
+table thead tr {
+  white-space: nowrap;
+}
+
+table tbody tr {
+  border-bottom: solid 1px #ccc;
+  color: #888;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+table tbody td.link {
+  font-weight: bold;
+}
+
+table tbody tr.link:hover,
+table tbody td.link:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+table tbody tr:last-child {
+  border-bottom: solid 1px transparent;
+}
+
+table td {
+  padding: 9px;
+}
+
+table td > a {
+  color: #666666;
+}
+
+table td.icon {
+  padding: 3px;
+  width: 29px;
+}
+
+table th.icon {
+  padding: 9px 3px;
+  width: 29px;
+}
+
+table td.id, table td.color, table td.icon,
+table th.id, table th.color, table th.icon {
+  text-align: center;
+}
+
+table td.icon > div{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 29px;
+  height: 29px;
+}

@@ -62,8 +62,8 @@
   width: 43px;
 }
 
-.decision.icon:after,
-.help.icon:after {
+.decision:after,
+.help:after {
   bottom: 12px;
   content: "\f105";
   display: block;
@@ -77,8 +77,8 @@
   text-decoration: inherit;
 }
 
-.decision.icon.square:after,
-.help.icon.square:after {
+.decision.square:after,
+.help.square:after {
   content: "";
 }
 

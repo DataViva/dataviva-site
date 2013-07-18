@@ -102,11 +102,14 @@ body.profiles .decision {
   background-color: #e0902d; /* orange */
 }
 
-body.apps .decision {
+body.apps .decision,
+body.builder .decision {
   background-color: #3daf49; /* green */
 }
 
-body.data .decision {
+body.data .decision,
+body.query .decision,
+body.classifications .decision {
   background-color: #1abbee; /* blue */
 }
 
@@ -127,11 +130,14 @@ body.profiles .help {
   color: #e0902d; /* orange */
 }
 
-body.apps .help {
+body.apps .help,
+body.builder .help {
   color: #3daf49; /* green */
 }
 
-body.data .help {
+body.data .help,
+body.query .help,
+body.classifications .help {
   color: #1abbee; /* blue */
 }
 

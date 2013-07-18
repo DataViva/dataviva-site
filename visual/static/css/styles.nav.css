@@ -33,6 +33,8 @@
   height: 58px;
   position: fixed;
   top: 0px;
+  -webkit-transition: height .2s;
+          transition: height .2s;
   width: 100%;
   z-index: 4000;
 }
@@ -166,6 +168,20 @@ a.account > i {
 
 a.account:hover {
   color: #af1f24;
+}
+
+#dynamic_header {
+  left: 50%;
+  margin-left: -490px;
+  padding-bottom: 0px;
+  position: fixed;
+  top: 75px;
+  width: 980px;
+  z-index: 4001;
+}
+
+#dynamic_header > h2 {
+  margin-left: 10px;
 }
 
 /***********************/

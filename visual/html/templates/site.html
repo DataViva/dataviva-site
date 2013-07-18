@@ -13,8 +13,8 @@
       <a id="logo" href="{{ url_for('general.home') }}"></a>
       <a id="guide" href="{{ url_for('guide.guide') }}" class="link{% if g.page_type == 'guide' or g.page_type == 'plan' %} active{% endif %}">Guide</a>
       <a id="profiles" href="{{ url_for('profiles.profiles') }}" class="link{% if g.page_type == 'profiles' or g.page_type == 'profile' %} active{% endif %}">Profiles</a>
-      <a id="apps" href="{{ url_for('apps.guide') }}" class="link{% if g.page_type == 'apps' %} active{% endif %}">Apps</a>
-      <a id="data" href="{{ url_for('data.index') }}" class="link{% if g.page_type == 'data' %} active{% endif %}">Data</a>
+      <a id="apps" href="{{ url_for('apps.guide') }}" class="link{% if g.page_type == 'apps' or g.page_type == 'builder' %} active{% endif %}">Apps</a>
+      <a id="data" href="{{ url_for('data.index') }}" class="link{% if g.page_type == 'data' or g.page_type == 'query' or g.page_type == 'classifications' %} active{% endif %}">Data</a>
       <a id="ask" href="{{ url_for('ask.index') }}" class="link{% if g.page_type == 'ask' %} active{% endif %}">Ask Sabrina</a>
       <a id="about" href="{{ url_for('about.about') }}" class="link{% if g.page_type == 'about' %} active{% endif %}">Learn More</a>
       <div id="account" class="leon button">
@@ -59,6 +59,7 @@
   </div>
   {% endfor %}
   <div id="container">
+    
     {% block body %}
     {% endblock %}
 
@@ -73,6 +74,8 @@
   <script type="text/javascript">
   
     // leon.touch("$language_select")
+    
+    visual.ui.header()
   
     function change_language(l) {
       window.location = "/set_lang/" + l + "/?next=" + window.location.pathname;

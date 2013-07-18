@@ -66,6 +66,27 @@ visual.format.number = function(value,name) {
 
 visual.ui = {}
 
+visual.ui.header = function() {
+  var dyn = d3.select("#dynamic_header").node()
+  if (dyn) {
+    var header_height = d3.select("#header_container").node().offsetHeight
+    var dyn_height = dyn.offsetHeight
+    var dyn_top = dyn.offsetTop-header_height
+    d3.select("#container").style("margin-top",dyn_height+dyn_top+"px")
+    document.onscroll = function() {
+      var top = document.body.scrollTop
+      if (top > 10) {
+        d3.select("#header_container")
+          .style("height",header_height+dyn_height+dyn_top+"px")
+      }
+      else {
+        d3.select("#header_container")
+          .style("height",header_height+"px")
+      }
+    }
+  }
+}
+
 visual.ui.tooltip = function(id,state) {
   if (state) {
     

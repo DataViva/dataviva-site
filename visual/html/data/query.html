@@ -5,119 +5,126 @@
 {% endblock %}
 
 {% block body %}
-<div class="grid4col1">
-  <div id="data_toggle">
-    <legend>Dataset</legend>
-    <label for="rais">RAIS</label>
-    <input type="radio" name="dataset" value="rais" onclick="change_dataset(this.value)" checked="checked">
-    <label for="secex">SECEX</label>
-    <input type="radio" name="dataset" value="secex" onclick="change_dataset(this.value)">
+
+<div id="dynamic_header">
+  
+  <div class="grid4col1">
+    
+    <div id="data_toggle">
+      <legend id="dataset">Dataset</legend>
+      <label for="rais">RAIS</label>
+      <input type="radio" name="dataset" value="rais" id="rais" onclick="change_dataset(this.value)" checked="checked">
+      <label for="secex">SECEX</label>
+      <input type="radio" name="dataset" value="secex" id="secex" onclick="change_dataset(this.value)">
+    </div>
+  
+    <div id="years_dropdown">
+        <select id="year_filter" onchange="">
+          <option value="all">All Years</option>
+          <option value="2002">2002</option>
+          <option value="2003">2003</option>
+          <option value="2004">2004</option>
+          <option value="2005">2005</option>
+          <option value="2006">2006</option>
+          <option value="2007">2007</option>
+          <option value="2008">2008</option>
+          <option value="2009">2009</option>
+          <option value="2010">2010</option>
+          <option value="2011">2011</option>
+        </select>
+    </div>
+    
   </div>
   
-  <div id="years-dropdown">
-      <label for="year_filter">Years</label>
-      <select id="year_filter" onchange="">
-        <option value="all">All Years</option>
-        <option value="2002">2002</option>
-        <option value="2003">2003</option>
-        <option value="2004">2004</option>
-        <option value="2005">2005</option>
-        <option value="2006">2006</option>
-        <option value="2007">2007</option>
-        <option value="2008">2008</option>
-        <option value="2009">2009</option>
-        <option value="2010">2010</option>
-        <option value="2011">2011</option>
-      </select>
+  <div class="grid4col3">
+    <div id="table_header">
+      <table>
+        <thead>
+          <tr></tr>
+        </thead>
+      </table>
+    </div>
   </div>
   
-    <a id="location_filter" class="filter button active">
-      <p><i>filter by </i><b>LOCATION</b></p>
+</div>
+
+<div id="filter_selects" class="grid4col1">
+  
+    <a id="location_filter" class="help filter_button active">
+      Brazilian Location
     </a>
-    <div id="location_add" class="filter add" style="display: block">
-      <p id="{{ geo_location.id }}" class="filter_item" style="font-size: 18.568421052631578px;">
+    <div id="location_add" class="filter_box" style="display: block">
+      <span class="filler" style="display:none;">Showing all of Brazil until a location is selected.</span>
+      <div id="{{ geo_location.id }}" class="filter_item">
         <span class="list_icon" title="{{ geo_location.id }}"></span>
-        <span class="filter_title" style="margin-left: 0px;">{{ geo_location.name_en }}</span>
-        <a><i class="icon-remove-sign" style="margin-left: -5px;"></i></a>
-      </p>
-      <a name="bra" class="add_filter button"><p>+ filter</p></a>
+        <span class="filter_title" style="margin-left: 1px;">{{ geo_location.name_en }}</span>
+        <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
+      </div>
+      <a name="bra" class="add_filter">add a location</a>
     </div>
   
   <div id="rais_on">
-      <a id="industry_filter" class="filter button">
-        <p><i>filter by </i><b>INDUSTRY</b></p>
+      <a id="industry_filter" class="help filter_button">
+        Establishment
       </a>
-      <div id="industry_add" class="filter add">
-        <span class="filler">Including all industries...</span>
-        <a name="isic" class="add_filter button"><p>+ filter</p></a>
+      <div id="industry_add" class="filter_box">
+        <span class="filler">Showing all establishments until a filter is selected.</span>
+        <a name="isic" class="add_filter button">add an establishment</a>
       </div>
      
-      <a id="occupation_filter" class="filter button">
-        <p><i>filter by </i><b>OCCUPATION</b></p>
+      <a id="occupation_filter" class="help filter_button">
+        Occupation
       </a>
-      <div id="occupation_add" class="filter add">
-        <span class="filler">Including all occupations...</span>
-        <a name="cbo" class="add_filter button"><p>+ filter</p></a>
+      <div id="occupation_add" class="filter_box">
+        <span class="filler">Showing all occupations until a filter is selected.</span>
+        <a name="cbo" class="add_filter button">add an occupation</a>
       </div>
 
-    
-      <div id="rais_go" class="decision">
-        <div class="text">Build</div>
-        <div class="arrow"></div>
-      </div>
+      <div id="rais_go" class="decision">Build</div>
       
   </div>
   
   <div id="secex_on">
-      <a id="product_filter" class="filter button">
-        <p><i>filter by </i><b>PRODUCT</b></p>
+      <a id="product_filter" class="help filter_button">
+        Product Export
       </a>
-      <div id="product_add" class="filter add">
-        <span class="filler">Including all products...</span>
-        <a name="hs" class="add_filter button"><p>+ filter</p></a>
+      <div id="product_add" class="filter_box">
+        <span class="filler">Showing all product exports until a filter is selected.</span>
+        <a name="hs" class="add_filter button">add a product</a>
       </div>
     
-      <a id="country_filter" class="filter button">
-        <p><i>filter by </i><b>COUNTRY</b></p>
+      <a id="country_filter" class="help filter_button">
+        Trade Partner
       </a>
       
-      <div id="country_add" class="filter add">
-        <span class="filler">Including all countries...</span>
-        <a name="wld" class="add_filter button"><p>+ filter</p></a>
+      <div id="country_add" class="filter_box">
+        <span class="filler">Showing all trade partners until a filter is selected.</span>
+        <a name="wld" class="add_filter button">add a country</a>
       </div>
     
-      <div id="secex_go" class="decision">
-        <div class="text">Build</div>
-        <div class="arrow"></div>
-      </div>
+      <div id="secex_go" class="decision">Build</div>
       
   </div>
 </div>
 
-<div class="grid4col3">
+<div class="grid4col3 grid4offset1">
+  
   <div id="table_container">
-    <div id="results">
-      <table>
-        <thead>
-          <tr>
-            <!-- <th><a href="#"></a></th>
-            <th><a href="#">ID</a></th>
-            <th><a href="#">Category</a></th>
-            <th><a href="#">Name (English)</a></th>
-            <th><a href="#">Name (Portuguese)</a></th> -->
-          </tr>
-        </thead>
-        <tbody>
-          
-        </tbody>
-      </table>
-    </div>
+    <table>
+      <tbody>
+      </tbody>
+    </table>
   </div>
+  
 </div>
 
 <script src="/static/js/utils/utils.selector.js"></script>
 <script src="/static/js/utils/utils.infinite_scroll.js"></script>
 <script type="text/javascript">
+
+  leon.touch("$dataset")
+  leon.touch("#year_filter")
+
   var CURRENT_DATASET = 'rais';
   var ORDER_DIRECTIONS = ["desc", "asc", ""]
   var COLUMNS = ["year", "bra_id", "isic_id", "hs_id", "cbo_id", "wld_id", "wage", "num_emp", "num_est", "val_usd", "val_kg", "val_qty", "rca", "growth_pct", "growth_pct_total", "growth_val", "growth_val_total"]
@@ -125,12 +132,9 @@
   // add icons to tags!
   d3.selectAll(".list_icon")
     .style("background-image", function(){
-      var tag_el = d3.select(this);
-      return "url('"+ visual.icon(tag_el.attr("title"), "bra") + "')"
+      var id = d3.select(this).attr("title")
+      return "url('"+ visual.icon(id, "bra") + "')"
     })
-  d3.select(d3.select(".icon-remove-sign").node().parentNode).on("click", function(){
-    d3.select(this.parentNode).remove();
-  })
 
   // visual.toggle("dataset");
   // visual.dropdown("#year_filter");
@@ -155,7 +159,7 @@
   }
   
   // Turning on button filters
-  d3.selectAll(".filter.button").on(vizwhiz.evt.click, function(){
+  d3.selectAll(".filter_button").on(vizwhiz.evt.click, function(){
     
     var classes = d3.select(this).attr("class");
     var add_container = d3.select("#" + this.id.split("_")[0] + "_add")
@@ -195,33 +199,41 @@
   })
   
   function add_filter(obj){
+    
     var add_btn = "a[name='" + selector.type() + "']"
     var cont = d3.select(add_btn).node().parentNode;
     visual.popover.hide();
     
     // remove filler text
-    d3.select(cont).selectAll("span.filler").remove()
+    d3.select(cont).selectAll("span.filler").style("display","none")
     
-    var p = d3.select(cont)
-      .insert("p", add_btn)
-      .attr("id", obj.id)
-      .attr("class", "filter_item")
-    p.append("span")
-      .attr("class","list_icon")
-      .style("background-image", "url('"+obj.icon+"')")
-      .style("background-color", obj.color)
-    p.append("span")
-      .attr("class","filter_title")
-      .text(obj.name)
-    p.append("a")
-      .on(vizwhiz.evt.click, function(){
-        d3.select(this.parentNode).remove();
-      })
-      .append("i")
-      .attr("class", "icon-remove-sign")
+    if (!d3.select(cont).select("#id_"+obj.id).node()) {
+
+      var div = d3.select(cont)
+        .insert("div", add_btn)
+        .attr("id", "id_"+obj.id)
+        .attr("class", "filter_item")
+      div.append("span")
+        .attr("class","list_icon")
+        .style("background-image", "url('"+obj.icon+"')")
+        .style("background-color", obj.color)
+      div.append("span")
+        .attr("class","filter_title")
+        .text(obj.name)
+      div.append("a")
+        .on(vizwhiz.evt.click, function(){ remove_filter(this) })
+        .append("i").attr("class", "icon-remove")
+        
+    }
     
-      
-    
+  }
+  
+  function remove_filter(node) {
+    var cont = d3.select(node.parentNode.parentNode)
+    d3.select(node.parentNode).remove()
+    if (!cont.select(".filter_item").node()) {
+      cont.select(".filler").style("display","block")
+    }
   }
   
   function is_active(selection){
@@ -285,8 +297,8 @@
       var api_url = "/secex/"+ [filters["year"], filters["location"], filters["product"], filters["country"]].join("/")
     }
     
-    d3.select("#results").selectAll("tbody > tr").remove()
-    d3.select("#results")
+    d3.select("#table_container").selectAll("tbody > tr").remove()
+    d3.select("#table_container")
       .call(is.url(api_url))
 
     // prevent page from submitting form
@@ -300,6 +312,7 @@
     columns = columns.filter(function(itm, i){
         return columns.indexOf(itm)== i; 
     });
+    
     var ordered_columns = COLUMNS.filter(function(i) {return (columns.indexOf(i) > -1);});
     
     
@@ -307,50 +320,69 @@
     selection.selectAll('table').data([0]).enter().append('table');
     var table = selection.select('table');
     
-    table.selectAll('thead').data([0]).enter().append('thead').append('tr');
-    var thead = table.select('thead tr');
-
     table.selectAll('tbody').data([0]).enter().append('tbody');
     var tbody = table.select('tbody');
     
     // enter new header rows
-    var th = thead.selectAll("th").data(ordered_columns)
-    var th_enter = th.enter().append("th").text(function(column) { return column; })
+    var th = d3.select("table > thead > tr")
+  
+    th.selectAll("th").remove()
+    var ths = th.selectAll("th")
+      .data(ordered_columns)
     
-    th.text(function(column) { return visual.format.text(column); })
-    
-    // remove old header columns
-    th.exit().remove()
-    
-    
-    // create a row for each object in the data
-    var rows = tbody.selectAll("tr").data(dataset, JSON.stringify)  
-    var rows_enter = rows.enter().append("tr");
-    
-    // create cells for each datum
-    var cells = rows.selectAll("td").data(function(row){
-        return ordered_columns.map(function(column) {
-          return {"column": column, "value": row[column]};
-        });
-    })
-    
-    cells.enter().append("td")
-    rows.selectAll("td")
-      .each(function(d){
-        if(d.column.indexOf("_id") >= 0){
-          var attr_type = d.column.split("_")[0]
-          d3.select(this).append("a")
-            .attr("href", "/profiles/" + attr_type + "/" + d.value)
-            .text(d.value)
-        }
-        else {
-          d3.select(this).text(function(d) { return d.value; })
-        }
+    var min_widths = {}
+    ths.enter().append("th")
+      .attr("class",function(d){return d})
+      .text(function(d) { return visual.format.text(d)})
+      .each(function(d) {
+        min_widths[d] = parseFloat(d3.select(this).style("width"),10)
       })
     
-    // remove old cells
-    // cells.exit().remove()
-    // rows.exit().remove()
+    // create a row for each object in the data
+    var rows = tbody.selectAll("tr").data(dataset, JSON.stringify)
+    
+    rows.enter().append("tr")
+    
+    rows
+      .each(function(d){
+        var self = d3.select(this)
+        ordered_columns.forEach(function(c){
+          
+          if (typeof d[c] == "string") {
+            var html = visual.format.text(d[c],c)
+          }
+          else if (typeof d[c] == "number") {
+            var html = visual.format.number(d[c],c)
+          }
+          else {
+            var html = d[c]
+          }
+          
+          var col = self.append("td")
+            .attr("class",c)
+            .html(html)
+            
+          col.style("min-width",min_widths[c]+"px")
+            
+          if(c.indexOf("_id") >= 0){
+            var attr_type = c.split("_")[0]
+            col.attr("class",c+" link").on(vizwhiz.evt.click,function(){
+              window.location = "/profiles/" + attr_type + "/" + d[c]
+            })
+          }
+          
+        })
+      })
+    
+    var col_widths = {}
+    tbody.select("tr").selectAll("td")
+      .each(function(d){
+        var key = this.className.split(" ")[0],
+            width = parseFloat(d3.select(this).style("width"),10)
+        col_widths[key] = width
+      })
+    
+    ths.style("width",function(d){ return col_widths[d]+"px" })
 
   }
 
@@ -367,6 +399,14 @@
   d3.select("#secex_go").on(vizwhiz.evt.click, function(){
     CURRENT_DATASET = 'secex';
     update_table(CURRENT_DATASET);
+  })
+  
+  // Scroll Header with Body, and vice-versa
+  d3.select("#table_container").on("scroll",function(){
+    d3.select("#table_header").node().scrollLeft = this.scrollLeft
+  })
+  d3.select("#table_header").on("scroll",function(){
+    d3.select("#table_container").node().scrollLeft = this.scrollLeft
   })
 
 </script>

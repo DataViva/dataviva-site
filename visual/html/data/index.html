@@ -3,7 +3,7 @@
 {% block body %}
 
   <div class="grid5col1 grid5offset1">
-    <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
+    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
   </div>
   
   <div class="grid5col2">
@@ -22,7 +22,7 @@
       Access the data directly.
     </a>
     
-    <a href="{{ url_for('data.classifications', attr='hs') }}" class="decision icon square source">
+    <a href="{{ url_for('data.classifications') }}" class="decision icon square source">
       <h2>Source List</h2>
       Browse the various classifications.
     </a>

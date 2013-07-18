@@ -21,6 +21,11 @@ mod = Blueprint('data', __name__, url_prefix='/data')
 @mod.before_request
 def before_request():
     g.page_type = mod.name
+    
+    g.sabrina = {}
+    g.sabrina["outfit"] = "lab"
+    g.sabrina["face"] = "smirk"
+    g.sabrina["hat"] = "glasses"
 
 def get_geo_location(ip):
     req = urllib2.Request("http://freegeoip.net/json/" + ip)
@@ -49,13 +54,7 @@ def get_geo_location(ip):
 
 @mod.route('/')
 def index():
-    
-    sabrina = {}
-    sabrina["outfit"] = "lab"
-    sabrina["face"] = "smirk"
-    sabrina["hat"] = "glasses"
-    
-    return render_template("data/index.html", sabrina = sabrina)
+    return render_template("data/index.html")
 
 @mod.route('/query/')
 def query():
@@ -77,60 +76,61 @@ def query():
     
     return render_template("data/query.html", geo_location = geo_location)
 
-@mod.route('/classifications/', defaults={"category": "all", "page":1})
-@mod.route('/classifications/<attr>/', defaults={"category": "all", "page":1})
-@mod.route('/classifications/<attr>/<category>/', defaults={"page":1})
-@mod.route('/classifications/<attr>/<category>/<int:page>/')
-def classifications(category, page, attr=None):
-    g.page_type = "classifications"
-    if not attr:
-        return redirect(url_for('data.classifications', attr='hs'))
+@mod.route('/classifications/')
+@mod.route('/classifications/<attr>/')
+@mod.route('/classifications/<attr>/<depth>/')
+@mod.route('/classifications/<attr>/<depth>/<int:page>/')
+def classifications(attr = None, depth = None, page = 1):
     
+    if not attr:
+        return render_template("data/select.html")
+    
+    g.page_type = "classifications"
     per_page = 50
     offset = request.args.get("offset", 0)
     
     if attr == "bra":
         attr_table = Bra
-        category_lookup = {"state":2, "mesoregion":4, "microregion":6, "municipality":8}
+        if depth == None:
+            depth = "2"
+        depths = ["2","4","6","8"]
         title = "Brazilian Geography"
     elif attr == "wld":
         attr_table = Wld
-        category_lookup = {"continent":2, "country":5}
+        if depth == None:
+            depth = "2"
+        depths = ["2","5"]
         title = "Countries"
     elif attr == "isic":
         attr_table = Isic
-        category_lookup = {"top category":1, "isic":5}
+        if depth == None:
+            depth = "1"
+        depths = ["1","3","5"]
         title = "Industries by ISIC Classification"
     elif attr == "cbo":
         attr_table = Cbo
-        category_lookup = {"top category":1, "cbo":4}
+        if depth == None:
+            depth = "1"
+        depths = ["1","4"]
         title = "Occupations by CBO Classification"
     elif attr == "hs":
         attr_table = Hs
-        category_lookup = {"top category":2, "hs":6}
+        if depth == None:
+            depth = "2"
+        depths = ["2","4","6"]
         title = "Products by HS Classification"
     
-    attrs = attr_table.query
-    
-    if category == "all":
-        possible_nestings = category_lookup.values()
-        attrs = attrs.filter(func.char_length(attr_table.id).in_(possible_nestings))
-    else:
-        attrs = attrs.filter(func.char_length(attr_table.id) == category_lookup[category])
-    
-    attrs = attrs.limit(per_page).offset(offset)
-    category_lookup = {v:k for k, v in category_lookup.items()}
+    attrs = attr_table.query.filter(func.char_length(attr_table.id) == depth).limit(per_page).offset(offset)
     
     if request.is_xhr:
         attrs_json = [dict(a.serialize().items() + [("attr_type",attr)]) for a in attrs]
-        return jsonify({"data": attrs_json, "attr_type": attr, "category_lookup":category_lookup})
+        return jsonify({"data": attrs_json})
     
     return render_template("data/classifications.html",
         title = title,
-        page = "data",
         page_attr = attr,
-        category = category,
-        category_lookup = category_lookup,
+        depth = depth,
+        depths = depths,
         attrs = attrs)
 
 @mod.route('/download/', methods=['GET', 'POST'])
