@@ -91,15 +91,17 @@ def admin_questions_edit(status, question_id):
     form = AdminQuestionUpdateForm()
     
     if form.validate_on_submit():
+        previous_status = form.previous_status.data
         q.status = form.status.data
         q.status_notes = form.answer.data
         db.session.add(q)
         db.session.commit()
         flash('This question has now been updated.')
-        return redirect(url_for('.admin_questions', status=q.status.name))
+        return redirect(url_for('.admin_questions', status=previous_status))
     
     # set defaults
     form.status.data = s
+    form.previous_status.data = s.name
     form.answer.data = q.status_notes
     
     return render_template("admin/admin_questions_edit.html", 

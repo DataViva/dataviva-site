@@ -27,6 +27,11 @@ hr.bold {
   display: none;
 }
 
+textarea {
+  min-width: 400px;
+  min-height: 200px;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
