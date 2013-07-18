@@ -55,7 +55,7 @@
     </a>
     <div id="location_add" class="filter_box" style="display: block">
       <span class="filler" style="display:none;">Showing all of Brazil until a location is selected.</span>
-      <div id="{{ geo_location.id }}" class="filter_item">
+      <div id="id_{{ geo_location.id }}" class="filter_item">
         <span class="list_icon" title="{{ geo_location.id }}"></span>
         <span class="filter_title" style="margin-left: 1px;">{{ geo_location.name_en }}</span>
         <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
@@ -266,13 +266,14 @@
       if(fdata == "show"){
         
         // are there any added filters?
-        var filter_items = d3.selectAll("#"+fname+"_add > p.filter_item");
+        var filter_items = d3.selectAll("#"+fname+"_add > .filter_item");
         if(!filter_items.empty()){
           
-          // there are filter, lets add them to a list
+          // there are filters, lets add them to a list
           fdata = []
           filter_items.each(function(fi){
-            fdata.push(this.id)
+            // the ids start with "id_", so we remove that
+            fdata.push(this.id.replace("id_", ""))
           })
           
           // concatenate filters using plus sign
@@ -292,14 +293,17 @@
       
     if(dataset == "rais"){
       var api_url = "/rais/" + [filters["year"], filters["location"], filters["industry"], filters["occupation"]].join("/")
+      api_url += "/?filter=wage>0"
     }
     else {
       var api_url = "/secex/"+ [filters["year"], filters["location"], filters["product"], filters["country"]].join("/")
+      api_url += "/?filter=val_usd>0"
     }
+    console.log(api_url)
     
     d3.select("#table_container").selectAll("tbody > tr").remove()
     d3.select("#table_container")
-      .call(is.url(api_url))
+      .call(is.url(api_url).offset(0))
 
     // prevent page from submitting form
     if(d3.event) d3.event.preventDefault();
@@ -353,6 +357,9 @@
           }
           else if (typeof d[c] == "number") {
             var html = visual.format.number(d[c],c)
+          }
+          else if (!d[c]) {
+            var html = " &mdash; "
           }
           else {
             var html = d[c]

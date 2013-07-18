@@ -1,3 +1,4 @@
+import re, operator
 from sqlalchemy import func
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, jsonify, abort, make_response
 
@@ -9,6 +10,10 @@ from visual.secex.models import Yb_secex, Yw, Yp, Ybw, Ybp, Ypw, Ybpw
 mod = Blueprint('secex', __name__, url_prefix='/secex')
 
 RESULTS_PER_PAGE = 40
+ops = {">": operator.gt,
+       ">=": operator.ge,
+       "<": operator.lt,
+       "<=": operator.le}
 
 @mod.errorhandler(404)
 def page_not_found(error):
@@ -48,16 +53,22 @@ def parse_bras(bra_str):
 def make_query(data_table, url_args, **kwargs):
     query = data_table.query
     order = url_args.get("order", None)
-    results_per_page = int(url_args.get("per_page", RESULTS_PER_PAGE))
     if order:
         order = url_args.get("order").split(" ")
-    page = url_args.get("page", None)
+    offset = url_args.get("offset", None)
+    limit = url_args.get("limit", None)
+    if offset:
+        limit = limit or 50
+    filter = url_args.get("filter", None)
+    if filter:
+        filter = re.split("(>=|>|<=|<)", filter)
     join = kwargs["join"] if "join" in kwargs else False
     cache_id = request.path
     ret = {}
 
-    # first lets test if this query is cached
-    if page is None and order is None:
+    # first lets test if this query is cached (be sure we are not paginating
+    # results) as these should not get cached
+    if limit is None:
         cached_q = cached_query(cache_id)
         if cached_q:
             return cached_q
@@ -91,7 +102,10 @@ def make_query(data_table, url_args, **kwargs):
             # otherwise we have been given specific bra(s)
             ret["location"] = parse_bras(kwargs["bra_id"])
             # filter query
-            query = query.filter(data_table.bra_id.in_([g["id"] for g in ret["location"]]))
+            if len(ret["location"]) > 1:
+                query = query.filter(data_table.bra_id.in_([g["id"] for g in ret["location"]]))
+            else:
+                query = query.filter(data_table.bra_id == ret["location"][0]["id"])
 
     # handle industry (if specified)
     if "hs_id" in kwargs:
@@ -107,7 +121,10 @@ def make_query(data_table, url_args, **kwargs):
             # Make sure the cbo_id requested actually exists in the DB
             ret["product"] = [exist_or_404(Hs, hs_id).serialize() for hs_id in ret["product"]]
             # filter query
-            query = query.filter(data_table.hs_id.in_([p["id"] for p in ret["product"]]))
+            if len(ret["product"]) > 1:
+                query = query.filter(data_table.hs_id.in_([p["id"] for p in ret["product"]]))
+            else:
+                query = query.filter(data_table.hs_id == ret["product"][0]["id"])
 
     # handle industry (if specified)
     if "wld_id" in kwargs:
@@ -123,7 +140,10 @@ def make_query(data_table, url_args, **kwargs):
             # Make sure the cbo_id requested actually exists in the DB
             ret["wld"] = [exist_or_404(Wld, wld_id).serialize() for wld_id in ret["wld"]]
             # filter query
-            query = query.filter(data_table.wld_id.in_([c["id"] for c in ret["wld"]]))
+            if len(ret["wld"]) > 1:
+                query = query.filter(data_table.wld_id.in_([o["id"] for o in ret["wld"]]))
+            else:
+                query = query.filter(data_table.wld_id == ret["wld"][0]["id"])
 
     # handle ordering
     if order:
@@ -143,16 +163,14 @@ def make_query(data_table, url_args, **kwargs):
             else:
                 query = query.order_by(o + " " + direction)
 
+    if filter:
+        query = query.filter(ops[filter[1]](getattr(data_table, filter[0]), float(filter[2])))
+
     # lastly we want to get the actual data held in the table requested
     if join:
         ret["data"] = []
-        # items = query.paginate(int(kwargs["page"]), RESULTS_PER_PAGE, False).items
-        # items = query.all()
-        if page:
-            count = query.count()
-            pagination = Pagination(int(page), results_per_page, count)
-            items = query.limit(results_per_page).offset(results_per_page * (pagination.page - 1)).all()
-            ret["pagination"] = pagination.serialize()
+        if limit:
+            items = query.limit(limit).offset(offset).all()
         else:
             items = query.all()
         for row in items:
@@ -162,17 +180,22 @@ def make_query(data_table, url_args, **kwargs):
                 extra[col_name] = value
                 datum = dict(datum.items() + extra.items())
             ret["data"].append(datum)
-    elif page:
-        count = query.count()
-        ret["pagination"] = Pagination(int(page), results_per_page, count).serialize()
-        ret["data"] = [d.serialize() for d in query.paginate(int(page), RESULTS_PER_PAGE, False).items]
+    # elif page:
+    #     count = query.count()
+    #     ret["pagination"] = Pagination(int(page), results_per_page, count).serialize()
+    #     ret["data"] = [d.serialize() for d in query.paginate(int(page), RESULTS_PER_PAGE, False).items]
+    # else:
+    #     ret["data"] = [d.serialize() for d in query.all()]
+
+    elif limit:
+        ret["data"] = [d.serialize() for d in query.limit(limit).offset(offset).all()]
     else:
         ret["data"] = [d.serialize() for d in query.all()]
 
     # gzip and jsonify result
     ret = gzip_data(jsonify(ret).data)
 
-    if page is None and order is None:
+    if limit is None:
         cached_query(cache_id, ret)
 
     return ret

@@ -21,6 +21,8 @@ def per_request_callbacks(response):
         response.headers['Content-Length'] = str(len(response.data))
     return response
 
+''' Given a "bra" string from URL, turn this into an array of Bra
+    objects'''
 def parse_bras(bra_str):
     if ".show." in bra_str:
         # the '.show.' indicates that we are looking for a specific nesting
