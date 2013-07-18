@@ -19,18 +19,18 @@ def before_request():
         session['has_access'] = False
 
     # test if the user has access!
-    # if not session['has_access'] and request.endpoint and request.endpoint != "static":
-    #     if request.endpoint == "general.home":
-    #         form = AccessForm()
-    #         if "pw" in request.form:
-    #             if request.form["pw"] == "parabens":
-    #                 session['has_access'] = True
-    #             else:
-    #                 return render_template("general/access.html", form=form)
-    #         else:
-    #             return render_template("general/access.html", form=form)
-    #     else:
-    #         return redirect(url_for("general.home"))
+    if not session['has_access'] and request.endpoint and request.endpoint != "static":
+        if request.endpoint == "general.home":
+            form = AccessForm()
+            if "pw" in request.form:
+                if request.form["pw"] == "parabens":
+                    session['has_access'] = True
+                else:
+                    return render_template("general/access.html", form=form)
+            else:
+                return render_template("general/access.html", form=form)
+        else:
+            return redirect(url_for("general.home"))
             
     # Save variable in session so we can determine if this is the user's
     # first time on the site
