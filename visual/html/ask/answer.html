@@ -12,75 +12,92 @@
 <div class="grid5col4 grid5offsethalf">
   {% with q = question %}
   
-  <div id="question">
-    <h1>{{ q.question }}</h1>
-    {% if q.body %}
-      <p>{{ q.body|safe }}</p>
-      {% endif %}
-    {% if tags|length %}
-    <div class="labels">
-      Tags:
-      {% for t in tags %}
-      <a class="tag" style="background-color: {{ t.color }};" rel="tag">
-        <span class="tag-icon" rel="{{ t.__class__.__name__ }}" title="{{ t.id }}"></span>
-        <span>{{ t.name_en }}&nbsp;&nbsp;</span>
+  <div class="question">
+    
+    <div class="vote_block">
+      <div class="vote_count">{% if q.votes.all()|length %}{{ q.votes.count() }}{% else %}0{% endif %}</div>
+      <div class="vote_label">votes</div>
+      <a class="vote_up" href="{{ url_for('ask.question_vote', slug=q.slug) }}">
+        <i class="icon-thumbs-up"></i>
       </a>
-      {% endfor %}
     </div>
-    {% endif %}
-    <div class="posted"><img src="{{ q.user.avatar(22) }}"> Asked by <a href="{{ url_for('account.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a> {{ momentjs(q.timestamp).fromNow() }}</div>
-    <br /><br />
-    <p><span class="vote_count answer big" style="font-size: 16px">{% if q.votes.all()|length %}{{ q.votes.count() }}{% else %}0{% endif %}</span>
-      <a class="vote_up button square answer big" href="{{ url_for('ask.question_vote', slug=q.slug) }}">
-        <i class="icon-thumbs-up" style="font-size: 16px"></i>
-      </a>
-    </p>
+    
+    <div class="question_preview">
+      <h2>{{ q.question }}</h2>
+      {% if q.body %}{{ q.body|safe }}{% endif %}
+      {% if tags|length %}
+        <div class="labels">
+          Tags:
+          {% for t in tags %}
+            <a class="tag" style="background-color: {{ t.color }};" rel="tag">
+              <span class="tag-icon" rel="{{ t.__class__.__name__ }}" title="{{ t.id }}"></span>
+              <span>{{ t.name_en }}&nbsp;&nbsp;</span>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="question_attr">
+        <div class="userpic" style="background-image: url('{{ q.user.avatar(50) }}')"></div>
+        Asked by <a href="{{ url_for('account.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a> {{ momentjs(q.timestamp).fromNow() }}
+      </div>
+    </div>
+    
   </div>
 
-  <div id="official-answer">
+  <div class="answer whitebox">
     {% if q.status_notes %}
-      <p><strong>Sabrina</strong> says:
-      <p>{{ q.status_notes|safe }}</p>
+      {{ q.status_notes|safe }}
     {% else %}
-      <p><strong>Sabrina</strong> has not answered yet!</p>
+      Sabrina has not answered this question yet. Feel free to start the conversation below.
     {% endif %}
-    <div id="sabrina-official-answer"></div>
-  </div><br />
+    <div id="answer_sabrina"></div>
+  </div>
+  
   {% if q.replies.all()|length %}
-  <h5>Responses</h5>
-  <hr class="bold"/>
+  <h2 style="margin-left:12px;">Responses</h2>
   <div id="responses">
-    <ol>
+    
     {% for r in q.replies %}
-      <li {% if r.id != r.parent_id %}class="child"{% endif %}>
-        <p><span class="vote_count answer">{% if r.votes.all()|length %}{{ r.votes.count() }}{% else %}0{% endif %}</span>
-          <a class="vote_up button square answer" href="{{ url_for('ask.reply_vote', id=r.id) }}">
+      <div class="question whitebox">
+        
+        <div class="vote_block">
+          <div class="vote_count">{% if r.votes.all()|length %}{{ r.votes.count() }}{% else %}0{% endif %}</div>
+          <div class="vote_label">votes</div>
+          <a class="vote_down" href="{{ url_for('ask.reply_flag', id=r.id) }}">
+            <i class="icon-flag"></i>
+          </a>
+          <a class="vote_up" href="{{ url_for('ask.reply_vote', id=r.id) }}">
             <i class="icon-thumbs-up"></i>
           </a>
-        </p>
-        <p><a class="flag button square" href="{{ url_for('ask.reply_flag', id=r.id) }}"><i class="icon-flag"></i></a></p>
-        <div class="response">
-        <p>{{ r.body|safe }}</p>
-        <div class="posted"><img class="avatar" src="{{ r.user.avatar(20) }}"> Added by <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a> {{ momentjs(r.timestamp).fromNow() }}</div>
-        <hr />
+        </div>
+    
+        <div class="question_preview{% if r.id != r.parent_id %} child{% endif %}">
+          {{ r.body|safe }}
+          <div class="question_attr">
+            <div class="userpic" style="background-image: url('{{ r.user.avatar(50) }}')"></div>
+            <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a> {{ momentjs(q.timestamp).fromNow() }}
+          </div>
+        </div>
+    
         {% if r.id == r.parent_id %}
-        <button class="reply">Reply</button>
-        {% include 'ask/snippets/reply_form.html' %}
+          {% include 'ask/snippets/reply_form.html' %}
         {% endif %}
-      </li>
-      {% endfor %}
-    </ol>
+    
+      </div>
+    {% endfor %}
+    
   </div>
-  {% else %}
-  <p>No responses yet!</p></br>
   {% endif %}
 
   {% endwith %}
-  <br />
-  <h5>Your Response</h5>
-  {% include 'ask/snippets/reply_form.html' %}
+
+  <h2 style="margin-left:12px;">New Response</h2>
+  <div class="reply whitebox">
+    {% include 'ask/snippets/reply_form.html' %}
+  </div>
   
   </div>
+  
 </div>
 
 {% endblock %}
@@ -120,7 +137,7 @@ d3.selectAll(".vote_up").on(vizwhiz.evt.click, function(){
 })
 
 // Flagging :(
-d3.selectAll(".flag").on(vizwhiz.evt.click, function(){
+d3.selectAll(".vote_down").on(vizwhiz.evt.click, function(){
   var link_el = this;
   d3.json(link_el.href, function(resp){
     if(resp.error) {

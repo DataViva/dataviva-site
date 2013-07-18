@@ -1,0 +1,22 @@
+#apps-links,
+#data-links,
+#admin-links {
+  display: block;
+  font-weight: bold;
+  float: left;
+  margin-left: 15%;
+  margin-bottom: 4%;
+  font-size: 14px;
+}
+
+#apps-links p,
+#data-links p,
+#admin-links p {
+  margin-bottom: 8px;
+}
+
+#apps-links a.active, 
+#data-links a.active, 
+#admin-links a.active {
+  color: #cc0000;
+}

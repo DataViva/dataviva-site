@@ -17,27 +17,25 @@
     <div class="title">
       What can I help you with?
     </div>
-    
     {{ search_form.search(size=80, id='search', class='ask', placeholder="Search here...") }}
     <div class="hide"><h3>Search Results</h3></div>
-    <div id="results"></div>
+    
+    <div id="order_toggle">
+      <legend id="order">Order by</legend>
+      <input type="radio" name="order" value="votes" id="votes" onclick="change_order(this.value)" checked="checked">
+      <label for="votes">Top Voted</label>
+      <input type="radio" name="order" value="newest" id="newest" onclick="change_order(this.value)">
+      <label for="newest">Newest</label>
+    </div>
       
     <div id="recent">
-      <div id="order_toggle">
-        <legend>Order by</legend>
-        <input type="radio" name="order" value="votes" onclick="change_order(this.value)" checked="checked">
-        <label for="votes">Top Voted</label>
-        <input type="radio" name="order" value="newest" onclick="change_order(this.value)">
-        <label for="newest">Newest</label>
-      </div>
-      <h3>Questions</h3>
 
       <div class="question_feed"></div>
 
-      <a href="/ask/ask/" class="help">
+      <a {% if g.user.is_authenticated() %}href="/ask/ask/"{%else%}onclick="login()"{%endif%} class="help">
         <div>
           <h2>Cannot find your answer here?</h2>
-          <p>Submit your question to Escritorio!</p>
+          Submit your question to Escritorio!
         </div>
       </a>
       
@@ -53,96 +51,97 @@
   <!-- wysihtml5 library -->
   <script src="/static/js/libs/wysihtml5-0.3.0.min.js"></script>
 
-<script src="/static/js/utils/utils.infinite_scroll.js"></script>
-<script>
+  <script src="/static/js/utils/utils.infinite_scroll.js"></script>
+  <script>
 
-var order = d3.select('input[name="order"]:checked').attr("value"),
-    search_term = null;
+  var order = d3.select('input[name="order"]:checked').attr("value"),
+      search_term = null;
+      
+  leon.touch("$order")
+  leon.touch("#search")
 
-function change_order(new_order){
-  order = new_order;
-  var url = window.location.href + "?order=" + order;
-  if(search_term){
-    url += "&q=" + search_term;
+  function change_order(new_order){
+    order = new_order;
+    var url = window.location.href + "?order=" + order;
+    if(search_term){
+      url += "&q=" + search_term;
+    }
+    d3.select(".question_feed").html('')
+      .call(is.url(url).offset(0).remove(true))
   }
-  d3.select(".question_feed").html('')
-    .call(is.url(url).offset(0).remove(true))
-}
 
-function item_formatter(container_el, activities, offset){
-  console.log(container_el)
+  function item_formatter(container_el, activities, offset){
   
-  var formatDate = d3.time.format("%B %-d, %Y"),
-      parseDate = d3.time.format.iso.parse;
+    var formatDate = d3.time.format("%B %-d, %Y"),
+        parseDate = d3.time.format.iso.parse;
   
-  var acts = d3.select(container_el).selectAll(".activity")
-    .data(activities, function(d){ return d.id; })
+    var acts = d3.select(container_el).selectAll(".activity")
+      .data(activities, function(d){ return d.id; })
     
-  var activities_enter = acts
-    .enter().insert("a", "div.infinite_loading")
-    .attr("class", "decision activity")
-    .attr("href", function(d){
-      return "/ask/question/" + d.slug;
-    })
+    var activities_enter = acts
+      .enter().insert("a", "div.infinite_loading")
+      .attr("class", "decision question")
+      .attr("href", function(d){
+        return "/ask/question/" + d.slug;
+      })
   
-  var votes_div = activities_enter.append("div")
-    .attr("class", "number_votes")
+    var votes_div = activities_enter.append("div")
+      .attr("class", "vote_block")
 
-  votes_div.append("span")
-    .attr("class", "vote_count")
-    .text(function(d){
-      return d.votes;
-    })
-  votes_div.append("p")
-    .attr("class", "vote_label")
-    .text("votes")
+    votes_div.append("div")
+      .attr("class", "vote_count")
+      .text(function(d){ return d.votes })
+      
+    votes_div.append("div")
+      .attr("class", "vote_label")
+      .text("votes")
 
       
-  // lastly, the div that holds the data
-  var question_div = activities_enter.append("div")
-    .attr("class", "question_preview")
+    // lastly, the div that holds the data
+    var question_div = activities_enter.append("div")
+      .attr("class", "question_preview")
   
-  question_div.append("h2")
-    .text(function(d){ return d.question })
+    question_div.append("h2")
+      .text(function(d){ return d.question })
   
-  question_div.each(function(d){
-      if(d.status_notes){
-        d3.select(this).append("p")
-          .text(function(){
-            return d.status_notes.replace(/<\/?[^>]+(>|$)/g, "");
-          })
-      }
-    })
+    question_div.each(function(d){
+        if(d.status_notes){
+          d3.select(this).append("div")
+            .text(function(){
+              return d.status_notes.replace(/<\/?[^>]+(>|$)/g, "").truncate(300);
+            })
+        }
+      })
 
-  question_div.append("div")
-    .attr("class", "posted")
-    .html(function(d){ 
-      var user_link = "<a href='/account/" + d.user.nickname + "'>" + d.user.fullname + "</a>"
-      return "Asked by " + user_link + " " + moment(d.timestamp).fromNow();
-    })
+    question_div.append("div")
+      .attr("class", "question_attr")
+      .html(function(d){ 
+        var user_link = "<a href='/account/" + d.user.nickname + "'>" + d.user.fullname + "</a>"
+        return "Asked by " + user_link + " " + moment(d.timestamp).fromNow();
+      })
 
-  acts.exit().remove()
+    acts.exit().remove()
 
-}
+  }
 
-var is = infinite_scroll()
-          .url(window.location.href)
-          .format_items(item_formatter);
+  var is = infinite_scroll()
+            .url(window.location.href)
+            .format_items(item_formatter);
 
-d3.select(".question_feed")
-  .call(is)
+  d3.select(".question_feed")
+    .call(is)
 
-d3.select("#search").on("input", function(e){
+  d3.select("#search").on("input", function(e){
 
-  search_term = this.value;
-  console.log(search_term)
-  var url = window.location.href + "?q=" + search_term + "&order=" + order;
-  d3.select(".question_feed").html('')
-    .call(is.url(url).offset(0).remove(true))
+    search_term = this.value;
+    console.log(search_term)
+    var url = window.location.href + "?q=" + search_term + "&order=" + order;
+    d3.select(".question_feed").html('')
+      .call(is.url(url).offset(0).remove(true))
 
-})
+  })
 
-</script>
+  </script>
 
 
 {% endblock %}

@@ -17,8 +17,7 @@ body.guide > #container {
 
 body.profiles > #container,
 body.apps > #container,
-body.data > #container,
-body.ask > #container {
+body.data > #container {
   background-image: url('/static/img/bgs/lab.png');
   background-position: center 125px;
   background-size: 75%;
@@ -37,6 +36,20 @@ div#selector {
   height: 450px;
 }
 
+.whitebox {
+  background-color: #fafafa;
+  -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+          box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+  padding: 12px;
+  position: relative;
+}
+
+p {
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 12px;
+}
+
 /*****************/
 /* Title Styling */
 /*****************/
@@ -48,27 +61,6 @@ h2 {
   line-height: 32px;
   margin-bottom: 6px;
   opacity: 1;
-}
-
-h3 {
-  margin: 1% 0;
-  font-size: 16px;
-}
-
-h4 {
-  text-transform: uppercase;
-  color: #cccccc;
-  font-size: 30px;
-  margin-bottom: 1.2%;
-  letter-spacing: 1px;
-}
-
-h5 {
-  text-transform: uppercase;
-  color: #cccccc;
-  font-size: 30px;
-  margin-bottom: -1.8%;
-  letter-spacing: 1px;
 }
 
 /***************************/

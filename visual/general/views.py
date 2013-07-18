@@ -49,8 +49,8 @@ def before_request():
         db.session.commit()
     
     # Set the locale to either 'pt' or 'en' on the global object
-    if request.endpoint != 'static':
-        g.locale = get_locale()
+    # if request.endpoint != 'static':
+    #     g.locale = get_locale()
 
 @babel.localeselector
 def get_locale(lang=None):

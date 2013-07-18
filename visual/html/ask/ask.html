@@ -11,30 +11,26 @@
 {% endblock %}
 
 {% block body %}
-<div id="sabrina_ask" class="grid5col1"></div>
+
+<div class="grid5col1">
+  <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
+</div>
+
 <div id="submit_column" class="grid5col4">
   <div class="title">
-    <div class="arrow"></div>
     {% if g.user.is_authenticated() %}
-    <div class="text">What would you like to know?</div>
+      What would you like to know?
     {% else %}
-    <div class="text">You need to login for this functionality.</div>
+      You need to login for this functionality.
     {% endif %}
   </div>
+  
   {% if g.user.is_authenticated() %}
-  {% include 'ask/snippets/question_form.html' %}
+    {% include 'ask/snippets/question_form.html' %}
   {% else %}
-  <a id="login" href="#" onclick="login()">
-    <div class="decision">
-      <div class="text">
-        <div class="question_preview">
-          <h2>Click here to login</h2>
-        </div>
-      </div>
-      <div class="arrow"></div>
-    </div>
-  </a>
+    <a id="login" class="decision" onclick="login()">Click here to login</a>
   {% endif %}
+  
 </div>
 
 <div id="poptest"></div>

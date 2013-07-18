@@ -13,21 +13,19 @@
 
     <div id="wysihtml5-toolbar" style="display: none;">
       <div id="text-field-options">
-        <a class="button square" data-wysihtml5-command="bold"><i class="icon-bold"></i></a>
-        <a class="button square" data-wysihtml5-command="italic"><i class="icon-italic"></i></a>
-
-        <a class="button square" data-wysihtml5-command="insertUnorderedList"><i class="icon-list-ul"></i></a>
-        <a class="button square" data-wysihtml5-command="insertOrderedList"><i class="icon-list-ol"></i></a>
-
-        <a class="button square" data-wysihtml5-command="createLink"><i class="icon-link"></i></a>
+        <a class="leon button square" data-wysihtml5-command="bold"><i class="icon-bold"></i></a>
+        <a class="leon button square" data-wysihtml5-command="italic"><i class="icon-italic"></i></a>
+        <a class="leon button square" data-wysihtml5-command="insertUnorderedList"><i class="icon-list-ul"></i></a>
+        <a class="leon button square" data-wysihtml5-command="insertOrderedList"><i class="icon-list-ol"></i></a>
+        <a class="leon button square" data-wysihtml5-command="createLink"><i class="icon-link"></i></a>
         <!-- Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href) -->
         <div data-wysihtml5-dialog="createLink" style="display: none;">
           <label class="link">
             Link:
             <input data-wysihtml5-dialog-field="href" value="http://" type="text" class="link">
           </label>
-          <a class="button square link" data-wysihtml5-dialog-action="save"><i class="icon-ok"></i></a>
-          <a class="button square link" data-wysihtml5-dialog-action="cancel"><i class="icon-remove"></i></a>
+          <a class="leon button square link" data-wysihtml5-dialog-action="save"><i class="icon-ok"></i></a>
+          <a class="leon button square link" data-wysihtml5-dialog-action="cancel"><i class="icon-remove"></i></a>
         </div>
       </div>
     </div>
@@ -38,8 +36,8 @@
   </p>
   
   <p>
-    <h3>App:</h3>
-    {{ form.app(size=80, class="ask", placeholder="Ex. /tree_map/secex/mg/show/show") }}
+    <label class="leon label" for="app_link">App</label>
+    {{ form.app(size=80, id="app_link", class="leon text", placeholder="Ex. /tree_map/secex/mg/show/show") }}
   </p>
   <p>
     <h3>Tags:</h3>
