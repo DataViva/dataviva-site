@@ -49,8 +49,8 @@ def before_request():
         db.session.commit()
     
     # Set the locale to either 'pt' or 'en' on the global object
-    # if request.endpoint != 'static':
-    #     g.locale = get_locale()
+    if request.endpoint != 'static':
+        g.locale = get_locale()
 
 @babel.localeselector
 def get_locale(lang=None):
@@ -60,17 +60,19 @@ def get_locale(lang=None):
     if lang:
         if lang in supported_langs:
             new_lang = lang
-        if user:
+        if user.is_authenticated():
             # set users preferred lang
             user.language = new_lang
             db.session.add(user)
             db.session.commit()
+        else:
+            session['locale'] = new_lang
     else:
         current_locale = getattr(g, 'locale', None)
         # return new_lang
         if current_locale:
             new_lang = current_locale
-        elif user:
+        elif user.is_authenticated():
             user_preferred_lang = getattr(user, 'language', None)
             if user_preferred_lang and user_preferred_lang in supported_langs:
                 new_lang = user_preferred_lang
