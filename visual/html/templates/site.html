@@ -75,7 +75,7 @@
     // leon.touch("$language_select")
   
     function change_language(l) {
-      console.log(l);
+      window.location = "/set_lang/" + l + "/?next=" + window.location.pathname;
     }
   
     var lang = "{{ g.locale }}"

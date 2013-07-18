@@ -49,26 +49,42 @@ def before_request():
         db.session.commit()
     
     # Set the locale to either 'pt' or 'en' on the global object
-    g.locale = get_locale()
+    if request.endpoint != 'static':
+        g.locale = get_locale()
 
 @babel.localeselector
-def get_locale():
+def get_locale(lang=None):
     supported_langs = current_app.config['LANGUAGES'].keys()
+    new_lang = request.accept_languages.best_match(supported_langs)
     user = getattr(g, 'user', None)
-    locale = None
-    if 'lang' in session:
-        locale = session['lang']
-    # if a user is logged in, use the locale from the user settings
-    elif user is not None:
-        lang = getattr(user, 'language', None)
-        if lang is not None and lang in supported_langs:
-            locale = lang
-    # otherwise try to guess the language from the user accept
-    # header the browser transmits. Supported languages are found
-    # in config.py. The best match wins.
-    if locale is None:
-        locale = request.accept_languages.best_match(supported_langs)
-    return locale
+    if lang:
+        if lang in supported_langs:
+            new_lang = lang
+        if user:
+            # set users preferred lang
+            user.language = new_lang
+            db.session.add(user)
+            db.session.commit()
+    else:
+        current_locale = getattr(g, 'locale', None)
+        # return new_lang
+        if current_locale:
+            new_lang = current_locale
+        elif user:
+            user_preferred_lang = getattr(user, 'language', None)
+            if user_preferred_lang and user_preferred_lang in supported_langs:
+                new_lang = user_preferred_lang
+            else:
+                # set users preferred lang
+                user.language = new_lang
+                db.session.add(user)
+                db.session.commit()
+        elif 'locale' in session:
+            new_lang = session['locale']
+        else:
+            session['locale'] = new_lang
+    
+    return new_lang
 
 @babel.timezoneselector
 def get_timezone():
@@ -97,13 +113,12 @@ def access():
 ###############################
 # Set language views 
 # ---------------------------
-@mod.route('set_lang/<lang>')
+@mod.route('set_lang/<lang>/')
 def set_lang(lang):
-    supported_langs = current_app.config['LANGUAGES'].keys()
-    user = getattr(g, 'user', None)
-    if lang in supported_langs:
-        session['lang'] = lang
-    return redirect(url_for('general.home'))
+    g.locale = get_locale(lang)
+    return redirect(request.args.get('next') or \
+               request.referrer or \
+               url_for('general.home'))
 
 ###############################
 # 404 view
