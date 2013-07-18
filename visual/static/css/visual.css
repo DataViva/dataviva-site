@@ -204,26 +204,6 @@ div.rec_value {
   width: 100%;
 }
 
-/****************/
-/* Help Specific */
-/****************/
-
-#help_wrapper {
-  padding: 25px;
-}
-
-#help_wrapper img {
-  text-align: center;
-  display: block;
-  margin: 0px auto;
-  width: 100%;
-  height: auto;
-}
-#help_wrapper .ui_group {
-  text-align: center;
-  margin: 10px 0px;
-}
-
 /*******************/
 /* Popover Styling */
 /*******************/

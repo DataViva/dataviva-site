@@ -66,6 +66,30 @@ a:hover {
   width: 144px;
 }
 
+.decision.short {
+  font-size: 12px !important;
+  line-height: 14px !important;
+  margin: 0px 0px 6px 0px !important;
+  padding: 6px 24px 6px 24px !important;
+}
+
+.decision.short .title {
+  color: #333 !important;
+  font-size: 12px !important;
+  line-height: 14px !important;
+  margin: 0px !important;
+  padding: 6px !important;
+}
+
+.decision.short:before {
+  width: 24px !important;
+}
+
+.decision.short:after {
+  bottom: 7px !important;
+  right: 6px !important;
+}
+
 .title {
   opacity: 1;
   text-shadow: 0px 1px white;

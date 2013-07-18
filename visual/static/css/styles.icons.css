@@ -8,38 +8,6 @@
   padding-left: 12px;
 }
 
-#vizwhiz_tooltip_id_rings .decision,
-#vizwhiz_tooltip_id_network .decision,
-#vizwhiz_tooltip_id_geo_map .decision {
-  font-size: 12px;
-  line-height: 14px;
-  margin: 0px 0px 6px 0px;
-  padding: 6px 24px 6px 24px;
-}
-
-#vizwhiz_tooltip_id_rings .title,
-#vizwhiz_tooltip_id_network .title,
-#vizwhiz_tooltip_id_geo_map .title {
-  color: #333;
-  font-size: 12px;
-  line-height: 14px;
-  margin: 0px;
-  padding: 6px;
-}
-
-#vizwhiz_tooltip_id_rings .decision:before,
-#vizwhiz_tooltip_id_network .decision:before,
-#vizwhiz_tooltip_id_geo_map .decision:before {
-  width: 24px;
-}
-
-#vizwhiz_tooltip_id_rings .decision:after,
-#vizwhiz_tooltip_id_network .decision:after,
-#vizwhiz_tooltip_id_geo_map .decision:after {
-  bottom: 7px;
-  right: 6px;
-}
-
 .decision.icon:before,
 .help.icon:before {
   background-position: 50%;

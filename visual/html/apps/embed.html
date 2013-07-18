@@ -295,8 +295,16 @@
             else if (i == priority.length-1) {
               html_return += "<div class='title'>Other Apps</div>"
             }
+            
+            if (["network","rings","geo_map"].indexOf(app.build.app.type) >= 0) {
+              var classname = "decision short icon"
+            }
+            else {
+              var classname = "decision icon"
+            }
+            
             data[p].forEach(function(a){
-              html_return += "<div id='"+a.url+"' class='decision icon "+a.app.type+"' "
+              html_return += "<div id='"+a.url+"' class='"+classname+" "+a.app.type+"' "
               html_return += "onclick='app.start(this.id)'>"
               html_return += a.title
               html_return += "</div>"

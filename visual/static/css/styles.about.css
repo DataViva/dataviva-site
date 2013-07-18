@@ -1,22 +1,43 @@
-#apps-links,
-#data-links,
-#admin-links {
+#about_nav {
+  left: 50%;
+  margin-left: -400px;
+  position: fixed;
+  top: 100px;
+}
+
+#about_content {
+  padding: 25px;
+}
+
+a.about {
   display: block;
-  font-weight: bold;
-  float: left;
-  margin-left: 15%;
-  margin-bottom: 4%;
-  font-size: 14px;
 }
 
-#apps-links p,
-#data-links p,
-#admin-links p {
-  margin-bottom: 8px;
+a.app {
+  display: block;
+  margin-left: 12px;
 }
 
-#apps-links a.active, 
-#data-links a.active, 
-#admin-links a.active {
+a.app.active {
   color: #cc0000;
+}
+
+/****************/
+/* Help Specific */
+/****************/
+
+#help_wrapper img {
+  text-align: center;
+  display: block;
+  margin: 0px auto;
+  width: 100%;
+  height: auto;
+}
+#help_wrapper .ui_group {
+  text-align: center;
+  margin: 10px 0px;
+}
+
+body.about #footer {
+  display: none;
 }
