@@ -45,6 +45,8 @@ class Build(db.Model, AutoSerialize):
 
     def set_bra(self, bra_id):
         '''If build requires 2 bras and only 1 is given, supply a 2nd'''
+        if isinstance(self.bra, list):
+            return
         if "+" in self.bra and "+" not in bra_id:
             bra_id = bra_id + "+sp"
         elif "+" not in self.bra and "+" in bra_id:
@@ -109,7 +111,7 @@ class Build(db.Model, AutoSerialize):
     data required for building a viz of this app.
     '''
     def data_url(self, **kwargs):
-        
+        print self.bra
         # bra = self.bra.id
         bra = "+".join([b.id for b in self.bra])
         if self.output == "bra":

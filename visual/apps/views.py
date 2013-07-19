@@ -69,7 +69,11 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     for build in all_builds:
         build.set_filter1(filter1)
         build.set_filter2(filter2)
+        # if build.id == 52:
+        #     raise Exception(bra_id, build.bra)
         build.set_bra(bra_id)
+        # if build.id == 52:
+        #     raise Exception(bra_id, build.bra, build.data_url())
     
     '''Get URL query parameters from reqest.args object to return to the view.
     '''
@@ -92,7 +96,7 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
         return jsonify({
             "current_build": current_build.serialize()
         })
-        
+    
     return render_template("apps/embed.html",
         all_builds = all_builds,
         starred = starred,
