@@ -1,11 +1,10 @@
 from flask import Flask, redirect, url_for, session, request
 from flask_oauth import OAuth
+from config import GOOGLE_OAUTH_ID, GOOGLE_OAUTH_SECRET, \
+                    TWITTER_OAUTH_ID, TWITTER_OAUTH_SECRET, \
+                    FACEBOOK_OAUTH_ID, FACEBOOK_OAUTH_SECRET
 
 oauth = OAuth()
-
-''' Google oauth '''
-GOOGLE_CLIENT_ID = '521034971212.apps.googleusercontent.com'
-GOOGLE_CLIENT_SECRET = 'rG6ak-cO5NJ2PtDWPiJPk9jK'
 
 google = oauth.remote_app('google',
     base_url='https://www.google.com/accounts/',
@@ -16,25 +15,8 @@ google = oauth.remote_app('google',
     access_token_url='https://accounts.google.com/o/oauth2/token',
     access_token_method='POST',
     access_token_params={'grant_type': 'authorization_code'},
-    consumer_key=GOOGLE_CLIENT_ID,
-    consumer_secret=GOOGLE_CLIENT_SECRET)
-
-''' Facebook oauth '''
-FACEBOOK_APP_ID = '519182984806249'
-FACEBOOK_APP_SECRET = 'c02b3115bbd969d3aa9b6b0cd631f427'
-
-facebook = oauth.remote_app('facebook',
-    base_url='https://graph.facebook.com/',
-    request_token_url=None,
-    access_token_url='/oauth/access_token',
-    authorize_url='https://www.facebook.com/dialog/oauth',
-    consumer_key=FACEBOOK_APP_ID,
-    consumer_secret=FACEBOOK_APP_SECRET,
-    request_token_params={'scope': 'email'})
-
-''' Twitter oauth '''
-TWITTER_APP_ID = 'MlPQ46Kklt7vfLqzeQWHpA'
-TWITTER_APP_SECRET = '58BEAPT4QyqUdA6K7CoIhsQ3EbvutESrX6tTW7s'
+    consumer_key=GOOGLE_OAUTH_ID,
+    consumer_secret=GOOGLE_OAUTH_SECRET)
 
 # Use Twitter as example remote application
 twitter = oauth.remote_app('twitter',
@@ -51,6 +33,15 @@ twitter = oauth.remote_app('twitter',
     # user interface on the twitter side.
     authorize_url='https://api.twitter.com/oauth/authenticate',
     # the consumer keys from the twitter application registry.
-    consumer_key=TWITTER_APP_ID,
-    consumer_secret=TWITTER_APP_SECRET
-)
+    consumer_key=TWITTER_OAUTH_ID,
+    consumer_secret=TWITTER_OAUTH_SECRET)
+
+facebook = oauth.remote_app('facebook',
+    base_url='https://graph.facebook.com/',
+    request_token_url=None,
+    access_token_url='/oauth/access_token',
+    authorize_url='https://www.facebook.com/dialog/oauth',
+    consumer_key=FACEBOOK_OAUTH_ID,
+    consumer_secret=FACEBOOK_OAUTH_SECRET,
+    request_token_params={'scope': 'email'})
+

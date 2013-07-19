@@ -63,3 +63,13 @@ WHOOSH_BASE = os.path.join(basedir, 'search.db')
 REDIS = RedisCache(host=get_env_variable("VISUAL_REDIS_HOST", "localhost"), 
          port=get_env_variable("VISUAL_REDIS_PORT", 6379), 
          password=get_env_variable("VISUAL_REDIS_PW", None), default_timeout=2591999)
+
+'''
+    Oauth tokens set in environment variables from their respecive sources
+'''
+GOOGLE_OAUTH_ID = get_env_variable("VISUAL_OAUTH_GOOGLE_ID")
+GOOGLE_OAUTH_SECRET = get_env_variable("VISUAL_OAUTH_GOOGLE_SECRET")
+TWITTER_OAUTH_ID = get_env_variable("VISUAL_OAUTH_TWITTER_ID")
+TWITTER_OAUTH_SECRET = get_env_variable("VISUAL_OAUTH_TWITTER_SECRET")
+FACEBOOK_OAUTH_ID = get_env_variable("VISUAL_OAUTH_FACEBOOK_ID")
+FACEBOOK_OAUTH_SECRET = get_env_variable("VISUAL_OAUTH_FACEBOOK_SECRET")
