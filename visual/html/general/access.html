@@ -2,35 +2,49 @@
   <head>
     <title>Visual : Login</title>
 
-    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome.min.css" />
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="{{STATIC_URL}}css/libs/font-awesome/font-awesome-ie7.min.css?v=3">
-    <![endif]-->
     <style>
     
       body {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
         text-align: center;
       }
       
+      #fullscreen {
+        background-image: url('/static/img/home/day.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: -1;
+      }
+      
       div.login_container {
+        background-color: #fafafa;
+        -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+                box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
         color: #333;
         left: 50%;
         margin-left: -114px;
-        margin-top: -110px;
+        margin-top: -150px;
+        opacity: 0.9;
         position: absolute;
         top: 50%;
         width: 228px;
+        padding: 12px;
       }
       
       div.logo {
-        background-image: url("/static/img/nav/logo.png");
+        background-image: url("/static/img/nav/visual.png");
         background-repeat: no-repeat;
         background-size: 100% 100%;
         background-position: top center;
-        width: 189px;
-        height: 20px;
         display: inline-block;
+        height: 40px;
+        width: 153px;
         margin-bottom: 15px;
       }
       
@@ -66,38 +80,31 @@
       }
     
       input {
-        height: 30px;
-        background-color: #ffffff;
-        border: 1px solid #cccccc;
-        float: center;
-        display: inline-block;
-        font-size: 16px;
-        font-weight: normal;
-        padding: 5px;
-        margin: 0px;
-        width: 200px;
-        -webkit-border-radius: 0px;
-           -moz-border-radius: 0px;
-                border-radius: 0px;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-           -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-        -webkit-transition: border linear .2s, box-shadow linear .2s;
-           -moz-transition: border linear .2s, box-shadow linear .2s;
-             -o-transition: border linear .2s, box-shadow linear .2s;
-                transition: border linear .2s, box-shadow linear .2s;
-        -webkit-box-sizing: border-box;
-           -moz-box-sizing: border-box;
-                box-sizing: border-box;
+        background: #ffffff;
+        border: 1px solid #888;
+        -webkit-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+           -moz-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+                box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+        color: #333;
+        line-height: 26px;
+        font-size: 20px;
+        padding: 6px;
+        margin: 6px 0px;
+        text-align: center;
+        transition: color 0.1s, background 0.1s, border-color 0.1s;
+        -webkit-transition: color 0.1s, background 0.1s, border-color 0.1s;
+        width: 150px;
+      }
+      
+      input:hover {
+        background: #efefef;
+        cursor: pointer;
       }
 
       input:focus {
-        border-color: #cc0000;
-        outline: 0;
-        outline: thin dotted \9;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px rgba(204, 0, 0, .6);
-           -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px rgba(204, 0, 0, .6);
-                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0px 5px rgba(204, 0, 0, .6);
+        background: #ffffff;
+        border-color: #af1f24;
+        outline: none;
       }
       
       div.text {
@@ -109,6 +116,8 @@
       a {
         text-decoration: none;
         color: #75665e;
+        transition: color 0.1s;
+        -webkit-transition: color 0.1s;
       }
 
       a:hover {
@@ -121,6 +130,7 @@
     
   </head>
   <body>
+    <div id="fullscreen"></div>
     <div class="login_container">
       <div class="logo"></div>
       <div class="text">
@@ -128,10 +138,7 @@
       <br><br>
       </div>
       <form action="" method="post" name="">
-        <div class="input-prepend">
-          <span class="add-on"><i class="icon-key"></i></span>
           {{ form.pw() }}
-        </div>
       </form>
       <div class="text">
       <br>

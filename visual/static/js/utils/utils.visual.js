@@ -87,6 +87,38 @@ visual.ui.header = function() {
   }
 }
 
+visual.ui.background = function() {
+  var fs = d3.select("#fullscreen")
+  if (fs.node()) {
+    var hour = new Date().getHours()
+    if (hour >= 5 && hour <= 20) {
+      var filename = "day"
+    }
+    else {
+      var filename = "night"
+    }
+    fs.style("background-image","url('/static/img/bgs/"+filename+".jpg')")
+    
+    resizebg = function() {
+      
+      var w = window.innerWidth, 
+          h = window.innerHeight,
+          aspect = w/h
+          
+      if (aspect > 1.5) {
+        fs.style("background-size",w+"px "+(w/1.5)+"px")
+      }
+      else {
+        fs.style("background-size",(h*1.5)+"px "+h+"px")
+      }
+    }
+    
+    window.onresize = resizebg
+    resizebg()
+    
+  }
+}
+
 visual.ui.tooltip = function(id,state) {
   if (state) {
     

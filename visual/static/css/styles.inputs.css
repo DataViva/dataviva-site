@@ -43,6 +43,8 @@ a:hover {
 
 .title.square, .decision.square, .help.square {
   display: inline-block;
+  min-height: 144px;
+  width: 144px;
 }
 
 .grid5col2 > .title.square,
@@ -88,11 +90,6 @@ a:hover {
 .decision.short:after {
   bottom: 7px !important;
   right: 6px !important;
-}
-
-.title {
-  opacity: 1;
-  text-shadow: 0px 1px white;
 }
 
 .decision, .help {

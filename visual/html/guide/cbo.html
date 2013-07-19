@@ -4,46 +4,41 @@
 
 {% block body %}
 
-  <div class="grid5col1 grid5offset1">
-    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
-  </div>
+  <div id="fullscreen"></div>
+  <br>
   
-  <div class="grid5col2">
-  
-    {% if category_id == "all" %}
-  
-      <div class="title">
-        What would you like to know?
-      </div>
-  
-      <a class="decision icon square growth" href="{{g.path}}growth">
-        What are the fastest <b>growing</b> jobs?
-      </a>
-  
-      <a class="decision icon square wages" href="{{g.path}}wages">
-        What are the best <b>paid</b> occupations?
-      </a>
-  
-    {% else %}
-    
-      <div class="title">
-        What would you like to know about {{ item.name_en }}?
-      </div>
+  {% if category_id == "all" %}
 
-      <a class="decision icon square isic" href="{{g.path}}isic">
-        Which <b>industries</b> employ them?
-      </a>
+    <div class="darkbox">
+      <h2>What would you like to know?</h2>
+    </div>
+    <br>
+    <a class="decision icon square growth" href="{{g.path}}growth">
+      What are the fastest <b>growing</b> jobs?
+    </a>
 
-      <a class="decision icon square growth" href="{{g.path}}growth">
-        Where is their employment <b>growing</b> the fastest?
-      </a>
+    <a class="decision icon square wages" href="{{g.path}}wages">
+      What are the best <b>paid</b> occupations?
+    </a>
 
-      <a class="decision icon square paths" href="{{g.path}}paths">
-        What are their <b>career alternatives</b>?
-      </a>
+  {% else %}
   
-    {% endif %}
+    <div class="darkbox">
+      <h2>What would you like to know about {{ item.name_en }}?</h2>
+    </div>
+    <br>
+    <a class="decision icon square isic" href="{{g.path}}isic">
+      Which <b>industries</b> employ them?
+    </a>
 
-  </div>
+    <a class="decision icon square growth" href="{{g.path}}growth">
+      Where is their employment <b>growing</b> the fastest?
+    </a>
+
+    <a class="decision icon square paths" href="{{g.path}}paths">
+      What are their <b>career alternatives</b>?
+    </a>
+
+  {% endif %}
 
 {% endblock %}

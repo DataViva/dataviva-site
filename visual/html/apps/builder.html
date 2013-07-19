@@ -5,8 +5,9 @@
 
 {% block body %}
 
-  <div id="app_buffer">
-  <iframe class="app_builder"></iframe>
+  <div id="fullscreen"></div>
+  <div class="lightbox">
+    <iframe class="app_builder"></iframe>
   </div>
 
 {% endblock %}
@@ -16,7 +17,7 @@
   <script>
   
     var w = window.innerWidth-20,
-        h = window.innerHeight-100,
+        h = window.innerHeight-200,
         aspect = w/h
         
     if (aspect >= 6/4) {
@@ -25,15 +26,11 @@
     else {
       var height = w/(6/4), width = w
     }
-    console.log(window.location.pathname.replace("builder","embed"))
+    
     d3.select("iframe.app_builder")
       .style("height",height+"px")
       .style("width",width+"px")
-      .style("margin-left",-(width/2)+"px")
       .attr("src",window.location.pathname.replace("builder","embed"))
-      
-    d3.select("div#app_buffer")
-      .style("height",height+"px")
       
     update_url = function(url) {
       console.log(url)

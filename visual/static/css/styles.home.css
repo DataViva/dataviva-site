@@ -1,16 +1,3 @@
-body.home #fullscreen {
-  background-image: url('/static/img/home/day.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  z-index: -1;
-}
-
 body.home #big_sabrina {
   bottom: 0px;
   position: fixed;
@@ -20,10 +7,32 @@ body.home #big_sabrina {
 }
 
 body.home #welcome {
-  margin-top: 100px;
+  background-color: white;
   text-align: center;
+  width: 500px;
 }
 
 body.home #footer {
   display: none;
+}
+
+body.home div.logo.sponsor {
+  font-size: 16px;
+  height: 50px;
+  line-height: 50px;
+}
+
+body.home a.logo {
+  height: 50px;
+  width: 80px;
+}
+
+body.home a.logo.governo {
+  background-image: url("/static/img/nav/logo_governo.jpg");
+  opacity: 1;
+}
+
+body.home a.logo.fapemig {
+  background-image: url("/static/img/nav/logo_fapemig.jpg");
+  opacity: 1;
 }

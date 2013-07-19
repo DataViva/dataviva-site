@@ -1,25 +1,20 @@
 {% extends "templates/site.html" %}
 
-{% block title %}: Generate a Guide{% endblock %}
+{% block title %}: Industry{% endblock %}
 
 {% block body %}
 
-  <div class="grid5col1 grid5offset1">
-    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
-  </div>
-  <div id="guide_start" class="grid5col2">
+  <div id="fullscreen"></div>
   
-    <div class="title">What are you interested in?</div>
-  
-    <a id="hs" class="decision icon square hs" onclick="linker(this.id)">
-      Product Exports
-    </a>
-  
-    <a id="isic" class="decision icon square isic" onclick="linker(this.id)">
-      Establishments and Employement
-    </a>
-  
-  </div>
+  <div class="darkbox"><h2>What are you interested in?</h2></div>
+  <br>
+  <a id="hs" class="decision icon square hs" onclick="linker(this.id)">
+    Product Exports
+  </a>
+
+  <a id="isic" class="decision icon square isic" onclick="linker(this.id)">
+    Establishments and Employement
+  </a>
 
 {% endblock %}
 

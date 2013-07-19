@@ -4,28 +4,23 @@
 
 {% block body %}
 
-  <div class="grid5col1 grid5offset1">
-    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
-  </div>
-  <div id="guide_start" class="grid5col2">
+  <div id="fullscreen"></div>
   
-    <div class="title">What's on your mind?</div>
-  
-    <a class="decision icon square bra" href="{{g.path}}bra">
-      <h2>Location</h2>
-      Learn about the potential of a location.
-    </a>
-  
-    <a class="decision icon square industry" href="{{g.path}}industry">
-      <h2>Industry</h2>
-      Learn about industrial opportunities.
-    </a>
-  
-    <a class="decision icon square cbo" href="{{g.path}}cbo">
-      <h2>Career</h2>
-      Learn about job opportunities.
-    </a>
-  
-  </div>
+  <div class="darkbox"><h2>What's on your mind?</h2></div>
+  <br>
+  <a class="decision icon square bra" href="{{g.path}}bra">
+    <h2>Location</h2>
+    Learn about the potential of a location.
+  </a>
+
+  <a class="decision icon square industry" href="{{g.path}}industry">
+    <h2>Industry</h2>
+    Learn about industrial opportunities.
+  </a>
+
+  <a class="decision icon square cbo" href="{{g.path}}cbo">
+    <h2>Career</h2>
+    Learn about job opportunities.
+  </a>
 
 {% endblock %}

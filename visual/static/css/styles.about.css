@@ -37,7 +37,3 @@ a.app.active {
   text-align: center;
   margin: 10px 0px;
 }
-
-body.about #footer {
-  display: none;
-}

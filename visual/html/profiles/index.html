@@ -4,36 +4,30 @@
 
 {% block body %}
 
-  <div class="grid5col1 grid5offset1">
-    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
+  <div id="fullscreen"></div>
+  
+  <div class="darkbox">
+    <h2>What would you like to learn more about?</h2>
   </div>
-  
-  <div class="grid5col2">
-  
-    <div class="title">
-      What would you like to learn more about?
-    </div>
-  
-    <a class="decision icon square bra" href="/profiles/bra/select/">
-      Brazilian Location
-    </a>
-  
-    <a class="decision icon square cbo" href="/profiles/cbo/select/">
-      Occupation
-    </a>
-  
-    <a class="decision icon square isic" href="/profiles/isic/select/">
-      Establishments and Employment
-    </a>
-  
-    <a class="decision icon square hs" href="/profiles/hs/select/">
-      Product Export
-    </a>
-  
-    <a class="decision icon square wld" href="/profiles/wld/select/">
-      World Trade Partner
-    </a>
-  
-  </div>
+  <br>
+  <a class="decision icon square bra" href="/profiles/bra/select/">
+    Brazilian Location
+  </a>
+
+  <a class="decision icon square cbo" href="/profiles/cbo/select/">
+    Occupation
+  </a>
+
+  <a class="decision icon square isic" href="/profiles/isic/select/">
+    Establishments and Employment
+  </a>
+  <br>
+  <a class="decision icon square hs" href="/profiles/hs/select/">
+    Product Export
+  </a>
+
+  <a class="decision icon square wld" href="/profiles/wld/select/">
+    World Trade Partner
+  </a>
 
 {% endblock %}

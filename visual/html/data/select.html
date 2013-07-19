@@ -2,41 +2,35 @@
 
 {% block body %}
 
-  <div class="grid5col1 grid5offset1">
-    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
+  <div id="fullscreen"></div>
+    
+  <div class="darkbox">
+    <h2>Which classification would you like to browse?</h2>
   </div>
+  <br>
+  <a href="{{ url_for('data.classifications', attr='hs') }}" class="decision icon square hs">
+    <h2>HS</h2>
+    Product Exports
+  </a>
   
-  <div class="grid5col2">
-    
-    <div class="title">
-      Which classification would you like to browse?
-    </div>
-    
-    <a href="{{ url_for('data.classifications', attr='hs') }}" class="decision icon square hs">
-      <h2>HS</h2>
-      Product Exports
-    </a>
-    
-    <a href="{{ url_for('data.classifications', attr='isic') }}" class="decision icon square isic">
-      <h2>ISIC</h2>
-      Industry Establishments
-    </a>
-    
-    <a href="{{ url_for('data.classifications', attr='cbo') }}" class="decision icon square cbo">
-      <h2>CBO</h2>
-      Occupations
-    </a>
-    
-    <a href="{{ url_for('data.classifications', attr='bra') }}" class="decision icon square bra">
-      <h2>Location</h2>
-      Geographical locations in Brazil
-    </a>
-    
-    <a href="{{ url_for('data.classifications', attr='wld') }}" class="decision icon square wld">
-      <h2>Trade Partners</h2>
-      World Trade Partners
-    </a>
+  <a href="{{ url_for('data.classifications', attr='isic') }}" class="decision icon square isic">
+    <h2>ISIC</h2>
+    Industry Establishments
+  </a>
   
-  </div>
+  <a href="{{ url_for('data.classifications', attr='cbo') }}" class="decision icon square cbo">
+    <h2>CBO</h2>
+    Occupations
+  </a>
+  <br>
+  <a href="{{ url_for('data.classifications', attr='bra') }}" class="decision icon square bra">
+    <h2>Location</h2>
+    Geographical locations in Brazil
+  </a>
+  
+  <a href="{{ url_for('data.classifications', attr='wld') }}" class="decision icon square wld">
+    <h2>Trade Partners</h2>
+    World Trade Partners
+  </a>
   
 {% endblock %}

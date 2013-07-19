@@ -1,26 +1,48 @@
-#container {
-  background-position: center top;
+html {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fafafa;
+  color: #333333;
+}
+
+#fullscreen {
+  background-image: url('/static/img/bgs/day.jpg');
   background-repeat: no-repeat;
-  display: inline-block;
-  left: 50%;
-  margin-left: -490px;
-  position: relative;
-  text-align: left;
+  background-position: center;
+  background-size: 100% 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: -1;
+}
+
+#outer_container {
+  display: table;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+#inner_container {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#container {
+  display: block;
+  margin: 0px auto;
+  padding: 68px 0px 80px 0px;
+  text-align: center;
   width: 980px;
-}
-
-body.guide > #container {
-  background-image: url('/static/img/bgs/hills.png');
-  background-position: center top;
-  background-size: 70%;
-}
-
-body.profiles > #container,
-body.apps > #container,
-body.data > #container {
-  background-image: url('/static/img/bgs/lab.png');
-  background-position: center 125px;
-  background-size: 75%;
 }
 
 body.error404 > #container {
@@ -33,13 +55,24 @@ div#selector {
   background-color: white;
   -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
           box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
-  height: 450px;
+  height: 500px;
+  margin: 12px auto;
+  width: 500px;
 }
 
-.whitebox {
-  background-color: #fafafa;
+.lightbox {
+  background-color: rgba(255,255,255,0.9);
+  display: inline-block;
   -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
           box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+}
+
+.darkbox {
+  background-color: rgba(0,0,0,0.15);
+  color: #fff;
+  display: inline-block;
+  margin: 12px;
+  max-width: 800px;
   padding: 12px;
   position: relative;
 }
@@ -67,20 +100,19 @@ h2 {
 /* Final Plan Page Styling */
 /***************************/
 
-div#guide_title {
-  font-size: 28px;
-  margin-bottom: 24px;
+div.guide_app {
+  height: 600px;
+  margin: 12px auto 24px;
+  width: 800px;
 }
 
 iframe.guide_app {
-  height: 573px;
-  width: 764px;
-  margin-bottom: 12px;
+  height: 600px;
+  width: 800px;
 }
 
-div.guide_app_description {
-  font-size: 14px;
-  margin: 10px 0px 5px 0px;
+iframe.app_builder {
+  
 }
 
 /******************/
@@ -88,7 +120,7 @@ div.guide_app_description {
 /******************/
 
 div.loading {
-  background-color: #fafafa;
+  background-color: #ffffff;
   bottom: 0px;
   font-size: 16px;
   left: 0px;
@@ -157,13 +189,4 @@ div.loading > .text {
   text-shadow: 0px 0px 6px #efefef;
   top: 50%;
   width: 100%;
-}
-
-iframe.app_builder {
-  left: 50%;
-  position: absolute;
-}
-
-div#app_buffer {
-  display: block;
 }

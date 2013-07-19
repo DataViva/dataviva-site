@@ -44,7 +44,7 @@
     
   </div>
 
-  <div class="answer whitebox">
+  <div class="answer darkbox">
     {% if q.status_notes %}
       {{ q.status_notes|safe }}
     {% else %}
@@ -58,7 +58,7 @@
   <div id="responses">
     
     {% for r in q.replies %}
-      <div class="question whitebox">
+      <div class="question darkbox">
         
         <div class="vote_block">
           <div class="vote_count">{% if r.votes.all()|length %}{{ r.votes.count() }}{% else %}0{% endif %}</div>
@@ -92,7 +92,7 @@
   {% endwith %}
 
   <h2 style="margin-left:12px;">New Response</h2>
-  <div class="reply whitebox">
+  <div class="reply darkbox">
     {% include 'ask/snippets/reply_form.html' %}
   </div>
   

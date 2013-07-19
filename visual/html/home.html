@@ -12,7 +12,7 @@
   
 <!--<img id="big_sabrina" src="/static/img/home/sabrina.png">-->
 
-<div id="welcome" class="grid5col3 grid5offset1 whitebox">
+<div id="welcome" class="lightbox">
   
   <div class="title">
     <h2>Visualizing Brazil</h2>
@@ -32,37 +32,8 @@
   <div class="logo sponsor">Sponsored By:</div>
   <a href="http://www.escritorio.mg.gov.br/" class="logo governo" target="_blank"></a>
   <a href="http://www.fapemig.br/" class="logo fapemig" target="_blank"></a>
+  <br><br>
   
 </div>
-
-{% endblock %}
-
-{% block js %}
-
-  <script>
-  
-    resizebg = function() {
-      
-      var w = window.innerWidth, 
-          h = window.innerHeight,
-          aspect = w/h
-          
-      if (aspect > 1.5) {
-        d3.select("#fullscreen")
-        .style("background-size",w+"px "+(w/1.5)+"px")
-      }
-      else {
-        d3.select("#fullscreen")
-        .style("background-size",(h*1.5)+"px "+h+"px")
-      }
-    }
-    
-    window.onresize = function() {
-      resizebg()
-    }
-
-    resizebg()
-    
-  </script>
 
 {% endblock %}

@@ -2,8 +2,9 @@
 .grid5col1, .grid5col2, .grid5col3, .grid5col4 {
   display: inline-block;
   float: left;
-  margin: 0px 10px;
+  margin: 0px 10px 82px 0px;
   position: relative;
+  text-align: left;
 }
 
 .grid1 {
@@ -31,7 +32,7 @@
 }
 
 .grid4offset1 {
-  margin-left: 255px;
+  margin-left: 250px;
 }
 
 /*****************/

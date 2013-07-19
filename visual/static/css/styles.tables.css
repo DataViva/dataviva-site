@@ -3,6 +3,7 @@ table {
   width: 100%;
   background-color: transparent;
   padding: 10px;
+  text-align: left;
 }
 
 table thead {
@@ -69,8 +70,10 @@ table th.icon {
   width: 29px;
 }
 
-table td.id, table td.color, table td.icon,
-table th.id, table th.color, table th.icon {
+table td.id, table td.bra_id, table td.isic_id, table td.cbo_id, 
+table td.hs_id, table td.wld_id, table td.year, table td.color, table td.icon,
+table th.id, table th.bra_id, table th.isic_id, table th.cbo_id, 
+table th.hs_id, table th.wld_id, table th.year, table th.color, table th.icon {
   text-align: center;
 }
 

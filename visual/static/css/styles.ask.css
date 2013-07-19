@@ -86,7 +86,7 @@
   position: relative;
 }
 
-.question.whitebox, .reply.whitebox {
+.question.darkbox, .reply.darkbox {
   margin: 12px;
 }
 

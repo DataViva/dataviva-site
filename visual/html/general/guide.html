@@ -5,102 +5,15 @@
 
 {% block body %}
 
-  <div class="grid5col1">
-    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
-  </div>
-  
-  <div class="primary_app grid5col4">
+  <div id="fullscreen"></div>
     
-    <h2>{{ plan.title }}</h2>
-    
-    {% for app in plan.builds %}
-    
-    <!--<div class="guide_app_description"></div>-->
-    <iframe class="guide_app" src="{{ app.url }}"></iframe>
-    {% endfor %}
-    
-  </div>
-
-  <!--
-    
-  {% if recs %}
-    <div id="rec_stroke">
-      <div id="site_breadcrumbs">
-        <div id="crumb_guide" class="site_crumb">
-          <div class="site_crumb_back_red"></div>
-          <div class="site_crumb_body_red">{{recs.type|safe}}</div>
-          <div class="site_crumb_arrow_red"></div>
-        </div>
-      </div>
+  <div class="darkbox"><h2>{{ plan.title }}</h2></div>
+  <br>
+  {% for app in plan.builds %}
+    <div class="lightbox guide_app">
+      <!--<div class="guide_app_description"></div>-->
+      <iframe class="guide_app" src="{{ app.url }}"></iframe>
     </div>
-    {% for r in recs.lists %}
-    <div id="{{r}}" class="recommendations"{% if loop.first %} style="display:block"{% endif %}>
-      <div class="recommendation_scroll">
-      {% for obj in recs.lists[r] %}
-        <a href="{{obj.url}}">
-          <div id="{{recs.type}}_{{obj.id}}" class="recommendation_block" style="background-color:{{obj.color}}">
-            <div class="rec_title">{{obj.name}}</div>
-            <div class="rec_value">{{obj.value}}</div>
-          </div>
-        </a>
-      {% endfor %}
-      </div>
-      <div class="recommendation_cover left"></div>
-      <div class="recommendation_cover right"></div>
-    </div>
-    {% endfor %}
+  {% endfor %}
 
-    <div class="recommendation_toggles">
-      {% for r in recs.lists %}
-      <label class="rec_label" for="{{r}}">{{r}}</label>
-      <input type="radio" name="recs" onclick="change_recs(this.value)" value="{{r}}"{% if loop.first %} checked{% endif %}>
-      {% endfor %}
-    </div>
-  {% endif %}
-    
-  -->
-
-{% endblock %}
-
-{% block js %}
-
-  <script>
-    
-    if (d3.select(".recommendations")[0][0]) {
-      d3.selectAll("label.rec_label")
-        .text(function(){
-          return visual.format.text(d3.select(this).text())
-        })
-    
-      d3.selectAll("#rec_stroke .site_crumb_body_red")
-        .text(function(){
-          return visual.format.text(d3.select(this).text())+" Recommendations"
-        })
-      visual.toggle("recs")
-      function change_recs(value) {
-        d3.selectAll(".recommendations")
-          .style("display","none")
-        d3.select("#"+value)
-          .style("display","block")
-      }
-    }
-      
-    d3.selectAll(".recommendation_block")
-      .style("color",function(){
-        return vizwhiz.utils.text_color(d3.select(this).style("background-color"))
-      })
-      .style("background-image",function(){
-        var type = this.id.split("_")[0],
-            id = this.id.split("_")[1]
-        return "url('"+visual.icon(id,type)+"')"
-      })
-      .style("background-size",function(){
-        var type = this.id.split("_")[0],
-            id = this.id.split("_")[1]
-        if (["wld","bra"].indexOf(type) >= 0) return "50% 50%"
-        else return "100% 100%"
-      })
-
-  </script>
-  
 {% endblock %}

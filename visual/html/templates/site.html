@@ -8,7 +8,7 @@
     <a href="/access/logout/">Click here to Logout</a>
   </div>
 -->
-  <div id="header_container">
+  <div id="header_container" class="lightbox">
     <div id="header">
       <a id="logo" href="{{ url_for('general.home') }}"></a>
       <a id="guide" href="{{ url_for('guide.guide') }}" class="link{% if g.page_type == 'guide' or g.page_type == 'plan' %} active{% endif %}">Guide</a>
@@ -58,17 +58,29 @@
     <i id="close_message" class="icon-remove-sign"></i>
   </div>
   {% endfor %}
-  <div id="container">
+  <div id="outer_container">
+    <div id="inner_container">
+      <div id="container">
     
     {% block body %}
     {% endblock %}
 
+      </div>
+    </div>
   </div>
   
-  <div id="footer">
+  <div id="footer" class="lightbox">
     <div class="logo sponsor">Sponsored By:</div>
     <a href="http://www.escritorio.mg.gov.br/" class="logo governo" target="_blank"></a>
     <a href="http://www.fapemig.br/" class="logo fapemig" target="_blank"></a>
+    
+    <!-- Open Data Link -->
+    <a class="opendata" href="http://opendefinition.org/">
+      <img alt="This material is Open Data" border="0"
+      src="http://assets.okfn.org/images/ok_buttons/od_80x15_red_green.png" />
+    </a>
+    <!-- /Open Data Link --
+      
   </div>
   
   <script type="text/javascript">

@@ -10,14 +10,11 @@
 
 {% block body %}
 
-  <div class="grid5col1 grid5offsethalf">
-    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
-  </div>
+  <div id="fullscreen"></div>
   
-  <div class="grid5col3">
-    <div class="title">Please choose {{ article }}.</div>
-    <div id="selector"></div>
-  </div>
+  <div class="darkbox"><h2>Please choose {{ article }}</h2></div>
+  <br>
+  <div id="selector"></div>
 
 {% endblock %}
 
@@ -26,6 +23,11 @@
   <script src="/static/js/utils/utils.selector.js"></script>
 
   <script>
+  
+    d3.select("#selector").style("height",window.innerHeight-290+"px")
+    // window.onresize = function(){
+    //   d3.select("#selector").style("height",window.innerHeight-290+"px")
+    // }
   
     var value = "{{ selector }}"
     

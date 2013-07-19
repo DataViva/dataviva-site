@@ -1,15 +1,3 @@
-html {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  overflow-x: hidden;
-}
-
-body {
-  width: 100%;
-  margin: 0 auto;
-  background-color: #fafafa;
-  color: #333333;
-}
-
 hr {
   clear: both;
   height: 1px;

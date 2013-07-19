@@ -238,11 +238,11 @@ def guide(category = None, category_id = None, option = None, subject = None, op
     if selector == "cbo":
         article = "an occupation"
     elif selector == "isic":
-        article = "an industry"
+        article = "an establishment"
     elif selector == "hs":
         article = "a product"
     elif selector == "bra":
-        article = "a bra"
+        article = "a location"
         
     if category != None:
         g.sabrina["face"] = "smirk"

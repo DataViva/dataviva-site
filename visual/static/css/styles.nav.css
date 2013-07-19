@@ -1,42 +1,15 @@
-#dev_banner {
-  background-color: #333;
-  -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.5);
-          box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.5);
-  color: white;
-  display: block;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 5px;
-  position: absolute;
-  right: -87px;
-  text-align: center;
-  top: 26px;
-  width: 300px;
-  -webkit-transform: rotate(30deg);
-     -moz-transform: rotate(30deg);
-      -ms-transform: rotate(30deg);
-          transform: rotate(30deg);
-  z-index: 5000;
-
-}
-
-#dev_banner > a {
-  color: #efefef;
-  font-size: 12px;
-  font-weight: normal;
-}
-
 #header_container {
-  background-color: rgba(255,255,255,0.9);
-  -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
-          box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
   height: 58px;
   position: fixed;
   top: 0px;
-  -webkit-transition: height .2s;
-          transition: height .2s;
+  -webkit-transition: height .2s, background-color .2s;
+          transition: height .2s, background-color .2s;
   width: 100%;
   z-index: 4000;
+}
+
+#header_container:hover {
+  background-color: white;
 }
 
 #header {
@@ -244,18 +217,33 @@ body.about a.site_crumb:hover {
 /******************/
 
 #footer {
-  text-align: center;
+  background-color: white;
+  bottom: 0px;
+  -webkit-box-shadow: 0px -3px 7px rgba(0,0,0,0.25);
+          box-shadow: 0px -3px 7px rgba(0,0,0,0.25);
+  display: block;
   font-size: 10px;
-  padding: 10px;
+  left: 0px;
+  opacity: 0.9;
+  padding: 5px;
+  position: fixed;
+  text-align: center;
+  -webkit-transition: opacity 0.1s;
+          transition: opacity 0.1s;
+  width: 100%;
+}
+
+#footer:hover {
+  opacity: 1;
 }
 
 div.logo.sponsor {
   color: #888;
   display: inline-block;
-  font-size: 20px;
-  height: 75px;
-  line-height: 74px;
-  margin: 5px 10px;
+  font-size: 14px;
+  height: 29px;
+  line-height: 29px;
+  margin: 5px;
   text-shadow: 0px 1px white;
 }
 
@@ -264,16 +252,14 @@ a.logo {
   background-size: 100% 100%;
   background-position: center center;
   display: inline-block;
-  height: 75px;
-  margin: 5px 10px;
-  opacity: 0.6;
-  width: 120px;
+  height: 29px;
+  margin: 5px;
+  opacity: 0.75;
+  width: 77px;
 }
 
 a.logo.governo {
-  background-image: url("/static/img/nav/logo_governo_bw.jpg");
-  -webkit-transition: background-image .1s, opacity .1s;
-          transition: background-image .1s, opacity .1s;
+  background-image: url("/static/img/nav/logo_governo_color.jpg");
 }
 
 a.logo.governo:hover {
@@ -282,13 +268,23 @@ a.logo.governo:hover {
 }
 
 a.logo.fapemig {
-  background-image: url("/static/img/nav/logo_fapemig_bw.jpg");
-  -webkit-transition: background-image .1s, opacity .1s;
-          transition: background-image .1s, opacity .1s;
+  background-image: url("/static/img/nav/logo_fapemig_color.jpg");
 }
 
 a.logo.fapemig:hover {
   background-image: url("/static/img/nav/logo_fapemig_color.jpg");
+  opacity: 1;
+}
+
+a.opendata {
+  display: inline-block;
+  margin: 12px 5px;
+  opacity: 0.5;
+  -webkit-transition: opacity 0.1s;
+          transition: opacity 0.1s;
+}
+
+a.opendata:hover {
   opacity: 1;
 }
 

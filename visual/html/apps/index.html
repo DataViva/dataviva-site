@@ -5,16 +5,12 @@
 
 {% block body %}
 
-<div class="grid5col1">
-  <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
-</div>
+  <div id="fullscreen"></div>
 
-<div id="data_start" class="grid5col4">
-
-  <div class="title">Which app would you like to build?</div>
-  
-  <a class="help" href="/apps/builder/">Skip straight to the app builder!</a>
+  <div class="darkbox"><h2>Which app would you like to build?</h2></div>
   <br>
+  
+  <a class="help square" href="/apps/builder/">Skip straight to the app builder!</a>
   
   <a class="decision icon square network" href="/apps/builder/network/secex/mg/all/all/hs/">
     <h2>Network</h2>
@@ -31,7 +27,7 @@
   <a class="decision icon square geo_map" href="/apps/builder/geo_map/rais/mg/all/all/bra/">
     <h2>Geo Map</h2>
   </a>
-  
+  <br>
   <a class="decision icon square scatter" href="/apps/builder/scatter/rais/mg/all/all/isic/">
     <h2>Scatter</h2>
   </a>
@@ -47,7 +43,5 @@
   <a class="decision icon square tree_map" href="/apps/builder/tree_map/rais/mg/all/all/cbo/">
     <h2>Tree Map</h2>
   </a>
-
-</div>
 
 {% endblock %}

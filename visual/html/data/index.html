@@ -2,31 +2,25 @@
 
 {% block body %}
 
-  <div class="grid5col1 grid5offset1">
-    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
+  <div id="fullscreen"></div>
+    
+  <div class="darkbox">
+    <h2>How do you want to access the data?</h2>
   </div>
-  
-  <div class="grid5col2">
-    
-    <div class="title">
-      How do you want to access the data?
-    </div>
-    
-    <a href="{{ url_for('data.query') }}" class="decision icon square database">
-      <h2>Database</h2>
-      Custom data queries of our database.
-    </a>
-    
-    <a href="{{ url_for('about.api') }}" class="decision icon square api">
-      <h2>API</h2>
-      Access the data directly.
-    </a>
-    
-    <a href="{{ url_for('data.classifications') }}" class="decision icon square source">
-      <h2>Source List</h2>
-      Browse the various classifications.
-    </a>
-  
-  </div>
+  <br>
+  <a href="{{ url_for('data.query') }}" class="decision icon square database">
+    <h2>Database</h2>
+    Custom data queries of our database.
+  </a>
+  <!--
+  <a href="{{ url_for('about.api') }}" class="decision icon square api">
+    <h2>API</h2>
+    Access the data directly.
+  </a>
+  -->
+  <a href="{{ url_for('data.classifications') }}" class="decision icon square source">
+    <h2>Source List</h2>
+    Browse the various classifications.
+  </a>
   
 {% endblock %}

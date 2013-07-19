@@ -3,41 +3,37 @@
 {% block title %}: Generate a Guide{% endblock %}
 
 {% block body %}
-
-  <div class="grid5col1">
-    <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
+  
+  <div id="fullscreen"></div>
+  
+  <div class="darkbox">
+    <h2>What would you like to know about {{ item.name_en }}?</h2>
   </div>
+  <br>
+  <a class="decision icon square opportunity" href="{{g.path}}opportunity">
+    What are the <b>industrial opportunities</b>?
+  </a>
+
+  <a class="decision icon square attract" href="{{g.path}}attract">
+    How can I <b>attract an industry</b>?
+  </a>
+
+  <a class="decision icon square growth" href="{{g.path}}growth">
+    Which industries are <b>growing</b>?
+  </a>
   
-  <div class="grid5col4">
-  
-    <div class="title">
-      What would you like to know about {{ item.name_en }}?
-    </div>
+  <br>
 
-    <a class="decision icon square opportunity" href="{{g.path}}opportunity">
-      What are the <b>industrial opportunities</b>?
-    </a>
-  
-    <a class="decision icon square attract" href="{{g.path}}attract">
-      How can I <b>attract an industry</b>?
-    </a>
+  <a class="decision icon square shrink" href="{{g.path}}shrink">
+    Which industries are <b>shrinking</b>?
+  </a>
 
-    <a class="decision icon square growth" href="{{g.path}}growth">
-      Which industries are <b>growing</b>?
-    </a>
+  <a class="decision icon square workforce" href="{{g.path}}workforce">
+    What is the available <b>workforce</b>?
+  </a>
 
-    <a class="decision icon square shrink" href="{{g.path}}shrink">
-      Which industries are <b>shrinking</b>?
-    </a>
-
-    <a class="decision icon square workforce" href="{{g.path}}workforce">
-      What is the available <b>workforce</b>?
-    </a>
-
-    <a class="decision icon square industry" href="{{g.path}}industry">
-      What are the present <b>industries</b>?
-    </a>
-  
-  </div>
+  <a class="decision icon square industry" href="{{g.path}}industry">
+    What are the present <b>industries</b>?
+  </a>
 
 {% endblock %}
