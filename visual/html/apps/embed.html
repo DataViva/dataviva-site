@@ -376,7 +376,6 @@
     app.start = function(new_url) {
       
       if (new_url) app.url = new_url
-      
       loading.text("Building App").show(app.create)
       
     }
@@ -1145,7 +1144,6 @@
         d3.json(url)
           .header("Content-type","application/x-www-form-urlencoded")
           .post("title="+app.build.title, function(error,data) {
-            console.log(data)
             var status = data.success
             d3.select("#starred > i")
               .attr("id","status_"+status)
@@ -1247,11 +1245,9 @@
           s = s.join("/")
           if (a == s) match = this.id
         })
-        
       if (!match) match = d3.select("#"+app_name+"_output_div option").node().id
       
       selects["output_"+app_name].set(match)
-      
       if (!static) app.start(match)
       
     }
@@ -1433,7 +1429,6 @@
     /************************/
     /* Initialize First App */
     /************************/
-    
     builder.app("{{ current_build.app.type }}")
   
   </script>

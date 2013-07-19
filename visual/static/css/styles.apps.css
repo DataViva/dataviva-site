@@ -37,7 +37,7 @@ body {
 
 #app {
   margin: 0px 5px;
-  background-color: #fafafa;
+  background-color: #ffffff;
   position: absolute;
   -webkit-transition: top 0.6s;
      -moz-transition: top 0.6s;
@@ -131,7 +131,7 @@ div#ui_bottom {
   bottom: 0px;
   width: 100%;
   text-align: center;
-  background-color: #fafafa;
+  background-color: #ffffff;
   z-index: 500;
 }
 
