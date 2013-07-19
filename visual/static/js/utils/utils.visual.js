@@ -100,7 +100,6 @@ visual.ui.background = function() {
     fs.style("background-image","url('/static/img/bgs/"+filename+".jpg')")
     
     resizebg = function() {
-      
       var w = window.innerWidth, 
           h = window.innerHeight,
           aspect = w/h
