@@ -88,7 +88,9 @@ def get_query(data_table, url_args, **kwargs):
             query = query.filter(func.char_length(data_table.bra_id) == ret["bra_level"])
             if ".show." in kwargs["bra_id"]:
                 bra_filter = kwargs["bra_id"].split(".show.")[0]
-                query = query.filter(data_table.bra_id.startswith(bra_filter))
+                if bra_filter != "all":
+                    query = query \
+                        .filter(data_table.bra_id.startswith(bra_filter))
         elif "show" not in kwargs["bra_id"]:
             # otherwise we have been given specific bra(s)
             ret["location"] = parse_bras(kwargs["bra_id"])
