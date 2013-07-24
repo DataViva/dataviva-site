@@ -26,7 +26,8 @@
     else {
       var height = w/(6/4), width = w
     }
-    
+    d3.select("#container")
+      .style("width",width+"px")
     d3.select("iframe.app_builder")
       .style("height",height+"px")
       .style("width",width+"px")
