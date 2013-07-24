@@ -784,6 +784,8 @@
           .yaxis_var("complexity")
           .xaxis_scale("linear")
           .yaxis_scale("linear")
+          .mirror_axis(false)
+          .spotlight(vars.spotlight)
         
       } 
   
@@ -798,6 +800,7 @@
           .yaxis_var("cp_bra_0_"+app.vars.axes)
           .yaxis_scale(app.vars.scale)
           .spotlight(false)
+          .mirror_axis(true)
     
       }
       
