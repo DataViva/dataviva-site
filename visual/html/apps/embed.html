@@ -672,6 +672,9 @@
           else if (ui.type == "depth" && app.build.app.type == "tree_map") {
             var default_value = ui.values[ui.values.length-1]
           }
+          else if (ui.type == "sort" && app.build.app.type == "stacked") {
+            var default_value = "color"
+          }
           else {
             var default_value = ui.values[0]
           }
@@ -697,6 +700,8 @@
       depths[app.build.output].forEach(function(d){
         nesting.push(app.build.output+"_"+d)
       })
+      
+      builder.url()
         
       /************************/
       /* Gloabl App Variables */
@@ -1299,7 +1304,7 @@
         }
         window_url += url_vars.join("&");
       }
-    
+      
       if (Modernizr.history) {
         window.history.pushState(
           {'prev_request': "/apps/embed/"+window_url}, 
