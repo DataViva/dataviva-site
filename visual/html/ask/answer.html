@@ -5,15 +5,22 @@
 {% block title %}: Ask Sabrina{% endblock %}
 
 {% block head %}
-<link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/wysihtml5.stylesheet.css" />
+<!-- Redactor is here -->
+<link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
+<style>
+.reply_form   { color: black !important;      }
+.question     { display: block;               }
+.child        { margin-left: 40px !important; }
+</style>
 {% endblock %}
 
 {% block body %}
 <div class="grid5col4 grid5offsethalf">
-  {% with q = question %}
   
+  {% with q = question %}
   <div class="question">
     
+    <!-- Show vote count and buttons -->
     <div class="vote_block">
       <div class="vote_count">{% if q.votes.all()|length %}{{ q.votes.count() }}{% else %}0{% endif %}</div>
       <div class="vote_label">votes</div>
@@ -22,97 +29,148 @@
       </a>
     </div>
     
+    <!-- Display question -->
     <div class="question_preview">
+      
+      <!-- Actual question -->
       <h2>{{ q.question }}</h2>
-      {% if q.body %}{{ q.body|safe }}{% endif %}
-      {% if tags|length %}
-        <div class="labels">
-          Tags:
-          {% for t in tags %}
-            <a class="tag" style="background-color: {{ t.color }};" rel="tag">
-              <span class="tag-icon" rel="{{ t.__class__.__name__ }}" title="{{ t.id }}"></span>
-              <span>{{ t.name_en }}&nbsp;&nbsp;</span>
-            </a>
-          {% endfor %}
-        </div>
+      
+      <!-- Body (clarification for question) -->
+      {% if q.body %}
+      <p>{{ q.body|safe }}</p>
       {% endif %}
+      
+      <!-- Tags associated with question -->
+      {% if tags|length %}
+      <div class="labels">
+        Tags:
+        {% for t in tags %}
+          <a class="tag" style="background-color: {{ t.color }};" rel="tag">
+            <span class="tag-icon" rel="{{ t.__class__.__name__ }}" title="{{ t.id }}"></span>
+            <span>{{ t.name_en }}&nbsp;&nbsp;</span>
+          </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+      
+      <!-- Question metadata -->
       <div class="question_attr">
         <div class="userpic" style="background-image: url('{{ q.user.avatar(50) }}')"></div>
         Asked by <a href="{{ url_for('account.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a> {{ momentjs(q.timestamp).fromNow() }}
       </div>
-    </div>
+      
+    </div> <!-- end of right hand-side -->
     
-  </div>
-
+  </div> <!-- end of question -->
+  
+  <!-- Sabrina's Answer! -->
   <div class="answer darkbox">
-    {% if q.status_notes %}
-      {{ q.status_notes|safe }}
-    {% else %}
-      Sabrina has not answered this question yet. Feel free to start the conversation below.
-    {% endif %}
+    
+    <!-- Answer text -->
+    <p>
+      {% if q.status_notes %}
+        {{ q.status_notes|safe }}
+      {% else %}
+        Sabrina has not answered this question yet. Feel free to start the conversation below.
+      {% endif %}
+    </p>
+    
+    <!-- Sabrina's face -->
     <div id="answer_sabrina"></div>
-  </div>
+    
+  </div> <!-- end of sabrina's answer -->
   
   {% if q.replies.all()|length %}
-  <h2 style="margin-left:12px;">Responses</h2>
+  <!-- The responses -->
+  <h2>Responses</h2>
   <div id="responses">
     
     {% for r in q.replies %}
-      <div class="question darkbox">
+    <div class="question darkbox {% if r.id != r.parent_id %} child {% endif %}">
+      
+      <!-- Voting -->
+      <div class="vote_block">
+        <div class="vote_count">{% if r.votes.all()|length %}{{ r.votes.count() }}{% else %}0{% endif %}</div>
+        <div class="vote_label">votes</div>
+        <a class="vote_down" href="{{ url_for('ask.reply_flag', id=r.id) }}">
+          <i class="icon-flag"></i>
+        </a>
+        <a class="vote_up" href="{{ url_for('ask.reply_vote', id=r.id) }}">
+          <i class="icon-thumbs-up"></i>
+        </a>
+      </div> <!-- end voting -->
+      
+      <!-- Reply text -->
+      <div class="question_preview{% if r.id != r.parent_id %} child{% endif %}">
+        {{ r.body|safe }}
         
-        <div class="vote_block">
-          <div class="vote_count">{% if r.votes.all()|length %}{{ r.votes.count() }}{% else %}0{% endif %}</div>
-          <div class="vote_label">votes</div>
-          <a class="vote_down" href="{{ url_for('ask.reply_flag', id=r.id) }}">
-            <i class="icon-flag"></i>
-          </a>
-          <a class="vote_up" href="{{ url_for('ask.reply_vote', id=r.id) }}">
-            <i class="icon-thumbs-up"></i>
-          </a>
+        <!-- User metadata -->
+        <div class="question_attr">
+          <div class="userpic" style="background-image: url('{{ r.user.avatar(50) }}')"></div>
+          <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a> {{ momentjs(q.timestamp).fromNow() }}
         </div>
+        
+      </div> <!-- end reply text -->
+        
+      {% if r.id == r.parent_id %}
+      <button class="leave_response" data-parent="{{r.parent_id}}">Respond to {{r.user.fullname}}</button>
+      {% endif %}
     
-        <div class="question_preview{% if r.id != r.parent_id %} child{% endif %}">
-          {{ r.body|safe }}
-          <div class="question_attr">
-            <div class="userpic" style="background-image: url('{{ r.user.avatar(50) }}')"></div>
-            <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a> {{ momentjs(q.timestamp).fromNow() }}
-          </div>
-        </div>
-    
-        {% if r.id == r.parent_id %}
-          {% include 'ask/snippets/reply_form.html' %}
-        {% endif %}
-    
-      </div>
+    </div> <!-- end reply -->
     {% endfor %}
     
-  </div>
+  </div> <!-- end responses -->
   {% endif %}
-
   {% endwith %}
-
-  <h2 style="margin-left:12px;">New Response</h2>
-  <div class="reply darkbox">
-    {% include 'ask/snippets/reply_form.html' %}
-  </div>
   
-  </div>
+  <!-- Leave another response (not to a specify reply but in general) -->
+  <h2>New Response</h2>
+  <button class="leave_response" style="display: none;">Leave a Response</button>
   
-</div>
+  <form class="reply_form" action="" method="post" name="login">
+    <!-- Reply form for the page that will be moved around-->
+    
+    {{ reply_form.hidden_tag() }}
+    
+    <!-- Reply texterea box -->
+    <p>
+      {{ reply_form.reply(class="reply", id="wysiwyg_textarea", placeholder="Enter your text...") }}<br />
+      
+      <!-- Errors! -->
+      {% for error in reply_form.errors.reply %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </p>
+    
+    <!-- Submit button -->
+    <a href="#" class="submit">
+      <div class="decision">
+        <div class="text">Reply!</div>
+        <div class="arrow"></div>
+      </div>
+    </a>
+    
+  </form> <!-- end reply for -->
+  
+</div> <!-- end entire container for page .grid5col4 -->
 
 {% endblock %}
 
 {% block js %}
-
-<!-- wysihtml5 parser rules -->
-<script src="/static/js/libs/wysihtml5-parser_rules-advanced.js"></script>
-<!-- wysihtml5 library -->
-<script src="/static/js/libs/wysihtml5-0.3.0.min.js"></script>
+<!-- Redactor is here -->
+<script src="/static/js/libs/jquery-1.9.0.min.js"></script>
+<script src="/static/js/libs/redactor.min.js"></script>
 <script>
-var editor = new wysihtml5.Editor("wysihtml5-textarea", { // id of textarea element
-  toolbar:      "wysihtml5-toolbar", // id of toolbar element
-  parserRules:  wysihtml5ParserRules, // defined in parser rules set 
-  stylesheets: ["/static/css/libs/wysihtml5.stylesheet.css"]
+
+// Initialize redactor wysiwyg textarea
+$(document).ready(function() {
+
+    var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
+		$('#wysiwyg_textarea').redactor({
+      // focus: true // scrolls page to this textarea
+      buttons: buttons 
+		});
+
 });
 
 // Voting!
@@ -126,7 +184,7 @@ d3.selectAll(".vote_up").on(vizwhiz.evt.click, function(){
       d3.select(link_el.parentNode).select(".vote_count").text(function(){
         var new_count = 1
         if(d3.select(this).text()){
-          console.log('nope!!', d3.select(this).text())
+          // console.log(d3.select(this).text())
           new_count = parseInt(d3.select(this).text(), 10) + parseInt(resp.success);
         }
         return new_count;
@@ -162,13 +220,17 @@ d3.selectAll(".tag-icon").style("background-image", function(){
 })
 
 // show/hide reply form
-d3.selectAll("button.reply").on(vizwhiz.evt.click, function(){
-  var reply_form = d3.select(this.parentNode).select(".reply_form")
-  if(reply_form.style("display") == "block"){
-    reply_form.style("display", "none")
-  }
-  else {
-    reply_form.style("display", "block")
+d3.selectAll("button.leave_response").on(vizwhiz.evt.click, function(){
+  
+  d3.selectAll("button.leave_response").style("display", "block")
+  var reply_form = d3.select(".reply_form").node()
+  this.parentNode.insertBefore(reply_form, this);
+  d3.select(this).style("display", "none")
+  
+  // set the hidden parent input
+  var reply_parent_id = d3.select(this).attr("data-parent");
+  if(reply_parent_id){
+    d3.select("input[name='parent']").attr("value", reply_parent_id)
   }
 })
 
