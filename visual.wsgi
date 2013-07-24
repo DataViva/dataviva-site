@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, '/web/visual.growth-ventures.com')
+sys.path.insert(0, '/web/testvisual.com')
 
 from visual import app as application
 
