@@ -127,7 +127,7 @@ function format_name(name) {
     "total_val_kg": {"en": "Weight", "pt": "Peso"},
     "total_val_quantity": {"en": "Units", "pt": "Unidades"},
     "total_val_usd": {"en": "Value", "pt": "Valor"},
-    "total_wage": {"en": "Monthly Wage", "pt": "Sal\u00e1rios Mensal"},
+    "total_wage": {"en": "Monthly Wage", "pt": "Massa Sal\u00e1rios Mensal"},
     "true": {"en": "On", "pt": "Em"},
     "val_kg": {"en": "Weight", "pt": "Peso"},
     "val_quantity": {"en": "Units", "pt": "Unidades"},
