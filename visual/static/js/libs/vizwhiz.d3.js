@@ -439,18 +439,26 @@ vizwhiz.tooltip.create = function(params) {
   
   if (params.data) {
       
+    var val_width = 0
+      
     params.data.forEach(function(d,i){
       var block = data_container.append("div")
         .attr("class","vizwhiz_tooltip_data_block")
-        .text(d.name)
+        
       if (d.highlight) {
         block
           .style("color",vizwhiz.utils.darker_color(params.color))
       }
       
       block.append("div")
+          .attr("class","vizwhiz_tooltip_data_name")
+          .text(d.name)
+      
+      var val = block.append("div")
           .attr("class","vizwhiz_tooltip_data_value")
           .text(d.value)
+      var w = parseFloat(val.style("width"),10)
+      if (w > val_width) val_width = w
           
       if (i != params.data.length-1) {
         data_container.append("div")
@@ -458,6 +466,9 @@ vizwhiz.tooltip.create = function(params) {
       }
           
     })
+    
+    data_container.selectAll(".vizwhiz_tooltip_data_name")
+      .style("padding-right",val_width+"px")
     
   }
     
@@ -2818,7 +2829,14 @@ vizwhiz.network = function(vars) {
         var hidden = vars.spotlight && !active
         // Grey out nodes that are in the background or hidden by spotlight,
         // otherwise, use the active_color function
-        return (background_node || hidden) && !highlighted ? "#efefef" : fill_color(d);
+        if ((background_node || hidden) && !highlighted) {
+          return "#efefef"
+        }
+        else {
+          var active = find_variable(d[vars.id_var],vars.active_var)
+          if (active) this.parentNode.appendChild(this)
+          return fill_color(d)
+        }
         
       })
       .attr("stroke", function(d){

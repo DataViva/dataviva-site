@@ -71,6 +71,8 @@ visual.format.number = function(value,name) {
     return_value = n.join(",")
   }
   
+  if (name == "total") return_value = "~"+return_value
+  
   return return_value
   
 }
