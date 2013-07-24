@@ -245,6 +245,22 @@ div.logo.sponsor {
   line-height: 29px;
   margin: 5px;
   text-shadow: 0px 1px white;
+  width: auto;
+}
+
+#footer > a.link {
+  color: #ccc;
+  display: inline-block;
+  font-size: 10px;
+  height: 19px;
+  line-height: 19px;
+  margin: 10px;
+  padding: 0px 5px;
+  text-shadow: 0px 1px white;
+}
+
+#footer > a.link:hover {
+  text-decoration: underline;
 }
 
 a.logo {
