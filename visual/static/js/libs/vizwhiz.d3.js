@@ -53,8 +53,8 @@ vizwhiz.utils.rand_color = function() {
 
 vizwhiz.utils.text_color = function(color) {
   var hsl = d3.hsl(color),
-      light = "#fff", 
-      dark = "#333";
+      light = "#ffffff", 
+      dark = "#333333";
   if (hsl.l > 0.65) return dark;
   else if (hsl.l < 0.48) return light;
   return hsl.h > 35 && hsl.s >= 0.3 && hsl.l >= 0.41 ? dark : light;
@@ -832,6 +832,8 @@ vizwhiz.viz = function() {
       nodes,
       links,
       removed_ids = [],
+      mirror_axis = false,
+      static_axis = true,
       xaxis_domain = null,
       yaxis_domain = null;
       
@@ -1064,20 +1066,34 @@ vizwhiz.viz = function() {
       
       if (vars.type == "pie_scatter") {
         if (vars.dev) console.log("[viz-whiz] Setting Axes Domains")
-        if (xaxis_domain) vars.xaxis_domain = xaxis_domain
+        if (xaxis_domain instanceof Array) vars.xaxis_domain = xaxis_domain
+        else if (!static_axis) {
+          vars.xaxis_domain = d3.extent(data_obj[data_type[vars.type]][vars.depth][vars.spotlight][vars.year],function(d){
+            return d[vars.xaxis_var]
+          })
+        }
         else {
           vars.xaxis_domain = d3.extent(data_obj[data_type[vars.type]][vars.depth][vars.spotlight].all,function(d){
             return d[vars.xaxis_var]
           })
         }
-        if (yaxis_domain) vars.yaxis_domain = yaxis_domain
+        if (yaxis_domain instanceof Array) vars.yaxis_domain = yaxis_domain
+        else if (!static_axis) {
+          vars.yaxis_domain = d3.extent(data_obj[data_type[vars.type]][vars.depth][vars.spotlight][vars.year],function(d){
+            return d[vars.yaxis_var]
+          }).reverse()
+        }
         else {
           vars.yaxis_domain = d3.extent(data_obj[data_type[vars.type]][vars.depth][vars.spotlight].all,function(d){
             return d[vars.yaxis_var]
           }).reverse()
         }
+        if (mirror_axis) {
+          var domains = vars.yaxis_domain.concat(vars.xaxis_domain)
+          vars.xaxis_domain = d3.extent(domains)
+          vars.yaxis_domain = d3.extent(domains).reverse()
+        }
       }
-      
       // Calculate total_bar value
       if (!vars.total_bar || vars.type == "stacked") {
         var total_val = null
@@ -1103,7 +1119,11 @@ vizwhiz.viz = function() {
           })
         }
         else if (vars.type == "rings") {
-          var total_val = vars.data[vars.highlight][vars.value_var]
+          if (vars.data[vars.highlight])
+            var total_val = vars.data[vars.highlight][vars.value_var]
+          else {
+            var total_val = null
+          }
         }
         else {
           var total_val = d3.sum(d3.values(vars.data),function(d){
@@ -1735,6 +1755,12 @@ vizwhiz.viz = function() {
     }
     return chart;
   };
+
+  chart.mirror_axis = function(x) {
+    if (!arguments.length) return mirror_axis;
+    mirror_axis = x;
+    return chart;
+  };
   
   chart.name_array = function(x) {
     if (!arguments.length) return vars.name_array;
@@ -1821,6 +1847,12 @@ vizwhiz.viz = function() {
     if (typeof x == "boolean")  vars.spotlight = x;
     else if (x === "false") vars.spotlight = false;
     else vars.spotlight = true;
+    return chart;
+  };
+
+  chart.static_axis = function(x) {
+    if (!arguments.length) return static_axis;
+    static_axis = x;
     return chart;
   };
   
@@ -3019,7 +3051,7 @@ vizwhiz.stacked = function(vars) {
   
   // Helper function unsed to convert stack values to X, Y coords 
   var area = d3.svg.area()
-    .interpolate("monotone")
+    .interpolate("linear")
     .x(function(d) { return vars.x_scale(d[vars.year_var]); })
     .y0(function(d) { return vars.y_scale(d.y0); })
     .y1(function(d) { return vars.y_scale(d.y0 + d.y)+1; });
@@ -3039,6 +3071,8 @@ vizwhiz.stacked = function(vars) {
   d3.select("#path_clipping rect").transition().duration(vizwhiz.timing)
     .attr("width",vars.graph.width)
     .attr("height",vars.graph.height)
+    .attr("x",1)
+    .attr("y",1)
   
   // Get layers from d3.stack function (gives x, y, y0 values)
   var offset = vars.layout == "value" ? "zero" : "expand";
@@ -3060,8 +3094,6 @@ vizwhiz.stacked = function(vars) {
       return "path_"+d[vars.id_var]
     })
     .attr("class", "layer")
-    .attr("stroke",vars.highlight_color)
-    .attr("stroke-width",0)
     .attr("fill", function(d){
       return find_variable(d.key,vars.color_var)
     })
@@ -3076,7 +3108,7 @@ vizwhiz.stacked = function(vars) {
       var id = find_variable(d,vars.id_var),
           self = d3.select("#path_"+id).node()
       
-      d3.select(self).attr("stroke-width",3)
+      d3.select(self).attr("opacity",1)
 
       d3.selectAll("line.rule").remove();
       
@@ -3166,7 +3198,7 @@ vizwhiz.stacked = function(vars) {
       
       d3.selectAll("line.rule").remove()
       vizwhiz.tooltip.remove(vars.type)
-      d3.select(self).attr("stroke-width",0)
+      d3.select(self).attr("opacity",0.85)
       
     })
     .on(vizwhiz.evt.click, function(d){
@@ -3179,8 +3211,15 @@ vizwhiz.stacked = function(vars) {
         d3.selectAll("line.rule").remove()
         vizwhiz.tooltip.remove(vars.type)
         d3.select(self).attr("stroke-width",0)
+
+        var mouse_x = d3.event.layerX-vars.graph.margin.left;
+        var rev_x_scale = d3.scale.linear()
+          .domain(vars.x_scale.range()).range(vars.x_scale.domain());
+        var this_x = Math.round(rev_x_scale(mouse_x));
+        var this_x_index = vars.years.indexOf(this_x)
+        var this_value = d.values[this_x_index]
         
-        var tooltip_data = get_tooltip_data(d,"long")
+        var tooltip_data = get_tooltip_data(this_value,"long")
         
         vizwhiz.tooltip.create({
           "title": find_variable(d[vars.id_var],vars.text_var),
@@ -3214,7 +3253,7 @@ vizwhiz.stacked = function(vars) {
     })
   
   paths.transition().duration(vizwhiz.timing)
-    .attr("opacity", 1)
+    .attr("opacity", 0.85)
     .attr("fill", function(d){
       return find_variable(d.key,vars.color_var)
     })
@@ -3233,9 +3272,6 @@ vizwhiz.stacked = function(vars) {
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // TEXT LAYERS
   //-------------------------------------------------------------------
-
-  var defs = vars.chart_enter.append('svg:defs')
-  vizwhiz.utils.drop_shadow(defs)
 
   // filter layers to only the ones with a height larger than 6% of viz
   var text_layers = [];
@@ -5594,7 +5630,12 @@ vizwhiz.rings = function(vars) {
       }
     })
     .each(function(d) {
-      if (d.depth == 0) var s = Math.sqrt((ring_width*ring_width)/2), w = s*1.5, h = s/1.5, resize = true;
+      if (d.depth == 0) {
+        var s = Math.sqrt((ring_width*ring_width)/2), 
+            w = s*1.4, 
+            h = s/1.4, 
+            resize = true
+      }
       else {
         var w = ring_width-d.radius*2, resize = false
         if (d.depth == 1) var h = (Math.PI*((tree_radius-(ring_width*2))*2))*(d.size/360);
@@ -5609,7 +5650,7 @@ vizwhiz.rings = function(vars) {
         "width": w,
         "height": h,
         "resize": resize,
-        "font_min": 6
+        "font_min": 10
       })
 
       d3.select(this).attr("y",(-d3.select(this).node().getBBox().height/2)+"px")
@@ -5715,10 +5756,21 @@ vizwhiz.rings = function(vars) {
             return vars.highlight_color;
           } else if (hover.depth == 1 && hover.children_total.indexOf(d.target) >= 0) {
             return vars.secondary_color;
-          } else return "#ddd";
-        } else return "#ddd";
+          }
+          else {
+            return "transparent"
+          }
+        }
+        if (d.source[vars.id_var] == vars.highlight) {
+          this.parentNode.appendChild(this)
+          return "#888"
+        }
+        else return "#ccc"
       })
-      .attr("stroke-width", "1.5")
+      .attr("stroke-width", function(d){
+        if (d.source[vars.id_var] == vars.highlight) return 2
+        else return 1
+      })
       .attr("opacity",function(d) {
         if (hover && d3.select(this).attr("stroke") == "#ddd") {
            return 0.25

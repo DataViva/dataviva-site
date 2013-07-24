@@ -114,18 +114,20 @@ class Build(db.Model, AutoSerialize):
         print self.bra
         # bra = self.bra.id
         bra = "+".join([b.id for b in self.bra])
-        if self.output == "bra":
+        if self.app.type == "geo_map":
+            bra = "show.8"
+        elif self.output == "bra":
             bra = bra + ".show.8"
             
         filter1 = self.filter1
-        if filter1 == "all":
+        if filter1 == "all" or self.app.type == "rings":
             if self.output == "isic":
                 filter1 = "show.5"
             elif self.output == "hs":
                 filter1 = "show.6"
         
         filter2 = self.filter2
-        if filter2 == "all":
+        if filter2 == "all" or self.app.type == "rings":
             if self.output == "cbo":
                 filter2 = "show.4"
             elif self.output == "wld":
