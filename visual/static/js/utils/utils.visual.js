@@ -25,15 +25,16 @@ visual.format.number = function(value,name) {
   
   var smalls = ["rca","rca_bra","rca_wld","distance","complexity"]
   
-  if (smalls.indexOf(name) >= 0 || value < 1) {
+  
+  if (name == "year") {
+    var return_value = value
+  }
+  else if (smalls.indexOf(name) >= 0 || value < 1) {
     var r = value.toString().split(""), l = false
     r.forEach(function(n,i){
       if (n != "0" && n != "." && !l) l = i
     })
     var return_value = d3.round(value,l)
-  }
-  else if (name == "year") {
-    var return_value = value
   }
   else if (value.toString().split(".")[0].length > 4) {
     
@@ -45,19 +46,29 @@ visual.format.number = function(value,name) {
     value = parseFloat(d3.format(".3g")(value))
     var return_value = value + symbol;
   }
+  else if (name == "share") {
+    var return_value = d3.format(".2f")(value)
+  }
   else {
     var return_value = d3.format(",f")(value)
   }
   
   var total_labels = {
         "val_usd": ["$"," USD"],
-        "wage": ["$"," BRL"],
-        "total": [""," employees"]
+        "wage": ["$"," BRL"]
       }
 
   if (total_labels[name]) {
     var labels = total_labels[name]
     return_value = labels[0] + return_value + labels[1]
+  }
+  
+  return_value = String(return_value)
+  
+  if (visual.language == "pt") {
+    var n = return_value.split(".")
+    n[0] = n[0].replace(",",".")
+    return_value = n.join(",")
   }
   
   return return_value
