@@ -1,6 +1,10 @@
 <!-- extend admin_template -->
 {% extends "templates/admin.html" %}
 
+{% block head %}
+<link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
+{% endblock %}
+
 {% block admin_content %}
 
 <h2>{{ question.question }}</h2>
@@ -20,27 +24,7 @@
   {{ form.status() }}
 
   <h3>Answer:</h3>
-  <div id="wysihtml5-toolbar" style="display: none;">
-    <div id="text-field-options">
-      <a class="button square" data-wysihtml5-command="bold"><i class="icon-bold"></i></a>
-      <a class="button square" data-wysihtml5-command="italic"><i class="icon-italic"></i></a>
-
-      <a class="button square" data-wysihtml5-command="insertUnorderedList"><i class="icon-list-ul"></i></a>
-      <a class="button square" data-wysihtml5-command="insertOrderedList"><i class="icon-list-ol"></i></a>
-
-      <a class="button square" data-wysihtml5-command="createLink"><i class="icon-link"></i></a>
-      <!-- Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href) -->
-      <div data-wysihtml5-dialog="createLink" style="display: none;">
-        <label class="link">
-          Link:
-          <input data-wysihtml5-dialog-field="href" value="http://" type="text" class="link">
-        </label>
-        <a class="button square link" data-wysihtml5-dialog-action="save"><i class="icon-ok"></i></a>
-        <a class="button square link" data-wysihtml5-dialog-action="cancel"><i class="icon-remove"></i></a>
-      </div>
-    </div>
-  </div>
-  {{ form.answer(id="wysihtml5-textarea", placeholder="Enter your answer...") }}<br />
+  {{ form.answer(id="wysiwyg_textarea", placeholder="Enter your answer...") }}<br />
   {% for error in form.errors.body %}
   <span style="color: red;">[{{ error }}]</span>
   {% endfor %}
@@ -48,17 +32,22 @@
   <input type="submit" value="Update"/>
 
 </form>
+{% endblock %}
 
-<!-- wysihtml5 parser rules -->
-<script src="/static/js/libs/wysihtml5-parser_rules-advanced.js"></script>
-<!-- wysihtml5 library -->
-<script src="/static/js/libs/wysihtml5-0.3.0.min.js"></script>
+{% block js %}
+<!-- Redactor is here -->
+<script src="/static/js/libs/jquery-1.9.0.min.js"></script>
+<script src="/static/js/libs/redactor.min.js"></script>
 <script>
-var editor = new wysihtml5.Editor("wysihtml5-textarea", { // id of textarea
-  toolbar:      "wysihtml5-toolbar", // id of toolbar element
-  parserRules:  wysihtml5ParserRules, // defined in parser rules set 
-  stylesheets: ["/static/css/libs/wysihtml5.stylesheet.css"]
+
+// Initialize redactor wysiwyg textarea
+$(document).ready(function() {
+
+    var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
+		$('#wysiwyg_textarea').redactor({
+      buttons: buttons 
+		});
+
 });
 </script>
-
 {% endblock %}

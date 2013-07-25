@@ -5,8 +5,8 @@
 
 {% block head %}
 
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/wysihtml5.stylesheet.css" />
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
+<link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
+<link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
 
 {% endblock %}
 
@@ -26,7 +26,44 @@
   </div>
   
   {% if g.user.is_authenticated() %}
-    {% include 'ask/snippets/question_form.html' %}
+    
+    <form id="ask_form" action="" method="post">
+      {{form.hidden_tag()}}
+      <p>
+        <h3>Question:</h3>
+        {{ form.question(size=80, class="ask", placeholder="Ex. Where does the data come from?") }}<br />
+        {% for error in form.errors.question %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+  
+      <p>
+        <h3>Description:</h3>
+        {{ form.body(id="wysiwyg_textarea", class="ask", placeholder="Enter your text...") }}<br />
+        {% for error in form.errors.body %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+  
+      <p>
+        <label class="leon label" for="app_link">App</label>
+        {{ form.app(size=80, id="app_link", class="leon text", placeholder="Ex. /tree_map/secex/mg/show/show") }}
+      </p>
+      <p>
+        <h3>Tags:</h3>
+        {{ form.tags(size=80, class="ask", id="tag_field") }}
+        <div id="tag_input"></div>
+      </p>
+      
+      <a href="#" class="submit">
+        <div class="decision">
+          <div class="text">Ask Sabrina!</div>
+          <div class="arrow"></div>
+        </div>
+      </a>
+      
+    </form>
+    
   {% else %}
     <a id="login" class="decision" onclick="login()">Click here to login</a>
   {% endif %}
@@ -37,18 +74,29 @@
 {% endblock %}
 
 {% block js %}
-<!-- wysihtml5 parser rules -->
-<script src="/static/js/libs/wysihtml5-parser_rules-advanced.js"></script>
-<!-- wysihtml5 library -->
-<script src="/static/js/libs/wysihtml5-0.3.0.min.js"></script>
+
+<!-- Redactor is here -->
+<script src="/static/js/libs/jquery-1.9.0.min.js"></script>
+<script src="/static/js/libs/redactor.min.js"></script>
 <script src="/static/js/utils/utils.selector.js"></script>
 <script>
+  
+  // Initialize redactor wysiwyg textarea
+  $(document).ready(function() {
 
-  var editor = new wysihtml5.Editor("wysihtml5-textarea", { // id of textarea element
-    toolbar:      "wysihtml5-toolbar", // id of toolbar element
-    parserRules:  wysihtml5ParserRules, // defined in parser rules set 
-    stylesheets: ["/static/css/libs/wysihtml5.stylesheet.css"]
+      var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
+  		$('#wysiwyg_textarea').redactor({
+        buttons: buttons 
+  		});
+
   });
+  
+  // submit form
+  d3.selectAll("#ask_form .submit").on(vizwhiz.evt.click, function(){
+    this.parentNode.submit()
+    d3.event.preventDefault();
+  })
+  
   
   var attr_url = "/attrs/filter/";
   
@@ -77,7 +125,6 @@
     tag.append("span")
       .attr("class", "tag-icon")
       .style("background-image", "url(" + obj.icon + ")")
-    // obj.display_id
     tag.append("span").html(obj.name+"&nbsp;&nbsp;")
     tag.append("a").attr("class", "tag-delete").append("i").attr("class", "icon-remove-sign")
     
@@ -87,7 +134,6 @@
   var select_id = "current_selector"
   var selector = Selector()
     .callback("select_filter")
-    // .language("en")
     .type("bra");
   
   function update_selector(val){

@@ -40,7 +40,8 @@ function item_formatter(container_el, activities){
     // the title (strip out HTML!)
     title_div.append("p")
       .html(function(d){
-        return d.body;
+        // remove HTML tags
+        return d.body.replace(/<\/?[^>]+(>|$)/g, "");
       })
       
     // lastly, the div that holds the data
