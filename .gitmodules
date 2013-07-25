@@ -1,0 +1,3 @@
+[submodule "scripts/growth"]
+	path = scripts/growth
+	url = https://github.com/alexandersimoes/growth.git
