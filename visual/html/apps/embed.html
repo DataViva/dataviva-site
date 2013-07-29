@@ -208,7 +208,7 @@
     })
   
     // Stylize SELECT menus
-    var selects = leon.touch(".leon_object")
+    var selects = leon(".leon_object")
     
     // Hide full-screen button while in full-screen
     if (parent.location.pathname.indexOf("embed") >= 0) {
@@ -650,7 +650,7 @@
             .attr("for","year")
             .html(visual.format.text("year"))
           
-          leon.touch("#year")
+          leon("#year")
           
         }
         else {
@@ -1202,7 +1202,7 @@
           }
         })
       
-      leon.touch("select")
+      leon("select")
       app.build[type][index] = obj
       
       var url = app.url.split("/")
@@ -1289,7 +1289,7 @@
         
       })
 
-      leon.touch("$"+obj.title)
+      leon("$"+obj.title)
       
     }
     
