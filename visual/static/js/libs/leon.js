@@ -3,22 +3,30 @@
 
 // Sup?
 
-var leon = {}
+leon_construct = {}
 
-leon.debug = false;
-leon.autohide = true;
-leon.version = 0.1
+leon_vars = {}
+leon_vars.debug = false;
+leon_vars.autohide = true;
+leon_vars.version = 0.1
 
-leon.corners = 0
-leon.padding = 6
+leon_vars.corners = 0
+leon_vars.padding = 6
 
-leon.time = {}
-leon.time.fade = 0.25
-leon.time.hover = 0.1
+leon_vars.time = {}
+leon_vars.time.fade = 0.25
+leon_vars.time.hover = 0.1
 
-leon.color = {}
+leon_vars.font = {}
+leon_vars.font.family = '"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif'
+leon_vars.font.size = 12
+leon_vars.font.weight = "normal"
 
-leon.color.tint = function(color, percent) {   
+leon_vars.border = 1
+
+leon_vars.color = {}
+
+leon_vars.color.tint = function(color, percent) {   
     var num = parseInt(color.slice(1),16),
     amt = Math.round(2.55 * percent),
     R = (num >> 16) + amt,
@@ -27,11 +35,11 @@ leon.color.tint = function(color, percent) {
     return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (B<255?B<1?0:B:255)*0x100 + (G<255?G<1?0:G:255)).toString(16).slice(1);
 }
 
-leon.color.text = function(color) {
+leon_vars.color.text = function(color) {
   
   var light = "#fff", 
-      dark = "#333",
-      hsl = leon.color.hsl(color);
+      dark = "#666",
+      hsl = leon_vars.color.hsl(color);
       
   if (hsl.l > 65) return dark;
   else if (hsl.l < 48) return light;
@@ -39,7 +47,7 @@ leon.color.text = function(color) {
   
 }
   
-leon.color.hsl = function(color){
+leon_vars.color.hsl = function(color){
     var r = parseInt(color.substr(1,2),16)
     var g = parseInt(color.substr(3,2),16)
     var b = parseInt(color.substr(5,2),16)
@@ -67,23 +75,22 @@ leon.color.hsl = function(color){
     };
 }
 
-leon.color.main = {}
-leon.color.main.normal = "#af1f24"
-leon.color.main.dark = leon.color.tint(leon.color.main.normal,-10)
-leon.color.accent = {}
-leon.color.accent.normal = "#ffffff"
-leon.color.accent.hover = "#efefef"
-leon.color.accent.highlight = "#aaaaaa"
-leon.color.accent.dark = "#888888"
+leon_vars.color.main = {}
+leon_vars.color.main.normal = "#af1f24"
+leon_vars.color.main.light = leon_vars.color.tint(leon_vars.color.main.normal,10)
+leon_vars.color.main.dark = leon_vars.color.tint(leon_vars.color.main.normal,-10)
+leon_vars.color.accent = {}
+leon_vars.color.accent.normal = "#ffffff"
+leon_vars.color.accent.hover = "#efefef"
+leon_vars.color.accent.highlight = "#aaaaaa"
+leon_vars.color.accent.dark = "#888888"
 
-leon.font = {}
-leon.font.family = '"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif'
-leon.font.size = 12
-leon.font.weight = "normal"
-
-leon.border = 0
-// Finds all elements that match the passed ID or Class
-leon.touch = function(name) {
+leon_construct.div = function(classname) {
+  var div = document.createElement("div")
+  div.className = classname
+  return div
+}// Finds all elements that match the passed ID or Class
+leon = function(name) {
   
   if (!name) var name = "all"
   
@@ -191,7 +198,7 @@ leon.touch = function(name) {
     else var parent = obj.items.parentNode
     var display = parent.style.display
     if (display == "none") parent.style.display = "block"
-    returns[obj.items.id] = new leon[obj.type.split("-")[0]](obj)
+    returns[obj.items.id] = new leon_construct[obj.type.split("-")[0]](obj)
     if (display == "none") parent.style.display = "none"
   })
   if (Object.keys(returns).length == 1) returns = returns[Object.keys(returns)[0]]
@@ -199,76 +206,66 @@ leon.touch = function(name) {
   return returns
   
 }
-leon.style = {}
 var head = document.getElementsByTagName("head")[0]
 var style = document.createElement("style")
 style.type = "text/css"
 style.innerHTML = "\
   .leon {\
-    border-radius: "+leon.corners+"px;\
-    -moz-border-radius: "+leon.corners+"px;\
-    -webkit-border-radius: "+leon.corners+"px;\
+    border-radius: "+leon_vars.corners+"px;\
+    -moz-border-radius: "+leon_vars.corners+"px;\
+    -webkit-border-radius: "+leon_vars.corners+"px;\
     display: inline-block;\
-    font-family: "+leon.font.family+";\
-    font-size: "+leon.font.size+"px;\
-    font-weight: "+leon.font.weight+";\
+    font-family: "+leon_vars.font.family+";\
+    font-size: "+leon_vars.font.size+"px;\
+    font-weight: "+leon_vars.font.weight+";\
     z-index: 1000;\
   }\
   .leon.button {\
-    background: "+leon.color.accent.normal+";\
-    border: "+leon.border+"px solid "+leon.color.accent.dark+";\
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);\
-       -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);\
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);\
-    color: "+leon.color.text(leon.color.accent.normal)+";\
-    padding: "+leon.padding+"px;\
-    margin: "+leon.padding+"px;\
+    background: "+leon_vars.color.accent.normal+";\
+    border: "+leon_vars.border+"px solid "+leon_vars.color.accent.highlight+";\
+    color: "+leon_vars.color.text(leon_vars.color.accent.highlight)+";\
+    padding: "+leon_vars.padding+"px;\
+    margin: "+leon_vars.padding+"px;\
     text-align: center;\
-    transition: color "+leon.time.hover+"s, background "+leon.time.hover+"s, border-color "+leon.time.hover+"s;\
-    -webkit-transition: color "+leon.time.hover+"s, background "+leon.time.hover+"s, border-color "+leon.time.hover+"s;\
+    transition: color "+leon_vars.time.hover+"s, background "+leon_vars.time.hover+"s, border-color "+leon_vars.time.hover+"s;\
+    -webkit-transition: color "+leon_vars.time.hover+"s, background "+leon_vars.time.hover+"s, border-color "+leon_vars.time.hover+"s;\
     vertical-align: top;\
   }\
   .leon.button > .icon{\
     background-repeat: no-repeat;\
     background-size: 100%;\
     float: left;\
-    height: "+(leon.font.size+2)+"px;\
-    margin-right: "+leon.padding+"px;\
-    width: "+(leon.font.size+2)+"px;\
+    height: "+(leon_vars.font.size+2)+"px;\
+    margin-right: "+leon_vars.padding+"px;\
+    width: "+(leon_vars.font.size+2)+"px;\
   }\
   .leon.button:hover {\
-    background: "+leon.color.accent.hover+";\
-    color: "+leon.color.main.normal+";\
+    background: "+leon_vars.color.accent.hover+";\
+    color: "+leon_vars.color.main.normal+";\
     cursor: pointer;\
   }\
   .leon.button.active {\
-    background: "+leon.color.main.normal+";\
-    border-color: "+leon.color.main.dark+";\
-    border-right-width: "+leon.border+"px !important;\
-    color: "+leon.color.text(leon.color.main.normal)+";\
+    background: "+leon_vars.color.main.normal+";\
+    border-color: "+leon_vars.color.main.dark+";\
+    border-right-width: "+leon_vars.border+"px !important;\
+    color: "+leon_vars.color.text(leon_vars.color.main.normal)+";\
   }\
   .leon.button:active {\
-    background: "+leon.color.main.normal+";\
-    border-color: "+leon.color.main.dark+";\
-    color: "+leon.color.text(leon.color.main.normal)+";\
+    background: "+leon_vars.color.main.normal+";\
+    border-color: "+leon_vars.color.main.dark+";\
+    color: "+leon_vars.color.text(leon_vars.color.main.normal)+";\
   }\
   .leon.button.active:hover {\
     cursor: pointer;\
   }\
   .leon.radio {\
     display: inline-block;\
-    margin: "+leon.padding+"px;\
+    margin: "+leon_vars.padding+"px;\
   }\
   .leon.radio.group {\
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);\
-       -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);\
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);\
     margin: 0px;\
   }\
   .leon.radio.group > .leon.button {\
-    -webkit-box-shadow: none;\
-       -moz-box-shadow: none;\
-            box-shadow: none;\
     margin: 0px;\
   }\
   .leon.radio.group > .leon.button.first {\
@@ -299,14 +296,14 @@ style.innerHTML = "\
     border-left-width: 0px;\
   }\
   .leon.label {\
-    border: "+leon.border+"px solid transparent;\
-    color: "+leon.color.accent.dark+";\
+    border: "+leon_vars.border+"px solid transparent;\
+    color: "+leon_vars.color.accent.dark+";\
     float: left;\
-    padding: "+leon.padding+"px;\
+    padding: "+leon_vars.padding+"px;\
   }\
   .leon.select {\
     display: inline-block;\
-    margin: "+leon.padding+"px;\
+    margin: "+leon_vars.padding+"px;\
     position: relative;\
   }\
   .leon.select.active {\
@@ -326,23 +323,17 @@ style.innerHTML = "\
     -webkit-border-bottom-right-radius: 0px;\
   }\
   .leon.select.dropdown {\
-    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);\
-       -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);\
-            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);\
     left: 0px;\
     margin: 0px;\
     opacity: 0px;\
     position: absolute;\
     top: 0px;\
-    transition: opacity "+leon.time.fade+"s, top "+leon.time.fade+"s;\
-    -webkit-transition: opacity "+leon.time.fade+"s, top "+leon.time.fade+"s;\
+    transition: opacity "+leon_vars.time.fade+"s, top "+leon_vars.time.fade+"s;\
+    -webkit-transition: opacity "+leon_vars.time.fade+"s, top "+leon_vars.time.fade+"s;\
     visibility: hidden;\
     z-index: -1;\
   }\
   .leon.select.dropdown > .leon.button {\
-    -webkit-box-shadow: none;\
-       -moz-box-shadow: none;\
-            box-shadow: none;\
     display: block;\
     float: none;\
     margin: 0px;\
@@ -389,18 +380,15 @@ style.innerHTML = "\
     width: 9px;\
   }\
   .leon.checkbox {\
-    margin: "+leon.padding+"px;\
+    margin: "+leon_vars.padding+"px;\
   }\
   .leon.checkbox.group {\
-    background: "+leon.color.accent.dark+";\
-    -webkit-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);\
-       -moz-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);\
-            box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);\
+    background: "+leon_vars.color.accent.dark+";\
     cursor: pointer;\
     margin: 0px;\
     position: relative;\
-    transition: background "+leon.time.hover+"s;\
-    -webkit-transition: background "+leon.time.hover+"s;\
+    transition: background "+leon_vars.time.hover+"s;\
+    -webkit-transition: background "+leon_vars.time.hover+"s;\
   }\
   .leon.checkbox.group > .leon.button {\
     display: block;\
@@ -408,42 +396,36 @@ style.innerHTML = "\
     left: 0px;\
     margin: 0px;\
     position: absolute;\
-    transition: left "+leon.time.hover+"s;\
-    -webkit-transition: left "+leon.time.hover+"s;\
+    transition: left "+leon_vars.time.hover+"s;\
+    -webkit-transition: left "+leon_vars.time.hover+"s;\
   }\
   .leon.text {\
-    background: "+leon.color.accent.normal+";\
-    border: "+leon.border+"px solid "+leon.color.accent.dark+";\
-    -webkit-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);\
-       -moz-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);\
-            box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);\
-    color: "+leon.color.text(leon.color.accent.normal)+";\
-    padding: "+leon.padding+"px;\
-    margin: "+leon.padding+"px;\
-    transition: color "+leon.time.hover+"s, background "+leon.time.hover+"s, border-color "+leon.time.hover+"s;\
-    -webkit-transition: color "+leon.time.hover+"s, background "+leon.time.hover+"s, border-color "+leon.time.hover+"s;\
+    background: "+leon_vars.color.accent.normal+";\
+    border: "+leon_vars.border+"px solid "+leon_vars.color.accent.dark+";\
+    color: "+leon_vars.color.text(leon_vars.color.accent.normal)+";\
+    padding: "+leon_vars.padding+"px;\
+    margin: "+leon_vars.padding+"px;\
+    transition: color "+leon_vars.time.hover+"s, background "+leon_vars.time.hover+"s, border-color "+leon_vars.time.hover+"s;\
+    -webkit-transition: color "+leon_vars.time.hover+"s, background "+leon_vars.time.hover+"s, border-color "+leon_vars.time.hover+"s;\
   }\
   .leon.text:hover {\
-    background: "+leon.color.accent.hover+";\
+    background: "+leon_vars.color.accent.hover+";\
     cursor: pointer;\
   }\
   .leon.text:focus {\
-    background: "+leon.color.accent.normal+";\
-    border-color: "+leon.color.main.normal+";\
+    background: "+leon_vars.color.accent.normal+";\
+    border-color: "+leon_vars.color.main.normal+";\
     outline: none;\
   }\
   .leon.range {\
-    margin: "+leon.padding+"px;\
+    margin: "+leon_vars.padding+"px;\
     padding: 0px;\
   }\
   .leon.range > .leon.button.play {\
-    margin: 0px "+leon.padding+"px 0px 0px;\
+    margin: 0px "+leon_vars.padding+"px 0px 0px;\
   }\
   .leon.range.slider {\
-    background: "+leon.color.accent.dark+";\
-    -webkit-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);\
-       -moz-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);\
-            box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);\
+    background: "+leon_vars.color.accent.dark+";\
     margin: 0px;\
     position: relative;\
     -webkit-user-select: none;\
@@ -454,10 +436,7 @@ style.innerHTML = "\
   .leon.range.slider > .leon.button.tick {\
     background: none;\
     border-color: transparent;\
-    -webkit-box-shadow: none;\
-       -moz-box-shadow: none;\
-            box-shadow: none;\
-    color: "+leon.color.accent.hover+";\
+    color: "+leon_vars.color.accent.hover+";\
     display: block;\
     float: none;\
     margin: 0px;\
@@ -467,7 +446,7 @@ style.innerHTML = "\
     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);\
   }\
   .leon.range.slider > .leon.button.tick.bullet {\
-    line-height: "+(leon.font.size*1.35)+"px;\
+    line-height: "+(leon_vars.font.size*1.35)+"px;\
   }\
   .leon.range.slider > .leon.button.handle {\
     display: block;\
@@ -477,7 +456,7 @@ style.innerHTML = "\
     text-align: center;\
   }\
   .leon.range.slider > .leon.ranger {\
-    background: "+leon.color.main.normal+";\
+    background: "+leon_vars.color.main.normal+";\
     display: block;\
     float: none;\
     margin: 0px;\
@@ -489,20 +468,20 @@ head.appendChild(style)
 CUSTOM BUTTON CREATOR
 Creates a custom button when passed an item
 */
-leon.label = function(item,parent) {
+leon_construct.label = function(item,parent) {
   
     var html = item.innerHTML ? item.innerHTML : item.id
     if (item.label) {
       if (typeof item.label != "string") {
         html = item.label.innerHTML
-        if (leon.autohide) item.label.style.display = "none"
+        if (leon_vars.autohide) item.label.style.display = "none"
       }
       else {
         html = item.label
       }
     }
     
-    if (leon.autohide) item.style.display = "none"
+    if (leon_vars.autohide) item.style.display = "none"
     
     var label = document.createElement("div")
     label.className = "leon label"
@@ -519,14 +498,14 @@ leon.label = function(item,parent) {
 CUSTOM BUTTON CREATOR
 Creates a custom button when passed an item
 */
-leon.button = function(item,parent) {
+leon_construct.button = function(item,parent) {
   
     if (item.type == "button") var item = item.items
     
     if (item.label) {
       if (typeof item.label != "string") {
         var html = item.label.innerHTML
-        if (leon.autohide) item.label.style.display = "none"
+        if (leon_vars.autohide) item.label.style.display = "none"
       }
       else {
         var html = item.label
@@ -536,7 +515,7 @@ leon.button = function(item,parent) {
       var html = item.value
     }
     
-    if (leon.autohide) item.style.display = "none"
+    if (leon_vars.autohide) item.style.display = "none"
     
     var button = document.createElement("div")
     button.className = "leon button"
@@ -595,28 +574,28 @@ leon.button = function(item,parent) {
 CUSTOM RADIO TOGGLE CREATOR
 Creates a custom toggle menu, when passed the name of a radio button group
 */
-leon.checkbox = function(obj) {
+leon_construct.checkbox = function(obj) {
   
   enable = function() {
-    buttongroup.style.background = leon.color.main.normal
+    buttongroup.style.background = leon_vars.color.main.normal
     button.style.left = button.offsetHeight+"px"
     obj.items.checked = true
   }
   
   disable = function() {
-    buttongroup.style.background = leon.color.accent.dark
+    buttongroup.style.background = leon_vars.color.accent.dark
     button.style.left = "0px"
     obj.items.checked = false
   }
   
-  if (leon.autohide) obj.items.style.display = "none"
+  if (leon_vars.autohide) obj.items.style.display = "none"
   
   var divgroup = document.createElement("div")
   divgroup.className = "leon checkbox"
   obj.items.parentNode.insertBefore(divgroup,obj.items)
   
   if (obj.items.label) {
-    var label = new leon.label(obj.items,divgroup)
+    var label = new leon_construct.label(obj.items,divgroup)
   }
   
   var buttongroup = document.createElement("div")
@@ -634,7 +613,7 @@ leon.checkbox = function(obj) {
   button.innerHTML = "&nbsp;"
   buttongroup.appendChild(button)
   
-  var w = button.offsetHeight - leon.padding*2 - leon.border*2
+  var w = button.offsetHeight - leon_vars.padding*2 - leon_vars.border*2
   button.style.width = w+"px"
   buttongroup.style.width = (button.offsetHeight*2)+"px"
   buttongroup.style.height = button.offsetHeight+"px"
@@ -646,14 +625,14 @@ leon.checkbox = function(obj) {
 CUSTOM RADIO TOGGLE CREATOR
 Creates a custom toggle menu, when passed the name of a radio button group
 */
-leon.radio = function(obj) {
+leon_construct.radio = function(obj) {
   
   var divgroup = document.createElement("div")
   divgroup.className = "leon radio"
   obj.items[0].parentNode.insertBefore(divgroup,obj.items[0])
   
   if (obj.legend) {
-    var label = new leon.label(obj.legend,divgroup)
+    var label = new leon_construct.label(obj.legend,divgroup)
   }
   
   var buttongroup = document.createElement("div")
@@ -662,7 +641,7 @@ leon.radio = function(obj) {
   
   obj.items.forEach(function(item,i){
     
-    var button = new leon.button(item,buttongroup)
+    var button = new leon_construct.button(item,buttongroup)
     
     if (i == 0) button.addclass("first")
     else if (i == obj.items.length-1) button.addclass("last")
@@ -691,132 +670,74 @@ leon.radio = function(obj) {
   
 }
 /*
-CUSTOM RADIO TOGGLE CREATOR
-Creates a custom toggle menu, when passed the name of a radio button group
+CUSTOM RANGE SLIDER CREATOR
 */
-leon.range = function(obj) {
+leon_construct.range = function(obj) {
   
-  setvalue = function(value) {
-    
-    if (typeof value == "string") value = parseFloat(value)
-    
-    if (range) {
-      
-      var h1 = parseFloat(handle.innerHTML),
-          h2 = parseFloat(handle2.innerHTML)
-          
-      if (value < h1 || value <= h1+((h2-h1)/2)) {
-        h1 = value
-        handle.innerHTML = h1
-        handle.style.left = tick_positions[h1]+"px"
-        obj.items.value = h1
-        active_handle = handle
-      }
-      else {
-        h2 = value
-        handle2.innerHTML = h2
-        handle2.style.left = tick_positions[h2]+"px"
-        obj.items.alt = h2
-        active_handle = handle2
-      }
-      
-      ranger.style.left = tick_positions[h1]+"px"
-      ranger.style.width = (tick_positions[h2]-tick_positions[h1])+"px"
-      
-    }
-    else {
-      obj.items.value = value
-      handle.innerHTML = value
-      handle.style.left = tick_positions[value]+"px"
-      active_handle = handle
-    }
-    active_handle.className = "leon button handle active"
-    obj.items.onchange()
-    
-  }
+  var self = this
   
-  var min = parseFloat(obj.items.min),
-      max = parseFloat(obj.items.max),
-      step = parseFloat(obj.items.step),
+  this.input = obj.items
+  if (leon_vars.autohide) self.input.style.display = "none"
+  
+  var min = parseFloat(self.input.min),
+      max = parseFloat(self.input.max),
+      step = parseFloat(self.input.step),
+      handle_width = 0,
+      tick_width = 0,
+      dragging = false,
       label_step = step,
       tick_step = step,
       tick_length = 0,
       ticks = [],
-      available_width = obj.items.parentNode.offsetWidth-leon.padding*2,
+      available_width = self.input.parentNode.offsetWidth-leon_vars.padding*2,
+      slider,
+      handle,
+      handle2,
+      ranger,
       tick_positions = {},
-      dragging = false,
-      handle_width = 0,
-      tick_width = 0,
       range = false,
       active_handle,
-      playing = false
-      
-  var divgroup = document.createElement("div")
-  divgroup.className = "leon range"
-  obj.items.parentNode.insertBefore(divgroup,obj.items)
+      play_button,
+      playing = false,
+      frame = self.min
   
-  if (obj.items.label) {
-    var label = new leon.label(obj.items,divgroup)
-    available_width -= label.node.offsetWidth+leon.padding
+  var play_function = function() {
+    if (frame <= max) {
+      self.value(frame);
+      frame += step;
+      if (frame > max) {
+        self.stop()
+      }
+    }
+  }
+  
+  var play_interval = null
+      
+  this.node = document.createElement("div")
+  this.node.className = "leon range"
+  this.input.parentNode.insertBefore(self.node,self.input)
+  
+  if (this.input.label) {
+    this.label = new leon_construct.label(self.input,self.node)
+    available_width -= self.label.node.offsetWidth+leon_vars.padding
   }
   
   if (!range) {
     
-    var play = document.createElement("div")
-    play.className = "leon button play"
-    play.innerHTML = "&#9658"
-    play.addEventListener("click",function(e){
-      
-        if (!playing) {
-          playing = true;
-          play.className = "leon button play active"
-          
-          var current = parseFloat(handle.innerHTML,10)
-          if (current == max) var i = min;
-          else var i = current+step;
-          
-          setvalue(i);
-          i += step;
-          
-          var play_interval = function() {
-            if (i < max) {
-              setvalue(i);
-              i += step;
-              if (i > max) {
-                stop_playback();
-              }
-            }
-          }
-          
-          if (i > max) {
-            stop_playback();
-          }
-          else {
-            play_function = setInterval(play_interval,1500);
-          }
-          
-        } 
-        else {
-          stop_playback();
-        }
-        
-        function stop_playback() {
-          clearInterval(play_function);
-          playing = false;
-          play.className = "leon button play"
-          active_handle.className = "leon button handle"
-        }
-      
+    play_button = document.createElement("div")
+    play_button.className = "leon button play"
+    play_button.innerHTML = "&#9658"
+    play_button.addEventListener("click",function(){
+        if (!playing) self.play()
+        else self.stop()
     })
-    divgroup.appendChild(play)
+    self.node.appendChild(play_button)
+    play_button.style.width = play_button.offsetHeight-leon_vars.padding*2-leon_vars.border*2
     
   }
   
-  if (leon.autohide) obj.items.style.display = "none"
-  
-  var slider = document.createElement("div")
-  slider.className = "leon range slider"
-  divgroup.appendChild(slider)
+  slider = leon_construct.div("leon range slider")
+  self.node.appendChild(slider)
       
   for (var i = min; i <= max; i += step) {
     var tick = document.createElement("div")
@@ -829,11 +750,10 @@ leon.range = function(obj) {
     if (handle_width < tick.offsetWidth) handle_width = tick.offsetWidth
   }
   
-  var handle = document.createElement("div")
-  handle.className = "leon button handle"
-  handle.innerHTML = obj.items.value
+  handle = leon_construct.div("leon button handle")
+  handle.innerHTML = self.input.value
   handle.style.marginLeft = (-handle_width/2)+"px"
-  handle.style.width = (handle_width-leon.padding*2)+"px"
+  handle.style.width = (handle_width-leon_vars.padding*2)+"px"
   slider.appendChild(handle)
 
   handle.addEventListener("mousedown",function(){
@@ -845,18 +765,16 @@ leon.range = function(obj) {
     dragging = false
   })
   
-  if (obj.items.alt) {
+  if (self.input.alt) {
     
     range = true
     
-    var ranger = document.createElement("div")
-    ranger.className = "leon ranger"
+    ranger = leon_construct.div("leon ranger")
     ranger.style.height = handle.offsetHeight+"px"
     ticks[0].parentNode.insertBefore(ranger,ticks[0])
     
-    var handle2 = document.createElement("div")
-    handle2.className = "leon button handle"
-    handle2.innerHTML = obj.items.alt
+    handle2 = leon_construct.div("leon button handle")
+    handle2.innerHTML = self.input.alt
     handle2.style.marginLeft = (-handle_width/2)+"px"
     slider.appendChild(handle2)
 
@@ -879,23 +797,23 @@ leon.range = function(obj) {
         if (x > 0) {
           for (var p = min; p <= max; p++) {
             if (x < tick_positions[p]+tick_width/2) {
-              if (p != value) setvalue(p)
+              if (p != value) self.value(p)
               break;
             }
           }
         }
-        else if (min != value) setvalue(min)
+        else if (min != value) self.value(min)
       }
       else if (x >= tick_positions[value]+tick_width/2) {
         if (x < parseFloat(slider.style.width,10)+handle_width) {
           for (var p = max; p >= min; p--) {
             if (x > tick_positions[p]-tick_width/2) {
-              if (p != value) setvalue(p)
+              if (p != value) self.value(p)
               break;
             }
           }
         }
-        else if (max != value) setvalue(max)
+        else if (max != value) self.value(max)
       }
       
     }
@@ -920,7 +838,7 @@ leon.range = function(obj) {
     }
     label_step = total/i
     
-    var i = Math.floor(available_width/leon.font.size)-1, total = max-min
+    var i = Math.floor(available_width/leon_vars.font.size)-1, total = max-min
     while ((total/i)%1 != 0) {
       i--
     }
@@ -935,20 +853,20 @@ leon.range = function(obj) {
   ticks.forEach(function(tick,i){
     
     tick.style.marginLeft = (-(tick_width)/2)+"px"
-    tick.style.width = (tick_width-leon.padding*2)+"px"
+    tick.style.width = (tick_width-leon_vars.padding*2)+"px"
 
     var value = parseFloat(tick.innerHTML)
     
     var percent = i*(100/(tick_length-1))
         x1 = handle_width/2,
-        x2 = parseFloat(slider.style.width,10)+x1-leon.border*2
+        x2 = parseFloat(slider.style.width,10)+x1-leon_vars.border*2
         
     tick_positions[value] = (percent/100) * (x2 - x1) + x1
     
     tick.style.left = tick_positions[value]+"px"
     tick.addEventListener("mousedown",function(){
       dragging = true
-      setvalue(this.innerHTML)
+      self.value(this.innerHTML)
     })
     tick.addEventListener("mouseup",function(){
       active_handle.className = "leon button handle"
@@ -961,7 +879,7 @@ leon.range = function(obj) {
       label.innerHTML = tick.innerHTML
       label.style.left = tick_positions[value]+"px"
       label.style.marginLeft = (-(handle_width)/2)+"px"
-      label.style.width = (handle_width-leon.padding*2)+"px"
+      label.style.width = (handle_width-leon_vars.padding*2)+"px"
       slider.insertBefore(label,ticks[0])
     }
     
@@ -976,7 +894,7 @@ leon.range = function(obj) {
         label.className = "leon button tick bullet"
       }
       label.style.marginLeft = (-(handle_width)/2)+"px"
-      label.style.width = (handle_width-leon.padding*2)+"px"
+      label.style.width = (handle_width-leon_vars.padding*2)+"px"
       label.style.left = tick_positions[value]+"px"
       slider.insertBefore(label,ticks[0])
     }
@@ -992,12 +910,82 @@ leon.range = function(obj) {
     ranger.style.width = (tick_positions[value2]-tick_positions[value])+"px"
   }
   
+  /*************/
+  /* FUNCTIONS */
+  /*************/
+  
+  this.value = function(value) {
+    
+    if (typeof value == "string") value = parseFloat(value)
+    
+    if (range) {
+      
+      var h1 = parseFloat(handle.innerHTML),
+          h2 = parseFloat(handle2.innerHTML)
+          
+      if (value < h1 || value <= h1+((h2-h1)/2)) {
+        h1 = value
+        handle.innerHTML = h1
+        handle.style.left = tick_positions[h1]+"px"
+        self.input.value = h1
+        active_handle = handle
+      }
+      else {
+        h2 = value
+        handle2.innerHTML = h2
+        handle2.style.left = tick_positions[h2]+"px"
+        self.input.alt = h2
+        active_handle = handle2
+      }
+      
+      ranger.style.left = tick_positions[h1]+"px"
+      ranger.style.width = (tick_positions[h2]-tick_positions[h1])+"px"
+      
+    }
+    else {
+      self.input.value = value
+      handle.innerHTML = value
+      handle.style.left = tick_positions[value]+"px"
+      active_handle = handle
+    }
+    active_handle.className = "leon button handle active"
+    self.input.onchange()
+    
+  }
+  
+  this.play = function() {
+    playing = true
+    play_button.className = "leon button play active"
+          
+    var current = parseFloat(handle.innerHTML,10)
+    if (current == max) frame = min;
+    else frame = current+step;
+    
+    self.value(frame)
+    frame += step;
+          
+    if (frame > max) {
+      self.stop();
+    }
+    else {
+      play_interval = setInterval(play_function,1500);
+    }
+    
+  }
+
+  this.stop = function() {
+    clearInterval(play_interval);
+    playing = false;
+    play_button.className = "leon button play"
+    active_handle.className = "leon button handle"
+  }
+  
 }
 /*
 CUSTOM RADIO TOGGLE CREATOR
 Creates a custom toggle menu, when passed the name of a radio button group
 */
-leon.select = function(obj) {
+leon_construct.select = function(obj) {
   
   var self = this
   
@@ -1029,7 +1017,7 @@ leon.select = function(obj) {
       self.dropdown.style.visibility = "hidden"
       self.node.className = "leon select"
       self.selected.open = false
-    },leon.time.fade*1000)
+    },leon_vars.time.fade*1000)
   }
   
   self.node = document.createElement("div")
@@ -1038,14 +1026,14 @@ leon.select = function(obj) {
   self.input.items.parentNode.insertBefore(self.node,self.input.items)
   
   if (self.input.items.label) {
-    var label = new leon.label(self.input.items.label,self.node)
+    var label = new leon_construct.label(self.input.items.label,self.node)
   }
   
   var arrow = "<span class='leon arrow'>&#8227</span>"
   
   self.input.items.label = self.input.items.selectedOptions[0].label + arrow
   
-  this.selected = new leon.button(self.input.items,self.node)
+  this.selected = new leon_construct.button(self.input.items,self.node)
   self.selected.open = false
   
   this.dropdown = document.createElement("div")
@@ -1056,7 +1044,7 @@ leon.select = function(obj) {
   
   this.options = []
   for (var i = 0; i < self.input.items.length; i++) {
-    self.options.push(new leon.button(self.input.items[i],self.dropdown))
+    self.options.push(new leon_construct.button(self.input.items[i],self.dropdown))
   }
   
   self.selected.node.addEventListener("click", function(e){
@@ -1074,7 +1062,7 @@ leon.select = function(obj) {
     
     var html = option.node.innerHTML
     option.node.innerHTML = html + arrow
-    var width = option.node.offsetWidth - leon.padding*2
+    var width = option.node.offsetWidth - leon_vars.padding*2
     if (width > w) w = width
     option.node.innerHTML = html
     
@@ -1095,14 +1083,14 @@ leon.select = function(obj) {
   })
   
   self.selected.node.style.width = w+"px"
-  self.dropdown.style.width = (w+leon.padding*2+leon.border*2)+"px"
+  self.dropdown.style.width = (w+leon_vars.padding*2+leon_vars.border*2)+"px"
   
 }
 /*
 CUSTOM RADIO TOGGLE CREATOR
 Creates a custom toggle menu, when passed the name of a radio button group
 */
-leon.text = function(obj) {
+leon_construct.text = function(obj) {
   
   if (obj.items.label) {
     obj.items.label.className = "leon label"
