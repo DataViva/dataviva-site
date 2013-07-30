@@ -194,6 +194,8 @@
     app.title_width -= 12
     d3.select("#builder")
       .style("max-width",app.title_width+"px")
+      
+    app.title_height = d3.select("#settings").node().offsetHeight+5
     
     app.font = null
     var fonts = ["HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"]
@@ -324,6 +326,7 @@
       .click_function(app.html)
       .font(app.font)
       .font_weight("lighter")
+      .title_height(app.title_height)
     
     // Start building a new app
     app.start = function(new_url) {
@@ -362,7 +365,7 @@
             }
             
             // Show/hide filters depending on build requirements
-            var filters = ["bra_1","isic_0","cbo_0","hs_0","wld_0"]
+            var filters = ["bra_0","bra_1","isic_0","cbo_0","hs_0","wld_0"]
             filters.forEach(function(filter){
               var type = filter.split("_")[0],
                   index = filter.split("_")[1]
@@ -656,19 +659,24 @@
       })
       
       var total_width = 0,
-          avail_width = d3.selectAll("#app_controls").node().offsetWidth
+          avail_width = app.title_width
       d3.selectAll("#app_controls > div")
         .each(function(){
           total_width += this.offsetWidth
         })
-        
+      d3.selectAll("#builder > br").remove()
       if (total_width > avail_width) {
-        var w = 0
+        var w = 0, firstbreak = true
         d3.selectAll("#app_controls > div")
           .each(function(){
             if (w > avail_width/2) {
+              if (firstbreak) {
+                firstbreak = false
+                var br = document.createElement("br")
+                this.parentNode.parentNode.insertBefore(br,this.parentNode)
+              }
               w = 0
-              br = document.createElement("br")
+              var br = document.createElement("br")
               this.parentNode.insertBefore(br,this)
             }
             w += this.offsetWidth
