@@ -49,12 +49,28 @@ def delete_old_opp_gain_from_db(year, geo_level):
 
 def add_new_opp_gain_to_db(year, opp_gain):
     '''add new opp_gain vals'''
+    to_add = []
+    counter = 0
+    total_inserts = 0
     for hs in opp_gain.columns:
-        to_add = []
         for bra in opp_gain.index:
+            counter += 1
+            total_inserts += 1
             to_add.append([opp_gain[hs][bra], year, bra, hs])
-        cursor.executemany("update secex_ybp set opp_gain=%s where year=%s " \
-                                "and bra_id=%s and hs_id=%s", to_add)
+            if counter >= 2500:
+                cursor.executemany("update secex_ybp set opp_gain=%s where " \
+                                "year=%s and bra_id=%s and hs_id=%s", to_add)
+                counter = 0
+                to_add = []
+                
+            if total_inserts % 10000 == 0:
+                sys.stdout.write('\r rows updated: ' + str(total_inserts) + ' ' * 20)
+                sys.stdout.flush() # important
+    
+    print
+    '''cant forget to add any stragglers to the DB'''
+    cursor.executemany("update secex_ybp set opp_gain=%s where " \
+                    "year=%s and bra_id=%s and hs_id=%s", to_add)
 
 def calculate_opp_gain(year, geo_level):
     
@@ -81,7 +97,7 @@ def calculate_opp_gain(year, geo_level):
     print "Deleteing old opportunity gain values..."
     delete_old_opp_gain_from_db(year, geo_level)
     
-    '''delete database'''
+    '''add to database'''
     print "Adding new opportunity gain values..."
     add_new_opp_gain_to_db(year, opp_gain)
 
