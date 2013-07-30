@@ -36,7 +36,7 @@ body {
 }
 
 #app {
-  margin: 0px 5px;
+  margin: 5px;
   background-color: #ffffff;
   position: absolute;
   -webkit-transition: top 0.6s;
@@ -77,9 +77,9 @@ div#toggles > .leon.button.square {
 }
 
 div#builder {
-  left: 50%;
+  left: 0px;
   position: absolute;
-  text-align: center;
+  text-align: left;
   -webkit-transition: top 0.6s;
      -moz-transition: top 0.6s;
           transition: top 0.6s;
@@ -89,10 +89,18 @@ div#builder {
 
 div#builder > div {
   display: inline-block;
+  margin: 10px -5px 5px 10px;
 }
 
 div#builder div.leon.label {
   padding-left: 0px;
+}
+
+div#builder div#app_controls {
+  background-color: #f9f9f9;
+  -webkit-box-shadow: inset 0px 1px 6px rgba(0,0,0,0.1);
+          box-shadow: inset 0px 1px 6px rgba(0,0,0,0.1);
+  margin: 5px 5px 5px 10px;
 }
 
 div.filter_button {

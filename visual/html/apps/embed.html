@@ -20,130 +20,89 @@
 
   <div id="builder">
 
-    <div id="app_selector">
-      <label for="app_select">App</label>
-      <select id="app_select" class="leon_object" onchange="builder.app(this.options[this.selectedIndex].id)">
-        {% set pre_app = None %}
-        {% for build in all_builds %}
+    <select id="app_select" onchange="builder.app(this.options[this.selectedIndex].id)">
+      {% set pre_app = None %}
+      {% for build in all_builds %}
 
-          {% if pre_app != build.app.type %}
-            {% set pre_app = build.app.type %}
-            <option icon="url('/static/img/icons/app/app_{{build.app.type}}.png')" color="{{build.app.color}}" value="{{build.app.type}}" id="{{build.app.type}}"{% if build.app.type == current_build.app.type %} selected="selected"{% endif %}>
-                {{ build.app.title }}
-            </option>
-          {% endif %}
+        {% if pre_app != build.app.type %}
+          {% set pre_app = build.app.type %}
+          <option icon="url('/static/img/icons/app/app_{{build.app.type}}.png')" color="{{build.app.color}}" value="{{build.app.type}}" id="{{build.app.type}}"{% if build.app.type == current_build.app.type %} selected="selected"{% endif %}>
+              {{ build.app.title }}
+          </option>
+        {% endif %}
 
-        {% endfor %}
-      </select>
+      {% endfor %}
+    </select>
+    
+    <div id="output" class="leon button" onclick="builder.selector(this.id)">
+      <span class="list_text">Change Output</span>
+      <i class="icon-list-alt"></i>
     </div>
 
-    <div id="bra_0_select" class="filter_button">
-      <div class="leon label">Location</div>
-      <div id="bra_0" class="leon button" onclick="builder.selector(this.id)">
-        {% set bra = current_build.bra[0] %}
-        <div class="leon icon" style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"></div>
-        <span class="list_text">{{ bra.name_en }}</span>
-        <i class="icon-list-alt"></i>
-      </div>
+    <div id="bra_0" class="leon button" onclick="builder.selector(this.id)">
+      {% set bra = current_build.bra[0] %}
+      <div class="leon icon" style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"></div>
+      <span class="list_text">{{ bra.name_en }}</span>
+      <i class="icon-list-alt"></i>
     </div>
     
     {% if current_build.bra[1] %}
     {% set bra = current_build.bra[1] %}
     {% endif %}
-    <div id="bra_1_select" class="filter_button">
-      <div class="leon label">Location</div>
-      <div id="bra_1" class="leon button" onclick="builder.selector(this.id)">
-        <div class="leon icon"{% if bra %} style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"{% endif %}></div>
-        <span class="list_text">{% if bra %}{{ bra.name_en }}{% endif %}</span>
-        <i class="icon-list-alt"></i>
-      </div>
+    <div id="bra_1" class="leon button" onclick="builder.selector(this.id)">
+      <div class="leon icon"{% if bra %} style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"{% endif %}></div>
+      <span class="list_text">{% if bra %}{{ bra.name_en }}{% endif %}</span>
+      <i class="icon-list-alt"></i>
     </div>
     
     {% if current_build.isic %}
     {% set isic = current_build.isic[0] %}
     {% endif %}
-    <div id="isic_0_select" class="filter_button">
-      <div class="leon label">Industry</div>
-      <div id="isic_0" class="leon button" onclick="builder.selector(this.id)">
-        <div class="leon icon"{% if isic %} style="background-color:{{ isic.color }}; background-image:url('/static/img/icons/isic/isic_{{ isic.id[:1] }}.png')"{% endif %}></div>
-        <span class="list_text">{% if isic %}{{ isic.name_en }}{% endif %}</span>
-        <i class="icon-list-alt"></i>
-      </div>
+    <div id="isic_0" class="leon button" onclick="builder.selector(this.id)">
+      <div class="leon icon"{% if isic %} style="background-color:{{ isic.color }}; background-image:url('/static/img/icons/isic/isic_{{ isic.id[:1] }}.png')"{% endif %}></div>
+      <span class="list_text">{% if isic %}{{ isic.name_en }}{% endif %}</span>
+      <i class="icon-list-alt"></i>
     </div>
 
     {% if current_build.cbo %}
     {% set cbo = current_build.cbo[0] %}
     {% endif %}
-    <div id="cbo_0_select" class="filter_button">
-      <div class="leon label">Occupation</div>
-      <div id="cbo_0" class="leon button" onclick="builder.selector(this.id)">
-        <div class="leon icon"{% if cbo %} style="background-color:{{ cbo.color }}; background-image:url('/static/img/icons/cbo/cbo_{{ cbo.id[:1] }}.png')"{% endif %}></div>
-        <span class="list_text">{% if cbo %}{{ cbo.name_en }}{% endif %}</span>
-        <i class="icon-list-alt"></i>
-      </div>
+    <div id="cbo_0" class="leon button" onclick="builder.selector(this.id)">
+      <div class="leon icon"{% if cbo %} style="background-color:{{ cbo.color }}; background-image:url('/static/img/icons/cbo/cbo_{{ cbo.id[:1] }}.png')"{% endif %}></div>
+      <span class="list_text">{% if cbo %}{{ cbo.name_en }}{% endif %}</span>
+      <i class="icon-list-alt"></i>
     </div>
 
     {% if current_build.hs %}
     {% set hs = current_build.hs[0] %}
     {% endif %}
-    <div id="hs_0_select" class="filter_button">
-      <div class="leon label">Product Export</div>
-      <div id="hs_0" class="leon button" onclick="builder.selector(this.id)">
-        <div class="leon icon"{% if hs %} style="background-color:{{ hs.color }}; background-image:url('/static/img/icons/hs/hs_{{ hs.id[:2] }}.png')"{% endif %}></div>
-        <span class="list_text">{% if hs %}{{ hs.name_en }}{% endif %}</span>
-        <i class="icon-list-alt"></i>
-      </div>
+    <div id="hs_0" class="leon button" onclick="builder.selector(this.id)">
+      <div class="leon icon"{% if hs %} style="background-color:{{ hs.color }}; background-image:url('/static/img/icons/hs/hs_{{ hs.id[:2] }}.png')"{% endif %}></div>
+      <span class="list_text">{% if hs %}{{ hs.name_en }}{% endif %}</span>
+      <i class="icon-list-alt"></i>
     </div>
 
     {% if current_build.wld %}
     {% set wld = current_build.wld[0] %}
     {% endif %}
-    <div id="wld_0_select" class="filter_button">
-      <div class="leon label">Trade Partner</div>
-      <div id="wld_0" class="leon button" onclick="builder.selector(this.id)">
-        <div class="leon icon"{% if wld %} style="background-color:{{ wld.color }}; background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
-        <span class="list_text">{% if wld %}{{ wld.name_en }}{% endif %}</span>
-        <i class="icon-list-alt"></i>
-      </div>
+    <div id="wld_0" class="leon button" onclick="builder.selector(this.id)">
+      <div class="leon icon"{% if wld %} style="background-color:{{ wld.color }}; background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
+      <span class="list_text">{% if wld %}{{ wld.name_en }}{% endif %}</span>
+      <i class="icon-list-alt"></i>
     </div>
-    
-    {% set pre_app = None %}
-    {% for build in all_builds %}
-
-      {% if pre_app != build.app.type %}
-        {% if pre_app != None %}
-          </select></div>
-        {% endif %}
-        {% set pre_app = build.app.type %}
-        <div id="{{ build.app.type }}_output_div" class="output_div">
-        <label for="output_{{ build.app.type }}">Output</label>
-        <select id="output_{{ build.app.type }}" class="leon_object output" onchange="app.start(this.options[this.selectedIndex].id)">
-      {% endif %}
-
-      <option value="{{ build.url() }}" id="{{ build.url() }}" {% if build.id == current_build.id %} selected="selected"{% endif %}>
-        {{ build.title() }}
-      </option>
-
-    {% endfor %}
-    </select></div>
     
     <div id="app_controls"></div>
   
   </div>
 
-  <div id="toggles">
-
-    <a id="controls_toggle" class="leon button square" onclick="builder.controls()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-cogs"></i></a>
-    <a id="refresh" class="leon button square" onclick="app.start()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-refresh"></i></a>
-  
-  </div>
-
   <div id="settings">
 
+    <a id="refresh" class="leon button square" onclick="app.start()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-refresh"></i></a>
     <a id="file" class="leon button square" onclick="builder.selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-save"></i></a>
     <a id="starred" class="leon button square" onclick="app.star()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
     <a id="help" class="leon button square" onclick="builder.selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-question-sign"></i></a>
     <a id="full_screen" class="leon button square" onclick="window.open(window.location.href,'_blank')" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-fullscreen"></i></a>
+    <a id="controls_toggle" class="leon button square" onclick="builder.controls()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-cogs"></i></a>
   
   </div>
 
@@ -169,7 +128,7 @@
   
   <script type="text/javascript">
     
-    var loading = visual.ui.loading("body")
+    var loading = new visual.ui.loading("body")
   
     loading.text("Initializing App").show()
     
@@ -206,26 +165,13 @@
       "width": 600,
       "height": "80%"
     })
-  
-    // Stylize SELECT menus
-    var selects = leon(".leon_object")
+    
+    leon("#app_select")
     
     // Hide full-screen button while in full-screen
     if (parent.location.pathname.indexOf("embed") >= 0) {
       d3.select("#full_screen").remove();
     }
-    
-    // Set the max-width for the builder div
-    var settings_width = d3.select("#settings").node().offsetWidth,
-        toggles_width = d3.select("#toggles").node().offsetWidth
-        
-    var w = window.innerWidth
-        w -= d3.max([settings_width,toggles_width])*2
-        w -= 12
-        
-    d3.select("#builder")
-      .style("margin-left",-w/2+"px")
-      .style("max-width",w+"px")
     
     /*******************************/
     /* App Functions and Variables */
@@ -241,6 +187,13 @@
     app.vars = {{ global_vars|safe }}
     app.solos = []
     app.filters = []
+    
+    // Set the max-width for the builder div and app_title
+    app.title_width = window.innerWidth
+    app.title_width -= d3.select("#settings").node().offsetWidth
+    app.title_width -= 12
+    d3.select("#builder")
+      .style("max-width",app.title_width+"px")
     
     app.font = null
     var fonts = ["HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"]
@@ -374,6 +327,9 @@
     
     // Start building a new app
     app.start = function(new_url) {
+          
+      // Hide popover
+      visual.popover.hide()
       
       if (new_url) app.url = new_url
       loading.text("Building App").show(app.create)
@@ -381,7 +337,7 @@
     }
     
     app.create = function() {
-          
+
       d3.select("#ui_bottom").selectAll("*").remove();
       d3.select("#app_controls").selectAll("*").remove();
       vizwhiz.tooltip.remove();
@@ -395,12 +351,15 @@
           }
           else {
             
-            if (app.build && app.build.app.type != data.current_build.app.type) {
-              builder.app(data.current_build.app.type,true)
-            }
             // Set public current build variable
             app.build = data.current_build
             builder.url()
+
+            builder.outputs(data.all_builds)
+            
+            if (app.build && app.build.app.type != data.current_build.app.type) {
+              builder.app(data.current_build.app.type,true)
+            }
             
             // Show/hide filters depending on build requirements
             var filters = ["bra_1","isic_0","cbo_0","hs_0","wld_0"]
@@ -408,11 +367,11 @@
               var type = filter.split("_")[0],
                   index = filter.split("_")[1]
               if (app.build[type] && app.build[type][index]) {
-                d3.select("#"+filter+"_select").style("display","inline-block")
+                d3.select("#"+filter).style("display","inline-block")
                 builder.filter(app.build[type][index],filter,true)
               }
               else {
-                d3.select("#"+filter+"_select").style("display","none")
+                d3.select("#"+filter).style("display","none")
               }
             })
             
@@ -696,6 +655,26 @@
         
       })
       
+      var total_width = 0,
+          avail_width = d3.selectAll("#app_controls").node().offsetWidth
+      d3.selectAll("#app_controls > div")
+        .each(function(){
+          total_width += this.offsetWidth
+        })
+        
+      if (total_width > avail_width) {
+        var w = 0
+        d3.selectAll("#app_controls > div")
+          .each(function(){
+            if (w > avail_width/2) {
+              w = 0
+              br = document.createElement("br")
+              this.parentNode.insertBefore(br,this)
+            }
+            w += this.offsetWidth
+          })
+      }
+      
       var nesting = []
       depths[app.build.output].forEach(function(d){
         nesting.push(app.build.output+"_"+d)
@@ -725,7 +704,7 @@
       /* Network Specific Variables */
       /******************************/  
       if (app.build.app.type == "network") {
-        var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca";
+        var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca"
         app.viz
           .links(app.networks[app.build.output].edges)
           .nodes(app.networks[app.build.output].nodes)
@@ -736,11 +715,12 @@
       /* Rings Specific Variables */
       /****************************/
       else if (app.build.app.type == "rings") {
+        var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca"
         app.viz
           .links(app.networks[app.build.output].edges)
           .nodes(app.networks[app.build.output].nodes)
           .highlight(app.build[app.build.output][0].id)
-          .active_var("active")
+          .active_var(av)
       }
   
       /******************************/
@@ -778,7 +758,7 @@
       /* Scatter Specific Variables */
       /******************************/
       else if (app.build.app.type == "scatter") {
-  
+        var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca"
         app.viz
           .xaxis_var("distance")
           .yaxis_var("complexity")
@@ -786,7 +766,7 @@
           .yaxis_scale("linear")
           .mirror_axis(false)
           .spotlight(app.vars.spotlight)
-        
+          .active_var(av)
       } 
   
       /******************************/
@@ -1085,13 +1065,11 @@
           app.vars.controls = "false";
           d3.select("#ui_bottom").style("display","none")
           d3.select("#settings").style("display","none")
-          d3.select("#toggles").style("display","none")
           d3.select("#builder").style("display","none")
         }
         else {
           d3.select("#ui_bottom").style("display","block")
           d3.select("#settings").style("display","block")
-          d3.select("#toggles").style("display","block")
           d3.select("#builder").style("display","block")
         }
 
@@ -1114,9 +1092,6 @@
       app.height -= d3.select("#ui_bottom").node().offsetHeight
       if (app.vars.controls != "false") app.height -= d3.select("#builder").node().offsetHeight
       app.width = window.innerWidth-10;
-      
-      app.title_width = app.width
-      app.title_width -= (d3.max([d3.select("#toggles").node().offsetHeight,d3.select("#settings").node().offsetHeight])*5)
       
       d3.select("#app")
         .style("height",app.height+"px")
@@ -1168,16 +1143,60 @@
     /*********************/
     
     var builder = {}
-    builder.filter = function(obj,id,static) {
+    builder.outputs = function(builds) {
+      app.all_builds = builds
       
+
+      app.all_builds.forEach(function(build){
+        d3.select("#output_"+build.app.type).remove()
+      })
+      
+      app.all_builds.forEach(function(build){
+        
+        if (d3.select("#output_"+build.app.type).empty()) {
+          visual.popover.create({
+            "id": "output_"+build.app.type,
+            "width": 600,
+            "height": "80%"
+          })
+          d3.select("#output_"+build.app.type)
+            .style("padding","10px")
+            .style("overflow","scroll")
+        }
+        
+        if (d3.select("#output_"+build.app.type).select("."+build.dataset).empty()) {
+          d3.select("#output_"+build.app.type).append("div")
+            .attr("class",build.dataset)
+            .append("div")
+              .attr("class","title")
+              .text(visual.format.text(build.dataset))
+        }
+        
+        d3.select("#output_"+build.app.type).select("."+build.dataset).append("div")
+          .attr("id",build.url)
+          .attr("class","output decision icon "+build.app.type)
+          .html(build.title)
+          .on(vizwhiz.evt.click,function(){
+            app.start(this.id)
+          })
+        
+      })
+      
+      if (d3.selectAll("#output_"+app.build.app.type+" .output")[0].length == 1) {
+        d3.select("#output").style("display","none")
+      }
+      else {
+        d3.select("#output").style("display","inline-block")
+      }
+      
+    }
+    
+    builder.filter = function(obj,id,static) {
+
       var type = id.split("_")[0],
           index = id.split("_")[1],
           old_obj = app.build[type][index]
-          old_name = old_obj.name ? old_obj.name : old_obj.name_en,
           new_name = obj.name ? obj.name : obj.name_en
-          
-      // Hide popover
-      visual.popover.hide("#popover");
       
       if (type == "bra") {
         var url_index = 2
@@ -1189,20 +1208,6 @@
         var url_index = 4
       }
       
-      d3.selectAll("select.output > option")
-        .each(function(){
-          var url = this.id.split("/"),
-              old_ids = url[url_index].split("+")
-          if (old_ids[index] && (url_index == 2 || old_ids[index] != "all")) old_ids[index] = obj.id
-          url[url_index] = old_ids.join("+")
-          this.id = url.join("/")
-          this.value = url.join("/")
-          if (this.innerHTML.indexOf(old_name) >= 0) {
-            this.innerHTML = this.innerHTML.replace(old_name,new_name)
-          }
-        })
-      
-      leon("select")
       app.build[type][index] = obj
       
       var url = app.url.split("/")
@@ -1210,7 +1215,7 @@
       url = url.join("/")
       app.url = url
       
-      var button = d3.select("#"+id+"_select")
+      var button = d3.select("#"+id)
       
       if (type == "bra" && !obj.distance) obj.distance = 0
 
@@ -1223,7 +1228,7 @@
       if (obj.distance > 0 && type == "bra") new_name += " ("+obj.distance+"km)"
 
       button.select(".list_text").text(new_name)
-
+      
       if (!static) {
         app.start(url)
       }
@@ -1234,13 +1239,13 @@
       
       var match = null
       
-      d3.selectAll(".output_div").style("display","none")
-      
-      var options = d3.select("#"+app_name+"_output_div").selectAll("option")
+      var options = d3.select("#output_"+app_name).selectAll(".output")
       
       if (options[0].length > 1) {
-        d3.select("#"+app_name+"_output_div")
-          .style("display","inline-block")
+        d3.select("#output").style("display","inline-block")
+      }
+      else {
+        d3.select("#output").style("display","none")
       }
       
       options
@@ -1253,9 +1258,9 @@
           s = s.join("/")
           if (a == s) match = this.id
         })
-      if (!match) match = d3.select("#"+app_name+"_output_div option").node().id
-      
-      selects["output_"+app_name].set(match)
+        console.log(match)
+      if (!match) match = options[0][0].id
+      console.log(match)
       if (!static) app.start(match)
       
     }
@@ -1385,41 +1390,50 @@
     
     builder.selector = function(id) {
       
-      var s = id.split("_")
-      var type = s[0]
-      if (s[1]) var index = s[1]
-      
-      if (type == "help") {
-        var init = app.build.app.type,
-            callback = null
-      }
-      else if (type == "file") {
-        var init = "all",
-            callback = "app.download"
+      if (id == "output") {
+        
+        visual.popover.show("#output_"+app.build.app.type)
+        
       }
       else {
-        var init = app.build[type][index].id,
-            callback = builder.filter
-      }
-    
-      // if (app.build.bra[0].distance) {
-//         var dist = app.build.bra[0].distance
-//       }
-//       else {
-//         var dist = 0
-//       }
 
-      selector
-        .callback(callback)
-        // .distance(dist)
-        .initial_value(init)
-        .type(id)
-    
-      d3.select("#popover")
-        .call(selector);
+        var s = id.split("_")
+        var type = s[0]
+        if (s[1]) var index = s[1]
       
-      // Show popover
-      visual.popover.show("#popover");
+        if (type == "help") {
+          var init = app.build.app.type,
+              callback = null
+        }
+        else if (type == "file") {
+          var init = "all",
+              callback = "app.download"
+        }
+        else {
+          var init = app.build[type][index].id,
+              callback = builder.filter
+        }
+    
+        // if (app.build.bra[0].distance) {
+  //         var dist = app.build.bra[0].distance
+  //       }
+  //       else {
+  //         var dist = 0
+  //       }
+
+        selector
+          .callback(callback)
+          // .distance(dist)
+          .initial_value(init)
+          .type(id)
+    
+        d3.select("#popover")
+          .call(selector);
+      
+        // Show popover
+        visual.popover.show("#popover");
+        
+      }
         
     }
     
@@ -1437,7 +1451,7 @@
     /************************/
     /* Initialize First App */
     /************************/
-    builder.app("{{ current_build.app.type }}")
+   app.start()
   
   </script>
 

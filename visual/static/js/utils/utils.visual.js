@@ -180,10 +180,11 @@ visual.ui.loading = function(parent) {
   this.show = function(callback) {
     
     self.div.style("display","block")
-      
+    
     setTimeout(function(){
+      
       self.div.style("opacity",1)
-
+      
       if (callback) {
         setTimeout(callback,self.timing)
       }
@@ -209,7 +210,7 @@ visual.ui.loading = function(parent) {
     self.words.html(text)
     return self
   }
-  
+
   return this
   
 }
@@ -305,14 +306,6 @@ visual.popover.create = function(params) {
       pop_width = params.width ? params.width : "50%",
       pop_height = params.height ? params.height : "50%";
   
-  if (d3.select("#popover_mask").empty()) {
-    d3.select("body").append("div")
-      .attr("id","popover_mask")
-      .on(vizwhiz.evt.click,function(){
-        visual.popover.hide();
-      })
-  }
-  
   document.onkeyup = function(e) {
     if (e.keyCode == 27) { visual.popover.hide(); }   // esc
   };
@@ -340,14 +333,20 @@ visual.popover.create = function(params) {
     .attr("class","popover")
     .style("width",w_px+"px")
     .style("height",h_px+"px")
-    .style("left","50%")
-    .style("top","50%")
     .style("margin-left",-w_px/2+"px")
     .style("margin-top",-h_px/2+"px")
   
 }
 
 visual.popover.show = function(id) {
+  
+  if (d3.select("#popover_mask").empty()) {
+    d3.select("body").append("div")
+      .attr("id","popover_mask")
+      .on(vizwhiz.evt.click,function(){
+        visual.popover.hide();
+      })
+  }
   
   d3.select("#popover_mask")
     .style("display","block")
@@ -380,11 +379,13 @@ visual.popover.hide = function(id) {
 
         d3.select("#popover_mask").style("opacity",0);
         p.style("opacity",0);
-    
+        
+        var timing = parseFloat(p.style("transition-duration"),10)*1000
+        
         setTimeout(function(){
           p.style("display","none")
           d3.select("#popover_mask").style("display","none")
-        },250)
+        },timing)
         
       }
       

@@ -458,7 +458,8 @@ function Selector() {
                 .attr("class","leon button")
                 .html("Show "+suffix)
                 .on(vizwhiz.evt.click,function(){
-                  select_value(v);
+                  d3.event.stopPropagation()
+                  select_value(v)
                 });
             }
             else if (type == "bra" && v.id.length == depths[depths.length-1]) {
@@ -503,7 +504,8 @@ function Selector() {
                 .attr("class","leon button")
                 .html("Select")
                 .on(vizwhiz.evt.click,function(){
-                  callback(data[v.id],name);
+                  d3.event.stopPropagation()
+                  callback(data[v.id],name)
                 });
             }
           
@@ -577,7 +579,7 @@ function Selector() {
         .append("div")
           .attr("class","selector")
       
-      var selector_load = visual.ui.loading(container.node())
+      var selector_load = new visual.ui.loading(container.node())
       selector_load.text("Loading Attribute List").show()
       
       if (type == "help") {

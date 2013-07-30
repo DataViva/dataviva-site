@@ -39,7 +39,7 @@ body {
 #container {
   display: block;
   margin: 0px auto;
-  padding: 68px 0px 80px 0px;
+  padding: 68px 0px 59px 0px;
   text-align: center;
   width: 980px;
 }
@@ -108,10 +108,6 @@ div.guide_app {
 iframe.guide_app {
   height: 600px;
   width: 800px;
-}
-
-iframe.app_builder {
-  
 }
 
 /******************/
@@ -188,4 +184,40 @@ div.loading > .text {
   text-shadow: 0px 0px 6px #efefef;
   top: 50%;
   width: 100%;
+}
+
+/*******************/
+/* Popover Styling */
+/*******************/
+
+div#popover_mask {
+  display: none;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 5000;
+  background-color: #fafafa;
+  opacity: 0;
+  -webkit-transition: opacity 0.6s;
+     -moz-transition: opacity 0.6s;
+       -o-transition: opacity 0.6s;
+          transition: opacity 0.6s;
+}
+
+div.popover {
+  background-color: white;
+  -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+          box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+  display: none;
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  -webkit-transition: opacity 0.6s;
+     -moz-transition: opacity 0.6s;
+       -o-transition: opacity 0.6s;
+          transition: opacity 0.6s;
+  z-index: 6000;
 }

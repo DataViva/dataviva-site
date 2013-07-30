@@ -58,8 +58,11 @@ class Build(db.Model, AutoSerialize):
                 self.bra[i].id = "all"
                 self.bra[i].icon = "/static/img/icons/wld/wld_sabra.png"
             else:
+                state = b[:2]
+                if self.output == "bra":
+                    b = state
                 self.bra.append(Bra.query.get(b))
-                self.bra[i].icon = "/static/img/icons/bra/bra_{0}.png".format(b[:2])
+                self.bra[i].icon = "/static/img/icons/bra/bra_{0}.png".format(state)
 
     def set_filter1(self, filter):
         if self.filter1 != "all":

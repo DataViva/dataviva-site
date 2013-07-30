@@ -94,7 +94,8 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     
     if request.is_xhr:
         return jsonify({
-            "current_build": current_build.serialize()
+            "current_build": current_build.serialize(),
+            "all_builds": [b.serialize() for b in all_builds]
         })
     
     return render_template("apps/embed.html",

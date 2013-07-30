@@ -16,16 +16,9 @@
 
   <script>
   
-    var w = window.innerWidth-20,
-        h = window.innerHeight-180,
-        aspect = w/h
+    var width = window.innerWidth-50,
+        height = window.innerHeight-167
         
-    if (aspect >= 6/4) {
-      var height = h, width = h*(6/4)
-    }
-    else {
-      var height = w/(6/4), width = w
-    }
     d3.select("#container")
       .style("width",width+"px")
     d3.select("iframe.app_builder")
