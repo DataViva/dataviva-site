@@ -15,7 +15,7 @@ def page_not_found(error):
 
 @mod.before_request
 def before_request():
-    cache_id = request.path
+    cache_id = request.path + g.locale
     # first lets test if this query is cached
     cached_q = cached_query(cache_id)
     # if cached_q and request.is_xhr:
@@ -27,7 +27,7 @@ def before_request():
 def after_request(response):
     if response.status_code != 302:
     # if response.status_code != 302 and request.is_xhr:
-        cache_id = request.path
+        cache_id = request.path + g.locale
         # test if this query was cached, if not add it
         cached_q = cached_query(cache_id)
         if cached_q is None:
@@ -38,9 +38,9 @@ def after_request(response):
     return response
 
 def fix_name(attr):
-    name_lang = "name_" + g.lang
-    desc_lang = "desc_" + g.lang
-    key_lang = "keywords_" + g.lang
+    name_lang = "name_" + g.locale
+    desc_lang = "desc_" + g.locale
+    key_lang = "keywords_" + g.locale
     if "desc_en" in attr:
         attr["desc"] = attr[desc_lang]
         del attr["desc_en"]
