@@ -11,8 +11,8 @@ matplotlib
 
 # scipy for calculations and regressions
 # required for pandas
-scikits.statsmodels
 scipy
+scikits.statsmodels
 
 # Pandas library for doing matrix math, dataframes etc. similar to R
 pandas
