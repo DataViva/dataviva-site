@@ -55,25 +55,26 @@ function Selector() {
             .replace("munic",id)
             .replace("value",dist)
             
-          d3.json(u,function(raw_distances){
+          d3.json(u)
+            .header("X-Requested-With", "XMLHttpRequest")
+            .get(function(error,raw_distances){
 
-            var distances = [];
-            raw_distances.data.forEach(function(d,i){
-              if (i != 0) {
-                var string = data[d.bra_id_dest].name
-                string += " ("+d.distance+"km)";
-                distances.push(string)
-              }
-            })
+              var distances = [];
+              raw_distances.data.forEach(function(d,i){
+                if (i != 0) {
+                  var string = data[d.bra_id_dest].name
+                  string += " ("+d.distance+"km)";
+                  distances.push(string)
+                }
+              })
       
-            if (distances.length > 0) {
-              div.html("Including "+distances.join(", "))
-            } else {
-              div.html("No municipalities within that distance.")
-            }
-          }).on("progress",function(){
-            div.html("Loading...")
-          })
+              if (distances.length > 0) {
+                div.html("Including "+distances.join(", "))
+              } else {
+                div.html("No municipalities within that distance.")
+              }
+              
+            })
       
         }
         else {
@@ -600,10 +601,12 @@ function Selector() {
         create_elements()
       }
       else {
-        d3.json("/attrs/"+type+"/",function(attrs) {
-          data = attrs.data
-          clean_data()
-        })
+        d3.json("/attrs/"+type+"/")
+          .header("X-Requested-With", "XMLHttpRequest")
+          .get(function(error,attrs) {
+            data = attrs.data
+            clean_data()
+          })
       }
       
     })

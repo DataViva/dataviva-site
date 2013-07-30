@@ -28,34 +28,6 @@ function loader() {
   return draw
 }
 
-//////////////////////////////////////////////////////////////
-// GLOBAL NO DATA THING
-//
-//////////////////////////////////////////////////////////////
-
-function no_data() {
-
-  function draw(selection) {
-    selection.each(function(title) {
-      
-      var error = d3.select(this).append("div")
-        .attr("id","error")
-        
-      error.append("div")
-        .attr("id","title")
-        .html(title)
-        
-      error.append("div")
-        .attr("id","sub_title")
-        .html("Please modify your search filters")
-        
-    })
-  }
-  
-  return draw
-  
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // GLOBAL NAME FORMATTER                                                      
 // Inputs: the name to be formatted

@@ -7,21 +7,6 @@ body {
   width: 100%;
 }
 
-#error {
-  color: #888;
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  top: 50%;
-  margin-top: -30px;
-}
-
-#error #title {
-  color: #888;
-  font-size: 30px;
-  margin-bottom: 10px;
-}
-
 #builder #app_title {
   text-align: left;
   font-weight: bold;

@@ -421,45 +421,51 @@
             
             if (!app.data[app.build.data_url]) {
               q.defer(function(u,callback){
-                d3.json(u,function(d){
-                  app.data[app.build.data_url] = {}
-                  app.data[app.build.data_url].raw = d.data
-                  callback(error,d)
-                })
+                d3.json(u)
+                  .header("X-Requested-With", "XMLHttpRequest")
+                  .get(function(error,d){
+                    app.data[app.build.data_url] = {}
+                    app.data[app.build.data_url].raw = d.data
+                    callback(error,d)
+                  })
               },"/"+app.build.data_url)
             }
             
             if (!app.attrs[app.build.output]) {
               q.defer(function(u,callback){
-                d3.json(u,function(d){
-                  app.attrs[app.build.output] = {}
-                  d.data.forEach(function(a){
-                    app.attrs[app.build.output][a.id] = a
+                d3.json(u)
+                  .header("X-Requested-With", "XMLHttpRequest")
+                  .get(function(error,d){
+                    app.attrs[app.build.output] = {}
+                    d.data.forEach(function(a){
+                      app.attrs[app.build.output][a.id] = a
+                    })
+                    callback(error,d)
                   })
-                  callback(error,d)
-                })
               },"/attrs/"+app.build.output)
             }
             
             if (["network","rings"].indexOf(app.build.app.type) >= 0 
                 && !app.networks[app.build.output]) {
               q.defer(function(u,callback){
-                d3.json(u,function(d){
+                d3.json(u)
+                  .header("X-Requested-With", "XMLHttpRequest")
+                  .get(function(error,d){
                   
-                  d.edges.forEach(function(edge){
-                    if (["hs","isic"].indexOf(app.build.output) >= 0) {
-                      edge.source = d.nodes[edge.source]
-                      edge.target = d.nodes[edge.target]
-                    }
-                    else {
-                      edge.source = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.source })[0]
-                      edge.target = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.target })[0]
-                    }
+                    d.edges.forEach(function(edge){
+                      if (["hs","isic"].indexOf(app.build.output) >= 0) {
+                        edge.source = d.nodes[edge.source]
+                        edge.target = d.nodes[edge.target]
+                      }
+                      else {
+                        edge.source = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.source })[0]
+                        edge.target = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.target })[0]
+                      }
+                    })
+                  
+                    app.networks[app.build.output] = d
+                    callback(error,d)
                   })
-                  
-                  app.networks[app.build.output] = d
-                  callback(error,d)
-                })
               },"/static/json/networks/network_"+app.build.output+".json")
             }
             
@@ -467,7 +473,9 @@
               
               if (!app.land) {
                 q.defer(function(u,callback){
-                  d3.json(u,function(d){
+                  d3.json(u)
+                  .header("X-Requested-With", "XMLHttpRequest")
+                  .get(function(error,d){
                     app.land = d
                     callback(error,d)
                   })
@@ -477,7 +485,9 @@
               var state = app.build.bra[0].id.substr(0,2)
               if (!app.coords[state]) {
                 q.defer(function(u,callback){
-                  d3.json(u,function(d){
+                  d3.json(u)
+                  .header("X-Requested-With", "XMLHttpRequest")
+                  .get(function(error,d){
                     app.coords[state] = d
                     callback(error,d)
                   })
@@ -493,7 +503,9 @@
                 
               if (!app.data[app.build.req_url]) {
                 q.defer(function(u,callback){
-                  d3.json(u,function(d){
+                  d3.json(u)
+                  .header("X-Requested-With", "XMLHttpRequest")
+                  .get(function(error,d){
                     app.data[app.build.req_url] = {}
                     app.data[app.build.req_url].raw = d.data
                     callback(error,d)
@@ -506,7 +518,9 @@
                 
               if (!app.data[app.build.else_url]) {
                 q.defer(function(u,callback){
-                  d3.json(u,function(d){
+                  d3.json(u)
+                  .header("X-Requested-With", "XMLHttpRequest")
+                  .get(function(error,d){
                     app.data[app.build.else_url] = {}
                     app.data[app.build.else_url].raw = d.data
                     callback(error,d)
@@ -520,46 +534,8 @@
             
             function check_data() {
               
-              if (app.data[app.build.data_url].raw.length == 0) {
-                app.error("No Data Available")
-              }
-              else if (app.build.app.type == "rings") {
-                
-                var node = app.networks[app.build.output].nodes.filter(function(n){
-                  return n[app.build.output+"_id"] == app.build[app.build.output][0].id
-                })[0]
-                
-                if (app.build[app.build.output][0].id.length == depths[app.build.output[0]]) {
-                  app.error("Not available for Parent Categories")
-                }
-                else if (!node) {
-                  app.error("No Connections Available");
-                }
-                else {
-                  app.finish()
-                }
-                
-              }
-              else if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
+              if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
                 app.error("Geo Map only available for States");
-              }
-              else if (app.build.app.type == "scatter") {
-
-                var complexities = app.data[app.build.data_url].raw
-                  .filter(function(d){return d.complexity})
-                var distances = app.data[app.build.data_url].raw
-                  .filter(function(d){return d.distance})
-                  
-                if (!complexities.length) {
-                  app.error("No Complexities Available");
-                }
-                else if (!distances.length) {
-                  app.error("No Distances Available for Location");
-                }
-                else {
-                  app.finish()
-                }
-                
               }
               else {
         
@@ -576,9 +552,9 @@
     
     app.error = function(error) {
       console.log("[visual] ERROR: "+error)
-      app.resize(error)
+      app.resize()
       loading.hide()
-      d3.select("#app").html("").datum(error).call(no_data())
+      d3.select("#app").call(app.viz.error(error))
     }
     
     app.finish = function() {
@@ -736,6 +712,7 @@
         .total_bar(app.total())
         .highlight(null)
         .id_var(app.build.output+"_id")
+        .error(false)
         
       /******************************/
       /* Network Specific Variables */
@@ -1085,43 +1062,39 @@
         
     }
     
-    app.resize = function(error) {
+    app.resize = function() {
       
-      if (!error) {
-
-        var children = d3.select("#ui_bottom").node().childNodes,
-            min_width = 0;
+      var children = d3.select("#ui_bottom").node().childNodes,
+          min_width = 0;
           
-        for (i = 0; i < children.length; i++) {
-          var w = children[i].offsetWidth;
-          if (w > min_width) min_width = w;
-        }
-      
-        if (window.innerWidth < min_width || window.innerHeight <= 400) {
-          app.vars.controls = "false";
-          d3.select("#ui_bottom").style("display","none")
-          d3.select("#settings").style("display","none")
-          d3.select("#builder").style("display","none")
-        }
-        else {
-          d3.select("#ui_bottom").style("display","block")
-          d3.select("#settings").style("display","block")
-          d3.select("#builder").style("display","block")
-        }
+      for (i = 0; i < children.length; i++) {
+        var w = children[i].offsetWidth;
+        if (w > min_width) min_width = w;
+      }
+  
+      if (window.innerWidth < min_width || window.innerHeight <= 400) {
+        app.vars.controls = "false";
+        d3.select("#ui_bottom").style("display","none")
+        d3.select("#settings").style("display","none")
+        d3.select("#builder").style("display","none")
+      }
+      else {
+        d3.select("#ui_bottom").style("display","block")
+        d3.select("#settings").style("display","block")
+        d3.select("#builder").style("display","block")
+      }
 
-        d3.select("#builder").style("top",function(d){
-          if (app.vars.controls != "false") var u = 0
-          else var u = 1
-          return "-"+((this.offsetHeight+5)*u)+"px"
-        })
-      
-        if (app.vars.controls == "true") {
-          d3.select("#controls_toggle").attr("class","leon button square active")
-        }
-        else {
-          d3.select("#controls_toggle").attr("class","leon button square")
-        }
-        
+      d3.select("#builder").style("top",function(d){
+        if (app.vars.controls != "false") var u = 0
+        else var u = 1
+        return "-"+((this.offsetHeight+5)*u)+"px"
+      })
+  
+      if (app.vars.controls == "true") {
+        d3.select("#controls_toggle").attr("class","leon button square active")
+      }
+      else {
+        d3.select("#controls_toggle").attr("class","leon button square")
       }
 
       app.height = window.innerHeight;
@@ -1137,15 +1110,11 @@
           else var u = 0
           return ((d3.select("#builder").node().offsetHeight)*u)+"px"
         })
-        
-      if (!error) {
-        d3.select("#app").call(
-          app.viz
+        .call(app.viz
             .height(app.height)
             .width(app.width)
             .title_width(app.title_width)
           )
-      }
       
     }
     

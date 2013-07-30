@@ -448,17 +448,19 @@ visual.breadcrumbs = function() {
           var distance = 0
         }
         waiting.push(p);
-        d3.json("/attrs/"+type+"/"+id, function(data){
+        d3.json("/attrs/"+type+"/"+id)
+          .header("X-Requested-With", "XMLHttpRequest")
+          .get(function(data){
           
-          if (distance == 0) var name = data.data[0].name.toTitleCase();
-          else var name = data.data[0].name.toTitleCase() + " (within "+distance+"km)"
+            if (distance == 0) var name = data.data[0].name.toTitleCase();
+            else var name = data.data[0].name.toTitleCase() + " (within "+distance+"km)"
           
-          crumbs[i].text = name;
+            crumbs[i].text = name;
           
-          waiting.splice(waiting.indexOf(p),1);
-          if (waiting.length == 0) create_breadcrumb();
+            waiting.splice(waiting.indexOf(p),1);
+            if (waiting.length == 0) create_breadcrumb();
           
-        })
+          })
       }
     }
     

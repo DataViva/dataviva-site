@@ -25,9 +25,15 @@ def before_request():
 
 @mod.after_request
 def after_request(response):
+<<<<<<< HEAD
+    if response.status_code != 302:
+    # if response.status_code != 302 and request.is_xhr:
+        cache_id = request.path + g.locale
+=======
     # if response.status_code != 302:
     if response.status_code != 302 and request.is_xhr:
         cache_id = request.path
+>>>>>>> rudimentary viz-whiz error handling, cached attrs
         # test if this query was cached, if not add it
         cached_q = cached_query(cache_id)
         if cached_q is None:
