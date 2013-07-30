@@ -21,11 +21,11 @@ mod = Blueprint('apps', __name__, url_prefix='/apps')
 @mod.before_request
 def before_request():
     g.page_type = mod.name
-    
-    g.sabrina = {}
-    g.sabrina["outfit"] = "lab"
-    g.sabrina["face"] = "smirk"
-    g.sabrina["hat"] = "glasses"
+    g.sabrina = {
+        "outfit": "lab",
+        "face": "smirk",
+        "hat": "glasses"
+    }
 
 @mod.route('/embed/', defaults={"app_name": "tree_map", "dataset": "rais", 
             "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
@@ -69,11 +69,7 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     for build in all_builds:
         build.set_filter1(filter1)
         build.set_filter2(filter2)
-        # if build.id == 52:
-        #     raise Exception(bra_id, build.bra)
         build.set_bra(bra_id)
-        # if build.id == 52:
-        #     raise Exception(bra_id, build.bra, build.data_url())
     
     '''Get URL query parameters from reqest.args object to return to the view.
     '''
@@ -92,11 +88,11 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     # view_data = rais_ybi(bra_id='sp', isic_id='a0112').data
     # app.url_map.bind('/').match('/attrs/wld/nausa/')
     
-    if request.is_xhr:
-        return jsonify({
-            "current_build": current_build.serialize(),
-            "all_builds": [b.serialize() for b in all_builds]
-        })
+    # if request.is_xhr:
+    return jsonify({
+        "current_build": current_build.serialize(),
+        "all_builds": [b.serialize() for b in all_builds]
+    })
     
     return render_template("apps/embed.html",
         all_builds = all_builds,

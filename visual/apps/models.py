@@ -142,25 +142,26 @@ class Build(db.Model, AutoSerialize):
     
     '''Returns the english language title of this build.'''
     def title(self, **kwargs):
-        lang = "en"
+        lang = g.locale
         if "lang" in kwargs:
-            lang =  kwargs["lang"]
+            lang = kwargs["lang"]
         
         title_lang = "title_en" if lang == "en" else "title_pt"
         name_lang = "name_en" if lang == "en" else "name_pt"
         
         title = getattr(self, title_lang)
         
-        if "<bra>" in title:
-            title = title.replace("<bra>", " and ".join([getattr(b, name_lang) for b in self.bra]))
-        if "<isic>" in title:
-            title = title.replace("<isic>", ", ".join([getattr(i, name_lang) for i in self.isic]))
-        if "<hs>" in title:
-            title = title.replace("<hs>", ", ".join([getattr(h, name_lang) for h in self.hs]))
-        if "<cbo>" in title:
-            title = title.replace("<cbo>", ", ".join([getattr(c, name_lang) for c in self.cbo]))
-        if "<wld>" in title:
-            title = title.replace("<wld>", ", ".join([getattr(w, name_lang) for w in self.wld]))
+        if title:
+            if "<bra>" in title:
+                title = title.replace("<bra>", " and ".join([getattr(b, name_lang) for b in self.bra]))
+            if "<isic>" in title:
+                title = title.replace("<isic>", ", ".join([getattr(i, name_lang) for i in self.isic]))
+            if "<hs>" in title:
+                title = title.replace("<hs>", ", ".join([getattr(h, name_lang) for h in self.hs]))
+            if "<cbo>" in title:
+                title = title.replace("<cbo>", ", ".join([getattr(c, name_lang) for c in self.cbo]))
+            if "<wld>" in title:
+                title = title.replace("<wld>", ", ".join([getattr(w, name_lang) for w in self.wld]))
 
         return title
             

@@ -20,58 +20,6 @@ def about():
 def data():
     return render_template("about/data/index.html", page = "data")
 
-@mod.route('/data/<attr>/', defaults={"category": "all", "page":1})
-@mod.route('/data/<attr>/<category>/', defaults={"page":1})
-@mod.route('/data/<attr>/<category>/<int:page>/')
-def data_attr(attr, category, page):
-    per_page = request.args.get("per_page", "25")
-    
-    if attr == "bra":
-        attr_table = Bra
-        category_lookup = {"state":2, "mesoregion":4, "microregion":4, "municipality":8}
-        title = "Brazilian Geography"
-    elif attr == "wld":
-        attr_table = Wld
-        category_lookup = {"continent":2, "country":5}
-        title = "Countries"
-    elif attr == "isic":
-        attr_table = Isic
-        category_lookup = {"top category":1, "isic":5}
-        title = "Industries by ISIC Classification"
-    elif attr == "cbo":
-        attr_table = Cbo
-        category_lookup = {"top category":1, "cbo":4}
-        title = "Occupations by CBO Classification"
-    elif attr == "hs":
-        attr_table = Hs
-        category_lookup = {"top category":2, "hs":6}
-        title = "Products by HS Classification"
-    
-    attrs = attr_table.query
-    
-    if category == "all":
-        possible_nestings = category_lookup.values()
-        attrs = attrs.filter(func.char_length(attr_table.id).in_(possible_nestings))
-    else:
-        attrs = attrs.filter(func.char_length(attr_table.id) == category_lookup[category])
-    
-    total = attrs.count()
-    if per_page.isdigit():
-        pagination = Pagination(page, int(per_page), total)
-        attrs = attrs.paginate(page, int(per_page), False).items
-    else:
-        pagination = Pagination(page, per_page, total)
-        attrs = attrs.all()
-    
-    return render_template("about/data/attr.html",
-        title = title,
-        page = "data",
-        page_attr = attr,
-        category = category,
-        category_lookup = category_lookup,
-        attrs = attrs,
-        pagination = pagination)
-
 @mod.route('/visual/')
 def visual():
     return render_template("about/visual.html", page = "dataminas")
