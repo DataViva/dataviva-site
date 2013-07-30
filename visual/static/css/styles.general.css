@@ -219,5 +219,5 @@ div.popover {
      -moz-transition: opacity 0.6s;
        -o-transition: opacity 0.6s;
           transition: opacity 0.6s;
-  z-index: 6000;
+  z-index: 5001;
 }

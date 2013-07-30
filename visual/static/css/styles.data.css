@@ -31,7 +31,7 @@
 
 #table_header {
   margin-top: 3px;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 #table_header th {
@@ -46,7 +46,7 @@
 #table_container {
   margin-top: -20px;
   min-height: 500px;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 #filter_selects {

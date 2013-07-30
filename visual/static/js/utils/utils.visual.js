@@ -6,8 +6,7 @@ visual.slide.timing = 0.75, // timing of page slides, in seconds
 visual.format = {};
 visual.format.text = function(text,name) {
   
-  if (name == "id") return text
-  else if (text.indexOf("cp_bra_") == 0) {
+  if (text.indexOf("cp_bra_") == 0) {
     var arr = text.split("_")
     arr.shift()
     arr.shift()
@@ -25,8 +24,9 @@ visual.format.number = function(value,name) {
   
   var smalls = ["rca","rca_bra","rca_wld","distance","complexity"]
   
-  
-  if (name == "year") {
+  var ids = ["cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
+  if (ids.indexOf(name) >= 0) return value
+  else if (name == "year") {
     var return_value = value
   }
   else if (smalls.indexOf(name) >= 0 || value < 1) {

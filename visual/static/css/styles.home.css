@@ -8,31 +8,22 @@ body.home #big_sabrina {
 
 body.home #welcome {
   background-color: white;
+  padding: 10px;
   text-align: center;
   width: 500px;
 }
 
-body.home #footer {
-  display: none;
+body.home #welcome a.logo {
+  height: 75px;
+  width: 120px;
 }
 
-body.home div.logo.sponsor {
-  font-size: 16px;
-  height: 50px;
-  line-height: 50px;
-}
-
-body.home a.logo {
-  height: 50px;
-  width: 80px;
-}
-
-body.home a.logo.governo {
+body.home #welcome a.logo.governo {
   background-image: url("/static/img/nav/logo_governo.jpg");
   opacity: 1;
 }
 
-body.home a.logo.fapemig {
+body.home #welcome a.logo.fapemig {
   background-image: url("/static/img/nav/logo_fapemig.jpg");
   opacity: 1;
 }

@@ -18,9 +18,9 @@ a:hover {
 /*******************/
 
 .button.square {
-  font-size: 14px !important;
+  font-size: 15px !important;
   height: 19px;
-  line-height: 19px;
+  line-height: 18px;
   padding: 3px !important;
   width: 19px;
 }
@@ -36,9 +36,16 @@ a:hover {
   line-height: 19px;
   margin: 10px;
   opacity: 0.9;
-  padding: 12px;
   position: relative;
   text-align: left;
+}
+
+.title {
+  padding: 0px;
+}
+
+.decision, .help {
+  padding: 10px;
 }
 
 .title.square, .decision.square, .help.square {

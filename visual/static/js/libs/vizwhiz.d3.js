@@ -318,6 +318,13 @@ vizwhiz.tooltip.create = function(params) {
     .datum(params)
     .attr("id","vizwhiz_tooltip_id_"+params.id)
     .attr("class","vizwhiz_tooltip vizwhiz_tooltip_"+params.size)
+    
+  if (params.fixed) {
+    tooltip.style("z-index",500)
+  }
+  else {
+    tooltip.style("z-index",2000)
+  }
   
   var container = tooltip.append("div")
     .datum(params)
@@ -489,7 +496,7 @@ vizwhiz.tooltip.create = function(params) {
   params.height = tooltip.node().offsetHeight
   
   if (params.html && params.fullscreen) {
-    var h = params.height-38
+    var h = params.height-12
     var w = tooltip.node().offsetWidth-params.width-44
     container.append("div")
       .attr("class","vizwhiz_tooltip_html")
@@ -1115,7 +1122,6 @@ vizwhiz.viz = function() {
         if (vars.dev) console.log("[viz-whiz] Calculating Total Value")
         
         if (vars.type == "tree_map") {
-          var total_val = check_child(vars.data)
           
           function check_child(c) {
             if (c[vars.value_var]) return c[vars.value_var]
@@ -1123,8 +1129,10 @@ vizwhiz.viz = function() {
               return d3.sum(c.children,function(c2){
                 return check_child(c2)
               })
+            }
           }
-          }
+          
+          var total_val = check_child(vars.data)
         }
         else if (vars.data instanceof Array) {
           var total_val = d3.sum(vars.data,function(d){
@@ -1202,6 +1210,7 @@ vizwhiz.viz = function() {
         
       filter_change = false
       axis_change = false
+      
       if (vars.dev) console.log("[viz-whiz] Building \"" + vars.type + "\"")
       vizwhiz[vars.type](vars);
       if (vars.dev) console.log("[viz-whiz] *** End Chart ***")
@@ -1284,7 +1293,7 @@ vizwhiz.viz = function() {
           
           to_return = {
             "num_children": leaves.length,
-            "num_children_active": d3.sum(leaves, function(d){ return d.active; })
+            "num_children_active": d3.sum(leaves, function(d){ return d[vars.active_var]; })
           }
           
           to_return[vars.id_var] = leaves[0][nest_key][vars.id_var]
@@ -1488,11 +1497,11 @@ vizwhiz.viz = function() {
     if (vars.tooltip_info instanceof Array) var a = vars.tooltip_info
     else var a = vars.tooltip_info[length]
     
-    if (a.indexOf(vars.value_var) < 0) a.unshift(vars.value_var)
+    if (a.indexOf(vars.value_var) < 0) a.push(vars.value_var)
     if (["stacked","pie_scatter"].indexOf(vars.type) >= 0
-         && a.indexOf(vars.xaxis_var) < 0) a.unshift(vars.xaxis_var)
+         && a.indexOf(vars.xaxis_var) < 0) a.push(vars.xaxis_var)
     if (["stacked","pie_scatter"].indexOf(vars.type) >= 0
-         && a.indexOf(vars.yaxis_var) < 0) a.unshift(vars.yaxis_var)
+         && a.indexOf(vars.yaxis_var) < 0) a.push(vars.yaxis_var)
     
     var tooltip_data = []
     a.forEach(function(t){
@@ -1573,6 +1582,7 @@ vizwhiz.viz = function() {
   
   chart.active_var = function(x) {
     if (!arguments.length) return vars.active_var;
+    filter_change = true
     vars.active_var = x;
     return chart;
   };
@@ -4484,7 +4494,7 @@ vizwhiz.pie_scatter = function(vars) {
   if (!size_domain[1]) size_domain = [0,0]
   
   var max_size = d3.max([d3.min([vars.graph.width,vars.graph.height])/25,10]),
-      min_size = 3
+      min_size = 5
       
   if (size_domain[0] == size_domain[1]) var min_size = max_size
   

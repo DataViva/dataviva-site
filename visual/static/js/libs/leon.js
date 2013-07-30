@@ -96,18 +96,6 @@ leon = function(name) {
   
   var objs = []
   
-  var labellist = document.getElementsByTagName('LABEL');
-  var labels = []
-  for(var i = labellist.length; i--; labels.unshift(labellist[i]));
-  labels.forEach(function(label){
-    if (label.htmlFor != '') {
-      var elem = document.getElementById(label.htmlFor);
-      if (elem) {
-        elem.label = label;
-      }
-    }
-  })
-  
   if (name == "all") {
     var tags = ["SELECT","INPUT"]
     tags.forEach(function(tag){
@@ -160,7 +148,8 @@ leon = function(name) {
   others.forEach(function(obj) {
     objs.push({
       "items": obj,
-      "type": obj.type
+      "type": obj.type,
+      "name": obj.id
     })
   })
   
@@ -174,7 +163,6 @@ leon = function(name) {
     
     objs.push(temp_obj)
   })
-
   
   var legendlist = document.getElementsByTagName('LEGEND');
   var legends = []
@@ -182,7 +170,7 @@ leon = function(name) {
   objs.forEach(function(obj){
     for (var i = 0; i < legends.length; i++) {
       if (legends[i].id == obj.name) {
-        obj.legend = legends[i]
+        obj.label = legends[i]
       }
     }
   })
@@ -300,6 +288,10 @@ style.innerHTML = "\
     color: "+leon_vars.color.accent.dark+";\
     float: left;\
     padding: "+leon_vars.padding+"px;\
+  }\
+  .leon.label.textlabel {\
+    margin: "+leon_vars.padding+"px 0px;\
+    padding: "+leon_vars.padding+"px 0px "+leon_vars.padding+"px "+leon_vars.padding+"px;\
   }\
   .leon.select {\
     display: inline-block;\
@@ -469,17 +461,8 @@ CUSTOM BUTTON CREATOR
 Creates a custom button when passed an item
 */
 leon_construct.label = function(item,parent) {
-  
+
     var html = item.innerHTML ? item.innerHTML : item.id
-    if (item.label) {
-      if (typeof item.label != "string") {
-        html = item.label.innerHTML
-        if (leon_vars.autohide) item.label.style.display = "none"
-      }
-      else {
-        html = item.label
-      }
-    }
     
     if (leon_vars.autohide) item.style.display = "none"
     
@@ -502,17 +485,18 @@ leon_construct.button = function(item,parent) {
   
     if (item.type == "button") var item = item.items
     
-    if (item.label) {
-      if (typeof item.label != "string") {
-        var html = item.label.innerHTML
-        if (leon_vars.autohide) item.label.style.display = "none"
+    if (item.labels && item.labels[0]) {
+      var label = item.labels[0]
+      if (typeof label != "string") {
+        var html = label.innerHTML
+        if (leon_vars.autohide) label.style.display = "none"
       }
       else {
-        var html = item.label
+        var html = label
       }
     }
     else {
-      var html = item.value
+      var html = item.innerHTML
     }
     
     if (leon_vars.autohide) item.style.display = "none"
@@ -594,8 +578,8 @@ leon_construct.checkbox = function(obj) {
   divgroup.className = "leon checkbox"
   obj.items.parentNode.insertBefore(divgroup,obj.items)
   
-  if (obj.items.label) {
-    var label = new leon_construct.label(obj.items,divgroup)
+  if (obj.items.labels[0]) {
+    var label = new leon_construct.label(obj.items.labels[0],divgroup)
   }
   
   var buttongroup = document.createElement("div")
@@ -631,8 +615,8 @@ leon_construct.radio = function(obj) {
   divgroup.className = "leon radio"
   obj.items[0].parentNode.insertBefore(divgroup,obj.items[0])
   
-  if (obj.legend) {
-    var label = new leon_construct.label(obj.legend,divgroup)
+  if (obj.label) {
+    var label = new leon_construct.label(obj.label,divgroup)
   }
   
   var buttongroup = document.createElement("div")
@@ -717,9 +701,9 @@ leon_construct.range = function(obj) {
   this.node.className = "leon range"
   this.input.parentNode.insertBefore(self.node,self.input)
   
-  if (this.input.label) {
-    this.label = new leon_construct.label(self.input,self.node)
-    available_width -= self.label.node.offsetWidth+leon_vars.padding
+  if (this.input.labels[0]) {
+    this.label = new leon_construct.label(self.input.labels[0],self.node)
+    available_width -= self.input.labels[0].offsetWidth+leon_vars.padding
   }
   
   if (!range) {
@@ -1025,13 +1009,11 @@ leon_construct.select = function(obj) {
   self.node.id = "leon_"+self.input.items.id
   self.input.items.parentNode.insertBefore(self.node,self.input.items)
   
-  if (self.input.items.label) {
-    var label = new leon_construct.label(self.input.items.label,self.node)
+  if (self.input.items.labels[0]) {
+    var label = new leon_construct.label(self.input.items.labels[0],self.node)
   }
   
   var arrow = "<span class='leon arrow'>&#8227</span>"
-  
-  self.input.items.label = self.input.items.selectedOptions[0].label + arrow
   
   this.selected = new leon_construct.button(self.input.items,self.node)
   self.selected.open = false
@@ -1058,6 +1040,7 @@ leon_construct.select = function(obj) {
   })
   
   var w = 0
+  
   self.options.forEach(function(option,i){
     
     var html = option.node.innerHTML
@@ -1082,8 +1065,8 @@ leon_construct.select = function(obj) {
     })
   })
   
-  self.selected.node.style.width = w+"px"
-  self.dropdown.style.width = (w+leon_vars.padding*2+leon_vars.border*2)+"px"
+  self.selected.node.style.width = (w+2)+"px"
+  self.dropdown.style.width = (w+2+leon_vars.padding*2+leon_vars.border*2)+"px"
   
 }
 /*
@@ -1092,8 +1075,8 @@ Creates a custom toggle menu, when passed the name of a radio button group
 */
 leon_construct.text = function(obj) {
   
-  if (obj.items.label) {
-    obj.items.label.className = "leon label"
+  if (obj.items.labels[0]) {
+    obj.items.labels[0].className = "leon label textlabel"
   }
   
   obj.items.className = obj.items.className + " leon text"

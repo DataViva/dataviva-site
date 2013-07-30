@@ -211,13 +211,24 @@
         if (list) {
           var cats = []
           list.forEach(function(n){
-            var id = n.id.slice(0,depths[app.build.output][0])
+            var id = n[app.build.output+"_id"].slice(0,depths[app.build.output][0])
             if (cats.indexOf(id) < 0) cats.push(id)
           })
           builder.key(cats)
         }
+        var old_url = app.url
         builder.filter(obj,app.build.output+"_0",true)
-        builder.url()
+        if (app.url != old_url) {
+          d3.json("/apps/embed/"+app.url)
+            .header("X-Requested-With", "XMLHttpRequest")
+            .get(function(error,data){
+              app.build = data.current_build
+              builder.url()
+              builder.outputs(data.all_builds)
+              d3.select("#app").call(app.viz.title(app.build.title))
+            })
+        }
+        
         var rec_url = app.url
       }
       else {
@@ -274,7 +285,13 @@
       
     }
     
-    app.tooltip = {"short": [], "long": [
+    app.tooltip = {"short": [
+          "hs_id",
+          "wld_id",
+          "isic_id",
+          "cbo_id",
+          "id_ibge"
+        ], "long": [
           "display_id",
           "rca",
           "rca_wld",
@@ -313,10 +330,17 @@
           "distance": "mean",
           "complexity": "mean",
           "rca": "mean",
-          "wage_avg": "mean"
+          "wage_avg": "mean",
+          "cp_bra_0_distance": "mean",
+          "cp_bra_0_complexity": "mean",
+          "cp_bra_0_rca": "mean",
+          "cp_bra_0_wage_avg": "mean",
+          "cp_bra_1_distance": "mean",
+          "cp_bra_1_complexity": "mean",
+          "cp_bra_1_rca": "mean",
+          "cp_bra_1_wage_avg": "mean"
         })
       .text_var("name")
-      .id_var("id")
       .year_var("year")
       .tooltip_info(app.tooltip)
       .text_format(visual.format.text)
@@ -354,15 +378,14 @@
           }
           else {
             
-            // Set public current build variable
-            app.build = data.current_build
-            builder.url()
-
-            builder.outputs(data.all_builds)
-            
             if (app.build && app.build.app.type != data.current_build.app.type) {
               builder.app(data.current_build.app.type,true)
             }
+            
+            // Set public current build variable
+            app.build = data.current_build
+            builder.url()
+            builder.outputs(data.all_builds)
             
             // Show/hide filters depending on build requirements
             var filters = ["bra_0","bra_1","isic_0","cbo_0","hs_0","wld_0"]
@@ -429,8 +452,8 @@
                       edge.target = d.nodes[edge.target]
                     }
                     else {
-                      edge.source = d.nodes.filter(function(n){ return n.id == edge.source })[0]
-                      edge.target = d.nodes.filter(function(n){ return n.id == edge.target })[0]
+                      edge.source = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.source })[0]
+                      edge.target = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.target })[0]
                     }
                   })
                   
@@ -503,7 +526,7 @@
               else if (app.build.app.type == "rings") {
                 
                 var node = app.networks[app.build.output].nodes.filter(function(n){
-                  return n.id == app.build[app.build.output][0].id
+                  return n[app.build.output+"_id"] == app.build[app.build.output][0].id
                 })[0]
                 
                 if (app.build[app.build.output][0].id.length == depths[app.build.output[0]]) {
@@ -632,7 +655,12 @@
             else var default_value = ui.values[0]
           }
           else if (ui.type == "depth" && app.build.app.type == "tree_map") {
-            var default_value = ui.values[ui.values.length-1]
+            if (app.build.output == "bra" && app.build.bra[0].id == "all") {
+              var default_value = ui.values[0]
+            }
+            else {
+              var default_value = ui.values[ui.values.length-1]
+            }
           }
           else if (ui.type == "sort" && app.build.app.type == "stacked") {
             var default_value = "color"
@@ -707,6 +735,7 @@
         .year(app.vars.year)
         .total_bar(app.total())
         .highlight(null)
+        .id_var(app.build.output+"_id")
         
       /******************************/
       /* Network Specific Variables */
@@ -907,9 +936,7 @@
               
           req_filtered.forEach(function(d){
       
-            d.id = d[app.build.output+"_id"]
-      
-            var temp_obj = year_data.filter(function(dd){ return dd[app.build.output+"_id"] == d[app.build.output+"_id"] })[0]
+            var temp_obj = year_data.filter(function(dd){ return dd[out+"_id"] == d[out+"_id"] })[0]
             if (!temp_obj) {
               temp_obj = {"num_emp": 0, "wage": 0, "num_est": 0}
             }
@@ -917,7 +944,7 @@
             d = vizwhiz.utils.merge(d,temp_obj)
           
             d.none = 1;
-            d.category = attr[d.id.slice(0,depths[out][0])].id+" | "+attr[d.id.slice(0,depths[out][0])].name
+            d.category = attr[d[out+"_id"].slice(0,depths[out][0])].name
 
           
             if (location_total >= industry_size) d.total = Math.ceil((d.num_emp_med/industry_size)*location_total);
@@ -927,15 +954,15 @@
             if (d.employed/d.total >= 1) d.active = true;
             else d.active = false;
           
-            var elsewhere = app.data[app.build.else_url].raw.filter(function(e){ return e.year == year && e[app.build.output+"_id"] == d.id })[0]
+            var elsewhere = app.data[app.build.else_url].raw.filter(function(e){ return e.year == year && e[out+"_id"] == d[out+"_id"] })[0]
           
             if (!elsewhere) elsewhere = 0;
             else elsewhere = elsewhere.num_emp;
           
             d.elsewhere = elsewhere-d.employed
       
-            d.display_id = visual.displayID(d.id,out)
-            d.icon = visual.icon(d.id,out)
+            d.display_id = visual.displayID(d[out+"_id"],out)
+            d.icon = visual.icon(d[out+"_id"],out)
             
             if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp;
 
@@ -958,9 +985,9 @@
             if (leaves.length == 2) {
               var d = {}
               d.year = leaves[0].year
-              d.id = leaves[0][out+"_id"]
-              d.display_id = visual.displayID(d.id,out)
-              d.icon = visual.icon(d.id,out)
+              d[out+"_id"] = leaves[0][out+"_id"]
+              d.display_id = visual.displayID(d[out+"_id"],out)
+              d.icon = visual.icon(d[out+"_id"],out)
               d.active = true
               
               leaves.forEach(function(leaf){
@@ -993,10 +1020,9 @@
           
           var obj = d
           
-          obj.id = obj[out+"_id"]
-          obj.display_id = visual.displayID(obj.id,out)
+          obj.display_id = visual.displayID(obj[out+"_id"],out)
           
-          obj.icon = visual.icon(obj.id,out)
+          obj.icon = visual.icon(obj[out+"_id"],out)
           
           if (obj.wage && obj.num_emp) obj.wage_avg = obj.wage/obj.num_emp;
           else obj.wage_avg = 0
@@ -1019,7 +1045,9 @@
       
       function set_nesting(obj) {
         depths[out].forEach(function(d){
-          obj[out+"_"+d] = {"name":attr[obj.id.slice(0, d)].name, "id":obj.id.slice(0, d)}
+          var id = obj[out+"_id"].slice(0, d)
+          obj[out+"_"+d] = {"name":attr[id].name}
+          obj[out+"_"+d][out+"_id"] = id
         })
         return obj;
       }
@@ -1029,7 +1057,7 @@
         if (!data.categories[d.year]) data.categories[d.year] = []
         if (!data.categories.all) data.categories.all = []
         for (var key in d) { 
-          if (key == "id") {
+          if (key == out+"_id") {
             var parent = d[key].slice(0,depths[out][0])
             if (data.categories[d.year].indexOf(parent) < 0) data.categories[d.year].push(parent);
             if (data.categories.all.indexOf(parent) < 0) data.categories.all.push(parent);
@@ -1169,7 +1197,7 @@
           })
           d3.select("#output_"+build.app.type)
             .style("padding","10px")
-            .style("overflow","scroll")
+            .style("overflow-y","auto")
         }
         
         if (d3.select("#output_"+build.app.type).select("."+build.dataset).empty()) {
@@ -1217,9 +1245,10 @@
       }
       
       app.build[type][index] = obj
-      
       var url = app.url.split("/")
-      url[url_index] = obj.id
+      var ids = url[url_index].split("+")
+      ids[index] = obj.id
+      url[url_index] = ids.join("+")
       url = url.join("/")
       app.url = url
       
@@ -1245,7 +1274,8 @@
     
     builder.app = function(app_name,static) {
       
-      var match = null
+      document.getElementById("app_select").value = app_name
+      leon("#app_select")
       
       var options = d3.select("#output_"+app_name).selectAll(".output")
       
@@ -1256,20 +1286,25 @@
         d3.select("#output").style("display","none")
       }
       
-      options
-        .each(function(d){
-          var a = app.url.split("/")
-          a.shift()
-          a = a.join("/")
-          var s = this.id.split("/")
-          s.shift()
-          s = s.join("/")
-          if (a == s) match = this.id
-        })
-        console.log(match)
-      if (!match) match = options[0][0].id
-      console.log(match)
-      if (!static) app.start(match)
+      if (!static) {
+      
+        var match = null
+      
+        options
+          .each(function(d){
+            var a = app.url.split("/")
+            a.shift()
+            a = a.join("/")
+            var s = this.id.split("/")
+            s.shift()
+            s = s.join("/")
+            if (a == s) match = this.id
+          })
+        
+        if (!match) match = options[0][0].id
+      
+        app.start(match)
+      }
       
     }
     
