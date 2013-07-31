@@ -581,6 +581,7 @@ function Selector() {
           .attr("class","selector")
       
       var selector_load = new visual.ui.loading(container.node())
+      selector_load.color("#ffffff")
       selector_load.text("Loading Attribute List").show()
       
       if (type == "help") {

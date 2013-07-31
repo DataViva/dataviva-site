@@ -214,6 +214,11 @@ visual.ui.loading = function(parent) {
     self.words.html(text)
     return self
   }
+    
+  this.color = function(color) {
+    self.div.style("background-color",color)
+    return self
+  }
 
   return this
   

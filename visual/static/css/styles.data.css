@@ -107,6 +107,7 @@ body.query #inner_container {
 
 .filter_box .filter_item {
   margin-bottom: 6px;
+  text-align: left;
 }
 
 .filter_box span.list_icon {
