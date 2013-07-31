@@ -1275,20 +1275,24 @@
       
       if (!static) {
       
-        var match = null
+        var match = null, backup = null
       
         options
           .each(function(d){
             var a = app.url.split("/")
+            var s = this.id.split("/")
+            if (!backup && s[s.length-1] == a[a.length-1]) backup = this.id
             a.shift()
             a = a.join("/")
-            var s = this.id.split("/")
             s.shift()
             s = s.join("/")
             if (a == s) match = this.id
           })
         
-        if (!match) match = options[0][0].id
+        if (!match) {
+          if (backup) match = backup
+          else match = options[0][0].id
+        }
       
         app.start(match)
       }
