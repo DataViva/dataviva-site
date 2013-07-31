@@ -295,9 +295,13 @@
           "wld_id",
           "isic_id",
           "cbo_id",
-          "id_ibge"
+          "id_ibge",
+          "growth_val",
+          "growth_val_total"
         ], "long": [
           "display_id",
+          "growth_val",
+          "growth_val_total",
           "rca",
           "rca_wld",
           "wage",
@@ -355,7 +359,6 @@
       .click_function(app.html)
       .font(app.font)
       .font_weight("lighter")
-      .title_height(app.title_height)
     
     // Start building a new app
     app.start = function(new_url) {
@@ -441,10 +444,25 @@
                 d3.json(u)
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
-                    app.attrs[app.build.output] = {}
+                    var out = app.build.output
+                    app.attrs[out] = {}
+                    
                     d.data.forEach(function(a){
+                      a[out+"_id"] = a.id
                       app.attrs[app.build.output][a.id] = a
                     })
+                    
+                    for (id in app.attrs[app.build.output]) {
+                      var obj = app.attrs[app.build.output][id]
+                      depths[out].forEach(function(d){
+                        if (d <= obj.id.length) {
+                          var id = obj[out+"_id"].slice(0, d)
+                          obj[out+"_"+d] = {"name":app.attrs[app.build.output][id].name}
+                          obj[out+"_"+d][out+"_id"] = id
+                        }
+                      })
+                    }
+                    
                     callback(error,d)
                   })
               },"/attrs/"+app.build.output)
@@ -698,12 +716,15 @@
       })
       
       builder.url()
+      
+      var color_var = app.vars.color_var ? app.vars.color_var : "color"
         
       /************************/
       /* Gloabl App Variables */
       /************************/
       app.viz.type(app.build.app.viz_whiz)
         .title(app.build.title)
+        .color_var(color_var)
         .attrs(app.attrs[app.build.output])
         .spotlight(app.vars.spotlight)
         .nesting(nesting)
@@ -949,7 +970,6 @@
             
             if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp;
 
-            d = set_nesting(d)
             get_keys(d)
           
             data_obj.push(d)
@@ -988,7 +1008,6 @@
                 }
               })
 
-              d = set_nesting(d)
               get_keys(d)
               
               data_obj.push(d)
@@ -1015,7 +1034,6 @@
           obj.bra_rca = obj.rca >=1 ? true : false;
           obj.wld_rca = obj.rca_wld >=1 ? true : false;
 
-          obj = set_nesting(obj)
           get_keys(obj)
           
           data_obj.push(obj)
@@ -1025,15 +1043,6 @@
       }
       
       data[format[app.build.app.type]] = data_obj;
-      
-      function set_nesting(obj) {
-        depths[out].forEach(function(d){
-          var id = obj[out+"_id"].slice(0, d)
-          obj[out+"_"+d] = {"name":attr[id].name}
-          obj[out+"_"+d][out+"_id"] = id
-        })
-        return obj;
-      }
       
       function get_keys(d) {
         if (!data.categories) data.categories = {}
@@ -1098,9 +1107,11 @@
   
       if (app.vars.controls == "true") {
         d3.select("#controls_toggle").attr("class","leon button square active")
+        var title_height = 0
       }
       else {
         d3.select("#controls_toggle").attr("class","leon button square")
+        var title_height = app.title_height
       }
 
       app.height = window.innerHeight;
@@ -1120,6 +1131,7 @@
             .height(app.height)
             .width(app.width)
             .title_width(app.title_width)
+            .title_height(title_height)
           )
       
     }

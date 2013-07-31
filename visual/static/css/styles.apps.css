@@ -113,12 +113,16 @@ div.filter_button > div.leon.button {
   color: #ffc41c;
 }
 
+.ui_group {
+  display: inline-block;
+}
+
 /*******************/
 /* Bottom Controls */
 /*******************/
 
 div#ui_bottom {
-  padding: 5px 0px;
+  padding: 0px;
   display: block;
   position: absolute;
   bottom: 0px;
@@ -128,8 +132,6 @@ div#ui_bottom {
   z-index: 500;
 }
 
-.ui_group {
-  display: inline-block;
-/*  padding: 0px 5px;*/
-/*  margin-top: 5px;*/
+div#year_slider > .leon.range {
+  margin-top: 0px;
 }

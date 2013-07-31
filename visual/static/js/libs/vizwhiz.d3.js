@@ -832,6 +832,9 @@ vizwhiz.viz = function() {
     "boundries": null,
     "click_function": null,
     "color_var": "color",
+    "color_domain": [],
+    "color_range": ["#ff0000","#888888","#00ff00"],
+    "color_scale": d3.scale.sqrt().interpolate(d3.interpolateRgb),
     "connections": null,
     "coords": null,
     "csv_columns": null,
@@ -881,6 +884,9 @@ vizwhiz.viz = function() {
         value = d3.formatPrefix(value).scale(value)
         value = parseFloat(d3.format(".3g")(value))
         return value + symbol;
+      }
+      else if (name == "share") {
+        return d3.format(".2f")(value)
       }
       else {
         return d3.format(",f")(value)
@@ -1008,7 +1014,7 @@ vizwhiz.viz = function() {
           (["pie_scatter","stacked"].indexOf(vars.type) >= 0 && axis_change)) {
         delete data_obj[data_type[vars.type]]
       }
-      
+
       if (!data_obj[data_type[vars.type]]) {
         
         data_obj[data_type[vars.type]] = {}
@@ -1138,14 +1144,14 @@ vizwhiz.viz = function() {
         .attr('height',vars.svg_height)
       
       if (["network","rings"].indexOf(vars.type) >= 0) {
-        if (filter_change) {
+        if (vars.solo.length || vars.filter.length) {
           if (vars.dev) console.log("[viz-whiz] Filtering Nodes and Edges")
           vars.nodes = nodes.filter(function(d){
             return true_filter(d)
           })
           vars.links = links.filter(function(d){
             var first_match = true_filter(d.source),
-                second_match = true_filter(d.source)
+                second_match = true_filter(d.target)
             return first_match && second_match
           })
         }
@@ -1191,6 +1197,14 @@ vizwhiz.viz = function() {
           vars.xaxis_domain = d3.extent(domains)
           vars.yaxis_domain = d3.extent(domains).reverse()
         }
+        if (vars.xaxis_domain[0] == vars.xaxis_domain[1]) {
+          vars.xaxis_domain[0] -= 1
+          vars.xaxis_domain[1] += 1
+        }
+        if (vars.yaxis_domain[0] == vars.yaxis_domain[1]) {
+          vars.yaxis_domain[0] -= 1
+          vars.yaxis_domain[1] += 1
+        }
       }
       // Calculate total_bar value
       if (!vars.data || !vars.total_bar || vars.type == "stacked") {
@@ -1229,6 +1243,63 @@ vizwhiz.viz = function() {
             return d[vars.value_var]
           })
         }
+      }
+      
+      if (vars.dev) console.log("[viz-whiz] Calculating Color Range")
+      
+      if (vars.type == "tree_map") {
+        
+        vars.color_domain = [0,0]
+        
+        function check_child_colors(c) {
+          if (c.children) {
+            c.children.forEach(function(c2){
+              check_child_colors(c2)
+            })
+          }
+          else {
+            var color = find_variable(c,vars.color_var)
+            if (typeof color == "number") {
+              if (color < vars.color_domain[0]) vars.color_domain[0] = color
+              if (color > vars.color_domain[1]) vars.color_domain[1] = color
+            }
+            else {
+              vars.color_domain[0] = color
+              vars.color_domain[1] = color
+            }
+          }
+        }
+        
+        check_child_colors(vars.data)
+      }
+      else if (vars.data instanceof Array) {
+        vars.color_domain = d3.extent(vars.data,function(d){
+          return d[vars.color_var]
+        })
+      }
+      else {
+        vars.color_domain = d3.extent(d3.values(vars.data),function(d){
+          return d[vars.color_var]
+        })
+      }
+      
+      if (typeof vars.color_domain[0] == "number") {
+        if (vars.color_domain[0] < 0 && vars.color_domain[1] > 0) {
+          vars.color_domain[2] = vars.color_domain[1]
+          vars.color_domain[1] = 0
+          var cr = vars.color_range
+        }
+        else if (vars.color_domain[1] > 0) {
+          vars.color_domain[0] = 0
+          var cr = [vars.color_range[1],vars.color_range[2]]
+        }
+        else if (vars.color_domain[0] < 0) {
+          vars.color_domain[1] = 0
+          var cr = [vars.color_range[0],vars.color_range[1]]
+        }
+        vars.color_scale
+          .domain(vars.color_domain)
+          .range(cr)
       }
       
       vars.svg_enter.append("g")
@@ -1298,7 +1369,7 @@ vizwhiz.viz = function() {
         
       filter_change = false
       axis_change = false
-      
+
       if (!error && !vars.data) {
         vars.error = vars.text_format("No Data Available","error")
       }
@@ -1336,55 +1407,52 @@ vizwhiz.viz = function() {
 
   filter_check = function(check_data) {
     
-    if (filter_change || 
-        (["pie_scatter","stacked"].indexOf(vars.type) >= 0 && axis_change)) {
+    if (vars.dev) console.log("[viz-whiz] Removing Solo/Filters")
+    
+    var graph_type = ["stacked","pie_scatter"].indexOf(vars.type) >= 0
       
-      if (vars.dev) console.log("[viz-whiz] Removing Solo/Filters")
+    return check_data.filter(function(d){
       
-      return check_data.filter(function(d){
-        
-        if (vars.xaxis_var) {
-          if (typeof d[vars.xaxis_var] == "undefined") return false
-        }
-        if (vars.yaxis_var) {
-          if (typeof d[vars.yaxis_var] == "undefined") return false
-        }
-        return true_filter(d)
-      })
+      if (vars.xaxis_var && graph_type) {
+        if (typeof d[vars.xaxis_var] == "undefined") return false
+      }
+      if (vars.yaxis_var && graph_type) {
+        if (typeof d[vars.yaxis_var] == "undefined") return false
+      }
+      return true_filter(d)
+    })
       
-    }
-    else {
-      return check_data
-    }
   }
   
   true_filter = function(d) {
-    var check = [d[vars.id_var],d[vars.text_var]]
+    var id = d[vars.id_var],
+        name = find_variable(id,vars.text_var)
+    var check = [id,name]
     vars.nesting.forEach(function(key){
-      if (d[key]) {
-        for (x in d[key]) {
-          check.push(d[key][x])
+      var obj = find_variable(id,key)
+      if (obj) {
+        for (k in obj) {
+          check.push(obj[k])
         }
       }
     })
-    var match = false
-    if (d[vars.id_var] != vars.highlight || vars.type != "rings") {
+    
+    var match = true
+    if (id != vars.highlight || vars.type != "rings") {
       if (vars.solo.length) {
+        match = false
         check.forEach(function(c){
-          if (vars.solo.indexOf(c) >= 0) return true
+          if (vars.solo.indexOf(c) >= 0) match = true
         })
-        return false
       }
-      else {
+      else if (vars.filter.length) {
+        match = true
         check.forEach(function(c){
-          if (vars.filter.indexOf(c) >= 0) return false
+          if (vars.filter.indexOf(c) >= 0) match = false
         })
-        return true
       }
     }
-    else {
-      return true
-    }
+    return match
   }
 
   nest = function(flat_data,levels) {
@@ -1395,7 +1463,7 @@ vizwhiz.viz = function() {
     levels.forEach(function(nest_key, i){
     
       nested_data
-        .key(function(d){ return d[nest_key][vars.id_var]; })
+        .key(function(d){ return find_variable(d,nest_key)[vars.id_var] })
       
       if (i == levels.length-1) {
         nested_data.rollup(function(leaves){
@@ -1405,20 +1473,25 @@ vizwhiz.viz = function() {
             "num_children_active": d3.sum(leaves, function(d){ return d[vars.active_var]; })
           }
           
-          to_return[vars.id_var] = leaves[0][nest_key][vars.id_var]
+          var nest_obj = find_variable(leaves[0],nest_key)
           
-          if (leaves[0][nest_key].display_id) to_return.display_id = leaves[0][nest_key].display_id;
+          to_return[vars.id_var] = nest_obj[vars.id_var]
+          
+          if (nest_obj.display_id) to_return.display_id = nest_obj.display_id;
           
           for (key in vars.keys) {
             if (vars.nesting_aggs[key]) {
               to_return[key] = d3[vars.nesting_aggs[key]](leaves, function(d){ return d[key]; })
             }
             else {
-              if ([vars.color_var,vars.year_var,"icon"].indexOf(key) >= 0) {
+              if ([vars.year_var,"icon"].indexOf(key) >= 0) {
                 to_return[key] = leaves[0][key];
               }
               else if (vars.keys[key] === "number") {
                 to_return[key] = d3.sum(leaves, function(d){ return d[key]; })
+              }
+              else if (key == vars.color_var) {
+                to_return[key] = leaves[0][key]
               }
             }
           }
@@ -1461,7 +1534,7 @@ vizwhiz.viz = function() {
     if(vars.type != "tree_map"){
       return flattened;
     }
-
+    
     return {"name":"root", "children": nested_data};
 
   }
@@ -1743,7 +1816,7 @@ vizwhiz.viz = function() {
           return d[vars.id_var] == id
         })[0]
       }
-      else {
+      else if (vars.data) {
         var dat = vars.data[id]
       }
     }
@@ -1761,7 +1834,6 @@ vizwhiz.viz = function() {
     if (!value) {
       if (dat && dat[variable]) value = dat[variable]
       else if (attr && attr[variable]) value = attr[variable]
-      else if (variable == "color") value = vizwhiz.utils.rand_color()
     }
     
     if (variable == vars.text_var && value) {
@@ -1769,6 +1841,13 @@ vizwhiz.viz = function() {
     }
     else return value
     
+  }
+  
+  find_color = function(id,variable) {
+    var color = find_variable(id,variable)
+    if (!color) return "#ccc"
+    else if (typeof color == "string") return color
+    else return vars.color_scale(color)
   }
   
   footer_text = function() {
@@ -1811,6 +1890,18 @@ vizwhiz.viz = function() {
     return chart;
   };
   
+  chart.color_domain = function(x) {
+    if (!arguments.length) return vars.color_domain;
+    vars.color_domain = x;
+    return chart;
+  };
+  
+  chart.color_var = function(x) {
+    if (!arguments.length) return vars.color_var;
+    vars.color_var = x;
+    return chart;
+  };
+  
   chart.csv_data = function(x) {
     if (!arguments.length) {
       var csv_to_return = []
@@ -1838,12 +1929,6 @@ vizwhiz.viz = function() {
   chart.csv_columns = function(x) {
     if (!arguments.length) return vars.csv_columns;
     vars.csv_columns = x;
-    return chart;
-  };
-  
-  chart.color_var = function(x) {
-    if (!arguments.length) return vars.color_var;
-    vars.color_var = x;
     return chart;
   };
   
@@ -2062,17 +2147,12 @@ vizwhiz.viz = function() {
       if(vars.solo.indexOf(x) > -1){
         vars.solo.splice(vars.solo.indexOf(x), 1)
       }
-      // if element is in the filter array remove it and add to this one
-      else if(vars.filter.indexOf(x) > -1){
-        vars.filter.splice(vars.filter.indexOf(x), 1)
-        vars.solo.push(x)
-      }
-      // element not in current filter so add it
+      // else, add it
       else {
         vars.solo.push(x)
       }
     }
-    filter_change = true;
+    filter_change = true
     return chart;
   };
   
@@ -2751,7 +2831,7 @@ vizwhiz.network = function(vars) {
             vizwhiz.tooltip.create({
               "data": tooltip_data,
               "title": find_variable(vars.highlight,vars.text_var),
-              "color": find_variable(vars.highlight,vars.color_var),
+              "color": find_color(vars.highlight,vars.color_var),
               "icon": find_variable(vars.highlight,"icon"),
               "x": x_pos,
               "y": vars.margin.top+5,
@@ -3124,7 +3204,7 @@ vizwhiz.network = function(vars) {
   function fill_color(d) {
     
     // Get elements' color
-    var color = find_variable(d[vars.id_var],vars.color_var)
+    var color = find_color(d[vars.id_var],vars.color_var)
     
     // If node is not active, lighten the color
     var active = find_variable(d[vars.id_var],vars.active_var)
@@ -3141,7 +3221,7 @@ vizwhiz.network = function(vars) {
   function stroke_color(d) {
     
     // Get elements' color
-    var color = find_variable(d[vars.id_var],vars.color_var)
+    var color = find_color(d[vars.id_var],vars.color_var)
     
     // If node is active, return a darker color, else, return the normal color
     var active = find_variable(d[vars.id_var],vars.active_var)
@@ -3383,7 +3463,7 @@ vizwhiz.stacked = function(vars) {
     })
     .attr("class", "layer")
     .attr("fill", function(d){
-      return find_variable(d.key,vars.color_var)
+      return find_color(d.key,vars.color_var)
     })
     .attr("d", function(d) {
       return area(d.values);
@@ -3421,6 +3501,10 @@ vizwhiz.stacked = function(vars) {
       
       // tooltip
       var tooltip_data = get_tooltip_data(this_value,"short")
+      if (vars.layout == "share") {
+        var share = vars.number_format(this_value.y*100,"share")+"%"
+        tooltip_data.push({"name": vars.text_format("share"), "value": share})
+      }
     
       var path_height = vars.y_scale(this_value.y + this_value.y0)-vars.y_scale(this_value.y0),
           tooltip_x = vars.x_scale(this_x)+vars.graph.margin.left+vars.margin.left+vars.parent.node().offsetLeft,
@@ -3431,7 +3515,7 @@ vizwhiz.stacked = function(vars) {
         "title": find_variable(d[vars.id_var],vars.text_var),
         "id": vars.type,
         "icon": find_variable(d[vars.id_var],"icon"),
-        "color": find_variable(d[vars.id_var],vars.color_var),
+        "color": find_color(d[vars.id_var],vars.color_var),
         "x": tooltip_x,
         "y": tooltip_y,
         "offset": (path_height/2),
@@ -3458,6 +3542,10 @@ vizwhiz.stacked = function(vars) {
         .attr({"y1": vars.y_scale(this_value.y0), "y2": vars.y_scale(this_value.y + this_value.y0)})
         
       var tooltip_data = get_tooltip_data(this_value,"short")
+      if (vars.layout == "share") {
+        var share = vars.number_format(this_value.y*100,"share")+"%"
+        tooltip_data.push({"name": vars.text_format("share"), "value": share})
+      }
     
       var path_height = vars.y_scale(this_value.y0)-vars.y_scale(this_value.y + this_value.y0),
           tooltip_x = vars.x_scale(this_x)+vars.graph.margin.left+vars.margin.left+vars.parent.node().offsetLeft,
@@ -3469,7 +3557,7 @@ vizwhiz.stacked = function(vars) {
         "title": find_variable(d[vars.id_var],vars.text_var),
         "id": vars.type,
         "icon": find_variable(d[vars.id_var],"icon"),
-        "color": find_variable(d[vars.id_var],vars.color_var),
+        "color": find_color(d[vars.id_var],vars.color_var),
         "x": tooltip_x,
         "y": tooltip_y,
         "offset": (path_height/2),
@@ -3505,13 +3593,17 @@ vizwhiz.stacked = function(vars) {
       
         d3.selectAll("line.rule").remove()
         vizwhiz.tooltip.remove(vars.type)
-        d3.select(self).attr("stroke-width",0)
+        d3.select(self).attr("opacity",0.85)
         
         var tooltip_data = get_tooltip_data(this_value,"long")
+        if (vars.layout == "share") {
+          var share = vars.number_format(this_value.y*100,"share")+"%"
+          tooltip_data.push({"name": vars.text_format("share"), "value": share})
+        }
         
         vizwhiz.tooltip.create({
           "title": find_variable(d[vars.id_var],vars.text_var),
-          "color": find_variable(d[vars.id_var],vars.color_var),
+          "color": find_color(d[vars.id_var],vars.color_var),
           "icon": find_variable(d[vars.id_var],"icon"),
           "id": vars.type,
           "fullscreen": true,
@@ -3543,7 +3635,7 @@ vizwhiz.stacked = function(vars) {
   paths.transition().duration(vizwhiz.timing)
     .attr("opacity", 0.85)
     .attr("fill", function(d){
-      return find_variable(d.key,vars.color_var)
+      return find_color(d.key,vars.color_var)
     })
     .attr("d", function(d) {
       return area(d.values);
@@ -3673,7 +3765,7 @@ vizwhiz.stacked = function(vars) {
       return "middle"
     })
     .attr("fill", function(d){
-      return vizwhiz.utils.text_color(find_variable(d[vars.id_var],vars.color_var))
+      return vizwhiz.utils.text_color(find_color(d[vars.id_var],vars.color_var))
     })
     .attr("x", function(d){
       var pad = 0;
@@ -3848,7 +3940,7 @@ vizwhiz.tree_map = function(vars) {
       return d.dy+'px'
     })
     .attr("fill", function(d){
-      return find_variable(d,vars.color_var);
+      return find_color(d,vars.color_var);
     })
     .attr("shape-rendering","crispEdges")
     
@@ -3863,7 +3955,7 @@ vizwhiz.tree_map = function(vars) {
     .attr('y','0em')
     .attr('dy','1em')
     .attr("fill", function(d){ 
-      var color = find_variable(d,vars.color_var)
+      var color = find_color(d,vars.color_var)
       return vizwhiz.utils.text_color(color); 
     })
     .style("pointer-events","none")
@@ -3875,7 +3967,7 @@ vizwhiz.tree_map = function(vars) {
     .style("font-weight",vars.font_weight)
     .attr("font-family",vars.font)
     .attr("fill", function(d){
-      var color = find_variable(d,vars.color_var)
+      var color = find_color(d,vars.color_var)
       return vizwhiz.utils.text_color(color); 
     })
     .attr("fill-opacity",0.5)
@@ -3930,7 +4022,7 @@ vizwhiz.tree_map = function(vars) {
       
       vizwhiz.tooltip.create({
         "title": find_variable(d,vars.text_var),
-        "color": find_variable(d,vars.color_var),
+        "color": find_color(d,vars.color_var),
         "icon": find_variable(d,"icon"),
         "id": vars.type,
         "x": d3.event.pageX,
@@ -3966,11 +4058,11 @@ vizwhiz.tree_map = function(vars) {
         vizwhiz.tooltip.remove(vars.type)
         
         var tooltip_data = get_tooltip_data(d,"long")
-        tooltip_data.push({"name": vars.text_format("share"), "value": d.share});
+        tooltip_data.push({"name": vars.text_format("share"), "value": d.share})
         
         vizwhiz.tooltip.create({
           "title": find_variable(d,vars.text_var),
-          "color": find_variable(d,vars.color_var),
+          "color": find_color(d,vars.color_var),
           "icon": find_variable(d,"icon"),
           "id": vars.type,
           "fullscreen": true,
@@ -4016,11 +4108,18 @@ vizwhiz.tree_map = function(vars) {
     .attr('height', function(d) { 
       return d.dy+'px'
     })
+    .attr("fill", function(d){
+      return find_color(d,vars.color_var);
+    })
 
   // text (name)
   cell.select("text.name").transition()
     .duration(vizwhiz.timing/2)
     .attr("opacity", 0)
+    .attr("fill", function(d){ 
+      var color = find_color(d,vars.color_var)
+      return vizwhiz.utils.text_color(color); 
+    })
     .transition().duration(vizwhiz.timing/2)
     .each("end", function(d){
       d3.select(this).selectAll("tspan").remove();
@@ -4050,6 +4149,10 @@ vizwhiz.tree_map = function(vars) {
   // text (share)
   cell.select("text.share").transition().duration(vizwhiz.timing/2)
     .attr("opacity", 0)
+    .attr("fill", function(d){ 
+      var color = find_color(d,vars.color_var)
+      return vizwhiz.utils.text_color(color); 
+    })
     .each("end",function(d){
       d3.select(this)
         .text(function(d){
@@ -4764,7 +4867,7 @@ vizwhiz.pie_scatter = function(vars) {
     .domain(vars.xaxis_domain)
     .range([0, vars.graph.width])
     .nice()
-
+  
   vars.y_scale = d3.scale[vars.yscale_type]()
     .domain(vars.yaxis_domain)
     .range([0, vars.graph.height])
@@ -4832,16 +4935,16 @@ vizwhiz.pie_scatter = function(vars) {
             return "#333";
           }
           else {
-            return find_variable(d[vars.id_var],vars.color_var);
+            return find_color(d[vars.id_var],vars.color_var);
           }
         })
         .style('stroke-width', 1)
         .style('fill', function(dd){
           if (d[vars.active_var] || (d.num_children_active == d.num_children && d[vars.active_var] != false)) {
-            return find_variable(d[vars.id_var],vars.color_var);
+            return find_color(d[vars.id_var],vars.color_var);
           }
           else {
-            var c = d3.hsl(find_variable(d[vars.id_var],vars.color_var));
+            var c = d3.hsl(find_color(d[vars.id_var],vars.color_var));
             c.l = 0.95;
             return c.toString();
           }
@@ -4853,7 +4956,7 @@ vizwhiz.pie_scatter = function(vars) {
         
       d3.select(this)
         .append("path")
-        .style('fill', find_variable(d[vars.id_var],vars.color_var) )
+        .style('fill', find_color(d[vars.id_var],vars.color_var) )
         .style("fill-opacity", 1)
         
       d3.select(this).select("path").transition().duration(vizwhiz.timing)
@@ -4890,7 +4993,7 @@ vizwhiz.pie_scatter = function(vars) {
         
         vizwhiz.tooltip.create({
           "title": find_variable(d,vars.text_var),
-          "color": find_variable(d,vars.color_var),
+          "color": find_color(d,vars.color_var),
           "icon": find_variable(d,"icon"),
           "id": vars.type,
           "fullscreen": true,
@@ -4931,12 +5034,12 @@ vizwhiz.pie_scatter = function(vars) {
       d3.select(this).select("circle").transition().duration(vizwhiz.timing)
         .style("stroke", function(dd){
           if (d[vars.active_var] || (d.num_children_active == d.num_children && d[vars.active_var] != false)) return "#333";
-          else return find_variable(d[vars.id_var],vars.color_var);
+          else return find_color(d[vars.id_var],vars.color_var);
         })
         .style('fill', function(dd){
-          if (d[vars.active_var] || (d.num_children_active == d.num_children && d[vars.active_var] != false)) return find_variable(d[vars.id_var],vars.color_var);
+          if (d[vars.active_var] || (d.num_children_active == d.num_children && d[vars.active_var] != false)) return find_color(d[vars.id_var],vars.color_var);
           else {
-            var c = d3.hsl(find_variable(d[vars.id_var],vars.color_var));
+            var c = d3.hsl(find_color(d[vars.id_var],vars.color_var));
             c.l = 0.95;
             return c.toString();
           }
@@ -4947,6 +5050,7 @@ vizwhiz.pie_scatter = function(vars) {
       if (d.num_children) {
         d.arc_angle = (((d.num_children_active / d.num_children)*360) * (Math.PI/180));
         d3.select(this).select("path").transition().duration(vizwhiz.timing)
+          .style('fill', find_color(d[vars.id_var],vars.color_var) )
           .attrTween("d",arcTween)
           .each("end", function(dd) {
             vars.arc_angles[d.id] = d.arc_angle
@@ -4986,7 +5090,7 @@ vizwhiz.pie_scatter = function(vars) {
     .attr("x2", 0)
     .attr("y1", function(d){ return vars.y_scale(d[vars.yaxis_var]) })
     .attr("y2", function(d){ return vars.y_scale(d[vars.yaxis_var]) })
-    .attr("stroke", function(d){ return find_variable(d[vars.id_var],vars.color_var); })
+    .attr("stroke", function(d){ return find_color(d[vars.id_var],vars.color_var); })
     .attr("stroke-width", 1)
     .attr("shape-rendering","crispEdges")
   
@@ -5005,7 +5109,7 @@ vizwhiz.pie_scatter = function(vars) {
     .attr("y2", vars.graph.height + 10)      
     .attr("x1", function(d){ return vars.x_scale(d[vars.xaxis_var]) })
     .attr("x2", function(d){ return vars.x_scale(d[vars.xaxis_var]) })
-    .attr("stroke", function(d){ return find_variable(d[vars.id_var],vars.color_var); })
+    .attr("stroke", function(d){ return find_color(d[vars.id_var],vars.color_var); })
     .attr("stroke-width", 1)
     .attr("shape-rendering","crispEdges")
   
@@ -5040,7 +5144,7 @@ vizwhiz.pie_scatter = function(vars) {
         var radius = vars.size_scale(val),
             x = vars.x_scale(d[vars.xaxis_var]),
             y = vars.y_scale(d[vars.yaxis_var]),
-            color = d[vars.active_var] || d.num_children_active/d.num_children == 1 ? "#333" : find_variable(d[vars.id_var],vars.color_var),
+            color = d[vars.active_var] || d.num_children_active/d.num_children == 1 ? "#333" : find_color(d[vars.id_var],vars.color_var),
             viz = d3.select("g.chart");
             
         // vertical line to x-axis
@@ -5130,7 +5234,7 @@ vizwhiz.pie_scatter = function(vars) {
       
         vizwhiz.tooltip.create({
           "id": vars.type,
-          "color": find_variable(d[vars.id_var],vars.color_var),
+          "color": find_color(d[vars.id_var],vars.color_var),
           "icon": find_variable(d[vars.id_var],"icon"),
           "data": tooltip_data,
           "title": find_variable(d[vars.id_var],vars.text_var),
@@ -5259,7 +5363,7 @@ vizwhiz.bubbles = function(vars) {
     if (d.depth == 1) {
       
       if (vars.grouping != "active") {
-        var color = find_variable(d.children[0][vars.id_var],vars.color_var);
+        var color = find_color(d.children[0][vars.id_var],vars.color_var);
       }
       else {
         var color = "#cccccc";
@@ -5435,7 +5539,7 @@ vizwhiz.bubbles = function(vars) {
       vars.arc_sizes[d[vars.id_var]+"_bg"] = 0
       vars.arc_inners[d[vars.id_var]+"_bg"] = 0
       
-      var color = find_variable(d[vars.id_var],vars.color_var)
+      var color = find_color(d[vars.id_var],vars.color_var)
       
       var bg_color = d3.hsl(color)
       bg_color.l = 0.95
@@ -5556,7 +5660,7 @@ vizwhiz.bubbles = function(vars) {
       
       vizwhiz.tooltip.create({
         "id": vars.type,
-        "color": find_variable(d[vars.id_var],vars.color_var),
+        "color": find_color(d[vars.id_var],vars.color_var),
         "icon": find_variable(d[vars.id_var],"icon"),
         "data": tooltip_data,
         "title": find_variable(d[vars.id_var],vars.text_var),
@@ -5585,7 +5689,7 @@ vizwhiz.bubbles = function(vars) {
         
         vizwhiz.tooltip.create({
           "title": find_variable(d,vars.text_var),
-          "color": find_variable(d,vars.color_var),
+          "color": find_color(d,vars.color_var),
           "icon": find_variable(d,"icon"),
           "id": vars.type,
           "fullscreen": true,
@@ -5620,8 +5724,16 @@ vizwhiz.bubbles = function(vars) {
       if (vars.donut) d.arc_inner_bg = d.r*arc_offset;
       else d.arc_inner_bg = 0;
       d.arc_radius_bg = d.r;
+      
+      var color = find_color(d[vars.id_var],vars.color_var)
+      
+      var bg_color = d3.hsl(color)
+      bg_color.l = 0.95
+      bg_color = bg_color.toString()
     
       d3.select(this).select("path.bg").transition().duration(vizwhiz.timing)
+        .attr("fill", bg_color )
+        .attr("stroke", color)
         .attrTween("d",arcTween_bg)
         .each("end", function() {
           vars.arc_sizes[d[vars.id_var]+"_bg"] = d.arc_radius_bg
@@ -5640,6 +5752,7 @@ vizwhiz.bubbles = function(vars) {
       d.arc_angle = d.arc_angle < Math.PI*2 ? d.arc_angle : Math.PI*2
 
       d3.select(this).select("path.available").transition().duration(vizwhiz.timing)
+        .style('fill', color)
         .attrTween("d",arcTween)
         .each("end", function() {
           vars.arc_sizes[d[vars.id_var]] = d.arc_radius
@@ -5656,6 +5769,7 @@ vizwhiz.bubbles = function(vars) {
         d.arc_angle_else = d.arc_angle_else < Math.PI*2 ? d.arc_angle_else : Math.PI*2
     
         d3.select(this).select("path.elsewhere").transition().duration(vizwhiz.timing)
+          .style('fill', color)
           .attrTween("d",arcTween_else)
           .each("end", function() {
             vars.arc_sizes[d[vars.id_var]+"_else"] = d.arc_radius_else
@@ -5958,7 +6072,7 @@ vizwhiz.rings = function(vars) {
       vizwhiz.tooltip.remove(vars.type)
       vizwhiz.tooltip.create({
         "title": find_variable(vars.highlight,vars.text_var),
-        "color": find_variable(vars.highlight,vars.color_var),
+        "color": find_color(vars.highlight,vars.color_var),
         "icon": find_variable(vars.highlight,"icon"),
         "id": vars.type,
         "html": tooltip_appends+html,
@@ -6117,7 +6231,7 @@ vizwhiz.rings = function(vars) {
     root[vars.text_var] = find_variable(vars.highlight,vars.text_var)
     root[vars.id_var] = vars.highlight
     root.children = []
-    root[vars.color_var] = find_variable(vars.highlight,vars.color_var)
+    root[vars.color_var] = find_color(vars.highlight,vars.color_var)
     root[vars.active_var] = find_variable(vars.highlight,vars.active_var)
   
     nodes.push(root);
@@ -6134,7 +6248,7 @@ vizwhiz.rings = function(vars) {
         child[vars.text_var] = find_variable(child[vars.id_var],vars.text_var)
         child.children = []
         child.children_total = []
-        child[vars.color_var] = find_variable(child[vars.id_var],vars.color_var)
+        child[vars.color_var] = find_color(child[vars.id_var],vars.color_var)
         child[vars.active_var] = find_variable(child[vars.id_var],vars.active_var)
   
         // push first level child into nodes
@@ -6167,7 +6281,7 @@ vizwhiz.rings = function(vars) {
               grandchild.ring_y = ring_width*2;
               grandchild.depth = 2;
               grandchild[vars.text_var] = find_variable(grandchild[vars.id_var],vars.text_var)
-              grandchild[vars.color_var] = find_variable(grandchild[vars.id_var],vars.color_var)
+              grandchild[vars.color_var] = find_color(grandchild[vars.id_var],vars.color_var)
               grandchild[vars.active_var] = find_variable(grandchild[vars.id_var],vars.active_var)
               grandchild.parents = []
 
