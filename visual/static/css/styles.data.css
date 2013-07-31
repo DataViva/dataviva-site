@@ -1,3 +1,9 @@
+body.classifications #inner_container,
+body.query #inner_container {
+  display: block;
+  vertical-align: top;
+}
+
 /***************************/
 /* Classification Specific */
 /***************************/
@@ -15,11 +21,6 @@
 /***********************/
 /* Data Query Specific */
 /***********************/
-
-body.query #inner_container {
-  display: block;
-  vertical-align: top;
-}
 
 #data_toggle, #years_dropdown {
   display: inline-block;

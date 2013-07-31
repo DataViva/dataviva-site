@@ -60,7 +60,7 @@ def index():
 @mod.route('/query/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
 def query(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
     isic, cbo, hs, wld = [None] * 4
-    
+    g.page_type = "query"
     if not bra_id:
         '''try getting the user's ip address, since the live server is using
             proxy nginx, we need to use the "X-Forwarded-For" remote address 
