@@ -8,10 +8,22 @@
 
 <div id="dynamic_header">
   
-  <div class="grid4col1">
+  <div class="grid4col3 grid4offset1">
+    <div id="table_header">
+      <table>
+        <thead>
+          <tr></tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+  
+</div>
+
+<div id="filter_selects" class="grid4col1">
     
     <div id="data_toggle">
-      <legend id="dataset">Dataset</legend>
+      <legend id="dataset">Data</legend>
       <label for="rais">RAIS</label>
       <input type="radio" name="dataset" value="rais" id="rais" onclick="change_dataset(this.value)" {% if data_type == "rais" %}checked="checked"{% endif %}>
       <label for="secex">SECEX</label>
@@ -33,8 +45,6 @@
           <option value="2011">2011</option>
         </select>
     </div>
-    
-  </div>
   
   <div class="grid4col3">
     <div id="table_header">
@@ -222,7 +232,7 @@
 
   var CURRENT_DATASET = d3.select("input[name='dataset']:checked").attr("value");
   var ORDER_DIRECTIONS = ["desc", "asc", ""]
-  var COLUMNS = ["year", "bra_id", "isic_id", "hs_id", "cbo_id", "wld_id", "wage", "num_emp", "num_est", "val_usd", "val_kg", "val_qty", "rca", "growth_pct", "growth_pct_total", "growth_val", "growth_val_total"]
+  var COLUMNS = ["year", "bra_id", "isic_id", "hs_id", "cbo_id", "wld_id", "wage", "num_emp", "num_est", "val_usd", "rca", "growth_val", "growth_val_total"]
 
   // add icons to tags!
   d3.selectAll(".list_icon")

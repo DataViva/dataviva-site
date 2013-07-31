@@ -6,6 +6,8 @@ visual.slide.timing = 0.75, // timing of page slides, in seconds
 visual.format = {};
 visual.format.text = function(text,name) {
   
+  var ids = ["cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
+  if (ids.indexOf(name) >= 0) return text.toUpperCase()
   if (text.indexOf("cp_bra_") == 0) {
     var arr = text.split("_")
     arr.shift()
@@ -25,7 +27,7 @@ visual.format.number = function(value,name) {
   var smalls = ["rca","rca_bra","rca_wld","distance","complexity"]
   
   var ids = ["cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
-  if (ids.indexOf(name) >= 0) return value
+  if (ids.indexOf(name) >= 0) return value.toString().toUpperCase()
   else if (name == "year") {
     var return_value = value
   }
@@ -55,7 +57,9 @@ visual.format.number = function(value,name) {
   
   var total_labels = {
         "val_usd": ["$"," USD"],
-        "wage": ["$"," BRL"]
+        "wage": ["$"," BRL"],
+        "growth_val": ["$"," BRL"],
+        "growth_val_total": ["$"," BRL"]
       }
 
   if (total_labels[name]) {

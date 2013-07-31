@@ -16,9 +16,14 @@
 /* Data Query Specific */
 /***********************/
 
+body.query #inner_container {
+  display: block;
+  vertical-align: top;
+}
+
 #data_toggle, #years_dropdown {
   display: inline-block;
-  margin-bottom: 5px;
+  margin-right: 5px;
 }
 
 #data_toggle > .leon.radio {
@@ -51,8 +56,9 @@
 
 #filter_selects {
   left: 50%;
-  margin-left: -480px;
+  margin-left: -485px;
   position: fixed;
+  text-align: center;
   top: 120px;
 }
 

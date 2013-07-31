@@ -1,3 +1,8 @@
+body.about #inner_container {
+  display: block;
+  vertical-align: top;
+}
+
 #about_nav {
   left: 50%;
   margin-left: -400px;
