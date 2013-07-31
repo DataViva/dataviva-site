@@ -173,6 +173,11 @@
       d3.select("#full_screen").remove();
     }
     
+    var footer = {
+      "secex": "Data Provided by SECEX",
+      "rais": "Data Provided by RAIS"
+    }
+    
     /*******************************/
     /* App Functions and Variables */
     /*******************************/
@@ -195,7 +200,7 @@
     d3.select("#builder")
       .style("max-width",app.title_width+"px")
       
-    app.title_height = d3.select("#settings").node().offsetHeight+5
+    app.title_height = d3.select("#settings").node().offsetHeight+10
     
     app.font = null
     var fonts = ["HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"]
@@ -696,7 +701,7 @@
         
       /************************/
       /* Gloabl App Variables */
-      /************************/  
+      /************************/
       app.viz.type(app.build.app.viz_whiz)
         .title(app.build.title)
         .attrs(app.attrs[app.build.output])
@@ -713,6 +718,7 @@
         .highlight(null)
         .id_var(app.build.output+"_id")
         .error(false)
+        .data_source(footer[app.build.dataset])
         
       /******************************/
       /* Network Specific Variables */

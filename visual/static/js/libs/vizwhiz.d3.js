@@ -1238,7 +1238,8 @@ vizwhiz.viz = function() {
         .attr("class","footer")
 
       // Create titles
-      vars.margin.top = 0;
+      vars.margin.top = 0
+      var title_offset = 0
       if ((vars.type == "rings" && !vars.connections[vars.highlight]) || !vars.data || error || vars.svg_width < 300 || vars.svg_height < 200) {
         vars.small = true;
         vars.graph.margin = {"top": 0, "right": 0, "bottom": 0, "left": 0}
@@ -1258,10 +1259,14 @@ vizwhiz.viz = function() {
         if (vars.margin.top > 0) {
           vars.margin.top += 3
           if (vars.margin.top < vars.title_height) {
+            title_offset = (vars.title_height-vars.margin.top)/2
             vars.margin.top = vars.title_height
           }
         }
       }
+      
+      d3.select("g.titles").transition().duration(vizwhiz.timing)
+        .attr("transform","translate(0,"+title_offset+")")
       
       update_footer()
       
@@ -3835,6 +3840,7 @@ vizwhiz.tree_map = function(vars) {
   cell_enter.append("rect")
     .attr("stroke",vars.background)
     .attr("stroke-width",1)
+    .attr("opacity",0.85)
     .attr('width', function(d) {
       return d.dx+'px'
     })
@@ -3917,7 +3923,7 @@ vizwhiz.tree_map = function(vars) {
       
       d3.select("#cell_"+id).select("rect")
         .style("cursor","pointer")
-        .attr("stroke-width",3)
+        .attr("opacity",1)
 
       var tooltip_data = get_tooltip_data(d,"short")
       tooltip_data.push({"name": vars.text_format("share"), "value": d.share});
@@ -3942,7 +3948,7 @@ vizwhiz.tree_map = function(vars) {
       var id = find_variable(d,vars.id_var)
       
       d3.select("#cell_"+id).select("rect")
-        .attr("stroke-width",1)
+        .attr("opacity",0.85)
       
       vizwhiz.tooltip.remove(vars.type)
       
@@ -3955,7 +3961,7 @@ vizwhiz.tree_map = function(vars) {
       make_tooltip = function(html) {
       
         d3.select("#cell_"+id).select("rect")
-          .attr("stroke-width",1)
+          .attr("opacity",0.85)
         
         vizwhiz.tooltip.remove(vars.type)
         

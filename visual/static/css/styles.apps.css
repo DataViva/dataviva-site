@@ -21,7 +21,7 @@ body {
 }
 
 #app {
-  margin: 5px;
+  margin: 0px 5px;
   background-color: #ffffff;
   position: absolute;
   -webkit-transition: top 0.6s;
