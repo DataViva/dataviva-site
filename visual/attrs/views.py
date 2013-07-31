@@ -21,13 +21,12 @@ def before_request():
     if cached_q and request.is_xhr:
     # if cached_q:
         return cached_q
-    g.lang = "en"
 
 @mod.after_request
 def after_request(response):
     # if response.status_code != 302:
     if response.status_code != 302 and request.is_xhr:
-        cache_id = request.path
+        cache_id = request.path + g.locale
         # test if this query was cached, if not add it
         cached_q = cached_query(cache_id)
         if cached_q is None:
