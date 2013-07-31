@@ -56,6 +56,13 @@
   top: 120px;
 }
 
+.filter_container {
+  display: none;
+}
+.filter_container.open {
+  display: block;
+}
+
 .filter_button:after {
   -webkit-transition: -webkit-transform .2s;
           transition: -webkit-transform .2s;
@@ -73,6 +80,9 @@
   margin: -10px 10px 10px;
   padding: 10px;
   position: relative;
+}
+.filter_box.open {
+  display: block;
 }
 
 .filter_box span {

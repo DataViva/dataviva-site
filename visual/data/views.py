@@ -57,24 +57,58 @@ def index():
     return render_template("data/index.html")
 
 @mod.route('/query/')
-def query():
-    g.page_type = "query"
-    # try getting the user's ip address, since the live server is using a proxy
-    # nginx, we need to use the "X-Forwarded-For" remote address otherwise
-    # this will always be 127.0.0.1 ie localhost
-    if not request.headers.getlist("X-Forwarded-For"):
-        ip = request.remote_addr
+@mod.route('/query/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
+def query(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
+    isic, cbo, hs, wld = [None] * 4
+    
+    if not bra_id:
+        '''try getting the user's ip address, since the live server is using
+            proxy nginx, we need to use the "X-Forwarded-For" remote address 
+            otherwise this will always be 127.0.0.1 ie localhost'''
+        if not request.headers.getlist("X-Forwarded-For"):
+            ip = request.remote_addr
+        else:
+            ip = request.headers.getlist("X-Forwarded-For")[0]
+    
+        # next try geolocating the user's ip
+        bra = get_geo_location(ip) or None
+    
+        '''if the city or region is not found in the db use Belo Horizonte as 
+            default'''
+        if not bra:
+            bra = [Bra.query.get("mg030000")]
+        else:
+            bra = [bra]
     else:
-        ip = request.headers.getlist("X-Forwarded-For")[0]
+        bra = [Bra.query.get_or_404(b) for b in bra_id.split("+")]
     
-    # next try geolocating the user's ip
-    geo_location = get_geo_location(ip) or None
+    if filter_1 and filter_1 != "all":
+        if data_type == "rais":
+            if filter_1 == "show":
+                isic = []
+            else:
+                isic = [Isic.query.get_or_404(f1) for f1 in filter_1.split("+")]
+        else:
+            if filter_1 == "show":
+                hs = []
+            else:
+                hs = [Hs.query.get_or_404(f1) for f1 in filter_1.split("+")]
     
-    # if the city or region is not found in the db use Belo Horizonte as default
-    if not geo_location:
-        geo_location = Bra.query.get("mg030000")
+    if filter_2 and filter_2 != "all":
+        if data_type == "rais":
+            if filter_2 == "show":
+                cbo = []
+            else:
+                cbo = [Cbo.query.get_or_404(f2) for f2 in filter_2.split("+")]
+        else:
+            if filter_2 == "show":
+                wld = []
+            else:
+                wld = [Wld.query.get_or_404(f2) for f2 in filter_2.split("+")]
     
-    return render_template("data/query.html", geo_location = geo_location)
+    return render_template("data/query.html", 
+        data_type = data_type,
+        bra=bra, isic=isic, cbo=cbo, hs=hs, wld=wld)
 
 @mod.route('/classifications/')
 @mod.route('/classifications/<attr>/')

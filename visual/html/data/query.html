@@ -13,9 +13,9 @@
     <div id="data_toggle">
       <legend id="dataset">Dataset</legend>
       <label for="rais">RAIS</label>
-      <input type="radio" name="dataset" value="rais" id="rais" onclick="change_dataset(this.value)" checked="checked">
+      <input type="radio" name="dataset" value="rais" id="rais" onclick="change_dataset(this.value)" {% if data_type == "rais" %}checked="checked"{% endif %}>
       <label for="secex">SECEX</label>
-      <input type="radio" name="dataset" value="secex" id="secex" onclick="change_dataset(this.value)">
+      <input type="radio" name="dataset" value="secex" id="secex" onclick="change_dataset(this.value)" {% if data_type == "secex" %}checked="checked"{% endif %}>
     </div>
   
     <div id="years_dropdown">
@@ -49,60 +49,155 @@
 </div>
 
 <div id="filter_selects" class="grid4col1">
-  
-    <a id="location_filter" class="help filter_button active">
-      Brazilian Location
-    </a>
-    <div id="location_add" class="filter_box" style="display: block">
-      <span class="filler" style="display:none;">Showing all of Brazil until a location is selected.</span>
-      <div id="id_{{ geo_location.id }}" class="filter_item">
-        <span class="list_icon" title="{{ geo_location.id }}"></span>
-        <span class="filter_title" style="margin-left: 1px;">{{ geo_location.name_en }}</span>
-        <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
-      </div>
-      <a name="bra" class="add_filter">add a location</a>
-    </div>
-  
-  <div id="rais_on">
-      <a id="industry_filter" class="help filter_button">
-        Establishment
-      </a>
-      <div id="industry_add" class="filter_box">
-        <span class="filler">Showing all establishments until a filter is selected.</span>
-        <a name="isic" class="add_filter button">add an establishment</a>
-      </div>
-     
-      <a id="occupation_filter" class="help filter_button">
-        Occupation
-      </a>
-      <div id="occupation_add" class="filter_box">
-        <span class="filler">Showing all occupations until a filter is selected.</span>
-        <a name="cbo" class="add_filter button">add an occupation</a>
-      </div>
 
-      <div id="rais_go" class="decision">Build</div>
+  <!-- 
+    ~~~~~~~~
+    Selector for Brazilian Locations
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~
+  -->
+  <a id="location_filter" class="help filter_button active">
+    Brazilian Location
+  </a>
+  <div id="location_add" class="filter_box open">
+      
+    {% for b in bra %}
+    <div id="id_{{ b.id }}" class="filter_item">
+      <span class="list_icon" title="{{ b.id }}" data-type="bra" style="background-color:{{b.color}}"></span>
+      <span class="filter_title" style="margin-left: 1px;">{{ b.name_en }}</span>
+      <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
+    </div>
+    {% endfor %}
+    
+    {% if not bra %}
+    <span class="filler">Showing all of Brazil until a location is selected.</span>
+    {% endif %}
+
+    <a name="bra" class="add_filter">add a location</a>
       
   </div>
   
-  <div id="secex_on">
-      <a id="product_filter" class="help filter_button">
-        Product Export
-      </a>
-      <div id="product_add" class="filter_box">
-        <span class="filler">Showing all product exports until a filter is selected.</span>
-        <a name="hs" class="add_filter button">add a product</a>
-      </div>
+  <div id="rais_on" class="filter_container {% if data_type == "rais" %}open{% endif %}">
     
-      <a id="country_filter" class="help filter_button">
-        Trade Partner
-      </a>
+    <!-- 
+      ~~~~~~~~
+      Selector for Industries
+      ~~~~~~~~~~~~~~~~~~~~~~~
+      ~~~
+    -->    
+    <a id="industry_filter" class="help filter_button {% if isic != None %}active{% endif %}">
+      Establishment
+    </a>
+    <div id="industry_add" class="filter_box {% if isic != None %}open{% endif %}">
       
-      <div id="country_add" class="filter_box">
-        <span class="filler">Showing all trade partners until a filter is selected.</span>
-        <a name="wld" class="add_filter button">add a country</a>
+      {% if isic %}
+      {% for i in isic %}
+      <div id="id_{{ i.id }}" class="filter_item">
+        <span class="list_icon" title="{{ i.id }}" data-type="isic" style="background-color:{{i.color}}"></span>
+        <span class="filter_title" style="margin-left: 1px;">{{ i.name_en }}</span>
+        <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
       </div>
+      {% endfor %}
+      
+      {% else %}
+      <span class="filler">Showing all establishments until a filter is selected.</span>
+      {% endif %}
+      
+      <a name="isic" class="add_filter button">add an establishment</a>
+      
+    </div>
+
+    <!-- 
+      ~~~~~~~~
+      Selector for Occupations
+      ~~~~~~~~~~~~~~~~~~~~~~~
+      ~~~
+    -->       
+    <a id="occupation_filter" class="help filter_button {% if cbo != None %}active{% endif %}">
+      Occupation
+    </a>
+    <div id="occupation_add" class="filter_box {% if cbo != None %}open{% endif %}">
+      
+      {% if cbo %}
+      {% for c in cbo %}
+      <div id="id_{{ c.id }}" class="filter_item">
+        <span class="list_icon" title="{{ c.id }}" data-type="cbo" style="background-color:{{c.color}}"></span>
+        <span class="filter_title" style="margin-left: 1px;">{{ c.name_en }}</span>
+        <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
+      </div>
+      {% endfor %}
+      
+      {% else %}
+      <span class="filler">Showing all occupations until a filter is selected.</span>
+      {% endif %}
+      
+      <a name="cbo" class="add_filter button">add an occupation</a>
+      
+    </div>
+
+    <div id="rais_go" class="decision">Build</div>
+      
+  </div>
+  
+  <div id="secex_on" class="filter_container {% if data_type == "secex" %}open{% endif %}">
+
+    <!-- 
+      ~~~~~~~~
+      Selector for Products
+      ~~~~~~~~~~~~~~~~~~~~~
+      ~~~
+    -->  
+    <a id="product_filter" class="help filter_button {% if hs != None %}active{% endif %}">
+      Product Export
+    </a>
+    <div id="product_add" class="filter_box {% if hs != None %}open{% endif %}">
+      
+      {% if hs %}
+      {% for p in hs %}
+      <div id="id_{{ p.id }}" class="filter_item">
+        <span class="list_icon" title="{{ p.id }}" data-type="hs" style="background-color:{{p.color}}"></span>
+        <span class="filter_title" style="margin-left: 1px;">{{ p.name_en }}</span>
+        <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
+      </div>
+      {% endfor %}
+      
+      {% else %}
+      <span class="filler">Showing all product exports until a filter is selected.</span>
+      {% endif %}
+      
+      <a name="hs" class="add_filter button">add a product</a>
+      
+    </div>
+
+    <!-- 
+      ~~~~~~~~
+      Selector for Trade Partner
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+      ~~~
+    -->      
+    <a id="country_filter" class="help filter_button {% if wld != None %}active{% endif %}">
+      Trade Partner
+    </a>      
+    <div id="country_add" class="filter_box {% if wld != None %}open{% endif %}">
+      
+      {% if wld %}
+      {% for c in wld %}
+      <div id="id_{{ c.id }}" class="filter_item">
+        <span class="list_icon" title="{{ c.id }}" data-type="wld" style="background-color:{{c.color}}"></span>
+        <span class="filter_title" style="margin-left: 1px;">{{ c.name_en }}</span>
+        <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
+      </div>
+      {% endfor %}
+      
+      {% else %}
+      <span class="filler">Showing all trade partners until a filter is selected.</span>
+      {% endif %}
+      
+      <a name="wld" class="add_filter button">add a country</a>
+      
+    </div>
     
-      <div id="secex_go" class="decision">Build</div>
+    <div id="secex_go" class="decision">Build</div>
       
   </div>
 </div>
@@ -125,7 +220,7 @@
   leon("$dataset")
   leon("#year_filter")
 
-  var CURRENT_DATASET = 'rais';
+  var CURRENT_DATASET = d3.select("input[name='dataset']:checked").attr("value");
   var ORDER_DIRECTIONS = ["desc", "asc", ""]
   var COLUMNS = ["year", "bra_id", "isic_id", "hs_id", "cbo_id", "wld_id", "wage", "num_emp", "num_est", "val_usd", "val_kg", "val_qty", "rca", "growth_pct", "growth_pct_total", "growth_val", "growth_val_total"]
 
@@ -133,17 +228,9 @@
   d3.selectAll(".list_icon")
     .style("background-image", function(){
       var id = d3.select(this).attr("title")
-      return "url('"+ visual.icon(id, "bra") + "')"
+      var type = d3.select(this).attr("data-type")
+      return "url('"+ visual.icon(id, type) + "')"
     })
-
-  // visual.toggle("dataset");
-  // visual.dropdown("#year_filter");
-
-  d3.selectAll("#secex_on").style("display", "none")
-  d3.selectAll("#rais_on").style("display", "block")
-
-  
-
   
   // Toggling between datasets (RAIS & SECEX)
   function change_dataset(value){
@@ -163,18 +250,16 @@
     
     var classes = d3.select(this).attr("class");
     var add_container = d3.select("#" + this.id.split("_")[0] + "_add")
+    var add_container_classes = add_container.attr("class")
     
     if(classes.indexOf("active") > -1){
       d3.select(this).attr("class", classes.replace("active"))
-      add_container.style("display", "none")
+      add_container.attr("class", add_container_classes.replace("open"))
     }
     else {
       d3.select(this).attr("class", classes + " active")
-      add_container.style("display", "block")
+      add_container.attr("class", add_container_classes + " open")
     }
-    
-
-    
     
   })
   
@@ -237,7 +322,7 @@
   }
   
   function is_active(selection){
-    if(selection.attr("class").indexOf("active") > -1){
+    if(selection.attr("class").indexOf("open") > -1){
       return true;
     }
     return false;
@@ -245,7 +330,6 @@
   
   // retrieving new data
   function update_table(dataset, order){
-
     
     // based on the dataset provided determine which filters we are interested
     // in
@@ -259,7 +343,8 @@
       
       // has the button been selected? if so we'll at least need to add this
       // to the api call as 'show'
-      fdata = is_active(d3.select("#"+fname+"_filter")) ? "show" : filters[fname];
+      // console.log("#"+fname+"_add")
+      fdata = is_active(d3.select("#"+fname+"_add")) ? "show" : filters[fname];
       
       // if this filter is active, we also need to check if items have been
       // added
@@ -299,7 +384,8 @@
       var api_url = "/secex/"+ [filters["year"], filters["location"], filters["product"], filters["country"]].join("/")
       api_url += "/?filter=val_usd>0"
     }
-    console.log(api_url)
+    
+    update_url(api_url)
     
     d3.select("#table_container").selectAll("tbody > tr").remove()
     d3.select("#table_container")
@@ -307,6 +393,34 @@
 
     // prevent page from submitting form
     if(d3.event) d3.event.preventDefault();
+  }
+  
+  function update_url(api_url){
+    
+    var page_url = api_url.split("?")[0]
+    page_url = "/data/query" + page_url
+        
+    if (Modernizr.history) {
+      window.history.pushState(
+        {'prev_request': page_url}, 
+        "Visual : Data", page_url
+      )
+      if (window != window.parent &&
+          window.parent.location.pathname.indexOf("query") >= 0) {
+        window.parent.history.pushState(
+          {'prev_request': page_url}, 
+          "Visual : Data", page_url
+        )
+      }
+    } 
+    else if (window.location.href.indexOf(window_url) < 0) {
+      if (window.parent.location.pathname.indexOf("query") >= 0) {
+        window.location = page_url
+      } else {
+        window.location = page_url
+      }
+    }
+      
   }
   
   function item_formatter(container_el, dataset){
