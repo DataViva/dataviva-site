@@ -18,32 +18,23 @@
       <a id="ask" href="{{ url_for('ask.index') }}" class="link{% if g.page_type == 'ask' %} active{% endif %}">Ask Sabrina</a>
       <a id="about" href="{{ url_for('about.about') }}" class="link{% if g.page_type == 'about' %} active{% endif %}">Learn More</a>
       <div id="account" class="leon button">
-        <i class="icon-user"></i>
-        <span class="leon arrow">&#8227</span>
-      </div>
-     
-      <div id="account_tooltip" style="display:none;">
         {% if g.user.is_authenticated() %}
-          <a class="account" href="{{ url_for('account.user', nickname=g.user.nickname) }}"><i class="icon-user"></i>{{g.user.fullname}}</a>
-          {% if g.user.is_admin() %}
-            <a class="account" href="{{ url_for('admin.admin') }}"><i class="icon-gears"></i>Admin Panel</a>
-          {% endif %}
+          <div class="avatar" style="background-image: url('{{ g.user.avatar(54) }}');"></div>
         {% else %}
-        <a class="account" onclick="login()"><i class="icon-key"></i>Click here to login</a>
+          Login
         {% endif %}
-        <input type="radio" name="language_select" onclick="change_language(this.value)" 
-          id="en" value="en"{% if g.locale == 'en' %} checked{% endif %}>
-        <label for="en">English</label>
-        <input type="radio" name="language_select" onclick="change_language(this.value)" 
-          id="pt" value="pt"{% if g.locale == 'pt' %} checked{% endif %}>
-        <label for="pt">Portuguese</label>
-        
+      </div>
 
-        {% if g.user.is_authenticated() %}
-        <a class="account" href="{{ url_for('account.logout') }}">Logout</a>
+      {% if g.user.is_authenticated() %}
+      <div id="account_tooltip" style="display:none;">
+        <a class="account" href="{{ url_for('account.user', nickname=g.user.nickname) }}"><i class="icon-user"></i>Profile</a>
+        {% if g.user.is_admin() %}
+          <a class="account" href="{{ url_for('admin.admin') }}"><i class="icon-gears"></i>Admin Panel</a>
         {% endif %}
+        <a class="account" href="{{ url_for('account.logout') }}"><i class="icon-key"></i>Logout</a>
         
       </div>
+      {% endif %}
     
     </div>
     
@@ -81,7 +72,14 @@
     </a>
     <!-- /Open Data Link -->
     
-    <a class="link" href="{{ url_for('about.about') }}">More Info</a>
+    <div id="language">
+      <input type="radio" name="language_select" onclick="change_language(this.value)" 
+        id="en" value="en"{% if g.locale == 'en' %} checked{% endif %}>
+      <label for="en">English</label>
+      <input type="radio" name="language_select" onclick="change_language(this.value)" 
+        id="pt" value="pt"{% if g.locale == 'pt' %} checked{% endif %}>
+      <label for="pt">Portuguese</label>
+    </div>
       
   </div>
   
@@ -97,6 +95,8 @@
   
     var lang = "{{ g.locale }}"
     
+    leon("$language_select")
+        
     d3.select("#close_message").on(vizwhiz.evt.click,function(){
       var div = d3.select("#server_message")
       var timing = parseFloat(div.style("transition-duration"),10)*1000;
@@ -106,68 +106,71 @@
       },timing)
     });
     
-    account_toggle = function() {
-      var account_button = d3.select("#account")
-      if (account_button.node().className.indexOf("active") < 0) {
-      }
-      else {
-      }
-    }
-    
-    show_toggle = function() {
-      d3.select("#account").attr("class","leon button active")
-      d3.select("#vizwhiz_tooltip_id_account").style("display","block")
-    }
-    
-    hide_toggle = function() {
-      d3.select("#account").attr("class","leon button")
-      d3.select("#vizwhiz_tooltip_id_account").style("display","none")
-    }
-    
-    var language_html = d3.select("div#account_tooltip").html()
-    d3.select("div#account_tooltip").remove()
-    
-    var acct = d3.select("#account").node(),
-        w = acct.offsetWidth,
-        h = acct.offsetHeight,
-        x = acct.offsetLeft+w/2+parseFloat(d3.select(acct).style("padding-left"),10)-2,
-        y = acct.offsetTop+h
-        
-    vizwhiz.tooltip.create({
-      "id": "account",
-      "x": x+2,
-      "y": y,
-      "arrow": true,
-      "align": "bottom center",
-      "mouseevents": true,
-      "html": language_html,
-      "width": "auto"
-    })
-    
-    leon("$language_select")
+    if ("{{ g.user.is_authenticated() }}" != "False") {
 
-    d3.select("#vizwhiz_tooltip_id_account")
-      .style("display","none")
-      .on(vizwhiz.evt.click,function(){
+      account_toggle = function() {
+        var account_button = d3.select("#account")
+        if (account_button.node().className.indexOf("active") < 0) {
+        }
+        else {
+        }
+      }
+    
+      show_toggle = function() {
+        d3.select("#account").attr("class","leon button active")
+        d3.select("#vizwhiz_tooltip_id_account").style("display","block")
+      }
+    
+      hide_toggle = function() {
+        d3.select("#account").attr("class","leon button")
+        d3.select("#vizwhiz_tooltip_id_account").style("display","none")
+      }
+    
+      var language_html = d3.select("div#account_tooltip").html()
+      d3.select("div#account_tooltip").remove()
+    
+      var acct = d3.select("#account").node(),
+          w = acct.offsetWidth,
+          h = acct.offsetHeight,
+          x = acct.offsetLeft+w/2,
+          y = acct.offsetTop+h
+        
+      vizwhiz.tooltip.create({
+        "id": "account",
+        "x": x,
+        "y": y,
+        "arrow": true,
+        "align": "bottom center",
+        "mouseevents": true,
+        "html": language_html,
+        "width": "auto"
+      })
+
+      d3.select("#vizwhiz_tooltip_id_account")
+        .style("display","none")
+        .on(vizwhiz.evt.click,function(){
+          d3.event.stopPropagation()
+        })
+    
+      d3.select("#account").on(vizwhiz.evt.click,function(){
+        if (this.className.indexOf("active") < 0) {
+          show_toggle()
+        }
+        else {
+          hide_toggle()
+        }
         d3.event.stopPropagation()
       })
     
-    d3.select("#account").on(vizwhiz.evt.click,function(){
-      if (this.className.indexOf("active") < 0) {
-        show_toggle()
-      }
-      else {
+      d3.select("body").on(vizwhiz.evt.click,function(){
         hide_toggle()
-      }
-      d3.event.stopPropagation()
-    })
+      })
     
-    d3.select("body").on(vizwhiz.evt.click,function(){
-      hide_toggle()
-    })
-    
-    if (["guide","profiles"].indexOf(window.location.pathname.split("/")[1]) >= 0) {
-      // visual.breadcrumbs();
+    }
+    else {
+      d3.select("#account").on(vizwhiz.evt.click,function(){
+        login()
+      })
     }
     
   </script>

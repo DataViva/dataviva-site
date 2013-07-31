@@ -8,8 +8,19 @@
   z-index: 750;
 }
 
+#header_container #account {
+  background-color: transparent;
+  opacity: 0.6;
+  -webkit-transition: opacity .2s;
+          transition: opacity .2s;
+}
+
 #header_container:hover {
   background-color: white;
+}
+
+#header_container:hover #account {
+  opacity: 1;
 }
 
 #header {
@@ -121,22 +132,39 @@
 }
 
 #header div#account {
+  font-size: 12px;
   float: right;
 }
 
-div#account > i {
+#header div#account > i {
   display: inline-block;
   float: left;
 }
 
+#header div#account > div.avatar {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  margin: -6px;
+  height: 27px;
+  width: 27px;
+}
+
+a.account:first-child {
+  margin-top: 3px !important;
+}
+
 a.account {
   display: block;
-  padding: 0px 9px 0px 6px;
-  text-align: center;
+  margin-top: 6px;
+  padding: 0px 3px;
+  text-align: left;
 }
 
 a.account > i {
-  margin-right: 6px;
+  display: inline-block;
+  width: 16px;
 }
 
 a.account:hover {
@@ -304,7 +332,7 @@ a.opendata:hover {
   opacity: 1;
 }
 
-#account {
-  font-size: 12px;
-  padding-bottom: 4px;
+#footer > #language {
+  display: inline-block;
+  margin-left: 6px;
 }
