@@ -39,22 +39,19 @@ def after_request(response):
 def fix_name(attr):
     name_lang = "name_" + g.locale
     desc_lang = "desc_" + g.locale
-    key_lang = "keywords_" + g.locale
-    if "desc_en" in attr:
+    keywords_lang = "keywords_" + g.locale
+    if desc_lang in attr:
         attr["desc"] = attr[desc_lang]
-        del attr["desc_en"]
-        if "desc_pt" in attr:
-            del attr["desc_pt"]
-    if "name_en" in attr:
+        if "desc_en" in attr: del attr["desc_en"]
+        if "desc_pt" in attr: del attr["desc_pt"]
+    if name_lang in attr:
         attr["name"] = attr[name_lang]
-        del attr["name_en"]
-        if "name_pt" in attr:
-            del attr["name_pt"]
-    if "keywords_en" in attr:
-        attr["keywords"] = attr[key_lang]
-        del attr["keywords_en"]
-        if "keywords_pt" in attr:
-            del attr["keywords_pt"]
+        if "name_en" in attr: del attr["name_en"]
+        if "name_pt" in attr: del attr["name_pt"]
+    if keywords_lang in attr:
+        attr["keywords"] = attr[keywords_lang]
+        if "keywords_en" in attr: del attr["keywords_en"]
+        if "keywords_pt" in attr: del attr["keywords_pt"]
     return attr
 
 ############################################################
