@@ -91,6 +91,9 @@ def calculate_proximity(year):
     print "Calculating proximities..."
     prox = growth.proximity(rca)
     
+    return prox
+
+def add(year, prox):
     '''delete old proximity values'''
     print "Deleteing old proximity values..."
     delete_old_proximity_from_db(year)
@@ -123,4 +126,5 @@ if __name__ == "__main__":
     for y in year:
         print
         print "Year: {0}".format(y);
-        calculate_proximity(y)
+        prox = calculate_proximity(y)
+        add(y, prox)
