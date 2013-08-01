@@ -57,7 +57,7 @@
   
     leon("$depth")
     
-    var keys = ["icon","id","name_en","name_pt","color"]
+    var keys = ["icon","id","name_"+visual.language,"color"]
     
     function update_depth(depth){
       var new_page_url = "{{ url_for('data.classifications', attr=page_attr) }}all/";

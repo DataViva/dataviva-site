@@ -1,6 +1,8 @@
 from visual import db
 from visual.utils import AutoSerialize
 
+from flask import g
+
 class Isic(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_isic'
@@ -20,6 +22,9 @@ class Isic(db.Model, AutoSerialize):
     ybi = db.relationship("Ybi", backref = 'isic', lazy = 'dynamic')
     yio = db.relationship("Yio", backref = 'isic', lazy = 'dynamic')
     ybio = db.relationship("Ybio", backref = 'isic', lazy = 'dynamic')
+    
+    def name(self):
+        return getattr(self,"name_"+g.locale)
 
     def __repr__(self):
         return '<Isic %r>' % (self.name_en)
@@ -44,6 +49,9 @@ class Cbo(db.Model, AutoSerialize):
     ybo = db.relationship("Ybo", backref = 'cbo', lazy = 'dynamic')
     yio = db.relationship("Yio", backref = 'cbo', lazy = 'dynamic')
     ybio = db.relationship("Ybio", backref = 'cbo', lazy = 'dynamic')
+    
+    def name(self):
+        return getattr(self,"name_"+g.locale)
 
     def __repr__(self):
         return '<Cbo %r>' % (self.name_en)
@@ -68,6 +76,9 @@ class Hs(db.Model, AutoSerialize):
     ypw = db.relationship("Ypw", backref = 'hs', lazy = 'dynamic')
     ybp = db.relationship("Ybp", backref = 'hs', lazy = 'dynamic')
     ybpw = db.relationship("Ybpw", backref = 'hs', lazy = 'dynamic')
+    
+    def name(self):
+        return getattr(self,"name_"+g.locale)
 
     def __repr__(self):
         return '<Hs %r>' % (self.name_en)
@@ -99,7 +110,10 @@ class Wld(db.Model, AutoSerialize):
     ypw = db.relationship("Ypw", backref = 'wld', lazy = 'dynamic')
     ybw = db.relationship("Ybw", backref = 'wld', lazy = 'dynamic')
     ybpw = db.relationship("Ybpw", backref = 'wld', lazy = 'dynamic')
-
+    
+    def name(self):
+        return getattr(self,"name_"+g.locale)
+        
     def __repr__(self):
         return '<Wld %r>' % (self.id_3char)
 
@@ -128,6 +142,9 @@ class Bra(db.Model, AutoSerialize):
     # Neighbors
     neighbors = db.relationship('Distances', primaryjoin = "(Bra.id == Distances.bra_id_origin)", backref='bra_origin', lazy='dynamic')
     bb = db.relationship('Distances', primaryjoin = "(Bra.id == Distances.bra_id_dest)", backref='bra', lazy='dynamic')
+    
+    def name(self):
+        return getattr(self,"name_"+g.locale)
 
     def get_neighbors(self, dist, remove_self=False):
         q = self.neighbors.filter(Distances.distance <= dist).order_by(Distances.distance)

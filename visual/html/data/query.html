@@ -60,7 +60,7 @@
     {% for b in bra %}
     <div id="id_{{ b.id }}" class="filter_item">
       <span class="list_icon" title="{{ b.id }}" data-type="bra" style="background-color:{{b.color}}"></span>
-      <span class="filter_title" style="margin-left: 1px;">{{ b.name_en }}</span>
+      <span class="filter_title" style="margin-left: 1px;">{{ b.name() }}</span>
       <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
     </div>
     {% endfor %}
@@ -90,7 +90,7 @@
       {% for i in isic %}
       <div id="id_{{ i.id }}" class="filter_item">
         <span class="list_icon" title="{{ i.id }}" data-type="isic" style="background-color:{{i.color}}"></span>
-        <span class="filter_title" style="margin-left: 1px;">{{ i.name_en }}</span>
+        <span class="filter_title" style="margin-left: 1px;">{{ i.name }}</span>
         <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
       </div>
       {% endfor %}
@@ -118,7 +118,7 @@
       {% for c in cbo %}
       <div id="id_{{ c.id }}" class="filter_item">
         <span class="list_icon" title="{{ c.id }}" data-type="cbo" style="background-color:{{c.color}}"></span>
-        <span class="filter_title" style="margin-left: 1px;">{{ c.name_en }}</span>
+        <span class="filter_title" style="margin-left: 1px;">{{ c.name }}</span>
         <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
       </div>
       {% endfor %}
@@ -152,7 +152,7 @@
       {% for p in hs %}
       <div id="id_{{ p.id }}" class="filter_item">
         <span class="list_icon" title="{{ p.id }}" data-type="hs" style="background-color:{{p.color}}"></span>
-        <span class="filter_title" style="margin-left: 1px;">{{ p.name_en }}</span>
+        <span class="filter_title" style="margin-left: 1px;">{{ p.name }}</span>
         <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
       </div>
       {% endfor %}
@@ -180,7 +180,7 @@
       {% for c in wld %}
       <div id="id_{{ c.id }}" class="filter_item">
         <span class="list_icon" title="{{ c.id }}" data-type="wld" style="background-color:{{c.color}}"></span>
-        <span class="filter_title" style="margin-left: 1px;">{{ c.name_en }}</span>
+        <span class="filter_title" style="margin-left: 1px;">{{ c.name }}</span>
         <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
       </div>
       {% endfor %}

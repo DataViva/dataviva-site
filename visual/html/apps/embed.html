@@ -42,7 +42,7 @@
     <div id="bra_0" class="leon button" onclick="builder.selector(this.id)">
       {% set bra = current_build.bra[0] %}
       <div class="leon icon" style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"></div>
-      <span class="list_text">{{ bra.name_en }}</span>
+      <span class="list_text">{{ bra.name() }}</span>
       <i class="icon-list-alt"></i>
     </div>
     
@@ -51,7 +51,7 @@
     {% endif %}
     <div id="bra_1" class="leon button" onclick="builder.selector(this.id)">
       <div class="leon icon"{% if bra %} style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"{% endif %}></div>
-      <span class="list_text">{% if bra %}{{ bra.name_en }}{% endif %}</span>
+      <span class="list_text">{% if bra %}{{ bra.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>
     
@@ -60,7 +60,7 @@
     {% endif %}
     <div id="isic_0" class="leon button" onclick="builder.selector(this.id)">
       <div class="leon icon"{% if isic %} style="background-color:{{ isic.color }}; background-image:url('/static/img/icons/isic/isic_{{ isic.id[:1] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if isic %}{{ isic.name_en }}{% endif %}</span>
+      <span class="list_text">{% if isic %}{{ isic.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>
 
@@ -69,7 +69,7 @@
     {% endif %}
     <div id="cbo_0" class="leon button" onclick="builder.selector(this.id)">
       <div class="leon icon"{% if cbo %} style="background-color:{{ cbo.color }}; background-image:url('/static/img/icons/cbo/cbo_{{ cbo.id[:1] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if cbo %}{{ cbo.name_en }}{% endif %}</span>
+      <span class="list_text">{% if cbo %}{{ cbo.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>
 
@@ -78,7 +78,7 @@
     {% endif %}
     <div id="hs_0" class="leon button" onclick="builder.selector(this.id)">
       <div class="leon icon"{% if hs %} style="background-color:{{ hs.color }}; background-image:url('/static/img/icons/hs/hs_{{ hs.id[:2] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if hs %}{{ hs.name_en }}{% endif %}</span>
+      <span class="list_text">{% if hs %}{{ hs.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>
 
@@ -87,7 +87,7 @@
     {% endif %}
     <div id="wld_0" class="leon button" onclick="builder.selector(this.id)">
       <div class="leon icon"{% if wld %} style="background-color:{{ wld.color }}; background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
-      <span class="list_text">{% if wld %}{{ wld.name_en }}{% endif %}</span>
+      <span class="list_text">{% if wld %}{{ wld.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>
     
@@ -1220,8 +1220,8 @@
       var type = id.split("_")[0],
           index = id.split("_")[1],
           old_obj = app.build[type][index]
-          new_name = obj.name ? obj.name : obj.name_en
-      
+          new_name = obj.name ? obj.name : obj["name_"+visual.language]
+          
       if (type == "bra") {
         var url_index = 2
       }
@@ -1373,7 +1373,7 @@
     
     builder.key = function(cats) {
       
-      if (["network","geo_map"].indexOf(app.build.app.type) < 0) {
+      if ("geo_map" != app.build.app.type) {
         if (!cats) {
           if (app.build.app.type != "network") {
             if (app.build.app.type != "stacked") {
@@ -1386,7 +1386,7 @@
           else {
             var cats = []
             app.networks[app.build.output].nodes.forEach(function(n){
-              var id = n.id.slice(0,depths[app.build.output][0])
+              var id = n[app.build.output+"_id"].slice(0,depths[app.build.output][0])
               if (cats.indexOf(id) < 0) cats.push(id)
             })
           }

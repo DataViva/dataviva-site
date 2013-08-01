@@ -14,7 +14,7 @@ visual.format.text = function(text,name) {
     arr.shift()
     var index = arr.shift()
     text = arr.join("_")
-    return app.build.bra[index].name_en + " ("+format_name(text)+")"
+    return app.build.bra[index]["name_"+visual.language] + " ("+format_name(text)+")"
   }
   else {
     return format_name(text)
