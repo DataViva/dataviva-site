@@ -305,7 +305,7 @@ function Selector() {
         
         if (!data.all) {
           if (type == "bra") var c = "#009b3a";
-          else var c = "#768593";
+          else var c = "#ffffff";
           var title = type == "bra" ? "brazil" : type
           data.all = {
             "color": c,
@@ -333,7 +333,7 @@ function Selector() {
             data[d].parent = d.slice(0,depths[depth-1]);
           }
           
-          if (!data[d].icon) data[d].icon = visual.icon(d,type)
+          if (!data[d].icon) data[d].icon = visual.icon(d,type,data[d].color)
         }
         
         lists[type] = data

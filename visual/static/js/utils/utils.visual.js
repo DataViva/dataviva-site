@@ -278,7 +278,7 @@ visual.displayID = function(id,type) {
   
 }
 
-visual.icon = function(id,type) {
+visual.icon = function(id,type,color) {
   
   if (["isic","cbo","hs","bra"].indexOf(type) >= 0 && id != "all"){
     var depth = visual.depths(type)[0],
@@ -286,6 +286,10 @@ visual.icon = function(id,type) {
   }
   else {
     var id = id;
+  }
+  
+  if (((type != "bra" && type != "wld") || (type == "wld" && id.length > 3)) && color == "#ffffff") {
+    id = id+"_black"
   }
   
   return "/static/img/icons/"+type+"/"+type+"_"+id+".png";
