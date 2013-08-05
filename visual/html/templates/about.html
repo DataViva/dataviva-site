@@ -6,25 +6,51 @@
 <div id="about_nav" class="grid5col1 grid5offsethalf">
     
     <a class="decision short icon general{% if page == 'apps' %} active{% endif %}" href="{{ url_for('about.about') }}">
-      General
+      {% trans %}General{% endtrans %}
     </a>
     
     <a class="decision short icon glossary{% if page == 'glossary' %} active{% endif %}" href="{{ url_for('about.glossary') }}">
-      Glossary
+      {% trans %}Glossary{% endtrans %}
     </a>
     
     <a class="decision short icon credits{% if page == 'credits' %} active{% endif %}" href="{{ url_for('about.credits') }}">
-      Credits
+      {% trans %}Credits{% endtrans %}
     </a>
     
     <br>
-    <a class="decision short icon network{% if app == 'network' %} active{% endif %}" href="{{ url_for('about.apps', app='network')}}">Network</a>
-    <a class="decision short icon tree_map{% if app == 'tree_map' %} active{% endif %}" href="{{ url_for('about.apps', app='tree_map')}}">Tree Map</a>
-    <a class="decision short icon geo_map{% if app == 'geo_map' %} active{% endif %}" href="{{ url_for('about.apps', app='geo_map')}}">Geo Map</a>
-    <a class="decision short icon stacked{% if app == 'stacked' %} active{% endif %}" href="{{ url_for('about.apps', app='stacked')}}">Stacked</a>
-    <a class="decision short icon rings{% if app == 'rings' %} active{% endif %}" href="{{ url_for('about.apps', app='rings')}}">Rings</a>
-    <a class="decision short icon scatter{% if app == 'scatter' %} active{% endif %}" href="{{ url_for('about.apps', app='scatter')}}">Pie Scatter</a>
-    <a class="decision short icon occugrid{% if app == 'occugrid' %} active{% endif %}" href="{{ url_for('about.apps', app='occugrid')}}">Occugrid</a>
+    
+    <a class="decision short icon network{% if app == 'network' %} active{% endif %}" href="{{ url_for('about.apps', app='network')}}">
+      {% trans %}Network{% endtrans %}
+    </a>
+    
+    <a class="decision short icon tree_map{% if app == 'tree_map' %} active{% endif %}" href="{{ url_for('about.apps', app='tree_map')}}">
+      {% trans %}Tree Map{% endtrans %}
+    </a>
+    
+    <a class="decision short icon geo_map{% if app == 'geo_map' %} active{% endif %}" href="{{ url_for('about.apps', app='geo_map')}}">
+      {% trans %}Geo Map{% endtrans %}
+    </a>
+    
+    <a class="decision short icon stacked{% if app == 'stacked' %} active{% endif %}" href="{{ url_for('about.apps', app='stacked')}}">
+      {% trans %}Stacked{% endtrans %}
+    </a>
+    
+    <a class="decision short icon rings{% if app == 'rings' %} active{% endif %}" href="{{ url_for('about.apps', app='rings')}}">
+      {% trans %}Rings{% endtrans %}
+    </a>
+    
+    <a class="decision short icon scatter{% if app == 'scatter' %} active{% endif %}" href="{{ url_for('about.apps', app='scatter')}}">
+      {% trans %}Scatter{% endtrans %}
+    </a>
+    
+    <a class="decision short icon compare{% if app == 'compare' %} active{% endif %}" href="{{ url_for('about.apps', app='compare')}}">
+      {% trans %}Compare{% endtrans %}
+    </a>
+    
+    <a class="decision short icon occugrid{% if app == 'occugrid' %} active{% endif %}" href="{{ url_for('about.apps', app='occugrid')}}">
+      {% trans %}Occugrid{% endtrans %}
+    </a>
+    
 
     
 </div>

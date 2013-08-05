@@ -1,36 +1,38 @@
 {% extends "templates/site.html" %}
 
+{% block title %}: {% trans %}Choose a Classification{% endtrans %}{% endblock %}
+
 {% block body %}
 
   <div id="fullscreen"></div>
     
   <div class="darkbox">
-    <h2>Which classification would you like to browse?</h2>
+    <h2>{% trans %}Which classification would you like to browse?{% endtrans %}</h2>
   </div>
   <br>
   <a href="{{ url_for('data.classifications', attr='hs') }}" class="decision icon square hs">
     <h2>HS</h2>
-    Product Exports
+    {% trans %}Product Exports{% endtrans %}
   </a>
   
   <a href="{{ url_for('data.classifications', attr='isic') }}" class="decision icon square isic">
     <h2>ISIC</h2>
-    Industry Establishments
+    {% trans %}Industries{% endtrans %}
   </a>
   
   <a href="{{ url_for('data.classifications', attr='cbo') }}" class="decision icon square cbo">
     <h2>CBO</h2>
-    Occupations
+    {% trans %}Occupations{% endtrans %}
   </a>
   <br>
   <a href="{{ url_for('data.classifications', attr='bra') }}" class="decision icon square bra">
-    <h2>Location</h2>
-    Geographical locations in Brazil
+    <h2>{% trans %}Municipalities{% endtrans %}</h2>
+    {% trans %}Geographical locations within Brazil{% endtrans %}
   </a>
   
   <a href="{{ url_for('data.classifications', attr='wld') }}" class="decision icon square wld">
-    <h2>Trade Partners</h2>
-    World Trade Partners
+    <h2>{% trans %}Countries{% endtrans %}</h2>
+    {% trans %}World Trade Partners{% endtrans %}
   </a>
   
 {% endblock %}

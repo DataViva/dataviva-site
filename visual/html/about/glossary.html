@@ -1,10 +1,10 @@
 <!-- extend from about base layout -->
 {% extends "templates/about.html" %}
 
-{% block title %}: About :: Glossary{% endblock %}
+{% block title %}: {% trans %}Glossary{% endtrans %}{% endblock %}
 
 {% block about_content %}
-  <h2>Glossary</h2>
+  <h2>{% trans %}Glossary{% endtrans %}</h2>
   
   <!-- terms -->
   <ul>Data Terms

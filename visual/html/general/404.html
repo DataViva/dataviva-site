@@ -1,5 +1,7 @@
 {% extends "templates/site.html" %}
 
+{% block title %}: 404{% endblock %}
+
 {% block body %}
 
   <div class="grid5col1 grid5offset1">
@@ -8,7 +10,7 @@
 
   <div id="question_404" class="grid5col2">
     <div class="title">
-        Oh no! The page you've requested does not exist.
+        {% trans %}Oh no! The page you've requested does not exist.{% endtrans %}
     </div>
   </div>
 

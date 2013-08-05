@@ -1,19 +1,19 @@
 {% extends "templates/site.html" %}
 
-{% block title %}: Industry{% endblock %}
+{% block title %}: {% trans %}Industry{% endtrans %}{% endblock %}
 
 {% block body %}
 
   <div id="fullscreen"></div>
   
-  <div class="darkbox"><h2>What are you interested in?</h2></div>
+  <div class="darkbox"><h2>{% trans %}What are you interested in?{% endtrans %}</h2></div>
   <br>
   <a id="hs" class="decision icon square hs" onclick="linker(this.id)">
-    Product Exports
+    {% trans %}Product Exports{% endtrans %}
   </a>
 
   <a id="isic" class="decision icon square isic" onclick="linker(this.id)">
-    Establishments and Employement
+    {% trans %}Establishments and Employment{% endtrans %}
   </a>
 
 {% endblock %}

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Blueprint, request, render_template, g, url_for
 from sqlalchemy import func
 from datetime import datetime
@@ -13,108 +14,8 @@ mod = Blueprint('guide', __name__, url_prefix='/guide')
 
 @mod.before_request
 def before_request():
-    
     g.page_type = mod.name
-    
-    g.sabrina = {}
-    g.sabrina["outfit"] = "casual"
-    g.sabrina["face"] = "smile"
-    g.sabrina["hat"] = None
-    
     g.path = request.path
-
-
-# ###############################
-# # Guide page apps creator
-# # ---------------------------
-
-# def rec_list(filters,output,lists):
-# 
-#     model_name = "Y"
-#     
-#     if "ind_id" in filters:
-#         if len(filters["ind_id"]) in [1,5]:
-#             filters["isic_id"] = filters["ind_id"]
-#         else:
-#             filters["hs_id"] = filters["ind_id"]
-#         del filters["ind_id"]
-#     
-#     if output == "bra" or "bra_id" in filters:
-#         model_name += "b"
-# 
-#     if "isic_id" in filters or "cbo_id" in filters:
-#         if "isic_id" in filters:
-#             model_name += "i"
-#         if "cbo_id" in filters:
-#             model_name += "o"
-#         model = getattr(rais,model_name)
-#     if "hs_id" in filters or "wld_id" in filters:
-#         if "hs_id" in filters:
-#             model_name += "p"
-#         if "wld_id" in filters:
-#             model_name += "w"
-#         model = getattr(secex,model_name)
-#     
-#     bra_id = filters["bra_id"]
-#     del filters["bra_id"]
-#     
-#     rec_obj = {}
-#     for sort in lists:
-#         
-#         if sort in ["rca_min","rca_max"]:
-#             value = "rca"
-#         else:
-#             value = sort
-#         
-#         list_array = model.query \
-#             .filter_by(**filters) \
-#             .filter(model.year == func.max(model.year).select())
-#         
-#         if output == "bra":
-#         
-#             if bra_id == "all" or bra_id == None:
-#                 list_array = list_array \
-#                     .filter(func.char_length(getattr(model,"bra_id")) == 2)
-#             else:
-#                 list_array = list_array \
-#                     .filter(model.bra_id.startswith(bra_id)) \
-#                     .filter(func.char_length(getattr(model,"bra_id")) == 8)
-#         
-#         list_array = list_array \
-#             .filter(getattr(model,value) != None)
-#             
-#         if sort == "rca_min":
-#             list_array = list_array \
-#                 .filter(getattr(model,value) > 0) \
-#                 .order_by(getattr(model,value).asc())
-#         elif sort == "rca_max":
-#             list_array = list_array \
-#                 .filter(getattr(model,value) >= 1) \
-#                 .order_by(getattr(model,value).desc())
-#         else:
-#             list_array = list_array \
-#                 .order_by(getattr(model,value).desc())
-#                 
-# 
-#         list_array = list_array \
-#             .limit(20)
-#     
-#         rec_array = []
-#         for l in list_array:
-#             name = getattr(l,output).name_en
-#             id = getattr(l,output).id
-#             color = getattr(l,output).color
-#             val = getattr(l,value)
-#             url = request.environ['PATH_INFO'].replace(bra_id,id)
-#             rec_array.append({"name": name, "id": id, "color": color, "value": val, "url": url})
-#         rec_obj[sort] = rec_array
-#     
-#     return {"type": output, "lists": rec_obj}
-
-
-###############################
-# Guide selection breadcrumb view
-# ---------------------------
 
 @mod.route('/')
 @mod.route('/<category>/')
@@ -126,9 +27,7 @@ def guide(category = None, category_id = None, option = None, subject = None, op
     
     item = None
     article = None
-    title = None
     selector = category
-    recs = False
     plan = None
     
     category_type = category_id
@@ -218,15 +117,15 @@ def guide(category = None, category_id = None, option = None, subject = None, op
         else:
             if category_id != "all":
                 if category == "isic":
-                    item = attrs.Isic.query.get_or_404(category_id)
+                    item = attrs.Isic.query.get_or_404(category_id).name()
                 elif category == "hs":
-                    item = attrs.Hs.query.get_or_404(category_id)
+                    item = attrs.Hs.query.get_or_404(category_id).name()
                 elif category == "cbo":
-                    item = attrs.Cbo.query.get_or_404(category_id)
+                    item = attrs.Cbo.query.get_or_404(category_id).name()
                 elif category == "bra":
-                    item = attrs.Bra.query.get_or_404(category_id)
+                    item = attrs.Bra.query.get_or_404(category_id).name()
             elif category == "bra":
-                item = attrs.Wld.query.get_or_404("sabra")
+                item = attrs.Wld.query.get_or_404("sabra").name()
             page = "guide/{0}.html".format(category)
     elif category == "industry":
         page = "guide/industry.html"
@@ -235,34 +134,24 @@ def guide(category = None, category_id = None, option = None, subject = None, op
     else:
         page = "guide/index.html"
         
-    if selector == "cbo":
-        article = "an occupation"
-    elif selector == "isic":
-        article = "an establishment"
-    elif selector == "hs":
-        article = "a product"
-    elif selector == "bra":
-        article = "a location"
-        
-    if category != None:
-        g.sabrina["face"] = "smirk"
-    
-    if category == "cbo":
-        g.sabrina["outfit"] = "preppy"
-    elif category == "industry" or category == "hs" or category == "isic":
-        g.sabrina["outfit"] = "worker"
-        if category == "hs" or category == "isic":
-            g.sabrina["hat"] = "hardhat"
-    elif category == "bra":
-        g.sabrina["outfit"] = "travel"
-        
-    if category_id == "select":
-        g.sabrina["outfit"] = g.sabrina["outfit"]+"_presenting"
-        
-    # if len(option_id) == 8:
-    #     recs = None
-    # else:
-    #     recs = rec_list({ "bra_id": option_id, "cbo_id": option_id },"bra",["wage"]);
+    if g.locale == "pt":
+        if selector == "cbo":
+            article = "uma profissão"
+        elif selector == "isic":
+            article = "uma indústria"
+        elif selector == "hs":
+            article = "um produto"
+        elif selector == "bra":
+            article = "um local"
+    else:
+        if selector == "cbo":
+            article = "an occupation"
+        elif selector == "isic":
+            article = "an industry"
+        elif selector == "hs":
+            article = "a product"
+        elif selector == "bra":
+            article = "a location"
             
     return render_template(page,
         category = category,
@@ -270,6 +159,5 @@ def guide(category = None, category_id = None, option = None, subject = None, op
         option = option,
         item = item,
         article = article,
-        title = title,
         selector = selector,
         plan = plan)

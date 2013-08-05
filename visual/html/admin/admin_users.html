@@ -1,5 +1,6 @@
-<!-- extend admin_template -->
 {% extends "templates/admin.html" %}
+
+{% block title %}: {% trans %}Admin Panel{% endtrans %}{% endblock %}
 
 {% block head %}
 <style>
@@ -20,10 +21,10 @@ Welcome Admin!
     <thead>
       <tr>
         <th></th>
-        <th>Email</th>
-        <th>Full Name</th>
-        <th>Nick Name</th>
-        <th>Role</th>
+        <th>{% trans %}Email{% endtrans %}</th>
+        <th>{% trans %}Full Name{% endtrans %}</th>
+        <th>{% trans %}Nick Name{% endtrans %}</th>
+        <th>{% trans %}Role{% endtrans %}</th>
       </tr>
     </thead>
     <tbody>

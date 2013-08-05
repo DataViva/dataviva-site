@@ -1,9 +1,10 @@
-<!-- extend admin_template -->
 {% extends "templates/account.html" %}
+
+{% block title %}: {% trans %}Starred{% endtrans %}{% endblock %}
 
 {% block admin_content %}
 
-<h5>Starred <i class=" icon-star-empty"></i></h5>
+<h5>{% trans %}Starred{% endtrans %} <i class=" icon-star-empty"></i></h5>
 <hr class="bold"/>
 
 <div class="feed"></div>

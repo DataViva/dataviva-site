@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Visual : Login</title>
+    <title>Visual : {% trans %}Login{% endtrans %}</title>
 
     <style>
     
@@ -134,7 +134,9 @@
     <div class="login_container">
       <div class="logo"></div>
       <div class="text">
-      Until we are able to complete extensive cross-browser compatibility, please use <b>Google Chrome</b> to view this site.
+        {% autoescape false %}
+        {{ _('Until we are able to complete extensive cross-browser compatibility, please use %(chrome)s to view this site.', chrome = '<a href="http://www.google.com/chrome/" target="_blank"><b>%s</b></a>' % ('Google Chrome')) }}
+        {% endautoescape %}
       <br><br>
       </div>
       <form action="" method="post" name="">
@@ -142,10 +144,13 @@
       </form>
       <div class="text">
       <br>
-      <b>Note:</b> This site is a work in progress. We are working hard everyday to fix bugs and improve the user experience.
+        {% autoescape false %}
+        {{ _('%(note)s: This site is a work in progress. We are working hard everyday to fix bugs and improve the user experience.', note = '<b>%s</b>' % (_('Note'))) }}
+        {% endautoescape %}
       <br><br>
-      If you have any questions, e-mail:
-      <br><a href="mailto:help@growth-ventures.com?Subject=Data%20Minas%20Help">help@growth-ventures.com</a>
+        {% autoescape false %}
+        {{ _('If you have any questions, e-mail: %(email)s', email = '<br><a href="mailto:help@growth-ventures.com?Subject=Data%20Minas%20Help">%s</a>' % ('help@growth-ventures.com')) }}
+        {% endautoescape %}
       </div>
     </div>
   </body>

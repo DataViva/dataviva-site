@@ -15,18 +15,18 @@
 <div id="welcome" class="lightbox">
   
   <div class="title">
-    <h2>Visualizing Brazil</h2>
-    Discover new meaning from economic data about Minas Gerais. Here are some good places to start:
+    <h2>{% trans %}Visualizing Brazil{% endtrans %}</h2>
+    {% trans %}Discover new meaning from economic data about Minas Gerais. Here are some good places to start:{% endtrans %}
   </div>
   
   <a class="decision icon square guide" href="{{ url_for('guide.guide') }}">
-    <h2>Guide</h2>
-    Generate multiple apps into a report.
+    <h2>{% trans %}Guide{% endtrans %}</h2>
+    {% trans %}Generate multiple apps into a report.{% endtrans %}
   </a>
   
   <a class="decision icon square apps" href="{{ url_for('apps.guide') }}">
-    <h2>Apps</h2>
-    Go straight to the visualization builder.
+    <h2>{% trans %}Apps{% endtrans %}</h2>
+    {% trans %}Go straight to the visualization builder.{% endtrans %}
   </a>
   <br><br>
   <a href="http://www.escritorio.mg.gov.br/" class="logo governo" target="_blank"></a>

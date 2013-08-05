@@ -1,26 +1,26 @@
 {% extends "templates/site.html" %}
 
-{% block title %}: Generate a Guide{% endblock %}
+{% block title %}: {% trans %}Generate a Guide{% endtrans %}{% endblock %}
 
 {% block body %}
 
   <div id="fullscreen"></div>
   
-  <div class="darkbox"><h2>What's on your mind?</h2></div>
+  <div class="darkbox"><h2>{% trans %}What's on your mind?{% endtrans %}</h2></div>
   <br>
   <a class="decision icon square bra" href="{{g.path}}bra">
-    <h2>Location</h2>
-    Learn about the potential of a location.
+    <h2>{% trans %}Location{% endtrans %}</h2>
+    {% trans %}Learn about the potential of a location.{% endtrans %}
   </a>
 
   <a class="decision icon square industry" href="{{g.path}}industry">
-    <h2>Industry</h2>
-    Learn about industrial opportunities.
+    <h2>{% trans %}Industry{% endtrans %}</h2>
+    {% trans %}Learn about industrial opportunities.{% endtrans %}
   </a>
 
   <a class="decision icon square cbo" href="{{g.path}}cbo">
-    <h2>Career</h2>
-    Learn about job opportunities.
+    <h2>{% trans %}Career{% endtrans %}</h2>
+    {% trans %}Learn about job opportunities.{% endtrans %}
   </a>
 
 {% endblock %}

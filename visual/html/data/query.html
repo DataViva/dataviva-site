@@ -1,5 +1,7 @@
 {% extends "templates/site.html" %}
 
+{% block title %}: {% trans %}Database Query{% endtrans %}{% endblock %}
+
 {% block head %}
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
 {% endblock %}
@@ -23,7 +25,7 @@
 <div id="filter_selects" class="grid4col1">
     
     <div id="data_toggle">
-      <legend id="dataset">Data</legend>
+      <legend id="dataset">{% trans %}Data{% endtrans %}</legend>
       <label for="rais">RAIS</label>
       <input type="radio" name="dataset" value="rais" id="rais" onclick="change_dataset(this.value)" {% if data_type == "rais" %}checked="checked"{% endif %}>
       <label for="secex">SECEX</label>
@@ -32,7 +34,7 @@
   
     <div id="years_dropdown">
         <select id="year_filter" onchange="">
-          <option value="all">All Years</option>
+          <option value="all">{% trans %}All Years{% endtrans %}</option>
           <option value="2002">2002</option>
           <option value="2003">2003</option>
           <option value="2004">2004</option>
@@ -53,7 +55,7 @@
     ~~~
   -->
   <a id="location_filter" class="help filter_button active">
-    Brazilian Location
+    {% trans %}Brazilian Locations{% endtrans %}
   </a>
   <div id="location_add" class="filter_box open">
       
@@ -66,10 +68,10 @@
     {% endfor %}
     
     {% if not bra %}
-    <span class="filler">Showing all of Brazil until a location is selected.</span>
+    <span class="filler">{% trans %}Showing all of Brazil until a location is selected.{% endtrans %}</span>
     {% endif %}
 
-    <a name="bra" class="add_filter">add a location</a>
+    <a name="bra" class="add_filter">{% trans %}add a location{% endtrans %}</a>
       
   </div>
   
@@ -82,7 +84,7 @@
       ~~~
     -->    
     <a id="industry_filter" class="help filter_button {% if isic != None %}active{% endif %}">
-      Establishment
+      {% trans %}Industries{% endtrans %}
     </a>
     <div id="industry_add" class="filter_box {% if isic != None %}open{% endif %}">
       
@@ -96,10 +98,10 @@
       {% endfor %}
       
       {% else %}
-      <span class="filler">Showing all establishments until a filter is selected.</span>
+      <span class="filler">{% trans %}Showing all industries until a filter is selected.{% endtrans %}</span>
       {% endif %}
       
-      <a name="isic" class="add_filter button">add an establishment</a>
+      <a name="isic" class="add_filter button">{% trans %}add an industry{% endtrans %}</a>
       
     </div>
 
@@ -110,7 +112,7 @@
       ~~~
     -->       
     <a id="occupation_filter" class="help filter_button {% if cbo != None %}active{% endif %}">
-      Occupation
+      {% trans %}Occupations{% endtrans %}
     </a>
     <div id="occupation_add" class="filter_box {% if cbo != None %}open{% endif %}">
       
@@ -124,14 +126,14 @@
       {% endfor %}
       
       {% else %}
-      <span class="filler">Showing all occupations until a filter is selected.</span>
+      <span class="filler">{% trans %}Showing all occupations until a filter is selected.{% endtrans %}</span>
       {% endif %}
       
-      <a name="cbo" class="add_filter button">add an occupation</a>
+      <a name="cbo" class="add_filter button">{% trans %}add an occupation{% endtrans %}</a>
       
     </div>
 
-    <div id="rais_go" class="decision">Build</div>
+    <div id="rais_go" class="decision">{% trans %}Build{% endtrans %}</div>
       
   </div>
   
@@ -144,7 +146,7 @@
       ~~~
     -->  
     <a id="product_filter" class="help filter_button {% if hs != None %}active{% endif %}">
-      Product Export
+      {% trans %}Products{% endtrans %}
     </a>
     <div id="product_add" class="filter_box {% if hs != None %}open{% endif %}">
       
@@ -158,10 +160,10 @@
       {% endfor %}
       
       {% else %}
-      <span class="filler">Showing all product exports until a filter is selected.</span>
+      <span class="filler">{% trans %}Showing all products until a filter is selected.{% endtrans %}</span>
       {% endif %}
       
-      <a name="hs" class="add_filter button">add a product</a>
+      <a name="hs" class="add_filter button">{% trans %}add a product{% endtrans %}</a>
       
     </div>
 
@@ -172,7 +174,7 @@
       ~~~
     -->      
     <a id="country_filter" class="help filter_button {% if wld != None %}active{% endif %}">
-      Trade Partner
+      {% trans %}Trade Partners{% endtrans %}
     </a>      
     <div id="country_add" class="filter_box {% if wld != None %}open{% endif %}">
       
@@ -186,14 +188,14 @@
       {% endfor %}
       
       {% else %}
-      <span class="filler">Showing all trade partners until a filter is selected.</span>
+      <span class="filler">{% trans %}Showing all countries until a filter is selected.{% endtrans %}</span>
       {% endif %}
       
-      <a name="wld" class="add_filter button">add a country</a>
+      <a name="wld" class="add_filter button">{% trans %}add a trade partner{% endtrans %}</a>
       
     </div>
     
-    <div id="secex_go" class="decision">Build</div>
+    <div id="secex_go" class="decision">{% trans %}Build{% endtrans %}</div>
       
   </div>
 </div>

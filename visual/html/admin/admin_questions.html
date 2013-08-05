@@ -1,5 +1,6 @@
-<!-- extend admin_template -->
 {% extends "templates/admin.html" %}
+
+{% block title %}: {% trans %}Question{% endtrans %}{% endblock %}
 
 {% block admin_content %}
 
@@ -8,9 +9,9 @@
   <table>
     <thead>
       <tr>
-        <th>Question</th>
-        <th>User</th>
-        <th>Date</th>
+        <th>{% trans %}Question{% endtrans %}</th>
+        <th>{% trans %}User{% endtrans %}</th>
+        <th>{% trans %}Date{% endtrans %}</th>
         <th></th>
       </tr>
     </thead>

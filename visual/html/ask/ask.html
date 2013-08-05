@@ -1,7 +1,7 @@
 <!-- extend site layout -->
 {% extends "templates/site.html" %}
 
-{% block title %}: Ask Sabrina :: Ask Sabrina{% endblock %}
+{% block title %}: {% trans %}Ask Sabrina{% endtrans %}{% endblock %}
 
 {% block head %}
 
@@ -19,9 +19,9 @@
 <div id="submit_column" class="grid5col4">
   <div class="title">
     {% if g.user.is_authenticated() %}
-      What would you like to know?
+      {% trans %}What would you like to know?{% endtrans %}
     {% else %}
-      You need to login for this functionality.
+      {% trans %}You need to login for this functionality.{% endtrans %}
     {% endif %}
   </div>
   
@@ -30,7 +30,7 @@
     <form id="ask_form" action="" method="post">
       {{form.hidden_tag()}}
       <p>
-        <h3>Question:</h3>
+        <h3>{% trans %}Question{% endtrans %}:</h3>
         {{ form.question(size=80, class="ask", placeholder="Ex. Where does the data come from?") }}<br />
         {% for error in form.errors.question %}
         <span style="color: red;">[{{ error }}]</span>
@@ -38,7 +38,7 @@
       </p>
   
       <p>
-        <h3>Description:</h3>
+        <h3>{% trans %}Description{% endtrans %}:</h3>
         {{ form.body(id="wysiwyg_textarea", class="ask", placeholder="Enter your text...") }}<br />
         {% for error in form.errors.body %}
         <span style="color: red;">[{{ error }}]</span>
@@ -46,18 +46,18 @@
       </p>
   
       <p>
-        <label class="leon label" for="app_link">App</label>
+        <label class="leon label" for="app_link">{% trans %}App{% endtrans %}</label>
         {{ form.app(size=80, id="app_link", class="leon text", placeholder="Ex. /tree_map/secex/mg/show/show") }}
       </p>
       <p>
-        <h3>Tags:</h3>
+        <h3>{% trans %}Tags{% endtrans %}:</h3>
         {{ form.tags(size=80, class="ask", id="tag_field") }}
         <div id="tag_input"></div>
       </p>
       
       <a href="#" class="submit">
         <div class="decision">
-          <div class="text">Ask Sabrina!</div>
+          <div class="text">{% trans %}Ask Sabrina{% endtrans %}!</div>
           <div class="arrow"></div>
         </div>
       </a>
@@ -65,7 +65,7 @@
     </form>
     
   {% else %}
-    <a id="login" class="decision" onclick="login()">Click here to login</a>
+    <a id="login" class="decision" onclick="login()">{% trans %}Click here to login{% endtrans %}</a>
   {% endif %}
   
 </div>

@@ -1,33 +1,33 @@
 {% extends "templates/site.html" %}
 
-{% block title %}: Generate a Profile{% endblock %}
+{% block title %}: {% trans %}Generate a Profile{% endtrans %}{% endblock %}
 
 {% block body %}
 
   <div id="fullscreen"></div>
   
   <div class="darkbox">
-    <h2>What would you like to learn more about?</h2>
+    <h2>{% trans %}What would you like to learn more about?{% endtrans %}</h2>
   </div>
   <br>
   <a class="decision icon square bra" href="/profiles/bra/select/">
-    Brazilian Location
+    {% trans %}Brazilian Location{% endtrans %}
   </a>
 
   <a class="decision icon square cbo" href="/profiles/cbo/select/">
-    Occupation
+    {% trans %}Occupation{% endtrans %}
   </a>
 
   <a class="decision icon square isic" href="/profiles/isic/select/">
-    Establishments and Employment
+    {% trans %}Industry{% endtrans %}
   </a>
   <br>
   <a class="decision icon square hs" href="/profiles/hs/select/">
-    Product Export
+    {% trans %}Product Export{% endtrans %}
   </a>
 
   <a class="decision icon square wld" href="/profiles/wld/select/">
-    World Trade Partner
+    {% trans %}World Trade Partner{% endtrans %}
   </a>
 
 {% endblock %}

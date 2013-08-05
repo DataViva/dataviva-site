@@ -1,6 +1,6 @@
 {% extends "templates/site.html" %}
 
-{% block title %}: Select{% endblock %}
+{% block title %}: {% trans %}Filter Selection{% endtrans %}{% endblock %}
 
 {% block head %}
 
@@ -12,7 +12,7 @@
 
   <div id="fullscreen"></div>
   
-  <div class="darkbox"><h2>Please choose {{ article }}</h2></div>
+  <div class="darkbox"><h2>{{ _('Please choose %(name)s', name = article.decode("utf-8")) }}</h2></div>
   <br>
   <div id="selector"></div>
 

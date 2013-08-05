@@ -35,7 +35,7 @@
     </select>
     
     <div id="output" class="leon button" onclick="builder.selector(this.id)">
-      <span class="list_text">Change Output</span>
+      <span class="list_text">{% trans %}Change Output{% endtrans %}</span>
       <i class="icon-list-alt"></i>
     </div>
 
@@ -97,12 +97,12 @@
 
   <div id="settings">
 
-    <a id="refresh" class="leon button square" onclick="app.start()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-refresh"></i></a>
-    <a id="file" class="leon button square" onclick="builder.selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-save"></i></a>
-    <a id="starred" class="leon button square" onclick="app.star()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
-    <a id="help" class="leon button square" onclick="builder.selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-question-sign"></i></a>
-    <a id="full_screen" class="leon button square" onclick="window.open(window.location.href,'_blank')" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-fullscreen"></i></a>
-    <a id="controls_toggle" class="leon button square" onclick="builder.controls()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)"><i class="icon-cogs"></i></a>
+    <a id="refresh" class="leon button square" onclick="app.start()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)" alt="{% trans %}Refresh the App{% endtrans %}"><i class="icon-refresh"></i></a>
+    <a id="file" class="leon button square" onclick="builder.selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)" alt="{% trans %}Download this App{% endtrans %}"><i class="icon-save"></i></a>
+    <a id="starred" class="leon button square" onclick="app.star()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)" alt="{% trans %}Save this App{% endtrans %}"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
+    <a id="help" class="leon button square" onclick="builder.selector(this.id)" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)" alt="{% trans %}Show App Tutorial{% endtrans %}"><i class="icon-question-sign"></i></a>
+    <a id="full_screen" class="leon button square" onclick="window.open(window.location.href,'_blank')" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)" alt="{% trans %}Open App in Full-Screen{% endtrans %}"><i class="icon-fullscreen"></i></a>
+    <a id="controls_toggle" class="leon button square" onclick="builder.controls()" onmouseover="visual.ui.tooltip(this.id,true)" onmouseout="visual.ui.tooltip(this.id,false)" alt="{% trans %}Show/Hide Controls{% endtrans %}"><i class="icon-cogs"></i></a>
   
   </div>
 
@@ -175,8 +175,8 @@
     }
     
     var footer = {
-      "secex": "Data Provided by SECEX",
-      "rais": "Data Provided by RAIS"
+      "secex": visual.format.text("Data Provided by") + " SECEX",
+      "rais": visual.format.text("Data Provided by") + " RAIS"
     }
     
     /*******************************/

@@ -3,6 +3,25 @@ visual.slide = {};
 visual.popover = {};
 visual.slide.timing = 0.75, // timing of page slides, in seconds
 
+visual.obj2csv = function(obj) {
+  var str = ''
+
+  for (var key in obj) {
+    str += key
+    str += ","
+    var o = obj[key]
+    for (l in o) {
+      str += o[l]
+      str += ","
+    }
+    str = str.substr(0, str.length - 1)
+    str += "\n"
+  }
+  
+  return str;
+  
+}
+
 visual.format = {};
 visual.format.text = function(text,name) {
   
@@ -138,28 +157,21 @@ visual.ui.background = function() {
 visual.ui.tooltip = function(id,state) {
   if (state) {
     
-    var text = {
-      "controls_toggle": "Show/Hide Controls",
-      "file": "Download this App",
-      "help": "Show App Tutorial",
-      "refresh": "Refresh the App",
-      "starred": "Save this App"
-    }
-    
-    var desc = text[id] ? text[id] : id
-    
     var item = document.getElementById(id),
-        size = item.getBoundingClientRect()
+        size = item.getBoundingClientRect(),
+        text = item.getAttribute("alt") ? item.getAttribute("alt") : id
+        
     vizwhiz.tooltip.remove(id);
     vizwhiz.tooltip.create({
       "x": size.left+size.width/2,
       "y": size.top+size.height/2,
       "offset": size.height/2,
       "arrow": true,
-      "description": desc,
+      "description": text,
       "width": "auto",
       "id": id
     })
+    
   }
   else {
     vizwhiz.tooltip.remove(id);

@@ -1,7 +1,7 @@
 <!-- extend from base layout -->
 {% extends "templates/base.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}{% trans %}Login{% endtrans %}{% endblock %}
 
 {% block head %}
 
@@ -30,14 +30,14 @@
 <div id="login_div">
   <div id="logo"></div>
   <div id="login_text">
-  Logging in is easy! All you have to do is choose one of the following accounts to link with your profile. We'll take care of the rest.
+    {% trans %}Logging in is easy! All you have to do is choose one of the following accounts to link with your profile. We'll take care of the rest.{% endtrans %}
   <br><br>
-  By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile.
+    {% trans %}By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile.{% endtrans %}
 </div>
   <form action="" method="post" name="login">
       {{ form.hidden_tag() }}
       <p>
-      {{form.remember_me(id="remember")}}<label for="remember">Remember Me</label></p>
+      {{form.remember_me(id="remember")}}<label for="remember">{% trans %}Remember Me{% endtrans %}</label></p>
       {% for pr in providers %}
       <a id="{{ pr }}" class="login_button" href="{{ pr }}"></a>
       {% endfor %}
@@ -49,15 +49,6 @@
 leon("#remember")
 d3.selectAll(".login_button").on(vizwhiz.evt.click, function () {
   var pr = this.id.toLowerCase()
-//   var openid = this.href
-//   console.log(openid, pr)
-//   u = openid.search('username')
-//   if (u != -1) {
-//     // openid requires username
-//     user = prompt('Enter your ' + pr + ' username:')
-//     openid = openid.substr(0, u) + user
-//     // this.parentNode.submit();
-//   }
   form = document.forms['login'];
   form.elements['provider'].value = pr;
   this.parentNode.submit();

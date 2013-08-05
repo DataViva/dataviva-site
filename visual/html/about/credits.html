@@ -1,14 +1,13 @@
 <!-- extend from about base layout -->
 {% extends "templates/about.html" %}
 
-{% block title %}: About :: Credits{% endblock %}
+{% block title %}: {% trans %}Credits{% endtrans %}{% endblock %}
 
 {% block about_content %}
-<h2>Credits</h2>
+<h2>{% trans %}Credits{% endtrans %}</h2>
 
 <ul>
-  <li>Sabrina Illustrations: Sara Showalter</li>
-  <li>Icons and Graphics: The Noun Project</li>
-  <li>Text Icons: Font-Awesome</li>
+  <li>{% trans %}Sabrina Illustrations{% endtrans %}: Sara Showalter</li>
+  <li>{% trans %}Icons and Graphics{% endtrans %}: The Noun Project and Font-Awesome</li>
 </ul>
 {% endblock %}

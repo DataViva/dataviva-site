@@ -1,9 +1,10 @@
-<!-- extend admin_template -->
 {% extends "templates/account.html" %}
+
+{% block title %}: {% trans %}Questions{% endtrans %}{% endblock %}
 
 {% block admin_content %}
 
-<h5>{% if status %}{{ status}}{% endif %} Questions</h5>
+<h5>{% if status %}{{ status }} {% endif %}{% trans %}Questions{% endtrans %}</h5>
 <hr class="bold"/>
 
 <div class="feed"></div>

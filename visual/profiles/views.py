@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Blueprint, request, render_template, g, url_for
 from sqlalchemy import func
 
@@ -13,12 +14,6 @@ mod = Blueprint('profiles', __name__, url_prefix='/profiles')
 @mod.before_request
 def before_request():
     g.page_type = mod.name
-    
-    g.sabrina = {}
-    g.sabrina["outfit"] = "lab"
-    g.sabrina["face"] = "smirk"
-    g.sabrina["hat"] = None
-    
     g.path = request.path
 
 @mod.route('/')
@@ -29,23 +24,29 @@ def profiles(category = None, id = None):
     selector = category
     
     article = None
-    if category == "cbo":
-        article = "an occupation"
-        g.sabrina["outfit"] = "preppy"
-    elif category == "isic":
-        article = "an industry"
-        g.sabrina["outfit"] = "worker"
-        g.sabrina["hat"] = "hardhat"
-    elif category == "hs":
-        article = "a product"
-        g.sabrina["outfit"] = "worker"
-        g.sabrina["hat"] = "hardhat"
-    elif category == "bra":
-        article = "a location"
-        g.sabrina["outfit"] = "travel"
-    elif category == "wld":
-        article = "a trade partner"
-        g.sabrina["outfit"] = "travel"
+    
+    if g.locale == "pt":
+        if category == "cbo":
+            article = "uma profissão"
+        elif category == "isic":
+            article = "uma indústria"
+        elif category == "hs":
+            article = "um produto"
+        elif category == "bra":
+            article = "um local"
+        elif category == "wld":
+            article = "um país"
+    else:
+        if category == "cbo":
+            article = "an occupation"
+        elif category == "isic":
+            article = "an industry"
+        elif category == "hs":
+            article = "a product"
+        elif category == "bra":
+            article = "a location"
+        elif category == "wld":
+            article = "a country"
 
     category_type = None
     if id and id != "select":

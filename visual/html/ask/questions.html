@@ -1,7 +1,7 @@
 <!-- extend site layout -->
 {% extends "templates/site.html" %}
 
-{% block title %}: Ask Sabrina{% endblock %}
+{% block title %}: {% trans %}Ask Sabrina{% endtrans %}{% endblock %}
 
 {% block head %}
 <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/wysihtml5.stylesheet.css" />
@@ -15,17 +15,17 @@
 
   <div class="grid5col4">
     <div class="title">
-      What can I help you with?
+      {% trans %}What would you like to know?{% endtrans %}
     </div>
     {{ search_form.search(size=80, id='search', class='ask', placeholder="Search here...") }}
-    <div class="hide"><h3>Search Results</h3></div>
+    <div class="hide"><h3>{% trans %}Search Results{% endtrans %}</h3></div>
     
     <div id="order_toggle">
-      <legend id="order">Order by</legend>
+      <legend id="order">{% trans %}Order by{% endtrans %}</legend>
       <input type="radio" name="order" value="votes" id="votes" onclick="change_order(this.value)" checked="checked">
-      <label for="votes">Top Voted</label>
+      <label for="votes">{% trans %}Top Voted{% endtrans %}</label>
       <input type="radio" name="order" value="newest" id="newest" onclick="change_order(this.value)">
-      <label for="newest">Newest</label>
+      <label for="newest">{% trans %}Newest{% endtrans %}</label>
     </div>
       
     <div id="recent">
@@ -34,8 +34,8 @@
 
       <a {% if g.user.is_authenticated() %}href="/ask/ask/"{%else%}onclick="login()"{%endif%} class="help">
         <div>
-          <h2>Cannot find your answer here?</h2>
-          Submit your question to Escritorio!
+          <h2>{% trans %}Cannot find your answer here?{% endtrans %}</h2>
+          {% trans %}Submit your question to Escritorio!{% endtrans %}
         </div>
       </a>
       
@@ -94,7 +94,7 @@
       
     votes_div.append("div")
       .attr("class", "vote_label")
-      .text("votes")
+      .text(visual.format.text("points"))
 
       
     // lastly, the div that holds the data
@@ -117,7 +117,7 @@
       .attr("class", "question_attr")
       .html(function(d){ 
         var user_link = "<a href='/account/" + d.user.nickname + "'>" + d.user.fullname + "</a>"
-        return "Asked by " + user_link + " " + moment(d.timestamp).fromNow();
+        return visual.format.text("Asked by") + " " + user_link + " " + moment(d.timestamp).fromNow();
       })
 
     acts.exit().remove()

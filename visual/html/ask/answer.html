@@ -2,15 +2,15 @@
 {% extends "templates/site.html" %}
 
 <!-- set the title -->
-{% block title %}: Ask Sabrina{% endblock %}
+{% block title %}: {% trans %}Ask Sabrina{% endtrans %}{% endblock %}
 
 {% block head %}
 <!-- Redactor is here -->
 <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
 <style>
-.reply_form   { color: black !important;      }
-.question     { display: block;               }
-.child        { margin-left: 40px !important; }
+  .reply_form   { color: black !important;      }
+  .question     { display: block;               }
+  .child        { margin-left: 40px !important; }
 </style>
 {% endblock %}
 
@@ -23,7 +23,7 @@
     <!-- Show vote count and buttons -->
     <div class="vote_block">
       <div class="vote_count">{% if q.votes.all()|length %}{{ q.votes.count() }}{% else %}0{% endif %}</div>
-      <div class="vote_label">votes</div>
+      <div class="vote_label">{% trans %}Points{% endtrans %}</div>
       <a class="vote_up" href="{{ url_for('ask.question_vote', slug=q.slug) }}">
         <i class="icon-thumbs-up"></i>
       </a>
@@ -43,7 +43,7 @@
       <!-- Tags associated with question -->
       {% if tags|length %}
       <div class="labels">
-        Tags:
+        {% trans %}Tags{% endtrans %}:
         {% for t in tags %}
           <a class="tag" style="background-color: {{ t.color }};" rel="tag">
             <span class="tag-icon" rel="{{ t.__class__.__name__ }}" title="{{ t.id }}"></span>
@@ -56,7 +56,7 @@
       <!-- Question metadata -->
       <div class="question_attr">
         <div class="userpic" style="background-image: url('{{ q.user.avatar(50) }}')"></div>
-        Asked by <a href="{{ url_for('account.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a> {{ momentjs(q.timestamp).fromNow() }}
+        {% trans %}Asked by{% endtrans %} <a href="{{ url_for('account.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a> {{ momentjs(q.timestamp).fromNow() }}
       </div>
       
     </div> <!-- end of right hand-side -->
@@ -71,7 +71,7 @@
       {% if q.status_notes %}
         {{ q.status_notes|safe }}
       {% else %}
-        Sabrina has not answered this question yet. Feel free to start the conversation below.
+        {% trans %}Sabrina has not answered this question yet. Feel free to start the conversation below.{% endtrans %}
       {% endif %}
     </p>
     
@@ -82,7 +82,7 @@
   
   {% if q.replies.all()|length %}
   <!-- The responses -->
-  <h2>Responses</h2>
+  <h2>{% trans %}Responses{% endtrans %}</h2>
   <div id="responses">
     
     {% for r in q.replies %}
@@ -91,7 +91,7 @@
       <!-- Voting -->
       <div class="vote_block">
         <div class="vote_count">{% if r.votes.all()|length %}{{ r.votes.count() }}{% else %}0{% endif %}</div>
-        <div class="vote_label">votes</div>
+        <div class="vote_label">{% trans %}Points{% endtrans %}</div>
         <a class="vote_down" href="{{ url_for('ask.reply_flag', id=r.id) }}">
           <i class="icon-flag"></i>
         </a>
@@ -113,7 +113,7 @@
       </div> <!-- end reply text -->
         
       {% if r.id == r.parent_id %}
-      <button class="leave_response" data-parent="{{r.parent_id}}">Respond to {{r.user.fullname}}</button>
+      <button class="leave_response" data-parent="{{r.parent_id}}">{% trans %}Respond to{% endtrans %} {{r.user.fullname}}</button>
       {% endif %}
     
     </div> <!-- end reply -->
@@ -124,8 +124,8 @@
   {% endwith %}
   
   <!-- Leave another response (not to a specify reply but in general) -->
-  <h2>New Response</h2>
-  <button class="leave_response" style="display: none;">Leave a Response</button>
+  <h2>{% trans %}New Response{% endtrans %}</h2>
+  <button class="leave_response" style="display: none;">{% trans %}Leave a Response{% endtrans %}</button>
   
   <form class="reply_form" action="" method="post" name="login">
     <!-- Reply form for the page that will be moved around-->
@@ -145,7 +145,7 @@
     <!-- Submit button -->
     <a href="#" class="submit">
       <div class="decision">
-        <div class="text">Reply!</div>
+        <div class="text">{% trans %}Reply{% endtrans %}!</div>
         <div class="arrow"></div>
       </div>
     </a>

@@ -1,29 +1,37 @@
 {% extends "templates/site.html" %}
 
-{% block title %}: Generate a Guide{% endblock %}
+{% block title %}: {% trans %}Generate a Guide{% endtrans %}{% endblock %}
 
 {% block body %}
 
   <div id="fullscreen"></div>
   
   <div class="darkbox">
-    <h2>What would you like to know about<br>the {{ item.name() }} industry?</h2>
+    <h2>{{ _('What would you like to know about %(name)s?', name = item) }}</h2>
   </div>
   <br>
   <a class="decision icon square workforce" href="{{g.path}}workforce">
-    Who do they <b>employ</b>?
+    {% autoescape false %}
+    {{ _('Who do they %(word)s?', word = '<b>%s</b>' % (_('employ'))) }}
+    {% endautoescape %}
   </a>
 
   <a class="decision icon square isic" href="{{g.path}}potential">
-    Where do they <b>locate</b>?
+    {% autoescape false %}
+    {{ _('Where do they %(word)s?', word = '<b>%s</b>' % (_('locate'))) }}
+    {% endautoescape %}
   </a>
 
   <a class="decision icon square diversification" href="{{g.path}}diversification">
-    Which industries <b>co-locate</b> with them?
+    {% autoescape false %}
+    {{ _('Which industries %(word)s with them?', word = '<b>%s</b>' % (_('co-locate'))) }}
+    {% endautoescape %}
   </a>
 
   <a class="decision icon square bra" href="{{g.path}}bra">
-    What is the <b>production potential</b> of a location?
+    {% autoescape false %}
+    {{ _('What is the production %(word)s of a location?', word = '<b>%s</b>' % (_('potential'))) }}
+    {% endautoescape %}
   </a>
 
 {% endblock %}

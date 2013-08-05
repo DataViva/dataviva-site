@@ -1,17 +1,17 @@
-# Portuguese translations for PROJECT.
+# Translations template for PROJECT.
 # Copyright (C) 2013 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-08-05 15:46-0400\n"
-"PO-Revision-Date: 2013-08-01 20:11-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: pt <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,460 +19,452 @@ msgstr ""
 
 #: visual/html/home.html:18
 msgid "Visualizing Brazil"
-msgstr "Visualizando Brasil"
+msgstr ""
 
 #: visual/html/home.html:19
 msgid ""
 "Discover new meaning from economic data about Minas Gerais. Here are some"
 " good places to start:"
 msgstr ""
-"Descubra um novo significado a partir de dados econômicos sobre Minas "
-"Gerais. Aqui estão alguns bons lugares para começar:"
 
 #: visual/html/home.html:23 visual/html/templates/site.html:14
 msgid "Guide"
-msgstr "Guia"
+msgstr ""
 
 #: visual/html/home.html:24
 msgid "Generate multiple apps into a report."
-msgstr "Gerar vários aplicativos em um relatório."
+msgstr ""
 
 #: visual/html/home.html:28 visual/html/apps/index.html:4
 #: visual/html/templates/site.html:16
 msgid "Apps"
-msgstr "Apps"
+msgstr ""
 
 #: visual/html/home.html:29
 msgid "Go straight to the visualization builder."
-msgstr "Vá direto ao construtor visualização."
+msgstr ""
 
 #: visual/html/about/appsdocs.html:4
 msgid "About the Apps"
-msgstr "Sobre os Apps"
+msgstr ""
 
 #: visual/html/about/credits.html:4 visual/html/about/credits.html:7
 #: visual/html/templates/about.html:17
 msgid "Credits"
-msgstr "Créditos"
+msgstr ""
 
 #: visual/html/about/credits.html:10
 msgid "Sabrina Illustrations"
-msgstr "Sabrina Ilustrações"
+msgstr ""
 
 #: visual/html/about/credits.html:11
 msgid "Icons and Graphics"
-msgstr "Ícones e Imagens"
+msgstr ""
 
 #: visual/html/about/glossary.html:4 visual/html/about/glossary.html:7
 #: visual/html/templates/about.html:13
 msgid "Glossary"
-msgstr "Glossário"
+msgstr ""
 
 #: visual/html/about/visual.html:4 visual/html/about/visual.html:7
 msgid "About the Site"
-msgstr "Sobre o Site"
+msgstr ""
 
 #: visual/html/about/apps/geo_map.html:3 visual/html/apps/index.html:28
 #: visual/html/templates/about.html:31
 msgid "Geo Map"
-msgstr "Mapa"
+msgstr ""
 
 #: visual/html/about/apps/network.html:3 visual/html/apps/index.html:16
 #: visual/html/templates/about.html:23
 msgid "Network"
-msgstr "Rede"
+msgstr ""
 
 #: visual/html/about/apps/occugrid.html:3 visual/html/apps/index.html:24
 #: visual/html/templates/about.html:51
 msgid "Occugrid"
-msgstr "Occugrid"
+msgstr ""
 
 #: visual/html/about/apps/rings.html:3 visual/html/apps/index.html:20
 #: visual/html/templates/about.html:39
 msgid "Rings"
-msgstr "Anéis"
+msgstr ""
 
 #: visual/html/about/apps/scatter.html:3 visual/html/apps/index.html:32
 #: visual/html/templates/about.html:43
 msgid "Scatter"
-msgstr "Espalhar"
+msgstr ""
 
 #: visual/html/about/apps/stacked.html:3 visual/html/apps/index.html:40
 #: visual/html/templates/about.html:35
 msgid "Stacked"
-msgstr "Empilhados"
+msgstr ""
 
 #: visual/html/about/apps/tree_map.html:3 visual/html/apps/index.html:44
 #: visual/html/templates/about.html:27
 msgid "Tree Map"
-msgstr "Árvore Mapa"
+msgstr ""
 
 #: visual/html/account/login.html:4 visual/html/general/access.html:3
 #: visual/html/templates/site.html:24
 msgid "Login"
-msgstr "Login"
+msgstr ""
 
 #: visual/html/account/login.html:33
 msgid ""
 "Logging in is easy! All you have to do is choose one of the following "
 "accounts to link with your profile. We'll take care of the rest."
 msgstr ""
-"O login é fácil! Tudo que você tem a fazer é escolher uma das seguintes "
-"contas de ligação com o seu perfil. Nós cuidaremos do resto."
 
 #: visual/html/account/login.html:35
 msgid ""
 "By having an account, you will be able to ask Sabrina questions, comment "
 "in discussions, and save your favorite apps to your profile."
 msgstr ""
-"Por ter uma conta, você será capaz de fazer perguntas Sabrina, comentar "
-"em discussões e guardar seus aplicativos favoritos ao seu perfil."
 
 #: visual/html/account/login.html:40
 msgid "Remember Me"
-msgstr "Lembrar de Mim"
+msgstr ""
 
 #: visual/html/account/questions.html:3 visual/html/account/questions.html:7
 msgid "Questions"
-msgstr "Perguntas"
+msgstr ""
 
 #: visual/html/account/replies.html:3 visual/html/account/replies.html:7
 msgid "Replies"
-msgstr "Respostas"
+msgstr ""
 
 #: visual/html/account/starred.html:3 visual/html/account/starred.html:7
 msgid "Starred"
-msgstr "Estrelado"
+msgstr ""
 
 #: visual/html/admin/admin_questions.html:3
 #: visual/html/admin/admin_questions.html:12 visual/html/ask/ask.html:33
 msgid "Question"
-msgstr "Pergunta"
+msgstr ""
 
 #: visual/html/admin/admin_questions.html:13
 msgid "User"
-msgstr "Usuário"
+msgstr ""
 
 #: visual/html/admin/admin_questions.html:14
 msgid "Date"
-msgstr "Data"
+msgstr ""
 
 #: visual/html/admin/admin_questions_edit.html:3
 msgid "Edit Question"
-msgstr "Editar Pergunta"
+msgstr ""
 
 #: visual/html/admin/admin_questions_edit.html:16
 #: visual/html/ask/answer.html:59
 msgid "Asked by"
-msgstr "Perguntado por"
+msgstr ""
 
 #: visual/html/admin/admin_questions_edit.html:24
 msgid "Status"
-msgstr "Estado"
+msgstr ""
 
 #: visual/html/admin/admin_questions_edit.html:27
 msgid "Answer"
-msgstr "Responder"
+msgstr ""
 
 #: visual/html/admin/admin_questions_edit.html:28
 msgid "Enter your answer..."
-msgstr "Digite sua resposta..."
+msgstr ""
 
 #: visual/html/admin/admin_questions_edit.html:33
 msgid "Update"
-msgstr "Atualizar"
+msgstr ""
 
 #: visual/html/admin/admin_users.html:3 visual/html/templates/site.html:32
 msgid "Admin Panel"
-msgstr "Painel de Administração"
+msgstr ""
 
 #: visual/html/admin/admin_users.html:24
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
 #: visual/html/admin/admin_users.html:25
 msgid "Full Name"
-msgstr "Nome Completo"
+msgstr ""
 
 #: visual/html/admin/admin_users.html:26
 msgid "Nick Name"
-msgstr "Apelido"
+msgstr ""
 
 #: visual/html/admin/admin_users.html:27
 msgid "Role"
-msgstr "Papel"
+msgstr ""
 
 #: visual/html/apps/builder.html:4
 msgid "App Builder"
-msgstr "Construtor de Apps"
+msgstr ""
 
 #: visual/html/apps/embed.html:38
 msgid "Change Output"
-msgstr "Mude de Saída"
+msgstr ""
 
 #: visual/html/apps/embed.html:100
 msgid "Refresh the App"
-msgstr "Atualizar o App"
+msgstr ""
 
 #: visual/html/apps/embed.html:101
 msgid "Download this App"
-msgstr "Baixe este aplicativo"
+msgstr ""
 
 #: visual/html/apps/embed.html:102
 msgid "Save this App"
-msgstr "Salvar esta App"
+msgstr ""
 
 #: visual/html/apps/embed.html:103
 msgid "Show App Tutorial"
-msgstr "Mostrar App Tutorial"
+msgstr ""
 
 #: visual/html/apps/embed.html:104
 msgid "Open App in Full-Screen"
-msgstr "Abra o aplicativo em tela cheia"
+msgstr ""
 
 #: visual/html/apps/embed.html:105
 msgid "Show/Hide Controls"
-msgstr "Mostrar/Ocultar Controles"
+msgstr ""
 
 #: visual/html/apps/index.html:10
 msgid "Which app would you like to build?"
-msgstr "Qual aplicativo você gostaria de construir?"
+msgstr ""
 
 #: visual/html/apps/index.html:13
 msgid "Skip straight to the app builder!"
-msgstr "Ir direto para o construtor de apps!"
+msgstr ""
 
 #: visual/html/apps/index.html:36 visual/html/templates/about.html:47
 msgid "Compare"
-msgstr "Comparar"
+msgstr ""
 
 #: visual/html/ask/answer.html:5 visual/html/ask/ask.html:4
 #: visual/html/ask/ask.html:60 visual/html/ask/questions.html:4
 #: visual/html/templates/site.html:18
 msgid "Ask Sabrina"
-msgstr "Pergunte Sabrina"
+msgstr ""
 
 #: visual/html/ask/answer.html:26 visual/html/ask/answer.html:94
 msgid "Points"
-msgstr "Pontos"
+msgstr ""
 
 #: visual/html/ask/answer.html:46 visual/html/ask/ask.html:53
 msgid "Tags"
-msgstr "Marcações"
+msgstr ""
 
 #: visual/html/ask/answer.html:74
 msgid ""
 "Sabrina has not answered this question yet. Feel free to start the "
 "conversation below."
 msgstr ""
-"Sabrina não respondeu a esta pergunta ainda. Sinta-se livre para iniciar "
-"a conversa abaixo."
 
 #: visual/html/ask/answer.html:85
 msgid "Responses"
-msgstr "Respostas"
+msgstr ""
 
 #: visual/html/ask/answer.html:116
 msgid "Respond to"
-msgstr "Responda a"
+msgstr ""
 
 #: visual/html/ask/answer.html:127
 msgid "New Response"
-msgstr "Nova Resposta"
+msgstr ""
 
 #: visual/html/ask/answer.html:128
 msgid "Leave a Response"
-msgstr "Deixe uma Resposta"
+msgstr ""
 
 #: visual/html/ask/answer.html:148
 msgid "Reply"
-msgstr "Responder"
+msgstr ""
 
 #: visual/html/ask/ask.html:22 visual/html/ask/questions.html:18
 #: visual/html/guide/cbo.html:13
 msgid "What would you like to know?"
-msgstr "O que você gostaria de saber?"
+msgstr ""
 
 #: visual/html/ask/ask.html:24
 msgid "You need to login for this functionality."
-msgstr "Você precisa fazer o login para essa funcionalidade."
+msgstr ""
 
 #: visual/html/ask/ask.html:41
 msgid "Description"
-msgstr "Descrição"
+msgstr ""
 
 #: visual/html/ask/ask.html:49
 msgid "App"
-msgstr "App"
+msgstr ""
 
 #: visual/html/ask/ask.html:68
 msgid "Click here to login"
-msgstr "Clique aqui para acessar"
+msgstr ""
 
 #: visual/html/ask/questions.html:21
 msgid "Search Results"
-msgstr "Resultados da Pesquisa"
+msgstr ""
 
 #: visual/html/ask/questions.html:24
 msgid "Order by"
-msgstr "Ordenar por"
+msgstr ""
 
 #: visual/html/ask/questions.html:26
 msgid "Top Voted"
-msgstr "Mais Votados"
+msgstr ""
 
 #: visual/html/ask/questions.html:28
 msgid "Newest"
-msgstr "O Mais Novo"
+msgstr ""
 
 #: visual/html/ask/questions.html:37
 msgid "Cannot find your answer here?"
-msgstr "Não foi possível encontrar aqui a sua resposta?"
+msgstr ""
 
 #: visual/html/ask/questions.html:38
 msgid "Submit your question to Escritorio!"
-msgstr "Enviar sua pergunta para Escritorio!"
+msgstr ""
 
 #: visual/html/data/classifications.html:14
 msgid "Depth"
-msgstr "Fundo"
+msgstr ""
 
 #: visual/html/data/index.html:3 visual/html/data/query.html:28
 #: visual/html/templates/site.html:17
 msgid "Data"
-msgstr "Dados"
+msgstr ""
 
 #: visual/html/data/index.html:10
 msgid "How do you want to access the data?"
-msgstr "Como você deseja acessar os dados?"
+msgstr ""
 
 #: visual/html/data/index.html:14
 msgid "Database"
-msgstr "Banco de Dados"
+msgstr ""
 
 #: visual/html/data/index.html:15
 msgid "Custom data queries of our database."
-msgstr "Consultas de dados personalizados do nosso banco de dados."
+msgstr ""
 
 #: visual/html/data/index.html:19
 msgid "API"
-msgstr "API"
+msgstr ""
 
 #: visual/html/data/index.html:20
 msgid "Access the data directly."
-msgstr "Acessar os dados diretamente."
+msgstr ""
 
 #: visual/html/data/index.html:24
 msgid "Source List"
-msgstr "Lista de Fontes"
+msgstr ""
 
 #: visual/html/data/index.html:25
 msgid "Browse the various classifications."
-msgstr "Percorrer as diversas classificações."
+msgstr ""
 
 #: visual/html/data/query.html:3
 msgid "Database Query"
-msgstr "Consultas de Banco de Dados"
+msgstr ""
 
 #: visual/html/data/query.html:37
 msgid "All Years"
-msgstr "Todos os Anos"
+msgstr ""
 
 #: visual/html/data/query.html:58
 msgid "Brazilian Locations"
-msgstr "Locais Brasileiros"
+msgstr ""
 
 #: visual/html/data/query.html:71
 msgid "Showing all of Brazil until a location is selected."
-msgstr "Mostrando todo o Brasil até que um local é selecionado."
+msgstr ""
 
 #: visual/html/data/query.html:74
 msgid "add a location"
-msgstr "adicionar um local"
+msgstr ""
 
 #: visual/html/data/query.html:87 visual/html/data/select.html:20
 msgid "Industries"
-msgstr "Actividades Económicas"
+msgstr ""
 
 #: visual/html/data/query.html:101
 msgid "Showing all industries until a filter is selected."
-msgstr "Mostrando todas as atividades econômicas, até que um filtro seleccionado."
+msgstr ""
 
 #: visual/html/data/query.html:104
 msgid "add an industry"
-msgstr "adicionar uma actividade económica"
+msgstr ""
 
 #: visual/html/data/query.html:115 visual/html/data/select.html:25
 msgid "Occupations"
-msgstr "Ocupações"
+msgstr ""
 
 #: visual/html/data/query.html:129
 msgid "Showing all occupations until a filter is selected."
-msgstr "Mostrando todas as ocupações até que um filtro seleccionado."
+msgstr ""
 
 #: visual/html/data/query.html:132
 msgid "add an occupation"
-msgstr "adicionar uma ocupação"
+msgstr ""
 
 #: visual/html/data/query.html:136 visual/html/data/query.html:198
 msgid "Build"
-msgstr "Construir"
+msgstr ""
 
 #: visual/html/data/query.html:149
 msgid "Products"
-msgstr "Produtos"
+msgstr ""
 
 #: visual/html/data/query.html:163
 msgid "Showing all products until a filter is selected."
-msgstr "Mostrando todos os produtos até um filtro seleccionado."
+msgstr ""
 
 #: visual/html/data/query.html:166
 msgid "add a product"
-msgstr "adicionar um produto"
+msgstr ""
 
 #: visual/html/data/query.html:177
 msgid "Trade Partners"
-msgstr "Parceiros Comerciais"
+msgstr ""
 
 #: visual/html/data/query.html:191
 msgid "Showing all countries until a filter is selected."
-msgstr "Mostrando todos os países, até que um filtro seleccionado."
+msgstr ""
 
 #: visual/html/data/query.html:194
 msgid "add a trade partner"
-msgstr "adicionar um parceiro comercial"
+msgstr ""
 
 #: visual/html/data/select.html:3
 msgid "Choose a Classification"
-msgstr "Escolha uma Classificação"
+msgstr ""
 
 #: visual/html/data/select.html:10
 msgid "Which classification would you like to browse?"
-msgstr "Qual a classificação que você gostaria de pesquisar?"
+msgstr ""
 
 #: visual/html/data/select.html:15 visual/html/guide/industry.html:12
 msgid "Product Exports"
-msgstr "As Exportações de Produtos"
+msgstr ""
 
 #: visual/html/data/select.html:29
 msgid "Municipalities"
-msgstr "Municípios"
+msgstr ""
 
 #: visual/html/data/select.html:30
 msgid "Geographical locations within Brazil"
-msgstr "Localizações geográficas no Brasil"
+msgstr ""
 
 #: visual/html/data/select.html:34
 msgid "Countries"
-msgstr "Países"
+msgstr ""
 
 #: visual/html/data/select.html:35
 msgid "World Trade Partners"
-msgstr "Parceiros Comércio Mundial"
+msgstr ""
 
 #: visual/html/general/404.html:13
 msgid "Oh no! The page you've requested does not exist."
-msgstr "Oh, não! A página que você solicitou não existe."
+msgstr ""
 
 #: visual/html/general/access.html:138
 #, python-format
@@ -480,8 +472,6 @@ msgid ""
 "Until we are able to complete extensive cross-browser compatibility, "
 "please use %(chrome)s to view this site."
 msgstr ""
-"Enquanto não formos capazes de completar extensa compatibilidade cross-"
-"browser, utilize o %(chrome)s para visualizar este site."
 
 #: visual/html/general/access.html:148
 #, python-format
@@ -489,268 +479,262 @@ msgid ""
 "%(note)s: This site is a work in progress. We are working hard everyday "
 "to fix bugs and improve the user experience."
 msgstr ""
-"%(note)s: Este site é um trabalho em progresso. Estamos trabalhando duro "
-"todos os dias para corrigir bugs e melhorar a experiência do usuário."
 
 #: visual/html/general/access.html:148
 msgid "Note"
-msgstr "Nota"
+msgstr ""
 
 #: visual/html/general/access.html:152
 #, python-format
 msgid "If you have any questions, e-mail: %(email)s"
-msgstr "Se você tiver alguma dúvida, e-mail: %(email)s"
+msgstr ""
 
 #: visual/html/general/selector.html:3
 msgid "Filter Selection"
-msgstr "Seleção de Filtro"
+msgstr ""
 
 #: visual/html/general/selector.html:15
 #, python-format
 msgid "Please choose %(name)s"
-msgstr "Por favor, escolha %(name)s"
+msgstr ""
 
 #: visual/html/guide/bra.html:3 visual/html/guide/cbo.html:3
 #: visual/html/guide/choice.html:3 visual/html/guide/hs.html:3
 #: visual/html/guide/index.html:3 visual/html/guide/isic.html:3
 msgid "Generate a Guide"
-msgstr "Gerar um Guia"
+msgstr ""
 
 #: visual/html/guide/bra.html:10 visual/html/guide/cbo.html:31
 #: visual/html/guide/hs.html:10 visual/html/guide/isic.html:10
 #, python-format
 msgid "What would you like to know about %(name)s?"
-msgstr "O que você gostaria de saber sobre %(name)s?"
+msgstr ""
 
 #: visual/html/guide/bra.html:17 visual/html/guide/bra.html:49
 #: visual/html/guide/cbo.html:18 visual/html/guide/cbo.html:24
-#, fuzzy, python-format
+#, python-format
 msgid "What are %(word)s?"
-msgstr "Quais são %(word)s?"
+msgstr ""
 
 #: visual/html/guide/bra.html:17
-#, fuzzy
 msgid "the industrial opportunities"
-msgstr "as oportunidades de atividade econômica"
+msgstr ""
 
 #: visual/html/guide/bra.html:23
 #, python-format
 msgid "How can I %(word)s?"
-msgstr "Como I pode %(word)s?"
+msgstr ""
 
 #: visual/html/guide/bra.html:23
 msgid "attract an industry"
-msgstr "atrair uma actividade económica"
+msgstr ""
 
 #: visual/html/guide/bra.html:29 visual/html/guide/bra.html:37
 #, python-format
 msgid "Which industries are %(word)s?"
-msgstr "Que as atividades econômicas estão %(word)s?"
+msgstr ""
 
 #: visual/html/guide/bra.html:29 visual/html/guide/cbo.html:42
 msgid "growing"
-msgstr "crescente"
+msgstr ""
 
 #: visual/html/guide/bra.html:37
 msgid "shrinking"
-msgstr "encolhendo"
+msgstr ""
 
 #: visual/html/guide/bra.html:43
 #, python-format
 msgid "What is the available %(word)s?"
-msgstr "Qual é a %(word)s disponível?"
+msgstr ""
 
 #: visual/html/guide/bra.html:43
 msgid "workforce"
-msgstr "força de trabalho"
+msgstr ""
 
 #: visual/html/guide/bra.html:49
-#, fuzzy
 msgid "the present industries"
-msgstr "as atuais atividades econômicas?"
+msgstr ""
 
 #: visual/html/guide/cbo.html:18
-#, fuzzy
 msgid "the fastest growing occupations"
-msgstr "as profissões que mais crescem"
+msgstr ""
 
 #: visual/html/guide/cbo.html:24
-#, fuzzy
 msgid "the best paying occupations"
-msgstr "as melhores profissões que pagam?"
+msgstr ""
 
 #: visual/html/guide/cbo.html:36
 #, python-format
 msgid "Which %(word)s employ them?"
-msgstr "Quais %(word)s eles empregam?"
+msgstr ""
 
 #: visual/html/guide/cbo.html:36
 msgid "industries"
-msgstr "atividades econômicas"
+msgstr ""
 
 #: visual/html/guide/cbo.html:42
 #, python-format
 msgid "Where is their employement %(word)s the fastest?"
-msgstr "Onde está o seu employement %(word)s o mais rápido?"
+msgstr ""
 
 #: visual/html/guide/cbo.html:48
 #, python-format
 msgid "What are their %(word)s?"
-msgstr "Quais são as suas %(word)s?"
+msgstr ""
 
 #: visual/html/guide/cbo.html:48
 msgid "career alternatives"
-msgstr "alternativas de carreira"
+msgstr ""
 
 #: visual/html/guide/choice.html:10
 #, python-format
 msgid "Do you have %(name)s in mind?"
-msgstr "Você tem %(name)s em mente?"
+msgstr ""
 
 #: visual/html/guide/choice.html:13
 msgid "Yes"
-msgstr "Sim"
+msgstr ""
 
 #: visual/html/guide/choice.html:16
 msgid "No"
-msgstr "Não"
+msgstr ""
 
 #: visual/html/guide/hs.html:15
 #, python-format
 msgid "Which %(word)s import them?"
-msgstr "Quais são os %(word)s-los importar?"
+msgstr ""
 
 #: visual/html/guide/hs.html:15
 msgid "countries"
-msgstr "países"
+msgstr ""
 
 #: visual/html/guide/hs.html:21
 #, python-format
 msgid "Which %(word)s in Brazil produce them?"
-msgstr "Quais os %(word)s no Brasil produzi-los?"
+msgstr ""
 
 #: visual/html/guide/hs.html:21
 msgid "municipalities"
-msgstr "municípios"
+msgstr ""
 
 #: visual/html/guide/hs.html:27 visual/html/guide/isic.html:27
 #, python-format
 msgid "Which industries %(word)s with them?"
-msgstr "Quais as indústrias %(word)s com eles?"
+msgstr ""
 
 #: visual/html/guide/hs.html:27 visual/html/guide/isic.html:27
 msgid "co-locate"
-msgstr "co-localizar"
+msgstr ""
 
 #: visual/html/guide/hs.html:33 visual/html/guide/isic.html:33
 #, python-format
 msgid "What is the production %(word)s of a location?"
-msgstr "Qual é o %(word)s de um local de produção?"
+msgstr ""
 
 #: visual/html/guide/hs.html:33 visual/html/guide/isic.html:33
 msgid "potential"
-msgstr "potencial"
+msgstr ""
 
 #: visual/html/guide/index.html:9
 msgid "What's on your mind?"
-msgstr "O que está em sua mente?"
+msgstr ""
 
 #: visual/html/guide/index.html:12
 msgid "Location"
-msgstr "Localização"
+msgstr ""
 
 #: visual/html/guide/index.html:13
 msgid "Learn about the potential of a location."
-msgstr "Saiba mais sobre o potencial de um local."
+msgstr ""
 
 #: visual/html/guide/index.html:17 visual/html/guide/industry.html:3
 #: visual/html/profiles/index.html:22
 msgid "Industry"
-msgstr "Atividade Econômica"
+msgstr ""
 
 #: visual/html/guide/index.html:18
 msgid "Learn about industrial opportunities."
-msgstr "Saiba mais sobre as oportunidades de atividade econômica."
+msgstr ""
 
 #: visual/html/guide/index.html:22
 msgid "Career"
-msgstr "Carreira"
+msgstr ""
 
 #: visual/html/guide/index.html:23
 msgid "Learn about job opportunities."
-msgstr "Saiba mais sobre as oportunidades de emprego."
+msgstr ""
 
 #: visual/html/guide/industry.html:9
 msgid "What are you interested in?"
-msgstr "O que você está interessado?"
+msgstr ""
 
 #: visual/html/guide/industry.html:16
 msgid "Establishments and Employment"
-msgstr "Estabelecimentos e Emprego"
+msgstr ""
 
 #: visual/html/guide/isic.html:15
 #, python-format
 msgid "Who do they %(word)s?"
-msgstr "Quem é que eles %(word)s?"
+msgstr ""
 
 #: visual/html/guide/isic.html:15
 msgid "employ"
-msgstr "utilizam"
+msgstr ""
 
 #: visual/html/guide/isic.html:21
 #, python-format
 msgid "Where do they %(word)s?"
-msgstr "Onde é que eles %(word)s?"
+msgstr ""
 
 #: visual/html/guide/isic.html:21
 msgid "locate"
-msgstr "localizar"
+msgstr ""
 
 #: visual/html/profiles/index.html:3
 msgid "Generate a Profile"
-msgstr "Gerar um Perfil"
+msgstr ""
 
 #: visual/html/profiles/index.html:10
 msgid "What would you like to learn more about?"
-msgstr "O que você gostaria de saber mais sobre?"
+msgstr ""
 
 #: visual/html/profiles/index.html:14
 msgid "Brazilian Location"
-msgstr "Localização Brasileira"
+msgstr ""
 
 #: visual/html/profiles/index.html:18
 msgid "Occupation"
-msgstr "Ocupação"
+msgstr ""
 
 #: visual/html/profiles/index.html:26
 msgid "Product Export"
-msgstr "Produto de Exportação"
+msgstr ""
 
 #: visual/html/profiles/index.html:30
 msgid "World Trade Partner"
-msgstr "Parceiro Mundial do Comércio"
+msgstr ""
 
 #: visual/html/templates/about.html:9
 msgid "General"
-msgstr "Geral"
+msgstr ""
 
 #: visual/html/templates/site.html:15
 msgid "Profiles"
-msgstr "Perfis"
+msgstr ""
 
 #: visual/html/templates/site.html:19
 msgid "Learn More"
-msgstr "Saiba Mais"
+msgstr ""
 
 #: visual/html/templates/site.html:30
 msgid "Profile"
-msgstr "Perfil"
+msgstr ""
 
 #: visual/html/templates/site.html:34
 msgid "Logout"
-msgstr "Sair"
+msgstr ""
 
 #: visual/html/templates/site.html:64
 msgid "Sponsored by"
-msgstr "Patrocinado pela"
+msgstr ""
 

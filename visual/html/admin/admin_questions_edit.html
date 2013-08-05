@@ -1,5 +1,6 @@
-<!-- extend admin_template -->
 {% extends "templates/admin.html" %}
+
+{% block title %}: {% trans %}Edit Question{% endtrans %}{% endblock %}
 
 {% block head %}
 <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
@@ -12,7 +13,7 @@
 <p>{{ question.body }}</p>
 <div class="posted">
   <img src="{{ question.user.avatar(22) }}"> 
-  Asked by {{question.user.nickname}} {{ momentjs(question.timestamp).fromNow() }}
+  {% trans %}Asked by{% endtrans %} {{question.user.nickname}} {{ momentjs(question.timestamp).fromNow() }}
 </div>
 
 <hr />
@@ -20,16 +21,16 @@
 <form id="ask_form" action="" method="post">
   {{ form.hidden_tag() }}
 
-  <h3>Status:</h3>
+  <h3>{% trans %}Status{% endtrans %}:</h3>
   {{ form.status() }}
 
-  <h3>Answer:</h3>
-  {{ form.answer(id="wysiwyg_textarea", placeholder="Enter your answer...") }}<br />
+  <h3>{% trans %}Answer{% endtrans %}:</h3>
+  {{ form.answer(id="wysiwyg_textarea", placeholder=_("Enter your answer...")) }}<br />
   {% for error in form.errors.body %}
   <span style="color: red;">[{{ error }}]</span>
   {% endfor %}
 
-  <input type="submit" value="Update"/>
+  <input type="submit" value="{% trans %}Update{% endtrans %}"/>
 
 </form>
 {% endblock %}

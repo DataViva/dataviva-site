@@ -1,19 +1,19 @@
 {% extends "templates/site.html" %}
 
-{% block title %}: Generate a Guide{% endblock %}
+{% block title %}: {% trans %}Generate a Guide{% endtrans %}{% endblock %}
 
 {% block body %}
 
   <div id="fullscreen"></div>
   <div class="grid5col5">
   
-    <div class="darkbox"><h2>Do you have {{ article }} in mind?</h2></div>
+    <div class="darkbox"><h2>{{ _('Do you have %(name)s in mind?', name = article) }}</h2></div>
     <br>
     <a class="decision icon square yes" href="{{g.path}}select">
-      <h2>Yes</h2>
+      <h2>{% trans %}Yes{% endtrans %}</h2>
     </a>
     <a class="decision icon square no" href="{{g.path}}all">
-      <h2>No</h2>
+      <h2>{% trans %}No{% endtrans %}</h2>
     </a>
   
   </div>

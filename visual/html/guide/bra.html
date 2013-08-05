@@ -1,39 +1,53 @@
 {% extends "templates/site.html" %}
 
-{% block title %}: Generate a Guide{% endblock %}
+{% block title %}: {% trans %}Generate a Guide{% endtrans %}{% endblock %}
 
 {% block body %}
   
   <div id="fullscreen"></div>
   
   <div class="darkbox">
-    <h2>What would you like to know about {{ item.name() }}?</h2>
+    <h2>{{ _('What would you like to know about %(name)s?', name = item) }}</h2>
   </div>
+  
   <br>
+  
   <a class="decision icon square opportunity" href="{{g.path}}opportunity">
-    What are the <b>industrial opportunities</b>?
+    {% autoescape false %}
+    {{ _('What are %(word)s?', word = '<b>%s</b>' % (_('the industrial opportunities'))) }}
+    {% endautoescape %}
   </a>
 
   <a class="decision icon square attract" href="{{g.path}}attract">
-    How can I <b>attract an industry</b>?
+    {% autoescape false %}
+    {{ _('How can I %(word)s?', word = '<b>%s</b>' % (_('attract an industry'))) }}
+    {% endautoescape %}
   </a>
 
   <a class="decision icon square growth" href="{{g.path}}growth">
-    Which industries are <b>growing</b>?
+    {% autoescape false %}
+    {{ _('Which industries are %(word)s?', word = '<b>%s</b>' % (_('growing'))) }}
+    {% endautoescape %}
   </a>
   
   <br>
 
   <a class="decision icon square shrink" href="{{g.path}}shrink">
-    Which industries are <b>shrinking</b>?
+    {% autoescape false %}
+    {{ _('Which industries are %(word)s?', word = '<b>%s</b>' % (_('shrinking'))) }}
+    {% endautoescape %}
   </a>
 
   <a class="decision icon square workforce" href="{{g.path}}workforce">
-    What is the available <b>workforce</b>?
+    {% autoescape false %}
+    {{ _('What is the available %(word)s?', word = '<b>%s</b>' % (_('workforce'))) }}
+    {% endautoescape %}
   </a>
 
   <a class="decision icon square industry" href="{{g.path}}industry">
-    What are the present <b>industries</b>?
+    {% autoescape false %}
+    {{ _('What are %(word)s?', word = '<b>%s</b>' % (_('the present industries'))) }}
+    {% endautoescape %}
   </a>
 
 {% endblock %}

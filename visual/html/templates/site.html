@@ -11,27 +11,27 @@
   <div id="header_container" class="lightbox">
     <div id="header">
       <a id="logo" href="{{ url_for('general.home') }}"></a>
-      <a id="guide" href="{{ url_for('guide.guide') }}" class="link{% if g.page_type == 'guide' or g.page_type == 'plan' %} active{% endif %}">Guide</a>
-      <a id="profiles" href="{{ url_for('profiles.profiles') }}" class="link{% if g.page_type == 'profiles' or g.page_type == 'profile' %} active{% endif %}">Profiles</a>
-      <a id="apps" href="{{ url_for('apps.guide') }}" class="link{% if g.page_type == 'apps' or g.page_type == 'builder' %} active{% endif %}">Apps</a>
-      <a id="data" href="{{ url_for('data.index') }}" class="link{% if g.page_type == 'data' or g.page_type == 'query' or g.page_type == 'classifications' %} active{% endif %}">Data</a>
-      <a id="ask" href="{{ url_for('ask.index') }}" class="link{% if g.page_type == 'ask' %} active{% endif %}">Ask Sabrina</a>
-      <a id="about" href="{{ url_for('about.about') }}" class="link{% if g.page_type == 'about' %} active{% endif %}">Learn More</a>
+      <a id="guide" href="{{ url_for('guide.guide') }}" class="link{% if g.page_type == 'guide' or g.page_type == 'plan' %} active{% endif %}">{% trans %}Guide{% endtrans %}</a>
+      <a id="profiles" href="{{ url_for('profiles.profiles') }}" class="link{% if g.page_type == 'profiles' or g.page_type == 'profile' %} active{% endif %}">{% trans %}Profiles{% endtrans %}</a>
+      <a id="apps" href="{{ url_for('apps.guide') }}" class="link{% if g.page_type == 'apps' or g.page_type == 'builder' %} active{% endif %}">{% trans %}Apps{% endtrans %}</a>
+      <a id="data" href="{{ url_for('data.index') }}" class="link{% if g.page_type == 'data' or g.page_type == 'query' or g.page_type == 'classifications' %} active{% endif %}">{% trans %}Data{% endtrans %}</a>
+      <a id="ask" href="{{ url_for('ask.index') }}" class="link{% if g.page_type == 'ask' %} active{% endif %}">{% trans %}Ask Sabrina{% endtrans %}</a>
+      <a id="about" href="{{ url_for('about.about') }}" class="link{% if g.page_type == 'about' %} active{% endif %}">{% trans %}Learn More{% endtrans %}</a>
       <div id="account" class="leon button">
         {% if g.user.is_authenticated() %}
           <div class="avatar" style="background-image: url('{{ g.user.avatar(54) }}');"></div>
         {% else %}
-          Login
+          {% trans %}Login{% endtrans %}
         {% endif %}
       </div>
 
       {% if g.user.is_authenticated() %}
       <div id="account_tooltip" style="display:none;">
-        <a class="account" href="{{ url_for('account.user', nickname=g.user.nickname) }}"><i class="icon-user"></i>Profile</a>
+        <a class="account" href="{{ url_for('account.user', nickname=g.user.nickname) }}"><i class="icon-user"></i>{% trans %}Profile{% endtrans %}</a>
         {% if g.user.is_admin() %}
-          <a class="account" href="{{ url_for('admin.admin') }}"><i class="icon-gears"></i>Admin Panel</a>
+          <a class="account" href="{{ url_for('admin.admin') }}"><i class="icon-gears"></i>{% trans %}Admin Panel{% endtrans %}</a>
         {% endif %}
-        <a class="account" href="{{ url_for('account.logout') }}"><i class="icon-key"></i>Logout</a>
+        <a class="account" href="{{ url_for('account.logout') }}"><i class="icon-key"></i>{% trans %}Logout{% endtrans %}</a>
         
       </div>
       {% endif %}
@@ -61,7 +61,7 @@
   </div>
   
   <div id="footer" class="lightbox">
-    <div class="logo sponsor">Sponsored By:</div>
+    <div class="logo sponsor">{% trans %}Sponsored by{% endtrans %}:</div>
     <a href="http://www.escritorio.mg.gov.br/" class="logo governo" target="_blank"></a>
     <a href="http://www.fapemig.br/" class="logo fapemig" target="_blank"></a>
     
@@ -78,7 +78,7 @@
       <label for="en">English</label>
       <input type="radio" name="language_select" onclick="change_language(this.value)" 
         id="pt" value="pt"{% if g.locale == 'pt' %} checked{% endif %}>
-      <label for="pt">Portuguese</label>
+      <label for="pt">Português</label>
     </div>
       
   </div>
