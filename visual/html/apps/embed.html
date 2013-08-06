@@ -194,6 +194,11 @@
     app.solos = []
     app.filters = []
     
+    if (app.vars.builder == "false") {
+      app.vars.controls = "false"
+      d3.select("#controls_toggle").remove()
+    }
+    
     // Set the max-width for the builder div and app_title
     app.title_width = window.innerWidth
     app.title_width -= d3.select("#settings").node().offsetWidth
@@ -1346,7 +1351,9 @@ v))
         window_url += "/?"
         url_vars = []
         for (v in app.vars) {
-          url_vars.push(v + "=" + app.vars[v])
+          if (v != "controls" || (v == "controls" && app.vars.builder != "false")) {
+            url_vars.push(v + "=" + app.vars[v])
+          }
         }
         window_url += url_vars.join("&");
       }
