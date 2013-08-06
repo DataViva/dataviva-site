@@ -56,7 +56,8 @@ def before_request():
 def get_locale(lang=None):
     supported_langs = current_app.config['LANGUAGES'].keys()
     new_lang = request.accept_languages.best_match(supported_langs)
-    user = getattr(g, 'user', None)
+    # user = getattr(g, 'user', None)
+    user = current_user
     if lang:
         if lang in supported_langs:
             new_lang = lang
