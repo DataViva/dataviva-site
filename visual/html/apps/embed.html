@@ -1074,7 +1074,8 @@
         
       if (exclusions.indexOf(val) >= 0) return false;
       
-      return {"prefix": format_name(val)+": ", "suffix": ""};
+      return {"prefix": visual.format.text(
+val)+": ", "suffix": ""};
         
     }
     
@@ -1308,7 +1309,8 @@
     
       div.append("legend")
         .attr("id",obj.title)
-        .html(format_name(obj.title))
+        .html(visual.format.text(
+obj.title))
         
       obj.data.forEach(function(v,i){
         
@@ -1321,7 +1323,8 @@
           
         div.append("label")
           .attr("for",obj.title+"+"+v)
-          .text(format_name(v))
+          .text(visual.format.text(
+v))
       
         if (v == obj.initial) {
           button.node().checked = true

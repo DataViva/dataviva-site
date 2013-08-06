@@ -431,7 +431,8 @@
           .attr("value",app)
           .attr("color",apps[app].color)
           .attr("icon","url("+visual.icon(app,"app")+")")
-          .html(format_name(app))
+          .html(visual.format.text(
+app))
           
         if (app_name == app) {
           option.attr("selected","selected")
@@ -592,7 +593,8 @@
             callback = null
         attrs[id] = [{
           "id": app_name,
-          "name": format_name(app_name),
+          "name": visual.format.text(
+app_name),
           "color": apps[app_name].color,
           "icon": visual.icon(app_name,"app")
         }]
@@ -710,7 +712,8 @@
     
       div.append("legend")
         .attr("id",obj.title)
-        .html(format_name(obj.title))
+        .html(visual.format.text(
+obj.title))
         
       obj.data.forEach(function(v,i){
         
@@ -723,7 +726,8 @@
           
         div.append("label")
           .attr("for",v)
-          .text(format_name(v))
+          .text(visual.format.text(
+v))
       
         if (v == obj.initial) {
           button.node().checked = true
@@ -1056,7 +1060,8 @@
           
           year.append("label")
             .attr("for","year")
-            .html(format_name("year"))
+            .html(visual.format.text(
+"year"))
             
           leon("#year")
           
@@ -1457,7 +1462,8 @@
       if (exclusions.indexOf(val) >= 0) return false;
 
       var total_obj = {
-        "prefix": format_name(val)+": "
+        "prefix": visual.format.text(
+val)+": "
       }
       
       if (total_labels[val]) {
@@ -1487,7 +1493,8 @@
           return "Available and required employment for "+isic.name+" in "+bra.name;
         }
         else {
-          var title = format_name(out+"_plural")
+          var title = visual.format.text(
+out+"_plural")
           if (out == "isic" || out == "cbo" || out == "bra") {
             title += " in "
           }
@@ -1496,7 +1503,8 @@
           }
           title += bra.name
           if (out == "bra" && build.length == 1) {
-            title += " with " + format_name(data)
+            title += " with " + visual.format.text(
+data)
           }
           build.forEach(function(f,i){
             if (i != 0) {
