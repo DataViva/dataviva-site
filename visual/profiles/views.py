@@ -55,7 +55,7 @@ def profiles(category = None, id = None):
     plan = Plan.query.filter_by(category=category, category_type=category_type, option=None, option_type=None, option_id=None).first()
     # raise Exception(plan)
     if plan:
-        page = "general/guide.html"
+        page = "profiles/profile.html"
         
         plan.set_attr(id,category)
             

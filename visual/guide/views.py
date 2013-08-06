@@ -65,7 +65,7 @@ def guide(category = None, category_id = None, option = None, subject = None, op
     if plan:
         
         g.page_type = "plan"
-        page = "general/guide.html"
+        page = "guide/guide.html"
         
         if category == "cbo":
             plan.set_attr(category_id,"cbo")

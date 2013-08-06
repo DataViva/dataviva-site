@@ -1,0 +1,18 @@
+{% extends "templates/site.html" %}
+
+{% block title %}: {{ plan.title }}{% endblock %}
+
+{% block body %}
+
+  <div id="fullscreen"></div>
+    
+  <div class="darkbox"><h2>{{ plan.title }}</h2></div>
+  <br>
+  {% for app in plan.builds %}
+    <div class="lightbox guide_app">
+      <!--<div class="guide_app_description"></div>-->
+      <iframe class="guide_app" id="{{ app.url }}"></iframe>
+    </div>
+  {% endfor %}
+
+{% endblock %}
