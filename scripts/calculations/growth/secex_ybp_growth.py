@@ -90,7 +90,10 @@ def calculate_growth(bras, years):
                 vals = [None if np.isnan(x) else x for x in row.values]
                 to_add.append(vals + [year, b, hs])
         
-        cursor.executemany("update secex_ybp set val_usd_growth_pct=%s, val_usd_growth_pct_5=%s, val_usd_growth_val=%s, val_usd_growth_val_5=%s where year=%s and bra_id=%s and hs_id=%s", to_add)
+        cursor.executemany("update secex_ybp set val_usd_growth_pct=%s, \
+            val_usd_growth_pct_5=%s, val_usd_growth_val=%s, \
+            val_usd_growth_val_5=%s where year=%s and bra_id=%s and hs_id=%s", \
+            to_add)
   
         print 'Update complete! Query time:', (time.time()-s)/60
 
