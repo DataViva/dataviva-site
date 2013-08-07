@@ -49,6 +49,7 @@ def parse_bras(bra_str):
 def get_query(data_table, url_args, **kwargs):
     query = data_table.query
     download = url_args.get("download", None)
+    raw = True if "raw" in kwargs else None
     order = url_args.get("order", None)
     if order:
         order = url_args.get("order").split(" ")
@@ -61,7 +62,7 @@ def get_query(data_table, url_args, **kwargs):
     ret = {}
     
     # first lets test if this query is cached
-    if limit is None and download is None:
+    if limit is None and download is None and raw is None:
         cached_q = cached_query(cache_id)
         if cached_q:
             return cached_q
@@ -176,6 +177,9 @@ def get_query(data_table, url_args, **kwargs):
         ret["data"] = [d.serialize() for d in query.limit(limit).offset(offset).all()]
     else:
         ret["data"] = [d.serialize() for d in query.all()]
+    
+    if raw is not None:
+        return ret["data"]
     
     if download is not None:
         def generate():

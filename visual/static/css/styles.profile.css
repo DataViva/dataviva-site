@@ -8,3 +8,24 @@ iframe.guide_app {
   height: 600px;
   width: 800px;
 }
+
+div.darkbox.title{
+
+}
+
+iframe.guide_app {
+  margin: 20px 0px;
+  margin-left: 310px;
+}
+
+div.data_table{
+	display: inline-block;
+	margin: 0 0 30px 0;
+	max-height: 700px;
+	overflow: hidden;
+	overflow-y: scroll;
+	width: 40%;
+}
+div.data_table table{ 
+	overflow: hidden;
+}

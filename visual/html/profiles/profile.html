@@ -1,10 +1,10 @@
 {% extends "templates/site.html" %}
 
-{% block title %}: {{ plan.title }}{% endblock %}
+{% block title %}: {% endblock %}
 
 {% block head %}
 
-    <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.guide.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.profile.css" />
 
 {% endblock %}
 
@@ -12,14 +12,40 @@
 
   <div id="fullscreen"></div>
     
-  <div class="darkbox"><h2>{{ plan.title }}</h2></div>
-  <br>
-  {% for app in plan.builds %}
-    <div class="lightbox guide_app">
-      <!--<div class="guide_app_description"></div>-->
-      <iframe class="guide_app" src="{{ app.url }}"></iframe>
-    </div>
+  <div class="darkbox title"><h2>{{ item.name() }}</h2></div>
+  
+  <br />
+  
+  {% for dt in data_tables %}
+  
+  <div class="lightbox data_table">
+	
+	  <iframe src="/apps/embed/{{ dt.build.url() }}"></iframe>
+  
+	  <h3>{{ dt.build.title() }}</h3>
+	  <table>
+		  <thead>
+			  <tr>
+				  {% for k in dt.table.0 %}
+			  	  <th>{{ k }}</th>
+				  {% endfor %}
+			  </tr>
+		  </thead>
+		  <tbody>
+			  {% for row in dt.table %}
+			  <tr>
+				  {% for v in row.values() %}
+				  <td>{{ v }}</td>
+				  {% endfor %}
+			  </tr>
+			  {% endfor %}
+		  </tbody>
+	  </table>
+  
+  </div>
+  
   {% endfor %}
+
 
 {% endblock %}
 

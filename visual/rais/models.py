@@ -83,10 +83,10 @@ class Ybi(db.Model, AutoSerialize):
     num_emp = db.Column(db.Integer())
     num_est = db.Column(db.Integer())
     rca = db.Column(db.Float())
-    growth_pct = db.Column(db.Float())
-    growth_pct_total = db.Column(db.Float())
-    growth_val = db.Column(db.Float())
-    growth_val_total = db.Column(db.Float())
+    wage_growth_pct = db.Column(db.Float())
+    wage_growth_pct_5 = db.Column(db.Float())
+    wage_growth_val = db.Column(db.Float())
+    wage_growth_val_5 = db.Column(db.Float())
     distance = db.Column(db.Float())
     
     def __repr__(self):
@@ -133,7 +133,7 @@ class Ybio(db.Model, AutoSerialize):
     wage = db.Column(db.Float())
     num_emp = db.Column(db.Integer())
     num_est = db.Column(db.Integer())
-    growth_wage = db.Column(db.Float())
+    wage_growth_pct = db.Column(db.Float())
     
     def __repr__(self):
         return '<Ybio %d.%s.%s.%s>' % (self.year, self.bra_id, self.isic_id, self.cbo_id)

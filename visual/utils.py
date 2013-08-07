@@ -154,6 +154,7 @@ def cached_query(id, data=None):
 ''' Given a "year" string from URL, turn this into an array of years 
     as integers'''
 def parse_years(year_str):
+    year_str = str(year_str)
     if "-" in year_str:
         # we allow a range of years w/ or w/o interval (using '.' as sep)
         year_start, year_end = year_str.split("-")
