@@ -31,35 +31,10 @@ class AutoSerialize(object):
         for k, field in keys:
             if public and k not in public: continue
             if k in exclude: continue
-            if field.value:
-                if hasattr(field.value, '__module__'):
-                    continue
-                data[k] = self._serialize(field.value)
-                # try:
-                #     data[k] = field.value
-                # except:
-                #     raise Exception(k, field)
-                #     continue
-            # x.append(field.value)
-            # if public and k not in public: continue
-            # if k in exclude: continue
-            # # if "_id" in k: continue
-            # # 
-            # # # if it's a foreign key aka backref
-            # # if hasattr(field.value, '__module__'):
-            # #     if not hasattr(field.value, 'name_en'):
-            # #         continue
-            # #     value = self._serialize(field.value.name_en)
-            # # else:
-            # #     value = self._serialize(field.value)
-            # 
-            # if hasattr(field.value, '__module__'):
-            #     continue
-            # value = self._serialize(field.value)
-            # 
-            # if value:
-            #     data[k] = value
-        # raise Exception(keys,x)
+            
+            if hasattr(field.value, '__module__'):
+                continue
+            data[k] = self._serialize(field.value)
         return data
 
     @classmethod
@@ -77,8 +52,6 @@ class AutoSerialize(object):
 
         return ret
 
-
-        from math import ceil
 
 ''' A helper class for including pagination in templates'''
 class Pagination(object):

@@ -1,6 +1,7 @@
+import StringIO, csv
 from sqlalchemy import func
-from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, jsonify, make_response
-
+from flask import Blueprint, request, render_template, flash, g, session, \
+            redirect, url_for, jsonify, make_response, Response
 from visual import db
 from visual.utils import exist_or_404, gzip_data, cached_query, parse_years, Pagination
 from visual.rais.models import Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio
@@ -16,7 +17,7 @@ def page_not_found(error):
 
 @mod.after_request
 def per_request_callbacks(response):
-    if response.status_code != 302:
+    if response.status_code != 302 and response.mimetype != "text/csv":
         response.headers['Content-Encoding'] = 'gzip'
         response.headers['Content-Length'] = str(len(response.data))
     return response
@@ -47,6 +48,7 @@ def parse_bras(bra_str):
 
 def get_query(data_table, url_args, **kwargs):
     query = data_table.query
+    download = url_args.get("download", None)
     order = url_args.get("order", None)
     if order:
         order = url_args.get("order").split(" ")
@@ -59,7 +61,7 @@ def get_query(data_table, url_args, **kwargs):
     ret = {}
     
     # first lets test if this query is cached
-    if limit is None:
+    if limit is None and download is None:
         cached_q = cached_query(cache_id)
         if cached_q:
             return cached_q
@@ -175,17 +177,26 @@ def get_query(data_table, url_args, **kwargs):
     else:
         ret["data"] = [d.serialize() for d in query.all()]
     
+    if download is not None:
+        def generate():
+            for i, data_dict in enumerate(ret["data"]):
+                row = [str(n) if n is not None else '' for n in data_dict.values()]
+                if i == 0:
+                    header = data_dict.keys()
+                    yield ','.join(header) + '\n' + ','.join(row) + '\n'
+                yield ','.join(row) + '\n'
+        content_disposition = "attachment;filename=%s.csv" % (cache_id[1:-1].replace('/', "_"))
+        resp = Response(generate(), mimetype="text/csv;charset=UTF-8", 
+                        headers={"Content-Disposition": content_disposition})
+        return resp
+    
     # gzip and jsonify result
     ret = gzip_data(jsonify(ret).data)
     
-    if limit is None:
+    if limit is None and download is None:
         cached_query(cache_id, ret)
     
-    # raise Exception(page)
     return ret
-
-def get_recommended(data_table, url_args, **kwargs):
-    x =4
 
 ############################################################
 # ----------------------------------------------------------

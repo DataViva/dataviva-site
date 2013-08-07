@@ -196,6 +196,10 @@
     </div>
     
     <div id="secex_go" class="decision">{% trans %}Build{% endtrans %}</div>
+	
+	<hr />
+	
+    <div id="download" class="decision">{% trans %}Download{% endtrans %}</div>
       
   </div>
 </div>
@@ -222,6 +226,8 @@
   var ORDER_DIRECTIONS = ["desc", "asc", ""]
   var COLUMNS = ["year", "bra_id", "isic_id", "hs_id", "cbo_id", "wld_id", "wage", "num_emp", "num_est", "val_usd", "rca", "growth_val", "growth_val_total"]
 
+  var is = infinite_scroll().format_items(item_formatter);
+
   // add icons to tags!
   d3.selectAll(".list_icon")
     .style("background-image", function(){
@@ -243,6 +249,15 @@
     
   }
   
+  // Download the data
+  d3.selectAll("#download").on(vizwhiz.evt.click, function(){
+    
+	var data_url = is.url().split("?")[0]
+ 	window.location = data_url + "?download"
+    
+  })
+
+
   // Turning on button filters
   d3.selectAll(".filter_button").on(vizwhiz.evt.click, function(){
     
@@ -504,8 +519,6 @@
     ths.style("width",function(d){ return col_widths[d]+"px" })
 
   }
-
-  var is = infinite_scroll().format_items(item_formatter);
   
   // default load page with data
   update_table(CURRENT_DATASET);

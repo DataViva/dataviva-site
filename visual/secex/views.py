@@ -1,7 +1,7 @@
 import re, operator
 from sqlalchemy import func
-from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, jsonify, abort, make_response
-
+from flask import Blueprint, request, render_template, flash, g, session, \
+            redirect, url_for, jsonify, abort, make_response, Response
 from visual import db
 from visual.utils import exist_or_404, gzip_data, cached_query, parse_years, Pagination
 from visual.attrs.models import Bra, Hs, Wld
@@ -21,7 +21,7 @@ def page_not_found(error):
 
 @mod.after_request
 def per_request_callbacks(response):
-    if response.status_code != 302:
+    if response.status_code != 302 and response.mimetype != "text/csv":
         response.headers['Content-Encoding'] = 'gzip'
         response.headers['Content-Length'] = str(len(response.data))
     return response
@@ -52,6 +52,7 @@ def parse_bras(bra_str):
 
 def make_query(data_table, url_args, **kwargs):
     query = data_table.query
+    download = url_args.get("download", None)
     order = url_args.get("order", None)
     if order:
         order = url_args.get("order").split(" ")
@@ -68,7 +69,7 @@ def make_query(data_table, url_args, **kwargs):
 
     # first lets test if this query is cached (be sure we are not paginating
     # results) as these should not get cached
-    if limit is None:
+    if limit is None and download is None:
         cached_q = cached_query(cache_id)
         if cached_q:
             return cached_q
@@ -182,22 +183,28 @@ def make_query(data_table, url_args, **kwargs):
                 extra[col_name] = value
                 datum = dict(datum.items() + extra.items())
             ret["data"].append(datum)
-    # elif page:
-    #     count = query.count()
-    #     ret["pagination"] = Pagination(int(page), results_per_page, count).serialize()
-    #     ret["data"] = [d.serialize() for d in query.paginate(int(page), RESULTS_PER_PAGE, False).items]
-    # else:
-    #     ret["data"] = [d.serialize() for d in query.all()]
-
     elif limit:
         ret["data"] = [d.serialize() for d in query.limit(limit).offset(offset).all()]
     else:
         ret["data"] = [d.serialize() for d in query.all()]
 
+    if download is not None:
+        def generate():
+            for i, data_dict in enumerate(ret["data"]):
+                row = [str(n) if n is not None else '' for n in data_dict.values()]
+                if i == 0:
+                    header = data_dict.keys()
+                    yield ','.join(header) + '\n' + ','.join(row) + '\n'
+                yield ','.join(row) + '\n'
+        content_disposition = "attachment;filename=%s.csv" % (cache_id[1:-1].replace('/', "_"))
+        resp = Response(generate(), mimetype="text/csv;charset=UTF-8", 
+                        headers={"Content-Disposition": content_disposition})
+        return resp
+
     # gzip and jsonify result
     ret = gzip_data(jsonify(ret).data)
 
-    if limit is None:
+    if limit is None and download is None:
         cached_query(cache_id, ret)
 
     return ret
