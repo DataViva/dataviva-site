@@ -1,0 +1,32 @@
+body.plan::-webkit-scrollbar {
+  display: none;
+}
+
+body.plan #inner_container {
+  display: block;
+  vertical-align: top;
+}
+
+body.plan #container {
+  padding: 58px 0px 49px 0px;
+  text-align: left;
+  width: 100%;
+}
+
+div#guide_controls {
+  left: 20px;
+  padding: 10px 10px 5px 10px;
+  position: fixed;
+  top: 78px;
+  width: 250px;
+}
+
+div#guide_title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+iframe.guide_app {
+  margin: 20px 0px;
+  margin-left: 310px;
+}

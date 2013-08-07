@@ -1,0 +1,10 @@
+div.guide_app {
+  height: 600px;
+  margin: 12px auto 24px;
+  width: 800px;
+}
+
+iframe.guide_app {
+  height: 600px;
+  width: 800px;
+}

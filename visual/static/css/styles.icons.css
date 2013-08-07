@@ -1,13 +1,16 @@
+.help.icon,
 .decision.icon,
 .help.icon {
   padding-left: 43px;
 }
 
+.help.icon.square,
 .decision.icon.square,
 .help.icon.square {
   padding-left: 12px;
 }
 
+.help.icon:before,
 .decision.icon:before,
 .help.icon:before {
   background-position: 50%;
@@ -45,11 +48,13 @@
   text-decoration: inherit;
 }
 
+.help.square:after,
 .decision.square:after,
 .help.square:after {
   content: "";
 }
 
+.help.icon.square:before,
 .decision.icon.square:before {
   height: 100%;
   font-size: 100px;
@@ -177,6 +182,46 @@
 }
 .decision.icon.occugrid:before {
   background-image: url("/static/img/icons/app/app_occugrid.png");
+}
+
+.help.icon.tree_map:before {
+  background-image: url("/static/img/icons/app/app_tree_map_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.stacked:before {
+  background-image: url("/static/img/icons/app/app_stacked_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.network:before {
+  background-image: url("/static/img/icons/app/app_network_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.rings:before {
+  background-image: url("/static/img/icons/app/app_rings_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.scatter:before {
+  background-image: url("/static/img/icons/app/app_scatter_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.compare:before {
+  background-image: url("/static/img/icons/app/app_compare_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.geo_map:before {
+  background-image: url("/static/img/icons/app/app_geo_map_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.occugrid:before {
+  background-image: url("/static/img/icons/app/app_occugrid_black.png");
+  opacity: 0.2;
 }
 
 /****************/

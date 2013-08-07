@@ -92,6 +92,9 @@ def guide(category = None, category_id = None, option = None, subject = None, op
         for pb in plan.builds.all():
             build = {}
             build["url"] = "/apps/embed/{0}{1}".format(pb.build.all()[0].url(),pb.variables)
+            build["title"] = pb.build.all()[0].title()
+            build["type"] = pb.build.all()[0].app.type
+            build["position"] = pb.position
             builds[pb.position-1] = build
             
         plan = {"title": plan.title(), "builds": builds}

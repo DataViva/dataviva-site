@@ -562,7 +562,7 @@
             q.awaitAll(check_data)
             
             function check_data() {
-              
+
               if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
                 app.error("Geo Map only available for States");
               }
@@ -678,7 +678,7 @@
             app.vars[ui.type] = default_value
           }
         
-          if (ui.values.length > 1) {
+          if (ui.values.length > 1 && app.vars.builder != "false") {
             builder.radios({
               "data": ui.values,
               "title": title,

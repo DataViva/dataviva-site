@@ -2,6 +2,12 @@
 
 {% block title %}: {{ plan.title }}{% endblock %}
 
+{% block head %}
+
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.guide.css" />
+
+{% endblock %}
+
 {% block body %}
 
   <div id="fullscreen"></div>
@@ -14,5 +20,15 @@
       <iframe class="guide_app" src="{{ app.url }}"></iframe>
     </div>
   {% endfor %}
+
+{% endblock %}
+
+{% block js %}
+
+  <script>
+  
+    
+  
+  </script>
 
 {% endblock %}
