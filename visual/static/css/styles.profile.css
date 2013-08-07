@@ -29,3 +29,6 @@ div.data_table{
 div.data_table table{ 
 	overflow: hidden;
 }
+div.data_table table td a{ 
+	text-decoration: underline;
+}

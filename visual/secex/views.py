@@ -186,11 +186,10 @@ def make_query(data_table, url_args, **kwargs):
             ret["data"].append(datum)
     elif limit:
         ret["data"] = [d.serialize() for d in query.limit(limit).offset(offset).all()]
+    elif raw:
+        return query.all()
     else:
         ret["data"] = [d.serialize() for d in query.all()]
-
-    if raw is not None:
-        return ret["data"]
 
     if download is not None:
         def generate():

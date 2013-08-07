@@ -26,16 +26,20 @@
 	  <table>
 		  <thead>
 			  <tr>
-				  {% for k in dt.table.0 %}
-			  	  <th>{{ k }}</th>
+				  {% for h in dt.table_headers %}
+			  	  <th>{{ h }}</th>
 				  {% endfor %}
 			  </tr>
 		  </thead>
 		  <tbody>
-			  {% for row in dt.table %}
+			  {% for row in dt.table_data %}
 			  <tr>
-				  {% for v in row.values() %}
+				  {% for v in row %}
+				  {% if loop.index0 == 1 %}
+				  <td><a href="/profiles/{{dt.build.output}}/{{v}}/">{{ v }}</a></td>
+				  {% else %}
 				  <td>{{ v }}</td>
+				  {% endif %}
 				  {% endfor %}
 			  </tr>
 			  {% endfor %}
