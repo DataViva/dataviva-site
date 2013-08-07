@@ -119,6 +119,7 @@
 
 {% block js %}
 
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
   <script src="/static/js/libs/d3.geo.tile.js"></script>
   <script src="/static/js/libs/topojson.js"></script>
   <script src="/static/js/libs/queue.min.js"></script>
@@ -500,17 +501,6 @@
             
             if (app.build.app.type == "geo_map") {
               
-              if (!app.land) {
-                q.defer(function(u,callback){
-                  d3.json(u)
-                  .header("X-Requested-With", "XMLHttpRequest")
-                  .get(function(error,d){
-                    app.land = d
-                    callback(error,d)
-                  })
-                },"/static/json/coords/wld_land.json")
-              }
-              
               var state = app.build.bra[0].id.substr(0,2)
               if (!app.coords[state]) {
                 q.defer(function(u,callback){
@@ -776,8 +766,6 @@
       else if (app.build.app.type == "geo_map") {
         app.viz
           .coords(app.coords[app.build.bra[0].id.substr(0,2)])
-          .map(app.land)
-          .tiles(false)
       
         if (app.build.bra[0].id.length == 8) app.viz.highlight(app.build.bra[0].id)
     
