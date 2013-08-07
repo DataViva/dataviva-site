@@ -48,7 +48,10 @@ class Build(db.Model, AutoSerialize):
         if isinstance(self.bra, list):
             return
         if "+" in self.bra and "+" not in bra_id:
-            bra_id = bra_id + "+sp"
+            if bra_id == "sp":
+                bra_id = bra_id + "+mg"
+            else:
+                bra_id = bra_id + "+sp"
         elif "+" not in self.bra and "+" in bra_id:
             bra_id = bra_id.split("+")[0]
         self.bra = []
