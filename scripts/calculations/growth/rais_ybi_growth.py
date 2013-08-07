@@ -49,34 +49,42 @@ def calculate_growth(bras, years):
                 continue
             
             growth_data = pd.DataFrame(index=cleaned.index, \
-                columns=["growth_pct", "growth_pct_total", \
-                        "growth_val", "growth_val_total"])
-            
-            earliest_year = cleaned.index[0]
-            
-            growth_data["growth_pct"] = cleaned.fillna(0) \
-                    .pct_change(fill_method=None).fillna(np.NaN)
-            
-            growth_data["growth_val"] = cleaned - cleaned.shift(1)
+                columns=["wage_growth_pct", "wage_growth_pct_5", \
+                        "wage_growth_val", "wage_growth_val_5"])
             
             for year in cleaned.index[1:]:
-                
-                # get total val delta
-                growth_data["growth_val_total"][year] = cleaned[year] - \
-                    cleaned[earliest_year]
+                five_yrs_ago = year - 5
+                last_yr = year - 1
 
-                # get total pct change
-                growth_pct_total = cleaned.reindex([earliest_year, year]) \
-                                    .pct_change(fill_method=None)
-                growth_data["growth_pct_total"][year] = growth_pct_total[year]
-            
+                if last_yr in cleaned.index:
+                    v_t0 = cleaned[last_yr]
+                    if v_t0:
+                        v_tn = cleaned[year]
+                        if v_tn:
+                            exp = 1.0 / (year - last_yr)
+                            growth_data["wage_growth_pct"][year] = \
+                                                    (v_tn/v_t0)**exp -1
+                        # get value
+                        growth_data["wage_growth_val"][year] = v_tn - v_t0
+
+                if five_yrs_ago in cleaned.index:
+                    v_t0 = cleaned[five_yrs_ago]
+                    if v_t0:
+                        v_tn = cleaned[year]
+                        if v_tn:
+                            exp = 1.0 / (year - five_yrs_ago)
+                            growth_data["wage_growth_pct_5"][year] = \
+                                                       (v_tn/v_t0) ** exp -1
+                        # get value
+                        growth_data["wage_growth_val_5"][year] = v_tn - v_t0
+                        
             growth_data = growth_data.apply(clean_val)
 
             for year, row in growth_data.iterrows():
                 vals = [None if np.isnan(x) else x for x in row.values]
                 to_add.append(vals + [year, b, isic])
         
-        cursor.executemany("update rais_ybi set growth_pct=%s, growth_pct_total=%s, growth_val=%s, growth_val_total=%s where year=%s and bra_id=%s and isic_id=%s", to_add)
+        cursor.executemany("update rais_ybi set wage_growth_pct=%s, growth_pct_total=%s, growth_val=%s, growth_val_total=%s where year=%s and bra_id=%s and isic_id=%s", to_add)
   
         # print 'Update complete! Query time:', (time.time()-s)/60
 
