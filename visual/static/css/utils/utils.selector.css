@@ -28,6 +28,7 @@ div.selector_header > div.selector_header_icon {
 
 div.selector_title_div {
   display: inline-block;
+  margin-top: 6px;
 }
 
 div.selector_title_div > div.selector_title {
@@ -57,18 +58,8 @@ div.selector_header > input {
   width: 100%;
 }
 
-div.selector_header > div.breadcrumb {
-  left: 12px;
-  position: absolute;
-  top: 12px;
-  -webkit-touch-callout: none;
-    -webkit-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-}
-
-div.selector_header > div.breadcrumb > a {
-  color: #888;
+div.selector_title_div > div.breadcrumb {
+  margin: 6px 0px;
 }
 
 /* Body Div */
@@ -110,7 +101,7 @@ div.search_result > div.search_text {
 }
 
 div.search_text > div.search_title {
-  display: inline-block;
+  display: inline;
   font-size: 14px;
   font-weight: bold;
   line-height: 16px;
@@ -126,13 +117,13 @@ div.search_result:hover div.search_title {
 
 div.search_text > div.search_sub {
   color: #888;
-  display: inline-block;
+  display: inline;
   line-height: 18px;
   margin-left: 6px;
 }
 
 div.search_text > div.search_data {
-  color: #888;
+  color: #333;
 }
 
 div.search_result > div.search_buttons {

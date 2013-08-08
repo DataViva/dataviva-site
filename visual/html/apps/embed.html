@@ -306,7 +306,6 @@
           "growth_val",
           "growth_val_total"
         ], "long": [
-          "display_id",
           "growth_val",
           "growth_val_total",
           "rca",
@@ -1156,6 +1155,35 @@ val)+": ", "suffix": ""};
         
     }
     
+    app.download = function(obj) {
+      
+      var type = obj.id,
+          title = app.build.title,
+          columns = app.tooltip.long
+      
+      var form = document.getElementById("svgform");
+  
+      if(type == "csv"){
+        form['data'].value = d3.csv.formatRows(app.viz.csv_columns(columns).csv_data());
+      }
+      else {
+        // Add necessary name space junk and get raw node
+        var svg = d3.select("svg")
+          .attr("version", 1.1)
+          .attr("xmlns", "http://www.w3.org/2000/svg")
+          .node()
+        // Extract the data as SVG text string
+        var svg_xml = (new XMLSerializer).serializeToString(svg);
+        form['data'].value = svg_xml;
+      }
+      // Submit the <FORM> to the server.
+      // The result will be an attachment file to download.
+      form['output_format'].value = type;
+      form['title'].value = title;
+      form.submit();
+      
+    }
+    
     /*********************/
     /* Builder Functions */
     /*********************/
@@ -1440,7 +1468,7 @@ v))
         }
         else if (type == "file") {
           var init = "all",
-              callback = "app.download"
+              callback = app.download
         }
         else {
           var init = app.build[type][index].id,

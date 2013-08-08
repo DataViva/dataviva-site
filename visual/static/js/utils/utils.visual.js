@@ -183,10 +183,15 @@ visual.format.text = function(text,name) {
     
       // File Types
       "download": {"en": "Download", "pt": "Baixar"},
+      "download_desc": {"en": "Choose from the following file types.", "pt": "Escolha um dos seguintes tipos de arquivo."},
       "csv": {"en": "Save as CSV", "pt": "Salvar como CSV"},
+      "csv_desc": {"en": "A table format that can be imported into a database or opened with Microsoft Excel.", "pt": "Um formato de tabela que pode ser importado para um banco de dados ou aberto com o Microsoft Excel."},
       "pdf": {"en": "Save as PDF", "pt": "Salvar como PDF"},
+      "pdf_desc": {"en": "Similar to SVG files, PDF files are vector-based and can be dynamically scaled.", "pt": "Semelhante a arquivos SVG, arquivos PDF s\u00e3o baseados em vetores e podem ser dimensionados de forma din\u00e2mica."},
       "png": {"en": "Save as PNG", "pt": "Salvar como PNG"},
+      "png_desc": {"en": "A standard image file, similar to JPG or BMP.", "pt": "Um arquivo de imagem padr\u00e3o, similar ao JPG ou BMP."},
       "svg": {"en": "Save as SVG", "pt": "Salvar como SVG"},
+      "svg_desc": {"en": "A vector-based file that can be resized without worrying about pixel resolution.", "pt": "Um arquivo com base em vetor que pode ser redimensionado sem se preocupar com pixel de resolu\u00e7\u00e3o."},
     
       // App Builder Footer
       "Data Provided by": {"en": "Data Provided by", "pt": "Dados fornecidos pela"},
@@ -197,7 +202,13 @@ visual.format.text = function(text,name) {
     
       // Ask Sabrina
       "Asked by": {"en": "Asked by", "pt": "Perguntado por"},
-      "points": {"en": "Points", "pt": "Pontos"}
+      "points": {"en": "Points", "pt": "Pontos"},
+      
+      // Selector
+      "search": {"en": "Search", "pt": "Busca"},
+      "search_results": {"en": "Search Results", "pt": "Resultados Busca"},
+      "select": {"en": "Select", "pt": "Escolher"},
+      "show": {"en": "Show", "pt": "Mostrar"}
     
     }
   
@@ -410,40 +421,6 @@ visual.ui.loading = function(parent) {
 // Returns a random number between the min and max passed to the function
 visual.random = function(min,max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
-visual.download = function(type, title) {
-  
-  var form = document.getElementById("svgform");
-  
-  if(type == "csv"){
-    // console.log(app.csv_data()[0])
-    // console.log(tooltip_info)
-    
-    var columns = app.csv_data()[0].filter(function(e,i,a){
-      return tooltip_info.indexOf(e) > -1;
-    })
-    
-    // console.log(app.csv_columns(columns).csv_data())
-    // d3.csv.format([{'asdf':4, 'wwww':45}])
-    
-    form['data'].value = d3.csv.formatRows(app.csv_columns(columns).csv_data());
-  }
-  else {
-    // Add necessary name space junk and get raw node
-    var svg = d3.select("svg")
-      .attr("version", 1.1)
-      .attr("xmlns", "http://www.w3.org/2000/svg")
-      .node()
-    // Extract the data as SVG text string
-    var svg_xml = (new XMLSerializer).serializeToString(svg);
-    form['data'].value = svg_xml;
-  }
-  // Submit the <FORM> to the server.
-  // The result will be an attachment file to download.
-  form['output_format'].value = type;
-  form['title'].value = title;
-  form.submit();
 }
 
 visual.displayID = function(id,type) {

@@ -11,29 +11,44 @@ function Selector() {
       
   lists.file = {
     "all": {
-      "color": "#768593",
+      "color": "#ffffff",
       "id": "all",
-      "name": visual.format.text("download")
+      "name": visual.format.text("download"),
+      "parent": "none",
+      "icon": visual.icon("all","file","#ffffff"),
+      "desc": visual.format.text("download_desc")
     },
     "svg": {
       "color": "#e87600",
       "id": "svg",
-      "name": visual.format.text("svg")
+      "name": visual.format.text("svg"),
+      "parent": "all",
+      "icon": visual.icon("svg","file"),
+      "desc": visual.format.text("svg_desc")
     },
     "png": {
       "color": "#0b1097",
       "id": "png",
-      "name": visual.format.text("png")
+      "name": visual.format.text("png"),
+      "parent": "all",
+      "icon": visual.icon("png","file"),
+      "desc": visual.format.text("png_desc")
     },
     "pdf": {
       "color": "#c8140a",
       "id": "pdf",
-      "name": visual.format.text("pdf")
+      "name": visual.format.text("pdf"),
+      "parent": "all",
+      "icon": visual.icon("pdf","file"),
+      "desc": visual.format.text("pdf_desc")
     },
     "csv": {
       "color": "#00923f",
       "id": "csv",
-      "name": visual.format.text("csv")
+      "name": visual.format.text("csv"),
+      "parent": "all",
+      "icon": visual.icon("csv","file"),
+      "desc": visual.format.text("csv_desc")
     }
   }
       
@@ -154,9 +169,23 @@ function Selector() {
             return (a_second.localeCompare(b_second))
           }
         })
+
+        
+        var parent = container.node().parentNode,
+            display = d3.select(parent).style("display")
+            
+        if (display == "none") {
+          parent.style.visibility = "hidden"
+          parent.style.display = "block"
+        }
         
         // Initially add some results
         add_results(20);
+        
+        if (display == "none") {
+          parent.style.visibility = "visible"
+          parent.style.display = "none"
+        }
         
         // Add more results on scroll
         body.on("scroll",function(){
@@ -224,6 +253,8 @@ function Selector() {
         title_div = header.append("div").attr("class","selector_title_div")
                 
         title = title_div.append("div").attr("class","selector_title")
+                
+        description = title_div.append("div").attr("class","selector_description")
       
         bread = title_div.append("div").attr("class","breadcrumb")
       
@@ -254,31 +285,27 @@ function Selector() {
 
         header_select = sort_toggles.append("div")
           .attr("class","leon button")
-          .html("Select")
-      
+          .html(visual.format.text("select"))
+        
         search = header.append("input")
           .attr("type","text")
           .attr("id",name+"_search")
           .attr("class","leon text")
-          .attr("placeholder","Search");
-                
+          .attr("placeholder",visual.format.text("search"));
+              
         search.node().oninput = function() { populate_list(selected) };
+        
+        if (type == "file") {
+          search.style("display","none")
+        }
           
-        if (type == "help") {
-          body = container.append("iframe")
-            .attr("class","selector_body")
-            .attr("width","100%")
-            .style("height","auto");
-        }
-        else {
-          body = container.append("div")
-            .attr("class","selector_body")
-            .style("height","auto");
-        }
+        body = container.append("div")
+          .attr("class","selector_body")
+          .style("height","auto")
         
         selector_load.hide()
         
-        if (type != "help") select_value(data[initial_value]);
+        select_value(data[initial_value]);
         
       }
 
@@ -346,7 +373,7 @@ function Selector() {
         if (typeof x == "string") {
           header_select.style("display","none")
           icon.style("display","none")
-          title.text("Searching for \""+x+"\"")
+          title.text(visual.format.text("search_results"))
         }
         else {
           icon
@@ -354,7 +381,7 @@ function Selector() {
             .style("background-image","url('"+x.icon+"')")
             .style("background-color",x.color)
           
-          if ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all")) {
+          if (type != "file" && ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all"))) {
             header_select
               .style("display","inline-block")
               .on(vizwhiz.evt.click,function(){
@@ -365,17 +392,26 @@ function Selector() {
             header_select.style("display","none")
           }
           
-          if (type == "bra") {
+          if (type == "file") var prefix = x.name
+          else if (type == "bra") {
             var d = depths.indexOf(x.id.length)
             var length = depths[d+1]
             var prefix = visual.format.text("bra_"+length+"_plural")
           }
           else var prefix = visual.format.text(type+"_plural")
+          
           if (x.id == "all" && type != "bra") {
             title.text(prefix)
           }
           else {
             title.text(prefix+" in "+x.name.toTitleCase())
+          }
+          
+          if (x.desc && type == "file") {
+            description.text(x.desc)
+          }
+          else {
+            description.text("")
           }
           
         }
@@ -416,7 +452,7 @@ function Selector() {
               })
               
             if (v.icon != selected.icon || search_term != "") {
-              item.append("div")
+              var search_icon = item.append("div")
                 .attr("class","search_icon")
                 .style("background-color",v.color)
                 .style("background-image","url("+v.icon+")")
@@ -436,9 +472,17 @@ function Selector() {
               .style("color",vizwhiz.utils.darker_color(v.color))
               .html(title)
           
-            text.append("div")
-              .attr("class","search_sub")
-              .html(visual.format.text(type+"_"+v.id.length))
+            if (type != "file") {
+              text.append("div")
+                .attr("class","search_sub")
+                .html(visual.format.text(type+"_"+v.id.length))
+            }
+            
+            if (v.desc && type == "file") {
+              text.append("div")
+                .attr("class","search_data")
+                .text(v.desc)
+            }
                
             if (v[value]) {
               text.append("div")
@@ -457,7 +501,7 @@ function Selector() {
               
               buttons.append("div")
                 .attr("class","leon button")
-                .html("Show "+suffix)
+                .html(visual.format.text("show")+" "+suffix)
                 .on(vizwhiz.evt.click,function(){
                   d3.event.stopPropagation()
                   select_value(v)
@@ -503,7 +547,7 @@ function Selector() {
             if (!limit || v.id.length >= limit) {
               buttons.append("div")
                 .attr("class","leon button")
-                .html("Select")
+                .html(visual.format.text("select"))
                 .on(vizwhiz.evt.click,function(){
                   d3.event.stopPropagation()
                   callback(data[v.id],name)
@@ -514,6 +558,17 @@ function Selector() {
               body.append("div")
                 .attr("class","vizwhiz_tooltip_data_seperator")
             }
+            
+            var width = item.node().offsetWidth
+            width -= parseFloat(item.style("padding-left"),10)
+            width -= parseFloat(item.style("padding-right"),10)
+            width -= 12
+            if (search_icon) {
+              width -= search_icon.node().offsetWidth
+              width -= parseFloat(search_icon.style("margin-right"),10)
+            }
+            width -= buttons.node().offsetWidth
+            text.style("max-width",width+"px")
               
           }
         
@@ -524,7 +579,7 @@ function Selector() {
       set_height = function() {
         // Set height for selector_body, based off of the title height
         var parent = container.node().parentNode,
-            display = parent.style.display
+            display = d3.select(parent).style("display")
         if (display == "none") {
           parent.style.visibility = "hidden"
           parent.style.display = "block"
@@ -547,6 +602,7 @@ function Selector() {
           bread = null, 
           icon = null, 
           title = null, 
+          description = null,
           search = null, 
           body = null, 
           sort_toggles = null;
@@ -579,22 +635,15 @@ function Selector() {
         .html("")
         .append("div")
           .attr("class","selector")
-      
+
       var selector_load = new visual.ui.loading(container.node())
       selector_load.color("#ffffff")
-      selector_load.text("Loading Attribute List").show()
       
-      if (type == "help") {
-        create_elements();
-        update_header({
-          "id": app.build.type,
-          "name": app.build.name,
-          "color": app.build.color,
-          "icon": visual.icon(app.build.type,"app")
-        })
-        body.attr("src","/about/apps/"+data[0].id+"/?ajax=true")
+      if (type != "file") {
+        selector_load.text("Loading Attribute List").show()
       }
-      else if (data) {
+      
+      if (data) {
         clean_data()
       }
       else if (lists[type]) {
