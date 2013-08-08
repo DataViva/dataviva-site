@@ -8,8 +8,8 @@
   z-index: 750;
 }
 
-#header_container #account {
-  background-color: transparent;
+#header_container #language {
+/*  background-color: transparent;*/
   opacity: 0.6;
   -webkit-transition: opacity .2s;
           transition: opacity .2s;
@@ -19,7 +19,7 @@
   background-color: white;
 }
 
-#header_container:hover #account {
+#header_container:hover #language {
   opacity: 1;
 }
 
@@ -47,7 +47,7 @@
 }
 
 #header > #logo {
-  margin-right: 24px;
+  margin-right: 12px;
 }
 
 #header > a.link {
@@ -60,7 +60,7 @@
   opacity: 0.25;
   padding-top: 34px;
   text-align: center;
-  width: 94px;
+  width: 90px;
 /*  -webkit-transition: color .2s, background-image .2s, opacity .2s;
           transition: color .2s, background-image .2s, opacity .2s;*/
 }
@@ -91,7 +91,7 @@
 
 #header a.active,
 #header a:hover {
-  color: #cc0000;
+  color: #af1f24;
   opacity: 1;
 }
 
@@ -131,24 +131,26 @@
   color: #d67ab0 !important; /* pink */
 }
 
+#header div#nav_controls {
+  display: inline-block;
+  margin-top: -2px;
+  text-align: center;
+  width: 90px;
+}
+
 #header div#account {
-  font-size: 12px;
-  float: right;
+  color: #888;
+  font-size: 11px;
+  padding: 3px 0px;
 }
 
-#header div#account > i {
-  display: inline-block;
-  float: left;
+#header div#account.active {
+  color: #af1f24;
 }
 
-#header div#account > div.avatar {
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  display: inline-block;
-  margin: -6px;
-  height: 27px;
-  width: 27px;
+#header div#account:hover {
+  color: #af1f24;
+  cursor: pointer;
 }
 
 a.account:first-child {
@@ -169,6 +171,14 @@ a.account > i {
 
 a.account:hover {
   color: #af1f24;
+}
+
+div#language .leon.radio {
+  margin: 0px !important;
+}
+
+div#language .leon.button {
+  padding: 2px 6px !important;
 }
 
 #dynamic_header {

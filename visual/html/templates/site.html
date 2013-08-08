@@ -17,12 +17,26 @@
       <a id="data" href="{{ url_for('data.index') }}" class="link{% if g.page_type == 'data' or g.page_type == 'query' or g.page_type == 'classifications' %} active{% endif %}">{% trans %}Data{% endtrans %}</a>
       <a id="ask" href="{{ url_for('ask.index') }}" class="link{% if g.page_type == 'ask' %} active{% endif %}">{% trans %}Ask Sabrina{% endtrans %}</a>
       <a id="about" href="{{ url_for('about.about') }}" class="link{% if g.page_type == 'about' %} active{% endif %}">{% trans %}Learn More{% endtrans %}</a>
-      <div id="account" class="leon button">
-        {% if g.user.is_authenticated() %}
-          <div class="avatar" style="background-image: url('{{ g.user.avatar(54) }}');"></div>
-        {% else %}
-          {% trans %}Login{% endtrans %}
-        {% endif %}
+      
+      <div id="nav_controls">
+        
+        <div id="account">
+          {% if g.user.is_authenticated() %}
+            {{ g.user.nickname }}
+          {% else %}
+            {% trans %}Login{% endtrans %}
+          {% endif %}
+        </div>
+      
+        <div id="language">
+          <input type="radio" name="language_select" onclick="change_language(this.value)" 
+            id="en" value="en"{% if g.locale == 'en' %} checked{% endif %}>
+          <label for="en">en</label>
+          <input type="radio" name="language_select" onclick="change_language(this.value)" 
+            id="pt" value="pt"{% if g.locale == 'pt' %} checked{% endif %}>
+          <label for="pt">pt</label>
+        </div>
+        
       </div>
 
       {% if g.user.is_authenticated() %}
@@ -71,15 +85,6 @@
       src="http://assets.okfn.org/images/ok_buttons/od_80x15_red_green.png" />
     </a>
     <!-- /Open Data Link -->
-    
-    <div id="language">
-      <input type="radio" name="language_select" onclick="change_language(this.value)" 
-        id="en" value="en"{% if g.locale == 'en' %} checked{% endif %}>
-      <label for="en">English</label>
-      <input type="radio" name="language_select" onclick="change_language(this.value)" 
-        id="pt" value="pt"{% if g.locale == 'pt' %} checked{% endif %}>
-      <label for="pt">Português</label>
-    </div>
       
   </div>
   
@@ -115,12 +120,12 @@
       }
     
       show_toggle = function() {
-        d3.select("#account").attr("class","leon button active")
+        d3.select("#account").attr("class","active")
         d3.select("#vizwhiz_tooltip_id_account").style("display","block")
       }
     
       hide_toggle = function() {
-        d3.select("#account").attr("class","leon button")
+        d3.select("#account").attr("class","")
         d3.select("#vizwhiz_tooltip_id_account").style("display","none")
       }
     
