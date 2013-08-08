@@ -134,10 +134,26 @@ visual.format.text = function(text,name) {
       "importance": {"en": "Exclusivity", "pt": "Exclusividade"},
       "growth_val": {"en": "Wage Growth", "pt": "Crescimento dos Sal\u00e1rios"},
       "growth_val_total": {"en": "Cumulative Wage Growth", "pt": "Crescimento Salarial Acumulada"},
-      "opp_gain": {"en": "Opportunity Gain", "pt": "Ganho Oportunidade"},
       "proximity": {"en": "Proximity", "pt": "Proximidade"},
       "rca": {"en": "Domestic RCA", "pt": "Interno RCA"},
       "rca_wld": {"en": "International RCA", "pt": "Internacional RCA"},
+      
+      "opp_gain": {"en": "Opportunity Gain", "pt": "Ganho Oportunidade"},
+      "opp_gain_wld": {"en": "International Opportunity Gain", "pt": "Ganho Internacional Opportunity"},
+      
+      "val_usd_growth_pct": {"en": "Growth Rate (1 year)", "pt": "Taxa de Crescimento (1 ano)"},
+      "val_usd_growth_pct_5": {"en": "Growth Rate (5 year)", "pt": "Taxa de Crescimento (5 anos)"},
+      "val_usd_growth_val": {"en": "Growth Value (1 year)", "pt": "Valor de Crescimento (1 ano)"},
+      "val_usd_growth_val_5": {"en": "Growth Value (5 year)", "pt": "Valor de Crescimento (5 anos)"},
+      
+      "wage_growth_pct": {"en": "Wage Growth Rate (1 year)", "pt": "Valor de Crescimento (1 ano)"},
+      "wage_growth_pct_5": {"en": "Wage Growth Rate (5 year)", "pt": "Valor de Crescimento (5 anos)"},
+      "wage_growth_val": {"en": "Wage Growth Value (1 year)", "pt": "Salário Value Growth (1 ano)"},
+      "wage_growth_val_5": {"en": "Wage Growth Value (5 year)", "pt": "Salário Value Growth (5 anos)"},
+      "num_emp_growth_pct": {"en": "Employee Growth Rate (1 year)", "pt": "Taxa de Crescimento de Empregado (1 ano)"},
+      "num_emp_growth_pct_5": {"en": "Employee Growth Rate (5 year)", "pt": "Taxa de Crescimento de Empregado (5 anos)"},
+      "num_emp_growth_val": {"en": "Employee Growth (1 year)", "pt": "Crescimento Empregado (1 ano)"},
+      "num_emp_growth_val_5": {"en": "Employee Growth (5 year)", "pt": "Crescimento Empregado (5 anos)"},
     
       // RAIS Labels
       "rais": {"en": "Establishments and Employment (RAIS)", "pt": "Estabelecimentos e Emprego (RAIS)"},
