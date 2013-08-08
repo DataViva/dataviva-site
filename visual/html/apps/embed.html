@@ -267,11 +267,11 @@
         priority.forEach(function(p,i){
           if (data[p]) {
             if (!title) {
-              html_return += "<div class='title'>Related Apps</div>"
+              html_return += "<div class='title'>"+visual.format.text("related_apps")+"</div>"
               title = true
             }
             else if (i == priority.length-1) {
-              html_return += "<div class='title'>Other Apps</div>"
+              html_return += "<div class='title'>"+visual.format.text("other_apps")+"</div>"
             }
             
             if (["network","rings","geo_map"].indexOf(app.build.app.type) >= 0) {
@@ -1158,8 +1158,11 @@ val)+": ", "suffix": ""};
     app.download = function(obj) {
       
       var type = obj.id,
-          title = app.build.title,
+          title = app.build.app.title+"-"+app.build.title,
           columns = app.tooltip.long
+          
+      if (app.build.app.type != "stacked") title += " ("+app.vars.year+")"
+      title = title.removeAccents().replace(" ","_")
       
       var form = document.getElementById("svgform");
   
@@ -1167,13 +1170,14 @@ val)+": ", "suffix": ""};
         form['data'].value = d3.csv.formatRows(app.viz.csv_columns(columns).csv_data());
       }
       else {
+        if (app.build.app.type == "geo_map") var svg = d3.select("div#map svg")
+        else var svg = d3.select("svg")
         // Add necessary name space junk and get raw node
-        var svg = d3.select("svg")
-          .attr("version", 1.1)
+        svg.attr("version", 1.1)
           .attr("xmlns", "http://www.w3.org/2000/svg")
           .node()
         // Extract the data as SVG text string
-        var svg_xml = (new XMLSerializer).serializeToString(svg);
+        var svg_xml = (new XMLSerializer).serializeToString(svg.node());
         form['data'].value = svg_xml;
       }
       // Submit the <FORM> to the server.

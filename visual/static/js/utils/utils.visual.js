@@ -193,8 +193,10 @@ visual.format.text = function(text,name) {
       "svg": {"en": "Save as SVG", "pt": "Salvar como SVG"},
       "svg_desc": {"en": "A vector-based file that can be resized without worrying about pixel resolution.", "pt": "Um arquivo com base em vetor que pode ser redimensionado sem se preocupar com pixel de resolu\u00e7\u00e3o."},
     
-      // App Builder Footer
+      // App Builder
       "Data Provided by": {"en": "Data Provided by", "pt": "Dados fornecidos pela"},
+      "related_apps": {"en": "Related Apps", "pt": "Apps Relacionados"},
+      "other_apps": {"en": "Other Apps", "pt": "Outros Apps"},
     
       // Viz-Whiz Text
       "Click for More Info": {"en": "Click for more data and related apps.", "pt": "Clique para obter mais dados e aplicativos relacionados."},
