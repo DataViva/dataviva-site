@@ -270,7 +270,7 @@ function Selector() {
             var input = sort_toggles.append("input")
               .attr("type","radio")
               .attr("id","selector_sort_"+s)
-              .attr("value","selector_sort_"+s)
+              .attr("value",s)
               .attr("name","selector_sort")
               .attr("onclick","populate_list(selected,this.value)")
             if (s == sorting) input.attr("checked","checked")
