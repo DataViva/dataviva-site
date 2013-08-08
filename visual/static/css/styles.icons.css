@@ -1,16 +1,13 @@
-.help.icon,
 .decision.icon,
 .help.icon {
   padding-left: 43px;
 }
 
-.help.icon.square,
 .decision.icon.square,
 .help.icon.square {
   padding-left: 12px;
 }
 
-.help.icon:before,
 .decision.icon:before,
 .help.icon:before {
   background-position: 50%;
@@ -31,27 +28,6 @@
   text-decoration: inherit;
   top: 0px;
   width: 43px;
-}
-
-.decision:after,
-.help:after {
-  bottom: 12px;
-  content: "\f105";
-  display: block;
-  font-family: FontAwesome;
-  font-size: 20px;
-  -webkit-font-smoothing: antialiased;
-  font-style: normal;
-  font-weight: normal;
-  position: absolute;
-  right: 12px;
-  text-decoration: inherit;
-}
-
-.help.square:after,
-.decision.square:after,
-.help.square:after {
-  content: "";
 }
 
 .help.icon.square:before,

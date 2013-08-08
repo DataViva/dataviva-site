@@ -45,14 +45,18 @@ a:hover {
   padding: 0px;
 }
 
-.decision, .help {
+.decision.square, .help.square {
   padding: 10px;
+}
+
+.decision, .help {
+  padding: 10px 30px 10px 10px;
 }
 
 .title.square, .decision.square, .help.square {
   display: inline-block;
-  min-height: 144px;
-  width: 144px;
+  min-height: 150px;
+  width: 150px;
 }
 
 .grid5col2 > .title.square,
@@ -86,6 +90,26 @@ a:hover {
 .help.short:before,
 .decision.short:before {
   width: 24px !important;
+}
+
+.decision:after,
+.help:after {
+  bottom: 10px;
+  content: "\f105";
+  display: block;
+  font-family: FontAwesome;
+  font-size: 20px;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  position: absolute;
+  right: 12px;
+  text-decoration: inherit;
+}
+
+.decision.square:after,
+.help.square:after {
+  content: "";
 }
 
 .help.short:after,

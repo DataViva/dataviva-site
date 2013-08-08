@@ -4,6 +4,17 @@ body.query #inner_container {
   vertical-align: top;
 }
 
+body.query #container {
+  padding: 58px 0px 49px 0px;
+  width: 100%;
+}
+
+body.query #dynamic_header {
+  left: 0px;
+  margin-left: 0px;
+  width: 100%;
+}
+
 /***************************/
 /* Classification Specific */
 /***************************/
@@ -36,6 +47,7 @@ body.query #inner_container {
 }
 
 #table_header {
+  padding-left: 340px;
   margin-top: 3px;
   overflow-x: auto;
 }
@@ -49,18 +61,24 @@ body.query #inner_container {
   display: none; 
 }
 
+.data_table {
+  width: 100%;
+}
+
 #table_container {
-  margin-top: -20px;
+  padding-left: 340px;
   min-height: 500px;
   overflow-x: auto;
 }
 
 #filter_selects {
   left: 50%;
-  margin-left: -485px;
+  left: 20px;
+  padding-top: 6px;
   position: fixed;
   text-align: center;
-  top: 120px;
+  top: 135px;
+  width: 300px;
 }
 
 .filter_container {

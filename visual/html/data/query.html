@@ -10,7 +10,7 @@
 
 <div id="dynamic_header">
   
-  <div class="grid4col3 grid4offset1">
+  <div class="data_table">
     <div id="table_header">
       <table>
         <thead>
@@ -22,7 +22,7 @@
   
 </div>
 
-<div id="filter_selects" class="grid4col1">
+<div id="filter_selects" class="lightbox">
     
     <div id="data_toggle">
       <legend id="dataset">{% trans %}Data{% endtrans %}</legend>
@@ -205,7 +205,7 @@
     
 </div>
 
-<div class="grid4col3 grid4offset1">
+<div class="data_table">
   
   <div id="table_container">
     <table>
@@ -225,7 +225,51 @@
 
   var CURRENT_DATASET = d3.select("input[name='dataset']:checked").attr("value");
   var ORDER_DIRECTIONS = ["desc", "asc", ""]
-  var COLUMNS = ["year", "bra_id", "isic_id", "hs_id", "cbo_id", "wld_id", "wage", "num_emp", "num_est", "val_usd", "rca", "growth_val", "growth_val_total"]
+  var COLUMNS = [ 
+                  "year", 
+  
+                  "bra_id", 
+                  
+                  "isic_id", 
+                  "cbo_id", 
+                  
+                  "hs_id", 
+                  "wld_id", 
+                  
+                  "wage", 
+                  "num_emp", 
+                  "num_est", 
+                  
+                  "val_usd", 
+                  
+                  "rca", 
+                  "rca_wld", 
+                  
+                  "distance", 
+                  "distance_wld", 
+                  
+                  "opp_gain", 
+                  "opp_gain_wld", 
+                  
+                  "complexity", 
+                  
+                  "importance", 
+                  
+                  "val_usd_growth_pct",
+                  "val_usd_growth_pct_5",
+                  "val_usd_growth_val",
+                  "val_usd_growth_val_5",
+                  
+                  "wage_growth_pct",
+                  "wage_growth_pct_5",
+                  "wage_growth_val",
+                  "wage_growth_val_5",
+                  "num_emp_growth_pct",
+                  "num_emp_growth_pct_5",
+                  "num_emp_growth_val",
+                  "num_emp_growth_val_5"
+                
+                ]
 
   var is = infinite_scroll().format_items(item_formatter);
 
@@ -524,7 +568,7 @@
   // default load page with data
   update_table(CURRENT_DATASET);
   
-  // attache click event listeners to build buttons
+  // attach click event listeners to build buttons
   d3.select("#rais_go").on(vizwhiz.evt.click, function(){
     CURRENT_DATASET = 'rais';
     update_table(CURRENT_DATASET);
@@ -533,6 +577,8 @@
     CURRENT_DATASET = 'secex';
     update_table(CURRENT_DATASET);
   })
+  
+  d3.selectAll(".data_table").style("width",window.innerWidth+"px")
   
   // Scroll Header with Body, and vice-versa
   d3.select("#table_container").on("scroll",function(){
