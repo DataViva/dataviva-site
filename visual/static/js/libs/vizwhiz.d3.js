@@ -2545,7 +2545,7 @@ vizwhiz.viz = function() {
     vars.chart_enter.append("g")
       .attr("class", "yaxis")
       .call(vars.y_axis.scale(vars.y_scale))
-//       
+      
     var labelx = vars.width/2
     if (!vars.title_center) labelx += vars.graph.margin.left
       
@@ -2555,8 +2555,8 @@ vizwhiz.viz = function() {
       .attr('x', labelx)
       .attr('y', vars.height-10)
       .text(vars.text_format(vars.xaxis_var))
-      .attr(label_style)
       .attr("font-family",vars.font)
+      .attr(label_style)
       
     // Create Y axis label
     axes.append('text')
@@ -2565,8 +2565,8 @@ vizwhiz.viz = function() {
       .attr('x', -(vars.graph.height/2+vars.graph.margin.top))
       .text(vars.text_format(vars.yaxis_var))
       .attr("transform","rotate(-90)")
-      .attr(label_style)
       .attr("font-family",vars.font)
+      .attr(label_style)
 
     // Set Y axis
     vars.graph.offset = 0
@@ -2576,14 +2576,14 @@ vizwhiz.viz = function() {
     vars.graph.margin.left += vars.graph.offset
     vars.graph.width -= vars.graph.offset
     vars.x_scale.range([0,vars.graph.width])
-//     
+    
     // Set X axis
     vars.graph.yoffset = 0
     d3.select("g.xaxis")
       .call(vars.x_axis.scale(vars.x_scale))
       
     vars.graph.height -= vars.graph.yoffset
-//     
+    
     // Update Graph
     d3.select(".chart").transition().duration(vars.graph.timing)
       .attr("transform", "translate(" + vars.graph.margin.left + "," + vars.graph.margin.top + ")")
@@ -2594,25 +2594,25 @@ vizwhiz.viz = function() {
       .select("rect#background")
         .attr('width', vars.graph.width)
         .attr('height', vars.graph.height)
-// 
-//     // Update X axis
+
+    // Update X axis
     if (vars.type == "stacked") {
       vars.y_scale.range([vars.graph.height,0]);
     }
     else {
       vars.y_scale.range([0, vars.graph.height]);
     }
-//     
+    
     d3.select("g.yaxis")
       .call(vars.y_axis.scale(vars.y_scale))
-//     
+    
     d3.select("g.xaxis")
       .attr("transform", "translate(0," + vars.graph.height + ")")
       .call(vars.x_axis.scale(vars.x_scale))
     
     d3.select("g.xaxis").selectAll("g.tick").select("text")
       .style("text-anchor","end")
-// 
+
     // Update X axis label
     d3.select(".x_axis_label")
       .attr('x', labelx)
@@ -2632,7 +2632,7 @@ vizwhiz.viz = function() {
         else return 1
       })
       .text(vars.text_format(vars.yaxis_var))
-//       
+      
     // Move titles
     update_titles()
     
@@ -5931,15 +5931,17 @@ vizwhiz.rings = function(vars) {
     .attr("class", "link")
     .attr("opacity",0);
       
-  link.transition().duration(vizwhiz.timing/2)
-    .attr("opacity",0)
-    .transition().call(line_styles)
-    .transition().duration(vizwhiz.timing/2)
-    .attr("opacity",function(d) {
-      if (hover && d3.select(this).attr("stroke") == "#ddd") {
-         return 0.25
-      } return 0.75;
-    })
+  if (!vars.last_highlight || vars.last_highlight != vars.highlight) {
+    link.transition().duration(vizwhiz.timing/2)
+      .attr("opacity",0)
+      .transition().call(line_styles)
+      .transition().duration(vizwhiz.timing/2)
+      .attr("opacity",function(d) {
+        if (hover && d3.select(this).attr("stroke") == "#ddd") {
+           return 0.25
+        } return 0.75;
+      })
+  }
       
   link.exit().transition().duration(vizwhiz.timing)
     .attr("opacity",0)
@@ -6017,6 +6019,7 @@ vizwhiz.rings = function(vars) {
       if (vars.small) return 0
       else return 1
     })
+    .call(text_styles)
     .each(function(d) {
       if (d.depth == 0) {
         var s = Math.sqrt((ring_width*ring_width)/2), 
@@ -6045,7 +6048,6 @@ vizwhiz.rings = function(vars) {
       d3.select(this).attr("y",(-d3.select(this).node().getBBox().height/2)+"px")
       
     })
-    .call(text_styles);
       
   node.exit().transition().duration(vizwhiz.timing)
       .attr("opacity",0)
@@ -6054,6 +6056,8 @@ vizwhiz.rings = function(vars) {
   //===================================================================
   
   hover = null;
+  
+  vars.last_highlight = vars.highlight
   
   if (!vars.small && vars.data) {
 
@@ -6212,7 +6216,7 @@ vizwhiz.rings = function(vars) {
     t
       .attr("fill",function(d){
         if (d.depth == 0) {
-          var color = vizwhiz.utils.text_color(d3.select("circle#node_"+d[vars.id_var]).attr("fill"));
+          var color = vizwhiz.utils.text_color(fill_color(d));
         } 
         else {
           var color = vizwhiz.utils.darker_color(d[vars.color_var]);

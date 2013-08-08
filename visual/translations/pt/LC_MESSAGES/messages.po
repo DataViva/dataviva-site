@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-05 15:46-0400\n"
+"POT-Creation-Date: 2013-08-08 17:14-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -108,7 +108,7 @@ msgid "Tree Map"
 msgstr "Árvore Mapa"
 
 #: visual/html/account/login.html:4 visual/html/general/access.html:3
-#: visual/html/templates/site.html:24
+#: visual/html/templates/site.html:27
 msgid "Login"
 msgstr "Login"
 
@@ -182,7 +182,7 @@ msgstr "Digite sua resposta..."
 msgid "Update"
 msgstr "Atualizar"
 
-#: visual/html/admin/admin_users.html:3 visual/html/templates/site.html:32
+#: visual/html/admin/admin_users.html:3 visual/html/templates/site.html:46
 msgid "Admin Panel"
 msgstr "Painel de Administração"
 
@@ -441,6 +441,10 @@ msgstr "Mostrando todos os países, até que um filtro seleccionado."
 #: visual/html/data/query.html:194
 msgid "add a trade partner"
 msgstr "adicionar um parceiro comercial"
+
+#: visual/html/data/query.html:204
+msgid "Download"
+msgstr "Baixar"
 
 #: visual/html/data/select.html:3
 msgid "Choose a Classification"
@@ -742,15 +746,15 @@ msgstr "Perfis"
 msgid "Learn More"
 msgstr "Saiba Mais"
 
-#: visual/html/templates/site.html:30
+#: visual/html/templates/site.html:44
 msgid "Profile"
 msgstr "Perfil"
 
-#: visual/html/templates/site.html:34
+#: visual/html/templates/site.html:48
 msgid "Logout"
 msgstr "Sair"
 
-#: visual/html/templates/site.html:64
+#: visual/html/templates/site.html:78
 msgid "Sponsored by"
 msgstr "Patrocinado pela"
 

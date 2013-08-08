@@ -289,3 +289,10 @@
 .decision.icon.source:before {
   content: "\f14e";
 }
+
+.decision.icon.csv {
+  background-color: #00923f !important;
+}
+.decision.icon.csv:before {
+  background-image: url("/static/img/icons/file/file_csv.png");
+}

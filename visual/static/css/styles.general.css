@@ -10,6 +10,11 @@ body {
   color: #333333;
 }
 
+hr {
+  background-color: #ccc;
+  margin: 10px;
+}
+
 #fullscreen {
   background-repeat: no-repeat;
   background-position: center;
