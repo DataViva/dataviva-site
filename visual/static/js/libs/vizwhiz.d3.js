@@ -1347,21 +1347,12 @@ vizwhiz.viz = function() {
         .append("rect")
           .attr("width",vars.width)
           .attr("height",vars.height)
-      
-      vars.svg.select("#clipping rect").transition().duration(vizwhiz.timing)
-        .attr("width",vars.width)
-        .attr("height",vars.height)
     
       vars.parent_enter = vars.svg_enter.append("g")
         .attr("class","parent")
-        .attr("width",vars.width)
-        .attr("height",vars.height)
-        .attr("clip-path","url(#clipping)")
         .attr("transform","translate("+vars.margin.left+","+vars.margin.top+")")
     
       vars.svg.select("g.parent").transition().duration(vizwhiz.timing)
-        .attr("width",vars.width)
-        .attr("height",vars.height)
         .attr("transform","translate("+vars.margin.left+","+vars.margin.top+")")
       
       vars.parent_enter.append("defs")
@@ -2396,14 +2387,12 @@ vizwhiz.viz = function() {
   }
   
   var axis_style = {
-    "font-family": vars.font,
     "font-size": "12px",
     "font-weight": vars.font_weight,
     "fill": "#888"
   }
   
   var label_style = {
-    "font-family": vars.font,
     "font-size": "14px",
     "font-weight": vars.font_weight,
     "fill": "#333",
@@ -2427,6 +2416,7 @@ vizwhiz.viz = function() {
         d3.select(this)
           .style(axis_style)
           .attr("transform","translate(-22,3)rotate(-65)")
+          .attr("font-family",vars.font)
           .text(text)
         
         var height = (Math.cos(25)*this.getBBox().width)
@@ -2485,6 +2475,7 @@ vizwhiz.viz = function() {
       
         d3.select(this)
           .style(axis_style)
+          .attr("font-family",vars.font)
           .text(text)
         
         var width = this.getBBox().width
@@ -2554,7 +2545,7 @@ vizwhiz.viz = function() {
     vars.chart_enter.append("g")
       .attr("class", "yaxis")
       .call(vars.y_axis.scale(vars.y_scale))
-      
+//       
     var labelx = vars.width/2
     if (!vars.title_center) labelx += vars.graph.margin.left
       
@@ -2565,6 +2556,7 @@ vizwhiz.viz = function() {
       .attr('y', vars.height-10)
       .text(vars.text_format(vars.xaxis_var))
       .attr(label_style)
+      .attr("font-family",vars.font)
       
     // Create Y axis label
     axes.append('text')
@@ -2574,6 +2566,7 @@ vizwhiz.viz = function() {
       .text(vars.text_format(vars.yaxis_var))
       .attr("transform","rotate(-90)")
       .attr(label_style)
+      .attr("font-family",vars.font)
 
     // Set Y axis
     vars.graph.offset = 0
@@ -2583,14 +2576,14 @@ vizwhiz.viz = function() {
     vars.graph.margin.left += vars.graph.offset
     vars.graph.width -= vars.graph.offset
     vars.x_scale.range([0,vars.graph.width])
-    
+//     
     // Set X axis
     vars.graph.yoffset = 0
     d3.select("g.xaxis")
       .call(vars.x_axis.scale(vars.x_scale))
       
     vars.graph.height -= vars.graph.yoffset
-    
+//     
     // Update Graph
     d3.select(".chart").transition().duration(vars.graph.timing)
       .attr("transform", "translate(" + vars.graph.margin.left + "," + vars.graph.margin.top + ")")
@@ -2601,25 +2594,25 @@ vizwhiz.viz = function() {
       .select("rect#background")
         .attr('width', vars.graph.width)
         .attr('height', vars.graph.height)
-
-    // Update X axis
+// 
+//     // Update X axis
     if (vars.type == "stacked") {
       vars.y_scale.range([vars.graph.height,0]);
     }
     else {
       vars.y_scale.range([0, vars.graph.height]);
     }
-    
+//     
     d3.select("g.yaxis")
       .call(vars.y_axis.scale(vars.y_scale))
-    
+//     
     d3.select("g.xaxis")
       .attr("transform", "translate(0," + vars.graph.height + ")")
       .call(vars.x_axis.scale(vars.x_scale))
     
     d3.select("g.xaxis").selectAll("g.tick").select("text")
       .style("text-anchor","end")
-
+// 
     // Update X axis label
     d3.select(".x_axis_label")
       .attr('x', labelx)
@@ -2639,7 +2632,7 @@ vizwhiz.viz = function() {
         else return 1
       })
       .text(vars.text_format(vars.yaxis_var))
-      
+//       
     // Move titles
     update_titles()
     

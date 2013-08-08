@@ -1162,7 +1162,7 @@ val)+": ", "suffix": ""};
           columns = app.tooltip.long
           
       if (app.build.app.type != "stacked") title += " ("+app.vars.year+")"
-      title = title.removeAccents().replace(" ","_")
+      title = title.removeAccents().split(" ").join("_")
       
       var form = document.getElementById("svgform");
   
