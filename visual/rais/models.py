@@ -49,7 +49,6 @@ class Yo(db.Model, AutoSerialize):
     wage = db.Column(db.Float())
     num_emp = db.Column(db.Integer())
     num_est = db.Column(db.Integer())
-    complexity = db.Column(db.Float())
     importance = db.Column(db.Float())
 
     def __repr__(self):
