@@ -21,6 +21,14 @@ class Yi(db.Model, AutoSerialize):
     complexity = db.Column(db.Float())
     num_emp_avg = db.Column(db.Float())
     num_emp_med = db.Column(db.Float())
+    wage_growth_pct = db.Column(db.Float())
+    wage_growth_pct_5 = db.Column(db.Float())
+    wage_growth_val = db.Column(db.Float())
+    wage_growth_val_5 = db.Column(db.Float())
+    num_emp_growth_pct = db.Column(db.Float())
+    num_emp_growth_pct_5 = db.Column(db.Float())
+    num_emp_growth_val = db.Column(db.Float())
+    num_emp_growth_val_5 = db.Column(db.Float())
 
     def __repr__(self):
         return '<Yi %d.%s>' % (self.year, self.isic_id)
@@ -33,10 +41,14 @@ class Yb_rais(db.Model, AutoSerialize):
     wage = db.Column(db.Float())
     num_emp = db.Column(db.Integer())
     num_est = db.Column(db.Integer())
-    growth_pct = db.Column(db.Float())
-    growth_pct_total = db.Column(db.Float())
-    growth_val = db.Column(db.Float())
-    growth_val_total = db.Column(db.Float())
+    wage_growth_pct = db.Column(db.Float())
+    wage_growth_pct_5 = db.Column(db.Float())
+    wage_growth_val = db.Column(db.Float())
+    wage_growth_val_5 = db.Column(db.Float())
+    num_emp_growth_pct = db.Column(db.Float())
+    num_emp_growth_pct_5 = db.Column(db.Float())
+    num_emp_growth_val = db.Column(db.Float())
+    num_emp_growth_val_5 = db.Column(db.Float())
 
     def __repr__(self):
         return '<Yb_rais %d.%s>' % (self.year, self.bra_id)
@@ -50,6 +62,14 @@ class Yo(db.Model, AutoSerialize):
     num_emp = db.Column(db.Integer())
     num_est = db.Column(db.Integer())
     importance = db.Column(db.Float())
+    wage_growth_pct = db.Column(db.Float())
+    wage_growth_pct_5 = db.Column(db.Float())
+    wage_growth_val = db.Column(db.Float())
+    wage_growth_val_5 = db.Column(db.Float())
+    num_emp_growth_pct = db.Column(db.Float())
+    num_emp_growth_pct_5 = db.Column(db.Float())
+    num_emp_growth_val = db.Column(db.Float())
+    num_emp_growth_val_5 = db.Column(db.Float())
 
     def __repr__(self):
         return '<Yo %d.%s>' % (self.year, self.cbo_id)
@@ -86,7 +106,12 @@ class Ybi(db.Model, AutoSerialize):
     wage_growth_pct_5 = db.Column(db.Float())
     wage_growth_val = db.Column(db.Float())
     wage_growth_val_5 = db.Column(db.Float())
+    num_emp_growth_pct = db.Column(db.Float())
+    num_emp_growth_pct_5 = db.Column(db.Float())
+    num_emp_growth_val = db.Column(db.Float())
+    num_emp_growth_val_5 = db.Column(db.Float())
     distance = db.Column(db.Float())
+    opp_gain = db.Column(db.Float())
     
     def __repr__(self):
         return '<Ybi %d.%s.%s>' % (self.year, self.bra_id, self.isic_id)
@@ -101,6 +126,14 @@ class Ybo(db.Model, AutoSerialize):
     num_emp = db.Column(db.Integer())
     num_est = db.Column(db.Integer())
     rca = db.Column(db.Float())
+    wage_growth_pct = db.Column(db.Float())
+    wage_growth_pct_5 = db.Column(db.Float())
+    wage_growth_val = db.Column(db.Float())
+    wage_growth_val_5 = db.Column(db.Float())
+    num_emp_growth_pct = db.Column(db.Float())
+    num_emp_growth_pct_5 = db.Column(db.Float())
+    num_emp_growth_val = db.Column(db.Float())
+    num_emp_growth_val_5 = db.Column(db.Float())
     
     def __repr__(self):
         return '<Ybo %d.%s.%s>' % (self.year, self.bra_id, self.cbo_id)
@@ -118,6 +151,14 @@ class Yio(db.Model, AutoSerialize):
     importance = db.Column(db.Float())
     num_emp_avg = db.Column(db.Float())
     num_emp_med = db.Column(db.Float())
+    wage_growth_pct = db.Column(db.Float())
+    wage_growth_pct_5 = db.Column(db.Float())
+    wage_growth_val = db.Column(db.Float())
+    wage_growth_val_5 = db.Column(db.Float())
+    num_emp_growth_pct = db.Column(db.Float())
+    num_emp_growth_pct_5 = db.Column(db.Float())
+    num_emp_growth_val = db.Column(db.Float())
+    num_emp_growth_val_5 = db.Column(db.Float())
     
     def __repr__(self):
         return '<Yio %d.%s.%s>' % (self.year, self.isic_id, self.cbo_id)
