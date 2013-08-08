@@ -668,12 +668,22 @@
           }
         
           if (ui.values.length > 1 && app.vars.builder != "false") {
-            builder.radios({
-              "data": ui.values,
-              "title": title,
-              "initial": app.vars[ui.type],
-              "type": ui.type
-            })
+            if (ui.values.length <= 4) {
+              builder.radios({
+                "data": ui.values,
+                "title": title,
+                "initial": app.vars[ui.type],
+                "type": ui.type
+              })
+            }
+            else {
+              builder.dropdown({
+                "data": ui.values,
+                "title": title,
+                "initial": app.vars[ui.type],
+                "type": ui.type
+              })
+            }
           }
           
         }
@@ -1334,8 +1344,7 @@ val)+": ", "suffix": ""};
     
       div.append("legend")
         .attr("id",obj.title)
-        .html(visual.format.text(
-obj.title))
+        .html(visual.format.text(obj.title))
         
       obj.data.forEach(function(v,i){
         
@@ -1358,6 +1367,35 @@ v))
       })
 
       leon("$"+obj.title)
+      
+    }
+    
+    builder.dropdown = function(obj) {
+      
+      var div = d3.select("#app_controls").append("div")
+        .attr("class","ui_group")
+    
+      div.append("label")
+        .attr("for",obj.title)
+        .html(visual.format.text(obj.title))
+    
+      var select = div.append("select")
+        .attr("id",obj.title)
+        .attr("onchange","app.update('"+obj.type+"',this.value.split('+')[1])")
+        
+      obj.data.forEach(function(v,i){
+        
+        var option = select.append("option")
+          .attr("value",obj.title+"+"+v)
+          .text(visual.format.text(v))
+      
+        if (v == obj.initial) {
+          option.node().selected = true
+        }
+        
+      })
+
+      leon("#"+obj.title)
       
     }
     

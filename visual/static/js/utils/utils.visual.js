@@ -172,7 +172,7 @@ visual.format.text = function(text,name) {
       "bra_id": {"en": "BRA ID", "pt": "BRA ID"},
       "category": {"en": "Sector", "pt": "Setor"},
       "cbo_id": {"en": "CBO ID", "pt": "CBO ID"},
-      "color": {"en": "Color", "pt": "Cor"},
+      "color": {"en": "Sector", "pt": "Setor"},
       "display_id": {"en": "ID", "pt": "ID"},
       "hs_id": {"en": "HS ID", "pt": "HS ID"},
       "id_ibge": {"en": "IBGE ID", "pt": "IBGE ID"},
