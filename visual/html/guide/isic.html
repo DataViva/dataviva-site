@@ -16,21 +16,21 @@
     {% endautoescape %}
   </a>
 
-  <a class="decision icon square isic" href="{{g.path}}potential">
-    {% autoescape false %}
-    {{ _('Where do they %(word)s?', word = '<b>%s</b>' % (_('locate'))) }}
-    {% endautoescape %}
-  </a>
-
   <a class="decision icon square diversification" href="{{g.path}}diversification">
     {% autoescape false %}
     {{ _('Which industries %(word)s with them?', word = '<b>%s</b>' % (_('co-locate'))) }}
     {% endautoescape %}
   </a>
 
-  <a class="decision icon square bra" href="{{g.path}}bra">
+  <a class="decision icon square bra" href="{{g.path}}potential">
     {% autoescape false %}
     {{ _('What is the production %(word)s of a location?', word = '<b>%s</b>' % (_('potential'))) }}
+    {% endautoescape %}
+  </a>
+
+  <a class="decision icon square isic" href="{{g.path}}locate">
+    {% autoescape false %}
+    {{ _('Where do they %(word)s?', word = '<b>%s</b>' % (_('locate'))) }}
     {% endautoescape %}
   </a>
 
