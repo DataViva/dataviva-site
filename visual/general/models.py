@@ -4,7 +4,7 @@ from visual.utils import AutoSerialize
 from visual.attrs.models import Bra, Isic, Hs, Cbo, Wld
 from visual.apps.models import Build
 
-import ast
+import ast, re
 
 class Plan_Build(db.Model, AutoSerialize):
 
@@ -40,7 +40,7 @@ class Plan(db.Model, AutoSerialize):
          
     '''Returns the english language title of this plan.'''
     def title(self, **kwargs):
-        lang = "en"
+        lang = g.locale
         if "lang" in kwargs:
             lang =  kwargs["lang"]
 
@@ -48,17 +48,50 @@ class Plan(db.Model, AutoSerialize):
         name_lang = "name_en" if lang == "en" else "name_pt"
 
         title = getattr(self, title_lang)
-
-        if "<bra>" in title:
-            title = title.replace("<bra>", ", ".join([getattr(b, name_lang) for b in self.bra]))
-        if "<isic>" in title:
-            title = title.replace("<isic>", ", ".join([getattr(i, name_lang) for i in self.isic]))
-        if "<hs>" in title:
-            title = title.replace("<hs>", ", ".join([getattr(h, name_lang) for h in self.hs]))
-        if "<cbo>" in title:
-            title = title.replace("<cbo>", ", ".join([getattr(c, name_lang) for c in self.cbo]))
-        if "<wld>" in title:
-            title = title.replace("<wld>", ", ".join([getattr(w, name_lang) for w in self.wld]))
+        
+        def get_article(attr, article):
+            if attr.article_pt:
+                if attr.gender_pt == "m":
+                    if article == "em": new_article = "no"
+                    if article == "de": new_article = "do" 
+                    if article == "para": new_article = "para o" 
+                elif attr.gender_pt == "f":
+                    if article == "em": new_article = "na" 
+                    if article == "de": new_article = "da"
+                    if article == "para": new_article = "para a" 
+                if attr.plural_pt:
+                    new_article = new_article + "s"
+                return new_article
+            else:
+                return article
+        
+        if title:
+            if "<bra>" in title:
+                and_joiner = " and " if lang == "en" else " e "
+                title = title.replace("<bra>", and_joiner.join([getattr(b, name_lang) for b in self.bra]))
+                article_search = re.search('<bra_(\w+)>', title)
+                if article_search:
+                    title = title.replace(article_search.group(0), and_joiner.join([get_article(b, article_search.group(1)) for b in self.bra]))
+            if "<isic>" in title:
+                title = title.replace("<isic>", ", ".join([getattr(i, name_lang) for i in self.isic]))
+                article_search = re.search('<isic_(\w+)>', title)
+                if article_search:
+                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.bra]))
+            if "<hs>" in title:
+                title = title.replace("<hs>", ", ".join([getattr(h, name_lang) for h in self.hs]))
+                article_search = re.search('<hs_(\w+)>', title)
+                if article_search:
+                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.bra]))
+            if "<cbo>" in title:
+                title = title.replace("<cbo>", ", ".join([getattr(c, name_lang) for c in self.cbo]))
+                article_search = re.search('<cbo_(\w+)>', title)
+                if article_search:
+                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.bra]))
+            if "<wld>" in title:
+                title = title.replace("<wld>", ", ".join([getattr(w, name_lang) for w in self.wld]))
+                article_search = re.search('<wld_(\w+)>', title)
+                if article_search:
+                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.bra]))
 
         return title
         
