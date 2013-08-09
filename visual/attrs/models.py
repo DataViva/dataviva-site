@@ -120,7 +120,7 @@ class Wld(db.Model, AutoSerialize):
 class Bra(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_bra'
-    __public__ = ('id', 'id_ibge', 'name_en', 'name_pt', 'color')
+    __public__ = ('id', 'id_ibge', 'name_en', 'name_pt', 'color', 'icon', 'distance')
     id = db.Column(db.String(10), primary_key=True)
     id_ibge = db.Column(db.Integer(7))
     name_en = db.Column(db.String(200))
@@ -129,6 +129,10 @@ class Bra(db.Model, AutoSerialize):
     gender_pt = db.Column(db.String(1))
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
+    
+    icon = None
+    distance = 0
+    
     # SECEX relations
     yb_secex = db.relationship("Yb_secex", backref = 'bra', lazy = 'dynamic')
     ybp = db.relationship("Ybp", backref = 'bra', lazy = 'dynamic')

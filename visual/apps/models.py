@@ -61,10 +61,17 @@ class Build(db.Model, AutoSerialize):
                 self.bra[i].id = "all"
                 self.bra[i].icon = "/static/img/icons/wld/wld_sabra.png"
             else:
+                if "." in b:
+                    split = b.split(".")
+                    b = split[0]
+                    dist = split[1]
+                else:
+                    dist = 0
                 state = b[:2]
                 if self.output == "bra":
                     b = state
                 self.bra.append(Bra.query.get(b))
+                self.bra[i].distance = dist
                 self.bra[i].icon = "/static/img/icons/bra/bra_{0}.png".format(state)
 
     def set_filter1(self, filter):
@@ -107,7 +114,14 @@ class Build(db.Model, AutoSerialize):
         
     '''Returns the URL for the specific build.'''
     def url(self, **kwargs):
-        bra_id = "+".join([b.id for b in self.bra])
+        bras = []
+        for b in self.bra:
+            if b.distance > 0:
+                bras.append(b.id+"."+b.distance)
+            else:
+                bras.append(b.id)
+                
+        bra_id = "+".join(bras)
         
         url = '{0}/{1}/{2}/{3}/{4}/{5}'.format(self.app.type, 
                 self.dataset, bra_id, self.filter1, self.filter2, self.output)
@@ -118,8 +132,16 @@ class Build(db.Model, AutoSerialize):
     '''
     def data_url(self, **kwargs):
         print self.bra
-        # bra = self.bra.id
-        bra = "+".join([b.id for b in self.bra])
+        
+        bras = []
+        for b in self.bra:
+            if b.distance > 0:
+                bras.append(b.id+"."+b.distance)
+            else:
+                bras.append(b.id)
+                
+        bra = "+".join(bras)
+        
         if self.app.type == "geo_map":
             bra = "show.8"
         elif self.output == "bra":
@@ -201,9 +223,17 @@ class Build(db.Model, AutoSerialize):
             
 
     def serialize(self, **kwargs):
+        
         auto_serialized = super(Build, self).serialize()
-
+        
         auto_serialized["bra"] = [b.serialize() for b in self.bra]
+        
+        for i,b in enumerate(auto_serialized["bra"]):
+            if self.bra[i].distance:
+                b["distance"] = self.bra[i].distance
+            if self.bra[i].icon:
+                b["icon"] = self.bra[i].icon
+        
         if hasattr(self, "isic"):
             auto_serialized["isic"] = [i.serialize() for i in self.isic]
         if hasattr(self, "hs"):

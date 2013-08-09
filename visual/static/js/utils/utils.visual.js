@@ -229,7 +229,7 @@ visual.format.text = function(text,name) {
       "show": {"en": "Show", "pt": "Mostrar"}
     
     }
-  
+    
     if (!name) return name;
     else if(labels[name]){
       if (labels[name][visual.language]) return labels[name][visual.language]

@@ -184,7 +184,7 @@
     /* App Functions and Variables */
     /*******************************/
     
-    var app = {}
+    var app = {}, last_app = null
     app.build = null
     app.url = "{{ current_build.url() }}"
     app.data = {}
@@ -334,7 +334,6 @@
           "employed",
           "elsewhere",
           "total",
-          "required",
           "importance"
         ]}
     
@@ -408,6 +407,7 @@
                   index = filter.split("_")[1]
               if (app.build[type] && app.build[type][index]) {
                 d3.select("#"+filter).style("display","inline-block")
+                console.log(app.build[type][index])
                 builder.filter(app.build[type][index],filter,true)
               }
               else {
@@ -430,7 +430,7 @@
             /***************************************/
             /* Data Calls and External Files Queue */
             /***************************************/  
-            
+
             var q = queue()
             
             if (!app.data[app.build.data_url]) {
@@ -556,7 +556,7 @@
                 app.error("Geo Map only available for States");
               }
               else {
-        
+
                 app.finish()
                 
               }
@@ -648,12 +648,15 @@
             else if (ui.values.indexOf("num_emp") >= 0) var default_value = "num_emp"
             else var default_value = ui.values[0]
           }
-          else if (ui.type == "depth" && app.build.app.type == "tree_map") {
+          else if (ui.type == "depth") {
             if (app.build.output == "bra" && app.build.bra[0].id == "all") {
               var default_value = ui.values[0]
             }
-            else {
+            else if (app.build.app.type == "tree_map") {
               var default_value = ui.values[ui.values.length-1]
+            }
+            else {
+              var default_value = ui.values[0]
             }
           }
           else if (ui.type == "sort" && app.build.app.type == "stacked") {
@@ -663,7 +666,7 @@
             var default_value = ui.values[0]
           }
           
-          if(!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0) {
+          if((last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
             app.vars[ui.type] = default_value
           }
         
@@ -719,7 +722,7 @@
       depths[app.build.output].forEach(function(d){
         nesting.push(app.build.output+"_"+d)
       })
-      
+
       builder.url()
       
       var color_var = app.vars.color_var ? app.vars.color_var : "color"
@@ -827,6 +830,8 @@
           .mirror_axis(true)
     
       }
+      
+      last_app = app.build.app.type
       
       d3.select("#app")
         .html("")
@@ -1252,7 +1257,7 @@ val)+": ", "suffix": ""};
     }
     
     builder.filter = function(obj,id,static) {
-
+      
       var type = id.split("_")[0],
           index = id.split("_")[1],
           old_obj = app.build[type][index]
@@ -1267,11 +1272,16 @@ val)+": ", "suffix": ""};
       else {
         var url_index = 4
       }
-      
+      console.log(obj.distance)
       app.build[type][index] = obj
       var url = app.url.split("/")
       var ids = url[url_index].split("+")
-      ids[index] = obj.id
+      if (obj.distance && obj.distance > 0) {
+        ids[index] = obj.id+"."+obj.distance
+      }
+      else {
+        ids[index] = obj.id
+      }
       url[url_index] = ids.join("+")
       url = url.join("/")
       app.url = url
@@ -1506,27 +1516,30 @@ v))
       
         if (type == "help") {
           var init = app.build.app.type,
-              callback = null
+              callback = null,
+              dist = 0
         }
         else if (type == "file") {
           var init = "all",
-              callback = app.download
+              callback = app.download,
+              dist = 0
         }
         else {
           var init = app.build[type][index].id,
               callback = builder.filter
-        }
     
-        // if (app.build.bra[0].distance) {
-  //         var dist = app.build.bra[0].distance
-  //       }
-  //       else {
-  //         var dist = 0
-  //       }
+          if (type == "bra" && app.build.bra[index].distance) {
+            var dist = app.build.bra[index].distance
+          }
+          else {
+            var dist = 0
+          }
+        
+        }
 
         selector
           .callback(callback)
-          // .distance(dist)
+          .distance(dist)
           .initial_value(init)
           .type(id)
     
