@@ -116,7 +116,7 @@ class Build(db.Model, AutoSerialize):
     def url(self, **kwargs):
         bras = []
         for b in self.bra:
-            if b.distance > 0:
+            if b.id != "all" and b.distance > 0:
                 bras.append(b.id+"."+b.distance)
             else:
                 bras.append(b.id)
@@ -135,7 +135,7 @@ class Build(db.Model, AutoSerialize):
         
         bras = []
         for b in self.bra:
-            if b.distance > 0:
+            if b.id != "all" and b.distance > 0:
                 bras.append(b.id+"."+b.distance)
             else:
                 bras.append(b.id)
@@ -197,7 +197,7 @@ class Build(db.Model, AutoSerialize):
                 bras = []
                 for b in self.bra:
                     name = getattr(b, name_lang)
-                    if b.distance > 0:
+                    if b.id != "all" and b.distance > 0:
                         name = name + " ("+b.distance+"km)"
                     bras.append(name)
                 title = title.replace("<bra>", " and ".join(bras))
@@ -235,7 +235,7 @@ class Build(db.Model, AutoSerialize):
         auto_serialized["bra"] = [b.serialize() for b in self.bra]
         
         for i,b in enumerate(auto_serialized["bra"]):
-            if self.bra[i].distance:
+            if b["id"] != "all" and self.bra[i].distance:
                 b["distance"] = self.bra[i].distance
             if self.bra[i].icon:
                 b["icon"] = self.bra[i].icon
