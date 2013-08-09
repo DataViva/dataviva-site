@@ -12,7 +12,7 @@
 
   <div id="fullscreen"></div>
     
-  <div class="darkbox title"><h2>{{ item.name() }}</h2></div>
+  <div class="darkbox title"><img src="" alt="{{ item.id }}" /><h2>{{ item.name() }}</h2></div>
   
   <br />
   
@@ -20,7 +20,7 @@
   
   <div class="lightbox data_table">
 	
-	  <iframe src="/apps/embed/{{ dt.build.url() }}"></iframe>
+	  <iframe src="/apps/embed/{{ dt.build.url() }}" width:"100%" height:"100%"></iframe>
   
 	  <h3>{{ dt.build.title() }}</h3>
 	  <table>
@@ -57,7 +57,10 @@
 
   <script>
   
-    
+  d3.select(".darkbox img").attr("src", function(){
+	  var type = window.location.pathname.split("/")[2];
+	  return visual.icon(this.alt, type)
+  })
   
   </script>
 

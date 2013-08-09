@@ -1,24 +1,23 @@
-div.guide_app {
-  height: 600px;
-  margin: 12px auto 24px;
-  width: 800px;
+body.profiles #container {
+	padding: 58px 0px 49px 0px;
+	width: 100%;
 }
 
-iframe.guide_app {
-  height: 600px;
-  width: 800px;
+div.darkbox img{
+	width: 35px;
+}
+div.darkbox h2{
+	color: #fff !important;
+	display: inline;
+	margin: 0 0 0 10px;
 }
 
-div.darkbox.title{
-
+iframe {
+	height: 100%;
+	width: 100%;
 }
 
-iframe.guide_app {
-  margin: 20px 0px;
-  margin-left: 310px;
-}
-
-div.data_table{
+div.data_table {
 	display: inline-block;
 	margin: 0 0 30px 0;
 	max-height: 700px;
@@ -26,8 +25,23 @@ div.data_table{
 	overflow-y: scroll;
 	width: 40%;
 }
+div.data_table:nth-child(even) {
+	margin-right: 20px;
+}
+div.data_table:nth-child(odd) {
+	margin-left: 20px;
+}
 div.data_table table{ 
 	overflow: hidden;
+}
+div.data_table table thead{ 
+	display: table-header-group;
+}
+div.data_table table thead th{ 
+	display: table-cell;
+}
+div.data_table table td { 
+	padding: 4px;
 }
 div.data_table table td a{ 
 	text-decoration: underline;
