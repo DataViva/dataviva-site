@@ -184,7 +184,7 @@
     /* App Functions and Variables */
     /*******************************/
     
-    var app = {}, last_app = null
+    var app = {}, last_app = null, last_depth = visual.format.text("bra_8_plural")
     app.build = null
     app.url = "{{ current_build.url() }}"
     app.data = {}
@@ -371,8 +371,15 @@
       // Hide popover
       visual.popover.hide()
       
-      if (new_url) app.url = new_url
-      loading.text("Building App").show(app.create)
+      if (new_url) {
+        if (new_url != app.url) {
+          app.url = new_url
+          loading.text(visual.format.text("Building App")).show(app.create)
+        }
+      }
+      else {
+        loading.text(visual.format.text("Building App")).show(app.create)
+      }
       
     }
     
@@ -381,6 +388,7 @@
       d3.select("#ui_bottom").selectAll("*").remove();
       d3.select("#app_controls").selectAll("*").remove();
       vizwhiz.tooltip.remove();
+      last_depth = visual.format.text("bra_8_plural")
       
       d3.json("/apps/embed/"+app.url)
         .header("X-Requested-With", "XMLHttpRequest")
@@ -407,7 +415,6 @@
                   index = filter.split("_")[1]
               if (app.build[type] && app.build[type][index]) {
                 d3.select("#"+filter).style("display","inline-block")
-                console.log(app.build[type][index])
                 builder.filter(app.build[type][index],filter,true)
               }
               else {
@@ -726,6 +733,8 @@
       builder.url()
       
       var color_var = app.vars.color_var ? app.vars.color_var : "color"
+      
+      app.title_update()
         
       /************************/
       /* Gloabl App Variables */
@@ -900,6 +909,8 @@
           builder.key()
           app.resize()
         }
+        
+        if (type == "depth") app.title_update()
 
         if (type == "axes") {
           d3.select("#app").call(app.viz.xaxis_var("cp_bra_1_"+value).yaxis_var("cp_bra_0_"+value))
@@ -914,7 +925,7 @@
           d3.select("#app").call(app.viz[type](value).total_bar(app.total()))
         }
         else {
-          d3.select("#app").call(app.viz[type](value))
+          d3.select("#app").call(app.viz[type](value).title(app.build.title))
         }
       }
     }
@@ -1203,6 +1214,14 @@ val)+": ", "suffix": ""};
       
     }
     
+    app.title_update = function() {
+      if (app.vars.depth && app.build.output == "bra") {
+        new_depth = visual.format.text(app.vars.depth+"_plural")
+        app.build.title = app.build.title.replace(last_depth,new_depth)
+        last_depth = new_depth
+      }
+    }
+    
     /*********************/
     /* Builder Functions */
     /*********************/
@@ -1272,7 +1291,7 @@ val)+": ", "suffix": ""};
       else {
         var url_index = 4
       }
-      console.log(obj.distance)
+      
       app.build[type][index] = obj
       var url = app.url.split("/")
       var ids = url[url_index].split("+")
