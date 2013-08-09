@@ -19,10 +19,10 @@
   {% for dt in data_tables %}
   
   <div class="lightbox data_table">
-	
-	  <iframe src="/apps/embed/{{ dt.build.url() }}" width:"100%" height:"100%"></iframe>
   
 	  <h3>{{ dt.build.title() }}</h3>
+	
+	  <iframe src="/apps/embed/{{ dt.build.url() }}"></iframe>
 	  <table>
 		  <thead>
 			  <tr>
@@ -61,6 +61,15 @@
 	  var type = window.location.pathname.split("/")[2];
 	  return visual.icon(this.alt, type)
   })
+  
+  d3.selectAll(".data_table")
+    .style("background-color","white")
+    .style("height",(window.innerHeight-d3.select(".title").node().offsetHeight-169)+"px")
+    
+  d3.selectAll("th")
+    .text(function(d){
+      return visual.format.text(this.innerHTML)
+    })
   
   </script>
 

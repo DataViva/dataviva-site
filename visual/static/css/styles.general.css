@@ -100,6 +100,15 @@ h2 {
   opacity: 1;
 }
 
+h3 {
+  display: block;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 16px;
+  margin: 6px;
+  opacity: 1;
+}
+
 /******************/
 /* Loader Styling */
 /******************/
