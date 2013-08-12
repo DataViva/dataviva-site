@@ -643,8 +643,11 @@
           
           // Custom Titles
           if (ui.type == "value_var") {
-            if (app.build.app.type == "geo_map") var title = "color"
+            if (app.build.app.type == "geo_map") var title = "color_var"
             else var title = "sizing"
+          }
+          else if (ui.type == "spotlight" && app.build.app.type == "scatter") {
+            var title = "spotlight_scatter"
           }
           else var title = ui.type
         
@@ -1370,7 +1373,7 @@ val)+": ", "suffix": ""};
       var div = d3.select("#app_controls").append("div")
         .attr("class","ui_group")
         .attr("id",obj.title)
-    
+        
       div.append("legend")
         .attr("id",obj.title)
         .html(visual.format.text(obj.title))
