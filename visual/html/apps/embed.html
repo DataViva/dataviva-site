@@ -681,6 +681,14 @@
           }
         
           if (ui.values.length > 1 && app.vars.builder != "false") {
+            // if (ui.values.length == 2 && ui.values.indexOf("true") >= 0 && ui.values.indexOf("false") >= 0) {
+            //   builder.checkbox({
+            //     "data": ui.values,
+            //     "title": title,
+            //     "initial": app.vars[ui.type],
+            //     "type": ui.type
+            //   })
+            // }
             if (ui.values.length <= 4) {
               builder.radios({
                 "data": ui.values,
@@ -840,6 +848,7 @@
           .yaxis_scale(app.vars.scale)
           .spotlight(false)
           .mirror_axis(true)
+          .active_var("active")
     
       }
       
@@ -1426,6 +1435,28 @@ v))
         }
         
       })
+
+      leon("#"+obj.title)
+      
+    }
+    
+    builder.checkbox = function(obj) {
+      
+      var div = d3.select("#app_controls").append("div")
+        .attr("class","ui_group")
+    
+      div.append("label")
+        .attr("for",obj.title)
+        .html(visual.format.text(obj.title))
+    
+      var checkbox = div.append("input")
+        .attr("type","checkbox")
+        .attr("id",obj.title)
+        .attr("onclick","app.update('"+obj.type+"',this.checked)")
+        
+      if (obj.initial == "true") {
+        checkbox.node().checked = true
+      }
 
       leon("#"+obj.title)
       
