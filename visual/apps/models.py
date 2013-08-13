@@ -165,6 +165,35 @@ class Build(db.Model, AutoSerialize):
             filter1, filter2)
         return data_url
     
+    '''Returns the data table required for this build'''
+    def data_table(self):
+        from visual.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
+        from visual.secex.models import Ybp, Ybw, Ypw, Yb_secex, Yp, Yw
+        
+        # raise Exception(self.output)
+        if self.dataset == "rais":
+            # raise Exception(self.bra[0], self.filter1, self.filter2, self.output)
+            if self.bra[0].id == "all" and self.output != "bra":
+                return Yio
+            elif self.output == "isic" or (self.output == "bra" and self.filter2 == "all"):
+                return Ybi
+            elif self.output == "cbo" or (self.output == "bra" and self.filter1 == "all"):
+                return Ybo
+        elif self.dataset == "secex":
+            if self.bra[0].id == "all" and self.output != "bra":
+                return Ypw
+            elif self.output == "hs" or (self.output == "bra" and self.filter2 == "all"):
+                return Ybp
+            elif self.output == "wld" or (self.output == "bra" and self.filter1 == "all"):
+                return Ybw
+            
+            
+            
+            if self.filter1 == "all":
+                return Ybw
+            elif self.filter1 == "all":
+                return Ybp
+    
     '''Returns the english language title of this build.'''
     def title(self, **kwargs):
         lang = g.locale

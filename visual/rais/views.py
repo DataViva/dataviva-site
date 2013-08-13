@@ -81,7 +81,7 @@ def get_query(data_table, url_args, **kwargs):
         ret["year"] = parse_years(kwargs["year"])
         # filter query
         query = query.filter(data_table.year.in_(ret["year"]))
-    
+
     # handle location (if specified)
     if "bra_id" in kwargs:
         if "show." in kwargs["bra_id"]:

@@ -65,9 +65,6 @@ def index(category = None, id = None):
 
 @mod.route('/<category>/<id>/')
 def profiles(category = None, id = None):
-    # if category == "bra":
-    #     isic = get_query(Ybi, request.args, bra_id=id, isic_id="show.5", raw=True)
-    #     cbo = get_query(Ybo, request.args, bra_id=id, cbo_id="show.4", raw=True)
     
     data_tables = []
     rais_latest_year = db.session.query(Yio.year.distinct()) \
@@ -75,202 +72,281 @@ def profiles(category = None, id = None):
     secex_latest_year = db.session.query(Ypw.year.distinct()) \
                         .order_by(Ypw.year.desc()).all()[0][0]
     app = App.query.filter_by(type="tree_map").first_or_404()
-    if category == "isic" or category == "cbo":
-        '''RAIS'''
+    query_kwargs = {"raw":True}
 
-        if category == "isic":
-            item = Isic.query.get_or_404(id)
-            
-            '''locations that have this industry'''
-            table = rais_get_query(Ybi, request.args, isic_id=id, \
-                        bra_id="show.8", raw=True, year=rais_latest_year)
-            table_headers = ["year", "bra_id", "wage", "num_emp", "num_est"]
-            table_data = [[getattr(t, h) for h in table_headers] for t in table]
-            build = Build.query.filter_by(app=app, dataset="rais", 
-                        filter1="<isic>", filter2="all", output="bra") \
-                        .first_or_404()
-            build.set_filter1(id)
-            build.set_filter2("all")
-            build.set_bra("all")
-            data_tables.append({ "table_headers":table_headers, "build":build, \
-                                    "table_data":table_data})
-            
-            '''occupations that employ this industry'''
-            table = rais_get_query(Yio, request.args, isic_id=id, \
-                        cbo_id="show.4", raw=True, year=rais_latest_year)
-            table_headers = ["year", "cbo_id", "wage", "num_emp", "num_est"]
-            table_data = [[getattr(t, h) for h in table_headers] for t in table]
-            build = Build.query.filter_by(app=app, dataset="rais", 
-                        filter1="<isic>", filter2="all", output="cbo") \
-                        .first_or_404()
-            build.set_filter1(id)
-            build.set_filter2("show")
-            build.set_bra("all")
-            data_tables.append({ "table_headers":table_headers, "build":build, \
-                                    "table_data":table_data})
-
-        if category == "cbo":
-            item = Cbo.query.get_or_404(id)
-            
-            '''locations that employ this occupation'''
-            table = rais_get_query(Ybo, request.args, cbo_id=id, \
-                        bra_id="show.8", raw=True, year=rais_latest_year)
-            table_headers = ["year", "bra_id", "wage", "num_emp", "num_est"]
-            table_data = [[getattr(t, h) for h in table_headers] for t in table]
-            build = Build.query.filter_by(app=app, dataset="rais", 
-                        filter1="all", filter2="<cbo>", output="bra") \
-                        .first_or_404()
-            build.set_filter1("all")
-            build.set_filter2(id)
-            build.set_bra("all")
-            data_tables.append({ "table_headers":table_headers, "build":build, \
-                                    "table_data":table_data})
-
-            '''industries that employ this occupation'''            
-            table = rais_get_query(Yio, request.args, cbo_id=id, \
-                        isic_id="show.5", raw=True, year=rais_latest_year)
-            table_headers = ["year", "isic_id", "wage", "num_emp", "num_est"]
-            table_data = [[getattr(t, h) for h in table_headers] for t in table]
-            build = Build.query.filter_by(app=app, dataset="rais", 
-                        filter1="all", filter2="<cbo>", output="isic") \
-                        .first_or_404()
-            build.set_filter1("show")
-            build.set_filter2(id)
-            build.set_bra("all")
-            data_tables.append({ "table_headers":table_headers, "build":build, \
-                                    "table_data":table_data})
-            
-            
-    elif category == "hs" or category == "wld":
-        '''SECEX'''
-
-        if category == "hs":
-            item = Hs.query.get_or_404(id)
-            
-            '''locations that export this product'''
-            table = secex_get_query(Ybp, request.args, hs_id=id, \
-                        bra_id="show.8", raw=True, year=secex_latest_year)
-            table_headers = ["year", "bra_id", "val_usd"]
-            table_data = [[getattr(t, h) for h in table_headers] for t in table]
-            build = Build.query.filter_by(app=app, dataset="secex", 
-                        filter1="<hs>", filter2="all", output="bra") \
-                        .first_or_404()
-            build.set_filter1(id)
-            build.set_filter2("all")
-            build.set_bra("all")
-            data_tables.append({ "table_headers":table_headers, "build":build, \
-                                    "table_data":table_data})
-            
-            '''trade partners that import this product'''
-            table = secex_get_query(Ypw, request.args, hs_id=id, \
-                        wld_id="show.5", raw=True, year=secex_latest_year)
-            table_headers = ["year", "wld_id", "val_usd"]
-            table_data = [[getattr(t, h) for h in table_headers] for t in table]
-            build = Build.query.filter_by(app=app, dataset="secex", 
-                        filter1="<hs>", filter2="all", output="wld") \
-                        .first_or_404()
-            build.set_filter1(id)
-            build.set_filter2("show")
-            build.set_bra("all")
-            data_tables.append({ "table_headers":table_headers, "build":build, \
-                                    "table_data":table_data})
-            
-        if category == "wld":
-            item = Wld.query.get_or_404(id)
-            
-            '''locations that export this product'''
-            table = secex_get_query(Ybw, request.args, wld_id=id, \
-                        bra_id="show.8", raw=True, year=secex_latest_year)
-            table_headers = ["year", "bra_id", "val_usd"]
-            table_data = [[getattr(t, h) for h in table_headers] for t in table]
-            build = Build.query.filter_by(app=app, dataset="secex", 
-                        filter1="all", filter2="<wld>", output="bra") \
-                        .first_or_404()
-            build.set_filter1("all")
-            build.set_filter2(id)
-            build.set_bra("all")
-            data_tables.append({ "table_headers":table_headers, "build":build, \
-                                    "table_data":table_data})
-            
-            '''trade partners that import this product'''
-            table = secex_get_query(Ypw, request.args, wld_id=id, \
-                        hs_id="show.6", raw=True, year=secex_latest_year)
-            table_headers = ["year", "hs_id", "val_usd"]
-            table_data = [[getattr(t, h) for h in table_headers] for t in table]
-            build = Build.query.filter_by(app=app, dataset="secex", 
-                        filter1="all", filter2="<wld>", output="hs") \
-                        .first_or_404()
-            build.set_filter1("show")
-            build.set_filter2(id)
-            build.set_bra("all")
-            data_tables.append({ "table_headers":table_headers, "build":build, \
-                                    "table_data":table_data})
-            
-    else:
-        item = Bra.query.get_or_404(id)
-        
-        '''industries found in this location'''
-        table = rais_get_query(Ybi, request.args, bra_id=id, \
-                    isic_id="show.5", raw=True, year=rais_latest_year)
-        table_headers = ["year", "isic_id", "wage", "num_emp", "num_est"]
-        table_data = [[getattr(t, h) for h in table_headers] for t in table]
-        build = Build.query.filter_by(app=app, dataset="rais", 
-                    filter1="all", filter2="all", output="isic") \
-                    .first_or_404()
-        build.set_filter1("show")
-        build.set_filter2("all")
-        build.set_bra(id)
-        data_tables.append({ "table_headers":table_headers, "build":build, \
-                                "table_data":table_data})
-        
-        '''occupations found in this location'''
-        table = rais_get_query(Ybo, request.args, bra_id=id, \
-                    cbo_id="show.4", raw=True, year=rais_latest_year)
-        table_headers = ["year", "cbo_id", "wage", "num_emp", "num_est"]
-        table_data = [[getattr(t, h) for h in table_headers] for t in table]
-        build = Build.query.filter_by(app=app, dataset="rais", 
-                    filter1="all", filter2="all", output="cbo") \
-                    .first_or_404()
-        build.set_filter1("all")
-        build.set_filter2("show")
-        build.set_bra(id)
-        data_tables.append({ "table_headers":table_headers, "build":build, \
-                                "table_data":table_data})
-        
-        '''products exported by this location'''
-        table = secex_get_query(Ybp, request.args, bra_id=id, \
-                    hs_id="show.6", raw=True, year=secex_latest_year)
-        table_headers = ["year", "hs_id", "val_usd"]
-        table_data = [[getattr(t, h) for h in table_headers] for t in table]
-        build = Build.query.filter_by(app=app, dataset="secex", 
-                    filter1="all", filter2="all", output="hs") \
-                    .first_or_404()
-        build.set_filter1("show")
-        build.set_filter2("all")
-        build.set_bra(id)
-        data_tables.append({ "table_headers":table_headers, "build":build, \
-                                "table_data":table_data})
-
-        '''world trade partners of this location'''
-        table = secex_get_query(Ybw, request.args, bra_id=id, \
-                    wld_id="show.5", raw=True, year=secex_latest_year)
-        table_headers = ["year", "wld_id", "val_usd"]
-        table_data = [[getattr(t, h) for h in table_headers] for t in table]
-        build = Build.query.filter_by(app=app, dataset="secex", 
-                    filter1="all", filter2="all", output="wld") \
-                    .first_or_404()
-        build.set_filter1("all")
-        build.set_filter2("show")
-        build.set_bra(id)
-        data_tables.append({ "table_headers":table_headers, "build":build, \
-                                "table_data":table_data})
-
-        
-        
+    if category == "bra":
+        category_type = "<bra>"
+        Attr = Bra
+    elif category == "isic":
+        category_type = "<isic>"
+        Attr = Isic
+        query_kwargs["year"] = rais_latest_year
+    elif category == "cbo":
+        category_type = "<cbo>"
+        Attr = Cbo
+        query_kwargs["year"] = rais_latest_year
+    elif category == "hs":
+        category_type = "<hs>"
+        Attr = Hs
+        query_kwargs["year"] = secex_latest_year
+    elif category == "wld":
+        category_type = "<wld>"
+        Attr = Wld
+        query_kwargs["year"] = secex_latest_year
     
+    item = Attr.query.get_or_404(id)
+    
+    plan = Plan.query.filter_by(category=category, category_type=category_type, 
+                                    option=None).first()
+    if category == "cbo":
+        plan.set_attr(id, "cbo")
+    elif category == "hs":
+        plan.set_attr(id, "hs")
+    elif category == "isic":
+        plan.set_attr(id, "isic")
+    elif category == "wld":
+        plan.set_attr(id, "wld")
+    
+    if category == "bra":
+        plan.set_attr(id, "bra")
+    else:
+        plan.set_attr("all", "bra")    
+    
+    
+    for i, pb in enumerate(plan.builds.all()):
+        this_query_kwargs = query_kwargs.copy()
+        data_table = pb.build.first().data_table()
+        data_url = pb.build.first().data_url().split("/")
+        bra = data_url[2]
+        filter1 = data_url[3]
+        filter2 = data_url[4]
+        data_set = data_url[0]
+        this_query_kwargs[category+"_id"] = id
+        if "show" in bra:
+            this_query_kwargs["bra_id"] = bra
+        if "show" in filter1:
+            if data_set == "rais":
+                this_query_kwargs["isic_id"] = filter1
+            elif data_set == "secex":
+                this_query_kwargs["hs_id"] = filter1
+        if "show" in filter2:
+            if data_set == "rais":
+                this_query_kwargs["cbo_id"] = filter2
+            elif data_set == "secex":
+                this_query_kwargs["wld_id"] = filter2
+        if data_set == "rais":
+            data = rais_get_query(data_table, request.args, **this_query_kwargs)
+        else:
+            data = secex_get_query(data_table, request.args, **this_query_kwargs)
+        raise Exception(data)        
+        
     return render_template("profiles/profile.html", 
                 item=item, 
                 data_tables=data_tables)
+    
+    # 
+    # data_tables = []
+    # rais_latest_year = db.session.query(Yio.year.distinct()) \
+    #                     .order_by(Yio.year.desc()).all()[0][0]
+    # secex_latest_year = db.session.query(Ypw.year.distinct()) \
+    #                     .order_by(Ypw.year.desc()).all()[0][0]
+    # app = App.query.filter_by(type="tree_map").first_or_404()
+    # if category == "isic" or category == "cbo":
+    #     '''RAIS'''
+    # 
+    #     if category == "isic":
+    #         item = Isic.query.get_or_404(id)
+    #         
+    #         '''locations that have this industry'''
+    #         table = rais_get_query(Ybi, request.args, isic_id=id, \
+    #                     bra_id="show.8", raw=True, year=rais_latest_year)
+    #         table_headers = ["year", "bra_id", "wage", "num_emp", "num_est"]
+    #         table_data = [[getattr(t, h) for h in table_headers] for t in table]
+    #         build = Build.query.filter_by(app=app, dataset="rais", 
+    #                     filter1="<isic>", filter2="all", output="bra") \
+    #                     .first_or_404()
+    #         build.set_filter1(id)
+    #         build.set_filter2("all")
+    #         build.set_bra("all")
+    #         data_tables.append({ "table_headers":table_headers, "build":build, \
+    #                                 "table_data":table_data})
+    #         
+    #         '''occupations that employ this industry'''
+    #         table = rais_get_query(Yio, request.args, isic_id=id, \
+    #                     cbo_id="show.4", raw=True, year=rais_latest_year)
+    #         table_headers = ["year", "cbo_id", "wage", "num_emp", "num_est"]
+    #         table_data = [[getattr(t, h) for h in table_headers] for t in table]
+    #         build = Build.query.filter_by(app=app, dataset="rais", 
+    #                     filter1="<isic>", filter2="all", output="cbo") \
+    #                     .first_or_404()
+    #         build.set_filter1(id)
+    #         build.set_filter2("show")
+    #         build.set_bra("all")
+    #         data_tables.append({ "table_headers":table_headers, "build":build, \
+    #                                 "table_data":table_data})
+    # 
+    #     if category == "cbo":
+    #         item = Cbo.query.get_or_404(id)
+    #         
+    #         '''locations that employ this occupation'''
+    #         table = rais_get_query(Ybo, request.args, cbo_id=id, \
+    #                     bra_id="show.8", raw=True, year=rais_latest_year)
+    #         table_headers = ["year", "bra_id", "wage", "num_emp", "num_est"]
+    #         table_data = [[getattr(t, h) for h in table_headers] for t in table]
+    #         build = Build.query.filter_by(app=app, dataset="rais", 
+    #                     filter1="all", filter2="<cbo>", output="bra") \
+    #                     .first_or_404()
+    #         build.set_filter1("all")
+    #         build.set_filter2(id)
+    #         build.set_bra("all")
+    #         data_tables.append({ "table_headers":table_headers, "build":build, \
+    #                                 "table_data":table_data})
+    # 
+    #         '''industries that employ this occupation'''            
+    #         table = rais_get_query(Yio, request.args, cbo_id=id, \
+    #                     isic_id="show.5", raw=True, year=rais_latest_year)
+    #         table_headers = ["year", "isic_id", "wage", "num_emp", "num_est"]
+    #         table_data = [[getattr(t, h) for h in table_headers] for t in table]
+    #         build = Build.query.filter_by(app=app, dataset="rais", 
+    #                     filter1="all", filter2="<cbo>", output="isic") \
+    #                     .first_or_404()
+    #         build.set_filter1("show")
+    #         build.set_filter2(id)
+    #         build.set_bra("all")
+    #         data_tables.append({ "table_headers":table_headers, "build":build, \
+    #                                 "table_data":table_data})
+    #         
+    #         
+    # elif category == "hs" or category == "wld":
+    #     '''SECEX'''
+    # 
+    #     if category == "hs":
+    #         item = Hs.query.get_or_404(id)
+    #         
+    #         '''locations that export this product'''
+    #         table = secex_get_query(Ybp, request.args, hs_id=id, \
+    #                     bra_id="show.8", raw=True, year=secex_latest_year)
+    #         table_headers = ["year", "bra_id", "val_usd"]
+    #         table_data = [[getattr(t, h) for h in table_headers] for t in table]
+    #         build = Build.query.filter_by(app=app, dataset="secex", 
+    #                     filter1="<hs>", filter2="all", output="bra") \
+    #                     .first_or_404()
+    #         build.set_filter1(id)
+    #         build.set_filter2("all")
+    #         build.set_bra("all")
+    #         data_tables.append({ "table_headers":table_headers, "build":build, \
+    #                                 "table_data":table_data})
+    #         
+    #         '''trade partners that import this product'''
+    #         table = secex_get_query(Ypw, request.args, hs_id=id, \
+    #                     wld_id="show.5", raw=True, year=secex_latest_year)
+    #         table_headers = ["year", "wld_id", "val_usd"]
+    #         table_data = [[getattr(t, h) for h in table_headers] for t in table]
+    #         build = Build.query.filter_by(app=app, dataset="secex", 
+    #                     filter1="<hs>", filter2="all", output="wld") \
+    #                     .first_or_404()
+    #         build.set_filter1(id)
+    #         build.set_filter2("show")
+    #         build.set_bra("all")
+    #         data_tables.append({ "table_headers":table_headers, "build":build, \
+    #                                 "table_data":table_data})
+    #         
+    #     if category == "wld":
+    #         item = Wld.query.get_or_404(id)
+    #         
+    #         '''locations that export this product'''
+    #         table = secex_get_query(Ybw, request.args, wld_id=id, \
+    #                     bra_id="show.8", raw=True, year=secex_latest_year)
+    #         table_headers = ["year", "bra_id", "val_usd"]
+    #         table_data = [[getattr(t, h) for h in table_headers] for t in table]
+    #         build = Build.query.filter_by(app=app, dataset="secex", 
+    #                     filter1="all", filter2="<wld>", output="bra") \
+    #                     .first_or_404()
+    #         build.set_filter1("all")
+    #         build.set_filter2(id)
+    #         build.set_bra("all")
+    #         data_tables.append({ "table_headers":table_headers, "build":build, \
+    #                                 "table_data":table_data})
+    #         
+    #         '''trade partners that import this product'''
+    #         table = secex_get_query(Ypw, request.args, wld_id=id, \
+    #                     hs_id="show.6", raw=True, year=secex_latest_year)
+    #         table_headers = ["year", "hs_id", "val_usd"]
+    #         table_data = [[getattr(t, h) for h in table_headers] for t in table]
+    #         build = Build.query.filter_by(app=app, dataset="secex", 
+    #                     filter1="all", filter2="<wld>", output="hs") \
+    #                     .first_or_404()
+    #         build.set_filter1("show")
+    #         build.set_filter2(id)
+    #         build.set_bra("all")
+    #         data_tables.append({ "table_headers":table_headers, "build":build, \
+    #                                 "table_data":table_data})
+    #         
+    # else:
+    #     item = Bra.query.get_or_404(id)
+    #     
+    #     '''industries found in this location'''
+    #     table = rais_get_query(Ybi, request.args, bra_id=id, \
+    #                 isic_id="show.5", raw=True, year=rais_latest_year)
+    #     table_headers = ["year", "isic_id", "wage", "num_emp", "num_est"]
+    #     table_data = [[getattr(t, h) for h in table_headers] for t in table]
+    #     build = Build.query.filter_by(app=app, dataset="rais", 
+    #                 filter1="all", filter2="all", output="isic") \
+    #                 .first_or_404()
+    #     build.set_filter1("show")
+    #     build.set_filter2("all")
+    #     build.set_bra(id)
+    #     data_tables.append({ "table_headers":table_headers, "build":build, \
+    #                             "table_data":table_data})
+    #     
+    #     '''occupations found in this location'''
+    #     table = rais_get_query(Ybo, request.args, bra_id=id, \
+    #                 cbo_id="show.4", raw=True, year=rais_latest_year)
+    #     table_headers = ["year", "cbo_id", "wage", "num_emp", "num_est"]
+    #     table_data = [[getattr(t, h) for h in table_headers] for t in table]
+    #     build = Build.query.filter_by(app=app, dataset="rais", 
+    #                 filter1="all", filter2="all", output="cbo") \
+    #                 .first_or_404()
+    #     build.set_filter1("all")
+    #     build.set_filter2("show")
+    #     build.set_bra(id)
+    #     data_tables.append({ "table_headers":table_headers, "build":build, \
+    #                             "table_data":table_data})
+    #     
+    #     '''products exported by this location'''
+    #     table = secex_get_query(Ybp, request.args, bra_id=id, \
+    #                 hs_id="show.6", raw=True, year=secex_latest_year)
+    #     table_headers = ["year", "hs_id", "val_usd"]
+    #     table_data = [[getattr(t, h) for h in table_headers] for t in table]
+    #     build = Build.query.filter_by(app=app, dataset="secex", 
+    #                 filter1="all", filter2="all", output="hs") \
+    #                 .first_or_404()
+    #     build.set_filter1("show")
+    #     build.set_filter2("all")
+    #     build.set_bra(id)
+    #     data_tables.append({ "table_headers":table_headers, "build":build, \
+    #                             "table_data":table_data})
+    # 
+    #     '''world trade partners of this location'''
+    #     table = secex_get_query(Ybw, request.args, bra_id=id, \
+    #                 wld_id="show.5", raw=True, year=secex_latest_year)
+    #     table_headers = ["year", "wld_id", "val_usd"]
+    #     table_data = [[getattr(t, h) for h in table_headers] for t in table]
+    #     build = Build.query.filter_by(app=app, dataset="secex", 
+    #                 filter1="all", filter2="all", output="wld") \
+    #                 .first_or_404()
+    #     build.set_filter1("all")
+    #     build.set_filter2("show")
+    #     build.set_bra(id)
+    #     data_tables.append({ "table_headers":table_headers, "build":build, \
+    #                             "table_data":table_data})
+    # 
+    #     
+    #     
+    # 
+    # return render_template("profiles/profile.html", 
+    #             item=item, 
+    #             data_tables=data_tables)
 
 # @mod.route('/<category>/<id>/')
 def profiles_old(category = None, id = None):
