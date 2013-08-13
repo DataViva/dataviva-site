@@ -70,7 +70,7 @@ visual.format.text = function(text,name) {
       "wld_rca": {"en": "International", "pt": "Internacional"},
 
       // Spotlight Toggle
-      "spotlight": {"en": "Spotlight RCA", "pt": "Real\u00e7ar RCA"},
+      "spotlight": {"en": "Highlight RCA", "pt": "Real\u00e7ar RCA"},
       "spotlight_scatter": {"en": "Hide RCA", "pt": "Esconder RCA"},
       "true": {"en": "On", "pt": "Em"},
       "false": {"en": "Off", "pt": "Fora"},
