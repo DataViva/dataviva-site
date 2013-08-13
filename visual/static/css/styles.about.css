@@ -11,7 +11,7 @@ body.about #inner_container {
 }
 
 #about_content {
-  padding: 25px;
+  padding: 25px 25px 25px 200px;
 }
 
 a.about {

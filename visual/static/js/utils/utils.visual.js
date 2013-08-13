@@ -222,6 +222,8 @@ visual.format.text = function(text,name) {
       // Ask Sabrina
       "Asked by": {"en": "Asked by", "pt": "Perguntado por"},
       "points": {"en": "Points", "pt": "Pontos"},
+      "votes": {"en": "Top Voted", "pt": "Mais Votados"},
+      "newest": {"en": "Newest", "pt": "O Mais Novo"},
       
       // Selector
       "search": {"en": "Search", "pt": "Busca"},

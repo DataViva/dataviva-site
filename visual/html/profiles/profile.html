@@ -11,65 +11,169 @@
 {% block body %}
 
   <div id="fullscreen"></div>
+  
+  <div id="guide_controls" class="lightbox guide_controls">
+    <div id="guide_title">{{ item.name() }}</div>
     
-  <div class="darkbox title"><img src="" alt="{{ item.id }}" /><h2>{{ item.name() }}</h2></div>
-  
-  <br />
-  
-  {% for dt in data_tables %}
-  
-  <div class="lightbox data_table">
-  
-	  <h3>{{ dt.build.title() }}</h3>
-	
-	  <iframe src="/apps/embed/{{ dt.build.url() }}"></iframe>
-	  <table>
-		  <thead>
-			  <tr>
-				  {% for h in dt.table_headers %}
-			  	  <th>{{ h }}</th>
-				  {% endfor %}
-			  </tr>
-		  </thead>
-		  <tbody>
-			  {% for row in dt.table_data %}
-			  <tr>
-				  {% for v in row %}
-				  {% if loop.index0 == 1 %}
-				  <td><a href="/profiles/{{dt.build.output}}/{{v}}/">{{ v }}</a></td>
-				  {% else %}
-				  <td>{{ v }}</td>
-				  {% endif %}
-				  {% endfor %}
-			  </tr>
-			  {% endfor %}
-		  </tbody>
-	  </table>
-  
+    {% for dt in data_tables %}
+      <a class="app_links decision short icon {{ dt.build.type }}" id="app{{ dt.build.position }}" onclick="slide(this.id)">{{ dt.build.title }}</a>
+    {% endfor %}
   </div>
-  
+    
+  {% for dt in data_tables %}
+    <div class="lightbox guide_app" id="iframe{{ dt.build.position }}">
+      <iframe alt="{{ dt.build.url }}"></iframe>
+      <table>
+  		  <thead>
+  			  <tr>
+  				  {% for h in dt.table_headers %}
+  			  	  <th>{{ h }}</th>
+  				  {% endfor %}
+  			  </tr>
+  		  </thead>
+  		  <tbody>
+  			  {% for row in dt.table_data %}
+  			  <tr>
+  				  {% for v in row %}
+  				  {% if loop.index0 == 1 %}
+  				  <td><a href="/profiles/{{dt.build.output}}/{{v}}/">{{ v }}</a></td>
+  				  {% else %}
+  				  <td>{{ v }}</td>
+  				  {% endif %}
+  				  {% endfor %}
+  			  </tr>
+  			  {% endfor %}
+  		  </tbody>
+  	  </table>
+    </div>
+    
   {% endfor %}
-
 
 {% endblock %}
 
 {% block js %}
 
   <script>
-  
-  d3.select(".darkbox img").attr("src", function(){
-	  var type = window.location.pathname.split("/")[2];
-	  return visual.icon(this.alt, type)
-  })
-  
-  d3.selectAll(".data_table")
-    .style("background-color","white")
-    .style("height",(window.innerHeight-d3.select(".title").node().offsetHeight-169)+"px")
     
-  d3.selectAll("th")
-    .text(function(d){
-      return visual.format.text(this.innerHTML)
-    })
+    d3.selectAll("th")
+      .text(function(d){
+        return visual.format.text(this.innerHTML)
+      })
+      
+    var width = window.innerWidth-330,
+        height = window.innerHeight-149,
+        builds = {},
+        sliding = false,
+        selected = null,
+        scrollinterval = null
+
+    d3.selectAll(".guide_app")
+      .style("width",width+"px")
+      .style("height",height+"px")
+      .each(function(){
+        var p = this.id.substring(6),
+            t = this.offsetTop-78
+        builds[p] = {"loaded": false, "top": t}
+        if (p == 1) {
+          load(p)
+          select(p)
+        }
+      })
+
+    function slide(id) {
+      sliding = true
+      var id = id.substring(3)
+      scroll(id)
+    }
+
+    function load(id) {
+      if (!builds[id].loaded) {
+        d3.select("#iframe"+id)
+          .attr("src",function(){
+            return this.getAttribute("alt")
+          })
+        builds[id].loaded = true
+      }
+    }
+
+    function select(id) {
+      clearInterval(scrollinterval)
+      selected = id
+      d3.selectAll(".app_links")
+        .attr("class",function(){
+          if (this.id.substring(3) == id) return this.className.replace("help","decision")
+          else return this.className.replace("decision","help")
+        })
+    }
+
+    function scroll(id) {
+
+      select(id)
+
+      var position = builds[id].top,
+          start = window.scrollY,
+          difference = position - start,
+          ticks = 50
+    
+      var i = 0
+      function scrollto(){
+        var val = Math.easeInOutCubic(i,start,difference,ticks)
+        window.scrollTo(0,val)
+        i++
+        if (i == ticks) {
+          window.scrollTo(0,position)
+          sliding = false
+          load(id)
+          clearInterval(scrollinterval)
+        }
+      }
+    
+      scrollinterval = setInterval(scrollto,10)
+
+    }
+
+    Math.easeInOutCubic = function (t, b, c, d) {
+    	t /= d/2;
+    	if (t < 1) return c/2*t*t*t + b;
+    	t -= 2;
+    	return c/2*(t*t*t + 2) + b;
+    }
+
+    if (Object.keys(builds).length > 1) {
+      document.onscroll = function() {
+        if (!sliding) {
+          var page = document.body.scrollTop
+          for (b in builds) {
+            if(page < ((builds[2].top*(b))-20) && page > ((builds[2].top*(b-2))+20)) {
+              if (page+(builds[2].top/2) < builds[b].top+builds[2].top
+                  && page+(builds[2].top/2) > builds[b].top && selected != b) {
+                    select(b)
+                  }
+              if (!builds[b].loaded) load(b)
+            }
+          }
+        }
+      }
+
+      document.onkeydown = function(e) {
+        var trans = null
+        if (e.keyCode == 34 || e.keyCode == 39 || e.keyCode == 40) { 
+          if (selected < Object.keys(builds).length) trans = parseInt(selected)+1
+          else trans = selected
+        }
+        else if (e.keyCode == 33 || e.keyCode == 37 || e.keyCode == 38) { 
+          if (selected > 1) trans = parseInt(selected)-1
+          else trans = selected
+        }
+        else if (e.keyCode == 36) { 
+          trans = 1
+        }
+        else if (e.keyCode == 35) { 
+          trans = Object.keys(builds).length
+        }
+        if (trans) slide("app"+trans)
+      };
+    }
   
   </script>
 

@@ -1,7 +1,6 @@
 .grid1, .grid4col1, .grid4col2, .grid4col3, 
 .grid5col1, .grid5col2, .grid5col3, .grid5col4 {
   display: inline-block;
-  float: left;
   margin: 0px 10px 0px 0px;
   position: relative;
   text-align: left;
@@ -27,14 +26,6 @@
   width: 715px;
 }
 
-.grid4offsethalf {
-  margin-left: 127.5px;
-}
-
-.grid4offset1 {
-  margin-left: 235px;
-}
-
 /*****************/
 /* 4 Column Grid */
 /*****************/
@@ -53,20 +44,4 @@
 
 .grid5col4 {
   width: 764px;
-}
-
-.grid5offsethalf {
-  margin-left: 103px;
-}
-
-.grid5offset1 {
-  margin-left: 206px;
-}
-
-.grid5offset1half {
-  margin-left: 309px;
-}
-
-.grid5offset2 {
-  margin-left: 402px;
 }

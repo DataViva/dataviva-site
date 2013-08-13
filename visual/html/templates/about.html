@@ -3,7 +3,12 @@
 
 {% block body %}
 
-<div id="about_nav" class="grid5col1 grid5offsethalf">
+<div id="about_content" class="grid5col3">
+  {% block about_content %}
+  {% endblock %}
+</div>
+
+<div id="about_nav" class="grid5col1">
     
     <a class="decision short icon general{% if page == 'apps' %} active{% endif %}" href="{{ url_for('about.about') }}">
       {% trans %}General{% endtrans %}
@@ -53,11 +58,6 @@
     
 
     
-</div>
-
-<div id="about_content" class="grid5col3 grid5offset1half">
-  {% block about_content %}
-  {% endblock %}
 </div>
 
 {% endblock %}

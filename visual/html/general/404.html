@@ -4,14 +4,12 @@
 
 {% block body %}
 
-  <div class="grid5col1 grid5offset1">
+  <div class="grid5col1">
     <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
   </div>
 
   <div id="question_404" class="grid5col2">
-    <div class="title">
-        {% trans %}Oh no! The page you've requested does not exist.{% endtrans %}
-    </div>
+    <h2>{% trans %}Oh no! The page you've requested does not exist.{% endtrans %}</h2>
   </div>
 
 {% endblock %}
