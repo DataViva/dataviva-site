@@ -3,7 +3,74 @@ from visual.utils import AutoSerialize
 
 from flask import g
 
-class Isic(db.Model, AutoSerialize):
+''' A Mixin class for retrieving quick stats about a particular attribute'''
+class Stats(object):
+    
+    def stats(self):
+        from visual.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
+        from visual.secex.models import Ybp, Ybw, Ypw, Yb_secex, Yp, Yw
+        
+        stats = {}
+        attr_type = self.__class__.__name__.lower()
+
+        if attr_type == "bra":
+            stats["isic"] = self.get_top_attr(Ybi, "wage", attr_type)
+            stats["cbo"] = self.get_top_attr(Ybo, "wage", attr_type)
+            stats["hs"] = self.get_top_attr(Ybp, "val_usd", attr_type)
+            stats["wld"] = self.get_top_attr(Ybw, "val_usd", attr_type)
+            stats["wage_total"] = self.get_val(Yb_rais, "wage", attr_type)
+            stats["wage_growth_pct"] = self.get_val(Yb_rais, "wage_growth_pct", attr_type)
+            stats["wage_growth_pct_5"] = self.get_val(Yb_rais, "wage_growth_pct_5", attr_type)
+            stats["val_usd_total"] = self.get_val(Yb_secex, "val_usd", attr_type)
+            stats["val_usd_growth_pct"] = self.get_val(Yb_secex, "val_usd_growth_pct", attr_type)
+            stats["val_usd_growth_pct_5"] = self.get_val(Yb_secex, "val_usd_growth_pct_5", attr_type)
+        if attr_type == "isic":
+            stats["bra"] = self.get_top_attr(Ybi, "wage", attr_type)
+            stats["cbo"] = self.get_top_attr(Yio, "wage", attr_type)
+            stats["wage_total"] = self.get_val(Yi, "wage", attr_type)
+            stats["wage_growth_pct"] = self.get_val(Yi, "wage_growth_pct", attr_type)
+            stats["wage_growth_pct_5"] = self.get_val(Yi, "wage_growth_pct_5", attr_type)
+        if attr_type == "cbo":
+            stats["bra"] = self.get_top_attr(Ybi, "wage", attr_type)
+            stats["isic"] = self.get_top_attr(Yio, "wage", attr_type)
+            stats["wage_total"] = self.get_val(Yo, "wage", attr_type)
+            stats["wage_growth_pct"] = self.get_val(Yo, "wage_growth_pct", attr_type)
+            stats["wage_growth_pct_5"] = self.get_val(Yo, "wage_growth_pct_5", attr_type)
+        if attr_type == "hs":
+            stats["bra"] = self.get_top_attr(Ybp, "val_usd", attr_type)
+            stats["wld"] = self.get_top_attr(Ypw, "val_usd", attr_type)
+            stats["val_usd_total"] = self.get_val(Yp, "val_usd", attr_type)
+            stats["val_usd_growth_pct"] = self.get_val(Yp, "val_usd_growth_pct", attr_type)
+            stats["val_usd_growth_pct_5"] = self.get_val(Yp, "val_usd_growth_pct_5", attr_type)
+        if attr_type == "wld":
+            stats["bra"] = self.get_top_attr(Ybw, "val_usd", attr_type)
+            stats["hs"] = self.get_top_attr(Ypw, "val_usd", attr_type)
+            stats["val_usd_total"] = self.get_val(Yw, "val_usd", attr_type)
+            stats["val_usd_growth_pct"] = self.get_val(Yw, "val_usd_growth_pct", attr_type)
+            stats["val_usd_growth_pct_5"] = self.get_val(Yw, "val_usd_growth_pct_5", attr_type)
+            
+        return stats
+    
+    @staticmethod
+    def get_latest_year(tbl):
+        latest_year = db.session.query(getattr(tbl, "year").distinct()) \
+                            .order_by(getattr(tbl, "year").desc()).first()[0]
+        return latest_year
+
+    def get_top_attr(self, tbl, val_var, attr_type):
+        latest_year = self.get_latest_year(tbl)
+        top = tbl.query.filter_by(year=latest_year) \
+                    .filter(getattr(tbl, attr_type+"_id") == self.id) \
+                    .order_by(getattr(tbl, val_var).desc()).first()
+        return top.serialize()
+
+    def get_val(self, tbl, val_var, attr_type):
+        latest_year = self.get_latest_year(tbl)
+        total = tbl.query.filter_by(year=latest_year) \
+                    .filter(getattr(tbl, attr_type+"_id") == self.id).first()
+        return getattr(total, val_var)
+
+class Isic(db.Model, AutoSerialize, Stats):
 
     __tablename__ = 'attrs_isic'
     __public__ = ('id', 'name_en', 'name_pt', 'desc_en', 'desc_pt', 'keywords_en', 'keywords_pt', 'color')
@@ -30,7 +97,7 @@ class Isic(db.Model, AutoSerialize):
         return '<Isic %r>' % (self.name_en)
 
 
-class Cbo(db.Model, AutoSerialize):
+class Cbo(db.Model, AutoSerialize, Stats):
 
     __tablename__ = 'attrs_cbo'
     __public__ = ('id', 'name_en', 'name_pt', 'desc_en', 'desc_pt', 'keywords_en', 'keywords_pt', 'color')
@@ -57,7 +124,7 @@ class Cbo(db.Model, AutoSerialize):
         return '<Cbo %r>' % (self.name_en)
 
 
-class Hs(db.Model, AutoSerialize):
+class Hs(db.Model, AutoSerialize, Stats):
 
     __tablename__ = 'attrs_hs'
     __public__ = ('id', 'name_en', 'name_pt', 'desc_en', 'desc_pt', 'keywords_en', 'keywords_pt', 'color')
@@ -91,7 +158,7 @@ class Hs(db.Model, AutoSerialize):
 ############################################################ 
 
 
-class Wld(db.Model, AutoSerialize):
+class Wld(db.Model, AutoSerialize, Stats):
 
     __tablename__ = 'attrs_wld'
     __public__ = ('id', 'id_3char', 'name_en', 'name_pt', 'color')
@@ -117,7 +184,7 @@ class Wld(db.Model, AutoSerialize):
     def __repr__(self):
         return '<Wld %r>' % (self.id_3char)
 
-class Bra(db.Model, AutoSerialize):
+class Bra(db.Model, AutoSerialize, Stats):
 
     __tablename__ = 'attrs_bra'
     __public__ = ('id', 'id_ibge', 'name_en', 'name_pt', 'color', 'icon', 'distance')
