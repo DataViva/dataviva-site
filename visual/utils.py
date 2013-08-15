@@ -118,6 +118,18 @@ class Momentjs:
 
     def fromNow(self):
         return self.render("fromNow()")
+        
+class formatter:
+    def __init__(self, text):
+        self.text = text
+        
+    def render(self, type, lang):
+        if isinstance(self.text,unicode) or isinstance(self.text,str):
+            format = "text"
+        else:
+            format = "number"
+            
+        return Markup("<script>\ndocument.write(visual.format.%s(\"%s\",\"%s\",\"%s\"))\n</script>" % (format, self.text, type, lang))
 
 ''' A helper funciton for stripping out html tags for showing snippets of user submitted content'''
 def strip_html(s):

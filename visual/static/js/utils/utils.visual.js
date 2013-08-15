@@ -23,7 +23,15 @@ visual.obj2csv = function(obj) {
 }
 
 visual.format = {};
-visual.format.text = function(text,name) {
+visual.format.text = function(text,name,l) {
+  
+  if (!l) var l = visual.languge
+  
+  if (text.indexOf("top_") == 0) {
+    var x = text.substring(4)
+    if (l == "pt") return format_name(x) + " " + format_name("top")
+    else return format_name("top") + " " + format_name(x)
+  }
   
   var exceptions = ["cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
   
@@ -34,7 +42,7 @@ visual.format.text = function(text,name) {
     arr.shift()
     var index = arr.shift()
     text = arr.join("_")
-    return app.build.bra[index]["name_"+visual.language] + " ("+format_name(text)+")"
+    return app.build.bra[index]["name_"+l] + " ("+format_name(text)+")"
   }
   else {
     return format_name(text)
@@ -183,6 +191,7 @@ visual.format.text = function(text,name) {
       "name_en": {"en": "Name (English)", "pt": "Nome"},
       "name_pt": {"en": "Name (Portuguese)", "pt": "Nome"},
       "population": {"en": "Population", "pt": "Popula\u00e7\u00e3o"},
+      "top": {"en": "Top", "pt": "Superior"},
       "wld_id": {"en": "WLD ID", "pt": "WLD ID"},
 
       // Filter Titles
@@ -235,7 +244,7 @@ visual.format.text = function(text,name) {
     
     if (!name) return name;
     else if(labels[name]){
-      if (labels[name][visual.language]) return labels[name][visual.language]
+      if (labels[name][l]) return labels[name][l]
       else return name.toTitleCase()
     } 
     else return name.toTitleCase()
@@ -244,7 +253,9 @@ visual.format.text = function(text,name) {
   
 }
 
-visual.format.number = function(value,name) {
+visual.format.number = function(value,name,l) {
+  
+  if (!l) var l = visual.language
   
   var smalls = ["rca","rca_bra","rca_wld","distance","complexity"]
   
@@ -291,7 +302,7 @@ visual.format.number = function(value,name) {
   
   return_value = String(return_value)
   
-  if (visual.language == "pt") {
+  if (l == "pt") {
     var n = return_value.split(".")
     n[0] = n[0].replace(",",".")
     return_value = n.join(",")

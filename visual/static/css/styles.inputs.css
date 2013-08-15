@@ -168,10 +168,6 @@ body.guide .help {
   color: #af1f24; /* red */
 }
 
-body.profiles .help {
-  color: #e0902d; /* orange */
-}
-
 body.apps .help,
 body.builder .help {
   color: #3daf49; /* green */

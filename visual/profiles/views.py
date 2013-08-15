@@ -112,9 +112,9 @@ def profiles(category = None, id = None):
     if category == "bra":
         plan.set_attr(id, "bra")
     else:
-        plan.set_attr("all", "bra")    
-    
-    
+        plan.set_attr("all", "bra")  
+          
+    builds = [0]*len(plan.builds.all())
     for i, pb in enumerate(plan.builds.all()):
         this_query_kwargs = query_kwargs.copy()
         build = pb.build.first()
@@ -147,12 +147,21 @@ def profiles(category = None, id = None):
         table_headers[1] = output + table_headers[1]
         
         table_data = [[getattr(d, h) for h in table_headers] for d in data]
-        data_tables.append({ "table_headers":table_headers, "build":build, \
-                                    "table_data":table_data})
+        
+        b = {}
+        b["url"] = "/apps/embed/{0}{1}".format(build.url(),pb.variables)
+        b["title"] = build.title()
+        b["type"] = build.app.type
+        b["position"] = pb.position
+        b["output"] = output
+        b["color"] = build.app.color
+        b["data"] = { "table_headers":table_headers, "build":build, \
+                                    "table_data":table_data}
+        builds[pb.position-1] = b
         
     return render_template("profiles/profile.html", 
                 item=item, 
-                data_tables=data_tables)
+                builds=builds)
 
 # @mod.route('/<category>/<id>/')
 def profiles_old(category = None, id = None):

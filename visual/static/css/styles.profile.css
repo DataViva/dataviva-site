@@ -21,46 +21,83 @@ div#guide_controls {
   width: 250px;
 }
 
+div#guide_icon {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  float: left;
+  height: 30px;
+  margin-right: 5px;
+  width: 30px;
+}
+
 div#guide_title {
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-div.guide_app {
-  margin: 20px 0px;
-  margin-left: 310px;
+div#guide_stats {
+  margin-bottom: 5px;
 }
 
-iframe, table {
+div.vizwhiz_tooltip_data_block > div {
+  width: 117px;
+}
+
+div.guide_app {
+  background-color: white;
+  margin: 20px 0px;
+  margin-left: 310px;
+  white-space: nowrap;
+}
+
+iframe, .guide_table {
+  display: block;
+  float: left;
   height: 100%;
   width: 50%;
 }
 
-div.data_table {
-	display: inline-block;
-	margin: 0px 10px;
-	overflow: hidden;
-	overflow-y: scroll;
-	width: 40%;
+.guide_table {
+  overflow: hidden;
+  overflow-y: scroll;
+  position: relative;
 }
-div.data_table:nth-child(even) {
-	margin-right: 20px;
+
+table.header {
+  background-color: rgba(255,255,255,0.75);
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  z-index: 2;
+}
+
+table.body {
+  margin-top: 30px;
+}
+
+th {
+  font-weight: bold;
+}
+
+/*div.data_table:nth-child(even) {
+  margin-right: 20px;
 }
 div.data_table:nth-child(odd) {
-	margin-left: 20px;
+  margin-left: 20px;
 }
 div.data_table table{ 
-	overflow: hidden;
+  overflow: hidden;
 }
 div.data_table table thead{ 
-	display: table-header-group;
+  display: table-header-group;
 }
 div.data_table table thead th{ 
-	display: table-cell;
+  display: table-cell;
 }
 div.data_table table td { 
-	padding: 4px;
+  padding: 4px;
 }
 div.data_table table td a{ 
-	text-decoration: underline;
-}
+  text-decoration: underline;
+}*/

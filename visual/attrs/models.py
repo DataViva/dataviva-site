@@ -10,45 +10,45 @@ class Stats(object):
         from visual.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
         from visual.secex.models import Ybp, Ybw, Ypw, Yb_secex, Yp, Yw
         
-        stats = {}
+        stats = []
         attr_type = self.__class__.__name__.lower()
 
         if attr_type == "bra":
-            stats["isic"] = self.get_top_attr(Ybi, "wage", attr_type)
-            stats["cbo"] = self.get_top_attr(Ybo, "wage", attr_type)
-            stats["hs"] = self.get_top_attr(Ybp, "val_usd", attr_type)
-            stats["wld"] = self.get_top_attr(Ybw, "val_usd", attr_type)
-            stats["wage_total"] = self.get_val(Yb_rais, "wage", attr_type)
-            stats["wage_growth_pct"] = self.get_val(Yb_rais, "wage_growth_pct", attr_type)
-            stats["wage_growth_pct_5"] = self.get_val(Yb_rais, "wage_growth_pct_5", attr_type)
-            stats["val_usd_total"] = self.get_val(Yb_secex, "val_usd", attr_type)
-            stats["val_usd_growth_pct"] = self.get_val(Yb_secex, "val_usd_growth_pct", attr_type)
-            stats["val_usd_growth_pct_5"] = self.get_val(Yb_secex, "val_usd_growth_pct_5", attr_type)
+            stats.append({"name": "top_isic", "value": self.get_top_attr(Ybi, "wage", attr_type, "isic")})
+            stats.append({"name": "top_cbo", "value": self.get_top_attr(Ybo, "wage", attr_type, "cbo")})
+            stats.append({"name": "top_hs", "value": self.get_top_attr(Ybp, "val_usd", attr_type, "hs")})
+            stats.append({"name": "top_wld", "value": self.get_top_attr(Ybw, "val_usd", attr_type, "wld")})
+            stats.append({"name": "wage", "value": self.get_val(Yb_rais, "wage", attr_type)})
+            stats.append({"name": "wage_growth_pct", "value": self.get_val(Yb_rais, "wage_growth_pct", attr_type)})
+            stats.append({"name": "wage_growth_pct_5", "value": self.get_val(Yb_rais, "wage_growth_pct_5", attr_type)})
+            stats.append({"name": "val_usd_total", "value": self.get_val(Yb_secex, "val_usd", attr_type)})
+            stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yb_secex, "val_usd_growth_pct", attr_type)})
+            stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yb_secex, "val_usd_growth_pct_5", attr_type)})
         if attr_type == "isic":
-            stats["bra"] = self.get_top_attr(Ybi, "wage", attr_type)
-            stats["cbo"] = self.get_top_attr(Yio, "wage", attr_type)
-            stats["wage_total"] = self.get_val(Yi, "wage", attr_type)
-            stats["wage_growth_pct"] = self.get_val(Yi, "wage_growth_pct", attr_type)
-            stats["wage_growth_pct_5"] = self.get_val(Yi, "wage_growth_pct_5", attr_type)
+            stats.append({"name": "top_bra", "value": self.get_top_attr(Ybi, "wage", attr_type, "bra")})
+            stats.append({"name": "top_cbo", "value": self.get_top_attr(Yio, "wage", attr_type, "cbo")})
+            stats.append({"name": "wage", "value": self.get_val(Yi, "wage", attr_type)})
+            stats.append({"name": "wage_growth_pct", "value": self.get_val(Yi, "wage_growth_pct", attr_type)})
+            stats.append({"name": "wage_growth_pct_5", "value": self.get_val(Yi, "wage_growth_pct_5", attr_type)})
         if attr_type == "cbo":
-            stats["bra"] = self.get_top_attr(Ybi, "wage", attr_type)
-            stats["isic"] = self.get_top_attr(Yio, "wage", attr_type)
-            stats["wage_total"] = self.get_val(Yo, "wage", attr_type)
-            stats["wage_growth_pct"] = self.get_val(Yo, "wage_growth_pct", attr_type)
-            stats["wage_growth_pct_5"] = self.get_val(Yo, "wage_growth_pct_5", attr_type)
+            stats.append({"name": "top_bra", "value": self.get_top_attr(Ybo, "wage", attr_type, "bra")})
+            stats.append({"name": "top_isic", "value": self.get_top_attr(Yio, "wage", attr_type, "isic")})
+            stats.append({"name": "wage", "value": self.get_val(Yo, "wage", attr_type)})
+            stats.append({"name": "wage_growth_pct", "value": self.get_val(Yo, "wage_growth_pct", attr_type)})
+            stats.append({"name": "wage_growth_pct_5", "value": self.get_val(Yo, "wage_growth_pct_5", attr_type)})
         if attr_type == "hs":
-            stats["bra"] = self.get_top_attr(Ybp, "val_usd", attr_type)
-            stats["wld"] = self.get_top_attr(Ypw, "val_usd", attr_type)
-            stats["val_usd_total"] = self.get_val(Yp, "val_usd", attr_type)
-            stats["val_usd_growth_pct"] = self.get_val(Yp, "val_usd_growth_pct", attr_type)
-            stats["val_usd_growth_pct_5"] = self.get_val(Yp, "val_usd_growth_pct_5", attr_type)
+            stats.append({"name": "top_bra", "value": self.get_top_attr(Ybp, "val_usd", attr_type, "bra")})
+            stats.append({"name": "top_wld", "value": self.get_top_attr(Ypw, "val_usd", attr_type, "wld")})
+            stats.append({"name": "val_usd_total", "value": self.get_val(Yp, "val_usd", attr_type)})
+            stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yp, "val_usd_growth_pct", attr_type)})
+            stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yp, "val_usd_growth_pct_5", attr_type)})
         if attr_type == "wld":
-            stats["bra"] = self.get_top_attr(Ybw, "val_usd", attr_type)
-            stats["hs"] = self.get_top_attr(Ypw, "val_usd", attr_type)
-            stats["val_usd_total"] = self.get_val(Yw, "val_usd", attr_type)
-            stats["val_usd_growth_pct"] = self.get_val(Yw, "val_usd_growth_pct", attr_type)
-            stats["val_usd_growth_pct_5"] = self.get_val(Yw, "val_usd_growth_pct_5", attr_type)
-            stats["complexity"] = self.get_val(Yw, "complexity", attr_type)
+            stats.append({"name": "top_bra", "value": self.get_top_attr(Ybw, "val_usd", attr_type, "bra")})
+            stats.append({"name": "top_hs", "value": self.get_top_attr(Ypw, "val_usd", attr_type, "hs")})
+            stats.append({"name": "val_usd_total", "value": self.get_val(Yw, "val_usd", attr_type)})
+            stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yw, "val_usd_growth_pct", attr_type)})
+            stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yw, "val_usd_growth_pct_5", attr_type)})
+            stats.append({"name": "complexity", "value": self.get_val(Yw, "complexity", attr_type)})
             
         return stats
     
@@ -58,12 +58,12 @@ class Stats(object):
                             .order_by(getattr(tbl, "year").desc()).first()[0]
         return latest_year
 
-    def get_top_attr(self, tbl, val_var, attr_type):
+    def get_top_attr(self, tbl, val_var, attr_type, key):
         latest_year = self.get_latest_year(tbl)
         top = tbl.query.filter_by(year=latest_year) \
                     .filter(getattr(tbl, attr_type+"_id") == self.id) \
                     .order_by(getattr(tbl, val_var).desc()).first()
-        return top
+        return getattr(top, key).name()
 
     def get_val(self, tbl, val_var, attr_type):
         latest_year = self.get_latest_year(tbl)
@@ -93,6 +93,9 @@ class Isic(db.Model, AutoSerialize, Stats):
     
     def name(self):
         return getattr(self,"name_"+g.locale)
+        
+    def icon(self):
+        return "/static/img/icons/isic/isic_%s.png" % (self.id[:1])
 
     def __repr__(self):
         return '<Isic %r>' % (self.name_en)
@@ -120,6 +123,9 @@ class Cbo(db.Model, AutoSerialize, Stats):
     
     def name(self):
         return getattr(self,"name_"+g.locale)
+        
+    def icon(self):
+        return "/static/img/icons/cbo/cbo_%s.png" % (self.id[:1])
 
     def __repr__(self):
         return '<Cbo %r>' % (self.name_en)
@@ -147,6 +153,9 @@ class Hs(db.Model, AutoSerialize, Stats):
     
     def name(self):
         return getattr(self,"name_"+g.locale)
+        
+    def icon(self):
+        return "/static/img/icons/hs/hs_%s.png" % (self.id[:2])
 
     def __repr__(self):
         return '<Hs %r>' % (self.name_en)
@@ -182,13 +191,16 @@ class Wld(db.Model, AutoSerialize, Stats):
     def name(self):
         return getattr(self,"name_"+g.locale)
         
+    def icon(self):
+        return "/static/img/icons/wld/wld_%s.png" % (self.id[:2])
+        
     def __repr__(self):
         return '<Wld %r>' % (self.id_3char)
 
 class Bra(db.Model, AutoSerialize, Stats):
 
     __tablename__ = 'attrs_bra'
-    __public__ = ('id', 'id_ibge', 'name_en', 'name_pt', 'color', 'icon', 'distance')
+    __public__ = ('id', 'id_ibge', 'name_en', 'name_pt', 'color', 'distance')
     id = db.Column(db.String(10), primary_key=True)
     id_ibge = db.Column(db.Integer(7))
     name_en = db.Column(db.String(200))
@@ -198,7 +210,6 @@ class Bra(db.Model, AutoSerialize, Stats):
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
     
-    icon = None
     distance = 0
     
     # SECEX relations
@@ -217,6 +228,9 @@ class Bra(db.Model, AutoSerialize, Stats):
     
     def name(self):
         return getattr(self,"name_"+g.locale)
+        
+    def icon(self):
+        return "/static/img/icons/bra/bra_%s.png" % (self.id[:2])
 
     def get_neighbors(self, dist, remove_self=False):
         q = self.neighbors.filter(Distances.distance <= dist).order_by(Distances.distance)

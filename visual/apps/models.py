@@ -59,7 +59,6 @@ class Build(db.Model, AutoSerialize):
             if b == "all":
                 self.bra.append(Wld.query.get("sabra"))
                 self.bra[i].id = "all"
-                self.bra[i].icon = "/static/img/icons/wld/wld_sabra.png"
             else:
                 if "." in b:
                     split = b.split(".")
@@ -72,7 +71,6 @@ class Build(db.Model, AutoSerialize):
                     b = state
                 self.bra.append(Bra.query.get(b))
                 self.bra[i].distance = dist
-                self.bra[i].icon = "/static/img/icons/bra/bra_{0}.png".format(state)
 
     def set_filter1(self, filter):
         if self.filter1 != "all":
@@ -266,8 +264,6 @@ class Build(db.Model, AutoSerialize):
         for i,b in enumerate(auto_serialized["bra"]):
             if b["id"] != "all" and self.bra[i].distance:
                 b["distance"] = self.bra[i].distance
-            if self.bra[i].icon:
-                b["icon"] = self.bra[i].icon
         
         if hasattr(self, "isic"):
             auto_serialized["isic"] = [i.serialize() for i in self.isic]
