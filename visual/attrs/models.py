@@ -21,7 +21,7 @@ class Stats(object):
             stats.append({"name": "wage", "value": self.get_val(Yb_rais, "wage", attr_type)})
             stats.append({"name": "wage_growth_pct", "value": self.get_val(Yb_rais, "wage_growth_pct", attr_type)})
             stats.append({"name": "wage_growth_pct_5", "value": self.get_val(Yb_rais, "wage_growth_pct_5", attr_type)})
-            stats.append({"name": "val_usd_total", "value": self.get_val(Yb_secex, "val_usd", attr_type)})
+            stats.append({"name": "val_usd", "value": self.get_val(Yb_secex, "val_usd", attr_type)})
             stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yb_secex, "val_usd_growth_pct", attr_type)})
             stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yb_secex, "val_usd_growth_pct_5", attr_type)})
         if attr_type == "isic":
@@ -39,13 +39,13 @@ class Stats(object):
         if attr_type == "hs":
             stats.append({"name": "top_bra", "value": self.get_top_attr(Ybp, "val_usd", attr_type, "bra")})
             stats.append({"name": "top_wld", "value": self.get_top_attr(Ypw, "val_usd", attr_type, "wld")})
-            stats.append({"name": "val_usd_total", "value": self.get_val(Yp, "val_usd", attr_type)})
+            stats.append({"name": "val_usd", "value": self.get_val(Yp, "val_usd", attr_type)})
             stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yp, "val_usd_growth_pct", attr_type)})
             stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yp, "val_usd_growth_pct_5", attr_type)})
         if attr_type == "wld":
             stats.append({"name": "top_bra", "value": self.get_top_attr(Ybw, "val_usd", attr_type, "bra")})
             stats.append({"name": "top_hs", "value": self.get_top_attr(Ypw, "val_usd", attr_type, "hs")})
-            stats.append({"name": "val_usd_total", "value": self.get_val(Yw, "val_usd", attr_type)})
+            stats.append({"name": "val_usd", "value": self.get_val(Yw, "val_usd", attr_type)})
             stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yw, "val_usd_growth_pct", attr_type)})
             stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yw, "val_usd_growth_pct_5", attr_type)})
             stats.append({"name": "complexity", "value": self.get_val(Yw, "complexity", attr_type)})

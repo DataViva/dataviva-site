@@ -25,7 +25,7 @@ visual.obj2csv = function(obj) {
 visual.format = {};
 visual.format.text = function(text,name,l) {
   
-  if (!l) var l = visual.languge
+  if (!l) var l = visual.language
   
   if (text.indexOf("top_") == 0) {
     var x = text.substring(4)
@@ -140,7 +140,8 @@ visual.format.text = function(text,name,l) {
       "complexity": {"en": "Complexity", "pt": "Complexidade"},
       "distance": {"en": "Distance", "pt": "Dist\u00e2ncia"},
       "employed": {"en": "Employed", "pt": "Empregada"},
-      "importance": {"en": "Exclusivity", "pt": "Exclusividade"},
+      "importance": {"en": "Importance", "pt": "Import\u00e2ncia"},
+      "elsewhere": {"en": "Employees Available In Other Industries", "pt": "Empregados em Outras Ind\u00fdstrias"},
       "growth_val": {"en": "Wage Growth", "pt": "Crescimento dos Sal\u00e1rios"},
       "growth_val_total": {"en": "Cumulative Wage Growth", "pt": "Crescimento Salarial Acumulada"},
       "proximity": {"en": "Proximity", "pt": "Proximidade"},
@@ -168,9 +169,9 @@ visual.format.text = function(text,name,l) {
       "rais": {"en": "Establishments and Employment (RAIS)", "pt": "Estabelecimentos e Emprego (RAIS)"},
       "num_emp": {"en": "Employees", "pt": "Funcion\u00e1rios"},
       "num_est": {"en": "Establishments", "pt": "Estabelecimentos"},
-      "required_wage_avg": {"en": "Average Monthly Wage", "pt": "Sal\u00e1rio M\u00e9dio Mensal"},
       "wage": {"en": "Monthly Wage", "pt": "Sal\u00e1rios Mensal"},
       "wage_avg": {"en": "Average Monthly Wage", "pt": "Sal\u00e1rio M\u00e9dio Mensal"},
+      "wage_avg_bra": {"en": "Brazilian Average Wage", "pt": "Sal\u00e1rio M\u00e9dio Brasileiro"},
     
       // SECEX Labels
       "secex": {"en": "Product Exports (SECEX)", "pt": "Exporta\u00e7\u00e3es de Produtos (SECEX)"},
@@ -291,8 +292,12 @@ visual.format.number = function(value,name,l) {
   var total_labels = {
         "val_usd": ["$"," USD"],
         "wage": ["$"," BRL"],
-        "growth_val": ["$"," BRL"],
-        "growth_val_total": ["$"," BRL"]
+        "wage_avg": ["$"," BRL"],
+        "wage_avg_bra": ["$"," BRL"],
+        "wage_growth_val": ["$"," BRL"],
+        "wage_growth_val_5": ["$"," BRL"],
+        "val_usd_growth_val": ["$"," USD"],
+        "val_usd_growth_val_5": ["$"," USD"]
       }
 
   if (total_labels[name]) {

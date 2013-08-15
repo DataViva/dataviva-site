@@ -312,7 +312,11 @@
           "rca_wld",
           "wage",
           "wage_avg",
+          "wage_avg_bra",
           "num_emp",
+          "elsewhere",
+          "required",
+          "importance",
           "num_est",
           "val_usd",
           "distance",
@@ -330,11 +334,7 @@
           "cp_bra_1_num_est",
           "cp_bra_1_val_usd",
           "cp_bra_1_distance",
-          "cp_bra_1_complexity",
-          "employed",
-          "elsewhere",
-          "total",
-          "importance"
+          "cp_bra_1_complexity"
         ]}
     
     // Define global viz-whiz app parameters
@@ -364,6 +364,8 @@
       .click_function(app.html)
       .font(app.font)
       .font_weight("lighter")
+      .total_var("required")
+      .else_var("elsewhere")
     
     // Start building a new app
     app.start = function(new_url) {
@@ -532,19 +534,19 @@
             
             if (app.build.app.type == "occugrid") {
               
-              app.build.req_url = app.build.data_url
+              app.build.imp_url = app.build.data_url
                 .replace(app.build.bra[0].id,"all")
                 
-              if (!app.data[app.build.req_url]) {
+              if (!app.data[app.build.imp_url]) {
                 q.defer(function(u,callback){
                   d3.json(u)
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
-                    app.data[app.build.req_url] = {}
-                    app.data[app.build.req_url].raw = d.data
+                    app.data[app.build.imp_url] = {}
+                    app.data[app.build.imp_url].raw = d.data
                     callback(error,d)
                   })
-                },"/"+app.build.req_url)
+                },"/"+app.build.imp_url)
               }
                 
               app.build.else_url = app.build.data_url
@@ -811,8 +813,7 @@
       /* Bubbles Specific Variables */
       /******************************/
       else if (app.build.app.type == "occugrid") {
-        app.viz
-          .active_var("employed")
+        app.viz.active_var("num_emp")
       } 
 
       /******************************/
@@ -955,62 +956,46 @@
       
       if ("occugrid" == format[app.build.app.type]) {
         
-        var years = app.build.ui.filter(function(f){return f.type == "years"})[0].values
-        
-        years.forEach(function(year){
+        data.raw.forEach(function(d,i){
           
-          var year_data = data.raw.filter(function(d){ return d.year == year; });
+          var bra_data = app.data[app.build.imp_url].raw.filter(function(i){
+            return i.cbo_id == d.cbo_id && i.year == d.year
+          })[0]
           
-          var req_filtered = app.data[app.build.req_url].raw.filter(function(d){ return d.year == year && d.required >= 0.6 }),
-              req_ids = []
-              
-          req_filtered.forEach(function(d){
-            req_ids.push(d[app.build.output+"_id"])
-          })
+          d.importance = bra_data.importance
           
-          var industry_size = d3.sum(d3.values(req_filtered),function(d){ return Math.ceil(d.num_emp_med); }),
-              location_total = d3.sum(d3.values(year_data),function(d){ 
-                return req_ids.indexOf(d[app.build.output+"_id"]) >= 0 ? d.num_emp : null; 
-              });
-              
-          req_filtered.forEach(function(d){
-      
-            var temp_obj = year_data.filter(function(dd){ return dd[out+"_id"] == d[out+"_id"] })[0]
-            if (!temp_obj) {
-              temp_obj = {"num_emp": 0, "wage": 0, "num_est": 0}
-            }
-            d.required_wage_avg = d.wage/d.num_emp
-            d = vizwhiz.utils.merge(d,temp_obj)
-          
-            d.none = 1;
+          if (d.importance >= 0.3) {
+            
             d.category = attr[d[out+"_id"].slice(0,depths[out][0])].name
-
+            d.none = 1
           
-            if (location_total >= industry_size) d.total = Math.ceil((d.num_emp_med/industry_size)*location_total);
-            else d.total = Math.ceil(d.num_emp_med);
+            if (!d.wage) d.wage = 0
+            if (!d.num_emp) d.num_emp = 0
+            if (!d.num_est) d.num_est = 0
           
-            d.employed = d.num_emp ? d.num_emp : 0;
-            if (d.employed/d.total >= 1) d.active = true;
-            else d.active = false;
+            if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp
+            else d.wage_avg = 0
           
-            var elsewhere = app.data[app.build.else_url].raw.filter(function(e){ return e.year == year && e[out+"_id"] == d[out+"_id"] })[0]
+            d.wage_avg_bra = bra_data.wage/bra_data.num_emp
           
-            if (!elsewhere) elsewhere = 0;
-            else elsewhere = elsewhere.num_emp;
+            var else_data = app.data[app.build.else_url].raw.filter(function(i){
+              return i.cbo_id == d.cbo_id && i.year == d.year
+            })[0]
           
-            d.elsewhere = elsewhere-d.employed
-      
+            d.active = d.num_emp/d.required >= 1 ? true : false
+          
+            if (!else_data) d.elsewhere = 0
+            else d.elsewhere = else_data.num_emp-d.num_emp
+    
             d.display_id = visual.displayID(d[out+"_id"],out)
             d.icon = visual.icon(d[out+"_id"],out)
-            
-            if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp;
 
             get_keys(d)
           
             data_obj.push(d)
-            
-          })
           
+          }
+            
         })
     
       }
@@ -1510,11 +1495,16 @@ v))
       if ("geo_map" != app.build.app.type) {
         if (!cats) {
           if (app.build.app.type != "network") {
-            if (app.build.app.type != "stacked") {
-              var cats = app.data[app.build.data_url].categories[app.vars.year]
+            if (app.data[app.build.data_url].categories) {
+              if (app.build.app.type != "stacked") {
+                var cats = app.data[app.build.data_url].categories[app.vars.year]
+              }
+              else {
+                var cats = app.data[app.build.data_url].categories.all
+              }
             }
             else {
-              var cats = app.data[app.build.data_url].categories.all
+              var cats = []
             }
           }
           else {
@@ -1526,7 +1516,7 @@ v))
           }
         }
         
-        if (cats.length == 1) {
+        if (cats.length <= 1) {
           d3.select("div#key").style("display","none")
         }
         else {
