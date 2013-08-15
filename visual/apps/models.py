@@ -142,8 +142,8 @@ class Build(db.Model, AutoSerialize):
                 
         bra = "+".join(bras)
         
-        if self.app.type == "geo_map":
-            bra = "show.8"
+        if self.app.type == "geo_map" and bra == "all":
+            bra = "all.show.2"
         elif self.output == "bra":
             bra = bra + ".show.8"
             

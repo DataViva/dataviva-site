@@ -54,11 +54,12 @@ div#toggles {
 }
 
 div#settings > .leon.button.square {
-  margin: 6px 0px 6px 3px;
-}
-
-div#toggles > .leon.button.square {
-  margin: 6px 3px 6px 0px;
+  font-size: 15px !important;
+  height: 17px;
+  line-height: 16px;
+  margin: 5px 0px 5px 3px;
+  padding: 3px !important;
+  width: 17px;
 }
 
 div#builder {
@@ -115,6 +116,7 @@ div.filter_button > div.leon.button {
 
 .ui_group {
   display: inline-block;
+  padding: 5px;
 }
 
 /*******************/
@@ -133,5 +135,5 @@ div#ui_bottom {
 }
 
 div#year_slider > .leon.range {
-  margin-top: 0px;
+  margin: 0px 0px 5px 0px;
 }

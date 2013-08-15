@@ -27,7 +27,7 @@ function Key() {
       })
           
       d3.select(key).append("div")
-        .attr("class","leon label")
+        .attr("class","leon label medium")
         .text(attr_type)
           
       data.sort(function(a, b){
@@ -81,14 +81,14 @@ function Key() {
               var filter_class = "leon button active"
             }
             else {
-              var filter_class = "leon button"
+              var filter_class = "leon button medium"
             }
             
             if (key_solos.indexOf(d.id) >= 0) {
               var solo_class = "leon button active"
             }
             else {
-              var solo_class = "leon button"
+              var solo_class = "leon button medium"
             }
             
             var html = "<div class='filter_buttons'>\

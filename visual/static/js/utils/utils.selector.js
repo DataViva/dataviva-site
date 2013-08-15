@@ -278,20 +278,22 @@ function Selector() {
               .attr("for","selector_sort_"+s)
               .html(visual.format.text(s))
           })
-        
-          leon("$selector_sort")
+          
+          leon("$selector_sort").color(visual.color)
         }
         
 
         header_select = sort_toggles.append("div")
-          .attr("class","leon button")
+          .attr("class","leon button medium select_button")
           .html(visual.format.text("select"))
         
         search = header.append("input")
           .attr("type","text")
           .attr("id",name+"_search")
           .attr("class","leon text")
-          .attr("placeholder",visual.format.text("search"));
+          .attr("placeholder",visual.format.text("search"))
+          
+        leon("#"+name+"_search").color(visual.color).size("medium")
               
         search.node().oninput = function() { populate_list(selected) };
         
@@ -500,7 +502,7 @@ function Selector() {
               var suffix = visual.format.text(type+"_"+length+"_plural")
               
               buttons.append("div")
-                .attr("class","leon button")
+                .attr("class","leon button medium")
                 .html(visual.format.text("show")+" "+suffix)
                 .on(vizwhiz.evt.click,function(){
                   d3.event.stopPropagation()
@@ -546,7 +548,7 @@ function Selector() {
               
             if (!limit || v.id.length >= limit) {
               buttons.append("div")
-                .attr("class","leon button")
+                .attr("class","leon button medium select_button")
                 .html(visual.format.text("select"))
                 .on(vizwhiz.evt.click,function(){
                   d3.event.stopPropagation()

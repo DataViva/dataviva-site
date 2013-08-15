@@ -220,8 +220,8 @@
 <script src="/static/js/utils/utils.infinite_scroll.js"></script>
 <script type="text/javascript">
 
-  leon("$dataset")
-  leon("#year_filter")
+  leon("$dataset").color(visual.color)
+  leon("#year_filter").color(visual.color)
 
   var CURRENT_DATASET = d3.select("input[name='dataset']:checked").attr("value");
   var ORDER_DIRECTIONS = ["desc", "asc", ""]

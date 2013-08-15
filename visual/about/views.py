@@ -11,6 +11,8 @@ mod = Blueprint('about', __name__, url_prefix='/about')
 @mod.before_request
 def before_request():
     g.page_type = mod.name
+    
+    g.color = "#d67ab0"
 
 @mod.route('/')
 def about():

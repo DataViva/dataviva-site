@@ -46,7 +46,8 @@
 
 <script type="text/javascript">
 
-leon("#remember")
+leon("#remember").color(visual.color).size("small")
+
 d3.selectAll(".login_button").on(vizwhiz.evt.click, function () {
   var pr = this.id.toLowerCase()
   form = document.forms['login'];

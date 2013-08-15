@@ -49,12 +49,15 @@ div.selector_toggles > div.leon.button {
   white-space: nowrap;
 }
 
-div.selector_header > input {
+div.selector_header > .leon.text {
+  display: block;
+  margin: 0px !important;
+} 
+
+div.selector_header input {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
-  display: block;
-  margin: 0px !important;
   width: 100%;
 }
 
@@ -131,17 +134,13 @@ div.search_result > div.search_buttons {
   float: right;
 }
 
-div.search_buttons > div.leon.button {
+div.select_button {
   display: inline-block;
-  margin: 0px 0px 0px 6px;
+  margin-left: 6px;
 }
 
 div.search_buttons > div.proximity_toggles {
   display: inline-block;
-}
-
-div.search_buttons > div.proximity_toggles > div.leon.select {
-  margin: 0px 6px 0px 0px;
 }
 
 div.search_text > div.search_withins {

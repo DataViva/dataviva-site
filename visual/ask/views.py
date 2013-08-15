@@ -14,6 +14,8 @@ mod = Blueprint('ask', __name__, url_prefix='/ask')
 def before_request():
     g.page_type = mod.name
     
+    g.color = "#742777"
+    
     g.sabrina = {}
     g.sabrina["outfit"] = "lab"
     g.sabrina["face"] = "smirk"

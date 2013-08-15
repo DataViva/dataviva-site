@@ -22,6 +22,8 @@ mod = Blueprint('profiles', __name__, url_prefix='/profiles')
 def before_request():
     g.page_type = mod.name
     g.path = request.path
+    
+    g.color = "#e0902d"
 
 @mod.route('/')
 @mod.route('/<category>/select/')

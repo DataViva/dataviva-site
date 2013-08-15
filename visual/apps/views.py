@@ -21,6 +21,9 @@ mod = Blueprint('apps', __name__, url_prefix='/apps')
 @mod.before_request
 def before_request():
     g.page_type = mod.name
+    
+    g.color = "#3daf49"
+    
     g.sabrina = {
         "outfit": "lab",
         "face": "smirk",

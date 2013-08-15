@@ -89,8 +89,6 @@
   </div>
   
   <script type="text/javascript">
-  
-    // leon("$language_select")
     
     visual.ui.header()
   
@@ -98,7 +96,7 @@
       window.location = "/set_lang/" + l + "/?next=" + window.location.pathname;
     }
     
-    leon("$language_select")
+    leon("$language_select").color("{{ g.color }}").size("small")
         
     d3.select("#close_message").on(vizwhiz.evt.click,function(){
       var div = d3.select("#server_message")

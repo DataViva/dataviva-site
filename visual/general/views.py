@@ -14,6 +14,8 @@ from visual.general.forms import AccessForm
 @app.before_request
 def before_request():
     
+    g.color = "#af1f24"
+    
     # Check if the user has access (temp log in for development purposes)
     if 'has_access' not in session:
         session['has_access'] = False

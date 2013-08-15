@@ -34,14 +34,14 @@
       {% endfor %}
     </select>
     
-    <div id="output" class="leon button" onclick="builder.selector(this.id)">
+    <div id="output" class="leon button medium" onclick="builder.selector(this.id)">
       <span class="list_text">{% trans %}Change Output{% endtrans %}</span>
       <i class="icon-list-alt"></i>
     </div>
 
-    <div id="bra_0" class="leon button" onclick="builder.selector(this.id)">
+    <div id="bra_0" class="leon button medium" onclick="builder.selector(this.id)">
       {% set bra = current_build.bra[0] %}
-      <div class="leon icon" style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"></div>
+      <div class="leon icon medium" style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"></div>
       <span class="list_text">{{ bra.name() }}</span>
       <i class="icon-list-alt"></i>
     </div>
@@ -49,8 +49,8 @@
     {% if current_build.bra[1] %}
     {% set bra = current_build.bra[1] %}
     {% endif %}
-    <div id="bra_1" class="leon button" onclick="builder.selector(this.id)">
-      <div class="leon icon"{% if bra %} style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"{% endif %}></div>
+    <div id="bra_1" class="leon button medium" onclick="builder.selector(this.id)">
+      <div class="leon icon medium"{% if bra %} style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"{% endif %}></div>
       <span class="list_text">{% if bra %}{{ bra.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>
@@ -58,8 +58,8 @@
     {% if current_build.isic %}
     {% set isic = current_build.isic[0] %}
     {% endif %}
-    <div id="isic_0" class="leon button" onclick="builder.selector(this.id)">
-      <div class="leon icon"{% if isic %} style="background-color:{{ isic.color }}; background-image:url('/static/img/icons/isic/isic_{{ isic.id[:1] }}.png')"{% endif %}></div>
+    <div id="isic_0" class="leon button medium" onclick="builder.selector(this.id)">
+      <div class="leon icon medium"{% if isic %} style="background-color:{{ isic.color }}; background-image:url('/static/img/icons/isic/isic_{{ isic.id[:1] }}.png')"{% endif %}></div>
       <span class="list_text">{% if isic %}{{ isic.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>
@@ -67,8 +67,8 @@
     {% if current_build.cbo %}
     {% set cbo = current_build.cbo[0] %}
     {% endif %}
-    <div id="cbo_0" class="leon button" onclick="builder.selector(this.id)">
-      <div class="leon icon"{% if cbo %} style="background-color:{{ cbo.color }}; background-image:url('/static/img/icons/cbo/cbo_{{ cbo.id[:1] }}.png')"{% endif %}></div>
+    <div id="cbo_0" class="leon button medium" onclick="builder.selector(this.id)">
+      <div class="leon icon medium"{% if cbo %} style="background-color:{{ cbo.color }}; background-image:url('/static/img/icons/cbo/cbo_{{ cbo.id[:1] }}.png')"{% endif %}></div>
       <span class="list_text">{% if cbo %}{{ cbo.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>
@@ -76,8 +76,8 @@
     {% if current_build.hs %}
     {% set hs = current_build.hs[0] %}
     {% endif %}
-    <div id="hs_0" class="leon button" onclick="builder.selector(this.id)">
-      <div class="leon icon"{% if hs %} style="background-color:{{ hs.color }}; background-image:url('/static/img/icons/hs/hs_{{ hs.id[:2] }}.png')"{% endif %}></div>
+    <div id="hs_0" class="leon button medium" onclick="builder.selector(this.id)">
+      <div class="leon icon medium"{% if hs %} style="background-color:{{ hs.color }}; background-image:url('/static/img/icons/hs/hs_{{ hs.id[:2] }}.png')"{% endif %}></div>
       <span class="list_text">{% if hs %}{{ hs.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>
@@ -85,8 +85,8 @@
     {% if current_build.wld %}
     {% set wld = current_build.wld[0] %}
     {% endif %}
-    <div id="wld_0" class="leon button" onclick="builder.selector(this.id)">
-      <div class="leon icon"{% if wld %} style="background-color:{{ wld.color }}; background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
+    <div id="wld_0" class="leon button medium" onclick="builder.selector(this.id)">
+      <div class="leon icon medium"{% if wld %} style="background-color:{{ wld.color }}; background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
       <span class="list_text">{% if wld %}{{ wld.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>
@@ -405,6 +405,7 @@
             
             // Set public current build variable
             app.build = data.current_build
+            leon("#app_select").color(app.build.app.color)
             builder.url()
             builder.outputs(data.all_builds)
             
@@ -507,16 +508,24 @@
             
             if (app.build.app.type == "geo_map") {
               
-              var state = app.build.bra[0].id.substr(0,2)
-              if (!app.coords[state]) {
+              if (app.build.bra[0].id == "all") {
+                var id = "all",
+                    geo_url = "/static/json/coords/bra_states.json"
+              }
+              else {
+                var id = app.build.bra[0].id.substr(0,2),
+                    geo_url = "/static/json/coords/"+id+"_munic.json"
+              }
+              
+              if (!app.coords[id]) {
                 q.defer(function(u,callback){
                   d3.json(u)
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
-                    app.coords[state] = d
+                    app.coords[id] = d
                     callback(error,d)
                   })
-                },"/static/json/coords/"+state+"_munic.json")
+                },geo_url)
               }
               
             }
@@ -555,20 +564,7 @@
               
             }
             
-            q.awaitAll(check_data)
-            
-            function check_data() {
-
-              if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
-                app.error("Geo Map only available for States");
-              }
-              else {
-
-                app.finish()
-                
-              }
-              
-            }
+            q.awaitAll(app.finish)
             
           }
         });
@@ -636,7 +632,7 @@
             .attr("for","year")
             .html(visual.format.text("year"))
           
-          leon("#year")
+          leon("#year").color(app.build.app.color)
           
         }
         else {
@@ -796,10 +792,18 @@
       /* Geo Map Specific Variables */
       /******************************/
       else if (app.build.app.type == "geo_map") {
-        app.viz
-          .coords(app.coords[app.build.bra[0].id.substr(0,2)])
+        
+        if (app.build.bra[0].id == "all") {
+          var coords = app.coords.all
+        }
+        else {
+          var coords = app.coords[app.build.bra[0].id.substr(0,2)]
+        }
+        
+        app.viz.coords(coords)
       
         if (app.build.bra[0].id.length == 8) app.viz.highlight(app.build.bra[0].id)
+        else app.viz.highlight()
     
       } 
   
@@ -1315,7 +1319,7 @@ val)+": ", "suffix": ""};
       }
       url[url_index] = ids.join("+")
       url = url.join("/")
-      app.url = url
+      // app.url = url
       
       var button = d3.select("#"+id)
       
@@ -1340,7 +1344,6 @@ val)+": ", "suffix": ""};
     builder.app = function(app_name,static) {
       
       document.getElementById("app_select").value = app_name
-      leon("#app_select")
       
       var options = d3.select("#output_"+app_name).selectAll(".output")
       
@@ -1406,8 +1409,8 @@ v))
         }
         
       })
-
-      leon("$"+obj.title)
+      
+      leon("$"+obj.title).color(app.build.app.color)
       
     }
     
@@ -1436,7 +1439,7 @@ v))
         
       })
 
-      leon("#"+obj.title)
+      leon("#"+obj.title).color(app.build.app.color)
       
     }
     
@@ -1458,7 +1461,7 @@ v))
         checkbox.node().checked = true
       }
 
-      leon("#"+obj.title)
+      leon("#"+obj.title).color(app.build.app.color)
       
     }
     

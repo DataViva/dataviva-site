@@ -469,7 +469,7 @@ visual.icon = function(id,type,color) {
     var id = id;
   }
   
-  if (((type != "bra" && type != "wld") || (type == "wld" && id.length > 3)) && color == "#ffffff") {
+  if (type != "bra" && id == "all" && color == "#ffffff") {
     id = id+"_black"
   }
   

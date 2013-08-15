@@ -9,7 +9,6 @@
 }
 
 #header_container #language {
-/*  background-color: transparent;*/
   opacity: 0.6;
   -webkit-transition: opacity .2s;
           transition: opacity .2s;
@@ -174,11 +173,7 @@ a.account:hover {
 }
 
 div#language .leon.radio {
-  margin: 0px !important;
-}
-
-div#language .leon.button {
-  padding: 2px 6px !important;
+  margin: 1px !important;
 }
 
 #dynamic_header {

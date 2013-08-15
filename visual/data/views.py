@@ -22,6 +22,8 @@ mod = Blueprint('data', __name__, url_prefix='/data')
 def before_request():
     g.page_type = mod.name
     
+    g.color = "#1abbee"
+    
     g.sabrina = {}
     g.sabrina["outfit"] = "lab"
     g.sabrina["face"] = "smirk"

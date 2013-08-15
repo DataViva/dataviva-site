@@ -13,18 +13,6 @@ a:hover {
   color: #cccccc;
 }
 
-/*******************/
-/* Standard Button */
-/*******************/
-
-.button.square {
-  font-size: 15px !important;
-  height: 19px;
-  line-height: 18px;
-  padding: 3px !important;
-  width: 19px;
-}
-
 /********************/
 /* Decision Buttons */
 /********************/
