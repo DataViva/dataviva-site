@@ -48,6 +48,7 @@ class Stats(object):
             stats["val_usd_total"] = self.get_val(Yw, "val_usd", attr_type)
             stats["val_usd_growth_pct"] = self.get_val(Yw, "val_usd_growth_pct", attr_type)
             stats["val_usd_growth_pct_5"] = self.get_val(Yw, "val_usd_growth_pct_5", attr_type)
+            stats["complexity"] = self.get_val(Yw, "complexity", attr_type)
             
         return stats
     
@@ -62,7 +63,7 @@ class Stats(object):
         top = tbl.query.filter_by(year=latest_year) \
                     .filter(getattr(tbl, attr_type+"_id") == self.id) \
                     .order_by(getattr(tbl, val_var).desc()).first()
-        return top.serialize()
+        return top
 
     def get_val(self, tbl, val_var, attr_type):
         latest_year = self.get_latest_year(tbl)

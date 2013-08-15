@@ -18,6 +18,7 @@ class Yw(db.Model, AutoSerialize):
     val_usd_growth_pct_5 = db.Column(db.Float())
     val_usd_growth_val = db.Column(db.Float())
     val_usd_growth_val_5 = db.Column(db.Float())
+    complexity = db.Column(db.Float())
 
     def __repr__(self):
         return '<Yw %d.%s>' % (self.year, self.wld_id)
