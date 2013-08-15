@@ -115,8 +115,10 @@ def profiles(category = None, id = None):
     
     for i, pb in enumerate(plan.builds.all()):
         this_query_kwargs = query_kwargs.copy()
-        data_table = pb.build.first().data_table()
-        data_url = pb.build.first().data_url().split("/")
+        build = pb.build.first()
+        data_table = build.data_table()
+        data_url = build.data_url().split("/")
+        output = build.output
         bra = data_url[2]
         filter1 = data_url[3]
         filter2 = data_url[4]
@@ -136,9 +138,15 @@ def profiles(category = None, id = None):
                 this_query_kwargs["wld_id"] = filter2
         if data_set == "rais":
             data = rais_get_query(data_table, request.args, **this_query_kwargs)
+            table_headers = ["year", "_id", "wage", "num_emp", "num_est"]
         else:
             data = secex_get_query(data_table, request.args, **this_query_kwargs)
-        raise Exception(data)        
+            table_headers = ["year", "_id", "val_usd"]
+        table_headers[1] = output + table_headers[1]
+        
+        table_data = [[getattr(d, h) for h in table_headers] for d in data]
+        data_tables.append({ "table_headers":table_headers, "build":build, \
+                                    "table_data":table_data})
         
     return render_template("profiles/profile.html", 
                 item=item, 
