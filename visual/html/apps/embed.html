@@ -1130,17 +1130,24 @@ val)+": ", "suffix": ""};
       app.title_width = window.innerWidth
       app.title_width -= d3.select("#settings").node().offsetWidth+12
       d3.select("#builder").style("max-width",app.title_width+"px")
-      app.title_width -= d3.select("#settings").node().offsetWidth
-      
-      app.title_height = d3.select("#settings").node().offsetHeight+10
   
       if (app.vars.controls == "true") {
+        app.title_width = window.innerWidth
         d3.select("#controls_toggle").attr("class","leon button square active")
-        var title_height = 0
+        app.title_height = 0
+        var buffer = 0
       }
       else {
+        app.title_width -= d3.select("#settings").node().offsetWidth
         d3.select("#controls_toggle").attr("class","leon button square")
-        var title_height = app.title_height
+        app.title_height = d3.select("#settings").node().offsetHeight+10
+        if (app.title_width < 200) {
+          app.title_width = window.innerWidth
+          var buffer = d3.select("#settings").node().offsetHeight
+        }
+        else {
+          var buffer = 0
+        }
       }
 
       d3.select("#key").style("display","inline-block")
@@ -1152,12 +1159,6 @@ val)+": ", "suffix": ""};
       if (window.innerWidth < d3.select("#year_slider").node().offsetWidth-10) {
         d3.select("#year_slider").style("display","none")
       }
-      
-      if (app.title_width < 200 && app.vars.controls == "false") {
-        var buffer = d3.select("#settings").node().offsetHeight
-        app.title_width = window.innerWidth
-      }
-      else var buffer = 0
 
       app.height = window.innerHeight
       app.height -= (d3.select("#ui_bottom").node().offsetHeight+buffer)
@@ -1177,7 +1178,7 @@ val)+": ", "suffix": ""};
             .height(app.height)
             .width(app.width)
             .title_width(app.title_width)
-            .title_height(title_height)
+            .title_height(app.title_height)
           )
       
     }
