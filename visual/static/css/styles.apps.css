@@ -134,6 +134,11 @@ div#ui_bottom {
   z-index: 500;
 }
 
+div#year_slider {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 div#year_slider > .leon.range {
   margin: 0px 0px 5px 0px;
 }

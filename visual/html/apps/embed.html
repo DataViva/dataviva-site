@@ -202,10 +202,9 @@
     
     // Set the max-width for the builder div and app_title
     app.title_width = window.innerWidth
+    app.title_width -= d3.select("#settings").node().offsetWidth+12
+    d3.select("#builder").style("max-width",app.title_width+"px")
     app.title_width -= d3.select("#settings").node().offsetWidth
-    app.title_width -= 12
-    d3.select("#builder")
-      .style("max-width",app.title_width+"px")
       
     app.title_height = d3.select("#settings").node().offsetHeight+10
     
@@ -1101,14 +1100,15 @@ val)+": ", "suffix": ""};
     app.resize = function() {
       
       var children = d3.select("#ui_bottom").node().childNodes,
-          min_width = 0;
+          min_width = 300;
           
-      for (i = 0; i < children.length; i++) {
-        var w = children[i].offsetWidth;
-        if (w > min_width) min_width = w;
-      }
-  
+      // for (i = 0; i < children.length; i++) {
+//         var w = children[i].offsetWidth;
+//         if (w > min_width) min_width = w;
+//       }
+
       if (window.innerWidth < min_width || window.innerHeight <= 400) {
+        console.log("here")
         app.vars.controls = "false";
         d3.select("#ui_bottom").style("display","none")
         d3.select("#settings").style("display","none")
@@ -1125,6 +1125,14 @@ val)+": ", "suffix": ""};
         else var u = 1
         return "-"+((this.offsetHeight+5)*u)+"px"
       })
+      
+      // Set the max-width for the builder div and app_title
+      app.title_width = window.innerWidth
+      app.title_width -= d3.select("#settings").node().offsetWidth+12
+      d3.select("#builder").style("max-width",app.title_width+"px")
+      app.title_width -= d3.select("#settings").node().offsetWidth
+      
+      app.title_height = d3.select("#settings").node().offsetHeight+10
   
       if (app.vars.controls == "true") {
         d3.select("#controls_toggle").attr("class","leon button square active")
@@ -1135,8 +1143,24 @@ val)+": ", "suffix": ""};
         var title_height = app.title_height
       }
 
-      app.height = window.innerHeight;
-      app.height -= d3.select("#ui_bottom").node().offsetHeight
+      d3.select("#key").style("display","inline-block")
+      if (window.innerWidth < d3.select("#key").node().offsetWidth-10) {
+        d3.select("#key").style("display","none")
+      }
+
+      d3.select("#year_slider").style("display","inline-block")
+      if (window.innerWidth < d3.select("#year_slider").node().offsetWidth-10) {
+        d3.select("#year_slider").style("display","none")
+      }
+      
+      if (app.title_width < 200 && app.vars.controls == "false") {
+        var buffer = d3.select("#settings").node().offsetHeight
+        app.title_width = window.innerWidth
+      }
+      else var buffer = 0
+
+      app.height = window.innerHeight
+      app.height -= (d3.select("#ui_bottom").node().offsetHeight+buffer)
       if (app.vars.controls != "false") app.height -= d3.select("#builder").node().offsetHeight
       app.width = window.innerWidth-10;
       
@@ -1146,7 +1170,8 @@ val)+": ", "suffix": ""};
         .style("top",function(d){
           if (app.vars.controls != "false") var u = 1
           else var u = 0
-          return ((d3.select("#builder").node().offsetHeight)*u)+"px"
+          
+          return (((d3.select("#builder").node().offsetHeight)*u)+buffer)+"px"
         })
         .call(app.viz
             .height(app.height)
@@ -1520,7 +1545,7 @@ v))
           d3.select("div#key").style("display","none")
         }
         else {
-          d3.select("div#key").style("display","block")
+          d3.select("div#key").style("display","inline-block")
       
           d3.selectAll("div.key_icon_container")
             .style("display",function(){
