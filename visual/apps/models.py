@@ -80,7 +80,7 @@ class Build(db.Model, AutoSerialize):
                     if Isic.query.get(f):
                         self.isic.append(Isic.query.get(f))
                     else:
-                        self.isic.append(Isic.query.get('c1410'))
+                        self.isic.append(Isic.query.get('c1010'))
                 self.filter1 = "+".join([i.id for i in set(self.isic)])
             elif self.dataset == "secex":
                 self.hs = []
