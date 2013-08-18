@@ -43,8 +43,6 @@ db = MySQLdb.connect(host="localhost", user=environ["VISUAL_DB_USER"],
 db.autocommit(1)
 cursor = db.cursor()
 
-DOMAIN = "http://localhost:5000/"
-
 def get_uniques(table):
     if table == "attrs_bra":
         q = "select bra_id from attrs_yb where length(bra_id) = 8 and population > 100000 and year = 2010;"
@@ -95,18 +93,6 @@ def format_urls(urls, attrs):
             formatted_urls.add(u.format(bra=b, hs=p, wld=w))
     
     return list(formatted_urls)
-
-# def fill_cache(classification, attrs, attr_data):
-#     data_url = "all/all/all".split("/")
-#     # attr_data_list = [attr_data[attr] + ["show"] for attr in attrs]
-#     attr_data_list = [attr_data[attr] for attr in attrs]
-#     for attr_data in itertools.product(*attr_data_list):
-#         data_url = [x[1] if x[1] else x[0] for x in itertools.izip_longest(data_url, attr_data)]
-#         data_api_url = DOMAIN + classification + "/all/" + "/".join(data_url)
-#         # print data_api_url
-#         # sys.exit()
-#         urllib2.urlopen(data_api_url)
-#         time.sleep(.1)
 
 def add_to_cache(urls):
     count = 0
