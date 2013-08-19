@@ -137,7 +137,10 @@ visual.format.text = function(text,name,l) {
       "wld_5_plural": {"en": "Countries", "pt": "Pa\u00eds"},
     
       // Calculation Labels
-      "complexity": {"en": "Complexity", "pt": "Complexidade"},
+      "eci": {"en": "Economic Complexity", "pt": "Complexidade Econ\u00f4mica"},
+      "pci": {"en": "Product Complexity", "pt": "Complexidade do Produto"},
+      "ici": {"en": "Industry Complexity", "pt": "Ind\u00fdstria Complexidade"},
+      "oci": {"en": "Occupation Complexity", "pt": "Complexidade Ocupa\u00e7\u00e3o"},
       "distance": {"en": "Distance", "pt": "Dist\u00e2ncia"},
       "employed": {"en": "Employed", "pt": "Empregada"},
       "importance": {"en": "Importance", "pt": "Import\u00e2ncia"},
@@ -258,7 +261,7 @@ visual.format.number = function(value,name,l) {
   
   if (!l) var l = visual.language
   
-  var smalls = ["rca","rca_bra","rca_wld","distance","complexity"]
+  var smalls = ["rca","rca_bra","rca_wld","distance","eci","pci","ici","oci"]
   
   var ids = ["cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
   if (ids.indexOf(name) >= 0) return value.toString().toUpperCase()

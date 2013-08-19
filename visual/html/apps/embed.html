@@ -303,7 +303,11 @@
           "cbo_id",
           "id_ibge",
           "growth_val",
-          "growth_val_total"
+          "growth_val_total",
+          "eci",
+          "pci",
+          "ici",
+          "oci"
         ], "long": [
           "growth_val",
           "growth_val_total",
@@ -319,21 +323,30 @@
           "num_est",
           "val_usd",
           "distance",
-          "complexity",
+          "eci",
+          "pci",
+          "ici",
+          "oci",
           "cp_bra_0_wage",
           "cp_bra_0_wage_avg",
           "cp_bra_0_num_emp",
           "cp_bra_0_num_est",
           "cp_bra_0_val_usd",
           "cp_bra_0_distance",
-          "cp_bra_0_complexity",
+          "cp_bra_0_eci",
+          "cp_bra_0_pci",
+          "cp_bra_0_ici",
+          "cp_bra_0_oci",
           "cp_bra_1_wage",
           "cp_bra_1_wage_avg",
           "cp_bra_1_num_emp",
           "cp_bra_1_num_est",
           "cp_bra_1_val_usd",
           "cp_bra_1_distance",
-          "cp_bra_1_complexity"
+          "cp_bra_1_eci",
+          "cp_bra_1_pci",
+          "cp_bra_1_ici",
+          "cp_bra_1_oci"
         ]}
     
     // Define global viz-whiz app parameters
@@ -341,15 +354,24 @@
       .name_array(["name","display_id"])
       .nesting_aggs({
           "distance": "mean",
-          "complexity": "mean",
+          "eci": "mean",
+          "pci": "mean",
+          "ici": "mean",
+          "oci": "mean",
           "rca": "mean",
           "wage_avg": "mean",
           "cp_bra_0_distance": "mean",
-          "cp_bra_0_complexity": "mean",
+          "cp_bra_0_eci": "mean",
+          "cp_bra_0_pci": "mean",
+          "cp_bra_0_ici": "mean",
+          "cp_bra_0_oci": "mean",
           "cp_bra_0_rca": "mean",
           "cp_bra_0_wage_avg": "mean",
           "cp_bra_1_distance": "mean",
-          "cp_bra_1_complexity": "mean",
+          "cp_bra_1_eci": "mean",
+          "cp_bra_1_pci": "mean",
+          "cp_bra_1_ici": "mean",
+          "cp_bra_1_oci": "mean",
           "cp_bra_1_rca": "mean",
           "cp_bra_1_wage_avg": "mean"
         })
@@ -830,9 +852,10 @@
       /******************************/
       else if (app.build.app.type == "scatter") {
         var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca"
+        var yv = app.build.output == "hs" ? "pci" : "ici"
         app.viz
           .xaxis_var("distance")
-          .yaxis_var("complexity")
+          .yaxis_var(yv)
           .xaxis_scale("linear")
           .yaxis_scale("linear")
           .mirror_axis(false)
@@ -1081,7 +1104,10 @@
     app.total = function() {
 
       var exclusions = [
-            "complexity",
+            "eci",
+            "pci",
+            "ici",
+            "oci",
             "none",
             "importance",
             "wage_avg",

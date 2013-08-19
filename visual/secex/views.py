@@ -248,8 +248,8 @@ def secex_ybw(**kwargs):
 @mod.route('/<year>/<bra_id>/<hs_id>/all/')
 def secex_ybp(**kwargs):
     kwargs["join"] = {
-                        "table": Yp.complexity,
-                        "columns": {"complexity": Yp.complexity},
+                        "table": Yp.pci,
+                        "columns": {"pci": Yp.pci},
                         "on": ('year', 'hs_id')
                     }
     return make_response(make_query(Ybp, request.args, **kwargs))

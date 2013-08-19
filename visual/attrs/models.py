@@ -48,7 +48,7 @@ class Stats(object):
             stats.append({"name": "val_usd", "value": self.get_val(Yw, "val_usd", attr_type)})
             stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yw, "val_usd_growth_pct", attr_type)})
             stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yw, "val_usd_growth_pct_5", attr_type)})
-            stats.append({"name": "complexity", "value": self.get_val(Yw, "complexity", attr_type)})
+            stats.append({"name": "eci", "value": self.get_val(Yw, "eci", attr_type)})
             
         return stats
     

@@ -231,10 +231,10 @@ def rais_yo(**kwargs):
 @mod.route('/all/<bra_id>/<isic_id>/all/')
 @mod.route('/<year>/<bra_id>/<isic_id>/all/')
 def rais_ybi(**kwargs):
-    # if "complexity" in kwargs:
+    
     kwargs["join"] = {
-                        "table": Yi.complexity,
-                        "columns": {"complexity": Yi.complexity},
+                        "table": Yi.ici,
+                        "columns": {"ici": Yi.ici},
                         "on": ('year', 'isic_id')
                     }
     return make_response(get_query(Ybi, request.args, **kwargs))
