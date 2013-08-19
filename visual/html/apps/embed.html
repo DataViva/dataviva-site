@@ -1149,9 +1149,11 @@ val)+": ", "suffix": ""};
         }
       }
 
-      d3.select("#key").style("display","inline-block")
-      if (window.innerWidth < d3.select("#key").node().offsetWidth-10) {
-        d3.select("#key").style("display","none")
+      if (d3.select("#key").node()) {
+        d3.select("#key").style("display","inline-block")
+        if (window.innerWidth < d3.select("#key").node().offsetWidth-10) {
+          d3.select("#key").style("display","none")
+        }
       }
 
       d3.select("#year_slider").style("display","inline-block")
