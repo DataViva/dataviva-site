@@ -45,19 +45,31 @@ cursor = db.cursor()
 
 def get_uniques(table):
     if table == "attrs_bra":
+        '''municipalities'''
         q = "select bra_id from attrs_yb where length(bra_id) = 8 and population > 100000 and year = 2010;"
-    elif table == "attrs_hs":
-        q = "select hs_id from secex_yp where length(hs_id) = 6 and val_usd > 100000000 and year = 2010;"
-    elif table == "attrs_cbo":
-        q = "select cbo_id from rais_yo where length(cbo_id) = 4 and num_emp > 50000 and year = 2010;"
-    elif table == "attrs_isic":
-        q = "select isic_id from rais_yi where length(isic_id) = 5 and num_emp > 50000 and year = 2010;"
-    elif table == "attrs_wld":
-        q = "select wld_id from secex_yw where length(wld_id) = 5 and val_usd > 100000000 and year = 2010;"
+        cursor.execute(q)
+        uniques = [row[0] for row in cursor.fetchall()]
+        
+        '''states'''
+        q = "select id from attrs_bra where length(id) = 2"
+        cursor.execute(q)
+        uniques += [row[0] for row in cursor.fetchall()]
+        
+        '''all for brazil'''
+        uniques += ["all"]
     else:
-        q = "SELECT DISTINCT(id) FROM %s" % (table,)
-    cursor.execute(q)
-    uniques = [row[0] for row in cursor.fetchall()]
+        if table == "attrs_hs":
+            q = "select hs_id from secex_yp where length(hs_id) = 6 and val_usd > 100000000 and year = 2010;"
+        elif table == "attrs_cbo":
+            q = "select cbo_id from rais_yo where length(cbo_id) = 4 and num_emp > 50000 and year = 2010;"
+        elif table == "attrs_isic":
+            q = "select isic_id from rais_yi where length(isic_id) = 5 and num_emp > 50000 and year = 2010;"
+        elif table == "attrs_wld":
+            q = "select wld_id from secex_yw where length(wld_id) = 5 and val_usd > 100000000 and year = 2010;"
+        else:
+            q = "SELECT DISTINCT(id) FROM %s" % (table,)
+        cursor.execute(q)
+        uniques = [row[0] for row in cursor.fetchall()]
     return uniques
 
 def get_urls():
