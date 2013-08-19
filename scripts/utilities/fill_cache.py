@@ -44,11 +44,12 @@ db.autocommit(1)
 cursor = db.cursor()
 
 def get_uniques(table):
+    uniques = []
     if table == "attrs_bra":
         '''municipalities'''
         q = "select bra_id from attrs_yb where length(bra_id) = 8 and population > 100000 and year = 2010;"
         cursor.execute(q)
-        uniques = [row[0] for row in cursor.fetchall()]
+        uniques += [row[0] for row in cursor.fetchall()]
         
         '''states'''
         q = "select id from attrs_bra where length(id) = 2"
@@ -60,16 +61,44 @@ def get_uniques(table):
     else:
         if table == "attrs_hs":
             q = "select hs_id from secex_yp where length(hs_id) = 6 and val_usd > 100000000 and year = 2010;"
+            cursor.execute(q)
+            uniques += [row[0] for row in cursor.fetchall()]
+            
+            '''HS2'''
+            q = "select id from attrs_hs where length(id) = 2"
+            cursor.execute(q)
+            uniques += [row[0] for row in cursor.fetchall()]
+            
         elif table == "attrs_cbo":
             q = "select cbo_id from rais_yo where length(cbo_id) = 4 and num_emp > 50000 and year = 2010;"
+            cursor.execute(q)
+            uniques += [row[0] for row in cursor.fetchall()]
+            
+            '''CBO 1'''
+            q = "select id from attrs_hs where length(id) = 1"
+            cursor.execute(q)
+            uniques += [row[0] for row in cursor.fetchall()]
+            
         elif table == "attrs_isic":
             q = "select isic_id from rais_yi where length(isic_id) = 5 and num_emp > 50000 and year = 2010;"
+            cursor.execute(q)
+            uniques += [row[0] for row in cursor.fetchall()]
+            
+            '''ISIC top level'''
+            q = "select id from attrs_isic where length(id) = 1"
+            cursor.execute(q)
+            uniques += [row[0] for row in cursor.fetchall()]
+            
         elif table == "attrs_wld":
             q = "select wld_id from secex_yw where length(wld_id) = 5 and val_usd > 100000000 and year = 2010;"
-        else:
-            q = "SELECT DISTINCT(id) FROM %s" % (table,)
-        cursor.execute(q)
-        uniques = [row[0] for row in cursor.fetchall()]
+            cursor.execute(q)
+            uniques += [row[0] for row in cursor.fetchall()]
+            
+            '''continents'''
+            q = "select id from attrs_wld where length(id) = 2"
+            cursor.execute(q)
+            uniques += [row[0] for row in cursor.fetchall()]
+
     return uniques
 
 def get_urls():
