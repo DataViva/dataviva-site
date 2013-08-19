@@ -18,7 +18,7 @@ class Yi(db.Model, AutoSerialize):
     wage = db.Column(db.Float())
     num_emp = db.Column(db.Integer())
     num_est = db.Column(db.Integer())
-    complexity = db.Column(db.Float())
+    ici = db.Column(db.Float())
     num_emp_avg = db.Column(db.Float())
     num_emp_med = db.Column(db.Float())
     wage_growth_pct = db.Column(db.Float())
