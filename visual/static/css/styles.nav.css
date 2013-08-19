@@ -45,10 +45,6 @@
   width: 153px;
 }
 
-#header > #logo {
-  margin-right: 12px;
-}
-
 #header > a.link {
   background-position: top center;
   background-repeat: no-repeat;
@@ -59,9 +55,7 @@
   opacity: 0.25;
   padding-top: 34px;
   text-align: center;
-  width: 90px;
-/*  -webkit-transition: color .2s, background-image .2s, opacity .2s;
-          transition: color .2s, background-image .2s, opacity .2s;*/
+  width: 95px;
 }
 
 #header a#guide {
@@ -134,7 +128,7 @@
   display: inline-block;
   margin-top: -2px;
   text-align: center;
-  width: 90px;
+  width: 75px;
 }
 
 #header div#account {
