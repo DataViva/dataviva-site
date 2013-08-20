@@ -4,42 +4,38 @@
 
 {% block body %}
 
-<h2>What is the Stacked app?</h2>
-<p>The Stacked app uses a visualization commonly referred to as a stacked area chart. It is a visualization used to show the change in values over time. Since the two datasets being show (exports and employment) have data ranging several years, this is a particularly useful app. At a glance we are able to see the overall trend of values as well as individual categories.</p>
+<h2>Stacked</h2>
+<p>Stacked Area Charts are similar to line charts, except that the areas created underneath each line are stacked on top of one another, showing overall and granular trends simultaneously over time.</p>
 
-<h2>Color</h2>
-<p>The color of the different areas is used to differentiate between the different category groupings of the items being shown (this varies with the question being asked). For example, when viewing a Stacked app of the question <a href="/builder/stacked/mte/mg/all/all/isic/" target="_blank">What industries locate in Minas Gerais?</a> the colors correspond to the various industry categories:</p>
-<img id="key_isic" src="/static/img/help/key/key_isic.jpg">
-<p>Whereas if we were to choose instead the question of <a href="/builder/stacked/mte/all/all/all/munic/" target="_blank">Where are Industries located in Brazil?</a> we would see the colors now corresponding to the different states of Brazil, as shown in the key:</p>
-<img id="key_munic" src="/static/img/help/key/key_munic.jpg">
+<div class="topic">
+	<h2>Sizing</h2>
+	<p>In the Stacked Area Chart, the Y axis variable determines the size of each area. The default variable is Trade Value for product data and Total Number of Employees for employment data, but this value can be changed depending on the dataset. When changing this value, the areas on the chart will resize and reposition accordingly.</p>
+</div>
 
-<h2>Sorting</h2>
-<p>Each area can be vertically sorted by 3 different data points: Category classification ID, alphabetical name, and overall size (as seen below).</p>
-<div class="ui_group">
-  <legend>Sorting</legend>
-  <input type="radio" name="sorting" value="key" checked>
-  <label for="key">key</label>
-  <input type="radio" name="sorting" value="name">
-  <label for="name">name</label>
-  <input type="radio" name="sorting" value="total">
-  <label for="total">total</label>
+<div class="topic">
+	<h2>Sorting</h2>
+	<p>The areas in the Stacked Area chart can be sorted by 3 different variables: Name, Value, and Sector. The order of these areas can be modified from ascending to descending, and vice versa.</p>
+</div>
+
+<div class="topic">
+	<h2>Depth</h2>
+	<p>By changing the depth shown, you can aggregate the areas to get a broad view of the Sectors, or go deeper to get a more granular look at the data.</p>
+</div>
+
+<div class="topic">
+	<h2>Color</h2>
+	<p>Color, along with the other visualizations, defaults to showing Sectors for the data classification you are viewing (whether it is products, industries, occupations, or locations).</p>
+</div>
+
+<div class="topic">
+	<h2>Filter/Solo</h2>
+	<p>By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of areas. Click the “X” on the right of the key to clear all filters and solos.</p>
+</div>
+
+<div class="topic">
+	<h2>Layout</h2>
+	<p>The behaviour of the Y axis variable can be switched between “Value” and “Market Share”. In “Value” layout, the areas are calculated on the literal value of the axis variable. In “Market Share” layout, the areas are calculated as a percentage of the overall value for each year.</p>
 </div>
 
 
-<h2>Nesting</h2>
-<p>Another important part of any stacked visualization is its ability to show the nestedness (or hierarchy) of a dataset. Here we leverage the interactivity of the web platform to show the children of any parent category on click. This is best understood when visualizing a geographic output, for example in <a href="/builder/stacked/mte/all/all/all/munic/" target="_blank">Where are Industries located in Brazil?</a>, the top or parent level is the 27 Brazilian states. By clicking one of these we see the sub categories or children, which in this case are municipalities found in the selected state.</p>
-<img id="stacked_states" src="/static/img/help/stacked/states.jpg">
-
-
-{% endblock %}
-
-{% block js %}
-
-  <script type="text/javascript">
-  
-    visual.toggle("sorting");
-    
-  
-  </script>
-  
 {% endblock %}

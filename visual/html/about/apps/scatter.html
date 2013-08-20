@@ -4,53 +4,37 @@
 
 {% block body %}
 
-<h2>What is the Scatter Plot?</h2>
+<h2>Scatter</h2>
+<p>A scatter plot is a collection of data positioned on a cartesian plane using 2 available variables. The default variables shown here are  <a href="/about/glossary/#distance">Distance</a> and Complexity.</p>
 
-<p>The Scatter Plot app shows either Industries or Products and their relationship (distance and overall complexity) with a specific location.</p>
-
-<h2>Pie Chart Fill</h2>
-<p>Each circle shown is filled in to a certain degree. The amount filled in depicts how many of the child elements the selected location has RCA in. Once you click a parent category, the child circles are filled in completely if the selected location has RCA in that category.</p>
-
-<h2>Sizing</h2>
-<p>The value (or size) of each circle can be mapped to a few different data points. For industry/occupation data, we can size by total monthly wages, number of employees, or number of establishments (as seen below).</p>
-<div class="ui_group">
-  <legend>Sizing</legend>
-  <input type="radio" name="sizing_isic" value="wage" checked>
-  <label for="wage">wage</label>
-  <input type="radio" name="sizing_isic" value="num_emp">
-  <label for="num_emp">num_emp</label>
-  <input type="radio" name="sizing_isic" value="num_est">
-  <label for="num_est">num_est</label>
+<div class="topic">
+	<h2>Sizing</h2>
+	<p>In a Scatter app, each circle has an area proportional to a specified dimension on the data. Our default sizing is Trade Value for product data and Total Number of Employees for employment data, but this value can be changed depending on the dataset. When changing this value, the circles on the page will resize accordingly.</p>
 </div>
 
-<p>For product export data, we can size the circls by total weight (in kg) of the product traded, or total trade value (in $USD).</p>
-<div class="ui_group">
-  <legend>Sizing</legend>
-  <input type="radio" name="sizing_hs" value="val_kg" checked>
-  <label for="val_kg">val_kg</label>
-  <input type="radio" name="sizing_hs" value="val_usd">
-  <label for="val_usd">val_usd</label>
+<div class="topic">
+	<h2>Depth</h2>
+	<p>By changing the depth shown, you can aggregate the circles to get a broad view of the Sectors, or go deeper to get a more granular look at the data.</p>
 </div>
 
-<p>The sizing selector is located in the app controls, and can be shown by clicking "Show App Controls" in the menu on the top right of the interface.</p>
+<div class="topic">
+	<h2>Color</h2>
+	<p>Color, along with the other visualizations, defaults to showing Sectors for the data classification you are viewing (whether it is products, industries, occupations, or locations). In some cases, the color may be manipulated to show other values, such as growth, complexity, or opportunity gain.</p>
+</div>
 
-<h2>Color</h2>
-<p>The color of the different circles is used to differentiate between the different category groupings of the items being shown (this varies with the question being asked). For example, when viewing the question <a href="/builder/scatter/mte/mg/all/all/isic/" target="_blank">What industries locate in Minas Gerais?</a> the colors correspond to the various industry categories:</p>
-<img id="key_isic" src="/static/img/help/key/key_isic.jpg">
+<div class="topic">
+	<h2>Hide RCA</h2>
+	<p>When this toggle is turned on, only the items with RCA < 1 will be shown. This is helpful when looking at distances of potential new sectors. When this toggle is off, all items will be shown, and if not viewing at the deepest level, will show items of RCA >= 1 as percentage of the circle complete. Circles with RCA >= 1 are always shown filled in every app.</p>
+</div>
 
-<h2>Nesting</h2>
-<p>Another important part of the Scatter Plot app is its ability to show the nestedness (or hierarchy) of a dataset. Here we leverage the interactivity of the web platform to show the children of any parent category on click.
+<div class="topic">
+	<h2>Filter/Solo</h2>
+	<p>By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of circles. Click the “X” on the right of the key to clear all filters and solos.</p>
+</div>
 
-{% endblock %}
+<div class="topic">
+	<h2>Year</h2>
+	<p>The circles are positioned in the chart based on data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each circle will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data changes over time.</p>
+</div>
 
-{% block js %}
-
-  <script type="text/javascript">
-  
-    visual.toggle("sizing_isic");
-    visual.toggle("sizing_hs");
-    
-  
-  </script>
-  
 {% endblock %}

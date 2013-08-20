@@ -143,7 +143,7 @@ def add_to_cache(urls):
     with app.test_client() as c:
         for u in urls:
             count += 1
-            print count, u
+            print len(urls), count, u
             ctx.app.test_client().get(u, headers={'X-Requested-With': 'XMLHttpRequest'})
 
 def main():
@@ -153,6 +153,8 @@ def main():
     
     urls = get_urls()
     urls = format_urls(urls, attrs)    
+    # print len(urls)
+    # sys.exit() - 388,755
     add_to_cache(urls)
     
     # ctx = app.test_request_context()

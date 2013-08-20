@@ -4,52 +4,37 @@
 
 {% block body %}
 
-<h2>What is a Tree Map?</h2>
+<h2>Tree Map</h2>
+<p>Tree Maps display hierarchical data as a set of nested rectangles. Each branch of the tree is given a rectangle, which is then tiled with smaller rectangles representing sub-branches.</p>
 
-<p>A tree map is a type of visualization that enables a user to view a hierarchical dataset at a glace. The size of each box relates to its proportional size out of the whole, thus the entire area of the visualization is equal to 100% of the total value.</p>
-
-<h2>Sizing</h2>
-<p>The value (or size) of each box can be mapped to a few different data points. For industry/occupation data, we can size by total monthly wages, number of employees, or number of establishments (as seen below).</p>
-<div class="ui_group">
-  <legend>Size</legend>
-  <input type="radio" name="size_rais" value="wage" checked>
-  <label for="wage">wage</label>
-  <input type="radio" name="size_rais" value="num_emp">
-  <label for="num_emp">num_emp</label>
-  <input type="radio" name="size_rais" value="num_est">
-  <label for="num_est">num_est</label>
-</div>
-<p>For product export data, we can size the boxes by total weight (in kg) of the product traded, or total trade value (in $USD).</p>
-<div class="ui_group">
-  <legend>Size</legend>
-  <input type="radio" name="size_secex" value="val_kg" checked>
-  <label for="val_kg">val_kg</label>
-  <input type="radio" name="size_secex" value="val_usd">
-  <label for="val_usd">val_usd</label>
+<div class="topic">
+	<h2>Sizing</h2>
+	<p>In a Tree Map, each rectangle has an area proportional to a specified dimension on the data. Our default sizing is Trade Value for product data and Total Number of Employees for employment data, but this value can be changed depending on the dataset. When changing this value, the rectangles on the page will resize and reposition accordingly.</p>
 </div>
 
-<p>The sizing selector is located in the app controls, and can be shown by clicking "Show App Controls" in the menu on the top right of the interface.</p>
+<div class="topic">
+	<h2>Order</h2>
+	<p>The rectangles in the Tree Map are grouped by their classification’s Sector, and the Sector’s are ordered from largest to smallest, based on the sizing variable.</p>
+</div>
 
-<h2>Color</h2>
-<p>The color of the different boxes is used to differentiate between the different category groupings of the items being shown (this varies with the question being asked). For example, when viewing a tree map of the question <a href="/builder/tree_map/mte/mg/all/all/isic/" target="_blank">What industries locate in Minas Gerais?</a> the colors correspond to the various industry categories:</p>
-<img id="key_isic" src="/static/img/help/key/key_isic.jpg">
-<p>Whereas if we were to choose instead the question of <a href="/builder/tree_map/mte/all/all/all/munic/" target="_blank">Where are Industries located in Brazil?</a> we would see the colors now corresponding to the different states of Brazil, as shown in the key:</p>
-<img id="key_munic" src="/static/img/help/key/key_munic.jpg">
+<div class="topic">
+	<h2>Depth</h2>
+	<p>By changing the depth shown, you can aggregate the squares to get a broad view of the Sectors, or go deeper to get a more granular look at the data.</p>
+</div>
 
-<h2>Nesting</h2>
-<p>Another important part of any tree map visualization, and its most distinguished feature, is its ability to show the nestedness (or hierarchy) of a dataset. Here we leverage the interactivity of the web platform to show the children of any parent category on click. This is best understood when visualizing a geographic output, for example in <a href="/builder/tree_map/mte/all/all/all/munic/" target="_blank">Where are Industries located in Brazil?</a>, the top or parent level is the 27 Brazilian states. By clicking one of these we see the sub categories or children, which in this case are municipalities found in the selected state.</p>
-<img id="tree_map_states" src="/static/img/help/tree_map/states.jpg">
+<div class="topic">
+	<h2>Color</h2>
+	<p>Color, along with the other visualizations, defaults to showing Sectors for the data classification you are viewing (whether it is products, industries, occupations, or locations). In some cases, the color may be manipulated to show other values, such as growth, complexity, or opportunity gain.</p>
+</div>
 
-{% endblock %}
+<div class="topic">
+	<h2>Filter/Solo</h2>
+	<p>By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of rectangles. Click the “X” on the right of the key to clear all filters and solos.</p>
+</div>
 
-{% block js %}
+<div class="topic">
+	<h2>Year</h2>
+	<p>The rectangles display data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each rectangle will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data changes over time.</p>
+</div>
 
-  <script type="text/javascript">
-  
-    visual.toggle("size_rais");
-    visual.toggle("size_secex");
-    
-    
-  </script>
-  
 {% endblock %}
