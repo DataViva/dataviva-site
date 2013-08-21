@@ -978,47 +978,56 @@
       
       if ("occugrid" == format[app.build.app.type]) {
         
-        data.raw.forEach(function(d,i){
-          
-          var bra_data = app.data[app.build.imp_url].raw.filter(function(i){
-            return i.cbo_id == d.cbo_id && i.year == d.year
-          })[0]
-          
-          d.importance = bra_data.importance
-          
-          if (d.importance >= 0.3) {
-            
-            d.category = attr[d[out+"_id"].slice(0,depths[out][0])].name
-            d.none = 1
-          
-            if (!d.wage) d.wage = 0
-            if (!d.num_emp) d.num_emp = 0
-            if (!d.num_est) d.num_est = 0
-          
-            if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp
-            else d.wage_avg = 0
-          
-            d.wage_avg_bra = bra_data.wage/bra_data.num_emp
-          
-            var else_data = app.data[app.build.else_url].raw.filter(function(i){
-              return i.cbo_id == d.cbo_id && i.year == d.year
-            })[0]
-          
-            d.active = d.num_emp/d.required >= 1 ? true : false
-          
-            if (!else_data) d.elsewhere = 0
-            else d.elsewhere = else_data.num_emp-d.num_emp
-    
-            d.display_id = visual.displayID(d[out+"_id"],out)
-            d.icon = visual.icon(d[out+"_id"],out)
-
-            get_keys(d)
-          
-            data_obj.push(d)
-          
-          }
-            
+        var jobs = app.data[app.build.imp_url].raw.sort(function(a,b){
+          return b.importance - a.importance
         })
+        
+        var year_jobs = {}
+        jobs.forEach(function(j){
+          if (j.importance >= 0.1) {
+            if (!year_jobs[j.year]) year_jobs[j.year] = [j]
+            else if (year_jobs[j.year].length < 40) year_jobs[j.year].push(j)
+          }
+        })
+        
+        for (year in year_jobs) {
+          year_jobs[year].forEach(function(job){
+            var d = data.raw.filter(function(x){
+              return x.cbo_id == job.cbo_id && x.year == year
+            })[0]
+            if (d && d.required) {
+              d.importance = job.importance
+              d.category = attr[d[out+"_id"].slice(0,depths[out][0])].name
+              d.none = 1
+            
+              if (!d.wage) d.wage = 0
+              if (!d.num_emp) d.num_emp = 0
+              if (!d.num_est) d.num_est = 0
+          
+              if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp
+              else d.wage_avg = 0
+              
+              d.wage_avg_bra = job.wage/job.num_emp
+          
+              var else_data = app.data[app.build.else_url].raw.filter(function(e){
+                return e.cbo_id == d.cbo_id && e.year == d.year
+              })[0]
+          
+              d.active = d.num_emp/d.required >= 1 ? true : false
+          
+              if (!else_data) d.elsewhere = 0
+              else d.elsewhere = else_data.num_emp-d.num_emp
+    
+              d.display_id = visual.displayID(d[out+"_id"],out)
+              d.icon = visual.icon(d[out+"_id"],out)
+
+              get_keys(d)
+            
+              data_obj.push(d)
+              
+            }
+          })
+        }
     
       }
       else if ("compare" == format[app.build.app.type]) {
@@ -1090,13 +1099,9 @@
         if (!data.categories) data.categories = {}
         if (!data.categories[d.year]) data.categories[d.year] = []
         if (!data.categories.all) data.categories.all = []
-        for (var key in d) { 
-          if (key == out+"_id") {
-            var parent = d[key].slice(0,depths[out][0])
-            if (data.categories[d.year].indexOf(parent) < 0) data.categories[d.year].push(parent);
-            if (data.categories.all.indexOf(parent) < 0) data.categories.all.push(parent);
-          }
-        }
+        var parent = d[out+"_id"].slice(0,depths[out][0])
+        if (data.categories[d.year].indexOf(parent) < 0) data.categories[d.year].push(parent);
+        if (data.categories.all.indexOf(parent) < 0) data.categories.all.push(parent);
       }
       
     }
@@ -1175,7 +1180,7 @@ val)+": ", "suffix": ""};
         }
       }
 
-      if (d3.select("#key").node()) {
+      if (d3.select("#key").node() && app.categories && app.categories.length > 1) {
         d3.select("#key").style("display","inline-block")
         if (window.innerWidth < d3.select("#key").node().offsetWidth-10) {
           d3.select("#key").style("display","none")
@@ -1552,26 +1557,29 @@ v))
           if (app.build.app.type != "network") {
             if (app.data[app.build.data_url].categories) {
               if (app.build.app.type != "stacked") {
-                var cats = app.data[app.build.data_url].categories[app.vars.year]
+                app.categories = app.data[app.build.data_url].categories[app.vars.year]
               }
               else {
-                var cats = app.data[app.build.data_url].categories.all
+                app.categories = app.data[app.build.data_url].categories.all
               }
             }
             else {
-              var cats = []
+              app.categories = []
             }
           }
           else {
-            var cats = []
+            app.categories = []
             app.networks[app.build.output].nodes.forEach(function(n){
               var id = n[app.build.output+"_id"].slice(0,depths[app.build.output][0])
-              if (cats.indexOf(id) < 0) cats.push(id)
+              if (app.categories.indexOf(id) < 0) app.categories.push(id)
             })
           }
         }
+        else {
+          app.categories = cats
+        }
         
-        if (cats.length <= 1) {
+        if (app.categories.length <= 1) {
           d3.select("div#key").style("display","none")
         }
         else {
@@ -1580,11 +1588,9 @@ v))
           d3.selectAll("div.key_icon_container")
             .style("display",function(){
               var id = this.id.slice(3)
-              return cats.indexOf(id) < 0 ? "none" : "inline-block";
+              return app.categories.indexOf(id) < 0 ? "none" : "inline-block";
             })
         }
-      
-        app.categories = cats
         
       }
         

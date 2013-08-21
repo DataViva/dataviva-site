@@ -78,14 +78,14 @@ function Key() {
             }
             
             if (key_filters.indexOf(d.id) >= 0) {
-              var filter_class = "leon button active"
+              var filter_class = "leon button medium active"
             }
             else {
               var filter_class = "leon button medium"
             }
             
             if (key_solos.indexOf(d.id) >= 0) {
-              var solo_class = "leon button active"
+              var solo_class = "leon button medium active"
             }
             else {
               var solo_class = "leon button medium"
@@ -121,7 +121,7 @@ function Key() {
       })
        
       var reset_button = d3.select(key).append("div")
-        .attr("class","leon button square")
+        .attr("class","leon button medium square")
         .on(vizwhiz.evt.over,function(){
           
           var x_pos = this.offsetLeft+(this.offsetWidth/2)
