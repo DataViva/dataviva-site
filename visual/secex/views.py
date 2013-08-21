@@ -29,7 +29,10 @@ def per_request_callbacks(response):
 ''' Given a "bra" string from URL, turn this into an array of Bra
     objects'''
 def parse_bras(bra_str):
-    if ".show." in bra_str:
+    if "mgpr" in bra_str:
+        planning_region = Bra.query.get(bra_str)
+        bras = [b.serialize() for b in planning_region.pr.all()]
+    elif ".show." in bra_str:
         # the '.show.' indicates that we are looking for a specific nesting
         bar_id, nesting = bra_str.split(".show.")
         # filter table by requested nesting level
