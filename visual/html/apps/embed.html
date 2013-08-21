@@ -759,7 +759,9 @@
       depths[app.build.output].forEach(function(d){
         nesting.push(app.build.output+"_"+d)
       })
-
+      
+      app.solos = []
+      app.filters = []
       builder.url()
       
       var color_var = app.vars.color_var ? app.vars.color_var : "color"
@@ -787,6 +789,9 @@
         .id_var(app.build.output+"_id")
         .error(false)
         .data_source(footer[app.build.dataset])
+        .solo(app.solos)
+        .filter(app.filters)
+        .sub_title(null)
         
       /******************************/
       /* Network Specific Variables */
@@ -1276,10 +1281,17 @@ val)+": ", "suffix": ""};
     }
     
     app.title_update = function() {
-      if (app.vars.depth && app.build.output == "bra") {
-        new_depth = visual.format.text(app.vars.depth+"_plural")
-        app.build.title = app.build.title.replace(last_depth,new_depth)
-        last_depth = new_depth
+      if (app.build.output == "bra") {
+        if (app.vars.depth) {
+          new_depth = visual.format.text(app.vars.depth+"_plural")
+          app.build.title = app.build.title.replace(last_depth,new_depth)
+          last_depth = new_depth
+        }
+        else if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
+          var old_word = visual.format.text("bra_8_plural")
+          var new_word = visual.format.text("bra_2_plural")
+          app.build.title = app.build.title.replace(old_word,new_word)
+        }
       }
     }
     
