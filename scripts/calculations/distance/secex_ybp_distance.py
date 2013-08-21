@@ -40,12 +40,14 @@ db = MySQLdb.connect(host="localhost", user=environ["VISUAL_DB_USER"],
 db.autocommit(1)
 cursor = db.cursor()
 
-def delete_old_distance_from_db(year, wld_or_domestic):
+def delete_old_distance_from_db(year, geo_level, wld_or_domestic):
     '''clear old proximity vals'''
     if wld_or_domestic == "domestic":
-        cursor.execute("update secex_ybp set distance=NULL where year=%s ", (year))
+        cursor.execute("update secex_ybp set distance=NULL where year=%s " \
+                        "and length(bra_id) = %s", (year, geo_level))
     else:
-        cursor.execute("update secex_ybp set distance_wld=NULL where year=%s ", (year))
+        cursor.execute("update secex_ybp set distance_wld=NULL where year=%s " \
+                        "and length(bra_id) = %s", (year, geo_level))
 
 def add_new_distance_to_db(year, dist, wld_or_domestic):
     '''add new opp_gain vals'''
@@ -106,10 +108,10 @@ def calculate_distance(year, geo_level, wld_or_domestic):
     
     return distances
 
-def add(year, distance, wld_or_domestic):
+def add(year, geo_level, distance, wld_or_domestic):
     '''delete old proximity values'''
     print "Deleteing old distance values..."
-    delete_old_distance_from_db(year, wld_or_domestic)
+    delete_old_distance_from_db(year, geo_level, wld_or_domestic)
     
     '''insert new proximity values to database'''
     print "Adding new distance values..."
@@ -155,7 +157,7 @@ if __name__ == "__main__":
             print
             print " --- Geo Level: {0} --- ".format(g);
             dist = calculate_distance(y, g, "domestic")
-            add(y, dist, "domestic")
+            add(y, g, dist, "domestic")
             
             dist = calculate_distance(y, g, "world")
-            add(y, dist, "world")
+            add(y, g, dist, "world")
