@@ -71,6 +71,7 @@ class Build(db.Model, AutoSerialize):
                     b = state
                 self.bra.append(Bra.query.get(b))
                 self.bra[i].distance = dist
+                self.bra[i].neighbor_ids = [b.bra_id_dest for b in self.bra[i].get_neighbors(dist)]
 
     def set_filter1(self, filter):
         if self.filter1 != "all":
