@@ -6,8 +6,7 @@ function Selector() {
       initial_value = "all",
       distance = 0,
       limit = null,
-      lists = {},
-      popover = false;
+      lists = {}
       
   lists.file = {
     "all": {
@@ -207,8 +206,6 @@ function Selector() {
         }
         
         selected = x;
-        
-        if (popover) close.style("background-color",vizwhiz.utils.darker_color(x.color))
 
         if (depths.length > 1) {
           
@@ -236,15 +233,6 @@ function Selector() {
       }
       
       create_elements = function() {
-      
-        if (popover) {
-          close = container.append("div")
-            .attr("class","vizwhiz_tooltip_close")
-            .html("\&times;")
-            .on(vizwhiz.evt.click,function(){
-              visual.popover.hide("#popover");
-            })
-        }
 
         header = container.append("div").attr("class","selector_header")
         
@@ -279,7 +267,7 @@ function Selector() {
               .html(visual.format.text(s))
           })
           
-          leon("$selector_sort").color(visual.color)
+          sorter = leon("$selector_sort").color(visual.color)
         }
         
 
@@ -376,8 +364,12 @@ function Selector() {
           header_select.style("display","none")
           icon.style("display","none")
           title.text(visual.format.text("search_results"))
+          var header_color = "#333333"
         }
         else {
+          
+          var header_color = x.color
+          
           icon
             .style("display","inline-block")
             .style("background-image","url('"+x.icon+"')")
@@ -416,6 +408,17 @@ function Selector() {
             description.text("")
           }
           
+        }
+        
+        if (header_color == "#ffffff") header_color = "#333333"
+        
+        var close = d3.select(container.node().parentNode).select(".vizwhiz_tooltip_close")
+        if (close.node()) {
+          close.style("background-color",header_color)
+        }
+        
+        if (sorter) {
+          sorter.color(header_color)
         }
         
         var hw = header.node().offsetWidth
@@ -582,11 +585,13 @@ function Selector() {
         // Set height for selector_body, based off of the title height
         var parent = container.node().parentNode,
             display = d3.select(parent).style("display")
+            
         if (display == "none") {
           parent.style.visibility = "hidden"
           parent.style.display = "block"
         }
         var max_height = container.node().offsetHeight
+        
         max_height -= body.node().offsetTop
         max_height -= parseFloat(body.style("padding-top"),10)
         max_height -= parseFloat(body.style("padding-bottom"),10)
@@ -607,7 +612,8 @@ function Selector() {
           description = null,
           search = null, 
           body = null, 
-          sort_toggles = null;
+          sort_toggles = null,
+          sorter = null;
           
       var distance_url = "/attrs/bra/munic.value/",
           depths = visual.depths(type,true),
@@ -632,9 +638,9 @@ function Selector() {
       else {
         var sorting = "name"
       }
-          
+       
+      d3.select(this).select(".selector").remove()
       var container = d3.select(this)
-        .html("")
         .append("div")
           .attr("class","selector")
 
@@ -685,12 +691,6 @@ function Selector() {
   util.limit = function(value) {
     if (!arguments.length) return limit;
     limit = value;
-    return util;
-  }
-  
-  util.popover = function(value) {
-    if (!arguments.length) return popover;
-    popover = value
     return util;
   }
   

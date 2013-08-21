@@ -56,19 +56,21 @@
   
   <div id="site_breadcrumbs"></div>
 
-
-  {% for category, msg in get_flashed_messages(with_categories=true) %}
-  <div id="server_message">
-    <span class="flash-{{ category }}">{{ msg|safe }}</span>
-    <i id="close_message" class="icon-remove-sign"></i>
-  </div>
-  {% endfor %}
   <div id="outer_container">
     <div id="inner_container">
       <div id="container">
+
+        {% for category, msg in get_flashed_messages(with_categories=true) %}
+        <div id="server_message">
+          <div class="decision flash-{{ category }}">
+            {{ msg|safe }}
+            <i id="close_message" class="icon-remove-sign"></i>
+          </div>
+        </div>
+        {% endfor %}
     
-    {% block body %}
-    {% endblock %}
+        {% block body %}
+        {% endblock %}
 
       </div>
     </div>

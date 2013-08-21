@@ -15,10 +15,13 @@
 {% endblock %}
 
 {% block body %}
+
+<div id="fullscreen"></div>
+
 <div class="grid5col4">
   
   {% with q = question %}
-  <div class="question">
+  <div class="question landing">
     
     <!-- Show vote count and buttons -->
     <div class="vote_block">
@@ -30,14 +33,13 @@
     </div>
     
     <!-- Display question -->
-    <div class="question_preview">
       
       <!-- Actual question -->
-      <h2>{{ q.question }}</h2>
+      <h1>{{ q.question }}</h1>
       
       <!-- Body (clarification for question) -->
       {% if q.body %}
-      <p>{{ q.body|safe }}</p>
+        {{ q.body|safe }}
       {% endif %}
       
       <!-- Tags associated with question -->
@@ -61,32 +63,29 @@
       
     </div> <!-- end of right hand-side -->
     
-  </div> <!-- end of question -->
+    <!-- end of question -->
   
   <!-- Sabrina's Answer! -->
-  <div class="answer darkbox">
+  <div class="answer lightbox{% if q.status_notes %} answered{% endif %}">
     
     <!-- Answer text -->
-    <p>
-      {% if q.status_notes %}
-        {{ q.status_notes|safe }}
-      {% else %}
-        {% trans %}Sabrina has not answered this question yet. Feel free to start the conversation below.{% endtrans %}
-      {% endif %}
-    </p>
-    
-    <!-- Sabrina's face -->
-    <div id="answer_sabrina"></div>
+    {% if q.status_notes %}
+      {{ q.status_notes|safe }}
+      <!-- Sabrina's face -->
+      <div id="answer_sabrina"></div>
+    {% else %}
+      {% trans %}Sabrina has not answered this question yet. Feel free to start the conversation below.{% endtrans %}
+    {% endif %}
     
   </div> <!-- end of sabrina's answer -->
   
   {% if q.replies.all()|length %}
   <!-- The responses -->
-  <h2>{% trans %}Responses{% endtrans %}</h2>
-  <div id="responses">
+  <div id="responses" class="responses lightbox">
+  <h1>{% trans %}Responses{% endtrans %}</h1>
     
     {% for r in q.replies %}
-    <div class="question darkbox {% if r.id != r.parent_id %} child {% endif %}">
+    <div class="question comment{% if r.id != r.parent_id %} child{% endif %}">
       
       <!-- Voting -->
       <div class="vote_block">
@@ -101,7 +100,6 @@
       </div> <!-- end voting -->
       
       <!-- Reply text -->
-      <div class="question_preview{% if r.id != r.parent_id %} child{% endif %}">
         {{ r.body|safe }}
         
         <!-- User metadata -->
@@ -109,11 +107,10 @@
           <div class="userpic" style="background-image: url('{{ r.user.avatar(50) }}')"></div>
           <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a> {{ momentjs(q.timestamp).fromNow() }}
         </div>
-        
-      </div> <!-- end reply text -->
+      <!-- end reply text -->
         
       {% if r.id == r.parent_id %}
-      <button class="leave_response" data-parent="{{r.parent_id}}">{% trans %}Respond to{% endtrans %} {{r.user.fullname}}</button>
+      <div class="leave_response decision short icon reply" data-parent="{{r.parent_id}}">{% trans %}Respond to{% endtrans %} {{r.user.fullname}}</div>
       {% endif %}
     
     </div> <!-- end reply -->
@@ -124,33 +121,34 @@
   {% endwith %}
   
   <!-- Leave another response (not to a specify reply but in general) -->
-  <h2>{% trans %}New Response{% endtrans %}</h2>
-  <button class="leave_response" style="display: none;">{% trans %}Leave a Response{% endtrans %}</button>
+  <div id="new_response" class="lightbox reply">
+    <h1>{% trans %}New Response{% endtrans %}</h1>
+    <div class="leave_response decision" style="display: none;">{% trans %}Leave a Response{% endtrans %}</div>
   
-  <form class="reply_form" action="" method="post" name="login">
-    <!-- Reply form for the page that will be moved around-->
+    <form class="reply_form" action="" method="post" name="login">
+      <!-- Reply form for the page that will be moved around-->
     
-    {{ reply_form.hidden_tag() }}
+      {{ reply_form.hidden_tag() }}
     
-    <!-- Reply texterea box -->
-    <p>
-      {{ reply_form.reply(class="reply", id="wysiwyg_textarea", placeholder="Enter your text...") }}<br />
+      <!-- Reply texterea box -->
+      <p>
+        {{ reply_form.reply(class="reply", id="wysiwyg_textarea", placeholder="Enter your text...") }}
       
-      <!-- Errors! -->
-      {% for error in reply_form.errors.reply %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-    </p>
+        <!-- Errors! -->
+        {% for error in reply_form.errors.reply %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
     
-    <!-- Submit button -->
-    <a href="#" class="submit">
-      <div class="decision">
-        <div class="text">{% trans %}Reply{% endtrans %}!</div>
-        <div class="arrow"></div>
-      </div>
-    </a>
+      <!-- Submit button -->
+      <a href="#" class="submit">
+        <div class="decision">
+          {% trans %}Reply{% endtrans %}
+        </div>
+      </a>
     
-  </form> <!-- end reply for -->
+    </form> <!-- end reply for -->
+  </div>
   
 </div> <!-- end entire container for page .grid5col4 -->
 
@@ -220,9 +218,9 @@ d3.selectAll(".tag-icon").style("background-image", function(){
 })
 
 // show/hide reply form
-d3.selectAll("button.leave_response").on(vizwhiz.evt.click, function(){
+d3.selectAll("div.leave_response").on(vizwhiz.evt.click, function(){
   
-  d3.selectAll("button.leave_response").style("display", "block")
+  d3.selectAll("div.leave_response").style("display", "inline-block")
   var reply_form = d3.select(".reply_form").node()
   this.parentNode.insertBefore(reply_form, this);
   d3.select(this).style("display", "none")

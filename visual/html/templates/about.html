@@ -3,9 +3,13 @@
 
 {% block body %}
 
+<div id="fullscreen"></div>
+
 <div id="about_content" class="grid5col3">
-  {% block about_content %}
-  {% endblock %}
+  <div class="lightbox">
+    {% block about_content %}
+    {% endblock %}
+  </div>
 </div>
 
 <div id="about_nav" class="grid5col1">
@@ -24,20 +28,20 @@
     
     <br>
     
-    <a class="decision short icon network{% if app == 'network' %} active{% endif %}" href="{{ url_for('about.apps', app='network')}}">
-      {% trans %}Network{% endtrans %}
-    </a>
-    
     <a class="decision short icon tree_map{% if app == 'tree_map' %} active{% endif %}" href="{{ url_for('about.apps', app='tree_map')}}">
       {% trans %}Tree Map{% endtrans %}
+    </a>
+    
+    <a class="decision short icon stacked{% if app == 'stacked' %} active{% endif %}" href="{{ url_for('about.apps', app='stacked')}}">
+      {% trans %}Stacked{% endtrans %}
     </a>
     
     <a class="decision short icon geo_map{% if app == 'geo_map' %} active{% endif %}" href="{{ url_for('about.apps', app='geo_map')}}">
       {% trans %}Geo Map{% endtrans %}
     </a>
     
-    <a class="decision short icon stacked{% if app == 'stacked' %} active{% endif %}" href="{{ url_for('about.apps', app='stacked')}}">
-      {% trans %}Stacked{% endtrans %}
+    <a class="decision short icon network{% if app == 'network' %} active{% endif %}" href="{{ url_for('about.apps', app='network')}}">
+      {% trans %}Network{% endtrans %}
     </a>
     
     <a class="decision short icon rings{% if app == 'rings' %} active{% endif %}" href="{{ url_for('about.apps', app='rings')}}">
@@ -55,8 +59,6 @@
     <a class="decision short icon occugrid{% if app == 'occugrid' %} active{% endif %}" href="{{ url_for('about.apps', app='occugrid')}}">
       {% trans %}Occugrid{% endtrans %}
     </a>
-    
-
     
 </div>
 

@@ -12,48 +12,44 @@
 
 {% block body %}
 
+<div id="fullscreen"></div>
+
 <div class="grid5col1">
+  <div class="lightbox bubble">
+    <h1>
+      {% if g.user.is_authenticated() %}
+        {% trans %}What would you like to know?{% endtrans %}
+      {% else %}
+        {% trans %}You need to login for this functionality.{% endtrans %}
+      {% endif %}
+    </h1>
+  </div>
   <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
 </div>
 
-<div id="submit_column" class="grid5col4">
-  <div class="title">
-    {% if g.user.is_authenticated() %}
-      {% trans %}What would you like to know?{% endtrans %}
-    {% else %}
-      {% trans %}You need to login for this functionality.{% endtrans %}
-    {% endif %}
-  </div>
+<div id="submit_column" class="grid5col4 lightbox">
   
   {% if g.user.is_authenticated() %}
     
     <form id="ask_form" action="" method="post">
       {{form.hidden_tag()}}
-      <p>
-        <h3>{% trans %}Question{% endtrans %}:</h3>
-        {{ form.question(size=80, class="ask", placeholder="Ex. Where does the data come from?") }}<br />
+        <label for="question">{% trans %}Question{% endtrans %}</label>
+        {{ form.question(id="question", placeholder="Ex. Where does the data come from?") }}
         {% for error in form.errors.question %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
-      </p>
   
-      <p>
-        <h3>{% trans %}Description{% endtrans %}:</h3>
-        {{ form.body(id="wysiwyg_textarea", class="ask", placeholder="Enter your text...") }}<br />
+        {{ form.body(id="wysiwyg_textarea") }}
         {% for error in form.errors.body %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
-      </p>
-  
-      <p>
-        <label class="leon label" for="app_link">{% trans %}App{% endtrans %}</label>
-        {{ form.app(size=80, id="app_link", class="leon text", placeholder="Ex. /tree_map/secex/mg/show/show") }}
-      </p>
-      <p>
-        <h3>{% trans %}Tags{% endtrans %}:</h3>
-        {{ form.tags(size=80, class="ask", id="tag_field") }}
-        <div id="tag_input"></div>
-      </p>
+        
+        <label for="app_link">{% trans %}App{% endtrans %}</label>
+        {{ form.app(id="app_link", placeholder="Ex. /tree_map/secex/mg/show/show") }}
+        
+        <label for="tag_field" class="leon label large">{% trans %}Tags{% endtrans %}</label>
+        {{ form.tags(id="tag_field") }}
+        <div id="tag_input" class="leon textbox large"></div>
       
       <a href="#" class="submit">
         <div class="decision">
@@ -80,6 +76,9 @@
 <script src="/static/js/libs/redactor.min.js"></script>
 <script src="/static/js/utils/utils.selector.js"></script>
 <script>
+
+  leon("#question").size("large").color(visual.color)
+  leon("#app_link").size("large").color(visual.color)
   
   // Initialize redactor wysiwyg textarea
   $(document).ready(function() {
@@ -102,6 +101,7 @@
   
   // Used whenever any filter is changed
   function select_filter(obj) {
+    
     visual.popover.hide();
     
     // add this to the input (for submission)
@@ -117,6 +117,7 @@
       .append("span")
       .attr("class", "tag")
       .style("background-color", obj.color)
+      .style("color", vizwhiz.utils.text_color(obj.color))
       .on(vizwhiz.evt.click, function(){
         this.remove()
         d3.event.stopPropagation();
@@ -133,7 +134,7 @@
   
   var select_id = "current_selector"
   var selector = Selector()
-    .callback("select_filter")
+    .callback(select_filter)
     .type("bra");
   
   function update_selector(val){
@@ -146,10 +147,7 @@
   function multi_selector(d){
     
     var btn_cont = this.append("div")
-      .style("height", "4%")
-      .style("padding-top", "1%")
-      .style("background-color","#333")
-      .style("text-align","center")
+      .attr("id","button_container")
     
     var btns = ["bra","wld","hs","isic","cbo"]
     
@@ -159,39 +157,43 @@
         .text(visual.format.text(b))
       var radio = btn_cont.append("input")
         .attr("value",b)
+        .attr("id",b)
         .attr("type","radio")
         .attr("name","select_radios")
         .attr("onclick","update_selector(this.value)")
       if (i == 0) radio.attr("checked","checked")
     })
     
-    // visual.toggle("select_radios")
+    leon("$select_radios").color(visual.color)
     
     this.append("div")
       .attr("id", select_id)
-      .style("height", "95%")
     
     update_selector("bra")
   }
   
   var id = "popover"
-  if (d3.select("#"+id).empty()) {
-    
-    visual.popover.create({
-      "id": id,
-      "width": "50%",
-      "height": "80%"
-    })
-    
-    d3.select("#"+id)
-      .append("div")
-      .attr("id", "multi_selector")
-      .style("height", "100%")
-      .call(multi_selector)
-    
-  }
+  
+  
   
   d3.select("#tag_input").on(vizwhiz.evt.click, function(){
+    
+    if (d3.select("#multi_selector").empty()) {
+    
+      visual.popover.create({
+        "id": id,
+        "width": 500,
+        "height": 500,
+        "color": visual.color
+      })
+    
+      d3.select("#"+id)
+        .append("div")
+        .attr("id", "multi_selector")
+        .call(multi_selector)
+    
+    }
+    
     visual.popover.show("#"+id);    
   })
 

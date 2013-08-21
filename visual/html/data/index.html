@@ -7,21 +7,21 @@
   <div id="fullscreen"></div>
     
   <div class="darkbox">
-    <h2>{% trans %}How do you want to access the data?{% endtrans %}</h2>
+    <h1>{% trans %}How do you want to access the data?{% endtrans %}</h1>
   </div>
   <br>
   <a href="{{ url_for('data.query') }}" class="decision icon square database">
-    <h2>{% trans %}Database{% endtrans %}</h2>
+    <h1>{% trans %}Database{% endtrans %}</h1>
     {% trans %}Custom data queries of our database.{% endtrans %}
   </a>
   <!--
   <a href="{{ url_for('about.api') }}" class="decision icon square api">
-    <h2>{% trans %}API{% endtrans %}</h2>
+    <h1>{% trans %}API{% endtrans %}</h1>
     {% trans %}Access the data directly.{% endtrans %}
   </a>
   -->
   <a href="{{ url_for('data.classifications') }}" class="decision icon square source">
-    <h2>{% trans %}Source List{% endtrans %}</h2>
+    <h1>{% trans %}Source List{% endtrans %}</h1>
     {% trans %}Browse the various classifications.{% endtrans %}
   </a>
   

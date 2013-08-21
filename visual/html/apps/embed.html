@@ -160,7 +160,6 @@
     
     // Create Filter Selector
     var selector = Selector()
-      .popover(true);
     
     visual.popover.create({
       "id": "popover",
@@ -1314,22 +1313,24 @@ val)+": ", "suffix": ""};
           visual.popover.create({
             "id": "output_"+build.app.type,
             "width": 600,
-            "height": "80%"
+            "height": "80%",
+            "color": build.app.color
           })
           d3.select("#output_"+build.app.type)
-            .style("padding","10px")
-            .style("overflow-y","auto")
+            .append("div").attr("class","scrolling_content")
         }
         
-        if (d3.select("#output_"+build.app.type).select("."+build.dataset).empty()) {
-          d3.select("#output_"+build.app.type).append("div")
-            .attr("class",build.dataset)
+        var box = d3.select("#output_"+build.app.type).select("div.scrolling_content")
+        
+        if (box.select("."+build.dataset).empty()) {
+          box.append("div")
+            .attr("class",build.dataset+" output_list")
             .append("div")
               .attr("class","title")
               .text(visual.format.text(build.dataset))
         }
         
-        d3.select("#output_"+build.app.type).select("."+build.dataset).append("div")
+        box.select("."+build.dataset).append("div")
           .attr("id",build.url)
           .attr("class","output decision icon "+build.app.type)
           .html(build.title)
@@ -1627,18 +1628,55 @@ v))
         visual.popover.show("#output_"+app.build.app.type)
         
       }
+      else if (id == "help") {
+        
+        var pid = "#help_"+app.build.app.type
+        
+        if (d3.select(pid).empty()) {
+          
+          d3.html("/about/apps/"+app.build.app.type+"/",function(page){
+            
+            visual.popover.create({
+              "id": "help_"+app.build.app.type,
+              "width": 300,
+              "height": 300,
+              "color": app.build.app.color
+            })
+            
+            var wrapper = d3.select(page).select("#help_wrapper")
+            
+            var title = wrapper.select("h1").text()
+            
+            var topics = wrapper.selectAll("div.topic")
+            
+            var body = d3.select(pid).append("div")
+              .attr("class","scrolling_content")
+              .append("div").attr("class","scrolling_help")
+            
+            body.append("h1").text(title)
+              
+            topics.each(function(){
+              var t = this
+              body.append("div")
+                .html(t.innerHTML)
+            })
+
+            visual.popover.show(pid)
+          })
+              
+        }
+        else {
+          visual.popover.show(pid)
+        }
+        
+      }
       else {
 
         var s = id.split("_")
         var type = s[0]
         if (s[1]) var index = s[1]
       
-        if (type == "help") {
-          var init = app.build.app.type,
-              callback = null,
-              dist = 0
-        }
-        else if (type == "file") {
+        if (type == "file") {
           var init = "all",
               callback = app.download,
               dist = 0
@@ -1655,7 +1693,7 @@ v))
           }
         
         }
-
+        
         selector
           .callback(callback)
           .distance(dist)

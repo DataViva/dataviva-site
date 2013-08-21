@@ -12,16 +12,16 @@
   <div id="fullscreen"></div>
   
   <div class="grid5col1">
-    <div class="lightbox bubble"><h2>{% trans %}What would you like to know?{% endtrans %}</h2></div>
+    <div class="lightbox bubble"><h1>{% trans %}What would you like to know?{% endtrans %}</h1></div>
     <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
   </div>
 
   <div class="grid5col4">
     <div id="list_header" class="lightbox">
-      <div id="list_title"><h2></h2></div>
+      <div id="list_title"><h1></h1></div>
     
       <div id="order_toggle">
-        <legend id="order">{% trans %}Order by{% endtrans %}</legend>
+        <legend id="order">{% trans %}Order{% endtrans %}</legend>
         <input type="radio" name="order" value="votes" id="votes" onclick="change_order(this.value)" checked="checked">
         <label for="votes">{% trans %}Top Voted{% endtrans %}</label>
         <input type="radio" name="order" value="newest" id="newest" onclick="change_order(this.value)">
@@ -29,7 +29,7 @@
       </div>
     
 
-      {{ search_form.search(size=80, id='search', class='ask', placeholder="Search") }}
+      {{ search_form.search(size=80, id='search', placeholder="Search") }}
     
     </div>
       
@@ -39,7 +39,7 @@
 
       <a {% if g.user.is_authenticated() %}href="/ask/ask/"{%else%}onclick="login()"{%endif%} class="help">
         <div>
-          <h2>{% trans %}Cannot find your answer here?{% endtrans %}</h2>
+          <h1>{% trans %}Cannot find your answer here?{% endtrans %}</h1>
           {% trans %}Submit your question to Escritorio!{% endtrans %}
         </div>
       </a>
@@ -66,7 +66,7 @@
       if(search_term){
         url += "&q=" + search_term;
       }
-      d3.select("#list_title h2").text(visual.format.text(order))
+      d3.select("#list_title h1").text(visual.format.text(order))
       d3.select(".question_feed").html('')
         .call(is.url(url).offset(0).remove(true))
     }
@@ -99,17 +99,16 @@
 
       
       // lastly, the div that holds the data
-      var question_div = activities_enter.append("div")
-        .attr("class", "question_preview")
+      var question_div = activities_enter
   
-      question_div.append("h2")
+      question_div.append("h1")
         .text(function(d){ return d.question })
   
       question_div.each(function(d){
           if(d.status_notes){
             d3.select(this).append("div")
               .text(function(){
-                return d.status_notes.replace(/<\/?[^>]+(>|$)/g, "").truncate(300);
+                return "Sabrina: \"" +d.status_notes.replace(/<\/?[^>]+(>|$)/g, "").truncate(300) + "\""
               })
           }
         })

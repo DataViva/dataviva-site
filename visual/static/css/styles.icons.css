@@ -39,6 +39,12 @@
   width: 100%;
 }
 
+.decision.icon.short:before,
+.help.icon.short:before {
+  font-size: 12px;
+  line-height: 27px;
+}
+
 /*******/
 /* Nav */
 /*******/
@@ -271,4 +277,12 @@
 }
 .decision.icon.csv:before {
   background-image: url("/static/img/icons/file/file_csv.png");
+}
+
+/***************/
+/* Ask Buttons */
+/***************/
+
+.decision.icon.reply:before {
+  content: "\f112";
 }

@@ -11,37 +11,6 @@ hr {
   display: none;
 }
 
-#server_message {
-  position: relative;
-  margin: 10px auto;
-  width: 800px;
-  background-color: #75665e;
-  font-weight: bold;
-  font-size: 13px;
-  color: white;
-  padding: 3px 8px 5px;
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
-  -webkit-transition: opacity 0.5s;
-     -moz-transition: opacity 0.5s;
-          transition: opacity 0.5s;
-}
-
-#server_message > i {
-  position: absolute;
-  right: 8px;
-  top: 5px;
-  opacity: 0.5;
-  -webkit-transition: opacity 0.1s;
-     -moz-transition: opacity 0.1s;
-          transition: opacity 0.1s;
-}
-
-#server_message > i:hover {
-  opacity: 1;
-}
-
 /********************/
 /* Admin Specific */
 /********************/
@@ -205,83 +174,6 @@ a.login_button#Facebook {
 
 a.login_button#Twitter {
   background-image: url("/static/img/icons/login/login_twitter.png");
-}
-
-/********************/
-/* Tag Styles  */
-/********************/
-
-.labels {
-  vertical-align: middle;
-}
-#tag_field {display: none;}
-#tag_input {
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  height: 100%;
-  min-height: 39px;
-  padding: 6px 1px 0px 6px;
-  overflow-y: auto;
-  text-align: left;
-  width: 98.8%;
-}
-.tag-icon {
-  background-size: 100% 100%;
-  display: inline-block;
-  height: 20px;
-  margin: 0 5px 0 0;
-  width: 20px;
-}
-#tag_input .tag, a.tag {
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-  margin-right: 5px;
-  overflow: hidden;
-  padding: 6px 13px 6px 19px;
-  position: relative;
-  vertical-align: middle;
-  display: inline-block;
-  zoom: 1;
-  -webkit-transition: 0.14s linear;
-  -moz-transition: 0.14s linear;
-  -o-transition: 0.14s linear;
-  transition: 0.14s linear;
-  -webkit-backface-visibility: hidden;
-  text-align: left;
-}
-a.tag:hover {
-  color: #ffffff !important;
-  opacity: .7;
-}
-a.tag span {
-  font-size: 16px;
-}
-#tag_input .tag .tag-delete {
-  bottom: 0;
-  color: #ffffff;
-  cursor: pointer;
-  font-size: 12px;
-  opacity: 0;
-  padding: 9px 7px 3px 0;
-  position: absolute;
-  right: 0;
-  text-align: right;
-  text-decoration: none;
-  top: 0;
-  width: 100%;
-  z-index: 2;
-  display: none;
-}
-#tag_input .tag:hover {
-  background-color: #16a085;
-  padding-left: 12px;
-  padding-right: 20px;
-}
-#tag_input .tag:hover .tag-delete {
-   opacity: 1;
-   display: block;
 }
 
 /********************/

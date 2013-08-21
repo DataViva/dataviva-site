@@ -76,7 +76,7 @@ div#selector {
 }
 
 p {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 16px;
   margin-bottom: 12px;
 }
@@ -96,21 +96,21 @@ body.error404 #container {
 /* Title Styling */
 /*****************/
 
-h2 {
+h1 {
   display: block;
   font-size: 28px;
-  font-weight: normal;
+  font-weight: lighter;
   line-height: 30px;
   margin-bottom: 6px;
   opacity: 1;
 }
 
-h3 {
+h2 {
   display: block;
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 16px;
-  margin: 6px;
+  font-size: 18px;
+  font-weight: lighter;
+  line-height: 20px;
+  margin-bottom: 6px;
   opacity: 1;
 }
 

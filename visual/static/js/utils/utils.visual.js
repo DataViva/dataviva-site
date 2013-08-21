@@ -517,7 +517,9 @@ visual.popover.create = function(params) {
   
   var id = params.id ? params.id : "popover",
       pop_width = params.width ? params.width : "50%",
-      pop_height = params.height ? params.height : "50%";
+      pop_height = params.height ? params.height : "50%",
+      close = params.close ? params.close : true,
+      color = params.color ? params.color : "#af1f24"
   
   document.onkeyup = function(e) {
     if (e.keyCode == 27) { visual.popover.hide(); }   // esc
@@ -534,20 +536,36 @@ visual.popover.create = function(params) {
   else {
     var w_px = pop_width;
   }
-  if (pop_height.indexOf("%") > 0) {
-    h_px = (parseFloat(pop_height,10)/100)*window.innerHeight;
+  
+  if (typeof pop_height == "string") {
+    if (pop_height.indexOf("%") > 0) {
+      var h_px = (parseFloat(pop_height,10)/100)*window.innerHeight
+    }
+    else {
+      var h_px = parseFloat(pop_height,10)
+    }
   }
   else {
     var h_px = pop_height;
   }
   
-  d3.select("body").append("div")
+  var body = d3.select("body").append("div")
     .attr("id",id)
     .attr("class","popover")
     .style("width",w_px+"px")
     .style("height",h_px+"px")
     .style("margin-left",-w_px/2+"px")
     .style("margin-top",-h_px/2+"px")
+    
+  if (close) {
+    body.append("div")
+      .attr("class","vizwhiz_tooltip_close")
+      .html("\&times;")
+      .style("background-color",color)
+      .on(vizwhiz.evt.click,function(){
+        visual.popover.hide("#"+id);
+      })
+  }
   
 }
 

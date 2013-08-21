@@ -142,3 +142,16 @@ div#year_slider {
 div#year_slider > .leon.range {
   margin: 0px 0px 5px 0px;
 }
+
+div.scrolling_content {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+div.output_list {
+  padding: 10px;
+}
+
+div.scrolling_help {
+  padding: 20px;
+}

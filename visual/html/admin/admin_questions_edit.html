@@ -8,7 +8,7 @@
 
 {% block admin_content %}
 
-<h2>{{ question.question }}</h2>
+<h1>{{ question.question }}</h1>
 
 <p>{{ question.body }}</p>
 <div class="posted">
@@ -21,10 +21,10 @@
 <form id="ask_form" action="" method="post">
   {{ form.hidden_tag() }}
 
-  <h3>{% trans %}Status{% endtrans %}:</h3>
+  <h2>{% trans %}Status{% endtrans %}:</h2>
   {{ form.status() }}
 
-  <h3>{% trans %}Answer{% endtrans %}:</h3>
+  <h2>{% trans %}Answer{% endtrans %}:</h2>
   {{ form.answer(id="wysiwyg_textarea", placeholder=_("Enter your answer...")) }}<br />
   {% for error in form.errors.body %}
   <span style="color: red;">[{{ error }}]</span>

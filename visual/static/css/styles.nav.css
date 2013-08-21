@@ -180,7 +180,7 @@ div#language .leon.radio {
   z-index: 751;
 }
 
-#dynamic_header > h2 {
+#dynamic_header > h1 {
   margin-left: 10px;
 }
 
@@ -334,4 +334,41 @@ a.opendata:hover {
 #footer > #language {
   display: inline-block;
   margin-left: 6px;
+}
+
+/*******************/
+/* Message Styling */
+/*******************/
+
+#server_message {
+  position: relative;
+  margin: 0px auto;
+  text-align: center;
+  width: 800px;
+  -webkit-transition: opacity 0.5s;
+     -moz-transition: opacity 0.5s;
+          transition: opacity 0.5s;
+}
+
+#server_message > .decision {
+  background-color: #af1f24;
+  display: inline-block;
+}
+
+#server_message > .decision::after {
+  content: "";
+}
+
+#server_message i {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  opacity: 0.5;
+  -webkit-transition: opacity 0.1s;
+     -moz-transition: opacity 0.1s;
+          transition: opacity 0.1s;
+}
+
+#server_message > i:hover {
+  opacity: 1;
 }

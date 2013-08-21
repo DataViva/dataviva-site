@@ -10,7 +10,7 @@
   {% if category_id == "all" %}
 
     <div class="darkbox">
-      <h2>{% trans %}What would you like to know?{% endtrans %}</h2>
+      <h1>{% trans %}What would you like to know?{% endtrans %}</h1>
     </div>
     <br>
     <a class="decision icon square growth" href="{{g.path}}growth">
@@ -28,7 +28,7 @@
   {% else %}
   
     <div class="darkbox">
-      <h2>{{ _('What would you like to know about %(name)s?', name = item) }}</h2>
+      <h1>{{ _('What would you like to know about %(name)s?', name = item) }}</h1>
     </div>
     <br>
     <a class="decision icon square isic" href="{{g.path}}isic">
