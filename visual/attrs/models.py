@@ -197,6 +197,11 @@ class Wld(db.Model, AutoSerialize, Stats):
     def __repr__(self):
         return '<Wld %r>' % (self.id_3char)
 
+bra_pr = db.Table('attrs_bra_pr',
+    db.Column('bra_id', db.Integer, db.ForeignKey('attrs_bra.id')),
+    db.Column('pr_id', db.Integer, db.ForeignKey('attrs_bra.id'))
+)
+
 class Bra(db.Model, AutoSerialize, Stats):
 
     __tablename__ = 'attrs_bra'
@@ -225,6 +230,13 @@ class Bra(db.Model, AutoSerialize, Stats):
     # Neighbors
     neighbors = db.relationship('Distances', primaryjoin = "(Bra.id == Distances.bra_id_origin)", backref='bra_origin', lazy='dynamic')
     bb = db.relationship('Distances', primaryjoin = "(Bra.id == Distances.bra_id_dest)", backref='bra', lazy='dynamic')
+    # Planning Regions
+    pr = db.relationship('Bra', 
+            secondary = bra_pr, 
+            primaryjoin = (bra_pr.c.pr_id == id), 
+            secondaryjoin = (bra_pr.c.bra_id == id), 
+            backref = db.backref('bra', lazy = 'dynamic'), 
+            lazy = 'dynamic')
     
     def name(self):
         return getattr(self,"name_"+g.locale)

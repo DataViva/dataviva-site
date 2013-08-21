@@ -1,4 +1,4 @@
-import re, operator, sys
+import re, operator, sys, inspect
 from sqlalchemy import func
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, abort, make_response, Response
@@ -50,6 +50,13 @@ def parse_bras(bra_str):
         bras = [exist_or_404(Bra, bra_id).serialize() for bra_id in bras]
     return bras
 
+agg = {'val_usd':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
+        'val_usd_growth_pct':func.avg, 'val_usd_growth_pct_5':func.avg, 
+        'val_usd_growth_val':func.avg, 'val_usd_growth_val_5':func.avg,
+        'distance':func.avg, 'distance_wld':func.avg,
+        'opp_gain':func.avg, 'opp_gain_wld':func.avg,
+        'rca':func.avg, 'rca_wld':func.avg}
+
 def make_query(data_table, url_args, **kwargs):
     query = data_table.query
     download = url_args.get("download", None)
@@ -67,6 +74,7 @@ def make_query(data_table, url_args, **kwargs):
     join = kwargs["join"] if "join" in kwargs else False
     cache_id = request.path
     ret = {}
+    unique_keys = ["year", "hs_id", "wld_id"]
 
     # first lets test if this query is cached (be sure we are not paginating
     # results) as these should not get cached
@@ -83,12 +91,6 @@ def make_query(data_table, url_args, **kwargs):
         query = db.session.query(data_table, join["table"])
         for col in join["on"]:
             query = query.filter(getattr(data_table, col) == getattr(join_table, col))
-
-    # handle year (if specified)
-    if "year" in kwargs:
-        ret["year"] = parse_years(kwargs["year"])
-        # filter query
-        query = query.filter(data_table.year.in_(ret["year"]))
 
     # handle location (if specified)
     if "bra_id" in kwargs:
@@ -107,9 +109,26 @@ def make_query(data_table, url_args, **kwargs):
             ret["location"] = parse_bras(kwargs["bra_id"])
             # filter query
             if len(ret["location"]) > 1:
+                attributes = inspect.getmembers(data_table, lambda a:not(inspect.isroutine(a)))
+                col_names = [c.name for c in list(data_table.__table__.columns)]
+                col_vals = [agg[c](getattr(data_table, c)) if c in agg else getattr(data_table, c) for c in col_names]
+                if join:
+                    col_names = join["columns"].keys() + col_names
+                    col_vals.insert(0, join["table"])
+                    query = db.session.query(*col_vals)
+                    for col in join["on"]:
+                        query = query.filter(getattr(data_table, col) == getattr(join_table, col))
+                else:
+                    query = db.session.query(*col_vals)
                 query = query.filter(data_table.bra_id.in_([g["id"] for g in ret["location"]]))
             else:
                 query = query.filter(data_table.bra_id == ret["location"][0]["id"])
+
+    # handle year (if specified)
+    if "year" in kwargs:
+        ret["year"] = parse_years(kwargs["year"])
+        # filter query
+        query = query.filter(data_table.year.in_(ret["year"]))
 
     # handle industry (if specified)
     if "hs_id" in kwargs:
@@ -129,6 +148,8 @@ def make_query(data_table, url_args, **kwargs):
                 query = query.filter(data_table.hs_id.in_([p["id"] for p in ret["product"]]))
             else:
                 query = query.filter(data_table.hs_id == ret["product"][0]["id"])
+    else:
+        unique_keys.remove('hs_id')
 
     # handle industry (if specified)
     if "wld_id" in kwargs:
@@ -148,6 +169,8 @@ def make_query(data_table, url_args, **kwargs):
                 query = query.filter(data_table.wld_id.in_([o["id"] for o in ret["wld"]]))
             else:
                 query = query.filter(data_table.wld_id == ret["wld"][0]["id"])
+    else:
+        unique_keys.remove('wld_id')
 
     # handle ordering
     if order:
@@ -171,7 +194,15 @@ def make_query(data_table, url_args, **kwargs):
         query = query.filter(ops[filter[1]](getattr(data_table, filter[0]), float(filter[2])))
 
     # lastly we want to get the actual data held in the table requested
-    if join:
+    if len(ret["location"]) > 1:
+        # raise Exception(unique_keys)
+        for uk in unique_keys:
+            query = query.group_by(getattr(data_table, uk))
+        # raise Exception(join["columns"].keys())
+        ret["data"] = [dict(zip(col_names, d)) for d in query.all()]
+        # raise Exception(col_names, query.all()[0])
+        # raise Exception(ret["data"])
+    elif join:
         ret["data"] = []
         if limit:
             items = query.limit(limit).offset(offset).all()
