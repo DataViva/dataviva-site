@@ -1,4 +1,4 @@
-import StringIO, csv
+import StringIO, csv, sys
 from sqlalchemy import func
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, make_response, Response
@@ -188,9 +188,16 @@ def get_query(data_table, url_args, **kwargs):
                     header = data_dict.keys()
                     yield ','.join(header) + '\n' + ','.join(row) + '\n'
                 yield ','.join(row) + '\n'
+
         content_disposition = "attachment;filename=%s.csv" % (cache_id[1:-1].replace('/', "_"))
-        resp = Response(generate(), mimetype="text/csv;charset=UTF-8", 
-                        headers={"Content-Disposition": content_disposition})
+        '''if the output is larger than 6 mb rais error'''
+        if sys.getsizeof(ret["data"]) > 10485760:
+            resp = Response(['Unable to download, request is larger than 10mb'], 
+                            mimetype="text/csv;charset=UTF-8", 
+                            headers={"Content-Disposition": content_disposition})
+        else:
+            resp = Response(generate(), mimetype="text/csv;charset=UTF-8", 
+                            headers={"Content-Disposition": content_disposition})
         return resp
     
     # gzip and jsonify result
