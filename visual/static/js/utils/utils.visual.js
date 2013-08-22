@@ -284,6 +284,27 @@ visual.format.number = function(value,name,l) {
     // Format number to precision level using proper scale
     value = d3.formatPrefix(value).scale(value)
     value = parseFloat(d3.format(".3g")(value))
+    
+    if (symbol && visual.language == "pt") {
+      var digit = parseFloat(value.toString().split(".")[0])
+      if (symbol == "T") {
+        if (digit < 2) symbol = " Trilh\u00e3o"
+        else symbol = " Trilh\u00f5es"
+      }
+      else if (symbol == "B") {
+        if (digit < 2) symbol = " Bilh\u00e3o"
+        else symbol = " Bilh\u00f5es"
+      }
+      else if (symbol == "M") {
+        if (digit < 2) symbol = " Milh\u00e3o"
+        else symbol = " Milh\u00f5es"
+      }
+      else if (symbol == "k") {
+        if (digit < 2) symbol = " Milhares"
+        else symbol = " Mil"
+      }
+    }
+    
     var return_value = value + symbol;
   }
   else if (name == "share") {
