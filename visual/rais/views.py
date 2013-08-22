@@ -1,5 +1,6 @@
 import StringIO, csv, sys
-from sqlalchemy import func
+from sqlalchemy import func, Float
+from sqlalchemy.sql.expression import cast
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, make_response, Response
 from visual import db
@@ -49,6 +50,15 @@ def parse_bras(bra_str):
         bras = [exist_or_404(Bra, bra_id).serialize() for bra_id in bras]
     return bras
 
+agg = {'wage':func.sum, 'num_emp':func.sum, 'num_est':func.sum,
+        'eci':func.avg, 'eci_wld':func.avg, 'ici':func.avg, 'oci':func.avg,
+        'wage_growth_pct':func.avg, 'wage_growth_pct_5':func.avg, 
+        'wage_growth_val':func.avg, 'wage_growth_val_5':func.avg,
+        'num_emp_growth_pct':func.avg, 'num_emp_pct_5':func.avg, 
+        'num_emp_growth_val':func.avg, 'num_emp_growth_val_5':func.avg,
+        'distance':func.avg, 'importance':func.avg,
+        'opp_gain':func.avg, 'required':func.avg, 'rca':func.avg}
+
 def get_query(data_table, url_args, **kwargs):
     query = data_table.query
     download = url_args.get("download", None)
@@ -63,6 +73,7 @@ def get_query(data_table, url_args, **kwargs):
     join = kwargs["join"] if "join" in kwargs else False
     cache_id = request.path
     ret = {}
+    unique_keys = ["year", "isic_id", "cbo_id"]
     
     # first lets test if this query is cached
     if limit is None and download is None and raw is None:
@@ -78,12 +89,6 @@ def get_query(data_table, url_args, **kwargs):
         query = db.session.query(data_table, join["table"])
         for col in join["on"]:
             query = query.filter(getattr(data_table, col) == getattr(join_table, col))
-    
-    # handle year (if specified)
-    if "year" in kwargs:
-        ret["year"] = parse_years(kwargs["year"])
-        # filter query
-        query = query.filter(data_table.year.in_(ret["year"]))
 
     # handle location (if specified)
     if "bra_id" in kwargs:
@@ -102,9 +107,25 @@ def get_query(data_table, url_args, **kwargs):
             ret["location"] = parse_bras(kwargs["bra_id"])
             # filter query
             if len(ret["location"]) > 1:
+                col_names = [c.name for c in list(data_table.__table__.columns)]
+                col_vals = [cast(agg[c](getattr(data_table, c)), Float) if c in agg else getattr(data_table, c) for c in col_names]
+                if join:
+                    col_names = join["columns"].keys() + col_names
+                    col_vals.insert(0, join["table"])
+                    query = db.session.query(*col_vals)
+                    for col in join["on"]:
+                        query = query.filter(getattr(data_table, col) == getattr(join_table, col))
+                else:
+                    query = db.session.query(*col_vals)
                 query = query.filter(data_table.bra_id.in_([g["id"] for g in ret["location"]]))
             else:
                 query = query.filter(data_table.bra_id == ret["location"][0]["id"])
+    
+    # handle year (if specified)
+    if "year" in kwargs:
+        ret["year"] = parse_years(kwargs["year"])
+        # filter query
+        query = query.filter(data_table.year.in_(ret["year"]))
     
     # handle industry (if specified)
     if "isic_id" in kwargs:
@@ -123,6 +144,8 @@ def get_query(data_table, url_args, **kwargs):
                 query = query.filter(data_table.isic_id.in_([i["id"] for i in ret["industry"]]))
             else:
                 query = query.filter(data_table.isic_id == ret["industry"][0]["id"])
+    else:
+        unique_keys.remove('isic_id')
 
     # handle industry (if specified)
     if "cbo_id" in kwargs:
@@ -142,6 +165,8 @@ def get_query(data_table, url_args, **kwargs):
                 query = query.filter(data_table.cbo_id.in_([o["id"] for o in ret["occupation"]]))
             else:
                 query = query.filter(data_table.cbo_id == ret["occupation"][0]["id"])
+    else:
+        unique_keys.remove('cbo_id')
     
     # handle ordering
     if order:
@@ -162,7 +187,20 @@ def get_query(data_table, url_args, **kwargs):
                 query = query.order_by(getattr(data_table, o) + " " + direction)
     
     # lastly we want to get the actual data held in the table requested
-    if join:
+    if len(ret["location"]) > 1:
+        # raise Exception(unique_keys)
+        for uk in unique_keys:
+            query = query.group_by(getattr(data_table, uk))
+        # ret["data"] = [dict(zip(col_names, d)) for d in query.all()]
+        # raise Exception(col_names, query.all()[0])
+        ret["data"] = []
+        for d in query.all():
+            d = dict(zip(col_names, d))
+            d["num_emp"] = int(d["num_emp"]) if d["num_emp"] else d["num_emp"]
+            d["num_est"] = int(d["num_est"]) if d["num_est"] else d["num_est"]
+            ret["data"].append(d)
+        # raise Exception(ret["data"])
+    elif join:
         # items = query.paginate(int(kwargs["page"]), RESULTS_PER_PAGE, False).items
         ret["data"] = []
         if limit:

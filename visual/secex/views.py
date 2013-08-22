@@ -1,4 +1,4 @@
-import re, operator, sys, inspect
+import re, operator, sys
 from sqlalchemy import func
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, abort, make_response, Response
@@ -112,7 +112,6 @@ def make_query(data_table, url_args, **kwargs):
             ret["location"] = parse_bras(kwargs["bra_id"])
             # filter query
             if len(ret["location"]) > 1:
-                attributes = inspect.getmembers(data_table, lambda a:not(inspect.isroutine(a)))
                 col_names = [c.name for c in list(data_table.__table__.columns)]
                 col_vals = [agg[c](getattr(data_table, c)) if c in agg else getattr(data_table, c) for c in col_names]
                 if join:
