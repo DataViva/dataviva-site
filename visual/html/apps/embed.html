@@ -512,7 +512,7 @@
                     for (id in app.attrs[app.build.output]) {
                       var obj = app.attrs[app.build.output][id]
                       depths[out].forEach(function(d){
-                        if (d <= obj.id.length) {
+                        if (d <= obj.id.length && depths[out].indexOf(obj.id.length) >= 0) {
                           var id = obj[out+"_id"].slice(0, d)
                           obj[out+"_"+d] = {"name":app.attrs[app.build.output][id].name}
                           obj[out+"_"+d][out+"_id"] = id
