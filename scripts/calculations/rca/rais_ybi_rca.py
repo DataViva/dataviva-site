@@ -34,6 +34,11 @@ def get_rca(year, geo_level):
         "from rais_ybi " \
         "where year = {0} and length(bra_id) = {1} and " \
         "length(isic_id) = 5".format(year, geo_level)
+    # q = "select ybi.bra_id, ybi.isic_id, ybi.wage from rais_ybi as ybi, " \
+    # "rais_yb as yb where" \
+    # " yb.year = ybi.year and yb.bra_id = ybi.bra_id and ybi.year = {0} and " \
+    # "length(ybi.bra_id) = {1} and length(isic_id) = 5 and yb.wage > 1200145000"\
+    .format(year, geo_level)
     table = sql.read_frame(q, db)
     table = table.pivot(index="bra_id", columns="isic_id", values="wage")
     table = table.fillna(0)
