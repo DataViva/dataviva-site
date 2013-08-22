@@ -196,7 +196,7 @@ def make_query(data_table, url_args, **kwargs):
         query = query.filter(ops[filter[1]](getattr(data_table, filter[0]), float(filter[2])))
 
     # lastly we want to get the actual data held in the table requested
-    if len(ret["location"]) > 1:
+    if "location" in ret and len(ret["location"]) > 1:
         # raise Exception(unique_keys)
         for uk in unique_keys:
             query = query.group_by(getattr(data_table, uk))

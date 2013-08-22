@@ -187,7 +187,7 @@ def get_query(data_table, url_args, **kwargs):
                 query = query.order_by(getattr(data_table, o) + " " + direction)
     
     # lastly we want to get the actual data held in the table requested
-    if len(ret["location"]) > 1:
+    if "location" in ret and len(ret["location"]) > 1:
         # raise Exception(unique_keys)
         for uk in unique_keys:
             query = query.group_by(getattr(data_table, uk))
