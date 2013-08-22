@@ -78,6 +78,7 @@ def make_query(data_table, url_args, **kwargs):
     cache_id = request.path
     ret = {}
     unique_keys = ["year", "hs_id", "wld_id"]
+    aggregate = True
 
     # first lets test if this query is cached (be sure we are not paginating
     # results) as these should not get cached
@@ -97,6 +98,8 @@ def make_query(data_table, url_args, **kwargs):
 
     # handle location (if specified)
     if "bra_id" in kwargs:
+        if "+" in kwargs["bra_id"]:
+            aggregate = False
         if "show." in kwargs["bra_id"]:
             # the '.' indicates that we are looking for a specific bra nesting
             ret["bra_level"] = kwargs["bra_id"].split("show.")[1]
@@ -112,16 +115,17 @@ def make_query(data_table, url_args, **kwargs):
             ret["location"] = parse_bras(kwargs["bra_id"])
             # filter query
             if len(ret["location"]) > 1:
-                col_names = [c.name for c in list(data_table.__table__.columns)]
-                col_vals = [agg[c](getattr(data_table, c)) if c in agg else getattr(data_table, c) for c in col_names]
-                if join:
-                    col_names = join["columns"].keys() + col_names
-                    col_vals.insert(0, join["table"])
-                    query = db.session.query(*col_vals)
-                    for col in join["on"]:
-                        query = query.filter(getattr(data_table, col) == getattr(join_table, col))
-                else:
-                    query = db.session.query(*col_vals)
+                if aggregate:
+                    col_names = [c.name for c in list(data_table.__table__.columns)]
+                    col_vals = [agg[c](getattr(data_table, c)) if c in agg else getattr(data_table, c) for c in col_names]
+                    if join:
+                        col_names = join["columns"].keys() + col_names
+                        col_vals.insert(0, join["table"])
+                        query = db.session.query(*col_vals)
+                        for col in join["on"]:
+                            query = query.filter(getattr(data_table, col) == getattr(join_table, col))
+                    else:
+                        query = db.session.query(*col_vals)
                 query = query.filter(data_table.bra_id.in_([g["id"] for g in ret["location"]]))
             else:
                 query = query.filter(data_table.bra_id == ret["location"][0]["id"])
@@ -196,7 +200,7 @@ def make_query(data_table, url_args, **kwargs):
         query = query.filter(ops[filter[1]](getattr(data_table, filter[0]), float(filter[2])))
 
     # lastly we want to get the actual data held in the table requested
-    if "location" in ret and len(ret["location"]) > 1:
+    if "location" in ret and len(ret["location"]) > 1 and aggregate:
         # raise Exception(unique_keys)
         for uk in unique_keys:
             query = query.group_by(getattr(data_table, uk))
