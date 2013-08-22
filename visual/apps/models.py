@@ -132,7 +132,6 @@ class Build(db.Model, AutoSerialize):
     data required for building a viz of this app.
     '''
     def data_url(self, **kwargs):
-        print self.bra
         
         bras = []
         for b in self.bra:
