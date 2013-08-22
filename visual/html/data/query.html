@@ -464,13 +464,13 @@
     if (Modernizr.history) {
       window.history.pushState(
         {'prev_request': page_url}, 
-        "Visual : Data", page_url
+        "DataViva : Data", page_url
       )
       if (window != window.parent &&
           window.parent.location.pathname.indexOf("query") >= 0) {
         window.parent.history.pushState(
           {'prev_request': page_url}, 
-          "Visual : Data", page_url
+          "DataViva : Data", page_url
         )
       }
     } 

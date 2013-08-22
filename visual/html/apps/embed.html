@@ -1525,7 +1525,7 @@ v))
     
     builder.url = function() {
       
-      document.title = "Visual : "+app.build.title;
+      document.title = "DataViva : "+app.build.title;
                         
       window_url = app.url
       
@@ -1543,13 +1543,13 @@ v))
       if (Modernizr.history) {
         window.history.pushState(
           {'prev_request': "/apps/embed/"+window_url}, 
-          "Visual : "+app.build.title, "/apps/embed/"+window_url
+          "DataViva : "+app.build.title, "/apps/embed/"+window_url
         )
         if (window != window.parent &&
             window.parent.location.pathname.indexOf("builder") >= 0) {
           window.parent.history.pushState(
             {'prev_request': "/apps/builder/"+window_url}, 
-            "Visual : "+app.build.title, "/apps/builder/"+window_url
+            "DataViva : "+app.build.title, "/apps/builder/"+window_url
           )
         }
       } 
