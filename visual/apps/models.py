@@ -72,6 +72,8 @@ class Build(db.Model, AutoSerialize):
                 self.bra.append(Bra.query.get(b))
                 self.bra[i].distance = dist
                 self.bra[i].neighbor_ids = [b.bra_id_dest for b in self.bra[i].get_neighbors(dist)]
+                # raise Exception([b.id for b in self.bra[i].pr.all()])
+                self.bra[i].pr_ids = [b.id for b in self.bra[i].pr.all()]
 
     def set_filter1(self, filter):
         if self.filter1 != "all":
@@ -265,6 +267,9 @@ class Build(db.Model, AutoSerialize):
         for i,b in enumerate(auto_serialized["bra"]):
             if b["id"] != "all" and self.bra[i].distance:
                 b["distance"] = self.bra[i].distance
+                b["neighbor_ids"] = self.bra[i].neighbor_ids
+            elif b["id"] != "all" and len(self.bra[i].pr_ids):
+                b["pr_ids"] = self.bra[i].pr_ids
         
         if hasattr(self, "isic"):
             auto_serialized["isic"] = [i.serialize() for i in self.isic]
