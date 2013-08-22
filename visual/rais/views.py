@@ -278,8 +278,7 @@ def rais_yo(**kwargs):
 
 @mod.route('/all/<bra_id>/<isic_id>/all/')
 @mod.route('/<year>/<bra_id>/<isic_id>/all/')
-def rais_ybi(**kwargs):
-    
+def rais_ybi(**kwargs):    
     kwargs["join"] = {
                         "table": Yi.ici,
                         "columns": {"ici": Yi.ici},
@@ -294,6 +293,11 @@ def rais_ybi_recommended(**kwargs):
 @mod.route('/all/<bra_id>/all/<cbo_id>/')
 @mod.route('/<year>/<bra_id>/all/<cbo_id>/')
 def rais_ybo(**kwargs):
+    kwargs["join"] = {
+                        "table": Yo.oci,
+                        "columns": {"oci": Yo.oci},
+                        "on": ('year', 'cbo_id')
+                    }
     return make_response(get_query(Ybo, request.args, **kwargs))
 
 @mod.route('/all/all/<isic_id>/<cbo_id>/')

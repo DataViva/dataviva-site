@@ -62,6 +62,7 @@ class Yo(db.Model, AutoSerialize):
     num_emp = db.Column(db.Integer())
     num_est = db.Column(db.Integer())
     importance = db.Column(db.Float())
+    oci = db.Column(db.Float())
     wage_growth_pct = db.Column(db.Float())
     wage_growth_pct_5 = db.Column(db.Float())
     wage_growth_val = db.Column(db.Float())
