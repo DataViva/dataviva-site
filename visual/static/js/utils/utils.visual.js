@@ -137,7 +137,8 @@ visual.format.text = function(text,name,l) {
       "wld_5_plural": {"en": "Countries", "pt": "Pa\u00edses"},
     
       // Calculation Labels
-      "eci": {"en": "Economic Complexity", "pt": "Complexidade Econ\u00f4mica"},
+      "eci": {"en": "Domestic Complexity", "pt": "Complexidade Dom\u0089stico"},
+      "eci_wld": {"en": "International Complexity", "pt": "Complexidade Internacional"},
       "pci": {"en": "Product Complexity", "pt": "Complexidade do Produto"},
       "ici": {"en": "Industry Complexity", "pt": "Ind\u00fdstria Complexidade"},
       "oci": {"en": "Occupation Complexity", "pt": "Complexidade Ocupa\u00e7\u00e3o"},

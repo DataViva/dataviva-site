@@ -296,22 +296,39 @@
     }
     
     app.tooltip = {"short": [
+    
           "hs_id",
           "wld_id",
           "isic_id",
           "cbo_id",
           "id_ibge",
-          "growth_val",
-          "growth_val_total",
+          
           "eci",
+          "eci_wld",
           "pci",
           "ici",
-          "oci"
-        ], "long": [
-          "growth_val",
-          "growth_val_total",
+          "oci",
           "rca",
           "rca_wld",
+          "distance",
+          "distance_wld", 
+          "opp_gain", 
+          "opp_gain_wld"
+          
+        ], "long": [
+        
+          "eci",
+          "eci_wld",
+          "pci",
+          "ici",
+          "oci",
+          "rca",
+          "rca_wld",
+          "distance",
+          "distance_wld", 
+          "opp_gain", 
+          "opp_gain_wld", 
+          
           "wage",
           "wage_avg",
           "wage_avg_bra",
@@ -320,60 +337,64 @@
           "required",
           "importance",
           "num_est",
+          "wage_growth_pct",
+          "wage_growth_pct_5",
+          "wage_growth_val",
+          "wage_growth_val_5",
+          "num_emp_growth_pct",
+          "num_emp_growth_pct_5",
+          "num_emp_growth_val",
+          "num_emp_growth_val_5",
+          
           "val_usd",
-          "distance",
-          "eci",
-          "pci",
-          "ici",
-          "oci",
-          "cp_bra_0_wage",
-          "cp_bra_0_wage_avg",
-          "cp_bra_0_num_emp",
-          "cp_bra_0_num_est",
-          "cp_bra_0_val_usd",
-          "cp_bra_0_distance",
-          "cp_bra_0_eci",
-          "cp_bra_0_pci",
-          "cp_bra_0_ici",
-          "cp_bra_0_oci",
-          "cp_bra_1_wage",
-          "cp_bra_1_wage_avg",
-          "cp_bra_1_num_emp",
-          "cp_bra_1_num_est",
-          "cp_bra_1_val_usd",
-          "cp_bra_1_distance",
-          "cp_bra_1_eci",
-          "cp_bra_1_pci",
-          "cp_bra_1_ici",
-          "cp_bra_1_oci"
+          "val_usd_growth_pct",
+          "val_usd_growth_pct_5",
+          "val_usd_growth_val",
+          "val_usd_growth_val_5"
+          
         ]}
+        
+    var additionals = []
+    app.tooltip.long.forEach(function(t){
+      additionals.push("cp_bra_0_"+t)
+      additionals.push("cp_bra_1_"+t)
+    })
+    app.tooltip.long = app.tooltip.long.concat(additionals)
     
-    // Define global viz-whiz app parameters
-    app.viz = vizwhiz.viz()
-      .name_array(["name","display_id"])
-      .nesting_aggs({
-          "distance": "mean",
+    var averages = {
           "eci": "mean",
           "pci": "mean",
           "ici": "mean",
           "oci": "mean",
           "rca": "mean",
+          "rca_wld": "mean",
+          "distance": "mean",
+          "distance_wld": "mean",
+          "opp_gain": "mean",
+          "opp_gain_wld": "mean",
           "wage_avg": "mean",
-          "cp_bra_0_distance": "mean",
-          "cp_bra_0_eci": "mean",
-          "cp_bra_0_pci": "mean",
-          "cp_bra_0_ici": "mean",
-          "cp_bra_0_oci": "mean",
-          "cp_bra_0_rca": "mean",
-          "cp_bra_0_wage_avg": "mean",
-          "cp_bra_1_distance": "mean",
-          "cp_bra_1_eci": "mean",
-          "cp_bra_1_pci": "mean",
-          "cp_bra_1_ici": "mean",
-          "cp_bra_1_oci": "mean",
-          "cp_bra_1_rca": "mean",
-          "cp_bra_1_wage_avg": "mean"
-        })
+          "wage_avg_bra": "mean",
+          "wage_growth_pct": "mean",
+          "wage_growth_pct_5": "mean",
+          "num_emp_growth_pct": "mean",
+          "num_emp_growth_pct_5": "mean",
+          "val_usd_growth_pct": "mean",
+          "val_usd_growth_pct_5": "mean",
+          "importance": "mean"
+        }
+        
+    var additionals = {}
+    for (k in averages) {
+      additionals["cp_bra_0_"+k] = averages[k]
+      additionals["cp_bra_1_"+k] = averages[k]
+    }
+    
+    averages = vizwhiz.utils.merge(averages,additionals)
+    
+    // Define global viz-whiz app parameters
+    app.viz = vizwhiz.viz()
+      .name_array(["name","display_id"])
+      .nesting_aggs(averages)
       .text_var("name")
       .year_var("year")
       .tooltip_info(app.tooltip)
