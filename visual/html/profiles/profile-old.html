@@ -20,15 +20,7 @@
       {% for stat in item.stats() %}
         <div class="vizwhiz_tooltip_data_block">
           <div class="vizwhiz_tooltip_data_name">{{ format(stat.name).render(stat.name,g.locale) }}</div>
-          <div class="vizwhiz_tooltip_data_value">
-            {% if stat.name[:3] == "top" %}
-              <a href="/profiles/{{stat.name[4:]}}/{{stat.id}}/">
-            {% endif %}
-              {{ format(stat.value).render(stat.name,g.locale) }}
-            {% if stat.name[:3] == "top" %}
-              </a>
-            {% endif %}
-          </div>
+          <div class="vizwhiz_tooltip_data_value">{{ format(stat.value).render(stat.name,g.locale) }}</div>
         </div>
         <div class="vizwhiz_tooltip_data_seperator"></div>
       {% endfor %}
@@ -42,6 +34,31 @@
   {% for build in builds %}
     <div class="lightbox guide_app" id="profile{{ build.position }}">
       <iframe alt="{{ build.url }}" id="iframe{{ build.position }}"></iframe>
+      <div class="guide_table">
+        <table class="header" id="header{{ build.position }}">
+    			  <tr>
+    				  {% for h in build.data.table_headers %}
+    			  	  <th style="color: {{ build.color }}">{{ format(h).render(h,g.locale) }}</th>
+    				  {% endfor %}
+    			  </tr>
+    		  </thead>
+        </table>
+        <table class="body" id="body{{ build.position }}">
+    		  <tbody>
+    			  {% for row in build.data.table_data %}
+    			  <tr>
+    				  {% for v in row %}
+    				  {% if loop.index0 == 1 %}
+    				  <td><a href="/profiles/{{ build.output }}/{{v}}/">{{ v }}</a></td>
+    				  {% else %}
+    				  <td>{{ v }}</td>
+    				  {% endif %}
+    				  {% endfor %}
+    			  </tr>
+    			  {% endfor %}
+    		  </tbody>
+    	  </table>
+      </div>
     </div>
     
   {% endfor %}
@@ -71,6 +88,25 @@
           select(p)
         }
       })
+      
+    d3.selectAll("table.body")
+      .each(function(){
+        var p = this.id.substring(4)
+        var sizes = []
+        d3.select(this).select("tbody").select("tr").selectAll("td")
+          .each(function(){
+            sizes.push(d3.select(this).style("width"))
+          })
+        d3.select("table#header"+p).select("tr").selectAll("th")
+          .each(function(){
+            this.style.width = sizes.shift()
+          })
+      })
+      
+    d3.selectAll(".guide_table").on("scroll",function(){
+      d3.select(this).select("table.header")
+        .style("top",this.scrollTop+"px")
+    })
       
     function slide(id) {
       sliding = true

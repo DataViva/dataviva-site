@@ -68,13 +68,13 @@ def index(category = None, id = None):
 @mod.route('/<category>/<id>/')
 def profiles(category = None, id = None):
     
-    data_tables = []
-    rais_latest_year = db.session.query(Yio.year.distinct()) \
-                        .order_by(Yio.year.desc()).all()[0][0]
-    secex_latest_year = db.session.query(Ypw.year.distinct()) \
-                        .order_by(Ypw.year.desc()).all()[0][0]
-    app = App.query.filter_by(type="tree_map").first_or_404()
-    query_kwargs = {"raw":True}
+    # data_tables = []
+    # rais_latest_year = db.session.query(Yio.year.distinct()) \
+    #                     .order_by(Yio.year.desc()).all()[0][0]
+    # secex_latest_year = db.session.query(Ypw.year.distinct()) \
+    #                     .order_by(Ypw.year.desc()).all()[0][0]
+    # app = App.query.filter_by(type="tree_map").first_or_404()
+    # query_kwargs = {"raw":True}
 
     if category == "bra":
         category_type = "<bra>"
@@ -82,19 +82,19 @@ def profiles(category = None, id = None):
     elif category == "isic":
         category_type = "<isic>"
         Attr = Isic
-        query_kwargs["year"] = rais_latest_year
+        # query_kwargs["year"] = rais_latest_year
     elif category == "cbo":
         category_type = "<cbo>"
         Attr = Cbo
-        query_kwargs["year"] = rais_latest_year
+        # query_kwargs["year"] = rais_latest_year
     elif category == "hs":
         category_type = "<hs>"
         Attr = Hs
-        query_kwargs["year"] = secex_latest_year
+        # query_kwargs["year"] = secex_latest_year
     elif category == "wld":
         category_type = "<wld>"
         Attr = Wld
-        query_kwargs["year"] = secex_latest_year
+        # query_kwargs["year"] = secex_latest_year
     
     item = Attr.query.get_or_404(id)
     
@@ -116,47 +116,47 @@ def profiles(category = None, id = None):
           
     builds = [0]*len(plan.builds.all())
     for i, pb in enumerate(plan.builds.all()):
-        this_query_kwargs = query_kwargs.copy()
+        # this_query_kwargs = query_kwargs.copy()
         build = pb.build.first()
-        data_table = build.data_table()
-        data_url = build.data_url().split("/")
-        output = build.output
-        bra = data_url[2]
-        filter1 = data_url[3]
-        filter2 = data_url[4]
-        data_set = data_url[0]
-        this_query_kwargs[category+"_id"] = id
-        if "show" in bra:
-            this_query_kwargs["bra_id"] = bra
-        if "show" in filter1:
-            if data_set == "rais":
-                this_query_kwargs["isic_id"] = filter1
-            elif data_set == "secex":
-                this_query_kwargs["hs_id"] = filter1
-        if "show" in filter2:
-            if data_set == "rais":
-                this_query_kwargs["cbo_id"] = filter2
-            elif data_set == "secex":
-                this_query_kwargs["wld_id"] = filter2
-        if data_set == "rais":
-            data = rais_get_query(data_table, request.args, **this_query_kwargs)
-            table_headers = ["year", "_id", "wage", "num_emp", "num_est"]
-        else:
-            data = secex_get_query(data_table, request.args, **this_query_kwargs)
-            table_headers = ["year", "_id", "val_usd"]
-        table_headers[1] = output + table_headers[1]
-        
-        table_data = [[getattr(d, h) for h in table_headers] for d in data]
+        # data_table = build.data_table()
+        # data_url = build.data_url().split("/")
+        # output = build.output
+        # bra = data_url[2]
+        # filter1 = data_url[3]
+        # filter2 = data_url[4]
+        # data_set = data_url[0]
+        # this_query_kwargs[category+"_id"] = id
+        # if "show" in bra:
+        #     this_query_kwargs["bra_id"] = bra
+        # if "show" in filter1:
+        #     if data_set == "rais":
+        #         this_query_kwargs["isic_id"] = filter1
+        #     elif data_set == "secex":
+        #         this_query_kwargs["hs_id"] = filter1
+        # if "show" in filter2:
+        #     if data_set == "rais":
+        #         this_query_kwargs["cbo_id"] = filter2
+        #     elif data_set == "secex":
+        #         this_query_kwargs["wld_id"] = filter2
+        # if data_set == "rais":
+        #     data = rais_get_query(data_table, request.args, **this_query_kwargs)
+        #     table_headers = ["year", "_id", "wage", "num_emp", "num_est"]
+        # else:
+        #     data = secex_get_query(data_table, request.args, **this_query_kwargs)
+        #     table_headers = ["year", "_id", "val_usd"]
+        # table_headers[1] = output + table_headers[1]
+        # 
+        # table_data = [[getattr(d, h) for h in table_headers] for d in data]
         
         b = {}
         b["url"] = "/apps/embed/{0}{1}".format(build.url(),pb.variables)
         b["title"] = build.title()
         b["type"] = build.app.type
         b["position"] = pb.position
-        b["output"] = output
+        b["output"] = build.output
         b["color"] = build.app.color
-        b["data"] = { "table_headers":table_headers, "build":build, \
-                                    "table_data":table_data}
+        # b["data"] = { "table_headers":table_headers, "build":build, \
+        #                             "table_data":table_data}
         builds[pb.position-1] = b
         
     return render_template("profiles/profile.html", 

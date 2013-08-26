@@ -51,14 +51,21 @@ div.guide_app {
   white-space: nowrap;
 }
 
-iframe, .guide_table {
+iframe {
+  display: block;
+  float: left;
+  height: 100%;
+  width: 100%;
+}
+
+/*iframe, .guide_table {
   display: block;
   float: left;
   height: 100%;
   width: 50%;
-}
+}*/
 
-.guide_table {
+/*.guide_table {
   overflow: hidden;
   overflow-y: scroll;
   position: relative;
@@ -78,26 +85,4 @@ table.body {
 
 th {
   font-weight: bold;
-}
-
-/*div.data_table:nth-child(even) {
-  margin-right: 20px;
-}
-div.data_table:nth-child(odd) {
-  margin-left: 20px;
-}
-div.data_table table{ 
-  overflow: hidden;
-}
-div.data_table table thead{ 
-  display: table-header-group;
-}
-div.data_table table thead th{ 
-  display: table-cell;
-}
-div.data_table table td { 
-  padding: 4px;
-}
-div.data_table table td a{ 
-  text-decoration: underline;
 }*/
