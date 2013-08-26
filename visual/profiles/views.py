@@ -16,14 +16,20 @@ from visual.secex.models import Ybp, Ybw, Ypw
 
 from visual.apps.models import Build, App
 
+import time
+
 mod = Blueprint('profiles', __name__, url_prefix='/profiles')
 
 @mod.before_request
 def before_request():
+    t1 = time.time()
     g.page_type = mod.name
     g.path = request.path
     
     g.color = "#e0902d"
+    
+    t2 = time.time()
+    g.timing.append("Before Profile: {0:.4f}s".format((t2-t1)))
 
 @mod.route('/')
 @mod.route('/<category>/select/')
@@ -67,6 +73,15 @@ def index(category = None, id = None):
 
 @mod.route('/<category>/<id>/')
 def profiles(category = None, id = None):
+          
+    t1 = time.time()
+    category_type = "<"+category+">"
+        
+    t2 = time.time()
+    g.timing.append("Initializing Profile: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
+    
+    # Attr = globals()[category.title()]()
     
     # data_tables = []
     # rais_latest_year = db.session.query(Yio.year.distinct()) \
@@ -76,44 +91,47 @@ def profiles(category = None, id = None):
     # app = App.query.filter_by(type="tree_map").first_or_404()
     # query_kwargs = {"raw":True}
 
-    if category == "bra":
-        category_type = "<bra>"
-        Attr = Bra
-    elif category == "isic":
-        category_type = "<isic>"
-        Attr = Isic
-        # query_kwargs["year"] = rais_latest_year
-    elif category == "cbo":
-        category_type = "<cbo>"
-        Attr = Cbo
-        # query_kwargs["year"] = rais_latest_year
-    elif category == "hs":
-        category_type = "<hs>"
-        Attr = Hs
-        # query_kwargs["year"] = secex_latest_year
-    elif category == "wld":
-        category_type = "<wld>"
-        Attr = Wld
-        # query_kwargs["year"] = secex_latest_year
+    # if category == "isic" or category == "cbo":
+    #     query_kwargs["year"] = rais_latest_year
+    # elif category == "hs" or category == "wld":
+    #     query_kwargs["year"] = secex_latest_year
+        
+    t2 = time.time()
+    g.timing.append("Getting Table: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
     
+    Attr = globals()[category.title()]()
     item = Attr.query.get_or_404(id)
+    
+    # if category == "cbo":
+    #     item = Cbo.query.get_or_404(id)
+    # elif category == "hs":
+    #     item = Hs.query.get_or_404(id)
+    # elif category == "isic":
+    #     item = Isic.query.get_or_404(id)
+    # elif category == "wld":
+    #     item = Wld.query.get_or_404(id)
+        
+    t2 = time.time()
+    g.timing.append("Getting Item: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
     
     plan = Plan.query.filter_by(category=category, category_type=category_type, 
                                     option=None).first()
-    if category == "cbo":
-        plan.set_attr(id, "cbo")
-    elif category == "hs":
-        plan.set_attr(id, "hs")
-    elif category == "isic":
-        plan.set_attr(id, "isic")
-    elif category == "wld":
-        plan.set_attr(id, "wld")
+        
+    t2 = time.time()
+    g.timing.append("Getting Plan: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
+        
+    plan.set_attr(id, category)
     
-    if category == "bra":
-        plan.set_attr(id, "bra")
-    else:
-        plan.set_attr("all", "bra")  
-          
+    if category != "bra":
+        plan.set_attr("all", "bra")
+        
+    t2 = time.time()
+    g.timing.append("Setting Plan Variables: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
+        
     builds = [0]*len(plan.builds.all())
     for i, pb in enumerate(plan.builds.all()):
         # this_query_kwargs = query_kwargs.copy()
@@ -158,7 +176,8 @@ def profiles(category = None, id = None):
         # b["data"] = { "table_headers":table_headers, "build":build, \
         #                             "table_data":table_data}
         builds[pb.position-1] = b
-        
+    t2 = time.time()
+    g.timing.append("Formatting Plan: {0}s".format((t2-t1)))
     return render_template("profiles/profile.html", 
                 item=item, 
                 builds=builds)

@@ -3,6 +3,8 @@ from flask import Blueprint, render_template, g, request, current_app, session, 
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.babel import gettext
 
+import time
+
 mod = Blueprint('general', __name__, url_prefix='/')
 
 from visual import app, db, babel
@@ -14,7 +16,12 @@ from visual.general.forms import AccessForm
 @app.before_request
 def before_request():
     
+    g.timing = []
+    g.timing.append(time.time())
     g.color = "#af1f24"
+    g.page_type = mod.name
+    
+    t1 = time.time()
     
     # Check if the user has access (temp log in for development purposes)
     if 'has_access' not in session:
@@ -53,6 +60,9 @@ def before_request():
     # Set the locale to either 'pt' or 'en' on the global object
     if request.endpoint != 'static':
         g.locale = get_locale()
+    
+    t2 = time.time()
+    g.timing.append("Global Before Request: {0:.4f}s".format(t2-t1))
 
 @babel.localeselector
 def get_locale(lang=None):
@@ -100,10 +110,15 @@ def get_timezone():
 ###############################
 # General views 
 # ---------------------------
-@mod.before_request
-def before_request():
-    g.page_type = mod.name
-
+@app.after_request
+def after_request(response):
+    overall = (time.time()-g.timing[0])
+    g.timing[0] = "Overall: {0:.4f}s".format(overall)
+    # raise Exception(g.timing)
+    # if overall > 1:
+    #     raise Exception(g.timing)
+    return response
+    
 @mod.route('/', methods=['GET', 'POST'])
 def home():
     g.page_type = "home"

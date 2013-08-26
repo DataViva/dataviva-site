@@ -15,41 +15,45 @@ class Stats(object):
         attr_type = self.__class__.__name__.lower()
 
         if attr_type == "bra":
-            stats.append(self.get_top_attr(Ybi, "wage", attr_type, "isic"))
-            stats.append(self.get_top_attr(Ybo, "wage", attr_type, "cbo"))
-            stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "hs"))
-            stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "wld"))
-            stats.append({"name": "wage", "value": self.get_val(Yb_rais, "wage", attr_type)})
-            stats.append({"name": "wage_growth_pct", "value": self.get_val(Yb_rais, "wage_growth_pct", attr_type)})
-            stats.append({"name": "wage_growth_pct_5", "value": self.get_val(Yb_rais, "wage_growth_pct_5", attr_type)})
-            stats.append({"name": "val_usd", "value": self.get_val(Yb_secex, "val_usd", attr_type)})
-            stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yb_secex, "val_usd_growth_pct", attr_type)})
-            stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yb_secex, "val_usd_growth_pct_5", attr_type)})
-        if attr_type == "isic":
-            stats.append(self.get_top_attr(Ybi, "wage", attr_type, "bra"))
-            stats.append(self.get_top_attr(Yio, "wage", attr_type, "cbo"))
-            stats.append({"name": "wage", "value": self.get_val(Yi, "wage", attr_type)})
-            stats.append({"name": "wage_growth_pct", "value": self.get_val(Yi, "wage_growth_pct", attr_type)})
-            stats.append({"name": "wage_growth_pct_5", "value": self.get_val(Yi, "wage_growth_pct_5", attr_type)})
-        if attr_type == "cbo":
-            stats.append(self.get_top_attr(Ybo, "wage", attr_type, "bra"))
-            stats.append(self.get_top_attr(Yio, "wage", attr_type, "isic"))
-            stats.append({"name": "wage", "value": self.get_val(Yo, "wage", attr_type)})
-            stats.append({"name": "wage_growth_pct", "value": self.get_val(Yo, "wage_growth_pct", attr_type)})
-            stats.append({"name": "wage_growth_pct_5", "value": self.get_val(Yo, "wage_growth_pct_5", attr_type)})
-        if attr_type == "hs":
-            stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "bra"))
-            stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "wld"))
-            stats.append({"name": "val_usd", "value": self.get_val(Yp, "val_usd", attr_type)})
-            stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yp, "val_usd_growth_pct", attr_type)})
-            stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yp, "val_usd_growth_pct_5", attr_type)})
-        if attr_type == "wld":
-            stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "bra"))
-            stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "hs"))
-            stats.append({"name": "val_usd", "value": self.get_val(Yw, "val_usd", attr_type)})
-            stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yw, "val_usd_growth_pct", attr_type)})
-            stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yw, "val_usd_growth_pct_5", attr_type)})
-            stats.append({"name": "eci", "value": self.get_val(Yw, "eci", attr_type)})
+            stats.append(self.get_top_attr(Ybi, "wage", attr_type, "isic", Yi))
+            stats.append(self.get_top_attr(Ybo, "wage", attr_type, "cbo", Yi))
+            stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "hs", Yw))
+            stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "wld", Yw))
+            stats.append({"name": "wage", "value": self.get_val(Yb_rais, "wage", attr_type, Yi)})
+            stats.append({"name": "wage_growth_pct", "value": self.get_val(Yb_rais, "wage_growth_pct", attr_type, Yi)})
+            stats.append({"name": "wage_growth_pct_5", "value": self.get_val(Yb_rais, "wage_growth_pct_5", attr_type, Yi)})
+            stats.append({"name": "val_usd", "value": self.get_val(Yb_secex, "val_usd", attr_type, Yw)})
+            stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yb_secex, "val_usd_growth_pct", attr_type, Yw)})
+            stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yb_secex, "val_usd_growth_pct_5", attr_type, Yw)})
+        elif attr_type == "isic":
+            dataset = Yi
+            stats.append(self.get_top_attr(Ybi, "wage", attr_type, "bra", dataset))
+            stats.append(self.get_top_attr(Yio, "wage", attr_type, "cbo", dataset))
+            stats.append({"name": "wage", "value": self.get_val(Yi, "wage", attr_type, dataset)})
+            stats.append({"name": "wage_growth_pct", "value": self.get_val(Yi, "wage_growth_pct", attr_type, dataset)})
+            stats.append({"name": "wage_growth_pct_5", "value": self.get_val(Yi, "wage_growth_pct_5", attr_type, dataset)})
+        elif attr_type == "cbo":
+            dataset = Yi
+            stats.append(self.get_top_attr(Ybo, "wage", attr_type, "bra", dataset))
+            stats.append(self.get_top_attr(Yio, "wage", attr_type, "isic", dataset))
+            stats.append({"name": "wage", "value": self.get_val(Yo, "wage", attr_type, dataset)})
+            stats.append({"name": "wage_growth_pct", "value": self.get_val(Yo, "wage_growth_pct", attr_type, dataset)})
+            stats.append({"name": "wage_growth_pct_5", "value": self.get_val(Yo, "wage_growth_pct_5", attr_type, dataset)})
+        elif attr_type == "hs":
+            dataset = Yw
+            stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "bra", dataset))
+            stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "wld", dataset))
+            stats.append({"name": "val_usd", "value": self.get_val(Yp, "val_usd", attr_type, dataset)})
+            stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yp, "val_usd_growth_pct", attr_type, dataset)})
+            stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yp, "val_usd_growth_pct_5", attr_type, dataset)})
+        elif attr_type == "wld":
+            dataset = Yw
+            stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "bra", dataset))
+            stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "hs", dataset))
+            stats.append({"name": "val_usd", "value": self.get_val(Yw, "val_usd", attr_type, dataset)})
+            stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yw, "val_usd_growth_pct", attr_type, dataset)})
+            stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yw, "val_usd_growth_pct_5", attr_type, dataset)})
+            stats.append({"name": "eci", "value": self.get_val(Yw, "eci", attr_type, dataset)})
             
         return stats
     
@@ -59,8 +63,8 @@ class Stats(object):
                             .order_by(getattr(tbl, "year").desc()).first()[0]
         return latest_year
 
-    def get_top_attr(self, tbl, val_var, attr_type, key):
-        latest_year = self.get_latest_year(tbl)
+    def get_top_attr(self, tbl, val_var, attr_type, key, dataset):
+        latest_year = self.get_latest_year(dataset)
         if key == "bra":
             length = 8
         elif key == "isic" or key == "wld":
@@ -75,8 +79,8 @@ class Stats(object):
                     .order_by(getattr(tbl, val_var).desc()).first()
         return {"name": "top_{0}".format(key), "value": getattr(top, key).name(), "id": getattr(top, key).id}
 
-    def get_val(self, tbl, val_var, attr_type):
-        latest_year = self.get_latest_year(tbl)
+    def get_val(self, tbl, val_var, attr_type, dataset):
+        latest_year = self.get_latest_year(dataset)
         total = tbl.query.filter_by(year=latest_year) \
                     .filter(getattr(tbl, attr_type+"_id") == self.id).first()
         return getattr(total, val_var)

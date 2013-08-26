@@ -31,32 +31,27 @@ def guide(category = None, category_id = None, option = None, subject = None, op
     plan = None
     
     category_type = category_id
-    option_type = option_id
+    
+    if category_id == "all" and category == "cbo":
+        category_type = "all"
+    elif category:
+        category_type = "<"+category+">"
+        
+    if (category == "cbo" or option == "potential") and option_id and option_id != "select":
+        option_type = "<bra>"
+    else:
+        option_type = option_id
+        
+
     extra_type = extra_id
         
-    if category == "cbo":
-        if category_id != "all":
-            category_type = "<cbo>"
-        if option_id and option_id != "select":
-            option_type = "<bra>"
-    elif category == "hs":
-        category_type = "<hs>"
-        if option == "potential" and option_id and option_id != "select":
-            option_type = "<bra>"
-    elif category == "isic":
-        category_type = "<isic>"
-        if option == "potential" and option_id and option_id != "select":
-            option_type = "<bra>"
-    elif category == "bra":
-        category_type = "<bra>"
+    if category == "bra":
         if option == "isic" and option_id:
             option_type = "<isic>"
         if option_id == "hs" and extra_id and extra_id != "select":
             extra_type = "<hs>"
         elif option_id == "isic" and extra_id and extra_id != "select":
             extra_type = "<isic>"
-    elif category == "wld":
-        category_type = "<wld>"
         
     # raise Exception(category,category_type,option,option_type,extra_type)
     if option:
@@ -67,17 +62,10 @@ def guide(category = None, category_id = None, option = None, subject = None, op
         g.page_type = "plan"
         page = "guide/guide.html"
         
-        if category == "cbo":
-            plan.set_attr(category_id,"cbo")
-        elif category == "hs":
-            plan.set_attr(category_id,"hs")
-        elif category == "isic":
-            plan.set_attr(category_id,"isic")
-        elif category == "wld":
-            plan.set_attr(category_id,"wld")
+
+        plan.set_attr(category_id,category)
 
         if category == "bra":
-            plan.set_attr(category_id,"bra")
             if option_id == "hs" and extra_id:
                 plan.set_attr(extra_id,"hs")
             elif option_id == "isic" and extra_id:

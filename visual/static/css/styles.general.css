@@ -10,6 +10,15 @@ body {
   color: #333333;
 }
 
+div#timer {
+  color: red;
+  font-size: 10px;
+  left: 10px;
+  position: absolute;
+  top: 10px;
+  z-index: 999999;
+}
+
 hr {
   background-color: #ccc;
   margin: 10px;
