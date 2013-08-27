@@ -27,12 +27,9 @@ class AutoSerialize(object):
         # return data
         keys = self._sa_instance_state.attrs.items()
         public = self.__public__ + extra if self.__public__ else extra
-        x = []
+        
         for k, field in keys:
-            if public and k not in public: continue
-            if k in exclude: continue
-            
-            if hasattr(field.value, '__module__'):
+            if (public and k not in public) or k in exclude or hasattr(field.value, '__module__'):
                 continue
             data[k] = self._serialize(field.value)
         return data

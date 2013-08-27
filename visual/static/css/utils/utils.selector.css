@@ -73,13 +73,17 @@ div.selector_body {
 }
 
 div.selector_body > div.vizwhiz_tooltip_data_seperator {
-  margin-bottom: 4px;
+  margin: 0px;
 }
 
 div.selector_body > div.search_result {
   display: block;
   padding: 6px;
   position: relative ;
+}
+
+div#result_mg {
+  background-color: #eee;
 }
 
 div.selector_body > div.search_result:after { 
@@ -134,7 +138,8 @@ div.search_result > div.search_buttons {
   float: right;
 }
 
-div.select_button {
+div.selector_toggles > div,
+div.search_buttons > div {
   display: inline-block;
   margin-left: 6px;
 }

@@ -10,6 +10,10 @@ from visual.attrs.models import Bra, Isic, Cbo
 
 mod = Blueprint('rais', __name__, url_prefix='/rais')
 
+import time
+
+timing = []
+
 RESULTS_PER_PAGE = 40
 
 @mod.errorhandler(404)
@@ -21,12 +25,13 @@ def per_request_callbacks(response):
     if response.status_code != 302 and response.mimetype != "text/csv":
         response.headers['Content-Encoding'] = 'gzip'
         response.headers['Content-Length'] = str(len(response.data))
+    # raise Exception(timing)
     return response
 
 ''' Given a "bra" string from URL, turn this into an array of Bra
     objects'''
 def parse_bras(bra_str):
-    if "mgpr" in bra_str:
+    if "mgplr" in bra_str:
         planning_region = Bra.query.get(bra_str)
         bras = [b.serialize() for b in planning_region.pr.all()]
     elif ".show." in bra_str:
@@ -60,6 +65,9 @@ agg = {'wage':func.sum, 'num_emp':func.sum, 'num_est':func.sum,
         'opp_gain':func.avg, 'required':func.avg, 'rca':func.avg}
 
 def get_query(data_table, url_args, **kwargs):
+    
+    t1 = time.time()
+    
     query = data_table.query
     download = url_args.get("download", None)
     raw = True if "raw" in kwargs else None
@@ -76,6 +84,10 @@ def get_query(data_table, url_args, **kwargs):
     unique_keys = ["year", "isic_id", "cbo_id"]
     aggregate = True
     
+    t2 = time.time()
+    timing.append("Get_Query Initialize: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
+    
     # first lets test if this query is cached
     if limit is None and download is None and raw is None:
         cached_q = cached_query(cache_id)
@@ -90,6 +102,10 @@ def get_query(data_table, url_args, **kwargs):
         query = db.session.query(data_table, join["table"])
         for col in join["on"]:
             query = query.filter(getattr(data_table, col) == getattr(join_table, col))
+    
+    t2 = time.time()
+    timing.append("Join Initialize: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
 
     # handle location (if specified)
     if "bra_id" in kwargs:
@@ -125,11 +141,19 @@ def get_query(data_table, url_args, **kwargs):
             else:
                 query = query.filter(data_table.bra_id == ret["location"][0]["id"])
     
+    t2 = time.time()
+    timing.append("Handle Location: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
+    
     # handle year (if specified)
     if "year" in kwargs:
         ret["year"] = parse_years(kwargs["year"])
         # filter query
         query = query.filter(data_table.year.in_(ret["year"]))
+    
+    t2 = time.time()
+    timing.append("Handle Year: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
     
     # handle industry (if specified)
     if "isic_id" in kwargs:
@@ -150,8 +174,12 @@ def get_query(data_table, url_args, **kwargs):
                 query = query.filter(data_table.isic_id == ret["industry"][0]["id"])
     else:
         unique_keys.remove('isic_id')
+    
+    t2 = time.time()
+    timing.append("Handle Industry: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
 
-    # handle industry (if specified)
+    # handle occupation (if specified)
     if "cbo_id" in kwargs:
         if "show." in kwargs["cbo_id"]:
             # the '.' indicates that we are looking for a specific bra nesting
@@ -172,6 +200,10 @@ def get_query(data_table, url_args, **kwargs):
     else:
         unique_keys.remove('cbo_id')
     
+    t2 = time.time()
+    timing.append("Handle Occupation: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
+    
     # handle ordering
     if order:
         for o in order:
@@ -189,6 +221,10 @@ def get_query(data_table, url_args, **kwargs):
                 query = query.join(Cbo).order_by(Cbo.name_en)
             else:
                 query = query.order_by(getattr(data_table, o) + " " + direction)
+    
+    t2 = time.time()
+    timing.append("Handle Ordering: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
     
     # lastly we want to get the actual data held in the table requested
     if "location" in ret and len(ret["location"]) > 1 and aggregate:
@@ -211,6 +247,11 @@ def get_query(data_table, url_args, **kwargs):
             items = query.limit(limit).offset(offset).all()
         else:
             items = query.all()
+    
+        t2 = time.time()
+        timing.append("Query Data: {0:.4f}s".format((t2-t1)))
+        t1 = time.time()
+        # raise Exception(len(items))
         for row in items:
             datum = row[0].serialize()
             for value, col_name in zip(row[1:], join["columns"].keys()):
@@ -218,6 +259,11 @@ def get_query(data_table, url_args, **kwargs):
                 extra[col_name] = value
                 datum = dict(datum.items() + extra.items())
             ret["data"].append(datum)
+            
+        t2 = time.time()
+        timing.append("Serialize Data: {0:.4f}s".format((t2-t1)))
+        t1 = time.time()
+            
     elif limit:
         ret["data"] = [d.serialize() for d in query.limit(limit).offset(offset).all()]
     elif raw:
@@ -245,12 +291,24 @@ def get_query(data_table, url_args, **kwargs):
                             headers={"Content-Disposition": content_disposition})
         return resp
     
+    t2 = time.time()
+    timing.append("Check Download: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
+    
     # gzip and jsonify result
     ret = gzip_data(jsonify(ret).data)
+    
+    t2 = time.time()
+    timing.append("GZIP Data: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
     
     if limit is None and download is None:
         cached_query(cache_id, ret)
     
+    t2 = time.time()
+    timing.append("Cache Data: {0:.4f}s".format((t2-t1)))
+    t1 = time.time()
+        
     return ret
 
 ############################################################
@@ -282,7 +340,7 @@ def rais_yo(**kwargs):
 
 @mod.route('/all/<bra_id>/<isic_id>/all/')
 @mod.route('/<year>/<bra_id>/<isic_id>/all/')
-def rais_ybi(**kwargs):    
+def rais_ybi(**kwargs):
     kwargs["join"] = {
                         "table": Yi.ici,
                         "columns": {"ici": Yi.ici},

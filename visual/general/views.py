@@ -115,8 +115,8 @@ def after_request(response):
     overall = (time.time()-g.timing[0])
     g.timing[0] = "Overall: {0:.4f}s".format(overall)
     # raise Exception(g.timing)
-    # if overall > 1:
-    #     raise Exception(g.timing)
+    # if overall > 10:
+        # raise Exception(g.timing)
     return response
     
 @mod.route('/', methods=['GET', 'POST'])

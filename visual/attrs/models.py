@@ -1,6 +1,7 @@
 from visual import db
-from visual.utils import AutoSerialize
-from sqlalchemy import func
+from visual.utils import AutoSerialize, exist_or_404
+from sqlalchemy import func, Float
+from sqlalchemy.sql.expression import cast
 
 from flask import g
 
@@ -56,6 +57,34 @@ class Stats(object):
             stats.append({"name": "eci", "value": self.get_val(Yw, "eci", attr_type, dataset)})
             
         return stats
+        
+    ''' Given a "bra" string from URL, turn this into an array of Bra
+        objects'''
+    @staticmethod
+    def parse_bras(bra_str):
+        if "mgplr" in bra_str:
+            planning_region = Bra.query.get(bra_str)
+            bras = [b.serialize() for b in planning_region.pr.all()]
+        elif ".show." in bra_str:
+            # the '.show.' indicates that we are looking for a specific nesting
+            bar_id, nesting = bra_str.split(".show.")
+            # filter table by requested nesting level
+            bras = Bra.query \
+                    .filter(Bra.id.startswith(bra_id)) \
+                    .filter(func.char_length(Attr.id) == nesting).all()
+            bras = [b.serialize() for b in bras]
+        elif "." in bra_str:
+            # the '.' indicates we are looking for bras within a given distance
+            bra_id, distance = bra_str.split(".")
+            bras = exist_or_404(Bra, bra_id)
+            neighbors = bras.get_neighbors(distance)
+            bras = [g.bra.serialize() for g in neighbors]
+        else:
+            # we allow the user to specify bras separated by '+'
+            bras = bra_str.split("+")
+            # Make sure the bra_id requested actually exists in the DB
+            bras = [exist_or_404(Bra, bra_id).serialize() for bra_id in bras]
+        return bras
     
     @staticmethod
     def get_latest_year(tbl):
@@ -73,17 +102,86 @@ class Stats(object):
             length = 4
         elif key == "hs":
             length = 6
-        top = tbl.query.filter_by(year=latest_year) \
-                    .filter(getattr(tbl, attr_type+"_id") == self.id) \
+            
+        if attr_type == "bra":
+            agg = {'val_usd':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
+                    'val_usd_growth_pct':func.avg, 'val_usd_growth_pct_5':func.avg, 
+                    'val_usd_growth_val':func.avg, 'val_usd_growth_val_5':func.avg,
+                    'distance':func.avg, 'distance_wld':func.avg,
+                    'opp_gain':func.avg, 'opp_gain_wld':func.avg,
+                    'rca':func.avg, 'rca_wld':func.avg,
+                    'wage':func.sum, 'num_emp':func.sum, 'num_est':func.sum,
+                    'ici':func.avg, 'oci':func.avg,
+                    'wage_growth_pct':func.avg, 'wage_growth_pct_5':func.avg, 
+                    'wage_growth_val':func.avg, 'wage_growth_val_5':func.avg,
+                    'num_emp_growth_pct':func.avg, 'num_emp_pct_5':func.avg, 
+                    'num_emp_growth_val':func.avg, 'num_emp_growth_val_5':func.avg,
+                    'distance':func.avg, 'importance':func.avg,
+                    'opp_gain':func.avg, 'required':func.avg, 'rca':func.avg}
+            
+            bras = self.parse_bras(self.id)
+
+            # filter query
+            if len(bras) > 1:
+                col_names = ["{0}_id".format(key)]
+                col_vals = [cast(agg[c](getattr(tbl, c)), Float) if c in agg else getattr(tbl, c) for c in col_names]
+                top = tbl.query.with_entities(*col_vals).filter(tbl.bra_id.in_([b["id"] for b in bras]))
+            else:
+                top = tbl.query.filter(tbl.bra_id == bras[0]["id"])
+        else:
+            top = tbl.query.filter(getattr(tbl, attr_type+"_id") == self.id)
+            
+        top = top.filter_by(year=latest_year) \
                     .filter(func.char_length(getattr(tbl, key+"_id")) == length) \
+                    .group_by(getattr(tbl, key+"_id")) \
                     .order_by(getattr(tbl, val_var).desc()).first()
-        return {"name": "top_{0}".format(key), "value": getattr(top, key).name(), "id": getattr(top, key).id}
+
+        if isinstance(top,tuple):
+            obj = globals()[key.title()].query.get(top[0])
+        else:
+            obj = getattr(top, key)
+        
+        return {"name": "top_{0}".format(key), "value": obj.name(), "id": obj.id}
 
     def get_val(self, tbl, val_var, attr_type, dataset):
         latest_year = self.get_latest_year(dataset)
-        total = tbl.query.filter_by(year=latest_year) \
-                    .filter(getattr(tbl, attr_type+"_id") == self.id).first()
-        return getattr(total, val_var)
+        
+        if attr_type == "bra":
+            agg = {'val_usd':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
+                    'val_usd_growth_pct':func.avg, 'val_usd_growth_pct_5':func.avg, 
+                    'val_usd_growth_val':func.avg, 'val_usd_growth_val_5':func.avg,
+                    'distance':func.avg, 'distance_wld':func.avg,
+                    'opp_gain':func.avg, 'opp_gain_wld':func.avg,
+                    'rca':func.avg, 'rca_wld':func.avg,
+                    'wage':func.sum, 'num_emp':func.sum, 'num_est':func.sum,
+                    'ici':func.avg, 'oci':func.avg,
+                    'wage_growth_pct':func.avg, 'wage_growth_pct_5':func.avg, 
+                    'wage_growth_val':func.avg, 'wage_growth_val_5':func.avg,
+                    'num_emp_growth_pct':func.avg, 'num_emp_pct_5':func.avg, 
+                    'num_emp_growth_val':func.avg, 'num_emp_growth_val_5':func.avg,
+                    'distance':func.avg, 'importance':func.avg,
+                    'opp_gain':func.avg, 'required':func.avg, 'rca':func.avg}
+            
+            bras = self.parse_bras(self.id)
+            
+            # filter query
+            if len(bras) > 1:
+                col_names = [val_var]
+                col_vals = [cast(agg[c](getattr(tbl, c)), Float) if c in agg else getattr(tbl, c) for c in col_names]
+                total = tbl.query.with_entities(*col_vals).filter(tbl.bra_id.in_([b["id"] for b in bras]))
+            else:
+                total = tbl.query.filter(tbl.bra_id == bras[0]["id"])
+        else:
+            total = tbl.query.filter(getattr(tbl, attr_type+"_id") == self.id)
+        
+        total = total.filter_by(year=latest_year).first()
+                 
+        if isinstance(total,tuple):
+            val = total[0]
+        else:
+            val = getattr(total,val_var)
+                    
+        return val
 
 class Isic(db.Model, AutoSerialize, Stats):
 
@@ -250,6 +348,13 @@ class Bra(db.Model, AutoSerialize, Stats):
             primaryjoin = (bra_pr.c.pr_id == id), 
             secondaryjoin = (bra_pr.c.bra_id == id), 
             backref = db.backref('bra', lazy = 'dynamic'), 
+            lazy = 'dynamic')
+            
+    pr2 = db.relationship('Bra', 
+            secondary = bra_pr, 
+            primaryjoin = (bra_pr.c.bra_id == id), 
+            secondaryjoin = (bra_pr.c.pr_id == id), 
+            backref = db.backref('bra2', lazy = 'dynamic'), 
             lazy = 'dynamic')
     
     def name(self):

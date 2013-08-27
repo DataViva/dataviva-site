@@ -102,26 +102,28 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_merge
         # merge cbo table to YO table to find all instances in the data
         attrs_in_db = db.session.query(Attr, func.sum(getattr(Attr_weight_tbl, Attr_weight_col)))
         attrs_in_db = attrs_in_db \
-                        .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id) \
-                        .filter(func.char_length(Attr.id) == Attr_id_lens[-1]).group_by(Attr)
+                        .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id).group_by(Attr)
                         
         if Attr_weight_col == "population":
             max_year = db.session.query(Attr_weight_tbl.year.distinct()).order_by(Yb.year.desc()).all()[0]
-            attrs_in_db = attrs_in_db.filter(Attr_weight_tbl.year == max_year[0])
+            attrs_in_db = attrs_in_db \
+                .filter(Attr_weight_tbl.year == max_year[0])
         # attrs_in_db = {a[0].id: a for a in attrs_in_db.all()}
         
-        
+        if Attr_weight_col == "population":
+            for a in attrs:
+                if len(a) == 8 and a[:2] == "mg":
+                    plr = Bra.query.get_or_404(a).pr2.first()
+                    if plr:
+                        attrs[a]["plr"] = plr.id
+                        
+        # raise Exception(attrs_in_db)
         
         for a in attrs_in_db.all():
-            this_id = a[0].id
+            # this_id = a[0].id
             # attrs[this_id][Attr_weight_col] = a[1]
-            longest_index = Attr_id_lens.index(len(this_id))
-            for id_len in Attr_id_lens[:longest_index+1]:
-                if Attr_weight_col in attrs[this_id[:id_len]]:
-                    attrs[this_id[:id_len]][Attr_weight_col] += int(a[1])
-                else:
-                    attrs[this_id[:id_len]][Attr_weight_col] = int(a[1])
-                    attrs[this_id[:id_len]]["available"] = True
+            attrs[a[0].id][Attr_weight_col] = int(a[1])
+            attrs[a[0].id]["available"] = True
             # raise Exception(this_id[:id_len])
         # raise Exception(attrs["14"])
         
@@ -142,6 +144,7 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_merge
         # raise Exception(len(attrs))
         
         ret["data"] = attrs.values()
+        
         # for a in attrs:
         #     if type(a) == Attr:
         #         ret["data"].append(fix_name(a.serialize()))

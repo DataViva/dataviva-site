@@ -133,10 +133,16 @@ function Selector() {
         else {
           
           update_header(selected);
-          
+        
           // Create list by matching parent ids
           list = d3.values(data).filter(function(v){
-            return v.parent == parent.id && v.id != "all";
+            if (parent.id != "all") {
+              var child = v.parents.indexOf(parent.id) >= 0
+            }
+            else {
+              var child = true
+            }
+            return v.id.length == current_depth && v.id != "all" && child;
           })
           
         }
@@ -147,7 +153,22 @@ function Selector() {
           var lengthdiff = b.id.length - a.id.length
           if (lengthdiff) return lengthdiff
           
-          if (a[sorting] && b[sorting]) {
+          if (type == "bra") {
+            var a_state = a.id.substr(0,2)
+            var b_state = b.id.substr(0,2)
+          }
+          else {
+            var a_state = a.id
+            var b_state = b.id
+          }
+          
+          if (a_state == "mg" && a_state != b_state) {
+            return -1
+          }
+          else if (b_state == "mg" && a_state != b_state) {
+            return 1
+          }
+          else if (a[sorting] && b[sorting]) {
             var a_first = a[sorting]
             var b_first = b[sorting]
           }
@@ -197,16 +218,30 @@ function Selector() {
        
       }
       
-      select_value = function(x) {
+      select_value = function(x,depth) {
         
         search.node().value = ""
         
         if (depths.indexOf(x.id.length) == depths.length-1) {
-          x = data[x.parent]
+          x = data[x.parents[0]]
         }
         
-        selected = x;
+        selected = x
+        if (depth_path.indexOf(depth) > 0) depth_path.pop()
+        else if ((!depth_path.length || depth_path[depth_path.length-1] < current_depth) && x.id != "all" && current_depth) depth_path.push(current_depth)
 
+        if (!depth) {
+          if (x.id == "all") {
+            current_depth = depths[0]
+          }
+          else {
+            current_depth = x.id.length == 7 && type == "bra" ? 8 : depths[depths.indexOf(x.id.length)+1]
+          }
+        }
+        else {
+          current_depth = depth
+        }
+        
         if (depths.length > 1) {
           
           bread.select("a").remove()
@@ -216,7 +251,7 @@ function Selector() {
               .html("&laquo; Back")
               .on(vizwhiz.evt.click,function(){
                 search.node().value = ""
-                select_value(data[selected.parent]);
+                select_value(data[selected.parents[0]],depth_path[depth_path.length-1]);
               })
               .on(vizwhiz.evt.over,function(){
                 this.style.color = vizwhiz.utils.darker_color(x.color)
@@ -227,8 +262,7 @@ function Selector() {
           }
           
         }
-        
-        populate_list(x);
+        populate_list(x,sorting);
         
       }
       
@@ -303,7 +337,7 @@ function Selector() {
         
         if (data instanceof Array) {
           data = data.filter(function(d){
-            return d.available;
+            return d.available || (type == "bra" && d.id.length == 7);
           })
         
           var temp_dict = {};
@@ -338,16 +372,25 @@ function Selector() {
             data[d].display_id = visual.displayID(d,type);
           }
           
-          var depth = depths.indexOf(data[d].id.length)
+          var depth = depths.indexOf(d.length)
           
-          if (data[d].id == "all") {
-            data[d].parent = "none"
+          if (d == "all") {
+            data[d].parents = ["none"]
           }
           else if (depth == 0) {
-            data[d].parent = "all"
+            data[d].parents = ["all"]
+          }
+          else if (type == "bra" && d.length == 8){
+            data[d].parents = [d.slice(0,depths[depth-1])]
+            if (data[d].plr) {
+              data[d].parents.push(data[d].plr)
+            }
+          }
+          else if (type == "bra" && d.length == 7){
+            data[d].parents = [d.slice(0,2)]
           }
           else {
-            data[d].parent = d.slice(0,depths[depth-1]);
+            data[d].parents = [d.slice(0,depths[depth-1])]
           }
           
           if (!data[d].icon) data[d].icon = visual.icon(d,type,data[d].color)
@@ -388,9 +431,7 @@ function Selector() {
           
           if (type == "file") var prefix = x.name
           else if (type == "bra") {
-            var d = depths.indexOf(x.id.length)
-            var length = depths[d+1]
-            var prefix = visual.format.text("bra_"+length+"_plural")
+            var prefix = visual.format.text("bra_"+current_depth+"_plural")
           }
           else var prefix = visual.format.text(type+"_plural")
           
@@ -449,7 +490,8 @@ function Selector() {
               .attr("class","search_result")
               .on(vizwhiz.evt.click,function(){
                 if (v.id.length < depths[depths.length-1]) {
-                  select_value(v);
+                  var depth = v.id.length == 7 && type == "bra" ? 8 : depths[depths.indexOf(v.id.length)+1]
+                  select_value(v,depth);
                 }
                 else {
                   callback(data[v.id],name);
@@ -500,17 +542,32 @@ function Selector() {
               
             if (v.id.length < depths[depths.length-1]) {
               
+              if (v.id == "mg" && type == "bra") {
+              
+                var d = depths.indexOf(v.id.length)
+                var length = depths[d+1]
+                var suffix = visual.format.text("bra_7_plural")
+              
+                buttons.append("div")
+                  .attr("class","leon button medium")
+                  .html(suffix)
+                  .on(vizwhiz.evt.click,function(){
+                    d3.event.stopPropagation()
+                    select_value(v,7)
+                  })
+              }
+              
               var d = depths.indexOf(v.id.length)
-              var length = depths[d+1]
+              var length = v.id.length == 7 && type == "bra" ? 8 : depths[d+1]
               var suffix = visual.format.text(type+"_"+length+"_plural")
               
               buttons.append("div")
                 .attr("class","leon button medium")
-                .html(visual.format.text("show")+" "+suffix)
+                .html(suffix)
                 .on(vizwhiz.evt.click,function(){
                   d3.event.stopPropagation()
-                  select_value(v)
-                });
+                  select_value(v,length)
+                })
             }
             else if (type == "bra" && v.id.length == depths[depths.length-1]) {
 
@@ -613,10 +670,11 @@ function Selector() {
           search = null, 
           body = null, 
           sort_toggles = null,
-          sorter = null;
+          sorter = null,
+          current_depth = null,
+          depth_path = [];
           
       var distance_url = "/attrs/bra/munic.value/",
-          depths = visual.depths(type,true),
           list = [],
           search_term = ""
           selected = null,
@@ -630,6 +688,13 @@ function Selector() {
           },
           value = sort_types[type] ? sort_types[type] : null,
           sorts = ["name"]
+          
+      if (type == "bra") {
+        var depths = visual.depths(type,false)
+      }
+      else {
+        var depths = visual.depths(type,true)
+      }
           
       if (value) {
         sorts.push(value)

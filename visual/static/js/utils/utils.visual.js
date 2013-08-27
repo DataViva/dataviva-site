@@ -100,6 +100,7 @@ visual.format.text = function(text,name,l) {
       "bra_2": {"en": "State", "pt": "Estado"},
       "bra_4": {"en": "Mesoregion", "pt": "Mesorregi\u00e3o"},
       "bra_6": {"en": "Microregion", "pt": "Microrregi\u00e3o"},
+      "bra_7": {"en": "Planning Region", "pt": "Regi\u00e3o de Planejamento"},
       "bra_8": {"en": "Municipality", "pt": "Municipalidade"},
       "cbo_1": {"en": "Sector", "pt": "Setor"},
       "cbo_2": {"en": "2 Digit", "pt": "2 D\u00edgitos"},
@@ -119,6 +120,7 @@ visual.format.text = function(text,name,l) {
       "bra_2_plural": {"en": "States", "pt": "Estados"},
       "bra_4_plural": {"en": "Mesoregions", "pt": "Mesorregi\u00f5es"},
       "bra_6_plural": {"en": "Microregions", "pt": "Microrregi\u00f5es"},
+      "bra_7_plural": {"en": "Planning Regions", "pt": "Regi\u00f5es de Planejamento"},
       "bra_8_plural": {"en": "Municipalities", "pt": "Municipalidades"},
       "cbo_1_plural": {"en": "Sectors", "pt": "Setores"},
       "cbo_2_plural": {"en": "2 Digit", "pt": "2 D\u00edgitos"},
@@ -522,7 +524,7 @@ visual.depths = function(type,flatten) {
   if (type == "isic") var array = [1,3,5];
   else if (type == "cbo") var array = [1,2,3,4];
   else if (type == "hs") var array = [2,4,6];
-  else if (type == "bra") var array = [2,4,6,8];
+  else if (type == "bra") var array = [2,4,8];
   else if (type == "wld") var array = [2,5];
   else var array = [0];
   
