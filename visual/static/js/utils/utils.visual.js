@@ -74,7 +74,7 @@ visual.format.text = function(text,name,l) {
     
       // RCA Scope Toggle
       "rca_scope": {"en": "RCA Scope", "pt": "Escopo do RCA"},
-      "bra_rca": {"en": "Domestic", "pt": "Dom\u0089stico"},
+      "bra_rca": {"en": "Domestic", "pt": "Dom\u00e9stico"},
       "wld_rca": {"en": "International", "pt": "Internacional"},
 
       // Spotlight Toggle
