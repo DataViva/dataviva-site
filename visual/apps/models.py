@@ -229,7 +229,10 @@ class Build(db.Model, AutoSerialize):
                     if b.id != "all" and b.distance > 0:
                         name = name + " ("+b.distance+"km)"
                     bras.append(name)
-                title = title.replace("<bra>", " and ".join(bras))
+                if lang == "pt":
+                    title = title.replace("<bra>", " e ".join(bras))
+                else:
+                    title = title.replace("<bra>", " and ".join(bras))
                 article_search = re.search('<bra_(\w+)>', title)
                 if article_search:
                     title = title.replace(article_search.group(0), " and ".join([get_article(b, article_search.group(1)) for b in self.bra]))
