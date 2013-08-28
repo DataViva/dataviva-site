@@ -711,6 +711,9 @@
           else if (ui.type == "sort" && app.build.app.type == "stacked") {
             var default_value = "color"
           }
+          else if (ui.type == "spotlight" && app.build.app.type == "scatter") {
+            var default_value = ui.values[1]
+          }
           else {
             var default_value = ui.values[0]
           }
