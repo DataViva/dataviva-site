@@ -22,13 +22,12 @@ div.selector_header > div.selector_header_icon {
   display: inline-block;
   height: 50px;
   margin-bottom: 12px;
-  margin-right: 12px;
   width: 50px;
 }
 
 div.selector_title_div {
   display: inline-block;
-  margin-top: 6px;
+  margin: 6px 0px 12px 12px;
 }
 
 div.selector_title_div > div.selector_title {

@@ -134,7 +134,7 @@ class Stats(object):
         top = top.filter_by(year=latest_year) \
                     .filter(func.char_length(getattr(tbl, key+"_id")) == length) \
                     .group_by(getattr(tbl, key+"_id")) \
-                    .order_by(getattr(tbl, val_var).desc()).first()
+                    .order_by(func.sum(getattr(tbl, val_var)).desc()).first()
 
         if isinstance(top,tuple):
             obj = globals()[key.title()].query.get(top[0])

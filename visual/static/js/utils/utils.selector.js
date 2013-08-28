@@ -104,10 +104,11 @@ function Selector() {
         body.selectAll("div").remove();
         
         // Get current search box value
-        search_term = search.node().value.toLowerCase().removeAccents();
+        search_term = search.node().value.toLowerCase().removeAccents()
+        searching = search_term.length > 0;
         
         // User is searching, so do this stuff!
-        if (search_term.length > 0) {
+        if (searching) {
           
           update_header(search_term);
         
@@ -227,20 +228,11 @@ function Selector() {
         }
         
         selected = x
+        
         if (depth_path.indexOf(depth) > 0) depth_path.pop()
         else if ((!depth_path.length || depth_path[depth_path.length-1] < current_depth) && x.id != "all" && current_depth) depth_path.push(current_depth)
-
-        if (!depth) {
-          if (x.id == "all") {
-            current_depth = depths[0]
-          }
-          else {
-            current_depth = x.id.length == 7 && type == "bra" ? 8 : depths[depths.indexOf(x.id.length)+1]
-          }
-        }
-        else {
-          current_depth = depth
-        }
+        
+        current_depth = depth
         
         if (depths.length > 1) {
           
@@ -329,7 +321,42 @@ function Selector() {
         
         selector_load.hide()
         
-        select_value(data[initial_value]);
+        if (initial_value != "all") {
+          if (type == "bra" && initial_value == "mg") {
+            var depth = 7
+          }
+          else if (type == "bra" && initial_value.length == 7) {
+            var depth = 8
+          }
+          else {
+            var depth = depths[depths.indexOf(initial_value.length)+1]
+          }
+        }
+        else {
+          var depth = depths[0]
+        }
+        
+        if (initial_value != "all") {
+          if (type == "bra" && initial_value.length >= 7) {
+            if (initial_value.substr(0,2) == "mg") {
+              depth_path = [2,7]
+            }
+            else {
+              depth_path = [2,4]
+            }
+          }
+          else {
+            depth_path = []
+            depths.forEach(function(d){
+              if (d <= initial_value.length) depth_path.push(d)
+            })
+          }
+        }
+        else {
+          depth_path = []
+        }
+        
+        select_value(data[initial_value],depth);
         
       }
 
@@ -490,7 +517,17 @@ function Selector() {
               .attr("class","search_result")
               .on(vizwhiz.evt.click,function(){
                 if (v.id.length < depths[depths.length-1]) {
-                  var depth = v.id.length == 7 && type == "bra" ? 8 : depths[depths.indexOf(v.id.length)+1]
+                  if (type == "bra" && v.id.substr(0,2) == "mg") {
+                    if (v.id.length == 2) {
+                      var depth = 7
+                    }
+                    else {
+                      var depth = 8
+                    }
+                  }
+                  else {
+                    var depth = depths[depths.indexOf(v.id.length)+1]
+                  }
                   select_value(v,depth);
                 }
                 else {
@@ -519,7 +556,7 @@ function Selector() {
               .style("color",vizwhiz.utils.darker_color(v.color))
               .html(title)
           
-            if (type != "file") {
+            if (type != "file" && searching) {
               text.append("div")
                 .attr("class","search_sub")
                 .html(visual.format.text(type+"_"+v.id.length))
@@ -602,7 +639,7 @@ function Selector() {
                 }
               })
       
-              leon("#distance"+v.id)
+              leon("#distance"+v.id).color(v.color)
               
             }
               
@@ -672,7 +709,8 @@ function Selector() {
           sort_toggles = null,
           sorter = null,
           current_depth = null,
-          depth_path = [];
+          depth_path = [],
+          searching = false;
           
       var distance_url = "/attrs/bra/munic.value/",
           list = [],
