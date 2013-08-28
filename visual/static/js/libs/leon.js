@@ -156,11 +156,12 @@ leon = function(name) {
   
   var objs = []
   others.forEach(function(obj) {
-    objs.push({
+    var o = {
       "items": obj,
       "type": obj.type,
       "name": obj.id
-    })
+    }
+    objs.push(o)
   })
   
   return_radios.forEach(function(radio_group) {
@@ -554,12 +555,12 @@ Creates a custom button when passed an item
 leon_construct.button = function(item,parent) {
   
   var self = this
-  self.item = item
   self.size = "medium"
   
   self.active = false
   
   if (item.type && item.type == "button") var item = item.items
+  self.item = item
 
   if (typeof item == "string") {
     var html = item
@@ -574,8 +575,11 @@ leon_construct.button = function(item,parent) {
       var html = label
     }
   }
-  else {
+  else if (item.innerHTML) {
     var html = item.innerHTML
+  }
+  else {
+    var html = item.value
   }
   
   if (typeof item != "string" && leon_vars.autohide) item.style.display = "none"
@@ -1178,6 +1182,8 @@ leon_construct.select = function(obj) {
   
   var self = this
   
+  self.input = obj.items
+  
   self.arrow = "<span class='leon arrow'>&#8227</span>"
   
   self.set = function(value) {
@@ -1185,33 +1191,31 @@ leon_construct.select = function(obj) {
       return o.node.id == "leon_button_"+value;
     })[0]
     if (!option) var option = self.options[0]
-    self.input.items.value = value
+    self.input.value = value
     self.selected.node.innerHTML = option.node.innerHTML + self.arrow
     return self
   }
   
-  self.input = obj
-  
   self.node = leon_construct.div("leon select")
-  self.node.id = "leon_"+self.input.items.id
-  self.input.items.parentNode.insertBefore(self.node,self.input.items)
+  self.node.id = "leon_"+self.input.id
+  self.input.parentNode.insertBefore(self.node,self.input)
   
-  if (self.input.items.labels[0]) {
-    self.label = new leon_construct.label(self.input.items.labels[0],self.node)
+  if (self.input.labels[0]) {
+    self.label = new leon_construct.label(self.input.labels[0],self.node)
   }
   
-  self.selected = new leon_construct.button(self.input.items,self.node)
+  self.selected = new leon_construct.button(self.input,self.node)
   self.selected.open = false
   
   self.dropdown = document.createElement("div")
   self.dropdown.className = "leon select dropdown"
-  self.dropdown.id = "leon_dropdown_"+self.input.items.id
+  self.dropdown.id = "leon_dropdown_"+self.input.id
   self.dropdown.style.left = self.selected.node.offsetLeft+"px"
   self.node.appendChild(self.dropdown)
   
   self.options = []
-  for (var i = 0; i < self.input.items.length; i++) {
-    self.options.push(new leon_construct.button(self.input.items[i],self.dropdown))
+  for (var i = 0; i < self.input.length; i++) {
+    self.options.push(new leon_construct.button(self.input[i],self.dropdown))
   }
   
   self.selected.node.addEventListener("click", function(e){
@@ -1229,14 +1233,14 @@ leon_construct.select = function(obj) {
     if (option.item.selected) self.set(option.item.value)
     
     if (i == 0) option.add_class("first")
-    else if (i == self.input.items.length-1) option.add_class("last")
+    else if (i == self.input.length-1) option.add_class("last")
     else option.add_class("middle")
     
     option.node.addEventListener("click", function(e){
       e.stopPropagation()
-      if (self.input.items.value != option.item.value) {
+      if (self.input.value != option.item.value) {
         self.set(option.item.value)
-        if (self.input.items.onchange) self.input.items.onchange()
+        if (self.input.onchange) self.input.onchange()
       }
       self.hide()
     })

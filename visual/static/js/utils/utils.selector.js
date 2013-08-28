@@ -296,10 +296,14 @@ function Selector() {
           sorter = leon("$selector_sort").color(visual.color)
         }
         
-
-        header_select = sort_toggles.append("div")
-          .attr("class","leon button medium select_button")
-          .html(visual.format.text("select"))
+        header_select_div = sort_toggles.append("div").attr("id","header_select_div")
+          
+        var b = header_select_div.append("input")
+          .attr("type","button")
+          .attr("id","header_select")
+          .attr("value",visual.format.text("select"))
+          
+        header_select = leon("#header_select")
         
         search = header.append("input")
           .attr("type","text")
@@ -431,7 +435,7 @@ function Selector() {
       update_header = function(x) {
         
         if (typeof x == "string") {
-          header_select.style("display","none")
+          header_select_div.style("display","none")
           icon.style("display","none")
           title.text(visual.format.text("search_results"))
           var header_color = "#333333"
@@ -446,14 +450,14 @@ function Selector() {
             .style("background-color",x.color)
           
           if (type != "file" && ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all"))) {
-            header_select
-              .style("display","inline-block")
-              .on(vizwhiz.evt.click,function(){
-                callback(data[x.id],name);
-              })
+            header_select_div.style("display","inline-block")
+            header_select.leons.header_select.item.onclick = function(){
+              callback(data[x.id],name)
+            }
+            header_select.color(x.color)
           }
           else {
-            header_select.style("display","none")
+            header_select_div.style("display","none")
           }
           
           if (type == "file") var prefix = x.name
@@ -585,26 +589,35 @@ function Selector() {
                 var length = depths[d+1]
                 var suffix = visual.format.text("bra_7_plural")
               
-                buttons.append("div")
-                  .attr("class","leon button medium")
-                  .html(suffix)
-                  .on(vizwhiz.evt.click,function(){
-                    d3.event.stopPropagation()
-                    select_value(v,7)
-                  })
+                var b = buttons.append("input")
+                  .attr("type","button")
+                  .attr("id","pr")
+                  .attr("value",suffix)
+                  
+                b.node().onclick = function(){
+                  window.event.stopPropagation()
+                  select_value(v,7)
+                }
+                
+                leon("#pr").color(v.color)
               }
               
               var d = depths.indexOf(v.id.length)
               var length = v.id.length == 7 && type == "bra" ? 8 : depths[d+1]
               var suffix = visual.format.text(type+"_"+length+"_plural")
               
-              buttons.append("div")
-                .attr("class","leon button medium")
-                .html(suffix)
-                .on(vizwhiz.evt.click,function(){
-                  d3.event.stopPropagation()
-                  select_value(v,length)
-                })
+              var b = buttons.append("input")
+                .attr("type","button")
+                .attr("id","child"+v.id)
+                .attr("value",suffix)
+                  
+              b.node().onclick = function(){
+                window.event.stopPropagation()
+                select_value(v,length)
+              }
+                
+              leon("#child"+v.id).color(v.color)
+              
             }
             else if (type == "bra" && v.id.length == depths[depths.length-1]) {
 
@@ -644,13 +657,18 @@ function Selector() {
             }
               
             if (!limit || v.id.length >= limit) {
-              buttons.append("div")
-                .attr("class","leon button medium select_button")
-                .html(visual.format.text("select"))
-                .on(vizwhiz.evt.click,function(){
-                  d3.event.stopPropagation()
-                  callback(data[v.id],name)
-                });
+              
+              var b = buttons.append("input")
+                .attr("type","button")
+                .attr("id","select"+v.id)
+                .attr("value",visual.format.text("select"))
+                  
+              b.node().onclick = function(){
+                window.event.stopPropagation()
+                callback(data[v.id],name)
+              }
+                
+              leon("#select"+v.id).color(v.color)
             }
           
             if (results[i+1] || i == results.length-1) {
@@ -699,6 +717,7 @@ function Selector() {
       
       var close = null,
           header = null,
+          header_select_div = null,
           header_select = null, 
           bread = null, 
           icon = null, 
