@@ -179,6 +179,7 @@ def profiles(category = None, id = None):
     t2 = time.time()
     g.timing.append("Formatting Plan: {0}s".format((t2-t1)))
     return render_template("profiles/profile.html", 
+                category=category,
                 item=item, 
                 builds=builds)
 

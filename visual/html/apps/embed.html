@@ -86,7 +86,7 @@
     {% set wld = current_build.wld[0] %}
     {% endif %}
     <div id="wld_0" class="leon button medium" onclick="builder.selector(this.id)">
-      <div class="leon icon medium"{% if wld %} style="{% if wld.id.length == 5 %}background-color:{{ wld.color }}; {% endif %}background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
+      <div class="leon icon medium"{% if wld %} style="{% if wld.id|count == 5 %}background-color:{{ wld.color }}; {% endif %}background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
       <span class="list_text">{% if wld %}{{ wld.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>

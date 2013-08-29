@@ -304,7 +304,7 @@ class Wld(db.Model, AutoSerialize, Stats):
         return getattr(self,"name_"+g.locale)
         
     def icon(self):
-        return "/static/img/icons/wld/wld_%s.png" % (self.id[:2])
+        return "/static/img/icons/wld/wld_%s.png" % (self.id)
         
     def __repr__(self):
         return '<Wld %r>' % (self.id_3char)
