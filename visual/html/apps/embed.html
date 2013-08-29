@@ -41,7 +41,7 @@
 
     <div id="bra_0" class="leon button medium" onclick="builder.selector(this.id)">
       {% set bra = current_build.bra[0] %}
-      <div class="leon icon medium" style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"></div>
+      <div class="leon icon medium" style="background-image:url('{{ bra.icon }}')"></div>
       <span class="list_text">{{ bra.name() }}</span>
       <i class="icon-list-alt"></i>
     </div>
@@ -86,7 +86,7 @@
     {% set wld = current_build.wld[0] %}
     {% endif %}
     <div id="wld_0" class="leon button medium" onclick="builder.selector(this.id)">
-      <div class="leon icon medium"{% if wld %} style="background-color:{{ wld.color }}; background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
+      <div class="leon icon medium"{% if wld %} style="{% if wld.id.length == 5 %}background-color:{{ wld.color }}; {% endif %}background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
       <span class="list_text">{% if wld %}{{ wld.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>
@@ -316,6 +316,12 @@
           "opp_gain_wld"
           
         ], "long": [
+    
+          "hs_id",
+          "wld_id",
+          "isic_id",
+          "cbo_id",
+          "id_ibge",
         
           "eci",
           "eci_wld",
@@ -1411,7 +1417,10 @@ val)+": ", "suffix": ""};
       
       button.select(".icon")
        .style("background-image","url("+obj.icon+")")
-       .style("background-color",obj.color)
+       
+      if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && obj.id.length != 5)) {
+        button.select(".icon").style("background-color",obj.color)
+      }
         
       if (obj.distance > 0 && type == "bra") new_name += " ("+obj.distance+"km)"
 

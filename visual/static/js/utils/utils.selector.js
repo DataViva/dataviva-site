@@ -333,7 +333,9 @@ function Selector() {
             var depth = 8
           }
           else {
-            var depth = depths[depths.indexOf(initial_value.length)+1]
+            var d = depths.indexOf(initial_value.length)
+            if (d+1 == depths.length) var depth = depths[d]
+            else var depth = depths[d+1]
           }
         }
         else {
@@ -447,7 +449,10 @@ function Selector() {
           icon
             .style("display","inline-block")
             .style("background-image","url('"+x.icon+"')")
-            .style("background-color",x.color)
+            
+          if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && x.id.length != 5)) {
+            icon.style("background-color",x.color)
+          }
           
           if (type != "file" && ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all"))) {
             header_select_div.style("display","inline-block")
@@ -542,8 +547,10 @@ function Selector() {
             if (v.icon != selected.icon || search_term != "") {
               var search_icon = item.append("div")
                 .attr("class","search_icon")
-                .style("background-color",v.color)
                 .style("background-image","url("+v.icon+")")
+              if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && v.id.length != 5)) {
+                search_icon.style("background-color",v.color)
+              }
             }
           
             var title = v.name.toTitleCase().truncate(65)

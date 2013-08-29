@@ -139,11 +139,11 @@ visual.format.text = function(text,name,l) {
       "wld_5_plural": {"en": "Countries", "pt": "Pa\u00edses"},
     
       // Calculation Labels
-      "eci": {"en": "Domestic Complexity", "pt": "Complexidade Dom\u0089stico"},
+      "eci": {"en": "Domestic Complexity", "pt": "Complexidade Dom\u00e9stica"},
       "eci_wld": {"en": "International Complexity", "pt": "Complexidade Internacional"},
       "pci": {"en": "Product Complexity", "pt": "Complexidade do Produto"},
-      "ici": {"en": "Industry Complexity", "pt": "Ind\u00fdstria Complexidade"},
-      "oci": {"en": "Occupation Complexity", "pt": "Complexidade Ocupa\u00e7\u00e3o"},
+      "ici": {"en": "Industry Complexity", "pt": "Complexidade da Ind\u00fdstria"},
+      "oci": {"en": "Occupation Complexity", "pt": "Complexidade da Ocupa\u00e7\u00e3o"},
       "distance": {"en": "Distance", "pt": "Dist\u00e2ncia"},
       "employed": {"en": "Employed", "pt": "Empregado"},
       "importance": {"en": "Importance", "pt": "Import\u00e2ncia"},
@@ -151,25 +151,25 @@ visual.format.text = function(text,name,l) {
       "growth_val": {"en": "Wage Growth", "pt": "Crescimento dos Sal\u00e1rios"},
       "growth_val_total": {"en": "Cumulative Wage Growth", "pt": "Crescimento Salarial Acumulada"},
       "proximity": {"en": "Proximity", "pt": "Proximidade"},
-      "rca": {"en": "Domestic RCA", "pt": "RCA Dom\u0089stico"},
+      "rca": {"en": "Domestic RCA", "pt": "RCA Dom\u00e9stico"},
       "rca_wld": {"en": "International RCA", "pt": "RCA Internacional"},
       
-      "opp_gain": {"en": "Opportunity Gain", "pt": "Oportunidade de Ganho"},
-      "opp_gain_wld": {"en": "International Opportunity Gain", "pt": "Ganho Internacional Opportunity"},
+      "opp_gain": {"en": "Opportunity Gain", "pt": "Ganho de Oportunidade Dom\u00e9stico"},
+      "opp_gain_wld": {"en": "International Opportunity Gain", "pt": "Ganho de Oportunidade Internacional"},
       
       "val_usd_growth_pct": {"en": "Growth Rate (1 year)", "pt": "Taxa de Crescimento (1 ano)"},
       "val_usd_growth_pct_5": {"en": "Growth Rate (5 year)", "pt": "Taxa de Crescimento (5 anos)"},
       "val_usd_growth_val": {"en": "Growth Value (1 year)", "pt": "Valor de Crescimento (1 ano)"},
       "val_usd_growth_val_5": {"en": "Growth Value (5 year)", "pt": "Valor de Crescimento (5 anos)"},
       
-      "wage_growth_pct": {"en": "Wage Growth Rate (1 year)", "pt": "Valor de Crescimento (1 ano)"},
-      "wage_growth_pct_5": {"en": "Wage Growth Rate (5 year)", "pt": "Valor de Crescimento (5 anos)"},
-      "wage_growth_val": {"en": "Wage Growth Value (1 year)", "pt": "Salário Value Growth (1 ano)"},
-      "wage_growth_val_5": {"en": "Wage Growth Value (5 year)", "pt": "Salário Value Growth (5 anos)"},
-      "num_emp_growth_pct": {"en": "Employee Growth Rate (1 year)", "pt": "Taxa de Crescimento de Empregado (1 ano)"},
-      "num_emp_growth_pct_5": {"en": "Employee Growth Rate (5 year)", "pt": "Taxa de Crescimento de Empregado (5 anos)"},
-      "num_emp_growth_val": {"en": "Employee Growth (1 year)", "pt": "Crescimento Empregado (1 ano)"},
-      "num_emp_growth_val_5": {"en": "Employee Growth (5 year)", "pt": "Crescimento Empregado (5 anos)"},
+      "wage_growth_pct": {"en": "Wage Growth Rate (1 year)", "pt": "Taxa de Crescimento dos Sal\u00e1rios (1 ano)"},
+      "wage_growth_pct_5": {"en": "Wage Growth Rate (5 year)", "pt": "Taxa de Crescimento dos Sal\u00e1rios (5 anos)"},
+      "wage_growth_val": {"en": "Wage Growth Value (1 year)", "pt": "Valor de Crescimento dos Sal\u00e1rios (1 ano)"},
+      "wage_growth_val_5": {"en": "Wage Growth Value (5 year)", "pt": "Valor de Crescimento dos Sal\u00e1rios (5 anos)"},
+      "num_emp_growth_pct": {"en": "Employee Growth Rate (1 year)", "pt": "Taxa de Crescimento de Empregados (1 ano)"},
+      "num_emp_growth_pct_5": {"en": "Employee Growth Rate (5 year)", "pt": "Taxa de Crescimento de Empregados (5 anos)"},
+      "num_emp_growth_val": {"en": "Employee Growth (1 year)", "pt": "Crescimento do N\u00famero de Empregados (1 ano)"},
+      "num_emp_growth_val_5": {"en": "Employee Growth (5 year)", "pt": "Crescimento do N\u00famero de Empregados (5 anos)"},
     
       // RAIS Labels
       "rais": {"en": "Establishments and Employment (RAIS)", "pt": "Estabelecimentos e Emprego (RAIS)"},
@@ -216,7 +216,7 @@ visual.format.text = function(text,name,l) {
     
       // File Types
       "download": {"en": "Download", "pt": "Download"},
-      "download_desc": {"en": "Choose from the following file types.", "pt": "Escolha um dos seguintes tipos de arquivo."},
+      "download_desc": {"en": "Choose from the following file types:", "pt": "Escolha um dos seguintes tipos de arquivo:"},
       "csv": {"en": "Save as CSV", "pt": "Salvar como CSV"},
       "csv_desc": {"en": "A table format that can be imported into a database or opened with Microsoft Excel.", "pt": "Um formato de tabela que pode ser importado para um banco de dados ou aberto com o Microsoft Excel."},
       "pdf": {"en": "Save as PDF", "pt": "Salvar como PDF"},
@@ -242,8 +242,8 @@ visual.format.text = function(text,name,l) {
       "newest": {"en": "Newest", "pt": "O Mais Novo"},
       
       // Selector
-      "search": {"en": "Search", "pt": "Busca"},
-      "search_results": {"en": "Search Results", "pt": "Resultados Busca"},
+      "search": {"en": "Search", "pt": "Pesquisar"},
+      "search_results": {"en": "Search Results", "pt": "Resultados da Pesquisa"},
       "select": {"en": "Select", "pt": "Escolher"},
       "show": {"en": "Show", "pt": "Mostrar"}
     
