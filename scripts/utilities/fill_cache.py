@@ -45,63 +45,88 @@ cursor = db.cursor()
 
 def get_uniques(table):
     uniques = []
+    
     if table == "attrs_bra":
-        '''municipalities'''
-        q = "select bra_id from attrs_yb where length(bra_id) = 8 and population > 100000 and year = 2010;"
+        
+        '''Minas Gerais at the top of the state list'''
+        uniques += ["mg"]
+        
+        '''Municipalities in Minas Gerais'''
+        q = "select bra_id from rais_yb where length(bra_id) = 8 and num_emp > 20000 and year = 2010 and substr(bra_id,1,2) = 'mg' order by num_emp desc;"
         cursor.execute(q)
         uniques += [row[0] for row in cursor.fetchall()]
         
-        '''states'''
-        q = "select id from attrs_bra where length(id) = 2"
+        '''Other States'''
+        q = "select bra_id from rais_yb where length(bra_id) = 2 and bra_id != 'mg' and year = 2010 order by num_emp desc;"
         cursor.execute(q)
         uniques += [row[0] for row in cursor.fetchall()]
         
-        '''all for brazil'''
+        '''all of brazil'''
         uniques += ["all"]
-    else:
-        if table == "attrs_hs":
-            q = "select hs_id from secex_yp where length(hs_id) = 6 and val_usd > 100000000 and year = 2010;"
-            cursor.execute(q)
-            uniques += [row[0] for row in cursor.fetchall()]
-            
-            '''HS2'''
-            q = "select id from attrs_hs where length(id) = 2"
-            cursor.execute(q)
-            uniques += [row[0] for row in cursor.fetchall()]
-            
-        elif table == "attrs_cbo":
-            q = "select cbo_id from rais_yo where length(cbo_id) = 4 and num_emp > 50000 and year = 2010;"
-            cursor.execute(q)
-            uniques += [row[0] for row in cursor.fetchall()]
-            
-            '''CBO 1'''
-            q = "select id from attrs_hs where length(id) = 1"
-            cursor.execute(q)
-            uniques += [row[0] for row in cursor.fetchall()]
-            
-        elif table == "attrs_isic":
-            q = "select isic_id from rais_yi where length(isic_id) = 5 and num_emp > 50000 and year = 2010;"
-            cursor.execute(q)
-            uniques += [row[0] for row in cursor.fetchall()]
-            
-            '''ISIC top level'''
-            q = "select id from attrs_isic where length(id) = 1"
-            cursor.execute(q)
-            uniques += [row[0] for row in cursor.fetchall()]
-            
-        elif table == "attrs_wld":
-            q = "select wld_id from secex_yw where length(wld_id) = 5 and val_usd > 100000000 and year = 2010;"
-            cursor.execute(q)
-            uniques += [row[0] for row in cursor.fetchall()]
-            
-            '''continents'''
-            q = "select id from attrs_wld where length(id) = 2"
-            cursor.execute(q)
-            uniques += [row[0] for row in cursor.fetchall()]
+        
+        '''municipalities not in Minas Gerais'''
+        q = "select bra_id from rais_yb where length(bra_id) = 8 and num_emp > 100000 and year = 2010 and substr(bra_id,1,2) != 'mg' order by num_emp desc;"
+        cursor.execute(q)
+        uniques += [row[0] for row in cursor.fetchall()]
+        
+        print "{0} Locations".format(len(uniques))
+        
+    elif table == "attrs_hs":
+        
+        '''HS2'''
+        q = "select distinct(hs_id) from secex_yp where length(hs_id) = 2"
+        cursor.execute(q)
+        uniques += [row[0] for row in cursor.fetchall()]
+        
+        q = "select hs_id from secex_yp where length(hs_id) = 6 and val_usd > 500000000 and year = 2010;"
+        cursor.execute(q)
+        uniques += [row[0] for row in cursor.fetchall()]
+        
+        print "{0} Products".format(len(uniques))
+        
+    elif table == "attrs_cbo":
+        
+        '''CBO 1'''
+        q = "select distinct(cbo_id) from rais_yo where length(cbo_id) = 1"
+        cursor.execute(q)
+        uniques += [row[0] for row in cursor.fetchall()]
+        
+        q = "select cbo_id from rais_yo where length(cbo_id) = 4 and num_emp > 200000 and year = 2010;"
+        cursor.execute(q)
+        uniques += [row[0] for row in cursor.fetchall()]
+        
+        print "{0} Products".format(len(uniques))
+        
+    elif table == "attrs_isic":
+        
+        '''ISIC top level'''
+        q = "select distinct(isic_id) from rais_yi where length(isic_id) = 1"
+        cursor.execute(q)
+        uniques += [row[0] for row in cursor.fetchall()]
+        
+        q = "select isic_id from rais_yi where length(isic_id) = 5 and num_emp > 200000 and year = 2010;"
+        cursor.execute(q)
+        uniques += [row[0] for row in cursor.fetchall()]
+        
+        print "{0} Industries".format(len(uniques))
+        
+    elif table == "attrs_wld":
+        
+        '''continents'''
+        q = "select distinct(wld_id) from secex_yw where length(wld_id) = 2"
+        cursor.execute(q)
+        uniques += [row[0] for row in cursor.fetchall()]
+        
+        q = "select wld_id from secex_yw where length(wld_id) = 5 and val_usd > 500000000 and year = 2010;"
+        cursor.execute(q)
+        uniques += [row[0] for row in cursor.fetchall()]
+        
+        print "{0} Countries".format(len(uniques))
 
     return uniques
 
 def get_urls():
+    
     urls = {"attrs":[], "rais":[], "secex":[]}
     '''start with attr urls'''
     urls["attrs"] = ['/attrs/cbo/', '/attrs/isic/', '/attrs/hs/', \
@@ -123,16 +148,20 @@ def get_urls():
 
 def format_urls(urls, attrs):
     
-    formatted_urls = set(urls["attrs"])
+    print "Formatting URLs..."
+    
+    formatted_urls = []
+    formatted_urls += urls["attrs"]
     for vars in itertools.product(attrs["attrs_bra"], attrs["attrs_isic"], attrs["attrs_cbo"]):
         b, i, o = vars
         for u in urls["rais"]:
-            formatted_urls.add(u.format(bra=b, isic=i, cbo=o))
+            if (".show.8" in u and (len(b) == 2 or b == "all")) or ".show.8" not in u:
+                formatted_urls.append(u.format(bra=b, isic=i, cbo=o))
     for vars in itertools.product(attrs["attrs_bra"], attrs["attrs_hs"], attrs["attrs_wld"]):
         b, p, w = vars
         for u in urls["secex"]:
-            formatted_urls.add(u.format(bra=b, hs=p, wld=w))
-    
+            formatted_urls.append(u.format(bra=b, hs=p, wld=w))
+            
     return list(formatted_urls)
 
 def add_to_cache(urls):
@@ -143,8 +172,9 @@ def add_to_cache(urls):
     with app.test_client() as c:
         for u in urls:
             count += 1
-            print len(urls), count, u
-            ctx.app.test_client().get(u, headers={'X-Requested-With': 'XMLHttpRequest'})
+            if count < 2:
+                print "{0} out of {1} ({2}%)".format(count,len(urls),(round(count/len(urls))*100)), u
+                ctx.app.test_client().get(u, headers={'X-Requested-With': 'XMLHttpRequest'})
 
 def main():
     attr_tables = ['attrs_cbo', 'attrs_hs', 'attrs_isic', \
@@ -152,7 +182,8 @@ def main():
     attrs = {attr:get_uniques(attr) for attr in attr_tables}
     
     urls = get_urls()
-    urls = format_urls(urls, attrs)    
+    urls = format_urls(urls, attrs)
+    # print urls
     # print len(urls)
     # sys.exit() - 388,755
     add_to_cache(urls)
