@@ -76,6 +76,21 @@ def profiles(category = None, id = None):
           
     t1 = time.time()
     category_type = "<"+category+">"
+    
+    depths = {
+        "bra": [2,8],
+        "isic": [1,5],
+        "cbo": [1,4],
+        "hs": [2,6],
+        "wld": [2,5]
+    }
+    
+    if len(id) == depths[category][0]:
+        group = "parent"
+    elif len(id) == depths[category][1]:
+        group = "child"
+    else:
+        group = None
         
     t2 = time.time()
     g.timing.append("Initializing Profile: {0:.4f}s".format((t2-t1)))
@@ -131,11 +146,19 @@ def profiles(category = None, id = None):
     t2 = time.time()
     g.timing.append("Setting Plan Variables: {0:.4f}s".format((t2-t1)))
     t1 = time.time()
-        
-    builds = [0]*len(plan.builds.all())
+    
+    pbs = []
     for i, pb in enumerate(plan.builds.all()):
-        # this_query_kwargs = query_kwargs.copy()
+        if pb.type == None or pb.type == group:
+            pbs.append(pb)
+            
+    builds = [0]*len(pbs)
+    for i, pb in enumerate(pbs):
+        
         build = pb.build.first()
+        b = {}
+        
+        # this_query_kwargs = query_kwargs.copy()
         # data_table = build.data_table()
         # data_url = build.data_url().split("/")
         # output = build.output
@@ -165,19 +188,20 @@ def profiles(category = None, id = None):
         # table_headers[1] = output + table_headers[1]
         # 
         # table_data = [[getattr(d, h) for h in table_headers] for d in data]
+        # b["data"] = { "table_headers":table_headers, "build":build, \
+        # "table_data":table_data}
         
-        b = {}
         b["url"] = "/apps/embed/{0}{1}".format(build.url(),pb.variables)
         b["title"] = build.title()
         b["type"] = build.app.type
         b["position"] = pb.position
         b["output"] = build.output
         b["color"] = build.app.color
-        # b["data"] = { "table_headers":table_headers, "build":build, \
-        #                             "table_data":table_data}
         builds[pb.position-1] = b
+        
     t2 = time.time()
     g.timing.append("Formatting Plan: {0}s".format((t2-t1)))
+    
     return render_template("profiles/profile.html", 
                 category=category,
                 item=item, 
