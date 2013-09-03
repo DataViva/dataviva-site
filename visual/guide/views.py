@@ -4,7 +4,7 @@ from sqlalchemy import func
 from datetime import datetime
 
 from visual import db
-from visual.attrs import models as attrs
+from visual.attrs.models import Bra, Isic, Cbo, Hs, Wld
 from visual.rais import models as rais
 from visual.secex import models as secex
 
@@ -23,61 +23,66 @@ def before_request():
 @mod.route('/<category>/<category_id>/<option>/')
 @mod.route('/<category>/<category_id>/<option>/<option_id>/')
 @mod.route('/<category>/<category_id>/<option>/<option_id>/<extra_id>/')
-def guide(category = None, category_id = None, option = None, subject = None, option_id = None, extra_id = None):
+def guide(category = None, category_id = None, option = None, option_id = None, extra_id = None):
     
     item = None
     article = None
     selector = category
     plan = None
+    group = None
     
-    category_type = category_id
-    
-    if category_id == "all" and category == "cbo":
-        category_type = "all"
-    elif category:
-        category_type = "<"+category+">"
+    depths = {
+        "bra": [2,3,4,7,8],
+        "isic": [1,5],
+        "cbo": [1,4],
+        "hs": [2,6],
+        "wld": [2,5]
+    }
         
-    if (category == "cbo" or option == "potential") and option_id and option_id != "select":
-        option_type = "<bra>"
-    else:
-        option_type = option_id
-        
-
-    extra_type = extra_id
-        
-    if category == "bra":
-        if option == "isic" and option_id:
-            option_type = "<isic>"
-        if option_id == "hs" and extra_id and extra_id != "select":
-            extra_type = "<hs>"
-        elif option_id == "isic" and extra_id and extra_id != "select":
-            extra_type = "<isic>"
-        
-    # raise Exception(category,category_type,option,option_type,extra_type)
     if option:
+        
+        if category_id == "all":
+            category_type = category_id
+        else:
+            category_type = "<{0}.{1}>".format(category,len(category_id))
+            
+        if option_id == "isic" or option_id == "hs":
+            option_type = option_id
+        elif option_id and option_id != "all":
+            option_type = "<bra.{0}>".format(len(option_id))
+        else:
+            option_type = option_id
+            
+        if extra_id and extra_id != "select" and extra_id != "all":
+            extra_type = "<{0}.{1}>".format(option_id,len(extra_id))
+        elif extra_id != "select":
+            extra_type = extra_id
+        else:
+            extra_type = None
+                    
         plan = Plan.query.filter_by(category=category, category_type=category_type, option=option, option_type=option_type, option_id=extra_type).first()
+    
     # raise Exception(plan)
+    
     if plan:
         
         g.page_type = "plan"
         page = "guide/guide.html"
         
-
         plan.set_attr(category_id,category)
 
-        if category == "bra":
-            if option_id == "hs" and extra_id:
-                plan.set_attr(extra_id,"hs")
-            elif option_id == "isic" and extra_id:
-                plan.set_attr(extra_id,"isic")
-            bra_id = category_id    
-        elif option_type == "<bra>":
-            plan.set_attr(option_id,"bra")
-        else:
-            plan.set_attr("all","bra")
+        if category == "bra" and extra_id:
+            plan.set_attr(extra_id,option_id)
+            
+        if category != "bra":
+            if option_type and "<bra" in option_type:
+                plan.set_attr(option_id,"bra")
+            else:
+                plan.set_attr("all","bra")
             
         builds = [0]*len(plan.builds.all())
         for pb in plan.builds.all():
+            
             build = {}
             build["url"] = "/apps/embed/{0}{1}".format(pb.build.all()[0].url(),pb.variables)
             build["title"] = pb.build.all()[0].title()
@@ -87,12 +92,13 @@ def guide(category = None, category_id = None, option = None, subject = None, op
             
         plan = {"title": plan.title(), "builds": builds}
             
-    elif extra_id == "select":
+    elif extra_id == "select" or option_id == "select" or category_id == "select":
         page = "general/selector.html"
-        selector = option_id
-    elif option_id == "select":
-        page = "general/selector.html"
-        selector = "bra"
+        if extra_id:
+            selector = option_id
+        elif option_id:
+            selector = "bra"
+            
     elif option:
         if category == "cbo":
             selector = "bra"
@@ -102,26 +108,35 @@ def guide(category = None, category_id = None, option = None, subject = None, op
         elif category == "hs" or category == "isic" and option == "potential":
             selector = "bra"
             page = "guide/choice.html"
+            
     elif category_id:
-        if category_id == "select":
-            page = "general/selector.html"
+
+        if category == "bra":
+            if len(category_id) == depths[category][0]:
+                group = "parent"
+            elif len(category_id) == depths[category][1]:
+                group = "all"
+            else:
+                group = "child"
         else:
-            if category_id != "all":
-                if category == "isic":
-                    item = attrs.Isic.query.get_or_404(category_id).name()
-                elif category == "hs":
-                    item = attrs.Hs.query.get_or_404(category_id).name()
-                elif category == "cbo":
-                    item = attrs.Cbo.query.get_or_404(category_id).name()
-                elif category == "bra":
-                    item = attrs.Bra.query.get_or_404(category_id).name()
-            elif category == "bra":
-                item = attrs.Wld.query.get_or_404("sabra").name()
-            page = "guide/{0}.html".format(category)
+            if len(category_id) == depths[category][0]:
+                group = "parent"
+            elif len(category_id) == depths[category][1]:
+                group = "child"
+                
+        if category_id != "all":
+            table = category.title()
+            item = globals()[table].query.get_or_404(category_id).name()
+        elif category == "bra":
+            item = Wld.query.get_or_404("sabra").name()
+        page = "guide/{0}.html".format(category)
+        
     elif category == "industry":
         page = "guide/industry.html"
+        
     elif category:
         page = "guide/choice.html"
+        
     else:
         page = "guide/index.html"
         
@@ -151,4 +166,5 @@ def guide(category = None, category_id = None, option = None, subject = None, op
         item = item,
         article = article,
         selector = selector,
-        plan = plan)
+        plan = plan,
+        group = group)

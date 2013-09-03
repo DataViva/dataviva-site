@@ -5,7 +5,6 @@
 {% block body %}
 
   <div id="fullscreen"></div>
-  <br>
   
   {% if category_id == "all" %}
 
@@ -42,12 +41,16 @@
       {{ _('Where is their employement %(word)s the fastest?', word = '<b>%s</b>' % (_('growing'))) }}
       {% endautoescape %}
     </a>
+  
+    {% if group == "child" %}
 
-    <a class="decision icon square paths" href="{{g.path}}paths">
-      {% autoescape false %}
-      {{ _('What are their %(word)s?', word = '<b>%s</b>' % (_('career alternatives'))) }}
-      {% endautoescape %}
-    </a>
+      <a class="decision icon square paths" href="{{g.path}}paths">
+        {% autoescape false %}
+        {{ _('What are their %(word)s?', word = '<b>%s</b>' % (_('career alternatives'))) }}
+        {% endautoescape %}
+      </a>
+  
+    {% endif %}
 
   {% endif %}
 

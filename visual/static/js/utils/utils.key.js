@@ -116,7 +116,9 @@ function Key() {
             .attr("id","key_icon"+d.id)
             .attr("class","key_icon")
             .style("background-image","url('"+d.icon+"')")
-            .style("background-color",d.color)
+            .style("background-color",function(){
+              return attr_type == "bra" ? "none" : d.color
+            })
         
       })
        

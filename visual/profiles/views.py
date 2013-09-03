@@ -76,21 +76,6 @@ def profiles(category = None, id = None):
           
     t1 = time.time()
     category_type = "<"+category+">"
-    
-    depths = {
-        "bra": [2,8],
-        "isic": [1,5],
-        "cbo": [1,4],
-        "hs": [2,6],
-        "wld": [2,5]
-    }
-    
-    if len(id) == depths[category][0]:
-        group = "parent"
-    elif len(id) == depths[category][1]:
-        group = "child"
-    else:
-        group = None
         
     t2 = time.time()
     g.timing.append("Initializing Profile: {0:.4f}s".format((t2-t1)))
@@ -146,14 +131,9 @@ def profiles(category = None, id = None):
     t2 = time.time()
     g.timing.append("Setting Plan Variables: {0:.4f}s".format((t2-t1)))
     t1 = time.time()
-    
-    pbs = []
-    for i, pb in enumerate(plan.builds.all()):
-        if pb.type == None or pb.type == group:
-            pbs.append(pb)
             
-    builds = [0]*len(pbs)
-    for i, pb in enumerate(pbs):
+    builds = [0]*len(plan.builds.all())
+    for pb in plan.builds.all():
         
         build = pb.build.first()
         b = {}

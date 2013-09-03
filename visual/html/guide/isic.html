@@ -5,28 +5,28 @@
 {% block body %}
 
   <div id="fullscreen"></div>
+
   
   <div class="darkbox">
     <h1>{{ _('What would you like to know about %(name)s?', name = item) }}</h1>
   </div>
   <br>
+  
   <a class="decision icon square workforce" href="{{g.path}}workforce">
     {% autoescape false %}
     {{ _('Who do they %(word)s?', word = '<b>%s</b>' % (_('employ'))) }}
     {% endautoescape %}
   </a>
+  
+  {% if group == "child" %}
+  
+    <a class="decision icon square diversification" href="{{g.path}}diversification">
+      {% autoescape false %}
+      {{ _('Which industries %(word)s with them?', word = '<b>%s</b>' % (_('co-locate'))) }}
+      {% endautoescape %}
+    </a>
 
-  <a class="decision icon square diversification" href="{{g.path}}diversification">
-    {% autoescape false %}
-    {{ _('Which industries %(word)s with them?', word = '<b>%s</b>' % (_('co-locate'))) }}
-    {% endautoescape %}
-  </a>
-
-  <a class="decision icon square bra" href="{{g.path}}potential">
-    {% autoescape false %}
-    {{ _('What is the production %(word)s of a location?', word = '<b>%s</b>' % (_('potential'))) }}
-    {% endautoescape %}
-  </a>
+  {% endif %}
 
   <a class="decision icon square isic" href="{{g.path}}locate">
     {% autoescape false %}

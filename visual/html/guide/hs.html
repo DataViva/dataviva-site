@@ -21,17 +21,15 @@
     {{ _('Which %(word)s in Brazil produce them?', word = '<b>%s</b>' % (_('municipalities'))) }}
     {% endautoescape %}
   </a>
+  
+  {% if group == "child" %}
 
-  <a class="decision icon square diversification" href="{{g.path}}diversification">
-    {% autoescape false %}
-    {{ _('Which industries %(word)s with them?', word = '<b>%s</b>' % (_('co-locate'))) }}
-    {% endautoescape %}
-  </a>
-
-  <a class="decision icon square bra" href="{{g.path}}bra">
-    {% autoescape false %}
-    {{ _('What is the production %(word)s of a location?', word = '<b>%s</b>' % (_('potential'))) }}
-    {% endautoescape %}
-  </a>
+    <a class="decision icon square diversification" href="{{g.path}}diversification">
+      {% autoescape false %}
+      {{ _('Which industries %(word)s with them?', word = '<b>%s</b>' % (_('co-locate'))) }}
+      {% endautoescape %}
+    </a>
+  
+  {% endif %}
 
 {% endblock %}
