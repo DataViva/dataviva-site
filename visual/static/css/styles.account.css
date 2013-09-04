@@ -1,0 +1,8 @@
+#user_pic {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  float: left;
+  height: 50px;
+  width: 50px;
+}

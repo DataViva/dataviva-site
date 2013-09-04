@@ -76,7 +76,18 @@ def login():
 @mod.route('/<nickname>/')
 def user(nickname):
     user = User.query.filter_by(nickname=nickname).first_or_404()
-    return render_template("account/user_home.html", user=user)
+    activity = None
+    
+    stars = Starred.query.filter_by(user=user) \
+                .order_by("timestamp desc").all()
+                
+    questions = Question.query.filter_by(user=user) \
+                .order_by("timestamp desc").all()
+                
+    raise Exception(questions)
+    return render_template("account/user_home.html", 
+        user = user,
+        activity = activity)
 
 @mod.route('/<nickname>/questions/')
 @mod.route('/<nickname>/questions/<status>/')

@@ -2,25 +2,16 @@
 {% extends "templates/site.html" %}
 
 {% block head %}
-<style>
-.pending_q {
-  margin: 0px 0;
-}
-form input {
-  width: 500px;
-}
-form textarea {
-  width: 500px;
-  height: 200px;
-}
-</style>
+
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.account.css" />
+
 {% endblock %}
 
 {% block body %}
-<div>
-  <div class="grid5col1">
+
+  <div class="grid5col4 lightbox">
     
-    <img class="account_user" src="{{ user.avatar(150) }}" alt="{{ user.fullname }} icon" />
+    <div id="user_pic" style="background-image: url('{{ user.avatar(100) }}')" alt="{{ user.fullname }} icon"></div>
     <h1>{{ user.fullname }}</h1>
     
     {% set navigation_bar = [
@@ -53,7 +44,6 @@ form textarea {
     </nav>
     
   </div>
-</div>
 
 <div id="admin-content" class="grid5col4">
 {% block admin_content %}
