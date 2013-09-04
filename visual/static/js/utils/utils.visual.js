@@ -373,8 +373,14 @@ visual.ui.background = function() {
   var fs = d3.select("#fullscreen")
   if (fs.node()) {
     var hour = new Date().getHours()
-    if (hour >= 5 && hour <= 20) {
+    if (hour >= 5 && hour <= 9) {
+      var filename = "dawn"
+    }
+    else if (hour >= 10 && hour <= 17) {
       var filename = "day"
+    }
+    else if (hour >= 18 && hour <= 22) {
+      var filename = "dusk"
     }
     else {
       var filename = "night"

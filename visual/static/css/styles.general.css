@@ -75,7 +75,7 @@ div#selector {
 }
 
 .darkbox {
-  background-color: rgba(0,0,0,0.15);
+  background-color: rgba(0,0,0,0.25);
   color: #fff;
   display: inline-block;
   margin: 12px;
