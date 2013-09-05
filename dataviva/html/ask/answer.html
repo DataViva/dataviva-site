@@ -1,0 +1,240 @@
+<!-- extend site layout -->
+{% extends "templates/site.html" %}
+
+<!-- set the title -->
+{% block title %}: {% trans %}Ask Sabrina{% endtrans %}{% endblock %}
+
+{% block head %}
+<!-- Redactor is here -->
+<link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
+<style>
+  .reply_form   { color: black !important;      }
+  .question     { display: block;               }
+  .child        { margin-left: 40px !important; }
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="grid5col4">
+  
+  {% with q = question %}
+  <div class="question landing">
+    
+    <!-- Show vote count and buttons -->
+    <div class="vote_block">
+      <div class="vote_count">{% if q.votes.all()|length %}{{ q.votes.count() }}{% else %}0{% endif %}</div>
+      <div class="vote_label">{% trans %}Points{% endtrans %}</div>
+      <a class="vote_up" href="{{ url_for('ask.question_vote', slug=q.slug) }}">
+        <i class="icon-thumbs-up"></i>
+      </a>
+    </div>
+    
+    <!-- Display question -->
+      
+      <!-- Actual question -->
+      <h1>{{ q.question }}</h1>
+      
+      <!-- Body (clarification for question) -->
+      {% if q.body %}
+        {{ q.body|safe }}
+      {% endif %}
+      
+      <!-- Tags associated with question -->
+      {% if tags|length %}
+      <div class="labels">
+        {% trans %}Tags{% endtrans %}:
+        {% for t in tags %}
+          <a class="tag" style="background-color: {{ t.color }};" rel="tag">
+            <span class="tag-icon" rel="{{ t.__class__.__name__ }}" title="{{ t.id }}"></span>
+            <span>{{ t.name_en }}&nbsp;&nbsp;</span>
+          </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+      
+      <!-- Question metadata -->
+      <div class="question_attr">
+        <div class="userpic" style="background-image: url('{{ q.user.avatar(50) }}')"></div>
+        {% trans %}Asked by{% endtrans %} <a href="{{ url_for('account.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a> {{ momentjs(q.timestamp).fromNow() }}
+      </div>
+      
+    </div> <!-- end of right hand-side -->
+    
+    <!-- end of question -->
+  
+  <!-- Sabrina's Answer! -->
+  <div class="answer lightbox{% if q.status_notes %} answered{% endif %}">
+    
+    <!-- Answer text -->
+    {% if q.status_notes %}
+      {{ q.status_notes|safe }}
+      <!-- Sabrina's face -->
+      <div id="answer_sabrina"></div>
+    {% else %}
+      {% trans %}Sabrina has not answered this question yet. Feel free to start the conversation below.{% endtrans %}
+    {% endif %}
+    
+  </div> <!-- end of sabrina's answer -->
+  
+  {% if q.replies.all()|length %}
+  <!-- The responses -->
+  <div id="responses" class="responses lightbox">
+  <h1>{% trans %}Responses{% endtrans %}</h1>
+    
+    {% for r in q.replies %}
+    <div class="question comment{% if r.id != r.parent_id %} child{% endif %}">
+      
+      <!-- Voting -->
+      <div class="vote_block">
+        <div class="vote_count">{% if r.votes.all()|length %}{{ r.votes.count() }}{% else %}0{% endif %}</div>
+        <div class="vote_label">{% trans %}Points{% endtrans %}</div>
+        <a class="vote_down" href="{{ url_for('ask.reply_flag', id=r.id) }}">
+          <i class="icon-flag"></i>
+        </a>
+        <a class="vote_up" href="{{ url_for('ask.reply_vote', id=r.id) }}">
+          <i class="icon-thumbs-up"></i>
+        </a>
+      </div> <!-- end voting -->
+      
+      <!-- Reply text -->
+        {{ r.body|safe }}
+        
+        <!-- User metadata -->
+        <div class="question_attr">
+          <div class="userpic" style="background-image: url('{{ r.user.avatar(50) }}')"></div>
+          <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a> {{ momentjs(q.timestamp).fromNow() }}
+        </div>
+      <!-- end reply text -->
+        
+      {% if r.id == r.parent_id %}
+      <div class="leave_response decision short icon reply" data-parent="{{r.parent_id}}">{% trans %}Respond to{% endtrans %} {{r.user.fullname}}</div>
+      {% endif %}
+    
+    </div> <!-- end reply -->
+    {% endfor %}
+    
+  </div> <!-- end responses -->
+  {% endif %}
+  {% endwith %}
+  
+  <!-- Leave another response (not to a specify reply but in general) -->
+  <div id="new_response" class="lightbox reply">
+    <h1>{% trans %}New Response{% endtrans %}</h1>
+    <div class="leave_response decision" style="display: none;">{% trans %}Leave a Response{% endtrans %}</div>
+  
+    <form class="reply_form" action="" method="post" name="login">
+      <!-- Reply form for the page that will be moved around-->
+    
+      {{ reply_form.hidden_tag() }}
+    
+      <!-- Reply texterea box -->
+      <p>
+        {{ reply_form.reply(class="reply", id="wysiwyg_textarea", placeholder="Enter your text...") }}
+      
+        <!-- Errors! -->
+        {% for error in reply_form.errors.reply %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+    
+      <!-- Submit button -->
+      <a href="#" class="submit">
+        <div class="decision">
+          {% trans %}Reply{% endtrans %}
+        </div>
+      </a>
+    
+    </form> <!-- end reply for -->
+  </div>
+  
+</div> <!-- end entire container for page .grid5col4 -->
+
+{% endblock %}
+
+{% block js %}
+<!-- Redactor is here -->
+<script src="/static/js/libs/jquery-1.9.0.min.js"></script>
+<script src="/static/js/libs/redactor.min.js"></script>
+<script>
+
+// Initialize redactor wysiwyg textarea
+$(document).ready(function() {
+
+    var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
+		$('#wysiwyg_textarea').redactor({
+      // focus: true // scrolls page to this textarea
+      buttons: buttons 
+		});
+
+});
+
+// Voting!
+d3.selectAll(".vote_up").on(vizwhiz.evt.click, function(){
+  var link_el = this;
+  d3.json(link_el.href, function(resp){
+    if(resp.error) {
+      alert(resp.error)
+    }
+    else {
+      d3.select(link_el.parentNode).select(".vote_count").text(function(){
+        var new_count = 1
+        if(d3.select(this).text()){
+          // console.log(d3.select(this).text())
+          new_count = parseInt(d3.select(this).text(), 10) + parseInt(resp.success);
+        }
+        return new_count;
+      })
+    }
+  })
+  d3.event.preventDefault();
+})
+
+// Flagging :(
+d3.selectAll(".vote_down").on(vizwhiz.evt.click, function(){
+  var link_el = this;
+  d3.json(link_el.href, function(resp){
+    if(resp.error) {
+      alert(resp.error)
+    }
+    else {
+      if(parseInt(resp.success) > 0){
+        d3.select(link_el).style("color", "#be1e2d")
+      }
+      else {
+        d3.select(link_el).style("color", "#333333")
+      }
+    }
+  })
+  d3.event.preventDefault();
+})
+ 
+// add icons to tags!
+d3.selectAll(".tag-icon").style("background-image", function(){
+  var tag_el = d3.select(this);
+  return "url('"+dataviva.icon(tag_el.attr("title"), tag_el.attr("rel").toLowerCase()) + "')"
+})
+
+// show/hide reply form
+d3.selectAll("div.leave_response").on(vizwhiz.evt.click, function(){
+  
+  d3.selectAll("div.leave_response").style("display", "inline-block")
+  var reply_form = d3.select(".reply_form").node()
+  this.parentNode.insertBefore(reply_form, this);
+  d3.select(this).style("display", "none")
+  
+  // set the hidden parent input
+  var reply_parent_id = d3.select(this).attr("data-parent");
+  if(reply_parent_id){
+    d3.select("input[name='parent']").attr("value", reply_parent_id)
+  }
+})
+
+// submit form
+d3.selectAll(".reply_form .submit").on(vizwhiz.evt.click, function(){
+  this.parentNode.submit()
+  d3.event.preventDefault();
+})
+</script>
+
+{% endblock %}

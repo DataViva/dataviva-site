@@ -1,4 +1,4 @@
-visual_mg
+DataViva
 =========
 
 Rapid data visualization engine

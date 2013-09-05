@@ -22,7 +22,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 CSRF_EN = True
 
 ''' Secret key should be set in environment var '''
-SECRET_KEY = get_env_variable("VISUAL_SECRET_KEY", "default-visual.mg-secr3t")
+SECRET_KEY = get_env_variable("VISUAL_SECRET_KEY", "default-dataviva.mg-secr3t")
 
 ''' Default debugging to True '''
 DEBUG = True
