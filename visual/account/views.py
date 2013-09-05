@@ -84,7 +84,12 @@ def user(nickname):
     questions = Question.query.filter_by(user=user) \
                 .order_by("timestamp desc").all()
                 
-    raise Exception(questions)
+    replies = Reply.query.filter_by(user=user) \
+                .order_by("timestamp desc").all()
+                
+    activity = stars + questions + replies
+    activity.sort(key=lambda a: a.timestamp, reverse=True)
+                
     return render_template("account/user_home.html", 
         user = user,
         activity = activity)

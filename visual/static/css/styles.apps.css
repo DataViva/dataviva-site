@@ -136,11 +136,12 @@ div#ui_bottom {
 
 div#year_slider {
   display: inline-block;
+  margin-bottom: 5px;
   white-space: nowrap;
 }
 
 div#year_slider > .leon.range {
-  margin: 0px 0px 5px 0px;
+  margin: 0px;
 }
 
 div.scrolling_content {

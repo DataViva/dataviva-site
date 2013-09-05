@@ -1,8 +1,39 @@
+body #inner_container {
+  display: block;
+  vertical-align: top;
+}
+
+body #container {
+  padding: 78px 0px 59px 0px;
+  width: 100%;
+}
+
+#user_header {
+  margin: 30px;
+  position: relative;
+}
+
 #user_pic {
   background-repeat: no-repeat;
   background-size: 100%;
   display: inline-block;
   float: left;
+  margin: 3px 10px 0px 0px;
   height: 50px;
   width: 50px;
+}
+
+#activity_sorter {
+  position: absolute;
+  right: 0px;
+  top: 14px;
+}
+
+#activity_list > a {
+  font-size: 16px !important;
+}
+
+#activity_list > a > .timestamp {
+  font-size: 12px !important;
+  opacity: 0.75;
 }

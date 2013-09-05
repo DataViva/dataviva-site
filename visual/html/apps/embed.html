@@ -128,6 +128,11 @@
   <script src="/static/js/utils/utils.selector.js"></script>
   
   <script type="text/javascript">
+  
+    var max_year = {
+      "secex": "2011",
+      "rais": "2010"
+    }
     
     var loading = new visual.ui.loading("body")
     loading.color("#ffffff")
@@ -415,15 +420,18 @@
       .else_var("elsewhere")
     
     // Start building a new app
-    app.start = function(new_url) {
+    app.start = function(new_url,allyears) {
           
       // Hide popover
       visual.popover.hide()
+      app.allyears = allyears
       
       if (new_url) {
-        if (new_url != app.url) {
+        if (new_url != app.url || allyears) {
           app.url = new_url
-          loading.text(visual.format.text("Building App")).show(app.create)
+          if (allyears) var t = "Downloading Additional Years"
+          else var t = "Building App"
+          loading.text(visual.format.text(t)).show(app.create)
         }
       }
       else {
@@ -489,6 +497,15 @@
             /***************************************/  
 
             var q = queue()
+            
+            if (app.data[app.build.data_url]) app.allyears = true
+            
+            if (!app.allyears && app.build.app.type != "stacked") {
+              if (!app.vars.year) {
+                app.vars.year = max_year[app.build.data_url.split("/")[0]]
+              }
+              app.build.data_url = app.build.data_url.replace("all",app.vars.year)
+            }
             
             if (!app.data[app.build.data_url]) {
               q.defer(function(u,callback){
@@ -666,22 +683,46 @@
           
           var year = d3.select("#ui_bottom").append("div")
             .attr("id","year_slider")
+            
+          if (app.allyears) {
+            year.append("input")
+              .attr("type","range")
+              .attr("onchange","app.update('year',this.value)")
+              .attr("id","year")
+              .attr("name","year")
+              .attr("min",ui.values[0]+"")
+              .attr("max",ui.values[ui.values.length-1]+"")
+              .attr("value",app.vars.year+"")
+              .attr("step","1")
         
-          year.append("input")
-            .attr("type","range")
-            .attr("onchange","app.update('year',this.value)")
-            .attr("id","year")
-            .attr("name","year")
-            .attr("min",ui.values[0]+"")
-            .attr("max",ui.values[ui.values.length-1]+"")
-            .attr("value",app.vars.year+"")
-            .attr("step","1")
-        
-          year.append("label")
-            .attr("for","year")
-            .html(visual.format.text("year"))
+            year.append("label")
+              .attr("for","year")
+              .html(visual.format.text("year"))
           
-          leon("#year").color(app.build.app.color)
+            leon("#year").color(app.build.app.color)
+          }
+          else {
+            var b = year.append("input")
+              .attr("type","button")
+              .attr("id","allyears")
+              
+            var label = year.append("label")
+              .attr("for","allyears")
+              
+            label.append("i")
+              .attr("class","icon-play")
+              .attr("style","color:"+app.build.app.color+";")
+              
+            label.append("div")
+              .attr("style","display:inline-block;margin-left:5px;")
+              .html(visual.format.text("Show All Years"))
+              
+            b.node().onclick = function(){
+              app.start(app.url,true)
+            }
+            
+            leon("#allyears").color(app.build.app.color)
+          }
           
         }
         else {
@@ -800,6 +841,8 @@
       /************************/
       /* Gloabl App Variables */
       /************************/
+      app.build.title += " ("+app.vars.year+")"
+      
       app.viz.type(app.build.app.viz_whiz)
         .title(app.build.title)
         .color_var(color_var)
@@ -976,11 +1019,15 @@
       }
       else {
         
+        var old_value = app.vars[type]
         app.vars[type] = value
         builder.url()
         if (type == "year" && app.build.app.type != "rings") {
-          builder.key()
-          app.resize()
+          app.build.title = app.build.title.replace(old_value,value)
+          if (app.build.app.type != "rings") {
+            builder.key()
+            app.resize()
+          }
         }
         
         if (type == "depth") app.title_update()

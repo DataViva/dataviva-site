@@ -286,3 +286,25 @@
 .decision.icon.reply:before {
   content: "\f112";
 }
+
+/*******************/
+/* Account Buttons */
+/*******************/
+
+.decision.icon.replies {
+  background-color: #e377c2 !important;
+}
+
+.decision.icon.replies:before {
+  content: "\f112";
+  line-height: 50px;
+}
+
+.decision.icon.questions {
+  background-color: #752277 !important;
+}
+
+.decision.icon.questions:before {
+  content: "\f075";
+  line-height: 50px;
+}
