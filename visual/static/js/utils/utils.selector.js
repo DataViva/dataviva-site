@@ -524,25 +524,25 @@ function Selector() {
             var item = body.append("div")
               .attr("id","result_"+v.id)
               .attr("class","search_result")
-              .on(vizwhiz.evt.click,function(){
-                if (v.id.length < depths[depths.length-1]) {
-                  if (type == "bra" && v.id.substr(0,2) == "mg") {
-                    if (v.id.length == 2) {
-                      var depth = 7
-                    }
-                    else {
-                      var depth = 8
-                    }
-                  }
-                  else {
-                    var depth = depths[depths.indexOf(v.id.length)+1]
-                  }
-                  select_value(v,depth);
-                }
-                else {
-                  callback(data[v.id],name);
-                }
-              })
+              // .on(vizwhiz.evt.click,function(){
+              //   if (v.id.length < depths[depths.length-1]) {
+              //     if (type == "bra" && v.id.substr(0,2) == "mg") {
+              //       if (v.id.length == 2) {
+              //         var depth = 7
+              //       }
+              //       else {
+              //         var depth = 8
+              //       }
+              //     }
+              //     else {
+              //       var depth = depths[depths.indexOf(v.id.length)+1]
+              //     }
+              //     select_value(v,depth);
+              //   }
+              //   else {
+              //     callback(data[v.id],name);
+              //   }
+              // })
               
             if (v.icon != selected.icon || search_term != "") {
               var search_icon = item.append("div")
@@ -602,7 +602,6 @@ function Selector() {
                   .attr("value",suffix)
                   
                 b.node().onclick = function(){
-                  window.event.stopPropagation()
                   select_value(v,7)
                 }
                 
@@ -619,7 +618,6 @@ function Selector() {
                 .attr("value",suffix)
                   
               b.node().onclick = function(){
-                window.event.stopPropagation()
                 select_value(v,length)
               }
                 
@@ -671,7 +669,6 @@ function Selector() {
                 .attr("value",visual.format.text("select"))
                   
               b.node().onclick = function(){
-                window.event.stopPropagation()
                 callback(data[v.id],name)
               }
                 

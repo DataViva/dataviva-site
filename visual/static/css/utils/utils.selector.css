@@ -113,13 +113,13 @@ div.search_text > div.search_title {
   line-height: 16px;
 }
 
-div.search_result:hover {
+/*div.search_result:hover {
   cursor: pointer;
 }
 
 div.search_result:hover div.search_title {
   text-decoration: underline;
-}
+}*/
 
 div.search_text > div.search_sub {
   color: #888;
