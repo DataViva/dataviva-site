@@ -745,6 +745,9 @@
             else var default_value = ui.values[0]
           }
           else if (ui.type == "depth") {
+            if (app.build.output == "bra" && app.build.bra[0].id.length == 2) {
+              ui.values.splice(0,1)
+            }
             if (app.build.output == "bra" && app.build.bra[0].id == "all") {
               var default_value = ui.values[0]
             }
@@ -841,7 +844,7 @@
       /************************/
       /* Gloabl App Variables */
       /************************/
-      app.build.title += " ("+app.vars.year+")"
+      if (app.build.app.type != "stacked") app.build.title += " ("+app.vars.year+")"
       
       app.viz.type(app.build.app.viz_whiz)
         .title(app.build.title)
@@ -1360,6 +1363,8 @@ val)+": ", "suffix": ""};
       if (app.build.output == "bra") {
         if (app.vars.depth) {
           new_depth = visual.format.text(app.vars.depth+"_plural")
+          if (new_depth == "Municipalidades") new_depth = "Municípios"
+          if (last_depth == "Municipalidades") last_depth = "Municípios"
           app.build.title = app.build.title.replace(last_depth,new_depth)
           last_depth = new_depth
         }
