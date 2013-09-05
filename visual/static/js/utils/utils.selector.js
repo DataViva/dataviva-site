@@ -13,7 +13,7 @@ function Selector() {
       "color": "#ffffff",
       "id": "all",
       "name": visual.format.text("download"),
-      "parent": "none",
+      "parents": [],
       "icon": visual.icon("all","file","#ffffff"),
       "desc": visual.format.text("download_desc")
     },
@@ -21,7 +21,7 @@ function Selector() {
       "color": "#e87600",
       "id": "svg",
       "name": visual.format.text("svg"),
-      "parent": "all",
+      "parents": ["all"],
       "icon": visual.icon("svg","file"),
       "desc": visual.format.text("svg_desc")
     },
@@ -29,7 +29,7 @@ function Selector() {
       "color": "#0b1097",
       "id": "png",
       "name": visual.format.text("png"),
-      "parent": "all",
+      "parents": ["all"],
       "icon": visual.icon("png","file"),
       "desc": visual.format.text("png_desc")
     },
@@ -37,7 +37,7 @@ function Selector() {
       "color": "#c8140a",
       "id": "pdf",
       "name": visual.format.text("pdf"),
-      "parent": "all",
+      "parents": ["all"],
       "icon": visual.icon("pdf","file"),
       "desc": visual.format.text("pdf_desc")
     },
@@ -45,7 +45,7 @@ function Selector() {
       "color": "#00923f",
       "id": "csv",
       "name": visual.format.text("csv"),
-      "parent": "all",
+      "parents": ["all"],
       "icon": visual.icon("csv","file"),
       "desc": visual.format.text("csv_desc")
     }
@@ -134,17 +134,24 @@ function Selector() {
         else {
           
           update_header(selected);
-        
-          // Create list by matching parent ids
-          list = d3.values(data).filter(function(v){
-            if (parent.id != "all") {
-              var child = v.parents.indexOf(parent.id) >= 0
-            }
-            else {
-              var child = true
-            }
-            return v.id.length == current_depth && v.id != "all" && child;
-          })
+          
+          if (type == "file") {
+            list = d3.values(data).filter(function(v){
+              return v.id != "all";
+            })
+          }
+          else {
+            // Create list by matching parent ids
+            list = d3.values(data).filter(function(v){
+              if (parent.id != "all") {
+                var child = v.parents.indexOf(parent.id) >= 0
+              }
+              else {
+                var child = true
+              }
+              return v.id.length == current_depth && v.id != "all" && child;
+            })
+          }
           
         }
         

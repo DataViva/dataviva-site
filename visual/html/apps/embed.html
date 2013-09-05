@@ -27,7 +27,7 @@
         {% if pre_app != build.app.type %}
           {% set pre_app = build.app.type %}
           <option icon="url('/static/img/icons/app/app_{{build.app.type}}.png')" color="{{build.app.color}}" value="{{build.app.type}}" id="{{build.app.type}}"{% if build.app.type == current_build.app.type %} selected="selected"{% endif %}>
-              {{ build.app.title }}
+              {{ build.app.name() }}
           </option>
         {% endif %}
 
@@ -1326,7 +1326,7 @@ val)+": ", "suffix": ""};
     app.download = function(obj) {
       
       var type = obj.id,
-          title = app.build.app.title+"-"+app.build.title,
+          title = app.build.app.name+"-"+app.build.title,
           columns = app.tooltip.long
           
       if (app.build.app.type != "stacked") title += " ("+app.vars.year+")"

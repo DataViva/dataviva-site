@@ -230,6 +230,7 @@ visual.format.text = function(text,name,l) {
       "Data Provided by": {"en": "Data Provided by", "pt": "Dados Fornecidos por"},
       "related_apps": {"en": "Related Apps", "pt": "Apps Relacionados"},
       "other_apps": {"en": "Other Apps", "pt": "Outros Apps"},
+      "Show All Years": {"en": "Show All Years", "pt": "Mostrar Todos os Anos"},
     
       // Viz-Whiz Text
       "Click for More Info": {"en": "Click for more data and related apps.", "pt": "Clique para dados adicionais e aplicativos relacionados."},
