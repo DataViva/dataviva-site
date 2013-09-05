@@ -127,22 +127,39 @@ def get_uniques(table):
 
 def get_urls():
     
-    urls = {"attrs":[], "rais":[], "secex":[]}
-    '''start with attr urls'''
-    urls["attrs"] = ['/attrs/cbo/', '/attrs/isic/', '/attrs/hs/', \
-                        '/attrs/wld/', '/attrs/bra/']
+    urls = {"rais":[], "secex":[]}
     
     '''rais'''
     urls["rais"] = ['/rais/all/{bra}/all/show.4/', '/rais/all/{bra}/show.5/all/', \
             '/rais/all/{bra}/{isic}/show.4/', '/rais/all/{bra}/show.5/{cbo}/',
             '/rais/all/{bra}.show.8/all/all/', '/rais/all/{bra}.show.8/{isic}/all/', \
             '/rais/all/{bra}.show.8/all/{cbo}/']
+            
+    q = "select max(year) from rais_yb"
+    cursor.execute(q)
+    maxyear = cursor.fetchall()[0][0]
+    
+    temp = []
+    for url in urls["rais"]:
+        temp.append(url.replace("all",str(maxyear),1))
+        
+    urls["rais"] = temp + urls["rais"]
     
     '''secex'''
     urls["secex"] = ['/secex/all/{bra}/all/show.5/', '/secex/all/{bra}/show.6/all/', \
             '/secex/all/{bra}/{hs}/show.5/', '/secex/all/{bra}/show.6/{wld}/',
             '/secex/all/{bra}.show.8/all/all/', '/secex/all/{bra}.show.8/{hs}/all/', \
             '/secex/all/{bra}.show.8/all/{wld}/']
+            
+    q = "select max(year) from secex_yb"
+    cursor.execute(q)
+    maxyear = cursor.fetchall()[0][0]
+    
+    temp = []
+    for url in urls["secex"]:
+        temp.append(url.replace("all",str(maxyear),1))
+        
+    urls["secex"] = temp + urls["secex"]
     
     return urls
 
@@ -151,7 +168,6 @@ def format_urls(urls, attrs):
     print "Formatting URLs..."
     
     formatted_urls = []
-    formatted_urls += urls["attrs"]
     for vars in itertools.product(attrs["attrs_bra"], attrs["attrs_isic"], attrs["attrs_cbo"]):
         b, i, o = vars
         for u in urls["rais"]:
@@ -183,15 +199,8 @@ def main():
     
     urls = get_urls()
     urls = format_urls(urls, attrs)
-    # print urls
-    # print len(urls)
-    # sys.exit() - 388,755
-    add_to_cache(urls)
     
-    # ctx = app.test_request_context()
-    # ctx.push()
-    # x = ctx.app.test_client().get('/attrs/hs/', headers={'X-Requested-With': 'XMLHttpRequest'})
-    # x = ctx.app.test_client().get('/secex/all/sc050003/show.6/all/', headers={'X-Requested-With': 'XMLHttpRequest'})
+    add_to_cache(urls)
 
 if __name__ == "__main__":
     main()
