@@ -39,7 +39,7 @@ def export(data, year, max_depth, csv_writer, keys, depth = 0):
         # print keys
         # raw_input('')
         # raw_input([year] + keys + [data['wage'], data['num_emp'], len(data['num_est'])])
-        csv_writer.writerow([year] + keys + [data['wage'], data['num_emp'], len(data['num_est'])])
+        csv_writer.writerow([year] + keys + [data['wage'], len(data['num_emp']), len(data['num_est'])])
 
 def clean(file_path):
     '''Initialize our data dictionaries'''
@@ -52,66 +52,114 @@ def clean(file_path):
     yo = defaultdict(lambda: defaultdict(int))
     
     '''Open CSV file'''
-    csv_reader = csv.reader(open(file_path, 'rb'), delimiter=";", quotechar='"')
-    header = csv_reader.next()
+    csv_reader = csv.reader(open(file_path, 'rU'), delimiter=",", quotechar='"')
+    header = [s.replace('\xef\xbb\xbf', '') for s in csv_reader.next()]
     
     '''Populate the data dictionaries'''
     print 'reading CSV file "' + file_path + '"'
     for i, line in enumerate(csv_reader):
+        
+        line = dict(zip(header, line))
         
         if i % 100000 == 0:
             sys.stdout.write('\r lines read: ' + str(i) + ' ' * 20)
             sys.stdout.flush() # important
         
         try:
-            year = int(line[0])
-            est = line[2]
-            munic = line[3]
-            occ = line[4][:-2] # chop off last 2 digits since we're only using CBO_4
-            isic = line[8]
-            wage = float(line[9].replace(",", "."))
+            year = int(line["Year"])
         except:
-            print "Unable to complete export. There is an issue with your " \
-                    "CSV file on line {0}".format(i+2)
+            print "Error reading year on line {0}".format(i+1)
+            continue
+        
+        try:
+            est = line["Establishment_ID"]
+        except:
+            print "Error reading establishment ID on line {0}".format(i+1)
+            continue
+
+        try:
+            emp = line["Employee_ID"]
+        except:
+            print "Error reading employee ID on line {0}".format(i+1)
+            continue
+
+        try:
+            munic = line["Municipality_ID"]
+        except:
+            print "Error reading municipality ID on line {0}".format(i+1)
+            continue
+        
+        try:
+            # chop off last 2 digits since we're only using CBO_4
+            occ = line["BrazilianOcupation_ID"][:-2]
+        except:
+            print "Error reading occupation ID on line {0}".format(i+1)
+            continue
+        
+        try:
+            isic = line["EconmicAtivity_ID_ISIC"]
+        except:
+            print "Error reading industry ID on line {0}".format(i+1)
+            continue
+        
+        try:
+            wage = float(line["AverageMonthlyWage"].replace(",", "."))
+        except:
+            print "Error reading wage value on line {0}".format(i+1)
+            continue
         
         yb[munic]["wage"] += wage
-        yb[munic]["num_emp"] += 1
+        if isinstance(yb[munic]["num_emp"], int):
+            yb[munic]["num_emp"] = set([])
+        yb[munic]["num_emp"].add(emp)
         if isinstance(yb[munic]["num_est"], int):
             yb[munic]["num_est"] = set([])
         yb[munic]["num_est"].add(est)
         
         ybi[munic][isic]["wage"] += wage
-        ybi[munic][isic]["num_emp"] += 1
+        if isinstance(ybi[munic][isic]["num_emp"], int):
+            ybi[munic][isic]["num_emp"] = set([])
+        ybi[munic][isic]["num_emp"].add(emp)
         if isinstance(ybi[munic][isic]["num_est"], int):
             ybi[munic][isic]["num_est"] = set([])
         ybi[munic][isic]["num_est"].add(est)
         
         ybio[munic][isic][occ]["wage"] += wage
-        ybio[munic][isic][occ]["num_emp"] += 1
+        if isinstance(ybio[munic][isic][occ]["num_emp"], int):
+            ybio[munic][isic][occ]["num_emp"] = set([])
+        ybio[munic][isic][occ]["num_emp"].add(emp)
         if isinstance(ybio[munic][isic][occ]["num_est"], int):
             ybio[munic][isic][occ]["num_est"] = set([])
         ybio[munic][isic][occ]["num_est"].add(est)
         
         ybo[munic][occ]["wage"] += wage
-        ybo[munic][occ]["num_emp"] += 1
+        if isinstance(ybo[munic][occ]["num_emp"], int):
+            ybo[munic][occ]["num_emp"] = set([])
+        ybo[munic][occ]["num_emp"].add(emp)
         if isinstance(ybo[munic][occ]["num_est"], int):
             ybo[munic][occ]["num_est"] = set([])
         ybo[munic][occ]["num_est"].add(est)
         
         yi[isic]["wage"] += wage
-        yi[isic]["num_emp"] += 1
+        if isinstance(yi[isic]["num_emp"], int):
+            yi[isic]["num_emp"] = set([])
+        yi[isic]["num_emp"].add(emp)
         if isinstance(yi[isic]["num_est"], int):
             yi[isic]["num_est"] = set([])
         yi[isic]["num_est"].add(est)
         
         yio[isic][occ]["wage"] += wage
-        yio[isic][occ]["num_emp"] += 1
+        if isinstance(yio[isic][occ]["num_emp"], int):
+            yio[isic][occ]["num_emp"] = set([])
+        yio[isic][occ]["num_emp"].add(emp)
         if isinstance(yio[isic][occ]["num_est"], int):
             yio[isic][occ]["num_est"] = set([])
         yio[isic][occ]["num_est"].add(est)
         
         yo[occ]["wage"] += wage
-        yo[occ]["num_emp"] += 1
+        if isinstance(yo[occ]["num_emp"], int):
+            yo[occ]["num_emp"] = set([])
+        yo[occ]["num_emp"].add(emp)
         if isinstance(yo[occ]["num_est"], int):
             yo[occ]["num_est"] = set([])
         yo[occ]["num_est"].add(est)
@@ -121,11 +169,14 @@ def clean(file_path):
     
     all_data = [("yb", yb), ("ybi", ybi), ("ybio", ybio), ("ybo", ybo), 
                 ("yi", yi), ("yio", yio), ("yo", yo)]
-    # all_data = [("ybio", ybio)]
     columns = {"y":"year", "b":"bra_id", "i":"isic_id", "o":"cbo_id"}
     
     print
     print "finished reading file, writing output..."
+    
+    year = str(year)
+    if not os.path.exists(year):
+        os.makedirs(year)
     
     for name, tbl in all_data:
         
@@ -136,7 +187,7 @@ def clean(file_path):
         header += ["wage", "num_emp", "num_est"]
         
         '''Export to files'''
-        csv_file = open(name+'.tsv', 'wb')
+        csv_file = open(year + "/" + name+'.tsv', 'wb')
         csv_writer = csv.writer(csv_file, delimiter='\t',
                                     quotechar='"', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow(header)
