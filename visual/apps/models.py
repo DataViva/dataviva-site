@@ -16,9 +16,20 @@ class App(db.Model, AutoSerialize):
     
     id = db.Column(db.Integer, primary_key = True)
     type = db.Column(db.String(20))
-    title = db.Column(db.String(20))
+    name_en = db.Column(db.String(20))
+    name_pt = db.Column(db.String(20))
     viz_whiz = db.Column(db.String(20))
     color = db.Column(db.String(7))
+    
+    def name(self):
+        return getattr(self,"name_"+g.locale)
+    
+    def serialize(self, **kwargs):
+        auto_serialized = super(App, self).serialize()
+        del auto_serialized["name_en"]
+        del auto_serialized["name_pt"]
+        auto_serialized["name"] = self.name()
+        return auto_serialized
 
 class Build(db.Model, AutoSerialize):
 
