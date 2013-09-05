@@ -4,7 +4,7 @@ from sqlalchemy.sql.expression import cast
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, make_response, Response
 from visual import db
-from visual.utils import exist_or_404, gzip_data, cached_query, parse_years, Pagination
+from visual.utils import exist_or_404, gzip_data, cached_query, parse_years
 from visual.rais.models import Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio
 from visual.attrs.models import Bra, Isic, Cbo
 
@@ -89,10 +89,10 @@ def get_query(data_table, url_args, **kwargs):
     t1 = time.time()
     
     # first lets test if this query is cached
-    if limit is None and download is None and raw is None:
-        cached_q = cached_query(cache_id)
-        if cached_q:
-            return cached_q
+    # if limit is None and download is None and raw is None:
+    #     cached_q = cached_query(cache_id)
+    #     if cached_q:
+    #         return cached_q
     
     if join:
         join_table = join["table"]
@@ -241,7 +241,6 @@ def get_query(data_table, url_args, **kwargs):
             ret["data"].append(d)
         # raise Exception(ret["data"])
     elif join:
-        # items = query.paginate(int(kwargs["page"]), RESULTS_PER_PAGE, False).items
         ret["data"] = []
         if limit:
             items = query.limit(limit).offset(offset).all()
@@ -251,14 +250,24 @@ def get_query(data_table, url_args, **kwargs):
         t2 = time.time()
         timing.append("Query Data: {0:.4f}s".format((t2-t1)))
         t1 = time.time()
-        # raise Exception(len(items))
-        for row in items:
-            datum = row[0].serialize()
-            for value, col_name in zip(row[1:], join["columns"].keys()):
+        # for row in items:
+        #     datum = row[0].serialize()
+        #     for value, col_name in zip(row[1:], join["columns"].keys()):
+        #         extra = {}
+        #         extra[col_name] = value
+        #         datum = dict(datum.items() + extra.items())
+        #     ret["data"].append(datum)
+        # raise Exception(query.all()[0])
+        # ret["data"] = [d[0].serialize() for d in query.all()]
+        for d in query.all():
+            # datum = dict((key,value) for key, value in d[0].__dict__.iteritems() if isinstance(value,unicode) or isinstance(value,float) or isinstance(value,int) or isinstance(value,long))
+            datum = d[0].serialize()
+            for value, col_name in zip(d[1:], join["columns"].keys()):
                 extra = {}
                 extra[col_name] = value
                 datum = dict(datum.items() + extra.items())
             ret["data"].append(datum)
+        # raise Exception(ret["data"][0])
             
         t2 = time.time()
         timing.append("Serialize Data: {0:.4f}s".format((t2-t1)))
@@ -269,7 +278,15 @@ def get_query(data_table, url_args, **kwargs):
     elif raw:
         return query.all()
     else:
+        t2 = time.time()
+        timing.append("Query Data: {0:.4f}s".format((t2-t1)))
+        t1 = time.time()
+        
         ret["data"] = [d.serialize() for d in query.all()]
+        
+        t2 = time.time()
+        timing.append("Serialize Data: {0:.4f}s".format((t2-t1)))
+        t1 = time.time()
     
     if download is not None:
         def generate():
@@ -308,6 +325,8 @@ def get_query(data_table, url_args, **kwargs):
     t2 = time.time()
     timing.append("Cache Data: {0:.4f}s".format((t2-t1)))
     t1 = time.time()
+    
+    # raise Exception(timing)
         
     return ret
 

@@ -128,11 +128,9 @@ def questions(status, page):
     
     if not questions and page != 1:
         abort(404)
-    pagination = Pagination(page, RESULTS_PER_PAGE, count)
     
     return render_template('admin/questions.html', 
         questions = questions,
-        pagination = pagination,
         status = curr_status,
         status_dropdown = status_dropdown)
 

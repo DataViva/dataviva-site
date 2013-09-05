@@ -4,7 +4,6 @@ from flask import Blueprint, request, render_template, g
 from visual.attrs.models import Bra, Wld
 from visual.rais.models import Isic, Cbo
 from visual.secex.models import Hs
-from visual.utils import Pagination
 
 mod = Blueprint('about', __name__, url_prefix='/about')
 

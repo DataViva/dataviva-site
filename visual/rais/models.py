@@ -136,6 +136,15 @@ class Ybo(db.Model, AutoSerialize):
     num_emp_growth_val = db.Column(db.Float())
     num_emp_growth_val_5 = db.Column(db.Float())
     
+    # oci = db.relationship("Yo",
+    #         primaryjoin= "and_(Ybo.year==Yo.year, Ybo.cbo_id==Yo.cbo_id)",
+    #         foreign_keys=[Yo.year, Yo.cbo_id], backref = 'Ybo')
+    # 
+    # def serialize(self):
+    #     auto_serialized = super(Ybo, self).serialize()
+    #     auto_serialized["oci"] = self.oci[0].oci
+    #     return auto_serialized
+    
     def __repr__(self):
         return '<Ybo %d.%s.%s>' % (self.year, self.bra_id, self.cbo_id)
     

@@ -21,18 +21,35 @@ from flask.sessions import SessionInterface, SessionMixin
 class AutoSerialize(object):
     __public__ = None
 
-    def serialize(self, exclude=("bra", "industry", "wld", "occupation", "product"), extra=()):
-        "Returns model's PUBLIC data for jsonify"
-        data = {}
-        # return data
-        keys = self._sa_instance_state.attrs.items()
-        public = self.__public__ + extra if self.__public__ else extra
+    def serialize(self):
         
-        for k, field in keys:
-            if (public and k not in public) or k in exclude or hasattr(field.value, '__module__'):
-                continue
-            data[k] = self._serialize(field.value)
+        data = self.__dict__
+        public = self.__public__
+        allowed = []
+        
+        for key, value in data.iteritems():
+            
+            if isinstance(value,unicode) or \
+                                    isinstance(value,float) or \
+                                    isinstance(value,int) or \
+                                    isinstance(value,long):
+                allowed.append((key,value))
+        
+        data = dict(allowed)
+        
         return data
+
+    # def serialize(self, exclude=("bra", "industry", "wld", "occupation", "product"), extra=()):
+    #     "Returns model's PUBLIC data for jsonify"
+    #     data = {}
+    #     keys = self._sa_instance_state.attrs.items()
+    #     public = self.__public__ + extra if self.__public__ else extra
+    #     
+    #     for k, field in keys:
+    #         if (public and k not in public) or k in exclude or hasattr(field.value, '__module__'):
+    #             continue
+    #         data[k] = self._serialize(field.value)
+    #     return data
 
     @classmethod
     def _serialize(cls, value, follow_fk=False):
@@ -48,56 +65,6 @@ class AutoSerialize(object):
             ret = value
 
         return ret
-
-
-''' A helper class for including pagination in templates'''
-class Pagination(object):
-
-    def __init__(self, page, per_page, total_count, order=None):
-        self.page = page
-        self.per_page = per_page
-        self.total_count = total_count
-        self.order = order
-
-    @property
-    def pages(self):
-        if str(self.per_page).isdigit():
-            return int(ceil(self.total_count / float(self.per_page)))
-        else:
-            return 0
-
-    @property
-    def has_prev(self):
-        return self.page > 1
-
-    @property
-    def has_next(self):
-        return self.page < self.pages
-
-    @staticmethod
-    def get_per_page_options():
-        return [10, 25, 50, 100, "all"]
-    
-    def serialize(self):
-        return {
-            "page": self.page, "per_page": self.per_page,
-            "total_count": self.total_count, "order": self.order,
-            "has_prev": self.has_prev, "has_next": self.has_next,
-            "pages": [p for p in self.iter_pages()]
-        }
-    
-    def iter_pages(self, left_edge=2, left_current=2,
-                   right_current=5, right_edge=2):
-        last = 0
-        for num in xrange(1, self.pages + 1):
-            if num <= left_edge or \
-               (num > self.page - left_current - 1 and \
-                num < self.page + right_current) or \
-               num > self.pages - right_edge:
-                if last + 1 != num:
-                    yield None
-                yield num
-                last = num
 
 ''' A helper class for dealing with injecting times into the page using moment.js'''
 class Momentjs:

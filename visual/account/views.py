@@ -12,7 +12,7 @@ from visual.ask.models import Question, Status, Reply
 # forms
 from visual.ask.forms import AskForm
 # utils
-from visual.utils import exist_or_404, Pagination
+from visual.utils import exist_or_404
 # login types
 from visual.account.login_providers import facebook, twitter, google
 

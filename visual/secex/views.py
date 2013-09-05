@@ -3,7 +3,7 @@ from sqlalchemy import func
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, abort, make_response, Response
 from visual import db
-from visual.utils import exist_or_404, gzip_data, cached_query, parse_years, Pagination
+from visual.utils import exist_or_404, gzip_data, cached_query, parse_years
 from visual.attrs.models import Bra, Hs, Wld
 from visual.secex.models import Yb_secex, Yw, Yp, Ybw, Ybp, Ypw, Ybpw
 

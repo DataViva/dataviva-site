@@ -6,7 +6,7 @@ from visual import db, lm
 from visual.account.models import User
 from visual.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE_REPLY, Flag
 from visual.ask.forms import AskForm, ReplyForm, SearchForm
-from visual.utils import Pagination, strip_html
+from visual.utils import strip_html
 
 mod = Blueprint('ask', __name__, url_prefix='/ask')
 

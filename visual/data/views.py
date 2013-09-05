@@ -12,8 +12,6 @@ from visual.attrs.models import Bra, Wld
 from visual.rais.models import Isic, Cbo
 from visual.secex.models import Hs
 
-from visual.utils import Pagination
-
 import json
 
 mod = Blueprint('data', __name__, url_prefix='/data')
