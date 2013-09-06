@@ -75,7 +75,7 @@ def index(category = None, id = None):
 def profiles(category = None, id = None):
           
     t1 = time.time()
-    category_type = "<"+category+">"
+    category_type = "<{0}.{1}>".format(category,len(id))
         
     t2 = time.time()
     g.timing.append("Initializing Profile: {0:.4f}s".format((t2-t1)))
@@ -118,7 +118,7 @@ def profiles(category = None, id = None):
     
     plan = Plan.query.filter_by(category=category, category_type=category_type, 
                                     option=None).first()
-        
+                                    
     t2 = time.time()
     g.timing.append("Getting Plan: {0:.4f}s".format((t2-t1)))
     t1 = time.time()
@@ -131,7 +131,7 @@ def profiles(category = None, id = None):
     t2 = time.time()
     g.timing.append("Setting Plan Variables: {0:.4f}s".format((t2-t1)))
     t1 = time.time()
-            
+    
     builds = [0]*len(plan.builds.all())
     for pb in plan.builds.all():
         

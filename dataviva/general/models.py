@@ -12,8 +12,8 @@ class Plan_Build(db.Model, AutoSerialize):
     __public__ = ('plan_id', 'build_id', 'position', 'type', 'variables')
     
     plan_id = db.Column(db.Integer, primary_key = True)
+    position = db.Column(db.Integer, primary_key = True)
     build_id = db.Column(db.Integer, primary_key = True)
-    position = db.Column(db.Integer)
     variables = db.Column(db.String(120))
     
     build = db.relationship("Build",

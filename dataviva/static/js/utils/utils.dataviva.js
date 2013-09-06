@@ -211,8 +211,8 @@ dataviva.format.text = function(text,name,l) {
       "icon": {"en": "Icon", "pt": "\u00cdcone"},
       "isic": {"en": "Industry", "pt": "Ind\u00fastria"},
       "isic_plural": {"en": "Industries", "pt": "Ind\u00fastrias"},
-      "wld": {"en": "Trade Partner", "pt": "Parceiro Comercial"},
-      "wld_plural": {"en": "Trade Partners", "pt": "Parceiros Comerciais"},
+      "wld": {"en": "Export Destination", "pt": "Destino das Exporta\u00e7\u00f5es"},
+      "wld_plural": {"en": "Export Destinations", "pt": "Destinos das Exporta\u00e7\u00f5es"},
     
       // File Types
       "download": {"en": "Download", "pt": "Download"},
