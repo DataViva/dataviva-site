@@ -14,7 +14,7 @@ class Stats(object):
         
         stats = []
         attr_type = self.__class__.__name__.lower()
-
+        
         if attr_type == "bra":
             stats.append(self.get_top_attr(Ybi, "wage", attr_type, "isic", Yi))
             stats.append(self.get_top_attr(Ybo, "wage", attr_type, "cbo", Yi))

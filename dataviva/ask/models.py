@@ -132,6 +132,9 @@ class Reply(db.Model, AutoSerialize):
             foreign_keys=[Vote.type_id], backref = 'reply', lazy = 'dynamic')
     flags = db.relationship("Flag", backref = 'reply', lazy = 'dynamic')
     
+    def slug(self):
+        return Question.query.get(self.question_id).slug
+    
     def __repr__(self):
         return '<Reply %r>' % (self.id)
 

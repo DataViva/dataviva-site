@@ -90,7 +90,7 @@ def user(nickname):
     activity = stars + questions + replies
     activity.sort(key=lambda a: a.timestamp, reverse=True)
                 
-    return render_template("account/user_home.html", 
+    return render_template("account/index.html", 
         user = user,
         activity = activity)
 

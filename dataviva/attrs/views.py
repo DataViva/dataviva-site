@@ -100,14 +100,12 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_merge
         attrs = {a.id: fix_name(a.serialize()) for a in Attr.query.filter(func.char_length(Attr.id) <= Attr_id_lens[-1]).all()}
         
         # merge cbo table to YO table to find all instances in the data
+        max_year = db.session.query(Attr_weight_tbl.year.distinct()).order_by(Attr_weight_tbl.year.desc()).all()[0]
+        
         attrs_in_db = db.session.query(Attr, func.sum(getattr(Attr_weight_tbl, Attr_weight_col)))
         attrs_in_db = attrs_in_db \
-                        .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id).group_by(Attr)
-                        
-        if Attr_weight_col == "population":
-            max_year = db.session.query(Attr_weight_tbl.year.distinct()).order_by(Yb.year.desc()).all()[0]
-            attrs_in_db = attrs_in_db \
-                .filter(Attr_weight_tbl.year == max_year[0])
+                        .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id).group_by(Attr) \
+                        .filter(Attr_weight_tbl.year == max_year[0])
         # attrs_in_db = {a[0].id: a for a in attrs_in_db.all()}
         
         if Attr_weight_col == "population":
