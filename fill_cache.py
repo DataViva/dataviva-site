@@ -33,7 +33,7 @@ base_dir = os.path.abspath(os.path.join(this_dir, '../../../'))
 
 visual_dir = os.path.abspath(os.path.join(base_dir, 'scripts/growth_lib/'))
 sys.path.append(visual_dir)
-from visual import app
+from dataviva import app
 from flask import g
 
 ''' Connect to DB '''
@@ -50,6 +50,11 @@ def get_uniques(table):
         
         '''Minas Gerais at the top of the state list'''
         uniques += ["mg"]
+        
+        '''Planning Regions in Minas Gerais'''
+        q = "select id from attrs_bra where length(id) = 7;"
+        cursor.execute(q)
+        uniques += [row[0] for row in cursor.fetchall()]
         
         '''Municipalities in Minas Gerais'''
         q = "select bra_id from rais_yb where length(bra_id) = 8 and num_emp > 20000 and year = 2010 and substr(bra_id,1,2) = 'mg' order by num_emp desc;"
