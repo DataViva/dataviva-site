@@ -1,6 +1,8 @@
 <!-- extend from site layout -->
 {% extends "templates/site.html" %}
 
+{% block title %}: {{ user.fullname }}{% endblock %}
+
 {% block head %}
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.account.css" />
@@ -42,10 +44,12 @@
           {% set text = a.body %}
           {% set type = "replies" %}
           {% set prefix = "Replied on " %}
+          {% set url = "/ask/question/"+a.slug() %}
         {% elif a.question %}
           {% set text = a.question %}
           {% set type = "questions" %}
           {% set prefix = "Asked on " %}
+          {% set url = "/ask/question/"+a.slug %}
         {% endif %}
         {% if text %}
           <a href="{{url}}" class="decision icon {{type}}">
