@@ -99,8 +99,11 @@ def clean(file_path):
         try:
             isic = line["EconmicAtivity_ID_ISIC"]
         except:
-            print "Error reading industry ID on line {0}".format(i+1)
-            continue
+            try:
+                isic = line["EconomicAtivity_ID_ISIC"]
+            except:
+                print "Error reading industry ID on line {0}".format(i+1)
+                continue
         
         try:
             wage = float(line["AverageMonthlyWage"].replace(",", "."))
