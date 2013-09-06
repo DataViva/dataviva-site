@@ -94,7 +94,7 @@ class formatter:
         else:
             format = "number"
             
-        return Markup("<script>\ndocument.write(dataviva.format.%s(\"%s\",\"%s\",\"%s\"))\n</script>" % (format, self.text, type, lang))
+        return Markup("<script>\ndocument.write(dataviva.format.%s(\"%s\",\"%s\",\"%s\"))\n</script>" % (format, self.text, type, str(lang)))
 
 ''' A helper funciton for stripping out html tags for showing snippets of user submitted content'''
 def strip_html(s):

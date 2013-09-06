@@ -291,7 +291,7 @@ dataviva.format.number = function(value,name,l) {
     value = d3.formatPrefix(value).scale(value)
     value = parseFloat(d3.format(".3g")(value))
     
-    if (symbol && dataviva.language == "pt") {
+    if (symbol && l == "pt") {
       var digit = parseFloat(value.toString().split(".")[0])
       if (symbol == "T") {
         if (digit < 2) symbol = " Trilh\u00e3o"
@@ -327,8 +327,14 @@ dataviva.format.number = function(value,name,l) {
         "wage_avg_bra": ["$"," BRL"],
         "wage_growth_val": ["$"," BRL"],
         "wage_growth_val_5": ["$"," BRL"],
+        "val_usd_growth_pct": ["","%"],
+        "val_usd_growth_pct_5": ["","%"],
         "val_usd_growth_val": ["$"," USD"],
-        "val_usd_growth_val_5": ["$"," USD"]
+        "val_usd_growth_val_5": ["$"," USD"],
+        "num_emp_growth_pct": ["","%"],
+        "num_emp_growth_pct_5": ["","%"],
+        "wage_growth_pct": ["","%"],
+        "wage_growth_pct_5": ["","%"]
       }
 
   if (total_labels[name]) {
