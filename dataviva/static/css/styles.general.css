@@ -101,6 +101,10 @@ body.error404 #container {
   background-size: 60%;
 }
 
+body.error404 #fullscreen {
+  background-image: none !important;
+}
+
 /*****************/
 /* Title Styling */
 /*****************/
