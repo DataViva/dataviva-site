@@ -134,7 +134,6 @@ h2 {
 div.loading {
   background-color: #fafafa;
   bottom: 0px;
-  font-size: 16px;
   left: 0px;
   opacity: 1;
   position: absolute;
@@ -195,6 +194,7 @@ div.loading > i {
 
 div.loading > .text {
   color: #888;
+  font-size: 16px;
   margin-top: -11px;
   position: absolute;
   text-align: center;

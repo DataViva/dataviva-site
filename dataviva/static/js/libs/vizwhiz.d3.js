@@ -284,6 +284,7 @@ vizwhiz.tooltip.create = function(params) {
   params.color = params.color ? params.color : "#333"
   params.parent = params.parent ? params.parent : d3.select("body")
   params.background = params.background ? params.background : "#ffffff"
+  params.style = params.style ? params.style : "default"
   
   params.anchor = {}
   if (params.fullscreen) {
@@ -425,7 +426,11 @@ vizwhiz.tooltip.create = function(params) {
     var title_icon = header.append("div")
       .attr("class","vizwhiz_tooltip_icon")
       .style("background-image","url("+params.icon+")")
-      .style("background-color",params.color)
+      
+    if (params.style == "knockout") {
+      title_icon.style("background-color",params.color)
+    }
+    
     title_width -= title_icon.node().offsetWidth
   }
   
@@ -759,6 +764,7 @@ vizwhiz.error = function(vars) {
       .attr("text-anchor", "middle")
       .attr("font-family", vars.font)
       .style("font-weight", vars.font_weight)
+      .style(vars.info_style)
       .each(function(d){
         vizwhiz.utils.wordwrap({
           "text": d,
@@ -864,6 +870,7 @@ vizwhiz.viz = function() {
     "grouping": "name",
     "highlight": null,
     "highlight_color": "#cc0000",
+    "icon_style": "default",
     "id_var": "id",
     "init": true,
     "keys": [],
@@ -871,6 +878,7 @@ vizwhiz.viz = function() {
     "layout": "value",
     "links": null,
     "margin": {"top": 0, "right": 0, "bottom": 0, "left": 0},
+    "mirror_axis": false,
     "name_array": null,
     "nesting": [],
     "nesting_aggs": {},
@@ -951,7 +959,6 @@ vizwhiz.viz = function() {
       footer = true,
       nodes,
       links,
-      mirror_axis = false,
       static_axis = true,
       xaxis_domain = null,
       yaxis_domain = null;
@@ -1231,7 +1238,7 @@ vizwhiz.viz = function() {
             return d[vars.yaxis_var]
           }).reverse()
         }
-        if (mirror_axis) {
+        if (vars.mirror_axis) {
           var domains = vars.yaxis_domain.concat(vars.xaxis_domain)
           vars.xaxis_domain = d3.extent(domains)
           vars.yaxis_domain = d3.extent(domains).reverse()
@@ -1426,6 +1433,7 @@ vizwhiz.viz = function() {
           .attr("id","vizwhiz_loader_text")
           .style("font-family",vars.font)
           .style("font-weight",vars.font_weight)
+          .style(vars.info_style)
           .text(vars.text_format("Loading..."))
       
       // vars.loader.select("div#vizwhiz_loader_text").transition().duration(vizwhiz.timing)
@@ -2162,6 +2170,12 @@ vizwhiz.viz = function() {
     return chart;
   };
   
+  chart.icon_style = function(x) {
+    if (!arguments.length) return vars.icon_style;
+    vars.icon_style = x;
+    return chart;
+  };
+  
   chart.id_var = function(x) {
     if (!arguments.length) return vars.id_var;
     vars.id_var = x;
@@ -2185,10 +2199,16 @@ vizwhiz.viz = function() {
     links = x;
     return chart;
   };
+  
+  chart.info_style = function(x) {
+    if (!arguments.length) return vars.info_style;
+    vars.info_style = x;
+    return chart;
+  };
 
   chart.mirror_axis = function(x) {
-    if (!arguments.length) return mirror_axis;
-    mirror_axis = x;
+    if (!arguments.length) return vars.mirror_axis;
+    vars.mirror_axis = x;
     return chart;
   };
   
@@ -2607,6 +2627,15 @@ vizwhiz.viz = function() {
       .attr("stroke-width",1)
       .attr("stroke","#ccc")
       .attr("shape-rendering","crispEdges")
+      
+    vars.mirror = vars.chart_enter.append("path")
+      .attr("id","mirror")
+      .attr("fill","#000")
+      .attr("fill-opacity",0.03)
+      // .attr("stroke-width",1)
+      // .attr("stroke","#ccc")
+      // .attr("shape-rendering","crispEdges")
+      .attr("opacity",0)
 
     // Create X axis
     vars.chart_enter.append("g")
@@ -2667,6 +2696,14 @@ vizwhiz.viz = function() {
       .select("rect#background")
         .attr('width', vars.graph.width)
         .attr('height', vars.graph.height)
+        
+    vars.mirror.transition().duration(vars.graph.timing)
+      .attr("opacity",function(){
+        return vars.mirror_axis ? 1 : 0
+      })
+      .attr("d",function(){
+        return "M "+vars.graph.width+" "+vars.graph.height+" L 0 "+vars.graph.height+" L "+vars.graph.width+" 0 Z"
+      })
 
     // Update X axis
     if (vars.type == "stacked") {
@@ -2935,6 +2972,7 @@ vizwhiz.network = function(vars) {
               "title": find_variable(vars.highlight,vars.text_var),
               "color": find_color(vars.highlight),
               "icon": find_variable(vars.highlight,"icon"),
+              "style": vars.icon_style,
               "x": x_pos,
               "y": vars.margin.top+5,
               "width": info_width,
@@ -3618,6 +3656,7 @@ vizwhiz.stacked = function(vars) {
         "title": find_variable(d[vars.id_var],vars.text_var),
         "id": vars.type,
         "icon": find_variable(d[vars.id_var],"icon"),
+        "style": vars.icon_style,
         "color": find_color(d[vars.id_var]),
         "x": tooltip_x,
         "y": tooltip_y,
@@ -3660,6 +3699,7 @@ vizwhiz.stacked = function(vars) {
         "title": find_variable(d[vars.id_var],vars.text_var),
         "id": vars.type,
         "icon": find_variable(d[vars.id_var],"icon"),
+        "style": vars.icon_style,
         "color": find_color(d[vars.id_var]),
         "x": tooltip_x,
         "y": tooltip_y,
@@ -3708,6 +3748,7 @@ vizwhiz.stacked = function(vars) {
           "title": find_variable(d[vars.id_var],vars.text_var),
           "color": find_color(d[vars.id_var]),
           "icon": find_variable(d[vars.id_var],"icon"),
+          "style": vars.icon_style,
           "id": vars.type,
           "fullscreen": true,
           "html": html,
@@ -4127,6 +4168,7 @@ vizwhiz.tree_map = function(vars) {
         "title": find_variable(d,vars.text_var),
         "color": find_color(d),
         "icon": find_variable(d,"icon"),
+        "style": vars.icon_style,
         "id": vars.type,
         "x": d3.event.pageX,
         "y": d3.event.pageY,
@@ -4167,6 +4209,7 @@ vizwhiz.tree_map = function(vars) {
           "title": find_variable(d,vars.text_var),
           "color": find_color(d),
           "icon": find_variable(d,"icon"),
+          "style": vars.icon_style,
           "id": vars.type,
           "fullscreen": true,
           "html": html,
@@ -4371,6 +4414,7 @@ vizwhiz.geo_map = function(vars) {
         panControl: false,
         streetViewControl: false,
         zoomControl: false,
+        scrollwheel: false,
         mapTypeId: google.maps.MapTypeId.TERRAIN
       })
   
@@ -4505,7 +4549,7 @@ vizwhiz.geo_map = function(vars) {
           var self = this
           
           setTimeout(function(){
-            
+
             projection = self.getProjection()
             gmap_projection = function (coordinates) {
               var googleCoordinates = new google.maps.LatLng(coordinates[1], coordinates[0]);
@@ -4524,7 +4568,7 @@ vizwhiz.geo_map = function(vars) {
                 .attr("opacity",default_opacity)
                 .call(color_paths)
                 .attr("vector-effect","non-scaling-stroke")
-          
+
             if (vars.map.zoom != vars.zoom) {
               paths.attr("d",path)
             }
@@ -4588,7 +4632,7 @@ vizwhiz.geo_map = function(vars) {
             }
           
             vars.loader.style("display","none")
-            
+
           },5)
         
         }
@@ -4703,6 +4747,7 @@ vizwhiz.geo_map = function(vars) {
           "title": find_variable(id,vars.text_var),
           "id": vars.type,
           "icon": find_variable(id,"icon"),
+          "style": vars.icon_style,
           "color": color,
           "footer": footer,
           "x": vars.width-info_width-5+vars.margin.left,
@@ -5090,6 +5135,7 @@ vizwhiz.pie_scatter = function(vars) {
           "title": find_variable(d,vars.text_var),
           "color": find_color(d),
           "icon": find_variable(d,"icon"),
+          "style": vars.icon_style,
           "id": vars.type,
           "fullscreen": true,
           "html": html,
@@ -5331,6 +5377,7 @@ vizwhiz.pie_scatter = function(vars) {
           "id": vars.type,
           "color": find_color(d[vars.id_var]),
           "icon": find_variable(d[vars.id_var],"icon"),
+          "style": vars.icon_style,
           "data": tooltip_data,
           "title": find_variable(d[vars.id_var],vars.text_var),
           "x": x+vars.graph.margin.left+vars.margin.left+vars.parent.node().offsetLeft,
@@ -5782,6 +5829,7 @@ vizwhiz.bubbles = function(vars) {
         "id": vars.type,
         "color": find_color(d[vars.id_var]),
         "icon": find_variable(d[vars.id_var],"icon"),
+        "style": vars.icon_style,
         "data": tooltip_data,
         "title": find_variable(d[vars.id_var],vars.text_var),
         "x": d.x+vars.margin.left+vars.parent.node().offsetLeft,
@@ -5811,6 +5859,7 @@ vizwhiz.bubbles = function(vars) {
           "title": find_variable(d,vars.text_var),
           "color": find_color(d),
           "icon": find_variable(d,"icon"),
+          "style": vars.icon_style,
           "id": vars.type,
           "fullscreen": true,
           "html": html,
@@ -6212,6 +6261,7 @@ vizwhiz.rings = function(vars) {
         "title": find_variable(vars.highlight,vars.text_var),
         "color": find_color(vars.highlight),
         "icon": find_variable(vars.highlight,"icon"),
+        "style": vars.icon_style,
         "id": vars.type,
         "html": tooltip_appends+html,
         "footer": vars.data_source,

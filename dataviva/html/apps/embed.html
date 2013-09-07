@@ -50,7 +50,7 @@
     {% set bra = current_build.bra[1] %}
     {% endif %}
     <div id="bra_1" class="leon button medium" onclick="builder.selector(this.id)">
-      <div class="leon icon medium"{% if bra %} style="background-color:{{ bra.color }}; background-image:url('{{ bra.icon }}')"{% endif %}></div>
+      <div class="leon icon medium"{% if bra %} style="background-image:url('{{ bra.icon }}')"{% endif %}></div>
       <span class="list_text">{% if bra %}{{ bra.name() }}{% endif %}</span>
       <i class="icon-list-alt"></i>
     </div>
@@ -217,6 +217,13 @@
     fonts.forEach(function(font){
       if (checkfont(font) && !app.font) app.font = font
     })
+    
+    app.loader_style = {
+      "color": "#888",
+      "font-size": "16px",
+      "margin-top": "-11px",
+      "text-shadow": "0px 0px 6px #efefef"
+    }
 
     app.html = function(id,list) {
       
@@ -418,6 +425,7 @@
       .font_weight("lighter")
       .total_var("required")
       .else_var("elsewhere")
+      .info_style(app.loader_style)
     
     // Start building a new app
     app.start = function(new_url,allyears) {
@@ -598,8 +606,9 @@
             
             if (app.build.app.type == "occugrid") {
               
-              app.build.imp_url = app.build.data_url
-                .replace(app.build.bra[0].id,"all")
+              var url = app.build.data_url.split("/")
+              url[2] = "all"
+              app.build.imp_url = url.join("/")
                 
               if (!app.data[app.build.imp_url]) {
                 q.defer(function(u,callback){
@@ -612,9 +621,10 @@
                   })
                 },"/"+app.build.imp_url)
               }
-                
-              app.build.else_url = app.build.data_url
-                .replace(app.build.isic[0].id,"all")
+              
+              var url = app.build.data_url.split("/")
+              url[3] = "all"
+              app.build.else_url = url.join("/")
                 
               if (!app.data[app.build.else_url]) {
                 q.defer(function(u,callback){
@@ -845,6 +855,8 @@
       /* Gloabl App Variables */
       /************************/
       if (app.build.app.type != "stacked") app.build.title += " ("+app.vars.year+")"
+      if (["bra","wld"].indexOf(app.build.output) >= 0) var style = "default"
+      else var style = "knockout"
       
       app.viz.type(app.build.app.viz_whiz)
         .title(app.build.title)
@@ -867,6 +879,7 @@
         .solo(app.solos)
         .filter(app.filters)
         .sub_title(null)
+        .icon_style(style)
         
       /******************************/
       /* Network Specific Variables */
@@ -1472,6 +1485,9 @@ val)+": ", "suffix": ""};
        
       if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && obj.id.length != 5)) {
         button.select(".icon").style("background-color",obj.color)
+      }
+      else {
+        button.select(".icon").style("background-color","transparent")
       }
         
       if (obj.distance > 0 && type == "bra") new_name += " ("+obj.distance+"km)"
