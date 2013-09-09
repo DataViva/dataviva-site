@@ -67,7 +67,7 @@ def before_request():
 @babel.localeselector
 def get_locale(lang=None):
     supported_langs = current_app.config['LANGUAGES'].keys()
-    new_lang = request.accept_languages.best_match(supported_langs)
+    new_lang = request.accept_languages.best_match(supported_langs, "en")
     # user = getattr(g, 'user', None)
     user = current_user
     if lang:

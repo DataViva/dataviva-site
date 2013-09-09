@@ -196,10 +196,8 @@ class Isic(db.Model, AutoSerialize, Stats):
     ybio = db.relationship("Ybio", backref = 'isic', lazy = 'dynamic')
     
     def name(self):
-        if g.locale:
-            return getattr(self,"name_"+g.locale)
-        else:
-            return self.name_en
+        lang = getattr(g, "locale", "en")
+        return getattr(self,"name_"+lang)
         
     def icon(self):
         return "/static/img/icons/isic/isic_%s.png" % (self.id[:1])
@@ -229,10 +227,8 @@ class Cbo(db.Model, AutoSerialize, Stats):
     ybio = db.relationship("Ybio", backref = 'cbo', lazy = 'dynamic')
     
     def name(self):
-        if g.locale:
-            return getattr(self,"name_"+g.locale)
-        else:
-            return self.name_en
+        lang = getattr(g, "locale", "en")
+        return getattr(self,"name_"+lang)
         
     def icon(self):
         return "/static/img/icons/cbo/cbo_%s.png" % (self.id[:1])
@@ -262,10 +258,8 @@ class Hs(db.Model, AutoSerialize, Stats):
     ybpw = db.relationship("Ybpw", backref = 'hs', lazy = 'dynamic')
     
     def name(self):
-        if g.locale:
-            return getattr(self,"name_"+g.locale)
-        else:
-            return self.name_en
+        lang = getattr(g, "locale", "en")
+        return getattr(self,"name_"+lang)
         
     def icon(self):
         return "/static/img/icons/hs/hs_%s.png" % (self.id[:2])
@@ -302,10 +296,8 @@ class Wld(db.Model, AutoSerialize, Stats):
     ybpw = db.relationship("Ybpw", backref = 'wld', lazy = 'dynamic')
     
     def name(self):
-        if g.locale:
-            return getattr(self,"name_"+g.locale)
-        else:
-            return self.name_en
+        lang = getattr(g, "locale", "en")
+        return getattr(self,"name_"+lang)
         
     def icon(self):
         return "/static/img/icons/wld/wld_%s.png" % (self.id)
@@ -362,10 +354,8 @@ class Bra(db.Model, AutoSerialize, Stats):
             lazy = 'dynamic')
     
     def name(self):
-        if g.locale:
-            return getattr(self,"name_"+g.locale)
-        else:
-            return self.name_en
+        lang = getattr(g, "locale", "en")
+        return getattr(self,"name_"+lang)
         
     def icon(self):
         return "/static/img/icons/bra/bra_%s.png" % (self.id[:2])
