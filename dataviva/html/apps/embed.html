@@ -1395,9 +1395,9 @@ val)+": ", "suffix": ""};
     
     var builder = {}
     builder.outputs = function(builds) {
+      
       app.all_builds = builds
       
-
       app.all_builds.forEach(function(build){
         d3.select("#output_"+build.app.type).remove()
       })
@@ -1425,9 +1425,12 @@ val)+": ", "suffix": ""};
               .text(dataviva.format.text(build.dataset))
         }
         
+        if (build.url == app.build.url) var c = "decision"
+        else var c = "help"
+        
         box.select("."+build.dataset).append("div")
           .attr("id",build.url)
-          .attr("class","output decision icon "+build.app.type)
+          .attr("class","output "+c+" icon "+build.app.type)
           .html(build.title)
           .on(vizwhiz.evt.click,function(){
             app.start(this.id)
