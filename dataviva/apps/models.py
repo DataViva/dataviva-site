@@ -22,7 +22,10 @@ class App(db.Model, AutoSerialize):
     color = db.Column(db.String(7))
     
     def name(self):
-        return getattr(self,"name_"+g.locale)
+        if g.locale:
+            return getattr(self,"name_"+g.locale)
+        else:
+            self.name_en
     
     def serialize(self, **kwargs):
         auto_serialized = super(App, self).serialize()
