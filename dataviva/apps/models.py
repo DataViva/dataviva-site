@@ -25,7 +25,7 @@ class App(db.Model, AutoSerialize):
         if g.locale:
             return getattr(self,"name_"+g.locale)
         else:
-            self.name_en
+            return self.name_en
     
     def serialize(self, **kwargs):
         auto_serialized = super(App, self).serialize()
