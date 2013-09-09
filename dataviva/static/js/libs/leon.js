@@ -164,7 +164,19 @@ leon = function(name) {
     objs.push(o)
   })
   
+  var labellist = document.getElementsByTagName('LABEL');
+  var labels = []
+  for(var i = labellist.length; i--; labels.unshift(labellist[i]));
+  
   return_radios.forEach(function(radio_group) {
+    
+    radio_group.forEach(function(obj){
+      for (var i = 0; i < labels.length; i++) {
+        if (labels[i].getAttribute("for") == obj.id) {
+          obj.label = labels[i]
+        }
+      }
+    })
     
     var temp_obj = {
           "items": radio_group,
@@ -173,6 +185,14 @@ leon = function(name) {
         }
     
     objs.push(temp_obj)
+  })
+  
+  objs.forEach(function(obj){
+    for (var i = 0; i < labels.length; i++) {
+      if (labels[i].getAttribute("for") == obj.name) {
+        obj.label = labels[i]
+      }
+    }
   })
   
   var legendlist = document.getElementsByTagName('LEGEND');
@@ -559,14 +579,11 @@ leon_construct.button = function(item,parent) {
   
   self.active = false
   
-  if (item.type && item.type == "button") var item = item.items
-  self.item = item
-
   if (typeof item == "string") {
     var html = item
   }
-  else if (item.labels && item.labels[0]) {
-    var label = item.labels[0]
+  else if (item.label) {
+    var label = item.label
     if (typeof label != "string") {
       var html = label.innerHTML
       if (leon_vars.autohide) label.style.display = "none"
@@ -581,6 +598,12 @@ leon_construct.button = function(item,parent) {
   else {
     var html = item.value
   }
+  
+  if (item.type && item.type == "button") {
+    var item = item.items
+    if (!html) html = item.value
+  }
+  self.item = item
   
   if (typeof item != "string" && leon_vars.autohide) item.style.display = "none"
   
@@ -706,8 +729,8 @@ leon_construct.checkbox = function(obj) {
   self.node.className = "leon checkbox"
   self.item.parentNode.insertBefore(self.node,self.item)
   
-  if (self.item.labels && self.item.labels[0]) {
-    self.label = new leon_construct.label(self.item.labels[0],self.node)
+  if (obj.label) {
+    self.label = new leon_construct.label(obj.label,self.node)
   }
   
   self.bg = document.createElement("div")
@@ -864,8 +887,8 @@ leon_construct.range = function(obj) {
   this.input.parentNode.insertBefore(self.node,self.input)
   
   // Create label
-  if (this.input.labels[0]) {
-    this.label = new leon_construct.label(self.input.labels[0],self.node)
+  if (obj.label) {
+    this.label = new leon_construct.label(obj.label,self.node)
   }
   
   // Create Play Button, if not a range slider
@@ -1200,8 +1223,8 @@ leon_construct.select = function(obj) {
   self.node.id = "leon_"+self.input.id
   self.input.parentNode.insertBefore(self.node,self.input)
   
-  if (self.input.labels[0]) {
-    self.label = new leon_construct.label(self.input.labels[0],self.node)
+  if (obj.label) {
+    self.label = new leon_construct.label(obj.label,self.node)
   }
   
   self.selected = new leon_construct.button(self.input,self.node)
@@ -1326,8 +1349,8 @@ leon_construct.text = function(obj) {
   self.input.parentNode.insertBefore(self.node,self.input)
   self.color = leon_vars.color.main.normal
   
-  if (obj.items.labels[0]) {
-    self.label = obj.items.labels[0]
+  if (obj.label) {
+    self.label = obj.label
     self.node.appendChild(self.label)
   }
   
