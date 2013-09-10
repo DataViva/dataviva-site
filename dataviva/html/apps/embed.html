@@ -1643,26 +1643,22 @@ v))
         }
         window_url += url_vars.join("&");
       }
-      
+      console.log(window.history)
       if (Modernizr.history) {
-        window.history.pushState(
+        window.history.replaceState(
           {'prev_request': "/apps/embed/"+window_url}, 
           "DataViva : "+app.build.title, "/apps/embed/"+window_url
         )
         if (window != window.parent &&
             window.parent.location.pathname.indexOf("builder") >= 0) {
-          window.parent.history.pushState(
+          window.parent.history.replaceState(
             {'prev_request': "/apps/builder/"+window_url}, 
             "DataViva : "+app.build.title, "/apps/builder/"+window_url
           )
         }
       } 
       else if (window.location.href.indexOf(window_url) < 0) {
-        if (window.parent.location.pathname.indexOf("embed") >= 0) {
-          window.location = "/apps/embed/"+window_url
-        } else {
-          window.location = "/apps/buuilder/"+window_url
-        }
+        window.location = "/apps/embed/"+window_url
       }
         
     }

@@ -464,24 +464,20 @@
     page_url = "/data/query" + page_url
         
     if (Modernizr.history) {
-      window.history.pushState(
+      window.history.replaceState(
         {'prev_request': page_url}, 
         "DataViva : Data", page_url
       )
       if (window != window.parent &&
           window.parent.location.pathname.indexOf("query") >= 0) {
-        window.parent.history.pushState(
+        window.parent.history.replaceState(
           {'prev_request': page_url}, 
           "DataViva : Data", page_url
         )
       }
     } 
     else if (window.location.href.indexOf(window_url) < 0) {
-      if (window.parent.location.pathname.indexOf("query") >= 0) {
-        window.location = page_url
-      } else {
-        window.location = page_url
-      }
+      window.location = page_url
     }
       
   }
