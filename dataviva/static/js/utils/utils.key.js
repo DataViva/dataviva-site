@@ -99,13 +99,14 @@ function Key() {
             if (attr_type == "bra") var s = "default"
             else var s = "knockout"
             
+            vizwhiz.tooltip.remove("key")
             vizwhiz.tooltip.create({
               "title": d.name,
               "color": d.color,
               "icon": d.icon,
               "style": s,
               "html": html,
-              "id": attr_type.toUpperCase(),
+              "id": "key",
               "x": x_pos,
               "y": y_pos-3,
               "offset": 0,
@@ -114,7 +115,7 @@ function Key() {
             })
           })
           .on(vizwhiz.evt.out, function(e){
-            vizwhiz.tooltip.remove(attr_type.toUpperCase())
+            vizwhiz.tooltip.remove("key")
           })
           .append("div")
             .attr("id","key_icon"+d.id)
@@ -133,8 +134,9 @@ function Key() {
           var x_pos = this.offsetLeft+(this.offsetWidth/2)
           var y_pos = key.parentNode.offsetTop+key.offsetTop+this.offsetTop
           
+          vizwhiz.tooltip.remove("key")
           vizwhiz.tooltip.create({
-            "id": "key_reset",
+            "id": "key",
             "x": x_pos,
             "y": y_pos,
             "offset": 0,
@@ -143,14 +145,14 @@ function Key() {
           })
         })
         .on(vizwhiz.evt.out,function(){
-          vizwhiz.tooltip.remove("key_reset")
+          vizwhiz.tooltip.remove("key")
         })
         .on(vizwhiz.evt.click,function(){
           key_filters = []
           key_solos = []
           app.update("filter",key_filters)
           app.update("solo",key_solos)
-          vizwhiz.tooltip.remove("key_reset")
+          vizwhiz.tooltip.remove("key")
           reset_check()
         })
       
