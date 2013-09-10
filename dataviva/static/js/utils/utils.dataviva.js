@@ -334,7 +334,8 @@ dataviva.format.number = function(value,name,l) {
         "num_emp_growth_pct": ["","%"],
         "num_emp_growth_pct_5": ["","%"],
         "wage_growth_pct": ["","%"],
-        "wage_growth_pct_5": ["","%"]
+        "wage_growth_pct_5": ["","%"],
+        "required": ["~",""]
       }
 
   if (total_labels[name]) {
@@ -350,7 +351,10 @@ dataviva.format.number = function(value,name,l) {
     return_value = n.join(",")
   }
   
-  if (name == "total") return_value = "~"+return_value
+  if (return_value.indexOf("-") >= 0 && return_value.indexOf("$") >= 0) {
+    return_value = return_value.replace("-","$")
+    return_value = return_value.replace("$","-")
+  }
   
   return return_value
   
