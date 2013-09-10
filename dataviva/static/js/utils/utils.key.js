@@ -95,11 +95,15 @@ function Key() {
                 <div onclick='key_filter()' class='"+filter_class+"'>Hide Group</div>\
                 <div onclick='key_solo()' class='"+solo_class+"'>Solo Group</div>\
               </div>"
+              
+            if (attr_type == "bra") var s = "default"
+            else var s = "knockout"
             
             vizwhiz.tooltip.create({
               "title": d.name,
               "color": d.color,
               "icon": d.icon,
+              "style": s,
               "html": html,
               "id": attr_type.toUpperCase(),
               "x": x_pos,
@@ -128,7 +132,7 @@ function Key() {
           
           var x_pos = this.offsetLeft+(this.offsetWidth/2)
           var y_pos = key.parentNode.offsetTop+key.offsetTop+this.offsetTop
-            
+          
           vizwhiz.tooltip.create({
             "id": "key_reset",
             "x": x_pos,
