@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-06 16:30-0400\n"
+"POT-Creation-Date: 2013-09-11 18:17-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -18,16 +18,15 @@ msgstr ""
 "Generated-By: Babel 0.9.6\n"
 
 #: dataviva/html/home.html:14
-msgid "Visualizing Brazil"
-msgstr "Visualizando Brasil"
+msgid "Visualizing Minas Gerais and other Brazilian States"
+msgstr "Visualizando Minas Gerais e os demais estados brasileiros"
 
 #: dataviva/html/home.html:15
 msgid ""
-"Discover new meaning from economic data about Minas Gerais. Here are some"
-" good places to start:"
-msgstr ""
-"Descubra um novo significado a partir dos dados econômicos sobre Minas "
-"Gerais. Aqui estão alguns bons lugares para iniciar:"
+"DataViva is an initiative of the Government of Minas Gerais which seeks "
+"to create an innovative and creative data visualization tool. Would you "
+"like to see some visualizations? Below are some good places to start:"
+msgstr "O DataViva é uma iniciativa do Governo de Minas Gerais, que busca contribuir com uma ferramenta de visualização de dados em modos inovadores e criativos. Que tal construir a sua visualização? Abaixo estão alguns bons lugares para iniciar:"
 
 #: dataviva/html/home.html:19 dataviva/html/templates/site.html:14
 msgid "Guide"
@@ -76,32 +75,32 @@ msgstr "Glossário"
 #: dataviva/html/about/apps/geo_map.html:3 dataviva/html/apps/index.html:20
 #: dataviva/html/templates/about.html:38
 msgid "Geo Map"
-msgstr "Geo Map"
+msgstr "Mapa"
 
 #: dataviva/html/about/apps/network.html:3 dataviva/html/apps/index.html:24
 #: dataviva/html/templates/about.html:42
 msgid "Network"
-msgstr "Network"
+msgstr "Rede"
 
 #: dataviva/html/about/apps/occugrid.html:3 dataviva/html/apps/index.html:42
 #: dataviva/html/templates/about.html:58
 msgid "Occugrid"
-msgstr "Occugrid"
+msgstr "Ocupações"
 
 #: dataviva/html/about/apps/rings.html:3 dataviva/html/apps/index.html:30
 #: dataviva/html/templates/about.html:46
 msgid "Rings"
-msgstr "Círculos"
+msgstr "Anéis"
 
 #: dataviva/html/about/apps/scatter.html:3 dataviva/html/apps/index.html:34
 #: dataviva/html/templates/about.html:50
 msgid "Scatter"
-msgstr "Disseminar"
+msgstr "Dispersão"
 
 #: dataviva/html/about/apps/stacked.html:3 dataviva/html/apps/index.html:16
 #: dataviva/html/templates/about.html:34
 msgid "Stacked"
-msgstr "Empilhado"
+msgstr "Histórico"
 
 #: dataviva/html/about/apps/tree_map.html:3 dataviva/html/apps/index.html:12
 #: dataviva/html/templates/about.html:30
@@ -223,7 +222,7 @@ msgstr "Construtor de Aplicativos"
 
 #: dataviva/html/apps/embed.html:38
 msgid "Change Output"
-msgstr "Alterar Output"
+msgstr "Alterar Visualização"
 
 #: dataviva/html/apps/embed.html:100
 msgid "Refresh the App"
@@ -255,7 +254,7 @@ msgstr "Qual aplicativo você gostaria de desenvolver?"
 
 #: dataviva/html/apps/index.html:38 dataviva/html/templates/about.html:54
 msgid "Compare"
-msgstr "Comparar"
+msgstr "Compare"
 
 #: dataviva/html/ask/answer.html:5 dataviva/html/ask/ask.html:4
 #: dataviva/html/ask/ask.html:54 dataviva/html/ask/questions.html:4
@@ -395,15 +394,17 @@ msgstr "adicionar uma localidade"
 
 #: dataviva/html/data/query.html:87 dataviva/html/data/select.html:18
 msgid "Industries"
-msgstr "Indústrias"
+msgstr "Atividades Econômicas"
 
 #: dataviva/html/data/query.html:101
 msgid "Showing all industries until a filter is selected."
-msgstr "Mostrando todas as indústrias até que um filtro seja selecionado."
+msgstr ""
+"Mostrando todas as atividades econômicas até que um filtro seja "
+"selecionado."
 
 #: dataviva/html/data/query.html:104
 msgid "add an industry"
-msgstr "adicionar uma indústria"
+msgstr "adicionar uma atividade econômica"
 
 #: dataviva/html/data/query.html:115 dataviva/html/data/select.html:23
 msgid "Occupations"
@@ -459,7 +460,7 @@ msgstr "Qual classificação você gostaria de pesquisar?"
 
 #: dataviva/html/data/select.html:13 dataviva/html/guide/industry.html:10
 msgid "Product Exports"
-msgstr "Exportações de Produtos"
+msgstr "Produtos Exportados"
 
 #: dataviva/html/data/select.html:27
 msgid "Municipalities"
@@ -477,16 +478,7 @@ msgstr "Países"
 msgid "Oh no! The page you've requested does not exist."
 msgstr "Oh, não! A página que você solicitou não existe."
 
-#: dataviva/html/general/access.html:138
-#, python-format
-msgid ""
-"Until we are able to complete extensive cross-browser compatibility, "
-"please use %(chrome)s to view this site."
-msgstr ""
-"Até que possamos oferecer uma extensa compatibilidade entre Browsers, "
-"utilize o %(chrome)s para datavivaizar este site."
-
-#: dataviva/html/general/access.html:148
+#: dataviva/html/general/access.html:142
 #, python-format
 msgid ""
 "%(note)s: This site is a work in progress. We are working hard everyday "
@@ -496,14 +488,9 @@ msgstr ""
 "todos os dias, para corrigir eventuais falhas e melhorar a experiência do"
 " usuário."
 
-#: dataviva/html/general/access.html:148
+#: dataviva/html/general/access.html:142
 msgid "Note"
 msgstr "Nota"
-
-#: dataviva/html/general/access.html:152
-#, python-format
-msgid "If you have any questions, e-mail: %(email)s"
-msgstr "Em caso de dúvidas, envie um e-mail para: %(email)s"
 
 #: dataviva/html/general/selector.html:3
 msgid "Filter Selection"
@@ -534,7 +521,7 @@ msgstr "Quais são %(word)s?"
 
 #: dataviva/html/guide/bra.html:15
 msgid "the industrial opportunities"
-msgstr "as oportunidades industriais"
+msgstr "as oportunidades econômicas"
 
 #: dataviva/html/guide/bra.html:21
 #, python-format
@@ -543,12 +530,12 @@ msgstr "Como posso %(word)s?"
 
 #: dataviva/html/guide/bra.html:21
 msgid "attract an industry"
-msgstr "atrair uma indústria"
+msgstr "atrair uma atividade econômica"
 
 #: dataviva/html/guide/bra.html:27 dataviva/html/guide/bra.html:35
 #, python-format
 msgid "Which industries are %(word)s?"
-msgstr "Quais indústrias estão em %(word)s?"
+msgstr "Quais atividades econômicas estão em %(word)s?"
 
 #: dataviva/html/guide/bra.html:27 dataviva/html/guide/cbo.html:39
 msgid "growing"
@@ -569,7 +556,7 @@ msgstr "força de trabalho"
 
 #: dataviva/html/guide/bra.html:47
 msgid "the present industries"
-msgstr "as indústrias atuais"
+msgstr "as atividades econômicas atuais"
 
 #: dataviva/html/guide/cbo.html:15
 msgid "the fastest growing occupations"
@@ -586,17 +573,17 @@ msgstr "Quais %(word)s as empregam?"
 
 #: dataviva/html/guide/cbo.html:33
 msgid "industries"
-msgstr "indústrias"
+msgstr "atividades"
 
 #: dataviva/html/guide/cbo.html:39
 #, python-format
 msgid "Where is their employement %(word)s the fastest?"
-msgstr "Aonde o emprego nestas indústrias vem %(word)s mais rapidamente?"
+msgstr "Aonde o emprego nestas atividades vem %(word)s mais rapidamente?"
 
 #: dataviva/html/guide/cbo.html:47
 #, python-format
 msgid "What are their %(word)s?"
-msgstr "Quais são as %(word)s nestas indústrias?"
+msgstr "Quais são as %(word)s nestas atividades?"
 
 #: dataviva/html/guide/cbo.html:47
 msgid "career alternatives"
@@ -618,7 +605,7 @@ msgstr "Não"
 #: dataviva/html/guide/hs.html:13
 #, python-format
 msgid "Which %(word)s import them?"
-msgstr "Quais são os %(word)s que importam destas indústrias?"
+msgstr "Quais são os %(word)s que importam destas atividades?"
 
 #: dataviva/html/guide/hs.html:13
 msgid "countries"
@@ -640,7 +627,7 @@ msgstr "Quais indústrias %(word)s com elas?"
 
 #: dataviva/html/guide/hs.html:27 dataviva/html/guide/isic.html:22
 msgid "co-locate"
-msgstr "coexistem"
+msgstr "são conectadas"
 
 #: dataviva/html/guide/index.html:7
 msgid "What's on your mind?"
@@ -715,7 +702,7 @@ msgstr "Ocupação"
 
 #: dataviva/html/profiles/index.html:24
 msgid "Product Export"
-msgstr "Exportação de Produto"
+msgstr "Produto Exportado"
 
 #: dataviva/html/profiles/index.html:28
 msgid "Export Destination"

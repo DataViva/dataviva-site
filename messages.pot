@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-06 16:30-0400\n"
+"POT-Creation-Date: 2013-09-11 18:17-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,14 @@ msgstr ""
 "Generated-By: Babel 0.9.6\n"
 
 #: dataviva/html/home.html:14
-msgid "Visualizing Brazil"
+msgid "Visualizing Minas Gerais and other Brazilian States"
 msgstr ""
 
 #: dataviva/html/home.html:15
 msgid ""
-"Discover new meaning from economic data about Minas Gerais. Here are some"
-" good places to start:"
+"DataViva is an initiative of the Government of Minas Gerais which seeks "
+"to create an innovative and creative data visualization tool. Would you "
+"like to see some visualizations? Below are some good places to start:"
 msgstr ""
 
 #: dataviva/html/home.html:19 dataviva/html/templates/site.html:14
@@ -469,27 +470,15 @@ msgstr ""
 msgid "Oh no! The page you've requested does not exist."
 msgstr ""
 
-#: dataviva/html/general/access.html:138
-#, python-format
-msgid ""
-"Until we are able to complete extensive cross-browser compatibility, "
-"please use %(chrome)s to view this site."
-msgstr ""
-
-#: dataviva/html/general/access.html:148
+#: dataviva/html/general/access.html:142
 #, python-format
 msgid ""
 "%(note)s: This site is a work in progress. We are working hard everyday "
 "to fix bugs and improve the user experience."
 msgstr ""
 
-#: dataviva/html/general/access.html:148
+#: dataviva/html/general/access.html:142
 msgid "Note"
-msgstr ""
-
-#: dataviva/html/general/access.html:152
-#, python-format
-msgid "If you have any questions, e-mail: %(email)s"
 msgstr ""
 
 #: dataviva/html/general/selector.html:3

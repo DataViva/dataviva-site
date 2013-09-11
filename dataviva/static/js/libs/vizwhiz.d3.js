@@ -465,7 +465,18 @@ vizwhiz.tooltip.create = function(params) {
       
     var val_width = 0
       
+    var last_group = null
     params.data.forEach(function(d,i){
+      
+      if (d.group) {
+        if (last_group != d.group) {
+          last_group = d.group
+          data_container.append("div")
+            .attr("class","vizwhiz_tooltip_data_title")
+            .text(d.group)
+        }
+      }
+      
       var block = data_container.append("div")
         .attr("class","vizwhiz_tooltip_data_block")
         
@@ -485,6 +496,7 @@ vizwhiz.tooltip.create = function(params) {
       if (w > val_width) val_width = w
           
       if (i != params.data.length-1) {
+        if ((d.group && d.group == params.data[i+1].group) || !d.group && !params.data[i+1].group)
         data_container.append("div")
           .attr("class","vizwhiz_tooltip_data_seperator")
       }
@@ -504,8 +516,6 @@ vizwhiz.tooltip.create = function(params) {
     
   if (params.html && !params.fullscreen) {
     data_container.append("div")
-      .style("padding","3px")
-      .style("margin-bottom","3px")
       .html(params.html)
   }
   
@@ -1860,31 +1870,54 @@ vizwhiz.viz = function() {
     }
 
     if (vars.tooltip_info instanceof Array) var a = vars.tooltip_info
-    else var a = vars.tooltip_info[length]
+    else if (vars.tooltip_info[length]) var a = vars.tooltip_info[length]
+    else var a = vars.tooltip_info
     
-    if (a.indexOf(vars.value_var) < 0) a.push(vars.value_var)
-    if (["stacked","pie_scatter"].indexOf(vars.type) >= 0
-         && a.indexOf(vars.xaxis_var) < 0) a.push(vars.xaxis_var)
-    if (["stacked","pie_scatter"].indexOf(vars.type) >= 0
-         && a.indexOf(vars.yaxis_var) < 0) a.push(vars.yaxis_var)
-    
-    var tooltip_data = []
-    a.forEach(function(t){
-      var value = find_variable(id,t)
+    function format_key(key,group) {
+      if (!group) var group = null
+      else var group = vars.text_format(group)
+      
+      var value = find_variable(id,key)
       if (value !== false) {
-        var name = vars.text_format(t),
-            h = t == tooltip_highlight
-            
+        var name = vars.text_format(key),
+            h = key == tooltip_highlight
+
         if (typeof value == "string") {
-          var val = vars.text_format(value,t)
+          value = value.toString()
+          var val = vars.text_format(value,key)
         }
         else if (typeof value == "number") {
-          var val = vars.number_format(value,t)
+          var val = vars.number_format(value,key)
         }
-        
-        if (val) tooltip_data.push({"name": name, "value": val, "highlight": h})
+      
+        if (val) tooltip_data.push({"name": name, "value": val, "highlight": h, "group": group})
       }
-    })
+      
+    }
+       
+    var tooltip_data = []
+    if (a instanceof Array) {
+    
+      if (a.indexOf(vars.value_var) < 0) a.push(vars.value_var)
+      if (["stacked","pie_scatter"].indexOf(vars.type) >= 0
+           && a.indexOf(vars.xaxis_var) < 0) a.push(vars.xaxis_var)
+      if (["stacked","pie_scatter"].indexOf(vars.type) >= 0
+           && a.indexOf(vars.yaxis_var) < 0) a.push(vars.yaxis_var)
+         
+      a.forEach(function(t){
+        format_key(t)
+      })
+    
+    }
+    else {
+      
+      for (group in a) {
+        a[group].forEach(function(t){
+          format_key(t,group)
+        })
+      }
+      
+    }
     
     return tooltip_data
     
@@ -2965,7 +2998,7 @@ vizwhiz.network = function(vars) {
           
             var tooltip_data = get_tooltip_data(vars.highlight)
           
-            var tooltip_appends = "<div class='vizwhiz_network_title'>Primary Connections</div>"
+            var tooltip_appends = "<div class='vizwhiz_tooltip_data_title'>Primary Connections</div>"
       
             prim_nodes.forEach(function(n){
             
@@ -6264,7 +6297,7 @@ vizwhiz.rings = function(vars) {
         
       if (typeof html == "string") html = "<br>"+html
 
-      var tooltip_appends = "<div class='vizwhiz_network_title'>Primary Connections</div>"
+      var tooltip_appends = "<div class='vizwhiz_tooltip_data_title'>Primary Connections</div>"
 
       vars.connections[vars.highlight].forEach(function(n){
       

@@ -133,12 +133,6 @@
     <div id="fullscreen"></div>
     <div class="login_container">
       <div class="logo"></div>
-      <div class="text">
-        {% autoescape false %}
-        {{ _('Until we are able to complete extensive cross-browser compatibility, please use %(chrome)s to view this site.', chrome = '<a href="http://www.google.com/chrome/" target="_blank"><b>%s</b></a>' % ('Google Chrome')) }}
-        {% endautoescape %}
-      <br><br>
-      </div>
       <form action="" method="post" name="">
           {{ form.pw() }}
       </form>
@@ -147,10 +141,7 @@
         {% autoescape false %}
         {{ _('%(note)s: This site is a work in progress. We are working hard everyday to fix bugs and improve the user experience.', note = '<b>%s</b>' % (_('Note'))) }}
         {% endautoescape %}
-      <br><br>
-        {% autoescape false %}
-        {{ _('If you have any questions, e-mail: %(email)s', email = '<br><a href="mailto:help@growth-ventures.com?Subject=DataViva">%s</a>' % ('help@growth-ventures.com')) }}
-        {% endautoescape %}
+        <br>
       </div>
     </div>
   </body>

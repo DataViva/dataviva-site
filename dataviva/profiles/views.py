@@ -44,7 +44,7 @@ def index(category = None, id = None):
         if category == "cbo":
             article = u"uma profissão"
         elif category == "isic":
-            article = u"uma indústria"
+            article = u"uma atividade econômica"
         elif category == "hs":
             article = u"um produto"
         elif category == "bra":

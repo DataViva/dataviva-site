@@ -146,7 +146,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
         if selector == "cbo":
             article = u"uma profissão"
         elif selector == "isic":
-            article = u"uma indústria"
+            article = u"uma atividade econômica"
         elif selector == "hs":
             article = u"um produto"
         elif selector == "bra":
