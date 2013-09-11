@@ -1,4 +1,4 @@
-from dataviva import db
+from dataviva import db, __latest_year__
 from dataviva.utils import AutoSerialize, exist_or_404
 from sqlalchemy import func, Float
 from sqlalchemy.sql.expression import cast
@@ -16,31 +16,31 @@ class Stats(object):
         attr_type = self.__class__.__name__.lower()
         
         if attr_type == "bra":
-            stats.append(self.get_top_attr(Ybi, "wage", attr_type, "isic", Yi))
-            stats.append(self.get_top_attr(Ybo, "wage", attr_type, "cbo", Yi))
-            stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "hs", Yw))
-            stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "wld", Yw))
-            stats.append({"name": "wage", "value": self.get_val(Yb_rais, "wage", attr_type, Yi)})
-            stats.append({"name": "val_usd", "value": self.get_val(Yb_secex, "val_usd", attr_type, Yw)})
+            stats.append(self.get_top_attr(Ybi, "wage", attr_type, "isic", "rais"))
+            stats.append(self.get_top_attr(Ybo, "wage", attr_type, "cbo", "rais"))
+            stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "hs", "secex"))
+            stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "wld", "secex"))
+            stats.append({"name": "wage", "value": self.get_val(Yb_rais, "wage", attr_type, "rais")})
+            stats.append({"name": "val_usd", "value": self.get_val(Yb_secex, "val_usd", attr_type, "secex")})
         elif attr_type == "isic":
-            dataset = Yi
+            dataset = "rais"
             stats.append(self.get_top_attr(Ybi, "wage", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Yio, "wage", attr_type, "cbo", dataset))
             stats.append({"name": "wage", "value": self.get_val(Yi, "wage", attr_type, dataset)})
         elif attr_type == "cbo":
-            dataset = Yi
+            dataset = "rais"
             stats.append(self.get_top_attr(Ybo, "wage", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Yio, "wage", attr_type, "isic", dataset))
             stats.append({"name": "wage", "value": self.get_val(Yo, "wage", attr_type, dataset)})
         elif attr_type == "hs":
-            dataset = Yw
+            dataset = "secex"
             stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "wld", dataset))
             stats.append({"name": "val_usd", "value": self.get_val(Yp, "val_usd", attr_type, dataset)})
             stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yp, "val_usd_growth_pct", attr_type, dataset)})
             stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yp, "val_usd_growth_pct_5", attr_type, dataset)})
         elif attr_type == "wld":
-            dataset = Yw
+            dataset = "secex"
             stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "hs", dataset))
             stats.append({"name": "val_usd", "value": self.get_val(Yw, "val_usd", attr_type, dataset)})
@@ -77,15 +77,9 @@ class Stats(object):
             # Make sure the bra_id requested actually exists in the DB
             bras = [exist_or_404(Bra, bra_id).serialize() for bra_id in bras]
         return bras
-    
-    @staticmethod
-    def get_latest_year(tbl):
-        latest_year = db.session.query(getattr(tbl, "year").distinct()) \
-                            .order_by(getattr(tbl, "year").desc()).first()[0]
-        return latest_year
 
     def get_top_attr(self, tbl, val_var, attr_type, key, dataset):
-        latest_year = self.get_latest_year(dataset)
+        latest_year = __latest_year__[dataset]
         if key == "bra":
             length = 8
         elif key == "isic" or key == "wld":
@@ -136,7 +130,7 @@ class Stats(object):
         return {"name": "top_{0}".format(key), "value": obj.name(), "id": obj.id}
 
     def get_val(self, tbl, val_var, attr_type, dataset):
-        latest_year = self.get_latest_year(dataset)
+        latest_year = __latest_year__[dataset]
         
         if attr_type == "bra":
             agg = {'val_usd':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,

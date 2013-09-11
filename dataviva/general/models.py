@@ -1,6 +1,6 @@
 from flask import g
 from dataviva import db
-from dataviva.utils import AutoSerialize
+from dataviva.utils import AutoSerialize, title_case
 from dataviva.attrs.models import Bra, Isic, Hs, Cbo, Wld
 from dataviva.apps.models import Build
 
@@ -83,7 +83,7 @@ class Plan(db.Model, AutoSerialize):
                     if article_search:
                         title = title.replace(article_search.group(0), and_joiner.join([get_article(b, article_search.group(1)) for b in getattr(self,filter)]))
 
-        return title
+        return title_case(title)
         
     def set_attr(self, id, type):
         if type == "bra":

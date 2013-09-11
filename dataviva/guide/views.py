@@ -2,6 +2,7 @@
 from flask import Blueprint, request, render_template, g, url_for
 from sqlalchemy import func
 from datetime import datetime
+from werkzeug import urls
 
 from dataviva import db
 from dataviva.attrs.models import Bra, Isic, Cbo, Hs, Wld
@@ -85,7 +86,8 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
             
             build = {}
             build["url"] = "/apps/embed/{0}{1}".format(pb.build.all()[0].url(),pb.variables)
-            build["title"] = pb.build.all()[0].title()
+            params = dict(urls.url_decode(pb.variables[1:]))
+            build["title"] = pb.build.all()[0].title(**params)
             build["type"] = pb.build.all()[0].app.type
             build["position"] = pb.position
             builds[pb.position-1] = build

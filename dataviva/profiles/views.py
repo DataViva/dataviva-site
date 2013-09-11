@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, request, render_template, g, url_for
 from sqlalchemy import func, distinct
+from werkzeug import urls
 
 from dataviva import db
 from dataviva.attrs import models as attrs
@@ -172,7 +173,8 @@ def profiles(category = None, id = None):
         # "table_data":table_data}
         
         b["url"] = "/apps/embed/{0}{1}".format(build.url(),pb.variables)
-        b["title"] = build.title()
+        params = dict(urls.url_decode(pb.variables[1:]))
+        b["title"] = build.title(**params)
         b["type"] = build.app.type
         b["position"] = pb.position
         b["output"] = build.output

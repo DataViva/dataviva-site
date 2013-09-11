@@ -27,6 +27,9 @@ db = SQLAlchemy(app)
 # Set session store as server side (Redis)
 app.session_interface = RedisSessionInterface()
 
+# Global Latest Year Variables
+__latest_year__ = {"secex": 2011, "rais": 2010}
+
 # login manager for user management
 lm = LoginManager()
 lm.setup_app(app)

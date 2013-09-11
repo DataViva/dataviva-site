@@ -129,10 +129,7 @@
   
   <script type="text/javascript">
   
-    var max_year = {
-      "secex": "2011",
-      "rais": "2010"
-    }
+    var max_year = {{ g.latest_year|safe }}
     
     var loading = new dataviva.ui.loading("body")
     loading.color("#ffffff")
@@ -188,7 +185,7 @@
     /* App Functions and Variables */
     /*******************************/
     
-    var app = {}, last_app = null, last_depth = dataviva.format.text("bra_8_plural")
+    var app = {}, last_app = null
     app.build = null
     app.url = "{{ current_build.url() }}"
     app.data = {}
@@ -453,7 +450,7 @@
       d3.select("#ui_bottom").selectAll("*").remove();
       d3.select("#app_controls").selectAll("*").remove();
       vizwhiz.tooltip.remove();
-      last_depth = dataviva.format.text("bra_8_plural")
+      last_depth = "bra_8"
       
       d3.json("/apps/embed/"+app.url)
         .header("X-Requested-With", "XMLHttpRequest")
@@ -854,7 +851,6 @@
       /************************/
       /* Gloabl App Variables */
       /************************/
-      if (app.build.app.type != "stacked") app.build.title += " ("+app.vars.year+")"
       if (["bra","wld"].indexOf(app.build.output) >= 0) var style = "default"
       else var style = "knockout"
       
@@ -1039,14 +1035,11 @@
         app.vars[type] = value
         builder.url()
         if (type == "year" && app.build.app.type != "rings") {
-          app.build.title = app.build.title.replace(old_value,value)
-          if (app.build.app.type != "rings") {
-            builder.key()
-            app.resize()
-          }
+          builder.key()
+          app.resize()
         }
         
-        if (type == "depth") app.title_update()
+        if (type == "depth" || type == "year") app.title_update()
 
         if (type == "axes") {
           d3.select("#app").call(app.viz.xaxis_var("cp_bra_1_"+value).yaxis_var("cp_bra_0_"+value))
@@ -1345,7 +1338,6 @@ val)+": ", "suffix": ""};
           title = app.build.app.name+"-"+app.build.title,
           columns = app.tooltip.long
           
-      if (app.build.app.type != "stacked") title += " ("+app.vars.year+")"
       title = title.removeAccents().split(" ").join("_")
       
       var form = document.getElementById("svgform");
@@ -1373,19 +1365,37 @@ val)+": ", "suffix": ""};
     }
     
     app.title_update = function() {
+      app.build.title = app.build.title.toTitleCase()
       if (app.build.output == "bra") {
         if (app.vars.depth) {
-          new_depth = dataviva.format.text(app.vars.depth+"_plural")
+          var new_depth = dataviva.format.text(app.vars.depth)
+          var old_depth = dataviva.format.text(last_depth)
+          if (new_depth == "Municipalidade") new_depth = "Município"
+          if (old_depth == "Municipalidade") old_depth = "Município"
+          app.build.title = app.build.title.replace(old_depth,new_depth)
+          var new_depth = dataviva.format.text(app.vars.depth+"_plural")
+          var old_depth = dataviva.format.text(last_depth+"_plural")
           if (new_depth == "Municipalidades") new_depth = "Municípios"
-          if (last_depth == "Municipalidades") last_depth = "Municípios"
-          app.build.title = app.build.title.replace(last_depth,new_depth)
-          last_depth = new_depth
+          if (old_depth == "Municipalidades") old_depth = "Municípios"
+          app.build.title = app.build.title.replace(old_depth,new_depth)
+          last_depth = app.vars.depth
         }
         else if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
           var old_word = dataviva.format.text("bra_8_plural")
           var new_word = dataviva.format.text("bra_2_plural")
           app.build.title = app.build.title.replace(old_word,new_word)
         }
+      }
+      if (app.vars.year && app.build.app.type != "stacked") {
+        if (app.build.title.indexOf("(") < 0) {
+          app.build.title += " ("+app.vars.year+")"
+        }
+        else {
+          app.build.title = app.build.title.replace(/\(.*?\)/, "("+app.vars.year+")")
+        }
+      }
+      if (parent.update_title) {
+        parent.update_title(window.frameElement.id,app.build.title,app.build.app.type)
       }
     }
     
@@ -1431,7 +1441,7 @@ val)+": ", "suffix": ""};
         box.select("."+build.dataset).append("div")
           .attr("id",build.url)
           .attr("class","output "+c+" icon "+build.app.type)
-          .html(build.title)
+          .html(build.title.toTitleCase())
           .on(vizwhiz.evt.click,function(){
             app.start(this.id)
           })

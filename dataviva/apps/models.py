@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 from flask import g
-from dataviva import db
-from dataviva.utils import AutoSerialize
+from dataviva import db, __latest_year__
+from dataviva.utils import AutoSerialize, title_case
 from dataviva.attrs.models import Bra, Isic, Hs, Cbo, Wld
 
 import ast, re
@@ -208,6 +209,7 @@ class Build(db.Model, AutoSerialize):
     
     '''Returns the english language title of this build.'''
     def title(self, **kwargs):
+        
         lang = g.locale
         if "lang" in kwargs:
             lang = kwargs["lang"]
@@ -215,7 +217,30 @@ class Build(db.Model, AutoSerialize):
         title_lang = "title_en" if lang == "en" else "title_pt"
         name_lang = "name_en" if lang == "en" else "name_pt"
         
-        title = getattr(self, title_lang)
+        title = title_case(getattr(self, title_lang))
+        
+        depths = {"en":{"plural":{},"single":{}},"pt":{"plural":{},"single":{}}}
+        depths["en"]["single"] = {"2":u"State","4":u"Mesoregion","8":u"Municipality"}
+        depths["en"]["plural"] = {"2":u"States","4":u"Mesoregions","8":u"Municipalities"}
+        depths["pt"]["single"] = {"2":u"Estado","4":u"Mesorregião","8":u"Município"}
+        depths["pt"]["plural"] = {"2":u"Estados","4":u"Mesorregiões","8":u"Municípios"}
+        
+        if "depth" in kwargs and u"bra_" in kwargs["depth"][0] and kwargs["depth"][0] != "bra_8":
+            if depths[lang]["plural"]["8"] in title:
+                title = title.replace(depths[lang]["plural"]["8"],depths[lang]["plural"][kwargs["depth"][0][4:]])
+            if depths[lang]["single"]["8"] in title:
+                title = title.replace(depths[lang]["single"]["8"],depths[lang]["single"][kwargs["depth"][0][4:]])
+                
+        if self.output == "bra" and self.bra[0].id == "all":
+             title = title.replace(depths[lang]["plural"]["8"],depths[lang]["plural"]["2"])
+         
+        if self.app_id != 2:    
+            if "year" in kwargs:
+                year = kwargs["year"]
+            else:
+                year = __latest_year__[self.dataset]
+            
+            title += " ({0})".format(year)
         
         def get_article(attr, article):
             if attr.article_pt:
@@ -269,7 +294,7 @@ class Build(db.Model, AutoSerialize):
                 if article_search:
                     title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.bra]))
 
-        return title
+        return title_case(title)
             
 
     def serialize(self, **kwargs):

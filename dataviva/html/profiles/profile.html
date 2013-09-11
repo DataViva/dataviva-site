@@ -70,6 +70,16 @@
         }
       })
       
+    function update_title(id,title,app) {
+      d3.select("#app"+id.substr(6,1))
+        .attr("class",function(){
+          var c = this.className.split(" ")
+          c[4] = app
+          return c.join(" ")
+        })
+        .text(title)
+    }
+      
     function slide(id) {
       sliding = true
       var id = id.substring(3)

@@ -1,4 +1,4 @@
-import cStringIO, gzip, pickle
+import cStringIO, gzip, pickle, re
 from re import sub
 from werkzeug.datastructures import CallbackDict
 from jinja2 import Markup
@@ -144,6 +144,23 @@ def parse_years(year_str):
         # we allow a set of years (with '+' between)
         years = [int(y) for y in year_str.split("+")]
     return years
+    
+''' Titlecase Function '''
+def title_case(string):
+    exceptions = ['A', 'An', 'And', 'As', 'At', 'But', 'By', 'For', 'From', 'If', \
+              'In', 'Into', 'Near', 'Nor', 'Of', 'On', 'Onto', 'Or', 'That', \
+              'The', 'To', 'With', 'Via', 'Vs', 'Vs.', \
+              'Um', 'Uma', 'E', 'Como', 'Em', 'No', 'Na', 'Mas', 'Por', \
+              'Para', 'Pelo', 'Pela', 'De', 'Do', 'Da', 'Se', 'Perto', 'Nem', \
+              'Ou', 'Que', 'O', 'A', 'Com']
+    words = re.split(" ",string)
+    final = [words[0].capitalize()]
+    for word in words[1:]:
+        if word in exceptions or word.capitalize() in exceptions:
+            final.append(word.lower())
+        else:
+            final.append(word.capitalize())
+    return " ".join(final)
 
 ''' We are using a custom class for storing sessions on the serverside instead
     of clientside for persistance/security reasons. See the following:

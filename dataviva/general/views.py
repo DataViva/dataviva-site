@@ -7,7 +7,7 @@ import time
 
 mod = Blueprint('general', __name__, url_prefix='/')
 
-from dataviva import app, db, babel
+from dataviva import app, db, babel, __latest_year__
 from dataviva.general.forms import AccessForm
 
 ###############################
@@ -20,6 +20,9 @@ def before_request():
     g.timing.append(time.time())
     g.color = "#af1f24"
     g.page_type = mod.name
+    g.latest_year = {}
+    for dataset in __latest_year__:
+        g.latest_year[dataset] = __latest_year__[dataset]
     
     t1 = time.time()
     
