@@ -42,26 +42,26 @@ def index(category = None, id = None):
     
     if g.locale == "pt":
         if category == "cbo":
-            article = "uma profissão"
+            article = u"uma profissão"
         elif category == "isic":
-            article = "uma indústria"
+            article = u"uma indústria"
         elif category == "hs":
-            article = "um produto"
+            article = u"um produto"
         elif category == "bra":
-            article = "um local"
+            article = u"um local"
         elif category == "wld":
-            article = "um país"
+            article = u"um país"
     else:
         if category == "cbo":
-            article = "an occupation"
+            article = u"an occupation"
         elif category == "isic":
-            article = "an industry"
+            article = u"an industry"
         elif category == "hs":
-            article = "a product"
+            article = u"a product"
         elif category == "bra":
-            article = "a location"
+            article = u"a location"
         elif category == "wld":
-            article = "a country"
+            article = u"a country"
 
     if category:
         page = "general/selector.html"

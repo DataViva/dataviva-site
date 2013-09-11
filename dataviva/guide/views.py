@@ -144,23 +144,23 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
         
     if g.locale == "pt":
         if selector == "cbo":
-            article = "uma profissão"
+            article = u"uma profissão"
         elif selector == "isic":
-            article = "uma indústria"
+            article = u"uma indústria"
         elif selector == "hs":
-            article = "um produto"
+            article = u"um produto"
         elif selector == "bra":
-            article = "um local"
+            article = u"um local"
     else:
         if selector == "cbo":
-            article = "an occupation"
+            article = u"an occupation"
         elif selector == "isic":
-            article = "an industry"
+            article = u"an industry"
         elif selector == "hs":
-            article = "a product"
+            article = u"a product"
         elif selector == "bra":
-            article = "a location"
-            
+            article = u"a location"
+    
     return render_template(page,
         category = category,
         category_id = category_id,
