@@ -505,7 +505,7 @@
             if (app.data[app.build.data_url]) app.allyears = true
             
             if (!app.allyears && app.build.app.type != "stacked") {
-              if (!app.vars.year) {
+              if (!app.vars.year || app.vars.year > max_year[app.build.data_url.split("/")[0]]) {
                 app.vars.year = max_year[app.build.data_url.split("/")[0]]
               }
               app.build.data_url = app.build.data_url.replace("all",app.vars.year)
