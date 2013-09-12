@@ -460,6 +460,8 @@
           }
           else {
             
+            app.star(data.starred)
+            
             if (app.build && app.build.app.type != data.current_build.app.type) {
               builder.app(data.current_build.app.type,true)
             }
@@ -1306,11 +1308,23 @@ val)+": ", "suffix": ""};
       
     }
     
-    app.star = function() {
+    app.star = function(status) {
+      
+      function update_star(s) {
+        d3.select("#starred > i")
+          .attr("id","status_"+s)
+          .attr("class",function() {
+            return s == 1 ? "icon-star" : "icon-star-empty";
+          })
+      }
 
       var id = d3.select("#starred > i").attr("id")
-      var status = parseInt(id.split("_")[1],10)
-      if (status == 0) {
+      var current_status = parseInt(id.split("_")[1],10)
+      
+      if (status) {
+        update_star(status)
+      }
+      else if (current_status == 0) {
         login();
       }
       else {
@@ -1320,12 +1334,7 @@ val)+": ", "suffix": ""};
         d3.json(url)
           .header("Content-type","application/x-www-form-urlencoded")
           .post("title="+app.build.title, function(error,data) {
-            var status = data.success
-            d3.select("#starred > i")
-              .attr("id","status_"+status)
-              .attr("class",function() {
-                return status == 1 ? "icon-star" : "icon-star-empty";
-              })
+            update_star(data.success)
           })
       }
         
