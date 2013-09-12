@@ -65,6 +65,10 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     current_build.set_filter2(filter2)
     current_build.set_bra(bra_id)
     
+    '''Get the recommended app list to pass with data'''
+    recs = recommend(app_name=app_name, dataset=dataset, bra_id=bra_id, \
+                        filter1=filter1, filter2=filter2, output=output)
+    
     '''Every possible build, required by the embed page for building the build
     dropdown.
     '''
@@ -94,7 +98,8 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     if request.is_xhr:
         return jsonify({
             "current_build": current_build.serialize(),
-            "all_builds": [b.serialize() for b in all_builds]
+            "all_builds": [b.serialize() for b in all_builds],
+            "recomendations": json.loads(recs.data)
         })
     
     return render_template("apps/embed.html",
