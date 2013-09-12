@@ -99,7 +99,8 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
         return jsonify({
             "current_build": current_build.serialize(),
             "all_builds": [b.serialize() for b in all_builds],
-            "recomendations": json.loads(recs.data)
+            "recomendations": json.loads(recs.data),
+            "starred": starred
         })
     
     return render_template("apps/embed.html",
