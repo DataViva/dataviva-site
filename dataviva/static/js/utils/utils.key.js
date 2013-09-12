@@ -31,7 +31,7 @@ function Key() {
         .text(attr_type)
           
       data.sort(function(a, b){
-        if (attr_type == "geo" || attr_type == "country") {
+        if (attr_type == "bra" || attr_type == "wld") {
           var a_name = a.name
           var b_name = b.name
         } else {
