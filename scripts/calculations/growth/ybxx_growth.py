@@ -75,6 +75,7 @@ def get_growth(bra_id, years, table, val_var, columns, other_var, other_var_2):
     
     vals_for_db = []
     for c in df.columns:
+        # c = ("a0141", "6231")
         
         cleaned = df[c].fillna(0)
         if not len(cleaned):
@@ -109,10 +110,12 @@ def get_growth(bra_id, years, table, val_var, columns, other_var, other_var_2):
                     growth_data[growth_val_5][year] = v_tn - v_t0
         
         growth_data = growth_data.apply(clean_val)
+        # print growth_data
         
         for year, row in growth_data.iterrows():
             vals = [None if np.isnan(x) else x for x in row.values]
-            if len(set(vals)) > 1 and None not in set(vals):
+            # if len(set(vals)) > 1 and None not in set(vals):
+            if set(vals) != set([None]):
                 vals_for_db.append(vals + [year, bra_id, c[0], c[1]])
     
     return vals_for_db
@@ -133,6 +136,7 @@ def calc_growth(table, val_var, dataset):
     check_columns(columns, val_var, table)
     
     bras = get_all_bras(table)
+    # bras = bras[bras.index('se000000'):]
     years = get_all_years(table)
     
     lookup = {"i":"isic_id", "o":"cbo_id", "p":"hs_id", "w":"wld_id"}    
@@ -149,6 +153,9 @@ def calc_growth(table, val_var, dataset):
         add_to_db(growth_vals, table, columns, other_var, other_var_2)
 
 if __name__ == "__main__":
+    start = time.time()
+    from time import gmtime, strftime
+    print strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-t", "--table", help="the table to calculate growth for")
@@ -170,3 +177,8 @@ if __name__ == "__main__":
         val_var = "val_usd"
     
     calc_growth(table, val_var, dataset)
+    
+    print
+    print strftime("%Y-%m-%d %H:%M:%S", gmtime())
+    print time.time() - start
+    

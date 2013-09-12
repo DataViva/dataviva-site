@@ -41,6 +41,16 @@ def export(data, year, max_depth, csv_writer, keys, depth = 0):
         # raw_input([year] + keys + [data['wage'], data['num_emp'], len(data['num_est'])])
         csv_writer.writerow([year] + keys + [data['wage'], len(data['num_emp']), len(data['num_est'])])
 
+def cbo_format(cbo_code):
+    # take off last 2 digits
+    return cbo_code[:-2]
+
+def wage_format(wage):
+    # convert commas to dots
+    wage = wage.replace(",", ".")
+    # cast to float
+    return float(wage)
+
 def clean(file_path):
     '''Initialize our data dictionaries'''
     yb = defaultdict(lambda: defaultdict(int))
@@ -50,6 +60,12 @@ def clean(file_path):
     yi = defaultdict(lambda: defaultdict(int))
     yio = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
     yo = defaultdict(lambda: defaultdict(int))
+    
+    var_names = {"year":["Year", int], "est":"Establishment_ID", \
+                    "emp":"Employee_ID", "munic": "Municipality_ID", \
+                    "occ": ["BrazilianOcupation_ID", cbo_format], \
+                    "isic":"EconmicAtivity_ID_ISIC", \
+                    "wage":["AverageMonthlyWages", wage_format]}
     
     '''Open CSV file'''
     csv_reader = csv.reader(open(file_path, 'rU'), delimiter=",", quotechar='"')
@@ -65,107 +81,104 @@ def clean(file_path):
             sys.stdout.write('\r lines read: ' + str(i) + ' ' * 20)
             sys.stdout.flush() # important
         
-        try:
-            year = int(line["Year"])
-        except:
-            print "Error reading year on line {0}".format(i+1)
-            continue
+        data = var_names.copy()
+        errors = False
         
-        try:
-            est = line["Establishment_ID"]
-        except:
-            print "Error reading establishment ID on line {0}".format(i+1)
-            continue
-
-        try:
-            emp = line["Employee_ID"]
-        except:
-            print "Error reading employee ID on line {0}".format(i+1)
-            continue
-
-        try:
-            munic = line["Municipality_ID"]
-        except:
-            print "Error reading municipality ID on line {0}".format(i+1)
-            continue
-        
-        try:
-            # chop off last 2 digits since we're only using CBO_4
-            occ = line["BrazilianOcupation_ID"][:-2]
-        except:
-            print "Error reading occupation ID on line {0}".format(i+1)
-            continue
-        
-        try:
-            isic = line["EconmicAtivity_ID_ISIC"]
-        except:
+        for var, var_name in data.items():
+            formatter = None
+            if isinstance(var_name, list):
+                var_name, formatter = var_name
+            
             try:
-                isic = line["EconomicAtivity_ID_ISIC"]
-            except:
-                print "Error reading industry ID on line {0}".format(i+1)
-                continue
+                data[var] = line[var_name].strip()
+            except KeyError:
+                print
+                # print "Error reading year on line {0}".format(i+1)
+                new_col = raw_input('Could not find value for "{0}" column. '\
+                            'Set different column name? [Y/n]: ' \
+                            .format(var_name))
+                if new_col == "Y" or new_col == "y" or new_col == "yes":
+                    new_col = raw_input('New column name: ')
+                    if isinstance(var_names[var], list):
+                        var_names[var][0] = new_col
+                    else:
+                        var_names[var] = new_col
+                    try:
+                        data[var] = line[new_col].strip()
+                    except KeyError:
+                        errors = True
+                        continue
+                else:
+                    errors = True
+                    continue
+            
+            # run proper formatting
+            if formatter:
+                try:
+                    data[var] = formatter(data[var])
+                except:
+                    print "Error reading establishment ID on line {0}".format(i+1)
+                    errors = True
+                    continue
         
-        try:
-            wage = float(line["AverageMonthlyWage"].replace(",", "."))
-        except:
-            print "Error reading wage value on line {0}".format(i+1)
+        if errors:
             continue
         
-        yb[munic]["wage"] += wage
-        if isinstance(yb[munic]["num_emp"], int):
-            yb[munic]["num_emp"] = set([])
-        yb[munic]["num_emp"].add(emp)
-        if isinstance(yb[munic]["num_est"], int):
-            yb[munic]["num_est"] = set([])
-        yb[munic]["num_est"].add(est)
+        yb[data["munic"]]["wage"] += data["wage"]
+        if isinstance(yb[data["munic"]]["num_emp"], int):
+            yb[data["munic"]]["num_emp"] = set([])
+        yb[data["munic"]]["num_emp"].add(data["emp"])
+        if isinstance(yb[data["munic"]]["num_est"], int):
+            yb[data["munic"]]["num_est"] = set([])
+        yb[data["munic"]]["num_est"].add(data["est"])
         
-        ybi[munic][isic]["wage"] += wage
-        if isinstance(ybi[munic][isic]["num_emp"], int):
-            ybi[munic][isic]["num_emp"] = set([])
-        ybi[munic][isic]["num_emp"].add(emp)
-        if isinstance(ybi[munic][isic]["num_est"], int):
-            ybi[munic][isic]["num_est"] = set([])
-        ybi[munic][isic]["num_est"].add(est)
+        ybi[data["munic"]][data["isic"]]["wage"] += data["wage"]
+        if isinstance(ybi[data["munic"]][data["isic"]]["num_emp"], int):
+            ybi[data["munic"]][data["isic"]]["num_emp"] = set([])
+        ybi[data["munic"]][data["isic"]]["num_emp"].add(data["emp"])
+        if isinstance(ybi[data["munic"]][data["isic"]]["num_est"], int):
+            ybi[data["munic"]][data["isic"]]["num_est"] = set([])
+        ybi[data["munic"]][data["isic"]]["num_est"].add(data["est"])
         
-        ybio[munic][isic][occ]["wage"] += wage
-        if isinstance(ybio[munic][isic][occ]["num_emp"], int):
-            ybio[munic][isic][occ]["num_emp"] = set([])
-        ybio[munic][isic][occ]["num_emp"].add(emp)
-        if isinstance(ybio[munic][isic][occ]["num_est"], int):
-            ybio[munic][isic][occ]["num_est"] = set([])
-        ybio[munic][isic][occ]["num_est"].add(est)
+        ybio[data["munic"]][data["isic"]][data["occ"]]["wage"] += data["wage"]
+        if isinstance(ybio[data["munic"]][data["isic"]][data["occ"]]["num_emp"], int):
+            ybio[data["munic"]][data["isic"]][data["occ"]]["num_emp"] = set([])
+        ybio[data["munic"]][data["isic"]][data["occ"]]["num_emp"].add(data["emp"])
+        if isinstance(ybio[data["munic"]][data["isic"]][data["occ"]]["num_est"], int):
+            ybio[data["munic"]][data["isic"]][data["occ"]]["num_est"] = set([])
+        ybio[data["munic"]][data["isic"]][data["occ"]]["num_est"].add(data["est"])
         
-        ybo[munic][occ]["wage"] += wage
-        if isinstance(ybo[munic][occ]["num_emp"], int):
-            ybo[munic][occ]["num_emp"] = set([])
-        ybo[munic][occ]["num_emp"].add(emp)
-        if isinstance(ybo[munic][occ]["num_est"], int):
-            ybo[munic][occ]["num_est"] = set([])
-        ybo[munic][occ]["num_est"].add(est)
+        ybo[data["munic"]][data["occ"]]["wage"] += data["wage"]
+        if isinstance(ybo[data["munic"]][data["occ"]]["num_emp"], int):
+            ybo[data["munic"]][data["occ"]]["num_emp"] = set([])
+        ybo[data["munic"]][data["occ"]]["num_emp"].add(data["emp"])
+        if isinstance(ybo[data["munic"]][data["occ"]]["num_est"], int):
+            ybo[data["munic"]][data["occ"]]["num_est"] = set([])
+        ybo[data["munic"]][data["occ"]]["num_est"].add(data["est"])
         
-        yi[isic]["wage"] += wage
-        if isinstance(yi[isic]["num_emp"], int):
-            yi[isic]["num_emp"] = set([])
-        yi[isic]["num_emp"].add(emp)
-        if isinstance(yi[isic]["num_est"], int):
-            yi[isic]["num_est"] = set([])
-        yi[isic]["num_est"].add(est)
+        yi[data["isic"]]["wage"] += data["wage"]
+        if isinstance(yi[data["isic"]]["num_emp"], int):
+            yi[data["isic"]]["num_emp"] = set([])
+        yi[data["isic"]]["num_emp"].add(data["emp"])
+        if isinstance(yi[data["isic"]]["num_est"], int):
+            yi[data["isic"]]["num_est"] = set([])
+        yi[data["isic"]]["num_est"].add(data["est"])
         
-        yio[isic][occ]["wage"] += wage
-        if isinstance(yio[isic][occ]["num_emp"], int):
-            yio[isic][occ]["num_emp"] = set([])
-        yio[isic][occ]["num_emp"].add(emp)
-        if isinstance(yio[isic][occ]["num_est"], int):
-            yio[isic][occ]["num_est"] = set([])
-        yio[isic][occ]["num_est"].add(est)
+        yio[data["isic"]][data["occ"]]["wage"] += data["wage"]
+        if isinstance(yio[data["isic"]][data["occ"]]["num_emp"], int):
+            yio[data["isic"]][data["occ"]]["num_emp"] = set([])
+        yio[data["isic"]][data["occ"]]["num_emp"].add(data["emp"])
+        if isinstance(yio[data["isic"]][data["occ"]]["num_est"], int):
+            yio[data["isic"]][data["occ"]]["num_est"] = set([])
+        yio[data["isic"]][data["occ"]]["num_est"].add(data["est"])
         
-        yo[occ]["wage"] += wage
-        if isinstance(yo[occ]["num_emp"], int):
-            yo[occ]["num_emp"] = set([])
-        yo[occ]["num_emp"].add(emp)
-        if isinstance(yo[occ]["num_est"], int):
-            yo[occ]["num_est"] = set([])
-        yo[occ]["num_est"].add(est)
+        yo[data["occ"]]["wage"] += data["wage"]
+        if isinstance(yo[data["occ"]]["num_emp"], int):
+            yo[data["occ"]]["num_emp"] = set([])
+        yo[data["occ"]]["num_emp"].add(data["emp"])
+        if isinstance(yo[data["occ"]]["num_est"], int):
+            yo[data["occ"]]["num_est"] = set([])
+        yo[data["occ"]]["num_est"].add(data["est"])
 
         # if i > 10000:
         #     break
@@ -177,7 +190,7 @@ def clean(file_path):
     print
     print "finished reading file, writing output..."
     
-    year = str(year)
+    year = str(data["year"])
     if not os.path.exists(year):
         os.makedirs(year)
     
