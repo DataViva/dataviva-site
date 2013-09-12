@@ -1566,10 +1566,12 @@ val)+": ", "suffix": ""};
           .attr("id",obj.title+"+"+v)
           .attr("onclick","app.update('"+obj.type+"',this.value.split('+')[1])")
           
+        if (obj.title == "depth") var text = dataviva.format.text(v+"_plural")
+        else var text = dataviva.format.text(v)
+        
         div.append("label")
           .attr("for",obj.title+"+"+v)
-          .text(dataviva.format.text(
-v))
+          .text(text)
       
         if (v == obj.initial) {
           button.node().checked = true
