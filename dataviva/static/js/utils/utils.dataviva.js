@@ -177,12 +177,14 @@ dataviva.format.text = function(text,name,l) {
       "num_emp": {"en": "Employees", "pt": "Empregados"},
       "num_est": {"en": "Establishments", "pt": "Estabelecimentos"},
       "wage": {"en": "Monthly Wage", "pt": "Renda Mensal"},
+      "total_wage": {"en": "Total Monthly Wage", "pt": "Renda Mensal Totais"},
       "wage_avg": {"en": "Average Monthly Wage", "pt": "Renda Mensal M\u00e9dia"},
       "wage_avg_bra": {"en": "Brazilian Average Wage", "pt": "Sal\u00e1rio M\u00e9dio Brasileiro"},
     
       // SECEX Labels
       "secex": {"en": "Product Exports (SECEX)", "pt": "Exporta\u00e7\u00f5es de Produtos (SECEX)"},
-      "val_usd": {"en": "Export Value", "pt": "Valor de Exporta\u00e7\u00e3o"},
+      "val_usd": {"en": "Exports", "pt": "Exporta\u00e7\u00f5es"},
+      "total_val_usd": {"en": "Total Exports", "pt": "Exporta\u00e7\u00f5es Totais"},
     
       // Key Labels
       "brazil": {"en": "Brazil", "pt": "Brasil"},
@@ -257,11 +259,26 @@ dataviva.format.text = function(text,name,l) {
     
     }
     
-    if (!name) return name;
+    if (!name) return name
+    else if (name.indexOf("_stats_") > 0) {
+      var n = name.split("_")
+      var s = {"en": "Stats", "pt": "Estat\u00edsticas"}
+      return n[2]+" "+s[l]+" ("+n[0].toUpperCase()+")"
+    }
     else if(labels[name]){
       if (labels[name][l]) return labels[name][l]
       else return name.toTitleCase()
-    } 
+    }
+    else if (name.indexOf("total_") == 0) {
+      label_name = name.substr(6)
+      if (labels[label_name][l]) return labels[label_name][l]
+      else return name.toTitleCase()
+    }
+    else if (name.indexOf("population_") == 0) {
+      year = name.split("_")[1]
+      if (labels["population"][l]) return labels["population"][l] + " ("+year+")"
+      else return name.toTitleCase() + " ("+year+")"
+    }
     else return name.toTitleCase()
   
   }
@@ -341,9 +358,14 @@ dataviva.format.number = function(value,name,l) {
         "wage_growth_pct_5": ["","%"],
         "required": ["~",""]
       }
-
-  if (total_labels[name]) {
-    var labels = total_labels[name]
+      
+  if (name.indexOf("total_") == 0) {
+    var label_name = name.substr(6)
+  }
+  else var label_name = name
+  
+  if (total_labels[label_name]) {
+    var labels = total_labels[label_name]
     return_value = labels[0] + return_value + labels[1]
   }
   

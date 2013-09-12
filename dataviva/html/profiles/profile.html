@@ -15,7 +15,14 @@
     <div id="guide_title">{{ item.name() }}</div>
     
     <div class="vizwhiz_tooltip_data_container" id="guide_stats">
+      {% set last_group = "" %}
       {% for stat in item.stats() %}
+        {% if last_group != stat.group %}
+          <div class="vizwhiz_tooltip_data_title">
+            {{ format(stat.group).render(stat.group,g.locale) }}
+          </div>
+          {% set last_group = stat.group %}
+        {% endif %}
         <div class="vizwhiz_tooltip_data_block">
           <div class="vizwhiz_tooltip_data_name">{{ format(stat.name).render(stat.name,g.locale) }}</div>
           <div class="vizwhiz_tooltip_data_value">
@@ -23,12 +30,15 @@
               <a href="/profiles/{{stat.name[4:]}}/{{stat.id}}/">
             {% endif %}
               {{ format(stat.value).render(stat.name,g.locale) }}
+              {% if stat.percent and stat.percent > 0 %}({{ format(stat.percent).render("share",g.locale) }}%){% endif %}
             {% if stat.name[:3] == "top" %}
               </a>
             {% endif %}
           </div>
         </div>
-        <div class="vizwhiz_tooltip_data_seperator"></div>
+        {% if loop.last == False and stat.group == item.stats()[loop.index].group %}
+          <div class="vizwhiz_tooltip_data_seperator"></div>
+        {% endif %}
       {% endfor %}
     </div>
     
@@ -50,7 +60,7 @@
 
   <script>
       
-    var width = window.innerWidth-330,
+    var width = window.innerWidth-380,
         height = window.innerHeight-149,
         builds = {},
         sliding = false,

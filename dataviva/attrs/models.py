@@ -9,6 +9,7 @@ from flask import g
 class Stats(object):
     
     def stats(self):
+        from dataviva.attrs.models import Yb
         from dataviva.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
         from dataviva.secex.models import Ybp, Ybw, Ypw, Yb_secex, Yp, Yw
         
@@ -16,37 +17,44 @@ class Stats(object):
         attr_type = self.__class__.__name__.lower()
         
         if attr_type == "bra":
-            stats.append(self.get_top_attr(Ybi, "wage", attr_type, "isic", "rais"))
-            stats.append(self.get_top_attr(Ybo, "wage", attr_type, "cbo", "rais"))
+            stats.append(self.get_val(Yb,"population",attr_type,"population"))
+            stats.append(self.get_top_attr(Ybi, "num_emp", attr_type, "isic", "rais"))
+            stats.append(self.get_top_attr(Ybo, "num_emp", attr_type, "cbo", "rais"))
+            stats.append(self.get_val(Yb_rais, "wage", attr_type, "rais"))
             stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "hs", "secex"))
             stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "wld", "secex"))
-            stats.append({"name": "wage", "value": self.get_val(Yb_rais, "wage", attr_type, "rais")})
-            stats.append({"name": "val_usd", "value": self.get_val(Yb_secex, "val_usd", attr_type, "secex")})
+            stats.append(self.get_val(Yb_secex, "val_usd", attr_type, "secex"))
         elif attr_type == "isic":
             dataset = "rais"
-            stats.append(self.get_top_attr(Ybi, "wage", attr_type, "bra", dataset))
-            stats.append(self.get_top_attr(Yio, "wage", attr_type, "cbo", dataset))
-            stats.append({"name": "wage", "value": self.get_val(Yi, "wage", attr_type, dataset)})
+            stats.append(self.get_top_attr(Ybi, "num_emp", attr_type, "bra", dataset))
+            stats.append(self.get_top_attr(Yio, "num_emp", attr_type, "cbo", dataset))
+            stats.append(self.get_val(Yi, "wage", attr_type, dataset))
+            stats.append(self.get_val(Yi, "wage_avg", attr_type, dataset))
+            stats.append(self.get_val(Yi, "wage_avg", attr_type, dataset, __latest_year__[dataset]-5))
         elif attr_type == "cbo":
             dataset = "rais"
-            stats.append(self.get_top_attr(Ybo, "wage", attr_type, "bra", dataset))
-            stats.append(self.get_top_attr(Yio, "wage", attr_type, "isic", dataset))
-            stats.append({"name": "wage", "value": self.get_val(Yo, "wage", attr_type, dataset)})
+            stats.append(self.get_top_attr(Ybo, "num_emp", attr_type, "bra", dataset))
+            stats.append(self.get_top_attr(Yio, "num_emp", attr_type, "isic", dataset))
+            stats.append(self.get_val(Yo, "wage", attr_type, dataset))
+            stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset))
+            stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset, __latest_year__[dataset]-5))
         elif attr_type == "hs":
             dataset = "secex"
             stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "wld", dataset))
-            stats.append({"name": "val_usd", "value": self.get_val(Yp, "val_usd", attr_type, dataset)})
-            stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yp, "val_usd_growth_pct", attr_type, dataset)})
-            stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yp, "val_usd_growth_pct_5", attr_type, dataset)})
+            stats.append(self.get_val(Yp, "val_usd_growth_pct", attr_type, dataset))
+            stats.append(self.get_val(Yp, "val_usd_growth_pct_5", attr_type, dataset))
+            stats.append(self.get_val(Yp, "val_usd", attr_type, dataset))
+            stats.append(self.get_val(Yp, "val_usd", attr_type, dataset, __latest_year__[dataset]-5))
         elif attr_type == "wld":
             dataset = "secex"
             stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "hs", dataset))
-            stats.append({"name": "val_usd", "value": self.get_val(Yw, "val_usd", attr_type, dataset)})
-            stats.append({"name": "val_usd_growth_pct", "value": self.get_val(Yw, "val_usd_growth_pct", attr_type, dataset)})
-            stats.append({"name": "val_usd_growth_pct_5", "value": self.get_val(Yw, "val_usd_growth_pct_5", attr_type, dataset)})
-            stats.append({"name": "eci", "value": self.get_val(Yw, "eci", attr_type, dataset)})
+            stats.append(self.get_val(Yw, "val_usd_growth_pct", attr_type, dataset))
+            stats.append(self.get_val(Yw, "val_usd_growth_pct_5", attr_type, dataset))
+            stats.append(self.get_val(Yw, "eci", attr_type, dataset))
+            stats.append(self.get_val(Yw, "val_usd", attr_type, dataset))
+            stats.append(self.get_val(Yw, "val_usd", attr_type, dataset, __latest_year__[dataset]-5))
             
         return stats
         
@@ -120,17 +128,33 @@ class Stats(object):
         top = top.filter_by(year=latest_year) \
                     .filter(func.char_length(getattr(tbl, key+"_id")) == length) \
                     .group_by(getattr(tbl, key+"_id")) \
-                    .order_by(func.sum(getattr(tbl, val_var)).desc()).first()
+                    .order_by(func.sum(getattr(tbl, val_var)).desc())
 
+        percent = 0
         if isinstance(top,tuple):
             obj = globals()[key.title()].query.get(top[0])
         else:
-            obj = getattr(top, key)
+            obj = getattr(top.first(), key)
+            num = getattr(top.first(),val_var)
+            den = 0
+            for x in top.all():
+                value = getattr(x,val_var)
+                if value:
+                    den += value
+            percent = (num/float(den))*100
         
-        return {"name": "top_{0}".format(key), "value": obj.name(), "id": obj.id}
+        return {"name": "top_{0}".format(key), "value": obj.name(), "percent": percent, "id": obj.id, "group": "{0}_stats_{1}".format(dataset,latest_year)}
 
-    def get_val(self, tbl, val_var, attr_type, dataset):
-        latest_year = __latest_year__[dataset]
+    def get_val(self, tbl, val_var, attr_type, dataset, latest_year = None):
+        
+        if latest_year == None:
+            latest_year = __latest_year__[dataset]
+        
+        if val_var == "wage_avg":
+            calc_var = val_var
+            val_var = "wage"
+        else:
+            calc_var = None
         
         if attr_type == "bra":
             agg = {'val_usd':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
@@ -166,8 +190,21 @@ class Stats(object):
             val = total[0]
         else:
             val = getattr(total,val_var)
-                    
-        return val
+            
+        if calc_var == "wage_avg":
+            val = val/getattr(total,"num_emp")
+            
+        if val_var == "population":
+            group = ""
+            name = "population_{0}".format(latest_year)
+        else:
+            group = "{0}_stats_{1}".format(dataset,latest_year)
+            if calc_var:
+                name = calc_var
+            else:
+                name = "total_{0}".format(val_var)
+        
+        return {"name": name, "value": val, "group": group}
 
 class Isic(db.Model, AutoSerialize, Stats):
 

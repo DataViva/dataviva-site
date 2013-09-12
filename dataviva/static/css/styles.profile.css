@@ -18,7 +18,7 @@ div#guide_controls {
   padding: 10px 10px 5px 10px;
   position: fixed;
   top: 78px;
-  width: 250px;
+  width: 300px;
 }
 
 div#guide_icon {
@@ -40,14 +40,22 @@ div#guide_stats {
   margin-bottom: 5px;
 }
 
-div.vizwhiz_tooltip_data_block > div {
-  width: 117px;
+div.vizwhiz_tooltip_data_title {
+  margin-top: 5px;
+}
+
+div.vizwhiz_tooltip_data_name {
+  width: 130px;
+}
+
+div.vizwhiz_tooltip_data_value {
+  width: 150px;
 }
 
 div.guide_app {
   background-color: white;
   margin: 20px 0px;
-  margin-left: 310px;
+  margin-left: 360px;
   white-space: nowrap;
 }
 
