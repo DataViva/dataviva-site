@@ -66,8 +66,18 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     current_build.set_bra(bra_id)
     
     '''Get the recommended app list to pass with data'''
-    recs = recommend(app_name=app_name, dataset=dataset, bra_id=bra_id, \
-                        filter1=filter1, filter2=filter2, output=output)
+    filler_bra = bra_id
+    filler1 = filter1
+    filler2 = filter2
+    if output == "isic" or output == "hs":
+        filler1 = "filler"
+    elif output == "cbo" or output == "wld":
+        filler2 = "filler"
+    elif output == "bra":
+        filler_bra = "filler"
+        
+    recs = recommend(app_name=app_name, dataset=dataset, bra_id=filler_bra, \
+                        filter1=filler1, filter2=filler2, output=output)
     
     '''Every possible build, required by the embed page for building the build
     dropdown.
@@ -99,7 +109,7 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
         return jsonify({
             "current_build": current_build.serialize(),
             "all_builds": [b.serialize() for b in all_builds],
-            "recomendations": json.loads(recs.data),
+            "recommendations": json.loads(recs.data),
             "starred": starred
         })
     
@@ -167,37 +177,47 @@ def recommend(app_name=None, dataset=None, bra_id="mg", filter1=None, filter2=No
                     filter2=build_filter2).all()
         recommended['both_filters'] = []
         for b in builds:
-            b.set_bra(bra_id)
-            b.set_filter1(filter1)
-            b.set_filter2(filter2)
+            if bra_id != "filler":
+                b.set_bra(bra_id)
+            if filter1 != "filler":
+                b.set_filter1(filter1)
+            if filter2 != "filler":
+                b.set_filter2(filter2)
             recommended['both_filters'].append(b.serialize())
+    else:
 
-    '''Add any builds that rely strictly on the second filter'''
-    if build_filter2 != "all":
-        builds = Build.query.filter_by(dataset=dataset, filter1="all", 
-                    filter2=build_filter2).all()
-        recommended['filter2'] = []
-        for b in builds:
-            b.set_bra(bra_id)
-            b.set_filter2(filter2)
-            recommended['filter2'].append(b.serialize())
+        '''Add any builds that rely strictly on the second filter'''
+        if build_filter2 != "all":
+            builds = Build.query.filter_by(dataset=dataset, filter1="all", 
+                        filter2=build_filter2).all()
+            recommended['filter2'] = []
+            for b in builds:
+                if bra_id != "filler":
+                    b.set_bra(bra_id)
+                if filter2 != "filler":
+                    b.set_filter2(filter2)
+                recommended['filter2'].append(b.serialize())
     
-    '''Add any builds that rely strictly on the first filter'''
-    if build_filter1 != "all":
-        builds = Build.query.filter_by(dataset=dataset, filter1=build_filter1, 
-                    filter2="all").all()
-        recommended['filter1'] = []
-        for b in builds:
-            b.set_bra(bra_id)
-            b.set_filter1(filter1)
-            recommended['filter1'].append(b.serialize())
-
-    '''Lastly get the rest of the relevent builds'''
-    builds = Build.query.filter_by(dataset=dataset, filter1="all", filter2="all").all()
-    recommended['no_filters'] = []
-    for b in builds:
-        b.set_bra(bra_id)
-        recommended['no_filters'].append(b.serialize())
+        '''Add any builds that rely strictly on the first filter'''
+        if build_filter1 != "all":
+            builds = Build.query.filter_by(dataset=dataset, filter1=build_filter1, 
+                        filter2="all").all()
+            recommended['filter1'] = []
+            for b in builds:
+                if bra_id != "filler":
+                    b.set_bra(bra_id)
+                if filter1 != "filler":
+                    b.set_filter1(filter1)
+                recommended['filter1'].append(b.serialize())
+            
+        '''Lastly get the rest of the relevent builds'''
+        if build_filter1 == "all" and build_filter2 == "all":
+            builds = Build.query.filter_by(dataset=dataset, filter1="all", filter2="all").all()
+            recommended['no_filters'] = []
+            for b in builds:
+                if bra_id != "filler":
+                    b.set_bra(bra_id)
+                recommended['no_filters'].append(b.serialize())
     
     return jsonify(recommended)
     

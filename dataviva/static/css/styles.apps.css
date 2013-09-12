@@ -119,6 +119,14 @@ div.filter_button > div.leon.button {
   padding: 5px;
 }
 
+.vizwhiz_tooltip_large .vizwhiz_tooltip_html {
+  text-align: center;
+}
+
+.vizwhiz_tooltip_large .vizwhiz_tooltip_html .title {
+  text-align: center;
+}
+
 /*******************/
 /* Bottom Controls */
 /*******************/
