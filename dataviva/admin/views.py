@@ -12,11 +12,9 @@ from dataviva.admin.forms import AdminQuestionUpdateForm
 mod = Blueprint('admin', __name__, url_prefix='/admin')
 
 
-# @mod.before_request
-# def before_request():
-#     if not g.user.is_admin():
-#         flash('You need admin privledges for this section of the site!')
-#         return redirect(url_for('account.activity'))
+@mod.before_request
+def before_request():
+    g.page_type = "admin"
 
 ###############################
 # Views for ALL logged in users

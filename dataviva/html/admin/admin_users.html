@@ -2,28 +2,16 @@
 
 {% block title %}: {% trans %}Admin Panel{% endtrans %}{% endblock %}
 
-{% block head %}
-<style>
-table > tbody td > img {
-  width: 30px;
-  text-align: center;
-}
-</style>
-{% endblock %}
-
 {% block admin_content %}
 
-Welcome Admin!
-
-<div class="feed lightbox">
+<div class="feed">
   
   <table>
     <thead>
       <tr>
-        <th></th>
-        <th>{% trans %}Email{% endtrans %}</th>
-        <th>{% trans %}Full Name{% endtrans %}</th>
+        <th>{% trans %}User{% endtrans %}</th>
         <th>{% trans %}Nick Name{% endtrans %}</th>
+        <th>{% trans %}Email{% endtrans %}</th>
         <th>{% trans %}Role{% endtrans %}</th>
       </tr>
     </thead>
@@ -38,46 +26,53 @@ Welcome Admin!
 
 function item_formatter(container_el, activities){
   
-  roles = {0: "user", 1: "admin", 2: "super admin"}
+  roles = {"user": 0, "admin": 1}
   
   var attrs_enter = d3.select(container_el).select("tbody").selectAll("tr")
     .data(activities, function(d){ return d.nickname; })
     .enter().append("tr")
-    
-  attrs_enter.append("td")
-    .append("img")
-    .attr("src", function(d){
-      if(d.avatar) return d.avatar;
-    })
 
-  attrs_enter.append("td").text(function(d){ return d.email; })
-  attrs_enter.append("td").text(function(d){ return d.fullname; })
+  var first = attrs_enter.append("td")
+  first.append("div")
+    .attr("class","user-image")
+    .style("background-image", function(d){
+      return "url('"+d.avatar+"')";
+    })
+  first.append("div").text(function(d){ return d.fullname; })
   attrs_enter.append("td").text(function(d){ return d.nickname; })
-  var role_select = attrs_enter
-    .append("td")
-    .append("select")
-    .attr("class", "role_select")
-    .on("change", function(d){
-      var selected_role = this.options[this.selectedIndex];
-      selected_role = d3.select(selected_role).attr("value")
-      d3.json("/admin/user/"+d.id+"/")
-        .header("Content-type", "application/json")
-        .send("PUT", '{"role": '+selected_role+'}', function(error, text) { console.log(error, text); });
-    })
+  attrs_enter.append("td").text(function(d){ return d.email; })
   
-  role_select.selectAll("option")
+  change_role = function(user,value) {
+    console.log(user,value)
+    d3.json("/admin/user/"+user+"/")
+      .header("Content-type", "application/json")
+      .send("PUT", '{"role": '+value+'}', function(error, text) { console.log("Error: "+error); });
+  }
+  
+  attrs_enter.append("td").selectAll("input")
     .data(d3.entries(roles))
-    .enter().append("option")
-    .text(function(d){ return d.value; })
-    .attr("value", function(d){ 
-      return d.key;
-    })
-    .attr("selected", function(d){
-      var parent_data = d3.select(this.parentNode).datum();
-      if(parent_data.role == d.key){
-        return "selected"
-      }
-    })
+    .enter().append("input")
+      .attr("type","radio")
+      .attr("value", function(d){ return dataviva.format.text(d.key); })
+      .attr("id", function(d){ return "role_"+d.value; })
+      .attr("name", function(d){ 
+        var parent_data = d3.select(this.parentNode).datum();
+        return "role_"+parent_data.nickname; 
+      })
+      .attr("checked", function(d){
+        var parent_data = d3.select(this.parentNode).datum();
+        if(parent_data.role == d.value){
+          return "checked"
+        }
+      })
+      .attr("onclick",function(d){
+        var parent_data = d3.select(this.parentNode).datum();
+        return "change_role('"+parent_data.id+"',this.id.split('_')[1])"
+      })
+      .each(function(d){
+        var parent_data = d3.select(this.parentNode).datum();
+        leon("$role_"+parent_data.nickname).size("small")
+      })
 
   // leon(".role_select")
 

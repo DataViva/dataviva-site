@@ -41,7 +41,8 @@ ul {
 }
 
 ul > li {
-  margin-left: 25px;
+  font-size: 12px;
+  margin: 2px 2px 2px 25px;
 }
 ul li a {
 	color: #d67ab0;

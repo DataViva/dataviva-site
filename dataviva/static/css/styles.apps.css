@@ -29,6 +29,10 @@ body {
           transition: top 0.6s;
 }
 
+div.loading {
+  background-color: #fafafa;
+}
+
 /****************/
 /* Top Controls */
 /****************/
