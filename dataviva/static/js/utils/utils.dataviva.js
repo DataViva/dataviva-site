@@ -96,14 +96,15 @@ dataviva.format.text = function(text,name,l) {
       "spotlight": {"en": "Highlight RCA", "pt": "Real\u00e7ar RCA"},
       "spotlight_desc_network": {"en": "Removes coloring from nodes which do not have RCA.", "pt": "Remover corantes a partir dos n\u00f3s que n\u00e3o t\u00eam RCA."},
       "spotlight_scatter": {"en": "Hide RCA", "pt": "Esconder RCA"},
-      "spotlight_desc_scatter": {"en": "Hides nodes that have RCA.", "pt": "Oculta n\u00f3s que possuem RCA."},
+      "spotlight_scatter_desc_scatter": {"en": "Hides nodes that have RCA.", "pt": "Oculta n\u00f3s que possuem RCA."},
       "true": {"en": "On", "pt": "Liga"},
       "false": {"en": "Off", "pt": "Desliga"},
       
       // Sorting Toggle
       "sorting": {"en": "Sort", "pt": "Ordenar"},
-      "sorting_desc_stacked": {"en": "Changes the variable used to order the areas.", "pt": "Altera a vari\u00e1vel usada para ordenar as \u00e1reas."},
-      "sorting_desc_occugrid": {"en": "Changes the variable used to order the donut charts.", "pt": "Altera a vari\u00e1vel usada para ordenar os gr\u00e1ficos de rosca."},
+      "sort": {"en": "Sort", "pt": "Ordenar"},
+      "sort_desc_stacked": {"en": "Changes the variable used to order the areas.", "pt": "Altera a vari\u00e1vel usada para ordenar as \u00e1reas."},
+      "sort_desc_occugrid": {"en": "Changes the variable used to order the donut charts.", "pt": "Altera a vari\u00e1vel usada para ordenar os gr\u00e1ficos de rosca."},
       
       // Sizing Labels
       "sizing": {"en": "Size", "pt": "Tamanho"},
@@ -131,7 +132,6 @@ dataviva.format.text = function(text,name,l) {
       "grouping": {"en": "Group", "pt": "Grupo"},
       "grouping_desc_occugrid": {"en": "Groups the donut charts into different categorizations.", "pt": "Agrupa os gr\u00e1ficos de rosca em diferentes categoriza\u00e7\u00f5es."},
       "none": {"en": "None", "pt": "Nenhum"},
-      "sort": {"en": "Sort", "pt": "Ordenar"},
       "total": {"en": "Required", "pt": "Requerido"},
       "year": {"en": "Year", "pt": "Ano"},
 
@@ -497,22 +497,29 @@ dataviva.ui.background = function() {
   }
 }
 
-dataviva.ui.tooltip = function(id,obj) {
+dataviva.ui.tooltip = function(id,obj,align) {
   if (obj) {
     
     var size = obj.getBoundingClientRect(),
         text = obj.getAttribute("alt") ? obj.getAttribute("alt") : id
         
+    if (!align) var align = "bottom center"
+    
+    var t = align.split(" ")[0]
+    if (t == "center") var offset = size.width/2
+    else var offset = size.height/2
+        
     vizwhiz.tooltip.remove(id);
     vizwhiz.tooltip.create({
       "x": size.left+size.width/2,
       "y": size.top+size.height/2,
-      "offset": size.height/2,
+      "offset": offset,
       "arrow": true,
       "description": text,
       "width": "auto",
       "id": id,
-      "align": "bottom center"
+      "align": align,
+      "max_width": 180
     })
     
   }

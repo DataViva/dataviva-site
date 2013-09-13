@@ -1602,7 +1602,7 @@ val)+": ", "suffix": ""};
         .attr("class","ui_group alt_tooltip")
         .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
         .on(vizwhiz.evt.over,function(){
-          dataviva.ui.tooltip("alt_tooltip",this)
+          dataviva.ui.tooltip("alt_tooltip",this,"center right")
         })
         .on(vizwhiz.evt.out,function(){
           dataviva.ui.tooltip("alt_tooltip",false)

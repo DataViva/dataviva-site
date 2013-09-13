@@ -47,14 +47,14 @@ div#settings {
   position: absolute; 
   right: 10px;
   top: 5px;
-  z-index: 5000;
+  z-index: 50;
 }
 
 div#toggles { 
   position: absolute; 
   left: 5px;
   top: 0px;
-  z-index: 5000;
+  z-index: 50;
 }
 
 div#settings > .leon.button.square {

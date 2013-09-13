@@ -128,9 +128,9 @@ class Build(db.Model, AutoSerialize):
         
     '''Returns the URL for the specific build.'''
     def url(self, **kwargs):
-        bras = []
 
         if isinstance(self.bra,(list,tuple)):
+            bras = []
             for b in self.bra:
                 if b.id != "all" and b.distance > 0:
                     bras.append(b.id+"."+b.distance)
