@@ -39,7 +39,9 @@ function item_formatter(container_el, activities){
       return "url('"+d.avatar+"')";
     })
   first.append("div").text(function(d){ return d.fullname; })
-  attrs_enter.append("td").text(function(d){ return d.nickname; })
+  attrs_enter.append("td").html(function(d){ 
+    return "<a href='/account/"+d.nickname+"'>"+d.nickname+"</a>"; 
+  })
   attrs_enter.append("td").text(function(d){ return d.email; })
   
   change_role = function(user,value) {
@@ -74,17 +76,7 @@ function item_formatter(container_el, activities){
         leon("$role_"+parent_data.nickname).size("small")
       })
 
-  // leon(".role_select")
-
 }
-
-// function(d){ 
-//       var role = "User";
-//       if(d.role){
-//         if(parseInt(d.role) > 1) role = "Super Admin";
-//         return role = "Admin";
-//       }
-//   }
 
 var is = infinite_scroll().format_items(item_formatter);
 

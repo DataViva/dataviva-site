@@ -1,4 +1,5 @@
 import re
+from flask import g
 from unicodedata import normalize
 from sqlalchemy import and_
 from sqlalchemy.dialects import mysql
@@ -86,6 +87,7 @@ class Question(db.Model, AutoSerialize):
     
     def serialize(self):
         auto_serialized = super(Question, self).serialize()
+        auto_serialized["timestamp"] = self.timestamp.isoformat()
         auto_serialized["user"] = self.user.serialize()
         auto_serialized["votes"] = len(self.votes.all())
         return auto_serialized
@@ -110,13 +112,16 @@ class Status(db.Model):
     __tablename__ = 'ask_status'
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(255))
+    name_en = db.Column(db.String(255))
+    name_pt = db.Column(db.String(255))
     questions = db.relationship(Question, backref = 'status', lazy = 'dynamic')
 
     def __repr__(self):
         return '<Status %r>' % (self.name)
 
     def __unicode__(self):
-        return '%s' % (self.name)
+        lang = getattr(g, "locale", "en")
+        return getattr(self,"name_"+lang)
 
 class Reply(db.Model, AutoSerialize):
 

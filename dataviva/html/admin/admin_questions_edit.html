@@ -2,53 +2,61 @@
 
 {% block title %}: {% trans %}Edit Question{% endtrans %}{% endblock %}
 
-{% block head %}
-<link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
-{% endblock %}
-
 {% block admin_content %}
 
-<h1>{{ question.question }}</h1>
+  <h1>{{ question.question }}</h1>
 
-<p>{{ question.body }}</p>
-<div class="posted">
-  <img src="{{ question.user.avatar(22) }}"> 
-  {% trans %}Asked by{% endtrans %} {{question.user.nickname}} {{ momentjs(question.timestamp).fromNow() }}
-</div>
+  {{ question.body|safe }}
 
-<hr />
+  <form id="ask_form" action="" method="post">
+    {{ form.hidden_tag() }}
+    
+    <div class="posted">
+      <div class="user-image" style="background-image: url('{{ question.user.avatar(50) }}')"></div>
+      <div>
+      {% trans %}Asked by{% endtrans %} {{question.user.nickname}} {{ momentjs(question.timestamp).fromNow() }}
+      </div>
+    </div>
 
-<form id="ask_form" action="" method="post">
-  {{ form.hidden_tag() }}
+    <label for="status">{% trans %}Status{% endtrans %}:</label>
+    {{ form.status(id="status") }}
 
-  <h2>{% trans %}Status{% endtrans %}:</h2>
-  {{ form.status() }}
+    <br><br>
+    {{ form.answer(id="wysiwyg_textarea", placeholder=_("Enter your answer...")) }}<br />
+    {% for error in form.errors.body %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
 
-  <h2>{% trans %}Answer{% endtrans %}:</h2>
-  {{ form.answer(id="wysiwyg_textarea", placeholder=_("Enter your answer...")) }}<br />
-  {% for error in form.errors.body %}
-  <span style="color: red;">[{{ error }}]</span>
-  {% endfor %}
+    <a class="decision" id="submit_button">{% trans %}Update{% endtrans %}</a>
 
-  <input type="submit" value="{% trans %}Update{% endtrans %}"/>
+  </form>
 
-</form>
 {% endblock %}
 
 {% block js %}
-<!-- Redactor is here -->
-<script src="/static/js/libs/jquery-1.9.0.min.js"></script>
-<script src="/static/js/libs/redactor.min.js"></script>
-<script>
 
-// Initialize redactor wysiwyg textarea
-$(document).ready(function() {
+  <script src="/static/js/libs/jquery-1.9.0.min.js"></script>
+  <script src="/static/js/libs/redactor.min.js"></script>
+  <script>
+  
+    leon("#status")
+    
+    // submit form
+    d3.selectAll("#submit_button").on(vizwhiz.evt.click, function(){
+      this.parentNode.submit()
+      d3.event.preventDefault();
+    })
+    
+    // Initialize redactor wysiwyg textarea
+    $(document).ready(function() {
 
-    var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
-		$('#wysiwyg_textarea').redactor({
-      buttons: buttons 
-		});
+      var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
+      $('#wysiwyg_textarea').redactor({
+        buttons: buttons 
+      })
 
-});
-</script>
+    })
+    
+  </script>
+
 {% endblock %}

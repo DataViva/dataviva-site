@@ -169,6 +169,6 @@ def ask():
             question.str_tags(tags)
         db.session.add(question)
         db.session.commit()
-        flash('Your question has been submitted and is <a href="' + url_for('account.questions', nickname=g.user.nickname, status='pending') + '">pending approval</a> by a site administrator.')
+        flash('Your question has been submitted and is pending approval by a site administrator.')
         return redirect(url_for('ask.index'))
     return render_template("ask/ask.html", form = form)

@@ -1,19 +1,18 @@
-hr {
-  clear: both;
-  height: 1px;
-  background-color: #cccccc;
-  color: #cccccc;
-  border: 0;
-  margin-top: 2%;
+div#login_div {
+  color: #333;
+  font-size: 11px;
+  left: 50%;
+  margin-left: -150px;
+  margin-top: -130px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 300px;
 }
-
-.hide {
-  display: none;
+div#login_text {
+  margin: 12px 0px;
+  text-align: left;
 }
-
-/******************/
-/* Login Specific */
-/******************/
 
 a.login_button {
   background-position: center center;
@@ -43,12 +42,4 @@ a.login_button#Facebook {
 
 a.login_button#Twitter {
   background-image: url("/static/img/icons/login/login_twitter.png");
-}
-
-/********************/
-/* Infinite Loading */
-/********************/
-div.infinite_loading {
-  height: 100px;
-  position: relative;
 }

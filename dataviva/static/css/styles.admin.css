@@ -60,7 +60,11 @@ td {
   text-align: left;
 }
 
-td > div {
+div.posted {
+  float: left;
+}
+
+td > div, .posted > div {
   display: inline-block;
 }
 
@@ -70,4 +74,12 @@ td > .leon.radio {
 
 tr:last-child {
   border-bottom: solid 1px transparent;
+}
+
+#leon_status {
+  float: right;
+}
+
+#submit_button {
+  margin: 0px;
 }
