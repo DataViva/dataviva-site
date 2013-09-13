@@ -131,8 +131,8 @@ class Stats(object):
                     .order_by(func.sum(getattr(tbl, val_var)).desc())
 
         percent = 0
-        if isinstance(top,tuple):
-            obj = globals()[key.title()].query.get(top[0])
+        if isinstance(top.first(),tuple):
+            obj = globals()[key.title()].query.get(top.first()[0])
         else:
             obj = getattr(top.first(), key)
             num = getattr(top.first(),val_var)
