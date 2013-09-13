@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-11 18:17-0400\n"
+"POT-Creation-Date: 2013-09-13 14:48-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -26,7 +26,11 @@ msgid ""
 "DataViva is an initiative of the Government of Minas Gerais which seeks "
 "to create an innovative and creative data visualization tool. Would you "
 "like to see some visualizations? Below are some good places to start:"
-msgstr "O DataViva é uma iniciativa do Governo de Minas Gerais, que busca contribuir com uma ferramenta de visualização de dados em modos inovadores e criativos. Que tal construir a sua visualização? Abaixo estão alguns bons lugares para iniciar:"
+msgstr ""
+"O DataViva é uma iniciativa do Governo de Minas Gerais, que busca "
+"contribuir com uma ferramenta de visualização de dados em modos "
+"inovadores e criativos. Que tal construir a sua visualização? Abaixo "
+"estão alguns bons lugares para iniciar:"
 
 #: dataviva/html/home.html:19 dataviva/html/templates/site.html:14
 msgid "Guide"
@@ -50,15 +54,15 @@ msgid "About the Apps"
 msgstr "Sobre os Aplicativos"
 
 #: dataviva/html/about/credits.html:4 dataviva/html/about/credits.html:7
-#: dataviva/html/templates/about.html:24
+#: dataviva/html/templates/about.html:30
 msgid "Credits"
 msgstr "Créditos"
 
-#: dataviva/html/about/credits.html:10
+#: dataviva/html/about/credits.html:9
 msgid "Sabrina Illustrations"
 msgstr "Ilustrações da Sabrina"
 
-#: dataviva/html/about/credits.html:11
+#: dataviva/html/about/credits.html:13
 msgid "Icons and Graphics"
 msgstr "Ícones e Imagens"
 
@@ -67,43 +71,43 @@ msgid "About the Site"
 msgstr "Sobre o Site"
 
 #: dataviva/html/about/glossary.html:4 dataviva/html/about/glossary.html:7
-#: dataviva/html/templates/about.html:20
+#: dataviva/html/templates/about.html:26
 msgid "Glossary"
 msgstr "Glossário"
 
 #: dataviva/html/about/apps/compare.html:3
 #: dataviva/html/about/apps/geo_map.html:3 dataviva/html/apps/index.html:20
-#: dataviva/html/templates/about.html:38
+#: dataviva/html/templates/about.html:44
 msgid "Geo Map"
 msgstr "Mapa"
 
 #: dataviva/html/about/apps/network.html:3 dataviva/html/apps/index.html:24
-#: dataviva/html/templates/about.html:42
+#: dataviva/html/templates/about.html:48
 msgid "Network"
 msgstr "Rede"
 
 #: dataviva/html/about/apps/occugrid.html:3 dataviva/html/apps/index.html:42
-#: dataviva/html/templates/about.html:58
+#: dataviva/html/templates/about.html:64
 msgid "Occugrid"
 msgstr "Ocupações"
 
 #: dataviva/html/about/apps/rings.html:3 dataviva/html/apps/index.html:30
-#: dataviva/html/templates/about.html:46
+#: dataviva/html/templates/about.html:52
 msgid "Rings"
 msgstr "Anéis"
 
 #: dataviva/html/about/apps/scatter.html:3 dataviva/html/apps/index.html:34
-#: dataviva/html/templates/about.html:50
+#: dataviva/html/templates/about.html:56
 msgid "Scatter"
 msgstr "Dispersão"
 
 #: dataviva/html/about/apps/stacked.html:3 dataviva/html/apps/index.html:16
-#: dataviva/html/templates/about.html:34
+#: dataviva/html/templates/about.html:40
 msgid "Stacked"
 msgstr "Histórico"
 
 #: dataviva/html/about/apps/tree_map.html:3 dataviva/html/apps/index.html:12
-#: dataviva/html/templates/about.html:30
+#: dataviva/html/templates/about.html:36
 msgid "Tree Map"
 msgstr "Tree Map"
 
@@ -119,13 +123,11 @@ msgstr "Tudo"
 msgid "Starred Apps"
 msgstr "Apps Favoritas"
 
-#: dataviva/html/account/index.html:28 dataviva/html/account/questions.html:3
-#: dataviva/html/account/questions.html:7
+#: dataviva/html/account/index.html:28 dataviva/html/templates/admin.html:25
 msgid "Questions"
 msgstr "Perguntas"
 
-#: dataviva/html/account/index.html:30 dataviva/html/account/replies.html:3
-#: dataviva/html/account/replies.html:7
+#: dataviva/html/account/index.html:30
 msgid "Replies"
 msgstr "Respostas"
 
@@ -134,7 +136,7 @@ msgstr "Respostas"
 msgid "Login"
 msgstr "Login"
 
-#: dataviva/html/account/login.html:33
+#: dataviva/html/account/login.html:17
 msgid ""
 "Logging in is easy! All you have to do is choose one of the following "
 "accounts to link with your profile. We'll take care of the rest."
@@ -142,7 +144,7 @@ msgstr ""
 "Fazer o login é muito fácil! Tudo que você tem a fazer é escolher uma das"
 " contas a seguir para vincular ao seu perfil. Nós cuidaremos do resto."
 
-#: dataviva/html/account/login.html:35
+#: dataviva/html/account/login.html:19
 msgid ""
 "By having an account, you will be able to ask Sabrina questions, comment "
 "in discussions, and save your favorite apps to your profile."
@@ -150,20 +152,17 @@ msgstr ""
 "Tendo uma conta, você será capaz de fazer perguntas à Sabrina, comentar "
 "em nossos fóruns, e salvar seus aplicativos favoritos em seu perfil."
 
-#: dataviva/html/account/login.html:40
+#: dataviva/html/account/login.html:24
 msgid "Remember Me"
 msgstr "Lembrar-me"
 
-#: dataviva/html/account/starred.html:3 dataviva/html/account/starred.html:7
-msgid "Starred"
-msgstr "Estrelado"
-
 #: dataviva/html/admin/admin_questions.html:3
-#: dataviva/html/admin/admin_questions.html:12 dataviva/html/ask/ask.html:34
+#: dataviva/html/admin/admin_questions.html:12 dataviva/html/ask/ask.html:36
 msgid "Question"
 msgstr "Pergunta"
 
 #: dataviva/html/admin/admin_questions.html:13
+#: dataviva/html/admin/admin_users.html:12
 msgid "User"
 msgstr "Usuário"
 
@@ -175,24 +174,20 @@ msgstr "Data"
 msgid "Edit Question"
 msgstr "Editar Pergunta"
 
-#: dataviva/html/admin/admin_questions_edit.html:16
-#: dataviva/html/ask/answer.html:59
+#: dataviva/html/admin/admin_questions_edit.html:17
+#: dataviva/html/ask/answer.html:63
 msgid "Asked by"
 msgstr "Perguntado por"
 
-#: dataviva/html/admin/admin_questions_edit.html:24
+#: dataviva/html/admin/admin_questions_edit.html:21
 msgid "Status"
 msgstr "Status"
 
-#: dataviva/html/admin/admin_questions_edit.html:27
-msgid "Answer"
-msgstr "Responder"
-
-#: dataviva/html/admin/admin_questions_edit.html:28
+#: dataviva/html/admin/admin_questions_edit.html:25
 msgid "Enter your answer..."
 msgstr "Digite sua resposta..."
 
-#: dataviva/html/admin/admin_questions_edit.html:33
+#: dataviva/html/admin/admin_questions_edit.html:30
 msgid "Update"
 msgstr "Atualizar"
 
@@ -200,19 +195,15 @@ msgstr "Atualizar"
 msgid "Admin Panel"
 msgstr "Painel do Administrador"
 
-#: dataviva/html/admin/admin_users.html:24
-msgid "Email"
-msgstr "Email"
-
-#: dataviva/html/admin/admin_users.html:25
-msgid "Full Name"
-msgstr "Nome Completo"
-
-#: dataviva/html/admin/admin_users.html:26
+#: dataviva/html/admin/admin_users.html:13
 msgid "Nick Name"
 msgstr "Apelido"
 
-#: dataviva/html/admin/admin_users.html:27
+#: dataviva/html/admin/admin_users.html:14
+msgid "Email"
+msgstr "Email"
+
+#: dataviva/html/admin/admin_users.html:15
 msgid "Role"
 msgstr "Função"
 
@@ -252,25 +243,25 @@ msgstr "Mostrar/Ocultar Controles"
 msgid "Which app would you like to build?"
 msgstr "Qual aplicativo você gostaria de desenvolver?"
 
-#: dataviva/html/apps/index.html:38 dataviva/html/templates/about.html:54
+#: dataviva/html/apps/index.html:38 dataviva/html/templates/about.html:60
 msgid "Compare"
 msgstr "Compare"
 
 #: dataviva/html/ask/answer.html:5 dataviva/html/ask/ask.html:4
-#: dataviva/html/ask/ask.html:54 dataviva/html/ask/questions.html:4
+#: dataviva/html/ask/ask.html:56 dataviva/html/ask/questions.html:4
 #: dataviva/html/templates/site.html:18
 msgid "Ask Sabrina"
 msgstr "Pergunte à Sabrina"
 
-#: dataviva/html/ask/answer.html:27 dataviva/html/ask/answer.html:91
+#: dataviva/html/ask/answer.html:31 dataviva/html/ask/answer.html:95
 msgid "Points"
 msgstr "Pontos"
 
-#: dataviva/html/ask/answer.html:46 dataviva/html/ask/ask.html:48
+#: dataviva/html/ask/answer.html:50 dataviva/html/ask/ask.html:50
 msgid "Tags"
 msgstr "Marcações"
 
-#: dataviva/html/ask/answer.html:75
+#: dataviva/html/ask/answer.html:79
 msgid ""
 "Sabrina has not answered this question yet. Feel free to start the "
 "conversation below."
@@ -278,97 +269,97 @@ msgstr ""
 "Sabrina ainda não respondeu a esta pergunta. Sinta-se à vontade para "
 "iniciar a conversa abaixo."
 
-#: dataviva/html/ask/answer.html:83
+#: dataviva/html/ask/answer.html:87
 msgid "Responses"
 msgstr "Respostas"
 
-#: dataviva/html/ask/answer.html:111
+#: dataviva/html/ask/answer.html:115
 msgid "Respond to"
 msgstr "Responder para"
 
-#: dataviva/html/ask/answer.html:123
+#: dataviva/html/ask/answer.html:127
 msgid "New Response"
 msgstr "Nova Resposta"
 
-#: dataviva/html/ask/answer.html:124
+#: dataviva/html/ask/answer.html:128
 msgid "Leave a Response"
 msgstr "Deixe uma Resposta"
 
-#: dataviva/html/ask/answer.html:144
+#: dataviva/html/ask/answer.html:148
 msgid "Reply"
 msgstr "Responder"
 
-#: dataviva/html/ask/ask.html:19 dataviva/html/ask/questions.html:13
+#: dataviva/html/ask/ask.html:21 dataviva/html/ask/questions.html:16
 #: dataviva/html/guide/cbo.html:10
 msgid "What would you like to know?"
 msgstr "O que você gostaria de saber?"
 
-#: dataviva/html/ask/ask.html:21
+#: dataviva/html/ask/ask.html:23
 msgid "You need to login for this functionality."
 msgstr "Você precisa fazer o login para utilizar essa funcionalidade."
 
-#: dataviva/html/ask/ask.html:45
+#: dataviva/html/ask/ask.html:47
 msgid "App"
 msgstr "Aplicativo"
 
-#: dataviva/html/ask/ask.html:62
+#: dataviva/html/ask/ask.html:63
 msgid "Click here to login"
 msgstr "Clique aqui para acessar o site"
 
-#: dataviva/html/ask/questions.html:22
+#: dataviva/html/ask/questions.html:25
 msgid "Order"
 msgstr "Solicitado por"
 
-#: dataviva/html/ask/questions.html:24
+#: dataviva/html/ask/questions.html:27
 msgid "Top Voted"
 msgstr "Mais Votados"
 
-#: dataviva/html/ask/questions.html:26
+#: dataviva/html/ask/questions.html:29
 msgid "Newest"
 msgstr "Mais Recente"
 
-#: dataviva/html/ask/questions.html:40
+#: dataviva/html/ask/questions.html:43
 msgid "Cannot find your answer here?"
 msgstr "Não encontrou a sua resposta aqui?"
 
-#: dataviva/html/ask/questions.html:41
+#: dataviva/html/ask/questions.html:44
 msgid "Submit your question to Escritorio!"
 msgstr "Envie sua pergunta para o Escritório!"
 
-#: dataviva/html/data/classifications.html:14
+#: dataviva/html/data/classifications.html:21
 msgid "Depth"
 msgstr "Fundo"
 
-#: dataviva/html/data/index.html:3 dataviva/html/data/query.html:28
+#: dataviva/html/data/index.html:3 dataviva/html/data/query.html:32
 #: dataviva/html/templates/site.html:17
 msgid "Data"
 msgstr "Dados"
 
-#: dataviva/html/data/index.html:8
+#: dataviva/html/data/index.html:14
 msgid "How do you want to access the data?"
 msgstr "Como você deseja acessar os dados?"
 
-#: dataviva/html/data/index.html:12
+#: dataviva/html/data/index.html:18
 msgid "Database"
 msgstr "Banco de Dados"
 
-#: dataviva/html/data/index.html:13
+#: dataviva/html/data/index.html:19
 msgid "Custom data queries of our database."
 msgstr "Consultas personalizadas em nosso banco de dados."
 
-#: dataviva/html/data/index.html:17
+#: dataviva/html/data/index.html:23
 msgid "API"
 msgstr "API"
 
-#: dataviva/html/data/index.html:18
+#: dataviva/html/data/index.html:24
 msgid "Access the data directly."
 msgstr "Acessar os dados diretamente."
 
-#: dataviva/html/data/index.html:22
+#: dataviva/html/data/index.html:28
 msgid "Source List"
 msgstr "Lista de Fontes"
 
-#: dataviva/html/data/index.html:23
+#: dataviva/html/data/index.html:29
 msgid "Browse the various classifications."
 msgstr "Navegar pelas classificações diversas."
 
@@ -376,77 +367,77 @@ msgstr "Navegar pelas classificações diversas."
 msgid "Database Query"
 msgstr "Consultas ao Banco de Dados"
 
-#: dataviva/html/data/query.html:37
+#: dataviva/html/data/query.html:41
 msgid "All Years"
 msgstr "Todos os Anos"
 
-#: dataviva/html/data/query.html:58
+#: dataviva/html/data/query.html:62
 msgid "Brazilian Locations"
 msgstr "Localidades Brasileiras"
 
-#: dataviva/html/data/query.html:71
+#: dataviva/html/data/query.html:75
 msgid "Showing all of Brazil until a location is selected."
 msgstr "Mostrando todo o Brasil até que uma localidade seja selecionada."
 
-#: dataviva/html/data/query.html:74
+#: dataviva/html/data/query.html:78
 msgid "add a location"
 msgstr "adicionar uma localidade"
 
-#: dataviva/html/data/query.html:87 dataviva/html/data/select.html:18
+#: dataviva/html/data/query.html:91 dataviva/html/data/select.html:24
 msgid "Industries"
 msgstr "Atividades Econômicas"
 
-#: dataviva/html/data/query.html:101
+#: dataviva/html/data/query.html:105
 msgid "Showing all industries until a filter is selected."
 msgstr ""
 "Mostrando todas as atividades econômicas até que um filtro seja "
 "selecionado."
 
-#: dataviva/html/data/query.html:104
+#: dataviva/html/data/query.html:108
 msgid "add an industry"
 msgstr "adicionar uma atividade econômica"
 
-#: dataviva/html/data/query.html:115 dataviva/html/data/select.html:23
+#: dataviva/html/data/query.html:119 dataviva/html/data/select.html:29
 msgid "Occupations"
 msgstr "Ocupações"
 
-#: dataviva/html/data/query.html:129
+#: dataviva/html/data/query.html:133
 msgid "Showing all occupations until a filter is selected."
 msgstr "Mostrando todas as ocupações até que um filtro seja selecionado."
 
-#: dataviva/html/data/query.html:132
+#: dataviva/html/data/query.html:136
 msgid "add an occupation"
 msgstr "adicionar uma ocupação"
 
-#: dataviva/html/data/query.html:136 dataviva/html/data/query.html:198
+#: dataviva/html/data/query.html:140 dataviva/html/data/query.html:202
 msgid "Build"
 msgstr "Construir"
 
-#: dataviva/html/data/query.html:149
+#: dataviva/html/data/query.html:153
 msgid "Products"
 msgstr "Produtos"
 
-#: dataviva/html/data/query.html:163
+#: dataviva/html/data/query.html:167
 msgid "Showing all products until a filter is selected."
 msgstr "Mostrando todos os produtos até que um filtro seja selecionado."
 
-#: dataviva/html/data/query.html:166
+#: dataviva/html/data/query.html:170
 msgid "add a product"
 msgstr "adicionar um produto"
 
-#: dataviva/html/data/query.html:177 dataviva/html/data/select.html:33
+#: dataviva/html/data/query.html:181 dataviva/html/data/select.html:39
 msgid "Export Destinations"
 msgstr "Destinos das Exportações"
 
-#: dataviva/html/data/query.html:191
+#: dataviva/html/data/query.html:195
 msgid "Showing all countries until a filter is selected."
 msgstr "Mostrando todos os países até que um filtro seja selecionado."
 
-#: dataviva/html/data/query.html:194
+#: dataviva/html/data/query.html:198
 msgid "add an export destination"
 msgstr "adicionar uma ocupação"
 
-#: dataviva/html/data/query.html:204
+#: dataviva/html/data/query.html:208
 msgid "Download"
 msgstr "Download"
 
@@ -454,23 +445,23 @@ msgstr "Download"
 msgid "Choose a Classification"
 msgstr "Selecionar uma Classificação"
 
-#: dataviva/html/data/select.html:8
+#: dataviva/html/data/select.html:14
 msgid "Which classification would you like to browse?"
 msgstr "Qual classificação você gostaria de pesquisar?"
 
-#: dataviva/html/data/select.html:13 dataviva/html/guide/industry.html:10
+#: dataviva/html/data/select.html:19 dataviva/html/guide/industry.html:10
 msgid "Product Exports"
 msgstr "Produtos Exportados"
 
-#: dataviva/html/data/select.html:27
+#: dataviva/html/data/select.html:33
 msgid "Municipalities"
 msgstr "Municípios"
 
-#: dataviva/html/data/select.html:28
+#: dataviva/html/data/select.html:34
 msgid "Geographical locations within Brazil"
 msgstr "Localizações geográficas no Brasil"
 
-#: dataviva/html/data/select.html:32
+#: dataviva/html/data/select.html:38
 msgid "Countries"
 msgstr "Países"
 
@@ -708,9 +699,29 @@ msgstr "Produto Exportado"
 msgid "Export Destination"
 msgstr "Destino das Exportações"
 
-#: dataviva/html/templates/about.html:16
+#: dataviva/html/templates/about.html:22
 msgid "General"
 msgstr "Geral"
+
+#: dataviva/html/templates/admin.html:24
+msgid "Users"
+msgstr "Usuários"
+
+#: dataviva/html/templates/admin.html:28
+msgid "Pending"
+msgstr "Indeciso"
+
+#: dataviva/html/templates/admin.html:29
+msgid "Approved"
+msgstr "Aprovado"
+
+#: dataviva/html/templates/admin.html:30
+msgid "Rejected"
+msgstr "Rejeitado"
+
+#: dataviva/html/templates/admin.html:31
+msgid "Duplicate"
+msgstr "Duplicar"
 
 #: dataviva/html/templates/site.html:15
 msgid "Profiles"

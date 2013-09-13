@@ -21,24 +21,24 @@
   <div id="admin_nav" class="grid5col1">
     
     {% set navigation_bar = [
-        ('admin.admin_users', 'Users'),
-        ('admin.admin_questions', 'Questions'),
+        ('admin.admin_users', _('Users')),
+        ('admin.admin_questions', _('Questions')),
     ] -%}
     {% set question_navigation_bar = [
-        ('pending', 'Pending'),
-        ('approved', 'Approved'),
-        ('rejected', 'Rejected'),
-        ('duplicate', 'Duplicate')
+        ('pending', _('Pending')),
+        ('approved', _('Approved')),
+        ('rejected', _('Rejected')),
+        ('duplicate', _('Duplicate'))
     ] -%}
     {% set active_page = request.endpoint -%}
     {% set active_question_page = request.view_args.status -%}
 
     {% for id, caption in navigation_bar %}
-      <a href="{{ url_for(id) }}" class="{% if id == active_page %}decision{% else %}help{% endif %}">{{ _(caption|e) }}</a>
+      <a href="{{ url_for(id) }}" class="{% if id == active_page %}decision{% else %}help{% endif %}">{{ caption|e }}</a>
       {% if active_page == 'admin.admin_questions' and id == 'admin.admin_questions' %}
         <ul>
         {% for q_id, q_caption in question_navigation_bar %}
-          <a href="{{ url_for(id, status=q_id) }}" class="{% if q_id == active_question_page %}decision{% else %}help{% endif %} icon short {{q_id}}">{{ _(q_caption|e) }}</a>
+          <a href="{{ url_for(id, status=q_id) }}" class="{% if q_id == active_question_page %}decision{% else %}help{% endif %} icon short {{q_id}}">{{ q_caption|e }}</a>
         {% endfor %}
         </ul>
       {% endif %}
