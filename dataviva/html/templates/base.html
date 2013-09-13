@@ -42,6 +42,14 @@
     
       dataviva.language = "{{ g.locale }}"
       dataviva.color = "{{ g.color }}"
+      
+      d3.selectAll(".alt_tooltip")
+        .on(vizwhiz.evt.over,function(){
+          dataviva.ui.tooltip("alt_tooltip",this)
+        })
+        .on(vizwhiz.evt.out,function(){
+          dataviva.ui.tooltip("alt_tooltip",false)
+        })
     
       function login() {
         var width = 400,

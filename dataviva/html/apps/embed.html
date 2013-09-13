@@ -97,12 +97,12 @@
 
   <div id="settings">
 
-    <a id="refresh" class="leon button square" onclick="app.start()" onmouseover="dataviva.ui.tooltip(this.id,true)" onmouseout="dataviva.ui.tooltip(this.id,false)" alt="{% trans %}Refresh the App{% endtrans %}"><i class="icon-refresh"></i></a>
-    <a id="file" class="leon button square" onclick="builder.selector(this.id)" onmouseover="dataviva.ui.tooltip(this.id,true)" onmouseout="dataviva.ui.tooltip(this.id,false)" alt="{% trans %}Download this App{% endtrans %}"><i class="icon-save"></i></a>
-    <a id="starred" class="leon button square" onclick="app.star()" onmouseover="dataviva.ui.tooltip(this.id,true)" onmouseout="dataviva.ui.tooltip(this.id,false)" alt="{% trans %}Save this App{% endtrans %}"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
-    <a id="help" class="leon button square" onclick="builder.selector(this.id)" onmouseover="dataviva.ui.tooltip(this.id,true)" onmouseout="dataviva.ui.tooltip(this.id,false)" alt="{% trans %}Show App Tutorial{% endtrans %}"><i class="icon-question-sign"></i></a>
-    <a id="full_screen" class="leon button square" onclick="window.open(window.location.href,'_blank')" onmouseover="dataviva.ui.tooltip(this.id,true)" onmouseout="dataviva.ui.tooltip(this.id,false)" alt="{% trans %}Open App in Full-Screen{% endtrans %}"><i class="icon-fullscreen"></i></a>
-    <a id="controls_toggle" class="leon button square" onclick="builder.controls()" onmouseover="dataviva.ui.tooltip(this.id,true)" onmouseout="dataviva.ui.tooltip(this.id,false)" alt="{% trans %}Show/Hide Controls{% endtrans %}"><i class="icon-cogs"></i></a>
+    <a id="refresh" class="leon button square alt_tooltip" onclick="app.start()" alt="{% trans %}Refresh the App{% endtrans %}"><i class="icon-refresh"></i></a>
+    <a id="file" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Download this App{% endtrans %}"><i class="icon-save"></i></a>
+    <a id="starred" class="leon button square alt_tooltip" onclick="app.star()" alt="{% trans %}Save this App{% endtrans %}"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
+    <a id="help" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Show App Tutorial{% endtrans %}"><i class="icon-question-sign"></i></a>
+    <a id="full_screen" class="leon button square alt_tooltip" onclick="window.open(window.location.href,'_blank')" alt="{% trans %}Open App in Full-Screen{% endtrans %}"><i class="icon-fullscreen"></i></a>
+    <a id="controls_toggle" class="leon button square alt_tooltip" onclick="builder.controls()" alt="{% trans %}Show/Hide Controls{% endtrans %}"><i class="icon-cogs"></i></a>
   
   </div>
 
@@ -1478,14 +1478,14 @@ val)+": ", "suffix": ""};
       
       app.build[type][index] = obj
       var url = app.url.split("/")
-      var ids = url[url_index].split("+")
+      var ids = url[url_index].split("_")
       if (obj.distance && obj.distance > 0) {
         ids[index] = obj.id+"."+obj.distance
       }
       else {
         ids[index] = obj.id
       }
-      url[url_index] = ids.join("+")
+      url[url_index] = ids.join("_")
       url = url.join("/")
       // app.url = url
       
@@ -1557,8 +1557,14 @@ val)+": ", "suffix": ""};
     builder.radios = function(obj) {
       
       var div = d3.select("#app_controls").append("div")
-        .attr("class","ui_group")
-        .attr("id",obj.title)
+        .attr("class","ui_group alt_tooltip")
+        .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
+        .on(vizwhiz.evt.over,function(){
+          dataviva.ui.tooltip("alt_tooltip",this)
+        })
+        .on(vizwhiz.evt.out,function(){
+          dataviva.ui.tooltip("alt_tooltip",false)
+        })
         
       div.append("legend")
         .attr("id",obj.title)
@@ -1593,7 +1599,14 @@ val)+": ", "suffix": ""};
     builder.dropdown = function(obj) {
       
       var div = d3.select("#app_controls").append("div")
-        .attr("class","ui_group")
+        .attr("class","ui_group alt_tooltip")
+        .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
+        .on(vizwhiz.evt.over,function(){
+          dataviva.ui.tooltip("alt_tooltip",this)
+        })
+        .on(vizwhiz.evt.out,function(){
+          dataviva.ui.tooltip("alt_tooltip",false)
+        })
     
       div.append("label")
         .attr("for",obj.title)
@@ -1622,7 +1635,14 @@ val)+": ", "suffix": ""};
     builder.checkbox = function(obj) {
       
       var div = d3.select("#app_controls").append("div")
-        .attr("class","ui_group")
+        .attr("class","ui_group alt_tooltip")
+        .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
+        .on(vizwhiz.evt.over,function(){
+          dataviva.ui.tooltip("alt_tooltip",this)
+        })
+        .on(vizwhiz.evt.out,function(){
+          dataviva.ui.tooltip("alt_tooltip",false)
+        })
     
       div.append("label")
         .attr("for",obj.title)
