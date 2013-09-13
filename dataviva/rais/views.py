@@ -49,8 +49,8 @@ def parse_bras(bra_str):
         neighbors = bras.get_neighbors(distance)
         bras = [g.bra.serialize() for g in neighbors]
     else:
-        # we allow the user to specify bras separated by '+'
-        bras = bra_str.split("+")
+        # we allow the user to specify bras separated by '_'
+        bras = bra_str.split("_")
         # Make sure the bra_id requested actually exists in the DB
         bras = [exist_or_404(Bra, bra_id).serialize() for bra_id in bras]
     return bras
@@ -109,7 +109,7 @@ def get_query(data_table, url_args, **kwargs):
 
     # handle location (if specified)
     if "bra_id" in kwargs:
-        if "+" in kwargs["bra_id"]:
+        if "_" in kwargs["bra_id"]:
             aggregate = False
         if "show." in kwargs["bra_id"]:
             # the '.' indicates that we are looking for a specific bra nesting
@@ -163,8 +163,8 @@ def get_query(data_table, url_args, **kwargs):
             # filter table by requested nesting level
             query = query.filter(func.char_length(data_table.isic_id) == ret["isic_level"])
         elif "show" not in kwargs["isic_id"]:
-            # we allow the user to specify industries separated by '+'
-            ret["industry"] = kwargs["isic_id"].split("+")
+            # we allow the user to specify industries separated by '_'
+            ret["industry"] = kwargs["isic_id"].split("_")
             # Make sure the isic_id requested actually exists in the DB
             ret["industry"] = [exist_or_404(Isic, isic_id).serialize() for isic_id in ret["industry"]]
             # filter query
@@ -188,8 +188,8 @@ def get_query(data_table, url_args, **kwargs):
             query = query.filter(func.char_length(data_table.cbo_id) == ret["cbo_level"])
         # make sure the user does not want to show all occupations
         if "show" not in kwargs["cbo_id"]:
-            # we allow the user to specify occupations separated by '+'
-            ret["occupation"] = kwargs["cbo_id"].split("+")
+            # we allow the user to specify occupations separated by '_'
+            ret["occupation"] = kwargs["cbo_id"].split("_")
             # Make sure the cbo_id requested actually exists in the DB
             ret["occupation"] = [exist_or_404(Cbo, cbo_id).serialize() for cbo_id in ret["occupation"]]
             # filter query

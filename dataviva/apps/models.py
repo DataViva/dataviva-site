@@ -60,15 +60,15 @@ class Build(db.Model, AutoSerialize):
         '''If build requires 2 bras and only 1 is given, supply a 2nd'''
         if isinstance(self.bra, list):
             return
-        if "+" in self.bra and "+" not in bra_id:
+        if "_" in self.bra and "_" not in bra_id:
             if bra_id == "rj":
-                bra_id = bra_id + "+mg"
+                bra_id = bra_id + "_mg"
             else:
-                bra_id = bra_id + "+rj"
-        elif "+" not in self.bra and "+" in bra_id:
-            bra_id = bra_id.split("+")[0]
+                bra_id = bra_id + "_rj"
+        elif "_" not in self.bra and "_" in bra_id:
+            bra_id = bra_id.split("_")[0]
         self.bra = []
-        for i, b in enumerate(bra_id.split("+")):
+        for i, b in enumerate(bra_id.split("_")):
             if b == "all":
                 self.bra.append(Wld.query.get("sabra"))
                 self.bra[i].id = "all"
@@ -92,39 +92,39 @@ class Build(db.Model, AutoSerialize):
         if self.filter1 != "all":
             if self.dataset == "rais":
                 self.isic = []
-                for i, f in enumerate(filter.split("+")):
+                for i, f in enumerate(filter.split("_")):
                     if Isic.query.get(f):
                         self.isic.append(Isic.query.get(f))
                     else:
                         self.isic.append(Isic.query.get('c1010'))
-                self.filter1 = "+".join([i.id for i in set(self.isic)])
+                self.filter1 = "_".join([i.id for i in set(self.isic)])
             elif self.dataset == "secex":
                 self.hs = []
-                for i, f in enumerate(filter.split("+")):
+                for i, f in enumerate(filter.split("_")):
                     if Hs.query.get(f):
                         self.hs.append(Hs.query.get(f))
                     else:
                         self.hs.append(Hs.query.get('178703'))
-                self.filter1 = "+".join([h.id for h in set(self.hs)])
+                self.filter1 = "_".join([h.id for h in set(self.hs)])
     
     def set_filter2(self, filter):
         if self.filter2 != "all":
             if self.dataset == "rais":
                 self.cbo = []
-                for i, f in enumerate(filter.split("+")):
+                for i, f in enumerate(filter.split("_")):
                     if Cbo.query.get(f):
                         self.cbo.append(Cbo.query.get(f))
                     else:
                         self.cbo.append(Cbo.query.get('1210'))
-                self.filter2 = "+".join([c.id for c in set(self.cbo)])
+                self.filter2 = "_".join([c.id for c in set(self.cbo)])
             elif self.dataset == "secex":
                 self.wld = []
-                for i, f in enumerate(filter.split("+")):
+                for i, f in enumerate(filter.split("_")):
                     if Wld.query.get(f):
                         self.wld.append(Wld.query.get(f))
                     else:
                         self.wld.append(Wld.query.get('aschn'))
-                self.filter2 = "+".join([w.id for w in set(self.wld)])
+                self.filter2 = "_".join([w.id for w in set(self.wld)])
         
     '''Returns the URL for the specific build.'''
     def url(self, **kwargs):
@@ -135,7 +135,7 @@ class Build(db.Model, AutoSerialize):
             else:
                 bras.append(b.id)
                 
-        bra_id = "+".join(bras)
+        bra_id = "_".join(bras)
         
         url = '{0}/{1}/{2}/{3}/{4}/{5}'.format(self.app.type, 
                 self.dataset, bra_id, self.filter1, self.filter2, self.output)
@@ -153,7 +153,7 @@ class Build(db.Model, AutoSerialize):
             else:
                 bras.append(b.id)
                 
-        bra = "+".join(bras)
+        bra = "_".join(bras)
         
         if self.app.type == "geo_map" and bra == "all":
             bra = "all.show.2"

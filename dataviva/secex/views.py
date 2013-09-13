@@ -48,10 +48,17 @@ def parse_bras(bra_str):
         bras = [g.bra.serialize() for g in neighbors]
     else:
         # we allow the user to specify bras separated by '+'
-        bras = bra_str.split("+")
+        bras = bra_str.split("_")
         # Make sure the bra_id requested actually exists in the DB
         bras = [exist_or_404(Bra, bra_id).serialize() for bra_id in bras]
     return bras
+
+def get_eci(bra):
+    ecis = {}
+    ybs = Yb_secex.query.filter_by(bra_id=bra[0]["id"])
+    for yb in ybs.all():
+        ecis[yb.year] = yb.eci_wld
+    return ecis
 
 agg = {'val_usd':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
         'val_usd_growth_pct':func.avg, 'val_usd_growth_pct_5':func.avg, 
@@ -98,7 +105,7 @@ def make_query(data_table, url_args, **kwargs):
 
     # handle location (if specified)
     if "bra_id" in kwargs:
-        if "+" in kwargs["bra_id"]:
+        if "_" in kwargs["bra_id"]:
             aggregate = False
         if "show." in kwargs["bra_id"]:
             # the '.' indicates that we are looking for a specific bra nesting
@@ -113,6 +120,7 @@ def make_query(data_table, url_args, **kwargs):
         elif "show" not in kwargs["bra_id"]:
             # otherwise we have been given specific bra(s)
             ret["location"] = parse_bras(kwargs["bra_id"])
+            ret["eci"] = get_eci(ret["location"])
             # filter query
             if len(ret["location"]) > 1:
                 if aggregate:
@@ -145,8 +153,8 @@ def make_query(data_table, url_args, **kwargs):
             query = query.filter(func.char_length(data_table.hs_id) == ret["hs_level"])
         # make sure the user does not want to show all occupations
         if "show" not in kwargs["hs_id"]:
-            # we allow the user to specify occupations separated by '+'
-            ret["product"] = kwargs["hs_id"].split("+")
+            # we allow the user to specify occupations separated by '_'
+            ret["product"] = kwargs["hs_id"].split("_")
             # Make sure the cbo_id requested actually exists in the DB
             ret["product"] = [exist_or_404(Hs, hs_id).serialize() for hs_id in ret["product"]]
             # filter query
@@ -167,7 +175,7 @@ def make_query(data_table, url_args, **kwargs):
         # make sure the user does not want to show all occupations
         if "show" not in kwargs["wld_id"]:
             # we allow the user to specify occupations separated by '+'
-            ret["wld"] = kwargs["wld_id"].split("+")
+            ret["wld"] = kwargs["wld_id"].split("_")
             # Make sure the cbo_id requested actually exists in the DB
             ret["wld"] = [exist_or_404(Wld, wld_id).serialize() for wld_id in ret["wld"]]
             # filter query
