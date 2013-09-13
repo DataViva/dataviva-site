@@ -5,55 +5,41 @@
 
 {% block head %}
 
-  <style>
-    div#login_div {
-      color: #333;
-      font-size: 11px;
-      left: 50%;
-      margin-left: -150px;
-      margin-top: -130px;
-      position: absolute;
-      text-align: center;
-      top: 50%;
-      width: 300px;
-    }
-    div#login_text {
-      margin: 12px 0px;
-      text-align: left;
-    }
-  </style>
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.login.css" />
 
 {% endblock %}
 
 {% block content %}
 
-<div id="login_div">
-  <div id="logo"></div>
-  <div id="login_text">
-    {% trans %}Logging in is easy! All you have to do is choose one of the following accounts to link with your profile. We'll take care of the rest.{% endtrans %}
-  <br><br>
-    {% trans %}By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile.{% endtrans %}
-</div>
-  <form action="" method="post" name="login">
-      {{ form.hidden_tag() }}
-      <p>
-      {{form.remember_me(id="remember")}}<label for="remember">{% trans %}Remember Me{% endtrans %}</label></p>
-      {% for pr in providers %}
-      <a id="{{ pr }}" class="login_button" href="{{ pr }}"></a>
-      {% endfor %}
-  </form>
-</div>
+  <div id="login_div">
+    <div id="logo"></div>
+    <div id="login_text">
+        {% trans %}Logging in is easy! All you have to do is choose one of the following accounts to link with your profile. We'll take care of the rest.{% endtrans %}
+      <br><br>
+        {% trans %}By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile.{% endtrans %}
+    </div>
+    <form action="" method="post" name="login">
+        {{ form.hidden_tag() }}
+        <p>
+        {{form.remember_me(id="remember")}}<label for="remember">{% trans %}Remember Me{% endtrans %}</label></p>
+        {% for pr in providers %}
+        <a id="{{ pr }}" class="login_button" href="{{ pr }}"></a>
+        {% endfor %}
+    </form>
+  </div>
 
-<script type="text/javascript">
+  <script type="text/javascript">
 
-leon("#remember").color(dataviva.color).size("small")
+    leon("#remember").color(dataviva.color).size("small")
 
-d3.selectAll(".login_button").on(vizwhiz.evt.click, function () {
-  var pr = this.id.toLowerCase()
-  form = document.forms['login'];
-  form.elements['provider'].value = pr;
-  this.parentNode.submit();
-  d3.event.preventDefault();
-})
-</script>
+    d3.selectAll(".login_button").on(vizwhiz.evt.click, function () {
+      var pr = this.id.toLowerCase()
+      form = document.forms['login'];
+      form.elements['provider'].value = pr;
+      this.parentNode.submit();
+      d3.event.preventDefault();
+    })
+    
+  </script>
+
 {% endblock %}

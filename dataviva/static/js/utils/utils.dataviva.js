@@ -251,6 +251,9 @@ dataviva.format.text = function(text,name,l) {
       "votes": {"en": "Top Voted", "pt": "Mais Votados"},
       "newest": {"en": "Newest", "pt": "O Mais Novo"},
       
+      // Admin
+      "edit": {"en": "Edit", "pt": "Editar"},
+      
       // Selector
       "search": {"en": "Search", "pt": "Pesquisar"},
       "search_results": {"en": "Search Results", "pt": "Resultados da Pesquisa"},

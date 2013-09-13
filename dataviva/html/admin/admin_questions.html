@@ -4,51 +4,53 @@
 
 {% block admin_content %}
 
-<div class="feed">
+  <div class="feed">
   
-  <table>
-    <thead>
-      <tr>
-        <th>{% trans %}Question{% endtrans %}</th>
-        <th>{% trans %}User{% endtrans %}</th>
-        <th>{% trans %}Date{% endtrans %}</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
+    <table>
+      <thead>
+        <tr>
+          <th>{% trans %}Question{% endtrans %}</th>
+          <th>{% trans %}User{% endtrans %}</th>
+          <th>{% trans %}Date{% endtrans %}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
 
-</div>
+  </div>
 
-<script src="/static/js/utils/utils.infinite_scroll.js"></script>
-<script>
+{% endblock %}
 
-function item_formatter(container_el, activities){
+{% block js %}
+
+  <script src="/static/js/utils/utils.infinite_scroll.js"></script>
+  <script>
+
+  function item_formatter(container_el, activities){
   
-  roles = {0: "user", 1: "admin", 2: "super admin"}
+    var attrs_enter = d3.select(container_el).select("tbody").selectAll("tr")
+      .data(activities, function(d){ return d.question; })
+      .enter().append("tr")
+
+    attrs_enter.append("td").text(function(d){ return d.question; })
+    attrs_enter.append("td").text(function(d){ return d.user.fullname; })
+    attrs_enter.append("td").text(function(d){ return moment(d.timestamp).calendar(); })
+    attrs_enter.append("td")
+      .append("a")
+      .attr("href", function(d){
+        return window.location + d.id;
+      })
+      .text(dataviva.format.text("edit"))
+
+  }
+
+  var is = infinite_scroll().format_items(item_formatter);
+
+  d3.select(".feed")
+    .call(is)
   
-  var attrs_enter = d3.select(container_el).select("tbody").selectAll("tr")
-    .data(activities, function(d){ return d.question; })
-    .enter().append("tr")
-
-  attrs_enter.append("td").text(function(d){ return d.question; })
-  attrs_enter.append("td").text(function(d){ return d.user.fullname; })
-  attrs_enter.append("td").text(function(d){ return moment(d.timestamp).calendar(); })
-  attrs_enter.append("td")
-    .append("a")
-    .attr("href", function(d){
-      return window.location + d.id;
-    })
-    .text("Edit")
-
-}
-
-var is = infinite_scroll().format_items(item_formatter);
-
-d3.select(".feed")
-  .call(is)
-  
-</script>
+  </script>
 
 {% endblock %}

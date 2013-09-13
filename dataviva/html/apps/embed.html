@@ -247,60 +247,57 @@
               d3.select("#app").call(app.viz.title(app.build.title))
             })
         }
-        
-        var rec_url = app.url
       }
-      else {
-        var u = app.url.split("/")
-        if (["hs","isic"].indexOf(app.build.output) >= 0) {
-          var i = 3
-        }
-        else if (["wld","cbo"].indexOf(app.build.output) >= 0) {
-          var i = 4
-        }
-        else {
-          var i = 2
-        }
-        u[i] = id
-        var rec_url = u.join("/")
-      }
-      
-      rec_format = function(data) {
 
-        var priority = ["both_filters","filter2","filter1","no_filters"],
-            html_return = "",
-            title = false
-        
-        priority.forEach(function(p,i){
-          if (data[p]) {
-            if (!title) {
-              html_return += "<div class='title'>"+dataviva.format.text("related_apps")+"</div>"
-              title = true
-            }
-            else if (i == priority.length-1) {
-              html_return += "<div class='title'>"+dataviva.format.text("other_apps")+"</div>"
-            }
-            
-            if (["network","rings","geo_map"].indexOf(app.build.app.type) >= 0) {
-              var classname = "decision short icon"
-            }
-            else {
-              var classname = "decision icon"
-            }
-            
-            data[p].forEach(function(a){
-              html_return += "<div id='"+a.url+"' class='"+classname+" "+a.app.type+"' "
-              html_return += "onclick='app.start(this.id)'>"
-              html_return += a.title
-              html_return += "</div>"
-            })
-          }
-        })
-        return html_return
-        
-      }
+      var priority = ["both_filters","filter2","filter1","no_filters"],
+          html_return = "<div class='title'>"+dataviva.format.text("related_apps")+"</div>"
       
-      return {"url": "/apps/recommend/"+rec_url, "callback": rec_format}
+      priority.forEach(function(p,i){
+        if (app.recommendations[p]) {
+          
+          if (["network","rings","geo_map"].indexOf(app.build.app.type) >= 0) {
+            var classname = "decision short icon"
+          }
+          else {
+            var classname = "decision icon square"
+          }
+          
+          app.recommendations[p].forEach(function(a){
+            var u = a.url.replace("<"+app.build.output+">",id)
+            var t = a.title.replace("<"+app.build.output+">",obj.name)
+            if (t.indexOf("<"+app.build.output+"_") >= 0) {
+              var article = t.match(new RegExp("<"+app.build.output+"_.*?>"))
+              var word = article[0]
+              article = article[0].split("_")[1].split(">")[0]
+              if (obj.article_pt) {
+                if (obj.gender_pt == "m") {
+                  if (article == "em") var new_article = "no"
+                  if (article == "de") var new_article = "do" 
+                  if (article == "para") var new_article = "para o" 
+                }
+                else if (obj.gender_pt == "f") {
+                  if (article == "em") var new_article = "na" 
+                  if (article == "de") var new_article = "da"
+                  if (article == "para") var new_article = "para a"
+                }
+                if (obj.plural_pt) {
+                  new_article += "s"
+                }
+              }
+              else {
+                var new_article = article
+              }
+              t = t.replace(word,new_article)
+            }
+            
+            html_return += "<div id='"+u+"' class='"+classname+" "+a.app.type+"' "
+            html_return += "onclick='app.start(this.id)'>"
+            html_return += t.toTitleCase()
+            html_return += "</div>"
+          })
+        }
+      })
+      return html_return
       
     }
     
@@ -459,6 +456,9 @@
             app.error(dataviva.format.text("Build Not Available"))
           }
           else {
+            
+            app.star(data.starred)
+            app.recommendations = data.recommendations
             
             if (app.build && app.build.app.type != data.current_build.app.type) {
               builder.app(data.current_build.app.type,true)
@@ -1306,11 +1306,23 @@ val)+": ", "suffix": ""};
       
     }
     
-    app.star = function() {
+    app.star = function(status) {
+      
+      function update_star(s) {
+        d3.select("#starred > i")
+          .attr("id","status_"+s)
+          .attr("class",function() {
+            return s == 1 ? "icon-star" : "icon-star-empty";
+          })
+      }
 
       var id = d3.select("#starred > i").attr("id")
-      var status = parseInt(id.split("_")[1],10)
-      if (status == 0) {
+      var current_status = parseInt(id.split("_")[1],10)
+      
+      if ([-1,0,1].indexOf(status) >= 0) {
+        update_star(status)
+      }
+      else if (current_status == 0) {
         login();
       }
       else {
@@ -1320,12 +1332,7 @@ val)+": ", "suffix": ""};
         d3.json(url)
           .header("Content-type","application/x-www-form-urlencoded")
           .post("title="+app.build.title, function(error,data) {
-            var status = data.success
-            d3.select("#starred > i")
-              .attr("id","status_"+status)
-              .attr("class",function() {
-                return status == 1 ? "icon-star" : "icon-star-empty";
-              })
+            update_star(data.success)
           })
       }
         

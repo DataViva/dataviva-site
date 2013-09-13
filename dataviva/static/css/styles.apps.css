@@ -29,6 +29,10 @@ body {
           transition: top 0.6s;
 }
 
+div.loading {
+  background-color: #fafafa;
+}
+
 /****************/
 /* Top Controls */
 /****************/
@@ -117,6 +121,14 @@ div.filter_button > div.leon.button {
 .ui_group {
   display: inline-block;
   padding: 5px;
+}
+
+.vizwhiz_tooltip_large .vizwhiz_tooltip_html {
+  text-align: center;
+}
+
+.vizwhiz_tooltip_large .vizwhiz_tooltip_html .title {
+  text-align: center;
 }
 
 /*******************/

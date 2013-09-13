@@ -1,10 +1,24 @@
 <!-- extend from site layout -->
 {% extends "templates/site.html" %}
 
+{% block head %}
+
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.admin.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
+
+{% endblock %}
+
 
 {% block body %}
-<div>
-  <div class="grid5col1">
+  
+  <div id="admin_content" class="grid5col4">
+    <div class="lightbox">
+      {% block admin_content %}
+      {% endblock %}
+    </div>
+  </div>
+
+  <div id="admin_nav" class="grid5col1">
     
     {% set navigation_bar = [
         ('admin.admin_users', 'Users'),
@@ -19,28 +33,18 @@
     {% set active_page = request.endpoint -%}
     {% set active_question_page = request.view_args.status -%}
 
-    <nav>
-      <ul id="navigation">
-      {% for id, caption in navigation_bar %}
-        <li{% if id == active_page %} class="active"{% endif %}><a href="{{ url_for(id) }}">{{ caption|e }}</a></li>
-        {% if active_page == 'admin.admin_questions' and id == 'admin.admin_questions' %}
-          <ul>
-          {% for q_id, q_caption in question_navigation_bar %}
-            <li{% if q_id == active_question_page %} class="active"{% endif %}><a href="{{ url_for(id, status=q_id) }}">{{ q_caption|e }}</a></li>
-          {% endfor %}
-          </ul>
-        {% endif %}
-      {% endfor %}
-      </ul>
-    </nav>
+    {% for id, caption in navigation_bar %}
+      <a href="{{ url_for(id) }}" class="{% if id == active_page %}decision{% else %}help{% endif %}">{{ _(caption|e) }}</a>
+      {% if active_page == 'admin.admin_questions' and id == 'admin.admin_questions' %}
+        <ul>
+        {% for q_id, q_caption in question_navigation_bar %}
+          <a href="{{ url_for(id, status=q_id) }}" class="{% if q_id == active_question_page %}decision{% else %}help{% endif %} icon short {{q_id}}">{{ _(q_caption|e) }}</a>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endfor %}
     
   </div>
-</div>
-
-<div id="admin-content" class="grid5col4">
-{% block admin_content %}
-{% endblock %}
-</div>
 
 </div>
 {% endblock %}

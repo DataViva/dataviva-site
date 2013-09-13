@@ -301,22 +301,20 @@ a.logo {
   width: 77px;
 }
 
-a.logo.governo {
-  background-image: url("/static/img/nav/logo_governo_color.jpg");
+a.logo:hover {
+  opacity: 1;
 }
 
-a.logo.governo:hover {
-  background-image: url("/static/img/nav/logo_governo_color.jpg");
-  opacity: 1;
+a.logo.governo {
+  background-image: url("/static/img/nav/logo_governo_footer.jpg");
 }
 
 a.logo.fapemig {
-  background-image: url("/static/img/nav/logo_fapemig_color.jpg");
+  background-image: url("/static/img/nav/logo_fapemig_footer.jpg");
 }
 
-a.logo.fapemig:hover {
-  background-image: url("/static/img/nav/logo_fapemig_color.jpg");
-  opacity: 1;
+a.logo.fjp {
+  background-image: url("/static/img/nav/logo_fjp_footer.jpg");
 }
 
 a.opendata {

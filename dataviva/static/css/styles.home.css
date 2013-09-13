@@ -15,15 +15,18 @@ body.home #welcome {
 
 body.home #welcome a.logo {
   height: 75px;
+  opacity: 1;
   width: 120px;
 }
 
 body.home #welcome a.logo.governo {
   background-image: url("/static/img/nav/logo_governo.jpg");
-  opacity: 1;
 }
 
 body.home #welcome a.logo.fapemig {
   background-image: url("/static/img/nav/logo_fapemig.jpg");
-  opacity: 1;
+}
+
+body.home #welcome a.logo.fjp {
+  background-image: url("/static/img/nav/logo_fjp.jpg");
 }

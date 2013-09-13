@@ -129,13 +129,16 @@ class Build(db.Model, AutoSerialize):
     '''Returns the URL for the specific build.'''
     def url(self, **kwargs):
         bras = []
-        for b in self.bra:
-            if b.id != "all" and b.distance > 0:
-                bras.append(b.id+"."+b.distance)
-            else:
-                bras.append(b.id)
-                
-        bra_id = "_".join(bras)
+
+        if isinstance(self.bra,(list,tuple)):
+            for b in self.bra:
+                if b.id != "all" and b.distance > 0:
+                    bras.append(b.id+"."+b.distance)
+                else:
+                    bras.append(b.id)
+            bra_id = "_".join(bras)
+        else:
+            bra_id = "<bra>"
         
         url = '{0}/{1}/{2}/{3}/{4}/{5}'.format(self.app.type, 
                 self.dataset, bra_id, self.filter1, self.filter2, self.output)
@@ -147,13 +150,15 @@ class Build(db.Model, AutoSerialize):
     def data_url(self, **kwargs):
         
         bras = []
-        for b in self.bra:
-            if b.id != "all" and b.distance > 0:
-                bras.append(b.id+"."+b.distance)
-            else:
-                bras.append(b.id)
-                
-        bra = "_".join(bras)
+        if isinstance(self.bra,(list,tuple)):
+            for b in self.bra:
+                if b.id != "all" and b.distance > 0:
+                    bras.append(b.id+"."+b.distance)
+                else:
+                    bras.append(b.id)
+            bra = "_".join(bras)
+        else:
+            bra = "<bra>"
         
         if self.app.type == "geo_map" and bra == "all":
             bra = "all.show.2"
@@ -231,7 +236,7 @@ class Build(db.Model, AutoSerialize):
             if depths[lang]["single"]["8"] in title:
                 title = title.replace(depths[lang]["single"]["8"],depths[lang]["single"][kwargs["depth"][0][4:]])
                 
-        if self.output == "bra" and self.bra[0].id == "all":
+        if self.output == "bra" and isinstance(self.bra,(list,tuple)) and self.bra[0].id == "all":
              title = title.replace(depths[lang]["plural"]["8"],depths[lang]["plural"]["2"])
          
         if self.app_id != 2:    
@@ -259,7 +264,7 @@ class Build(db.Model, AutoSerialize):
                 return article
         
         if title:
-            if "<bra>" in title:
+            if "<bra>" in title and isinstance(self.bra,(list,tuple)):
                 bras = []
                 for b in self.bra:
                     name = getattr(b, name_lang)
@@ -273,26 +278,26 @@ class Build(db.Model, AutoSerialize):
                 article_search = re.search('<bra_(\w+)>', title)
                 if article_search:
                     title = title.replace(article_search.group(0), " and ".join([get_article(b, article_search.group(1)) for b in self.bra]))
-            if "<isic>" in title:
+            if "<isic>" in title and hasattr(self,"isic"):
                 title = title.replace("<isic>", ", ".join([getattr(i, name_lang) for i in self.isic]))
                 article_search = re.search('<isic_(\w+)>', title)
                 if article_search:
-                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.bra]))
-            if "<hs>" in title:
+                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.isic]))
+            if "<hs>" in title and hasattr(self,"hs"):
                 title = title.replace("<hs>", ", ".join([getattr(h, name_lang) for h in self.hs]))
                 article_search = re.search('<hs_(\w+)>', title)
                 if article_search:
-                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.bra]))
-            if "<cbo>" in title:
+                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.hs]))
+            if "<cbo>" in title and hasattr(self,"cbo"):
                 title = title.replace("<cbo>", ", ".join([getattr(c, name_lang) for c in self.cbo]))
                 article_search = re.search('<cbo_(\w+)>', title)
                 if article_search:
-                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.bra]))
-            if "<wld>" in title:
+                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.cbo]))
+            if "<wld>" in title and hasattr(self,"wld"):
                 title = title.replace("<wld>", ", ".join([getattr(w, name_lang) for w in self.wld]))
                 article_search = re.search('<wld_(\w+)>', title)
                 if article_search:
-                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.bra]))
+                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.wld]))
 
         return title_case(title)
             
@@ -301,14 +306,14 @@ class Build(db.Model, AutoSerialize):
         
         auto_serialized = super(Build, self).serialize()
         
-        auto_serialized["bra"] = [b.serialize() for b in self.bra]
-        
-        for i,b in enumerate(auto_serialized["bra"]):
-            if b["id"] != "all" and self.bra[i].distance:
-                b["distance"] = self.bra[i].distance
-                b["neighbor_ids"] = self.bra[i].neighbor_ids
-            elif b["id"] != "all" and len(self.bra[i].pr_ids):
-                b["pr_ids"] = self.bra[i].pr_ids
+        if isinstance(self.bra,(list,tuple)):
+            auto_serialized["bra"] = [b.serialize() for b in self.bra]
+            for i,b in enumerate(auto_serialized["bra"]):
+                if b["id"] != "all" and self.bra[i].distance:
+                    b["distance"] = self.bra[i].distance
+                    b["neighbor_ids"] = self.bra[i].neighbor_ids
+                elif b["id"] != "all" and len(self.bra[i].pr_ids):
+                    b["pr_ids"] = self.bra[i].pr_ids
         
         if hasattr(self, "isic"):
             auto_serialized["isic"] = [i.serialize() for i in self.isic]

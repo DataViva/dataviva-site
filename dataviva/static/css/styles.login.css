@@ -1,0 +1,45 @@
+div#login_div {
+  color: #333;
+  font-size: 11px;
+  left: 50%;
+  margin-left: -150px;
+  margin-top: -130px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 300px;
+}
+div#login_text {
+  margin: 12px 0px;
+  text-align: left;
+}
+
+a.login_button {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 95% 95%;
+  display: inline-block;
+  height: 50px;
+  margin: 12px;
+  width: 50px;
+  -webkit-transition: background-size 0.1s;
+     -moz-transition: background-size 0.1s;
+       -o-transition: background-size 0.1s;
+          transition: background-size 0.1s;
+}
+
+a.login_button:hover {
+  background-size: 100% 100%;
+}
+
+a.login_button#Google {
+  background-image: url("/static/img/icons/login/login_google.png");
+}
+
+a.login_button#Facebook {
+  background-image: url("/static/img/icons/login/login_facebook.png");
+}
+
+a.login_button#Twitter {
+  background-image: url("/static/img/icons/login/login_twitter.png");
+}

@@ -13,7 +13,6 @@
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: 100%;
-  color: white;
   content: "";
   display: block;
   height: 100%;
@@ -23,11 +22,20 @@
   font-style: normal;
   font-weight: normal;
   left: 0px;
+  line-height: 50px;
   position: absolute;
   text-align: center;
   text-decoration: inherit;
   top: 0px;
   width: 43px;
+}
+
+.decision.icon:before {
+  color: white;
+}
+
+.help.icon:before {
+  color: #888;
 }
 
 .help.icon.square:before,
@@ -287,6 +295,22 @@
   content: "\f112";
 }
 
+/*****************/
+/* About Buttons */
+/*****************/
+
+.icon.general:before {
+  content: "\f0a3";
+}
+
+.icon.glossary:before {
+  content: "\f02d";
+}
+
+.icon.credits:before {
+  content: "\f03a";
+}
+
 /*******************/
 /* Account Buttons */
 /*******************/
@@ -297,7 +321,6 @@
 
 .decision.icon.replies:before {
   content: "\f112";
-  line-height: 50px;
 }
 
 .decision.icon.questions {
@@ -306,5 +329,31 @@
 
 .decision.icon.questions:before {
   content: "\f075";
-  line-height: 50px;
+}
+
+/*****************/
+/* Admin Buttons */
+/*****************/
+
+.decision.icon.pending,
+.decision.icon.approved,
+.decision.icon.rejected,
+.decision.icon.duplicate {
+  background-color: #333 !important;
+}
+
+.icon.pending:before {
+  content: "\f06a";
+}
+
+.icon.approved:before {
+  content: "\f00c";
+}
+
+.icon.rejected:before {
+  content: "\f00d";
+}
+
+.icon.duplicate:before {
+  content: "\f086";
 }

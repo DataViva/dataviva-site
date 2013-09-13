@@ -5,8 +5,10 @@
 
 {% block head %}
 
-<link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
-<link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.ask.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.sabrina.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
 
 {% endblock %}
 
@@ -51,8 +53,7 @@
       
       <a href="#" class="submit">
         <div class="decision">
-          <div class="text">{% trans %}Ask Sabrina{% endtrans %}!</div>
-          <div class="arrow"></div>
+          {% trans %}Ask Sabrina{% endtrans %}!
         </div>
       </a>
       

@@ -20,7 +20,11 @@ div#timer {
 }
 
 hr {
-  background-color: #ccc;
+  background-color: #cccccc;
+  border: 0;
+  clear: both;
+  color: #cccccc;
+  height: 1px;
   margin: 10px;
 }
 
@@ -132,7 +136,6 @@ h2 {
 /******************/
 
 div.loading {
-  background-color: #fafafa;
   bottom: 0px;
   left: 0px;
   opacity: 1;
@@ -201,6 +204,14 @@ div.loading > .text {
   text-shadow: 0px 0px 6px #efefef;
   top: 50%;
   width: 100%;
+}
+
+/********************/
+/* Infinite Loading */
+/********************/
+div.infinite_loading {
+  height: 100px;
+  position: relative;
 }
 
 /*******************/

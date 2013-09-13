@@ -12,11 +12,9 @@ from dataviva.admin.forms import AdminQuestionUpdateForm
 mod = Blueprint('admin', __name__, url_prefix='/admin')
 
 
-# @mod.before_request
-# def before_request():
-#     if not g.user.is_admin():
-#         flash('You need admin privledges for this section of the site!')
-#         return redirect(url_for('account.activity'))
+@mod.before_request
+def before_request():
+    g.page_type = "admin"
 
 ###############################
 # Views for ALL logged in users
@@ -67,18 +65,18 @@ def admin_questions(status=None):
     if not status:
         return redirect(url_for(".admin_questions", status="pending"))
     
-    offset = request.args.get('offset', 0)
-    limit = 50
-    
     if request.is_xhr:
-        
+    
+        offset = request.args.get('offset', 0)
+        limit = 50
+    
         # get all users EXCEPT the logged in user
         curr_status = Status.query.filter_by(name=status).first_or_404()
         query = Question.query.filter_by(status = curr_status)
-        
+    
         items = query.limit(limit).offset(offset).all()
         items = [i.serialize() for i in items]
-        
+    
         return jsonify({"activities":items})
     
     return render_template("admin/admin_questions.html")
@@ -86,6 +84,7 @@ def admin_questions(status=None):
 @mod.route('/questions/<status>/<int:question_id>/', methods=['GET', 'POST'])
 @login_required
 def admin_questions_edit(status, question_id):
+    
     q = Question.query.get_or_404(question_id)
     s = Status.query.filter_by(name=status).first_or_404()
     form = AdminQuestionUpdateForm()

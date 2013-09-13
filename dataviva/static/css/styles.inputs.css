@@ -136,7 +136,8 @@ a:hover {
 
 body.general .decision,
 body.home .decision,
-body.guide .decision {
+body.guide .decision,
+body.admin .decision {
   background-color: #af1f24; /* red */
 }
 
