@@ -112,7 +112,8 @@ def get_growth(bra_id, years, table, val_var, columns, other_var):
         
         for year, row in growth_data.iterrows():
             vals = [None if np.isnan(x) else x for x in row.values]
-            vals_for_db.append(vals + [year, bra_id, c])
+            if set(vals) != set([None]):
+                vals_for_db.append(vals + [year, bra_id, c])
     
     return vals_for_db
 
