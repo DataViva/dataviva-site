@@ -135,36 +135,36 @@ def get_urls():
     urls = {"rais":[], "secex":[]}
     
     '''rais'''
-    urls["rais"] = ['/rais/all/{bra}/all/show.4/', '/rais/all/{bra}/show.5/all/', \
-            '/rais/all/{bra}/{isic}/show.4/', '/rais/all/{bra}/show.5/{cbo}/',
-            '/rais/all/{bra}.show.8/all/all/', '/rais/all/{bra}.show.8/{isic}/all/', \
-            '/rais/all/{bra}.show.8/all/{cbo}/']
+    urls["rais"] = ['/rais/2010/{bra}/all/show.4/', '/rais/2010/{bra}/show.5/all/', \
+            '/rais/2010/{bra}/{isic}/show.4/', '/rais/2010/{bra}/show.5/{cbo}/',
+            '/rais/2010/{bra}.show.8/all/all/', '/rais/2010/{bra}.show.8/{isic}/all/', \
+            '/rais/2010/{bra}.show.8/all/{cbo}/']
             
-    q = "select max(year) from rais_yb"
-    cursor.execute(q)
-    maxyear = cursor.fetchall()[0][0]
-    
-    temp = []
-    for url in urls["rais"]:
-        temp.append(url.replace("all",str(maxyear),1))
-        
-    urls["rais"] = temp + urls["rais"]
+    # q = "select max(year) from rais_yb"
+    # cursor.execute(q)
+    # maxyear = cursor.fetchall()[0][0]
+    # 
+    # temp = []
+    # for url in urls["rais"]:
+    #     temp.append(url.replace("all",str(maxyear),1))
+    #     
+    # urls["rais"] = temp + urls["rais"]
     
     '''secex'''
-    urls["secex"] = ['/secex/all/{bra}/all/show.5/', '/secex/all/{bra}/show.6/all/', \
-            '/secex/all/{bra}/{hs}/show.5/', '/secex/all/{bra}/show.6/{wld}/',
-            '/secex/all/{bra}.show.8/all/all/', '/secex/all/{bra}.show.8/{hs}/all/', \
-            '/secex/all/{bra}.show.8/all/{wld}/']
-            
-    q = "select max(year) from secex_yb"
-    cursor.execute(q)
-    maxyear = cursor.fetchall()[0][0]
+    urls["secex"] = ['/secex/2011/{bra}/all/show.5/', '/secex/2011/{bra}/show.6/all/', \
+            '/secex/2011/{bra}/{hs}/show.5/', '/secex/2011/{bra}/show.6/{wld}/',
+            '/secex/2011/{bra}.show.8/all/all/', '/secex/2011/{bra}.show.8/{hs}/all/', \
+            '/secex/2011/{bra}.show.8/all/{wld}/']
     
-    temp = []
-    for url in urls["secex"]:
-        temp.append(url.replace("all",str(maxyear),1))
-        
-    urls["secex"] = temp + urls["secex"]
+    # q = "select max(year) from secex_yb"
+    # cursor.execute(q)
+    # maxyear = cursor.fetchall()[0][0]
+    # 
+    # temp = []
+    # for url in urls["secex"]:
+    #     temp.append(url.replace("all",str(maxyear),1))
+    #     
+    # urls["secex"] = temp + urls["secex"]
     
     return urls
 
