@@ -189,6 +189,7 @@
     app.build = null
     app.url = "{{ current_build.url() }}"
     app.data = {}
+    app.ecis = {}
     app.networks = {}
     app.coords = {}
     app.attrs = {}
@@ -518,6 +519,7 @@
                   .get(function(error,d){
                     app.data[app.build.data_url] = {}
                     app.data[app.build.data_url].raw = d.data
+                    app.ecis[app.build.data_url] = d.eci
                     callback(error,d)
                   })
               },"/"+app.build.data_url)
@@ -873,8 +875,9 @@
         .data_source(footer[app.build.dataset])
         .solo(app.solos)
         .filter(app.filters)
-        .sub_title(null)
+        .sub_title(app.sub_title())
         .icon_style(style)
+        .yaxis_val(null)
         
       /******************************/
       /* Network Specific Variables */
@@ -941,11 +944,14 @@
       else if (app.build.app.type == "scatter") {
         var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca"
         var yv = app.build.output == "hs" ? "pci" : "ici"
+        if (!app.ecis[app.build.data_url]) var eci = null
+        else var eci = {"eci": app.ecis[app.build.data_url][app.vars.year]}
         app.viz
           .xaxis_var("distance")
           .yaxis_var(yv)
           .xaxis_scale("linear")
           .yaxis_scale("linear")
+          .yaxis_val(eci)
           .mirror_axis(false)
           .spotlight(app.vars.spotlight)
           .active_var(av)
@@ -1022,7 +1028,7 @@
           var sub = text
         }
         else {
-          var sub = ""
+          var sub = app.sub_title()
         }
         
         d3.select("#app").call(app.viz[type](app[type+"s"]).sub_title(sub))
@@ -1038,23 +1044,37 @@
           app.resize()
         }
         
-        if (type == "depth" || type == "year") app.title_update()
+        if (!app.solos.length && !app.filters.length) {
+          app.viz.sub_title(app.sub_title())
+        }
+        
+        if (type == "depth" || type == "year") {
+          app.title_update()
+          app.viz.title(app.build.title)
+        }
+        
+        if (type == "year" && app.build.app.type == "scatter" && app.ecis[app.build.data_url]) {
+          var eci = {"eci": app.ecis[app.build.data_url][app.vars.year]}
+          app.viz.yaxis_val(eci)
+        }
 
         if (type == "axes") {
-          d3.select("#app").call(app.viz.xaxis_var("cp_bra_1_"+value).yaxis_var("cp_bra_0_"+value))
+          app.viz.xaxis_var("cp_bra_1_"+value).yaxis_var("cp_bra_0_"+value)
         }
         else if (type == "scale") {
-          d3.select("#app").call(app.viz.xaxis_scale(value).yaxis_scale(value)) 
+          app.viz.xaxis_scale(value).yaxis_scale(value)
         }
         else if (type == "rca_scope") {
-          d3.select("#app").call(app.viz.active_var(value))
+          app.viz.active_var(value)
         }
         else if (type == "value_var") {
-          d3.select("#app").call(app.viz[type](value).total_bar(app.total()))
+          app.viz[type](value).total_bar(app.total())
         }
         else {
-          d3.select("#app").call(app.viz[type](value).title(app.build.title))
+          app.viz[type](value)
         }
+        
+        d3.select("#app").call(app.viz)
       }
     }
     
@@ -1398,6 +1418,17 @@ val)+": ", "suffix": ""};
       }
       if (parent.update_title) {
         parent.update_title(window.frameElement.id,app.build.title,app.build.app.type)
+      }
+    }
+    
+    app.sub_title = function() {
+      if (app.ecis[app.build.data_url] && app.ecis[app.build.data_url][app.vars.year]) {
+        var t = dataviva.format.text("eci")
+        var n = dataviva.format.number(app.ecis[app.build.data_url][app.vars.year],"eci")
+        return t + ": " + n
+      }
+      else {
+        return null
       }
     }
     
