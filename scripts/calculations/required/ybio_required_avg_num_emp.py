@@ -46,15 +46,13 @@ def get_mcp(**kwargs):
         select 
           yg.bra_id, isic_id, {0} 
         from 
-          rais_ybi as ygi, attrs_yb as yg
+          rais_ybi as ygi
         where 
           yg.year = {1} and 
           yg.year = ygi.year and 
           length(yg.bra_id) = {2} and 
-          length(ygi.isic_id) = {3} and 
-          yg.population > {4} and 
-          ygi.bra_id = yg.bra_id
-      """.format(kwargs["val"], kwargs["year"], kwargs["geo_level"], 5, kwargs["pop_cutoff"])
+          length(ygi.isic_id) = {3}
+      """.format(kwargs["val"], kwargs["year"], kwargs["geo_level"], 5)
     # print q
     mcp = sql.read_frame(q, db)
     mcp = mcp.pivot(index="bra_id", columns="isic_id", values=kwargs["val"])
