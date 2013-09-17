@@ -38,7 +38,7 @@ def get_rca(year, geo_level):
     # "rais_yb as yb where" \
     # " yb.year = ybi.year and yb.bra_id = ybi.bra_id and ybi.year = {0} and " \
     # "length(ybi.bra_id) = {1} and length(isic_id) = 5 and yb.wage > 1200145000"\
-    .format(year, geo_level)
+    # .format(year, geo_level)
     table = sql.read_frame(q, db)
     table = table.pivot(index="bra_id", columns="isic_id", values="wage")
     table = table.fillna(0)
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-y", "--year", help="year for calculations to be run")
     parser.add_argument("-g", "--geo_level", help="level of geo nesting",
-                            choices=['2', '4', '6', '8', 'all'])
+                            choices=['2', '4', '6', '7', '8', 'all'])
     args = parser.parse_args()
     
     year = args.year
@@ -122,7 +122,7 @@ if __name__ == "__main__":
         geo_level = raw_input("Geo Level {2:state, 4:meso, 6:micro, " \
                                 "8:munic, all}: ")
     if geo_level == "all":
-        geo_level = range(2, 10, 2)
+        geo_level = ['2', '4', '6', '7', '8']
     else:
         geo_level = [geo_level]
     

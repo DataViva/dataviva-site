@@ -63,6 +63,8 @@ def get_growth(bra_id, years, table, val_var, columns, other_var, other_var_2):
 
     q = "select year, {0}, {1}, {2} from {3} where bra_id='{4}'" \
             .format(other_var, other_var_2, val_var, table, bra_id)
+    # print q
+    # sys.exit()
     df = sql.read_frame(q, db)
     df = df.pivot_table(val_var, rows=["year"], cols=[other_var, other_var_2])
     
@@ -136,7 +138,7 @@ def calc_growth(table, val_var, dataset):
     check_columns(columns, val_var, table)
     
     bras = get_all_bras(table)
-    # bras = bras[bras.index('se000000'):]
+    bras = bras[bras.index('sp'):]
     years = get_all_years(table)
     
     lookup = {"i":"isic_id", "o":"cbo_id", "p":"hs_id", "w":"wld_id"}    

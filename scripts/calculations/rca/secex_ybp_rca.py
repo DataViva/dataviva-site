@@ -64,7 +64,7 @@ def main():
     years = [row[0] for row in cursor.fetchall()]
     
     '''The different geo levels e.g. state, meso, micro, munic'''
-    geo_levels = range(2, 10, 2)
+    geo_levels = ['2', '4', '6', '7', '8']
     
     for y in years:
         for geo_level in geo_levels:

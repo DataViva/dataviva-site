@@ -74,11 +74,9 @@ def main():
     '''Get all years in the database'''
     cursor.execute("select distinct year from secex_ybp")
     years = [row[0] for row in cursor.fetchall()]
-    years = [2000]
     
     '''The different geo levels e.g. state, meso, micro, munic'''
-    geo_levels = range(2, 10, 2)
-    geo_levels = [2]
+    geo_levels = ['2', '4', '6', '7', '8']
     
     for y in years:
         for geo_level in geo_levels:
