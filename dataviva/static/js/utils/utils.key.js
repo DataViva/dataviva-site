@@ -92,8 +92,8 @@ function Key() {
             }
             
             var html = "<div class='filter_buttons'>\
-                <div onclick='key_filter()' class='"+filter_class+"'>Hide Group</div>\
-                <div onclick='key_solo()' class='"+solo_class+"'>Solo Group</div>\
+                <div onclick='key_filter()' class='"+filter_class+"'>"+dataviva.format.text("filter")+"</div>\
+                <div onclick='key_solo()' class='"+solo_class+"'>"+dataviva.format.text("solo")+"</div>\
               </div>"
               
             if (attr_type == "bra") var s = "default"
@@ -141,7 +141,7 @@ function Key() {
             "y": y_pos,
             "offset": 0,
             "arrow": true,
-            "description": "Click to Reset all Filters"
+            "description": dataviva.format.text("reset")
           })
         })
         .on(vizwhiz.evt.out,function(){

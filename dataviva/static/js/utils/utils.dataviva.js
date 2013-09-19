@@ -59,7 +59,7 @@ dataviva.format.text = function(text,name,l) {
       "network": {"en": "Network", "pt": "Rede"},
       "rings": {"en": "Rings", "pt": "An\u00e9is"},
       "scatter": {"en": "Scatter", "pt": "Dispers\u00e3o"},
-      "stacked": {"en": "Stacked", "pt": "Hist\u00f3rico"},
+      "stacked": {"en": "Stacked", "pt": "Evolu\u00e7\u00e3o"},
       "tree_map": {"en": "Tree Map", "pt": "Tree Map"},
 
       // Axes
@@ -68,83 +68,83 @@ dataviva.format.text = function(text,name,l) {
 
       // Stacked Area Sorting/Order
       "order": {"en": "Order", "pt": "Ordena\u00e7\u00e3o"},
-      "order_desc_stacked": {"en": "Changes the ordering of the visible areas based on the selected sorting.", "pt": "Muda a ordem das \u00e1reas vis\u00edveis com base na ordenar selecionada."},
+      "order_desc_stacked": {"en": "Changes the ordering of the visible areas based on the selected sorting.", "pt": "Mudar a ordem das \u00e1reas vis\u00edveis com base na ordena\u00e7\u00e3o selecionada."},
       "asc": {"en": "Ascending", "pt": "Ascendente"},
       "desc": {"en": "Descending", "pt": "Descendente"},
     
       // Stacked Area Layout Type
       "layout": {"en": "Layout", "pt": "Layout"},
-      "layout_desc_stacked": {"en": "Changes the X axis between value and market share.", "pt": "Muda o eixo X entre o valor e participa\u00e7\u00e3o de mercado."},
+      "layout_desc_stacked": {"en": "Changes the X axis between value and market share.", "pt": "Mudar o eixo X entre o valor e participa\u00e7\u00e3o de mercado."},
       "value": {"en": "Value", "pt": "Valor"},
       "share": {"en": "Market Share", "pt": "Participa\u00e7\u00e3o de Mercado"},
     
       // RCA Scope Toggle
       "rca_scope": {"en": "RCA Scope", "pt": "Escopo do RCA"},
-      "rca_scope_desc_network": {"en": "Changes which RCA variable is used when highlighting products in the app.", "pt": "Altera\u00e7\u00f5es qual vari\u00e1vel RCA \u00e9 usado quando destacando produtos no app."},
-      "rca_scope_desc_rings": {"en": "Changes which RCA variable is used when highlighting products in the app.", "pt": "Altera\u00e7\u00f5es qual vari\u00e1vel RCA \u00e9 usado quando destacando produtos no app."},
-      "rca_scope_desc_scatter": {"en": "Changes which RCA variable is used when highlighting products in the app.", "pt": "Altera\u00e7\u00f5es qual vari\u00e1vel RCA \u00e9 usado quando destacando produtos no app."},
+      "rca_scope_desc_network": {"en": "Changes which RCA variable is used when highlighting products in the app.", "pt": "Altera qual RCA ser\u00e1 utilizado para destacar produtos no app."},
+      "rca_scope_desc_rings": {"en": "Changes which RCA variable is used when highlighting products in the app.", "pt": "Altera qual RCA ser\u00e1 utilizado para destacar produtos no app."},
+      "rca_scope_desc_scatter": {"en": "Changes which RCA variable is used when highlighting products in the app.", "pt": "Altera qual RCA ser\u00e1 utilizado para destacar produtos no app."},
       "bra_rca": {"en": "Domestic", "pt": "Dom\u00e9stico"},
       "wld_rca": {"en": "International", "pt": "Internacional"},
 
       // Scale Toggle
       "scale": {"en": "Scale", "pt": "Escala"},
-      "scale_desc_compare": {"en": "Changes the mathematical scale used on both axes.", "pt": "Altera a escala matem\u00e1tico utilizado em ambos os eixos."},
+      "scale_desc_compare": {"en": "Changes the mathematical scale used on both axes.", "pt": "Altera a escala matem\u00e1tica utilizada em ambos os eixos."},
       "log": {"en": "Log", "pt": "Log"},
       "linear": {"en": "Linear", "pt": "Linear"},
 
       // Spotlight Toggle
       "spotlight": {"en": "Highlight RCA", "pt": "Real\u00e7ar RCA"},
-      "spotlight_desc_network": {"en": "Removes coloring from nodes which do not have RCA.", "pt": "Remover corantes a partir dos n\u00f3s que n\u00e3o t\u00eam RCA."},
+      "spotlight_desc_network": {"en": "Removes coloring from nodes which do not have RCA.", "pt": "Remover cor dos n\u00f3s que n\u00e3o t\u00eam RCA."},
       "spotlight_scatter": {"en": "Hide RCA", "pt": "Esconder RCA"},
-      "spotlight_scatter_desc_scatter": {"en": "Hides nodes that have RCA.", "pt": "Oculta n\u00f3s que possuem RCA."},
+      "spotlight_scatter_desc_scatter": {"en": "Hides nodes that have RCA.", "pt": "Ocultar n\u00f3s que possuem RCA."},
       "true": {"en": "On", "pt": "Liga"},
       "false": {"en": "Off", "pt": "Desliga"},
       
       // Sorting Toggle
       "sorting": {"en": "Sort", "pt": "Ordenar"},
       "sort": {"en": "Sort", "pt": "Ordenar"},
-      "sort_desc_stacked": {"en": "Changes the variable used to order the areas.", "pt": "Altera a vari\u00e1vel usada para ordenar as \u00e1reas."},
-      "sort_desc_occugrid": {"en": "Changes the variable used to order the donut charts.", "pt": "Altera a vari\u00e1vel usada para ordenar os gr\u00e1ficos de rosca."},
+      "sort_desc_stacked": {"en": "Changes the variable used to order the areas.", "pt": "Alterar a vari\u00e1vel usada para ordenar as \u00e1reas."},
+      "sort_desc_occugrid": {"en": "Changes the variable used to order the donut charts.", "pt": "Alterar a vari\u00e1vel usada para ordenar os gr\u00e1ficos de rosca."},
       
       // Sizing Labels
       "sizing": {"en": "Size", "pt": "Tamanho"},
-      "sizing_desc_tree_map": {"en": "Changes the variable used to size the rectangles.", "pt": "Altera a vari\u00e1vel usada para o tamanho dos ret\u00e2ngulos."},
-      "sizing_desc_stacked": {"en": "Changes the Y axis variable.", "pt": "Altera a vari\u00e1vel do eixo Y."},
-      "sizing_desc_network": {"en": "Changes the variable used to size the circles.", "pt": "Altera a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
-      "sizing_desc_compare": {"en": "Changes the variable used to size the circles.", "pt": "Altera a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
-      "sizing_desc_occugrid": {"en": "Changes the variable used to size the circles.", "pt": "Altera a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
-      "sizing_desc_scatter": {"en": "Changes the variable used to size the circles.", "pt": "Altera a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
+      "sizing_desc_tree_map": {"en": "Changes the variable used to size the rectangles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos ret\u00e2ngulos."},
+      "sizing_desc_stacked": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
+      "sizing_desc_network": {"en": "Changes the variable used to size the circles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
+      "sizing_desc_compare": {"en": "Changes the variable used to size the circles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
+      "sizing_desc_occugrid": {"en": "Changes the variable used to size the circles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
+      "sizing_desc_scatter": {"en": "Changes the variable used to size the circles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
     
       // Color Labels
       "color_var": {"en": "Color", "pt": "Cor"},
-      "color_var_desc_tree_map": {"en": "Changes the variable used to color the rectangles.", "pt": "Altera a vari\u00e1vel utilizada para colorir os ret\u00e2ngulos."},
-      "color_var_desc_stacked": {"en": "Changes the variable used to color the areas.", "pt": "Altera a vari\u00e1vel utilizada para colorir as \u00e1reas."},
-      "color_var_desc_geo_map": {"en": "Changes the variable used to color the locations.", "pt": "Altera a vari\u00e1vel utilizada para colorir os locais."},
-      "color_var_desc_network": {"en": "Changes the variable used to color the circles.", "pt": "Altera a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
-      "color_var_desc_rings": {"en": "Changes the variable used to color the circles.", "pt": "Altera a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
-      "color_var_desc_compare": {"en": "Changes the variable used to color the circles.", "pt": "Altera a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
-      "color_var_desc_occugrid": {"en": "Changes the variable used to color the circles.", "pt": "Altera a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
-      "color_var_desc_scatter": {"en": "Changes the variable used to color the circles.", "pt": "Altera a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
+      "color_var_desc_tree_map": {"en": "Changes the variable used to color the rectangles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os ret\u00e2ngulos."},
+      "color_var_desc_stacked": {"en": "Changes the variable used to color the areas.", "pt": "Alterar a vari\u00e1vel utilizada para colorir as \u00e1reas."},
+      "color_var_desc_geo_map": {"en": "Changes the variable used to color the locations.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os locais."},
+      "color_var_desc_network": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
+      "color_var_desc_rings": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
+      "color_var_desc_compare": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
+      "color_var_desc_occugrid": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
+      "color_var_desc_scatter": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
     
       // Other Control Labels
       "active": {"en": "Available", "pt": "Dispon\u00edvel"},
       "available": {"en": "Available", "pt": "Dispon\u00edvel"},
       "grouping": {"en": "Group", "pt": "Grupo"},
-      "grouping_desc_occugrid": {"en": "Groups the donut charts into different categorizations.", "pt": "Agrupa os gr\u00e1ficos de rosca em diferentes categoriza\u00e7\u00f5es."},
+      "grouping_desc_occugrid": {"en": "Groups the donut charts into different categorizations.", "pt": "Agrupar os gr\u00e1ficos de rosca em diferentes categoriza\u00e7\u00f5es."},
       "none": {"en": "None", "pt": "Nenhum"},
       "total": {"en": "Required", "pt": "Requerido"},
       "year": {"en": "Year", "pt": "Ano"},
 
       // Filter Depths
       "depth": {"en": "Classification", "pt": "Classifica\u00e7\u00e3o"},
-      "depth_desc_tree_map": {"en": "Changes the level of aggregation.", "pt": "Altera o n\u00edvel de agrega\u00e7\u00e3o."},
-      "depth_desc_stacked": {"en": "Changes the level of aggregation.", "pt": "Altera o n\u00edvel de agrega\u00e7\u00e3o."},
-      "depth_desc_geo_map": {"en": "Changes the level of aggregation.", "pt": "Altera o n\u00edvel de agrega\u00e7\u00e3o."},
-      "depth_desc_network": {"en": "Changes the level of aggregation.", "pt": "Altera o n\u00edvel de agrega\u00e7\u00e3o."},
-      "depth_desc_rings": {"en": "Changes the level of aggregation.", "pt": "Altera o n\u00edvel de agrega\u00e7\u00e3o."},
-      "depth_desc_compare": {"en": "Changes the level of aggregation.", "pt": "Altera o n\u00edvel de agrega\u00e7\u00e3o."},
-      "depth_desc_occugrid": {"en": "Changes the level of aggregation.", "pt": "Altera o n\u00edvel de agrega\u00e7\u00e3o."},
-      "depth_desc_scatter": {"en": "Changes the level of aggregation.", "pt": "Altera o n\u00edvel de agrega\u00e7\u00e3o."},
+      "depth_desc_tree_map": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
+      "depth_desc_stacked": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
+      "depth_desc_geo_map": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
+      "depth_desc_network": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
+      "depth_desc_rings": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
+      "depth_desc_compare": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
+      "depth_desc_occugrid": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
+      "depth_desc_scatter": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
       "bra_2": {"en": "State", "pt": "Estado"},
       "bra_4": {"en": "Mesoregion", "pt": "Mesorregi\u00e3o"},
       "bra_6": {"en": "Microregion", "pt": "Microrregi\u00e3o"},
@@ -225,14 +225,14 @@ dataviva.format.text = function(text,name,l) {
       "num_emp": {"en": "Employees", "pt": "Empregados"},
       "num_est": {"en": "Establishments", "pt": "Estabelecimentos"},
       "wage": {"en": "Monthly Wage", "pt": "Renda Mensal"},
-      "total_wage": {"en": "Total Monthly Wage", "pt": "Renda Mensal Totais"},
+      "total_wage": {"en": "Total Monthly Wage", "pt": "Renda Mensal Total"},
       "wage_avg": {"en": "Average Monthly Wage", "pt": "Renda Mensal M\u00e9dia"},
       "wage_avg_bra": {"en": "Brazilian Average Wage", "pt": "Sal\u00e1rio M\u00e9dio Brasileiro"},
     
       // SECEX Labels
       "secex": {"en": "Product Exports (SECEX)", "pt": "Exporta\u00e7\u00f5es de Produtos (SECEX)"},
       "val_usd": {"en": "Exports", "pt": "Exporta\u00e7\u00f5es"},
-      "total_val_usd": {"en": "Total Exports", "pt": "Exporta\u00e7\u00f5es Totais"},
+      "total_val_usd": {"en": "Total Exports", "pt": "Total de Exporta\u00e7\u00f5es"},
     
       // Key Labels
       "brazil": {"en": "Brazil", "pt": "Brasil"},
@@ -285,13 +285,19 @@ dataviva.format.text = function(text,name,l) {
       "related_apps": {"en": "Related Apps", "pt": "Apps Relacionados"},
       "other_apps": {"en": "Other Apps", "pt": "Outros Apps"},
       "Show All Years": {"en": "Show All Years", "pt": "Mostrar Todos os Anos"},
-      "Build Not Available": {"en": "Build Not Available", "pt": "Construir N\u00e3o Dispon\u00edvel"},
-      "Building App": {"en": "Building App", "pt": "Constru\u00e7\u00e3o App"},
+      "Build Not Available": {"en": "Build Not Available", "pt": "Constru\u00e7\u00e3o N\u00e3o Dispon\u00edvel"},
+      "Building App": {"en": "Building App", "pt": "Construindo App"},
       "Downloading Additional Years": {"en": "Downloading Additional Years", "pt": "Baixando Anos Adicionais"},
+      "and": {"en": "and", "pt": "e"},
+      "showing": {"en": "Showing only", "pt": "Mostrando somente"},
+      "excluding": {"en": "Excluding", "pt": "Excluindo"},
     
       // Viz-Whiz Text
       "Click for More Info": {"en": "Click for more data and related apps.", "pt": "Clique para dados adicionais e aplicativos relacionados."},
       "Click to Zoom": {"en": "Click to Zoom", "pt": "Clique para Ampliar"},
+      "filter": {"en": "Hide Group", "pt": "Ocultar Grupo"},
+      "solo": {"en": "Solo Group", "pt": "S\u00f3 este Grupo"},
+      "reset": {"en": "Click to Reset all Filters", "pt": "Clicca per Annulla Tutti i Filtri"}
     
       // Ask Sabrina
       "Asked by": {"en": "Asked by", "pt": "Solicitado por"},

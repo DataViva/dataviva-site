@@ -993,21 +993,21 @@
         
         var ids = []
         if (app.solos.length >= 1 && app.solos.length <= app.categories.length/2) {
-          var prefix = "Showing only "
+          var prefix = dataviva.format.text("showing")+" "
           ids = app.solos
         }
         else if (app.solos.length > app.categories.length/2) {
-          var prefix = "Excluding "
+          var prefix = dataviva.format.text("excluding")+" "
           cats.forEach(function(c){
             if (app.solos.indexOf(c) < 0) ids.push(c)
           })
         }
         else if (app.filters.length >= 1 && app.filters.length <= app.categories.length/2) {
-          var prefix = "Excluding "
+          var prefix = dataviva.format.text("excluding")+" "
           ids = app.filters
         }
         else if (app.filters.length > app.categories.length/2) {
-          var prefix = "Showing only "
+          var prefix = dataviva.format.text("showing")+" "
           cats.forEach(function(c){
             if (app.filters.indexOf(c) < 0) ids.push(c)
           })
@@ -1022,7 +1022,7 @@
           var text = prefix
           names.forEach(function(n,i){
             if (i != 0 && names.length != 2) text += ", "
-            if (i == names.length-1 && i != 0) text += " and "
+            if (i == names.length-1 && i != 0) text += " "+dataviva.format.text("and")+" "
             text += n
           })
           var sub = text

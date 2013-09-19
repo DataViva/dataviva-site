@@ -47,7 +47,7 @@ msgstr "Aplicativos"
 
 #: dataviva/html/home.html:25
 msgid "Go straight to the visualization builder."
-msgstr "Vá direto ao construtor de datavivaização."
+msgstr "Vá direto ao construtor de visualização."
 
 #: dataviva/html/about/appsdocs.html:4
 msgid "About the Apps"
@@ -104,7 +104,7 @@ msgstr "Dispersão"
 #: dataviva/html/about/apps/stacked.html:3 dataviva/html/apps/index.html:16
 #: dataviva/html/templates/about.html:40
 msgid "Stacked"
-msgstr "Histórico"
+msgstr "Evolução"
 
 #: dataviva/html/about/apps/tree_map.html:3 dataviva/html/apps/index.html:12
 #: dataviva/html/templates/about.html:36
@@ -121,7 +121,7 @@ msgstr "Tudo"
 
 #: dataviva/html/account/index.html:26
 msgid "Starred Apps"
-msgstr "Apps Favoritas"
+msgstr "Apps Favoritos"
 
 #: dataviva/html/account/index.html:28 dataviva/html/templates/admin.html:25
 msgid "Questions"
@@ -709,7 +709,7 @@ msgstr "Usuários"
 
 #: dataviva/html/templates/admin.html:28
 msgid "Pending"
-msgstr "Indeciso"
+msgstr "Pendente"
 
 #: dataviva/html/templates/admin.html:29
 msgid "Approved"
@@ -721,7 +721,7 @@ msgstr "Rejeitado"
 
 #: dataviva/html/templates/admin.html:31
 msgid "Duplicate"
-msgstr "Duplicar"
+msgstr "Duplicado"
 
 #: dataviva/html/templates/site.html:15
 msgid "Profiles"
