@@ -293,7 +293,7 @@
             
             html_return += "<div id='"+u+"' class='"+classname+" "+a.app.type+"' "
             html_return += "onclick='app.start(this.id)'>"
-            html_return += t.toTitleCase()
+            html_return += t
             html_return += "</div>"
           })
         }
@@ -1392,7 +1392,7 @@ val)+": ", "suffix": ""};
     }
     
     app.title_update = function() {
-      app.build.title = app.build.title.toTitleCase()
+      
       if (app.build.output == "bra") {
         if (app.vars.depth) {
           var new_depth = dataviva.format.text(app.vars.depth)
@@ -1475,7 +1475,7 @@ val)+": ", "suffix": ""};
         box.select("."+build.dataset).append("div")
           .attr("id",build.url)
           .attr("class","output "+c+" icon "+build.app.type)
-          .html(build.title.toTitleCase())
+          .html(build.title)
           .on(vizwhiz.evt.click,function(){
             app.start(this.id)
           })

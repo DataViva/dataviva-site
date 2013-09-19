@@ -222,7 +222,7 @@ class Build(db.Model, AutoSerialize):
         title_lang = "title_en" if lang == "en" else "title_pt"
         name_lang = "name_en" if lang == "en" else "name_pt"
         
-        title = title_case(getattr(self, title_lang))
+        title = getattr(self, title_lang)
         
         depths = {"en":{"plural":{},"single":{}},"pt":{"plural":{},"single":{}}}
         depths["en"]["single"] = {"2":u"State","4":u"Mesoregion","8":u"Municipality"}
@@ -267,7 +267,7 @@ class Build(db.Model, AutoSerialize):
             if "<bra>" in title and isinstance(self.bra,(list,tuple)):
                 bras = []
                 for b in self.bra:
-                    name = getattr(b, name_lang)
+                    name = title_case(getattr(b, name_lang))
                     if b.id != "all" and b.distance > 0:
                         name = name + " ("+b.distance+"km)"
                     bras.append(name)
@@ -279,27 +279,27 @@ class Build(db.Model, AutoSerialize):
                 if article_search:
                     title = title.replace(article_search.group(0), " and ".join([get_article(b, article_search.group(1)) for b in self.bra]))
             if "<isic>" in title and hasattr(self,"isic"):
-                title = title.replace("<isic>", ", ".join([getattr(i, name_lang) for i in self.isic]))
+                title = title.replace("<isic>", ", ".join([title_case(getattr(i, name_lang)) for i in self.isic]))
                 article_search = re.search('<isic_(\w+)>', title)
                 if article_search:
                     title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.isic]))
             if "<hs>" in title and hasattr(self,"hs"):
-                title = title.replace("<hs>", ", ".join([getattr(h, name_lang) for h in self.hs]))
+                title = title.replace("<hs>", ", ".join([title_case(getattr(h, name_lang)) for h in self.hs]))
                 article_search = re.search('<hs_(\w+)>', title)
                 if article_search:
                     title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.hs]))
             if "<cbo>" in title and hasattr(self,"cbo"):
-                title = title.replace("<cbo>", ", ".join([getattr(c, name_lang) for c in self.cbo]))
+                title = title.replace("<cbo>", ", ".join([title_case(getattr(c, name_lang)) for c in self.cbo]))
                 article_search = re.search('<cbo_(\w+)>', title)
                 if article_search:
                     title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.cbo]))
             if "<wld>" in title and hasattr(self,"wld"):
-                title = title.replace("<wld>", ", ".join([getattr(w, name_lang) for w in self.wld]))
+                title = title.replace("<wld>", ", ".join([title_case(getattr(w, name_lang)) for w in self.wld]))
                 article_search = re.search('<wld_(\w+)>', title)
                 if article_search:
                     title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.wld]))
 
-        return title_case(title)
+        return title
             
 
     def serialize(self, **kwargs):

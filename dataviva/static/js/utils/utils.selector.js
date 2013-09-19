@@ -573,12 +573,23 @@ function Selector() {
               .attr("class","search_title")
               .style("color",vizwhiz.utils.darker_color(v.color))
               .html(title)
-          
+              
             if (type != "file" && searching) {
               text.append("div")
                 .attr("class","search_sub")
                 .html(dataviva.format.text(type+"_"+v.id.length))
             }
+            
+            if (v.id_ibge) {
+              var sub_text = dataviva.format.text("id_ibge") + ": " + v.id_ibge.toString()
+            }
+            else {
+              var sub_text = dataviva.format.text(type+"_id") + ": " + v.display_id.toString()
+            }
+            
+            text.append("div")
+              .attr("class","search_data")
+              .html(sub_text)
             
             if (v.desc && type == "file") {
               text.append("div")

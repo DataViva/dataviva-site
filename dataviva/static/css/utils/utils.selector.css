@@ -109,7 +109,6 @@ div.search_result > div.search_text {
 div.search_text > div.search_title {
   display: inline;
   font-size: 14px;
-  font-weight: bold;
   line-height: 16px;
 }
 

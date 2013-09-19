@@ -74,8 +74,11 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-42576717-1', 'testdataviva.com');
+      
+      if (window.location.host.indexOf("dataviva.info") >= 0) var host = "dataviva.info"
+      else var host = "testvisual.com"
+      
+      ga('create', 'UA-42576717-1', host);
       ga('send', 'pageview');
     
       dataviva.ui.background()

@@ -5,7 +5,7 @@ from dataviva import db
 from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo, Yb
 from dataviva.secex.models import Yp, Yw
 from dataviva.rais.models import Yi, Yo
-from dataviva.utils import exist_or_404, gzip_data, cached_query
+from dataviva.utils import exist_or_404, gzip_data, cached_query, title_case
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
@@ -41,15 +41,15 @@ def fix_name(attr):
     desc_lang = "desc_" + g.locale
     keywords_lang = "keywords_" + g.locale
     if desc_lang in attr:
-        attr["desc"] = attr[desc_lang]
+        attr["desc"] = title_case(attr[desc_lang])
         if "desc_en" in attr: del attr["desc_en"]
         if "desc_pt" in attr: del attr["desc_pt"]
     if name_lang in attr:
-        attr["name"] = attr[name_lang]
+        attr["name"] = title_case(attr[name_lang])
         if "name_en" in attr: del attr["name_en"]
         if "name_pt" in attr: del attr["name_pt"]
     if keywords_lang in attr:
-        attr["keywords"] = attr[keywords_lang]
+        attr["keywords"] = title_case(attr[keywords_lang])
         if "keywords_en" in attr: del attr["keywords_en"]
         if "keywords_pt" in attr: del attr["keywords_pt"]
     return attr

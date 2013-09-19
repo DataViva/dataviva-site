@@ -598,13 +598,30 @@ dataviva.random = function(min,max) {
 }
 
 dataviva.displayID = function(id,type) {
+  
+  function romanize (num) {
+      if (!+num)
+          return false;
+      var digits = String(+num).split(""),
+          key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+                 "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+                 "","I","II","III","IV","V","VI","VII","VIII","IX"],
+          roman = "",
+          i = 3;
+      while (i--)
+          roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+      return Array(+digits.join("") + 1).join("M") + roman;
+  }
 
   if (id) {
     if (["hs","wld"].indexOf(type) >= 0 && id.length > 2) {
       return id.slice(2).toUpperCase();
     }
-    else if (["isic"].indexOf(type) >= 0) return id.slice(1);
-    else return id;
+    else if (["hs"].indexOf(type) >= 0) {
+      return romanize(parseFloat(id));
+    }
+    else if (["isic"].indexOf(type) >= 0 && id.length > 1) return id.slice(1);
+    else return id.toUpperCase();
   }
   else {
     return id;

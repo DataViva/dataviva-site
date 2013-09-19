@@ -1,5 +1,5 @@
 from dataviva import db, __latest_year__
-from dataviva.utils import AutoSerialize, exist_or_404
+from dataviva.utils import AutoSerialize, exist_or_404, title_case
 from sqlalchemy import func, Float
 from sqlalchemy.sql.expression import cast
 
@@ -228,7 +228,7 @@ class Isic(db.Model, AutoSerialize, Stats):
     
     def name(self):
         lang = getattr(g, "locale", "en")
-        return getattr(self,"name_"+lang)
+        return title_case(getattr(self,"name_"+lang))
         
     def icon(self):
         return "/static/img/icons/isic/isic_%s.png" % (self.id[:1])
@@ -259,7 +259,7 @@ class Cbo(db.Model, AutoSerialize, Stats):
     
     def name(self):
         lang = getattr(g, "locale", "en")
-        return getattr(self,"name_"+lang)
+        return title_case(getattr(self,"name_"+lang))
         
     def icon(self):
         return "/static/img/icons/cbo/cbo_%s.png" % (self.id[:1])
@@ -290,7 +290,7 @@ class Hs(db.Model, AutoSerialize, Stats):
     
     def name(self):
         lang = getattr(g, "locale", "en")
-        return getattr(self,"name_"+lang)
+        return title_case(getattr(self,"name_"+lang))
         
     def icon(self):
         return "/static/img/icons/hs/hs_%s.png" % (self.id[:2])
@@ -328,7 +328,7 @@ class Wld(db.Model, AutoSerialize, Stats):
     
     def name(self):
         lang = getattr(g, "locale", "en")
-        return getattr(self,"name_"+lang)
+        return title_case(getattr(self,"name_"+lang))
         
     def icon(self):
         return "/static/img/icons/wld/wld_%s.png" % (self.id)
@@ -386,7 +386,7 @@ class Bra(db.Model, AutoSerialize, Stats):
     
     def name(self):
         lang = getattr(g, "locale", "en")
-        return getattr(self,"name_"+lang)
+        return title_case(getattr(self,"name_"+lang))
         
     def icon(self):
         return "/static/img/icons/bra/bra_%s.png" % (self.id[:2])
