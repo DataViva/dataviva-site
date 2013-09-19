@@ -297,7 +297,7 @@ dataviva.format.text = function(text,name,l) {
       "Click to Zoom": {"en": "Click to Zoom", "pt": "Clique para Ampliar"},
       "filter": {"en": "Hide Group", "pt": "Ocultar Grupo"},
       "solo": {"en": "Solo Group", "pt": "S\u00f3 este Grupo"},
-      "reset": {"en": "Click to Reset all Filters", "pt": "Clicca per Annulla Tutti i Filtri"}
+      "reset": {"en": "Click to Reset all Filters", "pt": "Clicca per Annulla Tutti i Filtri"},
     
       // Ask Sabrina
       "Asked by": {"en": "Asked by", "pt": "Solicitado por"},
