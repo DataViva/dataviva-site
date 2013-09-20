@@ -2,6 +2,7 @@ body {
   background-color: #ffffff !important;
   height: 100%;
   margin: 0px;
+  overflow: hidden;
   padding: 0px;
   position: fixed;
   width: 100%;

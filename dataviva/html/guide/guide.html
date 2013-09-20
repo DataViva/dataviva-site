@@ -79,7 +79,7 @@
       select(id)
   
       var position = builds[id].top,
-          start = window.scrollY,
+          start = window.pageYOffset,
           difference = position - start,
           ticks = 50
       
@@ -90,9 +90,11 @@
         i++
         if (i == ticks) {
           window.scrollTo(0,position)
-          sliding = false
           load(id)
           clearInterval(scrollinterval)
+          setTimeout(function(){
+            sliding = false
+          },1000)
         }
       }
       
@@ -110,7 +112,7 @@
     if (Object.keys(builds).length > 1) {
       document.onscroll = function() {
         if (!sliding) {
-          var page = document.body.scrollTop
+          var page = window.pageYOffset
           for (b in builds) {
             if(page < ((builds[2].top*(b))-20) && page > ((builds[2].top*(b-2))+20)) {
               if (page+(builds[2].top/2) < builds[b].top+builds[2].top

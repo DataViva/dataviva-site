@@ -6,10 +6,6 @@
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.apps.css" />
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.key.css" />
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
-  
-  <!--[if lt IE 9]>
-  <script type="text/javascript" src="/static/js/libs/aight.d3.min.js?v=3"></script>
-  <![endif]-->
 
 {% endblock %}
 
@@ -438,7 +434,7 @@
       vizwhiz.tooltip.remove();
       last_depth = "bra_8"
       
-      d3.json("/apps/embed/"+app.url)
+      d3.json("/apps/embed/"+app.url+"/")
         .header("X-Requested-With", "XMLHttpRequest")
         .get(function(error,data){
           
@@ -639,7 +635,7 @@
       console.log("[dataviva] ERROR: "+error)
       app.resize()
       loading.hide()
-      d3.select("#app").call(app.viz.error(error))
+      d3.select("#app").html("").datum([]).call(app.viz.error(error))
     }
     
     app.finish = function() {

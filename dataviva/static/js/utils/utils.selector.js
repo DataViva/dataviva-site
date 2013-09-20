@@ -284,7 +284,7 @@ function Selector() {
         if (sorts.length > 1) {
         
           sort_toggles.append("legend")
-            .attr("id","selector_sort")
+            .attr("id","selector_sort_div")
             .html(dataviva.format.text("sort"))
       
           sorts.forEach(function(s){
@@ -453,10 +453,8 @@ function Selector() {
           
           var header_color = x.color
           
-          icon
-            .style("display","inline-block")
-            .style("background-image","url('"+x.icon+"')")
-            
+          icon.style("background-image","url('"+x.icon+"')")
+          
           if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && x.id.length != 5)) {
             icon.style("background-color",x.color)
           }

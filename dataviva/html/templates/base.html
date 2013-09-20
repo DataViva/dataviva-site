@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ g.locale }}">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
     <title>
       DataViva {% block title %}{% endblock %}
     </title>
@@ -15,9 +14,6 @@
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.icons.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome.min.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/vizwhiz.d3.css" />
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="{{STATIC_URL}}css/libs/font-awesome/font-awesome-ie7.min.css?v=3">
-    <![endif]-->
     
     <script src="/static/js/libs/modernizr.custom.js"></script>
     <script src="/static/js/libs/d3.v3.min.js"></script>
@@ -30,7 +26,13 @@
     
     {% block head %}
     {% endblock %}
+    
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="/static/js/libs/aight.d3.min.js?v=3"></script>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> 
+    <![endif]-->
     
   </head>
   <body{% if g.page_type %} class="{{g.page_type}}"{% endif %}>
