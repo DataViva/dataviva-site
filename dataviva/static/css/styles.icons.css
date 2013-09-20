@@ -8,6 +8,11 @@
   padding-left: 12px;
 }
 
+.decision span.info {
+  color: red;
+  position: absolute;
+}
+
 .decision.icon:before,
 .help.icon:before {
   background-position: 50%;
@@ -356,4 +361,12 @@
 
 .icon.duplicate:before {
   content: "\f086";
+}
+
+
+/****************/
+/* Help info    */
+/****************/
+div.media {
+	text-align: center;
 }

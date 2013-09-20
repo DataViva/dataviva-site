@@ -224,7 +224,6 @@ def recommend(app_name=None, dataset=None, bra_id="mg", filter1=None, filter2=No
                 recommended['no_filters'].append(b.serialize())
     
     return jsonify(recommended)
-    
 
 def get_geo_location(ip):
     req = urllib2.Request("http://freegeoip.net/json/" + ip)
@@ -297,6 +296,10 @@ def download():
     return Response(response_data, 
                         mimetype=mimetype, 
                         headers={"Content-Disposition": content_disposition})
+
+@mod.route('/info/<app_name>/')
+def info(app_name="tree_map"):
+    return render_template("apps/info.html", app_name=app_name)
 
 @mod.route('/')
 def guide():

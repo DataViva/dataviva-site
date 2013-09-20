@@ -10,36 +10,69 @@
   
   <a class="decision icon square tree_map" href="/apps/builder/tree_map/secex/mg/all/all/hs/">
     <h1>{% trans %}Tree Map{% endtrans %}</h1>
+	<span href="#" class="info" rel="tree_map">help</span>
   </a>
   
   <a class="decision icon square stacked" href="/apps/builder/stacked/rais/mg/all/all/cbo/">
     <h1>{% trans %}Stacked{% endtrans %}</h1>
+	<span href="#" class="info" rel="tree_map">help</span>
   </a>
   
   <a class="decision icon square geo_map" href="/apps/builder/geo_map/rais/mg/all/all/bra/?value_var=wage">
     <h1>{% trans %}Geo Map{% endtrans %}</h1>
+	<span href="#" class="info" rel="tree_map">help</span>
   </a>
   
   <a class="decision icon square network" href="/apps/builder/network/secex/mg/all/all/hs/">
     <h1>{% trans %}Network{% endtrans %}</h1>
+	<span href="#" class="info" rel="tree_map">help</span>
   </a>
 
   <br>
   
   <a class="decision icon square rings" href="/apps/builder/rings/rais/mg/j6312/all/isic/">
     <h1>{% trans %}Rings{% endtrans %}</h1>
+	<span href="#" class="info" rel="tree_map">help</span>
   </a>
   
   <a class="decision icon square scatter" href="/apps/builder/scatter/secex/mg/all/all/hs/?rca_scope=wld_rca">
     <h1>{% trans %}Scatter{% endtrans %}</h1>
+	<span href="#" class="info" rel="tree_map">help</span>
   </a>
   
   <a class="decision icon square compare" href="/apps/builder/compare/rais/mg_rj/all/all/cbo/?depth=cbo_4&axes=wage_avg">
     <h1>{% trans %}Compare{% endtrans %}</h1>
+	<span href="#" class="info" rel="tree_map">help</span>
   </a>
   
   <a class="decision icon square occugrid" href="/apps/builder/occugrid/rais/mg/r9000/all/cbo/">
     <h1>{% trans %}Occugrid{% endtrans %}</h1>
+	<span href="#" class="info" rel="tree_map">help</span>
   </a>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+
+dataviva.popover.create({
+  "id": "popover",
+  "width": "80%",
+  "height": "80%"
+})
+
+d3.selectAll("span.info")
+	.on(vizwhiz.evt.click,function(){
+		var app_type = d3.select(this).attr("rel"),
+			h = parseInt(d3.select("#popover").style("height")),
+			w = parseInt(d3.select("#popover").style("width"));
+	    dataviva.popover.show("#popover");
+		d3.select("#popover").html("<iframe width='"+w+"' height='"+h+"' src='/apps/info/"+app_type+"/' />")
+		d3.event.preventDefault()
+	})
+
+
+</script>
 
 {% endblock %}

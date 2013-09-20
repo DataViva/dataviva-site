@@ -1,0 +1,134 @@
+<!-- extend from base layout -->
+{% extends "templates/base.html" %}
+
+{% block title %}: {% trans %}Apps{% endtrans %}{% endblock %}
+
+{% block content %}
+
+<div class='media'>Media here</div>
+<div class='text'>Title here</div>
+<a class='prev' href='#'>Prev</a>
+<a class='next' href='#'>Next</a>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+var lang = "{{ g.locale }}";
+var app_name = "{{ app_name }}"
+
+var apps_info = {
+	"tree_map": [
+		{"text_en": "Tree maps can be used to look at shares.", "text_pt": "Tree maps can be used to look at shares.", "image":"/static/img/help/tree_map/stacked.jpg"},
+		{"text_en": "This tree map shows the exports of Minas Gerais.", "text_pt": "This tree map shows the exports of Minas Gerais.", "image":"/static/img/help/tree_map/tree_map.jpg"},
+		{"text_en": "Colors indicate different export categories.", "text_pt": "Colors indicate different export categories.", "image":"/static/img/help/tree_map/tree_map.jpg"},
+		{"text_en": "On hover, other statistics of the product are shown.", "text_pt": "On hover, other statistics of the product are shown.", "image":"/static/img/help/tree_map/tree_map_hover.jpg"},
+		{"text_en": "On click, a detailed summary of the product is shown, together with a list of related visualizations.", "text_pt": "On click, a detailed summary of the product is shown, together with a list of related visualizations.", "image":"/static/img/help/tree_map/tree_map_click.jpg"},
+		{"text_en": "The type of tree map displayed can be changed by selecting Change Output.", "text_pt": "The type of tree map displayed can be changed by selecting Change Output.", "video":"/static/img/help/tree_map/change_output"},
+		{"text_en": "DataViva can show the shares of employees, wages and establishments for each industry, and can present industries at a high or low level of aggregation.", "text_pt": "DataViva can show the shares of employees, wages and establishments for each industry, and can present industries at a high or low level of aggregation.", "video":"/static/img/help/tree_map/change_options"},
+		{"text_en": "DataViva can construct many highly specific tree maps: For example, the municipalities in the state of Minas Gerais where Computer Programming Activities are present.", "text_pt": "DataViva can construct many highly specific tree maps: For example, the municipalities in the state of Minas Gerais where Computer Programming Activities are present.", "video":"/static/img/help/tree_map/highly_specific"},
+		{"text_en": "DataViva can also show the employment growth in each of these municipalities.", "text_pt": "DataViva can also show the employment growth in each of these municipalities.", "video":"/static/img/help/tree_map/growth"}
+	],
+	"stacked": [
+		{"text_en": "Stacked charts can be used to explore the evolution of values and shares.", "text_pt": "Stacked charts can be used to explore the evolution of values and shares.", "image":"/static/img/help/stacked/stacked.png"},
+		{"text_en": "This stacked chart shows the evolution of employment in Minas Gerais.", "text_pt": "This stacked chart shows the evolution of employment in Minas Gerais.", "image":"/static/img/help/stacked/stacked.png"},
+		{"text_en": "Colors indicate different occupational categories.", "text_pt": "Colors indicate different occupational categories.", "image":"/static/img/help/stacked/stacked.png"},
+		{"text_en": "On hover, other statistics of the occupation are shown.", "text_pt": "On hover, other statistics of the occupation are shown.", "image":"/static/img/help/stacked/stacked_hover.png"},
+		{"text_en": "On click, a detailed summary of the occupation is shown, together with a list of related visualizations.", "text_pt": "On click, a detailed summary of the occupation is shown, together with a list of related visualizations.", "image":"/static/img/help/stacked/stacked_click.png"},
+		{"text_en": "The type of Stacked chart displayed can be changed by selecting Change Output.", "text_pt": "The type of Stacked chart displayed can be changed by selecting Change Output.", "video":"/static/img/help/stacked/stacked_change_output"},
+		{"text_en": "By using the icons below we can select or remove a category from the visualization.", "text_pt": "By using the icons below we can select or remove a category from the visualization.", "video":"/static/img/help/stacked/stacked_solo"},
+		{"text_en": "DataViva can construct many highly specific Stacked charts for example, The occupations employed in Santa Rita do Sapucai’s computer programming industry.", "text_pt": "DataViva can construct many highly specific Stacked charts for example, The occupations employed in Santa Rita do Sapucai’s computer programming industry.", "video":"/static/img/help/stacked/stacked_specialized"},
+		{"text_en": "We can look at this by number of employees, total wages, average wages, and number of establishments.", "text_pt": "We can look at this by number of employees, total wages, average wages, and number of establishments.", "video":"/static/img/help/stacked/stacked_change_size"}
+	],
+	"network": [
+		{"text_en": "Network visualizations are used to explore related products and industries.", "text_pt": "Network visualizations are used to explore related products and industries.", "image":"/static/img/help/network/network.png"},
+		{"text_en": "This visualization shows the industries that are present in the municipality of Betim.", "text_pt": "This visualization shows the industries that are present in the municipality of Betim.", "image":"/static/img/help/network/network.png"},
+		{"text_en": "Each node represents an industry. Fully colored nodes are the industries where the municipality of Betim is most competitive.", "text_pt": "Each node represents an industry. Fully colored nodes are the industries where the municipality of Betim is most competitive.", "image":"/static/img/help/network/network_hover.png"},
+		{"text_en": "Links connect industries that tend to hire workers from the same occupations.", "text_pt": "Links connect industries that tend to hire workers from the same occupations.", "image":"/static/img/help/network/network_hover.png"},
+		{"text_en": "Clicking on an industry zooms into the area defined by that industry, and the industries that are connected to it.", "text_pt": "Clicking on an industry zooms into the area defined by that industry, and the industries that are connected to it.", "image":"/static/img/help/network/network_click.png"},
+		{"text_en": "The presence of connected industries in a location indicates the presence of the skills needed to develop that industry, and is predictive of potential success in that area.", "text_pt": "The presence of connected industries in a location indicates the presence of the skills needed to develop that industry, and is predictive of potential success in that area.", "image":"/static/img/help/network/network_click.png"},
+		{"text_en": "DataViva can also visualize the network of product exports.", "text_pt": "DataViva can also visualize the network of product exports.", "video":"/static/img/help/network/network_change_output"},
+		{"text_en": "We can also color the nodes based on other measures such as complexity to find which are the more sophisticated products.", "text_pt": "We can also color the nodes based on other measures such as complexity to find which are the more sophisticated products.", "video":"/static/img/help/network/network_change_color"}
+	]
+}
+
+load_info(apps_info[app_name])
+
+function resize(max_w, max_h, img_w, img_h) {
+    var ratio = 0;  // Used for aspect ratio
+	var dimensions = [img_w, img_h]
+
+    // Check if the current width is larger than the max
+    if(img_w > max_w){
+        ratio = max_w / img_w;   // get ratio for scaling image
+        dimensions[0] = max_w; // Set new width
+        dimensions[1] = img_h * ratio;  // Scale height based on ratio
+        // height = height * ratio;    // Reset height to match scaled image
+        // width = width * ratio;    // Reset width to match scaled image
+    }
+
+    // Check if current height is larger than max
+    if(img_h > max_h){
+        ratio = max_h / img_h; // get ratio for scaling image
+        dimensions[0] = img_w *ratio;    // Scale width based on ratio
+		dimensions[1] = max_h;   // Set new height
+        // width = width * ratio;    // Reset width to match scaled image
+    }
+	return dimensions
+}
+
+function load_info(app_info){
+	var current = -1
+	
+	d3.selectAll("a.next").on(vizwhiz.evt.click,next);
+	d3.selectAll("a.prev").on(vizwhiz.evt.click,prev);
+	
+	function next(){
+		current++
+		new_panel()
+		if(d3.event) d3.event.preventDefault();
+	}
+	function prev(){
+		current--
+		new_panel()
+		if(d3.event) d3.event.preventDefault();
+	}
+	
+	function new_panel(){
+		var info = app_info[current%app_info.length],
+			h = parseInt(window.innerHeight) - 50,
+			w = parseInt(window.innerWidth);
+		
+		// set media
+		if(info.image){
+			var img = new Image()
+			img.src = info.image
+			img.onload = function(){
+				d3.select("div.media").html(
+					"<img height='"+resize(w, h, img.width, img.height)[1]+"' width='"+resize(w, h, img.width, img.height)[0]+"' src='"+info.image+"' />"
+				)
+			}
+		}
+		else if(info.video){
+			d3.select("div.media").html(
+				"\
+				<video width='"+w+"' height='"+h+"' preload autoplay='autoplay' loop='true'> \
+					<source src='"+info.video+".mp4' type='video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\"' /> \
+					<source src='"+info.video+".webm' type='video/webm; codecs=\"vp8, vorbis\"' /> \
+				</video> \
+				"
+			)
+		}
+		
+		// set text
+		d3.select("div.text").text(info["text_"+lang])
+	}
+	
+	next()
+}
+
+
+</script>
+
+{% endblock %}
