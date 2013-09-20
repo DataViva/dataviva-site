@@ -342,8 +342,8 @@
         "eci",
         "eci_wld",
         "pci",
-        "ici",
-        "oci",
+        "unique_isic",
+        "unique_cbo",
         "rca",
         "rca_wld",
         "distance",
@@ -891,7 +891,9 @@
       /* Network Specific Variables */
       /******************************/  
       if (app.build.app.type == "network") {
-        var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca"
+        if (app.build.output == "hs") var av = app.vars.rca_scope
+        else if (app.build.output == "isic") var av = "bra_rca"
+        else var av = "always_active"
         app.viz
           .links(app.networks[app.build.output].edges)
           .nodes(app.networks[app.build.output].nodes)
@@ -902,7 +904,9 @@
       /* Rings Specific Variables */
       /****************************/
       else if (app.build.app.type == "rings") {
-        var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca"
+        if (app.build.output == "hs") var av = app.vars.rca_scope
+        else if (app.build.output == "isic") var av = "bra_rca"
+        else var av = "always_active"
         app.viz
           .links(app.networks[app.build.output].edges)
           .nodes(app.networks[app.build.output].nodes)
@@ -1117,6 +1121,7 @@
               d.importance = job.importance
               d.category = attr[d[out+"_id"].slice(0,depths[out][0])].name
               d.none = 1
+              d.always_active = 1
             
               if (!d.wage) d.wage = 0
               if (!d.num_emp) d.num_emp = 0
@@ -1161,6 +1166,7 @@
               d[out+"_display"] = dataviva.displayID(d[out+"_id"],out)
               d.icon = dataviva.icon(d[out+"_id"],out)
               d.active = true
+              d.always_active = 1
               
               leaves.forEach(function(leaf){
                 if (leaf.wage && leaf.num_emp) leaf.wage_avg = leaf.wage/leaf.num_emp;
@@ -1192,11 +1198,12 @@
           var obj = d
           
           obj[out+"_display"] = dataviva.displayID(obj[out+"_id"],out)
+          d.always_active = 1
           
           obj.icon = dataviva.icon(obj[out+"_id"],out)
           
           if (obj.wage && obj.num_emp) obj.wage_avg = obj.wage/obj.num_emp;
-          else obj.wage_avg = 0
+          else if (app.build.dataset == "rais") obj.wage_avg = 0
           
           obj.active = obj.rca >=1 ? true : false;
           
