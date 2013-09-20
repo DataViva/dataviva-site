@@ -44,9 +44,10 @@ dataviva.format.text = function(text,name,l) {
     text = arr.join("_")
     return app.build.bra[index]["name_"+l] + " ("+format_name(text)+")"
   }
-  else {
+  else if (!name || (name.indexOf("_display") < 0 && name.indexOf("_id") < 0)) {
     return format_name(text)
   }
+  else return text
   
   function format_name(name) {
   
@@ -132,7 +133,7 @@ dataviva.format.text = function(text,name,l) {
       "grouping": {"en": "Group", "pt": "Grupo"},
       "grouping_desc_occugrid": {"en": "Groups the donut charts into different categorizations.", "pt": "Agrupar os gr\u00e1ficos de rosca em diferentes categoriza\u00e7\u00f5es."},
       "none": {"en": "None", "pt": "Nenhum"},
-      "total": {"en": "Required", "pt": "Requerido"},
+      "required": {"en": "Required", "pt": "Requerido"},
       "year": {"en": "Year", "pt": "Ano"},
 
       // Filter Depths
@@ -190,8 +191,8 @@ dataviva.format.text = function(text,name,l) {
       "eci": {"en": "Domestic Complexity", "pt": "Complexidade Dom\u00e9stica"},
       "eci_wld": {"en": "International Complexity", "pt": "Complexidade Internacional"},
       "pci": {"en": "Product Complexity", "pt": "Complexidade do Produto"},
-      "ici": {"en": "Industry Complexity", "pt": "Complexidade da Ind\u00fdstria"},
-      "oci": {"en": "Occupation Complexity", "pt": "Complexidade da Ocupa\u00e7\u00e3o"},
+      "unique_isic": {"en": "Unique Industries", "pt": "Atividades Econ\u00f4micas Exclusivas"},
+      "unique_cbo": {"en": "Unique Occupation", "pt": "Ocupa\u00e7\u00f5es Exclusivas"},
       "distance": {"en": "Domestic Distance", "pt": "Dist\u00e2ncia Dom\u00e9stica"},
       "distance_wld": {"en": "International Distance", "pt": "Dist\u00e2ncia Internacional"},
       "employed": {"en": "Employed", "pt": "Empregado"},
@@ -316,6 +317,10 @@ dataviva.format.text = function(text,name,l) {
     
     }
     
+    if (name.indexOf("_display") >= 0) {
+      name = name.split("_")[0]+"_id"
+    }
+    
     if (!name) return name
     else if (name.indexOf("_stats_") > 0) {
       var n = name.split("_")
@@ -412,8 +417,7 @@ dataviva.format.number = function(value,name,l) {
         "num_emp_growth_pct": ["","%"],
         "num_emp_growth_pct_5": ["","%"],
         "wage_growth_pct": ["","%"],
-        "wage_growth_pct_5": ["","%"],
-        "required": ["~",""]
+        "wage_growth_pct_5": ["","%"]
       }
       
   if (name.indexOf("total_") == 0) {

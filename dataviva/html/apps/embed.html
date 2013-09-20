@@ -304,23 +304,13 @@
     
     app.tooltip = {"short": {
     
-      "":[
-        "hs_id",
-        "wld_id",
-        "isic_id",
-        "cbo_id",
-        "id_ibge"
-      ]
+      "":[],
+      "basics":[],
+      "calculations":[]
          
       }, "long": {
     
-      "":[
-        "hs_id",
-        "wld_id",
-        "isic_id",
-        "cbo_id",
-        "id_ibge"
-      ],
+      "":[],
       "basics":[
         "wage",
         "wage_avg",
@@ -409,7 +399,6 @@
       .nesting_aggs(averages)
       .text_var("name")
       .year_var("year")
-      .tooltip_info(app.tooltip)
       .text_format(dataviva.format.text)
       .number_format(dataviva.format.number)
       .name_array(["name","display_id"])
@@ -535,6 +524,7 @@
                     
                     d.data.forEach(function(a){
                       a[out+"_id"] = a.id
+                      a[out+"_display"] = dataviva.displayID(a.id,out)
                       app.attrs[app.build.output][a.id] = a
                     })
                     
@@ -855,6 +845,23 @@
       if (["bra","wld"].indexOf(app.build.output) >= 0) var style = "default"
       else var style = "knockout"
       
+      if (app.build.output == "bra") {
+        app.tooltip["short"][""] = ["id_ibge"]
+        app.tooltip["long"][""] = ["id_ibge"]
+      }
+      else {
+        app.tooltip["short"][""] = [app.build.output+"_display"]
+        app.tooltip["long"][""] = [app.build.output+"_display"]
+        if (app.build.app.type == "bubbles") {
+          app.tooltip["short"]["calculations"] = ["required"]
+        }
+        else {
+          app.tooltip["short"]["calculations"] = []
+        }
+      }
+
+      app.tooltip["short"]["basics"] = [app.vars.value_var]
+      
       app.viz.type(app.build.app.viz_whiz)
         .title(app.build.title)
         .color_var(color_var)
@@ -878,6 +885,7 @@
         .sub_title(app.sub_title())
         .icon_style(style)
         .yaxis_val(null)
+        .tooltip_info(app.tooltip)
         
       /******************************/
       /* Network Specific Variables */
@@ -1068,7 +1076,8 @@
           app.viz.active_var(value)
         }
         else if (type == "value_var") {
-          app.viz[type](value).total_bar(app.total())
+          app.tooltip["short"]["basics"] = [app.vars.value_var]
+          app.viz[type](value).total_bar(app.total()).tooltip_info(app.tooltip)
         }
         else {
           app.viz[type](value)
@@ -1127,7 +1136,7 @@
               if (!else_data) d.elsewhere = 0
               else d.elsewhere = else_data.num_emp-d.num_emp
     
-              d.display_id = dataviva.displayID(d[out+"_id"],out)
+              d[out+"_display"] = dataviva.displayID(d[out+"_id"],out)
               d.icon = dataviva.icon(d[out+"_id"],out)
 
               get_keys(d)
@@ -1149,7 +1158,7 @@
               var d = {}
               d.year = leaves[0].year
               d[out+"_id"] = leaves[0][out+"_id"]
-              d.display_id = dataviva.displayID(d[out+"_id"],out)
+              d[out+"_display"] = dataviva.displayID(d[out+"_id"],out)
               d.icon = dataviva.icon(d[out+"_id"],out)
               d.active = true
               
@@ -1182,7 +1191,7 @@
           
           var obj = d
           
-          obj.display_id = dataviva.displayID(obj[out+"_id"],out)
+          obj[out+"_display"] = dataviva.displayID(obj[out+"_id"],out)
           
           obj.icon = dataviva.icon(obj[out+"_id"],out)
           
