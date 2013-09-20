@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-    Calculate proximities (using domestic RCA)
+    Calculate distance
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    This script utilizes the growth library to calculate proximity
-    according to the atlas method. The script takes the following steps:
-     - calculates RCA for given year and geo level (state, meso, micro, munic)
-     - calculates proximity based on RCA matrix
-     - adds proximity values to DB
 """
 
 import MySQLdb, os, argparse
@@ -128,7 +123,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-y", "--year", help="year for calculations to be run")
     parser.add_argument("-g", "--geo_level", help="level of geo nesting",
-                            choices=['2', '4', '6', '8', 'all'])
+                            choices=['2', '4', '7', '8', 'all'])
     args = parser.parse_args()
     
     year = args.year
@@ -143,13 +138,14 @@ if __name__ == "__main__":
     
     geo_level = args.geo_level
     if not geo_level:
-        geo_level = raw_input("Geo Level {2:state, 4:meso, 6:micro, " \
+        geo_level = raw_input("Geo Level {2:state, 4:meso, 7:planning, " \
                                 "8:munic, all}: ")
     if geo_level == "all":
-        geo_level = range(2, 10, 2)
+        geo_level = [2, 4, 7, 8]
     else:
         geo_level = [geo_level]
     
+    year = [2010, 2011]
     for y in year:
         print
         print "Year: {0}".format(y);

@@ -147,7 +147,7 @@ if __name__ == "__main__":
         geo_level = raw_input("Geo Level {2:state, 4:meso, 6:micro, " \
                                 "8:munic, all}: ")
     if geo_level == "all":
-        geo_level = range(2, 10, 2)
+        geo_level = [2, 4, 7, 8]
     else:
         geo_level = [geo_level]
     

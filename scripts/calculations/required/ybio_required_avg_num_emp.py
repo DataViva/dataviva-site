@@ -44,13 +44,12 @@ def get_mcp(**kwargs):
     '''mcp'''
     q = """
         select 
-          yg.bra_id, isic_id, {0} 
+          bra_id, isic_id, {0} 
         from 
           rais_ybi as ygi
         where 
-          yg.year = {1} and 
-          yg.year = ygi.year and 
-          length(yg.bra_id) = {2} and 
+          ygi.year = {1} and
+          length(ygi.bra_id) = {2} and 
           length(ygi.isic_id) = {3}
       """.format(kwargs["val"], kwargs["year"], kwargs["geo_level"], 5)
     # print q
@@ -77,7 +76,10 @@ def main(**kwargs):
     prox = growth.proximity(rcas.T)
     
     s = time.time()
-    for geo in rcas.index:
+    geos = list(rcas.index)
+    if year == 2011:
+        geos = geos[geos.index("sc000101"):]
+    for geo in geos:
         print year, geo, time.time() - s
         s = time.time()
         
@@ -138,8 +140,12 @@ if __name__ == "__main__":
     # pop_cutoff = 150000
     # val_cutoff = 1000000000
     val_cutoff = 0
-    for year in range(2010, 2012):
+    for year in [2011,2002]:
         print year
-        for geo_level in [2, 4, 7, 8]:
+        if year == 2011:
+            gls = [8]
+        else:
+            gls = [2, 4, 7, 8]
+        for geo_level in gls:
             print geo_level
             main(year=year, geo_level=geo_level, pop_cutoff=pop_cutoff, val_cutoff=val_cutoff)

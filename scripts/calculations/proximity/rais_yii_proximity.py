@@ -93,14 +93,8 @@ def calculate_proximity(year):
     print "Calculating proximities..."
     prox = growth.proximity(rca)
     
-    '''delete old proximity values'''
-    print "Deleteing old opportunity gain values..."
-    delete_old_proximity_from_db(year)
+    return prox
     
-    '''insert new proximity values to database'''
-    print "Adding new proximity values..."
-    add_new_proximity_to_db(year, prox)
-
 def get_all_years():
     '''Get all years in the database'''
     cursor.execute("select distinct year from rais_yio")
@@ -125,4 +119,13 @@ if __name__ == "__main__":
     for y in year:
         print
         print "Year: {0}".format(y);
-        calculate_proximity(y)
+        prox = calculate_proximity(y)
+        
+        '''delete old proximity values'''
+        print "Deleteing old opportunity gain values..."
+        delete_old_proximity_from_db(year)
+    
+        '''insert new proximity values to database'''
+        print "Adding new proximity values..."
+        add_new_proximity_to_db(year, prox)
+        
