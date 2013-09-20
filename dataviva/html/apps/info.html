@@ -50,7 +50,26 @@ var apps_info = {
 		{"text_en": "The presence of connected industries in a location indicates the presence of the skills needed to develop that industry, and is predictive of potential success in that area.", "text_pt": "The presence of connected industries in a location indicates the presence of the skills needed to develop that industry, and is predictive of potential success in that area.", "image":"/static/img/help/network/network_click.png"},
 		{"text_en": "DataViva can also visualize the network of product exports.", "text_pt": "DataViva can also visualize the network of product exports.", "video":"/static/img/help/network/network_change_output"},
 		{"text_en": "We can also color the nodes based on other measures such as complexity to find which are the more sophisticated products.", "text_pt": "We can also color the nodes based on other measures such as complexity to find which are the more sophisticated products.", "video":"/static/img/help/network/network_change_color"}
-	]
+	],
+	"geo_map": [
+		{"text_en": "The Geo Map visualization can be used to explore the spatial distribution of data.", "text_pt": "The Geo Map visualization can be used to explore the spatial distribution of data.", "image":"/static/img/help/geo_map/geo_map.png"},
+		{"text_en": "This visualization shows the Municipalities in Minas Gerais colored by total average monthly wages in all industries.", "text_pt": "This visualization shows the Municipalities in Minas Gerais colored by total average monthly wages in all industries.", "image":"/static/img/help/geo_map/geo_map.png"},
+		{"text_en": "Hovering over a municipality will show the name and other relevant information.", "text_pt": "Hovering over a municipality will show the name and other relevant information.", "image":"/static/img/help/geo_map/geo_map_hover.png"},
+		{"text_en": "On click, we are zoomed into the selected municipality and shown more detailed information as well as a list of related apps.", "text_pt": "On click, we are zoomed into the selected municipality and shown more detailed information as well as a list of related apps.", "image":"/static/img/help/geo_map/geo_map_click.png"},
+		{"text_en": "Different views of data can be shown with this visualization by changing the output. We can also look at a map of the wages for a particular industry.", "text_pt": "Different views of data can be shown with this visualization by changing the output. We can also look at a map of the wages for a particular industry.", "video":"/static/img/help/geo_map/geo_map_change_output"},
+		{"text_en": "We can also change the value used for color.", "text_pt": "We can also change the value used for color.", "video":"/static/img/help/geo_map/geo_map_change_color"},
+		{"text_en": "The Geo Map can also show data for the entirety of Brazil by states.", "text_pt": "The Geo Map can also show data for the entirety of Brazil by states.", "video":"/static/img/help/geo_map/geo_map_all_brazil"}
+	],
+	"rings": [
+		{"text_en": "The Rings visualization can be used to explore related products, industries or occupation. The central node shows the selected item, in this case an industry.", "text_pt": "The Rings visualization can be used to explore related products, industries or occupation. The central node shows the selected item, in this case an industry.", "image":"/static/img/help/rings/rings.png"},
+		{"text_en": "This visualization shows the primary and secondary connections for the Computer Programming industry.", "text_pt": "This visualization shows the primary and secondary connections for the Computer Programming industry.", "image":"/static/img/help/rings/rings.png"},
+		{"text_en": "Similar to the Network visualization each node represents an industry. Fully colored nodes are the industries where the municipality of Santa Rita do Sapucaí is most competitive.", "text_pt": "Similar to the Network visualization each node represents an industry. Fully colored nodes are the industries where the municipality of Santa Rita do Sapucaí is most competitive.", "image":"/static/img/help/rings/rings.png"},
+		{"text_en": "Links connect industries that tend to hire workers from the same occupations.", "text_pt": "Links connect industries that tend to hire workers from the same occupations.", "image":"/static/img/help/rings/rings.png"},
+		{"text_en": "Hovering over a connected industry will highlight in red its connections.", "text_pt": "Hovering over a connected industry will highlight in red its connections.", "image":"/static/img/help/rings/rings_hover.png"},
+		{"text_en": "Clicking on a connected industry will change the visualization to now center on this industry, updating all the relevant information.", "text_pt": "Clicking on a connected industry will change the visualization to now center on this industry, updating all the relevant information.", "video":"/static/img/help/rings/rings_click"},
+		{"text_en": "DataViva can also visualize the connections of product exports and occupations.", "text_pt": "DataViva can also visualize the connections of product exports and occupations.", "video":"/static/img/help/rings/rings_change_output"},
+		{"text_en": "We can also color the nodes based on other measures such as complexity or growth.", "text_pt": "We can also color the nodes based on other measures such as complexity or growth.", "video":"/static/img/help/rings/rings_change_color"}
+	],
 }
 
 load_info(apps_info[app_name])
