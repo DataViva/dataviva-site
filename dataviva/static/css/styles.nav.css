@@ -29,6 +29,7 @@
   background-position: top center;
   display: inline-block;
   height: 44px;
+  margin-right: 15px;
   margin-top: -1px;
   width: 147px;
 }
@@ -39,11 +40,11 @@
   background-size: 35px 35px;
   color: black;
   font-size: 11px;
-  margin-top: -4px;
+  margin: -4px 3px 0px 3px;
   opacity: 0.25;
   padding-top: 34px;
   text-align: center;
-  width: 95px;
+  width: 85px;
 }
 
 #header a#guide {
@@ -116,7 +117,7 @@
   display: inline-block;
   margin-top: -2px;
   text-align: center;
-  width: 75px;
+  width: 85px;
 }
 
 #header div#account {

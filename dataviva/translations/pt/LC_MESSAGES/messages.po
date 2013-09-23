@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-13 14:48-0400\n"
+"POT-Creation-Date: 2013-09-23 12:52-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -211,31 +211,31 @@ msgstr "Função"
 msgid "App Builder"
 msgstr "Construtor de Aplicativos"
 
-#: dataviva/html/apps/embed.html:38
+#: dataviva/html/apps/embed.html:34
 msgid "Change Output"
 msgstr "Alterar Visualização"
 
-#: dataviva/html/apps/embed.html:100
+#: dataviva/html/apps/embed.html:96
 msgid "Refresh the App"
 msgstr "Atualizar o Aplicativo"
 
-#: dataviva/html/apps/embed.html:101
+#: dataviva/html/apps/embed.html:97
 msgid "Download this App"
 msgstr "Baixar este Aplicativo"
 
-#: dataviva/html/apps/embed.html:102
+#: dataviva/html/apps/embed.html:98
 msgid "Save this App"
 msgstr "Salvar este Aplicativo"
 
-#: dataviva/html/apps/embed.html:103
+#: dataviva/html/apps/embed.html:99
 msgid "Show App Tutorial"
 msgstr "Mostrar o Tutorial deste Aplicativo"
 
-#: dataviva/html/apps/embed.html:104
+#: dataviva/html/apps/embed.html:100
 msgid "Open App in Full-Screen"
 msgstr "Abrir Aplicativo em Tela Cheia"
 
-#: dataviva/html/apps/embed.html:105
+#: dataviva/html/apps/embed.html:101
 msgid "Show/Hide Controls"
 msgstr "Mostrar/Ocultar Controles"
 
@@ -249,7 +249,6 @@ msgstr "Compare"
 
 #: dataviva/html/ask/answer.html:5 dataviva/html/ask/ask.html:4
 #: dataviva/html/ask/ask.html:56 dataviva/html/ask/questions.html:4
-#: dataviva/html/templates/site.html:18
 msgid "Ask Sabrina"
 msgstr "Pergunte à Sabrina"
 
@@ -465,7 +464,7 @@ msgstr "Localizações geográficas no Brasil"
 msgid "Countries"
 msgstr "Países"
 
-#: dataviva/html/general/404.html:12
+#: dataviva/html/general/404.html:18
 msgid "Oh no! The page you've requested does not exist."
 msgstr "Oh, não! A página que você solicitou não existe."
 
@@ -727,6 +726,10 @@ msgstr "Duplicado"
 msgid "Profiles"
 msgstr "Perfis"
 
+#: dataviva/html/templates/site.html:18
+msgid "Contact Us"
+msgstr "Fale Conosco"
+
 #: dataviva/html/templates/site.html:19
 msgid "Learn More"
 msgstr "Saiba Mais"
@@ -739,7 +742,7 @@ msgstr "Perfil"
 msgid "Logout"
 msgstr "Sair"
 
-#: dataviva/html/templates/site.html:80
+#: dataviva/html/templates/site.html:88
 msgid "Sponsored by"
 msgstr "Patrocinado por"
 
