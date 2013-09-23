@@ -11,6 +11,7 @@ String.prototype.toTitleCase = function() {
               'Um', 'Uma', 'E', 'Como', 'Em', 'No', 'Na', 'Mas', 'Por', 
               'Para', 'Pelo', 'Pela', 'De', 'Do', 'Da', 'Se', 'Perto', 'Nem', 
               'Ou', 'Que', 'O', 'A', 'Com'];
+              
     for (i = 0; i < lowers.length; i++)
         str = str.replace(new RegExp('\\s' + lowers[i] + '\\s', 'g'), 
             function(txt) {
@@ -18,7 +19,7 @@ String.prototype.toTitleCase = function() {
             });
 
     // Certain words such as initialisms or acronyms should be left uppercase
-    uppers = ['Id', 'Tv'];
+    uppers = ['Id', 'Tv', 'R&d'];
     for (i = 0; i < uppers.length; i++)
         str = str.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'), 
             uppers[i].toUpperCase());
