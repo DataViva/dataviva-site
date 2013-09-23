@@ -146,14 +146,14 @@ if __name__ == "__main__":
     if not table:
         table = raw_input("Table to insert into: ")
     
-    # for fp in file_path:
-    #     print
-    #     print fp
-    #     add_to_db(fp, table)
+    for fp in file_path:
+        print
+        print fp
+        add_to_db(fp, table)
     
-    for y in range(2002, 2012):
-        for fp in file_path:
-            fp = fp.replace("2002", str(y))
-            print
-            print fp
-            add_to_db(fp, table)
+    # for y in range(2002, 2012):
+    #     for fp in file_path:
+    #         fp = fp.replace("2002", str(y))
+    #         print
+    #         print fp
+    #         add_to_db(fp, table)

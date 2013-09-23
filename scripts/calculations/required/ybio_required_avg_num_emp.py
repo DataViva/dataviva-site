@@ -135,17 +135,21 @@ def main(**kwargs):
             "cbo_id, required) VALUES (%s, %s, %s, %s, %s) ON DUPLICATE KEY "\
             "UPDATE required=%s;", to_add)
 
+def get_all_years():
+    '''Get all years in the database'''
+    q = "select distinct year from rais_ybio"
+    cursor.execute(q)
+    years = [row[0] for row in cursor.fetchall()]
+    return years
+    
 if __name__ == "__main__":
     pop_cutoff = 0
     # pop_cutoff = 150000
     # val_cutoff = 1000000000
     val_cutoff = 0
-    for year in [2011,2002]:
+    for year in get_all_years():
         print year
-        if year == 2011:
-            gls = [8]
-        else:
-            gls = [2, 4, 7, 8]
+        gls = [2, 4, 7, 8]
         for geo_level in gls:
             print geo_level
             main(year=year, geo_level=geo_level, pop_cutoff=pop_cutoff, val_cutoff=val_cutoff)

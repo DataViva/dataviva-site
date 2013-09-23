@@ -138,7 +138,6 @@ def calc_growth(table, val_var, dataset):
     check_columns(columns, val_var, table)
     
     bras = get_all_bras(table)
-    bras = bras[bras.index('sp'):]
     years = get_all_years(table)
     
     lookup = {"i":"isic_id", "o":"cbo_id", "p":"hs_id", "w":"wld_id"}    
