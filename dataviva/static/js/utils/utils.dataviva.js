@@ -66,6 +66,10 @@ dataviva.format.text = function(text,name,l) {
       // Axes
       "axes": {"en": "Axes", "pt": "Eixos"},
       "axes_desc_compare": {"en": "Changes the X and Y variables used in the chart.", "pt": "Altera o vari\u00e1veis X e Y utilizados no gr\u00e1fico."},
+      "xaxis_var": {"en": "X Axis", "pt": "Eixo X"},
+      "xaxis_var_desc_scatter": {"en": "Changes the X axis variable.", "pt": "Alterar a vari\u00e1vel do eixo X."},
+      "yaxis_var": {"en": "Y Axis", "pt": "Eixo Y"},
+      "yaxis_var_desc_scatter": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
 
       // Stacked Area Sorting/Order
       "order": {"en": "Order", "pt": "Ordena\u00e7\u00e3o"},
@@ -193,7 +197,7 @@ dataviva.format.text = function(text,name,l) {
       "pci": {"en": "Product Complexity", "pt": "Complexidade do Produto"},
       "unique_isic": {"en": "Unique Industries", "pt": "Atividades Econ\u00f4micas Exclusivas"},
       "unique_cbo": {"en": "Unique Occupation", "pt": "Ocupa\u00e7\u00f5es Exclusivas"},
-      "distance": {"en": "Domestic Distance", "pt": "Dist\u00e2ncia Dom\u00e9stica"},
+      "distance": {"en": "Distance", "pt": "Dist\u00e2ncia"},
       "distance_wld": {"en": "International Distance", "pt": "Dist\u00e2ncia Internacional"},
       "employed": {"en": "Employed", "pt": "Empregado"},
       "importance": {"en": "Importance", "pt": "Import\u00e2ncia"},

@@ -805,6 +805,7 @@
         })
       d3.selectAll("#builder > br").remove()
       if (total_width > avail_width) {
+        avail_width = window.innerWidth - 20
         var w = 0, firstbreak = true
         d3.selectAll("#app_controls > div")
           .each(function(){
@@ -951,11 +952,19 @@
       /******************************/
       else if (app.build.app.type == "scatter") {
         var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca"
-        var yv = app.build.output == "hs" ? "pci" : "ici"
+        if (app.build.output == "hs" && app.vars.rca_scope == "wld_rca") {
+          var yv = app.vars.yaxis_var + "_wld",
+              xv = app.vars.xaxis_var + "_wld"
+        }
+        else {
+          var yv = app.vars.yaxis_var,
+              xv = app.vars.xaxis_var
+        }
+        if (app.vars.yaxis_var.indexOf("pci") >= 0) yv = app.vars.yaxis_var
         if (!app.ecis[app.build.data_url]) var eci = null
         else var eci = {"eci": app.ecis[app.build.data_url][app.vars.year]}
         app.viz
-          .xaxis_var("distance")
+          .xaxis_var(xv)
           .yaxis_var(yv)
           .xaxis_scale("linear")
           .yaxis_scale("linear")
@@ -1074,6 +1083,36 @@
         }
         else if (type == "rca_scope") {
           app.viz.active_var(value)
+          if (app.build.app.type == "scatter") {
+            if (app.build.output == "hs" && value == "wld_rca") {
+              var yv = app.vars.yaxis_var + "_wld",
+                  xv = app.vars.xaxis_var + "_wld"
+            }
+            else {
+              var yv = app.vars.yaxis_var,
+                  xv = app.vars.xaxis_var
+            }
+            if (app.vars.yaxis_var.indexOf("pci") >= 0) yv = app.vars.yaxis_var
+            app.viz.xaxis_var(xv).yaxis_var(yv)
+          }
+        }
+        else if (type == "xaxis_var") {
+          if (app.vars.rca_scope == "wld_rca") {
+            var xv = app.vars.xaxis_var + "_wld"
+          }
+          else {
+            var xv = app.vars.xaxis_var
+          }
+          app.viz.xaxis_var(xv)
+        }
+        else if (type == "yaxis_var") {
+          if (app.vars.rca_scope == "wld_rca" && app.vars.yaxis_var.indexOf("pci") < 0) {
+            var yv = app.vars.yaxis_var + "_wld"
+          }
+          else {
+            var yv = app.vars.yaxis_var
+          }
+          app.viz.yaxis_var(yv)
         }
         else if (type == "value_var") {
           app.tooltip["short"]["basics"] = [app.vars.value_var]
@@ -1254,11 +1293,6 @@ val)+": ", "suffix": ""};
       
       var children = d3.select("#ui_bottom").node().childNodes,
           min_width = 300;
-          
-      // for (i = 0; i < children.length; i++) {
-//         var w = children[i].offsetWidth;
-//         if (w > min_width) min_width = w;
-//       }
 
       if (window.innerWidth < min_width || window.innerHeight <= 400) {
         app.vars.controls = "false";
@@ -1601,14 +1635,7 @@ val)+": ", "suffix": ""};
     builder.radios = function(obj) {
       
       var div = d3.select("#app_controls").append("div")
-        .attr("class","ui_group alt_tooltip")
-        .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
-        .on(vizwhiz.evt.over,function(){
-          dataviva.ui.tooltip("alt_tooltip",this)
-        })
-        .on(vizwhiz.evt.out,function(){
-          dataviva.ui.tooltip("alt_tooltip",false)
-        })
+        .attr("class","ui_group")
         
       div.append("legend")
         .attr("id",obj.title)
@@ -1637,6 +1664,16 @@ val)+": ", "suffix": ""};
       })
       
       leon("$"+obj.title).color(app.build.app.color)
+      
+      d3.select("#leon_"+obj.title).select(".leon.radio.group")
+        .attr("class","leon radio group alt_tooltip")
+        .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
+        .on(vizwhiz.evt.over,function(){
+          dataviva.ui.tooltip("alt_tooltip",this)
+        })
+        .on(vizwhiz.evt.out,function(){
+          dataviva.ui.tooltip("alt_tooltip",false)
+        })
       
     }
     

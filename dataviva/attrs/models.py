@@ -129,21 +129,24 @@ class Stats(object):
                     .filter(func.char_length(getattr(tbl, key+"_id")) == length) \
                     .group_by(getattr(tbl, key+"_id")) \
                     .order_by(func.sum(getattr(tbl, val_var)).desc())
-
+                    
         percent = 0
-        if isinstance(top.first(),tuple):
-            obj = globals()[key.title()].query.get(top.first()[0])
-        else:
-            obj = getattr(top.first(), key)
-            num = getattr(top.first(),val_var)
-            den = 0
-            for x in top.all():
-                value = getattr(x,val_var)
-                if value:
-                    den += value
-            percent = (num/float(den))*100
+        if top.first() != None:
+            if isinstance(top.first(),tuple):
+                obj = globals()[key.title()].query.get(top.first()[0])
+            else:
+                obj = getattr(top.first(),key)
+                num = getattr(top.first(),val_var)
+                den = 0
+                for x in top.all():
+                    value = getattr(x,val_var)
+                    if value:
+                        den += value
+                percent = (num/float(den))*100
         
-        return {"name": "top_{0}".format(key), "value": obj.name(), "percent": percent, "id": obj.id, "group": "{0}_stats_{1}".format(dataset,latest_year)}
+            return {"name": "top_{0}".format(key), "value": obj.name(), "percent": percent, "id": obj.id, "group": "{0}_stats_{1}".format(dataset,latest_year)}
+        else:
+            return {"name": "top_{0}".format(key), "value": "-", "group": "{0}_stats_{1}".format(dataset,latest_year)}
 
     def get_val(self, tbl, val_var, attr_type, dataset, latest_year = None):
         
@@ -185,14 +188,18 @@ class Stats(object):
             total = tbl.query.filter(getattr(tbl, attr_type+"_id") == self.id)
         
         total = total.filter_by(year=latest_year).first()
-                 
-        if isinstance(total,tuple):
-            val = total[0]
-        else:
-            val = getattr(total,val_var)
+        
+        if total != None:
+            if isinstance(total,tuple):
+                val = total[0]
+            else:
+                val = getattr(total,val_var)
             
-        if calc_var == "wage_avg":
-            val = val/getattr(total,"num_emp")
+            if calc_var == "wage_avg":
+                val = val/getattr(total,"num_emp")
+                
+        else:
+            val = 0
             
         if val_var == "population":
             group = ""

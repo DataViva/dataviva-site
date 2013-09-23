@@ -173,9 +173,11 @@ vizwhiz.utils.wordwrap = function(params) {
     function flow() {
     
       d3.select(parent).selectAll('tspan').remove()
-    
+      
+      var x_pos = parent.getAttribute('x')
+      
       var tspan = d3.select(parent).append('tspan')
-        .attr('x',parent.getAttribute('x'))
+        .attr('x',x_pos)
         .text(words[0])
 
       for (var i=1; i < words.length; i++) {
@@ -187,7 +189,7 @@ vizwhiz.utils.wordwrap = function(params) {
           tspan.text(tspan.text().substr(0,tspan.text().lastIndexOf(" ")))
     
           tspan = d3.select(parent).append('tspan')
-            .attr('x',parent.getAttribute('x'))
+            .attr('x',x_pos)
             .text(words[i])
             
         }
@@ -309,6 +311,7 @@ vizwhiz.tooltip.create = function(params) {
   
   if (params.fullscreen) {
     var curtain = params.parent.append("div")
+      .attr("id","vizwhiz_tooltip_curtain_"+params.id)
       .attr("class","vizwhiz_tooltip_curtain")
       .style("background-color",params.background)
       .on(vizwhiz.evt.click,function(){
@@ -713,11 +716,10 @@ vizwhiz.tooltip.close = function() {
 //-------------------------------------------------------------------
 
 vizwhiz.tooltip.remove = function(id) {
-  
-  if (id) d3.select("div#vizwhiz_tooltip_id_"+id).remove();
-  else d3.selectAll("div.vizwhiz_tooltip").remove();
-  
-  d3.selectAll("div.vizwhiz_tooltip_curtain").remove()
+
+  d3.selectAll("div#vizwhiz_tooltip_curtain_"+id).remove()
+  if (id) d3.select("div#vizwhiz_tooltip_id_"+id).remove()
+  else d3.selectAll("div.vizwhiz_tooltip").remove()
 
 }
 
@@ -1035,8 +1037,7 @@ vizwhiz.viz = function() {
       filter_change = false,
       solo_change = false,
       value_change = false,
-      xaxis_change = false,
-      yaxis_change = false,
+      axis_change = false,
       footer = true,
       nodes,
       links,
@@ -1084,8 +1085,10 @@ vizwhiz.viz = function() {
         if (filter_change) changed.push("filter")
         if (solo_change) changed.push("solo")
         if (value_change && vars.value_var) changed.push(vars.value_var)
-        if (xaxis_change && vars.xaxis_var) changed.push(vars.xaxis_var)
-        if (yaxis_change && vars.yaxis_var) changed.push(vars.yaxis_var)
+        if (axis_change) {
+          if (vars.yaxis_var) changed.push(vars.yaxis_var)
+          if (vars.xaxis_var) changed.push(vars.xaxis_var)
+        }
         
         data_obj.filtered = filter_check(data_obj.raw,changed)
         vars.parent = d3.select(this)
@@ -1093,8 +1096,7 @@ vizwhiz.viz = function() {
         filter_change = false
         solo_change = false
         value_change = false
-        xaxis_change = false
-        yaxis_change = false
+        axis_change = false
         
         if (vars.dev) console.log("[viz-whiz] Establishing Year Range and Current Year")
         // Find available years
@@ -1125,8 +1127,10 @@ vizwhiz.viz = function() {
       if (filter_change) changed.push("filter")
       if (solo_change) changed.push("solo")
       if (value_change && vars.value_var) changed.push(vars.value_var)
-      if (xaxis_change && vars.xaxis_var) changed.push(vars.xaxis_var)
-      if (yaxis_change && vars.yaxis_var) changed.push(vars.yaxis_var)
+      if (axis_change) {
+        if (vars.yaxis_var) changed.push(vars.yaxis_var)
+        if (vars.xaxis_var) changed.push(vars.xaxis_var)
+      }
       
       if (changed.length) {
         delete data_obj[data_type[vars.type]]
@@ -1143,8 +1147,7 @@ vizwhiz.viz = function() {
       filter_change = false
       solo_change = false
       value_change = false
-      xaxis_change = false
-      yaxis_change = false
+      axis_change = false
 
       if (!data_obj[data_type[vars.type]]) {
         
@@ -1447,7 +1450,7 @@ vizwhiz.viz = function() {
       // Create titles
       vars.margin.top = 0
       var title_offset = 0
-      if ((vars.type == "rings" && !vars.connections[vars.highlight]) || !vars.data || error || vars.svg_width <= 400 || vars.svg_height <= 300) {
+      if (vars.svg_width <= 400 || vars.svg_height <= 300) {
         vars.small = true;
         vars.graph.margin = {"top": 0, "right": 0, "bottom": 0, "left": 0}
         vars.graph.width = vars.width
@@ -1463,7 +1466,12 @@ vizwhiz.viz = function() {
         vars.graph.width = vars.width-vars.graph.margin.left-vars.graph.margin.right
         make_title(vars.title,"title");
         make_title(vars.sub_title,"sub_title");
-        make_title(total_val,"total_bar");
+        if (vars.data && !error && (vars.type == "rings" && !vars.connections[vars.highlight])) {
+          make_title(total_val,"total_bar");
+        }
+        else {
+          make_title(null,"total_bar");
+        }
         if (vars.margin.top > 0) {
           vars.margin.top += 3
           if (vars.margin.top < vars.title_height) {
@@ -1804,8 +1812,8 @@ vizwhiz.viz = function() {
     source.enter().append("text")
       .attr("class","source")
       .attr("opacity",0)
-      .attr("x",vars.svg_width/2)
-      .attr("y",padding-1)
+      .attr("x",vars.svg_width/2+"px")
+      .attr("y",padding-1+"px")
       .attr("font-size","10px")
       .attr("fill","#333")
       .attr("text-anchor", "middle")
@@ -1844,9 +1852,9 @@ vizwhiz.viz = function() {
         }
       })
       
-    source.transition().duration(vizwhiz.evt.timing)
+    source
       .attr("opacity",1)
-      .attr("x",vars.svg_width/2)
+      .attr("x",(vars.svg_width/2)+"px")
       .attr("font-family", vars.font)
       .style("font-weight", vars.font_weight)
       .each(function(d){
@@ -1858,8 +1866,6 @@ vizwhiz.viz = function() {
           "resize": false
         })
       })
-      .selectAll("tspan")
-        .attr("x",vars.svg_width/2)
       
     source.exit().transition().duration(vizwhiz.evt.timing)
       .attr("opacity",0)
@@ -2525,7 +2531,7 @@ vizwhiz.viz = function() {
   chart.xaxis_var = function(x) {
     if (!arguments.length) return vars.xaxis_var;
     vars.xaxis_var = x;
-    xaxis_change = true;
+    axis_change = true;
     return chart;
   };
   
@@ -2550,7 +2556,7 @@ vizwhiz.viz = function() {
   chart.yaxis_var = function(x) {
     if (!arguments.length) return vars.yaxis_var;
     vars.yaxis_var = x;
-    yaxis_change = true;
+    axis_change = true;
     return chart;
   };
   
