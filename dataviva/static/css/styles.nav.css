@@ -1,4 +1,5 @@
 #header_container {
+  background-color: white;
   height: 58px;
   position: fixed;
   top: 0px;
@@ -8,26 +9,12 @@
   z-index: 750;
 }
 
-#header_container #language {
-  opacity: 0.6;
-  -webkit-transition: opacity .2s;
-          transition: opacity .2s;
-}
-
-#header_container:hover {
-  background-color: white;
-}
-
-#header_container:hover #language {
-  opacity: 1;
-}
-
 #header {
+  height: 40px;
   margin: 0 auto;
   margin-top: 0px;
-  width: 800px;
   padding: 8px 90px;
-  height: 40px;
+  width: 800px;
 }
 
 #header > a {
@@ -36,13 +23,14 @@
 }
 
 #logo {
-  background-image: url("/static/img/nav/DataViva.png");
+  background-image: url("/static/img/nav/DataViva_Beta.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: top center;
   display: inline-block;
-  height: 40px;
-  width: 153px;
+  height: 44px;
+  margin-top: -1px;
+  width: 147px;
 }
 
 #header > a.link {
@@ -251,7 +239,6 @@ body.about a.site_crumb:hover {
   display: block;
   font-size: 10px;
   left: 0px;
-  opacity: 0.9;
   padding: 5px;
   position: fixed;
   text-align: center;
@@ -260,17 +247,13 @@ body.about a.site_crumb:hover {
   width: 100%;
 }
 
-#footer:hover {
-  opacity: 1;
-}
-
 div.logo.sponsor {
   color: #888;
   display: inline-block;
   font-size: 14px;
   height: 29px;
   line-height: 29px;
-  margin: 5px;
+  margin: 5px 5px 5px 15px;
   text-shadow: 0px 1px white;
   width: auto;
 }
@@ -319,7 +302,7 @@ a.logo.fjp {
 
 a.opendata {
   display: inline-block;
-  margin: 12px 5px;
+  margin: 13px 5px 11px 5px;
   opacity: 0.5;
   -webkit-transition: opacity 0.1s;
           transition: opacity 0.1s;
