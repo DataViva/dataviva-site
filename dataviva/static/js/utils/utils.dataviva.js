@@ -229,7 +229,7 @@ dataviva.format.text = function(text,name,l) {
       "rais": {"en": "Establishments and Employment (RAIS)", "pt": "Estabelecimentos e Emprego (RAIS)"},
       "num_emp": {"en": "Employees", "pt": "Empregados"},
       "num_est": {"en": "Establishments", "pt": "Estabelecimentos"},
-      "wage": {"en": "Monthly Wage", "pt": "Renda Mensal"},
+      "wage": {"en": "Monthly Wage", "pt": "Massa Salarial"},
       "total_wage": {"en": "Total Monthly Wage", "pt": "Renda Mensal Total"},
       "wage_avg": {"en": "Average Monthly Wage", "pt": "Renda Mensal M\u00e9dia"},
       "wage_avg_bra": {"en": "Brazilian Average Wage", "pt": "Sal\u00e1rio M\u00e9dio Brasileiro"},

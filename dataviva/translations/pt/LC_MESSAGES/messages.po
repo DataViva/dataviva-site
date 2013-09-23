@@ -19,18 +19,12 @@ msgstr ""
 
 #: dataviva/html/home.html:14
 msgid "Visualizing Minas Gerais and other Brazilian States"
-msgstr "Visualizando Minas Gerais e os demais estados brasileiros"
+msgstr "Visualizando Minas Gerais e os demais Estados Brasileiros"
 
 #: dataviva/html/home.html:15
-msgid ""
-"DataViva is an initiative of the Government of Minas Gerais which seeks "
-"to create an innovative and creative data visualization tool. Would you "
-"like to see some visualizations? Below are some good places to start:"
+msgid "DataViva is an initiative of the Government of Minas Gerais which seeks to create an innovative and creative data visualization tool. Would you like to see some visualizations? Below are some good places to start:"
 msgstr ""
-"O DataViva é uma iniciativa do Governo de Minas Gerais, que busca "
-"contribuir com uma ferramenta de visualização de dados em modos "
-"inovadores e criativos. Que tal construir a sua visualização? Abaixo "
-"estão alguns bons lugares para iniciar:"
+"O DataViva é uma iniciativa do Governo de Minas Gerais, que busca contribuir com uma ferramenta de visualização de dados em modos inovadores e criativos. Que tal construir a sua visualização? Abaixo estão alguns bons lugares para iniciar:"
 
 #: dataviva/html/home.html:19 dataviva/html/templates/site.html:14
 msgid "Guide"
@@ -38,7 +32,7 @@ msgstr "Guia"
 
 #: dataviva/html/home.html:20
 msgid "Generate multiple apps into a report."
-msgstr "Gerar vários aplicativos em um relatório."
+msgstr "Siga um passo a passo para gerar um relatório com vários aplicativos."
 
 #: dataviva/html/home.html:24 dataviva/html/apps/index.html:4
 #: dataviva/html/templates/site.html:16
@@ -47,7 +41,7 @@ msgstr "Aplicativos"
 
 #: dataviva/html/home.html:25
 msgid "Go straight to the visualization builder."
-msgstr "Vá direto ao construtor de visualização."
+msgstr "Aqui você constroi a sua visualização."
 
 #: dataviva/html/about/appsdocs.html:4
 msgid "About the Apps"
@@ -617,7 +611,7 @@ msgstr "municípios"
 #: dataviva/html/guide/hs.html:27 dataviva/html/guide/isic.html:22
 #, python-format
 msgid "Which industries %(word)s with them?"
-msgstr "Quais indústrias %(word)s com elas?"
+msgstr "Quais atividades %(word)s com elas?"
 
 #: dataviva/html/guide/hs.html:27 dataviva/html/guide/isic.html:22
 msgid "co-locate"
@@ -638,11 +632,11 @@ msgstr "Saiba mais sobre o potencial de uma localidade."
 #: dataviva/html/guide/index.html:15 dataviva/html/guide/industry.html:3
 #: dataviva/html/profiles/index.html:20
 msgid "Industry"
-msgstr "Indústria"
+msgstr "Atividade Econômica"
 
 #: dataviva/html/guide/index.html:16
 msgid "Learn about industrial opportunities."
-msgstr "Saiba mais sobre as oportunidades industriais."
+msgstr "Saiba mais sobre as oportunidades econômicas."
 
 #: dataviva/html/guide/index.html:20
 msgid "Career"
