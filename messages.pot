@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-23 12:52-0400\n"
+"POT-Creation-Date: 2013-09-23 17:26-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -512,7 +512,7 @@ msgstr ""
 msgid "Which industries are %(word)s?"
 msgstr ""
 
-#: dataviva/html/guide/bra.html:27 dataviva/html/guide/cbo.html:39
+#: dataviva/html/guide/bra.html:27
 msgid "growing"
 msgstr ""
 
@@ -552,7 +552,11 @@ msgstr ""
 
 #: dataviva/html/guide/cbo.html:39
 #, python-format
-msgid "Where is their employement %(word)s the fastest?"
+msgid "Where is their employement %(word)s?"
+msgstr ""
+
+#: dataviva/html/guide/cbo.html:39
+msgid "growing the fastest"
 msgstr ""
 
 #: dataviva/html/guide/cbo.html:47

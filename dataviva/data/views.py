@@ -128,31 +128,46 @@ def classifications(attr = None, depth = None, page = 1):
         if depth == None:
             depth = "2"
         depths = ["2","4","6","8"]
-        title = "Brazilian Geography"
+        if g.locale == "pt":
+            title = u"Localidades Brasileiras"
+        else:
+            title = u"Brazilian Locations"
     elif attr == "wld":
         attr_table = Wld
         if depth == None:
             depth = "2"
         depths = ["2","5"]
-        title = "Countries"
+        if g.locale == "pt":
+            title = u"Países"
+        else:
+            title = u"Countries"
     elif attr == "isic":
         attr_table = Isic
         if depth == None:
             depth = "1"
         depths = ["1","3","5"]
-        title = "Industries by ISIC Classification"
+        if g.locale == "pt":
+            title = u"Indústrias pela Classificação ISIC"
+        else:
+            title = u"Industries by ISIC Classification"
     elif attr == "cbo":
         attr_table = Cbo
         if depth == None:
             depth = "1"
         depths = ["1","4"]
-        title = "Occupations by CBO Classification"
+        if g.locale == "pt":
+            title = u"Ocupações por Classificação CBO"
+        else:
+            title = u"Occupations by CBO Classification"
     elif attr == "hs":
         attr_table = Hs
         if depth == None:
             depth = "2"
         depths = ["2","4","6"]
-        title = "Products by HS Classification"
+        if g.locale == "pt":
+            title = u"Produtos da Classificação HS"
+        else:
+            title = u"Products by HS Classification"
     
     attrs = attr_table.query.filter(func.char_length(attr_table.id) == depth).limit(per_page).offset(offset)
     

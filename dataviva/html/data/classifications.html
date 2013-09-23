@@ -94,7 +94,12 @@
             if (key == "icon") {
               col.append("div")
                 .style("background-image","url('"+dataviva.icon(d.id, d.attr_type) + "')")
-                .style("background-color", d.color)
+                .style("background-color", function(dd){
+                  if (d.attr_type == "bra" || (d.attr_type == "wld" && d.id.length == 5)) {
+                    return "transparent"
+                  }
+                  else return d.color
+                })
                 .attr("title", d.id)
             }
             else {
