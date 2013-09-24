@@ -56,7 +56,7 @@ def parse_bras(bra_str):
     return bras
 
 agg = {'wage':func.sum, 'num_emp':func.sum, 'num_est':func.sum,
-        'eci':func.avg, 'eci_wld':func.avg, 'ici':func.avg, 'oci':func.avg,
+        'eci':func.avg, 'eci_wld':func.avg, 'unique_isic':func.avg, 'unique_cbo':func.avg,
         'wage_growth_pct':func.avg, 'wage_growth_pct_5':func.avg, 
         'wage_growth_val':func.avg, 'wage_growth_val_5':func.avg,
         'num_emp_growth_pct':func.avg, 'num_emp_pct_5':func.avg, 
@@ -361,8 +361,8 @@ def rais_yo(**kwargs):
 @mod.route('/<year>/<bra_id>/<isic_id>/all/')
 def rais_ybi(**kwargs):
     kwargs["join"] = {
-                        "table": Yi.ici,
-                        "columns": {"ici": Yi.ici},
+                        "table": Yi.unique_cbo,
+                        "columns": {"unique_cbo": Yi.unique_cbo},
                         "on": ('year', 'isic_id')
                     }
     return make_response(get_query(Ybi, request.args, **kwargs))
@@ -375,8 +375,8 @@ def rais_ybi_recommended(**kwargs):
 @mod.route('/<year>/<bra_id>/all/<cbo_id>/')
 def rais_ybo(**kwargs):
     kwargs["join"] = {
-                        "table": Yo.oci,
-                        "columns": {"oci": Yo.oci},
+                        "table": Yo.unique_isic,
+                        "columns": {"unique_isic": Yo.unique_isic},
                         "on": ('year', 'cbo_id')
                     }
     return make_response(get_query(Ybo, request.args, **kwargs))

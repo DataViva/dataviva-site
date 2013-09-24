@@ -30,7 +30,6 @@ class Yp(db.Model, AutoSerialize):
     hs_id = db.Column(db.String(6), db.ForeignKey(Hs.id), primary_key=True)
     val_usd = db.Column(db.Float())
     pci = db.Column(db.Float())
-    pci_wld = db.Column(db.Float())
     val_usd_growth_pct = db.Column(db.Float())
     val_usd_growth_pct_5 = db.Column(db.Float())
     val_usd_growth_val = db.Column(db.Float())
@@ -46,7 +45,6 @@ class Yb_secex(db.Model, AutoSerialize):
     bra_id = db.Column(db.String(8), db.ForeignKey(Bra.id), primary_key=True)
     val_usd = db.Column(db.Float())
     eci = db.Column(db.Float())
-    eci_wld = db.Column(db.Float())
     val_usd_growth_pct = db.Column(db.Float())
     val_usd_growth_pct_5 = db.Column(db.Float())
     val_usd_growth_val = db.Column(db.Float())
@@ -54,17 +52,6 @@ class Yb_secex(db.Model, AutoSerialize):
 
     def __repr__(self):
         return '<Yb_secex %d.%s>' % (self.year, self.bra_id)
-
-class Bp(db.Model, AutoSerialize):
-
-    __tablename__ = 'secex_bp'
-    bra_id = db.Column(db.String(8), db.ForeignKey(Bra.id), primary_key=True)
-    hs_id = db.Column(db.String(6), db.ForeignKey(Hs.id), primary_key=True)
-    mhat_rca = db.Column(db.Float())
-    mhat_val_usd = db.Column(db.Float())
-
-    def __repr__(self):
-        return '<Bp %s.%s>' % (self.bra_id, self.hs_id)
 
 ############################################################
 # ----------------------------------------------------------

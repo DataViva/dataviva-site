@@ -57,7 +57,7 @@ def get_eci(bra):
     ecis = {}
     ybs = Yb_secex.query.filter_by(bra_id=bra[0]["id"])
     for yb in ybs.all():
-        ecis[yb.year] = yb.eci_wld
+        ecis[yb.year] = yb.eci
     return ecis
 
 agg = {'val_usd':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
