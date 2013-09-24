@@ -3,136 +3,148 @@
 
 {% block title %}: {% trans %}Apps{% endtrans %}{% endblock %}
 
+{% block head %}
+
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.info.css" />
+
+{% endblock %}
+
 {% block content %}
 
-<div class='media'>Media here</div>
-<div class='text'>Title here</div>
-<a class='prev' href='#'>Prev</a>
-<a class='next' href='#'>Next</a>
+<div class='media'></div>
+<div id='info'>
+  <div class='divider'></div>
+  <div class='text'></div>
+  <div id='pagination'></div>
+</div>
+<a id='prev' class="page_button decision icon {{ app_name }} prev" href='#'>{% trans %}Previous{% endtrans %}</a>
+<a id='next' class="page_button decision icon {{ app_name }} next" href='#'>{% trans %}Next{% endtrans %}</a>
 
 {% endblock %}
 
 {% block js %}
 
 <script>
-var lang = "{{ g.locale }}";
+var lang = "{{ g.locale }}"
 var app_name = "{{ app_name }}"
 
 var apps_info = {
 	"tree_map": [
-		{"text_en": "Tree maps can be used to look at shares.", "text_pt": "Tree maps can be used to look at shares.", "image":"/static/img/help/tree_map/tree_map.jpg"},
+		{"text_en": "Tree Maps can be used to look at shares.", "text_pt": "Tree maps can be used to look at shares.", "image":"/static/img/help/tree_map/tree_map.jpg"},
 		{"text_en": "This tree map shows the exports of Minas Gerais.", "text_pt": "This tree map shows the exports of Minas Gerais.", "image":"/static/img/help/tree_map/tree_map.jpg"},
 		{"text_en": "Colors indicate different export categories.", "text_pt": "Colors indicate different export categories.", "image":"/static/img/help/tree_map/tree_map.jpg"},
 		{"text_en": "On hover, other statistics of the product are shown.", "text_pt": "On hover, other statistics of the product are shown.", "image":"/static/img/help/tree_map/tree_map_hover.jpg"},
-		{"text_en": "On click, a detailed summary of the product is shown, together with a list of related visualizations.", "text_pt": "On click, a detailed summary of the product is shown, together with a list of related visualizations.", "image":"/static/img/help/tree_map/tree_map_click.jpg"},
-		{"text_en": "The type of tree map displayed can be changed by selecting Change Output.", "text_pt": "The type of tree map displayed can be changed by selecting Change Output.", "video":"/static/img/help/tree_map/change_output"},
+		{"text_en": "On click, a detailed summary of the product is shown with a list of related visualizations.", "text_pt": "On click, a detailed summary of the product is shown, together with a list of related visualizations.", "image":"/static/img/help/tree_map/tree_map_click.jpg"},
+		{"text_en": "The type of tree map displayed can be changed by selecting 'Change Output'.", "text_pt": "The type of tree map displayed can be changed by selecting Change Output.", "video":"/static/img/help/tree_map/change_output"},
 		{"text_en": "DataViva can show the shares of employees, wages and establishments for each industry, and can present industries at a high or low level of aggregation.", "text_pt": "DataViva can show the shares of employees, wages and establishments for each industry, and can present industries at a high or low level of aggregation.", "video":"/static/img/help/tree_map/change_options"},
 		{"text_en": "DataViva can construct many highly specific tree maps: For example, the municipalities in the state of Minas Gerais where Computer Programming Activities are present.", "text_pt": "DataViva can construct many highly specific tree maps: For example, the municipalities in the state of Minas Gerais where Computer Programming Activities are present.", "video":"/static/img/help/tree_map/highly_specific"},
 		{"text_en": "DataViva can also show the employment growth in each of these municipalities.", "text_pt": "DataViva can also show the employment growth in each of these municipalities.", "video":"/static/img/help/tree_map/growth"}
 	],
 	"stacked": [
-		{"text_en": "Stacked charts can be used to explore the evolution of values and shares.", "text_pt": "Stacked charts can be used to explore the evolution of values and shares.", "image":"/static/img/help/stacked/stacked.png"},
+		{"text_en": "Stacked Area Charts can be used to explore the evolution of values and shares.", "text_pt": "Stacked charts can be used to explore the evolution of values and shares.", "image":"/static/img/help/stacked/stacked.png"},
 		{"text_en": "This stacked chart shows the evolution of employment in Minas Gerais.", "text_pt": "This stacked chart shows the evolution of employment in Minas Gerais.", "image":"/static/img/help/stacked/stacked.png"},
 		{"text_en": "Colors indicate different occupational categories.", "text_pt": "Colors indicate different occupational categories.", "image":"/static/img/help/stacked/stacked.png"},
 		{"text_en": "On hover, other statistics of the occupation are shown.", "text_pt": "On hover, other statistics of the occupation are shown.", "image":"/static/img/help/stacked/stacked_hover.png"},
-		{"text_en": "On click, a detailed summary of the occupation is shown, together with a list of related visualizations.", "text_pt": "On click, a detailed summary of the occupation is shown, together with a list of related visualizations.", "image":"/static/img/help/stacked/stacked_click.png"},
+		{"text_en": "On click, a detailed summary of the occupation is shown with a list of related visualizations.", "text_pt": "On click, a detailed summary of the occupation is shown, together with a list of related visualizations.", "image":"/static/img/help/stacked/stacked_click.png"},
 		{"text_en": "The type of Stacked chart displayed can be changed by selecting Change Output.", "text_pt": "The type of Stacked chart displayed can be changed by selecting Change Output.", "video":"/static/img/help/stacked/stacked_change_output"},
-		{"text_en": "By using the icons below we can select or remove a category from the visualization.", "text_pt": "By using the icons below we can select or remove a category from the visualization.", "video":"/static/img/help/stacked/stacked_solo"},
-		{"text_en": "DataViva can construct many highly specific Stacked charts for example, The occupations employed in Santa Rita do Sapucai’s computer programming industry.", "text_pt": "DataViva can construct many highly specific Stacked charts for example, The occupations employed in Santa Rita do Sapucai’s computer programming industry.", "video":"/static/img/help/stacked/stacked_specialized"},
+		{"text_en": "By using the category icons on the bottom, we can solo or remove a category from the visualization.", "text_pt": "By using the icons below we can select or remove a category from the visualization.", "video":"/static/img/help/stacked/stacked_solo"},
+		{"text_en": "DataViva can construct many highly specific Stacked charts for example, the occupations employed in Santa Rita do Sapucai’s computer programming industry.", "text_pt": "DataViva can construct many highly specific Stacked charts for example, The occupations employed in Santa Rita do Sapucai’s computer programming industry.", "video":"/static/img/help/stacked/stacked_specialized"},
 		{"text_en": "We can look at this by number of employees, total wages, average wages, and number of establishments.", "text_pt": "We can look at this by number of employees, total wages, average wages, and number of establishments.", "video":"/static/img/help/stacked/stacked_change_size"}
 	],
 	"network": [
-		{"text_en": "Network visualizations are used to explore related products and industries.", "text_pt": "Network visualizations are used to explore related products and industries.", "image":"/static/img/help/network/network.png"},
+		{"text_en": "Networks are used to explore related products and industries.", "text_pt": "Network visualizations are used to explore related products and industries.", "image":"/static/img/help/network/network.png"},
 		{"text_en": "This visualization shows the industries that are present in the municipality of Betim.", "text_pt": "This visualization shows the industries that are present in the municipality of Betim.", "image":"/static/img/help/network/network.png"},
 		{"text_en": "Each node represents an industry. Fully colored nodes are the industries where the municipality of Betim is most competitive.", "text_pt": "Each node represents an industry. Fully colored nodes are the industries where the municipality of Betim is most competitive.", "image":"/static/img/help/network/network_hover.png"},
 		{"text_en": "Links connect industries that tend to hire workers from the same occupations.", "text_pt": "Links connect industries that tend to hire workers from the same occupations.", "image":"/static/img/help/network/network_hover.png"},
 		{"text_en": "Clicking on an industry zooms into the area defined by that industry, and the industries that are connected to it.", "text_pt": "Clicking on an industry zooms into the area defined by that industry, and the industries that are connected to it.", "image":"/static/img/help/network/network_click.png"},
 		{"text_en": "The presence of connected industries in a location indicates the presence of the skills needed to develop that industry, and is predictive of potential success in that area.", "text_pt": "The presence of connected industries in a location indicates the presence of the skills needed to develop that industry, and is predictive of potential success in that area.", "image":"/static/img/help/network/network_click.png"},
 		{"text_en": "DataViva can also visualize the network of product exports.", "text_pt": "DataViva can also visualize the network of product exports.", "video":"/static/img/help/network/network_change_output"},
-		{"text_en": "We can also color the nodes based on other measures such as complexity to find which are the more sophisticated products.", "text_pt": "We can also color the nodes based on other measures such as complexity to find which are the more sophisticated products.", "video":"/static/img/help/network/network_change_color"}
+		{"text_en": "We can also color the nodes based on other measures, such as complexity, to find which are the more sophisticated products.", "text_pt": "We can also color the nodes based on other measures such as complexity to find which are the more sophisticated products.", "video":"/static/img/help/network/network_change_color"}
 	],
 	"geo_map": [
-		{"text_en": "The Geo Map visualization can be used to explore the spatial distribution of data.", "text_pt": "The Geo Map visualization can be used to explore the spatial distribution of data.", "image":"/static/img/help/geo_map/geo_map.png"},
+		{"text_en": "A Geo Map can be used to explore the spatial distribution of data.", "text_pt": "The Geo Map visualization can be used to explore the spatial distribution of data.", "image":"/static/img/help/geo_map/geo_map.png"},
 		{"text_en": "This visualization shows the Municipalities in Minas Gerais colored by total average monthly wages in all industries.", "text_pt": "This visualization shows the Municipalities in Minas Gerais colored by total average monthly wages in all industries.", "image":"/static/img/help/geo_map/geo_map.png"},
 		{"text_en": "Hovering over a municipality will show the name and other relevant information.", "text_pt": "Hovering over a municipality will show the name and other relevant information.", "image":"/static/img/help/geo_map/geo_map_hover.png"},
-		{"text_en": "On click, we are zoomed into the selected municipality and shown more detailed information as well as a list of related apps.", "text_pt": "On click, we are zoomed into the selected municipality and shown more detailed information as well as a list of related apps.", "image":"/static/img/help/geo_map/geo_map_click.png"},
-		{"text_en": "Different views of data can be shown with this visualization by changing the output. We can also look at a map of the wages for a particular industry.", "text_pt": "Different views of data can be shown with this visualization by changing the output. We can also look at a map of the wages for a particular industry.", "video":"/static/img/help/geo_map/geo_map_change_output"},
+		{"text_en": "On click, we are zoomed into the selected municipality and shown more detailed information, as well as a list of related apps.", "text_pt": "On click, we are zoomed into the selected municipality and shown more detailed information as well as a list of related apps.", "image":"/static/img/help/geo_map/geo_map_click.png"},
+		{"text_en": "Different views of the data can be shown with this visualization by changing the output. We can also look at a map of the wages for a particular industry.", "text_pt": "Different views of data can be shown with this visualization by changing the output. We can also look at a map of the wages for a particular industry.", "video":"/static/img/help/geo_map/geo_map_change_output"},
 		{"text_en": "We can also change the value used for color.", "text_pt": "We can also change the value used for color.", "video":"/static/img/help/geo_map/geo_map_change_color"},
-		{"text_en": "The Geo Map can also show data for the entirety of Brazil by states.", "text_pt": "The Geo Map can also show data for the entirety of Brazil by states.", "video":"/static/img/help/geo_map/geo_map_all_brazil"}
+		{"text_en": "The Geo Map can also show data for the entirety of Brazil by state.", "text_pt": "The Geo Map can also show data for the entirety of Brazil by states.", "video":"/static/img/help/geo_map/geo_map_all_brazil"}
 	],
 	"rings": [
-		{"text_en": "The Rings visualization can be used to explore related products, industries or occupation. The central node shows the selected item, in this case an industry.", "text_pt": "The Rings visualization can be used to explore related products, industries or occupation. The central node shows the selected item, in this case an industry.", "image":"/static/img/help/rings/rings.png"},
+		{"text_en": "Rings can be used to explore related products, industries or occupations. The central node shows the selected item, in this case an industry.", "text_pt": "The Rings visualization can be used to explore related products, industries or occupation. The central node shows the selected item, in this case an industry.", "image":"/static/img/help/rings/rings.png"},
 		{"text_en": "This visualization shows the primary and secondary connections for the Computer Programming industry.", "text_pt": "This visualization shows the primary and secondary connections for the Computer Programming industry.", "image":"/static/img/help/rings/rings.png"},
-		{"text_en": "Similar to the Network visualization each node represents an industry. Fully colored nodes are the industries where the municipality of Santa Rita do Sapucaí is most competitive.", "text_pt": "Similar to the Network visualization each node represents an industry. Fully colored nodes are the industries where the municipality of Santa Rita do Sapucaí is most competitive.", "image":"/static/img/help/rings/rings.png"},
+		{"text_en": "Similar to a Network, each node here represents an industry. Fully colored nodes are the industries where the municipality of Santa Rita do Sapucaí is most competitive.", "text_pt": "Similar to the Network visualization each node represents an industry. Fully colored nodes are the industries where the municipality of Santa Rita do Sapucaí is most competitive.", "image":"/static/img/help/rings/rings.png"},
 		{"text_en": "Links connect industries that tend to hire workers from the same occupations.", "text_pt": "Links connect industries that tend to hire workers from the same occupations.", "image":"/static/img/help/rings/rings.png"},
-		{"text_en": "Hovering over a connected industry will highlight in red its connections.", "text_pt": "Hovering over a connected industry will highlight in red its connections.", "image":"/static/img/help/rings/rings_hover.png"},
-		{"text_en": "Clicking on a connected industry will change the visualization to now center on this industry, updating all the relevant information.", "text_pt": "Clicking on a connected industry will change the visualization to now center on this industry, updating all the relevant information.", "video":"/static/img/help/rings/rings_click"},
+		{"text_en": "Hovering over a connected industry will highlight its connections in red.", "text_pt": "Hovering over a connected industry will highlight in red its connections.", "image":"/static/img/help/rings/rings_hover.png"},
+		{"text_en": "Clicking on a connected industry will change the visualization to now center on this industry, updating all the relevant information and connections.", "text_pt": "Clicking on a connected industry will change the visualization to now center on this industry, updating all the relevant information.", "video":"/static/img/help/rings/rings_click"},
 		{"text_en": "DataViva can also visualize the connections of product exports and occupations.", "text_pt": "DataViva can also visualize the connections of product exports and occupations.", "video":"/static/img/help/rings/rings_change_output"},
-		{"text_en": "We can also color the nodes based on other measures such as complexity or growth.", "text_pt": "We can also color the nodes based on other measures such as complexity or growth.", "video":"/static/img/help/rings/rings_change_color"}
+		{"text_en": "We can also color the nodes based on other measures, such as complexity or growth.", "text_pt": "We can also color the nodes based on other measures such as complexity or growth.", "video":"/static/img/help/rings/rings_change_color"}
 	],
 	"scatter": [
-		{"text_en": "The Scatter visualization (similar to the Compare) is a scatter plot comparing different values along an X and Y axis.", "text_pt": "The Scatter visualization (similar to the Compare) is a scatter plot comparing different values along an X and Y axis.", "image":"/static/img/help/scatter/scatter.png"},
-		{"text_en": "In this visualization each node represents a top-level product sector. The nodes are pie charts filled in by the percentage of products exported by Minas Gerais.", "text_pt": "In this visualization each node represents a top-level product sector. The nodes are pie charts filled in by the percentage of products exported by Minas Gerais.", "image":"/static/img/help/scatter/scatter.png"},
-		{"text_en": "The X axis shows the product’s distance value which is an indicator of how near it is to products that Minas Gerais does export in the Product Space.", "text_pt": "The X axis shows the product’s distance value which is an indicator of how near it is to products that Minas Gerais does export in the Product Space.", "image":"/static/img/help/scatter/scatter.png"},
-		{"text_en": "The Y axis shows complexity which is an indicator of how many countries export the product and how diversified those exporters are.", "text_pt": "The Y axis shows complexity which is an indicator of how many countries export the product and how diversified those exporters are.", "image":"/static/img/help/scatter/scatter.png"},
-		{"text_en": "Hovering over a node will show what percentage of products are being exported in Minas Gerais as well as the specific X and Y axis values.", "text_pt": "Hovering over a node will show what percentage of products are being exported in Minas Gerais as well as the specific X and Y axis values.", "image":"/static/img/help/scatter/scatter_hover.png"},
+		{"text_en": "Scatter (similar to Compare) is a scatter plot comparing different values along an X and Y axis.", "text_pt": "The Scatter visualization (similar to the Compare) is a scatter plot comparing different values along an X and Y axis.", "image":"/static/img/help/scatter/scatter.png"},
+		{"text_en": "In this visualization each node represents a top-level product sector. The nodes are pie charts filled in by the percentage of products in that sector exported by Minas Gerais.", "text_pt": "In this visualization each node represents a top-level product sector. The nodes are pie charts filled in by the percentage of products exported by Minas Gerais.", "image":"/static/img/help/scatter/scatter.png"},
+		{"text_en": "Here, the X axis shows the product’s Distance value, which is an indicator of how near it is to products that Minas Gerais does export in the Product Space.", "text_pt": "The X axis shows the product’s distance value which is an indicator of how near it is to products that Minas Gerais does export in the Product Space.", "image":"/static/img/help/scatter/scatter.png"},
+		{"text_en": "The Y axis shows Product Complexity, which is an indicator of how many countries export the product and how diversified those exporters are.", "text_pt": "The Y axis shows complexity which is an indicator of how many countries export the product and how diversified those exporters are.", "image":"/static/img/help/scatter/scatter.png"},
+		{"text_en": "Hovering over a node will show what percentage of products are being exported in Minas Gerais, as well as the specific X and Y axis values.", "text_pt": "Hovering over a node will show what percentage of products are being exported in Minas Gerais as well as the specific X and Y axis values.", "image":"/static/img/help/scatter/scatter_hover.png"},
 		{"text_en": "On click even greater detail is revealed about the Metals product sector as well as related apps.", "text_pt": "On click even greater detail is revealed about the Metals product sector as well as related apps.", "image":"/static/img/help/scatter/scatter_click.png"},
-		{"text_en": "DataViva can also visualize the scatter plot of industries. One difference is that complexity is replaced with number of occupations required for that industry.", "text_pt": "DataViva can also visualize the scatter plot of industries. One difference is that complexity is replaced with number of occupations required for that industry.", "video":"/static/img/help/scatter/scatter_change_output"},
+		{"text_en": "DataViva can also visualize a scatter plot of industries. One difference is that complexity is replaced with the number of unique occupations required for that industry.", "text_pt": "DataViva can also visualize the scatter plot of industries. One difference is that complexity is replaced with number of occupations required for that industry.", "video":"/static/img/help/scatter/scatter_change_output"},
 		{"text_en": "We can change the classification to display deeper levels of nesting for each top-level categories.", "text_pt": "We can change the classification to display deeper levels of nesting for each top-level categories.", "video":"/static/img/help/scatter/scatter_change_nesting"},
-		{"text_en": "As with many of the other visualizations we can change the sizing to reflect monthly wage or number of establishments as well as the color value.", "text_pt": "As with many of the other visualizations we can change the sizing to reflect monthly wage or number of establishments as well as the color value.", "video":"/static/img/help/scatter/scatter_change_size_color"}
+		{"text_en": "As with many of the other visualizations, we can change the sizing to reflect monthly wage or number of establishments as well as the color value.", "text_pt": "As with many of the other visualizations we can change the sizing to reflect monthly wage or number of establishments as well as the color value.", "video":"/static/img/help/scatter/scatter_change_size_color"}
 	],
 	"compare": [
-		{"text_en": "The Compare visualization (similar to the Scatter) is a scatter plot comparing different values along an X and Y axis.", "text_pt": "The Compare visualization (similar to the Scatter) is a scatter plot comparing different values along an X and Y axis.", "image":"/static/img/help/compare/compare.png"},
+		{"text_en": "Compare (similar to the Scatter) is a scatter plot comparing a value for 2 different locations along an X and Y axis.", "text_pt": "The Compare visualization (similar to the Scatter) is a scatter plot comparing different values along an X and Y axis.", "image":"/static/img/help/compare/compare.png"},
 		{"text_en": "In this visualization each node represents a top-level industry sector.", "text_pt": "In this visualization each node represents a top-level industry sector.", "image":"/static/img/help/compare/compare.png"},
 		{"text_en": "Here the axes are set to the number of employees, the Y axis is for Minas Gerais and X axis for Rio de Janeiro.", "text_pt": "Here the axes are set to the number of employees, the Y axis is for Minas Gerais and X axis for Rio de Janeiro.", "image":"/static/img/help/compare/compare.png"},
 		{"text_en": "The diagonal dashed line is where the value of both Minas Gerais and Rio de Janeiro’s number of employees is the same. Anything above the line indicates an advantage for the location on the Y axis and below the line indicates an advantage for the location on the X axis.", "text_pt": "The diagonal dashed line is where the value of both Minas Gerais and Rio de Janeiro’s number of employees is the same. Anything above the line indicates an advantage for the location on the Y axis and below the line indicates an advantage for the location on the X axis.", "image":"/static/img/help/compare/compare.png"},
 		{"text_en": "Hovering over a node will show the name of the industry sector as well as the specific X and Y axis values.", "text_pt": "Hovering over a node will show the name of the industry sector as well as the specific X and Y axis values.", "image":"/static/img/help/compare/compare_hover.png"},
-		{"text_en": "On click even greater detail is revealed about the Agriculture industry sector as well as related apps.", "text_pt": "On click even greater detail is revealed about the Agriculture industry sector as well as related apps.", "image":"/static/img/help/compare/compare_click.png"},
+		{"text_en": "On click, even greater detail is revealed about the Agriculture industry sector, as well as related apps.", "text_pt": "On click even greater detail is revealed about the Agriculture industry sector as well as related apps.", "image":"/static/img/help/compare/compare_click.png"},
 		{"text_en": "DataViva can also visualize a scatter plot comparing product exports as well as occupations.", "text_pt": "DataViva can also visualize a scatter plot comparing product exports as well as occupations.", "video":"/static/img/help/compare/compare_change_output"},
 		{"text_en": "We can change the classification to display deeper levels of nesting for each top-level categories.", "text_pt": "We can change the classification to display deeper levels of nesting for each top-level categories.", "video":"/static/img/help/compare/compare_change_nesting"},
-		{"text_en": "The axes are currently showing the log of export values but this can be changed to a linear scale. As with many of the other visualizations we can change the coloring value to reflect different variables such as growth.", "text_pt": "The axes are currently showing the log of export values but this can be changed to a linear scale. As with many of the other visualizations we can change the coloring value to reflect different variables such as growth.", "video":"/static/img/help/compare/compare_change_scale_color"}
+		{"text_en": "The axes are currently showing the log of export values but this can be changed to a linear scale. As with many of the other apps, we can change the color value to reflect different variables such as growth.", "text_pt": "The axes are currently showing the log of export values but this can be changed to a linear scale. As with many of the other visualizations we can change the coloring value to reflect different variables such as growth.", "video":"/static/img/help/compare/compare_change_scale_color"}
 	],
 	"occugrid": [
-		{"text_en": "The Occugrid shows the required workforce for a given industry. It can be used to determine which occupations a location may need to hire in order to become more successful.", "text_pt": "The Occugrid shows the required workforce for a given industry. It can be used to determine which occupations a location may need to hire in order to become more successful.", "image":"/static/img/help/occugrid/occugrid.png"},
-		{"text_en": "Each donut chart represents an occupation that is used by successful locations in the selected industry. In this case we are looking at the occupations commonly found in the Computer Programming industry.", "text_pt": "Each donut chart represents an occupation that is used by successful locations in the selected industry. In this case we are looking at the occupations commonly found in the Computer Programming industry.", "image":"/static/img/help/occugrid/occugrid.png"},
-		{"text_en": "The overall slices of the donut are determined by the total Required Number of Employees. This donut chart is divided into 3 sections, as illustrated in the diagram.", "text_pt": "The overall slices of the donut are determined by the total Required Number of Employees. This donut chart is divided into 3 sections, as illustrated in the diagram.", "image":"/static/img/help/occugrid/occugrid_details.png"},
-		{"text_en": "On hover we see the breakdown of employees found in the Computer Programming industry in Minas Gerais, found in other industries in Minas Gerais and how many are missing.", "text_pt": "On hover we see the breakdown of employees found in the Computer Programming industry in Minas Gerais, found in other industries in Minas Gerais and how many are missing.", "image":"/static/img/help/occugrid/occugrid_hover.png"},
-		{"text_en": "On click even greater detail is revealed about Information Analysts in the Computer Programming industry sector as well as related apps.", "text_pt": "On click even greater detail is revealed about Information Analysts in the Computer Programming industry sector as well as related apps.", "image":"/static/img/help/occugrid/occugrid_click.png"},
-		{"text_en": "The occugrid has many different options to change the occupational groupings such as by sector and availability.", "text_pt": "The occugrid has many different options to change the occupational groupings such as by sector and availability.", "video":"/static/img/help/occugrid/occugrid_change_grouping"},
-		{"text_en": "We can also change the sizing, sorting and color value to view many different combinations of the data and reveal new insights.", "text_pt": "We can also change the sizing, sorting and color value to view many different combinations of the data and reveal new insights.", "video":"/static/img/help/occugrid/occugrid_change_options"}
+		{"text_en": "Occugrid shows the recommended workforce for a given industry in a location. It can be used to determine which occupations a location may need to hire in order to become more successful.", "text_pt": "The Occugrid shows the required workforce for a given industry. It can be used to determine which occupations a location may need to hire in order to become more successful.", "image":"/static/img/help/occugrid/occugrid.png"},
+		{"text_en": "Each donut chart represents an occupation that is used by similar successful locations in the selected industry. In this case we are looking at the occupations commonly found in the Computer Programming industry.", "text_pt": "Each donut chart represents an occupation that is used by successful locations in the selected industry. In this case we are looking at the occupations commonly found in the Computer Programming industry.", "image":"/static/img/help/occugrid/occugrid.png"},
+		{"text_en": "The overall size of each donut is determined by the amound of recommended employees. This donut chart is divided into 3 sections, as illustrated in the diagram.", "text_pt": "The overall slices of the donut are determined by the total Required Number of Employees. This donut chart is divided into 3 sections, as illustrated in the diagram.", "image":"/static/img/help/occugrid/occugrid_details.png"},
+		{"text_en": "On hover, we see the breakdown of employees per establishment found in the Computer Programming industry in Minas Gerais, found in other industries in Minas Gerais, and how many they are recommended to employ.", "text_pt": "On hover we see the breakdown of employees found in the Computer Programming industry in Minas Gerais, found in other industries in Minas Gerais and how many are missing.", "image":"/static/img/help/occugrid/occugrid_hover.png"},
+		{"text_en": "On click even greater detail is revealed about Information Analysts in the Computer Programming industry sector, as well as related apps.", "text_pt": "On click even greater detail is revealed about Information Analysts in the Computer Programming industry sector as well as related apps.", "image":"/static/img/help/occugrid/occugrid_click.png"},
+		{"text_en": "Occugrid has many different options to change the occupational groupings, such as by sector and availability.", "text_pt": "The occugrid has many different options to change the occupational groupings such as by sector and availability.", "video":"/static/img/help/occugrid/occugrid_change_grouping"},
+		{"text_en": "We can also change the sizing, sorting, and color value to view many different combinations of the data and reveal new insights.", "text_pt": "We can also change the sizing, sorting and color value to view many different combinations of the data and reveal new insights.", "video":"/static/img/help/occugrid/occugrid_change_options"}
 	],
 }
 
 load_info(apps_info[app_name])
 
 function resize(max_w, max_h, img_w, img_h) {
-    var ratio = 0;  // Used for aspect ratio
+  var ratio = 0;  // Used for aspect ratio
 	var dimensions = [img_w, img_h]
 
-    // Check if the current width is larger than the max
-    if(img_w > max_w){
-        ratio = max_w / img_w;   // get ratio for scaling image
-        dimensions[0] = max_w; // Set new width
-        dimensions[1] = img_h * ratio;  // Scale height based on ratio
-        // height = height * ratio;    // Reset height to match scaled image
-        // width = width * ratio;    // Reset width to match scaled image
-    }
+  // Check if the current width is larger than the max
+  if(img_w > max_w){
+      ratio = max_w / img_w;   // get ratio for scaling image
+      dimensions[0] = max_w; // Set new width
+      dimensions[1] = img_h * ratio;  // Scale height based on ratio
+      // height = height * ratio;    // Reset height to match scaled image
+      // width = width * ratio;    // Reset width to match scaled image
+  }
 
-    // Check if current height is larger than max
-    if(img_h > max_h){
-        ratio = max_h / img_h; // get ratio for scaling image
-        dimensions[0] = img_w *ratio;    // Scale width based on ratio
-		dimensions[1] = max_h;   // Set new height
-        // width = width * ratio;    // Reset width to match scaled image
-    }
+  // Check if current height is larger than max
+  if(img_h > max_h){
+      ratio = max_h / img_h; // get ratio for scaling image
+      dimensions[0] = img_w *ratio;    // Scale width based on ratio
+    	dimensions[1] = max_h;   // Set new height
+      // width = width * ratio;    // Reset width to match scaled image
+  }
+  
 	return dimensions
 }
 
 function load_info(app_info){
+  
 	var current = -1
 	
-	d3.selectAll("a.next").on(vizwhiz.evt.click,next);
-	d3.selectAll("a.prev").on(vizwhiz.evt.click,prev);
+	d3.selectAll("a#next").on(vizwhiz.evt.click,next);
+	d3.selectAll("a#prev").on(vizwhiz.evt.click,prev);
 	
 	function next(){
 		current++
@@ -144,11 +156,37 @@ function load_info(app_info){
 		new_panel()
 		if(d3.event) d3.event.preventDefault();
 	}
+  
+  app_info.forEach(function(info,i){
+    d3.select("#pagination").append("div")
+      .attr("class","page")
+      .attr("id","page_"+i)
+      .text(i+1)
+      .on(vizwhiz.evt.click,function(){
+        current = i
+        new_panel()
+      })
+  })
 	
 	function new_panel(){
-		var info = app_info[current%app_info.length],
-			h = parseInt(window.innerHeight) - 50,
-			w = parseInt(window.innerWidth);
+    
+		var info = app_info[current]
+
+		// set text
+		d3.select("div.text").text(info["text_"+lang])
+    
+  	var h = parseInt(window.innerHeight) - d3.select("#info").node().offsetHeight,
+  			w = parseInt(window.innerWidth);
+      
+    d3.selectAll(".page_button").style("display","block")
+    var text_width = window.innerWidth - (d3.select("#next").node().offsetWidth*2) - 50
+    d3.select(".text").style("max-width",text_width+"px")
+    if (current == 0) d3.select("#prev").style("display","none")
+    if (current == app_info.length-1) d3.select("#next").style("display","none")
+    
+      
+    d3.selectAll(".page").attr("class","page")
+    d3.selectAll("#page_"+current).attr("class","page active")
 		
 		// set media
 		if(info.image){
@@ -170,10 +208,26 @@ function load_info(app_info){
 				"
 			)
 		}
-		
-		// set text
-		d3.select("div.text").text(info["text_"+lang])
 	}
+  
+  document.onkeydown = function(e) {
+    
+    if (e.keyCode == 34 || e.keyCode == 39 || e.keyCode == 40) { 
+      next()
+    }
+    else if (e.keyCode == 33 || e.keyCode == 37 || e.keyCode == 38) { 
+      prev()
+    }
+    else if (e.keyCode == 36) { 
+      current = 0
+      new_panel()
+    }
+    else if (e.keyCode == 35) { 
+      current = app_info.length-1
+      new_panel()
+    }
+    
+  };
 	
 	next()
 }

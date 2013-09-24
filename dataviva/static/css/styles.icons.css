@@ -8,11 +8,6 @@
   padding-left: 12px;
 }
 
-.decision span.info {
-  color: red;
-  position: absolute;
-}
-
 .decision.icon:before,
 .help.icon:before {
   background-position: 50%;
@@ -123,6 +118,22 @@
 /* Apps */
 /********/
 
+.decision > i {
+  color: white;
+  bottom: 5px;
+  display: block;
+  font-size: 20px;
+  height: 20px;
+  opacity: 0.75;
+  position: absolute;
+  right: 5px;
+  width: 20px;
+}
+
+.decision > i:hover {
+  opacity: 1;
+}
+
 .decision.icon.tree_map {
   background-color: #ffc41c !important;
 }
@@ -217,6 +228,32 @@
 .help.icon.occugrid:before {
   background-image: url("/static/img/icons/app/app_occugrid_black.png");
   opacity: 0.2;
+}
+
+.decision.icon.next:before,
+.decision.icon.prev:before {
+  background-image: none;
+}
+
+.decision.icon.next {
+  padding: 10px 30px 10px 10px;
+}
+
+.decision.icon.prev:after {
+  content: "";
+}
+
+.decision.icon.prev {
+  padding: 10px 10px 10px 30px;
+}
+
+.decision.icon.prev:before {
+  bottom: 10px;
+  content: "\f104";
+  left: 12px;
+  line-height: 39px;
+  text-decoration: inherit;
+  width: auto;
 }
 
 /****************/
@@ -367,6 +404,7 @@
 /****************/
 /* Help info    */
 /****************/
+
 div.media {
 	text-align: center;
 }
