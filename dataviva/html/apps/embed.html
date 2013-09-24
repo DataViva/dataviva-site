@@ -1863,40 +1863,22 @@ val)+": ", "suffix": ""};
         
         if (d3.select(pid).empty()) {
           
-          d3.html("/about/apps/"+app.build.app.type+"/",function(page){
-            
-            dataviva.popover.create({
-              "id": "help_"+app.build.app.type,
-              "width": 300,
-              "height": 300,
-              "color": app.build.app.color
-            })
-            
-            var wrapper = d3.select(page).select("#help_wrapper")
-            
-            var title = wrapper.select("h1").text()
-            
-            var topics = wrapper.selectAll("div.topic")
-            
-            var body = d3.select(pid).append("div")
-              .attr("class","scrolling_content")
-              .append("div").attr("class","scrolling_help")
-            
-            body.append("h1").text(title)
-              
-            topics.each(function(){
-              var t = this
-              body.append("div")
-                .html(t.innerHTML)
-            })
-
-            dataviva.popover.show(pid)
+          dataviva.popover.create({
+            "id": "help_"+app.build.app.type,
+            "width": "80%",
+            "height": "90%",
+            "color": app.build.app.color,
+            "close": true
           })
+          
+          d3.select(pid).append("iframe")
+            .attr("width","100%")
+            .attr("height","100%")
+            .attr("src","/apps/info/"+app.build.app.type+"/")
               
         }
-        else {
-          dataviva.popover.show(pid)
-        }
+        
+        dataviva.popover.show(pid)
         
       }
       else {
