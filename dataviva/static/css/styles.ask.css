@@ -17,7 +17,7 @@ body.ask .bubble {
   padding: 10px;
   bottom: 470px;
   position: fixed;
-  width: 150px;
+  width: 200px;
 }
 
 #list_header {
@@ -34,7 +34,7 @@ body.ask .bubble {
 
 input#search {
   margin-top: 10px;
-  width: 687px;
+  width: 638px;
 }
 
 .question {
@@ -226,7 +226,7 @@ input#search {
 #submit_column .redactor_box {
   margin-left: 118px;
   margin-top: 10px;
-  width: 633px;
+  width: 585px;
 }
 
 #submit_column label {
@@ -238,10 +238,8 @@ input#search {
 
 #submit_column input {
   margin-top: 10px;
-  width: 617px;
+  width: 569px;
 }
-
-
 
 /********************/
 /* Tag Styles  */
@@ -261,7 +259,7 @@ input#search {
   margin-top: 10px;
   padding: 5px;
   text-align: left;
-  width: 623px;
+  width: 575px;
 }
 
 .tag-icon {

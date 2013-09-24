@@ -12,12 +12,17 @@
 
 {% block body %}
   
-  <div class="grid5col1">
-    <div class="lightbox bubble"><h1>{% trans %}What would you like to know?{% endtrans %}</h1></div>
+  <div class="grid4col1">
+    <div class="lightbox bubble">
+    <h1>{% trans %}Cannot find your answer here?{% endtrans %}</h1>
+    <a {% if g.user.is_authenticated() %}href="/ask/ask/"{%else%}onclick="login()"{%endif%} class="decision icon short questions">
+      {% trans %}Submit your question to Escritorio!{% endtrans %}
+    </a>
+    </div>
     <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
   </div>
 
-  <div class="grid5col4">
+  <div class="grid4col3">
     <div id="list_header" class="lightbox">
       <div id="list_title"><h1></h1></div>
     
@@ -33,19 +38,9 @@
       {{ search_form.search(size=80, id='search', placeholder="Search") }}
     
     </div>
-      
-    <div id="recent">
 
-      <div class="question_feed"></div>
-
-      <a {% if g.user.is_authenticated() %}href="/ask/ask/"{%else%}onclick="login()"{%endif%} class="help">
-        <div>
-          <h1>{% trans %}Cannot find your answer here?{% endtrans %}</h1>
-          {% trans %}Submit your question to Escritorio!{% endtrans %}
-        </div>
-      </a>
-      
-    </div>
+    <div class="question_feed"></div>
+    
   </div>
 
 {% endblock %}
@@ -134,7 +129,7 @@
     d3.select("#search").on("input", function(e){
 
       search_term = this.value;
-      console.log(search_term)
+      
       var url = window.location.href + "?q=" + search_term + "&order=" + order;
       d3.select(".question_feed").html('')
         .call(is.url(url).offset(0).remove(true))
