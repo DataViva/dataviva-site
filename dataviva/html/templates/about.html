@@ -26,10 +26,6 @@
       {% trans %}Glossary{% endtrans %}
     </a>
     
-    <a class="decision short icon credits{% if page == 'credits' %} active{% endif %}" href="{{ url_for('about.credits') }}">
-      {% trans %}Credits{% endtrans %}
-    </a>
-    
     <br>
     
     <a class="decision short icon tree_map{% if app == 'tree_map' %} active{% endif %}" href="{{ url_for('about.apps', app='tree_map')}}">
