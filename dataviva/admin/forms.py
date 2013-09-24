@@ -6,7 +6,6 @@ def statuses():
     return Status.query.all()
 
 class AdminQuestionUpdateForm(Form):
-        
     previous_status = HiddenField('previous_status')
     status = QuerySelectField(query_factory=statuses)
     answer = TextAreaField('answer', validators = [Required()])

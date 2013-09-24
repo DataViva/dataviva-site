@@ -8,7 +8,7 @@
 
   {{ question.body|safe }}
 
-  <form id="ask_form" action="" method="post">
+  <form id="admin_form" action="" method="post">
     {{ form.hidden_tag() }}
     
     <div class="posted">
@@ -23,7 +23,7 @@
 
     <br><br>
     {{ form.answer(id="wysiwyg_textarea", placeholder=_("Enter your answer...")) }}<br />
-    {% for error in form.errors.body %}
+    {% for error in form.errors.answer %}
     <span style="color: red;">[{{ error }}]</span>
     {% endfor %}
 
