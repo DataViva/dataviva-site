@@ -201,7 +201,6 @@
     // Set the max-width for the builder div and app_title
     app.title_width = window.innerWidth
     app.title_width -= d3.select("#settings").node().offsetWidth+12
-    d3.select("#builder").style("max-width",app.title_width+"px")
     app.title_width -= d3.select("#settings").node().offsetWidth
       
     app.title_height = d3.select("#settings").node().offsetHeight+10
@@ -312,7 +311,6 @@
         "wage_avg",
         "wage_avg_bra",
         "num_emp",
-        "elsewhere",
         "num_est",
         
         "val_usd",
@@ -333,6 +331,8 @@
         "val_usd_growth_val_5"
       ],
       "calculations":[
+        "num_emp_est",
+        "elsewhere",
         "required",
         "importance",
         "eci",
@@ -362,8 +362,8 @@
     var averages = {
           "eci": "mean",
           "pci": "mean",
-          "ici": "mean",
-          "oci": "mean",
+          "unique_isic": "mean",
+          "unique_cbo": "mean",
           "rca": "mean",
           "rca_wld": "mean",
           "distance": "mean",
@@ -797,32 +797,6 @@
         
       })
       
-      var total_width = 0,
-          avail_width = app.title_width
-      d3.selectAll("#app_controls > div")
-        .each(function(){
-          total_width += this.offsetWidth
-        })
-      d3.selectAll("#builder > br").remove()
-      if (total_width > avail_width) {
-        avail_width = window.innerWidth - 20
-        var w = 0, firstbreak = true
-        d3.selectAll("#app_controls > div")
-          .each(function(){
-            if (w > avail_width/2) {
-              if (firstbreak) {
-                firstbreak = false
-                var br = document.createElement("br")
-                this.parentNode.parentNode.insertBefore(br,this.parentNode)
-              }
-              w = 0
-              var br = document.createElement("br")
-              this.parentNode.insertBefore(br,this)
-            }
-            w += this.offsetWidth
-          })
-      }
-      
       var nesting = []
       depths[app.build.output].forEach(function(d){
         nesting.push(app.build.output+"_"+d)
@@ -845,19 +819,19 @@
       if (app.build.output == "bra") {
         app.tooltip["short"][""] = ["id_ibge"]
         app.tooltip["long"][""] = ["id_ibge"]
+        app.tooltip["short"]["basics"] = [app.vars.value_var]
       }
       else {
         app.tooltip["short"][""] = [app.build.output+"_display"]
         app.tooltip["long"][""] = [app.build.output+"_display"]
-        if (app.build.app.type == "bubbles") {
-          app.tooltip["short"]["calculations"] = ["required"]
+        if (app.build.app.type == "occugrid") {
+          app.tooltip["short"]["calculations"] = ["num_emp_est","elsewhere","required"]
         }
         else {
+          app.tooltip["short"]["basics"] = [app.vars.value_var]
           app.tooltip["short"]["calculations"] = []
         }
       }
-
-      app.tooltip["short"]["basics"] = [app.vars.value_var]
       
       app.viz.type(app.build.app.viz_whiz)
         .title(app.build.title)
@@ -934,7 +908,7 @@
       /* Bubbles Specific Variables */
       /******************************/
       else if (app.build.app.type == "occugrid") {
-        app.viz.active_var("num_emp")
+        app.viz.active_var("num_emp_est")
       } 
 
       /******************************/
@@ -1115,7 +1089,9 @@
           app.viz.yaxis_var(yv)
         }
         else if (type == "value_var") {
-          app.tooltip["short"]["basics"] = [app.vars.value_var]
+          if (app.build.app.type != "occugrid") {
+            app.tooltip["short"]["basics"] = [app.vars.value_var]
+          }
           app.viz[type](value).total_bar(app.total()).tooltip_info(app.tooltip)
         }
         else {
@@ -1157,10 +1133,15 @@
               d.category = attr[d[out+"_id"].slice(0,depths[out][0])].name
               d.none = 1
               d.always_active = 1
+
+              d.required = Math.ceil(d.required)
             
               if (!d.wage) d.wage = 0
               if (!d.num_emp) d.num_emp = 0
               if (!d.num_est) d.num_est = 0
+              
+              if (d.num_est > 0) d.num_emp_est = d.num_emp/d.num_est
+              else d.num_emp_est = 0
           
               if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp
               else d.wage_avg = 0
@@ -1271,8 +1252,8 @@
       var exclusions = [
             "eci",
             "pci",
-            "ici",
-            "oci",
+            "unique_isic",
+            "unique_cbo",
             "none",
             "importance",
             "wage_avg",
@@ -1313,9 +1294,43 @@ val)+": ", "suffix": ""};
       })
       
       // Set the max-width for the builder div and app_title
+      d3.select("#builder").style("max-width",window.innerWidth+"px")
       app.title_width = window.innerWidth
-      app.title_width -= d3.select("#settings").node().offsetWidth+12
-      d3.select("#builder").style("max-width",app.title_width+"px")
+      app.title_width -= (d3.select("#settings").node().offsetWidth*2)
+        
+      d3.selectAll("#builder > br").remove()
+      
+      var total_width = 0,
+          settings_width = d3.select("#settings").node().offsetWidth,
+          builder_width = d3.select("#app_controls").node().offsetLeft,
+          avail_width = window.innerWidth - settings_width - builder_width
+          
+      d3.selectAll("#app_controls > div")
+        .each(function(){
+          total_width += this.offsetWidth
+        })
+        
+      if (total_width > avail_width) {
+        avail_width = window.innerWidth
+        firstbreak = false
+        var br = document.createElement("br")
+        document.getElementById("builder").insertBefore(br,document.getElementById("app_controls"))
+      }
+      
+      if (total_width > avail_width) {
+        
+        var w = 0
+        
+        d3.selectAll("#app_controls > div")
+          .each(function(){
+            if (w > avail_width/2) {
+              w = 0
+              var br = document.createElement("br")
+              this.parentNode.insertBefore(br,this)
+            }
+            w += this.offsetWidth
+          })
+      }
   
       if (app.vars.controls == "true") {
         app.title_width = window.innerWidth
@@ -1324,9 +1339,8 @@ val)+": ", "suffix": ""};
         var buffer = 0
       }
       else {
-        app.title_width -= d3.select("#settings").node().offsetWidth
+        app.title_width = window.innerWidth - d3.select("#settings").node().offsetWidth*2
         d3.select("#controls_toggle").attr("class","leon button square")
-        app.title_height = d3.select("#settings").node().offsetHeight+10
         if (app.title_width < 200) {
           app.title_width = window.innerWidth
           var buffer = d3.select("#settings").node().offsetHeight
@@ -1354,7 +1368,7 @@ val)+": ", "suffix": ""};
       app.height -= (d3.select("#ui_bottom").node().offsetHeight+buffer)
       if (app.vars.controls != "false") app.height -= d3.select("#builder").node().offsetHeight
       app.width = window.innerWidth-10;
-      
+
       d3.select("#app")
         .style("height",app.height+"px")
         .style("width",app.width+"px")

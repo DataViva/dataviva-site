@@ -137,7 +137,6 @@ dataviva.format.text = function(text,name,l) {
       "grouping": {"en": "Group", "pt": "Grupo"},
       "grouping_desc_occugrid": {"en": "Groups the donut charts into different categorizations.", "pt": "Agrupar os gr\u00e1ficos de rosca em diferentes categoriza\u00e7\u00f5es."},
       "none": {"en": "None", "pt": "Nenhum"},
-      "required": {"en": "Required", "pt": "Requerido"},
       "year": {"en": "Year", "pt": "Ano"},
 
       // Filter Depths
@@ -202,6 +201,7 @@ dataviva.format.text = function(text,name,l) {
       "employed": {"en": "Employed", "pt": "Empregado"},
       "importance": {"en": "Importance", "pt": "Import\u00e2ncia"},
       "elsewhere": {"en": "Employees Available In Other Industries", "pt": "Empregados em Outras Ind\u00fdstrias"},
+      "required": {"en": "Recommeded Employment", "pt": "Emprego Recomendado"},
       "growth_val": {"en": "Wage Growth", "pt": "Crescimento dos Sal\u00e1rios"},
       "growth_val_total": {"en": "Cumulative Wage Growth", "pt": "Crescimento Salarial Acumulada"},
       "proximity": {"en": "Proximity", "pt": "Proximidade"},
@@ -229,6 +229,7 @@ dataviva.format.text = function(text,name,l) {
       "rais": {"en": "Establishments and Employment (RAIS)", "pt": "Estabelecimentos e Emprego (RAIS)"},
       "num_emp": {"en": "Employees", "pt": "Empregados"},
       "num_est": {"en": "Establishments", "pt": "Estabelecimentos"},
+      "num_emp_est": {"en": "Employees per Establishment", "pt": "Empregados por Estabelecimento"},
       "wage": {"en": "Monthly Wage", "pt": "Massa Salarial"},
       "total_wage": {"en": "Total Monthly Wage", "pt": "Renda Mensal Total"},
       "wage_avg": {"en": "Average Monthly Wage", "pt": "Renda Mensal M\u00e9dia"},

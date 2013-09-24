@@ -19,7 +19,7 @@ String.prototype.toTitleCase = function() {
             });
 
     // Certain words such as initialisms or acronyms should be left uppercase
-    uppers = ['Id', 'Tv', 'R&d'];
+    uppers = ['Id', 'Tv', 'R&d', "P&d", "It", "Ti"];
     for (i = 0; i < uppers.length; i++)
         str = str.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'), 
             uppers[i].toUpperCase());
