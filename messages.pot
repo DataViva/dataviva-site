@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-23 17:26-0400\n"
+"POT-Creation-Date: 2013-09-24 16:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgid "Generate multiple apps into a report."
 msgstr ""
 
 #: dataviva/html/home.html:24 dataviva/html/apps/index.html:4
-#: dataviva/html/templates/site.html:16
+#: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:16
 msgid "Apps"
 msgstr ""
 
@@ -47,19 +47,6 @@ msgstr ""
 
 #: dataviva/html/about/appsdocs.html:4
 msgid "About the Apps"
-msgstr ""
-
-#: dataviva/html/about/credits.html:4 dataviva/html/about/credits.html:7
-#: dataviva/html/templates/about.html:30
-msgid "Credits"
-msgstr ""
-
-#: dataviva/html/about/credits.html:9
-msgid "Sabrina Illustrations"
-msgstr ""
-
-#: dataviva/html/about/credits.html:13
-msgid "Icons and Graphics"
 msgstr ""
 
 #: dataviva/html/about/dataviva.html:4 dataviva/html/about/dataviva.html:7
@@ -72,38 +59,38 @@ msgid "Glossary"
 msgstr ""
 
 #: dataviva/html/about/apps/compare.html:3
-#: dataviva/html/about/apps/geo_map.html:3 dataviva/html/apps/index.html:20
-#: dataviva/html/templates/about.html:44
+#: dataviva/html/about/apps/geo_map.html:3 dataviva/html/apps/index.html:22
+#: dataviva/html/templates/about.html:40
 msgid "Geo Map"
 msgstr ""
 
-#: dataviva/html/about/apps/network.html:3 dataviva/html/apps/index.html:24
-#: dataviva/html/templates/about.html:48
+#: dataviva/html/about/apps/network.html:3 dataviva/html/apps/index.html:27
+#: dataviva/html/templates/about.html:44
 msgid "Network"
 msgstr ""
 
-#: dataviva/html/about/apps/occugrid.html:3 dataviva/html/apps/index.html:42
-#: dataviva/html/templates/about.html:64
+#: dataviva/html/about/apps/occugrid.html:3 dataviva/html/apps/index.html:49
+#: dataviva/html/templates/about.html:60
 msgid "Occugrid"
 msgstr ""
 
-#: dataviva/html/about/apps/rings.html:3 dataviva/html/apps/index.html:30
-#: dataviva/html/templates/about.html:52
+#: dataviva/html/about/apps/rings.html:3 dataviva/html/apps/index.html:34
+#: dataviva/html/templates/about.html:48
 msgid "Rings"
 msgstr ""
 
-#: dataviva/html/about/apps/scatter.html:3 dataviva/html/apps/index.html:34
-#: dataviva/html/templates/about.html:56
+#: dataviva/html/about/apps/scatter.html:3 dataviva/html/apps/index.html:39
+#: dataviva/html/templates/about.html:52
 msgid "Scatter"
 msgstr ""
 
-#: dataviva/html/about/apps/stacked.html:3 dataviva/html/apps/index.html:16
-#: dataviva/html/templates/about.html:40
+#: dataviva/html/about/apps/stacked.html:3 dataviva/html/apps/index.html:17
+#: dataviva/html/templates/about.html:36
 msgid "Stacked"
 msgstr ""
 
 #: dataviva/html/about/apps/tree_map.html:3 dataviva/html/apps/index.html:12
-#: dataviva/html/templates/about.html:36
+#: dataviva/html/templates/about.html:32
 msgid "Tree Map"
 msgstr ""
 
@@ -235,8 +222,16 @@ msgstr ""
 msgid "Which app would you like to build?"
 msgstr ""
 
-#: dataviva/html/apps/index.html:38 dataviva/html/templates/about.html:60
+#: dataviva/html/apps/index.html:44 dataviva/html/templates/about.html:56
 msgid "Compare"
+msgstr ""
+
+#: dataviva/html/apps/info.html:20
+msgid "Previous"
+msgstr ""
+
+#: dataviva/html/apps/info.html:21
+msgid "Next"
 msgstr ""
 
 #: dataviva/html/ask/answer.html:5 dataviva/html/ask/ask.html:4
@@ -278,8 +273,7 @@ msgstr ""
 msgid "Reply"
 msgstr ""
 
-#: dataviva/html/ask/ask.html:21 dataviva/html/ask/questions.html:16
-#: dataviva/html/guide/cbo.html:10
+#: dataviva/html/ask/ask.html:21 dataviva/html/guide/cbo.html:10
 msgid "What would you like to know?"
 msgstr ""
 
@@ -295,24 +289,24 @@ msgstr ""
 msgid "Click here to login"
 msgstr ""
 
-#: dataviva/html/ask/questions.html:25
-msgid "Order"
-msgstr ""
-
-#: dataviva/html/ask/questions.html:27
-msgid "Top Voted"
-msgstr ""
-
-#: dataviva/html/ask/questions.html:29
-msgid "Newest"
-msgstr ""
-
-#: dataviva/html/ask/questions.html:43
+#: dataviva/html/ask/questions.html:17
 msgid "Cannot find your answer here?"
 msgstr ""
 
-#: dataviva/html/ask/questions.html:44
+#: dataviva/html/ask/questions.html:19
 msgid "Submit your question to Escritorio!"
+msgstr ""
+
+#: dataviva/html/ask/questions.html:30
+msgid "Order"
+msgstr ""
+
+#: dataviva/html/ask/questions.html:32
+msgid "Top Voted"
+msgstr ""
+
+#: dataviva/html/ask/questions.html:34
+msgid "Newest"
 msgstr ""
 
 #: dataviva/html/data/classifications.html:21
