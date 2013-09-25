@@ -22,6 +22,10 @@
       {% trans %}General{% endtrans %}
     </a>
     
+    <a class="decision short icon data{% if page == 'data' %} active{% endif %}" href="{{ url_for('about.data') }}">
+      {% trans %}Data{% endtrans %}
+    </a>
+    
     <a class="decision short icon glossary{% if page == 'glossary' %} active{% endif %}" href="{{ url_for('about.glossary') }}">
       {% trans %}Glossary{% endtrans %}
     </a>

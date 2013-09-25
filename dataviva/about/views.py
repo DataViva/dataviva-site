@@ -16,22 +16,14 @@ def before_request():
 @mod.route('/')
 def about():
     return render_template("about/dataviva.html", page = "dataminas")
-    
-@mod.route('/data/')
-def data():
-    return render_template("about/data/index.html", page = "data")
 
 @mod.route('/dataviva/')
 def dataviva():
     return render_template("about/dataviva.html", page = "dataminas")
     
-@mod.route('/sabrina/')    
-def sabrina():
-    return render_template("about/sabrina.html", page = "sabrina")
-    
-@mod.route('/minas/')
-def minas():
-    return render_template("about/minas.html", page = "minas")
+@mod.route('/data/')
+def data():
+    return render_template("about/data.html", page = "data")
 
 @mod.route('/glossary/')
 def glossary():

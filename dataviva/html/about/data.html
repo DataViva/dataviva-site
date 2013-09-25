@@ -1,0 +1,24 @@
+<!-- extend from about base layout -->
+{% extends "templates/about.html" %}
+
+{% block title %}: {% trans %}About the Data{% endtrans %}{% endblock %}
+
+{% block about_content %}
+  <h1>{% trans %}About the Data{% endtrans %}</h1>
+   
+  <h2>RAIS</h2>
+  <p>The RAIS dataset is made up of employment data for the entirity of Brazil, 
+  down to the municipality level. It includes an average monthly wage for each classification 
+  of occupation in each industry for every location.</p>
+   
+  <h2>SECEX</h2>
+  <p>The SECEX dataset is made up of export and/or production data for the entirity of Brazil, 
+  down to the municipality level. It includes an trade value (in USD) for each classification 
+  of product traded to each country for every location.</p>
+  
+  <p>For States, this value is determined by products exported from that location. 
+  For all other levels, this value is the amount of products produced by the location. 
+  Therefore, while a product may be produced in a municipality in a state, it may be exported by a different state.</p>
+    
+{% endblock %}
+

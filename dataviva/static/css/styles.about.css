@@ -32,6 +32,11 @@ a.app.active {
   color: #cc0000;
 }
 
+img {
+  display: block;
+  margin: 0px auto;
+}
+
 /****************/
 /* Help Specific */
 /****************/
