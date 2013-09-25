@@ -57,9 +57,12 @@ def add_new_distance_to_db(year, dist, wld_or_domestic):
         for bra in dist.index:
             counter += 1
             total_inserts += 1
-            to_add.append([dist[hs][bra], year, hs, bra])
+            to_add.append([year, bra, hs, dist[hs][bra], dist[hs][bra]])
             if counter >= 2500:
-                q = "update secex_ybp set {0}=%s where year=%s and hs_id=%s and bra_id=%s".format(dist_col)
+                # q = "update secex_ybp set {0}=%s where year=%s and hs_id=%s and bra_id=%s".format(dist_col)
+                q = "INSERT INTO secex_ybp (year, bra_id, hs_id, distance)" \
+                    "VALUES (%s, %s, %s, %s) " \
+                    "ON DUPLICATE KEY UPDATE distance=%s;"
                 cursor.executemany(q, to_add)
                 counter = 0
                 to_add = []
@@ -70,7 +73,9 @@ def add_new_distance_to_db(year, dist, wld_or_domestic):
     
     print
     '''cant forget to add any stragglers to the DB'''
-    q = "update secex_ybp set {0}=%s where year=%s and hs_id=%s and bra_id=%s".format(dist_col)
+    q = "INSERT INTO secex_ybp (year, bra_id, hs_id, distance)" \
+        "VALUES (%s, %s, %s, %s) " \
+        "ON DUPLICATE KEY UPDATE distance=%s;"
     cursor.executemany(q, to_add)
 
 
@@ -97,6 +102,9 @@ def calculate_distance(year, geo_level, wld_or_domestic):
     # rca = rca.reindex(columns=pci.index)
     
     distances = growth.distance(rcas, prox).fillna(0)
+    
+    # print distances.ix["ac"]
+    # sys.exit()
     
     # print distances.ix["mg030000"].order(ascending=False)
     # sys.exit()
@@ -145,7 +153,6 @@ if __name__ == "__main__":
     else:
         geo_level = [geo_level]
     
-    year = [2010, 2011]
     for y in year:
         print
         print "Year: {0}".format(y);
