@@ -22,7 +22,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 CSRF_EN = True
 
 ''' Secret key should be set in environment var '''
-SECRET_KEY = get_env_variable("VISUAL_SECRET_KEY", "default-dataviva.mg-secr3t")
+SECRET_KEY = get_env_variable("DATAVIVA_SECRET_KEY", "default-dataviva.mg-secr3t")
 
 ''' Default debugging to True '''
 DEBUG = True
@@ -33,17 +33,17 @@ SQLALCHEMY_ECHO = True
     variables.
 '''
 SQLALCHEMY_DATABASE_URI = "mysql://{0}:{1}@{2}/{3}".format(
-    get_env_variable("VISUAL_DB_USER", "root"), 
-    get_env_variable("VISUAL_DB_PW", ""), 
-    get_env_variable("VISUAL_DB_HOST", "localhost"),
-    get_env_variable("VISUAL_DB_NAME", "dataminas"))
+    get_env_variable("DATAVIVA_DB_USER", "root"), 
+    get_env_variable("DATAVIVA_DB_PW", ""), 
+    get_env_variable("DATAVIVA_DB_HOST", "localhost"),
+    get_env_variable("DATAVIVA_DB_NAME", "dataminas"))
 
 ''' If user prefers to connect via socket set env var '''
-if "VISUAL_DB_SOCKET" in os.environ:
-    SQLALCHEMY_DATABASE_URI += "?unix_socket=" + get_env_variable("VISUAL_DB_SOCKET")
+if "DATAVIVA_DB_SOCKET" in os.environ:
+    SQLALCHEMY_DATABASE_URI += "?unix_socket=" + get_env_variable("DATAVIVA_DB_SOCKET")
 
 ''' If an env var for production is set turn off all debugging support '''
-if "VISUAL_PRODUCTION" in os.environ:
+if "DATAVIVA_PRODUCTION" in os.environ:
     SQLALCHEMY_ECHO = False
     DEBUG = False
 
@@ -60,16 +60,16 @@ WHOOSH_BASE = os.path.join(basedir, 'search.db')
     Setup redis caching connection to be used throughout the site. Credentials
     are set in their respective env vars.
 '''
-REDIS = RedisCache(host=get_env_variable("VISUAL_REDIS_HOST", "localhost"), 
-         port=get_env_variable("VISUAL_REDIS_PORT", 6379), 
-         password=get_env_variable("VISUAL_REDIS_PW", None), default_timeout=2591999)
+REDIS = RedisCache(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"), 
+         port=get_env_variable("DATAVIVA_REDIS_PORT", 6379), 
+         password=get_env_variable("DATAVIVA_REDIS_PW", None), default_timeout=2591999)
 
 '''
     Oauth tokens set in environment variables from their respecive sources
 '''
-GOOGLE_OAUTH_ID = get_env_variable("VISUAL_OAUTH_GOOGLE_ID")
-GOOGLE_OAUTH_SECRET = get_env_variable("VISUAL_OAUTH_GOOGLE_SECRET")
-TWITTER_OAUTH_ID = get_env_variable("VISUAL_OAUTH_TWITTER_ID")
-TWITTER_OAUTH_SECRET = get_env_variable("VISUAL_OAUTH_TWITTER_SECRET")
-FACEBOOK_OAUTH_ID = get_env_variable("VISUAL_OAUTH_FACEBOOK_ID")
-FACEBOOK_OAUTH_SECRET = get_env_variable("VISUAL_OAUTH_FACEBOOK_SECRET")
+GOOGLE_OAUTH_ID = get_env_variable("DATAVIVA_OAUTH_GOOGLE_ID")
+GOOGLE_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_GOOGLE_SECRET")
+TWITTER_OAUTH_ID = get_env_variable("DATAVIVA_OAUTH_TWITTER_ID")
+TWITTER_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_TWITTER_SECRET")
+FACEBOOK_OAUTH_ID = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_ID")
+FACEBOOK_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_SECRET")
