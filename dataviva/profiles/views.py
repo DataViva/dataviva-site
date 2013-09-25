@@ -23,14 +23,10 @@ mod = Blueprint('profiles', __name__, url_prefix='/profiles')
 
 @mod.before_request
 def before_request():
-    t1 = time.time()
     g.page_type = mod.name
     g.path = request.path
     
     g.color = "#e0902d"
-    
-    t2 = time.time()
-    g.timing.append("Before Profile: {0:.4f}s".format((t2-t1)))
 
 @mod.route('/')
 @mod.route('/<category>/select/')
@@ -74,13 +70,8 @@ def index(category = None, id = None):
 
 @mod.route('/<category>/<id>/')
 def profiles(category = None, id = None):
-          
-    t1 = time.time()
+    
     category_type = "<{0}.{1}>".format(category,len(id))
-        
-    t2 = time.time()
-    g.timing.append("Initializing Profile: {0:.4f}s".format((t2-t1)))
-    t1 = time.time()
     
     # Attr = globals()[category.title()]()
     
@@ -96,10 +87,6 @@ def profiles(category = None, id = None):
     #     query_kwargs["year"] = rais_latest_year
     # elif category == "hs" or category == "wld":
     #     query_kwargs["year"] = secex_latest_year
-        
-    t2 = time.time()
-    g.timing.append("Getting Table: {0:.4f}s".format((t2-t1)))
-    t1 = time.time()
     
     Attr = globals()[category.title()]()
     item = Attr.query.get_or_404(id)
@@ -112,26 +99,14 @@ def profiles(category = None, id = None):
     #     item = Isic.query.get_or_404(id)
     # elif category == "wld":
     #     item = Wld.query.get_or_404(id)
-        
-    t2 = time.time()
-    g.timing.append("Getting Item: {0:.4f}s".format((t2-t1)))
-    t1 = time.time()
     
     plan = Plan.query.filter_by(category=category, category_type=category_type, 
                                     option=None).first()
-                                    
-    t2 = time.time()
-    g.timing.append("Getting Plan: {0:.4f}s".format((t2-t1)))
-    t1 = time.time()
         
     plan.set_attr(id, category)
     
     if category != "bra":
         plan.set_attr("all", "bra")
-        
-    t2 = time.time()
-    g.timing.append("Setting Plan Variables: {0:.4f}s".format((t2-t1)))
-    t1 = time.time()
     
     builds = [0]*len(plan.builds.all())
     for pb in plan.builds.all():
@@ -180,9 +155,6 @@ def profiles(category = None, id = None):
         b["output"] = build.output
         b["color"] = build.app.color
         builds[pb.position-1] = b
-        
-    t2 = time.time()
-    g.timing.append("Formatting Plan: {0}s".format((t2-t1)))
     
     return render_template("profiles/profile.html", 
                 category=category,

@@ -16,33 +16,11 @@ from dataviva.general.forms import AccessForm
 @app.before_request
 def before_request():
     
-    g.timing = []
-    g.timing.append(time.time())
     g.color = "#af1f24"
     g.page_type = mod.name
     g.latest_year = {}
     for dataset in __latest_year__:
         g.latest_year[dataset] = __latest_year__[dataset]
-    
-    t1 = time.time()
-    
-    # Check if the user has access (temp log in for development purposes)
-    if 'has_access' not in session:
-        session['has_access'] = False
-
-    # test if the user has access!
-    if not session['has_access'] and request.endpoint and request.endpoint != "static":
-        if request.endpoint == "general.home":
-            form = AccessForm()
-            if "pw" in request.form:
-                if request.form["pw"] == "parabens":
-                    session['has_access'] = True
-                else:
-                    return render_template("general/access.html", form=form)
-            else:
-                return render_template("general/access.html", form=form)
-        else:
-            return redirect(url_for("general.home"))
             
     # Save variable in session so we can determine if this is the user's
     # first time on the site
@@ -63,9 +41,6 @@ def before_request():
     # Set the locale to either 'pt' or 'en' on the global object
     if request.endpoint != 'static':
         g.locale = get_locale()
-    
-    t2 = time.time()
-    g.timing.append("Global Before Request: {0:.4f}s".format(t2-t1))
 
 @babel.localeselector
 def get_locale(lang=None):
@@ -115,11 +90,6 @@ def get_timezone():
 # ---------------------------
 @app.after_request
 def after_request(response):
-    overall = (time.time()-g.timing[0])
-    g.timing[0] = "Overall: {0:.4f}s".format(overall)
-    # raise Exception(g.timing)
-    # if overall > 10:
-        # raise Exception(g.timing)
     return response
     
 @mod.route('/', methods=['GET', 'POST'])
