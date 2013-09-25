@@ -38,9 +38,9 @@ import secex_ybp_rca_wld
 # print secex_ybp_rca.get_rca(2011, 2).ix["mg"]
 
 ''' Connect to DB '''
-db = MySQLdb.connect(host="localhost", user=environ["VISUAL_DB_USER"], 
-                        passwd=environ["VISUAL_DB_PW"], 
-                        db=environ["VISUAL_DB_NAME"])
+db = MySQLdb.connect(host="localhost", user=environ["DATAVIVA_DB_USER"], 
+                        passwd=environ["DATAVIVA_DB_PW"], 
+                        db=environ["DATAVIVA_DB_NAME"])
 db.autocommit(1)
 cursor = db.cursor()
 

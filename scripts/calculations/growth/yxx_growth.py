@@ -15,9 +15,9 @@ import sys
 from os import environ
 
 ''' Connect to DB '''
-db = MySQLdb.connect(host="localhost", user=environ["VISUAL_DB_USER"], 
-                        passwd=environ["VISUAL_DB_PW"], 
-                        db=environ["VISUAL_DB_NAME"])
+db = MySQLdb.connect(host="localhost", user=environ["DATAVIVA_DB_USER"], 
+                        passwd=environ["DATAVIVA_DB_PW"], 
+                        db=environ["DATAVIVA_DB_NAME"])
 db.autocommit(1)
 cursor = db.cursor()
 
@@ -46,7 +46,7 @@ def check_columns(columns, val_var, table):
             TABLE_SCHEMA = %s 
         AND TABLE_NAME = %s 
         AND COLUMN_NAME = %s ''', \
-        [environ["VISUAL_DB_NAME"], table, col])
+        [environ["DATAVIVA_DB_NAME"], table, col])
         
         col_exist = cursor.fetchone()[0]
         

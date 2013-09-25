@@ -29,9 +29,9 @@ sys.path.append(proximity_dir)
 import comtrade_ypp_proximity
 
 ''' Connect to DB '''
-db = MySQLdb.connect(host="localhost", user=environ["VISUAL_DB_USER"], 
-                        passwd=environ["VISUAL_DB_PW"], 
-                        db=environ["VISUAL_DB_NAME"])
+db = MySQLdb.connect(host="localhost", user=environ["DATAVIVA_DB_USER"], 
+                        passwd=environ["DATAVIVA_DB_PW"], 
+                        db=environ["DATAVIVA_DB_NAME"])
 db.autocommit(1)
 cursor = db.cursor()
 

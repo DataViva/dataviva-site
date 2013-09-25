@@ -20,9 +20,9 @@ base_dir = os.path.abspath(os.path.join(this_dir, '../../../'))
 # import growth
 # 
 ''' Connect to DB '''
-db = MySQLdb.connect(host="localhost", user=environ["VISUAL_DB_USER"], 
-                        passwd=environ["VISUAL_DB_PW"], 
-                        db=environ["VISUAL_DB_NAME"])
+db = MySQLdb.connect(host="localhost", user=environ["DATAVIVA_DB_USER"], 
+                        passwd=environ["DATAVIVA_DB_PW"], 
+                        db=environ["DATAVIVA_DB_NAME"])
 db.autocommit(1)
 cursor = db.cursor()
 
