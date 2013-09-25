@@ -124,6 +124,7 @@ var apps_info = {
 load_info(apps_info[app_name])
 
 function resize(max_w, max_h, img_w, img_h) {
+  
   var ratio = 0;  // Used for aspect ratio
 	var dimensions = [img_w, img_h]
 
@@ -182,9 +183,6 @@ function load_info(app_info){
 
 		// set text
 		d3.select("div.text").text(info["text_"+lang])
-    
-  	var h = parseInt(window.innerHeight) - d3.select("#info").node().offsetHeight,
-  			w = parseInt(window.innerWidth);
       
     d3.selectAll(".page_button").style("display","block")
     var text_width = window.innerWidth - (d3.select("#next").node().offsetWidth*2) - 50
@@ -192,9 +190,11 @@ function load_info(app_info){
     if (current == 0) d3.select("#prev").style("display","none")
     if (current == app_info.length-1) d3.select("#next").style("display","none")
     
-      
     d3.selectAll(".page").attr("class","page")
     d3.selectAll("#page_"+current).attr("class","page active")
+    
+  	var h = parseInt(window.innerHeight) - d3.select("#info").node().offsetHeight,
+  			w = parseInt(window.innerWidth);
 		
 		// set media
 		if(info.image){
