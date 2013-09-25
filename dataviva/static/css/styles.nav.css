@@ -335,6 +335,7 @@ a.opendata:hover {
 #server_message > .decision {
   background-color: #af1f24;
   display: inline-block;
+  padding-right: 40px;
 }
 
 #server_message > .decision::after {
