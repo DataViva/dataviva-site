@@ -35,8 +35,9 @@
 
 {% block js %}
 
-  <script src="/static/js/libs/jquery-1.9.0.min.js"></script>
+  <script src="/static/js/libs/jquery-2.0.3.min.js"></script>
   <script src="/static/js/libs/redactor.min.js"></script>
+  <script src="/static/js/libs/pt_br.js"></script>
   <script>
   
     leon("#status")
@@ -52,7 +53,8 @@
 
       var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
       $('#wysiwyg_textarea').redactor({
-        buttons: buttons 
+        buttons: buttons,
+        lang: "{{g.locale}}"
       })
 
     })

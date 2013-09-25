@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-24 16:37-0400\n"
+"POT-Creation-Date: 2013-09-25 16:31-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,25 +28,29 @@ msgid ""
 "like to see some visualizations? Below are some good places to start:"
 msgstr ""
 
-#: dataviva/html/home.html:19 dataviva/html/templates/site.html:14
-msgid "Guide"
-msgstr ""
-
-#: dataviva/html/home.html:20
-msgid "Generate multiple apps into a report."
-msgstr ""
-
-#: dataviva/html/home.html:24 dataviva/html/apps/index.html:4
-#: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:16
+#: dataviva/html/home.html:19 dataviva/html/apps/index.html:4
+#: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:14
 msgid "Apps"
 msgstr ""
 
-#: dataviva/html/home.html:25
+#: dataviva/html/home.html:20
 msgid "Go straight to the visualization builder."
+msgstr ""
+
+#: dataviva/html/home.html:24 dataviva/html/templates/site.html:16
+msgid "Guide"
+msgstr ""
+
+#: dataviva/html/home.html:25
+msgid "Generate multiple apps into a report."
 msgstr ""
 
 #: dataviva/html/about/appsdocs.html:4
 msgid "About the Apps"
+msgstr ""
+
+#: dataviva/html/about/data.html:4 dataviva/html/about/data.html:7
+msgid "About the Data"
 msgstr ""
 
 #: dataviva/html/about/dataviva.html:4 dataviva/html/about/dataviva.html:7
@@ -54,43 +58,43 @@ msgid "About the Site"
 msgstr ""
 
 #: dataviva/html/about/glossary.html:4 dataviva/html/about/glossary.html:7
-#: dataviva/html/templates/about.html:26
+#: dataviva/html/templates/about.html:30
 msgid "Glossary"
 msgstr ""
 
 #: dataviva/html/about/apps/compare.html:3
 #: dataviva/html/about/apps/geo_map.html:3 dataviva/html/apps/index.html:22
-#: dataviva/html/templates/about.html:40
+#: dataviva/html/templates/about.html:44
 msgid "Geo Map"
 msgstr ""
 
 #: dataviva/html/about/apps/network.html:3 dataviva/html/apps/index.html:27
-#: dataviva/html/templates/about.html:44
+#: dataviva/html/templates/about.html:48
 msgid "Network"
 msgstr ""
 
 #: dataviva/html/about/apps/occugrid.html:3 dataviva/html/apps/index.html:49
-#: dataviva/html/templates/about.html:60
+#: dataviva/html/templates/about.html:64
 msgid "Occugrid"
 msgstr ""
 
 #: dataviva/html/about/apps/rings.html:3 dataviva/html/apps/index.html:34
-#: dataviva/html/templates/about.html:48
+#: dataviva/html/templates/about.html:52
 msgid "Rings"
 msgstr ""
 
 #: dataviva/html/about/apps/scatter.html:3 dataviva/html/apps/index.html:39
-#: dataviva/html/templates/about.html:52
+#: dataviva/html/templates/about.html:56
 msgid "Scatter"
 msgstr ""
 
 #: dataviva/html/about/apps/stacked.html:3 dataviva/html/apps/index.html:17
-#: dataviva/html/templates/about.html:36
+#: dataviva/html/templates/about.html:40
 msgid "Stacked"
 msgstr ""
 
 #: dataviva/html/about/apps/tree_map.html:3 dataviva/html/apps/index.html:12
-#: dataviva/html/templates/about.html:32
+#: dataviva/html/templates/about.html:36
 msgid "Tree Map"
 msgstr ""
 
@@ -222,15 +226,15 @@ msgstr ""
 msgid "Which app would you like to build?"
 msgstr ""
 
-#: dataviva/html/apps/index.html:44 dataviva/html/templates/about.html:56
+#: dataviva/html/apps/index.html:44 dataviva/html/templates/about.html:60
 msgid "Compare"
 msgstr ""
 
-#: dataviva/html/apps/info.html:20
+#: dataviva/html/apps/info.html:28
 msgid "Previous"
 msgstr ""
 
-#: dataviva/html/apps/info.html:21
+#: dataviva/html/apps/info.html:29
 msgid "Next"
 msgstr ""
 
@@ -281,6 +285,10 @@ msgstr ""
 msgid "You need to login for this functionality."
 msgstr ""
 
+#: dataviva/html/ask/ask.html:37
+msgid "Ex. Where does the data come from?"
+msgstr ""
+
 #: dataviva/html/ask/ask.html:47
 msgid "App"
 msgstr ""
@@ -314,7 +322,7 @@ msgid "Depth"
 msgstr ""
 
 #: dataviva/html/data/index.html:3 dataviva/html/data/query.html:32
-#: dataviva/html/templates/site.html:17
+#: dataviva/html/templates/about.html:26 dataviva/html/templates/site.html:17
 msgid "Data"
 msgstr ""
 

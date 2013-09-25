@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-24 16:37-0400\n"
+"POT-Creation-Date: 2013-09-25 16:31-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -32,69 +32,73 @@ msgstr ""
 "inovadores e criativos. Que tal construir a sua visualização? Abaixo "
 "estão alguns bons lugares para iniciar:"
 
-#: dataviva/html/home.html:19 dataviva/html/templates/site.html:14
-msgid "Guide"
-msgstr "Guia"
-
-#: dataviva/html/home.html:20
-msgid "Generate multiple apps into a report."
-msgstr "Siga um passo a passo para gerar um relatório com vários aplicativos."
-
-#: dataviva/html/home.html:24 dataviva/html/apps/index.html:4
-#: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:16
+#: dataviva/html/home.html:19 dataviva/html/apps/index.html:4
+#: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:14
 msgid "Apps"
 msgstr "Aplicativos"
 
-#: dataviva/html/home.html:25
+#: dataviva/html/home.html:20
 msgid "Go straight to the visualization builder."
 msgstr "Aqui você constroi a sua visualização."
+
+#: dataviva/html/home.html:24 dataviva/html/templates/site.html:16
+msgid "Guide"
+msgstr "Guia"
+
+#: dataviva/html/home.html:25
+msgid "Generate multiple apps into a report."
+msgstr "Siga um passo a passo para gerar um relatório com vários aplicativos."
 
 #: dataviva/html/about/appsdocs.html:4
 msgid "About the Apps"
 msgstr "Sobre os Aplicativos"
+
+#: dataviva/html/about/data.html:4 dataviva/html/about/data.html:7
+msgid "About the Data"
+msgstr "Sobre o Site"
 
 #: dataviva/html/about/dataviva.html:4 dataviva/html/about/dataviva.html:7
 msgid "About the Site"
 msgstr "Sobre o Site"
 
 #: dataviva/html/about/glossary.html:4 dataviva/html/about/glossary.html:7
-#: dataviva/html/templates/about.html:26
+#: dataviva/html/templates/about.html:30
 msgid "Glossary"
 msgstr "Glossário"
 
 #: dataviva/html/about/apps/compare.html:3
 #: dataviva/html/about/apps/geo_map.html:3 dataviva/html/apps/index.html:22
-#: dataviva/html/templates/about.html:40
+#: dataviva/html/templates/about.html:44
 msgid "Geo Map"
 msgstr "Mapa"
 
 #: dataviva/html/about/apps/network.html:3 dataviva/html/apps/index.html:27
-#: dataviva/html/templates/about.html:44
+#: dataviva/html/templates/about.html:48
 msgid "Network"
 msgstr "Rede"
 
 #: dataviva/html/about/apps/occugrid.html:3 dataviva/html/apps/index.html:49
-#: dataviva/html/templates/about.html:60
+#: dataviva/html/templates/about.html:64
 msgid "Occugrid"
 msgstr "Ocupações"
 
 #: dataviva/html/about/apps/rings.html:3 dataviva/html/apps/index.html:34
-#: dataviva/html/templates/about.html:48
+#: dataviva/html/templates/about.html:52
 msgid "Rings"
 msgstr "Anéis"
 
 #: dataviva/html/about/apps/scatter.html:3 dataviva/html/apps/index.html:39
-#: dataviva/html/templates/about.html:52
+#: dataviva/html/templates/about.html:56
 msgid "Scatter"
 msgstr "Dispersão"
 
 #: dataviva/html/about/apps/stacked.html:3 dataviva/html/apps/index.html:17
-#: dataviva/html/templates/about.html:36
+#: dataviva/html/templates/about.html:40
 msgid "Stacked"
 msgstr "Evolução"
 
 #: dataviva/html/about/apps/tree_map.html:3 dataviva/html/apps/index.html:12
-#: dataviva/html/templates/about.html:32
+#: dataviva/html/templates/about.html:36
 msgid "Tree Map"
 msgstr "Tree Map"
 
@@ -230,15 +234,15 @@ msgstr "Mostrar/Ocultar Controles"
 msgid "Which app would you like to build?"
 msgstr "Qual aplicativo você gostaria de desenvolver?"
 
-#: dataviva/html/apps/index.html:44 dataviva/html/templates/about.html:56
+#: dataviva/html/apps/index.html:44 dataviva/html/templates/about.html:60
 msgid "Compare"
 msgstr "Compare"
 
-#: dataviva/html/apps/info.html:20
+#: dataviva/html/apps/info.html:28
 msgid "Previous"
 msgstr "Anterior"
 
-#: dataviva/html/apps/info.html:21
+#: dataviva/html/apps/info.html:29
 msgid "Next"
 msgstr "Próximo"
 
@@ -291,6 +295,10 @@ msgstr "O que você gostaria de saber?"
 msgid "You need to login for this functionality."
 msgstr "Você precisa fazer o login para utilizar essa funcionalidade."
 
+#: dataviva/html/ask/ask.html:37
+msgid "Ex. Where does the data come from?"
+msgstr "Ex. Onde é que os dados vêm?"
+
 #: dataviva/html/ask/ask.html:47
 msgid "App"
 msgstr "Aplicativo"
@@ -324,7 +332,7 @@ msgid "Depth"
 msgstr "Fundo"
 
 #: dataviva/html/data/index.html:3 dataviva/html/data/query.html:32
-#: dataviva/html/templates/site.html:17
+#: dataviva/html/templates/about.html:26 dataviva/html/templates/site.html:17
 msgid "Data"
 msgstr "Dados"
 

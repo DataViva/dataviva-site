@@ -9,6 +9,11 @@
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.sabrina.css" />
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
+  
+  <!-- Redactor is here -->
+  <script src="/static/js/libs/jquery-2.0.3.min.js"></script>
+  <script src="/static/js/libs/redactor.min.js"></script>
+  <script src="/static/js/utils/utils.selector.js"></script>
 
 {% endblock %}
 
@@ -34,7 +39,7 @@
     <form id="ask_form" action="" method="post">
       {{form.hidden_tag()}}
         <label for="question">{% trans %}Question{% endtrans %}</label>
-        {{ form.question(id="question", placeholder="Ex. Where does the data come from?") }}
+        {{ form.question(id="question", placeholder=_("Ex. Where does the data come from?")) }}
         {% for error in form.errors.question %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
@@ -45,7 +50,7 @@
         {% endfor %}
         
         <label for="app_link">{% trans %}App{% endtrans %}</label>
-        {{ form.app(id="app_link", placeholder="Ex. /tree_map/secex/mg/show/show") }}
+        {{ form.app(id="app_link", placeholder="Ex. /tree_map/secex/mg/all/all/hs/") }}
         
         <label for="tag_field" class="leon label large">{% trans %}Tags{% endtrans %}</label>
         {{ form.tags(id="tag_field") }}
@@ -70,10 +75,8 @@
 
 {% block js %}
 
-<!-- Redactor is here -->
-<script src="/static/js/libs/jquery-1.9.0.min.js"></script>
-<script src="/static/js/libs/redactor.min.js"></script>
-<script src="/static/js/utils/utils.selector.js"></script>
+<script src="/static/js/libs/pt_br.js"></script>
+
 <script>
 
   leon("#question").size("large").color(dataviva.color)
@@ -83,8 +86,10 @@
   $(document).ready(function() {
 
       var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
+      
   		$('#wysiwyg_textarea').redactor({
-        buttons: buttons 
+        buttons: buttons,
+        lang: "{{g.locale}}"
   		});
 
   });
