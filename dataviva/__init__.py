@@ -28,7 +28,7 @@ db = SQLAlchemy(app)
 app.session_interface = RedisSessionInterface()
 
 # Global Latest Year Variables
-__latest_year__ = {"secex": 2011, "rais": 2010, "population": 2012}
+__latest_year__ = {"secex": 2011, "rais": 2011, "population": 2012}
 
 # login manager for user management
 lm = LoginManager()
