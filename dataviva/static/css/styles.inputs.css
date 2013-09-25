@@ -136,7 +136,8 @@ a:hover {
 
 body.general .decision,
 body.home .decision,
-body.guide .decision,
+body.apps .decision,
+body.builder .decision,
 body.admin .decision {
   background-color: #af1f24; /* red */
 }
@@ -145,8 +146,7 @@ body.profiles .decision {
   background-color: #e0902d; /* orange */
 }
 
-body.apps .decision,
-body.builder .decision {
+body.guide .decision {
   background-color: #3daf49; /* green */
 }
 

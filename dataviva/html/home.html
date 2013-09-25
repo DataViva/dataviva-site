@@ -15,15 +15,16 @@
     {% trans %}DataViva is an initiative of the Government of Minas Gerais which seeks to create an innovative and creative data visualization tool. Would you like to see some visualizations? Below are some good places to start:{% endtrans %}
   </div>
   
+  <a class="decision icon square apps" href="{{ url_for('apps.guide') }}">
+    <h1>{% trans %}Apps{% endtrans %}</h1>
+    {% trans %}Go straight to the visualization builder.{% endtrans %}
+  </a>
+  
   <a class="decision icon square guide" href="{{ url_for('guide.guide') }}">
     <h1>{% trans %}Guide{% endtrans %}</h1>
     {% trans %}Generate multiple apps into a report.{% endtrans %}
   </a>
   
-  <a class="decision icon square apps" href="{{ url_for('apps.guide') }}">
-    <h1>{% trans %}Apps{% endtrans %}</h1>
-    {% trans %}Go straight to the visualization builder.{% endtrans %}
-  </a>
   <br><br>
   <a href="http://www.fjp.gov.br/" class="logo fjp" target="_blank"></a>
   <a href="http://www.fapemig.br/" class="logo fapemig" target="_blank"></a>

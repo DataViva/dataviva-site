@@ -22,7 +22,7 @@ mod = Blueprint('apps', __name__, url_prefix='/apps')
 def before_request():
     g.page_type = mod.name
     
-    g.color = "#3daf49"
+    g.color = "#af1f24"
     
     g.sabrina = {
         "outfit": "lab",

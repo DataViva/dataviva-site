@@ -77,9 +77,9 @@
   opacity: 1;
 }
 
-#header a#guide.link.active,
-#header a#guide:hover {
-  background-image: url("/static/img/nav/icons/guide_active.png");
+#header a#apps.link.active,
+#header a#apps:hover {
+  background-image: url("/static/img/nav/icons/apps_active.png");
   color: #af1f24 !important; /* red */
 }
 
@@ -89,9 +89,9 @@
   color: #e0902d !important; /* orange */
 }
 
-#header a#apps.link.active,
-#header a#apps:hover {
-  background-image: url("/static/img/nav/icons/apps_active.png");
+#header a#guide.link.active,
+#header a#guide:hover {
+  background-image: url("/static/img/nav/icons/guide_active.png");
   color: #3daf49 !important; /* green */
 }
 

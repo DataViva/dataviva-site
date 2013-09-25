@@ -17,6 +17,7 @@ mod = Blueprint('guide', __name__, url_prefix='/guide')
 def before_request():
     g.page_type = mod.name
     g.path = request.path
+    g.color = "#3daf49"
 
 @mod.route('/')
 @mod.route('/<category>/')
