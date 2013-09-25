@@ -237,13 +237,14 @@ def make_query(data_table, url_args, **kwargs):
         ret["data"] = [d.serialize() for d in query.all()]
 
     if download is not None:
+        header = [str(c).split(".")[1] for c in data_table.__table__.columns]
         def generate():
             for i, data_dict in enumerate(ret["data"]):
-                row = [str(n) if n is not None else '' for n in data_dict.values()]
+                row = [str(data_dict[c]) if c in data_dict else '' for c in header]
                 if i == 0:
-                    header = data_dict.keys()
                     yield ','.join(header) + '\n' + ','.join(row) + '\n'
                 yield ','.join(row) + '\n'
+
         content_disposition = "attachment;filename=%s.csv" % (cache_id[1:-1].replace('/', "_"))
         if sys.getsizeof(ret["data"]) > 10485760:
             resp = Response(['Unable to download, request is larger than 10mb'], 

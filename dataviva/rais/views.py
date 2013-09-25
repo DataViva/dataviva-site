@@ -228,72 +228,40 @@ def get_query(data_table, url_args, **kwargs):
     
     # lastly we want to get the actual data held in the table requested
     if "location" in ret and len(ret["location"]) > 1 and aggregate:
-        # raise Exception(unique_keys)
         for uk in unique_keys:
             query = query.group_by(getattr(data_table, uk))
-        # ret["data"] = [dict(zip(col_names, d)) for d in query.all()]
-        # raise Exception(col_names, query.all()[0])
         ret["data"] = []
         for d in query.all():
             d = dict(zip(col_names, d))
             d["num_emp"] = int(d["num_emp"]) if d["num_emp"] else d["num_emp"]
             d["num_est"] = int(d["num_est"]) if d["num_est"] else d["num_est"]
             ret["data"].append(d)
-        # raise Exception(ret["data"])
     elif join:
         ret["data"] = []
         if limit:
             items = query.limit(limit).offset(offset).all()
         else:
             items = query.all()
-    
-        t2 = time.time()
-        timing.append("Query Data: {0:.4f}s".format((t2-t1)))
-        t1 = time.time()
-        # for row in items:
-        #     datum = row[0].serialize()
-        #     for value, col_name in zip(row[1:], join["columns"].keys()):
-        #         extra = {}
-        #         extra[col_name] = value
-        #         datum = dict(datum.items() + extra.items())
-        #     ret["data"].append(datum)
-        # raise Exception(query.all()[0])
-        # ret["data"] = [d[0].serialize() for d in query.all()]
         for d in query.all():
-            # datum = dict((key,value) for key, value in d[0].__dict__.iteritems() if isinstance(value,unicode) or isinstance(value,float) or isinstance(value,int) or isinstance(value,long))
             datum = d[0].serialize()
             for value, col_name in zip(d[1:], join["columns"].keys()):
                 extra = {}
                 extra[col_name] = value
                 datum = dict(datum.items() + extra.items())
             ret["data"].append(datum)
-        # raise Exception(ret["data"][0])
-            
-        t2 = time.time()
-        timing.append("Serialize Data: {0:.4f}s".format((t2-t1)))
-        t1 = time.time()
-            
     elif limit:
         ret["data"] = [d.serialize() for d in query.limit(limit).offset(offset).all()]
     elif raw:
         return query.all()
     else:
-        t2 = time.time()
-        timing.append("Query Data: {0:.4f}s".format((t2-t1)))
-        t1 = time.time()
-        
         ret["data"] = [d.serialize() for d in query.all()]
-        
-        t2 = time.time()
-        timing.append("Serialize Data: {0:.4f}s".format((t2-t1)))
-        t1 = time.time()
     
     if download is not None:
+        header = [str(c).split(".")[1] for c in data_table.__table__.columns]
         def generate():
             for i, data_dict in enumerate(ret["data"]):
-                row = [str(n) if n is not None else '' for n in data_dict.values()]
+                row = [str(data_dict[c]) if c in data_dict else '' for c in header]
                 if i == 0:
-                    header = data_dict.keys()
                     yield ','.join(header) + '\n' + ','.join(row) + '\n'
                 yield ','.join(row) + '\n'
 
