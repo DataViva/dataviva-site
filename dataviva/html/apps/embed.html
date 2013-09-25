@@ -389,8 +389,25 @@
     
     averages = vizwhiz.utils.merge(averages,additionals)
     
+    var descs = {
+      "distance": dataviva.format.text("distance_desc"),
+      "distance_wld": dataviva.format.text("distance_desc"),
+      "importance": dataviva.format.text("importance_desc"),
+      "eci": dataviva.format.text("eci_desc"),
+      "eci_wld": dataviva.format.text("eci_desc"),
+      "opp_gain": dataviva.format.text("opp_gain_desc"),
+      "opp_gain_wld": dataviva.format.text("opp_gain_desc"),
+      "pci": dataviva.format.text("pci_desc"),
+      "rca": dataviva.format.text("rca_desc"),
+      "rca_wld": dataviva.format.text("rca_desc"),
+      "required": dataviva.format.text("required_desc"),
+      "unique_isic": dataviva.format.text("unique_isic_desc"),
+      "unique_cbo": dataviva.format.text("unique_cbo_desc"),
+    }
+    
     // Define global viz-whiz app parameters
     app.viz = vizwhiz.viz()
+      .descs(descs)
       .name_array(["name","display_id"])
       .nesting_aggs(averages)
       .text_var("name")
