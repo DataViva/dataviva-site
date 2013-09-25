@@ -193,9 +193,8 @@ def add_to_cache(urls):
     with app.test_client() as c:
         for u in urls:
             count += 1
-            if count < 2:
-                print "{0} out of {1} ({2}%)".format(count,len(urls),(round(count/len(urls))*100)), u
-                ctx.app.test_client().get(u, headers={'X-Requested-With': 'XMLHttpRequest'})
+            print "{0} out of {1} ({2}%)".format(count,len(urls),(round(float(count)/len(urls))*100)), u
+            ctx.app.test_client().get(u, headers={'X-Requested-With': 'XMLHttpRequest'})
 
 def main():
     attr_tables = ['attrs_cbo', 'attrs_hs', 'attrs_isic', \
