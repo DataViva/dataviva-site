@@ -319,6 +319,10 @@ dataviva.format.text = function(text,name,l) {
       "points": {"en": "Points", "pt": "Pontos"},
       "votes": {"en": "Top Voted", "pt": "Mais Votados"},
       "newest": {"en": "Newest", "pt": "O Mais Novo"},
+      "flagged": {"en": "This reply has been flagged", "pt": "Essa resposta foi marcado"},
+      "unflagged": {"en": "This flag on this reply has been removed", "pt": "O marcado sobre esta resposta foi removido"},
+      "voted": {"en": "Your vote has been added", "pt": "Seu voto foi adicionado"},
+      "unvoted": {"en": "Your vote was removed", "pt": "Seu voto foi removido"},
       
       // Admin
       "edit": {"en": "Edit", "pt": "Editar"},
@@ -792,4 +796,28 @@ dataviva.popover.hide = function(id) {
       
     })
 
+}
+
+dataviva.flash = function(text) {
+	
+	d3.selectAll("#server_message").remove();
+	
+	flash_cont = d3.select("#container").insert("div", ":first-child")
+	
+	flash_inner = flash_cont.attr("id", "server_message")
+					.append("div")
+					.attr("class", "decision")
+					.text(text)
+	
+	flash_inner.append("i")
+		.attr("id", "close_message")
+		.attr("class", "icon-remove-sign")
+		.on(vizwhiz.evt.click, function(d){
+	        var div = d3.select("#server_message")
+	        var timing = parseFloat(div.style("transition-duration"),10)*1000;
+	        div.style("opacity",0);
+	        setTimeout(function(){
+	          div.remove();
+	        },timing)
+		})
 }

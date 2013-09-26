@@ -166,80 +166,93 @@
 // Initialize redactor wysiwyg textarea
 $(document).ready(function() {
 
-    var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
-		$('#wysiwyg_textarea').redactor({
-      // focus: true // scrolls page to this textarea
-      buttons: buttons,
-      lang: "{{g.locale}}"
-		});
+	var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
+	$('#wysiwyg_textarea').redactor({
+		// focus: true // scrolls page to this textarea
+		buttons: buttons,
+		lang: "{{g.locale}}"
+	});
 
 });
 
 // Voting!
 d3.selectAll(".vote_up").on(vizwhiz.evt.click, function(){
-  var link_el = this;
-  d3.json(link_el.href, function(resp){
-    if(resp.error) {
-      alert(resp.error)
-    }
-    else {
-      d3.select(link_el.parentNode).select(".vote_count").text(function(){
-        var new_count = 1
-        if(d3.select(this).text()){
-          // console.log(d3.select(this).text())
-          new_count = parseInt(d3.select(this).text(), 10) + parseInt(resp.success);
-        }
-        return new_count;
-      })
-    }
-  })
-  d3.event.preventDefault();
+	var link_el = this;
+	d3.json(link_el.href, function(resp){
+		if(resp.error) {
+			alert(resp.error)
+		}
+		else {
+			d3.select(link_el.parentNode).select(".vote_count").text(function(){
+				var new_count = 1
+				if(d3.select(this).text()){
+					new_count = parseInt(d3.select(this).text(), 10) + parseInt(resp.success);
+				}
+				return new_count;
+			})
+			// a new vote was added
+			if(parseInt(resp.success) > 0){
+				d3.select(link_el).style("color", "green")
+				dataviva.flash(dataviva.format.text("voted"))
+			}
+			// user had already voted so it was removed
+			else {
+				d3.select(link_el).style("color", "#333333")
+				dataviva.flash(dataviva.format.text("unvoted"))
+			}
+		}
+	})
+	d3.event.preventDefault();
 })
 
 // Flagging :(
 d3.selectAll(".vote_down").on(vizwhiz.evt.click, function(){
-  var link_el = this;
-  d3.json(link_el.href, function(resp){
-    if(resp.error) {
-      alert(resp.error)
-    }
-    else {
-      if(parseInt(resp.success) > 0){
-        d3.select(link_el).style("color", "#be1e2d")
-      }
-      else {
-        d3.select(link_el).style("color", "#333333")
-      }
-    }
-  })
-  d3.event.preventDefault();
+	var link_el = this;
+	d3.json(link_el.href, function(resp){
+		if(resp.error) {
+			alert(resp.error)
+		}
+		else {
+			// item was able to be flagged
+			if(parseInt(resp.success) > 0){
+				d3.select(link_el).style("color", "#be1e2d")
+				dataviva.flash(dataviva.format.text("flagged"))
+			}
+			// item was not able to be flagged
+			else {
+				d3.select(link_el).style("color", "#333333")
+				dataviva.flash(dataviva.format.text("unflagged"))
+			}
+		}
+	})
+	d3.event.preventDefault();
 })
  
 // add icons to tags!
 d3.selectAll(".tag-icon").style("background-image", function(){
-  var tag_el = d3.select(this);
-  return "url('"+dataviva.icon(tag_el.attr("title"), tag_el.attr("rel").toLowerCase()) + "')"
+	var tag_el = d3.select(this);
+	return "url('"+dataviva.icon(tag_el.attr("title"), tag_el.attr("rel").toLowerCase()) + "')"
 })
 
 // show/hide reply form
 d3.selectAll("div.leave_response").on(vizwhiz.evt.click, function(){
   
-  d3.selectAll("div.leave_response").style("display", "inline-block")
-  var reply_form = d3.select(".reply_form").node()
-  this.parentNode.insertBefore(reply_form, this);
-  d3.select(this).style("display", "none")
+	d3.selectAll("div.leave_response").style("display", "inline-block")
+	var reply_form = d3.select(".reply_form").node()
+	this.parentNode.insertBefore(reply_form, this);
+	d3.select(this).style("display", "none")
   
-  // set the hidden parent input
-  var reply_parent_id = d3.select(this).attr("data-parent");
-  if(reply_parent_id){
-    d3.select("input[name='parent']").attr("value", reply_parent_id)
-  }
+	// set the hidden parent input
+	var reply_parent_id = d3.select(this).attr("data-parent");
+	if(reply_parent_id){
+		d3.select("input[name='parent']").attr("value", reply_parent_id)
+	}
 })
 
 // submit form
 d3.selectAll(".reply_form .submit").on(vizwhiz.evt.click, function(){
-  this.parentNode.submit()
-  d3.event.preventDefault();
+	this.parentNode.submit()
+	d3.event.preventDefault();
 })
 </script>
 
