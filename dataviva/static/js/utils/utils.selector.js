@@ -581,7 +581,7 @@ function Selector() {
             if (v.id_ibge) {
               var sub_text = dataviva.format.text("id_ibge") + ": " + v.id_ibge.toString()
             }
-            else {
+            else if (type != "file") {
               var sub_text = dataviva.format.text(type+"_id") + ": " + v.display_id.toString()
             }
             

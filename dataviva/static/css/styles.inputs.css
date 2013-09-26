@@ -165,9 +165,7 @@ body.about .decision {
   background-color: #d67ab0; /* pink */
 }
 
-body.general .help,
-body.apps .help,
-body.builder .help {
+body.general .help {
   color: #af1f24; /* red */
 }
 
