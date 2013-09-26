@@ -783,7 +783,7 @@
             app.vars[ui.type] = default_value
           }
         
-          if (ui.values.length > 1 && app.vars.builder != "false") {
+          if (ui.values.length > 1 && app.vars.builder != "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope"))) {
             // if (ui.values.length == 2 && ui.values.indexOf("true") >= 0 && ui.values.indexOf("false") >= 0) {
             //   builder.checkbox({
             //     "data": ui.values,
@@ -850,6 +850,10 @@
         }
       }
       
+      if (app.build.bra[0].id == "all" && app.build.app.type == "network") {
+        app.vars.spotlight = false
+      }
+      
       app.viz.type(app.build.app.viz_whiz)
         .title(app.build.title)
         .color_var(color_var)
@@ -879,7 +883,8 @@
       /* Network Specific Variables */
       /******************************/  
       if (app.build.app.type == "network") {
-        if (app.build.output == "hs") var av = app.vars.rca_scope
+        if (app.build.bra[0].id == "all") var av = "always_active"
+        else if (app.build.output == "hs") var av = app.vars.rca_scope
         else if (app.build.output == "isic") var av = "bra_rca"
         else var av = "always_active"
         app.viz
