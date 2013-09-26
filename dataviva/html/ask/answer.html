@@ -93,10 +93,10 @@
       <div class="vote_block">
         <div class="vote_count">{% if r.votes.all()|length %}{{ r.votes.count() }}{% else %}0{% endif %}</div>
         <div class="vote_label">{% trans %}Points{% endtrans %}</div>
-        <a class="vote_down" href="{{ url_for('ask.reply_flag', id=r.id) }}">
+        <a class="vote_down alt_tooltip" href="{{ url_for('ask.reply_flag', id=r.id) }}" alt='{% trans %}Flagged replies are reviewed by DataViva staff to determine if they violate community guidelines. Accounts are penalized for violations and can lead to account termination.{% endtrans %}'>
           <i class="icon-flag"></i>
         </a>
-        <a class="vote_up" href="{{ url_for('ask.reply_vote', id=r.id) }}">
+        <a class="vote_up alt_tooltip" href="{{ url_for('ask.reply_vote', id=r.id) }}" alt='{% trans %}This question contributes to a better understanding of the topic.{% endtrans %}'>
           <i class="icon-thumbs-up"></i>
         </a>
       </div> <!-- end voting -->
