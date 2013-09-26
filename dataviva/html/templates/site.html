@@ -53,6 +53,18 @@
     </div>
     
   </div>
+      
+  {% if crumbs|length %}
+    <div id="breadcrumbs">
+      {% for crumb in crumbs %}
+        {% if crumb.current %}
+          <div class="decision short">{{ crumb.text }}</div>
+        {% else %}
+          <a href="{{ crumb.url }}" class="help short">{{ crumb.text }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
   
   <div id="fullscreen"></div>
 
@@ -93,6 +105,9 @@
   </div>
   
   <script type="text/javascript">
+  
+    var crumbs = "{{crumbs|safe}}"
+    console.log(crumbs)
     
     dataviva.ui.header()
   

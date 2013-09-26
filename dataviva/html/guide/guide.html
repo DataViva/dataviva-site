@@ -29,7 +29,7 @@
   <script>
 
     var width = window.innerWidth-330,
-        height = window.innerHeight-149,
+        height = window.innerHeight-175,
         builds = {},
         sliding = false,
         selected = null,
@@ -40,7 +40,7 @@
       .style("height",height+"px")
       .each(function(){
         var p = this.id.substring(6),
-            t = this.offsetTop-78
+            t = this.offsetTop-108
         builds[p] = {"loaded": false, "top": t}
         if (p == 1) {
           load(p)

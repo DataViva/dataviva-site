@@ -8,7 +8,7 @@ body.plan #inner_container {
 }
 
 body.plan #container {
-  padding: 58px 0px 49px 0px;
+  padding: 88px 0px 49px 0px;
   text-align: left;
   width: 100%;
 }
@@ -17,7 +17,7 @@ div#guide_controls {
   left: 20px;
   padding: 10px 10px 5px 10px;
   position: fixed;
-  top: 78px;
+  top: 108px;
   width: 250px;
 }
 
@@ -27,6 +27,11 @@ div#guide_title {
 }
 
 iframe.guide_app {
-  margin: 20px 0px;
+  margin: 20px 0px 50px 0px;
   margin-left: 310px;
+}
+
+body.plan div#breadcrumbs {
+  left: 20px;
+  margin-left: 0px;
 }

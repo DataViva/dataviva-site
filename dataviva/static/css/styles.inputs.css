@@ -146,7 +146,8 @@ body.profiles .decision {
   background-color: #e0902d; /* orange */
 }
 
-body.guide .decision {
+body.guide .decision,
+body.plan .decision {
   background-color: #3daf49; /* green */
 }
 
@@ -165,7 +166,8 @@ body.about .decision {
 }
 
 body.general .help,
-body.guide .help {
+body.apps .help,
+body.builder .help {
   color: #af1f24; /* red */
 }
 

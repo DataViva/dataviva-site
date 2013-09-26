@@ -177,55 +177,24 @@ div#language .leon.radio {
 /* Breadcrumb Specific */
 /***********************/
 
-#site_breadcrumbs {
-  font-size: 11px;
-  margin: 10px auto;
-  margin-top: 70px;
-  text-shadow: 0px 1px white;
-  width: 800px;
+#breadcrumbs {
+  left: 50%;
+  margin-left: -390px;
+  position: fixed;
+  top: 70px;
+  width: 780px;
+  z-index: 1000;
 }
 
-a.site_crumb {
-  color: #ccc;
-  transition: color .1s;
-  -webkit-transition: color .1s;
-}
-
-span.site_crumb_divider {
-  color: #ccc;
-  margin: 0px 3px;
-}
-
-body.guide span.site_crumb,
-body.plan span.site_crumb,
-body.guide a.site_crumb:hover {
-  color: #af1f24;
-}
-
-body.profiles span.site_crumb,
-body.profile span.site_crumb,
-body.profiles a.site_crumb:hover {
-  color: #e0902d;
-}
-
-body.apps span.site_crumb,
-body.apps a.site_crumb:hover {
-  color: #3daf49;
-}
-
-body.data span.site_crumb,
-body.data a.site_crumb:hover {
-  color: #1abbee;
-}
-
-body.ask span.site_crumb,
-body.ask a.site_crumb:hover {
-  color: #742777;
-}
-
-body.about span.site_crumb,
-body.about a.site_crumb:hover {
-  color: #d67ab0;
+#breadcrumbs > a,
+#breadcrumbs > div {
+  display: inline-block;
+  max-width: 150px;
+  overflow: hidden;
+  padding: 6px 24px 6px 8px !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: auto;
 }
 
 /******************/

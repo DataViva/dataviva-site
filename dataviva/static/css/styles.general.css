@@ -58,7 +58,7 @@ hr {
 #container {
   display: block;
   margin: 0px auto;
-  padding: 78px 20px 69px 20px;
+  padding: 106px 20px 69px 20px;
   text-align: center;
   width: 980px;
 }
@@ -101,7 +101,7 @@ p {
 
 body.error404 #container {
   background-image: url('/static/img/bgs/error404.png');
-  background-position: center 115px;
+  background-position: center 140px;
   background-repeat: no-repeat;
   background-size: 60%;
 }

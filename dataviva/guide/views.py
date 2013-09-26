@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, request, render_template, g, url_for
+from flask.ext.babel import gettext
 from sqlalchemy import func
 from datetime import datetime
 from werkzeug import urls
 
 from dataviva import db
+from dataviva.utils import title_case
 from dataviva.attrs.models import Bra, Isic, Cbo, Hs, Wld
 from dataviva.rais import models as rais
 from dataviva.secex import models as secex
@@ -32,6 +34,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
     selector = category
     plan = None
     group = None
+    crumbs = []
     
     depths = {
         "bra": [2,3,4,7,8],
@@ -127,11 +130,6 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
             elif len(category_id) == depths[category][1]:
                 group = "child"
                 
-        if category_id != "all":
-            table = category.title()
-            item = globals()[table].query.get_or_404(category_id).name()
-        elif category == "bra":
-            item = Wld.query.get_or_404("sabra").name()
         page = "guide/{0}.html".format(category)
         
     elif category == "industry":
@@ -143,24 +141,80 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
     else:
         page = "guide/index.html"
         
-    if g.locale == "pt":
-        if selector == "cbo":
-            article = u"uma profissão"
-        elif selector == "isic":
-            article = u"uma atividade econômica"
-        elif selector == "hs":
-            article = u"um produto"
-        elif selector == "bra":
-            article = u"um local"
-    else:
-        if selector == "cbo":
-            article = u"an occupation"
-        elif selector == "isic":
-            article = u"an industry"
-        elif selector == "hs":
-            article = u"a product"
-        elif selector == "bra":
-            article = u"a location"
+    if selector == "cbo":
+        article = gettext(u"an occupation")
+    elif selector == "isic":
+        article = gettext(u"an industry")
+    elif selector == "hs":
+        article = gettext(u"a product")
+    elif selector == "bra":
+        article = gettext(u"a location")
+            
+    if category:
+        url = "/guide/"
+        crumbs.append({"url": url, "text": "Guide"})
+        
+        if category == "cbo":
+            crumb_title = gettext(u"Career")
+        elif category == "industry":
+            crumb_title = gettext(u"Industry")
+        elif category == "isic":
+            crumb_title = gettext(u"Establishments and Employment")
+        elif category == "hs":
+            crumb_title = gettext(u"Product Exports")
+        elif category == "bra":
+            crumb_title = gettext(u"Location")
+        
+        url += "{0}/".format(category)
+        crumbs.append({"url": url, "text": crumb_title})
+        
+        if category_id:
+            url += "{0}/".format(category_id)
+
+            if category_id != "all" and category_id != "select":
+                table = category.title()
+                item = globals()[table].query.get_or_404(category_id).name()
+            elif category == "bra":
+                item = Wld.query.get_or_404("sabra").name()
+                
+            if item:
+                crumbs.append({"url": url, "text": item})
+            elif category_id == "all":
+                crumb_title = gettext("All")
+                crumbs.append({"url": url, "text": crumb_title})
+                
+            if option:
+                url += "{0}/".format(option)
+                if option == "isic":
+                    crumb_title = gettext(u"Establishments and Employment")
+                elif option == "hs":
+                    crumb_title = gettext(u"Product Exports")
+                else:
+                    crumb_title = gettext(title_case(option))
+                crumbs.append({"url": url, "text": crumb_title})
+                
+                if option_id:
+                    url += "{0}/".format(option_id)
+                    if option_id == "isic":
+                        crumb_title = gettext(u"Establishments and Employment")
+                    elif option_id == "hs":
+                        crumb_title = gettext(u"Product Exports")
+                    elif option_id == "all":
+                        crumb_title = Wld.query.get_or_404("sabra").name()
+                    elif option_id != "select":
+                        crumb_title = Bra.query.get(option_id).name()
+                    if option_id != "select":
+                        crumbs.append({"url": url, "text": crumb_title})
+                    
+                    if extra_id and extra_id != "select":
+                        url += "{0}/".format(extra_id)
+                        if option_id == "hs":
+                            crumb_title = Hs.query.get(extra_id).name()
+                        if option_id == "isic":
+                            crumb_title = Isic.query.get(extra_id).name()
+                        crumbs.append({"url": url, "text": crumb_title})
+                        
+        crumbs[len(crumbs)-1]["current"] = True
     
     return render_template(page,
         category = category,
@@ -170,4 +224,5 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
         article = article,
         selector = selector,
         plan = plan,
-        group = group)
+        group = group,
+        crumbs = crumbs)
