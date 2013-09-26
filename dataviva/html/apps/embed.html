@@ -1456,7 +1456,7 @@ val)+": ", "suffix": ""};
       }
       else {
         if (app.build.app.type == "geo_map") var svg = d3.select("div#map svg")
-        else var svg = d3.select("svg")
+        else var svg = d3.select("#app > svg")
         // Add necessary name space junk and get raw node
         svg.attr("version", 1.1)
           .attr("xmlns", "http://www.w3.org/2000/svg")
