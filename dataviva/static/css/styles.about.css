@@ -7,11 +7,11 @@ body.about #inner_container {
   left: 50%;
   margin-left: -400px;
   position: fixed;
-  top: 100px;
+  top: 75px;
 }
 
 #about_content {
-  padding: 25px 25px 25px 200px;
+  padding: 0px 25px 25px 200px;
 }
 
 #about_content > .lightbox {
