@@ -62,10 +62,7 @@ class Stats(object):
         objects'''
     @staticmethod
     def parse_bras(bra_str):
-        if "mgplr" in bra_str:
-            planning_region = Bra.query.get(bra_str)
-            bras = [b.serialize() for b in planning_region.pr.all()]
-        elif ".show." in bra_str:
+        if ".show." in bra_str:
             # the '.show.' indicates that we are looking for a specific nesting
             bar_id, nesting = bra_str.split(".show.")
             # filter table by requested nesting level
@@ -133,6 +130,7 @@ class Stats(object):
         percent = 0
         if top.first() != None:
             if isinstance(top.first(),tuple):
+                raise Exception("here")
                 obj = globals()[key.title()].query.get(top.first()[0])
             else:
                 obj = getattr(top.first(),key)
