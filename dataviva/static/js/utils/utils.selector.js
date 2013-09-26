@@ -622,6 +622,8 @@ function Selector() {
                 }
                 
                 leon("#pr").color(v.color)
+                
+                buttons.append("br")
               }
               
               var d = depths.indexOf(v.id.length)
@@ -790,7 +792,7 @@ function Selector() {
       selector_load.color("#ffffff")
       
       if (type != "file") {
-        selector_load.text("Loading Attribute List").show()
+        selector_load.text(dataviva.format.text("loading_attrs")).show()
       }
       
       if (data) {

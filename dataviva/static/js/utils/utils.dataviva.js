@@ -327,7 +327,8 @@ dataviva.format.text = function(text,name,l) {
       "search": {"en": "Search", "pt": "Pesquisar"},
       "search_results": {"en": "Search Results", "pt": "Resultados da Pesquisa"},
       "select": {"en": "Select", "pt": "Escolher"},
-      "show": {"en": "Show", "pt": "Mostrar"}
+      "show": {"en": "Show", "pt": "Mostrar"},
+      "loading_attrs": {"en": "Loading Attribute List", "pt": "Carregar Lista de Atributos"}
     
     }
     

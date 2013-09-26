@@ -205,6 +205,10 @@ div.loading > i {
   100% { color: #af1f24; }
 }
 
+div.loading > i {
+  font-size: 60px;
+}
+
 div.loading > .text {
   color: #888;
   font-size: 16px;

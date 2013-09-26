@@ -134,12 +134,13 @@ div.search_text > div.search_data {
 div.search_result > div.search_buttons {
   display: inline-block;
   float: right;
+  text-align: right;
 }
 
 div.selector_toggles > div,
 div.search_buttons > div {
   display: inline-block;
-  margin-left: 6px;
+  margin: 0px 0px 6px 6px;
 }
 
 div.search_buttons > div.proximity_toggles {
