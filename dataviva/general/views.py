@@ -28,7 +28,6 @@ def before_request():
         session['first_time'] = False
     else:
         session['first_time'] = True
-        # flash("I've noticed it's your first time on the site. Welcome!")
     
     # Check if the user is logged in, if so give the global object
     # a reference to the user from DB

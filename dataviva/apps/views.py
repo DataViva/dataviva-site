@@ -128,7 +128,7 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
 def app_star(app_name, data_type, bra_id, filter1, filter2, output):
     app_id = "/".join([app_name, data_type, bra_id, filter1, filter2, output])
     if g.user is None or not g.user.is_authenticated():
-        return jsonify({"error": "You need to be logged in for this action."})
+        return jsonify({"error": _("You need to be logged in to star apps.")})
     starred = Starred.query.filter_by(user=g.user, app_id=app_id).first()
     if request.method == 'POST':
         if starred:

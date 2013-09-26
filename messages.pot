@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-25 16:31-0400\n"
+"POT-Creation-Date: 2013-09-26 15:23-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,86 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+
+#: dataviva/admin/views.py:98
+msgid "This question has now been updated."
+msgstr ""
+
+#: dataviva/apps/views.py:131
+msgid "You need to be logged in to star apps."
+msgstr ""
+
+#: dataviva/ask/views.py:87
+msgid "You need to be signed in to reply to questions."
+msgstr ""
+
+#: dataviva/ask/views.py:98
+msgid "Reply submitted."
+msgstr ""
+
+#: dataviva/ask/views.py:111 dataviva/ask/views.py:128
+msgid "You need to be logged in to vote."
+msgstr ""
+
+#: dataviva/ask/views.py:145
+msgid "You need to be logged in to flag replies."
+msgstr ""
+
+#: dataviva/ask/views.py:163
+msgid "You need to be logged in to ask questions."
+msgstr ""
+
+#: dataviva/ask/views.py:173
+msgid "Your question has been submitted and is pending approval."
+msgstr ""
+
+#: dataviva/guide/decorators.py:9
+msgid "You need to be logged in to view this page."
+msgstr ""
+
+#: dataviva/guide/views.py:145 dataviva/profiles/views.py:41
+msgid "an occupation"
+msgstr ""
+
+#: dataviva/guide/views.py:147 dataviva/profiles/views.py:43
+msgid "an industry"
+msgstr ""
+
+#: dataviva/guide/views.py:149 dataviva/profiles/views.py:45
+msgid "a product"
+msgstr ""
+
+#: dataviva/guide/views.py:151 dataviva/profiles/views.py:47
+msgid "a location"
+msgstr ""
+
+#: dataviva/guide/views.py:158 dataviva/html/guide/index.html:20
+msgid "Career"
+msgstr ""
+
+#: dataviva/guide/views.py:160 dataviva/html/guide/index.html:15
+#: dataviva/html/guide/industry.html:3 dataviva/html/profiles/index.html:20
+msgid "Industry"
+msgstr ""
+
+#: dataviva/guide/views.py:162 dataviva/guide/views.py:189
+#: dataviva/guide/views.py:199 dataviva/html/guide/industry.html:14
+msgid "Establishments and Employment"
+msgstr ""
+
+#: dataviva/guide/views.py:164 dataviva/guide/views.py:191
+#: dataviva/guide/views.py:201 dataviva/html/data/select.html:19
+#: dataviva/html/guide/industry.html:10
+msgid "Product Exports"
+msgstr ""
+
+#: dataviva/guide/views.py:166 dataviva/html/guide/index.html:10
+msgid "Location"
+msgstr ""
+
+#: dataviva/guide/views.py:183 dataviva/html/account/index.html:24
+msgid "All"
+msgstr ""
 
 #: dataviva/html/home.html:14
 msgid "Visualizing Minas Gerais and other Brazilian States"
@@ -102,10 +182,6 @@ msgstr ""
 msgid "Activity sorted by date"
 msgstr ""
 
-#: dataviva/html/account/index.html:24
-msgid "All"
-msgstr ""
-
 #: dataviva/html/account/index.html:26
 msgid "Starred Apps"
 msgstr ""
@@ -140,7 +216,7 @@ msgid "Remember Me"
 msgstr ""
 
 #: dataviva/html/admin/admin_questions.html:3
-#: dataviva/html/admin/admin_questions.html:12 dataviva/html/ask/ask.html:36
+#: dataviva/html/admin/admin_questions.html:12 dataviva/html/ask/ask.html:41
 msgid "Question"
 msgstr ""
 
@@ -239,7 +315,7 @@ msgid "Next"
 msgstr ""
 
 #: dataviva/html/ask/answer.html:5 dataviva/html/ask/ask.html:4
-#: dataviva/html/ask/ask.html:56 dataviva/html/ask/questions.html:4
+#: dataviva/html/ask/ask.html:61 dataviva/html/ask/questions.html:4
 msgid "Ask Sabrina"
 msgstr ""
 
@@ -247,7 +323,11 @@ msgstr ""
 msgid "Points"
 msgstr ""
 
-#: dataviva/html/ask/answer.html:50 dataviva/html/ask/ask.html:50
+#: dataviva/html/ask/answer.html:32 dataviva/html/ask/answer.html:99
+msgid "This question contributes to a better understanding of the topic."
+msgstr ""
+
+#: dataviva/html/ask/answer.html:50 dataviva/html/ask/ask.html:55
 msgid "Tags"
 msgstr ""
 
@@ -259,6 +339,13 @@ msgstr ""
 
 #: dataviva/html/ask/answer.html:87
 msgid "Responses"
+msgstr ""
+
+#: dataviva/html/ask/answer.html:96
+msgid ""
+"Flagged replies are reviewed by DataViva staff to determine if they "
+"violate community guidelines. Accounts are penalized for violations and "
+"can lead to account termination."
 msgstr ""
 
 #: dataviva/html/ask/answer.html:115
@@ -277,23 +364,23 @@ msgstr ""
 msgid "Reply"
 msgstr ""
 
-#: dataviva/html/ask/ask.html:21 dataviva/html/guide/cbo.html:10
+#: dataviva/html/ask/ask.html:26 dataviva/html/guide/cbo.html:10
 msgid "What would you like to know?"
 msgstr ""
 
-#: dataviva/html/ask/ask.html:23
+#: dataviva/html/ask/ask.html:28
 msgid "You need to login for this functionality."
 msgstr ""
 
-#: dataviva/html/ask/ask.html:37
+#: dataviva/html/ask/ask.html:42
 msgid "Ex. Where does the data come from?"
 msgstr ""
 
-#: dataviva/html/ask/ask.html:47
+#: dataviva/html/ask/ask.html:52
 msgid "App"
 msgstr ""
 
-#: dataviva/html/ask/ask.html:63
+#: dataviva/html/ask/ask.html:68
 msgid "Click here to login"
 msgstr ""
 
@@ -436,10 +523,6 @@ msgstr ""
 
 #: dataviva/html/data/select.html:14
 msgid "Which classification would you like to browse?"
-msgstr ""
-
-#: dataviva/html/data/select.html:19 dataviva/html/guide/industry.html:10
-msgid "Product Exports"
 msgstr ""
 
 #: dataviva/html/data/select.html:33
@@ -614,25 +697,12 @@ msgstr ""
 msgid "What's on your mind?"
 msgstr ""
 
-#: dataviva/html/guide/index.html:10
-msgid "Location"
-msgstr ""
-
 #: dataviva/html/guide/index.html:11
 msgid "Learn about the potential of a location."
 msgstr ""
 
-#: dataviva/html/guide/index.html:15 dataviva/html/guide/industry.html:3
-#: dataviva/html/profiles/index.html:20
-msgid "Industry"
-msgstr ""
-
 #: dataviva/html/guide/index.html:16
 msgid "Learn about industrial opportunities."
-msgstr ""
-
-#: dataviva/html/guide/index.html:20
-msgid "Career"
 msgstr ""
 
 #: dataviva/html/guide/index.html:21
@@ -641,10 +711,6 @@ msgstr ""
 
 #: dataviva/html/guide/industry.html:7
 msgid "What are you interested in?"
-msgstr ""
-
-#: dataviva/html/guide/industry.html:14
-msgid "Establishments and Employment"
 msgstr ""
 
 #: dataviva/html/guide/isic.html:14
@@ -733,7 +799,11 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: dataviva/html/templates/site.html:88
+#: dataviva/html/templates/site.html:100
 msgid "Sponsored by"
+msgstr ""
+
+#: dataviva/profiles/views.py:49
+msgid "a country"
 msgstr ""
 

@@ -1,6 +1,7 @@
 from sqlalchemy import and_, func
 from datetime import datetime
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, jsonify, abort, current_app
+from flask.ext.babel import gettext
 from dataviva import db, lm
 
 from dataviva.account.models import User
@@ -83,7 +84,7 @@ def answer(slug):
     
     if reply_form.validate_on_submit():
         if g.user is None or not g.user.is_authenticated():
-            flash('You need to be signed in for this.')
+            flash(_('You need to be signed in to reply to questions.'))
             return redirect(url_for('.answer', slug=question.slug))
         timestamp = datetime.utcnow()
         reply = Reply(body=reply_form.reply.data, timestamp=timestamp, 
@@ -94,7 +95,7 @@ def answer(slug):
             reply.parent_id = reply.id
             db.session.add(reply)
             db.session.commit()
-        flash('Reply submitted.')
+        flash(_('Reply submitted.'))
         return redirect(url_for('ask.answer', slug=question.slug))
     else:
         tags = [t.to_attr() for t in question.tags]
@@ -107,7 +108,7 @@ def answer(slug):
 def question_vote(slug):
     q = Question.query.filter_by(slug=slug).first_or_404()
     if g.user is None or not g.user.is_authenticated():
-        return jsonify({"error": "You need to be logged in for this action."})
+        return jsonify({"error": _("You need to be logged in to vote.")})
         
     vote = q.votes.filter_by(user=g.user).first()
     if vote:
@@ -124,7 +125,7 @@ def question_vote(slug):
 def reply_vote(id):
     reply = Reply.query.get_or_404(id)
     if g.user is None or not g.user.is_authenticated():
-        return jsonify({"error": "You need to be logged in for this action."})
+        return jsonify({"error": _("You need to be logged in to vote.")})
 
     vote = reply.votes.filter_by(user=g.user).first()
     if vote:
@@ -141,7 +142,7 @@ def reply_vote(id):
 def reply_flag(id):
     reply = Reply.query.get_or_404(id)
     if g.user is None or not g.user.is_authenticated():
-        return jsonify({"error": "You need to be logged in for this action."})
+        return jsonify({"error": _("You need to be logged in to flag replies.")})
 
     flag = reply.flags.filter_by(user=g.user).first()
     if flag:
@@ -159,7 +160,7 @@ def ask():
     form = AskForm()
     if form.validate_on_submit():
         if g.user is None or not g.user.is_authenticated():
-            flash('You need to be signed in for this.')
+            flash(_('You need to be logged in to ask questions.'))
             return redirect(url_for('account.login'))
         timestamp = datetime.utcnow()
         slug = Question.make_unique_slug(form.question.data)
@@ -169,6 +170,6 @@ def ask():
             question.str_tags(tags)
         db.session.add(question)
         db.session.commit()
-        flash('Your question has been submitted and is pending approval by a site administrator.')
+        flash(_('Your question has been submitted and is pending approval.'))
         return redirect(url_for('ask.index'))
     return render_template("ask/ask.html", form = form)

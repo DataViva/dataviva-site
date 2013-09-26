@@ -95,7 +95,7 @@ def admin_questions_edit(status, question_id):
         q.status_notes = form.answer.data
         db.session.add(q)
         db.session.commit()
-        flash('This question has now been updated.')
+        flash(_('This question has now been updated.'))
         return redirect(url_for('.admin_questions', status=previous_status))
     
     # set defaults
