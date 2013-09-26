@@ -1025,7 +1025,7 @@
             if (app.filters.indexOf(c) < 0) ids.push(c)
           })
         }
-      
+        
         var names = []
         ids.forEach(function(id){
           names.push(app.attrs[app.build.output][id].name)
@@ -1308,12 +1308,6 @@ val)+": ", "suffix": ""};
         d3.select("#settings").style("display","block")
         d3.select("#builder").style("display","block")
       }
-
-      d3.select("#builder").style("top",function(d){
-        if (app.vars.controls != "false") var u = 0
-        else var u = 1
-        return "-"+((this.offsetHeight+5)*u)+"px"
-      })
       
       // Set the max-width for the builder div and app_title
       d3.select("#builder").style("max-width",window.innerWidth+"px")
@@ -1385,11 +1379,17 @@ val)+": ", "suffix": ""};
           d3.select("#year_slider").style("display","none")
         }
       }
-
+      
       app.height = window.innerHeight
       app.height -= (d3.select("#ui_bottom").node().offsetHeight+buffer)
       if (app.vars.controls != "false") app.height -= d3.select("#builder").node().offsetHeight
       app.width = window.innerWidth-10;
+
+      d3.select("#builder").style("top",function(d){
+        if (app.vars.controls != "false") var u = 0
+        else var u = 1
+        return "-"+((this.offsetHeight+5)*u)+"px"
+      })
 
       d3.select("#app")
         .style("height",app.height+"px")
