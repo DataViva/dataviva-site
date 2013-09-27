@@ -915,14 +915,27 @@
         if (app.build.bra[0].id == "all") {
           var coords = app.coords.all
         }
+        else if (app.build.bra[0].id.indexOf("plr") >= 0) {
+          var coords = {"type": "Topology", "objects": {"geojson": {"geometries": [], "type": "GeometryCollection"}}}
+          coords.transform = app.coords[app.build.bra[0].id.substr(0,2)].transform
+          coords.arcs = app.coords[app.build.bra[0].id.substr(0,2)].arcs
+          coords.objects.geojson.geometries = app.coords[app.build.bra[0].id.substr(0,2)].objects.geojson.geometries.filter(function(g){
+            return app.build.bra[0].pr_ids.indexOf(g.bra_id) >= 0
+          })
+        }
+        else if (app.build.bra[0].distance > 0) {
+          var coords = {"type": "Topology", "objects": {"geojson": {"geometries": [], "type": "GeometryCollection"}}}
+          coords.transform = app.coords[app.build.bra[0].id.substr(0,2)].transform
+          coords.arcs = app.coords[app.build.bra[0].id.substr(0,2)].arcs
+          coords.objects.geojson.geometries = app.coords[app.build.bra[0].id.substr(0,2)].objects.geojson.geometries.filter(function(g){
+            return app.build.bra[0].neighbor_ids.indexOf(g.bra_id) >= 0
+          })
+        }
         else {
           var coords = app.coords[app.build.bra[0].id.substr(0,2)]
         }
         
-        app.viz.coords(coords)
-      
-        if (app.build.bra[0].id.length == 8) app.viz.highlight(app.build.bra[0].id)
-        else app.viz.highlight()
+        app.viz.coords(coords).highlight()
     
       } 
   

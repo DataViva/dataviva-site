@@ -80,8 +80,9 @@ class Build(db.Model, AutoSerialize):
                 else:
                     dist = 0
                 state = b[:2]
-                if self.output == "bra":
+                if self.output == "bra" and len(b) == 8 and dist == 0:
                     b = state
+                    dist = 0
                 self.bra.append(Bra.query.get(b))
                 self.bra[i].distance = dist
                 self.bra[i].neighbor_ids = [b.bra_id_dest for b in self.bra[i].get_neighbors(dist)]

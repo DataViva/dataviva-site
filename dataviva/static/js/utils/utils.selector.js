@@ -284,7 +284,7 @@ function Selector() {
         if (sorts.length > 1) {
         
           sort_toggles.append("legend")
-            .attr("id","selector_sort_div")
+            .attr("id","selector_sort")
             .html(dataviva.format.text("sort"))
       
           sorts.forEach(function(s){

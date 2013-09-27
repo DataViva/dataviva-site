@@ -111,7 +111,17 @@ def make_query(data_table, url_args, **kwargs):
             query = query.filter(func.char_length(data_table.bra_id) == ret["bra_level"])
             if ".show." in kwargs["bra_id"]:
                 bra_filter = kwargs["bra_id"].split(".show.")[0]
-                if bra_filter != "all":
+                if "." in bra_filter:
+                    munic_list = Bra.query.get(bra_filter.split(".")[0]).get_neighbors(bra_filter.split(".")[1])
+                    munic_list = [m.bra_id_dest for m in munic_list]
+                    query = query \
+                        .filter(data_table.bra_id.in_(munic_list))
+                elif "plr" in bra_filter:
+                    munic_list = Bra.query.get(bra_filter).pr.all()
+                    munic_list = [m.id for m in munic_list]
+                    query = query \
+                        .filter(data_table.bra_id.in_(munic_list))
+                elif bra_filter != "all":
                     query = query \
                         .filter(data_table.bra_id.startswith(bra_filter))
         elif "show" not in kwargs["bra_id"]:
