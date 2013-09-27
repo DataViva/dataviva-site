@@ -270,7 +270,7 @@ class Build(db.Model, AutoSerialize):
                 for b in self.bra:
                     name = title_case(getattr(b, name_lang))
                     if b.id != "all" and b.distance > 0:
-                        name = name + " ("+b.distance+"km)"
+                        name = name + " "+b.distance+"km"
                     bras.append(name)
                 if lang == "pt":
                     title = title.replace("<bra>", " e ".join(bras))
