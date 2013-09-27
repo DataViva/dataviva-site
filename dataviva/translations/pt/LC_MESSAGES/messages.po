@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-26 15:44-0400\n"
+"POT-Creation-Date: 2013-09-27 12:29-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -98,19 +98,14 @@ msgid "All"
 msgstr "Tudo"
 
 #: dataviva/html/home.html:14
-msgid "Visualizing Minas Gerais and other Brazilian States"
-msgstr "Visualizando Minas Gerais e os demais Estados Brasileiros"
+msgid "Visualizing the Economy of Minas Gerais and Brazil"
+msgstr "Visualizando da Economia de Minas Gerais e do Brasil"
 
 #: dataviva/html/home.html:15
 msgid ""
-"DataViva is an initiative of the Government of Minas Gerais which seeks "
-"to create an innovative and creative data visualization tool. Would you "
-"like to see some visualizations? Below are some good places to start:"
-msgstr ""
-"O DataViva é uma iniciativa do Governo de Minas Gerais, que busca "
-"contribuir com uma ferramenta de visualização de dados em modos "
-"inovadores e criativos. Que tal construir a sua visualização? Abaixo "
-"estão alguns bons lugares para iniciar:"
+"DataViva is an initiative of the Government of Minas Gerais to visualize "
+"public data."
+msgstr "DataViva é uma iniciativa do Governo de Minas Gerais para visualizar dados públicos."
 
 #: dataviva/html/home.html:19 dataviva/html/apps/index.html:4
 #: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:14
