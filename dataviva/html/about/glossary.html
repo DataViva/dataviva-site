@@ -57,7 +57,7 @@
   <br>
   
   <h3>Location Proximity</h3>
-  <p>The proximity measure used to measure how similar locations are is quite simply the inverse of the calculation used for the product space. The same matrix of products and locations is used. Below you will see an illustration of this calculation.</p>
+  <p>The proximity calculation used to determine how similar locations are is very similar to the one used for the product space, except the RCA calculation matrix is based off of locations and industries. This calculation could also be made by substituting products for industries but since these numbers are only used for the Recommended Employees calculations (which uses employment data) we are using industries.</p>
   <img src="/static/img/help/glossary/proximity_locations.png" />
   <br>
   
@@ -96,8 +96,8 @@
   </p>
   <br>
 
-  <h2>Required Employees</h2>
-  <p>To determine how many employees of a given occupation are required for a given industry in a given location, we find the top 20% of similar locations by Locational Proximity and take the average of those locations’ number of employees in an occupation per establishment. If a location already has RCA  1 we would just use their number for the recommended employment.</p>
+  <h2>Recommended Employees</h2>
+  <p>To determine how many employees of a given occupation are recommended for a given industry in a given location, we find the top 20% of similar locations by Locational Proximity and take the average of those locations’ number of employees in an occupation per establishment. If a location already has RCA we would just use their number for the recommended employment.</p>
   
   <p>Used In: <a href="/about/apps/occugrid/">Occugrid</a></p>
 
