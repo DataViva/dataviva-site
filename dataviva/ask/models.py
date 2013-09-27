@@ -132,6 +132,7 @@ class Reply(db.Model, AutoSerialize):
     timestamp = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     question_id = db.Column(db.Integer, db.ForeignKey(Question.id))
+    hidden = db.Column(db.SmallInteger, default = 0)
     votes = db.relationship("Vote",
             primaryjoin= "and_(Reply.id==Vote.type_id, Vote.type=={0})".format(TYPE_REPLY),
             foreign_keys=[Vote.type_id], backref = 'reply', lazy = 'dynamic')
@@ -142,6 +143,13 @@ class Reply(db.Model, AutoSerialize):
     
     def __repr__(self):
         return '<Reply %r>' % (self.id)
+    
+    def serialize(self):
+        auto_serialized = super(Reply, self).serialize()
+        auto_serialized["user"] = self.user.serialize()
+        auto_serialized["votes"] = len(self.votes.all())
+        auto_serialized["flags"] = len(self.flags.all())
+        return auto_serialized
 
 class Flag(db.Model):
 

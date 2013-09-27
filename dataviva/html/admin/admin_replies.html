@@ -1,0 +1,80 @@
+{% extends "templates/admin.html" %}
+
+{% block title %}: {% trans %}Admin Panel{% endtrans %}{% endblock %}
+
+{% block admin_content %}
+
+<div class="feed">
+  
+  <table>
+    <thead>
+      <tr>
+        <th>{% trans %}Reply{% endtrans %}</th>
+        <th>{% trans %}User{% endtrans %}</th>
+        <th>{% trans %}Flags{% endtrans %}</th>
+        <th>{% trans %}Remove{% endtrans %}</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</div>
+
+<script src="/static/js/utils/utils.infinite_scroll.js"></script>
+<script>
+
+function item_formatter(container_el, activities){
+  
+	roles = {"user": 0, "admin": 1}
+
+	var attrs_enter = d3.select(container_el).select("tbody").selectAll("tr")
+		.data(activities, function(d){ return d.id; })
+		.enter().append("tr")
+
+    attrs_enter.append("td").html(function(d){ return d.body; })
+    attrs_enter.append("td").text(function(d){ return d.user.fullname; })
+    attrs_enter.append("td").text(function(d){ return d.flags; })
+  // 
+  // change_role = function(user,value) {
+  //   console.log(user,value)
+  //   d3.json("/admin/user/"+user+"/")
+  //     .header("Content-type", "application/json")
+  //     .send("PUT", '{"role": '+value+'}', function(error, text) { console.log("Error: "+error); });
+  // }
+  // 
+	attrs_enter.append("td").selectAll("input")
+		.data(d3.entries(roles))
+    	.enter().append("input")
+      		.attr("type","radio")
+			.attr("value", function(d){ return dataviva.format.text(d.key); })
+			.attr("id", function(d){ return "role_"+d.value; })
+			.attr("name", function(d){ 
+				var parent_data = d3.select(this.parentNode).datum();
+				return "role_"+parent_data.id; 
+			})
+			.attr("checked", function(d){
+				var parent_data = d3.select(this.parentNode).datum();
+				if(parent_data.hidden == 1){
+					return "checked"
+				}
+			})
+			.each(function(d){
+				var parent_data = d3.select(this.parentNode).datum();
+				leon("$role_"+parent_data.id).size("small")
+			})
+  //     .attr("onclick",function(d){
+  //       var parent_data = d3.select(this.parentNode).datum();
+  //       return "change_role('"+parent_data.id+"',this.id.split('_')[1])"
+  //     })
+
+}
+
+var is = infinite_scroll().format_items(item_formatter);
+
+d3.select(".feed")
+  .call(is)
+  
+</script>
+
+{% endblock %}
