@@ -68,6 +68,14 @@ td > div, .posted > div {
   display: inline-block;
 }
 
+td.role_toggle {
+  min-width: 120px;
+}
+
+td.hidden_toggle {
+  min-width: 100px;
+}
+
 td > .leon.radio {
   line-height: 12px;
 }

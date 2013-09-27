@@ -45,13 +45,12 @@ function item_formatter(container_el, activities){
   attrs_enter.append("td").text(function(d){ return d.email; })
   
   change_role = function(user,value) {
-    console.log(user,value)
     d3.json("/admin/user/"+user+"/")
       .header("Content-type", "application/json")
       .send("PUT", '{"role": '+value+'}', function(error, text) { console.log("Error: "+error); });
   }
   
-  attrs_enter.append("td").selectAll("input")
+  attrs_enter.append("td").attr("class","role_toggle").selectAll("input")
     .data(d3.entries(roles))
     .enter().append("input")
       .attr("type","radio")

@@ -98,7 +98,23 @@ def answer(slug):
         flash(_('Reply submitted.'))
         return redirect(url_for('ask.answer', slug=question.slug))
     else:
+        question.vote = False
+        if g.user.is_authenticated():
+            vote = Vote.query.filter_by(type = 0, type_id = question.id, user_id = g.user.id).first()
+            if vote:
+                question.vote = True
         tags = [t.to_attr() for t in question.tags]
+        for r in question.replies:
+            r.vote = False
+            if g.user.is_authenticated():
+                vote = Vote.query.filter_by(type = 1, type_id = r.id, user_id = g.user.id).first()
+                if vote:
+                    r.vote = True
+            r.flag = False
+            if g.user.is_authenticated():
+                flag = Flag.query.filter_by(reply_id = r.id, user_id = g.user.id).first()
+                if flag:
+                    r.flag = True
         return render_template("ask/answer.html",
             reply_form = reply_form,
             question = question,

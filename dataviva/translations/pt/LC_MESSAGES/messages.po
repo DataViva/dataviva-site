@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-27 12:29-0400\n"
+"POT-Creation-Date: 2013-09-27 14:56-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: dataviva/admin/views.py:98
+#: dataviva/admin/views.py:99
 msgid "This question has now been updated."
 msgstr "Esta questão já foi atualizado."
 
@@ -33,19 +33,19 @@ msgstr "Você precisa fazer o login para responder a perguntas."
 msgid "Reply submitted."
 msgstr "Responder submetido."
 
-#: dataviva/ask/views.py:111 dataviva/ask/views.py:128
+#: dataviva/ask/views.py:127 dataviva/ask/views.py:144
 msgid "You need to be logged in to vote."
 msgstr "Você precisa estar logado para votar."
 
-#: dataviva/ask/views.py:145
+#: dataviva/ask/views.py:161
 msgid "You need to be logged in to flag replies."
 msgstr "Você precisa estar logado para respostas bandeira."
 
-#: dataviva/ask/views.py:163
+#: dataviva/ask/views.py:179
 msgid "You need to be logged in to ask questions."
 msgstr "Você precisa estar logado para fazer perguntas."
 
-#: dataviva/ask/views.py:173
+#: dataviva/ask/views.py:189
 msgid "Your question has been submitted and is pending approval."
 msgstr "Sua pergunta foi enviado e está aguardando aprovação."
 
@@ -105,7 +105,9 @@ msgstr "Visualizando da Economia de Minas Gerais e do Brasil"
 msgid ""
 "DataViva is an initiative of the Government of Minas Gerais to visualize "
 "public data."
-msgstr "DataViva é uma iniciativa do Governo de Minas Gerais para visualizar dados públicos."
+msgstr ""
+"DataViva é uma iniciativa do Governo de Minas Gerais para visualizar "
+"dados públicos."
 
 #: dataviva/html/home.html:19 dataviva/html/apps/index.html:4
 #: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:14
@@ -189,7 +191,7 @@ msgstr "Apps Favoritos"
 msgid "Questions"
 msgstr "Perguntas"
 
-#: dataviva/html/account/index.html:30
+#: dataviva/html/account/index.html:30 dataviva/html/templates/admin.html:26
 msgid "Replies"
 msgstr "Respostas"
 
@@ -224,6 +226,7 @@ msgid "Question"
 msgstr "Pergunta"
 
 #: dataviva/html/admin/admin_questions.html:13
+#: dataviva/html/admin/admin_replies.html:13
 #: dataviva/html/admin/admin_users.html:12
 msgid "User"
 msgstr "Usuário"
@@ -253,9 +256,22 @@ msgstr "Digite sua resposta..."
 msgid "Update"
 msgstr "Atualizar"
 
+#: dataviva/html/admin/admin_replies.html:3
 #: dataviva/html/admin/admin_users.html:3 dataviva/html/templates/site.html:46
 msgid "Admin Panel"
 msgstr "Painel do Administrador"
+
+#: dataviva/html/admin/admin_replies.html:12 dataviva/html/ask/answer.html:151
+msgid "Reply"
+msgstr "Responder"
+
+#: dataviva/html/admin/admin_replies.html:14
+msgid "Flags"
+msgstr "Sinalizadores"
+
+#: dataviva/html/admin/admin_replies.html:15
+msgid "Visibility"
+msgstr "Visibilidade"
 
 #: dataviva/html/admin/admin_users.html:13
 msgid "Nick Name"
@@ -356,21 +372,23 @@ msgstr ""
 "se eles violam as diretrizes da comunidade. As contas são penalizadas por"
 " violações e pode levar ao encerramento da conta."
 
-#: dataviva/html/ask/answer.html:115
+#: dataviva/html/ask/answer.html:106
+msgid ""
+"This reply has been flagged as inappropriate and hidden by an "
+"administrator."
+msgstr "Esta resposta foi sinalizado como impróprio e escondido por um administrador."
+
+#: dataviva/html/ask/answer.html:118
 msgid "Respond to"
 msgstr "Responder para"
 
-#: dataviva/html/ask/answer.html:127
+#: dataviva/html/ask/answer.html:130
 msgid "New Response"
 msgstr "Nova Resposta"
 
-#: dataviva/html/ask/answer.html:128
+#: dataviva/html/ask/answer.html:131
 msgid "Leave a Response"
 msgstr "Deixe uma Resposta"
-
-#: dataviva/html/ask/answer.html:148
-msgid "Reply"
-msgstr "Responder"
 
 #: dataviva/html/ask/ask.html:26 dataviva/html/guide/cbo.html:10
 msgid "What would you like to know?"
@@ -776,19 +794,19 @@ msgstr "Geral"
 msgid "Users"
 msgstr "Usuários"
 
-#: dataviva/html/templates/admin.html:28
+#: dataviva/html/templates/admin.html:29
 msgid "Pending"
 msgstr "Pendente"
 
-#: dataviva/html/templates/admin.html:29
+#: dataviva/html/templates/admin.html:30
 msgid "Approved"
 msgstr "Aprovado"
 
-#: dataviva/html/templates/admin.html:30
+#: dataviva/html/templates/admin.html:31
 msgid "Rejected"
 msgstr "Rejeitado"
 
-#: dataviva/html/templates/admin.html:31
+#: dataviva/html/templates/admin.html:32
 msgid "Duplicate"
 msgstr "Duplicado"
 

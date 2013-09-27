@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-27 12:29-0400\n"
+"POT-Creation-Date: 2013-09-27 14:56-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: dataviva/admin/views.py:98
+#: dataviva/admin/views.py:99
 msgid "This question has now been updated."
 msgstr ""
 
@@ -33,19 +33,19 @@ msgstr ""
 msgid "Reply submitted."
 msgstr ""
 
-#: dataviva/ask/views.py:111 dataviva/ask/views.py:128
+#: dataviva/ask/views.py:127 dataviva/ask/views.py:144
 msgid "You need to be logged in to vote."
 msgstr ""
 
-#: dataviva/ask/views.py:145
+#: dataviva/ask/views.py:161
 msgid "You need to be logged in to flag replies."
 msgstr ""
 
-#: dataviva/ask/views.py:163
+#: dataviva/ask/views.py:179
 msgid "You need to be logged in to ask questions."
 msgstr ""
 
-#: dataviva/ask/views.py:173
+#: dataviva/ask/views.py:189
 msgid "Your question has been submitted and is pending approval."
 msgstr ""
 
@@ -189,7 +189,7 @@ msgstr ""
 msgid "Questions"
 msgstr ""
 
-#: dataviva/html/account/index.html:30
+#: dataviva/html/account/index.html:30 dataviva/html/templates/admin.html:26
 msgid "Replies"
 msgstr ""
 
@@ -220,6 +220,7 @@ msgid "Question"
 msgstr ""
 
 #: dataviva/html/admin/admin_questions.html:13
+#: dataviva/html/admin/admin_replies.html:13
 #: dataviva/html/admin/admin_users.html:12
 msgid "User"
 msgstr ""
@@ -249,8 +250,21 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
+#: dataviva/html/admin/admin_replies.html:3
 #: dataviva/html/admin/admin_users.html:3 dataviva/html/templates/site.html:46
 msgid "Admin Panel"
+msgstr ""
+
+#: dataviva/html/admin/admin_replies.html:12 dataviva/html/ask/answer.html:151
+msgid "Reply"
+msgstr ""
+
+#: dataviva/html/admin/admin_replies.html:14
+msgid "Flags"
+msgstr ""
+
+#: dataviva/html/admin/admin_replies.html:15
+msgid "Visibility"
 msgstr ""
 
 #: dataviva/html/admin/admin_users.html:13
@@ -347,20 +361,22 @@ msgid ""
 "can lead to account termination."
 msgstr ""
 
-#: dataviva/html/ask/answer.html:115
+#: dataviva/html/ask/answer.html:106
+msgid ""
+"This reply has been flagged as inappropriate and hidden by an "
+"administrator."
+msgstr ""
+
+#: dataviva/html/ask/answer.html:118
 msgid "Respond to"
 msgstr ""
 
-#: dataviva/html/ask/answer.html:127
+#: dataviva/html/ask/answer.html:130
 msgid "New Response"
 msgstr ""
 
-#: dataviva/html/ask/answer.html:128
+#: dataviva/html/ask/answer.html:131
 msgid "Leave a Response"
-msgstr ""
-
-#: dataviva/html/ask/answer.html:148
-msgid "Reply"
 msgstr ""
 
 #: dataviva/html/ask/ask.html:26 dataviva/html/guide/cbo.html:10
@@ -762,19 +778,19 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: dataviva/html/templates/admin.html:28
+#: dataviva/html/templates/admin.html:29
 msgid "Pending"
 msgstr ""
 
-#: dataviva/html/templates/admin.html:29
+#: dataviva/html/templates/admin.html:30
 msgid "Approved"
 msgstr ""
 
-#: dataviva/html/templates/admin.html:30
+#: dataviva/html/templates/admin.html:31
 msgid "Rejected"
 msgstr ""
 
-#: dataviva/html/templates/admin.html:31
+#: dataviva/html/templates/admin.html:32
 msgid "Duplicate"
 msgstr ""
 

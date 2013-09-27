@@ -326,6 +326,10 @@ dataviva.format.text = function(text,name,l) {
       
       // Admin
       "edit": {"en": "Edit", "pt": "Editar"},
+      "visible": {"en": "Visible", "pt": "Vis\u00edvel"},
+      "hidden": {"en": "Hidden", "pt": "Escondido"},
+      "user": {"en": "User", "pt": "Usu\u00e1rio"},
+      "admin": {"en": "Admin", "pt": "Administrador"},
       
       // Selector
       "search": {"en": "Search", "pt": "Pesquisar"},

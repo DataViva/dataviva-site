@@ -128,3 +128,17 @@ def admin_replies():
         return jsonify({"activities":items})
     
     return render_template("admin/admin_replies.html")
+
+@mod.route('/reply/<int:reply_id>/', methods = ['PUT'])
+@login_required
+def update_reply(reply_id):
+    # test with:
+    # curl -i -H "Content-Type: application/json" -X PUT 
+    #   -d '{"role":2}' http://localhost:5000/admin/user/1
+    
+    reply = Reply.query.get(reply_id)
+    reply.hidden = request.json.get('hidden', reply.hidden)
+    db.session.add(reply)
+    db.session.commit()
+    
+    return jsonify( {'reply': reply.serialize()} )
