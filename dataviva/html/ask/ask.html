@@ -48,13 +48,14 @@
         {% for error in form.errors.body %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
-        
+        <!--
         <label for="app_link">{% trans %}App{% endtrans %}</label>
         {{ form.app(id="app_link", placeholder="Ex. /tree_map/secex/mg/all/all/hs/") }}
         
         <label for="tag_field" class="leon label large">{% trans %}Tags{% endtrans %}</label>
         {{ form.tags(id="tag_field") }}
         <div id="tag_input" class="leon textbox large"></div>
+        -->
       
       <a href="#" class="submit">
         <div class="decision">
