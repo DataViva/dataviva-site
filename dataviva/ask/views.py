@@ -134,11 +134,12 @@ def question_vote(slug, user=None):
         return jsonify({"error": gettext("You need to be logged in to vote.")})
     elif user is None and g.user is None:
         abort(404)
-        
-    try:
-        opener = urllib2.urlopen("{0}ask/question/{1}/vote/{2}/".format(SITE_MIRROR,slug,g.user.id),None,5)
-    except:
-        return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+    
+    if user is None:
+        try:
+            opener = urllib2.urlopen("{0}ask/question/{1}/vote/{2}/".format(SITE_MIRROR,slug,g.user.id),None,5)
+        except:
+            return jsonify({"error": gettext("The server is not responding. Please try again later.")})
         
     vote = q.votes.filter_by(user=g.user).first()
     if vote:
@@ -162,10 +163,11 @@ def reply_vote(id, user=None):
     elif user is None and g.user is None:
         abort(404)
     
-    try:
-        opener = urllib2.urlopen("{0}ask/reply/{1}/vote/{2}/".format(SITE_MIRROR,id,g.user.id),None,5)
-    except:
-        return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+    if user is None:
+        try:
+            opener = urllib2.urlopen("{0}ask/reply/{1}/vote/{2}/".format(SITE_MIRROR,id,g.user.id),None,5)
+        except:
+            return jsonify({"error": gettext("The server is not responding. Please try again later.")})
 
     vote = reply.votes.filter_by(user=g.user).first()
     if vote:
@@ -189,10 +191,11 @@ def reply_flag(id, user=None):
     elif user is None and g.user is None:
         abort(404)
     
-    try:
-        opener = urllib2.urlopen("{0}ask/reply/{1}/flag/{2}/".format(SITE_MIRROR,id,g.user.id),None,5)
-    except:
-        return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+    if user is None:
+        try:
+            opener = urllib2.urlopen("{0}ask/reply/{1}/flag/{2}/".format(SITE_MIRROR,id,g.user.id),None,5)
+        except:
+            return jsonify({"error": gettext("The server is not responding. Please try again later.")})
 
     flag = reply.flags.filter_by(user=g.user).first()
     if flag:
@@ -218,12 +221,13 @@ def ask(user=None):
             return redirect(url_for('account.login'))
         elif user is None and g.user is None:
             abort(404)
-            
-        form_json = {"question": form.question.data, "body": form.body.data, "app": form.app.data, "tags": form.tags.data}
-        try:
-            opener = urllib2.urlopen("{0}ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
-        except:
-            return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+    
+        if user is None:
+            form_json = {"question": form.question.data, "body": form.body.data, "app": form.app.data, "tags": form.tags.data}
+            try:
+                opener = urllib2.urlopen("{0}ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
+            except:
+                return jsonify({"error": gettext("The server is not responding. Please try again later.")})
         
         timestamp = datetime.utcnow()
         slug = Question.make_unique_slug(form.question.data)

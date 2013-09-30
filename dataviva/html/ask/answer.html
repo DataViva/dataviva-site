@@ -183,7 +183,6 @@ d3.selectAll(".vote_up").on(vizwhiz.evt.click, function(){
 	var link_el = this;
   d3.select(link_el).select("i").attr("class","icon-cog icon-spin")
 	d3.json(link_el.href, function(resp){
-    console.log(link_el)
     d3.select(link_el).select("i").attr("class","icon-thumbs-up")
 		if(resp.error) {
 			dataviva.flash(resp.error)
