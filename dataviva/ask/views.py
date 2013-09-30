@@ -10,7 +10,7 @@ from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TY
 from dataviva.ask.forms import AskForm, ReplyForm, SearchForm
 from dataviva.utils import strip_html
 
-import urllib2
+import urllib2, urllib
 
 mod = Blueprint('ask', __name__, url_prefix='/ask')
 
@@ -224,9 +224,8 @@ def ask(user=None):
             
         if user is None:
             form_json = {"question": form.question.data, "body": form.body.data, "app": form.app.data, "tags": form.tags.data}
-
             try:
-                opener = urllib2.urlopen("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id),urllib2.urlencode(form_json),5)
+                opener = urllib2.urlopen("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
             except:
                 return jsonify({"error": gettext("The server is not responding. Please try again later.")})
         
