@@ -239,7 +239,7 @@ dataviva.format.text = function(text,name,l) {
       "num_emp": {"en": "Employees", "pt": "Empregados"},
       "num_est": {"en": "Establishments", "pt": "Estabelecimentos"},
       "num_emp_est": {"en": "Employees per Establishment", "pt": "Empregados por Estabelecimento"},
-      "wage": {"en": "Monthly Wage", "pt": "Massa Salarial"},
+      "wage": {"en": "Total Monthly Wages", "pt": "Renda Mensal Total"},
       "total_wage": {"en": "Total Monthly Wage", "pt": "Renda Mensal Total"},
       "wage_avg": {"en": "Average Monthly Wage", "pt": "Renda Mensal M\u00e9dia"},
       "wage_avg_bra": {"en": "Brazilian Average Wage", "pt": "Sal\u00e1rio M\u00e9dio Brasileiro"},
@@ -400,22 +400,23 @@ dataviva.format.number = function(value,name,l) {
     if (symbol && l == "pt") {
       var digit = parseFloat(value.toString().split(".")[0])
       if (symbol == "T") {
-        if (digit < 2) symbol = " Trilh\u00e3o"
-        else symbol = " Trilh\u00f5es"
+        if (digit < 2) symbol = "Trilh\u00e3o"
+        else symbol = "Trilh\u00f5es"
       }
       else if (symbol == "B") {
-        if (digit < 2) symbol = " Bilh\u00e3o"
-        else symbol = " Bilh\u00f5es"
+        if (digit < 2) symbol = "Bilh\u00e3o"
+        else symbol = "Bilh\u00f5es"
       }
       else if (symbol == "M") {
-        if (digit < 2) symbol = " Milh\u00e3o"
-        else symbol = " Milh\u00f5es"
+        if (digit < 2) symbol = "Milh\u00e3o"
+        else symbol = "Milh\u00f5es"
       }
       else if (symbol == "k") {
-        if (digit < 2) symbol = " Milhares"
-        else symbol = " Mil"
+        if (digit < 2) symbol = "Milhares"
+        else symbol = "Mil"
       }
     }
+    if (symbol) symbol = " "+symbol
     
     var return_value = value + symbol;
   }
