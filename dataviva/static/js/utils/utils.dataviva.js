@@ -191,14 +191,13 @@ dataviva.format.text = function(text,name,l) {
       "wld_5_plural": {"en": "Countries", "pt": "Pa\u00edses"},
     
       // Calculation Labels
-      "eci": {"en": "Domestic Complexity", "pt": "Complexidade Dom\u00e9stica"},
+      "eci": {"en": "Economic Complexity", "pt": "Complexidade Econ\u00f4mica"},
       "eci_desc": {"en": "Economic Complexity measures how diversified and complex a location’s export production is.", "pt": "Economic Complexity measures how diversified and complex a location’s export production is."},
-      "eci_wld": {"en": "International Complexity", "pt": "Complexidade Internacional"},
       "pci": {"en": "Product Complexity", "pt": "Complexidade do Produto"},
       "pci_desc": {"en": "Product Complexity is a measure of how complex a product is, based on how many countries export the product and how diversified those exporters are.", "pt": "Product Complexity is a measure of how complex a product is, based on how many countries export the product and how diversified those exporters are."},
       "unique_isic": {"en": "Unique Industries", "pt": "Atividades Econ\u00f4micas Exclusivas"},
       "unique_isic_desc": {"en": "The number of different industries that employ an occupation.", "pt": "The number of different industries that employ an occupation."},
-      "unique_cbo": {"en": "Unique Occupation", "pt": "Ocupa\u00e7\u00f5es Exclusivas"},
+      "unique_cbo": {"en": "Unique Occupations", "pt": "Ocupa\u00e7\u00f5es Exclusivas"},
       "unique_cbo_desc": {"en": "The number of different occupations that are employed in an industry.", "pt": "The number of different occupations that are employed in an industry."},
       "distance": {"en": "Distance", "pt": "Dist\u00e2ncia"},
       "distance_desc": {"en": "Distance is a measure used to indicate how “far away” any given location is from a particular industry, occupation or product.", "pt": "Distance is a measure used to indicate how “far away” any given location is from a particular industry, occupation or product."},

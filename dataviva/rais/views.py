@@ -28,6 +28,20 @@ def per_request_callbacks(response):
     # raise Exception(timing)
     return response
 
+def get_unique_isic(bra):
+    unique_isics = {}
+    ybs = Yb_rais.query.filter_by(bra_id=bra[0]["id"])
+    for yb in ybs.all():
+        unique_isics[yb.year] = yb.unique_isic
+    return unique_isics
+
+def get_unique_cbo(bra):
+    unique_cbos = {}
+    ybs = Yb_rais.query.filter_by(bra_id=bra[0]["id"])
+    for yb in ybs.all():
+        unique_cbos[yb.year] = yb.unique_cbo
+    return unique_cbos
+
 ''' Given a "bra" string from URL, turn this into an array of Bra
     objects'''
 def parse_bras(bra_str):
@@ -121,6 +135,8 @@ def get_query(data_table, url_args, **kwargs):
         elif "show" not in kwargs["bra_id"]:
             # otherwise we have been given specific bra(s)
             ret["location"] = parse_bras(kwargs["bra_id"])
+            ret["unique_isic"] = get_unique_isic(ret["location"])
+            ret["unique_cbo"] = get_unique_cbo(ret["location"])
             # filter query
             if len(ret["location"]) > 1:
                 if aggregate:

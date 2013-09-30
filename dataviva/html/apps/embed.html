@@ -186,6 +186,8 @@
     app.url = "{{ current_build.url() }}"
     app.data = {}
     app.ecis = {}
+    app.unique_isics = {}
+    app.unique_cbos = {}
     app.networks = {}
     app.coords = {}
     app.attrs = {}
@@ -336,7 +338,6 @@
         "required",
         "importance",
         "eci",
-        "eci_wld",
         "pci",
         "unique_isic",
         "unique_cbo",
@@ -394,7 +395,6 @@
       "distance_wld": dataviva.format.text("distance_desc"),
       "importance": dataviva.format.text("importance_desc"),
       "eci": dataviva.format.text("eci_desc"),
-      "eci_wld": dataviva.format.text("eci_desc"),
       "opp_gain": dataviva.format.text("opp_gain_desc"),
       "opp_gain_wld": dataviva.format.text("opp_gain_desc"),
       "pci": dataviva.format.text("pci_desc"),
@@ -521,7 +521,9 @@
                   .get(function(error,d){
                     app.data[app.build.data_url] = {}
                     app.data[app.build.data_url].raw = d.data
-                    app.ecis[app.build.data_url] = d.eci
+                    if (d.eci) app.ecis[app.build.data_url] = d.eci
+                    if (d.unique_isic) app.unique_isics[app.build.data_url] = d.unique_isic
+                    if (d.unique_cbo) app.unique_cbos[app.build.data_url] = d.unique_cbo
                     callback(error,d)
                   })
               },"/"+app.build.data_url)
@@ -978,14 +980,23 @@
               xv = app.vars.xaxis_var
         }
         if (app.vars.yaxis_var.indexOf("pci") >= 0) yv = app.vars.yaxis_var
-        if (!app.ecis[app.build.data_url]) var eci = null
-        else var eci = {"eci": app.ecis[app.build.data_url][app.vars.year]}
+        
+        var yval = null
+        if (app.build.output == "isic" && app.unique_cbos[app.build.data_url] && yv == "unique_cbo") {
+          var yval = {"unique_cbo": app.unique_cbos[app.build.data_url][app.vars.year]}
+        }
+        else if (app.build.output == "cbo" && app.unique_isics[app.build.data_url] && yv == "unique_isic") {
+          var yval = {"unique_isic": app.unique_isics[app.build.data_url][app.vars.year]}
+        }
+        else if (app.build.output == "hs" && app.ecis[app.build.data_url] && yv == "pci") {
+          var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
+        }
         app.viz
           .xaxis_var(xv)
           .yaxis_var(yv)
           .xaxis_scale("linear")
           .yaxis_scale("linear")
-          .yaxis_val(eci)
+          .yaxis_val(yval)
           .mirror_axis(false)
           .spotlight(app.vars.spotlight)
           .active_var(av)
@@ -1087,9 +1098,18 @@
           app.viz.title(app.build.title)
         }
         
-        if (type == "year" && app.build.app.type == "scatter" && app.ecis[app.build.data_url]) {
-          var eci = {"eci": app.ecis[app.build.data_url][app.vars.year]}
-          app.viz.yaxis_val(eci)
+        if (type == "year" && app.build.app.type == "scatter") {
+          var yval = null
+          if (app.build.output == "cbo" && app.unique_cbos[app.build.data_url] && app.vars.yaxis_var == "unique_cbo") {
+            var yval = {"unique_cbo": app.unique_cbos[app.build.data_url][app.vars.year]}
+          }
+          else if (app.build.output == "isic" && app.unique_isics[app.build.data_url] && app.vars.yaxis_var == "unique_isic") {
+            var yval = {"unique_isic": app.unique_isics[app.build.data_url][app.vars.year]}
+          }
+          else if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
+            var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
+          }
+          app.viz.yaxis_val(yval)
         }
 
         if (type == "axes") {
@@ -1129,7 +1149,19 @@
           else {
             var yv = app.vars.yaxis_var
           }
-          app.viz.yaxis_var(yv)
+          
+          var yval = null
+          if (app.build.output == "cbo" && app.unique_cbos[app.build.data_url] && app.vars.yaxis_var == "unique_cbo") {
+            var yval = {"unique_cbo": app.unique_cbos[app.build.data_url][app.vars.year]}
+          }
+          else if (app.build.output == "isic" && app.unique_isics[app.build.data_url] && app.vars.yaxis_var == "unique_isic") {
+            var yval = {"unique_isic": app.unique_isics[app.build.data_url][app.vars.year]}
+          }
+          else if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
+            var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
+          }
+          
+          app.viz.yaxis_var(yv).yaxis_val(yval)
         }
         else if (type == "value_var") {
           if (app.build.app.type != "occugrid") {
@@ -1336,6 +1368,7 @@ val)+": ", "suffix": ""};
       app.title_width -= (d3.select("#settings").node().offsetWidth*2)
         
       d3.selectAll("#builder > br").remove()
+      d3.selectAll("#app_controls > br").remove()
       
       var total_width = 0,
           settings_width = d3.select("#settings").node().offsetWidth,
@@ -1526,7 +1559,17 @@ val)+": ", "suffix": ""};
     }
     
     app.sub_title = function() {
-      if (app.ecis[app.build.data_url] && app.ecis[app.build.data_url][app.vars.year]) {
+      if (app.unique_isics[app.build.data_url] && app.unique_isics[app.build.data_url][app.vars.year] && app.build.output == "cbo") {
+        var t = dataviva.format.text("unique_isic")
+        var n = dataviva.format.number(app.unique_isics[app.build.data_url][app.vars.year],"unique_isic")
+        return t + ": " + n
+      }
+      else if (app.unique_cbos[app.build.data_url] && app.unique_cbos[app.build.data_url][app.vars.year] && app.build.output == "isic") {
+        var t = dataviva.format.text("unique_cbo")
+        var n = dataviva.format.number(app.unique_cbos[app.build.data_url][app.vars.year],"unique_cbo")
+        return t + ": " + n
+      }
+      else if (app.ecis[app.build.data_url] && app.ecis[app.build.data_url][app.vars.year]) {
         var t = dataviva.format.text("eci")
         var n = dataviva.format.number(app.ecis[app.build.data_url][app.vars.year],"eci")
         return t + ": " + n
