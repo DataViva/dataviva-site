@@ -3,11 +3,14 @@ from datetime import datetime
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, jsonify, abort, current_app
 from flask.ext.babel import gettext
 from dataviva import db, lm
+from config import SITE_MIRROR
 
 from dataviva.account.models import User
 from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE_REPLY, Flag
 from dataviva.ask.forms import AskForm, ReplyForm, SearchForm
 from dataviva.utils import strip_html
+
+import urllib2
 
 mod = Blueprint('ask', __name__, url_prefix='/ask')
 
@@ -74,7 +77,7 @@ def index(page):
     return render_template("ask/questions.html",
         search_form = search_form)
 
-@mod.route('/question/<slug>', methods=['GET', 'POST'])
+@mod.route('/question/<slug>/', methods=['GET', 'POST'])
 def answer(slug):
     reply_form = ReplyForm()
     question = Question.query.filter_by(slug=slug).first()
@@ -121,10 +124,21 @@ def answer(slug):
             tags = tags)
 
 @mod.route('/question/<slug>/vote/')
-def question_vote(slug):
+@mod.route('/question/<slug>/vote/<user>/')
+def question_vote(slug, user=None):
+    
     q = Question.query.filter_by(slug=slug).first_or_404()
-    if g.user is None or not g.user.is_authenticated():
-        return jsonify({"error": _("You need to be logged in to vote.")})
+    if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+        g.user = User.query.get(user)
+    elif g.user is None or not g.user.is_authenticated():
+        return jsonify({"error": gettext("You need to be logged in to vote.")})
+    elif user is None and g.user is None:
+        abort(404)
+        
+    try:
+        opener = urllib2.urlopen("{0}ask/question/{1}/vote/{2}/".format(SITE_MIRROR,slug,g.user.id),None,5)
+    except:
+        return jsonify({"error": gettext("The server is not responding. Please try again later.")})
         
     vote = q.votes.filter_by(user=g.user).first()
     if vote:
@@ -138,10 +152,20 @@ def question_vote(slug):
         return jsonify({"success": 1})
 
 @mod.route('/reply/<int:id>/vote/')
-def reply_vote(id):
+@mod.route('/reply/<int:id>/vote/<user>/')
+def reply_vote(id, user=None):
     reply = Reply.query.get_or_404(id)
-    if g.user is None or not g.user.is_authenticated():
-        return jsonify({"error": _("You need to be logged in to vote.")})
+    if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+        g.user = User.query.get(user)
+    elif g.user is None or not g.user.is_authenticated():
+        return jsonify({"error": gettext("You need to be logged in to vote.")})
+    elif user is None and g.user is None:
+        abort(404)
+    
+    try:
+        opener = urllib2.urlopen("{0}ask/reply/{1}/vote/{2}/".format(SITE_MIRROR,id,g.user.id),None,5)
+    except:
+        return jsonify({"error": gettext("The server is not responding. Please try again later.")})
 
     vote = reply.votes.filter_by(user=g.user).first()
     if vote:
@@ -155,10 +179,20 @@ def reply_vote(id):
         return jsonify({"success": 1})
 
 @mod.route('/reply/<int:id>/flag/')
-def reply_flag(id):
+@mod.route('/reply/<int:id>/flag/<user>/')
+def reply_flag(id, user=None):
     reply = Reply.query.get_or_404(id)
-    if g.user is None or not g.user.is_authenticated():
-        return jsonify({"error": _("You need to be logged in to flag replies.")})
+    if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+        g.user = User.query.get(user)
+    elif g.user is None or not g.user.is_authenticated():
+        return jsonify({"error": gettext("You need to be logged in to flag replies.")})
+    elif user is None and g.user is None:
+        abort(404)
+    
+    try:
+        opener = urllib2.urlopen("{0}ask/reply/{1}/flag/{2}/".format(SITE_MIRROR,id,g.user.id),None,5)
+    except:
+        return jsonify({"error": gettext("The server is not responding. Please try again later.")})
 
     flag = reply.flags.filter_by(user=g.user).first()
     if flag:
@@ -172,12 +206,25 @@ def reply_flag(id):
         return jsonify({"success": 1})
 
 @mod.route('/ask/', methods=['GET', 'POST'])
-def ask():
+@mod.route('/ask/<user>/', methods=['GET', 'POST'])
+def ask(user=None):
     form = AskForm()
     if form.validate_on_submit():
-        if g.user is None or not g.user.is_authenticated():
-            flash(_('You need to be logged in to ask questions.'))
+        
+        if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+            g.user = User.query.get(user)
+        elif g.user is None or not g.user.is_authenticated():
+            flash(gettext('You need to be logged in to ask questions.'))
             return redirect(url_for('account.login'))
+        elif user is None and g.user is None:
+            abort(404)
+            
+        form_json = {"question": form.question.data, "body": form.body.data, "app": form.app.data, "tags": form.tags.data}
+        try:
+            opener = urllib2.urlopen("{0}ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
+        except:
+            return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+        
         timestamp = datetime.utcnow()
         slug = Question.make_unique_slug(form.question.data)
         question = Question(question=form.question.data, body=form.body.data, timestamp=timestamp, user=g.user, slug=slug)
