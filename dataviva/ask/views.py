@@ -221,12 +221,12 @@ def ask(user=None):
             return redirect(url_for('account.login'))
         elif user is None and g.user is None:
             abort(404)
-    
+            
         if user is None:
             form_json = {"question": form.question.data, "body": form.body.data, "app": form.app.data, "tags": form.tags.data}
-            print ("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id))
+
             try:
-                opener = urllib2.urlopen("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
+                opener = urllib2.urlopen("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id),urllib2.urlencode(form_json),5)
             except:
                 return jsonify({"error": gettext("The server is not responding. Please try again later.")})
         
@@ -238,7 +238,7 @@ def ask(user=None):
             question.str_tags(tags)
         db.session.add(question)
         db.session.commit()
-        flash(_('Your question has been submitted and is pending approval.'))
+        flash(gettext('Your question has been submitted and is pending approval.'))
         if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
             return jsonify({"status": "Success"})
         else:
