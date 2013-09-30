@@ -224,6 +224,7 @@ def ask(user=None):
     
         if user is None:
             form_json = {"question": form.question.data, "body": form.body.data, "app": form.app.data, "tags": form.tags.data}
+            print ("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id))
             try:
                 opener = urllib2.urlopen("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
             except:
@@ -238,5 +239,8 @@ def ask(user=None):
         db.session.add(question)
         db.session.commit()
         flash(_('Your question has been submitted and is pending approval.'))
-        return redirect(url_for('ask.index'))
+        if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+            return jsonify({"status": "Success"})
+        else:
+            return redirect(url_for('ask.index'))
     return render_template("ask/ask.html", form = form)
