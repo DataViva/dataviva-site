@@ -225,7 +225,7 @@ def ask(user=None):
         if user is None:
             form_json = {"question": form.question.data, "body": form.body.data, "app": form.app.data, "tags": form.tags.data}
             try:
-                opener = urllib2.urlopen("{0}ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
+                opener = urllib2.urlopen("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
             except:
                 return jsonify({"error": gettext("The server is not responding. Please try again later.")})
         
