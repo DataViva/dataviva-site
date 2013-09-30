@@ -212,7 +212,7 @@ def reply_flag(id, user=None):
 @mod.route('/ask/<user>/', methods=['GET', 'POST'])
 def ask(user=None):
     form = AskForm()
-    if form.validate_on_submit():
+    if form.validate_on_submit() or (user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]):
         
         if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
             g.user = User.query.get(user)
