@@ -61,18 +61,15 @@ def update_user(user_id):
         if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
             
             user.role = request.json.get('role', user.role)
-        
             form_json = {"role": user.role}
-            print "\n\n\n"
-            print form_json
-            print "\n\n\n"
+            
             try:
                 opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
             except:
                 flash(gettext("The server is not responding. Please try again later."))
                 return jsonify({"error": gettext("The server is not responding. Please try again later.")})
         else:
-            user.role = request.role
+            user.role = request.form.get("role")
             
         db.session.add(user)
         db.session.commit()
@@ -116,16 +113,22 @@ def admin_questions_edit(status, question_id):
     if form.validate_on_submit() or request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
 
         if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
-            form_json = {"status": form.status, "answer": form.answer, "previous_status": form.previous_status}
+            
+            previous_status = form.previous_status.data
+            q.status = form.status.data
+            q.status_notes = form.answer.data
+        
+            form_json = {"status": q.status, "answer": q.status_notes, "previous_status": previous_status}
             try:
-                opener = urllib2.urlopen("{0}{2}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+                opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
             except:
                 flash(gettext("The server is not responding. Please try again later."))
                 return redirect(url_for('.admin_questions_edit', status=status,question_id=question_id,form=form))
-                
-        previous_status = form.previous_status.data
-        q.status = form.status.data
-        q.status_notes = form.answer.data
+        else:
+            previous_status = form.previous_status.data
+            q.status = form.status.data
+            q.status_notes = form.answer.data
+            
         db.session.add(q)
         db.session.commit()
         flash(gettext('This question has now been updated.'))
