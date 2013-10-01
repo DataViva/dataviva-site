@@ -195,7 +195,7 @@ dataviva.format.text = function(text,name,l) {
       "eci_desc": {"en": "Economic Complexity measures how diversified and complex a location’s export production is.", "pt": "Economic Complexity measures how diversified and complex a location’s export production is."},
       "pci": {"en": "Product Complexity", "pt": "Complexidade do Produto"},
       "pci_desc": {"en": "Product Complexity is a measure of how complex a product is, based on how many countries export the product and how diversified those exporters are.", "pt": "Product Complexity is a measure of how complex a product is, based on how many countries export the product and how diversified those exporters are."},
-      "unique_isic": {"en": "Unique Industries", "pt": "Atividades Econ\u00f4micas Exclusivas"},
+      "unique_isic": {"en": "Unique Industries", "pt": "Setores Exclusivos"},
       "unique_isic_desc": {"en": "The number of different industries that employ an occupation.", "pt": "The number of different industries that employ an occupation."},
       "unique_cbo": {"en": "Unique Occupations", "pt": "Ocupa\u00e7\u00f5es Exclusivas"},
       "unique_cbo_desc": {"en": "The number of different occupations that are employed in an industry.", "pt": "The number of different occupations that are employed in an industry."},
@@ -311,22 +311,22 @@ dataviva.format.text = function(text,name,l) {
       "Click to Zoom": {"en": "Click to Zoom", "pt": "Clique para Ampliar"},
       "filter": {"en": "Hide Group", "pt": "Ocultar Grupo"},
       "solo": {"en": "Solo Group", "pt": "S\u00f3 este Grupo"},
-      "reset": {"en": "Click to Reset all Filters", "pt": "Clicca per Annulla Tutti i Filtri"},
+      "reset": {"en": "Click to Reset all Filters", "pt": "Clique para Eliminar todos os Filtros"},
     
       // Ask Sabrina
       "Asked by": {"en": "Asked by", "pt": "Solicitado por"},
       "points": {"en": "Points", "pt": "Pontos"},
       "votes": {"en": "Top Voted", "pt": "Mais Votados"},
       "newest": {"en": "Newest", "pt": "O Mais Novo"},
-      "flagged": {"en": "This reply has been flagged", "pt": "Essa resposta foi marcado"},
-      "unflagged": {"en": "This flag on this reply has been removed", "pt": "O marcado sobre esta resposta foi removido"},
-      "voted": {"en": "Your vote has been added", "pt": "Seu voto foi adicionado"},
-      "unvoted": {"en": "Your vote was removed", "pt": "Seu voto foi removido"},
+      "flagged": {"en": "This reply has been flagged.", "pt": "Esta resposta foi marcada."},
+      "unflagged": {"en": "This flag on this reply has been removed.", "pt": "A marca desta resposta foi retirada."},
+      "voted": {"en": "Your vote has been added.", "pt": "Seu voto foi enviado."},
+      "unvoted": {"en": "Your vote was removed.", "pt": "Seu voto foi removido."},
       
       // Admin
       "edit": {"en": "Edit", "pt": "Editar"},
       "visible": {"en": "Visible", "pt": "Vis\u00edvel"},
-      "hidden": {"en": "Hidden", "pt": "Escondido"},
+      "hidden": {"en": "Hidden", "pt": "Oculto"},
       "user": {"en": "User", "pt": "Usu\u00e1rio"},
       "admin": {"en": "Admin", "pt": "Administrador"},
       
@@ -335,7 +335,7 @@ dataviva.format.text = function(text,name,l) {
       "search_results": {"en": "Search Results", "pt": "Resultados da Pesquisa"},
       "select": {"en": "Select", "pt": "Escolher"},
       "show": {"en": "Show", "pt": "Mostrar"},
-      "loading_attrs": {"en": "Loading Attribute List", "pt": "Carregar Lista de Atributos"}
+      "loading_attrs": {"en": "Loading Attribute List", "pt": "Carregando Lista de Atributos"}
     
     }
     

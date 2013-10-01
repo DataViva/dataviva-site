@@ -147,7 +147,7 @@ def classifications(attr = None, depth = None, page = 1):
             depth = "1"
         depths = ["1","3","5"]
         if g.locale == "pt":
-            title = u"Atividades Econômicas pela Classificação ISIC"
+            title = u"Atividades Econômicas por Classificação ISIC"
         else:
             title = u"Industries by ISIC Classification"
     elif attr == "cbo":
@@ -156,7 +156,7 @@ def classifications(attr = None, depth = None, page = 1):
             depth = "1"
         depths = ["1","4"]
         if g.locale == "pt":
-            title = u"Ocupações por Classificação CBO"
+            title = u"Profissões por Classificação CBO"
         else:
             title = u"Occupations by CBO Classification"
     elif attr == "hs":
@@ -165,7 +165,7 @@ def classifications(attr = None, depth = None, page = 1):
             depth = "2"
         depths = ["2","4","6"]
         if g.locale == "pt":
-            title = u"Produtos da Classificação HS"
+            title = u"Produtos por Classificação HS"
         else:
             title = u"Products by HS Classification"
     

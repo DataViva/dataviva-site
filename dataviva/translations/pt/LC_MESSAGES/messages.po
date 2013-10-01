@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-27 14:56-0400\n"
+"POT-Creation-Date: 2013-10-01 16:53-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -17,41 +17,50 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: dataviva/admin/views.py:99
+#: dataviva/account/views.py:119 dataviva/admin/views.py:69
+#: dataviva/admin/views.py:70 dataviva/admin/views.py:123
+#: dataviva/admin/views.py:183 dataviva/admin/views.py:184
+#: dataviva/apps/views.py:148 dataviva/ask/views.py:99
+#: dataviva/ask/views.py:152 dataviva/ask/views.py:180
+#: dataviva/ask/views.py:210 dataviva/ask/views.py:242
+msgid "The server is not responding. Please try again later."
+msgstr "O servidor não está respondendo. Por favor, tente novamente mais tarde."
+
+#: dataviva/admin/views.py:131
 msgid "This question has now been updated."
-msgstr "Esta questão já foi atualizado."
+msgstr "Esta pergunta foi atualizada."
 
-#: dataviva/apps/views.py:131
+#: dataviva/apps/views.py:137
 msgid "You need to be logged in to star apps."
-msgstr "Você precisa estar logado para aplicações de estrelas."
+msgstr "Você precisa fazer o log in para iniciar aplicativos."
 
-#: dataviva/ask/views.py:87
+#: dataviva/ask/views.py:91
 msgid "You need to be signed in to reply to questions."
-msgstr "Você precisa fazer o login para responder a perguntas."
+msgstr "Você precisa fazer o log in para responder perguntas."
 
-#: dataviva/ask/views.py:98
+#: dataviva/ask/views.py:111
 msgid "Reply submitted."
-msgstr "Responder submetido."
+msgstr "Resposta enviada."
 
-#: dataviva/ask/views.py:127 dataviva/ask/views.py:144
+#: dataviva/ask/views.py:144 dataviva/ask/views.py:172
 msgid "You need to be logged in to vote."
-msgstr "Você precisa estar logado para votar."
+msgstr "Você precisa fazer o log in para votar."
 
-#: dataviva/ask/views.py:161
+#: dataviva/ask/views.py:202
 msgid "You need to be logged in to flag replies."
-msgstr "Você precisa estar logado para respostas bandeira."
+msgstr "Você precisa fazer o log in para marcar respostas."
 
-#: dataviva/ask/views.py:179
+#: dataviva/ask/views.py:232
 msgid "You need to be logged in to ask questions."
-msgstr "Você precisa estar logado para fazer perguntas."
+msgstr "Você precisa fazer o log in para fazer perguntas."
 
-#: dataviva/ask/views.py:189
+#: dataviva/ask/views.py:253
 msgid "Your question has been submitted and is pending approval."
-msgstr "Sua pergunta foi enviado e está aguardando aprovação."
+msgstr "Sua pergunta foi submetida e está pendente de aprovação."
 
 #: dataviva/guide/decorators.py:9
 msgid "You need to be logged in to view this page."
-msgstr "Você precisa estar logado para ver esta página."
+msgstr "Você precisa fazer o log in para ver essa página."
 
 #: dataviva/guide/views.py:145 dataviva/profiles/views.py:41
 msgid "an occupation"
@@ -99,15 +108,13 @@ msgstr "Tudo"
 
 #: dataviva/html/home.html:14
 msgid "Visualizing the Economy of Minas Gerais and Brazil"
-msgstr "Visualizando da Economia de Minas Gerais e do Brasil"
+msgstr "Visualizando a Economia de Minas Gerais e do Brasil."
 
 #: dataviva/html/home.html:15
 msgid ""
 "DataViva is an initiative of the Government of Minas Gerais to visualize "
 "public data."
-msgstr ""
-"DataViva é uma iniciativa do Governo de Minas Gerais para visualizar "
-"dados públicos."
+msgstr "O DataViva é uma iniciativa do Governo de Minas Gerais para visualização de dados públicos."
 
 #: dataviva/html/home.html:19 dataviva/html/apps/index.html:4
 #: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:14
@@ -267,7 +274,7 @@ msgstr "Responder"
 
 #: dataviva/html/admin/admin_replies.html:14
 msgid "Flags"
-msgstr "Sinalizadores"
+msgstr "Bandeiras"
 
 #: dataviva/html/admin/admin_replies.html:15
 msgid "Visibility"
@@ -334,7 +341,7 @@ msgid "Next"
 msgstr "Próximo"
 
 #: dataviva/html/ask/answer.html:5 dataviva/html/ask/ask.html:4
-#: dataviva/html/ask/ask.html:61 dataviva/html/ask/questions.html:4
+#: dataviva/html/ask/ask.html:62 dataviva/html/ask/questions.html:4
 msgid "Ask Sabrina"
 msgstr "Pergunte à Sabrina"
 
@@ -344,7 +351,7 @@ msgstr "Pontos"
 
 #: dataviva/html/ask/answer.html:32 dataviva/html/ask/answer.html:99
 msgid "This question contributes to a better understanding of the topic."
-msgstr "Esta questão contribui para uma melhor compreensão do tema."
+msgstr "Esta questão contribui para um melhor entendimento do tópico."
 
 #: dataviva/html/ask/answer.html:50 dataviva/html/ask/ask.html:55
 msgid "Tags"
@@ -367,16 +374,14 @@ msgid ""
 "Flagged replies are reviewed by DataViva staff to determine if they "
 "violate community guidelines. Accounts are penalized for violations and "
 "can lead to account termination."
-msgstr ""
-"Respostas sinalizadas são revisados pela equipe DataViva para determinar "
-"se eles violam as diretrizes da comunidade. As contas são penalizadas por"
-" violações e pode levar ao encerramento da conta."
+msgstr "Respostas destacadas são revisadas pela equipe do DataViva para determinar se violaram as normas da comunidade. As contas são penalizadas por violações e podem ser canceladas."
 
 #: dataviva/html/ask/answer.html:106
 msgid ""
 "This reply has been flagged as inappropriate and hidden by an "
 "administrator."
-msgstr "Esta resposta foi sinalizado como impróprio e escondido por um administrador."
+msgstr ""
+"Esta resposta foi marcada pelo administrador como inapropriada."
 
 #: dataviva/html/ask/answer.html:118
 msgid "Respond to"
@@ -400,13 +405,13 @@ msgstr "Você precisa fazer o login para utilizar essa funcionalidade."
 
 #: dataviva/html/ask/ask.html:42
 msgid "Ex. Where does the data come from?"
-msgstr "Ex. Onde é que os dados vêm?"
+msgstr "Ex. De onde vem os dados?"
 
 #: dataviva/html/ask/ask.html:52
 msgid "App"
 msgstr "Aplicativo"
 
-#: dataviva/html/ask/ask.html:68
+#: dataviva/html/ask/ask.html:69
 msgid "Click here to login"
 msgstr "Clique aqui para acessar o site"
 
@@ -830,11 +835,6 @@ msgstr "Perfil"
 msgid "Logout"
 msgstr "Sair"
 
-#: dataviva/html/templates/site.html:100
-msgid "Sponsored by"
-msgstr "Patrocinado por"
-
 #: dataviva/profiles/views.py:49
 msgid "a country"
 msgstr "um país"
-
