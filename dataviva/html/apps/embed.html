@@ -425,7 +425,7 @@
     
     // Start building a new app
     app.start = function(new_url,allyears) {
-          
+      
       // Hide popover
       dataviva.popover.hide()
       app.allyears = allyears
@@ -1856,33 +1856,54 @@ val)+": ", "suffix": ""};
       var doc_title = "DataViva : "+app.build.app.name+" : "+app.build.title;
       document.title = doc_title
                         
-      window_url = app.url
+      var window_url = app.url
       
+      var window_params = ""
       if (Object.keys(app.vars).length > 0) {
-        window_url += "/?"
+        window_params += "/?"
         url_vars = []
         for (v in app.vars) {
           if (v != "controls" || (v == "controls" && app.vars.builder != "false")) {
             url_vars.push(v + "=" + app.vars[v])
           }
         }
-        window_url += url_vars.join("&");
+        window_params += url_vars.join("&");
       }
       
+      var full_url = "/apps/embed/"+window_url+window_params
+      var replace = window.location.pathname.indexOf(window_url) >= 0
+      var iframe = window != window.parent && window.parent.location.pathname.indexOf("builder") >= 0
+      
       if (Modernizr.history) {
-        window.history.replaceState(
-          {'prev_request': "/apps/embed/"+window_url}, doc_title, "/apps/embed/"+window_url
-        )
-        if (window != window.parent &&
-            window.parent.location.pathname.indexOf("builder") >= 0) {
+        if (replace || iframe) {
+          window.history.replaceState({'prev_request': full_url}, doc_title, full_url)
+        }
+        else {
+          window.history.pushState({'prev_request': full_url}, doc_title, full_url)
+        }
+        
+        if (iframe) {
           window.parent.document.title = doc_title
-          window.parent.history.replaceState(
-            {'prev_request': "/apps/builder/"+window_url}, doc_title, "/apps/builder/"+window_url
-          )
+      
+          var builder_url = "/apps/builder/"+window_url+window_params
+          if (replace) {
+            window.parent.history.replaceState({'prev_request': builder_url}, doc_title, builder_url)
+          }
+          else {
+            window.parent.history.pushState({'prev_request': builder_url}, doc_title, builder_url)
+          }
         }
       } 
-      else if (window.location.href.indexOf(window_url) < 0) {
-        window.location = "/apps/embed/"+window_url
+      else if (window.location.href.indexOf(window_url+window_params) < 0) {
+        
+        if (window != window.parent && window.parent.location.pathname.indexOf("builder") >= 0) {
+          var builder_url = "/apps/builder/"+window_url+window_params
+          window.parent.location = builder_url
+        }
+        else {
+          window.location = full_url
+        }
+        
       }
         
     }
@@ -2031,6 +2052,13 @@ val)+": ", "suffix": ""};
     /* Initialize First App */
     /************************/
    app.start()
+   
+   if (Modernizr.history) {
+     window.onpopstate = function() {
+       var u = window.location.href.split("/embed/")[1].split("/?")[0]
+       if (u != app.url) app.start(u)
+     }
+   }
   
   </script>
 

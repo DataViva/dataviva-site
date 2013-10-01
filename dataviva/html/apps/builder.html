@@ -6,7 +6,7 @@
 {% block body %}
 
   <div class="lightbox">
-    <iframe class="app_builder"></iframe>
+    <iframe id="bulder_iframe" class="app_builder"></iframe>
   </div>
 
 {% endblock %}
@@ -26,6 +26,14 @@
       .style("height",height+"px")
       .style("width",width+"px")
       .attr("src",window.location.href.replace("builder","embed"))
+      
+    if (Modernizr.history) {
+      window.onpopstate = function() {
+        var u = window.location.href.split("/builder/")[1].split("/?")[0]
+        var app = document.getElementById("bulder_iframe").contentWindow.app
+        if (app && u != app.url) app.start(u)
+      }
+    }
 
   </script>
 
