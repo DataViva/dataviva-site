@@ -2,6 +2,7 @@ import json
 from sqlalchemy import or_
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, jsonify, abort, current_app
 from flask.ext.login import login_user, logout_user, current_user, login_required
+from flask.ext.babel import gettext
 from dataviva import db, lm
 from forms import LoginForm, UserEditForm
 from datetime import datetime
@@ -15,6 +16,9 @@ from dataviva.ask.forms import AskForm
 from dataviva.utils import exist_or_404
 # login types
 from dataviva.account.login_providers import facebook, twitter, google
+
+from config import SITE_MIRROR
+import urllib2, urllib
 
 mod = Blueprint('account', __name__, url_prefix='/account')
 
@@ -30,10 +34,6 @@ def page_not_found(error):
 @lm.user_loader
 def load_user(id):
     return User.query.get(int(id))
-
-@mod.route('/complete_login/')
-def complete_login():
-    return render_template('account/complete_login.html')
 
 ###############################
 # Views for ALL logged in users
@@ -94,17 +94,31 @@ def user(nickname):
         user = user,
         activity = activity)
 
-
+@mod.route('/complete_login/', methods=['GET', 'POST'])
 def after_login(**user_fields):
     # Remove None values
     user_fields = {k:v for k,v in user_fields.items() if v is not None}
+    
+    if request.method == "POST":
+        user_fields = request.form
+    
     if "google_id" in user_fields:
         user = User.query.filter_by(google_id = user_fields["google_id"]).first()
     elif "twitter_id" in user_fields:
         user = User.query.filter_by(twitter_id = user_fields["twitter_id"]).first()
     elif "facebook_id" in user_fields:
         user = User.query.filter_by(facebook_id = user_fields["facebook_id"]).first()
+        
     if user is None:
+            
+        if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
+            form_json = user_fields
+            try:
+                opener = urllib2.urlopen("{0}account/complete_login/".format(SITE_MIRROR),urllib.urlencode(form_json),5)
+            except:
+                flash(gettext("The server is not responding. Please try again later."))
+                return render_template('account/complete_login.html')
+        
         nickname = user_fields["nickname"] if "nickname" in user_fields else None
         if nickname is None or nickname == "":
             nickname = user_fields["email"].split('@')[0]
@@ -113,17 +127,17 @@ def after_login(**user_fields):
         user = User(**user_fields)
         db.session.add(user)
         db.session.commit()
-    remember_me = False
-    if 'remember_me' in session:
-        remember_me = session['remember_me']
-        session.pop('remember_me', None)
-    login_user(user, remember = remember_me)
+        
+    if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+        return jsonify({"success": 1})
+    else:
+        remember_me = False
+        if 'remember_me' in session:
+            remember_me = session['remember_me']
+            session.pop('remember_me', None)
+        login_user(user, remember = remember_me)
 
-    return redirect(url_for('account.complete_login'))
-
-
-
-
+        return render_template('account/complete_login.html')
 
 """
     TWITTER LOGIN
