@@ -109,7 +109,7 @@ def admin_questions_edit(status, question_id):
     s = Status.query.filter_by(name=status).first_or_404()
     form = AdminQuestionUpdateForm()
     
-    if form.validate_on_submit() or request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+    if request.method == "POST":
 
         if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
         
@@ -127,7 +127,11 @@ def admin_questions_edit(status, question_id):
         db.session.add(q)
         db.session.commit()
         flash(gettext('This question has now been updated.'))
-        return redirect(url_for('.admin_questions', status=previous_status))
+        
+        if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+            return jsonify({"success": 1})
+        else:
+            return redirect(url_for('.admin_questions', status=previous_status))
     
     # set defaults
     form.status.data = s
