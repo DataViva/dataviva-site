@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 from werkzeug.contrib.cache import RedisCache
+from redis import Redis
 
 '''
     Used for finding environment variables through configuration
@@ -60,7 +61,10 @@ WHOOSH_BASE = os.path.join(basedir, 'search.db')
     Setup redis caching connection to be used throughout the site. Credentials
     are set in their respective env vars.
 '''
-REDIS = RedisCache(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"), 
+REDIS = Redis(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"), 
+         port=get_env_variable("DATAVIVA_REDIS_PORT", 6379), 
+         password=get_env_variable("DATAVIVA_REDIS_PW", None))
+REDIS_CACHE = RedisCache(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"), 
          port=get_env_variable("DATAVIVA_REDIS_PORT", 6379), 
          password=get_env_variable("DATAVIVA_REDIS_PW", None), default_timeout=2591999)
 

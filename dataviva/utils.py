@@ -6,7 +6,7 @@ from flask import abort, current_app
 from datetime import datetime, date, timedelta
 from math import ceil
 from uuid import uuid4
-from redis import Redis
+from config import REDIS
 
 from flask.sessions import SessionInterface, SessionMixin
 
@@ -123,7 +123,7 @@ def gzip_data(json):
 ''' Get/Sets a given ID in the cache. If data is not supplied, 
     used as getter'''
 def cached_query(id, data=None):
-    c = current_app.config.get('REDIS')
+    c = current_app.config.get('REDIS_CACHE')
     if data is None:
         return c.get(id)
     return c.set(id, data)
@@ -181,7 +181,7 @@ class RedisSessionInterface(SessionInterface):
 
     def __init__(self, redis=None, prefix='session:'):
         if redis is None:
-            redis = Redis()
+            redis = REDIS
         self.redis = redis
         self.prefix = prefix
 
