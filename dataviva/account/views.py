@@ -96,11 +96,11 @@ def user(nickname):
 
 @mod.route('/complete_login/', methods=['GET', 'POST'])
 def after_login(**user_fields):
-    # Remove None values
-    user_fields = {k:v for k,v in user_fields.items() if v is not None}
     
     if request.method == "POST":
-        user_fields = request.form
+        user_fields = {k:v for k,v in request.form.items() if v is not None}
+    else:
+        user_fields = {k:v for k,v in user_fields.items() if v is not None}
     
     if "google_id" in user_fields:
         user = User.query.filter_by(google_id = user_fields["google_id"]).first()
