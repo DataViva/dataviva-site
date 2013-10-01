@@ -103,7 +103,6 @@ def admin_questions(status=None):
     return render_template("admin/admin_questions.html")
 
 @mod.route('/questions/<status>/<int:question_id>/', methods=['GET', 'POST'])
-@login_required
 def admin_questions_edit(status, question_id):
     
     q = Question.query.get_or_404(question_id)
@@ -113,22 +112,18 @@ def admin_questions_edit(status, question_id):
     if form.validate_on_submit() or request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
 
         if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
-            
-            previous_status = form.previous_status.data
-            q.status = form.status.data
-            q.status_notes = form.answer.data
         
-            form_json = {"status": q.status, "answer": q.status_notes, "previous_status": previous_status}
+            form_json = {"status": form.status.data, "answer": form.answer.data, "previous_status": form.previous_status.data}
+            
             try:
                 opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
             except:
                 flash(gettext("The server is not responding. Please try again later."))
                 return redirect(url_for('.admin_questions_edit', status=status,question_id=question_id,form=form))
-        else:
-            previous_status = form.previous_status.data
-            q.status = form.status.data
-            q.status_notes = form.answer.data
-            
+
+        previous_status = form.previous_status.data
+        q.status = form.status.data
+        q.status_notes = form.answer.data
         db.session.add(q)
         db.session.commit()
         flash(gettext('This question has now been updated.'))
@@ -171,17 +166,19 @@ def update_reply(reply_id):
     #   -d '{"role":2}' http://localhost:5000/admin/user/1
     
     if (g.user.is_authenticated() and g.user.role == 1) or (request.remote_addr == SITE_MIRROR.split(":")[1][2:]):
-
+    
+        reply = Reply.query.get(reply_id)
         if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
-            form_json = {"json": request.json}
+            reply.hidden = request.json.get('hidden', reply.hidden)
+            form_json = {"hidden": reply.hidden}
             try:
-                opener = urllib2.urlopen("{0}{2}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+                opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
             except:
                 flash(gettext("The server is not responding. Please try again later."))
                 return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+        else:
+            reply.hidden = request.form.get("hidden")
     
-        reply = Reply.query.get(reply_id)
-        reply.hidden = request.json.get('hidden', reply.hidden)
         db.session.add(reply)
         db.session.commit()
     
