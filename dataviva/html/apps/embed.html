@@ -1215,7 +1215,7 @@
               if (!d.num_emp) d.num_emp = 0
               if (!d.num_est) d.num_est = 0
               
-              if (d.num_est > 0) d.num_emp_est = d.num_emp/d.num_est
+              if (d.num_est > 0) d.num_emp_est = Math.ceil(d.num_emp/d.num_est)
               else d.num_emp_est = 0
           
               if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp
