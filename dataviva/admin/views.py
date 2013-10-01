@@ -48,25 +48,32 @@ def admin_users():
     
     return render_template("admin/admin_users.html")
 
-@mod.route('/user/<int:user_id>/', methods = ['PUT'])
-@login_required
+@mod.route('/user/<int:user_id>/', methods = ['PUT','POST'])
 def update_user(user_id):
     # test with:
     # curl -i -H "Content-Type: application/json" -X PUT 
     #   -d '{"role":2}' http://localhost:5000/admin/user/1
     
     if (g.user.is_authenticated() and g.user.role == 1) or (request.remote_addr == SITE_MIRROR.split(":")[1][2:]):
+        
+        user = User.query.get(user_id)
 
         if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
-            form_json = {"json": request.json}
+            
+            user.role = request.json.get('role', user.role)
+        
+            form_json = {"role": user.role}
+            print "\n\n\n"
+            print form_json
+            print "\n\n\n"
             try:
-                opener = urllib2.urlopen("{0}{2}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+                opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
             except:
                 flash(gettext("The server is not responding. Please try again later."))
                 return jsonify({"error": gettext("The server is not responding. Please try again later.")})
-                
-        user = User.query.get(user_id)
-        user.role = request.json.get('role', user.role)
+        else:
+            user.role = request.role
+            
         db.session.add(user)
         db.session.commit()
     
@@ -154,8 +161,7 @@ def admin_replies():
     
     return render_template("admin/admin_replies.html")
 
-@mod.route('/reply/<int:reply_id>/', methods = ['PUT'])
-@login_required
+@mod.route('/reply/<int:reply_id>/', methods = ['PUT','POST'])
 def update_reply(reply_id):
     # test with:
     # curl -i -H "Content-Type: application/json" -X PUT 

@@ -86,15 +86,15 @@ def answer(slug):
     if request.method == 'POST':
         
         if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-            g.user = User.query.get(request.form.user)
+            g.user = User.query.get(request.form["user"])
         elif g.user is None or not g.user.is_authenticated():
             flash(gettext('You need to be signed in to reply to questions.'))
             return redirect(url_for('.answer', slug=question.slug))
-        
+            
         if "user" not in request.form:
-            form_json = {"user": g.user.id, "reply": reply_form.reply, "parent": reply_form.parent}
+            form_json = {"user": g.user.id, "reply": reply_form.reply.data, "parent": reply_form.parent.data}
             try:
-                opener = urllib2.urlopen("{0}{2}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+                opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
             except:
                 flash(gettext("The server is not responding. Please try again later."))
                 return redirect(url_for('.answer', slug=question.slug))
