@@ -41,7 +41,9 @@ function item_formatter(container_el, activities){
   change_role = function(reply,value) {
     d3.json("/admin/reply/"+reply+"/")
       .header("Content-type", "application/json")
-      .send("PUT", '{"hidden": '+value+'}', function(error, text) { console.log("Error: "+error); });
+      .send("PUT", '{"hidden": '+value+'}', function(error, text) { 
+        if (error || (text && text.error)) location.reload()
+      });
   }
   
 	attrs_enter.append("td").attr("class","hidden_toggle").selectAll("input")

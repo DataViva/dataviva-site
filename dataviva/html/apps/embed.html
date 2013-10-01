@@ -1472,7 +1472,7 @@ val)+": ", "suffix": ""};
             return s == 1 ? "icon-star" : "icon-star-empty";
           })
       }
-
+      
       var id = d3.select("#starred > i").attr("id")
       var current_status = parseInt(id.split("_")[1],10)
       
@@ -1484,12 +1484,21 @@ val)+": ", "suffix": ""};
       }
       else {
         
+        d3.select("#starred > i")
+          .attr("class",function(){
+            return this.className + " icon-spin"
+          })
+        
         var url = window.location.pathname.replace("embed","star")
           
         d3.json(url)
           .header("Content-type","application/x-www-form-urlencoded")
           .post("title="+app.build.title, function(error,data) {
-            update_star(data.success)
+            if (data.error) {
+              alert(data.error)
+              update_star(current_status)
+            }
+            else if (data.success) update_star(data.success)
           })
       }
         

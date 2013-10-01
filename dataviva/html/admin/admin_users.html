@@ -47,7 +47,9 @@ function item_formatter(container_el, activities){
   change_role = function(user,value) {
     d3.json("/admin/user/"+user+"/")
       .header("Content-type", "application/json")
-      .send("PUT", '{"role": '+value+'}', function(error, text) { console.log("Error: "+error); });
+      .send("PUT", '{"role": '+value+'}', function(error, text) { 
+        if (error || (text && text.error)) location.reload()
+      });
   }
   
   attrs_enter.append("td").attr("class","role_toggle").selectAll("input")

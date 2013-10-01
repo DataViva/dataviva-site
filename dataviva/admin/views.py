@@ -2,6 +2,7 @@ from sqlalchemy import func
 from flask import Blueprint, render_template, g, redirect, url_for, \
     flash, request, jsonify
 from flask.ext.login import login_required
+from flask.ext.babel import gettext
 from dataviva import db
 from datetime import datetime
 # models
@@ -9,6 +10,9 @@ from dataviva.account.models import User
 from dataviva.ask.models import Question, Status, Reply, Flag
 # forms
 from dataviva.admin.forms import AdminQuestionUpdateForm
+
+import urllib2, urllib
+from config import SITE_MIRROR
 
 mod = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -51,12 +55,24 @@ def update_user(user_id):
     # curl -i -H "Content-Type: application/json" -X PUT 
     #   -d '{"role":2}' http://localhost:5000/admin/user/1
     
-    user = User.query.get(user_id)
-    user.role = request.json.get('role', user.role)
-    db.session.add(user)
-    db.session.commit()
+    if (g.user.is_authenticated() and g.user.role == 1) or (request.remote_addr == SITE_MIRROR.split(":")[1][2:]):
+
+        if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
+            form_json = {"json": request.json}
+            try:
+                opener = urllib2.urlopen("{0}{2}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+            except:
+                flash(gettext("The server is not responding. Please try again later."))
+                return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+                
+        user = User.query.get(user_id)
+        user.role = request.json.get('role', user.role)
+        db.session.add(user)
+        db.session.commit()
     
-    return jsonify( {'user': user.serialize()} )
+        return jsonify( {'user': user.serialize()} )
+    else:
+        abort(404)
 
 @mod.route('/questions/')
 @mod.route('/questions/<status>/')
@@ -90,13 +106,22 @@ def admin_questions_edit(status, question_id):
     s = Status.query.filter_by(name=status).first_or_404()
     form = AdminQuestionUpdateForm()
     
-    if form.validate_on_submit():
+    if form.validate_on_submit() or request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+
+        if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
+            form_json = {"status": form.status, "answer": form.answer, "previous_status": form.previous_status}
+            try:
+                opener = urllib2.urlopen("{0}{2}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+            except:
+                flash(gettext("The server is not responding. Please try again later."))
+                return redirect(url_for('.admin_questions_edit', status=status,question_id=question_id,form=form))
+                
         previous_status = form.previous_status.data
         q.status = form.status.data
         q.status_notes = form.answer.data
         db.session.add(q)
         db.session.commit()
-        flash(_('This question has now been updated.'))
+        flash(gettext('This question has now been updated.'))
         return redirect(url_for('.admin_questions', status=previous_status))
     
     # set defaults
@@ -136,9 +161,23 @@ def update_reply(reply_id):
     # curl -i -H "Content-Type: application/json" -X PUT 
     #   -d '{"role":2}' http://localhost:5000/admin/user/1
     
-    reply = Reply.query.get(reply_id)
-    reply.hidden = request.json.get('hidden', reply.hidden)
-    db.session.add(reply)
-    db.session.commit()
+    if (g.user.is_authenticated() and g.user.role == 1) or (request.remote_addr == SITE_MIRROR.split(":")[1][2:]):
+
+        if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
+            form_json = {"json": request.json}
+            try:
+                opener = urllib2.urlopen("{0}{2}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+            except:
+                flash(gettext("The server is not responding. Please try again later."))
+                return jsonify({"error": gettext("The server is not responding. Please try again later.")})
     
-    return jsonify( {'reply': reply.serialize()} )
+        reply = Reply.query.get(reply_id)
+        reply.hidden = request.json.get('hidden', reply.hidden)
+        db.session.add(reply)
+        db.session.commit()
+    
+        return jsonify( {'reply': reply.serialize()} )
+    else:
+        abort(404)
+    
+    

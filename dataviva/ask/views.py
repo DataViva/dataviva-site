@@ -79,16 +79,26 @@ def index(page):
 
 @mod.route('/question/<slug>/', methods=['GET', 'POST'])
 def answer(slug):
-    reply_form = ReplyForm()
-    question = Question.query.filter_by(slug=slug).first()
-    if not question:
-        question = Question.query.filter_by(id=slug).first_or_404()
-        return redirect(url_for("ask.answer", slug=question.slug))
     
-    if reply_form.validate_on_submit():
-        if g.user is None or not g.user.is_authenticated():
-            flash(_('You need to be signed in to reply to questions.'))
+    reply_form = ReplyForm()
+    question = Question.query.filter_by(slug=slug).first_or_404()
+    
+    if request.method == 'POST':
+        
+        if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+            g.user = User.query.get(request.form.user)
+        elif g.user is None or not g.user.is_authenticated():
+            flash(gettext('You need to be signed in to reply to questions.'))
             return redirect(url_for('.answer', slug=question.slug))
+        
+        if "user" not in request.form:
+            form_json = {"user": g.user.id, "reply": reply_form.reply, "parent": reply_form.parent}
+            try:
+                opener = urllib2.urlopen("{0}{2}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+            except:
+                flash(gettext("The server is not responding. Please try again later."))
+                return redirect(url_for('.answer', slug=question.slug))
+            
         timestamp = datetime.utcnow()
         reply = Reply(body=reply_form.reply.data, timestamp=timestamp, 
                         user=g.user, question=question, parent_id=reply_form.parent.data)
@@ -98,7 +108,7 @@ def answer(slug):
             reply.parent_id = reply.id
             db.session.add(reply)
             db.session.commit()
-        flash(_('Reply submitted.'))
+        flash(gettext('Reply submitted.'))
         return redirect(url_for('ask.answer', slug=question.slug))
     else:
         question.vote = False
@@ -183,7 +193,9 @@ def reply_vote(id, user=None):
 @mod.route('/reply/<int:id>/flag/')
 @mod.route('/reply/<int:id>/flag/<user>/')
 def reply_flag(id, user=None):
+    
     reply = Reply.query.get_or_404(id)
+    
     if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
         g.user = User.query.get(user)
     elif g.user is None or not g.user.is_authenticated():
@@ -212,7 +224,7 @@ def reply_flag(id, user=None):
 @mod.route('/ask/<user>/', methods=['GET', 'POST'])
 def ask(user=None):
     form = AskForm()
-    if form.validate_on_submit() or (user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]):
+    if request.method == 'POST':
         
         if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
             g.user = User.query.get(user)
@@ -227,7 +239,8 @@ def ask(user=None):
             try:
                 opener = urllib2.urlopen("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
             except:
-                return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+                flash(gettext("The server is not responding. Please try again later."))
+                return render_template("ask/ask.html", form = form)
         
         timestamp = datetime.utcnow()
         slug = Question.make_unique_slug(form.question.data)

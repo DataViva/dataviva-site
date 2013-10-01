@@ -5,6 +5,7 @@ from datetime import datetime
 from collections import defaultdict
 from sqlalchemy import func
 from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, url_for
+from flask.ext.babel import gettext
 
 from dataviva import db
 from dataviva.data.forms import DownloadForm
@@ -14,7 +15,8 @@ from dataviva.apps.models import Build, UI, App
 
 from dataviva.rais.views import rais_ybi
 
-import json
+import json, urllib2, urllib
+from config import SITE_MIRROR
 
 mod = Blueprint('apps', __name__, url_prefix='/apps')
 
@@ -126,29 +128,41 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
 
 @mod.route('/star/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
 def app_star(app_name, data_type, bra_id, filter1, filter2, output):
+    
     app_id = "/".join([app_name, data_type, bra_id, filter1, filter2, output])
-    if g.user is None or not g.user.is_authenticated():
-        return jsonify({"error": _("You need to be logged in to star apps.")})
+    
+    if request.method == 'POST' and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+        g.user = User.query.get(request.form.user)
+    elif g.user is None or not g.user.is_authenticated():
+        return jsonify({"error": gettext("You need to be logged in to star apps.")})
+        
     starred = Starred.query.filter_by(user=g.user, app_id=app_id).first()
+    
     if request.method == 'POST':
+        
+        if "user" not in request.form:
+            form_json = {"user": g.user.id, "title": request.form['title'].encode('utf-8')}
+            try:
+                opener = urllib2.urlopen("{0}{2}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+            except:
+                return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+        
         if starred:
             db.session.delete(starred)
             db.session.commit()
+            return jsonify({"success": -1})
         else:
-            app_name = None
-            if 'title' in request.form:
-                app_name = request.form['title'].encode('utf-8')
-                # print app_name
-                # app_name = "Uberlândia"
+            app_name = request.form['title'].encode('utf-8')
             timestamp = datetime.utcnow()
             new_star = Starred(user=g.user, app_id=app_id, app_name=app_name, timestamp=timestamp)
             db.session.add(new_star)
             db.session.commit()
             return jsonify({"success": 1})
+            
     if starred:
-        return jsonify({"success": -1})
-    else:
         return jsonify({"success": 1})
+    else:
+        return jsonify({"success": -1})
 
 @mod.route('/recommend/', methods=['GET', 'POST'])
 @mod.route('/recommend/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
