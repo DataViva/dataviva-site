@@ -24,16 +24,17 @@
 
     function linker(id) {
       if (path[2] == "bra") {
-        if (path[4] == "attract") window.location = path.join("/")+id+"/select/"
+        if (path[4] == "attract") var new_url = path.join("/")+id+"/select/"
         else if (path[4] == "industry") {
           path[4] = id
-          window.location = path.join("/")
+          var new_url = path.join("/")
         }
-        else window.location = path.join("/")+id+"/"
+        else var new_url = path.join("/")+id+"/"
       }
       else {
-        window.location = "/guide/"+id+"/select/"
+        var new_url = "/guide/"+id+"/select/"
       }
+      window.location = new_url
     }
   
   </script>

@@ -9,7 +9,7 @@
   </div>
   <br>
   
-  <a class="decision icon square workforce" href="{{g.path}}workforce">
+  <a class="decision icon square workforce" href="{{g.path}}workforce/">
     {% autoescape false %}
     {{ _('Who do they %(word)s?', word = '<b>%s</b>' % (_('employ'))) }}
     {% endautoescape %}
@@ -17,7 +17,7 @@
   
   {% if group == "child" %}
   
-    <a class="decision icon square diversification" href="{{g.path}}diversification">
+    <a class="decision icon square diversification" href="{{g.path}}diversification/">
       {% autoescape false %}
       {{ _('Which industries %(word)s with them?', word = '<b>%s</b>' % (_('co-locate'))) }}
       {% endautoescape %}
@@ -25,7 +25,7 @@
 
   {% endif %}
 
-  <a class="decision icon square isic" href="{{g.path}}locate">
+  <a class="decision icon square isic" href="{{g.path}}locate/">
     {% autoescape false %}
     {{ _('Where do they %(word)s?', word = '<b>%s</b>' % (_('locate'))) }}
     {% endautoescape %}

@@ -8,13 +8,13 @@
     <h1>{{ _('What would you like to know about %(name)s?', name = item) }}</h1>
   </div>
   <br>
-  <a class="decision icon square destinations" href="{{g.path}}destinations">
+  <a class="decision icon square destinations" href="{{g.path}}destinations/">
     {% autoescape false %}
     {{ _('Which %(word)s import them?', word = '<b>%s</b>' % (_('countries'))) }}
     {% endautoescape %}
   </a>
 
-  <a class="decision icon square hs" href="{{g.path}}potential">
+  <a class="decision icon square hs" href="{{g.path}}potential/">
     {% autoescape false %}
     {{ _('Which %(word)s in Brazil produce them?', word = '<b>%s</b>' % (_('municipalities'))) }}
     {% endautoescape %}
@@ -22,7 +22,7 @@
   
   {% if group == "child" %}
 
-    <a class="decision icon square diversification" href="{{g.path}}diversification">
+    <a class="decision icon square diversification" href="{{g.path}}diversification/">
       {% autoescape false %}
       {{ _('Which industries %(word)s with them?', word = '<b>%s</b>' % (_('co-locate'))) }}
       {% endautoescape %}
