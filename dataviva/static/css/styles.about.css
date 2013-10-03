@@ -10,26 +10,25 @@ body.about #inner_container {
   top: 75px;
 }
 
+#about_nav > a {
+  margin: 0px 0px 6px 0px !important;
+}
+
+#about_nav > a.decision::after {
+  content: '';
+}
+
+#about_nav > a.decision.short::after {
+  content: '\f105';
+}
+
 #about_content {
   padding: 0px 25px 25px 200px;
 }
 
 #about_content > .lightbox {
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
   width: 526px;
-}
-
-a.about {
-  display: block;
-}
-
-a.app {
-  display: block;
-  margin-left: 12px;
-}
-
-a.app.active {
-  color: #cc0000;
 }
 
 img {

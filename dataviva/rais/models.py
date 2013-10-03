@@ -83,7 +83,6 @@ class Yo(db.Model, AutoSerialize):
 class Ybi(db.Model, AutoSerialize):
     
     __tablename__ = 'rais_ybi'
-    __public__ = ()
     year = db.Column(db.Integer(4), primary_key=True)
     bra_id = db.Column(db.String(8), db.ForeignKey(Bra.id), primary_key=True)
     isic_id = db.Column(db.String(5), db.ForeignKey(Isic.id), primary_key=True)

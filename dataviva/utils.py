@@ -24,48 +24,20 @@ class AutoSerialize(object):
     def serialize(self):
         
         data = self.__dict__
-        public = self.__public__
         allowed = []
         
         for key, value in data.iteritems():
             
             if isinstance(value,unicode) or \
-                                    isinstance(value,float) or \
-                                    isinstance(value,int) or \
-                                    isinstance(value,str) or \
-                                    isinstance(value,long):
+                isinstance(value,float) or \
+                isinstance(value,int) or \
+                isinstance(value,str) or \
+                isinstance(value,long):
                 allowed.append((key,value))
         
         data = dict(allowed)
         
         return data
-
-    # def serialize(self, exclude=("bra", "industry", "wld", "occupation", "product"), extra=()):
-    #     "Returns model's PUBLIC data for jsonify"
-    #     data = {}
-    #     keys = self._sa_instance_state.attrs.items()
-    #     public = self.__public__ + extra if self.__public__ else extra
-    #     
-    #     for k, field in keys:
-    #         if (public and k not in public) or k in exclude or hasattr(field.value, '__module__'):
-    #             continue
-    #         data[k] = self._serialize(field.value)
-    #     return data
-
-    @classmethod
-    def _serialize(cls, value, follow_fk=False):
-        if type(value) in (datetime, date):
-            ret = value.isoformat()
-        elif hasattr(value, '__iter__'):
-            ret = []
-            for v in value:
-                ret.append(cls._serialize(v))
-        elif AutoSerialize in value.__class__.__bases__:
-            ret = value.get_public()
-        else:
-            ret = value
-
-        return ret
 
 ''' A helper class for dealing with injecting times into the page using moment.js'''
 class Momentjs:

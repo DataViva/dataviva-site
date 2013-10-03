@@ -214,7 +214,6 @@ class Stats(object):
 class Isic(db.Model, AutoSerialize, Stats):
 
     __tablename__ = 'attrs_isic'
-    __public__ = ('id', 'name_en', 'name_pt', 'desc_en', 'desc_pt', 'keywords_en', 'keywords_pt', 'color')
     id = db.Column(db.String(5), primary_key=True)
     name_en = db.Column(db.String(200))
     name_pt = db.Column(db.String(200))
@@ -245,7 +244,6 @@ class Isic(db.Model, AutoSerialize, Stats):
 class Cbo(db.Model, AutoSerialize, Stats):
 
     __tablename__ = 'attrs_cbo'
-    __public__ = ('id', 'name_en', 'name_pt', 'desc_en', 'desc_pt', 'keywords_en', 'keywords_pt', 'color')
     id = db.Column(db.String(6), primary_key=True)
     name_en = db.Column(db.String(200))
     name_pt = db.Column(db.String(200))
@@ -276,7 +274,6 @@ class Cbo(db.Model, AutoSerialize, Stats):
 class Hs(db.Model, AutoSerialize, Stats):
 
     __tablename__ = 'attrs_hs'
-    __public__ = ('id', 'name_en', 'name_pt', 'desc_en', 'desc_pt', 'keywords_en', 'keywords_pt', 'color')
     id = db.Column(db.String(8), primary_key=True)
     name_en = db.Column(db.String(200))
     name_pt = db.Column(db.String(200))
@@ -314,7 +311,6 @@ class Hs(db.Model, AutoSerialize, Stats):
 class Wld(db.Model, AutoSerialize, Stats):
 
     __tablename__ = 'attrs_wld'
-    __public__ = ('id', 'id_3char', 'name_en', 'name_pt', 'color')
     id = db.Column(db.String(5), primary_key=True)
     id_2char = db.Column(db.String(2))
     id_3char = db.Column(db.String(3))
@@ -349,7 +345,6 @@ bra_pr = db.Table('attrs_bra_pr',
 class Bra(db.Model, AutoSerialize, Stats):
 
     __tablename__ = 'attrs_bra'
-    __public__ = ('id', 'id_ibge', 'name_en', 'name_pt', 'color', 'distance')
     id = db.Column(db.String(10), primary_key=True)
     id_ibge = db.Column(db.Integer(7))
     name_en = db.Column(db.String(200))

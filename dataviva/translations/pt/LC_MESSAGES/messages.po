@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-01 16:53-0400\n"
+"POT-Creation-Date: 2013-10-03 16:05-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Generated-By: Babel 0.9.6\n"
 
 #: dataviva/account/views.py:119 dataviva/admin/views.py:69
-#: dataviva/admin/views.py:70 dataviva/admin/views.py:123
-#: dataviva/admin/views.py:183 dataviva/admin/views.py:184
-#: dataviva/apps/views.py:148 dataviva/ask/views.py:99
-#: dataviva/ask/views.py:152 dataviva/ask/views.py:180
-#: dataviva/ask/views.py:210 dataviva/ask/views.py:242
+#: dataviva/admin/views.py:70 dataviva/admin/views.py:121
+#: dataviva/admin/views.py:181 dataviva/admin/views.py:182
+#: dataviva/apps/views.py:148 dataviva/ask/views.py:100
+#: dataviva/ask/views.py:153 dataviva/ask/views.py:181
+#: dataviva/ask/views.py:211 dataviva/ask/views.py:243
 msgid "The server is not responding. Please try again later."
 msgstr "O servidor não está respondendo. Por favor, tente novamente mais tarde."
 
-#: dataviva/admin/views.py:131
+#: dataviva/admin/views.py:129
 msgid "This question has now been updated."
 msgstr "Esta pergunta foi atualizada."
 
@@ -34,27 +34,27 @@ msgstr "Esta pergunta foi atualizada."
 msgid "You need to be logged in to star apps."
 msgstr "Você precisa fazer o log in para iniciar aplicativos."
 
-#: dataviva/ask/views.py:91
+#: dataviva/ask/views.py:92
 msgid "You need to be signed in to reply to questions."
 msgstr "Você precisa fazer o log in para responder perguntas."
 
-#: dataviva/ask/views.py:111
+#: dataviva/ask/views.py:112
 msgid "Reply submitted."
 msgstr "Resposta enviada."
 
-#: dataviva/ask/views.py:144 dataviva/ask/views.py:172
+#: dataviva/ask/views.py:145 dataviva/ask/views.py:173
 msgid "You need to be logged in to vote."
 msgstr "Você precisa fazer o log in para votar."
 
-#: dataviva/ask/views.py:202
+#: dataviva/ask/views.py:203
 msgid "You need to be logged in to flag replies."
 msgstr "Você precisa fazer o log in para marcar respostas."
 
-#: dataviva/ask/views.py:232
+#: dataviva/ask/views.py:233
 msgid "You need to be logged in to ask questions."
 msgstr "Você precisa fazer o log in para fazer perguntas."
 
-#: dataviva/ask/views.py:253
+#: dataviva/ask/views.py:254
 msgid "Your question has been submitted and is pending approval."
 msgstr "Sua pergunta foi submetida e está pendente de aprovação."
 
@@ -114,7 +114,9 @@ msgstr "Visualizando a Economia de Minas Gerais e do Brasil."
 msgid ""
 "DataViva is an initiative of the Government of Minas Gerais to visualize "
 "public data."
-msgstr "O DataViva é uma iniciativa do Governo de Minas Gerais para visualização de dados públicos."
+msgstr ""
+"O DataViva é uma iniciativa do Governo de Minas Gerais para visualização "
+"de dados públicos."
 
 #: dataviva/html/home.html:19 dataviva/html/apps/index.html:4
 #: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:14
@@ -133,58 +135,627 @@ msgstr "Guia"
 msgid "Generate multiple apps into a report."
 msgstr "Siga um passo a passo para gerar um relatório com vários aplicativos."
 
-#: dataviva/html/about/appsdocs.html:4
+#: dataviva/html/about/apps.html:4 dataviva/html/templates/about.html:46
 msgid "About the Apps"
 msgstr "Sobre os Aplicativos"
 
-#: dataviva/html/about/data.html:4 dataviva/html/about/data.html:7
+#: dataviva/html/about/data.html:4 dataviva/html/templates/about.html:26
 msgid "About the Data"
-msgstr "Sobre o Site"
+msgstr "Sobre os Dados"
 
 #: dataviva/html/about/dataviva.html:4 dataviva/html/about/dataviva.html:7
+#: dataviva/html/templates/about.html:22
 msgid "About the Site"
 msgstr "Sobre o Site"
 
-#: dataviva/html/about/glossary.html:4 dataviva/html/about/glossary.html:7
-#: dataviva/html/templates/about.html:30
+#: dataviva/html/about/dataviva.html:9
+msgid ""
+"DataViva is a project that started in July of 2012 by the Escritorio of "
+"Minas Gerais in collaboration with a small start-up called Growth "
+"Ventures based in Cambridge, MA. DataViva is a collaborative planning "
+"tool composed of a number of applications, each of which visualize data "
+"in innovative and creative ways. DataViva is intended to be used as a "
+"tool to help members of the government, private sectors, as well as "
+"citizens themselves be able to understand big data and and more "
+"importantly, use it to their advantage."
+msgstr ""
+"O DataViva é um projeto iniciado em Julho de 2012 pelo Escritório de "
+"Minas Gerais, em colaboração com uma pequena partida chamada Growth "
+"Ventures sediada em Cambridge, MA. O DataViva é uma ferramenta de "
+"planejamento colaborativo composta de um número de aplicativos, cada um "
+"visualizando dados de forma inovadora e criativa. O DataViva pretende ser"
+" utilizado como uma ferramenta para ajudar os membros do governo, setores"
+" privados, bem como cidadãos estarem aptos a compreender grandes dados e,"
+" o mais importante, utilizá-los para seu benefício."
+
+#: dataviva/html/about/glossary.html:4 dataviva/html/templates/about.html:86
 msgid "Glossary"
 msgstr "Glossário"
 
-#: dataviva/html/about/apps/compare.html:3
-#: dataviva/html/about/apps/geo_map.html:3 dataviva/html/apps/index.html:22
-#: dataviva/html/templates/about.html:44
-msgid "Geo Map"
-msgstr "Mapa"
+#: dataviva/html/about/data/comtrade.html:3
+msgid "United Nations Commodity Trade Statistics Database"
+msgstr ""
+"Banco de Dados Estatísticos sobre Comércio de Commodities das Nações "
+"Unidas"
 
-#: dataviva/html/about/apps/network.html:3 dataviva/html/apps/index.html:27
-#: dataviva/html/templates/about.html:48
-msgid "Network"
-msgstr "Rede"
+#: dataviva/html/about/data/comtrade.html:5
+msgid "United Nations Statistics Division"
+msgstr "Divisão de Estatísticas das Nações Unidas"
 
-#: dataviva/html/about/apps/occugrid.html:3 dataviva/html/apps/index.html:49
-#: dataviva/html/templates/about.html:64
-msgid "Occugrid"
-msgstr "Ocupações"
+#: dataviva/html/about/data/comtrade.html:8
+#: dataviva/html/about/data/rais.html:8 dataviva/html/about/data/secex.html:8
+msgid "Description"
+msgstr "Descrição"
 
-#: dataviva/html/about/apps/rings.html:3 dataviva/html/apps/index.html:34
-#: dataviva/html/templates/about.html:52
-msgid "Rings"
-msgstr "Anéis"
+#: dataviva/html/about/data/comtrade.html:9
+msgid ""
+"The United Nations Commodity Trade Statistics Database (UN Comtrade) "
+"contains detailed imports and exports statistics reported by statistical "
+"authorities of close to 200 countries or areas. UN Comtrade is considered"
+" the most comprehensive trade database available, with more than 1 "
+"billion records. The database is continuously updated. Whenever trade "
+"data is received from the national authorities, it is standardized by the"
+" UN Statistics Division and then added to UN Comtrade."
+msgstr ""
+"O Banco de Dados Estatísticos sobre Comércio de Commodities das Nações "
+"Unidas (UN Comtrade) contem estatísticas detalhadas sobre importações e "
+"exportações relatadas pelas autoridades estatísticas de cerca de 200 "
+"países ou áreas. O UN Comtrade é considerado o banco de dados mais "
+"abrangente disponível, com mais de 1 bilhão de registros. O banco de "
+"dados é constantemente atualizado. Sempre que os dados de comércio são "
+"recebidos de autoridades nacionais, são padronizados pela Divisão de "
+"Estatísticas das Nações Unidas e então adicionados ao UN Comtrade."
 
-#: dataviva/html/about/apps/scatter.html:3 dataviva/html/apps/index.html:39
-#: dataviva/html/templates/about.html:56
+#: dataviva/html/about/data/comtrade.html:11
+#: dataviva/html/about/data/rais.html:11 dataviva/html/about/data/secex.html:11
+msgid "Main Variables"
+msgstr "Principais Variáveis"
+
+#: dataviva/html/about/data/comtrade.html:12
+msgid "Commodities; Reporters, Partners; Import; Export; Trade Value."
+msgstr ""
+"Commodities; Relatores, Parceiros; Importação; Exportação; Valor "
+"Comercial."
+
+#: dataviva/html/about/data/comtrade.html:14
+#: dataviva/html/about/data/rais.html:14 dataviva/html/about/data/secex.html:14
+msgid "Data Availability"
+msgstr "Disponibilidade de Dados"
+
+#: dataviva/html/about/data/comtrade.html:15
+msgid "It concerns annual trade data from 1962 to the most recent year."
+msgstr ""
+"Trata-se de dados de comércio anuais, a partir de 1962 para o ano mais "
+"recente."
+
+#: dataviva/html/about/data/comtrade.html:17
+#: dataviva/html/about/data/rais.html:17 dataviva/html/about/data/secex.html:17
+msgid "Level of Disclosure"
+msgstr "Nível de Divulgação"
+
+#: dataviva/html/about/data/comtrade.html:18
+msgid ""
+"Classifications of commodities: Standard International Trade "
+"Classification (SITC); Harmonized System (HS); Broad Economic Categories "
+"(BEC)."
+msgstr ""
+"Classificações das commodities: CTCI, Classificação Padrão do Comércio "
+"Internacional; SH, Sistema Harmonizado; BEC, Categorias Econômicas "
+"Amplas."
+
+#: dataviva/html/about/data/rais.html:3
+msgid "Annual Social Information Report"
+msgstr "Relação Anual de Informações Sociais"
+
+#: dataviva/html/about/data/rais.html:5
+msgid "Ministry of Labor and Employment – MTE"
+msgstr "Ministério do Trabalho e Emprego – MTE"
+
+#: dataviva/html/about/data/rais.html:9
+#, fuzzy, python-format
+msgid ""
+"RAIS is an Administrative Registry created annually for the purpose of "
+"supplying the control, statistical, and information needs of governmental"
+" entities in the social sector. It is an indispensable instrument for "
+"complying with legal norms, and is also of fundamental importance in the "
+"monitoring and description of the formal labor market. It describes the "
+"standing of companies on December 31st of each year, and is composed of "
+"information declared by the companies themselves in relation to their "
+"employees, economic activity, and stock, among other characteristics. It "
+"currently covers around 97&#37; of the Brazilian formal market."
+msgstr ""
+"A RAIS é um Registro Administrativo, de periodicidade anual, criada com a"
+" finalidade de suprir as necessidades de controle, de estatísticas e de "
+"informações às entidades governamentais da área social. Constitui um "
+"instrumento imprescindível para o cumprimento das normas legais, como "
+"também é de fundamental importância para o acompanhamento e a "
+"caracterização do mercado de trabalho formal. Retrata a situação das "
+"empresas em 31 de dezembro do ano de referência e é composta por "
+"informações declaradas pelas próprias empresas, anualmente, acerca de "
+"seus empregados, da atividade econômica desenvolvida, do seu estoque, "
+"entre outras características. Atualmente, cobre cerca de 97&#37; do universo "
+"do mercado formal brasileiro."
+
+#: dataviva/html/about/data/rais.html:12
+msgid ""
+"Jobs on December 31st, and those hired and released according to gender, "
+"age bracket, level of education, length of service and income, "
+"disaggregated in occupational, geographical, and sector levels. It "
+"contains information on the number of jobs by size of establishment, wage"
+" bill and employee nationality."
+msgstr ""
+"Empregos em 31 de dezembro e admitidos e desligados segundo gênero, faixa"
+" etária, grau de escolaridade, tempo de serviço e rendimentos, "
+"desagregados em nível ocupacional, geográfico e setorial. Contêm "
+"informações sobre número de empregos por tamanho de estabelecimento, "
+"massa salarial e nacionalidade do empregado."
+
+#: dataviva/html/about/data/rais.html:15
+msgid ""
+"Data is generally gathered between January and March of the year "
+"following the research reference year. And data release takes place "
+"approximately eight months after the beginning of collection."
+msgstr ""
+"As declarações são coletadas, geralmente, entre janeiro e março do ano "
+"subsequente ao de referência da pesquisa. E a liberação dos dados ocorre "
+"aproximadamente oito meses após o início da coleta."
+
+#: dataviva/html/about/data/rais.html:18
+msgid ""
+"According to geographical selections: for Brazil, Major Regions, "
+"Federation Units, Metropolitan and Municipal Regions; by sectors: sector,"
+" subsector, according to IBGE 80 classification and at the level of "
+"Section, Division, Group and Class as per CNAE 1.0 and CNAE 2.0; and "
+"occupational: Large Occupational Group, Main Subgroup, Occupational "
+"Subgroup, Occupational Family and Occupation."
+msgstr ""
+"Segundo recortes geográficos: para o Brasil, Grandes Regiões, Unidades da"
+" Federação, Regiões Metropolitanas e Municípios; setorial: setor, "
+"subsetor, segundo a classificação IBGE 80 e em nível de Seção, Divisão, "
+"Grupo e Classe segundo a CNAE 1.0 E CNAE 2.0; e ocupacional: Grande Grupo"
+" Ocupacional, Subgrupo Principal, Subgrupo Ocupacional, Família "
+"Ocupacional e Ocupação."
+
+#: dataviva/html/about/data/secex.html:3
+msgid "Foreign Trade Secretariat Database"
+msgstr "Banco de Dados da Secretaria de Comércio Exterior"
+
+#: dataviva/html/about/data/secex.html:5
+msgid "Ministry of Development, Industry and Foreign Trade – MDIC"
+msgstr "Ministério do Desenvolvimento, Indústria e Comércio Exterior – MDIC"
+
+#: dataviva/html/about/data/secex.html:9
+msgid ""
+"The SECEX Database allows for the historical analysis of Brazil’s "
+"commercial exchange, one of the most important performance indicators for"
+" the economy. It describes and assesses the country’s commercial movement"
+" in relation to other world nations, encompassing purchases and sales "
+"carried out externally. It is a basic instrument in decision making and "
+"determination of economic guidelines by the Government. It allows the "
+"agents involved in the activity to improve the planning of actions "
+"through the analysis of concrete import and export data, increasing "
+"opportunities for the development of foreign trade."
+msgstr ""
+"O Banco de Dados da SECEX possibilita a análise histórica do "
+"comportamento do intercâmbio comercial brasileiro, um dos mais "
+"importantes indicadores de desempenho da economia. Retrata e avalia o "
+"movimento comercial do País com as demais nações do mundo, englobando as "
+"vendas e compras efetuadas externamente. Constitui um instrumento básico "
+"para tomada de decisão e determinação de diretrizes econômicas por parte "
+"do Governo. Permite aos agentes envolvidos na atividade o melhor "
+"planejamento das suas ações pela análise dos dados concretos das "
+"exportações e importações, aumentando as oportunidades de desenvolvimento"
+" do comércio externo."
+
+#: dataviva/html/about/data/secex.html:12
+msgid ""
+"Exports; Imports; Goods; Federation Unit; Municipalities; Destination "
+"Country; Country of Origin."
+msgstr ""
+"Exportação; Importação; Mercadoria; Unidade da Federação; Municípios; "
+"País de Destino; País de Origem."
+
+#: dataviva/html/about/data/secex.html:15
+msgid ""
+"The database contains monthly information on Brazilian imports and "
+"exports, from 1989 onwards. The data are open to change for a period of "
+"five years. Information is gathered 15 to 20 working days after the "
+"month’s end."
+msgstr ""
+"O banco de dados contém informações mensais de exportação e importação "
+"brasileiras, de 1989 em diante. Os dados são passíveis de alteração por "
+"período de cinco anos. A coleta das informações ocorre de 15 a 20 dias "
+"úteis após o final do mês."
+
+#: dataviva/html/about/data/secex.html:18
+msgid ""
+"According to geographical selections: for Brazil, Major Regions, "
+"Federation Units, and Municipalities; through products according to "
+"Mercosul Common Nomenclature (NCM): Section, Chapter, Position, Sub-"
+"position, Item and Sub-item."
+msgstr ""
+"Segundo recortes geográficos: para o Brasil, Grandes Regiões, Unidades da"
+" Federação, Municípios; por produtos de acordo com a Nomenclatura Comum "
+"do Mercosul (NCM): Seção, Capítulo, Posição, Subposição, Item e Subitem."
+
+#: dataviva/html/about/glossary/complexity.html:1
+#: dataviva/html/templates/about.html:92
+msgid "Complexity"
+msgstr "Complexidade"
+
+#: dataviva/html/about/glossary/complexity.html:3
+msgid "Economic Complexity"
+msgstr "Complexidade Econômica"
+
+#: dataviva/html/about/glossary/complexity.html:6
+#, python-format
+msgid ""
+"Economic Complexity measures how diversified and complex a location’s "
+"export production is. It is calculated as the average complexity of the "
+"products’ complexities (or PCIs) that a location exports with %(rca)s."
+msgstr ""
+"Complexidade Econômica mede quão diversificada e complexa é a produção de"
+" exportação de uma localidade. É calculada conforme a complexidade média "
+"das complexidades dos produtos (ou PCIs) que uma localidade exporta com "
+"%(rca)s"
+
+#: dataviva/html/about/glossary/complexity.html:10
+#: dataviva/html/about/glossary/complexity.html:17
+#: dataviva/html/about/glossary/distance.html:10
+#: dataviva/html/about/glossary/importance.html:13
+#: dataviva/html/about/glossary/opp_gain.html:4
+#: dataviva/html/about/glossary/proximity.html:41
+#: dataviva/html/about/glossary/rca.html:5
+#: dataviva/html/about/glossary/required.html:8
+#: dataviva/html/about/glossary/unique.html:4
+#: dataviva/html/about/glossary/unique.html:9
+msgid "Used In"
+msgstr "Usado em"
+
+#: dataviva/html/about/glossary/complexity.html:11
+#: dataviva/html/about/glossary/complexity.html:18
+#: dataviva/html/about/glossary/distance.html:11
+#: dataviva/html/about/glossary/opp_gain.html:5
+#: dataviva/html/about/glossary/rca.html:6
+#: dataviva/html/about/glossary/unique.html:4
+#: dataviva/html/about/glossary/unique.html:9 dataviva/html/apps/index.html:39
+#: dataviva/html/templates/about.html:72
 msgid "Scatter"
 msgstr "Dispersão"
 
-#: dataviva/html/about/apps/stacked.html:3 dataviva/html/apps/index.html:17
-#: dataviva/html/templates/about.html:40
-msgid "Stacked"
-msgstr "Evolução"
+#: dataviva/html/about/glossary/complexity.html:14
+msgid "Product Complexity"
+msgstr "Complexidade do Produto"
 
-#: dataviva/html/about/apps/tree_map.html:3 dataviva/html/apps/index.html:12
-#: dataviva/html/templates/about.html:36
-msgid "Tree Map"
-msgstr "Tree Map"
+#: dataviva/html/about/glossary/complexity.html:15
+msgid ""
+"Product Complexity is a measure of how complex a product is, based on how"
+" many countries export the product and how diversified those exporters "
+"are."
+msgstr ""
+"A Complexidade do produto é uma medida de quão complexo é um produto, "
+"baseado no número de países que exportam o produto e quão diversificados "
+"são estes exportadores."
+
+#: dataviva/html/about/glossary/distance.html:1
+#: dataviva/html/templates/about.html:96
+msgid "Distance"
+msgstr "Distância"
+
+#: dataviva/html/about/glossary/distance.html:4
+#, python-format
+msgid ""
+"Using the %(network)s visualization we can quickly see which industries, "
+"occupations or products are found in a given location. But what about the"
+" ones in which a location does not have %(rca)s? Distance is the measure "
+"used to indicate how “far away” any given location is from a particular "
+"industry, occupation or product. The distance of a given item i to a "
+"location b is calculated as the sum of all the %(proximities)s between i "
+"and the other items that b has %(rca)s < 1. This number is then "
+"normalized by dividing it by the sum of all items regardless of its "
+"%(rca)s in location b. In speaking about exports, we would notice that if"
+" a particular product is connected mostly with products that a location "
+"does export, the distance value would be close to 0 (meaning it’s very "
+"close by!). The opposite being true if the interested product is "
+"connected with mostly products that are not exported, i.e. the distance "
+"value would be closer to 1. The equation can be found in this figure."
+msgstr ""
+"Usando a visualização da %(network)s, podemos ver rapidamente quais "
+"setores, ocupações ou produtos são encontrados em um determinado local. "
+"Mas o que acontece com aqueles em que a localização não tem %(rca)s? "
+"Distância é uma medida utilizada para indicar “quão longe” uma localidade"
+" específica está de um determinado setor, ocupação ou produto. A "
+"distância de um determinado item i para um local b é calculada como a "
+"soma de todas as %(proximities)s entre i e os outros itens que tem "
+"%(rca)s b <1. Este número é então normalizado dividindo-o pela soma de "
+"todos os itens, independentemente da localização do %(rca)s em b. Com "
+"respeito às exportações, notamos que, se um produto em particular está "
+"ligado principalmente com os produtos que a localização exporte, o valor "
+"da distância estaria perto de 0 (o que significa que está muito perto!). "
+"O oposto sendo verdadeiro, se o produto em questão está ligado com a "
+"maioria dos produtos que não são exportados, o valor da distância seria "
+"mais próximo de 1. A equação pode ser encontrada nesta figura."
+
+#: dataviva/html/about/glossary/distance.html:4
+#: dataviva/html/about/glossary/distance.html:12
+#: dataviva/html/about/glossary/proximity.html:4
+#: dataviva/html/about/glossary/proximity.html:12
+#: dataviva/html/about/glossary/proximity.html:42
+#: dataviva/html/about/glossary/rca.html:7 dataviva/html/apps/index.html:27
+#: dataviva/html/templates/about.html:64
+msgid "Network"
+msgstr "Rede"
+
+#: dataviva/html/about/glossary/distance.html:4
+msgid "proximities"
+msgstr "proximidades"
+
+#: dataviva/html/about/glossary/distance.html:13
+#: dataviva/html/about/glossary/proximity.html:43
+#: dataviva/html/about/glossary/rca.html:8 dataviva/html/apps/index.html:34
+#: dataviva/html/templates/about.html:68
+msgid "Rings"
+msgstr "Anéis"
+
+#: dataviva/html/about/glossary/importance.html:1
+#: dataviva/html/templates/about.html:100
+msgid "Importance"
+msgstr "Importância"
+
+#: dataviva/html/about/glossary/importance.html:5
+#, python-format
+msgid ""
+"Each occupation, regardless of geographical location, has an importance "
+"value. This value is calculated by looking at the overall ubiquity of an "
+"occupation throughout every industry in Brazil. We take the number of "
+"locations with %(rca)s in a given industry that also employ a given "
+"occupation, and divide that by the total number of locations with %(rca)s"
+" in that given industry. Here is the calculation used (where y is a year,"
+" b is a location, i is an industry, and o is an occupation):"
+msgstr ""
+"Cada ocupação, independente da localização geográfica, tem um valor de "
+"importância. Este valor é calculado observando a ubiquidade global de uma"
+" ocupação ao longo de cada setor no Brasil. Tomamos o número de "
+"localidades com %(rca)s em um determinado setor, que também empregam uma "
+"determinada ocupação, e dividimos esse valor pelo número total de "
+"localidades com %(rca)s deste determinado setor. Aqui está o cálculo "
+"usado (onde y é um Ano, b é uma localidade, i é um setor, e o é uma "
+"ocupação):"
+
+#: dataviva/html/about/glossary/importance.html:11
+msgid ""
+"The higher importance value an occupation has, the more common it is to "
+"that industry. This would generally mean that the occupation is more "
+"necessary. For example Cooks are much more important in the Restaurant "
+"industry than Accounting Assistants though they are both employed in that"
+" industry."
+msgstr ""
+"Quanto maior o valor de importância de uma ocupação, mais comum é para "
+"aquele setor. Isto geralmente significa que a ocupação é mais necessária."
+" Por exemplo, os Cozinheiros são muito mais importantes para o setor de "
+"Restaurantes do que Assistentes Contábeis, embora ambos sejam empregados "
+"naquele setor."
+
+#: dataviva/html/about/glossary/importance.html:14
+#: dataviva/html/about/glossary/required.html:8
+#: dataviva/html/apps/index.html:49 dataviva/html/templates/about.html:80
+msgid "Occugrid"
+msgstr "Ocupações"
+
+#: dataviva/html/about/glossary/opp_gain.html:1
+#: dataviva/html/templates/about.html:104
+msgid "Opportunity Gain"
+msgstr "Ganho de Oportunidade"
+
+#: dataviva/html/about/glossary/opp_gain.html:2
+msgid ""
+"Opportunity gain is a measure that indicates how much diversity is "
+"offered by an industry if the location develops the capacity to become "
+"successful in that industry."
+msgstr ""
+"Ganho de oportunidade é uma medida que indica quanta diversidade é "
+"oferecida por um setor, se a localidade desenvolve a capacidade de se "
+"tornar bem sucedida naquele setor."
+
+#: dataviva/html/about/glossary/proximity.html:1
+#: dataviva/html/templates/about.html:108
+msgid "Proximity"
+msgstr "Proximidade"
+
+#: dataviva/html/about/glossary/proximity.html:4
+#, python-format
+msgid ""
+"This is the measure of distance between any two products, industries or "
+"occupations used to construct the %(network)s visualization e.g. industry"
+" space, occupation space and product space. The %(network)s app only "
+"shows the connections between nodes that have the highest proximity but "
+"in actuality every node has a proximity value with every other node."
+msgstr ""
+"Esta é uma medida de distância entre quaisquer dois produtos, setores ou "
+"ocupações, utilizada para construir uma visualização de %(network)s, isto"
+" é, espaço setorial, espaço ocupacional ou espaço do produto. O "
+"aplicativo de %(network)s apenas mostra as conexões entre campos que "
+"tenham maior proximidade mas, na realidade, cada campo possui um valor de"
+" proximidade com todos os outros campos."
+
+#: dataviva/html/about/glossary/proximity.html:9
+msgid "Product Proximity"
+msgstr "Proximidade do Produto"
+
+#: dataviva/html/about/glossary/proximity.html:12
+#, python-format
+msgid ""
+"The product space %(network)s layout has been calculated using world "
+"trade (%(comtrade)s) data though any proximity values shown have all been"
+" calculated using only Brazilian export data (%(secex)s). It is important"
+" to note that any network graphic is really just an estimate of the "
+"underlying adjacency matrix used to create it. When viewing a specific "
+"Brazilian location, one is only seeing the products that said location is"
+" exporting. The way proximity is calculated for products is by counting "
+"the number of locations that export both products with revealed "
+"comparative advantage (%(rca)s) and dividing that by the number of "
+"locations that export the most ubiquitous product of the pair. Let us "
+"take as a simple example 2 products: Cut Flowers (HS ID: 0603) and Honey "
+"(HS ID: 0409). As shown in the following figure, the proximity between "
+"these 2 products is ⅓."
+msgstr ""
+"O layout da %(network)s espaço do produto foi calculado utilizando os "
+"dados do comércio mundial (%(comtrade)s), embora quaisquer valores de "
+"proximidade mostrados foram todos calculados usando apenas dados das "
+"exportações brasileiras (%(secex)s). É importante notar que qualquer "
+"gráfico de rede é realmente apenas uma estimativa da matriz de adjacência"
+" utilizada para criá-lo. Ao visualizar um local brasileiro específico, "
+"apenas se observam os produtos que tal localidade exporta. A forma que a "
+"proximidade é calculada para produtos é através da contagem do número de "
+"locais que exportam ambos os produtos com vantagem comparativa revelada "
+"(%(rca)s) e dividindo-se esse valor pelo número de locais que exportam o "
+"produto similar mais ubíquo. Vamos tomar como exemplo dois produtos: "
+"flores cortadas (HS ID: 0603) e Mel (HS ID: 0409). Tal como mostrado na "
+"figura a seguir, a proximidade entre estes dois produtos é ⅓."
+
+#: dataviva/html/about/glossary/proximity.html:18
+msgid "Location Proximity"
+msgstr "Proximidade de Localidades"
+
+#: dataviva/html/about/glossary/proximity.html:21
+#, python-format
+msgid ""
+"The proximity calculation used to determine how similar locations are is "
+"very similar to the one used for the product space, except the %(rca)s "
+"calculation matrix is based off of locations and industries. This "
+"calculation could also be made by substituting products for industries "
+"but since these numbers are only used for the %(required)s calculations "
+"(which uses %(emp_data)s) we are using industries."
+msgstr ""
+"O cálculo da medida de proximidade usado para medir quão similar são as "
+"localidades é bem simples ao usado para o espaço do produto, exceto que a"
+" matriz de cálculo de %(rca)s é baseada nas localidades e setores. Este "
+"cálculo pode também ser feito pela substituição de produtos por setores "
+"mas, desde que estes números sejam utilizados apenas para cálculo de "
+"%(required)s (que utiliza %(emp_data)s) e estamos utilizando setores."
+
+#: dataviva/html/about/glossary/proximity.html:21
+#: dataviva/html/about/glossary/required.html:1
+#: dataviva/html/templates/about.html:116
+msgid "Recommended Employees"
+msgstr "Empregados Recomendados"
+
+#: dataviva/html/about/glossary/proximity.html:21
+msgid "employment data"
+msgstr "dados de emprego"
+
+#: dataviva/html/about/glossary/proximity.html:27
+msgid "Industry Proximity"
+msgstr "Proximidade do Setor"
+
+#: dataviva/html/about/glossary/proximity.html:30
+#, python-format
+msgid ""
+"The industry space is created a bit differently from the product space, "
+"in that instead of basing the %(rca)s calculation matrix off of locations"
+" and industries, we are using a matrix of industries and occupations. The"
+" reason for this is that as opposed to product exports and location, "
+"similar industries do not necessarily tend to co-locate. Take for example"
+" two large industries such as auto part manufacturing and electronics "
+"manufacturing. The data has shown that such large industries do not tend "
+"to co-locate in similar areas, but instead in rural areas outside of "
+"urban centers isolated from many other industries. Yet by looking at the "
+"workforce shared between such industries we find many of the same "
+"occupations e.g. machine operators, production line feeders, electrical "
+"engineers."
+msgstr ""
+"O espaço do Setor é criado de forma um pouco diferente do espaço do "
+"produto, pois, em vez de basear a matriz de cálculo %(rca)s de "
+"localidades e setores, utilizamos uma matriz de setores e ocupações. A "
+"razão para isto é que, ao contrário de exportação e localização de "
+"produtos, setores similares, não necessariamente tendem a co-localizar. "
+"Tomemos, por exemplo, dois grandes setores como a de fabricação de peças "
+"automotivas e fabricação de produtos eletrônicos. Os dados mostraram que "
+"esses grandes setores não tendem a co-localizar em áreas similares, mas "
+"sim em áreas rurais fora dos centros urbanos isolados de muitos outros "
+"setores. Observando ainda a força de trabalho compartilhada por esses "
+"setores, encontramos muitas das mesmas ocupações, por exemplo, operadores"
+" de máquinas, alimentadores de linha de produção, engenheiros elétricos."
+
+#: dataviva/html/about/glossary/proximity.html:36
+msgid "Occupation Proximity"
+msgstr "Proximidade da Ocupação"
+
+#: dataviva/html/about/glossary/proximity.html:37
+msgid ""
+"The proximity measure used for the occupation space is quite simply the "
+"inverse of the calculation used in the industry space. The same matrix of"
+" industries and occupations is used. Below you will see an illustration "
+"of this calculation."
+msgstr ""
+"A medida de proximidade usada para o espaço de ocupação é bem simples, ao"
+" contrário do cálculo utilizado no espaço de setor. A mesma matriz é "
+"utilizada para setores e ocupações. Abaixo, você verá uma ilustração "
+"deste cálculo."
+
+#: dataviva/html/about/glossary/rca.html:2
+msgid ""
+"Revealed Comparative Advantage is a numeric value used to connote whether"
+" a particular product or industry is especially prominent in a location. "
+"The calculation for this number is a share of a share. Say for example we"
+" were to consider Belo Horizonte’s exports of Cars. We would take the "
+"share that Cars represent in Belo Horizonte’s export basket divided by "
+"the share that Cars represent in all of Brazil. If this number is larger "
+"than or equal to 1, we can say that Belo Horizonte is a strong exporter "
+"in Cars (stronger than the average). RCA is a much better indicator of "
+"whether a product or industry is expressed in a location rather than "
+"export value alone because it takes into account the size of the "
+"location’s market vis-a-vis the total market size."
+msgstr ""
+"Vantagem Comparativa Revelada é um valor numérico utilizado para a "
+"conotação de que um determinado produto ou setor é especialmente "
+"proeminente em uma localidade. O cálculo desse número é a parte de uma "
+"parte. Digamos, por exemplo, que consideramos as exportações de carros de"
+" Belo Horizonte. Gostaríamos de ter a participação representativa dos "
+"carros na pauta de exportação de Belo Horizonte, dividido pela parte que "
+"os carros representam, em todo o Brasil. Se esse número for maior ou "
+"igual a 1, podemos dizer que Belo Horizonte é um forte exportador de "
+"carros (mais forte do que a média). O RCA é um indicador muito melhor se "
+"um produto ou setor for expressa em um local ao invés de valor de "
+"exportação apenas considerar o tamanho do mercado do local vis-à-vis o "
+"tamanho total do mercado."
+
+#: dataviva/html/about/glossary/required.html:4
+#, python-format
+msgid ""
+"To determine how many employees of a given occupation are recommended for"
+" a given industry in a given location, we find the top 20%(percent)s of "
+"similar locations by %(prox)s and take the average of those locations’ "
+"number of employees in an occupation per establishment. If a location "
+"already has %(rca)s we would just use their number for the recommended "
+"employment."
+msgstr ""
+"Para determinar quantos funcionários de uma determinada ocupação são "
+"recomendados para um determinado setor em um determinado local, "
+"encontramos o top 20%(percent)s de localizações similares por %(prox)s e "
+"calculamos a média de número de empregados desses locais em uma ocupação "
+"por estabelecimento. Se um local já tem %(rca)s utilizaríamos apenas seu "
+"número para a contratação recomendada."
+
+#: dataviva/html/about/glossary/required.html:4
+msgid "Locational Proximity"
+msgstr "Proximidade de Localização"
+
+#: dataviva/html/about/glossary/unique.html:1
+msgid "Unique Industries"
+msgstr "Setores Exclusivos"
+
+#: dataviva/html/about/glossary/unique.html:2
+msgid "The number of different industries that employ an occupation."
+msgstr "O número de diferentes setores, que empregam uma ocupação."
+
+#: dataviva/html/about/glossary/unique.html:6
+msgid "Unique Occupations"
+msgstr "Ocupações Exclusivas"
+
+#: dataviva/html/about/glossary/unique.html:7
+msgid "The number of different occupations that are employed in an industry."
+msgstr "O número das diferentes ocupações empregadas em um setor."
 
 #: dataviva/html/account/index.html:20
 msgid "Activity sorted by date"
@@ -328,7 +899,19 @@ msgstr "Mostrar/Ocultar Controles"
 msgid "Which app would you like to build?"
 msgstr "Qual aplicativo você gostaria de desenvolver?"
 
-#: dataviva/html/apps/index.html:44 dataviva/html/templates/about.html:60
+#: dataviva/html/apps/index.html:12 dataviva/html/templates/about.html:52
+msgid "Tree Map"
+msgstr "Tree Map"
+
+#: dataviva/html/apps/index.html:17 dataviva/html/templates/about.html:56
+msgid "Stacked"
+msgstr "Evolução"
+
+#: dataviva/html/apps/index.html:22 dataviva/html/templates/about.html:60
+msgid "Geo Map"
+msgstr "Mapa"
+
+#: dataviva/html/apps/index.html:44 dataviva/html/templates/about.html:76
 msgid "Compare"
 msgstr "Compare"
 
@@ -374,14 +957,16 @@ msgid ""
 "Flagged replies are reviewed by DataViva staff to determine if they "
 "violate community guidelines. Accounts are penalized for violations and "
 "can lead to account termination."
-msgstr "Respostas destacadas são revisadas pela equipe do DataViva para determinar se violaram as normas da comunidade. As contas são penalizadas por violações e podem ser canceladas."
+msgstr ""
+"Respostas destacadas são revisadas pela equipe do DataViva para "
+"determinar se violaram as normas da comunidade. As contas são penalizadas"
+" por violações e podem ser canceladas."
 
 #: dataviva/html/ask/answer.html:106
 msgid ""
 "This reply has been flagged as inappropriate and hidden by an "
 "administrator."
-msgstr ""
-"Esta resposta foi marcada pelo administrador como inapropriada."
+msgstr "Esta resposta foi marcada pelo administrador como inapropriada."
 
 #: dataviva/html/ask/answer.html:118
 msgid "Respond to"
@@ -440,7 +1025,7 @@ msgid "Depth"
 msgstr "Fundo"
 
 #: dataviva/html/data/index.html:3 dataviva/html/data/query.html:32
-#: dataviva/html/templates/about.html:26 dataviva/html/templates/site.html:17
+#: dataviva/html/templates/site.html:17
 msgid "Data"
 msgstr "Dados"
 
@@ -791,9 +1376,9 @@ msgstr "Produto Exportado"
 msgid "Export Destination"
 msgstr "Destino das Exportações"
 
-#: dataviva/html/templates/about.html:22
-msgid "General"
-msgstr "Geral"
+#: dataviva/html/templates/about.html:120
+msgid "Unique Values"
+msgstr "Valores Exclusivos"
 
 #: dataviva/html/templates/admin.html:24
 msgid "Users"
@@ -838,3 +1423,4 @@ msgstr "Sair"
 #: dataviva/profiles/views.py:49
 msgid "a country"
 msgstr "um país"
+

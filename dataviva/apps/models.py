@@ -36,7 +36,6 @@ class App(db.Model, AutoSerialize):
 class Build(db.Model, AutoSerialize):
 
     __tablename__ = 'apps_build'
-    __public__ = ('id', 'type', 'bra', 'filter1', 'filter2', 'output', 'viz_whiz', 'name', 'color', 'dataset')
     
     id = db.Column(db.Integer, primary_key = True)
     dataset = db.Column(db.String(20))
@@ -338,7 +337,6 @@ class Build(db.Model, AutoSerialize):
 class UI(db.Model, AutoSerialize):
 
     __tablename__ = 'apps_ui'
-    __public__ = ("type","values")
 
     id = db.Column(db.Integer, db.ForeignKey(Build.id), primary_key = True)
     type = db.Column(db.String(20))

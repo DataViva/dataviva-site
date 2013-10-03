@@ -9,8 +9,6 @@ import ast, re
 class Plan_Build(db.Model, AutoSerialize):
 
     __tablename__ = 'apps_plan_build'
-    __public__ = ('plan_id', 'build_id', 'position', 'type', 'variables')
-    
     plan_id = db.Column(db.Integer, primary_key = True)
     position = db.Column(db.Integer, primary_key = True)
     build_id = db.Column(db.Integer, primary_key = True)
@@ -23,8 +21,6 @@ class Plan_Build(db.Model, AutoSerialize):
 class Plan_Title(db.Model, AutoSerialize):
 
     __tablename__ = 'apps_plan_title'
-    __public__ = ('id', 'name_en', 'name_pt')
-    
     id = db.Column(db.Integer, primary_key = True)
     name_en = db.Column(db.String(120))
     name_pt = db.Column(db.String(120))

@@ -1,0 +1,19 @@
+<h1>{% trans %}Complexity{% endtrans %}</h1>
+
+<h2>{% trans %}Economic Complexity{% endtrans %} (ECI)</h2>
+<p>
+  {% autoescape false %}
+  {{ _('Economic Complexity measures how diversified and complex a location’s export production is. It is calculated as the average complexity of the products’ complexities (or PCIs) that a location exports with %(rca)s.', rca = '<a href="/about/glossary/rca/">RCA</a>') }}
+  {% endautoescape %}
+</p>
+
+<p>{% trans %}Used In{% endtrans %}: 
+  <a href="/about/apps/scatter/">{% trans %}Scatter{% endtrans %}</a>
+</p>
+
+<h2>{% trans %}Product Complexity{% endtrans %} (PCI)</h2>
+<p>{% trans %}Product Complexity is a measure of how complex a product is, based on how many countries export the product and how diversified those exporters are.{% endtrans %}</p>
+
+<p>{% trans %}Used In{% endtrans %}: 
+  <a href="/about/apps/scatter/">{% trans %}Scatter{% endtrans %}</a>
+</p>

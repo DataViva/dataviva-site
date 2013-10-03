@@ -1,0 +1,8 @@
+<h1>{% trans %}Recommended Employees{% endtrans %}</h1>
+<p>
+  {% autoescape false %}
+  {{ _('To determine how many employees of a given occupation are recommended for a given industry in a given location, we find the top 20%(percent)s of similar locations by %(prox)s and take the average of those locations’ number of employees in an occupation per establishment. If a location already has %(rca)s we would just use their number for the recommended employment.', percent = "%", rca = '<a href="/about/glossary/rca/">RCA</a>', prox = '<a href="/about/glossary/proximity/">%s</a>' % (_("Locational Proximity"))) }}
+  {% endautoescape %}
+</p>
+
+<p>{% trans %}Used In{% endtrans %}: <a href="/about/apps/occugrid/">{% trans %}Occugrid{% endtrans %}</a></p>

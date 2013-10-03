@@ -47,6 +47,10 @@
   width: 100%;
 }
 
+.decision.icon.short, .title.icon.short, .help.icon.short {
+  padding: 6px 24px 6px 24px !important;
+}
+
 .decision.icon.short:before,
 .help.icon.short:before {
   font-size: 12px;
@@ -341,12 +345,31 @@
 /* About Buttons */
 /*****************/
 
-.icon.general:before {
-  content: "\f0a3";
+.decision.icon.short.rais:before {
+  background-image: url("/static/img/icons/cbo/cbo_all.png");
 }
 
-.icon.glossary:before {
-  content: "\f02d";
+.decision.icon.short.secex:before {
+  background-image: url("/static/img/icons/hs/hs_all.png");
+}
+
+.decision.icon.short.comtrade:before {
+  background-image: url("/static/img/icons/wld/wld_all.png");
+}
+
+.help.icon.short.rais:before {
+  background-image: url("/static/img/icons/cbo/cbo_all_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.short.secex:before {
+  background-image: url("/static/img/icons/hs/hs_all_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.short.comtrade:before {
+  background-image: url("/static/img/icons/wld/wld_all_black.png");
+  opacity: 0.2;
 }
 
 /*******************/

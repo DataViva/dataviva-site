@@ -18,51 +18,109 @@
 
 <div id="about_nav" class="grid5col1">
     
-    <a class="decision short icon general{% if page == 'apps' %} active{% endif %}" href="{{ url_for('about.about') }}">
-      {% trans %}General{% endtrans %}
+    <a class="{% if page == 'dataviva' %}decision{% else %}help{% endif %}" href="{{ url_for('about.about') }}">
+      {% trans %}About the Site{% endtrans %}
     </a>
     
-    <a class="decision short icon data{% if page == 'data' %} active{% endif %}" href="{{ url_for('about.data') }}">
-      {% trans %}Data{% endtrans %}
+    <a class="{% if page == 'data' %}decision{% else %}help{% endif %}" href="{{ url_for('about.data', data='rais') }}">
+      {% trans %}About the Data{% endtrans %}
     </a>
     
-    <a class="decision short icon glossary{% if page == 'glossary' %} active{% endif %}" href="{{ url_for('about.glossary') }}">
+    {% if page == 'data' %}
+    
+      <a class="{% if data == 'rais' %}decision{% else %}help{% endif %} short icon rais" href="{{ url_for('about.data', data='rais')}}">
+        RAIS
+      </a>
+    
+      <a class="{% if data == 'secex' %}decision{% else %}help{% endif %} short icon secex" href="{{ url_for('about.data', data='secex')}}">
+        SECEX/MDIC
+      </a>
+    
+      <a class="{% if data == 'comtrade' %}decision{% else %}help{% endif %} short icon comtrade" href="{{ url_for('about.data', data='comtrade')}}">
+        UN Comtrade
+      </a>
+    
+    {% endif %}
+    
+    <a class="{% if page == 'apps' %}decision{% else %}help{% endif %}" href="{{ url_for('about.apps', app='tree_map') }}">
+      {% trans %}About the Apps{% endtrans %}
+    </a>
+    
+    {% if page == 'apps' %}
+    
+      <a class="{% if app == 'tree_map' %}decision{% else %}help{% endif %} short icon tree_map" href="{{ url_for('about.apps', app='tree_map')}}">
+        {% trans %}Tree Map{% endtrans %}
+      </a>
+    
+      <a class="{% if app == 'stacked' %}decision{% else %}help{% endif %} short icon stacked" href="{{ url_for('about.apps', app='stacked')}}">
+        {% trans %}Stacked{% endtrans %}
+      </a>
+    
+      <a class="{% if app == 'geo_map' %}decision{% else %}help{% endif %} short icon geo_map" href="{{ url_for('about.apps', app='geo_map')}}">
+        {% trans %}Geo Map{% endtrans %}
+      </a>
+    
+      <a class="{% if app == 'network' %}decision{% else %}help{% endif %} short icon network" href="{{ url_for('about.apps', app='network')}}">
+        {% trans %}Network{% endtrans %}
+      </a>
+    
+      <a class="{% if app == 'rings' %}decision{% else %}help{% endif %} short icon rings" href="{{ url_for('about.apps', app='rings')}}">
+        {% trans %}Rings{% endtrans %}
+      </a>
+    
+      <a class="{% if app == 'scatter' %}decision{% else %}help{% endif %} short icon scatter" href="{{ url_for('about.apps', app='scatter')}}">
+        {% trans %}Scatter{% endtrans %}
+      </a>
+    
+      <a class="{% if app == 'compare' %}decision{% else %}help{% endif %} short icon compare" href="{{ url_for('about.apps', app='compare')}}">
+        {% trans %}Compare{% endtrans %}
+      </a>
+    
+      <a class="{% if app == 'occugrid' %}decision{% else %}help{% endif %} short icon occugrid" href="{{ url_for('about.apps', app='occugrid')}}">
+        {% trans %}Occugrid{% endtrans %}
+      </a>
+    
+    {% endif %}
+    
+    <a class="{% if page == 'glossary' %}decision{% else %}help{% endif %}" href="{{ url_for('about.glossary', term='complexity') }}">
       {% trans %}Glossary{% endtrans %}
     </a>
     
-    <br>
+    {% if page == 'glossary' %}
     
-    <a class="decision short icon tree_map{% if app == 'tree_map' %} active{% endif %}" href="{{ url_for('about.apps', app='tree_map')}}">
-      {% trans %}Tree Map{% endtrans %}
-    </a>
+      <a class="{% if term == 'complexity' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.glossary', term='complexity')}}">
+        {% trans %}Complexity{% endtrans %}
+      </a>
     
-    <a class="decision short icon stacked{% if app == 'stacked' %} active{% endif %}" href="{{ url_for('about.apps', app='stacked')}}">
-      {% trans %}Stacked{% endtrans %}
-    </a>
+      <a class="{% if term == 'distance' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.glossary', term='distance')}}">
+        {% trans %}Distance{% endtrans %}
+      </a>
     
-    <a class="decision short icon geo_map{% if app == 'geo_map' %} active{% endif %}" href="{{ url_for('about.apps', app='geo_map')}}">
-      {% trans %}Geo Map{% endtrans %}
-    </a>
+      <a class="{% if term == 'importance' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.glossary', term='importance')}}">
+        {% trans %}Importance{% endtrans %}
+      </a>
     
-    <a class="decision short icon network{% if app == 'network' %} active{% endif %}" href="{{ url_for('about.apps', app='network')}}">
-      {% trans %}Network{% endtrans %}
-    </a>
+      <a class="{% if term == 'opp_gain' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.glossary', term='opp_gain')}}">
+        {% trans %}Opportunity Gain{% endtrans %}
+      </a>
     
-    <a class="decision short icon rings{% if app == 'rings' %} active{% endif %}" href="{{ url_for('about.apps', app='rings')}}">
-      {% trans %}Rings{% endtrans %}
-    </a>
+      <a class="{% if term == 'proximity' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.glossary', term='proximity')}}">
+        {% trans %}Proximity{% endtrans %}
+      </a>
     
-    <a class="decision short icon scatter{% if app == 'scatter' %} active{% endif %}" href="{{ url_for('about.apps', app='scatter')}}">
-      {% trans %}Scatter{% endtrans %}
-    </a>
+      <a class="{% if term == 'rca' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.glossary', term='rca')}}">
+        RCA
+      </a>
     
-    <a class="decision short icon compare{% if app == 'compare' %} active{% endif %}" href="{{ url_for('about.apps', app='compare')}}">
-      {% trans %}Compare{% endtrans %}
-    </a>
+      <a class="{% if term == 'required' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.glossary', term='required')}}">
+        {% trans %}Recommended Employees{% endtrans %}
+      </a>
     
-    <a class="decision short icon occugrid{% if app == 'occugrid' %} active{% endif %}" href="{{ url_for('about.apps', app='occugrid')}}">
-      {% trans %}Occugrid{% endtrans %}
-    </a>
+      <a class="{% if term == 'unique' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.glossary', term='unique')}}">
+        {% trans %}Unique Values{% endtrans %}
+      </a>
+    
+    {% endif %}
     
 </div>
 
