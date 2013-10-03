@@ -1,35 +1,24 @@
-<h1>Stacked</h1>
+<h1>{% trans %}Stacked{% endtrans %}</h1>
+<p>{% trans %}Stacked Area Charts are similar to line charts, except that the areas created underneath each line are stacked on top of one another, showing overall and granular trends simultaneously over time.{% endtrans %}</p>
 
-<div class="topic">
-<p>Stacked Area Charts are similar to line charts, except that the areas created underneath each line are stacked on top of one another, showing overall and granular trends simultaneously over time.</p>
-</div>
+<h2>{% trans %}Sizing{% endtrans %}</h2>
+<p>
+  {% autoescape false %}
+  {{ _('In the Stacked Area Chart, the Y axis variable determines the size of each area. The default variable is Trade Value for %(prod_data)s and Total Number of Employees for %(emp_data)s, but this value can be changed depending on the dataset. When changing this value, the areas on the chart will resize and reposition accordingly.', emp_data = '<a href="/about/data/rais/">%s</a>' % (_("employment data")), prod_data = '<a href="/about/data/secex/">%s</a>' % (_("product data"))) }}
+  {% endautoescape %}
+</p>
 
-<div class="topic">
-	<h2>Sizing</h2>
-	<p>In the Stacked Area Chart, the Y axis variable determines the size of each area. The default variable is Trade Value for product data and Total Number of Employees for employment data, but this value can be changed depending on the dataset. When changing this value, the areas on the chart will resize and reposition accordingly.</p>
-</div>
+<h2>{% trans %}Sorting{% endtrans %}</h2>
+<p>{% trans %}The areas in the Stacked Area chart can be sorted by 3 different variables: Name, Value, and Sector. The order of these areas can be modified from ascending to descending, and vice versa.{% endtrans %}</p>
 
-<div class="topic">
-	<h2>Sorting</h2>
-	<p>The areas in the Stacked Area chart can be sorted by 3 different variables: Name, Value, and Sector. The order of these areas can be modified from ascending to descending, and vice versa.</p>
-</div>
+<h2>{% trans %}Classification{% endtrans %}</h2>
+<p>{% trans %}By changing the depth shown, you can aggregate the areas to get a broad view of the Sectors, or go deeper to get a more granular look at the data.{% endtrans %}</p>
 
-<div class="topic">
-	<h2>Depth</h2>
-	<p>By changing the depth shown, you can aggregate the areas to get a broad view of the Sectors, or go deeper to get a more granular look at the data.</p>
-</div>
+<h2>{% trans %}Color{% endtrans %}</h2>
+<p>{% trans %}Color, along with the other visualizations, defaults to showing Sectors for the data classification you are viewing (whether it is products, industries, occupations, or locations).{% endtrans %}</p>
 
-<div class="topic">
-	<h2>Color</h2>
-	<p>Color, along with the other visualizations, defaults to showing Sectors for the data classification you are viewing (whether it is products, industries, occupations, or locations).</p>
-</div>
+<h2>{% trans %}Filter/Solo{% endtrans %}</h2>
+<p>{% trans %}By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of areas. Click the “X” on the right of the key to clear all filters and solos.{% endtrans %}</p>
 
-<div class="topic">
-	<h2>Filter/Solo</h2>
-	<p>By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of areas. Click the “X” on the right of the key to clear all filters and solos.</p>
-</div>
-
-<div class="topic">
-	<h2>Layout</h2>
-	<p>The behaviour of the Y axis variable can be switched between “Value” and “Market Share”. In “Value” layout, the areas are calculated on the literal value of the axis variable. In “Market Share” layout, the areas are calculated as a percentage of the overall value for each year.</p>
-</div>
+<h2>{% trans %}Layout{% endtrans %}</h2>
+<p>{% trans %}The behaviour of the Y axis variable can be switched between “Value” and “Market Share”. In “Value” layout, the areas are calculated on the literal value of the axis variable. In “Market Share” layout, the areas are calculated as a percentage of the overall value for each year.{% endtrans %}</p>

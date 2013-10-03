@@ -1,40 +1,35 @@
-<h1>Compare</h1>
+<h1>{% trans %}Compare{% endtrans %}</h1>
+<p>{% trans %}The Compare app is a scatter plot that compares 2 different locations by plotting circles based on a common variable in each of the locations’ dataset.{% endtrans %}</p>
 
-<div class="topic">
-<p>The Compare app is a scatter plot that compares 2 different locations by plotting circles based on a common variable in each of the locations’ dataset.</p>
-</div>
+<h2>{% trans %}Sizing{% endtrans %}</h2>
+<p>
+  {% autoescape false %}
+  {{ _('Each circle has an area proportional to a specified dimension on the data. The default sizing is Trade Value for %(prod_data)s and Total Number of Employees for %(emp_data)s.', emp_data = '<a href="/about/data/rais/">%s</a>' % (_("employment data")), prod_data = '<a href="/about/data/secex/">%s</a>' % (_("product data"))) }}
+  {% endautoescape %}
+</p>
 
-<div class="topic">
-	<h2>Sizing</h2>
-	<p>Each circle has an area proportional to a specified dimension on the data. The default sizing is Trade Value for product data and Total Number of Employees for employment data.</p>
-</div>
+<h2>{% trans %}Classification{% endtrans %}</h2>
+<p>{% trans %}By changing the depth shown, you can aggregate the circles to get a broad view of the Sectors, or go deeper to get a more granular look at the data.{% endtrans %}</p>
 
-<div class="topic">
-	<h2>Depth</h2>
-	<p>By changing the depth shown, you can aggregate the circles to get a broad view of the Sectors, or go deeper to get a more granular look at the data.</p>
-</div>
+<h2>{% trans %}Axes{% endtrans %}</h2>
+<p>
+  {% autoescape false %}
+  {{ _('The circles are positioned in the chart based on each location’s value of a certain variable. The default axes variable is Trade Value for %(prod_data)s and Total Number of Employees for %(emp_data)s. When changing this variable, the circles will reposition accordingly.', emp_data = '<a href="/about/data/rais/">%s</a>' % (_("employment data")), prod_data = '<a href="/about/data/secex/">%s</a>' % (_("product data"))) }}
+  {% endautoescape %}
+</p>
 
-<div class="topic">
-	<h2>Axes</h2>
-	<p>The circles are positioned in the chart based on each location’s value of a certain variable. The default axes variable is Trade Value for product data and Total Number of Employees for employment data. When changing this variable, the circles will reposition accordingly.</p>
-</div>
+<h2>{% trans %}Scale{% endtrans %}</h2>
+<p>{% trans %}You can change the scale of the axes from logarithmic to linear, if it better suits your analysis.{% endtrans %}</p>
 
-<div class="topic">
-	<h2>Scale</h2>
-	<p>You can change the scale of the axes from logarithmic to linear, if it better suits your analysis.</p>
-</div>
+<h2>{% trans %}Color{% endtrans %}</h2>
+<p>
+  {% autoescape false %}
+  {{ _('Color, along with the other visualizations, defaults to showing Sectors for the data classification you are viewing (whether it is products, industries, occupations, or locations). In some cases, the color may be manipulated to show other values, such as Growth, %(comp)s, or %(opp_gain)s.', comp = '<a href="/about/glossary/complexity/">%s</a>' % (_("Complexity")), opp_gain = '<a href="/about/glossary/opp_gain/">%s</a>' % (_("Opportunity Gain"))) }}
+  {% endautoescape %}
+</p>
 
-<div class="topic">
-	<h2>Color</h2>
-	<p>Color, along with the other visualizations, defaults to showing Sectors for the data classification you are viewing (whether it is products, industries, occupations, or locations). In some cases, the color may be manipulated to show other values, such as growth, complexity, or opportunity gain.</p>
-</div>
+<h2>{% trans %}Filter/Solo{% endtrans %}</h2>
+<p>{% trans %}By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of circles. Click the “X” on the right of the key to clear all filters and solos.{% endtrans %}</p>
 
-<div class="topic">
-	<h2>Filter/Solo</h2>
-	<p>By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of circles. Click the “X” on the right of the key to clear all filters and solos.</p>
-</div>
-
-<div class="topic">
-	<h2>Year</h2>
-	<p>The circles are positioned in the chart based on data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each circle will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data changes over time.</p>
-</div>
+<h2>{% trans %}Year{% endtrans %}</h2>
+<p>{% trans %}The circles are positioned in the chart based on data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each circle will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data changes over time.{% endtrans %}</p>

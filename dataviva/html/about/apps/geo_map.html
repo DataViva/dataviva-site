@@ -1,25 +1,18 @@
-<h1>Geo Map</h1>
+<h1>{% trans %}Geo Map{% endtrans %}</h1>
+<p>{% trans %}Geo Maps are a way of viewing a dataset directly connected to it’s geographical origin. Using this app, you can gain a quick understanding of where in a region there is the most activity.{% endtrans %}</p>
 
-<div class="topic">
-<p>Geo Maps are a way of viewing a dataset directly connected to it’s geographical origin. Using this app, you can gain a quick understanding of where in a region there is the most activity.</p>
-</div>
+<h2>{% trans %}Color{% endtrans %}</h2>
+<p>
+  {% autoescape false %}
+  {{ _('Municipalities are colored based on a standard heat map coloring from Blue to Red, with Red being the largest value. The default variable for color is Trade Value for %(prod_data)s and Total Number of Employees for %(emp_data)s, but this value can be changed depending on the dataset. When changing this value, the municipalities will color accordingly.', emp_data = '<a href="/about/data/rais/">%s</a>' % (_("employment data")), prod_data = '<a href="/about/data/secex/">%s</a>' % (_("product data"))) }}
+  {% endautoescape %}
+</p>
 
-<div class="topic">
-	<h2>Color</h2>
-	<p>Municipalities are colored based on a standard heat map coloring from Blue to Red, with Red being the largest value. The default variable for color is Trade Value for product data and Total Number of Employees for employment data, but this value can be changed depending on the dataset. When changing this value, the municipalities will color accordingly.</p>
-</div>
+<h2>{% trans %}Zooming{% endtrans %}</h2>
+<p>{% trans %}You can zoom in and out of the map by using the controls in the top left, or with the mouse scroll wheel. Click and drag the terrain to pan. You can also zoom directly to a specific municipality by clicking on it (and clicking anywhere else on the map will zoom back out).{% endtrans %}</p>
 
-<div class="topic">
-	<h2>Zooming</h2>
-	<p>You can zoom in and out of the map by using the controls in the top left, or with the mouse scroll wheel. Click and drag the terrain to pan. You can also zoom directly to a specific municipality by clicking on it (and clicking anywhere else on the map will zoom back out).</p>
-</div>
+<h2>{% trans %}Map Tiles{% endtrans %}</h2>
+<p>{% trans %}The controls in the bottom right can be used to change the map tiles used. This can be helpful if you want to see specific landmarks or roads.{% endtrans %}</p>
 
-<div class="topic">
-	<h2>Map Tiles</h2>
-	<p>The controls in the bottom right can be used to change the map tiles used. This can be helpful if you want to see specific landmarks or roads.</p>
-</div>
-
-<div class="topic">
-	<h2>Year</h2>
-	<p>The municipalities display data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each municipality will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data change over time.</p>
-</div>
+<h2>{% trans %}Year{% endtrans %}</h2>
+<p>{% trans %}The municipalities display data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each municipality will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data change over time.{% endtrans %}</p>

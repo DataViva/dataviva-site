@@ -1,41 +1,40 @@
-<h1>Occugrid</h1>
+<h1>{% trans %}Occugrid{% endtrans %}</h1>
+<p>
+  {% autoescape false %}
+  {{ _('The Occugrid shows the %(rec)s for a given industry. It can be used to determine which occupations a location may need to hire in order to become more successful. By changing sizing, grouping, and other parameters, a user is able to bring clarity to the list of recommended occupations.', rec = '<a href="/about/glossary/required/">%s</a>' % (_("recommended workforce"))) }}
+  {% endautoescape %}
+</p>
 
-<div class="topic">
-<p>The Occugrid shows the recommended workforce for a given industry. It can be used to determine which occupations a location may need to hire in order to become more successful. By changing sizing, grouping, and other parameters, a user is able to bring clarity to the list of recommended occupations.</p>
-</div>
+<h2>{% trans %}Visual Language{% endtrans %}</h2>
+<p>
+  {% autoescape false %}
+  {{ _('In the Occugrid, each occupation is represented by a small donut chart. The overall slices of the donut are determined by the total %(rec)s. This donut chart is divided into 3 sections, as is illustrated in the following diagram:', rec = '<a href="/about/glossary/required/">%s</a>' % (_("Recommended Employees"))) }}
+  {% endautoescape %}
+</p>
+<img src="/static/img/help/occugrid/occugrid_details_small_{{g.locale}}.png">
 
-<div class="topic">
-	<h2>Visual Language</h2>
-	<p>In the Occugrid, each occupation is represented by a small donut chart. The overall slices of the donut are determined by the total Recommended Employees. This donut chart is divided into 3 sections, as is illustrated in the following diagram:</p>
-	<img src="/static/img/help/occugrid/occugrid_details_small_{{g.locale}}.png">
-</div>
+<h2>{% trans %}Sizing{% endtrans %}</h2>
+<p>
+  {% autoescape false %}
+  {{ _('Each donuts’ radius can be sized using a number of variables. These include: %(imp)s, Average Monthly Wage, and %(rec)s.', rec = '<a href="/about/glossary/required/">%s</a>' % (_("Recommended Employees")), imp = '<a href="/about/glossary/importance/">%s</a>' % (_("Importance"))) }}
+  {% endautoescape %}
+</p>
 
-<div class="topic">
-	<h2>Sizing</h2>
-	<p>Each donuts’ radius can be sized using a number of variables. These include: Importance, Average Monthly Wage, and Recommended Employees.</p>
-</div>
+<h2>{% trans %}Grouping{% endtrans %}</h2>
+<p>{% trans %}To help get a quick understanding of the different types of occupations you are looking at, the donuts can be placed into different groupings. These include: Grid and Category.{% endtrans %}</p>
 
-<div class="topic">
-	<h2>Grouping</h2>
-	<p>To help get a quick understanding of the different types of occupations you are looking at, the donuts can be placed into different groupings. These include: Grid and Category.</p>
-</div>
+<h2>{% trans %}Sorting{% endtrans %}</h2>
+<p>{% trans %}The donuts can also be ordered (from top left to bottom right) by a number of variables: Name, Value (whatever the current Sizing is), and Category.{% endtrans %}</p>
 
-<div class="topic">
-	<h2>Sorting</h2>
-	<p>The donuts can also be ordered (from top left to bottom right) by a number of variables: Name, Value (whatever the current Sizing is), and Category.</p>
-</div>
+<h2>{% trans %}Color{% endtrans %}</h2>
+<p>
+  {% autoescape false %}
+  {{ _('Color, along with the other visualizations, defaults to showing Sectors for the data classification you are viewing (whether it is products, industries, occupations, or locations). In some cases, the color may be manipulated to show other values, such as Growth, %(comp)s, or %(opp_gain)s.', comp = '<a href="/about/glossary/complexity/">%s</a>' % (_("Complexity")), opp_gain = '<a href="/about/glossary/opp_gain/">%s</a>' % (_("Opportunity Gain"))) }}
+  {% endautoescape %}
+</p>
 
-<div class="topic">
-	<h2>Color</h2>
-	<p>Color, along with the other visualizations, defaults to showing top-level categories for the data classification you are viewing (whether it is products, industries, occupations, or locations). In some cases, the color may be manipulated to show other values, such as growth, complexity, or opportunity gain.</p>
-</div>
+<h2>{% trans %}Filter/Solo{% endtrans %}</h2>
+<p>{% trans %}By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of donuts. Click the “X” on the right of the key to clear all filters and solos.{% endtrans %}</p>
 
-<div class="topic">
-	<h2>Filter/Solo</h2>
-	<p>By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of donuts. Click the “X” on the right of the key to clear all filters and solos.</p>
-</div>
-
-<div class="topic">
-	<h2>Year</h2>
-	<p>The donuts display data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each donut will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how occupations change over time.</p>
-</div>
+<h2>{% trans %}Year{% endtrans %}</h2>
+<p>{% trans %}The donuts display data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each donut will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how occupations change over time.{% endtrans %}</p>

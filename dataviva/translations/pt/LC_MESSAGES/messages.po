@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-03 16:05-0400\n"
+"POT-Creation-Date: 2013-10-03 17:24-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -139,6 +139,10 @@ msgstr "Siga um passo a passo para gerar um relatório com vários aplicativos."
 msgid "About the Apps"
 msgstr "Sobre os Aplicativos"
 
+#: dataviva/html/about/apps.html:10
+msgid "View the App"
+msgstr "Ver o Aplicativo"
+
 #: dataviva/html/about/data.html:4 dataviva/html/templates/about.html:26
 msgid "About the Data"
 msgstr "Sobre os Dados"
@@ -171,6 +175,601 @@ msgstr ""
 #: dataviva/html/about/glossary.html:4 dataviva/html/templates/about.html:86
 msgid "Glossary"
 msgstr "Glossário"
+
+#: dataviva/html/about/apps/compare.html:1 dataviva/html/apps/index.html:44
+#: dataviva/html/templates/about.html:76
+msgid "Compare"
+msgstr "Compare"
+
+#: dataviva/html/about/apps/compare.html:2
+msgid ""
+"The Compare app is a scatter plot that compares 2 different locations by "
+"plotting circles based on a common variable in each of the locations’ "
+"dataset."
+msgstr ""
+"O Aplicativo Comparar é um gráfico de dispersão que compara duas "
+"localidades diferentes traçando círculos com base em uma variável comum "
+"em cada um dos conjuntos de dados dos locais."
+
+#: dataviva/html/about/apps/compare.html:4
+#: dataviva/html/about/apps/network.html:8
+#: dataviva/html/about/apps/occugrid.html:16
+#: dataviva/html/about/apps/scatter.html:8
+#: dataviva/html/about/apps/stacked.html:4
+#: dataviva/html/about/apps/tree_map.html:4
+msgid "Sizing"
+msgstr "Dimensão"
+
+#: dataviva/html/about/apps/compare.html:7
+#, python-format
+msgid ""
+"Each circle has an area proportional to a specified dimension on the "
+"data. The default sizing is Trade Value for %(prod_data)s and Total "
+"Number of Employees for %(emp_data)s."
+msgstr ""
+"Cada círculo tem uma área proporcional a uma dimensão especificada nos "
+"dados. A Dimensão padrão são o valor comercial para os %(prod_data)s e o "
+"número total de funcionários para os %(emp_data)s."
+
+#: dataviva/html/about/apps/compare.html:7
+#: dataviva/html/about/apps/compare.html:17
+#: dataviva/html/about/apps/geo_map.html:7
+#: dataviva/html/about/apps/network.html:11
+#: dataviva/html/about/apps/scatter.html:11
+#: dataviva/html/about/apps/stacked.html:7
+#: dataviva/html/about/apps/tree_map.html:7
+#: dataviva/html/about/glossary/proximity.html:21
+msgid "employment data"
+msgstr "dados de emprego"
+
+#: dataviva/html/about/apps/compare.html:7
+#: dataviva/html/about/apps/compare.html:17
+#: dataviva/html/about/apps/geo_map.html:7
+#: dataviva/html/about/apps/network.html:11
+#: dataviva/html/about/apps/network.html:25
+#: dataviva/html/about/apps/rings.html:11
+#: dataviva/html/about/apps/scatter.html:11
+#: dataviva/html/about/apps/stacked.html:7
+#: dataviva/html/about/apps/tree_map.html:7
+msgid "product data"
+msgstr "dados do produto"
+
+#: dataviva/html/about/apps/compare.html:11
+#: dataviva/html/about/apps/scatter.html:15
+#: dataviva/html/about/apps/stacked.html:14
+#: dataviva/html/about/apps/tree_map.html:14
+#: dataviva/html/data/classifications.html:21
+msgid "Classification"
+msgstr "Classificação"
+
+#: dataviva/html/about/apps/compare.html:12
+#: dataviva/html/about/apps/scatter.html:16
+msgid ""
+"By changing the depth shown, you can aggregate the circles to get a broad"
+" view of the Sectors, or go deeper to get a more granular look at the "
+"data."
+msgstr ""
+"Alterando a profundidade mostrada, você pode agregar os círculos para "
+"obter uma visão ampla dos setores, ou ir mais fundo para obter uma visão "
+"mais granular dos dados."
+
+#: dataviva/html/about/apps/compare.html:14
+msgid "Axes"
+msgstr "Eixos"
+
+#: dataviva/html/about/apps/compare.html:17
+#, python-format
+msgid ""
+"The circles are positioned in the chart based on each location’s value of"
+" a certain variable. The default axes variable is Trade Value for "
+"%(prod_data)s and Total Number of Employees for %(emp_data)s. When "
+"changing this variable, the circles will reposition accordingly."
+msgstr "Os círculos estão posicionados no gráfico baseado no valor de uma determinada variável de cada localização. O padrão da variável dos eixos são o valor comercial para os %(prod_data)s e o número total de funcionários para os %(emp_data)s. Ao alterar esta variável, os círculos vão se reposicionar adequadamente."
+
+#: dataviva/html/about/apps/compare.html:21
+msgid "Scale"
+msgstr "Escala"
+
+#: dataviva/html/about/apps/compare.html:22
+msgid ""
+"You can change the scale of the axes from logarithmic to linear, if it "
+"better suits your analysis."
+msgstr "Você pode alterar a escala dos eixos de logarítmica para linear, o que for mais adequado para sua análise."
+
+#: dataviva/html/about/apps/compare.html:24
+#: dataviva/html/about/apps/geo_map.html:4
+#: dataviva/html/about/apps/network.html:29
+#: dataviva/html/about/apps/occugrid.html:29
+#: dataviva/html/about/apps/rings.html:15
+#: dataviva/html/about/apps/scatter.html:18
+#: dataviva/html/about/apps/stacked.html:17
+#: dataviva/html/about/apps/tree_map.html:17
+msgid "Color"
+msgstr "Cor"
+
+#: dataviva/html/about/apps/compare.html:27
+#: dataviva/html/about/apps/network.html:32
+#: dataviva/html/about/apps/occugrid.html:32
+#: dataviva/html/about/apps/rings.html:18
+#: dataviva/html/about/apps/scatter.html:21
+#: dataviva/html/about/apps/tree_map.html:20
+#, python-format
+msgid ""
+"Color, along with the other visualizations, defaults to showing Sectors "
+"for the data classification you are viewing (whether it is products, "
+"industries, occupations, or locations). In some cases, the color may be "
+"manipulated to show other values, such as Growth, %(comp)s, or "
+"%(opp_gain)s."
+msgstr "A Cor, junto com as outras visualizações, é padronizada para mostrar Setores para a classificação de dados que você está vendo (sejam de produtos, indústrias, profissões ou locais). Em alguns casos, a cor pode ser manipulada para mostrar outros valores, tais como o crescimento, %(comp)s, ou %(opp_gain)s."
+
+#: dataviva/html/about/apps/compare.html:27
+#: dataviva/html/about/apps/network.html:32
+#: dataviva/html/about/apps/occugrid.html:32
+#: dataviva/html/about/apps/rings.html:18
+#: dataviva/html/about/apps/scatter.html:4
+#: dataviva/html/about/apps/scatter.html:21
+#: dataviva/html/about/apps/tree_map.html:20
+#: dataviva/html/about/glossary/complexity.html:1
+#: dataviva/html/templates/about.html:92
+msgid "Complexity"
+msgstr "Complexidade"
+
+#: dataviva/html/about/apps/compare.html:27
+#: dataviva/html/about/apps/network.html:32
+#: dataviva/html/about/apps/occugrid.html:32
+#: dataviva/html/about/apps/rings.html:18
+#: dataviva/html/about/apps/scatter.html:21
+#: dataviva/html/about/apps/tree_map.html:20
+#: dataviva/html/about/glossary/opp_gain.html:1
+#: dataviva/html/templates/about.html:104
+msgid "Opportunity Gain"
+msgstr "Ganho de Oportunidade"
+
+#: dataviva/html/about/apps/compare.html:31
+#: dataviva/html/about/apps/network.html:36
+#: dataviva/html/about/apps/occugrid.html:36
+#: dataviva/html/about/apps/rings.html:22
+#: dataviva/html/about/apps/scatter.html:32
+#: dataviva/html/about/apps/stacked.html:20
+#: dataviva/html/about/apps/tree_map.html:24
+msgid "Filter/Solo"
+msgstr "Filtro/Solo"
+
+#: dataviva/html/about/apps/compare.html:32
+#: dataviva/html/about/apps/network.html:37
+#: dataviva/html/about/apps/rings.html:23
+#: dataviva/html/about/apps/scatter.html:33
+msgid ""
+"By using the key on the bottom of the page, you can remove (filter) or "
+"single out (solo) specific Sectors of circles. Click the “X” on the right"
+" of the key to clear all filters and solos."
+msgstr "Ao usar a chave na parte inferior da página, você pode remover (filtro) ou destacar (solo) círculos de setores específicos. Clique no “X” com o botão direito para limpar todos os filtros e solos."
+
+#: dataviva/html/about/apps/compare.html:34
+#: dataviva/html/about/apps/geo_map.html:17
+#: dataviva/html/about/apps/network.html:39
+#: dataviva/html/about/apps/occugrid.html:39
+#: dataviva/html/about/apps/rings.html:25
+#: dataviva/html/about/apps/scatter.html:35
+#: dataviva/html/about/apps/tree_map.html:27
+msgid "Year"
+msgstr "Ano"
+
+#: dataviva/html/about/apps/compare.html:35
+#: dataviva/html/about/apps/scatter.html:36
+msgid ""
+"The circles are positioned in the chart based on data for a specific year"
+" in the dataset. By changing the year using the slider at the bottom of "
+"the app, the data associated with each circle will change to that new "
+"year’s data. This, in conjunction with using the play button to cycle "
+"through years, can provide helpful insights on how the data changes over "
+"time."
+msgstr "Os círculos estão posicionados no gráfico com base nos dados de um ano específico no conjunto de dados. Alterando o ano, utilizando a barra na parte inferior do aplicativo, os dados associados a cada círculo vão se modificar para os dados do novo ano selecionado. Em conjunção com o uso do botão “play” para navegar através dos anos, isto pode fornecer insights úteis de como os dados mudam com o tempo."
+
+#: dataviva/html/about/apps/geo_map.html:1 dataviva/html/apps/index.html:22
+#: dataviva/html/templates/about.html:60
+msgid "Geo Map"
+msgstr "Mapa"
+
+#: dataviva/html/about/apps/geo_map.html:2
+msgid ""
+"Geo Maps are a way of viewing a dataset directly connected to it’s "
+"geographical origin. Using this app, you can gain a quick understanding "
+"of where in a region there is the most activity."
+msgstr "Os Mapas são uma forma de visualizar um conjunto de dados diretamente conectados com sua origem geográfica. Utilizando este aplicativo, você pode obter uma compreensão rápida da área da região onde há maior atividade."
+
+#: dataviva/html/about/apps/geo_map.html:7
+#, python-format
+msgid ""
+"Municipalities are colored based on a standard heat map coloring from "
+"Blue to Red, with Red being the largest value. The default variable for "
+"color is Trade Value for %(prod_data)s and Total Number of Employees for "
+"%(emp_data)s, but this value can be changed depending on the dataset. "
+"When changing this value, the municipalities will color accordingly."
+msgstr "Municípios são coloridos com base em um mapa padrão de temperatura da cor, do azul ao vermelho, Sendo o Vermelho o maior valor. A variável padrão de cor, são o valor comercial para os %(prod_data)s e o número total de funcionários para os %(emp_data)s, mas este valor pode ser alterado, dependendo do conjunto de dados. Ao alterar este valor, os municípios serão coloridos adequadamente."
+
+#: dataviva/html/about/apps/geo_map.html:11
+msgid "Zooming"
+msgstr "Zoom"
+
+#: dataviva/html/about/apps/geo_map.html:12
+msgid ""
+"You can zoom in and out of the map by using the controls in the top left,"
+" or with the mouse scroll wheel. Click and drag the terrain to pan. You "
+"can also zoom directly to a specific municipality by clicking on it (and "
+"clicking anywhere else on the map will zoom back out)."
+msgstr "Você pode ampliar ou reduzir o mapa utilizando os controles no canto esquerdo superior ou com o controle deslizante do mouse. Clique e arraste para deslocar o terreno. Você pode ainda ampliar diretamente um município específico clicando nele (clicando em qualquer outro lugar do mapa, vai retirar o zoom)."
+
+#: dataviva/html/about/apps/geo_map.html:14
+msgid "Map Tiles"
+msgstr "Quadros dos Mapas"
+
+#: dataviva/html/about/apps/geo_map.html:15
+msgid ""
+"The controls in the bottom right can be used to change the map tiles "
+"used. This can be helpful if you want to see specific landmarks or roads."
+msgstr "Os controles no canto inferior direito podem ser usados para alterar os quadros dos mapas utilizados. Isto pode ser útil se você quer visualizar terrenos ou estradas específicas."
+
+#: dataviva/html/about/apps/geo_map.html:18
+msgid ""
+"The municipalities display data for a specific year in the dataset. By "
+"changing the year using the slider at the bottom of the app, the data "
+"associated with each municipality will change to that new year’s data. "
+"This, in conjunction with using the play button to cycle through years, "
+"can provide helpful insights on how the data change over time."
+msgstr "Os municípios mostram os dados de um ano específico no conjunto de dados. Alterando o ano, usando a barra deslizante na parte inferior do aplicativo, os dados associados a cada município vão se alterar para os dados do ano selecionado. Em conjunção com o uso do botão “play”, para navegar através dos anos, pode proporcionar uma visão útil de como os dados se modificam com o tempo."
+
+#: dataviva/html/about/apps/network.html:1
+#: dataviva/html/about/glossary/distance.html:4
+#: dataviva/html/about/glossary/distance.html:12
+#: dataviva/html/about/glossary/proximity.html:4
+#: dataviva/html/about/glossary/proximity.html:12
+#: dataviva/html/about/glossary/proximity.html:42
+#: dataviva/html/about/glossary/rca.html:7 dataviva/html/apps/index.html:27
+#: dataviva/html/templates/about.html:64
+msgid "Network"
+msgstr "Rede"
+
+#: dataviva/html/about/apps/network.html:4
+#, python-format
+msgid ""
+"The Network app displays data points as a fixed layout of nodes and their"
+" connections, based on the selected dataset. The connections and node "
+"positions are calculated based off of their %(prox)s with eachother."
+msgstr "O aplicativo de Rede mostra pontos de dados em um layout fixo de campos e suas conexões, com base no conjunto de dados selecionado. As conexões e posições dos campos são calculadas com base na %(prox)s entre eles."
+
+#: dataviva/html/about/apps/network.html:4
+#: dataviva/html/about/apps/rings.html:4
+#: dataviva/html/about/glossary/proximity.html:1
+#: dataviva/html/templates/about.html:108
+msgid "Proximity"
+msgstr "Proximidade"
+
+#: dataviva/html/about/apps/network.html:11
+#, python-format
+msgid ""
+"In a Network, each circle has an area proportional to a specified "
+"dimension on the data. Our default sizing is Trade Value for "
+"%(prod_data)s and Wages Paid for %(emp_data)s, but this value can be "
+"changed depending on the dataset. When changing this value, the circles "
+"on the page will resize accordingly."
+msgstr "Em uma Rede, cada círculo possui uma área proporcional para uma dimensão especificada nos dados. O padrão de dimensão são o valor comercial para os %(prod_data)s e Salários Pagos para %(emp_data)s, mas este valor pode ser alterado no conjunto de dados. Quando alterar este valor, os círculos da página são redimensionados adequadamente."
+
+#: dataviva/html/about/apps/network.html:15
+msgid "Highlight RCA"
+msgstr "Destaque de RCA"
+
+#: dataviva/html/about/apps/network.html:18
+#, python-format
+msgid ""
+"The circles in the network are colored in if the current location has "
+"competitive advantage in that field. By turning on the “Highlight RCA” "
+"toggle, the items that do not have %(rca)s fade to grey."
+msgstr "Os círculos na rede são coloridos se a localidade atual possui vantagem competitiva naquele campo. Ao acionar o “Destaque RCA”, os itens que não têm %(rca)s se tornam cinza."
+
+#: dataviva/html/about/apps/network.html:22
+#: dataviva/html/about/apps/rings.html:8
+msgid "RCA Scope"
+msgstr "Escopo RCA"
+
+#: dataviva/html/about/apps/network.html:25
+#: dataviva/html/about/apps/rings.html:11
+#, python-format
+msgid ""
+"When looking at %(prod_data)s, you can change the %(rca)s calculation "
+"from using internal domestic comparisons (%(secex)s) to using "
+"international world trade comparisons (%(comtrade)s)."
+msgstr "Quando buscando nos %(prod_data)s, você pode alterar o cálculo de %(rca)s através das comparações domésticas internas (%(secex)s) para usar as comparações internacionais de comércio mundial (%(comtrade)s)."
+
+#: dataviva/html/about/apps/network.html:40
+#: dataviva/html/about/apps/rings.html:26
+msgid ""
+"The circles display data for a specific year in the dataset. By changing "
+"the year using the slider at the bottom of the app, the data associated "
+"with each circle will change to that new year’s data. This, in "
+"conjunction with using the play button to cycle through years, can "
+"provide helpful insights on how the data changes over time."
+msgstr "Os círculos mostram dados de um Ano específico no conjunto de dados. Alterando o ano, na barra deslizante na parte inferior do aplicativo, os dados associados de cada círculo vão se modificar para os dados do novo ano selecionado. Em conjunção com o uso do botão “play” para circular pelos anos, isso pode fornecer insights úteis de como os dados mudam com o tempo."
+
+#: dataviva/html/about/apps/occugrid.html:1
+#: dataviva/html/about/glossary/importance.html:14
+#: dataviva/html/about/glossary/required.html:8
+#: dataviva/html/apps/index.html:49 dataviva/html/templates/about.html:80
+msgid "Occugrid"
+msgstr "Ocupações"
+
+#: dataviva/html/about/apps/occugrid.html:4
+#, python-format
+msgid ""
+"The Occugrid shows the %(rec)s for a given industry. It can be used to "
+"determine which occupations a location may need to hire in order to "
+"become more successful. By changing sizing, grouping, and other "
+"parameters, a user is able to bring clarity to the list of recommended "
+"occupations."
+msgstr "O Ocupações mostra a %(rec)s para um determinado setor. Pode ser usado para determinar quais ocupações uma localidade pode precisar contratar, a fim de ser mais bem sucedida. Mudando Dimensão, agrupamento e outros parâmetros, o usuário é capaz de trazer clareza para a lista de ocupações recomendadas."
+
+#: dataviva/html/about/apps/occugrid.html:4
+msgid "recommended workforce"
+msgstr "força de trabalho recomendada"
+
+#: dataviva/html/about/apps/occugrid.html:8
+msgid "Visual Language"
+msgstr "Linguagem Visual"
+
+#: dataviva/html/about/apps/occugrid.html:11
+#, python-format
+msgid ""
+"In the Occugrid, each occupation is represented by a small donut chart. "
+"The overall slices of the donut are determined by the total %(rec)s. This"
+" donut chart is divided into 3 sections, as is illustrated in the "
+"following diagram:"
+msgstr "No Ocupações, cada ocupação é representada por um pequeno gráfico tipo donut. Os cortes gerais do donut são determinados pelo número total de %(rec)s. Este gráfico de donut está dividido em três seções, tal como ilustrado no seguinte diagrama:"
+
+#: dataviva/html/about/apps/occugrid.html:11
+#: dataviva/html/about/apps/occugrid.html:19
+#: dataviva/html/about/glossary/proximity.html:21
+#: dataviva/html/about/glossary/required.html:1
+#: dataviva/html/templates/about.html:116
+msgid "Recommended Employees"
+msgstr "Empregados Recomendados"
+
+#: dataviva/html/about/apps/occugrid.html:19
+#, python-format
+msgid ""
+"Each donuts’ radius can be sized using a number of variables. These "
+"include: %(imp)s, Average Monthly Wage, and %(rec)s."
+msgstr "Cada raio do donut pode ser dimensionado usando um número de variáveis. Estes incluem: %(imp)s, Salário Médio Mensal, e %(rec)s."
+
+#: dataviva/html/about/apps/occugrid.html:19
+#: dataviva/html/about/glossary/importance.html:1
+#: dataviva/html/templates/about.html:100
+msgid "Importance"
+msgstr "Importância"
+
+#: dataviva/html/about/apps/occugrid.html:23
+msgid "Grouping"
+msgstr "Agrupamento"
+
+#: dataviva/html/about/apps/occugrid.html:24
+msgid ""
+"To help get a quick understanding of the different types of occupations "
+"you are looking at, the donuts can be placed into different groupings. "
+"These include: Grid and Category."
+msgstr "Para ajudar a obter uma rápida compreensão dos diferentes tipos de ocupações que você está buscando, os donuts podem ser colocados em diferentes agrupamentos. Estes incluem: Grade, e Categoria."
+
+#: dataviva/html/about/apps/occugrid.html:26
+#: dataviva/html/about/apps/stacked.html:11
+msgid "Sorting"
+msgstr "Classificação"
+
+#: dataviva/html/about/apps/occugrid.html:27
+msgid ""
+"The donuts can also be ordered (from top left to bottom right) by a "
+"number of variables: Name, Value (whatever the current Sizing is), and "
+"Category."
+msgstr "Os donuts também podem ser ordenados (de cima à esquerda para baixo à direita) por uma série de variáveis: Nome, Valor (qualquer que seja a Dimensão atual), e Categoria."
+
+#: dataviva/html/about/apps/occugrid.html:37
+msgid ""
+"By using the key on the bottom of the page, you can remove (filter) or "
+"single out (solo) specific Sectors of donuts. Click the “X” on the right "
+"of the key to clear all filters and solos."
+msgstr "Ao usar a chave na parte inferior da página, você pode remover (Filtro) ou destacar (solo) Setores específicos de donuts. Clique no “X” com o botão direito para limpar todos os filtros e solos."
+
+#: dataviva/html/about/apps/occugrid.html:40
+msgid ""
+"The donuts display data for a specific year in the dataset. By changing "
+"the year using the slider at the bottom of the app, the data associated "
+"with each donut will change to that new year’s data. This, in conjunction"
+" with using the play button to cycle through years, can provide helpful "
+"insights on how occupations change over time."
+msgstr "Os donuts mostram dados para um ano específico no conjunto de dados. Alterando o ano na barra deslizante na parte inferior do aplicativo, os dados associados a cada donut vão ser alterados para se ajustarem aos dados do novo ano. Em conjunto com o uso do botão play para percorrer os anos, isso pode fornecer insights úteis sobre como ocupações mudam com o tempo."
+
+#: dataviva/html/about/apps/rings.html:1
+#: dataviva/html/about/glossary/distance.html:13
+#: dataviva/html/about/glossary/proximity.html:43
+#: dataviva/html/about/glossary/rca.html:8 dataviva/html/apps/index.html:34
+#: dataviva/html/templates/about.html:68
+msgid "Rings"
+msgstr "Anéis"
+
+#: dataviva/html/about/apps/rings.html:4
+#, python-format
+msgid ""
+"The Rings app shows a specific data point’s primary and secondary "
+"connections in the associated Network. The connections are calculated "
+"based off of their %(prox)s with eachother."
+msgstr "O Aplicativo Anéis mestra dados específicos de conexão primários e secundários dos pontos na Rede correspondente. As conexões são calculadas com base na %(prox)s entre elas."
+
+#: dataviva/html/about/apps/scatter.html:1
+#: dataviva/html/about/glossary/complexity.html:11
+#: dataviva/html/about/glossary/complexity.html:18
+#: dataviva/html/about/glossary/distance.html:11
+#: dataviva/html/about/glossary/opp_gain.html:5
+#: dataviva/html/about/glossary/rca.html:6
+#: dataviva/html/about/glossary/unique.html:4
+#: dataviva/html/about/glossary/unique.html:9 dataviva/html/apps/index.html:39
+#: dataviva/html/templates/about.html:72
+msgid "Scatter"
+msgstr "Dispersão"
+
+#: dataviva/html/about/apps/scatter.html:4
+#, python-format
+msgid ""
+"A scatter plot is a collection of data positioned on a cartesian plane "
+"using 2 available variables. The default variables shown here are "
+"%(dist)s and %(comp)s."
+msgstr "O gráfico de Dispersão é uma coleção de dados posicionados em um plano cartesiano utilizando duas variáveis disponíveis. As variáveis padrão são %(dist)s e %(comp)s."
+
+#: dataviva/html/about/apps/scatter.html:4
+#: dataviva/html/about/glossary/distance.html:1
+#: dataviva/html/templates/about.html:96
+msgid "Distance"
+msgstr "Distância"
+
+#: dataviva/html/about/apps/scatter.html:11
+#, python-format
+msgid ""
+"In a Scatter app, each circle has an area proportional to a specified "
+"dimension on the data. Our default sizing is Trade Value for "
+"%(prod_data)s and Total Number of Employees for %(emp_data)s, but this "
+"value can be changed depending on the dataset. When changing this value, "
+"the circles on the page will resize accordingly."
+msgstr "Em um aplicativo Dispersão, cada círculo tem uma área proporcional a uma dimensão especificada nos dados. O padrão de Dimensão são o valor comercial para os %(prod_data)s e o número total de empregados para os %(emp_data)s, mas este valor pode ser alterado, dependendo do conjunto de dados. Ao alterar este valor, os círculos da página serão adequadamente redimensionados."
+
+#: dataviva/html/about/apps/scatter.html:25
+msgid "Hide RCA"
+msgstr "Ocultar RCA"
+
+#: dataviva/html/about/apps/scatter.html:28
+#, python-format
+msgid ""
+"When this toggle is turned on, only the items with %(rca)s < 1 will be "
+"shown. This is helpful when looking at distances of potential new "
+"sectors. When this toggle is off, all items will be shown, and if not "
+"viewing at the deepest level, will show items of %(rca)s >= 1 as "
+"percentage of the circle complete. Circles with %(rca)s >= 1 are always "
+"shown filled in every app."
+msgstr "Quando esta alternância é acionada, apenas os itens com %(rca)s <1 serão mostrados. Isso é útil quando se busca distâncias de novos setores potenciais. Quando esta alternância é desativada, todos os itens serão mostrados, e se não visualizar ao nível mais profundo, vai mostrar os itens de %(rca)s >= 1 como percentual do círculo completo. Círculos com %(rca)s >= 1 são sempre mostrados preenchidos em todos os aplicativos."
+
+#: dataviva/html/about/apps/stacked.html:1 dataviva/html/apps/index.html:17
+#: dataviva/html/templates/about.html:56
+msgid "Stacked"
+msgstr "Evolução"
+
+#: dataviva/html/about/apps/stacked.html:2
+msgid ""
+"Stacked Area Charts are similar to line charts, except that the areas "
+"created underneath each line are stacked on top of one another, showing "
+"overall and granular trends simultaneously over time."
+msgstr "Os Gráficos Agrupados por Área são similares aos gráficos lineares, exceto que as áreas criadas sob cada linha estão agrupadas no topo uma da outra, mostrando uma tendência geral e granular simultaneamente sobre o tempo."
+
+#: dataviva/html/about/apps/stacked.html:7
+#, python-format
+msgid ""
+"In the Stacked Area Chart, the Y axis variable determines the size of "
+"each area. The default variable is Trade Value for %(prod_data)s and "
+"Total Number of Employees for %(emp_data)s, but this value can be changed"
+" depending on the dataset. When changing this value, the areas on the "
+"chart will resize and reposition accordingly."
+msgstr "Nos Gráficos Agrupados por Área, a variável do eixo Y determina o tamanho de cada área. O padrão de variável são o valor comercial para os %(prod_data)s e o número total de empregados para os %(emp_data)s, mas este valor pode ser alterado, dependendo do conjunto de dados. Ao alterar este valor, as áreas do gráfico serão adequadamente redimensionadas e reposicionadas."
+
+#: dataviva/html/about/apps/stacked.html:12
+msgid ""
+"The areas in the Stacked Area chart can be sorted by 3 different "
+"variables: Name, Value, and Sector. The order of these areas can be "
+"modified from ascending to descending, and vice versa."
+msgstr "As áreas nos Gráficos Agrupados por Área podem ser classificadas em três variáveis diferentes: Nome, Valor e Setor. A ordem destas áreas pode ser modificada para crescente e decrescente."
+
+#: dataviva/html/about/apps/stacked.html:15
+msgid ""
+"By changing the depth shown, you can aggregate the areas to get a broad "
+"view of the Sectors, or go deeper to get a more granular look at the "
+"data."
+msgstr "Alterando a Profundidade mostrada, você pode agregar áreas para obter uma visão ampla dos setores ou ir mais fundo para obter uma visão mais granular dos dados."
+
+#: dataviva/html/about/apps/stacked.html:18
+msgid ""
+"Color, along with the other visualizations, defaults to showing Sectors "
+"for the data classification you are viewing (whether it is products, "
+"industries, occupations, or locations)."
+msgstr "A Cor, juntamente com as outras visualizações, é padronizada para mostrar Setores para a classificação de dados que você está visualizando (seja de produtos, indústrias, ocupações ou localidades). "
+
+#: dataviva/html/about/apps/stacked.html:21
+msgid ""
+"By using the key on the bottom of the page, you can remove (filter) or "
+"single out (solo) specific Sectors of areas. Click the “X” on the right "
+"of the key to clear all filters and solos."
+msgstr "Ao usar a tecla na parte inferior da página, você pode remover (Filtro) ou destacar (solo) Setores específicos de áreas. Clique no “X” com o botão direito para limpar todos os filtros e solos."
+
+#: dataviva/html/about/apps/stacked.html:23
+msgid "Layout"
+msgstr "Layout"
+
+#: dataviva/html/about/apps/stacked.html:24
+msgid ""
+"The behaviour of the Y axis variable can be switched between “Value” and "
+"“Market Share”. In “Value” layout, the areas are calculated on the "
+"literal value of the axis variable. In “Market Share” layout, the areas "
+"are calculated as a percentage of the overall value for each year."
+msgstr "O comportamento da variável o eixo Y pode ser comutado entre “Valor” e “Cota de Mercado”. Em “Valor”, as áreas são calculadas no valor literal da variável do eixo. Em “Cota de Mercado” as áreas são calculadas como um percentual do valor geral para cada ano."
+
+#: dataviva/html/about/apps/tree_map.html:1 dataviva/html/apps/index.html:12
+#: dataviva/html/templates/about.html:52
+msgid "Tree Map"
+msgstr "Tree Map"
+
+#: dataviva/html/about/apps/tree_map.html:2
+msgid ""
+"Tree Maps display hierarchical data as a set of nested rectangles. Each "
+"branch of the tree is given a rectangle, which is then tiled with smaller"
+" rectangles representing sub-branches."
+msgstr "O TreeMap mostra dados hierárquicos conforme determinados nos retângulos aninhados. Cada “ramo” da árvore possui um retângulo que é então conectado a retângulos menores representando ramos menores."
+
+#: dataviva/html/about/apps/tree_map.html:7
+#, python-format
+msgid ""
+"In a Tree Map, each rectangle has an area proportional to a specified "
+"dimension on the data. Our default sizing is Trade Value for "
+"%(prod_data)s and Total Number of Employees for %(emp_data)s, but this "
+"value can be changed depending on the dataset. When changing this value, "
+"the rectangles on the page will resize and reposition accordingly."
+msgstr "Em um TreeMap, cada retângulo tem uma área proporcional a uma dimensão especificada nos dados. O padrão Dimensão é o valor comercial para os %(prod_data)s e o número total de empregados para os %(emp_data)s, mas este valor pode ser alterado, dependendo do conjunto de dados. Ao alterar este valor, os retângulos na página serão redimensionados e reposicionados adequadamente."
+
+#: dataviva/html/about/apps/tree_map.html:11
+#: dataviva/html/ask/questions.html:30
+msgid "Order"
+msgstr "Ordem"
+
+#: dataviva/html/about/apps/tree_map.html:12
+msgid ""
+"The rectangles in the Tree Map are grouped by their classification’s "
+"Sector, and the Sector’s are ordered from largest to smallest, based on "
+"the sizing variable."
+msgstr "Os retângulos do TreeMap são agrupados conforme o setor de classificação e os setores são ordenados por tamanho, em ordem decrescente, baseado na variável de dimensão."
+
+#: dataviva/html/about/apps/tree_map.html:15
+msgid ""
+"By changing the depth shown, you can aggregate the squares to get a broad"
+" view of the Sectors, or go deeper to get a more granular look at the "
+"data."
+msgstr "Alterando a Profundidade mostrada, você pode agregar os quadrados para obter uma visão ampla dos setores ou ir mais fundo para obter uma visão mais granular dos dados."
+
+#: dataviva/html/about/apps/tree_map.html:25
+msgid ""
+"By using the key on the bottom of the page, you can remove (filter) or "
+"single out (solo) specific Sectors of rectangles. Click the “X” on the "
+"right of the key to clear all filters and solos."
+msgstr "Ao usar a tecla na parte inferior da página, você pode remover (Filtro) ou destacar (solo) Setores específicos individuais de retângulos. Clique no “X” com o botão direito para limpar todos os filtros e solos."
+
+#: dataviva/html/about/apps/tree_map.html:28
+msgid ""
+"The rectangles display data for a specific year in the dataset. By "
+"changing the year using the slider at the bottom of the app, the data "
+"associated with each rectangle will change to that new year’s data. This,"
+" in conjunction with using the play button to cycle through years, can "
+"provide helpful insights on how the data changes over time."
+msgstr "Os retângulos mostram dados para um ano específico no conjunto de dados. Mudando o Ano na barra deslizante na parte inferior do aplicativo, os dados associados a cada retângulo vão ser alterados para se ajustarem ao novo ano. Em conjunto com o uso do botão play para navegar através dos anos, pode fornecer insights úteis sobre como os dados mudam com o tempo."
 
 #: dataviva/html/about/data/comtrade.html:3
 msgid "United Nations Commodity Trade Statistics Database"
@@ -252,7 +851,6 @@ msgid "Ministry of Labor and Employment – MTE"
 msgstr "Ministério do Trabalho e Emprego – MTE"
 
 #: dataviva/html/about/data/rais.html:9
-#, fuzzy, python-format
 msgid ""
 "RAIS is an Administrative Registry created annually for the purpose of "
 "supplying the control, statistical, and information needs of governmental"
@@ -273,8 +871,8 @@ msgstr ""
 "empresas em 31 de dezembro do ano de referência e é composta por "
 "informações declaradas pelas próprias empresas, anualmente, acerca de "
 "seus empregados, da atividade econômica desenvolvida, do seu estoque, "
-"entre outras características. Atualmente, cobre cerca de 97&#37; do universo "
-"do mercado formal brasileiro."
+"entre outras características. Atualmente, cobre cerca de 97&#37; do "
+"universo do mercado formal brasileiro."
 
 #: dataviva/html/about/data/rais.html:12
 msgid ""
@@ -378,11 +976,6 @@ msgstr ""
 " Federação, Municípios; por produtos de acordo com a Nomenclatura Comum "
 "do Mercosul (NCM): Seção, Capítulo, Posição, Subposição, Item e Subitem."
 
-#: dataviva/html/about/glossary/complexity.html:1
-#: dataviva/html/templates/about.html:92
-msgid "Complexity"
-msgstr "Complexidade"
-
 #: dataviva/html/about/glossary/complexity.html:3
 msgid "Economic Complexity"
 msgstr "Complexidade Econômica"
@@ -412,17 +1005,6 @@ msgstr ""
 msgid "Used In"
 msgstr "Usado em"
 
-#: dataviva/html/about/glossary/complexity.html:11
-#: dataviva/html/about/glossary/complexity.html:18
-#: dataviva/html/about/glossary/distance.html:11
-#: dataviva/html/about/glossary/opp_gain.html:5
-#: dataviva/html/about/glossary/rca.html:6
-#: dataviva/html/about/glossary/unique.html:4
-#: dataviva/html/about/glossary/unique.html:9 dataviva/html/apps/index.html:39
-#: dataviva/html/templates/about.html:72
-msgid "Scatter"
-msgstr "Dispersão"
-
 #: dataviva/html/about/glossary/complexity.html:14
 msgid "Product Complexity"
 msgstr "Complexidade do Produto"
@@ -436,11 +1018,6 @@ msgstr ""
 "A Complexidade do produto é uma medida de quão complexo é um produto, "
 "baseado no número de países que exportam o produto e quão diversificados "
 "são estes exportadores."
-
-#: dataviva/html/about/glossary/distance.html:1
-#: dataviva/html/templates/about.html:96
-msgid "Distance"
-msgstr "Distância"
 
 #: dataviva/html/about/glossary/distance.html:4
 #, python-format
@@ -477,30 +1054,8 @@ msgstr ""
 "mais próximo de 1. A equação pode ser encontrada nesta figura."
 
 #: dataviva/html/about/glossary/distance.html:4
-#: dataviva/html/about/glossary/distance.html:12
-#: dataviva/html/about/glossary/proximity.html:4
-#: dataviva/html/about/glossary/proximity.html:12
-#: dataviva/html/about/glossary/proximity.html:42
-#: dataviva/html/about/glossary/rca.html:7 dataviva/html/apps/index.html:27
-#: dataviva/html/templates/about.html:64
-msgid "Network"
-msgstr "Rede"
-
-#: dataviva/html/about/glossary/distance.html:4
 msgid "proximities"
 msgstr "proximidades"
-
-#: dataviva/html/about/glossary/distance.html:13
-#: dataviva/html/about/glossary/proximity.html:43
-#: dataviva/html/about/glossary/rca.html:8 dataviva/html/apps/index.html:34
-#: dataviva/html/templates/about.html:68
-msgid "Rings"
-msgstr "Anéis"
-
-#: dataviva/html/about/glossary/importance.html:1
-#: dataviva/html/templates/about.html:100
-msgid "Importance"
-msgstr "Importância"
 
 #: dataviva/html/about/glossary/importance.html:5
 #, python-format
@@ -536,17 +1091,6 @@ msgstr ""
 "Restaurantes do que Assistentes Contábeis, embora ambos sejam empregados "
 "naquele setor."
 
-#: dataviva/html/about/glossary/importance.html:14
-#: dataviva/html/about/glossary/required.html:8
-#: dataviva/html/apps/index.html:49 dataviva/html/templates/about.html:80
-msgid "Occugrid"
-msgstr "Ocupações"
-
-#: dataviva/html/about/glossary/opp_gain.html:1
-#: dataviva/html/templates/about.html:104
-msgid "Opportunity Gain"
-msgstr "Ganho de Oportunidade"
-
 #: dataviva/html/about/glossary/opp_gain.html:2
 msgid ""
 "Opportunity gain is a measure that indicates how much diversity is "
@@ -556,11 +1100,6 @@ msgstr ""
 "Ganho de oportunidade é uma medida que indica quanta diversidade é "
 "oferecida por um setor, se a localidade desenvolve a capacidade de se "
 "tornar bem sucedida naquele setor."
-
-#: dataviva/html/about/glossary/proximity.html:1
-#: dataviva/html/templates/about.html:108
-msgid "Proximity"
-msgstr "Proximidade"
 
 #: dataviva/html/about/glossary/proximity.html:4
 #, python-format
@@ -633,16 +1172,6 @@ msgstr ""
 "cálculo pode também ser feito pela substituição de produtos por setores "
 "mas, desde que estes números sejam utilizados apenas para cálculo de "
 "%(required)s (que utiliza %(emp_data)s) e estamos utilizando setores."
-
-#: dataviva/html/about/glossary/proximity.html:21
-#: dataviva/html/about/glossary/required.html:1
-#: dataviva/html/templates/about.html:116
-msgid "Recommended Employees"
-msgstr "Empregados Recomendados"
-
-#: dataviva/html/about/glossary/proximity.html:21
-msgid "employment data"
-msgstr "dados de emprego"
 
 #: dataviva/html/about/glossary/proximity.html:27
 msgid "Industry Proximity"
@@ -899,22 +1428,6 @@ msgstr "Mostrar/Ocultar Controles"
 msgid "Which app would you like to build?"
 msgstr "Qual aplicativo você gostaria de desenvolver?"
 
-#: dataviva/html/apps/index.html:12 dataviva/html/templates/about.html:52
-msgid "Tree Map"
-msgstr "Tree Map"
-
-#: dataviva/html/apps/index.html:17 dataviva/html/templates/about.html:56
-msgid "Stacked"
-msgstr "Evolução"
-
-#: dataviva/html/apps/index.html:22 dataviva/html/templates/about.html:60
-msgid "Geo Map"
-msgstr "Mapa"
-
-#: dataviva/html/apps/index.html:44 dataviva/html/templates/about.html:76
-msgid "Compare"
-msgstr "Compare"
-
 #: dataviva/html/apps/info.html:28
 msgid "Previous"
 msgstr "Anterior"
@@ -1008,10 +1521,6 @@ msgstr "Não encontrou a sua resposta aqui?"
 msgid "Submit your question to Escritorio!"
 msgstr "Envie sua pergunta para o Escritório!"
 
-#: dataviva/html/ask/questions.html:30
-msgid "Order"
-msgstr "Solicitado por"
-
 #: dataviva/html/ask/questions.html:32
 msgid "Top Voted"
 msgstr "Mais Votados"
@@ -1019,10 +1528,6 @@ msgstr "Mais Votados"
 #: dataviva/html/ask/questions.html:34
 msgid "Newest"
 msgstr "Mais Recente"
-
-#: dataviva/html/data/classifications.html:21
-msgid "Depth"
-msgstr "Fundo"
 
 #: dataviva/html/data/index.html:3 dataviva/html/data/query.html:32
 #: dataviva/html/templates/site.html:17
@@ -1423,4 +1928,7 @@ msgstr "Sair"
 #: dataviva/profiles/views.py:49
 msgid "a country"
 msgstr "um país"
+
+#~ msgid "Depth"
+#~ msgstr "Fundo"
 
