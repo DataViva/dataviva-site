@@ -146,11 +146,11 @@ def question_vote(slug, user=None):
     elif user is None and g.user is None:
         abort(404)
     
-    # if user is None:
-    #     try:
-    #         opener = urllib2.urlopen("{0}ask/question/{1}/vote/{2}/".format(SITE_MIRROR,slug,g.user.id),None,5)
-    #     except:
-    #         return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+    if user is None:
+        try:
+            opener = urllib2.urlopen("{0}ask/question/{1}/vote/{2}/".format(SITE_MIRROR,slug,g.user.id),None,5)
+        except:
+            return jsonify({"error": gettext("The server is not responding. Please try again later.")})
         
     vote = q.votes.filter_by(user=g.user).first()
     if vote:
