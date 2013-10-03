@@ -9,8 +9,6 @@ from dataviva.utils import AutoSerialize
 from dataviva.account.models import User
 from dataviva.attrs import models as attr_models
 
-import flask.ext.whooshalchemy as whooshalchemy
-
 TYPE_QUESTION = 0
 TYPE_REPLY = 1
 
@@ -33,7 +31,6 @@ class Vote(db.Model):
 class Question(db.Model, AutoSerialize):
 
     __tablename__ = 'ask_question'
-    __searchable__ = ['question', 'body', 'status_notes']
     id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     question = db.Column(db.String(140))
@@ -159,6 +156,3 @@ class Flag(db.Model):
 
     def __repr__(self):
         return '<Flag %r by user:%r>' % (self.reply_id, self.user_id)
-
-# For full text search support
-whooshalchemy.whoosh_index(app, Question)

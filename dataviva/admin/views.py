@@ -114,9 +114,7 @@ def admin_questions_edit(status, question_id):
         if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
         
             form_json = {"status": form.status.data.id, "answer": form.answer.data, "previous_status": form.previous_status.data}
-            print "\n\n\n"
-            print form_json
-            print "\n\n\n"
+            
             try:
                 opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
             except:

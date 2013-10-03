@@ -1,4 +1,4 @@
-from sqlalchemy import and_, func
+from sqlalchemy import and_, or_, func
 from datetime import datetime
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, jsonify, abort, current_app
 from flask.ext.babel import gettext
@@ -48,7 +48,8 @@ def index(page):
 
         # if the user has submitted a search, filter by that term
         if search_term:
-            questions = questions.whoosh_search(search_term)
+            like_str = "%{0}%".format(search_term)
+            questions = questions.filter(or_(Question.question.like(like_str),Question.body.like(like_str),Question.status_notes.like(like_str)))
 
         # if we are ordering the questions by newest get them ordered chronologically
         if order == "newest":
@@ -69,7 +70,7 @@ def index(page):
                 .order_by(votes_subq.c.vote_count.desc()) \
                 # .limit(limit).offset(offset)
             # raise Exception(votes_questions.all())
-        
+    
             questions = [q[0].serialize() for q in questions]
 
         return jsonify({"activities":questions})
@@ -145,11 +146,11 @@ def question_vote(slug, user=None):
     elif user is None and g.user is None:
         abort(404)
     
-    if user is None:
-        try:
-            opener = urllib2.urlopen("{0}ask/question/{1}/vote/{2}/".format(SITE_MIRROR,slug,g.user.id),None,5)
-        except:
-            return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+    # if user is None:
+    #     try:
+    #         opener = urllib2.urlopen("{0}ask/question/{1}/vote/{2}/".format(SITE_MIRROR,slug,g.user.id),None,5)
+    #     except:
+    #         return jsonify({"error": gettext("The server is not responding. Please try again later.")})
         
     vote = q.votes.filter_by(user=g.user).first()
     if vote:
