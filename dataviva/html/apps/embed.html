@@ -1674,7 +1674,6 @@ val)+": ", "suffix": ""};
       }
       url[url_index] = ids.join("_")
       url = url.join("/")
-      // app.url = url
       
       var button = d3.select("#"+id)
       
@@ -2056,6 +2055,7 @@ val)+": ", "suffix": ""};
    if (Modernizr.history) {
      window.onpopstate = function() {
        var u = window.location.href.split("/embed/")[1].split("/?")[0]
+       u = u.replace(/\/+$/, "")
        if (u != app.url) app.start(u)
      }
    }
