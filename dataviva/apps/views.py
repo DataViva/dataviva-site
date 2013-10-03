@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 from collections import defaultdict
 from sqlalchemy import func
-from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, url_for
+from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, url_for, redirect
 from flask.ext.babel import gettext
 
 from dataviva import db
@@ -265,10 +265,29 @@ def get_geo_location(ip):
     return None
         
 @mod.route('/builder/')
+@mod.route('/builder/tree_map/', defaults={"dataset": "secex", "bra_id": "mg", 
+            "filter1": "all", "filter2": "all", "output": "hs", "params": ""})
+@mod.route('/builder/stacked/', defaults={"dataset": "rais", "bra_id": "mg", 
+            "filter1": "all", "filter2": "all", "output": "cbo", "params": ""})
+@mod.route('/builder/geo_map/', defaults={"dataset": "rais", "bra_id": "mg", 
+            "filter1": "all", "filter2": "all", "output": "bra", "params": "?value_var=wage"})
+@mod.route('/builder/network/', defaults={"dataset": "secex", "bra_id": "mg", 
+            "filter1": "all", "filter2": "all", "output": "hs", "params": ""})
+@mod.route('/builder/rings/', defaults={"dataset": "rais", "bra_id": "mg", 
+            "filter1": "j6312", "filter2": "all", "output": "isic", "params": ""})
+@mod.route('/builder/scatter/', defaults={"dataset": "secex", "bra_id": "mg", 
+            "filter1": "all", "filter2": "all", "output": "hs", "params": "?rca_scope=wld_rca"})
+@mod.route('/builder/compare/', defaults={"dataset": "rais", "bra_id": "mg_rj", 
+            "filter1": "all", "filter2": "all", "output": "cbo", "params": "?depth=cbo_4&axes=wage_avg"})
+@mod.route('/builder/occugrid/', defaults={"dataset": "rais", "bra_id": "mg", 
+            "filter1": "r9000", "filter2": "all", "output": "cbo", "params": ""})
 @mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/'
             '<output>/')
 def builder(app_name=None, dataset=None, bra_id=None, filter1=None, 
-                filter2=None, output=None):
+                filter2=None, output=None, params=None):
+    path = request.path.split("/")
+    if len(path) == 5:
+        return redirect('{0}{1}/{2}/{3}/{4}/{5}/{6}'.format("/".join(path),dataset,bra_id,filter1,filter2,output,params))
     g.page_type = "builder"
     return render_template("apps/builder.html")
 
