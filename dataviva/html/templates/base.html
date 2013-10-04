@@ -77,10 +77,7 @@
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       
-      if (window.location.host.indexOf("dataviva.info") >= 0) var host = "dataviva.info"
-      else var host = "testvisual.com"
-      
-      ga('create', 'UA-42576717-1', host);
+      ga('create', 'UA-42576717-1', window.location.host);
       ga('send', 'pageview');
     
       dataviva.ui.background()
