@@ -526,7 +526,7 @@
                     if (d.unique_cbo) app.unique_cbos[app.build.data_url] = d.unique_cbo
                     callback(error,d)
                   })
-              },"/"+app.build.data_url)
+              },dataviva.static_url+app.build.data_url)
             }
             
             if (!app.attrs[app.build.output]) {
@@ -556,7 +556,7 @@
                     
                     callback(error,d)
                   })
-              },"/attrs/"+app.build.output)
+              },dataviva.static_url+"attrs/"+app.build.output)
             }
             
             if (["network","rings"].indexOf(app.build.app.type) >= 0 
@@ -580,18 +580,18 @@
                     app.networks[app.build.output] = d
                     callback(error,d)
                   })
-              },"/static/json/networks/network_"+app.build.output+".json")
+              },dataviva.static_url+"static/json/networks/network_"+app.build.output+".json")
             }
             
             if (app.build.app.type == "geo_map") {
               
               if (app.build.bra[0].id == "all") {
                 var id = "all",
-                    geo_url = "/static/json/coords/bra_states.json"
+                    geo_url = "static/json/coords/bra_states.json"
               }
               else {
                 var id = app.build.bra[0].id.substr(0,2),
-                    geo_url = "/static/json/coords/"+id+"_munic.json"
+                    geo_url = "static/json/coords/"+id+"_munic.json"
               }
               
               if (!app.coords[id]) {
@@ -602,7 +602,7 @@
                     app.coords[id] = d
                     callback(error,d)
                   })
-                },geo_url)
+                },dataviva.static_url+geo_url)
               }
               
             }
@@ -622,7 +622,7 @@
                     app.data[app.build.imp_url].raw = d.data
                     callback(error,d)
                   })
-                },"/"+app.build.imp_url)
+                },dataviva.static_url+app.build.imp_url)
               }
               
               var url = app.build.data_url.split("/")
@@ -638,7 +638,7 @@
                     app.data[app.build.else_url].raw = d.data
                     callback(error,d)
                   })
-                },"/"+app.build.else_url)
+                },dataviva.static_url+app.build.else_url)
               }
               
             }

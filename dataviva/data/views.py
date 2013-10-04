@@ -11,6 +11,9 @@ from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Wld
 from dataviva.rais.models import Isic, Cbo
 from dataviva.secex.models import Hs
+from dataviva.utils import crossdomain
+
+from config import ALLOWED_URLS
 
 import json
 
@@ -58,6 +61,7 @@ def index():
 
 @mod.route('/query/')
 @mod.route('/query/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
+@crossdomain(origin=ALLOWED_URLS, headers='Content-Type')
 def query(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
     isic, cbo, hs, wld = [None] * 4
     g.page_type = "query"

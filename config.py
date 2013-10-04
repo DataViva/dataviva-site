@@ -57,6 +57,9 @@ LANGUAGES = {
 ''' For full text search '''
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
+STATIC_URL = "http://www.dataviva.info/"
+ALLOWED_URLS = ["http://dataviva.mg.gov.br:8080/","http://dataviva.mg.gov.br:8080","http://www.dataviva.info/","http://www.dataviva.info","http://localhost:5000/","http://localhost:5000"]
+
 ''' 
     Setup redis caching connection to be used throughout the site. Credentials
     are set in their respective env vars.

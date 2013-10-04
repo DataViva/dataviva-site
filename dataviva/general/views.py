@@ -10,6 +10,8 @@ mod = Blueprint('general', __name__, url_prefix='/')
 from dataviva import app, db, babel, __latest_year__
 from dataviva.general.forms import AccessForm
 
+from config import STATIC_URL
+
 ###############################
 # General functions for ALL views
 # ---------------------------
@@ -17,6 +19,7 @@ from dataviva.general.forms import AccessForm
 def before_request():
     
     g.color = "#af1f24"
+    g.static_url = STATIC_URL
     g.page_type = mod.name
     g.latest_year = {}
     for dataset in __latest_year__:
