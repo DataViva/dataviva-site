@@ -104,7 +104,7 @@
           if(d.status_notes){
             d3.select(this).append("div")
               .text(function(){
-                return "Sabrina: \"" +d.status_notes.replace(/<\/?[^>]+(>|$)/g, "").truncate(300) + "\""
+                return d.status_notes.replace(/<\/?[^>]+(>|$)/g, "").truncate(300)
               })
           }
         })
@@ -112,8 +112,11 @@
       question_div.append("div")
         .attr("class", "question_attr")
         .html(function(d){ 
-          var user_link = "<a href='/account/" + d.user.nickname + "'>" + d.user.fullname + "</a>"
-          return dataviva.format.text("Asked by") + " " + user_link + " " + moment(d.timestamp).fromNow();
+          var user_link = ""
+          if (d.user.role == 0) {
+            user_link = dataviva.format.text("by") + " <a href='/account/" + d.user.nickname + "'>" + d.user.fullname + "</a> "
+          }
+          return dataviva.format.text("Asked") + " " + user_link + moment(d.timestamp).fromNow();
         })
 
       acts.exit().remove()

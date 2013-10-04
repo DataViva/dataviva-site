@@ -314,7 +314,8 @@ dataviva.format.text = function(text,name,l) {
       "reset": {"en": "Click to Reset all Filters", "pt": "Clique para Eliminar todos os Filtros"},
     
       // Ask Sabrina
-      "Asked by": {"en": "Asked by", "pt": "Solicitado por"},
+      "Asked": {"en": "Asked", "pt": "Perguntado"},
+      "by": {"en": "by", "pt": "por"},
       "points": {"en": "Points", "pt": "Pontos"},
       "votes": {"en": "Top Voted", "pt": "Mais Votados"},
       "newest": {"en": "Newest", "pt": "O Mais Novo"},
@@ -363,7 +364,7 @@ dataviva.format.text = function(text,name,l) {
       if (labels["population"][l]) return labels["population"][l] + " ("+year+")"
       else return name.toTitleCase() + " ("+year+")"
     }
-    else return name.toTitleCase()
+    else return name
   
   }
   

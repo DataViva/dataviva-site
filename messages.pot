@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-03 17:24-0400\n"
+"POT-Creation-Date: 2013-10-04 09:54-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -852,7 +852,6 @@ msgid "Edit Question"
 msgstr ""
 
 #: dataviva/html/admin/admin_questions_edit.html:17
-#: dataviva/html/ask/answer.html:63
 msgid "Asked by"
 msgstr ""
 
@@ -956,6 +955,14 @@ msgstr ""
 
 #: dataviva/html/ask/answer.html:50 dataviva/html/ask/ask.html:55
 msgid "Tags"
+msgstr ""
+
+#: dataviva/html/ask/answer.html:63
+msgid "Asked"
+msgstr ""
+
+#: dataviva/html/ask/answer.html:63
+msgid "by"
 msgstr ""
 
 #: dataviva/html/ask/answer.html:79
