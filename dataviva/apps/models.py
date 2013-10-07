@@ -140,7 +140,7 @@ class Build(db.Model, AutoSerialize):
         else:
             bra_id = "<bra>"
         
-        url = '{0}/{1}/{2}/{3}/{4}/{5}'.format(self.app.type, 
+        url = '{0}/{1}/{2}/{3}/{4}/{5}/'.format(self.app.type, 
                 self.dataset, bra_id, self.filter1, self.filter2, self.output)
         return url
 

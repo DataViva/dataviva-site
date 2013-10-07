@@ -451,7 +451,7 @@
       vizwhiz.tooltip.remove();
       last_depth = "bra_8"
       
-      d3.json("/apps/embed/"+app.url+"/")
+      d3.json("/apps/embed/"+app.url)
         .header("X-Requested-With", "XMLHttpRequest")
         .get(function(error,data){
           
@@ -1866,7 +1866,7 @@ val)+": ", "suffix": ""};
       
       var window_params = ""
       if (Object.keys(app.vars).length > 0) {
-        window_params += "/?"
+        window_params += "?"
         url_vars = []
         for (v in app.vars) {
           if (v != "controls" || (v == "controls" && app.vars.builder != "false")) {
