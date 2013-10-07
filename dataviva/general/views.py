@@ -98,6 +98,10 @@ def after_request(response):
 def home():
     g.page_type = "home"
     return render_template("home.html")
+    
+@mod.route('upgrade/')
+def upgrade():
+    return render_template("general/upgrade.html")
 
 @mod.route('access/')
 @mod.route('access/logout/')

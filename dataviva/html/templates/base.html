@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ g.locale }}">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -27,12 +27,17 @@
     {% block head %}
     {% endblock %}
     
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <script>var redirect = false</script>
   
     <!--[if lt IE 9]>
-      <script type="text/javascript" src="/static/js/libs/aight.d3.min.js?v=3"></script>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> 
+      <script>redirect = true</script>
     <![endif]-->
+    
+    <script>
+      if(vizwhiz.ie && redirect) window.location = "/upgrade/"
+    </script>
     
   </head>
   <body{% if g.page_type %} class="{{g.page_type}}"{% endif %}>
