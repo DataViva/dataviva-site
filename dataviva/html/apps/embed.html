@@ -2062,7 +2062,7 @@ val)+": ", "suffix": ""};
    if (Modernizr.history) {
      window.onpopstate = function() {
        var u = window.location.href.split("/embed/")[1].split("/?")[0]
-       u = u.replace(/\/+$/, "")
+       u = u.replace(/\/+$/, "")+"/"
        if (u != app.url) app.start(u)
      }
    }
