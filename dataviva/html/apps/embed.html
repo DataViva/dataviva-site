@@ -1508,12 +1508,18 @@ val)+": ", "suffix": ""};
       
       var type = obj.id,
           title = app.build.app.name+"-"+app.build.title,
-          columns = app.tooltip.long
+          columns = []
+          
+      for (cat in app.tooltip.long) {
+        app.tooltip.long[cat].forEach(function(k){
+          columns.push(k)
+        })
+      }
           
       title = title.removeAccents().split(" ").join("_")
       
       var form = document.getElementById("svgform");
-  
+      
       if(type == "csv"){
         form['data'].value = d3.csv.formatRows(app.viz.csv_columns(columns).csv_data());
       }
