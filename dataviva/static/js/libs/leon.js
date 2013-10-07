@@ -130,11 +130,11 @@ leon = function(name) {
   }
   
   var others = objs.filter(function(obj) {
-    return obj.type != "radio"
+    return obj.type != "radio" && obj.type
   })
   
   var radios = objs.filter(function(obj) {
-    return obj.type == "radio"
+    return obj.type == "radio" && obj.type
   })
   
   var radio_groups = [], return_radios = []
@@ -908,12 +908,18 @@ leon_construct.range = function(obj) {
   // Create Initial Ticks
   self.ticks = []
   var x = 0
-  for (var i = self.min; i <= self.max; i +=  self.step) {
+  for (var i = self.min; i <= self.max; i += self.step) {
     var tick = new leon_construct.div("leon button tick",self.slider)
     tick.style.opacity = 0
-    tick.innerHTML = i
+    if (self.step < 1) {
+      var t = parseFloat(i.toFixed(self.step.toString().length-2))
+    }
+    else {
+      var t = i
+    }
+    tick.innerHTML = t
     self.ticks.push(tick)
-    self.tick_indexes[i+""] = x
+    self.tick_indexes[t+""] = x
     x++
     
     tick.addEventListener("mousedown",function(){
@@ -954,14 +960,15 @@ leon_construct.range = function(obj) {
   self.ticks.forEach(function(tick,i){
     
     var label = document.createElement("div")
-    if (i%self.label_step == 0) {
+    
+    // if (i%self.label_step == 0) {
       label.innerHTML = tick.innerHTML
       label.className = "leon button tick"
-    }
-    else if (i%self.tick_step == 0) {
-      label.innerHTML = "&bull;"
-      label.className = "leon button tick bullet"
-    }
+    // }
+    // else if (i%self.tick_step != 0) {
+    //   label.innerHTML = "&bull;"
+    //   label.className = "leon button tick bullet"
+    // }
     self.slider.insertBefore(label,self.ticks[0])
   
     self.tick_labels.push(label)
@@ -1163,9 +1170,15 @@ leon_construct.range = function(obj) {
           value = self.tick_indexes[self.active_handle.node.innerHTML]
       if (x < self.tick_positions[value]-self.tick_width/2) {
         if (x > 0) {
-          for (var p = self.min; p <= self.max; p++) {
-            if (x < self.tick_positions[self.tick_indexes[p]]+self.tick_width/2) {
-              if (p != value) self.value(p)
+          for (var p = self.min; p <= self.max; p += self.step) {
+            if (self.step < 1) {
+              var t = parseFloat(p.toFixed(self.step.toString().length-2))
+            }
+            else {
+              var t = p
+            }
+            if (x < self.tick_positions[self.tick_indexes[t]]+self.tick_width/2) {
+              if (t != value) self.value(t)
               break;
             }
           }
@@ -1174,9 +1187,15 @@ leon_construct.range = function(obj) {
       }
       else if (x >= self.tick_positions[value]+self.tick_width/2) {
         if (x < parseFloat(self.slider.style.width,10)+self.handle_width) {
-          for (var p = self.max; p >= self.min; p--) {
-            if (x > self.tick_positions[self.tick_indexes[p]]-self.tick_width/2) {
-              if (p != value) self.value(p)
+          for (var p = self.max; p >= self.min; p -= self.step) {
+            if (self.step < 1) {
+              var t = parseFloat(p.toFixed(self.step.toString().length-2))
+            }
+            else {
+              var t = p
+            }
+            if (x > self.tick_positions[self.tick_indexes[t]]-self.tick_width/2) {
+              if (t != value) self.value(t)
               break;
             }
           }
