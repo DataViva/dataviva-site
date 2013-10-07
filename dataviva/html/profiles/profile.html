@@ -100,7 +100,7 @@
       if (!builds[id].loaded) {
         d3.select("#iframe"+id)
           .attr("src",function(){
-            return this.getAttribute("alt")
+            return window.location.origin+this.getAttribute("alt")
           })
         builds[id].loaded = true
       }
