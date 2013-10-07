@@ -80,15 +80,15 @@
         }
       })
       
-    function update_title(id,title,app) {
-      d3.select("#app"+id.substr(6,1))
+    window.addEventListener("message",function(msg){
+      d3.select("#app"+msg.data.id.substr(6,1))
         .attr("class",function(){
           var c = this.className.split(" ")
-          c[4] = app
+          c[4] = msg.data.app
           return c.join(" ")
         })
-        .text(title)
-    }
+        .text(msg.data.title)
+    })
       
     function slide(id) {
       sliding = true

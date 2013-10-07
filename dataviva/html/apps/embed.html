@@ -1568,9 +1568,8 @@ val)+": ", "suffix": ""};
           app.build.title = app.build.title.replace(/\(.*?\)/, "("+app.vars.year+")")
         }
       }
-      if (parent.update_title) {
-        parent.update_title(window.frameElement.id,app.build.title,app.build.app.type)
-      }
+      var message = {"id": window.frameElement.id, "title": app.build.title, "app": app.build.app.type}
+      parent.postMessage(message,window.location.origin)
     }
     
     app.sub_title = function() {

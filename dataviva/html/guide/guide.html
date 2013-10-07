@@ -47,6 +47,16 @@
           select(p)
         }
       })
+      
+    window.addEventListener("message",function(msg){
+      d3.select("#app"+msg.data.id.substr(6,1))
+        .attr("class",function(){
+          var c = this.className.split(" ")
+          c[4] = msg.data.app
+          return c.join(" ")
+        })
+        .text(msg.data.title)
+    })
   
     function slide(id) {
       sliding = true
