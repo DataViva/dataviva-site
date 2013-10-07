@@ -16,7 +16,7 @@ from dataviva.apps.models import Build, UI, App
 from dataviva.rais.views import rais_ybi
 
 import json, urllib2, urllib
-from config import SITE_MIRROR
+# from config import SITE_MIRROR
 
 mod = Blueprint('apps', __name__, url_prefix='/apps')
 
@@ -131,21 +131,21 @@ def app_star(app_name, data_type, bra_id, filter1, filter2, output):
     
     app_id = "/".join([app_name, data_type, bra_id, filter1, filter2, output])
     
-    if request.method == 'POST' and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-        g.user = User.query.get(request.form["user"])
-    elif g.user is None or not g.user.is_authenticated():
+    # if request.method == 'POST' and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+    #     g.user = User.query.get(request.form["user"])
+    if g.user is None or not g.user.is_authenticated():
         return jsonify({"error": gettext("You need to be logged in to star apps.")})
         
     starred = Starred.query.filter_by(user=g.user, app_id=app_id).first()
     
     if request.method == 'POST':
         
-        if "user" not in request.form:
-            form_json = {"user": g.user.id, "title": request.form['title'].encode('utf-8')}
-            try:
-                opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
-            except:
-                return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+        # if "user" not in request.form:
+        #     form_json = {"user": g.user.id, "title": request.form['title'].encode('utf-8')}
+        #     try:
+        #         opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+        #     except:
+        #         return jsonify({"error": gettext("The server is not responding. Please try again later.")})
         
         if starred:
             db.session.delete(starred)

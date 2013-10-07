@@ -7,6 +7,8 @@ from dataviva.utils import exist_or_404, gzip_data, cached_query, parse_years
 from dataviva.attrs.models import Bra, Hs, Wld
 from dataviva.secex.models import Yb_secex, Yw, Yp, Ybw, Ybp, Ypw, Ybpw
 
+from dataviva.utils import crossdomain
+
 mod = Blueprint('secex', __name__, url_prefix='/secex')
 
 RESULTS_PER_PAGE = 40
@@ -278,16 +280,19 @@ def make_query(data_table, url_args, **kwargs):
 
 @mod.route('/all/<bra_id>/all/all/')
 @mod.route('/<year>/<bra_id>/all/all/')
+@crossdomain()
 def secex_yb(**kwargs):
     return make_response(make_query(Yb_secex, request.args, **kwargs))
 
 @mod.route('/all/all/<hs_id>/all/')
 @mod.route('/<year>/all/<hs_id>/all/')
+@crossdomain()
 def secex_yp(**kwargs):
     return make_response(make_query(Yp, request.args, **kwargs))
 
 @mod.route('/all/all/all/<wld_id>/')
 @mod.route('/<year>/all/all/<wld_id>/')
+@crossdomain()
 def secex_yw(**kwargs):
     return make_response(make_query(Yw, request.args, **kwargs))
 
@@ -299,11 +304,13 @@ def secex_yw(**kwargs):
 
 @mod.route('/all/<bra_id>/all/<wld_id>/')
 @mod.route('/<year>/<bra_id>/all/<wld_id>/')
+@crossdomain()
 def secex_ybw(**kwargs):
     return make_response(make_query(Ybw, request.args, **kwargs))
 
 @mod.route('/all/<bra_id>/<hs_id>/all/')
 @mod.route('/<year>/<bra_id>/<hs_id>/all/')
+@crossdomain()
 def secex_ybp(**kwargs):
     kwargs["join"] = {
                         "table": Yp.pci,
@@ -314,6 +321,7 @@ def secex_ybp(**kwargs):
 
 @mod.route('/all/all/<hs_id>/<wld_id>/')
 @mod.route('/<year>/all/<hs_id>/<wld_id>/')
+@crossdomain()
 def secex_ypw(**kwargs):
     return make_response(make_query(Ypw, request.args, **kwargs))
 
@@ -325,5 +333,6 @@ def secex_ypw(**kwargs):
 
 @mod.route('/all/<bra_id>/<hs_id>/<wld_id>/')
 @mod.route('/<year>/<bra_id>/<hs_id>/<wld_id>/')
+@crossdomain()
 def secex_ybpw(**kwargs):
     return make_response(make_query(Ybpw, request.args, **kwargs))

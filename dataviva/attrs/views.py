@@ -5,22 +5,13 @@ from dataviva import db
 from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo, Yb
 from dataviva.secex.models import Yp, Yw
 from dataviva.rais.models import Yi, Yo
-from dataviva.utils import exist_or_404, gzip_data, cached_query, title_case
+from dataviva.utils import exist_or_404, gzip_data, cached_query, title_case, crossdomain
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
 @mod.errorhandler(404)
 def page_not_found(error):
     return error, 404
-
-@mod.before_request
-def before_request():
-    cache_id = request.path + g.locale
-    # first lets test if this query is cached
-    cached_q = cached_query(cache_id)
-    if cached_q and request.is_xhr:
-    # if cached_q:
-        return cached_q
 
 @mod.after_request
 def after_request(response):
@@ -95,6 +86,12 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_merge
     # an ID/filter was not provided
     else:
         
+        cache_id = request.path + g.locale
+        # first lets test if this query is cached
+        cached_q = cached_query(cache_id)
+        if cached_q and request.is_xhr:
+            return cached_q
+        
         # this will be the lookup we'll use for getting parents
         # attrs = Attr.query.all()
         attrs = {a.id: fix_name(a.serialize()) for a in Attr.query.filter(func.char_length(Attr.id) <= Attr_id_lens[-1]).all()}
@@ -148,11 +145,11 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_merge
         #         ret["data"].append(fix_name(a.serialize()))
         #     else:
         #         ret["data"].append(dict(fix_name(a[0].serialize()), **{"available":True, Attr_weight_col: int(a[1])}))
-    
     return jsonify(ret)
 
 @mod.route('/bra/')
 @mod.route('/bra/<bra_id>/')
+@crossdomain()
 def attrs_bra(bra_id=None):
     Attr = Bra
     Attr_id = bra_id
@@ -165,6 +162,7 @@ def attrs_bra(bra_id=None):
     
 @mod.route('/wld/')
 @mod.route('/wld/<wld_id>/')
+@crossdomain()
 def attrs_wld(wld_id=None):
     Attr = Wld
     Attr_id = wld_id
@@ -177,6 +175,7 @@ def attrs_wld(wld_id=None):
 
 @mod.route('/hs/')
 @mod.route('/hs/<hs_id>/')
+@crossdomain()
 def attrs_hs(hs_id=None):
     Attr = Hs
     Attr_id = hs_id
@@ -189,6 +188,7 @@ def attrs_hs(hs_id=None):
 
 @mod.route('/isic/')
 @mod.route('/isic/<isic_id>/')
+@crossdomain()
 def attrs_isic(isic_id=None):
     Attr = Isic
     Attr_id = isic_id
@@ -201,6 +201,7 @@ def attrs_isic(isic_id=None):
 
 @mod.route('/cbo/')
 @mod.route('/cbo/<cbo_id>/')
+@crossdomain()
 def attrs_cbo(cbo_id=None):
     Attr = Cbo
     Attr_id = cbo_id

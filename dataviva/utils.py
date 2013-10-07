@@ -2,7 +2,7 @@ import cStringIO, gzip, pickle, re
 from re import sub
 from werkzeug.datastructures import CallbackDict
 from jinja2 import Markup
-from flask import abort, current_app, make_response, Flask, jsonify
+from flask import abort, current_app, make_response, Flask, jsonify, request
 from functools import update_wrapper
 from datetime import datetime, date, timedelta
 from math import ceil
@@ -200,9 +200,10 @@ class RedisSessionInterface(SessionInterface):
                             expires=cookie_exp, httponly=True,
                             domain=domain)
                             
-def crossdomain(origin=None, methods=None, headers=None,
+def crossdomain(origin="*", methods=None, headers=['Content-Type','x-requested-with'],
                 max_age=21600, attach_to_all=True,
                 automatic_options=True):
+    
     if methods is not None:
         methods = ', '.join(sorted(x.upper() for x in methods))
     if headers is not None and not isinstance(headers, basestring):
@@ -230,11 +231,15 @@ def crossdomain(origin=None, methods=None, headers=None,
                 
             h = resp.headers
             
-            if request.headers['Origin'] in origin:
-                    h['Access-Control-Allow-Origin'] = request.headers['Origin']
-                    
-            if origin == '*':
-                    h['Access-Control-Allow-Origin'] = origin
+            h['Access-Control-Allow-Origin'] = "*"
+            
+            # if "Origin" not in request.headers:
+            #     h['Access-Control-Allow-Origin'] = request.environ["HTTP_HOST"]
+            # elif request.headers["Origin"] in origin:
+            #     h['Access-Control-Allow-Origin'] = request.headers["Origin"]
+            #         
+            # if origin == '*':
+            #     h['Access-Control-Allow-Origin'] = origin
                     
             #h['Access-Control-Allow-Origin'] = origin
             h['Access-Control-Allow-Methods'] = get_methods()

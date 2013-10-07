@@ -57,8 +57,9 @@ LANGUAGES = {
 ''' For full text search '''
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
+# SITE_MIRROR = get_env_variable("DATAVIVA_MIRROR")
 STATIC_URL = "http://www.dataviva.info/"
-ALLOWED_URLS = ["http://dataviva.mg.gov.br:8080/","http://dataviva.mg.gov.br:8080","http://www.dataviva.info/","http://www.dataviva.info","http://localhost:5000/","http://localhost:5000"]
+# STATIC_URL = "http://localhost:8080/"
 
 ''' 
     Setup redis caching connection to be used throughout the site. Credentials
@@ -80,5 +81,3 @@ TWITTER_OAUTH_ID = get_env_variable("DATAVIVA_OAUTH_TWITTER_ID")
 TWITTER_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_TWITTER_SECRET")
 FACEBOOK_OAUTH_ID = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_ID")
 FACEBOOK_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_SECRET")
-
-SITE_MIRROR = get_env_variable("DATAVIVA_MIRROR")

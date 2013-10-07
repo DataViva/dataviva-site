@@ -11,8 +11,8 @@ from dataviva.ask.models import Question, Status, Reply, Flag
 # forms
 from dataviva.admin.forms import AdminQuestionUpdateForm
 
-import urllib2, urllib
-from config import SITE_MIRROR
+# import urllib2, urllib
+# from config import SITE_MIRROR
 
 mod = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -54,22 +54,23 @@ def update_user(user_id):
     # curl -i -H "Content-Type: application/json" -X PUT 
     #   -d '{"role":2}' http://localhost:5000/admin/user/1
     
-    if (g.user.is_authenticated() and g.user.role == 1) or (request.remote_addr == SITE_MIRROR.split(":")[1][2:]):
+    # if (g.user.is_authenticated() and g.user.role == 1) or (request.remote_addr == SITE_MIRROR.split(":")[1][2:]):
+    if g.user.is_authenticated() and g.user.role == 1:
         
         user = User.query.get(user_id)
 
-        if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
-            
-            user.role = request.json.get('role', user.role)
-            form_json = {"role": user.role}
-            
-            try:
-                opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
-            except:
-                flash(gettext("The server is not responding. Please try again later."))
-                return jsonify({"error": gettext("The server is not responding. Please try again later.")})
-        else:
-            user.role = request.form.get("role")
+        # if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
+        #     
+        user.role = request.json.get('role', user.role)
+        #     form_json = {"role": user.role}
+        #     
+        #     try:
+        #         opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+        #     except:
+        #         flash(gettext("The server is not responding. Please try again later."))
+        #         return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+        # else:
+            # user.role = request.form.get("role")
             
         db.session.add(user)
         db.session.commit()
@@ -111,15 +112,15 @@ def admin_questions_edit(status, question_id):
     
     if request.method == "POST":
 
-        if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
-        
-            form_json = {"status": form.status.data.id, "answer": form.answer.data, "previous_status": form.previous_status.data}
-            
-            try:
-                opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
-            except:
-                flash(gettext("The server is not responding. Please try again later."))
-                return redirect(url_for('.admin_questions_edit', status=status,question_id=question_id,form=form))
+        # if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
+        # 
+        #     form_json = {"status": form.status.data.id, "answer": form.answer.data, "previous_status": form.previous_status.data}
+        #     
+        #     try:
+        #         opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+        #     except:
+        #         flash(gettext("The server is not responding. Please try again later."))
+        #         return redirect(url_for('.admin_questions_edit', status=status,question_id=question_id,form=form))
 
         previous_status = form.previous_status.data
         q.status = form.status.data
@@ -128,10 +129,10 @@ def admin_questions_edit(status, question_id):
         db.session.commit()
         flash(gettext('This question has now been updated.'))
         
-        if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-            return jsonify({"success": 1})
-        else:
-            return redirect(url_for('.admin_questions', status=previous_status))
+        # if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+        #     return jsonify({"success": 1})
+        # else:
+        return redirect(url_for('.admin_questions', status=previous_status))
     
     # set defaults
     form.status.data = s
@@ -169,19 +170,20 @@ def update_reply(reply_id):
     # curl -i -H "Content-Type: application/json" -X PUT 
     #   -d '{"role":2}' http://localhost:5000/admin/user/1
     
-    if (g.user.is_authenticated() and g.user.role == 1) or (request.remote_addr == SITE_MIRROR.split(":")[1][2:]):
+    # if (g.user.is_authenticated() and g.user.role == 1) or (request.remote_addr == SITE_MIRROR.split(":")[1][2:]):
+    if g.user.is_authenticated() and g.user.role == 1:
     
         reply = Reply.query.get(reply_id)
-        if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
-            reply.hidden = request.json.get('hidden', reply.hidden)
-            form_json = {"hidden": reply.hidden}
-            try:
-                opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
-            except:
-                flash(gettext("The server is not responding. Please try again later."))
-                return jsonify({"error": gettext("The server is not responding. Please try again later.")})
-        else:
-            reply.hidden = request.form.get("hidden")
+        # if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
+        #     reply.hidden = request.json.get('hidden', reply.hidden)
+        #     form_json = {"hidden": reply.hidden}
+        #     try:
+        #         opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+        #     except:
+        #         flash(gettext("The server is not responding. Please try again later."))
+        #         return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+        # else:
+        reply.hidden = request.form.get("hidden")
     
         db.session.add(reply)
         db.session.commit()

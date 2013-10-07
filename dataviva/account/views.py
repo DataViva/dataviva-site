@@ -17,8 +17,8 @@ from dataviva.utils import exist_or_404
 # login types
 from dataviva.account.login_providers import facebook, twitter, google
 
-from config import SITE_MIRROR
-import urllib2, urllib
+# from config import SITE_MIRROR
+# import urllib2, urllib
 
 mod = Blueprint('account', __name__, url_prefix='/account')
 
@@ -111,13 +111,13 @@ def after_login(**user_fields):
         
     if user is None:
             
-        if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
-            form_json = user_fields
-            try:
-                opener = urllib2.urlopen("{0}account/complete_login/".format(SITE_MIRROR),urllib.urlencode(form_json),5)
-            except:
-                flash(gettext("The server is not responding. Please try again later."))
-                return render_template('account/complete_login.html')
+        # if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
+        #     form_json = user_fields
+        #     try:
+        #         opener = urllib2.urlopen("{0}account/complete_login/".format(SITE_MIRROR),urllib.urlencode(form_json),5)
+        #     except:
+        #         flash(gettext("The server is not responding. Please try again later."))
+        #         return render_template('account/complete_login.html')
         
         nickname = user_fields["nickname"] if "nickname" in user_fields else None
         if nickname is None or nickname == "":
@@ -128,16 +128,16 @@ def after_login(**user_fields):
         db.session.add(user)
         db.session.commit()
         
-    if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-        return jsonify({"success": 1})
-    else:
-        remember_me = False
-        if 'remember_me' in session:
-            remember_me = session['remember_me']
-            session.pop('remember_me', None)
-        login_user(user, remember = remember_me)
+    # if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+    #     return jsonify({"success": 1})
+    # else:
+    remember_me = False
+    if 'remember_me' in session:
+        remember_me = session['remember_me']
+        session.pop('remember_me', None)
+    login_user(user, remember = remember_me)
 
-        return render_template('account/complete_login.html')
+    return render_template('account/complete_login.html')
 
 """
     TWITTER LOGIN

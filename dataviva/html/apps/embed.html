@@ -556,7 +556,7 @@
                     
                     callback(error,d)
                   })
-              },dataviva.static_url+"attrs/"+app.build.output)
+              },dataviva.static_url+"attrs/"+app.build.output+"/")
             }
             
             if (["network","rings"].indexOf(app.build.app.type) >= 0 
@@ -580,18 +580,18 @@
                     app.networks[app.build.output] = d
                     callback(error,d)
                   })
-              },dataviva.static_url+"static/json/networks/network_"+app.build.output+".json")
+              },"/static/json/networks/network_"+app.build.output+".json")
             }
             
             if (app.build.app.type == "geo_map") {
               
               if (app.build.bra[0].id == "all") {
                 var id = "all",
-                    geo_url = "static/json/coords/bra_states.json"
+                    geo_url = "/static/json/coords/bra_states.json"
               }
               else {
                 var id = app.build.bra[0].id.substr(0,2),
-                    geo_url = "static/json/coords/"+id+"_munic.json"
+                    geo_url = "/static/json/coords/"+id+"_munic.json"
               }
               
               if (!app.coords[id]) {
@@ -602,7 +602,7 @@
                     app.coords[id] = d
                     callback(error,d)
                   })
-                },dataviva.static_url+geo_url)
+                },geo_url)
               }
               
             }

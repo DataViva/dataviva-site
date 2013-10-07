@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, jsonify, abort, current_app
 from flask.ext.babel import gettext
 from dataviva import db, lm
-from config import SITE_MIRROR
+# from config import SITE_MIRROR
 
 from dataviva.account.models import User
 from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE_REPLY, Flag
@@ -86,19 +86,19 @@ def answer(slug):
     
     if request.method == 'POST':
         
-        if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-            g.user = User.query.get(request.form["user"])
-        elif g.user is None or not g.user.is_authenticated():
+        # if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+        #     g.user = User.query.get(request.form["user"])
+        if g.user is None or not g.user.is_authenticated():
             flash(gettext('You need to be signed in to reply to questions.'))
             return redirect(url_for('.answer', slug=question.slug))
             
-        if "user" not in request.form:
-            form_json = {"user": g.user.id, "reply": reply_form.reply.data, "parent": reply_form.parent.data}
-            try:
-                opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
-            except:
-                flash(gettext("The server is not responding. Please try again later."))
-                return redirect(url_for('.answer', slug=question.slug))
+        # if "user" not in request.form:
+        #     form_json = {"user": g.user.id, "reply": reply_form.reply.data, "parent": reply_form.parent.data}
+        #     try:
+        #         opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
+        #     except:
+        #         flash(gettext("The server is not responding. Please try again later."))
+        #         return redirect(url_for('.answer', slug=question.slug))
             
         timestamp = datetime.utcnow()
         reply = Reply(body=reply_form.reply.data, timestamp=timestamp, 
@@ -146,11 +146,11 @@ def question_vote(slug, user=None):
     elif user is None and g.user is None:
         abort(404)
     
-    if user is None:
-        try:
-            opener = urllib2.urlopen("{0}ask/question/{1}/vote/{2}/".format(SITE_MIRROR,slug,g.user.id),None,5)
-        except:
-            return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+    # if user is None:
+    #     try:
+    #         opener = urllib2.urlopen("{0}ask/question/{1}/vote/{2}/".format(SITE_MIRROR,slug,g.user.id),None,5)
+    #     except:
+    #         return jsonify({"error": gettext("The server is not responding. Please try again later.")})
         
     vote = q.votes.filter_by(user=g.user).first()
     if vote:
@@ -167,18 +167,18 @@ def question_vote(slug, user=None):
 @mod.route('/reply/<int:id>/vote/<user>/')
 def reply_vote(id, user=None):
     reply = Reply.query.get_or_404(id)
-    if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-        g.user = User.query.get(user)
-    elif g.user is None or not g.user.is_authenticated():
+    # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+    #     g.user = User.query.get(user)
+    if g.user is None or not g.user.is_authenticated():
         return jsonify({"error": gettext("You need to be logged in to vote.")})
-    elif user is None and g.user is None:
-        abort(404)
+    # elif user is None and g.user is None:
+    #     abort(404)
     
-    if user is None:
-        try:
-            opener = urllib2.urlopen("{0}ask/reply/{1}/vote/{2}/".format(SITE_MIRROR,id,g.user.id),None,5)
-        except:
-            return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+    # if user is None:
+    #     try:
+    #         opener = urllib2.urlopen("{0}ask/reply/{1}/vote/{2}/".format(SITE_MIRROR,id,g.user.id),None,5)
+    #     except:
+    #         return jsonify({"error": gettext("The server is not responding. Please try again later.")})
 
     vote = reply.votes.filter_by(user=g.user).first()
     if vote:
@@ -197,18 +197,18 @@ def reply_flag(id, user=None):
     
     reply = Reply.query.get_or_404(id)
     
-    if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-        g.user = User.query.get(user)
-    elif g.user is None or not g.user.is_authenticated():
+    # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+    #     g.user = User.query.get(user)
+    if g.user is None or not g.user.is_authenticated():
         return jsonify({"error": gettext("You need to be logged in to flag replies.")})
-    elif user is None and g.user is None:
-        abort(404)
+    # elif user is None and g.user is None:
+    #     abort(404)
     
-    if user is None:
-        try:
-            opener = urllib2.urlopen("{0}ask/reply/{1}/flag/{2}/".format(SITE_MIRROR,id,g.user.id),None,5)
-        except:
-            return jsonify({"error": gettext("The server is not responding. Please try again later.")})
+    # if user is None:
+    #     try:
+    #         opener = urllib2.urlopen("{0}ask/reply/{1}/flag/{2}/".format(SITE_MIRROR,id,g.user.id),None,5)
+    #     except:
+    #         return jsonify({"error": gettext("The server is not responding. Please try again later.")})
 
     flag = reply.flags.filter_by(user=g.user).first()
     if flag:
@@ -227,21 +227,21 @@ def ask(user=None):
     form = AskForm()
     if request.method == 'POST':
         
-        if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-            g.user = User.query.get(user)
-        elif g.user is None or not g.user.is_authenticated():
+        # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+        #     g.user = User.query.get(user)
+        if g.user is None or not g.user.is_authenticated():
             flash(gettext('You need to be logged in to ask questions.'))
             return redirect(url_for('account.login'))
-        elif user is None and g.user is None:
-            abort(404)
+        # elif user is None and g.user is None:
+        #     abort(404)
             
-        if user is None:
-            form_json = {"question": form.question.data, "body": form.body.data, "app": form.app.data, "tags": form.tags.data}
-            try:
-                opener = urllib2.urlopen("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
-            except:
-                flash(gettext("The server is not responding. Please try again later."))
-                return render_template("ask/ask.html", form = form)
+        # if user is None:
+        #     form_json = {"question": form.question.data, "body": form.body.data, "app": form.app.data, "tags": form.tags.data}
+        #     try:
+        #         opener = urllib2.urlopen("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
+        #     except:
+        #         flash(gettext("The server is not responding. Please try again later."))
+        #         return render_template("ask/ask.html", form = form)
         
         timestamp = datetime.utcnow()
         slug = Question.make_unique_slug(form.question.data)
@@ -252,8 +252,8 @@ def ask(user=None):
         db.session.add(question)
         db.session.commit()
         flash(gettext('Your question has been submitted and is pending approval.'))
-        if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-            return jsonify({"status": "Success"})
-        else:
-            return redirect(url_for('ask.index'))
+        # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+        #     return jsonify({"status": "Success"})
+        # else:
+        return redirect(url_for('ask.index'))
     return render_template("ask/ask.html", form = form)

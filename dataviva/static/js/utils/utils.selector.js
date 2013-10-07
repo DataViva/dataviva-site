@@ -69,7 +69,7 @@ function Selector() {
             .replace("munic",id)
             .replace("value",dist)
             
-          d3.json(u)
+          d3.json(dataviva.static_url+u.substr(1))
             .header("X-Requested-With", "XMLHttpRequest")
             .get(function(error,raw_distances){
 
@@ -803,7 +803,7 @@ function Selector() {
         create_elements()
       }
       else {
-        d3.json("/attrs/"+type+"/")
+        d3.json(dataviva.static_url+"attrs/"+type+"/")
           .header("X-Requested-With", "XMLHttpRequest")
           .get(function(error,attrs) {
             data = attrs.data
