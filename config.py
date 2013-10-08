@@ -57,9 +57,7 @@ LANGUAGES = {
 ''' For full text search '''
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
-# SITE_MIRROR = get_env_variable("DATAVIVA_MIRROR")
-STATIC_URL = "http://www.dataviva.info/"
-# STATIC_URL = "http://localhost:8080/"
+STATIC_URL = get_env_variable("DATAVIVA_STATIC_URL")
 
 ''' 
     Setup redis caching connection to be used throughout the site. Credentials

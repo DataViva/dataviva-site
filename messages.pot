@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-04 09:54-0400\n"
+"POT-Creation-Date: 2013-10-08 18:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,16 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: dataviva/account/views.py:119 dataviva/admin/views.py:69
-#: dataviva/admin/views.py:70 dataviva/admin/views.py:121
-#: dataviva/admin/views.py:181 dataviva/admin/views.py:182
-#: dataviva/apps/views.py:148 dataviva/ask/views.py:100
-#: dataviva/ask/views.py:153 dataviva/ask/views.py:181
-#: dataviva/ask/views.py:211 dataviva/ask/views.py:243
-msgid "The server is not responding. Please try again later."
-msgstr ""
-
-#: dataviva/admin/views.py:129
+#: dataviva/admin/views.py:130
 msgid "This question has now been updated."
 msgstr ""
 
@@ -105,29 +96,8 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: dataviva/html/home.html:14
-msgid "Visualizing the Economy of Minas Gerais and Brazil"
-msgstr ""
-
-#: dataviva/html/home.html:15
-msgid "DataViva is an initiative of the Government of Minas Gerais to visualize public data."
-msgstr ""
-
-#: dataviva/html/home.html:19 dataviva/html/apps/index.html:4
-#: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:14
-msgid "Apps"
-msgstr ""
-
-#: dataviva/html/home.html:20
-msgid "Go straight to the visualization builder."
-msgstr ""
-
-#: dataviva/html/home.html:24 dataviva/html/templates/site.html:16
-msgid "Guide"
-msgstr ""
-
-#: dataviva/html/home.html:25
-msgid "Generate multiple apps into a report."
+#: dataviva/html/home.html:21
+msgid "Watch the Video"
 msgstr ""
 
 #: dataviva/html/about/apps.html:4 dataviva/html/templates/about.html:46
@@ -816,7 +786,7 @@ msgid "Replies"
 msgstr ""
 
 #: dataviva/html/account/login.html:4 dataviva/html/general/access.html:3
-#: dataviva/html/templates/site.html:27
+#: dataviva/html/general/upgrade.html:3 dataviva/html/templates/site.html:27
 msgid "Login"
 msgstr ""
 
@@ -926,6 +896,11 @@ msgstr ""
 
 #: dataviva/html/apps/embed.html:101
 msgid "Show/Hide Controls"
+msgstr ""
+
+#: dataviva/html/apps/index.html:4 dataviva/html/apps/info.html:4
+#: dataviva/html/templates/site.html:14
+msgid "Apps"
 msgstr ""
 
 #: dataviva/html/apps/index.html:8
@@ -1046,19 +1021,11 @@ msgstr ""
 msgid "Custom data queries of our database."
 msgstr ""
 
-#: dataviva/html/data/index.html:23
-msgid "API"
-msgstr ""
-
-#: dataviva/html/data/index.html:24
-msgid "Access the data directly."
-msgstr ""
-
-#: dataviva/html/data/index.html:28
+#: dataviva/html/data/index.html:22
 msgid "Source List"
 msgstr ""
 
-#: dataviva/html/data/index.html:29
+#: dataviva/html/data/index.html:23
 msgid "Browse the various classifications."
 msgstr ""
 
@@ -1178,6 +1145,14 @@ msgstr ""
 #: dataviva/html/general/selector.html:13
 #, python-format
 msgid "Please choose %(name)s"
+msgstr ""
+
+#: dataviva/html/general/upgrade.html:59
+msgid "DataViva uses cutting-edge web technologies to create stunning data visualizations, and is compatible with all modern web browsers."
+msgstr ""
+
+#: dataviva/html/general/upgrade.html:61
+msgid "Because of the technology used, we cannot support versions of Internet Explorer older than version 9. Please update your browser to use the site."
 msgstr ""
 
 #: dataviva/html/guide/bra.html:3 dataviva/html/guide/cbo.html:3
@@ -1400,6 +1375,10 @@ msgstr ""
 
 #: dataviva/html/templates/site.html:15
 msgid "Profiles"
+msgstr ""
+
+#: dataviva/html/templates/site.html:16
+msgid "Guide"
 msgstr ""
 
 #: dataviva/html/templates/site.html:18

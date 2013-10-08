@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-04 09:54-0400\n"
+"POT-Creation-Date: 2013-10-08 18:37-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -17,16 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: dataviva/account/views.py:119 dataviva/admin/views.py:69
-#: dataviva/admin/views.py:70 dataviva/admin/views.py:121
-#: dataviva/admin/views.py:181 dataviva/admin/views.py:182
-#: dataviva/apps/views.py:148 dataviva/ask/views.py:100
-#: dataviva/ask/views.py:153 dataviva/ask/views.py:181
-#: dataviva/ask/views.py:211 dataviva/ask/views.py:243
-msgid "The server is not responding. Please try again later."
-msgstr "O servidor não está respondendo. Por favor, tente novamente mais tarde."
-
-#: dataviva/admin/views.py:129
+#: dataviva/admin/views.py:130
 msgid "This question has now been updated."
 msgstr "Esta pergunta foi atualizada."
 
@@ -106,34 +97,9 @@ msgstr "Localidade"
 msgid "All"
 msgstr "Tudo"
 
-#: dataviva/html/home.html:14
-msgid "Visualizing the Economy of Minas Gerais and Brazil"
-msgstr "Visualizando a Economia de Minas Gerais e do Brasil."
-
-#: dataviva/html/home.html:15
-msgid ""
-"DataViva is an initiative of the Government of Minas Gerais to visualize "
-"public data."
-msgstr ""
-"O DataViva é uma iniciativa do Governo de Minas Gerais para visualização "
-"de dados públicos."
-
-#: dataviva/html/home.html:19 dataviva/html/apps/index.html:4
-#: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:14
-msgid "Apps"
-msgstr "Aplicativos"
-
-#: dataviva/html/home.html:20
-msgid "Go straight to the visualization builder."
-msgstr "Aqui você constroi a sua visualização."
-
-#: dataviva/html/home.html:24 dataviva/html/templates/site.html:16
-msgid "Guide"
-msgstr "Guia"
-
-#: dataviva/html/home.html:25
-msgid "Generate multiple apps into a report."
-msgstr "Siga um passo a passo para gerar um relatório com vários aplicativos."
+#: dataviva/html/home.html:21
+msgid "Watch the Video"
+msgstr "Assista ao Vídeo"
 
 #: dataviva/html/about/apps.html:4 dataviva/html/templates/about.html:46
 msgid "About the Apps"
@@ -1461,7 +1427,7 @@ msgid "Replies"
 msgstr "Respostas"
 
 #: dataviva/html/account/login.html:4 dataviva/html/general/access.html:3
-#: dataviva/html/templates/site.html:27
+#: dataviva/html/general/upgrade.html:3 dataviva/html/templates/site.html:27
 msgid "Login"
 msgstr "Login"
 
@@ -1580,6 +1546,11 @@ msgstr "Abrir Aplicativo em Tela Cheia"
 #: dataviva/html/apps/embed.html:101
 msgid "Show/Hide Controls"
 msgstr "Mostrar/Ocultar Controles"
+
+#: dataviva/html/apps/index.html:4 dataviva/html/apps/info.html:4
+#: dataviva/html/templates/site.html:14
+msgid "Apps"
+msgstr "Aplicativos"
 
 #: dataviva/html/apps/index.html:8
 msgid "Which app would you like to build?"
@@ -1711,19 +1682,11 @@ msgstr "Banco de Dados"
 msgid "Custom data queries of our database."
 msgstr "Consultas personalizadas em nosso banco de dados."
 
-#: dataviva/html/data/index.html:23
-msgid "API"
-msgstr "API"
-
-#: dataviva/html/data/index.html:24
-msgid "Access the data directly."
-msgstr "Acessar os dados diretamente."
-
-#: dataviva/html/data/index.html:28
+#: dataviva/html/data/index.html:22
 msgid "Source List"
 msgstr "Lista de Fontes"
 
-#: dataviva/html/data/index.html:29
+#: dataviva/html/data/index.html:23
 msgid "Browse the various classifications."
 msgstr "Navegar pelas classificações diversas."
 
@@ -1851,6 +1814,19 @@ msgstr "Seleção de Filtro"
 #, python-format
 msgid "Please choose %(name)s"
 msgstr "Por favor, escolha %(name)s"
+
+#: dataviva/html/general/upgrade.html:59
+msgid ""
+"DataViva uses cutting-edge web technologies to create stunning data "
+"visualizations, and is compatible with all modern web browsers."
+msgstr ""
+
+#: dataviva/html/general/upgrade.html:61
+msgid ""
+"Because of the technology used, we cannot support versions of Internet "
+"Explorer older than version 9. Please update your browser to use the "
+"site."
+msgstr ""
 
 #: dataviva/html/guide/bra.html:3 dataviva/html/guide/cbo.html:3
 #: dataviva/html/guide/choice.html:3 dataviva/html/guide/hs.html:3
@@ -2074,6 +2050,10 @@ msgstr "Duplicado"
 msgid "Profiles"
 msgstr "Perfis"
 
+#: dataviva/html/templates/site.html:16
+msgid "Guide"
+msgstr "Guia"
+
 #: dataviva/html/templates/site.html:18
 msgid "Contact Us"
 msgstr "Fale Conosco"
@@ -2093,4 +2073,31 @@ msgstr "Sair"
 #: dataviva/profiles/views.py:49
 msgid "a country"
 msgstr "um país"
+
+#~ msgid "The server is not responding. Please try again later."
+#~ msgstr "O servidor não está respondendo. Por favor, tente novamente mais tarde."
+
+#~ msgid "Visualizing the Economy of Minas Gerais and Brazil"
+#~ msgstr "Visualizando a Economia de Minas Gerais e do Brasil."
+
+#~ msgid ""
+#~ "DataViva is an initiative of the "
+#~ "Government of Minas Gerais to visualize"
+#~ " public data."
+#~ msgstr ""
+#~ "O DataViva é uma iniciativa do "
+#~ "Governo de Minas Gerais para "
+#~ "visualização de dados públicos."
+
+#~ msgid "Go straight to the visualization builder."
+#~ msgstr "Aqui você constroi a sua visualização."
+
+#~ msgid "Generate multiple apps into a report."
+#~ msgstr "Siga um passo a passo para gerar um relatório com vários aplicativos."
+
+#~ msgid "API"
+#~ msgstr "API"
+
+#~ msgid "Access the data directly."
+#~ msgstr "Acessar os dados diretamente."
 

@@ -39,6 +39,8 @@ hr {
   right: 0px;
   bottom: 0px;
   z-index: -1;
+  -webkit-transition: background-image 1s;
+          transition: background-image 1s;
 }
 
 #outer_container {

@@ -8,29 +8,147 @@
 
 {% block body %}
 
-<div id="welcome" class="lightbox">
-  
-  <div class="title">
-    <h1>{% trans %}Visualizing the Economy of Minas Gerais and Brazil{% endtrans %}</h1>
-    {% trans %}DataViva is an initiative of the Government of Minas Gerais to visualize public data.{% endtrans %}
+<div class="grid5col2">
+  <h1 id="title"></h1>
+  </div>
+
+  <div id="carousel" class="lightbox grid5col3">
+    <div class="filler"></div>
   </div>
   
-  <a class="decision icon square apps" href="{{ url_for('apps.guide') }}">
-    <h1>{% trans %}Apps{% endtrans %}</h1>
-    {% trans %}Go straight to the visualization builder.{% endtrans %}
-  </a>
+  <div class="pages"></div>
   
-  <a class="decision icon square guide" href="{{ url_for('guide.guide') }}">
-    <h1>{% trans %}Guide{% endtrans %}</h1>
-    {% trans %}Generate multiple apps into a report.{% endtrans %}
-  </a>
+  <a class="decision" onclick="video()">{% trans %}Watch the Video{% endtrans %}</a>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+
+  var carousel = [
+  {"id": 1, "en": "Where are the Hi-Tech jobs in Minas Gerais?", "pt": "Onde estão os empregos Hi-Tech em Minas Gerais?", "image": "board", "url": "/apps/builder/geo_map/rais/mg/all/3132/bra/"},
+  {"id": 2, "en": "What are the industries opportunities for Minas Gerais?", "pt": "Quais são as oportunidades para indústrias de Minas Gerais?", "image": "sparks", "url": "/apps/builder/network/rais/mg/all/all/isic/"},
+  {"id": 3, "en": "Minas Gerais:<br>Home to the largest employment of Natural Science R&D.", "pt": "Minas Gerais:<br>Sede do maior emprego de P&D em Ciências Naturais.", "image": "lab", "url": "/apps/builder/tree_map/rais/all/m7210/all/bra/"}
+  ]
+    
+  var app = 1, stopped = false
   
-  <br><br>
-  <a href="http://www.fjp.gov.br/" class="logo fjp" target="_blank"></a>
-  <a href="http://www.fapemig.br/" class="logo fapemig" target="_blank"></a>
-  <a href="http://www.escritorio.mg.gov.br/" class="logo governo" target="_blank"></a>
-  <br><br>
+  d3.select("#title")
+    .html(carousel[app-1][dataviva.language])
+    .on(vizwhiz.evt.click,function(){
+      window.location = carousel[app-1].url
+    })
   
-</div>
+  d3.select("#carousel")
+    .on(vizwhiz.evt.click,function(){
+      window.location = carousel[app-1].url
+    })
+    
+  d3.select("#fullscreen")
+    .style("background-image","url('/static/img/bgs/"+carousel[app-1].image+".jpg')")
+  
+  var pages = d3.select(".pages").selectAll(".page")
+    .data(carousel)
+    
+  pages.enter().append("div")
+    .attr("class","page")
+    .attr("id",function(d){return "page_"+d.id})
+    .style("background-color",function(d){
+      if (d.id == app) return "#af1f24"
+      else return "#fff"
+    })
+    
+  pages.on(vizwhiz.evt.click,function(d){
+    stopped = true
+    show_app(d.id)
+  })
+  
+  var apps = d3.select("#carousel").selectAll(".app")
+    .data(carousel)
+    
+  apps.enter().append("div")
+    .attr("class","app")
+    .attr("id",function(d){return "app_"+d.id})
+    .style("background-image",function(d){return "url('static/img/home/app_"+d.id+"_"+dataviva.language+".jpg')"})
+    .style("opacity",function(d){
+      if (d.id == app) return 1
+      else return 0
+    })
+    .style("display",function(d){
+      if (d.id == app) return "block"
+      else return "none"
+    })
+  
+  var titles = d3.select("#titles").selectAll("h1")
+    .data(carousel)
+    
+  titles.enter().append("h1")
+    .attr("id",function(d){return "title_"+d.id})
+    .html(function(d){return d[dataviva.language]})
+    .style("opacity",function(d){
+      if (d.id == app) return 1
+      else return 0
+    })
+    .style("display",function(d){
+      if (d.id == app) return "block"
+      else return "none"
+    })
+    
+  function change_app() {
+    setTimeout(function(){
+      if (!stopped) {
+        show_app(app+1)
+        change_app()
+      }
+    },5000)
+  }
+  
+  change_app()
+  
+  function show_app(a) {
+    if (a != app) {
+      var old = d3.select("#app_"+app).style("opacity",0)
+      var old_title = d3.select("#title_"+app).style("opacity",0)
+      d3.select("#page_"+app).style("background-color","#fff")
+      setTimeout(function(){
+        old.style("display","none")
+        old_title.style("display","none")
+      },1000)
+      if (a > carousel.length) app = 1
+      else app = a
+      d3.select("#app_"+app).style("display","block")
+      d3.select("#title_"+app).style("display","block")
+      setTimeout(function(){
+        d3.select("#app_"+app).style("opacity",1)
+        d3.select("#title_"+app).style("opacity",1)
+      },5)
+      d3.select("#page_"+app).style("background-color","#af1f24")
+      d3.select("#title")
+        .html(carousel[app-1][dataviva.language])
+      d3.select("#fullscreen")
+        .style("background-image","url('/static/img/bgs/"+carousel[app-1].image+".jpg')")
+    }
+  }
+  
+  function video() {
+    if (d3.select("#video").empty()) {
+
+      dataviva.popover.create({
+        "id": "video",
+        "width": 800,
+        "height": 450
+      })
+      d3.select("#video").append("iframe")
+        .attr("src","//player.vimeo.com/video/76463234?byline=0&amp;color=af1f24")
+        .attr("width","800")
+        .attr("height","450")
+        .attr("frameborder","0")
+        
+    }
+    dataviva.popover.show("#video")
+  }
+
+</script>
 
 {% endblock %}
