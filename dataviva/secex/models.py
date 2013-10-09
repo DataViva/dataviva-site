@@ -16,8 +16,8 @@ class Yw(db.Model, AutoSerialize):
     val_usd = db.Column(db.Numeric(16,2))
     val_usd_growth_pct = db.Column(db.Float())
     val_usd_growth_pct_5 = db.Column(db.Float())
-    val_usd_growth_val = db.Column(db.Float())
-    val_usd_growth_val_5 = db.Column(db.Float())
+    val_usd_growth_val = db.Column(db.Numeric(16,2))
+    val_usd_growth_val_5 = db.Column(db.Numeric(16,2))
     eci = db.Column(db.Float())
 
     def __repr__(self):
@@ -32,8 +32,8 @@ class Yp(db.Model, AutoSerialize):
     pci = db.Column(db.Float())
     val_usd_growth_pct = db.Column(db.Float())
     val_usd_growth_pct_5 = db.Column(db.Float())
-    val_usd_growth_val = db.Column(db.Float())
-    val_usd_growth_val_5 = db.Column(db.Float())
+    val_usd_growth_val = db.Column(db.Numeric(16,2))
+    val_usd_growth_val_5 = db.Column(db.Numeric(16,2))
 
     def __repr__(self):
         return '<Yp %d.%s>' % (self.year, self.hs_id)
@@ -47,8 +47,8 @@ class Yb_secex(db.Model, AutoSerialize):
     eci = db.Column(db.Float())
     val_usd_growth_pct = db.Column(db.Float())
     val_usd_growth_pct_5 = db.Column(db.Float())
-    val_usd_growth_val = db.Column(db.Float())
-    val_usd_growth_val_5 = db.Column(db.Float())
+    val_usd_growth_val = db.Column(db.Numeric(16,2))
+    val_usd_growth_val_5 = db.Column(db.Numeric(16,2))
 
     def __repr__(self):
         return '<Yb_secex %d.%s>' % (self.year, self.bra_id)
@@ -68,8 +68,8 @@ class Ypw(db.Model, AutoSerialize):
     val_usd = db.Column(db.Numeric(16,2))
     val_usd_growth_pct = db.Column(db.Float())
     val_usd_growth_pct_5 = db.Column(db.Float())
-    val_usd_growth_val = db.Column(db.Float())
-    val_usd_growth_val_5 = db.Column(db.Float())
+    val_usd_growth_val = db.Column(db.Numeric(16,2))
+    val_usd_growth_val_5 = db.Column(db.Numeric(16,2))
 
     def __repr__(self):
         return '<Ypw %d.%s.%s>' % (self.year, self.hs_id, self.wld_id)
@@ -89,8 +89,8 @@ class Ybp(db.Model, AutoSerialize):
     opp_gain_wld = db.Column(db.Float())
     val_usd_growth_pct = db.Column(db.Float())
     val_usd_growth_pct_5 = db.Column(db.Float())
-    val_usd_growth_val = db.Column(db.Float())
-    val_usd_growth_val_5 = db.Column(db.Float())
+    val_usd_growth_val = db.Column(db.Numeric(16,2))
+    val_usd_growth_val_5 = db.Column(db.Numeric(16,2))
 
     def __repr__(self):
         return '<Ybp %d.%s.%s>' % (self.year, self.bra_id, self.hs_id)
@@ -104,8 +104,8 @@ class Ybw(db.Model, AutoSerialize):
     val_usd = db.Column(db.Numeric(16,2))
     val_usd_growth_pct = db.Column(db.Float())
     val_usd_growth_pct_5 = db.Column(db.Float())
-    val_usd_growth_val = db.Column(db.Float())
-    val_usd_growth_val_5 = db.Column(db.Float())
+    val_usd_growth_val = db.Column(db.Numeric(16,2))
+    val_usd_growth_val_5 = db.Column(db.Numeric(16,2))
 
     def __repr__(self):
         return '<Ybw %d.%s.%s>' % (self.year, self.bra_id, self.wld_id)
@@ -126,8 +126,8 @@ class Ybpw(db.Model, AutoSerialize):
     val_usd = db.Column(db.Numeric(16,2))
     val_usd_growth_pct = db.Column(db.Float())
     val_usd_growth_pct_5 = db.Column(db.Float())
-    val_usd_growth_val = db.Column(db.Float())
-    val_usd_growth_val_5 = db.Column(db.Float())
+    val_usd_growth_val = db.Column(db.Numeric(16,2))
+    val_usd_growth_val_5 = db.Column(db.Numeric(16,2))
 
     def __repr__(self):
         return '<Ybpw %d.%s.%s.%s>' % (self.year, self.bra_id, self.hs_id, self.wld_id)
