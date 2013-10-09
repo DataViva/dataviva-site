@@ -8,6 +8,7 @@ from datetime import datetime, date, timedelta
 from math import ceil
 from uuid import uuid4
 from config import REDIS
+from decimal import *
 
 from flask.sessions import SessionInterface, SessionMixin
 
@@ -29,13 +30,16 @@ class AutoSerialize(object):
         
         for key, value in data.iteritems():
             
+            if isinstance(value,Decimal):
+                value = float(value)
+            
             if isinstance(value,unicode) or \
                 isinstance(value,float) or \
                 isinstance(value,int) or \
                 isinstance(value,str) or \
                 isinstance(value,long):
                 allowed.append((key,value))
-        
+                
         data = dict(allowed)
         
         return data
