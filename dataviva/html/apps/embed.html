@@ -1569,7 +1569,7 @@ val)+": ", "suffix": ""};
       }
       if (window.frameElement) {
         var message = {"id": window.frameElement.id, "title": app.build.title, "app": app.build.app.type}
-        parent.postMessage(message,window.location.origin)
+        parent.postMessage(message,"*")
       }
     }
     
@@ -1874,7 +1874,7 @@ val)+": ", "suffix": ""};
         }
         window_params += url_vars.join("&");
       }
-      var full_url = window.location.origin+"/apps/embed/"+window_url+window_params
+      var full_url = "/apps/embed/"+window_url+window_params
       var replace = window.location.pathname.indexOf(window_url) >= 0
       var iframe = window != window.parent && window.parent.location.pathname.indexOf("builder") >= 0
       
@@ -1899,7 +1899,6 @@ val)+": ", "suffix": ""};
         }
       } 
       else if (window.location.href.indexOf(window_url) < 0) {
-        
         if (window != window.parent && window.parent.location.pathname.indexOf("builder") >= 0) {
           var builder_url = "/apps/builder/"+window_url+window_params
           window.parent.location = builder_url
