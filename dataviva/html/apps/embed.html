@@ -429,7 +429,6 @@
       // Hide popover
       dataviva.popover.hide()
       app.allyears = allyears
-      
       if (new_url) {
         if (new_url != app.url || allyears) {
           app.url = new_url
@@ -1741,7 +1740,7 @@ val)+": ", "suffix": ""};
           if (backup) match = backup
           else match = options[0][0].id
         }
-      
+        
         app.start(match)
       }
       
@@ -1875,7 +1874,6 @@ val)+": ", "suffix": ""};
         }
         window_params += url_vars.join("&");
       }
-      
       var full_url = window.location.origin+"/apps/embed/"+window_url+window_params
       var replace = window.location.pathname.indexOf(window_url) >= 0
       var iframe = window != window.parent && window.parent.location.pathname.indexOf("builder") >= 0
@@ -2060,11 +2058,13 @@ val)+": ", "suffix": ""};
    app.start()
    
    if (Modernizr.history) {
-     window.onpopstate = function() {
-       var u = window.location.href.split("/embed/")[1].split("/?")[0]
-       u = u.replace(/\/+$/, "")+"/"
-       if (u != app.url) app.start(u)
-     }
+     setTimeout(function(){
+       window.onpopstate = function() {
+         var u = window.location.href.split("/embed/")[1].split("/?")[0]
+         u = u.replace(/\/+$/, "")+"/"
+         if (u != app.url) app.start(u)
+       }
+     },1000)
    }
   
   </script>
