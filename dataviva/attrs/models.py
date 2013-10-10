@@ -2,6 +2,7 @@ from dataviva import db, __latest_year__
 from dataviva.utils import AutoSerialize, exist_or_404, title_case
 from sqlalchemy import func, Float
 from sqlalchemy.sql.expression import cast
+from decimal import *
 
 from flask import g
 
@@ -134,12 +135,12 @@ class Stats(object):
                 obj = globals()[key.title()].query.get(top.first()[0])
             else:
                 obj = getattr(top.first(),key)
-                num = getattr(top.first(),val_var)
+                num = float(getattr(top.first(),val_var))
                 den = 0
                 for x in top.all():
                     value = getattr(x,val_var)
                     if value:
-                        den += value
+                        den += float(value)
                 percent = (num/float(den))*100
         
             return {"name": "top_{0}".format(key), "value": obj.name(), "percent": percent, "id": obj.id, "group": "{0}_stats_{1}".format(dataset,latest_year)}
@@ -194,7 +195,7 @@ class Stats(object):
                 val = getattr(total,val_var)
             
             if calc_var == "wage_avg":
-                val = val/getattr(total,"num_emp")
+                val = float(val)/getattr(total,"num_emp")
                 
         else:
             val = 0
