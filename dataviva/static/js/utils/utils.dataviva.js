@@ -509,7 +509,7 @@ dataviva.ui.background = function() {
       var filename = "night"
     }
     
-    if (dataviva.page != "home") fs.style("background-image","url('/static/img/bgs/"+filename+".jpg')")
+    fs.style("background-image","url('/static/img/bgs/"+filename+".jpg')")
     
     resizebg = function() {
       var w = window.innerWidth, 

@@ -8,17 +8,42 @@
 
 {% block body %}
 
-<div class="grid5col2">
-  <h1 id="title"></h1>
+  <div id="video" class="lightbox">
+    <h1>{% trans %}Visualizing the Economy of Minas Gerais and Brazil{% endtrans %}</h1>
+    {% trans %}DataViva is an innovative way to visualize data and transform it into knowledge to guide sustainable economic development.{% endtrans %}
+    <div class="welcome_bottom">
+    {% trans %}Learn how DataViva was created:{% endtrans %}
+    <iframe width="348" height="195" src="//www.youtube.com/embed/Fx1-jVLnlS4?rel=0{% if g.locale == 'pt' %}&cc_lang_pref=BR&cc_load_policy=1{% endif %}" frameborder="0" allowfullscreen></iframe>
+    </div>
   </div>
 
-  <div id="carousel" class="lightbox grid5col3">
-    <div class="filler"></div>
+  <div id="carousel" class="lightbox">
+    <div class="pages"></div>
+    <div class="centered">
+      <a class="decision">{% trans %}Click, filter and discover!{% endtrans %}</a>
+    </div>
   </div>
   
-  <div class="pages"></div>
+  <br>
+  <a class="decision icon square bra" href="/profiles/bra/select/">
+    {% trans %}Brazilian Locations{% endtrans %}
+  </a>
+
+  <a class="decision icon square cbo" href="/profiles/cbo/select/">
+    {% trans %}Occupations{% endtrans %}
+  </a>
+
+  <a class="decision icon square isic" href="/profiles/isic/select/">
+    {% trans %}Industries{% endtrans %}
+  </a>
   
-  <a class="decision" onclick="video()">{% trans %}Watch the Video{% endtrans %}</a>
+  <a class="decision icon square hs" href="/profiles/hs/select/">
+    {% trans %}Product Exports{% endtrans %}
+  </a>
+
+  <a class="decision icon square wld" href="/profiles/wld/select/">
+    {% trans %}Export Destinations{% endtrans %}
+  </a>
 
 {% endblock %}
 
@@ -27,26 +52,17 @@
 <script>
 
   var carousel = [
-  {"id": 1, "en": "Where are the Hi-Tech jobs in Minas Gerais?", "pt": "Onde estão os empregados em setores de alta tecnologia em Minas Gerais?", "image": "board", "url": "/apps/builder/geo_map/rais/mg/all/3132/bra/"},
-  {"id": 2, "en": "What are the industrial opportunities for Minas Gerais?", "pt": "Quais são as oportunidades econômicas de Minas Gerais?", "image": "sparks", "url": "/apps/builder/network/rais/mg/all/all/isic/"},
-  {"id": 3, "en": "Minas Gerais:<br>Home to the largest employment of Natural Science R&D.", "pt": "Minas Gerais:<br>Estado com maior quantidade de empregados em P&D em Ciências Naturais.", "image": "lab", "url": "/apps/builder/tree_map/rais/all/m7210/all/bra/"}
+  {"id": 1, "en": "What are the industrial opportunities for Minas Gerais?", "pt": "Quais são as oportunidades econômicas de Minas Gerais?", "image": "sparks", "url": "/apps/builder/network/rais/mg/all/all/isic/"},
+  {"id": 2, "en": "Where are the Hi-Tech jobs in Minas Gerais?", "pt": "Onde estão os empregados em setores de alta tecnologia em Minas Gerais?", "image": "board", "url": "/apps/builder/geo_map/rais/mg/all/3132/bra/"},
+  {"id": 3, "en": "Minas Gerais: Home to the largest employment of Natural Science R&D.", "pt": "Minas Gerais: Estado com maior quantidade de empregados em P&D em Ciências Naturais", "image": "lab", "url": "/apps/builder/tree_map/rais/all/m7210/all/bra/"}
   ]
     
   var app = 1, stopped = false
   
-  d3.select("#title")
-    .html(carousel[app-1][dataviva.language])
+  d3.select("#carousel .decision")
     .on(vizwhiz.evt.click,function(){
       window.location = carousel[app-1].url
     })
-  
-  d3.select("#carousel")
-    .on(vizwhiz.evt.click,function(){
-      window.location = carousel[app-1].url
-    })
-    
-  d3.select("#fullscreen")
-    .style("background-image","url('/static/img/bgs/"+carousel[app-1].image+".jpg')")
   
   var pages = d3.select(".pages").selectAll(".page")
     .data(carousel)
@@ -70,7 +86,7 @@
   apps.enter().append("div")
     .attr("class","app")
     .attr("id",function(d){return "app_"+d.id})
-    .style("background-image",function(d){return "url('static/img/home/app_"+d.id+"_"+dataviva.language+".jpg')"})
+    .style("background-image",function(d){return "url('/static/img/home/"+d.image+".jpg')"})
     .style("opacity",function(d){
       if (d.id == app) return 1
       else return 0
@@ -80,7 +96,7 @@
       else return "none"
     })
   
-  var titles = d3.select("#titles").selectAll("h1")
+  var titles = d3.select("#carousel").selectAll("h1")
     .data(carousel)
     
   titles.enter().append("h1")
@@ -94,6 +110,9 @@
       if (d.id == app) return "block"
       else return "none"
     })
+    // .on(vizwhiz.evt.click,function(d){
+    //   window.location = d.url
+    // })
     
   function change_app() {
     setTimeout(function(){
@@ -101,7 +120,7 @@
         show_app(app+1)
         change_app()
       }
-    },5000)
+    },7000)
   }
   
   change_app()
@@ -124,29 +143,7 @@
         d3.select("#title_"+app).style("opacity",1)
       },5)
       d3.select("#page_"+app).style("background-color","#af1f24")
-      d3.select("#title")
-        .html(carousel[app-1][dataviva.language])
-      d3.select("#fullscreen")
-        .style("background-image","url('/static/img/bgs/"+carousel[app-1].image+".jpg')")
     }
-  }
-  
-  function video() {
-    if (d3.select("#video").empty()) {
-
-      dataviva.popover.create({
-        "id": "video",
-        "width": 800,
-        "height": 450
-      })
-      d3.select("#video").append("iframe")
-        .attr("src","//www.youtube.com/embed/Fx1-jVLnlS4?rel=0")
-        .attr("width","800")
-        .attr("height","450")
-        .attr("frameborder","0")
-        
-    }
-    dataviva.popover.show("#video")
   }
 
 </script>

@@ -60,7 +60,7 @@ hr {
 #container {
   display: block;
   margin: 0px auto;
-  padding: 76px 20px 69px 20px;
+  padding: 76px 20px 96px 20px;
   text-align: center;
   width: 980px;
 }
@@ -87,7 +87,7 @@ div#selector {
   display: inline-block;
   margin: 12px;
   max-width: 800px;
-  padding: 12px;
+  padding: 10px 15px 6px;
   position: relative;
 }
 

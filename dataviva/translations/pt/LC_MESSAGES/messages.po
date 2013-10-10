@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-10 16:17-0400\n"
+"POT-Creation-Date: 2013-10-10 17:31-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -84,8 +84,8 @@ msgid "Establishments and Employment"
 msgstr "Estabelecimentos e Emprego"
 
 #: dataviva/guide/views.py:164 dataviva/guide/views.py:191
-#: dataviva/guide/views.py:201 dataviva/html/data/select.html:19
-#: dataviva/html/guide/industry.html:10
+#: dataviva/guide/views.py:201 dataviva/html/home.html:43
+#: dataviva/html/data/select.html:19 dataviva/html/guide/industry.html:10
 msgid "Product Exports"
 msgstr "Produtos Exportados"
 
@@ -97,9 +97,44 @@ msgstr "Localidade"
 msgid "All"
 msgstr "Tudo"
 
-#: dataviva/html/home.html:21
-msgid "Watch the Video"
-msgstr "Assista ao Vídeo"
+#: dataviva/html/home.html:12
+msgid "Visualizing the Economy of Minas Gerais and Brazil"
+msgstr "Visualizando a Economia de Minas Gerais e do Brasil."
+
+#: dataviva/html/home.html:16
+msgid ""
+"DataViva is an innovative way to visualize data and transform it into "
+"knowledge to guide sustainable economic development."
+msgstr ""
+"O DataViva é uma forma inovadora de visualizar dados e transformá-los em "
+"conhecimento para orientar o desenvolvimento econômico sustentável."
+
+#: dataviva/html/home.html:18
+msgid "Learn how DataViva was created:"
+msgstr "Conheça como foi criado o DataViva:"
+
+#: dataviva/html/home.html:25
+msgid "Click, filter and discover!"
+msgstr "Clique, filtre e descubra!"
+
+#: dataviva/html/home.html:31 dataviva/html/data/query.html:62
+msgid "Brazilian Locations"
+msgstr "Localidades Brasileiras"
+
+#: dataviva/html/home.html:35 dataviva/html/data/query.html:119
+#: dataviva/html/data/select.html:29
+msgid "Occupations"
+msgstr "Ocupações"
+
+#: dataviva/html/home.html:39 dataviva/html/data/query.html:91
+#: dataviva/html/data/select.html:24
+msgid "Industries"
+msgstr "Atividades Econômicas"
+
+#: dataviva/html/home.html:47 dataviva/html/data/query.html:181
+#: dataviva/html/data/select.html:39
+msgid "Export Destinations"
+msgstr "Destinos das Exportações"
 
 #: dataviva/html/about/apps.html:4 dataviva/html/templates/about.html:46
 msgid "About the Apps"
@@ -918,7 +953,14 @@ msgid ""
 "data is received from the national authorities, it is standardized by the"
 " UN Statistics Division and then added to UN Comtrade."
 msgstr ""
-"O Banco de Dados Estatísticos de Comércio de Commodities das Nações Unidas (UN Comtrade) contem estatísticas detalhadas sobre importações e exportações relatadas pelas autoridades estatísticas de cerca de 200 países ou áreas. O UN Comtrade é considerado o banco de dados mais abrangente disponível, com mais de 1 bilhão de registros. O banco de dados é constantemente atualizado. Sempre que os dados de comércio são recebidos de autoridades nacionais, são padronizados pela Divisão de Estatísticas das Nações Unidas e então adicionados ao UN Comtrade."
+"O Banco de Dados Estatísticos de Comércio de Commodities das Nações "
+"Unidas (UN Comtrade) contem estatísticas detalhadas sobre importações e "
+"exportações relatadas pelas autoridades estatísticas de cerca de 200 "
+"países ou áreas. O UN Comtrade é considerado o banco de dados mais "
+"abrangente disponível, com mais de 1 bilhão de registros. O banco de "
+"dados é constantemente atualizado. Sempre que os dados de comércio são "
+"recebidos de autoridades nacionais, são padronizados pela Divisão de "
+"Estatísticas das Nações Unidas e então adicionados ao UN Comtrade."
 
 #: dataviva/html/about/data/comtrade.html:11
 #: dataviva/html/about/data/rais.html:11 dataviva/html/about/data/secex.html:11
@@ -928,7 +970,8 @@ msgstr "Principais Variáveis"
 #: dataviva/html/about/data/comtrade.html:12
 msgid "Commodities; Reporters, Partners; Import; Export; Trade Value."
 msgstr ""
-"Commodities; Relatores, Parceiros; Importação; Exportação; Valor Comercial."
+"Commodities; Relatores, Parceiros; Importação; Exportação; Valor "
+"Comercial."
 
 #: dataviva/html/about/data/comtrade.html:14
 #: dataviva/html/about/data/rais.html:14 dataviva/html/about/data/secex.html:14
@@ -938,7 +981,8 @@ msgstr "Disponibilidade de Dados"
 #: dataviva/html/about/data/comtrade.html:15
 msgid "It concerns annual trade data from 1962 to the most recent year."
 msgstr ""
-"Trata-se de dados de comércio anuais, a partir de 1962 para o ano mais recente."
+"Trata-se de dados de comércio anuais, a partir de 1962 para o ano mais "
+"recente."
 
 #: dataviva/html/about/data/comtrade.html:17
 #: dataviva/html/about/data/rais.html:17 dataviva/html/about/data/secex.html:17
@@ -951,7 +995,9 @@ msgid ""
 "Classification (SITC); Harmonized System (HS); Broad Economic Categories "
 "(BEC)."
 msgstr ""
-"Classificações das commodities: Classificação Padrão do Comércio Internacional (SITC, por sua sigla em inglês); Sistema Harmonizado (SH); Categorias Econômicas Amplas (BEC, por sua sigla em inglês)."
+"Classificações das commodities: Classificação Padrão do Comércio "
+"Internacional (SITC, por sua sigla em inglês); Sistema Harmonizado (SH); "
+"Categorias Econômicas Amplas (BEC, por sua sigla em inglês)."
 
 #: dataviva/html/about/data/rais.html:3
 msgid "Annual Social Information Report"
@@ -974,10 +1020,19 @@ msgid ""
 "characteristics. It currently covers around 97&#37; of the Brazilian "
 "formal market."
 msgstr ""
-"A RAIS é um Registro Administrativo, de periodicidade anual, criada com a finalidade de suprir as necessidades de controle, de estatísticas e de informações às entidades governamentais da área social. Constitui um instrumento imprescindível para o cumprimento das normas legais, como também é de fundamental importância para o acompanhamento e a caracterização do mercado de trabalho formal. Retrata a situação das empresas em 31 de dezembro do ano de referência e é composta por informações declaradas pelas próprias empresas, anualmente, acerca de seus empregados, da atividade econômica desenvolvida, do seu estoque, entre outras características. Atualmente, cobre cerca de 97&#37; do universo do mercado formal brasileiro."
+"A RAIS é um Registro Administrativo, de periodicidade anual, criada com a"
+" finalidade de suprir as necessidades de controle, de estatísticas e de "
+"informações às entidades governamentais da área social. Constitui um "
+"instrumento imprescindível para o cumprimento das normas legais, como "
+"também é de fundamental importância para o acompanhamento e a "
+"caracterização do mercado de trabalho formal. Retrata a situação das "
+"empresas em 31 de dezembro do ano de referência e é composta por "
+"informações declaradas pelas próprias empresas, anualmente, acerca de "
+"seus empregados, da atividade econômica desenvolvida, do seu estoque, "
+"entre outras características. Atualmente, cobre cerca de 97&#37; do "
+"universo do mercado formal brasileiro."
 
 #: dataviva/html/about/data/rais.html:12
-#, fuzzy
 msgid ""
 "Jobs on December 31st, and those hired and released according to gender, "
 "age bracket, level of education, length of service and income, "
@@ -985,7 +1040,11 @@ msgid ""
 " information on the number of jobs by size of establishment, wage bill "
 "and employee nationality."
 msgstr ""
-"Empregos em 31 de dezembro e admitidos e desligados segundo gênero, faixa etária, grau de escolaridade, tempo de serviço e rendimentos, desagregados em nível ocupacional, geográfico e setorial. Contêm informações sobre número de empregos por tamanho de estabelecimento, massa salarial e nacionalidade do empregado."
+"Empregos em 31 de dezembro e admitidos e desligados segundo gênero, faixa"
+" etária, grau de escolaridade, tempo de serviço e rendimentos, "
+"desagregados em nível ocupacional, geográfico e setorial. Contêm "
+"informações sobre número de empregos por tamanho de estabelecimento, "
+"massa salarial e nacionalidade do empregado."
 
 #: dataviva/html/about/data/rais.html:15
 msgid ""
@@ -993,7 +1052,9 @@ msgid ""
 "following the research reference year. And data release takes place "
 "approximately eight months after the beginning of collection."
 msgstr ""
-"As declarações são coletadas, geralmente, entre janeiro e março do ano subsequente ao de referência da pesquisa. E a liberação dos dados ocorre aproximadamente oito meses após o início da coleta."
+"As declarações são coletadas, geralmente, entre janeiro e março do ano "
+"subsequente ao de referência da pesquisa. E a liberação dos dados ocorre "
+"aproximadamente oito meses após o início da coleta."
 
 #: dataviva/html/about/data/rais.html:18
 msgid ""
@@ -1004,7 +1065,12 @@ msgid ""
 "occupational: Large Occupational Group, Main Subgroup, Occupational "
 "Subgroup, Occupational Family and Occupation."
 msgstr ""
-"Segundo recortes geográficos: para o Brasil, Grandes Regiões, Unidades da Federação, Regiões Metropolitanas e Municípios; setorial: setor, subsetor, segundo a classificação IBGE 80 e em nível de Seção, Divisão, Grupo e Classe segundo a CNAE 1.0 E CNAE 2.0; e ocupacional: Grande Grupo Ocupacional, Subgrupo Principal, Subgrupo Ocupacional, Família Ocupacional e Ocupação."
+"Segundo recortes geográficos: para o Brasil, Grandes Regiões, Unidades da"
+" Federação, Regiões Metropolitanas e Municípios; setorial: setor, "
+"subsetor, segundo a classificação IBGE 80 e em nível de Seção, Divisão, "
+"Grupo e Classe segundo a CNAE 1.0 E CNAE 2.0; e ocupacional: Grande Grupo"
+" Ocupacional, Subgrupo Principal, Subgrupo Ocupacional, Família "
+"Ocupacional e Ocupação."
 
 #: dataviva/html/about/data/secex.html:3
 msgid "Foreign Trade Secretariat Database"
@@ -1026,14 +1092,24 @@ msgid ""
 "through the analysis of concrete import and export data, increasing "
 "opportunities for the development of foreign trade."
 msgstr ""
-"O Banco de Dados da SECEX possibilita a análise histórica do comportamento do intercâmbio comercial brasileiro, um dos mais importantes indicadores de desempenho da economia. Retrata e avalia o movimento comercial do País com as demais nações do mundo, englobando as vendas e compras efetuadas externamente. Constitui um instrumento básico para tomada de decisão e determinação de diretrizes econômicas por parte do Governo. Permite aos agentes envolvidos na atividade o melhor planejamento das suas ações pela análise dos dados concretos das exportações e importações, aumentando as oportunidades de desenvolvimento do comércio externo."
+"O Banco de Dados da SECEX possibilita a análise histórica do "
+"comportamento do intercâmbio comercial brasileiro, um dos mais "
+"importantes indicadores de desempenho da economia. Retrata e avalia o "
+"movimento comercial do País com as demais nações do mundo, englobando as "
+"vendas e compras efetuadas externamente. Constitui um instrumento básico "
+"para tomada de decisão e determinação de diretrizes econômicas por parte "
+"do Governo. Permite aos agentes envolvidos na atividade o melhor "
+"planejamento das suas ações pela análise dos dados concretos das "
+"exportações e importações, aumentando as oportunidades de desenvolvimento"
+" do comércio externo."
 
 #: dataviva/html/about/data/secex.html:12
 msgid ""
 "Exports; Imports; Goods; Federation Unit; Municipalities; Destination "
 "Country; Country of Origin."
 msgstr ""
-"Exportação; Importação; Mercadoria; Unidade da Federação; Municípios; País de Destino; País de Origem."
+"Exportação; Importação; Mercadoria; Unidade da Federação; Municípios; "
+"País de Destino; País de Origem."
 
 #: dataviva/html/about/data/secex.html:15
 msgid ""
@@ -1042,7 +1118,10 @@ msgid ""
 "five years. Information is gathered 15 to 20 working days after the "
 "month’s end."
 msgstr ""
-"O banco de dados contém informações mensais de exportação e importação brasileiras, de 1989 em diante. Os dados são passíveis de alteração por período de cinco anos. A coleta das informações ocorre de 15 a 20 dias úteis após o final do mês."
+"O banco de dados contém informações mensais de exportação e importação "
+"brasileiras, de 1989 em diante. Os dados são passíveis de alteração por "
+"período de cinco anos. A coleta das informações ocorre de 15 a 20 dias "
+"úteis após o final do mês."
 
 #: dataviva/html/about/data/secex.html:18
 msgid ""
@@ -1051,7 +1130,9 @@ msgid ""
 "Mercosul Common Nomenclature (NCM): Section, Chapter, Position, Sub-"
 "position, Item and Sub-item."
 msgstr ""
-"Segundo recortes geográficos: para o Brasil, Grandes Regiões, Unidades da Federação, Municípios; por produtos de acordo com a Nomenclatura Comum do Mercosul (NCM): Seção, Capítulo, Posição, Subposição, Item e Subitem."
+"Segundo recortes geográficos: para o Brasil, Grandes Regiões, Unidades da"
+" Federação, Municípios; por produtos de acordo com a Nomenclatura Comum "
+"do Mercosul (NCM): Seção, Capítulo, Posição, Subposição, Item e Subitem."
 
 #: dataviva/html/about/glossary/complexity.html:3
 msgid "Economic Complexity"
@@ -1651,10 +1732,6 @@ msgstr "Consultas ao Banco de Dados"
 msgid "All Years"
 msgstr "Todos os Anos"
 
-#: dataviva/html/data/query.html:62
-msgid "Brazilian Locations"
-msgstr "Localidades Brasileiras"
-
 #: dataviva/html/data/query.html:75
 msgid "Showing all of Brazil until a location is selected."
 msgstr "Mostrando todo o Brasil até que uma localidade seja selecionada."
@@ -1662,10 +1739,6 @@ msgstr "Mostrando todo o Brasil até que uma localidade seja selecionada."
 #: dataviva/html/data/query.html:78
 msgid "add a location"
 msgstr "adicionar uma localidade"
-
-#: dataviva/html/data/query.html:91 dataviva/html/data/select.html:24
-msgid "Industries"
-msgstr "Atividades Econômicas"
 
 #: dataviva/html/data/query.html:105
 msgid "Showing all industries until a filter is selected."
@@ -1676,10 +1749,6 @@ msgstr ""
 #: dataviva/html/data/query.html:108
 msgid "add an industry"
 msgstr "adicionar uma atividade econômica"
-
-#: dataviva/html/data/query.html:119 dataviva/html/data/select.html:29
-msgid "Occupations"
-msgstr "Ocupações"
 
 #: dataviva/html/data/query.html:133
 msgid "Showing all occupations until a filter is selected."
@@ -1704,10 +1773,6 @@ msgstr "Mostrando todos os produtos até que um filtro seja selecionado."
 #: dataviva/html/data/query.html:170
 msgid "add a product"
 msgstr "adicionar um produto"
-
-#: dataviva/html/data/query.html:181 dataviva/html/data/select.html:39
-msgid "Export Destinations"
-msgstr "Destinos das Exportações"
 
 #: dataviva/html/data/query.html:195
 msgid "Showing all countries until a filter is selected."

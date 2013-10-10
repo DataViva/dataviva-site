@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-10 16:17-0400\n"
+"POT-Creation-Date: 2013-10-10 17:31-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,8 +83,8 @@ msgid "Establishments and Employment"
 msgstr ""
 
 #: dataviva/guide/views.py:164 dataviva/guide/views.py:191
-#: dataviva/guide/views.py:201 dataviva/html/data/select.html:19
-#: dataviva/html/guide/industry.html:10
+#: dataviva/guide/views.py:201 dataviva/html/home.html:43
+#: dataviva/html/data/select.html:19 dataviva/html/guide/industry.html:10
 msgid "Product Exports"
 msgstr ""
 
@@ -96,8 +96,39 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: dataviva/html/home.html:21
-msgid "Watch the Video"
+#: dataviva/html/home.html:12
+msgid "Visualizing the Economy of Minas Gerais and Brazil"
+msgstr ""
+
+#: dataviva/html/home.html:16
+msgid "DataViva is an innovative way to visualize data and transform it into knowledge to guide sustainable economic development."
+msgstr ""
+
+#: dataviva/html/home.html:18
+msgid "Learn how DataViva was created:"
+msgstr ""
+
+#: dataviva/html/home.html:25
+msgid "Click, filter and discover!"
+msgstr ""
+
+#: dataviva/html/home.html:31 dataviva/html/data/query.html:62
+msgid "Brazilian Locations"
+msgstr ""
+
+#: dataviva/html/home.html:35 dataviva/html/data/query.html:119
+#: dataviva/html/data/select.html:29
+msgid "Occupations"
+msgstr ""
+
+#: dataviva/html/home.html:39 dataviva/html/data/query.html:91
+#: dataviva/html/data/select.html:24
+msgid "Industries"
+msgstr ""
+
+#: dataviva/html/home.html:47 dataviva/html/data/query.html:181
+#: dataviva/html/data/select.html:39
+msgid "Export Destinations"
 msgstr ""
 
 #: dataviva/html/about/apps.html:4 dataviva/html/templates/about.html:46
@@ -1037,10 +1068,6 @@ msgstr ""
 msgid "All Years"
 msgstr ""
 
-#: dataviva/html/data/query.html:62
-msgid "Brazilian Locations"
-msgstr ""
-
 #: dataviva/html/data/query.html:75
 msgid "Showing all of Brazil until a location is selected."
 msgstr ""
@@ -1049,20 +1076,12 @@ msgstr ""
 msgid "add a location"
 msgstr ""
 
-#: dataviva/html/data/query.html:91 dataviva/html/data/select.html:24
-msgid "Industries"
-msgstr ""
-
 #: dataviva/html/data/query.html:105
 msgid "Showing all industries until a filter is selected."
 msgstr ""
 
 #: dataviva/html/data/query.html:108
 msgid "add an industry"
-msgstr ""
-
-#: dataviva/html/data/query.html:119 dataviva/html/data/select.html:29
-msgid "Occupations"
 msgstr ""
 
 #: dataviva/html/data/query.html:133
@@ -1087,10 +1106,6 @@ msgstr ""
 
 #: dataviva/html/data/query.html:170
 msgid "add a product"
-msgstr ""
-
-#: dataviva/html/data/query.html:181 dataviva/html/data/select.html:39
-msgid "Export Destinations"
 msgstr ""
 
 #: dataviva/html/data/query.html:195

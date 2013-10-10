@@ -2,19 +2,22 @@ body.home #box {
   background-color: white;
 }
 
-body.home #welcome {
-  text-align: left;
+body.home .welcome_text {
+  margin: 10px 10px 0px 10px;
 }
 
 body.home #carousel {
+  display: inline-block;
+  height: 400px;
+  margin: 0px -2px 15px 7px;
+  overflow: hidden;
   position: relative;
-  height: 318px;
-  margin: 10px;
-  width: 566px;
+  text-align: left;
+  width: 563px;
 }
 
 body.home #carousel .app {
-  background-size: 100%;
+  background-size: 100% 100%;
   display: none;
   height: 100%;
   left: 0px;
@@ -26,25 +29,39 @@ body.home #carousel .app {
           transition: opacity 1s;
 }
 
-body.home #carousel .app:hover {
-  cursor: pointer;
+body.home #carousel .centered {
+  bottom: 30px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 200;
 }
 
-body.home h1 {
+body.home #carousel .decision {
+  display: inline-block;
+}
+
+body.home #carousel h1 {
+  background-color: rgba(0,0,0,0.5);
   color: white;
   font-size: 40px;
+  height: 100%;
   line-height: 44px;
-  margin-top: 10px;
-  text-shadow: 0px 0px 5px #000;
-}
-
-body.home h1:hover {
-  cursor: pointer;
+  margin: 0px;
+  padding: 20px 25px 20px 25px;
+  position: absolute;
+  -webkit-transition: opacity 1s;
+          transition: opacity 1s;
+  width: 513px;
+  z-index: 100;
 }
 
 body.home .pages {
+  bottom: 5px;
+  position: absolute;
   text-align: center;
   width: 100%;
+  z-index: 200;
 }
 
 body.home .page {
@@ -65,7 +82,26 @@ body.home .page:hover {
   opacity: 1;
 }
 
-body.home a.decision {
+body.home div#video {
   display: inline-block;
-  width: auto;
+  height: 380px;
+  margin-right: 14px;
+  padding: 10px;
+  position: relative;
+  text-align: left;
+  width: 348px;
+}
+
+body.home div#video h1 {
+  font-size: 24px;
+  line-height: 26px;
+}
+
+body.home div#video iframe {
+  margin-top: 10px;
+}
+
+body.home div#video .welcome_bottom {
+  bottom: 10px;
+  position: absolute;
 }
