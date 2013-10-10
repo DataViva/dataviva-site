@@ -60,7 +60,7 @@
       <!-- Question metadata -->
       <div class="question_attr">
         {% if q.user.role == 0 %}<div class="userpic" style="background-image: url('{{ q.user.avatar(50) }}')"></div>{% endif %}
-        {% trans %}Asked{% endtrans %} {% if q.user.role == 0 %}{% trans %}by{% endtrans %} <a href="{{ url_for('account.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a>{% endif %} {{ momentjs(q.timestamp).fromNow() }}
+        {% if q.user.role == 0 or (q.timestamp != None and q.user.role == 1) %}{% trans %}Asked{% endtrans %} {% if q.user.role == 0 %}{% trans %}by{% endtrans %} <a href="{{ url_for('account.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a>{% endif %} {% if q.timestamp != None %}{{ momentjs(q.timestamp).fromNow() }}{% endif %}{% endif %}
       </div>
       
     </div> <!-- end of right hand-side -->

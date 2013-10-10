@@ -116,7 +116,10 @@
           if (d.user.role == 0) {
             user_link = dataviva.format.text("by") + " <a href='/account/" + d.user.nickname + "'>" + d.user.fullname + "</a> "
           }
-          return dataviva.format.text("Asked") + " " + user_link + moment(d.timestamp).fromNow();
+          if (d.timestamp) var t = moment(d.timestamp).fromNow()
+          else var t = ""
+          if (user_link == "" && t == "") return ""
+          return dataviva.format.text("Asked") + " " + user_link + t;
         })
 
       acts.exit().remove()

@@ -84,7 +84,10 @@ class Question(db.Model, AutoSerialize):
     
     def serialize(self):
         auto_serialized = super(Question, self).serialize()
-        auto_serialized["timestamp"] = self.timestamp.isoformat()
+        try:
+            auto_serialized["timestamp"] = self.timestamp.isoformat()
+        except AttributeError:
+            auto_serialized["timestamp"] = None
         auto_serialized["user"] = self.user.serialize()
         auto_serialized["votes"] = len(self.votes.all())
         return auto_serialized
