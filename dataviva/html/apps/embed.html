@@ -556,7 +556,7 @@
                     
                     callback(error,d)
                   })
-              },dataviva.static_url+"attrs/"+app.build.output+"/")
+              },dataviva.static_url+"attrs/"+app.build.output+"/?lang="+dataviva.language)
             }
             
             if (["network","rings"].indexOf(app.build.app.type) >= 0 
@@ -783,7 +783,7 @@
           else {
             var default_value = ui.values[0]
           }
-          console.log(ui.type,default_value)
+          
           if((last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
             app.vars[ui.type] = default_value
           }
@@ -855,7 +855,7 @@
         }
       }
       
-      if (app.build.bra[0].id == "all" && app.build.app.type == "network") {
+      if (app.build.bra[0].id == "all" && app.build.app.type == "network" && app.build.output != "hs") {
         app.vars.spotlight = false
       }
       

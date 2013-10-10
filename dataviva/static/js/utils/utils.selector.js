@@ -69,10 +69,10 @@ function Selector() {
             .replace("munic",id)
             .replace("value",dist)
             
-          d3.json(dataviva.static_url+u.substr(1))
+          d3.json(dataviva.static_url+u.substr(1)+"?lang="+dataviva.language)
             .header("X-Requested-With", "XMLHttpRequest")
             .get(function(error,raw_distances){
-
+              console.log(error,raw_distances)
               var distances = [];
               raw_distances.data.forEach(function(d,i){
                 if (i != 0) {
@@ -644,11 +644,6 @@ function Selector() {
             }
             else if (type == "bra" && v.id.length == depths[depths.length-1]) {
 
-              text.append("div")
-                .attr("id","withins"+v.id)
-                .attr("class","search_withins")
-                .style("display","none")
-                
               if (v.distance) update_distance(v.distance,v.id)
 
               var prox_toggles = buttons.append("div")
@@ -696,6 +691,15 @@ function Selector() {
             if (results[i+1] || i == results.length-1) {
               body.append("div")
                 .attr("class","vizwhiz_tooltip_data_seperator")
+            }
+            
+            if (type == "bra" && v.id.length == depths[depths.length-1]) {
+
+              item.append("div")
+                .attr("id","withins"+v.id)
+                .attr("class","search_withins")
+                .style("display","none")
+              
             }
             
             var width = item.node().offsetWidth
@@ -803,7 +807,7 @@ function Selector() {
         create_elements()
       }
       else {
-        d3.json(dataviva.static_url+"attrs/"+type+"/")
+        d3.json(dataviva.static_url+"attrs/"+type+"/?lang="+dataviva.language)
           .header("X-Requested-With", "XMLHttpRequest")
           .get(function(error,attrs) {
             data = attrs.data

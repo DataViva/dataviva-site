@@ -147,7 +147,7 @@ div.search_buttons > div.proximity_toggles {
   display: inline-block;
 }
 
-div.search_text > div.search_withins {
+div.search_result > div.search_withins {
   color: #333;
   font-size: 10px;
 }
