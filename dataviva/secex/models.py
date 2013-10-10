@@ -30,6 +30,7 @@ class Yp(db.Model, AutoSerialize):
     hs_id = db.Column(db.String(6), db.ForeignKey(Hs.id), primary_key=True)
     val_usd = db.Column(db.Numeric(16,2))
     pci = db.Column(db.Float())
+    rca_wld = db.Column(db.Float())
     val_usd_growth_pct = db.Column(db.Float())
     val_usd_growth_pct_5 = db.Column(db.Float())
     val_usd_growth_val = db.Column(db.Numeric(16,2))
