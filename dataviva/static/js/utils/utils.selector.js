@@ -72,7 +72,6 @@ function Selector() {
           d3.json(dataviva.static_url+u.substr(1)+"?lang="+dataviva.language)
             .header("X-Requested-With", "XMLHttpRequest")
             .get(function(error,raw_distances){
-              console.log(error,raw_distances)
               var distances = [];
               raw_distances.data.forEach(function(d,i){
                 if (i != 0) {
