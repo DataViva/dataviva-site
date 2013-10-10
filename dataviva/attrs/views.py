@@ -15,9 +15,10 @@ def page_not_found(error):
 
 @mod.after_request
 def after_request(response):
+    lang = request.args.get('lang', None) or g.locale
     # if response.status_code != 302:
     if response.status_code != 302 and request.is_xhr:
-        cache_id = request.path + g.locale
+        cache_id = request.path + lang
         # test if this query was cached, if not add it
         cached_q = cached_query(cache_id)
         if cached_q is None:
@@ -27,10 +28,10 @@ def after_request(response):
         response.headers['Content-Length'] = str(len(response.data))
     return response
 
-def fix_name(attr):
-    name_lang = "name_" + g.locale
-    desc_lang = "desc_" + g.locale
-    keywords_lang = "keywords_" + g.locale
+def fix_name(attr, lang):
+    name_lang = "name_" + lang
+    desc_lang = "desc_" + lang
+    keywords_lang = "keywords_" + lang
     if desc_lang in attr:
         attr["desc"] = title_case(attr[desc_lang])
         if "desc_en" in attr: del attr["desc_en"]
@@ -51,7 +52,8 @@ def fix_name(attr):
 # 
 ############################################################
 
-def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens):
+def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, 
+                        Attr_weight_mergeid, Attr_id_lens, lang):
     
     # this is the dictionary that will be jsonified and sent to the user
     ret = {}
@@ -82,19 +84,18 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_merge
         else:
             attrs = [Attr.query.get_or_404(Attr_id)]
         
-        ret["data"] = [fix_name(a.serialize()) for a in attrs]
+        ret["data"] = [fix_name(a.serialize(), lang) for a in attrs]
     # an ID/filter was not provided
     else:
         
-        cache_id = request.path + g.locale
+        cache_id = request.path + lang
         # first lets test if this query is cached
         cached_q = cached_query(cache_id)
         if cached_q and request.is_xhr:
             return cached_q
         
         # this will be the lookup we'll use for getting parents
-        # attrs = Attr.query.all()
-        attrs = {a.id: fix_name(a.serialize()) for a in Attr.query.filter(func.char_length(Attr.id) <= Attr_id_lens[-1]).all()}
+        attrs = {a.id: fix_name(a.serialize(), lang) for a in Attr.query.filter(func.char_length(Attr.id) <= Attr_id_lens[-1]).all()}
         
         # merge cbo table to YO table to find all instances in the data
         max_year = db.session.query(Attr_weight_tbl.year.distinct()).order_by(Attr_weight_tbl.year.desc()).all()[0]
@@ -112,7 +113,6 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_merge
                     if plr:
                         attrs[a]["plr"] = plr.id
                         
-        # raise Exception(attrs_in_db)
         
         for a in attrs_in_db.all():
             # this_id = a[0].id
@@ -120,31 +120,10 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_merge
             attrs[a[0].id][Attr_weight_col] = int(a[1])
             attrs[a[0].id]["available"] = True
             # raise Exception(this_id[:id_len])
-        # raise Exception(attrs["14"])
-        
-        
-        # raise Exception(len(attrs.keys()))
-        
-        # raise Exception(len(attrs_in_db.keys()))
-        
-        # use a set so we don't have to worry about duplicates
-        # for i, a in enumerate(attrs):
-        #     if a.id in attrs_in_db:
-        #         attrs[i] = attrs_in_db[a.id]
-                # raise Exception(attrs_in_db[a.id])
-            # attrs.add(a)
-            # for id_len in Attr_id_lens[:-1]:
-            #     attrs.add(attr_lookup.get(a[0].id[:id_len], a))
-        
-        # raise Exception(len(attrs))
+
         
         ret["data"] = attrs.values()
         
-        # for a in attrs:
-        #     if type(a) == Attr:
-        #         ret["data"].append(fix_name(a.serialize()))
-        #     else:
-        #         ret["data"].append(dict(fix_name(a[0].serialize()), **{"available":True, Attr_weight_col: int(a[1])}))
     return jsonify(ret)
 
 @mod.route('/bra/')
@@ -157,8 +136,9 @@ def attrs_bra(bra_id=None):
     Attr_weight_col = "population"
     Attr_weight_mergeid = "bra_id"
     Attr_id_lens = [2, 4, 6, 8]
+    lang = request.args.get('lang', None) or g.locale
     
-    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens)
+    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens, lang)
     
 @mod.route('/wld/')
 @mod.route('/wld/<wld_id>/')
@@ -170,8 +150,9 @@ def attrs_wld(wld_id=None):
     Attr_weight_col = "val_usd"
     Attr_weight_mergeid = "wld_id"
     Attr_id_lens = [2, 5]
+    lang = request.args.get('lang', None) or g.locale
     
-    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens)
+    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens, lang)
 
 @mod.route('/hs/')
 @mod.route('/hs/<hs_id>/')
@@ -183,8 +164,9 @@ def attrs_hs(hs_id=None):
     Attr_weight_col = "val_usd"
     Attr_weight_mergeid = "hs_id"
     Attr_id_lens = [2, 4, 6]
+    lang = request.args.get('lang', None) or g.locale
     
-    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens)
+    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens, lang)
 
 @mod.route('/isic/')
 @mod.route('/isic/<isic_id>/')
@@ -196,8 +178,9 @@ def attrs_isic(isic_id=None):
     Attr_weight_col = "num_emp"
     Attr_weight_mergeid = "isic_id"
     Attr_id_lens = [1, 3, 5]
+    lang = request.args.get('lang', None) or g.locale
     
-    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens)
+    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens, lang)
 
 @mod.route('/cbo/')
 @mod.route('/cbo/<cbo_id>/')
@@ -209,5 +192,6 @@ def attrs_cbo(cbo_id=None):
     Attr_weight_col = "num_emp"
     Attr_weight_mergeid = "cbo_id"
     Attr_id_lens = [1, 2, 3, 4]
+    lang = request.args.get('lang', None) or g.locale
     
-    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens)
+    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens, lang)
