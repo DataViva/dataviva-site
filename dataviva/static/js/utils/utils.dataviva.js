@@ -235,8 +235,8 @@ dataviva.format.text = function(text,name,l) {
     
       // RAIS Labels
       "rais": {"en": "Establishments and Employment (RAIS)", "pt": "Estabelecimentos e Emprego (RAIS)"},
-      "num_emp": {"en": "Employees", "pt": "Empregados"},
-      "num_est": {"en": "Establishments", "pt": "Estabelecimentos"},
+      "num_emp": {"en": "Total Employees", "pt": "Total de Empregados"},
+      "num_est": {"en": "Total Establishments", "pt": "Total de Estabelecimentos"},
       "num_emp_est": {"en": "Employees per Establishment", "pt": "Empregados por Estabelecimento"},
       "wage": {"en": "Total Monthly Wages", "pt": "Renda Mensal Total"},
       "total_wage": {"en": "Total Monthly Wage", "pt": "Renda Mensal Total"},
@@ -305,6 +305,10 @@ dataviva.format.text = function(text,name,l) {
       "and": {"en": "and", "pt": "e"},
       "showing": {"en": "Showing only", "pt": "Mostrando somente"},
       "excluding": {"en": "Excluding", "pt": "Excluindo"},
+      "of": {"en": "of", "pt": "de"},
+      "with": {"en": "with", "pt": "com"},
+      "and": {"en": "and", "pt": "e"},
+      "fill": {"en": "Fill", "pt": "Preenchido"},
     
       // Viz-Whiz Text
       "Click for More Info": {"en": "Click for more data and related apps.", "pt": "Clique para dados adicionais e aplicativos relacionados."},

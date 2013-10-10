@@ -194,6 +194,7 @@
     app.vars = {{ global_vars|safe }}
     app.solos = []
     app.filters = []
+    app.first_load = false
     
     if (app.vars.builder == "false") {
       app.vars.controls = "false"
@@ -418,7 +419,7 @@
       .background("#ffffff")
       .click_function(app.html)
       .font(app.font)
-      .font_weight("lighter")
+      .font_weight("normal")
       .total_var("required")
       .else_var("elsewhere")
       .info_style(app.loader_style)
@@ -776,15 +777,18 @@
           else if (ui.type == "spotlight" && app.build.app.type == "scatter") {
             var default_value = ui.values[1]
           }
+          else if (ui.type == "rca_scope" && app.build.bra[0].id == "all" && app.build.output == "hs") {
+            var default_value = "wld_rca"
+          }
           else {
             var default_value = ui.values[0]
           }
-          
+          console.log(ui.type,default_value)
           if((last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
             app.vars[ui.type] = default_value
           }
         
-          if (ui.values.length > 1 && app.vars.builder != "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope"))) {
+          if (ui.values.length > 1 && app.vars.builder != "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs"))) {
             // if (ui.values.length == 2 && ui.values.indexOf("true") >= 0 && ui.values.indexOf("false") >= 0) {
             //   builder.checkbox({
             //     "data": ui.values,
@@ -884,7 +888,7 @@
       /* Network Specific Variables */
       /******************************/  
       if (app.build.app.type == "network") {
-        if (app.build.bra[0].id == "all") var av = "always_active"
+        if (app.build.bra[0].id == "all" && app.build.output != "hs") var av = "always_active"
         else if (app.build.output == "hs") var av = app.vars.rca_scope
         else if (app.build.output == "isic") var av = "bra_rca"
         else var av = "always_active"
@@ -1026,6 +1030,7 @@
       if (app.build.app.type != "rings") builder.key()
       app.resize()
       loading.hide()
+      app.first_load = true
       
     }
     
@@ -1139,7 +1144,7 @@
           else {
             var xv = app.vars.xaxis_var
           }
-          app.viz.xaxis_var(xv)
+          app.viz.xaxis_var(xv).total_bar(app.total())
         }
         else if (type == "yaxis_var") {
           if (app.vars.rca_scope == "wld_rca" && app.vars.yaxis_var.indexOf("pci") < 0) {
@@ -1160,7 +1165,7 @@
             var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
           }
           
-          app.viz.yaxis_var(yv).yaxis_val(yval)
+          app.viz.yaxis_var(yv).yaxis_val(yval).total_bar(app.total())
         }
         else if (type == "value_var") {
           if (app.build.app.type != "occugrid") {
@@ -1339,8 +1344,22 @@
         
       if (exclusions.indexOf(val) >= 0) return false;
       
-      return {"prefix": dataviva.format.text(
-val)+": ", "suffix": ""};
+      var prefix = dataviva.format.text(val)
+      if (app.build.app.type == "scatter") {
+        var prefix = dataviva.format.text(app.build.output+"_plural")
+        prefix += " "+dataviva.format.text("with")
+        prefix += " "+dataviva.format.text(app.vars.xaxis_var)
+        if (app.vars.xaxis_var != app.vars.yaxis_var) {
+          prefix += " "+dataviva.format.text("and")
+          prefix += " "+dataviva.format.text(app.vars.yaxis_var)
+        }
+        if (app.build.output != "hs") {
+          prefix += " ("+dataviva.format.text(val)+")"
+        }
+      }
+      prefix += ": "
+      
+      return {"prefix": prefix, "suffix": ""};
         
     }
     
@@ -2057,13 +2076,13 @@ val)+": ", "suffix": ""};
    app.start()
    
    if (Modernizr.history) {
-     setTimeout(function(){
-       window.onpopstate = function() {
+     window.onpopstate = function() {
+       if (app.first_load) {
          var u = window.location.href.split("/embed/")[1].split("/?")[0]
          u = u.replace(/\/+$/, "")+"/"
          if (u != app.url) app.start(u)
        }
-     },1000)
+     }
    }
   
   </script>
