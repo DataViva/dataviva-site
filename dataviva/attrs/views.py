@@ -57,6 +57,12 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col,
     
     # this is the dictionary that will be jsonified and sent to the user
     ret = {}
+        
+    cache_id = request.path + lang
+    # first lets test if this query is cached
+    cached_q = cached_query(cache_id)
+    if cached_q and request.is_xhr:
+        return cached_q
     
     # if an ID is supplied only return that
     if Attr_id:
@@ -87,12 +93,6 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col,
         ret["data"] = [fix_name(a.serialize(), lang) for a in attrs]
     # an ID/filter was not provided
     else:
-        
-        cache_id = request.path + lang
-        # first lets test if this query is cached
-        cached_q = cached_query(cache_id)
-        if cached_q and request.is_xhr:
-            return cached_q
         
         # this will be the lookup we'll use for getting parents
         attrs = {a.id: fix_name(a.serialize(), lang) for a in Attr.query.filter(func.char_length(Attr.id) <= Attr_id_lens[-1]).all()}
