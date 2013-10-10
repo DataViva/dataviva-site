@@ -556,7 +556,7 @@
                     
                     callback(error,d)
                   })
-              },dataviva.static_url+"attrs/"+app.build.output+"/?lang="+dataviva.language)
+              },dataviva.static_url+"attrs/"+app.build.output+"/")
             }
             
             if (["network","rings"].indexOf(app.build.app.type) >= 0 
@@ -855,7 +855,7 @@
         }
       }
       
-      if (app.build.bra[0].id == "all" && app.build.app.type == "network" && app.build.output != "hs") {
+      if (app.build.bra[0].id == "all" && app.build.app.type == "network") {
         app.vars.spotlight = false
       }
       
