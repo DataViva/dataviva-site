@@ -1,6 +1,18 @@
 <!-- extend from base layout -->
 {% extends "templates/site.html" %}
 
+{% block head %}
+
+  <style>
+
+    body.builder #container {
+      padding: 76px 20px 68px 20px;
+    }
+  
+  </style>
+
+{% endblock %}
+
 {% block title %}: {% trans %}App Builder{% endtrans %}{% endblock %}
 
 {% block body %}

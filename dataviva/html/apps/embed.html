@@ -586,20 +586,20 @@
             if (app.build.app.type == "geo_map") {
               
               if (app.build.bra[0].id == "all") {
-                var id = "all",
+                var json_id = "all",
                     geo_url = "/static/json/coords/bra_states.json"
               }
               else {
-                var id = app.build.bra[0].id.substr(0,2),
-                    geo_url = "/static/json/coords/"+id+"_munic.json"
+                var json_id = app.build.bra[0].id.substr(0,2),
+                    geo_url = "/static/json/coords/"+json_id+"_munic.json"
               }
               
-              if (!app.coords[id]) {
+              if (!app.coords[json_id]) {
                 q.defer(function(u,callback){
                   d3.json(u)
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
-                    app.coords[id] = d
+                    app.coords[json_id] = d
                     callback(error,d)
                   })
                 },geo_url)
@@ -916,7 +916,6 @@
       /* Geo Map Specific Variables */
       /******************************/
       else if (app.build.app.type == "geo_map") {
-        
         if (app.build.bra[0].id == "all") {
           var coords = app.coords.all
         }
