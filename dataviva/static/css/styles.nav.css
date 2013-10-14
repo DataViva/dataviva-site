@@ -215,6 +215,7 @@ div#language .leon.radio {
   -webkit-transition: opacity 0.1s;
           transition: opacity 0.1s;
   width: 100%;
+  z-index: 750;
 }
 
 div.logo.sponsor {
