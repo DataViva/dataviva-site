@@ -1,6 +1,6 @@
 from sqlalchemy import func
 from flask import Blueprint, render_template, g, redirect, url_for, \
-    flash, request, jsonify
+    flash, request, jsonify, make_response
 from flask.ext.login import login_required
 from flask.ext.babel import gettext
 from dataviva import db
@@ -44,9 +44,16 @@ def admin_users():
         items = query.limit(limit).offset(offset).all()
         items = [i.serialize() for i in items]
         
-        return jsonify({"activities":items})
+        ret = jsonify({"activities":items})
+        
+    else:
+        ret = make_response(render_template("admin/admin_users.html"))
+            
+    ret.headers.add('Last-Modified', datetime.now())
+    ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    ret.headers.add('Pragma', 'no-cache')
     
-    return render_template("admin/admin_users.html")
+    return ret
 
 @mod.route('/user/<int:user_id>/', methods = ['PUT','POST'])
 def update_user(user_id):
@@ -99,9 +106,16 @@ def admin_questions(status=None):
         items = query.limit(limit).offset(offset).all()
         items = [i.serialize() for i in items]
     
-        return jsonify({"activities":items})
+        ret = jsonify({"activities":items})
     
-    return render_template("admin/admin_questions.html")
+    else:
+        ret = make_response(render_template("admin/admin_questions.html"))
+            
+    ret.headers.add('Last-Modified', datetime.now())
+    ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    ret.headers.add('Pragma', 'no-cache')
+        
+    return ret
 
 @mod.route('/questions/<status>/<int:question_id>/', methods=['GET', 'POST'])
 def admin_questions_edit(status, question_id):
@@ -162,9 +176,16 @@ def admin_replies():
         items = replies.limit(limit).offset(offset).all()
         items = [i[0].serialize() for i in items]
     
-        return jsonify({"activities":items})
-    
-    return render_template("admin/admin_replies.html")
+        ret = jsonify({"activities":items})
+        
+    else:
+        ret = make_response(render_template("admin/admin_replies.html"))
+            
+    ret.headers.add('Last-Modified', datetime.now())
+    ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    ret.headers.add('Pragma', 'no-cache')
+        
+    return ret
 
 @mod.route('/reply/<int:reply_id>/', methods = ['PUT','POST'])
 def update_reply(reply_id):

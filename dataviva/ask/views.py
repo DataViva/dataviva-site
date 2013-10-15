@@ -1,6 +1,6 @@
 from sqlalchemy import and_, or_, func
 from datetime import datetime
-from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, jsonify, abort, current_app
+from flask import Blueprint, request, make_response, render_template, flash, g, session, redirect, url_for, jsonify, abort, current_app
 from flask.ext.babel import gettext
 from dataviva import db, lm
 # from config import SITE_MIRROR
@@ -88,10 +88,16 @@ def index(page):
 
             questions = [q[0].serialize() for q in questions]
 
-        return jsonify({"activities":questions})
-    
-    return render_template("ask/questions.html",
-        search_form = search_form)
+        ret = jsonify({"activities":questions})
+        
+    else:
+        ret = make_response(render_template("ask/questions.html", search_form = search_form))
+            
+    ret.headers.add('Last-Modified', datetime.now())
+    ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    ret.headers.add('Pragma', 'no-cache')
+        
+    return ret
 
 @mod.route('/question/<slug>/', methods=['GET', 'POST'])
 def answer(slug):

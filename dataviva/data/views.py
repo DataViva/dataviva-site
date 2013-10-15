@@ -173,14 +173,21 @@ def classifications(attr = None, depth = None, page = 1):
     
     if request.is_xhr:
         attrs_json = [dict(a.serialize().items() + [("attr_type",attr)]) for a in attrs]
-        return jsonify({"data": attrs_json})
-    
-    return render_template("data/classifications.html",
-        title = title,
-        page_attr = attr,
-        depth = depth,
-        depths = depths,
-        attrs = attrs)
+        ret = jsonify({"data": attrs_json})
+        
+    else:
+        ret = make_response(render_template("data/classifications.html",
+            title = title,
+            page_attr = attr,
+            depth = depth,
+            depths = depths,
+            attrs = attrs))
+            
+    ret.headers.add('Last-Modified', datetime.now())
+    ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    ret.headers.add('Pragma', 'no-cache')
+            
+    return ret
 
 @mod.route('/download/', methods=['GET', 'POST'])
 def download():
