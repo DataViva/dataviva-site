@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-10 17:31-0400\n"
+"POT-Creation-Date: 2013-10-15 13:09-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: dataviva/admin/views.py:130
+#: dataviva/admin/views.py:131
 msgid "This question has now been updated."
 msgstr ""
 
@@ -24,27 +24,27 @@ msgstr ""
 msgid "You need to be logged in to star apps."
 msgstr ""
 
-#: dataviva/ask/views.py:92
+#: dataviva/ask/views.py:106
 msgid "You need to be signed in to reply to questions."
 msgstr ""
 
-#: dataviva/ask/views.py:112
+#: dataviva/ask/views.py:126
 msgid "Reply submitted."
 msgstr ""
 
-#: dataviva/ask/views.py:145 dataviva/ask/views.py:173
+#: dataviva/ask/views.py:159 dataviva/ask/views.py:187
 msgid "You need to be logged in to vote."
 msgstr ""
 
-#: dataviva/ask/views.py:203
+#: dataviva/ask/views.py:217
 msgid "You need to be logged in to flag replies."
 msgstr ""
 
-#: dataviva/ask/views.py:233
+#: dataviva/ask/views.py:247
 msgid "You need to be logged in to ask questions."
 msgstr ""
 
-#: dataviva/ask/views.py:254
+#: dataviva/ask/views.py:268
 msgid "Your question has been submitted and is pending approval."
 msgstr ""
 
@@ -83,7 +83,7 @@ msgid "Establishments and Employment"
 msgstr ""
 
 #: dataviva/guide/views.py:164 dataviva/guide/views.py:191
-#: dataviva/guide/views.py:201 dataviva/html/home.html:43
+#: dataviva/guide/views.py:201 dataviva/html/home.html:41
 #: dataviva/html/data/select.html:19 dataviva/html/guide/industry.html:10
 msgid "Product Exports"
 msgstr ""
@@ -100,33 +100,33 @@ msgstr ""
 msgid "Visualizing the Economy of Minas Gerais and Brazil"
 msgstr ""
 
-#: dataviva/html/home.html:16
+#: dataviva/html/home.html:13
 msgid "DataViva is an innovative way to visualize data and transform it into knowledge to guide sustainable economic development."
 msgstr ""
 
-#: dataviva/html/home.html:18
+#: dataviva/html/home.html:15
 msgid "Learn how DataViva was created:"
 msgstr ""
 
-#: dataviva/html/home.html:25
+#: dataviva/html/home.html:23
 msgid "Click, filter and discover!"
 msgstr ""
 
-#: dataviva/html/home.html:31 dataviva/html/data/query.html:62
+#: dataviva/html/home.html:29 dataviva/html/data/query.html:62
 msgid "Brazilian Locations"
 msgstr ""
 
-#: dataviva/html/home.html:35 dataviva/html/data/query.html:119
+#: dataviva/html/home.html:33 dataviva/html/data/query.html:119
 #: dataviva/html/data/select.html:29
 msgid "Occupations"
 msgstr ""
 
-#: dataviva/html/home.html:39 dataviva/html/data/query.html:91
+#: dataviva/html/home.html:37 dataviva/html/data/query.html:91
 #: dataviva/html/data/select.html:24
 msgid "Industries"
 msgstr ""
 
-#: dataviva/html/home.html:47 dataviva/html/data/query.html:181
+#: dataviva/html/home.html:45 dataviva/html/data/query.html:181
 #: dataviva/html/data/select.html:39
 msgid "Export Destinations"
 msgstr ""
@@ -206,8 +206,7 @@ msgstr ""
 #: dataviva/html/about/apps/scatter.html:15
 #: dataviva/html/about/apps/stacked.html:14
 #: dataviva/html/about/apps/tree_map.html:14
-#: dataviva/html/data/classifications.html:21
-msgid "Classification"
+msgid "Depth"
 msgstr ""
 
 #: dataviva/html/about/apps/compare.html:12
@@ -348,7 +347,7 @@ msgstr ""
 #: dataviva/html/about/glossary/proximity.html:4
 #: dataviva/html/about/glossary/proximity.html:12
 #: dataviva/html/about/glossary/proximity.html:42
-#: dataviva/html/about/glossary/rca.html:7 dataviva/html/apps/index.html:27
+#: dataviva/html/about/glossary/rca.html:8 dataviva/html/apps/index.html:27
 #: dataviva/html/templates/about.html:64
 msgid "Network"
 msgstr ""
@@ -467,7 +466,7 @@ msgstr ""
 #: dataviva/html/about/apps/rings.html:1
 #: dataviva/html/about/glossary/distance.html:13
 #: dataviva/html/about/glossary/proximity.html:43
-#: dataviva/html/about/glossary/rca.html:8 dataviva/html/apps/index.html:34
+#: dataviva/html/about/glossary/rca.html:9 dataviva/html/apps/index.html:34
 #: dataviva/html/templates/about.html:68
 msgid "Rings"
 msgstr ""
@@ -482,7 +481,7 @@ msgstr ""
 #: dataviva/html/about/glossary/complexity.html:18
 #: dataviva/html/about/glossary/distance.html:11
 #: dataviva/html/about/glossary/opp_gain.html:5
-#: dataviva/html/about/glossary/rca.html:6
+#: dataviva/html/about/glossary/rca.html:7
 #: dataviva/html/about/glossary/unique.html:4
 #: dataviva/html/about/glossary/unique.html:9 dataviva/html/apps/index.html:39
 #: dataviva/html/templates/about.html:72
@@ -694,7 +693,7 @@ msgstr ""
 #: dataviva/html/about/glossary/importance.html:13
 #: dataviva/html/about/glossary/opp_gain.html:4
 #: dataviva/html/about/glossary/proximity.html:41
-#: dataviva/html/about/glossary/rca.html:5
+#: dataviva/html/about/glossary/rca.html:6
 #: dataviva/html/about/glossary/required.html:8
 #: dataviva/html/about/glossary/unique.html:4
 #: dataviva/html/about/glossary/unique.html:9
@@ -773,6 +772,10 @@ msgstr ""
 
 #: dataviva/html/about/glossary/rca.html:2
 msgid "Revealed Comparative Advantage is a numeric value used to connote whether a particular product or industry is especially prominent in a location. The calculation for this number is a share of a share. Say for example we were to consider Belo Horizonte’s exports of Cars. We would take the share that Cars represent in Belo Horizonte’s export basket divided by the share that Cars represent in all of Brazil. If this number is larger than or equal to 1, we can say that Belo Horizonte is a strong exporter in Cars (stronger than the average). RCA is a much better indicator of whether a product or industry is expressed in a location rather than export value alone because it takes into account the size of the location’s market vis-a-vis the total market size."
+msgstr ""
+
+#: dataviva/html/about/glossary/rca.html:4
+msgid "The RCA equation. Here “b” represents a location and “p” represents a product."
 msgstr ""
 
 #: dataviva/html/about/glossary/required.html:4
@@ -857,14 +860,18 @@ msgid "Asked by"
 msgstr ""
 
 #: dataviva/html/admin/admin_questions_edit.html:21
+msgid "Language"
+msgstr ""
+
+#: dataviva/html/admin/admin_questions_edit.html:24
 msgid "Status"
 msgstr ""
 
-#: dataviva/html/admin/admin_questions_edit.html:25
+#: dataviva/html/admin/admin_questions_edit.html:28
 msgid "Enter your answer..."
 msgstr ""
 
-#: dataviva/html/admin/admin_questions_edit.html:30
+#: dataviva/html/admin/admin_questions_edit.html:33
 msgid "Update"
 msgstr ""
 
@@ -897,7 +904,7 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
-#: dataviva/html/apps/builder.html:4
+#: dataviva/html/apps/builder.html:16
 msgid "App Builder"
 msgstr ""
 
@@ -1020,11 +1027,11 @@ msgid "Click here to login"
 msgstr ""
 
 #: dataviva/html/ask/questions.html:17
-msgid "Cannot find your answer here?"
+msgid "Cannot find your answer?"
 msgstr ""
 
 #: dataviva/html/ask/questions.html:19
-msgid "Submit your question to Escritorio!"
+msgid "Submit your question here!"
 msgstr ""
 
 #: dataviva/html/ask/questions.html:32
@@ -1033,6 +1040,14 @@ msgstr ""
 
 #: dataviva/html/ask/questions.html:34
 msgid "Newest"
+msgstr ""
+
+#: dataviva/html/ask/questions.html:38
+msgid "Search"
+msgstr ""
+
+#: dataviva/html/data/classifications.html:21
+msgid "Classification"
 msgstr ""
 
 #: dataviva/html/data/index.html:3 dataviva/html/data/query.html:32
