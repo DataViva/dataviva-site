@@ -12,6 +12,7 @@ from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Isic, Hs, Cbo, Wld
 from dataviva.apps.models import Build, UI, App
+from dataviva.utils import crossdomain
 
 from dataviva.rais.views import rais_ybi
 
@@ -36,6 +37,7 @@ def before_request():
             "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
 @mod.route('/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/'
             '<output>/')
+@crossdomain()
 def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             output=None):
     
