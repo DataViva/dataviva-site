@@ -14,9 +14,9 @@
   
   <div class="grid4col1">
     <div class="lightbox bubble">
-    <h1>{% trans %}Cannot find your answer here?{% endtrans %}</h1>
+    <h1>{% trans %}Cannot find your answer?{% endtrans %}</h1>
     <a {% if g.user.is_authenticated() %}href="/ask/ask/"{%else%}onclick="login()"{%endif%} class="decision icon short questions">
-      {% trans %}Submit your question to Escritorio!{% endtrans %}
+      {% trans %}Submit your question here!{% endtrans %}
     </a>
     </div>
     <div id="sabrina" class="{{g.sabrina.outfit}} {{g.sabrina.face}} {{g.sabrina.hat}}"></div>
@@ -35,7 +35,7 @@
       </div>
     
 
-      {{ search_form.search(size=80, id='search', placeholder="Search") }}
+      {{ search_form.search(size=80, id='search', placeholder=_("Search")) }}
     
     </div>
 

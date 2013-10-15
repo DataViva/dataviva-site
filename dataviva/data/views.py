@@ -156,7 +156,7 @@ def classifications(attr = None, depth = None, page = 1):
             depth = "1"
         depths = ["1","4"]
         if g.locale == "pt":
-            title = u"Profissões por Classificação CBO"
+            title = u"Ocupações por Classificação CBO"
         else:
             title = u"Occupations by CBO Classification"
     elif attr == "hs":
