@@ -19,7 +19,6 @@ def output(file):
                 data["video"] = row["Video"]
             apps_info[row['App']].append(data)
         print json.dumps(apps_info, indent=4)
-        sys.exit()
 
 if __name__ == "__main__":
 
