@@ -20,7 +20,7 @@
   
   <script>
   d3.select("a.open_parent").on("click", function(){
-      window.opener.location.href = "http://dataviva.mg.gov.br" + window.opener.location.pathname;
+      window.opener.parent.location.href = "http://dataviva.mg.gov.br" + window.opener.parent.location.pathname;
       window.close();
       d3.event.preventDefault();
   })
