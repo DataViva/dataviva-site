@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-15 12:33-0400\n"
+"POT-Creation-Date: 2013-10-15 13:09-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -206,8 +206,7 @@ msgstr ""
 #: dataviva/html/about/apps/scatter.html:15
 #: dataviva/html/about/apps/stacked.html:14
 #: dataviva/html/about/apps/tree_map.html:14
-#: dataviva/html/data/classifications.html:21
-msgid "Classification"
+msgid "Depth"
 msgstr ""
 
 #: dataviva/html/about/apps/compare.html:12
@@ -1045,6 +1044,10 @@ msgstr ""
 
 #: dataviva/html/ask/questions.html:38
 msgid "Search"
+msgstr ""
+
+#: dataviva/html/data/classifications.html:21
+msgid "Classification"
 msgstr ""
 
 #: dataviva/html/data/index.html:3 dataviva/html/data/query.html:32

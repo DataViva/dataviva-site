@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-15 12:33-0400\n"
+"POT-Creation-Date: 2013-10-15 13:09-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -240,9 +240,8 @@ msgstr "dados relacionados a produto"
 #: dataviva/html/about/apps/scatter.html:15
 #: dataviva/html/about/apps/stacked.html:14
 #: dataviva/html/about/apps/tree_map.html:14
-#: dataviva/html/data/classifications.html:21
-msgid "Classification"
-msgstr "Classificação"
+msgid "Depth"
+msgstr "Agregação"
 
 #: dataviva/html/about/apps/compare.html:12
 #: dataviva/html/about/apps/scatter.html:16
@@ -1429,7 +1428,9 @@ msgstr ""
 msgid ""
 "The RCA equation. Here “b” represents a location and “p” represents a "
 "product."
-msgstr "A Equação RCA. Aqui, “b” representa uma localidade e “p” representa um produto."
+msgstr ""
+"A Equação RCA. Aqui, “b” representa uma localidade e “p” representa um "
+"produto."
 
 #: dataviva/html/about/glossary/required.html:4
 #, python-format
@@ -1440,7 +1441,13 @@ msgid ""
 "number of employees in an occupation per establishment. If a location "
 "already has %(rca)s we would just use their number for the recommended "
 "employment."
-msgstr "Para determinar quantos empregados de uma determinada ocupação são recomendados para um determinado setor em uma determinada localidade, encontramos os primeiros 20%(percent)s de localidades similares pela %(prox)s e calculamos a média do número de empregados em uma ocupação por estabelecimento destas localidades. Se uma localidade já tem %(rca)s, utilizaríamos apenas o seu número para contratações recomendadas."
+msgstr ""
+"Para determinar quantos empregados de uma determinada ocupação são "
+"recomendados para um determinado setor em uma determinada localidade, "
+"encontramos os primeiros 20%(percent)s de localidades similares pela "
+"%(prox)s e calculamos a média do número de empregados em uma ocupação por"
+" estabelecimento destas localidades. Se uma localidade já tem %(rca)s, "
+"utilizaríamos apenas o seu número para contratações recomendadas."
 
 #: dataviva/html/about/glossary/required.html:4
 msgid "Locational Proximity"
@@ -1724,6 +1731,10 @@ msgstr "Mais Recente"
 #: dataviva/html/ask/questions.html:38
 msgid "Search"
 msgstr "Pesquisar"
+
+#: dataviva/html/data/classifications.html:21
+msgid "Classification"
+msgstr "Classificação"
 
 #: dataviva/html/data/index.html:3 dataviva/html/data/query.html:32
 #: dataviva/html/templates/site.html:17

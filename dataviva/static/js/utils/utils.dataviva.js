@@ -140,7 +140,7 @@ dataviva.format.text = function(text,name,l) {
       "year": {"en": "Year", "pt": "Ano"},
 
       // Filter Depths
-      "depth": {"en": "Classification", "pt": "Classifica\u00e7\u00e3o"},
+      "depth": {"en": "Depth", "pt": "Agrega\u00e7\u00e3o"},
       "depth_desc_tree_map": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
       "depth_desc_stacked": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
       "depth_desc_geo_map": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
