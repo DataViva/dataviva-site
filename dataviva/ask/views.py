@@ -53,6 +53,12 @@ def index(page):
 
         # if we are ordering the questions by newest get them ordered chronologically
         if order == "newest":
+            
+            if g.locale == "pt":
+                questions = questions.order_by(Question.timestamp.desc(),Question.language.desc())
+            else:
+                questions = questions.order_by(Question.timestamp.desc(),Question.language)
+                    
             questions = questions.order_by(Question.timestamp.desc())
             questions = questions.limit(limit).offset(offset)
             questions = [q.serialize() for q in questions.all()]
@@ -63,14 +69,22 @@ def index(page):
             ids = [q.id for q in questions]
             # raise Exception(ids)
             votes_subq = db.session.query(Vote, func.count('*').label('vote_count')).group_by(Vote.type_id).subquery()
-            questions = db.session.query(Question, votes_subq.c.vote_count) \
-                .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
-                .filter(Question.status == approved) \
-                .filter(Question.id.in_(ids)) \
-                .order_by(votes_subq.c.vote_count.desc()) \
+            
+            if g.locale == "pt":
+                questions = db.session.query(Question, votes_subq.c.vote_count) \
+                    .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
+                    .filter(Question.status == approved) \
+                    .filter(Question.id.in_(ids)) \
+                    .order_by(votes_subq.c.vote_count.desc(),Question.language.desc())
+            else:
+                questions = db.session.query(Question, votes_subq.c.vote_count) \
+                    .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
+                    .filter(Question.status == approved) \
+                    .filter(Question.id.in_(ids)) \
+                    .order_by(votes_subq.c.vote_count.desc(),Question.language)
                 # .limit(limit).offset(offset)
             # raise Exception(votes_questions.all())
-    
+
             questions = [q[0].serialize() for q in questions]
 
         return jsonify({"activities":questions})
@@ -245,7 +259,7 @@ def ask(user=None):
         
         timestamp = datetime.utcnow()
         slug = Question.make_unique_slug(form.question.data)
-        question = Question(question=form.question.data, body=form.body.data, timestamp=timestamp, user=g.user, slug=slug)
+        question = Question(question=form.question.data, body=form.body.data, timestamp=timestamp, user=g.user, slug=slug, language=g.locale)
         if "," in form.tags.data:
             tags = form.tags.data.split(",")
             question.str_tags(tags)

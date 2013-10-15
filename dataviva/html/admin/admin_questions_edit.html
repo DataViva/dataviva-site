@@ -18,6 +18,9 @@
       </div>
     </div>
 
+    <label for="language">{% trans %}Language{% endtrans %}:</label>
+    {{ form.language(id="language") }}
+
     <label for="status">{% trans %}Status{% endtrans %}:</label>
     {{ form.status(id="status") }}
 
@@ -41,6 +44,7 @@
   <script>
   
     leon("#status")
+    leon("#language")
     
     // submit form
     d3.selectAll("#submit_button").on(vizwhiz.evt.click, function(){

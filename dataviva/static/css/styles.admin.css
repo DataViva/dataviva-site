@@ -84,7 +84,7 @@ tr:last-child {
   border-bottom: solid 1px transparent;
 }
 
-#leon_status {
+#leon_status, #leon_language {
   float: right;
 }
 

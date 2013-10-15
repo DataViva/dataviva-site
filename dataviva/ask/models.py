@@ -32,6 +32,7 @@ class Question(db.Model, AutoSerialize):
 
     __tablename__ = 'ask_question'
     id = db.Column(db.Integer, primary_key = True)
+    language = db.Column(db.String(2))
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     question = db.Column(db.String(140))
     slug = db.Column(db.String(140))

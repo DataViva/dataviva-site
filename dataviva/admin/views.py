@@ -125,6 +125,7 @@ def admin_questions_edit(status, question_id):
         previous_status = form.previous_status.data
         q.status = form.status.data
         q.status_notes = form.answer.data
+        q.language = form.language.data
         db.session.add(q)
         db.session.commit()
         flash(gettext('This question has now been updated.'))
@@ -136,6 +137,7 @@ def admin_questions_edit(status, question_id):
     
     # set defaults
     form.status.data = s
+    form.language.data = q.language
     form.previous_status.data = s.name
     form.answer.data = q.status_notes
     
