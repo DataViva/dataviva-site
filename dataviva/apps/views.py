@@ -40,7 +40,7 @@ def before_request():
 @crossdomain()
 def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             output=None):
-    
+            
     '''Since the "builds" are held in the database with placeholders for 
     attributes i.e. <cbo>, <hs>, <isic> we need to convert the IDs given
     in the URL to these placeholders. i.e. 
@@ -108,25 +108,27 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     '''Get the actual data for the current build'''
     # view_data = rais_ybi(bra_id='sp', isic_id='a0112').data
     # app.url_map.bind('/').match('/attrs/wld/nausa/')
-
+    
     if request.is_xhr:
-        return jsonify({
+        ret = jsonify({
             "current_build": current_build.serialize(),
             "all_builds": [b.serialize() for b in all_builds],
             "recommendations": json.loads(recs.data),
             "starred": starred
         })
-        # response.headers.add('Last-Modified', datetime.now())
-        # response.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
-        # response.headers.add('Pragma', 'no-cache')
-        # return response
+    else:
+        ret = make_response(render_template("apps/embed.html",
+            all_builds = all_builds,
+            starred = starred,
+            form = DownloadForm(),
+            current_build = current_build,
+            global_vars = json.dumps(global_vars)))
+            
+    ret.headers.add('Last-Modified', datetime.now())
+    ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    ret.headers.add('Pragma', 'no-cache')
     
-    return render_template("apps/embed.html",
-        all_builds = all_builds,
-        starred = starred,
-        form = DownloadForm(),
-        current_build = current_build,
-        global_vars = json.dumps(global_vars))
+    return ret
 
 @mod.route('/star/<app_name>/<data_type>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
 def app_star(app_name, data_type, bra_id, filter1, filter2, output):

@@ -323,6 +323,8 @@ class Build(db.Model, AutoSerialize):
             auto_serialized["cbo"] = [c.serialize() for c in self.cbo]
         if hasattr(self, "wld"):
             auto_serialized["wld"] = [w.serialize() for w in self.wld]
+        del auto_serialized["title_en"]
+        del auto_serialized["title_pt"]
         auto_serialized["title"] = self.title()
         auto_serialized["data_url"] = self.data_url()
         auto_serialized["url"] = self.url()

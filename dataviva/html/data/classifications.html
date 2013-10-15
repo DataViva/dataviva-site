@@ -18,7 +18,7 @@
     <h1>{{ title }}</h1>
   
     <div class="data_depth">
-      <legend id="depth">{% trans %}Classification{% endtrans %}</legend>
+      <legend id="depth">{% trans %}Depth{% endtrans %}</legend>
       {% for d in depths %}
         <input type="radio" name="depth" id="{{ d }}" value="{{ d }}" onclick="update_depth(this.value)"{% if d == depth %} checked{% endif %}>
         <label for="{{ d }}"></label>
