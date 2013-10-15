@@ -8,7 +8,7 @@ from dataviva import db, lm
 from dataviva.account.models import User
 from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE_REPLY, Flag
 from dataviva.ask.forms import AskForm, ReplyForm, SearchForm
-from dataviva.utils import strip_html
+from dataviva.utils import strip_html, crossdomain
 
 import urllib2, urllib
 
@@ -30,6 +30,7 @@ RESULTS_PER_PAGE = 10
 @mod.route('/', methods=['GET', 'POST'], defaults={'page': 1})
 @mod.route('/questions/', methods=['GET', 'POST'], defaults={'page': 1})
 @mod.route('/questions/<int:page>/', methods=['GET', 'POST'])
+@crossdomain()
 def index(page):
     # get URL parameters for results per page and ordering options
     order = request.args.get('order', 'votes') # options = 'votes' or 'newest'
