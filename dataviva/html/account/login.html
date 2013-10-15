@@ -14,32 +14,16 @@
   <div id="login_div">
     <div id="logo"></div>
     <div id="login_text">
-        {% trans %}Logging in is easy! All you have to do is choose one of the following accounts to link with your profile. We'll take care of the rest.{% endtrans %}
-      <br><br>
-        {% trans %}By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile.{% endtrans %}
+      Logging in has been deactivated on this version of the site. Please visit <a class="open_parent" href="http://dataviva.mg.gov.br/">dataviva.mg.gov.br</a> to login.
     </div>
-    <form action="" method="post" name="login">
-        {{ form.hidden_tag() }}
-        <p>
-        {{form.remember_me(id="remember")}}<label for="remember">{% trans %}Remember Me{% endtrans %}</label></p>
-        {% for pr in providers %}
-        <a id="{{ pr }}" class="login_button" href="{{ pr }}"></a>
-        {% endfor %}
-    </form>
   </div>
-
-  <script type="text/javascript">
-
-    leon("#remember").color(dataviva.color).size("small")
-
-    d3.selectAll(".login_button").on(vizwhiz.evt.click, function () {
-      var pr = this.id.toLowerCase()
-      form = document.forms['login'];
-      form.elements['provider'].value = pr;
-      this.parentNode.submit();
+  
+  <script>
+  d3.select("a.open_parent").on("click", function(){
+      window.opener.location.href = "http://dataviva.mg.gov.br" + window.opener.location.pathname;
+      window.close();
       d3.event.preventDefault();
-    })
-    
+  })
   </script>
 
 {% endblock %}

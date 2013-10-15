@@ -10,8 +10,13 @@ div#login_div {
   width: 300px;
 }
 div#login_text {
+  font-size: 15px;
+  line-height: 20px;
   margin: 12px 0px;
   text-align: left;
+}
+div#login_text a {
+  text-decoration: underline;
 }
 
 a.login_button {
