@@ -129,6 +129,22 @@ leon = function(name) {
     for(var i = nodelist.length; i--; objs.unshift(nodelist[i]));
   }
   
+  function find_var(string,variable,seperator) {
+    return obj.outerHTML.split("min=")[1].split(sep)[1]
+  }
+  
+  objs.forEach(function(obj){
+    if (obj.type == "text") {
+      var text = obj.outerHTML
+      if (text.indexOf("min=") > 0 && text.indexOf("max=") > 0 && text.indexOf("step=") > 0) {
+        var sep = text.split("id=")[1].charAt(0)
+        obj.min = text.split("min=")[1].split(sep)[1]
+        obj.max = text.split("max=")[1].split(sep)[1]
+        obj.step = text.split("step=")[1].split(sep)[1]
+      }
+    }
+  })
+  
   var others = objs.filter(function(obj) {
     return obj.type != "radio" && obj.type
   })
@@ -156,9 +172,11 @@ leon = function(name) {
   
   var objs = []
   others.forEach(function(obj) {
+    if (obj.type == "text" && obj.min && obj.max && obj.step) var type = "range"
+    else var type = obj.type
     var o = {
       "items": obj,
-      "type": obj.type,
+      "type": type,
       "name": obj.id
     }
     objs.push(o)
@@ -438,10 +456,10 @@ style.innerHTML = "\
   }\
   .leon.button.medium > .leon.arrow {\
     font-size: "+leon_vars.font.size.medium*1.5+"px;\
-    height: "+leon_vars.font.size.medium+"px;\
+    height: "+leon_vars.font.size.medium*1.25+"px;\
     line-height: "+leon_vars.font.size.medium+"px;\
-    margin-left: "+leon_vars.font.size.medium/2+"px;\
-    margin-right: "+leon_vars.font.size.medium/6+"px;\
+    margin-left: "+leon_vars.font.size.medium/3+"px;\
+    margin-right: "+leon_vars.font.size.medium/4+"px;\
     width: "+leon_vars.font.size.medium*0.75+"px;\
   }\
   .leon.button.large > .leon.arrow {\
@@ -493,10 +511,20 @@ style.innerHTML = "\
     background: "+leon_vars.color.accent.dark+";\
     margin: 0px;\
     position: relative;\
-    -webkit-user-select: none;\
-       -moz-user-select: none;\
-        -ms-user-select: none;\
-            user-select: none;\
+    -webkit-touch-select: none;\
+     -webkit-user-select: none;\
+      -khtml-user-select: none;\
+        -moz-user-select: none;\
+         -ms-user-select: none;\
+             user-select: none;\
+  }\
+  .leon.range.slider > div {\
+    -webkit-touch-select: none;\
+     -webkit-user-select: none;\
+      -khtml-user-select: none;\
+        -moz-user-select: none;\
+         -ms-user-select: none;\
+             user-select: none;\
   }\
   .leon.range.slider.small {\
     height: 21px;\
@@ -521,13 +549,6 @@ style.innerHTML = "\
   }\
   .leon.range.slider > .leon.button.tick.bullet {\
     line-height: "+(leon_vars.font.size*1.35)+"px;\
-  }\
-  .leon.range.slider > .leon.button.handle {\
-    display: block;\
-    float: none;\
-    margin: 0px;\
-    position: absolute;\
-    text-align: center;\
   }\
   .leon.range.slider > .leon.ranger {\
     background: "+leon_vars.color.main.normal+";\
@@ -944,6 +965,7 @@ leon_construct.range = function(obj) {
   
   // Add Handle Event Listeners
   self.handles.forEach(function(handle){
+    handle.node.setAttribute("unselectable","on")
     handle.node.style.position = "absolute"
     handle.node.addEventListener("mousedown",function(){
       self.dragging = true
@@ -1082,7 +1104,7 @@ leon_construct.range = function(obj) {
   
     if (self.play_button) {
       self.play_button.set_size(size)
-      self.play_button.node.style.marginRight = self.padding
+      self.play_button.node.style.marginRight = self.padding+"px"
       available_width -= self.play_button.node.offsetWidth
     }
     // self.play_button.style.width = self.play_button.offsetHeight-leon_vars.padding*2-leon_vars.border*2
@@ -1166,7 +1188,7 @@ leon_construct.range = function(obj) {
   document.addEventListener("mousemove",function(e){
     if (self.dragging) {
       self.active_handle.set_active(true)
-      var x = e.x-self.active_handle.node.parentNode.offsetLeft,
+      var x = e.clientX-self.active_handle.node.parentNode.offsetLeft,
           value = self.tick_indexes[self.active_handle.node.innerHTML]
       if (x < self.tick_positions[value]-self.tick_width/2) {
         if (x > 0) {
@@ -1317,13 +1339,14 @@ leon_construct.select = function(obj) {
         
       var html = option.node.innerHTML
       option.node.innerHTML = html + self.arrow
-      var width = option.node.offsetWidth - self.padding*2
-      if (width > self.width) self.width = width
+      var arrow_width = option.node.getElementsByTagName("span")[0].offsetHeight
       option.node.innerHTML = html
+      var width = option.node.offsetWidth - self.padding*2 + arrow_width
+      if (width > self.width) self.width = width
       
     })
       
-    self.selected.node.style.width = (self.width+2)+"px"
+    self.selected.node.style.width = (self.width)+"px"
     
     self.dropdown.style.width = (self.width+2+self.padding*2+leon_vars.border*2)+"px"
     self.dropdown.style.left = self.selected.node.offsetLeft+"px"
