@@ -32,71 +32,75 @@ RESULTS_PER_PAGE = 10
 @mod.route('/questions/<int:page>/', methods=['GET', 'POST'])
 @crossdomain()
 def index(page):
+    
+    # load forms for submitting new question or for searching
+    search_form = SearchForm()
+    ret = make_response(render_template("ask/questions.html", search_form = search_form))
+        
+    return ret
+
+@mod.route('/questionslist/', methods=['GET', 'POST'], defaults={'page': 1})
+@crossdomain()
+def question_list(page):
     # get URL parameters for results per page and ordering options
     order = request.args.get('order', 'votes') # options = 'votes' or 'newest'
     offset = request.args.get('offset', 0)
     search_term = request.args.get('q', None)
     limit = 25
+    lang = request.args.get('lang', None) or g.locale
     
-    # load forms for submitting new question or for searching
-    search_form = SearchForm()
-    
-    if request.is_xhr:
-        # lets find the questions to load in the page
-        # only the approved questions
-        approved = Status.query.filter_by(name='Approved').first()
-        questions = Question.query.filter_by(status = approved)
+    # lets find the questions to load in the page
+    # only the approved questions
+    approved = Status.query.filter_by(name='Approved').first()
+    questions = Question.query.filter_by(status = approved)
 
-        # if the user has submitted a search, filter by that term
-        if search_term:
-            like_str = "%{0}%".format(search_term)
-            questions = questions.filter(or_(Question.question.like(like_str),Question.body.like(like_str),Question.status_notes.like(like_str)))
+    # if the user has submitted a search, filter by that term
+    if search_term:
+        like_str = "%{0}%".format(search_term)
+        questions = questions.filter(or_(Question.question.like(like_str),Question.body.like(like_str),Question.status_notes.like(like_str)))
 
-        # if we are ordering the questions by newest get them ordered chronologically
-        if order == "newest":
-            
-            if g.locale == "pt":
-                questions = questions.order_by(Question.timestamp.desc(),Question.language.desc())
-            else:
-                questions = questions.order_by(Question.timestamp.desc(),Question.language)
-                    
-            questions = questions.order_by(Question.timestamp.desc())
-            questions = questions.limit(limit).offset(offset)
-            questions = [q.serialize() for q in questions.all()]
-
-        # otherwise we are ordering the questions by votes
-        else:
-            questions = questions.limit(limit).offset(offset)
-            ids = [q.id for q in questions]
-            # raise Exception(ids)
-            votes_subq = db.session.query(Vote, func.count('*').label('vote_count')).group_by(Vote.type_id).subquery()
-            
-            if g.locale == "pt":
-                questions = db.session.query(Question, votes_subq.c.vote_count) \
-                    .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
-                    .filter(Question.status == approved) \
-                    .filter(Question.id.in_(ids)) \
-                    .order_by(votes_subq.c.vote_count.desc(),Question.language.desc())
-            else:
-                questions = db.session.query(Question, votes_subq.c.vote_count) \
-                    .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
-                    .filter(Question.status == approved) \
-                    .filter(Question.id.in_(ids)) \
-                    .order_by(votes_subq.c.vote_count.desc(),Question.language)
-                # .limit(limit).offset(offset)
-            # raise Exception(votes_questions.all())
-
-            questions = [q[0].serialize() for q in questions]
-
-        ret = jsonify({"activities":questions})
+    # if we are ordering the questions by newest get them ordered chronologically
+    if order == "newest":
         
+        if g.locale == "pt":
+            questions = questions.order_by(Question.timestamp.desc(),Question.language.desc())
+        else:
+            questions = questions.order_by(Question.timestamp.desc(),Question.language)
+                
+        questions = questions.order_by(Question.timestamp.desc())
+        questions = questions.limit(limit).offset(offset)
+        questions = [q.serialize() for q in questions.all()]
+
+    # otherwise we are ordering the questions by votes
     else:
-        ret = make_response(render_template("ask/questions.html", search_form = search_form))
+        questions = questions.limit(limit).offset(offset)
+        ids = [q.id for q in questions]
+        # raise Exception(ids)
+        votes_subq = db.session.query(Vote, func.count('*').label('vote_count')).group_by(Vote.type_id).subquery()
+        
+        if lang == "pt":
+            questions = db.session.query(Question, votes_subq.c.vote_count) \
+                .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
+                .filter(Question.status == approved) \
+                .filter(Question.id.in_(ids)) \
+                .order_by(votes_subq.c.vote_count.desc(),Question.language.desc())
+        else:
+            questions = db.session.query(Question, votes_subq.c.vote_count) \
+                .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
+                .filter(Question.status == approved) \
+                .filter(Question.id.in_(ids)) \
+                .order_by(votes_subq.c.vote_count.desc(),Question.language)
+            # .limit(limit).offset(offset)
+        # raise Exception(votes_questions.all())
+
+        questions = [q[0].serialize() for q in questions]
+
+    ret = jsonify({"activities":questions})
             
     ret.headers.add('Last-Modified', datetime.now())
-    ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
-    ret.headers.add('Pragma', 'no-cache')
-        
+    ret.headers.add('Expires', '-1')
+    ret.headers.add('Cache-Control', 'must-revalidate, private')
+    
     return ret
 
 @mod.route('/question/<slug>/', methods=['GET', 'POST'])

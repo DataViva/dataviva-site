@@ -33,21 +33,28 @@ def admin():
 @login_required
 def admin_users():
     
+    ret = make_response(render_template("admin/admin_users.html"))
+            
+    ret.headers.add('Last-Modified', datetime.now())
+    ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    ret.headers.add('Pragma', 'no-cache')
+    
+    return ret
+
+@mod.route('/userslist/')
+@login_required
+def admin_users_list():
+    
     offset = request.args.get('offset', 0)
     limit = 50
+        
+    # get all users EXCEPT the logged in user
+    query = User.query.filter(User.id != g.user.id)
     
-    if request.is_xhr:
-        
-        # get all users EXCEPT the logged in user
-        query = User.query.filter(User.id != g.user.id)
-        
-        items = query.limit(limit).offset(offset).all()
-        items = [i.serialize() for i in items]
-        
-        ret = jsonify({"activities":items})
-        
-    else:
-        ret = make_response(render_template("admin/admin_users.html"))
+    items = query.limit(limit).offset(offset).all()
+    items = [i.serialize() for i in items]
+    
+    ret = jsonify({"activities":items})
             
     ret.headers.add('Last-Modified', datetime.now())
     ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
@@ -94,22 +101,29 @@ def admin_questions(status=None):
     if not status:
         return redirect(url_for(".admin_questions", status="pending"))
     
-    if request.is_xhr:
+    ret = make_response(render_template("admin/admin_questions.html"))
+            
+    ret.headers.add('Last-Modified', datetime.now())
+    ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    ret.headers.add('Pragma', 'no-cache')
+        
+    return ret
+
+@mod.route('/questionslist/<status>/')
+@login_required
+def admin_questions_list(status=None):
     
-        offset = request.args.get('offset', 0)
-        limit = 50
-    
-        # get all users EXCEPT the logged in user
-        curr_status = Status.query.filter_by(name=status).first_or_404()
-        query = Question.query.filter_by(status = curr_status)
-    
-        items = query.limit(limit).offset(offset).all()
-        items = [i.serialize() for i in items]
-    
-        ret = jsonify({"activities":items})
-    
-    else:
-        ret = make_response(render_template("admin/admin_questions.html"))
+    offset = request.args.get('offset', 0)
+    limit = 50
+
+    # get all users EXCEPT the logged in user
+    curr_status = Status.query.filter_by(name=status).first_or_404()
+    query = Question.query.filter_by(status = curr_status)
+
+    items = query.limit(limit).offset(offset).all()
+    items = [i.serialize() for i in items]
+
+    ret = jsonify({"activities":items})
             
     ret.headers.add('Last-Modified', datetime.now())
     ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
@@ -162,24 +176,31 @@ def admin_questions_edit(status, question_id):
 @login_required
 def admin_replies():
     
+    ret = make_response(render_template("admin/admin_replies.html"))
+            
+    ret.headers.add('Last-Modified', datetime.now())
+    ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    ret.headers.add('Pragma', 'no-cache')
+        
+    return ret
+
+@mod.route('/replieslist/')
+@login_required
+def admin_replies_list():
+    
     offset = request.args.get('offset', 0)
     limit = 50
-    
-    if request.is_xhr:
         
-        # get all users EXCEPT the logged in user
-        flags_subq = db.session.query(Flag, func.count('*') \
-                        .label('flag_count')) \
-                        .group_by(Flag.reply_id).subquery()
-        replies = db.session.query(Reply, flags_subq.c.flag_count) \
-                        .order_by(flags_subq.c.flag_count.desc())
-        items = replies.limit(limit).offset(offset).all()
-        items = [i[0].serialize() for i in items]
-    
-        ret = jsonify({"activities":items})
-        
-    else:
-        ret = make_response(render_template("admin/admin_replies.html"))
+    # get all users EXCEPT the logged in user
+    flags_subq = db.session.query(Flag, func.count('*') \
+                    .label('flag_count')) \
+                    .group_by(Flag.reply_id).subquery()
+    replies = db.session.query(Reply, flags_subq.c.flag_count) \
+                    .order_by(flags_subq.c.flag_count.desc())
+    items = replies.limit(limit).offset(offset).all()
+    items = [i[0].serialize() for i in items]
+
+    ret = jsonify({"activities":items})
             
     ret.headers.add('Last-Modified', datetime.now())
     ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')

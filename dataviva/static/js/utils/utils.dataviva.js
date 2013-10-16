@@ -486,7 +486,7 @@ dataviva.ui.header = function() {
     var dyn_top = dyn.offsetTop-header_height
     d3.select("#container").style("margin-top",dyn_height+dyn_top+"px")
     document.onscroll = function() {
-      var top = document.body.scrollTop
+      var top = window.pageYOffset
       if (top > 10) {
         d3.select("#header_container")
           .style("height",header_height+dyn_height+dyn_top+"px")

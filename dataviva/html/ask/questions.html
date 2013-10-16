@@ -51,14 +51,15 @@
   <script>
 
     var order = d3.select('input[name="order"]:checked').attr("value"),
-        search_term = null;
+        search_term = null,
+        json_url = "/ask/questionslist/?lang="+dataviva.language;
       
     leon("$order").color(dataviva.color)
     leon("#search").color(dataviva.color).size("large")
 
     function change_order(new_order){
       order = new_order;
-      var url = window.location.href + "?order=" + order;
+      var url = json_url + "&order=" + order;
       if(search_term){
         url += "&q=" + search_term;
       }
@@ -126,9 +127,7 @@
 
     }
 
-    var is = infinite_scroll()
-              .url(window.location.href)
-              .format_items(item_formatter);
+    var is = infinite_scroll().format_items(item_formatter);
 
     change_order(order)
 
@@ -136,7 +135,7 @@
 
       search_term = this.value;
       
-      var url = window.location.href + "?q=" + search_term + "&order=" + order;
+      var url = json_url + "&q=" + search_term + "&order=" + order;
       d3.select(".question_feed").html('')
         .call(is.url(url).offset(0).remove(true))
 
