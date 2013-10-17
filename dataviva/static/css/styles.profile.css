@@ -36,6 +36,11 @@ div#guide_title {
   margin-bottom: 10px;
 }
 
+div#guide_title:hover {
+  color: #ccc;
+  cursor: pointer;
+}
+
 div#guide_stats {
   margin-bottom: 5px;
 }

@@ -5,6 +5,7 @@
 {% block head %}
 
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.profile.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
 
 {% endblock %}
 
@@ -12,7 +13,7 @@
   
   <div id="guide_controls" class="lightbox guide_controls">
     <div id="guide_icon" style="background-image: url('{{ item.icon() }}');{% if category != 'wld' and category != 'bra' or (category == 'wld' and item.id|count == 2) %} background-color: {{ item.color }};{% endif %}"></div>
-    <div id="guide_title">{{ item.name() }}</div>
+    <div id="guide_title" onclick="selector('{{category}}','{{item.id}}')">{{ item.name() }}</div>
     
     <div class="vizwhiz_tooltip_data_container" id="guide_stats">
       {% set last_group = "" %}
@@ -58,7 +59,61 @@
 
 {% block js %}
 
+  <script src="/static/js/utils/utils.selector.js"></script>
   <script>
+  
+    function callback(obj) {
+      dataviva.popover.hide()
+      split = window.location.pathname.split("/")
+      var id = obj.id
+      // if (obj.distance > 0) id += "."+obj.distance
+      split[3] = id
+      window.location = split.join("/")
+    }
+  
+    function selector(type,id) {
+      
+      if (d3.select("#profile_select").empty()) {
+        
+        dataviva.popover.create({
+          "id": "profile_select",
+          "width": 600,
+          "height": "80%",
+          "close": true
+        })
+        
+        if (type == "bra" && id.indexOf(".") > 0) {
+          var dist = id.split(".")[1]
+          id = id.split(".")[0]
+        }
+        else {
+          var dist = 0
+        }
+        
+        if (type == "hs" || type == "wld") {
+          var limit = 2
+        }
+        else if (type == "isic" || type == "cbo") {
+          var limit = 1
+        }
+        else if (type == "bra") {
+         var limit = null
+        }
+        
+        var selector = Selector()
+          .callback(callback)
+          .distance(dist)
+          .initial_value(id)
+          .type(type)
+          .limit(limit)
+    
+        d3.select("#profile_select")
+          .call(selector);
+            
+      }
+      
+      dataviva.popover.show("#profile_select")
+    }
       
     var width = window.innerWidth-380,
         height = window.innerHeight-149,
