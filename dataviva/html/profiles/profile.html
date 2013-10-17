@@ -11,7 +11,7 @@
 {% block body %}
   
   <div id="guide_controls" class="lightbox guide_controls">
-    <div id="guide_icon" style="background-image: url('{{ item.icon() }}');{% if category != 'wld' and category != 'bra' or (category == 'wld' and item.id|count == 2) %} background-color: {{ item.color }}{% endif %};"></div>
+    <div id="guide_icon" style="background-image: url('{{ item.icon() }}');{% if category != 'wld' and category != 'bra' or (category == 'wld' and item.id|count == 2) %} background-color: {{ item.color }};{% endif %}"></div>
     <div id="guide_title">{{ item.name() }}</div>
     
     <div class="vizwhiz_tooltip_data_container" id="guide_stats">
