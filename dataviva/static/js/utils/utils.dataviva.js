@@ -379,6 +379,9 @@ dataviva.format.number = function(value,name,l) {
   
   if (!l) var l = dataviva.language
   
+  var negative = value < 0
+  value = Math.abs(value)
+  
   var smalls = ["rca","rca_bra","rca_wld","distance","eci","pci","ici","oci"]
   
   var ids = ["cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
@@ -467,10 +470,7 @@ dataviva.format.number = function(value,name,l) {
     return_value = n.join(",")
   }
   
-  if (return_value.indexOf("-") >= 0 && return_value.indexOf("$") >= 0) {
-    return_value = return_value.replace("-","$")
-    return_value = return_value.replace("$","-")
-  }
+  if (negative) return_value = "-"+return_value
   
   return return_value
   
