@@ -12,8 +12,10 @@
 {% block body %}
   
   <div id="guide_controls" class="lightbox guide_controls">
-    <div id="guide_icon" style="background-image: url('{{ item.icon() }}');{% if category != 'wld' and category != 'bra' or (category == 'wld' and item.id|count == 2) %} background-color: {{ item.color }};{% endif %}"></div>
-    <div id="guide_title" onclick="selector('{{category}}','{{item.id}}')">{{ item.name() }}</div>
+    <div id="profile_button" onclick="selector('{{category}}','{{item.id}}')">
+      <div id="guide_icon" style="background-image: url('{{ item.icon() }}');{% if category != 'wld' and category != 'bra' or (category == 'wld' and item.id|count == 2) %} background-color: {{ item.color }};{% endif %}"></div>
+      <div id="guide_title">{{ item.name() }}</div>
+    </div>
     
     <div class="vizwhiz_tooltip_data_container" id="guide_stats">
       {% set last_group = "" %}
