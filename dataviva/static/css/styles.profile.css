@@ -61,7 +61,8 @@ div.vizwhiz_tooltip_data_name {
   width: 130px;
 }
 
-div.vizwhiz_tooltip_data_value {
+div#guide_controls div.vizwhiz_tooltip_data_value {
+  float: none;
   width: 150px;
 }
 
