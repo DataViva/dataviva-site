@@ -1,0 +1,818 @@
+{% extends "templates/base.html" %}
+
+{% block title %}: {% trans %}Database Table{% endtrans %}{% endblock %}
+
+{% block head %}
+
+  <!-- <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.data.css" /> -->
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.tables.css" />
+  
+  <script type="text/javascript" charset="utf-8" src="/static/js/libs/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="http://datatables.net/release-datatables/media/js/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="http://datatables.net/release-datatables/media/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf-8" src="http://datatables.net/release-datatables/extras/FixedColumns/media/js/FixedColumns.js"></script>
+  <script type="text/javascript" charset="utf-8" src="http://datatables.net/release-datatables/extras/FixedHeader/js/FixedHeader.js"></script>
+  
+  
+{% endblock %}
+
+{% block content %}
+
+<div id="dt_query">
+  <div id="sticky"></div>
+  <div id="data"></div>
+  <!-- <table>
+    <thead>
+      <tr></tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table> -->
+</div>
+
+
+
+
+ <!--
+<div id="dt_query">
+  
+  <div id="tbl_sticky">
+    
+    <table class="header">
+      <thead>
+        <tr>
+          <th class="year sticky">
+            Year
+          </th>
+          <th class="bra_id sticky">
+            BRA ID
+          </th>
+        </tr>
+      </thead>
+    </table>
+    
+    <table class="body">
+        <tbody>
+          <tr>
+            <td class="year sticky">
+              2002
+            </td>
+            <td class="bra_id sticky">
+              AC
+            </td>
+          </tr>
+          <tr>
+            <td class="year sticky">
+              2003
+            </td>
+            <td class="bra_id sticky">
+              AC
+            </td>
+          </tr>
+          <tr>
+            <td class="year sticky">
+              2004
+            </td>
+            <td class="bra_id sticky">
+              AC
+            </td>
+          </tr>
+          <tr>
+            <td class="year sticky">
+              2005
+            </td>
+            <td class="bra_id sticky">
+              AC
+            </td>
+          </tr>
+          <tr>
+            <td class="year sticky">
+              2006
+            </td>
+            <td class="bra_id sticky">
+              AC
+            </td>
+          </tr>
+          <tr>
+            <td class="year sticky">
+              2007
+            </td>
+            <td class="bra_id sticky">
+              AC
+            </td>
+          </tr>
+          <tr>
+            <td class="year sticky">2008</td>
+            <td class="bra_id sticky">AC</td>
+          </tr>
+          <tr>
+            <td class="year sticky">2008</td>
+            <td class="bra_id sticky">AC</td>
+          </tr>
+          <tr>
+            <td class="year sticky">2008</td>
+            <td class="bra_id sticky">AC</td>
+          </tr>
+          <tr>
+            <td class="year sticky">2008</td>
+            <td class="bra_id sticky">AC</td>
+          </tr>
+          <tr>
+            <td class="year sticky">2008</td>
+            <td class="bra_id sticky">AC</td>
+          </tr>
+          <tr>
+            <td class="year sticky">2008</td>
+            <td class="bra_id sticky">AC</td>
+          </tr>
+          <tr>
+            <td class="year sticky">2008</td>
+            <td class="bra_id sticky">AC</td>
+          </tr>
+          <tr>
+            <td class="year sticky">2008</td>
+            <td class="bra_id sticky">AC</td>
+          </tr>
+          <tr>
+            <td class="year sticky">2008</td>
+            <td class="bra_id sticky">AC</td>
+          </tr>
+          <tr>
+            <td class="year sticky">2008</td>
+            <td class="bra_id sticky">AC</td>
+          </tr>
+          <tr>
+            <td class="year sticky">2008</td>
+            <td class="bra_id sticky">AC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="tbl_data">
+    
+      <table class="header">
+        <thead>
+          <tr>
+            <th class="wage">
+              Total Monthly Wages
+            </th>
+            <th class="num_emp">
+              Total Employees
+            </th>
+            <th class="num_est">
+              Total Establishments
+            </th>
+            <th class="wage_growth_pct">
+              Wage Growth Rate (1 year)
+            </th>
+            <th class="wage_growth_pct_5">
+              Wage Growth Rate (5 year)
+            </th>
+            <th class="wage_growth_val">
+              Wage Growth Value (1 year)
+            </th>
+            <th class="wage_growth_val_5">
+              Wage Growth Value (5 year)
+            </th>
+            <th class="num_emp_growth_pct">
+              Employee Growth Rate (1 year)
+            </th>
+            <th class="num_emp_growth_pct_5">
+              Employee Growth Rate (5 year)
+            </th>
+            <th class="num_emp_growth_val">
+              Employee Growth (1 year)
+            </th>
+            <th class="num_emp_growth_val_5">
+              Employee Growth (5 year)
+            </th>
+          </tr>
+        </thead>
+      </table>
+      
+      
+      <table class="body">
+          <tbody>
+            <tr>
+              <td class="wage">
+                $58.1 M BRL
+              </td>
+              <td class="num_emp">
+                68.4 k
+              </td>
+              <td class="num_est">
+                9,947
+              </td>
+              <td class="wage_growth_pct">
+                —
+              </td>
+              <td class="wage_growth_pct_5">
+                —
+              </td>
+              <td class="wage_growth_val">
+                —
+              </td>
+              <td class="wage_growth_val_5">
+                —
+              </td>
+              <td class="num_emp_growth_pct">
+                —
+              </td>
+              <td class="num_emp_growth_pct_5">
+                —
+              </td>
+              <td class="num_emp_growth_val">
+                —
+              </td>
+              <td class="num_emp_growth_val_5">
+                —
+              </td>
+            </tr>
+            <tr>
+              <td class="wage">
+                $60.2 M BRL
+              </td>
+              <td class="num_emp">
+                68.5 k
+              </td>
+              <td class="num_est">
+                10.2 k
+              </td>
+              <td class="wage_growth_pct">
+                0.035%
+              </td>
+              <td class="wage_growth_pct_5">
+                —
+              </td>
+              <td class="wage_growth_val">
+                $2.06 M BRL
+              </td>
+              <td class="wage_growth_val_5">
+                —
+              </td>
+              <td class="num_emp_growth_pct">
+                0.00089%
+              </td>
+              <td class="num_emp_growth_pct_5">
+                —
+              </td>
+              <td class="num_emp_growth_val">
+                61
+              </td>
+              <td class="num_emp_growth_val_5">
+                —
+              </td>
+            </tr>
+            <tr>
+              <td class="wage">
+                $68.8 M BRL
+              </td>
+              <td class="num_emp">
+                73.7 k
+              </td>
+              <td class="num_est">
+                11.3 k
+              </td>
+              <td class="wage_growth_pct">
+                0.14%
+              </td>
+              <td class="wage_growth_pct_5">
+                —
+              </td>
+              <td class="wage_growth_val">
+                $8.64 M BRL
+              </td>
+              <td class="wage_growth_val_5">
+                —
+              </td>
+              <td class="num_emp_growth_pct">
+                0.076%
+              </td>
+              <td class="num_emp_growth_pct_5">
+                —
+              </td>
+              <td class="num_emp_growth_val">
+                5,231
+              </td>
+              <td class="num_emp_growth_val_5">
+                —
+              </td>
+            </tr>
+            <tr>
+              <td class="wage">
+                $81 M BRL
+              </td>
+              <td class="num_emp">
+                79.4 k
+              </td>
+              <td class="num_est">
+                12.2 k
+              </td>
+              <td class="wage_growth_pct">
+                0.18%
+              </td>
+              <td class="wage_growth_pct_5">
+                —
+              </td>
+              <td class="wage_growth_val">
+                $12.2 M BRL
+              </td>
+              <td class="wage_growth_val_5">
+                —
+              </td>
+              <td class="num_emp_growth_pct">
+                0.077%
+              </td>
+              <td class="num_emp_growth_pct_5">
+                —
+              </td>
+              <td class="num_emp_growth_val">
+                5,700
+              </td>
+              <td class="num_emp_growth_val_5">
+                —
+              </td>
+            </tr>
+            <tr>
+              <td class="wage">
+                $101 M BRL
+              </td>
+              <td class="num_emp">
+                85.6 k
+              </td>
+              <td class="num_est">
+                13.2 k
+              </td>
+              <td class="wage_growth_pct">
+                0.24%
+              </td>
+              <td class="wage_growth_pct_5">
+                —
+              </td>
+              <td class="wage_growth_val">
+                $19.6 M BRL
+              </td>
+              <td class="wage_growth_val_5">
+                —
+              </td>
+              <td class="num_emp_growth_pct">
+                0.077%
+              </td>
+              <td class="num_emp_growth_pct_5">
+                —
+              </td>
+              <td class="num_emp_growth_val">
+                6,152
+              </td>
+              <td class="num_emp_growth_val_5">
+                —
+              </td>
+            </tr>
+            <tr>
+              <td class="wage">
+                $118 M BRL
+              </td>
+              <td class="num_emp">
+                92 k
+              </td>
+              <td class="num_est">
+                14.4 k
+              </td>
+              <td class="wage_growth_pct">
+                0.18%
+              </td>
+              <td class="wage_growth_pct_5">
+                0.15%
+              </td>
+              <td class="wage_growth_val">
+                $17.8 M BRL
+              </td>
+              <td class="wage_growth_val_5">
+                $60.3 M BRL
+              </td>
+              <td class="num_emp_growth_pct">
+                0.075%
+              </td>
+              <td class="num_emp_growth_pct_5">
+                0.061%
+              </td>
+              <td class="num_emp_growth_val">
+                6,426
+              </td>
+              <td class="num_emp_growth_val_5">
+                23.6 k
+              </td>
+            </tr>
+            <tr>
+              <td class="wage">$136 M BRL</td>
+              <td class="num_emp">98.7 k</td>
+              <td class="num_est">15.7 k</td>
+              <td class="wage_growth_pct">0.15%</td>
+              <td class="wage_growth_pct_5">0.18%</td>
+              <td class="wage_growth_val">$17.5 M BRL</td>
+              <td class="wage_growth_val_5">$75.7 M BRL</td>
+              <td class="num_emp_growth_pct">0.073%</td>
+              <td class="num_emp_growth_pct_5">0.076%</td>
+              <td class="num_emp_growth_val">6,715</td>
+              <td class="num_emp_growth_val_5">30.2 k</td>
+            </tr>
+            <tr>
+              <td class="wage">$136 M BRL</td>
+              <td class="num_emp">98.7 k</td>
+              <td class="num_est">15.7 k</td>
+              <td class="wage_growth_pct">0.15%</td>
+              <td class="wage_growth_pct_5">0.18%</td>
+              <td class="wage_growth_val">$17.5 M BRL</td>
+              <td class="wage_growth_val_5">$75.7 M BRL</td>
+              <td class="num_emp_growth_pct">0.073%</td>
+              <td class="num_emp_growth_pct_5">0.076%</td>
+              <td class="num_emp_growth_val">6,715</td>
+              <td class="num_emp_growth_val_5">30.2 k</td>
+            </tr>
+            <tr>
+              <td class="wage">$136 M BRL</td>
+              <td class="num_emp">98.7 k</td>
+              <td class="num_est">15.7 k</td>
+              <td class="wage_growth_pct">0.15%</td>
+              <td class="wage_growth_pct_5">0.18%</td>
+              <td class="wage_growth_val">$17.5 M BRL</td>
+              <td class="wage_growth_val_5">$75.7 M BRL</td>
+              <td class="num_emp_growth_pct">0.073%</td>
+              <td class="num_emp_growth_pct_5">0.076%</td>
+              <td class="num_emp_growth_val">6,715</td>
+              <td class="num_emp_growth_val_5">30.2 k</td>
+            </tr>
+            <tr>
+              <td class="wage">$136 M BRL</td>
+              <td class="num_emp">98.7 k</td>
+              <td class="num_est">15.7 k</td>
+              <td class="wage_growth_pct">0.15%</td>
+              <td class="wage_growth_pct_5">0.18%</td>
+              <td class="wage_growth_val">$17.5 M BRL</td>
+              <td class="wage_growth_val_5">$75.7 M BRL</td>
+              <td class="num_emp_growth_pct">0.073%</td>
+              <td class="num_emp_growth_pct_5">0.076%</td>
+              <td class="num_emp_growth_val">6,715</td>
+              <td class="num_emp_growth_val_5">30.2 k</td>
+            </tr>
+            <tr>
+              <td class="wage">$136 M BRL</td>
+              <td class="num_emp">98.7 k</td>
+              <td class="num_est">15.7 k</td>
+              <td class="wage_growth_pct">0.15%</td>
+              <td class="wage_growth_pct_5">0.18%</td>
+              <td class="wage_growth_val">$17.5 M BRL</td>
+              <td class="wage_growth_val_5">$75.7 M BRL</td>
+              <td class="num_emp_growth_pct">0.073%</td>
+              <td class="num_emp_growth_pct_5">0.076%</td>
+              <td class="num_emp_growth_val">6,715</td>
+              <td class="num_emp_growth_val_5">30.2 k</td>
+            </tr>
+            <tr>
+              <td class="wage">$136 M BRL</td>
+              <td class="num_emp">98.7 k</td>
+              <td class="num_est">15.7 k</td>
+              <td class="wage_growth_pct">0.15%</td>
+              <td class="wage_growth_pct_5">0.18%</td>
+              <td class="wage_growth_val">$17.5 M BRL</td>
+              <td class="wage_growth_val_5">$75.7 M BRL</td>
+              <td class="num_emp_growth_pct">0.073%</td>
+              <td class="num_emp_growth_pct_5">0.076%</td>
+              <td class="num_emp_growth_val">6,715</td>
+              <td class="num_emp_growth_val_5">30.2 k</td>
+            </tr>
+            <tr>
+              <td class="wage">$136 M BRL</td>
+              <td class="num_emp">98.7 k</td>
+              <td class="num_est">15.7 k</td>
+              <td class="wage_growth_pct">0.15%</td>
+              <td class="wage_growth_pct_5">0.18%</td>
+              <td class="wage_growth_val">$17.5 M BRL</td>
+              <td class="wage_growth_val_5">$75.7 M BRL</td>
+              <td class="num_emp_growth_pct">0.073%</td>
+              <td class="num_emp_growth_pct_5">0.076%</td>
+              <td class="num_emp_growth_val">6,715</td>
+              <td class="num_emp_growth_val_5">30.2 k</td>
+            </tr>
+            <tr>
+              <td class="wage">$136 M BRL</td>
+              <td class="num_emp">98.7 k</td>
+              <td class="num_est">15.7 k</td>
+              <td class="wage_growth_pct">0.15%</td>
+              <td class="wage_growth_pct_5">0.18%</td>
+              <td class="wage_growth_val">$17.5 M BRL</td>
+              <td class="wage_growth_val_5">$75.7 M BRL</td>
+              <td class="num_emp_growth_pct">0.073%</td>
+              <td class="num_emp_growth_pct_5">0.076%</td>
+              <td class="num_emp_growth_val">6,715</td>
+              <td class="num_emp_growth_val_5">30.2 k</td>
+            </tr>
+            <tr>
+              <td class="wage">$136 M BRL</td>
+              <td class="num_emp">98.7 k</td>
+              <td class="num_est">15.7 k</td>
+              <td class="wage_growth_pct">0.15%</td>
+              <td class="wage_growth_pct_5">0.18%</td>
+              <td class="wage_growth_val">$17.5 M BRL</td>
+              <td class="wage_growth_val_5">$75.7 M BRL</td>
+              <td class="num_emp_growth_pct">0.073%</td>
+              <td class="num_emp_growth_pct_5">0.076%</td>
+              <td class="num_emp_growth_val">6,715</td>
+              <td class="num_emp_growth_val_5">30.2 k</td>
+            </tr>
+            <tr>
+              <td class="wage">$136 M BRL</td>
+              <td class="num_emp">98.7 k</td>
+              <td class="num_est">15.7 k</td>
+              <td class="wage_growth_pct">0.15%</td>
+              <td class="wage_growth_pct_5">0.18%</td>
+              <td class="wage_growth_val">$17.5 M BRL</td>
+              <td class="wage_growth_val_5">$75.7 M BRL</td>
+              <td class="num_emp_growth_pct">0.073%</td>
+              <td class="num_emp_growth_pct_5">0.076%</td>
+              <td class="num_emp_growth_val">6,715</td>
+              <td class="num_emp_growth_val_5">30.2 k</td>
+            </tr>
+            <tr>
+              <td class="wage">$136 M BRL</td>
+              <td class="num_emp">98.7 k</td>
+              <td class="num_est">15.7 k</td>
+              <td class="wage_growth_pct">0.15%</td>
+              <td class="wage_growth_pct_5">0.18%</td>
+              <td class="wage_growth_val">$17.5 M BRL</td>
+              <td class="wage_growth_val_5">$75.7 M BRL</td>
+              <td class="num_emp_growth_pct">0.073%</td>
+              <td class="num_emp_growth_pct_5">0.076%</td>
+              <td class="num_emp_growth_val">6,715</td>
+              <td class="num_emp_growth_val_5">30.2 k</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+</div>
+ -->
+
+
+<script src="/static/js/utils/utils.selector.js"></script>
+<script src="/static/js/utils/utils.infinite_scroll.js"></script>
+<script type="text/javascript">
+var oTable;
+
+  leon("$dataset").color(dataviva.color)
+  leon("#year_filter").color(dataviva.color)
+  
+  var num_of_sticky_cols = 0;
+  var CURRENT_DATASET = 'rais';
+  var ORDER_DIRECTIONS = ["desc", "asc", ""]
+  var STICKY_COLUMNS = [ 
+                  "year", 
+  
+                  "bra_id", 
+                  "id_ibge", 
+                  
+                  "isic_id", 
+                  "cbo_id", 
+                  
+                  "hs_id", 
+                  "wld_id"
+              ]
+  var DATA_COLUMNS = [ 
+                  "wage", 
+                  "num_emp", 
+                  "num_est", 
+                  "required",
+                  
+                  "val_usd", 
+                  
+                  "rca", 
+                  "rca_wld", 
+                  
+                  "distance", 
+                  "distance_wld", 
+                  
+                  "opp_gain", 
+                  "opp_gain_wld", 
+                  
+                  "eci",
+                  "pci",
+                  "ici",
+                  "oci",
+                  
+                  "importance", 
+                  
+                  "val_usd_growth_pct",
+                  "val_usd_growth_pct_5",
+                  "val_usd_growth_val",
+                  "val_usd_growth_val_5",
+                  
+                  "wage_growth_pct",
+                  "wage_growth_pct_5",
+                  "wage_growth_val",
+                  "wage_growth_val_5",
+                  "num_emp_growth_pct",
+                  "num_emp_growth_pct_5",
+                  "num_emp_growth_val",
+                  "num_emp_growth_val_5"
+                
+                ]
+
+  var is = infinite_scroll().format_items(item_formatter);
+  
+  function update_url(api_url){
+    
+    var page_url = api_url.split("?")[0]
+    page_url = "/data/table" + page_url
+        
+    if (Modernizr.history) {
+      window.history.replaceState(
+        {'prev_request': page_url}, 
+        "DataViva : Data", page_url
+      )
+      if (window != window.parent &&
+          window.parent.location.pathname.indexOf("table") >= 0) {
+        window.parent.history.replaceState(
+          {'prev_request': page_url}, 
+          "DataViva : Data", page_url
+        )
+      }
+    } 
+    else if (window.location.href.indexOf(window_url) < 0) {
+      window.location = page_url
+    }
+      
+  }
+  
+  function item_formatter(container_el, dataset){
+  
+    /*
+      FILTER COLUMNS
+    */
+    var all_cols = d3.keys(dataset[0]).concat(d3.keys(dataset[dataset.length-1]));
+    all_cols = all_cols.filter(function(itm, i){
+        return all_cols.indexOf(itm)== i; 
+    });
+    var data_cols = DATA_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1});
+    var sticky_cols = STICKY_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1});
+    
+    /*
+      CREATE "STICKY" HEADER TABLE
+    */
+    var selection = d3.select(container_el).select("#sticky")
+    selection.selectAll('table.header').data([0])
+      .enter().append('table').attr("class", "header")
+    var tbl_sticky_header = selection.select('table.header');
+    
+    tbl_sticky_header.selectAll('thead').data([0]).enter().append('thead');
+    tbl_sticky_header = tbl_sticky_header.select('thead');
+    
+    tbl_sticky_header.selectAll('tr').data([0]).enter().append('tr');
+    tbl_sticky_header = tbl_sticky_header.select('tr');
+
+    var ths = tbl_sticky_header.selectAll("th")
+      .data(sticky_cols)
+    
+    ths.enter().append("th")
+      .attr("class",function(d){
+        return d
+      })
+      .text(function(d) { return dataviva.format.text(d)})
+    
+    /*
+      CREATE "STICKY" DATA TABLE
+    */
+    selection.selectAll('table.data').data([0])
+      .enter().append('table').attr("class", "data")
+    var tbl_sticky_data = selection.select('table.data');
+    
+    tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
+    tbl_sticky_data = tbl_sticky_data.select('tbody');
+    
+    // create a row for each object in the data
+    var rows = tbl_sticky_data.selectAll("tr").data(dataset, JSON.stringify)
+    rows.enter().append("tr")
+    
+    rows.each(function(d){
+      var self = d3.select(this)
+      sticky_cols.forEach(data_printer(d, self))
+    })
+    
+    /*
+      CREATE DATA HEADER TABLE
+    */
+    var selection = d3.select(container_el).select("#data")
+    selection.selectAll('table.header').data([0])
+      .enter().append('table').attr("class", "header")
+    var tbl_data_header = selection.select('table.header');
+    
+    tbl_data_header.selectAll('thead').data([0]).enter().append('thead');
+    tbl_data_header = tbl_data_header.select('thead');
+    
+    tbl_data_header.selectAll('tr').data([0]).enter().append('tr');
+    tbl_data_header = tbl_data_header.select('tr');
+
+    var ths = tbl_data_header.selectAll("th")
+      .data(data_cols)
+    
+    ths.enter().append("th")
+      .attr("class",function(d){ return d })
+      .text(function(d) { return dataviva.format.text(d)})
+    
+    /*
+      CREATE DATA DATA TABLE
+    */
+    selection.selectAll('table.data').data([0])
+      .enter().append('table').attr("class", "data")
+    var tbl_sticky_data = selection.select('table.data');
+      
+    tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
+    tbl_sticky_data = tbl_sticky_data.select('tbody');
+      
+    // create a row for each object in the data
+    var rows = tbl_sticky_data.selectAll("tr").data(dataset, JSON.stringify)
+    rows.enter().append("tr")
+      
+    rows.each(function(d){
+      var self = d3.select(this)
+      data_cols.forEach(data_printer(d, self))
+    })
+    
+    // d3.selectAll("#dt_query table .sticky:nth-child("+num_of_sticky_cols+")")
+    // .style("box-shadow", "3px 0px 3px rgba(0,0,0,0.25)")
+    
+    d3.select("#dt_query #sticky").style("width", function(){
+      return d3.select("#sticky table.data").node().offsetWidth + "px"
+    })
+    var sticky_width = d3.select("#dt_query #sticky").node().offsetWidth;
+    
+    d3.select("#dt_query #data").on("scroll", function(){
+      d3.select("#dt_query #data table.header thead").style("left", -(this.scrollLeft-sticky_width)+"px")
+    })
+    
+    d3.select("#dt_query #data")
+      .style("width", function(){
+        return (window.innerWidth - sticky_width) + "px"
+      })
+      .style("margin-left", function(){
+        return sticky_width + "px"
+      })
+    
+    d3.selectAll("#dt_query table.data").style("margin-top", function(){
+      return d3.select("#data table.header tr").style("height");
+    })
+    
+    d3.selectAll("#dt_query table.header th").style("height", function(){
+      var padding = parseInt(d3.select(this).style("padding-top")) * 2
+      var h = parseInt(d3.select("#data table.header tr").style("height"));
+      return h - padding + "px";
+    })
+    
+    
+    d3.selectAll("#data table.data").style("width", function(){
+      return d3.select("#data table.header thead").node().offsetWidth + "px";
+    })
+    
+      
+  }
+  
+  
+  
+  
+  
+  // var api_url = "/rais/all/mg030000/all/all/?filter=wage>0"
+  var api_url = window.location.pathname.replace("/data/table", "")
+  
+  update_url(api_url)
+  // 
+  // d3.select("#dt_query").selectAll("tbody > tr").remove()
+  d3.select("#dt_query")
+    .call(is.url(api_url).offset(0))
+  
+  
+    function data_printer(d, self){
+      return function(c){
+          
+          if (typeof d[c] == "string") {
+            var html = dataviva.format.text(d[c],c)
+          }
+          else if (typeof d[c] == "number") {
+            var html = dataviva.format.number(d[c],c)
+          }
+          else if (!d[c]) {
+            var html = " &mdash; "
+          }
+          else {
+            var html = d[c]
+          }
+          
+          var col = self.append("td")
+            .attr("class", function(d){
+              return c;
+            })
+            .html(html)
+      }
+    }
+
+</script>
+{% endblock %}

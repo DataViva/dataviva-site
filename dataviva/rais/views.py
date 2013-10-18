@@ -235,7 +235,7 @@ def get_query(data_table, url_args, **kwargs):
             items = query.limit(limit).offset(offset).all()
         else:
             items = query.all()
-        for d in query.all():
+        for d in items:
             datum = d[0].serialize()
             for value, col_name in zip(d[1:], join["columns"].keys()):
                 extra = {}
