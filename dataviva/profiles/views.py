@@ -60,10 +60,14 @@ def index(category = None, id = None):
 @mod.route('/<category>/<id>/')
 def profiles(category = None, id = None):
     
-    category_type = "<{0}.{1}>".format(category,len(id))
     
-    Attr = globals()[category.title()]()
-    item = Attr.query.get_or_404(id)
+    if category == "bra" and id == "all":
+        item = Wld.query.get_or_404("sabra")
+        category_type = "all"
+    else:
+        Attr = globals()[category.title()]()
+        item = Attr.query.get_or_404(id)
+        category_type = "<{0}.{1}>".format(category,len(id))
     
     plan = Plan.query.filter_by(category=category, category_type=category_type, 
                                     option=None).first()

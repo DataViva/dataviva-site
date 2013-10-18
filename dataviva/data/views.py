@@ -12,6 +12,8 @@ from dataviva.attrs.models import Bra, Wld
 from dataviva.rais.models import Isic, Cbo
 from dataviva.secex.models import Hs
 
+from dataviva.utils import crossdomain
+
 import json
 
 mod = Blueprint('data', __name__, url_prefix='/data')
@@ -58,6 +60,7 @@ def index():
 
 @mod.route('/query/')
 @mod.route('/query/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
+@crossdomain()
 def query(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
     isic, cbo, hs, wld = [None] * 4
     g.page_type = "query"
@@ -113,7 +116,7 @@ def query(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
 @mod.route('/classifications/')
 @mod.route('/classifications/<attr>/')
 @mod.route('/classifications/<attr>/<depth>/')
-@mod.route('/classifications/<attr>/<depth>/<int:page>/')
+@crossdomain()
 def classifications(attr = None, depth = None, page = 1):
     
     if not attr:
@@ -123,73 +126,96 @@ def classifications(attr = None, depth = None, page = 1):
     per_page = 50
     offset = request.args.get("offset", 0)
     
+    attr_table = globals()[attr.capitalize()]
+    
     if attr == "bra":
-        attr_table = Bra
-        if depth == None:
-            depth = "2"
-        depths = ["2","4","6","8"]
+        depths = ["2","4","6","7","8"]
         if g.locale == "pt":
             title = u"Localidades Brasileiras"
         else:
             title = u"Brazilian Locations"
     elif attr == "wld":
-        attr_table = Wld
-        if depth == None:
-            depth = "2"
         depths = ["2","5"]
         if g.locale == "pt":
             title = u"Países"
         else:
             title = u"Countries"
     elif attr == "isic":
-        attr_table = Isic
-        if depth == None:
-            depth = "1"
         depths = ["1","3","5"]
         if g.locale == "pt":
             title = u"Atividades Econômicas por Classificação ISIC"
         else:
             title = u"Industries by ISIC Classification"
     elif attr == "cbo":
-        attr_table = Cbo
-        if depth == None:
-            depth = "1"
         depths = ["1","4"]
         if g.locale == "pt":
             title = u"Ocupações por Classificação CBO"
         else:
             title = u"Occupations by CBO Classification"
     elif attr == "hs":
-        attr_table = Hs
-        if depth == None:
-            depth = "2"
         depths = ["2","4","6"]
         if g.locale == "pt":
             title = u"Produtos por Classificação HS"
         else:
             title = u"Products by HS Classification"
+            
+    if depth == None:
+        depth = depths[0]
     
     attrs = attr_table.query.filter(func.char_length(attr_table.id) == depth).limit(per_page).offset(offset)
     
-    if request.is_xhr:
-        attrs_json = [dict(a.serialize().items() + [("attr_type",attr)]) for a in attrs]
-        ret = jsonify({"data": attrs_json})
-        
-    else:
-        ret = make_response(render_template("data/classifications.html",
-            title = title,
-            page_attr = attr,
-            depth = depth,
-            depths = depths,
-            attrs = attrs))
+    ret = make_response(render_template("data/classifications.html",
+        title = title,
+        page_attr = attr,
+        depth = depth,
+        depths = depths,
+        attrs = attrs))
             
     ret.headers.add('Last-Modified', datetime.now())
-    ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
-    ret.headers.add('Pragma', 'no-cache')
+    ret.headers.add('Expires', '-1')
+    ret.headers.add('Cache-Control', 'must-revalidate, private')
+            
+    return ret
+
+@mod.route('/classificationslist/<attr>/')
+@mod.route('/classificationslist/<attr>/<depth>/')
+@crossdomain()
+def classificationslist(attr = None, depth = None, page = 1):
+    
+    g.page_type = "classifications"
+    per_page = 50
+    offset = request.args.get("offset", 0)
+    
+    attr_table = globals()[attr.capitalize()]
+            
+    if depth == None:
+    
+        if attr == "bra":
+            depths = ["2","4","6","7","8"]
+        elif attr == "wld":
+            depths = ["2","5"]
+        elif attr == "isic":
+            depths = ["1","3","5"]
+        elif attr == "cbo":
+            depths = ["1","4"]
+        elif attr == "hs":
+            depths = ["2","4","6"]
+            
+        depth = depths[0]
+    
+    attrs = attr_table.query.filter(func.char_length(attr_table.id) == depth).limit(per_page).offset(offset)
+    
+    attrs_json = [dict(a.serialize().items() + [("attr_type",attr)]) for a in attrs]
+    ret = jsonify({"data": attrs_json})
+            
+    ret.headers.add('Last-Modified', datetime.now())
+    ret.headers.add('Expires', '-1')
+    ret.headers.add('Cache-Control', 'must-revalidate, private')
             
     return ret
 
 @mod.route('/download/', methods=['GET', 'POST'])
+@crossdomain()
 def download():
     import tempfile, subprocess
     

@@ -131,7 +131,7 @@
 
     }
 
-    var is = infinite_scroll().format_items(item_formatter);
+    var is = infinite_scroll().url(window.location.href.replace("classifications","classificationslist")).format_items(item_formatter);
     d3.select("#results").call(is)
 
   </script>

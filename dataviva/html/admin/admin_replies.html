@@ -73,7 +73,7 @@ function item_formatter(container_el, activities){
 
 }
 
-var is = infinite_scroll().format_items(item_formatter);
+var is = infinite_scroll().url(window.location.href.replace("replies","replieslist")).format_items(item_formatter);
 
 d3.select(".feed")
   .call(is)

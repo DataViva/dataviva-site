@@ -21,6 +21,20 @@ div#guide_controls {
   width: 300px;
 }
 
+div#profile_button {
+  background-color: #fff;
+  border: solid 1px #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+  -webkit-transition: background-color .1s;
+          transition: background-color .1s;
+}
+
+div#profile_button:hover {
+  background-color: #efefef;
+  cursor: pointer;
+}
+
 div#guide_icon {
   background-position: 50%;
   background-repeat: no-repeat;
@@ -33,7 +47,6 @@ div#guide_icon {
 
 div#guide_title {
   font-size: 24px;
-  margin-bottom: 10px;
 }
 
 div#guide_stats {
@@ -48,7 +61,8 @@ div.vizwhiz_tooltip_data_name {
   width: 130px;
 }
 
-div.vizwhiz_tooltip_data_value {
+div#guide_controls div.vizwhiz_tooltip_data_value {
+  float: none;
   width: 150px;
 }
 

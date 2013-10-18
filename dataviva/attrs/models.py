@@ -16,8 +16,18 @@ class Stats(object):
         
         stats = []
         attr_type = self.__class__.__name__.lower()
+        if attr_type == "wld" and self.id == "all":
+            attr_type = "bra"
         
-        if attr_type == "bra":
+        if attr_type == "bra" and self.id == "all":
+            stats.append(self.get_val(Yb,"population",attr_type,"population"))
+            stats.append(self.get_top_attr(Yi, "num_emp", attr_type, "isic", "rais"))
+            stats.append(self.get_top_attr(Yo, "num_emp", attr_type, "cbo", "rais"))
+            stats.append(self.get_val(Yi, "wage", attr_type, "rais"))
+            stats.append(self.get_top_attr(Yp, "val_usd", attr_type, "hs", "secex"))
+            stats.append(self.get_top_attr(Yw, "val_usd", attr_type, "wld", "secex"))
+            stats.append(self.get_val(Yp, "val_usd", attr_type, "secex"))
+        elif attr_type == "bra":
             stats.append(self.get_val(Yb,"population",attr_type,"population"))
             stats.append(self.get_top_attr(Ybi, "num_emp", attr_type, "isic", "rais"))
             stats.append(self.get_top_attr(Ybo, "num_emp", attr_type, "cbo", "rais"))
@@ -110,16 +120,19 @@ class Stats(object):
                     'num_emp_growth_val':func.avg, 'num_emp_growth_val_5':func.avg,
                     'distance':func.avg, 'importance':func.avg,
                     'opp_gain':func.avg, 'required':func.avg, 'rca':func.avg}
-            
-            bras = self.parse_bras(self.id)
 
-            # filter query
-            if len(bras) > 1:
-                col_names = ["{0}_id".format(key)]
-                col_vals = [cast(agg[c](getattr(tbl, c)), Float) if c in agg else getattr(tbl, c) for c in col_names]
-                top = tbl.query.with_entities(*col_vals).filter(tbl.bra_id.in_([b["id"] for b in bras]))
+            if self.id == "all":
+                top = tbl.query
             else:
-                top = tbl.query.filter(tbl.bra_id == bras[0]["id"])
+                bras = self.parse_bras(self.id)
+
+                # filter query
+                if len(bras) > 1:
+                    col_names = ["{0}_id".format(key)]
+                    col_vals = [cast(agg[c](getattr(tbl, c)), Float) if c in agg else getattr(tbl, c) for c in col_names]
+                    top = tbl.query.with_entities(*col_vals).filter(tbl.bra_id.in_([b["id"] for b in bras]))
+                elif bras[0]["id"] != "all":
+                    top = tbl.query.filter(tbl.bra_id == bras[0]["id"])
         else:
             top = tbl.query.filter(getattr(tbl, attr_type+"_id") == self.id)
             
@@ -131,8 +144,8 @@ class Stats(object):
         percent = 0
         if top.first() != None:
             if isinstance(top.first(),tuple):
-                raise Exception("here")
                 obj = globals()[key.title()].query.get(top.first()[0])
+                percent = None
             else:
                 obj = getattr(top.first(),key)
                 num = float(getattr(top.first(),val_var))
@@ -159,7 +172,7 @@ class Stats(object):
             calc_var = None
         
         if attr_type == "bra":
-            agg = {'val_usd':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
+            agg = {'population':func.sum, 'val_usd':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
                     'val_usd_growth_pct':func.avg, 'val_usd_growth_pct_5':func.avg, 
                     'val_usd_growth_val':func.avg, 'val_usd_growth_val_5':func.avg,
                     'distance':func.avg, 'distance_wld':func.avg,
@@ -173,16 +186,27 @@ class Stats(object):
                     'num_emp_growth_val':func.avg, 'num_emp_growth_val_5':func.avg,
                     'distance':func.avg, 'importance':func.avg,
                     'opp_gain':func.avg, 'required':func.avg, 'rca':func.avg}
-            
-            bras = self.parse_bras(self.id)
-            
-            # filter query
-            if len(bras) > 1:
+
+            if self.id == "all":
                 col_names = [val_var]
                 col_vals = [cast(agg[c](getattr(tbl, c)), Float) if c in agg else getattr(tbl, c) for c in col_names]
-                total = tbl.query.with_entities(*col_vals).filter(tbl.bra_id.in_([b["id"] for b in bras]))
+                total = tbl.query.with_entities(*col_vals)
+                if dataset == "rais":
+                    total = total.filter(func.char_length(getattr(tbl,"isic_id")) == 1)
+                elif dataset == "secex":
+                    total = total.filter(func.char_length(getattr(tbl,"hs_id")) == 2)
+                elif dataset == "population":
+                    total = total.filter(func.char_length(getattr(tbl,"bra_id")) == 2)
             else:
-                total = tbl.query.filter(tbl.bra_id == bras[0]["id"])
+                bras = self.parse_bras(self.id)
+            
+                # filter query
+                if len(bras) > 1:
+                    col_names = [val_var]
+                    col_vals = [cast(agg[c](getattr(tbl, c)), Float) if c in agg else getattr(tbl, c) for c in col_names]
+                    total = tbl.query.with_entities(*col_vals).filter(tbl.bra_id.in_([b["id"] for b in bras]))
+                elif bras[0]["id"] != "all":
+                    total = tbl.query.filter(tbl.bra_id == bras[0]["id"])
         else:
             total = tbl.query.filter(getattr(tbl, attr_type+"_id") == self.id)
         
@@ -333,7 +357,10 @@ class Wld(db.Model, AutoSerialize, Stats):
         return title_case(getattr(self,"name_"+lang))
         
     def icon(self):
-        return "/static/img/icons/wld/wld_%s.png" % (self.id)
+        if self.id == "all":
+            return "/static/img/icons/wld/wld_sabra.png"
+        else:
+            return "/static/img/icons/wld/wld_%s.png" % (self.id)
         
     def __repr__(self):
         return '<Wld %r>' % (self.id_3char)
