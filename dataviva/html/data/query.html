@@ -304,7 +304,7 @@
   }
   
   // Download the data
-  d3.selectAll("#download").on(vizwhiz.evt.click, function(){
+  d3.selectAll("#download").on(d3plus.evt.click, function(){
     
 	var data_url = is.url().split("?")[0]
  	window.location = data_url + "?download"
@@ -313,7 +313,7 @@
 
 
   // Turning on button filters
-  d3.selectAll(".filter_button").on(vizwhiz.evt.click, function(){
+  d3.selectAll(".filter_button").on(d3plus.evt.click, function(){
     
     var classes = d3.select(this).attr("class");
     var add_container = d3.select("#" + this.id.split("_")[0] + "_add")
@@ -344,7 +344,7 @@
   var selector = Selector()
     .callback(add_filter);
 
-  d3.selectAll(".add_filter").on(vizwhiz.evt.click, function(){
+  d3.selectAll(".add_filter").on(d3plus.evt.click, function(){
     var selector_type = d3.select(this).attr("name")
     nd.call(selector.type(selector_type));
     dataviva.popover.show("#popover");
@@ -373,7 +373,7 @@
         .attr("class","filter_title")
         .text(obj.name)
       div.append("a")
-        .on(vizwhiz.evt.click, function(){ remove_filter(this) })
+        .on(d3plus.evt.click, function(){ remove_filter(this) })
         .append("i").attr("class", "icon-remove")
         
     }
@@ -550,7 +550,7 @@
             
           if(c.indexOf("_id") >= 0){
             var attr_type = c.split("_")[0]
-            col.attr("class",c+" link").on(vizwhiz.evt.click,function(){
+            col.attr("class",c+" link").on(d3plus.evt.click,function(){
               window.location = "/profiles/" + attr_type + "/" + d[c]
             })
           }
@@ -574,11 +574,11 @@
   update_table(CURRENT_DATASET);
   
   // attach click event listeners to build buttons
-  d3.select("#rais_go").on(vizwhiz.evt.click, function(){
+  d3.select("#rais_go").on(d3plus.evt.click, function(){
     CURRENT_DATASET = 'rais';
     update_table(CURRENT_DATASET);
   })
-  d3.select("#secex_go").on(vizwhiz.evt.click, function(){
+  d3.select("#secex_go").on(d3plus.evt.click, function(){
     CURRENT_DATASET = 'secex';
     update_table(CURRENT_DATASET);
   })

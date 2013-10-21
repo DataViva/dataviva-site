@@ -10,17 +10,17 @@
 
   <div id="video" class="lightbox">
     <h1>{% trans %}Visualizing the Economy of Minas Gerais and Brazil{% endtrans %}</h1>
-    {% trans %}DataViva is an innovative way to visualize data and transform it into knowledge to guide sustainable economic development.{% endtrans %}
+    {% trans %}DataViva is opening up data for the entire formal sector of the Brazilian economy through more than 100 million interactive visualization.{% endtrans %}
     <div class="welcome_bottom">
     {% trans %}Learn how DataViva was created:{% endtrans %}
-    <iframe width="348" height="195" src="https://www.youtube.com/embed/Fx1-jVLnlS4?modestbranding=1&rel=0&showinfo=0&autohide=1&color=white&theme=light{% if g.locale == 'pt' %}&hl=pt-br&cc_lang_pref=pt-br&cc_load_policy=1{% endif %}" frameborder="0" allowfullscreen></iframe>
+    <iframe width="308" height="173" src="https://www.youtube.com/embed/Fx1-jVLnlS4?modestbranding=1&rel=0&showinfo=0&autohide=1&color=white&theme=light{% if g.locale == 'pt' %}&hl=pt-br&cc_lang_pref=pt-br&cc_load_policy=1{% endif %}" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
 
   <div id="carousel" class="lightbox">
     <div class="pages"></div>
     <div class="centered">
-      <a class="decision">{% trans %}Click, filter and discover!{% endtrans %}</a>
+      <a class="decision">{% trans %}Learn More{% endtrans %}</a>
     </div>
   </div>
   
@@ -52,15 +52,33 @@
 <script>
 
   var carousel = [
-  {"id": 1, "en": "What are the industrial opportunities for Minas Gerais?", "pt": "Quais são as oportunidades econômicas de Minas Gerais?", "image": "sparks", "url": "/apps/builder/network/rais/mg/all/all/isic/"},
-  {"id": 2, "en": "Where are the Hi-Tech jobs in Minas Gerais?", "pt": "Onde estão os empregados em setores de alta tecnologia em Minas Gerais?", "image": "board", "url": "/apps/builder/geo_map/rais/mg/all/3132/bra/"},
-  {"id": 3, "en": "Minas Gerais: Home to the largest employment of Natural Science R&D.", "pt": "Minas Gerais: Estado com maior quantidade de empregados em P&D em Ciências Naturais", "image": "lab", "url": "/apps/builder/tree_map/rais/all/m7210/all/bra/"}
+  {"en": "Did you know that Minas Gerais is the largest employer of Natural Science R&D in Brazil?",
+  "pt": "Você sabia que Minas Gerais é o estado brasileiro com o maior número de empregados em P&D em Ciências Naturais?",
+  "image": "lab", "url": "/profiles/isic/m7210/", "id": 1},
+  {"en": "What are the export opportunities for Minas Gerais?",
+  "pt": "Quais são as oportunidades de exportação de Minas Gerais?",
+  "image": "sparks", "url": "/guide/bra/mg/opportunity/hs/", "id": 2},
+  {"en": "Did you know that Minas Gerais is the number one Brazilian exporter to China?",
+  "pt": "Você sabia que Minas Gerais é o estado brasileiro líder em exportações para a China?",
+  "image": "cars", "url": "/profiles/wld/aschn/", "id": 3},
+  {"en": "Did you know that Administrative Assistants are the most common occupation in Brazil?",
+  "pt": "Você sabia que a ocupação mais comum no Brasil são os Assistentes Administrativos?",
+  "image": "planning", "url": "/profiles/bra/all/", "id": 4},
+  {"en": "Did you know that Minas Gerais employs more primary school teachers than any other state in Brazil?",
+  "pt": "Você sabia que Minas Gerais é o estado brasileiro que emprega o maior número de professores primários?",
+  "image": "students", "url": "/profiles/cbo/2312/", "id": 5},
+  {"en": "Did you know that Minas Gerais employs more than 26 thousand doctors?",
+  "pt": "Você sabia que Minas Gerais tem mais de 26 mil médicos?",
+  "image": "doctor", "url": "/profiles/cbo/2251/", "id": 6},
+  {"en": "Did you know that Minas Gerais is the second largest exporter in Brazil?",
+  "pt": "Você sabia que Minas Gerais é o segundo maior estado exportador do Brasil?",
+  "image": "factory", "url": "/profiles/bra/all/", "id": 7}
   ]
     
   var app = 1, stopped = false
   
   d3.select("#carousel .decision")
-    .on(vizwhiz.evt.click,function(){
+    .on(d3plus.evt.click,function(){
       window.location = carousel[app-1].url
     })
   
@@ -75,7 +93,7 @@
       else return "#fff"
     })
     
-  pages.on(vizwhiz.evt.click,function(d){
+  pages.on(d3plus.evt.click,function(d){
     stopped = true
     show_app(d.id)
   })
@@ -110,7 +128,7 @@
       if (d.id == app) return "block"
       else return "none"
     })
-    // .on(vizwhiz.evt.click,function(d){
+    // .on(d3plus.evt.click,function(d){
     //   window.location = d.url
     // })
     

@@ -63,7 +63,7 @@ dataviva.popover.create({
 })
 
 d3.selectAll("i")
-	.on(vizwhiz.evt.click,function(){
+	.on(d3plus.evt.click,function(){
 		var app_type = d3.select(this).attr("rel"),
 			h = parseInt(d3.select("#popover").style("height")),
 			w = parseInt(d3.select("#popover").style("width"));

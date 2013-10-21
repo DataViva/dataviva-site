@@ -96,7 +96,7 @@
   });
   
   // submit form
-  d3.selectAll("#ask_form .submit").on(vizwhiz.evt.click, function(){
+  d3.selectAll("#ask_form .submit").on(d3plus.evt.click, function(){
     this.parentNode.submit()
     d3.event.preventDefault();
   })
@@ -122,8 +122,8 @@
       .append("span")
       .attr("class", "tag")
       .style("background-color", obj.color)
-      .style("color", vizwhiz.utils.text_color(obj.color))
-      .on(vizwhiz.evt.click, function(){
+      .style("color", d3plus.utils.text_color(obj.color))
+      .on(d3plus.evt.click, function(){
         this.remove()
         d3.event.stopPropagation();
       })
@@ -181,7 +181,7 @@
   
   
   
-  d3.select("#tag_input").on(vizwhiz.evt.click, function(){
+  d3.select("#tag_input").on(d3plus.evt.click, function(){
     
     if (d3.select("#multi_selector").empty()) {
     

@@ -389,7 +389,7 @@
       additionals["cp_bra_1_"+k] = averages[k]
     }
     
-    averages = vizwhiz.utils.merge(averages,additionals)
+    averages = d3plus.utils.merge(averages,additionals)
     
     var descs = {
       "distance": dataviva.format.text("distance_desc"),
@@ -406,8 +406,8 @@
       "unique_cbo": dataviva.format.text("unique_cbo_desc"),
     }
     
-    // Define global viz-whiz app parameters
-    app.viz = vizwhiz.viz()
+    // Define global D3plus app parameters
+    app.viz = d3plus.viz()
       .descs(descs)
       .name_array(["name","display_id"])
       .nesting_aggs(averages)
@@ -448,7 +448,7 @@
 
       d3.select("#ui_bottom").selectAll("*").remove();
       d3.select("#app_controls").selectAll("*").remove();
-      vizwhiz.tooltip.remove();
+      d3plus.tooltip.remove();
       last_depth = "bra_8"
       
       d3.json("/apps/embed/"+app.url)
@@ -876,7 +876,7 @@
         .highlight(null)
         .id_var(app.build.output+"_id")
         .error(false)
-        .data_source(footer[app.build.dataset])
+        .footer(footer[app.build.dataset])
         .solo(app.solos)
         .filter(app.filters)
         .sub_title(app.sub_title())
@@ -1655,7 +1655,7 @@
           .attr("id",build.url)
           .attr("class","output "+c+" icon "+build.app.type)
           .html(build.title)
-          .on(vizwhiz.evt.click,function(){
+          .on(d3plus.evt.click,function(){
             app.start(this.id)
           })
         
@@ -1800,10 +1800,10 @@
       d3.select("#leon_"+obj.title).select(".leon.radio.group")
         .attr("class","leon radio group alt_tooltip")
         .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
-        .on(vizwhiz.evt.over,function(){
+        .on(d3plus.evt.over,function(){
           dataviva.ui.tooltip("alt_tooltip",this)
         })
-        .on(vizwhiz.evt.out,function(){
+        .on(d3plus.evt.out,function(){
           dataviva.ui.tooltip("alt_tooltip",false)
         })
       
@@ -1814,10 +1814,10 @@
       var div = d3.select("#app_controls").append("div")
         .attr("class","ui_group alt_tooltip")
         .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
-        .on(vizwhiz.evt.over,function(){
+        .on(d3plus.evt.over,function(){
           dataviva.ui.tooltip("alt_tooltip",this,"center right")
         })
-        .on(vizwhiz.evt.out,function(){
+        .on(d3plus.evt.out,function(){
           dataviva.ui.tooltip("alt_tooltip",false)
         })
     
@@ -1850,10 +1850,10 @@
       var div = d3.select("#app_controls").append("div")
         .attr("class","ui_group alt_tooltip")
         .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
-        .on(vizwhiz.evt.over,function(){
+        .on(d3plus.evt.over,function(){
           dataviva.ui.tooltip("alt_tooltip",this)
         })
-        .on(vizwhiz.evt.out,function(){
+        .on(d3plus.evt.out,function(){
           dataviva.ui.tooltip("alt_tooltip",false)
         })
     
