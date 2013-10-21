@@ -3,7 +3,8 @@ from sqlalchemy import func
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, abort, make_response, Response
 from dataviva import db
-from dataviva.utils import exist_or_404, gzip_data, cached_query, parse_years
+from dataviva.utils import exist_or_404, gzip_data, cached_query, parse_years, \
+                            id_parse
 from dataviva.attrs.models import Bra, Hs, Wld
 from dataviva.secex.models import Yb_secex, Yw, Yp, Ybw, Ybp, Ypw, Ybpw
 
@@ -27,30 +28,6 @@ def per_request_callbacks(response):
         response.headers['Content-Encoding'] = 'gzip'
         response.headers['Content-Length'] = str(len(response.data))
     return response
-
-''' Given a "bra" string from URL, turn this into an array of Bra
-    objects'''
-def parse_bras(bra_str):
-    if ".show." in bra_str:
-        # the '.show.' indicates that we are looking for a specific nesting
-        bar_id, nesting = bra_str.split(".show.")
-        # filter table by requested nesting level
-        bras = Bra.query \
-                .filter(Bra.id.startswith(bra_id)) \
-                .filter(func.char_length(Attr.id) == nesting).all()
-        bras = [b.serialize() for b in bras]
-    elif "." in bra_str:
-        # the '.' indicates we are looking for bras within a given distance
-        bra_id, distance = bra_str.split(".")
-        bras = exist_or_404(Bra, bra_id)
-        neighbors = bras.get_neighbors(distance)
-        bras = [g.bra.serialize() for g in neighbors]
-    else:
-        # we allow the user to specify bras separated by '+'
-        bras = bra_str.split("_")
-        # Make sure the bra_id requested actually exists in the DB
-        bras = [exist_or_404(Bra, bra_id).serialize() for bra_id in bras]
-    return bras
 
 def get_eci(bra):
     ecis = {}
@@ -128,7 +105,7 @@ def make_query(data_table, url_args, **kwargs):
                         .filter(data_table.bra_id.startswith(bra_filter))
         elif "show" not in kwargs["bra_id"]:
             # otherwise we have been given specific bra(s)
-            ret["location"] = parse_bras(kwargs["bra_id"])
+            ret["location"] = id_parse(Bra, kwargs["bra_id"])
             ret["eci"] = get_eci(ret["location"])
             # filter query
             if len(ret["location"]) > 1:
@@ -203,13 +180,13 @@ def make_query(data_table, url_args, **kwargs):
                 o, direction = o.split(".")
             if o == "bra":
                 # order by bra
-                query = query.join(Bra).order_by(Bra.name_en)
+                query = query.join(Bra).order_by( getattr(Bra.name_en, direction)() )
             elif o == "hs":
                 # order by product
-                query = query.join(Hs).order_by(Hs.name_en)
+                query = query.join(Hs).order_by( getattr(Hs.name_en, direction)() )
             elif o == "wld":
                 # order by wld
-                query = query.join(Wld).order_by(Wld.name_en)
+                query = query.join(Wld).order_by( getattr(Wld.name_en, direction)() )
             else:
                 query = query.order_by(o + " " + direction)
 
@@ -218,13 +195,15 @@ def make_query(data_table, url_args, **kwargs):
 
     # lastly we want to get the actual data held in the table requested
     if "location" in ret and len(ret["location"]) > 1 and aggregate:
-        # raise Exception(unique_keys)
+        # raise Exception(limit, offset)
         for uk in unique_keys:
             query = query.group_by(getattr(data_table, uk))
         # raise Exception(join["columns"].keys())
+        if limit:
+            query = query.limit(limit).offset(offset)
         ret["data"] = [dict(zip(col_names, d)) for d in query.all()]
         # raise Exception(col_names, query.all()[0])
-        # raise Exception(ret["data"])
+        # raise Exception(len(ret["data"]))
     elif join:
         ret["data"] = []
         if limit:
@@ -244,7 +223,7 @@ def make_query(data_table, url_args, **kwargs):
         return query.all()
     else:
         ret["data"] = [d.serialize() for d in query.all()]
-
+    
     if download is not None:
         header = [str(c).split(".")[1] for c in data_table.__table__.columns]
         def generate():

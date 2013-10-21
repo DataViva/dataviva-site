@@ -40,7 +40,7 @@ function infinite_scroll(selection){
         if(isNaN(offset)){
           offset = 0;
         }
-        console.log(fetching, offset, loading_div_y, innerHeight, refresh)
+        // console.log(fetching, offset, loading_div_y, innerHeight, refresh)
         if ((!fetching && offset >= 0 && loading_div_y < innerHeight) || refresh) {
           fetch();
         }
@@ -76,7 +76,6 @@ function infinite_scroll(selection){
       function display(error, new_data) {
         
         activities = new_data.activities || new_data.data;
-        console.log(activities)
   
         // we're obviously no longer fetching
         fetching = false;

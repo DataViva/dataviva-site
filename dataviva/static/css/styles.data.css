@@ -51,23 +51,11 @@ body.query #fullscreen {
   margin: 6px 0px;
 }
 
-#table_header {
-  padding-left: 340px;
-  margin-top: 3px;
-  overflow-x: auto;
-}
-
-#table_header th {
-  -webkit-transition: none;
-          transition: none;
-}
-
-#table_header::-webkit-scrollbar { 
-  display: none; 
-}
-
 .data_table {
-  width: 100%;
+  background-color: white;
+  margin: 20px 0px;
+  margin-left: 360px;
+  white-space: nowrap;
 }
 
 #table_container {
@@ -82,7 +70,7 @@ body.query #fullscreen {
   padding-top: 6px;
   position: fixed;
   text-align: center;
-  top: 135px;
+  top: 80px;
   width: 300px;
 }
 
@@ -174,4 +162,11 @@ body.query #fullscreen {
 .filter_box .add_filter:hover {
   background-color: rgba(0,0,0,0.1);
   color: #666;
+}
+
+iframe {
+  display: block;
+  float: left;
+  height: 100%;
+  width: 100%;
 }

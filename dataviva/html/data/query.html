@@ -6,25 +6,10 @@
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.data.css" />
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.tables.css" />
   
 {% endblock %}
 
 {% block body %}
-
-<div id="dynamic_header">
-  
-  <div class="data_table">
-    <div id="table_header">
-      <table>
-        <thead>
-          <tr></tr>
-        </thead>
-      </table>
-    </div>
-  </div>
-  
-</div>
 
 <div id="filter_selects" class="lightbox">
     
@@ -209,19 +194,10 @@
     
 </div>
 
-<div class="data_table">
-  
-  <div id="table_container">
-    <table>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-  
-</div>
+<div class="data_table"></div>
 
 <script src="/static/js/utils/utils.selector.js"></script>
-<script src="/static/js/utils/utils.infinite_scroll.js"></script>
+<!-- <script src="/static/js/utils/utils.infinite_scroll.js"></script> -->
 <script type="text/javascript">
 
   leon("$dataset").color(dataviva.color)
@@ -280,7 +256,7 @@
                 
                 ]
 
-  var is = infinite_scroll().format_items(item_formatter);
+  // var is = infinite_scroll().format_items(item_formatter);
 
   // add icons to tags!
   d3.selectAll(".list_icon")
@@ -452,11 +428,17 @@
       api_url += "/?filter=val_usd>0"
     }
     
-    update_url(api_url)
+    // update_url(api_url)
+    api_url = "/data/table" + api_url
+    console.log(api_url)
     
-    d3.select("#table_container").selectAll("tbody > tr").remove()
-    d3.select("#table_container")
-      .call(is.url(api_url).offset(0))
+    d3.select(".data_table")
+      .style("width", window.innerWidth - 400+"px")
+      .style("height", window.innerHeight - 200+"px")
+      .selectAll("iframe").remove()
+    
+    d3.select(".data_table").append("iframe")
+      .attr("src", api_url)
 
     // prevent page from submitting form
     if(d3.event) d3.event.preventDefault();
@@ -486,93 +468,8 @@
       
   }
   
-  function item_formatter(container_el, dataset){
-  
-    // the columns we'd like to display
-    var columns = d3.keys(dataset[0]).concat(d3.keys(dataset[dataset.length-1]));
-    columns = columns.filter(function(itm, i){
-        return columns.indexOf(itm)== i; 
-    });
-    
-    var ordered_columns = COLUMNS.filter(function(i) {return (columns.indexOf(i) > -1);});
-    
-    
-    var selection = d3.select(container_el)
-    selection.selectAll('table').data([0]).enter().append('table');
-    var table = selection.select('table');
-    
-    table.selectAll('tbody').data([0]).enter().append('tbody');
-    var tbody = table.select('tbody');
-    
-    // enter new header rows
-    var th = d3.select("table > thead > tr")
-  
-    th.selectAll("th").remove()
-    var ths = th.selectAll("th")
-      .data(ordered_columns)
-    
-    var min_widths = {}
-    ths.enter().append("th")
-      .attr("class",function(d){return d})
-      .text(function(d) { return dataviva.format.text(d)})
-      .each(function(d) {
-        min_widths[d] = parseFloat(d3.select(this).style("width"),10)
-      })
-    
-    // create a row for each object in the data
-    var rows = tbody.selectAll("tr").data(dataset, JSON.stringify)
-    
-    rows.enter().append("tr")
-    
-    rows
-      .each(function(d){
-        var self = d3.select(this)
-        ordered_columns.forEach(function(c){
-          
-          if (typeof d[c] == "string") {
-            var html = dataviva.format.text(d[c],c)
-          }
-          else if (typeof d[c] == "number") {
-            var html = dataviva.format.number(d[c],c)
-          }
-          else if (!d[c]) {
-            var html = " &mdash; "
-          }
-          else {
-            var html = d[c]
-          }
-          
-          var col = self.append("td")
-            .attr("class",c)
-            .html(html)
-            
-          col.style("min-width",min_widths[c]+"px")
-            
-          if(c.indexOf("_id") >= 0){
-            var attr_type = c.split("_")[0]
-            col.attr("class",c+" link").on(vizwhiz.evt.click,function(){
-              window.location = "/profiles/" + attr_type + "/" + d[c]
-            })
-          }
-          
-        })
-      })
-    
-    var col_widths = {}
-    tbody.select("tr").selectAll("td")
-      .each(function(d){
-        var key = this.className.split(" ")[0],
-            width = parseFloat(d3.select(this).style("width"),10)
-        col_widths[key] = width
-      })
-    
-    ths.style("width",function(d){ return col_widths[d]+"px" })
+  update_table(CURRENT_DATASET)
 
-  }
-  
-  // default load page with data
-  update_table(CURRENT_DATASET);
-  
   // attach click event listeners to build buttons
   d3.select("#rais_go").on(vizwhiz.evt.click, function(){
     CURRENT_DATASET = 'rais';
@@ -581,16 +478,6 @@
   d3.select("#secex_go").on(vizwhiz.evt.click, function(){
     CURRENT_DATASET = 'secex';
     update_table(CURRENT_DATASET);
-  })
-  
-  d3.selectAll(".data_table").style("width",window.innerWidth+"px")
-  
-  // Scroll Header with Body, and vice-versa
-  d3.select("#table_container").on("scroll",function(){
-    d3.select("#table_header").node().scrollLeft = this.scrollLeft
-  })
-  d3.select("#table_header").on("scroll",function(){
-    d3.select("#table_container").node().scrollLeft = this.scrollLeft
   })
 
 </script>

@@ -4,7 +4,8 @@ from sqlalchemy.sql.expression import cast
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, make_response, Response
 from dataviva import db
-from dataviva.utils import exist_or_404, gzip_data, cached_query, parse_years, crossdomain
+from dataviva.utils import exist_or_404, gzip_data, cached_query, parse_years, \
+                            crossdomain, id_parse
 from dataviva.rais.models import Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio
 from dataviva.attrs.models import Bra, Isic, Cbo
 
@@ -41,30 +42,6 @@ def get_unique_cbo(bra):
     for yb in ybs.all():
         unique_cbos[yb.year] = yb.unique_cbo
     return unique_cbos
-
-''' Given a "bra" string from URL, turn this into an array of Bra
-    objects'''
-def parse_bras(bra_str):
-    if ".show." in bra_str:
-        # the '.show.' indicates that we are looking for a specific nesting
-        bar_id, nesting = bra_str.split(".show.")
-        # filter table by requested nesting level
-        bras = Bra.query \
-                .filter(Bra.id.startswith(bra_id)) \
-                .filter(func.char_length(Attr.id) == nesting).all()
-        bras = [b.serialize() for b in bras]
-    elif "." in bra_str:
-        # the '.' indicates we are looking for bras within a given distance
-        bra_id, distance = bra_str.split(".")
-        bras = exist_or_404(Bra, bra_id)
-        neighbors = bras.get_neighbors(distance)
-        bras = [g.bra.serialize() for g in neighbors]
-    else:
-        # we allow the user to specify bras separated by '_'
-        bras = bra_str.split("_")
-        # Make sure the bra_id requested actually exists in the DB
-        bras = [exist_or_404(Bra, bra_id).serialize() for bra_id in bras]
-    return bras
 
 agg = {'wage':func.sum, 'num_emp':func.sum, 'num_est':func.sum,
         'eci':func.avg, 'eci_wld':func.avg, 'unique_isic':func.avg, 'unique_cbo':func.avg,
@@ -134,7 +111,7 @@ def get_query(data_table, url_args, **kwargs):
                         .filter(data_table.bra_id.startswith(bra_filter))
         elif "show" not in kwargs["bra_id"]:
             # otherwise we have been given specific bra(s)
-            ret["location"] = parse_bras(kwargs["bra_id"])
+            ret["location"] = id_parse(Bra, kwargs["bra_id"])
             ret["unique_isic"] = get_unique_isic(ret["location"])
             ret["unique_cbo"] = get_unique_cbo(ret["location"])
             # filter query
@@ -169,9 +146,11 @@ def get_query(data_table, url_args, **kwargs):
             query = query.filter(func.char_length(data_table.isic_id) == ret["isic_level"])
         elif "show" not in kwargs["isic_id"]:
             # we allow the user to specify industries separated by '_'
-            ret["industry"] = kwargs["isic_id"].split("_")
+            # ret["industry"] = kwargs["isic_id"].split("_")
             # Make sure the isic_id requested actually exists in the DB
-            ret["industry"] = [exist_or_404(Isic, isic_id).serialize() for isic_id in ret["industry"]]
+            # ret["industry"] = [exist_or_404(Isic, isic_id).serialize() for isic_id in ret["industry"]]
+            
+            ret["industry"] = id_parse(Isic, kwargs["isic_id"])
             # filter query
             if len(ret["industry"]) > 1:
                 query = query.filter(data_table.isic_id.in_([i["id"] for i in ret["industry"]]))
@@ -209,21 +188,23 @@ def get_query(data_table, url_args, **kwargs):
                 o, direction = o.split(".")
             if o == "bra":
                 # order by bra
-                query = query.join(Bra).order_by(Bra.name_en)
+                query = query.join(Bra).order_by( getattr(Bra.name_en, direction)() )
             elif o == "isic":
                 # order by isic
-                query = query.join(Isic).order_by(Isic.name_en)
+                query = query.join(Isic).order_by( getattr(Isic.name_en, direction)() )
             elif o == "cbo":
                 # order by cbo
-                query = query.join(Cbo).order_by(Cbo.name_en)
+                query = query.join(Cbo).order_by( getattr(Cbo.name_en, direction)() )
             else:
-                query = query.order_by(getattr(data_table, o) + " " + direction)
+                query = query.order_by( getattr(getattr(data_table, o), direction)() )
     
     # lastly we want to get the actual data held in the table requested
     if "location" in ret and len(ret["location"]) > 1 and aggregate:
         for uk in unique_keys:
             query = query.group_by(getattr(data_table, uk))
         ret["data"] = []
+        if limit:
+            query = query.limit(limit).offset(offset)
         for d in query.all():
             d = dict(zip(col_names, d))
             d["num_emp"] = int(d["num_emp"]) if d["num_emp"] else d["num_emp"]
