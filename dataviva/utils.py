@@ -261,3 +261,36 @@ def crossdomain(origin="*", methods=None, headers=['Content-Type','x-requested-w
         f.required_methods = ['OPTIONS']
         return update_wrapper(wrapped_function, f)
     return decorator
+
+''' Given the ID string from URL of a BRA, ISIC, CBO, HS or WLD returns an 
+    array of said objects'''
+def id_parse(Attr, id):
+    items = []
+    
+    from dataviva.attrs.models import Bra, Isic, Cbo, Hs, Wld
+    if ".show." in id:
+        # the '.show.' indicates that we are looking for a specific nesting
+        id, nesting = id.split(".show.")
+        # filter table by requested nesting level
+        attrs = Attr.query \
+                .filter(Attr.id.startswith(id)) \
+                .filter(func.char_length(Attr.id) == nesting).all()
+        items = [a.serialize() for a in attrs]
+    elif "show." in id:
+        nesting = id.split("show.")[1]
+        query = Attr.query \
+                .filter(func.char_length(Attr.id) == nesting).all()
+        items = [a.serialize() for a in attrs]
+    elif "." in id and Attr == Bra:
+        # the '.' indicates we are looking for bras within a given distance
+        bra_id, distance = id.split(".")
+        bras = exist_or_404(Bra, bra_id)
+        neighbors = bras.get_neighbors(distance)
+        items = [g.bra.serialize() for g in neighbors]
+    else:
+        # we allow the user to specify bras separated by '_'
+        attrs = id.split("_")
+        # Make sure the bra_id requested actually exists in the DB
+        items = [exist_or_404(Attr, id).serialize() for id in attrs]
+
+    return items

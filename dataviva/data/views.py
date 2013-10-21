@@ -113,6 +113,11 @@ def query(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
         data_type = data_type,
         bra=bra, isic=isic, cbo=cbo, hs=hs, wld=wld)
 
+@mod.route('/table/')
+@mod.route('/table/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
+def table(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
+    return render_template("data/table.html")
+
 @mod.route('/classifications/')
 @mod.route('/classifications/<attr>/')
 @mod.route('/classifications/<attr>/<depth>/')

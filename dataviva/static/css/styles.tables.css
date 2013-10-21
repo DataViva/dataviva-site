@@ -12,14 +12,16 @@ table thead {
 }
 
 table th {
+  background: white;
   color: #aaa;
   display: inline-block;
   font-size: 14px;
   font-weight: lighter;
   padding: 9px;
   text-align: left;
-  -webkit-transition: width .2s;
-          transition: width .2s;
+  white-space: normal;
+/*  -webkit-transition: width .2s;
+          transition: width .2s;*/
 }
 
 body.classifications table th,
@@ -32,6 +34,7 @@ table thead tr {
 }
 
 table tbody tr {
+  background: white;
   border-bottom: solid 1px #ccc;
   color: #888;
   font-size: 14px;
@@ -84,3 +87,51 @@ table td.icon > div{
   width: 29px;
   height: 29px;
 }
+
+
+#dt_query table.body {
+  margin-top: 30px;
+}
+#dt_query table.header {
+  background: white;
+}
+#dt_query table.header thead {
+  background: white;
+  position: fixed;
+  top: 0;
+}
+#dt_query table td{
+  background: white;
+}
+#dt_query table td,
+#dt_query table th{
+  width: 100px;
+}
+#dt_query table thead tr{
+  border-bottom: solid #ccc 1px;
+}
+
+#dt_query #sticky {
+  border: solid 1px #efefef;
+  position: absolute;
+  left: 0;
+  width: 136px;
+  top: 0;
+  z-index: 1;
+  -webkit-box-shadow: 3px 0px 3px rgba(0,0,0,0.25);
+          box-shadow: 3px 0px 3px rgba(0,0,0,0.25);
+}
+#dt_query #data {
+  margin-left: 235px;
+  overflow-x: scroll;
+  width: 725px;
+  z-index: 0;
+}
+table { table-layout: fixed; border-collapse: collapse; border-spacing: 0; overflow: hidden;}
+
+table .year     { width: 50px !important; }
+table .bra_id   { width: 70px !important; }
+table .isic_id  { width: 70px !important; }
+table .cbo_id   { width: 70px !important; }
+table .hs_id    { width: 70px !important; }
+table .wld_id   { width: 70px !important; }

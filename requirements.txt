@@ -28,3 +28,6 @@ flask-sqlalchemy
 # WARNING: Must have Redis server installed!
 redis
 hiredis
+
+# Better JSON serializer that knows how to handle Decimal types
+simplejson
