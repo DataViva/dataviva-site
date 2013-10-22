@@ -25,9 +25,7 @@ body {
   margin: 0px 5px;
   background-color: #ffffff;
   position: absolute;
-  -webkit-transition: top 0.6s;
-     -moz-transition: top 0.6s;
-          transition: top 0.6s;
+  top: 0px;
 }
 
 div.loading {
@@ -71,9 +69,6 @@ div#builder {
   left: 0px;
   position: absolute;
   text-align: left;
-  -webkit-transition: top 0.6s;
-     -moz-transition: top 0.6s;
-          transition: top 0.6s;
   width: 100%;
   -webkit-user-select: none;
 }

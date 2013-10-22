@@ -367,7 +367,6 @@ d3plus.tooltip.create = function(params) {
       else {
         var istooltip = false
       }
-      console.log(!ischild(tooltip.node(),target), !ischild(params.mouseevents,target), !istooltip)
       if (!target || (!ischild(tooltip.node(),target) && !ischild(params.mouseevents,target) && !istooltip)) {
         oldout(d3.select(params.mouseevents).datum())
         d3plus.tooltip.close()
@@ -1335,11 +1334,10 @@ d3plus.viz = function() {
         if (vars.dev) console.log("[d3plus] Calculating Color Range")
         
         var data_range = []
+        vars.color_domain = null
         
         if (vars.type == "tree_map") {
-        
-          vars.color_domain = [0,0]
-        
+          
           function check_child_colors(c) {
             if (c.children) {
               c.children.forEach(function(c2){
@@ -1372,21 +1370,22 @@ d3plus.viz = function() {
         if (typeof data_range[0] == "number") {
           data_range.sort(function(a,b) {return a-b})
           vars.color_domain = [d3.quantile(data_range,0.1),d3.quantile(data_range,0.9)]
+          var new_range = vars.color_range.slice(0)
           if (vars.color_domain[0] < 0 && vars.color_domain[1] > 0) {
-            vars.color_domain[2] = vars.color_domain[1]
+            vars.color_domain.push(vars.color_domain[1])
             vars.color_domain[1] = 0
           }
           else if (vars.color_domain[1] > 0) {
             vars.color_domain[0] = 0
-            vars.color_domain.unshift(0)
+            new_range.splice(0,1)
           }
           else if (vars.color_domain[0] < 0) {
             vars.color_domain[1] = 0
-            vars.color_domain.push(0)
+            new_range.pop()
           }
           vars.color_scale
             .domain(vars.color_domain)
-            .range(vars.color_range)
+            .range(new_range)
         }
         
       }
@@ -1396,6 +1395,7 @@ d3plus.viz = function() {
       
       vars.svg_enter.append("g")
         .attr("class","footer")
+        .attr("transform","translate(0,"+vars.svg_height+")")
 
       // Create titles
       vars.margin.top = 0
@@ -1569,7 +1569,7 @@ d3plus.viz = function() {
   }
 
   nest = function(flat_data,levels) {
-  
+    
     var flattened = [];
     var nested_data = d3.nest();
     
@@ -1591,9 +1591,8 @@ d3plus.viz = function() {
           }
           
           var nest_obj = find_variable(leaves[0],nest_key)
-          // var nest_obj = vars.attrs[leaves[0][vars.id_var]][nest_key]
-          
-          to_return[vars.id_var] = nest_obj[vars.id_var]
+          if (typeof nest_obj === "object") to_return[vars.id_var] = nest_obj[vars.id_var]
+          else to_return[vars.id_var] = nest_obj
           
           if (nest_obj.display_id) to_return.display_id = nest_obj.display_id;
           
@@ -1602,10 +1601,10 @@ d3plus.viz = function() {
               to_return[key] = d3[vars.nesting_aggs[key]](leaves, function(d){ return d[key]; })
             }
             else {
-              if ([vars.year_var,vars.id_var,"icon"].indexOf(key) >= 0) {
+              if ([vars.year_var,"icon"].indexOf(key) >= 0 || (key == vars.id_var && !to_return[vars.id_var])) {
                 to_return[key] = leaves[0][key];
               }
-              else if (vars.keys[key] === "number") {
+              else if (vars.keys[key] === "number" && key != vars.id_var) {
                 to_return[key] = d3.sum(leaves, function(d){ return d[key]; })
               }
               else if (key == vars.color_var) {
@@ -1821,7 +1820,7 @@ d3plus.viz = function() {
         })
       })
       
-    source.exit().transition().duration(d3plus.evt.timing)
+    source.exit().transition().duration(d3plus.timing)
       .attr("opacity",0)
       .remove()
       
@@ -1833,7 +1832,7 @@ d3plus.viz = function() {
       vars.margin.bottom = 0
     }
     
-    d3.select("g.footer")
+    d3.select("g.footer").transition().duration(d3plus.timing)
       .attr("transform","translate(0,"+(vars.svg_height-vars.margin.bottom)+")")
     
   }
@@ -2068,7 +2067,7 @@ d3plus.viz = function() {
   
   find_color = function(id) {
     var color = find_variable(id,vars.color_var)
-    if (!color && vars.color_domain == [0,0]) color = 0
+    if (!color && vars.color_domain instanceof Array) color = 0
     else if (!color) color = d3plus.utils.rand_color()
     if (typeof color == "string") return color
     else return vars.color_scale(color)

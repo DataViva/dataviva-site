@@ -60,9 +60,9 @@ function Key() {
               else key_filters.splice(key_filters.indexOf(d.id),1)
               if (key_solos.indexOf(d.id) >= 0) {
                 key_solos.splice(key_solos.indexOf(d.id),1)
-                app.update("solo",key_solos)
+                app.update(key_solos,"solo")
               }
-              app.update("filter",key_filters)
+              app.update(key_filters,"filter")
               reset_check()
             }
             
@@ -71,9 +71,9 @@ function Key() {
               else key_solos.splice(key_solos.indexOf(d.id),1)
               if (key_filters.indexOf(d.id) >= 0) {
                 key_filters.splice(key_filters.indexOf(d.id),1)
-                app.update("filter",key_filters)
+                app.update(key_filters,"filter")
               }
-              app.update("solo",key_solos)
+              app.update(key_solos,"solo")
               reset_check()
             }
             
@@ -150,8 +150,8 @@ function Key() {
         .on(d3plus.evt.click,function(){
           key_filters = []
           key_solos = []
-          app.update("filter",key_filters)
-          app.update("solo",key_solos)
+          app.update(key_filters,"filter")
+          app.update(key_solos,"solo")
           d3plus.tooltip.remove("key")
           reset_check()
         })

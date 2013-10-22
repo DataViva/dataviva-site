@@ -698,21 +698,17 @@
             .attr("id","year_slider")
             
           if (app.allyears) {
-            year.append("input")
-              .attr("type","range")
-              .attr("onchange","app.update('year',this.value)")
-              .attr("id","year")
-              .attr("name","year")
-              .attr("min",ui.values[0]+"")
-              .attr("max",ui.values[ui.values.length-1]+"")
-              .attr("value",app.vars.year+"")
-              .attr("step","1")
-        
-            year.append("label")
-              .attr("for","year")
-              .html(dataviva.format.text("year"))
-          
-            leon("#year").color(app.build.app.color)
+            
+            leon({
+              "type": "range",
+              "event": app.update,
+              "id": "year",
+              "data": {"min": ui.values[0], "max": ui.values[ui.values.length-1], "step": 1},
+              "default": app.vars.year,
+              "parent": document.getElementById("year_slider"),
+              "label": dataviva.format.text("year")
+            }).color(app.build.app.color)
+            
           }
           else {
             var b = year.append("input")
@@ -789,30 +785,34 @@
           }
         
           if (ui.values.length > 1 && app.vars.builder != "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs"))) {
-            // if (ui.values.length == 2 && ui.values.indexOf("true") >= 0 && ui.values.indexOf("false") >= 0) {
-            //   builder.checkbox({
-            //     "data": ui.values,
-            //     "title": title,
-            //     "initial": app.vars[ui.type],
-            //     "type": ui.type
-            //   })
-            // }
-            if (ui.values.length <= 4) {
-              builder.radios({
-                "data": ui.values,
-                "title": title,
-                "initial": app.vars[ui.type],
-                "type": ui.type
+
+            var leon_type = ui.values.length <= 4 ? "radio" : "select"
+            var leon_data = {}
+            ui.values.forEach(function(v){
+              leon_data[v] = dataviva.format.text(v)
+            })
+            
+            var ui_div = d3.select("#app_controls").append("div")
+              .attr("class","ui_group alt_tooltip")
+              .attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
+              .on(d3plus.evt.over,function(){
+                if (leon_type == "select") dataviva.ui.tooltip("alt_tooltip",this,"center right")
+                else dataviva.ui.tooltip("alt_tooltip",this)
               })
-            }
-            else {
-              builder.dropdown({
-                "data": ui.values,
-                "title": title,
-                "initial": app.vars[ui.type],
-                "type": ui.type
+              .on(d3plus.evt.out,function(){
+                dataviva.ui.tooltip("alt_tooltip",false)
               })
-            }
+            
+            leon({
+              "type": leon_type,
+              "data": leon_data,
+              "id": title,
+              "default": app.vars[ui.type],
+              "label": dataviva.format.text(title),
+              "parent": ui_div.node(),
+              "event": app.update
+            }).color(app.build.app.color)
+            
           }
           
         }
@@ -1033,8 +1033,8 @@
       
     }
     
-    app.update = function(type,value) {
-      
+    app.update = function(value,type) {
+      console.log(value,type)
       if (type == "solo" || type == "filter") {
         
         app[type+"s"] = value
@@ -1477,6 +1477,15 @@
             .title_width(app.title_width)
             .title_height(app.title_height)
           )
+        
+      if (!app.first_load) {
+        d3.select("#app")
+          .style("-webkit-transition","top 0.6s, height 0.6s")
+          .style("transition","top 0.6s, height 0.6s")
+        d3.select("#builder")
+          .style("-webkit-transition","top 0.6s")
+          .style("transition","top 0.6s")
+      }
       
     }
     
@@ -1761,116 +1770,6 @@
         
         app.start(match)
       }
-      
-    }
-    
-    builder.radios = function(obj) {
-      
-      var div = d3.select("#app_controls").append("div")
-        .attr("class","ui_group")
-        
-      div.append("legend")
-        .attr("id",obj.title)
-        .html(dataviva.format.text(obj.title))
-        
-      obj.data.forEach(function(v,i){
-        
-        var button = div.append("input")
-          .attr("type","radio")
-          .attr("name",obj.title)
-          .attr("value",obj.title+"+"+v)
-          .attr("id",obj.title+"+"+v)
-          .attr("onclick","app.update('"+obj.type+"',this.value.split('+')[1])")
-          
-        if (obj.title == "depth") var text = dataviva.format.text(v+"_plural")
-        else var text = dataviva.format.text(v)
-        
-        div.append("label")
-          .attr("for",obj.title+"+"+v)
-          .text(text)
-      
-        if (v == obj.initial) {
-          button.node().checked = true
-        }
-        
-      })
-      
-      leon("$"+obj.title).color(app.build.app.color)
-      
-      d3.select("#leon_"+obj.title).select(".leon.radio.group")
-        .attr("class","leon radio group alt_tooltip")
-        .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
-        .on(d3plus.evt.over,function(){
-          dataviva.ui.tooltip("alt_tooltip",this)
-        })
-        .on(d3plus.evt.out,function(){
-          dataviva.ui.tooltip("alt_tooltip",false)
-        })
-      
-    }
-    
-    builder.dropdown = function(obj) {
-      
-      var div = d3.select("#app_controls").append("div")
-        .attr("class","ui_group alt_tooltip")
-        .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
-        .on(d3plus.evt.over,function(){
-          dataviva.ui.tooltip("alt_tooltip",this,"center right")
-        })
-        .on(d3plus.evt.out,function(){
-          dataviva.ui.tooltip("alt_tooltip",false)
-        })
-    
-      div.append("label")
-        .attr("for",obj.title)
-        .html(dataviva.format.text(obj.title))
-    
-      var select = div.append("select")
-        .attr("id",obj.title)
-        .attr("onchange","app.update('"+obj.type+"',this.value.split('+')[1])")
-        
-      obj.data.forEach(function(v,i){
-        
-        var option = select.append("option")
-          .attr("value",obj.title+"+"+v)
-          .text(dataviva.format.text(v))
-      
-        if (v == obj.initial) {
-          option.node().selected = true
-        }
-        
-      })
-
-      leon("#"+obj.title).color(app.build.app.color)
-      
-    }
-    
-    builder.checkbox = function(obj) {
-      
-      var div = d3.select("#app_controls").append("div")
-        .attr("class","ui_group alt_tooltip")
-        .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
-        .on(d3plus.evt.over,function(){
-          dataviva.ui.tooltip("alt_tooltip",this)
-        })
-        .on(d3plus.evt.out,function(){
-          dataviva.ui.tooltip("alt_tooltip",false)
-        })
-    
-      div.append("label")
-        .attr("for",obj.title)
-        .html(dataviva.format.text(obj.title))
-    
-      var checkbox = div.append("input")
-        .attr("type","checkbox")
-        .attr("id",obj.title)
-        .attr("onclick","app.update('"+obj.type+"',this.checked)")
-        
-      if (obj.initial == "true") {
-        checkbox.node().checked = true
-      }
-
-      leon("#"+obj.title).color(app.build.app.color)
       
     }
     
