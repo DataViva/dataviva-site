@@ -110,11 +110,14 @@ body.query #fullscreen {
 .filter_box span.filter_title {
   display: inline-block;
   margin: 1px 6px;
-  width: 73%;
+/*  width: 73%;*/
 }
 
 .filter_box span.filler {
   color: #888;
+}
+.filter_box span.filler.hide {
+  display: none !important;
 }
 
 .filter_box .filter_item {
@@ -169,4 +172,13 @@ iframe {
   float: left;
   height: 100%;
   width: 100%;
+}
+
+#columns_add a {
+  color: #aaa;
+  display: block;
+  text-align: left;
+}
+#columns_add a.active {
+  color: #000;
 }

@@ -111,7 +111,7 @@ function infinite_scroll(selection){
         // maybe the user has a super dooper tall screen (or high resolution)
         // so we need to check if we're already at the bottem, even though we
         // just added new items
-        // setTimeout(maybe_fetch, 50);
+        setTimeout(maybe_fetch, 50);
         
       }
       

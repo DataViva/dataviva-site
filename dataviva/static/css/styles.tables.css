@@ -127,6 +127,10 @@ table td.icon > div{
   width: 725px;
   z-index: 0;
 }
+#dt_query #data th {
+  color: #000;
+  cursor: pointer;
+}
 table { table-layout: fixed; border-collapse: collapse; border-spacing: 0; overflow: hidden;}
 
 table .year     { width: 50px !important; }
