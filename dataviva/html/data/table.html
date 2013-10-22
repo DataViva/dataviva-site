@@ -171,7 +171,7 @@ var oTable;
       .append("a")
         .attr("href", "#")
         .text(function(d) { return dataviva.format.text(d)})
-        .on(vizwhiz.evt.click, function(d){
+        .on(d3plus.evt.click, function(d){
           var direction = d3.select(this).attr("class");
           if (direction == "desc") { direction = "asc"; }
           else if (direction == "asc") { direction = ""; }
@@ -235,7 +235,7 @@ var oTable;
     
     ths
       .text(function(d) { return dataviva.format.text(d)})    
-      .on(vizwhiz.evt.click, function(d){
+      .on(d3plus.evt.click, function(d){
         var direction = d3.select(this).attr("class");
         if (direction == "desc") { direction = "asc"; }
         else if (direction == "asc") { direction = ""; }
