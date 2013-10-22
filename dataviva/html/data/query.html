@@ -52,13 +52,19 @@
     <div id="id_{{ b.id }}" class="filter_item">
       <span class="list_icon" title="{{ b.id }}" data-type="bra" style="background-color:{{b.color}}"></span>
       <span class="filter_title" style="margin-left: 1px;">{{ b.name() }}</span>
+      <select id="depth_dropdownmg030000"><option value="8">Municipality</option></select>
       <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
     </div>
     {% endfor %}
     
-    {% if not bra %}
-    <span class="filler">{% trans %}Showing all of Brazil until a location is selected.{% endtrans %}</span>
-    {% endif %}
+    <span class="filler hide">
+      {% trans %}Showing all of Brazil at the following depth: {% endtrans %}
+      <select class="depth_dropdown">
+        <option value="2">States</option>
+        <option value="4">Meso Regions</option>
+        <option value="8">Municipalities</option>
+      </select>
+    </span>
 
     <a name="bra" class="add_filter">{% trans %}add a location{% endtrans %}</a>
       
@@ -73,7 +79,7 @@
       ~~~
     -->    
     <a id="industry_filter" class="help filter_button {% if isic != None %}active{% endif %}">
-      {% trans %}Industries{% endtrans %}
+      {% trans %}Click to show Industries{% endtrans %}
     </a>
     <div id="industry_add" class="filter_box {% if isic != None %}open{% endif %}">
       
@@ -85,10 +91,16 @@
         <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
       </div>
       {% endfor %}
-      
-      {% else %}
-      <span class="filler">{% trans %}Showing all industries until a filter is selected.{% endtrans %}</span>
       {% endif %}
+      
+      <span class="filler {% if isic %}hide{% endif %}">
+        {% trans %}Showing all industries at the following depth:{% endtrans %}
+        <select class="depth_dropdown">
+          <option value="1">Section</option>
+          <option value="3">Division</option>
+          <option value="5">Class</option>
+        </select>
+      </span>
       
       <a name="isic" class="add_filter button">{% trans %}add an industry{% endtrans %}</a>
       
@@ -101,7 +113,7 @@
       ~~~
     -->       
     <a id="occupation_filter" class="help filter_button {% if cbo != None %}active{% endif %}">
-      {% trans %}Occupations{% endtrans %}
+      {% trans %}Click to show Occupations{% endtrans %}
     </a>
     <div id="occupation_add" class="filter_box {% if cbo != None %}open{% endif %}">
       
@@ -113,10 +125,17 @@
         <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
       </div>
       {% endfor %}
-      
-      {% else %}
-      <span class="filler">{% trans %}Showing all occupations until a filter is selected.{% endtrans %}</span>
       {% endif %}
+      
+      <span class="filler {% if cbo %}hide{% endif %}">
+        {% trans %}Showing all occupations at the following depth:{% endtrans %}
+        <select class="depth_dropdown">
+          <option value="1">Main Group</option>
+          <option value="2">Principal Subgroup</option>
+          <option value="4">Occupation</option>
+        </select>
+      </span>
+      
       
       <a name="cbo" class="add_filter button">{% trans %}add an occupation{% endtrans %}</a>
       
@@ -147,10 +166,17 @@
         <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
       </div>
       {% endfor %}
-      
-      {% else %}
-      <span class="filler">{% trans %}Showing all products until a filter is selected.{% endtrans %}</span>
       {% endif %}
+      
+      <span class="filler {% if hs %}hide{% endif %}">
+        {% trans %}Showing all products at the following depth:{% endtrans %}
+        <select class="depth_dropdown">
+          <option value="2">Section</option>
+          <option value="4">Chapter</option>
+          <option value="6">Division</option>
+        </select>
+      </span>
+      
       
       <a name="hs" class="add_filter button">{% trans %}add a product{% endtrans %}</a>
       
@@ -163,7 +189,7 @@
       ~~~
     -->      
     <a id="country_filter" class="help filter_button {% if wld != None %}active{% endif %}">
-      {% trans %}Export Destinations{% endtrans %}
+      {% trans %}Click to show Export Destinations{% endtrans %}
     </a>      
     <div id="country_add" class="filter_box {% if wld != None %}open{% endif %}">
       
@@ -175,10 +201,16 @@
         <a onclick="remove_filter(this)"><i class="icon-remove"></i></a>
       </div>
       {% endfor %}
-      
-      {% else %}
-      <span class="filler">{% trans %}Showing all countries until a filter is selected.{% endtrans %}</span>
       {% endif %}
+      
+      <span class="filler {% if wld %}hide{% endif %}">
+        {% trans %}Showing all countries at the following depth:{% endtrans %}
+        <select class="depth_dropdown">
+          <option value="2">Continent</option>
+          <option value="5">Country</option>
+        </select>
+      </span>
+      
       
       <a name="wld" class="add_filter button">{% trans %}add an export destination{% endtrans %}</a>
       
@@ -189,8 +221,19 @@
   </div>
   
   <hr>
-	
-    <div id="download" class="decision icon csv">{% trans %}Download{% endtrans %}</div>
+  
+  <div id="download" class="decision icon csv">{% trans %}Download{% endtrans %}</div>
+  
+  <a id="column_filter" class="help filter_button active">
+    {% trans %}Columns{% endtrans %}
+  </a> 
+  <div id="columns_add" class="filter_box open">
+    
+    <a>test</a>
+    <a>test</a>
+    <a>test</a>
+    
+  </div>
     
 </div>
 
@@ -204,57 +247,6 @@
   leon("#year_filter").color(dataviva.color)
 
   var CURRENT_DATASET = d3.select("input[name='dataset']:checked").attr("value");
-  var ORDER_DIRECTIONS = ["desc", "asc", ""]
-  var COLUMNS = [ 
-                  "year", 
-  
-                  "bra_id", 
-                  "id_ibge", 
-                  
-                  "isic_id", 
-                  "cbo_id", 
-                  
-                  "hs_id", 
-                  "wld_id", 
-                  
-                  "wage", 
-                  "num_emp", 
-                  "num_est", 
-                  "required",
-                  
-                  "val_usd", 
-                  
-                  "rca", 
-                  "rca_wld", 
-                  
-                  "distance", 
-                  "distance_wld", 
-                  
-                  "opp_gain", 
-                  "opp_gain_wld", 
-                  
-                  "eci",
-                  "pci",
-                  "ici",
-                  "oci",
-                  
-                  "importance", 
-                  
-                  "val_usd_growth_pct",
-                  "val_usd_growth_pct_5",
-                  "val_usd_growth_val",
-                  "val_usd_growth_val_5",
-                  
-                  "wage_growth_pct",
-                  "wage_growth_pct_5",
-                  "wage_growth_val",
-                  "wage_growth_val_5",
-                  "num_emp_growth_pct",
-                  "num_emp_growth_pct_5",
-                  "num_emp_growth_val",
-                  "num_emp_growth_val_5"
-                
-                ]
 
   // var is = infinite_scroll().format_items(item_formatter);
 
@@ -295,13 +287,17 @@
     var add_container = d3.select("#" + this.id.split("_")[0] + "_add")
     var add_container_classes = add_container.attr("class")
     
+    // turning active off
     if(classes.indexOf("active") > -1){
       d3.select(this).attr("class", classes.replace("active"))
       add_container.attr("class", add_container_classes.replace("open"))
+      d3.select(this).text("Click to show " + d3.select(this).text())
     }
+    // making active
     else {
       d3.select(this).attr("class", classes + " active")
       add_container.attr("class", add_container_classes + " open")
+      d3.select(this).text(d3.select(this).text().replace("Click to show", ""))
     }
     
   })
@@ -333,7 +329,7 @@
     dataviva.popover.hide();
     
     // remove filler text
-    d3.select(cont).selectAll("span.filler").style("display","none")
+    d3.select(cont).selectAll("span.filler").attr("class","filler hide")
     
     if (!d3.select(cont).select("#id_"+obj.id).node()) {
 
@@ -348,9 +344,33 @@
       div.append("span")
         .attr("class","filter_title")
         .text(obj.name)
+        // .append("a")
+        //   .text(function(){
+        //     var depth_name = dataviva.format.text(selector.type() + "_" + obj.id.length)
+        //     return " (" + depth_name + ")"
+        //   })
+      var depth_ids = dataviva.depths(selector.type())
+      if(obj.id == "mg" || obj.id.indexOf("mgplr") >= 0){
+        depth_ids.splice(-1, 0, 7)
+      }
+      depth_ids = depth_ids.slice(depth_ids.indexOf(obj.id.length))
+      
+      var s = div.append("select")
+        .attr("id", "depth_dropdown"+obj.id)
+        .selectAll("option").data(depth_ids).enter().append("option")
+          .text(function(d, i){ 
+            if(i == 0){
+              return dataviva.format.text(selector.type() + "_" + d)
+            }
+            return dataviva.format.text(selector.type() + "_" + d + "_plural");
+          })
+          .attr("value", function(d){ return d; })
+      
       div.append("a")
-        .on(vizwhiz.evt.click, function(){ remove_filter(this) })
+        .on(vizwhiz.evt.click, function(){ remove_filter(this); })
         .append("i").attr("class", "icon-remove")
+      
+      leon("#"+"depth_dropdown"+obj.id)
         
     }
     
@@ -360,7 +380,7 @@
     var cont = d3.select(node.parentNode.parentNode)
     d3.select(node.parentNode).remove()
     if (!cont.select(".filter_item").node()) {
-      cont.select(".filler").style("display","block")
+      cont.select(".filler").attr("class", "filler")
     }
   }
   
@@ -401,11 +421,29 @@
           fdata = []
           filter_items.each(function(fi){
             // the ids start with "id_", so we remove that
-            fdata.push(this.id.replace("id_", ""))
+            var id = this.id.replace("id_", "")
+            // if the dropdown is not equivalent to this IDs length we need to
+            // qualify this ID
+            var depth_dropdown = d3.select(this).selectAll("select").node()
+            var d_i = depth_dropdown.selectedIndex
+            var depth = depth_dropdown.options[d_i].value
+            if (id.length != depth) {
+              fdata.push(id+".show."+depth)
+            }
+            else {
+              fdata.push(id)
+            }
           })
           
           // concatenate filters using plus sign
           fdata = fdata.join("+")
+        }
+        // see which depth was requested
+        else {
+          var depth_dd = d3.select("#"+fname+"_add .filler .depth_dropdown").node()
+          var d_i = depth_dd.selectedIndex
+          var depth = depth_dd.options[d_i].value
+          fdata = "show."+depth
         }
       }
       
@@ -438,6 +476,7 @@
       .selectAll("iframe").remove()
     
     d3.select(".data_table").append("iframe")
+      .attr("id", "table_frame")
       .attr("src", api_url)
 
     // prevent page from submitting form
@@ -468,6 +507,32 @@
       
   }
   
+  function update_cols(cols){
+    d3.selectAll("#columns_add a").remove()
+    cols.forEach(function(d){
+      d3.select("#columns_add").append("a")
+        .attr("class", function(){
+          if(d.active){ return "active" }
+        })
+        .attr("name", d.name)
+        .text(dataviva.format.text(d.name))
+        .on(vizwhiz.evt.click, function(){
+          if(d3.select(this).attr("class") && d3.select(this).attr("class").indexOf("active") > -1){ 
+            d3.select(this).attr("class", "")
+          }
+          else {
+            d3.select(this).attr("class", "active")
+          }
+          var new_cols = []
+          d3.selectAll("#columns_add a.active").each(function(d){
+            new_cols.push(d3.select(this).attr("name"))
+          })
+          document.getElementById("table_frame").contentWindow.change_cols(new_cols)
+        })
+    })
+  }
+  
+  // leon("all")
   update_table(CURRENT_DATASET)
 
   // attach click event listeners to build buttons

@@ -34,6 +34,7 @@ var oTable;
   leon("#year_filter").color(dataviva.color)
   
   var num_of_sticky_cols = 0;
+  var DATA = [];
   var CURRENT_DATASET = 'rais';
   var ORDER_DIRECTIONS = ["desc", "asc", ""]
   var STICKY_COLUMNS = [ 
@@ -87,6 +88,7 @@ var oTable;
                   "num_emp_growth_val_5"
                 
                 ]
+  var current_data_cols = []
 
   var is = infinite_scroll().format_items(item_formatter);
   
@@ -115,6 +117,9 @@ var oTable;
   }
   
   function item_formatter(container_el, dataset){
+    if(dataset != DATA){
+      DATA = DATA.concat(dataset)
+    }
   
     /*
       FILTER COLUMNS
@@ -123,8 +128,24 @@ var oTable;
     all_cols = all_cols.filter(function(itm, i){
         return all_cols.indexOf(itm)== i; 
     });
-    var data_cols = DATA_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1});
+    var all_data_cols = DATA_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1});
+    var active_data_cols = all_data_cols;
+    if(current_data_cols.length){
+      var active_data_cols = all_data_cols.filter(function(i) {return current_data_cols.indexOf(i) > -1});
+    }
     var sticky_cols = STICKY_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1});
+    
+    var data_col_status = []
+    all_data_cols.forEach(function(d){
+      var active = false;
+      if (active_data_cols.indexOf(d) > -1){
+        active = true;
+      }
+      data_col_status.push({"name":d, "active":active})
+    })
+    if(window.parent.update_cols){
+      window.parent.update_cols(data_col_status)
+    }
     
     /*
       CREATE "STICKY" HEADER TABLE
@@ -163,6 +184,7 @@ var oTable;
             api_url = api_url + "?order=" + d + "." + direction;
           }
           
+          DATA = [];
           d3.selectAll("tbody tr").remove()
           d3.select("#dt_query")
             .call(is.url(api_url).offset(0))
@@ -171,6 +193,7 @@ var oTable;
           d3.event.preventDefault()
         })
     
+    ths.exit().remove()
     /*
       CREATE "STICKY" DATA TABLE
     */
@@ -203,36 +226,37 @@ var oTable;
     
     tbl_data_header.selectAll('tr').data([0]).enter().append('tr');
     tbl_data_header = tbl_data_header.select('tr');
-
+    
     var ths = tbl_data_header.selectAll("th")
-      .data(data_cols)
+      .data(active_data_cols)
     
     ths.enter().append("th")
       .attr("class",function(d){ return d })
-      .append("a")
-        .attr("href", "#")
-        .text(function(d) { return dataviva.format.text(d)})
-        .on(vizwhiz.evt.click, function(d){
-          var direction = d3.select(this).attr("class");
-          if (direction == "desc") { direction = "asc"; }
-          else if (direction == "asc") { direction = ""; }
-          else { direction = "desc"; }
-          // direction = direction == "desc" ? "asc" : "desc";
-          d3.select(this).attr("class", direction)
-          
-          var api_url = window.location.pathname.replace("/data/table", "")
-          if(direction){
-            api_url = api_url + "?order=" + d + "." + direction;
-          }
-          
-          d3.selectAll("tbody tr").remove()
-          d3.select("#dt_query")
-            .call(is.url(api_url).offset(0))
-          
-          
-          d3.event.preventDefault()
-        })
     
+    ths
+      .text(function(d) { return dataviva.format.text(d)})    
+      .on(vizwhiz.evt.click, function(d){
+        var direction = d3.select(this).attr("class");
+        if (direction == "desc") { direction = "asc"; }
+        else if (direction == "asc") { direction = ""; }
+        else { direction = "desc"; }
+        // direction = direction == "desc" ? "asc" : "desc";
+        d3.select(this).attr("class", direction)
+      
+        var api_url = window.location.pathname.replace("/data/table", "")
+        if(direction){
+          api_url = api_url + "?order=" + d + "." + direction;
+        }
+      
+        d3.selectAll("tbody tr").remove()
+        d3.select("#dt_query")
+          .call(is.url(api_url).offset(0))
+      
+      
+        d3.event.preventDefault()
+      })
+    
+    ths.exit().remove()
     /*
       CREATE DATA DATA TABLE
     */
@@ -249,7 +273,7 @@ var oTable;
       
     rows.each(function(d){
       var self = d3.select(this)
-      data_cols.forEach(data_printer(d, self))
+      active_data_cols.forEach(data_printer(d, self))
     })
     
     // d3.selectAll("#dt_query table .sticky:nth-child("+num_of_sticky_cols+")")
@@ -321,6 +345,12 @@ var oTable;
           })
           .html(html)
     }
+  }
+  
+  function change_cols(cols){
+    d3.selectAll("tbody tr").remove();
+    current_data_cols = cols;
+    item_formatter("#dt_query", DATA);
   }
 
 </script>
