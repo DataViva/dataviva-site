@@ -136,11 +136,14 @@ def title_case(string):
               'Um', 'Uma', 'E', 'Como', 'Em', 'No', 'Na', 'Mas', 'Por', \
               'Para', 'Pelo', 'Pela', 'De', 'Do', 'Da', 'Se', 'Perto', 'Nem', \
               'Ou', 'Que', 'O', 'A', 'Com']
+    uppers = ['Id', 'Tv', 'R&d', "P&d", "It", "Ti"]
     words = re.split(" ",string)
     final = [words[0].capitalize()]
     for word in words[1:]:
         if word in exceptions or word.capitalize() in exceptions:
             final.append(word.lower())
+        elif word in uppers or word.capitalize() in uppers:
+            final.append(word.upper())
         else:
             final.append(word.capitalize())
     return " ".join(final)

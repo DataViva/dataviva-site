@@ -179,7 +179,7 @@ $(document).ready(function() {
 });
 
 // Voting!
-d3.selectAll(".vote_up").on(vizwhiz.evt.click, function(){
+d3.selectAll(".vote_up").on(d3plus.evt.click, function(){
 	var link_el = this;
   d3.select(link_el).select("i").attr("class","icon-cog icon-spin")
 	d3.json(link_el.href, function(resp){
@@ -211,7 +211,7 @@ d3.selectAll(".vote_up").on(vizwhiz.evt.click, function(){
 })
 
 // Flagging :(
-d3.selectAll(".vote_down").on(vizwhiz.evt.click, function(){
+d3.selectAll(".vote_down").on(d3plus.evt.click, function(){
 	var link_el = this;
   d3.select(link_el).select("i").attr("class","icon-cog icon-spin")
 	d3.json(link_el.href, function(resp){
@@ -242,7 +242,7 @@ d3.selectAll(".tag-icon").style("background-image", function(){
 })
 
 // show/hide reply form
-d3.selectAll("div.leave_response").on(vizwhiz.evt.click, function(){
+d3.selectAll("div.leave_response").on(d3plus.evt.click, function(){
   
 	d3.selectAll("div.leave_response").style("display", "inline-block")
 	var reply_form = d3.select(".reply_form").node()
@@ -257,7 +257,7 @@ d3.selectAll("div.leave_response").on(vizwhiz.evt.click, function(){
 })
 
 // submit form
-d3.selectAll(".reply_form .submit").on(vizwhiz.evt.click, function(){
+d3.selectAll(".reply_form .submit").on(d3plus.evt.click, function(){
 	this.parentNode.submit()
 	d3.event.preventDefault();
 })

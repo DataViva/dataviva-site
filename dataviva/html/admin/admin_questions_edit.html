@@ -47,7 +47,7 @@
     leon("#language")
     
     // submit form
-    d3.selectAll("#submit_button").on(vizwhiz.evt.click, function(){
+    d3.selectAll("#submit_button").on(d3plus.evt.click, function(){
       this.parentNode.submit()
       d3.event.preventDefault();
     })

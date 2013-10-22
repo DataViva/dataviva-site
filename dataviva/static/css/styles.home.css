@@ -48,11 +48,11 @@ body.home #carousel h1 {
   height: 100%;
   line-height: 44px;
   margin: 0px;
-  padding: 20px 25px 20px 25px;
+  padding: 30px 35px;
   position: absolute;
   -webkit-transition: opacity 1s;
           transition: opacity 1s;
-  width: 513px;
+  width: 493px;
   z-index: 100;
 }
 
@@ -84,12 +84,12 @@ body.home .page:hover {
 
 body.home div#video {
   display: inline-block;
-  height: 380px;
+  height: 350px;
   margin-right: 14px;
-  padding: 10px;
+  padding: 25px 30px;
   position: relative;
   text-align: left;
-  width: 348px;
+  width: 308px;
 }
 
 body.home div#video h1 {
@@ -102,6 +102,6 @@ body.home div#video iframe {
 }
 
 body.home div#video .welcome_bottom {
-  bottom: 10px;
+  bottom: 25px;
   position: absolute;
 }

@@ -543,8 +543,8 @@ dataviva.ui.tooltip = function(id,obj,align) {
     if (t == "center") var offset = size.width/2
     else var offset = size.height/2
         
-    vizwhiz.tooltip.remove(id);
-    vizwhiz.tooltip.create({
+    d3plus.tooltip.remove(id);
+    d3plus.tooltip.create({
       "x": size.left+size.width/2,
       "y": size.top+size.height/2,
       "offset": offset,
@@ -558,7 +558,7 @@ dataviva.ui.tooltip = function(id,obj,align) {
     
   }
   else {
-    vizwhiz.tooltip.remove(id);
+    d3plus.tooltip.remove(id);
   }
 }
 
@@ -738,10 +738,10 @@ dataviva.popover.create = function(params) {
     
   if (close) {
     body.append("div")
-      .attr("class","vizwhiz_tooltip_close")
+      .attr("class","d3plus_tooltip_close")
       .html("\&times;")
       .style("background-color",color)
-      .on(vizwhiz.evt.click,function(){
+      .on(d3plus.evt.click,function(){
         dataviva.popover.hide("#"+id);
       })
   }
@@ -753,7 +753,7 @@ dataviva.popover.show = function(id) {
   if (d3.select("#popover_mask").empty()) {
     d3.select("body").append("div")
       .attr("id","popover_mask")
-      .on(vizwhiz.evt.click,function(){
+      .on(d3plus.evt.click,function(){
         dataviva.popover.hide();
       })
   }
@@ -817,7 +817,7 @@ dataviva.flash = function(text) {
 	flash_inner.append("i")
 		.attr("id", "close_message")
 		.attr("class", "icon-remove-sign")
-		.on(vizwhiz.evt.click, function(d){
+		.on(d3plus.evt.click, function(d){
 	        var div = d3.select("#server_message")
 	        var timing = parseFloat(div.style("transition-duration"),10)*1000;
 	        div.style("opacity",0);

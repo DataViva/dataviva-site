@@ -124,11 +124,11 @@ div.filter_button > div.leon.button {
   padding: 5px;
 }
 
-.vizwhiz_tooltip_large .vizwhiz_tooltip_html {
+.d3plus_tooltip_large .d3plus_tooltip_html {
   text-align: center;
 }
 
-.vizwhiz_tooltip_large .vizwhiz_tooltip_html .title {
+.d3plus_tooltip_large .d3plus_tooltip_html .title {
   text-align: center;
 }
 

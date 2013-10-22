@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-15 13:09-0400\n"
+"POT-Creation-Date: 2013-10-21 14:41-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -17,35 +17,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: dataviva/admin/views.py:131
+#: dataviva/admin/views.py:159
 msgid "This question has now been updated."
 msgstr "Esta pergunta foi atualizada."
 
-#: dataviva/apps/views.py:137
+#: dataviva/apps/views.py:141
 msgid "You need to be logged in to star apps."
 msgstr "Você precisa fazer o login para iniciar aplicativos."
 
-#: dataviva/ask/views.py:106
+#: dataviva/ask/views.py:117
 msgid "You need to be signed in to reply to questions."
 msgstr "Você precisa fazer o login para responder perguntas."
 
-#: dataviva/ask/views.py:126
+#: dataviva/ask/views.py:137
 msgid "Reply submitted."
 msgstr "Resposta enviada."
 
-#: dataviva/ask/views.py:159 dataviva/ask/views.py:187
+#: dataviva/ask/views.py:170 dataviva/ask/views.py:198
 msgid "You need to be logged in to vote."
 msgstr "Você precisa fazer o login para votar."
 
-#: dataviva/ask/views.py:217
+#: dataviva/ask/views.py:228
 msgid "You need to be logged in to flag replies."
 msgstr "Você precisa fazer o login para marcar respostas."
 
-#: dataviva/ask/views.py:247
+#: dataviva/ask/views.py:258
 msgid "You need to be logged in to ask questions."
 msgstr "Você precisa fazer o login para fazer perguntas."
 
-#: dataviva/ask/views.py:268
+#: dataviva/ask/views.py:279
 msgid "Your question has been submitted and is pending approval."
 msgstr "Sua pergunta foi submetida e está pendente de aprovação."
 
@@ -103,11 +103,9 @@ msgstr "Visualizando a Economia de Minas Gerais e do Brasil."
 
 #: dataviva/html/home.html:13
 msgid ""
-"DataViva is an innovative way to visualize data and transform it into "
-"knowledge to guide sustainable economic development."
-msgstr ""
-"O DataViva é uma forma inovadora de visualizar dados e transformá-los em "
-"conhecimento para orientar o desenvolvimento econômico sustentável."
+"DataViva is opening up data for the entire formal sector of the Brazilian"
+" economy through more than 100 million interactive visualization."
+msgstr "O DataViva está disponibilizando dados sobre todo o setor formal da economia brasileira em mais de 100 milhões de visualizações interativas."
 
 #: dataviva/html/home.html:15
 msgid "Learn how DataViva was created:"
@@ -240,6 +238,7 @@ msgstr "dados relacionados a produto"
 #: dataviva/html/about/apps/scatter.html:15
 #: dataviva/html/about/apps/stacked.html:14
 #: dataviva/html/about/apps/tree_map.html:14
+#: dataviva/html/data/classifications.html:21
 msgid "Depth"
 msgstr "Agregação"
 
@@ -1732,10 +1731,6 @@ msgstr "Mais Recente"
 msgid "Search"
 msgstr "Pesquisar"
 
-#: dataviva/html/data/classifications.html:21
-msgid "Classification"
-msgstr "Classificação"
-
 #: dataviva/html/data/index.html:3 dataviva/html/data/query.html:32
 #: dataviva/html/templates/site.html:17
 msgid "Data"
@@ -2128,4 +2123,3 @@ msgstr "Sair"
 #: dataviva/profiles/views.py:49
 msgid "a country"
 msgstr "um país"
-

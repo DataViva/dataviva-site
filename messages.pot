@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-15 13:09-0400\n"
+"POT-Creation-Date: 2013-10-21 14:41-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,35 +16,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: dataviva/admin/views.py:131
+#: dataviva/admin/views.py:159
 msgid "This question has now been updated."
 msgstr ""
 
-#: dataviva/apps/views.py:137
+#: dataviva/apps/views.py:141
 msgid "You need to be logged in to star apps."
 msgstr ""
 
-#: dataviva/ask/views.py:106
+#: dataviva/ask/views.py:117
 msgid "You need to be signed in to reply to questions."
 msgstr ""
 
-#: dataviva/ask/views.py:126
+#: dataviva/ask/views.py:137
 msgid "Reply submitted."
 msgstr ""
 
-#: dataviva/ask/views.py:159 dataviva/ask/views.py:187
+#: dataviva/ask/views.py:170 dataviva/ask/views.py:198
 msgid "You need to be logged in to vote."
 msgstr ""
 
-#: dataviva/ask/views.py:217
+#: dataviva/ask/views.py:228
 msgid "You need to be logged in to flag replies."
 msgstr ""
 
-#: dataviva/ask/views.py:247
+#: dataviva/ask/views.py:258
 msgid "You need to be logged in to ask questions."
 msgstr ""
 
-#: dataviva/ask/views.py:268
+#: dataviva/ask/views.py:279
 msgid "Your question has been submitted and is pending approval."
 msgstr ""
 
@@ -101,7 +101,7 @@ msgid "Visualizing the Economy of Minas Gerais and Brazil"
 msgstr ""
 
 #: dataviva/html/home.html:13
-msgid "DataViva is an innovative way to visualize data and transform it into knowledge to guide sustainable economic development."
+msgid "DataViva is opening up data for the entire formal sector of the Brazilian economy through more than 100 million interactive visualization."
 msgstr ""
 
 #: dataviva/html/home.html:15
@@ -206,6 +206,7 @@ msgstr ""
 #: dataviva/html/about/apps/scatter.html:15
 #: dataviva/html/about/apps/stacked.html:14
 #: dataviva/html/about/apps/tree_map.html:14
+#: dataviva/html/data/classifications.html:21
 msgid "Depth"
 msgstr ""
 
@@ -1044,10 +1045,6 @@ msgstr ""
 
 #: dataviva/html/ask/questions.html:38
 msgid "Search"
-msgstr ""
-
-#: dataviva/html/data/classifications.html:21
-msgid "Classification"
 msgstr ""
 
 #: dataviva/html/data/index.html:3 dataviva/html/data/query.html:32

@@ -115,7 +115,7 @@
     
     leon("$language_select").color("{{ g.color }}").size("small")
         
-    d3.select("#close_message").on(vizwhiz.evt.click,function(){
+    d3.select("#close_message").on(d3plus.evt.click,function(){
       var div = d3.select("#server_message")
       var timing = parseFloat(div.style("transition-duration"),10)*1000;
       div.style("opacity",0);
@@ -136,12 +136,12 @@
     
       show_toggle = function() {
         d3.select("#account").attr("class","active")
-        d3.select("#vizwhiz_tooltip_id_account").style("display","block")
+        d3.select("#d3plus_tooltip_id_account").style("display","block")
       }
     
       hide_toggle = function() {
         d3.select("#account").attr("class","")
-        d3.select("#vizwhiz_tooltip_id_account").style("display","none")
+        d3.select("#d3plus_tooltip_id_account").style("display","none")
       }
     
       var language_html = d3.select("div#account_tooltip").html()
@@ -153,7 +153,7 @@
           x = acct.offsetLeft+w/2,
           y = acct.offsetTop+h
         
-      vizwhiz.tooltip.create({
+      d3plus.tooltip.create({
         "id": "account",
         "x": x,
         "y": y,
@@ -164,13 +164,13 @@
         "width": "auto"
       })
 
-      d3.select("#vizwhiz_tooltip_id_account")
+      d3.select("#d3plus_tooltip_id_account")
         .style("display","none")
-        .on(vizwhiz.evt.click,function(){
+        .on(d3plus.evt.click,function(){
           d3.event.stopPropagation()
         })
     
-      d3.select("#account").on(vizwhiz.evt.click,function(){
+      d3.select("#account").on(d3plus.evt.click,function(){
         if (this.className.indexOf("active") < 0) {
           show_toggle()
         }
@@ -180,13 +180,13 @@
         d3.event.stopPropagation()
       })
     
-      d3.select("body").on(vizwhiz.evt.click,function(){
+      d3.select("body").on(d3plus.evt.click,function(){
         hide_toggle()
       })
     
     }
     else {
-      d3.select("#account").on(vizwhiz.evt.click,function(){
+      d3.select("#account").on(d3plus.evt.click,function(){
         login()
       })
     }
