@@ -1,31 +1,30 @@
-table {
-  border-collapse: collapse;
-  width: 100%;
-  background-color: transparent;
-  padding: 10px;
-  text-align: left;
+body.table {
+  background-color: white;
 }
 
-table thead {
-  display: block;
-  height: 36px;
+table { 
+  border-collapse: collapse; 
+  border-spacing: 0; 
+  overflow: hidden;
+  table-layout: fixed;
+  text-align: left;
+  width: 100%;
 }
 
 table th {
-  background: white;
-  color: #aaa;
   display: inline-block;
   font-size: 14px;
   font-weight: lighter;
   padding: 9px;
   text-align: left;
   white-space: normal;
-/*  -webkit-transition: width .2s;
-          transition: width .2s;*/
 }
 
-body.classifications table th,
-body.query table th {
+body.classifications table th {
+  color: #1abbee;
+}
+
+body.table table th {
   color: #1abbee;
 }
 
@@ -34,21 +33,21 @@ table thead tr {
 }
 
 table tbody tr {
-  background: white;
-  border-bottom: solid 1px #ccc;
   color: #888;
   font-size: 14px;
   line-height: 16px;
 }
 
-table tbody td.link {
-  font-weight: bold;
+#sticky table tbody tr:nth-child(odd) {
+  background-color: #f0f0f0;
 }
 
-table tbody tr.link:hover,
-table tbody td.link:hover {
-  background-color: #f0f0f0;
-  cursor: pointer;
+#data table tbody tr:nth-child(odd) {
+  background-color: rgba(235,235,235,0.75);
+}
+
+table tbody td.link {
+  font-weight: bold;
 }
 
 table tbody tr:last-child {
@@ -57,10 +56,6 @@ table tbody tr:last-child {
 
 table td {
   padding: 9px;
-}
-
-table td > a {
-  color: #666666;
 }
 
 table td.icon {
@@ -80,7 +75,7 @@ table th.hs_id, table th.wld_id, table th.year, table th.color, table th.icon {
   text-align: center;
 }
 
-table td.icon > div{
+table td.icon > div {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -88,54 +83,113 @@ table td.icon > div{
   height: 29px;
 }
 
-
 #dt_query table.body {
   margin-top: 30px;
 }
-#dt_query table.header {
-  background: white;
-}
-#dt_query table.header thead {
-  background: white;
+
+thead {
+  border-color: rgba(255,255,255,0.75);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
   position: fixed;
   top: 0;
-}
-#dt_query table td{
-  background: white;
-}
-#dt_query table td,
-#dt_query table th{
-  width: 100px;
-}
-#dt_query table thead tr{
-  border-bottom: solid #ccc 1px;
+  -webkit-transition: border-color .4s;
+          transition: border-color .4s;
 }
 
-#dt_query #sticky {
-  border: solid 1px #efefef;
+thead.shadow {
+  border-color: rgba(235,235,235,0.5);
+}
+
+#sticky {
+  background-color: white;
+  border-color: #f0f0f0;
+  border-right-width: 0px;
+  border-right-style: solid;
   position: absolute;
   left: 0;
   width: 136px;
   top: 0;
   z-index: 1;
-  -webkit-box-shadow: 3px 0px 3px rgba(0,0,0,0.25);
-          box-shadow: 3px 0px 3px rgba(0,0,0,0.25);
+  -webkit-transition: -webkit-box-shadow 0.4s;
+                  transition: box-shadow 0.4s;
 }
-#dt_query #data {
+
+#sticky.shadow {
+  border-right-width: 1px;
+  -webkit-box-shadow: 3px 0px 3px rgba(0,0,0,0.1);
+          box-shadow: 3px 0px 3px rgba(0,0,0,0.1);
+}
+
+#data {
   margin-left: 235px;
   overflow-x: scroll;
   width: 725px;
   z-index: 0;
 }
-#dt_query #data th {
-  color: #000;
+
+table th {
+  background-color: rgba(255,255,255,0.75);
+  font-weight: bold;
+  position: relative;
+}
+
+table th:hover {
+  background-color: rgba(235,235,235,0.75);
   cursor: pointer;
 }
-table { table-layout: fixed; border-collapse: collapse; border-spacing: 0; overflow: hidden;}
 
-table .year     { width: 50px !important; }
-table .bra_id   { width: 70px !important; }
-table .isic_id  { width: 70px !important; }
-table .cbo_id   { width: 70px !important; }
-table .hs_id    { width: 70px !important; }
-table .wld_id   { width: 70px !important; }
+table th::after {
+  content: "";
+  font-family: FontAwesome;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+}
+
+body.classifications table th.asc::before,
+body.classifications table th.desc::before {
+  background-color: #1abbee;
+}
+
+body.table table th.asc::before,
+body.table table th.desc::before {
+  background-color: #1abbee;
+}
+
+body.table table th.asc::before, body.table table th.desc::before,
+body.classifications table th.asc::before, 
+body.classifications table th.desc::before {
+  content: "";
+  display: block;
+  height: 3px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+table th.asc::after {
+  content: " \f077";
+}
+
+table th.desc::after {
+  content: " \f078";
+}
+
+table td,
+table th, table th::before {
+  width: 120px;
+}
+
+table .year { 
+  width: 40px !important; 
+}
+table .bra_id, table .isic_id,
+table .cbo_id, table .hs_id,
+table .wld_id { 
+  width: 60px !important; 
+}
+table .bra_id { 
+  width: 70px !important; 
+}

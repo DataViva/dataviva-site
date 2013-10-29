@@ -32,14 +32,14 @@
     
     <div id="output" class="leon button medium" onclick="builder.selector(this.id)">
       <span class="list_text">{% trans %}Change Output{% endtrans %}</span>
-      <i class="icon-list-alt"></i>
+      <i class="fa fa-list-alt"></i>
     </div>
 
     <div id="bra_0" class="leon button medium" onclick="builder.selector(this.id)">
       {% set bra = current_build.bra[0] %}
       <div class="leon icon medium" style="background-image:url('{{ bra.icon }}')"></div>
-      <span class="list_text">{{ bra.name() }}</span>
-      <i class="icon-list-alt"></i>
+      <span class="list_text">{{ bra.name }}</span>
+      <i class="fa fa-list-alt"></i>
     </div>
     
     {% if current_build.bra[1] %}
@@ -47,8 +47,8 @@
     {% endif %}
     <div id="bra_1" class="leon button medium" onclick="builder.selector(this.id)">
       <div class="leon icon medium"{% if bra %} style="background-image:url('{{ bra.icon }}')"{% endif %}></div>
-      <span class="list_text">{% if bra %}{{ bra.name() }}{% endif %}</span>
-      <i class="icon-list-alt"></i>
+      <span class="list_text">{% if bra %}{{ bra.name }}{% endif %}</span>
+      <i class="fa fa-list-alt"></i>
     </div>
     
     {% if current_build.isic %}
@@ -56,8 +56,8 @@
     {% endif %}
     <div id="isic_0" class="leon button medium" onclick="builder.selector(this.id)">
       <div class="leon icon medium"{% if isic %} style="background-color:{{ isic.color }}; background-image:url('/static/img/icons/isic/isic_{{ isic.id[:1] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if isic %}{{ isic.name() }}{% endif %}</span>
-      <i class="icon-list-alt"></i>
+      <span class="list_text">{% if isic %}{{ isic.name }}{% endif %}</span>
+      <i class="fa fa-list-alt"></i>
     </div>
 
     {% if current_build.cbo %}
@@ -65,8 +65,8 @@
     {% endif %}
     <div id="cbo_0" class="leon button medium" onclick="builder.selector(this.id)">
       <div class="leon icon medium"{% if cbo %} style="background-color:{{ cbo.color }}; background-image:url('/static/img/icons/cbo/cbo_{{ cbo.id[:1] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if cbo %}{{ cbo.name() }}{% endif %}</span>
-      <i class="icon-list-alt"></i>
+      <span class="list_text">{% if cbo %}{{ cbo.name }}{% endif %}</span>
+      <i class="fa fa-list-alt"></i>
     </div>
 
     {% if current_build.hs %}
@@ -74,8 +74,8 @@
     {% endif %}
     <div id="hs_0" class="leon button medium" onclick="builder.selector(this.id)">
       <div class="leon icon medium"{% if hs %} style="background-color:{{ hs.color }}; background-image:url('/static/img/icons/hs/hs_{{ hs.id[:2] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if hs %}{{ hs.name() }}{% endif %}</span>
-      <i class="icon-list-alt"></i>
+      <span class="list_text">{% if hs %}{{ hs.name }}{% endif %}</span>
+      <i class="fa fa-list-alt"></i>
     </div>
 
     {% if current_build.wld %}
@@ -83,8 +83,8 @@
     {% endif %}
     <div id="wld_0" class="leon button medium" onclick="builder.selector(this.id)">
       <div class="leon icon medium"{% if wld %} style="{% if wld.id|count == 5 %}background-color:{{ wld.color }}; {% endif %}background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
-      <span class="list_text">{% if wld %}{{ wld.name() }}{% endif %}</span>
-      <i class="icon-list-alt"></i>
+      <span class="list_text">{% if wld %}{{ wld.name }}{% endif %}</span>
+      <i class="fa fa-list-alt"></i>
     </div>
     
     <div id="app_controls"></div>
@@ -93,12 +93,12 @@
 
   <div id="settings">
 
-    <a id="refresh" class="leon button square alt_tooltip" onclick="app.start()" alt="{% trans %}Refresh the App{% endtrans %}"><i class="icon-refresh"></i></a>
-    <a id="file" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Download this App{% endtrans %}"><i class="icon-save"></i></a>
-    <a id="starred" class="leon button square alt_tooltip" onclick="app.star()" alt="{% trans %}Save this App{% endtrans %}"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
-    <a id="help" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Show App Tutorial{% endtrans %}"><i class="icon-question-sign"></i></a>
-    <a id="full_screen" class="leon button square alt_tooltip" onclick="window.open(window.location.href,'_blank')" alt="{% trans %}Open App in Full-Screen{% endtrans %}"><i class="icon-fullscreen"></i></a>
-    <a id="controls_toggle" class="leon button square alt_tooltip" onclick="builder.controls()" alt="{% trans %}Show/Hide Controls{% endtrans %}"><i class="icon-cogs"></i></a>
+    <a id="refresh" class="leon button square alt_tooltip" onclick="app.start()" alt="{% trans %}Refresh the App{% endtrans %}"><i class="fa fa-refresh"></i></a>
+    <a id="file" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Download this App{% endtrans %}"><i class="fa fa-save"></i></a>
+    <a id="starred" class="leon button square alt_tooltip" onclick="app.star()" alt="{% trans %}Save this App{% endtrans %}"><i id="status_{{starred}}" class="{% if starred == 1 %}fa fa-star{% else %}fa fa-star-o{% endif %}"></i></a>
+    <a id="help" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Show App Tutorial{% endtrans %}"><i class="fa fa-question-circle"></i></a>
+    <a id="full_screen" class="leon button square alt_tooltip" onclick="window.open(window.location.href,'_blank')" alt="{% trans %}Open App in Full-Screen{% endtrans %}"><i class="fa fa-fullscreen"></i></a>
+    <a id="controls_toggle" class="leon button square alt_tooltip" onclick="builder.controls()" alt="{% trans %}Show/Hide Controls{% endtrans %}"><i class="fa fa-cogs"></i></a>
   
   </div>
 
@@ -652,7 +652,7 @@
     
     app.error = function(error) {
       console.log("[dataviva] ERROR: "+error)
-      app.resize()
+      dataviva.resize()
       loading.hide()
       d3.select("#app").html("").datum([]).call(app.viz.error(error))
     }
@@ -719,7 +719,7 @@
               .attr("for","allyears")
               
             label.append("i")
-              .attr("class","icon-play")
+              .attr("class","fa fa-play")
               .attr("style","color:"+app.build.app.color+";")
               
             label.append("div")
@@ -1027,14 +1027,14 @@
         .datum(app.data[app.build.data_url][format[app.build.app.type]])
 
       if (app.build.app.type != "rings") builder.key()
-      app.resize()
+      dataviva.resize()
       loading.hide()
       app.first_load = true
       
     }
     
     app.update = function(value,type) {
-      console.log(value,type)
+      
       if (type == "solo" || type == "filter") {
         
         app[type+"s"] = value
@@ -1089,7 +1089,7 @@
         builder.url()
         if (type == "year" && app.build.app.type != "rings") {
           builder.key()
-          app.resize()
+          dataviva.resize()
         }
         
         if (!app.solos.length && !app.filters.length) {
@@ -1362,140 +1362,13 @@
         
     }
     
-    app.resize = function() {
-      
-      var children = d3.select("#ui_bottom").node().childNodes,
-          min_width = 300;
-
-      if (window.innerWidth < min_width || window.innerHeight <= 400) {
-        app.vars.controls = "false";
-        d3.select("#ui_bottom").style("display","none")
-        d3.select("#settings").style("display","none")
-        d3.select("#builder").style("display","none")
-      }
-      else {
-        d3.select("#ui_bottom").style("display","block")
-        d3.select("#settings").style("display","block")
-        d3.select("#builder").style("display","block")
-      }
-      
-      // Set the max-width for the builder div and app_title
-      d3.select("#builder").style("max-width",window.innerWidth+"px")
-      app.title_width = window.innerWidth
-      app.title_width -= (d3.select("#settings").node().offsetWidth*2)
-        
-      d3.selectAll("#builder > br").remove()
-      d3.selectAll("#app_controls > br").remove()
-      
-      var total_width = 0,
-          settings_width = d3.select("#settings").node().offsetWidth,
-          builder_width = d3.select("#app_controls").node().offsetLeft,
-          avail_width = window.innerWidth - settings_width - builder_width
-          
-      d3.selectAll("#app_controls > div")
-        .each(function(){
-          total_width += this.offsetWidth
-        })
-        
-      if (total_width > avail_width) {
-        avail_width = window.innerWidth
-        firstbreak = false
-        var br = document.createElement("br")
-        document.getElementById("builder").insertBefore(br,document.getElementById("app_controls"))
-      }
-      
-      if (total_width > avail_width) {
-        
-        var w = 0
-        
-        d3.selectAll("#app_controls > div")
-          .each(function(){
-            if (w > avail_width/2) {
-              w = 0
-              var br = document.createElement("br")
-              this.parentNode.insertBefore(br,this)
-            }
-            w += this.offsetWidth
-          })
-      }
-  
-      if (app.vars.controls == "true") {
-        app.title_width = window.innerWidth
-        d3.select("#controls_toggle").attr("class","leon button square active")
-        app.title_height = 0
-        var buffer = 0
-      }
-      else {
-        app.title_width = window.innerWidth - d3.select("#settings").node().offsetWidth*2
-        d3.select("#controls_toggle").attr("class","leon button square")
-        if (app.title_width < 200) {
-          app.title_width = window.innerWidth
-          var buffer = d3.select("#settings").node().offsetHeight
-        }
-        else {
-          var buffer = 0
-        }
-      }
-
-      if (d3.select("#key").node() && app.categories && app.categories.length > 1) {
-        d3.select("#key").style("display","inline-block")
-        if (window.innerWidth < d3.select("#key").node().offsetWidth-10) {
-          d3.select("#key").style("display","none")
-        }
-      }
-
-      if (d3.select("#year_slider").node()) {
-        d3.select("#year_slider").style("display","inline-block")
-        if (window.innerWidth < d3.select("#year_slider").node().offsetWidth-10) {
-          d3.select("#year_slider").style("display","none")
-        }
-      }
-      
-      app.height = window.innerHeight
-      app.height -= (d3.select("#ui_bottom").node().offsetHeight+buffer)
-      if (app.vars.controls != "false") app.height -= d3.select("#builder").node().offsetHeight
-      app.width = window.innerWidth-10;
-
-      d3.select("#builder").style("top",function(d){
-        if (app.vars.controls != "false") var u = 0
-        else var u = 1
-        return "-"+((this.offsetHeight+5)*u)+"px"
-      })
-
-      d3.select("#app")
-        .style("height",app.height+"px")
-        .style("width",app.width+"px")
-        .style("top",function(d){
-          if (app.vars.controls != "false") var u = 1
-          else var u = 0
-          
-          return (((d3.select("#builder").node().offsetHeight)*u)+buffer)+"px"
-        })
-        .call(app.viz
-            .height(app.height)
-            .width(app.width)
-            .title_width(app.title_width)
-            .title_height(app.title_height)
-          )
-        
-      if (!app.first_load) {
-        d3.select("#app")
-          .style("-webkit-transition","top 0.6s, height 0.6s")
-          .style("transition","top 0.6s, height 0.6s")
-        d3.select("#builder")
-          .style("-webkit-transition","top 0.6s")
-          .style("transition","top 0.6s")
-      }
-      
-    }
-    
     app.star = function(status) {
       
       function update_star(s) {
         d3.select("#starred > i")
           .attr("id","status_"+s)
           .attr("class",function() {
-            return s == 1 ? "icon-star" : "icon-star-empty";
+            return s == 1 ? "fa fa-star" : "fa fa-star-o";
           })
       }
       
@@ -1512,7 +1385,7 @@
         
         d3.select("#starred > i")
           .attr("class",function(){
-            return this.className + " icon-spin"
+            return this.className + " fa fa-spin"
           })
         
         var url = window.location.pathname.replace("embed","star")
@@ -1775,56 +1648,8 @@
     
     builder.url = function() {
       
-      var doc_title = "DataViva : "+app.build.app.name+" : "+app.build.title;
-      document.title = doc_title
-                        
-      var window_url = app.url
-      
-      var window_params = ""
-      if (Object.keys(app.vars).length > 0) {
-        window_params += "?"
-        url_vars = []
-        for (v in app.vars) {
-          if (v != "controls" || (v == "controls" && app.vars.builder != "false")) {
-            url_vars.push(v + "=" + app.vars[v])
-          }
-        }
-        window_params += url_vars.join("&");
-      }
-      var full_url = "/apps/embed/"+window_url+window_params
-      var replace = window.location.pathname.indexOf(window_url) >= 0
-      var iframe = window != window.parent && window.parent.location.pathname.indexOf("builder") >= 0
-      
-      if (Modernizr.history) {
-        if (replace || iframe) {
-          window.history.replaceState({'prev_request': full_url}, doc_title, full_url)
-        }
-        else {
-          window.history.pushState({'prev_request': full_url}, doc_title, full_url)
-        }
-        
-        if (iframe) {
-          window.parent.document.title = doc_title
-      
-          var builder_url = full_url.replace("embed","builder")
-          if (replace) {
-            window.parent.history.replaceState({'prev_request': builder_url}, doc_title, builder_url)
-          }
-          else {
-            window.parent.history.pushState({'prev_request': builder_url}, doc_title, builder_url)
-          }
-        }
-      } 
-      else if (window.location.href.indexOf(window_url) < 0) {
-        if (window != window.parent && window.parent.location.pathname.indexOf("builder") >= 0) {
-          var builder_url = "/apps/builder/"+window_url+window_params
-          window.parent.location = builder_url
-        }
-        else {
-          window.location = full_url
-        }
-        
-      }
+      var doc_title = app.build.app.name+" : "+app.build.title
+      dataviva.url("/apps/embed/"+app.url,app.vars,doc_title)
         
     }
     
@@ -1882,7 +1707,7 @@
         app.vars.controls = "false"
       }
       builder.url()
-      app.resize()
+      dataviva.resize()
       
     }
     
@@ -1961,11 +1786,131 @@
     /* Page Resizing */
     /*****************/
     
-    window.onresize = function() {
-      if(this.resizeTO) clearTimeout(this.resizeTO);
-      this.resizeTO = setTimeout(function() {
-        app.resize()
-      },500)
+    dataviva.resize = function() {
+      
+      var children = d3.select("#ui_bottom").node().childNodes,
+          min_width = 300;
+
+      if (window.innerWidth < min_width || window.innerHeight <= 400) {
+        app.vars.controls = "false";
+        d3.select("#ui_bottom").style("display","none")
+        d3.select("#settings").style("display","none")
+        d3.select("#builder").style("display","none")
+      }
+      else {
+        d3.select("#ui_bottom").style("display","block")
+        d3.select("#settings").style("display","block")
+        d3.select("#builder").style("display","block")
+      }
+      
+      // Set the max-width for the builder div and app_title
+      d3.select("#builder").style("max-width",window.innerWidth+"px")
+      app.title_width = window.innerWidth
+      app.title_width -= (d3.select("#settings").node().offsetWidth*2)
+        
+      d3.selectAll("#builder > br").remove()
+      d3.selectAll("#app_controls > br").remove()
+      
+      var total_width = 0,
+          settings_width = d3.select("#settings").node().offsetWidth,
+          builder_width = d3.select("#app_controls").node().offsetLeft,
+          avail_width = window.innerWidth - settings_width - builder_width
+          
+      d3.selectAll("#app_controls > div")
+        .each(function(){
+          total_width += this.offsetWidth
+        })
+        
+      if (total_width > avail_width) {
+        avail_width = window.innerWidth
+        firstbreak = false
+        var br = document.createElement("br")
+        document.getElementById("builder").insertBefore(br,document.getElementById("app_controls"))
+      }
+      
+      if (total_width > avail_width) {
+        
+        var w = 0
+        
+        d3.selectAll("#app_controls > div")
+          .each(function(){
+            if (w > avail_width/2) {
+              w = 0
+              var br = document.createElement("br")
+              this.parentNode.insertBefore(br,this)
+            }
+            w += this.offsetWidth
+          })
+      }
+  
+      if (app.vars.controls == "true") {
+        app.title_width = window.innerWidth
+        d3.select("#controls_toggle").attr("class","leon button square active")
+        app.title_height = 0
+        var buffer = 0
+      }
+      else {
+        app.title_width = window.innerWidth - d3.select("#settings").node().offsetWidth*2
+        d3.select("#controls_toggle").attr("class","leon button square")
+        if (app.title_width < 200) {
+          app.title_width = window.innerWidth
+          var buffer = d3.select("#settings").node().offsetHeight
+        }
+        else {
+          var buffer = 0
+        }
+      }
+
+      if (d3.select("#key").node() && app.categories && app.categories.length > 1) {
+        d3.select("#key").style("display","inline-block")
+        if (window.innerWidth < d3.select("#key").node().offsetWidth-10) {
+          d3.select("#key").style("display","none")
+        }
+      }
+
+      if (d3.select("#year_slider").node()) {
+        d3.select("#year_slider").style("display","inline-block")
+        if (window.innerWidth < d3.select("#year_slider").node().offsetWidth-10) {
+          d3.select("#year_slider").style("display","none")
+        }
+      }
+      
+      app.height = window.innerHeight
+      app.height -= (d3.select("#ui_bottom").node().offsetHeight+buffer)
+      if (app.vars.controls != "false") app.height -= d3.select("#builder").node().offsetHeight
+      app.width = window.innerWidth-10;
+
+      d3.select("#builder").style("top",function(d){
+        if (app.vars.controls != "false") var u = 0
+        else var u = 1
+        return "-"+((this.offsetHeight+5)*u)+"px"
+      })
+
+      d3.select("#app")
+        .style("height",app.height+"px")
+        .style("width",app.width+"px")
+        .style("top",function(d){
+          if (app.vars.controls != "false") var u = 1
+          else var u = 0
+          
+          return (((d3.select("#builder").node().offsetHeight)*u)+buffer)+"px"
+        })
+        .call(app.viz
+            .height(app.height)
+            .width(app.width)
+            .title_width(app.title_width)
+            .title_height(app.title_height)
+          )
+        
+      if (!app.first_load) {
+        d3.select("#app")
+          .style("-webkit-transition","top 0.6s, height 0.6s")
+          .style("transition","top 0.6s, height 0.6s")
+        d3.select("#builder")
+          .style("-webkit-transition","top 0.6s")
+          .style("transition","top 0.6s")
+      }
+      
     }
     
     /************************/

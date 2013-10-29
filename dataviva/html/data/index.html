@@ -1,26 +1,419 @@
 {% extends "templates/site.html" %}
 
-{% block title %}: {% trans %}Data{% endtrans %}{% endblock %}
+{% block title %}: {% trans %}Database Query{% endtrans %}{% endblock %}
 
 {% block head %}
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.data.css" />
-
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
+  
 {% endblock %}
 
 {% block body %}
+
+<div id="filter_selects" class="lightbox">
     
-  <div class="darkbox">
-    <h1>{% trans %}How do you want to access the data?{% endtrans %}</h1>
+  <div id="data_toggle">
+    <!--<legend id="dataset">{% trans %}Data{% endtrans %}</legend>-->
+    {% for dataset in datasets %}
+      <label for="{{dataset}}">{{dataset.upper()}}</label>
+      <input type="radio" name="dataset" value="{{dataset}}" id="{{dataset}}" onclick="change_dataset(this.value)" {% if datasets[dataset]["active"] %}checked="checked"{% endif %}>
+    {% endfor %}
   </div>
-  <br>
-  <a href="{{ url_for('data.query') }}" class="decision icon square database">
-    <h1>{% trans %}Database{% endtrans %}</h1>
-    {% trans %}Custom data queries of our database.{% endtrans %}
-  </a>
-  <a href="{{ url_for('data.classifications') }}" class="decision icon square source">
-    <h1>{% trans %}Source List{% endtrans %}</h1>
-    {% trans %}Browse the various classifications.{% endtrans %}
-  </a>
   
+  {% for dataset in datasets %}
+    <div class="years_dropdown filter {{dataset}}_yearfilter">
+      <select id="{{dataset}}_yearselect" class="year_filter" onchange="change_year(this.value,this.id)">
+        <option value="all"{% if datasets[dataset]["year"] == "all" %} selected{% endif %}>{% trans %}All Years{% endtrans %}</option>
+        {% for year in datasets[dataset]["years"] %}
+          <option value="{{year}}"{% if datasets[dataset]["year"] == year %} selected{% endif %}>{{year}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  {% endfor %}
+  
+  <a id="file" class="leon button square alt_tooltip" onclick="download_csv()" alt="{% trans %}Download as CSV{% endtrans %}"><i class="fa fa-save"></i></a>
+  <a id="settings" class="leon button square alt_tooltip" onclick="settings()" alt="{% trans %}Edit Columns{% endtrans %}"><i class="fa fa-columns"></i></a>
+  
+  {% for filter in filter_order %}
+    <div id="{{filter}}_filter" class="filter{% for dataset in datasets %}{% if filter in datasets[dataset]['filters'] %} {{dataset}}_filter{% endif %}{% endfor %}{% if filters[filter]["active"] %} active{% endif %}">
+      <a id="{{filter}}_toggle" class="help short filter_button" onclick="toggle_filter(this.id,this.parentNode)">
+        <span class="show">{{ format("show").render("show",g.locale) }}</span>
+        {{ format(filter+"_plural").render(filter+"_plural",g.locale) }}
+      </a>
+      <div class="filter_box">
+      
+        {% for obj in filters[filter]["items"] %}
+          <div id="id_{{ obj.item.id }}{% if obj.kms > 0 %}distance{{obj.kms}}{% endif %}" class="filter_item">
+            <span class="list_icon" title="{{ obj.item.id }}" 
+              style="background-image: url('{{obj.item.icon()}}');
+              {% if (filter != 'wld' and filter != 'bra') or (filter == 'wld' and obj.item.id|length == 2) %} background-color:{{obj.item.color}};{% endif %}"></span>
+            <span class="filter_title" style="margin-left: 1px;">
+              {{ obj.item.name() }}{% if obj.kms > 0 %} ({{obj.kms}}km){% endif %}
+            </span>
+            <i class="fa fa-times-circle" onclick="remove_filter(this)"></i>
+            {% if obj.item.id|length < filters[filter]["depths"][filters[filter]["depths"]|length-1] %}
+              <div class="filter_depth">
+                <select id="depths_{{filter}}_{{obj.item.id}}" class="depth_select" onchange="change_depth(this.value,this.id)">
+                {% for d in filters[filter]["depths"] %}
+                  {% if (d == 7 and obj.item.id[:2] == "mg") or d != 7 %}
+                    {% if d == obj.item.id|length %}
+                      {% set option_name = filter~"_"~d %}
+                    {% elif d > obj.item.id|length %}
+                      {% set option_name = filter~"_"~d~"_plural" %}
+                    {% endif %}
+                    <option value="{{d}}"{% if d|string == obj.depth %} selected{% endif %}>{{ format(option_name).render(option_name,g.locale) }}</option>
+                  {% endif %}
+                {% endfor %}
+                </select>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      
+        <div class="filler"{% if filters[filter]["items"] %} style="display:none;"{% endif %}>
+          <label for="{{filter}}_filler">{% trans %}Currently showing{% endtrans %}</label>
+          <select id="{{filter}}_filler" class="depth_select" onchange="change_depth(this.value,'depths_{{filter}}_show')">
+            {% for depth in filters[filter]["depths"] %}
+              <option value="{{depth}}"{% if depth == filters[filter]["depth"] %} selected{% endif %}>
+                {{ format(filter+"_"~depth~"_plural").render(filter+"_"~depth~"_plural",g.locale) }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      
+        <div class="add_filter leon button medium" onclick="add_filter('{{filter}}')">
+          <i class="fa fa-plus"></i>
+          {{ format(filter+"_add").render(filter+"_add",g.locale) }}
+        </div>
+      
+      </div>
+    </div>
+  {% endfor %}
+  
+  <div id="build" onclick="update_table(true)" class="decision short">{% trans %}Build{% endtrans %}</div>
+    
+</div>
+
+<div class="lightbox data_table">
+  <iframe id="table_frame"></iframe>
+</div>
+
+{% endblock %}
+{% block js %}
+
+<script src="/static/js/utils/utils.selector.js"></script>
+<script type="text/javascript">
+  
+  leon("$dataset").color(dataviva.color)
+  leon(".depth_select").color(dataviva.color)
+  leon(".year_filter").color(dataviva.color)
+  
+  d3.select("#filter_selects")
+    .style("max-height",window.innerHeight-169+"px")
+  
+  var datasets = {{ datasets|safe }}
+  var filters = {{ filters_json|safe }}
+  var args = {}, first = true
+  for (d in datasets) {
+    args[d] = {"cols": {}, "order": ""}
+  }
+  args.columns = function() {
+    var ret = []
+    for (c in args[dataset].cols) {
+      if (args[dataset].cols[c]) ret.push(c)
+    }
+    return ret
+  }
+  
+  // Download the data
+  function download_csv() {
+    var u = document.getElementById("table_frame").contentWindow.is.url()
+    u += "?download"
+    if (args[dataset].order != "") u += "&order="+args[dataset].order
+    if (args.columns().length) u += "&cols="+args.columns().join(".")
+    window.location = u
+  }
+
+  // Toggling between datasets
+  var dataset = d3.select("input[name='dataset']:checked").attr("value")
+  function change_dataset(value){
+    d3.selectAll(".filter").style("display", "none")
+    d3.selectAll("."+value+"_filter").style("display", "block")
+    d3.selectAll("."+value+"_yearfilter").style("display", "inline-block")
+    datasets[dataset].active = false
+    datasets[value].active = true
+    dataset = value
+  }
+  change_dataset(dataset)
+  
+  // Create Filter Selector
+  dataviva.popover.create({
+    "id": "filter_popover",
+    "width": 600,
+    "height": "80%",
+    "close": true
+  })
+
+  var selector = Selector()
+    .callback(add_filter);
+  
+  function add_filter(obj){
+    
+    if (typeof obj === "string") {
+      d3.select("#filter_popover").call(selector.type(obj));
+      dataviva.popover.show("#filter_popover");
+    }
+    else {
+      
+      dataviva.popover.hide();
+      
+      var type = selector.type()
+      var cont = d3.select("#"+type+"_filter .filter_box")
+      var add_btn = "#"+type+"_filter .add_filter"
+      
+      // remove filler text
+      cont.select(".filler").style("display","none")
+    
+      if (!cont.select("#id_"+obj.id).node()) {
+        
+        var new_id = obj.distance ? obj.id+"distance"+obj.distance : obj.id
+
+        var div = cont
+          .insert("div", add_btn)
+          .attr("id", "id_"+new_id)
+          .attr("class", "filter_item")
+          
+        div.append("span")
+          .attr("class","list_icon")
+          .style("background-image", "url('"+obj.icon+"')")
+          .style("background-color", function(){
+            return (type != "wld" && type != "bra") || (type == "wld" && obj.id.length == 2) ? obj.color : "transparent"
+          })
+          
+        div.append("span")
+          .attr("class","filter_title")
+          .text(function(){
+            var d = ""
+            if (obj.distance) d = " ("+obj.distance+"km)"
+            return obj.name + d
+          })
+          
+        var depth_ids = dataviva.depths(selector.type())
+        
+        if (obj.id.length < depth_ids[depth_ids.length-1]) {
+          if(obj.id == "mg" || obj.id.indexOf("mgplr") >= 0){
+            depth_ids.splice(-1, 0, 7)
+          }
+          depth_ids = depth_ids.slice(depth_ids.indexOf(obj.id.length))
+          var depth_data = {}
+          depth_ids.forEach(function(d,i){
+            if (i == 0) depth_data[d] = dataviva.format.text(type+"_"+d)
+            else depth_data[d] =  dataviva.format.text(type+"_"+d+"_plural");
+          })
+          var depth_div = div.append("div").attr("class","filter_depth")
+          leon({
+            "id": "depths_"+type+"_"+obj.id,
+            "data": depth_data,
+            "parent": depth_div.node(),
+            "type": "select",
+            "event": "change_depth",
+            "default": depth_ids[0]
+          }).color(dataviva.color)
+          filters[type][new_id] = depth_ids[0]
+        }
+        else {
+          filters[type][new_id] = obj.id.length
+        }
+      
+        div.append("i")
+          .on(d3plus.evt.click, function(){ remove_filter(this) })
+          .attr("class", "fa fa-times-circle")
+        
+      }
+      
+    }
+    
+  }
+  
+  function remove_filter(node) {
+    var cont = d3.select(node.parentNode.parentNode)
+    delete filters[cont.node().parentNode.id.split("_")[0]][node.parentNode.id.split("_")[1]]
+    d3.select(node.parentNode).remove()
+    if (!cont.select(".filter_item").node()) {
+      cont.select(".filler").style("display","block")
+    }
+  }
+  
+  function change_depth(depth,elid,elem) {
+    type = elid.split("_")[1]
+    id = elid.split("_")[2]
+    filters[type][id] = depth
+  }
+  
+  function change_year(year,dataset) {
+    dataset = dataset.split("_")[0]
+    datasets[dataset].year = year
+  }
+  
+  function toggle_filter(filter,parent) {
+    active = dataviva.toggleClass(parent,"active")
+    filter = filter.split("_")[0]
+    filters[filter].active = active
+  }
+  
+  function is_active(selection){
+    if(selection.attr("class").indexOf("active") > -1) return true;
+    return false;
+  }
+  
+  // retrieving new data
+  function update_table(url) {
+    new_url = dataset+"/"+datasets[dataset].year+"/"
+    datasets[dataset].filters.forEach(function(f){
+      if (filters[f]) {
+        new_ids = []
+        if (filters[f].active) {
+          for (x in filters[f]) {
+            var split = x.split("distance")
+            var id = split[0]
+            if (split.length > 1) id += "."+split[1]
+            if (["show","active"].indexOf(id) < 0) {
+              if (filters[f][x] == x) new_ids.push(id)
+              else new_ids.push(id+".show."+filters[f][x])
+            }
+          }
+          if (!new_ids.length) new_ids.push("show"+"."+filters[f]["show"])
+        }
+        else new_ids.push("all")
+        new_url += new_ids.join("_")+"/"
+      }
+      else {
+        filters[f] = {"active": false}
+        new_url += "all/"
+      }
+    })
+    if (!url) {
+      if (window.location.search.indexOf("cols=") > -1) {
+        var columns = window.location.search.split("cols=")[1].split("&")[0].split(".")
+        columns.forEach(function(c){
+          args[dataset].cols[c] = true
+        })
+      }
+      if (window.location.search.indexOf("order=") > -1) {
+        args[dataset].order = window.location.search.split("order=")[1].split("&")[0]
+      }
+      else {
+        args[dataset].order = ""
+      }
+    }
+    
+    var params = []
+    if (args[dataset].order != "") params.push("order="+args[dataset].order)
+    var avail_columns = args.columns()
+    if (avail_columns.length > 0 && (first || avail_columns.length < Object.keys(args[dataset].cols).length)) {
+      params.push("cols="+avail_columns.join("."))
+    }
+    if (params.length) params = "?"+params.join("&")
+    else params = ""
+    d3.select("iframe").attr("src","/data/table/"+new_url+params)
+    if (url) dataviva.url("/data/"+new_url,params)
+  }
+  
+  function change_cols(value,id) {
+    var key = id.split("coltoggle_")[1]
+    args[dataset].cols[key] = value
+    
+    if (!args.columns().length) {
+      for (c in args[dataset].cols) {
+        args[dataset].cols[c] = true
+        leon("#coltoggle_"+c).set(true).color(dataviva.color)
+      }
+    }
+    send_columns()
+  }
+  
+  function send_columns() {
+    document.getElementById("table_frame").contentWindow.change_cols(args[dataset].cols)
+  }
+  
+  function update_cols(cols) {
+    
+    var resend = false
+    for (c in args[dataset].cols) {
+      var colIndex = cols.objectIndex("name",c)
+      if (colIndex < 0) {
+        delete args[dataset].cols[c]
+        resend = true
+      }
+    }
+    
+    cols.forEach(function(c,i){
+      if (!(c.name in args[dataset].cols)) {
+        if (!c.active && !first) {
+          resend = true
+          args[dataset].cols[c.name] = true
+          c.active = true
+        }
+        else args[dataset].cols[c.name] = c.active
+      }
+      else if (c.name in args[dataset].cols && (args[dataset].cols[c.name].active != c.active)) {
+        c.active = args[dataset].cols[c.name]
+      }
+    })
+    
+    if (first || resend) send_columns()
+    
+    var switches = d3.select("#column_toggles").selectAll("div.column_toggle")
+      .data(cols,function(d){return d.name})
+    switches.enter().append("div")
+      .attr("class","column_toggle")
+      .each(function(d){
+        leon({
+          "id": "coltoggle_"+d.name,
+          "parent": this,
+          "type": "checkbox",
+          "event": "change_cols",
+          "default": d.active,
+          "label": dataviva.format.text(d.name)
+        }).color(dataviva.color)
+      })
+    switches.exit().remove()
+    first = false
+  }
+  
+  // Create Settings
+  dataviva.popover.create({
+    "id": "settings_popover",
+    "width": 400,
+    "height": 400,
+    "close": true
+  })
+  d3.select("#settings_popover").append("div")
+    .attr("id","column_toggles")
+  d3.select("#column_toggles").append("div")
+    .attr("class","selector_title")
+    .text(dataviva.format.text("Column Visibility"))
+    
+  function settings() {
+    dataviva.popover.show("#settings_popover")
+  }
+  
+  function iframe_size(w,h) {
+      
+    d3.select(".data_table")
+      .style("width",function(){
+        var allowed =  window.innerWidth - 380
+        return w < allowed ? w+"px" : allowed+"px"
+      })
+      .style("height",function(){
+        var allowed =  window.innerHeight - 149
+        return h < allowed ? h+"px" : allowed+"px"
+      })
+      
+  }
+  
+  update_table()
+
+</script>
 {% endblock %}

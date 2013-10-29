@@ -13,7 +13,7 @@
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.grid.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.nav.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.icons.css" />
-    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome-4.0.0/css/font-awesome.min.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/d3plus.css" />
     
     <script src="/static/js/libs/modernizr.custom.js"></script>
@@ -87,6 +87,18 @@
       ga('send', 'pageview');
     
       dataviva.ui.background()
+      
+      if (dataviva.resize) {
+        window.onresize = function() {
+          if (dataviva.resize_snap) dataviva.resize()
+          else {
+            if(this.resizeTO) clearTimeout(this.resizeTO);
+            this.resizeTO = setTimeout(function() {
+              dataviva.resize()
+            },500)
+          }
+        }
+      }
       
     </script>
     

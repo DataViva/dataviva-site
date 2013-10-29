@@ -54,6 +54,40 @@ leon_functions.text_color = function(color) {
   return hsl.h > 35 && hsl.s >= 3 && hsl.l >= 41 ? dark : light;
   
 }
+
+leon_functions.check_hidden = function(hidden_node) {
+  if (hidden_node) {
+    if (hidden_node instanceof Array) {
+      hidden_node.forEach(function(h){
+        h.node.style.visibility = h.v
+        h.node.style.display = h.d
+      })
+    }
+    else {
+      hidden_objs = []
+      function find_hidden(node) {
+        function getStyle(el, cssprop){
+          if (el.currentStyle)
+            return el.currentStyle[cssprop]
+          else if (document.defaultView && document.defaultView.getComputedStyle)
+            return document.defaultView.getComputedStyle(el, "")[cssprop]
+          else
+            return el.style[cssprop]
+        }
+        if (getStyle(node,"display") == "none") hidden_objs.push({"node": node})
+        if (node.parentNode && node.tagName != "BODY") find_hidden(node.parentNode)
+      }
+      find_hidden(hidden_node)
+      hidden_objs.forEach(function(h){
+        h.v = h.node.style.visibility
+        h.d = h.node.style.display
+        h.node.style.visibility = "hidden"
+        h.node.style.display = "block"
+      })
+      return hidden_objs
+    }
+  }
+}
   
 leon_vars.color.hsl = function(color){
     var r = parseInt(color.substr(1,2),16)
@@ -248,12 +282,7 @@ leon = function(name) {
       node.parentNode.removeChild(node)
       node = null
     }
-    if (obj.items instanceof Array) var parent = obj.items[0].parentNode
-    else var parent = obj.items.parentNode
-    var display = parent.style.display
-    if (display == "none") parent.style.display = "block"
     self.leons[obj.name] = new leon_construct[obj.type.split("-")[0]](obj)
-    if (display == "none") parent.style.display = "none"
     if (obj.items.onclick && obj.type == "button") {
       self.leons[obj.name].node.addEventListener("click",function(){
         obj.items.onclick(this.value)
@@ -825,8 +854,7 @@ leon_construct.button = function(item,parent) {
   
   if (typeof item != "string" && leon_vars.autohide) item.style.display = "none"
   
-  self.node = document.createElement("div")
-  self.node.className = "leon button "+self.size
+  self.node = leon_construct.div("leon button "+self.size)
   
   if (item.attributes && item.attributes.icon) {
     var icon = document.createElement("div")
@@ -840,8 +868,10 @@ leon_construct.button = function(item,parent) {
   
   self.node.innerHTML = self.node.innerHTML + html
   if (item.value) {
-    self.node.id = "leon_button_"+item.value
     self.node.value = item.value
+  }
+  if (item.id) {
+    self.node.id = "leon_"+item.id
   }
   
   if (parent) {
@@ -929,22 +959,22 @@ leon_construct.checkbox = function(obj) {
   self.item = obj.items
   self.color = leon_vars.color.main.normal
   
-  self.enable = function() {
-    self.bg.style.background = self.color
-    self.button.style.left = self.button.offsetHeight+"px"
-    self.item.checked = true
-  }
-  
-  self.disable = function() {
-    self.bg.style.background = leon_vars.color.accent.dark
-    self.button.style.left = "0px"
-    self.item.checked = false
+  self.set_value = function(value) {
+    if (value) {
+      self.bg.style.background = self.color
+      self.button.style.left = self.button.offsetHeight+"px"
+    }
+    else {
+      self.bg.style.background = leon_vars.color.accent.dark
+      self.button.style.left = "0px"
+    }
+    self.item.checked = value
   }
   
   if (leon_vars.autohide) self.item.style.display = "none"
   
-  self.node = document.createElement("div")
-  self.node.className = "leon checkbox"
+  self.node = leon_construct.div("leon checkbox")
+  self.node.id = "leon_"+obj.name
   self.item.parentNode.insertBefore(self.node,self.item)
   
   if (obj.label) {
@@ -956,8 +986,8 @@ leon_construct.checkbox = function(obj) {
   self.node.appendChild(self.bg)
   
   self.bg.addEventListener("click",function(e){
-    if (self.item.checked) self.disable()
-    else self.enable()
+    if (self.item.checked) self.set_value(false)
+    else self.set_value(true)
     if (self.item.onclick) self.item.onclick()
   })
   
@@ -966,9 +996,10 @@ leon_construct.checkbox = function(obj) {
   self.button.innerHTML = "&nbsp;"
   self.bg.appendChild(self.button)
   
-  if (self.item.checked) self.enable()
+  if (self.item.checked) self.set_value(true)
   
   self.set_size = function(size) {
+    var hidden_node = leon_functions.check_hidden(self.node)
     self.button.style.padding = leon_vars.padding[size]
     self.button.style.fontSize = leon_vars.font.size[size]
     var w = self.button.offsetHeight
@@ -978,8 +1009,9 @@ leon_construct.checkbox = function(obj) {
     w -= parseFloat(self.button.style.paddingRight,10)
     w -= leon_vars.border*2
     self.button.style.width = w+"px"
-    if (self.item.checked) self.enable()
+    if (self.item.checked) self.set_value(true)
     if (self.label) self.label.set_size(size)
+    leon_functions.check_hidden(hidden_node)
     return self
   }
   
@@ -1101,8 +1133,8 @@ leon_construct.range = function(obj) {
   }
       
   // Create range group
-  this.node = document.createElement("div")
-  this.node.className = "leon range"
+  this.node = leon_construct.div("leon range")
+  this.node.id = "leon_"+obj.name
   this.input.parentNode.insertBefore(self.node,self.input)
   
   // Create label
@@ -1275,6 +1307,7 @@ leon_construct.range = function(obj) {
   
   self.set_size = function(size) {
     
+    var hidden_node = leon_functions.check_hidden(self.node)
     var available_width = self.max_width
     
     self.handle_width = 0
@@ -1378,6 +1411,7 @@ leon_construct.range = function(obj) {
     }
   
     self.size = size
+    hidden_node = leon_functions.check_hidden(hidden_node)
       
     return self
   }
@@ -1462,7 +1496,8 @@ leon_construct.select = function(obj) {
     
     self.width = 0
     self.padding = parseFloat(leon_vars.padding[size].split(" ")[1],10)
-        
+    
+    var hidden_node = leon_functions.check_hidden(self.node)
     self.options.forEach(function(option){
       
       option.set_size(size)
@@ -1483,6 +1518,8 @@ leon_construct.select = function(obj) {
     
     self.dropdown.style.width = (self.width+self.padding*2+leon_vars.border*2)+"px"
     self.dropdown.style.left = self.selected.node.offsetLeft+"px"
+
+    leon_functions.check_hidden(hidden_node)
       
     return self
   }
@@ -1512,7 +1549,7 @@ leon_construct.select = function(obj) {
   self.set_value = function(value,miss) {
     if (self.input.value != value || miss) {
       var option = self.options.filter(function(o){
-        return o.node.id == "leon_button_"+value;
+        return o.node.value == value;
       })[0]
       if (!option) var option = self.options[0]
       self.input.value = value
@@ -1585,6 +1622,7 @@ leon_construct.text = function(obj) {
   var self = this
   self.input = obj.items
   self.node = leon_construct.div("leon text")
+  self.node.id = "leon_"+obj.name
   self.input.parentNode.insertBefore(self.node,self.input)
   self.color = leon_vars.color.main.normal
   

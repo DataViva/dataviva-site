@@ -65,6 +65,10 @@ div#settings > .leon.button.square {
   width: 17px;
 }
 
+.leon.button:hover {
+  background-color: rgb(239,239,239);
+}
+
 div#builder {
   left: 0px;
   position: absolute;
@@ -97,8 +101,9 @@ div.filter_button > div.leon.button {
   margin: 0px;
 }
 
-.leon.button > i.icon-list-alt {
+.leon.button > i.fa-list-alt {
   margin-left: 2px;
+  margin-top: 2px;
   opacity: 0.5;
 }
 

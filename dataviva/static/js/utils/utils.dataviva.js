@@ -278,6 +278,12 @@ dataviva.format.text = function(text,name,l) {
       "isic_plural": {"en": "Industries", "pt": "Atividades Econ\u00f4micas"},
       "wld": {"en": "Export Destination", "pt": "Destino das Exporta\u00e7\u00f5es"},
       "wld_plural": {"en": "Export Destinations", "pt": "Destinos das Exporta\u00e7\u00f5es"},
+
+      "bra_add": {"en": "add a location", "pt": "adicionar uma localidade"},
+      "cbo_add": {"en": "add an occupation", "pt": "adicionar uma ocupa\u00e7\u00e3o"},
+      "hs_add": {"en": "add a product", "pt": "adicionar um produto"},
+      "isic_add": {"en": "add an industry", "pt": "adicionar uma atividade econ\u00f4mica"},
+      "wld_add": {"en": "add an export destination", "pt": "adicionar um destino das exporta\u00e7\u00f5es"},
     
       // File Types
       "download": {"en": "Download", "pt": "Download"},
@@ -478,32 +484,11 @@ dataviva.format.number = function(value,name,l) {
 
 dataviva.ui = {}
 
-dataviva.ui.header = function() {
-  var dyn = d3.select("#dynamic_header").node()
-  if (dyn) {
-    var header_height = d3.select("#header_container").node().offsetHeight
-    var dyn_height = dyn.offsetHeight
-    var dyn_top = dyn.offsetTop-header_height
-    d3.select("#container").style("margin-top",dyn_height+dyn_top+"px")
-    document.onscroll = function() {
-      var top = window.pageYOffset
-      if (top > 10) {
-        d3.select("#header_container")
-          .style("height",header_height+dyn_height+dyn_top+"px")
-      }
-      else {
-        d3.select("#header_container")
-          .style("height",header_height+"px")
-      }
-    }
-  }
-}
-
 dataviva.ui.background = function() {
   var fs = d3.select("#fullscreen")
   if (fs.node()) {
     var hour = new Date().getHours()
-    if (hour >= 5 && hour <= 22) {
+    if (hour >= 5 && hour <= 20) {
       var filename = "day"
     }
     else {
@@ -570,7 +555,7 @@ dataviva.ui.loading = function(parent) {
     .attr("class","loading")
     
   this.icon = self.div.append("i")
-    .attr("class","icon-certificate icon-4x")
+    .attr("class","fa fa-certificate")
     
   this.words = self.div.append("div")
     .attr("class","text")
@@ -803,6 +788,21 @@ dataviva.popover.hide = function(id) {
 
 }
 
+dataviva.toggleClass = function(element,tag) {
+  var ret = false
+  d3.select(element).attr("class",function(){
+    var classes = this.className.split(" ")
+    var index = classes.indexOf(tag)
+    if (index >= 0) classes.splice(index,1)
+    else {
+      classes.push(tag)
+      ret = true
+    }
+    return classes.join(" ")
+  })
+  return ret
+}
+
 dataviva.flash = function(text) {
 	
 	d3.selectAll("#server_message").remove();
@@ -825,4 +825,67 @@ dataviva.flash = function(text) {
 	          div.remove();
 	        },timing)
 		})
+}
+
+dataviva.url = function(url,args,title) {
+  
+  var replace = window.location.pathname.indexOf(url) >= 0
+  var iframe = window != window.parent
+  var app_embed = window.location.pathname.indexOf("apps/embed") >= 0
+  var app_builder = window.parent.location.pathname.indexOf("apps/builder") >= 0
+  var data_table = window.location.pathname.indexOf("data/table") >= 0
+
+  if (title) document.title = "DataViva : "+title
+
+  var params = ""
+  if (args && typeof args === "string") {
+    params = args
+  }
+  else if (args && Object.keys(args).length > 0) {
+    var url_vars = []
+    for (v in args) {
+      if (args[v] != "" && (!app_embed || (app_embed && (v != "controls" || (v == "controls" && args.builder != "false"))))) {
+        url_vars.push(v + "=" + args[v])
+      }
+    }
+    params += url_vars.join("&");
+    if (params.length) params = "?"+params
+  }
+  var full_url = url+params
+  
+  if (Modernizr.history) {
+    if (replace || iframe) {
+      window.history.replaceState({'prev_request': full_url}, title, full_url)
+    }
+    else {
+      window.history.pushState({'prev_request': full_url}, title, full_url)
+    }
+    
+    if (iframe) {
+      if (title) window.parent.document.title = "DataViva : "+title
+  
+      if (app_builder) {
+        var parent_url = full_url.replace("embed","builder")
+      }
+      else if (data_table) {
+        var parent_url = full_url.replace("table/","")
+      }
+      if (replace) {
+        window.parent.history.replaceState({'prev_request': parent_url}, title, parent_url)
+      }
+      else {
+        window.parent.history.pushState({'prev_request': parent_url}, title, parent_url)
+      }
+    }
+  } 
+  else if (!replace) {
+    if (app_builder) {
+      full_url = full_url.replace("embed","builder")
+      window.parent.location = builder_url
+    }
+    else {
+      window.location = full_url
+    }
+    
+  }
 }

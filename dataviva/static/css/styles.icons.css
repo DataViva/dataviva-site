@@ -318,10 +318,6 @@
   line-height: 180px;
 }
 
-.decision.icon.api:before {
-  content: "\f0ad";
-}
-
 .decision.icon.source:before {
   content: "\f14e";
 }

@@ -30,7 +30,7 @@
       <div class="vote_count">{% if q.votes.all()|length %}{{ q.votes.count() }}{% else %}0{% endif %}</div>
       <div class="vote_label">{% trans %}Points{% endtrans %}</div>
       <a class="vote_up alt_tooltip" style="color: {% if q.vote == True %}green{% else %}#333{% endif %}" href="{{ url_for('ask.question_vote', slug=q.slug) }}" alt="{% trans %}This question contributes to a better understanding of the topic.{% endtrans %}">
-        <i class="icon-thumbs-up"></i>
+        <i class="fa fa-thumbs-up"></i>
       </a>
     </div>
     
@@ -94,10 +94,10 @@
         <div class="vote_count">{% if r.votes.all()|length %}{{ r.votes.count() }}{% else %}0{% endif %}</div>
         <div class="vote_label">{% trans %}Points{% endtrans %}</div>
         <a class="vote_down alt_tooltip" style="color: {% if r.flag == True %}red{% else %}#333{% endif %}" href="{{ url_for('ask.reply_flag', id=r.id) }}" alt="{% trans %}Flagged replies are reviewed by DataViva staff to determine if they violate community guidelines. Accounts are penalized for violations and can lead to account termination.{% endtrans %}">
-          <i class="icon-flag"></i>
+          <i class="fa fa-flag"></i>
         </a>
         <a class="vote_up alt_tooltip" style="color: {% if r.vote == True %}green{% else %}#333{% endif %}" href="{{ url_for('ask.reply_vote', id=r.id) }}" alt="{% trans %}This question contributes to a better understanding of the topic.{% endtrans %}">
-          <i class="icon-thumbs-up"></i>
+          <i class="fa fa-thumbs-up"></i>
         </a>
       </div> <!-- end voting -->
       
@@ -181,9 +181,9 @@ $(document).ready(function() {
 // Voting!
 d3.selectAll(".vote_up").on(d3plus.evt.click, function(){
 	var link_el = this;
-  d3.select(link_el).select("i").attr("class","icon-cog icon-spin")
+  d3.select(link_el).select("i").attr("class","fa fa-cog fa-spin")
 	d3.json(link_el.href, function(resp){
-    d3.select(link_el).select("i").attr("class","icon-thumbs-up")
+    d3.select(link_el).select("i").attr("class","fa fa-thumbs-up")
 		if(resp.error) {
 			dataviva.flash(resp.error)
 		}
@@ -213,9 +213,9 @@ d3.selectAll(".vote_up").on(d3plus.evt.click, function(){
 // Flagging :(
 d3.selectAll(".vote_down").on(d3plus.evt.click, function(){
 	var link_el = this;
-  d3.select(link_el).select("i").attr("class","icon-cog icon-spin")
+  d3.select(link_el).select("i").attr("class","fa fa-cog fa-spin")
 	d3.json(link_el.href, function(resp){
-    d3.select(link_el).select("i").attr("class","icon-flag")
+    d3.select(link_el).select("i").attr("class","fa fa-flag")
 		if(resp.error) {
 			dataviva.flash(resp.error)
 		}
