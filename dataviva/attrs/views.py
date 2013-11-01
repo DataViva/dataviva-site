@@ -1,7 +1,7 @@
 from sqlalchemy import func, distinct
 from flask import Blueprint, request, jsonify, abort, g
 
-from dataviva import db
+from dataviva import db, __latest_year__
 from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo, Yb
 from dataviva.secex.models import Yp, Yw
 from dataviva.rais.models import Yi, Yo
@@ -54,9 +54,12 @@ def fix_name(attr, lang):
 
 def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, 
                         Attr_weight_mergeid, Attr_id_lens, lang):
-    
     # this is the dictionary that will be jsonified and sent to the user
     ret = {}
+    dataset = "rais"
+    if Attr == Cbo or Attr == Hs:
+        dataset = "secex"
+    latest_year = __latest_year__[dataset]
         
     cache_id = request.path + lang
     # first lets test if this query is cached
@@ -94,35 +97,33 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col,
     # an ID/filter was not provided
     else:
         
-        # this will be the lookup we'll use for getting parents
-        attrs = {a.id: fix_name(a.serialize(), lang) for a in Attr.query.filter(func.char_length(Attr.id) <= Attr_id_lens[-1]).all()}
+        attrs_all = Attr.query.filter(func.char_length(Attr.id) <= Attr_id_lens[-1]).all()
         
-        # merge cbo table to YO table to find all instances in the data
-        max_year = db.session.query(Attr_weight_tbl.year.distinct()).order_by(Attr_weight_tbl.year.desc()).all()[0]
+        # just get items available in DB
+        attrs_val = Attr_weight_tbl.query.filter(Attr_weight_tbl.year == latest_year).all()
+        attrs_val = {getattr(a, Attr_weight_mergeid): getattr(a, Attr_weight_col) for a in attrs_val}
         
-        attrs_in_db = db.session.query(Attr, func.sum(getattr(Attr_weight_tbl, Attr_weight_col)))
-        attrs_in_db = attrs_in_db \
-                        .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id).group_by(Attr) \
-                        .filter(Attr_weight_tbl.year == max_year[0])
-        # attrs_in_db = {a[0].id: a for a in attrs_in_db.all()}
-        
-        if Attr_weight_col == "population":
-            for a in attrs:
-                if len(a) == 8 and a[:2] == "mg":
-                    plr = Bra.query.get_or_404(a).pr2.first()
-                    if plr:
-                        attrs[a]["plr"] = plr.id
+        attrs_w_data = db.session.query(Attr, func.sum(getattr(Attr_weight_tbl, Attr_weight_col)))
+        attrs_w_data = attrs_w_data \
+                        .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id).group_by(Attr)
+        attrs_w_data = {a[0].id: a[1] for a in attrs_w_data}
                         
+        attrs = []
+        for a in attrs_all:
+            a = a.serialize()
+            a["available"] = False
+            a[Attr_weight_col] = 0
+            if a["id"] in attrs_w_data:
+                a["available"] = True
+                if a["id"] in attrs_val:
+                    a[Attr_weight_col] = attrs_val[a["id"]]
+            if Attr_weight_col == "population":
+                if len(a["id"]) == 8 and a["id"][:2] == "mg":
+                    plr = Bra.query.get_or_404(a["id"]).pr2.first()
+                    if plr: a["plr"] = plr.id
+            attrs.append(fix_name(a, lang))
         
-        for a in attrs_in_db.all():
-            # this_id = a[0].id
-            # attrs[this_id][Attr_weight_col] = a[1]
-            attrs[a[0].id][Attr_weight_col] = int(a[1])
-            attrs[a[0].id]["available"] = True
-            # raise Exception(this_id[:id_len])
-
-        
-        ret["data"] = attrs.values()
+        ret["data"] = attrs
         
     return jsonify(ret)
 
