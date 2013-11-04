@@ -40,6 +40,7 @@
 
 .help.icon.square:before,
 .decision.icon.square:before {
+  background-size: 100%;
   height: 100%;
   font-size: 100px;
   line-height: 160px;
