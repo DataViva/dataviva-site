@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-21 14:41-0400\n"
+"POT-Creation-Date: 2013-11-04 16:48-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,22 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+
+#: dataviva/about/views.py:49
+msgid "You need to be logged in to ask questions."
+msgstr ""
+
+#: dataviva/about/views.py:70
+msgid "Your question has been submitted and is pending approval."
+msgstr ""
+
+#: dataviva/about/views.py:89
+msgid "You need to be signed in to reply to questions."
+msgstr ""
+
+#: dataviva/about/views.py:109
+msgid "Reply submitted."
+msgstr ""
 
 #: dataviva/admin/views.py:159
 msgid "This question has now been updated."
@@ -24,47 +40,31 @@ msgstr ""
 msgid "You need to be logged in to star apps."
 msgstr ""
 
-#: dataviva/ask/views.py:117
-msgid "You need to be signed in to reply to questions."
-msgstr ""
-
-#: dataviva/ask/views.py:137
-msgid "Reply submitted."
-msgstr ""
-
-#: dataviva/ask/views.py:170 dataviva/ask/views.py:198
+#: dataviva/ask/views.py:91 dataviva/ask/views.py:119
 msgid "You need to be logged in to vote."
 msgstr ""
 
-#: dataviva/ask/views.py:228
+#: dataviva/ask/views.py:149
 msgid "You need to be logged in to flag replies."
-msgstr ""
-
-#: dataviva/ask/views.py:258
-msgid "You need to be logged in to ask questions."
-msgstr ""
-
-#: dataviva/ask/views.py:279
-msgid "Your question has been submitted and is pending approval."
 msgstr ""
 
 #: dataviva/guide/decorators.py:9
 msgid "You need to be logged in to view this page."
 msgstr ""
 
-#: dataviva/guide/views.py:145 dataviva/profiles/views.py:41
+#: dataviva/guide/views.py:145 dataviva/profiles/views.py:39
 msgid "an occupation"
 msgstr ""
 
-#: dataviva/guide/views.py:147 dataviva/profiles/views.py:43
+#: dataviva/guide/views.py:147 dataviva/profiles/views.py:41
 msgid "an industry"
 msgstr ""
 
-#: dataviva/guide/views.py:149 dataviva/profiles/views.py:45
+#: dataviva/guide/views.py:149 dataviva/profiles/views.py:43
 msgid "a product"
 msgstr ""
 
-#: dataviva/guide/views.py:151 dataviva/profiles/views.py:47
+#: dataviva/guide/views.py:151 dataviva/profiles/views.py:45
 msgid "a location"
 msgstr ""
 
@@ -84,7 +84,7 @@ msgstr ""
 
 #: dataviva/guide/views.py:164 dataviva/guide/views.py:191
 #: dataviva/guide/views.py:201 dataviva/html/home.html:41
-#: dataviva/html/data/select.html:19 dataviva/html/guide/industry.html:10
+#: dataviva/html/general/select.html:19 dataviva/html/guide/industry.html:10
 msgid "Product Exports"
 msgstr ""
 
@@ -108,56 +108,31 @@ msgstr ""
 msgid "Learn how DataViva was created:"
 msgstr ""
 
-#: dataviva/html/home.html:23
-msgid "Click, filter and discover!"
+#: dataviva/html/home.html:23 dataviva/html/templates/site.html:19
+msgid "Learn More"
 msgstr ""
 
-#: dataviva/html/home.html:29 dataviva/html/data/query.html:62
+#: dataviva/html/home.html:29 dataviva/html/rankings/index.html:15
 msgid "Brazilian Locations"
 msgstr ""
 
-#: dataviva/html/home.html:33 dataviva/html/data/query.html:119
-#: dataviva/html/data/select.html:29
+#: dataviva/html/home.html:33 dataviva/html/general/select.html:29
+#: dataviva/html/rankings/index.html:23
 msgid "Occupations"
 msgstr ""
 
-#: dataviva/html/home.html:37 dataviva/html/data/query.html:91
-#: dataviva/html/data/select.html:24
+#: dataviva/html/home.html:37 dataviva/html/general/select.html:24
+#: dataviva/html/rankings/index.html:19
 msgid "Industries"
 msgstr ""
 
-#: dataviva/html/home.html:45 dataviva/html/data/query.html:181
-#: dataviva/html/data/select.html:39
+#: dataviva/html/home.html:45 dataviva/html/general/select.html:39
+#: dataviva/html/rankings/index.html:31
 msgid "Export Destinations"
 msgstr ""
 
-#: dataviva/html/about/apps.html:4 dataviva/html/templates/about.html:46
-msgid "About the Apps"
-msgstr ""
-
-#: dataviva/html/about/apps.html:10
-msgid "View the App"
-msgstr ""
-
-#: dataviva/html/about/data.html:4 dataviva/html/templates/about.html:26
-msgid "About the Data"
-msgstr ""
-
-#: dataviva/html/about/dataviva.html:4 dataviva/html/about/dataviva.html:7
-#: dataviva/html/templates/about.html:22
-msgid "About the Site"
-msgstr ""
-
-#: dataviva/html/about/dataviva.html:9
-msgid "DataViva is a project that started in July of 2012 by the Escritorio of Minas Gerais in collaboration with a small start-up called Growth Ventures based in Cambridge, MA. DataViva is a collaborative planning tool composed of a number of applications, each of which visualize data in innovative and creative ways. DataViva is intended to be used as a tool to help members of the government, private sectors, as well as citizens themselves be able to understand big data and and more importantly, use it to their advantage."
-msgstr ""
-
-#: dataviva/html/about/glossary.html:4 dataviva/html/templates/about.html:86
-msgid "Glossary"
-msgstr ""
-
 #: dataviva/html/about/apps/compare.html:1 dataviva/html/apps/index.html:44
-#: dataviva/html/templates/about.html:76
+#: dataviva/html/templates/about.html:70
 msgid "Compare"
 msgstr ""
 
@@ -207,6 +182,7 @@ msgstr ""
 #: dataviva/html/about/apps/stacked.html:14
 #: dataviva/html/about/apps/tree_map.html:14
 #: dataviva/html/data/classifications.html:21
+#: dataviva/html/rankings/index.html:39
 msgid "Depth"
 msgstr ""
 
@@ -261,7 +237,7 @@ msgstr ""
 #: dataviva/html/about/apps/scatter.html:21
 #: dataviva/html/about/apps/tree_map.html:20
 #: dataviva/html/about/glossary/complexity.html:1
-#: dataviva/html/templates/about.html:92
+#: dataviva/html/templates/about.html:86
 msgid "Complexity"
 msgstr ""
 
@@ -272,7 +248,7 @@ msgstr ""
 #: dataviva/html/about/apps/scatter.html:21
 #: dataviva/html/about/apps/tree_map.html:20
 #: dataviva/html/about/glossary/opp_gain.html:1
-#: dataviva/html/templates/about.html:104
+#: dataviva/html/templates/about.html:98
 msgid "Opportunity Gain"
 msgstr ""
 
@@ -309,7 +285,7 @@ msgid "The circles are positioned in the chart based on data for a specific year
 msgstr ""
 
 #: dataviva/html/about/apps/geo_map.html:1 dataviva/html/apps/index.html:22
-#: dataviva/html/templates/about.html:60
+#: dataviva/html/templates/about.html:54
 msgid "Geo Map"
 msgstr ""
 
@@ -342,6 +318,14 @@ msgstr ""
 msgid "The municipalities display data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each municipality will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data change over time."
 msgstr ""
 
+#: dataviva/html/about/apps/index.html:4 dataviva/html/templates/about.html:40
+msgid "About the Apps"
+msgstr ""
+
+#: dataviva/html/about/apps/index.html:10
+msgid "View the App"
+msgstr ""
+
 #: dataviva/html/about/apps/network.html:1
 #: dataviva/html/about/glossary/distance.html:4
 #: dataviva/html/about/glossary/distance.html:12
@@ -349,7 +333,7 @@ msgstr ""
 #: dataviva/html/about/glossary/proximity.html:12
 #: dataviva/html/about/glossary/proximity.html:42
 #: dataviva/html/about/glossary/rca.html:8 dataviva/html/apps/index.html:27
-#: dataviva/html/templates/about.html:64
+#: dataviva/html/templates/about.html:58
 msgid "Network"
 msgstr ""
 
@@ -361,7 +345,7 @@ msgstr ""
 #: dataviva/html/about/apps/network.html:4
 #: dataviva/html/about/apps/rings.html:4
 #: dataviva/html/about/glossary/proximity.html:1
-#: dataviva/html/templates/about.html:108
+#: dataviva/html/templates/about.html:102
 msgid "Proximity"
 msgstr ""
 
@@ -398,7 +382,7 @@ msgstr ""
 #: dataviva/html/about/apps/occugrid.html:1
 #: dataviva/html/about/glossary/importance.html:14
 #: dataviva/html/about/glossary/required.html:8
-#: dataviva/html/apps/index.html:49 dataviva/html/templates/about.html:80
+#: dataviva/html/apps/index.html:49 dataviva/html/templates/about.html:74
 msgid "Occugrid"
 msgstr ""
 
@@ -424,7 +408,7 @@ msgstr ""
 #: dataviva/html/about/apps/occugrid.html:19
 #: dataviva/html/about/glossary/proximity.html:21
 #: dataviva/html/about/glossary/required.html:1
-#: dataviva/html/templates/about.html:116
+#: dataviva/html/templates/about.html:110
 msgid "Recommended Employees"
 msgstr ""
 
@@ -435,7 +419,7 @@ msgstr ""
 
 #: dataviva/html/about/apps/occugrid.html:19
 #: dataviva/html/about/glossary/importance.html:1
-#: dataviva/html/templates/about.html:100
+#: dataviva/html/templates/about.html:94
 msgid "Importance"
 msgstr ""
 
@@ -468,7 +452,7 @@ msgstr ""
 #: dataviva/html/about/glossary/distance.html:13
 #: dataviva/html/about/glossary/proximity.html:43
 #: dataviva/html/about/glossary/rca.html:9 dataviva/html/apps/index.html:34
-#: dataviva/html/templates/about.html:68
+#: dataviva/html/templates/about.html:62
 msgid "Rings"
 msgstr ""
 
@@ -485,7 +469,7 @@ msgstr ""
 #: dataviva/html/about/glossary/rca.html:7
 #: dataviva/html/about/glossary/unique.html:4
 #: dataviva/html/about/glossary/unique.html:9 dataviva/html/apps/index.html:39
-#: dataviva/html/templates/about.html:72
+#: dataviva/html/templates/about.html:66
 msgid "Scatter"
 msgstr ""
 
@@ -496,7 +480,7 @@ msgstr ""
 
 #: dataviva/html/about/apps/scatter.html:4
 #: dataviva/html/about/glossary/distance.html:1
-#: dataviva/html/templates/about.html:96
+#: dataviva/html/templates/about.html:90
 msgid "Distance"
 msgstr ""
 
@@ -515,7 +499,7 @@ msgid "When this toggle is turned on, only the items with %(rca)s < 1 will be sh
 msgstr ""
 
 #: dataviva/html/about/apps/stacked.html:1 dataviva/html/apps/index.html:17
-#: dataviva/html/templates/about.html:56
+#: dataviva/html/templates/about.html:50
 msgid "Stacked"
 msgstr ""
 
@@ -553,7 +537,7 @@ msgid "The behaviour of the Y axis variable can be switched between “Value” 
 msgstr ""
 
 #: dataviva/html/about/apps/tree_map.html:1 dataviva/html/apps/index.html:12
-#: dataviva/html/templates/about.html:52
+#: dataviva/html/templates/about.html:46
 msgid "Tree Map"
 msgstr ""
 
@@ -567,7 +551,7 @@ msgid "In a Tree Map, each rectangle has an area proportional to a specified dim
 msgstr ""
 
 #: dataviva/html/about/apps/tree_map.html:11
-#: dataviva/html/ask/questions.html:30
+#: dataviva/html/about/ask/index.html:25
 msgid "Order"
 msgstr ""
 
@@ -585,6 +569,122 @@ msgstr ""
 
 #: dataviva/html/about/apps/tree_map.html:28
 msgid "The rectangles display data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each rectangle will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data changes over time."
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:18
+msgid "Point"
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:20
+#: dataviva/html/about/ask/answer.html:70
+msgid "Points"
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:23
+#: dataviva/html/about/ask/answer.html:74
+msgid "This question contributes to a better understanding of the topic."
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:43
+msgid "Sabrina has not answered this question yet. Feel free to start the conversation below."
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:49
+msgid "Asked"
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:49
+msgid "by"
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:61
+msgid "Responses"
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:71
+msgid "Flagged replies are reviewed by DataViva staff to determine if they violate community guidelines. Accounts are penalized for violations and can lead to account termination."
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:82
+msgid "This reply has been flagged as inappropriate and hidden by an administrator."
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:93
+msgid "Respond to"
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:107
+msgid "New Response"
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:109
+msgid "Leave a Response"
+msgstr ""
+
+#: dataviva/html/about/ask/answer.html:130
+#: dataviva/html/admin/admin_replies.html:12
+msgid "Reply"
+msgstr ""
+
+#: dataviva/html/about/ask/ask.html:4 dataviva/html/about/ask/index.html:4
+#: dataviva/html/templates/about.html:16
+msgid "Contact Us"
+msgstr ""
+
+#: dataviva/html/about/ask/ask.html:10 dataviva/html/guide/cbo.html:10
+msgid "What would you like to know?"
+msgstr ""
+
+#: dataviva/html/about/ask/ask.html:12
+msgid "You need to login for this functionality."
+msgstr ""
+
+#: dataviva/html/about/ask/ask.html:20
+msgid "Ex. Where does the data come from?"
+msgstr ""
+
+#: dataviva/html/about/ask/ask.html:30
+msgid "App"
+msgstr ""
+
+#: dataviva/html/about/ask/ask.html:33
+msgid "Tags"
+msgstr ""
+
+#: dataviva/html/about/ask/ask.html:38
+msgid "Submit your question to Escritorio!"
+msgstr ""
+
+#: dataviva/html/about/ask/ask.html:43
+msgid "Click here to login"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:7
+msgid "DataViva is a project that started in July of 2012 by the Escritorio of Minas Gerais in collaboration with a small start-up called Growth Ventures based in Cambridge, MA. DataViva is a collaborative planning tool composed of a number of applications, each of which visualize data in innovative and creative ways. DataViva is intended to be used as a tool to help members of the government, private sectors, as well as citizens themselves be able to understand big data and and more importantly, use it to their advantage."
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:10 dataviva/html/guide/index.html:7
+msgid "What's on your mind?"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:11
+msgid "Search"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:16
+msgid "Cannot find your answer?"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:16
+msgid "Submit your question here!"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:27
+msgid "Top Voted"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:29
+msgid "Newest"
 msgstr ""
 
 #: dataviva/html/about/data/comtrade.html:3
@@ -629,6 +729,10 @@ msgstr ""
 
 #: dataviva/html/about/data/comtrade.html:18
 msgid "Classifications of commodities: Standard International Trade Classification (SITC); Harmonized System (HS); Broad Economic Categories (BEC)."
+msgstr ""
+
+#: dataviva/html/about/data/index.html:4 dataviva/html/templates/about.html:20
+msgid "About the Data"
 msgstr ""
 
 #: dataviva/html/about/data/rais.html:3
@@ -725,6 +829,11 @@ msgstr ""
 
 #: dataviva/html/about/glossary/importance.html:11
 msgid "The higher importance value an occupation has, the more common it is to that industry. This would generally mean that the occupation is more necessary. For example Cooks are much more important in the Restaurant industry than Accounting Assistants though they are both employed in that industry."
+msgstr ""
+
+#: dataviva/html/about/glossary/index.html:4
+#: dataviva/html/templates/about.html:80
+msgid "Glossary"
 msgstr ""
 
 #: dataviva/html/about/glossary/opp_gain.html:2
@@ -838,7 +947,7 @@ msgid "Remember Me"
 msgstr ""
 
 #: dataviva/html/admin/admin_questions.html:3
-#: dataviva/html/admin/admin_questions.html:12 dataviva/html/ask/ask.html:41
+#: dataviva/html/admin/admin_questions.html:12
 msgid "Question"
 msgstr ""
 
@@ -879,10 +988,6 @@ msgstr ""
 #: dataviva/html/admin/admin_replies.html:3
 #: dataviva/html/admin/admin_users.html:3 dataviva/html/templates/site.html:46
 msgid "Admin Panel"
-msgstr ""
-
-#: dataviva/html/admin/admin_replies.html:12 dataviva/html/ask/answer.html:151
-msgid "Reply"
 msgstr ""
 
 #: dataviva/html/admin/admin_replies.html:14
@@ -954,202 +1059,32 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: dataviva/html/ask/answer.html:5 dataviva/html/ask/ask.html:4
-#: dataviva/html/ask/ask.html:62 dataviva/html/ask/questions.html:4
-msgid "Ask Sabrina"
-msgstr ""
-
-#: dataviva/html/ask/answer.html:31 dataviva/html/ask/answer.html:95
-msgid "Points"
-msgstr ""
-
-#: dataviva/html/ask/answer.html:32 dataviva/html/ask/answer.html:99
-msgid "This question contributes to a better understanding of the topic."
-msgstr ""
-
-#: dataviva/html/ask/answer.html:50 dataviva/html/ask/ask.html:55
-msgid "Tags"
-msgstr ""
-
-#: dataviva/html/ask/answer.html:63
-msgid "Asked"
-msgstr ""
-
-#: dataviva/html/ask/answer.html:63
-msgid "by"
-msgstr ""
-
-#: dataviva/html/ask/answer.html:79
-msgid "Sabrina has not answered this question yet. Feel free to start the conversation below."
-msgstr ""
-
-#: dataviva/html/ask/answer.html:87
-msgid "Responses"
-msgstr ""
-
-#: dataviva/html/ask/answer.html:96
-msgid "Flagged replies are reviewed by DataViva staff to determine if they violate community guidelines. Accounts are penalized for violations and can lead to account termination."
-msgstr ""
-
-#: dataviva/html/ask/answer.html:106
-msgid "This reply has been flagged as inappropriate and hidden by an administrator."
-msgstr ""
-
-#: dataviva/html/ask/answer.html:118
-msgid "Respond to"
-msgstr ""
-
-#: dataviva/html/ask/answer.html:130
-msgid "New Response"
-msgstr ""
-
-#: dataviva/html/ask/answer.html:131
-msgid "Leave a Response"
-msgstr ""
-
-#: dataviva/html/ask/ask.html:26 dataviva/html/guide/cbo.html:10
-msgid "What would you like to know?"
-msgstr ""
-
-#: dataviva/html/ask/ask.html:28
-msgid "You need to login for this functionality."
-msgstr ""
-
-#: dataviva/html/ask/ask.html:42
-msgid "Ex. Where does the data come from?"
-msgstr ""
-
-#: dataviva/html/ask/ask.html:52
-msgid "App"
-msgstr ""
-
-#: dataviva/html/ask/ask.html:69
-msgid "Click here to login"
-msgstr ""
-
-#: dataviva/html/ask/questions.html:17
-msgid "Cannot find your answer?"
-msgstr ""
-
-#: dataviva/html/ask/questions.html:19
-msgid "Submit your question here!"
-msgstr ""
-
-#: dataviva/html/ask/questions.html:32
-msgid "Top Voted"
-msgstr ""
-
-#: dataviva/html/ask/questions.html:34
-msgid "Newest"
-msgstr ""
-
-#: dataviva/html/ask/questions.html:38
-msgid "Search"
-msgstr ""
-
-#: dataviva/html/data/index.html:3 dataviva/html/data/query.html:32
-#: dataviva/html/templates/site.html:17
-msgid "Data"
-msgstr ""
-
-#: dataviva/html/data/index.html:14
-msgid "How do you want to access the data?"
-msgstr ""
-
-#: dataviva/html/data/index.html:18
-msgid "Database"
-msgstr ""
-
-#: dataviva/html/data/index.html:19
-msgid "Custom data queries of our database."
-msgstr ""
-
-#: dataviva/html/data/index.html:22
-msgid "Source List"
-msgstr ""
-
-#: dataviva/html/data/index.html:23
-msgid "Browse the various classifications."
-msgstr ""
-
-#: dataviva/html/data/query.html:3
+#: dataviva/html/data/index.html:3
 msgid "Database Query"
 msgstr ""
 
-#: dataviva/html/data/query.html:41
+#: dataviva/html/data/index.html:17 dataviva/html/templates/site.html:17
+msgid "Data"
+msgstr ""
+
+#: dataviva/html/data/index.html:27
 msgid "All Years"
 msgstr ""
 
-#: dataviva/html/data/query.html:75
-msgid "Showing all of Brazil until a location is selected."
+#: dataviva/html/data/index.html:35
+msgid "Save as CSV"
 msgstr ""
 
-#: dataviva/html/data/query.html:78
-msgid "add a location"
+#: dataviva/html/data/index.html:36
+msgid "Edit Columns"
 msgstr ""
 
-#: dataviva/html/data/query.html:105
-msgid "Showing all industries until a filter is selected."
+#: dataviva/html/data/index.html:75
+msgid "Currently showing"
 msgstr ""
 
-#: dataviva/html/data/query.html:108
-msgid "add an industry"
-msgstr ""
-
-#: dataviva/html/data/query.html:133
-msgid "Showing all occupations until a filter is selected."
-msgstr ""
-
-#: dataviva/html/data/query.html:136
-msgid "add an occupation"
-msgstr ""
-
-#: dataviva/html/data/query.html:140 dataviva/html/data/query.html:202
+#: dataviva/html/data/index.html:94
 msgid "Build"
-msgstr ""
-
-#: dataviva/html/data/query.html:153
-msgid "Products"
-msgstr ""
-
-#: dataviva/html/data/query.html:167
-msgid "Showing all products until a filter is selected."
-msgstr ""
-
-#: dataviva/html/data/query.html:170
-msgid "add a product"
-msgstr ""
-
-#: dataviva/html/data/query.html:195
-msgid "Showing all countries until a filter is selected."
-msgstr ""
-
-#: dataviva/html/data/query.html:198
-msgid "add an export destination"
-msgstr ""
-
-#: dataviva/html/data/query.html:208
-msgid "Download"
-msgstr ""
-
-#: dataviva/html/data/select.html:3
-msgid "Choose a Classification"
-msgstr ""
-
-#: dataviva/html/data/select.html:14
-msgid "Which classification would you like to browse?"
-msgstr ""
-
-#: dataviva/html/data/select.html:33
-msgid "Municipalities"
-msgstr ""
-
-#: dataviva/html/data/select.html:34
-msgid "Geographical locations within Brazil"
-msgstr ""
-
-#: dataviva/html/data/select.html:38
-msgid "Countries"
 msgstr ""
 
 #: dataviva/html/general/404.html:18
@@ -1165,6 +1100,26 @@ msgstr ""
 msgid "Note"
 msgstr ""
 
+#: dataviva/html/general/select.html:3
+msgid "Choose a Classification"
+msgstr ""
+
+#: dataviva/html/general/select.html:14
+msgid "Which classification would you like to browse?"
+msgstr ""
+
+#: dataviva/html/general/select.html:33
+msgid "Municipalities"
+msgstr ""
+
+#: dataviva/html/general/select.html:34
+msgid "Geographical locations within Brazil"
+msgstr ""
+
+#: dataviva/html/general/select.html:38
+msgid "Countries"
+msgstr ""
+
 #: dataviva/html/general/selector.html:3
 msgid "Filter Selection"
 msgstr ""
@@ -1172,6 +1127,10 @@ msgstr ""
 #: dataviva/html/general/selector.html:13
 #, python-format
 msgid "Please choose %(name)s"
+msgstr ""
+
+#: dataviva/html/general/table.html:3
+msgid "Database Table"
 msgstr ""
 
 #: dataviva/html/general/upgrade.html:59
@@ -1314,10 +1273,6 @@ msgstr ""
 msgid "co-locate"
 msgstr ""
 
-#: dataviva/html/guide/index.html:7
-msgid "What's on your mind?"
-msgstr ""
-
 #: dataviva/html/guide/index.html:11
 msgid "Learn about the potential of a location."
 msgstr ""
@@ -1376,7 +1331,11 @@ msgstr ""
 msgid "Export Destination"
 msgstr ""
 
-#: dataviva/html/templates/about.html:120
+#: dataviva/html/rankings/index.html:27
+msgid "Products"
+msgstr ""
+
+#: dataviva/html/templates/about.html:114
 msgid "Unique Values"
 msgstr ""
 
@@ -1409,11 +1368,7 @@ msgid "Guide"
 msgstr ""
 
 #: dataviva/html/templates/site.html:18
-msgid "Contact Us"
-msgstr ""
-
-#: dataviva/html/templates/site.html:19
-msgid "Learn More"
+msgid "Rankings"
 msgstr ""
 
 #: dataviva/html/templates/site.html:44
@@ -1424,7 +1379,7 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: dataviva/profiles/views.py:49
+#: dataviva/profiles/views.py:47
 msgid "a country"
 msgstr ""
 
