@@ -22,9 +22,11 @@ function infinite_scroll(selection){
       inf_loading_div.data([container_el])
         .enter().append("div")
         .attr("class", "infinite_loading")
+        .each(function(){
+          infinite_loading = dataviva.ui.loading(".infinite_loading")
+        })
       
-      var loading = dataviva.ui.loading(".infinite_loading")
-      loading.text("Loading more items").show()
+      infinite_loading.text(dataviva.format.text("loading_items")).show()
       
       // The item we're going to listen on for scrolling
       d3.select(window)

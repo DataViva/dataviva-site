@@ -4,22 +4,16 @@
 {% block head %}
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.about.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
 
 {% endblock %}
 
 {% block body %}
 
-<div id="about_content" class="grid5col3">
-  <div class="lightbox">
-    {% block about_content %}
-    {% endblock %}
-  </div>
-</div>
-
 <div id="about_nav" class="grid5col1">
     
-    <a class="{% if page == 'dataviva' %}decision{% else %}help{% endif %}" href="{{ url_for('about.about') }}">
-      {% trans %}About the Site{% endtrans %}
+    <a class="{% if page == 'ask' %}decision{% else %}help{% endif %}" href="{{ url_for('about.contact') }}">
+      {% trans %}Contact Us{% endtrans %}
     </a>
     
     <a class="{% if page == 'data' %}decision{% else %}help{% endif %}" href="{{ url_for('about.data', data='rais') }}">
@@ -122,6 +116,13 @@
     
     {% endif %}
     
+</div>
+
+<div id="about_content" class="grid5col3">
+  <div class="lightbox">
+    {% block about_content %}
+    {% endblock %}
+  </div>
 </div>
 
 {% endblock %}

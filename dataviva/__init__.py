@@ -56,6 +56,7 @@ from dataviva.apps.views import mod as apps_module
 from dataviva.guide.views import mod as guide_module
 from dataviva.data.views import mod as data_module
 from dataviva.ask.views import mod as ask_module
+from dataviva.rankings.views import mod as rankings_module
 from dataviva.about.views import mod as about_module
 from dataviva.profiles.views import mod as profiles_module
 
@@ -71,5 +72,6 @@ app.register_blueprint(apps_module)
 app.register_blueprint(guide_module)
 app.register_blueprint(data_module)
 app.register_blueprint(ask_module)
+app.register_blueprint(rankings_module)
 app.register_blueprint(about_module)
 app.register_blueprint(profiles_module)

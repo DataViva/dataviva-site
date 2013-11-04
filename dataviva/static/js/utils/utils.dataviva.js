@@ -327,9 +327,13 @@ dataviva.format.text = function(text,name,l) {
       // Ask Sabrina
       "Asked": {"en": "Asked", "pt": "Perguntado"},
       "by": {"en": "by", "pt": "por"},
+      "point": {"en": "Point", "pt": "Ponto"},
       "points": {"en": "Points", "pt": "Pontos"},
+      "reply": {"en": "Reply", "pt": "Resposta"},
+      "replies": {"en": "Replies", "pt": "Respostas"},
       "votes": {"en": "Top Voted", "pt": "Mais Votados"},
       "newest": {"en": "Newest", "pt": "O Mais Novo"},
+      "questions": {"en": "Questions", "pt": "Perguntas"},
       "flagged": {"en": "This reply has been flagged.", "pt": "Esta resposta foi marcada."},
       "unflagged": {"en": "This flag on this reply has been removed.", "pt": "A marca desta resposta foi retirada."},
       "voted": {"en": "Your vote has been added.", "pt": "Seu voto foi enviado."},
@@ -347,7 +351,8 @@ dataviva.format.text = function(text,name,l) {
       "search_results": {"en": "Search Results", "pt": "Resultados da Pesquisa"},
       "select": {"en": "Select", "pt": "Escolher"},
       "show": {"en": "Show", "pt": "Mostrar"},
-      "loading_attrs": {"en": "Loading Attribute List", "pt": "Carregando Lista de Atributos"}
+      "loading_attrs": {"en": "Loading Attribute List", "pt": "Carregando Lista de Atributos"},
+      "loading_items": {"en": "Loading More Items", "pt": "Carregar Mais Itens"}
     
     }
     
@@ -788,21 +793,6 @@ dataviva.popover.hide = function(id) {
 
 }
 
-dataviva.toggleClass = function(element,tag) {
-  var ret = false
-  d3.select(element).attr("class",function(){
-    var classes = this.className.split(" ")
-    var index = classes.indexOf(tag)
-    if (index >= 0) classes.splice(index,1)
-    else {
-      classes.push(tag)
-      ret = true
-    }
-    return classes.join(" ")
-  })
-  return ret
-}
-
 dataviva.flash = function(text) {
 	
 	d3.selectAll("#server_message").remove();
@@ -816,7 +806,7 @@ dataviva.flash = function(text) {
 	
 	flash_inner.append("i")
 		.attr("id", "close_message")
-		.attr("class", "icon-remove-sign")
+		.attr("class", "fa fa-times-circle")
 		.on(d3plus.evt.click, function(d){
 	        var div = d3.select("#server_message")
 	        var timing = parseFloat(div.style("transition-duration"),10)*1000;

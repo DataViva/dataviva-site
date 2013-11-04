@@ -157,7 +157,7 @@ body.classifications .decision {
   background-color: #1abbee; /* blue */
 }
 
-body.ask .decision {
+body.rankings .decision {
   background-color: #742777; /* purple */
 }
 
@@ -166,7 +166,11 @@ body.about .decision {
 }
 
 body.about .decision.short {
-  background-color: #333; /* pink */
+  background-color: #333; /* grey */
+}
+
+body.about .decision.short.question {
+  background-color: #d67ab0; /* pink */
 }
 
 body.general .help {
@@ -179,7 +183,7 @@ body.classifications .help {
   color: #1abbee; /* blue */
 }
 
-body.ask .help {
+body.rankings .help {
   color: #742777; /* purple */
 }
 

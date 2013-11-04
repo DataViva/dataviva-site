@@ -257,7 +257,7 @@
   }
   
   function toggle_filter(filter,parent) {
-    active = dataviva.toggleClass(parent,"active")
+    active = parent.toggleClass("active")
     filter = filter.split("_")[0]
     filters[filter].active = active
   }

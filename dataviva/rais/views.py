@@ -22,7 +22,6 @@ def per_request_callbacks(response):
     if response.status_code != 302 and response.mimetype != "text/csv":
         response.headers['Content-Encoding'] = 'gzip'
         response.headers['Content-Length'] = str(len(response.data))
-    # raise Exception(timing)
     return response
 
 ############################################################
@@ -59,22 +58,22 @@ def rais_yo(**kwargs):
 @mod.route('/<year>/<bra_id>/<isic_id>/all/')
 @crossdomain()
 def rais_ybi(**kwargs):
-    kwargs["join"] = {
-                        "table": Yi.unique_cbo,
-                        "columns": {"unique_cbo": Yi.unique_cbo},
-                        "on": ('year', 'isic_id')
-                    }
+    kwargs["join"] = [{
+                        "table": Yi,
+                        "columns": ["unique_cbo"],
+                        "on": ["year", "isic_id"]
+                    }]
     return make_response(make_query(Ybi, request.args, **kwargs))
 
 @mod.route('/all/<bra_id>/all/<cbo_id>/')
 @mod.route('/<year>/<bra_id>/all/<cbo_id>/')
 @crossdomain()
 def rais_ybo(**kwargs):
-    kwargs["join"] = {
-                        "table": Yo.unique_isic,
-                        "columns": {"unique_isic": Yo.unique_isic},
-                        "on": ('year', 'cbo_id')
-                    }
+    kwargs["join"] = [{
+                        "table": Yo,
+                        "columns": ["unique_isic"],
+                        "on": ["year", "cbo_id"]
+                    }]
     return make_response(make_query(Ybo, request.args, **kwargs))
 
 @mod.route('/all/all/<isic_id>/<cbo_id>/')

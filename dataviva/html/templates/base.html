@@ -36,6 +36,7 @@
     
     <script>
       if(d3plus.ie && redirect) window.location = "/upgrade/"
+      dataviva.language = "{{ g.locale }}"
     </script>
     
   </head>
@@ -46,7 +47,6 @@
     
     <script type="text/javascript">
     
-      dataviva.language = "{{ g.locale }}"
       dataviva.color = "{{ g.color }}"
       dataviva.static_url = "{{ g.static_url }}"
       dataviva.page = "{{ g.page_type }}"

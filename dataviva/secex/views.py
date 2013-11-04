@@ -58,11 +58,11 @@ def secex_ybw(**kwargs):
 @mod.route('/<year>/<bra_id>/<hs_id>/all/')
 @crossdomain()
 def secex_ybp(**kwargs):
-    kwargs["join"] = {
-                        "table": Yp.pci,
-                        "columns": {"pci": Yp.pci},
-                        "on": ('year', 'hs_id')
-                    }
+    kwargs["join"] = [{
+                        "table": Yp,
+                        "columns": ["pci"],
+                        "on": ["year", "hs_id"]
+                    }]
     return make_response(make_query(Ybp, request.args, **kwargs))
 
 @mod.route('/all/all/<hs_id>/<wld_id>/')

@@ -64,3 +64,16 @@ Array.prototype.objectIndex = function(key,value) {
   }
   return -1;
 }
+
+Element.prototype.toggleClass = function(tag) {
+  var ret = false
+  var classes = this.className.split(" ")
+  var index = classes.indexOf(tag)
+  if (index >= 0) classes.splice(index,1)
+  else {
+    classes.push(tag)
+    ret = true
+  }
+  this.className = classes.join(" ")
+  return ret
+}

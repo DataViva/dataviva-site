@@ -15,8 +15,8 @@
       <a id="profiles" href="{{ url_for('profiles.index') }}" class="link{% if g.page_type == 'profiles' or g.page_type == 'profile' %} active{% endif %}">{% trans %}Profiles{% endtrans %}</a>
       <a id="guide" href="{{ url_for('guide.guide') }}" class="link{% if g.page_type == 'guide' or g.page_type == 'plan' %} active{% endif %}">{% trans %}Guide{% endtrans %}</a>
       <a id="data" href="{{ url_for('data.index') }}" class="link{% if g.page_type == 'data' or g.page_type == 'query' or g.page_type == 'classifications' %} active{% endif %}">{% trans %}Data{% endtrans %}</a>
-      <a id="ask" href="{{ url_for('ask.index') }}" class="link{% if g.page_type == 'ask' %} active{% endif %}">{% trans %}Contact Us{% endtrans %}</a>
-      <a id="about" href="{{ url_for('about.about') }}" class="link{% if g.page_type == 'about' %} active{% endif %}">{% trans %}Learn More{% endtrans %}</a>
+      <a id="rankings" href="{{ url_for('rankings.index') }}" class="link{% if g.page_type == 'rankings' %} active{% endif %}">{% trans %}Rankings{% endtrans %}</a>
+      <a id="about" href="{{ url_for('about.contact') }}" class="link{% if g.page_type == 'about' %} active{% endif %}">{% trans %}Learn More{% endtrans %}</a>
       
       <div id="nav_controls">
         
@@ -41,11 +41,11 @@
 
       {% if g.user.is_authenticated() %}
       <div id="account_tooltip" style="display:none;">
-        <a class="account" href="{{ url_for('account.user', nickname=g.user.nickname) }}"><i class="icon-user"></i>{% trans %}Profile{% endtrans %}</a>
+        <a class="account" href="{{ url_for('account.user', nickname=g.user.nickname) }}"><i class="fa fa-user"></i>{% trans %}Profile{% endtrans %}</a>
         {% if g.user.is_admin() %}
-          <a class="account" href="{{ url_for('admin.admin') }}"><i class="icon-gears"></i>{% trans %}Admin Panel{% endtrans %}</a>
+          <a class="account" href="{{ url_for('admin.admin') }}"><i class="fa fa-cogs"></i>{% trans %}Admin Panel{% endtrans %}</a>
         {% endif %}
-        <a class="account" href="{{ url_for('account.logout') }}"><i class="icon-key"></i>{% trans %}Logout{% endtrans %}</a>
+        <a class="account" href="{{ url_for('account.logout') }}"><i class="fa fa-key"></i>{% trans %}Logout{% endtrans %}</a>
         
       </div>
       {% endif %}
@@ -76,7 +76,7 @@
         <div id="server_message">
           <div class="decision flash-{{ category }}">
             {{ msg|safe }}
-            <i id="close_message" class="icon-remove-sign"></i>
+            <i id="close_message" class="fa fa-times-circle"></i>
           </div>
         </div>
         {% endfor %}

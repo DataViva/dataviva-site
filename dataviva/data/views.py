@@ -21,13 +21,7 @@ mod = Blueprint('data', __name__, url_prefix='/data')
 @mod.before_request
 def before_request():
     g.page_type = mod.name
-    
     g.color = "#1abbee"
-    
-    g.sabrina = {}
-    g.sabrina["outfit"] = "lab"
-    g.sabrina["face"] = "smirk"
-    g.sabrina["hat"] = "glasses"
 
 def get_geo_location(ip):
     req = urllib2.Request("http://freegeoip.net/json/" + ip)
@@ -161,46 +155,6 @@ def classificationslist(attr = None, depth = None, page = 1):
     ret.headers.add('Cache-Control', 'must-revalidate, private')
             
     return ret
-
-@mod.route('/download/', methods=['GET', 'POST'])
-@crossdomain()
-def download():
-    import tempfile, subprocess
-    
-    form = DownloadForm()
-
-    data = form.data.data
-    format = form.output_format.data
-    title = form.title.data
-
-    temp = tempfile.NamedTemporaryFile()
-    temp.write(data.encode("utf-8"))
-    temp.seek(0)
-
-    if format == "png":
-        mimetype='image/png'
-    elif format == "pdf":
-        mimetype='application/pdf'
-    elif format == "svg":
-        mimetype='application/octet-stream'
-    elif format == "csv":
-        mimetype="text/csv;charset=UTF-8"
-
-    if format == "png" or format == "pdf":
-        zoom = "1"
-        background = "#ffffff"
-        p = subprocess.Popen(["rsvg-convert", "-z", zoom, "-f", format, "--background-color={0}".format(background), temp.name], stdout=subprocess.PIPE)
-        out, err = p.communicate()  
-        response_data = out
-    else:
-        response_data = data.encode("utf-8")
-    
-    content_disposition = "attachment;filename=%s.%s" % (title, format)
-    content_disposition = content_disposition.replace(",", "_")
-
-    return Response(response_data, 
-                        mimetype=mimetype, 
-                        headers={"Content-Disposition": content_disposition})
 
 @mod.route('/')
 @mod.route('/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')

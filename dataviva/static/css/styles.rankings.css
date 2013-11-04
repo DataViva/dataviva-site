@@ -1,0 +1,46 @@
+body.rankings #inner_container {
+  display: block;
+  vertical-align: top;
+}
+
+#rankings_nav > a {
+  margin: 0px 0px 6px 0px !important;
+}
+
+#rankings_nav > a.decision:after {
+  content: '';
+}
+
+div#rankings_table {
+  min-height: 200px;
+  overflow: hidden;
+  position: relative;
+  -webkit-transition: height 1s;
+          transition: height 1s;
+}
+
+div#controls {
+  text-align: center;
+  padding: 12px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 2;
+}
+
+div#controls > div {
+  display: inline-block;
+}
+
+div#iframe {
+  position: relative;
+  margin-top: 48px;
+  width: 100%;
+  z-index: 1;
+}
+
+iframe {
+  border-top: 1px solid #ccc;
+  min-height: 151px;
+  width: 100%;
+}

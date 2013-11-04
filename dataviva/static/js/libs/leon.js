@@ -51,7 +51,7 @@ leon_functions.text_color = function(color) {
       
   if (hsl.l > 65) return dark;
   else if (hsl.l < 48) return light;
-  return hsl.h > 35 && hsl.s >= 3 && hsl.l >= 41 ? dark : light;
+  return hsl.h > 35 && hsl.s >= 3 && hsl.l >= 70 ? dark : light;
   
 }
 

@@ -1,6 +1,6 @@
 .decision.icon,
 .help.icon {
-  padding-left: 43px;
+  padding-left: 38px;
 }
 
 .decision.icon.square,
@@ -12,7 +12,7 @@
 .help.icon:before {
   background-position: 50%;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 80%;
   content: "";
   display: block;
   height: 100%;
@@ -27,7 +27,7 @@
   text-align: center;
   text-decoration: inherit;
   top: 0px;
-  width: 43px;
+  width: 38px;
 }
 
 .decision.icon:before {
@@ -118,6 +118,31 @@
   background-image: url("/static/img/icons/wld/wld_all.png");
 }
 
+.help.icon.bra:before {
+  background-image: url("/static/img/icons/bra/bra_all_alt_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.isic:before {
+  background-image: url("/static/img/icons/isic/isic_all_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.hs:before {
+  background-image: url("/static/img/icons/hs/hs_all_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.cbo:before {
+  background-image: url("/static/img/icons/cbo/cbo_all_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.wld:before {
+  background-image: url("/static/img/icons/wld/wld_all_black.png");
+  opacity: 0.2;
+}
+
 /********/
 /* Apps */
 /********/
@@ -146,21 +171,21 @@
 }
 
 .decision.icon.stacked {
-  background-color: #752277 !important;
+  background-color: #742777 !important;
 }
 .decision.icon.stacked:before {
   background-image: url("/static/img/icons/app/app_stacked.png");
 }
 
 .decision.icon.network {
-  background-color: #c8140a !important;
+  background-color: #af1f24 !important;
 }
 .decision.icon.network:before {
   background-image: url("/static/img/icons/app/app_network.png");
 }
 
 .decision.icon.rings {
-  background-color: #e377c2 !important;
+  background-color: #d67ab0 !important;
 }
 .decision.icon.rings:before {
   background-image: url("/static/img/icons/app/app_rings.png");
@@ -174,21 +199,21 @@
 }
 
 .decision.icon.compare {
-  background-color: #17bcef !important;
+  background-color: #1abbee !important;
 }
 .decision.icon.compare:before {
   background-image: url("/static/img/icons/app/app_compare.png");
 }
 
 .decision.icon.geo_map {
-  background-color: #00923f !important;
+  background-color: #3daf49 !important;
 }
 .decision.icon.geo_map:before {
   background-image: url("/static/img/icons/app/app_geo_map.png");
 }
 
 .decision.icon.occugrid {
-  background-color: #e87600 !important;
+  background-color: #e0902d !important;
 }
 .decision.icon.occugrid:before {
   background-image: url("/static/img/icons/app/app_occugrid.png");
@@ -372,16 +397,13 @@
 /* Account Buttons */
 /*******************/
 
-.decision.icon.replies {
-  background-color: #e377c2 !important;
+.decision.icon.replies,
+.decision.icon.questions {
+  background-color: #d67ab0 !important;
 }
 
 .decision.icon.replies:before {
   content: "\f112";
-}
-
-.decision.icon.questions {
-  background-color: #752277 !important;
 }
 
 .decision.icon.questions:before {

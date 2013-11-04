@@ -440,20 +440,19 @@ def make_query(data_table, url_args, **kwargs):
     ret = {}
     # first lets test if this query is cached (be sure we are not paginating
     # results) as these should not get cached
-    # if limit is None and download is None and raw is None:
-    #     cached_q = cached_query(cache_id)
-    #     if cached_q:
-    #         return cached_q
-
-    query = data_table.query.group_by(data_table.year)
+    if limit is None and download is None and raw is None and cols is None:
+        cached_q = cached_query(cache_id)
+        if cached_q:
+            return cached_q
+    
+    query = db.session.query(data_table)
     if join:
-        join_table = join["table"]
-        # check if given a whole table of just a table's column
-        if hasattr(join_table, 'parent'):
-            join_table = join_table.parent.class_
-        query = db.session.query(data_table, join["table"])
-        for col in join["on"]:
-            query = query.filter(getattr(data_table, col) == getattr(join_table, col))
+        for j in join:
+            query = query.add_entity(j["table"])
+            for col in j["on"]:
+                query = query.filter(getattr(data_table, col) == getattr(j["table"], col))
+                
+    query = query.group_by(data_table.year)
 
     # handle year (if specified)
     if "year" in kwargs:
@@ -472,24 +471,32 @@ def make_query(data_table, url_args, **kwargs):
 
     if filter:
         query = query.filter(ops[filter[1]](getattr(data_table, filter[0]), float(filter[2])))
-
+        
     # lastly we want to get the actual data held in the table requested
     if "aggregate" not in ret:
         # handle ordering
         if order:
             direction = "asc"
+            
             if "." in order:
                 o, direction = order.split(".")
             else:
                 o = order
-            if join and o in join["columns"]:
-                order_table = join_table
-            else:
+                
+            order_table = None
+            if join:
+                for j in join:
+                    if o in j["columns"]:
+                        order_table = j["table"]
+                
+            if order_table == None:
                 order_table = data_table
+                
             if direction == "asc":
                 query = query.order_by(asc(getattr(order_table,o)))
             elif direction == "desc":
                 query = query.order_by(desc(getattr(order_table,o)))
+                
         if limit:
             query = query.limit(limit).offset(offset)
     
@@ -498,10 +505,13 @@ def make_query(data_table, url_args, **kwargs):
         items = query.all()
         for row in items:
             datum = row[0].serialize()
-            for value, col_name in zip(row[1:], join["columns"].keys()):
-                extra = {}
-                extra[col_name] = value
-                datum = dict(datum.items() + extra.items())
+            join_data = []
+            for i, r in enumerate(row):
+                if i != 0:
+                    serialized = r.serialize()
+                    for k in serialized:
+                        if k not in datum:
+                            datum[k] = serialized[k]
             ret["data"].append(datum)
     elif raw:
         return query.all()
@@ -563,6 +573,16 @@ def make_query(data_table, url_args, **kwargs):
         
         if limit:
             ret["data"] = ret["data"][int(offset):int(offset)+int(limit)]
+
+    if cols:
+        new_return = []
+        for d in ret["data"]:
+            new_obj = {}
+            for k in d:
+                if k in cols:
+                    new_obj[k] = d[k]
+            new_return.append(new_obj)
+        ret["data"] = new_return
     
     if download is not None:
         header = [str(c).split(".")[1] for c in data_table.__table__.columns]
@@ -589,7 +609,7 @@ def make_query(data_table, url_args, **kwargs):
     # gzip and jsonify result
     ret = gzip_data(jsonify(ret).data)
 
-    if limit is None and download is None:
+    if limit is None and download is None and raw is None and cols is None:
         cached_query(cache_id, ret)
 
     return ret

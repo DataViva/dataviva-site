@@ -250,6 +250,7 @@ class Isic(db.Model, AutoSerialize, Stats):
     gender_pt = db.Column(db.String(1))
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
+    
     yi = db.relationship("Yi", backref = 'isic', lazy = 'dynamic')
     ybi = db.relationship("Ybi", backref = 'isic', lazy = 'dynamic')
     yio = db.relationship("Yio", backref = 'isic', lazy = 'dynamic')
@@ -280,6 +281,7 @@ class Cbo(db.Model, AutoSerialize, Stats):
     gender_pt = db.Column(db.String(1))
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
+    
     yo = db.relationship("Yo", backref = 'cbo', lazy = 'dynamic')
     ybo = db.relationship("Ybo", backref = 'cbo', lazy = 'dynamic')
     yio = db.relationship("Yio", backref = 'cbo', lazy = 'dynamic')
@@ -310,6 +312,7 @@ class Hs(db.Model, AutoSerialize, Stats):
     gender_pt = db.Column(db.String(1))
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
+    
     yp = db.relationship("Yp", backref = 'hs', lazy = 'dynamic')
     ypw = db.relationship("Ypw", backref = 'hs', lazy = 'dynamic')
     ybp = db.relationship("Ybp", backref = 'hs', lazy = 'dynamic')
@@ -347,6 +350,7 @@ class Wld(db.Model, AutoSerialize, Stats):
     gender_pt = db.Column(db.String(1))
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
+    
     yw = db.relationship("Yw", backref = 'wld', lazy = 'dynamic')
     ypw = db.relationship("Ypw", backref = 'wld', lazy = 'dynamic')
     ybw = db.relationship("Ybw", backref = 'wld', lazy = 'dynamic')
@@ -437,8 +441,8 @@ class Bra(db.Model, AutoSerialize, Stats):
 class Distances(db.Model):
 
     __tablename__ = 'attrs_bb'
-    bra_id_origin = db.Column(db.String(10), db.ForeignKey('attrs_bra.id'), primary_key=True)
-    bra_id_dest = db.Column(db.String(10), db.ForeignKey('attrs_bra.id'), primary_key=True)
+    bra_id_origin = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
+    bra_id_dest = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
     distance = db.Column(db.Float())
 
     def __repr__(self):
@@ -451,11 +455,11 @@ class Distances(db.Model):
             "distance": self.distance
         }
 
-class Yb(db.Model):
+class Yb(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_yb'
     year = db.Column(db.Integer(4), primary_key=True)
-    bra_id = db.Column(db.String(10), db.ForeignKey('attrs_bra.id'), primary_key=True)
+    bra_id = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
     population = db.Column(db.Integer)
 
     def __repr__(self):

@@ -83,6 +83,11 @@ table td.icon > div {
   height: 29px;
 }
 
+#dt_query {
+  position: relative;
+  z-index: 0;
+}
+
 #dt_query table.body {
   margin-top: 30px;
 }
@@ -108,7 +113,7 @@ thead.shadow {
   border-right-style: solid;
   position: absolute;
   left: 0;
-  width: 136px;
+  width: 5px;
   top: 0;
   z-index: 1;
   -webkit-transition: -webkit-box-shadow 0.4s;
@@ -185,9 +190,8 @@ table th, table th::before {
 table .year { 
   width: 40px !important; 
 }
-table .bra_id, table .isic_id,
-table .cbo_id, table .hs_id,
-table .wld_id { 
+table .isic_id, table .cbo_id, 
+table .hs_id, table .wld_id { 
   width: 60px !important; 
 }
 table .bra_id { 

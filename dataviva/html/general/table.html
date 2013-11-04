@@ -39,10 +39,13 @@
                   "wld_id"
               ]
   var DATA_COLUMNS = [ 
+                  "population", 
+                  
                   "wage", 
+                  "wage_avg", 
                   "num_emp", 
                   "num_est", 
-                  "required",
+                  "num_emp_est", 
                   
                   "val_usd", 
                   
@@ -57,10 +60,19 @@
                   
                   "eci",
                   "pci",
-                  "ici",
-                  "oci",
+                  "bra_diversity",
+                  "bra_diversity_eff",
+                  "isic_diversity",
+                  "isic_diversity_eff",
+                  "cbo_diversity",
+                  "cbo_diversity_eff",
+                  "hs_diversity",
+                  "hs_diversity_eff",
+                  "wld_diversity",
+                  "wld_diversity_eff",
                   
                   "importance", 
+                  "required", 
                   
                   "val_usd_growth_pct",
                   "val_usd_growth_pct_5",
@@ -258,7 +270,6 @@
       return d3.select("#sticky table.data").node().offsetWidth + "px"
     })
     sticky_width = d3.select("#dt_query #sticky").node().offsetWidth;
-    
     d3.select("#dt_query #data").on("scroll", function(){
       d3.select("#dt_query #data table.header thead").style("left", -(this.scrollLeft-sticky_width)+"px")
     })
@@ -292,7 +303,7 @@
     }
 
     var data_div = d3.select("div#data table.data")
-    table_width = data_div.node().offsetWidth + d3.select("div#sticky").node().offsetWidth
+    table_width = data_div.node().offsetWidth + sticky_width
     table_height = data_div.node().offsetHeight + parseFloat(data_div.style("margin-top"),10)
     
     if (window.parent.iframe_size) window.parent.iframe_size(table_width,table_height)
