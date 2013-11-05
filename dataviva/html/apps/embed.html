@@ -449,7 +449,6 @@
       d3.select("#ui_bottom").selectAll("*").remove();
       d3.select("#app_controls").selectAll("*").remove();
       d3plus.tooltip.remove();
-      last_depth = "bra_8"
       
       d3.json("/apps/embed/"+app.url)
         .header("X-Requested-With", "XMLHttpRequest")
@@ -469,6 +468,7 @@
             
             // Set public current build variable
             app.build = data.current_build
+            last_depth = app.build.bra[0].id == "all" ? "bra_2" : "bra_8"
             leon("#app_select").color(app.build.app.color)
             builder.url()
             builder.outputs(data.all_builds)
@@ -1444,13 +1444,18 @@
     app.title_update = function() {
       
       if (app.build.output == "bra") {
+        var words = app.build.title.split(" ")
         if (app.vars.depth) {
           var new_depth = dataviva.format.text(app.vars.depth)
           var old_depth = dataviva.format.text(last_depth)
-          app.build.title = app.build.title.replace(old_depth,new_depth)
-          var new_depth = dataviva.format.text(app.vars.depth+"_plural")
-          var old_depth = dataviva.format.text(last_depth+"_plural")
-          app.build.title = app.build.title.replace(old_depth,new_depth)
+          if (words[words.length-2] == old_depth) words[words.length-2] = new_depth
+          else if (words[words.length-1] == old_depth) words[words.length-1] = new_depth
+          else {
+            var new_depth = dataviva.format.text(app.vars.depth+"_plural")
+            var old_depth = dataviva.format.text(last_depth+"_plural")
+            if (words[0] == old_depth) words[0] = new_depth
+          }
+          app.build.title = words.join(" ")
           last_depth = app.vars.depth
         }
         else if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
