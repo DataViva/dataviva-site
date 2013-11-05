@@ -406,7 +406,9 @@ dataviva.format.number = function(value,name,l) {
     r.forEach(function(n,i){
       if (n != "0" && n != "." && !l) l = i
     })
+    if (l > 5) l = 5
     var return_value = d3.round(value,l)
+    
   }
   else if (value.toString().split(".")[0].length > 4) {
     

@@ -186,8 +186,6 @@
     app.url = "{{ current_build.url() }}"
     app.data = {}
     app.ecis = {}
-    app.unique_isics = {}
-    app.unique_cbos = {}
     app.networks = {}
     app.coords = {}
     app.attrs = {}
@@ -522,8 +520,6 @@
                     app.data[app.build.data_url] = {}
                     app.data[app.build.data_url].raw = d.data
                     if (d.eci) app.ecis[app.build.data_url] = d.eci
-                    if (d.unique_isic) app.unique_isics[app.build.data_url] = d.unique_isic
-                    if (d.unique_cbo) app.unique_cbos[app.build.data_url] = d.unique_cbo
                     callback(error,d)
                   })
               },dataviva.static_url+app.build.data_url)
@@ -879,7 +875,6 @@
         .footer(footer[app.build.dataset])
         .solo(app.solos)
         .filter(app.filters)
-        .sub_title(app.sub_title())
         .icon_style(style)
         .yaxis_val(null)
         .tooltip_info(app.tooltip)
@@ -984,13 +979,7 @@
         if (app.vars.yaxis_var.indexOf("pci") >= 0) yv = app.vars.yaxis_var
         
         var yval = null
-        if (app.build.output == "isic" && app.unique_cbos[app.build.data_url] && yv == "unique_cbo") {
-          var yval = {"unique_cbo": app.unique_cbos[app.build.data_url][app.vars.year]}
-        }
-        else if (app.build.output == "cbo" && app.unique_isics[app.build.data_url] && yv == "unique_isic") {
-          var yval = {"unique_isic": app.unique_isics[app.build.data_url][app.vars.year]}
-        }
-        else if (app.build.output == "hs" && app.ecis[app.build.data_url] && yv == "pci") {
+        if (app.build.output == "hs" && app.ecis[app.build.data_url] && yv == "pci") {
           var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
         }
         app.viz
@@ -1076,7 +1065,7 @@
           var sub = text
         }
         else {
-          var sub = app.sub_title()
+          var sub = null
         }
         
         d3.select("#app").call(app.viz[type](app[type+"s"]).sub_title(sub))
@@ -1093,7 +1082,7 @@
         }
         
         if (!app.solos.length && !app.filters.length) {
-          app.viz.sub_title(app.sub_title())
+          app.viz.sub_title(null)
         }
         
         if (type == "depth" || type == "year") {
@@ -1103,13 +1092,7 @@
         
         if (type == "year" && app.build.app.type == "scatter") {
           var yval = null
-          if (app.build.output == "cbo" && app.unique_cbos[app.build.data_url] && app.vars.yaxis_var == "unique_cbo") {
-            var yval = {"unique_cbo": app.unique_cbos[app.build.data_url][app.vars.year]}
-          }
-          else if (app.build.output == "isic" && app.unique_isics[app.build.data_url] && app.vars.yaxis_var == "unique_isic") {
-            var yval = {"unique_isic": app.unique_isics[app.build.data_url][app.vars.year]}
-          }
-          else if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
+          if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
             var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
           }
           app.viz.yaxis_val(yval)
@@ -1154,13 +1137,7 @@
           }
           
           var yval = null
-          if (app.build.output == "cbo" && app.unique_cbos[app.build.data_url] && app.vars.yaxis_var == "unique_cbo") {
-            var yval = {"unique_cbo": app.unique_cbos[app.build.data_url][app.vars.year]}
-          }
-          else if (app.build.output == "isic" && app.unique_isics[app.build.data_url] && app.vars.yaxis_var == "unique_isic") {
-            var yval = {"unique_isic": app.unique_isics[app.build.data_url][app.vars.year]}
-          }
-          else if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
+          if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
             var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
           }
           
@@ -1475,27 +1452,6 @@
       if (window.frameElement) {
         var message = {"id": window.frameElement.id, "title": app.build.title, "app": app.build.app.type}
         parent.postMessage(message,"*")
-      }
-    }
-    
-    app.sub_title = function() {
-      if (app.unique_isics[app.build.data_url] && app.unique_isics[app.build.data_url][app.vars.year] && app.build.output == "cbo") {
-        var t = dataviva.format.text("unique_isic")
-        var n = dataviva.format.number(app.unique_isics[app.build.data_url][app.vars.year],"unique_isic")
-        return t + ": " + n
-      }
-      else if (app.unique_cbos[app.build.data_url] && app.unique_cbos[app.build.data_url][app.vars.year] && app.build.output == "isic") {
-        var t = dataviva.format.text("unique_cbo")
-        var n = dataviva.format.number(app.unique_cbos[app.build.data_url][app.vars.year],"unique_cbo")
-        return t + ": " + n
-      }
-      else if (app.ecis[app.build.data_url] && app.ecis[app.build.data_url][app.vars.year]) {
-        var t = dataviva.format.text("eci")
-        var n = dataviva.format.number(app.ecis[app.build.data_url][app.vars.year],"eci")
-        return t + ": " + n
-      }
-      else {
-        return null
       }
     }
     
