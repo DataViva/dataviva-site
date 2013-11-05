@@ -51,9 +51,29 @@ String.prototype.removeAccents = function() {
   return s;
 };
 
-String.prototype.truncate = function(n){
+String.prototype.truncate = function(n) {
   var tooLong = this.length > n,
       string = tooLong ? this.substr(0,n-1) : this;
   string = tooLong ? string.substr(0,string.lastIndexOf(' ')) : string;
   return  tooLong ? string + '...' : string;
 };
+
+Array.prototype.objectIndex = function(key,value) {
+  for(var i = 0, len = this.length; i < len; i++) {
+      if (this[i][key] === value) return i;
+  }
+  return -1;
+}
+
+Element.prototype.toggleClass = function(tag) {
+  var ret = false
+  var classes = this.className.split(" ")
+  var index = classes.indexOf(tag)
+  if (index >= 0) classes.splice(index,1)
+  else {
+    classes.push(tag)
+    ret = true
+  }
+  this.className = classes.join(" ")
+  return ret
+}

@@ -13,12 +13,12 @@
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.grid.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.nav.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.icons.css" />
-    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome.min.css" />
-    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/vizwhiz.d3.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome-4.0.0/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/d3plus.css" />
     
     <script src="/static/js/libs/modernizr.custom.js"></script>
     <script src="/static/js/libs/d3.v3.min.js"></script>
-    <script src="/static/js/libs/vizwhiz.d3.js"></script>
+    <script src="/static/js/libs/d3plus.js"></script>
     <script src="/static/js/libs/leon.js"></script>
     <script src="/static/js/libs/moment.min.js"></script>
     <script>moment.lang("{{g.locale}}")</script>
@@ -35,7 +35,8 @@
     <![endif]-->
     
     <script>
-      if(vizwhiz.ie && redirect) window.location = "/upgrade/"
+      if(d3plus.ie && redirect) window.location = "/upgrade/"
+      dataviva.language = "{{ g.locale }}"
     </script>
     
   </head>
@@ -46,16 +47,15 @@
     
     <script type="text/javascript">
     
-      dataviva.language = "{{ g.locale }}"
       dataviva.color = "{{ g.color }}"
       dataviva.static_url = "{{ g.static_url }}"
       dataviva.page = "{{ g.page_type }}"
       
       d3.selectAll(".alt_tooltip")
-        .on(vizwhiz.evt.over,function(){
+        .on(d3plus.evt.over,function(){
           dataviva.ui.tooltip("alt_tooltip",this)
         })
-        .on(vizwhiz.evt.out,function(){
+        .on(d3plus.evt.out,function(){
           dataviva.ui.tooltip("alt_tooltip",false)
         })
     
@@ -87,6 +87,18 @@
       ga('send', 'pageview');
     
       dataviva.ui.background()
+      
+      if (dataviva.resize) {
+        window.onresize = function() {
+          if (dataviva.resize_snap) dataviva.resize()
+          else {
+            if(this.resizeTO) clearTimeout(this.resizeTO);
+            this.resizeTO = setTimeout(function() {
+              dataviva.resize()
+            },500)
+          }
+        }
+      }
       
     </script>
     

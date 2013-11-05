@@ -238,6 +238,7 @@ class Build(db.Model, AutoSerialize):
                 
         if self.output == "bra" and isinstance(self.bra,(list,tuple)) and self.bra[0].id == "all":
              title = title.replace(depths[lang]["plural"]["8"],depths[lang]["plural"]["2"])
+             title = title.replace(depths[lang]["single"]["8"],depths[lang]["single"]["2"])
          
         if self.app_id != 2:    
             if "year" in kwargs:

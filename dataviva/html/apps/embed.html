@@ -32,14 +32,14 @@
     
     <div id="output" class="leon button medium" onclick="builder.selector(this.id)">
       <span class="list_text">{% trans %}Change Output{% endtrans %}</span>
-      <i class="icon-list-alt"></i>
+      <i class="fa fa-list-alt"></i>
     </div>
 
     <div id="bra_0" class="leon button medium" onclick="builder.selector(this.id)">
       {% set bra = current_build.bra[0] %}
       <div class="leon icon medium" style="background-image:url('{{ bra.icon }}')"></div>
-      <span class="list_text">{{ bra.name() }}</span>
-      <i class="icon-list-alt"></i>
+      <span class="list_text">{{ bra.name }}</span>
+      <i class="fa fa-list-alt"></i>
     </div>
     
     {% if current_build.bra[1] %}
@@ -47,8 +47,8 @@
     {% endif %}
     <div id="bra_1" class="leon button medium" onclick="builder.selector(this.id)">
       <div class="leon icon medium"{% if bra %} style="background-image:url('{{ bra.icon }}')"{% endif %}></div>
-      <span class="list_text">{% if bra %}{{ bra.name() }}{% endif %}</span>
-      <i class="icon-list-alt"></i>
+      <span class="list_text">{% if bra %}{{ bra.name }}{% endif %}</span>
+      <i class="fa fa-list-alt"></i>
     </div>
     
     {% if current_build.isic %}
@@ -56,8 +56,8 @@
     {% endif %}
     <div id="isic_0" class="leon button medium" onclick="builder.selector(this.id)">
       <div class="leon icon medium"{% if isic %} style="background-color:{{ isic.color }}; background-image:url('/static/img/icons/isic/isic_{{ isic.id[:1] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if isic %}{{ isic.name() }}{% endif %}</span>
-      <i class="icon-list-alt"></i>
+      <span class="list_text">{% if isic %}{{ isic.name }}{% endif %}</span>
+      <i class="fa fa-list-alt"></i>
     </div>
 
     {% if current_build.cbo %}
@@ -65,8 +65,8 @@
     {% endif %}
     <div id="cbo_0" class="leon button medium" onclick="builder.selector(this.id)">
       <div class="leon icon medium"{% if cbo %} style="background-color:{{ cbo.color }}; background-image:url('/static/img/icons/cbo/cbo_{{ cbo.id[:1] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if cbo %}{{ cbo.name() }}{% endif %}</span>
-      <i class="icon-list-alt"></i>
+      <span class="list_text">{% if cbo %}{{ cbo.name }}{% endif %}</span>
+      <i class="fa fa-list-alt"></i>
     </div>
 
     {% if current_build.hs %}
@@ -74,8 +74,8 @@
     {% endif %}
     <div id="hs_0" class="leon button medium" onclick="builder.selector(this.id)">
       <div class="leon icon medium"{% if hs %} style="background-color:{{ hs.color }}; background-image:url('/static/img/icons/hs/hs_{{ hs.id[:2] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if hs %}{{ hs.name() }}{% endif %}</span>
-      <i class="icon-list-alt"></i>
+      <span class="list_text">{% if hs %}{{ hs.name }}{% endif %}</span>
+      <i class="fa fa-list-alt"></i>
     </div>
 
     {% if current_build.wld %}
@@ -83,8 +83,8 @@
     {% endif %}
     <div id="wld_0" class="leon button medium" onclick="builder.selector(this.id)">
       <div class="leon icon medium"{% if wld %} style="{% if wld.id|count == 5 %}background-color:{{ wld.color }}; {% endif %}background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
-      <span class="list_text">{% if wld %}{{ wld.name() }}{% endif %}</span>
-      <i class="icon-list-alt"></i>
+      <span class="list_text">{% if wld %}{{ wld.name }}{% endif %}</span>
+      <i class="fa fa-list-alt"></i>
     </div>
     
     <div id="app_controls"></div>
@@ -93,12 +93,12 @@
 
   <div id="settings">
 
-    <a id="refresh" class="leon button square alt_tooltip" onclick="app.start()" alt="{% trans %}Refresh the App{% endtrans %}"><i class="icon-refresh"></i></a>
-    <a id="file" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Download this App{% endtrans %}"><i class="icon-save"></i></a>
-    <a id="starred" class="leon button square alt_tooltip" onclick="app.star()" alt="{% trans %}Save this App{% endtrans %}"><i id="status_{{starred}}" class="{% if starred == 1 %}icon-star{% else %}icon-star-empty{% endif %}"></i></a>
-    <a id="help" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Show App Tutorial{% endtrans %}"><i class="icon-question-sign"></i></a>
-    <a id="full_screen" class="leon button square alt_tooltip" onclick="window.open(window.location.href,'_blank')" alt="{% trans %}Open App in Full-Screen{% endtrans %}"><i class="icon-fullscreen"></i></a>
-    <a id="controls_toggle" class="leon button square alt_tooltip" onclick="builder.controls()" alt="{% trans %}Show/Hide Controls{% endtrans %}"><i class="icon-cogs"></i></a>
+    <a id="refresh" class="leon button square alt_tooltip" onclick="app.start()" alt="{% trans %}Refresh the App{% endtrans %}"><i class="fa fa-refresh"></i></a>
+    <a id="file" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Download this App{% endtrans %}"><i class="fa fa-save"></i></a>
+    <a id="starred" class="leon button square alt_tooltip" onclick="app.star()" alt="{% trans %}Save this App{% endtrans %}"><i id="status_{{starred}}" class="{% if starred == 1 %}fa fa-star{% else %}fa fa-star-o{% endif %}"></i></a>
+    <a id="help" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Show App Tutorial{% endtrans %}"><i class="fa fa-question-circle"></i></a>
+    <a id="full_screen" class="leon button square alt_tooltip" onclick="window.open(window.location.href,'_blank')" alt="{% trans %}Open App in Full-Screen{% endtrans %}"><i class="fa fa-fullscreen"></i></a>
+    <a id="controls_toggle" class="leon button square alt_tooltip" onclick="builder.controls()" alt="{% trans %}Show/Hide Controls{% endtrans %}"><i class="fa fa-cogs"></i></a>
   
   </div>
 
@@ -389,7 +389,7 @@
       additionals["cp_bra_1_"+k] = averages[k]
     }
     
-    averages = vizwhiz.utils.merge(averages,additionals)
+    averages = d3plus.utils.merge(averages,additionals)
     
     var descs = {
       "distance": dataviva.format.text("distance_desc"),
@@ -406,8 +406,8 @@
       "unique_cbo": dataviva.format.text("unique_cbo_desc"),
     }
     
-    // Define global viz-whiz app parameters
-    app.viz = vizwhiz.viz()
+    // Define global D3plus app parameters
+    app.viz = d3plus.viz()
       .descs(descs)
       .name_array(["name","display_id"])
       .nesting_aggs(averages)
@@ -448,8 +448,7 @@
 
       d3.select("#ui_bottom").selectAll("*").remove();
       d3.select("#app_controls").selectAll("*").remove();
-      vizwhiz.tooltip.remove();
-      last_depth = "bra_8"
+      d3plus.tooltip.remove();
       
       d3.json("/apps/embed/"+app.url)
         .header("X-Requested-With", "XMLHttpRequest")
@@ -469,6 +468,7 @@
             
             // Set public current build variable
             app.build = data.current_build
+            last_depth = app.build.bra[0].id == "all" ? "bra_2" : "bra_8"
             leon("#app_select").color(app.build.app.color)
             builder.url()
             builder.outputs(data.all_builds)
@@ -652,7 +652,7 @@
     
     app.error = function(error) {
       console.log("[dataviva] ERROR: "+error)
-      app.resize()
+      dataviva.resize()
       loading.hide()
       d3.select("#app").html("").datum([]).call(app.viz.error(error))
     }
@@ -698,21 +698,17 @@
             .attr("id","year_slider")
             
           if (app.allyears) {
-            year.append("input")
-              .attr("type","range")
-              .attr("onchange","app.update('year',this.value)")
-              .attr("id","year")
-              .attr("name","year")
-              .attr("min",ui.values[0]+"")
-              .attr("max",ui.values[ui.values.length-1]+"")
-              .attr("value",app.vars.year+"")
-              .attr("step","1")
-        
-            year.append("label")
-              .attr("for","year")
-              .html(dataviva.format.text("year"))
-          
-            leon("#year").color(app.build.app.color)
+            
+            leon({
+              "type": "range",
+              "event": app.update,
+              "id": "year",
+              "data": {"min": ui.values[0], "max": ui.values[ui.values.length-1], "step": 1},
+              "default": app.vars.year,
+              "parent": document.getElementById("year_slider"),
+              "label": dataviva.format.text("year")
+            }).color(app.build.app.color)
+            
           }
           else {
             var b = year.append("input")
@@ -723,7 +719,7 @@
               .attr("for","allyears")
               
             label.append("i")
-              .attr("class","icon-play")
+              .attr("class","fa fa-play")
               .attr("style","color:"+app.build.app.color+";")
               
             label.append("div")
@@ -789,30 +785,34 @@
           }
         
           if (ui.values.length > 1 && app.vars.builder != "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs"))) {
-            // if (ui.values.length == 2 && ui.values.indexOf("true") >= 0 && ui.values.indexOf("false") >= 0) {
-            //   builder.checkbox({
-            //     "data": ui.values,
-            //     "title": title,
-            //     "initial": app.vars[ui.type],
-            //     "type": ui.type
-            //   })
-            // }
-            if (ui.values.length <= 4) {
-              builder.radios({
-                "data": ui.values,
-                "title": title,
-                "initial": app.vars[ui.type],
-                "type": ui.type
+
+            var leon_type = ui.values.length <= 4 ? "radio" : "select"
+            var leon_data = {}
+            ui.values.forEach(function(v){
+              leon_data[v] = dataviva.format.text(v)
+            })
+            
+            var ui_div = d3.select("#app_controls").append("div")
+              .attr("class","ui_group alt_tooltip")
+              .attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
+              .on(d3plus.evt.over,function(){
+                if (leon_type == "select") dataviva.ui.tooltip("alt_tooltip",this,"center right")
+                else dataviva.ui.tooltip("alt_tooltip",this)
               })
-            }
-            else {
-              builder.dropdown({
-                "data": ui.values,
-                "title": title,
-                "initial": app.vars[ui.type],
-                "type": ui.type
+              .on(d3plus.evt.out,function(){
+                dataviva.ui.tooltip("alt_tooltip",false)
               })
-            }
+            
+            leon({
+              "type": leon_type,
+              "data": leon_data,
+              "id": title,
+              "default": app.vars[ui.type],
+              "label": dataviva.format.text(title),
+              "parent": ui_div.node(),
+              "event": app.update
+            }).color(app.build.app.color)
+            
           }
           
         }
@@ -876,7 +876,7 @@
         .highlight(null)
         .id_var(app.build.output+"_id")
         .error(false)
-        .data_source(footer[app.build.dataset])
+        .footer(footer[app.build.dataset])
         .solo(app.solos)
         .filter(app.filters)
         .sub_title(app.sub_title())
@@ -1027,13 +1027,13 @@
         .datum(app.data[app.build.data_url][format[app.build.app.type]])
 
       if (app.build.app.type != "rings") builder.key()
-      app.resize()
+      dataviva.resize()
       loading.hide()
       app.first_load = true
       
     }
     
-    app.update = function(type,value) {
+    app.update = function(value,type) {
       
       if (type == "solo" || type == "filter") {
         
@@ -1089,7 +1089,7 @@
         builder.url()
         if (type == "year" && app.build.app.type != "rings") {
           builder.key()
-          app.resize()
+          dataviva.resize()
         }
         
         if (!app.solos.length && !app.filters.length) {
@@ -1362,7 +1362,436 @@
         
     }
     
-    app.resize = function() {
+    app.star = function(status) {
+      
+      function update_star(s) {
+        d3.select("#starred > i")
+          .attr("id","status_"+s)
+          .attr("class",function() {
+            return s == 1 ? "fa fa-star" : "fa fa-star-o";
+          })
+      }
+      
+      var id = d3.select("#starred > i").attr("id")
+      var current_status = parseInt(id.split("_")[1],10)
+      
+      if ([-1,0,1].indexOf(status) >= 0) {
+        update_star(status)
+      }
+      else if (current_status == 0) {
+        login();
+      }
+      else {
+        
+        d3.select("#starred > i")
+          .attr("class",function(){
+            return this.className + " fa fa-spin"
+          })
+        
+        var url = window.location.pathname.replace("embed","star")
+          
+        d3.json(url)
+          .header("Content-type","application/x-www-form-urlencoded")
+          .post("title="+app.build.title, function(error,data) {
+            if (data.error) {
+              alert(data.error)
+              update_star(current_status)
+            }
+            else if (data.success) update_star(data.success)
+          })
+      }
+        
+    }
+    
+    app.download = function(obj) {
+      
+      var type = obj.id,
+          title = app.build.app.name+"-"+app.build.title,
+          columns = []
+          
+      for (cat in app.tooltip.long) {
+        app.tooltip.long[cat].forEach(function(k){
+          columns.push(k)
+        })
+      }
+          
+      title = title.removeAccents().split(" ").join("_")
+      
+      var form = document.getElementById("svgform");
+      
+      if(type == "csv"){
+        form['data'].value = d3.csv.formatRows(app.viz.csv_columns(columns).csv_data());
+      }
+      else {
+        if (app.build.app.type == "geo_map") var svg = d3.select("div#map svg")
+        else var svg = d3.select("#app > svg")
+        // Add necessary name space junk and get raw node
+        svg.attr("version", 1.1)
+          .attr("xmlns", "http://www.w3.org/2000/svg")
+          .node()
+        // Extract the data as SVG text string
+        var svg_xml = (new XMLSerializer).serializeToString(svg.node());
+        form['data'].value = svg_xml;
+      }
+      // Submit the <FORM> to the server.
+      // The result will be an attachment file to download.
+      form['output_format'].value = type;
+      form['title'].value = title;
+      form.submit();
+      
+    }
+    
+    app.title_update = function() {
+      
+      if (app.build.output == "bra") {
+        var words = app.build.title.split(" ")
+        if (app.vars.depth) {
+          var new_depth = dataviva.format.text(app.vars.depth)
+          var old_depth = dataviva.format.text(last_depth)
+          if (words[words.length-2] == old_depth) words[words.length-2] = new_depth
+          else if (words[words.length-1] == old_depth) words[words.length-1] = new_depth
+          else {
+            var new_depth = dataviva.format.text(app.vars.depth+"_plural")
+            var old_depth = dataviva.format.text(last_depth+"_plural")
+            if (words[0] == old_depth) words[0] = new_depth
+          }
+          app.build.title = words.join(" ")
+          last_depth = app.vars.depth
+        }
+        else if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
+          var old_word = dataviva.format.text("bra_8_plural")
+          var new_word = dataviva.format.text("bra_2_plural")
+          app.build.title = app.build.title.replace(old_word,new_word)
+        }
+      }
+      if (app.vars.year && app.build.app.type != "stacked") {
+        if (app.build.title.indexOf("(") < 0) {
+          app.build.title += " ("+app.vars.year+")"
+        }
+        else {
+          app.build.title = app.build.title.replace(/\(.*?\)/, "("+app.vars.year+")")
+        }
+      }
+      if (window.frameElement) {
+        var message = {"id": window.frameElement.id, "title": app.build.title, "app": app.build.app.type}
+        parent.postMessage(message,"*")
+      }
+    }
+    
+    app.sub_title = function() {
+      if (app.unique_isics[app.build.data_url] && app.unique_isics[app.build.data_url][app.vars.year] && app.build.output == "cbo") {
+        var t = dataviva.format.text("unique_isic")
+        var n = dataviva.format.number(app.unique_isics[app.build.data_url][app.vars.year],"unique_isic")
+        return t + ": " + n
+      }
+      else if (app.unique_cbos[app.build.data_url] && app.unique_cbos[app.build.data_url][app.vars.year] && app.build.output == "isic") {
+        var t = dataviva.format.text("unique_cbo")
+        var n = dataviva.format.number(app.unique_cbos[app.build.data_url][app.vars.year],"unique_cbo")
+        return t + ": " + n
+      }
+      else if (app.ecis[app.build.data_url] && app.ecis[app.build.data_url][app.vars.year]) {
+        var t = dataviva.format.text("eci")
+        var n = dataviva.format.number(app.ecis[app.build.data_url][app.vars.year],"eci")
+        return t + ": " + n
+      }
+      else {
+        return null
+      }
+    }
+    
+    /*********************/
+    /* Builder Functions */
+    /*********************/
+    
+    var builder = {}
+    builder.outputs = function(builds) {
+      
+      app.all_builds = builds
+      
+      app.all_builds.forEach(function(build){
+        d3.select("#output_"+build.app.type).remove()
+      })
+      
+      app.all_builds.forEach(function(build){
+        
+        if (d3.select("#output_"+build.app.type).empty()) {
+          dataviva.popover.create({
+            "id": "output_"+build.app.type,
+            "width": 600,
+            "height": "80%",
+            "color": build.app.color
+          })
+          d3.select("#output_"+build.app.type)
+            .append("div").attr("class","scrolling_content")
+        }
+        
+        var box = d3.select("#output_"+build.app.type).select("div.scrolling_content")
+        
+        if (box.select("."+build.dataset).empty()) {
+          box.append("div")
+            .attr("class",build.dataset+" output_list")
+            .append("div")
+              .attr("class","title")
+              .text(dataviva.format.text(build.dataset))
+        }
+        
+        if (build.url == app.build.url) var c = "decision"
+        else var c = "help"
+        
+        box.select("."+build.dataset).append("div")
+          .attr("id",build.url)
+          .attr("class","output "+c+" icon "+build.app.type)
+          .html(build.title)
+          .on(d3plus.evt.click,function(){
+            app.start(this.id)
+          })
+        
+      })
+      
+      if (d3.selectAll("#output_"+app.build.app.type+" .output")[0].length == 1) {
+        d3.select("#output").style("display","none")
+      }
+      else {
+        d3.select("#output").style("display","inline-block")
+      }
+      
+    }
+    
+    builder.filter = function(obj,id,static) {
+      
+      var type = id.split("_")[0],
+          index = id.split("_")[1],
+          old_obj = app.build[type][index]
+          new_name = obj.name ? obj.name : obj["name_"+dataviva.language]
+          
+      if (type == "bra") {
+        var url_index = 2
+      }
+      else if (["hs","isic"].indexOf(type) >= 0) {
+        var url_index = 3
+      }
+      else {
+        var url_index = 4
+      }
+      
+      app.build[type][index] = obj
+      var url = app.url.split("/")
+      var ids = url[url_index].split("_")
+      if (obj.distance && obj.distance > 0) {
+        ids[index] = obj.id+"."+obj.distance
+      }
+      else {
+        ids[index] = obj.id
+      }
+      url[url_index] = ids.join("_")
+      url = url.join("/")
+      
+      var button = d3.select("#"+id)
+      
+      if (type == "bra" && !obj.distance) obj.distance = 0
+
+      if (!obj.icon) obj.icon = dataviva.icon(obj.id,type)
+      
+      button.select(".icon")
+       .style("background-image","url("+obj.icon+")")
+       
+      if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && obj.id.length != 5)) {
+        button.select(".icon").style("background-color",obj.color)
+      }
+      else {
+        button.select(".icon").style("background-color","transparent")
+      }
+        
+      if (obj.distance > 0 && type == "bra") new_name += " "+obj.distance+"km"
+
+      button.select(".list_text").text(new_name)
+      
+      if (!static) {
+        app.start(url)
+      }
+       
+    }
+    
+    builder.app = function(app_name,static) {
+      
+      document.getElementById("app_select").value = app_name
+      
+      var options = d3.select("#output_"+app_name).selectAll(".output")
+      
+      if (options[0].length > 1) {
+        d3.select("#output").style("display","inline-block")
+      }
+      else {
+        d3.select("#output").style("display","none")
+      }
+      
+      if (!static) {
+      
+        var match = null, backup = null
+      
+        options
+          .each(function(d){
+            var a = app.url.split("/")
+            var s = this.id.split("/")
+            if (!backup && s[s.length-1] == a[a.length-1]) backup = this.id
+            a.shift()
+            a = a.join("/")
+            s.shift()
+            s = s.join("/")
+            if (a == s) match = this.id
+          })
+        
+        if (!match) {
+          if (backup) match = backup
+          else match = options[0][0].id
+        }
+        
+        app.start(match)
+      }
+      
+    }
+    
+    builder.url = function() {
+      
+      var doc_title = app.build.app.name+" : "+app.build.title
+      dataviva.url("/apps/embed/"+app.url,app.vars,doc_title)
+        
+    }
+    
+    builder.key = function(cats) {
+      
+      if ("geo_map" != app.build.app.type) {
+        if (!cats) {
+          if (app.build.app.type != "network") {
+            if (app.data[app.build.data_url].categories) {
+              if (app.build.app.type != "stacked") {
+                app.categories = app.data[app.build.data_url].categories[app.vars.year]
+              }
+              else {
+                app.categories = app.data[app.build.data_url].categories.all
+              }
+            }
+            else {
+              app.categories = []
+            }
+          }
+          else {
+            app.categories = []
+            app.networks[app.build.output].nodes.forEach(function(n){
+              var id = n[app.build.output+"_id"].slice(0,depths[app.build.output][0])
+              if (app.categories.indexOf(id) < 0) app.categories.push(id)
+            })
+          }
+        }
+        else {
+          app.categories = cats
+        }
+        
+        if (app.categories.length <= 1) {
+          d3.select("div#key").style("display","none")
+        }
+        else {
+          d3.select("div#key").style("display","inline-block")
+      
+          d3.selectAll("div.key_icon_container")
+            .style("display",function(){
+              var id = this.id.slice(3)
+              return app.categories.indexOf(id) < 0 ? "none" : "inline-block";
+            })
+        }
+        
+      }
+        
+    }
+    
+    builder.controls = function() {
+      
+      if (app.vars.controls == "false") {
+        app.vars.controls = "true"
+      } else {
+        app.vars.controls = "false"
+      }
+      builder.url()
+      dataviva.resize()
+      
+    }
+    
+    builder.selector = function(id) {
+      
+      if (id == "output") {
+        
+        dataviva.popover.show("#output_"+app.build.app.type)
+        
+      }
+      else if (id == "help") {
+        
+        var pid = "#help_"+app.build.app.type
+        
+        if (d3.select(pid).empty()) {
+          
+          dataviva.popover.create({
+            "id": "help_"+app.build.app.type,
+            "width": "80%",
+            "height": "90%",
+            "color": app.build.app.color,
+            "close": true
+          })
+          
+          d3.select(pid).append("iframe")
+            .attr("width","100%")
+            .attr("height","100%")
+            .attr("src","/apps/info/"+app.build.app.type+"/")
+              
+        }
+        
+        dataviva.popover.show(pid)
+        
+      }
+      else {
+
+        var s = id.split("_")
+        var type = s[0]
+        if (s[1]) var index = s[1]
+      
+        if (type == "file") {
+          var init = "all",
+              callback = app.download,
+              dist = 0
+        }
+        else {
+          var init = app.build[type][index].id,
+              callback = builder.filter
+    
+          if (type == "bra" && app.build.bra[index].distance) {
+            var dist = app.build.bra[index].distance
+          }
+          else {
+            var dist = 0
+          }
+        
+        }
+        
+        selector
+          .callback(callback)
+          .distance(dist)
+          .initial_value(init)
+          .type(id)
+    
+        d3.select("#popover")
+          .call(selector);
+      
+        // Show popover
+        dataviva.popover.show("#popover");
+        
+      }
+        
+    }
+    
+    /*****************/
+    /* Page Resizing */
+    /*****************/
+    
+    dataviva.resize = function() {
       
       var children = d3.select("#ui_bottom").node().childNodes,
           min_width = 300;
@@ -1477,596 +1906,16 @@
             .title_width(app.title_width)
             .title_height(app.title_height)
           )
-      
-    }
-    
-    app.star = function(status) {
-      
-      function update_star(s) {
-        d3.select("#starred > i")
-          .attr("id","status_"+s)
-          .attr("class",function() {
-            return s == 1 ? "icon-star" : "icon-star-empty";
-          })
+        
+      if (!app.first_load) {
+        d3.select("#app")
+          .style("-webkit-transition","top 0.6s, height 0.6s")
+          .style("transition","top 0.6s, height 0.6s")
+        d3.select("#builder")
+          .style("-webkit-transition","top 0.6s")
+          .style("transition","top 0.6s")
       }
       
-      var id = d3.select("#starred > i").attr("id")
-      var current_status = parseInt(id.split("_")[1],10)
-      
-      if ([-1,0,1].indexOf(status) >= 0) {
-        update_star(status)
-      }
-      else if (current_status == 0) {
-        login();
-      }
-      else {
-        
-        d3.select("#starred > i")
-          .attr("class",function(){
-            return this.className + " icon-spin"
-          })
-        
-        var url = window.location.pathname.replace("embed","star")
-          
-        d3.json(url)
-          .header("Content-type","application/x-www-form-urlencoded")
-          .post("title="+app.build.title, function(error,data) {
-            if (data.error) {
-              alert(data.error)
-              update_star(current_status)
-            }
-            else if (data.success) update_star(data.success)
-          })
-      }
-        
-    }
-    
-    app.download = function(obj) {
-      
-      var type = obj.id,
-          title = app.build.app.name+"-"+app.build.title,
-          columns = []
-          
-      for (cat in app.tooltip.long) {
-        app.tooltip.long[cat].forEach(function(k){
-          columns.push(k)
-        })
-      }
-          
-      title = title.removeAccents().split(" ").join("_")
-      
-      var form = document.getElementById("svgform");
-      
-      if(type == "csv"){
-        form['data'].value = d3.csv.formatRows(app.viz.csv_columns(columns).csv_data());
-      }
-      else {
-        if (app.build.app.type == "geo_map") var svg = d3.select("div#map svg")
-        else var svg = d3.select("#app > svg")
-        // Add necessary name space junk and get raw node
-        svg.attr("version", 1.1)
-          .attr("xmlns", "http://www.w3.org/2000/svg")
-          .node()
-        // Extract the data as SVG text string
-        var svg_xml = (new XMLSerializer).serializeToString(svg.node());
-        form['data'].value = svg_xml;
-      }
-      // Submit the <FORM> to the server.
-      // The result will be an attachment file to download.
-      form['output_format'].value = type;
-      form['title'].value = title;
-      form.submit();
-      
-    }
-    
-    app.title_update = function() {
-      
-      if (app.build.output == "bra") {
-        if (app.vars.depth) {
-          var new_depth = dataviva.format.text(app.vars.depth)
-          var old_depth = dataviva.format.text(last_depth)
-          app.build.title = app.build.title.replace(old_depth,new_depth)
-          var new_depth = dataviva.format.text(app.vars.depth+"_plural")
-          var old_depth = dataviva.format.text(last_depth+"_plural")
-          app.build.title = app.build.title.replace(old_depth,new_depth)
-          last_depth = app.vars.depth
-        }
-        else if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
-          var old_word = dataviva.format.text("bra_8_plural")
-          var new_word = dataviva.format.text("bra_2_plural")
-          app.build.title = app.build.title.replace(old_word,new_word)
-        }
-      }
-      if (app.vars.year && app.build.app.type != "stacked") {
-        if (app.build.title.indexOf("(") < 0) {
-          app.build.title += " ("+app.vars.year+")"
-        }
-        else {
-          app.build.title = app.build.title.replace(/\(.*?\)/, "("+app.vars.year+")")
-        }
-      }
-      if (window.frameElement) {
-        var message = {"id": window.frameElement.id, "title": app.build.title, "app": app.build.app.type}
-        parent.postMessage(message,"*")
-      }
-    }
-    
-    app.sub_title = function() {
-      if (app.unique_isics[app.build.data_url] && app.unique_isics[app.build.data_url][app.vars.year] && app.build.output == "cbo") {
-        var t = dataviva.format.text("unique_isic")
-        var n = dataviva.format.number(app.unique_isics[app.build.data_url][app.vars.year],"unique_isic")
-        return t + ": " + n
-      }
-      else if (app.unique_cbos[app.build.data_url] && app.unique_cbos[app.build.data_url][app.vars.year] && app.build.output == "isic") {
-        var t = dataviva.format.text("unique_cbo")
-        var n = dataviva.format.number(app.unique_cbos[app.build.data_url][app.vars.year],"unique_cbo")
-        return t + ": " + n
-      }
-      else if (app.ecis[app.build.data_url] && app.ecis[app.build.data_url][app.vars.year]) {
-        var t = dataviva.format.text("eci")
-        var n = dataviva.format.number(app.ecis[app.build.data_url][app.vars.year],"eci")
-        return t + ": " + n
-      }
-      else {
-        return null
-      }
-    }
-    
-    /*********************/
-    /* Builder Functions */
-    /*********************/
-    
-    var builder = {}
-    builder.outputs = function(builds) {
-      
-      app.all_builds = builds
-      
-      app.all_builds.forEach(function(build){
-        d3.select("#output_"+build.app.type).remove()
-      })
-      
-      app.all_builds.forEach(function(build){
-        
-        if (d3.select("#output_"+build.app.type).empty()) {
-          dataviva.popover.create({
-            "id": "output_"+build.app.type,
-            "width": 600,
-            "height": "80%",
-            "color": build.app.color
-          })
-          d3.select("#output_"+build.app.type)
-            .append("div").attr("class","scrolling_content")
-        }
-        
-        var box = d3.select("#output_"+build.app.type).select("div.scrolling_content")
-        
-        if (box.select("."+build.dataset).empty()) {
-          box.append("div")
-            .attr("class",build.dataset+" output_list")
-            .append("div")
-              .attr("class","title")
-              .text(dataviva.format.text(build.dataset))
-        }
-        
-        if (build.url == app.build.url) var c = "decision"
-        else var c = "help"
-        
-        box.select("."+build.dataset).append("div")
-          .attr("id",build.url)
-          .attr("class","output "+c+" icon "+build.app.type)
-          .html(build.title)
-          .on(vizwhiz.evt.click,function(){
-            app.start(this.id)
-          })
-        
-      })
-      
-      if (d3.selectAll("#output_"+app.build.app.type+" .output")[0].length == 1) {
-        d3.select("#output").style("display","none")
-      }
-      else {
-        d3.select("#output").style("display","inline-block")
-      }
-      
-    }
-    
-    builder.filter = function(obj,id,static) {
-      
-      var type = id.split("_")[0],
-          index = id.split("_")[1],
-          old_obj = app.build[type][index]
-          new_name = obj.name ? obj.name : obj["name_"+dataviva.language]
-          
-      if (type == "bra") {
-        var url_index = 2
-      }
-      else if (["hs","isic"].indexOf(type) >= 0) {
-        var url_index = 3
-      }
-      else {
-        var url_index = 4
-      }
-      
-      app.build[type][index] = obj
-      var url = app.url.split("/")
-      var ids = url[url_index].split("_")
-      if (obj.distance && obj.distance > 0) {
-        ids[index] = obj.id+"."+obj.distance
-      }
-      else {
-        ids[index] = obj.id
-      }
-      url[url_index] = ids.join("_")
-      url = url.join("/")
-      
-      var button = d3.select("#"+id)
-      
-      if (type == "bra" && !obj.distance) obj.distance = 0
-
-      if (!obj.icon) obj.icon = dataviva.icon(obj.id,type)
-      
-      button.select(".icon")
-       .style("background-image","url("+obj.icon+")")
-       
-      if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && obj.id.length != 5)) {
-        button.select(".icon").style("background-color",obj.color)
-      }
-      else {
-        button.select(".icon").style("background-color","transparent")
-      }
-        
-      if (obj.distance > 0 && type == "bra") new_name += " "+obj.distance+"km"
-
-      button.select(".list_text").text(new_name)
-      
-      if (!static) {
-        app.start(url)
-      }
-       
-    }
-    
-    builder.app = function(app_name,static) {
-      
-      document.getElementById("app_select").value = app_name
-      
-      var options = d3.select("#output_"+app_name).selectAll(".output")
-      
-      if (options[0].length > 1) {
-        d3.select("#output").style("display","inline-block")
-      }
-      else {
-        d3.select("#output").style("display","none")
-      }
-      
-      if (!static) {
-      
-        var match = null, backup = null
-      
-        options
-          .each(function(d){
-            var a = app.url.split("/")
-            var s = this.id.split("/")
-            if (!backup && s[s.length-1] == a[a.length-1]) backup = this.id
-            a.shift()
-            a = a.join("/")
-            s.shift()
-            s = s.join("/")
-            if (a == s) match = this.id
-          })
-        
-        if (!match) {
-          if (backup) match = backup
-          else match = options[0][0].id
-        }
-        
-        app.start(match)
-      }
-      
-    }
-    
-    builder.radios = function(obj) {
-      
-      var div = d3.select("#app_controls").append("div")
-        .attr("class","ui_group")
-        
-      div.append("legend")
-        .attr("id",obj.title)
-        .html(dataviva.format.text(obj.title))
-        
-      obj.data.forEach(function(v,i){
-        
-        var button = div.append("input")
-          .attr("type","radio")
-          .attr("name",obj.title)
-          .attr("value",obj.title+"+"+v)
-          .attr("id",obj.title+"+"+v)
-          .attr("onclick","app.update('"+obj.type+"',this.value.split('+')[1])")
-          
-        if (obj.title == "depth") var text = dataviva.format.text(v+"_plural")
-        else var text = dataviva.format.text(v)
-        
-        div.append("label")
-          .attr("for",obj.title+"+"+v)
-          .text(text)
-      
-        if (v == obj.initial) {
-          button.node().checked = true
-        }
-        
-      })
-      
-      leon("$"+obj.title).color(app.build.app.color)
-      
-      d3.select("#leon_"+obj.title).select(".leon.radio.group")
-        .attr("class","leon radio group alt_tooltip")
-        .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
-        .on(vizwhiz.evt.over,function(){
-          dataviva.ui.tooltip("alt_tooltip",this)
-        })
-        .on(vizwhiz.evt.out,function(){
-          dataviva.ui.tooltip("alt_tooltip",false)
-        })
-      
-    }
-    
-    builder.dropdown = function(obj) {
-      
-      var div = d3.select("#app_controls").append("div")
-        .attr("class","ui_group alt_tooltip")
-        .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
-        .on(vizwhiz.evt.over,function(){
-          dataviva.ui.tooltip("alt_tooltip",this,"center right")
-        })
-        .on(vizwhiz.evt.out,function(){
-          dataviva.ui.tooltip("alt_tooltip",false)
-        })
-    
-      div.append("label")
-        .attr("for",obj.title)
-        .html(dataviva.format.text(obj.title))
-    
-      var select = div.append("select")
-        .attr("id",obj.title)
-        .attr("onchange","app.update('"+obj.type+"',this.value.split('+')[1])")
-        
-      obj.data.forEach(function(v,i){
-        
-        var option = select.append("option")
-          .attr("value",obj.title+"+"+v)
-          .text(dataviva.format.text(v))
-      
-        if (v == obj.initial) {
-          option.node().selected = true
-        }
-        
-      })
-
-      leon("#"+obj.title).color(app.build.app.color)
-      
-    }
-    
-    builder.checkbox = function(obj) {
-      
-      var div = d3.select("#app_controls").append("div")
-        .attr("class","ui_group alt_tooltip")
-        .attr("alt",dataviva.format.text(obj.title+"_desc_"+app.build.app.type))
-        .on(vizwhiz.evt.over,function(){
-          dataviva.ui.tooltip("alt_tooltip",this)
-        })
-        .on(vizwhiz.evt.out,function(){
-          dataviva.ui.tooltip("alt_tooltip",false)
-        })
-    
-      div.append("label")
-        .attr("for",obj.title)
-        .html(dataviva.format.text(obj.title))
-    
-      var checkbox = div.append("input")
-        .attr("type","checkbox")
-        .attr("id",obj.title)
-        .attr("onclick","app.update('"+obj.type+"',this.checked)")
-        
-      if (obj.initial == "true") {
-        checkbox.node().checked = true
-      }
-
-      leon("#"+obj.title).color(app.build.app.color)
-      
-    }
-    
-    builder.url = function() {
-      
-      var doc_title = "DataViva : "+app.build.app.name+" : "+app.build.title;
-      document.title = doc_title
-                        
-      var window_url = app.url
-      
-      var window_params = ""
-      if (Object.keys(app.vars).length > 0) {
-        window_params += "?"
-        url_vars = []
-        for (v in app.vars) {
-          if (v != "controls" || (v == "controls" && app.vars.builder != "false")) {
-            url_vars.push(v + "=" + app.vars[v])
-          }
-        }
-        window_params += url_vars.join("&");
-      }
-      var full_url = "/apps/embed/"+window_url+window_params
-      var replace = window.location.pathname.indexOf(window_url) >= 0
-      var iframe = window != window.parent && window.parent.location.pathname.indexOf("builder") >= 0
-      
-      if (Modernizr.history) {
-        if (replace || iframe) {
-          window.history.replaceState({'prev_request': full_url}, doc_title, full_url)
-        }
-        else {
-          window.history.pushState({'prev_request': full_url}, doc_title, full_url)
-        }
-        
-        if (iframe) {
-          window.parent.document.title = doc_title
-      
-          var builder_url = full_url.replace("embed","builder")
-          if (replace) {
-            window.parent.history.replaceState({'prev_request': builder_url}, doc_title, builder_url)
-          }
-          else {
-            window.parent.history.pushState({'prev_request': builder_url}, doc_title, builder_url)
-          }
-        }
-      } 
-      else if (window.location.href.indexOf(window_url) < 0) {
-        if (window != window.parent && window.parent.location.pathname.indexOf("builder") >= 0) {
-          var builder_url = "/apps/builder/"+window_url+window_params
-          window.parent.location = builder_url
-        }
-        else {
-          window.location = full_url
-        }
-        
-      }
-        
-    }
-    
-    builder.key = function(cats) {
-      
-      if ("geo_map" != app.build.app.type) {
-        if (!cats) {
-          if (app.build.app.type != "network") {
-            if (app.data[app.build.data_url].categories) {
-              if (app.build.app.type != "stacked") {
-                app.categories = app.data[app.build.data_url].categories[app.vars.year]
-              }
-              else {
-                app.categories = app.data[app.build.data_url].categories.all
-              }
-            }
-            else {
-              app.categories = []
-            }
-          }
-          else {
-            app.categories = []
-            app.networks[app.build.output].nodes.forEach(function(n){
-              var id = n[app.build.output+"_id"].slice(0,depths[app.build.output][0])
-              if (app.categories.indexOf(id) < 0) app.categories.push(id)
-            })
-          }
-        }
-        else {
-          app.categories = cats
-        }
-        
-        if (app.categories.length <= 1) {
-          d3.select("div#key").style("display","none")
-        }
-        else {
-          d3.select("div#key").style("display","inline-block")
-      
-          d3.selectAll("div.key_icon_container")
-            .style("display",function(){
-              var id = this.id.slice(3)
-              return app.categories.indexOf(id) < 0 ? "none" : "inline-block";
-            })
-        }
-        
-      }
-        
-    }
-    
-    builder.controls = function() {
-      
-      if (app.vars.controls == "false") {
-        app.vars.controls = "true"
-      } else {
-        app.vars.controls = "false"
-      }
-      builder.url()
-      app.resize()
-      
-    }
-    
-    builder.selector = function(id) {
-      
-      if (id == "output") {
-        
-        dataviva.popover.show("#output_"+app.build.app.type)
-        
-      }
-      else if (id == "help") {
-        
-        var pid = "#help_"+app.build.app.type
-        
-        if (d3.select(pid).empty()) {
-          
-          dataviva.popover.create({
-            "id": "help_"+app.build.app.type,
-            "width": "80%",
-            "height": "90%",
-            "color": app.build.app.color,
-            "close": true
-          })
-          
-          d3.select(pid).append("iframe")
-            .attr("width","100%")
-            .attr("height","100%")
-            .attr("src","/apps/info/"+app.build.app.type+"/")
-              
-        }
-        
-        dataviva.popover.show(pid)
-        
-      }
-      else {
-
-        var s = id.split("_")
-        var type = s[0]
-        if (s[1]) var index = s[1]
-      
-        if (type == "file") {
-          var init = "all",
-              callback = app.download,
-              dist = 0
-        }
-        else {
-          var init = app.build[type][index].id,
-              callback = builder.filter
-    
-          if (type == "bra" && app.build.bra[index].distance) {
-            var dist = app.build.bra[index].distance
-          }
-          else {
-            var dist = 0
-          }
-        
-        }
-        
-        selector
-          .callback(callback)
-          .distance(dist)
-          .initial_value(init)
-          .type(id)
-    
-        d3.select("#popover")
-          .call(selector);
-      
-        // Show popover
-        dataviva.popover.show("#popover");
-        
-      }
-        
-    }
-    
-    /*****************/
-    /* Page Resizing */
-    /*****************/
-    
-    window.onresize = function() {
-      if(this.resizeTO) clearTimeout(this.resizeTO);
-      this.resizeTO = setTimeout(function() {
-        app.resize()
-      },500)
     }
     
     /************************/

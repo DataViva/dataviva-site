@@ -14,34 +14,12 @@ import urllib2, urllib
 
 mod = Blueprint('ask', __name__, url_prefix='/ask')
 
-@mod.before_request
-def before_request():
-    g.page_type = mod.name
-    
-    g.color = "#742777"
-    
-    g.sabrina = {}
-    g.sabrina["outfit"] = "lab"
-    g.sabrina["face"] = "smirk"
-    g.sabrina["hat"] = "glasses"
-
 RESULTS_PER_PAGE = 10
-
-@mod.route('/', methods=['GET', 'POST'], defaults={'page': 1})
-@mod.route('/questions/', methods=['GET', 'POST'], defaults={'page': 1})
-@mod.route('/questions/<int:page>/', methods=['GET', 'POST'])
-@crossdomain()
-def index(page):
     
-    # load forms for submitting new question or for searching
-    search_form = SearchForm()
-    ret = make_response(render_template("ask/questions.html", search_form = search_form))
-        
-    return ret
-
-@mod.route('/questionslist/', methods=['GET', 'POST'], defaults={'page': 1})
+@mod.route('/questions/', methods=['GET', 'POST'], defaults={'page': 1})
 @crossdomain()
 def question_list(page):
+    
     # get URL parameters for results per page and ordering options
     order = request.args.get('order', 'votes') # options = 'votes' or 'newest'
     offset = request.args.get('offset', 0)
@@ -91,8 +69,7 @@ def question_list(page):
                 .filter(Question.id.in_(ids)) \
                 .order_by(votes_subq.c.vote_count.desc(),Question.language)
             # .limit(limit).offset(offset)
-        # raise Exception(votes_questions.all())
-
+            
         questions = [q[0].serialize() for q in questions]
 
     ret = jsonify({"activities":questions})
@@ -102,62 +79,6 @@ def question_list(page):
     ret.headers.add('Cache-Control', 'must-revalidate, private')
     
     return ret
-
-@mod.route('/question/<slug>/', methods=['GET', 'POST'])
-def answer(slug):
-    
-    reply_form = ReplyForm()
-    question = Question.query.filter_by(slug=slug).first_or_404()
-    
-    if request.method == 'POST':
-        
-        # if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-        #     g.user = User.query.get(request.form["user"])
-        if g.user is None or not g.user.is_authenticated():
-            flash(gettext('You need to be signed in to reply to questions.'))
-            return redirect(url_for('.answer', slug=question.slug))
-            
-        # if "user" not in request.form:
-        #     form_json = {"user": g.user.id, "reply": reply_form.reply.data, "parent": reply_form.parent.data}
-        #     try:
-        #         opener = urllib2.urlopen("{0}{1}".format(SITE_MIRROR,request.path[1:]),urllib.urlencode(form_json),5)
-        #     except:
-        #         flash(gettext("The server is not responding. Please try again later."))
-        #         return redirect(url_for('.answer', slug=question.slug))
-            
-        timestamp = datetime.utcnow()
-        reply = Reply(body=reply_form.reply.data, timestamp=timestamp, 
-                        user=g.user, question=question, parent_id=reply_form.parent.data)
-        db.session.add(reply)
-        db.session.commit()
-        if not reply_form.parent.data:
-            reply.parent_id = reply.id
-            db.session.add(reply)
-            db.session.commit()
-        flash(gettext('Reply submitted.'))
-        return redirect(url_for('ask.answer', slug=question.slug))
-    else:
-        question.vote = False
-        if g.user.is_authenticated():
-            vote = Vote.query.filter_by(type = 0, type_id = question.id, user_id = g.user.id).first()
-            if vote:
-                question.vote = True
-        tags = [t.to_attr() for t in question.tags]
-        for r in question.replies:
-            r.vote = False
-            if g.user.is_authenticated():
-                vote = Vote.query.filter_by(type = 1, type_id = r.id, user_id = g.user.id).first()
-                if vote:
-                    r.vote = True
-            r.flag = False
-            if g.user.is_authenticated():
-                flag = Flag.query.filter_by(reply_id = r.id, user_id = g.user.id).first()
-                if flag:
-                    r.flag = True
-        return render_template("ask/answer.html",
-            reply_form = reply_form,
-            question = question,
-            tags = tags)
 
 @mod.route('/question/<slug>/vote/')
 @mod.route('/question/<slug>/vote/<user>/')
@@ -245,40 +166,3 @@ def reply_flag(id, user=None):
         db.session.add(new_flag)
         db.session.commit()
         return jsonify({"success": 1})
-
-@mod.route('/ask/', methods=['GET', 'POST'])
-@mod.route('/ask/<user>/', methods=['GET', 'POST'])
-def ask(user=None):
-    form = AskForm()
-    if request.method == 'POST':
-        
-        # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-        #     g.user = User.query.get(user)
-        if g.user is None or not g.user.is_authenticated():
-            flash(gettext('You need to be logged in to ask questions.'))
-            return redirect(url_for('account.login'))
-        # elif user is None and g.user is None:
-        #     abort(404)
-            
-        # if user is None:
-        #     form_json = {"question": form.question.data, "body": form.body.data, "app": form.app.data, "tags": form.tags.data}
-        #     try:
-        #         opener = urllib2.urlopen("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
-        #     except:
-        #         flash(gettext("The server is not responding. Please try again later."))
-        #         return render_template("ask/ask.html", form = form)
-        
-        timestamp = datetime.utcnow()
-        slug = Question.make_unique_slug(form.question.data)
-        question = Question(question=form.question.data, body=form.body.data, timestamp=timestamp, user=g.user, slug=slug, language=g.locale)
-        if "," in form.tags.data:
-            tags = form.tags.data.split(",")
-            question.str_tags(tags)
-        db.session.add(question)
-        db.session.commit()
-        flash(gettext('Your question has been submitted and is pending approval.'))
-        # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-        #     return jsonify({"status": "Success"})
-        # else:
-        return redirect(url_for('ask.index'))
-    return render_template("ask/ask.html", form = form)

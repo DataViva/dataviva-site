@@ -1,30 +1,42 @@
-table {
-  border-collapse: collapse;
-  width: 100%;
-  background-color: transparent;
-  padding: 10px;
-  text-align: left;
+body {
+  background-color: white;
 }
 
-table thead {
-  display: block;
-  height: 36px;
+table { 
+  border-collapse: collapse; 
+  border-spacing: 0; 
+  overflow: hidden;
+  table-layout: fixed;
+  text-align: left;
+  width: 100%;
 }
 
 table th {
-  color: #aaa;
   display: inline-block;
   font-size: 14px;
   font-weight: lighter;
   padding: 9px;
   text-align: left;
-  -webkit-transition: width .2s;
-          transition: width .2s;
+  white-space: normal;
 }
 
-body.classifications table th,
-body.query table th {
+table th {
+  color: #888;
+}
+
+body.table table th.asc,
+body.table table th.desc {
   color: #1abbee;
+}
+
+body.attrs table th.asc,
+body.attrs table th.desc {
+  color: #d67ab0;
+}
+
+body.rankings table th.asc,
+body.rankings table th.desc {
+  color: #742777;
 }
 
 table thead tr {
@@ -32,20 +44,21 @@ table thead tr {
 }
 
 table tbody tr {
-  border-bottom: solid 1px #ccc;
   color: #888;
   font-size: 14px;
   line-height: 16px;
 }
 
-table tbody td.link {
-  font-weight: bold;
+#sticky table tbody tr:nth-child(odd) {
+  background-color: #f0f0f0;
 }
 
-table tbody tr.link:hover,
-table tbody td.link:hover {
-  background-color: #f0f0f0;
-  cursor: pointer;
+#data table tbody tr:nth-child(odd) {
+  background-color: rgba(235,235,235,0.75);
+}
+
+table tbody td.link {
+  font-weight: bold;
 }
 
 table tbody tr:last-child {
@@ -56,31 +69,118 @@ table td {
   padding: 9px;
 }
 
-table td > a {
-  color: #666666;
-}
-
-table td.icon {
-  padding: 3px;
-  width: 29px;
-}
-
-table th.icon {
-  padding: 9px 3px;
-  width: 29px;
-}
-
-table td.id, table td.bra_id, table td.isic_id, table td.cbo_id, 
-table td.hs_id, table td.wld_id, table td.year, table td.color, table td.icon,
-table th.id, table th.bra_id, table th.isic_id, table th.cbo_id, 
-table th.hs_id, table th.wld_id, table th.year, table th.color, table th.icon {
+table .id, table .bra_id, table .id_ibge, table .isic_id, table .cbo_id, 
+table .hs_id, table .wld_id, table .year, table .color, table .rank {
   text-align: center;
 }
 
-table td.icon > div{
+table td.icon > div {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   width: 29px;
   height: 29px;
+}
+
+#dt_query {
+  position: relative;
+  z-index: 0;
+}
+
+#dt_query table.body {
+  margin-top: 30px;
+}
+
+thead {
+  border-color: rgba(255,255,255,0.75);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  position: fixed;
+  top: 0;
+  -webkit-transition: border-color .4s;
+          transition: border-color .4s;
+}
+
+thead.shadow {
+  border-color: rgba(235,235,235,0.5);
+}
+
+#sticky {
+  background-color: white;
+  border-color: #f0f0f0;
+  border-right-width: 0px;
+  border-right-style: solid;
+  position: absolute;
+  left: 0;
+  width: 5px;
+  top: 0;
+  z-index: 1;
+  -webkit-transition: -webkit-box-shadow 0.4s;
+                  transition: box-shadow 0.4s;
+}
+
+#sticky.shadow {
+  border-right-width: 1px;
+  -webkit-box-shadow: 3px 0px 3px rgba(0,0,0,0.1);
+          box-shadow: 3px 0px 3px rgba(0,0,0,0.1);
+}
+
+#data {
+  margin-left: 235px;
+  overflow-x: scroll;
+  width: 725px;
+  z-index: 0;
+}
+
+table th {
+  background-color: rgba(255,255,255,0.75);
+  font-weight: bold;
+  position: relative;
+}
+
+table th:hover {
+  background-color: rgba(235,235,235,0.75);
+  cursor: pointer;
+}
+
+table th::after {
+  content: "";
+  font-family: FontAwesome;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+}
+
+table th.asc::after {
+  content: " \f077";
+}
+
+table th.desc::after {
+  content: " \f078";
+}
+
+table td, table th {
+  width: 120px;
+}
+
+table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+table .rank { 
+  width: 50px !important; 
+}
+table .year { 
+  width: 40px !important; 
+}
+table .bra_id, table .id, table .id_ibge, 
+table .isic_id, table .cbo_id, 
+table .hs_id, table .wld_id, table.color { 
+  width: 70px !important; 
+}
+table .name { 
+  width: 300px !important; 
 }

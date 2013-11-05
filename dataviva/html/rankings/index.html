@@ -1,0 +1,103 @@
+<!-- extend from site layout -->
+{% extends "templates/site.html" %}
+
+{% block head %}
+
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.rankings.css" />
+
+{% endblock %}
+
+{% block body %}
+
+  <div id="rankings_nav" class="grid5col1">
+    
+      <a class="{% if type == 'bra' %}decision{% else %}help{% endif %} icon bra" href="/rankings/2012/bra/2/">
+        {% trans %}Brazilian Locations{% endtrans %}
+      </a>
+    
+      <a class="{% if type == 'isic' %}decision{% else %}help{% endif %} icon isic" href="/rankings/2012/isic/1/">
+        {% trans %}Industries{% endtrans %}
+      </a>
+    
+      <a class="{% if type == 'cbo' %}decision{% else %}help{% endif %} icon cbo" href="/rankings/2012/cbo/1/">
+        {% trans %}Occupations{% endtrans %}
+      </a>
+    
+      <a class="{% if type == 'hs' %}decision{% else %}help{% endif %} icon hs" href="/rankings/2012/hs/2/">
+        {% trans %}Products{% endtrans %}
+      </a>
+    
+      <a class="{% if type == 'wld' %}decision{% else %}help{% endif %} icon wld" href="/rankings/2012/wld/2/">
+        {% trans %}Export Destinations{% endtrans %}
+      </a>
+    
+  </div>
+
+  <div id="rankings_table" class="grid5col3 lightbox">
+    <div id="controls">
+      <div id="depths">
+        <legend id="depth">{% trans %}Depth{% endtrans %}</legend>
+        {% for d in depths %}
+          <input onclick="change_depth(this.value)" type="radio" id="{{type}}_{{d}}" name="depth" value="{{d}}"{% if depth == d %} checked{% endif %}>
+          <label for="{{type}}_{{d}}">{{format(type~"_"~d~"_plural").render(type~"_"~d~"_plural",g.locale)}}</label>
+        {% endfor %}
+      </div>
+      <div id="years">
+        <select id="year_select" onchange="change_year(this.value)">
+          {% for y in years %}
+            <option value="{{y}}"{% if y == year %} selected{% endif %}>{{y}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div id="iframe">
+      <iframe src="/rankings/table/{{year}}/{{type}}/{{depth}}/"></iframe>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block js %}
+
+  <script>
+    
+    leon("$depth").color(dataviva.color)
+    leon("#year_select").color(dataviva.color)
+    var depth = "{{depth}}", year = "{{year}}", type = "{{type}}"
+    
+    function update_table() {
+      var url = year+"/"+type+"/"+depth+"/"
+      d3.select("iframe").attr("src","/rankings/table/"+url)
+      dataviva.url("/rankings/"+url)
+    }
+    
+    function change_depth(d) {
+      depth = d
+      update_table()
+    }
+    
+    function change_year(y) {
+      year = y
+      update_table()
+    }
+    
+    function iframe_size(w,h) {
+      d3.select("#rankings_table")
+        .style("height",function(){
+          var allowed =  window.innerHeight - 149
+          return h < allowed ? h+"px" : allowed+"px"
+        })
+      d3.select("#rankings_table iframe")
+        .style("height",function(){
+          var allowed =  window.innerHeight - 149 - 49
+          return h < allowed ? h+"px" : allowed+"px"
+        })
+      
+    }
+    
+    update_table()
+    iframe_size(0,100)
+    
+  </script>
+
+{% endblock %}

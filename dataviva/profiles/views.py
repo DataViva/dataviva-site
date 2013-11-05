@@ -11,9 +11,7 @@ from dataviva.secex import models as secex
 
 from dataviva.general.models import Plan
 from dataviva.attrs.models import Bra, Isic, Cbo, Hs, Wld
-from dataviva.rais.views import get_query as rais_get_query
 from dataviva.rais.models import Ybi, Ybo, Yio
-from dataviva.secex.views import make_query as secex_get_query
 from dataviva.secex.models import Ybp, Ybw, Ypw
 
 from dataviva.apps.models import Build, App

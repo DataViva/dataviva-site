@@ -247,14 +247,14 @@ function Selector() {
             bread.append("a")
               .attr("class","site_crumb")
               .html("&laquo; Back")
-              .on(vizwhiz.evt.click,function(){
+              .on(d3plus.evt.click,function(){
                 search.node().value = ""
                 select_value(data[selected.parents[0]],depth_path[depth_path.length-1]);
               })
-              .on(vizwhiz.evt.over,function(){
-                this.style.color = vizwhiz.utils.darker_color(x.color)
+              .on(d3plus.evt.over,function(){
+                this.style.color = d3plus.utils.darker_color(x.color)
               })
-              .on(vizwhiz.evt.out,function(){
+              .on(d3plus.evt.out,function(){
                 this.style.color = "#888"
               })
           }
@@ -493,7 +493,7 @@ function Selector() {
         
         if (header_color == "#ffffff") header_color = "#333333"
         
-        var close = d3.select(container.node().parentNode).select(".vizwhiz_tooltip_close")
+        var close = d3.select(container.node().parentNode).select(".d3plus_tooltip_close")
         if (close.node()) {
           close.style("background-color",header_color)
         }
@@ -528,7 +528,7 @@ function Selector() {
             var item = body.append("div")
               .attr("id","result_"+v.id)
               .attr("class","search_result")
-              // .on(vizwhiz.evt.click,function(){
+              // .on(d3plus.evt.click,function(){
               //   if (v.id.length < depths[depths.length-1]) {
               //     if (type == "bra" && v.id.substr(0,2) == "mg") {
               //       if (v.id.length == 2) {
@@ -568,7 +568,7 @@ function Selector() {
           
             text.append("div")
               .attr("class","search_title")
-              .style("color",vizwhiz.utils.darker_color(v.color))
+              .style("color",d3plus.utils.darker_color(v.color))
               .html(title)
               
             if (type != "file" && searching) {
@@ -689,7 +689,7 @@ function Selector() {
           
             if (results[i+1] || i == results.length-1) {
               body.append("div")
-                .attr("class","vizwhiz_tooltip_data_seperator")
+                .attr("class","d3plus_tooltip_data_seperator")
             }
             
             if (type == "bra" && v.id.length == depths[depths.length-1]) {

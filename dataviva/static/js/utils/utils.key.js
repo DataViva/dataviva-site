@@ -50,7 +50,7 @@ function Key() {
         var cat = d3.select(key).append("div")
           .attr("id","key"+d.id)
           .attr("class","key_icon_container")
-          .on(vizwhiz.evt.over, function(e){
+          .on(d3plus.evt.over, function(e){
             
             var x_pos = this.offsetLeft+(this.offsetWidth/2)
             var y_pos = key.parentNode.offsetTop+key.offsetTop+this.offsetTop+(this.offsetHeight/2)
@@ -60,9 +60,9 @@ function Key() {
               else key_filters.splice(key_filters.indexOf(d.id),1)
               if (key_solos.indexOf(d.id) >= 0) {
                 key_solos.splice(key_solos.indexOf(d.id),1)
-                app.update("solo",key_solos)
+                app.update(key_solos,"solo")
               }
-              app.update("filter",key_filters)
+              app.update(key_filters,"filter")
               reset_check()
             }
             
@@ -71,9 +71,9 @@ function Key() {
               else key_solos.splice(key_solos.indexOf(d.id),1)
               if (key_filters.indexOf(d.id) >= 0) {
                 key_filters.splice(key_filters.indexOf(d.id),1)
-                app.update("filter",key_filters)
+                app.update(key_filters,"filter")
               }
-              app.update("solo",key_solos)
+              app.update(key_solos,"solo")
               reset_check()
             }
             
@@ -99,8 +99,8 @@ function Key() {
             if (attr_type == "bra") var s = "default"
             else var s = "knockout"
             
-            vizwhiz.tooltip.remove("key")
-            vizwhiz.tooltip.create({
+            d3plus.tooltip.remove("key")
+            d3plus.tooltip.create({
               "title": d.name,
               "color": d.color,
               "icon": d.icon,
@@ -114,8 +114,8 @@ function Key() {
               "mouseevents": this
             })
           })
-          .on(vizwhiz.evt.out, function(e){
-            vizwhiz.tooltip.remove("key")
+          .on(d3plus.evt.out, function(e){
+            d3plus.tooltip.remove("key")
           })
           .append("div")
             .attr("id","key_icon"+d.id)
@@ -129,13 +129,13 @@ function Key() {
        
       var reset_button = d3.select(key).append("div")
         .attr("class","leon button medium square")
-        .on(vizwhiz.evt.over,function(){
+        .on(d3plus.evt.over,function(){
           
           var x_pos = this.offsetLeft+(this.offsetWidth/2)
           var y_pos = key.parentNode.offsetTop+key.offsetTop+this.offsetTop
           
-          vizwhiz.tooltip.remove("key")
-          vizwhiz.tooltip.create({
+          d3plus.tooltip.remove("key")
+          d3plus.tooltip.create({
             "id": "key",
             "x": x_pos,
             "y": y_pos,
@@ -144,15 +144,15 @@ function Key() {
             "description": dataviva.format.text("reset")
           })
         })
-        .on(vizwhiz.evt.out,function(){
-          vizwhiz.tooltip.remove("key")
+        .on(d3plus.evt.out,function(){
+          d3plus.tooltip.remove("key")
         })
-        .on(vizwhiz.evt.click,function(){
+        .on(d3plus.evt.click,function(){
           key_filters = []
           key_solos = []
-          app.update("filter",key_filters)
-          app.update("solo",key_solos)
-          vizwhiz.tooltip.remove("key")
+          app.update(key_filters,"filter")
+          app.update(key_solos,"solo")
+          d3plus.tooltip.remove("key")
           reset_check()
         })
       

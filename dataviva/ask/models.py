@@ -91,6 +91,7 @@ class Question(db.Model, AutoSerialize):
             auto_serialized["timestamp"] = None
         auto_serialized["user"] = self.user.serialize()
         auto_serialized["votes"] = len(self.votes.all())
+        auto_serialized["replies"] = len(self.replies.all())
         return auto_serialized
 
 class Tag(db.Model):
@@ -144,6 +145,20 @@ class Reply(db.Model, AutoSerialize):
     
     def __repr__(self):
         return '<Reply %r>' % (self.id)
+        
+    def flagged(self):
+        if g.user.is_authenticated():
+            flag = Flag.query.filter_by(reply_id = self.id, user_id = g.user.id).first()
+            if flag:
+                return True
+        return False
+        
+    def voted(self):
+        if g.user.is_authenticated():
+            vote = Vote.query.filter_by(type = 1, type_id = self.id, user_id = g.user.id).first()
+            if vote:
+                return True
+        return False
     
     def serialize(self):
         auto_serialized = super(Reply, self).serialize()

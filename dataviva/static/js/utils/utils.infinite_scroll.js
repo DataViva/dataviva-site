@@ -3,6 +3,7 @@ function infinite_scroll(selection){
       refresh = false,
       remove = false,
       offset = 0,
+      order = null,
       format_items = function(d){ return d };
   
   // Initialize variables
@@ -21,9 +22,11 @@ function infinite_scroll(selection){
       inf_loading_div.data([container_el])
         .enter().append("div")
         .attr("class", "infinite_loading")
+        .each(function(){
+          infinite_loading = dataviva.ui.loading(".infinite_loading")
+        })
       
-      var loading = dataviva.ui.loading(".infinite_loading")
-      loading.text("Loading more items").show()
+      infinite_loading.text(dataviva.format.text("loading_items")).show()
       
       // The item we're going to listen on for scrolling
       d3.select(window)
@@ -40,8 +43,8 @@ function infinite_scroll(selection){
         if(isNaN(offset)){
           offset = 0;
         }
-        // console.log(fetching, offset, loading_div_y, innerHeight, refresh)
-        if ((!fetching && offset >= 0 && loading_div_y < innerHeight) || refresh) {
+        // console.log(fetching, offset, loading_div_y-50, innerHeight, refresh)
+        if ((!fetching && offset >= 0 && loading_div_y-50 < innerHeight) || refresh) {
           fetch();
         }
 
@@ -62,6 +65,9 @@ function infinite_scroll(selection){
         }
         else {
           a.href = a.href + "?offset="+offset
+        }
+        if (order) {
+          a.href += "&order="+order
         }
   
         // Here we set the header X-Requested-With to XMLHttpRequest so the 
@@ -145,6 +151,12 @@ function infinite_scroll(selection){
   scroll.offset = function(value) {
     if(!arguments.length) return offset;
     offset = value;
+    return scroll;
+  }
+  
+  scroll.order = function(value) {
+    if(!arguments.length) return order;
+    order = value;
     return scroll;
   }
   

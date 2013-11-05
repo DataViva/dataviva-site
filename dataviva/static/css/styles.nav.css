@@ -63,8 +63,8 @@
   background-image: url("/static/img/nav/icons/data.png");
 }
 
-#header a#ask {
-  background-image: url("/static/img/nav/icons/ask.png");
+#header a#rankings {
+  background-image: url("/static/img/nav/icons/rankings.png");
 }
 
 #header a#about {
@@ -101,9 +101,9 @@
   color: #1abbee !important; /* blue */
 }
 
-#header a#ask.link.active,
-#header a#ask:hover {
-  background-image: url("/static/img/nav/icons/ask_active.png");
+#header a#rankings.link.active,
+#header a#rankings:hover {
+  background-image: url("/static/img/nav/icons/rankings_active.png");
   color: #742777 !important; /* purple */
 }
 

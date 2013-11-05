@@ -84,7 +84,7 @@
       var rows_enter = rows.enter().append("tr").attr("class","link")
         .each(function(d){
           var row = d3.select(this)
-            .on(vizwhiz.evt.click,function(){
+            .on(d3plus.evt.click,function(){
               window.location = "/profiles/"+d.attr_type+"/"+d.id
             })
           keys.forEach(function(key){

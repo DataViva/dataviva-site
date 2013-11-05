@@ -60,7 +60,7 @@ hr {
 #container {
   display: block;
   margin: 0px auto;
-  padding: 76px 20px 96px 20px;
+  padding: 76px 20px 66px 20px;
   text-align: center;
   width: 980px;
 }
@@ -165,12 +165,11 @@ div.loading > i {
   display: inline-block;
   left: 50%;
   margin-left: -27.5px;
-  margin-top: -35px;
+  margin-top: -32px;
   opacity: 0.1;
   position: absolute;
   top: 50%;
   -webkit-animation: spin 2s infinite linear, pulsate 6s infinite linear;
-     -moz-animation: spin 2s infinite linear, pulsate 6s infinite linear;
           animation: spin 2s infinite linear, pulsate 6s infinite linear;
 }
 

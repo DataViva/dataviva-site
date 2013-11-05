@@ -53,16 +53,17 @@ div#guide_stats {
   margin-bottom: 5px;
 }
 
-div.vizwhiz_tooltip_data_title {
+div.d3plus_tooltip_data_title {
   margin-top: 5px;
 }
 
-div.vizwhiz_tooltip_data_name {
+div.d3plus_tooltip_data_name {
   width: 130px;
 }
 
-div#guide_controls div.vizwhiz_tooltip_data_value {
-  float: none;
+div#guide_controls div.d3plus_tooltip_data_value {
+  display: inline-block;
+  position: static;
   width: 150px;
 }
 
@@ -79,32 +80,3 @@ iframe {
   height: 100%;
   width: 100%;
 }
-
-/*iframe, .guide_table {
-  display: block;
-  float: left;
-  height: 100%;
-  width: 50%;
-}*/
-
-/*.guide_table {
-  overflow: hidden;
-  overflow-y: scroll;
-  position: relative;
-}
-
-table.header {
-  background-color: rgba(255,255,255,0.75);
-  left: 0px;
-  position: absolute;
-  top: 0px;
-  z-index: 2;
-}
-
-table.body {
-  margin-top: 30px;
-}
-
-th {
-  font-weight: bold;
-}*/
