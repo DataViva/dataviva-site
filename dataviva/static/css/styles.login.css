@@ -15,10 +15,6 @@ div#login_text {
   margin: 12px 0px;
   text-align: left;
 }
-div#login_text a {
-  text-decoration: underline;
-}
-
 a.login_button {
   background-position: center center;
   background-repeat: no-repeat;
