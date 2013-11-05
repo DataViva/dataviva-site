@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-04 16:48-0500\n"
+"POT-Creation-Date: 2013-11-05 14:19-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,19 +16,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: dataviva/about/views.py:49
+#: dataviva/about/views.py:63
 msgid "You need to be logged in to ask questions."
 msgstr ""
 
-#: dataviva/about/views.py:70
+#: dataviva/about/views.py:84
 msgid "Your question has been submitted and is pending approval."
 msgstr ""
 
-#: dataviva/about/views.py:89
+#: dataviva/about/views.py:103
 msgid "You need to be signed in to reply to questions."
 msgstr ""
 
-#: dataviva/about/views.py:109
+#: dataviva/about/views.py:123
 msgid "Reply submitted."
 msgstr ""
 
@@ -113,26 +113,40 @@ msgid "Learn More"
 msgstr ""
 
 #: dataviva/html/home.html:29 dataviva/html/rankings/index.html:15
+#: dataviva/html/templates/about.html:46
 msgid "Brazilian Locations"
 msgstr ""
 
 #: dataviva/html/home.html:33 dataviva/html/general/select.html:29
-#: dataviva/html/rankings/index.html:23
+#: dataviva/html/rankings/index.html:23 dataviva/html/templates/about.html:54
 msgid "Occupations"
 msgstr ""
 
 #: dataviva/html/home.html:37 dataviva/html/general/select.html:24
-#: dataviva/html/rankings/index.html:19
+#: dataviva/html/rankings/index.html:19 dataviva/html/templates/about.html:50
 msgid "Industries"
 msgstr ""
 
 #: dataviva/html/home.html:45 dataviva/html/general/select.html:39
-#: dataviva/html/rankings/index.html:31
+#: dataviva/html/rankings/index.html:31 dataviva/html/templates/about.html:62
 msgid "Export Destinations"
 msgstr ""
 
+#: dataviva/html/about/attrs.html:4 dataviva/html/templates/about.html:40
+msgid "Classifications"
+msgstr ""
+
+#: dataviva/html/about/attrs.html:10 dataviva/html/about/apps/compare.html:11
+#: dataviva/html/about/apps/scatter.html:15
+#: dataviva/html/about/apps/stacked.html:14
+#: dataviva/html/about/apps/tree_map.html:14
+#: dataviva/html/data/classifications.html:21
+#: dataviva/html/rankings/index.html:39
+msgid "Depth"
+msgstr ""
+
 #: dataviva/html/about/apps/compare.html:1 dataviva/html/apps/index.html:44
-#: dataviva/html/templates/about.html:70
+#: dataviva/html/templates/about.html:98
 msgid "Compare"
 msgstr ""
 
@@ -175,15 +189,6 @@ msgstr ""
 #: dataviva/html/about/apps/stacked.html:7
 #: dataviva/html/about/apps/tree_map.html:7
 msgid "product data"
-msgstr ""
-
-#: dataviva/html/about/apps/compare.html:11
-#: dataviva/html/about/apps/scatter.html:15
-#: dataviva/html/about/apps/stacked.html:14
-#: dataviva/html/about/apps/tree_map.html:14
-#: dataviva/html/data/classifications.html:21
-#: dataviva/html/rankings/index.html:39
-msgid "Depth"
 msgstr ""
 
 #: dataviva/html/about/apps/compare.html:12
@@ -237,7 +242,7 @@ msgstr ""
 #: dataviva/html/about/apps/scatter.html:21
 #: dataviva/html/about/apps/tree_map.html:20
 #: dataviva/html/about/glossary/complexity.html:1
-#: dataviva/html/templates/about.html:86
+#: dataviva/html/templates/about.html:114
 msgid "Complexity"
 msgstr ""
 
@@ -248,7 +253,7 @@ msgstr ""
 #: dataviva/html/about/apps/scatter.html:21
 #: dataviva/html/about/apps/tree_map.html:20
 #: dataviva/html/about/glossary/opp_gain.html:1
-#: dataviva/html/templates/about.html:98
+#: dataviva/html/templates/about.html:126
 msgid "Opportunity Gain"
 msgstr ""
 
@@ -285,7 +290,7 @@ msgid "The circles are positioned in the chart based on data for a specific year
 msgstr ""
 
 #: dataviva/html/about/apps/geo_map.html:1 dataviva/html/apps/index.html:22
-#: dataviva/html/templates/about.html:54
+#: dataviva/html/templates/about.html:82
 msgid "Geo Map"
 msgstr ""
 
@@ -318,7 +323,7 @@ msgstr ""
 msgid "The municipalities display data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each municipality will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data change over time."
 msgstr ""
 
-#: dataviva/html/about/apps/index.html:4 dataviva/html/templates/about.html:40
+#: dataviva/html/about/apps/index.html:4 dataviva/html/templates/about.html:68
 msgid "About the Apps"
 msgstr ""
 
@@ -333,7 +338,7 @@ msgstr ""
 #: dataviva/html/about/glossary/proximity.html:12
 #: dataviva/html/about/glossary/proximity.html:42
 #: dataviva/html/about/glossary/rca.html:8 dataviva/html/apps/index.html:27
-#: dataviva/html/templates/about.html:58
+#: dataviva/html/templates/about.html:86
 msgid "Network"
 msgstr ""
 
@@ -345,7 +350,7 @@ msgstr ""
 #: dataviva/html/about/apps/network.html:4
 #: dataviva/html/about/apps/rings.html:4
 #: dataviva/html/about/glossary/proximity.html:1
-#: dataviva/html/templates/about.html:102
+#: dataviva/html/templates/about.html:130
 msgid "Proximity"
 msgstr ""
 
@@ -382,7 +387,7 @@ msgstr ""
 #: dataviva/html/about/apps/occugrid.html:1
 #: dataviva/html/about/glossary/importance.html:14
 #: dataviva/html/about/glossary/required.html:8
-#: dataviva/html/apps/index.html:49 dataviva/html/templates/about.html:74
+#: dataviva/html/apps/index.html:49 dataviva/html/templates/about.html:102
 msgid "Occugrid"
 msgstr ""
 
@@ -408,7 +413,7 @@ msgstr ""
 #: dataviva/html/about/apps/occugrid.html:19
 #: dataviva/html/about/glossary/proximity.html:21
 #: dataviva/html/about/glossary/required.html:1
-#: dataviva/html/templates/about.html:110
+#: dataviva/html/templates/about.html:138
 msgid "Recommended Employees"
 msgstr ""
 
@@ -419,7 +424,7 @@ msgstr ""
 
 #: dataviva/html/about/apps/occugrid.html:19
 #: dataviva/html/about/glossary/importance.html:1
-#: dataviva/html/templates/about.html:94
+#: dataviva/html/templates/about.html:122
 msgid "Importance"
 msgstr ""
 
@@ -452,7 +457,7 @@ msgstr ""
 #: dataviva/html/about/glossary/distance.html:13
 #: dataviva/html/about/glossary/proximity.html:43
 #: dataviva/html/about/glossary/rca.html:9 dataviva/html/apps/index.html:34
-#: dataviva/html/templates/about.html:62
+#: dataviva/html/templates/about.html:90
 msgid "Rings"
 msgstr ""
 
@@ -469,7 +474,7 @@ msgstr ""
 #: dataviva/html/about/glossary/rca.html:7
 #: dataviva/html/about/glossary/unique.html:4
 #: dataviva/html/about/glossary/unique.html:9 dataviva/html/apps/index.html:39
-#: dataviva/html/templates/about.html:66
+#: dataviva/html/templates/about.html:94
 msgid "Scatter"
 msgstr ""
 
@@ -480,7 +485,7 @@ msgstr ""
 
 #: dataviva/html/about/apps/scatter.html:4
 #: dataviva/html/about/glossary/distance.html:1
-#: dataviva/html/templates/about.html:90
+#: dataviva/html/templates/about.html:118
 msgid "Distance"
 msgstr ""
 
@@ -499,7 +504,7 @@ msgid "When this toggle is turned on, only the items with %(rca)s < 1 will be sh
 msgstr ""
 
 #: dataviva/html/about/apps/stacked.html:1 dataviva/html/apps/index.html:17
-#: dataviva/html/templates/about.html:50
+#: dataviva/html/templates/about.html:78
 msgid "Stacked"
 msgstr ""
 
@@ -537,7 +542,7 @@ msgid "The behaviour of the Y axis variable can be switched between “Value” 
 msgstr ""
 
 #: dataviva/html/about/apps/tree_map.html:1 dataviva/html/apps/index.html:12
-#: dataviva/html/templates/about.html:46
+#: dataviva/html/templates/about.html:74
 msgid "Tree Map"
 msgstr ""
 
@@ -832,7 +837,7 @@ msgid "The higher importance value an occupation has, the more common it is to t
 msgstr ""
 
 #: dataviva/html/about/glossary/index.html:4
-#: dataviva/html/templates/about.html:80
+#: dataviva/html/templates/about.html:108
 msgid "Glossary"
 msgstr ""
 
@@ -1331,11 +1336,11 @@ msgstr ""
 msgid "Export Destination"
 msgstr ""
 
-#: dataviva/html/rankings/index.html:27
+#: dataviva/html/rankings/index.html:27 dataviva/html/templates/about.html:58
 msgid "Products"
 msgstr ""
 
-#: dataviva/html/templates/about.html:114
+#: dataviva/html/templates/about.html:142
 msgid "Unique Values"
 msgstr ""
 
