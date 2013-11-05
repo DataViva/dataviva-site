@@ -30,6 +30,20 @@ def glossary(term):
 @mod.route('/apps/<app>/')
 def apps(app):
     return render_template("about/apps/index.html", app=app, page = "apps")
+  
+@mod.route('/classification/<attr>/<depth>/')
+def attrs(attr="bra",depth="2"):
+    
+    data_url = "/attrs/table/{0}/{1}/".format(attr,depth)
+
+    depths = {}
+    depths["bra"] = [2,4,7,8]
+    depths["isic"] = [1,3,5]
+    depths["cbo"] = [1,2,4]
+    depths["hs"] = [2,4,6]
+    depths["wld"] = [2,5]
+    
+    return render_template("about/attrs.html", data_url=data_url, depths = depths[attr], page = "attrs", attr = attr, depth = int(depth))
 
 @mod.route('/')
 @mod.route('/contact/')

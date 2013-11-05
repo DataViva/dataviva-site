@@ -1,5 +1,5 @@
-from sqlalchemy import func, distinct
-from flask import Blueprint, request, jsonify, abort, g
+from sqlalchemy import func, distinct, asc, desc
+from flask import Blueprint, request, jsonify, abort, g, render_template
 
 from dataviva import db, __latest_year__
 from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo, Yb
@@ -16,8 +16,13 @@ def page_not_found(error):
 @mod.after_request
 def after_request(response):
     lang = request.args.get('lang', None) or g.locale
+    offset = request.args.get('offset', None)
+    limit = request.args.get('limit', None)
+    if offset:
+        offset = float(offset)
+        limit = limit or 50
     # if response.status_code != 302:
-    if response.status_code != 302 and request.is_xhr:
+    if response.status_code != 302 and request.is_xhr and limit is None:
         cache_id = request.path + lang
         # test if this query was cached, if not add it
         cached_q = cached_query(cache_id)
@@ -52,9 +57,39 @@ def fix_name(attr, lang):
 # 
 ############################################################
 
-def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, 
-                        Attr_weight_mergeid, Attr_id_lens, lang):
-    # this is the dictionary that will be jsonified and sent to the user
+@mod.route('/<attr>/')
+@mod.route('/<attr>/<Attr_id>/')
+@crossdomain()
+def attrs(attr="bra",Attr_id=None):
+    
+    Attr = globals()[attr.title()]
+    Attr_weight_mergeid = "{0}_id".format(attr)
+    
+    if attr == "bra":
+        Attr_weight_tbl = Yb
+        Attr_weight_col = "population"
+    elif attr == "isic":
+        Attr_weight_tbl = Yi
+        Attr_weight_col = "num_emp"
+    elif attr == "cbo":
+        Attr_weight_tbl = Yo
+        Attr_weight_col = "num_emp"
+    elif attr == "hs":
+        Attr_weight_tbl = Yp
+        Attr_weight_col = "val_usd"
+    elif attr == "wld":
+        Attr_weight_tbl = Yw
+        Attr_weight_col = "val_usd"
+    
+    Attr_depth = request.args.get('depth', None)
+    order = request.args.get('order', None)
+    offset = request.args.get('offset', None)
+    limit = request.args.get('limit', None)
+    if offset:
+        offset = float(offset)
+        limit = limit or 50
+        
+    lang = request.args.get('lang', None) or g.locale
     ret = {}
     dataset = "rais"
     if Attr == Cbo or Attr == Hs:
@@ -62,9 +97,11 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col,
     latest_year = __latest_year__[dataset]
         
     cache_id = request.path + lang
+    if Attr_depth:
+        cache_id = cache_id + "/" + Attr_depth
     # first lets test if this query is cached
     cached_q = cached_query(cache_id)
-    if cached_q and request.is_xhr:
+    if cached_q and request.is_xhr and limit is None:
         return cached_q
     
     # if an ID is supplied only return that
@@ -97,102 +134,70 @@ def get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col,
     # an ID/filter was not provided
     else:
         
-        attrs_all = Attr.query.filter(func.char_length(Attr.id) <= Attr_id_lens[-1]).all()
+        query = db.session.query(Attr,Attr_weight_tbl) \
+            .filter(Attr_weight_tbl.year == latest_year) \
+            .filter(getattr(Attr_weight_tbl,"{0}_id".format(attr)) == Attr.id)
+        if Attr_depth:
+            query = query.filter(func.char_length(Attr.id) == Attr_depth)
+        elif Attr == Hs:
+            query = query.filter(func.char_length(Attr.id) <= 6)
+        elif Attr == Cbo:
+            query = query.filter(func.char_length(Attr.id) <= 4)
+            
+        if order:
+            direction = "asc"
+        
+            if "." in order:
+                o, direction = order.split(".")
+            else:
+                o = order
+                
+            if o == "name":
+                o = "name_{0}".format(lang)
+                
+            if o == Attr_weight_col:
+                order_table  = Attr_weight_tbl
+            else:
+                order_table = Attr
+                
+            if direction == "asc":
+                query = query.order_by(asc(getattr(order_table,o)))
+            elif direction == "desc":
+                query = query.order_by(desc(getattr(order_table,o)))
+                
+        if limit:
+            query = query.limit(limit).offset(offset)
+        
+        attrs_all = query.all()
         
         # just get items available in DB
-        attrs_val = Attr_weight_tbl.query.filter(Attr_weight_tbl.year == latest_year).all()
-        attrs_val = {getattr(a, Attr_weight_mergeid): getattr(a, Attr_weight_col) for a in attrs_val}
-        
         attrs_w_data = db.session.query(Attr, func.sum(getattr(Attr_weight_tbl, Attr_weight_col)))
         attrs_w_data = attrs_w_data \
                         .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id).group_by(Attr)
         attrs_w_data = {a[0].id: a[1] for a in attrs_w_data}
                         
         attrs = []
-        for a in attrs_all:
-            a = a.serialize()
+        for i, a in enumerate(attrs_all):
+            b = a[0].serialize()
+            b[Attr_weight_col] = a[1].serialize()[Attr_weight_col]
+            a = b
             a["available"] = False
-            a[Attr_weight_col] = 0
             if a["id"] in attrs_w_data:
                 a["available"] = True
-                if a["id"] in attrs_val:
-                    a[Attr_weight_col] = attrs_val[a["id"]]
             if Attr_weight_col == "population":
                 if len(a["id"]) == 8 and a["id"][:2] == "mg":
                     plr = Bra.query.get_or_404(a["id"]).pr2.first()
                     if plr: a["plr"] = plr.id
+            if order:
+                a["rank"] = int(i+offset+1)
             attrs.append(fix_name(a, lang))
         
         ret["data"] = attrs
         
     return jsonify(ret)
-
-@mod.route('/bra/')
-@mod.route('/bra/<bra_id>/')
-@crossdomain()
-def attrs_bra(bra_id=None):
-    Attr = Bra
-    Attr_id = bra_id
-    Attr_weight_tbl = Yb
-    Attr_weight_col = "population"
-    Attr_weight_mergeid = "bra_id"
-    Attr_id_lens = [2, 4, 6, 8]
-    lang = request.args.get('lang', None) or g.locale
     
-    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens, lang)
-    
-@mod.route('/wld/')
-@mod.route('/wld/<wld_id>/')
-@crossdomain()
-def attrs_wld(wld_id=None):
-    Attr = Wld
-    Attr_id = wld_id
-    Attr_weight_tbl = Yw
-    Attr_weight_col = "val_usd"
-    Attr_weight_mergeid = "wld_id"
-    Attr_id_lens = [2, 5]
-    lang = request.args.get('lang', None) or g.locale
-    
-    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens, lang)
-
-@mod.route('/hs/')
-@mod.route('/hs/<hs_id>/')
-@crossdomain()
-def attrs_hs(hs_id=None):
-    Attr = Hs
-    Attr_id = hs_id
-    Attr_weight_tbl = Yp
-    Attr_weight_col = "val_usd"
-    Attr_weight_mergeid = "hs_id"
-    Attr_id_lens = [2, 4, 6]
-    lang = request.args.get('lang', None) or g.locale
-    
-    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens, lang)
-
-@mod.route('/isic/')
-@mod.route('/isic/<isic_id>/')
-@crossdomain()
-def attrs_isic(isic_id=None):
-    Attr = Isic
-    Attr_id = isic_id
-    Attr_weight_tbl = Yi
-    Attr_weight_col = "num_emp"
-    Attr_weight_mergeid = "isic_id"
-    Attr_id_lens = [1, 3, 5]
-    lang = request.args.get('lang', None) or g.locale
-    
-    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens, lang)
-
-@mod.route('/cbo/')
-@mod.route('/cbo/<cbo_id>/')
-@crossdomain()
-def attrs_cbo(cbo_id=None):
-    Attr = Cbo
-    Attr_id = cbo_id
-    Attr_weight_tbl = Yo
-    Attr_weight_col = "num_emp"
-    Attr_weight_mergeid = "cbo_id"
-    Attr_id_lens = [1, 2, 3, 4]
-    lang = request.args.get('lang', None) or g.locale
-    
-    return get_attrs(Attr, Attr_id, Attr_weight_tbl, Attr_weight_col, Attr_weight_mergeid, Attr_id_lens, lang)
+@mod.route('/table/<attr>/<depth>/')
+def attrs_table(attr="bra",depth="2"):
+    g.page_type = "attrs"
+    data_url = "/attrs/{0}/?depth={1}".format(attr,depth)
+    return render_template("general/table.html", data_url=data_url)

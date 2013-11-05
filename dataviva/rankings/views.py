@@ -61,7 +61,7 @@ def index(year=2012,type="bra",depth=2):
 
 @mod.route('/table/<year>/<type>/<depth>/')
 def table(year=None,type="bra",depth=None):
-    g.page_type = "table"
+    g.page_type = "rankings"
     
     data_url = "/rankings/data/{0}/{1}/{2}/".format(year,type,depth)
     return render_template("general/table.html",data_url = data_url)

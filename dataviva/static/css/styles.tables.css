@@ -1,4 +1,4 @@
-body.table {
+body {
   background-color: white;
 }
 
@@ -20,12 +20,23 @@ table th {
   white-space: normal;
 }
 
-body.classifications table th {
+table th {
+  color: #888;
+}
+
+body.table table th.asc,
+body.table table th.desc {
   color: #1abbee;
 }
 
-body.table table th {
-  color: #1abbee;
+body.attrs table th.asc,
+body.attrs table th.desc {
+  color: #d67ab0;
+}
+
+body.rankings table th.asc,
+body.rankings table th.desc {
+  color: #742777;
 }
 
 table thead tr {
@@ -58,20 +69,8 @@ table td {
   padding: 9px;
 }
 
-table td.icon {
-  padding: 3px;
-  width: 29px;
-}
-
-table th.icon {
-  padding: 9px 3px;
-  width: 29px;
-}
-
-table td.id, table td.bra_id, table td.isic_id, table td.cbo_id, 
-table td.hs_id, table td.wld_id, table td.year, table td.color, table td.icon,
-table th.id, table th.bra_id, table th.isic_id, table th.cbo_id, 
-table th.hs_id, table th.wld_id, table th.year, table th.color, table th.icon {
+table .id, table .bra_id, table .id_ibge, table .isic_id, table .cbo_id, 
+table .hs_id, table .wld_id, table .year, table .color, table .rank {
   text-align: center;
 }
 
@@ -152,28 +151,6 @@ table th::after {
   font-weight: normal;
 }
 
-body.classifications table th.asc::before,
-body.classifications table th.desc::before {
-  background-color: #1abbee;
-}
-
-body.table table th.asc::before,
-body.table table th.desc::before {
-  background-color: #1abbee;
-}
-
-body.table table th.asc::before, body.table table th.desc::before,
-body.classifications table th.asc::before, 
-body.classifications table th.desc::before {
-  content: "";
-  display: block;
-  height: 3px;
-  left: 0px;
-  position: absolute;
-  top: 0px;
-  width: 100%;
-}
-
 table th.asc::after {
   content: " \f077";
 }
@@ -182,18 +159,28 @@ table th.desc::after {
   content: " \f078";
 }
 
-table td,
-table th, table th::before {
+table td, table th {
   width: 120px;
 }
 
+table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+table .rank { 
+  width: 50px !important; 
+}
 table .year { 
   width: 40px !important; 
 }
+table .bra_id, table .id, table .id_ibge, 
 table .isic_id, table .cbo_id, 
-table .hs_id, table .wld_id { 
-  width: 60px !important; 
-}
-table .bra_id { 
+table .hs_id, table .wld_id, table.color { 
   width: 70px !important; 
+}
+table .name { 
+  width: 300px !important; 
 }

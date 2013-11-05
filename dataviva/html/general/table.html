@@ -27,8 +27,12 @@
   var DATA = [];
   var CURRENT_DATASET = 'rais';
   var STICKY_COLUMNS = [ 
-                  "year", 
   
+                  "rank",
+                  "year", 
+                  
+                  "id",
+                  
                   "bra_id", 
                   "id_ibge", 
                   
@@ -39,6 +43,7 @@
                   "wld_id"
               ]
   var DATA_COLUMNS = [ 
+                  "name",
                   "population", 
                   
                   "wage", 
@@ -86,7 +91,9 @@
                   "num_emp_growth_pct",
                   "num_emp_growth_pct_5",
                   "num_emp_growth_val",
-                  "num_emp_growth_val_5"
+                  "num_emp_growth_val_5",
+                  
+                  "color"
                 
                 ]
                 
@@ -102,9 +109,9 @@
   function column_sort(d) {
     if (d == current_order[0]) var direction = current_order[1]
     else var direction = ""
-    if (direction == "asc") { direction = "desc"; }
-    else if (direction == "desc") { direction = ""; }
-    else { direction = "asc"; }
+    if (direction == "desc") { direction = "asc"; }
+    else if (direction == "asc") { direction = ""; }
+    else { direction = "desc"; }
     
     if (direction == "") current_order = []
     else current_order = [d,direction]
@@ -241,7 +248,10 @@
       })
     
     ths
-      .text(function(d) { return dataviva.format.text(d)}) 
+      .text(function(d) { 
+        if (d == "color") d = "color_var"
+        return dataviva.format.text(d)
+      }) 
       .on(d3plus.evt.click, column_sort)
     
     ths.exit().remove()
@@ -266,10 +276,12 @@
       data_printer(d,self,active_data_cols)
     })
     
+    d3.select("#dt_query #sticky").style("width","5px")
     d3.select("#dt_query #sticky").style("width", function(){
       return d3.select("#sticky table.data").node().offsetWidth + "px"
     })
     sticky_width = d3.select("#dt_query #sticky").node().offsetWidth;
+    d3.select("#dt_query #data table.header thead").style("left", sticky_width+"px")
     d3.select("#dt_query #data").on("scroll", function(){
       d3.select("#dt_query #data table.header thead").style("left", -(this.scrollLeft-sticky_width)+"px")
     })

@@ -36,6 +36,34 @@
     
     {% endif %}
     
+    <a class="{% if page == 'attrs' %}decision{% else %}help{% endif %}" href="{{ url_for('about.attrs', attr='bra', depth='2') }}">
+      {% trans %}Classifications{% endtrans %}
+    </a>
+    
+    {% if page == 'attrs' %}
+    
+      <a class="{% if attr == 'bra' %}decision{% else %}help{% endif %} short icon bra" href="{{ url_for('about.attrs', attr='bra', depth='2')}}">
+        {% trans %}Brazilian Locations{% endtrans %}
+      </a>
+    
+      <a class="{% if attr == 'isic' %}decision{% else %}help{% endif %} short icon isic" href="{{ url_for('about.attrs', attr='isic', depth='1')}}">
+        {% trans %}Industries{% endtrans %}
+      </a>
+    
+      <a class="{% if attr == 'cbo' %}decision{% else %}help{% endif %} short icon cbo" href="{{ url_for('about.attrs', attr='cbo', depth='1')}}">
+        {% trans %}Occupations{% endtrans %}
+      </a>
+    
+      <a class="{% if attr == 'hs' %}decision{% else %}help{% endif %} short icon hs" href="{{ url_for('about.attrs', attr='hs', depth='2')}}">
+        {% trans %}Products{% endtrans %}
+      </a>
+    
+      <a class="{% if attr == 'wld' %}decision{% else %}help{% endif %} short icon wld" href="{{ url_for('about.attrs', attr='wld', depth='2')}}">
+        {% trans %}Trade Partners{% endtrans %}
+      </a>
+    
+    {% endif %}
+    
     <a class="{% if page == 'apps' %}decision{% else %}help{% endif %}" href="{{ url_for('about.apps', app='tree_map') }}">
       {% trans %}About the Apps{% endtrans %}
     </a>

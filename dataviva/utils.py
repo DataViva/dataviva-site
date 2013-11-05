@@ -567,9 +567,9 @@ def make_query(data_table, url_args, **kwargs):
             else:
                 o = order
             if direction == "asc":
-                ret["data"].sort(key=lambda x: x[o])
+                ret["data"].sort(key=lambda x: x[o] if o in x else None)
             elif direction == "desc":
-                ret["data"].sort(key=lambda x: x[o], reverse=True)
+                ret["data"].sort(key=lambda x: x[o] if o in x else None, reverse=True)
         
         if limit:
             ret["data"] = ret["data"][int(offset):int(offset)+int(limit)]
@@ -583,6 +583,13 @@ def make_query(data_table, url_args, **kwargs):
                     new_obj[k] = d[k]
             new_return.append(new_obj)
         ret["data"] = new_return
+        
+    if order:
+        for i, d in enumerate(ret["data"]):
+            r = i+1
+            if offset:
+                r = r+offset
+            d["rank"] = int(r)
     
     if download is not None:
         header = [str(c).split(".")[1] for c in data_table.__table__.columns]

@@ -33,7 +33,7 @@ dataviva.format.text = function(text,name,l) {
     else return format_name("top") + " " + format_name(x)
   }
   
-  var exceptions = ["cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
+  var exceptions = ["id","cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
   
   if (exceptions.indexOf(name) >= 0) return text.toUpperCase()
   else if (text.indexOf("cp_bra_") == 0 && app) {
@@ -265,6 +265,7 @@ dataviva.format.text = function(text,name,l) {
       "population": {"en": "Population", "pt": "Popula\u00e7\u00e3o"},
       "top": {"en": "Top", "pt": "Superior"},
       "wld_id": {"en": "WLD ID", "pt": "ID WLD"},
+      "rank": {"en": "#", "pt": "#"},
 
       // Filter Titles
       "bra": {"en": "Location", "pt": "Localidade"},

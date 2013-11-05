@@ -16,13 +16,48 @@ body.about #inner_container {
 }
 
 #about_content > .lightbox {
+  min-height: 200px;
   padding: 20px 20px 10px 20px;
+  position: relative;
+  -webkit-transition: height 1s;
+          transition: height 1s;
   width: 526px;
 }
 
 img {
   display: block;
   margin: 0px auto;
+}
+
+/******************/
+/* Attrs Specific */
+/******************/
+
+div#controls {
+  left: 0px;
+  padding: 12px;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  width: 535px;
+  z-index: 2;
+}
+
+div#controls > div {
+  display: inline-block;
+}
+
+div#iframe {
+  position: relative;
+  margin: 28px 0px -10px -20px;
+  width: 566px;
+  z-index: 1;
+}
+
+iframe {
+  border-top: 1px solid #ccc;
+  min-height: 181px;
+  width: 566px;
 }
 
 /****************/
