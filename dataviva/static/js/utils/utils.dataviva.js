@@ -195,10 +195,32 @@ dataviva.format.text = function(text,name,l) {
       "eci_desc": {"en": "Economic Complexity measures how diversified and complex a location’s export production is.", "pt": "Complexidade Econ\u00f4mica mede qu\u00e3o diversificada e complexa \u00e9 a produ\u00e7\u00e3o de exporta\u00e7\u00e3o de uma localidade."},
       "pci": {"en": "Product Complexity", "pt": "Complexidade do Produto"},
       "pci_desc": {"en": "Product Complexity is a measure of how complex a product is, based on how many countries export the product and how diversified those exporters are.", "pt": "A Complexidade do Produto \u00e9 uma medida de qu\u00e3o complexo \u00e9 um produto, baseada no n\u00fdmero de pa\u00edses que exportam o produto e qu\u00e3o diversificados s\u00e3o estes exportadores."},
-      "unique_isic": {"en": "Unique Industries", "pt": "Setores Exclusivos"},
-      "unique_isic_desc": {"en": "The number of different industries that employ an occupation.", "pt": "O n\u00fdmero de diferentes setores que empregam uma ocupa\u00e7\u00e3o."},
-      "unique_cbo": {"en": "Unique Occupations", "pt": "Ocupa\u00e7\u00f5es Exclusivas"},
-      "unique_cbo_desc": {"en": "The number of different occupations that are employed in an industry.", "pt": "O n\u00fdmero de diferentes ocupa\u00e7\u00f5es que s\u00e3o empregadas em um setor."},
+      
+      "bra_diversity": {"en": "Location Diversity", "pt": "Diversidade de Localidades"},
+      "bra_diversity_desc": {"en": "The number of unique municipalities where a given variable is present.", "pt": "The number of unique municipalities where a given variable is present."},
+      "bra_diversity_eff": {"en": "Effective Location Diversity", "pt": "Diversidade Eficaz de Localidades"},
+      "bra_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
+      
+      "isic_diversity": {"en": "Industry Diversity", "pt": "Diversidade de Setores"},
+      "isic_diversity_desc": {"en": "The number of unique 5-digit ISIC industries that are present for a given variable.", "pt": "The number of unique 5-digit ISIC industries that are present for a given variable."},
+      "isic_diversity_eff": {"en": "Effective Industry Diversity", "pt": "Diversidade Eficaz de Setores"},
+      "isic_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
+      
+      "cbo_diversity": {"en": "Occupation Diversity", "pt": "Diversidade de Ocupa\u00e7\u00f5es"},
+      "cbo_diversity_desc": {"en": "The number of unique 4-digit CBO occupations that are present for a given variable.", "pt": "The number of unique 4-digit CBO occupations that are present for a given variable."},
+      "cbo_diversity_eff": {"en": "Effective Occupation Diversity", "pt": "Diversidade Eficaz de Ocupa\u00e7\u00f5es"},
+      "cbo_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
+      
+      "hs_diversity": {"en": "Product Diversity", "pt": "Diversidade de Produtos"},
+      "hs_diversity_desc": {"en": "The number of unique HS4 products that are present for a given variable.", "pt": "The number of unique HS4 products that are present for a given variable."},
+      "hs_diversity_eff": {"en": "Effective Product Diversity", "pt": "Diversidade Eficaz de Produtos"},
+      "hs_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
+      
+      "wld_diversity": {"en": "Export Destination Diversity", "pt": "Diversidade de Destino das Exporta\u00e7\u00f5es"},
+      "wld_diversity_desc": {"en": "The number of unique import countries that are present for a given variable.", "pt": "The number of unique import countries that are present for a given variable."},
+      "wld_diversity_eff": {"en": "Effective Export Destination Diversity", "pt": "Diversidade Eficaz de Destino das Exporta\u00e7\u00f5es"},
+      "wld_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
+      
       "distance": {"en": "Distance", "pt": "Dist\u00e2ncia"},
       "distance_desc": {"en": "Distance is a measure used to indicate how “far away” any given location is from a particular industry, occupation or product.", "pt": "Dist\u00e2ncia \u00e9 uma medida utilizada para indicar o qu\u00e3o longe uma localidade espec\u00edfica est\u00e1 de um determinado setor, ocupa\u00e7\u00e3o ou produto."},
       "distance_wld": {"en": "International Distance", "pt": "Dist\u00e2ncia Internacional"},
