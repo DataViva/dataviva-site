@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-05 14:19-0500\n"
+"POT-Creation-Date: 2013-11-05 14:36-0500\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -867,7 +867,6 @@ msgstr ""
 " reposicionados adequadamente."
 
 #: dataviva/html/about/apps/tree_map.html:11
-#: dataviva/html/about/ask/index.html:25
 msgid "Order"
 msgstr "Ordem"
 
@@ -1038,29 +1037,11 @@ msgstr ""
 "os demais cidadãos, a estarem aptos a compreender um grande volume de "
 "dados e, o mais importante, utilizá-los em seu benefício."
 
-#: dataviva/html/about/ask/index.html:10 dataviva/html/guide/index.html:7
-msgid "What's on your mind?"
-msgstr "O quê você tem em mente?"
-
-#: dataviva/html/about/ask/index.html:11
-msgid "Search"
-msgstr "Pesquisar"
-
-#: dataviva/html/about/ask/index.html:16
-msgid "Cannot find your answer?"
-msgstr "Não encontrou a sua resposta?"
-
-#: dataviva/html/about/ask/index.html:16
-msgid "Submit your question here!"
-msgstr "Envie sua pergunta aqui!"
-
-#: dataviva/html/about/ask/index.html:27
-msgid "Top Voted"
-msgstr "Mais Votados"
-
-#: dataviva/html/about/ask/index.html:29
-msgid "Newest"
-msgstr "Mais Recente"
+#: dataviva/html/about/ask/index.html:10
+msgid ""
+"The version of DataViva that you are viewing does not support user "
+"accounts. Click here to contact us through the main website."
+msgstr "A versão do DataViva que você está vendo não suporta contas de usuário. Clique aqui para entrar em contato conosco através do site principal."
 
 #: dataviva/html/about/data/comtrade.html:3
 msgid "United Nations Commodity Trade Statistics Database"
@@ -1620,23 +1601,9 @@ msgstr "Login"
 
 #: dataviva/html/account/login.html:17
 msgid ""
-"Logging in is easy! All you have to do is choose one of the following "
-"accounts to link with your profile. We'll take care of the rest."
-msgstr ""
-"Fazer o login é muito fácil! Tudo que você tem a fazer é escolher uma das"
-" contas a seguir para vincular ao seu perfil. Nós cuidaremos do resto."
-
-#: dataviva/html/account/login.html:19
-msgid ""
-"By having an account, you will be able to ask Sabrina questions, comment "
-"in discussions, and save your favorite apps to your profile."
-msgstr ""
-"Tendo uma conta, você será capaz de fazer perguntas à Sabrina, comentar "
-"em nossos fóruns, e salvar seus aplicativos favoritos em seu perfil."
-
-#: dataviva/html/account/login.html:24
-msgid "Remember Me"
-msgstr "Lembrar-me"
+"Logging in has been disabled on this version of DataViva. Please visit "
+"the main site to log in."
+msgstr "O login foi desativado nesta versão do DataViva. Por favor, visite o site principal para entrar."
 
 #: dataviva/html/admin/admin_questions.html:3
 #: dataviva/html/admin/admin_questions.html:12
@@ -1980,6 +1947,10 @@ msgstr "Quais atividades %(word)s com elas?"
 msgid "co-locate"
 msgstr "são conectadas"
 
+#: dataviva/html/guide/index.html:7
+msgid "What's on your mind?"
+msgstr "O quê você tem em mente?"
+
 #: dataviva/html/guide/index.html:11
 msgid "Learn about the potential of a location."
 msgstr "Saiba mais sobre o potencial de uma localidade."
@@ -2090,6 +2061,45 @@ msgstr "Sair"
 msgid "a country"
 msgstr "um país"
 
-#~ msgid "Trade Partners"
+#~ msgid "Search"
+#~ msgstr "Pesquisar"
+
+#~ msgid "Cannot find your answer?"
+#~ msgstr "Não encontrou a sua resposta?"
+
+#~ msgid "Submit your question here!"
+#~ msgstr "Envie sua pergunta aqui!"
+
+#~ msgid "Top Voted"
+#~ msgstr "Mais Votados"
+
+#~ msgid "Newest"
+#~ msgstr "Mais Recente"
+
+#~ msgid ""
+#~ "Logging in is easy! All you have"
+#~ " to do is choose one of the "
+#~ "following accounts to link with your "
+#~ "profile. We'll take care of the "
+#~ "rest."
 #~ msgstr ""
+#~ "Fazer o login é muito fácil! Tudo"
+#~ " que você tem a fazer é "
+#~ "escolher uma das contas a seguir "
+#~ "para vincular ao seu perfil. Nós "
+#~ "cuidaremos do resto."
+
+#~ msgid ""
+#~ "By having an account, you will be"
+#~ " able to ask Sabrina questions, "
+#~ "comment in discussions, and save your"
+#~ " favorite apps to your profile."
+#~ msgstr ""
+#~ "Tendo uma conta, você será capaz "
+#~ "de fazer perguntas à Sabrina, comentar"
+#~ " em nossos fóruns, e salvar seus "
+#~ "aplicativos favoritos em seu perfil."
+
+#~ msgid "Remember Me"
+#~ msgstr "Lembrar-me"
 
