@@ -1,4 +1,4 @@
-from sqlalchemy import func, distinct, asc, desc
+from sqlalchemy import func, distinct, asc, desc, and_
 from flask import Blueprint, request, jsonify, abort, g, render_template
 
 from dataviva import db, __latest_year__
@@ -80,6 +80,13 @@ def attrs(attr="bra",Attr_id=None):
     elif attr == "wld":
         Attr_weight_tbl = Yw
         Attr_weight_col = "val_usd"
+        
+    depths = {}
+    depths["bra"] = [2,4,7,8]
+    depths["isic"] = [1,3,5]
+    depths["cbo"] = [1,2,4]
+    depths["hs"] = [2,4,6]
+    depths["wld"] = [2,5]
     
     Attr_depth = request.args.get('depth', None)
     order = request.args.get('order', None)
@@ -133,16 +140,12 @@ def attrs(attr="bra",Attr_id=None):
         ret["data"] = [fix_name(a.serialize(), lang) for a in attrs]
     # an ID/filter was not provided
     else:
-        
         query = db.session.query(Attr,Attr_weight_tbl) \
-            .filter(Attr_weight_tbl.year == latest_year) \
-            .filter(getattr(Attr_weight_tbl,"{0}_id".format(attr)) == Attr.id)
+            .outerjoin(Attr_weight_tbl, and_(getattr(Attr_weight_tbl,"{0}_id".format(attr)) == Attr.id, Attr_weight_tbl.year == latest_year))
         if Attr_depth:
             query = query.filter(func.char_length(Attr.id) == Attr_depth)
-        elif Attr == Hs:
-            query = query.filter(func.char_length(Attr.id) <= 6)
-        elif Attr == Cbo:
-            query = query.filter(func.char_length(Attr.id) <= 4)
+        else:
+            query = query.filter(func.char_length(Attr.id).in_(depths[attr]))
             
         if order:
             direction = "asc"
@@ -171,23 +174,29 @@ def attrs(attr="bra",Attr_id=None):
         attrs_all = query.all()
         
         # just get items available in DB
-        attrs_w_data = db.session.query(Attr, func.sum(getattr(Attr_weight_tbl, Attr_weight_col)))
-        attrs_w_data = attrs_w_data \
-                        .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id).group_by(Attr)
-        attrs_w_data = {a[0].id: a[1] for a in attrs_w_data}
+        attrs_w_data = None
+        if Attr_depth is None and limit is None:
+            attrs_w_data = db.session.query(Attr, Attr_weight_tbl) \
+                .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id) \
+                .group_by(Attr.id)
+            # raise Exception(attrs_w_data.all())
+            attrs_w_data = [a[0].id for a in attrs_w_data]
                         
         attrs = []
         for i, a in enumerate(attrs_all):
             b = a[0].serialize()
-            b[Attr_weight_col] = a[1].serialize()[Attr_weight_col]
+            if a[1]:
+                b[Attr_weight_col] = a[1].serialize()[Attr_weight_col]
+            else:
+                b[Attr_weight_col] = 0
             a = b
-            a["available"] = False
-            if a["id"] in attrs_w_data:
-                a["available"] = True
-            if Attr_weight_col == "population":
-                if len(a["id"]) == 8 and a["id"][:2] == "mg":
-                    plr = Bra.query.get_or_404(a["id"]).pr2.first()
-                    if plr: a["plr"] = plr.id
+            if attrs_w_data:
+                a["available"] = False
+                if a["id"] in attrs_w_data:
+                    a["available"] = True
+            if Attr_weight_col == "population" and len(a["id"]) == 8 and a["id"][:2] == "mg":
+                plr = Bra.query.get_or_404(a["id"]).pr2.first()
+                if plr: a["plr"] = plr.id
             if order:
                 a["rank"] = int(i+offset+1)
             attrs.append(fix_name(a, lang))

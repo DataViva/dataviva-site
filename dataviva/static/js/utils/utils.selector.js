@@ -175,7 +175,7 @@ function Selector() {
           else if (b_state == "mg" && a_state != b_state) {
             return 1
           }
-          else if (a[sorting] && b[sorting]) {
+          else if (["number","string"].indexOf(typeof a[sorting]) >= 0 && ["number","string"].indexOf(typeof b[sorting]) >= 0) {
             var a_first = a[sorting]
             var b_first = b[sorting]
           }
@@ -185,7 +185,6 @@ function Selector() {
             if (d3.rgb(a.color).hsl().s == 0) a_first = 361
             if (d3.rgb(b.color).hsl().s == 0) b_first = 361
           }
-          
           if (a_first != b_first) {
             if (typeof a_first === "string") return (a_first.localeCompare(b_first));
             else return (b_first - a_first);
@@ -196,7 +195,6 @@ function Selector() {
             return (a_second.localeCompare(b_second))
           }
         })
-
         
         var parent = container.node().parentNode,
             display = d3.select(parent).style("display")
