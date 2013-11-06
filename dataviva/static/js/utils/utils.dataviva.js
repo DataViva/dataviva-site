@@ -630,6 +630,22 @@ dataviva.ui.loading = function(parent) {
     self.div.style("background-color",color)
     return self
   }
+  
+  if (!Modernizr.cssanimations) {
+    var elem = this.icon.node(), degree = 0, timer;
+    function rotate() { 
+      if (degree == 360) degree = 0
+      elem.style.msTransform = 'rotate(' + degree + 'deg)'
+      elem.style.transform = 'rotate(' + degree + 'deg)'
+      // timeout increase degrees:
+      timer = setTimeout(function() {
+        degree = degree + 4;
+        rotate(); // loop it
+      },20);
+    }
+
+    rotate();
+  }
 
   return this
   
@@ -896,7 +912,7 @@ dataviva.url = function(url,args,title) {
   else if (!replace) {
     if (app_builder) {
       full_url = full_url.replace("embed","builder")
-      window.parent.location = builder_url
+      window.parent.location = full_url
     }
     else {
       window.location = full_url
