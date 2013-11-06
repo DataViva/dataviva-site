@@ -69,7 +69,7 @@ function Selector() {
             .replace("munic",id)
             .replace("value",dist)
             
-          d3.json(dataviva.static_url+u.substr(1)+"?lang="+dataviva.language)
+          d3.json("/"+u.substr(1)+"?lang="+dataviva.language)
             .header("X-Requested-With", "XMLHttpRequest")
             .get(function(error,raw_distances){
               var distances = [];
@@ -804,7 +804,7 @@ function Selector() {
         create_elements()
       }
       else {
-        d3.json(dataviva.static_url+"attrs/"+type+"/?lang="+dataviva.language)
+        d3.json("/"+"attrs/"+type+"/?lang="+dataviva.language)
           .header("X-Requested-With", "XMLHttpRequest")
           .get(function(error,attrs) {
             data = attrs.data

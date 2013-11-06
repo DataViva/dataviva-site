@@ -2,7 +2,7 @@ import StringIO, csv
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, make_response, Response
 from dataviva import db
-from dataviva.utils import make_query, crossdomain
+from dataviva.utils import make_query
 from dataviva.rais.models import Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio
 
 mod = Blueprint('rais', __name__, url_prefix='/rais')
@@ -32,19 +32,16 @@ def per_request_callbacks(response):
 
 @mod.route('/all/<bra_id>/all/all/')
 @mod.route('/<year>/<bra_id>/all/all/')
-@crossdomain()
 def rais_yb(**kwargs):
     return make_response(make_query(Yb_rais, request.args, **kwargs))
 
 @mod.route('/all/all/<isic_id>/all/')
 @mod.route('/<year>/all/<isic_id>/all/')
-@crossdomain()
 def rais_yi(**kwargs):
     return make_response(make_query(Yi, request.args, **kwargs))
 
 @mod.route('/all/all/all/<cbo_id>/')
 @mod.route('/<year>/all/all/<cbo_id>/')
-@crossdomain()
 def rais_yo(**kwargs):
     return make_response(make_query(Yo, request.args, **kwargs))
 
@@ -56,7 +53,6 @@ def rais_yo(**kwargs):
 
 @mod.route('/all/<bra_id>/<isic_id>/all/')
 @mod.route('/<year>/<bra_id>/<isic_id>/all/')
-@crossdomain()
 def rais_ybi(**kwargs):
     kwargs["join"] = [{
                         "table": Yi,
@@ -67,7 +63,6 @@ def rais_ybi(**kwargs):
 
 @mod.route('/all/<bra_id>/all/<cbo_id>/')
 @mod.route('/<year>/<bra_id>/all/<cbo_id>/')
-@crossdomain()
 def rais_ybo(**kwargs):
     kwargs["join"] = [{
                         "table": Yo,
@@ -78,7 +73,6 @@ def rais_ybo(**kwargs):
 
 @mod.route('/all/all/<isic_id>/<cbo_id>/')
 @mod.route('/<year>/all/<isic_id>/<cbo_id>/')
-@crossdomain()
 def rais_yio(**kwargs):
     return make_response(make_query(Yio, request.args, **kwargs))
 
@@ -90,6 +84,5 @@ def rais_yio(**kwargs):
 
 @mod.route('/all/<bra_id>/<isic_id>/<cbo_id>/')
 @mod.route('/<year>/<bra_id>/<isic_id>/<cbo_id>/')
-@crossdomain()
 def rais_ybio(**kwargs):
     return make_response(make_query(Ybio, request.args, **kwargs))

@@ -12,8 +12,6 @@ from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo
 from dataviva.apps.models import UI
 from dataviva.secex.models import Yb_secex
 
-from dataviva.utils import crossdomain
-
 import json
 
 mod = Blueprint('data', __name__, url_prefix='/data')
@@ -58,7 +56,6 @@ def table(data_type="rais", year="all", bra_id="mg", filter_1="show.1", filter_2
 @mod.route('/classifications/')
 @mod.route('/classifications/<attr>/')
 @mod.route('/classifications/<attr>/<depth>/')
-@crossdomain()
 def classifications(attr = None, depth = None, page = 1):
     
     if not attr:
@@ -121,7 +118,6 @@ def classifications(attr = None, depth = None, page = 1):
 
 @mod.route('/classificationslist/<attr>/')
 @mod.route('/classificationslist/<attr>/<depth>/')
-@crossdomain()
 def classificationslist(attr = None, depth = None, page = 1):
     
     g.page_type = "classifications"
@@ -158,7 +154,6 @@ def classificationslist(attr = None, depth = None, page = 1):
 
 @mod.route('/')
 @mod.route('/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
-@crossdomain()
 def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
     
     filters = {}

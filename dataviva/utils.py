@@ -208,61 +208,6 @@ class RedisSessionInterface(SessionInterface):
         response.set_cookie(app.session_cookie_name, session.sid,
                             expires=cookie_exp, httponly=True,
                             domain=domain)
-                            
-def crossdomain(origin="*", methods=None, headers=['Content-Type','x-requested-with'],
-                max_age=21600, attach_to_all=True,
-                automatic_options=True):
-    
-    if methods is not None:
-        methods = ', '.join(sorted(x.upper() for x in methods))
-    if headers is not None and not isinstance(headers, basestring):
-        headers = ', '.join(x.upper() for x in headers)
-    #if not isinstance(origin, basestring):
-    #    origin = ', '.join(origin)
-    if isinstance(max_age, timedelta):
-        max_age = max_age.total_seconds()
-        
-    def get_methods():
-        if methods is not None:
-            return methods
-            
-        options_resp = current_app.make_default_options_response()
-        return options_resp.headers['allow']
-        
-    def decorator(f):
-        def wrapped_function(*args, **kwargs):
-            if automatic_options and request.method == 'OPTIONS':
-                resp = current_app.make_default_options_response()
-            else:
-                resp = make_response(f(*args, **kwargs))
-            if not attach_to_all and request.method != 'OPTIONS':
-                return resp
-                
-            h = resp.headers
-            
-            h['Access-Control-Allow-Origin'] = "*"
-            
-            # if "Origin" not in request.headers:
-            #     h['Access-Control-Allow-Origin'] = request.environ["HTTP_HOST"]
-            # elif request.headers["Origin"] in origin:
-            #     h['Access-Control-Allow-Origin'] = request.headers["Origin"]
-            #         
-            # if origin == '*':
-            #     h['Access-Control-Allow-Origin'] = origin
-                    
-            #h['Access-Control-Allow-Origin'] = origin
-            h['Access-Control-Allow-Methods'] = get_methods()
-            h['Access-Control-Max-Age'] = str(max_age)
-            
-            if headers is not None:
-                h['Access-Control-Allow-Headers'] = headers
-                
-            return resp
-            
-        f.provide_automatic_options = False
-        f.required_methods = ['OPTIONS']
-        return update_wrapper(wrapped_function, f)
-    return decorator
 
 ''' Returns array of ECIs given location '''
 def location_values(ret,cat):
@@ -276,12 +221,6 @@ def location_values(ret,cat):
         ret["eci"] = {}
         for yb in ecis:
             ret["eci"][yb.year] = yb.eci
-        rais_uniques = Yb_rais.query.filter_by(bra_id=bra_id).all()
-        ret["unique_isic"] = {}
-        ret["unique_cbo"] = {}
-        for yb in rais_uniques:
-            ret["unique_isic"][yb.year] = yb.unique_isic
-            ret["unique_cbo"][yb.year] = yb.unique_cbo
     return ret
 
 ''' Returns modified query and return variable for data calls '''       

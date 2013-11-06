@@ -15,8 +15,6 @@ from dataviva.rais.models import Yb_rais, Yi, Yo
 from dataviva.secex.models import Yb_secex, Yp, Yw
 from dataviva.attrs.models import Yb
 
-from dataviva.utils import crossdomain
-
 import json
 
 mod = Blueprint('rankings', __name__, url_prefix='/rankings')

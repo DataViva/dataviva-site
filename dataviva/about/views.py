@@ -10,7 +10,7 @@ from dataviva.secex.models import Hs
 
 from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE_REPLY, Flag
 from dataviva.ask.forms import AskForm, ReplyForm, SearchForm
-from dataviva.utils import strip_html, crossdomain
+from dataviva.utils import strip_html
 
 mod = Blueprint('about', __name__, url_prefix='/about')
 

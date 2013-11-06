@@ -8,7 +8,7 @@ from dataviva import db, lm
 from dataviva.account.models import User
 from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE_REPLY, Flag
 from dataviva.ask.forms import AskForm, ReplyForm, SearchForm
-from dataviva.utils import strip_html, crossdomain
+from dataviva.utils import strip_html
 
 import urllib2, urllib
 
@@ -17,7 +17,6 @@ mod = Blueprint('ask', __name__, url_prefix='/ask')
 RESULTS_PER_PAGE = 10
     
 @mod.route('/questions/', methods=['GET', 'POST'], defaults={'page': 1})
-@crossdomain()
 def question_list(page):
     
     # get URL parameters for results per page and ordering options

@@ -522,7 +522,7 @@
                     if (d.eci) app.ecis[app.build.data_url] = d.eci
                     callback(error,d)
                   })
-              },dataviva.static_url+app.build.data_url)
+              },"/"+app.build.data_url)
             }
             
             if (!app.attrs[app.build.output]) {
@@ -532,7 +532,6 @@
                   .get(function(error,d){
                     var out = app.build.output
                     app.attrs[out] = {}
-                    
                     d.data.forEach(function(a){
                       a[out+"_id"] = a.id
                       a[out+"_display"] = dataviva.displayID(a.id,out)
@@ -552,7 +551,7 @@
                     
                     callback(error,d)
                   })
-              },dataviva.static_url+"attrs/"+app.build.output+"/"+"?lang="+dataviva.language)
+              },"/attrs/"+app.build.output+"/"+"?lang="+dataviva.language)
             }
             
             if (["network","rings"].indexOf(app.build.app.type) >= 0 
@@ -618,7 +617,7 @@
                     app.data[app.build.imp_url].raw = d.data
                     callback(error,d)
                   })
-                },dataviva.static_url+app.build.imp_url)
+                },"/"+app.build.imp_url)
               }
               
               var url = app.build.data_url.split("/")
@@ -634,7 +633,7 @@
                     app.data[app.build.else_url].raw = d.data
                     callback(error,d)
                   })
-                },dataviva.static_url+app.build.else_url)
+                },"/"+app.build.else_url)
               }
               
             }

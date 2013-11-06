@@ -5,7 +5,7 @@ from dataviva import db, __latest_year__
 from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo, Yb
 from dataviva.secex.models import Yp, Yw
 from dataviva.rais.models import Yi, Yo
-from dataviva.utils import exist_or_404, gzip_data, cached_query, title_case, crossdomain
+from dataviva.utils import exist_or_404, gzip_data, cached_query, title_case
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
@@ -62,7 +62,6 @@ def fix_name(attr, lang):
 
 @mod.route('/<attr>/')
 @mod.route('/<attr>/<Attr_id>/')
-@crossdomain()
 def attrs(attr="bra",Attr_id=None):
     
     Attr = globals()[attr.title()]
