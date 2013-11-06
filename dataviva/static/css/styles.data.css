@@ -82,7 +82,7 @@ span.show {
 
 #filter_selects {
   left: 20px;
-  overflow-y: scroll;
+  overflow: hidden;
   padding: 10px 10px 5px 10px;
   position: fixed;
   text-align: center;

@@ -406,6 +406,8 @@
   
   function iframe_size(w,h) {
       
+    w += dataviva.scrollbar()
+      
     d3.select(".data_table")
       .style("width",function(){
         var allowed =  window.innerWidth - 380
