@@ -1,6 +1,8 @@
 <!-- extend from site layout -->
 {% extends "templates/site.html" %}
 
+{% block title %}: {% trans %}Rankings{% endtrans %}{% endblock %}
+
 {% block head %}
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.rankings.css" />
@@ -51,7 +53,7 @@
       </div>
     </div>
     <div id="iframe">
-      <iframe src="/rankings/table/{{year}}/{{type}}/{{depth}}/"></iframe>
+      <iframe src="/rankings/table/{{year}}/{{type}}/{{depth}}/" width="100%"></iframe>
     </div>
   </div>
 
@@ -60,6 +62,11 @@
 {% block js %}
 
   <script>
+  
+    if (Modernizr.touch) {
+      d3.select("#iframe").style("overflow","auto")
+        .style("-webkit-overflow-scrolling","touch")
+    }
     
     leon("$depth").color(dataviva.color)
     leon("#year_select").color(dataviva.color)
@@ -82,17 +89,22 @@
     }
     
     function iframe_size(w,h) {
+      var container_height = d3.select("#outer_container").node().offsetHeight
       d3.select("#rankings_table")
         .style("height",function(){
-          var allowed =  window.innerHeight - 149
+          var allowed =  container_height - 149
+          return h < allowed ? h+"px" : allowed+"px"
+        })
+      d3.select("#rankings_table #iframe")
+        .style("height",function(){
+          var allowed =  container_height - 149 - 49
           return h < allowed ? h+"px" : allowed+"px"
         })
       d3.select("#rankings_table iframe")
-        .style("height",function(){
-          var allowed =  window.innerHeight - 149 - 49
+        .attr("height",function(){
+          var allowed =  container_height - 149 - 49
           return h < allowed ? h+"px" : allowed+"px"
         })
-      
     }
     
     update_table()

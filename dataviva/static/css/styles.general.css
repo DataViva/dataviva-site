@@ -1,23 +1,18 @@
 html {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  overflow-x: hidden;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
 }
 
 body {
   background-color: #fafafa;
   color: #333333;
+  height: 100%;
   margin: 0 auto;
-  overflow: scroll;
+  padding: 0;
+  position: relative;
   width: 100%;
-}
-
-div#timer {
-  color: red;
-  font-size: 10px;
-  left: 10px;
-  position: absolute;
-  top: 10px;
-  z-index: 999999;
 }
 
 hr {
@@ -60,7 +55,7 @@ hr {
 #container {
   display: block;
   margin: 0px auto;
-  padding: 76px 20px 66px 20px;
+  padding: 76px 0px 66px 0px;
   text-align: center;
   width: 980px;
 }

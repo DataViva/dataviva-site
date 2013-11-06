@@ -104,6 +104,11 @@
 
 <script src="/static/js/utils/utils.selector.js"></script>
 <script type="text/javascript">
+
+  if (Modernizr.touch) {
+    d3.select(".data_table").style("overflow","auto")
+      .style("-webkit-overflow-scrolling","touch")
+  }
   
   leon("$dataset").color(dataviva.color)
   leon(".depth_select").color(dataviva.color)
