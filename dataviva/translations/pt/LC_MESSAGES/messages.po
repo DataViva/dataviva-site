@@ -1769,7 +1769,7 @@ msgstr "Salvar como CSV"
 
 #: dataviva/html/data/index.html:36
 msgid "Edit Columns"
-msgstr "Editar as Colunas"
+msgstr "Editar Colunas"
 
 #: dataviva/html/data/index.html:75
 msgid "Currently showing"
@@ -2076,7 +2076,7 @@ msgstr "Guia"
 
 #: dataviva/html/templates/site.html:18
 msgid "Rankings"
-msgstr "Posições"
+msgstr "Rankings"
 
 #: dataviva/html/templates/site.html:44
 msgid "Profile"
@@ -2089,7 +2089,4 @@ msgstr "Sair"
 #: dataviva/profiles/views.py:47
 msgid "a country"
 msgstr "um país"
-
-#~ msgid "Trade Partners"
-#~ msgstr ""
 

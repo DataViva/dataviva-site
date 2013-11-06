@@ -198,27 +198,27 @@ dataviva.format.text = function(text,name,l) {
       
       "bra_diversity": {"en": "Location Diversity", "pt": "Diversidade de Localidades"},
       "bra_diversity_desc": {"en": "The number of unique municipalities where a given variable is present.", "pt": "The number of unique municipalities where a given variable is present."},
-      "bra_diversity_eff": {"en": "Effective Location Diversity", "pt": "Diversidade Eficaz de Localidades"},
+      "bra_diversity_eff": {"en": "Effective Location Diversity", "pt": "Diversidade Efetiva de Localidades"},
       "bra_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
       
-      "isic_diversity": {"en": "Industry Diversity", "pt": "Diversidade de Setores"},
+      "isic_diversity": {"en": "Industry Diversity", "pt": "Diversidade de Atividades"},
       "isic_diversity_desc": {"en": "The number of unique 5-digit ISIC industries that are present for a given variable.", "pt": "The number of unique 5-digit ISIC industries that are present for a given variable."},
-      "isic_diversity_eff": {"en": "Effective Industry Diversity", "pt": "Diversidade Eficaz de Setores"},
+      "isic_diversity_eff": {"en": "Effective Industry Diversity", "pt": "Diversidade Efetiva de Atividades"},
       "isic_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
       
       "cbo_diversity": {"en": "Occupation Diversity", "pt": "Diversidade de Ocupa\u00e7\u00f5es"},
       "cbo_diversity_desc": {"en": "The number of unique 4-digit CBO occupations that are present for a given variable.", "pt": "The number of unique 4-digit CBO occupations that are present for a given variable."},
-      "cbo_diversity_eff": {"en": "Effective Occupation Diversity", "pt": "Diversidade Eficaz de Ocupa\u00e7\u00f5es"},
+      "cbo_diversity_eff": {"en": "Effective Occupation Diversity", "pt": "Diversidade Efetiva de Ocupa\u00e7\u00f5es"},
       "cbo_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
       
       "hs_diversity": {"en": "Product Diversity", "pt": "Diversidade de Produtos"},
       "hs_diversity_desc": {"en": "The number of unique HS4 products that are present for a given variable.", "pt": "The number of unique HS4 products that are present for a given variable."},
-      "hs_diversity_eff": {"en": "Effective Product Diversity", "pt": "Diversidade Eficaz de Produtos"},
+      "hs_diversity_eff": {"en": "Effective Product Diversity", "pt": "Diversidade Efetiva de Produtos"},
       "hs_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
       
       "wld_diversity": {"en": "Export Destination Diversity", "pt": "Diversidade de Destino das Exporta\u00e7\u00f5es"},
       "wld_diversity_desc": {"en": "The number of unique import countries that are present for a given variable.", "pt": "The number of unique import countries that are present for a given variable."},
-      "wld_diversity_eff": {"en": "Effective Export Destination Diversity", "pt": "Diversidade Eficaz de Destino das Exporta\u00e7\u00f5es"},
+      "wld_diversity_eff": {"en": "Effective Export Destination Diversity", "pt": "Diversidade Efetiva de Destino das Exporta\u00e7\u00f5es"},
       "wld_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
       
       "distance": {"en": "Distance", "pt": "Dist\u00e2ncia"},
