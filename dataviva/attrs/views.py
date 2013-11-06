@@ -1,5 +1,5 @@
 from sqlalchemy import func, distinct, asc, desc, and_
-from flask import Blueprint, request, jsonify, abort, g, render_template
+from flask import Blueprint, request, jsonify, abort, g, render_template, make_response
 
 from dataviva import db, __latest_year__
 from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo, Yb
@@ -12,29 +12,6 @@ mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 @mod.errorhandler(404)
 def page_not_found(error):
     return error, 404
-
-@mod.after_request
-def after_request(response):
-    lang = request.args.get('lang', None) or g.locale
-    offset = request.args.get('offset', None)
-    limit = request.args.get('limit', None)
-    depth = request.args.get('depth', None)
-    if offset:
-        offset = float(offset)
-        limit = limit or 50
-    # if response.status_code != 302:
-    if response.status_code != 302 and limit is None:
-        cache_id = request.path + lang
-        if depth:
-            cache_id = cache_id + "/" + depth
-        # test if this query was cached, if not add it
-        cached_q = cached_query(cache_id)
-        if cached_q is None:
-            response.data = gzip_data(response.data)
-            cached_query(cache_id, response.data)
-        response.headers['Content-Encoding'] = 'gzip'
-        response.headers['Content-Length'] = str(len(response.data))
-    return response
 
 def fix_name(attr, lang):
     name_lang = "name_" + lang
@@ -90,7 +67,7 @@ def attrs(attr="bra",Attr_id=None):
     depths["hs"] = [2,4,6]
     depths["wld"] = [2,5]
     
-    Attr_depth = request.args.get('depth', None)
+    depth = request.args.get('depth', None)
     order = request.args.get('order', None)
     offset = request.args.get('offset', None)
     limit = request.args.get('limit', None)
@@ -106,12 +83,15 @@ def attrs(attr="bra",Attr_id=None):
     latest_year = __latest_year__[dataset]
         
     cache_id = request.path + lang
-    if Attr_depth:
-        cache_id = cache_id + "/" + Attr_depth
+    if depth:
+        cache_id = cache_id + "/" + depth
     # first lets test if this query is cached
     cached_q = cached_query(cache_id)
     if cached_q and limit is None:
-        return cached_q
+        ret = make_response(cached_q)
+        ret.headers['Content-Encoding'] = 'gzip'
+        ret.headers['Content-Length'] = str(len(ret.data))
+        return ret
     
     # if an ID is supplied only return that
     if Attr_id:
@@ -144,8 +124,8 @@ def attrs(attr="bra",Attr_id=None):
     else:
         query = db.session.query(Attr,Attr_weight_tbl) \
             .outerjoin(Attr_weight_tbl, and_(getattr(Attr_weight_tbl,"{0}_id".format(attr)) == Attr.id, Attr_weight_tbl.year == latest_year))
-        if Attr_depth:
-            query = query.filter(func.char_length(Attr.id) == Attr_depth)
+        if depth:
+            query = query.filter(func.char_length(Attr.id) == depth)
         else:
             query = query.filter(func.char_length(Attr.id).in_(depths[attr]))
             
@@ -177,7 +157,7 @@ def attrs(attr="bra",Attr_id=None):
         
         # just get items available in DB
         attrs_w_data = None
-        if Attr_depth is None and limit is None:
+        if depth is None and limit is None:
             attrs_w_data = db.session.query(Attr, Attr_weight_tbl) \
                 .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id) \
                 .group_by(Attr.id)
@@ -204,8 +184,17 @@ def attrs(attr="bra",Attr_id=None):
             attrs.append(fix_name(a, lang))
         
         ret["data"] = attrs
+    
+    ret = jsonify(ret)
+    ret.data = gzip_data(ret.data)
+    
+    if limit is None and cached_q is None:
+        cached_query(cache_id, ret.data)
+            
+    ret.headers['Content-Encoding'] = 'gzip'
+    ret.headers['Content-Length'] = str(len(ret.data))
         
-    return jsonify(ret)
+    return ret
     
 @mod.route('/table/<attr>/<depth>/')
 def attrs_table(attr="bra",depth="2"):
