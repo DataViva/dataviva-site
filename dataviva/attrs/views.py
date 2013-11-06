@@ -18,12 +18,15 @@ def after_request(response):
     lang = request.args.get('lang', None) or g.locale
     offset = request.args.get('offset', None)
     limit = request.args.get('limit', None)
+    depth = request.args.get('depth', None)
     if offset:
         offset = float(offset)
         limit = limit or 50
     # if response.status_code != 302:
-    if response.status_code != 302 and request.is_xhr and limit is None:
+    if response.status_code != 302 and limit is None:
         cache_id = request.path + lang
+        if depth:
+            cache_id = cache_id + "/" + depth
         # test if this query was cached, if not add it
         cached_q = cached_query(cache_id)
         if cached_q is None:
@@ -108,7 +111,7 @@ def attrs(attr="bra",Attr_id=None):
         cache_id = cache_id + "/" + Attr_depth
     # first lets test if this query is cached
     cached_q = cached_query(cache_id)
-    if cached_q and request.is_xhr and limit is None:
+    if cached_q and limit is None:
         return cached_q
     
     # if an ID is supplied only return that
