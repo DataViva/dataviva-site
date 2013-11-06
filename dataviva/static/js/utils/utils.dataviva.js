@@ -692,7 +692,7 @@ dataviva.icon = function(id,type,color) {
 
 dataviva.depths = function(type,flatten) {
   if (type == "isic") var array = [1,3,5];
-  else if (type == "cbo") var array = [1,2,3,4];
+  else if (type == "cbo") var array = [1,2,4];
   else if (type == "hs") var array = [2,4,6];
   else if (type == "bra") var array = [2,4,8];
   else if (type == "wld") var array = [2,5];
