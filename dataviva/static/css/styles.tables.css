@@ -4,11 +4,10 @@ body {
 
 table { 
   border-collapse: collapse; 
-  border-spacing: 0; 
-  overflow: hidden;
+  border-spacing: 0;
+  position: relative;
   table-layout: fixed;
   text-align: left;
-  width: 100%;
 }
 
 table th {
@@ -99,6 +98,7 @@ thead {
   top: 0;
   -webkit-transition: border-color .4s;
           transition: border-color .4s;
+  z-index: 1;
 }
 
 thead.shadow {
@@ -110,11 +110,11 @@ thead.shadow {
   border-color: #f0f0f0;
   border-right-width: 0px;
   border-right-style: solid;
-  position: absolute;
+  position: fixed;
   left: 0;
   width: 5px;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   -webkit-transition: -webkit-box-shadow 0.4s;
                   transition: box-shadow 0.4s;
 }
@@ -126,9 +126,6 @@ thead.shadow {
 }
 
 #data {
-  margin-left: 235px;
-  overflow-x: scroll;
-  width: 725px;
   z-index: 0;
 }
 
@@ -160,6 +157,7 @@ table th.desc::after {
 }
 
 table td, table th {
+  min-width: 120px;
   width: 120px;
 }
 
@@ -171,16 +169,20 @@ table td {
 
 
 table .rank { 
+  min-width: 50px !important; 
   width: 50px !important; 
 }
 table .year { 
+  min-width: 40px !important; 
   width: 40px !important; 
 }
 table .bra_id, table .id, table .id_ibge, 
 table .isic_id, table .cbo_id, 
 table .hs_id, table .wld_id, table.color { 
+  min-width: 70px !important; 
   width: 70px !important; 
 }
 table .name { 
+  min-width: 300px !important; 
   width: 300px !important; 
 }
