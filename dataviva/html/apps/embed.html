@@ -126,6 +126,7 @@
   <script type="text/javascript">
   
     var max_year = {{ g.latest_year|safe }}
+    console.log(max_year)
     
     var loading = new dataviva.ui.loading("body")
     loading.color("#ffffff")
@@ -326,8 +327,16 @@
         "importance",
         "eci",
         "pci",
-        "unique_isic",
-        "unique_cbo",
+        "bra_diversity",
+        "bra_diversity_eff",
+        "isic_diversity",
+        "isic_diversity_eff",
+        "cbo_diversity",
+        "cbo_diversity_eff",
+        "hs_diversity",
+        "hs_diversity_eff",
+        "wld_diversity",
+        "wld_diversity_eff",
         "rca",
         "rca_wld",
         "distance",
@@ -365,14 +374,23 @@
     var averages = {
           "eci": "mean",
           "pci": "mean",
-          "unique_isic": "mean",
-          "unique_cbo": "mean",
+          "bra_diversity": "mean",
+          "bra_diversity_eff": "mean",
+          "isic_diversity": "mean",
+          "isic_diversity_eff": "mean",
+          "cbo_diversity": "mean",
+          "cbo_diversity_eff": "mean",
+          "hs_diversity": "mean",
+          "hs_diversity_eff": "mean",
+          "wld_diversity": "mean",
+          "wld_diversity_eff": "mean",
           "rca": "mean",
           "rca_wld": "mean",
           "distance": "mean",
           "distance_wld": "mean",
           "opp_gain": "mean",
           "opp_gain_wld": "mean",
+          "num_emp_est": "mean",
           "wage_avg": "mean",
           "wage_avg_bra": "mean",
           "wage_growth_pct": "mean",
@@ -403,8 +421,16 @@
       "rca": dataviva.format.text("rca_desc"),
       "rca_wld": dataviva.format.text("rca_desc"),
       "required": dataviva.format.text("required_desc"),
-      "unique_isic": dataviva.format.text("unique_isic_desc"),
-      "unique_cbo": dataviva.format.text("unique_cbo_desc"),
+      "bra_diversity": dataviva.format.text("bra_diversity_desc"),
+      "bra_diversity_eff": dataviva.format.text("bra_diversity_eff_desc"),
+      "isic_diversity": dataviva.format.text("isic_diversity_desc"),
+      "isic_diversity_eff": dataviva.format.text("isic_diversity_eff_desc"),
+      "cbo_diversity": dataviva.format.text("cbo_diversity_desc"),
+      "cbo_diversity_eff": dataviva.format.text("cbo_diversity_eff_desc"),
+      "hs_diversity": dataviva.format.text("hs_diversity_desc"),
+      "hs_diversity_eff": dataviva.format.text("hs_diversity_eff_desc"),
+      "wld_diversity": dataviva.format.text("wld_diversity_desc"),
+      "wld_diversity_eff": dataviva.format.text("wld_diversity_eff_desc")
     }
     
     // Define global D3plus app parameters
@@ -802,7 +828,7 @@
             leon({
               "type": leon_type,
               "data": leon_data,
-              "id": title,
+              "id": ui.type,
               "default": app.vars[ui.type],
               "label": dataviva.format.text(title),
               "parent": ui_div.node(),
@@ -1561,7 +1587,7 @@
       if (obj.distance > 0 && type == "bra") new_name += " "+obj.distance+"km"
 
       button.select(".list_text").text(new_name)
-      
+      app.url = url
       if (!static) {
         app.start(url)
       }

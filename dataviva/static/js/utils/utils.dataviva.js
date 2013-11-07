@@ -376,7 +376,7 @@ dataviva.format.text = function(text,name,l) {
       "show": {"en": "Show", "pt": "Mostrar"},
       "loading_attrs": {"en": "Loading Attribute List", "pt": "Carregando Lista de Atributos"},
       "loading_items": {"en": "Loading More Items", "pt": "Carregar Mais Itens"},
-      "wait": {"en": "Please Wait", "pt": "Espere por Favor"}
+      "wait": {"en": "Please Wait", "pt": "Por favor Aguarde"}
     
     }
     
