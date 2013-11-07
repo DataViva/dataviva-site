@@ -11,7 +11,7 @@
 
 {% block body %}
 
-  <div id="rankings_nav" class="grid5col1">
+  <div id="rankings_nav">
     
       <a class="{% if type == 'bra' %}decision{% else %}help{% endif %} icon bra" href="/rankings/2012/bra/2/">
         {% trans %}Brazilian Locations{% endtrans %}
@@ -88,27 +88,38 @@
       update_table()
     }
     
+    var last_w = 500, last_h = 200-49
+    
     function iframe_size(w,h) {
+      if (!w) w = last_w
+      if (!h) h = last_h
+      last_w = w
+      last_h = h
       var container_height = d3.select("#outer_container").node().offsetHeight
       d3.select("#rankings_table")
         .style("height",function(){
-          var allowed =  container_height - 149
-          return h < allowed ? h+"px" : allowed+"px"
+          var allowed = container_height - 169
+          return h < allowed ? h+49+"px" : allowed+"px"
         })
-      d3.select("#rankings_table #iframe")
+        .style("width",function(){
+          var allowed = window.innerWidth - 320
+          return w < allowed ? w+"px" : allowed+"px"
+        })
+      d3.select("#iframe")
         .style("height",function(){
-          var allowed =  container_height - 149 - 49
+          var allowed = container_height - 169 - 49
           return h < allowed ? h+"px" : allowed+"px"
         })
-      d3.select("#rankings_table iframe")
+      d3.select("iframe")
         .attr("height",function(){
-          var allowed =  container_height - 149 - 49
+          var allowed = container_height - 169 - 49
           return h < allowed ? h+"px" : allowed+"px"
         })
     }
     
+    dataviva.resize = iframe_size
+    
     update_table()
-    iframe_size(0,100)
     
   </script>
 

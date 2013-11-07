@@ -113,7 +113,7 @@
       ga('create', 'UA-42576717-1', window.location.host);
       ga('send', 'pageview');
     
-      dataviva.ui.background()
+      var bg_resize = dataviva.ui.background()
       
       if (dataviva.resize) {
         window.onresize = function() {
@@ -124,6 +124,7 @@
               dataviva.resize()
             },500)
           }
+          if (bg_resize) bg_resize()
         }
       }
       

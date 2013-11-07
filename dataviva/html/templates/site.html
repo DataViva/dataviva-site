@@ -118,14 +118,6 @@
     });
     
     if ("{{ g.user.is_authenticated() }}" != "False") {
-
-      account_toggle = function() {
-        var account_button = d3.select("#account")
-        if (account_button.node().className.indexOf("active") < 0) {
-        }
-        else {
-        }
-      }
     
       show_toggle = function() {
         d3.select("#account").attr("class","active")

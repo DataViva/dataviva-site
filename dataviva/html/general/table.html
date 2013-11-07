@@ -22,7 +22,7 @@
   <script src="/static/js/utils/utils.infinite_scroll.js"></script>
   <script type="text/javascript">
   
-    var table_height = 0, table_width = 0, sticky_width = 0
+    var table_height = 0, table_width = 0, sticky_width = 0, x_scroll = 0
   
     var columns = {}
 
@@ -109,21 +109,24 @@
     var is = infinite_scroll().format_items(item_formatter);
   
     function column_sort(d) {
-      if (d == current_order[0]) var direction = current_order[1]
-      else var direction = ""
-      if (direction == "desc") { direction = "asc"; }
-      else if (direction == "asc") { direction = ""; }
-      else { direction = "desc"; }
-    
-      if (direction == "") current_order = []
-      else current_order = [d,direction]
+      if (d != "rank") {
 
-      update_url()
+        if (d == current_order[0]) var direction = current_order[1]
+        else var direction = ""
+        if (direction == "desc") { direction = "asc"; }
+        else if (direction == "asc") { direction = ""; }
+        else { direction = "desc"; }
     
-      DATA = [];
-      d3.selectAll("tbody tr").remove()
-      d3.select("#dt_query")
-        .call(is.order(current_order.join(".")).offset(0))
+        if (direction == "") current_order = []
+        else current_order = [d,direction]
+
+        update_url()
+    
+        DATA = [];
+        d3.selectAll("tbody tr").remove()
+        d3.select("#dt_query")
+          .call(is.order(current_order.join(".")).offset(0))
+      }
 
       d3.event.preventDefault()
     }
@@ -392,8 +395,10 @@
         header_shadow = false
       }
       
+      x_scroll = window.pageXOffset
+      
       d3.select("#dt_query #data table.header thead")
-        .style("left", -(window.pageXOffset-sticky_width)+"px")
+        .style("left", -(x_scroll-sticky_width)+"px")
       
       d3.select("#dt_query #sticky table.data")
         .style("top", -(window.pageYOffset)+"px")

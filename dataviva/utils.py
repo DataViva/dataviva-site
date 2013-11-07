@@ -350,9 +350,10 @@ def merge_objects(objs):
                 ret_obj[k] = None
     return ret_obj
 
-def make_query(data_table, url_args, **kwargs):
+def make_query(data_table, url_args, lang, **kwargs):
     
     from dataviva import db
+    from dataviva.attrs.models import Bra, Isic, Cbo, Hs, Wld
             
     ops = {">": operator.gt,
            ">=": operator.ge,
@@ -375,6 +376,7 @@ def make_query(data_table, url_args, **kwargs):
     if filter:
         filter = re.split("(>=|>|<=|<)", filter)
     join = kwargs["join"] if "join" in kwargs else False
+    show_id = None
     cache_id = request.path
     ret = {}
     # first lets test if this query is cached (be sure we are not paginating
@@ -404,10 +406,12 @@ def make_query(data_table, url_args, **kwargs):
         if key in kwargs:
             if key != "bra_id":
                 unique_keys.append(key)
+            if "show" in kwargs[key]:
+                show_id = key
             parse_results = parse_filter(kwargs,key,query,data_table,ret)
             query = parse_results["query"]
             ret = parse_results["ret"]
-
+            
     if filter:
         query = query.filter(ops[filter[1]](getattr(data_table, filter[0]), float(filter[2])))
         
@@ -515,11 +519,18 @@ def make_query(data_table, url_args, **kwargs):
 
     if cols:
         new_return = []
+        attrs = None
+        if "name" in cols and show_id:
+            attr_table = locals()[show_id.split("_")[0].title()]
+            attrs = [x.serialize() for x in attr_table.query.all()]
+            attrs = {x["id"]:x["name_{0}".format(lang)] or None for x in attrs}
         for d in ret["data"]:
             new_obj = {}
             for k in d:
                 if k in cols:
                     new_obj[k] = d[k]
+            if attrs:
+                new_obj["name"] = attrs[d[show_id]]
             new_return.append(new_obj)
         ret["data"] = new_return
         
