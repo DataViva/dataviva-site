@@ -65,7 +65,6 @@
   <script>
   
     function callback(obj) {
-      dataviva.popover.hide()
       split = window.location.pathname.split("/")
       var id = obj.id
       // if (obj.distance > 0) id += "."+obj.distance
@@ -81,7 +80,8 @@
           "id": "profile_select",
           "width": 600,
           "height": "80%",
-          "close": true
+          "close": true,
+          "color": dataviva.color
         })
         
         if (type == "bra" && id.indexOf(".") > 0) {
@@ -117,7 +117,7 @@
       dataviva.popover.show("#profile_select")
     }
       
-    var width = window.innerWidth-380,
+    var width = window.innerWidth-380 - dataviva.scrollbar(),
         height = window.innerHeight-149,
         builds = {},
         sliding = false,
@@ -136,16 +136,16 @@
           select(p)
         }
       })
-      
-    window.addEventListener("message",function(msg){
-      d3.select("#app"+msg.data.id.substr(6,1))
+    
+    function update_titles(msg) {
+      d3.select("#app"+msg.id.substr(6,1))
         .attr("class",function(){
           var c = this.className.split(" ")
-          c[4] = msg.data.app
+          c[4] = msg.app
           return c.join(" ")
         })
-        .text(msg.data.title)
-    })
+        .text(msg.title)
+    }
       
     function slide(id) {
       sliding = true

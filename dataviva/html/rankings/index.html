@@ -102,7 +102,7 @@
           return h < allowed ? h+49+"px" : allowed+"px"
         })
         .style("width",function(){
-          var allowed = window.innerWidth - 320
+          var allowed = window.innerWidth - 320 - dataviva.scrollbar()
           return w < allowed ? w+"px" : allowed+"px"
         })
       d3.select("#iframe")
