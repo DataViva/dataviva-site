@@ -349,7 +349,7 @@ def info(app_name="tree_map"):
     return render_template("apps/info.html", app_name=app_name)
 
 @mod.route('/coords/<id>/')
-def info(id="all"):
+def coords(id="all"):
     if id == "all":
         file_name = "bra_states.json.gz"
     else:
@@ -370,7 +370,7 @@ def info(id="all"):
     return ret
 
 @mod.route('/networks/<type>/')
-def info(type="hs"):
+def networks(type="hs"):
     file_name = "network_{0}.json.gz".format(type)
     cached_q = cached_query(file_name)
     if cached_q:
