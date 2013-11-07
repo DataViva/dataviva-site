@@ -359,6 +359,23 @@ def info(id="all"):
     
     return ret
 
+@mod.route('/networks/<type>/')
+def info(type="hs"):
+    file_name = "network_{0}.json.gz".format(type)
+    cached_q = cached_query(file_name)
+    if cached_q:
+        ret = make_response(cached_q)
+    else:
+        path = datavivadir+"/static/json/networks/{0}".format(file_name)
+        gzip_file = open(path).read()
+        cached_query(file_name, gzip_file)
+        ret = make_response(gzip_file)
+        
+    ret.headers['Content-Encoding'] = 'gzip'
+    ret.headers['Content-Length'] = str(len(ret.data))
+    
+    return ret
+
 @mod.route('/')
 def guide():
     return render_template("apps/index.html")

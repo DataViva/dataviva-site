@@ -126,7 +126,6 @@
   <script type="text/javascript">
   
     var max_year = {{ g.latest_year|safe }}
-    console.log(max_year)
     
     var loading = new dataviva.ui.loading("body")
     loading.color("#ffffff")
@@ -604,7 +603,7 @@
                     app.networks[app.build.output] = d
                     callback(error,d)
                   })
-              },"/static/json/networks/network_"+app.build.output+".json")
+              },"/apps/networks/"+app.build.output+"/")
             }
             
             if (app.build.app.type == "geo_map") {
