@@ -193,6 +193,9 @@
     app.solos = []
     app.filters = []
     app.first_load = false
+
+    app.embed_footer = "<a href='http://www.dataviva.info' target='_blank'>"
+    app.embed_footer += dataviva.format.text("Data Provided by") + " DataViva</a>"
     
     if (app.vars.builder == "false") {
       app.vars.controls = "false"
@@ -313,8 +316,24 @@
         "wage_avg_bra",
         "num_emp",
         "num_est",
+        "num_emp_est",
         
         "val_usd",
+      ],
+      "calculations":[
+        "elsewhere",
+        "required",
+        "importance",
+        "eci",
+        "pci",
+        "unique_isic",
+        "unique_cbo",
+        "rca",
+        "rca_wld",
+        "distance",
+        "distance_wld", 
+        "opp_gain", 
+        "opp_gain_wld"
       ],
       "growth":[
         "wage_growth_pct",
@@ -330,22 +349,6 @@
         "val_usd_growth_pct_5",
         "val_usd_growth_val",
         "val_usd_growth_val_5"
-      ],
-      "calculations":[
-        "num_emp_est",
-        "elsewhere",
-        "required",
-        "importance",
-        "eci",
-        "pci",
-        "unique_isic",
-        "unique_cbo",
-        "rca",
-        "rca_wld",
-        "distance",
-        "distance_wld", 
-        "opp_gain", 
-        "opp_gain_wld"
       ]
           
         }}
@@ -581,23 +584,21 @@
             if (app.build.app.type == "geo_map") {
               
               if (app.build.bra[0].id == "all") {
-                var json_id = "all",
-                    geo_url = "/static/json/coords/bra_states.json"
+                var json_id = "all"
               }
               else {
-                var json_id = app.build.bra[0].id.substr(0,2),
-                    geo_url = "/static/json/coords/"+json_id+"_munic.json"
+                var json_id = app.build.bra[0].id.substr(0,2)
               }
               
               if (!app.coords[json_id]) {
                 q.defer(function(u,callback){
                   d3.json(u)
-                  .header("X-Requested-With", "XMLHttpRequest")
-                  .get(function(error,d){
-                    app.coords[json_id] = d
-                    callback(error,d)
-                  })
-                },geo_url)
+                    .header("X-Requested-With", "XMLHttpRequest")
+                    .get(function(error,d){
+                      app.coords[json_id] = d
+                      callback(error,d)
+                    })
+                },"/apps/coords/"+json_id+"/")
               }
               
             }
@@ -871,12 +872,20 @@
         .highlight(null)
         .id_var(app.build.output+"_id")
         .error(false)
-        .footer(footer[app.build.dataset])
         .solo(app.solos)
         .filter(app.filters)
         .icon_style(style)
         .yaxis_val(null)
         .tooltip_info(app.tooltip)
+        
+      if (window.parent.location.origin.indexOf("dataviva.info") >= 0 ||
+          window.parent.location.origin.indexOf("localhost") >= 0 ||
+          window.parent.location.origin.indexOf("dataviva.mg.gov.br") >= 0) {
+        app.viz.footer(footer[app.build.dataset])
+      }
+      else {
+        app.viz.footer(app.embed_footer)
+      }
         
       /******************************/
       /* Network Specific Variables */
@@ -1194,11 +1203,7 @@
               if (!d.num_emp) d.num_emp = 0
               if (!d.num_est) d.num_est = 0
               
-              if (d.num_est > 0) d.num_emp_est = Math.ceil(d.num_emp/d.num_est)
-              else d.num_emp_est = 0
-          
-              if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp
-              else d.wage_avg = 0
+              d.num_emp_est = Math.ceil(d.num_emp_est)
               
               d.wage_avg_bra = job.wage/job.num_emp
           
@@ -1239,7 +1244,6 @@
               d.always_active = 1
               
               leaves.forEach(function(leaf){
-                if (leaf.wage && leaf.num_emp) leaf.wage_avg = leaf.wage/leaf.num_emp;
                 for (key in leaf) {
                   if (key != "bra_id" && key != out+"_id") {
                     if (typeof leaf[key] === "number" && key != "year") {
@@ -1271,9 +1275,6 @@
           d.always_active = 1
           
           obj.icon = dataviva.icon(obj[out+"_id"],out)
-          
-          if (obj.wage && obj.num_emp) obj.wage_avg = obj.wage/obj.num_emp;
-          else if (app.build.dataset == "rais") obj.wage_avg = 0
           
           obj.active = obj.rca >=1 ? true : false;
           
