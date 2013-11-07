@@ -375,7 +375,8 @@ dataviva.format.text = function(text,name,l) {
       "select": {"en": "Select", "pt": "Escolher"},
       "show": {"en": "Show", "pt": "Mostrar"},
       "loading_attrs": {"en": "Loading Attribute List", "pt": "Carregando Lista de Atributos"},
-      "loading_items": {"en": "Loading More Items", "pt": "Carregar Mais Itens"}
+      "loading_items": {"en": "Loading More Items", "pt": "Carregar Mais Itens"},
+      "wait": {"en": "Please Wait", "pt": "Espere por Favor"}
     
     }
     
@@ -540,9 +541,13 @@ dataviva.ui.background = function() {
       }
     }
     
-    window.onresize = resizebg
     resizebg()
     
+    return resizebg
+    
+  }
+  else {
+    return null
   }
 }
 

@@ -458,7 +458,8 @@ function Selector() {
           
           if (type != "file" && ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all"))) {
             header_select_div.style("display","inline-block")
-            header_select.leons.header_select.item.onclick = function(){
+            header_select.leons.header_select.node.onclick = function(){
+              selector_load.text(dataviva.format.text("wait")).show()
               callback(data[x.id],name)
             }
             header_select.color(x.color)
@@ -542,6 +543,7 @@ function Selector() {
               //     select_value(v,depth);
               //   }
               //   else {
+                      // selector_load.text(dataviva.format.text("wait")).show()
               //     callback(data[v.id],name);
               //   }
               // })
@@ -679,6 +681,7 @@ function Selector() {
                 .attr("value",dataviva.format.text("select"))
                   
               b.node().onclick = function(){
+                selector_load.text(dataviva.format.text("wait")).show()
                 callback(data[v.id],name)
               }
                 
