@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-05 14:19-0500\n"
+"POT-Creation-Date: 2013-11-07 11:50-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,15 +36,15 @@ msgstr ""
 msgid "This question has now been updated."
 msgstr ""
 
-#: dataviva/apps/views.py:141
+#: dataviva/apps/views.py:139
 msgid "You need to be logged in to star apps."
 msgstr ""
 
-#: dataviva/ask/views.py:91 dataviva/ask/views.py:119
+#: dataviva/ask/views.py:90 dataviva/ask/views.py:118
 msgid "You need to be logged in to vote."
 msgstr ""
 
-#: dataviva/ask/views.py:149
+#: dataviva/ask/views.py:148
 msgid "You need to be logged in to flag replies."
 msgstr ""
 
@@ -108,27 +108,27 @@ msgstr ""
 msgid "Learn how DataViva was created:"
 msgstr ""
 
-#: dataviva/html/home.html:23 dataviva/html/templates/site.html:19
+#: dataviva/html/home.html:23 dataviva/html/templates/site.html:14
 msgid "Learn More"
 msgstr ""
 
-#: dataviva/html/home.html:29 dataviva/html/rankings/index.html:15
+#: dataviva/html/home.html:29 dataviva/html/rankings/index.html:17
 #: dataviva/html/templates/about.html:46
 msgid "Brazilian Locations"
 msgstr ""
 
 #: dataviva/html/home.html:33 dataviva/html/general/select.html:29
-#: dataviva/html/rankings/index.html:23 dataviva/html/templates/about.html:54
+#: dataviva/html/rankings/index.html:25 dataviva/html/templates/about.html:54
 msgid "Occupations"
 msgstr ""
 
 #: dataviva/html/home.html:37 dataviva/html/general/select.html:24
-#: dataviva/html/rankings/index.html:19 dataviva/html/templates/about.html:50
+#: dataviva/html/rankings/index.html:21 dataviva/html/templates/about.html:50
 msgid "Industries"
 msgstr ""
 
 #: dataviva/html/home.html:45 dataviva/html/general/select.html:39
-#: dataviva/html/rankings/index.html:31 dataviva/html/templates/about.html:62
+#: dataviva/html/rankings/index.html:33 dataviva/html/templates/about.html:62
 msgid "Export Destinations"
 msgstr ""
 
@@ -140,8 +140,7 @@ msgstr ""
 #: dataviva/html/about/apps/scatter.html:15
 #: dataviva/html/about/apps/stacked.html:14
 #: dataviva/html/about/apps/tree_map.html:14
-#: dataviva/html/data/classifications.html:21
-#: dataviva/html/rankings/index.html:39
+#: dataviva/html/rankings/index.html:41
 msgid "Depth"
 msgstr ""
 
@@ -253,7 +252,7 @@ msgstr ""
 #: dataviva/html/about/apps/scatter.html:21
 #: dataviva/html/about/apps/tree_map.html:20
 #: dataviva/html/about/glossary/opp_gain.html:1
-#: dataviva/html/templates/about.html:126
+#: dataviva/html/templates/about.html:130
 msgid "Opportunity Gain"
 msgstr ""
 
@@ -350,7 +349,7 @@ msgstr ""
 #: dataviva/html/about/apps/network.html:4
 #: dataviva/html/about/apps/rings.html:4
 #: dataviva/html/about/glossary/proximity.html:1
-#: dataviva/html/templates/about.html:130
+#: dataviva/html/templates/about.html:134
 msgid "Proximity"
 msgstr ""
 
@@ -413,7 +412,7 @@ msgstr ""
 #: dataviva/html/about/apps/occugrid.html:19
 #: dataviva/html/about/glossary/proximity.html:21
 #: dataviva/html/about/glossary/required.html:1
-#: dataviva/html/templates/about.html:138
+#: dataviva/html/templates/about.html:142
 msgid "Recommended Employees"
 msgstr ""
 
@@ -424,7 +423,7 @@ msgstr ""
 
 #: dataviva/html/about/apps/occugrid.html:19
 #: dataviva/html/about/glossary/importance.html:1
-#: dataviva/html/templates/about.html:122
+#: dataviva/html/templates/about.html:126
 msgid "Importance"
 msgstr ""
 
@@ -470,10 +469,9 @@ msgstr ""
 #: dataviva/html/about/glossary/complexity.html:11
 #: dataviva/html/about/glossary/complexity.html:18
 #: dataviva/html/about/glossary/distance.html:11
+#: dataviva/html/about/glossary/diversity.html:23
 #: dataviva/html/about/glossary/opp_gain.html:5
-#: dataviva/html/about/glossary/rca.html:7
-#: dataviva/html/about/glossary/unique.html:4
-#: dataviva/html/about/glossary/unique.html:9 dataviva/html/apps/index.html:39
+#: dataviva/html/about/glossary/rca.html:7 dataviva/html/apps/index.html:39
 #: dataviva/html/templates/about.html:94
 msgid "Scatter"
 msgstr ""
@@ -800,13 +798,12 @@ msgstr ""
 #: dataviva/html/about/glossary/complexity.html:10
 #: dataviva/html/about/glossary/complexity.html:17
 #: dataviva/html/about/glossary/distance.html:10
+#: dataviva/html/about/glossary/diversity.html:23
 #: dataviva/html/about/glossary/importance.html:13
 #: dataviva/html/about/glossary/opp_gain.html:4
 #: dataviva/html/about/glossary/proximity.html:41
 #: dataviva/html/about/glossary/rca.html:6
 #: dataviva/html/about/glossary/required.html:8
-#: dataviva/html/about/glossary/unique.html:4
-#: dataviva/html/about/glossary/unique.html:9
 msgid "Used In"
 msgstr ""
 
@@ -825,6 +822,59 @@ msgstr ""
 
 #: dataviva/html/about/glossary/distance.html:4
 msgid "proximities"
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:1
+#: dataviva/html/templates/about.html:122
+msgid "Diversity"
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:3
+msgid "Location Diversity"
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:4
+msgid "The number of unique municipalities where a given variable is present."
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:6
+msgid "Industry Diversity"
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:7
+msgid "The number of unique 5-digit ISIC industries that are present for a given variable."
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:9
+msgid "Occupation Diversity"
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:10
+msgid "The number of unique 4-digit CBO occupations that are present for a given variable."
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:12
+msgid "Product Diversity"
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:13
+msgid "The number of unique HS4 products that are present for a given variable."
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:15
+msgid "Export Destination Diversity"
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:16
+msgid "The number of unique import countries that are present for a given variable."
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:18
+msgid "Effective Diversity"
+msgstr ""
+
+#: dataviva/html/about/glossary/diversity.html:19
+msgid "Effective diversity is the diversity of a given variable corrected for the share that each unit represents. For instance, if a location exports two products and each of these represents a 50&#37; share, then the effective diversity is 2. However, if these shares were 99&#37; and 1&#37;, then the effective diversity would be 1.058, which is close to 1, since this is a location that exports primarily one product."
 msgstr ""
 
 #: dataviva/html/about/glossary/importance.html:5
@@ -902,22 +952,6 @@ msgstr ""
 msgid "Locational Proximity"
 msgstr ""
 
-#: dataviva/html/about/glossary/unique.html:1
-msgid "Unique Industries"
-msgstr ""
-
-#: dataviva/html/about/glossary/unique.html:2
-msgid "The number of different industries that employ an occupation."
-msgstr ""
-
-#: dataviva/html/about/glossary/unique.html:6
-msgid "Unique Occupations"
-msgstr ""
-
-#: dataviva/html/about/glossary/unique.html:7
-msgid "The number of different occupations that are employed in an industry."
-msgstr ""
-
 #: dataviva/html/account/index.html:20
 msgid "Activity sorted by date"
 msgstr ""
@@ -935,7 +969,7 @@ msgid "Replies"
 msgstr ""
 
 #: dataviva/html/account/login.html:4 dataviva/html/general/access.html:3
-#: dataviva/html/general/upgrade.html:3 dataviva/html/templates/site.html:27
+#: dataviva/html/general/upgrade.html:3 dataviva/html/templates/site.html:22
 msgid "Login"
 msgstr ""
 
@@ -991,7 +1025,7 @@ msgid "Update"
 msgstr ""
 
 #: dataviva/html/admin/admin_replies.html:3
-#: dataviva/html/admin/admin_users.html:3 dataviva/html/templates/site.html:46
+#: dataviva/html/admin/admin_users.html:3 dataviva/html/templates/site.html:41
 msgid "Admin Panel"
 msgstr ""
 
@@ -1048,7 +1082,7 @@ msgid "Show/Hide Controls"
 msgstr ""
 
 #: dataviva/html/apps/index.html:4 dataviva/html/apps/info.html:4
-#: dataviva/html/templates/site.html:14
+#: dataviva/html/templates/site.html:9
 msgid "Apps"
 msgstr ""
 
@@ -1068,7 +1102,7 @@ msgstr ""
 msgid "Database Query"
 msgstr ""
 
-#: dataviva/html/data/index.html:17 dataviva/html/templates/site.html:17
+#: dataviva/html/data/index.html:17 dataviva/html/templates/site.html:12
 msgid "Data"
 msgstr ""
 
@@ -1336,12 +1370,12 @@ msgstr ""
 msgid "Export Destination"
 msgstr ""
 
-#: dataviva/html/rankings/index.html:27 dataviva/html/templates/about.html:58
-msgid "Products"
+#: dataviva/html/rankings/index.html:4 dataviva/html/templates/site.html:13
+msgid "Rankings"
 msgstr ""
 
-#: dataviva/html/templates/about.html:142
-msgid "Unique Values"
+#: dataviva/html/rankings/index.html:29 dataviva/html/templates/about.html:58
+msgid "Products"
 msgstr ""
 
 #: dataviva/html/templates/admin.html:24
@@ -1364,23 +1398,19 @@ msgstr ""
 msgid "Duplicate"
 msgstr ""
 
-#: dataviva/html/templates/site.html:15
+#: dataviva/html/templates/site.html:10
 msgid "Profiles"
 msgstr ""
 
-#: dataviva/html/templates/site.html:16
+#: dataviva/html/templates/site.html:11
 msgid "Guide"
 msgstr ""
 
-#: dataviva/html/templates/site.html:18
-msgid "Rankings"
-msgstr ""
-
-#: dataviva/html/templates/site.html:44
+#: dataviva/html/templates/site.html:39
 msgid "Profile"
 msgstr ""
 
-#: dataviva/html/templates/site.html:48
+#: dataviva/html/templates/site.html:43
 msgid "Logout"
 msgstr ""
 
