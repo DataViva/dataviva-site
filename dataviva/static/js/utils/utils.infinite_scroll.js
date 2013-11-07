@@ -68,7 +68,7 @@ function infinite_scroll(selection){
         if (order) {
           a += "&order="+order
         }
-        console.log(a)
+        
         // Here we set the header X-Requested-With to XMLHttpRequest so the 
         // server knows it's an AJAX call
         d3.json(a)
