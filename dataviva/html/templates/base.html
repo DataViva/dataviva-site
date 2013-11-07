@@ -113,9 +113,10 @@
       ga('create', 'UA-42576717-1', window.location.host);
       ga('send', 'pageview');
     
-      var bg_resize = dataviva.ui.background()
+      dataviva.ui.background()
       
       if (dataviva.resize) {
+        var bg_resize = window.onresize
         window.onresize = function() {
           if (dataviva.resize_snap) dataviva.resize()
           else {

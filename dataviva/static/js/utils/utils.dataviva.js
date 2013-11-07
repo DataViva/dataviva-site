@@ -543,11 +543,8 @@ dataviva.ui.background = function() {
     
     resizebg()
     
-    return resizebg
+    window.onresize = resizebg
     
-  }
-  else {
-    return null
   }
 }
 
