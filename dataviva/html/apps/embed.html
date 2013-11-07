@@ -1230,7 +1230,7 @@
               
               d.num_emp_est = Math.ceil(d.num_emp_est)
               
-              d.wage_avg_bra = job.wage/job.num_emp
+              d.wage_avg_bra = job.wage_avg
           
               var else_data = app.data[app.build.else_url].raw.filter(function(e){
                 return e.cbo_id == d.cbo_id && e.year == d.year
@@ -1245,7 +1245,7 @@
               d.icon = dataviva.icon(d[out+"_id"],out)
 
               get_keys(d)
-            
+              
               data_obj.push(d)
               
             }

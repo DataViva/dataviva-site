@@ -39,6 +39,14 @@ def before_request():
 def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             output=None):
             
+    if request.is_xhr:
+        cache_id = request.path
+        cached_q = cached_query(cache_id)
+        if cached_q:
+            ret = make_response(cached_q)
+            ret.headers['Content-Encoding'] = 'gzip'
+            ret.headers['Content-Length'] = str(len(ret.data))
+            return ret
     '''Since the "builds" are held in the database with placeholders for 
     attributes i.e. <cbo>, <hs>, <isic> we need to convert the IDs given
     in the URL to these placeholders. i.e. 
@@ -117,6 +125,8 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
         ret.data = gzip_data(ret.data)
         ret.headers['Content-Encoding'] = 'gzip'
         ret.headers['Content-Length'] = str(len(ret.data))
+        if cached_q is None:
+            cached_query(cache_id, ret.data)
     else:
         ret = make_response(render_template("apps/embed.html",
             all_builds = all_builds,
