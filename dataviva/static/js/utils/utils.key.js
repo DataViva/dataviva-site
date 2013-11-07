@@ -157,7 +157,7 @@ function Key() {
         })
       
       reset_button.append("i")
-        .attr("class","icon-remove")
+        .attr("class","fa fa-times")
         
       reset_check()
       

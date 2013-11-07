@@ -59,9 +59,8 @@ div#toggles {
 div#settings > .leon.button.square {
   font-size: 15px !important;
   height: 17px;
-  line-height: 16px;
   margin: 5px 0px 5px 3px;
-  padding: 3px !important;
+  padding: 4px 3px 3px 3px !important;
   width: 17px;
 }
 
