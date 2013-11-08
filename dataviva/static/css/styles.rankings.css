@@ -3,8 +3,11 @@ body.rankings #inner_container {
   vertical-align: top;
 }
 
-#rankings_nav > a {
-  margin: 0px 0px 6px 0px !important;
+#rankings_nav {
+  left: 20px;
+  position: absolute;
+  top: 78px;
+  width: 250px;
 }
 
 #rankings_nav > a.decision:after {
@@ -12,19 +15,24 @@ body.rankings #inner_container {
 }
 
 div#rankings_table {
+  height: 200px;
+  left: 290px;
   min-height: 200px;
+  min-width: 500px;
   overflow: hidden;
-  position: relative;
-  -webkit-transition: height 1s;
-          transition: height 1s;
+  position: absolute;
+  top: 88px;
+  -webkit-transition: height 1s, width 1s;
+          transition: height 1s, width 1s;
+  width: 500px;
 }
 
 div#controls {
   text-align: center;
-  padding: 12px;
+  padding: 12px 0px;
   position: absolute;
   top: 0px;
-  width: 535px;
+  width: 100%;
   z-index: 2;
 }
 
@@ -42,5 +50,4 @@ div#iframe {
 iframe {
   border-top: 1px solid #ccc;
   min-height: 151px;
-  width: 100%;
 }

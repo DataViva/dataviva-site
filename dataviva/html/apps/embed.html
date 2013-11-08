@@ -186,8 +186,6 @@
     app.url = "{{ current_build.url() }}"
     app.data = {}
     app.ecis = {}
-    app.unique_isics = {}
-    app.unique_cbos = {}
     app.networks = {}
     app.coords = {}
     app.attrs = {}
@@ -195,6 +193,9 @@
     app.solos = []
     app.filters = []
     app.first_load = false
+
+    app.embed_footer = "<a href='http://www.dataviva.info' target='_blank'>"
+    app.embed_footer += dataviva.format.text("Data Provided by") + " DataViva</a>"
     
     if (app.vars.builder == "false") {
       app.vars.controls = "false"
@@ -235,7 +236,12 @@
           builder.key(cats)
         }
         var old_url = app.url
+        var split_url = app.url.split("/")
+        if (app.build.output == "cbo") var url_index = 4
+        else var url_index = 3
         builder.filter(obj,app.build.output+"_0",true)
+        split_url[url_index] = app.build[app.build.output][0].id
+        app.url = split_url.join("/")
         if (app.url != old_url) {
           d3.json("/apps/embed/"+app.url)
             .header("X-Requested-With", "XMLHttpRequest")
@@ -315,8 +321,32 @@
         "wage_avg_bra",
         "num_emp",
         "num_est",
+        "num_emp_est",
         
         "val_usd",
+      ],
+      "calculations":[
+        "elsewhere",
+        "required",
+        "importance",
+        "eci",
+        "pci",
+        "bra_diversity",
+        "bra_diversity_eff",
+        "isic_diversity",
+        "isic_diversity_eff",
+        "cbo_diversity",
+        "cbo_diversity_eff",
+        "hs_diversity",
+        "hs_diversity_eff",
+        "wld_diversity",
+        "wld_diversity_eff",
+        "rca",
+        "rca_wld",
+        "distance",
+        "distance_wld", 
+        "opp_gain", 
+        "opp_gain_wld"
       ],
       "growth":[
         "wage_growth_pct",
@@ -332,22 +362,6 @@
         "val_usd_growth_pct_5",
         "val_usd_growth_val",
         "val_usd_growth_val_5"
-      ],
-      "calculations":[
-        "num_emp_est",
-        "elsewhere",
-        "required",
-        "importance",
-        "eci",
-        "pci",
-        "unique_isic",
-        "unique_cbo",
-        "rca",
-        "rca_wld",
-        "distance",
-        "distance_wld", 
-        "opp_gain", 
-        "opp_gain_wld"
       ]
           
         }}
@@ -364,14 +378,23 @@
     var averages = {
           "eci": "mean",
           "pci": "mean",
-          "unique_isic": "mean",
-          "unique_cbo": "mean",
+          "bra_diversity": "mean",
+          "bra_diversity_eff": "mean",
+          "isic_diversity": "mean",
+          "isic_diversity_eff": "mean",
+          "cbo_diversity": "mean",
+          "cbo_diversity_eff": "mean",
+          "hs_diversity": "mean",
+          "hs_diversity_eff": "mean",
+          "wld_diversity": "mean",
+          "wld_diversity_eff": "mean",
           "rca": "mean",
           "rca_wld": "mean",
           "distance": "mean",
           "distance_wld": "mean",
           "opp_gain": "mean",
           "opp_gain_wld": "mean",
+          "num_emp_est": "mean",
           "wage_avg": "mean",
           "wage_avg_bra": "mean",
           "wage_growth_pct": "mean",
@@ -402,8 +425,16 @@
       "rca": dataviva.format.text("rca_desc"),
       "rca_wld": dataviva.format.text("rca_desc"),
       "required": dataviva.format.text("required_desc"),
-      "unique_isic": dataviva.format.text("unique_isic_desc"),
-      "unique_cbo": dataviva.format.text("unique_cbo_desc"),
+      "bra_diversity": dataviva.format.text("bra_diversity_desc"),
+      "bra_diversity_eff": dataviva.format.text("bra_diversity_eff_desc"),
+      "isic_diversity": dataviva.format.text("isic_diversity_desc"),
+      "isic_diversity_eff": dataviva.format.text("isic_diversity_eff_desc"),
+      "cbo_diversity": dataviva.format.text("cbo_diversity_desc"),
+      "cbo_diversity_eff": dataviva.format.text("cbo_diversity_eff_desc"),
+      "hs_diversity": dataviva.format.text("hs_diversity_desc"),
+      "hs_diversity_eff": dataviva.format.text("hs_diversity_eff_desc"),
+      "wld_diversity": dataviva.format.text("wld_diversity_desc"),
+      "wld_diversity_eff": dataviva.format.text("wld_diversity_eff_desc")
     }
     
     // Define global D3plus app parameters
@@ -522,11 +553,9 @@
                     app.data[app.build.data_url] = {}
                     app.data[app.build.data_url].raw = d.data
                     if (d.eci) app.ecis[app.build.data_url] = d.eci
-                    if (d.unique_isic) app.unique_isics[app.build.data_url] = d.unique_isic
-                    if (d.unique_cbo) app.unique_cbos[app.build.data_url] = d.unique_cbo
                     callback(error,d)
                   })
-              },dataviva.static_url+app.build.data_url)
+              },"/"+app.build.data_url)
             }
             
             if (!app.attrs[app.build.output]) {
@@ -536,7 +565,6 @@
                   .get(function(error,d){
                     var out = app.build.output
                     app.attrs[out] = {}
-                    
                     d.data.forEach(function(a){
                       a[out+"_id"] = a.id
                       a[out+"_display"] = dataviva.displayID(a.id,out)
@@ -556,7 +584,7 @@
                     
                     callback(error,d)
                   })
-              },dataviva.static_url+"attrs/"+app.build.output+"/"+"?lang="+dataviva.language)
+              },"/attrs/"+app.build.output+"/"+"?lang="+dataviva.language)
             }
             
             if (["network","rings"].indexOf(app.build.app.type) >= 0 
@@ -580,29 +608,27 @@
                     app.networks[app.build.output] = d
                     callback(error,d)
                   })
-              },"/static/json/networks/network_"+app.build.output+".json")
+              },"/apps/networks/"+app.build.output+"/")
             }
             
             if (app.build.app.type == "geo_map") {
               
               if (app.build.bra[0].id == "all") {
-                var json_id = "all",
-                    geo_url = "/static/json/coords/bra_states.json"
+                var json_id = "all"
               }
               else {
-                var json_id = app.build.bra[0].id.substr(0,2),
-                    geo_url = "/static/json/coords/"+json_id+"_munic.json"
+                var json_id = app.build.bra[0].id.substr(0,2)
               }
               
               if (!app.coords[json_id]) {
                 q.defer(function(u,callback){
                   d3.json(u)
-                  .header("X-Requested-With", "XMLHttpRequest")
-                  .get(function(error,d){
-                    app.coords[json_id] = d
-                    callback(error,d)
-                  })
-                },geo_url)
+                    .header("X-Requested-With", "XMLHttpRequest")
+                    .get(function(error,d){
+                      app.coords[json_id] = d
+                      callback(error,d)
+                    })
+                },"/apps/coords/"+json_id+"/")
               }
               
             }
@@ -622,7 +648,7 @@
                     app.data[app.build.imp_url].raw = d.data
                     callback(error,d)
                   })
-                },dataviva.static_url+app.build.imp_url)
+                },"/"+app.build.imp_url)
               }
               
               var url = app.build.data_url.split("/")
@@ -638,7 +664,7 @@
                     app.data[app.build.else_url].raw = d.data
                     callback(error,d)
                   })
-                },dataviva.static_url+app.build.else_url)
+                },"/"+app.build.else_url)
               }
               
             }
@@ -806,7 +832,7 @@
             leon({
               "type": leon_type,
               "data": leon_data,
-              "id": title,
+              "id": ui.type,
               "default": app.vars[ui.type],
               "label": dataviva.format.text(title),
               "parent": ui_div.node(),
@@ -876,13 +902,20 @@
         .highlight(null)
         .id_var(app.build.output+"_id")
         .error(false)
-        .footer(footer[app.build.dataset])
         .solo(app.solos)
         .filter(app.filters)
-        .sub_title(app.sub_title())
         .icon_style(style)
         .yaxis_val(null)
         .tooltip_info(app.tooltip)
+        
+      if (window.parent.location.href.indexOf("dataviva.info") >= 0 ||
+          window.parent.location.href.indexOf("localhost") >= 0 ||
+          window.parent.location.href.indexOf("dataviva.mg.gov.br") >= 0) {
+        app.viz.footer(footer[app.build.dataset])
+      }
+      else {
+        app.viz.footer(app.embed_footer)
+      }
         
       /******************************/
       /* Network Specific Variables */
@@ -984,13 +1017,7 @@
         if (app.vars.yaxis_var.indexOf("pci") >= 0) yv = app.vars.yaxis_var
         
         var yval = null
-        if (app.build.output == "isic" && app.unique_cbos[app.build.data_url] && yv == "unique_cbo") {
-          var yval = {"unique_cbo": app.unique_cbos[app.build.data_url][app.vars.year]}
-        }
-        else if (app.build.output == "cbo" && app.unique_isics[app.build.data_url] && yv == "unique_isic") {
-          var yval = {"unique_isic": app.unique_isics[app.build.data_url][app.vars.year]}
-        }
-        else if (app.build.output == "hs" && app.ecis[app.build.data_url] && yv == "pci") {
+        if (app.build.output == "hs" && app.ecis[app.build.data_url] && yv == "pci") {
           var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
         }
         app.viz
@@ -1076,7 +1103,7 @@
           var sub = text
         }
         else {
-          var sub = app.sub_title()
+          var sub = null
         }
         
         d3.select("#app").call(app.viz[type](app[type+"s"]).sub_title(sub))
@@ -1093,7 +1120,7 @@
         }
         
         if (!app.solos.length && !app.filters.length) {
-          app.viz.sub_title(app.sub_title())
+          app.viz.sub_title(null)
         }
         
         if (type == "depth" || type == "year") {
@@ -1103,13 +1130,7 @@
         
         if (type == "year" && app.build.app.type == "scatter") {
           var yval = null
-          if (app.build.output == "cbo" && app.unique_cbos[app.build.data_url] && app.vars.yaxis_var == "unique_cbo") {
-            var yval = {"unique_cbo": app.unique_cbos[app.build.data_url][app.vars.year]}
-          }
-          else if (app.build.output == "isic" && app.unique_isics[app.build.data_url] && app.vars.yaxis_var == "unique_isic") {
-            var yval = {"unique_isic": app.unique_isics[app.build.data_url][app.vars.year]}
-          }
-          else if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
+          if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
             var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
           }
           app.viz.yaxis_val(yval)
@@ -1154,13 +1175,7 @@
           }
           
           var yval = null
-          if (app.build.output == "cbo" && app.unique_cbos[app.build.data_url] && app.vars.yaxis_var == "unique_cbo") {
-            var yval = {"unique_cbo": app.unique_cbos[app.build.data_url][app.vars.year]}
-          }
-          else if (app.build.output == "isic" && app.unique_isics[app.build.data_url] && app.vars.yaxis_var == "unique_isic") {
-            var yval = {"unique_isic": app.unique_isics[app.build.data_url][app.vars.year]}
-          }
-          else if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
+          if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
             var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
           }
           
@@ -1218,13 +1233,9 @@
               if (!d.num_emp) d.num_emp = 0
               if (!d.num_est) d.num_est = 0
               
-              if (d.num_est > 0) d.num_emp_est = Math.ceil(d.num_emp/d.num_est)
-              else d.num_emp_est = 0
-          
-              if (d.wage && d.num_emp) d.wage_avg = d.wage/d.num_emp
-              else d.wage_avg = 0
+              d.num_emp_est = Math.ceil(d.num_emp_est)
               
-              d.wage_avg_bra = job.wage/job.num_emp
+              d.wage_avg_bra = job.wage_avg
           
               var else_data = app.data[app.build.else_url].raw.filter(function(e){
                 return e.cbo_id == d.cbo_id && e.year == d.year
@@ -1239,7 +1250,7 @@
               d.icon = dataviva.icon(d[out+"_id"],out)
 
               get_keys(d)
-            
+              
               data_obj.push(d)
               
             }
@@ -1263,7 +1274,6 @@
               d.always_active = 1
               
               leaves.forEach(function(leaf){
-                if (leaf.wage && leaf.num_emp) leaf.wage_avg = leaf.wage/leaf.num_emp;
                 for (key in leaf) {
                   if (key != "bra_id" && key != out+"_id") {
                     if (typeof leaf[key] === "number" && key != "year") {
@@ -1295,9 +1305,6 @@
           d.always_active = 1
           
           obj.icon = dataviva.icon(obj[out+"_id"],out)
-          
-          if (obj.wage && obj.num_emp) obj.wage_avg = obj.wage/obj.num_emp;
-          else if (app.build.dataset == "rais") obj.wage_avg = 0
           
           obj.active = obj.rca >=1 ? true : false;
           
@@ -1474,28 +1481,7 @@
       }
       if (window.frameElement) {
         var message = {"id": window.frameElement.id, "title": app.build.title, "app": app.build.app.type}
-        parent.postMessage(message,"*")
-      }
-    }
-    
-    app.sub_title = function() {
-      if (app.unique_isics[app.build.data_url] && app.unique_isics[app.build.data_url][app.vars.year] && app.build.output == "cbo") {
-        var t = dataviva.format.text("unique_isic")
-        var n = dataviva.format.number(app.unique_isics[app.build.data_url][app.vars.year],"unique_isic")
-        return t + ": " + n
-      }
-      else if (app.unique_cbos[app.build.data_url] && app.unique_cbos[app.build.data_url][app.vars.year] && app.build.output == "isic") {
-        var t = dataviva.format.text("unique_cbo")
-        var n = dataviva.format.number(app.unique_cbos[app.build.data_url][app.vars.year],"unique_cbo")
-        return t + ": " + n
-      }
-      else if (app.ecis[app.build.data_url] && app.ecis[app.build.data_url][app.vars.year]) {
-        var t = dataviva.format.text("eci")
-        var n = dataviva.format.number(app.ecis[app.build.data_url][app.vars.year],"eci")
-        return t + ": " + n
-      }
-      else {
-        return null
+        if (window.parent.update_titles) window.parent.update_titles(message)
       }
     }
     

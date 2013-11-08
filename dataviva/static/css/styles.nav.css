@@ -1,19 +1,17 @@
 #header_container {
   background-color: white;
   height: 58px;
+  margin: 0px;
+  min-width: 980px;
   position: fixed;
   top: 0px;
-  -webkit-transition: height .2s, background-color .2s;
-          transition: height .2s, background-color .2s;
   width: 100%;
   z-index: 750;
 }
-
 #header {
   height: 40px;
-  margin: 0 auto;
-  margin-top: 0px;
-  padding: 8px 90px;
+  margin: 0px auto;
+  padding: 8px 0px;
   width: 800px;
 }
 
@@ -159,20 +157,6 @@ div#language .leon.radio {
   margin: 1px !important;
 }
 
-#dynamic_header {
-  left: 50%;
-  margin-left: -490px;
-  padding-bottom: 0px;
-  position: fixed;
-  top: 75px;
-  width: 980px;
-  z-index: 751;
-}
-
-#dynamic_header > h1 {
-  margin-left: 10px;
-}
-
 /***********************/
 /* Breadcrumb Specific */
 /***********************/
@@ -209,7 +193,8 @@ div#language .leon.radio {
   display: block;
   font-size: 10px;
   left: 0px;
-  padding: 5px;
+  min-width: 980px;
+  padding: 5px 0px;
   position: fixed;
   text-align: center;
   -webkit-transition: opacity 0.1s;
@@ -287,6 +272,19 @@ a.opendata:hover {
   display: inline-block;
   margin-left: 6px;
 }
+
+@media only screen and (max-device-width: 980px) {
+  #header_container, #nav_footer {
+    position: static;
+  }
+  #outer_container {
+    position: static;
+  }
+  #container {
+    padding: 20px 0px !important;
+  }
+}
+
 
 /*******************/
 /* Message Styling */

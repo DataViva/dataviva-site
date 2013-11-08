@@ -195,10 +195,32 @@ dataviva.format.text = function(text,name,l) {
       "eci_desc": {"en": "Economic Complexity measures how diversified and complex a location’s export production is.", "pt": "Complexidade Econ\u00f4mica mede qu\u00e3o diversificada e complexa \u00e9 a produ\u00e7\u00e3o de exporta\u00e7\u00e3o de uma localidade."},
       "pci": {"en": "Product Complexity", "pt": "Complexidade do Produto"},
       "pci_desc": {"en": "Product Complexity is a measure of how complex a product is, based on how many countries export the product and how diversified those exporters are.", "pt": "A Complexidade do Produto \u00e9 uma medida de qu\u00e3o complexo \u00e9 um produto, baseada no n\u00fdmero de pa\u00edses que exportam o produto e qu\u00e3o diversificados s\u00e3o estes exportadores."},
-      "unique_isic": {"en": "Unique Industries", "pt": "Setores Exclusivos"},
-      "unique_isic_desc": {"en": "The number of different industries that employ an occupation.", "pt": "O n\u00fdmero de diferentes setores que empregam uma ocupa\u00e7\u00e3o."},
-      "unique_cbo": {"en": "Unique Occupations", "pt": "Ocupa\u00e7\u00f5es Exclusivas"},
-      "unique_cbo_desc": {"en": "The number of different occupations that are employed in an industry.", "pt": "O n\u00fdmero de diferentes ocupa\u00e7\u00f5es que s\u00e3o empregadas em um setor."},
+      
+      "bra_diversity": {"en": "Location Diversity", "pt": "Diversidade de Localidades"},
+      "bra_diversity_desc": {"en": "The number of unique municipalities where a given variable is present.", "pt": "The number of unique municipalities where a given variable is present."},
+      "bra_diversity_eff": {"en": "Effective Location Diversity", "pt": "Diversidade Efetiva de Localidades"},
+      "bra_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
+      
+      "isic_diversity": {"en": "Industry Diversity", "pt": "Diversidade de Atividades"},
+      "isic_diversity_desc": {"en": "The number of unique 5-digit ISIC industries that are present for a given variable.", "pt": "The number of unique 5-digit ISIC industries that are present for a given variable."},
+      "isic_diversity_eff": {"en": "Effective Industry Diversity", "pt": "Diversidade Efetiva de Atividades"},
+      "isic_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
+      
+      "cbo_diversity": {"en": "Occupation Diversity", "pt": "Diversidade de Ocupa\u00e7\u00f5es"},
+      "cbo_diversity_desc": {"en": "The number of unique 4-digit CBO occupations that are present for a given variable.", "pt": "The number of unique 4-digit CBO occupations that are present for a given variable."},
+      "cbo_diversity_eff": {"en": "Effective Occupation Diversity", "pt": "Diversidade Efetiva de Ocupa\u00e7\u00f5es"},
+      "cbo_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
+      
+      "hs_diversity": {"en": "Product Diversity", "pt": "Diversidade de Produtos"},
+      "hs_diversity_desc": {"en": "The number of unique HS4 products that are present for a given variable.", "pt": "The number of unique HS4 products that are present for a given variable."},
+      "hs_diversity_eff": {"en": "Effective Product Diversity", "pt": "Diversidade Efetiva de Produtos"},
+      "hs_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
+      
+      "wld_diversity": {"en": "Export Destination Diversity", "pt": "Diversidade de Destino das Exporta\u00e7\u00f5es"},
+      "wld_diversity_desc": {"en": "The number of unique import countries that are present for a given variable.", "pt": "The number of unique import countries that are present for a given variable."},
+      "wld_diversity_eff": {"en": "Effective Export Destination Diversity", "pt": "Diversidade Efetiva de Destino das Exporta\u00e7\u00f5es"},
+      "wld_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "The diversity of a given variable corrected for the share that each unit represents."},
+      
       "distance": {"en": "Distance", "pt": "Dist\u00e2ncia"},
       "distance_desc": {"en": "Distance is a measure used to indicate how “far away” any given location is from a particular industry, occupation or product.", "pt": "Dist\u00e2ncia \u00e9 uma medida utilizada para indicar o qu\u00e3o longe uma localidade espec\u00edfica est\u00e1 de um determinado setor, ocupa\u00e7\u00e3o ou produto."},
       "distance_wld": {"en": "International Distance", "pt": "Dist\u00e2ncia Internacional"},
@@ -353,7 +375,8 @@ dataviva.format.text = function(text,name,l) {
       "select": {"en": "Select", "pt": "Escolher"},
       "show": {"en": "Show", "pt": "Mostrar"},
       "loading_attrs": {"en": "Loading Attribute List", "pt": "Carregando Lista de Atributos"},
-      "loading_items": {"en": "Loading More Items", "pt": "Carregar Mais Itens"}
+      "loading_items": {"en": "Loading More Items", "pt": "Carregar Mais Itens"},
+      "wait": {"en": "Please Wait", "pt": "Por favor Aguarde"}
     
     }
     
@@ -406,7 +429,9 @@ dataviva.format.number = function(value,name,l) {
     r.forEach(function(n,i){
       if (n != "0" && n != "." && !l) l = i
     })
+    if (l > 5) l = 5
     var return_value = d3.round(value,l)
+    
   }
   else if (value.toString().split(".")[0].length > 4) {
     
@@ -516,8 +541,9 @@ dataviva.ui.background = function() {
       }
     }
     
-    window.onresize = resizebg
     resizebg()
+    
+    window.onresize = resizebg
     
   }
 }
@@ -606,6 +632,22 @@ dataviva.ui.loading = function(parent) {
     self.div.style("background-color",color)
     return self
   }
+  
+  if (!Modernizr.cssanimations) {
+    var elem = this.icon.node(), degree = 0, timer;
+    function rotate() { 
+      if (degree == 360) degree = 0
+      elem.style.msTransform = 'rotate(' + degree + 'deg)'
+      elem.style.transform = 'rotate(' + degree + 'deg)'
+      // timeout increase degrees:
+      timer = setTimeout(function() {
+        degree = degree + 4;
+        rotate(); // loop it
+      },20);
+    }
+
+    rotate();
+  }
 
   return this
   
@@ -668,7 +710,7 @@ dataviva.icon = function(id,type,color) {
 
 dataviva.depths = function(type,flatten) {
   if (type == "isic") var array = [1,3,5];
-  else if (type == "cbo") var array = [1,2,3,4];
+  else if (type == "cbo") var array = [1,2,4];
   else if (type == "hs") var array = [2,4,6];
   else if (type == "bra") var array = [2,4,8];
   else if (type == "wld") var array = [2,5];
@@ -872,7 +914,7 @@ dataviva.url = function(url,args,title) {
   else if (!replace) {
     if (app_builder) {
       full_url = full_url.replace("embed","builder")
-      window.parent.location = builder_url
+      window.parent.location = full_url
     }
     else {
       window.location = full_url

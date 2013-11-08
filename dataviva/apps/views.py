@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*- 
-import urllib2
-import json
+import urllib2, json
 from datetime import datetime
 from collections import defaultdict
 from sqlalchemy import func
 from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, url_for, redirect
 from flask.ext.babel import gettext
 
-from dataviva import db
+from dataviva import db, datavivadir
 from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Isic, Hs, Cbo, Wld
 from dataviva.apps.models import Build, UI, App
-from dataviva.utils import crossdomain
 
 from dataviva.rais.views import rais_ybi
+from dataviva.utils import gzip_data, cached_query
 
 import json, urllib2, urllib
 # from config import SITE_MIRROR
@@ -37,10 +36,17 @@ def before_request():
             "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
 @mod.route('/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/'
             '<output>/')
-@crossdomain()
 def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             output=None):
             
+    if request.is_xhr:
+        cache_id = request.path
+        cached_q = cached_query(cache_id)
+        if cached_q:
+            ret = make_response(cached_q)
+            ret.headers['Content-Encoding'] = 'gzip'
+            ret.headers['Content-Length'] = str(len(ret.data))
+            return ret
     '''Since the "builds" are held in the database with placeholders for 
     attributes i.e. <cbo>, <hs>, <isic> we need to convert the IDs given
     in the URL to these placeholders. i.e. 
@@ -116,6 +122,11 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             "recommendations": json.loads(recs.data),
             "starred": starred
         })
+        ret.data = gzip_data(ret.data)
+        ret.headers['Content-Encoding'] = 'gzip'
+        ret.headers['Content-Length'] = str(len(ret.data))
+        if cached_q is None:
+            cached_query(cache_id, ret.data)
     else:
         ret = make_response(render_template("apps/embed.html",
             all_builds = all_builds,
@@ -336,6 +347,44 @@ def download():
 @mod.route('/info/<app_name>/')
 def info(app_name="tree_map"):
     return render_template("apps/info.html", app_name=app_name)
+
+@mod.route('/coords/<id>/')
+def coords(id="all"):
+    if id == "all":
+        file_name = "bra_states.json.gz"
+    else:
+        file_name = "{0}_munic.json.gz".format(id)
+        
+    cached_q = cached_query(file_name)
+    if cached_q:
+        ret = make_response(cached_q)
+    else:
+        path = datavivadir+"/static/json/coords/{0}".format(file_name)
+        gzip_file = open(path).read()
+        cached_query(file_name, gzip_file)
+        ret = make_response(gzip_file)
+        
+    ret.headers['Content-Encoding'] = 'gzip'
+    ret.headers['Content-Length'] = str(len(ret.data))
+    
+    return ret
+
+@mod.route('/networks/<type>/')
+def networks(type="hs"):
+    file_name = "network_{0}.json.gz".format(type)
+    cached_q = cached_query(file_name)
+    if cached_q:
+        ret = make_response(cached_q)
+    else:
+        path = datavivadir+"/static/json/networks/{0}".format(file_name)
+        gzip_file = open(path).read()
+        cached_query(file_name, gzip_file)
+        ret = make_response(gzip_file)
+        
+    ret.headers['Content-Encoding'] = 'gzip'
+    ret.headers['Content-Length'] = str(len(ret.data))
+    
+    return ret
 
 @mod.route('/')
 def guide():

@@ -118,6 +118,10 @@
         {% trans %}Distance{% endtrans %}
       </a>
     
+      <a class="{% if term == 'diversity' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.glossary', term='diversity')}}">
+        {% trans %}Diversity{% endtrans %}
+      </a>
+    
       <a class="{% if term == 'importance' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.glossary', term='importance')}}">
         {% trans %}Importance{% endtrans %}
       </a>
@@ -136,10 +140,6 @@
     
       <a class="{% if term == 'required' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.glossary', term='required')}}">
         {% trans %}Recommended Employees{% endtrans %}
-      </a>
-    
-      <a class="{% if term == 'unique' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.glossary', term='unique')}}">
-        {% trans %}Unique Values{% endtrans %}
       </a>
     
     {% endif %}

@@ -56,23 +56,22 @@ function infinite_scroll(selection){
         refresh = false;
   
         // conver url to Location object
-        var a = document.createElement('a');
-        a.href = url;
-        
+        a = url
         // decide whether to use '?' or '&'
-        if(a.search.length > 0){
-          a.href = a.href + "&offset="+offset
+        if(a.indexOf("?") >= 0){
+          a += "&offset="+offset
         }
         else {
-          a.href = a.href + "?offset="+offset
+          a += "?offset="+offset
         }
+        
         if (order) {
-          a.href += "&order="+order
+          a += "&order="+order
         }
-  
+        
         // Here we set the header X-Requested-With to XMLHttpRequest so the 
         // server knows it's an AJAX call
-        d3.json(a.href)
+        d3.json(a)
           .header("X-Requested-With", "XMLHttpRequest")
           .get(display);
       }

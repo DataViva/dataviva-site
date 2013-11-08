@@ -14,405 +14,412 @@
   <div id="sticky"></div>
   <div id="data"></div>
 </div>
-
-
-<script src="/static/js/utils/utils.selector.js"></script>
-<script src="/static/js/utils/utils.infinite_scroll.js"></script>
-<script type="text/javascript">
   
-  var table_height = 0, table_width = 0, sticky_width = 0
-  
-  var columns = {}
+{% endblock %}
 
-  var DATA = [];
-  var CURRENT_DATASET = 'rais';
-  var STICKY_COLUMNS = [ 
+{% block js %}
+
+  <script src="/static/js/utils/utils.infinite_scroll.js"></script>
+  <script type="text/javascript">
   
-                  "rank",
-                  "year", 
+    var table_height = 0, table_width = 0, sticky_width = 0, x_scroll = 0
+  
+    var columns = {}
+
+    var DATA = [];
+    var CURRENT_DATASET = 'rais';
+    var STICKY_COLUMNS = [ 
+  
+                    "rank",
+                    "year", 
                   
-                  "id",
+                    "id",
                   
-                  "bra_id", 
-                  "id_ibge", 
+                    "bra_id", 
+                    "id_ibge", 
                   
-                  "isic_id", 
-                  "cbo_id", 
+                    "isic_id", 
+                    "cbo_id", 
                   
-                  "hs_id", 
-                  "wld_id"
-              ]
-  var DATA_COLUMNS = [ 
-                  "name",
-                  "population", 
-                  
-                  "wage", 
-                  "wage_avg", 
-                  "num_emp", 
-                  "num_est", 
-                  "num_emp_est", 
-                  
-                  "val_usd", 
-                  
-                  "rca", 
-                  "rca_wld", 
-                  
-                  "distance", 
-                  "distance_wld", 
-                  
-                  "opp_gain", 
-                  "opp_gain_wld", 
-                  
-                  "eci",
-                  "pci",
-                  "bra_diversity",
-                  "bra_diversity_eff",
-                  "isic_diversity",
-                  "isic_diversity_eff",
-                  "cbo_diversity",
-                  "cbo_diversity_eff",
-                  "hs_diversity",
-                  "hs_diversity_eff",
-                  "wld_diversity",
-                  "wld_diversity_eff",
-                  
-                  "importance", 
-                  "required", 
-                  
-                  "val_usd_growth_pct",
-                  "val_usd_growth_pct_5",
-                  "val_usd_growth_val",
-                  "val_usd_growth_val_5",
-                  
-                  "wage_growth_pct",
-                  "wage_growth_pct_5",
-                  "wage_growth_val",
-                  "wage_growth_val_5",
-                  "num_emp_growth_pct",
-                  "num_emp_growth_pct_5",
-                  "num_emp_growth_val",
-                  "num_emp_growth_val_5",
-                  
-                  "color"
-                
+                    "hs_id", 
+                    "wld_id"
                 ]
+    var DATA_COLUMNS = [ 
+                    "name",
+                    "population", 
+                  
+                    "wage", 
+                    "wage_avg", 
+                    "num_emp", 
+                    "num_est", 
+                    "num_emp_est", 
+                  
+                    "val_usd", 
+                  
+                    "rca", 
+                    "rca_wld", 
+                  
+                    "distance", 
+                    "distance_wld", 
+                  
+                    "opp_gain", 
+                    "opp_gain_wld", 
+                  
+                    "eci",
+                    "pci",
+                    "bra_diversity",
+                    "bra_diversity_eff",
+                    "isic_diversity",
+                    "isic_diversity_eff",
+                    "cbo_diversity",
+                    "cbo_diversity_eff",
+                    "hs_diversity",
+                    "hs_diversity_eff",
+                    "wld_diversity",
+                    "wld_diversity_eff",
+                  
+                    "importance", 
+                    "required", 
+                  
+                    "val_usd_growth_pct",
+                    "val_usd_growth_pct_5",
+                    "val_usd_growth_val",
+                    "val_usd_growth_val_5",
+                  
+                    "wage_growth_pct",
+                    "wage_growth_pct_5",
+                    "wage_growth_val",
+                    "wage_growth_val_5",
+                    "num_emp_growth_pct",
+                    "num_emp_growth_pct_5",
+                    "num_emp_growth_val",
+                    "num_emp_growth_val_5",
+                  
+                    "color"
                 
-  var current_data_cols = [], current_order = []
-  if (window.location.search.indexOf("cols=") > -1) {
-    current_data_cols = window.location.search.split("cols=")[1].split("&")[0].split(".")
-  }
-  if (window.location.search.indexOf("order=") > -1) {
-    current_order = window.location.search.split("order=")[1].split("&")[0].split(".")
-  }
-  var is = infinite_scroll().format_items(item_formatter);
+                  ]
+                
+    var current_data_cols = [], current_order = []
+    if (window.location.search.indexOf("cols=") > -1) {
+      current_data_cols = window.location.search.split("cols=")[1].split("&")[0].split(".")
+    }
+    if (window.location.search.indexOf("order=") > -1) {
+      current_order = window.location.search.split("order=")[1].split("&")[0].split(".")
+    }
+    var is = infinite_scroll().format_items(item_formatter);
   
-  function column_sort(d) {
-    if (d == current_order[0]) var direction = current_order[1]
-    else var direction = ""
-    if (direction == "desc") { direction = "asc"; }
-    else if (direction == "asc") { direction = ""; }
-    else { direction = "desc"; }
-    
-    if (direction == "") current_order = []
-    else current_order = [d,direction]
+    function column_sort(d) {
+      if (d != "rank") {
 
-    update_url()
+        if (d == current_order[0]) var direction = current_order[1]
+        else var direction = ""
+        if (direction == "desc") { direction = "asc"; }
+        else if (direction == "asc") { direction = ""; }
+        else { direction = "desc"; }
     
-    DATA = [];
-    d3.selectAll("tbody tr").remove()
+        if (direction == "") current_order = []
+        else current_order = [d,direction]
+
+        update_url()
+    
+        DATA = [];
+        d3.selectAll("tbody tr").remove()
+        d3.select("#dt_query")
+          .call(is.order(current_order.join(".")).offset(0))
+      }
+
+      d3.event.preventDefault()
+    }
+  
+    function item_formatter(container_el, dataset, offset, manual){
+    
+      if(dataset != DATA){
+        DATA = DATA.concat(dataset)
+      }
+  
+      /*
+        FILTER COLUMNS
+      */
+    
+      // Gets all possible columns from new 'dataset'
+      var all_cols = []
+      dataset.forEach(function(d){
+        all_cols = all_cols.concat(d3.keys(d))
+      })
+      all_cols = all_cols.filter(function(itm, i){
+          return all_cols.indexOf(itm)== i; 
+      });
+    
+      // Get data columns present in new 'dataset'
+      var all_data_cols = DATA_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1 || i == current_order[0]});
+      // Filter data columns by user-specified columns
+      var active_data_cols = all_data_cols;
+      if(current_data_cols.length){
+        active_data_cols = all_data_cols.filter(function(i) {return current_data_cols.indexOf(i) > -1});
+      }
+      // Get sticky columns present in new 'dataset'
+      var sticky_cols = STICKY_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1});
+    
+      /*
+        CREATE "STICKY" HEADER TABLE
+      */
+      var selection = d3.select(container_el).select("#sticky")
+      selection.selectAll('table.header').data([0])
+        .enter().append('table').attr("class", "header")
+      var tbl_sticky_header = selection.select('table.header');
+    
+      tbl_sticky_header.selectAll('thead').data([0]).enter().append('thead');
+      tbl_sticky_header = tbl_sticky_header.select('thead');
+    
+      tbl_sticky_header.selectAll('tr').data([0]).enter().append('tr');
+      tbl_sticky_header = tbl_sticky_header.select('tr');
+
+      var ths = tbl_sticky_header.selectAll("th")
+        .data(sticky_cols)
+    
+      ths
+        .attr("class",function(d){  
+          var o = current_order || init_order
+          if (o.length && d == o[0]) var x = " "+o[1]
+          else var x = ""
+          return d+x
+        })
+    
+      ths.enter().append("th")
+        .attr("class",function(d){  
+          var o = current_order || init_order
+          if (o.length && d == o[0]) var x = " "+o[1]
+          else var x = ""
+          return d+x
+        })
+    
+      ths
+        .text(function(d) { return dataviva.format.text(d)})
+        .on(d3plus.evt.click, column_sort)
+    
+      ths.exit().remove()
+    
+      /*
+        CREATE "STICKY" DATA TABLE
+      */
+      selection.selectAll('table.data').data([0])
+        .enter().append('table').attr("class", "data")
+      var tbl_sticky_data = selection.select('table.data');
+    
+      tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
+      tbl_sticky_data = tbl_sticky_data.select('tbody');
+    
+      // create a row for each object in the data
+      var rows = tbl_sticky_data.selectAll("tr").data(dataset, JSON.stringify)
+      rows.enter().append("tr")
+    
+      rows.each(function(d){
+        var self = d3.select(this)
+        data_printer(d,self,sticky_cols)
+      })
+    
+      /*
+        CREATE DATA HEADER TABLE
+      */
+      var selection = d3.select(container_el).select("#data")
+      selection.selectAll('table.header').data([0])
+        .enter().append('table').attr("class", "header")
+      
+      var tbl_data_header = selection.select('table.header');
+    
+      tbl_data_header.selectAll('thead').data([0]).enter().append('thead');
+      tbl_data_header = tbl_data_header.select('thead');
+    
+      tbl_data_header.selectAll('tr').data([0]).enter().append('tr');
+      tbl_data_header = tbl_data_header.select('tr');
+    
+      var ths = tbl_data_header.selectAll("th")
+        .data(active_data_cols)
+      
+      ths
+        .attr("class",function(d){  
+          var o = current_order || init_order
+          if (o.length && d == o[0]) var x = " "+o[1]
+          else var x = ""
+          return d+x
+        })
+      
+      ths.enter().append("th")
+        .attr("class",function(d){  
+          var o = current_order || init_order
+          if (o.length && d == o[0]) var x = " "+o[1]
+          else var x = ""
+          return d+x
+        })
+    
+      ths
+        .text(function(d) { 
+          if (d == "color") d = "color_var"
+          return dataviva.format.text(d)
+        }) 
+        .on(d3plus.evt.click, column_sort)
+    
+      ths.exit().remove()
+    
+      /*
+        CREATE DATA DATA TABLE
+      */
+      selection.selectAll('table.data').data([0])
+        .enter().append('table').attr("class", "data")
+      var tbl_sticky_data = selection.select('table.data');
+      
+      tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
+      tbl_sticky_data = tbl_sticky_data.select('tbody');
+      
+      // create a row for each object in the data
+      var rows = tbl_sticky_data.selectAll("tr").data(DATA, JSON.stringify)
+    
+      rows.enter().append("tr")
+      
+      rows.each(function(d){
+        var self = d3.select(this)
+        data_printer(d,self,active_data_cols)
+      })
+    
+      d3.select("#dt_query #sticky").style("width","5px")
+      d3.select("#dt_query #sticky").style("width", function(){
+        return d3.select("#sticky table.data").node().offsetWidth + "px"
+      })
+      sticky_width = d3.select("#dt_query #sticky").node().offsetWidth;
+      d3.select("#dt_query #data table.header thead").style("left", sticky_width+"px")
+    
+      d3.selectAll("#dt_query table.data").style("margin-top", function(){
+        return d3.select("#data table.header tr").node().offsetHeight+"px";
+      })
+    
+      d3.selectAll("#dt_query table.header th").style("height", function(){
+        var padding = parseInt(d3.select(this).style("padding-top")) * 2
+        var h = d3.select("#data table.header tr").node().offsetHeight;
+        return h - padding + "px";
+      })
+    
+      d3.selectAll("#data table.data").style("width", function(){
+        return d3.select("#data table.header thead").node().offsetWidth + "px";
+      })
+    
+      // Sends parent window column states
+      if(window.parent.update_cols && !manual){
+        var data_col_status = []
+        all_data_cols.forEach(function(d){
+          var active = false;
+          if (active_data_cols.indexOf(d) > -1){
+            active = true;
+          }
+          data_col_status.push({"name":d, "active":active})
+        })
+        window.parent.update_cols(data_col_status)
+      }
+
+      var data_div = d3.select("div#data table.data")
+      table_width = data_div.node().offsetWidth + sticky_width
+      table_height = data_div.node().offsetHeight + parseFloat(data_div.style("margin-top"),10)
+    
+      if (window.parent.iframe_size) window.parent.iframe_size(table_width,table_height)
+    
+      check_headers()
+      dataviva.resize()
+    
+    }
+
+    var init_order = null
+    if (window.location.search.indexOf("order=") >= 0) {
+      var o = window.location.search.split("order=")[1].split("&")[0]
+      is.order(o)
+      init_order = o.split(".")
+    }
+  
     d3.select("#dt_query")
-      .call(is.order(current_order.join(".")).offset(0))
-
-    d3.event.preventDefault()
-  }
+      .call(is.url("{{data_url}}").offset(0))
   
-  function item_formatter(container_el, dataset, offset, manual){
-    
-    if(dataset != DATA){
-      DATA = DATA.concat(dataset)
-    }
-  
-    /*
-      FILTER COLUMNS
-    */
-    
-    // Gets all possible columns from new 'dataset'
-    var all_cols = []
-    dataset.forEach(function(d){
-      all_cols = all_cols.concat(d3.keys(d))
-    })
-    all_cols = all_cols.filter(function(itm, i){
-        return all_cols.indexOf(itm)== i; 
-    });
-    
-    // Get data columns present in new 'dataset'
-    var all_data_cols = DATA_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1 || i == current_order[0]});
-    // Filter data columns by user-specified columns
-    var active_data_cols = all_data_cols;
-    if(current_data_cols.length){
-      active_data_cols = all_data_cols.filter(function(i) {return current_data_cols.indexOf(i) > -1});
-    }
-    // Get sticky columns present in new 'dataset'
-    var sticky_cols = STICKY_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1});
-    
-    /*
-      CREATE "STICKY" HEADER TABLE
-    */
-    var selection = d3.select(container_el).select("#sticky")
-    selection.selectAll('table.header').data([0])
-      .enter().append('table').attr("class", "header")
-    var tbl_sticky_header = selection.select('table.header');
-    
-    tbl_sticky_header.selectAll('thead').data([0]).enter().append('thead');
-    tbl_sticky_header = tbl_sticky_header.select('thead');
-    
-    tbl_sticky_header.selectAll('tr').data([0]).enter().append('tr');
-    tbl_sticky_header = tbl_sticky_header.select('tr');
-
-    var ths = tbl_sticky_header.selectAll("th")
-      .data(sticky_cols)
-    
-    ths
-      .attr("class",function(d){  
-        var o = current_order || init_order
-        if (o.length && d == o[0]) var x = " "+o[1]
-        else var x = ""
-        return d+x
-      })
-    
-    ths.enter().append("th")
-      .attr("class",function(d){  
-        var o = current_order || init_order
-        if (o.length && d == o[0]) var x = " "+o[1]
-        else var x = ""
-        return d+x
-      })
-    
-    ths
-      .text(function(d) { return dataviva.format.text(d)})
-      .on(d3plus.evt.click, column_sort)
-    
-    ths.exit().remove()
-    
-    /*
-      CREATE "STICKY" DATA TABLE
-    */
-    selection.selectAll('table.data').data([0])
-      .enter().append('table').attr("class", "data")
-    var tbl_sticky_data = selection.select('table.data');
-    
-    tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
-    tbl_sticky_data = tbl_sticky_data.select('tbody');
-    
-    // create a row for each object in the data
-    var rows = tbl_sticky_data.selectAll("tr").data(dataset, JSON.stringify)
-    rows.enter().append("tr")
-    
-    rows.each(function(d){
-      var self = d3.select(this)
-      data_printer(d,self,sticky_cols)
-    })
-    
-    /*
-      CREATE DATA HEADER TABLE
-    */
-    var selection = d3.select(container_el).select("#data")
-    selection.selectAll('table.header').data([0])
-      .enter().append('table').attr("class", "header")
-      
-    var tbl_data_header = selection.select('table.header');
-    
-    tbl_data_header.selectAll('thead').data([0]).enter().append('thead');
-    tbl_data_header = tbl_data_header.select('thead');
-    
-    tbl_data_header.selectAll('tr').data([0]).enter().append('tr');
-    tbl_data_header = tbl_data_header.select('tr');
-    
-    var ths = tbl_data_header.selectAll("th")
-      .data(active_data_cols)
-      
-    ths
-      .attr("class",function(d){  
-        var o = current_order || init_order
-        if (o.length && d == o[0]) var x = " "+o[1]
-        else var x = ""
-        return d+x
-      })
-      
-    ths.enter().append("th")
-      .attr("class",function(d){  
-        var o = current_order || init_order
-        if (o.length && d == o[0]) var x = " "+o[1]
-        else var x = ""
-        return d+x
-      })
-    
-    ths
-      .text(function(d) { 
-        if (d == "color") d = "color_var"
-        return dataviva.format.text(d)
-      }) 
-      .on(d3plus.evt.click, column_sort)
-    
-    ths.exit().remove()
-    
-    /*
-      CREATE DATA DATA TABLE
-    */
-    selection.selectAll('table.data').data([0])
-      .enter().append('table').attr("class", "data")
-    var tbl_sticky_data = selection.select('table.data');
-      
-    tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
-    tbl_sticky_data = tbl_sticky_data.select('tbody');
-      
-    // create a row for each object in the data
-    var rows = tbl_sticky_data.selectAll("tr").data(DATA, JSON.stringify)
-    
-    rows.enter().append("tr")
-      
-    rows.each(function(d){
-      var self = d3.select(this)
-      data_printer(d,self,active_data_cols)
-    })
-    
-    d3.select("#dt_query #sticky").style("width","5px")
-    d3.select("#dt_query #sticky").style("width", function(){
-      return d3.select("#sticky table.data").node().offsetWidth + "px"
-    })
-    sticky_width = d3.select("#dt_query #sticky").node().offsetWidth;
-    d3.select("#dt_query #data table.header thead").style("left", sticky_width+"px")
-    d3.select("#dt_query #data").on("scroll", function(){
-      d3.select("#dt_query #data table.header thead").style("left", -(this.scrollLeft-sticky_width)+"px")
-    })
-    
-    d3.selectAll("#dt_query table.data").style("margin-top", function(){
-      return d3.select("#data table.header tr").style("height");
-    })
-    
-    d3.selectAll("#dt_query table.header th").style("height", function(){
-      var padding = parseInt(d3.select(this).style("padding-top")) * 2
-      var h = parseInt(d3.select("#data table.header tr").style("height"));
-      return h - padding + "px";
-    })
-    
-    
-    d3.selectAll("#data table.data").style("width", function(){
-      return d3.select("#data table.header thead").node().offsetWidth + "px";
-    })
-    
-    // Sends parent window column states
-    if(window.parent.update_cols && !manual){
-      var data_col_status = []
-      all_data_cols.forEach(function(d){
-        var active = false;
-        if (active_data_cols.indexOf(d) > -1){
-          active = true;
+    function data_printer(d, self, columns){
+      var row_data = {}
+      columns.forEach(function(c){
+        if (typeof d[c] == "string") {
+          row_data[c] = dataviva.format.text(d[c],c)
         }
-        data_col_status.push({"name":d, "active":active})
+        else if (typeof d[c] == "number") {
+          row_data[c] = dataviva.format.number(d[c],c)
+        }
+        else if (!d[c]) {
+          row_data[c] = " &mdash; "
+        }
+        else {
+          row_data[c] = d[c]
+        }
       })
-      window.parent.update_cols(data_col_status)
+      var row_keys = d3.keys(row_data)
+      var tds = self.selectAll("td")
+        .data(row_keys)
+      
+      tds.enter().append("td")
+        .attr("class",function(dd){return dd})
+      
+      tds
+        .html(function(dd){return row_data[dd]})
     }
-
-    var data_div = d3.select("div#data table.data")
-    table_width = data_div.node().offsetWidth + sticky_width
-    table_height = data_div.node().offsetHeight + parseFloat(data_div.style("margin-top"),10)
-    
-    if (window.parent.iframe_size) window.parent.iframe_size(table_width,table_height)
-    
-    check_header()
-    dataviva.resize()
-    
-  }
-
-  var init_order = null
-  if (window.location.search.indexOf("order=") >= 0) {
-    var o = window.location.search.split("order=")[1].split("&")[0]
-    is.order(o)
-    init_order = o.split(".")
-  }
   
-  d3.select("#dt_query")
-    .call(is.url("{{data_url}}").offset(0))
+    function change_cols(cols){
+      d3.selectAll("tbody tr").remove();
+      columns = cols
+      current_data_cols = [];
+      for (c in columns) {
+        if (columns[c]) current_data_cols.push(c)
+      }
+      item_formatter("#dt_query", DATA, 0, true);
+      update_url()
+    }
   
-  function data_printer(d, self, columns){
-    var row_data = {}
-    columns.forEach(function(c){
-      if (typeof d[c] == "string") {
-        row_data[c] = dataviva.format.text(d[c],c)
+    function update_url() {
+      var args = {}
+      if (current_order.length) args.order = current_order[0]+"."+current_order[1]
+      if (current_data_cols.length > 0 && current_data_cols.length < Object.keys(columns).length) args.cols = current_data_cols.join(".")
+      dataviva.url(window.location.pathname,args)
+    }
+    
+    var header_shadow = false
+    document.onscroll = check_headers
+  
+    function check_headers() {
+      var pos = window.pageYOffset
+      if (pos > 0 && !header_shadow && table_height > window.innerHeight) {
+        d3.selectAll("#dt_query thead").attr("class","shadow")
+        header_shadow = true
       }
-      else if (typeof d[c] == "number") {
-        row_data[c] = dataviva.format.number(d[c],c)
+      else if (pos <= 0 && header_shadow) {
+        d3.selectAll("#dt_query thead").attr("class","")
+        header_shadow = false
       }
-      else if (!d[c]) {
-        row_data[c] = " &mdash; "
+      
+      x_scroll = window.pageXOffset
+      
+      d3.select("#dt_query #data table.header thead")
+        .style("left", -(x_scroll-sticky_width)+"px")
+      
+      d3.select("#dt_query #sticky table.data")
+        .style("top", -(window.pageYOffset)+"px")
+      
+    }
+  
+    dataviva.resize = function() {
+      if (table_width <= window.innerWidth) {
+        d3.select("div#sticky").attr("class","")
       }
       else {
-        row_data[c] = d[c]
+        d3.select("div#sticky").attr("class","shadow")
       }
-    })
-    var row_keys = d3.keys(row_data)
-    var tds = self.selectAll("td")
-      .data(row_keys)
-      
-    tds.enter().append("td")
-      .attr("class",function(dd){return dd})
-      
-    tds
-      .html(function(dd){return row_data[dd]})
-  }
-  
-  function change_cols(cols){
-    d3.selectAll("tbody tr").remove();
-    columns = cols
-    current_data_cols = [];
-    for (c in columns) {
-      if (columns[c]) current_data_cols.push(c)
+      d3.select("#dt_query #data")
+        .style("margin-left", function(){
+          if (table_width <= window.innerWidth) return sticky_width - 1 + "px"
+          return sticky_width + "px"
+        })
     }
-    item_formatter("#dt_query", DATA, 0, true);
-    update_url()
-  }
-  
-  function update_url() {
-    var args = {}
-    if (current_order.length) args.order = current_order[0]+"."+current_order[1]
-    if (current_data_cols.length > 0 && current_data_cols.length < Object.keys(columns).length) args.cols = current_data_cols.join(".")
-    dataviva.url(window.location.pathname,args)
-  }
-    
-  var header_shadow = false
-  document.onscroll = check_header
-  
-  function check_header() {
-    var pos = window.pageYOffset
-    if (pos > 0 && !header_shadow && table_height > window.innerHeight) {
-      d3.selectAll("#dt_query thead").attr("class","shadow")
-      header_shadow = true
-    }
-    else if (pos <= 0 && header_shadow) {
-      d3.selectAll("#dt_query thead").attr("class","")
-      header_shadow = false
-    }
-  }
-  
-  dataviva.resize = function() {
-    if (table_width <= window.innerWidth) {
-      d3.select("div#sticky").attr("class","")
-    }
-    else {
-      d3.select("div#sticky").attr("class","shadow")
-    }
-    
-    d3.select("#dt_query #data")
-      .style("width", function(){
-        return (window.innerWidth - sticky_width) + "px"
-      })
-      .style("margin-left", function(){
-        if (table_width <= window.innerWidth) return sticky_width - 1 + "px"
-        return sticky_width + "px"
-      })
-  }
-  dataviva.resize_snap = true
+    dataviva.resize_snap = true
 
-</script>
+  </script>
+  
 {% endblock %}

@@ -18,7 +18,7 @@
 {% block body %}
 
   <div class="lightbox">
-    <iframe id="bulder_iframe" class="app_builder"></iframe>
+    <iframe id="bulder_iframe" width="600px" height="400px"></iframe>
   </div>
 
 {% endblock %}
@@ -32,12 +32,25 @@
         
     if (height < 600) height = 600
         
-    d3.select("#container")
-      .style("width",width+"px")
-    d3.select("iframe.app_builder")
-      .style("height",height+"px")
-      .style("width",width+"px")
+    d3.select("iframe")
       .attr("src",window.location.href.replace("builder","embed"))
+      
+    dataviva.resize = function() {
+
+      var width = window.innerWidth-50,
+          height = window.innerHeight-167
+        
+      if (height < 500) height = 500
+        
+      d3.select("#container")
+        .style("width",width+"px")
+      d3.select("iframe")
+        .attr("height",height+"px")
+        .attr("width",width+"px")
+        
+    }
+    
+    dataviva.resize()
       
     if (Modernizr.history) {
       window.onpopstate = function() {

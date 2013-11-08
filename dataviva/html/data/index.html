@@ -104,6 +104,11 @@
 
 <script src="/static/js/utils/utils.selector.js"></script>
 <script type="text/javascript">
+
+  if (Modernizr.touch) {
+    d3.select(".data_table").style("overflow","auto")
+      .style("-webkit-overflow-scrolling","touch")
+  }
   
   leon("$dataset").color(dataviva.color)
   leon(".depth_select").color(dataviva.color)
@@ -387,7 +392,8 @@
     "id": "settings_popover",
     "width": 400,
     "height": 400,
-    "close": true
+    "close": true,
+    "color": dataviva.color
   })
   d3.select("#settings_popover").append("div")
     .attr("id","column_toggles")
@@ -399,7 +405,13 @@
     dataviva.popover.show("#settings_popover")
   }
   
+  var last_w = 320, last_h = 320
   function iframe_size(w,h) {
+    if (!w) w = last_w
+    if (!h) h = last_h
+    w += dataviva.scrollbar()
+    last_w = w
+    last_h = h
       
     d3.select(".data_table")
       .style("width",function(){
@@ -414,6 +426,8 @@
   }
   
   update_table()
+  
+  dataviva.resize = iframe_size
 
 </script>
 {% endblock %}

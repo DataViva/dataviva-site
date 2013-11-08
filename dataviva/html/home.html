@@ -147,7 +147,7 @@
     if (a != app) {
       var old = d3.select("#app_"+app).style("opacity",0)
       var old_title = d3.select("#title_"+app).style("opacity",0)
-      d3.select("#page_"+app).style("background-color","#fff")
+      d3.select("#page_"+app).node().style.backgroundColor = "#ffffff"
       setTimeout(function(){
         old.style("display","none")
         old_title.style("display","none")
@@ -160,7 +160,7 @@
         d3.select("#app_"+app).style("opacity",1)
         d3.select("#title_"+app).style("opacity",1)
       },5)
-      d3.select("#page_"+app).style("background-color","#af1f24")
+      d3.select("#page_"+app).node().style.backgroundColor = "#af1f24"
     }
   }
 

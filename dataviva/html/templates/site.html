@@ -2,12 +2,7 @@
 {% extends "templates/base.html" %}
 
 {% block content %}
-<!--
-  <div id="dev_banner">
-    Development Site<br />
-    <a href="/access/logout/">Click here to Logout</a>
-  </div>
--->
+
   <div id="header_container" class="lightbox">
     <div id="header">
       <a id="logo" href="{{ url_for('general.home') }}"></a>
@@ -123,14 +118,6 @@
     });
     
     if ("{{ g.user.is_authenticated() }}" != "False") {
-
-      account_toggle = function() {
-        var account_button = d3.select("#account")
-        if (account_button.node().className.indexOf("active") < 0) {
-        }
-        else {
-        }
-      }
     
       show_toggle = function() {
         d3.select("#account").attr("class","active")

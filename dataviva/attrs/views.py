@@ -1,37 +1,17 @@
-from sqlalchemy import func, distinct, asc, desc
-from flask import Blueprint, request, jsonify, abort, g, render_template
+from sqlalchemy import func, distinct, asc, desc, and_
+from flask import Blueprint, request, jsonify, abort, g, render_template, make_response
 
 from dataviva import db, __latest_year__
 from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo, Yb
 from dataviva.secex.models import Yp, Yw
 from dataviva.rais.models import Yi, Yo
-from dataviva.utils import exist_or_404, gzip_data, cached_query, title_case, crossdomain
+from dataviva.utils import exist_or_404, gzip_data, cached_query, title_case
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
 @mod.errorhandler(404)
 def page_not_found(error):
     return error, 404
-
-@mod.after_request
-def after_request(response):
-    lang = request.args.get('lang', None) or g.locale
-    offset = request.args.get('offset', None)
-    limit = request.args.get('limit', None)
-    if offset:
-        offset = float(offset)
-        limit = limit or 50
-    # if response.status_code != 302:
-    if response.status_code != 302 and request.is_xhr and limit is None:
-        cache_id = request.path + lang
-        # test if this query was cached, if not add it
-        cached_q = cached_query(cache_id)
-        if cached_q is None:
-            response.data = gzip_data(response.data)
-            cached_query(cache_id, response.data)
-        response.headers['Content-Encoding'] = 'gzip'
-        response.headers['Content-Length'] = str(len(response.data))
-    return response
 
 def fix_name(attr, lang):
     name_lang = "name_" + lang
@@ -59,7 +39,6 @@ def fix_name(attr, lang):
 
 @mod.route('/<attr>/')
 @mod.route('/<attr>/<Attr_id>/')
-@crossdomain()
 def attrs(attr="bra",Attr_id=None):
     
     Attr = globals()[attr.title()]
@@ -80,8 +59,15 @@ def attrs(attr="bra",Attr_id=None):
     elif attr == "wld":
         Attr_weight_tbl = Yw
         Attr_weight_col = "val_usd"
+        
+    depths = {}
+    depths["bra"] = [2,4,7,8]
+    depths["isic"] = [1,3,5]
+    depths["cbo"] = [1,2,4]
+    depths["hs"] = [2,4,6]
+    depths["wld"] = [2,5]
     
-    Attr_depth = request.args.get('depth', None)
+    depth = request.args.get('depth', None)
     order = request.args.get('order', None)
     offset = request.args.get('offset', None)
     limit = request.args.get('limit', None)
@@ -97,12 +83,15 @@ def attrs(attr="bra",Attr_id=None):
     latest_year = __latest_year__[dataset]
         
     cache_id = request.path + lang
-    if Attr_depth:
-        cache_id = cache_id + "/" + Attr_depth
+    if depth:
+        cache_id = cache_id + "/" + depth
     # first lets test if this query is cached
     cached_q = cached_query(cache_id)
-    if cached_q and request.is_xhr and limit is None:
-        return cached_q
+    if cached_q and limit is None:
+        ret = make_response(cached_q)
+        ret.headers['Content-Encoding'] = 'gzip'
+        ret.headers['Content-Length'] = str(len(ret.data))
+        return ret
     
     # if an ID is supplied only return that
     if Attr_id:
@@ -133,16 +122,12 @@ def attrs(attr="bra",Attr_id=None):
         ret["data"] = [fix_name(a.serialize(), lang) for a in attrs]
     # an ID/filter was not provided
     else:
-        
         query = db.session.query(Attr,Attr_weight_tbl) \
-            .filter(Attr_weight_tbl.year == latest_year) \
-            .filter(getattr(Attr_weight_tbl,"{0}_id".format(attr)) == Attr.id)
-        if Attr_depth:
-            query = query.filter(func.char_length(Attr.id) == Attr_depth)
-        elif Attr == Hs:
-            query = query.filter(func.char_length(Attr.id) <= 6)
-        elif Attr == Cbo:
-            query = query.filter(func.char_length(Attr.id) <= 4)
+            .outerjoin(Attr_weight_tbl, and_(getattr(Attr_weight_tbl,"{0}_id".format(attr)) == Attr.id, Attr_weight_tbl.year == latest_year))
+        if depth:
+            query = query.filter(func.char_length(Attr.id) == depth)
+        else:
+            query = query.filter(func.char_length(Attr.id).in_(depths[attr]))
             
         if order:
             direction = "asc"
@@ -171,30 +156,45 @@ def attrs(attr="bra",Attr_id=None):
         attrs_all = query.all()
         
         # just get items available in DB
-        attrs_w_data = db.session.query(Attr, func.sum(getattr(Attr_weight_tbl, Attr_weight_col)))
-        attrs_w_data = attrs_w_data \
-                        .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id).group_by(Attr)
-        attrs_w_data = {a[0].id: a[1] for a in attrs_w_data}
+        attrs_w_data = None
+        if depth is None and limit is None:
+            attrs_w_data = db.session.query(Attr, Attr_weight_tbl) \
+                .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id) \
+                .group_by(Attr.id)
+            # raise Exception(attrs_w_data.all())
+            attrs_w_data = [a[0].id for a in attrs_w_data]
                         
         attrs = []
         for i, a in enumerate(attrs_all):
             b = a[0].serialize()
-            b[Attr_weight_col] = a[1].serialize()[Attr_weight_col]
+            if a[1]:
+                b[Attr_weight_col] = a[1].serialize()[Attr_weight_col]
+            else:
+                b[Attr_weight_col] = 0
             a = b
-            a["available"] = False
-            if a["id"] in attrs_w_data:
-                a["available"] = True
-            if Attr_weight_col == "population":
-                if len(a["id"]) == 8 and a["id"][:2] == "mg":
-                    plr = Bra.query.get_or_404(a["id"]).pr2.first()
-                    if plr: a["plr"] = plr.id
+            if attrs_w_data:
+                a["available"] = False
+                if a["id"] in attrs_w_data:
+                    a["available"] = True
+            if Attr_weight_col == "population" and len(a["id"]) == 8 and a["id"][:2] == "mg":
+                plr = Bra.query.get_or_404(a["id"]).pr2.first()
+                if plr: a["plr"] = plr.id
             if order:
                 a["rank"] = int(i+offset+1)
             attrs.append(fix_name(a, lang))
         
         ret["data"] = attrs
+    
+    ret = jsonify(ret)
+    ret.data = gzip_data(ret.data)
+    
+    if limit is None and cached_q is None:
+        cached_query(cache_id, ret.data)
+            
+    ret.headers['Content-Encoding'] = 'gzip'
+    ret.headers['Content-Length'] = str(len(ret.data))
         
-    return jsonify(ret)
+    return ret
     
 @mod.route('/table/<attr>/<depth>/')
 def attrs_table(attr="bra",depth="2"):

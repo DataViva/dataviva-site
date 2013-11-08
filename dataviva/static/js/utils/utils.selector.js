@@ -69,7 +69,7 @@ function Selector() {
             .replace("munic",id)
             .replace("value",dist)
             
-          d3.json(dataviva.static_url+u.substr(1)+"?lang="+dataviva.language)
+          d3.json("/"+u.substr(1)+"?lang="+dataviva.language)
             .header("X-Requested-With", "XMLHttpRequest")
             .get(function(error,raw_distances){
               var distances = [];
@@ -175,7 +175,7 @@ function Selector() {
           else if (b_state == "mg" && a_state != b_state) {
             return 1
           }
-          else if (a[sorting] && b[sorting]) {
+          else if (["number","string"].indexOf(typeof a[sorting]) >= 0 && ["number","string"].indexOf(typeof b[sorting]) >= 0) {
             var a_first = a[sorting]
             var b_first = b[sorting]
           }
@@ -185,7 +185,6 @@ function Selector() {
             if (d3.rgb(a.color).hsl().s == 0) a_first = 361
             if (d3.rgb(b.color).hsl().s == 0) b_first = 361
           }
-          
           if (a_first != b_first) {
             if (typeof a_first === "string") return (a_first.localeCompare(b_first));
             else return (b_first - a_first);
@@ -196,7 +195,6 @@ function Selector() {
             return (a_second.localeCompare(b_second))
           }
         })
-
         
         var parent = container.node().parentNode,
             display = d3.select(parent).style("display")
@@ -460,7 +458,8 @@ function Selector() {
           
           if (type != "file" && ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all"))) {
             header_select_div.style("display","inline-block")
-            header_select.leons.header_select.item.onclick = function(){
+            header_select.leons.header_select.node.onclick = function(){
+              selector_load.text(dataviva.format.text("wait")).show()
               callback(data[x.id],name)
             }
             header_select.color(x.color)
@@ -544,6 +543,7 @@ function Selector() {
               //     select_value(v,depth);
               //   }
               //   else {
+                      // selector_load.text(dataviva.format.text("wait")).show()
               //     callback(data[v.id],name);
               //   }
               // })
@@ -681,6 +681,7 @@ function Selector() {
                 .attr("value",dataviva.format.text("select"))
                   
               b.node().onclick = function(){
+                selector_load.text(dataviva.format.text("wait")).show()
                 callback(data[v.id],name)
               }
                 
@@ -806,7 +807,7 @@ function Selector() {
         create_elements()
       }
       else {
-        d3.json(dataviva.static_url+"attrs/"+type+"/?lang="+dataviva.language)
+        d3.json("/"+"attrs/"+type+"/?lang="+dataviva.language)
           .header("X-Requested-With", "XMLHttpRequest")
           .get(function(error,attrs) {
             data = attrs.data

@@ -15,7 +15,7 @@
       </div>
     </div>
     <div id="iframe">
-      <iframe src="{{data_url}}"></iframe>
+      <iframe src="{{data_url}}" width="566px"></iframe>
     </div>
 
 {% endblock %}
@@ -23,6 +23,11 @@
 {% block js %}
 
   <script>
+  
+    if (Modernizr.touch) {
+      d3.select("#iframe").style("overflow","auto")
+        .style("-webkit-overflow-scrolling","touch")
+    }
     
     leon("$depth").color(dataviva.color)
     var depth = "{{depth}}", attr = "{{attr}}"
@@ -38,17 +43,22 @@
     }
     
     function iframe_size(w,h) {
+      var container_height = d3.select("#outer_container").node().offsetHeight
       d3.select("#about_content .lightbox")
         .style("height",function(){
-          var allowed =  window.innerHeight - 179
+          var allowed =  container_height - 179
+          return h < allowed ? h+"px" : allowed+"px"
+        })
+      d3.select("#about_content #iframe")
+        .style("height",function(){
+          var allowed =  container_height - 179 - 19
           return h < allowed ? h+"px" : allowed+"px"
         })
       d3.select("#about_content iframe")
-        .style("height",function(){
-          var allowed =  window.innerHeight - 179 - 19
+        .attr("height",function(){
+          var allowed =  container_height - 179 - 19
           return h < allowed ? h+"px" : allowed+"px"
         })
-      
     }
     
     update_table()

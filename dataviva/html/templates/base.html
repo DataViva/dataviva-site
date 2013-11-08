@@ -3,6 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>
       DataViva {% block title %}{% endblock %}
     </title>
@@ -16,6 +17,7 @@
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome-4.0.0/css/font-awesome.min.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/d3plus.css" />
     
+    <script src="/static/js/libs/ios-orientationchange-fix.js"></script>
     <script src="/static/js/libs/modernizr.custom.js"></script>
     <script src="/static/js/libs/d3.v3.min.js"></script>
     <script src="/static/js/libs/d3plus.js"></script>
@@ -48,7 +50,6 @@
     <script type="text/javascript">
     
       dataviva.color = "{{ g.color }}"
-      dataviva.static_url = "{{ g.static_url }}"
       dataviva.page = "{{ g.page_type }}"
       
       d3.selectAll(".alt_tooltip")
@@ -69,6 +70,32 @@
                                         scrollbars=no,resizable=no,\
                                         location=no,menubar=no,toolbar=no')
       }
+      
+      dataviva.scrollbar = function() {
+        var inner = document.createElement('p');
+        inner.style.width = "100%";
+        inner.style.height = "200px";
+
+        var outer = document.createElement('div');
+        outer.style.position = "absolute";
+        outer.style.top = "0px";
+        outer.style.left = "0px";
+        outer.style.visibility = "hidden";
+        outer.style.width = "200px";
+        outer.style.height = "150px";
+        outer.style.overflow = "hidden";
+        outer.appendChild(inner);
+
+        document.body.appendChild(outer);
+        var w1 = inner.offsetWidth;
+        outer.style.overflow = 'scroll';
+        var w2 = inner.offsetWidth;
+        if (w1 == w2) w2 = outer.clientWidth;
+
+        document.body.removeChild(outer);
+
+        return (w1 - w2);
+      };
     
     </script>
     
@@ -89,6 +116,7 @@
       dataviva.ui.background()
       
       if (dataviva.resize) {
+        var bg_resize = window.onresize
         window.onresize = function() {
           if (dataviva.resize_snap) dataviva.resize()
           else {
@@ -97,6 +125,7 @@
               dataviva.resize()
             },500)
           }
+          if (bg_resize) bg_resize()
         }
       }
       
