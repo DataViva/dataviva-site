@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-07 11:50-0500\n"
+"POT-Creation-Date: 2013-11-08 12:36-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgstr ""
 msgid "This question has now been updated."
 msgstr ""
 
-#: dataviva/apps/views.py:139
+#: dataviva/apps/views.py:152
 msgid "You need to be logged in to star apps."
 msgstr ""
 
@@ -554,7 +554,6 @@ msgid "In a Tree Map, each rectangle has an area proportional to a specified dim
 msgstr ""
 
 #: dataviva/html/about/apps/tree_map.html:11
-#: dataviva/html/about/ask/index.html:25
 msgid "Order"
 msgstr ""
 
@@ -666,28 +665,8 @@ msgstr ""
 msgid "DataViva is a project that started in July of 2012 by the Escritorio of Minas Gerais in collaboration with a small start-up called Growth Ventures based in Cambridge, MA. DataViva is a collaborative planning tool composed of a number of applications, each of which visualize data in innovative and creative ways. DataViva is intended to be used as a tool to help members of the government, private sectors, as well as citizens themselves be able to understand big data and and more importantly, use it to their advantage."
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:10 dataviva/html/guide/index.html:7
-msgid "What's on your mind?"
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:11
-msgid "Search"
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:16
-msgid "Cannot find your answer?"
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:16
-msgid "Submit your question here!"
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:27
-msgid "Top Voted"
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:29
-msgid "Newest"
+#: dataviva/html/about/ask/index.html:10
+msgid "The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website."
 msgstr ""
 
 #: dataviva/html/about/data/comtrade.html:3
@@ -974,15 +953,7 @@ msgid "Login"
 msgstr ""
 
 #: dataviva/html/account/login.html:17
-msgid "Logging in is easy! All you have to do is choose one of the following accounts to link with your profile. We'll take care of the rest."
-msgstr ""
-
-#: dataviva/html/account/login.html:19
-msgid "By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile."
-msgstr ""
-
-#: dataviva/html/account/login.html:24
-msgid "Remember Me"
+msgid "Logging in has been disabled on this version of DataViva. Please visit the main site to log in."
 msgstr ""
 
 #: dataviva/html/admin/admin_questions.html:3
@@ -1310,6 +1281,10 @@ msgstr ""
 
 #: dataviva/html/guide/hs.html:27 dataviva/html/guide/isic.html:22
 msgid "co-locate"
+msgstr ""
+
+#: dataviva/html/guide/index.html:7
+msgid "What's on your mind?"
 msgstr ""
 
 #: dataviva/html/guide/index.html:11
