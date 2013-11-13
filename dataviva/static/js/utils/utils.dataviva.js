@@ -417,7 +417,7 @@ dataviva.format.number = function(value,name,l) {
   var negative = value < 0
   value = Math.abs(value)
   
-  var smalls = ["rca","rca_bra","rca_wld","distance","eci","pci","ici","oci"]
+  var smalls = ["rca","rca_bra","rca_wld","distance","eci","pci","bra_diversity_eff","isic_diversity_eff","cbo_diversity_eff","hs_diversity_eff","wld_diversity_eff"]
   
   var ids = ["cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
   if (ids.indexOf(name) >= 0) return value.toString().toUpperCase()
@@ -867,6 +867,7 @@ dataviva.url = function(url,args,title) {
   var app_embed = window.location.pathname.indexOf("apps/embed") >= 0
   var app_builder = window.parent.location.pathname.indexOf("apps/builder") >= 0
   var data_table = window.location.pathname.indexOf("data/table") >= 0
+  var rankings = window.location.pathname.indexOf("rankings") >= 0
 
   if (title) document.title = "DataViva : "+title
 
@@ -895,12 +896,13 @@ dataviva.url = function(url,args,title) {
     }
     
     if (iframe) {
+      
       if (title) window.parent.document.title = "DataViva : "+title
   
       if (app_builder) {
         var parent_url = full_url.replace("embed","builder")
       }
-      else if (data_table) {
+      else if (data_table || rankings) {
         var parent_url = full_url.replace("table/","")
       }
       if (replace) {

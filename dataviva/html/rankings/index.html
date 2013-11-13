@@ -17,19 +17,19 @@
         {% trans %}Brazilian Locations{% endtrans %}
       </a>
     
-      <a class="{% if type == 'isic' %}decision{% else %}help{% endif %} icon isic" href="/rankings/2012/isic/1/">
+      <a class="{% if type == 'isic' %}decision{% else %}help{% endif %} icon isic" href="/rankings/2012/isic/5/">
         {% trans %}Industries{% endtrans %}
       </a>
     
-      <a class="{% if type == 'cbo' %}decision{% else %}help{% endif %} icon cbo" href="/rankings/2012/cbo/1/">
+      <a class="{% if type == 'cbo' %}decision{% else %}help{% endif %} icon cbo" href="/rankings/2012/cbo/4/">
         {% trans %}Occupations{% endtrans %}
       </a>
     
-      <a class="{% if type == 'hs' %}decision{% else %}help{% endif %} icon hs" href="/rankings/2012/hs/2/">
+      <a class="{% if type == 'hs' %}decision{% else %}help{% endif %} icon hs" href="/rankings/2012/hs/6/">
         {% trans %}Products{% endtrans %}
       </a>
     
-      <a class="{% if type == 'wld' %}decision{% else %}help{% endif %} icon wld" href="/rankings/2012/wld/2/">
+      <a class="{% if type == 'wld' %}decision{% else %}help{% endif %} icon wld" href="/rankings/2012/wld/5/">
         {% trans %}Export Destinations{% endtrans %}
       </a>
     
@@ -53,7 +53,7 @@
       </div>
     </div>
     <div id="iframe">
-      <iframe src="/rankings/table/{{year}}/{{type}}/{{depth}}/" width="100%"></iframe>
+      <iframe src="/rankings/table/{{year}}/{{type}}/{{depth}}/?order={{order}}" width="100%"></iframe>
     </div>
   </div>
 
@@ -70,10 +70,10 @@
     
     leon("$depth").color(dataviva.color)
     leon("#year_select").color(dataviva.color)
-    var depth = "{{depth}}", year = "{{year}}", type = "{{type}}"
+    var depth = "{{depth}}", year = "{{year}}", type = "{{type}}", order = "{{order}}"
     
     function update_table() {
-      var url = year+"/"+type+"/"+depth+"/"
+      var url = year+"/"+type+"/"+depth+"/?order="+order
       d3.select("iframe").attr("src","/rankings/table/"+url)
       dataviva.url("/rankings/"+url)
     }

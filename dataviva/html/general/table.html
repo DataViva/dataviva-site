@@ -106,10 +106,11 @@
     if (window.location.search.indexOf("order=") > -1) {
       current_order = window.location.search.split("order=")[1].split("&")[0].split(".")
     }
+    
     var is = infinite_scroll().format_items(item_formatter);
   
     function column_sort(d) {
-      if (d != "rank") {
+      if (d != "rank" && d != "name") {
 
         if (d == current_order[0]) var direction = current_order[1]
         else var direction = ""
@@ -123,7 +124,7 @@
         update_url()
     
         DATA = [];
-        d3.selectAll("tbody tr").remove()
+        d3.selectAll("tr").remove()
         d3.select("#dt_query")
           .call(is.order(current_order.join(".")).offset(0))
       }
@@ -159,7 +160,12 @@
       }
       // Get sticky columns present in new 'dataset'
       var sticky_cols = STICKY_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1});
-    
+      
+      if (active_data_cols.indexOf(current_order[0]) >= 0) {
+        active_data_cols.splice(active_data_cols.indexOf(current_order[0]),1)
+        sticky_cols.push(current_order[0])
+      }
+      
       /*
         CREATE "STICKY" HEADER TABLE
       */

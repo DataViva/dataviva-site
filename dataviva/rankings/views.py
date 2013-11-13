@@ -55,7 +55,17 @@ def index(year=2012,type="bra",depth=2):
     depths["cbo"] = [1,2,4]
     depths["hs"] = [2,4,6]
     depths["wld"] = [2,5]
-    return render_template("rankings/index.html",type = type, depths = depths[type], depth = int(depth), year = year, years = years)
+    
+    order = {}
+    order["bra"] = "val_usd"
+    order["isic"] = "wage_avg"
+    order["cbo"] = "wage_avg"
+    order["hs"] = "val_usd"
+    order["wld"] = "val_usd"
+    
+    order = request.args.get("order","{0}.desc".format(order[type]))
+    
+    return render_template("rankings/index.html",type = type, depths = depths[type], depth = int(depth), year = year, years = years, order = order)
 
 @mod.route('/table/<year>/<type>/<depth>/')
 def table(year=None,type="bra",depth=None):
