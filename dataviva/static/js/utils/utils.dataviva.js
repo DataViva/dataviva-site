@@ -404,7 +404,7 @@ dataviva.format.text = function(text,name,l) {
       if (labels["population"][l]) return labels["population"][l] + " ("+year+")"
       else return name.toTitleCase() + " ("+year+")"
     }
-    else return name
+    else return name.toTitleCase()
   
   }
   

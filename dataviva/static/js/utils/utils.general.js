@@ -1,30 +1,25 @@
 String.prototype.toTitleCase = function() {
-    var i, str, lowers, uppers;
-    str = this.replace(/([^\s:\-])([^\s:\-]*)/g, function(txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-    // Certain minor words should be left lowercase unless 
-    // they are the first or last words in the string
-    lowers = ['A', 'An', 'And', 'As', 'At', 'But', 'By', 'For', 'From', 'If', 
-              'In', 'Into', 'Near', 'Nor', 'Of', 'On', 'Onto', 'Or', 'That', 
-              'The', 'To', 'With', 'Via', 'Vs', 'Vs.', 
-              'Um', 'Uma', 'E', 'Como', 'Em', 'No', 'Na', 'Mas', 'Por', 
-              'Para', 'Pelo', 'Pela', 'De', 'Do', 'Da', 'Se', 'Perto', 'Nem', 
-              'Ou', 'Que', 'O', 'A', 'Com'];
-              
-    for (i = 0; i < lowers.length; i++)
-        str = str.replace(new RegExp('\\s' + lowers[i] + '\\s', 'g'), 
-            function(txt) {
-                return txt.toLowerCase();
-            });
+  var i, str, lowers, uppers;
+  // Certain minor words should be left lowercase unless 
+  // they are the first or last words in the string
+  lowers = ['A', 'An', 'And', 'As', 'At', 'But', 'By', 'For', 'From', 'If', 
+            'In', 'Into', 'Near', 'Nor', 'Of', 'On', 'Onto', 'Or', 'That', 
+            'The', 'To', 'With', 'Via', 'Vs', 'Vs.', 
+            'Um', 'Uma', 'E', 'Como', 'Em', 'No', 'Na', 'Mas', 'Por', 
+            'Para', 'Pelo', 'Pela', 'De', 'Do', 'Da', 'Se', 'Perto', 'Nem', 
+            'Ou', 'Que', 'O', 'A', 'Com'];
 
-    // Certain words such as initialisms or acronyms should be left uppercase
-    uppers = ['Id', 'Tv', 'R&d', "P&d", "It", "Ti"];
-    for (i = 0; i < uppers.length; i++)
-        str = str.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'), 
-            uppers[i].toUpperCase());
+  // Certain words such as initialisms or acronyms should be left uppercase
+  uppers = ['Id', 'Tv', 'R&d', "P&d", "It", "Ti"];
+  
+  str = this.replace(/([^\s:\-:\/])([^\s:\-:\/]*)/g, function(txt) {
+    var us = txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    if (lowers.indexOf(txt) >= 0 || lowers.indexOf(us) >= 0) return txt.toLowerCase()
+    else if (uppers.indexOf(txt) >= 0 || uppers.indexOf(us) >= 0) return txt.toUpperCase()
+    else return us
+  });
 
-    return str;
+  return str;
 }
 
 String.prototype.removeAccents = function() {
