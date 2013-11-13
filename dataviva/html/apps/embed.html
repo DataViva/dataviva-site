@@ -107,7 +107,7 @@
   
   <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it 
        to SVG/PDF/PNG downloadable file. -->
-  <form id="svgform" action="/data/download/" method="post">
+  <form id="svgform" action="/apps/download/" method="post">
     {{ form.hidden_tag() }}
   </form>
 
@@ -1449,6 +1449,8 @@
       form['output_format'].value = type;
       form['title'].value = title;
       form.submit();
+      
+      dataviva.popover.hide("#popover")
       
     }
     
