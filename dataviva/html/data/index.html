@@ -206,14 +206,15 @@
           
         var depth_ids = dataviva.depths(selector.type())
         
-        if (obj.id.length < depth_ids[depth_ids.length-1]) {
-          if(obj.id == "mg" || obj.id.indexOf("mgplr") >= 0){
+        if (obj.id.length < depth_ids[depth_ids.length-1] || obj.id == "all") {
+          if(obj.id == "mg" || obj.id.indexOf("mgplr") >= 0 || (obj.id == "all" && type == "bra")){
             depth_ids.splice(-1, 0, 7)
           }
-          depth_ids = depth_ids.slice(depth_ids.indexOf(obj.id.length))
+          
+          if (obj.id != "all") depth_ids = depth_ids.slice(depth_ids.indexOf(obj.id.length))
           var depth_data = {}
           depth_ids.forEach(function(d,i){
-            if (i == 0) depth_data[d] = dataviva.format.text(type+"_"+d)
+            if (i == 0 && obj.id != "all") depth_data[d] = dataviva.format.text(type+"_"+d)
             else depth_data[d] =  dataviva.format.text(type+"_"+d+"_plural");
           })
           var depth_div = div.append("div").attr("class","filter_depth")
@@ -284,7 +285,8 @@
             var id = split[0]
             if (split.length > 1) id += "."+split[1]
             if (["show","active"].indexOf(id) < 0) {
-              if (filters[f][x] == x) new_ids.push(id)
+              if (id == "all") new_ids.push("show."+filters[f][x])
+              else if (filters[f][x] == x) new_ids.push(id)
               else new_ids.push(id+".show."+filters[f][x])
             }
           }

@@ -160,10 +160,13 @@ class Build(db.Model, AutoSerialize):
         else:
             bra = "<bra>"
         
-        if self.app.type == "geo_map" and bra == "all":
-            bra = "all.show.2"
-        elif self.output == "bra":
-            bra = bra + ".show.8"
+        if self.output == "bra":
+            if bra == "all" and self.app.type == "geo_map":
+                bra = "show.2"
+            elif bra == "all":
+                bra = "show.8"
+            else:
+                bra = bra + ".show.8"
             
         filter1 = self.filter1
         if filter1 == "all" or self.app.type == "rings":

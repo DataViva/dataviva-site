@@ -107,7 +107,7 @@
   
   <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it 
        to SVG/PDF/PNG downloadable file. -->
-  <form id="svgform" action="/data/download/" method="post">
+  <form id="svgform" action="/apps/download/" method="post">
     {{ form.hidden_tag() }}
   </form>
 
@@ -780,8 +780,11 @@
             else var default_value = ui.values[0]
           }
           else if (ui.type == "depth") {
-            if (app.build.output == "bra" && app.build.bra[0].id.length == 2) {
-              ui.values.splice(0,1)
+            var bra_id = app.build.bra[0].id
+            if (app.build.output == "bra" && bra_id != "all") {
+              // if (bra_id.indexOf("mg") == 0) ui.values[1] = "bra_7"
+              if (bra_id.length >= 2) ui.values.splice(0,1)
+              if (bra_id.length >= 4) ui.values.splice(0,1)
             }
             if (app.build.output == "bra" && app.build.bra[0].id == "all") {
               var default_value = ui.values[0]
@@ -904,6 +907,7 @@
         .error(false)
         .solo(app.solos)
         .filter(app.filters)
+        .sub_title(null)
         .icon_style(style)
         .yaxis_val(null)
         .tooltip_info(app.tooltip)
@@ -1445,6 +1449,8 @@
       form['output_format'].value = type;
       form['title'].value = title;
       form.submit();
+      
+      dataviva.popover.hide("#popover")
       
     }
     
