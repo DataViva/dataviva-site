@@ -481,7 +481,7 @@
       d3.select("#app_controls").selectAll("*").remove();
       d3plus.tooltip.remove();
       
-      d3.json("/apps/embed/"+app.url)
+      d3.json("/apps/embed/"+app.url+"?lang="+dataviva.language)
         .header("X-Requested-With", "XMLHttpRequest")
         .get(function(error,data){
           
