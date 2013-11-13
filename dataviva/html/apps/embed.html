@@ -780,8 +780,11 @@
             else var default_value = ui.values[0]
           }
           else if (ui.type == "depth") {
-            if (app.build.output == "bra" && app.build.bra[0].id.length == 2) {
-              ui.values.splice(0,1)
+            var bra_id = app.build.bra[0].id
+            if (app.build.output == "bra" && bra_id != "all") {
+              // if (bra_id.indexOf("mg") == 0) ui.values[1] = "bra_7"
+              if (bra_id.length >= 2) ui.values.splice(0,1)
+              if (bra_id.length >= 4) ui.values.splice(0,1)
             }
             if (app.build.output == "bra" && app.build.bra[0].id == "all") {
               var default_value = ui.values[0]
