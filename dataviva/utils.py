@@ -381,11 +381,11 @@ def make_query(data_table, url_args, lang, **kwargs):
     ret = {}
     # first lets test if this query is cached (be sure we are not paginating
     # results) as these should not get cached
-    if limit is None and download is None and raw is None and cols is None:
-        cached_q = cached_query(cache_id)
-        if cached_q:
-            return cached_q
-    
+    # if limit is None and download is None and raw is None and cols is None:
+    #     cached_q = cached_query(cache_id)
+    #     if cached_q:
+    #         return cached_q
+    # 
     query = db.session.query(data_table)
     if join:
         for j in join:
@@ -453,7 +453,7 @@ def make_query(data_table, url_args, lang, **kwargs):
                 if i != 0:
                     serialized = r.serialize()
                     for k in serialized:
-                        if k not in datum:
+                        if k not in datum and k in join[i-1]["columns"]:
                             datum[k] = serialized[k]
             ret["data"].append(datum)
     elif raw:
