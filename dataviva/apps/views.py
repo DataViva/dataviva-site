@@ -39,8 +39,10 @@ def before_request():
 def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             output=None):
             
+    lang = request.args.get('lang', None) or g.locale
+            
     if request.is_xhr:
-        cache_id = request.path
+        cache_id = request.path + lang
         cached_q = cached_query(cache_id)
         if cached_q:
             ret = make_response(cached_q)
