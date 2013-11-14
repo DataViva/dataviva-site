@@ -12,7 +12,7 @@ String.prototype.toTitleCase = function() {
   // Certain words such as initialisms or acronyms should be left uppercase
   uppers = ['Id', 'Tv', 'R&d', "P&d", "It", "Ti"];
   
-  str = this.replace(/([^\s:\-:\/])([^\s:\-:\/]*)/g, function(txt) {
+  str = this.replace(/([^\s:\-:\/:\(])([^\s:\-:\/:\(]*)/g, function(txt) {
     var us = txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
     if (lowers.indexOf(txt) >= 0 || lowers.indexOf(us) >= 0) return txt.toLowerCase()
     else if (uppers.indexOf(txt) >= 0 || uppers.indexOf(us) >= 0) return txt.toUpperCase()
