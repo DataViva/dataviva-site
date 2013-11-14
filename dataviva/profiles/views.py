@@ -89,8 +89,10 @@ def profiles(category = None, id = None):
         b["output"] = build.output
         b["color"] = build.app.color
         builds[pb.position-1] = b
+        
+    start = request.args.get("app",1)
     
     return render_template("profiles/profile.html", 
                 category=category,
-                item=item, 
+                item=item, starting_app = start,
                 builds=builds)
