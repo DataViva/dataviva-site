@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-08 12:36-0500\n"
+"POT-Creation-Date: 2013-11-14 15:01-0500\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr "Resposta enviada."
 msgid "This question has now been updated."
 msgstr "Esta pergunta foi atualizada."
 
-#: dataviva/apps/views.py:152
+#: dataviva/apps/views.py:154
 msgid "You need to be logged in to star apps."
 msgstr "Você precisa fazer o login para iniciar aplicativos."
 
@@ -68,6 +68,10 @@ msgstr "um produto"
 #: dataviva/guide/views.py:151 dataviva/profiles/views.py:45
 msgid "a location"
 msgstr "um local"
+
+#: dataviva/guide/views.py:155 dataviva/html/templates/site.html:11
+msgid "Guide"
+msgstr "Guia"
 
 #: dataviva/guide/views.py:158 dataviva/html/guide/index.html:20
 msgid "Career"
@@ -1038,7 +1042,9 @@ msgstr ""
 msgid ""
 "The version of DataViva that you are viewing does not support user "
 "accounts. Click here to contact us through the main website."
-msgstr "A versão do DataViva que você está vendo não suporta contas de usuário. Clique aqui para entrar em contato conosco através do site principal."
+msgstr ""
+"A versão do DataViva que você está vendo não suporta contas de usuário. "
+"Clique aqui para entrar em contato conosco através do site principal."
 
 #: dataviva/html/about/data/comtrade.html:3
 msgid "United Nations Commodity Trade Statistics Database"
@@ -1350,7 +1356,9 @@ msgstr "Diversidade de Atividades"
 msgid ""
 "The number of unique 5-digit ISIC industries that are present for a given"
 " variable."
-msgstr "O número de atividades únicas de 5 dígitos ISIC que estão presentes para uma dada variável."
+msgstr ""
+"O número de atividades únicas de 5 dígitos ISIC que estão presentes para "
+"uma dada variável."
 
 #: dataviva/html/about/glossary/diversity.html:9
 msgid "Occupation Diversity"
@@ -1360,7 +1368,9 @@ msgstr "Diversidade de Ocupações"
 msgid ""
 "The number of unique 4-digit CBO occupations that are present for a given"
 " variable."
-msgstr "O número de ocupações únicas de 4 dígitos CBO que estão presentes para uma dada variável."
+msgstr ""
+"O número de ocupações únicas de 4 dígitos CBO que estão presentes para "
+"uma dada variável."
 
 #: dataviva/html/about/glossary/diversity.html:12
 msgid "Product Diversity"
@@ -1368,7 +1378,9 @@ msgstr "Diversidade de Produtos"
 
 #: dataviva/html/about/glossary/diversity.html:13
 msgid "The number of unique HS4 products that are present for a given variable."
-msgstr "O número de produtos únicos HS4 que estão presentes para uma dada variável."
+msgstr ""
+"O número de produtos únicos HS4 que estão presentes para uma dada "
+"variável."
 
 #: dataviva/html/about/glossary/diversity.html:15
 msgid "Export Destination Diversity"
@@ -1378,7 +1390,9 @@ msgstr "Diversidade de Destino das Exportações"
 msgid ""
 "The number of unique import countries that are present for a given "
 "variable."
-msgstr "O número de países importadores únicos que estão presentes para uma dada variável."
+msgstr ""
+"O número de países importadores únicos que estão presentes para uma dada "
+"variável."
 
 #: dataviva/html/about/glossary/diversity.html:18
 msgid "Effective Diversity"
@@ -1392,7 +1406,13 @@ msgid ""
 "effective diversity is 2. However, if these shares were 99&#37; and "
 "1&#37;, then the effective diversity would be 1.058, which is close to 1,"
 " since this is a location that exports primarily one product."
-msgstr "A diversidade efetiva é a diversidade de uma dada variável corrigida pela participação que cada unidade representa. Por exemplo, se uma localidade exporta dois produtos e cada um representa uma participação de 50&#37;, então a diversidade efetiva é 2. Por outro lado, se a participação for de 99&#37; e 1&#37;, então a diversidade efetiva será 1,058, próxima a 1, dado que esta é uma localidade que exporta basicamente um produto."
+msgstr ""
+"A diversidade efetiva é a diversidade de uma dada variável corrigida pela"
+" participação que cada unidade representa. Por exemplo, se uma localidade"
+" exporta dois produtos e cada um representa uma participação de 50&#37;, "
+"então a diversidade efetiva é 2. Por outro lado, se a participação for de"
+" 99&#37; e 1&#37;, então a diversidade efetiva será 1,058, próxima a 1, "
+"dado que esta é uma localidade que exporta basicamente um produto."
 
 #: dataviva/html/about/glossary/importance.html:5
 #, python-format
@@ -1648,7 +1668,9 @@ msgstr "Login"
 msgid ""
 "Logging in has been disabled on this version of DataViva. Please visit "
 "the main site to log in."
-msgstr "O login foi desativado nesta versão do DataViva. Por favor, visite o site principal para entrar."
+msgstr ""
+"O login foi desativado nesta versão do DataViva. Por favor, visite o site"
+" principal para entrar."
 
 #: dataviva/html/admin/admin_questions.html:3
 #: dataviva/html/admin/admin_questions.html:12
@@ -1994,7 +2016,7 @@ msgstr "são conectadas"
 
 #: dataviva/html/guide/index.html:7
 msgid "What's on your mind?"
-msgstr "O quê você tem em mente?"
+msgstr "O que você tem em mente?"
 
 #: dataviva/html/guide/index.html:11
 msgid "Learn about the potential of a location."
@@ -2086,10 +2108,6 @@ msgstr "Duplicado"
 msgid "Profiles"
 msgstr "Perfis"
 
-#: dataviva/html/templates/site.html:11
-msgid "Guide"
-msgstr "Guia"
-
 #: dataviva/html/templates/site.html:39
 msgid "Profile"
 msgstr "Perfil"
@@ -2101,46 +2119,4 @@ msgstr "Sair"
 #: dataviva/profiles/views.py:47
 msgid "a country"
 msgstr "um país"
-
-#~ msgid "Search"
-#~ msgstr "Pesquisar"
-
-#~ msgid "Cannot find your answer?"
-#~ msgstr "Não encontrou a sua resposta?"
-
-#~ msgid "Submit your question here!"
-#~ msgstr "Envie sua pergunta aqui!"
-
-#~ msgid "Top Voted"
-#~ msgstr "Mais Votados"
-
-#~ msgid "Newest"
-#~ msgstr "Mais Recente"
-
-#~ msgid ""
-#~ "Logging in is easy! All you have"
-#~ " to do is choose one of the "
-#~ "following accounts to link with your "
-#~ "profile. We'll take care of the "
-#~ "rest."
-#~ msgstr ""
-#~ "Fazer o login é muito fácil! Tudo"
-#~ " que você tem a fazer é "
-#~ "escolher uma das contas a seguir "
-#~ "para vincular ao seu perfil. Nós "
-#~ "cuidaremos do resto."
-
-#~ msgid ""
-#~ "By having an account, you will be"
-#~ " able to ask Sabrina questions, "
-#~ "comment in discussions, and save your"
-#~ " favorite apps to your profile."
-#~ msgstr ""
-#~ "Tendo uma conta, você será capaz "
-#~ "de fazer perguntas à Sabrina, comentar"
-#~ " em nossos fóruns, e salvar seus "
-#~ "aplicativos favoritos em seu perfil."
-
-#~ msgid "Remember Me"
-#~ msgstr "Lembrar-me"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-08 12:36-0500\n"
+"POT-Creation-Date: 2013-11-14 15:01-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgstr ""
 msgid "This question has now been updated."
 msgstr ""
 
-#: dataviva/apps/views.py:152
+#: dataviva/apps/views.py:154
 msgid "You need to be logged in to star apps."
 msgstr ""
 
@@ -66,6 +66,10 @@ msgstr ""
 
 #: dataviva/guide/views.py:151 dataviva/profiles/views.py:45
 msgid "a location"
+msgstr ""
+
+#: dataviva/guide/views.py:155 dataviva/html/templates/site.html:11
+msgid "Guide"
 msgstr ""
 
 #: dataviva/guide/views.py:158 dataviva/html/guide/index.html:20
@@ -1375,10 +1379,6 @@ msgstr ""
 
 #: dataviva/html/templates/site.html:10
 msgid "Profiles"
-msgstr ""
-
-#: dataviva/html/templates/site.html:11
-msgid "Guide"
 msgstr ""
 
 #: dataviva/html/templates/site.html:39
