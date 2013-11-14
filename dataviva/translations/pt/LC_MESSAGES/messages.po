@@ -1037,7 +1037,7 @@ msgstr ""
 
 #: dataviva/html/about/ask/index.html:10 dataviva/html/guide/index.html:7
 msgid "What's on your mind?"
-msgstr "O quê você tem em mente?"
+msgstr "O que você tem em mente?"
 
 #: dataviva/html/about/ask/index.html:11
 msgid "Search"
@@ -1961,7 +1961,7 @@ msgstr "as ocupações mais bem remuneradas"
 #: dataviva/html/guide/cbo.html:33
 #, python-format
 msgid "Which %(word)s employ them?"
-msgstr "Quais %(word)s as empregam?"
+msgstr "Em quais %(word)s estão empregados?"
 
 #: dataviva/html/guide/cbo.html:33
 msgid "industries"
@@ -1979,7 +1979,7 @@ msgstr "crescendo mais rapidamente"
 #: dataviva/html/guide/cbo.html:47
 #, python-format
 msgid "What are their %(word)s?"
-msgstr "Quais são as %(word)s nestas atividades?"
+msgstr "Quais são as %(word)s para esta ocupação?"
 
 #: dataviva/html/guide/cbo.html:47
 msgid "career alternatives"
@@ -2131,3 +2131,37 @@ msgstr "Sair"
 msgid "a country"
 msgstr "um país"
 
+# guide breadcrumbs
+
+msgid "Attract"
+msgstr "Atrair"
+
+msgid "Destinations"
+msgstr "Destinos"
+
+msgid "Diversification"
+msgstr "Diversificação"
+
+msgid "Growth"
+msgstr "Crescimento"
+
+msgid "Locate"
+msgstr "Localizados"
+
+msgid "Opportunity"
+msgstr "Oportunidades"
+
+msgid "Paths"
+msgstr "Caminhos"
+
+msgid "Potential"
+msgstr "Potencial"
+
+msgid "Shrink"
+msgstr "Baixa"
+
+msgid "Wages"
+msgstr "Oportunidades"
+
+msgid "Workforce"
+msgstr "Força de Trabalho"

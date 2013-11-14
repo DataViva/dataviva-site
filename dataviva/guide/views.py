@@ -152,7 +152,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
             
     if category:
         url = "/guide/"
-        crumbs.append({"url": url, "text": "Guide"})
+        crumbs.append({"url": url, "text": gettext("Guide")})
         
         if category == "cbo":
             crumb_title = gettext(u"Career")
@@ -203,6 +203,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
                         crumb_title = Wld.query.get_or_404("sabra").name()
                     elif option_id != "select":
                         crumb_title = Bra.query.get(option_id).name()
+                        
                     if option_id != "select":
                         crumbs.append({"url": url, "text": crumb_title})
                     
