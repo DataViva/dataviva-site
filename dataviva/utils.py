@@ -139,8 +139,7 @@ def title_case(string):
               'Para', 'Pelo', 'Pela', 'De', 'Do', 'Da', 'Se', 'Perto', 'Nem', \
               'Ou', 'Que', 'O', 'A', 'Com']
     uppers = ['Id', 'Tv', 'R&d', "P&d", "It", "Ti"]
-    words = re.split(" ",string)
-    final = [words[0].capitalize()]
+    words = re.split('(\s|-|\/|\()', string)
     
     def detect_string(s):
         if s in exceptions or s.capitalize() in exceptions:
@@ -150,13 +149,11 @@ def title_case(string):
         else:
             return s.capitalize()
     
-    for word in words[1:]:
-        w = word.split("/")
-        for s in w:
-            s = detect_string(s)
-        w = "/".join(w)
-        final.append(w)
-    return " ".join(final)
+    for i, word in enumerate(words):
+        words[i] = detect_string(word)
+    words[0].capitalize()
+    
+    return "".join(words)
 
 ''' We are using a custom class for storing sessions on the serverside instead
     of clientside for persistance/security reasons. See the following:
