@@ -1350,9 +1350,7 @@ msgstr "Diversidade de Atividades"
 msgid ""
 "The number of unique 5-digit ISIC industries that are present for a given"
 " variable."
-msgstr ""
-"O número de atividades únicas de 5 dígitos ISIC que estão presentes para "
-"uma dada variável."
+msgstr "O número de atividades únicas de 5 dígitos ISIC que estão presentes para uma dada variável."
 
 #: dataviva/html/about/glossary/diversity.html:9
 msgid "Occupation Diversity"
@@ -1362,9 +1360,7 @@ msgstr "Diversidade de Ocupações"
 msgid ""
 "The number of unique 4-digit CBO occupations that are present for a given"
 " variable."
-msgstr ""
-"O número de ocupações únicas de 4 dígitos CBO que estão presentes para "
-"uma dada variável."
+msgstr "O número de ocupações únicas de 4 dígitos CBO que estão presentes para uma dada variável."
 
 #: dataviva/html/about/glossary/diversity.html:12
 msgid "Product Diversity"
@@ -1372,9 +1368,7 @@ msgstr "Diversidade de Produtos"
 
 #: dataviva/html/about/glossary/diversity.html:13
 msgid "The number of unique HS4 products that are present for a given variable."
-msgstr ""
-"O número de produtos únicos HS4 que estão presentes para uma dada "
-"variável."
+msgstr "O número de produtos únicos HS4 que estão presentes para uma dada variável."
 
 #: dataviva/html/about/glossary/diversity.html:15
 msgid "Export Destination Diversity"
@@ -1384,9 +1378,7 @@ msgstr "Diversidade de Destino das Exportações"
 msgid ""
 "The number of unique import countries that are present for a given "
 "variable."
-msgstr ""
-"O número de países importadores únicos que estão presentes para uma dada "
-"variável."
+msgstr "O número de países importadores únicos que estão presentes para uma dada variável."
 
 #: dataviva/html/about/glossary/diversity.html:18
 msgid "Effective Diversity"
@@ -1400,13 +1392,7 @@ msgid ""
 "effective diversity is 2. However, if these shares were 99&#37; and "
 "1&#37;, then the effective diversity would be 1.058, which is close to 1,"
 " since this is a location that exports primarily one product."
-msgstr ""
-"A diversidade efetiva é a diversidade de uma dada variável corrigida pela"
-" participação que cada unidade representa. Por exemplo, se uma localidade"
-" exporta dois produtos e cada um representa uma participação de 50&#37;, "
-"então a diversidade efetiva é 2. Por outro lado, se a participação for de"
-" 99&#37; e 1&#37;, então a diversidade efetiva será 1,058, próxima a 1, "
-"dado que esta é uma localidade que exporta basicamente um produto."
+msgstr "A diversidade efetiva é a diversidade de uma dada variável corrigida pela participação que cada unidade representa. Por exemplo, se uma localidade exporta dois produtos e cada um representa uma participação de 50&#37;, então a diversidade efetiva é 2. Por outro lado, se a participação for de 99&#37; e 1&#37;, então a diversidade efetiva será 1,058, próxima a 1, dado que esta é uma localidade que exporta basicamente um produto."
 
 #: dataviva/html/about/glossary/importance.html:5
 #, python-format
@@ -1942,7 +1928,7 @@ msgstr "as ocupações mais bem remuneradas"
 #: dataviva/html/guide/cbo.html:33
 #, python-format
 msgid "Which %(word)s employ them?"
-msgstr "Quais %(word)s as empregam?"
+msgstr "Em quais %(word)s estão empregados?"
 
 #: dataviva/html/guide/cbo.html:33
 msgid "industries"
@@ -1960,7 +1946,7 @@ msgstr "crescendo mais rapidamente"
 #: dataviva/html/guide/cbo.html:47
 #, python-format
 msgid "What are their %(word)s?"
-msgstr "Quais são as %(word)s nestas atividades?"
+msgstr "Quais são as %(word)s para esta ocupação?"
 
 #: dataviva/html/guide/cbo.html:47
 msgid "career alternatives"
