@@ -214,7 +214,7 @@ function Selector() {
         
         // Add more results on scroll
         body.on("scroll",function(){
-          if(body.node().scrollTop + body.node().clientHeight + 10 >= body.node().scrollHeight) {
+          if(this.scrollTop + this.clientHeight + 10 >= this.scrollHeight) {
             if (list.length > 0) add_results(20);
           }
         })

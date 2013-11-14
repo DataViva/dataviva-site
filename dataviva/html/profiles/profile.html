@@ -122,7 +122,8 @@
         builds = {},
         sliding = false,
         selected = null,
-        scrollinterval = null
+        scrollinterval = null,
+        starting_app = "{{starting_app}}"
 
     d3.selectAll(".guide_app")
       .style("width",width+"px")
@@ -131,9 +132,8 @@
         var p = this.id.substring(7),
             t = this.offsetTop-78
         builds[p] = {"loaded": false, "top": t}
-        if (p == 1) {
-          load(p)
-          select(p)
+        if (p == starting_app) {
+          slide("app"+p)
         }
       })
     
@@ -164,6 +164,7 @@
     }
 
     function select(id) {
+      dataviva.url(window.location.pathname,{"app":id})
       clearInterval(scrollinterval)
       selected = id
       d3.selectAll(".app_links")

@@ -26,6 +26,7 @@ div#profile_button {
   border: solid 1px #ccc;
   margin-bottom: 10px;
   padding: 10px;
+  position: relative;
   -webkit-transition: background-color .1s;
           transition: background-color .1s;
 }
@@ -39,14 +40,16 @@ div#guide_icon {
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: 100%;
-  float: left;
   height: 30px;
-  margin-right: 5px;
+  left: 10px;
+  position: absolute;
+  top: 10px;
   width: 30px;
 }
 
 div#guide_title {
   font-size: 24px;
+  margin-left: 35px;
 }
 
 div#guide_stats {
