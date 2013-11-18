@@ -478,7 +478,6 @@ function Selector() {
             title.text(prefix)
           }
           else {
-            console.log(x)
             if (dataviva.language == "en") {
               var connect = "in"
             }
