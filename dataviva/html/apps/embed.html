@@ -1680,6 +1680,8 @@
           app.categories = cats
         }
         
+        if (!app.categories) app.categories = []
+        
         if (app.categories.length <= 1) {
           d3.select("div#key").style("display","none")
         }
