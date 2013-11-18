@@ -228,7 +228,7 @@ dataviva.format.text = function(text,name,l) {
       "importance": {"en": "Importance", "pt": "Import\u00e2ncia"},
       "importance_desc": {"en": "Importance measures the ubiquity of a given occupation in a particular industry. Occupations with a high importance in an industry are commonly employed in said industry.", "pt": "Import\u00e2ncia mede a ubiquidade de uma determinada ocupa\u00e7\u00e3o em um setor espec\u00edfico. As ocupa\u00e7\u00f5es com um alto grau de import\u00e2ncia em um determinado Setor s\u00e3o geralmente empregadas no Setor mencionado."},
       "elsewhere": {"en": "Employees Available In Other Industries", "pt": "Empregados em Outras Ind\u00fastrias"},
-      "required": {"en": "Recommended Employment", "pt": "Emprego Recomendado"},
+      "required": {"en": "Estimated Employees", "pt": "Estimado de Empregados"},
       "required_desc": {"en": "The estimated number of employees per establishment needed in order to have a successful establishment in an industry in a particular location.", "pt": "O n\u00fdmero estimado de empregados por estabelecimento necess\u00e1rio para que um estabelecimento seja bem sucedido em um setor, em uma determinada localidade."},
       "growth_val": {"en": "Wage Growth", "pt": "Crescimento dos Sal\u00e1rios"},
       "growth_val_total": {"en": "Cumulative Wage Growth", "pt": "Crescimento Salarial Acumulada"},

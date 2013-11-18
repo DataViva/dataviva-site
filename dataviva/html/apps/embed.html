@@ -876,7 +876,7 @@
         app.tooltip["short"][""] = [app.build.output+"_display"]
         app.tooltip["long"][""] = [app.build.output+"_display"]
         if (app.build.app.type == "occugrid") {
-          app.tooltip["short"]["calculations"] = ["num_emp_est","elsewhere","required"]
+          app.tooltip["short"]["calculations"] = ["elsewhere","required"]
         }
         else {
           app.tooltip["short"]["basics"] = [app.vars.value_var]
@@ -1214,9 +1214,9 @@
         
         var year_jobs = {}
         jobs.forEach(function(j){
-          if (j.importance >= 0.1) {
+          if (j.importance >= 0.2) {
             if (!year_jobs[j.year]) year_jobs[j.year] = [j]
-            else if (year_jobs[j.year].length < 40) year_jobs[j.year].push(j)
+            else year_jobs[j.year].push(j)
           }
         })
         
@@ -1236,6 +1236,7 @@
               if (!d.wage) d.wage = 0
               if (!d.num_emp) d.num_emp = 0
               if (!d.num_est) d.num_est = 0
+              if (!d.wage_avg) d.wage_avg = 0
               
               d.num_emp_est = Math.ceil(d.num_emp_est)
               
