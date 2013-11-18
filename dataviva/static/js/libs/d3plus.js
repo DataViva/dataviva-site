@@ -3789,6 +3789,12 @@ d3plus.stacked = function(vars) {
   // get max total for sums of each xaxis
   if (!vars.data) vars.data = []
   
+  vars.xaxis_range = d3.extent(vars.years)
+  var xaxis_vals = [vars.xaxis_range[0]]
+  while (xaxis_vals[xaxis_vals.length-1] < vars.xaxis_range[1]) {
+    xaxis_vals.push(xaxis_vals[xaxis_vals.length-1]+1)
+  }
+  
   var xaxis_sums = d3.nest()
     .key(function(d){return d[vars.xaxis_var] })
     .rollup(function(leaves){
@@ -3802,7 +3808,7 @@ d3plus.stacked = function(vars) {
   var data_max = vars.layout == "share" ? 1 : d3.max(xaxis_sums, function(d){ return d.values; });
 
   // scales for both X and Y values
-  var year_extent = vars.year instanceof Array ? vars.year : d3.extent(vars.years)
+  var year_extent = vars.year instanceof Array ? vars.year : d3.extent(xaxis_vals)
   
   vars.x_scale = d3.scale[vars.xscale_type]()
     .domain(year_extent)
@@ -3876,60 +3882,63 @@ d3plus.stacked = function(vars) {
     
     covered = false
     
-    var id = find_variable(d,vars.id_var),
-        self = d3.select("#path_"+id).node()
-    
-    d3.select(self).attr("opacity",1)
-
-    d3.selectAll("line.rule").remove();
-    
     var mouse_x = d3.event.layerX-vars.graph.margin.left;
     var rev_x_scale = d3.scale.linear()
       .domain(vars.x_scale.range()).range(vars.x_scale.domain());
     var this_x = Math.round(rev_x_scale(mouse_x));
-    var this_x_index = vars.years.indexOf(this_x)
+    var this_x_index = xaxis_vals.indexOf(this_x)
     var this_value = d.values[this_x_index]
-    
-    // add dashed line at closest X position to mouse location
-    d3.selectAll("line.rule").remove()
-    d3.select("g.chart").append("line")
-      .datum(d)
-      .attr("class", "rule")
-      .attr({"x1": vars.x_scale(this_x), "x2": vars.x_scale(this_x)})
-      .attr({"y1": vars.y_scale(this_value.y0), "y2": vars.y_scale(this_value.y + this_value.y0)})
-      .attr("stroke", "white")
-      .attr("stroke-width", 1)
-      .attr("stroke-opacity", 0.5)
-      .attr("stroke-dasharray", "5,3")
-      .attr("pointer-events","none")
-    
-    // tooltip
-    var tooltip_data = get_tooltip_data(this_value,"short")
-    if (vars.layout == "share") {
-      var share = vars.number_format(this_value.y*100,"share")+"%"
-      tooltip_data.push({"name": vars.text_format("share"), "value": share})
-    }
-  
-    var path_height = vars.y_scale(this_value.y + this_value.y0)-vars.y_scale(this_value.y0),
-        tooltip_x = vars.x_scale(this_x)+vars.graph.margin.left+vars.margin.left+vars.parent.node().offsetLeft,
-        tooltip_y = vars.y_scale(this_value.y0 + this_value.y)-(path_height/2)+vars.graph.margin.top+vars.margin.top+vars.parent.node().offsetTop
 
+    d3.selectAll("line.rule").remove()
     d3plus.tooltip.remove(vars.type)
-    d3plus.tooltip.create({
-      "data": tooltip_data,
-      "title": find_variable(d[vars.id_var],vars.text_var),
-      "id": vars.type,
-      "icon": find_variable(d[vars.id_var],"icon"),
-      "style": vars.icon_style,
-      "color": find_color(d[vars.id_var]),
-      "x": tooltip_x,
-      "y": tooltip_y,
-      "offset": -(path_height/2),
-      "align": "top center",
-      "arrow": true,
-      "footer": footer_text(),
-      "mouseevents": false
-    })
+    
+    if (this_value && this_value[vars.value_var] > 0) {
+      
+      var id = find_variable(d,vars.id_var),
+          self = d3.select("#path_"+id).node()
+    
+      d3.select(self).attr("opacity",1)
+    
+      // add dashed line at closest X position to mouse location
+      d3.select("g.chart").append("line")
+        .datum(d)
+        .attr("class", "rule")
+        .attr({"x1": vars.x_scale(this_x), "x2": vars.x_scale(this_x)})
+        .attr({"y1": vars.y_scale(this_value.y0), "y2": vars.y_scale(this_value.y + this_value.y0)})
+        .attr("stroke", "white")
+        .attr("stroke-width", 1)
+        .attr("stroke-opacity", 0.5)
+        .attr("stroke-dasharray", "5,3")
+        .attr("pointer-events","none")
+    
+      // tooltip
+      var tooltip_data = get_tooltip_data(this_value,"short")
+      if (vars.layout == "share") {
+        var share = vars.number_format(this_value.y*100,"share")+"%"
+        tooltip_data.push({"name": vars.text_format("share"), "value": share})
+      }
+  
+      var path_height = vars.y_scale(this_value.y + this_value.y0)-vars.y_scale(this_value.y0),
+          tooltip_x = vars.x_scale(this_x)+vars.graph.margin.left+vars.margin.left+vars.parent.node().offsetLeft,
+          tooltip_y = vars.y_scale(this_value.y0 + this_value.y)-(path_height/2)+vars.graph.margin.top+vars.margin.top+vars.parent.node().offsetTop
+
+      d3plus.tooltip.create({
+        "data": tooltip_data,
+        "title": find_variable(d[vars.id_var],vars.text_var),
+        "id": vars.type,
+        "icon": find_variable(d[vars.id_var],"icon"),
+        "style": vars.icon_style,
+        "color": find_color(d[vars.id_var]),
+        "x": tooltip_x,
+        "y": tooltip_y,
+        "offset": -(path_height/2),
+        "align": "top center",
+        "arrow": true,
+        "footer": footer_text(),
+        "mouseevents": false
+      })
+      
+    }
     
   }
   
@@ -3965,7 +3974,7 @@ d3plus.stacked = function(vars) {
       var rev_x_scale = d3.scale.linear()
         .domain(vars.x_scale.range()).range(vars.x_scale.domain());
       var this_x = Math.round(rev_x_scale(mouse_x));
-      var this_x_index = vars.years.indexOf(this_x)
+      var this_x_index = xaxis_vals.indexOf(this_x)
       var this_value = d.values[this_x_index]
       
       make_tooltip = function(html) {
@@ -4164,7 +4173,7 @@ d3plus.stacked = function(vars) {
     })
     .each(function(d){
       // set usable width to 2x the width of each x-axis tick
-      var tick_width = (vars.graph.width / vars.years.length) * 2;
+      var tick_width = (vars.graph.width / xaxis_vals.length) * 2;
       // if the text box's width is larger than the tick width wrap text
       if(this.getBBox().width > tick_width){
         // first remove the current text
@@ -4214,14 +4223,12 @@ d3plus.stacked = function(vars) {
           .reduce(function(a, b){ return a.concat(b[vars.xaxis_var])}, [])
           .filter(function(y, i, arr) { return arr.indexOf(y) == i })
           
-        vars.years.forEach(function(y){
+        xaxis_vals.forEach(function(y){
           if(years_available.indexOf(y) < 0){
             var obj = {}
             obj[vars.xaxis_var] = y
             obj[vars.yaxis_var] = 0
             if (leaves[0][vars.id_var]) obj[vars.id_var] = leaves[0][vars.id_var]
-            if (leaves[0][vars.text_var]) obj[vars.text_var] = leaves[0][vars.text_var]
-            if (leaves[0][vars.color_var]) obj[vars.color_var] = leaves[0][vars.color_var]
             leaves.push(obj)
           }
         })
@@ -4235,7 +4242,6 @@ d3plus.stacked = function(vars) {
     
     nested.forEach(function(d, i){
       d.total = d3.sum(d.values, function(dd){ return dd[vars.yaxis_var]; })
-      d[vars.text_var] = d.values[0][vars.text_var]
       d[vars.id_var] = d.values[0][vars.id_var]
     })
     // return nested
