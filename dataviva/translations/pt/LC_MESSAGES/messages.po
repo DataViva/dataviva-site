@@ -558,7 +558,7 @@ msgstr ""
 
 #: dataviva/html/about/apps/occugrid.html:4
 msgid "recommended workforce"
-msgstr "força de trabalho recomendada"
+msgstr "capital humano recomendada"
 
 #: dataviva/html/about/apps/occugrid.html:8
 msgid "Visual Language"
@@ -1566,7 +1566,7 @@ msgstr ""
 "Os dados nos mostram que esses grandes setores tendem a não compartilhar "
 "áreas similares, porém, ao invés disso, áreas rurais fora dos centros "
 "urbanos, isolados de muitos outros setores. Contudo, se olharmos para a "
-"força de trabalho compartilhada entre esses setores, encontraremos muitas"
+"capital humano compartilhada entre esses setores, encontraremos muitas"
 " das mesmas ocupações, por exemplo, operadores de máquinas, alimentadores"
 " de linha de produção, engenheiros elétricos."
 
@@ -1944,7 +1944,7 @@ msgstr "Qual é a %(word)s disponível?"
 
 #: dataviva/html/guide/bra.html:41
 msgid "workforce"
-msgstr "força de trabalho"
+msgstr "capital humano"
 
 #: dataviva/html/guide/bra.html:47
 msgid "the present industries"
@@ -2146,7 +2146,7 @@ msgid "Growth"
 msgstr "Crescimento"
 
 msgid "Locate"
-msgstr "Localizados"
+msgstr "Localizar"
 
 msgid "Opportunity"
 msgstr "Oportunidades"
@@ -2161,7 +2161,7 @@ msgid "Shrink"
 msgstr "Baixa"
 
 msgid "Wages"
-msgstr "Oportunidades"
+msgstr "Salários"
 
 msgid "Workforce"
-msgstr "Força de Trabalho"
+msgstr "Capital Humano"
