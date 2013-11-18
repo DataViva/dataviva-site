@@ -459,7 +459,7 @@ def make_query(data_table, url_args, lang, **kwargs):
                 if i != 0:
                     serialized = r.serialize()
                     for k in serialized:
-                        if k not in datum and k in join[i-1]["columns"]:
+                        if k in join[i-1]["columns"]:
                             datum[k] = serialized[k]
             ret["data"].append(datum)
     elif raw:

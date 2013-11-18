@@ -56,7 +56,7 @@ def rais_yo(**kwargs):
 def rais_ybi(**kwargs):
     kwargs["join"] = [{
                         "table": Yi,
-                        "columns": ["unique_cbo"],
+                        "columns": ["cbo_diversity","cbo_diversity_eff"],
                         "on": ["year", "isic_id"]
                     }]
     return make_response(make_query(Ybi, request.args, g.locale, **kwargs))
@@ -66,7 +66,7 @@ def rais_ybi(**kwargs):
 def rais_ybo(**kwargs):
     kwargs["join"] = [{
                         "table": Yo,
-                        "columns": ["unique_isic"],
+                        "columns": ["isic_diversity","isic_diversity_eff"],
                         "on": ["year", "cbo_id"]
                     }]
     return make_response(make_query(Ybo, request.args, g.locale, **kwargs))
