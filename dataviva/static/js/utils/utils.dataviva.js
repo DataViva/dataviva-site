@@ -287,6 +287,7 @@ dataviva.format.text = function(text,name,l) {
       "population": {"en": "Population", "pt": "Popula\u00e7\u00e3o"},
       "top": {"en": "Top", "pt": "Superior"},
       "wld_id": {"en": "WLD ID", "pt": "ID WLD"},
+      "id_mdic": {"en": "MDIC ID", "pt": "ID MDIC"},
       "rank": {"en": " ", "pt": " "},
 
       // Filter Titles

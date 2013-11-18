@@ -10,7 +10,7 @@ from math import ceil
 from uuid import uuid4
 from config import REDIS
 from decimal import *
-from sqlalchemy import func, and_, or_, asc, desc
+from sqlalchemy import func, and_, or_, asc, desc, not_
 
 from flask.sessions import SessionInterface, SessionMixin
 
@@ -375,6 +375,7 @@ def make_query(data_table, url_args, lang, **kwargs):
     offset = url_args.get("offset", None)
     limit = url_args.get("limit", None)
     cols = url_args.get("cols", None)
+    excluding = url_args.get("excluding", None)
     if offset:
         offset = float(offset)
         limit = limit or 50
@@ -420,6 +421,10 @@ def make_query(data_table, url_args, lang, **kwargs):
             
     if filter:
         query = query.filter(ops[filter[1]](getattr(data_table, filter[0]), float(filter[2])))
+        
+    if excluding:
+        for e in excluding:
+            query = query.filter(not_(getattr(data_table, e).startswith(excluding[e])))
         
     # lastly we want to get the actual data held in the table requested
     if "aggregate" not in ret:
@@ -526,17 +531,22 @@ def make_query(data_table, url_args, lang, **kwargs):
     if cols:
         new_return = []
         attrs = None
-        if "name" in cols and show_id:
+        if ("name" or "id_ibge" or "id_mdic" in cols) and show_id:
             attr_table = locals()[show_id.split("_")[0].title()]
             attrs = [x.serialize() for x in attr_table.query.all()]
-            attrs = {x["id"]:x["name_{0}".format(lang)] or None for x in attrs}
+            attrs = {x["id"]:x or None for x in attrs}
         for d in ret["data"]:
             new_obj = {}
             for k in d:
                 if k in cols:
                     new_obj[k] = d[k]
             if attrs:
-                new_obj["name"] = attrs[d[show_id]]
+                if "name" in cols and "name_{0}".format(lang) in attrs[d[show_id]]:
+                    new_obj["name"] = attrs[d[show_id]]["name_{0}".format(lang)]
+                if "id_ibge" in cols and "id_ibge" in attrs[d[show_id]]:
+                    new_obj["id_ibge"] = attrs[d[show_id]]["id_ibge"]
+                if "id_mdic" in cols and "id_mdic" in attrs[d[show_id]]:
+                    new_obj["id_mdic"] = attrs[d[show_id]]["id_mdic"]
             new_return.append(new_obj)
         ret["data"] = new_return
         
