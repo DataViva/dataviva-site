@@ -151,7 +151,8 @@ def title_case(string):
     
     for i, word in enumerate(words):
         words[i] = detect_string(word)
-    words[0].capitalize()
+        
+    words[0] = words[0].capitalize()
     
     return "".join(words)
 
