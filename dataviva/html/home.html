@@ -95,7 +95,7 @@
   apps.enter().append("div")
     .attr("class","app")
     .attr("id",function(d){return "app_"+d.id})
-    .style("background-image",function(d){return d.image != "youtube" ? "url('/static/img/home/"+d.image+".jpg')" : "transparent"})
+    .style("background-image",function(d){return d.image != "youtube" ? "url('/static/img/home/"+d.image+".jpg')" : "none"})
     .style("opacity",function(d){
       if (d.id == app) return 1
       else return 0
