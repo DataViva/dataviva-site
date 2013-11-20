@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-07 11:50-0500\n"
+"POT-Creation-Date: 2013-11-20 18:31-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgstr ""
 msgid "This question has now been updated."
 msgstr ""
 
-#: dataviva/apps/views.py:139
+#: dataviva/apps/views.py:154
 msgid "You need to be logged in to star apps."
 msgstr ""
 
@@ -68,6 +68,11 @@ msgstr ""
 msgid "a location"
 msgstr ""
 
+#: dataviva/guide/views.py:155 dataviva/html/home.html:33
+#: dataviva/html/templates/site.html:11
+msgid "Guide"
+msgstr ""
+
 #: dataviva/guide/views.py:158 dataviva/html/guide/index.html:20
 msgid "Career"
 msgstr ""
@@ -83,8 +88,8 @@ msgid "Establishments and Employment"
 msgstr ""
 
 #: dataviva/guide/views.py:164 dataviva/guide/views.py:191
-#: dataviva/guide/views.py:201 dataviva/html/home.html:41
-#: dataviva/html/general/select.html:19 dataviva/html/guide/industry.html:10
+#: dataviva/guide/views.py:201 dataviva/html/general/select.html:19
+#: dataviva/html/guide/industry.html:10
 msgid "Product Exports"
 msgstr ""
 
@@ -96,40 +101,42 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: dataviva/html/home.html:12
-msgid "Visualizing the Economy of Minas Gerais and Brazil"
+#: dataviva/html/home.html:11
+msgid "Open Data for the Brazilian Economy"
 msgstr ""
 
-#: dataviva/html/home.html:13
-msgid "DataViva is opening up data for the entire formal sector of the Brazilian economy through more than 100 million interactive visualization."
-msgstr ""
-
-#: dataviva/html/home.html:15
-msgid "Learn how DataViva was created:"
-msgstr ""
-
-#: dataviva/html/home.html:23 dataviva/html/templates/site.html:14
+#: dataviva/html/home.html:16 dataviva/html/templates/site.html:14
 msgid "Learn More"
 msgstr ""
 
-#: dataviva/html/home.html:29 dataviva/html/rankings/index.html:17
-#: dataviva/html/templates/about.html:46
-msgid "Brazilian Locations"
+#: dataviva/html/home.html:23 dataviva/html/apps/index.html:4
+#: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:9
+msgid "Apps"
 msgstr ""
 
-#: dataviva/html/home.html:33 dataviva/html/general/select.html:29
-#: dataviva/html/rankings/index.html:25 dataviva/html/templates/about.html:54
-msgid "Occupations"
+#: dataviva/html/home.html:24
+msgid "Explore the Brazilian economy through over 100 million visualizations."
 msgstr ""
 
-#: dataviva/html/home.html:37 dataviva/html/general/select.html:24
-#: dataviva/html/rankings/index.html:21 dataviva/html/templates/about.html:50
-msgid "Industries"
+#: dataviva/html/home.html:28 dataviva/html/templates/site.html:10
+msgid "Profiles"
 msgstr ""
 
-#: dataviva/html/home.html:45 dataviva/html/general/select.html:39
-#: dataviva/html/rankings/index.html:33 dataviva/html/templates/about.html:62
-msgid "Export Destinations"
+#: dataviva/html/home.html:29
+msgid "Quickly learn about the exports, occupations, and industries of each Brazilian state and economic sector."
+msgstr ""
+
+#: dataviva/html/home.html:34
+msgid "Answer strategic questions about economic opportunities of states and industries."
+msgstr ""
+
+#: dataviva/html/home.html:38 dataviva/html/rankings/index.html:4
+#: dataviva/html/templates/site.html:13
+msgid "Rankings"
+msgstr ""
+
+#: dataviva/html/home.html:39
+msgid "Compare locations, industries and occupations based on economic output, diversity, and salaries."
 msgstr ""
 
 #: dataviva/html/about/attrs.html:4 dataviva/html/templates/about.html:40
@@ -1081,11 +1088,6 @@ msgstr ""
 msgid "Show/Hide Controls"
 msgstr ""
 
-#: dataviva/html/apps/index.html:4 dataviva/html/apps/info.html:4
-#: dataviva/html/templates/site.html:9
-msgid "Apps"
-msgstr ""
-
 #: dataviva/html/apps/index.html:8
 msgid "Which app would you like to build?"
 msgstr ""
@@ -1147,6 +1149,16 @@ msgstr ""
 msgid "Which classification would you like to browse?"
 msgstr ""
 
+#: dataviva/html/general/select.html:24 dataviva/html/rankings/index.html:21
+#: dataviva/html/templates/about.html:50
+msgid "Industries"
+msgstr ""
+
+#: dataviva/html/general/select.html:29 dataviva/html/rankings/index.html:25
+#: dataviva/html/templates/about.html:54
+msgid "Occupations"
+msgstr ""
+
 #: dataviva/html/general/select.html:33
 msgid "Municipalities"
 msgstr ""
@@ -1157,6 +1169,11 @@ msgstr ""
 
 #: dataviva/html/general/select.html:38
 msgid "Countries"
+msgstr ""
+
+#: dataviva/html/general/select.html:39 dataviva/html/rankings/index.html:33
+#: dataviva/html/templates/about.html:62
+msgid "Export Destinations"
 msgstr ""
 
 #: dataviva/html/general/selector.html:3
@@ -1370,8 +1387,8 @@ msgstr ""
 msgid "Export Destination"
 msgstr ""
 
-#: dataviva/html/rankings/index.html:4 dataviva/html/templates/site.html:13
-msgid "Rankings"
+#: dataviva/html/rankings/index.html:17 dataviva/html/templates/about.html:46
+msgid "Brazilian Locations"
 msgstr ""
 
 #: dataviva/html/rankings/index.html:29 dataviva/html/templates/about.html:58
@@ -1396,14 +1413,6 @@ msgstr ""
 
 #: dataviva/html/templates/admin.html:32
 msgid "Duplicate"
-msgstr ""
-
-#: dataviva/html/templates/site.html:10
-msgid "Profiles"
-msgstr ""
-
-#: dataviva/html/templates/site.html:11
-msgid "Guide"
 msgstr ""
 
 #: dataviva/html/templates/site.html:39

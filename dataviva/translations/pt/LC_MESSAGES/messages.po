@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-07 11:50-0500\n"
+"POT-Creation-Date: 2013-11-20 18:31-0500\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr "Resposta enviada."
 msgid "This question has now been updated."
 msgstr "Esta pergunta foi atualizada."
 
-#: dataviva/apps/views.py:139
+#: dataviva/apps/views.py:154
 msgid "You need to be logged in to star apps."
 msgstr "Você precisa fazer o login para iniciar aplicativos."
 
@@ -69,6 +69,11 @@ msgstr "um produto"
 msgid "a location"
 msgstr "um local"
 
+#: dataviva/guide/views.py:155 dataviva/html/home.html:33
+#: dataviva/html/templates/site.html:11
+msgid "Guide"
+msgstr "Guia"
+
 #: dataviva/guide/views.py:158 dataviva/html/guide/index.html:20
 msgid "Career"
 msgstr "Carreira"
@@ -84,8 +89,8 @@ msgid "Establishments and Employment"
 msgstr "Estabelecimentos e Emprego"
 
 #: dataviva/guide/views.py:164 dataviva/guide/views.py:191
-#: dataviva/guide/views.py:201 dataviva/html/home.html:41
-#: dataviva/html/general/select.html:19 dataviva/html/guide/industry.html:10
+#: dataviva/guide/views.py:201 dataviva/html/general/select.html:19
+#: dataviva/html/guide/industry.html:10
 msgid "Product Exports"
 msgstr "Produtos Exportados"
 
@@ -97,45 +102,57 @@ msgstr "Localidade"
 msgid "All"
 msgstr "Tudo"
 
-#: dataviva/html/home.html:12
-msgid "Visualizing the Economy of Minas Gerais and Brazil"
-msgstr "Visualizando a Economia de Minas Gerais e do Brasil."
+#: dataviva/html/home.html:11
+msgid "Open Data for the Brazilian Economy"
+msgstr "Dados Abertos para a Economia Brasileira"
 
-#: dataviva/html/home.html:13
-msgid ""
-"DataViva is opening up data for the entire formal sector of the Brazilian"
-" economy through more than 100 million interactive visualization."
-msgstr ""
-"O DataViva está disponibilizando dados sobre todo o setor formal da "
-"economia brasileira em mais de 100 milhões de visualizações interativas."
-
-#: dataviva/html/home.html:15
-msgid "Learn how DataViva was created:"
-msgstr "Conheça como foi criado o DataViva:"
-
-#: dataviva/html/home.html:23 dataviva/html/templates/site.html:14
+#: dataviva/html/home.html:16 dataviva/html/templates/site.html:14
 msgid "Learn More"
 msgstr "Saiba Mais"
 
-#: dataviva/html/home.html:29 dataviva/html/rankings/index.html:17
-#: dataviva/html/templates/about.html:46
-msgid "Brazilian Locations"
-msgstr "Localidades Brasileiras"
+#: dataviva/html/home.html:23 dataviva/html/apps/index.html:4
+#: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:9
+msgid "Apps"
+msgstr "Aplicativos"
 
-#: dataviva/html/home.html:33 dataviva/html/general/select.html:29
-#: dataviva/html/rankings/index.html:25 dataviva/html/templates/about.html:54
-msgid "Occupations"
-msgstr "Ocupações"
+#: dataviva/html/home.html:24
+msgid "Explore the Brazilian economy through over 100 million visualizations."
+msgstr ""
+"Explore a economia brasileira por meio de mais de 100 milhões de "
+"visualizações."
 
-#: dataviva/html/home.html:37 dataviva/html/general/select.html:24
-#: dataviva/html/rankings/index.html:21 dataviva/html/templates/about.html:50
-msgid "Industries"
-msgstr "Atividades Econômicas"
+#: dataviva/html/home.html:28 dataviva/html/templates/site.html:10
+msgid "Profiles"
+msgstr "Perfis"
 
-#: dataviva/html/home.html:45 dataviva/html/general/select.html:39
-#: dataviva/html/rankings/index.html:33 dataviva/html/templates/about.html:62
-msgid "Export Destinations"
-msgstr "Destinos das Exportações"
+#: dataviva/html/home.html:29
+msgid ""
+"Quickly learn about the exports, occupations, and industries of each "
+"Brazilian state and economic sector."
+msgstr ""
+"Aprender rapidamente sobre as exportações, ocupações, e as indústrias de "
+"cada estado brasileiro e do setor econômico."
+
+#: dataviva/html/home.html:34
+msgid ""
+"Answer strategic questions about economic opportunities of states and "
+"industries."
+msgstr ""
+"Responda às perguntas estratégicas sobre oportunidades econômicas dos "
+"estados e indústrias."
+
+#: dataviva/html/home.html:38 dataviva/html/rankings/index.html:4
+#: dataviva/html/templates/site.html:13
+msgid "Rankings"
+msgstr "Rankings"
+
+#: dataviva/html/home.html:39
+msgid ""
+"Compare locations, industries and occupations based on economic output, "
+"diversity, and salaries."
+msgstr ""
+"Compare locais, indústrias e profissões com base na produção econômica, "
+"diversidade e salários."
 
 #: dataviva/html/about/attrs.html:4 dataviva/html/templates/about.html:40
 msgid "Classifications"
@@ -1369,7 +1386,9 @@ msgstr "Diversidade de Atividades"
 msgid ""
 "The number of unique 5-digit ISIC industries that are present for a given"
 " variable."
-msgstr "O número de atividades únicas de 5 dígitos ISIC que estão presentes para uma dada variável."
+msgstr ""
+"O número de atividades únicas de 5 dígitos ISIC que estão presentes para "
+"uma dada variável."
 
 #: dataviva/html/about/glossary/diversity.html:9
 msgid "Occupation Diversity"
@@ -1379,7 +1398,9 @@ msgstr "Diversidade de Ocupações"
 msgid ""
 "The number of unique 4-digit CBO occupations that are present for a given"
 " variable."
-msgstr "O número de ocupações únicas de 4 dígitos CBO que estão presentes para uma dada variável."
+msgstr ""
+"O número de ocupações únicas de 4 dígitos CBO que estão presentes para "
+"uma dada variável."
 
 #: dataviva/html/about/glossary/diversity.html:12
 msgid "Product Diversity"
@@ -1387,7 +1408,9 @@ msgstr "Diversidade de Produtos"
 
 #: dataviva/html/about/glossary/diversity.html:13
 msgid "The number of unique HS4 products that are present for a given variable."
-msgstr "O número de produtos únicos HS4 que estão presentes para uma dada variável."
+msgstr ""
+"O número de produtos únicos HS4 que estão presentes para uma dada "
+"variável."
 
 #: dataviva/html/about/glossary/diversity.html:15
 msgid "Export Destination Diversity"
@@ -1397,7 +1420,9 @@ msgstr "Diversidade de Destino das Exportações"
 msgid ""
 "The number of unique import countries that are present for a given "
 "variable."
-msgstr "O número de países importadores únicos que estão presentes para uma dada variável."
+msgstr ""
+"O número de países importadores únicos que estão presentes para uma dada "
+"variável."
 
 #: dataviva/html/about/glossary/diversity.html:18
 msgid "Effective Diversity"
@@ -1411,7 +1436,13 @@ msgid ""
 "effective diversity is 2. However, if these shares were 99&#37; and "
 "1&#37;, then the effective diversity would be 1.058, which is close to 1,"
 " since this is a location that exports primarily one product."
-msgstr "A diversidade efetiva é a diversidade de uma dada variável corrigida pela participação que cada unidade representa. Por exemplo, se uma localidade exporta dois produtos e cada um representa uma participação de 50&#37;, então a diversidade efetiva é 2. Por outro lado, se a participação for de 99&#37; e 1&#37;, então a diversidade efetiva será 1,058, próxima a 1, dado que esta é uma localidade que exporta basicamente um produto."
+msgstr ""
+"A diversidade efetiva é a diversidade de uma dada variável corrigida pela"
+" participação que cada unidade representa. Por exemplo, se uma localidade"
+" exporta dois produtos e cada um representa uma participação de 50&#37;, "
+"então a diversidade efetiva é 2. Por outro lado, se a participação for de"
+" 99&#37; e 1&#37;, então a diversidade efetiva será 1,058, próxima a 1, "
+"dado que esta é uma localidade que exporta basicamente um produto."
 
 #: dataviva/html/about/glossary/importance.html:5
 #, python-format
@@ -1566,9 +1597,9 @@ msgstr ""
 "Os dados nos mostram que esses grandes setores tendem a não compartilhar "
 "áreas similares, porém, ao invés disso, áreas rurais fora dos centros "
 "urbanos, isolados de muitos outros setores. Contudo, se olharmos para a "
-"capital humano compartilhada entre esses setores, encontraremos muitas"
-" das mesmas ocupações, por exemplo, operadores de máquinas, alimentadores"
-" de linha de produção, engenheiros elétricos."
+"capital humano compartilhada entre esses setores, encontraremos muitas "
+"das mesmas ocupações, por exemplo, operadores de máquinas, alimentadores "
+"de linha de produção, engenheiros elétricos."
 
 #: dataviva/html/about/glossary/proximity.html:36
 msgid "Occupation Proximity"
@@ -1779,11 +1810,6 @@ msgstr "Abrir Aplicativo em Tela Cheia"
 msgid "Show/Hide Controls"
 msgstr "Mostrar/Ocultar Controles"
 
-#: dataviva/html/apps/index.html:4 dataviva/html/apps/info.html:4
-#: dataviva/html/templates/site.html:9
-msgid "Apps"
-msgstr "Aplicativos"
-
 #: dataviva/html/apps/index.html:8
 msgid "Which app would you like to build?"
 msgstr "Qual aplicativo você gostaria de desenvolver?"
@@ -1850,6 +1876,16 @@ msgstr "Selecionar uma Classificação"
 msgid "Which classification would you like to browse?"
 msgstr "Qual classificação você gostaria de pesquisar?"
 
+#: dataviva/html/general/select.html:24 dataviva/html/rankings/index.html:21
+#: dataviva/html/templates/about.html:50
+msgid "Industries"
+msgstr "Atividades Econômicas"
+
+#: dataviva/html/general/select.html:29 dataviva/html/rankings/index.html:25
+#: dataviva/html/templates/about.html:54
+msgid "Occupations"
+msgstr "Ocupações"
+
 #: dataviva/html/general/select.html:33
 msgid "Municipalities"
 msgstr "Municípios"
@@ -1861,6 +1897,11 @@ msgstr "Localizações geográficas no Brasil"
 #: dataviva/html/general/select.html:38
 msgid "Countries"
 msgstr "Países"
+
+#: dataviva/html/general/select.html:39 dataviva/html/rankings/index.html:33
+#: dataviva/html/templates/about.html:62
+msgid "Export Destinations"
+msgstr "Destinos das Exportações"
 
 #: dataviva/html/general/selector.html:3
 msgid "Filter Selection"
@@ -2083,9 +2124,9 @@ msgstr "Produto Exportado"
 msgid "Export Destination"
 msgstr "Destino das Exportações"
 
-#: dataviva/html/rankings/index.html:4 dataviva/html/templates/site.html:13
-msgid "Rankings"
-msgstr "Rankings"
+#: dataviva/html/rankings/index.html:17 dataviva/html/templates/about.html:46
+msgid "Brazilian Locations"
+msgstr "Localidades Brasileiras"
 
 #: dataviva/html/rankings/index.html:29 dataviva/html/templates/about.html:58
 msgid "Products"
@@ -2111,14 +2152,6 @@ msgstr "Rejeitado"
 msgid "Duplicate"
 msgstr "Duplicado"
 
-#: dataviva/html/templates/site.html:10
-msgid "Profiles"
-msgstr "Perfis"
-
-#: dataviva/html/templates/site.html:11
-msgid "Guide"
-msgstr "Guia"
-
 #: dataviva/html/templates/site.html:39
 msgid "Profile"
 msgstr "Perfil"
@@ -2131,37 +2164,3 @@ msgstr "Sair"
 msgid "a country"
 msgstr "um país"
 
-# guide breadcrumbs
-
-msgid "Attract"
-msgstr "Atrair"
-
-msgid "Destinations"
-msgstr "Destinos"
-
-msgid "Diversification"
-msgstr "Diversificação"
-
-msgid "Growth"
-msgstr "Crescimento"
-
-msgid "Locate"
-msgstr "Localizar"
-
-msgid "Opportunity"
-msgstr "Oportunidades"
-
-msgid "Paths"
-msgstr "Caminhos"
-
-msgid "Potential"
-msgstr "Potencial"
-
-msgid "Shrink"
-msgstr "Baixa"
-
-msgid "Wages"
-msgstr "Salários"
-
-msgid "Workforce"
-msgstr "Capital Humano"

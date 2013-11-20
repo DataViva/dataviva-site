@@ -38,6 +38,25 @@
   color: #888;
 }
 
+.help.icon.large,
+.decision.icon.large {
+  padding: 20px 40px 20px 150px;
+}
+
+.help.icon.large:before,
+.decision.icon.large:before {
+  height: 150px;
+  opacity: 0.25;
+  width: 150px;
+}
+
+.help.icon.large:after,
+.decision.icon.large:after {
+  font-size: 100px;
+  line-height: 130px;
+  padding-right: 20px;
+}
+
 .help.icon.square:before,
 .decision.icon.square:before {
   background-size: 100%;
@@ -62,13 +81,16 @@
 /* Nav */
 /*******/
 
+.decision.icon.apps:before {
+  background-size: 95%;
+}
+
 .decision.icon.guide:before,
 .decision.icon.profiles:before,
-.decision.icon.apps:before,
 .decision.icon.data:before,
-.decision.icon.ask:before,
+.decision.icon.rankings:before,
 .decision.icon.learn:before {
-  background-size: 75%;
+  background-size: 80%;
 }
 
 .decision.icon.guide:before {
@@ -87,12 +109,36 @@
   background-image: url("/static/img/nav/icons/data_white.png");
 }
 
-.decision.icon.ask:before {
-  background-image: url("/static/img/nav/icons/ask_white.png");
+.decision.icon.rankings:before {
+  background-image: url("/static/img/nav/icons/rankings_white.png");
 }
 
 .decision.icon.learn:before {
   background-image: url("/static/img/nav/icons/learn_white.png");
+}
+
+.decision.icon.guide {
+  background-color: #3daf49;
+}
+
+.decision.icon.profiles {
+  background-color: #e0902d;
+}
+
+.decision.icon.apps {
+  background-color: #af1f24;
+}
+
+.decision.icon.data {
+  background-color: #1abbee;
+}
+
+.decision.icon.rankings {
+  background-color: #742777;
+}
+
+.decision.icon.learn {
+  background-color: #d67ab0;
 }
 
 /***********/

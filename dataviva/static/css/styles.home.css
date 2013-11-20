@@ -1,19 +1,24 @@
-body.home #box {
-  background-color: white;
+body.home #container {
+  padding: 58px 0px 66px 0px !important;
+  width: 800px;
 }
 
-body.home .welcome_text {
-  margin: 10px 10px 0px 10px;
+body.home #intro {
+  display: block;
+  height: 340px;
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
 }
 
 body.home #carousel {
-  display: inline-block;
-  height: 400px;
-  margin: 0px -2px 15px 7px;
-  overflow: hidden;
-  position: relative;
+  display: block;
+  height: 270px;
+  position: absolute;
+  right: 20px;
   text-align: left;
-  width: 563px;
+  top: 20px;
+  width: 480px;
 }
 
 body.home #carousel .app {
@@ -29,31 +34,29 @@ body.home #carousel .app {
           transition: opacity 1s;
 }
 
+body.home #intro h1 {
+  display: block;
+  left: 25px;
+  margin: 0px;
+  position: absolute;
+  text-align: left;
+  top: 25px;
+  -webkit-transition: opacity 1s;
+          transition: opacity 1s;
+  width: 250px;
+}
+
 body.home #carousel .centered {
-  bottom: 30px;
+  top: 110px;
   position: absolute;
   text-align: center;
   width: 100%;
-  z-index: 200;
+  z-index: 10;
 }
 
 body.home #carousel .decision {
   display: inline-block;
-}
-
-body.home #carousel h1 {
-  background-color: rgba(0,0,0,0.5);
-  color: white;
-  font-size: 40px;
-  height: 100%;
-  line-height: 44px;
-  margin: 0px;
-  padding: 30px 35px;
-  position: absolute;
-  -webkit-transition: opacity 1s;
-          transition: opacity 1s;
-  width: 493px;
-  z-index: 100;
+  width: 90px;
 }
 
 body.home .pages {
@@ -61,47 +64,31 @@ body.home .pages {
   position: absolute;
   text-align: center;
   width: 100%;
-  z-index: 200;
 }
 
 body.home .page {
   background-color: #fff;
   -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
           box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+  color: #888;
   display: inline-block;
-  height: 10px;
+  font-size: 12px;
+  font-weight: normal;
+  height: 20px;
+  line-height: 20px;
   margin: 10px;
   opacity: 0.9;
-  -webkit-transition: background-color 1s;
-          transition: background-color 1s;
-  width: 10px;
+  -webkit-transition: background-color 1s, color 1s;
+          transition: background-color 1s, color 1s;
+  width: 20px;
+}
+
+body.home .page.active {
+  background-color: #af1f24;
+  color: #fff;
 }
 
 body.home .page:hover {
   cursor: pointer;
   opacity: 1;
-}
-
-body.home div#video {
-  display: inline-block;
-  height: 350px;
-  margin-right: 14px;
-  padding: 25px 30px;
-  position: relative;
-  text-align: left;
-  width: 308px;
-}
-
-body.home div#video h1 {
-  font-size: 24px;
-  line-height: 26px;
-}
-
-body.home div#video iframe {
-  margin-top: 10px;
-}
-
-body.home div#video .welcome_bottom {
-  bottom: 25px;
-  position: absolute;
 }
