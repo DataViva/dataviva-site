@@ -419,6 +419,8 @@ dataviva.format.number = function(value,name,l) {
   var negative = value < 0
   value = Math.abs(value)
   
+  if (name.indexOf("_growth_pct") >= 0) value = value * 100
+  
   var smalls = ["rca","rca_bra","rca_wld","distance","eci","pci","bra_diversity_eff","isic_diversity_eff","cbo_diversity_eff","hs_diversity_eff","wld_diversity_eff"]
   
   var ids = ["cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
