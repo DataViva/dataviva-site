@@ -99,6 +99,7 @@
     <a id="help" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Show App Tutorial{% endtrans %}"><i class="fa fa-question-circle"></i></a>
     <a id="full_screen" class="leon button square alt_tooltip" onclick="window.open(window.location.href,'_blank')" alt="{% trans %}Open App in Full-Screen{% endtrans %}"><i class="fa fa-fullscreen"></i></a>
     <a id="controls_toggle" class="leon button square alt_tooltip" onclick="builder.controls()" alt="{% trans %}Show/Hide Controls{% endtrans %}"><i class="fa fa-cogs"></i></a>
+    <a id="share" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Share or Embed{% endtrans %}"><i class="fa fa-share"></i></a>
   
   </div>
 
@@ -1743,6 +1744,125 @@
             .attr("width","100%")
             .attr("height","100%")
             .attr("src","/apps/info/"+app.build.app.type+"/")
+              
+        }
+        
+        dataviva.popover.show(pid)
+        
+      }
+      else if (id == "share") {
+        
+        var pid = "#share_info"
+        
+        if (d3.select(pid).empty()) {
+          
+          dataviva.popover.create({
+            "id": "share_info",
+            "width": "40%",
+            "height": "250px",
+            "color": app.build.app.color,
+            "close": true
+          })
+          
+          if(window.location != window.parent.location){
+            var url = encodeURIComponent(window.parent.location.pathname + window.parent.location.search)
+          }
+          else {
+            var url = encodeURIComponent(window.location.pathname + window.location.search)
+          }
+          
+          d3.json("/apps/shorten/")
+            .header("Content-type","application/x-www-form-urlencoded")
+            .post("url="+url, function(error,data) {
+              if (data.error) {
+                alert(data.error)
+              }
+              else{
+                
+                d3.select(pid).append("h3")
+                  .text("Share URL:")
+                
+                // make input box with share link
+                var share_url = window.location.origin + "/" + data.slug + "/";
+                d3.select(pid).append("input")
+                  .attr("type", "text")
+                  .attr("class", "leon textbox mediumleon textbox large")
+                  .attr("value", share_url)
+                  .on(d3plus.evt.click, function(){
+                    this.focus();
+                    this.select();
+                  })
+                
+                d3.select(pid).append("h3")
+                  .text("Embed URL:")
+              
+                // make input box with embed iframe
+                d3.select(pid).append("input")
+                  .attr("type", "text")
+                  .attr("class", "leon textbox mediumleon textbox large")
+                  .attr("value", "<iframe width='560' height='315' src='"+window.location.href+"' frameborder='0'></iframe>")
+                  .on(d3plus.evt.click, function(){
+                    this.focus();
+                    this.select();
+                  })
+                
+                d3.select(pid).append("h3")
+                  .text("Share via Social Media:")
+            
+                // Twitter link
+                var share_url = "http://dataviva.info/"+data.slug
+                d3.select(pid).append("a")
+                  .attr("href", "https://twitter.com/share?url="+share_url+"&text="+app.viz.title()+"&hashtags=dataviva")
+                  .attr("class", "twitter-share-button")
+                  .attr("target", "_blank")
+                  .attr("onclick", "return !window.open(this.href, 'Twitter', 'width=640,height=300')")
+                  .attr("title", function(){
+                    return dataviva.language == "pt" ? "Tweetar" : "Tweet";
+                  })
+                  .append("i")
+                    .attr("class", "fa fa-twitter-square fa-4x")
+                
+                // d3.select(pid).append("script")
+//                   .html("!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');")
+                
+                // Facebook link
+                d3.select(pid).append("a")
+                  .attr("href", "http://www.facebook.com/sharer.php?s=100&p[title]=DataViva&p[summary]="+app.viz.title()+"&p[url]=http://dataviva.info/" + data.slug + "/")
+                  .attr("class", "facebook")
+                  .attr("target", "_blank")
+                  .attr("onclick", "return !window.open(this.href, 'Facebook', 'width=640,height=300')")
+                  .attr("title", "Facebook")
+                  .append("i")
+                    .attr("class", "fa fa-facebook-square fa-4x")
+                
+                // Google link
+                d3.select(pid).append("a")
+                  .attr("href", function(){
+                    var lang = dataviva.language == "pt" ? "pt-BR" : "en-US";
+                    return "https://plus.google.com/share?url=" + share_url + "&hl=" + lang
+                  })
+                  .attr("class", "google")
+                  .attr("target", "_blank")
+                  .attr("onclick", "return !window.open(this.href, 'Google+', 'width=640,height=300')")
+                  .attr("title", "Google+")
+                  .append("i")
+                    .attr("class", "fa fa-google-plus-square fa-4x")
+                    
+                // d3.select(pid).append("script")
+                //   .attr("src", "https://apis.google.com/js/platform.js")
+                //   .html(function(){
+                //     return dataviva.language == "pt" ? "{lang: 'pt-BR'}" : "";
+                //   })
+                // 
+                // d3.select(pid).append("div")
+                //   .attr("class", "g-plus")
+                //   .attr("data-action", "share")
+                //   .attr("data-width", "200")
+                //   .attr("data-height", "24")
+                //   .attr("data-href", "http://dataviva.info/"+data.slug)
+                
+              }
+            })
               
         }
         
