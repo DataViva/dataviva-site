@@ -79,10 +79,10 @@
   pages.enter().append("div")
     .attr("class","page")
     .attr("id",function(d){return "page_"+d.id})
-    .style("background-color",function(d){
+    .text(function(d){return d.id})
+    .each(function(d){
       if (d.id == app) this.toggleClass("active")
     })
-    .text(function(d){return d.id})
     
   pages.on(d3plus.evt.click,function(d){
     stopped = true

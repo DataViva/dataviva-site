@@ -193,7 +193,7 @@
           .attr("class","list_icon")
           .style("background-image", "url('"+obj.icon+"')")
           .style("background-color", function(){
-            return (type != "wld" && type != "bra") || (type == "wld" && obj.id.length == 2) ? obj.color : "transparent"
+            return (type != "wld" && type != "bra") || (type == "wld" && obj.id.length == 2) ? obj.color : "rgba(0,0,0,0)"
           })
           
         div.append("span")
