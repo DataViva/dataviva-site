@@ -1,19 +1,17 @@
 <h1>{% trans %}Complexity{% endtrans %}</h1>
 
-<h2>{% trans %}Economic Complexity{% endtrans %} (ECI)</h2>
+<h2>{% trans %}Product Complexity{% endtrans %} (PCI)</h2>
 <p>
   {% autoescape false %}
-  {{ _('Economic Complexity measures how diversified and complex a location’s export production is. It is calculated as the average complexity of the products’ complexities (or PCIs) that a location exports with %(rca)s.', rca = '<a href="/about/glossary/rca/">RCA</a>') }}
+  {{ _('The Product Complexity Index is based on two main concepts: diversity and ubiquity. Diversity refers to the number of products that the region exports with %(rca)s. Ubiquity is the number of regions that export a given product with comparative advantage. The index is based on the idea that more complex products are produced and exported by a smaller number of regions, while requiring more productive knowledge to be manufactured. Therefore, more complex products are those produced by few regions that produce different products.', rca = '<a href="/about/glossary/rca/">%s</a>' % (_('comparative advantage'))) }}
   {% endautoescape %}
 </p>
 
-<p>{% trans %}Used In{% endtrans %}: 
-  <a href="/about/apps/scatter/">{% trans %}Scatter{% endtrans %}</a>
-</p>
+<h2>{% trans %}Economic Complexity{% endtrans %} (ECI)</h2>
+<p>{% trans %}The Economic Complexity Index measures how diverse and complex  the economy of a region is, calculated as the average complexity of the products that the region exports with comparative advantage.{% endtrans %}</p>
 
-<h2>{% trans %}Product Complexity{% endtrans %} (PCI)</h2>
-<p>{% trans %}Product Complexity is a measure of how complex a product is, based on how many countries export the product and how diversified those exporters are.{% endtrans %}</p>
-
-<p>{% trans %}Used In{% endtrans %}: 
-  <a href="/about/apps/scatter/">{% trans %}Scatter{% endtrans %}</a>
+<p>
+  {% autoescape false %}
+  {{ _('If it is of interest, the formulas for the calculation of these indices can be found at: %(atlas)s', atlas = '<a href="http://atlas.media.mit.edu/book/" target="_blank">http://atlas.media.mit.edu/book/</a>') }}
+  {% endautoescape %}
 </p>

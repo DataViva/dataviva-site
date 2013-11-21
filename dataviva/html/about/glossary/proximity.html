@@ -1,44 +1,5 @@
 <h1>{% trans %}Proximity{% endtrans %}</h1>
-<p>
-  {% autoescape false %}
-  {{ _('This is the measure of distance between any two products, industries or occupations used to construct the %(network)s visualization e.g. industry space, occupation space and product space. The %(network)s app only shows the connections between nodes that have the highest proximity but in actuality every node has a proximity value with every other node.', network = '<a href="/about/apps/network/">%s</a>' % (_("Network"))) }}
-  {% endautoescape %}
-</p>
-<br>
 
-<h2>{% trans %}Product Proximity{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('The product space %(network)s layout has been calculated using world trade (%(comtrade)s) data though any proximity values shown have all been calculated using only Brazilian export data (%(secex)s). It is important to note that any network graphic is really just an estimate of the underlying adjacency matrix used to create it. When viewing a specific Brazilian location, one is only seeing the products that said location is exporting. The way proximity is calculated for products is by counting the number of locations that export both products with revealed comparative advantage (%(rca)s) and dividing that by the number of locations that export the most ubiquitous product of the pair. Let us take as a simple example 2 products: Cut Flowers (HS ID: 0603) and Honey (HS ID: 0409). As shown in the following figure, the proximity between these 2 products is ⅓.', network = '<a href="/about/apps/network/">%s</a>' % (_("Network")), comtrade = '<a href="/about/data/comtrade/">UN Comtrade</a>', secex = '<a href="/about/data/secex/">SECEX</a>', rca = '<a href="/about/glossary/rca/">RCA</a>') }}
-  {% endautoescape %}
-</p>
-<img src="/static/img/help/glossary/proximity_products_{{g.locale}}.png" />
-<br>
+<p>{% trans %}The proximity between two products is the main index used for the creation of the Product Space, being a measure of the probability of product co-export. Using global export data, it estimates the probability of a product being exported by a country that also exports another specific product. This calculation is made for all products of the standard international trade classification (HS 4-digit level). The products most likely to be co-exported are considered connected in the network, based on the assumption that they share capabilities required for their manufacture.{% endtrans %}</p>
 
-<h2>{% trans %}Location Proximity{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('The proximity calculation used to determine how similar locations are is very similar to the one used for the product space, except the %(rca)s calculation matrix is based off of locations and industries. This calculation could also be made by substituting products for industries but since these numbers are only used for the %(required)s calculations (which uses %(emp_data)s) we are using industries.', required = '<a href="/about/glossary/required/">%s</a>' % (_("Recommended Employees")), emp_data = '<a href="/about/data/rais/">%s</a>' % (_("employment data")), rca = '<a href="/about/glossary/rca/">RCA</a>') }}
-  {% endautoescape %}
-</p>
-<img src="/static/img/help/glossary/proximity_locations_{{g.locale}}.png" />
-<br>
-
-<h2>{% trans %}Industry Proximity{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('The industry space is created a bit differently from the product space, in that instead of basing the %(rca)s calculation matrix off of locations and industries, we are using a matrix of industries and occupations. The reason for this is that as opposed to product exports and location, similar industries do not necessarily tend to co-locate. Take for example two large industries such as auto part manufacturing and electronics manufacturing. The data has shown that such large industries do not tend to co-locate in similar areas, but instead in rural areas outside of urban centers isolated from many other industries. Yet by looking at the workforce shared between such industries we find many of the same occupations e.g. machine operators, production line feeders, electrical engineers.', rca = '<a href="/about/glossary/rca/">RCA</a>') }}
-  {% endautoescape %}
-</p>
-<img src="/static/img/help/glossary/proximity_industries_{{g.locale}}.png" />
-<br>
-
-<h2>{% trans %}Occupation Proximity{% endtrans %}</h2>
-<p>{% trans %}The proximity measure used for the occupation space is quite simply the inverse of the calculation used in the industry space. The same matrix of industries and occupations is used. Below you will see an illustration of this calculation.{% endtrans %}</p>
-<img src="/static/img/help/glossary/proximity_occupations_{{g.locale}}.png" />
-<br>
-
-<p>{% trans %}Used In{% endtrans %}: 
-  <a href="/about/apps/network/">{% trans %}Network{% endtrans %}</a>, 
-  <a href="/about/apps/rings/">{% trans %}Rings{% endtrans %}</a>
-</p>
+<p>{% trans %}To build the "Industry Space" and the connections between occupations the same reasoning is used. The proximity of the industries is calculated based on the probability of co-occupancy between two activities, meaning that it is a measure of the probability of two industries having the same occupations, and therefore requiring common capabilities. Similarly, the proximity of occupations is calculated based on the likelihood of these being employed in the same industry, revealing a productive knowledge that is used in various sectors of the Brazilian economy.{% endtrans %}</p>

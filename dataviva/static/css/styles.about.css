@@ -3,6 +3,12 @@ body.about #inner_container {
   vertical-align: top;
 }
 
+#about_nav {
+  display: inline-block;
+  margin-right: 20px;
+  width: 200px;
+}
+
 #about_nav > a {
   margin: 0px 0px 6px 0px !important;
 }
@@ -13,6 +19,11 @@ body.about #inner_container {
 
 #about_nav > a.decision.short::after {
   content: '\f105';
+}
+
+#about_content {
+  display: inline-block;
+  text-align: left;
 }
 
 #about_content > .lightbox {
@@ -54,10 +65,14 @@ div#iframe {
   z-index: 1;
 }
 
-iframe {
+iframe.attrs {
   border-top: 1px solid #ccc;
   min-height: 181px;
   width: 566px;
+}
+
+iframe.youtube {
+  margin: 10px 0px;
 }
 
 /****************/

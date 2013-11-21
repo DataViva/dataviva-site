@@ -1,18 +1,7 @@
 <h1>{% trans %}Geo Map{% endtrans %}</h1>
-<p>{% trans %}Geo Maps are a way of viewing a dataset directly connected to it’s geographical origin. Using this app, you can gain a quick understanding of where in a region there is the most activity.{% endtrans %}</p>
 
-<h2>{% trans %}Color{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('Municipalities are colored based on a standard heat map coloring from Blue to Red, with Red being the largest value. The default variable for color is Trade Value for %(prod_data)s and Total Number of Employees for %(emp_data)s, but this value can be changed depending on the dataset. When changing this value, the municipalities will color accordingly.', emp_data = '<a href="/about/data/rais/">%s</a>' % (_("employment data")), prod_data = '<a href="/about/data/secex/">%s</a>' % (_("product data"))) }}
-  {% endautoescape %}
-</p>
+<p>{% trans %}The Geo Map is a descriptive geographical visualization that enables an analysis of the spatial distribution of the variables available in DataViva. Using a heat scale, it shows the municipalities with the largest (in red) and lowest (blue) values, and allows navigation both to zoom in and out, as to see more information about a selected municipality. This application aims to reveal the geographic distribution of the data.{% endtrans %}</p>
 
-<h2>{% trans %}Zooming{% endtrans %}</h2>
-<p>{% trans %}You can zoom in and out of the map by using the controls in the top left, or with the mouse scroll wheel. Click and drag the terrain to pan. You can also zoom directly to a specific municipality by clicking on it (and clicking anywhere else on the map will zoom back out).{% endtrans %}</p>
+<p>{% trans %}One of the visualizations, for example, shows the economic activities in Minas Gerais by municipality, showing its concentration in the Metropolitan Region of Belo Horizonte, in the southern part of the state and in the so called Triângulo Mineiro. As in other applications, you can change the visualization to the desired variable with the filters.{% endtrans %}</p>
 
-<h2>{% trans %}Map Tiles{% endtrans %}</h2>
-<p>{% trans %}The controls in the bottom right can be used to change the map tiles used. This can be helpful if you want to see specific landmarks or roads.{% endtrans %}</p>
-
-<h2>{% trans %}Year{% endtrans %}</h2>
-<p>{% trans %}The municipalities display data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each municipality will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data change over time.{% endtrans %}</p>
+<iframe class="youtube" src="https://www.youtube.com/embed/_7C-jKemilc?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}" frameborder="0" allowfullscreen width="525" height="295"></iframe>

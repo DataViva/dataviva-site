@@ -4,29 +4,31 @@
 {% block title %}: {% trans %}Contact Us{% endtrans %}{% endblock %}
 
 {% block about_content %}
-  <p>{% trans %}DataViva is a project that started in July of 2012 by the Escritorio of Minas Gerais in collaboration with a small start-up called Growth Ventures based in Cambridge, MA. DataViva is a collaborative planning tool composed of a number of applications, each of which visualize data in innovative and creative ways. DataViva is intended to be used as a tool to help members of the government, private sectors, as well as citizens themselves be able to understand big data and and more importantly, use it to their advantage.{% endtrans %}</p>
+  <p>{% trans %}DataViva is a Big Data platform created by the Strategic Priorities Office of the government of Minas Gerais and developed in collaboration with professors Cesar Hidalgo (Massachusetts Institute of Technology - MIT) and Ricardo Hausmann (Harvard Kennedy School) by the formation of a startup called Growth Ventures, located in Cambridge, MA. The online suite is innovative in the way that it makes a great volume of official data about exports and occupation in Brazil available, and enables – with its eight apps – access to more than 100 million interactive visualizations for over five thousand Brazilian municipalities.{% endtrans %}</p>
+  
+  <p>{% trans %}The data incorporated and addressed in DataViva is able to contribute to the implementation of public and private investments and policies, as well as academic researches. By pointing out relations and showing dynamics, which were not explicit until now, the tool allows public and private actors to improve their strategies and decision making processes. DataViva also enables these actors to discuss, in a more qualified manner and based on empiric data, relevant issues for economic and social development.{% endtrans %}</p>
   
   <div id="search_div">
-    <h1>{% trans %}What's on your mind?{% endtrans %}</h1>
+    <h1>{% trans %}What do you want to know?{% endtrans %}</h1>
     {{ search_form.search(size=60, id='search', placeholder=_("Search")) }}
     <div id="sabrina_head"></div>
   </div>
   
   <a {% if g.user.is_authenticated() %}href="/about/ask/"{%else%}onclick="login()"{%endif%} class="decision icon short questions">
-    {% trans %}Cannot find your answer?{% endtrans %} {% trans %}Submit your question here!{% endtrans %}
+    {% trans %}Can´t find an answer?{% endtrans %} {% trans %}Send your question to us here!{% endtrans %}
   </a>
   
   </div><br><br><div class="lightbox">
   
   <div id="list_title">
-    <h2></h2>
+    <h2>{% trans %}Find your Answers{% endtrans %}</h2>
   
     <div id="order_toggle">
       <legend id="order">{% trans %}Order{% endtrans %}</legend>
       <input type="radio" name="order" value="votes" id="votes" onclick="change_order(this.value)" checked="checked">
-      <label for="votes">{% trans %}Top Voted{% endtrans %}</label>
+      <label for="votes">{% trans %}Most Active{% endtrans %}</label>
       <input type="radio" name="order" value="newest" id="newest" onclick="change_order(this.value)">
-      <label for="newest">{% trans %}Newest{% endtrans %}</label>
+      <label for="newest">{% trans %}Most Recent{% endtrans %}</label>
     </div>
   </div>
   
@@ -53,7 +55,6 @@
       if(search_term){
         url += "&q=" + search_term;
       }
-      update_title()
       d3.select("#question_feed").html('')
         .call(is.url(url).offset(0).remove(true))
     }
@@ -133,12 +134,6 @@
     var is = infinite_scroll().format_items(item_formatter);
 
     change_order(order)
-    
-    function update_title(title) {
-      if (!title) var title = dataviva.format.text(order) + " " + dataviva.format.text("questions")
-      else title = dataviva.format.text(title)
-      d3.select("#list_title h2").text(title)
-    }
 
     d3.select("#search").on("input", function(e){
 

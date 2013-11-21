@@ -1,40 +1,9 @@
 <h1>{% trans %}Occugrid{% endtrans %}</h1>
-<p>
-  {% autoescape false %}
-  {{ _('The Occugrid shows the %(rec)s for a given industry. It can be used to determine which occupations a location may need to hire in order to become more successful. By changing sizing, grouping, and other parameters, a user is able to bring clarity to the list of recommended occupations.', rec = '<a href="/about/glossary/required/">%s</a>' % (_("recommended workforce"))) }}
-  {% endautoescape %}
-</p>
 
-<h2>{% trans %}Visual Language{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('In the Occugrid, each occupation is represented by a small donut chart. The overall slices of the donut are determined by the total %(rec)s. This donut chart is divided into 3 sections, as is illustrated in the following diagram:', rec = '<a href="/about/glossary/required/">%s</a>' % (_("Recommended Employees"))) }}
-  {% endautoescape %}
-</p>
-<img src="/static/img/help/occugrid/occugrid_details_small_{{g.locale}}.png">
+<p>{% trans %}The Occugrid deals specifically with RAIS data regarding occupations in Brazil. The goal is to show graphically which are the main occupations employed in various economic activities, their importance to each industry and the number of employees who work in these activities. Prescriptive in nature, this visualization compares the location in question with a reference calculated from the definition of other similar localities in terms of economic structure. Consequently, it enables, in a single visualization, the ability to know what are the main occupations of an industry, how many professionals work in comparable localities, how many professionals work in the region, and how many of them work specifically in that region and industry.{% endtrans %}</p>
 
-<h2>{% trans %}Sizing{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('Each donuts’ radius can be sized using a number of variables. These include: %(imp)s, Average Monthly Wage, and %(rec)s.', rec = '<a href="/about/glossary/required/">%s</a>' % (_("Recommended Employees")), imp = '<a href="/about/glossary/importance/">%s</a>' % (_("Importance"))) }}
-  {% endautoescape %}
-</p>
+<p>{% trans %}This type of visualization allows an analysis of the labor market of a region, the professions needed to develop an industry, and, in conjunction with other applications about economic activities and occupations, links occupations and economic activities (which may also be related to the products they manufacture). It is also an initial step towards an analysis of human capital training needs in a locality, revealing shortcomings of qualified personnel and its importance for the economic activities analyzed.{% endtrans %}</p>
 
-<h2>{% trans %}Grouping{% endtrans %}</h2>
-<p>{% trans %}To help get a quick understanding of the different types of occupations you are looking at, the donuts can be placed into different groupings. These include: Grid and Category.{% endtrans %}</p>
+<p>{% trans %}Unlike the other applications, the Occugrid allows only one type of output, because it was created especially for the analysis of occupations (and related economic activities). However, the output can use different parameters and types of grouping. One of the possible visualizations shows the average number of employees per establishment for the “Arts and Entertainment” industry in Minas Gerais.{% endtrans %}</p>
 
-<h2>{% trans %}Sorting{% endtrans %}</h2>
-<p>{% trans %}The donuts can also be ordered (from top left to bottom right) by a number of variables: Name, Value (whatever the current Sizing is), and Category.{% endtrans %}</p>
-
-<h2>{% trans %}Color{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('Color, along with the other visualizations, defaults to showing Sectors for the data classification you are viewing (whether it is products, industries, occupations, or locations). In some cases, the color may be manipulated to show other values, such as Growth, %(comp)s, or %(opp_gain)s.', comp = '<a href="/about/glossary/complexity/">%s</a>' % (_("Complexity")), opp_gain = '<a href="/about/glossary/opp_gain/">%s</a>' % (_("Opportunity Gain"))) }}
-  {% endautoescape %}
-</p>
-
-<h2>{% trans %}Filter/Solo{% endtrans %}</h2>
-<p>{% trans %}By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of donuts. Click the “X” on the right of the key to clear all filters and solos.{% endtrans %}</p>
-
-<h2>{% trans %}Year{% endtrans %}</h2>
-<p>{% trans %}The donuts display data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each donut will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how occupations change over time.{% endtrans %}</p>
+<iframe class="youtube" src="https://www.youtube.com/embed/PfZVsnKOOLc?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}" frameborder="0" allowfullscreen width="525" height="295"></iframe>

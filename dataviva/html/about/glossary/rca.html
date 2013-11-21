@@ -1,11 +1,6 @@
 <h1>RCA</h1>
-<p>{% trans %}Revealed Comparative Advantage is a numeric value used to connote whether a particular product or industry is especially prominent in a location. The calculation for this number is a share of a share. Say for example we were to consider Belo Horizonte’s exports of Cars. We would take the share that Cars represent in Belo Horizonte’s export basket divided by the share that Cars represent in all of Brazil. If this number is larger than or equal to 1, we can say that Belo Horizonte is a strong exporter in Cars (stronger than the average). RCA is a much better indicator of whether a product or industry is expressed in a location rather than export value alone because it takes into account the size of the location’s market vis-a-vis the total market size.{% endtrans %}</p>
-<img src="/static/img/help/glossary/rca.png" />
-<p>{% trans %}The RCA equation. Here “b” represents a location and “p” represents a product.{% endtrans %}</p>
 
-<p>{% trans %}Used In{% endtrans %}: 
-  <a href="/about/apps/scatter/">{% trans %}Scatter{% endtrans %}</a>, 
-  <a href="/about/apps/network/">{% trans %}Network{% endtrans %}</a>, 
-  <a href="/about/apps/rings/">{% trans %}Rings{% endtrans %}</a>
-</p>
-<br>
+<p>{% trans %}The Revealed Comparative Advantage (RCA) shows the share of exports in a region of a given product in relation to the participation of this product in the world trade. In other words, the RCA measures if the share of a product in the exports of a region is larger or smaller than this product participation in the international trade. If the participation is equal, the RCA will be 1, meaning that the region exports exactly the "fair share" for all regions (an average share of the total exports divided by the number of regions). When the RCA of a region is larger than 1, it means that this region exports, in percentage terms, more than the "fair share", meaning that it has a comparative advantage in the export of this product in relation to other regions.{% endtrans %}</p>
+
+<p>{% trans %}In DataViva, the calculation of the RCA is made considering the global trade (International), and just Brazilian exports (Domestic).
+For industries, the RCA is calculated only for Brazil, following the same participation logic. An RCA greater than 1 in an industry means that the region has a larger share than the average in that industry, in terms of number of employees.{% endtrans %}</p>

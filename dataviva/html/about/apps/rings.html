@@ -1,26 +1,9 @@
 <h1>{% trans %}Rings{% endtrans %}</h1>
-<p>
-  {% autoescape false %}
-  {{ _('The Rings app shows a specific data point’s primary and secondary connections in the associated Network. The connections are calculated based off of their %(prox)s with eachother.', prox = '<a href="/about/glossary/proximity/">%s</a>' % (_("Proximity"))) }}
-  {% endautoescape %}
-</p>
 
-<h2>{% trans %}RCA Scope{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('When looking at %(prod_data)s, you can change the %(rca)s calculation from using internal domestic comparisons (%(secex)s) to using international world trade comparisons (%(comtrade)s).', secex = '<a href="/about/data/secex/">SECEX</a>', prod_data = '<a href="/about/data/secex/">%s</a>' % (_("product data")), comtrade = '<a href="/about/data/comtrade/">COMTRADE</a>', rca = '<a href="/about/glossary/rca/">RCA</a>') }}
-  {% endautoescape %}
-</p>
+<p>{% trans %}The Rings visualization allows viewing a product, industry or occupation in isolation, making it easier to navigate round its primary and secondary connections, which can be a bit difficult in the Network application. Also a prescriptive application, its main advantage is to create a visualization of the location of an isolated product, industry, or occupation in the network, revealing all of their first degree connections and the connections of these connections (second degree). It also shows those products, activities or occupations in which the selected location has revealed comparative advantage (RCA> 1).{% endtrans %}</p>
 
-<h2>{% trans %}Color{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('Color, along with the other visualizations, defaults to showing Sectors for the data classification you are viewing (whether it is products, industries, occupations, or locations). In some cases, the color may be manipulated to show other values, such as Growth, %(comp)s, or %(opp_gain)s.', comp = '<a href="/about/glossary/complexity/">%s</a>' % (_("Complexity")), opp_gain = '<a href="/about/glossary/opp_gain/">%s</a>' % (_("Opportunity Gain"))) }}
-  {% endautoescape %}
-</p>
+<p>{% trans %}This is important because, according to the Product Space theory, having comparative advantage in a product means that the region has the expertise to produce it and the knowledge that is shared in the production of connected products. Thus, one can visualize, quickly and easily, if the product has many connections and if these are with products that the region already has comparative advantage, which would facilitate its development, because it means that much of the productive knowledge needed is already present.{% endtrans %}</p>
 
-<h2>{% trans %}Filter/Solo{% endtrans %}</h2>
-<p>{% trans %}By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of circles. Click the “X” on the right of the key to clear all filters and solos.{% endtrans %}</p>
+<p>{% trans %}Similar to other applications, Rings uses a standard color pattern that lets one see of which big group a product, industry or occupation belongs, as well as other groups with which it is connected. Correctly understanding the concepts of the Product Space theory is fundamental to interpret this prescriptive visualization.{% endtrans %}</p>
 
-<h2>{% trans %}Year{% endtrans %}</h2>
-<p>{% trans %}The circles display data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each circle will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data changes over time.{% endtrans %}</p>
+<iframe class="youtube" src="https://www.youtube.com/embed/AbaagElhEKI?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}" frameborder="0" allowfullscreen width="525" height="295"></iframe>
