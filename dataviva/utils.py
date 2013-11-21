@@ -375,6 +375,8 @@ def make_query(data_table, url_args, lang, **kwargs):
     offset = url_args.get("offset", None)
     limit = url_args.get("limit", None)
     cols = url_args.get("cols", None)
+    if cols:
+        cols = cols.split(".")
     excluding = url_args.get("excluding", None)
     if offset:
         offset = float(offset)
@@ -388,11 +390,11 @@ def make_query(data_table, url_args, lang, **kwargs):
     ret = {}
     # first lets test if this query is cached (be sure we are not paginating
     # results) as these should not get cached
-    # if limit is None and download is None and raw is None and cols is None:
-    #     cached_q = cached_query(cache_id)
-    #     if cached_q:
-    #         return cached_q
-    # 
+    if limit is None and download is None and raw is None and cols is None:
+        cached_q = cached_query(cache_id)
+        if cached_q:
+            return cached_q
+    
     query = db.session.query(data_table)
     if join:
         for j in join:
@@ -529,6 +531,7 @@ def make_query(data_table, url_args, lang, **kwargs):
             ret["data"] = ret["data"][int(offset):int(offset)+int(limit)]
 
     if cols:
+        cols = ["year","bra_id"]+unique_keys+cols
         new_return = []
         attrs = None
         if ("name" or "id_ibge" or "id_mdic" in cols) and show_id:
@@ -560,8 +563,9 @@ def make_query(data_table, url_args, lang, **kwargs):
     if download is not None:
         header = [str(c).split(".")[1] for c in data_table.__table__.columns]
         if cols:
-            stickies = [c for c in header if c in ["year","bra_id"]+unique_keys]
-            header = stickies+cols.split(".")
+            stickies = [c for c in header if c in unique_keys]
+            header = stickies+cols
+            
         def generate():
             for i, data_dict in enumerate(ret["data"]):
                 row = [str(data_dict[c]) if c in data_dict else '' for c in header]
@@ -570,6 +574,7 @@ def make_query(data_table, url_args, lang, **kwargs):
                 yield ','.join(row) + '\n'
 
         content_disposition = "attachment;filename=%s.csv" % (cache_id[1:-1].replace('/', "_"))
+        
         if sys.getsizeof(ret["data"]) > 10485760:
             resp = Response(['Unable to download, request is larger than 10mb'], 
                             mimetype="text/csv;charset=UTF-8", 
