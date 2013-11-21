@@ -339,6 +339,9 @@ dataviva.format.text = function(text,name,l) {
       "with": {"en": "with", "pt": "com"},
       "and": {"en": "and", "pt": "e"},
       "fill": {"en": "Fill", "pt": "Preenchido"},
+      "embed_url": {"en": "Embed URL", "pt": "URL para Incorporar"},
+      "share_url": {"en": "Shortened URL", "pt": "URL Abreviada"},
+      "social_media": {"en": "Social Media", "pt": "Mídias Sociais"},
     
       // Viz-Whiz Text
       "Click for More Info": {"en": "Click for more data and related apps.", "pt": "Clique para dados adicionais e aplicativos relacionados."},

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-21 16:39-0500\n"
+"POT-Creation-Date: 2013-11-21 17:09-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgstr ""
 msgid "This question has now been updated."
 msgstr ""
 
-#: dataviva/apps/views.py:154
+#: dataviva/apps/views.py:155
 msgid "You need to be logged in to star apps."
 msgstr ""
 
@@ -213,7 +213,7 @@ msgstr ""
 msgid "The views are created from two databases, one on exports and another on occupations and industries in Brazil. It is possible to cross the main variables of each database, building different views. For example, you can view the products exported by Minas Gerais, or export destinations of the state (change output), or exports destiny of only one product or product section selected (depth filter), with a color code showing those which presented growth or decline in the last five years (color filter)."
 msgstr ""
 
-#: dataviva/html/about/apps/index.html:24
+#: dataviva/html/about/apps/index.html:26
 msgid "View the App"
 msgstr ""
 
@@ -799,14 +799,18 @@ msgid "Save this App"
 msgstr ""
 
 #: dataviva/html/apps/embed.html:99
-msgid "Show App Tutorial"
+msgid "Share/Embed"
 msgstr ""
 
 #: dataviva/html/apps/embed.html:100
-msgid "Open App in Full-Screen"
+msgid "Show App Tutorial"
 msgstr ""
 
 #: dataviva/html/apps/embed.html:101
+msgid "Open App in Full-Screen"
+msgstr ""
+
+#: dataviva/html/apps/embed.html:102
 msgid "Show/Hide Controls"
 msgstr ""
 

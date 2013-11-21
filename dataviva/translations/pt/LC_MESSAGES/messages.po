@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-21 16:39-0500\n"
+"POT-Creation-Date: 2013-11-21 17:09-0500\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr "Resposta enviada."
 msgid "This question has now been updated."
 msgstr "Esta pergunta foi atualizada."
 
-#: dataviva/apps/views.py:154
+#: dataviva/apps/views.py:155
 msgid "You need to be logged in to star apps."
 msgstr "Você precisa fazer o login para iniciar aplicativos."
 
@@ -354,7 +354,7 @@ msgstr ""
 "(filtro de agregação), com um código de cores que mostra aqueles que "
 "tiveram crescimento ou queda nos últimos cinco anos (filtro de cor)."
 
-#: dataviva/html/about/apps/index.html:24
+#: dataviva/html/about/apps/index.html:26
 msgid "View the App"
 msgstr "Ver o Aplicativo"
 
@@ -1440,7 +1440,12 @@ msgid ""
 "occupation, in a given industry. This reference is calculated by defining"
 " similar regions to the region examined, and then finding the average "
 "number of employees in these regions for the select industry."
-msgstr "O Emprego Estimado é uma referência do número de empregados, por ocupação, em uma dada atividade econômica. Esta referência é calculada a partir da definição de regiões similares àquela analisada, sendo uma média do número de empregados nestas regiões numa dada atividade econômica."
+msgstr ""
+"O Emprego Estimado é uma referência do número de empregados, por "
+"ocupação, em uma dada atividade econômica. Esta referência é calculada a "
+"partir da definição de regiões similares àquela analisada, sendo uma "
+"média do número de empregados nestas regiões numa dada atividade "
+"econômica."
 
 #: dataviva/html/account/index.html:20
 msgid "Activity sorted by date"
@@ -1568,14 +1573,18 @@ msgid "Save this App"
 msgstr "Salvar este Aplicativo"
 
 #: dataviva/html/apps/embed.html:99
+msgid "Share/Embed"
+msgstr "Compartilhar/Incorporar"
+
+#: dataviva/html/apps/embed.html:100
 msgid "Show App Tutorial"
 msgstr "Mostrar o Tutorial deste Aplicativo"
 
-#: dataviva/html/apps/embed.html:100
+#: dataviva/html/apps/embed.html:101
 msgid "Open App in Full-Screen"
 msgstr "Abrir Aplicativo em Tela Cheia"
 
-#: dataviva/html/apps/embed.html:101
+#: dataviva/html/apps/embed.html:102
 msgid "Show/Hide Controls"
 msgstr "Mostrar/Ocultar Controles"
 
