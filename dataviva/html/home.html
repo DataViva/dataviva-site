@@ -66,7 +66,7 @@
   "image": "doctor", "url": "/profiles/cbo/2251/", "id": 6}
   ]
     
-  var app = 1, stopped = false
+  var app = 1, stopped = false, changing = false
   
   d3.select("#carousel .decision")
     .on(d3plus.evt.click,function(){
@@ -149,13 +149,15 @@
   change_app()
   
   function show_app(a) {
-    if (a != app) {
+    if (a != app && !changing) {
+      changing = true
       var old = d3.select("#app_"+app).style("opacity",0)
       var old_title = d3.select("#title_"+app).style("opacity",0)
       d3.select("#page_"+app).node().toggleClass("active")
       setTimeout(function(){
         old.style("display","none")
         old_title.style("display","none")
+        changing = false
       },1000)
       if (a > carousel.length) app = 1
       else app = a
