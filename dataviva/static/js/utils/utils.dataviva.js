@@ -866,13 +866,13 @@ dataviva.flash = function(text) {
 
 dataviva.url = function(url,args,title) {
   
-  var replace = window.location.pathname.indexOf(url) >= 0
+  var replace = window.location.pathname.indexOf(url.split("?")[0]) >= 0
   var iframe = window != window.parent
   var app_embed = window.location.pathname.indexOf("apps/embed") >= 0
   var app_builder = window.parent.location.pathname.indexOf("apps/builder") >= 0
   var data_table = window.location.pathname.indexOf("data/table") >= 0
   var rankings = window.location.pathname.indexOf("rankings") >= 0
-
+  
   if (title) document.title = "DataViva : "+title
 
   var params = ""
