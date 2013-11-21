@@ -168,3 +168,20 @@ div.output_list {
 div.scrolling_help {
   padding: 20px;
 }
+
+/*******************/
+/* Share Buttons   */
+/*******************/
+
+#share_info {
+  padding: 20px;
+}
+
+#share_info input {
+  margin: 0 0 20px 0;
+  width: 96%;
+}
+
+#share_info a i.fa {
+  margin: 0 20px 0 0;
+}
