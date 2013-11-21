@@ -482,7 +482,8 @@ function Selector() {
               var connect = "in"
             }
             else {
-              if (x.article_pt && x.gender_pt == "m") var connect = "no"
+              if (x.id == "all") var connect = "do"
+              else if (x.article_pt && x.gender_pt == "m") var connect = "no"
               else if (x.article_pt && x.gender_pt == "f") var connect = "na"
               else var connect = "em"
               if (x.plural_pt && x.article_pt) connect += "s"
