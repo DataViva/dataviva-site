@@ -18,8 +18,8 @@ String.prototype.toTitleCase = function() {
     else if (uppers.indexOf(txt) >= 0 || uppers.indexOf(us) >= 0) return txt.toUpperCase()
     else return us
   });
-
-  return str;
+  
+  return str.charAt(0).toUpperCase() + str.substr(1);
 }
 
 String.prototype.removeAccents = function() {

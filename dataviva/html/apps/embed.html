@@ -96,6 +96,7 @@
     <a id="refresh" class="leon button square alt_tooltip" onclick="app.start()" alt="{% trans %}Refresh the App{% endtrans %}"><i class="fa fa-refresh"></i></a>
     <a id="file" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Download this App{% endtrans %}"><i class="fa fa-save"></i></a>
     <a id="starred" class="leon button square alt_tooltip" onclick="app.star()" alt="{% trans %}Save this App{% endtrans %}"><i id="status_{{starred}}" class="{% if starred == 1 %}fa fa-star{% else %}fa fa-star-o{% endif %}"></i></a>
+    <a id="share" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Share/Embed{% endtrans %}"><i class="fa fa-share"></i></a>
     <a id="help" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Show App Tutorial{% endtrans %}"><i class="fa fa-question-circle"></i></a>
     <a id="full_screen" class="leon button square alt_tooltip" onclick="window.open(window.location.href,'_blank')" alt="{% trans %}Open App in Full-Screen{% endtrans %}"><i class="fa fa-fullscreen"></i></a>
     <a id="controls_toggle" class="leon button square alt_tooltip" onclick="builder.controls()" alt="{% trans %}Show/Hide Controls{% endtrans %}"><i class="fa fa-cogs"></i></a>
@@ -876,7 +877,7 @@
         app.tooltip["short"][""] = [app.build.output+"_display"]
         app.tooltip["long"][""] = [app.build.output+"_display"]
         if (app.build.app.type == "occugrid") {
-          app.tooltip["short"]["calculations"] = ["num_emp_est","elsewhere","required"]
+          app.tooltip["short"]["calculations"] = ["elsewhere","required"]
         }
         else {
           app.tooltip["short"]["basics"] = [app.vars.value_var]
@@ -1053,9 +1054,17 @@
       
       last_app = app.build.app.type
       
-      d3.select("#app")
-        .html("")
-        .datum(app.data[app.build.data_url][format[app.build.app.type]])
+      if(app.build.app.type == "scatter" && app.build.bra[0].id == "all") {
+        d3.select("#app")
+          .html("")
+          .datum([])
+      }
+      else {
+        d3.select("#app")
+          .html("")
+          .datum(app.data[app.build.data_url][format[app.build.app.type]])
+      }
+      
 
       if (app.build.app.type != "rings") builder.key()
       dataviva.resize()
@@ -1214,9 +1223,9 @@
         
         var year_jobs = {}
         jobs.forEach(function(j){
-          if (j.importance >= 0.1) {
+          if (j.importance >= 0.2) {
             if (!year_jobs[j.year]) year_jobs[j.year] = [j]
-            else if (year_jobs[j.year].length < 40) year_jobs[j.year].push(j)
+            else year_jobs[j.year].push(j)
           }
         })
         
@@ -1236,6 +1245,7 @@
               if (!d.wage) d.wage = 0
               if (!d.num_emp) d.num_emp = 0
               if (!d.num_est) d.num_est = 0
+              if (!d.wage_avg) d.wage_avg = 0
               
               d.num_emp_est = Math.ceil(d.num_emp_est)
               
@@ -1268,7 +1278,7 @@
           .key(function(d){return d.year})
           .key(function(d){return d[out+"_id"]})
           .rollup(function(leaves){
-            if (leaves.length == 2) {
+            if (leaves.length == 2 && leaves[0][app.vars.axes] && leaves[1][app.vars.axes]) {
               var d = {}
               d.year = leaves[0].year
               d[out+"_id"] = leaves[0][out+"_id"]
@@ -1276,7 +1286,6 @@
               d.icon = dataviva.icon(d[out+"_id"],out)
               d.active = true
               d.always_active = 1
-              
               leaves.forEach(function(leaf){
                 for (key in leaf) {
                   if (key != "bra_id" && key != out+"_id") {
@@ -1591,7 +1600,7 @@
         button.select(".icon").style("background-color",obj.color)
       }
       else {
-        button.select(".icon").style("background-color","transparent")
+        button.select(".icon").style("background-color","rgba(0,0,0,0)")
       }
         
       if (obj.distance > 0 && type == "bra") new_name += " "+obj.distance+"km"
@@ -1679,6 +1688,8 @@
           app.categories = cats
         }
         
+        if (!app.categories) app.categories = []
+        
         if (app.categories.length <= 1) {
           d3.select("div#key").style("display","none")
         }
@@ -1733,6 +1744,106 @@
             .attr("width","100%")
             .attr("height","100%")
             .attr("src","/apps/info/"+app.build.app.type+"/")
+              
+        }
+        
+        dataviva.popover.show(pid)
+        
+      }
+      else if (id == "share") {
+        
+        var pid = "#share_info"
+        
+        if (d3.select(pid).empty()) {
+          
+          dataviva.popover.create({
+            "id": "share_info",
+            "width": "40%",
+            "height": "250px",
+            "color": app.build.app.color,
+            "close": true
+          })
+          
+          if(window.location != window.parent.location){
+            var url = encodeURIComponent(window.parent.location.pathname + window.parent.location.search)
+          }
+          else {
+            var url = encodeURIComponent(window.location.pathname + window.location.search)
+          }
+          
+          d3.json("/apps/shorten/")
+            .header("Content-type","application/x-www-form-urlencoded")
+            .post("url="+url, function(error,data) {
+              if (data.error) {
+                alert(data.error)
+              }
+              else{
+                
+                d3.select(pid).append("h3")
+                  .text(dataviva.format.text("share_url"))
+                
+                // make input box with share link
+                var share_url = window.location.origin + "/" + data.slug + "/";
+                d3.select(pid).append("input")
+                  .attr("type", "text")
+                  .attr("class", "leon textbox mediumleon textbox large")
+                  .attr("value", share_url)
+                  .on(d3plus.evt.click, function(){
+                    this.focus();
+                    this.select();
+                  })
+                
+                d3.select(pid).append("h3")
+                  .text(dataviva.format.text("embed_url"))
+              
+                // make input box with embed iframe
+                d3.select(pid).append("input")
+                  .attr("type", "text")
+                  .attr("class", "leon textbox mediumleon textbox large")
+                  .attr("value", "<iframe width='560' height='315' src='"+window.location.href+"' frameborder='0'></iframe>")
+                  .on(d3plus.evt.click, function(){
+                    this.focus();
+                    this.select();
+                  })
+                
+                d3.select(pid).append("h3")
+                  .text(dataviva.format.text("social_media"))
+            
+                // Twitter link
+                var share_url = "http://dataviva.info/"+data.slug
+                d3.select(pid).append("a")
+                  .attr("href", "https://twitter.com/share?url="+share_url+"&text="+app.viz.title()+"&hashtags=dataviva")
+                  .attr("class", "share_button")
+                  .attr("target", "_blank")
+                  .attr("onclick", "return !window.open(this.href, 'Twitter', 'width=640,height=300')")
+                  .attr("id", "Twitter")
+                  .attr("title", function(){
+                    return dataviva.language == "pt" ? "Tweetar" : "Tweet";
+                  })
+                
+                // Facebook link
+                d3.select(pid).append("a")
+                  .attr("href", "http://www.facebook.com/sharer.php?s=100&p[title]=DataViva&p[summary]="+app.viz.title()+"&p[url]=http://dataviva.info/" + data.slug + "/")
+                  .attr("class", "share_button")
+                  .attr("target", "_blank")
+                  .attr("onclick", "return !window.open(this.href, 'Facebook', 'width=640,height=300')")
+                  .attr("id", "Facebook")
+                  .attr("title", "Facebook")
+                
+                // Google link
+                d3.select(pid).append("a")
+                  .attr("href", function(){
+                    var lang = dataviva.language == "pt" ? "pt-BR" : "en-US";
+                    return "https://plus.google.com/share?url=" + share_url + "&hl=" + lang
+                  })
+                  .attr("class", "share_button")
+                  .attr("target", "_blank")
+                  .attr("onclick", "return !window.open(this.href, 'Google+', 'width=640,height=300')")
+                  .attr("id", "Google")
+                  .attr("title", "Google+")
+                
+              }
+            })
               
         }
         

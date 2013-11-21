@@ -244,7 +244,7 @@ function Selector() {
           if (x.id != "all") {
             bread.append("a")
               .attr("class","site_crumb")
-              .html("&laquo; Back")
+              .html("&laquo; "+dataviva.format.text("back"))
               .on(d3plus.evt.click,function(){
                 search.node().value = ""
                 select_value(data[selected.parents[0]],depth_path[depth_path.length-1]);
@@ -478,7 +478,17 @@ function Selector() {
             title.text(prefix)
           }
           else {
-            title.text(prefix+" in "+x.name.toTitleCase())
+            if (dataviva.language == "en") {
+              var connect = "in"
+            }
+            else {
+              if (x.id == "all") var connect = "do"
+              else if (x.article_pt && x.gender_pt == "m") var connect = "no"
+              else if (x.article_pt && x.gender_pt == "f") var connect = "na"
+              else var connect = "em"
+              if (x.plural_pt && x.article_pt) connect += "s"
+            }
+            title.text(prefix+" "+connect+" "+x.name.toTitleCase())
           }
           
           if (x.desc && type == "file") {

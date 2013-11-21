@@ -228,7 +228,7 @@ dataviva.format.text = function(text,name,l) {
       "importance": {"en": "Importance", "pt": "Import\u00e2ncia"},
       "importance_desc": {"en": "Importance measures the ubiquity of a given occupation in a particular industry. Occupations with a high importance in an industry are commonly employed in said industry.", "pt": "Import\u00e2ncia mede a ubiquidade de uma determinada ocupa\u00e7\u00e3o em um setor espec\u00edfico. As ocupa\u00e7\u00f5es com um alto grau de import\u00e2ncia em um determinado Setor s\u00e3o geralmente empregadas no Setor mencionado."},
       "elsewhere": {"en": "Employees Available In Other Industries", "pt": "Empregados em Outras Ind\u00fastrias"},
-      "required": {"en": "Recommended Employment", "pt": "Emprego Recomendado"},
+      "required": {"en": "Estimated Employees", "pt": "Estimado de Empregados"},
       "required_desc": {"en": "The estimated number of employees per establishment needed in order to have a successful establishment in an industry in a particular location.", "pt": "O n\u00fdmero estimado de empregados por estabelecimento necess\u00e1rio para que um estabelecimento seja bem sucedido em um setor, em uma determinada localidade."},
       "growth_val": {"en": "Wage Growth", "pt": "Crescimento dos Sal\u00e1rios"},
       "growth_val_total": {"en": "Cumulative Wage Growth", "pt": "Crescimento Salarial Acumulada"},
@@ -287,6 +287,7 @@ dataviva.format.text = function(text,name,l) {
       "population": {"en": "Population", "pt": "Popula\u00e7\u00e3o"},
       "top": {"en": "Top", "pt": "Superior"},
       "wld_id": {"en": "WLD ID", "pt": "ID WLD"},
+      "id_mdic": {"en": "MDIC ID", "pt": "ID MDIC"},
       "rank": {"en": " ", "pt": " "},
 
       // Filter Titles
@@ -338,6 +339,9 @@ dataviva.format.text = function(text,name,l) {
       "with": {"en": "with", "pt": "com"},
       "and": {"en": "and", "pt": "e"},
       "fill": {"en": "Fill", "pt": "Preenchido"},
+      "embed_url": {"en": "Embed URL", "pt": "URL para Incorporar"},
+      "share_url": {"en": "Shortened URL", "pt": "URL Abreviada"},
+      "social_media": {"en": "Social Media", "pt": "Mídias Sociais"},
     
       // Viz-Whiz Text
       "Click for More Info": {"en": "Click for more data and related apps.", "pt": "Clique para dados adicionais e aplicativos relacionados."},
@@ -354,8 +358,8 @@ dataviva.format.text = function(text,name,l) {
       "points": {"en": "Points", "pt": "Pontos"},
       "reply": {"en": "Reply", "pt": "Resposta"},
       "replies": {"en": "Replies", "pt": "Respostas"},
-      "votes": {"en": "Top Voted", "pt": "Mais Votados"},
-      "newest": {"en": "Newest", "pt": "O Mais Novo"},
+      "votes": {"en": "Most Active", "pt": "Mais Frequente"},
+      "newest": {"en": "Most Recent", "pt": "Mais Recente"},
       "questions": {"en": "Questions", "pt": "Perguntas"},
       "flagged": {"en": "This reply has been flagged.", "pt": "Esta resposta foi marcada."},
       "unflagged": {"en": "This flag on this reply has been removed.", "pt": "A marca desta resposta foi retirada."},
@@ -376,7 +380,8 @@ dataviva.format.text = function(text,name,l) {
       "show": {"en": "Show", "pt": "Mostrar"},
       "loading_attrs": {"en": "Loading Attribute List", "pt": "Carregando Lista de Atributos"},
       "loading_items": {"en": "Loading More Items", "pt": "Carregar Mais Itens"},
-      "wait": {"en": "Please Wait", "pt": "Por favor Aguarde"}
+      "wait": {"en": "Please Wait", "pt": "Por favor Aguarde"},
+      "back": {"en": "Back", "pt": "Voltar"}
     
     }
     
@@ -416,6 +421,8 @@ dataviva.format.number = function(value,name,l) {
   
   var negative = value < 0
   value = Math.abs(value)
+  
+  if (name.indexOf("_growth_pct") >= 0) value = value * 100
   
   var smalls = ["rca","rca_bra","rca_wld","distance","eci","pci","bra_diversity_eff","isic_diversity_eff","cbo_diversity_eff","hs_diversity_eff","wld_diversity_eff"]
   
@@ -862,13 +869,13 @@ dataviva.flash = function(text) {
 
 dataviva.url = function(url,args,title) {
   
-  var replace = window.location.pathname.indexOf(url) >= 0
+  var replace = window.location.pathname.indexOf(url.split("?")[0]) >= 0
   var iframe = window != window.parent
   var app_embed = window.location.pathname.indexOf("apps/embed") >= 0
   var app_builder = window.parent.location.pathname.indexOf("apps/builder") >= 0
   var data_table = window.location.pathname.indexOf("data/table") >= 0
   var rankings = window.location.pathname.indexOf("rankings") >= 0
-
+  
   if (title) document.title = "DataViva : "+title
 
   var params = ""

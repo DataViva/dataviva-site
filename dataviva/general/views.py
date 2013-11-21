@@ -9,6 +9,7 @@ mod = Blueprint('general', __name__, url_prefix='/')
 
 from dataviva import app, db, babel, __latest_year__
 from dataviva.general.forms import AccessForm
+from dataviva.general.models import Short
 
 from config import STATIC_URL
 
@@ -118,6 +119,18 @@ def set_lang(lang):
     return redirect(request.args.get('next') or \
                request.referrer or \
                url_for('general.home'))
+
+###############################
+# Handle shortened URLs
+# ---------------------------
+@mod.route('<slug>/')
+def redirect_short_url(slug):
+    short = Short.query.filter_by(slug = slug).first_or_404()
+    short.clicks += 1
+    db.session.add(short)
+    db.session.commit()
+    
+    return redirect(short.long_url)
 
 ###############################
 # 404 view

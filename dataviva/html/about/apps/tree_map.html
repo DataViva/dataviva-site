@@ -1,28 +1,9 @@
 <h1>{% trans %}Tree Map{% endtrans %}</h1>
-<p>{% trans %}Tree Maps display hierarchical data as a set of nested rectangles. Each branch of the tree is given a rectangle, which is then tiled with smaller rectangles representing sub-branches.{% endtrans %}</p>
 
-<h2>{% trans %}Sizing{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('In a Tree Map, each rectangle has an area proportional to a specified dimension on the data. Our default sizing is Trade Value for %(prod_data)s and Total Number of Employees for %(emp_data)s, but this value can be changed depending on the dataset. When changing this value, the rectangles on the page will resize and reposition accordingly.', emp_data = '<a href="/about/data/rais/">%s</a>' % (_("employment data")), prod_data = '<a href="/about/data/secex/">%s</a>' % (_("product data"))) }}
-  {% endautoescape %}
-</p>
+<p>{% trans %}The Tree Map is a descriptive application which allows visualizing participation, in percentage terms, of the different variables available in DataViva. For example, this visualization allows analyzing the importance of a product in the exports of a location. Tree Maps are built with blocks that are proportional to the participation of selected categories in total, and grouped by colors representing the major groups for each variable (or another color coding selected by the color filter).{% endtrans %}</p>
 
-<h2>{% trans %}Order{% endtrans %}</h2>
-<p>{% trans %}The rectangles in the Tree Map are grouped by their classification’s Sector, and the Sector’s are ordered from largest to smallest, based on the sizing variable.{% endtrans %}</p>
+<p>{% trans %}The logic of the Tree Map is the same used in a pie chart or other visual representation of distribution. The use of squares grouped by major groups in order of importance allows a quick view of items with greater participation in the respective large group, in which it is contained, enabling a fast and simple analysis of the percentage of participation.{% endtrans %}</p>
 
-<h2>{% trans %}Depth{% endtrans %}</h2>
-<p>{% trans %}By changing the depth shown, you can aggregate the squares to get a broad view of the Sectors, or go deeper to get a more granular look at the data.{% endtrans %}</p>
+<p>{% trans %}One of the visualizations, for instance, shows the participation of each of the products in Minas Gerais' export basket, revealing quickly and easily the significant participation of the product Iron Ore in the exports of the state. Several other views are possible, using the variables available in the platform such as economic activities, occupations, localities and intersections between these variables.{% endtrans %}</p>
 
-<h2>{% trans %}Color{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('Color, along with the other visualizations, defaults to showing Sectors for the data classification you are viewing (whether it is products, industries, occupations, or locations). In some cases, the color may be manipulated to show other values, such as Growth, %(comp)s, or %(opp_gain)s.', comp = '<a href="/about/glossary/complexity/">%s</a>' % (_("Complexity")), opp_gain = '<a href="/about/glossary/opp_gain/">%s</a>' % (_("Opportunity Gain"))) }}
-  {% endautoescape %}
-</p>
-
-<h2>{% trans %}Filter/Solo{% endtrans %}</h2>
-<p>{% trans %}By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of rectangles. Click the “X” on the right of the key to clear all filters and solos.{% endtrans %}</p>
-
-<h2>{% trans %}Year{% endtrans %}</h2>
-<p>{% trans %}The rectangles display data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each rectangle will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data changes over time.{% endtrans %}</p>
+<iframe class="youtube" src="https://www.youtube.com/embed/NKfPLj-fntc?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}" frameborder="0" allowfullscreen width="525" height="295"></iframe>

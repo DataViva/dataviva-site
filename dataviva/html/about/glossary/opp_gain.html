@@ -1,6 +1,11 @@
 <h1>{% trans %}Opportunity Gain{% endtrans %}</h1>
-<p>{% trans %}Opportunity gain is a measure that indicates how much diversity is offered by an industry if the location develops the capacity to become successful in that industry.{% endtrans %}</p>
 
-<p>{% trans %}Used In{% endtrans %}: 
-  <a href="/about/apps/scatter/">{% trans %}Scatter{% endtrans %}</a>
+<p>
+  {% autoescape false %}
+  {{ _('Opportunity Gain is an index that measures the increase of economic complexity that a product will give a region, meaning, the contribution of a given product to the complexity of the region economy. In other words, the Opportunity Gain measures the new capabilities that will be acquired by a region if it develops comparative advantage in a given product. The idea behind this index is that each product can contribute in varying degrees to the economic development of a region, adding new capabilities and, consequently, reducing the %(distances)s of other products (that have shared knowledge) in relation to the economic structure of the region.', distances = '<a href="/about/glossary/distance/">%s</a>' % (_('distances'))) }}
+  {% endautoescape %}
 </p>
+
+<p>{% trans %}In DataViva, Opportunity Gain is calculated considering both world trade (International), as just Brazilian exports (Domestic).{% endtrans %}</p>
+
+<p>{% trans %}For economic activities, it is calculated only for Brazil. This calculation is made considering the diversity of occupations, meaning that the Opportunity Gain reveals the contribution of a new industry (development of comparative advantage) to reduce the distance in relation to other activities with a high diversity of occupations.{% endtrans %}</p>

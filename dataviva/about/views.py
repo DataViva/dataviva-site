@@ -19,6 +19,14 @@ def before_request():
     g.page_type = mod.name
     g.color = "#d67ab0"
     
+@mod.route('/analysis/')
+def analysis():
+    return render_template("about/analysis.html", page = "analysis")
+    
+@mod.route('/testimonial/')
+def testimonial():
+    return render_template("about/testimonial.html", page = "testimonial")
+    
 @mod.route('/data/<data>/')
 def data(data):
     return render_template("about/data/index.html", data=data, page = "data")

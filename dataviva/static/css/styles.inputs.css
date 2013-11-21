@@ -47,6 +47,12 @@ a:hover {
   width: 150px;
 }
 
+.help.icon.large,
+.decision.icon.large {
+  height: 110px;
+  margin: 0px 0px 20px;
+}
+
 .grid5col2 > .title.square,
 .grid5col2 > .decision.square,
 .grid5col2 > .help.square {

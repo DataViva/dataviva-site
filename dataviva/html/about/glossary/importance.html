@@ -1,15 +1,3 @@
 <h1>{% trans %}Importance{% endtrans %}</h1>
 
-<p>
-  {% autoescape false %}
-  {{ _('Each occupation, regardless of geographical location, has an importance value. This value is calculated by looking at the overall ubiquity of an occupation throughout every industry in Brazil. We take the number of locations with %(rca)s in a given industry that also employ a given occupation, and divide that by the total number of locations with %(rca)s in that given industry. Here is the calculation used (where y is a year, b is a location, i is an industry, and o is an occupation):', rca = '<a href="/about/glossary/rca/">RCA</a>') }}
-  {% endautoescape %}
-</p>
-
-<img src="/static/img/help/glossary/importance.png" />
-
-<p>{% trans %}The higher importance value an occupation has, the more common it is to that industry. This would generally mean that the occupation is more necessary. For example Cooks are much more important in the Restaurant industry than Accounting Assistants though they are both employed in that industry.{% endtrans %}</p>
-
-<p>{% trans %}Used In{% endtrans %}: 
-  <a href="/about/apps/occugrid/">{% trans %}Occugrid{% endtrans %}</a>
-</p>
+<p>{% trans %}The importance of an occupation shows how often this occupation is employed by establishments of a given industry. The number of employees is not considered, just that the establishments of an industry employ the occupation. It is a calculation percentage, for example, if the importance of an occupation is 0.4 in an industry, this means that 40&#37; of the establishments in this industry employ that occupation.{% endtrans %}</p>

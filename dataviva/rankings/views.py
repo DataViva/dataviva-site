@@ -87,7 +87,8 @@ def data(year=None,type="bra",depth=None):
     request_args = {x:request_args[x][0] for x in request_args}
     
     if type == "bra":
-        request_args["cols"] = ["bra_id","name","wage","wage_avg","val_usd","population","hs_diversity","hs_diversity_eff","isic_diversity","isic_diversity_eff"]
+        request_args["excluding"] = {"bra_id": "xx"}
+        request_args["cols"] = ["bra_id","id_ibge","name","wage","wage_avg","val_usd","population","hs_diversity","hs_diversity_eff","isic_diversity","isic_diversity_eff"]
         args["join"] = [{
                 "table": Yb,
                 "columns": ["population"],
@@ -101,16 +102,20 @@ def data(year=None,type="bra",depth=None):
             })
         table = Yb_secex
     elif type == "isic":
+        request_args["excluding"] = {"isic_id": "xx"}
         request_args["cols"] = ["isic_id","name","wage","wage_avg","num_emp","num_emp_est","cbo_diversity","cbo_diversity_eff"]
         table = Yi
     elif type == "cbo":
+        request_args["excluding"] = {"cbo_id": "xx"}
         request_args["cols"] = ["cbo_id","name","wage","wage_avg","num_emp","num_emp_est","isic_diversity","isic_diversity_eff"]
         table = Yo
     elif type == "hs":
+        request_args["excluding"] = {"hs_id": "xx"}
         request_args["cols"] = ["hs_id","name","val_usd","pci","wld_diversity","wld_diversity_eff"]
         table = Yp
     elif type == "wld":
-        request_args["cols"] = ["wld_id","name","val_usd","hs_diversity","hs_diversity_eff"]
+        request_args["excluding"] = {"wld_id": "xx"}
+        request_args["cols"] = ["wld_id","id_mdic","name","val_usd","hs_diversity","hs_diversity_eff"]
         table = Yw
         
     return make_response(make_query(table, request_args, g.locale, **args))

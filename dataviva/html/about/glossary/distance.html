@@ -1,14 +1,8 @@
 <h1>{% trans %}Distance{% endtrans %}</h1>
 <p>
   {% autoescape false %}
-  {{ _('Using the %(network)s visualization we can quickly see which industries, occupations or products are found in a given location. But what about the ones in which a location does not have %(rca)s? Distance is the measure used to indicate how “far away” any given location is from a particular industry, occupation or product. The distance of a given item i to a location b is calculated as the sum of all the %(proximities)s between i and the other items that b has %(rca)s < 1. This number is then normalized by dividing it by the sum of all items regardless of its %(rca)s in location b. In speaking about exports, we would notice that if a particular product is connected mostly with products that a location does export, the distance value would be close to 0 (meaning it’s very close by!). The opposite being true if the interested product is connected with mostly products that are not exported, i.e. the distance value would be closer to 1. The equation can be found in this figure.', network = '<a href="/about/apps/network/">%s</a>' % (_("Network")), rca = '<a href="/about/glossary/rca/">RCA</a>', proximities = '<a href="/about/glossary/proximity/">%s</a>' % (_("proximities"))) }}
+  {{ _('Distance is a measure of how far the current production structure of a region is in relation to a given product, signifying the difficulty of this region to achieve a comparative advantage in this product. The idea here is that each product requires a set of capabilities, which may or may not be shared in the manufacture process of other products (%(prox)s). Products closest to other products in which the region already has comparative advantage will be more easily developed - because some of the required knowledge is already present in the region. Distance is a measure that reflects the amount of new capabilities that a region needs in order to manufacture and export a product with comparative advantage, meaning that the greater the distance, the more knowledge that needs to be acquired and the longer (or more difficult) it will be to have advantage in the export of this product.', prox = '<a href="/about/glossary/proximity/">%s</a>' % (_('proximity'))) }}
   {% endautoescape %}
 </p>
 
-<img src="/static/img/help/glossary/distance.png" />
-
-<p>{% trans %}Used In{% endtrans %}: 
-  <a href="/about/apps/scatter/">{% trans %}Scatter{% endtrans %}</a>, 
-  <a href="/about/apps/network/">{% trans %}Network{% endtrans %}</a>, 
-  <a href="/about/apps/rings/">{% trans %}Rings{% endtrans %}</a>
-</p>
+<p>{% trans %}In DataViva, distance is calculated considering both world trade (International), and just Brazilian exports (Domestic).{% endtrans %}</p>

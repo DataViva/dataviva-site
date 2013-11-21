@@ -8,41 +8,35 @@
 
 {% block body %}
 
-  <div id="video" class="lightbox">
-    <h1>{% trans %}Visualizing the Economy of Minas Gerais and Brazil{% endtrans %}</h1>
-    {% trans %}DataViva is opening up data for the entire formal sector of the Brazilian economy through more than 100 million interactive visualization.{% endtrans %}
-    <div class="welcome_bottom">
-    {% trans %}Learn how DataViva was created:{% endtrans %}
-    <iframe width="308" height="173" src="https://www.youtube.com/embed/Fx1-jVLnlS4?modestbranding=1&rel=0&showinfo=0&autohide=1&color=white&theme=light{% if g.locale == 'pt' %}&hl=pt-br&cc_lang_pref=pt-br&cc_load_policy=1{% endif %}" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </div>
+  <div class="darkbox"><h1>{% trans %}Open Data for the Brazilian Economy{% endtrans %}</h1></div>
 
-  <div id="carousel" class="lightbox">
+  <div id="intro" class="lightbox">
+    <div id="carousel">
+      <div class="centered">
+        <a class="decision">{% trans %}Learn More{% endtrans %}</a>
+      </div>
+    </div>
     <div class="pages"></div>
-    <div class="centered">
-      <a class="decision">{% trans %}Learn More{% endtrans %}</a>
-    </div>
   </div>
   
-  <br>
-  <a class="decision icon square bra" href="/profiles/bra/select/">
-    {% trans %}Brazilian Locations{% endtrans %}
-  </a>
-
-  <a class="decision icon square cbo" href="/profiles/cbo/select/">
-    {% trans %}Occupations{% endtrans %}
-  </a>
-
-  <a class="decision icon square isic" href="/profiles/isic/select/">
-    {% trans %}Industries{% endtrans %}
+  <a class="decision icon large apps" href="/apps/">
+    <h1>{% trans %}Apps{% endtrans %}</h1>
+    <h2>{% trans %}Explore the Brazilian economy through over 100 million visualizations.{% endtrans %}</h2>
   </a>
   
-  <a class="decision icon square hs" href="/profiles/hs/select/">
-    {% trans %}Product Exports{% endtrans %}
+  <a class="decision icon large profiles" href="/profiles/">
+    <h1>{% trans %}Profiles{% endtrans %}</h1>
+    <h2>{% trans %}Quickly learn about the exports, occupations, and industries of each Brazilian state and economic sector.{% endtrans %}</h2>
   </a>
-
-  <a class="decision icon square wld" href="/profiles/wld/select/">
-    {% trans %}Export Destinations{% endtrans %}
+  
+  <a class="decision icon large guide" href="/guide/">
+    <h1>{% trans %}Guide{% endtrans %}</h1>
+    <h2>{% trans %}Answer strategic questions about economic opportunities of states and industries.{% endtrans %}</h2>
+  </a>
+  
+  <a class="decision icon large rankings" href="/rankings/">
+    <h1>{% trans %}Rankings{% endtrans %}</h1>
+    <h2>{% trans %}Compare locations, industries and occupations based on economic output, diversity, and salaries.{% endtrans %}</h2>
   </a>
 
 {% endblock %}
@@ -52,27 +46,27 @@
 <script>
 
   var carousel = [
+  {"en": "Learn How DataViva was Created",
+  "pt": "Conheça Como Foi Criado o DataViva",
+  "image": "youtube", "url": "https://www.youtube.com/embed/XZKFhNpsYS4?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'pt' %}&hl=pt-br&cc_lang_pref=pt-br{% else %}&hl=en&cc_lang_pref=en{% endif %}&cc_load_policy=1", "id": 1},
   {"en": "Did you know that Minas Gerais is the largest exporter in Brazil?",
   "pt": "Você sabia que Minas Gerais é o maior estado exportador do Brasil?",
-  "image": "factory", "url": "/profiles/bra/all/?app=1", "id": 1},
-  {"en": "Did you know that Administrative Assistants are the most common occupation in Brazil?",
-  "pt": "Você sabia que a ocupação mais comum no Brasil são os Assistentes Administrativos?",
-  "image": "planning", "url": "/profiles/bra/all/?app=4", "id": 2},
+  "image": "factory", "url": "/profiles/bra/all/?app=1", "id": 2},
   {"en": "What are the export opportunities for Minas Gerais?",
   "pt": "Quais são as oportunidades de exportação de Minas Gerais?",
   "image": "sparks", "url": "/guide/bra/mg/opportunity/hs/", "id": 3},
-  {"en": "Did you know that Minas Gerais is the number one Brazilian exporter to China?",
-  "pt": "Você sabia que Minas Gerais é o estado brasileiro líder em exportações para a China?",
-  "image": "cars", "url": "/profiles/wld/aschn/", "id": 4},
   {"en": "Did you know that Minas Gerais employs more Vocational Middle School Teachers than any other state in Brazil?",
   "pt": "Você sabia que Minas Gerais é o estado brasileiro que emprega o maior número de Professores de Nível Médio no Ensino Profissionalizante?",
-  "image": "students", "url": "/profiles/cbo/3313/", "id": 5},
+  "image": "students", "url": "/profiles/cbo/3313/", "id": 4},
+  {"en": "The Goal of DataViva",
+  "pt": "O Objetivo do DataViva",
+  "image": "youtube", "url": "https://www.youtube.com/embed/Xp0azMCmzdA?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}", "id": 5},
   {"en": "Did you know that Minas Gerais employs more than 24 thousand doctors?",
   "pt": "Você sabia que Minas Gerais tem mais de 24 mil médicos?",
   "image": "doctor", "url": "/profiles/cbo/2251/", "id": 6}
   ]
     
-  var app = 1, stopped = false
+  var app = 1, stopped = false, changing = false
   
   d3.select("#carousel .decision")
     .on(d3plus.evt.click,function(){
@@ -85,9 +79,9 @@
   pages.enter().append("div")
     .attr("class","page")
     .attr("id",function(d){return "page_"+d.id})
-    .style("background-color",function(d){
-      if (d.id == app) return "#af1f24"
-      else return "#fff"
+    .text(function(d){return d.id})
+    .each(function(d){
+      if (d.id == app) this.toggleClass("active")
     })
     
   pages.on(d3plus.evt.click,function(d){
@@ -101,7 +95,7 @@
   apps.enter().append("div")
     .attr("class","app")
     .attr("id",function(d){return "app_"+d.id})
-    .style("background-image",function(d){return "url('/static/img/home/"+d.image+".jpg')"})
+    .style("background-image",function(d){return d.image != "youtube" ? "url('/static/img/home/"+d.image+".jpg')" : "none"})
     .style("opacity",function(d){
       if (d.id == app) return 1
       else return 0
@@ -110,11 +104,25 @@
       if (d.id == app) return "block"
       else return "none"
     })
+    .each(function(d){
+      if (d.image == "youtube") {
+        d3.select(this).style("z-index",20)
+          .append("iframe")
+            .attr("src",d.url)
+            .attr("width","480")
+            .attr("height","270")
+            .attr("frameborder","0")
+            .attr("allowfullscreen",true)
+      }
+    })
+    .on(d3plus.evt.over,function(d){
+      stopped = true
+    })
   
-  var titles = d3.select("#carousel").selectAll("h1")
+  var titles = d3.select("#intro").selectAll("h1")
     .data(carousel)
     
-  titles.enter().append("h1")
+  titles.enter().insert("h1","#carousel")
     .attr("id",function(d){return "title_"+d.id})
     .html(function(d){return d[dataviva.language]})
     .style("opacity",function(d){
@@ -125,9 +133,9 @@
       if (d.id == app) return "block"
       else return "none"
     })
-    // .on(d3plus.evt.click,function(d){
-    //   window.location = d.url
-    // })
+    .on(d3plus.evt.click,function(d){
+      if (d.image != "youtube") window.location = d.url
+    })
     
   function change_app() {
     setTimeout(function(){
@@ -141,13 +149,15 @@
   change_app()
   
   function show_app(a) {
-    if (a != app) {
+    if (a != app && !changing) {
+      changing = true
       var old = d3.select("#app_"+app).style("opacity",0)
       var old_title = d3.select("#title_"+app).style("opacity",0)
-      d3.select("#page_"+app).node().style.backgroundColor = "#ffffff"
+      d3.select("#page_"+app).node().toggleClass("active")
       setTimeout(function(){
         old.style("display","none")
         old_title.style("display","none")
+        changing = false
       },1000)
       if (a > carousel.length) app = 1
       else app = a
@@ -157,7 +167,7 @@
         d3.select("#app_"+app).style("opacity",1)
         d3.select("#title_"+app).style("opacity",1)
       },5)
-      d3.select("#page_"+app).node().style.backgroundColor = "#af1f24"
+      d3.select("#page_"+app).node().toggleClass("active")
     }
   }
 

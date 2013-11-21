@@ -168,3 +168,52 @@ div.output_list {
 div.scrolling_help {
   padding: 20px;
 }
+
+/*******************/
+/* Share Buttons   */
+/*******************/
+
+#share_info {
+  padding: 20px;
+  text-align: center;
+}
+
+#share_info input {
+  margin: 5px 0 20px 0;
+  text-align: left;
+  width: 96%;
+}
+
+#share_info a i.fa {
+  margin: 0 20px 0 0;
+}
+
+a.share_button {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 95% 95%;
+  display: inline-block;
+  height: 50px;
+  margin: 5px 10px;
+  width: 50px;
+  -webkit-transition: background-size 0.1s;
+     -moz-transition: background-size 0.1s;
+       -o-transition: background-size 0.1s;
+          transition: background-size 0.1s;
+}
+
+a.share_button:hover {
+  background-size: 100% 100%;
+}
+
+a.share_button#Google {
+  background-image: url("/static/img/icons/login/login_google.png");
+}
+
+a.share_button#Facebook {
+  background-image: url("/static/img/icons/login/login_facebook.png");
+}
+
+a.share_button#Twitter {
+  background-image: url("/static/img/icons/login/login_twitter.png");
+}

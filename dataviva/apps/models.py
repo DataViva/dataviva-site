@@ -268,6 +268,10 @@ class Build(db.Model, AutoSerialize):
                 return article
         
         if title:
+            if lang == "pt":
+                joiner = " e "
+            else:
+                joiner = " and "
             if "<bra>" in title and isinstance(self.bra,(list,tuple)):
                 bras = []
                 for b in self.bra:
@@ -275,33 +279,32 @@ class Build(db.Model, AutoSerialize):
                     if b.id != "all" and b.distance > 0:
                         name = name + " "+b.distance+"km"
                     bras.append(name)
-                if lang == "pt":
-                    title = title.replace("<bra>", " e ".join(bras))
-                else:
-                    title = title.replace("<bra>", " and ".join(bras))
                 article_search = re.search('<bra_(\w+)>', title)
                 if article_search:
-                    title = title.replace(article_search.group(0), " and ".join([get_article(b, article_search.group(1)) for b in self.bra]))
+                    title = title.replace(" <bra>", "")
+                    title = title.replace(article_search.group(0), joiner.join([get_article(b, article_search.group(1)) + " " + bras[i] for i, b in enumerate(self.bra)]))
+                else:
+                    title = title.replace("<bra>", joiner.join(bras))
             if "<isic>" in title and hasattr(self,"isic"):
-                title = title.replace("<isic>", ", ".join([title_case(getattr(i, name_lang)) for i in self.isic]))
+                title = title.replace("<isic>", joiner.join([title_case(getattr(i, name_lang)) for i in self.isic]))
                 article_search = re.search('<isic_(\w+)>', title)
                 if article_search:
-                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.isic]))
+                    title = title.replace(article_search.group(0), joiner.join([get_article(b, article_search.group(1)) for b in self.isic]))
             if "<hs>" in title and hasattr(self,"hs"):
-                title = title.replace("<hs>", ", ".join([title_case(getattr(h, name_lang)) for h in self.hs]))
+                title = title.replace("<hs>", joiner.join([title_case(getattr(h, name_lang)) for h in self.hs]))
                 article_search = re.search('<hs_(\w+)>', title)
                 if article_search:
-                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.hs]))
+                    title = title.replace(article_search.group(0), joiner.join([get_article(b, article_search.group(1)) for b in self.hs]))
             if "<cbo>" in title and hasattr(self,"cbo"):
-                title = title.replace("<cbo>", ", ".join([title_case(getattr(c, name_lang)) for c in self.cbo]))
+                title = title.replace("<cbo>", joiner.join([title_case(getattr(c, name_lang)) for c in self.cbo]))
                 article_search = re.search('<cbo_(\w+)>', title)
                 if article_search:
-                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.cbo]))
+                    title = title.replace(article_search.group(0), joiner.join([get_article(b, article_search.group(1)) for b in self.cbo]))
             if "<wld>" in title and hasattr(self,"wld"):
-                title = title.replace("<wld>", ", ".join([title_case(getattr(w, name_lang)) for w in self.wld]))
+                title = title.replace("<wld>", joiner.join([title_case(getattr(w, name_lang)) for w in self.wld]))
                 article_search = re.search('<wld_(\w+)>', title)
                 if article_search:
-                    title = title.replace(article_search.group(0), " , ".join([get_article(b, article_search.group(1)) for b in self.wld]))
+                    title = title.replace(article_search.group(0), joiner.join([get_article(b, article_search.group(1)) for b in self.wld]))
 
         return title
             

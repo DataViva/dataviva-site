@@ -1,35 +1,9 @@
 <h1>{% trans %}Compare{% endtrans %}</h1>
-<p>{% trans %}The Compare app is a scatter plot that compares 2 different locations by plotting circles based on a common variable in each of the locations’ dataset.{% endtrans %}</p>
 
-<h2>{% trans %}Sizing{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('Each circle has an area proportional to a specified dimension on the data. The default sizing is Trade Value for %(prod_data)s and Total Number of Employees for %(emp_data)s.', emp_data = '<a href="/about/data/rais/">%s</a>' % (_("employment data")), prod_data = '<a href="/about/data/secex/">%s</a>' % (_("product data"))) }}
-  {% endautoescape %}
-</p>
+<p>{% trans %}The eighth DataViva application aims to facilitate comparison between two different localities and works the same way as a scatter plot. Each locality compared occupies one of the axes of the graph and the values of selected variables are distributed in the same scale, creating a diagonal line where the values are equal. We can thus compare the values of the variables available between two localities (municipalities, regions and states) in a simple and visual way.{% endtrans %}</p>
 
-<h2>{% trans %}Depth{% endtrans %}</h2>
-<p>{% trans %}By changing the depth shown, you can aggregate the circles to get a broad view of the Sectors, or go deeper to get a more granular look at the data.{% endtrans %}</p>
+<p>{% trans %}One of the visualizations is a comparison of exports from Minas Gerais and Rio de Janeiro, revealing that “Mineral Products” is a leading category for both states, with very similar values, since they are located near the diagonal line of the graph. Some other products like “Arts and Antiques” are exported significantly more by Rio de Janeiro state, while products such as “Precious Metals” are exported mostly by Minas Gerais.{% endtrans %}</p>
 
-<h2>{% trans %}Axes{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('The circles are positioned in the chart based on each location’s value of a certain variable. The default axes variable is Trade Value for %(prod_data)s and Total Number of Employees for %(emp_data)s. When changing this variable, the circles will reposition accordingly.', emp_data = '<a href="/about/data/rais/">%s</a>' % (_("employment data")), prod_data = '<a href="/about/data/secex/">%s</a>' % (_("product data"))) }}
-  {% endautoescape %}
-</p>
+<p>{% trans %}These comparisons can help with finding other reference localities or determining the most interesting localities for a particular investment or economic activities which are more concentrated in certain regions. Compare creates visualizations with the main variables available in DataViva (products, activities, occupations) and reveal or confirm hypotheses about differences or similarities in the variables selected between two Brazilian localities.{% endtrans %}</p>
 
-<h2>{% trans %}Scale{% endtrans %}</h2>
-<p>{% trans %}You can change the scale of the axes from logarithmic to linear, if it better suits your analysis.{% endtrans %}</p>
-
-<h2>{% trans %}Color{% endtrans %}</h2>
-<p>
-  {% autoescape false %}
-  {{ _('Color, along with the other visualizations, defaults to showing Sectors for the data classification you are viewing (whether it is products, industries, occupations, or locations). In some cases, the color may be manipulated to show other values, such as Growth, %(comp)s, or %(opp_gain)s.', comp = '<a href="/about/glossary/complexity/">%s</a>' % (_("Complexity")), opp_gain = '<a href="/about/glossary/opp_gain/">%s</a>' % (_("Opportunity Gain"))) }}
-  {% endautoescape %}
-</p>
-
-<h2>{% trans %}Filter/Solo{% endtrans %}</h2>
-<p>{% trans %}By using the key on the bottom of the page, you can remove (filter) or single out (solo) specific Sectors of circles. Click the “X” on the right of the key to clear all filters and solos.{% endtrans %}</p>
-
-<h2>{% trans %}Year{% endtrans %}</h2>
-<p>{% trans %}The circles are positioned in the chart based on data for a specific year in the dataset. By changing the year using the slider at the bottom of the app, the data associated with each circle will change to that new year’s data. This, in conjunction with using the play button to cycle through years, can provide helpful insights on how the data changes over time.{% endtrans %}</p>
+<iframe class="youtube" src="https://www.youtube.com/embed/dLK89I5tXc0?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}" frameborder="0" allowfullscreen width="525" height="295"></iframe>

@@ -11,6 +11,7 @@ from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Isic, Hs, Cbo, Wld
 from dataviva.apps.models import Build, UI, App
+from dataviva.general.models import Short
 
 from dataviva.rais.views import rais_ybi
 from dataviva.utils import gzip_data, cached_query
@@ -391,3 +392,21 @@ def networks(type="hs"):
 @mod.route('/')
 def guide():
     return render_template("apps/index.html")
+
+@mod.route('/shorten/', methods=['GET', 'POST'])
+def shorten_url():
+    
+    if request.method == 'POST':
+        
+        long_url = urllib.unquote(request.form["url"].encode('utf-8')).decode("utf-8")
+        
+        short = Short.query.filter_by(long_url = long_url).first()
+        if short is None:
+            slug = Short.make_unique_slug(long_url)
+            short = Short(slug = slug, long_url = long_url)
+            db.session.add(short)
+            db.session.commit()
+            
+        return jsonify({"slug": short.slug})
+    
+    return jsonify({"error": "No URL given."})
