@@ -1053,9 +1053,17 @@
       
       last_app = app.build.app.type
       
-      d3.select("#app")
-        .html("")
-        .datum(app.data[app.build.data_url][format[app.build.app.type]])
+      if(app.build.app.type == "scatter" && app.build.bra[0].id == "all") {
+        d3.select("#app")
+          .html("")
+          .datum([])
+      }
+      else {
+        d3.select("#app")
+          .html("")
+          .datum(app.data[app.build.data_url][format[app.build.app.type]])
+      }
+      
 
       if (app.build.app.type != "rings") builder.key()
       dataviva.resize()
@@ -1269,7 +1277,7 @@
           .key(function(d){return d.year})
           .key(function(d){return d[out+"_id"]})
           .rollup(function(leaves){
-            if (leaves.length == 2) {
+            if (leaves.length == 2 && leaves[0][app.vars.axes] && leaves[1][app.vars.axes]) {
               var d = {}
               d.year = leaves[0].year
               d[out+"_id"] = leaves[0][out+"_id"]
@@ -1277,7 +1285,6 @@
               d.icon = dataviva.icon(d[out+"_id"],out)
               d.active = true
               d.always_active = 1
-              
               leaves.forEach(function(leaf){
                 for (key in leaf) {
                   if (key != "bra_id" && key != out+"_id") {
