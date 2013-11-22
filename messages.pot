@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-21 17:09-0500\n"
+"POT-Creation-Date: 2013-11-22 13:16-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,6 +146,30 @@ msgstr ""
 
 #: dataviva/html/about/analysis.html:10
 msgid "The suite of apps that compose DataViva can be used to analyze different aspects of Brazilian economy. Below, you will find a few examples to help you understanding and making your own analyses using the platform."
+msgstr ""
+
+#: dataviva/html/about/analysis.html:12
+msgid "Industry.pdf"
+msgstr ""
+
+#: dataviva/html/about/analysis.html:13
+msgid "Industries in Minas Gerais"
+msgstr ""
+
+#: dataviva/html/about/analysis.html:16
+msgid "Employment.pdf"
+msgstr ""
+
+#: dataviva/html/about/analysis.html:17
+msgid "Evolution of the Occupational Structure of Minas Gerais"
+msgstr ""
+
+#: dataviva/html/about/analysis.html:20
+msgid "Exports.pdf"
+msgstr ""
+
+#: dataviva/html/about/analysis.html:21
+msgid "Evolution of Minas Gerais Exports"
 msgstr ""
 
 #: dataviva/html/about/attrs.html:4 dataviva/html/templates/about.html:40

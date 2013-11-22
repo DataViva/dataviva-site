@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-21 17:09-0500\n"
+"POT-Creation-Date: 2013-11-22 13:16-0500\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -169,6 +169,30 @@ msgstr ""
 "analisar diferentes aspectos da economia brasileira. Abaixo, você irá "
 "encontrar alguns exemplos para ajuda-la a compreender e fazer suas "
 "próprias análises utilizando a plataforma."
+
+#: dataviva/html/about/analysis.html:12
+msgid "Industry.pdf"
+msgstr "Atividade-Economica.pdf"
+
+#: dataviva/html/about/analysis.html:13
+msgid "Industries in Minas Gerais"
+msgstr "Atividades Econômicas de Minas Gerais"
+
+#: dataviva/html/about/analysis.html:16
+msgid "Employment.pdf"
+msgstr "Empregos.pdf"
+
+#: dataviva/html/about/analysis.html:17
+msgid "Evolution of the Occupational Structure of Minas Gerais"
+msgstr "Evolução da Estrutura de Ocupação de Minas Gerais"
+
+#: dataviva/html/about/analysis.html:20
+msgid "Exports.pdf"
+msgstr "Exportacoes.pdf"
+
+#: dataviva/html/about/analysis.html:21
+msgid "Evolution of Minas Gerais Exports"
+msgstr "Evolução da Pauta de Exportações de Minas Gerais"
 
 #: dataviva/html/about/attrs.html:4 dataviva/html/templates/about.html:40
 msgid "Classifications"
