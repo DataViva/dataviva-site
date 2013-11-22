@@ -803,16 +803,23 @@ dataviva.popover.show = function(id) {
     
   d3.select(id)
     .style("display","block")
-    
-  setTimeout(function(){
   
+  if (Modernizr.cssanimations) {
+    setTimeout(function(){
+      show()
+    },5)
+  }
+  else {
+    show()
+  }
+  
+  function show() {
     d3.select("#popover_mask")
       .style("opacity",0.8)
     
     d3.select(id)
       .style("opacity",1)
-    
-  },5)
+  }
   
 }
 
@@ -830,12 +837,21 @@ dataviva.popover.hide = function(id) {
         d3.select("#popover_mask").style("opacity",0);
         p.style("opacity",0);
         
-        var timing = parseFloat(p.style("transition-duration"),10)*1000
+        if (Modernizr.cssanimations) {
+          var timing = parseFloat(p.style("transition-duration"),10)*1000
         
-        setTimeout(function(){
+          setTimeout(function(){
+            hide()
+          },timing)
+        }
+        else {
+          hide()
+        }
+  
+        function hide() {
           p.style("display","none")
           d3.select("#popover_mask").style("display","none")
-        },timing)
+        }
         
       }
       
