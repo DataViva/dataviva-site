@@ -568,6 +568,7 @@
                     d.data.forEach(function(a){
                       a[out+"_id"] = a.id
                       a[out+"_display"] = dataviva.displayID(a.id,out)
+                      a.icon = dataviva.icon(a.id,out)
                       app.attrs[app.build.output][a.id] = a
                     })
                     
@@ -864,7 +865,7 @@
       /************************/
       /* Gloabl App Variables */
       /************************/
-      if (["bra","wld"].indexOf(app.build.output) >= 0) var style = "default"
+      if (app.build.output == "bra" || (app.build.output == "wld" && app.vars.depth == "wld_5")) var style = "default"
       else var style = "knockout"
       
       if (app.build.output == "bra") {
@@ -1096,7 +1097,7 @@
     }
     
     app.update = function(value,type) {
-      console.log(app)
+      
       if (type == "solo" || type == "filter") {
         
         app[type+"s"] = value
@@ -1161,6 +1162,11 @@
         if (type == "depth" || type == "year") {
           app.title_update()
           app.viz.title(app.build.title)
+        }
+        
+        if (type == "depth" && app.build.output == "wld") {
+          if (app.vars.depth == "wld_5") app.viz.icon_style("default")
+          else app.viz.icon_style("knockout")
         }
         
         if (type == "year" && app.build.app.type == "scatter") {
@@ -1283,7 +1289,7 @@
               else d.elsewhere = else_data.num_emp-d.num_emp
     
               d[out+"_display"] = dataviva.displayID(d[out+"_id"],out)
-              d.icon = dataviva.icon(d[out+"_id"],out)
+              // d.icon = dataviva.icon(d[out+"_id"],out)
 
               get_keys(d)
               
@@ -1305,7 +1311,7 @@
               d.year = leaves[0].year
               d[out+"_id"] = leaves[0][out+"_id"]
               d[out+"_display"] = dataviva.displayID(d[out+"_id"],out)
-              d.icon = dataviva.icon(d[out+"_id"],out)
+              // d.icon = dataviva.icon(d[out+"_id"],out)
               d.active = true
               d.always_active = 1
               leaves.forEach(function(leaf){
@@ -1339,7 +1345,7 @@
           obj[out+"_display"] = dataviva.displayID(obj[out+"_id"],out)
           d.always_active = 1
           
-          obj.icon = dataviva.icon(obj[out+"_id"],out)
+          // obj.icon = dataviva.icon(obj[out+"_id"],out)
           
           obj.active = obj.rca >=1 ? true : false;
           
