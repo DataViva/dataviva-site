@@ -8,6 +8,10 @@
   
   <p>{% trans %}The data incorporated and addressed in DataViva is able to contribute to the implementation of public and private investments and policies, as well as academic researches. By pointing out relations and showing dynamics, which were not explicit until now, the tool allows public and private actors to improve their strategies and decision making processes. DataViva also enables these actors to discuss, in a more qualified manner and based on empiric data, relevant issues for economic and social development.{% endtrans %}</p>
   
+  <div style="display:none;opacity:0;">
+    {% trans %}The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website.{% endtrans %}
+  </div>
+  
   <div id="search_div">
     <h1>{% trans %}What do you want to know?{% endtrans %}</h1>
     {{ search_form.search(size=60, id='search', placeholder=_("Search")) }}

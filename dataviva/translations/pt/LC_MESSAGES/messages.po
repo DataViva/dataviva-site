@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-22 13:16-0500\n"
+"POT-Creation-Date: 2013-11-22 13:21-0500\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -917,34 +917,40 @@ msgstr ""
 "econômico e social a partir de dados empíricos."
 
 #: dataviva/html/about/ask/index.html:12
+msgid ""
+"The version of DataViva that you are viewing does not support user "
+"accounts. Click here to contact us through the main website."
+msgstr "A versão do DataViva que você está vendo não suporta contas de usuário. Clique aqui para entrar em contato conosco através do site principal."
+
+#: dataviva/html/about/ask/index.html:16
 msgid "What do you want to know?"
 msgstr "O que você gostaria de saber?"
 
-#: dataviva/html/about/ask/index.html:13
+#: dataviva/html/about/ask/index.html:17
 msgid "Search"
 msgstr "Pesquisar"
 
-#: dataviva/html/about/ask/index.html:18
+#: dataviva/html/about/ask/index.html:22
 msgid "Can´t find an answer?"
 msgstr "Não encontrou uma resposta?"
 
-#: dataviva/html/about/ask/index.html:18
+#: dataviva/html/about/ask/index.html:22
 msgid "Send your question to us here!"
 msgstr "Envie sua pergunta para nós aqui!"
 
-#: dataviva/html/about/ask/index.html:24
+#: dataviva/html/about/ask/index.html:28
 msgid "Find your Answers"
 msgstr "Tire suas Dúvidas"
 
-#: dataviva/html/about/ask/index.html:27
+#: dataviva/html/about/ask/index.html:31
 msgid "Order"
 msgstr "Ordem"
 
-#: dataviva/html/about/ask/index.html:29
+#: dataviva/html/about/ask/index.html:33
 msgid "Most Active"
 msgstr "Mais Frequente"
 
-#: dataviva/html/about/ask/index.html:31
+#: dataviva/html/about/ask/index.html:35
 msgid "Most Recent"
 msgstr "Mais Recente"
 
@@ -1511,6 +1517,12 @@ msgstr ""
 #: dataviva/html/account/login.html:24
 msgid "Remember Me"
 msgstr "Lembrar-me"
+
+#: dataviva/html/account/login.html:29
+msgid ""
+"Logging in has been disabled on this version of DataViva. Please visit "
+"the main site to log in."
+msgstr "O login foi desativado nesta versão do DataViva. Por favor, visite o site principal para entrar."
 
 #: dataviva/html/admin/admin_questions.html:3
 #: dataviva/html/admin/admin_questions.html:12
