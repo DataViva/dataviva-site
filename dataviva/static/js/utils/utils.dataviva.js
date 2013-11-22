@@ -241,8 +241,8 @@ dataviva.format.text = function(text,name,l) {
       "opp_gain_desc": {"en": "Opportunity gain is a measure that indicates how much diversity is offered by an industry or product should the given location develop it.", "pt": "O ganho de oportunidade \u00e9 uma medida que indica quanta diversidade \u00e9 oferecida por um determinado setor ou produto se uma determinada localidade fosse desenvolv\u00ea-lo."},
       "opp_gain_wld": {"en": "International Opportunity Gain", "pt": "Ganho de Oportunidade Internacional"},
       
-      "val_usd_growth_pct": {"en": "Growth Rate (1 year)", "pt": "Taxa de Crescimento (1 ano)"},
-      "val_usd_growth_pct_5": {"en": "Growth Rate (5 year)", "pt": "Taxa de Crescimento (5 anos)"},
+      "val_usd_growth_pct": {"en": "Annual Growth Rate (1 year)", "pt": "Taxa de Crescimento Annual (1 ano)"},
+      "val_usd_growth_pct_5": {"en": "Annual Growth Rate (5 year)", "pt": "Taxa de Crescimento Annual (5 anos)"},
       "val_usd_growth_val": {"en": "Growth Value (1 year)", "pt": "Valor de Crescimento (1 ano)"},
       "val_usd_growth_val_5": {"en": "Growth Value (5 year)", "pt": "Valor de Crescimento (5 anos)"},
       
