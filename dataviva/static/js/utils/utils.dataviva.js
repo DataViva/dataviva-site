@@ -341,7 +341,9 @@ dataviva.format.text = function(text,name,l) {
       "fill": {"en": "Fill", "pt": "Preenchido"},
       "embed_url": {"en": "Embed URL", "pt": "URL para Incorporar"},
       "share_url": {"en": "Shortened URL", "pt": "URL Abreviada"},
-      "social_media": {"en": "Social Media", "pt": "Mídias Sociais"},
+      "social_media": {"en": "Social Networks", "pt": "Redes Sociais"},
+      "secex_2": {"en": "Based on State Production", "pt": "Baseado nos Estados Produtores"},
+      "secex_8": {"en": "Based on the Exporting Municipality", "pt": "Baseado nos Municípios Exportadores"},
     
       // Viz-Whiz Text
       "Click for More Info": {"en": "Click for more data and related apps.", "pt": "Clique para dados adicionais e aplicativos relacionados."},
