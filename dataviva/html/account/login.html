@@ -19,12 +19,15 @@
         {% trans %}By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile.{% endtrans %}
     </div>
     <form action="" method="post" name="login">
-        {{ form.hidden_tag() }}
-        <p>
-        {{form.remember_me(id="remember")}}<label for="remember">{% trans %}Remember Me{% endtrans %}</label></p>
-        {% for pr in providers %}
-        <a id="{{ pr }}" class="login_button" href="{{ pr }}"></a>
-        {% endfor %}
+      
+      {{ form.hidden_tag() }}
+      
+      <p>
+        {{form.remember_me(id="remember")}}<label for="remember">{% trans %}Remember Me{% endtrans %}</label>
+      </p>
+      {% for pr in providers %}
+      <a id="{{ pr }}" class="login_button" href="{{ pr }}"></a>
+      {% endfor %}
     </form>
     <div style="display:none;opacity:0;">{% trans %}Logging in has been disabled on this version of DataViva. Please visit the main site to log in.{% endtrans %}</div>
   </div>
@@ -37,6 +40,7 @@
       var pr = this.id.toLowerCase()
       form = document.forms['login'];
       form.elements['provider'].value = pr;
+      console.log(form.elements['provider'], pr)
       this.parentNode.submit();
       d3.event.preventDefault();
     })

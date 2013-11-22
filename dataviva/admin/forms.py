@@ -1,5 +1,6 @@
-from flask.ext.wtf import Form, TextField, TextAreaField, BooleanField, QuerySelectField, SelectField, HiddenField
-from flask.ext.wtf import Required, Length, url
+from flask_wtf import Form
+from wtforms import TextField, TextAreaField, BooleanField, SelectField, HiddenField, validators
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from dataviva.ask.models import Status, Question
 from sqlalchemy import distinct
 
@@ -10,4 +11,4 @@ class AdminQuestionUpdateForm(Form):
     previous_status = HiddenField('previous_status')
     status = QuerySelectField(query_factory=statuses)
     language = SelectField("language",choices=[("en","English"),("pt","Portugu&#234;s")])
-    answer = TextAreaField('answer', validators = [Required()])
+    answer = TextAreaField('answer', validators = [validators.Required()])

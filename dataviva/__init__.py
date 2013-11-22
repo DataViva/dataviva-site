@@ -10,7 +10,8 @@ from flask.ext.login import LoginManager
 # flask-babel for handling L18n and L10n
 from flaskext.babel import Babel
 # for new filters, redis sessions
-from utils import Momentjs, formatter, strip_html, jinja_split, RedisSessionInterface
+from utils import Momentjs, formatter, strip_html, jinja_split, \
+                    RedisSessionInterface
 
 ''' Base directory of where the site is held '''
 datavivadir = os.path.abspath(os.path.dirname(__file__))
