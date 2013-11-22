@@ -143,9 +143,6 @@
 
       search_term = this.value;
       
-      if (search_term.length > 0) update_title("search_results")
-      else update_title()
-      
       var url = json_url + "&q=" + search_term + "&order=" + order;
       d3.select("#question_feed").html('')
         .call(is.url(url).offset(0).remove(true))
