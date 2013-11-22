@@ -1939,7 +1939,7 @@ d3plus.viz = function() {
         
         var obj = {"name": name, "value": val, "highlight": h, "group": group}
         
-        if (vars.descs[key]) obj.desc = vars.descs[key]
+        if (vars.descs[key] && length == "long") obj.desc = vars.descs[key]
       
         if (val) tooltip_data.push(obj)
       }

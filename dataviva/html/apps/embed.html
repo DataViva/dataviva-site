@@ -440,7 +440,6 @@
     
     // Define global D3plus app parameters
     app.viz = d3plus.viz()
-      .descs(descs)
       .name_array(["name","display_id"])
       .nesting_aggs(averages)
       .text_var("name")
@@ -890,6 +889,7 @@
       }
       
       app.viz.type(app.build.app.viz_whiz)
+        .descs(descs)
         .title(app.build.title)
         .color_var(color_var)
         .attrs(app.attrs[app.build.output])
@@ -908,7 +908,7 @@
         .error(false)
         .solo(app.solos)
         .filter(app.filters)
-        .sub_title(null)
+        .sub_title(app.sub_title())
         .icon_style(style)
         .yaxis_val(null)
         .tooltip_info(app.tooltip)
@@ -1073,8 +1073,30 @@
       
     }
     
+    app.sub_title = function() {
+      var elems = app.build.bra,
+          same = elems.length == 1 || (elems.length == 2 && elems[0].id.length == elems[0].id.length),
+          mix = elems.length == 2 && (elems[0].id == "all" || elems[1].id == "all") && (elems[0].id.length == 2 || elems[1].id.length == 2)
+          depth = elems[0].id.length,
+          secex = app.build.dataset == "secex",
+          munics = app.build.output == "bra",
+          text = null
+          
+      if (secex && same && !mix) {
+        if (munics || depth > 2 || depth == 3) {
+          text = dataviva.format.text("secex_8")
+        }
+        else {
+          text = dataviva.format.text("secex_2")
+        }
+      }
+      descs["val_usd"] = text
+      app.viz.descs(descs)
+      return text
+    }
+    
     app.update = function(value,type) {
-      
+      console.log(app)
       if (type == "solo" || type == "filter") {
         
         app[type+"s"] = value
@@ -1133,7 +1155,7 @@
         }
         
         if (!app.solos.length && !app.filters.length) {
-          app.viz.sub_title(null)
+          app.viz.sub_title(app.sub_title())
         }
         
         if (type == "depth" || type == "year") {
