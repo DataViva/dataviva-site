@@ -375,7 +375,7 @@ def make_query(data_table, url_args, lang, **kwargs):
     offset = url_args.get("offset", None)
     limit = url_args.get("limit", None)
     cols = url_args.get("cols", None)
-    if cols:
+    if type(cols) == str:
         cols = cols.split(".")
     excluding = url_args.get("excluding", None)
     if offset:
