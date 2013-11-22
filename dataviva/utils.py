@@ -498,7 +498,6 @@ def make_query(data_table, url_args, lang, **kwargs):
                             else:
                                 d = sorted(d,key=lambda x: x[keys[i]])
                                 for x, g in groupby(d,lambda x: x[keys[i]]):
-                                    print x,keys[i]
                                     new_array = []
                                     for o in g:
                                         new_array.append(o)
