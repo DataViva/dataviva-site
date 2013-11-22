@@ -1,12 +1,12 @@
 body.home #container {
-  padding: 58px 0px 66px 0px !important;
+  padding: 78px 0px 66px 0px !important;
   width: 800px;
 }
 
 body.home #intro {
   display: block;
-  height: 340px;
-  margin-bottom: 20px;
+  height: 330px;
+  margin: 0px 0px;
   position: relative;
   width: 100%;
 }
@@ -15,14 +15,16 @@ body.home #carousel {
   display: block;
   height: 270px;
   position: absolute;
-  right: 20px;
   text-align: left;
-  top: 20px;
-  width: 480px;
+  width: 800px;
 }
 
 body.home #carousel .app {
-  background-size: 100% 100%;
+  background-position: 320px 0px;
+  background-repeat: no-repeat;
+  background-size: 480px 270px;
+  -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+          box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
   display: none;
   height: 100%;
   left: 0px;
@@ -34,29 +36,39 @@ body.home #carousel .app {
           transition: opacity 1s;
 }
 
+body.home #carousel .app iframe {
+  margin-left: 320px;
+}
+
 body.home #intro h1 {
+  color: white;
   display: block;
-  left: 25px;
+  font-size: 24px;
+  line-height: 28px;
   margin: 0px;
+  padding: 25px;
   position: absolute;
   text-align: left;
-  top: 25px;
   -webkit-transition: opacity 1s;
           transition: opacity 1s;
-  width: 250px;
+  width: 270px;
+  z-index: 30;
 }
 
 body.home #carousel .centered {
+  margin-left: 320px;
   top: 110px;
   position: absolute;
   text-align: center;
-  width: 100%;
+  width: 480px;
   z-index: 10;
 }
 
 body.home #carousel .decision {
   display: inline-block;
   width: 90px;
+  -webkit-transition: background-color 1s;
+          transition: background-color 1s;
 }
 
 body.home .pages {
@@ -70,21 +82,20 @@ body.home .page {
   background-color: #fff;
   -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
           box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
-  color: #888;
+  color: #ccc;
   display: inline-block;
-  font-size: 12px;
-  font-weight: normal;
-  height: 20px;
-  line-height: 20px;
+  font-size: 18px;
+  font-weight: lighter;
+  height: 30px;
+  line-height: 30px;
   margin: 10px;
   opacity: 0.9;
   -webkit-transition: background-color 1s, color 1s;
           transition: background-color 1s, color 1s;
-  width: 20px;
+  width: 30px;
 }
 
 body.home .page.active {
-  background-color: #af1f24;
   color: #fff;
 }
 
