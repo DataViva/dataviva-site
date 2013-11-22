@@ -258,6 +258,7 @@ function Selector() {
           }
           
         }
+        
         populate_list(x,sorting);
         
       }
@@ -318,11 +319,11 @@ function Selector() {
         leon("#"+name+"_search").color(dataviva.color).size("medium")
               
         search.node().oninput = function() { populate_list(selected) };
-        
+
         if (type == "file") {
           search.style("display","none")
         }
-          
+        
         body = container.append("div")
           .attr("class","selector_body")
           .style("height","auto")
@@ -341,12 +342,6 @@ function Selector() {
             if (d+1 == depths.length) var depth = depths[d]
             else var depth = depths[d+1]
           }
-        }
-        else {
-          var depth = depths[0]
-        }
-        
-        if (initial_value != "all") {
           if (type == "bra" && initial_value.length >= 7) {
             if (initial_value.substr(0,2) == "mg") {
               depth_path = [2,7]
@@ -363,6 +358,7 @@ function Selector() {
           }
         }
         else {
+          var depth = depths[0]
           depth_path = []
         }
         
@@ -516,8 +512,8 @@ function Selector() {
         hw -= sort_toggles.node().offsetWidth
         hw -= 36
         
-        title.style("max-width",hw+"px")
-
+        if (hw > 0) title.style("max-width",hw+"px")
+        
         // Set height, now that the header is completely updated
         set_height();
         
