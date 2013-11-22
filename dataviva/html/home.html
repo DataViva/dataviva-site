@@ -10,7 +10,7 @@
 
   <div class="darkbox"><h1>{% trans %}Open Data for the Brazilian Economy{% endtrans %}</h1></div>
 
-  <div id="intro" class="lightbox">
+  <div id="intro">
     <div id="carousel">
       <div class="centered">
         <a class="decision">{% trans %}Learn More{% endtrans %}</a>
@@ -46,23 +46,23 @@
 <script>
 
   var carousel = [
-  {"en": "Learn How DataViva was Created",
+  {"en": "Learn How DataViva was Created", "color": "#a33c18",
   "pt": "Conheça Como Foi Criado o DataViva",
   "image": "youtube", "url": "https://www.youtube.com/embed/XZKFhNpsYS4?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'pt' %}&hl=pt-br&cc_lang_pref=pt-br{% else %}&hl=en&cc_lang_pref=en{% endif %}&cc_load_policy=1", "id": 1},
-  {"en": "Did you know that Minas Gerais is the largest exporter in Brazil?",
+  {"en": "Did you know that Minas Gerais is the largest exporter in Brazil?", "color": "#516043",
   "pt": "Você sabia que Minas Gerais é o maior estado exportador do Brasil?",
   "image": "factory", "url": "/profiles/bra/all/?app=1", "id": 2},
-  {"en": "What are the export opportunities for Minas Gerais?",
+  {"en": "What are the export opportunities for Minas Gerais?", "color": "#c9532f",
   "pt": "Quais são as oportunidades de exportação de Minas Gerais?",
   "image": "sparks", "url": "/guide/bra/mg/opportunity/hs/", "id": 3},
-  {"en": "Did you know that Minas Gerais employs more Vocational Middle School Teachers than any other state in Brazil?",
+  {"en": "Did you know that Minas Gerais employs more Vocational Middle School Teachers than any other state in Brazil?", "color": "#2a2948",
   "pt": "Você sabia que Minas Gerais é o estado brasileiro que emprega o maior número de Professores de Nível Médio no Ensino Profissionalizante?",
   "image": "students", "url": "/profiles/cbo/3313/", "id": 4},
-  {"en": "The Goal of DataViva",
+  {"en": "The Goal of DataViva", "color": "#1d372c", "color": "#243e31",
   "pt": "O Objetivo do DataViva",
   "image": "youtube", "url": "https://www.youtube.com/embed/Xp0azMCmzdA?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}", "id": 5},
   {"en": "Did you know that Minas Gerais employs more than 24 thousand doctors?",
-  "pt": "Você sabia que Minas Gerais tem mais de 24 mil médicos?",
+  "pt": "Você sabia que Minas Gerais tem mais de 24 mil médicos?", "color": "#8e708a",
   "image": "doctor", "url": "/profiles/cbo/2251/", "id": 6}
   ]
     
@@ -81,7 +81,10 @@
     .attr("id",function(d){return "page_"+d.id})
     .text(function(d){return d.id})
     .each(function(d){
-      if (d.id == app) this.toggleClass("active")
+      if (d.id == app) {
+        this.toggleClass("active")
+        this.style.backgroundColor = carousel[app-1].color
+      }
     })
     
   pages.on(d3plus.evt.click,function(d){
@@ -104,9 +107,11 @@
       if (d.id == app) return "block"
       else return "none"
     })
+    .style("background-color",function(d){return d.color})
     .each(function(d){
       if (d.image == "youtube") {
-        d3.select(this).style("z-index",20)
+        d3.select(this)
+          .style("z-index",20)
           .append("iframe")
             .attr("src",d.url)
             .attr("width","480")
@@ -122,7 +127,7 @@
   var titles = d3.select("#intro").selectAll("h1")
     .data(carousel)
     
-  titles.enter().insert("h1","#carousel")
+  titles.enter().append("h1")
     .attr("id",function(d){return "title_"+d.id})
     .html(function(d){return d[dataviva.language]})
     .style("opacity",function(d){
@@ -154,6 +159,7 @@
       var old = d3.select("#app_"+app).style("opacity",0)
       var old_title = d3.select("#title_"+app).style("opacity",0)
       d3.select("#page_"+app).node().toggleClass("active")
+      d3.select("#page_"+app).node().style.backgroundColor = "#ffffff"
       setTimeout(function(){
         old.style("display","none")
         old_title.style("display","none")
@@ -168,6 +174,8 @@
         d3.select("#title_"+app).style("opacity",1)
       },5)
       d3.select("#page_"+app).node().toggleClass("active")
+      d3.select("#page_"+app).node().style.backgroundColor = carousel[app-1].color
+      d3.select("#carousel .decision").node().style.backgroundColor = carousel[app-1].color
     }
   }
 

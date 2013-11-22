@@ -109,7 +109,7 @@
   <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it 
        to SVG/PDF/PNG downloadable file. -->
   <form id="svgform" action="/apps/download/" method="post">
-    {{ form.hidden_tag() }}
+      {{ form.hidden_tag() }}
   </form>
 
 {% endblock %}
@@ -686,17 +686,11 @@
     
     app.finish = function() {
       
-      // Format Data if it hasn't already been formatted
-      if (!app.data[app.build.data_url][format[app.build.app.type]]) {
-        app.format_data()
-      }
-      
       d3.select("#ui_bottom").selectAll("*").remove()
       d3.select("#app_controls").selectAll("*").remove()
       
       // Create Key
       if (app.build.app.type != "geo_map") {
-
         d3.select("#ui_bottom").append("div")
           .attr("id","key")
           .datum(app.attrs[app.build.output])
@@ -848,6 +842,11 @@
         }
         
       })
+
+      // Format Data if it hasn't already been formatted
+      if (!app.data[app.build.data_url][format[app.build.app.type]]) {
+        app.format_data()
+      }
       
       var nesting = []
       depths[app.build.output].forEach(function(d){

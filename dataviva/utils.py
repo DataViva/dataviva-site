@@ -3,7 +3,7 @@ from re import sub
 from itertools import groupby
 from werkzeug.datastructures import CallbackDict
 from jinja2 import Markup
-from flask import abort, current_app, make_response, Flask, jsonify, request, Response
+from flask import abort, current_app, make_response, Flask, jsonify, request, Response, session
 from functools import update_wrapper
 from datetime import datetime, date, timedelta
 from math import ceil
@@ -11,6 +11,7 @@ from uuid import uuid4
 from config import REDIS
 from decimal import *
 from sqlalchemy import func, and_, or_, asc, desc, not_
+from uuid import uuid4
 
 from flask.sessions import SessionInterface, SessionMixin
 
