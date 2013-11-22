@@ -109,7 +109,7 @@
   <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it 
        to SVG/PDF/PNG downloadable file. -->
   <form id="svgform" action="/apps/download/" method="post">
-    {{ form.hidden_tag() }}
+      {{ form.hidden_tag() }}
   </form>
 
 {% endblock %}
