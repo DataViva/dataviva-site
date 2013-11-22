@@ -41,7 +41,7 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             output=None):
             
     lang = request.args.get('lang', None) or g.locale
-            
+    
     if request.is_xhr:
         cache_id = request.path + lang
         cached_q = cached_query(cache_id)
@@ -292,7 +292,7 @@ def get_geo_location(ip):
 @mod.route('/builder/network/', defaults={"app_name": "network", "dataset": "secex", "bra_id": "mg", 
             "filter1": "all", "filter2": "all", "output": "hs", "params": ""})
 @mod.route('/builder/rings/', defaults={"app_name": "rings", "dataset": "rais", "bra_id": "mg", 
-            "filter1": "j6312", "filter2": "all", "output": "isic", "params": ""})
+            "filter1": "all", "filter2": "2211", "output": "cbo", "params": ""})
 @mod.route('/builder/scatter/', defaults={"app_name": "scatter", "dataset": "secex", "bra_id": "mg", 
             "filter1": "all", "filter2": "all", "output": "hs", "params": "?rca_scope=wld_rca"})
 @mod.route('/builder/compare/', defaults={"app_name": "compare", "dataset": "rais", "bra_id": "mg_rj", 

@@ -115,7 +115,7 @@ class Build(db.Model, AutoSerialize):
                     if Cbo.query.get(f):
                         self.cbo.append(Cbo.query.get(f))
                     else:
-                        self.cbo.append(Cbo.query.get('1210'))
+                        self.cbo.append(Cbo.query.get('2211'))
                 self.filter2 = "_".join([c.id for c in set(self.cbo)])
             elif self.dataset == "secex":
                 self.wld = []
