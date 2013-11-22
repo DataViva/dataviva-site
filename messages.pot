@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-21 17:32-0500\n"
+"POT-Creation-Date: 2013-11-22 13:21-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,6 +146,30 @@ msgstr ""
 
 #: dataviva/html/about/analysis.html:10
 msgid "The suite of apps that compose DataViva can be used to analyze different aspects of Brazilian economy. Below, you will find a few examples to help you understanding and making your own analyses using the platform."
+msgstr ""
+
+#: dataviva/html/about/analysis.html:12
+msgid "Industry.pdf"
+msgstr ""
+
+#: dataviva/html/about/analysis.html:13
+msgid "Industries in Minas Gerais"
+msgstr ""
+
+#: dataviva/html/about/analysis.html:16
+msgid "Employment.pdf"
+msgstr ""
+
+#: dataviva/html/about/analysis.html:17
+msgid "Evolution of the Occupational Structure of Minas Gerais"
+msgstr ""
+
+#: dataviva/html/about/analysis.html:20
+msgid "Exports.pdf"
+msgstr ""
+
+#: dataviva/html/about/analysis.html:21
+msgid "Evolution of Minas Gerais Exports"
 msgstr ""
 
 #: dataviva/html/about/attrs.html:4 dataviva/html/templates/about.html:40
@@ -431,6 +455,38 @@ msgstr ""
 msgid "The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website."
 msgstr ""
 
+#: dataviva/html/about/ask/index.html:16
+msgid "What do you want to know?"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:17
+msgid "Search"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:22
+msgid "Can´t find an answer?"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:22
+msgid "Send your question to us here!"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:28
+msgid "Find your Answers"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:31
+msgid "Order"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:33
+msgid "Most Active"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:35
+msgid "Most Recent"
+msgstr ""
+
 #: dataviva/html/about/data/comtrade.html:3
 msgid "United Nations Commodity Trade Statistics Database"
 msgstr ""
@@ -675,6 +731,18 @@ msgid "Login"
 msgstr ""
 
 #: dataviva/html/account/login.html:17
+msgid "Logging in is easy! All you have to do is choose one of the following accounts to link with your profile. We'll take care of the rest."
+msgstr ""
+
+#: dataviva/html/account/login.html:19
+msgid "By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile."
+msgstr ""
+
+#: dataviva/html/account/login.html:24
+msgid "Remember Me"
+msgstr ""
+
+#: dataviva/html/account/login.html:29
 msgid "Logging in has been disabled on this version of DataViva. Please visit the main site to log in."
 msgstr ""
 

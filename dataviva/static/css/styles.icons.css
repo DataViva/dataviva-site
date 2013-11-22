@@ -440,6 +440,11 @@
   opacity: 0.2;
 }
 
+.decision.icon.pdf:before {
+  content: "\f15c";
+  line-height: 40px;
+}
+
 /*******************/
 /* Account Buttons */
 /*******************/

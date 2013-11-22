@@ -1601,7 +1601,7 @@ d3plus.viz = function() {
               to_return[key] = d3[vars.nesting_aggs[key]](leaves, function(d){ return d[key]; })
             }
             else {
-              if ([vars.year_var,"icon"].indexOf(key) >= 0 || (key == vars.id_var && !to_return[vars.id_var])) {
+              if ([vars.year_var].indexOf(key) >= 0 || (key == vars.id_var && !to_return[vars.id_var])) {
                 to_return[key] = leaves[0][key];
               }
               else if (vars.keys[key] === "number" && key != vars.id_var) {
@@ -1939,7 +1939,7 @@ d3plus.viz = function() {
         
         var obj = {"name": name, "value": val, "highlight": h, "group": group}
         
-        if (vars.descs[key]) obj.desc = vars.descs[key]
+        if (vars.descs[key] && length == "long") obj.desc = vars.descs[key]
       
         if (val) tooltip_data.push(obj)
       }

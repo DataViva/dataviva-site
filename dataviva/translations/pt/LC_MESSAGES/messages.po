@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-21 17:32-0500\n"
+"POT-Creation-Date: 2013-11-22 13:21-0500\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -169,6 +169,30 @@ msgstr ""
 "analisar diferentes aspectos da economia brasileira. Abaixo, você irá "
 "encontrar alguns exemplos para ajuda-la a compreender e fazer suas "
 "próprias análises utilizando a plataforma."
+
+#: dataviva/html/about/analysis.html:12
+msgid "Industry.pdf"
+msgstr "Atividade-Economica.pdf"
+
+#: dataviva/html/about/analysis.html:13
+msgid "Industries in Minas Gerais"
+msgstr "Atividades Econômicas de Minas Gerais"
+
+#: dataviva/html/about/analysis.html:16
+msgid "Employment.pdf"
+msgstr "Empregos.pdf"
+
+#: dataviva/html/about/analysis.html:17
+msgid "Evolution of the Occupational Structure of Minas Gerais"
+msgstr "Evolução da Estrutura de Ocupação de Minas Gerais"
+
+#: dataviva/html/about/analysis.html:20
+msgid "Exports.pdf"
+msgstr "Exportacoes.pdf"
+
+#: dataviva/html/about/analysis.html:21
+msgid "Evolution of Minas Gerais Exports"
+msgstr "Evolução da Pauta de Exportações de Minas Gerais"
 
 #: dataviva/html/about/attrs.html:4 dataviva/html/templates/about.html:40
 msgid "Classifications"
@@ -898,6 +922,38 @@ msgid ""
 "accounts. Click here to contact us through the main website."
 msgstr "A versão do DataViva que você está vendo não suporta contas de usuário. Clique aqui para entrar em contato conosco através do site principal."
 
+#: dataviva/html/about/ask/index.html:16
+msgid "What do you want to know?"
+msgstr "O que você gostaria de saber?"
+
+#: dataviva/html/about/ask/index.html:17
+msgid "Search"
+msgstr "Pesquisar"
+
+#: dataviva/html/about/ask/index.html:22
+msgid "Can´t find an answer?"
+msgstr "Não encontrou uma resposta?"
+
+#: dataviva/html/about/ask/index.html:22
+msgid "Send your question to us here!"
+msgstr "Envie sua pergunta para nós aqui!"
+
+#: dataviva/html/about/ask/index.html:28
+msgid "Find your Answers"
+msgstr "Tire suas Dúvidas"
+
+#: dataviva/html/about/ask/index.html:31
+msgid "Order"
+msgstr "Ordem"
+
+#: dataviva/html/about/ask/index.html:33
+msgid "Most Active"
+msgstr "Mais Frequente"
+
+#: dataviva/html/about/ask/index.html:35
+msgid "Most Recent"
+msgstr "Mais Recente"
+
 #: dataviva/html/about/data/comtrade.html:3
 msgid "United Nations Commodity Trade Statistics Database"
 msgstr "Banco de Dados Estatísticos de Comércio de Commodities das Nações Unidas"
@@ -1444,6 +1500,26 @@ msgstr "Login"
 
 #: dataviva/html/account/login.html:17
 msgid ""
+"Logging in is easy! All you have to do is choose one of the following "
+"accounts to link with your profile. We'll take care of the rest."
+msgstr ""
+"Fazer o login é muito fácil! Tudo que você tem a fazer é escolher uma das"
+" contas a seguir para vincular ao seu perfil. Nós cuidaremos do resto."
+
+#: dataviva/html/account/login.html:19
+msgid ""
+"By having an account, you will be able to ask Sabrina questions, comment "
+"in discussions, and save your favorite apps to your profile."
+msgstr ""
+"Tendo uma conta, você será capaz de fazer perguntas à Sabrina, comentar "
+"em nossos fóruns, e salvar seus aplicativos favoritos em seu perfil."
+
+#: dataviva/html/account/login.html:24
+msgid "Remember Me"
+msgstr "Lembrar-me"
+
+#: dataviva/html/account/login.html:29
+msgid ""
 "Logging in has been disabled on this version of DataViva. Please visit "
 "the main site to log in."
 msgstr "O login foi desativado nesta versão do DataViva. Por favor, visite o site principal para entrar."
@@ -1909,55 +1985,4 @@ msgstr "Sair"
 #: dataviva/profiles/views.py:47
 msgid "a country"
 msgstr "um país"
-
-#~ msgid "What do you want to know?"
-#~ msgstr "O que você gostaria de saber?"
-
-#~ msgid "Search"
-#~ msgstr "Pesquisar"
-
-#~ msgid "Can´t find an answer?"
-#~ msgstr "Não encontrou uma resposta?"
-
-#~ msgid "Send your question to us here!"
-#~ msgstr "Envie sua pergunta para nós aqui!"
-
-#~ msgid "Find your Answers"
-#~ msgstr "Tire suas Dúvidas"
-
-#~ msgid "Order"
-#~ msgstr "Ordem"
-
-#~ msgid "Most Active"
-#~ msgstr "Mais Frequente"
-
-#~ msgid "Most Recent"
-#~ msgstr "Mais Recente"
-
-#~ msgid ""
-#~ "Logging in is easy! All you have"
-#~ " to do is choose one of the "
-#~ "following accounts to link with your "
-#~ "profile. We'll take care of the "
-#~ "rest."
-#~ msgstr ""
-#~ "Fazer o login é muito fácil! Tudo"
-#~ " que você tem a fazer é "
-#~ "escolher uma das contas a seguir "
-#~ "para vincular ao seu perfil. Nós "
-#~ "cuidaremos do resto."
-
-#~ msgid ""
-#~ "By having an account, you will be"
-#~ " able to ask Sabrina questions, "
-#~ "comment in discussions, and save your"
-#~ " favorite apps to your profile."
-#~ msgstr ""
-#~ "Tendo uma conta, você será capaz "
-#~ "de fazer perguntas à Sabrina, comentar"
-#~ " em nossos fóruns, e salvar seus "
-#~ "aplicativos favoritos em seu perfil."
-
-#~ msgid "Remember Me"
-#~ msgstr "Lembrar-me"
 

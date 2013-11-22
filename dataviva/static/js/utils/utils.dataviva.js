@@ -241,8 +241,8 @@ dataviva.format.text = function(text,name,l) {
       "opp_gain_desc": {"en": "Opportunity gain is a measure that indicates how much diversity is offered by an industry or product should the given location develop it.", "pt": "O ganho de oportunidade \u00e9 uma medida que indica quanta diversidade \u00e9 oferecida por um determinado setor ou produto se uma determinada localidade fosse desenvolv\u00ea-lo."},
       "opp_gain_wld": {"en": "International Opportunity Gain", "pt": "Ganho de Oportunidade Internacional"},
       
-      "val_usd_growth_pct": {"en": "Growth Rate (1 year)", "pt": "Taxa de Crescimento (1 ano)"},
-      "val_usd_growth_pct_5": {"en": "Growth Rate (5 year)", "pt": "Taxa de Crescimento (5 anos)"},
+      "val_usd_growth_pct": {"en": "Annual Growth Rate (1 year)", "pt": "Taxa de Crescimento Annual (1 ano)"},
+      "val_usd_growth_pct_5": {"en": "Annual Growth Rate (5 year)", "pt": "Taxa de Crescimento Annual (5 anos)"},
       "val_usd_growth_val": {"en": "Growth Value (1 year)", "pt": "Valor de Crescimento (1 ano)"},
       "val_usd_growth_val_5": {"en": "Growth Value (5 year)", "pt": "Valor de Crescimento (5 anos)"},
       
@@ -341,7 +341,9 @@ dataviva.format.text = function(text,name,l) {
       "fill": {"en": "Fill", "pt": "Preenchido"},
       "embed_url": {"en": "Embed URL", "pt": "URL para Incorporar"},
       "share_url": {"en": "Shortened URL", "pt": "URL Abreviada"},
-      "social_media": {"en": "Social Media", "pt": "Mídias Sociais"},
+      "social_media": {"en": "Social Networks", "pt": "Redes Sociais"},
+      "secex_2": {"en": "Based on State Production", "pt": "Baseado nos Estados Produtores"},
+      "secex_8": {"en": "Based on the Exporting Municipality", "pt": "Baseado nos Municípios Exportadores"},
     
       // Viz-Whiz Text
       "Click for More Info": {"en": "Click for more data and related apps.", "pt": "Clique para dados adicionais e aplicativos relacionados."},
@@ -803,16 +805,23 @@ dataviva.popover.show = function(id) {
     
   d3.select(id)
     .style("display","block")
-    
-  setTimeout(function(){
   
+  if (Modernizr.cssanimations) {
+    setTimeout(function(){
+      show()
+    },5)
+  }
+  else {
+    show()
+  }
+  
+  function show() {
     d3.select("#popover_mask")
       .style("opacity",0.8)
     
     d3.select(id)
       .style("opacity",1)
-    
-  },5)
+  }
   
 }
 
@@ -830,12 +839,21 @@ dataviva.popover.hide = function(id) {
         d3.select("#popover_mask").style("opacity",0);
         p.style("opacity",0);
         
-        var timing = parseFloat(p.style("transition-duration"),10)*1000
+        if (Modernizr.cssanimations) {
+          var timing = parseFloat(p.style("transition-duration"),10)*1000
         
-        setTimeout(function(){
+          setTimeout(function(){
+            hide()
+          },timing)
+        }
+        else {
+          hide()
+        }
+  
+        function hide() {
           p.style("display","none")
           d3.select("#popover_mask").style("display","none")
-        },timing)
+        }
         
       }
       

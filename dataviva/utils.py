@@ -375,7 +375,7 @@ def make_query(data_table, url_args, lang, **kwargs):
     offset = url_args.get("offset", None)
     limit = url_args.get("limit", None)
     cols = url_args.get("cols", None)
-    if cols:
+    if type(cols) == str or type(cols) == unicode:
         cols = cols.split(".")
     excluding = url_args.get("excluding", None)
     if offset:
@@ -498,7 +498,6 @@ def make_query(data_table, url_args, lang, **kwargs):
                             else:
                                 d = sorted(d,key=lambda x: x[keys[i]])
                                 for x, g in groupby(d,lambda x: x[keys[i]]):
-                                    print x,keys[i]
                                     new_array = []
                                     for o in g:
                                         new_array.append(o)
