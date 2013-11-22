@@ -1823,7 +1823,7 @@
                 
                 // Facebook link
                 d3.select(pid).append("a")
-                  .attr("href", "http://www.facebook.com/sharer.php?s=100&p[title]=DataViva&p[summary]="+app.viz.title()+"&p[url]=http://dataviva.info/" + data.slug + "/")
+                  .attr("href", "http://www.facebook.com/sharer.php?s=100&p[title]=DataViva&p[summary]="+app.viz.title()+"&p[url]=http://dataviva.info/" + data.slug + "/&p[images][0]=http://dataviva.info/static/img/icons/DataViva.png")
                   .attr("class", "share_button")
                   .attr("target", "_blank")
                   .attr("onclick", "return !window.open(this.href, 'Facebook', 'width=640,height=300')")
