@@ -118,7 +118,7 @@
     }
       
     var width = window.innerWidth-380 - dataviva.scrollbar(),
-        height = window.innerHeight-149,
+        height = window.innerHeight-159,
         builds = {},
         sliding = false,
         selected = null,
@@ -130,7 +130,7 @@
       .style("height",height+"px")
       .each(function(){
         var p = this.id.substring(7),
-            t = this.offsetTop-78
+            t = this.offsetTop-88
         builds[p] = {"loaded": false, "top": t}
         if (p == starting_app) {
           slide("app"+p)

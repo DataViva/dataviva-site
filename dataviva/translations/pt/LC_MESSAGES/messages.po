@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-22 17:31-0500\n"
+"POT-Creation-Date: 2013-11-24 10:51-0500\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -69,7 +69,7 @@ msgstr "um produto"
 msgid "a location"
 msgstr "um local"
 
-#: dataviva/guide/views.py:155 dataviva/html/home.html:33
+#: dataviva/guide/views.py:155 dataviva/html/home.html:44
 #: dataviva/html/templates/site.html:11
 msgid "Guide"
 msgstr "Guia"
@@ -103,29 +103,43 @@ msgid "All"
 msgstr "Tudo"
 
 #: dataviva/html/home.html:11
-msgid "Open Data for the Brazilian Economy"
-msgstr "Dados Abertos para a Economia Brasileira"
+msgid "Visualizing the Economy of Minas Gerais and Brazil"
+msgstr "Visualizando a Economia de Minas Gerais e do Brasil"
 
-#: dataviva/html/home.html:16 dataviva/html/templates/site.html:14
+#: dataviva/html/home.html:13
+msgid ""
+"DataViva is opening up data for the entire formal sector of the Brazilian"
+" economy"
+msgstr "O DataViva está disponibilizando dados sobre todo o setor formal da economia"
+
+#: dataviva/html/home.html:15
+msgid "through more than 100 million interactive visualization."
+msgstr "brasileira em mais de 100 milhões de visualizações interativas."
+
+#: dataviva/html/home.html:21 dataviva/html/templates/site.html:14
 msgid "Learn More"
 msgstr "Saiba Mais"
 
-#: dataviva/html/home.html:23 dataviva/html/apps/index.html:4
+#: dataviva/html/home.html:30
+msgid "Also Browse"
+msgstr "Navegue Também por"
+
+#: dataviva/html/home.html:34 dataviva/html/apps/index.html:4
 #: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:9
 msgid "Apps"
 msgstr "Aplicativos"
 
-#: dataviva/html/home.html:24
+#: dataviva/html/home.html:35
 msgid "Explore the Brazilian economy through over 100 million visualizations."
 msgstr ""
 "Explore a economia brasileira por meio de mais de 100 milhões de "
 "visualizações."
 
-#: dataviva/html/home.html:28 dataviva/html/templates/site.html:10
+#: dataviva/html/home.html:39 dataviva/html/templates/site.html:10
 msgid "Profiles"
 msgstr "Perfis"
 
-#: dataviva/html/home.html:29
+#: dataviva/html/home.html:40
 msgid ""
 "Quickly learn about the exports, occupations, and industries of each "
 "Brazilian state and economic sector."
@@ -133,7 +147,7 @@ msgstr ""
 "Aprender rapidamente sobre as exportações, ocupações, e as indústrias de "
 "cada estado brasileiro e do setor econômico."
 
-#: dataviva/html/home.html:34
+#: dataviva/html/home.html:45
 msgid ""
 "Answer strategic questions about economic opportunities of states and "
 "industries."
@@ -141,12 +155,12 @@ msgstr ""
 "Responda às perguntas estratégicas sobre oportunidades econômicas dos "
 "estados e indústrias."
 
-#: dataviva/html/home.html:38 dataviva/html/rankings/index.html:4
+#: dataviva/html/home.html:49 dataviva/html/rankings/index.html:4
 #: dataviva/html/templates/site.html:13
 msgid "Rankings"
 msgstr "Rankings"
 
-#: dataviva/html/home.html:39
+#: dataviva/html/home.html:50
 msgid ""
 "Compare locations, industries and occupations based on economic output, "
 "diversity, and salaries."
@@ -904,20 +918,7 @@ msgstr ""
 "o DataViva ajuda a criar uma base sólida para o diálogo entre o setor "
 "público e o privado, fundamentada por dados empíricos."
 
-#: dataviva/html/about/ask/index.html:13
-#, python-format
-msgid ""
-"The platform was developed by a partnership between the Strategic "
-"Priorities Office of the government of Minas Gerais and an external "
-"contractor. The front end of DataViva runs on the d3plus visualization "
-"engine (%(d3plus)s)."
-msgstr ""
-"A plataforma foi desenvolvida por meio de uma parceria entre o Escritório"
-" de Prioridades Estratégicas do Governo de Minas Gerais e uma consultoria"
-" internacional. A parte visual do DataViva é processada pela ferramenta "
-"de visualização “d3plus” (%(d3plus)s)."
-
-#: dataviva/html/about/ask/index.html:18
+#: dataviva/html/about/ask/index.html:12
 msgid ""
 "The version of DataViva that you are viewing does not support user "
 "accounts. Click here to contact us through the main website."
@@ -925,35 +926,35 @@ msgstr ""
 "A versão do DataViva que você está vendo não suporta contas de usuário. "
 "Clique aqui para entrar em contato conosco através do site principal."
 
-#: dataviva/html/about/ask/index.html:22
+#: dataviva/html/about/ask/index.html:16
 msgid "What do you want to know?"
 msgstr "O que você gostaria de saber?"
 
-#: dataviva/html/about/ask/index.html:23
+#: dataviva/html/about/ask/index.html:17
 msgid "Search"
 msgstr "Pesquisar"
 
-#: dataviva/html/about/ask/index.html:28
+#: dataviva/html/about/ask/index.html:22
 msgid "Can´t find an answer?"
 msgstr "Não encontrou uma resposta?"
 
-#: dataviva/html/about/ask/index.html:28
+#: dataviva/html/about/ask/index.html:22
 msgid "Send your question to us here!"
 msgstr "Envie sua pergunta para nós aqui!"
 
-#: dataviva/html/about/ask/index.html:34
+#: dataviva/html/about/ask/index.html:28
 msgid "Find your Answers"
 msgstr "Tire suas Dúvidas"
 
-#: dataviva/html/about/ask/index.html:37
+#: dataviva/html/about/ask/index.html:31
 msgid "Order"
 msgstr "Ordem"
 
-#: dataviva/html/about/ask/index.html:39
+#: dataviva/html/about/ask/index.html:33
 msgid "Most Active"
 msgstr "Mais Frequente"
 
-#: dataviva/html/about/ask/index.html:41
+#: dataviva/html/about/ask/index.html:35
 msgid "Most Recent"
 msgstr "Mais Recente"
 
@@ -1990,4 +1991,24 @@ msgstr "Sair"
 #: dataviva/profiles/views.py:47
 msgid "a country"
 msgstr "um país"
+
+#~ msgid "Open Data for the Brazilian Economy"
+#~ msgstr "Dados Abertos para a Economia Brasileira"
+
+#~ msgid ""
+#~ "The platform was developed by a "
+#~ "partnership between the Strategic Priorities"
+#~ " Office of the government of Minas"
+#~ " Gerais and an external contractor. "
+#~ "The front end of DataViva runs on"
+#~ " the d3plus visualization engine "
+#~ "(%(d3plus)s)."
+#~ msgstr ""
+#~ "A plataforma foi desenvolvida por meio"
+#~ " de uma parceria entre o Escritório"
+#~ " de Prioridades Estratégicas do Governo "
+#~ "de Minas Gerais e uma consultoria "
+#~ "internacional. A parte visual do "
+#~ "DataViva é processada pela ferramenta de"
+#~ " visualização “d3plus” (%(d3plus)s)."
 

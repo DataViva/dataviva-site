@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-22 17:31-0500\n"
+"POT-Creation-Date: 2013-11-24 10:51-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,7 +68,7 @@ msgstr ""
 msgid "a location"
 msgstr ""
 
-#: dataviva/guide/views.py:155 dataviva/html/home.html:33
+#: dataviva/guide/views.py:155 dataviva/html/home.html:44
 #: dataviva/html/templates/site.html:11
 msgid "Guide"
 msgstr ""
@@ -102,40 +102,52 @@ msgid "All"
 msgstr ""
 
 #: dataviva/html/home.html:11
-msgid "Open Data for the Brazilian Economy"
+msgid "Visualizing the Economy of Minas Gerais and Brazil"
 msgstr ""
 
-#: dataviva/html/home.html:16 dataviva/html/templates/site.html:14
+#: dataviva/html/home.html:13
+msgid "DataViva is opening up data for the entire formal sector of the Brazilian economy"
+msgstr ""
+
+#: dataviva/html/home.html:15
+msgid "through more than 100 million interactive visualization."
+msgstr ""
+
+#: dataviva/html/home.html:21 dataviva/html/templates/site.html:14
 msgid "Learn More"
 msgstr ""
 
-#: dataviva/html/home.html:23 dataviva/html/apps/index.html:4
+#: dataviva/html/home.html:30
+msgid "Also Browse"
+msgstr ""
+
+#: dataviva/html/home.html:34 dataviva/html/apps/index.html:4
 #: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:9
 msgid "Apps"
 msgstr ""
 
-#: dataviva/html/home.html:24
+#: dataviva/html/home.html:35
 msgid "Explore the Brazilian economy through over 100 million visualizations."
 msgstr ""
 
-#: dataviva/html/home.html:28 dataviva/html/templates/site.html:10
+#: dataviva/html/home.html:39 dataviva/html/templates/site.html:10
 msgid "Profiles"
 msgstr ""
 
-#: dataviva/html/home.html:29
+#: dataviva/html/home.html:40
 msgid "Quickly learn about the exports, occupations, and industries of each Brazilian state and economic sector."
 msgstr ""
 
-#: dataviva/html/home.html:34
+#: dataviva/html/home.html:45
 msgid "Answer strategic questions about economic opportunities of states and industries."
 msgstr ""
 
-#: dataviva/html/home.html:38 dataviva/html/rankings/index.html:4
+#: dataviva/html/home.html:49 dataviva/html/rankings/index.html:4
 #: dataviva/html/templates/site.html:13
 msgid "Rankings"
 msgstr ""
 
-#: dataviva/html/home.html:39
+#: dataviva/html/home.html:50
 msgid "Compare locations, industries and occupations based on economic output, diversity, and salaries."
 msgstr ""
 
@@ -451,44 +463,39 @@ msgstr ""
 msgid "Through its visualizations, DataViva provides information that is valuable for export promotion, investment decision and policy design. Moreover, by providing facts about the economic development of industries, locations and their respective opportunities, DataViva is helping create a solid data-driven foundation for conversations between the public and private sectors."
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:13
-#, python-format
-msgid "The platform was developed by a partnership between the Strategic Priorities Office of the government of Minas Gerais and an external contractor. The front end of DataViva runs on the d3plus visualization engine (%(d3plus)s)."
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:18
+#: dataviva/html/about/ask/index.html:12
 msgid "The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website."
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:22
+#: dataviva/html/about/ask/index.html:16
 msgid "What do you want to know?"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:23
+#: dataviva/html/about/ask/index.html:17
 msgid "Search"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:28
+#: dataviva/html/about/ask/index.html:22
 msgid "Can´t find an answer?"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:28
+#: dataviva/html/about/ask/index.html:22
 msgid "Send your question to us here!"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:34
+#: dataviva/html/about/ask/index.html:28
 msgid "Find your Answers"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:37
+#: dataviva/html/about/ask/index.html:31
 msgid "Order"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:39
+#: dataviva/html/about/ask/index.html:33
 msgid "Most Active"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:41
+#: dataviva/html/about/ask/index.html:35
 msgid "Most Recent"
 msgstr ""
 

@@ -4,7 +4,7 @@ body.query #inner_container {
 }
 
 body.query #container {
-  padding: 58px 0px 49px 0px;
+  padding: 68px 0px 49px 0px;
   text-align: left;
   width: 100%;
 }
@@ -60,7 +60,7 @@ span.show {
   padding: 10px 10px 5px 10px;
   position: fixed;
   text-align: center;
-  top: 78px;
+  top: 88px;
   width: 300px;
 }
 

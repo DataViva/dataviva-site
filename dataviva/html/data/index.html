@@ -115,7 +115,7 @@
   leon(".year_filter").color(dataviva.color)
   
   d3.select("#filter_selects")
-    .style("max-height",window.innerHeight-169+"px")
+    .style("max-height",window.innerHeight-179+"px")
   
   var datasets = {{ datasets|safe }}
   var filters = {{ filters_json|safe }}
@@ -421,7 +421,7 @@
         return w < allowed ? w+"px" : allowed+"px"
       })
       .style("height",function(){
-        var allowed =  window.innerHeight - 149
+        var allowed =  window.innerHeight - 159
         return h < allowed ? h+"px" : allowed+"px"
       })
       

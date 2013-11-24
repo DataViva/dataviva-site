@@ -1,6 +1,9 @@
 #header_container {
   background-color: white;
-  height: 58px;
+  background-image: url("/static/img/nav/color_bar.jpg");
+  background-position: bottom center;
+  background-repeat: repeat-x;
+  height: 68px;
   margin: 0px;
   min-width: 980px;
   position: fixed;
@@ -10,9 +13,10 @@
 }
 #header {
   height: 40px;
-  margin: 0px auto;
-  padding: 8px 0px;
-  width: 800px;
+  margin: 5px auto;
+  padding: 5px 0px;
+  text-align: center;
+  width: 820px;
 }
 
 #header > a {
@@ -26,10 +30,10 @@
   background-size: 100% 100%;
   background-position: top center;
   display: inline-block;
-  height: 44px;
+  height: 52px;
   margin-right: 15px;
-  margin-top: -1px;
-  width: 147px;
+  margin-top: -6px;
+  width: 180px;
 }
 
 #header > a.link {
@@ -38,11 +42,11 @@
   background-size: 35px 35px;
   color: black;
   font-size: 11px;
-  margin: -4px 3px 0px 3px;
+  margin: -4px 12px 0px 12px;
   opacity: 0.25;
   padding-top: 34px;
   text-align: center;
-  width: 85px;
+  width: 65px;
 }
 
 #header a#guide {
@@ -165,7 +169,7 @@ div#language .leon.radio {
   left: 50%;
   margin-left: -390px;
   position: fixed;
-  top: 70px;
+  top: 80px;
   width: 780px;
   z-index: 1000;
 }

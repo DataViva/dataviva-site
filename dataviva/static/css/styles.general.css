@@ -55,7 +55,7 @@ hr {
 #container {
   display: block;
   margin: 0px auto;
-  padding: 76px 0px 66px 0px;
+  padding: 90px 0px 66px 0px;
   text-align: center;
   width: 980px;
 }
@@ -77,13 +77,14 @@ div#selector {
 }
 
 .darkbox {
-  background-color: rgba(0,0,0,0.25);
-  color: #fff;
+  color: #129cc0;
   display: inline-block;
   margin: 12px;
   max-width: 800px;
   padding: 10px 15px 6px;
   position: relative;
+  -webkit-transition: color 1s;
+          transition: color 1s;
 }
 
 p {
