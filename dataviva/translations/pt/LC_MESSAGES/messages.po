@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-24 10:51-0500\n"
+"POT-Creation-Date: 2013-11-25 14:07-0200\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -110,7 +110,9 @@ msgstr "Visualizando a Economia de Minas Gerais e do Brasil"
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
 " economy"
-msgstr "O DataViva está disponibilizando dados sobre todo o setor formal da economia"
+msgstr ""
+"O DataViva está disponibilizando dados sobre todo o setor formal da "
+"economia"
 
 #: dataviva/html/home.html:15
 msgid "through more than 100 million interactive visualization."
@@ -936,15 +938,15 @@ msgstr "Pesquisar"
 
 #: dataviva/html/about/ask/index.html:22
 msgid "Can´t find an answer?"
-msgstr "Não encontrou uma resposta?"
+msgstr "Caso não encontre resposta para sua dúvida,"
 
 #: dataviva/html/about/ask/index.html:22
 msgid "Send your question to us here!"
-msgstr "Envie sua pergunta para nós aqui!"
+msgstr "envie sua pergunta aqui!"
 
 #: dataviva/html/about/ask/index.html:28
-msgid "Find your Answers"
-msgstr "Tire suas Dúvidas"
+msgid "Find your answers"
+msgstr "Tire suas dúvidas"
 
 #: dataviva/html/about/ask/index.html:31
 msgid "Order"
@@ -1009,7 +1011,7 @@ msgstr "Relação Anual de Informações Sociais"
 
 #: dataviva/html/about/data/rais.html:5
 msgid "Ministry of Labor and Employment – MTE"
-msgstr "Ministério do Trabalho e Emprego – TEM"
+msgstr "Ministério do Trabalho e Emprego – MTE"
 
 #: dataviva/html/about/data/rais.html:8
 msgid ""
@@ -1991,24 +1993,4 @@ msgstr "Sair"
 #: dataviva/profiles/views.py:47
 msgid "a country"
 msgstr "um país"
-
-#~ msgid "Open Data for the Brazilian Economy"
-#~ msgstr "Dados Abertos para a Economia Brasileira"
-
-#~ msgid ""
-#~ "The platform was developed by a "
-#~ "partnership between the Strategic Priorities"
-#~ " Office of the government of Minas"
-#~ " Gerais and an external contractor. "
-#~ "The front end of DataViva runs on"
-#~ " the d3plus visualization engine "
-#~ "(%(d3plus)s)."
-#~ msgstr ""
-#~ "A plataforma foi desenvolvida por meio"
-#~ " de uma parceria entre o Escritório"
-#~ " de Prioridades Estratégicas do Governo "
-#~ "de Minas Gerais e uma consultoria "
-#~ "internacional. A parte visual do "
-#~ "DataViva é processada pela ferramenta de"
-#~ " visualização “d3plus” (%(d3plus)s)."
 
