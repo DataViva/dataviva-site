@@ -8,7 +8,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 # flask-login for managing users
 from flask.ext.login import LoginManager
 # flask-babel for handling L18n and L10n
-from flaskext.babel import Babel
+from flask.ext.babel import Babel
 # for new filters, redis sessions
 from utils import Momentjs, formatter, strip_html, jinja_split, \
                     RedisSessionInterface
