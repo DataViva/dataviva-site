@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-22 13:21-0500\n"
+"POT-Creation-Date: 2013-11-25 14:07-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Reply submitted."
 msgstr ""
 
-#: dataviva/admin/views.py:159
+#: dataviva/admin/views.py:140
 msgid "This question has now been updated."
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "a location"
 msgstr ""
 
-#: dataviva/guide/views.py:155 dataviva/html/home.html:33
+#: dataviva/guide/views.py:155 dataviva/html/home.html:44
 #: dataviva/html/templates/site.html:11
 msgid "Guide"
 msgstr ""
@@ -102,40 +102,52 @@ msgid "All"
 msgstr ""
 
 #: dataviva/html/home.html:11
-msgid "Open Data for the Brazilian Economy"
+msgid "Visualizing the Economy of Minas Gerais and Brazil"
 msgstr ""
 
-#: dataviva/html/home.html:16 dataviva/html/templates/site.html:14
+#: dataviva/html/home.html:13
+msgid "DataViva is opening up data for the entire formal sector of the Brazilian economy"
+msgstr ""
+
+#: dataviva/html/home.html:15
+msgid "through more than 100 million interactive visualization."
+msgstr ""
+
+#: dataviva/html/home.html:21 dataviva/html/templates/site.html:14
 msgid "Learn More"
 msgstr ""
 
-#: dataviva/html/home.html:23 dataviva/html/apps/index.html:4
+#: dataviva/html/home.html:30
+msgid "Also Browse"
+msgstr ""
+
+#: dataviva/html/home.html:34 dataviva/html/apps/index.html:4
 #: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:9
 msgid "Apps"
 msgstr ""
 
-#: dataviva/html/home.html:24
+#: dataviva/html/home.html:35
 msgid "Explore the Brazilian economy through over 100 million visualizations."
 msgstr ""
 
-#: dataviva/html/home.html:28 dataviva/html/templates/site.html:10
+#: dataviva/html/home.html:39 dataviva/html/templates/site.html:10
 msgid "Profiles"
 msgstr ""
 
-#: dataviva/html/home.html:29
+#: dataviva/html/home.html:40
 msgid "Quickly learn about the exports, occupations, and industries of each Brazilian state and economic sector."
 msgstr ""
 
-#: dataviva/html/home.html:34
+#: dataviva/html/home.html:45
 msgid "Answer strategic questions about economic opportunities of states and industries."
 msgstr ""
 
-#: dataviva/html/home.html:38 dataviva/html/rankings/index.html:4
+#: dataviva/html/home.html:49 dataviva/html/rankings/index.html:4
 #: dataviva/html/templates/site.html:13
 msgid "Rankings"
 msgstr ""
 
-#: dataviva/html/home.html:39
+#: dataviva/html/home.html:50
 msgid "Compare locations, industries and occupations based on economic output, diversity, and salaries."
 msgstr ""
 
@@ -423,32 +435,32 @@ msgstr ""
 msgid "You need to login for this functionality."
 msgstr ""
 
-#: dataviva/html/about/ask/ask.html:20
+#: dataviva/html/about/ask/ask.html:22
 msgid "Ex. Where does the data come from?"
 msgstr ""
 
-#: dataviva/html/about/ask/ask.html:30
+#: dataviva/html/about/ask/ask.html:32
 msgid "App"
 msgstr ""
 
-#: dataviva/html/about/ask/ask.html:33
+#: dataviva/html/about/ask/ask.html:35
 msgid "Tags"
 msgstr ""
 
-#: dataviva/html/about/ask/ask.html:38
+#: dataviva/html/about/ask/ask.html:40
 msgid "Submit your question to Escritorio!"
 msgstr ""
 
-#: dataviva/html/about/ask/ask.html:43
+#: dataviva/html/about/ask/ask.html:45
 msgid "Click here to login"
 msgstr ""
 
 #: dataviva/html/about/ask/index.html:7
-msgid "DataViva is a Big Data platform created by the Strategic Priorities Office of the government of Minas Gerais and developed in collaboration with professors Cesar Hidalgo (Massachusetts Institute of Technology - MIT) and Ricardo Hausmann (Harvard Kennedy School) by the formation of a startup called Growth Ventures, located in Cambridge, MA. The online suite is innovative in the way that it makes a great volume of official data about exports and occupation in Brazil available, and enables – with its eight apps – access to more than 100 million interactive visualizations for over five thousand Brazilian municipalities."
+msgid "DataViva is a Data Visualization Engine created by the Strategic Priorities Office of the government of Minas Gerais. DataViva makes available official data about exports, industries, locations and occupations for the entirety of Brazil through eight apps and more than 100 million possible visualizations."
 msgstr ""
 
 #: dataviva/html/about/ask/index.html:9
-msgid "The data incorporated and addressed in DataViva is able to contribute to the implementation of public and private investments and policies, as well as academic researches. By pointing out relations and showing dynamics, which were not explicit until now, the tool allows public and private actors to improve their strategies and decision making processes. DataViva also enables these actors to discuss, in a more qualified manner and based on empiric data, relevant issues for economic and social development."
+msgid "Through its visualizations, DataViva provides information that is valuable for export promotion, investment decision and policy design. Moreover, by providing facts about the economic development of industries, locations and their respective opportunities, DataViva is helping create a solid data-driven foundation for conversations between the public and private sectors."
 msgstr ""
 
 #: dataviva/html/about/ask/index.html:12
@@ -472,7 +484,7 @@ msgid "Send your question to us here!"
 msgstr ""
 
 #: dataviva/html/about/ask/index.html:28
-msgid "Find your Answers"
+msgid "Find your answers"
 msgstr ""
 
 #: dataviva/html/about/ask/index.html:31
@@ -738,11 +750,11 @@ msgstr ""
 msgid "By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile."
 msgstr ""
 
-#: dataviva/html/account/login.html:24
+#: dataviva/html/account/login.html:26
 msgid "Remember Me"
 msgstr ""
 
-#: dataviva/html/account/login.html:29
+#: dataviva/html/account/login.html:32
 msgid "Logging in has been disabled on this version of DataViva. Please visit the main site to log in."
 msgstr ""
 
@@ -765,23 +777,23 @@ msgstr ""
 msgid "Edit Question"
 msgstr ""
 
-#: dataviva/html/admin/admin_questions_edit.html:17
+#: dataviva/html/admin/admin_questions_edit.html:18
 msgid "Asked by"
 msgstr ""
 
-#: dataviva/html/admin/admin_questions_edit.html:21
+#: dataviva/html/admin/admin_questions_edit.html:22
 msgid "Language"
 msgstr ""
 
-#: dataviva/html/admin/admin_questions_edit.html:24
+#: dataviva/html/admin/admin_questions_edit.html:25
 msgid "Status"
 msgstr ""
 
-#: dataviva/html/admin/admin_questions_edit.html:28
+#: dataviva/html/admin/admin_questions_edit.html:29
 msgid "Enter your answer..."
 msgstr ""
 
-#: dataviva/html/admin/admin_questions_edit.html:33
+#: dataviva/html/admin/admin_questions_edit.html:34
 msgid "Update"
 msgstr ""
 

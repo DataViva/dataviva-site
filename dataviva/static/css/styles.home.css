@@ -1,14 +1,22 @@
 body.home #container {
-  padding: 78px 0px 66px 0px !important;
-  width: 800px;
+  padding: 93px 0px 42px 0px !important;
+  width: 100%;
+}
+
+body.home .home_sub {
+  color: #666;
+  margin-top: -10px;
 }
 
 body.home #intro {
+  background-color: #555;
+  -webkit-box-shadow: 0px 0px 20px rgba(255,255,255,0.75);
+          box-shadow: 0px 0px 20px rgba(255,255,255,0.75);
   display: block;
-  height: 330px;
-  margin: 0px 0px;
+  height: 270px;
+  margin: 30px auto 70px;
   position: relative;
-  width: 100%;
+  width: 800px;
 }
 
 body.home #carousel {
@@ -16,48 +24,25 @@ body.home #carousel {
   height: 270px;
   position: absolute;
   text-align: left;
-  width: 800px;
+  width: 530px;
 }
 
 body.home #carousel .app {
-  background-position: 320px 0px;
   background-repeat: no-repeat;
   background-size: 480px 270px;
-  -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
-          box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
   display: none;
   height: 100%;
   left: 0px;
   opacity: 0;
   position: absolute;
   top: 0px;
-  width: 100%;
+  width: 480px;
   -webkit-transition: opacity 1s;
           transition: opacity 1s;
-}
-
-body.home #carousel .app iframe {
-  margin-left: 320px;
-}
-
-body.home #intro h1 {
-  color: white;
-  display: block;
-  font-size: 24px;
-  line-height: 28px;
-  margin: 0px;
-  padding: 25px;
-  position: absolute;
-  text-align: left;
-  -webkit-transition: opacity 1s;
-          transition: opacity 1s;
-  width: 270px;
-  z-index: 30;
 }
 
 body.home #carousel .centered {
-  margin-left: 320px;
-  top: 110px;
+  top: 105px;
   position: absolute;
   text-align: center;
   width: 480px;
@@ -74,32 +59,113 @@ body.home #carousel .decision {
 body.home .pages {
   bottom: 5px;
   position: absolute;
-  text-align: center;
-  width: 100%;
+  right: 0px;
+  top: 0px;
+  width: 320px;
 }
 
 body.home .page {
-  background-color: #fff;
-  -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
-          box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
-  color: #ccc;
-  display: inline-block;
-  font-size: 18px;
+  background-color: #333;
+  border-color: #333;
+  border-width: 0px;
+  color: #fff;
+  display: block;
+  font-size: 16px;
   font-weight: lighter;
-  height: 30px;
-  line-height: 30px;
-  margin: 10px;
-  opacity: 0.9;
-  -webkit-transition: background-color 1s, color 1s;
-          transition: background-color 1s, color 1s;
-  width: 30px;
+  height: 66px;
+  line-height: 18px;
+  margin: 1px;
+  position: relative;
+  text-align: left;
+  -webkit-transition: background-color 1s;
+          transition: background-color 1s;
 }
 
-body.home .page.active {
-  color: #fff;
+body.home .page:before,
+body.home .page:after {
+  content: "";
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0px;
+}
+
+body.home .page:before {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-right-color: inherit;
+  border-style: solid;
+  border-width: 33px;
+  height: 0px;
+  left: -88px;
+  width: 0px;
+  -webkit-transition: border-right-color 1s, opacity 1s;
+          transition: border-right-color 1s, opacity 1s;
+  z-index: 30;
+}
+
+body.home .page:after {
+  background-color: inherit;
+  width: 23px;
+  height: 66px;
+  left: -22px;
+  -webkit-transition: opacity 1s;
+          transition: opacity 1s;
+  z-index: 30;
+}
+
+body.home .page.active:before,
+body.home .page.active:after {
+  opacity: 1;
+}
+
+body.home .page_helper {
+  display: inline-block;
+  vertical-align: middle;
+  height:100%;
+  width: 0px;
+}
+
+body.home .page_text {
+  display: inline-block;
+  opacity: 0.9;
+  padding: 0px 20px;
+  vertical-align: middle;
+  z-index: 20;
 }
 
 body.home .page:hover {
   cursor: pointer;
+}
+
+body.home .page:hover .page_text {
   opacity: 1;
+}
+
+body.home .page.active:hover {
+  cursor: default;
+}
+
+body.home .page.active:hover .page_text {
+  opacity: 1;
+}
+
+body.home .bottom_section {
+  background-color: #fedd69;
+  background-image: url("/static/img/home/triangles.png");
+  -webkit-box-shadow: 0px 0px 20px rgba(255,255,255,0.75);
+          box-shadow: 0px 0px 20px rgba(255,255,255,0.75);
+  color: white;
+  padding: 30px 0px 40px 0px;
+  width: 100%;
+}
+
+body.home .bottom_title {
+  font-family: "HelveticaNeue-Bold", "Helvetica Neue Bold", "Helvetica Bold", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  margin: 0px auto 15px;
+  text-align: left;
+  width: 740px;
 }

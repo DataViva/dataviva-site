@@ -29,7 +29,7 @@
   <script>
 
     var width = window.innerWidth-330,
-        height = window.innerHeight-175,
+        height = window.innerHeight-190,
         builds = {},
         sliding = false,
         selected = null,
@@ -40,7 +40,7 @@
       .style("height",height+"px")
       .each(function(){
         var p = this.id.substring(6),
-            t = this.offsetTop-108
+            t = this.offsetTop-118
         builds[p] = {"loaded": false, "top": t}
         if (p == 1) {
           load(p)
@@ -48,15 +48,15 @@
         }
       })
       
-    window.addEventListener("message",function(msg){
-      d3.select("#app"+msg.data.id.substr(6,1))
+    function update_titles(msg) {
+      d3.select("#app"+msg.id.substr(6,1))
         .attr("class",function(){
           var c = this.className.split(" ")
-          c[4] = msg.data.app
+          c[4] = msg.app
           return c.join(" ")
         })
-        .text(msg.data.title)
-    })
+        .text(msg.title)
+    }
   
     function slide(id) {
       sliding = true
