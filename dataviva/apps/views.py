@@ -297,8 +297,8 @@ def get_geo_location(ip):
             "filter1": "all", "filter2": "all", "output": "hs", "params": "?rca_scope=wld_rca"})
 @mod.route('/builder/compare/', defaults={"app_name": "compare", "dataset": "rais", "bra_id": "mg_rj", 
             "filter1": "all", "filter2": "all", "output": "cbo", "params": "?depth=cbo_4&axes=wage_avg"})
-@mod.route('/builder/occugrid/', defaults={"app_name": "occugrid", "dataset": "rais", "bra_id": "mg", 
-            "filter1": "r9000", "filter2": "all", "output": "cbo", "params": ""})
+@mod.route('/builder/occugrid/', defaults={"app_name": "occugrid", "dataset": "rais", "bra_id": "mg030000", 
+            "filter1": "m7310", "filter2": "all", "output": "cbo", "params": ""})
 @mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/')
 def builder(app_name=None, dataset=None, bra_id=None, filter1=None, 
                 filter2=None, output=None, params=None):
