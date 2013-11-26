@@ -217,7 +217,7 @@ dataviva.format.text = function(text,name,l) {
       "hs_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "A diversidade de uma dada vari\u00e1vel corrigida pela participa\u00e7\u00e3o que cada unidade representa."},
       
       "wld_diversity": {"en": "Export Destination Diversity", "pt": "Diversidade de Destino das Exporta\u00e7\u00f5es"},
-      "wld_diversity_desc": {"en": "The number of unique import countries that are present for a given variable.", "pt": "O n\u00famero de pa\u00edses importadores \u00fdnicos que est\u00e3o presentes para uma dada vari\u00e1vel."},
+      "wld_diversity_desc": {"en": "The number of unique import countries that are present for a given variable.", "pt": "O n\u00famero de pa\u00edses importadores \u00fanicos que est\u00e3o presentes para uma dada vari\u00e1vel."},
       "wld_diversity_eff": {"en": "Effective Export Destination Diversity", "pt": "Diversidade Efetiva de Destino das Exporta\u00e7\u00f5es"},
       "wld_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "A diversidade de uma dada vari\u00e1vel corrigida pela participa\u00e7\u00e3o que cada unidade representa."},
       
@@ -427,7 +427,7 @@ dataviva.format.number = function(value,name,l) {
   if (name.indexOf("_growth_pct") >= 0) value = value * 100
   
   var smalls = ["rca","rca_bra","rca_wld","distance","eci","pci","bra_diversity_eff","isic_diversity_eff","cbo_diversity_eff","hs_diversity_eff","wld_diversity_eff"]
-  
+
   var ids = ["cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
   if (ids.indexOf(name) >= 0) return value.toString().toUpperCase()
   else if (name == "year") {
