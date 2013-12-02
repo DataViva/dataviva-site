@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-26 17:14-0200\n"
+"POT-Creation-Date: 2013-12-02 16:00-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -196,6 +196,10 @@ msgstr ""
 #: dataviva/html/about/testimonial.html:8
 #: dataviva/html/templates/about.html:112
 msgid "Testimonial"
+msgstr ""
+
+#: dataviva/html/about/testimonial.html:13
+msgid "Learn how DataViva was Created"
 msgstr ""
 
 #: dataviva/html/about/apps/compare.html:1 dataviva/html/apps/index.html:44
