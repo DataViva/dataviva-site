@@ -1597,18 +1597,44 @@ d3plus.viz = function() {
           if (nest_obj.display_id) to_return.display_id = nest_obj.display_id;
           
           for (key in vars.keys) {
-            if (vars.nesting_aggs[key]) {
-              to_return[key] = d3[vars.nesting_aggs[key]](leaves, function(d){ return d[key]; })
+            var prefix = ""
+            if (key.indexOf("cp_bra_") == 0) {
+              var arr = key.split("_")
+              prefix = []
+              prefix.push(arr.shift())
+              prefix.push(arr.shift())
+              prefix.push(arr.shift())
+              prefix = prefix.join("_") + "_"
+              key = arr.join("_")
+            }
+            if (key == "wage_avg") {
+              var wage = 0, num_emp = 0
+              leaves.forEach(function(d){
+                wage += d[prefix+"wage"] ? d[prefix+"wage"] : 0
+                num_emp += d[prefix+"num_emp"] ? d[prefix+"num_emp"] : 0
+              })
+              to_return[prefix+key] = wage/num_emp
+            }
+            else if (key == "num_emp_est") {
+              var num_est = 0, num_emp = 0
+              leaves.forEach(function(d){
+                num_est += d[prefix+"num_est"] ? d[prefix+"num_est"] : 0
+                num_emp += d[prefix+"num_emp"] ? d[prefix+"num_emp"] : 0
+              })
+              to_return[prefix+key] = num_emp/num_est
+            }
+            else if (vars.nesting_aggs[prefix+key]) {
+              to_return[prefix+key] = d3[vars.nesting_aggs[prefix+key]](leaves, function(d){ return d[prefix+key]; })
             }
             else {
-              if ([vars.year_var].indexOf(key) >= 0 || (key == vars.id_var && !to_return[vars.id_var])) {
-                to_return[key] = leaves[0][key];
+              if ([vars.year_var].indexOf(prefix+key) >= 0 || (prefix+key == vars.id_var && !to_return[vars.id_var])) {
+                to_return[prefix+key] = leaves[0][prefix+key];
               }
-              else if (vars.keys[key] === "number" && key != vars.id_var) {
-                to_return[key] = d3.sum(leaves, function(d){ return d[key]; })
+              else if (vars.keys[prefix+key] === "number" && prefix+key != vars.id_var) {
+                to_return[prefix+key] = d3.sum(leaves, function(d){ return d[prefix+key]; })
               }
-              else if (key == vars.color_var) {
-                to_return[key] = leaves[0][key]
+              else if (prefix+key == vars.color_var) {
+                to_return[prefix+key] = leaves[0][prefix+key]
               }
             }
           }

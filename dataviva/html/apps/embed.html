@@ -570,6 +570,8 @@
                       a[out+"_display"] = dataviva.displayID(a.id,out)
                       a.icon = dataviva.icon(a.id,out)
                       app.attrs[app.build.output][a.id] = a
+                      if (a["val_usd"]) delete a["val_usd"]
+                      if (a["num_emp"]) delete a["num_emp"]
                     })
                     
                     for (id in app.attrs[app.build.output]) {

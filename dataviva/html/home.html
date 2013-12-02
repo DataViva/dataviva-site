@@ -59,15 +59,15 @@
 <script>
 
   var carousel = [
-  {"en": "Learn how DataViva was created.", "color": "#129cc0",
-  "pt": "Conheça como foi criado o DataViva.",
-  "image": "youtube", "url": "https://www.youtube.com/embed/XZKFhNpsYS4?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'pt' %}&hl=pt-br&cc_lang_pref=pt-br{% else %}&hl=en&cc_lang_pref=en{% endif %}&cc_load_policy=1", "id": 1},
+  {"en": "What can DataViva do?", "color": "#129cc0",
+  "pt": "O que DataViva posso fazer?",
+  "image": "video", "url": "{% if g.locale == 'pt' %}//player.vimeo.com/video/80812605{% else %}//player.vimeo.com/video/80812604{% endif %}?portrait=0&badge=0&byline=0&color=af1f24&title=0", "id": 1},
   {"en": "Did you know that Minas Gerais is the largest exporter to China?", "color": "#516043",
   "pt": "Você sabia que Minas Gerais é o estado que mais exporta para China?",
   "image": "factory", "url": "/profiles/wld/aschn/?app=1", "id": 2},
   {"en": "The goal of DataViva.", "color": "#1d372c", "color": "#243e31",
   "pt": "O objetivo do DataViva.",
-  "image": "youtube", "url": "https://www.youtube.com/embed/Xp0azMCmzdA?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}", "id": 3},
+  "image": "video", "url": "https://www.youtube.com/embed/Xp0azMCmzdA?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}", "id": 3},
   {"en": "What are the export opportunities for Minas Gerais?", "color": "#c9532f",
   "pt": "Quais são as oportunidades de exportação de Minas Gerais?",
   "image": "sparks", "url": "/guide/bra/mg/opportunity/hs/", "id": 4}
@@ -94,7 +94,7 @@
   apps.enter().append("div")
     .attr("class","app")
     .attr("id",function(d){return "app_"+d.id})
-    .style("background-image",function(d){return d.image != "youtube" ? "url('/static/img/home/"+d.image+".jpg')" : "none"})
+    .style("background-image",function(d){return d.image != "video" ? "url('/static/img/home/"+d.image+".jpg')" : "none"})
     .style("opacity",function(d){
       if (d.id == app) return 1
       else return 0
@@ -105,7 +105,7 @@
     })
     // .style("background-color",function(d){return d.color})
     .each(function(d){
-      if (d.image == "youtube") {
+      if (d.image == "video") {
         d3.select(this)
           .style("z-index",20)
           .append("iframe")
@@ -114,6 +114,8 @@
             .attr("height","270")
             .attr("frameborder","0")
             .attr("allowfullscreen",true)
+            .attr("mozallowfullscreen",true)
+            .attr("webkitallowfullscreen",true)
       }
     })
     .on(d3plus.evt.over,function(d){
