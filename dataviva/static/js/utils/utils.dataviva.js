@@ -501,6 +501,9 @@ dataviva.format.number = function(value,name,l) {
   if (name.indexOf("total_") == 0) {
     var label_name = name.substr(6)
   }
+  else if (name.indexOf("cp_bra_") == 0) {
+    var label_name = name.substr(9)
+  }
   else var label_name = name
   
   if (total_labels[label_name]) {
