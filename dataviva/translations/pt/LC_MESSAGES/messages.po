@@ -1998,3 +1998,36 @@ msgstr "Sair"
 msgid "a country"
 msgstr "um país"
 
+msgid "Attract"
+msgstr "Atrair"
+ 
+msgid "Destinations"
+msgstr "Destinos"
+ 
+msgid "Diversification"
+msgstr "Diversificação"
+ 
+msgid "Growth"
+msgstr "Crescimento"
+ 
+msgid "Locate"
+msgstr "Localizar"
+ 
+msgid "Opportunity"
+msgstr "Oportunidades"
+ 
+msgid "Paths"
+msgstr "Caminhos"
+ 
+msgid "Potential"
+msgstr "Potencial"
+ 
+msgid "Shrink"
+msgstr "Baixa"
+ 
+msgid "Wages"
+msgstr "Salários"
+ 
+msgid "Workforce"
+msgstr "Capital Humano"
+
