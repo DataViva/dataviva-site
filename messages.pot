@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-12-02 16:00-0500\n"
+"POT-Creation-Date: 2013-12-09 13:22-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,7 +110,7 @@ msgid "DataViva is opening up data for the entire formal sector of the Brazilian
 msgstr ""
 
 #: dataviva/html/home.html:15
-msgid "through more than 100 million interactive visualization."
+msgid "through more than 100 million interactive visualizations."
 msgstr ""
 
 #: dataviva/html/home.html:21 dataviva/html/templates/site.html:14
