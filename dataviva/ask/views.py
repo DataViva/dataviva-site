@@ -60,12 +60,14 @@ def question_list(page):
                 .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
                 .filter(Question.status == approved) \
                 .filter(Question.id.in_(ids)) \
+                .filter(Question.language==lang) \
                 .order_by(votes_subq.c.vote_count.desc(),Question.language.desc())
         else:
             questions = db.session.query(Question, votes_subq.c.vote_count) \
                 .outerjoin(votes_subq, and_(Question.id==votes_subq.c.type_id, votes_subq.c.type==TYPE_QUESTION)) \
                 .filter(Question.status == approved) \
                 .filter(Question.id.in_(ids)) \
+                .filter(Question.language==lang) \
                 .order_by(votes_subq.c.vote_count.desc(),Question.language)
             # .limit(limit).offset(offset)
             
