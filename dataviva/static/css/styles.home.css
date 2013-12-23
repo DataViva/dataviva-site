@@ -13,7 +13,7 @@ body.home #intro {
   -webkit-box-shadow: 0px 0px 20px rgba(255,255,255,0.75);
           box-shadow: 0px 0px 20px rgba(255,255,255,0.75);
   display: block;
-  height: 270px;
+  height: 267px;
   margin: 30px auto 70px;
   position: relative;
   width: 800px;
@@ -21,7 +21,7 @@ body.home #intro {
 
 body.home #carousel {
   display: block;
-  height: 270px;
+  height: 267px;
   position: absolute;
   text-align: left;
   width: 530px;
@@ -29,14 +29,14 @@ body.home #carousel {
 
 body.home #carousel .app {
   background-repeat: no-repeat;
-  background-size: 480px 270px;
+  background-size: 475px 267px;
   display: none;
   height: 100%;
   left: 0px;
   opacity: 0;
   position: absolute;
   top: 0px;
-  width: 480px;
+  width: 475px;
   -webkit-transition: opacity 1s;
           transition: opacity 1s;
 }
@@ -45,7 +45,7 @@ body.home #carousel .centered {
   top: 105px;
   position: absolute;
   text-align: center;
-  width: 480px;
+  width: 475px;
   z-index: 10;
 }
 
@@ -61,7 +61,7 @@ body.home .pages {
   position: absolute;
   right: 0px;
   top: 0px;
-  width: 320px;
+  width: 325px;
 }
 
 body.home .page {
@@ -74,11 +74,19 @@ body.home .page {
   font-weight: lighter;
   height: 66px;
   line-height: 18px;
-  margin: 1px;
+  margin: 1px 0px 1px 1px;
   position: relative;
   text-align: left;
   -webkit-transition: background-color 1s;
           transition: background-color 1s;
+}
+
+div.pages div.page:first-child {
+  margin: 0px 0px 1px 1px;
+}
+
+div.pages div.page:last-child {
+  margin: 1px 0px 0px 1px;
 }
 
 body.home .page:before,

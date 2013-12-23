@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-12-02 16:00-0500\n"
+"POT-Creation-Date: 2013-12-09 13:22-0500\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -115,7 +115,7 @@ msgstr ""
 "economia"
 
 #: dataviva/html/home.html:15
-msgid "through more than 100 million interactive visualization."
+msgid "through more than 100 million interactive visualizations."
 msgstr "brasileira em mais de 100 milhões de visualizações interativas."
 
 #: dataviva/html/home.html:21 dataviva/html/templates/site.html:14
@@ -1997,4 +1997,37 @@ msgstr "Sair"
 #: dataviva/profiles/views.py:47
 msgid "a country"
 msgstr "um país"
+
+#~ msgid "Attract"
+#~ msgstr "Atrair"
+
+#~ msgid "Destinations"
+#~ msgstr "Destinos"
+
+#~ msgid "Diversification"
+#~ msgstr "Diversificação"
+
+#~ msgid "Growth"
+#~ msgstr "Crescimento"
+
+#~ msgid "Locate"
+#~ msgstr "Localizar"
+
+#~ msgid "Opportunity"
+#~ msgstr "Oportunidades"
+
+#~ msgid "Paths"
+#~ msgstr "Caminhos"
+
+#~ msgid "Potential"
+#~ msgstr "Potencial"
+
+#~ msgid "Shrink"
+#~ msgstr "Baixa"
+
+#~ msgid "Wages"
+#~ msgstr "Salários"
+
+#~ msgid "Workforce"
+#~ msgstr "Capital Humano"
 
