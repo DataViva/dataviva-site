@@ -14,37 +14,18 @@
   <div id="login_div">
     <div id="logo"></div>
     <div id="login_text">
-        {% trans %}Logging in is easy! All you have to do is choose one of the following accounts to link with your profile. We'll take care of the rest.{% endtrans %}
+      {% trans %}Logging in has been disabled on this version of DataViva. Please visit the main site to log in.{% endtrans %}
       <br><br>
-        {% trans %}By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile.{% endtrans %}
+      <a class="open_parent decision" href="http://www.dataviva.info/">www.dataviva.info</a>
     </div>
-    <form action="" method="post" name="login">
-      
-      {{ form.hidden_tag() }}
-      
-      <p>
-        {{form.remember_me(id="remember")}}<label for="remember">{% trans %}Remember Me{% endtrans %}</label>
-      </p>
-      {% for pr in providers %}
-      <a id="{{ pr }}" class="login_button" href="{{ pr }}"></a>
-      {% endfor %}
-    </form>
-    <div style="display:none;opacity:0;">{% trans %}Logging in has been disabled on this version of DataViva. Please visit the main site to log in.{% endtrans %}</div>
   </div>
-
-  <script type="text/javascript">
-
-    leon("#remember").color(dataviva.color).size("small")
-
-    d3.selectAll(".login_button").on(d3plus.evt.click, function () {
-      var pr = this.id.toLowerCase()
-      form = document.forms['login'];
-      form.elements['provider'].value = pr;
-      console.log(form.elements['provider'], pr)
-      this.parentNode.submit();
+  
+  <script>
+  d3.select("a.open_parent").on("click", function(){
+      window.opener.parent.location.href = "http://www.dataviva.info" + window.opener.parent.location.pathname;
+      window.close();
       d3.event.preventDefault();
-    })
-    
+  })
   </script>
 
 {% endblock %}

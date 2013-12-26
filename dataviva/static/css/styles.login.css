@@ -10,10 +10,11 @@ div#login_div {
   width: 300px;
 }
 div#login_text {
+  font-size: 15px;
+  line-height: 20px;
   margin: 12px 0px;
   text-align: left;
 }
-
 a.login_button {
   background-position: center center;
   background-repeat: no-repeat;
