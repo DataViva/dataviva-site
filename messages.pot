@@ -1,13 +1,13 @@
 # Translations template for PROJECT.
-# Copyright (C) 2013 ORGANIZATION
+# Copyright (C) 2014 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
 ##, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-12-09 13:22-0500\n"
+"POT-Creation-Date: 2014-01-07 16:39-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,11 +40,11 @@ msgstr ""
 msgid "You need to be logged in to star apps."
 msgstr ""
 
-#: dataviva/ask/views.py:90 dataviva/ask/views.py:118
+#: dataviva/ask/views.py:92 dataviva/ask/views.py:120
 msgid "You need to be logged in to vote."
 msgstr ""
 
-#: dataviva/ask/views.py:148
+#: dataviva/ask/views.py:150
 msgid "You need to be logged in to flag replies."
 msgstr ""
 
@@ -157,7 +157,7 @@ msgid "Analysis"
 msgstr ""
 
 #: dataviva/html/about/analysis.html:10
-msgid "The suite of apps that compose DataViva can be used to analyze different aspects of Brazilian economy. Below, you will find a few examples to help you understanding and making your own analyses using the platform."
+msgid "The suite of apps that compose DataViva can be used to analyze different aspects of Brazilian economy. Below, you will find a few examples to help you understand DataViva and make your own analyses using the platform."
 msgstr ""
 
 #: dataviva/html/about/analysis.html:12
@@ -182,6 +182,14 @@ msgstr ""
 
 #: dataviva/html/about/analysis.html:21
 msgid "Evolution of Minas Gerais Exports"
+msgstr ""
+
+#: dataviva/html/about/analysis.html:25 dataviva/html/about/analysis.html:29
+msgid "to"
+msgstr ""
+
+#: dataviva/html/about/analysis.html:25 dataviva/html/about/analysis.html:29
+msgid "Crosswalk"
 msgstr ""
 
 #: dataviva/html/about/attrs.html:4 dataviva/html/templates/about.html:40
@@ -471,38 +479,6 @@ msgstr ""
 msgid "The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website."
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:16
-msgid "What do you want to know?"
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:17
-msgid "Search"
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:22
-msgid "Can´t find an answer?"
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:22
-msgid "Send your question to us here!"
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:28
-msgid "Find your answers"
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:31
-msgid "Order"
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:33
-msgid "Most Active"
-msgstr ""
-
-#: dataviva/html/about/ask/index.html:35
-msgid "Most Recent"
-msgstr ""
-
 #: dataviva/html/about/data/comtrade.html:3
 msgid "United Nations Commodity Trade Statistics Database"
 msgstr ""
@@ -747,18 +723,6 @@ msgid "Login"
 msgstr ""
 
 #: dataviva/html/account/login.html:17
-msgid "Logging in is easy! All you have to do is choose one of the following accounts to link with your profile. We'll take care of the rest."
-msgstr ""
-
-#: dataviva/html/account/login.html:19
-msgid "By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile."
-msgstr ""
-
-#: dataviva/html/account/login.html:26
-msgid "Remember Me"
-msgstr ""
-
-#: dataviva/html/account/login.html:32
 msgid "Logging in has been disabled on this version of DataViva. Please visit the main site to log in."
 msgstr ""
 

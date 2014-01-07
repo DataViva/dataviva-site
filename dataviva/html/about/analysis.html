@@ -7,7 +7,7 @@
 
 <h1>{% trans %}Analysis{% endtrans %}</h1>
 
-<p>{% trans %}The suite of apps that compose DataViva can be used to analyze different aspects of Brazilian economy. Below, you will find a few examples to help you understanding and making your own analyses using the platform.{% endtrans %}</p>
+<p>{% trans %}The suite of apps that compose DataViva can be used to analyze different aspects of Brazilian economy. Below, you will find a few examples to help you understand DataViva and make your own analyses using the platform.{% endtrans %}</p>
 
 <a class="decision icon pdf" href="/static/pdf/{% trans %}Industry.pdf{% endtrans %}" target="_blank">
   {% trans %}Industries in Minas Gerais{% endtrans %}
@@ -19,6 +19,14 @@
 
 <a class="decision icon pdf" href="/static/pdf/{% trans %}Exports.pdf{% endtrans %}" target="_blank">
   {% trans %}Evolution of Minas Gerais Exports{% endtrans %}
+</a>
+
+<a class="decision icon csv" href="/static/xls/HS-ISIC_{{ g.locale }}.xls" target="_blank">
+  HS {% trans %}to{% endtrans %} ISIC {% trans %}Crosswalk{% endtrans %}
+</a>
+
+<a class="decision icon csv" href="/static/xls/CNAE-ISIC.xls" target="_blank">
+  CNAE {% trans %}to{% endtrans %} ISIC {% trans %}Crosswalk{% endtrans %}
 </a>
 
 {% endblock %}
