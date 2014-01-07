@@ -326,7 +326,7 @@ def parse_filter(kwargs,id_type,query,data_table,ret):
 def merge_objects(objs):
 
     averages = ['eci', 'eci_wld', 'pci', 'unique_isic', 'unique_cbo',
-                'unique_hs', 'unique_wld', 'importance', "wage_avg", "num_emp_est",
+                'unique_hs', 'unique_wld', 'importance', 
                 'val_usd_growth_pct', 'val_usd_growth_pct_5', 
                 'wage_growth_pct', 'wage_growth_pct_5',
                 'num_emp_growth_pct', 'num_emp_growth_pct_5',
@@ -338,16 +338,31 @@ def merge_objects(objs):
     for obj in objs:
         for k in obj:
             values = []
+            if k == "wage_avg":
+                num_emp = []
+            elif k == "num_emp_est":
+                num_est = []
             for obj2 in objs:
                 if k in obj2:
                     if isinstance(obj2[k],str) or isinstance(obj2[k],unicode):
                         values = obj2[k]
                     elif isinstance(obj2[k],Decimal) or isinstance(obj2[k],long) \
                       or isinstance(obj2[k],float) or isinstance(obj2[k],int):
-                        values.append(float(obj2[k]))
+                        if k == "num_emp_est":
+                            num_est.append(float(obj2["num_est"]))
+                            values.append(float(obj2["num_emp"]))
+                        elif k == "wage_avg":
+                            num_emp.append(float(obj2["num_emp"]))
+                            values.append(float(obj2["wage"]))
+                        else:
+                            values.append(float(obj2[k]))
             if len(values) > 0:
                 if not isinstance(values,str) and not isinstance(values,unicode):
-                    if k in averages:
+                    if k == "num_emp_est":
+                        ret_obj[k] = sum(values)/sum(num_est)
+                    elif k == "wage_avg":
+                        ret_obj[k] = sum(values)/sum(num_emp)
+                    elif k in averages:
                         ret_obj[k] = sum(values)/len(values)
                     else:
                         ret_obj[k] = sum(values)
@@ -476,10 +491,11 @@ def make_query(data_table, url_args, lang, **kwargs):
         ret["data"] = [d.serialize() for d in query.all()]
     
     if "aggregate" in ret:
-            
+        
         agg_data = []
         ret["data"] = sorted(ret["data"],key=lambda x: x["year"])
         for bra in ret["bra"]:
+
             if "aggregates" in bra:
                 filtered_objs = []
                 for key, group in groupby(ret["data"],lambda x: x["year"]):
