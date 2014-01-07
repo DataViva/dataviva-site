@@ -114,7 +114,7 @@ function Selector() {
           // Create master list by matching both name and id
           var strings = ["name","id","desc","keywords"]
           list = d3.values(data).filter(function(v){
-
+            
             var match = false
             strings.forEach(function(s){
               if (v[s]) {
@@ -125,7 +125,7 @@ function Selector() {
               }
             })
             
-            return match
+            return match && depths.indexOf(v.id.length) >= 0
             
           })
             
