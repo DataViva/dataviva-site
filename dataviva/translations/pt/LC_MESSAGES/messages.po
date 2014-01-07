@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-01-07 16:39-0500\n"
+"POT-Creation-Date: 2014-01-07 16:54-0500\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -176,6 +176,7 @@ msgid "Analysis"
 msgstr "Análises"
 
 #: dataviva/html/about/analysis.html:10
+#, fuzzy
 msgid ""
 "The suite of apps that compose DataViva can be used to analyze different "
 "aspects of Brazilian economy. Below, you will find a few examples to help"
@@ -940,6 +941,38 @@ msgstr ""
 "A versão do DataViva que você está vendo não suporta contas de usuário. "
 "Clique aqui para entrar em contato conosco através do site principal."
 
+#: dataviva/html/about/ask/index.html:16
+msgid "What do you want to know?"
+msgstr "O que você gostaria de saber?"
+
+#: dataviva/html/about/ask/index.html:17
+msgid "Search"
+msgstr "Pesquisar"
+
+#: dataviva/html/about/ask/index.html:22
+msgid "Can´t find an answer?"
+msgstr "Caso não encontre resposta para sua dúvida,"
+
+#: dataviva/html/about/ask/index.html:22
+msgid "Send your question to us here!"
+msgstr "envie sua pergunta aqui!"
+
+#: dataviva/html/about/ask/index.html:28
+msgid "Find your answers"
+msgstr "Tire suas dúvidas"
+
+#: dataviva/html/about/ask/index.html:31
+msgid "Order"
+msgstr "Ordem"
+
+#: dataviva/html/about/ask/index.html:33
+msgid "Most Active"
+msgstr "Mais Frequente"
+
+#: dataviva/html/about/ask/index.html:35
+msgid "Most Recent"
+msgstr "Mais Recente"
+
 #: dataviva/html/about/data/comtrade.html:3
 msgid "United Nations Commodity Trade Statistics Database"
 msgstr "Banco de Dados Estatísticos de Comércio de Commodities das Nações Unidas"
@@ -1485,6 +1518,26 @@ msgid "Login"
 msgstr "Login"
 
 #: dataviva/html/account/login.html:17
+msgid ""
+"Logging in is easy! All you have to do is choose one of the following "
+"accounts to link with your profile. We'll take care of the rest."
+msgstr ""
+"Fazer o login é muito fácil! Tudo que você tem a fazer é escolher uma das"
+" contas a seguir para vincular ao seu perfil. Nós cuidaremos do resto."
+
+#: dataviva/html/account/login.html:19
+msgid ""
+"By having an account, you will be able to ask Sabrina questions, comment "
+"in discussions, and save your favorite apps to your profile."
+msgstr ""
+"Tendo uma conta, você será capaz de fazer perguntas à Sabrina, comentar "
+"em nossos fóruns, e salvar seus aplicativos favoritos em seu perfil."
+
+#: dataviva/html/account/login.html:26
+msgid "Remember Me"
+msgstr "Lembrar-me"
+
+#: dataviva/html/account/login.html:32
 msgid ""
 "Logging in has been disabled on this version of DataViva. Please visit "
 "the main site to log in."
