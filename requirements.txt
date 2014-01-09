@@ -1,33 +1,33 @@
 # Flask framework
 Jinja2==2.6
 Werkzeug==0.8.3
-flask==0.9
+Flask==0.10.1
 
 # Helper lib for running scripts locally without server
-Flask-Script
+Flask-Script==0.5.3
 
 # Make managing logged in users easier
-flask-login
+Flask-Login==0.1.3
 
 # Oauth helper for signing in users from facebook, twitter, google
-flask_oauth
+Flask-OAuth==0.12
 
 # Form helper
-flask-wtf
+Flask-WTF==0.8.3
 
 # Localization
-flask-babel
+Flask-Babel==0.8
 
 # DB libs for connecting to MySQL
 # WARNING: Must have MySQL server installed!
-MySQL-python
-sqlalchemy
-flask-sqlalchemy
+MySQL-python==1.2.3
+SQLAlchemy==0.8.1
+Flask-SQLAlchemy==0.16
 
 # Redis connector for caching/sessions 
 # WARNING: Must have Redis server installed!
-redis
-hiredis
+redis==2.7.6
+hiredis==0.1.1
 
 # Better JSON serializer that knows how to handle Decimal types
-simplejson
+simplejson==3.3.1
