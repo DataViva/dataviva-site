@@ -65,35 +65,26 @@ def ask(user=None):
     form = AskForm()
     if request.method == 'POST':
     
-        # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-        #     g.user = User.query.get(user)
         if g.user is None or not g.user.is_authenticated():
             flash(gettext('You need to be logged in to ask questions.'))
             return redirect(url_for('account.login'))
-        # elif user is None and g.user is None:
-        #     abort(404)
         
-        # if user is None:
-        #     form_json = {"question": form.question.data, "body": form.body.data, "app": form.app.data, "tags": form.tags.data}
-        #     try:
-        #         opener = urllib2.urlopen("{0}ask/ask/{1}/".format(SITE_MIRROR,g.user.id),urllib.urlencode(form_json),5)
-        #     except:
-        #         flash(gettext("The server is not responding. Please try again later."))
-        #         return render_template("ask/ask.html", form = form)
-    
-        timestamp = datetime.utcnow()
-        slug = Question.make_unique_slug(form.question.data)
-        question = Question(question=form.question.data, body=form.body.data, timestamp=timestamp, user=g.user, slug=slug, language=g.locale)
-        if "," in form.tags.data:
-            tags = form.tags.data.split(",")
-            question.str_tags(tags)
-        db.session.add(question)
-        db.session.commit()
-        flash(gettext('Your question has been submitted and is pending approval.'))
-        # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-        #     return jsonify({"status": "Success"})
-        # else:
-        return redirect(url_for('about.contact'))
+        if form.validate_on_submit():
+            timestamp = datetime.utcnow()
+            slug = Question.make_unique_slug(form.question.data)
+            question = Question(question=form.question.data, body=form.body.data, timestamp=timestamp, user=g.user, slug=slug, language=g.locale)
+            if "," in form.tags.data:
+                tags = form.tags.data.split(",")
+                question.str_tags(tags)
+            db.session.add(question)
+            db.session.commit()
+            flash(gettext('Your question has been submitted and is pending approval.'))
+            # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
+            #     return jsonify({"status": "Success"})
+            # else:
+            return redirect(url_for('about.contact'))
+        else:
+            return render_template("about/ask/ask.html", page = "ask", form = form)
         
     return render_template("about/ask/ask.html", page = "ask", form = form)
 
