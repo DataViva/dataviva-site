@@ -178,6 +178,11 @@
       "rais": dataviva.format.text("Data Provided by") + " RAIS"
     }
     
+    var zerofills = {
+      "secex": ["val_usd"],
+      "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"]
+    }
+    
     /*******************************/
     /* App Functions and Variables */
     /*******************************/
@@ -551,6 +556,13 @@
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
                     app.data[app.build.data_url] = {}
+                    d.data.forEach(function(x){
+                      zerofills[app.build.dataset].forEach(function(z){
+                        if (!(z in x)) {
+                          x[z] = 0
+                        }
+                      })
+                    })
                     app.data[app.build.data_url].raw = d.data
                     if (d.eci) app.ecis[app.build.data_url] = d.eci
                     callback(error,d)
