@@ -40,6 +40,7 @@ class Question(db.Model, AutoSerialize):
     body = db.Column(db.Text())
     timestamp = db.Column(db.DateTime)
     status_id = db.Column(db.Integer, db.ForeignKey('ask_status.id'), default = 1)
+    type_id = db.Column(db.Integer, db.ForeignKey('ask_type.id'), default = 1)
     status_notes = db.Column(db.Text())
     tags = db.relationship('Tag', secondary=question_tags,
             backref=db.backref('question', lazy='dynamic'))            
@@ -124,6 +125,23 @@ class Status(db.Model):
     def __unicode__(self):
         lang = getattr(g, "locale", "en")
         return getattr(self,"name_"+lang)
+
+class Type(db.Model):
+
+    __tablename__ = 'ask_type'
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(255))
+    name_en = db.Column(db.String(255))
+    name_pt = db.Column(db.String(255))
+    questions = db.relationship(Question, backref = 'type', lazy = 'dynamic')
+
+    def __repr__(self):
+        return '<Type %r>' % (self.name)
+
+    def __unicode__(self):
+        lang = getattr(g, "locale", "en")
+        return getattr(self,"name_"+lang)
+
 
 class Reply(db.Model, AutoSerialize):
 
