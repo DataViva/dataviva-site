@@ -108,6 +108,8 @@ def after_login(**user_fields):
         user = User.query.filter_by(twitter_id = user_fields["twitter_id"]).first()
     elif "facebook_id" in user_fields:
         user = User.query.filter_by(facebook_id = user_fields["facebook_id"]).first()
+    else:
+        user = User(id = 1)
         
     if user is None:
             

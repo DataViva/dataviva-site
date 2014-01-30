@@ -12,6 +12,9 @@ from dataviva.ask.models import Question, Status, Reply, Flag
 from dataviva.admin.forms import AdminQuestionUpdateForm
 from dataviva.utils import strip_html
 
+#utils
+from ..utils import send_mail
+
 # import urllib2, urllib
 # from config import SITE_MIRROR
 
@@ -122,6 +125,11 @@ def admin_questions_list(status=None):
         
     return ret
 
+@mod.route('/mail/', methods=['GET', 'POST'])
+def admin_mail():
+    status = "2"
+    return render_template('admin/mail/ask_feedback.html', status=status)
+    
 @mod.route('/questions/<status>/<int:question_id>/', methods=['GET', 'POST'])
 def admin_questions_edit(status, question_id):
     
@@ -137,6 +145,14 @@ def admin_questions_edit(status, question_id):
         q.language = form.language.data
         db.session.add(q)
         db.session.commit()
+        
+        # if status is approve or rejected send email
+        status_id = request.form['status']
+        subject = gettext('Resposta DataViva')
+        
+        if status_id == "2" or status_id == "3" :
+            send_mail(subject, [g.user.email], render_template('admin/mail/ask_feedback.html', status=status_id))
+        
         flash(gettext('This question has now been updated.'))
         
         return redirect(url_for('.admin_questions', status=previous_status))

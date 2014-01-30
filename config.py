@@ -83,7 +83,7 @@ FACEBOOK_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_SECRET")
 '''
     Mail credentials to send automatic emails to users
 '''
-MAIL_SERVER = 'smtp.googlemail.com'
+MAIL_SERVER = 'smtp.gmail.com'
 MAIL_PORT = 465
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
