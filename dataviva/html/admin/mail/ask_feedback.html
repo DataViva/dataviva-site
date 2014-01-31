@@ -14,16 +14,16 @@
 						</tr>
 						<tr>
 							<td bgcolor="#FFFFFF" colspan="2" style="padding:10px; font-family:'Trebuchet MS'; font-size:18px; color:#000000">
-								{% trans %}Caro usuário,{% endtrans %}<br/><br/>
+								{% trans %}Dear user,{% endtrans %}<br/><br/>
 								{% if status == "2" %}
-									{% trans %}Obrigado por utilizar o dataviva.info.{% endtrans %} <a style="color:#00C; text-decoration: none" href="http://dataviva.info/about/contact/">{% trans %}Clique aqui{% endtrans %}</a> {% trans %}para ver a publicação de sua resposta no Fale Conosco.{% endtrans %}
+									{% trans %}Thanks for using dataviva.info.{% endtrans %} <a style="color:#00C; text-decoration: none" href="http://dataviva.info/about/contact/">{% trans %}Click here{% endtrans %}</a> {% trans %}to see your answer in the Contact Us section.{% endtrans %}
 								{% elif status == "3" %}
-									{% trans %}Obrigado por utilizar o dataviva.info. Vamos considerar a sua opinião para aperfeiçoar ainda mais a ferramenta.{% endtrans %}
+									{% trans %}Thanks for using dataviva.info. We will consider your opinion in order to improve our tool.{% endtrans %}
 								{% endif %}
 								<br/><br/><br/>
-								{% trans %}Atenciosamente{% endtrans %}<br/><br/>
+								{% trans %}Best regards,{% endtrans %}<br/><br/>
 								
-								{% trans %}Equipe DataViva{% endtrans %}<br/>
+								{% trans %}DataViva team{% endtrans %}<br/>
 								<a style="color:#333333; text-decoration: none" href="http://dataviva.info">dataviva.info</a>
 								
 							</td>

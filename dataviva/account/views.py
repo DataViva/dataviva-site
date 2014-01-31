@@ -33,7 +33,8 @@ def page_not_found(error):
 # ---------------------------
 @lm.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    if request.endpoint != 'static':
+        return User.query.get(int(id))
 
 ###############################
 # Views for ALL logged in users
@@ -96,11 +97,14 @@ def user(nickname):
 
 @mod.route('/complete_login/', methods=['GET', 'POST'])
 def after_login(**user_fields):
+    import re
     
     if request.method == "POST":
         user_fields = {k:v for k,v in request.form.items() if v is not None}
     else:
         user_fields = {k:v for k,v in user_fields.items() if v is not None}
+    
+    print(request.host)
     
     if "google_id" in user_fields:
         user = User.query.filter_by(google_id = user_fields["google_id"]).first()
@@ -108,7 +112,7 @@ def after_login(**user_fields):
         user = User.query.filter_by(twitter_id = user_fields["twitter_id"]).first()
     elif "facebook_id" in user_fields:
         user = User.query.filter_by(facebook_id = user_fields["facebook_id"]).first()
-    else:
+    elif None is not re.match(r'^(localhost|127.0.0.1)', request.host ):
         user = User(id = 1)
         
     if user is None:

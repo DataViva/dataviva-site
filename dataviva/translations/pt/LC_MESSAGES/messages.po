@@ -22,8 +22,8 @@ msgid "You need to be logged in to ask questions."
 msgstr "Você precisa fazer o login para fazer perguntas."
 
 #: dataviva/about/views.py:92
-msgid "Your question has been submitted and is pending approval."
-msgstr "Sua pergunta foi submetida e está pendente de aprovação."
+msgid "Your message was sent successfully! Soon our team will contact you by e-mail. Thanks for your contribution, it is essential to help other users and to improve our tool!"
+msgstr "A sua mensagem foi enviada com sucesso! Em breve nossa equipe entrará em contato pelo e-mail informado. Agradecemos a sua participação. Ela é fundamental para auxiliar outros usuários e nos ajudar a aprimorar a ferramenta!"
 
 #: dataviva/about/views.py:111
 msgid "You need to be signed in to reply to questions."
@@ -2007,3 +2007,24 @@ msgstr "Sair"
 msgid "a country"
 msgstr "um país"
 
+#: dataviva/html/admin/mail/ask_feedback.html
+msgid "Dear user,"
+msgstr "Caro usuário,"
+
+msgid "Thanks for using dataviva.info."
+msgstr "Obrigado por utilizar o dataviva.info."
+
+msgid "Thanks for using dataviva.info. We will consider your opinion in order to improve our tool."
+msgstr "Obrigado por utilizar o dataviva.info. Vamos considerar a sua opinião para aperfeiçoar ainda mais a ferramenta."
+
+msgid "Click here"
+msgstr "Clique aqui"
+
+msgid "to see your answer in the Contact Us section."
+msgstr "para ver a publicação de sua resposta no Fale Conosco."
+
+msgid "Best regards,"
+msgstr "Atenciosamente,"
+
+msgid "DataViva team"
+msgstr "Equipe DataViva"

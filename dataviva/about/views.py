@@ -78,7 +78,7 @@ def ask(user=None):
                 question.str_tags(tags)
             db.session.add(question)
             db.session.commit()
-            flash(gettext('Your question has been submitted and is pending approval.'))
+            flash(gettext('Your message was sent successfully! Soon our team will contact you by e-mail. Thanks for your contribution, it is essential to help other users and to improve our tool!'))
             # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
             #     return jsonify({"status": "Success"})
             # else:
