@@ -145,13 +145,15 @@ def admin_questions_edit(status, question_id):
         q.language = form.language.data
         db.session.add(q)
         db.session.commit()
-        
+
+        user = User.query.get(q.user_id)
+
         # if status is approve or rejected send email
         status_id = request.form['status']
         subject = gettext('Resposta DataViva')
         
-        if status_id == "2" or status_id == "3" :
-            send_mail(subject, [g.user.email], render_template('admin/mail/ask_feedback.html', status=status_id))
+        if (status_id == "2" or status_id == "3") and int(user.agree_mailer) > 0 :
+            send_mail(subject, [user.email], render_template('admin/mail/ask_feedback.html', status=status_id, user=user))
         
         flash(gettext('This question has now been updated.'))
         

@@ -1,21 +1,23 @@
-import json
-from sqlalchemy import or_
-from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, jsonify, abort, current_app
-from flask.ext.login import login_user, logout_user, current_user, login_required
-from flask.ext.babel import gettext
 from dataviva import db, lm
-from forms import LoginForm, UserEditForm
-from datetime import datetime
-from urllib2 import Request, urlopen, URLError
-# models
-from dataviva.account.models import User, Starred, ROLE_USER, ROLE_ADMIN
-from dataviva.ask.models import Question, Status, Reply
-# forms
-from dataviva.ask.forms import AskForm
-# utils
-from dataviva.utils import exist_or_404
-# login types
 from dataviva.account.login_providers import facebook, twitter, google
+from dataviva.account.models import User, Starred, ROLE_USER, ROLE_ADMIN
+from dataviva.ask.forms import AskForm
+from dataviva.ask.models import Question, Status, Reply
+from dataviva.utils import exist_or_404
+from datetime import datetime
+from flask import Blueprint, request, render_template, flash, g, session, \
+    redirect, url_for, jsonify, abort, current_app
+from flask.ext.babel import gettext
+from flask.ext.login import login_user, logout_user, current_user, \
+    login_required
+from forms import LoginForm, UserEditForm
+from sqlalchemy import or_
+from urllib2 import Request, urlopen, URLError
+import json
+# models
+# forms
+# utils
+# login types
 
 # from config import SITE_MIRROR
 # import urllib2, urllib
@@ -33,9 +35,8 @@ def page_not_found(error):
 # ---------------------------
 @lm.user_loader
 def load_user(id):
-    if request.endpoint != 'static':
-        return User.query.get(int(id))
-
+    return User.query.get(int(id))
+    
 ###############################
 # Views for ALL logged in users
 # ---------------------------
@@ -95,6 +96,37 @@ def user(nickname):
         user = user,
         activity = activity)
 
+
+def update_email_preferences(id, nickname, agree):
+    user = User.query.filter_by(nickname=nickname).first_or_404()
+    if user.id == int(id) and int(agree) in [0,1]:
+        user.agree_mailer = agree
+        db.session.add(user)
+        db.session.commit()
+        
+    return user
+        
+@mod.route('/remove_email/<id>/<nickname>')        
+def remove_email_list(id, nickname):
+    update_email_preferences(id, nickname, 0)
+    flash(gettext("Preferences updated."))
+    return redirect('/')
+
+@mod.route('/preferences/change_email_preference')        
+def preferences():
+    if g.user.is_authenticated() :
+        if g.user.agree_mailer == 1:
+            agree = 0
+        else:
+            agree = 1
+            
+        user = update_email_preferences(g.user.id, g.user.nickname, agree)
+        flash(gettext("Preferences updated."))
+        return redirect('/account/' + user.nickname )
+    else:
+        return redirect('/')
+
+    
 @mod.route('/complete_login/', methods=['GET', 'POST'])
 def after_login(**user_fields):
     import re

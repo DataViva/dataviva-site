@@ -28,6 +28,8 @@
         <label for="questions">{% trans %}Questions{% endtrans %}</label>
         <input type="radio" onclick="show(this.value)" name="activity" id="replies" value="replies">
         <label for="replies">{% trans %}Replies{% endtrans %}</label>
+        <input type="radio" onclick="show(this.value)" name="activity" id="preferences" value="preferences">
+        <label for="preferences">{% trans %}Preferences{% endtrans %}</label>
       </div>
     
     </div>
@@ -59,6 +61,19 @@
           </a>
         {% endif %}
       {% endfor %}
+      
+	  	<div id="active_preferences" class="preferences">
+	  		<fieldset>
+	  			<legend>{% trans %}Preferences{% endtrans %}</legend>
+	  			<h2>{% trans %}Emails{% endtrans %}</h2>
+		    	<input onclick="update_email_preference()" type="checkbox" id="receive_email"
+	    		{% if user.agree_mailer %}
+	    			checked="checked"
+	    		{% endif %} 
+		    	name="receive_email" value="1">
+		    	<label for="receive_email">{% trans %}I agree to receive emails from dataviva.info.{% endtrans %}</label>
+	  		</fieldset>
+		</div>
     </div>
     
   </div>
@@ -68,16 +83,25 @@
 {% block js %}
 
   <script>
-  
+  	function update_email_preference(){
+  		location.href = '/account/preferences/change_email_preference';
+  	}
+  	
     leon("$activity")
     
     function show(category) {
       if (category == "all") {
         d3.selectAll("#activity_list > a").style("display","block")
+        d3.selectAll("#active_preferences").style("display","none")
       }
       else {
         d3.selectAll("#activity_list > a").style("display","none")
-        d3.selectAll("#activity_list > a."+category).style("display","block")
+        if(category == "preferences") {
+        	d3.selectAll("#active_preferences").style("display","block")
+        } else {
+        	d3.selectAll("#active_preferences").style("display","none")
+			d3.selectAll("#activity_list > a."+category).style("display","block")        	
+        }
       }
     }
   

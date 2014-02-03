@@ -37,3 +37,32 @@ body #container {
   font-size: 12px !important;
   opacity: 0.75;
 }
+
+#active_preferences{
+	display: none;
+	padding:20px;
+}
+
+#active_preferences fieldset{
+	border:1px solid rgb(175, 31, 36);;
+	padding:20px;
+}
+
+#active_preferences fieldset legend{
+	font-size:16px;
+	color: #fff;
+	font-weight: bold;
+	padding:7px;
+	background:rgb(175, 31, 36);
+	margin-left:0px;
+}
+#active_preferences h2{
+	font-size:22px;
+	color: #333;
+}
+
+#active_preferences label{
+	font-size:12px
+}
+
+

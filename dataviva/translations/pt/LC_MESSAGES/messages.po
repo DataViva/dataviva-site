@@ -2028,3 +2028,23 @@ msgstr "Atenciosamente,"
 
 msgid "DataViva team"
 msgstr "Equipe DataViva"
+
+#: dataviva/html/account/index.html
+msgid "Emails"
+msgstr "E-mails"
+
+msgid "Preferences"
+msgstr "Preferencias"
+
+msgid "I agree to receive emails from dataviva.info."
+msgstr "Concordo em receber e-mails de dataviva.info."
+
+msgid "If you don´t want to receive these updates,"
+msgstr "Se você não deseja mais receber atualizações,"
+
+msgid "click here."
+msgstr "clique aqui."
+
+#: dataviva/dataviva/account/views.py
+msgid "Preferences updated."
+msgstr "Preferencias atualizadas."
