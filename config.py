@@ -89,3 +89,9 @@ MAIL_USE_TLS = False
 MAIL_USE_SSL = True
 MAIL_USERNAME = 'datavivaweb@gmail.com'
 MAIL_PASSWORD = 'escritorio2013'
+
+
+'''
+    Administrator email
+'''
+ADMINISTRATOR_EMAIL = 'daniela.caetano@escritorio.mg.gov.br'

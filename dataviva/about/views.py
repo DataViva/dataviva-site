@@ -12,6 +12,9 @@ from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TY
 from dataviva.ask.forms import AskForm, ReplyForm, SearchForm
 from dataviva.utils import strip_html
 
+from dataviva.utils import send_mail
+from config import ADMINISTRATOR_EMAIL
+
 mod = Blueprint('about', __name__, url_prefix='/about')
 
 @mod.before_request
@@ -93,7 +96,6 @@ def answer(slug):
     
     reply_form = ReplyForm()
     question = Question.query.filter_by(slug=slug).first_or_404()
-    
     if request.method == 'POST':
         
         # if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
@@ -111,8 +113,11 @@ def answer(slug):
         #         return redirect(url_for('.answer', slug=question.slug))
             
         timestamp = datetime.utcnow()
+        if not reply_form.parent.data:
+            parent_id = 0 
+            
         reply = Reply(body=reply_form.reply.data, timestamp=timestamp, 
-                        user=g.user, question=question, parent_id=reply_form.parent.data)
+                        user=g.user, question=question, parent_id=parent_id)
         db.session.add(reply)
         db.session.commit()
         if not reply_form.parent.data:
@@ -120,6 +125,10 @@ def answer(slug):
             db.session.add(reply)
             db.session.commit()
         flash(gettext('Reply submitted.'))
+        
+        #envia email para o admin
+        send_mail('Aviso de nova publicacao no DataViva', [ADMINISTRATOR_EMAIL], render_template('about/ask/ask_feedback.html', question=question))
+            
         return redirect(url_for('about.answer', slug=question.slug))
     else:
         
