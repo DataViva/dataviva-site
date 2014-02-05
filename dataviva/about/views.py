@@ -75,7 +75,18 @@ def ask(user=None):
         if form.validate_on_submit():
             timestamp = datetime.utcnow()
             slug = Question.make_unique_slug(form.question.data)
-            question = Question(question=form.question.data, body=form.body.data, timestamp=timestamp, user=g.user, slug=slug, language=g.locale)
+            
+            from ..utils import ProfanitiesFilter
+            
+            file_banned_words = open("dataviva/static/txt/blacklist.txt")
+            banned_words = [line.strip() for line in file_banned_words]
+                
+            filter = ProfanitiesFilter(banned_words, replacements = '*')
+            
+            _question = filter.clean(str(form.question.data))
+            _body =  filter.clean(str(form.body.data))
+            
+            question = Question(question=_question, body=_body, timestamp=timestamp, user=g.user, slug=slug, language=g.locale)
             if "," in form.tags.data:
                 tags = form.tags.data.split(",")
                 question.str_tags(tags)
