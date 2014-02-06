@@ -2048,3 +2048,7 @@ msgstr "clique aqui."
 #: dataviva/dataviva/account/views.py
 msgid "Preferences updated."
 msgstr "Preferencias atualizadas."
+
+#: dataviva/html/templates/about.html
+msgid "Terms of use"
+msgstr "Termos de uso"

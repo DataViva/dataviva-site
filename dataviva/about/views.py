@@ -152,3 +152,7 @@ def answer(slug):
         return render_template("about/ask/answer.html",
             reply_form = reply_form,
             question = question, page = "ask")
+        
+@mod.route('/terms_of_use', methods=['GET'])
+def terms_of_use():
+    return render_template("about/terms_of_use.html", page='terms_of_use')
