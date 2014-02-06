@@ -31,3 +31,6 @@ hiredis
 
 # Better JSON serializer that knows how to handle Decimal types
 simplejson
+
+# Mail
+Flask-Mail

@@ -12,6 +12,9 @@ from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TY
 from dataviva.ask.forms import AskForm, ReplyForm, SearchForm
 from dataviva.utils import strip_html
 
+from dataviva.utils import send_mail
+from config import ADMINISTRATOR_EMAIL
+
 mod = Blueprint('about', __name__, url_prefix='/about')
 
 @mod.before_request
@@ -72,13 +75,24 @@ def ask(user=None):
         if form.validate_on_submit():
             timestamp = datetime.utcnow()
             slug = Question.make_unique_slug(form.question.data)
-            question = Question(question=form.question.data, body=form.body.data, timestamp=timestamp, user=g.user, slug=slug, language=g.locale)
+            
+            from ..utils import ProfanitiesFilter
+            
+            file_banned_words = open("dataviva/static/txt/blacklist.txt")
+            banned_words = [line.strip() for line in file_banned_words]
+                
+            filter = ProfanitiesFilter(banned_words, replacements = '*')
+            
+            _question = filter.clean(str(form.question.data))
+            _body =  filter.clean(str(form.body.data))
+            
+            question = Question(question=_question, body=_body, timestamp=timestamp, user=g.user, slug=slug, language=g.locale)
             if "," in form.tags.data:
                 tags = form.tags.data.split(",")
                 question.str_tags(tags)
             db.session.add(question)
             db.session.commit()
-            flash(gettext('Your question has been submitted and is pending approval.'))
+            flash(gettext('Your message was sent successfully! Soon our team will contact you by e-mail. Thanks for your contribution, it is essential to help other users and to improve our tool!'))
             # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
             #     return jsonify({"status": "Success"})
             # else:
@@ -93,7 +107,6 @@ def answer(slug):
     
     reply_form = ReplyForm()
     question = Question.query.filter_by(slug=slug).first_or_404()
-    
     if request.method == 'POST':
         
         # if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
@@ -111,8 +124,11 @@ def answer(slug):
         #         return redirect(url_for('.answer', slug=question.slug))
             
         timestamp = datetime.utcnow()
+        if not reply_form.parent.data:
+            parent_id = 0 
+            
         reply = Reply(body=reply_form.reply.data, timestamp=timestamp, 
-                        user=g.user, question=question, parent_id=reply_form.parent.data)
+                        user=g.user, question=question, parent_id=parent_id)
         db.session.add(reply)
         db.session.commit()
         if not reply_form.parent.data:
@@ -120,6 +136,10 @@ def answer(slug):
             db.session.add(reply)
             db.session.commit()
         flash(gettext('Reply submitted.'))
+        
+        #envia email para o admin
+        send_mail('Aviso de nova publicacao no DataViva', [ADMINISTRATOR_EMAIL], render_template('about/ask/ask_feedback.html', question=question))
+            
         return redirect(url_for('about.answer', slug=question.slug))
     else:
         
@@ -132,3 +152,7 @@ def answer(slug):
         return render_template("about/ask/answer.html",
             reply_form = reply_form,
             question = question, page = "ask")
+        
+@mod.route('/terms_of_use', methods=['GET'])
+def terms_of_use():
+    return render_template("about/terms_of_use.html", page='terms_of_use')

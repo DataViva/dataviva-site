@@ -36,7 +36,7 @@ def before_request():
     # Check if the user is logged in, if so give the global object
     # a reference to the user from DB
     g.user = current_user
-    if g.user.is_authenticated():
+    if g.user.is_authenticated() and request.endpoint != 'static':
         g.user.last_seen = datetime.utcnow()
         db.session.add(g.user)
         db.session.commit()

@@ -12,11 +12,28 @@ from dataviva.ask.models import Question, Status, Reply, Flag
 from dataviva.admin.forms import AdminQuestionUpdateForm
 from dataviva.utils import strip_html
 
+#utils
+from ..utils import send_mail
+
+from functools import wraps
+
 # import urllib2, urllib
 # from config import SITE_MIRROR
 
 mod = Blueprint('admin', __name__, url_prefix='/admin')
 
+def get_current_user_role():
+    return g.user.role
+
+def required_roles(*roles):
+    def wrapper(f):
+        @wraps(f)
+        def wrapped(*args, **kwargs):
+            if get_current_user_role() not in roles:
+                return gettext("You dont have permission to access this page.")
+            return f(*args, **kwargs)
+        return wrapped
+    return wrapper
 
 @mod.before_request
 def before_request():
@@ -27,11 +44,13 @@ def before_request():
 # ---------------------------
 @mod.route('/')
 @login_required
+@required_roles(1)
 def admin():
     return redirect(url_for('.admin_users'))
 
 @mod.route('/users/')
 @login_required
+@required_roles(1)
 def admin_users():
     
     ret = make_response(render_template("admin/admin_users.html"))
@@ -44,6 +63,7 @@ def admin_users():
 
 @mod.route('/userslist/')
 @login_required
+@required_roles(1)
 def admin_users_list():
     
     offset = request.args.get('offset', 0)
@@ -64,6 +84,7 @@ def admin_users_list():
     return ret
 
 @mod.route('/user/<int:user_id>/', methods = ['PUT','POST'])
+@required_roles(1)
 def update_user(user_id):
     # test with:
     # curl -i -H "Content-Type: application/json" -X PUT 
@@ -85,6 +106,7 @@ def update_user(user_id):
 @mod.route('/questions/')
 @mod.route('/questions/<status>/')
 @login_required
+@required_roles(1)
 def admin_questions(status=None):
     
     if not status:
@@ -100,6 +122,7 @@ def admin_questions(status=None):
 
 @mod.route('/questionslist/<status>/')
 @login_required
+@required_roles(1)
 def admin_questions_list(status=None):
     
     offset = request.args.get('offset', 0)
@@ -122,7 +145,13 @@ def admin_questions_list(status=None):
         
     return ret
 
+@mod.route('/mail/', methods=['GET', 'POST'])
+def admin_mail():
+    status = "2"
+    return render_template('admin/mail/ask_feedback.html', status=status)
+    
 @mod.route('/questions/<status>/<int:question_id>/', methods=['GET', 'POST'])
+@required_roles(1)
 def admin_questions_edit(status, question_id):
     
     q = Question.query.get_or_404(question_id)
@@ -137,6 +166,16 @@ def admin_questions_edit(status, question_id):
         q.language = form.language.data
         db.session.add(q)
         db.session.commit()
+
+        user = User.query.get(q.user_id)
+
+        # if status is approve or rejected send email
+        status_id = request.form['status']
+        subject = gettext('Resposta DataViva')
+        
+        if (status_id == "2" or status_id == "3") and int(user.agree_mailer) > 0 :
+            send_mail(subject, [user.email], render_template('admin/mail/ask_feedback.html', status=status_id, user=user))
+        
         flash(gettext('This question has now been updated.'))
         
         return redirect(url_for('.admin_questions', status=previous_status))
@@ -152,6 +191,7 @@ def admin_questions_edit(status, question_id):
 
 @mod.route('/replies/')
 @login_required
+@required_roles(1)
 def admin_replies():
     
     ret = make_response(render_template("admin/admin_replies.html"))
@@ -164,6 +204,7 @@ def admin_replies():
 
 @mod.route('/replieslist/')
 @login_required
+@required_roles(1)
 def admin_replies_list():
     
     offset = request.args.get('offset', 0)
@@ -189,6 +230,7 @@ def admin_replies_list():
     return ret
 
 @mod.route('/reply/<int:reply_id>/', methods = ['PUT','POST'])
+@required_roles(1)
 def update_reply(reply_id):
     # test with:
     # curl -i -H "Content-Type: application/json" -X PUT 
