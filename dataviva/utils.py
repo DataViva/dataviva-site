@@ -111,6 +111,8 @@ def gzip_data(json):
     used as getter'''
 def cached_query(id, data=None):
     c = current_app.config.get('REDIS_CACHE')
+    if c is None:
+        return None
     if data is None:
         return c.get(id)
     return c.set(id, data)
