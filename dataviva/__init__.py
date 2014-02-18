@@ -30,7 +30,9 @@ mail = Mail(app)
 db = SQLAlchemy(app)
 
 # Set session store as server side (Redis)
-app.session_interface = RedisSessionInterface()
+redis_sesh = RedisSessionInterface()
+if resis_sesh.redis:
+    app.session_interface = resis_sesh
 
 # Global Latest Year Variables
 __latest_year__ = {"secex": 2012, "rais": 2012, "population": 2012}

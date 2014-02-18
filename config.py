@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 from werkzeug.contrib.cache import RedisCache
-from redis import Redis
+from redis import Redis, ConnectionError
 
 '''
     Used for finding environment variables through configuration
@@ -72,6 +72,11 @@ REDIS = Redis(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"),
 REDIS_CACHE = RedisCache(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"), 
          port=get_env_variable("DATAVIVA_REDIS_PORT", 6379), 
          password=get_env_variable("DATAVIVA_REDIS_PW", None), default_timeout=2591999)
+         
+try:
+    REDIS.client_list()
+except ConnectionError:
+    REDIS, REDIS_CACHE = [None]*2
 
 '''
     Oauth tokens set in environment variables from their respecive sources

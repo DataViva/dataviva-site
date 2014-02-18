@@ -178,8 +178,12 @@ class RedisSessionInterface(SessionInterface):
     def __init__(self, redis=None, prefix='session:'):
         if redis is None:
             redis = REDIS
-        self.redis = redis
-        self.prefix = prefix
+        if redis is None:
+            self.redis = None
+            self.prefix = None
+        else:
+            self.redis = redis
+            self.prefix = prefix
 
     def generate_sid(self):
         return str(uuid4())
