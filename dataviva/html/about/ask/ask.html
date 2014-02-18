@@ -18,14 +18,13 @@
     <form id="ask_form" action="" method="post">
       
       {{ form.hidden_tag() }}
-		
- 		<div id="ask_type_toggle_form" style="margin: 20px 10px;"> 
- 			<h2>{% trans %}Type{% endtrans %}</h2>
-			{% for subfield in form.type %}
-			    
-			    {{ subfield }}
-			    {{ subfield.label }}
-			{% endfor %}
+
+      <div id="ask_type_toggle_form"> 
+      <label for="type">{% trans %}Type{% endtrans %}</label>
+        {% for subfield in form.type %}
+          {{ subfield }}
+          {{ subfield.label }}
+        {% endfor %}
      	</div> 
       {{ form.question(id="question", placeholder=_("Ex. Where does the data come from?")) }}
       {% for error in form.errors.question %}
@@ -64,7 +63,7 @@
   
     leon("#question").size("large").color(dataviva.color)
     leon("#app_link").size("large").color(dataviva.color)
-	leon("$type").color(dataviva.color)
+  	leon("$type").color(dataviva.color)
 	
     // Initialize redactor wysiwyg textarea
     $(document).ready(function() {
