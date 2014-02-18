@@ -1,5 +1,6 @@
 from flask_wtf import Form
 from wtforms import TextField, TextAreaField, HiddenField,RadioField, validators
+from flask.ext.babel import lazy_gettext
 
 class SearchForm(Form):
     search = TextField('search', validators = [validators.Required()])
@@ -10,8 +11,8 @@ class AskForm(Form):
     app = TextField('app', validators = [])
     tags = TextField('tags', validators = [])
     type = RadioField(u'Type', choices=[
-        ('1', u'Question'),
-        ('2', u'Comment'),('3', u'Contact')],
+        ('1', lazy_gettext('Question')),
+        ('2', lazy_gettext('Comment')),('3', lazy_gettext('Contact'))],
         default=2, validators=[validators.Required()])
 
 class ReplyForm(Form):

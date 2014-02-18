@@ -30,7 +30,7 @@ def required_roles(*roles):
         @wraps(f)
         def wrapped(*args, **kwargs):
             if get_current_user_role() not in roles:
-                return gettext("You dont have permission to access this page.")
+                return gettext("You dont have permission to view this page.")
             return f(*args, **kwargs)
         return wrapped
     return wrapper
@@ -171,7 +171,7 @@ def admin_questions_edit(status, question_id):
 
         # if status is approve or rejected send email
         status_id = request.form['status']
-        subject = gettext('Resposta DataViva')
+        subject = gettext('DataViva Reply')
         
         if (status_id == "2" or status_id == "3") and int(user.agree_mailer) > 0 :
             send_mail(subject, [user.email], render_template('admin/mail/ask_feedback.html', status=status_id, user=user))
