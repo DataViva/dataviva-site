@@ -13,7 +13,8 @@ from dataviva.ask.forms import AskForm, ReplyForm, SearchForm
 from dataviva.utils import strip_html
 
 from dataviva.utils import send_mail
-from config import ADMINISTRATOR_EMAIL
+from config import ADMINISTRATOR_EMAIL, basedir
+import os
 
 mod = Blueprint('about', __name__, url_prefix='/about')
 
@@ -78,7 +79,7 @@ def ask(user=None):
             
             from ..utils import ProfanitiesFilter
             
-            file_banned_words = open("http://www.dataviva.info/static/txt/blacklist.txt")
+            file_banned_words = open(os.path.join(basedir, "dataviva/static/txt/blacklist.txt"))
             banned_words = [line.strip() for line in file_banned_words]
                 
             filter = ProfanitiesFilter(banned_words, replacements = '*')
