@@ -21,6 +21,7 @@ def question_list(page):
     
     # get URL parameters for results per page and ordering options
     order = request.args.get('order', 'votes') # options = 'votes' or 'newest'
+    type = request.args.get('type', 'all') # options = 'all' or 'question' or 'comment' or 'contact'
     offset = request.args.get('offset', 0)
     search_term = request.args.get('q', None)
     limit = 25
@@ -35,7 +36,14 @@ def question_list(page):
     if search_term:
         like_str = "%{0}%".format(search_term)
         questions = questions.filter(or_(Question.question.like(like_str),Question.body.like(like_str),Question.status_notes.like(like_str)))
-
+    
+    if type == "question":
+        questions = questions.filter_by(type_id='1')
+    elif type == "comment":
+        questions = questions.filter_by(type_id='2')
+    elif type == "contact":
+        questions = questions.filter_by(type_id='3')   
+          
     # if we are ordering the questions by newest get them ordered chronologically
     if order == "newest":
         

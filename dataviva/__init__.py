@@ -12,6 +12,8 @@ from flask.ext.babel import Babel
 # for new filters, redis sessions
 from utils import Momentjs, formatter, strip_html, jinja_split, \
                     RedisSessionInterface
+                    
+from flask.ext.mail import Mail
 
 ''' Base directory of where the site is held '''
 datavivadir = os.path.abspath(os.path.dirname(__file__))
@@ -21,6 +23,8 @@ app = Flask(__name__, template_folder=os.path.join(datavivadir, 'html'))
 
 # Load default configuration from config.py
 app.config.from_object('config')
+
+mail = Mail(app)
 
 # DB connection object
 db = SQLAlchemy(app)

@@ -102,7 +102,7 @@ div#search_div > div#sabrina_head {
 }
 
 div#list_title {
-  height: 20px;
+  height: 60px;
   position: relative;
   margin-bottom: 20px;
 }
@@ -111,6 +111,12 @@ div#order_toggle {
   position: absolute;
   right: 0px;
   top: -3px;
+}
+
+div#ask_type_toggle {
+  position: absolute;
+  right: 0px;
+  top: 30px;
 }
 
 a.decision.short.question {
@@ -257,4 +263,15 @@ div.reply_box.comment.child p.question_attr {
 
 div.reply_box:last-child {
   border-bottom: 0px;
+}
+
+#terms_of_use ul{
+	margin-left:40px;
+	font-size:13px;
+	margin-bottom:20px;
+}
+
+#terms_of_use strong{
+	color:#c00;
+	font-size:13px;
 }

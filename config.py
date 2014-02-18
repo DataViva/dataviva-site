@@ -82,3 +82,19 @@ TWITTER_OAUTH_ID = get_env_variable("DATAVIVA_OAUTH_TWITTER_ID")
 TWITTER_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_TWITTER_SECRET")
 FACEBOOK_OAUTH_ID = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_ID")
 FACEBOOK_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_SECRET")
+
+'''
+    Mail credentials to send automatic emails to users
+'''
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 465
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+MAIL_USERNAME = 'datavivaweb@gmail.com'
+MAIL_PASSWORD = 'escritorio2013'
+
+
+'''
+    Administrator email
+'''
+ADMINISTRATOR_EMAIL = 'daniela.caetano@escritorio.mg.gov.br'

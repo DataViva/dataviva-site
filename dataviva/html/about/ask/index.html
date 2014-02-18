@@ -8,37 +8,47 @@
   
   <p>{% trans %}Through its visualizations, DataViva provides information that is valuable for export promotion, investment decision and policy design. Moreover, by providing facts about the economic development of industries, locations and their respective opportunities, DataViva is helping create a solid data-driven foundation for conversations between the public and private sectors.{% endtrans %}</p>
   
-  {% if g.accounts %}
-    <div id="search_div">
-      <h1>{% trans %}What do you want to know?{% endtrans %}</h1>
-      {{ search_form.search(size=60, id='search', placeholder=_("Search")) }}
-      <div id="sabrina_head"></div>
+  <div style="display:none;opacity:0;">
+    {% trans %}The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website.{% endtrans %}
+  </div>
+  
+  <div id="search_div">
+    <h1>{% trans %}What do you want to know?{% endtrans %}</h1>
+    {{ search_form.search(size=60, id='search', placeholder=_("Search")) }}
+    <div id="sabrina_head"></div>
+  </div>
+  
+  <a {% if g.user.is_authenticated() %}href="/about/ask/"{%else%}onclick="login()"{%endif%} class="decision icon short questions">
+    {% trans %}Can´t find an answer?{% endtrans %} {% trans %}Send your question to us here!{% endtrans %}
+  </a>
+  
+  </div><br><br><div class="lightbox">
+  
+  <div id="list_title">
+    <h2>{% trans %}Find your answers{% endtrans %}</h2>
+  
+    <div id="order_toggle">
+      <legend id="order">{% trans %}Order{% endtrans %}</legend>
+      <input type="radio" name="order" value="votes" id="votes" onclick="change_order(this.value)" checked="checked">
+      <label for="votes">{% trans %}Most Active{% endtrans %}</label>
+      <input type="radio" name="order" value="newest" id="newest" onclick="change_order(this.value)">
+      <label for="newest">{% trans %}Most Recent{% endtrans %}</label>
     </div>
-  
-    <a {% if g.user.is_authenticated() %}href="/about/ask/"{%else%}onclick="login()"{%endif%} class="decision icon short questions">
-      {% trans %}Can´t find an answer?{% endtrans %} {% trans %}Send your question to us here!{% endtrans %}
-    </a>
-  
-    </div><br><br><div class="lightbox">
-  
-    <div id="list_title">
-      <h2>{% trans %}Find your answers{% endtrans %}</h2>
-  
-      <div id="order_toggle">
-        <legend id="order">{% trans %}Order{% endtrans %}</legend>
-        <input type="radio" name="order" value="votes" id="votes" onclick="change_order(this.value)" checked="checked">
-        <label for="votes">{% trans %}Most Active{% endtrans %}</label>
-        <input type="radio" name="order" value="newest" id="newest" onclick="change_order(this.value)">
-        <label for="newest">{% trans %}Most Recent{% endtrans %}</label>
-      </div>
+    
+    <div id="ask_type_toggle">     
+      <legend id="ask_type">{% trans %}Type{% endtrans %}</legend>
+      <input type="radio" name="ask_type" value="all" id="all" onclick="change_type(this.value)" checked="checked">
+      <label for="all">{% trans %}All{% endtrans %}</label>
+      <input type="radio" name="ask_type" value="question" id="question" onclick="change_type(this.value)">
+      <label for="question">{% trans %}Question{% endtrans %}</label>
+      <input type="radio" name="ask_type" value="comment" id="comment" onclick="change_type(this.value)">
+      <label for="comment">{% trans %}Comment{% endtrans %}</label>
+      <input type="radio" name="ask_type" value="contact" id="contact" onclick="change_type(this.value)">
+      <label for="contact">{% trans %}Contact{% endtrans %}</label>
     </div>
+  </div>
   
-    <div id="question_feed"></div>
-  {% else %}
-    <a href="http://www.dataviva.info/about/contact/" class="decision icon questions">
-      {% trans %}The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website.{% endtrans %}
-    </a>
-  {% endif %}
+  <div id="question_feed"></div>
   
 {% endblock %}
   
@@ -50,14 +60,26 @@
     //
     var order = d3.select('input[name="order"]:checked').attr("value"),
         search_term = null,
-        json_url = "/ask/questions/?lang="+dataviva.language;
-  
+        json_url = "/ask/questions/?lang="+dataviva.language,
+  		type = d3.select('input[name="ask_type"]:checked').attr("value");
+  	
     leon("#search").color(dataviva.color).size("large")
     leon("$order").color(dataviva.color)
+    leon("$ask_type").color(dataviva.color)
     
     function change_order(new_order){
       order = new_order;
       var url = json_url + "&order=" + order;
+      if(search_term){
+        url += "&q=" + search_term;
+      }
+      d3.select("#question_feed").html('')
+        .call(is.url(url).offset(0).remove(true))
+    }
+    
+    function change_type(new_type){
+      type = new_type;
+      var url = json_url + "&type=" + type;
       if(search_term){
         url += "&q=" + search_term;
       }
@@ -140,12 +162,13 @@
     var is = infinite_scroll().format_items(item_formatter);
 
     change_order(order)
+    change_type(type)
 
     d3.select("#search").on("input", function(e){
 
       search_term = this.value;
       
-      var url = json_url + "&q=" + search_term + "&order=" + order;
+      var url = json_url + "&q=" + search_term + "&order=" + order+ "&type=" + type;
       d3.select("#question_feed").html('')
         .call(is.url(url).offset(0).remove(true))
 

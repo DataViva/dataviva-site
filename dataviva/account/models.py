@@ -31,6 +31,7 @@ class User(db.Model, AutoSerialize):
     votes = db.relationship("Vote", backref = 'user', lazy = 'dynamic')
     flag = db.relationship("Flag", backref = 'user', lazy = 'dynamic')
     starred = db.relationship("Starred", backref = 'user', lazy = 'dynamic')
+    agree_mailer = db.Column(db.Integer)
     
     def is_authenticated(self):
         return True
