@@ -78,7 +78,7 @@ def ask(user=None):
             
             from ..utils import ProfanitiesFilter
             
-            file_banned_words = open("/static/txt/blacklist.txt")
+            file_banned_words = open("http://www.dataviva.info/static/txt/blacklist.txt")
             banned_words = [line.strip() for line in file_banned_words]
                 
             filter = ProfanitiesFilter(banned_words, replacements = '*')
