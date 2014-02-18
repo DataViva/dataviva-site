@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-01-07 16:54-0500\n"
+"POT-Creation-Date: 2014-02-18 15:01-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,23 +16,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: dataviva/about/views.py:71
+#: dataviva/about/views.py:72
 msgid "You need to be logged in to ask questions."
 msgstr ""
 
-#: dataviva/about/views.py:92
-msgid "Your question has been submitted and is pending approval."
+#: dataviva/about/views.py:96
+msgid "Your message was sent successfully. Thank you for your contribution, it will be helpful to other users and is essential to improving our tool! Our team will contact you by e-mail shortly."
 msgstr ""
 
-#: dataviva/about/views.py:111
+#: dataviva/about/views.py:116
 msgid "You need to be signed in to reply to questions."
 msgstr ""
 
-#: dataviva/about/views.py:131
+#: dataviva/about/views.py:139
 msgid "Reply submitted."
 msgstr ""
 
-#: dataviva/admin/views.py:140
+#: dataviva/account/views.py:112 dataviva/account/views.py:124
+msgid "Preferences updated."
+msgstr ""
+
+#: dataviva/admin/views.py:33
+msgid "You dont have permission to view this page."
+msgstr ""
+
+#: dataviva/admin/views.py:174
+msgid "DataViva Reply"
+msgstr ""
+
+#: dataviva/admin/views.py:179
 msgid "This question has now been updated."
 msgstr ""
 
@@ -40,11 +52,11 @@ msgstr ""
 msgid "You need to be logged in to star apps."
 msgstr ""
 
-#: dataviva/ask/views.py:92 dataviva/ask/views.py:120
+#: dataviva/ask/views.py:100 dataviva/ask/views.py:128
 msgid "You need to be logged in to vote."
 msgstr ""
 
-#: dataviva/ask/views.py:150
+#: dataviva/ask/views.py:158
 msgid "You need to be logged in to flag replies."
 msgstr ""
 
@@ -97,7 +109,8 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
-#: dataviva/guide/views.py:183 dataviva/html/account/index.html:24
+#: dataviva/guide/views.py:183 dataviva/html/about/ask/index.html:43
+#: dataviva/html/account/index.html:24
 msgid "All"
 msgstr ""
 
@@ -198,6 +211,11 @@ msgstr ""
 
 #: dataviva/html/about/attrs.html:10 dataviva/html/rankings/index.html:41
 msgid "Depth"
+msgstr ""
+
+#: dataviva/html/about/terms_of_use.html:4
+#: dataviva/html/templates/about.html:155
+msgid "Terms of Use"
 msgstr ""
 
 #: dataviva/html/about/testimonial.html:4
@@ -447,23 +465,27 @@ msgstr ""
 msgid "You need to login for this functionality."
 msgstr ""
 
-#: dataviva/html/about/ask/ask.html:22
+#: dataviva/html/about/ask/ask.html:23 dataviva/html/about/ask/index.html:41
+msgid "Type"
+msgstr ""
+
+#: dataviva/html/about/ask/ask.html:29
 msgid "Ex. Where does the data come from?"
 msgstr ""
 
-#: dataviva/html/about/ask/ask.html:32
+#: dataviva/html/about/ask/ask.html:39
 msgid "App"
 msgstr ""
 
-#: dataviva/html/about/ask/ask.html:35
+#: dataviva/html/about/ask/ask.html:42
 msgid "Tags"
 msgstr ""
 
-#: dataviva/html/about/ask/ask.html:40
+#: dataviva/html/about/ask/ask.html:47
 msgid "Submit your question to Escritorio!"
 msgstr ""
 
-#: dataviva/html/about/ask/ask.html:45
+#: dataviva/html/about/ask/ask.html:52
 msgid "Click here to login"
 msgstr ""
 
@@ -475,40 +497,54 @@ msgstr ""
 msgid "Through its visualizations, DataViva provides information that is valuable for export promotion, investment decision and policy design. Moreover, by providing facts about the economic development of industries, locations and their respective opportunities, DataViva is helping create a solid data-driven foundation for conversations between the public and private sectors."
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:12
+#: dataviva/html/about/ask/index.html:12 dataviva/html/about/ask/index.html:58
 msgid "The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website."
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:16
+#: dataviva/html/about/ask/index.html:18
 msgid "What do you want to know?"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:17
+#: dataviva/html/about/ask/index.html:19
 msgid "Search"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:22
+#: dataviva/html/about/ask/index.html:24
 msgid "Can´t find an answer?"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:22
+#: dataviva/html/about/ask/index.html:24
 msgid "Send your question to us here!"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:28
+#: dataviva/html/about/ask/index.html:30
 msgid "Find your answers"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:31
+#: dataviva/html/about/ask/index.html:33
 msgid "Order"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:33
+#: dataviva/html/about/ask/index.html:35
 msgid "Most Active"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:35
+#: dataviva/html/about/ask/index.html:37
 msgid "Most Recent"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:45
+#: dataviva/html/admin/admin_questions.html:3
+#: dataviva/html/admin/admin_questions.html:12
+msgid "Question"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:47
+msgid "Comment"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:49
+msgid "Contact"
 msgstr ""
 
 #: dataviva/html/about/data/comtrade.html:3
@@ -749,30 +785,33 @@ msgstr ""
 msgid "Replies"
 msgstr ""
 
+#: dataviva/html/account/index.html:33
+msgid "Preferences"
+msgstr ""
+
+#: dataviva/html/account/index.html:71
+msgid "I agree to receive emails from dataviva.info."
+msgstr ""
+
 #: dataviva/html/account/login.html:4 dataviva/html/general/access.html:3
 #: dataviva/html/general/upgrade.html:3 dataviva/html/templates/site.html:22
 msgid "Login"
 msgstr ""
 
-#: dataviva/html/account/login.html:17
+#: dataviva/html/account/login.html:18
 msgid "Logging in is easy! All you have to do is choose one of the following accounts to link with your profile. We'll take care of the rest."
 msgstr ""
 
-#: dataviva/html/account/login.html:19
+#: dataviva/html/account/login.html:20
 msgid "By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile."
 msgstr ""
 
-#: dataviva/html/account/login.html:26
-msgid "Remember Me"
-msgstr ""
-
-#: dataviva/html/account/login.html:32
+#: dataviva/html/account/login.html:24
 msgid "Logging in has been disabled on this version of DataViva. Please visit the main site to log in."
 msgstr ""
 
-#: dataviva/html/admin/admin_questions.html:3
-#: dataviva/html/admin/admin_questions.html:12
-msgid "Question"
+#: dataviva/html/account/login.html:36
+msgid "Remember Me"
 msgstr ""
 
 #: dataviva/html/admin/admin_questions.html:13
@@ -832,6 +871,42 @@ msgstr ""
 
 #: dataviva/html/admin/admin_users.html:15
 msgid "Role"
+msgstr ""
+
+#: dataviva/html/admin/mail/ask_feedback.html:17
+msgid "Dear user,"
+msgstr ""
+
+#: dataviva/html/admin/mail/ask_feedback.html:19
+msgid "Thanks for using dataviva.info."
+msgstr ""
+
+#: dataviva/html/admin/mail/ask_feedback.html:19
+msgid "Click here"
+msgstr ""
+
+#: dataviva/html/admin/mail/ask_feedback.html:19
+msgid "to see your answer in the Contact Us section."
+msgstr ""
+
+#: dataviva/html/admin/mail/ask_feedback.html:21
+msgid "Thanks for using dataviva.info. We will consider your opinion in order to improve our tool."
+msgstr ""
+
+#: dataviva/html/admin/mail/ask_feedback.html:24
+msgid "Best regards,"
+msgstr ""
+
+#: dataviva/html/admin/mail/ask_feedback.html:26
+msgid "DataViva team"
+msgstr ""
+
+#: dataviva/html/admin/mail/ask_feedback.html:29
+msgid "If you don´t want to receive these updates,"
+msgstr ""
+
+#: dataviva/html/admin/mail/ask_feedback.html:29
+msgid "click here."
 msgstr ""
 
 #: dataviva/html/apps/builder.html:16
