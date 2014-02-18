@@ -85,14 +85,15 @@ def ask(user=None):
             
             _question = filter.clean(str(form.question.data))
             _body =  filter.clean(str(form.body.data))
+            _type = filter.clean(str(form.type.data))
             
-            question = Question(question=_question, body=_body, timestamp=timestamp, user=g.user, slug=slug, language=g.locale)
+            question = Question(question=_question, body=_body, timestamp=timestamp, user=g.user, slug=slug, language=g.locale, type_id=_type)
             if "," in form.tags.data:
                 tags = form.tags.data.split(",")
                 question.str_tags(tags)
             db.session.add(question)
             db.session.commit()
-            flash(gettext('Your message was sent successfully! Soon our team will contact you by e-mail. Thanks for your contribution, it is essential to help other users and to improve our tool!'))
+            flash(gettext('Your message was sent successfully. Thank you for your contribution, it will be helpful to other users and is essential to improving our tool! Our team will contact you by e-mail shortly.'))
             # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
             #     return jsonify({"status": "Success"})
             # else:
