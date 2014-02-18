@@ -8,35 +8,37 @@
   
   <p>{% trans %}Through its visualizations, DataViva provides information that is valuable for export promotion, investment decision and policy design. Moreover, by providing facts about the economic development of industries, locations and their respective opportunities, DataViva is helping create a solid data-driven foundation for conversations between the public and private sectors.{% endtrans %}</p>
   
-  <div style="display:none;opacity:0;">
-    {% trans %}The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website.{% endtrans %}
-  </div>
-  
-  <div id="search_div">
-    <h1>{% trans %}What do you want to know?{% endtrans %}</h1>
-    {{ search_form.search(size=60, id='search', placeholder=_("Search")) }}
-    <div id="sabrina_head"></div>
-  </div>
-  
-  <a {% if g.user.is_authenticated() %}href="/about/ask/"{%else%}onclick="login()"{%endif%} class="decision icon short questions">
-    {% trans %}Can´t find an answer?{% endtrans %} {% trans %}Send your question to us here!{% endtrans %}
-  </a>
-  
-  </div><br><br><div class="lightbox">
-  
-  <div id="list_title">
-    <h2>{% trans %}Find your answers{% endtrans %}</h2>
-  
-    <div id="order_toggle">
-      <legend id="order">{% trans %}Order{% endtrans %}</legend>
-      <input type="radio" name="order" value="votes" id="votes" onclick="change_order(this.value)" checked="checked">
-      <label for="votes">{% trans %}Most Active{% endtrans %}</label>
-      <input type="radio" name="order" value="newest" id="newest" onclick="change_order(this.value)">
-      <label for="newest">{% trans %}Most Recent{% endtrans %}</label>
+  {% if g.accounts %}
+    <div id="search_div">
+      <h1>{% trans %}What do you want to know?{% endtrans %}</h1>
+      {{ search_form.search(size=60, id='search', placeholder=_("Search")) }}
+      <div id="sabrina_head"></div>
     </div>
-  </div>
   
-  <div id="question_feed"></div>
+    <a {% if g.user.is_authenticated() %}href="/about/ask/"{%else%}onclick="login()"{%endif%} class="decision icon short questions">
+      {% trans %}Can´t find an answer?{% endtrans %} {% trans %}Send your question to us here!{% endtrans %}
+    </a>
+  
+    </div><br><br><div class="lightbox">
+  
+    <div id="list_title">
+      <h2>{% trans %}Find your answers{% endtrans %}</h2>
+  
+      <div id="order_toggle">
+        <legend id="order">{% trans %}Order{% endtrans %}</legend>
+        <input type="radio" name="order" value="votes" id="votes" onclick="change_order(this.value)" checked="checked">
+        <label for="votes">{% trans %}Most Active{% endtrans %}</label>
+        <input type="radio" name="order" value="newest" id="newest" onclick="change_order(this.value)">
+        <label for="newest">{% trans %}Most Recent{% endtrans %}</label>
+      </div>
+    </div>
+  
+    <div id="question_feed"></div>
+  {% else %}
+    <a href="http://www.dataviva.info/about/contact/" class="decision icon questions">
+      {% trans %}The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website.{% endtrans %}
+    </a>
+  {% endif %}
   
 {% endblock %}
   

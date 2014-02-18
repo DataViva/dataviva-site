@@ -14,6 +14,12 @@ div#login_text {
   margin: 12px 0px;
   text-align: left;
 }
+div#denied_text {
+  font-size: 15px;
+  line-height: 20px;
+  margin: 12px 0px;
+  text-align: left;
+}
 a.login_button {
   background-position: center center;
   background-repeat: no-repeat;

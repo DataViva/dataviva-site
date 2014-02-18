@@ -29,6 +29,9 @@ SECRET_KEY = get_env_variable("DATAVIVA_SECRET_KEY", "default-dataviva.mg-secr3t
 DEBUG = True
 SQLALCHEMY_ECHO = True
 
+''' Whether or not to allow User Account Activity '''
+ACCOUNTS = get_env_variable("DATAVIVA_ACCOUNTS",False)
+
 ''' 
     Details for connecting to the database, credentials set as environment
     variables.

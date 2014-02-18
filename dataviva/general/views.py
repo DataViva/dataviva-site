@@ -11,7 +11,7 @@ from dataviva import app, db, babel, __latest_year__
 from dataviva.general.forms import AccessForm
 from dataviva.general.models import Short
 
-from config import STATIC_URL
+from config import STATIC_URL, ACCOUNTS
 
 ###############################
 # General functions for ALL views
@@ -19,6 +19,7 @@ from config import STATIC_URL
 @app.before_request
 def before_request():
     
+    g.accounts = True if ACCOUNTS in ["True","true","Yes","yes","Y","y",1] else False
     g.color = "#af1f24"
     g.static_url = STATIC_URL
     g.page_type = mod.name
