@@ -14,7 +14,7 @@ Note: Internet Explorer versions 8 and below will not work as they do not have S
 
 *   Python
 *   MySQL
-*   Redis
+*   Redis (at least version 2.8.6)
 
 1.	Clone from github (this will create dataviva folder in the current directory)
 
