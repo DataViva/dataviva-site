@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-02-18 15:01-0500\n"
+"POT-Creation-Date: 2014-02-18 15:56-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,7 +40,7 @@ msgstr ""
 msgid "You dont have permission to view this page."
 msgstr ""
 
-#: dataviva/admin/views.py:174
+#: dataviva/admin/views.py:174 dataviva/html/admin/mail/ask_feedback.html:5
 msgid "DataViva Reply"
 msgstr ""
 
@@ -873,39 +873,39 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:17
-msgid "Dear user,"
+#: dataviva/html/admin/mail/ask_feedback.html:22
+msgid "Dear"
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:19
-msgid "Thanks for using dataviva.info."
+#: dataviva/html/admin/mail/ask_feedback.html:25
+msgid "Thanks for using DataViva."
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:19
+#: dataviva/html/admin/mail/ask_feedback.html:27
 msgid "Click here"
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:19
+#: dataviva/html/admin/mail/ask_feedback.html:27
 msgid "to see your answer in the Contact Us section."
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:21
-msgid "Thanks for using dataviva.info. We will consider your opinion in order to improve our tool."
+#: dataviva/html/admin/mail/ask_feedback.html:29
+msgid "Thanks for using DataViva. We will consider your opinion in order to improve our tool."
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:24
+#: dataviva/html/admin/mail/ask_feedback.html:32
 msgid "Best regards,"
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:26
-msgid "DataViva team"
+#: dataviva/html/admin/mail/ask_feedback.html:33
+msgid "The DataViva Team"
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:29
-msgid "If you don´t want to receive these updates,"
+#: dataviva/html/admin/mail/ask_feedback.html:36
+msgid "If you don't want to receive these updates,"
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:29
+#: dataviva/html/admin/mail/ask_feedback.html:36
 msgid "click here."
 msgstr ""
 
