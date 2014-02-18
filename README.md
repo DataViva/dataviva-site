@@ -40,7 +40,9 @@ Note: Internet Explorer versions 8 and below will not work as they do not have S
         export DATAVIVA_DB_NAME=dataviva
         export DATAVIVA_DB_USER=root
         export DATAVIVA_DB_PW=my-pw
-        export DATAVIVA_ACCOUNTS=True
+        * export DATAVIVA_ACCOUNTS=True
+        
+        * only necessary if you want to enable user accounts
 6. Run the site locally!
 
         python run.py runserver
