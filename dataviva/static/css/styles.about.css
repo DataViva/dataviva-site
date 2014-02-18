@@ -27,8 +27,8 @@ body.about #inner_container {
 }
 
 #about_content > .lightbox {
-  min-height: 200px;
-  padding: 20px 20px 10px 20px;
+  min-height: 180px;
+  padding: 20px 20px 16px 20px;
   position: relative;
   -webkit-transition: height 1s;
           transition: height 1s;
