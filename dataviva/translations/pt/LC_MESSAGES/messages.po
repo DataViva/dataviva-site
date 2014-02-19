@@ -1527,10 +1527,10 @@ msgstr ""
 
 #: dataviva/html/account/login.html:19
 msgid ""
-"By having an account, you will be able to ask Sabrina questions, comment "
+"By having an account, you will be able to ask questions, comment "
 "in discussions, and save your favorite apps to your profile."
 msgstr ""
-"Tendo uma conta, você será capaz de fazer perguntas à Sabrina, comentar "
+"Tendo uma conta, você será capaz de fazer perguntas, comentar "
 "em nossos fóruns, e salvar seus aplicativos favoritos em seu perfil."
 
 #: dataviva/html/account/login.html:26
@@ -2052,3 +2052,6 @@ msgstr "Preferencias atualizadas."
 #: dataviva/html/templates/about.html
 msgid "Terms of use"
 msgstr "Termos de uso"
+
+msgid "Terms of use."
+msgstr "Conheça os termos de uso e regras de participação."
