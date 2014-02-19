@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-01-07 16:54-0500\n"
+"POT-Creation-Date: 2014-02-18 15:56-0500\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -17,23 +17,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: dataviva/about/views.py:71
+#: dataviva/about/views.py:72
 msgid "You need to be logged in to ask questions."
 msgstr "Você precisa fazer o login para fazer perguntas."
 
-#: dataviva/about/views.py:92
-msgid "Your message was sent successfully! Soon our team will contact you by e-mail. Thanks for your contribution, it is essential to help other users and to improve our tool!"
-msgstr "A sua mensagem foi enviada com sucesso! Em breve nossa equipe entrará em contato pelo e-mail informado. Agradecemos a sua participação. Ela é fundamental para auxiliar outros usuários e nos ajudar a aprimorar a ferramenta!"
+#: dataviva/about/views.py:96
+msgid ""
+"Your message was sent successfully. Thank you for your contribution, it "
+"will be helpful to other users and is essential to improving our tool! "
+"Our team will contact you by e-mail shortly."
+msgstr ""
+"A sua mensagem foi enviada com sucesso. Agradecemos a sua participação. "
+"Ela é fundamental para auxiliar outros usuários e nos ajudar a aprimorar "
+"a ferramenta! Em breve nossa equipe entrará em contato pelo e-mail "
+"informado."
 
-#: dataviva/about/views.py:111
+#: dataviva/about/views.py:116
 msgid "You need to be signed in to reply to questions."
 msgstr "Você precisa fazer o login para responder perguntas."
 
-#: dataviva/about/views.py:131
+#: dataviva/about/views.py:139
 msgid "Reply submitted."
 msgstr "Resposta enviada."
 
-#: dataviva/admin/views.py:140
+#: dataviva/account/views.py:112 dataviva/account/views.py:124
+msgid "Preferences updated."
+msgstr "Preferencias atualizadas."
+
+#: dataviva/admin/views.py:33
+msgid "You dont have permission to view this page."
+msgstr "Você não tem permissão para ver essa página."
+
+#: dataviva/admin/views.py:174 dataviva/html/admin/mail/ask_feedback.html:5
+msgid "DataViva Reply"
+msgstr "Resposta DataViva"
+
+#: dataviva/admin/views.py:179
 msgid "This question has now been updated."
 msgstr "Esta pergunta foi atualizada."
 
@@ -41,11 +60,11 @@ msgstr "Esta pergunta foi atualizada."
 msgid "You need to be logged in to star apps."
 msgstr "Você precisa fazer o login para iniciar aplicativos."
 
-#: dataviva/ask/views.py:92 dataviva/ask/views.py:120
+#: dataviva/ask/views.py:100 dataviva/ask/views.py:128
 msgid "You need to be logged in to vote."
 msgstr "Você precisa fazer o login para votar."
 
-#: dataviva/ask/views.py:150
+#: dataviva/ask/views.py:158
 msgid "You need to be logged in to flag replies."
 msgstr "Você precisa fazer o login para marcar respostas."
 
@@ -98,7 +117,8 @@ msgstr "Produtos Exportados"
 msgid "Location"
 msgstr "Localidade"
 
-#: dataviva/guide/views.py:183 dataviva/html/account/index.html:24
+#: dataviva/guide/views.py:183 dataviva/html/about/ask/index.html:43
+#: dataviva/html/account/index.html:24
 msgid "All"
 msgstr "Tudo"
 
@@ -176,7 +196,6 @@ msgid "Analysis"
 msgstr "Análises"
 
 #: dataviva/html/about/analysis.html:10
-#, fuzzy
 msgid ""
 "The suite of apps that compose DataViva can be used to analyze different "
 "aspects of Brazilian economy. Below, you will find a few examples to help"
@@ -226,6 +245,11 @@ msgstr "Classificações"
 #: dataviva/html/about/attrs.html:10 dataviva/html/rankings/index.html:41
 msgid "Depth"
 msgstr "Agregação"
+
+#: dataviva/html/about/terms_of_use.html:4
+#: dataviva/html/templates/about.html:155
+msgid "Terms of Use"
+msgstr "Termos de Uso"
 
 #: dataviva/html/about/testimonial.html:4
 #: dataviva/html/about/testimonial.html:8
@@ -883,23 +907,27 @@ msgstr "O que você gostaria de saber?"
 msgid "You need to login for this functionality."
 msgstr "Você precisa fazer o login para utilizar essa funcionalidade."
 
-#: dataviva/html/about/ask/ask.html:22
+#: dataviva/html/about/ask/ask.html:23 dataviva/html/about/ask/index.html:41
+msgid "Type"
+msgstr "Tipo"
+
+#: dataviva/html/about/ask/ask.html:29
 msgid "Ex. Where does the data come from?"
 msgstr "Ex. De onde vem os dados?"
 
-#: dataviva/html/about/ask/ask.html:32
+#: dataviva/html/about/ask/ask.html:39
 msgid "App"
 msgstr "Aplicativo"
 
-#: dataviva/html/about/ask/ask.html:35
+#: dataviva/html/about/ask/ask.html:42
 msgid "Tags"
 msgstr "Marcações"
 
-#: dataviva/html/about/ask/ask.html:40
+#: dataviva/html/about/ask/ask.html:47
 msgid "Submit your question to Escritorio!"
 msgstr "Envie sua pergunta para o Escritório!"
 
-#: dataviva/html/about/ask/ask.html:45
+#: dataviva/html/about/ask/ask.html:52
 msgid "Click here to login"
 msgstr "Clique aqui para acessar o site"
 
@@ -933,7 +961,7 @@ msgstr ""
 "o DataViva ajuda a criar uma base sólida para o diálogo entre o setor "
 "público e o privado, fundamentada por dados empíricos."
 
-#: dataviva/html/about/ask/index.html:12
+#: dataviva/html/about/ask/index.html:12 dataviva/html/about/ask/index.html:58
 msgid ""
 "The version of DataViva that you are viewing does not support user "
 "accounts. Click here to contact us through the main website."
@@ -941,37 +969,51 @@ msgstr ""
 "A versão do DataViva que você está vendo não suporta contas de usuário. "
 "Clique aqui para entrar em contato conosco através do site principal."
 
-#: dataviva/html/about/ask/index.html:16
+#: dataviva/html/about/ask/index.html:18
 msgid "What do you want to know?"
 msgstr "O que você gostaria de saber?"
 
-#: dataviva/html/about/ask/index.html:17
+#: dataviva/html/about/ask/index.html:19
 msgid "Search"
 msgstr "Pesquisar"
 
-#: dataviva/html/about/ask/index.html:22
+#: dataviva/html/about/ask/index.html:24
 msgid "Can´t find an answer?"
 msgstr "Caso não encontre resposta para sua dúvida,"
 
-#: dataviva/html/about/ask/index.html:22
+#: dataviva/html/about/ask/index.html:24
 msgid "Send your question to us here!"
 msgstr "envie sua pergunta aqui!"
 
-#: dataviva/html/about/ask/index.html:28
+#: dataviva/html/about/ask/index.html:30
 msgid "Find your answers"
 msgstr "Tire suas dúvidas"
 
-#: dataviva/html/about/ask/index.html:31
+#: dataviva/html/about/ask/index.html:33
 msgid "Order"
 msgstr "Ordem"
 
-#: dataviva/html/about/ask/index.html:33
+#: dataviva/html/about/ask/index.html:35
 msgid "Most Active"
 msgstr "Mais Frequente"
 
-#: dataviva/html/about/ask/index.html:35
+#: dataviva/html/about/ask/index.html:37
 msgid "Most Recent"
 msgstr "Mais Recente"
+
+#: dataviva/html/about/ask/index.html:45
+#: dataviva/html/admin/admin_questions.html:3
+#: dataviva/html/admin/admin_questions.html:12
+msgid "Question"
+msgstr "Pergunta"
+
+#: dataviva/html/about/ask/index.html:47
+msgid "Comment"
+msgstr "Comentário"
+
+#: dataviva/html/about/ask/index.html:49
+msgid "Contact"
+msgstr "Contato"
 
 #: dataviva/html/about/data/comtrade.html:3
 msgid "United Nations Commodity Trade Statistics Database"
@@ -1512,12 +1554,20 @@ msgstr "Perguntas"
 msgid "Replies"
 msgstr "Respostas"
 
+#: dataviva/html/account/index.html:33
+msgid "Preferences"
+msgstr "Preferencias"
+
+#: dataviva/html/account/index.html:71
+msgid "I agree to receive emails from dataviva.info."
+msgstr "Concordo em receber e-mails de dataviva.info."
+
 #: dataviva/html/account/login.html:4 dataviva/html/general/access.html:3
 #: dataviva/html/general/upgrade.html:3 dataviva/html/templates/site.html:22
 msgid "Login"
 msgstr "Login"
 
-#: dataviva/html/account/login.html:17
+#: dataviva/html/account/login.html:18
 msgid ""
 "Logging in is easy! All you have to do is choose one of the following "
 "accounts to link with your profile. We'll take care of the rest."
@@ -1525,7 +1575,7 @@ msgstr ""
 "Fazer o login é muito fácil! Tudo que você tem a fazer é escolher uma das"
 " contas a seguir para vincular ao seu perfil. Nós cuidaremos do resto."
 
-#: dataviva/html/account/login.html:19
+#: dataviva/html/account/login.html:20
 msgid ""
 "By having an account, you will be able to ask questions, comment "
 "in discussions, and save your favorite apps to your profile."
@@ -1533,11 +1583,7 @@ msgstr ""
 "Tendo uma conta, você será capaz de fazer perguntas, comentar "
 "em nossos fóruns, e salvar seus aplicativos favoritos em seu perfil."
 
-#: dataviva/html/account/login.html:26
-msgid "Remember Me"
-msgstr "Lembrar-me"
-
-#: dataviva/html/account/login.html:32
+#: dataviva/html/account/login.html:24
 msgid ""
 "Logging in has been disabled on this version of DataViva. Please visit "
 "the main site to log in."
@@ -1545,10 +1591,9 @@ msgstr ""
 "O login foi desativado nesta versão do DataViva. Por favor, visite o site"
 " principal para entrar."
 
-#: dataviva/html/admin/admin_questions.html:3
-#: dataviva/html/admin/admin_questions.html:12
-msgid "Question"
-msgstr "Pergunta"
+#: dataviva/html/account/login.html:36
+msgid "Remember Me"
+msgstr "Lembrar-me"
 
 #: dataviva/html/admin/admin_questions.html:13
 #: dataviva/html/admin/admin_replies.html:13
@@ -1608,6 +1653,46 @@ msgstr "Email"
 #: dataviva/html/admin/admin_users.html:15
 msgid "Role"
 msgstr "Função"
+
+#: dataviva/html/admin/mail/ask_feedback.html:22
+msgid "Dear"
+msgstr "Caro"
+
+#: dataviva/html/admin/mail/ask_feedback.html:25
+msgid "Thanks for using DataViva."
+msgstr "Obrigado por utilizar o DataViva."
+
+#: dataviva/html/admin/mail/ask_feedback.html:27
+msgid "Click here"
+msgstr "Clique aqui"
+
+#: dataviva/html/admin/mail/ask_feedback.html:27
+msgid "to see your answer in the Contact Us section."
+msgstr "para ver a publicação de sua resposta no Fale Conosco."
+
+#: dataviva/html/admin/mail/ask_feedback.html:29
+msgid ""
+"Thanks for using DataViva. We will consider your opinion in order to "
+"improve our tool."
+msgstr ""
+"Obrigado por utilizar o DataViva. Vamos considerar a sua opinião "
+"para aperfeiçoar ainda mais a ferramenta."
+
+#: dataviva/html/admin/mail/ask_feedback.html:32
+msgid "Best regards,"
+msgstr "Atenciosamente,"
+
+#: dataviva/html/admin/mail/ask_feedback.html:33
+msgid "The DataViva Team"
+msgstr "O Equipe DataViva"
+
+#: dataviva/html/admin/mail/ask_feedback.html:36
+msgid "If you don't want to receive these updates,"
+msgstr "Se você não deseja mais receber atualizações,"
+
+#: dataviva/html/admin/mail/ask_feedback.html:36
+msgid "click here."
+msgstr "clique aqui."
 
 #: dataviva/html/apps/builder.html:16
 msgid "App Builder"
@@ -2017,15 +2102,6 @@ msgstr "Obrigado por utilizar o dataviva.info."
 msgid "Thanks for using dataviva.info. We will consider your opinion in order to improve our tool."
 msgstr "Obrigado por utilizar o dataviva.info. Vamos considerar a sua opinião para aperfeiçoar ainda mais a ferramenta."
 
-msgid "Click here"
-msgstr "Clique aqui"
-
-msgid "to see your answer in the Contact Us section."
-msgstr "para ver a publicação de sua resposta no Fale Conosco."
-
-msgid "Best regards,"
-msgstr "Atenciosamente,"
-
 msgid "DataViva team"
 msgstr "Equipe DataViva"
 
@@ -2033,21 +2109,8 @@ msgstr "Equipe DataViva"
 msgid "Emails"
 msgstr "E-mails"
 
-msgid "Preferences"
-msgstr "Preferencias"
-
-msgid "I agree to receive emails from dataviva.info."
-msgstr "Concordo em receber e-mails de dataviva.info."
-
 msgid "If you don´t want to receive these updates,"
 msgstr "Se você não deseja mais receber atualizações,"
-
-msgid "click here."
-msgstr "clique aqui."
-
-#: dataviva/dataviva/account/views.py
-msgid "Preferences updated."
-msgstr "Preferencias atualizadas."
 
 #: dataviva/html/templates/about.html
 msgid "Terms of use"

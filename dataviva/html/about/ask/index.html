@@ -12,6 +12,8 @@
     {% trans %}The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website.{% endtrans %}
   </div>
   
+  {% if g.accounts %}
+  
   <div id="search_div">
     <h1>{% trans %}What do you want to know?{% endtrans %}</h1>
     {{ search_form.search(size=60, id='search', placeholder=_("Search")) }}
@@ -50,130 +52,142 @@
   
   <div id="question_feed"></div>
   
-{% endblock %}
+  {% else %}
   
-{% block js %}
+    <a href="http://www.dataviva.info/about/ask/" class="decision icon questions">
+      {% trans %}The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website.{% endtrans %}
+    </a>
+    
+  {% endif %}
+  
+{% endblock %}
 
-  <script src="/static/js/utils/utils.infinite_scroll.js"></script>
-  <script>
+{% if g.accounts %}
+  
+  {% block js %}
 
-    //
-    var order = d3.select('input[name="order"]:checked').attr("value"),
-        search_term = null,
-        json_url = "/ask/questions/?lang="+dataviva.language,
-  		type = d3.select('input[name="ask_type"]:checked').attr("value");
+    <script src="/static/js/utils/utils.infinite_scroll.js"></script>
+    <script>
+
+      //
+      var order = d3.select('input[name="order"]:checked').attr("value"),
+          search_term = null,
+          json_url = "/ask/questions/?lang="+dataviva.language,
+    		type = d3.select('input[name="ask_type"]:checked').attr("value");
   	
-    leon("#search").color(dataviva.color).size("large")
-    leon("$order").color(dataviva.color)
-    leon("$ask_type").color(dataviva.color)
+      leon("#search").color(dataviva.color).size("large")
+      leon("$order").color(dataviva.color)
+      leon("$ask_type").color(dataviva.color)
     
-    function change_order(new_order){
-      order = new_order;
-      var url = json_url + "&order=" + order;
-      if(search_term){
-        url += "&q=" + search_term;
+      function change_order(new_order){
+        order = new_order;
+        var url = json_url + "&order=" + order;
+        if(search_term){
+          url += "&q=" + search_term;
+        }
+        d3.select("#question_feed").html('')
+          .call(is.url(url).offset(0).remove(true))
       }
-      d3.select("#question_feed").html('')
-        .call(is.url(url).offset(0).remove(true))
-    }
     
-    function change_type(new_type){
-      type = new_type;
-      var url = json_url + "&type=" + type;
-      if(search_term){
-        url += "&q=" + search_term;
+      function change_type(new_type){
+        type = new_type;
+        var url = json_url + "&type=" + type;
+        if(search_term){
+          url += "&q=" + search_term;
+        }
+        d3.select("#question_feed").html('')
+          .call(is.url(url).offset(0).remove(true))
       }
-      d3.select("#question_feed").html('')
-        .call(is.url(url).offset(0).remove(true))
-    }
     
-    function item_formatter(feed, activity){
+      function item_formatter(feed, activity){
       
-      var formatDate = d3.time.format("%B %-d, %Y"),
-          parseDate = d3.time.format.iso.parse;
+        var formatDate = d3.time.format("%B %-d, %Y"),
+            parseDate = d3.time.format.iso.parse;
           
-      var questions = d3.select(feed).selectAll(".question_block")
-        .data(activity, function(d){ return d.id; })
+        var questions = d3.select(feed).selectAll(".question_block")
+          .data(activity, function(d){ return d.id; })
         
-      var question_block = questions.enter()
-        .insert("div", "div.infinite_loading")
-          .attr("class", "question_block")
+        var question_block = questions.enter()
+          .insert("div", "div.infinite_loading")
+            .attr("class", "question_block")
           
-          // .attr("href", function(d){
-          //   return "/about/contact/question/" + d.slug;
-          // })
+            // .attr("href", function(d){
+            //   return "/about/contact/question/" + d.slug;
+            // })
     
-      var question_title = question_block.append("a")
-        .attr("class", "decision short question")
-        .text(function(d){ return d.question })
-        .on(d3plus.evt.click,function(){
-          this.parentNode.toggleClass("active")
-        })
+        var question_title = question_block.append("a")
+          .attr("class", "decision short question")
+          .text(function(d){ return d.question })
+          .on(d3plus.evt.click,function(){
+            this.parentNode.toggleClass("active")
+          })
   
-      question_title.append("div")
-        .attr("class", "vote_block")
-        .text(function(d){ 
-          if (d.votes == 1) var suffix = dataviva.format.text("point")
-          else var suffix = dataviva.format.text("points")
-          return d.votes + " " + suffix
-        })
+        question_title.append("div")
+          .attr("class", "vote_block")
+          .text(function(d){ 
+            if (d.votes == 1) var suffix = dataviva.format.text("point")
+            else var suffix = dataviva.format.text("points")
+            return d.votes + " " + suffix
+          })
 
       
-      // lastly, the div that holds the data
-      var question_info = question_block.append("div")
-        .attr("class","question_info")
+        // lastly, the div that holds the data
+        var question_info = question_block.append("div")
+          .attr("class","question_info")
         
-      question_info.append("p")
-        .attr("class","question_body")
-        .text(function(d){
-          if (d.body) return d.body.replace(/<\/?[^>]+(>|$)/g, "")
-          else d3.select(this).remove()
-        })
+        question_info.append("p")
+          .attr("class","question_body")
+          .text(function(d){
+            if (d.body) return d.body.replace(/<\/?[^>]+(>|$)/g, "")
+            else d3.select(this).remove()
+          })
         
-      question_info.append("p")
-        .attr("class","question_answer")
-        .text(function(d){
-          return d.status_notes.replace(/<\/?[^>]+(>|$)/g, "")
-        })
+        question_info.append("p")
+          .attr("class","question_answer")
+          .text(function(d){
+            return d.status_notes.replace(/<\/?[^>]+(>|$)/g, "")
+          })
 
-      question_info.append("p")
-        .attr("class", "question_attr")
-        .html(function(d){ 
-          var user_link = ""
-          if (d.user.role == 0) {
-            user_link = dataviva.format.text("by") + " <a href='/account/" + d.user.nickname + "'>" + d.user.fullname + "</a> "
-          }
-          if (d.timestamp) var t = moment(d.timestamp).fromNow()
-          else var t = ""
-          if (user_link == "" && t == "") return ""
-          return dataviva.format.text("Asked") + " " + user_link + t;
-        })
+        question_info.append("p")
+          .attr("class", "question_attr")
+          .html(function(d){ 
+            var user_link = ""
+            if (d.user.role == 0) {
+              user_link = dataviva.format.text("by") + " <a href='/account/" + d.user.nickname + "'>" + d.user.fullname + "</a> "
+            }
+            if (d.timestamp) var t = moment(d.timestamp).fromNow()
+            else var t = ""
+            if (user_link == "" && t == "") return ""
+            return dataviva.format.text("Asked") + " " + user_link + t;
+          })
 
-      question_info.append("p")
-        .attr("class", "question_replies")
-        .html(function(d){ 
-          if (d.replies == 1) var suffix = dataviva.format.text("reply")
-          else var suffix = dataviva.format.text("replies")
-          return "<a href='/about/question/" + d.slug + "'>" + d.replies + " " + suffix + "</a>"
-        })
+        question_info.append("p")
+          .attr("class", "question_replies")
+          .html(function(d){ 
+            if (d.replies == 1) var suffix = dataviva.format.text("reply")
+            else var suffix = dataviva.format.text("replies")
+            return "<a href='/about/question/" + d.slug + "'>" + d.replies + " " + suffix + "</a>"
+          })
 
-    }
+      }
     
-    var is = infinite_scroll().format_items(item_formatter);
+      var is = infinite_scroll().format_items(item_formatter);
 
-    change_order(order)
-    change_type(type)
+      change_order(order)
+      change_type(type)
 
-    d3.select("#search").on("input", function(e){
+      d3.select("#search").on("input", function(e){
 
-      search_term = this.value;
+        search_term = this.value;
       
-      var url = json_url + "&q=" + search_term + "&order=" + order+ "&type=" + type;
-      d3.select("#question_feed").html('')
-        .call(is.url(url).offset(0).remove(true))
+        var url = json_url + "&q=" + search_term + "&order=" + order+ "&type=" + type;
+        d3.select("#question_feed").html('')
+          .call(is.url(url).offset(0).remove(true))
 
-    })
+      })
   
-  </script>
+    </script>
   
-{% endblock %}
+  {% endblock %}
+  
+{% endif %}

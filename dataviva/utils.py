@@ -111,6 +111,8 @@ def gzip_data(json):
     used as getter'''
 def cached_query(id, data=None):
     c = current_app.config.get('REDIS_CACHE')
+    if c is None:
+        return None
     if data is None:
         return c.get(id)
     return c.set(id, data)
@@ -178,8 +180,12 @@ class RedisSessionInterface(SessionInterface):
     def __init__(self, redis=None, prefix='session:'):
         if redis is None:
             redis = REDIS
-        self.redis = redis
-        self.prefix = prefix
+        if redis is None:
+            self.redis = None
+            self.prefix = None
+        else:
+            self.redis = redis
+            self.prefix = prefix
 
     def generate_sid(self):
         return str(uuid4())

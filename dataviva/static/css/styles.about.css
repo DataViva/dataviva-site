@@ -27,8 +27,8 @@ body.about #inner_container {
 }
 
 #about_content > .lightbox {
-  min-height: 200px;
-  padding: 20px 20px 10px 20px;
+  min-height: 180px;
+  padding: 20px 20px 16px 20px;
   position: relative;
   -webkit-transition: height 1s;
           transition: height 1s;
@@ -78,6 +78,11 @@ iframe.youtube {
 /****************/
 /* Ask Specific */
 /****************/
+
+div#ask_type_toggle_form {
+  margin: 18px 10px 10px;
+  text-align: right;
+}
 
 div#search_div {
   margin: 30px 0px 10px;
@@ -266,12 +271,7 @@ div.reply_box:last-child {
 }
 
 #terms_of_use ul{
-	margin-left:40px;
-	font-size:13px;
-	margin-bottom:20px;
-}
-
-#terms_of_use strong{
-	color:#c00;
-	font-size:13px;
+	font-size: 13px;
+	margin-bottom: 20px;
+	margin-left: 26px;
 }
