@@ -101,6 +101,10 @@ def home():
     g.page_type = "home"
     return render_template("home.html")
     
+@mod.route('close/')
+def close():
+    return render_template("general/close.html")
+    
 @mod.route('upgrade/')
 def upgrade():
     return render_template("general/upgrade.html")
