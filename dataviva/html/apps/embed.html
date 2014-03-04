@@ -29,7 +29,7 @@
 
       {% endfor %}
     </select>
-    
+
     <div id="output" class="leon button medium" onclick="builder.selector(this.id)">
       <span class="list_text">{% trans %}Change Output{% endtrans %}</span>
       <i class="fa fa-list-alt"></i>
@@ -41,7 +41,7 @@
       <span class="list_text">{{ bra.name }}</span>
       <i class="fa fa-list-alt"></i>
     </div>
-    
+
     {% if current_build.bra[1] %}
     {% set bra = current_build.bra[1] %}
     {% endif %}
@@ -50,7 +50,7 @@
       <span class="list_text">{% if bra %}{{ bra.name }}{% endif %}</span>
       <i class="fa fa-list-alt"></i>
     </div>
-    
+
     {% if current_build.isic %}
     {% set isic = current_build.isic[0] %}
     {% endif %}
@@ -86,9 +86,9 @@
       <span class="list_text">{% if wld %}{{ wld.name }}{% endif %}</span>
       <i class="fa fa-list-alt"></i>
     </div>
-    
+
     <div id="app_controls"></div>
-  
+
   </div>
 
   <div id="settings">
@@ -100,13 +100,13 @@
     <a id="help" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Show App Tutorial{% endtrans %}"><i class="fa fa-question-circle"></i></a>
     <a id="full_screen" class="leon button square alt_tooltip" onclick="window.open(window.location.href,'_blank')" alt="{% trans %}Open App in Full-Screen{% endtrans %}"><i class="fa fa-fullscreen"></i></a>
     <a id="controls_toggle" class="leon button square alt_tooltip" onclick="builder.controls()" alt="{% trans %}Show/Hide Controls{% endtrans %}"><i class="fa fa-cogs"></i></a>
-  
+
   </div>
 
   <div id="app"></div>
   <div id="ui_bottom"></div>
-  
-  <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it 
+
+  <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it
        to SVG/PDF/PNG downloadable file. -->
   <form id="svgform" action="/apps/download/" method="post">
       {{ form.hidden_tag() }}
@@ -123,18 +123,26 @@
   <script src="/static/js/libs/jfont-minified.js"></script>
   <script src="/static/js/utils/utils.key.js"></script>
   <script src="/static/js/utils/utils.selector.js"></script>
-  
+
   <script type="text/javascript">
-  
+
     var max_year = {{ g.latest_year|safe }}
-    
+
     var loading = new dataviva.ui.loading("body")
     loading.color("#ffffff")
-  
+
     loading.text("Initializing App").show()
-    
+
     d3.select("#mask").remove()
-  
+
+    // Check to see if parent window element is of same origin
+    try {
+      var same_origin = window.parent.location.host == window.location.host;
+    }
+    catch (e) {
+      var same_origin = false
+    }
+
     // App Data Formatting
     var format = {
       "occugrid": "occugrid",
@@ -146,47 +154,47 @@
       "tree_map": "default",
       "stacked": "default"
     }
-    
+
     // Get various depth levels
     var depths = {
-      "isic": dataviva.depths("isic"), 
+      "isic": dataviva.depths("isic"),
       "cbo": dataviva.depths("cbo"),
       "hs": dataviva.depths("hs"),
       "bra": dataviva.depths("bra"),
       "bra2": dataviva.depths("bra"),
       "wld": dataviva.depths("wld")
     }
-    
+
     // Create Filter Selector
     var selector = Selector()
-    
+
     dataviva.popover.create({
       "id": "popover",
       "width": 600,
       "height": "80%"
     })
-    
+
     leon("#app_select")
-    
+
     // Hide full-screen button while in full-screen
     if (parent.location.pathname.indexOf("embed") >= 0) {
       d3.select("#full_screen").remove();
     }
-    
+
     var footer = {
       "secex": dataviva.format.text("Data Provided by") + " SECEX",
       "rais": dataviva.format.text("Data Provided by") + " RAIS"
     }
-    
+
     var zerofills = {
       "secex": ["val_usd"],
       "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"]
     }
-    
+
     /*******************************/
     /* App Functions and Variables */
     /*******************************/
-    
+
     var app = {}, last_app = null
     app.build = null
     app.url = "{{ current_build.url() }}"
@@ -202,25 +210,25 @@
 
     app.embed_footer = "<a href='http://www.dataviva.info' target='_blank'>"
     app.embed_footer += dataviva.format.text("Data Provided by") + " DataViva</a>"
-    
+
     if (app.vars.builder == "false") {
       app.vars.controls = "false"
       d3.select("#controls_toggle").remove()
     }
-    
+
     // Set the max-width for the builder div and app_title
     app.title_width = window.innerWidth
     app.title_width -= d3.select("#settings").node().offsetWidth+12
     app.title_width -= d3.select("#settings").node().offsetWidth
-      
+
     app.title_height = d3.select("#settings").node().offsetHeight+10
-    
+
     app.font = null
     var fonts = ["HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"]
     fonts.forEach(function(font){
       if (checkfont(font) && !app.font) app.font = font
     })
-    
+
     app.loader_style = {
       "color": "#888",
       "font-size": "16px",
@@ -229,9 +237,9 @@
     }
 
     app.html = function(id,list) {
-      
+
       var obj = app.attrs[app.build.output][id]
-      
+
       if (app.build.app.type == "rings") {
         if (list) {
           var cats = []
@@ -262,17 +270,17 @@
 
       var priority = ["both_filters","filter2","filter1","no_filters"],
           html_return = "<div class='title'>"+dataviva.format.text("related_apps")+"</div>"
-      
+
       priority.forEach(function(p,i){
         if (app.recommendations[p]) {
-          
+
           if (["network","rings","geo_map"].indexOf(app.build.app.type) >= 0) {
             var classname = "decision short icon"
           }
           else {
             var classname = "decision icon square"
           }
-          
+
           app.recommendations[p].forEach(function(a){
             var u = a.url.replace("<"+app.build.output+">",id)
             var t = a.title.replace("<"+app.build.output+">",obj.name)
@@ -283,11 +291,11 @@
               if (obj.article_pt) {
                 if (obj.gender_pt == "m") {
                   if (article == "em") var new_article = "no"
-                  if (article == "de") var new_article = "do" 
-                  if (article == "para") var new_article = "para o" 
+                  if (article == "de") var new_article = "do"
+                  if (article == "para") var new_article = "para o"
                 }
                 else if (obj.gender_pt == "f") {
-                  if (article == "em") var new_article = "na" 
+                  if (article == "em") var new_article = "na"
                   if (article == "de") var new_article = "da"
                   if (article == "para") var new_article = "para a"
                 }
@@ -300,7 +308,7 @@
               }
               t = t.replace(word,new_article)
             }
-            
+
             html_return += "<div id='"+u+"' class='"+classname+" "+a.app.type+"' "
             html_return += "onclick='app.start(this.id)'>"
             html_return += t
@@ -309,17 +317,17 @@
         }
       })
       return html_return
-      
+
     }
-    
+
     app.tooltip = {"short": {
-    
+
       "":[],
       "basics":[],
       "calculations":[]
-         
+
       }, "long": {
-    
+
       "":[],
       "basics":[
         "wage",
@@ -328,7 +336,7 @@
         "num_emp",
         "num_est",
         "num_emp_est",
-        
+
         "val_usd",
       ],
       "calculations":[
@@ -350,8 +358,8 @@
         "rca",
         "rca_wld",
         "distance",
-        "distance_wld", 
-        "opp_gain", 
+        "distance_wld",
+        "opp_gain",
         "opp_gain_wld"
       ],
       "growth":[
@@ -363,15 +371,15 @@
         "num_emp_growth_pct_5",
         "num_emp_growth_val",
         "num_emp_growth_val_5",
-      
+
         "val_usd_growth_pct",
         "val_usd_growth_pct_5",
         "val_usd_growth_val",
         "val_usd_growth_val_5"
       ]
-          
+
         }}
-        
+
     for (g in app.tooltip.long) {
       var additionals = []
       app.tooltip.long[g].forEach(function(t){
@@ -380,7 +388,7 @@
       })
       app.tooltip.long[g] = app.tooltip.long[g].concat(additionals)
     }
-    
+
     var averages = {
           "eci": "mean",
           "pci": "mean",
@@ -411,15 +419,15 @@
           "val_usd_growth_pct_5": "mean",
           "importance": "mean"
         }
-        
+
     var additionals = {}
     for (k in averages) {
       additionals["cp_bra_0_"+k] = averages[k]
       additionals["cp_bra_1_"+k] = averages[k]
     }
-    
+
     averages = d3plus.utils.merge(averages,additionals)
-    
+
     var descs = {
       "distance": dataviva.format.text("distance_desc"),
       "distance_wld": dataviva.format.text("distance_desc"),
@@ -442,7 +450,7 @@
       "wld_diversity": dataviva.format.text("wld_diversity_desc"),
       "wld_diversity_eff": dataviva.format.text("wld_diversity_eff_desc")
     }
-    
+
     // Define global D3plus app parameters
     app.viz = d3plus.viz()
       .name_array(["name","display_id"])
@@ -459,10 +467,10 @@
       .total_var("required")
       .else_var("elsewhere")
       .info_style(app.loader_style)
-    
+
     // Start building a new app
     app.start = function(new_url,allyears) {
-      
+
       // Hide popover
       dataviva.popover.hide()
       app.allyears = allyears
@@ -477,38 +485,38 @@
       else {
         loading.text(dataviva.format.text("Building App")).show(app.create)
       }
-      
+
     }
-    
+
     app.create = function() {
 
       d3.select("#ui_bottom").selectAll("*").remove();
       d3.select("#app_controls").selectAll("*").remove();
       d3plus.tooltip.remove();
-      
+
       d3.json("/apps/embed/"+app.url+"?lang="+dataviva.language)
         .header("X-Requested-With", "XMLHttpRequest")
         .get(function(error,data){
-          
+
           if (error) {
             app.error(dataviva.format.text("Build Not Available"))
           }
           else {
-            
+
             app.star(data.starred)
             app.recommendations = data.recommendations
-            
+
             if (app.build && app.build.app.type != data.current_build.app.type) {
               builder.app(data.current_build.app.type,true)
             }
-            
+
             // Set public current build variable
             app.build = data.current_build
             last_depth = app.build.bra[0].id == "all" ? "bra_2" : "bra_8"
             leon("#app_select").color(app.build.app.color)
             builder.url()
             builder.outputs(data.all_builds)
-            
+
             // Show/hide filters depending on build requirements
             var filters = ["bra_0","bra_1","isic_0","cbo_0","hs_0","wld_0"]
             filters.forEach(function(filter){
@@ -522,7 +530,7 @@
                 d3.select("#"+filter).style("display","none")
               }
             })
-            
+
             // Remove unused global_vars
             uis = []
             app.build.ui.forEach(function(ui){
@@ -534,22 +542,22 @@
                 delete app.vars[v];
               }
             }
-          
+
             /***************************************/
             /* Data Calls and External Files Queue */
-            /***************************************/  
+            /***************************************/
 
             var q = queue()
-            
+
             if (app.data[app.build.data_url]) app.allyears = true
-            
+
             if (!app.allyears && app.build.app.type != "stacked") {
               if (!app.vars.year || app.vars.year > max_year[app.build.data_url.split("/")[0]]) {
                 app.vars.year = max_year[app.build.data_url.split("/")[0]]
               }
               app.build.data_url = app.build.data_url.replace("all",app.vars.year)
             }
-            
+
             if (!app.data[app.build.data_url]) {
               q.defer(function(u,callback){
                 d3.json(u)
@@ -569,7 +577,7 @@
                   })
               },"/"+app.build.data_url)
             }
-            
+
             if (!app.attrs[app.build.output]) {
               q.defer(function(u,callback){
                 d3.json(u)
@@ -585,7 +593,7 @@
                       if (a["val_usd"]) delete a["val_usd"]
                       if (a["num_emp"]) delete a["num_emp"]
                     })
-                    
+
                     for (id in app.attrs[app.build.output]) {
                       var obj = app.attrs[app.build.output][id]
                       depths[out].forEach(function(d){
@@ -596,19 +604,19 @@
                         }
                       })
                     }
-                    
+
                     callback(error,d)
                   })
               },"/attrs/"+app.build.output+"/"+"?lang="+dataviva.language)
             }
-            
-            if (["network","rings"].indexOf(app.build.app.type) >= 0 
+
+            if (["network","rings"].indexOf(app.build.app.type) >= 0
                 && !app.networks[app.build.output]) {
               q.defer(function(u,callback){
                 d3.json(u)
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
-                  
+
                     d.edges.forEach(function(edge){
                       if (["hs","isic"].indexOf(app.build.output) >= 0) {
                         edge.source = d.nodes[edge.source]
@@ -619,22 +627,22 @@
                         edge.target = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.target })[0]
                       }
                     })
-                  
+
                     app.networks[app.build.output] = d
                     callback(error,d)
                   })
               },"/apps/networks/"+app.build.output+"/")
             }
-            
+
             if (app.build.app.type == "geo_map") {
-              
+
               if (app.build.bra[0].id == "all") {
                 var json_id = "all"
               }
               else {
                 var json_id = app.build.bra[0].id.substr(0,2)
               }
-              
+
               if (!app.coords[json_id]) {
                 q.defer(function(u,callback){
                   d3.json(u)
@@ -645,15 +653,15 @@
                     })
                 },"/apps/coords/"+json_id+"/")
               }
-              
+
             }
-            
+
             if (app.build.app.type == "occugrid") {
-              
+
               var url = app.build.data_url.split("/")
               url[2] = "all"
               app.build.imp_url = url.join("/")
-                
+
               if (!app.data[app.build.imp_url]) {
                 q.defer(function(u,callback){
                   d3.json(u)
@@ -665,11 +673,11 @@
                   })
                 },"/"+app.build.imp_url)
               }
-              
+
               var url = app.build.data_url.split("/")
               url[3] = "all"
               app.build.else_url = url.join("/")
-                
+
               if (!app.data[app.build.else_url]) {
                 q.defer(function(u,callback){
                   d3.json(u)
@@ -681,28 +689,28 @@
                   })
                 },"/"+app.build.else_url)
               }
-              
+
             }
-            
+
             q.awaitAll(app.finish)
-            
+
           }
         });
-        
+
     }
-    
+
     app.error = function(error) {
       console.log("[dataviva] ERROR: "+error)
       dataviva.resize()
       loading.hide()
       d3.select("#app").html("").datum([]).call(app.viz.error(error))
     }
-    
+
     app.finish = function() {
-      
+
       d3.select("#ui_bottom").selectAll("*").remove()
       d3.select("#app_controls").selectAll("*").remove()
-      
+
       // Create Key
       if (app.build.app.type != "geo_map") {
         d3.select("#ui_bottom").append("div")
@@ -710,10 +718,10 @@
           .datum(app.attrs[app.build.output])
           .call(Key().type(app.build.output))
       }
-      
+
       app.build.ui.forEach(function(ui){
         if (ui.type == "years") {
-          
+
           // Determine current year
           if (!app.vars.year) {
             app.vars.year = ui.values[ui.values.length-1];
@@ -721,19 +729,19 @@
           else if (ui.values.indexOf(app.vars.year) < 0) {
             var closest = null;
             ui.values.forEach(function(y){
-              if (!closest || Math.abs(y-app.vars.year) 
+              if (!closest || Math.abs(y-app.vars.year)
                   < Math.abs(closest-app.vars.year)) {
                 closest = y;
               }
             })
             app.vars.year = closest;
           }
-          
+
           var year = d3.select("#ui_bottom").append("div")
             .attr("id","year_slider")
-            
+
           if (app.allyears) {
-            
+
             leon({
               "type": "range",
               "event": app.update,
@@ -743,34 +751,34 @@
               "parent": document.getElementById("year_slider"),
               "label": dataviva.format.text("year")
             }).color(app.build.app.color)
-            
+
           }
           else {
             var b = year.append("input")
               .attr("type","button")
               .attr("id","allyears")
-              
+
             var label = year.append("label")
               .attr("for","allyears")
-              
+
             label.append("i")
               .attr("class","fa fa-play")
               .attr("style","color:"+app.build.app.color+";")
-              
+
             label.append("div")
               .attr("style","display:inline-block;margin-left:5px;")
               .html(dataviva.format.text("Show All Years"))
-              
+
             b.node().onclick = function(){
               app.start(app.url,true)
             }
-            
+
             leon("#allyears").color(app.build.app.color)
           }
-          
+
         }
         else {
-          
+
           // Custom Titles
           if (ui.type == "value_var") {
             if (app.build.app.type == "geo_map") var title = "color_var"
@@ -780,10 +788,10 @@
             var title = "spotlight_scatter"
           }
           else var title = ui.type
-        
+
           // Set Global Vars
           if (ui.type == "value_var") {
-            if (app.build.app.type == "occugrid") var default_value = "required"      
+            if (app.build.app.type == "occugrid") var default_value = "required"
             else if (ui.values.indexOf("val_usd") >= 0) var default_value = "val_usd"
             else if (ui.values.indexOf("num_emp") >= 0) var default_value = "num_emp"
             else var default_value = ui.values[0]
@@ -817,11 +825,11 @@
           else {
             var default_value = ui.values[0]
           }
-          
+
           if((last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
             app.vars[ui.type] = default_value
           }
-        
+
           if (ui.values.length > 1 && app.vars.builder != "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs"))) {
 
             var leon_type = ui.values.length <= 4 ? "radio" : "select"
@@ -829,7 +837,7 @@
             ui.values.forEach(function(v){
               leon_data[v] = dataviva.format.text(v)
             })
-            
+
             var ui_div = d3.select("#app_controls").append("div")
               .attr("class","ui_group alt_tooltip")
               .attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
@@ -840,7 +848,7 @@
               .on(d3plus.evt.out,function(){
                 dataviva.ui.tooltip("alt_tooltip",false)
               })
-            
+
             leon({
               "type": leon_type,
               "data": leon_data,
@@ -850,37 +858,37 @@
               "parent": ui_div.node(),
               "event": app.update
             }).color(app.build.app.color)
-            
+
           }
-          
+
         }
-        
+
       })
 
       // Format Data if it hasn't already been formatted
       if (!app.data[app.build.data_url][format[app.build.app.type]]) {
         app.format_data()
       }
-      
+
       var nesting = []
       depths[app.build.output].forEach(function(d){
         nesting.push(app.build.output+"_"+d)
       })
-      
+
       app.solos = []
       app.filters = []
       builder.url()
-      
+
       var color_var = app.vars.color_var ? app.vars.color_var : "color"
-      
+
       app.title_update()
-        
+
       /************************/
       /* Gloabl App Variables */
       /************************/
       if (app.build.output == "bra" || (app.build.output == "wld" && app.vars.depth == "wld_5")) var style = "default"
       else var style = "knockout"
-      
+
       if (app.build.output == "bra") {
         app.tooltip["short"][""] = ["id_ibge"]
         app.tooltip["long"][""] = ["id_ibge"]
@@ -897,11 +905,11 @@
           app.tooltip["short"]["calculations"] = []
         }
       }
-      
+
       if (app.build.bra[0].id == "all" && app.build.app.type == "network") {
         app.vars.spotlight = false
       }
-      
+
       app.viz.type(app.build.app.viz_whiz)
         .descs(descs)
         .title(app.build.title)
@@ -926,19 +934,20 @@
         .icon_style(style)
         .yaxis_val(null)
         .tooltip_info(app.tooltip)
-        
-      if (window.parent.location.href.indexOf("dataviva.info") >= 0 ||
+
+      if (same_origin &&
+          (window.parent.location.href.indexOf("dataviva.info") >= 0 ||
           window.parent.location.href.indexOf("localhost") >= 0 ||
-          window.parent.location.href.indexOf("dataviva.mg.gov.br") >= 0) {
+          window.parent.location.href.indexOf("dataviva.mg.gov.br") >= 0)) {
         app.viz.footer(footer[app.build.dataset])
       }
       else {
         app.viz.footer(app.embed_footer)
       }
-        
+
       /******************************/
       /* Network Specific Variables */
-      /******************************/  
+      /******************************/
       if (app.build.app.type == "network") {
         if (app.build.bra[0].id == "all" && app.build.output != "hs") var av = "always_active"
         else if (app.build.output == "hs") var av = app.vars.rca_scope
@@ -948,8 +957,8 @@
           .links(app.networks[app.build.output].edges)
           .nodes(app.networks[app.build.output].nodes)
           .active_var(av)
-      } 
-  
+      }
+
       /****************************/
       /* Rings Specific Variables */
       /****************************/
@@ -963,7 +972,7 @@
           .highlight(app.build[app.build.output][0].id)
           .active_var(av)
       }
-  
+
       /******************************/
       /* Geo Map Specific Variables */
       /******************************/
@@ -998,17 +1007,17 @@
         else {
           var coords = app.coords[app.build.bra[0].id.substr(0,2)]
         }
-        
+
         app.viz.coords(coords).highlight()
-    
-      } 
-  
+
+      }
+
       /******************************/
       /* Bubbles Specific Variables */
       /******************************/
       else if (app.build.app.type == "occugrid") {
         app.viz.active_var("num_emp_est")
-      } 
+      }
 
       /******************************/
       /* Stacked Specific Variables */
@@ -1018,7 +1027,7 @@
           .xaxis_var("year")
           .xaxis_scale("linear")
           .yaxis_scale("linear")
-      } 
+      }
 
       /******************************/
       /* Scatter Specific Variables */
@@ -1034,7 +1043,7 @@
               xv = app.vars.xaxis_var
         }
         if (app.vars.yaxis_var.indexOf("pci") >= 0) yv = app.vars.yaxis_var
-        
+
         var yval = null
         if (app.build.output == "hs" && app.ecis[app.build.data_url] && yv == "pci") {
           var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
@@ -1048,13 +1057,13 @@
           .mirror_axis(false)
           .spotlight(app.vars.spotlight)
           .active_var(av)
-      } 
-  
+      }
+
       /******************************/
       /* Compare Specific Variables */
       /******************************/
       else if (app.build.app.type == "compare") {
-    
+
         app.viz
           .xaxis_var("cp_bra_1_"+app.vars.axes)
           .xaxis_scale(app.vars.scale)
@@ -1063,11 +1072,11 @@
           .spotlight(false)
           .mirror_axis(true)
           .active_var("active")
-    
+
       }
-      
+
       last_app = app.build.app.type
-      
+
       if(app.build.app.type == "scatter" && app.build.bra[0].id == "all") {
         d3.select("#app")
           .html("")
@@ -1078,15 +1087,15 @@
           .html("")
           .datum(app.data[app.build.data_url][format[app.build.app.type]])
       }
-      
+
 
       if (app.build.app.type != "rings") builder.key()
       dataviva.resize()
       loading.hide()
       app.first_load = true
-      
+
     }
-    
+
     app.sub_title = function() {
       var elems = app.build.bra,
           same = elems.length == 1 || (elems.length == 2 && elems[0].id.length == elems[0].id.length),
@@ -1095,7 +1104,7 @@
           secex = app.build.dataset == "secex",
           munics = app.build.output == "bra",
           text = null
-          
+
       if (secex && same && !mix) {
         if (munics || depth > 2 || depth == 3) {
           text = dataviva.format.text("secex_8")
@@ -1108,13 +1117,13 @@
       app.viz.descs(descs)
       return text
     }
-    
+
     app.update = function(value,type) {
-      
+
       if (type == "solo" || type == "filter") {
-        
+
         app[type+"s"] = value
-        
+
         var ids = []
         if (app.solos.length >= 1 && app.solos.length <= app.categories.length/2) {
           var prefix = dataviva.format.text("showing")+" "
@@ -1136,12 +1145,12 @@
             if (app.filters.indexOf(c) < 0) ids.push(c)
           })
         }
-        
+
         var names = []
         ids.forEach(function(id){
           names.push(app.attrs[app.build.output][id].name)
         })
-      
+
         if (names.length > 0) {
           var text = prefix
           names.forEach(function(n,i){
@@ -1154,12 +1163,12 @@
         else {
           var sub = null
         }
-        
+
         d3.select("#app").call(app.viz[type](app[type+"s"]).sub_title(sub))
-        
+
       }
       else {
-        
+
         var old_value = app.vars[type]
         app.vars[type] = value
         builder.url()
@@ -1167,21 +1176,21 @@
           builder.key()
           dataviva.resize()
         }
-        
+
         if (!app.solos.length && !app.filters.length) {
           app.viz.sub_title(app.sub_title())
         }
-        
+
         if (type == "depth" || type == "year") {
           app.title_update()
           app.viz.title(app.build.title)
         }
-        
+
         if (type == "depth" && app.build.output == "wld") {
           if (app.vars.depth == "wld_5") app.viz.icon_style("default")
           else app.viz.icon_style("knockout")
         }
-        
+
         if (type == "year" && app.build.app.type == "scatter") {
           var yval = null
           if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
@@ -1227,12 +1236,12 @@
           else {
             var yv = app.vars.yaxis_var
           }
-          
+
           var yval = null
           if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
             var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
           }
-          
+
           app.viz.yaxis_var(yv).yaxis_val(yval).total_bar(app.total())
         }
         else if (type == "value_var") {
@@ -1244,24 +1253,24 @@
         else {
           app.viz[type](value)
         }
-        
+
         d3.select("#app").call(app.viz)
       }
     }
-    
+
     app.format_data = function() {
-      
+
       var data_obj = [],
           data = app.data[app.build.data_url],
           out = app.build.output,
           attr = app.attrs[out]
-      
+
       if ("occugrid" == format[app.build.app.type]) {
-        
+
         var jobs = app.data[app.build.imp_url].raw.sort(function(a,b){
           return b.importance - a.importance
         })
-        
+
         var year_jobs = {}
         jobs.forEach(function(j){
           if (j.importance >= 0.2) {
@@ -1269,7 +1278,7 @@
             else year_jobs[j.year].push(j)
           }
         })
-        
+
         for (year in year_jobs) {
           year_jobs[year].forEach(function(job){
             var d = data.raw.filter(function(x){
@@ -1282,39 +1291,39 @@
               d.always_active = 1
 
               d.required = Math.ceil(d.required)
-            
+
               if (!d.wage) d.wage = 0
               if (!d.num_emp) d.num_emp = 0
               if (!d.num_est) d.num_est = 0
               if (!d.wage_avg) d.wage_avg = 0
-              
+
               d.num_emp_est = Math.ceil(d.num_emp_est)
-              
+
               d.wage_avg_bra = job.wage_avg
-          
+
               var else_data = app.data[app.build.else_url].raw.filter(function(e){
                 return e.cbo_id == d.cbo_id && e.year == d.year
               })[0]
-          
+
               d.active = d.num_emp/d.required >= 1 ? true : false
-          
+
               if (!else_data) d.elsewhere = 0
               else d.elsewhere = else_data.num_emp-d.num_emp
-    
+
               d[out+"_display"] = dataviva.displayID(d[out+"_id"],out)
               // d.icon = dataviva.icon(d[out+"_id"],out)
 
               get_keys(d)
-              
+
               data_obj.push(d)
-              
+
             }
           })
         }
-    
+
       }
       else if ("compare" == format[app.build.app.type]) {
-        
+
         d3.nest()
           .key(function(d){return d.year})
           .key(function(d){return d[out+"_id"]})
@@ -1342,39 +1351,39 @@
               })
 
               get_keys(d)
-              
+
               data_obj.push(d)
-              
+
             }
           })
           .entries(data.raw)
       }
       else {
-        
+
         data.raw.forEach(function(d){
-          
+
           var obj = d
-          
+
           obj[out+"_display"] = dataviva.displayID(obj[out+"_id"],out)
           d.always_active = 1
-          
+
           // obj.icon = dataviva.icon(obj[out+"_id"],out)
-          
+
           obj.active = obj.rca >=1 ? true : false;
-          
+
           obj.bra_rca = obj.rca >=1 ? true : false;
           obj.wld_rca = obj.rca_wld >=1 ? true : false;
 
           get_keys(obj)
-          
+
           data_obj.push(obj)
-          
+
         })
-        
+
       }
-      
+
       data[format[app.build.app.type]] = data_obj;
-      
+
       function get_keys(d) {
         if (!data.categories) data.categories = {}
         if (!data.categories[d.year]) data.categories[d.year] = []
@@ -1383,9 +1392,9 @@
         if (data.categories[d.year].indexOf(parent) < 0) data.categories[d.year].push(parent);
         if (data.categories.all.indexOf(parent) < 0) data.categories.all.push(parent);
       }
-      
+
     }
-    
+
     app.total = function() {
 
       var exclusions = [
@@ -1401,9 +1410,9 @@
             undefined
           ],
           val = app.vars.value_var
-        
+
       if (exclusions.indexOf(val) >= 0) return false;
-      
+
       var prefix = dataviva.format.text(val)
       if (app.build.app.type == "scatter") {
         var prefix = dataviva.format.text(app.build.output+"_plural")
@@ -1418,13 +1427,13 @@
         }
       }
       prefix += ": "
-      
+
       return {"prefix": prefix, "suffix": ""};
-        
+
     }
-    
+
     app.star = function(status) {
-      
+
       function update_star(s) {
         d3.select("#starred > i")
           .attr("id","status_"+s)
@@ -1432,10 +1441,10 @@
             return s == 1 ? "fa fa-star" : "fa fa-star-o";
           })
       }
-      
+
       var id = d3.select("#starred > i").attr("id")
       var current_status = parseInt(id.split("_")[1],10)
-      
+
       if ([-1,0,1].indexOf(status) >= 0) {
         update_star(status)
       }
@@ -1443,14 +1452,14 @@
         login();
       }
       else {
-        
+
         d3.select("#starred > i")
           .attr("class",function(){
             return this.className + " fa fa-spin"
           })
-        
+
         var url = window.location.pathname.replace("embed","star")
-          
+
         d3.json(url)
           .header("Content-type","application/x-www-form-urlencoded")
           .post("title="+app.build.title, function(error,data) {
@@ -1461,25 +1470,25 @@
             else if (data.success) update_star(data.success)
           })
       }
-        
+
     }
-    
+
     app.download = function(obj) {
-      
+
       var type = obj.id,
           title = app.build.app.name+"-"+app.build.title,
           columns = []
-          
+
       for (cat in app.tooltip.long) {
         app.tooltip.long[cat].forEach(function(k){
           columns.push(k)
         })
       }
-          
+
       title = title.removeAccents().split(" ").join("_")
-      
+
       var form = document.getElementById("svgform");
-      
+
       if(type == "csv"){
         form['data'].value = d3.csv.formatRows(app.viz.csv_columns(columns).csv_data());
       }
@@ -1499,13 +1508,13 @@
       form['output_format'].value = type;
       form['title'].value = title;
       form.submit();
-      
+
       dataviva.popover.hide("#popover")
-      
+
     }
-    
+
     app.title_update = function() {
-      
+
       if (app.build.output == "bra") {
         var words = app.build.title.split(" ")
         if (app.vars.depth) {
@@ -1537,25 +1546,25 @@
       }
       if (window.frameElement) {
         var message = {"id": window.frameElement.id, "title": app.build.title, "app": app.build.app.type}
-        if (window.parent.update_titles) window.parent.update_titles(message)
+        if (same_origin && window.parent.update_titles) window.parent.update_titles(message)
       }
     }
-    
+
     /*********************/
     /* Builder Functions */
     /*********************/
-    
+
     var builder = {}
     builder.outputs = function(builds) {
-      
+
       app.all_builds = builds
-      
+
       app.all_builds.forEach(function(build){
         d3.select("#output_"+build.app.type).remove()
       })
-      
+
       app.all_builds.forEach(function(build){
-        
+
         if (d3.select("#output_"+build.app.type).empty()) {
           dataviva.popover.create({
             "id": "output_"+build.app.type,
@@ -1566,9 +1575,9 @@
           d3.select("#output_"+build.app.type)
             .append("div").attr("class","scrolling_content")
         }
-        
+
         var box = d3.select("#output_"+build.app.type).select("div.scrolling_content")
-        
+
         if (box.select("."+build.dataset).empty()) {
           box.append("div")
             .attr("class",build.dataset+" output_list")
@@ -1576,10 +1585,10 @@
               .attr("class","title")
               .text(dataviva.format.text(build.dataset))
         }
-        
+
         if (build.url == app.build.url) var c = "decision"
         else var c = "help"
-        
+
         box.select("."+build.dataset).append("div")
           .attr("id",build.url)
           .attr("class","output "+c+" icon "+build.app.type)
@@ -1587,25 +1596,25 @@
           .on(d3plus.evt.click,function(){
             app.start(this.id)
           })
-        
+
       })
-      
+
       if (d3.selectAll("#output_"+app.build.app.type+" .output")[0].length == 1) {
         d3.select("#output").style("display","none")
       }
       else {
         d3.select("#output").style("display","inline-block")
       }
-      
+
     }
-    
+
     builder.filter = function(obj,id,static) {
-      
+
       var type = id.split("_")[0],
           index = id.split("_")[1],
           old_obj = app.build[type][index]
           new_name = obj.name ? obj.name : obj["name_"+dataviva.language]
-          
+
       if (type == "bra") {
         var url_index = 2
       }
@@ -1615,7 +1624,7 @@
       else {
         var url_index = 4
       }
-      
+
       app.build[type][index] = obj
       var url = app.url.split("/")
       var ids = url[url_index].split("_")
@@ -1627,50 +1636,50 @@
       }
       url[url_index] = ids.join("_")
       url = url.join("/")
-      
+
       var button = d3.select("#"+id)
-      
+
       if (type == "bra" && !obj.distance) obj.distance = 0
 
       if (!obj.icon) obj.icon = dataviva.icon(obj.id,type)
-      
+
       button.select(".icon")
        .style("background-image","url("+obj.icon+")")
-       
+
       if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && obj.id.length != 5)) {
         button.select(".icon").style("background-color",obj.color)
       }
       else {
         button.select(".icon").style("background-color","rgba(0,0,0,0)")
       }
-        
+
       if (obj.distance > 0 && type == "bra") new_name += " "+obj.distance+"km"
 
       button.select(".list_text").text(new_name)
-      
+
       if (!static) {
         app.start(url)
       }
-       
+
     }
-    
+
     builder.app = function(app_name,static) {
-      
+
       document.getElementById("app_select").value = app_name
-      
+
       var options = d3.select("#output_"+app_name).selectAll(".output")
-      
+
       if (options[0].length > 1) {
         d3.select("#output").style("display","inline-block")
       }
       else {
         d3.select("#output").style("display","none")
       }
-      
+
       if (!static) {
-      
+
         var match = null, backup = null, backup2 = null
-      
+
         options
           .each(function(d){
             var a = app.url.split("/")
@@ -1683,27 +1692,27 @@
             s = s.join("/")
             if (a == s) match = this.id
           })
-          
+
         if (!match) {
           if (backup) match = backup
           else if (backup2) match = backup2
           else match = options[0][0].id
         }
-        
+
         app.start(match)
       }
-      
+
     }
-    
+
     builder.url = function() {
-      
+
       var doc_title = app.build.app.name+" : "+app.build.title
       dataviva.url("/apps/embed/"+app.url,app.vars,doc_title)
-        
+
     }
-    
+
     builder.key = function(cats) {
-      
+
       if ("geo_map" != app.build.app.type) {
         if (!cats) {
           if (app.build.app.type != "network") {
@@ -1730,28 +1739,28 @@
         else {
           app.categories = cats
         }
-        
+
         if (!app.categories) app.categories = []
-        
+
         if (app.categories.length <= 1) {
           d3.select("div#key").style("display","none")
         }
         else {
           d3.select("div#key").style("display","inline-block")
-      
+
           d3.selectAll("div.key_icon_container")
             .style("display",function(){
               var id = this.id.slice(3)
               return app.categories.indexOf(id) < 0 ? "none" : "inline-block";
             })
         }
-        
+
       }
-        
+
     }
-    
+
     builder.controls = function() {
-      
+
       if (app.vars.controls == "false") {
         app.vars.controls = "true"
       } else {
@@ -1759,22 +1768,22 @@
       }
       builder.url()
       dataviva.resize()
-      
+
     }
-    
+
     builder.selector = function(id) {
-      
+
       if (id == "output") {
-        
+
         dataviva.popover.show("#output_"+app.build.app.type)
-        
+
       }
       else if (id == "help") {
-        
+
         var pid = "#help_"+app.build.app.type
-        
+
         if (d3.select(pid).empty()) {
-          
+
           dataviva.popover.create({
             "id": "help_"+app.build.app.type,
             "width": "80%",
@@ -1782,23 +1791,23 @@
             "color": app.build.app.color,
             "close": true
           })
-          
+
           d3.select(pid).append("iframe")
             .attr("width","100%")
             .attr("height","100%")
             .attr("src","/apps/info/"+app.build.app.type+"/")
-              
+
         }
-        
+
         dataviva.popover.show(pid)
-        
+
       }
       else if (id == "share") {
-        
+
         var pid = "#share_info"
-        
+
         if (d3.select(pid).empty()) {
-          
+
           dataviva.popover.create({
             "id": "share_info",
             "width": "40%",
@@ -1806,14 +1815,14 @@
             "color": app.build.app.color,
             "close": true
           })
-          
-          if(window.location != window.parent.location){
+
+          if(same_origin && window.location != window.parent.location){
             var url = encodeURIComponent(window.parent.location.pathname + window.parent.location.search)
           }
           else {
             var url = encodeURIComponent(window.location.pathname + window.location.search)
           }
-          
+
           d3.json("/apps/shorten/")
             .header("Content-type","application/x-www-form-urlencoded")
             .post("url="+url, function(error,data) {
@@ -1821,10 +1830,10 @@
                 alert(data.error)
               }
               else{
-                
+
                 d3.select(pid).append("h3")
                   .text(dataviva.format.text("share_url"))
-                
+
                 // make input box with share link
                 var share_url = window.location.origin + "/" + data.slug + "/";
                 d3.select(pid).append("input")
@@ -1835,10 +1844,10 @@
                     this.focus();
                     this.select();
                   })
-                
+
                 d3.select(pid).append("h3")
                   .text(dataviva.format.text("embed_url"))
-              
+
                 // make input box with embed iframe
                 d3.select(pid).append("input")
                   .attr("type", "text")
@@ -1848,10 +1857,10 @@
                     this.focus();
                     this.select();
                   })
-                
+
                 d3.select(pid).append("h3")
                   .text(dataviva.format.text("social_media"))
-            
+
                 // Twitter link
                 var share_url = window.location.origin + "/" + data.slug
                 d3.select(pid).append("a")
@@ -1863,7 +1872,7 @@
                   .attr("title", function(){
                     return dataviva.language == "pt" ? "Tweetar" : "Tweet";
                   })
-                
+
                 // Facebook link
                 var description = "{{ _('DataViva is opening up data for the entire formal sector of the Brazilian economy') }}"
                 description += " "
@@ -1875,7 +1884,7 @@
                   .attr("onclick", "return !window.open(this.href, 'Facebook', 'width=640,height=300')")
                   .attr("id", "Facebook")
                   .attr("title", "Facebook")
-                
+
                 // Google link
                 d3.select(pid).append("a")
                   .attr("href", function(){
@@ -1887,21 +1896,21 @@
                   .attr("onclick", "return !window.open(this.href, 'Google+', 'width=640,height=300')")
                   .attr("id", "Google")
                   .attr("title", "Google+")
-                
+
               }
             })
-              
+
         }
-        
+
         dataviva.popover.show(pid)
-        
+
       }
       else {
 
         var s = id.split("_")
         var type = s[0]
         if (s[1]) var index = s[1]
-      
+
         if (type == "file") {
           var init = "all",
               callback = app.download,
@@ -1910,38 +1919,38 @@
         else {
           var init = app.build[type][index].id,
               callback = builder.filter
-    
+
           if (type == "bra" && app.build.bra[index].distance) {
             var dist = app.build.bra[index].distance
           }
           else {
             var dist = 0
           }
-        
+
         }
-        
+
         selector
           .callback(callback)
           .distance(dist)
           .initial_value(init)
           .type(id)
-    
+
         d3.select("#popover")
           .call(selector);
-      
+
         // Show popover
         dataviva.popover.show("#popover");
-        
+
       }
-        
+
     }
-    
+
     /*****************/
     /* Page Resizing */
     /*****************/
-    
+
     dataviva.resize = function() {
-      
+
       var children = d3.select("#ui_bottom").node().childNodes,
           min_width = 300;
 
@@ -1956,36 +1965,36 @@
         d3.select("#settings").style("display","block")
         d3.select("#builder").style("display","block")
       }
-      
+
       // Set the max-width for the builder div and app_title
       d3.select("#builder").style("max-width",window.innerWidth+"px")
       app.title_width = window.innerWidth
       app.title_width -= (d3.select("#settings").node().offsetWidth*2)
-        
+
       d3.selectAll("#builder > br").remove()
       d3.selectAll("#app_controls > br").remove()
-      
+
       var total_width = 0,
           settings_width = d3.select("#settings").node().offsetWidth,
           builder_width = d3.select("#app_controls").node().offsetLeft,
           avail_width = window.innerWidth - settings_width - builder_width
-          
+
       d3.selectAll("#app_controls > div")
         .each(function(){
           total_width += this.offsetWidth
         })
-        
+
       if (total_width > avail_width) {
         avail_width = window.innerWidth
         firstbreak = false
         var br = document.createElement("br")
         document.getElementById("builder").insertBefore(br,document.getElementById("app_controls"))
       }
-      
+
       if (total_width > avail_width) {
-        
+
         var w = 0
-        
+
         d3.selectAll("#app_controls > div")
           .each(function(){
             if (w > avail_width/2) {
@@ -1996,7 +2005,7 @@
             w += this.offsetWidth
           })
       }
-  
+
       if (app.vars.controls == "true") {
         app.title_width = window.innerWidth
         d3.select("#controls_toggle").attr("class","leon button square active")
@@ -2028,7 +2037,7 @@
           d3.select("#year_slider").style("display","none")
         }
       }
-      
+
       app.height = window.innerHeight
       app.height -= (d3.select("#ui_bottom").node().offsetHeight+buffer)
       if (app.vars.controls != "false") app.height -= d3.select("#builder").node().offsetHeight
@@ -2046,7 +2055,7 @@
         .style("top",function(d){
           if (app.vars.controls != "false") var u = 1
           else var u = 0
-          
+
           return (((d3.select("#builder").node().offsetHeight)*u)+buffer)+"px"
         })
         .call(app.viz
@@ -2055,7 +2064,7 @@
             .title_width(app.title_width)
             .title_height(app.title_height)
           )
-        
+
       if (!app.first_load) {
         d3.select("#app")
           .style("-webkit-transition","top 0.6s, height 0.6s")
@@ -2064,14 +2073,14 @@
           .style("-webkit-transition","top 0.6s")
           .style("transition","top 0.6s")
       }
-      
+
     }
-    
+
     /************************/
     /* Initialize First App */
     /************************/
    app.start()
-   
+
    if (Modernizr.history) {
      window.onpopstate = function() {
        if (app.first_load) {
@@ -2081,7 +2090,7 @@
        }
      }
    }
-  
+
   </script>
 
 {% endblock %}
