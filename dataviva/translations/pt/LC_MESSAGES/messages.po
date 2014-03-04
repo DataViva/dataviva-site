@@ -1577,10 +1577,10 @@ msgstr ""
 
 #: dataviva/html/account/login.html:20
 msgid ""
-"By having an account, you will be able to ask Sabrina questions, comment "
+"By having an account, you will be able to ask questions, comment "
 "in discussions, and save your favorite apps to your profile."
 msgstr ""
-"Tendo uma conta, você será capaz de fazer perguntas à Sabrina, comentar "
+"Tendo uma conta, você será capaz de fazer perguntas, comentar "
 "em nossos fóruns, e salvar seus aplicativos favoritos em seu perfil."
 
 #: dataviva/html/account/login.html:24
@@ -2092,3 +2092,29 @@ msgstr "Sair"
 msgid "a country"
 msgstr "um país"
 
+#: dataviva/html/admin/mail/ask_feedback.html
+msgid "Dear user,"
+msgstr "Caro usuário,"
+
+msgid "Thanks for using dataviva.info."
+msgstr "Obrigado por utilizar o dataviva.info."
+
+msgid "Thanks for using dataviva.info. We will consider your opinion in order to improve our tool."
+msgstr "Obrigado por utilizar o dataviva.info. Vamos considerar a sua opinião para aperfeiçoar ainda mais a ferramenta."
+
+msgid "DataViva team"
+msgstr "Equipe DataViva"
+
+#: dataviva/html/account/index.html
+msgid "Emails"
+msgstr "E-mails"
+
+msgid "If you don´t want to receive these updates,"
+msgstr "Se você não deseja mais receber atualizações,"
+
+#: dataviva/html/templates/about.html
+msgid "Terms of use"
+msgstr "Termos de uso"
+
+msgid "Terms of use."
+msgstr "Conheça os termos de uso e regras de participação."
