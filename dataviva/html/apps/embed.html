@@ -1544,7 +1544,7 @@
           app.build.title = app.build.title.replace(/\(.*?\)/, "("+app.vars.year+")")
         }
       }
-      if (window.frameElement) {
+      if (same_origin && window.frameElement) {
         var message = {"id": window.frameElement.id, "title": app.build.title, "app": app.build.app.type}
         if (same_origin && window.parent.update_titles) window.parent.update_titles(message)
       }
