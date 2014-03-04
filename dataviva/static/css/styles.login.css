@@ -20,6 +20,18 @@ div#denied_text {
   margin: 12px 0px;
   text-align: left;
 }
+
+a.terms {
+  color: #af1f24;
+  display: inline-block;
+  font-weight: bold;
+  margin: 0px auto 10px;
+}
+
+a.terms:hover {
+  color: #333;
+}
+
 a.login_button {
   background-position: center center;
   background-repeat: no-repeat;

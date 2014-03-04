@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-02-18 15:56-0500\n"
+"POT-Creation-Date: 2014-03-04 10:13-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,19 +16,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: dataviva/about/views.py:72
+#: dataviva/about/views.py:73
 msgid "You need to be logged in to ask questions."
 msgstr ""
 
-#: dataviva/about/views.py:96
+#: dataviva/about/views.py:97
 msgid "Your message was sent successfully. Thank you for your contribution, it will be helpful to other users and is essential to improving our tool! Our team will contact you by e-mail shortly."
 msgstr ""
 
-#: dataviva/about/views.py:116
+#: dataviva/about/views.py:117
 msgid "You need to be signed in to reply to questions."
 msgstr ""
 
-#: dataviva/about/views.py:139
+#: dataviva/about/views.py:140
 msgid "Reply submitted."
 msgstr ""
 
@@ -213,7 +213,7 @@ msgstr ""
 msgid "Depth"
 msgstr ""
 
-#: dataviva/html/about/terms_of_use.html:4
+#: dataviva/html/about/terms_of_use.html:4 dataviva/html/account/login.html:22
 #: dataviva/html/templates/about.html:155
 msgid "Terms of Use"
 msgstr ""
@@ -803,14 +803,14 @@ msgid "Logging in is easy! All you have to do is choose one of the following acc
 msgstr ""
 
 #: dataviva/html/account/login.html:20
-msgid "By having an account, you will be able to ask Sabrina questions, comment in discussions, and save your favorite apps to your profile."
+msgid "By having an account, you will be able to ask questions, comment in discussions, and save your favorite apps to your profile."
 msgstr ""
 
-#: dataviva/html/account/login.html:24
+#: dataviva/html/account/login.html:25
 msgid "Logging in has been disabled on this version of DataViva. Please visit the main site to log in."
 msgstr ""
 
-#: dataviva/html/account/login.html:36
+#: dataviva/html/account/login.html:37
 msgid "Remember Me"
 msgstr ""
 
