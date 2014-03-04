@@ -148,27 +148,17 @@ def after_login(**user_fields):
         user = User(id = 1)
         
     if user is None:
-            
-        # if request.remote_addr != SITE_MIRROR.split(":")[1][2:]:
-        #     form_json = user_fields
-        #     try:
-        #         opener = urllib2.urlopen("{0}account/complete_login/".format(SITE_MIRROR),urllib.urlencode(form_json),5)
-        #     except:
-        #         flash(gettext("The server is not responding. Please try again later."))
-        #         return render_template('account/complete_login.html')
-        
+    
         nickname = user_fields["nickname"] if "nickname" in user_fields else None
         if nickname is None or nickname == "":
             nickname = user_fields["email"].split('@')[0]
         nickname = User.make_unique_nickname(nickname)
         user_fields["nickname"] = nickname
+        user_fields["agree_mailer"] = 1
         user = User(**user_fields)
         db.session.add(user)
         db.session.commit()
         
-    # if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
-    #     return jsonify({"success": 1})
-    # else:
     remember_me = False
     if 'remember_me' in session:
         remember_me = session['remember_me']
@@ -192,9 +182,6 @@ def get_twitter_token():
     session instead.
     """
     return session.get('twitter_token')
-    # user = g.user
-    # if user is not None:
-    #     return user.oauth_token, user.oauth_secret
 
 @mod.route('/twoauth-authorized/')
 @twitter.authorized_handler
@@ -212,7 +199,7 @@ def twitter_authorized(resp):
     the application submitted.  Note that Twitter itself does not really
     redirect back unless the user clicks on the application name.
     """
-    # session['oauth_token'] = (resp['oauth_token'], '')
+    
     session['twitter_token'] = (
         resp['oauth_token'],
         resp['oauth_token_secret']
@@ -246,7 +233,6 @@ def facebook_authorized(resp):
             request.args['error_description']
         )
     session['facebook_token'] = (resp['access_token'], '')
-    # me = facebook.get('/me/')
     response = facebook.get('/me/?fields=picture,username,name,id,location,locale,email').data
     
     email = response["email"] if "email" in response else None
@@ -272,13 +258,10 @@ def get_facebook_oauth_token():
 @mod.route('/google_authorized/')
 @google.authorized_handler
 def google_authorized(resp):
-    # raise Exception(session['google_access_token'])
+    
     access_token = resp['access_token']
     session['google_token'] = access_token, ''
     
-    # headers = {'Authorization': 'OAuth '+access_token}
-    # req = Request('https://www.googleapis.com/plus/v1/people/me',
-    #               None, headers)
     req = Request('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+access_token)
     try:
         res = urlopen(req)
