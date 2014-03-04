@@ -1853,7 +1853,7 @@
                   .text(dataviva.format.text("social_media"))
             
                 // Twitter link
-                var share_url = "http://dataviva.info/"+data.slug
+                var share_url = window.location.origin + "/" + data.slug
                 d3.select(pid).append("a")
                   .attr("href", "https://twitter.com/share?url="+share_url+"&text="+app.viz.title()+"&hashtags=dataviva")
                   .attr("class", "share_button")
@@ -1866,7 +1866,7 @@
                 
                 // Facebook link
                 d3.select(pid).append("a")
-                  .attr("href", "http://www.facebook.com/sharer.php?s=100&p[title]=DataViva&p[summary]="+app.viz.title()+"&p[url]=http://dataviva.info/" + data.slug + "/&p[images][0]=http://dataviva.info/static/img/icons/DataViva.png")
+                  .attr("href", "http://www.facebook.com/dialog/feed?app_id={{facebook_id}}&name=DataViva&caption="+app.viz.title()+"&link="+share_url+"/&picture="+window.location.origin+"/static/img/icons/DataViva.png&redirect_uri="+share_url+"/")
                   .attr("class", "share_button")
                   .attr("target", "_blank")
                   .attr("onclick", "return !window.open(this.href, 'Facebook', 'width=640,height=300')")

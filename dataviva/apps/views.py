@@ -17,7 +17,7 @@ from dataviva.rais.views import rais_ybi
 from dataviva.utils import gzip_data, cached_query
 
 import json, urllib2, urllib
-# from config import SITE_MIRROR
+from config import FACEBOOK_OAUTH_ID
 
 mod = Blueprint('apps', __name__, url_prefix='/apps')
 
@@ -136,7 +136,8 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             starred = starred,
             form = DownloadForm(),
             current_build = current_build,
-            global_vars = json.dumps(global_vars)))
+            global_vars = json.dumps(global_vars),
+            facebook_id = FACEBOOK_OAUTH_ID))
             
     ret.headers.add('Last-Modified', datetime.now())
     ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
