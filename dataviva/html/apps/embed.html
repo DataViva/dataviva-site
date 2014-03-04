@@ -177,7 +177,7 @@
     leon("#app_select")
 
     // Hide full-screen button while in full-screen
-    if (parent.location.pathname.indexOf("embed") >= 0) {
+    if (same_origin && parent.location.pathname.indexOf("embed") >= 0) {
       d3.select("#full_screen").remove();
     }
 
