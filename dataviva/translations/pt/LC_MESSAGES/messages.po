@@ -2122,3 +2122,6 @@ msgstr "um país"
 #~ msgid "Terms of use."
 #~ msgstr "Conheça os termos de uso e regras de participação."
 
+msgid "terms_of_use"
+msgstr "termos_de_uso"
+
