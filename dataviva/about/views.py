@@ -157,4 +157,4 @@ def answer(slug):
         
 @mod.route('/terms_of_use', methods=['GET'])
 def terms_of_use():
-    return render_template("about/terms_of_use.html", page='terms_of_use')
+    return render_template("about/" + gettext("terms_of_use") + ".html", page='terms_of_use')
