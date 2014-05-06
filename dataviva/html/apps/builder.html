@@ -18,7 +18,7 @@
 {% block body %}
 
   <div class="lightbox">
-    <iframe src="/413" id="bulder_iframe" width="600px" height="400px"></iframe>
+    <iframe id="bulder_iframe" width="600px" height="400px"></iframe>
   </div>
 
 {% endblock %}
@@ -32,8 +32,8 @@
 
     if (height < 500) height = 500
 
-    // d3.select("iframe")
-      // .attr("src",window.location.href.replace("builder","embed"))
+    d3.select("iframe")
+      .attr("src",window.location.href.replace("builder","embed"))
 
     dataviva.resize = function() {
 
