@@ -20,11 +20,14 @@ body.home #intro {
 }
 
 body.home #carousel {
+  background-image: url("/static/img/home/map.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
   display: block;
   height: 267px;
   position: absolute;
   text-align: left;
-  width: 530px;
+  width: 475px;
 }
 
 body.home #carousel .app {
@@ -70,7 +73,7 @@ body.home .page {
   border-width: 0px;
   color: #fff;
   display: block;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: lighter;
   height: 66px;
   line-height: 18px;

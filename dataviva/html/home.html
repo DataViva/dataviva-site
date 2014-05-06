@@ -23,33 +23,33 @@
     </div>
     <div class="pages"></div>
   </div>
-  
+
   <div class="bottom_section">
-    
+
     <div class="bottom_title">
       <h1>{% trans %}Also browse{% endtrans %}:</h1>
     </div>
-  
+
     <a class="decision icon square apps" href="/apps/">
       <h1>{% trans %}Apps{% endtrans %}</h1>
       <p>{% trans %}Explore the Brazilian economy through over 100 million visualizations.{% endtrans %}</p>
     </a>
-  
+
     <a class="decision icon square profiles" href="/profiles/">
       <h1>{% trans %}Profiles{% endtrans %}</h1>
       <p>{% trans %}Quickly learn about the exports, occupations, and industries of each Brazilian state and economic sector.{% endtrans %}</p>
     </a>
-  
+
     <a class="decision icon square guide" href="/guide/">
       <h1>{% trans %}Guide{% endtrans %}</h1>
       <p>{% trans %}Answer strategic questions about economic opportunities of states and industries.{% endtrans %}</p>
     </a>
-  
+
     <a class="decision icon square rankings" href="/rankings/">
       <h1>{% trans %}Rankings{% endtrans %}</h1>
       <p>{% trans %}Compare locations, industries and occupations based on economic output, diversity, and salaries.{% endtrans %}</p>
     </a>
-  
+
   </div>
 
 {% endblock %}
@@ -59,48 +59,57 @@
 <script>
 
   var carousel = [
-  {"en": "What can DataViva do?", "color": "#129cc0",
-  "pt": "O que o DataViva pode fazer?",
-  "image": "video", "url": "{% if g.locale == 'pt' %}//player.vimeo.com/video/80812605{% else %}//player.vimeo.com/video/80812604{% endif %}?portrait=0&badge=0&byline=0&color=af1f24&title=0", "id": 1},
-  {"en": "Did you know that Minas Gerais is the largest state exporter to China?", "color": "#516043",
-  "pt": "Você sabia que Minas Gerais é o estado que mais exporta para China?",
-  "image": "factory", "url": "/profiles/wld/aschn/?app=1", "id": 2},
-  {"en": "The goal of DataViva.", "color": "#1d372c", "color": "#243e31",
-  "pt": "O objetivo do DataViva.",
-  "image": "video", "url": "https://www.youtube.com/embed/Xp0azMCmzdA?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}", "id": 3},
-  {"en": "What are the export opportunities for Minas Gerais?", "color": "#c9532f",
-  "pt": "Quais são as oportunidades de exportação de Minas Gerais?",
-  "image": "sparks", "url": "/guide/bra/mg/opportunity/hs/", "id": 4}
-
+    {
+      "en": "How was DataViva created?",
+      "pt": "Como DataViva foi criado?",
+      "color": "#af1f24",
+      "image": "video",
+      "url": "https://www.youtube.com/embed/3Cf-ZyrHwAE?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}"
+    },
+    {
+      "en": "Where in Brazil is employment of Early Childhood Teachers growing?",
+      "pt": "Em que lugar do Brasil a contratação dos Professores de Nível Médio na Educação Infantil teve o maior crescimento?",
+      "color": "#2a2948",
+      "image": "students",
+      "url": "/guide/cbo/3311/growth/all/"
+    },
+    {
+      "en": "What can DataViva do?",
+      "pt": "O que o DataViva pode fazer?",
+      "color": "#129cc0",
+      "image": "video",
+      "url": "{% if g.locale == 'pt' %}//player.vimeo.com/video/80812605{% else %}//player.vimeo.com/video/80812604{% endif %}?portrait=0&badge=0&byline=0&color=af1f24&title=0"
+    },
+    {
+      "en": "What are the export opportunities for Minas Gerais?",
+      "pt": "Quais são as oportunidades de exportação de Minas Gerais?",
+      "color": "#c9532f",
+      "image": "sparks",
+      "url": "/guide/bra/mg/opportunity/hs/"
+    }
   ]
-  
-  // {"en": "Did you know that Minas Gerais employs more Vocational Middle School Teachers than any other state in Brazil?", "color": "#2a2948",
-  // "pt": "Você sabia que Minas Gerais é o estado brasileiro que emprega o maior número de Professores de Nível Médio no Ensino Profissionalizante?",
-  // "image": "students", "url": "/profiles/cbo/3313/", "id": 4},
-  // {"en": "Did you know that Minas Gerais employs more than 24 thousand doctors?",
-  // "pt": "Você sabia que Minas Gerais tem mais de 24 mil médicos?", "color": "#8e708a",
-  // "image": "doctor", "url": "/profiles/cbo/2251/", "id": 6}
-    
+
+
   var app = 1, stopped = false, changing = false
-  
+
   d3.select("#carousel .decision")
     .on(d3plus.evt.click,function(){
       window.location = carousel[app-1].url
     })
-  
+
   var apps = d3.select("#carousel").selectAll(".app")
     .data(carousel)
-    
+
   apps.enter().append("div")
     .attr("class","app")
-    .attr("id",function(d){return "app_"+d.id})
+    .attr("id",function(d,i){return "app_"+(i+1)})
     .style("background-image",function(d){return d.image != "video" ? "url('/static/img/home/"+d.image+".jpg')" : "none"})
-    .style("opacity",function(d){
-      if (d.id == app) return 1
+    .style("opacity",function(d,i){
+      if (i+1 == app) return 1
       else return 0
     })
-    .style("display",function(d){
-      if (d.id == app) return "block"
+    .style("display",function(d,i){
+      if (i+1 == app) return "block"
       else return "none"
     })
     // .style("background-color",function(d){return d.color})
@@ -121,31 +130,31 @@
     .on(d3plus.evt.over,function(d){
       stopped = true
     })
-  
+
   var pages = d3.select(".pages").selectAll(".page")
     .data(carousel)
-    
+
   pages.enter().append("div")
     .attr("class","page")
-    .attr("id",function(d){return "page_"+d.id})
-    .each(function(d){
+    .attr("id",function(d,i){return "page_"+(i+1)})
+    .each(function(d,i){
       d3.select(this).append("div").attr("class","page_helper")
       d3.select(this).append("div")
         .attr("class","page_text")
         .html(function(d){return d[dataviva.language]})
-      if (d.id == app) {
+      if (i+1 == app) {
         this.toggleClass("active")
         this.style.borderColor = carousel[app-1].color
         this.style.backgroundColor = carousel[app-1].color
         d3.select(".darkbox").node().style.color = carousel[app-1].color
       }
     })
-    
-  pages.on(d3plus.evt.click,function(d){
+
+  pages.on(d3plus.evt.click,function(d,i){
     stopped = true
-    show_app(d.id)
+    show_app(i+1)
   })
-    
+
   function change_app() {
     setTimeout(function(){
       if (!stopped) {
@@ -154,9 +163,9 @@
       }
     },7000)
   }
-  
+
   change_app()
-  
+
   function show_app(a) {
     if (a != app && !changing) {
       changing = true
