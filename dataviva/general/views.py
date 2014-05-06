@@ -154,28 +154,34 @@ def page_not_found(e="413"):
 
     error = str(e).split(":")[0]
     error_code = int(error)
+    
+    request_info = {
+        "Date": datetime.today().ctime(),
+        "IP": request.remote_addr,
+        "Method": request.method,
+        "URL": request.url,
+        "Data": request.data
+    }
+    
+    headers = list(request.headers)
 
     if ERROR_EMAIL and error_code != 404:
+        admins = User.query.filter(User.role == 1).filter(User.email != "").filter(User.agree_mailer == 1).all()
+        emails = [str(getattr(a,"email")) for a in admins]
+        
+        if len(emails) > 0:
+            subject = "DataViva Error: "+error
 
-      admins = User.query.filter(User.role == 1).filter(User.email != "").filter(User.agree_mailer == 1).all()
-
-      emails = [str(getattr(a,"email")) for a in admins]
-
-      if len(emails) > 0:
-
-        subject = "DataViva Error: "+error
-
-        if e == "413":
-          url = None
-          error_text = "413: Request entity too large"
-        else:
-          url = request.path
-          error_text = str(e)
-
-        send_mail(subject, emails,
-          render_template('admin/mail/error.html', title=subject,
-            error=error_text, url=url))
-
+            if e == "413":
+                request_info["URL"] = ''
+                error_text = "413: Request entity too large"
+            else:
+                error_text = str(e)
+            
+            send_mail(subject, emails,
+                render_template('admin/mail/error.html', title=subject,
+                error=error_text, request_info=request_info, headers=headers))
+            
     g.page_type = "error"
 
     sabrina = {}
