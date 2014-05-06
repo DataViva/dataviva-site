@@ -18,7 +18,7 @@ from config import STATIC_URL, ACCOUNTS
 # ---------------------------
 @app.before_request
 def before_request():
-    
+
     g.accounts = True if ACCOUNTS in ["True","true","Yes","yes","Y","y",1] else False
     g.color = "#af1f24"
     g.static_url = STATIC_URL
@@ -26,14 +26,14 @@ def before_request():
     g.latest_year = {}
     for dataset in __latest_year__:
         g.latest_year[dataset] = __latest_year__[dataset]
-            
+
     # Save variable in session so we can determine if this is the user's
     # first time on the site
     if 'first_time' in session:
         session['first_time'] = False
     else:
         session['first_time'] = True
-    
+
     # Check if the user is logged in, if so give the global object
     # a reference to the user from DB
     g.user = current_user
@@ -41,7 +41,7 @@ def before_request():
         g.user.last_seen = datetime.utcnow()
         db.session.add(g.user)
         db.session.commit()
-    
+
     # Set the locale to either 'pt' or 'en' on the global object
     if request.endpoint != 'static':
         g.locale = get_locale()
@@ -80,7 +80,7 @@ def get_locale(lang=None):
             new_lang = session['locale']
         else:
             session['locale'] = new_lang
-    
+
     return new_lang
 
 @babel.timezoneselector
@@ -90,21 +90,21 @@ def get_timezone():
         return user.timezone
 
 ###############################
-# General views 
+# General views
 # ---------------------------
 @app.after_request
 def after_request(response):
     return response
-    
+
 @mod.route('/', methods=['GET', 'POST'])
 def home():
     g.page_type = "home"
     return render_template("home.html")
-    
+
 @mod.route('close/')
 def close():
     return render_template("general/close.html")
-    
+
 @mod.route('upgrade/')
 def upgrade():
     return render_template("general/upgrade.html")
@@ -116,7 +116,7 @@ def access():
     return redirect(url_for('general.home'))
 
 ###############################
-# Set language views 
+# Set language views
 # ---------------------------
 @mod.route('set_lang/<lang>/')
 def set_lang(lang):
@@ -134,20 +134,28 @@ def redirect_short_url(slug):
     short.clicks += 1
     db.session.add(short)
     db.session.commit()
-    
+
     return redirect(short.long_url)
 
 ###############################
 # 404 view
 # ---------------------------
+@mod.route('413/',defaults={"e": "413"})
+@app.errorhandler(403)
 @app.errorhandler(404)
-def page_not_found(e):
-    g.page_type = "error404"
+@app.errorhandler(410)
+@app.errorhandler(413)
+@app.errorhandler(500)
+def page_not_found(e=None):
+
+    error = str(e).split(":")[0]
+
+    g.page_type = "error"
 
     sabrina = {}
     sabrina["outfit"] = "lab"
     sabrina["face"] = "scared"
     sabrina["hat"] = None
-    
-    return render_template('general/404.html', 
-        error = e, sabrina = sabrina), 404
+
+    return render_template('general/error.html',
+        error = error, sabrina = sabrina), error
