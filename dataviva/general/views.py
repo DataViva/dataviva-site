@@ -140,15 +140,16 @@ def redirect_short_url(slug):
 ###############################
 # 404 view
 # ---------------------------
-@mod.route('413/',defaults={"e": "413"})
+@mod.route('413/')
 @app.errorhandler(403)
 @app.errorhandler(404)
 @app.errorhandler(410)
 @app.errorhandler(413)
 @app.errorhandler(500)
-def page_not_found(e=None):
+def page_not_found(e="413"):
 
     error = str(e).split(":")[0]
+    error_code = int(error)
 
     g.page_type = "error"
 
@@ -158,4 +159,4 @@ def page_not_found(e=None):
     sabrina["hat"] = None
 
     return render_template('general/error.html',
-        error = error, sabrina = sabrina), error
+        error = error, sabrina = sabrina), error_code
