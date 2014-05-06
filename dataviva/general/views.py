@@ -155,7 +155,7 @@ def page_not_found(e="413"):
     error = str(e).split(":")[0]
     error_code = int(error)
 
-    if ERROR_EMAIL:
+    if ERROR_EMAIL and error_code != 404:
 
       admins = User.query.filter(User.role == 1).filter(User.email != "").filter(User.agree_mailer == 1).all()
 
