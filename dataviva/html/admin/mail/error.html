@@ -1,0 +1,13 @@
+{% extends "templates/mail.html" %}
+
+{% block mail_body %}
+
+  <center>
+    <b>{{ error }}</b>
+    {% if url %}
+      <br><br>
+      <a href="http://www.dataviva.info{{url}}">"{{ url }}"</a>
+    {% endif %}
+  </center>
+
+{% endblock %}

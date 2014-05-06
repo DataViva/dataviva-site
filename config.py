@@ -27,18 +27,19 @@ SECRET_KEY = get_env_variable("DATAVIVA_SECRET_KEY", "default-dataviva.mg-secr3t
 
 ''' Default debugging to True '''
 DEBUG = True
+ERROR_EMAIL = False
 SQLALCHEMY_ECHO = True
 
 ''' Whether or not to allow User Account Activity '''
 ACCOUNTS = get_env_variable("DATAVIVA_ACCOUNTS",False)
 
-''' 
+'''
     Details for connecting to the database, credentials set as environment
     variables.
 '''
 SQLALCHEMY_DATABASE_URI = "mysql://{0}:{1}@{2}/{3}".format(
-    get_env_variable("DATAVIVA_DB_USER", "root"), 
-    get_env_variable("DATAVIVA_DB_PW", ""), 
+    get_env_variable("DATAVIVA_DB_USER", "root"),
+    get_env_variable("DATAVIVA_DB_PW", ""),
     get_env_variable("DATAVIVA_DB_HOST", "localhost"),
     get_env_variable("DATAVIVA_DB_NAME", "dataminas"))
 
@@ -50,6 +51,7 @@ if "DATAVIVA_DB_SOCKET" in os.environ:
 if "DATAVIVA_PRODUCTION" in os.environ:
     SQLALCHEMY_ECHO = False
     DEBUG = False
+    ERROR_EMAIL = True
 
 ''' Available languages '''
 LANGUAGES = {
@@ -62,17 +64,17 @@ WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
 STATIC_URL = get_env_variable("DATAVIVA_STATIC_URL")
 
-''' 
+'''
     Setup redis caching connection to be used throughout the site. Credentials
     are set in their respective env vars.
 '''
-REDIS = Redis(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"), 
-         port=get_env_variable("DATAVIVA_REDIS_PORT", 6379), 
+REDIS = Redis(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"),
+         port=get_env_variable("DATAVIVA_REDIS_PORT", 6379),
          password=get_env_variable("DATAVIVA_REDIS_PW", None))
-REDIS_CACHE = RedisCache(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"), 
-         port=get_env_variable("DATAVIVA_REDIS_PORT", 6379), 
+REDIS_CACHE = RedisCache(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"),
+         port=get_env_variable("DATAVIVA_REDIS_PORT", 6379),
          password=get_env_variable("DATAVIVA_REDIS_PW", None), default_timeout=2591999)
-         
+
 try:
     REDIS.client_list()
 except ConnectionError:

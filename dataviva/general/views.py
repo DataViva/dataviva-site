@@ -10,8 +10,12 @@ mod = Blueprint('general', __name__, url_prefix='/')
 from dataviva import app, db, babel, __latest_year__
 from dataviva.general.forms import AccessForm
 from dataviva.general.models import Short
+from dataviva.account.models import User
 
-from config import STATIC_URL, ACCOUNTS
+from config import STATIC_URL, ACCOUNTS, ERROR_EMAIL
+
+#utils
+from ..utils import send_mail
 
 ###############################
 # General functions for ALL views
@@ -140,15 +144,37 @@ def redirect_short_url(slug):
 ###############################
 # 404 view
 # ---------------------------
-@mod.route('413/',defaults={"e": "413"})
+@mod.route('413/')
 @app.errorhandler(403)
 @app.errorhandler(404)
 @app.errorhandler(410)
 @app.errorhandler(413)
 @app.errorhandler(500)
-def page_not_found(e=None):
+def page_not_found(e="413"):
 
     error = str(e).split(":")[0]
+    error_code = int(error)
+
+    if ERROR_EMAIL:
+
+      admins = User.query.filter(User.role == 1).filter(User.email != "").filter(User.agree_mailer == 1).all()
+
+      emails = [str(getattr(a,"email")) for a in admins]
+
+      if len(emails) > 0:
+
+        subject = "DataViva Error: "+error
+
+        if e == "413":
+          url = None
+          error_text = "413: Request entity too large"
+        else:
+          url = request.path
+          error_text = str(e)
+
+        send_mail(subject, emails,
+          render_template('admin/mail/error.html', title=subject,
+            error=error_text, url=url))
 
     g.page_type = "error"
 
@@ -158,4 +184,4 @@ def page_not_found(e=None):
     sabrina["hat"] = None
 
     return render_template('general/error.html',
-        error = error, sabrina = sabrina), error
+        error = error, sabrina = sabrina), error_code
