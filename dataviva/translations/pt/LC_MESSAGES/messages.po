@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-03-04 10:13-0500\n"
+"POT-Creation-Date: 2014-05-06 11:58-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -40,11 +40,15 @@ msgstr "Você precisa fazer o login para responder perguntas."
 msgid "Reply submitted."
 msgstr "Resposta enviada."
 
+#: dataviva/about/views.py:160
+msgid "terms_of_use"
+msgstr "termos_de_uso"
+
 #: dataviva/account/views.py:112 dataviva/account/views.py:124
 msgid "Preferences updated."
 msgstr "Preferencias atualizadas."
 
-#: dataviva/admin/views.py:33
+#: dataviva/admin/views.py:33 dataviva/html/general/error.html:20
 msgid "You dont have permission to view this page."
 msgstr "Você não tem permissão para ver essa página."
 
@@ -56,7 +60,7 @@ msgstr "Resposta DataViva"
 msgid "This question has now been updated."
 msgstr "Esta pergunta foi atualizada."
 
-#: dataviva/apps/views.py:155
+#: dataviva/apps/views.py:156
 msgid "You need to be logged in to star apps."
 msgstr "Você precisa fazer o login para iniciar aplicativos."
 
@@ -126,7 +130,8 @@ msgstr "Tudo"
 msgid "Visualizing the Economy of Minas Gerais and Brazil"
 msgstr "Visualizando a Economia de Minas Gerais e do Brasil"
 
-#: dataviva/html/home.html:13
+#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1877
+#: dataviva/html/templates/base.html:7
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
 " economy"
@@ -134,7 +139,8 @@ msgstr ""
 "O DataViva está disponibilizando dados sobre todo o setor formal da "
 "economia"
 
-#: dataviva/html/home.html:15
+#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1879
+#: dataviva/html/templates/base.html:7
 msgid "through more than 100 million interactive visualizations."
 msgstr "brasileira em mais de 100 milhões de visualizações interativas."
 
@@ -246,6 +252,7 @@ msgstr "Classificações"
 msgid "Depth"
 msgstr "Agregação"
 
+#: dataviva/html/about/termos_de_uso.html:4
 #: dataviva/html/about/terms_of_use.html:4 dataviva/html/account/login.html:22
 #: dataviva/html/templates/about.html:155
 msgid "Terms of Use"
@@ -1770,10 +1777,6 @@ msgstr "Atualmente mostrando"
 msgid "Build"
 msgstr "Construir"
 
-#: dataviva/html/general/404.html:18
-msgid "Oh no! The page you've requested does not exist."
-msgstr "Oh, não! A página que você solicitou não existe."
-
 #: dataviva/html/general/access.html:142
 #, python-format
 msgid ""
@@ -1787,6 +1790,18 @@ msgstr ""
 #: dataviva/html/general/access.html:142
 msgid "Note"
 msgstr "Nota"
+
+#: dataviva/html/general/error.html:22
+msgid "There was a problem serving the requested page."
+msgstr "Há um problema com a página que você está tentando acessar e ela não pode ser exibida."
+
+#: dataviva/html/general/error.html:24
+msgid "Oh no! Your request is too large to be processed."
+msgstr "Oh, não! Sua requisição é muito grande para ser processada."
+
+#: dataviva/html/general/error.html:26
+msgid "Oh no! The page you've requested does not exist."
+msgstr "Oopss! A página que você solicitou não existe."
 
 #: dataviva/html/general/select.html:3
 msgid "Choose a Classification"
@@ -2091,37 +2106,3 @@ msgstr "Sair"
 #: dataviva/profiles/views.py:47
 msgid "a country"
 msgstr "um país"
-
-#~ msgid "Dear user,"
-#~ msgstr "Caro usuário,"
-
-#~ msgid "Thanks for using dataviva.info."
-#~ msgstr "Obrigado por utilizar o dataviva.info."
-
-#~ msgid ""
-#~ "Thanks for using dataviva.info. We will"
-#~ " consider your opinion in order to"
-#~ " improve our tool."
-#~ msgstr ""
-#~ "Obrigado por utilizar o dataviva.info. "
-#~ "Vamos considerar a sua opinião para "
-#~ "aperfeiçoar ainda mais a ferramenta."
-
-#~ msgid "DataViva team"
-#~ msgstr "Equipe DataViva"
-
-#~ msgid "Emails"
-#~ msgstr "E-mails"
-
-#~ msgid "If you don´t want to receive these updates,"
-#~ msgstr "Se você não deseja mais receber atualizações,"
-
-#~ msgid "Terms of use"
-#~ msgstr "Termos de uso"
-
-#~ msgid "Terms of use."
-#~ msgstr "Conheça os termos de uso e regras de participação."
-
-msgid "terms_of_use"
-msgstr "termos_de_uso"
-

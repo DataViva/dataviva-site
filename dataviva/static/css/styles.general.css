@@ -97,15 +97,27 @@ p {
 /* Error Styling */
 /*****************/
 
-body.error404 #container {
-  background-image: url('/static/img/bgs/error404.png');
+body.error #container {
+  background-image: url('/static/img/bgs/error.png');
   background-position: center 140px;
   background-repeat: no-repeat;
   background-size: 60%;
 }
 
-body.error404 #fullscreen {
+body.error #fullscreen {
   background-image: none !important;
+}
+
+div#error_code {
+  color: #ccc;
+  font-family: "HelveticaNeue-Thin", "Helvetica Neue Thin", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 38px;
+  font-weight: 200;
+  opacity: 0.75;
+  position: absolute;
+  text-align: center;
+  top: 283px;
+  width: 80px;
 }
 
 /*****************/
