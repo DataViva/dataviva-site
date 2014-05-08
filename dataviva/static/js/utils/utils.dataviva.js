@@ -326,6 +326,7 @@ dataviva.format.text = function(text,name,l) {
       "growth": {"en": "Growth", "pt": "Crescimento"},
       "calculations": {"en": "Strategic Indicators", "pt": "Indicadores Estrat\u00e9gicos"},
       "Data Provided by": {"en": "Data Provided by", "pt": "Dados Fornecidos por"},
+      "View more visualizations on the full DataViva.info website.": {"en": "View more visualizations on the full DataViva.info website.", "pt": "Veja mais visualiza\u00e7\u00f5es na vers\u00e3o completa do site DataViva.info."},
       "related_apps": {"en": "Related Apps", "pt": "Apps Relacionados"},
       "other_apps": {"en": "Other Apps", "pt": "Outros Apps"},
       "Show All Years": {"en": "Show All Years", "pt": "Mostrar Todos os Anos"},
