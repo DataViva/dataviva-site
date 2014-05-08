@@ -5,30 +5,30 @@
 
 {% block about_content %}
   <p>{% trans %}DataViva is a Data Visualization Engine created by the Strategic Priorities Office of the government of Minas Gerais. DataViva makes available official data about exports, industries, locations and occupations for the entirety of Brazil through eight apps and more than 100 million possible visualizations.{% endtrans %}</p>
-  
+
   <p>{% trans %}Through its visualizations, DataViva provides information that is valuable for export promotion, investment decision and policy design. Moreover, by providing facts about the economic development of industries, locations and their respective opportunities, DataViva is helping create a solid data-driven foundation for conversations between the public and private sectors.{% endtrans %}</p>
-  
+
   <div style="display:none;opacity:0;">
     {% trans %}The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website.{% endtrans %}
   </div>
-  
+
   {% if g.accounts %}
-  
+
   <div id="search_div">
     <h1>{% trans %}What do you want to know?{% endtrans %}</h1>
     {{ search_form.search(size=60, id='search', placeholder=_("Search")) }}
     <div id="sabrina_head"></div>
   </div>
-  
+
   <a {% if g.user.is_authenticated() %}href="/about/ask/"{%else%}onclick="login()"{%endif%} class="decision icon short questions">
     {% trans %}Can´t find an answer?{% endtrans %} {% trans %}Send your question to us here!{% endtrans %}
   </a>
-  
+
   </div><br><br><div class="lightbox">
-  
+
   <div id="list_title">
     <h2>{% trans %}Find your answers{% endtrans %}</h2>
-  
+
     <div id="order_toggle">
       <legend id="order">{% trans %}Order{% endtrans %}</legend>
       <input type="radio" name="order" value="votes" id="votes" onclick="change_order(this.value)" checked="checked">
@@ -36,8 +36,8 @@
       <input type="radio" name="order" value="newest" id="newest" onclick="change_order(this.value)">
       <label for="newest">{% trans %}Most Recent{% endtrans %}</label>
     </div>
-    
-    <div id="ask_type_toggle">     
+
+    <div id="ask_type_toggle">
       <legend id="ask_type">{% trans %}Type{% endtrans %}</legend>
       <input type="radio" name="ask_type" value="all" id="all" onclick="change_type(this.value)" checked="checked">
       <label for="all">{% trans %}All{% endtrans %}</label>
@@ -49,21 +49,21 @@
       <label for="contact">{% trans %}Contact{% endtrans %}</label>
     </div>
   </div>
-  
+
   <div id="question_feed"></div>
-  
+
   {% else %}
-  
+
     <a href="http://www.dataviva.info/about/ask/" class="decision icon questions">
       {% trans %}The version of DataViva that you are viewing does not support user accounts. Click here to contact us through the main website.{% endtrans %}
     </a>
-    
+
   {% endif %}
-  
+
 {% endblock %}
 
 {% if g.accounts %}
-  
+
   {% block js %}
 
     <script src="/static/js/utils/utils.infinite_scroll.js"></script>
@@ -74,11 +74,11 @@
           search_term = null,
           json_url = "/ask/questions/?lang="+dataviva.language,
     		type = d3.select('input[name="ask_type"]:checked').attr("value");
-  	
+
       leon("#search").color(dataviva.color).size("large")
       leon("$order").color(dataviva.color)
       leon("$ask_type").color(dataviva.color)
-    
+
       function change_order(new_order){
         order = new_order;
         var url = json_url + "&order=" + order;
@@ -88,7 +88,7 @@
         d3.select("#question_feed").html('')
           .call(is.url(url).offset(0).remove(true))
       }
-    
+
       function change_type(new_type){
         type = new_type;
         var url = json_url + "&type=" + type;
@@ -98,59 +98,59 @@
         d3.select("#question_feed").html('')
           .call(is.url(url).offset(0).remove(true))
       }
-    
+
       function item_formatter(feed, activity){
-      
+
         var formatDate = d3.time.format("%B %-d, %Y"),
             parseDate = d3.time.format.iso.parse;
-          
+
         var questions = d3.select(feed).selectAll(".question_block")
           .data(activity, function(d){ return d.id; })
-        
+
         var question_block = questions.enter()
           .insert("div", "div.infinite_loading")
             .attr("class", "question_block")
-          
+
             // .attr("href", function(d){
             //   return "/about/contact/question/" + d.slug;
             // })
-    
+
         var question_title = question_block.append("a")
           .attr("class", "decision short question")
           .text(function(d){ return d.question })
           .on(d3plus.evt.click,function(){
             this.parentNode.toggleClass("active")
           })
-  
+
         question_title.append("div")
           .attr("class", "vote_block")
-          .text(function(d){ 
+          .text(function(d){
             if (d.votes == 1) var suffix = dataviva.format.text("point")
             else var suffix = dataviva.format.text("points")
             return d.votes + " " + suffix
           })
 
-      
+
         // lastly, the div that holds the data
         var question_info = question_block.append("div")
           .attr("class","question_info")
-        
+
         question_info.append("p")
           .attr("class","question_body")
-          .text(function(d){
+          .html(function(d){
             if (d.body) return d.body.replace(/<\/?[^>]+(>|$)/g, "")
             else d3.select(this).remove()
           })
-        
+
         question_info.append("p")
           .attr("class","question_answer")
-          .text(function(d){
+          .html(function(d){
             return d.status_notes.replace(/<\/?[^>]+(>|$)/g, "")
           })
 
         question_info.append("p")
           .attr("class", "question_attr")
-          .html(function(d){ 
+          .html(function(d){
             var user_link = ""
             if (d.user.role == 0) {
               user_link = dataviva.format.text("by") + " <a href='/account/" + d.user.nickname + "'>" + d.user.fullname + "</a> "
@@ -163,14 +163,14 @@
 
         question_info.append("p")
           .attr("class", "question_replies")
-          .html(function(d){ 
+          .html(function(d){
             if (d.replies == 1) var suffix = dataviva.format.text("reply")
             else var suffix = dataviva.format.text("replies")
             return "<a href='/about/question/" + d.slug + "'>" + d.replies + " " + suffix + "</a>"
           })
 
       }
-    
+
       var is = infinite_scroll().format_items(item_formatter);
 
       change_order(order)
@@ -179,15 +179,15 @@
       d3.select("#search").on("input", function(e){
 
         search_term = this.value;
-      
+
         var url = json_url + "&q=" + search_term + "&order=" + order+ "&type=" + type;
         d3.select("#question_feed").html('')
           .call(is.url(url).offset(0).remove(true))
 
       })
-  
+
     </script>
-  
+
   {% endblock %}
-  
+
 {% endif %}
