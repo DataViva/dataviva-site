@@ -345,13 +345,14 @@ dataviva.format.text = function(text,name,l) {
       "secex_2": {"en": "Based on State Production", "pt": "Baseado nos Estados Produtores"},
       "secex_8": {"en": "Based on the Exporting Municipality", "pt": "Baseado nos Municípios Exportadores"},
 
-      // Viz-Whiz Text
+      // D3plus Text
       "Click for More Info": {"en": "Click for more data and related apps.", "pt": "Clique para dados adicionais e aplicativos relacionados."},
       "Click to Zoom": {"en": "Click to Zoom", "pt": "Clique para Ampliar"},
       "filter": {"en": "Hide Group", "pt": "Ocultar Grupo"},
       "solo": {"en": "Solo Group", "pt": "S\u00f3 este Grupo"},
       "reset": {"en": "Click to Reset all Filters", "pt": "Clique para Eliminar todos os Filtros"},
       "Primary Connections": {"en": "Primary Connections", "pt": "Conex\u00f5es Prim\u00e1rias"},
+      "No Data Available": {"en": "No Data Available", "pt": "N\u00e3o h\u00e1 dados dispon\u00edveis"},
 
       // Ask Sabrina
       "Asked": {"en": "Asked", "pt": "Perguntado"},
