@@ -48,6 +48,7 @@
                     "name"
                 ]
     var DATA_COLUMNS = [
+
                     "population",
 
                     "wage",
@@ -400,6 +401,7 @@
     document.onscroll = check_headers
 
     function check_headers() {
+
       var pos = window.pageYOffset
       if (pos > 0 && !header_shadow && table_height > window.innerHeight) {
         d3.selectAll("#dt_query thead").attr("class","shadow")
@@ -412,11 +414,39 @@
 
       x_scroll = window.pageXOffset
 
+      if ( d3.select("div#sticky").node().offsetWidth > window.innerWidth/2 ) {
+
+        if ( table_width > window.innerWidth ) {
+          d3.select("div#sticky").attr("class","")
+        }
+
+        d3.select("div#sticky")
+          .style("position","absolute")
+          .select("table.header thead")
+            .style("left", -(x_scroll)+"px")
+
+        d3.select("#dt_query #sticky table.data")
+          .style("top", "0px")
+
+      }
+      else {
+
+        if ( table_width > window.innerWidth ) {
+          d3.select("div#sticky").attr("class","shadow")
+        }
+
+        d3.select("div#sticky")
+          .style("position","fixed")
+          .select("table.header thead")
+            .style("left","0px")
+
+        d3.select("#dt_query #sticky table.data")
+          .style("top", -(window.pageYOffset)+"px")
+
+      }
+
       d3.select("#dt_query #data table.header thead")
         .style("left", -(x_scroll-sticky_width)+"px")
-
-      d3.select("#dt_query #sticky table.data")
-        .style("top", -(window.pageYOffset)+"px")
 
     }
 
@@ -432,6 +462,7 @@
           if (table_width <= window.innerWidth) return sticky_width - 1 + "px"
           return sticky_width + "px"
         })
+      check_headers()
     }
     dataviva.resize_snap = true
 

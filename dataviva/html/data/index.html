@@ -6,13 +6,13 @@
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.data.css" />
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
-  
+
 {% endblock %}
 
 {% block body %}
 
 <div id="filter_selects" class="lightbox">
-    
+
   <div id="data_toggle">
     <!--<legend id="dataset">{% trans %}Data{% endtrans %}</legend>-->
     {% for dataset in datasets %}
@@ -20,7 +20,7 @@
       <input type="radio" name="dataset" value="{{dataset}}" id="{{dataset}}" onclick="change_dataset(this.value)" {% if datasets[dataset]["active"] %}checked="checked"{% endif %}>
     {% endfor %}
   </div>
-  
+
   {% for dataset in datasets %}
     <div class="years_dropdown filter {{dataset}}_yearfilter">
       <select id="{{dataset}}_yearselect" class="year_filter" onchange="change_year(this.value,this.id)">
@@ -31,10 +31,10 @@
       </select>
     </div>
   {% endfor %}
-  
+
   <a id="file" class="leon button square alt_tooltip" onclick="download_csv()" alt="{% trans %}Save as CSV{% endtrans %}"><i class="fa fa-save"></i></a>
   <a id="settings" class="leon button square alt_tooltip" onclick="settings()" alt="{% trans %}Edit Columns{% endtrans %}"><i class="fa fa-columns"></i></a>
-  
+
   {% for filter in filter_order %}
     <div id="{{filter}}_filter" class="filter{% for dataset in datasets %}{% if filter in datasets[dataset]['filters'] %} {{dataset}}_filter{% endif %}{% endfor %}{% if filters[filter]["active"] %} active{% endif %}">
       <a id="{{filter}}_toggle" class="help short filter_button" onclick="toggle_filter(this.id,this.parentNode)">
@@ -42,10 +42,10 @@
         {{ format(filter+"_plural").render(filter+"_plural",g.locale) }}
       </a>
       <div class="filter_box">
-      
+
         {% for obj in filters[filter]["items"] %}
           <div id="id_{{ obj.item.id }}{% if obj.kms > 0 %}distance{{obj.kms}}{% endif %}" class="filter_item">
-            <span class="list_icon" title="{{ obj.item.id }}" 
+            <span class="list_icon" title="{{ obj.item.id }}"
               style="background-image: url('{{obj.item.icon()}}');
               {% if (filter != 'wld' and filter != 'bra') or (filter == 'wld' and obj.item.id|length == 2) %} background-color:{{obj.item.color}};{% endif %}"></span>
             <span class="filter_title" style="margin-left: 1px;">
@@ -70,7 +70,7 @@
             {% endif %}
           </div>
         {% endfor %}
-      
+
         <div class="filler"{% if filters[filter]["items"] %} style="display:none;"{% endif %}>
           <label for="{{filter}}_filler">{% trans %}Currently showing{% endtrans %}</label>
           <select id="{{filter}}_filler" class="depth_select" onchange="change_depth(this.value,'depths_{{filter}}_show')">
@@ -81,18 +81,18 @@
             {% endfor %}
           </select>
         </div>
-      
+
         <div class="add_filter leon button medium" onclick="add_filter('{{filter}}')">
           <i class="fa fa-plus"></i>
           {{ format(filter+"_add").render(filter+"_add",g.locale) }}
         </div>
-      
+
       </div>
     </div>
   {% endfor %}
-  
+
   <div id="build" onclick="update_table(true)" class="decision short">{% trans %}Build{% endtrans %}</div>
-    
+
 </div>
 
 <div class="lightbox data_table">
@@ -109,14 +109,14 @@
     d3.select(".data_table").style("overflow","auto")
       .style("-webkit-overflow-scrolling","touch")
   }
-  
+
   leon("$dataset").color(dataviva.color)
   leon(".depth_select").color(dataviva.color)
   leon(".year_filter").color(dataviva.color)
-  
+
   d3.select("#filter_selects")
     .style("max-height",window.innerHeight-179+"px")
-  
+
   var datasets = {{ datasets|safe }}
   var filters = {{ filters_json|safe }}
   var args = {}, first = true
@@ -130,7 +130,7 @@
     }
     return ret
   }
-  
+
   // Download the data
   function download_csv() {
     var u = document.getElementById("table_frame").contentWindow.is.url()
@@ -151,7 +151,7 @@
     dataset = value
   }
   change_dataset(dataset)
-  
+
   // Create Filter Selector
   dataviva.popover.create({
     "id": "filter_popover",
@@ -162,40 +162,40 @@
 
   var selector = Selector()
     .callback(add_filter);
-  
+
   function add_filter(obj){
-    
+
     if (typeof obj === "string") {
       d3.select("#filter_popover").call(selector.type(obj));
       dataviva.popover.show("#filter_popover");
     }
     else {
-      
+
       dataviva.popover.hide();
-      
+
       var type = selector.type()
       var cont = d3.select("#"+type+"_filter .filter_box")
       var add_btn = "#"+type+"_filter .add_filter"
-      
+
       // remove filler text
       cont.select(".filler").style("display","none")
-    
+
       if (!cont.select("#id_"+obj.id).node()) {
-        
+
         var new_id = obj.distance ? obj.id+"distance"+obj.distance : obj.id
 
         var div = cont
           .insert("div", add_btn)
           .attr("id", "id_"+new_id)
           .attr("class", "filter_item")
-          
+
         div.append("span")
           .attr("class","list_icon")
           .style("background-image", "url('"+obj.icon+"')")
           .style("background-color", function(){
             return (type != "wld" && type != "bra") || (type == "wld" && obj.id.length == 2) ? obj.color : "rgba(0,0,0,0)"
           })
-          
+
         div.append("span")
           .attr("class","filter_title")
           .text(function(){
@@ -203,14 +203,14 @@
             if (obj.distance) d = " ("+obj.distance+"km)"
             return obj.name + d
           })
-          
+
         var depth_ids = dataviva.depths(selector.type())
-        
+
         if (obj.id.length < depth_ids[depth_ids.length-1] || obj.id == "all") {
           if(obj.id == "mg" || obj.id.indexOf("mgplr") >= 0 || (obj.id == "all" && type == "bra")){
             depth_ids.splice(-1, 0, 7)
           }
-          
+
           if (obj.id != "all") depth_ids = depth_ids.slice(depth_ids.indexOf(obj.id.length))
           var depth_data = {}
           depth_ids.forEach(function(d,i){
@@ -231,17 +231,17 @@
         else {
           filters[type][new_id] = obj.id.length
         }
-      
+
         div.append("i")
           .on(d3plus.evt.click, function(){ remove_filter(this) })
           .attr("class", "fa fa-times-circle")
-        
+
       }
-      
+
     }
-    
+
   }
-  
+
   function remove_filter(node) {
     var cont = d3.select(node.parentNode.parentNode)
     delete filters[cont.node().parentNode.id.split("_")[0]][node.parentNode.id.split("_")[1]]
@@ -250,32 +250,34 @@
       cont.select(".filler").style("display","block")
     }
   }
-  
+
   function change_depth(depth,elid,elem) {
     type = elid.split("_")[1]
     id = elid.split("_")[2]
     filters[type][id] = depth
   }
-  
+
   function change_year(year,dataset) {
     dataset = dataset.split("_")[0]
     datasets[dataset].year = year
   }
-  
+
   function toggle_filter(filter,parent) {
     active = parent.toggleClass("active")
     filter = filter.split("_")[0]
     filters[filter].active = active
   }
-  
+
   function is_active(selection){
     if(selection.attr("class").indexOf("active") > -1) return true;
     return false;
   }
-  
+
   // retrieving new data
   function update_table(url) {
+
     new_url = dataset+"/"+datasets[dataset].year+"/"
+
     datasets[dataset].filters.forEach(function(f){
       if (filters[f]) {
         new_ids = []
@@ -300,6 +302,7 @@
         new_url += "all/"
       }
     })
+
     if (!url) {
       if (window.location.search.indexOf("cols=") > -1) {
         var columns = window.location.search.split("cols=")[1].split("&")[0].split(".")
@@ -314,7 +317,7 @@
         args[dataset].order = ""
       }
     }
-    
+
     var params = []
     if (args[dataset].order != "") params.push("order="+args[dataset].order)
     var avail_columns = args.columns()
@@ -326,11 +329,11 @@
     d3.select("iframe").attr("src","/data/table/"+new_url+params)
     if (url) dataviva.url("/data/"+new_url,params)
   }
-  
+
   function change_cols(value,id) {
     var key = id.split("coltoggle_")[1]
     args[dataset].cols[key] = value
-    
+
     if (!args.columns().length) {
       for (c in args[dataset].cols) {
         args[dataset].cols[c] = true
@@ -339,13 +342,13 @@
     }
     send_columns()
   }
-  
+
   function send_columns() {
     document.getElementById("table_frame").contentWindow.change_cols(args[dataset].cols)
   }
-  
+
   function update_cols(cols) {
-    
+
     var resend = false
     for (c in args[dataset].cols) {
       var colIndex = cols.objectIndex("name",c)
@@ -354,7 +357,7 @@
         resend = true
       }
     }
-    
+
     cols.forEach(function(c,i){
       if (!(c.name in args[dataset].cols)) {
         if (!c.active && !first) {
@@ -368,9 +371,9 @@
         c.active = args[dataset].cols[c.name]
       }
     })
-    
+
     if (first || resend) send_columns()
-    
+
     var switches = d3.select("#column_toggles").selectAll("div.column_toggle")
       .data(cols,function(d){return d.name})
     switches.enter().append("div")
@@ -388,7 +391,7 @@
     switches.exit().remove()
     first = false
   }
-  
+
   // Create Settings
   dataviva.popover.create({
     "id": "settings_popover",
@@ -402,11 +405,11 @@
   d3.select("#column_toggles").append("div")
     .attr("class","selector_title")
     .text(dataviva.format.text("Column Visibility"))
-    
+
   function settings() {
     dataviva.popover.show("#settings_popover")
   }
-  
+
   var last_w = 320, last_h = 320
   function iframe_size(w,h) {
     if (!w) w = last_w
@@ -414,7 +417,7 @@
     w += dataviva.scrollbar()
     last_w = w
     last_h = h
-      
+
     d3.select(".data_table")
       .style("width",function(){
         var allowed =  window.innerWidth - 380
@@ -424,11 +427,11 @@
         var allowed =  window.innerHeight - 159
         return h < allowed ? h+"px" : allowed+"px"
       })
-      
+
   }
-  
+
   update_table()
-  
+
   dataviva.resize = iframe_size
 
 </script>
