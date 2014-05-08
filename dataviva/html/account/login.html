@@ -30,9 +30,9 @@
 
     {% if g.accounts %}
       <form action="" method="post" name="login">
-      
+
         {{ form.hidden_tag() }}
-      
+
         <p>
           {{form.remember_me(id="remember")}}<label for="remember">{% trans %}Remember Me{% endtrans %}</label>
         </p>
@@ -41,11 +41,11 @@
         {% endfor %}
       </form>
     {% endif %}
-  
+
   </div>
 
   <script type="text/javascript">
-  
+
 
   {% if g.accounts %}
 
@@ -55,27 +55,26 @@
       var pr = this.id.toLowerCase()
       form = document.forms['login'];
       form.elements['provider'].value = pr;
-      console.log(form.elements['provider'], pr)
       this.parentNode.submit();
       d3.event.preventDefault();
     })
-    
+
   {% else %}
-  
+
     d3.select("a.open_parent").on("click", function(){
       d3.event.preventDefault();
       window.opener.parent.location.href = "http://www.dataviva.info" + window.opener.parent.location.pathname;
       window.close();
     })
-  
+
   {% endif %}
-  
+
   d3.select("a.terms").on("click", function(){
     d3.event.preventDefault();
     window.opener.parent.location.href = "/about/terms_of_use";
     window.close();
   })
-    
+
   </script>
 
 {% endblock %}

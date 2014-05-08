@@ -1448,16 +1448,16 @@
           })
       }
 
-      var id = d3.select("#starred > i").attr("id")
-      var current_status = parseInt(id.split("_")[1],10)
-
-      if ([-1,0,1].indexOf(status) >= 0) {
+      if ( status !== undefined ) {
         update_star(status)
       }
-      else if (current_status == 0) {
-        login();
+      else if ( "{{g.user.is_authenticated()}}" === "False" ) {
+        login()
       }
       else {
+
+        var id = d3.select("#starred > i").attr("id")
+          , current_status = parseInt(id.split("_")[1],10)
 
         d3.select("#starred > i")
           .attr("class",function(){
@@ -1469,12 +1469,14 @@
         d3.json(url)
           .header("Content-type","application/x-www-form-urlencoded")
           .post("title="+app.build.title, function(error,data) {
-            if (data.error) {
-              alert(data.error)
+            if (data.success) {
+              update_star(data.success)
+            }
+            else {
               update_star(current_status)
             }
-            else if (data.success) update_star(data.success)
           })
+
       }
 
     }
