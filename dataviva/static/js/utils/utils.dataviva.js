@@ -354,6 +354,7 @@ dataviva.format.text = function(text,name,l) {
       "reset": {"en": "Click to Reset all Filters", "pt": "Clique para Eliminar todos os Filtros"},
       "Primary Connections": {"en": "Primary Connections", "pt": "Conex\u00f5es Prim\u00e1rias"},
       "No Data Available": {"en": "No Data Available", "pt": "N\u00e3o h\u00e1 dados dispon\u00edveis"},
+      "No Connections Available": {"en": "No Connections Available", "pt": "N\u00e3o h\u00e1 conex\u00f5es dispon\u00edveis"},
 
       // Ask Sabrina
       "Asked": {"en": "Asked", "pt": "Perguntado"},
