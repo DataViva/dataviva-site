@@ -1,5 +1,5 @@
 function Selector() {
-  
+
   var callback,
       type = "bra",
       name = "bra",
@@ -7,7 +7,7 @@ function Selector() {
       distance = 0,
       limit = null,
       lists = {}
-      
+
   lists.file = {
     "all": {
       "color": "#ffffff",
@@ -50,25 +50,25 @@ function Selector() {
       "desc": dataviva.format.text("csv_desc")
     }
   }
-      
+
   function util(selection) {
-    
+
     selection.each(function(data) {
-          
+
       update_distance = function(dist,id) {
-        
+
         data[id].distance = dist
-        
+
         var div = d3.select("#withins"+id)
-        
+
         if (dist > 0) {
-          
+
           div.style("display","block")
-          
+
           var u = distance_url
             .replace("munic",id)
             .replace("value",dist)
-            
+
           d3.json("/"+u.substr(1)+"?lang="+dataviva.language)
             .header("X-Requested-With", "XMLHttpRequest")
             .get(function(error,raw_distances){
@@ -80,41 +80,41 @@ function Selector() {
                   distances.push(string)
                 }
               })
-      
+
               if (distances.length > 0) {
-                div.html("Including "+distances.join(", "))
+                div.html(dataviva.format.text("Including")+" "+distances.join(", "))
               } else {
-                div.html("No municipalities within that distance.")
+                div.html(dataviva.format.text("No municipalities within that distance."))
               }
-              
+
             })
-      
+
         }
         else {
           div.style("display","none")
         }
       }
-      
+
       populate_list = function(parent,sort) {
-        
+
         if (sort) sorting = sort
 
         // Remove all current list elements
         body.selectAll("div").remove();
-        
+
         // Get current search box value
         search_term = search.node().value.toLowerCase().removeAccents()
         searching = search_term.length > 0;
-        
+
         // User is searching, so do this stuff!
         if (searching) {
-          
+
           update_header(search_term);
-        
+
           // Create master list by matching both name and id
           var strings = ["name","id","desc","keywords"]
           list = d3.values(data).filter(function(v){
-            
+
             var match = false
             strings.forEach(function(s){
               if (v[s]) {
@@ -124,16 +124,16 @@ function Selector() {
                 }
               }
             })
-            
+
             return match && depths.indexOf(v.id.length) >= 0
-            
+
           })
-            
+
         }
         else {
-          
+
           update_header(selected);
-          
+
           if (type == "file") {
             list = d3.values(data).filter(function(v){
               return v.id != "all";
@@ -151,15 +151,15 @@ function Selector() {
               return v.id.length == current_depth && v.id != "all" && child;
             })
           }
-          
+
         }
-        
+
         // Sort final generated list
         list.sort(function(a, b){
-          
+
           var lengthdiff = b.id.length - a.id.length
           if (lengthdiff) return lengthdiff
-          
+
           if (type == "bra") {
             var a_state = a.id.substr(0,2)
             var b_state = b.id.substr(0,2)
@@ -168,7 +168,7 @@ function Selector() {
             var a_state = a.id
             var b_state = b.id
           }
-          
+
           if (a_state == "mg" && a_state != b_state) {
             return -1
           }
@@ -188,58 +188,58 @@ function Selector() {
           if (a_first != b_first) {
             if (typeof a_first === "string") return (a_first.localeCompare(b_first));
             else return (b_first - a_first);
-          } 
+          }
           else {
             var a_second = a.name.toTitleCase()
             var b_second = b.name.toTitleCase()
             return (a_second.localeCompare(b_second))
           }
         })
-        
+
         var parent = container.node().parentNode,
             display = d3.select(parent).style("display")
-            
+
         if (display == "none") {
           parent.style.visibility = "hidden"
           parent.style.display = "block"
         }
-        
+
         // Initially add some results
         add_results(20);
-        
+
         if (display == "none") {
           parent.style.visibility = "visible"
           parent.style.display = "none"
         }
-        
+
         // Add more results on scroll
         body.on("scroll",function(){
           if(this.scrollTop + this.clientHeight + 10 >= this.scrollHeight) {
             if (list.length > 0) add_results(20);
           }
         })
-        
+
         body.node().scrollTop = 0;
-       
+
       }
-      
+
       select_value = function(x,depth) {
-        
+
         search.node().value = ""
-        
+
         if (depths.indexOf(x.id.length) == depths.length-1) {
           x = data[x.parents[0]]
         }
-        
+
         selected = x
-        
+
         if (depth_path.indexOf(depth) > 0) depth_path.pop()
         else if ((!depth_path.length || depth_path[depth_path.length-1] < current_depth) && x.id != "all" && current_depth) depth_path.push(current_depth)
-        
+
         current_depth = depth
-        
+
         if (depths.length > 1) {
-          
+
           bread.select("a").remove()
           if (x.id != "all") {
             bread.append("a")
@@ -256,35 +256,35 @@ function Selector() {
                 this.style.color = "#888"
               })
           }
-          
+
         }
-        
+
         populate_list(x,sorting);
-        
+
       }
-      
+
       create_elements = function() {
 
         header = container.append("div").attr("class","selector_header")
-        
+
         icon = header.append("div").attr("class","selector_header_icon")
-        
+
         title_div = header.append("div").attr("class","selector_title_div")
-                
+
         title = title_div.append("div").attr("class","selector_title")
-                
+
         description = title_div.append("div").attr("class","selector_description")
-      
+
         bread = title_div.append("div").attr("class","breadcrumb")
-      
+
         sort_toggles = header.append("div").attr("class","selector_toggles")
-      
+
         if (sorts.length > 1) {
-        
+
           sort_toggles.append("legend")
             .attr("id","selector_sort")
             .html(dataviva.format.text("sort"))
-      
+
           sorts.forEach(function(s){
             var input = sort_toggles.append("input")
               .attr("type","radio")
@@ -297,39 +297,39 @@ function Selector() {
               .attr("for","selector_sort_"+s)
               .html(dataviva.format.text(s))
           })
-          
+
           sorter = leon("$selector_sort").color(dataviva.color)
         }
-        
+
         header_select_div = sort_toggles.append("div").attr("id","header_select_div")
-          
+
         var b = header_select_div.append("input")
           .attr("type","button")
           .attr("id","header_select")
           .attr("value",dataviva.format.text("select"))
-          
+
         header_select = leon("#header_select")
-        
+
         search = header.append("input")
           .attr("type","text")
           .attr("id",name+"_search")
           .attr("class","leon text")
           .attr("placeholder",dataviva.format.text("search"))
-          
+
         leon("#"+name+"_search").color(dataviva.color).size("medium")
-              
+
         search.node().oninput = function() { populate_list(selected) };
 
         if (type == "file") {
           search.style("display","none")
         }
-        
+
         body = container.append("div")
           .attr("class","selector_body")
           .style("height","auto")
-        
+
         selector_load.hide()
-        
+
         if (initial_value != "all") {
           if (type == "bra" && initial_value == "mg") {
             var depth = 7
@@ -361,18 +361,18 @@ function Selector() {
           var depth = depths[0]
           depth_path = []
         }
-        
+
         select_value(data[initial_value],depth);
-        
+
       }
 
       clean_data = function() {
-        
+
         if (data instanceof Array) {
           data = data.filter(function(d){
             return d.available || (type == "bra" && d.id.length == 7);
           })
-        
+
           var temp_dict = {};
           data.forEach(function(d){
             temp_dict[d.id] = d;
@@ -386,7 +386,7 @@ function Selector() {
           }
           data = temp_dict;
         }
-        
+
         if (!data.all) {
           if (type == "bra") var c = "#009b3a";
           else var c = "#ffffff";
@@ -398,15 +398,15 @@ function Selector() {
             "name": dataviva.format.text(title)
           };
         }
-      
+
         for (d in data) {
-          
+
           if (!data[d].display_id) {
             data[d].display_id = dataviva.displayID(d,type);
           }
-          
+
           var depth = depths.indexOf(d.length)
-          
+
           if (d == "all") {
             data[d].parents = ["none"]
           }
@@ -425,17 +425,17 @@ function Selector() {
           else {
             data[d].parents = [d.slice(0,depths[depth-1])]
           }
-          
+
           if (!data[d].icon) data[d].icon = dataviva.icon(d,type,data[d].color)
         }
-        
+
         lists[type] = data
         create_elements()
-        
+
       }
-      
+
       update_header = function(x) {
-        
+
         if (typeof x == "string") {
           header_select_div.style("display","none")
           icon.style("display","none")
@@ -443,15 +443,15 @@ function Selector() {
           var header_color = "#333333"
         }
         else {
-          
+
           var header_color = x.color
-          
+
           icon.style("background-image","url('"+x.icon+"')")
-          
+
           if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && x.id.length != 5)) {
             icon.style("background-color",x.color)
           }
-          
+
           if (type != "file" && ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all"))) {
             header_select_div.style("display","inline-block")
             header_select.leons.header_select.node.onclick = function(){
@@ -463,13 +463,13 @@ function Selector() {
           else {
             header_select_div.style("display","none")
           }
-          
+
           if (type == "file") var prefix = x.name
           else if (type == "bra") {
             var prefix = dataviva.format.text("bra_"+current_depth+"_plural")
           }
           else var prefix = dataviva.format.text(type+"_plural")
-          
+
           if (x.id == "all" && type != "bra") {
             title.text(prefix)
           }
@@ -486,50 +486,50 @@ function Selector() {
             }
             title.text(prefix+" "+connect+" "+x.name.toTitleCase())
           }
-          
+
           if (x.desc && type == "file") {
             description.text(x.desc)
           }
           else {
             description.text("")
           }
-          
+
         }
-        
+
         if (header_color == "#ffffff") header_color = "#333333"
-        
+
         var close = d3.select(container.node().parentNode).select(".d3plus_tooltip_close")
         if (close.node()) {
           close.style("background-color",header_color)
         }
-        
+
         if (sorter) {
           sorter.color(header_color)
         }
-        
+
         var hw = header.node().offsetWidth
         hw -= icon.node().offsetWidth
         hw -= sort_toggles.node().offsetWidth
         hw -= 36
-        
+
         if (hw > 0) title.style("max-width",hw+"px")
-        
+
         // Set height, now that the header is completely updated
         set_height();
-        
+
       }
-      
+
       add_results = function(amount) {
-      
+
         var results = []
         for (var i = 0; i < amount; i++) {
           results.push(list.shift())
         }
-        
+
         results.forEach(function(v,i){
-          
+
           if (v) {
-            
+
             var item = body.append("div")
               .attr("id","result_"+v.id)
               .attr("class","search_result")
@@ -553,7 +553,7 @@ function Selector() {
               //     callback(data[v.id],name);
               //   }
               // })
-              
+
             if (v.icon != selected.icon || search_term != "") {
               var search_icon = item.append("div")
                 .attr("class","search_icon")
@@ -562,90 +562,90 @@ function Selector() {
                 search_icon.style("background-color",v.color)
               }
             }
-          
+
             var title = v.name.toTitleCase().truncate(65)
             if (search.length >= 3) {
               title = title.replace(search,"<b>"+search+"</b>")
               title = title.replace(search.toTitleCase(),"<b>"+search.toTitleCase()+"</b>")
             }
-          
+
             var text = item.append("div")
               .attr("class","search_text")
-          
+
             text.append("div")
               .attr("class","search_title")
               .style("color",d3plus.utils.darker_color(v.color))
               .html(title)
-              
+
             if (type != "file" && searching) {
               text.append("div")
                 .attr("class","search_sub")
                 .html(dataviva.format.text(type+"_"+v.id.length))
             }
-            
+
             if (v.id_ibge) {
               var sub_text = dataviva.format.text("id_ibge") + ": " + v.id_ibge.toString()
             }
             else if (type != "file") {
               var sub_text = dataviva.format.text(type+"_id") + ": " + v.display_id.toString()
             }
-            
+
             text.append("div")
               .attr("class","search_data")
               .html(sub_text)
-            
+
             if (v.desc && type == "file") {
               text.append("div")
                 .attr("class","search_data")
                 .text(v.desc)
             }
-               
+
             if (v[value]) {
               text.append("div")
                 .attr("class","search_data")
                 .text(dataviva.format.text(value)+": "+dataviva.format.number(v[value],value))
             }
-            
+
             var buttons = item.append("div")
               .attr("class","search_buttons")
-              
+
             if (v.id.length < depths[depths.length-1]) {
-              
+
               if (v.id == "mg" && type == "bra") {
-              
+
                 var d = depths.indexOf(v.id.length)
                 var length = depths[d+1]
                 var suffix = dataviva.format.text("bra_7_plural")
-              
+
                 var b = buttons.append("input")
                   .attr("type","button")
                   .attr("id","pr")
                   .attr("value",suffix)
-                  
+
                 b.node().onclick = function(){
                   select_value(v,7)
                 }
-                
+
                 leon("#pr").color(v.color)
-                
+
                 buttons.append("br")
               }
-              
+
               var d = depths.indexOf(v.id.length)
               var length = v.id.length == 7 && type == "bra" ? 8 : depths[d+1]
               var suffix = dataviva.format.text(type+"_"+length+"_plural")
-              
+
               var b = buttons.append("input")
                 .attr("type","button")
                 .attr("id","child"+v.id)
                 .attr("value",suffix)
-                  
+
               b.node().onclick = function(){
                 select_value(v,length)
               }
-                
+
               leon("#child"+v.id).color(v.color)
-              
+
             }
             else if (type == "bra" && v.id.length == depths[depths.length-1]) {
 
@@ -653,15 +653,15 @@ function Selector() {
 
               var prox_toggles = buttons.append("div")
                 .attr("class","proximity_toggles")
-                
+
               prox_toggles.append("label")
                 .attr("for","distance"+v.id)
                 .html(dataviva.format.text("Municipalities within"))
-                
+
               var select = prox_toggles.append("select")
                 .attr("id","distance"+v.id)
                 .attr("onchange","update_distance(this.value,'"+v.id+"')")
-    
+
               proximities.forEach(function(p,i){
                 var option = select.append("option")
                   .attr("id",p)
@@ -674,40 +674,40 @@ function Selector() {
                   option.attr("selected","selected")
                 }
               })
-      
+
               leon("#distance"+v.id).color(v.color)
-              
+
             }
-              
+
             if (!limit || v.id.length >= limit) {
-              
+
               var b = buttons.append("input")
                 .attr("type","button")
                 .attr("id","select"+v.id)
                 .attr("value",dataviva.format.text("select"))
-                  
+
               b.node().onclick = function(){
                 selector_load.text(dataviva.format.text("wait")).show()
                 callback(data[v.id],name)
               }
-                
+
               leon("#select"+v.id).color(v.color)
             }
-          
+
             if (results[i+1] || i == results.length-1) {
               body.append("div")
                 .attr("class","d3plus_tooltip_data_seperator")
             }
-            
+
             if (type == "bra" && v.id.length == depths[depths.length-1]) {
 
               item.append("div")
                 .attr("id","withins"+v.id)
                 .attr("class","search_withins")
                 .style("display","none")
-              
+
             }
-            
+
             var width = item.node().offsetWidth
             width -= parseFloat(item.style("padding-left"),10)
             width -= parseFloat(item.style("padding-right"),10)
@@ -718,24 +718,24 @@ function Selector() {
             }
             width -= buttons.node().offsetWidth
             text.style("max-width",width+"px")
-              
+
           }
-        
+
         })
-    
+
       }
-  
+
       set_height = function() {
         // Set height for selector_body, based off of the title height
         var parent = container.node().parentNode,
             display = d3.select(parent).style("display")
-            
+
         if (display == "none") {
           parent.style.visibility = "hidden"
           parent.style.display = "block"
         }
         var max_height = container.node().offsetHeight
-        
+
         max_height -= body.node().offsetTop
         max_height -= parseFloat(body.style("padding-top"),10)
         max_height -= parseFloat(body.style("padding-bottom"),10)
@@ -746,23 +746,23 @@ function Selector() {
         }
         body.style("height",max_height+"px")
       }
-      
+
       var close = null,
           header = null,
           header_select_div = null,
-          header_select = null, 
-          bread = null, 
-          icon = null, 
-          title = null, 
+          header_select = null,
+          bread = null,
+          icon = null,
+          title = null,
           description = null,
-          search = null, 
-          body = null, 
+          search = null,
+          body = null,
           sort_toggles = null,
           sorter = null,
           current_depth = null,
           depth_path = [],
           searching = false;
-          
+
       var distance_url = "/attrs/bra/munic.value/",
           list = [],
           search_term = ""
@@ -777,14 +777,14 @@ function Selector() {
           },
           value = sort_types[type] ? sort_types[type] : null,
           sorts = ["name"]
-          
+
       if (type == "bra") {
         var depths = dataviva.depths(type,false)
       }
       else {
         var depths = dataviva.depths(type,true)
       }
-          
+
       if (value) {
         sorts.push(value)
         var sorting = value
@@ -792,7 +792,7 @@ function Selector() {
       else {
         var sorting = "name"
       }
-       
+
       d3.select(this).select(".selector").remove()
       var container = d3.select(this)
         .append("div")
@@ -800,11 +800,11 @@ function Selector() {
 
       var selector_load = new dataviva.ui.loading(container.node())
       selector_load.color("#ffffff")
-      
+
       if (type != "file") {
         selector_load.text(dataviva.format.text("loading_attrs")).show()
       }
-      
+
       if (data) {
         clean_data()
       }
@@ -820,7 +820,7 @@ function Selector() {
             clean_data()
           })
       }
-      
+
     })
   }
 
@@ -829,31 +829,31 @@ function Selector() {
     callback = value;
     return util;
   }
-  
+
   util.distance = function(value) {
     if (!arguments.length) return distance;
     distance = value;
     return util;
   }
-  
+
   util.initial_value = function(value) {
     if (!arguments.length) return initial_value;
     initial_value = value;
     return util;
   }
-  
+
   util.limit = function(value) {
     if (!arguments.length) return limit;
     limit = value;
     return util;
   }
-  
+
   util.type = function(value) {
     if (!arguments.length) return name;
     name = value
     type = value.split("_")[0]
     return util;
   }
-  
+
   return util;
 }

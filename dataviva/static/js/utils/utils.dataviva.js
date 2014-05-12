@@ -385,7 +385,10 @@ dataviva.format.text = function(text,name,l) {
       "loading_attrs": {"en": "Loading Attribute List", "pt": "Carregando Lista de Atributos"},
       "loading_items": {"en": "Loading More Items", "pt": "Carregar Mais Itens"},
       "wait": {"en": "Please Wait", "pt": "Por favor Aguarde"},
-      "back": {"en": "Back", "pt": "Voltar"}
+      "back": {"en": "Back", "pt": "Voltar"},
+      "Municipalities within": {"en": "Municipalities within", "pt": "Munic\u00edpios dentro de"},
+      "No municipalities within that distance.": {"en": "No municipalities within that distance.", "pt": "N\u00e3o existem munic\u00edpios dentro desta dist\u00e2ncia."},
+      "Including": {"en": "Including", "pt": "Incluindo"}
 
     }
 
