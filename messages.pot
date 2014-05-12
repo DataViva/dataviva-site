@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-05-06 11:58-0400\n"
+"POT-Creation-Date: 2014-05-12 18:49-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,7 +48,7 @@ msgstr ""
 msgid "You dont have permission to view this page."
 msgstr ""
 
-#: dataviva/admin/views.py:174 dataviva/html/admin/mail/ask_feedback.html:5
+#: dataviva/admin/views.py:174
 msgid "DataViva Reply"
 msgstr ""
 
@@ -126,15 +126,15 @@ msgstr ""
 msgid "Visualizing the Economy of Minas Gerais and Brazil"
 msgstr ""
 
-#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1877
-#: dataviva/html/templates/base.html:7
+#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1885
+#: dataviva/html/templates/base.html:6
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
 " economy"
 msgstr ""
 
-#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1879
-#: dataviva/html/templates/base.html:7
+#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1887
+#: dataviva/html/templates/base.html:6
 msgid "through more than 100 million interactive visualizations."
 msgstr ""
 
@@ -1255,42 +1255,34 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:22
+#: dataviva/html/admin/mail/ask_feedback.html:5
 msgid "Dear"
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:25
+#: dataviva/html/admin/mail/ask_feedback.html:8
 msgid "Thanks for using DataViva."
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:27
+#: dataviva/html/admin/mail/ask_feedback.html:10
 msgid "Click here"
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:27
+#: dataviva/html/admin/mail/ask_feedback.html:10
 msgid "to see your answer in the Contact Us section."
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:29
+#: dataviva/html/admin/mail/ask_feedback.html:12
 msgid ""
 "Thanks for using DataViva. We will consider your opinion in order to "
 "improve our tool."
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:32
+#: dataviva/html/admin/mail/ask_feedback.html:15
 msgid "Best regards,"
 msgstr ""
 
-#: dataviva/html/admin/mail/ask_feedback.html:33
+#: dataviva/html/admin/mail/ask_feedback.html:16
 msgid "The DataViva Team"
-msgstr ""
-
-#: dataviva/html/admin/mail/ask_feedback.html:36
-msgid "If you don't want to receive these updates,"
-msgstr ""
-
-#: dataviva/html/admin/mail/ask_feedback.html:36
-msgid "click here."
 msgstr ""
 
 #: dataviva/html/apps/builder.html:16
@@ -1677,6 +1669,14 @@ msgstr ""
 
 #: dataviva/html/templates/admin.html:32
 msgid "Duplicate"
+msgstr ""
+
+#: dataviva/html/templates/mail.html:27
+msgid "If you don't want to receive these updates,"
+msgstr ""
+
+#: dataviva/html/templates/mail.html:27
+msgid "click here."
 msgstr ""
 
 #: dataviva/html/templates/site.html:39

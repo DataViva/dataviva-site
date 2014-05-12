@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-05-06 11:58-0400\n"
+"POT-Creation-Date: 2014-05-12 18:49-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -52,7 +52,7 @@ msgstr "Preferencias atualizadas."
 msgid "You dont have permission to view this page."
 msgstr "Você não tem permissão para ver essa página."
 
-#: dataviva/admin/views.py:174 dataviva/html/admin/mail/ask_feedback.html:5
+#: dataviva/admin/views.py:174
 msgid "DataViva Reply"
 msgstr "Resposta DataViva"
 
@@ -130,8 +130,8 @@ msgstr "Tudo"
 msgid "Visualizing the Economy of Minas Gerais and Brazil"
 msgstr "Visualizando a Economia de Minas Gerais e do Brasil"
 
-#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1877
-#: dataviva/html/templates/base.html:7
+#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1885
+#: dataviva/html/templates/base.html:6
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
 " economy"
@@ -139,8 +139,8 @@ msgstr ""
 "O DataViva está disponibilizando dados sobre todo o setor formal da "
 "economia"
 
-#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1879
-#: dataviva/html/templates/base.html:7
+#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1887
+#: dataviva/html/templates/base.html:6
 msgid "through more than 100 million interactive visualizations."
 msgstr "brasileira em mais de 100 milhões de visualizações interativas."
 
@@ -1661,23 +1661,23 @@ msgstr "Email"
 msgid "Role"
 msgstr "Função"
 
-#: dataviva/html/admin/mail/ask_feedback.html:22
+#: dataviva/html/admin/mail/ask_feedback.html:5
 msgid "Dear"
 msgstr "Caro"
 
-#: dataviva/html/admin/mail/ask_feedback.html:25
+#: dataviva/html/admin/mail/ask_feedback.html:8
 msgid "Thanks for using DataViva."
 msgstr "Obrigado por utilizar o DataViva."
 
-#: dataviva/html/admin/mail/ask_feedback.html:27
+#: dataviva/html/admin/mail/ask_feedback.html:10
 msgid "Click here"
 msgstr "Clique aqui"
 
-#: dataviva/html/admin/mail/ask_feedback.html:27
+#: dataviva/html/admin/mail/ask_feedback.html:10
 msgid "to see your answer in the Contact Us section."
 msgstr "para ver a publicação de sua resposta no Fale Conosco."
 
-#: dataviva/html/admin/mail/ask_feedback.html:29
+#: dataviva/html/admin/mail/ask_feedback.html:12
 msgid ""
 "Thanks for using DataViva. We will consider your opinion in order to "
 "improve our tool."
@@ -1685,21 +1685,13 @@ msgstr ""
 "Obrigado por utilizar o DataViva. Vamos considerar a sua opinião para "
 "aperfeiçoar ainda mais a ferramenta."
 
-#: dataviva/html/admin/mail/ask_feedback.html:32
+#: dataviva/html/admin/mail/ask_feedback.html:15
 msgid "Best regards,"
 msgstr "Atenciosamente,"
 
-#: dataviva/html/admin/mail/ask_feedback.html:33
+#: dataviva/html/admin/mail/ask_feedback.html:16
 msgid "The DataViva Team"
 msgstr "O Equipe DataViva"
-
-#: dataviva/html/admin/mail/ask_feedback.html:36
-msgid "If you don't want to receive these updates,"
-msgstr "Se você não deseja mais receber atualizações,"
-
-#: dataviva/html/admin/mail/ask_feedback.html:36
-msgid "click here."
-msgstr "clique aqui."
 
 #: dataviva/html/apps/builder.html:16
 msgid "App Builder"
@@ -1793,7 +1785,9 @@ msgstr "Nota"
 
 #: dataviva/html/general/error.html:22
 msgid "There was a problem serving the requested page."
-msgstr "Há um problema com a página que você está tentando acessar e ela não pode ser exibida."
+msgstr ""
+"Há um problema com a página que você está tentando acessar e ela não pode"
+" ser exibida."
 
 #: dataviva/html/general/error.html:24
 msgid "Oh no! Your request is too large to be processed."
@@ -2095,6 +2089,14 @@ msgstr "Rejeitado"
 msgid "Duplicate"
 msgstr "Duplicado"
 
+#: dataviva/html/templates/mail.html:27
+msgid "If you don't want to receive these updates,"
+msgstr "Se você não deseja mais receber atualizações,"
+
+#: dataviva/html/templates/mail.html:27
+msgid "click here."
+msgstr "clique aqui."
+
 #: dataviva/html/templates/site.html:39
 msgid "Profile"
 msgstr "Perfil"
@@ -2106,3 +2108,30 @@ msgstr "Sair"
 #: dataviva/profiles/views.py:47
 msgid "a country"
 msgstr "um país"
+
+msgid "wages"
+msgstr "salário"
+
+msgid "opportunity"
+msgstr "oportunidade"
+
+msgid "destinations"
+msgstr "destinos"
+
+msgid "diversification"
+msgstr "diversificação"
+
+msgid "attract"
+msgstr "atrair"
+
+msgid "growth"
+msgstr "crescimento"
+
+msgid "shrink"
+msgstr "baixa"
+
+msgid "paths"
+msgstr "alternativas"
+
+msgid "potential"
+msgstr "potencial"
