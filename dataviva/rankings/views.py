@@ -8,7 +8,6 @@ from flask import Blueprint, request, render_template, g, Response, make_respons
 
 from dataviva import db
 from dataviva.utils import make_query
-from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
 from dataviva.apps.models import UI
 from dataviva.rais.models import Yb_rais, Yi, Yo

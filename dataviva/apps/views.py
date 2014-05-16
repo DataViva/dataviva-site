@@ -320,7 +320,7 @@ def download():
     title = form.title.data
 
     temp = tempfile.NamedTemporaryFile()
-    temp.write(data.encode("utf-8"))
+    temp.write(data.encode("utf-16"))
     temp.seek(0)
 
     if format == "png":
@@ -330,7 +330,7 @@ def download():
     elif format == "svg":
         mimetype='application/octet-stream'
     elif format == "csv":
-        mimetype="text/csv;charset=UTF-8"
+        mimetype="text/csv;charset=UTF-16"
 
     if format == "png" or format == "pdf":
         zoom = "1"
@@ -339,8 +339,8 @@ def download():
         out, err = p.communicate()
         response_data = out
     else:
-        response_data = data.encode("utf-8")
-
+        response_data = data.encode("utf-16")
+    
     content_disposition = "attachment;filename=%s.%s" % (title, format)
     content_disposition = content_disposition.replace(",", "_")
 
