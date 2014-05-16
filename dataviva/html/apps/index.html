@@ -69,7 +69,7 @@ d3.selectAll("i")
 			w = parseInt(d3.select("#popover").style("width"));
 		d3.select("#popover").style("overflow", "hidden")
 	    dataviva.popover.show("#popover");
-		d3.select("#popover").html("<iframe scrolling='no' width='"+w+"' height='"+h+"' src='/apps/info/"+app_type+"/' />")
+		d3.select("#popover").html("<iframe scrolling='no' width='100%' height='"+h+"' src='/apps/info/"+app_type+"/' />")
 		d3.event.preventDefault()
 	})
 
