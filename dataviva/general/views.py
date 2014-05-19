@@ -153,8 +153,11 @@ def redirect_short_url(slug):
 def page_not_found(e="413"):
 
     error = str(e).split(":")[0]
-    error_code = int(error)
-    
+    try:
+        error_code = int(error)
+    except URLError, e:
+        error_code=0
+       
     request_info = {
         "Date": datetime.today().ctime(),
         "IP": request.remote_addr,
