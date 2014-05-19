@@ -27,7 +27,7 @@
         <input type="radio" onclick="show(this.value)" name="activity" id="questions" value="questions">
         <label for="questions">{% trans %}Questions{% endtrans %}</label>
         <input type="radio" onclick="show(this.value)" name="activity" id="replies" value="replies">
-        <label for="replies">{% trans %}Replies{% endtrans %}</label>
+        <label for="replies">{% trans %}Comments{% endtrans %}</label>
         {% if g.user.is_authenticated() and user.nickname == g.user.nickname %}
           <input type="radio" onclick="show(this.value)" name="activity" id="preferences" value="preferences">
           <label for="preferences">{% trans %}Preferences{% endtrans %}</label>

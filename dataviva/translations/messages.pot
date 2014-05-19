@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-05-19 15:50-0300\n"
+"POT-Creation-Date: 2014-05-19 16:09-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -641,7 +641,8 @@ msgid "by"
 msgstr ""
 
 #: dataviva/html/about/ask/answer.html:61
-msgid "Responses"
+#: dataviva/html/about/ask/index.html:168 dataviva/html/account/index.html:30
+msgid "Comments"
 msgstr ""
 
 #: dataviva/html/about/ask/answer.html:71
@@ -662,7 +663,7 @@ msgid "Respond to"
 msgstr ""
 
 #: dataviva/html/about/ask/answer.html:107
-msgid "New Response"
+msgid "New Comment"
 msgstr ""
 
 #: dataviva/html/about/ask/answer.html:109
@@ -774,7 +775,7 @@ msgstr ""
 msgid "Question"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:47
+#: dataviva/html/about/ask/index.html:47 dataviva/html/about/ask/index.html:167
 msgid "Comment"
 msgstr ""
 
@@ -1155,10 +1156,6 @@ msgstr ""
 
 #: dataviva/html/account/index.html:28 dataviva/html/templates/admin.html:25
 msgid "Questions"
-msgstr ""
-
-#: dataviva/html/account/index.html:30 dataviva/html/templates/admin.html:26
-msgid "Replies"
 msgstr ""
 
 #: dataviva/html/account/index.html:33
@@ -1653,6 +1650,10 @@ msgstr ""
 
 #: dataviva/html/templates/admin.html:24
 msgid "Users"
+msgstr ""
+
+#: dataviva/html/templates/admin.html:26
+msgid "Replies"
 msgstr ""
 
 #: dataviva/html/templates/admin.html:29
