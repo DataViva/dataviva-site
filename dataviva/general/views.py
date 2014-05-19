@@ -145,19 +145,16 @@ def redirect_short_url(slug):
 # 404 view
 # ---------------------------
 @mod.route('413/')
-@app.errorhandler(403)
-@app.errorhandler(404)
-@app.errorhandler(410)
-@app.errorhandler(413)
-@app.errorhandler(500)
+@app.errorhandler(Exception)
 def page_not_found(e="413"):
 
     error = str(e).split(":")[0]
     try:
         error_code = int(error)
-    except e:
-        error_code=0
-       
+    except:
+        error = "500"
+        error_code = int(error)
+
     request_info = {
         "Date": datetime.today().ctime(),
         "IP": request.remote_addr,
@@ -165,13 +162,13 @@ def page_not_found(e="413"):
         "URL": request.url,
         "Data": request.data
     }
-    
+
     headers = list(request.headers)
 
     if ERROR_EMAIL and error_code != 404:
         admins = User.query.filter(User.role == 1).filter(User.email != "").filter(User.agree_mailer == 1).all()
         emails = [str(getattr(a,"email")) for a in admins]
-        
+
         if len(emails) > 0:
             subject = "DataViva Error: "+error
 
@@ -180,11 +177,11 @@ def page_not_found(e="413"):
                 error_text = "413: Request entity too large"
             else:
                 error_text = str(e)
-            
+
             send_mail(subject, emails,
                 render_template('admin/mail/error.html', title=subject,
                 error=error_text, request_info=request_info, headers=headers))
-            
+
     g.page_type = "error"
 
     sabrina = {}
