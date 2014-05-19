@@ -3,6 +3,11 @@
 {% block title %}: {% trans %}Admin Panel{% endtrans %}{% endblock %}
 
 {% block admin_content %}
+<style>
+	td.hidden_toggle {
+		min-width: 150px;
+	}
+</style>
 
 <div class="feed">
   
@@ -27,14 +32,15 @@
 function item_formatter(container_el, activities){
   
 	roles = {}
-  roles[dataviva.format.text("visible")] = 0
-  roles[dataviva.format.text("hidden")] = 1
+	roles[dataviva.format.text("visible")] = 0
+	roles[dataviva.format.text("hidden")] = 1
+	
 
 	var attrs_enter = d3.select(container_el).select("tbody").selectAll("tr")
 		.data(activities, function(d){ return d.id; })
 		.enter().append("tr")
 
-    attrs_enter.append("td").html(function(d){ return d.body; })
+    attrs_enter.append("td").html(function(d){ return '<b style="font-size:10px">('+ d.question_title +')</b> <br>' + d.body; })
     attrs_enter.append("td").text(function(d){ return d.user.fullname; })
     attrs_enter.append("td").text(function(d){ return d.flags; })
   
@@ -64,12 +70,15 @@ function item_formatter(container_el, activities){
 			})
 			.each(function(d){
 				var parent_data = d3.select(this.parentNode).datum();
-				leon("$hidden_"+parent_data.id).size("small")
+				l = leon("$hidden_"+parent_data.id).size("small")
+				
 			})
       .attr("onclick",function(d){
         var parent_data = d3.select(this.parentNode).datum();
         return "change_role('"+parent_data.id+"',this.id.split('_')[1])"
       })
+      
+      
 
 }
 

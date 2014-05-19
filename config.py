@@ -31,7 +31,7 @@ ERROR_EMAIL = False
 SQLALCHEMY_ECHO = True
 
 ''' Whether or not to allow User Account Activity '''
-ACCOUNTS = get_env_variable("DATAVIVA_ACCOUNTS",False)
+ACCOUNTS = get_env_variable("DATAVIVA_ACCOUNTS",True)
 
 '''
     Details for connecting to the database, credentials set as environment

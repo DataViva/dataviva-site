@@ -163,6 +163,8 @@ def admin_questions_edit(status, question_id):
         previous_status = form.previous_status.data
         q.status = form.status.data
         q.status_notes = form.answer.data
+        q.body = form.body.data
+        q.question = form.question.data
         q.language = form.language.data
         db.session.add(q)
         db.session.commit()
@@ -185,9 +187,26 @@ def admin_questions_edit(status, question_id):
     form.language.data = q.language
     form.previous_status.data = s.name
     form.answer.data = q.status_notes
+    form.question.data = q.question
+    form.body.data = q.body
 
     return render_template("admin/admin_questions_edit.html",
                             question=q, status=status, form=form)
+    
+    
+@mod.route('/questions/delete/<int:question_id>/', methods=['GET', 'POST'])
+@required_roles(1)
+def admin_questions_delete(question_id):
+
+    q = Question.query.get_or_404(question_id)
+    s = Status.query.filter_by(name=q.status).first()
+    status = s
+    db.session.delete(q)
+    db.session.commit()
+    flash(gettext('The item was successfully deleted.'))
+    
+    return redirect(url_for(".admin_questions", status=status))
+    
 
 @mod.route('/replies/')
 @login_required
@@ -211,16 +230,17 @@ def admin_replies_list():
     limit = 50
 
     # get all users EXCEPT the logged in user
-    flags_subq = db.session.query(Flag, func.count('*') \
-                    .label('flag_count')) \
-                    .group_by(Flag.reply_id).subquery()
-    replies = db.session.query(Reply, flags_subq.c.flag_count) \
-                    .order_by(flags_subq.c.flag_count.desc())
-    items = replies.limit(limit).offset(offset).all()
-    items = [i[0].serialize() for i in items]
+   
+    reply = Reply.query
+    question = Question.query
+
+    items = reply.order_by(Reply.hidden.desc(), Reply.timestamp.desc()).limit(limit).offset(offset).all()
+    items = [i.serialize() for i in items]
     for i in items:
         i["body"] = strip_html(i["body"])
-
+        q = question.get(i["question_id"])
+        i['question_title'] = q.question
+        
     ret = jsonify({"activities":items})
 
     ret.headers.add('Last-Modified', datetime.now())

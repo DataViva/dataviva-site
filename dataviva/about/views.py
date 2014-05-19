@@ -84,8 +84,8 @@ def ask(user=None):
                 
             filter = ProfanitiesFilter(banned_words, replacements = '*')
             
-            _question = filter.clean(str(form.question.data.encode("ascii", "xmlcharrefreplace")))
-            _body =  filter.clean(str(form.body.data.encode("ascii", "xmlcharrefreplace")))
+            _question = filter.clean(str(form.question.data))
+            _body =  filter.clean(str(form.body.data))
             _type = filter.clean(str(form.type.data))
             
             question = Question(question=_question, body=_body, timestamp=timestamp, user=g.user, slug=slug, language=g.locale, type_id=_type)
@@ -127,10 +127,13 @@ def answer(slug):
             
         timestamp = datetime.utcnow()
         if not reply_form.parent.data:
-            parent_id = 0 
-            
+            parent_id = 0
+        else:
+            parent_id = reply_form.parent.data
+        
+        hiddenFld = 1;
         reply = Reply(body=reply_form.reply.data, timestamp=timestamp, 
-                        user=g.user, question=question, parent_id=parent_id)
+                        user=g.user, question=question, parent_id=parent_id, hidden=hiddenFld)
         db.session.add(reply)
         db.session.commit()
         if not reply_form.parent.data:
@@ -140,7 +143,7 @@ def answer(slug):
         flash(gettext('Reply submitted.'))
         
         #envia email para o admin
-        send_mail('Aviso de nova publicacao no DataViva', [ADMINISTRATOR_EMAIL], render_template('about/ask/ask_feedback.html', question=question))
+        #send_mail('Aviso de nova publicacao no DataViva', [ADMINISTRATOR_EMAIL], render_template('about/ask/ask_feedback.html', question=question))
             
         return redirect(url_for('about.answer', slug=question.slug))
     else:

@@ -275,3 +275,7 @@ div.reply_box:last-child {
 	margin-bottom: 20px;
 	margin-left: 26px;
 }
+
+#admin_form input:text {
+	width:100%;
+}

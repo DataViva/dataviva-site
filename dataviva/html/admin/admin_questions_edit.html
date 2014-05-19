@@ -3,11 +3,14 @@
 {% block title %}: {% trans %}Edit Question{% endtrans %}{% endblock %}
 
 {% block admin_content %}
-
-  <h1>{{ question.question }}</h1>
-
-  {{ question.body }}
-
+<style>
+	.inputtext {
+		width:100%;
+		padding:10px 0;
+		font-size:18px;
+	}
+</style>
+ 
   <form id="admin_form" action="" method="post">
     
     {{ form.hidden_tag() }}
@@ -24,9 +27,16 @@
 
     <label for="status">{% trans %}Status{% endtrans %}:</label>
     {{ form.status(id="status") }}
-
-    <br><br>
-    {{ form.answer(id="wysiwyg_textarea", placeholder=_("Enter your answer...")) }}<br />
+	 <br><br>
+	<br>
+	<h3>{% trans %}Question title{% endtrans %}</h3>
+    {{ form.question(class="inputtext", placeholder=_("Enter your answer...")) }}<br />
+	<br>
+	<h3>{% trans %}Question body{% endtrans %}</h3>
+    {{ form.body(id="wysiwyg_textarea", class="text_content", placeholder=_("Enter your answer...")) }}<br />
+   
+    <h3>{% trans %}Reply{% endtrans %}</h3>
+    {{ form.answer(id="wysiwyg_textarea", class="text_content", placeholder=_("Enter your answer...")) }}<br />
     {% for error in form.errors.answer %}
     <span style="color: red;">[{{ error }}]</span>
     {% endfor %}
@@ -57,7 +67,7 @@
     $(document).ready(function() {
 
       var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
-      $('#wysiwyg_textarea').redactor({
+      $('.text_content').redactor({
         buttons: buttons,
         lang: "{{g.locale}}"
       })

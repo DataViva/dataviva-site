@@ -24,9 +24,10 @@
 {% endblock %}
 
 {% block js %}
-
+ <script src="/static/js/libs/jquery-2.0.3.min.js"></script>
   <script src="/static/js/utils/utils.infinite_scroll.js"></script>
   <script>
+  
 
   function item_formatter(container_el, activities){
   
@@ -37,19 +38,45 @@
     attrs_enter.append("td").text(function(d){ return d.question; })
     attrs_enter.append("td").text(function(d){ return d.user.fullname; })
     attrs_enter.append("td").text(function(d){ return moment(d.timestamp).calendar(); })
-    attrs_enter.append("td")
-      .append("a")
-      .attr("href", function(d){
-        return window.location + d.id;
-      })
-      .text(dataviva.format.text("edit"))
+    action_box = attrs_enter.append("td");
+    
+    // Edit Button
+    action_box.append("a")
+     .attr("href", function(d){
+       return window.location + d.id;
+     })
+     .text(dataviva.format.text("edit"))
+    
+    // Create Delet URL
+    u = window.location.toString();
+    url_pop = u.split('/');
+    url_pop.pop();
+    url_pop.pop();
+    url_delete = url_pop.join("/") + "/delete/";
+     
+     // Delete Button
+     action_box.append("a")
+     .attr("href", function(d){
+       return url_delete + d.id;
+     }).attr("class", "delete_btn").attr("style", "margin: 0; display:block")
+     .text(dataviva.format.text("delete"))
+     .on("click", function(e) { 
+     	if(!confirm("Are you sure to delete this item?")) {
+     		d3.event.preventDefault();
+     	}
+     })
 
   }
+  
+  
 
   var is = infinite_scroll().url(window.location.href.replace("questions","questionslist")).format_items(item_formatter);
+  
+  
 
   d3.select(".feed")
     .call(is)
+  
   
   </script>
 

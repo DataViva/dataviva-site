@@ -62,40 +62,42 @@
       </div>
     
       {% for r in q.replies %}
-        <div class="reply_box comment{% if r.id != r.parent_id %} child{% endif %}">
-    
-          <!-- Voting -->
-          <div class="vote_block answer">
-            <div class="vote_count">{% if r.votes.all()|length %}{{ r.votes.count() }}{% else %}0{% endif %}</div>
-            <div class="vote_label">{% trans %}Points{% endtrans %}</div>
-            <a class="vote_down alt_tooltip" style="color: {% if r.flagged() %}red{% else %}#333{% endif %}" href="{{ url_for('ask.reply_flag', id=r.id) }}" alt="{% trans %}Flagged replies are reviewed by DataViva staff to determine if they violate community guidelines. Accounts are penalized for violations and can lead to account termination.{% endtrans %}">
-              <i class="fa fa-flag"></i>
-            </a>
-            <a class="vote_up alt_tooltip" style="color: {% if r.voted() %}green{% else %}#333{% endif %}" href="{{ url_for('ask.reply_vote', id=r.id) }}" alt="{% trans %}This question contributes to a better understanding of the topic.{% endtrans %}">
-              <i class="fa fa-thumbs-up"></i>
-            </a>
-          </div> <!-- end voting -->
-    
-          <div class="reply_body">
-          <!-- Reply text -->
-            {% if r.hidden == 1%}
-              <i>{% trans %}This reply has been flagged as inappropriate and hidden by an administrator.{% endtrans %}</i>
-            {% else %}
-              {{ r.body|safe }}
-            {% endif %}
-            <!-- User metadata -->
-            <p class="question_attr">
-              <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a>{% if r.timestamp != None %} {{ momentjs(r.timestamp).fromNow() }}{% endif %}
-            </p>
-          <!-- end reply text -->
-      
-          {% if r.id == r.parent_id %}
-            <div class="leave_response decision short icon reply" data-parent="{{r.parent_id}}">{% trans %}Respond to{% endtrans %} {{r.user.fullname}}</div>
-            </div><div class="reply_area">
-          {% endif %}
-          </div>
-  
-        </div> <!-- end reply -->
+      	{% if r.hidden < 2 %}
+	        <div class="reply_box comment{% if r.id != r.parent_id %} child{% endif %}">
+	    
+	          <!-- Voting -->
+	          <div class="vote_block answer">
+	            <div class="vote_count">{% if r.votes.all()|length %}{{ r.votes.count() }}{% else %}0{% endif %}</div>
+	            <div class="vote_label">{% trans %}Points{% endtrans %}</div>
+	            <a class="vote_down alt_tooltip" style="color: {% if r.flagged() %}red{% else %}#333{% endif %}" href="{{ url_for('ask.reply_flag', id=r.id) }}" alt="{% trans %}Flagged replies are reviewed by DataViva staff to determine if they violate community guidelines. Accounts are penalized for violations and can lead to account termination.{% endtrans %}">
+	              <i class="fa fa-flag"></i>
+	            </a>
+	            <a class="vote_up alt_tooltip" style="color: {% if r.voted() %}green{% else %}#333{% endif %}" href="{{ url_for('ask.reply_vote', id=r.id) }}" alt="{% trans %}This question contributes to a better understanding of the topic.{% endtrans %}">
+	              <i class="fa fa-thumbs-up"></i>
+	            </a>
+	          </div> <!-- end voting -->
+	    
+	          <div class="reply_body">
+	          <!-- Reply text -->
+	            {% if r.hidden == 1%}
+	              <i>{% trans %}This reply has been flagged as inappropriate and hidden by an administrator.{% endtrans %}</i>
+	            {% else %}
+	              {{ r.body|safe }}
+	            {% endif %}
+	            <!-- User metadata -->
+	            <p class="question_attr">
+	              <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a>{% if r.timestamp != None %} {{ momentjs(r.timestamp).fromNow() }}{% endif %}
+	            </p>
+	          <!-- end reply text -->
+	      
+	          {% if r.id == r.parent_id %}
+	            <div class="leave_response decision short icon reply" data-parent="{{r.parent_id}}">{% trans %}Respond to{% endtrans %} {{r.user.fullname}}</div>
+	            </div><div class="reply_area">
+	          {% endif %}
+	          </div>
+	  
+	        </div> <!-- end reply -->
+	     {% endif %}
       {% endfor %}
     
     {% endif %}

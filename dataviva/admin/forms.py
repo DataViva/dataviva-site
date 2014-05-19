@@ -12,3 +12,5 @@ class AdminQuestionUpdateForm(Form):
     status = QuerySelectField(query_factory=statuses)
     language = SelectField("language",choices=[("en","English"),("pt","Portugu&#234;s")])
     answer = TextAreaField('answer', validators = [validators.Required()])
+    body = TextAreaField('body', validators = [validators.Required()])
+    question = TextField("question", validators = [validators.Required()])
