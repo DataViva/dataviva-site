@@ -155,7 +155,7 @@ def page_not_found(e="413"):
     error = str(e).split(":")[0]
     try:
         error_code = int(error)
-    except URLError, e:
+    except e:
         error_code=0
        
     request_info = {
