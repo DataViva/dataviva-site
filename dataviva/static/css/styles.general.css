@@ -57,7 +57,8 @@ hr {
   margin: 0px auto;
   padding: 90px 0px 66px 0px;
   text-align: center;
-  width: 980px;
+  max-width: 980px;
+  width:100%;
 }
 
 div#selector {
