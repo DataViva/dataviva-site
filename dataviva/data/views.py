@@ -6,7 +6,6 @@ from sqlalchemy import func
 from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, redirect, url_for
 
 from dataviva import db
-from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo
 from dataviva.apps.models import UI

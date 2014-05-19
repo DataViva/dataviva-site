@@ -28,6 +28,12 @@ div#pagination {
   padding-bottom: 14px;
 }
 
+@media (max-width: 600px) {
+	.page_button {
+		display:none!important;
+	}
+}
+
 div.page {
   background-color: #ddd;
   color: white;
