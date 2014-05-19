@@ -164,8 +164,8 @@
         question_info.append("p")
           .attr("class", "question_replies")
           .html(function(d){
-            if (d.replies == 1) var suffix = dataviva.format.text("{% trans %}Comment{% endtrans %}")
-            else var suffix = dataviva.format.text("{% trans %}Comments{% endtrans %}")
+            if (d.replies == 1) var suffix = "{% trans %}Comment{% endtrans %}"
+            else var suffix = "{% trans %}Comments{% endtrans %}"
             return "<a href='/about/question/" + d.slug + "'>" + d.replies + " " + suffix + "</a>"
           })
 
