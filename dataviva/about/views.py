@@ -84,9 +84,9 @@ def ask(user=None):
 
             filter = ProfanitiesFilter(banned_words, replacements = '*')
 
-            _question = filter.clean(str(form.question.data.encode("utf-8")))
-            _body =  filter.clean(str(form.body.data.encode("utf-8")))
-            _type = filter.clean(str(form.type.data.encode("utf-8")))
+            _question = filter.clean(form.question.data.encode("utf-8"))
+            _body =  filter.clean(form.body.data.encode("utf-8"))
+            _type = filter.clean(form.type.data.encode("utf-8"))
 
             question = Question(question=_question, body=_body, timestamp=timestamp, user=g.user, slug=slug, language=g.locale, type_id=_type)
             if "," in form.tags.data:
