@@ -62,6 +62,7 @@
 {% block js %}
 
   <script src="/static/js/utils/utils.selector.js"></script>
+  <script src="/static/js/libs/jquery-2.0.3.min.js"></script>
   <script>
   
     function callback(obj) {
@@ -73,9 +74,9 @@
     }
   
     function selector(type,id) {
-      
+       d3.select("body").style("overflow", "hidden")
       if (d3.select("#profile_select").empty()) {
-        
+
         dataviva.popover.create({
           "id": "profile_select",
           "width": 600,

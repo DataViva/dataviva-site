@@ -794,6 +794,7 @@ dataviva.popover.create = function(params) {
       .style("background-color",color)
       .on(d3plus.evt.click,function(){
         dataviva.popover.hide("#"+id);
+        d3.select("body").style("overflow", "auto")
       })
   }
 
