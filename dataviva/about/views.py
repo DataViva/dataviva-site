@@ -84,8 +84,8 @@ def ask(user=None):
                 
             filter = ProfanitiesFilter(banned_words, replacements = '*')
             
-            _question = filter.clean(str(form.question.data.encode("ascii", "xmlcharrefreplace")))
-            _body =  filter.clean(str(form.body.data.encode("ascii", "xmlcharrefreplace")))
+            _question = filter.clean(str(form.question.data))
+            _body =  filter.clean(str(form.body.data))
             _type = filter.clean(str(form.type.data))
             
             question = Question(question=_question, body=_body, timestamp=timestamp, user=g.user, slug=slug, language=g.locale, type_id=_type)
