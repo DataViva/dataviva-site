@@ -58,7 +58,7 @@
     {% if q.replies.all()|length %}
       <!-- The responses -->
       <div class="reply_box">
-        <h2>{% trans %}Responses{% endtrans %}</h2>
+        <h2>{% trans %}Comments{% endtrans %}</h2>
       </div>
     
       {% for r in q.replies %}
@@ -106,7 +106,7 @@
   
   <!-- Leave another response (not to a specify reply but in general) -->
   <div id="new_response" class="reply_box">
-    <h2>{% trans %}New Response{% endtrans %}</h2>
+    <h2>{% trans %}New Comment{% endtrans %}</h2>
     <div>
     <div class="decision short icon reply leave_response" style="display: none;">{% trans %}Leave a Response{% endtrans %}</div>
     </div>

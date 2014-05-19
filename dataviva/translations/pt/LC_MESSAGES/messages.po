@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-05-12 18:49-0400\n"
+"POT-Creation-Date: 2014-05-19 16:09-0300\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.6\n"
+"Generated-By: Babel 1.3\n"
 
 #: dataviva/about/views.py:73
 msgid "You need to be logged in to ask questions."
@@ -865,8 +865,9 @@ msgid "by"
 msgstr "por"
 
 #: dataviva/html/about/ask/answer.html:61
-msgid "Responses"
-msgstr "Respostas"
+#: dataviva/html/about/ask/index.html:168 dataviva/html/account/index.html:30
+msgid "Comments"
+msgstr "Comentários"
 
 #: dataviva/html/about/ask/answer.html:71
 msgid ""
@@ -889,8 +890,8 @@ msgid "Respond to"
 msgstr "Responder para"
 
 #: dataviva/html/about/ask/answer.html:107
-msgid "New Response"
-msgstr "Nova Resposta"
+msgid "New Comment"
+msgstr "Novo Comentário"
 
 #: dataviva/html/about/ask/answer.html:109
 msgid "Leave a Response"
@@ -1014,7 +1015,7 @@ msgstr "Mais Recente"
 msgid "Question"
 msgstr "Pergunta"
 
-#: dataviva/html/about/ask/index.html:47
+#: dataviva/html/about/ask/index.html:47 dataviva/html/about/ask/index.html:167
 msgid "Comment"
 msgstr "Comentário"
 
@@ -1557,10 +1558,6 @@ msgstr "Apps Favoritos"
 msgid "Questions"
 msgstr "Perguntas"
 
-#: dataviva/html/account/index.html:30 dataviva/html/templates/admin.html:26
-msgid "Replies"
-msgstr "Respostas"
-
 #: dataviva/html/account/index.html:33
 msgid "Preferences"
 msgstr "Preferencias"
@@ -1693,7 +1690,7 @@ msgstr "Atenciosamente,"
 msgid "The DataViva Team"
 msgstr "O Equipe DataViva"
 
-#: dataviva/html/apps/builder.html:16
+#: dataviva/html/apps/builder.html:17
 msgid "App Builder"
 msgstr "Construtor de Aplicativos"
 
@@ -2073,6 +2070,10 @@ msgstr "Vantagem Comparativa"
 msgid "Users"
 msgstr "Usuários"
 
+#: dataviva/html/templates/admin.html:26
+msgid "Replies"
+msgstr "Respostas"
+
 #: dataviva/html/templates/admin.html:29
 msgid "Pending"
 msgstr "Pendente"
@@ -2109,29 +2110,3 @@ msgstr "Sair"
 msgid "a country"
 msgstr "um país"
 
-msgid "wages"
-msgstr "salário"
-
-msgid "opportunity"
-msgstr "oportunidade"
-
-msgid "destinations"
-msgstr "destinos"
-
-msgid "diversification"
-msgstr "diversificação"
-
-msgid "attract"
-msgstr "atrair"
-
-msgid "growth"
-msgstr "crescimento"
-
-msgid "shrink"
-msgstr "baixa"
-
-msgid "paths"
-msgstr "alternativas"
-
-msgid "potential"
-msgstr "potencial"

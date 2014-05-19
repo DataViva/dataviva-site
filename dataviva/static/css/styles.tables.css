@@ -2,8 +2,8 @@ body {
   background-color: white;
 }
 
-table { 
-  border-collapse: collapse; 
+table {
+  border-collapse: collapse;
   border-spacing: 0;
   position: relative;
   table-layout: fixed;
@@ -68,7 +68,7 @@ table td {
   padding: 9px;
 }
 
-table .id, table .bra_id, table .id_ibge, table .isic_id, table .cbo_id, 
+table .id, table .bra_id, table .id_ibge, table .isic_id, table .cbo_id,
 table .hs_id, table .wld_id, table .year, table .color, table .rank {
   text-align: center;
 }
@@ -140,7 +140,8 @@ table th:hover {
   cursor: pointer;
 }
 
-table th.rank:hover, table th.name:hover {
+table th.rank:hover, table th.name:hover,
+table th.id_ibge:hover, table th.id_mdic:hover {
   background-color: rgba(255,255,255,0.75);
   cursor: auto;
 }
@@ -177,30 +178,30 @@ table .bra_diversity, table .bra_diversity_eff,
 table .isic_diversity, table .isic_diversity_eff,
 table .cbo_diversity, table .cbo_diversity_eff,
 table .hs_diversity, table .hs_diversity_eff,
-table .wld_diversity, table .wld_diversity_eff { 
-  min-width: 100px !important; 
-  width: 100px !important; 
+table .wld_diversity, table .wld_diversity_eff {
+  min-width: 100px !important;
+  width: 100px !important;
 }
-table .rank { 
-  min-width: 40px !important; 
-  width: 40px !important; 
+table .rank {
+  min-width: 40px !important;
+  width: 40px !important;
 }
-table .year { 
-  min-width: 40px !important; 
-  width: 40px !important; 
+table .year {
+  min-width: 40px !important;
+  width: 40px !important;
 }
 table .population {
-  min-width: 95px !important; 
-  width: 95px !important; 
+  min-width: 95px !important;
+  width: 95px !important;
 }
-table .bra_id, table .id, table .id_ibge, 
-table .isic_id, table .cbo_id, 
-table .hs_id, table .wld_id, table.color { 
-  min-width: 70px !important; 
-  width: 70px !important; 
+table .bra_id, table .id, table .id_ibge,
+table .isic_id, table .cbo_id,
+table .hs_id, table .wld_id, table.color {
+  min-width: 70px !important;
+  width: 70px !important;
 }
-table .name { 
-  max-width: 200px !important; 
-  min-width: 200px !important; 
-  width: 200px !important; 
+table .name {
+  max-width: 200px !important;
+  min-width: 200px !important;
+  width: 200px !important;
 }
