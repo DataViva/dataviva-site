@@ -43,6 +43,7 @@ th {
   line-height: 0px !important;
   padding: 9px;
   text-align: left;
+  vertical-align: middle;
 }
 
 tr {

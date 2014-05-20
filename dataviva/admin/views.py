@@ -249,6 +249,20 @@ def admin_replies_list():
 
     return ret
 
+@mod.route('/reply/delete/<int:reply_id>/', methods = ['GET'])
+@required_roles(1)
+def delete_reply(reply_id):
+    
+
+    reply = Reply.query.get(reply_id)
+    
+    db.session.delete(reply)
+    db.session.commit()
+    flash(gettext('The item was successfully deleted.'))
+    
+    return redirect(url_for(".admin_replies"))
+
+
 @mod.route('/reply/<int:reply_id>/', methods = ['PUT','POST'])
 @required_roles(1)
 def update_reply(reply_id):
