@@ -82,20 +82,12 @@ def ask(user=None):
             file_banned_words = open(os.path.join(basedir, "dataviva/static/txt/blacklist.txt"))
             banned_words = [line.strip() for line in file_banned_words]
 
-            filter = ProfanitiesFilter(banned_words, replacements = '*')
-<<<<<<< HEAD
-            
+            filter = ProfanitiesFilter(banned_words, replacements = '*')          
             _question = filter.clean(str(form.question.data))
             _body =  filter.clean(str(form.body.data))
             _type = filter.clean(str(form.type.data))
             
-=======
 
-            _question = filter.clean(form.question.data.encode("utf-8"))
-            _body =  filter.clean(form.body.data.encode("utf-8"))
-            _type = filter.clean(form.type.data.encode("utf-8"))
-
->>>>>>> 8604d10abe353dd717e23e4f9da1edc57f55722c
             question = Question(question=_question, body=_body, timestamp=timestamp, user=g.user, slug=slug, language=g.locale, type_id=_type)
             if "," in form.tags.data:
                 tags = form.tags.data.split(",")
