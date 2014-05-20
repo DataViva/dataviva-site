@@ -377,6 +377,8 @@ dataviva.format.text = function(text,name,l) {
       "hidden": {"en": "Hidden", "pt": "Oculto"},
       "user": {"en": "User", "pt": "Usu\u00e1rio"},
       "admin": {"en": "Admin", "pt": "Administrador"},
+      "remove": {"en": "Remove", "pt": "Remover"},
+      "remove_confirmation": {"en": "Are you sure to delete this item?", "pt": "Tem certeza que deseja remover este item?"},
 
       // Selector
       "search": {"en": "Search", "pt": "Pesquisar"},

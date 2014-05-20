@@ -44,7 +44,7 @@ function item_formatter(container_el, activities){
   
 	roles = {}
 	roles[dataviva.format.text("visible")] = 0
-	roles[dataviva.format.text("hidden")] = 1
+	roles[dataviva.format.text("hidden")] = 2
 	
 
 	var attrs_enter = d3.select(container_el).select("tbody").selectAll("tr")
@@ -81,7 +81,7 @@ function item_formatter(container_el, activities){
 			})
 			.each(function(d){
 				var parent_data = d3.select(this.parentNode).datum();
-				console.log(parent_data)
+				
 				leon("$hidden_"+parent_data.id).size("small")
 				
 			})
@@ -100,7 +100,7 @@ function item_formatter(container_el, activities){
      }).attr("class", "delete_btn").attr("style", "margin: 0; display:block")
      .text(dataviva.format.text("remove"))
      .on("click", function(e) { 
-     	if(!confirm("Are you sure to delete this item?")) {
+     	if(!confirm(dataviva.format.text("remove_confirmation"))) {
      		d3.event.preventDefault();
      	}
      })

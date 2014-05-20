@@ -244,7 +244,7 @@ input {
 }
 
 .reply_box {
-  border-bottom: 1px solid #888;
+  border-top: 1px solid #888;
   padding: 12px;
   position: relative;
 }

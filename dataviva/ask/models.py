@@ -92,7 +92,7 @@ class Question(db.Model, AutoSerialize):
             auto_serialized["timestamp"] = None
         auto_serialized["user"] = self.user.serialize()
         auto_serialized["votes"] = len(self.votes.all())
-        auto_serialized["replies"] = len(self.replies.all())
+        auto_serialized["replies"] = len(self.replies.filter_by(hidden=0).all()) + len(self.replies.filter_by(hidden=1).all()) 
         return auto_serialized
 
 class Tag(db.Model):

@@ -3,7 +3,23 @@
 {% block title %}: {% trans %}Question{% endtrans %}{% endblock %}
 
 {% block admin_content %}
-
+<style>
+td.reply_cell { vertical-align: middle; text-align: center; line-height: 15px;}
+	.action_btn {
+		border: 1px solid #CCC;
+		background-color: #FFF;
+		color: #666;
+		font-size: 11px;
+		line-height: 11px;
+		padding: 4px 5px;
+		margin-top: 4px!important;
+		float: left;
+	}
+	.action_btn:hover {
+		background-color: #AF1F24;
+		color: #fff;
+	}
+</style>
   <div class="feed">
   
     <table>
@@ -11,6 +27,7 @@
         <tr>
           <th>{% trans %}Question{% endtrans %}</th>
           <th>{% trans %}User{% endtrans %}</th>
+          <th>{% trans %}Replies{% endtrans %}</th>
           <th>{% trans %}Date{% endtrans %}</th>
           <th></th>
         </tr>
@@ -28,15 +45,30 @@
   <script src="/static/js/utils/utils.infinite_scroll.js"></script>
   <script>
   
-
+	var delete_label = "{% trans %}Delete{% endtrans %}"
+	var delete_confirmation = "{% trans %}Are you sure to delete this item?{% endtrans %}" 
+	
   function item_formatter(container_el, activities){
-  
+  	
+  	// Get Controller url
+  	u = window.location.toString();
+    url_pop = u.split('/');
+    url_pop.pop();
+    url_pop.pop();
+  	var urlReply = url_pop;
+  	
     var attrs_enter = d3.select(container_el).select("tbody").selectAll("tr")
       .data(activities, function(d){ return d.question; })
       .enter().append("tr")
 
     attrs_enter.append("td").text(function(d){ return d.question; })
     attrs_enter.append("td").text(function(d){ return d.user.fullname; })
+    
+    // Create Delete URL
+    urlReply.pop()
+    url_replies = urlReply.join("/") + "/replies/question";
+    attrs_enter.append("td").attr("class", "reply_cell").attr("valign", "middle").attr("align", "center").html(function(d){ return '<a href="'+ url_replies +'/'+ d.id+'">'+ d.replies + '   <i class="fa fa-eye"></i></a>'; })
+    
     attrs_enter.append("td").text(function(d){ return moment(d.timestamp).calendar(); })
     action_box = attrs_enter.append("td");
     
@@ -44,24 +76,20 @@
     action_box.append("a")
      .attr("href", function(d){
        return window.location + d.id;
-     })
+     }).attr("class", "action_btn")
      .text(dataviva.format.text("edit"))
     
-    // Create Delet URL
-    u = window.location.toString();
-    url_pop = u.split('/');
-    url_pop.pop();
-    url_pop.pop();
+    // Create Delete URL
     url_delete = url_pop.join("/") + "/delete/";
      
      // Delete Button
      action_box.append("a")
      .attr("href", function(d){
        return url_delete + d.id;
-     }).attr("class", "delete_btn").attr("style", "margin: 0; display:block")
-     .text(dataviva.format.text("delete"))
+     }).attr("class", "action_btn").attr("style", "margin: 0; display:block")
+     .text(dataviva.format.text("remove"))
      .on("click", function(e) { 
-     	if(!confirm("Are you sure to delete this item?")) {
+     	if(!confirm(dataviva.format.text("remove_confirmation"))) {
      		d3.event.preventDefault();
      	}
      })

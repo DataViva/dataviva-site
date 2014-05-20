@@ -7,7 +7,7 @@ from dataviva import db
 from datetime import datetime
 # models
 from dataviva.account.models import User
-from dataviva.ask.models import Question, Status, Reply, Flag
+from dataviva.ask.models import Question, Status, Reply, Flag, Vote
 # forms
 from dataviva.admin.forms import AdminQuestionUpdateForm
 from dataviva.utils import strip_html
@@ -231,7 +231,7 @@ def admin_replies_list():
 
     # get all users EXCEPT the logged in user
    
-    reply = Reply.query
+    reply = Reply.query.filter_by(hidden=2)
     question = Question.query
 
     items = reply.order_by(Reply.hidden.desc(), Reply.timestamp.desc()).limit(limit).offset(offset).all()
@@ -249,11 +249,73 @@ def admin_replies_list():
 
     return ret
 
+
+@mod.route('/replies/question/<int:question_id>/')
+@login_required
+@required_roles(1)
+def admin_replies_question(question_id):
+   
+    questions = Question.query.get_or_404(question_id)
+    reply = Reply.query.filter_by(question_id=question_id)
+    replies = reply.order_by(Reply.hidden.asc(), Reply.timestamp.desc()).limit(50).offset(0).all()
+    user = User.query.get(questions.user_id)
+    questions.replies = replies
+    #questions.user = user
+    
+    return render_template("admin/admin_replies_question.html", q=questions)
+    
+
+@mod.route('/replieslist/question/<int:questionid>/')
+@login_required
+@required_roles(1)
+def admin_replies_question_list(questionid):
+
+    offset = request.args.get('offset', 0)
+    limit = 50
+
+    # get all users EXCEPT the logged in user
+   
+    reply = Reply.query.filter_by(question_id=questionid)
+    items = reply.order_by(Reply.hidden.desc(), Reply.timestamp.desc()).limit(limit).offset(offset).all()
+    
+    items = [i.serialize() for i in items]
+    
+    for i in items:
+        i["body"] = strip_html(i["body"])
+        
+        
+    ret = jsonify({"activities":items})
+
+    ret.headers.add('Last-Modified', datetime.now())
+    ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    ret.headers.add('Pragma', 'no-cache')
+
+    return ret
+
+@mod.route('/replies/delete/<int:reply_id>/')
+@required_roles(1)
+def delete_reply_question(reply_id):
+    
+    vote = Vote.query.filter_by(type_id=reply_id).delete()
+    
+    reply = Reply.query.get(reply_id)
+    question = reply.question_id
+    
+    db.session.delete(reply)
+    db.session.commit()
+    
+    flash(gettext('The item was successfully deleted.'))
+    
+    return redirect(url_for(".admin_replies_question", question_id=question))
+    
+
+
 @mod.route('/reply/delete/<int:reply_id>/', methods = ['GET'])
 @required_roles(1)
 def delete_reply(reply_id):
     
-
+    
+    
     reply = Reply.query.get(reply_id)
     
     db.session.delete(reply)

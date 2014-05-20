@@ -131,8 +131,18 @@ def answer(slug):
         else:
             parent_id = reply_form.parent.data
         
-        hiddenFld = 1;
-        reply = Reply(body=reply_form.reply.data, timestamp=timestamp, 
+        hiddenFld = 2;
+        
+        from ..utils import ProfanitiesFilter
+        
+        file_banned_words = open(os.path.join(basedir, "dataviva/static/txt/blacklist.txt"))
+        banned_words = [line.strip() for line in file_banned_words]
+        
+        filter = ProfanitiesFilter(banned_words, replacements = '*')          
+        _body =  filter.clean(str(reply_form.reply.data))
+        
+
+        reply = Reply(body=_body, timestamp=timestamp, 
                         user=g.user, question=question, parent_id=parent_id, hidden=hiddenFld)
 
         db.session.add(reply)
@@ -141,7 +151,7 @@ def answer(slug):
             reply.parent_id = reply.id
             db.session.add(reply)
             db.session.commit()
-        flash(gettext('Reply submitted.'))
+        flash(gettext('Reply submitted. Your reply will show up after we review it.'))
 
         #envia email para o admin
         send_mail('Aviso de nova publicacao no DataViva', [ADMINISTRATOR_EMAIL], render_template('about/ask/ask_feedback.html', question=question))
