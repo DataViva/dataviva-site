@@ -37,7 +37,7 @@
 
   {% for filter in filter_order %}
     <div id="{{filter}}_filter" class="filter{% for dataset in datasets %}{% if filter in datasets[dataset]['filters'] %} {{dataset}}_filter{% endif %}{% endfor %}{% if filters[filter]["active"] %} active{% endif %}">
-      <a id="{{filter}}_toggle" class="help short filter_button" onclick="toggle_filter(this.id,this.parentNode)">
+      <a id="{{filter}}_toggle" class="help short filter_button" {% if filter != "bra" %}onclick="toggle_filter(this.id,this.parentNode)"{% endif %}>
         <span class="show">{{ format("show").render("show",g.locale) }}</span>
         {{ format(filter+"_plural").render(filter+"_plural",g.locale) }}
       </a>
