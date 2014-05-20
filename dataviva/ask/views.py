@@ -23,7 +23,7 @@ def question_list(page):
     order = request.args.get('order', 'votes') # options = 'votes' or 'newest'
     type = request.args.get('type', 'all') # options = 'all' or 'question' or 'comment' or 'contact'
     offset = request.args.get('offset', 0)
-    search_term = request.args.get('q', None)
+    search_term = request.args.get('q', None).encode('utf-8')
     limit = 25
     lang = request.args.get('lang', None) or g.locale
     
