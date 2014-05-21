@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-05-21 11:13-0300\n"
+"POT-Creation-Date: 2014-05-21 11:51-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1734,19 +1734,19 @@ msgstr ""
 #: dataviva/html/templates/site.html:111
 msgid ""
 "The estimated time to answer is about 2 to 3 minutes and there is no "
-"identification. All you need to do is follow this link:"
+"identification."
 msgstr ""
 
-#: dataviva/html/templates/site.html:114
-msgid "PARTICIPAR DA PESQUISA"
+#: dataviva/html/templates/site.html:113
+msgid "Thanks a lot, DataViva Team."
 msgstr ""
 
 #: dataviva/html/templates/site.html:116
-msgid "TAKE THE SURVEY"
+msgid "PARTICIPAR DA PESQUISA"
 msgstr ""
 
-#: dataviva/html/templates/site.html:119
-msgid "Thanks a lot, DataViva Team."
+#: dataviva/html/templates/site.html:118
+msgid "TAKE THE SURVEY"
 msgstr ""
 
 #: dataviva/profiles/views.py:47

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-05-21 11:13-0300\n"
+"POT-Creation-Date: 2014-05-21 11:51-0300\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -2150,28 +2150,29 @@ msgid ""
 "In order to improve our platform, we are running a very quick survey to "
 "collect some impressions and to know more about our users."
 msgstr ""
-"Com o objetivo de aprimorar nossa plataforma estamosfazendo uma breve "
-"pesquisa com nossos usuários para sabemais sobre seu perfil e percepções."
+"Com o objetivo de aprimorar nossa plataforma estamos fazendo uma breve "
+"pesquisa com nossos usuários para saber mais sobre seu perfil e "
+"percepções."
 
 #: dataviva/html/templates/site.html:111
 msgid ""
 "The estimated time to answer is about 2 to 3 minutes and there is no "
-"identification. All you need to do is follow this link:"
+"identification."
 msgstr ""
-"O tempo requerido para responder esta pesquisa é de aproximadamente02 a "
-"03 minutos e não há identificação. Contamos com sua ajuda! Basta acessar:"
+"O tempo requerido para responder esta pesquisa é de aproximadamente 02 a "
+"03 minutos e não há identificação. Contamos com sua ajuda!"
 
-#: dataviva/html/templates/site.html:114
+#: dataviva/html/templates/site.html:113
+msgid "Thanks a lot, DataViva Team."
+msgstr "Muito obrigado, Equipe DataViva"
+
+#: dataviva/html/templates/site.html:116
 msgid "PARTICIPAR DA PESQUISA"
 msgstr ""
 
-#: dataviva/html/templates/site.html:116
+#: dataviva/html/templates/site.html:118
 msgid "TAKE THE SURVEY"
 msgstr ""
-
-#: dataviva/html/templates/site.html:119
-msgid "Thanks a lot, DataViva Team."
-msgstr "Muito obrigado, Equipe DataViva"
 
 #: dataviva/profiles/views.py:47
 msgid "a country"
