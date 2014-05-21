@@ -98,6 +98,30 @@
       
   </div>
   
+  <div class="survey-block">
+  	{% if g.locale == 'pt' %}
+  	<img src="/static/img/icons/app/pesquisa2.png">
+  	{% else %}
+  	<img src="/static/img/icons/app/pesquisa.png">
+  	{% endif %}
+  	<div class="survey-body">
+  		<h2>{%trans%}Dear user,{%endtrans%}</h2>
+		{%trans%}In order to improve our platform, we are running a very quick survey to collect some impressions and to know more about our users.{%endtrans%}
+		<br><br>
+		{%trans%}The estimated time to answer is about 2 to 3 minutes and there is no identification. All you need to do is follow this link:{%endtrans%}
+		<br><br>
+		{%trans%}Thanks a lot, DataViva Team.{%endtrans%}
+		<br><br>
+		{% if g.locale == 'pt' %}
+		<a href="https://pt.surveymonkey.com/s/M6TR9SG" target="_blank">{%trans%}PARTICIPAR DA PESQUISA{%endtrans%}</a>
+		{% else %}
+		<a href="https://pt.surveymonkey.com/s/MWZ97WG" target="_blank">{%trans%}TAKE THE SURVEY{%endtrans%}</a>
+		{% endif %}
+		<br><br>
+		
+  	</div>
+  </div>
+  
   <script type="text/javascript">
   
     var crumbs = "{{crumbs|safe}}"
@@ -175,7 +199,15 @@
         login()
       })
     }
-    
+    d3.select(".survey-block img").on("click", function(){
+    	if(this.getAttribute("open")==1) {
+	    	d3.select(this.parentNode).transition().style("bottom", "-322px");
+	    	d3.select(this).attr("open", 0)
+    	} else {
+    		d3.select(this.parentNode).transition().style("bottom", "0px");
+    		d3.select(this).attr("open", 1)
+    	}
+    })
   </script>
     
 {% endblock %}

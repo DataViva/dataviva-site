@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-05-19 16:09-0300\n"
+"POT-Creation-Date: 2014-05-21 11:13-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,15 +28,15 @@ msgid ""
 "Our team will contact you by e-mail shortly."
 msgstr ""
 
-#: dataviva/about/views.py:117
+#: dataviva/about/views.py:118
 msgid "You need to be signed in to reply to questions."
 msgstr ""
 
-#: dataviva/about/views.py:140
-msgid "Reply submitted."
+#: dataviva/about/views.py:155
+msgid "Reply submitted. Your reply will show up after we review it."
 msgstr ""
 
-#: dataviva/about/views.py:160
+#: dataviva/about/views.py:175
 msgid "terms_of_use"
 msgstr ""
 
@@ -48,23 +48,28 @@ msgstr ""
 msgid "You dont have permission to view this page."
 msgstr ""
 
-#: dataviva/admin/views.py:174
+#: dataviva/admin/views.py:176
 msgid "DataViva Reply"
 msgstr ""
 
-#: dataviva/admin/views.py:179
+#: dataviva/admin/views.py:181
 msgid "This question has now been updated."
+msgstr ""
+
+#: dataviva/admin/views.py:206 dataviva/admin/views.py:307
+#: dataviva/admin/views.py:323
+msgid "The item was successfully deleted."
 msgstr ""
 
 #: dataviva/apps/views.py:156
 msgid "You need to be logged in to star apps."
 msgstr ""
 
-#: dataviva/ask/views.py:100 dataviva/ask/views.py:128
+#: dataviva/ask/views.py:102 dataviva/ask/views.py:130
 msgid "You need to be logged in to vote."
 msgstr ""
 
-#: dataviva/ask/views.py:158
+#: dataviva/ask/views.py:160
 msgid "You need to be logged in to flag replies."
 msgstr ""
 
@@ -617,12 +622,13 @@ msgid "Point"
 msgstr ""
 
 #: dataviva/html/about/ask/answer.html:20
-#: dataviva/html/about/ask/answer.html:70
+#: dataviva/html/about/ask/answer.html:71
+#: dataviva/html/admin/admin_replies_question.html:118
 msgid "Points"
 msgstr ""
 
 #: dataviva/html/about/ask/answer.html:23
-#: dataviva/html/about/ask/answer.html:74
+#: dataviva/html/about/ask/answer.html:75
 msgid "This question contributes to a better understanding of the topic."
 msgstr ""
 
@@ -633,10 +639,12 @@ msgid ""
 msgstr ""
 
 #: dataviva/html/about/ask/answer.html:49
+#: dataviva/html/admin/admin_replies_question.html:110
 msgid "Asked"
 msgstr ""
 
 #: dataviva/html/about/ask/answer.html:49
+#: dataviva/html/admin/admin_replies_question.html:110
 msgid "by"
 msgstr ""
 
@@ -645,33 +653,34 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: dataviva/html/about/ask/answer.html:71
+#: dataviva/html/about/ask/answer.html:72
 msgid ""
 "Flagged replies are reviewed by DataViva staff to determine if they "
 "violate community guidelines. Accounts are penalized for violations and "
 "can lead to account termination."
 msgstr ""
 
-#: dataviva/html/about/ask/answer.html:82
+#: dataviva/html/about/ask/answer.html:83
 msgid ""
 "This reply has been flagged as inappropriate and hidden by an "
 "administrator."
 msgstr ""
 
-#: dataviva/html/about/ask/answer.html:93
+#: dataviva/html/about/ask/answer.html:94
 msgid "Respond to"
 msgstr ""
 
-#: dataviva/html/about/ask/answer.html:107
+#: dataviva/html/about/ask/answer.html:109
 msgid "New Comment"
 msgstr ""
 
-#: dataviva/html/about/ask/answer.html:109
+#: dataviva/html/about/ask/answer.html:111
 msgid "Leave a Response"
 msgstr ""
 
-#: dataviva/html/about/ask/answer.html:130
-#: dataviva/html/admin/admin_replies.html:12
+#: dataviva/html/about/ask/answer.html:132
+#: dataviva/html/admin/admin_questions_edit.html:38
+#: dataviva/html/admin/admin_replies.html:27
 msgid "Reply"
 msgstr ""
 
@@ -771,7 +780,7 @@ msgstr ""
 
 #: dataviva/html/about/ask/index.html:45
 #: dataviva/html/admin/admin_questions.html:3
-#: dataviva/html/admin/admin_questions.html:12
+#: dataviva/html/admin/admin_questions.html:28
 msgid "Question"
 msgstr ""
 
@@ -1193,51 +1202,79 @@ msgstr ""
 msgid "Remember Me"
 msgstr ""
 
-#: dataviva/html/admin/admin_questions.html:13
-#: dataviva/html/admin/admin_replies.html:13
+#: dataviva/html/admin/admin_questions.html:29
+#: dataviva/html/admin/admin_replies.html:28
 #: dataviva/html/admin/admin_users.html:12
 msgid "User"
 msgstr ""
 
-#: dataviva/html/admin/admin_questions.html:14
+#: dataviva/html/admin/admin_questions.html:30
+#: dataviva/html/templates/admin.html:26
+msgid "Replies"
+msgstr ""
+
+#: dataviva/html/admin/admin_questions.html:31
 msgid "Date"
+msgstr ""
+
+#: dataviva/html/admin/admin_questions.html:48
+msgid "Delete"
+msgstr ""
+
+#: dataviva/html/admin/admin_questions.html:49
+msgid "Are you sure to delete this item?"
 msgstr ""
 
 #: dataviva/html/admin/admin_questions_edit.html:3
 msgid "Edit Question"
 msgstr ""
 
-#: dataviva/html/admin/admin_questions_edit.html:18
+#: dataviva/html/admin/admin_questions_edit.html:21
 msgid "Asked by"
 msgstr ""
 
-#: dataviva/html/admin/admin_questions_edit.html:22
+#: dataviva/html/admin/admin_questions_edit.html:25
 msgid "Language"
 msgstr ""
 
-#: dataviva/html/admin/admin_questions_edit.html:25
+#: dataviva/html/admin/admin_questions_edit.html:28
 msgid "Status"
 msgstr ""
 
-#: dataviva/html/admin/admin_questions_edit.html:29
+#: dataviva/html/admin/admin_questions_edit.html:32
+msgid "Question title"
+msgstr ""
+
+#: dataviva/html/admin/admin_questions_edit.html:33
+#: dataviva/html/admin/admin_questions_edit.html:36
+#: dataviva/html/admin/admin_questions_edit.html:39
 msgid "Enter your answer..."
 msgstr ""
 
-#: dataviva/html/admin/admin_questions_edit.html:34
+#: dataviva/html/admin/admin_questions_edit.html:35
+msgid "Question body"
+msgstr ""
+
+#: dataviva/html/admin/admin_questions_edit.html:44
 msgid "Update"
 msgstr ""
 
 #: dataviva/html/admin/admin_replies.html:3
+#: dataviva/html/admin/admin_replies_question.html:3
 #: dataviva/html/admin/admin_users.html:3 dataviva/html/templates/site.html:41
 msgid "Admin Panel"
 msgstr ""
 
-#: dataviva/html/admin/admin_replies.html:14
+#: dataviva/html/admin/admin_replies.html:29
 msgid "Flags"
 msgstr ""
 
-#: dataviva/html/admin/admin_replies.html:15
+#: dataviva/html/admin/admin_replies.html:30
 msgid "Visibility"
+msgstr ""
+
+#: dataviva/html/admin/admin_replies_question.html:126
+msgid "Remove"
 msgstr ""
 
 #: dataviva/html/admin/admin_users.html:13
@@ -1652,10 +1689,6 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: dataviva/html/templates/admin.html:26
-msgid "Replies"
-msgstr ""
-
 #: dataviva/html/templates/admin.html:29
 msgid "Pending"
 msgstr ""
@@ -1686,6 +1719,34 @@ msgstr ""
 
 #: dataviva/html/templates/site.html:43
 msgid "Logout"
+msgstr ""
+
+#: dataviva/html/templates/site.html:108
+msgid "Dear user,"
+msgstr ""
+
+#: dataviva/html/templates/site.html:109
+msgid ""
+"In order to improve our platform, we are running a very quick survey to "
+"collect some impressions and to know more about our users."
+msgstr ""
+
+#: dataviva/html/templates/site.html:111
+msgid ""
+"The estimated time to answer is about 2 to 3 minutes and there is no "
+"identification. All you need to do is follow this link:"
+msgstr ""
+
+#: dataviva/html/templates/site.html:114
+msgid "PARTICIPAR DA PESQUISA"
+msgstr ""
+
+#: dataviva/html/templates/site.html:116
+msgid "TAKE THE SURVEY"
+msgstr ""
+
+#: dataviva/html/templates/site.html:119
+msgid "Thanks a lot, DataViva Team."
 msgstr ""
 
 #: dataviva/profiles/views.py:47

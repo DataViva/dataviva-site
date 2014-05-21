@@ -273,3 +273,47 @@ div.popover {
           transition: opacity 0.6s;
   z-index: 5001;
 }
+
+/*******************/
+/*   Survey Block  */
+/*******************/
+
+.survey-block img {
+    position: absolute;
+    top: -77px;
+    left: 50%;
+    margin-left: -80px;
+    cursor: pointer;
+}
+
+.survey-block a {
+	padding:15px 0px;
+	width:100%;
+	font-size:14px;
+	display: block;
+	text-align: center;
+	color: white;
+	background-color: #EE191A;
+
+}
+.survey-block a:hover {
+	color: #fff;
+	background-color:#cc1f20;
+	
+}
+
+.survey-block {
+	position: fixed;
+	bottom: -320px;
+	right: 10px;
+	width: 250px;
+	background-color: #FFF;
+	border-top: 5px solid #EE191A;
+	height: 250px;
+	padding: 30px;
+	color: #666;
+	text-align: justify;
+	font-size: 12px;
+	box-shadow: -1px 0px 22px #666;
+	z-index: 760;
+}

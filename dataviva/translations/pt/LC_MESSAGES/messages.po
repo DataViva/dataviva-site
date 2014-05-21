@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-05-19 16:09-0300\n"
+"POT-Creation-Date: 2014-05-21 11:13-0300\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -32,15 +32,15 @@ msgstr ""
 "a ferramenta! Em breve nossa equipe entrará em contato pelo e-mail "
 "informado."
 
-#: dataviva/about/views.py:117
+#: dataviva/about/views.py:118
 msgid "You need to be signed in to reply to questions."
 msgstr "Você precisa fazer o login para responder perguntas."
 
-#: dataviva/about/views.py:140
-msgid "Reply submitted."
-msgstr "Resposta enviada."
+#: dataviva/about/views.py:155
+msgid "Reply submitted. Your reply will show up after we review it."
+msgstr ""
 
-#: dataviva/about/views.py:160
+#: dataviva/about/views.py:175
 msgid "terms_of_use"
 msgstr "termos_de_uso"
 
@@ -52,23 +52,28 @@ msgstr "Preferencias atualizadas."
 msgid "You dont have permission to view this page."
 msgstr "Você não tem permissão para ver essa página."
 
-#: dataviva/admin/views.py:174
+#: dataviva/admin/views.py:176
 msgid "DataViva Reply"
 msgstr "Resposta DataViva"
 
-#: dataviva/admin/views.py:179
+#: dataviva/admin/views.py:181
 msgid "This question has now been updated."
 msgstr "Esta pergunta foi atualizada."
+
+#: dataviva/admin/views.py:206 dataviva/admin/views.py:307
+#: dataviva/admin/views.py:323
+msgid "The item was successfully deleted."
+msgstr ""
 
 #: dataviva/apps/views.py:156
 msgid "You need to be logged in to star apps."
 msgstr "Você precisa fazer o login para iniciar aplicativos."
 
-#: dataviva/ask/views.py:100 dataviva/ask/views.py:128
+#: dataviva/ask/views.py:102 dataviva/ask/views.py:130
 msgid "You need to be logged in to vote."
 msgstr "Você precisa fazer o login para votar."
 
-#: dataviva/ask/views.py:158
+#: dataviva/ask/views.py:160
 msgid "You need to be logged in to flag replies."
 msgstr "Você precisa fazer o login para marcar respostas."
 
@@ -839,12 +844,13 @@ msgid "Point"
 msgstr "Ponto"
 
 #: dataviva/html/about/ask/answer.html:20
-#: dataviva/html/about/ask/answer.html:70
+#: dataviva/html/about/ask/answer.html:71
+#: dataviva/html/admin/admin_replies_question.html:118
 msgid "Points"
 msgstr "Pontos"
 
 #: dataviva/html/about/ask/answer.html:23
-#: dataviva/html/about/ask/answer.html:74
+#: dataviva/html/about/ask/answer.html:75
 msgid "This question contributes to a better understanding of the topic."
 msgstr "Esta questão contribui para um melhor entendimento do tópico."
 
@@ -857,10 +863,12 @@ msgstr ""
 "iniciar a conversa abaixo."
 
 #: dataviva/html/about/ask/answer.html:49
+#: dataviva/html/admin/admin_replies_question.html:110
 msgid "Asked"
 msgstr "Perguntado"
 
 #: dataviva/html/about/ask/answer.html:49
+#: dataviva/html/admin/admin_replies_question.html:110
 msgid "by"
 msgstr "por"
 
@@ -869,7 +877,7 @@ msgstr "por"
 msgid "Comments"
 msgstr "Comentários"
 
-#: dataviva/html/about/ask/answer.html:71
+#: dataviva/html/about/ask/answer.html:72
 msgid ""
 "Flagged replies are reviewed by DataViva staff to determine if they "
 "violate community guidelines. Accounts are penalized for violations and "
@@ -879,26 +887,27 @@ msgstr ""
 "determinar se violaram as normas da comunidade. As contas são penalizadas"
 " por violações e podem ser canceladas."
 
-#: dataviva/html/about/ask/answer.html:82
+#: dataviva/html/about/ask/answer.html:83
 msgid ""
 "This reply has been flagged as inappropriate and hidden by an "
 "administrator."
 msgstr "Esta resposta foi marcada pelo administrador como inapropriada."
 
-#: dataviva/html/about/ask/answer.html:93
+#: dataviva/html/about/ask/answer.html:94
 msgid "Respond to"
 msgstr "Responder para"
 
-#: dataviva/html/about/ask/answer.html:107
+#: dataviva/html/about/ask/answer.html:109
 msgid "New Comment"
 msgstr "Novo Comentário"
 
-#: dataviva/html/about/ask/answer.html:109
+#: dataviva/html/about/ask/answer.html:111
 msgid "Leave a Response"
 msgstr "Deixe uma Resposta"
 
-#: dataviva/html/about/ask/answer.html:130
-#: dataviva/html/admin/admin_replies.html:12
+#: dataviva/html/about/ask/answer.html:132
+#: dataviva/html/admin/admin_questions_edit.html:38
+#: dataviva/html/admin/admin_replies.html:27
 msgid "Reply"
 msgstr "Responder"
 
@@ -1011,7 +1020,7 @@ msgstr "Mais Recente"
 
 #: dataviva/html/about/ask/index.html:45
 #: dataviva/html/admin/admin_questions.html:3
-#: dataviva/html/admin/admin_questions.html:12
+#: dataviva/html/admin/admin_questions.html:28
 msgid "Question"
 msgstr "Pergunta"
 
@@ -1599,52 +1608,82 @@ msgstr ""
 msgid "Remember Me"
 msgstr "Lembrar-me"
 
-#: dataviva/html/admin/admin_questions.html:13
-#: dataviva/html/admin/admin_replies.html:13
+#: dataviva/html/admin/admin_questions.html:29
+#: dataviva/html/admin/admin_replies.html:28
 #: dataviva/html/admin/admin_users.html:12
 msgid "User"
 msgstr "Usuário"
 
-#: dataviva/html/admin/admin_questions.html:14
+#: dataviva/html/admin/admin_questions.html:30
+#: dataviva/html/templates/admin.html:26
+msgid "Replies"
+msgstr "Respostas"
+
+#: dataviva/html/admin/admin_questions.html:31
 msgid "Date"
 msgstr "Data"
+
+#: dataviva/html/admin/admin_questions.html:48
+msgid "Delete"
+msgstr ""
+
+#: dataviva/html/admin/admin_questions.html:49
+msgid "Are you sure to delete this item?"
+msgstr ""
 
 #: dataviva/html/admin/admin_questions_edit.html:3
 msgid "Edit Question"
 msgstr "Editar Pergunta"
 
-#: dataviva/html/admin/admin_questions_edit.html:18
+#: dataviva/html/admin/admin_questions_edit.html:21
 msgid "Asked by"
 msgstr "Perguntado por"
 
-#: dataviva/html/admin/admin_questions_edit.html:22
+#: dataviva/html/admin/admin_questions_edit.html:25
 msgid "Language"
 msgstr "Linguagem"
 
-#: dataviva/html/admin/admin_questions_edit.html:25
+#: dataviva/html/admin/admin_questions_edit.html:28
 msgid "Status"
 msgstr "Status"
 
-#: dataviva/html/admin/admin_questions_edit.html:29
+#: dataviva/html/admin/admin_questions_edit.html:32
+#, fuzzy
+msgid "Question title"
+msgstr "Testemunho"
+
+#: dataviva/html/admin/admin_questions_edit.html:33
+#: dataviva/html/admin/admin_questions_edit.html:36
+#: dataviva/html/admin/admin_questions_edit.html:39
 msgid "Enter your answer..."
 msgstr "Digite sua resposta..."
 
-#: dataviva/html/admin/admin_questions_edit.html:34
+#: dataviva/html/admin/admin_questions_edit.html:35
+#, fuzzy
+msgid "Question body"
+msgstr "Pergunta"
+
+#: dataviva/html/admin/admin_questions_edit.html:44
 msgid "Update"
 msgstr "Atualizar"
 
 #: dataviva/html/admin/admin_replies.html:3
+#: dataviva/html/admin/admin_replies_question.html:3
 #: dataviva/html/admin/admin_users.html:3 dataviva/html/templates/site.html:41
 msgid "Admin Panel"
 msgstr "Painel do Administrador"
 
-#: dataviva/html/admin/admin_replies.html:14
+#: dataviva/html/admin/admin_replies.html:29
 msgid "Flags"
 msgstr "Bandeiras"
 
-#: dataviva/html/admin/admin_replies.html:15
+#: dataviva/html/admin/admin_replies.html:30
 msgid "Visibility"
 msgstr "Visibilidade"
+
+#: dataviva/html/admin/admin_replies_question.html:126
+msgid "Remove"
+msgstr ""
 
 #: dataviva/html/admin/admin_users.html:13
 msgid "Nick Name"
@@ -2070,10 +2109,6 @@ msgstr "Vantagem Comparativa"
 msgid "Users"
 msgstr "Usuários"
 
-#: dataviva/html/templates/admin.html:26
-msgid "Replies"
-msgstr "Respostas"
-
 #: dataviva/html/templates/admin.html:29
 msgid "Pending"
 msgstr "Pendente"
@@ -2106,7 +2141,42 @@ msgstr "Perfil"
 msgid "Logout"
 msgstr "Sair"
 
+#: dataviva/html/templates/site.html:108
+msgid "Dear user,"
+msgstr "Prezado(a) usuário(a),"
+
+#: dataviva/html/templates/site.html:109
+msgid ""
+"In order to improve our platform, we are running a very quick survey to "
+"collect some impressions and to know more about our users."
+msgstr ""
+"Com o objetivo de aprimorar nossa plataforma estamosfazendo uma breve "
+"pesquisa com nossos usuários para sabemais sobre seu perfil e percepções."
+
+#: dataviva/html/templates/site.html:111
+msgid ""
+"The estimated time to answer is about 2 to 3 minutes and there is no "
+"identification. All you need to do is follow this link:"
+msgstr ""
+"O tempo requerido para responder esta pesquisa é de aproximadamente02 a "
+"03 minutos e não há identificação. Contamos com sua ajuda! Basta acessar:"
+
+#: dataviva/html/templates/site.html:114
+msgid "PARTICIPAR DA PESQUISA"
+msgstr ""
+
+#: dataviva/html/templates/site.html:116
+msgid "TAKE THE SURVEY"
+msgstr ""
+
+#: dataviva/html/templates/site.html:119
+msgid "Thanks a lot, DataViva Team."
+msgstr "Muito obrigado, Equipe DataViva"
+
 #: dataviva/profiles/views.py:47
 msgid "a country"
 msgstr "um país"
+
+#~ msgid "Reply submitted."
+#~ msgstr "Resposta enviada."
 
