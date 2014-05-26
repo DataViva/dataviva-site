@@ -80,6 +80,10 @@ td.reply_cell { vertical-align: middle; text-align: center; line-height: 15px;}
      .text(dataviva.format.text("edit"))
     
     // Create Delete URL
+    u = window.location.toString();
+    url_pop = u.split('/');
+    url_pop.pop();
+    url_pop.pop();
     url_delete = url_pop.join("/") + "/delete/";
      
      // Delete Button
