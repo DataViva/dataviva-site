@@ -83,8 +83,8 @@ def ask(user=None):
             banned_words = [line.strip() for line in file_banned_words]
 
             filter = ProfanitiesFilter(banned_words, replacements = '*')          
-            _question = filter.clean(str(form.question.data))
-            _body =  filter.clean(str(form.body.data))
+            _question = filter.clean(str(form.question.data.encode("utf-8")))
+            _body =  filter.clean(str(form.body.data.encode("utf-8")))
             _type = filter.clean(str(form.type.data))
             
 
