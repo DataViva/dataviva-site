@@ -1,4 +1,3 @@
-<!-- extend from base layout -->
 {% extends "templates/base.html" %}
 
 {% block head %}
@@ -111,6 +110,7 @@
   <form id="svgform" action="/apps/download/" method="post">
       {{ form.hidden_tag() }}
   </form>
+  
 
 {% endblock %}
 
@@ -123,6 +123,46 @@
   <script src="/static/js/libs/jfont-minified.js"></script>
   <script src="/static/js/utils/utils.key.js"></script>
   <script src="/static/js/utils/utils.selector.js"></script>
+  
+  <script>
+  // Handling Cookies
+  function getCookie( name ) {
+    var parts = document.cookie.split(name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+  }
+
+  function expireCookie( cName ) {
+    document.cookie = 
+      encodeURIComponent( cName ) +
+      "=deleted; expires=" +
+      new Date( 0 ).toUTCString();
+  }
+
+ 
+  var downloadTimer;
+  var attempts = 30;
+
+  // Starts de verification if download is finished
+  function checkDownloadIsDone() {
+  	var token = document.getElementById("downloadToken").value;
+    	downloadTimer = window.setInterval( function() {
+    	 downloadToken = new Date().getTime();
+		console.log({tokennow: token, cookitoken: downloadToken})
+      if( (token < downloadToken) || (attempts == 0) ) {
+        downloadDone();
+      }
+
+      attempts--;
+    }, 1000 );
+  }
+	
+	// Destrioy verification and hide the popover
+  function downloadDone() {
+    dataviva.popover.hide("#popover")
+    window.clearInterval( downloadTimer );
+    expireCookie( "downloadToken" );
+  }
+  </script>
 
   <script type="text/javascript">
 
@@ -1482,7 +1522,7 @@
     }
 
     app.download = function(obj) {
-
+	
       var type = obj.id,
           title = app.build.app.name+"-"+app.build.title,
           columns = []
@@ -1515,9 +1555,12 @@
       // The result will be an attachment file to download.
       form['output_format'].value = type;
       form['title'].value = title;
+      form['downloadToken'].value = new Date().getTime();      
       form.submit();
-
-      dataviva.popover.hide("#popover")
+      
+	  // Check donwload status
+	  checkDownloadIsDone()
+      
 
     }
 

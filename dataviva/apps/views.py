@@ -3,6 +3,7 @@ import urllib2, json
 from datetime import datetime
 from collections import defaultdict
 from sqlalchemy import func
+from random import randint
 from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, url_for, redirect
 from flask.ext.babel import gettext
 
@@ -312,12 +313,13 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
 @mod.route('/download/', methods=['GET', 'POST'])
 def download():
     import tempfile, subprocess
-
+    
     form = DownloadForm()
 
     data = form.data.data
     format = form.output_format.data
     title = form.title.data
+    downloadToken = form.downloadToken.data
 
     temp = tempfile.NamedTemporaryFile()
     temp.write(data.encode("utf-16"))
@@ -343,10 +345,14 @@ def download():
     
     content_disposition = "attachment;filename=%s.%s" % (title, format)
     content_disposition = content_disposition.replace(",", "_")
-
-    return Response(response_data,
+    
+    download_file = make_response(Response(response_data,
                         mimetype=mimetype,
-                        headers={"Content-Disposition": content_disposition})
+                        headers={"Content-Disposition": content_disposition}))
+    
+    download_file.set_cookie('downloadToken', downloadToken)
+    
+    return download_file
 
 @mod.route('/info/<app_name>/')
 def info(app_name="tree_map"):
