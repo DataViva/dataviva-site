@@ -46,8 +46,9 @@
                     "id_mdic",
 
                     "name"
-                ]
-    var DATA_COLUMNS = [
+                ];
+                
+    	var DATA_COLUMNS = [
 
                     "population",
 
@@ -100,9 +101,9 @@
 
                     "color"
 
-                  ]
+                  ];
 
-       var SECEX_COLUMNS = [
+	var SECEX_COLUMNS = [
                     "val_usd",
                     "rca",
                     "rca_wld",
@@ -110,8 +111,19 @@
                     "distance_wld",
                     "opp_gain",
                     "opp_gain_wld",
-                    "pci"   ]
-       
+                    "pci", 
+                    "eci",
+                    "hs_diversity",
+                    "hs_diversity_eff",
+                    "wld_diversity",
+                    "wld_diversity_eff",
+                    "val_usd_growth_pct",
+                    "val_usd_growth_pct_5",
+                    "val_usd_growth_val",
+                    "val_usd_growth_val_5",                    
+                    ];
+
+      
       var RAIS_COLUMNS = [
                     "wage",
                     "wage_avg",
@@ -130,7 +142,7 @@
                     "num_emp_growth_pct_5",
                     "num_emp_growth_val" ,
 		    		"num_emp_growth_val_5"		    
-		    	]
+		    	];
 		    
     var current_data_cols = [], current_order = []
     if (window.location.search.indexOf("cols=") > -1) {
@@ -186,9 +198,10 @@
 
       
       var all_data_cols;
-      if ("{{data_url}}".indexOf("/secex/")==0){
+      var data_url = "{{data_url}}";
+      if (data_url.indexOf("/secex/")==0){
       	 all_data_cols = SECEX_COLUMNS;	
-      }else if ("{{data_url}}".indexOf("/rais/")==0){
+      }else if (data_url.indexOf("/rais/")==0){
       	all_data_cols = RAIS_COLUMNS;	      	
       }else{
       	// Get data columns present in new 'dataset'
