@@ -46,8 +46,9 @@
                     "id_mdic",
 
                     "name"
-                ]
-    var DATA_COLUMNS = [
+                ];
+                
+    	var DATA_COLUMNS = [
 
                     "population",
 
@@ -100,8 +101,49 @@
 
                     "color"
 
-                  ]
+                  ];
 
+	var SECEX_COLUMNS = [
+                    "val_usd",
+                    "rca",
+                    "rca_wld",
+                    "distance",
+                    "distance_wld",
+                    "opp_gain",
+                    "opp_gain_wld",
+                    "pci", 
+                    "eci",
+                    "hs_diversity",
+                    "hs_diversity_eff",
+                    "wld_diversity",
+                    "wld_diversity_eff",
+                    "val_usd_growth_pct",
+                    "val_usd_growth_pct_5",
+                    "val_usd_growth_val",
+                    "val_usd_growth_val_5",                    
+                    ];
+
+      
+      var RAIS_COLUMNS = [
+                    "wage",
+                    "wage_avg",
+                    "num_emp",
+                    "num_est",
+                    "num_emp_est",
+                    "isic_diversity",
+                    "isic_diversity_eff",
+                    "cbo_diversity",
+                    "cbo_diversity_eff",
+                    "wage_growth_pct",
+                    "wage_growth_pct_5",
+                    "wage_growth_val",
+                    "wage_growth_val_5",
+                    "num_emp_growth_pct",
+                    "num_emp_growth_pct_5",
+                    "num_emp_growth_val" ,
+		    		"num_emp_growth_val_5"		    
+		    	];
+		    
     var current_data_cols = [], current_order = []
     if (window.location.search.indexOf("cols=") > -1) {
       current_data_cols = window.location.search.split("cols=")[1].split("&")[0].split(".")
@@ -154,8 +196,19 @@
           return all_cols.indexOf(itm)== i;
       });
 
-      // Get data columns present in new 'dataset'
-      var all_data_cols = DATA_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1 || i == current_order[0]});
+      
+      var all_data_cols;
+      var data_url = "{{data_url}}";
+      if (data_url.indexOf("/secex/")==0){
+      	 all_data_cols = SECEX_COLUMNS;	
+      }else if (data_url.indexOf("/rais/")==0){
+      	all_data_cols = RAIS_COLUMNS;	      	
+      }else{
+      	// Get data columns present in new 'dataset'
+      	all_data_cols = DATA_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1 || i == current_order[0]});
+      }
+      
+      
       // Filter data columns by user-specified columns
       var active_data_cols = all_data_cols;
       if(current_data_cols.length){
