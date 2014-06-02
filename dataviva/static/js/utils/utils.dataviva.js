@@ -380,7 +380,7 @@ dataviva.format.text = function(text,name,l) {
       "remove": {"en": "Remove", "pt": "Remover"},
       "remove_confirmation": {"en": "Are you sure to delete this item?", "pt": "Tem certeza que deseja remover este item?"},
 
-      // Selector
+      // Selector & Search
       "search": {"en": "Search", "pt": "Pesquisar"},
       "search_results": {"en": "Search Results", "pt": "Resultados da Pesquisa"},
       "select": {"en": "Select", "pt": "Escolher"},
@@ -391,7 +391,12 @@ dataviva.format.text = function(text,name,l) {
       "back": {"en": "Back", "pt": "Voltar"},
       "Municipalities within": {"en": "Municipalities within", "pt": "Munic\u00edpios dentro de"},
       "No municipalities within that distance.": {"en": "No municipalities within that distance.", "pt": "N\u00e3o existem munic\u00edpios dentro desta dist\u00e2ncia."},
-      "Including": {"en": "Including", "pt": "Incluindo"}
+      "Including": {"en": "Including", "pt": "Incluindo"},
+      "Location": {"en": "Location", "pt": "Localidade"},
+      "Occupation": {"en": "Occupation", "pt": "Ocupação"},
+      "Industry": {"en": "Industry", "pt": "Atividade Econômica"},
+      "product_export": {"en": "Product Export", "pt": "Produto Exportado"},
+      "export_destination": {"en": "Export Destination", "pt": "Destino das Exportações"},
 
     }
 

@@ -5,6 +5,16 @@
 
   <div id="header_container" class="lightbox">
     <div id="header">
+   
+    <div class="searchBox">
+    	
+	    	<input type="text" autocomplete="false" name="searchFld_1" id="searchFld" class="searchFld"  placeholder="{%trans%}Search by Location, Occupation, etc..{%endtrans%}">
+    	
+    	<a id="search" href="#" class="link">{%trans%}Search{%endtrans%}</a>
+    	<div class="searchResult">
+    		
+    	</div>
+    </div>
       <a id="logo" href="{{ url_for('general.home') }}"></a>
       <a id="apps" href="{{ url_for('apps.guide') }}" class="link{% if g.page_type == 'apps' or g.page_type == 'builder' %} active{% endif %}">{% trans %}Apps{% endtrans %}</a>
       <a id="profiles" href="{{ url_for('profiles.index') }}" class="link{% if g.page_type == 'profiles' or g.page_type == 'profile' %} active{% endif %}">{% trans %}Profiles{% endtrans %}</a>
@@ -32,8 +42,9 @@
           <label for="pt">pt</label>
         </div>
         
+        
       </div>
-
+		
       {% if g.user.is_authenticated() %}
       <div id="account_tooltip" style="display:none;">
         <a class="account" href="{{ url_for('account.user', nickname=g.user.nickname) }}"><i class="fa fa-user"></i>{% trans %}Profile{% endtrans %}</a>
@@ -95,7 +106,8 @@
     <a href="http://www.fjp.gov.br/" class="logo fjp" target="_blank"></a>
     <a href="http://www.fapemig.br/" class="logo fapemig" target="_blank"></a>
     <a href="http://www.escritorio.mg.gov.br/" class="logo governo" target="_blank"></a>
-      
+    
+    
   </div>
   
   <div class="survey-block">
@@ -208,6 +220,145 @@
     		d3.select(this).attr("open", 1)
     	}
     })
+    
+     d3.select("a#search").on(d3plus.evt.click, function() {
+     	d3.select(this.parentNode).transition().style("width", "490px");
+     	d3.event.preventDefault();
+     })
+    
+    d3.select(window).on(d3plus.evt.click, function() {
+    	d3_target = d3.select(d3.event.target);   
+        if (!d3_target.classed("searchFld")&&!d3_target.classed("link")&&!d3_target.classed("searchBtn")&&!d3_target.classed("searchBox")) {
+            //d3.event.preventDefault();
+            if(d3.select(".searchBox").style("width")=="490px") {
+            	d3.select(".searchResult").style("display", "none").transition().style("opacity", 0).each("end", function() { 
+            		this.innerHTML = "";
+            		document.getElementById("searchFld").value = "";
+            	});
+            	d3.select(".searchBox").transition().style("width", "41px");
+           }
+        }
+    })
+    var searchInterval = "";
+    d3.select(".searchFld").on("keyup", function() {
+    	clearInterval(searchInterval);
+    	
+    	//d3.select(".fa-search").attr("class", "fa fa-spinner fa-spin")
+    	searchInterval = setTimeout(function(){
+    		d3.select(".searchResult").style("display", "block").transition().delay(0).style("opacity", 1);
+    		find_search(document.getElementById(d3.select(".searchFld").attr("id")).value)
+    		//d3.select(".fa-spinner").attr("class", "fa fa-search")
+    	},300)
+    })
+  find_search = function(search) {
+  	if(search != "") {
+	    d3.json("/attrs/search/"+search+"/")
+	      .header("Content-type", "application/json")
+	      .send("GET", '', function(error, text) { 
+	       litems = "";
+	        type_curr = ""
+	       for(var result in text.activities) {
+	       	item = text.activities[result]
+	       	urlSearch = item.content_type+"/"+item.id;
+	       	exclude = false;
+	       
+	       	if (typeof item.content_type !== "undefined") {
+	       		item.bg = item.color
+	       		
+		       	if(item.content_type == "bra") {
+		       		item_type = "Location"
+		       		if(item.id.length > 6) {
+		       			type = "(Cidade)"
+		      		} else if(item.id.length == 4){
+		      			type = "(Mesoregião)"
+		       		} else if(item.id.length > 4 && item.id.length <= 6)  {
+		       			exclude = true;
+		       		} else {
+		       			type = "(Estado)"
+		       		}
+		       		
+		       		item.bg = "transparent";
+		       		if(item.id!="bra") {
+		       			icon = item.id.substr(0,2);
+		       		} else {
+		       			icon = "all";
+		       		}
+		       	}
+		       	
+		       	if(item.content_type == "cbo") {
+		       		item_type = "Occupation"
+		       		if(item.id.length == 1) {
+		       			type = "(Grande Grupo)"
+		       			icon = item.id
+		       		} else if (item.id.length == 4) {
+		       			type = "(Família)"
+		       			icon = item.id.substr(0,1)
+		       		} else {
+		       			exclude = true;
+		       		} 
+		       	}
+		       	
+		       	if(item.content_type == "isic") {
+		       		item_type = "Industry"
+		       			type = ""
+		       			icon = item.id		
+		       	}
+		       	
+		       	if(item.content_type == "hs") {
+		       		item_type = "product_export"
+		       		if(item.id.length == 2) {
+		       			type = "(Seção)"
+		       			icon = item.id
+		       		} else if (item.id.length == 6) {
+		       			type = "(Posição)"
+		       			icon = item.id.substr(0,2)
+		       		} else {
+		       			exclude = true;
+		       			
+		       		} 
+		       	}
+		       	
+		       	if(item.content_type == "wld") {
+		       		item_type = "export_destination"
+		       		if(item.id.length == 2) {
+		       			type = "(Continente)"
+		       			icon = item.id
+		       		} else {
+		       			item.bg = "transparent";
+		       			type = "(País)"
+		       			icon = item.id
+		       		} 
+		       	}
+		       	
+		       	if(!exclude) {
+		       		if(type_curr!=item.content_type) {
+		       			//console.log("passou");
+		       			if(type_curr!="") { litems += "</div>" }
+		       			
+		       			litems += "<div class='search_ct'> \
+		       							<div class='search_qd'> \
+		       							<div class='search_esq'>"
+		       			litems += dataviva.format.text(item_type);
+		       			litems += " \
+		       							</div><div class='search_dir'>"
+		       			type_curr = item.content_type
+		       		}
+		       		litems += "<a target='_blank' href='http://dataviva.info/profiles/"+urlSearch+"' class='searchLink'> \
+		       						<div class='searchIcon' style='background-image: url(/static/img/icons/"+item.content_type+"/"+item.content_type+"_"+icon+".png); background-color: "+item.bg+";'></div> \
+			       						<div class='searchText'> \
+			       							<div class='search_title'>"+item.name+"</div> \
+			       							<div class='searchType'>"+type+"</div> \
+			       						</div>\
+		       					</a>"
+		       		//litems += "<a href='/profiles/"+urlSearch+"' style='display:inline-block; margin-bottom:5px; width:411px; border-left:6px solid "+item.color+"; padding: 7px 10px;'>"+item.name+"</a>"
+		       	}
+		       	
+		       }
+	       }
+	       d3.select(".searchResult").html(litems);
+	      });
+      }
+  }
   </script>
     
 {% endblock %}

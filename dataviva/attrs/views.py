@@ -1,5 +1,5 @@
-from sqlalchemy import func, distinct, asc, desc, and_
-from flask import Blueprint, request, jsonify, abort, g, render_template, make_response
+from sqlalchemy import func, distinct, asc, desc, and_, or_
+from flask import Blueprint, request, jsonify, abort, g, render_template, make_response, redirect, url_for, flash
 
 from dataviva import db, __latest_year__
 from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo, Yb
@@ -201,3 +201,116 @@ def attrs_table(attr="bra",depth="2"):
     g.page_type = "attrs"
     data_url = "/attrs/{0}/?depth={1}".format(attr,depth)
     return render_template("general/table.html", data_url=data_url)
+
+@mod.route('/search/<term>/')
+def attrs_search(term=None):
+    # Dictionary
+    bra_query = {}
+    cbo_query = {}
+    isic_query = {}
+    hs_query = {}
+    wld = {}
+    lang = request.args.get('lang', None) or g.locale
+    result = []
+    
+    bra = Bra.query.filter(or_(Bra.id == term, or_(Bra.name_pt.ilike("%"+term+"%"), Bra.name_en.ilike("%"+term+"%"))))
+    items = bra.limit(10).all()
+    items = [i.serialize() for i in items]
+    
+    for i in items:
+        bra_query = {}
+        bra_query["id"] = i["id"]
+        bra_query["name_pt"] = i["name_pt"]
+        
+        if i["id"] == "bra":
+            icon = "all"
+        else:
+            icon = i["id"][0:2]
+            
+        bra_query["icon"] = "/static/images/icons/bra/bra_" + icon
+        bra_query["name_en"] = i["name_en"]
+        bra_query["color"] = i["color"]
+        bra_query["content_type"] = "bra"
+        bra_query = fix_name(bra_query, lang)
+        result.append(bra_query)
+        
+    if lang == "pt":
+        cbo = Cbo.query.filter(or_(Cbo.id == term, Cbo.name_pt.ilike("%"+term+"%")))
+    else:
+        cbo = Cbo.query.filter(or_(Cbo.id == term, Cbo.name_en.ilike("%"+term+"%")))
+    
+    items = cbo.limit(10).all()
+    items = [i.serialize() for i in items]
+    
+    for i in items:
+        cbo_query = {}
+        cbo_query["id"] = i["id"]
+        cbo_query["name_pt"] = i["name_pt"]        
+        cbo_query["name_en"] = i["name_en"]
+        cbo_query["color"] = i["color"]
+        cbo_query["content_type"] = "cbo"
+        cbo_query = fix_name(cbo_query, lang)
+        result.append(cbo_query)
+    
+    isic_match = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u"]
+    
+    if lang == "pt":
+        isic = Isic.query.filter(and_(Isic.name_pt.ilike("%"+term+"%"), Isic.id.in_(isic_match)))
+    else:
+        isic = Isic.query.filter(and_(Isic.name_en.ilike("%"+term+"%"), Isic.id.in_(isic_match)))
+    
+    items = isic.limit(10).all()
+    items = [i.serialize() for i in items]
+    
+    for i in items:
+        isic_query = {}
+        isic_query["id"] = i["id"]
+        isic_query["name_pt"] = i["name_pt"]
+        isic_query["name_en"] = i["name_en"]
+        isic_query["color"] = i["color"]
+        isic_query["content_type"] = "isic"
+        isic_query = fix_name(isic_query, lang)
+        result.append(isic_query)
+        
+    if lang == "pt":
+        hs = Hs.query.filter(or_(Hs.id == term, Hs.name_pt.ilike("%"+term+"%")))
+    else:
+        hs = Hs.query.filter(or_(Hs.id == term, Hs.name_en.ilike("%"+term+"%")))
+    
+    items = hs.limit(10).all()
+    print(items)
+    items = [i.serialize() for i in items]
+    
+    for i in items:
+        hs_query = {}
+        hs_query["id"] = i["id"]
+        hs_query["name_pt"] = i["name_pt"]
+        hs_query["name_en"] = i["name_en"]
+        hs_query["color"] = i["color"]
+        hs_query["content_type"] = "hs"
+        hs_query = fix_name(hs_query,lang)
+        result.append(hs_query)
+        
+        
+    if lang == "pt":
+        wld = Wld.query.filter(or_(Wld.id == term, Wld.name_pt.like("%"+term+"%")))
+    else:
+        wld = Wld.query.filter(or_(Wld.id == term, Wld.name_en.like("%"+term+"%")))
+        
+    items = wld.limit(10).all()
+    items = [i.serialize() for i in items]
+    
+    for i in items:
+        wld_query = {}
+        wld_query["id"] = i["id"]
+        wld_query["name_pt"] = i["name_pt"]
+        wld_query["name_en"] = i["name_en"]
+        wld_query["color"] = i["color"]
+        wld_query["content_type"] = "wld"
+        wld_query = fix_name(wld_query, lang)
+        result.append(wld_query)
+        
+
+    ret = jsonify({"activities":result})
+   
+    return ret
