@@ -18,7 +18,10 @@ from dataviva.rais.views import rais_ybi
 from dataviva.utils import gzip_data, cached_query
 
 import json, urllib2, urllib
-from config import FACEBOOK_OAUTH_ID
+from config import FACEBOOK_OAUTH_ID, basedir
+import os
+import random
+import zipfile
 
 mod = Blueprint('apps', __name__, url_prefix='/apps')
 
@@ -312,7 +315,7 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
 
 @mod.route('/download/', methods=['GET', 'POST'])
 def download():
-    import tempfile, subprocess
+    import tempfile, subprocess, random
     
     form = DownloadForm()
 
@@ -320,7 +323,7 @@ def download():
     format = form.output_format.data
     title = form.title.data
     downloadToken = form.downloadToken.data
-
+    filenameDownload = title+"-"+downloadToken
     temp = tempfile.NamedTemporaryFile()
     temp.write(data.encode("utf-16"))
     temp.seek(0)
@@ -333,7 +336,7 @@ def download():
         mimetype='application/octet-stream'
     elif format == "csv":
         mimetype="text/csv;charset=UTF-16"
-
+        
     if format == "png" or format == "pdf":
         zoom = "1"
         background = "#ffffff"
@@ -342,17 +345,28 @@ def download():
         response_data = out
     else:
         response_data = data.encode("utf-16")
-    
+
     content_disposition = "attachment;filename=%s.%s" % (title, format)
     content_disposition = content_disposition.replace(",", "_")
     
     download_file = make_response(Response(response_data,
-                        mimetype=mimetype,
+                       mimetype=mimetype,
                         headers={"Content-Disposition": content_disposition}))
     
-    download_file.set_cookie('downloadToken', downloadToken)
+    with open(os.path.join(basedir, "dataviva/static/downloads/"+title+"."+format),"wb") as fo:
+        fo.write(response_data)
     
-    return download_file
+    zf = zipfile.ZipFile(os.path.join(basedir, "dataviva/static/downloads/"+filenameDownload+".zip"), mode='w')
+    try:
+        zf.write(os.path.join(basedir, "dataviva/static/downloads/"+title+"."+format), title+"."+format)
+    finally:
+        zf.close()
+    
+    os.remove(os.path.join(basedir, "dataviva/static/downloads/"+title+"."+format))
+        
+    return "/static/downloads/"+filenameDownload+".zip"
+
+
 
 @mod.route('/info/<app_name>/')
 def info(app_name="tree_map"):

@@ -145,14 +145,15 @@
   // Starts de verification if download is finished
   function checkDownloadIsDone() {
   	var token = document.getElementById("downloadToken").value;
-    	downloadTimer = window.setInterval( function() {
-    	 downloadToken = new Date().getTime();
-		console.log({tokennow: token, cookitoken: downloadToken})
-      if( (token < downloadToken) || (attempts == 0) ) {
-        downloadDone();
-      }
+	downloadTimer = window.setInterval( function() {
+		downloadToken = new Date().getTime();
+		console.log(getCookie("downloadToken"));
+		//console.log({tokennow: token, cookitoken: downloadToken})
+		if( (token < downloadToken) || (attempts == 0) ) {
+		  //downloadDone();
+		}
 
-      attempts--;
+      	attempts--;
     }, 1000 );
   }
 	
@@ -1555,11 +1556,21 @@
       // The result will be an attachment file to download.
       form['output_format'].value = type;
       form['title'].value = title;
-      form['downloadToken'].value = new Date().getTime();      
-      form.submit();
-      
+      form['downloadToken'].value = new Date().getTime();
+      //console.log(form)      
+      //form.submit();
+      csrf_token = document.getElementById("csrf_token").value;
 	  // Check donwload status
-	  checkDownloadIsDone()
+	  //checkDownloadIsDone()
+	  
+	  // conole.log({output_format: type, title: title, downloadToken: new Date().getTime(), data: form['data'].value, csrf_token: csrf_token})
+// 	  
+	  d3.xhr("/apps/download/")
+	  .header("Content-Type", "application/x-www-form-urlencoded")
+        .post("output_format="+type+"&title="+ title+"&downloadToken="+ new Date().getTime() +"&data="+ form['data'].value +"&csrf_token="+ csrf_token, function(e, data){ 
+		    top.location.href = data.response;
+		    downloadDone();
+		});
       
 
     }
