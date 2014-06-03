@@ -4,3 +4,4 @@
 .pydevproject
 *.prefs
 db
+/static/downloads/
