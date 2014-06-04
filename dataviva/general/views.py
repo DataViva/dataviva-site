@@ -144,8 +144,8 @@ def redirect_short_url(slug):
 ###############################
 # 404 view
 # ---------------------------
-@mod.route('413/')
 @app.errorhandler(Exception)
+@mod.route('413/')
 def page_not_found(e="413"):
 
     error = str(e).split(":")[0]
@@ -165,7 +165,16 @@ def page_not_found(e="413"):
 
     headers = list(request.headers)
 
-    if ERROR_EMAIL and error_code != 404:
+    allowed = True
+    requester = request.headers.get("from")
+    if requester:
+      if "googlebot" in requester:
+        allowed = False
+
+    if "fancybox" in request.url:
+      allowed = False
+
+    if allowed and ERROR_EMAIL and error_code != 404:
         admins = User.query.filter(User.role == 1).filter(User.email != "").filter(User.agree_mailer == 1).all()
         emails = [str(getattr(a,"email")) for a in admins]
 
