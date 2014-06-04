@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-05-21 11:51-0300\n"
+"POT-Creation-Date: 2014-06-04 17:31-0400\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 1.3\n"
+"Generated-By: Babel 0.9.6\n"
 
 #: dataviva/about/views.py:73
 msgid "You need to be logged in to ask questions."
@@ -65,7 +65,7 @@ msgstr "Esta pergunta foi atualizada."
 msgid "The item was successfully deleted."
 msgstr ""
 
-#: dataviva/apps/views.py:156
+#: dataviva/apps/views.py:160
 msgid "You need to be logged in to star apps."
 msgstr "Você precisa fazer o login para iniciar aplicativos."
 
@@ -98,7 +98,7 @@ msgid "a location"
 msgstr "um local"
 
 #: dataviva/guide/views.py:155 dataviva/html/home.html:44
-#: dataviva/html/templates/site.html:11
+#: dataviva/html/templates/site.html:16
 msgid "Guide"
 msgstr "Guia"
 
@@ -135,7 +135,7 @@ msgstr "Tudo"
 msgid "Visualizing the Economy of Minas Gerais and Brazil"
 msgstr "Visualizando a Economia de Minas Gerais e do Brasil"
 
-#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1885
+#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1938
 #: dataviva/html/templates/base.html:6
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
@@ -144,12 +144,12 @@ msgstr ""
 "O DataViva está disponibilizando dados sobre todo o setor formal da "
 "economia"
 
-#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1887
+#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1940
 #: dataviva/html/templates/base.html:6
 msgid "through more than 100 million interactive visualizations."
 msgstr "brasileira em mais de 100 milhões de visualizações interativas."
 
-#: dataviva/html/home.html:21 dataviva/html/templates/site.html:14
+#: dataviva/html/home.html:21 dataviva/html/templates/site.html:19
 msgid "Learn More"
 msgstr "Saiba Mais"
 
@@ -158,7 +158,7 @@ msgid "Also browse"
 msgstr "Navegue também por"
 
 #: dataviva/html/home.html:34 dataviva/html/apps/index.html:4
-#: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:9
+#: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:14
 msgid "Apps"
 msgstr "Aplicativos"
 
@@ -168,7 +168,7 @@ msgstr ""
 "Explore a economia brasileira por meio de mais de 100 milhões de "
 "visualizações."
 
-#: dataviva/html/home.html:39 dataviva/html/templates/site.html:10
+#: dataviva/html/home.html:39 dataviva/html/templates/site.html:15
 msgid "Profiles"
 msgstr "Perfis"
 
@@ -189,7 +189,7 @@ msgstr ""
 "estados e indústrias."
 
 #: dataviva/html/home.html:49 dataviva/html/rankings/index.html:4
-#: dataviva/html/templates/site.html:13
+#: dataviva/html/templates/site.html:18
 msgid "Rankings"
 msgstr "Rankings"
 
@@ -990,7 +990,7 @@ msgstr ""
 msgid "What do you want to know?"
 msgstr "O que você gostaria de saber?"
 
-#: dataviva/html/about/ask/index.html:19
+#: dataviva/html/about/ask/index.html:19 dataviva/html/templates/site.html:20
 msgid "Search"
 msgstr "Pesquisar"
 
@@ -1576,7 +1576,7 @@ msgid "I agree to receive emails from dataviva.info."
 msgstr "Concordo em receber e-mails de dataviva.info."
 
 #: dataviva/html/account/login.html:4 dataviva/html/general/access.html:3
-#: dataviva/html/general/upgrade.html:3 dataviva/html/templates/site.html:22
+#: dataviva/html/general/upgrade.html:3 dataviva/html/templates/site.html:28
 msgid "Login"
 msgstr "Login"
 
@@ -1669,7 +1669,7 @@ msgstr "Atualizar"
 
 #: dataviva/html/admin/admin_replies.html:3
 #: dataviva/html/admin/admin_replies_question.html:3
-#: dataviva/html/admin/admin_users.html:3 dataviva/html/templates/site.html:41
+#: dataviva/html/admin/admin_users.html:3 dataviva/html/templates/site.html:48
 msgid "Admin Panel"
 msgstr "Painel do Administrador"
 
@@ -1733,35 +1733,35 @@ msgstr "O Equipe DataViva"
 msgid "App Builder"
 msgstr "Construtor de Aplicativos"
 
-#: dataviva/html/apps/embed.html:34
+#: dataviva/html/apps/embed.html:32
 msgid "Change Output"
 msgstr "Alterar Visualização"
 
-#: dataviva/html/apps/embed.html:96
+#: dataviva/html/apps/embed.html:94
 msgid "Refresh the App"
 msgstr "Atualizar o Aplicativo"
 
-#: dataviva/html/apps/embed.html:97
+#: dataviva/html/apps/embed.html:95
 msgid "Download this App"
 msgstr "Baixar este Aplicativo"
 
-#: dataviva/html/apps/embed.html:98
+#: dataviva/html/apps/embed.html:96
 msgid "Save this App"
 msgstr "Salvar este Aplicativo"
 
-#: dataviva/html/apps/embed.html:99
+#: dataviva/html/apps/embed.html:97
 msgid "Share/Embed"
 msgstr "Compartilhar/Incorporar"
 
-#: dataviva/html/apps/embed.html:100
+#: dataviva/html/apps/embed.html:98
 msgid "Show App Tutorial"
 msgstr "Mostrar o Tutorial deste Aplicativo"
 
-#: dataviva/html/apps/embed.html:101
+#: dataviva/html/apps/embed.html:99
 msgid "Open App in Full-Screen"
 msgstr "Abrir Aplicativo em Tela Cheia"
 
-#: dataviva/html/apps/embed.html:102
+#: dataviva/html/apps/embed.html:100
 msgid "Show/Hide Controls"
 msgstr "Mostrar/Ocultar Controles"
 
@@ -1781,7 +1781,7 @@ msgstr "Próximo"
 msgid "Database Query"
 msgstr "Consultas ao Banco de Dados"
 
-#: dataviva/html/data/index.html:17 dataviva/html/templates/site.html:12
+#: dataviva/html/data/index.html:17 dataviva/html/templates/site.html:17
 msgid "Data"
 msgstr "Dados"
 
@@ -1872,7 +1872,7 @@ msgstr "Destinos das Exportações"
 msgid "Filter Selection"
 msgstr "Seleção de Filtro"
 
-#: dataviva/html/general/selector.html:13
+#: dataviva/html/general/selector.html:7
 #, python-format
 msgid "Please choose %(name)s"
 msgstr "Por favor, escolha %(name)s"
@@ -2133,19 +2133,23 @@ msgstr "Se você não deseja mais receber atualizações,"
 msgid "click here."
 msgstr "clique aqui."
 
-#: dataviva/html/templates/site.html:39
+#: dataviva/html/templates/site.html:10
+msgid "Search by Location, Occupation, etc..."
+msgstr ""
+
+#: dataviva/html/templates/site.html:46
 msgid "Profile"
 msgstr "Perfil"
 
-#: dataviva/html/templates/site.html:43
+#: dataviva/html/templates/site.html:50
 msgid "Logout"
 msgstr "Sair"
 
-#: dataviva/html/templates/site.html:108
+#: dataviva/html/templates/site.html:116
 msgid "Dear user,"
 msgstr "Prezado(a) usuário(a),"
 
-#: dataviva/html/templates/site.html:109
+#: dataviva/html/templates/site.html:117
 msgid ""
 "In order to improve our platform, we are running a very quick survey to "
 "collect some impressions and to know more about our users."
@@ -2154,7 +2158,7 @@ msgstr ""
 "pesquisa com nossos usuários para saber mais sobre seu perfil e "
 "percepções."
 
-#: dataviva/html/templates/site.html:111
+#: dataviva/html/templates/site.html:119
 msgid ""
 "The estimated time to answer is about 2 to 3 minutes and there is no "
 "identification."
@@ -2162,22 +2166,19 @@ msgstr ""
 "O tempo requerido para responder esta pesquisa é de aproximadamente 02 a "
 "03 minutos e não há identificação. Contamos com sua ajuda!"
 
-#: dataviva/html/templates/site.html:113
+#: dataviva/html/templates/site.html:121
 msgid "Thanks a lot, DataViva Team."
 msgstr "Muito obrigado, Equipe DataViva"
 
-#: dataviva/html/templates/site.html:116
+#: dataviva/html/templates/site.html:124
 msgid "PARTICIPAR DA PESQUISA"
 msgstr ""
 
-#: dataviva/html/templates/site.html:118
+#: dataviva/html/templates/site.html:126
 msgid "TAKE THE SURVEY"
 msgstr ""
 
 #: dataviva/profiles/views.py:47
 msgid "a country"
 msgstr "um país"
-
-#~ msgid "Reply submitted."
-#~ msgstr "Resposta enviada."
 

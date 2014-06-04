@@ -4,7 +4,6 @@
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.apps.css" />
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.key.css" />
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
 
 {% endblock %}
 
@@ -110,7 +109,7 @@
   <form id="svgform" action="/apps/download/" method="post">
       {{ form.hidden_tag() }}
   </form>
-  
+
 
 {% endblock %}
 
@@ -123,7 +122,7 @@
   <script src="/static/js/libs/jfont-minified.js"></script>
   <script src="/static/js/utils/utils.key.js"></script>
   <script src="/static/js/utils/utils.selector.js"></script>
-  
+
   <script>
   // Handling Cookies
   function getCookie( name ) {
@@ -132,13 +131,13 @@
   }
 
   function expireCookie( cName ) {
-    document.cookie = 
+    document.cookie =
       encodeURIComponent( cName ) +
       "=deleted; expires=" +
       new Date( 0 ).toUTCString();
   }
 
- 
+
   var downloadTimer;
   var attempts = 30;
 
@@ -156,7 +155,7 @@
       	attempts--;
     }, 1000 );
   }
-	
+
 	// Destrioy verification and hide the popover
   function downloadDone() {
     dataviva.popover.hide("#popover")
@@ -1523,7 +1522,7 @@
     }
 
     app.download = function(obj) {
-	
+
       var type = obj.id,
           title = app.build.app.name+"-"+app.build.title,
           columns = []
@@ -1557,21 +1556,21 @@
       form['output_format'].value = type;
       form['title'].value = title;
       form['downloadToken'].value = new Date().getTime();
-      //console.log(form)      
+      //console.log(form)
       //form.submit();
       csrf_token = document.getElementById("csrf_token").value;
 	  // Check donwload status
 	  //checkDownloadIsDone()
-	  
+
 	  // conole.log({output_format: type, title: title, downloadToken: new Date().getTime(), data: form['data'].value, csrf_token: csrf_token})
-// 	  
+//
 	  d3.xhr("/apps/download/")
 	  .header("Content-Type", "application/x-www-form-urlencoded")
-        .post("output_format="+type+"&title="+ title+"&downloadToken="+ new Date().getTime() +"&data="+ form['data'].value +"&csrf_token="+ csrf_token, function(e, data){ 
+        .post("output_format="+type+"&title="+ title+"&downloadToken="+ new Date().getTime() +"&data="+ form['data'].value +"&csrf_token="+ csrf_token, function(e, data){
 		    top.location.href = data.response;
 		    downloadDone();
 		});
-      
+
 
     }
 

@@ -392,11 +392,6 @@ dataviva.format.text = function(text,name,l) {
       "Municipalities within": {"en": "Municipalities within", "pt": "Munic\u00edpios dentro de"},
       "No municipalities within that distance.": {"en": "No municipalities within that distance.", "pt": "N\u00e3o existem munic\u00edpios dentro desta dist\u00e2ncia."},
       "Including": {"en": "Including", "pt": "Incluindo"},
-      "Location": {"en": "Location", "pt": "Localidade"},
-      "Occupation": {"en": "Occupation", "pt": "Ocupação"},
-      "Industry": {"en": "Industry", "pt": "Atividade Econômica"},
-      "product_export": {"en": "Product Export", "pt": "Produto Exportado"},
-      "export_destination": {"en": "Export Destination", "pt": "Destino das Exportações"},
 
     }
 

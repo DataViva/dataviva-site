@@ -15,6 +15,7 @@
   height: 40px;
   margin: 5px auto;
   padding: 5px 0px;
+  position: relative;
   text-align: center;
   width: 820px;
 }
@@ -46,7 +47,7 @@
   opacity: 0.25;
   padding-top: 34px;
   text-align: center;
-  width: 65px;
+  width: 70px;
 }
 
 #header a#guide {
@@ -128,7 +129,6 @@
 #header div#nav_controls {
   display: inline-block;
   margin-top: -2px;
-  margin-left: 70px;
   text-align: center;
   width: 85px;
 }
@@ -208,7 +208,7 @@ div#language .leon.radio {
   display: block;
   font-size: 10px;
   left: 0px;
-  
+
   padding: 5px 0px;
   position: fixed;
   text-align: center;
@@ -344,70 +344,68 @@ a.opendata:hover {
 /* 		Search	   */
 /*******************/
 
-.searchBox {
-	position: absolute;
-	top: -15px;
-	right: 120px;
-	display: inline-block;
-	width: 41px;
-	text-align: left;
-	
-	border-bottom:4px solid #CC1F20;
-	margin-top: 3px;
-	z-index:10;
-	background-color: #f7f7f7!important;
-	
-	padding: 12px; 
-	height:47px;
-}
-.searchFld { 
-	padding: 15px 15px 15px 15px;
-	background-color: transparent!important;
-	font-size:17px;
-	border:none;
-	color:#333!important;
-	width: 81%;
-	border: none;
-	outline: none;
-	display: inline-block;
-	margin-left: -15px; 
-}
-.searchBtn { width: 10%; border: none;  background: none; }
-#header {
-	position: relative;
-}
-
 a#search {
-	background-color: #ea1115;
-	top: -17px;
-	opacity: 1!important;
-	position: absolute;
-	right: 0px;
-	width:46px;
-	text-align:center;
-	z-index: 90;
-	height: 20px;
-	opacity: 1;
-	background-position: center!important;
-	color: #FFF!important;
-	/*border: 1px solid #FFF;
-	box-shadow: 0px 3px 4px #333;*/
-	padding: 68px 10px 0;
-	font-size: 11px;
-	background-repeat: no-repeat;
-	background-size: 80%;
+  background-color: #af1f24;
+  background-position: center 14px !important;
+  color: #ffffff !important;
+  height: 20px;
+  margin-top: -17px !important;
+  opacity: 1 !important;
+  padding-bottom: 8px !important;
+  padding-top: 47px !important;
 }
 
-.searchFld[placeholder] { color:white; }
+.searchBox {
+  background-color: #f7f7f7 !important;
+  border-bottom: 4px solid #af1f24;
+  display: none;
+  height: 64px;
+  overflow: hidden;
+  padding: 0px;
+	position: absolute;
+  right: 163px;
+  text-align: left;
+	top: -5px;
+	width: 0px;
+	z-index: 10;
+}
+
+.searchFld {
+  background-color: transparent !important;
+  border: none;
+  color: #333333 !important;
+  display: block;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  outline: none;
+	padding: 20px;
+	width: 91%;
+}
+
 .searchResult {
-	position:absolute;
-	left:0;
-	width:448px; max-height:250px;
-	overflow: auto;
-	background-color: #f7f7f7;
-	z-index:9999;
-	opacity:0;
-	top:71px;
+  background-color: #f7f7f7;
+  font-size: 12px;
+	left: 0;
+  opacity: 0;
+  overflow: auto;
+  max-height: 250px;
+  position:absolute;
+  top: 68px;
+	width: 465px;
+	z-index: 9999;
+}
+
+.searchResult > .selector_title {
+  padding: 20px 20px 10px 20px;
+}
+
+.searchResult > a {
+  margin: 0px 6px;
+}
+
+.searchResult .search_text * {
+  display: block !important;
+  margin-left: 6px !important;
 }
 
 .searchIcon {
@@ -424,7 +422,7 @@ a#search {
 	display:inline-block; margin-bottom:5px; width:93%; padding: 7px 10px;
 }
 .searchLink:hover .search_title {
-	text-decoration:underline;			
+	text-decoration:underline;
 }
 .searchType {
 	color:#ccc; font-size:12px;
@@ -432,5 +430,5 @@ a#search {
 .search_title { color: #999; font-size:14px; }
 .search_dir { width: 62%; float:left; border-right:none; border-bottom:none; border-top:none;padding: 0 15px; }
 .search_esq { float:left; width:90%; padding: 14px; font-size:15px; font-weight:bold }
-.search_qd { width:100%;float:left; border:1px solid #ccc; border-right:none;border-left:none; }
 .search_ct { display:inline-block;width:100%; }
+.search_qd { width:100%;float:left; border:1px solid #ccc; border-right:none;border-left:none; }

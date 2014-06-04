@@ -2,14 +2,8 @@
 
 {% block title %}: {% trans %}Filter Selection{% endtrans %}{% endblock %}
 
-{% block head %}
-
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
-
-{% endblock %}
-
 {% block body %}
-  
+
   <div class="darkbox"><h1>{{ _('Please choose %(name)s', name = article) }}</h1></div>
   <br>
   <div id="selector"></div>
@@ -21,14 +15,14 @@
   <script src="/static/js/utils/utils.selector.js"></script>
 
   <script>
-  
+
     d3.select("#selector").style("height",window.innerHeight-290+"px")
     // window.onresize = function(){
     //   d3.select("#selector").style("height",window.innerHeight-290+"px")
     // }
-  
+
     var value = "{{ selector }}"
-    
+
     if (value == "hs") {
       value = "hs"
       var limit = 2
@@ -50,19 +44,19 @@
       value = "wld"
       var limit = 2
     }
-  
+
     selector_return = function(value) {
       window.location = "{{ g.path }}".replace("select",value.id)
     }
-  
+
     var selector = Selector()
       .callback(selector_return)
       .type(value)
       .limit(limit);
-  
+
     d3.select("#selector")
       .call(selector);
 
   </script>
-  
+
 {% endblock %}
