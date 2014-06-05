@@ -222,6 +222,7 @@
      	d3.select(".searchBox").style("display","block").transition().style("width", "465px")
        .each("end",function(){
          d3.select(this).style("overflow","visible")
+         d3.select("#searchFld").node().focus()
        });
      	d3.event.preventDefault();
      })
