@@ -226,6 +226,23 @@
      	d3.event.preventDefault();
      })
 
+    function closeSearch() {
+
+      d3.select(".searchBox").style("overflow","hidden")
+        .transition()
+        .style("width", "0px")
+
+      d3.select(".searchResult")
+        .transition()
+        .style("opacity", 0)
+        .each("end", function() {
+          d3.select(this).html("")
+          d3.select(".searchBox").style("display","none")
+          document.getElementById("searchFld").value = "";
+        })
+
+    }
+
     d3.select(window).on(d3plus.evt.click, function() {
 
     	var d3_target = d3.select(d3.event.target)
@@ -233,20 +250,7 @@
       if ( !d3_target.classed("searchFld") && !d3_target.classed("searchBox") ) {
 
         if( d3.select(".searchBox").style("width") === "465px" ) {
-
-          d3.select(".searchBox").style("overflow","hidden")
-            .transition()
-            .style("width", "0px")
-
-        	d3.select(".searchResult")
-            .transition()
-            .style("opacity", 0)
-            .each("end", function() {
-              d3.select(this).html("")
-              d3.select(".searchBox").style("display","none")
-          		document.getElementById("searchFld").value = "";
-          	})
-
+          closeSearch()
         }
 
       }
@@ -254,15 +258,22 @@
     })
 
     var searchInterval = "";
-    d3.select(".searchFld").on("keyup", function() {
+    d3.select(".searchFld").on("keyup", function(e) {
+
     	clearInterval(searchInterval);
 
-    	searchInterval = setTimeout(function(){
-    		d3.select(".searchResult").style("display", "block")
-          .transition().delay(0).style("opacity", 1)
-    		find_search(document.getElementById(d3.select(".searchFld").attr("id")).value)
+      // Close search box if "esc" key is pressed
+      if ( d3.event.keyCode === 27 ) {
+        closeSearch()
+      }
+      else {
+        searchInterval = setTimeout(function(){
+          d3.select(".searchResult").style("display", "block")
+            .transition().delay(0).style("opacity", 1)
+          find_search(document.getElementById(d3.select(".searchFld").attr("id")).value)
 
-    	},300)
+        },300)
+      }
 
     })
 
