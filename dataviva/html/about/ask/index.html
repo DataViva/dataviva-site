@@ -16,7 +16,7 @@
 
   <div id="search_div">
     <h1>{% trans %}What do you want to know?{% endtrans %}</h1>
-    {{ search_form.search(size=60, id='search', placeholder=_("Search")) }}
+    {{ search_form.search(size=60, id='ask_search', placeholder=_("Search")) }}
     <div id="sabrina_head"></div>
   </div>
 
@@ -69,13 +69,12 @@
     <script src="/static/js/utils/utils.infinite_scroll.js"></script>
     <script>
 
-      //
       var order = d3.select('input[name="order"]:checked').attr("value"),
           search_term = null,
           json_url = "/ask/questions/?lang="+dataviva.language,
-    		type = d3.select('input[name="ask_type"]:checked').attr("value");
+    		  type = d3.select('input[name="ask_type"]:checked').attr("value");
 
-      leon("#search").color(dataviva.color).size("large")
+      leon("#ask_search").color(dataviva.color).size("large")
       leon("$order").color(dataviva.color)
       leon("$ask_type").color(dataviva.color)
 
@@ -176,11 +175,12 @@
       change_order(order)
       change_type(type)
 
-      d3.select("#search").on("input", function(e){
+      d3.select("#ask_search").on("input", function(e){
 
         search_term = this.value;
 
         var url = json_url + "&q=" + search_term + "&order=" + order+ "&type=" + type;
+
         d3.select("#question_feed").html('')
           .call(is.url(url).offset(0).remove(true))
 
