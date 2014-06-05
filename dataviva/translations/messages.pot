@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-06-04 17:31-0400\n"
+"POT-Creation-Date: 2014-06-05 11:03-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.6\n"
+"Generated-By: Babel 1.3\n"
 
 #: dataviva/about/views.py:73
 msgid "You need to be logged in to ask questions."
@@ -1653,7 +1653,7 @@ msgstr ""
 msgid "Generate a Profile"
 msgstr ""
 
-#: dataviva/html/profiles/index.html:8
+#: dataviva/html/profiles/index.html:8 dataviva/html/templates/site.html:10
 msgid "What would you like to learn more about?"
 msgstr ""
 
@@ -1711,10 +1711,6 @@ msgstr ""
 
 #: dataviva/html/templates/mail.html:27
 msgid "click here."
-msgstr ""
-
-#: dataviva/html/templates/site.html:10
-msgid "Search by Location, Occupation, etc..."
 msgstr ""
 
 #: dataviva/html/templates/site.html:46
