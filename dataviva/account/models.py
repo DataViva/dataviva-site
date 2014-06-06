@@ -1,6 +1,6 @@
 from dataviva import db
 from hashlib import md5
-from dataviva.utils import AutoSerialize
+from dataviva.utils.auto_serialize import AutoSerialize
 from os import urandom
 
 ROLE_USER = 0

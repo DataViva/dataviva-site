@@ -12,10 +12,10 @@ from dataviva.general.forms import AccessForm
 from dataviva.general.models import Short
 from dataviva.account.models import User
 
-from config import STATIC_URL, ACCOUNTS, ERROR_EMAIL
+from config import ACCOUNTS, ERROR_EMAIL, DEBUG
 
 #utils
-from ..utils import send_mail
+# from ..utils import send_mail
 
 ###############################
 # General functions for ALL views
@@ -25,7 +25,6 @@ def before_request():
 
     g.accounts = True if ACCOUNTS in ["True","true","Yes","yes","Y","y",1] else False
     g.color = "#af1f24"
-    g.static_url = STATIC_URL
     g.page_type = mod.name
     g.latest_year = {}
     for dataset in __latest_year__:
@@ -102,6 +101,9 @@ def after_request(response):
 
 @mod.route('/', methods=['GET', 'POST'])
 def home():
+    # return render_template("test.html")
+    
+    # raise Exception('asfd')
     g.page_type = "home"
     return render_template("home.html")
 
@@ -144,59 +146,62 @@ def redirect_short_url(slug):
 ###############################
 # 404 view
 # ---------------------------
-@app.errorhandler(Exception)
-@mod.route('413/')
-def page_not_found(e="413"):
-
-    error = str(e).split(":")[0]
-    try:
-        error_code = int(error)
-    except:
-        error = "500"
-        error_code = int(error)
-
-    request_info = {
-        "Date": datetime.today().ctime(),
-        "IP": request.remote_addr,
-        "Method": request.method,
-        "URL": request.url,
-        "Data": request.data
-    }
-
-    headers = list(request.headers)
-
-    allowed = True
-    requester = request.headers.get("from")
-    if requester:
-      if "googlebot" in requester:
-        allowed = False
-
-    if "fancybox" in request.url:
-      allowed = False
-
-    if allowed and ERROR_EMAIL and error_code != 404:
-        admins = User.query.filter(User.role == 1).filter(User.email != "").filter(User.agree_mailer == 1).all()
-        emails = [str(getattr(a,"email")) for a in admins]
-
-        if len(emails) > 0:
-            subject = "DataViva Error: "+error
-
-            if e == "413":
-                request_info["URL"] = ''
-                error_text = "413: Request entity too large"
-            else:
-                error_text = str(e)
-
-            send_mail(subject, emails,
-                render_template('admin/mail/error.html', title=subject,
-                error=error_text, request_info=request_info, headers=headers))
-
-    g.page_type = "error"
-
-    sabrina = {}
-    sabrina["outfit"] = "lab"
-    sabrina["face"] = "scared"
-    sabrina["hat"] = None
-
-    return render_template('general/error.html',
-        error = error, sabrina = sabrina), error_code
+# @app.errorhandler(Exception)
+# @mod.route('413/')
+# def page_not_found(e="413"):
+#     
+#     if DEBUG:
+#         raise Exception(e)
+# 
+#     error = str(e).split(":")[0]
+#     try:
+#         error_code = int(error)
+#     except:
+#         error = "500"
+#         error_code = int(error)
+# 
+#     request_info = {
+#         "Date": datetime.today().ctime(),
+#         "IP": request.remote_addr,
+#         "Method": request.method,
+#         "URL": request.url,
+#         "Data": request.data
+#     }
+# 
+#     headers = list(request.headers)
+# 
+#     allowed = True
+#     requester = request.headers.get("from")
+#     if requester:
+#       if "googlebot" in requester:
+#         allowed = False
+# 
+#     if "fancybox" in request.url:
+#       allowed = False
+# 
+#     if allowed and ERROR_EMAIL and error_code != 404:
+#         admins = User.query.filter(User.role == 1).filter(User.email != "").filter(User.agree_mailer == 1).all()
+#         emails = [str(getattr(a,"email")) for a in admins]
+# 
+#         if len(emails) > 0:
+#             subject = "DataViva Error: "+error
+# 
+#             if e == "413":
+#                 request_info["URL"] = ''
+#                 error_text = "413: Request entity too large"
+#             else:
+#                 error_text = str(e)
+# 
+#             send_mail(subject, emails,
+#                 render_template('admin/mail/error.html', title=subject,
+#                 error=error_text, request_info=request_info, headers=headers))
+# 
+#     g.page_type = "error"
+# 
+#     sabrina = {}
+#     sabrina["outfit"] = "lab"
+#     sabrina["face"] = "scared"
+#     sabrina["hat"] = None
+# 
+#     return render_template('general/error.html',
+#         error = error, sabrina = sabrina), error_code

@@ -62,8 +62,6 @@ LANGUAGES = {
 ''' For full text search '''
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
-STATIC_URL = get_env_variable("DATAVIVA_STATIC_URL")
-
 '''
     Setup redis caching connection to be used throughout the site. Credentials
     are set in their respective env vars.

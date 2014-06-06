@@ -10,9 +10,8 @@ from dataviva.secex.models import Hs
 
 from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE_REPLY, Flag
 from dataviva.ask.forms import AskForm, ReplyForm, SearchForm
-from dataviva.utils import strip_html
 
-from dataviva.utils import send_mail
+from dataviva.utils.send_mail import send_mail
 from config import ADMINISTRATOR_EMAIL, basedir
 import os
 

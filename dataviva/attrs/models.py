@@ -1,5 +1,7 @@
 from dataviva import db, __latest_year__
-from dataviva.utils import AutoSerialize, exist_or_404, title_case
+from dataviva.utils.auto_serialize import AutoSerialize
+from dataviva.utils.exist_or_404 import exist_or_404
+from dataviva.utils.title_case import title_case
 from sqlalchemy import func, Float
 from sqlalchemy.sql.expression import cast
 from decimal import *

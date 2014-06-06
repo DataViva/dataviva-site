@@ -1,5 +1,5 @@
 from dataviva import db
-from dataviva.utils import AutoSerialize
+from dataviva.utils.auto_serialize import AutoSerialize
 from dataviva.attrs.models import Wld, Hs, Bra
 
 ############################################################

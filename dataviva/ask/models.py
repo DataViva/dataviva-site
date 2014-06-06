@@ -4,7 +4,7 @@ from unicodedata import normalize
 from sqlalchemy import and_
 from sqlalchemy.dialects import mysql
 from dataviva import db, app
-from dataviva.utils import AutoSerialize
+from dataviva.utils.auto_serialize import AutoSerialize
 
 from dataviva.account.models import User
 from dataviva.attrs import models as attr_models

@@ -2,7 +2,7 @@ import StringIO, csv
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, make_response, Response
 from dataviva import db
-from dataviva.utils import make_query
+from dataviva.utils.make_query import make_query
 from dataviva.rais.models import Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio
 
 mod = Blueprint('rais', __name__, url_prefix='/rais')

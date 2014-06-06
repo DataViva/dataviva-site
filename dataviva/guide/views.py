@@ -6,7 +6,7 @@ from datetime import datetime
 from werkzeug import urls
 
 from dataviva import db
-from dataviva.utils import title_case
+from dataviva.utils.title_case import title_case
 from dataviva.attrs.models import Bra, Isic, Cbo, Hs, Wld
 from dataviva.rais import models as rais
 from dataviva.secex import models as secex

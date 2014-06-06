@@ -15,7 +15,8 @@ from dataviva.apps.models import Build, UI, App
 from dataviva.general.models import Short
 
 from dataviva.rais.views import rais_ybi
-from dataviva.utils import gzip_data, cached_query
+from dataviva.utils.gzip_data import gzip_data
+from dataviva.utils.cached_query import cached_query
 
 import json, urllib2, urllib
 from config import FACEBOOK_OAUTH_ID, basedir

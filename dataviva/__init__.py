@@ -10,9 +10,8 @@ from flask.ext.login import LoginManager
 # flask-babel for handling L18n and L10n
 from flask.ext.babel import Babel
 # for new filters, redis sessions
-from utils import Momentjs, formatter, strip_html, jinja_split, \
-                    RedisSessionInterface
-                    
+from utils.jinja_helpers import jinja_momentjs, jinja_formatter, jinja_strip_html, jinja_split
+from utils.redis import RedisSessionInterface
 from flask.ext.mail import Mail
 
 ''' Base directory of where the site is held '''
@@ -45,9 +44,9 @@ lm.setup_app(app)
 babel = Babel(app)
 
 # add a few extra template filters to jinja
-app.jinja_env.globals['momentjs'] = Momentjs
-app.jinja_env.globals['format'] = formatter
-app.jinja_env.filters['strip_html'] = strip_html
+app.jinja_env.globals['moment_js'] = jinja_momentjs
+app.jinja_env.globals['format'] = jinja_formatter
+app.jinja_env.filters['strip_html'] = jinja_strip_html
 app.jinja_env.filters['split'] = jinja_split
 
 # Load the modules for each different section of the site

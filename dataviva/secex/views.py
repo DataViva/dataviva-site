@@ -2,7 +2,7 @@ import re, operator
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, abort, make_response, Response
 from dataviva import db
-from dataviva.utils import make_query
+from dataviva.utils.make_query import make_query
 from dataviva.secex.models import Yb_secex, Yw, Yp, Ybw, Ybp, Ypw, Ybpw
 
 mod = Blueprint('secex', __name__, url_prefix='/secex')

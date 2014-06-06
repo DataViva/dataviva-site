@@ -7,7 +7,7 @@ from sqlalchemy import func
 from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, redirect, url_for
 
 from dataviva import db
-from dataviva.utils import make_query
+from dataviva.utils.make_query import make_query
 from dataviva.account.models import User, Starred
 from dataviva.apps.models import UI
 from dataviva.rais.models import Yb_rais, Yi, Yo

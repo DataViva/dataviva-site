@@ -131,7 +131,7 @@
 	           
 	            <!-- User metadata -->
 	            <p class="question_attr">
-	              <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a>{% if r.timestamp != None %} {{ momentjs(r.timestamp).fromNow() }}{% endif %}
+	              <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a>{% if r.timestamp != None %} {{ moment_js(r.timestamp).fromNow() }}{% endif %}
 	            </p>
 	          <!-- end reply text -->
 	          </div>

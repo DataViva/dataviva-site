@@ -10,7 +10,7 @@ from dataviva.account.models import User
 from dataviva.ask.models import Question, Status, Reply, Flag, Vote
 # forms
 from dataviva.admin.forms import AdminQuestionUpdateForm
-from dataviva.utils import strip_html
+from dataviva.utils.jinja_helpers import jinja_strip_html
 
 #utils
 from ..utils import send_mail
@@ -135,7 +135,7 @@ def admin_questions_list(status=None):
     items = query.limit(limit).offset(offset).all()
     items = [i.serialize() for i in items]
     for i in items:
-        i["question"] = strip_html(i["question"])
+        i["question"] = jinja_strip_html(i["question"])
 
     ret = jsonify({"activities":items})
 

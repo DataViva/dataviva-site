@@ -5,7 +5,11 @@ from dataviva import db, __latest_year__
 from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo, Yb
 from dataviva.secex.models import Yp, Yw
 from dataviva.rais.models import Yi, Yo
-from dataviva.utils import exist_or_404, gzip_data, cached_query, title_case
+
+from dataviva.utils.gzip_data import gzip_data
+from dataviva.utils.cached_query import cached_query
+from dataviva.utils.exist_or_404 import exist_or_404
+from dataviva.utils.title_case import title_case
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 

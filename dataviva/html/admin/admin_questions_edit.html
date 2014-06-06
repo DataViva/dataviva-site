@@ -18,7 +18,7 @@
     <div class="posted">
       <div class="user-image" style="background-image: url('{{ question.user.avatar(50) }}')"></div>
       <div>
-      {% trans %}Asked by{% endtrans %} {{question.user.nickname}} {{ momentjs(question.timestamp).fromNow() }}
+      {% trans %}Asked by{% endtrans %} {{question.user.nickname}} {{ moment_js(question.timestamp).fromNow() }}
       </div>
     </div>
 

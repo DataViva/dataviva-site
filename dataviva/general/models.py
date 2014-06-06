@@ -1,7 +1,8 @@
 from flask import g
 from datetime import datetime
 from dataviva import db
-from dataviva.utils import AutoSerialize, title_case
+from dataviva.utils.auto_serialize import AutoSerialize
+from dataviva.utils.title_case import title_case
 from dataviva.attrs.models import Bra, Isic, Hs, Cbo, Wld
 from dataviva.apps.models import Build
 

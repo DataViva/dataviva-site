@@ -3,7 +3,7 @@ from dataviva.account.login_providers import facebook, twitter, google
 from dataviva.account.models import User, Starred, ROLE_USER, ROLE_ADMIN
 from dataviva.ask.forms import AskForm
 from dataviva.ask.models import Question, Status, Reply
-from dataviva.utils import exist_or_404
+from dataviva.utils.exist_or_404 import exist_or_404
 from datetime import datetime
 from flask import Blueprint, request, render_template, flash, g, session, \
     redirect, url_for, jsonify, abort, current_app
