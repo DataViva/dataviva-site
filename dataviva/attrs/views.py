@@ -5,6 +5,7 @@ from dataviva import db, __latest_year__
 from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo, Yb
 from dataviva.secex.models import Yp, Yw
 from dataviva.rais.models import Yi, Yo
+from dataviva.ask.models import Question
 
 from dataviva.utils.gzip_data import gzip_data
 from dataviva.utils.cached_query import cached_query
@@ -213,12 +214,14 @@ def attrs_search(term=None):
     cbo_query = {}
     isic_query = {}
     hs_query = {}
+    question_query = {}
     wld = {}
     lang = request.args.get('lang', None) or g.locale
     result = []
     
+    
     bra = Bra.query.filter(or_(Bra.id == term, or_(Bra.name_pt.ilike("%"+term+"%"), Bra.name_en.ilike("%"+term+"%"))))
-    items = bra.limit(10).all()
+    items = bra.limit(5).all()
     items = [i.serialize() for i in items]
     
     for i in items:
@@ -243,7 +246,7 @@ def attrs_search(term=None):
     else:
         cbo = Cbo.query.filter(or_(Cbo.id == term, Cbo.name_en.ilike("%"+term+"%")))
     
-    items = cbo.limit(10).all()
+    items = cbo.limit(5).all()
     items = [i.serialize() for i in items]
     
     for i in items:
@@ -263,7 +266,7 @@ def attrs_search(term=None):
     else:
         isic = Isic.query.filter(and_(Isic.name_en.ilike("%"+term+"%"), Isic.id.in_(isic_match)))
     
-    items = isic.limit(10).all()
+    items = isic.limit(5).all()
     items = [i.serialize() for i in items]
     
     for i in items:
@@ -281,7 +284,7 @@ def attrs_search(term=None):
     else:
         hs = Hs.query.filter(or_(Hs.id == term, Hs.name_en.ilike("%"+term+"%")))
     
-    items = hs.limit(10).all()
+    items = hs.limit(5).all()
     print(items)
     items = [i.serialize() for i in items]
     
@@ -301,7 +304,7 @@ def attrs_search(term=None):
     else:
         wld = Wld.query.filter(or_(Wld.id == term, Wld.name_en.like("%"+term+"%")))
         
-    items = wld.limit(10).all()
+    items = wld.limit(5).all()
     items = [i.serialize() for i in items]
     
     for i in items:
@@ -313,6 +316,20 @@ def attrs_search(term=None):
         wld_query["content_type"] = "wld"
         wld_query = fix_name(wld_query, lang)
         result.append(wld_query)
+    
+    question = Question.query.filter(and_(Question.language == lang, or_(Question.question.ilike("%"+term+"%"), Question.body.ilike("%"+term+"%"))))
+    
+    items = question.limit(5).all()
+    items = [i.serialize() for i in items]
+    
+    for i in items:
+        question_query = {}
+        question_query["id"] = i["id"]
+        question_query["name"] = i["question"]        
+        question_query["color"] = '#D67AB0'
+        question_query["content_type"] = "learnmore"
+        question_query = fix_name(question_query, lang)
+        result.append(question_query)
         
 
     ret = jsonify({"activities":result})

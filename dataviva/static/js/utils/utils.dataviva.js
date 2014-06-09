@@ -366,6 +366,7 @@ dataviva.format.text = function(text,name,l) {
       "votes": {"en": "Most Active", "pt": "Mais Frequente"},
       "newest": {"en": "Most Recent", "pt": "Mais Recente"},
       "questions": {"en": "Questions", "pt": "Perguntas"},
+      "learnmore_plural": {"en": "Learn more", "pt": "Saiba mais"},
       "flagged": {"en": "This reply has been flagged.", "pt": "Esta resposta foi marcada."},
       "unflagged": {"en": "This flag on this reply has been removed.", "pt": "A marca desta resposta foi retirada."},
       "voted": {"en": "Your vote has been added.", "pt": "Seu voto foi enviado."},

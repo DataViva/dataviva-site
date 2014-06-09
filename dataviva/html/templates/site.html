@@ -361,6 +361,13 @@
                  }
 
                }
+               
+               if(item.content_type === "learnmore") {
+
+                 type = ""
+                 icon = "icon"
+
+               }
 
                if(!exclude) {
 
@@ -381,8 +388,13 @@
                  }
 
                  var link = d3.select(".searchResult").append("a")
-                   .attr("class","search_result")
-                   .attr("href","/profiles/"+urlSearch)
+                   .attr("class","search_result");
+                   
+                   if(item.content_type=="learnmore") {
+                   	link.attr("href","/about/contact")
+                   } else {
+                   	link.attr("href","/profiles/"+urlSearch)
+                   }
 
                  link.append("div")
                    .attr("class","search_icon")
