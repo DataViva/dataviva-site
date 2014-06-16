@@ -146,7 +146,7 @@
   	var token = document.getElementById("downloadToken").value;
 	downloadTimer = window.setInterval( function() {
 		downloadToken = new Date().getTime();
-		console.log(getCookie("downloadToken"));
+		//console.log(getCookie("downloadToken"));
 		//console.log({tokennow: token, cookitoken: downloadToken})
 		if( (token < downloadToken) || (attempts == 0) ) {
 		  //downloadDone();
@@ -1649,7 +1649,8 @@
 
         if (build.url == app.build.url) var c = "decision"
         else var c = "help"
-
+		
+		
         box.select("."+build.dataset).append("div")
           .attr("id",build.url)
           .attr("class","output "+c+" icon "+build.app.type)
@@ -1687,6 +1688,7 @@
       }
 
       app.build[type][index] = obj
+      //console.log(obj)
       var url = app.url.split("/")
       var ids = url[url_index].split("_")
       if (obj.distance && obj.distance > 0) {

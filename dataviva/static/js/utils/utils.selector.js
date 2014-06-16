@@ -451,8 +451,18 @@ function Selector() {
           if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && x.id.length != 5)) {
             icon.style("background-color",x.color)
           }
+          
+          appType = app.build.app.type;          
+          
+          show_selectButton = true;
+          
+          //Network, Rings, Scatter: Not for Brazil
+          if((appType=="scatter" || appType=="rings" || appType=="network") && type == "bra" && x.id == "all") {
+          	show_selectButton = false;
+          }
+          
 
-          if (type != "file" && ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all"))) {
+          if ((show_selectButton) && (type != "file" && ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all")))) {
             header_select_div.style("display","inline-block")
             header_select.leons.header_select.node.onclick = function(){
               selector_load.text(dataviva.format.text("wait")).show()
@@ -463,6 +473,7 @@ function Selector() {
           else {
             header_select_div.style("display","none")
           }
+          
 
           if (type == "file") var prefix = x.name
           else if (type == "bra") {
@@ -529,7 +540,8 @@ function Selector() {
         results.forEach(function(v,i){
 
           if (v) {
-
+			current_app = app.build.app.type;
+			
             var item = body.append("div")
               .attr("id","result_"+v.id)
               .attr("class","search_result")
@@ -678,21 +690,41 @@ function Selector() {
               leon("#distance"+v.id).color(v.color)
 
             }
-
-            if (!limit || v.id.length >= limit) {
-
+            
+            //SETTING RULES FOR SELECTION
+            show_select = true;
+		    
+		    //Rings,Occugrid: Not for CBO/HS 1 digit (able just for CBO/HS 4 digit)
+		    if(["occugrid", "rings"].indexOf(current_app) && (["cbo", "hs"].indexOf(type) && v.id.length == 1)) {
+		  		show_selectButton = false
+		    }
+		    
+		    //Geomap: Not for cities, (states, country, planning regions OK)
+		    if(current_app == "geo_map" && v.display_id.length == 8) {
+		    	show_selectButton = false;
+		    }
+		
+            if ((!limit || v.id.length >= limit)) {
+			
               var b = buttons.append("input")
                 .attr("type","button")
                 .attr("id","select"+v.id)
-                .attr("value",dataviva.format.text("select"))
-
-              b.node().onclick = function(){
-                selector_load.text(dataviva.format.text("wait")).show()
-                callback(data[v.id],name)
+                
+              if(!show_selectButton) {
+                b.attr("value",dataviva.format.text("not_available"))
+              } else {
+              	b.attr("value",dataviva.format.text("select"))
+              	b.node().onclick = function(){
+					selector_load.text(dataviva.format.text("wait")).show()
+				  	callback(data[v.id],name)
+			  	}
               }
+                
+              
+              
 
               leon("#select"+v.id).color(v.color)
-            }
+             }
 
             if (results[i+1] || i == results.length-1) {
               body.append("div")

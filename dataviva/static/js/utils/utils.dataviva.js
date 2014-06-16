@@ -134,6 +134,7 @@ dataviva.format.text = function(text,name,l) {
       // Other Control Labels
       "active": {"en": "Available", "pt": "Dispon\u00edvel"},
       "available": {"en": "Available", "pt": "Dispon\u00edvel"},
+      "not_available": {"en": "Not available", "pt": "N\u00e3o dispon\u00edvel"},
       "grouping": {"en": "Group", "pt": "Grupo"},
       "grouping_desc_occugrid": {"en": "Groups the donut charts into different categorizations.", "pt": "Agrupar os gr\u00e1ficos de rosca em diferentes categoriza\u00e7\u00f5es."},
       "none": {"en": "None", "pt": "Nenhum"},
