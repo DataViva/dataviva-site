@@ -121,6 +121,12 @@ div#error_code {
   width: 80px;
 }
 
+
+div#extra_error {
+	font-size:20px; 
+	margin-top:20px;
+}
+
 /*****************/
 /* Title Styling */
 /*****************/

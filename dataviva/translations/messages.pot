@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-06-05 11:03-0300\n"
+"POT-Creation-Date: 2014-06-18 16:03-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,26 +17,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
-#: dataviva/about/views.py:73
+#: dataviva/about/views.py:72
 msgid "You need to be logged in to ask questions."
 msgstr ""
 
-#: dataviva/about/views.py:97
+#: dataviva/about/views.py:96
 msgid ""
 "Your message was sent successfully. Thank you for your contribution, it "
 "will be helpful to other users and is essential to improving our tool! "
 "Our team will contact you by e-mail shortly."
 msgstr ""
 
-#: dataviva/about/views.py:118
+#: dataviva/about/views.py:117
 msgid "You need to be signed in to reply to questions."
 msgstr ""
 
-#: dataviva/about/views.py:155
+#: dataviva/about/views.py:154
 msgid "Reply submitted. Your reply will show up after we review it."
 msgstr ""
 
-#: dataviva/about/views.py:175
+#: dataviva/about/views.py:174
 msgid "terms_of_use"
 msgstr ""
 
@@ -61,15 +61,15 @@ msgstr ""
 msgid "The item was successfully deleted."
 msgstr ""
 
-#: dataviva/apps/views.py:160
+#: dataviva/apps/views.py:161
 msgid "You need to be logged in to star apps."
 msgstr ""
 
-#: dataviva/ask/views.py:102 dataviva/ask/views.py:130
+#: dataviva/ask/views.py:101 dataviva/ask/views.py:129
 msgid "You need to be logged in to vote."
 msgstr ""
 
-#: dataviva/ask/views.py:160
+#: dataviva/ask/views.py:159
 msgid "You need to be logged in to flag replies."
 msgstr ""
 
@@ -131,14 +131,14 @@ msgstr ""
 msgid "Visualizing the Economy of Minas Gerais and Brazil"
 msgstr ""
 
-#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1938
+#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1941
 #: dataviva/html/templates/base.html:6
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
 " economy"
 msgstr ""
 
-#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1940
+#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1943
 #: dataviva/html/templates/base.html:6
 msgid "through more than 100 million interactive visualizations."
 msgstr ""
@@ -649,7 +649,7 @@ msgid "by"
 msgstr ""
 
 #: dataviva/html/about/ask/answer.html:61
-#: dataviva/html/about/ask/index.html:168 dataviva/html/account/index.html:30
+#: dataviva/html/about/ask/index.html:167 dataviva/html/account/index.html:30
 msgid "Comments"
 msgstr ""
 
@@ -784,7 +784,7 @@ msgstr ""
 msgid "Question"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:47 dataviva/html/about/ask/index.html:167
+#: dataviva/html/about/ask/index.html:47 dataviva/html/about/ask/index.html:166
 msgid "Comment"
 msgstr ""
 
@@ -1416,6 +1416,14 @@ msgstr ""
 
 #: dataviva/html/general/error.html:26
 msgid "Oh no! The page you've requested does not exist."
+msgstr ""
+
+#: dataviva/html/general/error.html:32
+msgid "Our technical team already received a message"
+msgstr ""
+
+#: dataviva/html/general/error.html:34
+msgid "informing this error and will fix it as soon as possible."
 msgstr ""
 
 #: dataviva/html/general/select.html:3
