@@ -137,7 +137,6 @@
     u += "?download"
     if (args[dataset].order != "") u += "&order="+args[dataset].order
     if (args.columns().length) u += "&cols="+args.columns().join(".")
-    console.log(u)
     window.location = u
   }
 

@@ -708,7 +708,7 @@ function Selector() {
 		    }
 		    
 		    //Geomap: Not for cities, (states, country, planning regions OK)
-		    if(current_app == "occugrid" && v.display_id.length == 8) {
+		    if(current_app == "geo_map" && v.display_id.length == 8) {
 		    	show_selectButton = false;
 		    }
 		
