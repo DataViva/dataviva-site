@@ -28,11 +28,13 @@
     </h1>
     <div id="error_code">{{ error }}</div>
   </div>
+   {% if error == "500" %}
 	<div id="extra_error">
     	{%trans%}Our technical team already received a message{%endtrans%}
     	<br>
   		{%trans%}informing this error and will fix it as soon as possible.{%endtrans%}
     </div>
+    {% endif %}
 {% endblock %}
 
 {% block js %}
