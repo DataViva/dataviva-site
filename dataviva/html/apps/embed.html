@@ -1525,7 +1525,8 @@
 
       var type = obj.id,
           title = app.build.app.name+"-"+app.build.title,
-          columns = []
+          columns = [],
+          formattedColumns = []
 
       for (cat in app.tooltip.long) {
         app.tooltip.long[cat].forEach(function(k){
@@ -1536,9 +1537,9 @@
       title = title.removeAccents().split(" ").join("_")
 
       var form = document.getElementById("svgform");
-
+	 
       if(type == "csv"){
-        form['data'].value = d3.csv.formatRows(app.viz.csv_columns(columns).csv_data());
+        form['data'].value = d3.tsv.formatRows(app.viz.csv_columns(columns).csv_data());
       }
       else {
         if (app.build.app.type == "geo_map") var svg = d3.select("div#map svg")

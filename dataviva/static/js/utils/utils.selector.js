@@ -443,7 +443,7 @@ function Selector() {
           var header_color = "#333333"
         }
         else {
-
+			
           var header_color = x.color
 
           icon.style("background-image","url('"+x.icon+"')")
@@ -452,7 +452,11 @@ function Selector() {
             icon.style("background-color",x.color)
           }
           
-          appType = app.build.app.type;          
+          if (typeof app === "undefined") {
+          	appType = "";
+          } else {
+          	appType = app.build.app.type;
+          }          
           
           show_selectButton = true;
           
@@ -540,7 +544,11 @@ function Selector() {
         results.forEach(function(v,i){
 
           if (v) {
-			current_app = app.build.app.type;
+      		 if (typeof app === "undefined") {
+		    	current_app = "";
+		     } else {
+		  	    current_app = app.build.app.type;
+		     } 
 			
             var item = body.append("div")
               .attr("id","result_"+v.id)
@@ -700,7 +708,7 @@ function Selector() {
 		    }
 		    
 		    //Geomap: Not for cities, (states, country, planning regions OK)
-		    if(current_app == "geo_map" && v.display_id.length == 8) {
+		    if(current_app == "occugrid" && v.display_id.length == 8) {
 		    	show_selectButton = false;
 		    }
 		
@@ -719,10 +727,6 @@ function Selector() {
 				  	callback(data[v.id],name)
 			  	}
               }
-                
-              
-              
-
               leon("#select"+v.id).color(v.color)
              }
 

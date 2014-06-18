@@ -415,8 +415,8 @@ def make_query(data_table, url_args, lang, **kwargs):
             for i, data_dict in enumerate(ret["data"]):
                 row = [str(data_dict[c]) if c in data_dict else '' for c in header]
                 if i == 0:
-                    yield ','.join(header) + '\n' + ','.join(row) + '\n'
-                yield ','.join(row) + '\n'
+                    yield ';'.join(header) + '\n' + ';'.join(row) + '\n'
+                yield ';'.join(row) + '\n'
 
         content_disposition = "attachment;filename=%s.csv" % (cache_id[1:-1].replace('/', "_"))
         
