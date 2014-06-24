@@ -153,7 +153,7 @@
 
       show_toggle = function() {
         d3.select("#account").attr("class","active")
-        d3.select("#d3plus_tooltip_id_account").style("display","block")
+        d3.select("#d3plus_tooltip_id_account").style("left", x).style("display","block")
       }
 
       hide_toggle = function() {
@@ -163,13 +163,13 @@
 
       var language_html = d3.select("div#account_tooltip").html()
       d3.select("div#account_tooltip").remove()
-
+	  diff_screen = ((window.outerWidth-parseInt(d3.select("#header").style("width").replace("px","")))/2) 
       var acct = d3.select("#account").node(),
           w = acct.offsetWidth,
           h = acct.offsetHeight,
-          x = acct.offsetLeft+w/2,
+          x = (acct.offsetLeft+(w/2)+diff_screen),
           y = acct.offsetTop+h
-
+	  
       d3plus.tooltip.create({
         "id": "account",
         "x": x,
