@@ -846,7 +846,7 @@
             else if (ui.values.indexOf("val_usd") >= 0) var default_value = "val_usd"
             else if (ui.values.indexOf("num_emp") >= 0) var default_value = "num_emp"
             else var default_value = ui.values[0]
-          }
+          } 
           else if (ui.type == "depth") {
             var bra_id = app.build.bra[0].id
             if (app.build.output == "bra" && bra_id != "all") {
@@ -872,7 +872,7 @@
           }
           else if (ui.type == "rca_scope" && app.build.bra[0].id == "all" && app.build.output == "hs") {
             var default_value = "wld_rca"
-          }
+          } 
           else {
             var default_value = ui.values[0]
           }
@@ -880,36 +880,42 @@
           if((last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
             app.vars[ui.type] = default_value
           }
-
-          if (ui.values.length > 1 && app.vars.builder != "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs"))) {
+		
+		 
+		 
+          if (ui.values.length > 1 && app.vars.builder != "false" && (ui.type != "color_var" && app.build.app.type == "stacked") && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs")) || (ui.type != "color_var"  && app.build.app.type != "stacked")) {
 
             var leon_type = ui.values.length <= 4 ? "radio" : "select"
             var leon_data = {}
             ui.values.forEach(function(v){
               leon_data[v] = dataviva.format.text(v)
             })
+            
+            
+	          
+				  var ui_div = d3.select("#app_controls").append("div")
+				  .attr("class","ui_group alt_tooltip")
+				  .attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
+				  .on(d3plus.evt.over,function(){
+				    if (leon_type == "select") dataviva.ui.tooltip("alt_tooltip",this,"center right")
+				    else dataviva.ui.tooltip("alt_tooltip",this)
+				  })
+				  .on(d3plus.evt.out,function(){
+				    dataviva.ui.tooltip("alt_tooltip",false)
+				  })
+	
+				leon({
+				  "type": leon_type,
+				  "data": leon_data,
+				  "id": ui.type,
+				  "default": app.vars[ui.type],
+				  "label": dataviva.format.text(title),
+				  "parent": ui_div.node(),
+				  "event": app.update
+				}).color(app.build.app.color)
 
-            var ui_div = d3.select("#app_controls").append("div")
-              .attr("class","ui_group alt_tooltip")
-              .attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
-              .on(d3plus.evt.over,function(){
-                if (leon_type == "select") dataviva.ui.tooltip("alt_tooltip",this,"center right")
-                else dataviva.ui.tooltip("alt_tooltip",this)
-              })
-              .on(d3plus.evt.out,function(){
-                dataviva.ui.tooltip("alt_tooltip",false)
-              })
-
-            leon({
-              "type": leon_type,
-              "data": leon_data,
-              "id": ui.type,
-              "default": app.vars[ui.type],
-              "label": dataviva.format.text(title),
-              "parent": ui_div.node(),
-              "event": app.update
-            }).color(app.build.app.color)
-
+			
+			
           }
 
         }
@@ -931,6 +937,8 @@
       builder.url()
 
       var color_var = app.vars.color_var ? app.vars.color_var : "color"
+      
+      
 
       app.title_update()
 
