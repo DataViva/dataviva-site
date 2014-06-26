@@ -310,6 +310,8 @@
 
       var priority = ["both_filters","filter2","filter1","no_filters"],
           html_return = "<div class='title'>"+dataviva.format.text("related_apps")+"</div>"
+          
+         
 
       priority.forEach(function(p,i){
         if (app.recommendations[p]) {
@@ -351,7 +353,9 @@
                 }
                 t = t.replace(word,new_article)
               }
-
+			
+				
+			  console.log(a)
               html_return += "<div id='"+u+"' class='"+classname+" "+a.app.type+"' "
               html_return += "onclick='app.start(this.id)'>"
               html_return += t
@@ -362,6 +366,7 @@
           })
         }
       })
+      
       return html_return
 
     }

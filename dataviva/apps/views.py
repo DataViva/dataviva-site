@@ -23,6 +23,7 @@ from config import FACEBOOK_OAUTH_ID, basedir
 import os
 import random
 import zipfile
+import sys
 
 mod = Blueprint('apps', __name__, url_prefix='/apps')
 
@@ -83,6 +84,7 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     current_build.set_filter2(filter2)
     current_build.set_bra(bra_id)
 
+    
     '''Get the recommended app list to pass with data'''
     filler_bra = bra_id
     filler1 = filter1
@@ -96,7 +98,9 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
 
     recs = recommend(app_name=app_name, dataset=dataset, bra_id=filler_bra, \
                         filter1=filler1, filter2=filler2, output=output)
-
+    
+    
+    
     '''Every possible build, required by the embed page for building the build
     dropdown.
     '''
@@ -122,7 +126,10 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     '''Get the actual data for the current build'''
     # view_data = rais_ybi(bra_id='sp', isic_id='a0112').data
     # app.url_map.bind('/').match('/attrs/wld/nausa/')
-
+    
+   
+    
+    
     if request.is_xhr:
         ret = jsonify({
             "current_build": current_build.serialize(),
@@ -143,6 +150,8 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             current_build = current_build,
             global_vars = json.dumps(global_vars),
             facebook_id = FACEBOOK_OAUTH_ID))
+
+   
 
     ret.headers.add('Last-Modified', datetime.now())
     ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
@@ -202,6 +211,7 @@ def recommend(app_name=None, dataset=None, bra_id="mg", filter1=None, filter2=No
          - all      = all
     '''
     build_filter1 = filter1
+    item_id = bra_id
     if dataset == "rais" and build_filter1 != "all":
         build_filter1 = "<isic>"
     if dataset == "secex" and build_filter1 != "all":
@@ -250,6 +260,9 @@ def recommend(app_name=None, dataset=None, bra_id="mg", filter1=None, filter2=No
                     b.set_bra(bra_id)
                 if filter1 != "filler":
                     b.set_filter1(filter1)
+                # Municipalities are not allowed to have other municipality within it - Github #141
+                if b.output == "bra" and len(item_id) > 2:
+                    continue 
                 recommended['filter1'].append(b.serialize())
 
         '''Lastly get the rest of the relevent builds'''
@@ -260,7 +273,11 @@ def recommend(app_name=None, dataset=None, bra_id="mg", filter1=None, filter2=No
                 if bra_id != "filler":
                     b.set_bra(bra_id)
                 recommended['no_filters'].append(b.serialize())
-
+    
+    print("----")
+    print(recommended)
+        
+        
     return jsonify(recommended)
 
 def get_geo_location(ip):

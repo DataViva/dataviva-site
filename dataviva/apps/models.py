@@ -334,6 +334,7 @@ class Build(db.Model, AutoSerialize):
         del auto_serialized["title_en"]
         del auto_serialized["title_pt"]
         auto_serialized["title"] = self.title()
+        #auto_serialized["id_item"] = self.title()
         auto_serialized["data_url"] = self.data_url()
         auto_serialized["url"] = self.url()
         auto_serialized["ui"] = [ui.serialize() for ui in self.ui.all()]
