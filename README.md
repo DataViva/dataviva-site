@@ -31,7 +31,7 @@ Note: Internet Explorer versions 8 and below will not work as they do not have S
         pip install -r requirements.txt
 4.	Create a MySQL database and import the latest dump from [dataviva.info/static/db/](http://dataviva.info/static/db/)
 
-        bzip2 < dataviva_xxxx-xx-xx.sql.bz2 | mysql -u USERNAME -p -h localhost DB_NAME
+        bunzip2 < dataviva_xxxx-xx-xx.sql.bz2 | mysql -u USERNAME -p -h localhost DB_NAME
 5.	Set the following environment variables
 
 	**(if using virtualenv)** add the following to to the bottom of your virtualenv activate file (virtualenv_root/bin/activate).
