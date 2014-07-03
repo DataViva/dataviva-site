@@ -274,13 +274,20 @@ a.logo.mc {
 	margin-top: 12px;
 }
 
+a.logo.datawheel {
+  width: 102px;
+  height: 31px;
+  background-image: url("/static/img/nav/logo_datawheel_footer.jpg");
+  margin-top: 4px;
+}
+
 a.logo.fjp {
   background-image: url("/static/img/nav/logo_fjp_footer.jpg");
 }
 
 a.opendata {
   display: inline-block;
-  margin: 13px 5px 11px 5px;
+  margin: 13px 10px 11px 5px;
   opacity: 0.5;
   -webkit-transition: opacity 0.1s;
           transition: opacity 0.1s;
