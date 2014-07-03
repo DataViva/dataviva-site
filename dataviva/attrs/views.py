@@ -1,3 +1,5 @@
+import urllib2
+
 from sqlalchemy import func, distinct, asc, desc, and_, or_
 from flask import Blueprint, request, jsonify, abort, g, render_template, make_response, redirect, url_for, flash
 
@@ -11,6 +13,7 @@ from dataviva.utils.gzip_data import gzip_data
 from dataviva.utils.cached_query import cached_query
 from dataviva.utils.exist_or_404 import exist_or_404
 from dataviva.utils.title_case import title_case
+
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
@@ -205,6 +208,15 @@ def attrs(attr="bra",Attr_id=None):
 def attrs_table(attr="bra",depth="2"):
     g.page_type = "attrs"
     data_url = "/attrs/{0}/?depth={1}".format(attr,depth)
+    return render_template("general/table.html", data_url=data_url)
+
+@mod.route('/download/<attr>/<depth>/')
+def attrs_download(attr="bra",depth="2"):
+    g.page_type = "attrs"
+    data_url = "http://localhost:5000/attrs/{0}/?depth={1}".format(attr,depth)
+    url = urllib2.urlopen(data_url)
+
+    
     return render_template("general/table.html", data_url=data_url)
 
 @mod.route('/search/<term>/')
