@@ -108,9 +108,7 @@
       {% trans %}Analysis{% endtrans %}
     </a>
     
-    <a class="{% if page == 'testimonial' %}decision{% else %}help{% endif %}" href="{{ url_for('about.testimonial') }}">
-      {% trans %}Testimonial{% endtrans %}
-    </a>
+    
     
     <a class="{% if page == 'glossary' %}decision{% else %}help{% endif %}" href="{{ url_for('about.glossary', term='complexity') }}">
       {% trans %}Glossary{% endtrans %}

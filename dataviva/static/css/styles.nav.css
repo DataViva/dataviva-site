@@ -267,6 +267,13 @@ a.logo.fapemig {
   background-image: url("/static/img/nav/logo_fapemig_footer.jpg");
 }
 
+a.logo.mc {
+	width: 155px;
+	height: 18px;
+	background-image: url("/static/img/nav/logo_mc_footer.jpg");
+	margin-top: 12px;
+}
+
 a.logo.fjp {
   background-image: url("/static/img/nav/logo_fjp_footer.jpg");
 }
