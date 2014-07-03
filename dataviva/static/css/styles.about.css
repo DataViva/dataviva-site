@@ -279,3 +279,12 @@ div.reply_box:last-child {
 #admin_form input:text {
 	width:100%;
 }
+
+
+.download_classification {
+	border: 1px solid #AAA;
+	padding: 5px 4px;
+	margin-top: 0px;
+	display: inline-block;
+	height: 13px;
+}

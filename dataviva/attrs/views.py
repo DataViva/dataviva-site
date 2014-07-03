@@ -210,14 +210,6 @@ def attrs_table(attr="bra",depth="2"):
     data_url = "/attrs/{0}/?depth={1}".format(attr,depth)
     return render_template("general/table.html", data_url=data_url)
 
-@mod.route('/download/<attr>/<depth>/')
-def attrs_download(attr="bra",depth="2"):
-    g.page_type = "attrs"
-    data_url = "http://localhost:5000/attrs/{0}/?depth={1}".format(attr,depth)
-    url = urllib2.urlopen(data_url)
-
-    
-    return render_template("general/table.html", data_url=data_url)
 
 @mod.route('/search/<term>/')
 def attrs_search(term=None):

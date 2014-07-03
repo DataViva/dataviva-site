@@ -12,6 +12,9 @@
           <input onclick="change_depth(this.value)" type="radio" id="{{attr}}_{{d}}" name="depth" value="{{d}}"{% if depth == d %} checked{% endif %}>
           <label for="{{attr}}_{{d}}">{{format(attr~"_"~d~"_plural").render(attr~"_"~d~"_plural",g.locale)}}</label>
         {% endfor %}
+        
+        <a id="file" class="alt_tooltip download_classification" onclick="download_classfication()" alt="{%trans%}Download{%endtrans%}"><i class="fa fa-save"></i></a>
+        
       </div>
     </div>
     <div id="iframe">
@@ -31,6 +34,41 @@
     
     leon("$depth").color(dataviva.color)
     var depth = "{{depth}}", attr = "{{attr}}"
+    
+    function downloadDone() {
+      dataviva.popover.hide("#popover")
+      window.clearInterval( downloadTimer );
+      expireCookie( "downloadToken" );
+    }
+    
+	function getCookie( name ) {
+	  var parts = document.cookie.split(name + "=");
+	  if (parts.length == 2) return parts.pop().split(";").shift();
+	}
+
+    function expireCookie( cName ) {
+      document.cookie =
+      encodeURIComponent( cName ) +
+      "=deleted; expires=" +
+      new Date( 0 ).toUTCString();
+    }
+    
+    function download_classfication() {
+    	depthSelected = d3.selectAll(":checked");
+    	depthElem = d3.select(depthSelected[0][1]);
+    	depth = depthElem[0][0].value;
+    	id = depthElem[0][0].id.split("_");
+    	url = "/attrs/"+id[0]+"/?depth="+depth;
+        d3.xhr("/apps/download/")
+		  .header("Content-Type", "application/x-www-form-urlencoded")
+	        .post("output_format=url2csv&title=TESTE&downloadToken="+ new Date().getTime() +"&data="+ lineStr, function(e, data){
+			    top.location.href = data.response;
+			    downloadDone();
+			});
+		  
+		
+    	
+    }
     
     function update_table() {
       d3.select("iframe").attr("src","/attrs/table/"+attr+"/"+depth+"/")
