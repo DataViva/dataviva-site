@@ -93,16 +93,16 @@
   <div id="nav_footer" class="lightbox">
 
     <!-- Open Data Link -->
-    <a class="opendata" href="http://opendefinition.org/">
+    <a class="opendata" href="http://opendefinition.org/" target="_blank">
       <img alt="This material is Open Data" border="0"
       src="http://assets.okfn.org/images/ok_buttons/od_80x15_red_green.png" />
     </a>
     <!-- /Open Data Link -->
 
-    
     <a href="http://macroconnections.media.mit.edu/" class="logo mc" target="_blank"></a>
-    
-    
+    <a href="http://www.datawheel.us/" class="logo datawheel" target="_blank"></a>
+
+
 
 
   </div>
@@ -164,13 +164,13 @@
 
       var language_html = d3.select("div#account_tooltip").html()
       d3.select("div#account_tooltip").remove()
-	  diff_screen = ((window.outerWidth-parseInt(d3.select("#header").style("width").replace("px","")))/2) 
+	  diff_screen = ((window.outerWidth-parseInt(d3.select("#header").style("width").replace("px","")))/2)
       var acct = d3.select("#account").node(),
           w = acct.offsetWidth,
           h = acct.offsetHeight,
           x = (acct.offsetLeft+(w/2)+diff_screen),
           y = acct.offsetTop+h
-	  
+
       d3plus.tooltip.create({
         "id": "account",
         "x": x,
@@ -288,20 +288,20 @@
 	      .send("GET", '', function(error, text) {
 
           var litems = ""
-            , type_curr = "", $ct_bra = 1, $ct_cbo = 1, $ct_isic = 1, $ct_hs = 1, $ct_wld = 1; 
+            , type_curr = "", $ct_bra = 1, $ct_cbo = 1, $ct_isic = 1, $ct_hs = 1, $ct_wld = 1;
 
 
           if (!error) {
-			
+
             text.activities.forEach(function(item){
-				
+
               var urlSearch = item.content_type+"/"+item.id
                 , exclude = false;
-                
+
               if (typeof item.content_type !== "undefined") {
 
                 item.bg = item.color
-				 
+
                 if (item.content_type === "bra") {
 					if ( $ct_bra < 6 ) {
 					    if (item.id.length === 6) {
@@ -309,10 +309,10 @@
 					    } else {
 					        type = "bra_" + item.id.length
 					        $ct_bra++;
-					
-					
+
+
 					        item.bg = "transparent"
-					
+
 					        if (item.id !== "bra") {
 					            var icon = item.id.substr(0, 2);
 					        } else {
@@ -322,9 +322,9 @@
 				    } else {
 				    	exclude = true
 				    }
-				
+
 				}
-				
+
 				if (item.content_type === "cbo") {
 				    if ($ct_cbo < 6) {
 				        if (item.id.length === 1) {
@@ -342,7 +342,7 @@
 				        exclude = true
 				    }
 				}
-				
+
 				if (item.content_type === "isic") {
 				    if ($ct_isic < 6) {
 				        type = "isic_" + item.id.length
@@ -352,12 +352,12 @@
 				        exclude = true
 				    }
 				}
-				
-				
+
+
 				if (item.content_type === "hs") {
-				
+
 				    if ($ct_hs < 6) {
-				
+
 				        if (item.id.length == 2) {
 				            type = "hs_2"
 				            icon = item.id
@@ -368,19 +368,19 @@
 				            $ct_hs++;
 				        } else {
 				            exclude = true
-				
+
 				        }
 				    } else {
 				        exclude = true
 				    }
-				
+
 				}
-				
+
 				if (item.content_type === "wld") {
 				    if ($ct_wld < 6) {
 				        type = "wld_" + item.id.length
 				        icon = item.id
-				
+
 				        if (item.id.length === 5) {
 				            item.bg = "transparent"
 				        }
@@ -389,14 +389,14 @@
 				        exclude = true
 				    }
 				}
-				
+
 				if (item.content_type === "learnmore") {
-				
+
 				    type = ""
 				    icon = "icon"
-				
+
 				}
-				
+
                if(exclude!=true) {
 
                  if (type_curr !== item.content_type) {
@@ -417,7 +417,7 @@
 
                  var link = d3.select(".searchResult").append("a")
                    .attr("class","search_result");
-                   
+
                    if(item.content_type=="learnmore") {
                    	link.attr("href","/about/question/"+item.id)
                    } else {

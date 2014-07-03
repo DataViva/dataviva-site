@@ -1,4 +1,5 @@
 import pickle
+from uuid import uuid4
 from config import REDIS
 from datetime import timedelta
 from werkzeug.datastructures import CallbackDict
@@ -66,4 +67,3 @@ class RedisSessionInterface(SessionInterface):
         response.set_cookie(app.session_cookie_name, session.sid,
                             expires=cookie_exp, httponly=True,
                             domain=domain)
-

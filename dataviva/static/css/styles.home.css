@@ -20,7 +20,6 @@ body.home #intro {
 }
 
 body.home #carousel {
-  background-image: url("/static/img/home/map.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
   display: block;
