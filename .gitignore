@@ -4,4 +4,4 @@
 .pydevproject
 *.prefs
 db
-dataviva/static/downloads/
+dataviva/static/downloads/*
