@@ -13,7 +13,7 @@
           <label for="{{attr}}_{{d}}">{{format(attr~"_"~d~"_plural").render(attr~"_"~d~"_plural",g.locale)}}</label>
         {% endfor %}
         
-        <a id="file" class="alt_tooltip download_classification" onclick="download_classfication()" alt="{%trans%}Download{%endtrans%}"><i class="fa fa-save"></i></a>
+        
         
       </div>
     </div>
@@ -65,9 +65,7 @@
 			    top.location.href = data.response;
 			    downloadDone();
 			});
-		  
-		
-    	
+
     }
     
     function update_table() {
