@@ -15,7 +15,14 @@
     {% trans %}through more than 100 million interactive visualizations.{% endtrans %}
   </div>
 
-  
+  <div id="intro">
+    <div id="carousel">
+      <div class="centered">
+        <a class="decision">Saiba Mais</a>
+      </div>
+    </div>
+    <div class="pages"></div>
+  </div>
 
   <div class="bottom_section" style="margin-top:100px">
 
@@ -53,32 +60,32 @@
 
   var carousel = [
     {
-      "en": "What can DataViva do?",
-      "pt": "O que o DataViva pode fazer?",
-      "color": "#129cc0",
-      "image": "video",
-      "url": "{% if g.locale == 'pt' %}//player.vimeo.com/video/80812605{% else %}//player.vimeo.com/video/80812604{% endif %}?portrait=0&badge=0&byline=0&color=af1f24&title=0"
-    },
-    {
-      "en": "What are the export opportunities for Minas Gerais?",
-      "pt": "Quais são as oportunidades de exportação de Minas Gerais?",
+      "en": "What are the export opportunities in Brazil?",
+      "pt": "Quais são as oportunidades de exportação no Brasil?",
       "color": "#c9532f",
       "image": "sparks",
-      "url": "/guide/bra/mg/opportunity/hs/"
+      "url": "/guide/bra/all/opportunity/hs/"
     },
     {
-      "en": "Did you know that Minas Gerais is the largest state exporter to China?",
-      "pt": "Você sabia que Minas Gerais é o estado que mais exporta para China?",
+      "en": "What are the main occupations in Brazil?",
+      "pt": "Quais são as principais ocupações no Brasil?",
+      "color": "#129cc0",
+      "image": "lab",
+      "url": "/apps/builder/stacked/rais/all/all/all/cbo/?controls=true&value_var=num_emp&sort=color&depth=cbo_1&layout=value&order=asc"
+    },
+    {
+      "en": "Did you know that China is the largest destination of brazilian expots?",
+      "pt": "Você sabia que a China é o principal destino das exportações brasileiras?",
       "color": "#516043",
       "image": "factory",
-      "url": "/profiles/wld/aschn/?app=1"
+      "url": "/apps/builder/tree_map/secex/all/all/all/wld/?controls=true&year=2012&value_var=val_usd&depth=wld_5"
     },
     {
-      "en": "Where in Brazil is employment of Early Childhood Teachers growing?",
-      "pt": "Em que lugar do Brasil a contratação dos Professores de Nível Médio na Educação Infantil teve o maior crescimento?",
+      "en": "Which industries in Brazil employ Electrical Engineers?",
+      "pt": "Quais atividades econômicas mais empregam Engenheiros Eletricistas?",
       "color": "#2a2948",
-      "image": "students",
-      "url": "/guide/cbo/3311/growth/all/"
+      "image": "board",
+      "url": "/apps/builder/tree_map/rais/all/all/2143/isic/?controls=true&year=2012&value_var=num_emp&depth=isic_5&color_var=color"
     }
   ]
 
