@@ -150,8 +150,8 @@ def redirect_short_url(slug):
 @mod.route('413/')
 def page_not_found(e="413"):
     
-    #if DEBUG:
-        #raise Exception(e)
+    if DEBUG:
+        raise Exception(e)
 
     error = str(e).split(":")[0]
     try:
