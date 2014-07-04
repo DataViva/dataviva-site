@@ -22,6 +22,7 @@ import json, urllib2, urllib
 from config import FACEBOOK_OAUTH_ID, basedir
 import os
 import random
+import requests
 import zipfile
 import sys
 
@@ -354,6 +355,12 @@ def download():
         mimetype='application/octet-stream'
     elif format == "csv":
         mimetype="text/csv;charset=UTF-16"
+    elif format == "url2csv":
+        mimetype="text/csv;charset=UTF-16"
+        
+    def getRows(data):
+        # ?? this totally depends on what's in your data
+        return []
         
     if format == "png" or format == "pdf":
         zoom = "1"
@@ -361,6 +368,12 @@ def download():
         p = subprocess.Popen(["rsvg-convert", "-z", zoom, "-f", format, "--background-color={0}".format(background), temp.name], stdout=subprocess.PIPE)
         out, err = p.communicate()
         response_data = out
+    elif format == "url2csv":
+        format = "csv"
+        data = requests.get(data)
+        print('-------dataBuiu-------')
+        print(data)
+        response_data = "\t".join(getRows(data))
     else:
         response_data = data.encode("utf-16")
 

@@ -13,7 +13,7 @@
           <label for="{{attr}}_{{d}}">{{format(attr~"_"~d~"_plural").render(attr~"_"~d~"_plural",g.locale)}}</label>
         {% endfor %}
         
-        
+        <a id="file" class="alt_tooltip download_classification" onclick="download_classfication()" alt="{%trans%}Download{%endtrans%}"><i class="fa fa-save"></i></a>
         
       </div>
     </div>
@@ -58,14 +58,29 @@
     	depthElem = d3.select(depthSelected[0][1]);
     	depth = depthElem[0][0].value;
     	id = depthElem[0][0].id.split("_");
-    	url = "/attrs/"+id[0]+"/?depth="+depth;
-        d3.xhr("/apps/download/")
+    	url = "http://localhost:5000/attrs/"+id[0]+"/?depth="+depth;
+    	
+    	 d3.xhr("/apps/download/")
 		  .header("Content-Type", "application/x-www-form-urlencoded")
-	        .post("output_format=url2csv&title=TESTE&downloadToken="+ new Date().getTime() +"&data="+ lineStr, function(e, data){
+	        .post("output_format=url2csv&title=TESTE&downloadToken="+ new Date().getTime() +"&data="+ url, function(e, data){
 			    top.location.href = data.response;
 			    downloadDone();
 			});
-
+    	    	
+    	// d3.json(url, function(error, json) {
+		  // if (error) return console.warn(error);
+		  // data = json;
+		  // data_csv = data;
+		  // line = "";
+		  // // for($i=0;$i<json.data.length;$i++) {
+		  	// // ln = json.data[$i];
+		  	// // line += ln.id+";"+ln.name+";"+ln.population+"\n"
+		  // // }
+		  // //console.log("output_format=csv&title=TESTE&downloadToken="+ new Date().getTime() +"&data="+ line);
+// 		  
+// 		  
+		// });
+    	
     }
     
     function update_table() {
