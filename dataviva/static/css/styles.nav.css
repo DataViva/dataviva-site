@@ -26,15 +26,17 @@
 }
 
 #logo {
-  background-image: url("/static/img/nav/DataViva_Beta.png");
+  /* background-image: url("/static/img/nav/DataViva_Beta.png"); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: top center;
   display: inline-block;
   height: 52px;
   margin-right: 15px;
-  margin-top: -6px;
+  margin-top: 0px;
   width: 180px;
+  font-size: 34px;
+  color: #AF1F24;
 }
 
 #header > a.link {
