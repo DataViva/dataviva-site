@@ -29,6 +29,7 @@ SECRET_KEY = get_env_variable("DATAVIVA_SECRET_KEY", "default-dataviva.mg-secr3t
 DEBUG = True
 ERROR_EMAIL = False
 SQLALCHEMY_ECHO = True
+GZIP_DATA = get_env_variable("DATAVIVA_GZIP_DATA", True)
 
 ''' Whether or not to allow User Account Activity '''
 ACCOUNTS = get_env_variable("DATAVIVA_ACCOUNTS",True)
