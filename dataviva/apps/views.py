@@ -19,7 +19,7 @@ from dataviva.utils.gzip_data import gzip_data
 from dataviva.utils.cached_query import cached_query
 
 import json, urllib2, urllib
-from config import FACEBOOK_OAUTH_ID, basedir
+from config import FACEBOOK_OAUTH_ID, basedir,GZIP_DATA
 import os
 import random
 import requests
@@ -405,10 +405,17 @@ def info(app_name="tree_map"):
 
 @mod.route('/coords/<id>/')
 def coords(id="all"):
-    if id == "all":
-        file_name = "bra_states.json.gz"
+    if GZIP_DATA:
+        fileext=".gz"
+        filetype="gzip"
     else:
-        file_name = "{0}_munic.json.gz".format(id)
+        fileext=""
+        filetype="json"
+        
+    if id == "all":
+        file_name = "bra_states.json"+fileext
+    else:
+        file_name = ("{0}_munic.json"+fileext).format(id)
 
     cached_q = cached_query(file_name)
     if cached_q:
@@ -419,14 +426,20 @@ def coords(id="all"):
         cached_query(file_name, gzip_file)
         ret = make_response(gzip_file)
 
-    ret.headers['Content-Encoding'] = 'gzip'
+    ret.headers['Content-Encoding'] = filetype
     ret.headers['Content-Length'] = str(len(ret.data))
 
     return ret
 
 @mod.route('/networks/<type>/')
 def networks(type="hs"):
-    file_name = "network_{0}.json.gz".format(type)
+    if GZIP_DATA:
+        fileext=".gz"
+        filetype="gzip"
+    else:
+        fileext=""
+        filetype="json"
+    file_name = ("network_{0}.json"+fileext).format(type)
     cached_q = cached_query(file_name)
     if cached_q:
         ret = make_response(cached_q)
@@ -436,7 +449,7 @@ def networks(type="hs"):
         cached_query(file_name, gzip_file)
         ret = make_response(gzip_file)
 
-    ret.headers['Content-Encoding'] = 'gzip'
+    ret.headers['Content-Encoding'] = filetype
     ret.headers['Content-Length'] = str(len(ret.data))
 
     return ret
