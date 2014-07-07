@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-07-03 17:05-0300\n"
+"POT-Creation-Date: 2014-07-07 16:39-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr ""
 msgid "The item was successfully deleted."
 msgstr ""
 
-#: dataviva/apps/views.py:170
+#: dataviva/apps/views.py:171
 msgid "You need to be logged in to star apps."
 msgstr ""
 
@@ -93,7 +93,7 @@ msgstr ""
 msgid "a location"
 msgstr ""
 
-#: dataviva/guide/views.py:155 dataviva/html/home.html:37
+#: dataviva/guide/views.py:155 dataviva/html/home.html:44
 #: dataviva/html/templates/site.html:16
 msgid "Guide"
 msgstr ""
@@ -131,53 +131,53 @@ msgstr ""
 msgid "Visualizing the Economy of Brazil"
 msgstr ""
 
-#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1946
+#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1947
 #: dataviva/html/templates/base.html:6
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
 " economy"
 msgstr ""
 
-#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1948
+#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1949
 #: dataviva/html/templates/base.html:6
 msgid "through more than 100 million interactive visualizations."
 msgstr ""
 
-#: dataviva/html/home.html:23
+#: dataviva/html/home.html:30
 msgid "Also browse"
 msgstr ""
 
-#: dataviva/html/home.html:27 dataviva/html/apps/index.html:4
+#: dataviva/html/home.html:34 dataviva/html/apps/index.html:4
 #: dataviva/html/apps/info.html:4 dataviva/html/templates/site.html:14
 msgid "Apps"
 msgstr ""
 
-#: dataviva/html/home.html:28
+#: dataviva/html/home.html:35
 msgid "Explore the Brazilian economy through over 100 million visualizations."
 msgstr ""
 
-#: dataviva/html/home.html:32 dataviva/html/templates/site.html:15
+#: dataviva/html/home.html:39 dataviva/html/templates/site.html:15
 msgid "Profiles"
 msgstr ""
 
-#: dataviva/html/home.html:33
+#: dataviva/html/home.html:40
 msgid ""
 "Quickly learn about the exports, occupations, and industries of each "
 "Brazilian state and economic sector."
 msgstr ""
 
-#: dataviva/html/home.html:38
+#: dataviva/html/home.html:45
 msgid ""
 "Answer strategic questions about economic opportunities of states and "
 "industries."
 msgstr ""
 
-#: dataviva/html/home.html:42 dataviva/html/rankings/index.html:4
+#: dataviva/html/home.html:49 dataviva/html/rankings/index.html:4
 #: dataviva/html/templates/site.html:18
 msgid "Rankings"
 msgstr ""
 
-#: dataviva/html/home.html:43
+#: dataviva/html/home.html:50
 msgid ""
 "Compare locations, industries and occupations based on economic output, "
 "diversity, and salaries."
@@ -217,7 +217,6 @@ msgstr ""
 
 #: dataviva/html/about/termos_de_uso.html:4
 #: dataviva/html/about/terms_of_use.html:4 dataviva/html/account/login.html:22
-#: dataviva/html/templates/about.html:153
 msgid "Terms of Use"
 msgstr ""
 
@@ -312,9 +311,7 @@ msgstr ""
 msgid ""
 "Each one of these sections explains the objectives and how to interpret "
 "the eight visualizations of DataViva, followed by a brief presentation "
-"with tips on navigating in each of the applications. Some of the features"
-" of the platform are common to all applications and are explained in the "
-"video below."
+"with tips on navigating in each of the applications."
 msgstr ""
 
 #: dataviva/html/about/apps/index.html:16
@@ -1704,34 +1701,6 @@ msgstr ""
 
 #: dataviva/html/templates/site.html:50
 msgid "Logout"
-msgstr ""
-
-#: dataviva/html/templates/site.html:117
-msgid "Dear user,"
-msgstr ""
-
-#: dataviva/html/templates/site.html:118
-msgid ""
-"In order to improve our platform, we are running a very quick survey to "
-"collect some impressions and to know more about our users."
-msgstr ""
-
-#: dataviva/html/templates/site.html:120
-msgid ""
-"The estimated time to answer is about 2 to 3 minutes and there is no "
-"identification."
-msgstr ""
-
-#: dataviva/html/templates/site.html:122
-msgid "Thanks a lot, DataViva Team."
-msgstr ""
-
-#: dataviva/html/templates/site.html:125
-msgid "PARTICIPAR DA PESQUISA"
-msgstr ""
-
-#: dataviva/html/templates/site.html:127
-msgid "TAKE THE SURVEY"
 msgstr ""
 
 #: dataviva/profiles/views.py:47
