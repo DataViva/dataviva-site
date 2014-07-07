@@ -92,9 +92,7 @@
   <div id="settings">
 	
     <a id="refresh" class="leon button square alt_tooltip" onclick="app.start()" alt="{% trans %}Refresh the App{% endtrans %}"><i class="fa fa-refresh"></i></a>
-    {% if current_build.app and current_build.app.type!="geo_map" %}
-    <a id="file" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Download this App{% endtrans %}"><i class="fa fa-save"></i></a>
-    {% endif %}
+    <a id="file" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Download this App{% endtrans %}"><i class="fa fa-save"></i></a>  
     <a id="starred" class="leon button square alt_tooltip" onclick="app.star()" alt="{% trans %}Save this App{% endtrans %}"><i id="status_{{starred}}" class="{% if starred == 1 %}fa fa-star{% else %}fa fa-star-o{% endif %}"></i></a>
     <a id="share" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Share/Embed{% endtrans %}"><i class="fa fa-share"></i></a>
     <a id="help" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Show App Tutorial{% endtrans %}"><i class="fa fa-question-circle"></i></a>
@@ -687,8 +685,9 @@
               },"/apps/networks/"+app.build.output+"/")
             }
 
+			d3.selectAll("#settings #file").style("display","inline-block");
             if (app.build.app.type == "geo_map") {
-
+			  d3.selectAll("#settings #file").style("display","none");
               if (app.build.bra[0].id == "all") {
                 var json_id = "all"
               }

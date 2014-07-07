@@ -58,7 +58,7 @@
     	depthElem = d3.select(depthSelected[0][1]);
     	depth = depthElem[0][0].value;
     	id = depthElem[0][0].id.split("_");
-    	url = "http://localhost:5000/attrs/"+id[0]+"/?depth="+depth;
+    	url = "http://dataviva.info/attrs/"+id[0]+"/?depth="+depth;
     	
     	 d3.xhr("/apps/download/")
 		  .header("Content-Type", "application/x-www-form-urlencoded")

@@ -373,6 +373,7 @@ def download():
     elif format == "url2csv":
         urrll = data
         format = "csv"
+
 #        data = requests.get(data)
 #        print '-------dataBuiu-------'
 #        print data.content
