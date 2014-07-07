@@ -39,7 +39,12 @@
   letter-spacing: 4px;
   margin-right: 15px;
   margin-top: -6px;
+  opacity: 0.75;
   width: 180px;
+}
+
+#header > #logo:hover {
+  opacity: 1;
 }
 
 #header > a.link {
