@@ -10,7 +10,7 @@
 	    <input type="text" autocomplete="false" name="searchFld_1" id="searchFld" class="searchFld"  placeholder="{%trans%}What would you like to learn more about?{%endtrans%}">
     	<div class="searchResult"></div>
     </div>
-      <a id="logo" href="{{ url_for('general.home') }}">DataViva</a>
+      <a id="logo" href="{{ url_for('general.home') }}"></a>
       <a id="apps" href="{{ url_for('apps.guide') }}" class="link{% if g.page_type == 'apps' or g.page_type == 'builder' %} active{% endif %}">{% trans %}Apps{% endtrans %}</a>
       <a id="profiles" href="{{ url_for('profiles.index') }}" class="link{% if g.page_type == 'profiles' or g.page_type == 'profile' %} active{% endif %}">{% trans %}Profiles{% endtrans %}</a>
       <a id="guide" href="{{ url_for('guide.guide') }}" class="link{% if g.page_type == 'guide' or g.page_type == 'plan' %} active{% endif %}">{% trans %}Guide{% endtrans %}</a>
