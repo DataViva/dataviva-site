@@ -22,7 +22,7 @@ import json, urllib2, urllib
 from config import FACEBOOK_OAUTH_ID, basedir,GZIP_DATA
 import os
 import random
-import requests
+#import requests
 import zipfile
 import sys
 
@@ -370,7 +370,7 @@ def download():
         response_data = out
     elif format == "url2csv":
         format = "csv"
-        data = requests.get(data)
+        #data = requests.get(data)
         print('-------dataBuiu-------')
         print(data)
         response_data = "\t".join(getRows(data))
