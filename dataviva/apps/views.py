@@ -22,7 +22,7 @@ import json, urllib2, urllib
 from config import FACEBOOK_OAUTH_ID, basedir,GZIP_DATA
 import os
 import random
-import requests
+#import requests
 import zipfile
 import sys
 
@@ -337,16 +337,15 @@ def download():
     import tempfile, subprocess, random
     
     form = DownloadForm()
-
+    
     data = form.data.data
     format = form.output_format.data
     title = form.title.data
     downloadToken = form.downloadToken.data
     filenameDownload = title+"-"+downloadToken
-    temp = tempfile.NamedTemporaryFile()
-    temp.write(data.encode("utf-16"))
-    temp.seek(0)
 
+    
+    
     if format == "png":
         mimetype='image/png'
     elif format == "pdf":
@@ -361,22 +360,29 @@ def download():
     def getRows(data):
         # ?? this totally depends on what's in your data
         return []
-        
+      
     if format == "png" or format == "pdf":
+        temp = tempfile.NamedTemporaryFile()
+        temp.write(data.encode("utf-16"))
+        temp.seek(0)
         zoom = "1"
         background = "#ffffff"
         p = subprocess.Popen(["rsvg-convert", "-z", zoom, "-f", format, "--background-color={0}".format(background), temp.name], stdout=subprocess.PIPE)
         out, err = p.communicate()
         response_data = out
     elif format == "url2csv":
+        urrll = data
         format = "csv"
-        data = requests.get(data)
-        print('-------dataBuiu-------')
-        print(data)
-        response_data = "\t".join(getRows(data))
+#        data = requests.get(data)
+#        print '-------dataBuiu-------'
+#        print data.content
+#        
+#        response_data = "\t".join(data.content)
+#        print response_data
+#        return urrll
     else:
         response_data = data.encode("utf-16")
-
+    
     content_disposition = "attachment;filename=%s.%s" % (title, format)
     content_disposition = content_disposition.replace(",", "_")
     
