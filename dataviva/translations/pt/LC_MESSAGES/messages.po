@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-07-07 16:39-0300\n"
+"POT-Creation-Date: 2014-07-09 14:54-0300\n"
 "PO-Revision-Date: 2013-08-01 20:11-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -2160,4 +2160,7 @@ msgstr "um país"
 
 #~ msgid "TAKE THE SURVEY"
 #~ msgstr ""
+
+#~ msgid "name"
+#~ msgstr "Nome"
 

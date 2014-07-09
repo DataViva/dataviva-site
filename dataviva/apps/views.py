@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-import urllib2, json
 from datetime import datetime
 from collections import defaultdict
 from sqlalchemy import func
 from random import randint
-from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, url_for, redirect
+from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, url_for, redirect, jsonify
 from flask.ext.babel import gettext
 
 from dataviva import db, datavivadir
@@ -14,15 +13,16 @@ from dataviva.attrs.models import Bra, Isic, Hs, Cbo, Wld
 from dataviva.apps.models import Build, UI, App
 from dataviva.general.models import Short
 
+
 from dataviva.rais.views import rais_ybi
 from dataviva.utils.gzip_data import gzip_data
+from dataviva.utils.translates import translate_columns
 from dataviva.utils.cached_query import cached_query
 
 import json, urllib2, urllib
 from config import FACEBOOK_OAUTH_ID, basedir,GZIP_DATA
 import os
 import random
-#import requests
 import zipfile
 import sys
 
@@ -373,14 +373,40 @@ def download():
     elif format == "url2csv":
         urrll = data
         format = "csv"
-
-#        data = requests.get(data)
-#        print '-------dataBuiu-------'
-#        print data.content
-#        
-#        response_data = "\t".join(data.content)
-#        print response_data
-#        return urrll
+        
+        lang = request.args.get('lang', None) or g.locale
+        txdata = None
+        txheaders = {   
+            'User-Agent': 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)',
+            'Accept-Language': lang,
+            'Accept-Encoding': 'gzip, deflate, compress;q=0.9',
+            'Keep-Alive': '300',
+            'Connection': 'keep-alive',
+            'Cache-Control': 'max-age=0',
+        }
+        reqq = urllib2.Request(data, txdata, txheaders)
+        req = urllib2.urlopen(reqq)
+        data = json.loads(req.read())
+        
+        cvs = ""
+        i = 0
+        lineArray = []
+        linesArray = []
+        headerArray = []
+        for item in data['data']:
+            lineArray = []
+            for cabecalho in item:
+                if i == 0:
+                   translation = translate_columns(cabecalho, lang)
+                   #print(translation)
+                   headerArray.append(cabecalho)
+                if cabecalho in headerArray:
+                    lineArray.append(str(item[cabecalho]))
+            linesArray.append('\t'.join(lineArray))
+            i = 1
+        cvs = '\t'.join(headerArray) + '\n' + '\n'.join(linesArray)
+        response_data = cvs.encode("utf-16")
+        
     else:
         response_data = data.encode("utf-16")
     
