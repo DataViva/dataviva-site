@@ -372,6 +372,7 @@ dataviva.format.text = function(text,name,l) {
       "unflagged": {"en": "This flag on this reply has been removed.", "pt": "A marca desta resposta foi retirada."},
       "voted": {"en": "Your vote has been added.", "pt": "Seu voto foi enviado."},
       "unvoted": {"en": "Your vote was removed.", "pt": "Seu voto foi removido."},
+      "classifications": {"en": "Classifications", "pt": "Classificaç\u00f5es"},
 
       // Admin
       "edit": {"en": "Edit", "pt": "Editar"},

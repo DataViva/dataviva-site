@@ -393,15 +393,24 @@ def download():
         lineArray = []
         linesArray = []
         headerArray = []
+        checkHeader = []
+        
+        for item in data['data']:
+            for cabecalho in item:
+                if cabecalho not in checkHeader:
+                   checkHeader.append(cabecalho)
+                   translation = translate_columns(cabecalho, lang)
+                   headerArray.append(translation)
+        
         for item in data['data']:
             lineArray = []
-            for cabecalho in item:
-                if i == 0:
-                   translation = translate_columns(cabecalho, lang)
-                   #print(translation)
-                   headerArray.append(cabecalho)
-                if cabecalho in headerArray:
-                    lineArray.append(str(item[cabecalho]))
+            
+            for header in checkHeader:
+                if header in item:
+                    lineArray.append(str(item[header]))
+                else:
+                    lineArray.append("")
+     
             linesArray.append('\t'.join(lineArray))
             i = 1
         cvs = '\t'.join(headerArray) + '\n' + '\n'.join(linesArray)

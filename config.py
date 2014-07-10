@@ -27,6 +27,7 @@ SECRET_KEY = get_env_variable("DATAVIVA_SECRET_KEY", "default-dataviva.mg-secr3t
 
 ''' Default debugging to True '''
 DEBUG = True
+DEBUG_WITH_APTANA = True
 ERROR_EMAIL = False
 SQLALCHEMY_ECHO = True
 GZIP_DATA = get_env_variable("DATAVIVA_GZIP_DATA", True)
