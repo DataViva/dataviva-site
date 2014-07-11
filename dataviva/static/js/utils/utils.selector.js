@@ -462,7 +462,8 @@ function Selector() {
           
           //Network, Rings, Scatter: Not for Brazil
           if((appType=="scatter" || appType=="rings" || appType=="network") && type == "bra" && x.id == "all") {
-          	show_selectButton = false;
+          	//show_selectButton = false;
+          	//Commented on 2014-07-11 for further analisys
           }
           
 
@@ -704,12 +705,14 @@ function Selector() {
 		    
 		    //Rings,Occugrid: Not for CBO/HS 1 digit (able just for CBO/HS 4 digit)
 		    if(["occugrid", "rings"].indexOf(current_app) && (["cbo", "hs"].indexOf(type) && v.id.length == 1)) {
-		  		show_selectButton = false
+		  		//show_selectButton = false
+		  		//Commented on 2014-07-11 for further analisys
 		    }
 		    
 		    //Geomap: Not for cities, (states, country, planning regions OK)
 		    if(current_app == "geo_map" && v.display_id.length == 8) {
-		    	show_selectButton = false;
+		    	//show_selectButton = false;
+		    	//Commented on 2014-07-11 for further analisys
 		    }
 		
             if ((!limit || v.id.length >= limit)) {
