@@ -25,7 +25,17 @@
   		 {% set idOption = category %}
   		 {% set idItem = 'all' %}
   		{% endif %}
-  	<div id="guide_icon" category = "{{category}}" category_id = "{{category_id}}"        option = "{{option}}"        item = "{{item}}"        article = "{{article}}" plan = "{{plan}}"       group = "{{group}}"  crumbs = "{{crumbs}}" style="background-image: url('/static/img/icons/{{idOption}}/{{idOption}}_{{idItem}}.png');"></div>
+  		{% if option == 'destinations' and category == 'hs'  %}
+  		{% set idOption = "isic" %}
+  		 {% set idItem = 'u' %}
+  		{% endif %}
+  		
+  		{% if option == 'potential' and category == 'hs'  %}
+  		 {% set idOption = "bra" %}
+  		 {% set idItem = plan.option_id %}
+  		 {% set bgColor = 'background-color:transparent;' %}
+  		{% endif %}
+  	<div id="guide_icon" category = "{{category}}" category_id = "{{category_id}}"        option = "{{option}}"        item = "{{item}}"        article = "{{article}}" plan = "{{plan}}"       group = "{{group}}"  crumbs = "{{crumbs}}" style="{{bgColor}} background-image: url('/static/img/icons/{{idOption}}/{{idOption}}_{{idItem}}.png');"></div>
     <div id="guide_title">{{ plan.title }}</div>
     </div>
     

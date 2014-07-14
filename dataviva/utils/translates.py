@@ -353,6 +353,7 @@ def translate_columns(column, lang):
       
       "article_pt": {"en": "Portuguese content", "pt": "Conteúdo em português"},
       "gender_pt": {"en": "Gender", "pt": "Gênero"},
+      "gender": {"en": "Gender", "pt": "Gênero"},
       "id_ibge": {"en": "IBGE ID", "pt": "IBGE ID"},
       "plural_pt": {"en": "Plural", "pt": "Plural"},
       "population": {"en": "Population", "pt": "População"},
@@ -363,6 +364,7 @@ def translate_columns(column, lang):
       "id_3char": {"en": "Name abbr", "pt": "Abreviação do nome"},
       "id_mdic": {"en": "MDIC ID", "pt": "ID MDIC"},
       "id_num": {"en": "NUM ID", "pt": "ID NUM"},
+      "plr": {"en": "plr", "pt": "plr"},
 
       
       
