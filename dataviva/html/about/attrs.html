@@ -61,28 +61,12 @@
     	title = "["+dataviva.format.text("classifications")+"] "+dataviva.format.text(id[0])+" - "+dataviva.format.text(depthElem[0][0].id+"_plural",depthElem[0][0].id+"_plural",dataviva.language)
     	
     	url = "http://dataviva.info/attrs/"+id[0]+"/?depth="+depth;
-    	console.log(url)
     	 d3.xhr("/apps/download/")
 		  .header("Content-Type", "application/x-www-form-urlencoded")
 	        .post("output_format=url2csv&title="+title+"&downloadToken="+ new Date().getTime() +"&data="+ url, function(e, data){
 			    top.location.href = data.response;
 			    downloadDone();
 			});
-    	    	
-    	// d3.json(url, function(error, json) {
-		  // if (error) return console.warn(error);
-		  // data = json;
-		  // data_csv = data;
-		  // line = "";
-		  // // for($i=0;$i<json.data.length;$i++) {
-		  	// // ln = json.data[$i];
-		  	// // line += ln.id+";"+ln.name+";"+ln.population+"\n"
-		  // // }
-		  // //console.log("output_format=csv&title=TESTE&downloadToken="+ new Date().getTime() +"&data="+ line);
-// 		  
-// 		  
-		// });
-    	
     }
     
     function update_table() {
