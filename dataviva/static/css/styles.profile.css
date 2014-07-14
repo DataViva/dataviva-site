@@ -48,6 +48,15 @@ div#guide_icon {
   width: 30px;
 }
 
+div#arrow_clickable {
+	position:absolute; 
+	bottom:50%;
+	color:#CCC;
+	margin-bottom:-10px; 
+	text-decoration:underline;
+	right:10px; 
+	font-size:15px
+}
 div#guide_title {
   font-size: 24px;
   margin-left: 35px;

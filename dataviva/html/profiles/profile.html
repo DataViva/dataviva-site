@@ -12,7 +12,7 @@
 
   <div id="guide_controls" class="lightbox guide_controls">
     <div id="profile_button" onclick="selector('{{category}}','{{item.id}}')">
-    	<div style="position:absolute; bottom:50%; margin-bottom:-10px; text-decoration:underline;right:10px; font-size:15px"><i class="fa fa-chevron-down"></i></div>
+    	<div id="arrow_clickable"><i class="fa fa fa-list-alt"></i></div>
       <div id="guide_icon" style="background-image: url('{{ item.icon() }}');{% if category != 'wld' and category != 'bra' or (category == 'wld' and item.id|count == 2) %} background-color: {{ item.color }};{% endif %}"></div>
       <div id="guide_title">{{ item.name() }}</div>
     </div>
