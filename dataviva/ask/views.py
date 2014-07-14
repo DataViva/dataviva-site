@@ -2,12 +2,14 @@ from sqlalchemy import and_, or_, func
 from datetime import datetime
 from flask import Blueprint, request, make_response, render_template, flash, g, session, redirect, url_for, jsonify, abort, current_app
 from flask.ext.babel import gettext
-from dataviva import db, lm
+from dataviva import db, lm, view_cache
 # from config import SITE_MIRROR
 
 from dataviva.account.models import User
 from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE_REPLY, Flag
 from dataviva.ask.forms import AskForm, ReplyForm, SearchForm
+
+from dataviva.utils.cached_query import cached_query, make_cache_key
 
 import urllib2, urllib
 

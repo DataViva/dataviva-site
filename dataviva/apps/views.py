@@ -6,7 +6,7 @@ from random import randint
 from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, url_for, redirect, jsonify
 from flask.ext.babel import gettext
 
-from dataviva import db, datavivadir
+from dataviva import db, datavivadir, view_cache
 from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Isic, Hs, Cbo, Wld
@@ -17,7 +17,7 @@ from dataviva.general.models import Short
 from dataviva.rais.views import rais_ybi
 from dataviva.utils.gzip_data import gzip_data
 from dataviva.utils.translates import translate_columns
-from dataviva.utils.cached_query import cached_query
+from dataviva.utils.cached_query import cached_query, make_cache_key
 
 import json, urllib2, urllib
 from config import FACEBOOK_OAUTH_ID, basedir,GZIP_DATA
@@ -44,6 +44,7 @@ def before_request():
             "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
 @mod.route('/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/'
             '<output>/')
+#@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             output=None):
 

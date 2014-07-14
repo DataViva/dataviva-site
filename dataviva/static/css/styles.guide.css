@@ -22,9 +22,30 @@ div#guide_controls {
   width: 250px;
 }
 
+#guide_icon {
+  background-color: #3DAF49;
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  display:inline-block;
+}
+
+#guide_button {
+  background-color: #FFF;
+  border: solid 1px #CCC;
+  margin-bottom: 10px;
+  padding: 10px;
+  position: relative;
+  -webkit-transition: background-color .1s;
+  transition: background-color .1s;
+}
+
 div#guide_title {
   font-size: 24px;
   margin-bottom: 10px;
+  display: inline-block;
+  max-width: 183px;
+  margin-left: 10px;
 }
 
 iframe.guide_app {

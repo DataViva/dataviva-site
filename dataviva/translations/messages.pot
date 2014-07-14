@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-07-09 14:54-0300\n"
+"POT-Creation-Date: 2014-07-10 16:39-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,26 +17,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
-#: dataviva/about/views.py:72
+#: dataviva/about/views.py:74
 msgid "You need to be logged in to ask questions."
 msgstr ""
 
-#: dataviva/about/views.py:96
+#: dataviva/about/views.py:98
 msgid ""
 "Your message was sent successfully. Thank you for your contribution, it "
 "will be helpful to other users and is essential to improving our tool! "
 "Our team will contact you by e-mail shortly."
 msgstr ""
 
-#: dataviva/about/views.py:117
+#: dataviva/about/views.py:119
 msgid "You need to be signed in to reply to questions."
 msgstr ""
 
-#: dataviva/about/views.py:154
+#: dataviva/about/views.py:156
 msgid "Reply submitted. Your reply will show up after we review it."
 msgstr ""
 
-#: dataviva/about/views.py:174
+#: dataviva/about/views.py:176
 msgid "terms_of_use"
 msgstr ""
 
@@ -61,15 +61,15 @@ msgstr ""
 msgid "The item was successfully deleted."
 msgstr ""
 
-#: dataviva/apps/views.py:171
+#: dataviva/apps/views.py:172
 msgid "You need to be logged in to star apps."
 msgstr ""
 
-#: dataviva/ask/views.py:101 dataviva/ask/views.py:129
+#: dataviva/ask/views.py:103 dataviva/ask/views.py:131
 msgid "You need to be logged in to vote."
 msgstr ""
 
-#: dataviva/ask/views.py:159
+#: dataviva/ask/views.py:161
 msgid "You need to be logged in to flag replies."
 msgstr ""
 
@@ -131,14 +131,14 @@ msgstr ""
 msgid "Visualizing the Economy of Brazil"
 msgstr ""
 
-#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1947
+#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1948
 #: dataviva/html/templates/base.html:6
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
 " economy"
 msgstr ""
 
-#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1949
+#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1950
 #: dataviva/html/templates/base.html:6
 msgid "through more than 100 million interactive visualizations."
 msgstr ""
@@ -1649,6 +1649,10 @@ msgstr ""
 
 #: dataviva/html/profiles/index.html:28
 msgid "Export Destination"
+msgstr ""
+
+#: dataviva/html/profiles/profile.html:15
+msgid "See more"
 msgstr ""
 
 #: dataviva/html/rankings/index.html:17 dataviva/html/templates/about.html:46

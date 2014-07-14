@@ -548,9 +548,10 @@
       d3.json("/apps/embed/"+app.url+"?lang="+dataviva.language)
         .header("X-Requested-With", "XMLHttpRequest")
         .get(function(error,data){
-
+			
           if (error) {
-            app.error(dataviva.format.text("Build Not Available"))
+          	console.log(error)
+           // app.error(dataviva.format.text("Build Not Available"))
           }
           else {
 

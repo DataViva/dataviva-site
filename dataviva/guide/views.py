@@ -96,7 +96,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
             build["position"] = pb.position
             builds[pb.position-1] = build
 
-        plan = {"title": plan.title(), "builds": builds}
+        plan = {"title": plan.title(), "extra": extra_id,"option_id": option_id, "builds": builds}
 
     elif extra_id == "select" or option_id == "select" or category_id == "select":
         page = "general/selector.html"

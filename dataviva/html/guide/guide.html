@@ -9,9 +9,25 @@
 {% endblock %}
 
 {% block body %}
-  
   <div id="guide_controls" class="lightbox guide_controls">
+  	<div id="guide_button">
+  		{% if plan.extra %} 
+  			{% set idItem = plan.extra %}
+  		{% else %}
+  			{% set idItem = 'all' %}
+  		{% endif %}
+  		{% if plan.option_id and plan.option_id != 'all' %} 
+  			{% set idOption = plan.option_id %}
+  		{% else %}
+  			{% set idOption = category %}
+  		{% endif %}
+  		{% if category == 'cbo' or category == 'isic'  %}
+  		 {% set idOption = category %}
+  		 {% set idItem = 'all' %}
+  		{% endif %}
+  	<div id="guide_icon" category = "{{category}}" category_id = "{{category_id}}"        option = "{{option}}"        item = "{{item}}"        article = "{{article}}" plan = "{{plan}}"       group = "{{group}}"  crumbs = "{{crumbs}}" style="background-image: url('/static/img/icons/{{idOption}}/{{idOption}}_{{idItem}}.png');"></div>
     <div id="guide_title">{{ plan.title }}</div>
+    </div>
     
     {% for build in plan.builds %}
       <a class="app_links decision short icon {{ build.type }}" id="app{{ build.position }}" onclick="slide(this.id)">{{ build.title }}</a>
