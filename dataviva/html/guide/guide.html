@@ -12,58 +12,8 @@
   <div id="guide_controls" class="lightbox guide_controls">
   	<div id="guide_button">
   		
-		{% if plan.extra %}
-			
-			{% set idItem = plan.extra %}
-			
-		{% else %}
-			{% set idItem = 'all' %}
-		{% endif %}
-		
-		{% if plan.option_id and plan.option_id != 'all' %} 
-			{% set idOption = plan.option_id %}
-		{% else %}
-			{% set idOption = category %}
-		{% endif %}
-		
-		{% if category == 'cbo' or category == 'isic'  %}
-			{% set idOption = category %}
-			{% set idItem = category_id[0:1] %}
-			{% set color_icon = color_icon %}
-		{% endif %}
-		
-		{% if option == 'attract' and option_id == 'isic'  %}
-			{% set idItem = plan.extra[0:1] %}
-		{% endif %}
-		
-		{% if option == 'attract' and option_id == 'hs'  %}
-			{% set idItem = plan.extra[0:2] %}
-		{% endif %}
-		
-
-		{% if option == 'workforce' and category == 'bra'  %}
-			{% set idOption = 'cbo' %}
-			{% set idItem = 'all' %}
-			{% set color_icon = color_icon %}
-			
-		{% endif %}
-		
-		{% if (option == 'isic' or option == 'hs') and category == 'bra'  %}
-			{% set idOption = option %}
-			{% set idItem = 'all' %}
-			{% set color_icon = color_icon %}
-			
-		{% endif %}
-		
-		{% if (option == 'potential' or option == 'diversification' or option == 'destinations') and category == 'hs'  %}
-			{% set idOption = 'hs' %}
-			{% set idItem = category_id[0:2] %}
-			{% set color_icon = color_icon %}
-		{% endif %}
-		
   		 
-  		 
-  	<div id="guide_icon" category = "{{category}}" category_id = "{{category_id}}"     extra_id = "{{extra_id}}"   option_id = "{{option_id}}"  option = "{{option}}"        item = "{{item}}"        article = "{{article}}" plan = "{{plan}}"       group = "{{group}}"  crumbs = "{{crumbs}}" style="background-color:{{color_icon}}; background-image: url('/static/img/icons/{{idOption}}/{{idOption}}_{{idItem}}.png');"></div>
+  	<div id="guide_icon" style="background-color:{{color_icon}}; background-image: url('/static/img/icons/{{idOption}}/{{idOption}}_{{idItem}}.png');"></div>
     <div id="guide_title">{{ plan.title }}</div>
     </div>
     

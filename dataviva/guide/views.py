@@ -40,6 +40,8 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
     crumbs = []
     color_icon = None
     option_icon = None
+    idOption = 'bra'
+    idItem = 'all'
 
     depths = {
         "bra": [2,3,4,7,8],
@@ -228,6 +230,44 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
                         crumbs.append({"url": url, "text": crumb_title})
 
         crumbs[len(crumbs)-1]["current"] = True
+        
+        if extra_id:
+             idItem = extra_id
+        else:
+             idItem = 'all'
+        
+        
+        if option_id and option_id != 'all':
+            idOption = option_id
+        else:
+            idOption = category
+                
+        
+        if category == 'cbo' or category == 'isic':
+            idOption = category
+            if category_id:
+                idItem = category_id[0:1]
+        
+        
+        if option == 'attract' and option_id == 'isic':
+             idItem = extra_id[0:1]
+               
+        if option == 'attract' and option_id == 'hs':
+            idItem = extra_id[0:2]
+        
+
+        if option == 'workforce' and category == 'bra': 
+            idOption = 'cbo'
+            idItem = 'all'
+        
+        
+        if (option == 'isic' or option == 'hs') and category == 'bra': 
+            idOption = option
+            idItem = 'all'
+                
+        if (option == 'potential' or option == 'diversification' or option == 'destinations') and category == 'hs': 
+            idOption = 'hs'
+            idItem = category_id[0:2]
 
     return render_template(page,
         category = category,
@@ -240,4 +280,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
         plan = plan,
         group = group,
         crumbs = crumbs,
-        color_icon = color_icon)
+        color_icon = color_icon,
+        idOption = idOption,
+        idItem = idItem
+        )
