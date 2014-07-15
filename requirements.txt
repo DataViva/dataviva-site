@@ -1,13 +1,13 @@
 # Flask framework
-Jinja2==2.6
-Werkzeug==0.8.3
+Jinja2==2.7
+Werkzeug==0.9
 Flask==0.10.1
 
 # Helper lib for running scripts locally without server
 Flask-Script==0.5.3
 
 # Make managing logged in users easier
-Flask-Login==0.1.3
+Flask-Login==0.2
 
 # Oauth helper for signing in users from facebook, twitter, google
 Flask-OAuth==0.12
@@ -24,7 +24,7 @@ MySQL-python==1.2.3
 SQLAlchemy==0.8.1
 Flask-SQLAlchemy==0.16
 
-# Redis connector for caching/sessions 
+# Redis connector for caching/sessions
 # WARNING: Must have Redis server installed!
 redis==2.7.6
 hiredis==0.1.1
