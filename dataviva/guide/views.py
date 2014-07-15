@@ -5,11 +5,13 @@ from sqlalchemy import func
 from datetime import datetime
 from werkzeug import urls
 
-from dataviva import db
+from dataviva import db, view_cache
 from dataviva.utils.title_case import title_case
 from dataviva.attrs.models import Bra, Isic, Cbo, Hs, Wld
 from dataviva.rais import models as rais
 from dataviva.secex import models as secex
+
+from dataviva.utils.cached_query import cached_query, make_cache_key
 
 from dataviva.general.models import Plan
 
@@ -27,6 +29,7 @@ def before_request():
 @mod.route('/<category>/<category_id>/<option>/')
 @mod.route('/<category>/<category_id>/<option>/<option_id>/')
 @mod.route('/<category>/<category_id>/<option>/<option_id>/<extra_id>/')
+@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def guide(category = None, category_id = None, option = None, option_id = None, extra_id = None):
 
     item = None

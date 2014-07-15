@@ -5,11 +5,13 @@ from datetime import datetime
 from sqlalchemy import func
 from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, redirect, url_for
 
-from dataviva import db
+from dataviva import db, view_cache
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo
 from dataviva.apps.models import UI
 from dataviva.secex.models import Yb_secex
+
+from dataviva.utils.cached_query import cached_query, make_cache_key
 
 import json
 
@@ -54,6 +56,7 @@ def table(data_type="rais", year="all", bra_id="mg", filter_1="show.1", filter_2
 
 @mod.route('/')
 @mod.route('/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
+@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
     
     filters = {}

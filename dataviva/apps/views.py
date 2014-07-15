@@ -276,10 +276,7 @@ def recommend(app_name=None, dataset=None, bra_id="mg", filter1=None, filter2=No
                     b.set_bra(bra_id)
                 recommended['no_filters'].append(b.serialize())
     
-    print("----")
-    print(recommended)
-        
-        
+ 
     return jsonify(recommended)
 
 def get_geo_location(ip):
@@ -325,6 +322,7 @@ def get_geo_location(ip):
 @mod.route('/builder/occugrid/', defaults={"app_name": "occugrid", "dataset": "rais", "bra_id": "mg030000",
             "filter1": "m7310", "filter2": "all", "output": "cbo", "params": ""})
 @mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/')
+@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
                 filter2=None, output=None, params=None):
     path = request.path.split("/")
@@ -498,6 +496,7 @@ def networks(type="hs"):
     return ret
 
 @mod.route('/')
+@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def guide():
     return render_template("apps/index.html")
 

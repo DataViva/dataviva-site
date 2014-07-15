@@ -7,10 +7,12 @@ import time
 
 mod = Blueprint('general', __name__, url_prefix='/')
 
-from dataviva import app, db, babel, __latest_year__
+from dataviva import app, db, babel, __latest_year__, view_cache
 from dataviva.general.forms import AccessForm
 from dataviva.general.models import Short
 from dataviva.account.models import User
+
+from dataviva.utils.cached_query import cached_query, make_cache_key
 
 from config import ACCOUNTS, ERROR_EMAIL, DEBUG
 
@@ -100,6 +102,7 @@ def after_request(response):
     return response
 
 @mod.route('/', methods=['GET', 'POST'])
+@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def home():
     # return render_template("test.html")
     

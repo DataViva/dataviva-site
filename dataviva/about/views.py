@@ -66,6 +66,7 @@ def contact():
 
 @mod.route('/ask/', methods=['GET', 'POST'])
 @mod.route('/ask/<user>/', methods=['GET', 'POST'])
+@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def ask(user=None):
     form = AskForm()
     if request.method == 'POST':
@@ -107,6 +108,7 @@ def ask(user=None):
     return render_template("about/ask/ask.html", page = "ask", form = form)
 
 @mod.route('/question/<slug>/', methods=['GET', 'POST'])
+@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def answer(slug):
 
     reply_form = ReplyForm()
