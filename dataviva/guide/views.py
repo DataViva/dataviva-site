@@ -29,7 +29,7 @@ def before_request():
 @mod.route('/<category>/<category_id>/<option>/')
 @mod.route('/<category>/<category_id>/<option>/<option_id>/')
 @mod.route('/<category>/<category_id>/<option>/<option_id>/<extra_id>/')
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+
 def guide(category = None, category_id = None, option = None, option_id = None, extra_id = None):
 
     item = None
@@ -38,6 +38,8 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
     plan = None
     group = None
     crumbs = []
+    color_icon = None
+    option_icon = None
 
     depths = {
         "bra": [2,3,4,7,8],
@@ -170,13 +172,16 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
 
         url += "{0}/".format(category)
         crumbs.append({"url": url, "text": crumb_title})
-
+       
+        
         if category_id:
             url += "{0}/".format(category_id)
 
             if category_id != "all" and category_id != "select":
                 table = category.title()
                 item = globals()[table].query.get_or_404(category_id).name()
+                c_i = globals()[table].query.get_or_404(category_id)
+                color_icon = c_i.color
             elif category == "bra":
                 item = Wld.query.get_or_404("sabra").name()
 
@@ -214,8 +219,12 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
                         url += "{0}/".format(extra_id)
                         if option_id == "hs":
                             crumb_title = Hs.query.get(extra_id).name()
+                            c_i = Hs.query.get(extra_id)
+                            color_icon = c_i.color
                         if option_id == "isic":
                             crumb_title = Isic.query.get(extra_id).name()
+                            c_i = Isic.query.get(extra_id)
+                            color_icon = c_i.color
                         crumbs.append({"url": url, "text": crumb_title})
 
         crumbs[len(crumbs)-1]["current"] = True
@@ -224,9 +233,11 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
         category = category,
         category_id = category_id,
         option = option,
+        option_id = option_id,
         item = item,
         article = article,
         selector = selector,
         plan = plan,
         group = group,
-        crumbs = crumbs)
+        crumbs = crumbs,
+        color_icon = color_icon)
