@@ -1,6 +1,6 @@
 from sqlalchemy import func, and_, or_
 from datetime import datetime
-from flask import Blueprint, request, make_response, render_template, flash, g, session, redirect, url_for, jsonify, abort, current_app
+from flask import Blueprint, request, make_response, render_template, flash, g, session, redirect, url_for, jsonify, abort, current_app, abort
 from flask.ext.babel import gettext
 from dataviva import db, view_cache
 
@@ -66,7 +66,7 @@ def contact():
 
 @mod.route('/ask/', methods=['GET', 'POST'])
 @mod.route('/ask/<user>/', methods=['GET', 'POST'])
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+
 def ask(user=None):
     form = AskForm()
     if request.method == 'POST':
@@ -79,7 +79,7 @@ def ask(user=None):
             timestamp = datetime.utcnow()
             slug = Question.make_unique_slug(form.question.data)
 
-            from ..utils import ProfanitiesFilter
+            from ..utils.profanities_filter import ProfanitiesFilter
 
             file_banned_words = open(os.path.join(basedir, "dataviva/static/txt/blacklist.txt"))
             banned_words = [line.strip() for line in file_banned_words]
@@ -96,8 +96,11 @@ def ask(user=None):
                 question.str_tags(tags)
             db.session.add(question)
             db.session.commit()
-            flash(gettext('Your message was sent successfully. Thank you for your contribution, it will be helpful to other users and is essential to improving our tool! Our team will contact you by e-mail shortly.'))
-            send_mail('Aviso de nova publicacao no DataViva', [ADMINISTRATOR_EMAIL], render_template('about/ask/ask_feedback.html', question=question))
+            try:
+                flash(gettext('Your message was sent successfully. Thank you for your contribution, it will be helpful to other users and is essential to improving our tool! Our team will contact you by e-mail shortly.'))
+                send_mail('Aviso de nova publicacao no DataViva', [ADMINISTRATOR_EMAIL], render_template('about/ask/ask_feedback.html', question=question))
+            except BaseException as e:              
+                print e
             # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
             #     return jsonify({"status": "Success"})
             # else:
@@ -137,7 +140,7 @@ def answer(slug):
         
         hiddenFld = 2;
         
-        from ..utils import ProfanitiesFilter
+        from ..utils.profanities_filter import ProfanitiesFilter
         
         file_banned_words = open(os.path.join(basedir, "dataviva/static/txt/blacklist.txt"))
         banned_words = [line.strip() for line in file_banned_words]
@@ -155,11 +158,14 @@ def answer(slug):
             reply.parent_id = reply.id
             db.session.add(reply)
             db.session.commit()
-        flash(gettext('Reply submitted. Your reply will show up after we review it.'))
-
-        #envia email para o admin
-        send_mail('Aviso de nova publicacao no DataViva', [ADMINISTRATOR_EMAIL], render_template('about/ask/ask_feedback.html', question=question))
-
+        
+        try:
+            flash(gettext('Reply submitted. Your reply will show up after we review it.'))
+             #envia email para o admin
+            send_mail('Aviso de nova publicacao no DataViva', [ADMINISTRATOR_EMAIL], render_template('about/ask/ask_feedback.html', question=question))
+        except:
+                flash(gettext('Your Reply was not sent. Try later, please.'))
+        
         return redirect(url_for('about.answer', slug=question.slug))
     else:
 

@@ -47,7 +47,6 @@ def parse_filter(kwargs,id_type,query,data_table,ret):
     cat = id_type.split("_")[0]
     table = locals()[cat.title()]
     ids = kwargs[id_type].split("_")
-        
     id_list = []
     depth = None
     for id in ids:
@@ -65,6 +64,8 @@ def parse_filter(kwargs,id_type,query,data_table,ret):
             if cat == "bra":
                 ret_obj = Wld.query.get_or_404("sabra").serialize()
                 ret_obj["id"] = "all"
+            else:
+                ret_obj = None
         else:
             obj_id = None
             ret_obj = None
@@ -323,6 +324,10 @@ def make_query(data_table, url_args, lang, **kwargs):
         
         agg_data = []
         ret["data"] = sorted(ret["data"],key=lambda x: x["year"])
+        
+        if "bra" not in ret:
+            ret["bra"] = {}
+            
         for bra in ret["bra"]:
 
             if "aggregates" in bra:

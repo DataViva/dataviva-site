@@ -5,6 +5,7 @@
 '''
 def send_mail(title, recipients,message):   
     from dataviva import mail
+    from flask.ext.mail import Message
     msg = Message(title,sender="datavivaweb@gmail.com",recipients=recipients)   
     msg.body = message
     msg.html = msg.body 

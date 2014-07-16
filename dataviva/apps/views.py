@@ -22,6 +22,7 @@ from dataviva.utils.cached_query import cached_query, make_cache_key
 import json, urllib2, urllib
 from config import FACEBOOK_OAUTH_ID, basedir,GZIP_DATA
 import os
+import urlparse
 import random
 import zipfile
 import sys
@@ -326,6 +327,10 @@ def get_geo_location(ip):
 def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
                 filter2=None, output=None, params=None):
     path = request.path.split("/")
+    if bra_id == 'bra':
+        bra_id = 'all'
+        params = request.query_string
+        return redirect('/{0}/{1}/{2}/{3}/{4}/{5}/{6}?{7}'.format('apps/builder',app_name,dataset,bra_id,filter1,filter2,output,params))
     if len(path) == 5:
         return redirect('{0}{1}/{2}/{3}/{4}/{5}/{6}'.format("/".join(path),dataset,bra_id,filter1,filter2,output,params))
     g.page_type = "builder"
@@ -336,7 +341,6 @@ def download():
     import tempfile, subprocess, random
     
     form = DownloadForm()
-    
     data = form.data.data
     format = form.output_format.data
     title = form.title.data
@@ -394,6 +398,7 @@ def download():
         headerArray = []
         checkHeader = []
         
+        
         for item in data['data']:
             for cabecalho in item:
                 if cabecalho not in checkHeader:
@@ -417,6 +422,8 @@ def download():
         
     else:
         response_data = data.encode("utf-16")
+        #print response_data
+    
     
     content_disposition = "attachment;filename=%s.%s" % (title, format)
     content_disposition = content_disposition.replace(",", "_")

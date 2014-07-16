@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, request, render_template, g, url_for
+from flask import Blueprint, request, render_template, g, url_for, abort
 from flask.ext.babel import gettext
 from sqlalchemy import func
 from datetime import datetime
@@ -42,14 +42,20 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
     option_icon = None
     idOption = 'bra'
     idItem = 'all'
+    page = None
+    crumb_title = None
 
     depths = {
         "bra": [2,3,4,7,8],
         "isic": [1,5],
         "cbo": [1,4],
         "hs": [2,6],
-        "wld": [2,5]
+        "wld": [2,5],
+        "industry": []
     }
+    
+    if category not in depths and category:
+        abort(404)
 
     if option:
 
@@ -141,7 +147,10 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
 
     elif category == "industry":
         page = "guide/industry.html"
-
+        
+    elif category == "locate":
+        page = "guide/index.html"
+        
     elif category:
         page = "guide/choice.html"
 
@@ -224,9 +233,13 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
                             c_i = Hs.query.get(extra_id)
                             color_icon = c_i.color
                         if option_id == "isic":
-                            crumb_title = Isic.query.get(extra_id).name()
                             c_i = Isic.query.get(extra_id)
-                            color_icon = c_i.color
+                            if c_i.name:
+                                crumb_title = c_i.name
+                                color_icon = c_i.color
+                            else:
+                                crumb_title = None
+                                color_icon = None
                         crumbs.append({"url": url, "text": crumb_title})
 
         crumbs[len(crumbs)-1]["current"] = True
