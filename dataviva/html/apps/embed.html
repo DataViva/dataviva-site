@@ -1564,14 +1564,10 @@
       form['output_format'].value = type;
       form['title'].value = title;
       form['downloadToken'].value = new Date().getTime();
-      //console.log(form)
-      //form.submit();
       csrf_token = document.getElementById("csrf_token").value;
-	  // Check donwload status
-	  //checkDownloadIsDone()
-
-	  // conole.log({output_format: type, title: title, downloadToken: new Date().getTime(), data: form['data'].value, csrf_token: csrf_token})
-//
+	  form['data'].value = form['data'].value.replace(/&/g, "%26")
+	  
+	  console.log(form['data'].value)
 	  d3.xhr("/apps/download/")
 	  .header("Content-Type", "application/x-www-form-urlencoded")
         .post("output_format="+type+"&title="+ title+"&downloadToken="+ new Date().getTime() +"&data="+ form['data'].value +"&csrf_token="+ csrf_token, function(e, data){
