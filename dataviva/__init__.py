@@ -9,8 +9,10 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 # flask-babel for handling L18n and L10n
 from flask.ext.babel import Babel
+
 # flask-cache for caching
-from flask.ext.cache import Cache
+#from flask.ext.cache import Cache
+
 # for new filters, redis sessions
 from utils.jinja_helpers import jinja_momentjs, jinja_formatter, jinja_strip_html, jinja_split
 from utils.redis import RedisSessionInterface
@@ -33,9 +35,9 @@ mail = Mail(app)
 db = SQLAlchemy(app)
 
 # Initialize cache for views
-view_cache = Cache(app, config={'CACHE_TYPE': 'redis', \
-                'CACHE_REDIS_HOST':'localhost', 'CACHE_REDIS_PORT':6379, \
-                'CACHE_REDIS_PASSWORD':None})
+#view_cache = Cache(app, config={'CACHE_TYPE': 'redis', \
+#                'CACHE_REDIS_HOST':'localhost', 'CACHE_REDIS_PORT':6379, \
+#                'CACHE_REDIS_PASSWORD':None})
 
 # Set session store as server side (Redis)
 redis_sesh = RedisSessionInterface()

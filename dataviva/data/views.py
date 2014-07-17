@@ -56,7 +56,7 @@ def table(data_type="rais", year="all", bra_id="mg", filter_1="show.1", filter_2
 
 @mod.route('/')
 @mod.route('/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+#@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
     
     filters = {}

@@ -31,7 +31,7 @@ def before_request():
 
 @mod.route('/')
 @mod.route('/<category>/select/')
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+#@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def index(category = None, id = None):
     
     selector = category
@@ -59,7 +59,7 @@ def index(category = None, id = None):
         article = article)
 
 @mod.route('/<category>/<id>/')
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+#@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def profiles(category = None, id = None):
     
     
