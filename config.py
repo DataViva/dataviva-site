@@ -93,12 +93,12 @@ FACEBOOK_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_SECRET")
 '''
     Mail credentials to send automatic emails to users
 '''
-MAIL_SERVER = 'smtp.gmail.com'
-MAIL_PORT = 465
-MAIL_USE_TLS = False
-MAIL_USE_SSL = True
-MAIL_USERNAME = 'datavivaweb@gmail.com'
-MAIL_PASSWORD = get_env_variable("DATAVIVA_EMAIL_PASSWD")
+MAIL_SERVER = get_env_variable("DATAVIVA_MAIL_SERVER",'smtp.gmail.com')
+MAIL_PORT = get_env_variable("DATAVIVA_MAIL_PORT",465)
+MAIL_USE_TLS = get_env_variable("DATAVIVA_MAIL_USE_TLS",False)
+MAIL_USE_SSL = get_env_variable("DATAVIVA_MAIL_USE_SSL",True)
+MAIL_USERNAME = get_env_variable("DATAVIVA_MAIL_USERNAME",'datavivaweb@gmail.com')
+MAIL_PASSWORD = get_env_variable("DATAVIVA_MAIL_PASSWORD","")
 
 
 '''
