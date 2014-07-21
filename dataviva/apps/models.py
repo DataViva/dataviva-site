@@ -73,10 +73,6 @@ class Build(db.Model, AutoSerialize):
             bra_id = bra_id.split("_")[0]
         self.bra = []
         
-            
-            
-        print '-------------'
-        print bra_id
         for i, b in enumerate(bra_id.split("_")):
             if b == "all":
                 self.bra.append(Wld.query.get("sabra"))
