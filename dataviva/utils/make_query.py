@@ -292,11 +292,11 @@ def make_query(data_table, url_args, lang, **kwargs):
                 
             if order_table == None:
                 order_table = data_table
-                
-            if direction == "asc":
-                query = query.order_by(asc(getattr(order_table,o)))
-            elif direction == "desc":
-                query = query.order_by(desc(getattr(order_table,o)))
+            if o in query:   
+                if direction == "asc":
+                    query = query.order_by(asc(getattr(order_table,o)))
+                elif direction == "desc":
+                    query = query.order_by(desc(getattr(order_table,o)))
                 
         if limit:
             query = query.limit(limit).offset(offset)

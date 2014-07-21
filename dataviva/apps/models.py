@@ -60,6 +60,10 @@ class Build(db.Model, AutoSerialize):
         '''If build requires 2 bras and only 1 is given, supply a 2nd'''
         if isinstance(self.bra, list):
             return
+        
+        if bra_id == 'bra':
+            bra_id = 'all'
+            
         if "_" in self.bra and "_" not in bra_id:
             if bra_id == "rj":
                 bra_id = bra_id + "_mg"
@@ -68,6 +72,11 @@ class Build(db.Model, AutoSerialize):
         elif "_" not in self.bra and "_" in bra_id:
             bra_id = bra_id.split("_")[0]
         self.bra = []
+        
+            
+            
+        print '-------------'
+        print bra_id
         for i, b in enumerate(bra_id.split("_")):
             if b == "all":
                 self.bra.append(Wld.query.get("sabra"))
