@@ -1564,13 +1564,30 @@
       form['downloadToken'].value = new Date().getTime();
       csrf_token = document.getElementById("csrf_token").value;
 	  form['data'].value = form['data'].value.replace(/&/g, "%26")
-
+	  progress = 0
 	  d3.xhr("/apps/download/")
 	  .header("Content-Type", "application/x-www-form-urlencoded")
         .post("output_format="+type+"&title="+ title+"&downloadToken="+ new Date().getTime() +"&data="+ form['data'].value +"&csrf_token="+ csrf_token, function(e, data){
-		    top.location.href = data.response;
-		    downloadDone();
-		});
+		  urlFile = data.response
+		})
+		.on("progress", function() {
+			
+	      var i = d3.interpolate(progress, d3.event.loaded / d3.event.position);
+	      var progress_txt = d3.select("#popover").select(".text").text()
+	      
+	      d3.select("#popover").select(".text").text(progress_txt + " (0%)")
+	      
+	      d3.transition().tween("progress", function() {
+	        return function(t) {
+	          progress = i(t);
+	          progress_display = " ("+parseInt(progress*100) + "%)"
+	          d3.select("#popover").select(".text").text(progress_txt + progress_display)
+	          if(progress==1) {
+	          	setTimeout(function() { top.location.href = urlFile; downloadDone(); } , 1000);
+	          }
+	        };
+	      });
+	    })
 
 
     }
