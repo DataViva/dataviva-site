@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-07-10 16:39-0300\n"
+"POT-Creation-Date: 2014-07-22 17:19-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,26 +17,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
-#: dataviva/about/views.py:74
+#: dataviva/about/views.py:75
 msgid "You need to be logged in to ask questions."
 msgstr ""
 
-#: dataviva/about/views.py:98
+#: dataviva/about/views.py:100
 msgid ""
 "Your message was sent successfully. Thank you for your contribution, it "
 "will be helpful to other users and is essential to improving our tool! "
 "Our team will contact you by e-mail shortly."
 msgstr ""
 
-#: dataviva/about/views.py:119
+#: dataviva/about/views.py:124
 msgid "You need to be signed in to reply to questions."
 msgstr ""
 
-#: dataviva/about/views.py:156
+#: dataviva/about/views.py:163
 msgid "Reply submitted. Your reply will show up after we review it."
 msgstr ""
 
-#: dataviva/about/views.py:176
+#: dataviva/about/views.py:167
+msgid "Your Reply was not sent. Try later, please."
+msgstr ""
+
+#: dataviva/about/views.py:184
 msgid "terms_of_use"
 msgstr ""
 
@@ -61,7 +65,7 @@ msgstr ""
 msgid "The item was successfully deleted."
 msgstr ""
 
-#: dataviva/apps/views.py:172
+#: dataviva/apps/views.py:173
 msgid "You need to be logged in to star apps."
 msgstr ""
 
@@ -77,52 +81,52 @@ msgstr ""
 msgid "You need to be logged in to view this page."
 msgstr ""
 
-#: dataviva/guide/views.py:145 dataviva/profiles/views.py:39
+#: dataviva/guide/views.py:161 dataviva/profiles/views.py:42
 msgid "an occupation"
 msgstr ""
 
-#: dataviva/guide/views.py:147 dataviva/profiles/views.py:41
+#: dataviva/guide/views.py:163 dataviva/profiles/views.py:44
 msgid "an industry"
 msgstr ""
 
-#: dataviva/guide/views.py:149 dataviva/profiles/views.py:43
+#: dataviva/guide/views.py:165 dataviva/profiles/views.py:46
 msgid "a product"
 msgstr ""
 
-#: dataviva/guide/views.py:151 dataviva/profiles/views.py:45
+#: dataviva/guide/views.py:167 dataviva/profiles/views.py:48
 msgid "a location"
 msgstr ""
 
-#: dataviva/guide/views.py:155 dataviva/html/home.html:44
+#: dataviva/guide/views.py:171 dataviva/html/home.html:44
 #: dataviva/html/templates/site.html:16
 msgid "Guide"
 msgstr ""
 
-#: dataviva/guide/views.py:158 dataviva/html/guide/index.html:20
+#: dataviva/guide/views.py:174 dataviva/html/guide/index.html:20
 msgid "Career"
 msgstr ""
 
-#: dataviva/guide/views.py:160 dataviva/html/guide/index.html:15
+#: dataviva/guide/views.py:176 dataviva/html/guide/index.html:15
 #: dataviva/html/guide/industry.html:3 dataviva/html/profiles/index.html:20
 msgid "Industry"
 msgstr ""
 
-#: dataviva/guide/views.py:162 dataviva/guide/views.py:189
-#: dataviva/guide/views.py:199 dataviva/html/guide/industry.html:14
+#: dataviva/guide/views.py:178 dataviva/guide/views.py:208
+#: dataviva/guide/views.py:218 dataviva/html/guide/industry.html:14
 msgid "Establishments and Employment"
 msgstr ""
 
-#: dataviva/guide/views.py:164 dataviva/guide/views.py:191
-#: dataviva/guide/views.py:201 dataviva/html/general/select.html:19
+#: dataviva/guide/views.py:180 dataviva/guide/views.py:210
+#: dataviva/guide/views.py:220 dataviva/html/general/select.html:19
 #: dataviva/html/guide/industry.html:10
 msgid "Product Exports"
 msgstr ""
 
-#: dataviva/guide/views.py:166 dataviva/html/guide/index.html:10
+#: dataviva/guide/views.py:182 dataviva/html/guide/index.html:10
 msgid "Location"
 msgstr ""
 
-#: dataviva/guide/views.py:183 dataviva/html/about/ask/index.html:43
+#: dataviva/guide/views.py:202 dataviva/html/about/ask/index.html:43
 #: dataviva/html/account/index.html:24
 msgid "All"
 msgstr ""
@@ -131,16 +135,20 @@ msgstr ""
 msgid "Visualizing the Economy of Brazil"
 msgstr ""
 
-#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1948
+#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1958
 #: dataviva/html/templates/base.html:6
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
 " economy"
 msgstr ""
 
-#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1950
+#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1960
 #: dataviva/html/templates/base.html:6
 msgid "through more than 100 million interactive visualizations."
+msgstr ""
+
+#: dataviva/html/home.html:21
+msgid "See More"
 msgstr ""
 
 #: dataviva/html/home.html:30
@@ -1651,10 +1659,6 @@ msgstr ""
 msgid "Export Destination"
 msgstr ""
 
-#: dataviva/html/profiles/profile.html:15
-msgid "See more"
-msgstr ""
-
 #: dataviva/html/rankings/index.html:17 dataviva/html/templates/about.html:46
 msgid "Brazilian Locations"
 msgstr ""
@@ -1707,7 +1711,7 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: dataviva/profiles/views.py:47
+#: dataviva/profiles/views.py:50
 msgid "a country"
 msgstr ""
 
