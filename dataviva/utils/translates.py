@@ -365,9 +365,12 @@ def translate_columns(column, lang):
       "id_mdic": {"en": "MDIC ID", "pt": "ID MDIC"},
       "id_num": {"en": "NUM ID", "pt": "ID NUM"},
       "plr": {"en": "plr", "pt": "plr"},
-
+      
       
       
     } 
-
-    return jj[column][lang]
+    
+    if column in jj:
+        return jj[column][lang]
+    else:
+        return column
