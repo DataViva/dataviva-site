@@ -132,9 +132,6 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     # view_data = rais_ybi(bra_id='sp', isic_id='a0112').data
     # app.url_map.bind('/').match('/attrs/wld/nausa/')
     
-   
-    
-    
     if request.is_xhr:
         ret = jsonify({
             "current_build": current_build.serialize(),
