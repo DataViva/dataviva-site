@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from StringIO import StringIO
 from datetime import datetime
 from collections import defaultdict
 from sqlalchemy import func
@@ -26,6 +27,7 @@ import urlparse
 import random
 import zipfile
 import sys
+import gzip
 
 mod = Blueprint('apps', __name__, url_prefix='/apps')
 
@@ -382,14 +384,24 @@ def download():
         txheaders = {   
             'User-Agent': 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)',
             'Accept-Language': lang,
-            'Accept-Encoding': 'gzip, deflate, compress;q=0.9',
+            'encoding': 'UTF-8',
+            'Content-type': 'text/html',
             'Keep-Alive': '300',
             'Connection': 'keep-alive',
             'Cache-Control': 'max-age=0',
         }
         reqq = urllib2.Request(data, txdata, txheaders)
+        reqq.add_header('Accept-encoding', 'gzip')
         req = urllib2.urlopen(reqq)
-        data = json.loads(req.read())
+        
+        if req.info().get('Content-Encoding') == 'gzip':
+            buf = StringIO(req.read())
+            f = gzip.GzipFile(fileobj=buf)
+            data = f.read()
+        else:
+            data = req.read()
+            
+        data = json.loads(str(data))
         
         cvs = ""
         i = 0
@@ -404,21 +416,24 @@ def download():
                 if cabecalho not in checkHeader:
                    checkHeader.append(cabecalho)
                    translation = translate_columns(cabecalho, lang)
-                   headerArray.append(translation)
+                   headerArray.append(unicode(translation,'utf-8'))
         
         for item in data['data']:
+            print item
             lineArray = []
-            
             for header in checkHeader:
                 if header in item:
-                    lineArray.append(str(item[header]))
+                    if (type(item[header]) is unicode):
+                        lineArray.append(item[header])
+                    else:
+                        lineArray.append(str(item[header]))
                 else:
                     lineArray.append("")
      
             linesArray.append('\t'.join(lineArray))
             i = 1
         cvs = '\t'.join(headerArray) + '\n' + '\n'.join(linesArray)
-        response_data = cvs.encode("utf-16")
+        response_data = cvs.encode("utf-16", 'ignore')
         
     else:
         response_data = data.encode("utf-16")
