@@ -461,9 +461,16 @@ function Selector() {
           show_selectButton = true;
           
           //Network, Rings, Scatter: Not for Brazil
-          if((appType=="scatter" || appType=="rings" || appType=="network") && type == "bra" && x.id == "all") {
-          	//show_selectButton = false;
+          dataset = app.build.dataset;
+          rca = app.vars.rca_scope;
+
+          if((appType=="scatter" || appType=="rings" || appType=="network"|| appType=="occugrid" ) && ((type == "bra" && x.id == "all" && rca == "bra_rca") || (dataset == 'rais' && x.id == 'all') || (type != "bra" && x.id.length < 6 && appType == 'rings'))) {
+          	show_selectButton = false;
           	//Commented on 2014-07-11 for further analisys
+          }
+          
+          if(appType=="scatter" && x.id == 'all' && type == 'bra') {
+          	show_selectButton = false;
           }
           
 
@@ -477,6 +484,7 @@ function Selector() {
           }
           else {
             header_select_div.style("display","none")
+            show_selectButton = true;
           }
           
 
@@ -701,12 +709,24 @@ function Selector() {
             }
             
             //SETTING RULES FOR SELECTION
-            show_select = true;
+            show_selectButton = true;
+
+		    if(current_app == "rings"){
+		    	if(v.id.length <= 5 &&  type == "hs") {
+			    	show_selectButton = false;
+			    	//Commented on 2014-07-11 for further analisys
+		    	} else if(v.id.length < 5 &&  type == "isic") {
+			    	show_selectButton = false;
+			    	//Commented on 2014-07-11 for further analisys
+		    	} else if(v.id.length < 4 &&  type == "cbo") {
+			    	show_selectButton = false;
+			    	//Commented on 2014-07-11 for further analisys
+		    	}
+		    }
 		    
-		    //Rings,Occugrid: Not for CBO/HS 1 digit (able just for CBO/HS 4 digit)
-		    if(["occugrid", "rings"].indexOf(current_app) && (["cbo", "hs"].indexOf(type) && v.id.length == 1)) {
-		  		//show_selectButton = false
-		  		//Commented on 2014-07-11 for further analisys
+		    if(current_app == "occugrid" && v.display_id.length == 1) {
+		    	show_selectButton = false;
+		    	//Commented on 2014-07-11 for further analisys
 		    }
 		    
 		    //Geomap: Not for cities, (states, country, planning regions OK)
@@ -722,15 +742,25 @@ function Selector() {
                 .attr("id","select"+v.id)
                 
               if(!show_selectButton) {
-                b.attr("value",dataviva.format.text("not_available"))
+                //b.attr("value",dataviva.format.text("not_available"))
+                b.style("display", "none")
               } else {
+              	show_selectButton = true;
               	b.attr("value",dataviva.format.text("select"))
               	b.node().onclick = function(){
+              		val = d3.select("#distance"+v.id);
+              		
+              		if(!val.empty()) {
+              			//if there is distance selection
+              			update_distance(val.property("value"),v.id)	
+              		}
+              		
 					selector_load.text(dataviva.format.text("wait")).show()
 				  	callback(data[v.id],name)
 			  	}
+			  	leon("#select"+v.id).color(v.color)
               }
-              leon("#select"+v.id).color(v.color)
+              
              }
 
             if (results[i+1] || i == results.length-1) {
@@ -806,7 +836,7 @@ function Selector() {
           list = [],
           search_term = ""
           selected = null,
-          proximities = [0,30,60,90],
+          proximities = [30,60,90],
           sort_types = {
             "bra": "population",
             "hs": "val_usd",
