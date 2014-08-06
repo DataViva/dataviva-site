@@ -690,17 +690,23 @@ function Selector() {
               var select = prox_toggles.append("select")
                 .attr("id","distance"+v.id)
                 .attr("onchange","update_distance(this.value,'"+v.id+"')")
-
+			  
               proximities.forEach(function(p,i){
-                var option = select.append("option")
-                  .attr("id",p)
-                  .attr("value",p)
-                  .html(p+"km")
-                if (v.distance && p == v.distance) {
-                  option.attr("selected","selected")
-                }
-                else if (i == 0) {
-                  option.attr("selected","selected")
+              		dontshow = true
+              	if(app.build.app.type == "geo_map" && p == 0) {
+              		dontshow = false
+              	}
+              	if(dontshow) {
+	                var option = select.append("option")
+	                  .attr("id",p)
+	                  .attr("value",p)
+	                  .html(p+"km")
+	                if (v.distance && p == v.distance) {
+	                  option.attr("selected","selected")
+	                }
+	                else if (i == 0) {
+	                  option.attr("selected","selected")
+	                }
                 }
               })
 
@@ -836,7 +842,7 @@ function Selector() {
           list = [],
           search_term = ""
           selected = null,
-          proximities = [30,60,90],
+          proximities = [0,30,60,90],
           sort_types = {
             "bra": "population",
             "hs": "val_usd",
