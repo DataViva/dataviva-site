@@ -519,11 +519,32 @@
 
     // Start building a new app
     app.start = function(new_url,allyears) {
-
+	
+	 
       // Hide popover
       dataviva.popover.hide()
       app.allyears = allyears
       if (new_url) {
+      	
+      	
+      	
+      	  info = new_url.split("/")
+		  if('network' == info[0] || 'rings' == info[0]) {
+		  	// RULE: Network/Rings forces the location MG when dataset is RAIS and Location is BRA
+		  	if(info[1]=='rais' && info[2] == 'all') {
+		  		info[2] = 'mg'
+		  		new_url = info.join("/")
+		  	}
+		  }
+		  if('occugrid' == info[0] || 'scatter' == info[0]) {
+		  	// RULE: Occugrid/Scatter forces the location MG when Location is BRA
+		  	if(info[2] == 'all') {
+		  		info[2] = 'mg'
+		  		new_url = info.join("/")
+		  		
+		  	}
+		  }
+		  
         if (new_url != app.url || allyears) {
           app.url = new_url
           if (allyears) var t = "Downloading Additional Years"
