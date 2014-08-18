@@ -395,6 +395,7 @@ dataviva.format.text = function(text,name,l) {
       "Municipalities within": {"en": "Municipalities within", "pt": "Munic\u00edpios dentro de"},
       "No municipalities within that distance.": {"en": "No municipalities within that distance.", "pt": "N\u00e3o existem munic\u00edpios dentro desta dist\u00e2ncia."},
       "Including": {"en": "Including", "pt": "Incluindo"},
+      "in": {"en": "in", "pt": "em"},
 
     }
 

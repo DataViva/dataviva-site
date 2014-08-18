@@ -156,13 +156,16 @@ function Selector() {
 
         // Sort final generated list
         list.sort(function(a, b){
-
-          var lengthdiff = b.id.length - a.id.length
-          if (lengthdiff) return lengthdiff
-
+		  if(a.display_id=="MG"||b.display_id=="MG") {
+		  	var lengthdiff = b.id.length - a.id.length
+		  } else {
+		  	var lengthdiff = b.population - a.population
+		  }
+		  if (lengthdiff) return lengthdiff
+		  
           if (type == "bra") {
-            var a_state = a.id.substr(0,2)
-            var b_state = b.id.substr(0,2)
+      		var a_state = a.id.substr(0,2)
+        	var b_state = b.id.substr(0,2)            
           }
           else {
             var a_state = a.id
@@ -600,16 +603,26 @@ function Selector() {
 
             var text = item.append("div")
               .attr("class","search_text")
-
+			
+			
+			
             text.append("div")
               .attr("class","search_title")
               .style("color",d3plus.utils.darker_color(v.color))
               .html(title)
-
+              
             if (type != "file" && searching) {
+            	
+              if(type=="bra"&&v.id.length>2) {
+              	stateInfo = v.id.substr(0,2).toUpperCase();
+              	extrainfo = dataviva.format.text(type+"_"+v.id.length)+" "+dataviva.format.text("in")+" "+stateInfo;
+              } else {
+              	extrainfo = dataviva.format.text(type+"_"+v.id.length);
+              }
+              
               text.append("div")
                 .attr("class","search_sub")
-                .html(dataviva.format.text(type+"_"+v.id.length))
+                .html(extrainfo)
             }
 
             if (v.id_ibge) {
@@ -734,13 +747,6 @@ function Selector() {
 		    	show_selectButton = false;
 		    	//Commented on 2014-07-11 for further analisys
 		    }
-		    
-		    //Geomap: Not for cities, (states, country, planning regions OK)
-		    if(current_app == "geo_map" && v.display_id.length == 8) {
-		    	//show_selectButton = false;
-		    	//Commented on 2014-07-11 for further analisys
-		    }
-		
             if ((!limit || v.id.length >= limit)) {
 			
               var b = buttons.append("input")
