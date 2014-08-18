@@ -284,9 +284,9 @@ def attrs_search(term=None):
         result.append(isic_query)
         
     if lang == "pt":
-        hs = Hs.query.filter(or_(Hs.id == term, Hs.name_pt.like("%"+term+"%")))
+        hs = Hs.query.filter(or_(Hs.id.like("%"+term+"%"), Hs.name_pt.like("%"+term+"%")))
     else:
-        hs = Hs.query.filter(or_(Hs.id == term, Hs.name_en.ilike("%"+term+"%")))
+        hs = Hs.query.filter(or_(Hs.id.like("%"+term+"%"), Hs.name_en.ilike("%"+term+"%")))
     
     items = hs.limit(50).all()
     print(items)
