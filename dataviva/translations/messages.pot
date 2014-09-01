@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-07-22 17:19-0300\n"
+"POT-Creation-Date: 2014-09-01 18:09-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,7 +65,7 @@ msgstr ""
 msgid "The item was successfully deleted."
 msgstr ""
 
-#: dataviva/apps/views.py:173
+#: dataviva/apps/views.py:172
 msgid "You need to be logged in to star apps."
 msgstr ""
 
@@ -126,7 +126,7 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
-#: dataviva/guide/views.py:202 dataviva/html/about/ask/index.html:43
+#: dataviva/guide/views.py:202 dataviva/html/about/ask/index.html:51
 #: dataviva/html/account/index.html:24
 msgid "All"
 msgstr ""
@@ -135,14 +135,14 @@ msgstr ""
 msgid "Visualizing the Economy of Brazil"
 msgstr ""
 
-#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1958
+#: dataviva/html/home.html:13 dataviva/html/apps/embed.html:1987
 #: dataviva/html/templates/base.html:6
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
 " economy"
 msgstr ""
 
-#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1960
+#: dataviva/html/home.html:15 dataviva/html/apps/embed.html:1989
 #: dataviva/html/templates/base.html:6
 msgid "through more than 100 million interactive visualizations."
 msgstr ""
@@ -629,7 +629,7 @@ msgid "by"
 msgstr ""
 
 #: dataviva/html/about/ask/answer.html:61
-#: dataviva/html/about/ask/index.html:167 dataviva/html/account/index.html:30
+#: dataviva/html/about/ask/index.html:175 dataviva/html/account/index.html:30
 msgid "Comments"
 msgstr ""
 
@@ -677,7 +677,7 @@ msgstr ""
 msgid "You need to login for this functionality."
 msgstr ""
 
-#: dataviva/html/about/ask/ask.html:23 dataviva/html/about/ask/index.html:41
+#: dataviva/html/about/ask/ask.html:23 dataviva/html/about/ask/index.html:49
 msgid "Type"
 msgstr ""
 
@@ -718,55 +718,59 @@ msgid ""
 "empirical data."
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:12 dataviva/html/about/ask/index.html:58
+#: dataviva/html/about/ask/index.html:11
+msgid "To contact the Dataviva team please send a email to contato@dataviva.info"
+msgstr ""
+
+#: dataviva/html/about/ask/index.html:14 dataviva/html/about/ask/index.html:66
 msgid ""
 "The version of DataViva that you are viewing does not support user "
 "accounts. Click here to contact us through the main website."
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:18
+#: dataviva/html/about/ask/index.html:26
 msgid "What do you want to know?"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:19 dataviva/html/templates/site.html:20
+#: dataviva/html/about/ask/index.html:27 dataviva/html/templates/site.html:20
 msgid "Search"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:24
+#: dataviva/html/about/ask/index.html:32
 msgid "Can´t find an answer?"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:24
+#: dataviva/html/about/ask/index.html:32
 msgid "Send your question to us here!"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:30
+#: dataviva/html/about/ask/index.html:38
 msgid "Find your answers"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:33
+#: dataviva/html/about/ask/index.html:41
 msgid "Order"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:35
+#: dataviva/html/about/ask/index.html:43
 msgid "Most Active"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:37
+#: dataviva/html/about/ask/index.html:45
 msgid "Most Recent"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:45
+#: dataviva/html/about/ask/index.html:53
 #: dataviva/html/admin/admin_questions.html:3
 #: dataviva/html/admin/admin_questions.html:28
 msgid "Question"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:47 dataviva/html/about/ask/index.html:166
+#: dataviva/html/about/ask/index.html:55 dataviva/html/about/ask/index.html:174
 msgid "Comment"
 msgstr ""
 
-#: dataviva/html/about/ask/index.html:49
+#: dataviva/html/about/ask/index.html:57
 msgid "Contact"
 msgstr ""
 
