@@ -162,10 +162,10 @@ function Selector() {
 		  	var lengthdiff = b.population - a.population
 		  }
 		  if (lengthdiff) return lengthdiff
-		  
+
           if (type == "bra") {
       		var a_state = a.id.substr(0,2)
-        	var b_state = b.id.substr(0,2)            
+        	var b_state = b.id.substr(0,2)
           }
           else {
             var a_state = a.id
@@ -446,7 +446,7 @@ function Selector() {
           var header_color = "#333333"
         }
         else {
-			
+
           var header_color = x.color
 
           icon.style("background-image","url('"+x.icon+"')")
@@ -454,28 +454,28 @@ function Selector() {
           if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && x.id.length != 5)) {
             icon.style("background-color",x.color)
           }
-          
+
           if (typeof app === "undefined") {
           	appType = "";
+            dataset = false;
+            rca = false;
           } else {
           	appType = app.build.app.type;
-          }          
-          
+            dataset = app.build.dataset;
+            rca = app.vars.rca_scope;
+          }
+
           show_selectButton = true;
-          
-          //Network, Rings, Scatter: Not for Brazil
-          dataset = app.build.dataset;
-          rca = app.vars.rca_scope;
 
           if((appType=="scatter" || appType=="rings" || appType=="network"|| appType=="occugrid" ) && ((type == "bra" && x.id == "all" && rca == "bra_rca") || (dataset == 'rais' && x.id == 'all') || (type != "bra" && x.id.length < 6 && appType == 'rings'))) {
           	show_selectButton = false;
           	//Commented on 2014-07-11 for further analisys
           }
-          
+
           if(appType=="scatter" && x.id == 'all' && type == 'bra') {
           	show_selectButton = false;
           }
-          
+
 
           if ((show_selectButton) && (type != "file" && ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all")))) {
             header_select_div.style("display","inline-block")
@@ -489,7 +489,7 @@ function Selector() {
             header_select_div.style("display","none")
             show_selectButton = true;
           }
-          
+
 
           if (type == "file") var prefix = x.name
           else if (type == "bra") {
@@ -560,8 +560,8 @@ function Selector() {
 		    	current_app = "";
 		     } else {
 		  	    current_app = app.build.app.type;
-		     } 
-			
+		     }
+
             var item = body.append("div")
               .attr("id","result_"+v.id)
               .attr("class","search_result")
@@ -603,23 +603,23 @@ function Selector() {
 
             var text = item.append("div")
               .attr("class","search_text")
-			
-			
-			
+
+
+
             text.append("div")
               .attr("class","search_title")
               .style("color",d3plus.utils.darker_color(v.color))
               .html(title)
-              
+
             if (type != "file" && searching) {
-            	
+
               if(type=="bra"&&v.id.length>2) {
               	stateInfo = v.id.substr(0,2).toUpperCase();
               	extrainfo = dataviva.format.text(type+"_"+v.id.length)+" "+dataviva.format.text("in")+" "+stateInfo;
               } else {
               	extrainfo = dataviva.format.text(type+"_"+v.id.length);
               }
-              
+
               text.append("div")
                 .attr("class","search_sub")
                 .html(extrainfo)
@@ -703,7 +703,7 @@ function Selector() {
               var select = prox_toggles.append("select")
                 .attr("id","distance"+v.id)
                 .attr("onchange","update_distance(this.value,'"+v.id+"')")
-			  
+
               proximities.forEach(function(p,i){
               		dontshow = true
               	if(app.build.app.type == "geo_map" && p == 0) {
@@ -726,7 +726,7 @@ function Selector() {
               leon("#distance"+v.id).color(v.color)
 
             }
-            
+
             //SETTING RULES FOR SELECTION
             show_selectButton = true;
 
@@ -742,17 +742,17 @@ function Selector() {
 			    	//Commented on 2014-07-11 for further analisys
 		    	}
 		    }
-		    
+
 		    if(current_app == "occugrid" && v.display_id.length == 1) {
 		    	show_selectButton = false;
 		    	//Commented on 2014-07-11 for further analisys
 		    }
             if ((!limit || v.id.length >= limit)) {
-			
+
               var b = buttons.append("input")
                 .attr("type","button")
                 .attr("id","select"+v.id)
-                
+
               if(!show_selectButton) {
                 //b.attr("value",dataviva.format.text("not_available"))
                 b.style("display", "none")
@@ -761,18 +761,18 @@ function Selector() {
               	b.attr("value",dataviva.format.text("select"))
               	b.node().onclick = function(){
               		val = d3.select("#distance"+v.id);
-              		
+
               		if(!val.empty()) {
               			//if there is distance selection
-              			update_distance(val.property("value"),v.id)	
+              			update_distance(val.property("value"),v.id)
               		}
-              		
+
 					selector_load.text(dataviva.format.text("wait")).show()
 				  	callback(data[v.id],name)
 			  	}
 			  	leon("#select"+v.id).color(v.color)
               }
-              
+
              }
 
             if (results[i+1] || i == results.length-1) {
