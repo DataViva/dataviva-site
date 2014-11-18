@@ -26,7 +26,7 @@
 }
 
 #logo {
-  background-image: url("/static/img/nav/DataViva_Plain.png");
+  background-image: url("/static/img/nav/DataViva_Beta.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: top center;
@@ -270,29 +270,23 @@ a.logo:hover {
 }
 
 a.logo.governo {
-  background-image: url("/static/img/nav/logo_governo_footer.jpg");
+  background-image: url("/static/img/nav/logo_governo.jpg");
 }
 
 a.logo.fapemig {
-  background-image: url("/static/img/nav/logo_fapemig_footer.jpg");
+  background-image: url("/static/img/nav/logo_fapemig.jpg");
 }
 
 a.logo.mc {
-	width: 155px;
-	height: 18px;
-	background-image: url("/static/img/nav/logo_mc_footer.jpg");
-	margin-top: 12px;
+	background-image: url("/static/img/nav/logo_mc.jpg");
 }
 
 a.logo.datawheel {
-  width: 102px;
-  height: 31px;
-  background-image: url("/static/img/nav/logo_datawheel_footer.jpg");
-  margin-top: 4px;
+  background-image: url("/static/img/nav/logo_datawheel.jpg");
 }
 
 a.logo.fjp {
-  background-image: url("/static/img/nav/logo_fjp_footer.jpg");
+  background-image: url("/static/img/nav/logo_fjp.jpg");
 }
 
 a.opendata {
