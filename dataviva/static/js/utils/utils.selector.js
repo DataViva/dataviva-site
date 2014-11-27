@@ -557,10 +557,10 @@ function Selector() {
 
           if (v) {
       		 if (typeof app === "undefined") {
-		    	current_app = "";
-		     } else {
-		  	    current_app = app.build.app.type;
-		     }
+  		    	current_app = "";
+  		     } else {
+  		  	    current_app = app.build.app.type;
+  		     }
 
             var item = body.append("div")
               .attr("id","result_"+v.id)
@@ -705,8 +705,8 @@ function Selector() {
                 .attr("onchange","update_distance(this.value,'"+v.id+"')")
 
               proximities.forEach(function(p,i){
-              		dontshow = true
-              	if(app.build.app.type == "geo_map" && p == 0) {
+            		dontshow = true
+              	if(current_app == "geo_map" && p == 0) {
               		dontshow = false
               	}
               	if(dontshow) {
