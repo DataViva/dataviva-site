@@ -2,6 +2,8 @@ function infinite_scroll(selection){
   var url = window.location.href,
       refresh = false,
       remove = false,
+      done = false,
+      limit = 50,
       offset = 0,
       order = null,
       format_items = function(d){ return d };
@@ -44,7 +46,7 @@ function infinite_scroll(selection){
           offset = 0;
         }
         // console.log(fetching, offset, loading_div_y-50, innerHeight, refresh)
-        if ((!fetching && offset >= 0 && loading_div_y-50 < innerHeight) || refresh) {
+        if ((!done && !fetching && offset >= 0 && loading_div_y-50 < innerHeight) || refresh) {
           fetch();
         }
 
@@ -59,14 +61,14 @@ function infinite_scroll(selection){
         a = url
         // decide whether to use '?' or '&'
         if(a.indexOf("?") >= 0){
-          a += "&offset="+offset
+          a += "&limit="+limit+"&offset="+offset
         }
         else {
-          a += "?offset="+offset
+          a += "?limit="+limit+"&offset="+offset
         }
         
         if (order) {
-          a += "&order="+order
+          a += "&limit="+limit+"&order="+order
         }
         
         // Here we set the header X-Requested-With to XMLHttpRequest so the 
@@ -98,8 +100,9 @@ function infinite_scroll(selection){
               d3.select(container_el).html('')
             }
           }
+          done = true;
           offset = NaN;
-          d3.select(".infinite_loading").remove();
+          d3.selectAll(".infinite_loading").remove();
           return;
         }
   
