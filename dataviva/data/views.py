@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 import urllib2
 import json
 from datetime import datetime
@@ -35,7 +35,7 @@ def get_geo_location(ip):
     state = json_resp["region_name"]
     # state = "Espírito Santo"
     # state = "Maranhão"
-    
+
     # first try to find the exact city within the state
     bra_state = Bra.query.filter_by(name_pt=state).filter(func.char_length(Bra.id) == 2).first()
     bra_cities = Bra.query.filter_by(name_pt=city).filter(func.char_length(Bra.id) == 8)
@@ -58,7 +58,7 @@ def table(data_type="rais", year="all", bra_id="mg", filter_1="show.1", filter_2
 @mod.route('/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
 #@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
-    
+
     filters = {}
     filters["bra"] = {"items": [], "depths": [2,4,7,8]}
     filters["isic"] = {"items": [], "depths": [1,3,5]}
@@ -66,10 +66,10 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
     filters["hs"] = {"items": [], "depths": [2,4,6]}
     filters["wld"] = {"items": [], "depths": [2,5]}
     filter_order = ["bra","isic","cbo","hs","wld"]
-    
+
     datasets = {"rais": {"filters": ["bra","isic","cbo"], "years": 1},
                 "secex": {"filters": ["bra","hs","wld"], "years": 2}}
-                
+
     for d in datasets:
         datasets[d]["years"] = eval(UI.query.get(datasets[d]["years"]).values)
         if data_type == d:
@@ -85,10 +85,10 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
                 datasets[d]["year"] = datasets[d]["years"][0]
         else:
             datasets[d]["year"] = "all"
-    
+
     g.page_type = "query"
     filters_json = {}
-    
+
     def parse_filter(list,type):
         table = globals()[type.title()]
         ids = list.split("_")
@@ -97,7 +97,7 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
             obj_split = id.split(".")
             obj = {}
             obj_id = obj_split[0]
-            
+
             if obj_id == "show":
                 filters[type]["active"] = True
                 filters[type]["depth"] = float(obj_split[1])
@@ -118,40 +118,41 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
                     obj["kms"] = 0
                     json_id = obj["item"].id
                 filters_json[type][json_id] = obj["depth"]
-    
+
     if not bra_id:
         '''try getting the user's ip address, since the live server is using
-            proxy nginx, we need to use the "X-Forwarded-For" remote address 
+            proxy nginx, we need to use the "X-Forwarded-For" remote address
             otherwise this will always be 127.0.0.1 ie localhost'''
-        if not request.headers.getlist("X-Forwarded-For"):
-            ip = request.remote_addr
-        else:
-            ip = request.headers.getlist("X-Forwarded-For")[0]
-    
+        # if not request.headers.getlist("X-Forwarded-For"):
+        #     ip = request.remote_addr
+        # else:
+        #     ip = request.headers.getlist("X-Forwarded-For")[0]
+
         # next try geolocating the user's ip
-        bra = get_geo_location(ip) or None
-    
-        '''if the city or region is not found in the db use Belo Horizonte as 
+        # bra = get_geo_location(ip) or None
+
+        '''if the city or region is not found in the db use Belo Horizonte as
             default'''
-        if not bra:
-            bra_id = "mg.show.7"
-        else:
-            bra_id = bra.id
-            
+        bra_id = "mg.show.7"
+        # if not bra:
+        #     bra_id = "mg.show.7"
+        # else:
+        #     bra_id = bra.id
+
     parse_filter(bra_id,"bra")
-    
+
     if filter_1 and filter_1 != "all":
         if data_type == "rais":
             parse_filter(filter_1,"isic")
         else:
             parse_filter(filter_1,"hs")
-    
+
     if filter_2 and filter_2 != "all":
         if data_type == "rais":
             parse_filter(filter_2,"cbo")
         else:
             parse_filter(filter_2,"wld")
-            
+
     for f in filters:
         if f not in filters_json:
             filters_json[f] = {"active": 0, "show": filters[f]["depths"][0]}
@@ -162,6 +163,6 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
                 filters_json[f]["active"] = 0
             else:
                 filters_json[f]["active"] = 1
-                
-    return render_template("data/index.html", 
+
+    return render_template("data/index.html",
         datasets = datasets, filters = filters, filter_order = filter_order, filters_json = json.dumps(filters_json))
