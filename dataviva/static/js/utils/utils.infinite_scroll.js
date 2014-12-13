@@ -97,12 +97,14 @@ function infinite_scroll(selection){
               .attr("class", "no_data")
               .text(String)
             if(remove){
-              d3.select(container_el).html('')
+              // d3.select(container_el).html('')
             }
           }
           done = true;
           offset = NaN;
-          d3.selectAll(".infinite_loading").remove();
+          d3.select(container_el).select(".infinite_loading")
+            .style("opacity", 0)
+            .style("height", 0)
           return;
         }
   

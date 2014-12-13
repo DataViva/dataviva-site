@@ -125,8 +125,8 @@
   }
   args.columns = function() {
     var ret = []
-    for (c in args[dataset].cols) {
-      if (args[dataset].cols[c]) ret.push(c)
+    for (c in args[dset].cols) {
+      if (args[dset].cols[c]) ret.push(c)
     }
     return ret
   }
@@ -135,22 +135,22 @@
   function download_csv() {
     var u = document.getElementById("table_frame").contentWindow.is.url()
     u += "?download"
-    if (args[dataset].order != "") u += "&order="+args[dataset].order
+    if (args[dset].order != "") u += "&order="+args[dset].order
     if (args.columns().length) u += "&cols="+args.columns().join(".")
     window.location = u
   }
 
   // Toggling between datasets
-  var dataset = d3.select("input[name='dataset']:checked").attr("value")
+  var dset = d3.select("input[name='dataset']:checked").attr("value")
   function change_dataset(value){
     d3.selectAll(".filter").style("display", "none")
     d3.selectAll("."+value+"_filter").style("display", "block")
     d3.selectAll("."+value+"_yearfilter").style("display", "inline-block")
-    datasets[dataset].active = false
+    datasets[dset].active = false
     datasets[value].active = true
-    dataset = value
+    dset = value
   }
-  change_dataset(dataset)
+  change_dataset(dset)
 
   // Create Filter Selector
   dataviva.popover.create({
@@ -257,9 +257,9 @@
     filters[type][id] = depth
   }
 
-  function change_year(year,dataset) {
-    dataset = dataset.split("_")[0]
-    datasets[dataset].year = year
+  function change_year(year,dset) {
+    dset = dset.split("_")[0]
+    datasets[dset].year = year
   }
 
   function toggle_filter(filter,parent) {
@@ -276,9 +276,9 @@
   // retrieving new data
   function update_table(url) {
 
-    new_url = dataset+"/"+datasets[dataset].year+"/"
+    new_url = dset+"/"+datasets[dset].year+"/"
 
-    datasets[dataset].filters.forEach(function(f){
+    datasets[dset].filters.forEach(function(f){
       if (filters[f]) {
         new_ids = []
         if (filters[f].active) {
@@ -307,21 +307,21 @@
       if (window.location.search.indexOf("cols=") > -1) {
         var columns = window.location.search.split("cols=")[1].split("&")[0].split(".")
         columns.forEach(function(c){
-          args[dataset].cols[c] = true
+          args[dset].cols[c] = true
         })
       }
       if (window.location.search.indexOf("order=") > -1) {
-        args[dataset].order = window.location.search.split("order=")[1].split("&")[0]
+        args[dset].order = window.location.search.split("order=")[1].split("&")[0]
       }
       else {
-        args[dataset].order = ""
+        args[dset].order = ""
       }
     }
 
     var params = []
-    if (args[dataset].order != "") params.push("order="+args[dataset].order)
+    if (args[dset].order != "") params.push("order="+args[dset].order)
     var avail_columns = args.columns()
-    if (avail_columns.length > 0 && (first || avail_columns.length < Object.keys(args[dataset].cols).length)) {
+    if (avail_columns.length > 0 && (first || avail_columns.length < Object.keys(args[dset].cols).length)) {
       params.push("cols="+avail_columns.join("."))
     }
     if (params.length) params = "?"+params.join("&")
@@ -332,11 +332,11 @@
 
   function change_cols(value,id) {
     var key = id.split("coltoggle_")[1]
-    args[dataset].cols[key] = value
+    args[dset].cols[key] = value
 
     if (!args.columns().length) {
-      for (c in args[dataset].cols) {
-        args[dataset].cols[c] = true
+      for (c in args[dset].cols) {
+        args[dset].cols[c] = true
         leon("#coltoggle_"+c).set(true).color(dataviva.color)
       }
     }
@@ -344,31 +344,31 @@
   }
 
   function send_columns() {
-    document.getElementById("table_frame").contentWindow.change_cols(args[dataset].cols)
+    document.getElementById("table_frame").contentWindow.change_cols(args[dset].cols)
   }
 
   function update_cols(cols) {
 
     var resend = false
-    for (c in args[dataset].cols) {
+    for (c in args[dset].cols) {
       var colIndex = cols.objectIndex("name",c)
       if (colIndex < 0) {
-        delete args[dataset].cols[c]
+        delete args[dset].cols[c]
         resend = true
       }
     }
 
     cols.forEach(function(c,i){
-      if (!(c.name in args[dataset].cols)) {
+      if (!(c.name in args[dset].cols)) {
         if (!c.active && !first) {
           resend = true
-          args[dataset].cols[c.name] = true
+          args[dset].cols[c.name] = true
           c.active = true
         }
-        else args[dataset].cols[c.name] = c.active
+        else args[dset].cols[c.name] = c.active
       }
-      else if (c.name in args[dataset].cols && (args[dataset].cols[c.name].active != c.active)) {
-        c.active = args[dataset].cols[c.name]
+      else if (c.name in args[dset].cols && (args[dset].cols[c.name].active != c.active)) {
+        c.active = args[dset].cols[c.name]
       }
     })
 
