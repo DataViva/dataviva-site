@@ -7,7 +7,7 @@ from sqlalchemy import func, and_, or_, asc, desc, not_
 from dataviva.utils.cached_query import cached_query
 from dataviva.utils.gzip_data import gzip_data
 
-''' Given a "year" string from URL, turn this into an array of years 
+''' Given a "year" string from URL, turn this into an array of years
     as integers'''
 def parse_years(year_str):
     year_str = str(year_str)
@@ -29,7 +29,7 @@ def location_values(ret,cat):
 
     from dataviva.secex.models import Yb_secex
     from dataviva.rais.models import Yb_rais
-    
+
     bra_id = ret[cat][0]["id"]
     if bra_id != "all":
         ecis = Yb_secex.query.filter_by(bra_id=bra_id).all()
@@ -41,7 +41,7 @@ def location_values(ret,cat):
 ''' Returns modified query and return variable for data calls '''       
 def parse_filter(kwargs,id_type,query,data_table,ret):
 
-    from dataviva.attrs.models import Bra, Isic, Cbo, Hs, Wld
+    from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld
 
     query = query.group_by(getattr(data_table, id_type))
     cat = id_type.split("_")[0]
@@ -50,7 +50,7 @@ def parse_filter(kwargs,id_type,query,data_table,ret):
     id_list = []
     depth = None
     for id in ids:
-        
+
         split_obj = id.split(".")
 
         kms = None
@@ -69,13 +69,13 @@ def parse_filter(kwargs,id_type,query,data_table,ret):
         else:
             obj_id = None
             ret_obj = None
-        
+
         split_depth = id.split("show.")
         if len(split_depth) > 1:
             obj_depth = int(split_depth[1])
         else:
             obj_depth = None
-            
+
         if obj_id:
             if kms:
                 neighbors = table.query.get(obj_id).get_neighbors(kms)
@@ -114,30 +114,30 @@ def parse_filter(kwargs,id_type,query,data_table,ret):
                 id_list.append(obj_id)
         elif obj_depth:
             depth = obj_depth
-            
+
         if ret_obj:
             if cat not in ret:
                 ret[cat] = []
             ret[cat].append(ret_obj)
-            
+
     if len(id_list) > 0:
         query = query.filter(getattr(data_table,id_type).in_(id_list))
     elif depth:
         query = query.filter(func.char_length(getattr(data_table,id_type)) == depth)
-        
+
     if cat == "bra" and obj_id:
         if len(ret[cat]) == 0:
             ret[cat].append(Wld.query.get_or_404("sabra").serialize())
         ret = location_values(ret,cat)
-        
+
     return {"query": query, "ret": ret}
 
 
 def merge_objects(objs):
 
-    averages = ['eci', 'eci_wld', 'pci', 'unique_isic', 'unique_cbo',
-                'unique_hs', 'unique_wld', 'importance', 
-                'val_usd_growth_pct', 'val_usd_growth_pct_5', 
+    averages = ['eci', 'eci_wld', 'pci', 'unique_cnae', 'unique_cbo',
+                'unique_hs', 'unique_wld', 'importance',
+                'val_usd_growth_pct', 'val_usd_growth_pct_5',
                 'wage_growth_pct', 'wage_growth_pct_5',
                 'num_emp_growth_pct', 'num_emp_growth_pct_5',
                 'distance', 'distance_wld',
@@ -202,18 +202,18 @@ def compile_query(query):
 
 
 def make_query(data_table, url_args, lang, **kwargs):
-    
+
     from dataviva import db
-    from dataviva.attrs.models import Bra, Isic, Cbo, Hs, Wld
-            
+    from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld
+
     ops = {">": operator.gt,
            ">=": operator.ge,
            "<": operator.lt,
            "<=": operator.le}
 
-    check_keys = ["bra_id", "isic_id", "cbo_id", "hs_id", "wld_id"]
+    check_keys = ["bra_id", "cnae_id", "cbo_id", "hs_id", "wld_id"]
     unique_keys = []
-    
+
     download = url_args.get("download", None)
     raw = True if "raw" in kwargs else None
     order = url_args.get("order", None)
@@ -239,14 +239,14 @@ def make_query(data_table, url_args, lang, **kwargs):
         cached_q = cached_query(cache_id)
         if cached_q:
             return cached_q
-    
+
     query = db.session.query(data_table)
     if join:
         for j in join:
             query = query.add_entity(j["table"])
             for col in j["on"]:
                 query = query.filter(getattr(data_table, col) == getattr(j["table"], col))
-                
+
     query = query.group_by(data_table.year)
 
     # handle year (if specified)
@@ -254,7 +254,7 @@ def make_query(data_table, url_args, lang, **kwargs):
         ret["year"] = parse_years(kwargs["year"])
         query = query \
             .filter(data_table.year.in_(ret["year"]))
-        
+
     # parse all filters
     for key in check_keys:
         if key in kwargs:
@@ -265,42 +265,42 @@ def make_query(data_table, url_args, lang, **kwargs):
             parse_results = parse_filter(kwargs,key,query,data_table,ret)
             query = parse_results["query"]
             ret = parse_results["ret"]
-            
+
     if filter:
         query = query.filter(ops[filter[1]](getattr(data_table, filter[0]), float(filter[2])))
-        
+
     if excluding:
         for e in excluding:
             query = query.filter(not_(getattr(data_table, e).startswith(excluding[e])))
-        
+
     # lastly we want to get the actual data held in the table requested
     if "aggregate" not in ret:
         # handle ordering
         if order:
             direction = "asc"
-            
+
             if "." in order:
                 o, direction = order.split(".")
             else:
                 o = order
-                
+
             order_table = None
             if join:
                 for j in join:
                     if o in j["columns"]:
                         order_table = j["table"]
-                
+
             if order_table == None:
                 order_table = data_table
-            if o in query:   
+            if o in query:
                 if direction == "asc":
                     query = query.order_by(asc(getattr(order_table,o)))
                 elif direction == "desc":
                     query = query.order_by(desc(getattr(order_table,o)))
-                
+
         if limit:
             query = query.limit(limit).offset(offset)
-    
+
     # raise Exception(compile_query(query))
     if join:
         ret["data"] = []
@@ -319,15 +319,15 @@ def make_query(data_table, url_args, lang, **kwargs):
         return query.all()
     else:
         ret["data"] = [d.serialize() for d in query.all()]
-    
+
     if "aggregate" in ret:
-        
+
         agg_data = []
         ret["data"] = sorted(ret["data"],key=lambda x: x["year"])
-        
+
         if "bra" not in ret:
             ret["bra"] = {}
-            
+
         for bra in ret["bra"]:
 
             if "aggregates" in bra:
@@ -337,9 +337,9 @@ def make_query(data_table, url_args, lang, **kwargs):
                     for obj in group:
                         if obj["bra_id"] in bra["aggregates"]:
                             year_data.append(obj)
-                            
+
                     if len(unique_keys) > 0:
-                        
+
                         def check_filter(d,keys,i):
                             if i == len(keys):
                                 merged_data = merge_objects(d)
@@ -353,7 +353,7 @@ def make_query(data_table, url_args, lang, **kwargs):
                                     for o in g:
                                         new_array.append(o)
                                     check_filter(new_array,keys,i+1)
-                                    
+
                         check_filter(year_data,unique_keys,0)
                     else:
                         merged_data = merge_objects(year_data)
@@ -376,7 +376,7 @@ def make_query(data_table, url_args, lang, **kwargs):
                 ret["data"].sort(key=lambda x: x[o] if o in x else None)
             elif direction == "desc":
                 ret["data"].sort(key=lambda x: x[o] if o in x else None, reverse=True)
-        
+
         if limit:
             ret["data"] = ret["data"][int(offset):int(offset)+int(limit)]
 
@@ -402,20 +402,20 @@ def make_query(data_table, url_args, lang, **kwargs):
                     new_obj["id_mdic"] = attrs[d[show_id]]["id_mdic"]
             new_return.append(new_obj)
         ret["data"] = new_return
-        
+
     if order:
         for i, d in enumerate(ret["data"]):
             r = i+1
             if offset:
                 r = r+offset
             d["rank"] = int(r)
-    
+
     if download is not None:
         header = [str(c).split(".")[1] for c in data_table.__table__.columns]
         if cols:
             stickies = [c for c in header if c in unique_keys]
             header = stickies+cols
-            
+
         def generate():
             for i, data_dict in enumerate(ret["data"]):
                 row = [str(data_dict[c]) if c in data_dict else '' for c in header]
@@ -424,13 +424,13 @@ def make_query(data_table, url_args, lang, **kwargs):
                 yield ';'.join(row) + '\n'
 
         content_disposition = "attachment;filename=%s.csv" % (cache_id[1:-1].replace('/', "_"))
-        
+
         if sys.getsizeof(ret["data"]) > 10485760:
-            resp = Response(['Unable to download, request is larger than 10mb'], 
-                            mimetype="text/csv;charset=UTF-8", 
+            resp = Response(['Unable to download, request is larger than 10mb'],
+                            mimetype="text/csv;charset=UTF-8",
                             headers={"Content-Disposition": content_disposition})
         else:
-            resp = Response(generate(), mimetype="text/csv;charset=UTF-8", 
+            resp = Response(generate(), mimetype="text/csv;charset=UTF-8",
                             headers={"Content-Disposition": content_disposition})
         return resp
 

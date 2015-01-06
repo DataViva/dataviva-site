@@ -7,7 +7,7 @@ from flask import Blueprint, request, render_template, g, Response, make_respons
 
 from dataviva import db, view_cache
 from dataviva.account.models import User, Starred
-from dataviva.attrs.models import Bra, Wld, Hs, Isic, Cbo
+from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo
 from dataviva.apps.models import UI
 from dataviva.secex.models import Yb_secex
 
@@ -61,13 +61,13 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
 
     filters = {}
     filters["bra"] = {"items": [], "depths": [2,4,7,8]}
-    filters["isic"] = {"items": [], "depths": [1,3,5]}
+    filters["cnae"] = {"items": [], "depths": [1,3,6]}
     filters["cbo"] = {"items": [], "depths": [1,2,4]}
     filters["hs"] = {"items": [], "depths": [2,4,6]}
     filters["wld"] = {"items": [], "depths": [2,5]}
-    filter_order = ["bra","isic","cbo","hs","wld"]
+    filter_order = ["bra","cnae","cbo","hs","wld"]
 
-    datasets = {"rais": {"filters": ["bra","isic","cbo"], "years": 1},
+    datasets = {"rais": {"filters": ["bra","cnae","cbo"], "years": 1},
                 "secex": {"filters": ["bra","hs","wld"], "years": 2}}
 
     for d in datasets:
@@ -143,7 +143,7 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
 
     if filter_1 and filter_1 != "all":
         if data_type == "rais":
-            parse_filter(filter_1,"isic")
+            parse_filter(filter_1,"cnae")
         else:
             parse_filter(filter_1,"hs")
 

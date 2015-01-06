@@ -5,7 +5,7 @@ from flask.ext.babel import gettext
 from dataviva import db, view_cache
 
 from dataviva.attrs.models import Bra, Wld
-from dataviva.rais.models import Isic, Cbo
+from dataviva.rais.models import Cnae, Cbo
 from dataviva.secex.models import Hs
 
 from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE_REPLY, Flag
@@ -51,7 +51,7 @@ def attrs(attr="bra",depth="2"):
 
     depths = {}
     depths["bra"] = [2,4,7,8]
-    depths["isic"] = [1,3,5]
+    depths["cnae"] = [1,3,6]
     depths["cbo"] = [1,2,4]
     depths["hs"] = [2,4,6]
     depths["wld"] = [2,5]
@@ -84,11 +84,11 @@ def ask(user=None):
             file_banned_words = open(os.path.join(basedir, "dataviva/static/txt/blacklist.txt"))
             banned_words = [line.strip() for line in file_banned_words]
 
-            filter = ProfanitiesFilter(banned_words, replacements = '*')          
+            filter = ProfanitiesFilter(banned_words, replacements = '*')
             _question = filter.clean(str(form.question.data.encode("utf-8")))
             _body =  filter.clean(str(form.body.data.encode("utf-8")))
             _type = filter.clean(str(form.type.data))
-            
+
 
             question = Question(question=_question, body=_body, timestamp=timestamp, user=g.user, slug=slug, language=g.locale, type_id=_type)
             if "," in form.tags.data:
@@ -99,7 +99,7 @@ def ask(user=None):
             try:
                 flash(gettext('Your message was sent successfully. Thank you for your contribution, it will be helpful to other users and is essential to improving our tool! Our team will contact you by e-mail shortly.'))
                 send_mail('Aviso de nova publicacao no DataViva', [ADMINISTRATOR_EMAIL], render_template('about/ask/ask_feedback.html', question=question))
-            except BaseException as e:              
+            except BaseException as e:
                 print e
             # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
             #     return jsonify({"status": "Success"})
@@ -137,19 +137,19 @@ def answer(slug):
             parent_id = 0
         else:
             parent_id = reply_form.parent.data
-        
+
         hiddenFld = 2;
-        
+
         from ..utils.profanities_filter import ProfanitiesFilter
-        
+
         file_banned_words = open(os.path.join(basedir, "dataviva/static/txt/blacklist.txt"))
         banned_words = [line.strip() for line in file_banned_words]
-        
-        filter = ProfanitiesFilter(banned_words, replacements = '*')          
-        _body =  filter.clean(str(reply_form.reply.data))
-        
 
-        reply = Reply(body=_body, timestamp=timestamp, 
+        filter = ProfanitiesFilter(banned_words, replacements = '*')
+        _body =  filter.clean(str(reply_form.reply.data))
+
+
+        reply = Reply(body=_body, timestamp=timestamp,
                         user=g.user, question=question, parent_id=parent_id, hidden=hiddenFld)
 
         db.session.add(reply)
@@ -158,14 +158,14 @@ def answer(slug):
             reply.parent_id = reply.id
             db.session.add(reply)
             db.session.commit()
-        
+
         try:
             flash(gettext('Reply submitted. Your reply will show up after we review it.'))
              #envia email para o admin
             send_mail('Aviso de nova publicacao no DataViva', [ADMINISTRATOR_EMAIL], render_template('about/ask/ask_feedback.html', question=question))
         except:
                 flash(gettext('Your Reply was not sent. Try later, please.'))
-        
+
         return redirect(url_for('about.answer', slug=question.slug))
     else:
 

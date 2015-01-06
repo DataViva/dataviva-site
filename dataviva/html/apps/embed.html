@@ -49,12 +49,12 @@
       <i class="fa fa-list-alt"></i>
     </div>
 
-    {% if current_build.isic %}
-    {% set isic = current_build.isic[0] %}
+    {% if current_build.cnae %}
+    {% set cnae = current_build.cnae[0] %}
     {% endif %}
-    <div id="isic_0" class="leon button medium" onclick="builder.selector(this.id)">
-      <div class="leon icon medium"{% if isic %} style="background-color:{{ isic.color }}; background-image:url('/static/img/icons/isic/isic_{{ isic.id[:1] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if isic %}{{ isic.name }}{% endif %}</span>
+    <div id="cnae_0" class="leon button medium" onclick="builder.selector(this.id)">
+      <div class="leon icon medium"{% if cnae %} style="background-color:{{ cnae.color }}; background-image:url('/static/img/icons/cnae/cnae_{{ cnae.id[:1] }}.png')"{% endif %}></div>
+      <span class="list_text">{% if cnae %}{{ cnae.name }}{% endif %}</span>
       <i class="fa fa-list-alt"></i>
     </div>
 
@@ -90,9 +90,9 @@
   </div>
 
   <div id="settings">
-	
+
     <a id="refresh" class="leon button square alt_tooltip" onclick="app.start()" alt="{% trans %}Refresh the App{% endtrans %}"><i class="fa fa-refresh"></i></a>
-    <a id="file" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Download this App{% endtrans %}"><i class="fa fa-save"></i></a>  
+    <a id="file" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Download this App{% endtrans %}"><i class="fa fa-save"></i></a>
     <a id="starred" class="leon button square alt_tooltip" onclick="app.star()" alt="{% trans %}Save this App{% endtrans %}"><i id="status_{{starred}}" class="{% if starred == 1 %}fa fa-star{% else %}fa fa-star-o{% endif %}"></i></a>
     <a id="share" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Share/Embed{% endtrans %}"><i class="fa fa-share"></i></a>
     <a id="help" class="leon button square alt_tooltip" onclick="builder.selector(this.id)" alt="{% trans %}Show App Tutorial{% endtrans %}"><i class="fa fa-question-circle"></i></a>
@@ -197,7 +197,7 @@
 
     // Get various depth levels
     var depths = {
-      "isic": dataviva.depths("isic"),
+      "cnae": dataviva.depths("cnae"),
       "cbo": dataviva.depths("cbo"),
       "hs": dataviva.depths("hs"),
       "bra": dataviva.depths("bra"),
@@ -310,8 +310,8 @@
 
       var priority = ["both_filters","filter2","filter1","no_filters"],
           html_return = "<div class='title'>"+dataviva.format.text("related_apps")+"</div>"
-          
-         
+
+
 
       priority.forEach(function(p,i){
         if (app.recommendations[p]) {
@@ -353,7 +353,7 @@
                 }
                 t = t.replace(word,new_article)
               }
-			
+
               html_return += "<div id='"+u+"' class='"+classname+" "+a.app.type+"' "
               html_return += "onclick='app.start(this.id)'>"
               html_return += t
@@ -364,7 +364,7 @@
           })
         }
       })
-      
+
       return html_return
 
     }
@@ -396,8 +396,8 @@
         "pci",
         "bra_diversity",
         "bra_diversity_eff",
-        "isic_diversity",
-        "isic_diversity_eff",
+        "cnae_diversity",
+        "cnae_diversity_eff",
         "cbo_diversity",
         "cbo_diversity_eff",
         "hs_diversity",
@@ -443,8 +443,8 @@
           "pci": "mean",
           "bra_diversity": "mean",
           "bra_diversity_eff": "mean",
-          "isic_diversity": "mean",
-          "isic_diversity_eff": "mean",
+          "cnae_diversity": "mean",
+          "cnae_diversity_eff": "mean",
           "cbo_diversity": "mean",
           "cbo_diversity_eff": "mean",
           "hs_diversity": "mean",
@@ -490,8 +490,8 @@
       "required": dataviva.format.text("required_desc"),
       "bra_diversity": dataviva.format.text("bra_diversity_desc"),
       "bra_diversity_eff": dataviva.format.text("bra_diversity_eff_desc"),
-      "isic_diversity": dataviva.format.text("isic_diversity_desc"),
-      "isic_diversity_eff": dataviva.format.text("isic_diversity_eff_desc"),
+      "cnae_diversity": dataviva.format.text("cnae_diversity_desc"),
+      "cnae_diversity_eff": dataviva.format.text("cnae_diversity_eff_desc"),
       "cbo_diversity": dataviva.format.text("cbo_diversity_desc"),
       "cbo_diversity_eff": dataviva.format.text("cbo_diversity_eff_desc"),
       "hs_diversity": dataviva.format.text("hs_diversity_desc"),
@@ -519,15 +519,15 @@
 
     // Start building a new app
     app.start = function(new_url,allyears) {
-	
-	 
+
+
       // Hide popover
       dataviva.popover.hide()
       app.allyears = allyears
       if (new_url) {
-      	
-      	
-      	
+
+
+
       	  info = new_url.split("/")
 		  if('network' == info[0] || 'rings' == info[0]) {
 		  	// RULE: Network/Rings forces the location MG when dataset is RAIS and Location is BRA
@@ -541,10 +541,10 @@
 		  	if(info[2] == 'all') {
 		  		info[2] = 'mg'
 		  		new_url = info.join("/")
-		  		
+
 		  	}
 		  }
-		  
+
         if (new_url != app.url || allyears) {
           app.url = new_url
           if (allyears) var t = "Downloading Additional Years"
@@ -567,7 +567,7 @@
       d3.json("/apps/embed/"+app.url+"?lang="+dataviva.language)
         .header("X-Requested-With", "XMLHttpRequest")
         .get(function(error,data){
-			
+
           if (error) {
           	console.log(error)
            // app.error(dataviva.format.text("Build Not Available"))
@@ -589,7 +589,7 @@
             builder.outputs(data.all_builds)
 
             // Show/hide filters depending on build requirements
-            var filters = ["bra_0","bra_1","isic_0","cbo_0","hs_0","wld_0"]
+            var filters = ["bra_0","bra_1","cnae_0","cbo_0","hs_0","wld_0"]
             filters.forEach(function(filter){
               var type = filter.split("_")[0],
                   index = filter.split("_")[1]
@@ -689,7 +689,7 @@
                   .get(function(error,d){
 
                     d.edges.forEach(function(edge){
-                      if (["hs","isic"].indexOf(app.build.output) >= 0) {
+                      if (["hs","cnae"].indexOf(app.build.output) >= 0) {
                         edge.source = d.nodes[edge.source]
                         edge.target = d.nodes[edge.target]
                       }
@@ -867,7 +867,7 @@
             else if (ui.values.indexOf("val_usd") >= 0) var default_value = "val_usd"
             else if (ui.values.indexOf("num_emp") >= 0) var default_value = "num_emp"
             else var default_value = ui.values[0]
-          } 
+          }
           else if (ui.type == "depth") {
             var bra_id = app.build.bra[0].id
             if (app.build.output == "bra" && bra_id != "all") {
@@ -893,7 +893,7 @@
           }
           else if (ui.type == "rca_scope" && app.build.bra[0].id == "all" && app.build.output == "hs") {
             var default_value = "wld_rca"
-          } 
+          }
           else {
             var default_value = ui.values[0]
           }
@@ -906,18 +906,18 @@
           if((last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
             app.vars[ui.type] = default_value
           }
-			
+
           if (ui.values.length > 1 && app.vars.builder != "false"  && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs")) || (ui.type != "color_var"  && app.build.app.type != "stacked")) {
 			//&& (ui.type != "color_var" && app.build.app.type == "stacked")
             var leon_type = ui.values.length <= 4 ? "radio" : "select"
             var leon_data = {}
             ui.values.forEach(function(v){
-              if(!(v == "bra_rca" &&  app.build.bra[0].id == "all" &&  app.build.app.type == "network")) { 
+              if(!(v == "bra_rca" &&  app.build.bra[0].id == "all" &&  app.build.app.type == "network")) {
               	// If it is different of Type: network, Location: bra, Option: Domestic
               	leon_data[v] = dataviva.format.text(v)
               }
             })
-  
+
 			var ui_div = d3.select("#app_controls").append("div")
 			.attr("class","ui_group alt_tooltip")
 			.attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
@@ -928,7 +928,7 @@
 			.on(d3plus.evt.out,function(){
 			  dataviva.ui.tooltip("alt_tooltip",false)
 			})
-	
+
 			leon({
 			  "type": leon_type,
 			  "data": leon_data,
@@ -1031,7 +1031,7 @@
       if (app.build.app.type == "network") {
         if (app.build.bra[0].id == "all" && app.build.output != "hs") var av = "always_active"
         else if (app.build.output == "hs") var av = app.vars.rca_scope
-        else if (app.build.output == "isic") var av = "bra_rca"
+        else if (app.build.output == "cnae") var av = "bra_rca"
         else var av = "always_active"
         app.viz
           .links(app.networks[app.build.output].edges)
@@ -1044,7 +1044,7 @@
       /****************************/
       else if (app.build.app.type == "rings") {
         if (app.build.output == "hs") var av = app.vars.rca_scope
-        else if (app.build.output == "isic") var av = "bra_rca"
+        else if (app.build.output == "cnae") var av = "bra_rca"
         else var av = "always_active"
         app.viz
           .links(app.networks[app.build.output].edges)
@@ -1480,7 +1480,7 @@
       var exclusions = [
             "eci",
             "pci",
-            "unique_isic",
+            "unique_cnae",
             "unique_cbo",
             "none",
             "importance",
@@ -1571,7 +1571,7 @@
       title = title.removeAccents().split(" ").join("_")
 
       var form = document.getElementById("svgform");
-	 
+
       if(type == "csv"){
         form['data'].value = d3.tsv.formatRows(app.viz.csv_columns(columns).csv_data());
       }
@@ -1600,12 +1600,12 @@
 		  urlFile = data.response
 		})
 		.on("progress", function() {
-			
+
 	      var i = d3.interpolate(progress, d3.event.loaded / d3.event.position);
 	      var progress_txt = d3.select("#popover").select(".text").text()
-	      
+
 	      d3.select("#popover").select(".text").text(progress_txt + " (0%)")
-	      
+
 	      d3.transition().tween("progress", function() {
 	        return function(t) {
 	          progress = i(t);
@@ -1696,8 +1696,8 @@
 
         if (build.url == app.build.url) var c = "decision"
         else var c = "help"
-		
-		
+
+
         box.select("."+build.dataset).append("div")
           .attr("id",build.url)
           .attr("class","output "+c+" icon "+build.app.type)
@@ -1727,7 +1727,7 @@
       if (type == "bra") {
         var url_index = 2
       }
-      else if (["hs","isic"].indexOf(type) >= 0) {
+      else if (["hs","cnae"].indexOf(type) >= 0) {
         var url_index = 3
       }
       else {

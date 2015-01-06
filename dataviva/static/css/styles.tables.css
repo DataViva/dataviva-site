@@ -68,7 +68,7 @@ table td {
   padding: 9px;
 }
 
-table .id, table .bra_id, table .id_ibge, table .isic_id, table .cbo_id,
+table .id, table .bra_id, table .id_ibge, table .cnae_id, table .cbo_id,
 table .hs_id, table .wld_id, table .year, table .color, table .rank {
   text-align: center;
 }
@@ -175,7 +175,7 @@ table td {
 
 
 table .bra_diversity, table .bra_diversity_eff,
-table .isic_diversity, table .isic_diversity_eff,
+table .cnae_diversity, table .cnae_diversity_eff,
 table .cbo_diversity, table .cbo_diversity_eff,
 table .hs_diversity, table .hs_diversity_eff,
 table .wld_diversity, table .wld_diversity_eff {
@@ -195,7 +195,7 @@ table .population {
   width: 95px !important;
 }
 table .bra_id, table .id, table .id_ibge,
-table .isic_id, table .cbo_id,
+table .cnae_id, table .cbo_id,
 table .hs_id, table .wld_id, table.color {
   min-width: 70px !important;
   width: 70px !important;

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import json
-''' Translates the columns names 
+''' Translates the columns names
 '''
-def translate_columns(column, lang): 
-      
+def translate_columns(column, lang):
+
     jj = {
 
-      
+
       "compare": {"en": "Compare", "pt": "Comparar"},
       "occugrid": {"en": "Occugrid", "pt": "Ocupa\u00e7\u00f5es"},
       "geo_map": {"en": "Geo Map", "pt": "Mapa"},
@@ -16,7 +16,7 @@ def translate_columns(column, lang):
       "stacked": {"en": "Stacked", "pt": "Evolu\u00e7\u00e3o"},
       "tree_map": {"en": "Tree Map", "pt": "Tree Map"},
 
-      
+
       "axes": {"en": "Axes", "pt": "Eixos"},
       "axes_desc_compare": {"en": "Changes the X and Y variables used in the chart.", "pt": "Altera o vari\u00e1veis X e Y utilizadas no gr\u00e1fico."},
       "xaxis_var": {"en": "X Axis", "pt": "Eixo X"},
@@ -24,21 +24,21 @@ def translate_columns(column, lang):
       "yaxis_var": {"en": "Y Axis", "pt": "Eixo Y"},
       "yaxis_var_desc_scatter": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
 
-      
+
       "order": {"en": "Order", "pt": "Ordena\u00e7\u00e3o"},
       "order_desc_stacked": {"en": "Changes the ordering of the visible areas based on the selected sorting.", "pt": "Mudar a ordem das \u00e1reas vis\u00edveis com base na ordena\u00e7\u00e3o selecionada."},
       "asc": {"en": "Ascending", "pt": "Ascendente"},
       #"desc": {"en": "Descending", "pt": "Descendente"},
       "desc": {"en": "Description", "pt": "Descrição"},
-      
 
-      
+
+
       "layout": {"en": "Layout", "pt": "Layout"},
       "layout_desc_stacked": {"en": "Changes the X axis between value and market share.", "pt": "Mudar o eixo X entre o valor e participa\u00e7\u00e3o de mercado."},
       "value": {"en": "Value", "pt": "Valor"},
       "share": {"en": "Market Share", "pt": "Participa\u00e7\u00e3o de Mercado"},
 
-      
+
       "rca_scope": {"en": "RCA Scope", "pt": "Escopo do RCA"},
       "rca_scope_desc_network": {"en": "Changes which RCA variable is used when highlighting products in the app.", "pt": "Altera qual RCA ser\u00e1 utilizado para destacar produtos no app."},
       "rca_scope_desc_rings": {"en": "Changes which RCA variable is used when highlighting products in the app.", "pt": "Altera qual RCA ser\u00e1 utilizado para destacar produtos no app."},
@@ -46,13 +46,13 @@ def translate_columns(column, lang):
       "bra_rca": {"en": "Domestic", "pt": "Dom\u00e9stico"},
       "wld_rca": {"en": "International", "pt": "Internacional"},
 
-      
+
       "scale": {"en": "Scale", "pt": "Escala"},
       "scale_desc_compare": {"en": "Changes the mathematical scale used on both axes.", "pt": "Altera a escala matem\u00e1tica utilizada em ambos os eixos."},
       "log": {"en": "Log", "pt": "Log"},
       "linear": {"en": "Linear", "pt": "Linear"},
 
-      
+
       "spotlight": {"en": "Highlight RCA", "pt": "Real\u00e7ar RCA"},
       "spotlight_desc_network": {"en": "Removes coloring from nodes which do not have RCA.", "pt": "Remover cor dos n\u00f3s que n\u00e3o t\u00eam RCA."},
       "spotlight_scatter": {"en": "Hide RCA", "pt": "Esconder RCA"},
@@ -60,13 +60,13 @@ def translate_columns(column, lang):
       "true": {"en": "On", "pt": "Liga"},
       "false": {"en": "Off", "pt": "Desliga"},
 
-    
+
       "sorting": {"en": "Sort", "pt": "Ordenar"},
       "sort": {"en": "Sort", "pt": "Ordenar"},
       "sort_desc_stacked": {"en": "Changes the variable used to order the areas.", "pt": "Alterar a vari\u00e1vel usada para ordenar as \u00e1reas."},
       "sort_desc_occugrid": {"en": "Changes the variable used to order the donut charts.", "pt": "Alterar a vari\u00e1vel usada para ordenar os gr\u00e1ficos de rosca."},
 
-      
+
       "sizing": {"en": "Size", "pt": "Tamanho"},
       "sizing_desc_tree_map": {"en": "Changes the variable used to size the rectangles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos ret\u00e2ngulos."},
       "sizing_desc_stacked": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
@@ -75,7 +75,7 @@ def translate_columns(column, lang):
       "sizing_desc_occugrid": {"en": "Changes the variable used to size the circles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
       "sizing_desc_scatter": {"en": "Changes the variable used to size the circles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
 
-      
+
       "color_var": {"en": "Color", "pt": "Cor"},
       "color_var_desc_tree_map": {"en": "Changes the variable used to color the rectangles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os ret\u00e2ngulos."},
       "color_var_desc_stacked": {"en": "Changes the variable used to color the areas.", "pt": "Alterar a vari\u00e1vel utilizada para colorir as \u00e1reas."},
@@ -86,7 +86,7 @@ def translate_columns(column, lang):
       "color_var_desc_occugrid": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
       "color_var_desc_scatter": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
 
-      
+
       "active": {"en": "Available", "pt": "Dispon\u00edvel"},
       "available": {"en": "Available", "pt": "Dispon\u00edvel"},
       "not_available": {"en": "Not available", "pt": "N\u00e3o dispon\u00edvel"},
@@ -95,7 +95,7 @@ def translate_columns(column, lang):
       "none": {"en": "None", "pt": "Nenhum"},
       "year": {"en": "Year", "pt": "Ano"},
 
-      
+
       "depth": {"en": "Depth", "pt": "Agrega\u00e7\u00e3o"},
       "depth_desc_tree_map": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
       "depth_desc_stacked": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
@@ -115,10 +115,10 @@ def translate_columns(column, lang):
       "cbo_3": {"en": "Subgroup", "pt": "SubGrupo"},
       "cbo_4": {"en": "Family", "pt": "Fam\u00edlia"},
       "cbo_6": {"en": "Occupation", "pt": "Ocupa\u00e7\u00e3o"},
-      "isic_1": {"en": "Section", "pt": "Se\u00e7\u00e3o"},
-      "isic_3": {"en": "Division", "pt": "Divis\u00e3o"},
-      "isic_4": {"en": "Group", "pt": "Grupo"},
-      "isic_5": {"en": "Class", "pt": "Classe"},
+      "cnae_1": {"en": "Section", "pt": "Se\u00e7\u00e3o"},
+      "cnae_3": {"en": "Division", "pt": "Divis\u00e3o"},
+      "cnae_4": {"en": "Group", "pt": "Grupo"},
+      "cnae_6": {"en": "Class", "pt": "Classe"},
       "hs_2": {"en": "Section", "pt": "Se\u00e7\u00e3o"},
       "hs_4": {"en": "Chapter", "pt": "Cap\u00edtulo"},
       "hs_6": {"en": "Position", "pt": "Posi\u00e7\u00e3o"},
@@ -135,10 +135,10 @@ def translate_columns(column, lang):
       "cbo_3_plural": {"en": "Subgroups", "pt": "SubGrupos"},
       "cbo_4_plural": {"en": "Families", "pt": "Fam\u00edlias"},
       "cbo_6_plural": {"en": "Occupations", "pt": "Ocupa\u00e7\u00f5es"},
-      "isic_1_plural": {"en": "Sections", "pt": "Se\u00e7\u00f5es"},
-      "isic_3_plural": {"en": "Divisions", "pt": "Divis\u00f5es"},
-      "isic_4_plural": {"en": "Groups", "pt": "Grupos"},
-      "isic_5_plural": {"en": "Classes", "pt": "Classes"},
+      "cnae_1_plural": {"en": "Sections", "pt": "Se\u00e7\u00f5es"},
+      "cnae_3_plural": {"en": "Divisions", "pt": "Divis\u00f5es"},
+      "cnae_4_plural": {"en": "Groups", "pt": "Grupos"},
+      "cnae_6_plural": {"en": "Classes", "pt": "Classes"},
       "hs_2_plural": {"en": "Sections", "pt": "Se\u00e7\u00f5es"},
       "hs_4_plural": {"en": "Chapters", "pt": "Cap\u00edtulos"},
       "hs_6_plural": {"en": "Positions", "pt": "Posi\u00e7\u00f5es"},
@@ -146,7 +146,7 @@ def translate_columns(column, lang):
       "wld_2_plural": {"en": "Continents", "pt": "Continentes"},
       "wld_5_plural": {"en": "Countries", "pt": "Pa\u00edses"},
 
-     
+
       "eci": {"en": "Economic Complexity", "pt": "Complexidade Econ\u00f4mica"},
       "eci_desc": {"en": "Economic Complexity measures how diversified and complex a location’s export production is.", "pt": "Complexidade Econ\u00f4mica mede qu\u00e3o diversificada e complexa \u00e9 a produ\u00e7\u00e3o de exporta\u00e7\u00e3o de uma localidade."},
       "pci": {"en": "Product Complexity", "pt": "Complexidade do Produto"},
@@ -157,10 +157,10 @@ def translate_columns(column, lang):
       "bra_diversity_eff": {"en": "Effective Location Diversity", "pt": "Diversidade Efetiva de Localidades"},
       "bra_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "A diversidade de uma dada vari\u00e1vel corrigida pela participa\u00e7\u00e3o que cada unidade representa."},
 
-      "isic_diversity": {"en": "Industry Diversity", "pt": "Diversidade de Atividades"},
-      "isic_diversity_desc": {"en": "The number of unique 5-digit ISIC industries that are present for a given variable.", "pt": "O n\u00famero de atividades \u00fanicas de 5 d\u00edgitos ISIC que est\u00e3o presentes para uma dada vari\u00e1vel."},
-      "isic_diversity_eff": {"en": "Effective Industry Diversity", "pt": "Diversidade Efetiva de Atividades"},
-      "isic_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "A diversidade de uma dada vari\u00e1vel corrigida pela participa\u00e7\u00e3o que cada unidade representa."},
+      "cnae_diversity": {"en": "Industry Diversity", "pt": "Diversidade de Atividades"},
+      "cnae_diversity_desc": {"en": "The number of unique 5-digit CNAE industries that are present for a given variable.", "pt": "O n\u00famero de atividades \u00fanicas de 5 d\u00edgitos CNAE que est\u00e3o presentes para uma dada vari\u00e1vel."},
+      "cnae_diversity_eff": {"en": "Effective Industry Diversity", "pt": "Diversidade Efetiva de Atividades"},
+      "cnae_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "A diversidade de uma dada vari\u00e1vel corrigida pela participa\u00e7\u00e3o que cada unidade representa."},
 
       "cbo_diversity": {"en": "Occupation Diversity", "pt": "Diversidade de Ocupa\u00e7\u00f5es"},
       "cbo_diversity_desc": {"en": "The number of unique 4-digit CBO occupations that are present for a given variable.", "pt": "O n\u00famero de ocupa\u00e7\u00f5es \u00fanicas de 4 d\u00edgitos CBO que est\u00e3o presentes para uma dada vari\u00e1vel."},
@@ -211,7 +211,7 @@ def translate_columns(column, lang):
       "num_emp_growth_val": {"en": "Employee Growth (1 year)", "pt": "Crescimento do N\u00famero de Empregados (1 ano)"},
       "num_emp_growth_val_5": {"en": "Employee Growth (5 year)", "pt": "Crescimento do N\u00famero de Empregados (5 anos)"},
 
-      
+
       "rais": {"en": "Establishments and Employment (RAIS)", "pt": "Estabelecimentos e Emprego (RAIS)"},
       "num_emp": {"en": "Total Employees", "pt": "Total de Empregados"},
       "num_est": {"en": "Total Establishments", "pt": "Total de Estabelecimentos"},
@@ -221,12 +221,12 @@ def translate_columns(column, lang):
       "wage_avg": {"en": "Average Monthly Wage", "pt": "Renda Mensal M\u00e9dia"},
       "wage_avg_bra": {"en": "Brazilian Average Wage", "pt": "Sal\u00e1rio M\u00e9dio Brasileiro"},
 
-     
+
       "secex": {"en": "Product Exports (SECEX)", "pt": "Exporta\u00e7\u00f5es de Produtos (SECEX)"},
       "val_usd": {"en": "Exports", "pt": "Exporta\u00e7\u00f5es"},
       "total_val_usd": {"en": "Total Exports", "pt": "Total de Exporta\u00e7\u00f5es"},
 
-      
+
       "brazil": {"en": "Brazil", "pt": "Brasil"},
       "bra_id": {"en": "BRA ID", "pt": "ID BRA"},
       "category": {"en": "Sector", "pt": "Setor"},
@@ -237,7 +237,7 @@ def translate_columns(column, lang):
       "hs_id": {"en": "HS ID", "pt": "ID HS"},
       "id_ibge": {"en": "IBGE ID", "pt": "ID IBGE"},
       "id": {"en": "ID", "pt": "ID"},
-      "isic_id": {"en": "ISIC ID", "pt": "ID ISIC"},
+      "cnae_id": {"en": "CNAE ID", "pt": "ID CNAE"},
       "name": {"en": "Name", "pt": "Nome"},
       "name_en": {"en": "Name (English)", "pt": "Nome (Ingl\u00eas)"},
       "name_pt": {"en": "Name (Portuguese)", "pt": "Nome (Portugu\u00eas)"},
@@ -247,7 +247,7 @@ def translate_columns(column, lang):
       "id_mdic": {"en": "MDIC ID", "pt": "ID MDIC"},
       "rank": {"en": " ", "pt": " "},
 
-     
+
       "bra": {"en": "Location", "pt": "Localidade"},
       "bra_plural": {"en": "Locations", "pt": "Localidades"},
       "cbo": {"en": "Occupation", "pt": "Ocupa\u00e7\u00e3o"},
@@ -255,18 +255,18 @@ def translate_columns(column, lang):
       "hs": {"en": "Product Export", "pt": "Produto Exportado"},
       "hs_plural": {"en": "Product Exports", "pt": "Produtos Exportados"},
       "icon": {"en": "Icon", "pt": "\u00cdcone"},
-      "isic": {"en": "Industry", "pt": "Atividade Econ\u00f4mica"},
-      "isic_plural": {"en": "Industries", "pt": "Atividades Econ\u00f4micas"},
+      "cnae": {"en": "Industry", "pt": "Atividade Econ\u00f4mica"},
+      "cnae_plural": {"en": "Industries", "pt": "Atividades Econ\u00f4micas"},
       "wld": {"en": "Export Destination", "pt": "Destino das Exporta\u00e7\u00f5es"},
       "wld_plural": {"en": "Export Destinations", "pt": "Destinos das Exporta\u00e7\u00f5es"},
 
       "bra_add": {"en": "add a location", "pt": "adicionar uma localidade"},
       "cbo_add": {"en": "add an occupation", "pt": "adicionar uma ocupa\u00e7\u00e3o"},
       "hs_add": {"en": "add a product", "pt": "adicionar um produto"},
-      "isic_add": {"en": "add an industry", "pt": "adicionar uma atividade econ\u00f4mica"},
+      "cnae_add": {"en": "add an industry", "pt": "adicionar uma atividade econ\u00f4mica"},
       "wld_add": {"en": "add an export destination", "pt": "adicionar um destino das exporta\u00e7\u00f5es"},
 
-      
+
       "download": {"en": "Download", "pt": "Download"},
       "download_desc": {"en": "Choose from the following file types:", "pt": "Escolha um dos seguintes tipos de arquivo:"},
       "csv": {"en": "Save as CSV", "pt": "Salvar como CSV"},
@@ -278,7 +278,7 @@ def translate_columns(column, lang):
       "svg": {"en": "Save as SVG", "pt": "Salvar como SVG"},
       "svg_desc": {"en": "A vector-based file that can be resized without worrying about pixel resolution.", "pt": "Um arquivo com base em vetor que pode ser redimensionado sem se preocupar com pixel de resolu\u00e7\u00e3o."},
 
-      
+
       "basics": {"en": "Basic Values", "pt": "Valores B\u00e1sicos"},
       "growth": {"en": "Growth", "pt": "Crescimento"},
       "calculations": {"en": "Strategic Indicators", "pt": "Indicadores Estrat\u00e9gicos"},
@@ -303,7 +303,7 @@ def translate_columns(column, lang):
       "secex_2": {"en": "Based on State Production", "pt": "Baseado nos Estados Produtores"},
       "secex_8": {"en": "Based on the Exporting Municipality", "pt": "Baseado nos Municípios Exportadores"},
 
-     
+
       "Click for More Info": {"en": "Click for more data and related apps.", "pt": "Clique para dados adicionais e aplicativos relacionados."},
       "Click to Zoom": {"en": "Click to Zoom", "pt": "Clique para Ampliar"},
       "filter": {"en": "Hide Group", "pt": "Ocultar Grupo"},
@@ -313,7 +313,7 @@ def translate_columns(column, lang):
       "No Data Available": {"en": "No Data Available", "pt": "N\u00e3o h\u00e1 dados dispon\u00edveis"},
       "No Connections Available": {"en": "No Connections Available", "pt": "N\u00e3o h\u00e1 conex\u00f5es dispon\u00edveis"},
 
-    
+
       "Asked": {"en": "Asked", "pt": "Perguntado"},
       "by": {"en": "by", "pt": "por"},
       "point": {"en": "Point", "pt": "Ponto"},
@@ -329,7 +329,7 @@ def translate_columns(column, lang):
       "voted": {"en": "Your vote has been added.", "pt": "Seu voto foi enviado."},
       "unvoted": {"en": "Your vote was removed.", "pt": "Seu voto foi removido."},
 
-      
+
       "edit": {"en": "Edit", "pt": "Editar"},
       "visible": {"en": "Visible", "pt": "Vis\u00edvel"},
       "hidden": {"en": "Hidden", "pt": "Oculto"},
@@ -350,7 +350,7 @@ def translate_columns(column, lang):
       "Municipalities within": {"en": "Municipalities within", "pt": "Munic\u00edpios dentro de"},
       "No municipalities within that distance.": {"en": "No municipalities within that distance.", "pt": "N\u00e3o existem munic\u00edpios dentro desta dist\u00e2ncia."},
       "Including": {"en": "Including", "pt": "Incluindo"},
-      
+
       "article_pt": {"en": "Portuguese content", "pt": "Conteúdo em português"},
       "gender_pt": {"en": "Gender", "pt": "Gênero"},
       "gender": {"en": "Gender", "pt": "Gênero"},
@@ -365,11 +365,11 @@ def translate_columns(column, lang):
       "id_mdic": {"en": "MDIC ID", "pt": "ID MDIC"},
       "id_num": {"en": "NUM ID", "pt": "ID NUM"},
       "plr": {"en": "plr", "pt": "plr"},
-      
-      
-      
-    } 
-    
+
+
+
+    }
+
     if column in jj:
         return jj[column][lang]
     else:

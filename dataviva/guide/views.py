@@ -7,7 +7,7 @@ from werkzeug import urls
 
 from dataviva import db, view_cache
 from dataviva.utils.title_case import title_case
-from dataviva.attrs.models import Bra, Isic, Cbo, Hs, Wld
+from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld
 from dataviva.rais import models as rais
 from dataviva.secex import models as secex
 
@@ -47,13 +47,13 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
 
     depths = {
         "bra": [2,3,4,7,8],
-        "isic": [1,5],
+        "cnae": [1,6],
         "cbo": [1,4],
         "hs": [2,6],
         "wld": [2,5],
         "industry": []
     }
-    
+
     if category not in depths and category:
         abort(404)
 
@@ -64,7 +64,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
         else:
             category_type = "<{0}.{1}>".format(category,len(category_id))
 
-        if option_id == "isic" or option_id == "hs":
+        if option_id == "cnae" or option_id == "hs":
             option_type = option_id
         elif option_id and option_id != "all":
             option_type = "<bra.{0}>".format(len(option_id))
@@ -124,7 +124,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
             page = "guide/choice.html"
         elif category == "bra":
             page = "guide/industry.html"
-        elif category == "hs" or category == "isic" and option == "potential":
+        elif category == "hs" or category == "cnae" and option == "potential":
             selector = "bra"
             page = "guide/choice.html"
 
@@ -147,10 +147,10 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
 
     elif category == "industry":
         page = "guide/industry.html"
-        
+
     elif category == "locate":
         page = "guide/index.html"
-        
+
     elif category:
         page = "guide/choice.html"
 
@@ -159,7 +159,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
 
     if selector == "cbo":
         article = gettext(u"an occupation")
-    elif selector == "isic":
+    elif selector == "cnae":
         article = gettext(u"an industry")
     elif selector == "hs":
         article = gettext(u"a product")
@@ -174,7 +174,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
             crumb_title = gettext(u"Career")
         elif category == "industry":
             crumb_title = gettext(u"Industry")
-        elif category == "isic":
+        elif category == "cnae":
             crumb_title = gettext(u"Establishments and Employment")
         elif category == "hs":
             crumb_title = gettext(u"Product Exports")
@@ -183,8 +183,8 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
 
         url += "{0}/".format(category)
         crumbs.append({"url": url, "text": crumb_title})
-       
-        
+
+
         if category_id:
             url += "{0}/".format(category_id)
 
@@ -204,7 +204,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
 
             if option:
                 url += "{0}/".format(option)
-                if option == "isic":
+                if option == "cnae":
                     crumb_title = gettext(u"Establishments and Employment")
                 elif option == "hs":
                     crumb_title = gettext(u"Product Exports")
@@ -214,7 +214,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
 
                 if option_id:
                     url += "{0}/".format(option_id)
-                    if option_id == "isic":
+                    if option_id == "cnae":
                         crumb_title = gettext(u"Establishments and Employment")
                     elif option_id == "hs":
                         crumb_title = gettext(u"Product Exports")
@@ -232,8 +232,8 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
                             crumb_title = Hs.query.get(extra_id).name()
                             c_i = Hs.query.get(extra_id)
                             color_icon = c_i.color
-                        if option_id == "isic":
-                            c_i = Isic.query.get(extra_id)
+                        if option_id == "cnae":
+                            c_i = Cnae.query.get(extra_id)
                             if c_i.name:
                                 crumb_title = c_i.name
                                 color_icon = c_i.color
@@ -243,42 +243,42 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
                         crumbs.append({"url": url, "text": crumb_title})
 
         crumbs[len(crumbs)-1]["current"] = True
-        
+
         if extra_id:
              idItem = extra_id
         else:
              idItem = 'all'
-        
-        
+
+
         if option_id and option_id != 'all':
             idOption = option_id
         else:
             idOption = category
-                
-        
-        if category == 'cbo' or category == 'isic':
+
+
+        if category == 'cbo' or category == 'cnae':
             idOption = category
             if category_id:
                 idItem = category_id[0:1]
-        
-        
-        if option == 'attract' and option_id == 'isic':
+
+
+        if option == 'attract' and option_id == 'cnae':
              idItem = extra_id[0:1]
-               
+
         if option == 'attract' and option_id == 'hs':
             idItem = extra_id[0:2]
-        
 
-        if option == 'workforce' and category == 'bra': 
+
+        if option == 'workforce' and category == 'bra':
             idOption = 'cbo'
             idItem = 'all'
-        
-        
-        if (option == 'isic' or option == 'hs') and category == 'bra': 
+
+
+        if (option == 'cnae' or option == 'hs') and category == 'bra':
             idOption = option
             idItem = 'all'
-                
-        if (option == 'potential' or option == 'diversification' or option == 'destinations') and category == 'hs': 
+
+        if (option == 'potential' or option == 'diversification' or option == 'destinations') and category == 'hs':
             idOption = 'hs'
             idItem = category_id[0:2]
 

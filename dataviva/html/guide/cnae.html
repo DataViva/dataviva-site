@@ -3,20 +3,20 @@
 {% block title %}: {% trans %}Generate a Guide{% endtrans %}{% endblock %}
 
 {% block body %}
-  
+
   <div class="darkbox">
     <h1>{{ _('What would you like to know about %(name)s?', name = item) }}</h1>
   </div>
   <br>
-  
+
   <a class="decision icon square workforce" href="{{g.path}}workforce/">
     {% autoescape false %}
     {{ _('Who do they %(word)s?', word = '<b>%s</b>' % (_('employ'))) }}
     {% endautoescape %}
   </a>
-  
+
   {% if group == "child" %}
-  
+
     <a class="decision icon square diversification" href="{{g.path}}diversification/">
       {% autoescape false %}
       {{ _('Which industries %(word)s with them?', word = '<b>%s</b>' % (_('co-locate'))) }}
@@ -25,7 +25,7 @@
 
   {% endif %}
 
-  <a class="decision icon square isic" href="{{g.path}}locate/">
+  <a class="decision icon square cnae" href="{{g.path}}locate/">
     {% autoescape false %}
     {{ _('Where do they %(word)s?', word = '<b>%s</b>' % (_('locate'))) }}
     {% endautoescape %}

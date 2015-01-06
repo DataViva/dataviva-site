@@ -3,7 +3,7 @@
 {% block title %}: {% trans %}Generate a Guide{% endtrans %}{% endblock %}
 
 {% block body %}
-  
+
   {% if category_id == "all" %}
 
     <div class="darkbox">
@@ -23,12 +23,12 @@
     </a>
 
   {% else %}
-  
+
     <div class="darkbox">
       <h1>{{ _('What would you like to know about %(name)s?', name = item) }}</h1>
     </div>
     <br>
-    <a class="decision icon square isic" href="{{g.path}}isic/">
+    <a class="decision icon square cnae" href="{{g.path}}cnae/">
       {% autoescape false %}
       {{ _('Which %(word)s employ them?', word = '<b>%s</b>' % (_('industries'))) }}
       {% endautoescape %}
@@ -39,7 +39,7 @@
       {{ _('Where is their employement %(word)s?', word = '<b>%s</b>' % (_('growing the fastest'))) }}
       {% endautoescape %}
     </a>
-  
+
     {% if group == "child" %}
 
       <a class="decision icon square paths" href="{{g.path}}paths/">
@@ -47,7 +47,7 @@
         {{ _('What are their %(word)s?', word = '<b>%s</b>' % (_('career alternatives'))) }}
         {% endautoescape %}
       </a>
-  
+
     {% endif %}
 
   {% endif %}

@@ -12,27 +12,27 @@
 {% block body %}
 
   <div id="rankings_nav">
-    
+
       <a class="{% if type == 'bra' %}decision{% else %}help{% endif %} icon bra" href="/rankings/2012/bra/2/">
         {% trans %}Brazilian Locations{% endtrans %}
       </a>
-    
-      <a class="{% if type == 'isic' %}decision{% else %}help{% endif %} icon isic" href="/rankings/2012/isic/5/">
+
+      <a class="{% if type == 'cnae' %}decision{% else %}help{% endif %} icon cnae" href="/rankings/2012/cnae/6/">
         {% trans %}Industries{% endtrans %}
       </a>
-    
+
       <a class="{% if type == 'cbo' %}decision{% else %}help{% endif %} icon cbo" href="/rankings/2012/cbo/4/">
         {% trans %}Occupations{% endtrans %}
       </a>
-    
+
       <a class="{% if type == 'hs' %}decision{% else %}help{% endif %} icon hs" href="/rankings/2012/hs/6/">
         {% trans %}Products{% endtrans %}
       </a>
-    
+
       <a class="{% if type == 'wld' %}decision{% else %}help{% endif %} icon wld" href="/rankings/2012/wld/5/">
         {% trans %}Export Destinations{% endtrans %}
       </a>
-    
+
   </div>
 
   <div id="rankings_table" class="grid5col3 lightbox">
@@ -62,34 +62,34 @@
 {% block js %}
 
   <script>
-  
+
     if (Modernizr.touch) {
       d3.select("#iframe").style("overflow","auto")
         .style("-webkit-overflow-scrolling","touch")
     }
-    
+
     leon("$depth").color(dataviva.color)
     leon("#year_select").color(dataviva.color)
     var depth = "{{depth}}", year = "{{year}}", type = "{{type}}", order = "{{order}}"
-    
+
     function update_table() {
       var url = year+"/"+type+"/"+depth+"/?order="+order
       d3.select("iframe").attr("src","/rankings/table/"+url)
       dataviva.url("/rankings/"+url)
     }
-    
+
     function change_depth(d) {
       depth = d
       update_table()
     }
-    
+
     function change_year(y) {
       year = y
       update_table()
     }
-    
+
     var last_w = 500, last_h = 200-49
-    
+
     function iframe_size(w,h) {
       if (!w) w = last_w
       if (!h) h = last_h
@@ -116,11 +116,11 @@
           return h < allowed ? h+"px" : allowed+"px"
         })
     }
-    
+
     dataviva.resize = iframe_size
-    
+
     update_table()
-    
+
   </script>
 
 {% endblock %}

@@ -3,14 +3,14 @@
 {% block title %}: {% trans %}Industry{% endtrans %}{% endblock %}
 
 {% block body %}
-  
+
   <div class="darkbox"><h1>{% trans %}What are you interested in?{% endtrans %}</h1></div>
   <br>
   <a id="hs" class="decision icon square hs" onclick="linker(this.id)">
     {% trans %}Product Exports{% endtrans %}
   </a>
 
-  <a id="isic" class="decision icon square isic" onclick="linker(this.id)">
+  <a id="cnae" class="decision icon square cnae" onclick="linker(this.id)">
     {% trans %}Establishments and Employment{% endtrans %}
   </a>
 
@@ -19,7 +19,7 @@
 {% block js %}
 
   <script>
-  
+
     path = "{{g.path}}".split("/")
 
     function linker(id) {
@@ -36,7 +36,7 @@
       }
       window.location = new_url
     }
-  
+
   </script>
 
 {% endblock %}

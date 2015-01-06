@@ -149,8 +149,8 @@
   background-image: url("/static/img/icons/bra/bra_all_alt.png");
 }
 
-.decision.icon.isic:before {
-  background-image: url("/static/img/icons/isic/isic_all.png");
+.decision.icon.cnae:before {
+  background-image: url("/static/img/icons/cnae/cnae_all.png");
 }
 
 .decision.icon.hs:before {
@@ -170,8 +170,8 @@
   opacity: 0.2;
 }
 
-.help.icon.isic:before {
-  background-image: url("/static/img/icons/isic/isic_all_black.png");
+.help.icon.cnae:before {
+  background-image: url("/static/img/icons/cnae/cnae_all_black.png");
   opacity: 0.2;
 }
 

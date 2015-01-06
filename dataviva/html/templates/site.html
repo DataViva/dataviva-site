@@ -270,7 +270,7 @@
 	      .send("GET", '', function(error, text) {
 
           var litems = ""
-            , type_curr = "", $ct_bra = 1, $ct_cbo = 1, $ct_isic = 1, $ct_hs = 1, $ct_wld = 1;
+            , type_curr = "", $ct_bra = 1, $ct_cbo = 1, $ct_cnae = 1, $ct_hs = 1, $ct_wld = 1;
 
 
           if (!error) {
@@ -325,11 +325,11 @@
 				    }
 				}
 
-				if (item.content_type === "isic") {
-				    if ($ct_isic < 6) {
-				        type = "isic_" + item.id.length
+				if (item.content_type === "cnae") {
+				    if ($ct_cnae < 6) {
+				        type = "cnae_" + item.id.length
 				        icon = item.id;
-				        $ct_isic++;
+				        $ct_cnae++;
 				    } else {
 				        exclude = true
 				    }

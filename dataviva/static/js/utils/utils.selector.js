@@ -731,13 +731,15 @@ function Selector() {
             show_selectButton = true;
 
 		    if(current_app == "rings"){
-		    	if(v.id.length <= 5 &&  type == "hs") {
+		    	if(v.id.length <= 6 && type == "hs") {
 			    	show_selectButton = false;
 			    	//Commented on 2014-07-11 for further analisys
-		    	} else if(v.id.length < 5 &&  type == "isic") {
+		    	}
+          else if(v.id.length < 6 && type == "cnae") {
 			    	show_selectButton = false;
 			    	//Commented on 2014-07-11 for further analisys
-		    	} else if(v.id.length < 4 &&  type == "cbo") {
+		    	}
+          else if(v.id.length < 4 && type == "cbo") {
 			    	show_selectButton = false;
 			    	//Commented on 2014-07-11 for further analisys
 		    	}
@@ -854,7 +856,7 @@ function Selector() {
             "hs": "val_usd",
             "wld": "val_usd",
             "cbo": "num_emp",
-            "isic": "num_emp",
+            "cnae": "num_emp",
           },
           value = sort_types[type] ? sort_types[type] : null,
           sorts = ["name"]

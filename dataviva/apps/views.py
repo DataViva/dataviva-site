@@ -10,7 +10,7 @@ from flask.ext.babel import gettext
 from dataviva import db, datavivadir, view_cache
 from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
-from dataviva.attrs.models import Bra, Isic, Hs, Cbo, Wld
+from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld
 from dataviva.apps.models import Build, UI, App
 from dataviva.general.models import Short
 
@@ -62,15 +62,15 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             ret.headers['Content-Length'] = str(len(ret.data))
             return ret
     '''Since the "builds" are held in the database with placeholders for
-    attributes i.e. <cbo>, <hs>, <isic> we need to convert the IDs given
+    attributes i.e. <cbo>, <hs>, <cnae> we need to convert the IDs given
     in the URL to these placeholders. i.e.
-         - a0111    = <isic>
+         - a0111    = <cnae>
          - 010101   = <hs>
          - all      = all
     '''
     build_filter1 = filter1
     if dataset == "rais" and build_filter1 != "all":
-        build_filter1 = "<isic>"
+        build_filter1 = "<cnae>"
     if dataset == "secex" and build_filter1 != "all":
         build_filter1 = "<hs>"
 
@@ -89,12 +89,12 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     current_build.set_filter2(filter2)
     current_build.set_bra(bra_id)
 
-    
+
     '''Get the recommended app list to pass with data'''
     filler_bra = bra_id
     filler1 = filter1
     filler2 = filter2
-    if output == "isic" or output == "hs":
+    if output == "cnae" or output == "hs":
         filler1 = "filler"
     elif output == "cbo" or output == "wld":
         filler2 = "filler"
@@ -103,9 +103,9 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
 
     recs = recommend(app_name=app_name, dataset=dataset, bra_id=filler_bra, \
                         filter1=filler1, filter2=filler2, output=output)
-    
-    
-    
+
+
+
     '''Every possible build, required by the embed page for building the build
     dropdown.
     '''
@@ -129,9 +129,9 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
         starred = 1 if is_starred else -1
 
     '''Get the actual data for the current build'''
-    # view_data = rais_ybi(bra_id='sp', isic_id='a0112').data
+    # view_data = rais_ybi(bra_id='sp', cnae_id='a0112').data
     # app.url_map.bind('/').match('/attrs/wld/nausa/')
-    
+
     if request.is_xhr:
         ret = jsonify({
             "current_build": current_build.serialize(),
@@ -153,7 +153,7 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             global_vars = json.dumps(global_vars),
             facebook_id = FACEBOOK_OAUTH_ID))
 
-   
+
 
     ret.headers.add('Last-Modified', datetime.now())
     ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
@@ -206,16 +206,16 @@ def recommend(app_name=None, dataset=None, bra_id="mg", filter1=None, filter2=No
     recommended = {}
 
     '''Since the "builds" are held in the database with placeholders for
-    attributes i.e. <cbo>, <hs>, <isic> we need to convert the IDs given
+    attributes i.e. <cbo>, <hs>, <cnae> we need to convert the IDs given
     in the URL to these placeholders. i.e.
-         - a0111    = <isic>
+         - a0111    = <cnae>
          - 010101   = <hs>
          - all      = all
     '''
     build_filter1 = filter1
     item_id = bra_id
     if dataset == "rais" and build_filter1 != "all":
-        build_filter1 = "<isic>"
+        build_filter1 = "<cnae>"
     if dataset == "secex" and build_filter1 != "all":
         build_filter1 = "<hs>"
 
@@ -264,7 +264,7 @@ def recommend(app_name=None, dataset=None, bra_id="mg", filter1=None, filter2=No
                     b.set_filter1(filter1)
                 # Municipalities are not allowed to have other municipality within it - Github #141
                 if b.output == "bra" and len(item_id) > 2:
-                    continue 
+                    continue
                 recommended['filter1'].append(b.serialize())
 
         '''Lastly get the rest of the relevent builds'''
@@ -275,8 +275,8 @@ def recommend(app_name=None, dataset=None, bra_id="mg", filter1=None, filter2=No
                 if bra_id != "filler":
                     b.set_bra(bra_id)
                 recommended['no_filters'].append(b.serialize())
-    
- 
+
+
     return jsonify(recommended)
 
 def get_geo_location(ip):
@@ -338,7 +338,7 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
 @mod.route('/download/', methods=['GET', 'POST'])
 def download():
     import tempfile, subprocess, random
-    
+
     form = DownloadForm()
     data = form.data.data
     format = form.output_format.data
@@ -346,8 +346,8 @@ def download():
     downloadToken = form.downloadToken.data
     filenameDownload = title+"-"+downloadToken
 
-    
-    
+
+
     if format == "png":
         mimetype='image/png'
     elif format == "pdf":
@@ -358,11 +358,11 @@ def download():
         mimetype="text/csv;charset=UTF-16"
     elif format == "url2csv":
         mimetype="text/csv;charset=UTF-16"
-        
+
     def getRows(data):
         # ?? this totally depends on what's in your data
         return []
-      
+
     if format == "png" or format == "pdf":
         temp = tempfile.NamedTemporaryFile()
         temp.write(data.encode("utf-16"))
@@ -375,10 +375,10 @@ def download():
     elif format == "url2csv":
         urrll = data
         format = "csv"
-        
+
         lang = request.args.get('lang', None) or g.locale
         txdata = None
-        txheaders = {   
+        txheaders = {
             'User-Agent': 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)',
             'Accept-Language': lang,
             'encoding': 'UTF-8',
@@ -390,31 +390,31 @@ def download():
         reqq = urllib2.Request(data, txdata, txheaders)
         reqq.add_header('Accept-encoding', 'gzip')
         req = urllib2.urlopen(reqq)
-        
+
         if req.info().get('Content-Encoding') == 'gzip':
             buf = StringIO(req.read())
             f = gzip.GzipFile(fileobj=buf)
             data = f.read()
         else:
             data = req.read()
-            
+
         data = json.loads(str(data))
-        
+
         cvs = ""
         i = 0
         lineArray = []
         linesArray = []
         headerArray = []
         checkHeader = []
-        
-        
+
+
         for item in data['data']:
             for cabecalho in item:
                 if cabecalho not in checkHeader:
                    checkHeader.append(cabecalho)
                    translation = translate_columns(cabecalho, lang)
                    headerArray.append(unicode(translation,'utf-8'))
-        
+
         for item in data['data']:
             print item
             lineArray = []
@@ -426,35 +426,35 @@ def download():
                         lineArray.append(str(item[header]))
                 else:
                     lineArray.append("")
-     
+
             linesArray.append('\t'.join(lineArray))
             i = 1
         cvs = '\t'.join(headerArray) + '\n' + '\n'.join(linesArray)
         response_data = cvs.encode("utf-16", 'ignore')
-        
+
     else:
         response_data = data.encode("utf-16")
         #print response_data
-    
-    
+
+
     content_disposition = "attachment;filename=%s.%s" % (title, format)
     content_disposition = content_disposition.replace(",", "_")
-    
+
     download_file = make_response(Response(response_data,
                        mimetype=mimetype,
                         headers={"Content-Disposition": content_disposition}))
-    
+
     with open(os.path.join(basedir, "dataviva/static/downloads/"+title+"."+format),"wb") as fo:
         fo.write(response_data)
-    
+
     zf = zipfile.ZipFile(os.path.join(basedir, "dataviva/static/downloads/"+filenameDownload+".zip"), mode='w')
     try:
         zf.write(os.path.join(basedir, "dataviva/static/downloads/"+title+"."+format), title+"."+format)
     finally:
         zf.close()
-    
+
     os.remove(os.path.join(basedir, "dataviva/static/downloads/"+title+"."+format))
-        
+
     return "/static/downloads/"+filenameDownload+".zip"
 
 
@@ -471,7 +471,7 @@ def coords(id="all"):
     else:
         fileext=""
         filetype="json"
-        
+
     if id == "all":
         file_name = "bra_states.json"+fileext
     else:

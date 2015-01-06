@@ -33,7 +33,7 @@ dataviva.format.text = function(text,name,l) {
     else return format_name("top") + " " + format_name(x)
   }
 
-  var exceptions = ["id","cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
+  var exceptions = ["id","cbo_id","cnae_id","wld_id","hs_id","bra_id","id_ibge"]
 
   if (exceptions.indexOf(name) >= 0) return text.toUpperCase()
   else if (text.indexOf("cp_bra_") == 0 && app) {
@@ -160,10 +160,10 @@ dataviva.format.text = function(text,name,l) {
       "cbo_3": {"en": "Subgroup", "pt": "SubGrupo"},
       "cbo_4": {"en": "Family", "pt": "Fam\u00edlia"},
       "cbo_6": {"en": "Occupation", "pt": "Ocupa\u00e7\u00e3o"},
-      "isic_1": {"en": "Section", "pt": "Se\u00e7\u00e3o"},
-      "isic_3": {"en": "Division", "pt": "Divis\u00e3o"},
-      "isic_4": {"en": "Group", "pt": "Grupo"},
-      "isic_5": {"en": "Class", "pt": "Classe"},
+      "cnae_1": {"en": "Section", "pt": "Se\u00e7\u00e3o"},
+      "cnae_3": {"en": "Division", "pt": "Divis\u00e3o"},
+      "cnae_4": {"en": "Group", "pt": "Grupo"},
+      "cnae_6": {"en": "Class", "pt": "Classe"},
       "hs_2": {"en": "Section", "pt": "Se\u00e7\u00e3o"},
       "hs_4": {"en": "Chapter", "pt": "Cap\u00edtulo"},
       "hs_6": {"en": "Position", "pt": "Posi\u00e7\u00e3o"},
@@ -180,10 +180,10 @@ dataviva.format.text = function(text,name,l) {
       "cbo_3_plural": {"en": "Subgroups", "pt": "SubGrupos"},
       "cbo_4_plural": {"en": "Families", "pt": "Fam\u00edlias"},
       "cbo_6_plural": {"en": "Occupations", "pt": "Ocupa\u00e7\u00f5es"},
-      "isic_1_plural": {"en": "Sections", "pt": "Se\u00e7\u00f5es"},
-      "isic_3_plural": {"en": "Divisions", "pt": "Divis\u00f5es"},
-      "isic_4_plural": {"en": "Groups", "pt": "Grupos"},
-      "isic_5_plural": {"en": "Classes", "pt": "Classes"},
+      "cnae_1_plural": {"en": "Sections", "pt": "Se\u00e7\u00f5es"},
+      "cnae_3_plural": {"en": "Divisions", "pt": "Divis\u00f5es"},
+      "cnae_4_plural": {"en": "Groups", "pt": "Grupos"},
+      "cnae_6_plural": {"en": "Classes", "pt": "Classes"},
       "hs_2_plural": {"en": "Sections", "pt": "Se\u00e7\u00f5es"},
       "hs_4_plural": {"en": "Chapters", "pt": "Cap\u00edtulos"},
       "hs_6_plural": {"en": "Positions", "pt": "Posi\u00e7\u00f5es"},
@@ -202,10 +202,10 @@ dataviva.format.text = function(text,name,l) {
       "bra_diversity_eff": {"en": "Effective Location Diversity", "pt": "Diversidade Efetiva de Localidades"},
       "bra_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "A diversidade de uma dada vari\u00e1vel corrigida pela participa\u00e7\u00e3o que cada unidade representa."},
 
-      "isic_diversity": {"en": "Industry Diversity", "pt": "Diversidade de Atividades"},
-      "isic_diversity_desc": {"en": "The number of unique 5-digit ISIC industries that are present for a given variable.", "pt": "O n\u00famero de atividades \u00fanicas de 5 d\u00edgitos ISIC que est\u00e3o presentes para uma dada vari\u00e1vel."},
-      "isic_diversity_eff": {"en": "Effective Industry Diversity", "pt": "Diversidade Efetiva de Atividades"},
-      "isic_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "A diversidade de uma dada vari\u00e1vel corrigida pela participa\u00e7\u00e3o que cada unidade representa."},
+      "cnae_diversity": {"en": "Industry Diversity", "pt": "Diversidade de Atividades"},
+      "cnae_diversity_desc": {"en": "The number of unique 6-digit CNAE industries that are present for a given variable.", "pt": "O n\u00famero de atividades \u00fanicas de 5 d\u00edgitos CNAE que est\u00e3o presentes para uma dada vari\u00e1vel."},
+      "cnae_diversity_eff": {"en": "Effective Industry Diversity", "pt": "Diversidade Efetiva de Atividades"},
+      "cnae_diversity_eff_desc": {"en": "The diversity of a given variable corrected for the share that each unit represents.", "pt": "A diversidade de uma dada vari\u00e1vel corrigida pela participa\u00e7\u00e3o que cada unidade representa."},
 
       "cbo_diversity": {"en": "Occupation Diversity", "pt": "Diversidade de Ocupa\u00e7\u00f5es"},
       "cbo_diversity_desc": {"en": "The number of unique 4-digit CBO occupations that are present for a given variable.", "pt": "O n\u00famero de ocupa\u00e7\u00f5es \u00fanicas de 4 d\u00edgitos CBO que est\u00e3o presentes para uma dada vari\u00e1vel."},
@@ -281,7 +281,7 @@ dataviva.format.text = function(text,name,l) {
       "hs_id": {"en": "HS ID", "pt": "ID HS"},
       "id_ibge": {"en": "IBGE ID", "pt": "ID IBGE"},
       "id": {"en": "ID", "pt": "ID"},
-      "isic_id": {"en": "ISIC ID", "pt": "ID ISIC"},
+      "cnae_id": {"en": "CNAE ID", "pt": "ID CNAE"},
       "name": {"en": "Name", "pt": "Nome"},
       "name_en": {"en": "Name (English)", "pt": "Nome (Ingl\u00eas)"},
       "name_pt": {"en": "Name (Portuguese)", "pt": "Nome (Portugu\u00eas)"},
@@ -299,15 +299,15 @@ dataviva.format.text = function(text,name,l) {
       "hs": {"en": "Product Export", "pt": "Produto Exportado"},
       "hs_plural": {"en": "Product Exports", "pt": "Produtos Exportados"},
       "icon": {"en": "Icon", "pt": "\u00cdcone"},
-      "isic": {"en": "Industry", "pt": "Atividade Econ\u00f4mica"},
-      "isic_plural": {"en": "Industries", "pt": "Atividades Econ\u00f4micas"},
+      "cnae": {"en": "Industry", "pt": "Atividade Econ\u00f4mica"},
+      "cnae_plural": {"en": "Industries", "pt": "Atividades Econ\u00f4micas"},
       "wld": {"en": "Export Destination", "pt": "Destino das Exporta\u00e7\u00f5es"},
       "wld_plural": {"en": "Export Destinations", "pt": "Destinos das Exporta\u00e7\u00f5es"},
 
       "bra_add": {"en": "add a location", "pt": "adicionar uma localidade"},
       "cbo_add": {"en": "add an occupation", "pt": "adicionar uma ocupa\u00e7\u00e3o"},
       "hs_add": {"en": "add a product", "pt": "adicionar um produto"},
-      "isic_add": {"en": "add an industry", "pt": "adicionar uma atividade econ\u00f4mica"},
+      "cnae_add": {"en": "add an industry", "pt": "adicionar uma atividade econ\u00f4mica"},
       "wld_add": {"en": "add an export destination", "pt": "adicionar um destino das exporta\u00e7\u00f5es"},
 
       // File Types
@@ -438,9 +438,9 @@ dataviva.format.number = function(value,name,l) {
 
   if (name.indexOf("_growth_pct") >= 0) value = value * 100
 
-  var smalls = ["rca","rca_bra","rca_wld","distance","eci","pci","bra_diversity_eff","isic_diversity_eff","cbo_diversity_eff","hs_diversity_eff","wld_diversity_eff"]
+  var smalls = ["rca","rca_bra","rca_wld","distance","eci","pci","bra_diversity_eff","cnae_diversity_eff","cbo_diversity_eff","hs_diversity_eff","wld_diversity_eff"]
 
-  var ids = ["cbo_id","isic_id","wld_id","hs_id","bra_id","id_ibge"]
+  var ids = ["cbo_id","cnae_id","wld_id","hs_id","bra_id","id_ibge"]
   if (ids.indexOf(name) >= 0) return value.toString().toUpperCase()
   else if (name == "year") {
     var return_value = value
@@ -705,7 +705,7 @@ dataviva.displayID = function(id,type) {
     else if (["hs"].indexOf(type) >= 0) {
       return romanize(parseFloat(id));
     }
-    else if (["isic"].indexOf(type) >= 0 && id.length > 1) return id.slice(1);
+    else if (["cnae"].indexOf(type) >= 0 && id.length > 1) return id.slice(1);
     else return id.toUpperCase();
   }
   else {
@@ -716,7 +716,7 @@ dataviva.displayID = function(id,type) {
 
 dataviva.icon = function(id,type,color) {
 
-  if (["isic","cbo","hs","bra"].indexOf(type) >= 0 && id != "all"){
+  if (["cnae","cbo","hs","bra"].indexOf(type) >= 0 && id != "all"){
     var depth = dataviva.depths(type)[0],
         id = id.slice(0,depth);
   }
@@ -733,7 +733,7 @@ dataviva.icon = function(id,type,color) {
 }
 
 dataviva.depths = function(type,flatten) {
-  if (type == "isic") var array = [1,3,5];
+  if (type == "cnae") var array = [1,3,6];
   else if (type == "cbo") var array = [1,2,4];
   else if (type == "hs") var array = [2,4,6];
   else if (type == "bra") var array = [2,4,8];

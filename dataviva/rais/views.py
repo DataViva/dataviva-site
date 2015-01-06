@@ -27,7 +27,7 @@ def per_request_callbacks(response):
 ############################################################
 # ----------------------------------------------------------
 # 2 variable views
-# 
+#
 ############################################################
 
 @mod.route('/all/<bra_id>/all/all/')
@@ -35,8 +35,8 @@ def per_request_callbacks(response):
 def rais_yb(**kwargs):
     return make_response(make_query(Yb_rais, request.args, g.locale, **kwargs))
 
-@mod.route('/all/all/<isic_id>/all/')
-@mod.route('/<year>/all/<isic_id>/all/')
+@mod.route('/all/all/<cnae_id>/all/')
+@mod.route('/<year>/all/<cnae_id>/all/')
 def rais_yi(**kwargs):
     return make_response(make_query(Yi, request.args, g.locale, **kwargs))
 
@@ -48,16 +48,16 @@ def rais_yo(**kwargs):
 ############################################################
 # ----------------------------------------------------------
 # 3 variable views
-# 
+#
 ############################################################
 
-@mod.route('/all/<bra_id>/<isic_id>/all/')
-@mod.route('/<year>/<bra_id>/<isic_id>/all/')
+@mod.route('/all/<bra_id>/<cnae_id>/all/')
+@mod.route('/<year>/<bra_id>/<cnae_id>/all/')
 def rais_ybi(**kwargs):
     kwargs["join"] = [{
                         "table": Yi,
                         "columns": ["cbo_diversity","cbo_diversity_eff"],
-                        "on": ["year", "isic_id"]
+                        "on": ["year", "cnae_id"]
                     }]
     return make_response(make_query(Ybi, request.args, g.locale, **kwargs))
 
@@ -66,23 +66,23 @@ def rais_ybi(**kwargs):
 def rais_ybo(**kwargs):
     kwargs["join"] = [{
                         "table": Yo,
-                        "columns": ["isic_diversity","isic_diversity_eff"],
+                        "columns": ["cnae_diversity","cnae_diversity_eff"],
                         "on": ["year", "cbo_id"]
                     }]
     return make_response(make_query(Ybo, request.args, g.locale, **kwargs))
 
-@mod.route('/all/all/<isic_id>/<cbo_id>/')
-@mod.route('/<year>/all/<isic_id>/<cbo_id>/')
+@mod.route('/all/all/<cnae_id>/<cbo_id>/')
+@mod.route('/<year>/all/<cnae_id>/<cbo_id>/')
 def rais_yio(**kwargs):
     return make_response(make_query(Yio, request.args, g.locale, **kwargs))
 
 ############################################################
 # ----------------------------------------------------------
 # 4 variable views
-# 
+#
 ############################################################
 
-@mod.route('/all/<bra_id>/<isic_id>/<cbo_id>/')
-@mod.route('/<year>/<bra_id>/<isic_id>/<cbo_id>/')
+@mod.route('/all/<bra_id>/<cnae_id>/<cbo_id>/')
+@mod.route('/<year>/<bra_id>/<cnae_id>/<cbo_id>/')
 def rais_ybio(**kwargs):
     return make_response(make_query(Ybio, request.args, g.locale, **kwargs))
