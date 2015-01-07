@@ -94,3 +94,7 @@ def build_filters_and_groups(table, kwargs, exclude=None):
         else:
             filters.append(~show_column.in_(exclude))
     return filters, groups, show_column
+
+def convert_filters(table, kwargs, remove=None):
+    fake_kwargs = {k:v for k,v in kwargs.items() if not k in remove}
+    return build_filters_and_groups(table, fake_kwargs)
