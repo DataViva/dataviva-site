@@ -59,7 +59,7 @@ def _show_filters_to_add(column, value, table, colname):
         # then it isn't nested and therefore an additional filter is not needed.
     return to_add
 
-def build_filters_and_groups(table, kwargs):
+def build_filters_and_groups(table, kwargs, exclude=None):
     filters = []
     groups = []
     show_column = None
@@ -87,5 +87,12 @@ def build_filters_and_groups(table, kwargs):
 
     if len(table.__name__) == len(groups):
         groups = []
+
+    if exclude:
+        if "," in exclude:
+            exclude = exclude.split(",")
+            filters.append(~show_column.in_(exclude))
+        else:
+            filters.append(show_column != exclude)
 
     return filters, groups, show_column
