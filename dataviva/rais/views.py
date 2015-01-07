@@ -2,87 +2,71 @@ import StringIO, csv
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, make_response, Response
 from dataviva import db
-from dataviva.utils.make_query import make_query
-from dataviva.rais.models import Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio
 
+from dataviva.rais.models import Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio
+from dataviva.utils import table_helper, query_helper
+from dataviva.utils.gzip_data import gzipped
+from dataviva.utils.decorators import cache_api
 mod = Blueprint('rais', __name__, url_prefix='/rais')
 
-import time
-
-timing = []
-
-RESULTS_PER_PAGE = 40
-
-@mod.errorhandler(404)
-def page_not_found(error):
-    return error, 404
-
-@mod.after_request
-def per_request_callbacks(response):
-    if response.status_code != 302 and response.mimetype != "text/csv":
-        response.headers['Content-Encoding'] = 'gzip'
-        response.headers['Content-Length'] = str(len(response.data))
-    return response
-
-############################################################
-# ----------------------------------------------------------
-# 2 variable views
-#
-############################################################
-
-@mod.route('/all/<bra_id>/all/all/')
-@mod.route('/<year>/<bra_id>/all/all/')
-def rais_yb(**kwargs):
-    return make_response(make_query(Yb_rais, request.args, g.locale, **kwargs))
-
-@mod.route('/all/all/<cnae_id>/all/')
-@mod.route('/<year>/all/<cnae_id>/all/')
-def rais_yi(**kwargs):
-    return make_response(make_query(Yi, request.args, g.locale, **kwargs))
-
-@mod.route('/all/all/all/<cbo_id>/')
-@mod.route('/<year>/all/all/<cbo_id>/')
-def rais_yo(**kwargs):
-    return make_response(make_query(Yo, request.args, g.locale, **kwargs))
-
-############################################################
-# ----------------------------------------------------------
-# 3 variable views
-#
-############################################################
-
-@mod.route('/all/<bra_id>/<cnae_id>/all/')
-@mod.route('/<year>/<bra_id>/<cnae_id>/all/')
-def rais_ybi(**kwargs):
-    kwargs["join"] = [{
-                        "table": Yi,
-                        "columns": ["cbo_diversity","cbo_diversity_eff"],
-                        "on": ["year", "cnae_id"]
-                    }]
-    return make_response(make_query(Ybi, request.args, g.locale, **kwargs))
-
-@mod.route('/all/<bra_id>/all/<cbo_id>/')
-@mod.route('/<year>/<bra_id>/all/<cbo_id>/')
-def rais_ybo(**kwargs):
-    kwargs["join"] = [{
-                        "table": Yo,
-                        "columns": ["cnae_diversity","cnae_diversity_eff"],
-                        "on": ["year", "cbo_id"]
-                    }]
-    return make_response(make_query(Ybo, request.args, g.locale, **kwargs))
-
-@mod.route('/all/all/<cnae_id>/<cbo_id>/')
-@mod.route('/<year>/all/<cnae_id>/<cbo_id>/')
-def rais_yio(**kwargs):
-    return make_response(make_query(Yio, request.args, g.locale, **kwargs))
-
-############################################################
-# ----------------------------------------------------------
-# 4 variable views
-#
-############################################################
-
-@mod.route('/all/<bra_id>/<cnae_id>/<cbo_id>/')
 @mod.route('/<year>/<bra_id>/<cnae_id>/<cbo_id>/')
-def rais_ybio(**kwargs):
-    return make_response(make_query(Ybio, request.args, g.locale, **kwargs))
+@gzipped
+# @cache_api('rais')
+def rais_api(**kwargs):
+    limit = int(kwargs.pop('limit', 0)) or int(request.args.get('limit', 0) )
+    order = request.args.get('order', None) or kwargs.pop('order', None)
+    sort = request.args.get('sort', None) or kwargs.pop('sort', 'desc')
+    # ignore_zeros = request.args.get('zeros', True) or kwargs.pop('zeros', True)
+    serialize = request.args.get('serialize', None) or kwargs.pop('serialize', True)
+    exclude = request.args.get('exclude', None) or kwargs.pop('exclude', None)
+    if exclude and "," in exclude:
+        exclude = exclude.split(",")
+
+    # -- 1. filter ALLs
+    kwargs = {k:v for k,v in kwargs.items() if v != table_helper.ALL}
+    # -- 2. select table
+    allowed_when_not, possible_tables = table_helper.prepare(['bra_id', 'cnae_id', 'cbo_id'], [ Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio ] )
+    table = table_helper.select_best_table(kwargs, allowed_when_not, possible_tables)
+    filters, groups, show_column = query_helper.build_filters_and_groups(table, kwargs, exclude=exclude)
+
+    results = query_helper.query_table(table, filters=filters, groups=groups, limit=limit, order=order, sort=sort, serialize=serialize)
+
+    # if table is Ybi:
+        # stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yi, kwargs, remove=['bra_id'])
+        # stripped_columns = [Yi.year, Yi.hs_id, Yi.cbo_diversity, Yi.cbo_diversity_eff]
+        # tmp = query_helper.query_table(Yi, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
+        # results["diversity"] = tmp
+
+    if serialize:
+        return jsonify(results)
+
+    return results
+
+# ############################################################
+# # ----------------------------------------------------------
+# # 3 variable views
+# #
+# ############################################################
+
+# @mod.route('/all/<bra_id>/<cnae_id>/all/')
+# @mod.route('/<year>/<bra_id>/<cnae_id>/all/')
+# def rais_ybi(**kwargs):
+    # return rais_api(**kwargs)
+    # kwargs["join"] = [{
+    #                     "table": Yi,
+    #                     "columns": ["cbo_diversity","cbo_diversity_eff"],
+    #                     "on": ["year", "cnae_id"]
+    #                 }]
+    # return make_response(make_query(Ybi, request.args, g.locale, **kwargs))
+
+# @mod.route('/all/<bra_id>/all/<cbo_id>/')
+# @mod.route('/<year>/<bra_id>/all/<cbo_id>/')
+# def rais_ybo(**kwargs):
+#     kwargs["join"] = [{
+#                         "table": Yo,
+#                         "columns": ["cnae_diversity","cnae_diversity_eff"],
+#                         "on": ["year", "cbo_id"]
+#                     }]
+#     return make_response(make_query(Ybo, request.args, g.locale, **kwargs))
+
+# 
