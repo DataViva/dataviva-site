@@ -4,6 +4,7 @@ from flask import Blueprint, request, render_template, flash, g, session, \
 from dataviva import db
 from dataviva.utils.make_query import make_query
 from dataviva.secex.models import Yb_secex, Yw, Yp, Ybw, Ybp, Ypw, Ybpw
+from dataviva.utils import table_helper
 
 mod = Blueprint('secex', __name__, url_prefix='/secex')
 
@@ -18,60 +19,14 @@ def per_request_callbacks(response):
         response.headers['Content-Length'] = str(len(response.data))
     return response
 
-############################################################
-# ----------------------------------------------------------
-# 2 variable views
-# 
-############################################################
-
-@mod.route('/all/<bra_id>/all/all/')
-@mod.route('/<year>/<bra_id>/all/all/')
-def secex_yb(**kwargs):
-    return make_response(make_query(Yb_secex, request.args, g.locale, **kwargs))
-
-@mod.route('/all/all/<hs_id>/all/')
-@mod.route('/<year>/all/<hs_id>/all/')
-def secex_yp(**kwargs):
-    return make_response(make_query(Yp, request.args, g.locale, **kwargs))
-
-@mod.route('/all/all/all/<wld_id>/')
-@mod.route('/<year>/all/all/<wld_id>/')
-def secex_yw(**kwargs):
-    return make_response(make_query(Yw, request.args, g.locale, **kwargs))
-
-############################################################
-# ----------------------------------------------------------
-# 3 variable views
-# 
-############################################################
-
-@mod.route('/all/<bra_id>/all/<wld_id>/')
-@mod.route('/<year>/<bra_id>/all/<wld_id>/')
-def secex_ybw(**kwargs):
-    return make_response(make_query(Ybw, request.args, g.locale, **kwargs))
-
-@mod.route('/all/<bra_id>/<hs_id>/all/')
-@mod.route('/<year>/<bra_id>/<hs_id>/all/')
-def secex_ybp(**kwargs):
-    kwargs["join"] = [{
-                        "table": Yp,
-                        "columns": ["pci"],
-                        "on": ["year", "hs_id"]
-                    }]
-    return make_response(make_query(Ybp, request.args, g.locale, **kwargs))
-
-@mod.route('/all/all/<hs_id>/<wld_id>/')
-@mod.route('/<year>/all/<hs_id>/<wld_id>/')
-def secex_ypw(**kwargs):
-    return make_response(make_query(Ypw, request.args, g.locale, **kwargs))
-
-############################################################
-# ----------------------------------------------------------
-# 4 variable views
-# 
-############################################################
-
-@mod.route('/all/<bra_id>/<hs_id>/<wld_id>/')
 @mod.route('/<year>/<bra_id>/<hs_id>/<wld_id>/')
-def secex_ybpw(**kwargs):
-    return make_response(make_query(Ybpw, request.args, g.locale, **kwargs))
+def secex_api(**kwargs):
+    # -- 1. filter ALLs
+    kwargs = {k:v for k,v in kwargs.items() if v != table_helper.ALL}
+    # -- 2. select table
+    allowed_when_not, possible_tables = table_helper.prepare(["bra_id", "hs_id", "wld_id"], [Yb_secex, Yw, Yp, Ybw, Ybp, Ypw, Ybpw])
+    table = table_helper.select_best_table(kwargs, allowed_when_not, possible_tables)
+    if table is Ybp:
+        kwargs["join"] = [{"table": Yp, "columns": ["pci"], "on": ["year", "hs_id"]}]
+    resp = make_query(table, kwargs, g.locale)
+    return make_response(resp)
