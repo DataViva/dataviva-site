@@ -11,8 +11,6 @@ from sqlalchemy.ext.declarative import declared_attr
 
 class BaseSecex(object):
     year = db.Column(db.Integer(4), primary_key=True)
-
-    year = db.Column(db.Integer(4), primary_key=True)
     val_usd_growth = db.Column(db.Float())
     val_usd_growth_5 = db.Column(db.Float())
 
