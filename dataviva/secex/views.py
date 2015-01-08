@@ -17,6 +17,8 @@ def secex_api(**kwargs):
     # ignore_zeros = request.args.get('zeros', True) or kwargs.pop('zeros', True)
     serialize = request.args.get('serialize', None) or kwargs.pop('serialize', True)
     exclude = request.args.get('exclude', None) or kwargs.pop('exclude', None)
+    download = request.args.get('download', None) or kwargs.pop('download', None)
+
     if exclude and "," in exclude:
         exclude = exclude.split(",")
 
@@ -36,7 +38,10 @@ def secex_api(**kwargs):
         tmp = query_helper.query_table(Yp, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
         results["pci"] = tmp
 
-    if serialize:
-        return jsonify(results)
+    if serialize or download:
+        response = jsonify(results)
+        if download:
+            response.headers["Content-Disposition"] = "attachment;filename=secex_data.json"
+        return response
 
     return results
