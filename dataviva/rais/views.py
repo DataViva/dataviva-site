@@ -2,7 +2,7 @@ import StringIO, csv
 from flask import Blueprint, request, render_template, flash, g, session, \
             redirect, url_for, jsonify, make_response, Response
 from dataviva import db
-
+import json
 from dataviva.rais.models import Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio
 from dataviva.utils import table_helper, query_helper
 from dataviva.utils.gzip_data import gzipped
@@ -19,6 +19,8 @@ def rais_api(**kwargs):
     # ignore_zeros = request.args.get('zeros', True) or kwargs.pop('zeros', True)
     serialize = request.args.get('serialize', None) or kwargs.pop('serialize', True)
     exclude = request.args.get('exclude', None) or kwargs.pop('exclude', None)
+    download = request.args.get('download', None) or kwargs.pop('download', None)
+
     if exclude and "," in exclude:
         exclude = exclude.split(",")
 
@@ -42,7 +44,9 @@ def rais_api(**kwargs):
         diversity_results = query_helper.query_table(Yo, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
         results["diversity"] = diversity_results
 
-    if serialize:
-        return jsonify(results)
-
+    if serialize or download:
+        response = jsonify(results)
+        if download:
+            response.headers["Content-Disposition"] = "attachment;filename=rais_data.json"
+        return response
     return results
