@@ -34,28 +34,15 @@ def rais_api(**kwargs):
     if table is Ybi:
         stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yi, kwargs, remove=['bra_id'])
         stripped_columns = [Yi.year, Yi.cnae_id, Yi.cbo_diversity, Yi.cbo_diversity_eff]
-        tmp = query_helper.query_table(Yi, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
-        results["diversity"] = tmp
+        diversity_results = query_helper.query_table(Yi, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
+        results["diversity"] = diversity_results
+    elif table is Ybo:
+        stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yi, kwargs, remove=['bra_id'])
+        stripped_columns = [Yo.year, Yo.cbo_id, Yo.cnae_diversity, Yo.cnae_diversity_eff]
+        diversity_results = query_helper.query_table(Yo, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
+        results["diversity"] = diversity_results
 
     if serialize:
         return jsonify(results)
 
     return results
-
-# ############################################################
-# # ----------------------------------------------------------
-# # 3 variable views
-# #
-# ############################################################
-
-# @mod.route('/all/<bra_id>/all/<cbo_id>/')
-# @mod.route('/<year>/<bra_id>/all/<cbo_id>/')
-# def rais_ybo(**kwargs):
-#     kwargs["join"] = [{
-#                         "table": Yo,
-#                         "columns": ["cnae_diversity","cnae_diversity_eff"],
-#                         "on": ["year", "cbo_id"]
-#                     }]
-#     return make_response(make_query(Ybo, request.args, g.locale, **kwargs))
-
-# 
