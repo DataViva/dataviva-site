@@ -37,7 +37,7 @@ def rais_api(**kwargs):
         diversity_results = query_helper.query_table(Yi, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
         results["diversity"] = diversity_results
     elif table is Ybo:
-        stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yi, kwargs, remove=['bra_id'])
+        stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yo, kwargs, remove=['bra_id'])
         stripped_columns = [Yo.year, Yo.cbo_id, Yo.cnae_diversity, Yo.cnae_diversity_eff]
         diversity_results = query_helper.query_table(Yo, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
         results["diversity"] = diversity_results
