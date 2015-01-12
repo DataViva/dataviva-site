@@ -176,10 +176,7 @@ class Build(db.Model, AutoSerialize):
 
         filter1 = self.filter1
         if filter1 == "all" or self.app.type == "rings":
-            if self.output == "cnae":
-                filter1 = "show.5"
-            elif self.output == "hs":
-                filter1 = "show.6"
+            filter1 = "show.6"
 
         filter2 = self.filter2
         if filter2 == "all" or self.app.type == "rings":

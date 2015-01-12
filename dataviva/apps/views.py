@@ -104,8 +104,6 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
     recs = recommend(app_name=app_name, dataset=dataset, bra_id=filler_bra, \
                         filter1=filler1, filter2=filler2, output=output)
 
-
-
     '''Every possible build, required by the embed page for building the build
     dropdown.
     '''
