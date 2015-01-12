@@ -15,7 +15,7 @@ from dataviva.apps.models import Build, UI, App
 from dataviva.general.models import Short
 
 
-from dataviva.rais.views import rais_ybi
+from dataviva.rais.views import rais_api
 from dataviva.utils.gzip_data import gzip_data
 from dataviva.utils.translates import translate_columns
 from dataviva.utils.cached_query import cached_query, make_cache_key
@@ -129,7 +129,7 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
         starred = 1 if is_starred else -1
 
     '''Get the actual data for the current build'''
-    # view_data = rais_ybi(bra_id='sp', cnae_id='a0112').data
+    # view_data = rais_api(bra_id='sp', cnae_id='a0112').data
     # app.url_map.bind('/').match('/attrs/wld/nausa/')
 
     if request.is_xhr:
