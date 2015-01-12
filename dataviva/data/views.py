@@ -38,7 +38,7 @@ def get_geo_location(ip):
 
     # first try to find the exact city within the state
     bra_state = Bra.query.filter_by(name_pt=state).filter(func.char_length(Bra.id) == 2).first()
-    bra_cities = Bra.query.filter_by(name_pt=city).filter(func.char_length(Bra.id) == 8)
+    bra_cities = Bra.query.filter_by(name_pt=city).filter(func.char_length(Bra.id) == 9)
     if bra_state:
         if bra_cities.count() == 1:
             return bra_cities.first()
@@ -49,7 +49,7 @@ def get_geo_location(ip):
 
 @mod.route('/table/')
 @mod.route('/table/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
-def table(data_type="rais", year="all", bra_id="mg", filter_1="show.1", filter_2="all"):
+def table(data_type="rais", year="all", bra_id="4mg", filter_1="show.1", filter_2="all"):
     g.page_type = "table"
     data_url = "/{0}/{1}/{2}/{3}/{4}/".format(data_type,year,bra_id,filter_1,filter_2)
     return render_template("general/table.html",data_url = data_url)
@@ -60,7 +60,7 @@ def table(data_type="rais", year="all", bra_id="mg", filter_1="show.1", filter_2
 def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
 
     filters = {}
-    filters["bra"] = {"items": [], "depths": [2,4,7,8]}
+    filters["bra"] = {"items": [], "depths": [1,3,5,8,9]}
     filters["cnae"] = {"items": [], "depths": [1,3,6]}
     filters["cbo"] = {"items": [], "depths": [1,2,4]}
     filters["hs"] = {"items": [], "depths": [2,4,6]}
@@ -133,9 +133,9 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
 
         '''if the city or region is not found in the db use Belo Horizonte as
             default'''
-        bra_id = "mg.show.7"
+        bra_id = "4mg.show.8"
         # if not bra:
-        #     bra_id = "mg.show.7"
+        #     bra_id = "4mg.show.8"
         # else:
         #     bra_id = bra.id
 

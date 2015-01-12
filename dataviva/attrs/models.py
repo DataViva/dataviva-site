@@ -99,7 +99,7 @@ class Stats(object):
     def get_top_attr(self, tbl, val_var, attr_type, key, dataset):
         latest_year = __latest_year__[dataset]
         if key == "bra":
-            length = 8
+            length = 9
         elif key == "hs" or key == "cnae":
             length = 6
         elif key == "wld":
@@ -423,7 +423,7 @@ class Bra(db.Model, AutoSerialize, Stats):
         return title_case(getattr(self,"name_"+lang))
 
     def icon(self):
-        return "/static/img/icons/bra/bra_%s.png" % (self.id[:2])
+        return "/static/img/icons/bra/bra_%s.png" % (self.id[:3])
 
     def get_neighbors(self, dist, remove_self=False):
         q = self.neighbors.filter(Distances.distance <= dist).order_by(Distances.distance)

@@ -69,7 +69,7 @@ def attrs(attr="bra",Attr_id=None):
         Attr_weight_col = "val_usd"
 
     depths = {}
-    depths["bra"] = [2,4,7,8]
+    depths["bra"] = [1,3,5,8,9]
     depths["cnae"] = [1,3,6]
     depths["cbo"] = [1,2,4]
     depths["hs"] = [2,4,6]
@@ -184,7 +184,7 @@ def attrs(attr="bra",Attr_id=None):
                 a["available"] = False
                 if a["id"] in attrs_w_data:
                     a["available"] = True
-            if Attr_weight_col == "population" and len(a["id"]) == 8 and a["id"][:2] == "mg":
+            if Attr_weight_col == "population" and len(a["id"]) == 9 and a["id"][:3] == "4mg":
                 plr = Bra.query.get_or_404(a["id"]).pr2.first()
                 if plr: a["plr"] = plr.id
             if order:

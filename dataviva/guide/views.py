@@ -46,7 +46,7 @@ def guide(category = None, category_id = None, option = None, option_id = None, 
     crumb_title = None
 
     depths = {
-        "bra": [2,3,4,7,8],
+        "bra": [1,3,5,8,9],
         "cnae": [1,6],
         "cbo": [1,4],
         "hs": [2,6],

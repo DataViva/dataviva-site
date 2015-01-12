@@ -49,7 +49,7 @@ def index(year=2012,type="bra",depth=2):
         year = years[-1]
 
     depths = {}
-    depths["bra"] = [2,4,7,8]
+    depths["bra"] = [1,3,5,8,9]
     depths["cnae"] = [1,3,6]
     depths["cbo"] = [1,2,4]
     depths["hs"] = [2,4,6]

@@ -150,11 +150,12 @@ dataviva.format.text = function(text,name,l) {
       "depth_desc_compare": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
       "depth_desc_occugrid": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
       "depth_desc_scatter": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
-      "bra_2": {"en": "State", "pt": "Estado"},
-      "bra_4": {"en": "Mesoregion", "pt": "Mesorregi\u00e3o"},
-      "bra_6": {"en": "Microregion", "pt": "Microrregi\u00e3o"},
-      "bra_7": {"en": "Planning Region", "pt": "Regi\u00e3o de Planejamento"},
-      "bra_8": {"en": "Municipality", "pt": "Munic\u00edpio"},
+      "bra_1": {"en": "Region", "pt": "Regi\u00e3o"},
+      "bra_3": {"en": "State", "pt": "Estado"},
+      "bra_5": {"en": "Mesoregion", "pt": "Mesorregi\u00e3o"},
+      "bra_7": {"en": "Microregion", "pt": "Microrregi\u00e3o"},
+      "bra_8": {"en": "Planning Region", "pt": "Regi\u00e3o de Planejamento"},
+      "bra_9": {"en": "Municipality", "pt": "Munic\u00edpio"},
       "cbo_1": {"en": "Main Group", "pt": "Grande Grupo"},
       "cbo_2": {"en": "Principal Subgroup", "pt": "SubGrupo Principal"},
       "cbo_3": {"en": "Subgroup", "pt": "SubGrupo"},
@@ -170,11 +171,12 @@ dataviva.format.text = function(text,name,l) {
       "hs_8": {"en": "Sub-Position", "pt": "Sub-Posi\u00e7\u00e3o"},
       "wld_2": {"en": "Continent", "pt": "Continente"},
       "wld_5": {"en": "Country", "pt": "Pa\u00eds"},
-      "bra_2_plural": {"en": "States", "pt": "Estados"},
-      "bra_4_plural": {"en": "Mesoregions", "pt": "Mesorregi\u00f5es"},
-      "bra_6_plural": {"en": "Microregions", "pt": "Microrregi\u00f5es"},
-      "bra_7_plural": {"en": "Planning Regions", "pt": "Regi\u00f5es de Planejamento"},
-      "bra_8_plural": {"en": "Municipalities", "pt": "Munic\u00edpios"},
+      "bra_1_plural": {"en": "Regions", "pt": "Regi\u00f5es"},
+      "bra_3_plural": {"en": "States", "pt": "Estados"},
+      "bra_5_plural": {"en": "Mesoregions", "pt": "Mesorregi\u00f5es"},
+      "bra_7_plural": {"en": "Microregions", "pt": "Microrregi\u00f5es"},
+      "bra_8_plural": {"en": "Planning Regions", "pt": "Regi\u00f5es de Planejamento"},
+      "bra_9_plural": {"en": "Municipalities", "pt": "Munic\u00edpios"},
       "cbo_1_plural": {"en": "Main Groups", "pt": "Grandes Grupos"},
       "cbo_2_plural": {"en": "Principal Subgroups", "pt": "SubGrupos Principais"},
       "cbo_3_plural": {"en": "Subgroups", "pt": "SubGrupos"},
@@ -732,11 +734,38 @@ dataviva.icon = function(id,type,color) {
 
 }
 
+dataviva.cleanData = function(app, data) {
+
+  var zerofills = {
+    "secex": ["val_usd"],
+    "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"]
+  }
+
+  var dataObj = data.data.map(function(d){
+
+    return d.reduce(function(obj, value, i){
+      var header = data.headers[i];
+      obj[header] = value;
+      return obj
+    }, {})
+
+  })
+
+  zerofills[app.build.dataset].forEach(function(z){
+    if (!(z in dataObj)) {
+      dataObj[z] = 0
+    }
+  })
+
+  return dataObj;
+
+}
+
 dataviva.depths = function(type,flatten) {
   if (type == "cnae") var array = [1,3,6];
   else if (type == "cbo") var array = [1,2,4];
   else if (type == "hs") var array = [2,4,6];
-  else if (type == "bra") var array = [2,4,8];
+  else if (type == "bra") var array = [3,5,9];
   else if (type == "wld") var array = [2,5];
   else var array = [0];
 

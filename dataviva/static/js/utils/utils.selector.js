@@ -156,7 +156,7 @@ function Selector() {
 
         // Sort final generated list
         list.sort(function(a, b){
-		  if(a.display_id=="MG"||b.display_id=="MG") {
+		  if(a.display_id=="4mg"||b.display_id=="4mg") {
 		  	var lengthdiff = b.id.length - a.id.length
 		  } else {
 		  	var lengthdiff = b.population - a.population
@@ -172,10 +172,10 @@ function Selector() {
             var b_state = b.id
           }
 
-          if (a_state == "mg" && a_state != b_state) {
+          if (a_state == "4mg" && a_state != b_state) {
             return -1
           }
-          else if (b_state == "mg" && a_state != b_state) {
+          else if (b_state == "4mg" && a_state != b_state) {
             return 1
           }
           else if (["number","string"].indexOf(typeof a[sorting]) >= 0 && ["number","string"].indexOf(typeof b[sorting]) >= 0) {
@@ -334,23 +334,23 @@ function Selector() {
         selector_load.hide()
 
         if (initial_value != "all") {
-          if (type == "bra" && initial_value == "mg") {
-            var depth = 7
+          if (type == "bra" && initial_value == "4mg") {
+            var depth = 8
           }
           else if (type == "bra" && initial_value.length == 7) {
-            var depth = 8
+            var depth = 9
           }
           else {
             var d = depths.indexOf(initial_value.length)
             if (d+1 == depths.length) var depth = depths[d]
             else var depth = depths[d+1]
           }
-          if (type == "bra" && initial_value.length >= 7) {
-            if (initial_value.substr(0,2) == "mg") {
-              depth_path = [2,7]
+          if (type == "bra" && initial_value.length >= 8) {
+            if (initial_value.substr(0,3) === "4mg") {
+              depth_path = [3,8]
             }
             else {
-              depth_path = [2,4]
+              depth_path = [3,5]
             }
           }
           else {
@@ -373,7 +373,7 @@ function Selector() {
 
         if (data instanceof Array) {
           data = data.filter(function(d){
-            return d.available || (type == "bra" && d.id.length == 7);
+            return d.available || (type == "bra" && d.id.length == 8);
           })
 
           var temp_dict = {};
@@ -416,14 +416,14 @@ function Selector() {
           else if (depth == 0) {
             data[d].parents = ["all"]
           }
-          else if (type == "bra" && d.length == 8){
+          else if (type == "bra" && d.length == 9){
             data[d].parents = [d.slice(0,depths[depth-1])]
             if (data[d].plr) {
               data[d].parents.push(data[d].plr)
             }
           }
-          else if (type == "bra" && d.length == 7){
-            data[d].parents = [d.slice(0,2)]
+          else if (type == "bra" && d.length == 8){
+            data[d].parents = [d.slice(0,3)]
           }
           else {
             data[d].parents = [d.slice(0,depths[depth-1])]
@@ -567,7 +567,7 @@ function Selector() {
               .attr("class","search_result")
               // .on(d3plus.evt.click,function(){
               //   if (v.id.length < depths[depths.length-1]) {
-              //     if (type == "bra" && v.id.substr(0,2) == "mg") {
+              //     if (type == "bra" && v.id.substr(0,2) == "4mg") {
               //       if (v.id.length == 2) {
               //         var depth = 7
               //       }
@@ -653,7 +653,7 @@ function Selector() {
 
             if (v.id.length < depths[depths.length-1]) {
 
-              if (v.id == "mg" && type == "bra") {
+              if (v.id == "4mg" && type == "bra") {
 
                 var d = depths.indexOf(v.id.length)
                 var length = depths[d+1]

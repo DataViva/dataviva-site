@@ -65,10 +65,10 @@ class Build(db.Model, AutoSerialize):
             bra_id = 'all'
 
         if "_" in self.bra and "_" not in bra_id:
-            if bra_id == "rj":
-                bra_id = bra_id + "_mg"
+            if bra_id == "4rj":
+                bra_id = bra_id + "_4mg"
             else:
-                bra_id = bra_id + "_rj"
+                bra_id = bra_id + "_4rj"
         elif "_" not in self.bra and "_" in bra_id:
             bra_id = bra_id.split("_")[0]
         self.bra = []
@@ -84,8 +84,8 @@ class Build(db.Model, AutoSerialize):
                     dist = split[1]
                 else:
                     dist = 0
-                state = b[:2]
-                if self.output == "bra" and len(b) == 8 and dist == 0:
+                state = b[:3]
+                if self.output == "bra" and len(b) == 9 and dist == 0:
                     b = state
                     dist = 0
                 self.bra.append(Bra.query.get(b))
@@ -102,7 +102,7 @@ class Build(db.Model, AutoSerialize):
                     if Cnae.query.get(f):
                         self.cnae.append(Cnae.query.get(f))
                     else:
-                        self.cnae.append(Cnae.query.get('r9000'))
+                        self.cnae.append(Cnae.query.get('r90027'))
                 self.filter1 = "_".join([i.id for i in set(self.cnae)])
             elif self.dataset == "secex":
                 self.hs = []

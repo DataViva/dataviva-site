@@ -56,7 +56,7 @@
               <div class="filter_depth">
                 <select id="depths_{{filter}}_{{obj.item.id}}" class="depth_select" onchange="change_depth(this.value,this.id)">
                 {% for d in filters[filter]["depths"] %}
-                  {% if (d == 7 and obj.item.id[:2] == "mg") or d != 7 %}
+                  {% if (d == 7 and obj.item.id[:2] == "4mg") or d != 7 %}
                     {% if d == obj.item.id|length %}
                       {% set option_name = filter~"_"~d %}
                     {% elif d > obj.item.id|length %}
@@ -207,7 +207,7 @@
         var depth_ids = dataviva.depths(selector.type())
 
         if (obj.id.length < depth_ids[depth_ids.length-1] || obj.id == "all") {
-          if(obj.id == "mg" || obj.id.indexOf("mgplr") >= 0 || (obj.id == "all" && type == "bra")){
+          if(obj.id == "4mg" || obj.id.indexOf("4mgplr") >= 0 || (obj.id == "all" && type == "bra")){
             depth_ids.splice(-1, 0, 7)
           }
 

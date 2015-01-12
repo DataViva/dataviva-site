@@ -44,7 +44,7 @@ def before_request():
     }
 
 @mod.route('/embed/', defaults={"app_name": "tree_map", "dataset": "rais",
-            "bra_id": "mg", "filter1": "all", "filter2": "all", "output": "cbo"})
+            "bra_id": "4mg", "filter1": "all", "filter2": "all", "output": "cbo"})
 @mod.route('/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/'
             '<output>/')
 #@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
@@ -201,7 +201,7 @@ def app_star(app_name, data_type, bra_id, filter1, filter2, output):
 
 @mod.route('/recommend/', methods=['GET', 'POST'])
 @mod.route('/recommend/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
-def recommend(app_name=None, dataset=None, bra_id="mg", filter1=None, filter2=None, output=None):
+def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=None, output=None):
 
     recommended = {}
 
@@ -294,8 +294,8 @@ def get_geo_location(ip):
     # state = "Maranhão"
 
     # first try to find the exact city within the state
-    bra_state = Bra.query.filter_by(name_pt=state).filter(func.char_length(Bra.id) == 2).first()
-    bra_cities = Bra.query.filter_by(name_pt=city).filter(func.char_length(Bra.id) == 8)
+    bra_state = Bra.query.filter_by(name_pt=state).filter(func.char_length(Bra.id) == 3).first()
+    bra_cities = Bra.query.filter_by(name_pt=city).filter(func.char_length(Bra.id) == 9)
     if bra_state:
         if bra_cities.count() == 1:
             return bra_cities.first()
@@ -305,21 +305,21 @@ def get_geo_location(ip):
     return None
 
 @mod.route('/builder/')
-@mod.route('/builder/tree_map/', defaults={"app_name": "tree_map", "dataset": "secex", "bra_id": "mg",
+@mod.route('/builder/tree_map/', defaults={"app_name": "tree_map", "dataset": "secex", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "hs", "params": ""})
-@mod.route('/builder/stacked/', defaults={"app_name": "stacked", "dataset": "rais", "bra_id": "mg",
+@mod.route('/builder/stacked/', defaults={"app_name": "stacked", "dataset": "rais", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "cbo", "params": ""})
-@mod.route('/builder/geo_map/', defaults={"app_name": "geo_map", "dataset": "rais", "bra_id": "mgplr02",
+@mod.route('/builder/geo_map/', defaults={"app_name": "geo_map", "dataset": "rais", "bra_id": "4mgplr02",
             "filter1": "all", "filter2": "all", "output": "bra", "params": "?value_var=wage"})
-@mod.route('/builder/network/', defaults={"app_name": "network", "dataset": "secex", "bra_id": "mg",
+@mod.route('/builder/network/', defaults={"app_name": "network", "dataset": "secex", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "hs", "params": ""})
-@mod.route('/builder/rings/', defaults={"app_name": "rings", "dataset": "rais", "bra_id": "mg",
+@mod.route('/builder/rings/', defaults={"app_name": "rings", "dataset": "rais", "bra_id": "4mg",
             "filter1": "all", "filter2": "2211", "output": "cbo", "params": ""})
-@mod.route('/builder/scatter/', defaults={"app_name": "scatter", "dataset": "secex", "bra_id": "mg",
+@mod.route('/builder/scatter/', defaults={"app_name": "scatter", "dataset": "secex", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "hs", "params": "?rca_scope=wld_rca"})
-@mod.route('/builder/compare/', defaults={"app_name": "compare", "dataset": "rais", "bra_id": "mg_rj",
+@mod.route('/builder/compare/', defaults={"app_name": "compare", "dataset": "rais", "bra_id": "4mg_rj",
             "filter1": "all", "filter2": "all", "output": "cbo", "params": "?depth=cbo_4&axes=wage_avg"})
-@mod.route('/builder/occugrid/', defaults={"app_name": "occugrid", "dataset": "rais", "bra_id": "mg030000",
+@mod.route('/builder/occugrid/', defaults={"app_name": "occugrid", "dataset": "rais", "bra_id": "4mg030000",
             "filter1": "m7310", "filter2": "all", "output": "cbo", "params": ""})
 @mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/')
 #@view_cache.cached(timeout=604800, key_prefix=make_cache_key)

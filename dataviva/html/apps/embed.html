@@ -226,11 +226,6 @@
       "rais": dataviva.format.text("Data Provided by") + " RAIS"
     }
 
-    var zerofills = {
-      "secex": ["val_usd"],
-      "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"]
-    }
-
     /*******************************/
     /* App Functions and Variables */
     /*******************************/
@@ -635,14 +630,7 @@
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
                     app.data[app.build.data_url] = {}
-                    d.data.forEach(function(x){
-                      zerofills[app.build.dataset].forEach(function(z){
-                        if (!(z in x)) {
-                          x[z] = 0
-                        }
-                      })
-                    })
-                    app.data[app.build.data_url].raw = d.data
+                    app.data[app.build.data_url].raw = dataviva.cleanData(app, d)
                     if (d.eci) app.ecis[app.build.data_url] = d.eci
                     callback(error,d)
                   })
@@ -740,7 +728,7 @@
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
                     app.data[app.build.imp_url] = {}
-                    app.data[app.build.imp_url].raw = d.data
+                    app.data[app.build.imp_url].raw = dataviva.cleanData(app, d)
                     callback(error,d)
                   })
                 },"/"+app.build.imp_url)
@@ -756,7 +744,7 @@
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
                     app.data[app.build.else_url] = {}
-                    app.data[app.build.else_url].raw = d.data
+                    app.data[app.build.else_url].raw = dataviva.cleanData(app, d)
                     callback(error,d)
                   })
                 },"/"+app.build.else_url)
@@ -871,7 +859,7 @@
           else if (ui.type == "depth") {
             var bra_id = app.build.bra[0].id
             if (app.build.output == "bra" && bra_id != "all") {
-              // if (bra_id.indexOf("mg") == 0) ui.values[1] = "bra_7"
+              // if (bra_id.indexOf("4mg") == 0) ui.values[1] = "bra_7"
               if (bra_id.length >= 2) ui.values.splice(0,1)
               if (bra_id.length >= 4) ui.values.splice(0,1)
             }
