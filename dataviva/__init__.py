@@ -45,7 +45,7 @@ if redis_sesh.redis:
     app.session_interface = redis_sesh
 
 # Global Latest Year Variables
-__latest_year__ = {"secex": 2013, "rais": 2012, "population": 2012}
+__latest_year__ = {"secex": 2014, "rais": 2002, "population": 2012}
 
 # login manager for user management
 lm = LoginManager()
