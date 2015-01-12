@@ -115,11 +115,11 @@
 
 {% block js %}
 
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-  <script src="/static/js/libs/d3.geo.tile.js"></script>
+  <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>-->
+  <!--<script src="/static/js/libs/d3.geo.tile.js"></script>-->
   <script src="/static/js/libs/topojson.js"></script>
   <script src="/static/js/libs/queue.min.js"></script>
-  <script src="/static/js/libs/jfont-minified.js"></script>
+  <!--<script src="/static/js/libs/jfont-minified.js"></script>-->
   <script src="/static/js/utils/utils.key.js"></script>
   <script src="/static/js/utils/utils.selector.js"></script>
 
@@ -261,15 +261,15 @@
     app.font = null
     var fonts = ["HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"]
     fonts.forEach(function(font){
-      if (checkfont(font) && !app.font) app.font = font
+      if (d3plus.font.validate(font) && !app.font) app.font = font
     })
 
-    app.loader_style = {
-      "color": "#888",
-      "font-size": "16px",
-      "margin-top": "-11px",
-      "text-shadow": "0px 0px 6px #efefef"
-    }
+    // app.loader_style = {
+    //   "color": "#888",
+    //   "font-size": "16px",
+    //   "margin-top": "-11px",
+    //   "text-shadow": "0px 0px 6px #efefef"
+    // }
 
     app.html = function(id,list) {
 
@@ -298,7 +298,8 @@
               app.build = data.current_build
               builder.url()
               builder.outputs(data.all_builds)
-              d3.select("#app").call(app.viz.title(app.build.title))
+              app.viz.title(app.build.title).draw()
+              // d3.select("#app").call(app.viz.title(app.build.title))
             })
         }
       }
@@ -407,19 +408,12 @@
         "opp_gain_wld"
       ],
       "growth":[
-        "wage_growth_pct",
-        "wage_growth_pct_5",
-        "wage_growth_val",
-        "wage_growth_val_5",
-        "num_emp_growth_pct",
-        "num_emp_growth_pct_5",
-        "num_emp_growth_val",
-        "num_emp_growth_val_5",
-
-        "val_usd_growth_pct",
-        "val_usd_growth_pct_5",
-        "val_usd_growth_val",
-        "val_usd_growth_val_5"
+        "wage_growth",
+        "wage_growth_5",
+        "num_emp_growth",
+        "num_emp_growth_5",
+        "val_usd_growth",
+        "val_usd_growth_5",
       ]
 
         }}
@@ -455,12 +449,12 @@
           "num_emp_est": "mean",
           "wage_avg": "mean",
           "wage_avg_bra": "mean",
-          "wage_growth_pct": "mean",
-          "wage_growth_pct_5": "mean",
-          "num_emp_growth_pct": "mean",
-          "num_emp_growth_pct_5": "mean",
-          "val_usd_growth_pct": "mean",
-          "val_usd_growth_pct_5": "mean",
+          "wage_growth": "mean",
+          "wage_growth_5": "mean",
+          "num_emp_growth": "mean",
+          "num_emp_growth_5": "mean",
+          "val_usd_growth": "mean",
+          "val_usd_growth_5": "mean",
           "importance": "mean"
         }
 
@@ -470,7 +464,7 @@
       additionals["cp_bra_1_"+k] = averages[k]
     }
 
-    averages = d3plus.utils.merge(averages,additionals)
+    averages = d3plus.object.merge(averages,additionals)
 
     var descs = {
       "distance": dataviva.format.text("distance_desc"),
@@ -497,20 +491,37 @@
 
     // Define global D3plus app parameters
     app.viz = d3plus.viz()
-      .name_array(["name","display_id"])
-      .nesting_aggs(averages)
-      .text_var("name")
-      .year_var("year")
-      .text_format(dataviva.format.text)
-      .number_format(dataviva.format.number)
-      .name_array(["name","display_id"])
+      .aggs(averages)
+      .time("year")
+      .format({
+        "number": dataviva.format.number,
+        "text": dataviva.format.text
+      })
+      .text(["name","display_id"])
       .background("#ffffff")
-      .click_function(app.html)
-      .font(app.font)
-      .font_weight("normal")
-      .total_var("required")
-      .else_var("elsewhere")
-      .info_style(app.loader_style)
+      .tooltip({"html": app.html})
+      .font({
+        "family": app.font,
+        "weight": "normal"
+      })
+      .total("required")
+      .temp("elsewhere")
+
+    // app.viz = d3plus.viz()
+    //   .name_array(["name","display_id"])
+    //   .nesting_aggs(averages)
+    //   .text_var("name")
+    //   .year_var("year")
+    //   .text_format(dataviva.format.text)
+    //   .number_format(dataviva.format.number)
+    //   .name_array(["name","display_id"])
+    //   .background("#ffffff")
+    //   .click_function(app.html)
+    //   .font(app.font)
+    //   .font_weight("normal")
+    //   .total_var("required")
+    //   .else_var("elsewhere")
+    //   .info_style(app.loader_style)
 
     // Start building a new app
     app.start = function(new_url,allyears) {
@@ -763,7 +774,8 @@
       console.log("[dataviva] ERROR: "+error)
       dataviva.resize()
       loading.hide()
-      d3.select("#app").html("").datum([]).call(app.viz.error(error))
+      app.viz.error(error).draw()
+      // d3.select("#app").html("").datum([]).call(app.viz.error(error))
     }
 
     app.finish = function() {
@@ -840,8 +852,8 @@
         else {
 
           // Custom Titles
-          if (ui.type == "value_var") {
-            if (app.build.app.type == "geo_map") var title = "color_var"
+          if (ui.type == "size") {
+            if (app.build.app.type == "geo_map") var title = "color"
             else var title = "sizing"
           }
           else if (ui.type == "spotlight" && app.build.app.type == "scatter") {
@@ -850,7 +862,7 @@
           else var title = ui.type
 
           // Set Global Vars
-          if (ui.type == "value_var") {
+          if (ui.type == "size") {
             if (app.build.app.type == "occugrid") var default_value = "required"
             else if (ui.values.indexOf("val_usd") >= 0) var default_value = "val_usd"
             else if (ui.values.indexOf("num_emp") >= 0) var default_value = "num_emp"
@@ -895,8 +907,8 @@
             app.vars[ui.type] = default_value
           }
 
-          if (ui.values.length > 1 && app.vars.builder != "false"  && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs")) || (ui.type != "color_var"  && app.build.app.type != "stacked")) {
-			//&& (ui.type != "color_var" && app.build.app.type == "stacked")
+          if (ui.values.length > 1 && app.vars.builder != "false"  && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs")) || (ui.type != "color"  && app.build.app.type != "stacked")) {
+			//&& (ui.type != "color" && app.build.app.type == "stacked")
             var leon_type = ui.values.length <= 4 ? "radio" : "select"
             var leon_data = {}
             ui.values.forEach(function(v){
@@ -909,11 +921,11 @@
 			var ui_div = d3.select("#app_controls").append("div")
 			.attr("class","ui_group alt_tooltip")
 			.attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
-			.on(d3plus.evt.over,function(){
+			.on(d3plus.client.pointer.over,function(){
 			  if (leon_type == "select") dataviva.ui.tooltip("alt_tooltip",this,"center right")
 			  else dataviva.ui.tooltip("alt_tooltip",this)
 			})
-			.on(d3plus.evt.out,function(){
+			.on(d3plus.client.pointer.out,function(){
 			  dataviva.ui.tooltip("alt_tooltip",false)
 			})
 
@@ -947,7 +959,7 @@
       app.filters = []
       builder.url()
 
-      var color_var = app.vars.color_var ? app.vars.color_var : "color"
+      var color_var = app.vars.color ? app.vars.color : "color"
 
       app.title_update()
 
@@ -960,7 +972,7 @@
       if (app.build.output == "bra") {
         app.tooltip["short"][""] = ["id_ibge"]
         app.tooltip["long"][""] = ["id_ibge"]
-        app.tooltip["short"]["basics"] = [app.vars.value_var]
+        app.tooltip["short"]["basics"] = [app.vars.size]
       }
       else {
         app.tooltip["short"][""] = [app.build.output+"_display"]
@@ -969,7 +981,7 @@
           app.tooltip["short"]["calculations"] = ["elsewhere","required"]
         }
         else {
-          app.tooltip["short"]["basics"] = [app.vars.value_var]
+          app.tooltip["short"]["basics"] = [app.vars.size]
           app.tooltip["short"]["calculations"] = []
         }
       }
@@ -979,29 +991,63 @@
       }
 
       app.viz.type(app.build.app.viz_whiz)
+        .container("#app")
         .descs(descs)
-        .title(app.build.title)
-        .color_var(color_var)
+        .title({
+          "sub": app.sub_title(),
+          "total": app.total(),
+          "value": app.build.title
+        })
+        .color(color_var)
         .attrs(app.attrs[app.build.output])
-        .spotlight(app.vars.spotlight)
-        .nesting(nesting)
-        .depth(app.vars.depth)
-        .sort(app.vars.sort)
-        .grouping(app.vars.grouping)
-        .order(app.vars.order)
-        .layout(app.vars.layout)
-        .value_var(app.vars.value_var)
-        .year(app.vars.year)
-        .total_bar(app.total())
-        .highlight(null)
-        .id_var(app.build.output+"_id")
+        .active({"spotlight": app.vars.spotlight})
+        .id(nesting)
+        .depth(nesting.indexOf(app.vars.depth))
+        // .grouping(app.vars.grouping)
+        .order({
+          "sort": app.vars.sort,
+          "value": app.vars.order
+        })
+        // .layout(app.vars.layout)
+        .size(app.vars.size)
+        .time({"solo": [app.vars.year]})
+        .focus(false)
         .error(false)
-        .solo(app.solos)
-        .filter(app.filters)
-        .sub_title(app.sub_title())
-        .icon_style(style)
-        .yaxis_val(null)
-        .tooltip_info(app.tooltip)
+        .id({
+          "solo": app.solos,
+          "mute": app.filters
+        })
+        .icon({
+          "style": style,
+          "value": "icon"
+        })
+        .y(false)
+        .tooltip(app.tooltip)
+
+      // app.viz.type(app.build.app.viz_whiz)
+      //   .descs(descs)
+      //   .title(app.build.title)
+      //   .color_var(color_var)
+      //   .attrs(app.attrs[app.build.output])
+      //   .spotlight(app.vars.spotlight)
+      //   .nesting(nesting)
+      //   .depth(app.vars.depth)
+      //   .sort(app.vars.sort)
+      //   .grouping(app.vars.grouping)
+      //   .order(app.vars.order)
+      //   .layout(app.vars.layout)
+      //   .value_var(app.vars.size)
+      //   .year(app.vars.year)
+      //   .total_bar(app.total())
+      //   .highlight(null)
+      //   .id_var(app.build.output+"_id")
+      //   .error(false)
+      //   .solo(app.solos)
+      //   .filter(app.filters)
+      //   .sub_title(app.sub_title())
+      //   .icon_style(style)
+      //   .yaxis_val(null)
+      //   .tooltip_info(app.tooltip)
 
       if (same_origin &&
           (window.parent.location.href.indexOf("dataviva.info") >= 0 ||
@@ -1013,18 +1059,30 @@
         app.viz.footer(app.embed_footer)
       }
 
+      /*******************************/
+      /* Tree Map Specific Variables */
+      /*******************************/
+      if (app.build.app.type === "tree_map") {
+
+        app.viz
+          .labels({"align": "left", "valign": "top"})
+          .temp(false)
+          .total(false)
+
+      }
+
       /******************************/
       /* Network Specific Variables */
       /******************************/
-      if (app.build.app.type == "network") {
+      else if (app.build.app.type == "network") {
         if (app.build.bra[0].id == "all" && app.build.output != "hs") var av = "always_active"
         else if (app.build.output == "hs") var av = app.vars.rca_scope
         else if (app.build.output == "cnae") var av = "bra_rca"
         else var av = "always_active"
         app.viz
-          .links(app.networks[app.build.output].edges)
+          .edges(app.networks[app.build.output].edges)
           .nodes(app.networks[app.build.output].nodes)
-          .active_var(av)
+          .active(av)
       }
 
       /****************************/
@@ -1035,10 +1093,10 @@
         else if (app.build.output == "cnae") var av = "bra_rca"
         else var av = "always_active"
         app.viz
-          .links(app.networks[app.build.output].edges)
+          .edges(app.networks[app.build.output].edges)
           .nodes(app.networks[app.build.output].nodes)
-          .highlight(app.build[app.build.output][0].id)
-          .active_var(av)
+          .focus(app.build[app.build.output][0].id)
+          .active(av)
       }
 
       /******************************/
@@ -1076,7 +1134,7 @@
           var coords = app.coords[app.build.bra[0].id.substr(0,2)]
         }
 
-        app.viz.coords(coords).highlight()
+        app.viz.coords(coords).focus(false)
 
       }
 
@@ -1084,7 +1142,7 @@
       /* Bubbles Specific Variables */
       /******************************/
       else if (app.build.app.type == "occugrid") {
-        app.viz.active_var("num_emp_est")
+        app.viz.active("num_emp_est")
       }
 
       /******************************/
@@ -1092,9 +1150,11 @@
       /******************************/
       else if (app.build.app.type == "stacked") {
         app.viz
-          .xaxis_var("year")
-          .xaxis_scale("linear")
-          .yaxis_scale("linear")
+          .x({
+            "scale": "linear",
+            "value": "year"
+          })
+          .y({"scale": "linear"})
       }
 
       /******************************/
@@ -1103,28 +1163,32 @@
       else if (app.build.app.type == "scatter") {
         var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca"
         if (app.build.output == "hs" && app.vars.rca_scope == "wld_rca") {
-          var yv = app.vars.yaxis_var + "_wld",
-              xv = app.vars.xaxis_var + "_wld"
+          var yv = app.vars.y + "_wld",
+              xv = app.vars.x + "_wld"
         }
         else {
-          var yv = app.vars.yaxis_var,
-              xv = app.vars.xaxis_var
+          var yv = app.vars.y,
+              xv = app.vars.x
         }
-        if (app.vars.yaxis_var.indexOf("pci") >= 0) yv = app.vars.yaxis_var
+        if (app.vars.y.indexOf("pci") >= 0) yv = app.vars.y
 
         var yval = null
         if (app.build.output == "hs" && app.ecis[app.build.data_url] && yv == "pci") {
           var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
         }
         app.viz
-          .xaxis_var(xv)
-          .yaxis_var(yv)
-          .xaxis_scale("linear")
-          .yaxis_scale("linear")
-          .yaxis_val(yval)
-          .mirror_axis(false)
-          .spotlight(app.vars.spotlight)
-          .active_var(av)
+          .x({
+            "scale": "linear",
+            "value": xv
+          })
+          .y({
+            "lines": [yval],
+            "scale": "linear",
+            "value": yv
+          })
+          .axes({"mirror": false})
+          .active({"spotlight": app.vars.spotlight})
+          .active(av)
       }
 
       /******************************/
@@ -1133,29 +1197,34 @@
       else if (app.build.app.type == "compare") {
 
         app.viz
-          .xaxis_var("cp_bra_1_"+app.vars.axes)
+          .x({
+            "scale": app.vars.scale,
+            "value": "cp_bra_1_"+app.vars.axes
+          })
           .xaxis_scale(app.vars.scale)
-          .yaxis_var("cp_bra_0_"+app.vars.axes)
-          .yaxis_scale(app.vars.scale)
-          .spotlight(false)
-          .mirror_axis(true)
-          .active_var("active")
+          .y({
+            "scale": app.vars.scale,
+            "value": "cp_bra_0_"+app.vars.axes
+          })
+          .axes({"mirror": true})
+          .active({"spotlight": false})
+          .active("active")
 
       }
 
       last_app = app.build.app.type
 
       if(app.build.app.type == "scatter" && app.build.bra[0].id == "all") {
-        d3.select("#app")
-          .html("")
-          .datum([])
+        app.viz.data(false)
       }
       else {
-        d3.select("#app")
-          .html("")
-          .datum(app.data[app.build.data_url][format[app.build.app.type]])
+        app.viz.data(app.data[app.build.data_url][format[app.build.app.type]])
+        // d3.select("#app")
+        //   .html("")
+        //   .datum(app.data[app.build.data_url][format[app.build.app.type]])
       }
 
+      app.viz.legend(app.vars.color !== "color")
 
       if (app.build.app.type != "rings") builder.key()
       dataviva.resize()
@@ -1171,7 +1240,8 @@
           depth = elems[0].id.length,
           secex = app.build.dataset == "secex",
           munics = app.build.output == "bra",
-          text = null
+          text = false
+          // text = null
 
       if (secex && same && !mix) {
         if (munics || depth > 2 || depth == 3) {
@@ -1232,7 +1302,8 @@
           var sub = null
         }
 
-        d3.select("#app").call(app.viz[type](app[type+"s"]).sub_title(sub))
+        app.viz[type](app[type+"s"]).title({"sub": sub}).draw()
+        // d3.select("#app").call(app.viz[type](app[type+"s"]).sub_title(sub))
 
       }
       else {
@@ -1246,7 +1317,7 @@
         }
 
         if (!app.solos.length && !app.filters.length) {
-          app.viz.sub_title(app.sub_title())
+          app.viz.title({"sub": app.sub_title()})
         }
 
         if (type == "depth" || type == "year") {
@@ -1255,74 +1326,82 @@
         }
 
         if (type == "depth" && app.build.output == "wld") {
-          if (app.vars.depth == "wld_5") app.viz.icon_style("default")
-          else app.viz.icon_style("knockout")
+          if (app.vars.depth == "wld_5") app.viz.icon({"style": "default"})
+          else app.viz.icon({"style": "knockout"})
         }
 
         if (type == "year" && app.build.app.type == "scatter") {
           var yval = null
-          if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
+          if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.y == "pci") {
             var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
           }
-          app.viz.yaxis_val(yval)
+          app.viz.y({"lines": [yval]})
         }
 
         if (type == "axes") {
-          app.viz.xaxis_var("cp_bra_1_"+value).yaxis_var("cp_bra_0_"+value)
+          app.viz.x("cp_bra_1_"+value).y("cp_bra_0_"+value)
         }
         else if (type == "scale") {
-          app.viz.xaxis_scale(value).yaxis_scale(value)
+          app.viz.x({"scale": value}).y({"scale": value})
         }
         else if (type == "rca_scope") {
-          app.viz.active_var(value)
+          app.viz.active(value)
           if (app.build.app.type == "scatter") {
             if (app.build.output == "hs" && value == "wld_rca") {
-              var yv = app.vars.yaxis_var + "_wld",
-                  xv = app.vars.xaxis_var + "_wld"
+              var yv = app.vars.y + "_wld",
+                  xv = app.vars.x + "_wld"
             }
             else {
-              var yv = app.vars.yaxis_var,
-                  xv = app.vars.xaxis_var
+              var yv = app.vars.y,
+                  xv = app.vars.x
             }
-            if (app.vars.yaxis_var.indexOf("pci") >= 0) yv = app.vars.yaxis_var
-            app.viz.xaxis_var(xv).yaxis_var(yv)
+            if (app.vars.y.indexOf("pci") >= 0) yv = app.vars.y
+            app.viz.x(xv).y(yv)
           }
         }
-        else if (type == "xaxis_var") {
+        else if (type == "x") {
           if (app.vars.rca_scope == "wld_rca") {
-            var xv = app.vars.xaxis_var + "_wld"
+            var xv = app.vars.x + "_wld"
           }
           else {
-            var xv = app.vars.xaxis_var
+            var xv = app.vars.x
           }
-          app.viz.xaxis_var(xv).total_bar(app.total())
+          app.viz.x(xv).title({"total": app.total()})
         }
-        else if (type == "yaxis_var") {
-          if (app.vars.rca_scope == "wld_rca" && app.vars.yaxis_var.indexOf("pci") < 0) {
-            var yv = app.vars.yaxis_var + "_wld"
+        else if (type == "y") {
+          if (app.vars.rca_scope == "wld_rca" && app.vars.y.indexOf("pci") < 0) {
+            var yv = app.vars.y + "_wld"
           }
           else {
-            var yv = app.vars.yaxis_var
+            var yv = app.vars.y
           }
 
           var yval = null
-          if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.yaxis_var == "pci") {
+          if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.y == "pci") {
             var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
           }
 
-          app.viz.yaxis_var(yv).yaxis_val(yval).total_bar(app.total())
+          app.viz.y({"lines": [yval], "value": yv}).title({"total": app.total()})
         }
-        else if (type == "value_var") {
+        else if (type == "size") {
           if (app.build.app.type != "occugrid") {
-            app.tooltip["short"]["basics"] = [app.vars.value_var]
+            app.tooltip["short"]["basics"] = [app.vars.size]
           }
-          app.viz[type](value).total_bar(app.total()).tooltip_info(app.tooltip)
+          app.viz[type](value).title({"total": app.total()}).tooltip(app.tooltip)
+        }
+        else if (type === "depth") {
+          app.viz[type](parseFloat(value.split("_")[1]))
         }
         else {
           app.viz[type](value)
         }
 
-        d3.select("#app").call(app.viz)
+        if (type === "color") {
+          app.viz.legend(value !== "color")
+        }
+
+        app.viz.draw()
+        // d3.select("#app").call(app.viz)
       }
     }
 
@@ -1477,7 +1556,7 @@
             "required_wage_avg",
             undefined
           ],
-          val = app.vars.value_var
+          val = app.vars.size
 
       if (exclusions.indexOf(val) >= 0) return false;
 
@@ -1485,10 +1564,10 @@
       if (app.build.app.type == "scatter") {
         var prefix = dataviva.format.text(app.build.output+"_plural")
         prefix += " "+dataviva.format.text("with")
-        prefix += " "+dataviva.format.text(app.vars.xaxis_var)
-        if (app.vars.xaxis_var != app.vars.yaxis_var) {
+        prefix += " "+dataviva.format.text(app.vars.x)
+        if (app.vars.x != app.vars.y) {
           prefix += " "+dataviva.format.text("and")
-          prefix += " "+dataviva.format.text(app.vars.yaxis_var)
+          prefix += " "+dataviva.format.text(app.vars.y)
         }
         if (app.build.output != "hs") {
           prefix += " ("+dataviva.format.text(val)+")"
@@ -1561,7 +1640,8 @@
       var form = document.getElementById("svgform");
 
       if(type == "csv"){
-        form['data'].value = d3.tsv.formatRows(app.viz.csv_columns(columns).csv_data());
+        form['data'].value = d3.tsv.formatRows(app.viz.csv(columns));
+        // form['data'].value = d3.tsv.formatRows(app.viz.csv_columns(columns).csv_data());
       }
       else {
         if (app.build.app.type == "geo_map") var svg = d3.select("div#map svg")
@@ -1690,7 +1770,7 @@
           .attr("id",build.url)
           .attr("class","output "+c+" icon "+build.app.type)
           .html(build.title)
-          .on(d3plus.evt.click,function(){
+          .on(d3plus.client.pointer.click,function(){
             app.start(this.id)
           })
 
@@ -1938,7 +2018,7 @@
                   .attr("type", "text")
                   .attr("class", "leon textbox mediumleon textbox large")
                   .attr("value", share_url)
-                  .on(d3plus.evt.click, function(){
+                  .on(d3plus.client.pointer.click, function(){
                     this.focus();
                     this.select();
                   })
@@ -1951,7 +2031,7 @@
                   .attr("type", "text")
                   .attr("class", "leon textbox mediumleon textbox large")
                   .attr("value", "<iframe width='560' height='315' src='"+window.location.href+"' frameborder='0'></iframe>")
-                  .on(d3plus.evt.click, function(){
+                  .on(d3plus.client.pointer.click, function(){
                     this.focus();
                     this.select();
                   })
@@ -2156,12 +2236,21 @@
 
           return (((d3.select("#builder").node().offsetHeight)*u)+buffer)+"px"
         })
-        .call(app.viz
-            .height(app.height)
-            .width(app.width)
-            .title_width(app.title_width)
-            .title_height(app.title_height)
-          )
+        // .call(app.viz
+        //     .height(app.height)
+        //     .width(app.width)
+        //     .title_width(app.title_width)
+        //     .title_height(app.title_height)
+        //   )
+
+      app.viz
+        .height(app.height)
+        .width(app.width)
+        .title({
+          "height": app.title_height,
+          "width": app.title_width
+        })
+        .draw()
 
       if (!app.first_load) {
         d3.select("#app")

@@ -51,7 +51,7 @@
 
     leon("#remember").color(dataviva.color).size("small")
 
-    d3.selectAll(".login_button").on(d3plus.evt.click, function () {
+    d3.selectAll(".login_button").on(d3plus.client.pointer.click, function () {
       var pr = this.id.toLowerCase()
       form = document.forms['login'];
       form.elements['provider'].value = pr;

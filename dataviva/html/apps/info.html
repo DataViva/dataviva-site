@@ -418,8 +418,8 @@ function load_info(app_info){
 
 	var current = -1
 
-	d3.selectAll("a#next").on(d3plus.evt.click,next);
-	d3.selectAll("a#prev").on(d3plus.evt.click,prev);
+	d3.selectAll("a#next").on(d3plus.client.pointer.click,next);
+	d3.selectAll("a#prev").on(d3plus.client.pointer.click,prev);
 
 	function next(){
 		current++
@@ -437,7 +437,7 @@ function load_info(app_info){
       .attr("class","page")
       .attr("id","page_"+i)
       .text(i+1)
-      .on(d3plus.evt.click,function(){
+      .on(d3plus.client.pointer.click,function(){
         current = i
         new_panel()
       })

@@ -233,7 +233,7 @@
         }
 
         div.append("i")
-          .on(d3plus.evt.click, function(){ remove_filter(this) })
+          .on(d3plus.client.pointer.click, function(){ remove_filter(this) })
           .attr("class", "fa fa-times-circle")
 
       }

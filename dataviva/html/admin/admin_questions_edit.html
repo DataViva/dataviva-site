@@ -58,7 +58,7 @@
     leon("#language")
     
     // submit form
-    d3.selectAll("#submit_button").on(d3plus.evt.click, function(){
+    d3.selectAll("#submit_button").on(d3plus.client.pointer.click, function(){
       this.parentNode.submit()
       d3.event.preventDefault();
     })

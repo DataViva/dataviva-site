@@ -248,14 +248,14 @@ function Selector() {
             bread.append("a")
               .attr("class","site_crumb")
               .html("&laquo; "+dataviva.format.text("back"))
-              .on(d3plus.evt.click,function(){
+              .on(d3plus.client.pointer.click,function(){
                 search.node().value = ""
                 select_value(data[selected.parents[0]],depth_path[depth_path.length-1]);
               })
-              .on(d3plus.evt.over,function(){
+              .on(d3plus.client.pointer.over,function(){
                 this.style.color = d3plus.utils.darker_color(x.color)
               })
-              .on(d3plus.evt.out,function(){
+              .on(d3plus.client.pointer.out,function(){
                 this.style.color = "#888"
               })
           }
@@ -565,7 +565,7 @@ function Selector() {
             var item = body.append("div")
               .attr("id","result_"+v.id)
               .attr("class","search_result")
-              // .on(d3plus.evt.click,function(){
+              // .on(d3plus.client.pointer.click,function(){
               //   if (v.id.length < depths[depths.length-1]) {
               //     if (type == "bra" && v.id.substr(0,2) == "4mg") {
               //       if (v.id.length == 2) {

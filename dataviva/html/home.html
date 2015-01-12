@@ -93,7 +93,7 @@
   var app = 1, stopped = false, changing = false
 
   d3.select("#carousel .decision")
-    .on(d3plus.evt.click,function(){
+    .on(d3plus.client.pointer.click,function(){
       window.location = carousel[app-1].url
     })
 
@@ -127,7 +127,7 @@
             .attr("webkitallowfullscreen",true)
       }
     })
-    .on(d3plus.evt.over,function(d){
+    .on(d3plus.client.pointer.over,function(d){
       stopped = true
     })
 
@@ -150,7 +150,7 @@
       }
     })
 
-  pages.on(d3plus.evt.click,function(d,i){
+  pages.on(d3plus.client.pointer.click,function(d,i){
     stopped = true
     show_app(i+1)
   })

@@ -171,7 +171,7 @@
     })
     
     // submit form
-    d3.selectAll(".reply_form .submit").on(d3plus.evt.click, function(){
+    d3.selectAll(".reply_form .submit").on(d3plus.client.pointer.click, function(){
     	this.parentNode.submit()
     	d3.event.preventDefault();
     })

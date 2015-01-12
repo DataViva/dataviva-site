@@ -125,7 +125,7 @@
         var question_title = question_block.append("a")
           .attr("class", "decision short question")
           .text(function(d){ return d.question })
-          .on(d3plus.evt.click,function(){
+          .on(d3plus.client.pointer.click,function(){
             this.parentNode.toggleClass("active")
           })
 

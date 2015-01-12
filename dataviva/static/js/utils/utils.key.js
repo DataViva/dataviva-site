@@ -50,7 +50,7 @@ function Key() {
         var cat = d3.select(key).append("div")
           .attr("id","key"+d.id)
           .attr("class","key_icon_container")
-          .on(d3plus.evt.over, function(e){
+          .on(d3plus.client.pointer.over, function(e){
             
             var x_pos = this.offsetLeft+(this.offsetWidth/2)
             var y_pos = key.parentNode.offsetTop+key.offsetTop+this.offsetTop+(this.offsetHeight/2)
@@ -114,7 +114,7 @@ function Key() {
               "mouseevents": this
             })
           })
-          .on(d3plus.evt.out, function(e){
+          .on(d3plus.client.pointer.out, function(e){
             d3plus.tooltip.remove("key")
           })
           .append("div")
@@ -129,7 +129,7 @@ function Key() {
        
       var reset_button = d3.select(key).append("div")
         .attr("class","leon button medium square")
-        .on(d3plus.evt.over,function(){
+        .on(d3plus.client.pointer.over,function(){
           
           var x_pos = this.offsetLeft+(this.offsetWidth/2)
           var y_pos = key.parentNode.offsetTop+key.offsetTop+this.offsetTop
@@ -144,10 +144,10 @@ function Key() {
             "description": dataviva.format.text("reset")
           })
         })
-        .on(d3plus.evt.out,function(){
+        .on(d3plus.client.pointer.out,function(){
           d3plus.tooltip.remove("key")
         })
-        .on(d3plus.evt.click,function(){
+        .on(d3plus.client.pointer.click,function(){
           key_filters = []
           key_solos = []
           app.update(key_filters,"filter")

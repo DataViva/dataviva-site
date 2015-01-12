@@ -123,7 +123,7 @@
 
     leon("$language_select").color("{{ g.color }}").size("small")
 
-    d3.select("#close_message").on(d3plus.evt.click,function(){
+    d3.select("#close_message").on(d3plus.client.pointer.click,function(){
       var div = d3.select("#server_message")
       var timing = parseFloat(div.style("transition-duration"),10)*1000;
       div.style("opacity",0);
@@ -166,11 +166,11 @@
 
       d3.select("#d3plus_tooltip_id_account")
         .style("display","none")
-        .on(d3plus.evt.click,function(){
+        .on(d3plus.client.pointer.click,function(){
           d3.event.stopPropagation()
         })
 
-      d3.select("#account").on(d3plus.evt.click,function(){
+      d3.select("#account").on(d3plus.client.pointer.click,function(){
         if (this.className.indexOf("active") < 0) {
           show_toggle()
         }
@@ -180,13 +180,13 @@
         d3.event.stopPropagation()
       })
 
-      d3.select("body").on(d3plus.evt.click,function(){
+      d3.select("body").on(d3plus.client.pointer.click,function(){
         hide_toggle()
       })
 
     }
     else {
-      d3.select("#account").on(d3plus.evt.click,function(){
+      d3.select("#account").on(d3plus.client.pointer.click,function(){
         login()
       })
     }
@@ -201,7 +201,7 @@
     	}
     })
 
-     d3.select("a#search").on(d3plus.evt.click, function() {
+     d3.select("a#search").on(d3plus.client.pointer.click, function() {
      	d3.select(".searchBox").style("display","block").transition().style("width", "465px")
        .each("end",function(){
          d3.select(this).style("overflow","visible")
@@ -227,7 +227,7 @@
 
     }
 
-    d3.select(window).on(d3plus.evt.click, function() {
+    d3.select(window).on(d3plus.client.pointer.click, function() {
 
     	var d3_target = d3.select(d3.event.target)
 

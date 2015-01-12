@@ -23,7 +23,7 @@ dataviva.obj2csv = function(obj) {
 }
 
 dataviva.format = {};
-dataviva.format.text = function(text,name,l) {
+dataviva.format.text = function(text,name,vars,obj,l) {
 
   if (!l) var l = dataviva.language
 
@@ -66,10 +66,10 @@ dataviva.format.text = function(text,name,l) {
       // Axes
       "axes": {"en": "Axes", "pt": "Eixos"},
       "axes_desc_compare": {"en": "Changes the X and Y variables used in the chart.", "pt": "Altera o vari\u00e1veis X e Y utilizadas no gr\u00e1fico."},
-      "xaxis_var": {"en": "X Axis", "pt": "Eixo X"},
-      "xaxis_var_desc_scatter": {"en": "Changes the X axis variable.", "pt": "Alterar a vari\u00e1vel do eixo X."},
-      "yaxis_var": {"en": "Y Axis", "pt": "Eixo Y"},
-      "yaxis_var_desc_scatter": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
+      "x": {"en": "X Axis", "pt": "Eixo X"},
+      "x_desc_scatter": {"en": "Changes the X axis variable.", "pt": "Alterar a vari\u00e1vel do eixo X."},
+      "y": {"en": "Y Axis", "pt": "Eixo Y"},
+      "y_desc_scatter": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
 
       // Stacked Area Sorting/Order
       "order": {"en": "Order", "pt": "Ordena\u00e7\u00e3o"},
@@ -121,15 +121,15 @@ dataviva.format.text = function(text,name,l) {
       "sizing_desc_scatter": {"en": "Changes the variable used to size the circles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
 
       // Color Labels
-      "color_var": {"en": "Color", "pt": "Cor"},
-      "color_var_desc_tree_map": {"en": "Changes the variable used to color the rectangles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os ret\u00e2ngulos."},
-      "color_var_desc_stacked": {"en": "Changes the variable used to color the areas.", "pt": "Alterar a vari\u00e1vel utilizada para colorir as \u00e1reas."},
-      "color_var_desc_geo_map": {"en": "Changes the variable used to color the locations.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os locais."},
-      "color_var_desc_network": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
-      "color_var_desc_rings": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
-      "color_var_desc_compare": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
-      "color_var_desc_occugrid": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
-      "color_var_desc_scatter": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
+      "color": {"en": "Color", "pt": "Cor"},
+      "color_desc_tree_map": {"en": "Changes the variable used to color the rectangles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os ret\u00e2ngulos."},
+      "color_desc_stacked": {"en": "Changes the variable used to color the areas.", "pt": "Alterar a vari\u00e1vel utilizada para colorir as \u00e1reas."},
+      "color_desc_geo_map": {"en": "Changes the variable used to color the locations.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os locais."},
+      "color_desc_network": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
+      "color_desc_rings": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
+      "color_desc_compare": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
+      "color_desc_occugrid": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
+      "color_desc_scatter": {"en": "Changes the variable used to color the circles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os c\u00edrculos."},
 
       // Other Control Labels
       "active": {"en": "Available", "pt": "Dispon\u00edvel"},
@@ -731,13 +731,21 @@ dataviva.cleanData = function(app, data) {
     "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"]
   }
 
+  var depths = dataviva.depths(app.build.output)
+
   var dataObj = data.data.map(function(d){
 
-    return d.reduce(function(obj, value, i){
+    var temp = d.reduce(function(obj, value, i){
       var header = data.headers[i];
       obj[header] = value;
       return obj
     }, {})
+
+    depths.forEach(function(depth){
+      temp[app.build.output+"_"+depth] = temp[app.build.output+"_id"].slice(0,depth);
+    })
+
+    return temp
 
   })
 
@@ -817,7 +825,7 @@ dataviva.popover.create = function(params) {
       .attr("class","d3plus_tooltip_close")
       .html("\&times;")
       .style("background-color",color)
-      .on(d3plus.evt.click,function(){
+      .on(d3plus.client.pointer.click,function(){
         dataviva.popover.hide("#"+id);
         d3.select("body").style("overflow", "auto")
       })
@@ -830,7 +838,7 @@ dataviva.popover.show = function(id) {
   if (d3.select("#popover_mask").empty()) {
     d3.select("body").append("div")
       .attr("id","popover_mask")
-      .on(d3plus.evt.click,function(){
+      .on(d3plus.client.pointer.click,function(){
         dataviva.popover.hide();
       })
   }
@@ -910,7 +918,7 @@ dataviva.flash = function(text) {
 	flash_inner.append("i")
 		.attr("id", "close_message")
 		.attr("class", "fa fa-times-circle")
-		.on(d3plus.evt.click, function(d){
+		.on(d3plus.client.pointer.click, function(d){
 	        var div = d3.select("#server_message")
 	        var timing = parseFloat(div.style("transition-duration"),10)*1000;
 	        div.style("opacity",0);

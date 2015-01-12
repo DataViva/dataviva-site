@@ -257,7 +257,7 @@
 
       ths
         .text(function(d) { return dataviva.format.text(d)})
-        .on(d3plus.evt.click, column_sort)
+        .on(d3plus.client.pointer.click, column_sort)
 
       ths.exit().remove()
 
@@ -319,7 +319,7 @@
           if (d == "color") d = "color_var"
           return dataviva.format.text(d)
         })
-        .on(d3plus.evt.click, column_sort)
+        .on(d3plus.client.pointer.click, column_sort)
 
       ths.exit().remove()
 
