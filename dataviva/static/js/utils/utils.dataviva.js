@@ -244,19 +244,13 @@ dataviva.format.text = function(text,name,l) {
       "opp_gain_desc": {"en": "Opportunity gain is a measure that indicates how much diversity is offered by an industry or product should the given location develop it.", "pt": "O ganho de oportunidade \u00e9 uma medida que indica quanta diversidade \u00e9 oferecida por um determinado setor ou produto se uma determinada localidade fosse desenvolv\u00ea-lo."},
       "opp_gain_wld": {"en": "International Opportunity Gain", "pt": "Ganho de Oportunidade Internacional"},
 
-      "val_usd_growth_pct": {"en": "Nominal Annual Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento Anual (1 ano)"},
-      "val_usd_growth_pct_5": {"en": "Nominal Annual Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento Anual (5 anos)"},
-      "val_usd_growth_val": {"en": "Growth Value (1 year)", "pt": "Valor de Crescimento (1 ano)"},
-      "val_usd_growth_val_5": {"en": "Growth Value (5 year)", "pt": "Valor de Crescimento (5 anos)"},
+      "val_usd_growth": {"en": "Nominal Annual Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento Anual (1 ano)"},
+      "val_usd_growth_5": {"en": "Nominal Annual Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento Anual (5 anos)"},
 
-      "wage_growth_pct": {"en": "Nominal Annual Wage Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento dos Sal\u00e1rios Anual (1 ano)"},
-      "wage_growth_pct_5": {"en": "Nominal Annual Wage Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento dos Sal\u00e1rios Anual (5 anos)"},
-      "wage_growth_val": {"en": "Wage Growth Value (1 year)", "pt": "Valor de Crescimento dos Sal\u00e1rios (1 ano)"},
-      "wage_growth_val_5": {"en": "Wage Growth Value (5 year)", "pt": "Valor de Crescimento dos Sal\u00e1rios (5 anos)"},
-      "num_emp_growth_pct": {"en": "Nominal Annual Employee Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Empregados Anual (1 ano)"},
-      "num_emp_growth_pct_5": {"en": "Nominal Annual Employee Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento de Empregados Anual (5 anos)"},
-      "num_emp_growth_val": {"en": "Employee Growth (1 year)", "pt": "Crescimento do N\u00famero de Empregados (1 ano)"},
-      "num_emp_growth_val_5": {"en": "Employee Growth (5 year)", "pt": "Crescimento do N\u00famero de Empregados (5 anos)"},
+      "wage_growth": {"en": "Nominal Annual Wage Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento dos Sal\u00e1rios Anual (1 ano)"},
+      "wage_growth_5": {"en": "Nominal Annual Wage Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento dos Sal\u00e1rios Anual (5 anos)"},
+      "num_emp_growth": {"en": "Nominal Annual Employee Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Empregados Anual (1 ano)"},
+      "num_emp_growth_5": {"en": "Nominal Annual Employee Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento de Empregados Anual (5 anos)"},
 
       // RAIS Labels
       "rais": {"en": "Establishments and Employment (RAIS)", "pt": "Estabelecimentos e Emprego (RAIS)"},
@@ -438,7 +432,7 @@ dataviva.format.number = function(value,name,l) {
   var negative = value < 0
   value = Math.abs(value)
 
-  if (name.indexOf("_growth_pct") >= 0) value = value * 100
+  if (name.indexOf("_growth") >= 0) value = value * 100
 
   var smalls = ["rca","rca_bra","rca_wld","distance","eci","pci","bra_diversity_eff","cnae_diversity_eff","cbo_diversity_eff","hs_diversity_eff","wld_diversity_eff"]
 
@@ -500,16 +494,12 @@ dataviva.format.number = function(value,name,l) {
         "wage": ["$"," BRL"],
         "wage_avg": ["$"," BRL"],
         "wage_avg_bra": ["$"," BRL"],
-        "wage_growth_val": ["$"," BRL"],
-        "wage_growth_val_5": ["$"," BRL"],
-        "val_usd_growth_pct": ["","%"],
-        "val_usd_growth_pct_5": ["","%"],
-        "val_usd_growth_val": ["$"," USD"],
-        "val_usd_growth_val_5": ["$"," USD"],
-        "num_emp_growth_pct": ["","%"],
-        "num_emp_growth_pct_5": ["","%"],
-        "wage_growth_pct": ["","%"],
-        "wage_growth_pct_5": ["","%"]
+        "val_usd_growth": ["","%"],
+        "val_usd_growth_5": ["","%"],
+        "num_emp_growth": ["","%"],
+        "num_emp_growth_5": ["","%"],
+        "wage_growth": ["","%"],
+        "wage_growth_5": ["","%"]
       }
 
   if (name.indexOf("total_") == 0) {

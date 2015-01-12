@@ -43,13 +43,11 @@ def before_request():
         "hat": "glasses"
     }
 
-@mod.route('/embed/', defaults={"app_name": "tree_map", "dataset": "rais",
-            "bra_id": "4mg", "filter1": "all", "filter2": "all", "output": "cbo"})
-@mod.route('/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/'
-            '<output>/')
+@mod.route("/embed/")
+@mod.route("/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
 #@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
-def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
-            output=None):
+def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
+          filter1="all", filter2="all", output="cbo"):
 
     lang = request.args.get('lang', None) or g.locale
 
@@ -150,8 +148,6 @@ def embed(app_name=None, dataset=None, bra_id=None, filter1=None, filter2=None,
             current_build = current_build,
             global_vars = json.dumps(global_vars),
             facebook_id = FACEBOOK_OAUTH_ID))
-
-
 
     ret.headers.add('Last-Modified', datetime.now())
     ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
@@ -273,7 +269,6 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
                 if bra_id != "filler":
                     b.set_bra(bra_id)
                 recommended['no_filters'].append(b.serialize())
-
 
     return jsonify(recommended)
 

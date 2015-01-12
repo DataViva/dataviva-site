@@ -102,7 +102,7 @@ class Build(db.Model, AutoSerialize):
                     if Cnae.query.get(f):
                         self.cnae.append(Cnae.query.get(f))
                     else:
-                        self.cnae.append(Cnae.query.get('r90027'))
+                        self.cnae.append(Cnae.query.get('r90019'))
                 self.filter1 = "_".join([i.id for i in set(self.cnae)])
             elif self.dataset == "secex":
                 self.hs = []
@@ -168,15 +168,16 @@ class Build(db.Model, AutoSerialize):
 
         if self.output == "bra":
             if bra == "all" and self.app.type == "geo_map":
-                bra = "show.2"
+                bra = "show.3"
             elif bra == "all":
-                bra = "show.8"
+                bra = "show.9"
             else:
-                bra = bra + ".show.8"
+                bra = bra + ".show.9"
 
         filter1 = self.filter1
         if filter1 == "all" or self.app.type == "rings":
-            filter1 = "show.6"
+            if self.output == "cnae" or self.output == "hs":
+                filter1 = "show.6"
 
         filter2 = self.filter2
         if filter2 == "all" or self.app.type == "rings":
@@ -185,9 +186,7 @@ class Build(db.Model, AutoSerialize):
             elif self.output == "wld":
                 filter2 = "show.5"
 
-        data_url = '{0}/all/{1}/{2}/{3}/'.format(self.dataset, bra,
-            filter1, filter2)
-        return data_url
+        return '{0}/all/{1}/{2}/{3}/'.format(self.dataset, bra, filter1, filter2)
 
     '''Returns the data table required for this build'''
     def data_table(self):

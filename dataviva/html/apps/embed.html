@@ -578,7 +578,7 @@
 
             // Set public current build variable
             app.build = data.current_build
-            last_depth = app.build.bra[0].id == "all" ? "bra_2" : "bra_8"
+            last_depth = app.build.bra[0].id == "all" ? "bra_3" : "bra_9"
             leon("#app_select").color(app.build.app.color)
             builder.url()
             builder.outputs(data.all_builds)
@@ -700,7 +700,7 @@
                 var json_id = "all"
               }
               else {
-                var json_id = app.build.bra[0].id.substr(0,2)
+                var json_id = app.build.bra[0].id.substr(1,2)
               }
 
               if (!app.coords[json_id]) {
