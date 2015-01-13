@@ -21,10 +21,7 @@ def rais_api(**kwargs):
 
     if exclude and "," in exclude:
         exclude = exclude.split(",")
-
-    # -- 1. filter ALLs
-    kwargs = {k:v for k,v in kwargs.items() if v != table_helper.ALL}
-    # -- 2. select table
+    
     allowed_when_not, possible_tables = table_helper.prepare(['bra_id', 'cnae_id', 'cbo_id'], [ Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio ] )
     table = table_helper.select_best_table(kwargs, allowed_when_not, possible_tables)
     filters, groups, show_column = query_helper.build_filters_and_groups(table, kwargs, exclude=exclude)
