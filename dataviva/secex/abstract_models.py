@@ -23,6 +23,8 @@ class BaseYw(BaseSecex):
     hs_diversity = db.Column(db.Integer(11))
     hs_diversity_eff = db.Column(db.Float())
 
+    wld_id_len = db.Column(db.Integer(1))
+
     @declared_attr
     def wld_id(cls):
         return db.Column(db.String(5), db.ForeignKey(Wld.id), primary_key=True)
@@ -38,6 +40,8 @@ class BaseYp(BaseSecex):
     wld_diversity = db.Column(db.Integer(11))
     wld_diversity_eff = db.Column(db.Float())
     rca_wld = db.Column(db.Float())
+
+    hs_id_len = db.Column(db.Integer(1))
 
     @declared_attr
     def hs_id(cls):
@@ -55,6 +59,8 @@ class BaseYb(BaseSecex):
     wld_diversity = db.Column(db.Integer(11))
     wld_diversity_eff = db.Column(db.Float())
 
+    bra_id_len = db.Column(db.Integer(1))
+
     @declared_attr
     def bra_id(cls):
         return db.Column(db.String(8), db.ForeignKey(Bra.id), primary_key=True)
@@ -71,6 +77,9 @@ class BaseYb(BaseSecex):
 
 class BaseYpw(BaseSecex):
     val_usd = db.Column(db.Numeric(16,2))
+
+    hs_id_len = db.Column(db.Integer(1))
+    wld_id_len = db.Column(db.Integer(1))
 
     @declared_attr
     def hs_id(cls):
@@ -93,6 +102,9 @@ class BaseYbp(BaseSecex):
     opp_gain = db.Column(db.Float())
     opp_gain_wld = db.Column(db.Float())
 
+    hs_id_len = db.Column(db.Integer(1))
+    bra_id_len = db.Column(db.Integer(1))
+
     @declared_attr
     def bra_id(cls):
         return db.Column(db.String(8), db.ForeignKey(Bra.id), primary_key=True)
@@ -106,6 +118,9 @@ class BaseYbp(BaseSecex):
 
 class BaseYbw(BaseSecex):
     val_usd = db.Column(db.Numeric(16,2))
+
+    wld_id_len = db.Column(db.Integer(1))
+    bra_id_len = db.Column(db.Integer(1))
 
     @declared_attr
     def bra_id(cls):
@@ -126,7 +141,11 @@ class BaseYbw(BaseSecex):
 
 class BaseYbpw(BaseSecex):    
     val_usd = db.Column(db.Numeric(16,2))
-
+    
+    wld_id_len = db.Column(db.Integer(1))
+    bra_id_len = db.Column(db.Integer(1))
+    hs_id_len = db.Column(db.Integer(1))
+    
     @declared_attr
     def bra_id(cls):
         return db.Column(db.String(8), db.ForeignKey(Bra.id), primary_key=True)
