@@ -1081,8 +1081,9 @@
 
         app.viz
           .labels({"align": "left", "valign": "top"})
-          .temp(false)
-          .total(false)
+            .active(false)
+            .temp(false)
+            .total(false)
           .zoom(false)
 
       }
@@ -1151,6 +1152,9 @@
         }
 
         app.viz.coords(coords).focus(false)
+          .active(false)
+          .temp(false)
+          .total(false)
 
       }
 
@@ -1171,6 +1175,9 @@
             "value": "year"
           })
           .y({"scale": "linear"})
+          .active(false)
+          .temp(false)
+          .total(false)
       }
 
       /******************************/
@@ -1272,9 +1279,10 @@
       return text
     }
 
-    app.update = function(value, viz) {
+    app.update = function(value, type) {
 
-      var type = viz.container(Object).id.slice(3);
+
+      if (typeof type !== "string") type = type.container(Object).id.slice(3);
 
       if (type == "solo" || type == "filter") {
 
@@ -1317,10 +1325,19 @@
           var sub = text
         }
         else {
-          var sub = null
+          var sub = false
         }
 
-        app.viz[type](app[type+"s"]).title({"sub": sub}).draw()
+        var method = type === "filter" ? "mute" : "solo";
+        var filterObj = {}
+        if (app[type+"s"].length) {
+          filterObj[method] = app[type+"s"]
+        }
+        else {
+          filterObj[method] = false
+        }
+
+        app.viz.id(filterObj).title({"sub": sub}).draw()
         // d3.select("#app").call(app.viz[type](app[type+"s"]).sub_title(sub))
 
       }
@@ -1329,9 +1346,10 @@
         var old_value = app.vars[type]
         app.vars[type] = value
         builder.url()
+
         if (type == "year" && app.build.app.type != "rings") {
           builder.key()
-          dataviva.resize()
+          dataviva.resize(true)
         }
 
         if (!app.solos.length && !app.filters.length) {
@@ -1409,6 +1427,9 @@
         }
         else if (type === "depth") {
           app.viz[type](app.viz.id(Object).nesting.indexOf(value))
+        }
+        else if (type === "year") {
+          app.viz.time({"solo": [parseFloat(value)]})
         }
         else {
           app.viz[type](value)
@@ -2145,7 +2166,7 @@
     /* Page Resizing */
     /*****************/
 
-    dataviva.resize = function() {
+    dataviva.resize = function(noDraw) {
 
       var children = d3.select("#ui_bottom").node().childNodes,
           min_width = 300;
@@ -2268,7 +2289,8 @@
           "height": app.title_height,
           "width": app.title_width
         })
-        .draw()
+
+      if (!noDraw) app.viz.draw()
 
       if (!app.first_load) {
         d3.select("#app")
