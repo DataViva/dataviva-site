@@ -506,6 +506,7 @@
       })
       .total("required")
       .temp("elsewhere")
+      .timeline(false)
 
     // app.viz = d3plus.viz()
     //   .name_array(["name","display_id"])
@@ -897,47 +898,61 @@
           else {
             var default_value = ui.values[0]
           }
-		  if(ui.type == "rca_scope"){
-			var default_value = "wld_rca"
-		  }
-		  if(ui.type == "spotlight"){
-			var default_value = "true"
-		  }
+
+    		  if(ui.type == "rca_scope"){
+      			var default_value = "wld_rca"
+    		  }
+    		  if(ui.type == "spotlight"){
+      			var default_value = "true"
+    		  }
+
           if((last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
             app.vars[ui.type] = default_value
           }
 
-          if (ui.values.length > 1 && app.vars.builder != "false"  && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs")) || (ui.type != "color"  && app.build.app.type != "stacked")) {
-			//&& (ui.type != "color" && app.build.app.type == "stacked")
-            var leon_type = ui.values.length <= 4 ? "radio" : "select"
-            var leon_data = {}
+          if (ui.values.length > 1 && app.vars.builder !== "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs") || (ui.type != "color" && app.build.app.type != "stacked"))) {
+
+            var ui_data = []
             ui.values.forEach(function(v){
               if(!(v == "bra_rca" &&  app.build.bra[0].id == "all" &&  app.build.app.type == "network")) {
-              	// If it is different of Type: network, Location: bra, Option: Domestic
-              	leon_data[v] = dataviva.format.text(v)
+                ui_data.push({
+                  "text": dataviva.format.text(v),
+                  "value": v
+                })
               }
             })
 
-			var ui_div = d3.select("#app_controls").append("div")
-			.attr("class","ui_group alt_tooltip")
-			.attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
-			.on(d3plus.client.pointer.over,function(){
-			  if (leon_type == "select") dataviva.ui.tooltip("alt_tooltip",this,"center right")
-			  else dataviva.ui.tooltip("alt_tooltip",this)
-			})
-			.on(d3plus.client.pointer.out,function(){
-			  dataviva.ui.tooltip("alt_tooltip",false)
-			})
+            var form_type = ui_data.length > 3 ? "drop" : "toggle";
 
-			leon({
-			  "type": leon_type,
-			  "data": leon_data,
-			  "id": ui.type,
-			  "default": app.vars[ui.type],
-			  "label": dataviva.format.text(title),
-			  "parent": ui_div.node(),
-			  "event": app.update
-			}).color(app.build.app.color)
+      			var ui_div = d3.select("#app_controls").append("div")
+        			.attr("class","ui_group alt_tooltip")
+        			.attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
+        			.on(d3plus.client.pointer.over,function(){
+        			  if (form_type === "drop") dataviva.ui.tooltip("alt_tooltip",this,"center right")
+        			  else dataviva.ui.tooltip("alt_tooltip",this)
+        			})
+        			.on(d3plus.client.pointer.out,function(){
+        			  dataviva.ui.tooltip("alt_tooltip",false)
+        			})
+
+            d3plus.form()
+              .container({
+                "id": "ui_" + ui.type,
+                "value": ui_div
+              })
+              .type(form_type)
+              .data({
+                "sort": false,
+                "value": ui_data
+              })
+              .text("text")
+              .id("value")
+              .focus(app.vars[ui.type], app.update)
+              .title(dataviva.format.text(title))
+              // .ui({
+              //   "color": app.build.app.color
+              // })
+              .draw()
 
           }
 
@@ -1068,6 +1083,7 @@
           .labels({"align": "left", "valign": "top"})
           .temp(false)
           .total(false)
+          .zoom(false)
 
       }
 
@@ -1256,7 +1272,9 @@
       return text
     }
 
-    app.update = function(value,type) {
+    app.update = function(value, viz) {
+
+      var type = viz.container(Object).id.slice(3);
 
       if (type == "solo" || type == "filter") {
 
@@ -1390,7 +1408,7 @@
           app.viz[type](value).title({"total": app.total()}).tooltip(app.tooltip)
         }
         else if (type === "depth") {
-          app.viz[type](parseFloat(value.split("_")[1]))
+          app.viz[type](app.viz.id(Object).nesting.indexOf(value))
         }
         else {
           app.viz[type](value)
