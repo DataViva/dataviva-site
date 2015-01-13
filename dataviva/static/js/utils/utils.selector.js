@@ -57,6 +57,10 @@ function Selector() {
 
       update_distance = function(dist,id) {
 
+        if (typeof id === "function") {
+          id = id.container(Object).id.substr(5)
+        }
+
         data[id].distance = dist
 
         var div = d3.select("#withins"+id)
@@ -156,26 +160,27 @@ function Selector() {
 
         // Sort final generated list
         list.sort(function(a, b){
-		  if(a.display_id=="4mg"||b.display_id=="4mg") {
-		  	var lengthdiff = b.id.length - a.id.length
-		  } else {
-		  	var lengthdiff = b.population - a.population
-		  }
-		  if (lengthdiff) return lengthdiff
+
+    		  if(a.id=="4mg" || b.id=="4mg") {
+    		  	var lengthdiff = b.id.length - a.id.length
+    		  } else {
+    		  	var lengthdiff = b.population - a.population
+    		  }
+    		  if (lengthdiff) return lengthdiff
 
           if (type == "bra") {
-      		var a_state = a.id.substr(0,2)
-        	var b_state = b.id.substr(0,2)
+        		var a_state = a.id.substr(1,2)
+          	var b_state = b.id.substr(1,2)
           }
           else {
             var a_state = a.id
             var b_state = b.id
           }
 
-          if (a_state == "4mg" && a_state != b_state) {
+          if (a_state == "mg" && a_state != b_state) {
             return -1
           }
-          else if (b_state == "4mg" && a_state != b_state) {
+          else if (b_state == "mg" && a_state != b_state) {
             return 1
           }
           else if (["number","string"].indexOf(typeof a[sorting]) >= 0 && ["number","string"].indexOf(typeof b[sorting]) >= 0) {
@@ -253,7 +258,7 @@ function Selector() {
                 select_value(data[selected.parents[0]],depth_path[depth_path.length-1]);
               })
               .on(d3plus.client.pointer.over,function(){
-                this.style.color = d3plus.utils.darker_color(x.color)
+                this.style.color = d3plus.color.legible(x.color)
               })
               .on(d3plus.client.pointer.out,function(){
                 this.style.color = "#888"
@@ -373,7 +378,8 @@ function Selector() {
 
         if (data instanceof Array) {
           data = data.filter(function(d){
-            return d.available || (type == "bra" && d.id.length == 8);
+            return d.available || type === "bra";
+            return d.available || (type == "bra" && d.id.length === 9);
           })
 
           var temp_dict = {};
@@ -402,7 +408,7 @@ function Selector() {
           };
         }
 
-        for (d in data) {
+        for (var d in data) {
 
           if (!data[d].display_id) {
             data[d].display_id = dataviva.displayID(d,type);
@@ -416,13 +422,13 @@ function Selector() {
           else if (depth == 0) {
             data[d].parents = ["all"]
           }
-          else if (type == "bra" && d.length == 9){
+          else if (type == "bra" && d.length === 9){
             data[d].parents = [d.slice(0,depths[depth-1])]
             if (data[d].plr) {
               data[d].parents.push(data[d].plr)
             }
           }
-          else if (type == "bra" && d.length == 8){
+          else if (type == "bra" && d.length === 8){
             data[d].parents = [d.slice(0,3)]
           }
           else {
@@ -449,7 +455,7 @@ function Selector() {
 
           var header_color = x.color
 
-          icon.style("background-image","url('"+x.icon+"')")
+          icon.style("display", "inline-block").style("background-image","url('"+x.icon+"')")
 
           if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && x.id.length != 5)) {
             icon.style("background-color",x.color)
@@ -537,7 +543,7 @@ function Selector() {
         var hw = header.node().offsetWidth
         hw -= icon.node().offsetWidth
         hw -= sort_toggles.node().offsetWidth
-        hw -= 36
+        hw -= 40
 
         if (hw > 0) title.style("max-width",hw+"px")
 
@@ -608,13 +614,13 @@ function Selector() {
 
             text.append("div")
               .attr("class","search_title")
-              .style("color",d3plus.utils.darker_color(v.color))
+              .style("color",d3plus.color.legible(v.color))
               .html(title)
 
             if (type != "file" && searching) {
 
-              if(type=="bra"&&v.id.length>2) {
-              	stateInfo = v.id.substr(0,2).toUpperCase();
+              if(type == "bra" && v.id.length > 3) {
+              	stateInfo = v.id.substr(1,2).toUpperCase();
               	extrainfo = dataviva.format.text(type+"_"+v.id.length)+" "+dataviva.format.text("in")+" "+stateInfo;
               } else {
               	extrainfo = dataviva.format.text(type+"_"+v.id.length);
@@ -657,7 +663,7 @@ function Selector() {
 
                 var d = depths.indexOf(v.id.length)
                 var length = depths[d+1]
-                var suffix = dataviva.format.text("bra_7_plural")
+                var suffix = dataviva.format.text("bra_8_plural")
 
                 var b = buttons.append("input")
                   .attr("type","button")
@@ -665,7 +671,7 @@ function Selector() {
                   .attr("value",suffix)
 
                 b.node().onclick = function(){
-                  select_value(v,7)
+                  select_value(v,8)
                 }
 
                 leon("#pr").color(v.color)
@@ -674,7 +680,7 @@ function Selector() {
               }
 
               var d = depths.indexOf(v.id.length)
-              var length = v.id.length == 7 && type == "bra" ? 8 : depths[d+1]
+              var length = v.id.length == 8 && type == "bra" ? 9 : depths[d+1]
               var suffix = dataviva.format.text(type+"_"+length+"_plural")
 
               var b = buttons.append("input")
@@ -696,34 +702,25 @@ function Selector() {
               var prox_toggles = buttons.append("div")
                 .attr("class","proximity_toggles")
 
-              prox_toggles.append("label")
-                .attr("for","distance"+v.id)
-                .html(dataviva.format.text("Municipalities within"))
-
-              var select = prox_toggles.append("select")
-                .attr("id","distance"+v.id)
-                .attr("onchange","update_distance(this.value,'"+v.id+"')")
-
-              proximities.forEach(function(p,i){
-            		dontshow = true
-              	if(current_app == "geo_map" && p == 0) {
-              		dontshow = false
-              	}
-              	if(dontshow) {
-	                var option = select.append("option")
-	                  .attr("id",p)
-	                  .attr("value",p)
-	                  .html(p+"km")
-	                if (v.distance && p == v.distance) {
-	                  option.attr("selected","selected")
-	                }
-	                else if (i == 0) {
-	                  option.attr("selected","selected")
-	                }
-                }
+              var proxData = proximities.map(function(p){
+                return {"text": p+"km", "value": p}
               })
 
-              leon("#distance"+v.id).color(v.color)
+              var proxFocus = v.distance || proxData[0].value
+
+              d3plus.form()
+                .container({
+                  "id": "prox_"+v.id,
+                  "value": prox_toggles
+                })
+                .title(dataviva.format.text("Municipalities within"))
+                .data(proxData)
+                .focus(proxFocus, update_distance)
+                .ui({"margin": 0})
+                .type("drop")
+                .id("value")
+                .text("text")
+                .draw()
 
             }
 
