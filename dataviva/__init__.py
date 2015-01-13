@@ -66,6 +66,7 @@ from dataviva.attrs.views import mod as attrs_module
 from dataviva.secex_export.views import mod as secex_export_module
 from dataviva.secex_import.views import mod as secex_import_module
 from dataviva.rais.views import mod as rais_module
+from dataviva.hedu.views import mod as hedu_module
 ''' front facing views/models of site '''
 from dataviva.general.views import mod as general_module
 from dataviva.admin.views import mod as admin_module
@@ -83,6 +84,7 @@ app.register_blueprint(attrs_module)
 app.register_blueprint(secex_export_module)
 app.register_blueprint(secex_import_module)
 app.register_blueprint(rais_module)
+app.register_blueprint(hedu_module)
 
 app.register_blueprint(general_module)
 app.register_blueprint(admin_module)
