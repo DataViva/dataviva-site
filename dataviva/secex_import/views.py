@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from dataviva import db
 import dataviva.secex_import.models as secex_import
-from dataviva.secex_import.models import Yb #, Yw, Yp, Ybw #, Ybp, Ypw, Ybpw
+from dataviva.secex_import.models import *
 from dataviva.utils import table_helper, query_helper
 from dataviva.utils.gzip_data import gzipped
 from dataviva.utils.decorators import cache_api
@@ -28,7 +28,7 @@ def secex_api(**kwargs):
     kwargs = {k:v for k,v in kwargs.items() if v != table_helper.ALL}
     # -- 2. select table
 
-    allowed_when_not, possible_tables = table_helper.prepare(['bra_id', 'hs_id', 'wld_id'], [dataviva.secex_import.models.Yb] ) #, secex_import.Yw, secex_import.Yp, secex_import.Ybw, secex_import.Ybp, secex_import.Ypw, secex_import.Ybpw])
+    allowed_when_not, possible_tables = table_helper.prepare(['bra_id', 'hs_id', 'wld_id'], [Yb_import, Yp_import, Yw_import, Ybw_import, Ybp_import, Ypw_import, Ybpw_import])
 
     table = table_helper.select_best_table(kwargs, allowed_when_not, possible_tables)
 
@@ -36,11 +36,11 @@ def secex_api(**kwargs):
 
     results = query_helper.query_table(table, filters=filters, groups=groups, limit=limit, order=order, sort=sort, serialize=serialize)
 
-    if table is secex_import.Ybp:
-        stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yp, kwargs, remove=['bra_id'])
-        stripped_columns = [Yp.year, Yp.hs_id, Yp.pci]
-        tmp = query_helper.query_table(Yp, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
-        results["pci"] = tmp
+    # if table is Ybp_import:
+        # stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yp_import, kwargs, remove=['bra_id'])
+        # stripped_columns = [Yp_import.year, Yp_import.hs_id]
+        # tmp = query_helper.query_table(Yp, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
+        # results["pci"] = tmp
 
     if serialize or download:
         response = jsonify(results)
