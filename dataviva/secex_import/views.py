@@ -39,7 +39,7 @@ def secex_api(**kwargs):
 
     if table is Ybp_import:
         stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yp_export, kwargs, remove=['bra_id'])
-        stripped_columns = [Yp_export.year, Yp_export.hs_id]
+        stripped_columns = [Yp_export.year, Yp_export.hs_id, Yp_export.pci]
         tmp = query_helper.query_table(Yp_export, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
         results["pci"] = tmp
 
