@@ -1,12 +1,13 @@
 from flask import Blueprint, request, jsonify
 from dataviva import db
-from dataviva.secex.models import Yb_secex, Yw, Yp, Ybw, Ybp, Ypw, Ybpw
+from dataviva.secex_export.models import Yb_secex, Yw, Yp, Ybw, Ybp, Ypw, Ybpw
 from dataviva.utils import table_helper, query_helper
 from dataviva.utils.gzip_data import gzipped
 from dataviva.utils.decorators import cache_api
 
 mod = Blueprint('secex', __name__, url_prefix='/secex')
 
+@mod.route('_export/<year>/<bra_id>/<hs_id>/<wld_id>/')
 @mod.route('/<year>/<bra_id>/<hs_id>/<wld_id>/')
 @gzipped
 # @cache_api('secex')

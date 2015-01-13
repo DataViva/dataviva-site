@@ -63,7 +63,8 @@ app.jinja_env.filters['split'] = jinja_split
 # Load the modules for each different section of the site
 ''' data API view/models '''
 from dataviva.attrs.views import mod as attrs_module
-from dataviva.secex.views import mod as secex_module
+from dataviva.secex_export.views import mod as secex_export_module
+from dataviva.secex_import.views import mod as secex_import_module
 from dataviva.rais.views import mod as rais_module
 ''' front facing views/models of site '''
 from dataviva.general.views import mod as general_module
@@ -79,7 +80,8 @@ from dataviva.profiles.views import mod as profiles_module
 
 ''' Register these modules as blueprints '''
 app.register_blueprint(attrs_module)
-app.register_blueprint(secex_module)
+app.register_blueprint(secex_export_module)
+app.register_blueprint(secex_import_module)
 app.register_blueprint(rais_module)
 
 app.register_blueprint(general_module)
