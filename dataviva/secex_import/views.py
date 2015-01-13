@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from dataviva import db
 import dataviva.secex_import.models as secex_import
 from dataviva.secex_import.models import *
+from dataviva.secex_export.models import Yp as Yp_export
 from dataviva.utils import table_helper, query_helper
 from dataviva.utils.gzip_data import gzipped
 from dataviva.utils.decorators import cache_api
@@ -36,11 +37,11 @@ def secex_api(**kwargs):
 
     results = query_helper.query_table(table, filters=filters, groups=groups, limit=limit, order=order, sort=sort, serialize=serialize)
 
-    # if table is Ybp_import:
-        # stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yp_import, kwargs, remove=['bra_id'])
-        # stripped_columns = [Yp_import.year, Yp_import.hs_id]
-        # tmp = query_helper.query_table(Yp, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
-        # results["pci"] = tmp
+    if table is Ybp_import:
+        stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yp_export, kwargs, remove=['bra_id'])
+        stripped_columns = [Yp_export.year, Yp_export.hs_id]
+        tmp = query_helper.query_table(Yp_export, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
+        results["pci"] = tmp
 
     if serialize or download:
         response = jsonify(results)
