@@ -25,10 +25,6 @@ def secex_api(**kwargs):
     if exclude and "," in exclude:
         exclude = exclude.split(",")
 
-    # -- 1. filter ALLs
-    kwargs = {k:v for k,v in kwargs.items() if v != table_helper.ALL}
-    # -- 2. select table
-
     allowed_when_not, possible_tables = table_helper.prepare(['bra_id', 'hs_id', 'wld_id'], [Yb_import, Yp_import, Yw_import, Ybw_import, Ybp_import, Ypw_import, Ybpw_import])
     table = table_helper.select_best_table(kwargs, allowed_when_not, possible_tables)
 
