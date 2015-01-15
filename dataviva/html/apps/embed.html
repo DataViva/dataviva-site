@@ -1020,12 +1020,11 @@
         .depth(nesting.indexOf(app.vars.depth))
         // .grouping(app.vars.grouping)
         .order({
-          "sort": app.vars.sort,
-          "value": app.vars.order
+          "sort": app.vars.order,
+          "value": app.vars.sort
         })
         // .layout(app.vars.layout)
         .size(app.vars.size)
-        .time({"solo": [app.vars.year]})
         .focus(false)
         .error(false)
         .id({
@@ -1038,6 +1037,9 @@
         })
         .y(false)
         .tooltip(app.tooltip)
+
+      if (app.vars.year) app.viz.time({"solo": [app.vars.year]})
+      else app.viz.time({"solo": false})
 
       // app.viz.type(app.build.app.viz_whiz)
       //   .descs(descs)
