@@ -1247,7 +1247,7 @@
         //   .datum(app.data[app.build.data_url][format[app.build.app.type]])
       }
 
-      app.viz.legend(app.vars.color !== "color")
+      app.viz.legend(app.vars.color !== undefined && app.vars.color !== "color")
 
       if (app.build.app.type != "rings") builder.key()
       dataviva.resize()
