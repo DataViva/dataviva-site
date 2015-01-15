@@ -886,7 +886,7 @@
               var default_value = ui.values[0]
             }
           }
-          else if (ui.type == "sort" && app.build.app.type == "stacked") {
+          else if (ui.type == "order" && app.build.app.type == "stacked") {
             var default_value = "color"
           }
           else if (ui.type == "spotlight" && app.build.app.type == "scatter") {
@@ -1020,8 +1020,8 @@
         .depth(nesting.indexOf(app.vars.depth))
         // .grouping(app.vars.grouping)
         .order({
-          "sort": app.vars.order,
-          "value": app.vars.sort
+          "sort": app.vars.sort,
+          "value": app.vars.order
         })
         // .layout(app.vars.layout)
         .size(app.vars.size)
@@ -1037,6 +1037,7 @@
         })
         .y(false)
         .tooltip(app.tooltip)
+        .zoom(true)
 
       if (app.vars.year) app.viz.time({"solo": [app.vars.year]})
       else app.viz.time({"solo": false})
@@ -1086,6 +1087,7 @@
             .active(false)
             .temp(false)
             .total(false)
+          .size({"threshold": false})
           .zoom(false)
 
       }
@@ -1180,6 +1182,7 @@
           .active(false)
           .temp(false)
           .total(false)
+          .size({"threshold": true})
       }
 
       /******************************/
@@ -1432,6 +1435,10 @@
         }
         else if (type === "year") {
           app.viz.time({"solo": [parseFloat(value)]})
+        }
+        else if (type === "layout") {
+          var yscale = value === "value" ? "linear" : "share";
+          app.viz.y({"scale": yscale})
         }
         else {
           app.viz[type](value)
