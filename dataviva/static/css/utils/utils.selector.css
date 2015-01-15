@@ -152,3 +152,27 @@ div.search_buttons > div.proximity_toggles {
   color: #333;
   font-size: 10px;
 }
+
+div.selector_close {
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-size: 20px;
+  height: 18px;
+  line-height: 14px;
+  position: absolute;
+  right: 16px;
+  text-align: center;
+  top: -10px;
+  width: 18px;
+  z-index: 10;
+}
+
+div.selector_close:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
