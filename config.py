@@ -43,7 +43,7 @@ SQLALCHEMY_DATABASE_URI = "mysql://{0}:{1}@{2}/{3}".format(
     get_env_variable("DATAVIVA_DB_USER", "root"),
     get_env_variable("DATAVIVA_DB_PW", ""),
     get_env_variable("DATAVIVA_DB_HOST", "localhost"),
-    get_env_variable("DATAVIVA_DB_NAME", "dataminas"))
+    get_env_variable("DATAVIVA_DB_NAME", "dataviva"))
 
 ''' If user prefers to connect via socket set env var '''
 if "DATAVIVA_DB_SOCKET" in os.environ:
