@@ -1425,8 +1425,11 @@
           app.viz.y({"lines": [yval], "value": yv}).title({"total": app.total()})
         }
         else if (type == "size") {
-          if (app.build.app.type != "occugrid") {
+          if (app.build.app.type !== "occugrid") {
             app.tooltip["short"]["basics"] = [app.vars.size]
+          }
+          if (app.viz.order() === app.viz.size()) {
+            app.viz.order(value)
           }
           app.viz[type](value).title({"total": app.total()}).tooltip(app.tooltip)
         }
@@ -1439,6 +1442,12 @@
         else if (type === "layout") {
           var yscale = value === "value" ? "linear" : "share";
           app.viz.y({"scale": yscale})
+        }
+        else if (type === "sort") {
+          app.viz.order({"sort": value})
+        }
+        else if (type === "order" && value === "value") {
+          app.viz.order(app.viz.size())
         }
         else {
           app.viz[type](value)

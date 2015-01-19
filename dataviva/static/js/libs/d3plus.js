@@ -23,7 +23,7 @@ module.exports = d3plus;
  * @static
  */
 
-d3plus.version = "1.6.8 - Turquoise";
+d3plus.version = "1.6.9 - Turquoise";
 
 
 /**
@@ -1578,9 +1578,9 @@ module.exports = require('./lib/heap');
 
   /*
   Insert item x in list a, and keep it sorted assuming a is sorted.
-
+  
   If x is already in a, insert it to the right of the rightmost x.
-
+  
   Optional args lo (default 0) and hi (default a.length) bound the slice
   of a to be searched.
    */
@@ -1647,7 +1647,7 @@ module.exports = require('./lib/heap');
 
   /*
   Pop and return the current smallest value, and add the new item.
-
+  
   This is more efficient than heappop() followed by heappush(), and can be
   more appropriate when using a fixed size heap. Note that the value
   returned may be larger than item! That constrains reasonable use of
@@ -1993,16 +1993,16 @@ numeric.prettyPrint = function prettyPrint(x) {
             return false;
         }
         if(x === null) { ret.push("null"); return false; }
-        if(typeof x === "function") {
+        if(typeof x === "function") { 
             ret.push(x.toString());
             var flag = false;
-            for(k in x) { if(x.hasOwnProperty(k)) {
+            for(k in x) { if(x.hasOwnProperty(k)) { 
                 if(flag) ret.push(',\n');
                 else ret.push('\n{');
-                flag = true;
-                ret.push(k);
-                ret.push(': \n');
-                foo(x[k]);
+                flag = true; 
+                ret.push(k); 
+                ret.push(': \n'); 
+                foo(x[k]); 
             } }
             if(flag) ret.push('}\n');
             return true;
@@ -2114,45 +2114,45 @@ numeric.imageURL = function imageURL(img) {
         if(typeof from === "undefined") { from = 0; }
         if(typeof to === "undefined") { to = a.length; }
         var table = [0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA, 0x076DC419, 0x706AF48F, 0xE963A535, 0x9E6495A3,
-                     0x0EDB8832, 0x79DCB8A4, 0xE0D5E91E, 0x97D2D988, 0x09B64C2B, 0x7EB17CBD, 0xE7B82D07, 0x90BF1D91,
+                     0x0EDB8832, 0x79DCB8A4, 0xE0D5E91E, 0x97D2D988, 0x09B64C2B, 0x7EB17CBD, 0xE7B82D07, 0x90BF1D91, 
                      0x1DB71064, 0x6AB020F2, 0xF3B97148, 0x84BE41DE, 0x1ADAD47D, 0x6DDDE4EB, 0xF4D4B551, 0x83D385C7,
-                     0x136C9856, 0x646BA8C0, 0xFD62F97A, 0x8A65C9EC, 0x14015C4F, 0x63066CD9, 0xFA0F3D63, 0x8D080DF5,
-                     0x3B6E20C8, 0x4C69105E, 0xD56041E4, 0xA2677172, 0x3C03E4D1, 0x4B04D447, 0xD20D85FD, 0xA50AB56B,
-                     0x35B5A8FA, 0x42B2986C, 0xDBBBC9D6, 0xACBCF940, 0x32D86CE3, 0x45DF5C75, 0xDCD60DCF, 0xABD13D59,
+                     0x136C9856, 0x646BA8C0, 0xFD62F97A, 0x8A65C9EC, 0x14015C4F, 0x63066CD9, 0xFA0F3D63, 0x8D080DF5, 
+                     0x3B6E20C8, 0x4C69105E, 0xD56041E4, 0xA2677172, 0x3C03E4D1, 0x4B04D447, 0xD20D85FD, 0xA50AB56B, 
+                     0x35B5A8FA, 0x42B2986C, 0xDBBBC9D6, 0xACBCF940, 0x32D86CE3, 0x45DF5C75, 0xDCD60DCF, 0xABD13D59, 
                      0x26D930AC, 0x51DE003A, 0xC8D75180, 0xBFD06116, 0x21B4F4B5, 0x56B3C423, 0xCFBA9599, 0xB8BDA50F,
                      0x2802B89E, 0x5F058808, 0xC60CD9B2, 0xB10BE924, 0x2F6F7C87, 0x58684C11, 0xC1611DAB, 0xB6662D3D,
                      0x76DC4190, 0x01DB7106, 0x98D220BC, 0xEFD5102A, 0x71B18589, 0x06B6B51F, 0x9FBFE4A5, 0xE8B8D433,
-                     0x7807C9A2, 0x0F00F934, 0x9609A88E, 0xE10E9818, 0x7F6A0DBB, 0x086D3D2D, 0x91646C97, 0xE6635C01,
-                     0x6B6B51F4, 0x1C6C6162, 0x856530D8, 0xF262004E, 0x6C0695ED, 0x1B01A57B, 0x8208F4C1, 0xF50FC457,
-                     0x65B0D9C6, 0x12B7E950, 0x8BBEB8EA, 0xFCB9887C, 0x62DD1DDF, 0x15DA2D49, 0x8CD37CF3, 0xFBD44C65,
-                     0x4DB26158, 0x3AB551CE, 0xA3BC0074, 0xD4BB30E2, 0x4ADFA541, 0x3DD895D7, 0xA4D1C46D, 0xD3D6F4FB,
-                     0x4369E96A, 0x346ED9FC, 0xAD678846, 0xDA60B8D0, 0x44042D73, 0x33031DE5, 0xAA0A4C5F, 0xDD0D7CC9,
-                     0x5005713C, 0x270241AA, 0xBE0B1010, 0xC90C2086, 0x5768B525, 0x206F85B3, 0xB966D409, 0xCE61E49F,
-                     0x5EDEF90E, 0x29D9C998, 0xB0D09822, 0xC7D7A8B4, 0x59B33D17, 0x2EB40D81, 0xB7BD5C3B, 0xC0BA6CAD,
-                     0xEDB88320, 0x9ABFB3B6, 0x03B6E20C, 0x74B1D29A, 0xEAD54739, 0x9DD277AF, 0x04DB2615, 0x73DC1683,
-                     0xE3630B12, 0x94643B84, 0x0D6D6A3E, 0x7A6A5AA8, 0xE40ECF0B, 0x9309FF9D, 0x0A00AE27, 0x7D079EB1,
-                     0xF00F9344, 0x8708A3D2, 0x1E01F268, 0x6906C2FE, 0xF762575D, 0x806567CB, 0x196C3671, 0x6E6B06E7,
-                     0xFED41B76, 0x89D32BE0, 0x10DA7A5A, 0x67DD4ACC, 0xF9B9DF6F, 0x8EBEEFF9, 0x17B7BE43, 0x60B08ED5,
-                     0xD6D6A3E8, 0xA1D1937E, 0x38D8C2C4, 0x4FDFF252, 0xD1BB67F1, 0xA6BC5767, 0x3FB506DD, 0x48B2364B,
-                     0xD80D2BDA, 0xAF0A1B4C, 0x36034AF6, 0x41047A60, 0xDF60EFC3, 0xA867DF55, 0x316E8EEF, 0x4669BE79,
-                     0xCB61B38C, 0xBC66831A, 0x256FD2A0, 0x5268E236, 0xCC0C7795, 0xBB0B4703, 0x220216B9, 0x5505262F,
-                     0xC5BA3BBE, 0xB2BD0B28, 0x2BB45A92, 0x5CB36A04, 0xC2D7FFA7, 0xB5D0CF31, 0x2CD99E8B, 0x5BDEAE1D,
-                     0x9B64C2B0, 0xEC63F226, 0x756AA39C, 0x026D930A, 0x9C0906A9, 0xEB0E363F, 0x72076785, 0x05005713,
-                     0x95BF4A82, 0xE2B87A14, 0x7BB12BAE, 0x0CB61B38, 0x92D28E9B, 0xE5D5BE0D, 0x7CDCEFB7, 0x0BDBDF21,
-                     0x86D3D2D4, 0xF1D4E242, 0x68DDB3F8, 0x1FDA836E, 0x81BE16CD, 0xF6B9265B, 0x6FB077E1, 0x18B74777,
-                     0x88085AE6, 0xFF0F6A70, 0x66063BCA, 0x11010B5C, 0x8F659EFF, 0xF862AE69, 0x616BFFD3, 0x166CCF45,
-                     0xA00AE278, 0xD70DD2EE, 0x4E048354, 0x3903B3C2, 0xA7672661, 0xD06016F7, 0x4969474D, 0x3E6E77DB,
-                     0xAED16A4A, 0xD9D65ADC, 0x40DF0B66, 0x37D83BF0, 0xA9BCAE53, 0xDEBB9EC5, 0x47B2CF7F, 0x30B5FFE9,
-                     0xBDBDF21C, 0xCABAC28A, 0x53B39330, 0x24B4A3A6, 0xBAD03605, 0xCDD70693, 0x54DE5729, 0x23D967BF,
+                     0x7807C9A2, 0x0F00F934, 0x9609A88E, 0xE10E9818, 0x7F6A0DBB, 0x086D3D2D, 0x91646C97, 0xE6635C01, 
+                     0x6B6B51F4, 0x1C6C6162, 0x856530D8, 0xF262004E, 0x6C0695ED, 0x1B01A57B, 0x8208F4C1, 0xF50FC457, 
+                     0x65B0D9C6, 0x12B7E950, 0x8BBEB8EA, 0xFCB9887C, 0x62DD1DDF, 0x15DA2D49, 0x8CD37CF3, 0xFBD44C65, 
+                     0x4DB26158, 0x3AB551CE, 0xA3BC0074, 0xD4BB30E2, 0x4ADFA541, 0x3DD895D7, 0xA4D1C46D, 0xD3D6F4FB, 
+                     0x4369E96A, 0x346ED9FC, 0xAD678846, 0xDA60B8D0, 0x44042D73, 0x33031DE5, 0xAA0A4C5F, 0xDD0D7CC9, 
+                     0x5005713C, 0x270241AA, 0xBE0B1010, 0xC90C2086, 0x5768B525, 0x206F85B3, 0xB966D409, 0xCE61E49F, 
+                     0x5EDEF90E, 0x29D9C998, 0xB0D09822, 0xC7D7A8B4, 0x59B33D17, 0x2EB40D81, 0xB7BD5C3B, 0xC0BA6CAD, 
+                     0xEDB88320, 0x9ABFB3B6, 0x03B6E20C, 0x74B1D29A, 0xEAD54739, 0x9DD277AF, 0x04DB2615, 0x73DC1683, 
+                     0xE3630B12, 0x94643B84, 0x0D6D6A3E, 0x7A6A5AA8, 0xE40ECF0B, 0x9309FF9D, 0x0A00AE27, 0x7D079EB1, 
+                     0xF00F9344, 0x8708A3D2, 0x1E01F268, 0x6906C2FE, 0xF762575D, 0x806567CB, 0x196C3671, 0x6E6B06E7, 
+                     0xFED41B76, 0x89D32BE0, 0x10DA7A5A, 0x67DD4ACC, 0xF9B9DF6F, 0x8EBEEFF9, 0x17B7BE43, 0x60B08ED5, 
+                     0xD6D6A3E8, 0xA1D1937E, 0x38D8C2C4, 0x4FDFF252, 0xD1BB67F1, 0xA6BC5767, 0x3FB506DD, 0x48B2364B, 
+                     0xD80D2BDA, 0xAF0A1B4C, 0x36034AF6, 0x41047A60, 0xDF60EFC3, 0xA867DF55, 0x316E8EEF, 0x4669BE79, 
+                     0xCB61B38C, 0xBC66831A, 0x256FD2A0, 0x5268E236, 0xCC0C7795, 0xBB0B4703, 0x220216B9, 0x5505262F, 
+                     0xC5BA3BBE, 0xB2BD0B28, 0x2BB45A92, 0x5CB36A04, 0xC2D7FFA7, 0xB5D0CF31, 0x2CD99E8B, 0x5BDEAE1D, 
+                     0x9B64C2B0, 0xEC63F226, 0x756AA39C, 0x026D930A, 0x9C0906A9, 0xEB0E363F, 0x72076785, 0x05005713, 
+                     0x95BF4A82, 0xE2B87A14, 0x7BB12BAE, 0x0CB61B38, 0x92D28E9B, 0xE5D5BE0D, 0x7CDCEFB7, 0x0BDBDF21, 
+                     0x86D3D2D4, 0xF1D4E242, 0x68DDB3F8, 0x1FDA836E, 0x81BE16CD, 0xF6B9265B, 0x6FB077E1, 0x18B74777, 
+                     0x88085AE6, 0xFF0F6A70, 0x66063BCA, 0x11010B5C, 0x8F659EFF, 0xF862AE69, 0x616BFFD3, 0x166CCF45, 
+                     0xA00AE278, 0xD70DD2EE, 0x4E048354, 0x3903B3C2, 0xA7672661, 0xD06016F7, 0x4969474D, 0x3E6E77DB, 
+                     0xAED16A4A, 0xD9D65ADC, 0x40DF0B66, 0x37D83BF0, 0xA9BCAE53, 0xDEBB9EC5, 0x47B2CF7F, 0x30B5FFE9, 
+                     0xBDBDF21C, 0xCABAC28A, 0x53B39330, 0x24B4A3A6, 0xBAD03605, 0xCDD70693, 0x54DE5729, 0x23D967BF, 
                      0xB3667A2E, 0xC4614AB8, 0x5D681B02, 0x2A6F2B94, 0xB40BBE37, 0xC30C8EA1, 0x5A05DF1B, 0x2D02EF8D];
-
+     
         var crc = -1, y = 0, n = a.length,i;
 
         for (i = from; i < to; i++) {
             y = (crc ^ a[i]) & 0xFF;
             crc = (crc >>> 8) ^ table[y];
         }
-
+     
         return crc ^ (-1);
     }
 
@@ -2160,7 +2160,7 @@ numeric.imageURL = function imageURL(img) {
     var stream = [
                   137, 80, 78, 71, 13, 10, 26, 10,                           //  0: PNG signature
                   0,0,0,13,                                                  //  8: IHDR Chunk length
-                  73, 72, 68, 82,                                            // 12: "IHDR"
+                  73, 72, 68, 82,                                            // 12: "IHDR" 
                   (w >> 24) & 255, (w >> 16) & 255, (w >> 8) & 255, w&255,   // 16: Width
                   (h >> 24) & 255, (h >> 16) & 255, (h >> 8) & 255, h&255,   // 20: Height
                   8,                                                         // 24: bit depth
@@ -2615,7 +2615,7 @@ numeric.mapreducers = {
                 if(numeric.opseq.hasOwnProperty(i+'eq')) {
                     codeeq = function(x,y) { return x+' '+o+'= '+y; };
                 } else {
-                    codeeq = function(x,y) { return x+' = '+x+' '+o+' '+y; };
+                    codeeq = function(x,y) { return x+' = '+x+' '+o+' '+y; };                    
                 }
             }
             numeric[i+'VV'] = numeric.pointwise2(['x[i]','y[i]'],code('ret[i]','x[i]','y[i]'),setup);
@@ -2732,7 +2732,7 @@ numeric.inv = function inv(x) {
         Aj = A[i0]; A[i0] = A[j]; A[j] = Aj;
         Ij = I[i0]; I[i0] = I[j]; I[j] = Ij;
         x = Aj[j];
-        for(k=j;k!==n;++k)    Aj[k] /= x;
+        for(k=j;k!==n;++k)    Aj[k] /= x; 
         for(k=n-1;k!==-1;--k) Ij[k] /= x;
         for(i=m-1;i!==-1;--i) {
             if(i!==j) {
@@ -3596,7 +3596,7 @@ numeric.ccsDFS.prototype.dfs = function dfs(J,Ai,Aj,x,xj,Pinv) {
 numeric.ccsLPSolve = function ccsLPSolve(A,B,x,xj,I,Pinv,dfs) {
     var Ai = A[0], Aj = A[1], Av = A[2],m = Ai.length-1, n=0;
     var Bi = B[0], Bj = B[1], Bv = B[2];
-
+    
     var i,i0,i1,j,J,j0,j1,k,l,l0,l1,a;
     i0 = Bi[I];
     i1 = Bi[I+1];
@@ -3703,7 +3703,7 @@ numeric.ccsDFS0.prototype.dfs = function dfs(J,Ai,Aj,x,xj,Pinv,P) {
 numeric.ccsLPSolve0 = function ccsLPSolve0(A,B,y,xj,I,Pinv,P,dfs) {
     var Ai = A[0], Aj = A[1], Av = A[2],m = Ai.length-1, n=0;
     var Bi = B[0], Bj = B[1], Bv = B[2];
-
+    
     var i,i0,i1,j,J,j0,j1,k,l,l0,l1,a;
     i0 = Bi[I];
     i1 = Bi[I+1];
@@ -3866,7 +3866,7 @@ numeric.ccsLUPSolve = function ccsLUPSolve(LUP,B) {
         k = 0;
         j0 = Bi[i];
         j1 = Bi[i+1];
-        for(j=j0;j<j1;++j) {
+        for(j=j0;j<j1;++j) { 
             J = LUP.Pinv[Bj[j]];
             bj[k] = J;
             b[J] = Bv[j];
@@ -4274,7 +4274,7 @@ numeric.cgrid = function grid(n,shape) {
         }
     }
     count=0;
-    for(i=1;i<n[0]-1;i++) for(j=1;j<n[1]-1;j++)
+    for(i=1;i<n[0]-1;i++) for(j=1;j<n[1]-1;j++) 
         if(shape(i,j)) {
             ret[i][j] = count;
             count++;
@@ -4421,7 +4421,7 @@ numeric.Spline.prototype.roots = function roots() {
                 t1 = stops[k+1];
                 z1 = this._at(t1,j);
                 if(z0 === 0) {
-                    ri.push(t0);
+                    ri.push(t0); 
                     t0 = t1;
                     z0 = z1;
                     continue;
@@ -4464,7 +4464,7 @@ numeric.spline = function spline(x,y,k1,kn) {
     var i;
     var sub = numeric.sub,mul = numeric.mul,add = numeric.add;
     for(i=n-2;i>=0;i--) { dx[i] = x[i+1]-x[i]; dy[i] = sub(y[i+1],y[i]); }
-    if(typeof k1 === "string" || typeof kn === "string") {
+    if(typeof k1 === "string" || typeof kn === "string") { 
         k1 = kn = "periodic";
     }
     // Build sparse tridiagonal system
@@ -5162,7 +5162,7 @@ numeric.MPStoLP = function MPStoLP(MPS) {
         }
         switch(state) {
         case 0: case 1: err('Unexpected line');
-        case 2:
+        case 2: 
             switch(w[0]) {
             case 'N': if(N===0) N = w[1]; else err('Two or more N rows'); break;
             case 'L': rows[w[1]] = rl; sign[rl] = 1; b[rl] = 0; ++rl; break;
@@ -5259,18 +5259,18 @@ numeric.MPStoLP = function MPStoLP(MPS) {
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
-//
+// 
 //   1. Redistributions of source code must retain the above copyright
 //      notice, this list of conditions and the following disclaimer.
 //
 //   2. Redistributions in binary form must reproduce the above copyright
 //      notice, this list of conditions and the following disclaimer in the
 //      documentation and/or other materials provided with the distribution.
-//
+// 
 //   3. Neither the name of this module nor the names of its contributors may
 //      be used to endorse or promote products derived from this software
 //      without specific prior written permission.
-//
+// 
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 // "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 // LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -5286,7 +5286,7 @@ numeric.MPStoLP = function MPStoLP(MPS) {
 /**
  * All code is in an anonymous closure to keep the global namespace clean.
  *
- * @param {number=} overflow
+ * @param {number=} overflow 
  * @param {number=} startdenom
  */
 
@@ -5402,7 +5402,7 @@ function ARC4(key) {
 // flatten()
 // Converts an object tree to nested arrays of strings.
 //
-/** @param {Object=} result
+/** @param {Object=} result 
   * @param {string=} prop
   * @param {string=} typ */
 function flatten(obj, depth, result, prop, typ) {
@@ -5423,7 +5423,7 @@ function flatten(obj, depth, result, prop, typ) {
 // Mixes a string seed into a key that is an array of integers, and
 // returns a shortened string seed that is equivalent to the result key.
 //
-/** @param {number=} smear
+/** @param {number=} smear 
   * @param {number=} j */
 function mixkey(seed, key, smear, j) {
   seed += '';                         // Ensure the seed is a string
@@ -6071,27 +6071,27 @@ numeric.svd= function svd(A) {
 	var j=0;
 	var k=0;
 	var l=0;
-
+	
 	var u= numeric.clone(A);
 	var m= u.length;
-
+	
 	var n= u[0].length;
-
+	
 	if (m < n) throw "Need more rows than columns"
-
+	
 	var e = new Array(n);
 	var q = new Array(n);
 	for (i=0; i<n; i++) e[i] = q[i] = 0.0;
 	var v = numeric.rep([n,n],0);
 //	v.zero();
-
+	
  	function pythag(a,b)
  	{
 		a = Math.abs(a)
 		b = Math.abs(b)
 		if (a > b)
 			return a*Math.sqrt(1.0+(b*b/a/a))
-		else if (b == 0.0)
+		else if (b == 0.0) 
 			return a
 		return b*Math.sqrt(1.0+(a*a/b/b))
 	}
@@ -6105,18 +6105,18 @@ numeric.svd= function svd(A) {
 	var y= 0.0;
 	var z= 0.0;
 	var s= 0.0;
-
+	
 	for (i=0; i < n; i++)
-	{
+	{	
 		e[i]= g;
 		s= 0.0;
 		l= i+1;
-		for (j=i; j < m; j++)
+		for (j=i; j < m; j++) 
 			s += (u[j][i]*u[j][i]);
 		if (s <= tolerance)
 			g= 0.0;
 		else
-		{
+		{	
 			f= u[i][i];
 			g= Math.sqrt(s);
 			if (f >= 0.0) g= -g;
@@ -6125,21 +6125,21 @@ numeric.svd= function svd(A) {
 			for (j=l; j < n; j++)
 			{
 				s= 0.0
-				for (k=i; k < m; k++)
+				for (k=i; k < m; k++) 
 					s += u[k][i]*u[k][j]
 				f= s/h
-				for (k=i; k < m; k++)
+				for (k=i; k < m; k++) 
 					u[k][j]+=f*u[k][i]
 			}
 		}
 		q[i]= g
 		s= 0.0
-		for (j=l; j < n; j++)
+		for (j=l; j < n; j++) 
 			s= s + u[i][j]*u[i][j]
 		if (s <= tolerance)
 			g= 0.0
 		else
-		{
+		{	
 			f= u[i][i+1]
 			g= Math.sqrt(s)
 			if (f >= 0.0) g= -g
@@ -6147,35 +6147,35 @@ numeric.svd= function svd(A) {
 			u[i][i+1] = f-g;
 			for (j=l; j < n; j++) e[j]= u[i][j]/h
 			for (j=l; j < m; j++)
-			{
+			{	
 				s=0.0
-				for (k=l; k < n; k++)
+				for (k=l; k < n; k++) 
 					s += (u[j][k]*u[i][k])
-				for (k=l; k < n; k++)
+				for (k=l; k < n; k++) 
 					u[j][k]+=s*e[k]
-			}
+			}	
 		}
 		y= Math.abs(q[i])+Math.abs(e[i])
-		if (y>x)
+		if (y>x) 
 			x=y
 	}
-
+	
 	// accumulation of right hand gtransformations
 	for (i=n-1; i != -1; i+= -1)
-	{
+	{	
 		if (g != 0.0)
 		{
 		 	h= g*u[i][i+1]
-			for (j=l; j < n; j++)
+			for (j=l; j < n; j++) 
 				v[j][i]=u[i][j]/h
 			for (j=l; j < n; j++)
-			{
+			{	
 				s=0.0
-				for (k=l; k < n; k++)
+				for (k=l; k < n; k++) 
 					s += u[i][k]*v[k][j]
-				for (k=l; k < n; k++)
+				for (k=l; k < n; k++) 
 					v[k][j]+=(s*v[k][i])
-			}
+			}	
 		}
 		for (j=l; j < n; j++)
 		{
@@ -6186,13 +6186,13 @@ numeric.svd= function svd(A) {
 		g= e[i]
 		l= i
 	}
-
+	
 	// accumulation of left hand transformations
 	for (i=n-1; i != -1; i+= -1)
-	{
+	{	
 		l= i+1
 		g= q[i]
-		for (j=l; j < n; j++)
+		for (j=l; j < n; j++) 
 			u[i][j] = 0;
 		if (g != 0.0)
 		{
@@ -6210,7 +6210,7 @@ numeric.svd= function svd(A) {
 			for (j=i; j < m; j++) u[j][i] = 0;
 		u[i][i] += 1;
 	}
-
+	
 	// diagonalization of the bidiagonal form
 	prec= prec*x
 	for (k=n-1; k != -1; k+= -1)
@@ -6219,13 +6219,13 @@ numeric.svd= function svd(A) {
 		{	// test f splitting
 			var test_convergence = false
 			for (l=k; l != -1; l+= -1)
-			{
+			{	
 				if (Math.abs(e[l]) <= prec)
 				{	test_convergence= true
-					break
+					break 
 				}
 				if (Math.abs(q[l-1]) <= prec)
-					break
+					break 
 			}
 			if (!test_convergence)
 			{	// cancellation of e[l] if l>0
@@ -6233,7 +6233,7 @@ numeric.svd= function svd(A) {
 				s= 1.0
 				var l1= l-1
 				for (i =l; i<k+1; i++)
-				{
+				{	
 					f= s*e[i]
 					e[i]= c*e[i]
 					if (Math.abs(f) <= prec)
@@ -6244,13 +6244,13 @@ numeric.svd= function svd(A) {
 					c= g/h
 					s= -f/h
 					for (j=0; j < m; j++)
-					{
+					{	
 						y= u[j][l1]
 						z= u[j][i]
 						u[j][l1] =  y*c+(z*s)
 						u[j][i] = -y*s+(z*c)
-					}
-				}
+					} 
+				}	
 			}
 			// test f convergence
 			z= q[k]
@@ -6281,7 +6281,7 @@ numeric.svd= function svd(A) {
 			c= 1.0
 			s= 1.0
 			for (i=l+1; i< k+1; i++)
-			{
+			{	
 				g= e[i]
 				y= q[i]
 				h= s*g
@@ -6295,7 +6295,7 @@ numeric.svd= function svd(A) {
 				h= y*s
 				y= y*c
 				for (j=0; j < n; j++)
-				{
+				{	
 					x= v[j][i-1]
 					z= v[j][i]
 					v[j][i-1] = x*c+z*s
@@ -6318,17 +6318,17 @@ numeric.svd= function svd(A) {
 			e[l]= 0.0
 			e[k]= f
 			q[k]= x
-		}
+		} 
 	}
-
+		
 	//vt= transpose(v)
 	//return (u,q,vt)
-	for (i=0;i<q.length; i++)
+	for (i=0;i<q.length; i++) 
 	  if (q[i] < prec) q[i] = 0
-
-	//sort eigenvalues
+	  
+	//sort eigenvalues	
 	for (i=0; i< n; i++)
-	{
+	{	 
 	//writeln(q)
 	 for (j=i-1; j >= 0; j--)
 	 {
@@ -6342,11 +6342,11 @@ numeric.svd= function svd(A) {
 	   for(k=0;k<v.length;k++) { temp = v[k][i]; v[k][i] = v[k][j]; v[k][j] = temp; }
 //	   u.swapCols(i,j)
 //	   v.swapCols(i,j)
-	   i = j
+	   i = j	   
 	  }
-	 }
+	 }	
 	}
-
+	
 	return {U:u,S:q,V:v}
 };
 
@@ -6551,7 +6551,7 @@ proto.range = function kdtRangeQuery(lo, hi, visit) {
   visitIndex[0] = 0
   pack(lo, visitRange.pick(0,0))
   pack(hi, visitRange.pick(0,1))
-
+  
   while(visitTop < visitCount) {
     var idx = visitIndex[visitTop]
     var k = bits.log2(idx+1)%d
@@ -6562,7 +6562,7 @@ proto.range = function kdtRangeQuery(lo, hi, visit) {
     var visitPoint = true
     for(var i=0; i<d; ++i) {
       var pc = pointData[pidx+i]
-      if((pc < rangeData[loidx + i]) ||
+      if((pc < rangeData[loidx + i]) || 
          (rangeData[hiidx + i] < pc)) {
         visitPoint = false
         break
@@ -6732,7 +6732,7 @@ proto.nn = function(point, maxDistance) {
   if(typeof maxDistance === "number") {
     if(maxDistance < 0) {
       return -1
-    }
+    } 
   } else {
     maxDistance = Infinity
   }
@@ -6793,7 +6793,7 @@ proto.nn = function(point, maxDistance) {
     var d2h = hk + ds
 
     toVisit.pop()
-
+    
     if(d2l < nearestD) {
       var left = 2 * idx + 1
       if(left < n) {
@@ -6826,7 +6826,7 @@ proto.nn = function(point, maxDistance) {
 
   pool.freeFloat64(dataVector)
   toVisit.dispose()
-
+  
   if(nearest < 0) {
     return -1
   }
@@ -6860,7 +6860,7 @@ proto.knn = function(point, maxPoints, maxDistance) {
   var points = this.points
   var pointData = points.data
   var dataVector = pool.mallocFloat64(d)
-
+  
   //List of closest points
   var closestPoints = new KDTHeap(maxPoints, 1)
   var cl_index = closestPoints.index
@@ -7032,7 +7032,7 @@ function createKDTree(points) {
     var head = toVisit.shift()
     var array = head
     var nn = array.shape[0]|0
-
+    
     //Find median
     if(nn > 1) {
       var k = bits.log2(pointer+1)%d
@@ -7186,7 +7186,7 @@ proto.heapDown = function(i) {
       break
     }
     this.heapSwap(i, next)
-    i = next
+    i = next      
   }
 }
 
@@ -7386,13 +7386,13 @@ exports.interleave3 = function(x, y, z) {
   y  = (y | (y<<4))  & 3272356035;
   y  = (y | (y<<2))  & 1227133513;
   x |= (y << 1);
-
+  
   z &= 0x3FF;
   z  = (z | (z<<16)) & 4278190335;
   z  = (z | (z<<8))  & 251719695;
   z  = (z | (z<<4))  & 3272356035;
   z  = (z | (z<<2))  & 1227133513;
-
+  
   return x | (z << 2);
 }
 
@@ -7904,7 +7904,7 @@ exports.norm2squared = compile({
   post: {args:[], localVars:[], thisVars:["this_s"], body:"return this_s"},
   funcName: "norm2squared"
 })
-
+  
 exports.norm2 = compile({
   args:["array"],
   pre: {args:[], localVars:[], thisVars:["this_s"], body:"this_s=0"},
@@ -7912,7 +7912,7 @@ exports.norm2 = compile({
   post: {args:[], localVars:[], thisVars:["this_s"], body:"return Math.sqrt(this_s)"},
   funcName: "norm2"
 })
-
+  
 
 exports.norminf = compile({
   args:["array"],
@@ -8016,7 +8016,7 @@ exports.argmax = compile({
     args:[],
     thisVars:["this_i"],
     localVars:[]}
-})
+})  
 
 exports.random = makeOp({
   args: ["array"],
@@ -8040,9 +8040,9 @@ exports.equals = compile({
   args:["array", "array"],
   pre: EmptyProc,
   body: {args:[{name:"x", lvalue:false, rvalue:true, count:1},
-               {name:"y", lvalue:false, rvalue:true, count:1}],
-        body: "if(x!==y){return false}",
-        localVars: [],
+               {name:"y", lvalue:false, rvalue:true, count:1}], 
+        body: "if(x!==y){return false}", 
+        localVars: [], 
         thisVars: []},
   post: {args:[], localVars:[], thisVars:[], body:"return true"},
   funcName: "equals"
@@ -8074,7 +8074,7 @@ function Procedure() {
 function compileCwise(user_args) {
   //Create procedure
   var proc = new Procedure()
-
+  
   //Parse blocks
   proc.pre    = user_args.pre
   proc.body   = user_args.body
@@ -8127,12 +8127,12 @@ function compileCwise(user_args) {
       throw new Error("cwise: Unknown argument type " + proc_args[i])
     }
   }
-
+  
   //Make sure at least one array argument was specified
   if(proc.arrayArgs.length <= 0) {
     throw new Error("cwise: No array arguments specified")
   }
-
+  
   //Make sure arguments are correct
   if(proc.pre.args.length > proc_args.length) {
     throw new Error("cwise: Too many arguments in pre() block")
@@ -8146,10 +8146,10 @@ function compileCwise(user_args) {
 
   //Check debug flag
   proc.debug = !!user_args.printCode || !!user_args.debug
-
+  
   //Retrieve name
   proc.funcName = user_args.funcName || "cwise"
-
+  
   //Read in block size
   proc.blockSize = user_args.blockSize || 64
 
@@ -8361,7 +8361,7 @@ function generateCWiseOp(proc, typesig) {
   var arglist = ["SS"]
   var code = ["'use strict'"]
   var vars = []
-
+  
   for(var j=0; j<dimension; ++j) {
     vars.push(["s", j, "=SS[", j, "]"].join(""))
   }
@@ -8371,7 +8371,7 @@ function generateCWiseOp(proc, typesig) {
     arglist.push("p"+i)
     dtypes[i] = typesig[2*i]
     orders[i] = typesig[2*i+1]
-
+    
     for(var j=0; j<dimension; ++j) {
       vars.push(["t",i,"p",j,"=t",i,"[",j,"]"].join(""))
     }
@@ -8396,7 +8396,7 @@ function generateCWiseOp(proc, typesig) {
       if(off_arg.offset[j] === 0) {
         continue
       } else if(off_arg.offset[j] === 1) {
-        init_string.push(["t", off_arg.array, "p", j].join(""))
+        init_string.push(["t", off_arg.array, "p", j].join(""))      
       } else {
         init_string.push([off_arg.offset[j], "*t", off_arg.array, "p", j].join(""))
       }
@@ -8417,7 +8417,7 @@ function generateCWiseOp(proc, typesig) {
   for(var i=0; i<proc.arrayArgs.length; ++i) {
     code.push("p"+i+"|=0")
   }
-
+  
   //Inline prelude
   if(proc.pre.body.length > 3) {
     code.push(processBlock(proc.pre, proc, dtypes))
@@ -8436,11 +8436,11 @@ function generateCWiseOp(proc, typesig) {
   if(proc.post.body.length > 3) {
     code.push(processBlock(proc.post, proc, dtypes))
   }
-
+  
   if(proc.debug) {
     console.log("Generated cwise routine for ", typesig, ":\n\n", code.join("\n"))
   }
-
+  
   var loopName = [(proc.funcName||"unnamed"), "_cwise_loop_", orders[0].join("s"),"m",matched,typeSummary(dtypes)].join("")
   var f = new Function(["function ",loopName,"(", arglist.join(","),"){", code.join("\n"),"} return ", loopName].join(""))
   return f()
@@ -8455,7 +8455,7 @@ function createThunk(proc) {
   var code = ["'use strict'", "var CACHED={}"]
   var vars = []
   var thunkName = proc.funcName + "_cwise_thunk"
-
+  
   //Build thunk
   code.push(["return function ", thunkName, "(", proc.shimArgs.join(","), "){"].join(""))
   var typesig = []
@@ -8479,7 +8479,7 @@ function createThunk(proc) {
   vars.push(["type=[", string_typesig.join(","), "].join()"].join(""))
   vars.push("proc=CACHED[type]")
   code.push("var " + vars.join(","))
-
+  
   code.push(["if(!proc){",
              "CACHED[type]=proc=compile([", typesig.join(","), "])}",
              "return proc(", proc_args.join(","), ")}"].join(""))
@@ -8487,7 +8487,7 @@ function createThunk(proc) {
   if(proc.debug) {
     console.log("Generated thunk:", code.join("\n"))
   }
-
+  
   //Compile thunk
   var thunk = new Function("compile", code.join("\n"))
   return thunk(compile.bind(undefined, proc))
@@ -8604,7 +8604,7 @@ function Procedure() {
 function compileCwise(user_args) {
   //Create procedure
   var proc = new Procedure()
-
+  
   //Parse blocks
   proc.pre    = user_args.pre
   proc.body   = user_args.body
@@ -8657,12 +8657,12 @@ function compileCwise(user_args) {
       throw new Error("cwise: Unknown argument type " + proc_args[i])
     }
   }
-
+  
   //Make sure at least one array argument was specified
   if(proc.arrayArgs.length <= 0) {
     throw new Error("cwise: No array arguments specified")
   }
-
+  
   //Make sure arguments are correct
   if(proc.pre.args.length > proc_args.length) {
     throw new Error("cwise: Too many arguments in pre() block")
@@ -8676,10 +8676,10 @@ function compileCwise(user_args) {
 
   //Check debug flag
   proc.debug = !!user_args.printCode || !!user_args.debug
-
+  
   //Retrieve name
   proc.funcName = user_args.funcName || "cwise"
-
+  
   //Read in block size
   proc.blockSize = user_args.blockSize || 64
 
@@ -8688,353 +8688,11 @@ function compileCwise(user_args) {
 
 module.exports = compileCwise
 
-},{"./lib/thunk.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/thunk.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/compile.js":[function(require,module,exports){
-"use strict"
-
-var uniq = require("uniq")
-
-function innerFill(order, proc, body) {
-  var dimension = order.length
-    , nargs = proc.arrayArgs.length
-    , has_index = proc.indexArgs.length>0
-    , code = []
-    , vars = []
-    , idx=0, pidx=0, i, j
-  for(i=0; i<dimension; ++i) {
-    vars.push(["i",i,"=0"].join(""))
-  }
-  //Compute scan deltas
-  for(j=0; j<nargs; ++j) {
-    for(i=0; i<dimension; ++i) {
-      pidx = idx
-      idx = order[i]
-      if(i === 0) {
-        vars.push(["d",j,"s",i,"=t",j,"[",idx,"]"].join(""))
-      } else {
-        vars.push(["d",j,"s",i,"=(t",j,"[",idx,"]-s",pidx,"*t",j,"[",pidx,"])"].join(""))
-      }
-    }
-  }
-  code.push("var " + vars.join(","))
-  //Scan loop
-  for(i=dimension-1; i>=0; --i) {
-    idx = order[i]
-    code.push(["for(i",i,"=0;i",i,"<s",idx,";++i",i,"){"].join(""))
-  }
-  //Push body of inner loop
-  code.push(body)
-  //Advance scan pointers
-  for(i=0; i<dimension; ++i) {
-    pidx = idx
-    idx = order[i]
-    for(j=0; j<nargs; ++j) {
-      code.push(["p",j,"+=d",j,"s",i].join(""))
-    }
-    if(has_index) {
-      if(i > 0) {
-        code.push(["index[",pidx,"]-=s",pidx].join(""))
-      }
-      code.push(["++index[",idx,"]"].join(""))
-    }
-    code.push("}")
-  }
-  return code.join("\n")
-}
-
-function outerFill(matched, order, proc, body) {
-  var dimension = order.length
-    , nargs = proc.arrayArgs.length
-    , blockSize = proc.blockSize
-    , has_index = proc.indexArgs.length > 0
-    , code = []
-  for(var i=0; i<nargs; ++i) {
-    code.push(["var offset",i,"=p",i].join(""))
-  }
-  //Generate matched loops
-  for(var i=matched; i<dimension; ++i) {
-    code.push(["for(var j"+i+"=SS[", order[i], "]|0;j", i, ">0;){"].join(""))
-    code.push(["if(j",i,"<",blockSize,"){"].join(""))
-    code.push(["s",order[i],"=j",i].join(""))
-    code.push(["j",i,"=0"].join(""))
-    code.push(["}else{s",order[i],"=",blockSize].join(""))
-    code.push(["j",i,"-=",blockSize,"}"].join(""))
-    if(has_index) {
-      code.push(["index[",order[i],"]=j",i].join(""))
-    }
-  }
-  for(var i=0; i<nargs; ++i) {
-    var indexStr = ["offset"+i]
-    for(var j=matched; j<dimension; ++j) {
-      indexStr.push(["j",j,"*t",i,"[",order[j],"]"].join(""))
-    }
-    code.push(["p",i,"=(",indexStr.join("+"),")"].join(""))
-  }
-  code.push(innerFill(order, proc, body))
-  for(var i=matched; i<dimension; ++i) {
-    code.push("}")
-  }
-  return code.join("\n")
-}
-
-//Count the number of compatible inner orders
-function countMatches(orders) {
-  var matched = 0, dimension = orders[0].length
-  while(matched < dimension) {
-    for(var j=1; j<orders.length; ++j) {
-      if(orders[j][matched] !== orders[0][matched]) {
-        return matched
-      }
-    }
-    ++matched
-  }
-  return matched
-}
-
-//Processes a block according to the given data types
-function processBlock(block, proc, dtypes) {
-  var code = block.body
-  var pre = []
-  var post = []
-  for(var i=0; i<block.args.length; ++i) {
-    var carg = block.args[i]
-    if(carg.count <= 0) {
-      continue
-    }
-    var re = new RegExp(carg.name, "g")
-    var ptrStr = ""
-    var arrNum = proc.arrayArgs.indexOf(i)
-    switch(proc.argTypes[i]) {
-      case "offset":
-        var offArgIndex = proc.offsetArgIndex.indexOf(i)
-        var offArg = proc.offsetArgs[offArgIndex]
-        arrNum = offArg.array
-        ptrStr = "+q" + offArgIndex
-      case "array":
-        ptrStr = "p" + arrNum + ptrStr
-        var localStr = "l" + i
-        var arrStr = "a" + arrNum
-        if(carg.count === 1) {
-          if(dtypes[arrNum] === "generic") {
-            if(carg.lvalue) {
-              pre.push(["var ", localStr, "=", arrStr, ".get(", ptrStr, ")"].join(""))
-              code = code.replace(re, localStr)
-              post.push([arrStr, ".set(", ptrStr, ",", localStr,")"].join(""))
-            } else {
-              code = code.replace(re, [arrStr, ".get(", ptrStr, ")"].join(""))
-            }
-          } else {
-            code = code.replace(re, [arrStr, "[", ptrStr, "]"].join(""))
-          }
-        } else if(dtypes[arrNum] === "generic") {
-          pre.push(["var ", localStr, "=", arrStr, ".get(", ptrStr, ")"].join(""))
-          code = code.replace(re, localStr)
-          if(carg.lvalue) {
-            post.push([arrStr, ".set(", ptrStr, ",", localStr,")"].join(""))
-          }
-        } else {
-          pre.push(["var ", localStr, "=", arrStr, "[", ptrStr, "]"].join(""))
-          code = code.replace(re, localStr)
-          if(carg.lvalue) {
-            post.push([arrStr, "[", ptrStr, "]=", localStr].join(""))
-          }
-        }
-      break
-      case "scalar":
-        code = code.replace(re, "Y" + proc.scalarArgs.indexOf(i))
-      break
-      case "index":
-        code = code.replace(re, "index")
-      break
-      case "shape":
-        code = code.replace(re, "shape")
-      break
-    }
-  }
-  return [pre.join("\n"), code, post.join("\n")].join("\n").trim()
-}
-
-function typeSummary(dtypes) {
-  var summary = new Array(dtypes.length)
-  var allEqual = true
-  for(var i=0; i<dtypes.length; ++i) {
-    var t = dtypes[i]
-    var digits = t.match(/\d+/)
-    if(!digits) {
-      digits = ""
-    } else {
-      digits = digits[0]
-    }
-    if(t.charAt(0) === 0) {
-      summary[i] = "u" + t.charAt(1) + digits
-    } else {
-      summary[i] = t.charAt(0) + digits
-    }
-    if(i > 0) {
-      allEqual = allEqual && summary[i] === summary[i-1]
-    }
-  }
-  if(allEqual) {
-    return summary[0]
-  }
-  return summary.join("")
-}
-
-//Generates a cwise operator
-function generateCWiseOp(proc, typesig) {
-
-  //Compute dimension
-  var dimension = typesig[1].length|0
-  var orders = new Array(proc.arrayArgs.length)
-  var dtypes = new Array(proc.arrayArgs.length)
-
-  //First create arguments for procedure
-  var arglist = ["SS"]
-  var code = ["'use strict'"]
-  var vars = []
-
-  for(var j=0; j<dimension; ++j) {
-    vars.push(["s", j, "=SS[", j, "]"].join(""))
-  }
-  for(var i=0; i<proc.arrayArgs.length; ++i) {
-    arglist.push("a"+i)
-    arglist.push("t"+i)
-    arglist.push("p"+i)
-    dtypes[i] = typesig[2*i]
-    orders[i] = typesig[2*i+1]
-  }
-  for(var i=0; i<proc.scalarArgs.length; ++i) {
-    arglist.push("Y" + i)
-  }
-  if(proc.shapeArgs.length > 0) {
-    vars.push("shape=SS.slice(0)")
-  }
-  if(proc.indexArgs.length > 0) {
-    var zeros = new Array(dimension)
-    for(var i=0; i<dimension; ++i) {
-      zeros[i] = "0"
-    }
-    vars.push(["index=[", zeros.join(","), "]"].join(""))
-  }
-  for(var i=0; i<proc.offsetArgs.length; ++i) {
-    var off_arg = proc.offsetArgs[i]
-    var init_string = []
-    for(var j=0; j<off_arg.offset.length; ++j) {
-      if(off_arg.offset[j] === 0) {
-        continue
-      } else if(off_arg.offset[j] === 1) {
-        init_string.push(["t", off_arg.array, "[", j, "]"].join(""))
-      } else {
-        init_string.push([off_arg.offset[j], "*t", off_arg.array, "[", j, "]"].join(""))
-      }
-    }
-    if(init_string.length === 0) {
-      vars.push("q" + i + "=0")
-    } else {
-      vars.push(["q", i, "=(", init_string.join("+"),")|0"].join(""))
-    }
-  }
-
-  //Prepare this variables
-  var thisVars = uniq([].concat(proc.pre.thisVars)
-                      .concat(proc.body.thisVars)
-                      .concat(proc.post.thisVars))
-  vars = vars.concat(thisVars)
-  code.push("var " + vars.join(","))
-  for(var i=0; i<proc.arrayArgs.length; ++i) {
-    code.push("p"+i+"|=0")
-  }
-
-  //Inline prelude
-  if(proc.pre.body.length > 3) {
-    code.push(processBlock(proc.pre, proc, dtypes))
-  }
-
-  //Process body
-  var body = processBlock(proc.body, proc, dtypes)
-  var matched = countMatches(orders)
-  if(matched < dimension) {
-    code.push(outerFill(matched, orders[0], proc, body))
-  } else {
-    code.push(innerFill(orders[0], proc, body))
-  }
-
-  //Inline epilog
-  if(proc.post.body.length > 3) {
-    code.push(processBlock(proc.post, proc, dtypes))
-  }
-
-  if(proc.debug) {
-    console.log("Generated cwise routine for ", typesig, ":\n\n", code.join("\n"))
-  }
-
-  var loopName = [(proc.funcName||"unnamed"), "_cwise_loop_", orders[0].join("s"),"m",matched,typeSummary(dtypes)].join("")
-  var f = new Function(["function ",loopName,"(", arglist.join(","),"){", code.join("\n"),"} return ", loopName].join(""))
-  return f()
-}
-module.exports = generateCWiseOp
-},{"uniq":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/node_modules/uniq/uniq.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/thunk.js":[function(require,module,exports){
+},{"./lib/thunk.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/thunk.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/thunk.js":[function(require,module,exports){
 module.exports=require("/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js")
-},{"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/node_modules/uniq/uniq.js":[function(require,module,exports){
-"use strict"
-
-function unique_pred(list, compare) {
-  var ptr = 1
-    , len = list.length
-    , a=list[0], b=list[0]
-  for(var i=1; i<len; ++i) {
-    b = a
-    a = list[i]
-    if(compare(a, b)) {
-      if(i === ptr) {
-        ptr++
-        continue
-      }
-      list[ptr++] = a
-    }
-  }
-  list.length = ptr
-  return list
-}
-
-function unique_eq(list) {
-  var ptr = 1
-    , len = list.length
-    , a=list[0], b = list[0]
-  for(var i=1; i<len; ++i, b=a) {
-    b = a
-    a = list[i]
-    if(a !== b) {
-      if(i === ptr) {
-        ptr++
-        continue
-      }
-      list[ptr++] = a
-    }
-  }
-  list.length = ptr
-  return list
-}
-
-function unique(list, compare, sorted) {
-  if(list.length === 0) {
-    return []
-  }
-  if(compare) {
-    if(!sorted) {
-      list.sort(compare)
-    }
-    return unique_pred(list, compare)
-  }
-  if(!sorted) {
-    list.sort()
-  }
-  return unique_eq(list)
-}
-
-module.exports = unique
-},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
-module.exports=require("/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js")
-},{"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
+},{"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
+module.exports=require("/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js")
+},{"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
 "use strict"
 
 function dupe_array(count, value, i) {
@@ -9158,11 +8816,11 @@ exports.freeUint32 =
 exports.freeInt8 =
 exports.freeInt16 =
 exports.freeInt32 =
-exports.freeFloat32 =
+exports.freeFloat32 = 
 exports.freeFloat =
-exports.freeFloat64 =
-exports.freeDouble =
-exports.freeUint8Clamped =
+exports.freeFloat64 = 
+exports.freeDouble = 
+exports.freeUint8Clamped = 
 exports.freeDataView = freeTypedArray
 
 exports.freeArrayBuffer = freeArrayBuffer
@@ -9471,15 +9129,15 @@ function compileQuickSelect(order, useCompare, dtype) {
         code.push("_cmp:")
       }
       for(var i=dimension-1; i>0; --i) {
-        code.push("for(", INDEX(i), "=0;",
+        code.push("for(", INDEX(i), "=0;", 
           INDEX(i), "<", SHAPE(i), ";",
           INDEX(i), "++){")
       }
       if(useGetter) {
-        code.push(out, "=", DATA, ".get(", PTR(0), ")-",
+        code.push(out, "=", DATA, ".get(", PTR(0), ")-", 
                             DATA, ".get(", PTR(1), ");")
       } else {
-        code.push(out, "=", DATA, "[", PTR(0), "]-",
+        code.push(out, "=", DATA, "[", PTR(0), "]-", 
                             DATA, "[", PTR(1), "];")
       }
       if(dimension > 1) {
@@ -9499,16 +9157,16 @@ function compileQuickSelect(order, useCompare, dtype) {
       PTR(0), "=", OFFSET, "+", STRIDE(order[0]), "*(", i0, ");",
       PTR(1), "=", OFFSET, "+", STRIDE(order[0]), "*(", i1, ");")
     for(var i=dimension-1; i>0; --i) {
-      code.push("for(", INDEX(order[i]), "=0;",
+      code.push("for(", INDEX(order[i]), "=0;", 
         INDEX(order[i]), "<", SHAPE(order[i]), ";",
         INDEX(order[i]), "++){")
     }
     if(useGetter) {
-      code.push(TMP, "=", DATA, ".get(", PTR(0), ");",
+      code.push(TMP, "=", DATA, ".get(", PTR(0), ");", 
                 DATA, ".set(", PTR(0), ",", DATA, ".get(", PTR(1), "));",
                 DATA, ".set(", PTR(1), ",", TMP, ");")
     } else {
-      code.push(TMP, "=", DATA, "[", PTR(0), "];",
+      code.push(TMP, "=", DATA, "[", PTR(0), "];", 
                 DATA, "[", PTR(0), "]=", DATA, "[", PTR(1), "];",
                 DATA, "[", PTR(1), "]=", TMP, ";")
     }
@@ -9583,7 +9241,7 @@ function lookupCache(order, useCompare, dtype) {
 
 function ndSelect(array, k, compare) {
   k |= 0
-  if((array.dimension === 0) ||
+  if((array.dimension === 0) || 
     (array.shape[0] <= k) ||
     (k < 0)) {
     return null
@@ -9644,10 +9302,10 @@ function compileConstructor(dtype, dimension) {
     className = "View_Nil" + dtype
   }
   var useGetters = (dtype === "generic")
-
+  
   if(dimension === -1) {
     //Special case for trivial arrays
-    var code =
+    var code = 
       "function "+className+"(a){this.data=a;};\
 var proto="+className+".prototype;\
 proto.dtype='"+dtype+"';\
@@ -9698,7 +9356,7 @@ return function construct_"+className+"(a,b,c,d){return new "+className+"(a,d)}"
   }
 
   var code = ["'use strict'"]
-
+    
   //Create constructor for view
   var indices = iota(dimension)
   var args = indices.map(function(i) { return "i"+i })
@@ -9722,7 +9380,7 @@ return function construct_"+className+"(a,b,c,d){return new "+className+"(a,d)}"
     "var proto="+className+".prototype",
     "proto.dtype='"+dtype+"'",
     "proto.dimension="+dimension)
-
+  
   //view.stride and view.shape
   var strideClassName = "VStride" + dimension + "d" + dtype
   var shapeClassName = "VShape" + dimension + "d" + dtype
@@ -9732,7 +9390,7 @@ return function construct_"+className+"(a,b,c,d){return new "+className+"(a,d)}"
     code.push(
       "function " + arrayName + "(v) {this._v=v} var aproto=" + arrayName + ".prototype",
       "aproto.length="+dimension)
-
+    
     var array_elements = []
     for(var i=0; i<dimension; ++i) {
       array_elements.push(["this._v._", prop, i].join(""))
@@ -9740,7 +9398,7 @@ return function construct_"+className+"(a,b,c,d){return new "+className+"(a,d)}"
     code.push(
       "aproto.toJSON=function " + arrayName + "_toJSON(){return [" + array_elements.join(",") + "]}",
       "aproto.valueOf=aproto.toString=function " + arrayName + "_toString(){return [" + array_elements.join(",") + "].join()}")
-
+    
     for(var i=0; i<dimension; ++i) {
       code.push("Object.defineProperty(aproto,"+i+",{get:function(){return this._v._"+prop+i+"},set:function(v){return this._v._"+prop+i+"=v|0},enumerable:true})")
     }
@@ -9755,7 +9413,7 @@ return function construct_"+className+"(a,b,c,d){return new "+className+"(a,d)}"
     }
     code.push("return v}})")
   }
-
+  
   //view.size:
   code.push("Object.defineProperty(proto,'size',{get:function "+className+"_size(){\
 return "+indices.map(function(i) { return "this._shape"+i }).join("*"),
@@ -9793,7 +9451,7 @@ return [0,2,1];\
       code.push("ORDER})")
     }
   }
-
+  
   //view.set(i0, ..., v):
   code.push(
 "proto.set=function "+className+"_set("+args.join(",")+",v){")
@@ -9802,7 +9460,7 @@ return [0,2,1];\
   } else {
     code.push("return this.data["+index_str+"]=v}")
   }
-
+  
   //view.get(i0, ...):
   code.push("proto.get=function "+className+"_get("+args.join(",")+"){")
   if(useGetters) {
@@ -9810,7 +9468,7 @@ return [0,2,1];\
   } else {
     code.push("return this.data["+index_str+"]}")
   }
-
+  
   //view.index:
   code.push(
     "proto.index=function "+className+"_index(", args.join(), "){return "+index_str+"}")
@@ -9823,7 +9481,7 @@ return [0,2,1];\
     indices.map(function(i) {
       return "this._stride"+i
     }).join(",")+",this.offset)}")
-
+  
   //view.lo():
   var a_vars = indices.map(function(i) { return "a"+i+"=this._shape"+i })
   var c_vars = indices.map(function(i) { return "c"+i+"=this._stride"+i })
@@ -9842,7 +9500,7 @@ a"+i+"-=d}")
     indices.map(function(i) {
       return "c"+i
     }).join(",")+",b)}")
-
+  
   //view.step():
   code.push("proto.step=function "+className+"_step("+args.join(",")+"){var "+
     indices.map(function(i) {
@@ -9871,7 +9529,7 @@ b"+i+"*=d\
     indices.map(function(i) {
       return "b" + i
     }).join(",")+",c)}")
-
+  
   //view.transpose():
   var tShape = new Array(dimension)
   var tStride = new Array(dimension)
@@ -9882,14 +9540,14 @@ b"+i+"*=d\
   code.push("proto.transpose=function "+className+"_transpose("+args+"){"+
     args.map(function(n,idx) { return n + "=(" + n + "===undefined?" + idx + ":" + n + "|0)"}).join(";"),
     "var a=this.shape,b=this.stride;return new "+className+"(this.data,"+tShape.join(",")+","+tStride.join(",")+",this.offset)}")
-
+  
   //view.pick():
   code.push("proto.pick=function "+className+"_pick("+args+"){var a=[],b=[],c=this.offset")
   for(var i=0; i<dimension; ++i) {
     code.push("if(typeof i"+i+"==='number'&&i"+i+">=0){c=(c+this._stride"+i+"*i"+i+")|0}else{a.push(this._shape"+i+");b.push(this._stride"+i+")}")
   }
   code.push("var ctor=CTOR_LIST[a.length+1];return ctor(this.data,a,b,c)}")
-
+    
   //Add return statement
   code.push("return function construct_"+className+"(data,shape,stride,offset){return new "+className+"(data,"+
     indices.map(function(i) {
@@ -10008,9 +9666,7 @@ function iota(n) {
 }
 
 module.exports = iota
-},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
-module.exports=require("/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js")
-},{"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/pool.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/pool.js":[function(require,module,exports){
 module.exports=require("/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/pool.js")
 },{"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/pool.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/pool.js"}],"/Users/Dave/Sites/d3plus/src/array/comparator.coffee":[function(require,module,exports){
 var colorSort;
@@ -10078,15 +9734,25 @@ fetchSort = require("../core/fetch/sort.coffee");
 
 module.exports = function(arr, keys, sort, colors, vars, depth) {
   var d, _i, _len;
-  if (!arr || arr.length <= 1 || !keys) {
+  if (!arr || arr.length <= 1) {
     return arr || [];
   } else {
     if (vars) {
+      if (!keys) {
+        keys = vars.order.value || vars.size.value || vars.id.value;
+      }
+      if (!sort) {
+        sort = vars.order.sort.value;
+      }
+      if (!colors) {
+        colors = vars.color.value || [];
+      }
       for (_i = 0, _len = arr.length; _i < _len; _i++) {
         d = arr[_i];
-        if (d.d3plus) {
-          d.d3plus.sortKeys = fetchSort(vars, d, keys, colors, depth);
+        if (!d.d3plus) {
+          d.d3plus = {};
         }
+        d.d3plus.sortKeys = fetchSort(vars, d, keys, colors, depth);
       }
     }
     return arr.sort(function(a, b) {
@@ -10099,11 +9765,11 @@ module.exports = function(arr, keys, sort, colors, vars, depth) {
 
 },{"../core/fetch/sort.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/sort.coffee","./comparator.coffee":"/Users/Dave/Sites/d3plus/src/array/comparator.coffee"}],"/Users/Dave/Sites/d3plus/src/array/update.coffee":[function(require,module,exports){
 module.exports = function(arr, x) {
-  if (x === false) {
-    return [];
-  }
   if (x === void 0) {
     return arr;
+  }
+  if (x === false) {
+    return [];
   }
   if (x instanceof Array) {
     return x;
@@ -16419,7 +16085,7 @@ module.exports = function ( vars ) {
   vars.container.search.exit().remove()
 
   if (!vars.open.value) {
-    vars.search.height = vars.search.enabled ? vars.container.search.node().offsetHeight ||
+    vars.search.height = vars.search.enabled ? vars.container.search.node().offsetHeight || 
                          vars.container.search.node().getBoundingClientRect().height : 0;
   }
 
@@ -21401,7 +21067,7 @@ module.exports = function(vars,selection,enter,exit) {
   function init(paths){
     paths.attr("d", d3.svg.symbol().type("cross").size(10))
   }
-
+  
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // Change scale of check on update.
   //---------------------------------------------------------------------------
@@ -21454,7 +21120,7 @@ module.exports = function(vars,selection,enter,exit) {
   function init(paths){
     paths.attr("d", d3.svg.symbol().type("diamond").size(10))
   }
-
+  
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // Change scale of check on update.
   //---------------------------------------------------------------------------
@@ -23172,7 +22838,7 @@ module.exports = function( vars , group ) {
 
     elem
       .attr("opacity",function(d){
-        if (vars.draw.timing) return 1;
+        // if (vars.draw.timing) return 1;
         var size = parseFloat(d3.select(this).attr("font-size"),10);
         d.visible = size * (vars.zoom.scale/scale[1]) >= 2;
         return d.visible ? 1 : 0;
@@ -23295,7 +22961,12 @@ module.exports = function( vars , group ) {
             x = t.translate && t.translate.x ? t.translate.x : 0,
             y = t.translate && t.translate.y ? t.translate.y : 0;
 
-        return "rotate("+a+","+x+","+y+")scale("+1/scale[1]+")" + translate;
+        if (translate.length) {
+          translate = translate.split(")").slice(-3).join(")");
+        }
+
+        return "rotate("+a+","+x+","+y+")scale("+1/scale[1]+")translate("+(t.x*scale[1]-t.x)+","+(t.y*scale[1]-t.y)+")" + translate;
+
       });
 
   };
@@ -23444,8 +23115,8 @@ module.exports = function( vars , group ) {
               .attr("opacity",0)
               .call(style,true)
               .transition().duration(vars.draw.timing/2)
-              .delay(vars.draw.timing/2)
-              .call(opacity);
+                .delay(vars.draw.timing/2)
+                .call(opacity);
 
           }
           else {
@@ -24061,7 +23732,7 @@ module.exports = function(vars,selection,enter,exit) {
   function init(paths){
     paths.attr("d", d3.svg.symbol().type("triangle-down").size(10))
   }
-
+  
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // Change scale of check on update.
   //---------------------------------------------------------------------------
@@ -24114,7 +23785,7 @@ module.exports = function(vars,selection,enter,exit) {
   function init(paths){
     paths.attr("d", d3.svg.symbol().type("triangle-up").size(10))
   }
-
+  
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // Change scale of check on update.
   //---------------------------------------------------------------------------
@@ -28215,7 +27886,7 @@ module.exports = {
   deprecates: ["sort"],
   sort: {
     accepted: ["asc", "desc"],
-    value: "asc"
+    value: "desc"
   },
   value: false
 };
@@ -28949,6 +28620,7 @@ groupData = require("../../core/data/group.coffee");
 bubbles = function(vars) {
   var column_height, column_width, columns, d, data, dataLength, domain, domainMax, domainMin, downscale, groupedData, i, labelHeight, obj, pack, padding, row, rows, screenRatio, size, size_max, size_min, t, temp, xPadding, xoffset, yPadding, yoffset, _i, _j, _k, _len, _len1, _len2;
   groupedData = groupData(vars, vars.data.viz);
+  groupedData = arraySort(groupedData, null, null, null, vars);
   dataLength = groupedData.length;
   if (dataLength < 4) {
     columns = dataLength;
@@ -28998,16 +28670,13 @@ bubbles = function(vars) {
     yoffset = column_height * row;
     for (_j = 0, _len1 = temp.length; _j < _len1; _j++) {
       t = temp[_j];
-      obj = t.d3plus || {
-        d3plus: {}
-      };
-      if (t.d3plus) {
-        obj = t.d3plus;
-      } else {
+      if (t.children) {
         obj = {
           d3plus: {}
         };
         obj[vars.id.value] = t.key;
+      } else {
+        obj = t.d3plus;
       }
       obj.d3plus.depth = vars.id.grouping.value ? t.depth : vars.depth.value;
       obj.d3plus.x = t.x;
@@ -31669,7 +31338,7 @@ stack = require("./helpers/graph/stack.coffee");
 threshold = require("../../core/data/threshold.js");
 
 stacked = function(vars) {
-  var d, data, domains, order, point, sortOrder, _i, _j, _len, _len1, _ref;
+  var d, data, domains, point, _i, _j, _len, _len1, _ref;
   graph(vars, {
     buffer: vars.axes.opposite
   });
@@ -31677,7 +31346,7 @@ stacked = function(vars) {
   if (domains.indexOf(void 0) >= 0) {
     return [];
   }
-  data = nest(vars);
+  data = sort(nest(vars), null, null, null, vars);
   for (_i = 0, _len = data.length; _i < _len; _i++) {
     point = data[_i];
     if (!point.d3plus) {
@@ -31701,10 +31370,7 @@ stacked = function(vars) {
       }
     }
   }
-  data = stack(vars, data);
-  order = vars.order.value || vars.size.value || vars.id.value;
-  sortOrder = vars.order.sort.value === "desc" ? "asc" : "desc";
-  return sort(data, order, sortOrder, vars.color.value || [], vars);
+  return stack(vars, data);
 };
 
 stacked.filter = function(vars, data) {
