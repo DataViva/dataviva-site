@@ -23,7 +23,7 @@ module.exports = d3plus;
  * @static
  */
 
-d3plus.version = "1.6.8 - Turquoise";
+d3plus.version = "1.6.9 - Turquoise";
 
 
 /**
@@ -9734,15 +9734,25 @@ fetchSort = require("../core/fetch/sort.coffee");
 
 module.exports = function(arr, keys, sort, colors, vars, depth) {
   var d, _i, _len;
-  if (!arr || arr.length <= 1 || !keys) {
+  if (!arr || arr.length <= 1) {
     return arr || [];
   } else {
     if (vars) {
+      if (!keys) {
+        keys = vars.order.value || vars.size.value || vars.id.value;
+      }
+      if (!sort) {
+        sort = vars.order.sort.value;
+      }
+      if (!colors) {
+        colors = vars.color.value || [];
+      }
       for (_i = 0, _len = arr.length; _i < _len; _i++) {
         d = arr[_i];
-        if (d.d3plus) {
-          d.d3plus.sortKeys = fetchSort(vars, d, keys, colors, depth);
+        if (!d.d3plus) {
+          d.d3plus = {};
         }
+        d.d3plus.sortKeys = fetchSort(vars, d, keys, colors, depth);
       }
     }
     return arr.sort(function(a, b) {
@@ -9755,6 +9765,9 @@ module.exports = function(arr, keys, sort, colors, vars, depth) {
 
 },{"../core/fetch/sort.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/sort.coffee","./comparator.coffee":"/Users/Dave/Sites/d3plus/src/array/comparator.coffee"}],"/Users/Dave/Sites/d3plus/src/array/update.coffee":[function(require,module,exports){
 module.exports = function(arr, x) {
+  if (x === void 0) {
+    return arr;
+  }
   if (x === false) {
     return [];
   }
@@ -20270,21 +20283,19 @@ module.exports = function(vars) {
     var new_opacity = (data_req && vars.data.viz.length === 0) ||
                        vars.error.internal || vars.error.value ? 0 : vars.focus.value.length &&
                        vars.types[vars.type.value].zoom && vars.zoom.value ?
-                       1 - vars.tooltip.curtain.opacity : 1,
-        old_opacity = vars.group.attr("opacity")
+                       1 - vars.tooltip.curtain.opacity : 1;
 
-    if (new_opacity != old_opacity) {
+    var timing = vars.draw.timing;
 
-      var timing = vars.draw.timing
+    vars.group.transition().duration(timing)
+      .attr("opacity",new_opacity);
 
-      vars.group.transition().duration(timing)
-        .attr("opacity",new_opacity)
-      vars.g.data.transition().duration(timing)
-        .attr("opacity",new_opacity)
-      vars.g.edges.transition().duration(timing)
-        .attr("opacity",new_opacity)
+    vars.g.data.transition().duration(timing)
+      .attr("opacity",new_opacity);
 
-    }
+    vars.g.edges.transition().duration(timing)
+      .attr("opacity",new_opacity);
+
   }
 
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -22827,7 +22838,7 @@ module.exports = function( vars , group ) {
 
     elem
       .attr("opacity",function(d){
-        if (vars.draw.timing) return 1;
+        // if (vars.draw.timing) return 1;
         var size = parseFloat(d3.select(this).attr("font-size"),10);
         d.visible = size * (vars.zoom.scale/scale[1]) >= 2;
         return d.visible ? 1 : 0;
@@ -22950,7 +22961,12 @@ module.exports = function( vars , group ) {
             x = t.translate && t.translate.x ? t.translate.x : 0,
             y = t.translate && t.translate.y ? t.translate.y : 0;
 
-        return "rotate("+a+","+x+","+y+")scale("+1/scale[1]+")" + translate;
+        if (translate.length) {
+          translate = translate.split(")").slice(-3).join(")");
+        }
+
+        return "rotate("+a+","+x+","+y+")scale("+1/scale[1]+")translate("+(t.x*scale[1]-t.x)+","+(t.y*scale[1]-t.y)+")" + translate;
+
       });
 
   };
@@ -23099,8 +23115,8 @@ module.exports = function( vars , group ) {
               .attr("opacity",0)
               .call(style,true)
               .transition().duration(vars.draw.timing/2)
-              .delay(vars.draw.timing/2)
-              .call(opacity);
+                .delay(vars.draw.timing/2)
+                .call(opacity);
 
           }
           else {
@@ -27870,7 +27886,7 @@ module.exports = {
   deprecates: ["sort"],
   sort: {
     accepted: ["asc", "desc"],
-    value: "asc"
+    value: "desc"
   },
   value: false
 };
@@ -28604,6 +28620,7 @@ groupData = require("../../core/data/group.coffee");
 bubbles = function(vars) {
   var column_height, column_width, columns, d, data, dataLength, domain, domainMax, domainMin, downscale, groupedData, i, labelHeight, obj, pack, padding, row, rows, screenRatio, size, size_max, size_min, t, temp, xPadding, xoffset, yPadding, yoffset, _i, _j, _k, _len, _len1, _len2;
   groupedData = groupData(vars, vars.data.viz);
+  groupedData = arraySort(groupedData, null, null, null, vars);
   dataLength = groupedData.length;
   if (dataLength < 4) {
     columns = dataLength;
@@ -28653,16 +28670,13 @@ bubbles = function(vars) {
     yoffset = column_height * row;
     for (_j = 0, _len1 = temp.length; _j < _len1; _j++) {
       t = temp[_j];
-      obj = t.d3plus || {
-        d3plus: {}
-      };
-      if (t.d3plus) {
-        obj = t.d3plus;
-      } else {
+      if (t.children) {
         obj = {
           d3plus: {}
         };
         obj[vars.id.value] = t.key;
+      } else {
+        obj = t.d3plus;
       }
       obj.d3plus.depth = vars.id.grouping.value ? t.depth : vars.depth.value;
       obj.d3plus.x = t.x;
@@ -31324,7 +31338,7 @@ stack = require("./helpers/graph/stack.coffee");
 threshold = require("../../core/data/threshold.js");
 
 stacked = function(vars) {
-  var d, data, domains, order, point, sortOrder, _i, _j, _len, _len1, _ref;
+  var d, data, domains, point, _i, _j, _len, _len1, _ref;
   graph(vars, {
     buffer: vars.axes.opposite
   });
@@ -31332,7 +31346,7 @@ stacked = function(vars) {
   if (domains.indexOf(void 0) >= 0) {
     return [];
   }
-  data = nest(vars);
+  data = sort(nest(vars), null, null, null, vars);
   for (_i = 0, _len = data.length; _i < _len; _i++) {
     point = data[_i];
     if (!point.d3plus) {
@@ -31356,10 +31370,7 @@ stacked = function(vars) {
       }
     }
   }
-  data = stack(vars, data);
-  order = vars.order.value || vars.size.value || vars.id.value;
-  sortOrder = vars.order.sort.value === "desc" ? "asc" : "desc";
-  return sort(data, order, sortOrder, vars.color.value || [], vars);
+  return stack(vars, data);
 };
 
 stacked.filter = function(vars, data) {

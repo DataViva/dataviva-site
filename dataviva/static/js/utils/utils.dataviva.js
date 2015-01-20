@@ -822,7 +822,7 @@ dataviva.popover.create = function(params) {
 
   if (close) {
     body.append("div")
-      .attr("class","d3plus_tooltip_close")
+      .attr("class","selector_close")
       .html("\&times;")
       .style("background-color",color)
       .on(d3plus.client.pointer.click,function(){

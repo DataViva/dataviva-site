@@ -12,7 +12,7 @@ mod = Blueprint('secex_import', __name__, url_prefix='/secex_import')
 
 @mod.route('/<year>/<bra_id>/<hs_id>/<wld_id>/')
 @gzipped
-# @cache_api('secex')
+@cache_api('secex')
 def secex_api(**kwargs):
     limit = int(kwargs.pop('limit', 0)) or int(request.args.get('limit', 0) )
     order = request.args.get('order', None) or kwargs.pop('order', None)

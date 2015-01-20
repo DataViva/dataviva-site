@@ -491,6 +491,7 @@
 
     // Define global D3plus app parameters
     app.viz = d3plus.viz()
+      .container("#app")
       .aggs(averages)
       .time("year")
       .format({
@@ -774,8 +775,8 @@
     app.error = function(error) {
       console.log("[dataviva] ERROR: "+error)
       dataviva.resize()
-      loading.hide()
       app.viz.error(error).draw()
+      loading.hide()
       // d3.select("#app").html("").datum([]).call(app.viz.error(error))
     }
 
@@ -886,7 +887,7 @@
               var default_value = ui.values[0]
             }
           }
-          else if (ui.type == "sort" && app.build.app.type == "stacked") {
+          else if (ui.type == "order" && app.build.app.type == "stacked") {
             var default_value = "color"
           }
           else if (ui.type == "spotlight" && app.build.app.type == "scatter") {
@@ -1005,9 +1006,8 @@
         app.vars.spotlight = false
       }
 
-      app.viz.type(app.build.app.viz_whiz)
-        .container("#app")
-        .descs(descs)
+      app.viz
+        .type(app.build.app.viz_whiz)
         .title({
           "sub": app.sub_title(),
           "total": app.total(),
@@ -1025,7 +1025,6 @@
         })
         // .layout(app.vars.layout)
         .size(app.vars.size)
-        .time({"solo": [app.vars.year]})
         .focus(false)
         .error(false)
         .id({
@@ -1038,9 +1037,12 @@
         })
         .y(false)
         .tooltip(app.tooltip)
+        .zoom(true)
+
+      if (app.vars.year) app.viz.time({"solo": [app.vars.year]})
+      else app.viz.time({"solo": false})
 
       // app.viz.type(app.build.app.viz_whiz)
-      //   .descs(descs)
       //   .title(app.build.title)
       //   .color_var(color_var)
       //   .attrs(app.attrs[app.build.output])
@@ -1084,6 +1086,7 @@
             .active(false)
             .temp(false)
             .total(false)
+          .size({"threshold": false})
           .zoom(false)
 
       }
@@ -1178,6 +1181,7 @@
           .active(false)
           .temp(false)
           .total(false)
+          .size({"threshold": true})
       }
 
       /******************************/
@@ -1420,8 +1424,11 @@
           app.viz.y({"lines": [yval], "value": yv}).title({"total": app.total()})
         }
         else if (type == "size") {
-          if (app.build.app.type != "occugrid") {
+          if (app.build.app.type !== "occugrid") {
             app.tooltip["short"]["basics"] = [app.vars.size]
+          }
+          if (app.viz.order() === app.viz.size()) {
+            app.viz.order(value)
           }
           app.viz[type](value).title({"total": app.total()}).tooltip(app.tooltip)
         }
@@ -1430,6 +1437,16 @@
         }
         else if (type === "year") {
           app.viz.time({"solo": [parseFloat(value)]})
+        }
+        else if (type === "layout") {
+          var yscale = value === "value" ? "linear" : "share";
+          app.viz.y({"scale": yscale})
+        }
+        else if (type === "sort") {
+          app.viz.order({"sort": value})
+        }
+        else if (type === "order" && value === "value") {
+          app.viz.order(app.viz.size())
         }
         else {
           app.viz[type](value)
@@ -1842,7 +1859,7 @@
       }
 
       app.build[type][index] = obj
-      //console.log(obj)
+
       var url = app.url.split("/")
       var ids = url[url_index].split("_")
       if (obj.distance && obj.distance > 0) {

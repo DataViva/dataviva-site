@@ -531,7 +531,7 @@ function Selector() {
 
         if (header_color == "#ffffff") header_color = "#333333"
 
-        var close = d3.select(container.node().parentNode).select(".d3plus_tooltip_close")
+        var close = d3.select(container.node().parentNode).select(".selector_close")
         if (close.node()) {
           close.style("background-color",header_color)
         }
