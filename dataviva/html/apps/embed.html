@@ -689,6 +689,16 @@
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
 
+                    d.nodes.forEach(function(node){
+                      if (app.build.output === "cnae") {
+                        node[app.build.output+"_id"] = node.cnae_6;
+                      }
+                      else {
+                        var id = node[app.build.output+"_id"];
+                        node[app.build.output+"_"+id.length] = id;
+                      }
+                    })
+
                     d.edges.forEach(function(edge){
                       if (["hs"].indexOf(app.build.output) >= 0) {
                         edge.source = d.nodes[edge.source]
@@ -698,11 +708,6 @@
                         edge.source = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.source })[0]
                         edge.target = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.target })[0]
                       }
-                    })
-
-                    d.nodes.forEach(function(node){
-                      var id = node[app.build.output+"_id"];
-                      node[app.build.output+"_"+id.length] = id;
                     })
 
                     app.networks[app.build.output] = d
