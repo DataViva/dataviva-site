@@ -73,7 +73,7 @@ REDIS = Redis(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"),
          password=get_env_variable("DATAVIVA_REDIS_PW", None))
 REDIS_CACHE = RedisCache(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"),
          port=get_env_variable("DATAVIVA_REDIS_PORT", 6379),
-         password=get_env_variable("DATAVIVA_REDIS_PW", None), default_timeout=2591999)
+         password=get_env_variable("DATAVIVA_REDIS_PW", None), default_timeout=2591999, key_prefix="dv2015:")
 
 try:
     REDIS.client_list()
