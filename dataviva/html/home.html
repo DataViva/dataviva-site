@@ -3,54 +3,336 @@
 {% block head %}
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.home.css" />
+  <style>
+  *, body {
+    text-align: left;
+  }
+  h2 {
+    font-size: 36px;
+    line-height: 40px;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
+  }
+  button {
+    border: solid rgba(0, 0, 0, 0.4) 1px;
+    background: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+  }
+  button i {
+    margin: 0 0 0 5px;
+    vertical-align: bottom;
+  }
+  .search, .explore, .profile {
+    margin: 0 0 40px 0;
+  }
+  .search {
+/*    border: solid black 1px;*/
+    margin: 100px 150px 150px 150px;
+  }
+  .search input {
+    background-color: white;
+    border: solid rgba(0, 0, 0, 0.4) 1px;
+    box-sizing: border-box;
+    font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    outline: none;
+    opacity: 0.75;
+    padding: 10px;
+    -webkit-transition: border-color .1s, color .1s, opacity .1s;
+    transition: border-color .1s, color .1s, opacity .1s;
+    width: 100%;
+  }
+  .explore {
+/*    border: solid black 1px;*/
+  }
+  .explore ul {
+    list-style: none;
+  }
+  .explore ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 0 44px 0 0;
+  }
+  .explore ul li:last-child {
+    margin: 0;
+  }
+  .explore ul li a {
+    border: solid rgba(0, 0, 0, 0.4) 1px;
+    background: rgba(255, 255, 255, 0.6);
+    display: inline-block;
+    height: 100px;
+    padding: 10px;
+    text-align: center;
+    width: 100px;
+  }
+  .explore ul li a:hover {
+    color: black;
+  }
+  .explore ul li i {
+    display: inline-block;
+    font-size: 66px;
+  }
+  .profile .scroller {
+    overflow: hidden;
+    position: relative;
+  }
+  .profile ul {
+    list-style: none;
+    white-space: nowrap;
+  }
+  .profile ul li {
+    display: inline-block;
+    margin: 0 10px 0 0;
+  }
+  .profile ul li a {
+    border: solid rgba(0, 0, 0, 0.4) 1px;
+    background: rgba(255, 255, 255, 0.6);
+    display: inline-block;
+    height: 200px;
+    text-align: center;
+    width: 150px;
+  }
+  .profile ul li a h4 {
+    white-space: normal;
+  }
+  </style>
 
 {% endblock %}
 
 {% block body %}
 
-  <div class="darkbox"><h1>{% trans %}Visualizing the Economy of Brazil{% endtrans %}</h1></div>
+  <!-- <div class="darkbox"><h1>{% trans %}Visualizing the Economy of Brazil{% endtrans %}</h1></div>
   <div class="home_sub">
     {% trans %}DataViva is opening up data for the entire formal sector of the Brazilian economy{% endtrans %}
       <br>
     {% trans %}through more than 100 million interactive visualizations.{% endtrans %}
+  </div> -->
+  <div class="search">
+    <h2>What are you looking for?</h2>
+    <input type="text" placeholder="Products exported by Minas Gerais" />
   </div>
-
-  <div id="intro">
-    <div id="carousel">
-      <div class="centered">
-        <a class="decision">{%trans%}See More{%endtrans%}</a>
+  
+  <div class="explore">
+    <h2>Explore by dataset</h2>
+    <ul>
+      <li><a href="#"><i class="fa fa-plane"></i>Exports</a></li>
+      <li><a href="#"><i class="fa fa-plane fa-rotate-90"></i>Imports</a></li>
+      <li><a href="#"><i class="fa fa-building-o"></i>Industries</a></li>
+      <li><a href="#"><i class="fa fa-user-md"></i>Occupations</a></li>
+      <li><a href="#"><i class="fa fa-graduation-cap"></i>Higher Education</a></li>
+      <li><a href="#"><i class="fa fa-slideshare"></i>Primary Education</a></li>
+    </ul>
+  </div>
+  
+  <div class="profile">
+    <h2>Top exporting municipalities</h2>
+    <div class="scroller">
+      <ul data-parameters="/stats/carosel/?metric=export_val&amp;show=bra_id&amp;profile=BraProfile&amp;limit=10" class="set">
+        <li>
+          <a class="poster" href="/profile/bra/1pa040304/">
+            <h4 class="title">
+              Parauapebas, PA
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/bra/4sp090607/">
+            <h4 class="title">
+              São Paulo, SP
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/bra/5rs050101/">
+            <h4 class="title">
+              Rio Grande, RS
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/bra/4rj020212/">
+            <h4 class="title">
+              Rio de Janeiro, RJ
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/bra/4sp090504/">
+            <h4 class="title">
+              Santos, SP
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/bra/4sp140505/">
+            <h4 class="title">
+              São José dos Campos, SP
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/bra/4rj050000/">
+            <h4 class="title">
+              Angra dos Reis, RJ
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/bra/5pr030305/">
+            <h4 class="title">
+              Paranaguá, PR
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/bra/4sp090605/">
+            <h4 class="title">
+              São Bernardo do Campo, SP
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/bra/4rj040102/">
+            <h4 class="title">
+              Macaé, RJ
+            </h4>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div> <!-- end profile -->
+    
+  <div class="profile">
+    <h2>Top Brazilian exports</h2>
+    <div class="scroller">
+      <ul data-parameters="/stats/carosel/?metric=export_val&amp;show=hs_id&amp;profile=HsProfile&amp;limit=10" class="page">
+        <li>
+          <a class="poster" href="/profile/wld/sabra/hs/052601/">
+            <h4 class="title">
+              Iron Ore
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/wld/sabra/hs/021201/">
+            <h4 class="title">
+              Soybeans
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/wld/sabra/hs/052709/">
+            <h4 class="title">
+              Crude Petroleum
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/wld/sabra/hs/041701/">
+            <h4 class="title">
+              Raw Sugar
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/wld/sabra/hs/178905/">
+            <h4 class="title">
+              Drilling Platforms
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/wld/sabra/hs/010207/">
+            <h4 class="title">
+              Poultry Meat
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/wld/sabra/hs/042304/">
+            <h4 class="title">
+              Soybean Meal
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/wld/sabra/hs/021005/">
+            <h4 class="title">
+              Corn
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/wld/sabra/hs/178703/">
+            <h4 class="title">
+              Cars
+            </h4>
+          </a>
+        </li><li>
+          <a class="poster" href="/profile/wld/sabra/hs/229999/">
+            <h4 class="title">
+              Unspecified
+            </h4>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div> <!-- end profile -->
+  
+  <div class="profile">
+    <h2>Highest paid occupations</h2>
+      <div class="scroller">
+        <ul data-parameters="/stats/carosel/?metric=wage_avg&amp;show=cbo_id&amp;profile=CboProfile&amp;limit=10" class="page">
+          <li>
+            <a class="poster" href="/profile/wld/sabra/cbo/2422/">
+              <h4 class="title">
+                Public Ministry
+              </h4>
+            </a>
+          </li><li>
+            <a class="poster" href="/profile/wld/sabra/cbo/1113/">
+              <h4 class="title">
+                Magistrates
+              </h4>
+            </a>
+          </li><li>
+            <a class="poster" href="/profile/wld/sabra/cbo/1222/">
+              <h4 class="title">
+                Mining and Quarrying COOs
+              </h4>
+            </a>
+          </li><li>
+            <a class="poster" href="/profile/wld/sabra/cbo/1233/">
+              <h4 class="title">
+                Sales and Marketing Directors
+              </h4>
+            </a>
+          </li><li>
+            <a class="poster" href="/profile/wld/sabra/cbo/2424/">
+              <h4 class="title">
+                Public Defenders
+              </h4>
+            </a>
+          </li><li>
+            <a class="poster" href="/profile/wld/sabra/cbo/1237/">
+              <h4 class="title">
+                R&amp;D Directors
+              </h4>
+            </a>
+          </li><li>
+            <a class="poster" href="/profile/wld/sabra/cbo/1227/">
+              <h4 class="title">
+                Financial COOs
+              </h4>
+            </a>
+          </li><li>
+            <a class="poster" href="/profile/wld/sabra/cbo/2541/">
+              <h4 class="title">
+                Federal Revenue Inspectors
+              </h4>
+            </a>
+          </li><li>
+            <a class="poster" href="/profile/wld/sabra/cbo/2429/">
+              <h4 class="title">
+                Intelligence Agents
+              </h4>
+            </a>
+          </li><li>
+            <a class="poster" href="/profile/wld/sabra/cbo/2145/">
+              <h4 class="title">
+                Chemical Engineers
+              </h4>
+            </a>
+          </li> 
+        </ul>
       </div>
-    </div>
-    <div class="pages"></div>
-  </div>
-
-  <div class="bottom_section" style="margin-top:100px">
-
-    <div class="bottom_title">
-      <h1>{% trans %}Also browse{% endtrans %}:</h1>
-    </div>
-
-    <a class="decision icon square apps" href="/apps/">
-      <h1>{% trans %}Apps{% endtrans %}</h1>
-      <p>{% trans %}Explore the Brazilian economy through over 100 million visualizations.{% endtrans %}</p>
-    </a>
-
-    <a class="decision icon square profiles" href="/profiles/">
-      <h1>{% trans %}Profiles{% endtrans %}</h1>
-      <p>{% trans %}Quickly learn about the exports, occupations, and industries of each Brazilian state and economic sector.{% endtrans %}</p>
-    </a>
-
-    <a class="decision icon square guide" href="/guide/">
-      <h1>{% trans %}Guide{% endtrans %}</h1>
-      <p>{% trans %}Answer strategic questions about economic opportunities of states and industries.{% endtrans %}</p>
-    </a>
-
-    <a class="decision icon square rankings" href="/rankings/">
-      <h1>{% trans %}Rankings{% endtrans %}</h1>
-      <p>{% trans %}Compare locations, industries and occupations based on economic output, diversity, and salaries.{% endtrans %}</p>
-    </a>
-
-  </div>
+  </div> <!-- end profile -->
+  
+  <button>Load more <i class="fa fa-angle-double-down"></i></button>
 
 {% endblock %}
 
@@ -58,138 +340,6 @@
 
 <script>
 
-  var carousel = [
-    {
-      "en": "What are the export opportunities in Brazil?",
-      "pt": "Quais são as oportunidades de exportação no Brasil?",
-      "color": "#c9532f",
-      "image": "sparks",
-      "url": "/guide/bra/all/opportunity/hs/"
-    },
-    {
-      "en": "What are the main occupations in Brazil?",
-      "pt": "Quais são as principais ocupações no Brasil?",
-      "color": "#129cc0",
-      "image": "lab",
-      "url": "/apps/builder/stacked/rais/all/all/all/cbo/?controls=true&value_var=num_emp&sort=color&depth=cbo_1&layout=value&order=asc"
-    },
-    {
-      "en": "Did you know that China is the largest destination of brazilian expots?",
-      "pt": "Você sabia que a China é o principal destino das exportações brasileiras?",
-      "color": "#516043",
-      "image": "factory",
-      "url": "/apps/builder/tree_map/secex/all/all/all/wld/?controls=true&year=2012&value_var=val_usd&depth=wld_5"
-    },
-    {
-      "en": "Which industries in Brazil employ Electrical Engineers?",
-      "pt": "Quais atividades econômicas mais empregam Engenheiros Eletricistas?",
-      "color": "#2a2948",
-      "image": "board",
-      "url": "/apps/builder/tree_map/rais/all/all/2143/cnae/?controls=true&year=2012&value_var=num_emp&depth=cnae_6&color_var=color"
-    }
-  ]
-
-
-  var app = 1, stopped = false, changing = false
-
-  d3.select("#carousel .decision")
-    .on(d3plus.client.pointer.click,function(){
-      window.location = carousel[app-1].url
-    })
-
-  var apps = d3.select("#carousel").selectAll(".app")
-    .data(carousel)
-
-  apps.enter().append("div")
-    .attr("class","app")
-    .attr("id",function(d,i){return "app_"+(i+1)})
-    .style("background-image",function(d){return d.image != "video" ? "url('/static/img/home/"+d.image+".jpg')" : "none"})
-    .style("opacity",function(d,i){
-      if (i+1 == app) return 1
-      else return 0
-    })
-    .style("display",function(d,i){
-      if (i+1 == app) return "block"
-      else return "none"
-    })
-    // .style("background-color",function(d){return d.color})
-    .each(function(d){
-      if (d.image == "video") {
-        d3.select(this)
-          .style("z-index",20)
-          .append("iframe")
-            .attr("src",d.url)
-            .attr("width","475")
-            .attr("height","267")
-            .attr("frameborder","0")
-            .attr("allowfullscreen",true)
-            .attr("mozallowfullscreen",true)
-            .attr("webkitallowfullscreen",true)
-      }
-    })
-    .on(d3plus.client.pointer.over,function(d){
-      stopped = true
-    })
-
-  var pages = d3.select(".pages").selectAll(".page")
-    .data(carousel)
-
-  pages.enter().append("div")
-    .attr("class","page")
-    .attr("id",function(d,i){return "page_"+(i+1)})
-    .each(function(d,i){
-      d3.select(this).append("div").attr("class","page_helper")
-      d3.select(this).append("div")
-        .attr("class","page_text")
-        .html(function(d){return d[dataviva.language]})
-      if (i+1 == app) {
-        this.toggleClass("active")
-        this.style.borderColor = carousel[app-1].color
-        this.style.backgroundColor = carousel[app-1].color
-        d3.select(".darkbox").node().style.color = carousel[app-1].color
-      }
-    })
-
-  pages.on(d3plus.client.pointer.click,function(d,i){
-    stopped = true
-    show_app(i+1)
-  })
-
-  function change_app() {
-    setTimeout(function(){
-      if (!stopped) {
-        show_app(app+1)
-        change_app()
-      }
-    },7000)
-  }
-
-  change_app()
-
-  function show_app(a) {
-    if (a != app && !changing) {
-      changing = true
-      var old = d3.select("#app_"+app).style("opacity",0)
-      d3.select("#page_"+app).node().toggleClass("active")
-      d3.select("#page_"+app).node().style.backgroundColor = "#333"
-      d3.select("#page_"+app).node().style.borderColor = "#333"
-      setTimeout(function(){
-        old.style("display","none")
-        changing = false
-      },1000)
-      if (a > carousel.length) app = 1
-      else app = a
-      d3.select("#app_"+app).style("display","block")
-      setTimeout(function(){
-        d3.select("#app_"+app).style("opacity",1)
-      },5)
-      d3.select("#page_"+app).node().toggleClass("active")
-      d3.select("#page_"+app).node().style.backgroundColor = carousel[app-1].color
-      d3.select("#page_"+app).node().style.borderColor = carousel[app-1].color
-      d3.select("#carousel .decision").node().style.backgroundColor = carousel[app-1].color
-      d3.select(".darkbox").node().style.color = carousel[app-1].color
-    }
-  }
 
 </script>
 
