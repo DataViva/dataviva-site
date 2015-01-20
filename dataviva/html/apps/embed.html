@@ -2397,7 +2397,9 @@
           "width": app.title_width
         })
 
-      if (!noDraw) app.viz.draw()
+      if (!noDraw) {
+        app.viz.draw()
+      }
 
       if (!app.first_load) {
         d3.select("#app")
