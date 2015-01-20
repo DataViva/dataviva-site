@@ -491,6 +491,7 @@
 
     // Define global D3plus app parameters
     app.viz = d3plus.viz()
+      .container("#app")
       .aggs(averages)
       .time("year")
       .format({
@@ -774,8 +775,8 @@
     app.error = function(error) {
       console.log("[dataviva] ERROR: "+error)
       dataviva.resize()
-      loading.hide()
       app.viz.error(error).draw()
+      loading.hide()
       // d3.select("#app").html("").datum([]).call(app.viz.error(error))
     }
 
@@ -1005,9 +1006,8 @@
         app.vars.spotlight = false
       }
 
-      app.viz.type(app.build.app.viz_whiz)
-        .container("#app")
-        .descs(descs)
+      app.viz
+        .type(app.build.app.viz_whiz)
         .title({
           "sub": app.sub_title(),
           "total": app.total(),
@@ -1043,7 +1043,6 @@
       else app.viz.time({"solo": false})
 
       // app.viz.type(app.build.app.viz_whiz)
-      //   .descs(descs)
       //   .title(app.build.title)
       //   .color_var(color_var)
       //   .attrs(app.attrs[app.build.output])
