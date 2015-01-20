@@ -9,7 +9,7 @@ mod = Blueprint('rais', __name__, url_prefix='/rais')
 
 @mod.route('/<year>/<bra_id>/<cnae_id>/<cbo_id>/')
 @gzipped
-# @cache_api('rais')
+@cache_api('rais')
 def rais_api(**kwargs):
     limit = int(kwargs.pop('limit', 0)) or int(request.args.get('limit', 0) )
     order = request.args.get('order', None) or kwargs.pop('order', None)
@@ -21,7 +21,7 @@ def rais_api(**kwargs):
 
     if exclude and "," in exclude:
         exclude = exclude.split(",")
-    
+
     allowed_when_not, possible_tables = table_helper.prepare(['bra_id', 'cnae_id', 'cbo_id'], [ Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio ] )
     table = table_helper.select_best_table(kwargs, allowed_when_not, possible_tables)
     filters, groups, show_column = query_helper.build_filters_and_groups(table, kwargs, exclude=exclude)
