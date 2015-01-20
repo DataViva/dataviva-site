@@ -960,9 +960,10 @@
               .id("value")
               .focus(app.vars[ui.type], app.update)
               .title(dataviva.format.text(title))
-              // .ui({
-              //   "color": app.build.app.color
-              // })
+              .ui({
+                // "color": app.build.app.color
+                "margin": 0
+              })
               .draw()
 
           }
@@ -1023,7 +1024,7 @@
       }
 
       app.viz
-        .type(app.build.app.viz_whiz)
+        .type(app.build.app.d3plus)
         .title({
           "sub": app.sub_title(),
           "total": app.total(),
@@ -1058,7 +1059,7 @@
       if (app.vars.year) app.viz.time({"solo": [app.vars.year]})
       else app.viz.time({"solo": false})
 
-      // app.viz.type(app.build.app.viz_whiz)
+      // app.viz.type(app.build.app.d3plus)
       //   .title(app.build.title)
       //   .color_var(color_var)
       //   .attrs(app.attrs[app.build.output])
@@ -1204,8 +1205,6 @@
         else {
           var coords = app.coords[app.build.bra[0].id.substr(0,3)]
         }
-
-        console.log(coords)
 
         app.viz
           .coords(coords)

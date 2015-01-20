@@ -20,7 +20,7 @@ class App(db.Model, AutoSerialize):
     type = db.Column(db.String(20))
     name_en = db.Column(db.String(20))
     name_pt = db.Column(db.String(20))
-    viz_whiz = db.Column(db.String(20))
+    d3plus = db.Column(db.String(20))
     color = db.Column(db.String(7))
 
     def name(self):
