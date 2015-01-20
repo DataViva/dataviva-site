@@ -17946,22 +17946,25 @@ module.exports = function(text, key, vars, data) {
   });
   return text.replace(/\S*/g, function(txt, i) {
     var bigindex, new_txt, prefix;
-    bigindex = biglow.indexOf(txt.toLowerCase());
-    prefix = txt.charAt(0).search(/[^A-Za-z0-9\-_]/g) === 0;
-    if (prefix) {
-      prefix = txt.charAt(0);
-      txt = txt.slice(1);
+    if (txt) {
+      bigindex = biglow.indexOf(txt.toLowerCase());
+      if (/^[^\W\s]/.test(txt)) {
+        prefix = "";
+      } else {
+        prefix = txt.charAt(0);
+        txt = txt.slice(1);
+      }
+      if (bigindex >= 0) {
+        new_txt = bigs[bigindex];
+      } else if (smalls.indexOf(txt.toLowerCase()) >= 0 && i !== 0 && i !== text.length - 1) {
+        new_txt = txt.toLowerCase();
+      } else {
+        new_txt = txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      }
+      return prefix + new_txt;
     } else {
-      prefix = "";
+      return "";
     }
-    if (bigindex >= 0) {
-      new_txt = bigs[bigindex];
-    } else if (smalls.indexOf(txt.toLowerCase()) >= 0 && i !== 0 && i !== text.length - 1) {
-      new_txt = txt.toLowerCase();
-    } else {
-      new_txt = txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    }
-    return prefix + new_txt;
   });
 };
 
@@ -30346,19 +30349,19 @@ var network = function(vars) {
     else {
 
       var width = (x_range[1]+max_size*1.1)-(x_range[0]-max_size*1.1),
-          height = (y_range[1]+max_size*1.1)-(y_range[0]-max_size*1.1)
+          height = (y_range[1]+max_size*1.1)-(y_range[0]-max_size*1.1),
           aspect = width/height,
-          app = vars.width.viz/vars.height.viz
+          app = vars.width.viz/vars.height.viz;
 
       if ( app > aspect ) {
-        var scale = vars.height.viz/height
+        var scale = vars.height.viz/height;
       }
       else {
-        var scale = vars.width.viz/width
+        var scale = vars.width.viz/width;
       }
-      var min_size = max_size * 0.25
+      var min_size = max_size * 0.25;
       if ( min_size * scale < 2 ) {
-        min_size = 2/scale
+        min_size = 2/scale;
       }
 
     }

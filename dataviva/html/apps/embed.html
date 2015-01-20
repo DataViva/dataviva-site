@@ -690,7 +690,7 @@
                   .get(function(error,d){
 
                     d.edges.forEach(function(edge){
-                      if (["hs","cnae"].indexOf(app.build.output) >= 0) {
+                      if (["hs"].indexOf(app.build.output) >= 0) {
                         edge.source = d.nodes[edge.source]
                         edge.target = d.nodes[edge.target]
                       }
@@ -698,6 +698,11 @@
                         edge.source = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.source })[0]
                         edge.target = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.target })[0]
                       }
+                    })
+
+                    d.nodes.forEach(function(node){
+                      var id = node[app.build.output+"_id"];
+                      node[app.build.output+"_"+id.length] = id;
                     })
 
                     app.networks[app.build.output] = d
@@ -1005,6 +1010,12 @@
       if (app.build.bra[0].id == "all" && app.build.app.type == "network") {
         app.vars.spotlight = false
       }
+      else if (app.vars.spotlight === "true") {
+        app.vars.spotlight = true
+      }
+      else if (app.vars.spotlight === "false") {
+        app.vars.spotlight = false
+      }
 
       app.viz
         .type(app.build.app.viz_whiz)
@@ -1095,27 +1106,62 @@
       /* Network Specific Variables */
       /******************************/
       else if (app.build.app.type == "network") {
-        if (app.build.bra[0].id == "all" && app.build.output != "hs") var av = "always_active"
-        else if (app.build.output == "hs") var av = app.vars.rca_scope
-        else if (app.build.output == "cnae") var av = "bra_rca"
-        else var av = "always_active"
+        if ((app.build.bra[0].id === "all" && app.build.output !== "hs") || app.build.output === "cbo") {
+          app.viz.active(function(d){return true;})
+        }
+        else if (app.build.output == "hs") {
+          if (app.vars.rca_scope == "wld_rca") {
+            app.viz.active(function(d){
+              return d.rca_wld >= 1;
+            })
+          }
+          else {
+            app.viz.active(function(d){
+              return d.rca >= 1;
+            })
+          }
+        }
+        else if (app.build.output == "cnae") {
+          app.viz.active(function(d){
+            return d.rca >= 1;
+          })
+        }
+
         app.viz
           .edges(app.networks[app.build.output].edges)
           .nodes(app.networks[app.build.output].nodes)
-          .active(av)
+          .depth(app.viz.id(Object).nesting.length - 1)
       }
 
       /****************************/
       /* Rings Specific Variables */
       /****************************/
       else if (app.build.app.type == "rings") {
-        if (app.build.output == "hs") var av = app.vars.rca_scope
-        else if (app.build.output == "cnae") var av = "bra_rca"
-        else var av = "always_active"
+        if (app.build.output == "hs") {
+          if (app.vars.rca_scope == "wld_rca") {
+            app.viz.active(function(d){
+              return d.rca_wld >= 1;
+            })
+          }
+          else {
+            app.viz.active(function(d){
+              return d.rca >= 1;
+            })
+          }
+        }
+        else if (app.build.output == "cnae") {
+          app.viz.active(function(d){
+            return d.rca >= 1;
+          })
+        }
+        else {
+          app.viz.active(function(d){return true;})
+        }
         app.viz
           .edges(app.networks[app.build.output].edges)
           .nodes(app.networks[app.build.output].nodes)
           .focus(app.build[app.build.output][0].id)
+          .depth(app.viz.id(Object).nesting.length - 1)
           .active(av)
       }
 
@@ -1158,6 +1204,7 @@
           .active(false)
           .temp(false)
           .total(false)
+          .depth(app.viz.id(Object).nesting.length - 1)
 
       }
 
@@ -1188,7 +1235,23 @@
       /* Scatter Specific Variables */
       /******************************/
       else if (app.build.app.type == "scatter") {
-        var av = app.build.output == "hs" ? app.vars.rca_scope : "bra_rca"
+        if (app.build.output == "hs") {
+          if (app.vars.rca_scope == "wld_rca") {
+            app.viz.active(function(d){
+              return d.rca_wld >= 1;
+            })
+          }
+          else {
+            app.viz.active(function(d){
+              return d.rca >= 1;
+            })
+          }
+        }
+        else {
+          app.viz.active(function(d){
+            return d.rca >= 1;
+          })
+        }
         if (app.build.output == "hs" && app.vars.rca_scope == "wld_rca") {
           var yv = app.vars.y + "_wld",
               xv = app.vars.x + "_wld"
@@ -1215,7 +1278,6 @@
           })
           .axes({"mirror": false})
           .active({"spotlight": app.vars.spotlight})
-          .active(av)
       }
 
       /******************************/
@@ -1235,7 +1297,9 @@
           })
           .axes({"mirror": true})
           .active({"spotlight": false})
-          .active("active")
+          .active(false)
+          .temp(false)
+          .total(false)
 
       }
 
@@ -1385,7 +1449,16 @@
           app.viz.x({"scale": value}).y({"scale": value})
         }
         else if (type == "rca_scope") {
-          app.viz.active(value)
+          if (value == "wld_rca") {
+            app.viz.active(function(d){
+              return d.rca_wld >= 1;
+            })
+          }
+          else {
+            app.viz.active(function(d){
+              return d.rca >= 1;
+            })
+          }
           if (app.build.app.type == "scatter") {
             if (app.build.output == "hs" && value == "wld_rca") {
               var yv = app.vars.y + "_wld",
@@ -1447,6 +1520,15 @@
         }
         else if (type === "order" && value === "value") {
           app.viz.order(app.viz.size())
+        }
+        else if (type === "spotlight") {
+          if (value === "true") {
+            value = true;
+          }
+          else {
+            value = false;
+          }
+          app.viz.active({"spotlight": value})
         }
         else {
           app.viz[type](value)
