@@ -4,14 +4,14 @@
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.home.css" />
   <style>
-  *, body {
+  /**, body {
     text-align: left;
   }
   h2 {
     font-size: 36px;
     line-height: 40px;
     text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
-  }
+  }*/
   button {
     border: solid rgba(0, 0, 0, 0.4) 1px;
     background: rgba(255, 255, 255, 0.6);
@@ -28,7 +28,7 @@
   }
   .search {
 /*    border: solid black 1px;*/
-    margin: 100px 150px 150px 150px;
+    margin: 20px 150px 150px 150px;
     position: relative;
   }
   .search input {
@@ -120,12 +120,12 @@
       <br>
     {% trans %}through more than 100 million interactive visualizations.{% endtrans %}
   </div> -->
+  <div class="darkbox"><h1>What are you looking for?</h1></div>
   <div class="search">
-    <h2>What are you looking for?</h2>
     <input class="searchFld" type="text" placeholder="Products exported by Minas Gerais" autofocus />
     <div class="searchResult">search results</div>
   </div>
-  
+
   <div class="explore">
     <h2>Explore by dataset</h2>
     <ul>
@@ -138,7 +138,7 @@
       <li><a href="#" data-type="sc"><i class="fa fa-slideshare"></i>Primary Education</a></li>
     </ul>
   </div>
-  
+
   <div class="profile">
     <h2>Top exporting municipalities</h2>
     <div class="scroller">
@@ -217,7 +217,7 @@
       </ul>
     </div>
   </div> <!-- end profile -->
-    
+
   <div class="profile">
     <h2>Top Brazilian exports</h2>
     <div class="scroller">
@@ -293,7 +293,7 @@
       </ul>
     </div>
   </div> <!-- end profile -->
-  
+
   <div class="profile">
     <h2>Highest paid occupations</h2>
       <div class="scroller">
@@ -368,11 +368,11 @@
               </h4>
               <img style="background:#752277" src="/static/img/icons/cbo/cbo_2.png" /></span>
             </a>
-          </li> 
+          </li>
         </ul>
       </div>
   </div> <!-- end profile -->
-  
+
   <button>Load more <i class="fa fa-angle-double-down"></i></button>
 
 {% endblock %}
