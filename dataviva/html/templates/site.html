@@ -242,7 +242,15 @@
     })
 
     var searchInterval = "";
-    d3.select(".searchFld").on("keyup", function(e) {
+    d3.selectAll(".searchFld").on("keyup", function(e) {
+      
+      var key_code = d3.event.keyCode;
+      if (key_code > 36 && key_code < 41) {
+        return;
+      }
+      
+      // for closure
+      var _this = this;
 
     	clearInterval(searchInterval);
 
@@ -252,17 +260,18 @@
       }
       else {
         searchInterval = setTimeout(function(){
-          d3.select(".searchResult").style("display", "block")
+          d3.select(_this.parentNode).select(".searchResult")
+            .style("display", "block")
             .transition().delay(0).style("opacity", 1)
-          find_search(document.getElementById(d3.select(".searchFld").attr("id")).value)
+          find_search(d3.select(_this).property("value"), _this)
 
         },300)
       }
 
     })
 
-    find_search = function(search) {
-    d3.select(".searchResult").html("")
+    find_search = function(search, el) {
+      var results_el = d3.select(el.parentNode).select(".searchResult").html("")
   	if ( search !== "" ) {
 
 	    d3.json("/attrs/search/"+search+"/")
@@ -383,7 +392,7 @@
 
                  if (type_curr !== item.content_type) {
 
-                   d3.select(".searchResult").append("div")
+                   results_el.append("div")
                      .attr("class","selector_title")
                      .text(dataviva.format.text(item.content_type+"_plural"))
 
@@ -392,12 +401,12 @@
                  }
                  else {
 
-                   d3.select(".searchResult").append("div")
-                     .attr("class","d3plus_tooltip_data_seperator")
+                   // results_el.append("div")
+                   //   .attr("class","d3plus_tooltip_data_seperator")
 
                  }
 
-                 var link = d3.select(".searchResult").append("a")
+                 var link = results_el.append("a")
                    .attr("class","search_result");
 
                    if(item.content_type=="learnmore") {
@@ -435,7 +444,46 @@
 
       }
     }
-
+    
+    var selected_el;
+    var selected_i;
+    d3.selectAll(".search")
+      .on("keydown", function() {
+        var results = d3.selectAll("a.search_result")
+        if(d3.event.keyCode === 40 || d3.event.keyCode === 38){ // down || up
+          results.classed("active", false);
+          var incr = 1;
+          if(d3.event.keyCode === 38) incr = -1;
+          d3.event.preventDefault();
+          if(selected_el){
+            selected_i = (selected_i+incr) % results.size();
+            if(selected_i < 0) selected_i = results.size()-1;
+            selected_el = results.filter(function(d, i) { return i === selected_i; });
+          }
+          else {
+            selected_i = 0;
+            if(d3.event.keyCode === 38) selected_i = results.size()-1;
+            selected_el = results.filter(function(d, i) { return i === selected_i; });
+          }
+          selected_el.classed("active", true);
+        }
+        else if(d3.event.keyCode === 13){ // enter
+          var selected = d3.select("a.search_result.active");
+          if(!selected.empty()){
+            window.location = selected.attr("href");
+          }
+        }
+      })
+    
+    d3.selectAll(".searchResult")
+      .on("mouseover", function(){
+        d3.select(this).selectAll(".active").classed("temp_inactive", true);
+        d3.select(this).selectAll(".active").classed("active", false);
+      })
+      .on("mouseout", function(){
+        d3.select(this).selectAll(".temp_inactive").classed("active", true);
+        d3.select(this).selectAll(".temp_inactive").classed("temp_inactive", false);
+      })
   </script>
 
 {% endblock %}

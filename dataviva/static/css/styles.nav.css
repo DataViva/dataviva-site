@@ -388,7 +388,7 @@ a#search {
 	z-index: 10;
 }
 
-.searchFld {
+#header .searchFld {
   background-color: transparent !important;
   border: none;
   color: #333333 !important;
@@ -403,14 +403,19 @@ a#search {
 .searchResult {
   background-color: #f7f7f7;
   font-size: 12px;
-	left: 0;
+  position: absolute;
   opacity: 0;
   overflow: auto;
   max-height: 250px;
-  position:absolute;
+  width: 100%;
+	z-index: 9999;
+}
+
+#header .searchResult {
+	left: 0;
+  position: absolute;
   top: 68px;
 	width: 465px;
-	z-index: 9999;
 }
 
 .searchResult > .d3plus_tooltip_data_seperator {
@@ -422,14 +427,15 @@ a#search {
 }
 
 .searchResult > a {
-  background-color: #f7f7f7 !important;
+  background-color: #f7f7f7;
   margin: 0px 6px;
   -webkit-transition: background-color .1s;
           transition: background-color .1s;
 }
 
-.searchResult > a:hover {
-  background-color: #efefef !important;
+.searchResult > a:hover,
+.searchResult > a.active {
+  background-color: #e2e2e2;
   margin: 0px 6px;
 }
 
