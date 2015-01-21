@@ -55,16 +55,16 @@ class Stats(object):
             dataset = "secex_export"
             stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "wld", dataset))
-            stats.append(self.get_val(Yp, "val_usd_growth_pct", attr_type, dataset))
-            stats.append(self.get_val(Yp, "val_usd_growth_pct_5", attr_type, dataset))
+            stats.append(self.get_val(Yp, "val_usd_growth", attr_type, dataset))
+            stats.append(self.get_val(Yp, "val_usd_growth_5", attr_type, dataset))
             stats.append(self.get_val(Yp, "val_usd", attr_type, dataset))
             stats.append(self.get_val(Yp, "val_usd", attr_type, dataset, __latest_year__[dataset]-5))
         elif attr_type == "wld":
             dataset = "secex_export"
             stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "hs", dataset))
-            stats.append(self.get_val(Yw, "val_usd_growth_pct", attr_type, dataset))
-            stats.append(self.get_val(Yw, "val_usd_growth_pct_5", attr_type, dataset))
+            stats.append(self.get_val(Yw, "val_usd_growth", attr_type, dataset))
+            stats.append(self.get_val(Yw, "val_usd_growth_5", attr_type, dataset))
             stats.append(self.get_val(Yw, "eci", attr_type, dataset))
             stats.append(self.get_val(Yw, "val_usd", attr_type, dataset))
             stats.append(self.get_val(Yw, "val_usd", attr_type, dataset, __latest_year__[dataset]-5))
@@ -109,8 +109,7 @@ class Stats(object):
 
         if attr_type == "bra":
             agg = {'val_usd':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
-                    'val_usd_growth_pct':func.avg, 'val_usd_growth_pct_5':func.avg,
-                    'val_usd_growth_val':func.avg, 'val_usd_growth_val_5':func.avg,
+                    'val_usd_growth':func.avg, 'val_usd_growth_5':func.avg,
                     'distance':func.avg, 'distance_wld':func.avg,
                     'opp_gain':func.avg, 'opp_gain_wld':func.avg,
                     'rca':func.avg, 'rca_wld':func.avg,
