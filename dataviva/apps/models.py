@@ -104,7 +104,7 @@ class Build(db.Model, AutoSerialize):
                     else:
                         self.cnae.append(Cnae.query.get('r90019'))
                 self.filter1 = "_".join([i.id for i in set(self.cnae)])
-            elif self.dataset == "secex":
+            elif self.dataset.startswith("secex"):
                 self.hs = []
                 for i, f in enumerate(filter.split("_")):
                     if Hs.query.get(f):
@@ -123,7 +123,7 @@ class Build(db.Model, AutoSerialize):
                     else:
                         self.cbo.append(Cbo.query.get('2211'))
                 self.filter2 = "_".join([c.id for c in set(self.cbo)])
-            elif self.dataset == "secex":
+            elif self.dataset.startswith("secex"):
                 self.wld = []
                 for i, f in enumerate(filter.split("_")):
                     if Wld.query.get(f):
@@ -202,7 +202,7 @@ class Build(db.Model, AutoSerialize):
                 return Ybi
             elif self.output == "cbo" or (self.output == "bra" and self.filter1 == "all"):
                 return Ybo
-        elif self.dataset == "secex":
+        elif self.dataset.startswith("secex"):
             if self.bra[0].id == "all" and self.output != "bra":
                 return Ypw
             elif self.output == "hs" or (self.output == "bra" and self.filter2 == "all"):

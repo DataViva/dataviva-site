@@ -26,17 +26,17 @@ class Stats(object):
             stats.append(self.get_top_attr(Yi, "num_emp", attr_type, "cnae", "rais"))
             stats.append(self.get_top_attr(Yo, "num_emp", attr_type, "cbo", "rais"))
             stats.append(self.get_val(Yi, "wage", attr_type, "rais"))
-            stats.append(self.get_top_attr(Yp, "val_usd", attr_type, "hs", "secex"))
-            stats.append(self.get_top_attr(Yw, "val_usd", attr_type, "wld", "secex"))
-            stats.append(self.get_val(Yp, "val_usd", attr_type, "secex"))
+            stats.append(self.get_top_attr(Yp, "val_usd", attr_type, "hs", "secex_export"))
+            stats.append(self.get_top_attr(Yw, "val_usd", attr_type, "wld", "secex_export"))
+            stats.append(self.get_val(Yp, "val_usd", attr_type, "secex_export"))
         elif attr_type == "bra":
             stats.append(self.get_val(Yb,"population",attr_type,"population"))
             stats.append(self.get_top_attr(Ybi, "num_emp", attr_type, "cnae", "rais"))
             stats.append(self.get_top_attr(Ybo, "num_emp", attr_type, "cbo", "rais"))
             stats.append(self.get_val(Yb_rais, "wage", attr_type, "rais"))
-            stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "hs", "secex"))
-            stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "wld", "secex"))
-            stats.append(self.get_val(Yb_secex, "val_usd", attr_type, "secex"))
+            stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "hs", "secex_export"))
+            stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "wld", "secex_export"))
+            stats.append(self.get_val(Yb_secex, "val_usd", attr_type, "secex_export"))
         elif attr_type == "cnae":
             dataset = "rais"
             stats.append(self.get_top_attr(Ybi, "num_emp", attr_type, "bra", dataset))
@@ -52,7 +52,7 @@ class Stats(object):
             stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset))
             stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset, __latest_year__[dataset]-5))
         elif attr_type == "hs":
-            dataset = "secex"
+            dataset = "secex_export"
             stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "wld", dataset))
             stats.append(self.get_val(Yp, "val_usd_growth_pct", attr_type, dataset))
@@ -60,7 +60,7 @@ class Stats(object):
             stats.append(self.get_val(Yp, "val_usd", attr_type, dataset))
             stats.append(self.get_val(Yp, "val_usd", attr_type, dataset, __latest_year__[dataset]-5))
         elif attr_type == "wld":
-            dataset = "secex"
+            dataset = "secex_export"
             stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "hs", dataset))
             stats.append(self.get_val(Yw, "val_usd_growth_pct", attr_type, dataset))
@@ -195,7 +195,7 @@ class Stats(object):
                 total = tbl.query.with_entities(*col_vals)
                 if dataset == "rais":
                     total = total.filter(func.char_length(getattr(tbl,"cnae_id")) == 1)
-                elif dataset == "secex":
+                elif dataset.startswith("secex"):
                     total = total.filter(func.char_length(getattr(tbl,"hs_id")) == 2)
                 elif dataset == "population":
                     total = total.filter(func.char_length(getattr(tbl,"bra_id")) == 2)

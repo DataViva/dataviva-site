@@ -68,7 +68,7 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
     filter_order = ["bra","cnae","cbo","hs","wld"]
 
     datasets = {"rais": {"filters": ["bra","cnae","cbo"], "years": 1},
-                "secex": {"filters": ["bra","hs","wld"], "years": 2}}
+                "secex_export": {"filters": ["bra","hs","wld"], "years": 2}}
 
     for d in datasets:
         datasets[d]["years"] = eval(UI.query.get(datasets[d]["years"]).values)

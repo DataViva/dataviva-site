@@ -222,8 +222,10 @@ def translate_columns(column, lang):
       "wage_avg_bra": {"en": "Brazilian Average Wage", "pt": "Sal\u00e1rio M\u00e9dio Brasileiro"},
 
 
-      "secex": {"en": "Product Exports (SECEX)", "pt": "Exporta\u00e7\u00f5es de Produtos (SECEX)"},
-      "val_usd": {"en": "Exports", "pt": "Exporta\u00e7\u00f5es"},
+      "secex": {"en": "Product Trade (SECEX)", "pt": "Com\u00e9rcio Internacional (SECEX)"},
+      "secex_export": {"en": "Product Exports (SECEX)", "pt": "Exporta\u00e7\u00f5es de Produtos (SECEX)"},
+      "secex_import": {"en": "Product Imports (SECEX)", "pt": "Importa\u00e7\u00f5es de Produtos (SECEX)"},
+      "val_usd": {"en": "Trade Value", "pt": "Valor do Com\u00e9rcio"},
       "total_val_usd": {"en": "Total Exports", "pt": "Total de Exporta\u00e7\u00f5es"},
 
 

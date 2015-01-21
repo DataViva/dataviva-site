@@ -223,6 +223,8 @@
 
     var footer = {
       "secex": dataviva.format.text("Data Provided by") + " SECEX",
+      "secex_export": dataviva.format.text("Data Provided by") + " SECEX",
+      "secex_import": dataviva.format.text("Data Provided by") + " SECEX",
       "rais": dataviva.format.text("Data Provided by") + " RAIS"
     }
 
@@ -1114,6 +1116,8 @@
             .total(false)
           .size({"threshold": false})
           .zoom(false)
+          .id({"grouping": true})
+          .shape("square")
 
       }
 
@@ -1147,6 +1151,7 @@
           .nodes(app.networks[app.build.output].nodes)
           .depth(app.viz.id(Object).nesting.length - 1)
           .size({"scale": {"min": 3}})
+          .shape("circle")
       }
 
       /****************************/
@@ -1178,6 +1183,7 @@
           .nodes(app.networks[app.build.output].nodes)
           .focus(app.build[app.build.output][0].id)
           .depth(app.viz.id(Object).nesting.length - 1)
+          .shape("circle")
       }
 
       /******************************/
@@ -1222,6 +1228,7 @@
           .temp(false)
           .total(false)
           .depth(app.viz.id(Object).nesting.length - 1)
+          .shape("coords")
 
       }
 
@@ -1258,6 +1265,8 @@
           .temp(false)
           .total(false)
           .size({"threshold": true})
+          .id({"grouping": true})
+          .shape("area")
       }
 
       /******************************/
@@ -1308,6 +1317,8 @@
           .axes({"mirror": false})
           .active({"spotlight": app.vars.spotlight})
           .size({"scale": {"min": 3}})
+          .id({"grouping": true})
+          .shape("circle")
       }
 
       /******************************/
@@ -1330,6 +1341,8 @@
           .temp(false)
           .total(false)
           .size({"scale": {"min": 3}})
+          .id({"grouping": true})
+          .shape("circle")
 
       }
 
@@ -1359,7 +1372,7 @@
           same = elems.length == 1 || (elems.length == 2 && elems[0].id.length == elems[0].id.length),
           mix = elems.length == 2 && (elems[0].id == "all" || elems[1].id == "all") && (elems[0].id.length == 2 || elems[1].id.length == 2)
           depth = elems[0].id.length,
-          secex = app.build.dataset == "secex",
+          secex = app.build.dataset.indexOf("secex") === 0,
           munics = app.build.output == "bra",
           text = false
           // text = null

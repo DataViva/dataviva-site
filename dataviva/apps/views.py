@@ -69,13 +69,13 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     build_filter1 = filter1
     if dataset == "rais" and build_filter1 != "all":
         build_filter1 = "<cnae>"
-    if dataset == "secex" and build_filter1 != "all":
+    if dataset.startswith("secex") and build_filter1 != "all":
         build_filter1 = "<hs>"
 
     build_filter2 = filter2
     if dataset == "rais" and build_filter2 != "all":
         build_filter2 = "<cbo>"
-    if dataset == "secex" and build_filter2 != "all":
+    if dataset.startswith("secex") and build_filter2 != "all":
         build_filter2 = "<wld>"
 
     '''This is an instance of the Build class for the selected app,
@@ -210,13 +210,13 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
     item_id = bra_id
     if dataset == "rais" and build_filter1 != "all":
         build_filter1 = "<cnae>"
-    if dataset == "secex" and build_filter1 != "all":
+    if dataset.startswith("secex") and build_filter1 != "all":
         build_filter1 = "<hs>"
 
     build_filter2 = filter2
     if dataset == "rais" and build_filter2 != "all":
         build_filter2 = "<cbo>"
-    if dataset == "secex" and build_filter2 != "all":
+    if dataset.startswith("secex") and build_filter2 != "all":
         build_filter2 = "<wld>"
 
     '''First get the MOST relevent builds (ones that use all filters)'''
@@ -298,17 +298,17 @@ def get_geo_location(ip):
     return None
 
 @mod.route('/builder/')
-@mod.route('/builder/tree_map/', defaults={"app_name": "tree_map", "dataset": "secex", "bra_id": "4mg",
+@mod.route('/builder/tree_map/', defaults={"app_name": "tree_map", "dataset": "secex_export", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "hs", "params": ""})
 @mod.route('/builder/stacked/', defaults={"app_name": "stacked", "dataset": "rais", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "cbo", "params": ""})
 @mod.route('/builder/geo_map/', defaults={"app_name": "geo_map", "dataset": "rais", "bra_id": "4mgplr02",
             "filter1": "all", "filter2": "all", "output": "bra", "params": "?value_var=wage"})
-@mod.route('/builder/network/', defaults={"app_name": "network", "dataset": "secex", "bra_id": "4mg",
+@mod.route('/builder/network/', defaults={"app_name": "network", "dataset": "secex_export", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "hs", "params": ""})
 @mod.route('/builder/rings/', defaults={"app_name": "rings", "dataset": "rais", "bra_id": "4mg",
             "filter1": "all", "filter2": "2211", "output": "cbo", "params": ""})
-@mod.route('/builder/scatter/', defaults={"app_name": "scatter", "dataset": "secex", "bra_id": "4mg",
+@mod.route('/builder/scatter/', defaults={"app_name": "scatter", "dataset": "secex_export", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "hs", "params": "?rca_scope=wld_rca"})
 @mod.route('/builder/compare/', defaults={"app_name": "compare", "dataset": "rais", "bra_id": "4mg_rj",
             "filter1": "all", "filter2": "all", "output": "cbo", "params": "?depth=cbo_4&axes=wage_avg"})
