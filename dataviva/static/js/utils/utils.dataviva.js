@@ -73,7 +73,7 @@ dataviva.format.text = function(text,name,vars,obj,l) {
 
       // Stacked Area Sorting/Order
       "order": {"en": "Order", "pt": "Ordena\u00e7\u00e3o"},
-      "order_desc_stacked": {"en": "Changes the ordering of the visible areas based on the selected sorting.", "pt": "Mudar a ordem das \u00e1reas vis\u00edveis com base na ordena\u00e7\u00e3o selecionada."},
+      "sort_desc_stacked": {"en": "Changes the ordering of the visible areas based on the selected sorting.", "pt": "Mudar a ordem das \u00e1reas vis\u00edveis com base na ordena\u00e7\u00e3o selecionada."},
       "asc": {"en": "Ascending", "pt": "Ascendente"},
       "desc": {"en": "Descending", "pt": "Descendente"},
 
@@ -108,8 +108,8 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       // Sorting Toggle
       "sorting": {"en": "Sort", "pt": "Ordenar"},
       "sort": {"en": "Sort", "pt": "Ordenar"},
-      "sort_desc_stacked": {"en": "Changes the variable used to order the areas.", "pt": "Alterar a vari\u00e1vel usada para ordenar as \u00e1reas."},
-      "sort_desc_occugrid": {"en": "Changes the variable used to order the donut charts.", "pt": "Alterar a vari\u00e1vel usada para ordenar os gr\u00e1ficos de rosca."},
+      "order_desc_stacked": {"en": "Changes the variable used to order the areas.", "pt": "Alterar a vari\u00e1vel usada para ordenar as \u00e1reas."},
+      "order_desc_occugrid": {"en": "Changes the variable used to order the donut charts.", "pt": "Alterar a vari\u00e1vel usada para ordenar os gr\u00e1ficos de rosca."},
 
       // Sizing Labels
       "sizing": {"en": "Size", "pt": "Tamanho"},
@@ -135,7 +135,7 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "active": {"en": "Available", "pt": "Dispon\u00edvel"},
       "available": {"en": "Available", "pt": "Dispon\u00edvel"},
       "not_available": {"en": "Not available", "pt": "N\u00e3o dispon\u00edvel"},
-      "grouping": {"en": "Group", "pt": "Grupo"},
+      "grouping": {"en": "Grouping", "pt": "Grupo"},
       "grouping_desc_occugrid": {"en": "Groups the donut charts into different categorizations.", "pt": "Agrupar os gr\u00e1ficos de rosca em diferentes categoriza\u00e7\u00f5es."},
       "none": {"en": "None", "pt": "Nenhum"},
       "year": {"en": "Year", "pt": "Ano"},

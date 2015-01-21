@@ -540,14 +540,14 @@
 		  if('network' == info[0] || 'rings' == info[0]) {
 		  	// RULE: Network/Rings forces the location MG when dataset is RAIS and Location is BRA
 		  	if(info[1]=='rais' && info[2] == 'all') {
-		  		info[2] = 'mg'
+		  		info[2] = '4mg'
 		  		new_url = info.join("/")
 		  	}
 		  }
 		  if('occugrid' == info[0] || 'scatter' == info[0]) {
 		  	// RULE: Occugrid/Scatter forces the location MG when Location is BRA
 		  	if(info[2] == 'all') {
-		  		info[2] = 'mg'
+		  		info[2] = '4mg'
 		  		new_url = info.join("/")
 
 		  	}
@@ -1023,6 +1023,15 @@
         app.vars.spotlight = false
       }
 
+      if ("grouping" in app.vars) {
+        if (app.vars.grouping === "true") {
+          app.vars.grouping = true
+        }
+        else if (app.vars.grouping === "false") {
+          app.vars.grouping = false
+        }
+      }
+
       app.viz
         .type(app.build.app.d3plus)
         .title({
@@ -1035,7 +1044,7 @@
         .active({"spotlight": app.vars.spotlight})
         .id(nesting)
         .depth(nesting.indexOf(app.vars.depth))
-        // .grouping(app.vars.grouping)
+        .id({"grouping": app.vars.grouping})
         .order({
           "sort": app.vars.sort,
           "value": app.vars.order
@@ -1137,6 +1146,7 @@
           .edges(app.networks[app.build.output].edges)
           .nodes(app.networks[app.build.output].nodes)
           .depth(app.viz.id(Object).nesting.length - 1)
+          .size({"scale": {"min": 3}})
       }
 
       /****************************/
@@ -1219,7 +1229,19 @@
       /* Bubbles Specific Variables */
       /******************************/
       else if (app.build.app.type == "occugrid") {
-        app.viz.active("num_emp_est")
+
+        if (app.vars.order === "name") {
+          app.viz.order({"sort": "asc"})
+        }
+        else {
+          app.viz.order({"sort": "desc"})
+        }
+
+        app.viz
+          .active("num_emp_est")
+          .shape("donut")
+          .size({"scale": {"min": 10}})
+          .depth(app.viz.id(Object).nesting.length - 1)
       }
 
       /******************************/
@@ -1285,6 +1307,7 @@
           })
           .axes({"mirror": false})
           .active({"spotlight": app.vars.spotlight})
+          .size({"scale": {"min": 3}})
       }
 
       /******************************/
@@ -1306,6 +1329,7 @@
           .active(false)
           .temp(false)
           .total(false)
+          .size({"scale": {"min": 3}})
 
       }
 
@@ -1536,12 +1560,30 @@
           }
           app.viz.active({"spotlight": value})
         }
+        else if (type === "grouping") {
+          if (value === "true") {
+            value = true;
+          }
+          else {
+            value = false;
+          }
+          app.viz.id({"grouping": value})
+        }
         else {
           app.viz[type](value)
         }
 
         if (type === "color") {
           app.viz.legend(value !== "color")
+        }
+
+        if (type === "order" && app.build.app.type === "occugrid") {
+          if (value === "name") {
+            app.viz.order({"sort": "asc"})
+          }
+          else {
+            app.viz.order({"sort": "desc"})
+          }
         }
 
         app.viz.draw()
@@ -1588,7 +1630,7 @@
               if (!d.num_est) d.num_est = 0
               if (!d.wage_avg) d.wage_avg = 0
 
-              d.num_emp_est = Math.ceil(d.num_emp_est)
+              d.num_emp_est = Math.ceil(d.num_emp/d.num_est);
 
               d.wage_avg_bra = job.wage_avg
 
