@@ -192,7 +192,9 @@
       "network": "default",
       "rings": "default",
       "tree_map": "default",
-      "stacked": "default"
+      "stacked": "default",
+      "line": "default",
+      "bar": "default"
     }
 
     // Get various depth levels
@@ -632,7 +634,7 @@
 
             if (app.data[app.build.data_url]) app.allyears = true
 
-            if (!app.allyears && app.build.app.type != "stacked") {
+            if (!app.allyears && ["stacked", "line"].indexOf(app.build.app.type) < 0) {
               if (!app.vars.year || app.vars.year > max_year[app.build.data_url.split("/")[0]]) {
                 app.vars.year = max_year[app.build.data_url.split("/")[0]]
               }
@@ -652,7 +654,20 @@
               },"/"+app.build.data_url)
             }
 
-            if (!app.attrs[app.build.output]) {
+            if (app.build.dataset === "secex") {
+              app.build.import_url = app.build.data_url.replace("secex/","secex_import/")
+              q.defer(function(u,callback){
+                d3.json(u)
+                  .header("X-Requested-With", "XMLHttpRequest")
+                  .get(function(error,d){
+                    app.data[app.build.import_url] = {}
+                    app.data[app.build.import_url].raw = dataviva.cleanData(app, d)
+                    callback(error,d)
+                  })
+              },"/"+app.build.import_url)
+            }
+
+            if (app.build.output != "all" && !app.attrs[app.build.output]) {
               q.defer(function(u,callback){
                 d3.json(u)
                   .header("X-Requested-With", "XMLHttpRequest")
@@ -980,9 +995,14 @@
       }
 
       var nesting = []
-      depths[app.build.output].forEach(function(d){
-        nesting.push(app.build.output+"_"+d)
-      })
+      if (app.build.output === "all") {
+        nesting.push("id")
+      }
+      else {
+        depths[app.build.output].forEach(function(d){
+          nesting.push(app.build.output+"_"+d)
+        })
+      }
 
       app.solos = []
       app.filters = []
@@ -1346,6 +1366,27 @@
 
       }
 
+      /******************************/
+      /* Line Specific Variables */
+      /******************************/
+      else if (app.build.app.type == "line") {
+
+        app.viz
+        .x("year")
+        .y({
+          "scale": app.vars.scale,
+          "value": "val_usd"
+        })
+        .axes({"mirror": false})
+        .active({"spotlight": false})
+        .active(false)
+        .temp(false)
+        .total(false)
+        .id({"grouping": true})
+        .shape("line")
+
+      }
+
       last_app = app.build.app.type
 
       if(app.build.app.type == "scatter" && app.build.bra[0].id == "all") {
@@ -1374,15 +1415,14 @@
           depth = elems[0].id.length,
           secex = app.build.dataset.indexOf("secex") === 0,
           munics = app.build.output == "bra",
-          text = false
-          // text = null
+          text = false;
 
       if (secex && same && !mix) {
-        if (munics || depth > 2 || depth == 3) {
-          text = dataviva.format.text("secex_8")
+        if ((munics && depth >= 3) || (app.build.output === "all" && depth > 3)) {
+          text = dataviva.format.text("secex_9")
         }
         else {
-          text = dataviva.format.text("secex_2")
+          text = dataviva.format.text("secex_3")
         }
       }
       descs["val_usd"] = text
@@ -1706,13 +1746,40 @@
           })
           .entries(data.raw)
       }
+      else if (app.build.dataset === "secex" && app.build.output === "all") {
+
+        data.raw.forEach(function(d){
+
+          var obj = d3plus.util.copy(d);
+          obj.name = "secex_export";
+          obj.id = "export";
+          obj.color = "#0b1097";
+          get_keys(obj);
+          data_obj.push(obj);
+
+          var imp = app.data[app.build.import_url].raw.filter(function(i){
+            return i.year === d.year;
+          })
+
+          if (imp.length) {
+            imp = d3plus.util.copy(imp[0]);
+            imp.name = "secex_import";
+            imp.id = "import";
+            imp.color = "#af1f24";
+            get_keys(imp);
+            data_obj.push(imp);
+          }
+
+        })
+
+      }
       else {
 
         data.raw.forEach(function(d){
 
           var obj = d
 
-          obj[out+"_display"] = dataviva.displayID(obj[out+"_id"],out)
+          if (out !== "all") obj[out+"_display"] = dataviva.displayID(obj[out+"_id"],out)
 
           obj.bra_rca = obj.rca >=1 ? true : false;
           obj.wld_rca = obj.rca_wld >=1 ? true : false;
@@ -1731,7 +1798,7 @@
         if (!data.categories) data.categories = {}
         if (!data.categories[d.year]) data.categories[d.year] = []
         if (!data.categories.all) data.categories.all = []
-        var parent = d[out+"_id"].slice(0,depths[out][0])
+        if (out !== "all") var parent = d[out+"_id"].slice(0,depths[out][0])
         if (data.categories[d.year].indexOf(parent) < 0) data.categories[d.year].push(parent);
         if (data.categories.all.indexOf(parent) < 0) data.categories.all.push(parent);
       }
@@ -1960,7 +2027,6 @@
 
         if (build.url == app.build.url) var c = "decision"
         else var c = "help"
-
 
         box.select("."+build.dataset).append("div")
           .attr("id",build.url)

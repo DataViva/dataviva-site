@@ -106,6 +106,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     dropdown.
     '''
     all_builds = Build.query.all()
+    all_builds.sort(key=lambda x: x.app_id)
     for build in all_builds:
         build.set_filter1(filter1)
         build.set_filter2(filter2)

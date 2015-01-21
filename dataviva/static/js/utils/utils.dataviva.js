@@ -342,8 +342,8 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "embed_url": {"en": "Embed URL", "pt": "URL para Incorporar"},
       "share_url": {"en": "Shortened URL", "pt": "URL Abreviada"},
       "social_media": {"en": "Social Networks", "pt": "Redes Sociais"},
-      "secex_2": {"en": "Based on State Production", "pt": "Baseado nos Estados Produtores"},
-      "secex_8": {"en": "Based on the Exporting Municipality", "pt": "Baseado nos Municípios Exportadores"},
+      "secex_3": {"en": "Based on State Production", "pt": "Baseado nos Estados Produtores"},
+      "secex_9": {"en": "Based on the Exporting Municipality", "pt": "Baseado nos Municípios Exportadores"},
 
       // D3plus Text
       "Click for More Info": {"en": "Click for more data and related apps.", "pt": "Clique para dados adicionais e aplicativos relacionados."},
@@ -764,14 +764,16 @@ dataviva.cleanData = function(app, data) {
       return obj
     }, {})
 
-    var id = temp[app.build.output+"_id"];
+    if (app.build.output !== "all") {
+      var id = temp[app.build.output+"_id"];
 
-    depths.forEach(function(depth){
-      temp[app.build.output+"_"+depth] = id.slice(0,depth);
-    })
+      depths.forEach(function(depth){
+        temp[app.build.output+"_"+depth] = id.slice(0,depth);
+      })
 
-    if (id in extras) {
-      temp = d3plus.object.merge(temp, extras[id]);
+      if (id in extras) {
+        temp = d3plus.object.merge(temp, extras[id]);
+      }
     }
 
     zerofills[app.build.dataset].forEach(function(z){

@@ -186,7 +186,10 @@ class Build(db.Model, AutoSerialize):
             elif self.output == "wld":
                 filter2 = "show.5"
 
-        return '{0}/all/{1}/{2}/{3}/'.format(self.dataset, bra, filter1, filter2)
+        if self.output == "all":
+            bra = bra + ".show.{}".format(len(bra))
+
+        return '{}/all/{}/{}/{}/'.format(self.dataset, bra, filter1, filter2)
 
     '''Returns the data table required for this build'''
     def data_table(self):
