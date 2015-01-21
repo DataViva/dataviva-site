@@ -733,6 +733,19 @@ dataviva.cleanData = function(app, data) {
 
   var depths = dataviva.depths(app.build.output)
 
+  var extras = {}
+
+  if ("diversity" in data) {
+    data.diversity.data.forEach(function(d){
+      extras[d[1]] = {}
+      d.forEach(function(v, i){
+        if (data.diversity.headers[i].indexOf("diversity") >= 0) {
+          extras[d[1]][data.diversity.headers[i]] = v
+        }
+      })
+    })
+  }
+
   var dataObj = data.data.map(function(d){
 
     var temp = d.reduce(function(obj, value, i){
@@ -741,18 +754,24 @@ dataviva.cleanData = function(app, data) {
       return obj
     }, {})
 
+    var id = temp[app.build.output+"_id"];
+
     depths.forEach(function(depth){
-      temp[app.build.output+"_"+depth] = temp[app.build.output+"_id"].slice(0,depth);
+      temp[app.build.output+"_"+depth] = id.slice(0,depth);
+    })
+
+    if (id in extras) {
+      temp = d3plus.object.merge(temp, extras[id]);
+    }
+
+    zerofills[app.build.dataset].forEach(function(z){
+      if (!(z in temp)) {
+        temp[z] = 0
+      }
     })
 
     return temp
 
-  })
-
-  zerofills[app.build.dataset].forEach(function(z){
-    if (!(z in dataObj)) {
-      dataObj[z] = 0
-    }
   })
 
   return dataObj;
