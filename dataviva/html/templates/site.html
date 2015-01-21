@@ -12,13 +12,13 @@
       </div>
       <a id="logo" href="{{ url_for('general.home') }}"></a>
       <a id="profiles" href="{{ url_for('profiles.index') }}" class="link{% if g.page_type == 'profiles' or g.page_type == 'profile' %} active{% endif %}">{% trans %}Profiles{% endtrans %}</a>
-      <a id="apps" href="{{ url_for('apps.guide') }}" class="link{% if g.page_type == 'apps' or g.page_type == 'builder' %} active{% endif %}">{% trans %}Apps{% endtrans %}</a>
-      <a id="guide" href="{{ url_for('guide.guide') }}" class="link{% if g.page_type == 'guide' or g.page_type == 'plan' %} active{% endif %}">{% trans %}Guide{% endtrans %}</a>
+      <a id="apps" href="{{ url_for('apps.guide') }}" class="link{% if g.page_type == 'apps' or g.page_type == 'builder' %} active{% endif %}">{% trans %}Builder{% endtrans %}</a>
+      <!-- <a id="guide" href="{{ url_for('guide.guide') }}" class="link{% if g.page_type == 'guide' or g.page_type == 'plan' %} active{% endif %}">{% trans %}Guide{% endtrans %}</a> -->
       <a id="data" href="{{ url_for('data.index') }}" class="link{% if g.page_type == 'data' or g.page_type == 'query' or g.page_type == 'classifications' %} active{% endif %}">{% trans %}Data{% endtrans %}</a>
       <a id="rankings" href="{{ url_for('rankings.index') }}" class="link{% if g.page_type == 'rankings' %} active{% endif %}">{% trans %}Rankings{% endtrans %}</a>
       <a id="about" href="{{ url_for('about.contact') }}" class="link{% if g.page_type == 'about' %} active{% endif %}">{% trans %}Learn More{% endtrans %}</a>
       {% if "home" not in request.endpoint %}
-      <a id="search" href="#" class="link">{%trans%}Search{%endtrans%}</a>
+        <a id="search" href="#" class="link">{%trans%}Search{%endtrans%}</a>
       {% endif %}
 
       <div id="nav_controls">
@@ -238,7 +238,7 @@
           closeSearch()
         }
       }
-      
+
       // if ( !d3_target.classed("searchFld") && !d3_target.classed("searchBox") ) {
       //   if( d3.select(".searchBox").style("width") === "465px" ) {
       //     closeSearch()
@@ -249,12 +249,12 @@
 
     var searchInterval = "";
     d3.selectAll(".searchFld").on("keyup", function(e) {
-      
+
       var key_code = d3.event.keyCode;
       if (key_code > 36 && key_code < 41) {
         return;
       }
-      
+
       // for closure
       var _this = this;
 
@@ -450,7 +450,7 @@
 
       }
     }
-    
+
     var selected_el;
     var selected_i;
     d3.selectAll(".search")
@@ -480,7 +480,7 @@
           }
         }
       })
-    
+
     d3.selectAll(".searchResult")
       .on("mouseover", function(){
         d3.select(this).selectAll(".active").classed("temp_inactive", true);
