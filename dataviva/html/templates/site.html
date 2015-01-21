@@ -17,7 +17,9 @@
       <a id="data" href="{{ url_for('data.index') }}" class="link{% if g.page_type == 'data' or g.page_type == 'query' or g.page_type == 'classifications' %} active{% endif %}">{% trans %}Data{% endtrans %}</a>
       <a id="rankings" href="{{ url_for('rankings.index') }}" class="link{% if g.page_type == 'rankings' %} active{% endif %}">{% trans %}Rankings{% endtrans %}</a>
       <a id="about" href="{{ url_for('about.contact') }}" class="link{% if g.page_type == 'about' %} active{% endif %}">{% trans %}Learn More{% endtrans %}</a>
+      {% if "home" not in request.endpoint %}
       <a id="search" href="#" class="link">{%trans%}Search{%endtrans%}</a>
+      {% endif %}
 
       <div id="nav_controls">
 
@@ -216,7 +218,7 @@
         .transition()
         .style("width", "0px")
 
-      d3.select(".searchResult")
+      d3.selectAll(".searchResult")
         .transition()
         .style("opacity", 0)
         .each("end", function() {
@@ -231,13 +233,17 @@
 
     	var d3_target = d3.select(d3.event.target)
 
-      if ( !d3_target.classed("searchFld") && !d3_target.classed("searchBox") ) {
-
-        if( d3.select(".searchBox").style("width") === "465px" ) {
+      if ( !d3_target.classed("searchFld") && !d3_target.classed("searchBox") && !d3_target.classed("searchResult") ) {
+        if( d3.select(".searchBox").style("width") === "465px" || d3.select(".search .searchResult").style("opacity") ) {
           closeSearch()
         }
-
       }
+      
+      // if ( !d3_target.classed("searchFld") && !d3_target.classed("searchBox") ) {
+      //   if( d3.select(".searchBox").style("width") === "465px" ) {
+      //     closeSearch()
+      //   }
+      // }
 
     })
 

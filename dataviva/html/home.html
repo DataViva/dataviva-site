@@ -53,7 +53,7 @@
   .explore ul li {
     display: inline-block;
     list-style: none;
-    margin: 0 44px 0 0;
+    margin: 0 15px 0 0;
   }
   .explore ul li:last-child {
     margin: 0;
@@ -73,6 +73,7 @@
   .explore ul li i {
     display: inline-block;
     font-size: 66px;
+    margin: 0 5px;
   }
   .profile .scroller {
     overflow: hidden;
@@ -89,13 +90,23 @@
   .profile ul li a {
     border: solid rgba(0, 0, 0, 0.4) 1px;
     background: rgba(255, 255, 255, 0.6);
+    box-sizing: border-box;
     display: inline-block;
-    height: 200px;
+    height: 180px;
+    position: relative;
     text-align: center;
     width: 150px;
   }
   .profile ul li a h4 {
+    color: inherit;
+    height: 45px;
     white-space: normal;
+  }
+  .profile ul li a img {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0 10px;
+    width: 100px;
   }
   </style>
 
@@ -118,12 +129,13 @@
   <div class="explore">
     <h2>Explore by dataset</h2>
     <ul>
-      <li><a href="#"><i class="fa fa-plane"></i>Exports</a></li>
-      <li><a href="#"><i class="fa fa-plane fa-rotate-90"></i>Imports</a></li>
-      <li><a href="#"><i class="fa fa-building-o"></i>Industries</a></li>
-      <li><a href="#"><i class="fa fa-user-md"></i>Occupations</a></li>
-      <li><a href="#"><i class="fa fa-graduation-cap"></i>Higher Education</a></li>
-      <li><a href="#"><i class="fa fa-slideshare"></i>Primary Education</a></li>
+      <li><a href="#" data-type="bra"><i class="fa fa-photo"></i>Locations</a></li>
+      <li><a href="#" data-type="hs"><i class="fa fa-truck"></i>Products</a></li>
+      <li><a href="#" data-type="wld"><i class="fa fa-globe"></i>Trade Partners</a></li>
+      <li><a href="#" data-type="cnae"><i class="fa fa-building-o"></i>Industries</a></li>
+      <li><a href="#" data-type="cbo"><i class="fa fa-user-md"></i>Occupations</a></li>
+      <li><a href="#" data-type="hedu"><i class="fa fa-graduation-cap"></i>Higher Education</a></li>
+      <li><a href="#" data-type="sc"><i class="fa fa-slideshare"></i>Primary Education</a></li>
     </ul>
   </div>
   
@@ -132,64 +144,74 @@
     <div class="scroller">
       <ul data-parameters="/stats/carosel/?metric=export_val&amp;show=bra_id&amp;profile=BraProfile&amp;limit=10" class="set">
         <li>
-          <a class="poster" href="/profile/bra/1pa040304/">
+          <a class="poster" href="/profile/bra/1pa040304/" style="border-color:#ff0000;color:#ff0000;">
             <h4 class="title">
               Parauapebas, PA
             </h4>
+            <img src="/static/img/icons/bra/bra_1pa.png" />
           </a>
         </li><li>
-          <a class="poster" href="/profile/bra/4sp090607/">
+          <a class="poster" href="/profile/bra/4sp090607/" style="border-color:#c40008;color:#c40008;">
             <h4 class="title">
               São Paulo, SP
             </h4>
+            <img src="/static/img/icons/bra/bra_4sp.png" />
           </a>
         </li><li>
-          <a class="poster" href="/profile/bra/5rs050101/">
+          <a class="poster" href="/profile/bra/5rs050101/" style="border-color:#da251d;color:#da251d;">
             <h4 class="title">
               Rio Grande, RS
             </h4>
+            <img src="/static/img/icons/bra/bra_5rs.png" />
           </a>
         </li><li>
-          <a class="poster" href="/profile/bra/4rj020212/">
+          <a class="poster" href="/profile/bra/4rj020212/" style="border-color:#00afef;color:#00afef;">
             <h4 class="title">
               Rio de Janeiro, RJ
             </h4>
+            <img src="/static/img/icons/bra/bra_4rj.png" />
           </a>
         </li><li>
-          <a class="poster" href="/profile/bra/4sp090504/">
+          <a class="poster" href="/profile/bra/4sp090504/" style="border-color:#c40008;color:#c40008;">
             <h4 class="title">
               Santos, SP
             </h4>
+            <img src="/static/img/icons/bra/bra_4sp.png" />
           </a>
         </li><li>
-          <a class="poster" href="/profile/bra/4sp140505/">
+          <a class="poster" href="/profile/bra/4sp140505/" style="border-color:#c40008;color:#c40008;">
             <h4 class="title">
               São José dos Campos, SP
             </h4>
+            <img src="/static/img/icons/bra/bra_4sp.png" />
           </a>
         </li><li>
-          <a class="poster" href="/profile/bra/4rj050000/">
+          <a class="poster" href="/profile/bra/4rj050000/" style="border-color:#00afef;color:#00afef;">
             <h4 class="title">
               Angra dos Reis, RJ
             </h4>
+            <img src="/static/img/icons/bra/bra_4rj.png" />
           </a>
         </li><li>
-          <a class="poster" href="/profile/bra/5pr030305/">
+          <a class="poster" href="/profile/bra/5pr030305/" style="border-color:#c40008;color:#c40008;">
             <h4 class="title">
               Paranaguá, PR
             </h4>
+            <img src="/static/img/icons/bra/bra_5pr.png" />
           </a>
         </li><li>
-          <a class="poster" href="/profile/bra/4sp090605/">
+          <a class="poster" href="/profile/bra/4sp090605/" style="border-color:#c40008;color:#c40008;">
             <h4 class="title">
               São Bernardo do Campo, SP
             </h4>
+            <img src="/static/img/icons/bra/bra_4sp.png" />
           </a>
         </li><li>
-          <a class="poster" href="/profile/bra/4rj040102/">
+          <a class="poster" href="/profile/bra/4rj040102/" style="border-color:#00afef;color:#00afef;">
             <h4 class="title">
               Macaé, RJ
             </h4>
+            <img src="/static/img/icons/bra/bra_4rj.png" />
           </a>
         </li>
       </ul>
@@ -201,46 +223,53 @@
     <div class="scroller">
       <ul data-parameters="/stats/carosel/?metric=export_val&amp;show=hs_id&amp;profile=HsProfile&amp;limit=10" class="page">
         <li>
-          <a class="poster" href="/profile/wld/sabra/hs/052601/">
+          <a class="poster" href="/profile/wld/sabra/hs/052601/" style="border-color:#330000;color:#330000;">
             <h4 class="title">
               Iron Ore
             </h4>
+            <img style="background:#330000" src="/static/img/icons/hs/hs_05.png" /></span>
           </a>
         </li><li>
-          <a class="poster" href="/profile/wld/sabra/hs/021201/">
+          <a class="poster" href="/profile/wld/sabra/hs/021201/" style="border-color:#FFC41C;color:#FFC41C;">
             <h4 class="title">
               Soybeans
             </h4>
+            <img style="background:#FFC41C" src="/static/img/icons/hs/hs_02.png" /></span>
           </a>
         </li><li>
-          <a class="poster" href="/profile/wld/sabra/hs/052709/">
+          <a class="poster" href="/profile/wld/sabra/hs/052709/" style="border-color:#330000;color:#330000;">
             <h4 class="title">
               Crude Petroleum
             </h4>
+            <img style="background:#330000" src="/static/img/icons/hs/hs_05.png" /></span>
           </a>
         </li><li>
-          <a class="poster" href="/profile/wld/sabra/hs/041701/">
+          <a class="poster" href="/profile/wld/sabra/hs/041701/" style="border-color:#D1FF00;color:#D1FF00;">
             <h4 class="title">
               Raw Sugar
             </h4>
+            <img style="background:#D1FF00" src="/static/img/icons/hs/hs_04.png" /></span>
           </a>
         </li><li>
-          <a class="poster" href="/profile/wld/sabra/hs/178905/">
+          <a class="poster" href="/profile/wld/sabra/hs/178905/" style="border-color:#9edae5;color:#9edae5;">
             <h4 class="title">
               Drilling Platforms
             </h4>
+            <img style="background:#9edae5" src="/static/img/icons/hs/hs_17.png" /></span>
           </a>
         </li><li>
-          <a class="poster" href="/profile/wld/sabra/hs/010207/">
+          <a class="poster" href="/profile/wld/sabra/hs/010207/" style="border-color:#FFE999;color:#FFE999;">
             <h4 class="title">
               Poultry Meat
             </h4>
+            <img style="background:#FFE999" src="/static/img/icons/hs/hs_01.png" /></span>
           </a>
         </li><li>
-          <a class="poster" href="/profile/wld/sabra/hs/042304/">
+          <a class="poster" href="/profile/wld/sabra/hs/042304/" style="border-color:#D1FF00;color:#D1FF00;">
             <h4 class="title">
               Soybean Meal
             </h4>
+            <img style="background:#D1FF00" src="/static/img/icons/hs/hs_04.png" /></span>
           </a>
         </li><li>
           <a class="poster" href="/profile/wld/sabra/hs/021005/">
@@ -270,64 +299,74 @@
       <div class="scroller">
         <ul data-parameters="/stats/carosel/?metric=wage_avg&amp;show=cbo_id&amp;profile=CboProfile&amp;limit=10" class="page">
           <li>
-            <a class="poster" href="/profile/wld/sabra/cbo/2422/">
+            <a class="poster" href="/profile/wld/sabra/cbo/2422/" style="border-color:#cc0000;color:#cc0000;">
               <h4 class="title">
                 Public Ministry
               </h4>
+              <img style="background:#cc0000" src="/static/img/icons/cbo/cbo_2.png" /></span>
             </a>
           </li><li>
-            <a class="poster" href="/profile/wld/sabra/cbo/1113/">
+            <a class="poster" href="/profile/wld/sabra/cbo/1113/" style="border-color:#752277;color:#752277;">
               <h4 class="title">
                 Magistrates
               </h4>
+              <img style="background:#752277" src="/static/img/icons/cbo/cbo_1.png" /></span>
             </a>
           </li><li>
-            <a class="poster" href="/profile/wld/sabra/cbo/1222/">
+            <a class="poster" href="/profile/wld/sabra/cbo/1222/" style="border-color:#752277;color:#752277;">
               <h4 class="title">
                 Mining and Quarrying COOs
               </h4>
+              <img style="background:#752277" src="/static/img/icons/cbo/cbo_1.png" /></span>
             </a>
           </li><li>
-            <a class="poster" href="/profile/wld/sabra/cbo/1233/">
+            <a class="poster" href="/profile/wld/sabra/cbo/1233/" style="border-color:#752277;color:#752277;">
               <h4 class="title">
                 Sales and Marketing Directors
               </h4>
+              <img style="background:#752277" src="/static/img/icons/cbo/cbo_1.png" /></span>
             </a>
           </li><li>
-            <a class="poster" href="/profile/wld/sabra/cbo/2424/">
+            <a class="poster" href="/profile/wld/sabra/cbo/2424/" style="border-color:#cc0000;color:#cc0000;">
               <h4 class="title">
                 Public Defenders
               </h4>
+              <img style="background:#cc0000" src="/static/img/icons/cbo/cbo_2.png" /></span>
             </a>
           </li><li>
-            <a class="poster" href="/profile/wld/sabra/cbo/1237/">
+            <a class="poster" href="/profile/wld/sabra/cbo/1237/" style="border-color:#752277;color:#752277;">
               <h4 class="title">
                 R&amp;D Directors
               </h4>
+              <img style="background:#752277" src="/static/img/icons/cbo/cbo_1.png" /></span>
             </a>
           </li><li>
-            <a class="poster" href="/profile/wld/sabra/cbo/1227/">
+            <a class="poster" href="/profile/wld/sabra/cbo/1227/" style="border-color:#752277;color:#752277;">
               <h4 class="title">
                 Financial COOs
               </h4>
+              <img style="background:#752277" src="/static/img/icons/cbo/cbo_1.png" /></span>
             </a>
           </li><li>
-            <a class="poster" href="/profile/wld/sabra/cbo/2541/">
+            <a class="poster" href="/profile/wld/sabra/cbo/2541/" style="border-color:#cc0000;color:#cc0000;">
               <h4 class="title">
                 Federal Revenue Inspectors
               </h4>
+              <img style="background:#cc0000" src="/static/img/icons/cbo/cbo_2.png" /></span>
             </a>
           </li><li>
-            <a class="poster" href="/profile/wld/sabra/cbo/2429/">
+            <a class="poster" href="/profile/wld/sabra/cbo/2429/" style="border-color:#cc0000;color:#cc0000;">
               <h4 class="title">
                 Intelligence Agents
               </h4>
+              <img style="background:#cc0000" src="/static/img/icons/cbo/cbo_2.png" /></span>
             </a>
           </li><li>
-            <a class="poster" href="/profile/wld/sabra/cbo/2145/">
+            <a class="poster" href="/profile/wld/sabra/cbo/2145/" style="border-color:#752277;color:#752277;">
               <h4 class="title">
                 Chemical Engineers
               </h4>
+              <img style="background:#752277" src="/static/img/icons/cbo/cbo_2.png" /></span>
             </a>
           </li> 
         </ul>
@@ -340,7 +379,24 @@
 
 {% block js %}
 
+<script src="/static/js/utils/utils.selector.js"></script>
 <script>
+// Create Filter Selector
+dataviva.popover.create({
+  "id": "filter_popover",
+  "width": 600,
+  "height": "80%",
+  "close": true
+})
+var selector = Selector().callback(function(d){
+  window.location = "/profiles/" + selector.type() + "/" + d.id + "/";
+});
+
+d3.selectAll(".explore li a").on("click", function(){
+  d3.select("#filter_popover").call(selector.type(d3.select(this).attr('data-type')));
+  dataviva.popover.show("#filter_popover");
+  d3.event.preventDefault();
+})
 
 </script>
 

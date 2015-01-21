@@ -408,7 +408,7 @@ a#search {
   overflow: auto;
   max-height: 250px;
   width: 100%;
-	z-index: 9999;
+	z-index: 999;
 }
 
 #header .searchResult {
