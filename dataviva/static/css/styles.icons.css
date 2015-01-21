@@ -284,6 +284,20 @@
   background-image: url("/static/img/icons/app/app_occugrid.png");
 }
 
+.decision.icon.line {
+  background-color: #a4bd99 !important;
+}
+.decision.icon.line:before {
+  background-image: url("/static/img/icons/app/app_line.png");
+}
+
+.decision.icon.bar {
+  background-color: #93789e !important;
+}
+.decision.icon.bar:before {
+  background-image: url("/static/img/icons/app/app_bar.png");
+}
+
 .help.icon.tree_map:before {
   background-image: url("/static/img/icons/app/app_tree_map_black.png");
   opacity: 0.2;
@@ -321,6 +335,16 @@
 
 .help.icon.occugrid:before {
   background-image: url("/static/img/icons/app/app_occugrid_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.line:before {
+  background-image: url("/static/img/icons/app/app_line_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.bar:before {
+  background-image: url("/static/img/icons/app/app_bar_black.png");
   opacity: 0.2;
 }
 
