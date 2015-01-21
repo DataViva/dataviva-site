@@ -1297,7 +1297,6 @@
             "scale": app.vars.scale,
             "value": "cp_bra_1_"+app.vars.axes
           })
-          .xaxis_scale(app.vars.scale)
           .y({
             "scale": app.vars.scale,
             "value": "cp_bra_0_"+app.vars.axes
@@ -1555,7 +1554,8 @@
       var data_obj = [],
           data = app.data[app.build.data_url],
           out = app.build.output,
-          attr = app.attrs[out]
+          attr = app.attrs[out],
+          outdepths = dataviva.depths(app.build.output);
 
       if ("occugrid" == format[app.build.app.type]) {
 
@@ -1580,7 +1580,6 @@
               d.importance = job.importance
               d.category = attr[d[out+"_id"].slice(0,depths[out][0])].name
               d.none = 1
-              d.always_active = 1
 
               d.required = Math.ceil(d.required)
 
@@ -1625,9 +1624,11 @@
               d.year = leaves[0].year
               d[out+"_id"] = leaves[0][out+"_id"]
               d[out+"_display"] = dataviva.displayID(d[out+"_id"],out)
-              // d.icon = dataviva.icon(d[out+"_id"],out)
-              d.active = true
-              d.always_active = 1
+
+              outdepths.forEach(function(dd){
+                d[out+"_"+dd] = leaves[0][out+"_"+dd]
+              })
+
               leaves.forEach(function(leaf){
                 for (key in leaf) {
                   if (key != "bra_id" && key != out+"_id") {
@@ -1657,11 +1658,6 @@
           var obj = d
 
           obj[out+"_display"] = dataviva.displayID(obj[out+"_id"],out)
-          d.always_active = 1
-
-          // obj.icon = dataviva.icon(obj[out+"_id"],out)
-
-          obj.active = obj.rca >=1 ? true : false;
 
           obj.bra_rca = obj.rca >=1 ? true : false;
           obj.wld_rca = obj.rca_wld >=1 ? true : false;
