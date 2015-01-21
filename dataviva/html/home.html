@@ -23,57 +23,28 @@
     margin: 0 0 0 5px;
     vertical-align: bottom;
   }
-  .search, .explore, .profile {
+  .profile {
     margin: 0 0 40px 0;
   }
   .search {
-/*    border: solid black 1px;*/
-    margin: 20px 150px 150px 150px;
+    margin: 40px 50px;
     position: relative;
+    text-align: center;
   }
   .search input {
     background-color: white;
     border: solid rgba(0, 0, 0, 0.4) 1px;
     box-sizing: border-box;
+    /*display: block;*/
     font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
     font-size: 18px;
+    margin-bottom: 10px;
     outline: none;
     opacity: 0.75;
     padding: 10px;
     -webkit-transition: border-color .1s, color .1s, opacity .1s;
     transition: border-color .1s, color .1s, opacity .1s;
-    width: 100%;
-  }
-  .explore {
-/*    border: solid black 1px;*/
-  }
-  .explore ul {
-    list-style: none;
-  }
-  .explore ul li {
-    display: inline-block;
-    list-style: none;
-    margin: 0 15px 0 0;
-  }
-  .explore ul li:last-child {
-    margin: 0;
-  }
-  .explore ul li a {
-    border: solid rgba(0, 0, 0, 0.4) 1px;
-    background: rgba(255, 255, 255, 0.6);
-    display: inline-block;
-    height: 100px;
-    padding: 10px;
-    text-align: center;
-    width: 100px;
-  }
-  .explore ul li a:hover {
-    color: black;
-  }
-  .explore ul li i {
-    display: inline-block;
-    font-size: 66px;
-    margin: 0 5px;
+    width: 826px;
   }
   .profile .scroller {
     overflow: hidden;
@@ -120,23 +91,19 @@
       <br>
     {% trans %}through more than 100 million interactive visualizations.{% endtrans %}
   </div> -->
-  <div class="darkbox"><h1>What are you looking for?</h1></div>
   <div class="search">
+    <div class="darkbox"><h1>What are you looking for?</h1></div>
     <input class="searchFld" type="text" placeholder="Products exported by Minas Gerais" autofocus />
     <div class="searchResult">search results</div>
-  </div>
 
-  <div class="explore">
-    <h2>Explore by dataset</h2>
-    <ul>
-      <li><a href="#" data-type="bra"><i class="fa fa-photo"></i>Locations</a></li>
-      <li><a href="#" data-type="hs"><i class="fa fa-truck"></i>Products</a></li>
-      <li><a href="#" data-type="wld"><i class="fa fa-globe"></i>Trade Partners</a></li>
-      <li><a href="#" data-type="cnae"><i class="fa fa-building-o"></i>Industries</a></li>
-      <li><a href="#" data-type="cbo"><i class="fa fa-user-md"></i>Occupations</a></li>
-      <li><a href="#" data-type="hedu"><i class="fa fa-graduation-cap"></i>Higher Education</a></li>
-      <li><a href="#" data-type="sc"><i class="fa fa-slideshare"></i>Primary Education</a></li>
-    </ul>
+    <a href="#" class="decision square small icon bra" data-type="bra">Locations</a>
+    <a href="#" class="decision square small icon hs" data-type="hs">Products</a>
+    <a href="#" class="decision square small icon wld" data-type="wld">Trade Partners</a>
+    <a href="#" class="decision square small icon cnae" data-type="cnae">Industries</a>
+    <a href="#" class="decision square small icon cbo" data-type="cbo">Occupations</a>
+    <a href="#" class="decision square small icon university" data-type="university">Universities</a>
+    <a href="#" class="decision square small icon course_hedu" data-type="course_hedu">Higher Education Courses</a>
+
   </div>
 
   <div class="profile">
@@ -392,7 +359,7 @@ var selector = Selector().callback(function(d){
   window.location = "/profiles/" + selector.type() + "/" + d.id + "/";
 });
 
-d3.selectAll(".explore li a").on("click", function(){
+d3.selectAll("a.decision.square").on("click", function(){
   d3.select("#filter_popover").call(selector.type(d3.select(this).attr('data-type')));
   dataviva.popover.show("#filter_popover");
   d3.event.preventDefault();

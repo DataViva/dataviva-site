@@ -165,6 +165,14 @@
   background-image: url("/static/img/icons/wld/wld_all.png");
 }
 
+.decision.icon.university:before {
+  background-image: url("/static/img/icons/university/university_all.png");
+}
+
+.decision.icon.course_hedu:before {
+  background-image: url("/static/img/icons/course_hedu/course_hedu_all.png");
+}
+
 .help.icon.bra:before {
   background-image: url("/static/img/icons/bra/bra_all_alt_black.png");
   opacity: 0.2;
@@ -187,6 +195,16 @@
 
 .help.icon.wld:before {
   background-image: url("/static/img/icons/wld/wld_all_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.university:before {
+  background-image: url("/static/img/icons/university/university_all_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.course_hedu:before {
+  background-image: url("/static/img/icons/course_hedu/course_hedu_all_black.png");
   opacity: 0.2;
 }
 

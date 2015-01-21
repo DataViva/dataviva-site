@@ -47,6 +47,13 @@ a:hover {
   width: 150px;
 }
 
+.title.square.small, .decision.square.small, .help.square.small {
+  display: inline-block;
+  font-size: 13px;
+  min-height: 75px;
+  width: 75px;
+}
+
 .help.icon.large,
 .decision.icon.large {
   height: 110px;
