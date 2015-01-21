@@ -543,7 +543,7 @@ dataviva.ui.background = function() {
     // else {
     //   var filename = "night"
     // }
-    var filename = "city"
+    var filename = "clouds"
     fs.style("background-image","url('/static/img/bgs/"+filename+".jpg')")
 
     resizebg = function() {
