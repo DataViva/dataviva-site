@@ -363,3 +363,25 @@ class UI(db.Model, AutoSerialize):
 
     def __repr__(self):
         return '<Build %r: %r>' % (self.type, self.values)
+
+class Crosswalk_oc(db.Model):
+    __tablename__ = 'crosswalk_oc'
+
+    cbo_id = db.Column(db.String(4), primary_key = True)
+    course_hedu_id = db.Column(db.String(6), primary_key = True)
+
+    def get_id(self, build_filter):
+        if build_filter == "<cbo_id>":
+            return self.cbo_id
+        return self.course_hedu_id
+
+class Crosswalk_pi(db.Model):
+    __tablename__ = 'crosswalk_pi'
+
+    hs_id = db.Column(db.String(6), primary_key = True)
+    cnae_id = db.Column(db.String(5), primary_key = True)
+
+    def get_id(self, build_filter):
+        if build_filter == "<hs_id>":
+            return self.hs_id
+        return self.cnae_id
