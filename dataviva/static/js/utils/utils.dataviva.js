@@ -746,6 +746,12 @@ dataviva.cleanData = function(app, data) {
     })
   }
 
+  if ("pci" in data) {
+    data.pci.data.forEach(function(d){
+      extras[d[1]] = {"pci": d[2]}
+    })
+  }
+
   var dataObj = data.data.map(function(d){
 
     var temp = d.reduce(function(obj, value, i){
