@@ -11,7 +11,7 @@ from dataviva import db, datavivadir, view_cache
 from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld
-from dataviva.apps.models import Build, UI, App
+from dataviva.apps.models import Build, UI, App, Crosswalk_oc, Crosswalk_pi
 from dataviva.general.models import Short
 
 
@@ -219,6 +219,8 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
         build_filter2 = "<cbo>"
     if dataset.startswith("secex") and build_filter2 != "all":
         build_filter2 = "<wld>"
+
+    recommended["crosswalk"] = crosswalk_recs(dataset, build_filter1, filter1, build_filter2, filter2, bra_id)
 
     '''First get the MOST relevent builds (ones that use all filters)'''
     if build_filter1 != "all" and build_filter2 != "all":
@@ -530,3 +532,33 @@ def shorten_url():
         return jsonify({"slug": short.slug})
 
     return jsonify({"error": "No URL given."})
+
+
+def crosswalk_recs(dataset, build_filter1, raw_filter1, build_filter2, raw_filter2, bra_id):
+    crosswalk = {"filter1" : [], "filter2": []}
+
+    data = {"<cnae>": (Crosswalk_pi.cnae_id, Crosswalk_pi), "<hs>": (Crosswalk_pi.hs_id, Crosswalk_pi)}
+
+    if build_filter1 in data and build_filter1 != "all":
+        col, table = data[build_filter1]
+
+        results = table.query.filter(col == raw_filter1).all()
+        ids = [row.get_id(dataset) for row in results]
+        if ids:
+            # Build filter1 must either be <cnae> or <hs>
+            swap_map = { "secex_export" : { "<hs>" : ("rais", "<cnae>") },
+                         "secex_import" : { "<hs>" : ("rais", "<cnae>") },
+                         "rais" : { "<cnae>" : ("secex_export", "<hs>") }}
+            dataset2, target_filter = swap_map[dataset][build_filter1]
+            raw_target_filter = "_".join(ids)
+
+            builds = Build.query.filter_by(dataset=dataset2, filter1=target_filter, filter2="all").all()
+
+            for b in builds:
+                if bra_id != "filler":
+                    b.set_bra(bra_id)
+                b.set_filter1(raw_target_filter)
+
+            crosswalk["filter1"] = [b.serialize() for b in builds]
+
+    return crosswalk
