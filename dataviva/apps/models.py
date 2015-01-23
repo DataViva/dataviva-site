@@ -187,7 +187,12 @@ class Build(db.Model, AutoSerialize):
                 filter2 = "show.5"
 
         if self.output == "all":
-            bra = bra + ".show.{}".format(len(bra))
+            if bra != "all":
+                bra = bra + ".show.{}".format(len(bra))
+            elif filter1 != "all":
+                filter1 = filter1 + ".show.{}".format(len(filter1))
+            elif filter2 != "all":
+                filter2 = filter2 + ".show.{}".format(len(filter2))
 
         return '{}/all/{}/{}/{}/'.format(self.dataset, bra, filter1, filter2)
 
