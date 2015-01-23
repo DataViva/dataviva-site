@@ -536,14 +536,8 @@ dataviva.ui = {}
 dataviva.ui.background = function() {
   var fs = d3.select("#fullscreen")
   if (fs.node()) {
-    // var hour = new Date().getHours()
-    // if (hour >= 5 && hour <= 20) {
-    //   var filename = "day"
-    // }
-    // else {
-    //   var filename = "night"
-    // }
-    var filename = "clouds"
+    // var filename = "clouds"
+    var filename = "city_small"
     fs.style("background-image","url('/static/img/bgs/"+filename+".jpg')")
 
     resizebg = function() {
