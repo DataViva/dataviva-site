@@ -157,9 +157,9 @@ class Stats(object):
                         den += float(value)
                 percent = (num/float(den))*100
 
-            return {"name": "top_{0}".format(key), "value": obj.name(), "percent": percent, "id": obj.id, "group": "{0}_stats_{1}".format(dataset,latest_year)}
+            return {"name": "top_{0}".format(key), "value": obj.name(), "percent": percent, "id": obj.id, "group": "{0}_stats_{1}".format(dataset.split("_")[0],latest_year)}
         else:
-            return {"name": "top_{0}".format(key), "value": "-", "group": "{0}_stats_{1}".format(dataset,latest_year)}
+            return {"name": "top_{0}".format(key), "value": "-", "group": "{0}_stats_{1}".format(dataset.split("_")[0],latest_year)}
 
     def get_val(self, tbl, val_var, attr_type, dataset, latest_year = None):
 
@@ -229,7 +229,7 @@ class Stats(object):
             group = ""
             name = "population_{0}".format(latest_year)
         else:
-            group = "{0}_stats_{1}".format(dataset,latest_year)
+            group = "{0}_stats_{1}".format(dataset.split("_")[0],latest_year)
             if calc_var:
                 name = calc_var
             else:

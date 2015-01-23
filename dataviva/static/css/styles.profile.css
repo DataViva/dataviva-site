@@ -49,12 +49,12 @@ div#guide_icon {
 }
 
 div#arrow_clickable {
-	position:absolute; 
+	position:absolute;
 	bottom:50%;
 	color:#CCC;
-	margin-bottom:-10px; 
+	margin-bottom:-10px;
 	text-decoration:underline;
-	right:10px; 
+	right:10px;
 	font-size:15px
 }
 div#guide_title {
@@ -72,6 +72,41 @@ div.d3plus_tooltip_data_title {
 
 div.d3plus_tooltip_data_name {
   width: 130px;
+}
+
+div.d3plus_tooltip_data_name {
+  display: inline-block;
+}
+
+div.d3plus_tooltip_data_value {
+  display: block;
+  position: absolute;
+  right: 6px;
+  text-align: right;
+  top: 3px;
+}
+
+div.d3plus_tooltip_data_seperator {
+  background-color: #ddd;
+  display: block;
+  height: 1px;
+  margin: 0px 3px;
+}
+
+div.d3plus_tooltip_data_block {
+  color: #333;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  padding: 3px 6px;
+  position: relative;
+}
+
+div.d3plus_tooltip_data_title {
+  color: #333;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 6px 3px 0px 3px;
 }
 
 div#guide_controls div.d3plus_tooltip_data_value {
