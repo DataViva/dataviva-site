@@ -407,6 +407,7 @@ a#search {
   opacity: 0;
   overflow: auto;
   max-height: 250px;
+  text-align: left;
   width: 100%;
 	z-index: 999;
 }
