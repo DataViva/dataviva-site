@@ -48,6 +48,7 @@
   }
   .profile .scroller {
     overflow: hidden;
+    padding-bottom: 20px;
     position: relative;
   }
   .profile ul {
@@ -58,22 +59,26 @@
     display: inline-block;
     margin: 0 10px 0 0;
   }
-  .profile ul li a {
-    border: solid rgba(0, 0, 0, 0.4) 1px;
-    background: rgba(255, 255, 255, 0.6);
+  .poster {
+    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
     box-sizing: border-box;
     display: inline-block;
-    height: 180px;
+    height: 170px;
     position: relative;
     text-align: center;
-    width: 150px;
+    width: 140px;
   }
-  .profile ul li a h4 {
+  .poster:hover {
+    -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+            box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+  }
+  .poster h4 {
     color: inherit;
     height: 45px;
     white-space: normal;
   }
-  .profile ul li a img {
+  .poster img {
     box-sizing: border-box;
     display: inline-block;
     margin: 0 10px;
@@ -106,239 +111,26 @@
 
   </div>
 
-  <div class="profile">
-    <h2>Top exporting municipalities</h2>
-    <div class="scroller">
-      <ul data-parameters="/stats/carosel/?metric=export_val&amp;show=bra_id&amp;profile=BraProfile&amp;limit=10" class="set">
-        <li>
-          <a class="poster" href="/profiles/bra/1pa040304/" style="border-color:#ff0000;color:#ff0000;">
-            <h4 class="title">
-              Parauapebas, PA
-            </h4>
-            <img src="/static/img/icons/bra/bra_1pa.png" />
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/bra/4sp090607/" style="border-color:#c40008;color:#c40008;">
-            <h4 class="title">
-              São Paulo, SP
-            </h4>
-            <img src="/static/img/icons/bra/bra_4sp.png" />
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/bra/5rs050101/" style="border-color:#da251d;color:#da251d;">
-            <h4 class="title">
-              Rio Grande, RS
-            </h4>
-            <img src="/static/img/icons/bra/bra_5rs.png" />
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/bra/4rj020212/" style="border-color:#00afef;color:#00afef;">
-            <h4 class="title">
-              Rio de Janeiro, RJ
-            </h4>
-            <img src="/static/img/icons/bra/bra_4rj.png" />
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/bra/4sp090504/" style="border-color:#c40008;color:#c40008;">
-            <h4 class="title">
-              Santos, SP
-            </h4>
-            <img src="/static/img/icons/bra/bra_4sp.png" />
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/bra/4sp140505/" style="border-color:#c40008;color:#c40008;">
-            <h4 class="title">
-              São José dos Campos, SP
-            </h4>
-            <img src="/static/img/icons/bra/bra_4sp.png" />
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/bra/4rj050000/" style="border-color:#00afef;color:#00afef;">
-            <h4 class="title">
-              Angra dos Reis, RJ
-            </h4>
-            <img src="/static/img/icons/bra/bra_4rj.png" />
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/bra/5pr030305/" style="border-color:#c40008;color:#c40008;">
-            <h4 class="title">
-              Paranaguá, PR
-            </h4>
-            <img src="/static/img/icons/bra/bra_5pr.png" />
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/bra/4sp090605/" style="border-color:#c40008;color:#c40008;">
-            <h4 class="title">
-              São Bernardo do Campo, SP
-            </h4>
-            <img src="/static/img/icons/bra/bra_4sp.png" />
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/bra/4rj040102/" style="border-color:#00afef;color:#00afef;">
-            <h4 class="title">
-              Macaé, RJ
-            </h4>
-            <img src="/static/img/icons/bra/bra_4rj.png" />
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div> <!-- end profile -->
+  {% for carousel in carousels %}
 
-  <div class="profile">
-    <h2>Top Brazilian exports</h2>
-    <div class="scroller">
-      <ul data-parameters="/stats/carosel/?metric=export_val&amp;show=hs_id&amp;profile=HsProfile&amp;limit=10" class="page">
-        <li>
-          <a class="poster" href="/profiles/hs/052601/" style="border-color:#330000;color:#330000;">
-            <h4 class="title">
-              Iron Ore
-            </h4>
-            <img style="background:#330000" src="/static/img/icons/hs/hs_05.png" /></span>
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/hs/021201/" style="border-color:#FFC41C;color:#FFC41C;">
-            <h4 class="title">
-              Soybeans
-            </h4>
-            <img style="background:#FFC41C" src="/static/img/icons/hs/hs_02.png" /></span>
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/hs/052709/" style="border-color:#330000;color:#330000;">
-            <h4 class="title">
-              Crude Petroleum
-            </h4>
-            <img style="background:#330000" src="/static/img/icons/hs/hs_05.png" /></span>
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/hs/041701/" style="border-color:#D1FF00;color:#D1FF00;">
-            <h4 class="title">
-              Raw Sugar
-            </h4>
-            <img style="background:#D1FF00" src="/static/img/icons/hs/hs_04.png" /></span>
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/hs/178905/" style="border-color:#9edae5;color:#9edae5;">
-            <h4 class="title">
-              Drilling Platforms
-            </h4>
-            <img style="background:#9edae5" src="/static/img/icons/hs/hs_17.png" /></span>
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/hs/010207/" style="border-color:#FFE999;color:#FFE999;">
-            <h4 class="title">
-              Poultry Meat
-            </h4>
-            <img style="background:#FFE999" src="/static/img/icons/hs/hs_01.png" /></span>
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/hs/042304/" style="border-color:#D1FF00;color:#D1FF00;">
-            <h4 class="title">
-              Soybean Meal
-            </h4>
-            <img style="background:#D1FF00" src="/static/img/icons/hs/hs_04.png" /></span>
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/hs/021005/">
-            <h4 class="title">
-              Corn
-            </h4>
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/hs/178703/">
-            <h4 class="title">
-              Cars
-            </h4>
-          </a>
-        </li><li>
-          <a class="poster" href="/profiles/hs/229999/">
-            <h4 class="title">
-              Unspecified
-            </h4>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div> <!-- end profile -->
+    <div class="profile">
 
-  <div class="profile">
-    <h2>Highest paid occupations</h2>
+      <div class="darkbox"><h1>{{ carousel.title }}</h1></div>
       <div class="scroller">
-        <ul data-parameters="/stats/carosel/?metric=wage_avg&amp;show=cbo_id&amp;profile=CboProfile&amp;limit=10" class="page">
-          <li>
-            <a class="poster" href="/profiles/cbo/2422/" style="border-color:#cc0000;color:#cc0000;">
-              <h4 class="title">
-                Public Ministry
-              </h4>
-              <img style="background:#cc0000" src="/static/img/icons/cbo/cbo_2.png" /></span>
-            </a>
-          </li><li>
-            <a class="poster" href="/profiles/cbo/1113/" style="border-color:#752277;color:#752277;">
-              <h4 class="title">
-                Magistrates
-              </h4>
-              <img style="background:#752277" src="/static/img/icons/cbo/cbo_1.png" /></span>
-            </a>
-          </li><li>
-            <a class="poster" href="/profiles/cbo/1222/" style="border-color:#752277;color:#752277;">
-              <h4 class="title">
-                Mining and Quarrying COOs
-              </h4>
-              <img style="background:#752277" src="/static/img/icons/cbo/cbo_1.png" /></span>
-            </a>
-          </li><li>
-            <a class="poster" href="/profiles/cbo/1233/" style="border-color:#752277;color:#752277;">
-              <h4 class="title">
-                Sales and Marketing Directors
-              </h4>
-              <img style="background:#752277" src="/static/img/icons/cbo/cbo_1.png" /></span>
-            </a>
-          </li><li>
-            <a class="poster" href="/profiles/cbo/2424/" style="border-color:#cc0000;color:#cc0000;">
-              <h4 class="title">
-                Public Defenders
-              </h4>
-              <img style="background:#cc0000" src="/static/img/icons/cbo/cbo_2.png" /></span>
-            </a>
-          </li><li>
-            <a class="poster" href="/profiles/cbo/1237/" style="border-color:#752277;color:#752277;">
-              <h4 class="title">
-                R&amp;D Directors
-              </h4>
-              <img style="background:#752277" src="/static/img/icons/cbo/cbo_1.png" /></span>
-            </a>
-          </li><li>
-            <a class="poster" href="/profiles/cbo/1227/" style="border-color:#752277;color:#752277;">
-              <h4 class="title">
-                Financial COOs
-              </h4>
-              <img style="background:#752277" src="/static/img/icons/cbo/cbo_1.png" /></span>
-            </a>
-          </li><li>
-            <a class="poster" href="/profiles/cbo/2541/" style="border-color:#cc0000;color:#cc0000;">
-              <h4 class="title">
-                Federal Revenue Inspectors
-              </h4>
-              <img style="background:#cc0000" src="/static/img/icons/cbo/cbo_2.png" /></span>
-            </a>
-          </li><li>
-            <a class="poster" href="/profiles/cbo/2429/" style="border-color:#cc0000;color:#cc0000;">
-              <h4 class="title">
-                Intelligence Agents
-              </h4>
-              <img style="background:#cc0000" src="/static/img/icons/cbo/cbo_2.png" /></span>
-            </a>
-          </li><li>
-            <a class="poster" href="/profiles/cbo/2145/" style="border-color:#752277;color:#752277;">
-              <h4 class="title">
-                Chemical Engineers
-              </h4>
-              <img style="background:#752277" src="/static/img/icons/cbo/cbo_2.png" /></span>
-            </a>
-          </li>
+        <ul class="set">
+          {% for poster in carousel.posters %}
+            <li>
+              <a class="poster" href="/profiles/{{ carousel.type }}/{{ poster.id }}/" style="background-color:{{ poster.color }};">
+                <h4 class="title">{{ poster.name() }}</h4>
+                <img src="{{ poster.icon() }}"/>
+              </a>
+            </li>
+          {% endfor %}
         </ul>
       </div>
-  </div> <!-- end profile -->
+    </div>
+
+  {% endfor %}
 
   <button>Load more <i class="fa fa-angle-double-down"></i></button>
 
@@ -348,22 +140,29 @@
 
 <script src="/static/js/utils/utils.selector.js"></script>
 <script>
-// Create Filter Selector
-dataviva.popover.create({
-  "id": "filter_popover",
-  "width": 600,
-  "height": "80%",
-  "close": true
-})
-var selector = Selector().callback(function(d){
-  window.location = "/profiles/" + selector.type() + "/" + d.id + "/";
-});
 
-d3.selectAll("a.decision.square").on("click", function(){
-  d3.select("#filter_popover").call(selector.type(d3.select(this).attr('data-type')));
-  dataviva.popover.show("#filter_popover");
-  d3.event.preventDefault();
-})
+  d3.selectAll("h4.title")
+    .style("color", function(){
+      var c = d3.select(this.parentNode).style("background-color")
+      return d3plus.color.text(c);
+    })
+
+  // Create Filter Selector
+  dataviva.popover.create({
+    "id": "filter_popover",
+    "width": 600,
+    "height": "80%",
+    "close": true
+  })
+  var selector = Selector().callback(function(d){
+    window.location = "/profiles/" + selector.type() + "/" + d.id + "/";
+  });
+
+  d3.selectAll("a.decision.square").on("click", function(){
+    d3.select("#filter_popover").call(selector.type(d3.select(this).attr('data-type')));
+    dataviva.popover.show("#filter_popover");
+    d3.event.preventDefault();
+  })
 
 </script>
 

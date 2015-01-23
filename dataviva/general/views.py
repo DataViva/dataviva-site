@@ -11,6 +11,7 @@ from dataviva import app, db, babel, __latest_year__, view_cache
 from dataviva.general.forms import AccessForm
 from dataviva.general.models import Short
 from dataviva.account.models import User
+from dataviva.attrs.models import Bra, Hs, Cbo
 
 from dataviva.utils.cached_query import cached_query, make_cache_key
 
@@ -105,10 +106,34 @@ def after_request(response):
 #@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def home():
     # return render_template("test.html")
-    
+
     # raise Exception('asfd')
     g.page_type = "home"
-    return render_template("home.html")
+
+    carousels = []
+
+    bras = ["1pa040304", "4sp090607", "5rs050101", "4rj020212", "4sp090504", "4sp140505", "4rj050000", "5pr030305", "4sp090605", "4rj040102"]
+    carousels.append({
+        "title": "Top Exporting Municipalities",
+        "type": "bra",
+        "posters": [Bra.query.get(b) for b in bras]
+    })
+
+    prods = ["052601", "021201", "052709", "041701", "178905", "010207", "042304", "021005", "178703", "229999"]
+    carousels.append({
+        "title": "Top Brazilian Exports",
+        "type": "hs",
+        "posters": [Hs.query.get(b) for b in prods]
+    })
+
+    cbos = ["2422", "1113", "1222", "1233", "2424", "1237", "1227", "2541", "2429", "2145"]
+    carousels.append({
+        "title": "Highest Paid Occupations",
+        "type": "cbo",
+        "posters": [Cbo.query.get(b) for b in cbos]
+    })
+
+    return render_template("home.html", carousels = carousels)
 
 @mod.route('close/')
 def close():
