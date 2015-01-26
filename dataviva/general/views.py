@@ -11,7 +11,7 @@ from dataviva import app, db, babel, __latest_year__, view_cache
 from dataviva.general.forms import AccessForm
 from dataviva.general.models import Short
 from dataviva.account.models import User
-from dataviva.attrs.models import Bra, Hs, Cbo
+from dataviva.attrs.models import Bra, Hs, Cbo, Cnae
 
 from dataviva.utils.cached_query import cached_query, make_cache_key
 
@@ -131,6 +131,13 @@ def home():
         "title": "Highest Paid Occupations",
         "type": "cbo",
         "posters": [Cbo.query.get(b) for b in cbos]
+    })
+    
+    cnaes = ["o84116", "i56112", "g47113", "f41204", "q86101", "h49302", "g47814", "g47440", "n81214", "n81125"]
+    carousels.append({
+        "title": "Largest Industries by Employment",
+        "type": "cnae",
+        "posters": [Cnae.query.get(c) for c in cnaes]
     })
 
     return render_template("home.html", carousels = carousels)

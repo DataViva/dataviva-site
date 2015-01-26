@@ -647,7 +647,7 @@
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
                     app.data[app.build.data_url] = {}
-                    app.data[app.build.data_url].raw = dataviva.cleanData(app, d)
+                    app.data[app.build.data_url].raw = dataviva.cleanData(d, app.build.dataset, app.build.output)
                     if (d.eci) app.ecis[app.build.data_url] = d.eci
                     callback(error,d)
                   })
@@ -661,7 +661,7 @@
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
                     app.data[app.build.import_url] = {}
-                    app.data[app.build.import_url].raw = dataviva.cleanData(app, d)
+                    app.data[app.build.import_url].raw = dataviva.cleanData(d, app.build.dataset, app.build.output)
                     callback(error,d)
                   })
               },"/"+app.build.import_url)
@@ -768,7 +768,7 @@
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
                     app.data[app.build.imp_url] = {}
-                    app.data[app.build.imp_url].raw = dataviva.cleanData(app, d)
+                    app.data[app.build.imp_url].raw = dataviva.cleanData(d, app.build.dataset, app.build.output)
                     callback(error,d)
                   })
                 },"/"+app.build.imp_url)
@@ -784,7 +784,7 @@
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
                     app.data[app.build.else_url] = {}
-                    app.data[app.build.else_url].raw = dataviva.cleanData(app, d)
+                    app.data[app.build.else_url].raw = dataviva.cleanData(d, app.build.dataset, app.build.output)
                     callback(error,d)
                   })
                 },"/"+app.build.else_url)

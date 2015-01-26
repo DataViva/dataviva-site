@@ -32,7 +32,7 @@ def per_request_callbacks(response):
 
 @mod.route('/')
 @mod.route('/<year>/<type>/<depth>/')
-def index(year=2012,type="bra",depth=2):
+def index(year=2012,type="bra",depth=3):
 
     if type == "bra":
         years_rais = eval(UI.query.get(1).values)

@@ -720,7 +720,7 @@ dataviva.icon = function(id,type,color) {
 
 }
 
-dataviva.cleanData = function(app, data) {
+dataviva.cleanData = function(data, dataset, output) {
 
   var zerofills = {
     "secex": ["val_usd"],
@@ -729,7 +729,7 @@ dataviva.cleanData = function(app, data) {
     "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"]
   }
 
-  var depths = dataviva.depths(app.build.output)
+  var depths = dataviva.depths(output)
 
   var extras = {}
 
@@ -758,11 +758,11 @@ dataviva.cleanData = function(app, data) {
       return obj
     }, {})
 
-    if (app.build.output !== "all") {
-      var id = temp[app.build.output+"_id"];
+    if (output !== "all") {
+      var id = temp[output+"_id"];
 
       depths.forEach(function(depth){
-        temp[app.build.output+"_"+depth] = id.slice(0,depth);
+        temp[output+"_"+depth] = id.slice(0,depth);
       })
 
       if (id in extras) {
@@ -770,7 +770,7 @@ dataviva.cleanData = function(app, data) {
       }
     }
 
-    zerofills[app.build.dataset].forEach(function(z){
+    zerofills[dataset].forEach(function(z){
       if (!(z in temp)) {
         temp[z] = 0
       }

@@ -23,11 +23,8 @@
     margin: 0 0 0 5px;
     vertical-align: bottom;
   }
-  .profile {
-    margin: 0 0 40px 0;
-  }
   .search {
-    margin: 40px 50px;
+    margin: 50px 50px 80px;
     position: relative;
     text-align: center;
   }
@@ -45,6 +42,10 @@
     -webkit-transition: border-color .1s, color .1s, opacity .1s;
     transition: border-color .1s, color .1s, opacity .1s;
     width: 826px;
+  }
+  .profile {
+    margin: 0px 30px 10px;
+    width: 800px;
   }
   .profile .scroller {
     overflow: hidden;
@@ -106,33 +107,37 @@
     <a href="#" class="decision square small icon wld" data-type="wld">Trade Partners</a>
     <a href="#" class="decision square small icon cnae" data-type="cnae">Industries</a>
     <a href="#" class="decision square small icon cbo" data-type="cbo">Occupations</a>
-    <a href="#" class="decision square small icon university" data-type="university">Universities</a>
-    <a href="#" class="decision square small icon course_hedu" data-type="course_hedu">Higher Education Courses</a>
+    <a href="#" class="decision square small icon university" data-type="university">
+      <div class="new">{% trans %}New{% endtrans %}</div>Universities</a>
+    <a href="#" class="decision square small icon course_hedu" data-type="course_hedu">
+      <div class="new">{% trans %}New{% endtrans %}</div>Higher Education Courses</a>
 
   </div>
 
-  {% for carousel in carousels %}
+  <div class="lightbox">
 
-    <div class="profile">
+    {% for carousel in carousels %}
 
-      <div class="darkbox"><h1>{{ carousel.title }}</h1></div>
-      <div class="scroller">
-        <ul class="set">
-          {% for poster in carousel.posters %}
-            <li>
-              <a class="poster" href="/profiles/{{ carousel.type }}/{{ poster.id }}/" style="background-color:{{ poster.color }};">
-                <h4 class="title">{{ poster.name() }}</h4>
-                <img src="{{ poster.icon() }}"/>
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
+      <div class="profile">
+
+        <div class="darkbox"><h2>{{ carousel.title }}</h2></div>
+        <div class="scroller">
+          <ul class="set">
+            {% for poster in carousel.posters %}
+              <li>
+                <a class="poster" href="/profiles/{{ carousel.type }}/{{ poster.id }}/" style="background-color:{{ poster.color }};">
+                  <h4 class="title">{{ poster.name() }}</h4>
+                  <img src="{{ poster.icon() }}"/>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
-    </div>
 
-  {% endfor %}
+    {% endfor %}
 
-  <button>Load more <i class="fa fa-angle-double-down"></i></button>
+  </div>
 
 {% endblock %}
 
