@@ -58,17 +58,22 @@ function infinite_scroll(selection){
         refresh = false;
 
         // conver url to Location object
-        a = url
+        var a = url;
         // decide whether to use '?' or '&'
-        if(a.indexOf("?") >= 0){
-          a += "&limit="+limit+"&offset="+offset
+        if (a.indexOf("?") >= 0) {
+          a += "&limit="+limit+"&offset="+offset;
         }
         else {
-          a += "?limit="+limit+"&offset="+offset
+          a += "?limit="+limit+"&offset="+offset;
         }
 
         if (order) {
-          a += "&limit="+limit+"&order="+order
+          if (a.indexOf("?") >= 0) {
+            a += "&order="+order;
+          }
+          else {
+            a += "&order="+order;
+          }
         }
 
         // Here we set the header X-Requested-With to XMLHttpRequest so the
