@@ -23,11 +23,8 @@
     margin: 0 0 0 5px;
     vertical-align: bottom;
   }
-  .profile {
-    margin: 0 0 40px 0;
-  }
   .search {
-    margin: 40px 50px;
+    margin: 50px 50px 80px;
     position: relative;
     text-align: center;
   }
@@ -45,6 +42,10 @@
     -webkit-transition: border-color .1s, color .1s, opacity .1s;
     transition: border-color .1s, color .1s, opacity .1s;
     width: 826px;
+  }
+  .profile {
+    margin: 0px 30px 10px;
+    width: 800px;
   }
   .profile .scroller {
     overflow: hidden;
@@ -113,28 +114,30 @@
 
   </div>
 
-  {% for carousel in carousels %}
+  <div class="lightbox">
 
-    <div class="profile">
+    {% for carousel in carousels %}
 
-      <div class="darkbox"><h1>{{ carousel.title }}</h1></div>
-      <div class="scroller">
-        <ul class="set">
-          {% for poster in carousel.posters %}
-            <li>
-              <a class="poster" href="/profiles/{{ carousel.type }}/{{ poster.id }}/" style="background-color:{{ poster.color }};">
-                <h4 class="title">{{ poster.name() }}</h4>
-                <img src="{{ poster.icon() }}"/>
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
+      <div class="profile">
+
+        <div class="darkbox"><h2>{{ carousel.title }}</h2></div>
+        <div class="scroller">
+          <ul class="set">
+            {% for poster in carousel.posters %}
+              <li>
+                <a class="poster" href="/profiles/{{ carousel.type }}/{{ poster.id }}/" style="background-color:{{ poster.color }};">
+                  <h4 class="title">{{ poster.name() }}</h4>
+                  <img src="{{ poster.icon() }}"/>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
-    </div>
 
-  {% endfor %}
+    {% endfor %}
 
-  <button>Load more <i class="fa fa-angle-double-down"></i></button>
+  </div>
 
 {% endblock %}
 
