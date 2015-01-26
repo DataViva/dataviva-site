@@ -292,7 +292,9 @@ def make_query(data_table, url_args, lang, **kwargs):
 
             if order_table == None:
                 order_table = data_table
-            if o in query:
+
+            all_col_names = data_table.__table__.columns.keys() + order_table.__table__.columns.keys()
+            if o in all_col_names:
                 if direction == "asc":
                     query = query.order_by(asc(getattr(order_table,o)))
                 elif direction == "desc":
