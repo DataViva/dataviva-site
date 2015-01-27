@@ -36,7 +36,7 @@ def select_best_table(kwargs, allowed_when_not, possible_tables):
     for column_name, value in kwargs.items():
         if str(value).startswith(SHOW) or SHOW2 in str(value):
             show = column_name
-        elif str(value) != ALL:
+        if str(value) != ALL:
             required_columns.append(column_name)
     # -- step 2, given the show + kwargs determine best table
     table_choices = possible_tables[show]

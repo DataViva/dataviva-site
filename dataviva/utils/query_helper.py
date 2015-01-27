@@ -90,7 +90,10 @@ def build_filters_and_groups(table, kwargs, exclude=None):
 
     if exclude:
         if type(exclude) in [str, unicode]:
-            filters.append(show_column != exclude)
+            if "%" in exclude:
+                filters.append(~show_column.like(exclude))
+            else:
+                filters.append(show_column != exclude)
         else:
             filters.append(~show_column.in_(exclude))
     return filters, groups, show_column
