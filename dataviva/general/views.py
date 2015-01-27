@@ -11,7 +11,8 @@ from dataviva import app, db, babel, __latest_year__, view_cache
 from dataviva.general.forms import AccessForm
 from dataviva.general.models import Short
 from dataviva.account.models import User
-from dataviva.attrs.models import Bra, Hs, Cbo, Cnae
+from dataviva.attrs.models import Bra, Hs, Cbo, Cnae, Course_hedu
+from dataviva.stats.helper import stats_list
 
 from dataviva.utils.cached_query import cached_query, make_cache_key
 
@@ -112,34 +113,54 @@ def home():
 
     carousels = []
 
-    bras = ["1pa040304", "4sp090607", "5rs050101", "4rj020212", "4sp090504", "4sp140505", "4rj050000", "5pr030305", "4sp090605", "4rj040102"]
-    carousels.append({
-        "title": "Top Exporting Municipalities",
-        "type": "bra",
-        "posters": [Bra.query.get(b) for b in bras]
-    })
+    # bras = ["1pa040304", "4sp090607", "5rs050101", "4rj020212", "4sp090504", "4sp140505", "4rj050000", "5pr030305", "4sp090605", "4rj040102"]
+    # carousels.append({
+    #     "title": "Top Exporting Municipalities",
+    #     "type": "bra",
+    #     "posters": [Bra.query.get(b) for b in bras]
+    # })
 
-    prods = ["052601", "021201", "052709", "041701", "178905", "010207", "042304", "021005", "178703", "229999"]
-    carousels.append({
-        "title": "Top Brazilian Exports",
-        "type": "hs",
-        "posters": [Hs.query.get(b) for b in prods]
-    })
-
-    cbos = ["2422", "1113", "1222", "1233", "2424", "1237", "1227", "2541", "2429", "2145"]
-    carousels.append({
-        "title": "Highest Paid Occupations",
-        "type": "cbo",
-        "posters": [Cbo.query.get(b) for b in cbos]
-    })
+    # prods = ["052601", "021201", "052709", "041701", "178905", "010207", "042304", "021005", "178703", "229999"]
+    # carousels.append({
+    #     "title": "Top Brazilian Exports",
+    #     "type": "hs",
+    #     "posters": [Hs.query.get(b) for b in prods]
+    # })
     
-    cnaes = ["o84116", "i56112", "g47113", "f41204", "q86101", "h49302", "g47814", "g47440", "n81214", "n81125"]
+    cbos = stats_list("wage_avg", "cbo_id", limit=10)
+    carousels.append({
+        "title": "Occupations by Highest Average Wage",
+        "type": "cbo",
+        "posters": [Cbo.query.get(c) for c in cbos]
+    })
+
+    cnaes = stats_list("num_emp", "cnae_id", limit=10)
     carousels.append({
         "title": "Largest Industries by Employment",
         "type": "cnae",
         "posters": [Cnae.query.get(c) for c in cnaes]
     })
 
+    cnaes = stats_list("num_emp_growth", "cnae_id", limit=10)
+    carousels.append({
+        "title": "Industries by Employment Growth",
+        "type": "cnae",
+        "posters": [Cnae.query.get(c) for c in cnaes]
+    })
+
+    courses = stats_list("enrolled", "course_hedu_id", limit=10)
+    carousels.append({
+        "title": "Most Popular Courses by Enrollment",
+        "type": "course_sc",
+        "posters": [Course_hedu.query.get(c) for c in courses]
+    })
+
+    bras = stats_list("enrolled", "bra_id", limit=10)
+    carousels.append({
+        "title": "Cities by Largest University Enrollment",
+        "type": "bra",
+        "posters": [Bra.query.get(u) for u in bras]
+    })
     return render_template("home.html", carousels = carousels)
 
 @mod.route('close/')
