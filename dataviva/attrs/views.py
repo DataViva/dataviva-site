@@ -4,9 +4,11 @@ from sqlalchemy import func, distinct, asc, desc, and_, or_
 from flask import Blueprint, request, jsonify, abort, g, render_template, make_response, redirect, url_for, flash
 
 from dataviva import db, __latest_year__
-from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb
+from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University
 from dataviva.secex.models import Yp, Yw
 from dataviva.rais.models import Yi, Yo
+from dataviva.hedu.models import Yu, Yc_hedu
+from dataviva.sc.models import Yc_sc
 from dataviva.ask.models import Question
 
 from dataviva.utils.gzip_data import gzip_data
@@ -49,7 +51,7 @@ def fix_name(attr, lang):
 @mod.route('/<attr>/<Attr_id>/')
 def attrs(attr="bra",Attr_id=None):
 
-    Attr = globals()[attr.title()]
+    Attr = globals()[attr.capitalize()]
     Attr_weight_mergeid = "{0}_id".format(attr)
 
     if attr == "bra":
@@ -67,6 +69,15 @@ def attrs(attr="bra",Attr_id=None):
     elif attr == "wld":
         Attr_weight_tbl = Yw
         Attr_weight_col = "val_usd"
+    elif attr == "course_hedu":
+        Attr_weight_tbl = Yc_hedu
+        Attr_weight_col = "enrolled"
+    elif attr == "university":
+        Attr_weight_tbl = Yu
+        Attr_weight_col = "enrolled"
+    elif attr == "course_sc":
+        Attr_weight_tbl = Yc_sc
+        Attr_weight_col = "enrolled"
 
     depths = {}
     depths["bra"] = [1,3,5,8,9]
@@ -74,6 +85,9 @@ def attrs(attr="bra",Attr_id=None):
     depths["cbo"] = [1,2,4]
     depths["hs"] = [2,4,6]
     depths["wld"] = [2,5]
+    depths["course_hedu"] = [2,6]
+    depths["university"] = [5]
+    depths["course_sc"] = [2,5]
 
     depth = request.args.get('depth', None)
     order = request.args.get('order', None)
@@ -88,6 +102,10 @@ def attrs(attr="bra",Attr_id=None):
     dataset = "rais"
     if Attr == Cbo or Attr == Hs:
         dataset = "secex"
+    elif Attr == Course_hedu or Attr == University:
+        dataset = "hedu"
+    elif Attr == Course_sc:
+        dataset = "sc"
     latest_year = __latest_year__[dataset]
 
     cache_id = request.path + lang
