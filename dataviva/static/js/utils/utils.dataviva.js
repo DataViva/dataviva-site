@@ -729,6 +729,8 @@ dataviva.displayID = function(id,type) {
 
 dataviva.icon = function(id,type,color) {
 
+  if (type === "university" && id !== "all") return false;
+
   if (type !== "wld" && id !== "all"){
     var depth = dataviva.depths(type)[0],
         id = id.slice(0,depth);

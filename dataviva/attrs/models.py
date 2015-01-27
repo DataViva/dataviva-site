@@ -417,7 +417,7 @@ class University(db.Model, AutoSerialize, Stats):
         return title_case(getattr(self,"name_"+lang))
 
     def icon(self):
-        return "/static/img/icons/university/university_%s.png" % (self.id[:2])
+        return None
 
     def __repr__(self):
         return '<University %r>' % (self.name_en)

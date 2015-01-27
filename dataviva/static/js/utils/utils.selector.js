@@ -455,7 +455,9 @@ function Selector() {
 
           var header_color = x.color
 
-          icon.style("display", "inline-block").style("background-image","url('"+x.icon+"')")
+          icon.style("display", "inline-block")
+
+          if (x.icon) icon.style("background-image","url('"+x.icon+"')")
 
           if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && x.id.length != 5)) {
             icon.style("background-color",x.color)
@@ -592,7 +594,7 @@ function Selector() {
               //   }
               // })
 
-            if (v.icon != selected.icon || search_term != "") {
+            if (v.icon && (v.icon != selected.icon || search_term != "")) {
               var search_icon = item.append("div")
                 .attr("class","search_icon")
                 .style("background-image","url("+v.icon+")")
