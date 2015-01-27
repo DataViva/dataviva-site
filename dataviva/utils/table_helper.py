@@ -1,6 +1,7 @@
 ALL = 'all'
 SHOW = 'show'
 SHOW2 = '.show.'
+LEN = '_len'
 
 def compute_allowed(table_dict):
     master_list = set([])
