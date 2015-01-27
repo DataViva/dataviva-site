@@ -43,6 +43,38 @@ def before_request():
         "hat": "glasses"
     }
 
+def filler(dataset, filter1, filter2):
+
+    '''Since the "builds" are held in the database with placeholders for
+    attributes i.e. <cbo>, <hs>, <cnae> we need to convert the IDs given
+    in the URL to these placeholders. i.e.
+         - a0111    = <cnae>
+         - 010101   = <hs>
+         - all      = all
+    '''
+
+    filler1 = filter1
+    if filler1 != "all":
+        if dataset == "rais":
+            filler1 = "<cnae>"
+        elif dataset.startswith("secex"):
+            filler1 = "<hs>"
+        elif dataset == "hedu":
+            filler1 = "<university>"
+
+    filler2 = filter2
+    if filler2 != "all":
+        if dataset == "rais":
+            filler2 = "<cbo>"
+        elif dataset.startswith("secex"):
+            filler2 = "<wld>"
+        elif dataset == "hedu":
+            filler2 = "<course_hedu>"
+        elif dataset == "sc":
+            filler2 = "<course_sc>"
+
+    return filler1, filler2
+
 @mod.route("/embed/")
 @mod.route("/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
 #@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
@@ -59,24 +91,8 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
             ret.headers['Content-Encoding'] = 'gzip'
             ret.headers['Content-Length'] = str(len(ret.data))
             return ret
-    '''Since the "builds" are held in the database with placeholders for
-    attributes i.e. <cbo>, <hs>, <cnae> we need to convert the IDs given
-    in the URL to these placeholders. i.e.
-         - a0111    = <cnae>
-         - 010101   = <hs>
-         - all      = all
-    '''
-    build_filter1 = filter1
-    if dataset == "rais" and build_filter1 != "all":
-        build_filter1 = "<cnae>"
-    if dataset.startswith("secex") and build_filter1 != "all":
-        build_filter1 = "<hs>"
 
-    build_filter2 = filter2
-    if dataset == "rais" and build_filter2 != "all":
-        build_filter2 = "<cbo>"
-    if dataset.startswith("secex") and build_filter2 != "all":
-        build_filter2 = "<wld>"
+    build_filter1, build_filter2 = filler(dataset, filter1, filter2)
 
     '''This is an instance of the Build class for the selected app,
     determined by the combination of app_type, dataset, filters and output.
@@ -92,9 +108,9 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     filler_bra = bra_id
     filler1 = filter1
     filler2 = filter2
-    if output == "cnae" or output == "hs":
+    if output == "cnae" or output == "hs" or output == "university":
         filler1 = "filler"
-    elif output == "cbo" or output == "wld":
+    elif output == "cbo" or output == "wld" or output == "course_hedu" or "course_sc":
         filler2 = "filler"
     elif output == "bra":
         filler_bra = "filler"
@@ -200,25 +216,7 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
 
     recommended = {}
 
-    '''Since the "builds" are held in the database with placeholders for
-    attributes i.e. <cbo>, <hs>, <cnae> we need to convert the IDs given
-    in the URL to these placeholders. i.e.
-         - a0111    = <cnae>
-         - 010101   = <hs>
-         - all      = all
-    '''
-    build_filter1 = filter1
-    item_id = bra_id
-    if dataset == "rais" and build_filter1 != "all":
-        build_filter1 = "<cnae>"
-    if dataset.startswith("secex") and build_filter1 != "all":
-        build_filter1 = "<hs>"
-
-    build_filter2 = filter2
-    if dataset == "rais" and build_filter2 != "all":
-        build_filter2 = "<cbo>"
-    if dataset.startswith("secex") and build_filter2 != "all":
-        build_filter2 = "<wld>"
+    build_filter1, build_filter2 = filler(dataset, filter1, filter2)
 
     recommended["crosswalk"] = crosswalk_recs(dataset, build_filter1, filter1, build_filter2, filter2, bra_id)
 

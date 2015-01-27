@@ -3,7 +3,7 @@ from flask import g
 from dataviva import db, __latest_year__
 from dataviva.utils.auto_serialize import AutoSerialize
 from dataviva.utils.title_case import title_case
-from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld
+from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_hedu, Course_sc
 
 import ast, re
 
@@ -91,46 +91,57 @@ class Build(db.Model, AutoSerialize):
                 self.bra.append(Bra.query.get(b))
                 self.bra[i].distance = dist
                 self.bra[i].neighbor_ids = [b.bra_id_dest for b in self.bra[i].get_neighbors(dist)]
-                # raise Exception([b.id for b in self.bra[i].pr.all()])
                 self.bra[i].pr_ids = [b.id for b in self.bra[i].pr.all()]
 
     def set_filter1(self, filter):
         if self.filter1 != "all":
+
             if self.dataset == "rais":
-                self.cnae = []
-                for i, f in enumerate(filter.split("_")):
-                    if Cnae.query.get(f):
-                        self.cnae.append(Cnae.query.get(f))
-                    else:
-                        self.cnae.append(Cnae.query.get('r90019'))
-                self.filter1 = "_".join([i.id for i in set(self.cnae)])
+                name = "cnae"
+                default = "r90019"
             elif self.dataset.startswith("secex"):
-                self.hs = []
-                for i, f in enumerate(filter.split("_")):
-                    if Hs.query.get(f):
-                        self.hs.append(Hs.query.get(f))
-                    else:
-                        self.hs.append(Hs.query.get('178703'))
-                self.filter1 = "_".join([h.id for h in set(self.hs)])
+                name = "hs"
+                default = "178703"
+            elif self.dataset == "hedu":
+                name = "university"
+                default = "00575"
+
+            items = []
+            attr = globals()[name.capitalize()]
+
+            for i, f in enumerate(filter.split("_")):
+                if attr.query.get(f):
+                    items.append(attr.query.get(f))
+                else:
+                    items.append(attr.query.get(default))
+
+            self.filter1 = "_".join([c.id for c in set(items)])
+            setattr(self, name, items)
 
     def set_filter2(self, filter):
         if self.filter2 != "all":
+
             if self.dataset == "rais":
-                self.cbo = []
-                for i, f in enumerate(filter.split("_")):
-                    if Cbo.query.get(f):
-                        self.cbo.append(Cbo.query.get(f))
-                    else:
-                        self.cbo.append(Cbo.query.get('2211'))
-                self.filter2 = "_".join([c.id for c in set(self.cbo)])
+                name = "cbo"
+                default = "2211"
             elif self.dataset.startswith("secex"):
-                self.wld = []
-                for i, f in enumerate(filter.split("_")):
-                    if Wld.query.get(f):
-                        self.wld.append(Wld.query.get(f))
-                    else:
-                        self.wld.append(Wld.query.get('aschn'))
-                self.filter2 = "_".join([w.id for w in set(self.wld)])
+                name = "wld"
+                default = "aschn"
+            elif self.dataset == "hedu":
+                name = "course_hedu"
+                default = "345A01"
+
+            items = []
+            attr = globals()[name.capitalize()]
+
+            for i, f in enumerate(filter.split("_")):
+                if attr.query.get(f):
+                    items.append(attr.query.get(f))
+                else:
+                    items.append(attr.query.get(default))
+
+            self.filter2 = "_".join([c.id for c in set(items)])
+            setattr(self, name, items)
 
     '''Returns the URL for the specific build.'''
     def url(self, **kwargs):
@@ -178,13 +189,17 @@ class Build(db.Model, AutoSerialize):
         if filter1 == "all" or self.app.type == "rings":
             if self.output == "cnae" or self.output == "hs":
                 filter1 = "show.6"
+            elif self.output == "university":
+                filter1 = "show.5"
 
         filter2 = self.filter2
         if filter2 == "all" or self.app.type == "rings":
             if self.output == "cbo":
                 filter2 = "show.4"
-            elif self.output == "wld":
+            elif self.output == "wld" or self.output == "course_sc":
                 filter2 = "show.5"
+            elif self.output == "course_hedu":
+                filter2 = "show.6"
 
         if self.output == "all":
             if bra != "all":

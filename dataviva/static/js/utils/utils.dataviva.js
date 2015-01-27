@@ -285,6 +285,12 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "val_usd": {"en": "Trade Value", "pt": "Valor do Com\u00e9rcio"},
       "total_val_usd": {"en": "Total Exports", "pt": "Total de Exporta\u00e7\u00f5es"},
 
+      // HEDU Labels
+      "hedu": {"en": "Higher Education", "pt": "Ensino Superior"},
+
+      // SC Labels
+      "sc": {"en": "School Census", "pt": "Censo Escolar"},
+
       // Key Labels
       "brazil": {"en": "Brazil", "pt": "Brasil"},
       "bra_id": {"en": "BRA ID", "pt": "ID BRA"},
@@ -745,7 +751,9 @@ dataviva.cleanData = function(data, dataset, output) {
     "secex": ["val_usd"],
     "secex_export": ["val_usd"],
     "secex_import": ["val_usd"],
-    "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"]
+    "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"],
+    "hedu": ["enrolled"],
+    "sc": ["enrolled"]
   }
 
   var depths = dataviva.depths(output)
