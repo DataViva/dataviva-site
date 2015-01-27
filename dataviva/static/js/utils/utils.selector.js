@@ -854,6 +854,9 @@ function Selector() {
             "wld": "val_usd",
             "cbo": "num_emp",
             "cnae": "num_emp",
+            "course_hedu": "enrolled",
+            "university": "enrolled",
+            "course_sc": "enrolled",
           },
           value = sort_types[type] ? sort_types[type] : null,
           sorts = ["name"]
@@ -931,7 +934,12 @@ function Selector() {
   util.type = function(value) {
     if (!arguments.length) return name;
     name = value
-    type = value.split("_")[0]
+    if (value.indexOf("_id") > 0) {
+      type = value.slice(0,value.indexOf("_id"))
+    }
+    else {
+      type = value
+    }
     return util;
   }
 

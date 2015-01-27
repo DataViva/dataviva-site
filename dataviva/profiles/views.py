@@ -48,6 +48,10 @@ def index(category = None, id = None):
         article = gettext(u"a location")
     elif category == "wld":
         article = gettext(u"a country")
+    elif category == "university":
+        article = gettext(u"a university")
+    elif category == "course_hedu":
+        article = gettext(u"a course")
 
     if category:
         page = "general/selector.html"

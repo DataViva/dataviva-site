@@ -192,6 +192,22 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "hs_8_plural": {"en": "Sub-Positions", "pt": "Sub-Posi\u00e7\u00f5es"},
       "wld_2_plural": {"en": "Continents", "pt": "Continentes"},
       "wld_5_plural": {"en": "Countries", "pt": "Pa\u00edses"},
+      "course_hedu": {"en": "Course", "pt": "Curso"},
+      "course_hedu_2": {"en": "Field", "pt": "Dom\u00ednio"},
+      "course_hedu_6": {"en": "Course", "pt": "Curso"},
+      "course_hedu_plural": {"en": "Courses", "pt": "Cursos"},
+      "course_hedu_2_plural": {"en": "Fields", "pt": "Dom\u00ednios"},
+      "course_hedu_6_plural": {"en": "Courses", "pt": "Cursos"},
+      "course_sc": {"en": "Course", "pt": "Curso"},
+      "course_sc_2": {"en": "Field", "pt": "Dom\u00ednio"},
+      "course_sc_6": {"en": "Course", "pt": "Curso"},
+      "course_sc_plural": {"en": "Courses", "pt": "Cursos"},
+      "course_sc_2_plural": {"en": "Fields", "pt": "Dom\u00ednios"},
+      "course_sc_6_plural": {"en": "Courses", "pt": "Cursos"},
+      "university": {"en": "University", "pt": "Universidade"},
+      "university_5": {"en": "University", "pt": "Universidade"},
+      "university_plural": {"en": "Universities", "pt": "Universidades"},
+      "university_5_plural": {"en": "Universities", "pt": "Universidades"},
 
       // Calculation Labels
       "eci": {"en": "Economic Complexity", "pt": "Complexidade Econ\u00f4mica"},
@@ -288,6 +304,9 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "wld_id": {"en": "WLD ID", "pt": "ID WLD"},
       "id_mdic": {"en": "MDIC ID", "pt": "ID MDIC"},
       "rank": {"en": " ", "pt": " "},
+      "university_id": {"en": "ID", "pt": "ID"},
+      "course_hedu_id": {"en": "ID", "pt": "ID"},
+      "course_sc_id": {"en": "ID", "pt": "ID"},
 
       // Filter Titles
       "bra": {"en": "Location", "pt": "Localidade"},
@@ -704,7 +723,7 @@ dataviva.displayID = function(id,type) {
 
 dataviva.icon = function(id,type,color) {
 
-  if (["cnae","cbo","hs","bra"].indexOf(type) >= 0 && id != "all"){
+  if (type !== "wld" && id !== "all"){
     var depth = dataviva.depths(type)[0],
         id = id.slice(0,depth);
   }
@@ -790,9 +809,12 @@ dataviva.depths = function(type,flatten) {
   else if (type == "hs") var array = [2,6];
   else if (type == "bra") var array = [3,5,9];
   else if (type == "wld") var array = [2,5];
+  else if (type == "course_hedu") var array = [2,6];
+  else if (type == "university") var array = [5];
+  else if (type == "course_sc") var array = [2,5];
   else var array = [0];
 
-  if (flatten && array.length > 1) {
+  if (flatten && array.length > 2) {
     return [array[0],array[array.length-1]];
   }
   else {
