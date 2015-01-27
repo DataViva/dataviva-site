@@ -38,14 +38,14 @@ def location_values(ret,cat):
             ret["eci"][yb.year] = yb.eci
     return ret
 
-''' Returns modified query and return variable for data calls '''       
+''' Returns modified query and return variable for data calls '''
 def parse_filter(kwargs,id_type,query,data_table,ret):
 
     from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld
 
     query = query.group_by(getattr(data_table, id_type))
     cat = id_type.split("_")[0]
-    table = locals()[cat.title()]
+    table = locals()[cat.capitalize()]
     ids = kwargs[id_type].split("_")
     id_list = []
     depth = None

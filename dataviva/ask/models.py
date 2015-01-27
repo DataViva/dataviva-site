@@ -43,12 +43,12 @@ class Question(db.Model, AutoSerialize):
     type_id = db.Column(db.Integer, db.ForeignKey('ask_type.id'), default = 1)
     status_notes = db.Column(db.Text())
     tags = db.relationship('Tag', secondary=question_tags,
-            backref=db.backref('question', lazy='dynamic'))            
+            backref=db.backref('question', lazy='dynamic'))
     replies = db.relationship("Reply", backref = 'question', lazy = 'dynamic', order_by="Reply.parent_id")
     votes = db.relationship("Vote",
             primaryjoin= "and_(Question.id==Vote.type_id, Vote.type=={0})".format(TYPE_QUESTION),
             foreign_keys=[Vote.type_id], backref = 'question', lazy = 'dynamic')
-    
+
     @staticmethod
     def make_unique_slug(question):
         """Generates an slightly worse ASCII-only slug."""
@@ -59,19 +59,19 @@ class Question(db.Model, AutoSerialize):
             word = normalize('NFKD', word).encode('ascii', 'ignore')
             if word:
                 result.append(word)
-        slug = unicode(delim.join(result))        
+        slug = unicode(delim.join(result))
         """Check if slug is unique otherwise append the last inserted ID +1"""
         if Question.query.filter_by(slug = slug).first() is not None:
             last_q = Question.query.order_by(Question.id.desc()).first()
             slug = str(last_q.id) + delim + slug
         return slug
-    
+
     def _find_or_create_tag(self, attr_type, attr_id):
         t = Tag.query.filter_by(attr_type=attr_type, attr_id=attr_id).first()
         if not(t):
             t = Tag(attr_type=attr_type, attr_id=attr_id)
         return t
-    
+
     def str_tags(self, tag_list):
         # clear the list first
         while self.tags:
@@ -80,10 +80,10 @@ class Question(db.Model, AutoSerialize):
         for tag in tag_list:
             attr_type, attr_id = tag.split(":")
             self.tags.append(self._find_or_create_tag(attr_type, attr_id))
-    
+
     def __repr__(self):
         return '<Question %r>' % (self.question)
-    
+
     def serialize(self):
         auto_serialized = super(Question, self).serialize()
         try:
@@ -92,7 +92,7 @@ class Question(db.Model, AutoSerialize):
             auto_serialized["timestamp"] = None
         auto_serialized["user"] = self.user.serialize()
         auto_serialized["votes"] = len(self.votes.all())
-        auto_serialized["replies"] = len(self.replies.filter_by(hidden=0).all()) + len(self.replies.filter_by(hidden=1).all()) 
+        auto_serialized["replies"] = len(self.replies.filter_by(hidden=0).all()) + len(self.replies.filter_by(hidden=1).all())
         return auto_serialized
 
 class Tag(db.Model):
@@ -101,12 +101,12 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     attr_type = db.Column(db.String(20))
     attr_id = db.Column(db.String(12))
-    
+
     def __repr__(self):
         return '<%r: %r>' % (self.attr_type, self.attr_id)
-    
+
     def to_attr(self):
-        attr = getattr(attr_models, self.attr_type.title())
+        attr = getattr(attr_models, self.attr_type.capitalize())
         attr = attr.query.get(self.attr_id)
         return attr
 
@@ -157,27 +157,27 @@ class Reply(db.Model, AutoSerialize):
             primaryjoin= "and_(Reply.id==Vote.type_id, Vote.type=={0})".format(TYPE_REPLY),
             foreign_keys=[Vote.type_id], backref = 'reply', lazy = 'dynamic')
     flags = db.relationship("Flag", backref = 'reply', lazy = 'dynamic')
-    
+
     def slug(self):
         return Question.query.get(self.question_id).slug
-    
+
     def __repr__(self):
         return '<Reply %r>' % (self.id)
-        
+
     def flagged(self):
         if g.user.is_authenticated():
             flag = Flag.query.filter_by(reply_id = self.id, user_id = g.user.id).first()
             if flag:
                 return True
         return False
-        
+
     def voted(self):
         if g.user.is_authenticated():
             vote = Vote.query.filter_by(type = 1, type_id = self.id, user_id = g.user.id).first()
             if vote:
                 return True
         return False
-    
+
     def serialize(self):
         auto_serialized = super(Reply, self).serialize()
         auto_serialized["user"] = self.user.serialize()

@@ -1,6 +1,6 @@
 from dataviva import db
 from dataviva.utils.auto_serialize import AutoSerialize
-from dataviva.attrs.models import Bra
+from dataviva.attrs.models import Bra, Course_hedu, University
 
 class Hedu(db.Model, AutoSerialize):
     __abstract__ = True
@@ -17,21 +17,21 @@ class Hedu(db.Model, AutoSerialize):
     graduates_growth = db.Column(db.Float())
     enrolled_growth = db.Column(db.Float())
 
-class Yc(Hedu):
+class Yc_hedu(Hedu):
     __tablename__ = 'hedu_yc'
     year = db.Column(db.Integer(4), primary_key=True)
-    course_hedu_id = db.Column(db.String(6), primary_key=True)
+    course_hedu_id = db.Column(db.String(6), db.ForeignKey(Course_hedu.id), primary_key=True)
 
     course_hedu_id_len = db.Column(db.Integer(1))
 
     def __repr__(self):
         return '<Ybc {}.{}.{}>'.format(self.year, self.bra_id, self.course_hedu_id)
 
-class Ybc(Hedu):
+class Ybc_hedu(Hedu):
     __tablename__ = 'hedu_ybc'
     year = db.Column(db.Integer(4), primary_key=True)
     bra_id = db.Column(db.String(9), db.ForeignKey(Bra.id), primary_key=True)
-    course_hedu_id = db.Column(db.String(6), primary_key=True)
+    course_hedu_id = db.Column(db.String(6), db.ForeignKey(Course_hedu.id), primary_key=True)
 
     bra_id_len = db.Column(db.Integer(1))
     course_hedu_id_len = db.Column(db.Integer(1))
@@ -43,8 +43,8 @@ class Ybuc(Hedu):
     __tablename__ = 'hedu_ybuc'
     year = db.Column(db.Integer(4), primary_key=True)
     bra_id = db.Column(db.String(9), db.ForeignKey(Bra.id), primary_key=True)
-    university_id = db.Column(db.String(5), primary_key=True)
-    course_hedu_id = db.Column(db.String(6), primary_key=True)
+    university_id = db.Column(db.String(5), db.ForeignKey(University.id), primary_key=True)
+    course_hedu_id = db.Column(db.String(6), db.ForeignKey(Course_hedu.id), primary_key=True)
 
     enrolled_rca = db.Column(db.Float())
 
@@ -73,7 +73,7 @@ class Ybu(Hedu):
 
     year = db.Column(db.Integer(4), primary_key=True)
     bra_id = db.Column(db.String(9), db.ForeignKey(Bra.id), primary_key=True)
-    university_id = db.Column(db.String(5), primary_key=True)
+    university_id = db.Column(db.String(5), db.ForeignKey(University.id), primary_key=True)
 
     bra_id_len = db.Column(db.Integer(1))
 
@@ -85,7 +85,7 @@ class Yu(Hedu):
     __tablename__ = 'hedu_yu'
 
     year = db.Column(db.Integer(4), primary_key=True)
-    university_id = db.Column(db.String(5), primary_key=True)
+    university_id = db.Column(db.String(5), db.ForeignKey(University.id), primary_key=True)
 
     def __repr__(self):
         return '<Yu {}.{}>'.format(self.year, self.university_id)
@@ -95,8 +95,8 @@ class Yuc(Hedu):
     __tablename__ = 'hedu_yuc'
 
     year = db.Column(db.Integer(4), primary_key=True)
-    university_id = db.Column(db.String(5), primary_key=True)
-    course_hedu_id = db.Column(db.Integer(6), primary_key=True)
+    university_id = db.Column(db.String(5), db.ForeignKey(University.id), primary_key=True)
+    course_hedu_id = db.Column(db.Integer(6), db.ForeignKey(Course_hedu.id), primary_key=True)
     enrolled_rca = db.Column(db.Float())
 
     course_hedu_id_len = db.Column(db.Integer(1))

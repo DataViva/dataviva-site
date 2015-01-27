@@ -67,7 +67,7 @@ def profiles(category = None, id = None):
         item = Wld.query.get_or_404("sabra")
         category_type = "all"
     else:
-        Attr = globals()[category.title()]()
+        Attr = globals()[category.capitalize()]()
         item = Attr.query.get_or_404(id)
         category_type = "<{0}.{1}>".format(category,len(id))
 

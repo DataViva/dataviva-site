@@ -90,7 +90,7 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
     filters_json = {}
 
     def parse_filter(list,type):
-        table = globals()[type.title()]
+        table = globals()[type.capitalize()]
         ids = list.split("_")
         filters_json[type] = {}
         for id in ids:

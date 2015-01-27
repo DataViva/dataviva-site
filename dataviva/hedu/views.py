@@ -14,7 +14,7 @@ mod = Blueprint('hedu', __name__, url_prefix='/hedu')
 @gzipped
 # @cache_api("hedu")
 def hedu_api(**kwargs):
-    tables = [hedu.Yb_hedu, hedu.Yc, hedu.Yu, hedu.Ybc, hedu.Ybu, hedu.Yuc, hedu.Ybuc]
+    tables = [hedu.Yb_hedu, hedu.Yc_hedu, hedu.Yu, hedu.Ybc_hedu, hedu.Ybu, hedu.Yuc, hedu.Ybuc]
 
     idonly = request.args.get('id', False) is not False
     limit = int(request.args.get('limit', 0) or kwargs.pop('limit', 0))

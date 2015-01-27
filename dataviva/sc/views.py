@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from dataviva import db
-from dataviva.sc.models import Yb, Yc, Ys, Ybs, Ybc, Ybsc, Ysc
+from dataviva.sc.models import Yb_sc, Yc_sc, Ys, Ybs, Ybc_sc, Ybsc, Ysc
 from dataviva.utils.gzip_data import gzipped
 from dataviva.utils import make_query
 from dataviva.utils.decorators import cache_api
@@ -12,8 +12,8 @@ mod = Blueprint('sc', __name__, url_prefix='/sc')
 @gzipped
 # @cache_api("sc")
 def sc_api(**kwargs):
-    tables = [Yc, Yb, Ys, Ybc, Ybs, Ysc, Ybsc]
-    
+    tables = [Yc_sc, Yb_sc, Ys, Ybc_sc, Ybs, Ysc, Ybsc]
+
     idonly = request.args.get('id', False) is not False
     limit = int(request.args.get('limit', 0) or kwargs.pop('limit', 0))
     order = request.args.get('order', None) or kwargs.pop('order', None)
