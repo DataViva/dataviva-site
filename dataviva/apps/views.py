@@ -258,7 +258,7 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
                 if filter1 != "filler":
                     b.set_filter1(filter1)
                 # Municipalities are not allowed to have other municipality within it - Github #141
-                if b.output == "bra" and len(item_id) > 2:
+                if b.output == "bra" and len(bra_id) > 2:
                     continue
                 recommended['filter1'].append(b.serialize())
 
@@ -535,11 +535,11 @@ def shorten_url():
 def crosswalk_recs(dataset, build_filter1, raw_filter1, build_filter2, raw_filter2, bra_id):
     crosswalk = {"filter1" : [], "filter2": []}
 
-    data = {"<cnae>": (Crosswalk_pi.cnae_id, Crosswalk_pi), "<hs>": (Crosswalk_pi.hs_id, Crosswalk_pi)}
-
-    if build_filter1 in data and build_filter1 != "all":
-        col, table = data[build_filter1]
-
+    data1 = {"<cnae>": Crosswalk_pi.cnae_id, "<hs>": Crosswalk_pi.hs_id}
+    data2 = {"<cbo>": Crosswalk_oc.cbo_id, "<course_hedu>": Crosswalk_oc.course_hedu_id}
+    if build_filter1 in data1 and build_filter1 != "all":
+        col = data1[build_filter1]
+        table = Crosswalk_pi
         results = table.query.filter(col == raw_filter1).all()
         ids = [row.get_id(dataset) for row in results]
         if ids:
@@ -558,5 +558,24 @@ def crosswalk_recs(dataset, build_filter1, raw_filter1, build_filter2, raw_filte
                 b.set_filter1(raw_target_filter)
 
             crosswalk["filter1"] = [b.serialize() for b in builds]
+    elif build_filter2 in data2 and build_filter2 != "all":
+        col = data2[build_filter2]
+        table = Crosswalk_oc
+        results = table.query.filter(col == raw_filter2).all()
+        ids = [row.get_id(dataset) for row in results]
+        if ids:
+            # Build filter2 must either be <cbo>, <course_hedu>
+            swap_map = { "hedu" : { "<course_hedu>" : ("rais", "<cbo>")},
+                         "rais" : { "<cbo>" : ("hedu", "<course_hedu>") }}
+            dataset2, target_filter = swap_map[dataset][build_filter2]
+            raw_target_filter = "_".join(ids)
+            builds = Build.query.filter_by(dataset=dataset2, filter1="all", filter2=target_filter).all()
+
+            for b in builds:
+                if bra_id != "filler":
+                    b.set_bra(bra_id)
+                b.set_filter2(raw_target_filter)
+
+            crosswalk["filter2"] = [b.serialize() for b in builds]
 
     return crosswalk

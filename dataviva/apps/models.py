@@ -390,8 +390,8 @@ class Crosswalk_oc(db.Model):
     cbo_id = db.Column(db.String(4), primary_key = True)
     course_hedu_id = db.Column(db.String(6), primary_key = True)
 
-    def get_id(self, build_filter):
-        if build_filter == "<cbo_id>":
+    def get_id(self, dataset):
+        if dataset == "rais":
             return self.course_hedu_id
         return self.cbo_id
 
