@@ -85,6 +85,13 @@
     margin: 0 10px;
     width: 100px;
   }
+
+  body.home .set {
+    -webkit-transition: 0.75s ease-in-out;
+    -moz-transition: 0.75s ease-in-out;
+    -o-transition: 0.75s ease-in-out;
+    transition: 0.75s ease-in-out;
+  }
   </style>
 
 {% endblock %}
@@ -121,11 +128,14 @@
       <div class="profile">
 
         <div class="darkbox"><h2>{{ carousel.title }}</h2></div>
+        <a class="prev">Prev</a>
+        <a class="next">Next</a>
+
         <div class="scroller">
-          <ul class="set">
+          <ul class="set" id="test" data-parameters="{{ carousel.url }}">
             {% for poster in carousel.posters %}
               <li>
-                <a class="poster" href="/profiles/{{ carousel.type }}/{{ poster.id }}/" style="background-color:{{ poster.color }};">
+                <a class="poster" href="{{ poster.url() }}" style="background-color:{{ poster.color }};">
                   <h4 class="title">{{ poster.name() }}</h4>
                   <img src="{{ poster.icon() }}"/>
                 </a>
@@ -145,12 +155,13 @@
 
 <script src="/static/js/utils/utils.selector.js"></script>
 <script>
-
-  d3.selectAll("h4.title")
-    .style("color", function(){
-      var c = d3.select(this.parentNode).style("background-color")
-      return d3plus.color.text(c);
-    })
+  var colorTitles = function() {
+    d3.selectAll("h4.title")
+      .style("color", function(){
+        var c = d3.select(this.parentNode).style("background-color")
+        return d3plus.color.text(c);
+      })
+    };
 
   // Create Filter Selector
   dataviva.popover.create({
@@ -168,6 +179,77 @@
     dataviva.popover.show("#filter_popover");
     d3.event.preventDefault();
   })
+  
+  prefix = d3plus.client.prefix();
+
+  var addLi = function(page, item) {
+    var a = page.append("li").append("a")
+      .attr("class", "poster")
+      .attr("href", item.url)
+      .style("background-color",  item.color);
+      a.append("h4").attr("class", "title").text(item.name);
+      a.append("img").attr("src", item.icon);
+  }
+
+  var addNodes = function(page, list) {
+    for (var j = 0; j < list.length; j++) {
+      var item = list[j];
+      addLi(page, item);
+    }
+    colorTitles();
+  }
+
+  var loadMore = function(parentNode, page, callback) {
+    var offset = page.selectAll("li").size();
+    var params = page.attr("data-parameters");
+    var url = params + "&offset=" + offset
+    d3.json(url, function(error, json) {
+      if (error)
+        return console.warn(error)
+      else if (!json || json.length == 0)
+        return console.log("No more data available")
+      d3.select(parentNode).select("a.next").classed("disabled", false);
+      result = addNodes(page, json);
+      if (callback)
+        callback(result);
+      return result;
+    });
+  }
+
+  var nextClick = function(x,y,z) {
+    page_el = d3.select(this.parentNode).select(".set");
+    transform = page_el.style(prefix + "transform");
+
+    if (transform === "none")
+      current_x = 0;
+    else
+      current_x = d3.transform(transform).translate[0];
+
+    poster_w = parseInt(d3.select(".poster").style("width"));
+    poster_w += parseInt(d3.select(".poster").style("margin-left")) * 2;
+    container_w = parseInt(d3.select(".set").style("width"));
+    if (d3.select(this).attr("class").indexOf("next") > -1) {
+      d3.select(this.parentNode).select("a.prev").classed("disabled", false);
+      next_x = current_x - container_w;
+      max_left = (page_el.selectAll("li").size() * poster_w) * -1;
+      max_left += container_w;
+      next_x =  next_x < max_left ? max_left : next_x;
+      next_x = next_x > 0 ? 0 : next_x;
+      if (next_x == max_left) {
+        loadMore(this.parentNode, page_el);
+        d3.select(this.parentNode).select("a.next").classed("disabled", true);
+      }
+    } else {
+      d3.select(this.parentNode).select("a.next").classed("disabled", false);
+      next_x = current_x + container_w;
+      next_x = next_x > 0 ? 0 : next_x;
+      d3.select(this.parentNode).select("a.prev").classed("disabled", next_x == 0);
+    }
+    page_el.style(prefix + "transform", "translateX(" + (next_x) + "px)");
+  
+  }
+  colorTitles();
+  d3.selectAll("a.next,a.prev").on("click", nextClick);
 
 </script>
 

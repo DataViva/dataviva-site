@@ -1,6 +1,6 @@
 # Utility functions for stats
 import json
-from dataviva.attrs.models import Bra, Hs, Cbo, Cnae
+from dataviva.attrs.models import Bra, Hs, Cbo, Cnae, Course_hedu, University
 
 
 def compute_allowed(table_dict):
@@ -21,7 +21,7 @@ def gen_table_list(poss_tables):
     return table_dict
 
 def get_profiles(item_list, typestr, serialize=True):
-    typemap = {"bra": Bra, "hs": Hs, "cnae": Cnae, "cbo": Cbo}
+    typemap = {"bra": Bra, "hs": Hs, "cnae": Cnae, "cbo": Cbo, "course_hedu": Course_hedu, "university": University}
     obj = typemap[typestr]
 
     posters = [obj.query.get(me)for me in item_list]

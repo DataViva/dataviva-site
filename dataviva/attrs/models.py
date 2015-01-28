@@ -264,6 +264,9 @@ class Cnae(db.Model, AutoSerialize, Stats):
     def icon(self):
         return "/static/img/icons/cnae/cnae_%s.png" % (self.id[:1])
 
+    def url(self):
+        return "/profiles/cnae/{}/".format(self.id)
+
     def __repr__(self):
         return '<Cnae %r>' % (self.name_en)
 
@@ -294,6 +297,9 @@ class Cbo(db.Model, AutoSerialize, Stats):
 
     def icon(self):
         return "/static/img/icons/cbo/cbo_%s.png" % (self.id[:1])
+
+    def url(self):
+        return "/profiles/cbo/{}/".format(self.id)
 
     def __repr__(self):
         return '<Cbo %r>' % (self.name_en)
@@ -356,6 +362,9 @@ class Course_hedu(db.Model, AutoSerialize, Stats):
 
     def icon(self):
         return "/static/img/icons/course_hedu/course_hedu_%s.png" % (self.id[:2])
+
+    def url(self):
+        return "/profiles/course_hedu/{}/".format(self.id)
 
     def __repr__(self):
         return '<Course_hedu %r>' % (self.name_en)
@@ -522,6 +531,9 @@ class Bra(db.Model, AutoSerialize, Stats):
         if remove_self:
             q = q.filter(Distances.bra_id_dest != self.id) # filter out self
         return q.all()
+
+    def url(self):
+        return "/profiles/bra/{}/".format(self.id)
 
     def __repr__(self):
         return '<Bra %r>' % (self.name_en)
