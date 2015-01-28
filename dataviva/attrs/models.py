@@ -415,6 +415,8 @@ class University(db.Model, AutoSerialize, Stats):
     gender_pt = db.Column(db.String(1))
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
+    school_type_en = db.Column(db.String(32))
+    school_type_pt = db.Column(db.String(32))
 
     yu = db.relationship("Yu", backref = 'university', lazy = 'dynamic')
     yuc = db.relationship("Yuc", backref = 'university', lazy = 'dynamic')
