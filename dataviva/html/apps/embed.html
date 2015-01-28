@@ -390,6 +390,12 @@
         "num_emp_est",
 
         "val_usd",
+
+        "enrolled",
+        "students",
+        "graduates",
+        "entrants",
+        "age"
       ],
       "calculations":[
         "elsewhere",
@@ -419,8 +425,12 @@
         "wage_growth_5",
         "num_emp_growth",
         "num_emp_growth_5",
+
         "val_usd_growth",
         "val_usd_growth_5",
+
+        "enrolled_growth",
+        "graduates_growth"
       ]
 
         }}
@@ -954,6 +964,12 @@
             })
 
             var form_type = ui_data.length > 3 ? "drop" : "toggle";
+            if (["color"].indexOf(title) >= 0) {
+              form_type = "drop";
+            }
+            else if (["sizing"].indexOf(title) >= 0) {
+              form_type = "toggle";
+            }
 
       			var ui_div = d3.select("#app_controls").append("div")
         			.attr("class","ui_group alt_tooltip")
@@ -965,6 +981,8 @@
         			.on(d3plus.client.pointer.out,function(){
         			  dataviva.ui.tooltip("alt_tooltip",false)
         			})
+
+            if (title === "color") title = "color_toggle";
 
             d3plus.form()
               .container({

@@ -121,7 +121,7 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "sizing_desc_scatter": {"en": "Changes the variable used to size the circles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
 
       // Color Labels
-      "color": {"en": "Color", "pt": "Cor"},
+      "color_toggle": {"en": "Color", "pt": "Cor"},
       "color_desc_tree_map": {"en": "Changes the variable used to color the rectangles.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os ret\u00e2ngulos."},
       "color_desc_stacked": {"en": "Changes the variable used to color the areas.", "pt": "Alterar a vari\u00e1vel utilizada para colorir as \u00e1reas."},
       "color_desc_geo_map": {"en": "Changes the variable used to color the locations.", "pt": "Alterar a vari\u00e1vel utilizada para colorir os locais."},
@@ -267,6 +267,9 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "wage_growth_5": {"en": "Nominal Annual Wage Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento dos Sal\u00e1rios Anual (5 anos)"},
       "num_emp_growth": {"en": "Nominal Annual Employee Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Empregados Anual (1 ano)"},
       "num_emp_growth_5": {"en": "Nominal Annual Employee Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento de Empregados Anual (5 anos)"},
+
+      "enrolled_growth": {"en": "Nominal Annual Enrollment Growth Rate", "pt": "Taxa Nominal de Crescimento de Matr\u00edculas Anual"},
+      "graduates_growth": {"en": "Nominal Annual Graduation Growth Rate", "pt": "Taxa Nominal de Crescimento de Gradua\u00e7\u00f5es Anual"},
 
       // RAIS Labels
       "rais": {"en": "Establishments and Employment (RAIS)", "pt": "Estabelecimentos e Emprego (RAIS)"},
@@ -520,13 +523,7 @@ dataviva.format.number = function(value,name,l) {
         "val_usd": ["$"," USD"],
         "wage": ["$"," BRL"],
         "wage_avg": ["$"," BRL"],
-        "wage_avg_bra": ["$"," BRL"],
-        "val_usd_growth": ["","%"],
-        "val_usd_growth_5": ["","%"],
-        "num_emp_growth": ["","%"],
-        "num_emp_growth_5": ["","%"],
-        "wage_growth": ["","%"],
-        "wage_growth_5": ["","%"]
+        "wage_avg_bra": ["$"," BRL"]
       }
 
   if (name.indexOf("total_") == 0) {
@@ -540,6 +537,9 @@ dataviva.format.number = function(value,name,l) {
   if (total_labels[label_name]) {
     var labels = total_labels[label_name]
     return_value = labels[0] + return_value + labels[1]
+  }
+  else if (label_name.indexOf("_growth") > 0) {
+    return_value += "%";
   }
 
   return_value = String(return_value)
