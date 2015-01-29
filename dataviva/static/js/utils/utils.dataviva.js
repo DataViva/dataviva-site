@@ -70,6 +70,8 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "x_desc_scatter": {"en": "Changes the X axis variable.", "pt": "Alterar a vari\u00e1vel do eixo X."},
       "y": {"en": "Y Axis", "pt": "Eixo Y"},
       "y_desc_scatter": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
+      "y_desc_line": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
+      "y_desc_box": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
 
       // Stacked Area Sorting/Order
       "order": {"en": "Order", "pt": "Ordena\u00e7\u00e3o"},
@@ -94,6 +96,8 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       // Scale Toggle
       "scale": {"en": "Scale", "pt": "Escala"},
       "scale_desc_compare": {"en": "Changes the mathematical scale used on both axes.", "pt": "Altera a escala matem\u00e1tica utilizada em ambos os eixos."},
+      "scale_desc_line": {"en": "Changes the mathematical scale used on both axes.", "pt": "Altera a escala matem\u00e1tica utilizada em ambos os eixos."},
+      "scale_desc_box": {"en": "Changes the mathematical scale used on both axes.", "pt": "Altera a escala matem\u00e1tica utilizada em ambos os eixos."},
       "log": {"en": "Log", "pt": "Log"},
       "linear": {"en": "Linear", "pt": "Linear"},
 
