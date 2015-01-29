@@ -404,6 +404,8 @@
         "students",
         "graduates",
         "entrants",
+        "classes",
+        "enrolled_classes",
         "age"
       ],
       "calculations":[
@@ -687,8 +689,8 @@
               },"/"+app.build.data_url)
             }
 
-            if (app.build.dataset === "secex") {
-              app.build.import_url = app.build.data_url.replace("secex/","secex_import/")
+            if (app.build.dataset === "secex_export" && app.build.output === "all") {
+              app.build.import_url = app.build.data_url.replace("secex_export/","secex_import/")
               if (!app.data[app.build.import_url]) {
                 q.defer(function(u,callback){
                   d3.json(u)
@@ -1791,7 +1793,7 @@
           })
           .entries(data.raw)
       }
-      else if (app.build.dataset === "secex" && app.build.output === "all") {
+      else if (app.build.dataset === "secex_export" && app.build.output === "all") {
 
         data.raw.forEach(function(d){
 

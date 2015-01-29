@@ -315,7 +315,7 @@ def get_geo_location(ip):
             "filter1": "all", "filter2": "all", "output": "cbo", "params": "?depth=cbo_4&axes=wage_avg"})
 @mod.route('/builder/occugrid/', defaults={"app_name": "occugrid", "dataset": "rais", "bra_id": "4mg030000",
             "filter1": "m7310", "filter2": "all", "output": "cbo", "params": ""})
-@mod.route('/builder/line/', defaults={"app_name": "line", "dataset": "secex", "bra_id": "4mg",
+@mod.route('/builder/line/', defaults={"app_name": "line", "dataset": "secex_export", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "all", "params": ""})
 @mod.route('/builder/box/', defaults={"app_name": "box", "dataset": "rais", "bra_id": "4mg030000",
             "filter1": "m7310", "filter2": "all", "output": "cbo", "params": ""})
