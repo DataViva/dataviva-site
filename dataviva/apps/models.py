@@ -309,26 +309,14 @@ class Build(db.Model, AutoSerialize):
                     title = title.replace(article_search.group(0), joiner.join([get_article(b, article_search.group(1)) + " " + bras[i] for i, b in enumerate(self.bra)]))
                 else:
                     title = title.replace("<bra>", joiner.join(bras))
-            if "<cnae>" in title and hasattr(self,"cnae"):
-                title = title.replace("<cnae>", joiner.join([title_case(getattr(i, name_lang)) for i in self.cnae]))
-                article_search = re.search('<cnae_(\w+)>', title)
-                if article_search:
-                    title = title.replace(article_search.group(0), joiner.join([get_article(b, article_search.group(1)) for b in self.cnae]))
-            if "<hs>" in title and hasattr(self,"hs"):
-                title = title.replace("<hs>", joiner.join([title_case(getattr(h, name_lang)) for h in self.hs]))
-                article_search = re.search('<hs_(\w+)>', title)
-                if article_search:
-                    title = title.replace(article_search.group(0), joiner.join([get_article(b, article_search.group(1)) for b in self.hs]))
-            if "<cbo>" in title and hasattr(self,"cbo"):
-                title = title.replace("<cbo>", joiner.join([title_case(getattr(c, name_lang)) for c in self.cbo]))
-                article_search = re.search('<cbo_(\w+)>', title)
-                if article_search:
-                    title = title.replace(article_search.group(0), joiner.join([get_article(b, article_search.group(1)) for b in self.cbo]))
-            if "<wld>" in title and hasattr(self,"wld"):
-                title = title.replace("<wld>", joiner.join([title_case(getattr(w, name_lang)) for w in self.wld]))
-                article_search = re.search('<wld_(\w+)>', title)
-                if article_search:
-                    title = title.replace(article_search.group(0), joiner.join([get_article(b, article_search.group(1)) for b in self.wld]))
+
+            for f in ["cnae", "hs", "cbo", "wld", "university", "course_hedu", "course_sc"]:
+                placeholder = "<{}>".format(f)
+                if placeholder in title and hasattr(self, f):
+                    title = title.replace(placeholder, joiner.join([title_case(getattr(a, name_lang)) for a in getattr(self, f)]))
+                    article_search = re.search("<{}_(\w+)>".format(f), title)
+                    if article_search:
+                        title = title.replace(article_search.group(0), joiner.join([get_article(a, article_search.group(1)) for a in getattr(self, f)]))
 
         return title
 
