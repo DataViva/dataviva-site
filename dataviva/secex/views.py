@@ -20,7 +20,8 @@ def secex_api(**kwargs):
     exclude = request.args.get('exclude', None) or kwargs.pop('exclude', None)
     download = request.args.get('download', None) or kwargs.pop('download', None)
 
-    # if not month then make filter month != 0
+    if not "month" in kwargs:
+        kwargs["month"] = query_helper.ALL
 
     if exclude and "," in exclude:
         exclude = exclude.split(",")

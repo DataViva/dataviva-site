@@ -81,7 +81,7 @@ def build_filters_and_groups(table, kwargs, exclude=None):
                 show_column = column # -- set this as the show column
                 filters += _show_filters_to_add(column, value, table, colname)
 
-        elif colname == "year":
+        elif colname in ["year", "month"]:
             column = getattr(table, colname)
             groups.append(column)
 
