@@ -24,7 +24,7 @@ class AutoSerialize(object):
 
         data = dict(allowed)
 
-        methods = ["icon", "name", "url"]
+        methods = ["icon", "name", "url", "school_type"]
         for method in methods:
             if hasattr(self, method):
                 data[method] = getattr(self, method)()

@@ -27,6 +27,7 @@ def fix_name(attr, lang):
     name_lang = "name_" + lang
     desc_lang = "desc_" + lang
     keywords_lang = "keywords_" + lang
+    school_type_lang = "school_type_" + lang
     if desc_lang in attr:
         attr["desc"] = title_case(attr[desc_lang])
         if "desc_en" in attr: del attr["desc_en"]
@@ -39,6 +40,10 @@ def fix_name(attr, lang):
         attr["keywords"] = title_case(attr[keywords_lang])
         if "keywords_en" in attr: del attr["keywords_en"]
         if "keywords_pt" in attr: del attr["keywords_pt"]
+    if school_type_lang in attr:
+        attr["school_type"] = attr[school_type_lang]
+        if "school_type_en" in attr: del attr["school_type_en"]
+        if "school_type_pt" in attr: del attr["school_type_pt"]
     return attr
 
 ############################################################
@@ -75,6 +80,7 @@ def attrs(attr="bra",Attr_id=None):
     elif attr == "university":
         Attr_weight_tbl = Yu
         Attr_weight_col = "enrolled"
+
     elif attr == "course_sc":
         Attr_weight_tbl = Yc_sc
         Attr_weight_col = "enrolled"

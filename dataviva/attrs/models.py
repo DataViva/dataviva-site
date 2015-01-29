@@ -430,6 +430,10 @@ class University(db.Model, AutoSerialize, Stats):
     def icon(self):
         return None
 
+    def school_type(self):
+        lang = getattr(g, "locale", "en")
+        return getattr(self, "school_type_" + lang)
+
     def __repr__(self):
         return '<University %r>' % (self.name_en)
 
