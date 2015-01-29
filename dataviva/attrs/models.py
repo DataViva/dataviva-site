@@ -320,10 +320,10 @@ class Hs(db.Model, AutoSerialize, Stats):
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
 
-    yp = db.relationship("Yp", backref = 'hs', lazy = 'dynamic')
-    ypw = db.relationship("Ypw", backref = 'hs', lazy = 'dynamic')
-    ybp = db.relationship("Ybp", backref = 'hs', lazy = 'dynamic')
-    ybpw = db.relationship("Ybpw", backref = 'hs', lazy = 'dynamic')
+#     yp = db.relationship("Yp", backref = 'hs', lazy = 'dynamic')
+#     ypw = db.relationship("Ypw", backref = 'hs', lazy = 'dynamic')
+#     ybp = db.relationship("Ybp", backref = 'hs', lazy = 'dynamic')
+#     ybpw = db.relationship("Ybpw", backref = 'hs', lazy = 'dynamic')
 
     def name(self):
         lang = getattr(g, "locale", "en")
@@ -456,10 +456,10 @@ class Wld(db.Model, AutoSerialize, Stats):
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
 
-    yw = db.relationship("Yw", backref = 'wld', lazy = 'dynamic')
-    ypw = db.relationship("Ypw", backref = 'wld', lazy = 'dynamic')
-    ybw = db.relationship("Ybw", backref = 'wld', lazy = 'dynamic')
-    ybpw = db.relationship("Ybpw", backref = 'wld', lazy = 'dynamic')
+#     yw = db.relationship("Yw", backref = 'wld', lazy = 'dynamic')
+#     ypw = db.relationship("Ypw", backref = 'wld', lazy = 'dynamic')
+#     ybw = db.relationship("Ybw", backref = 'wld', lazy = 'dynamic')
+#     ybpw = db.relationship("Ybpw", backref = 'wld', lazy = 'dynamic')
 
     def name(self):
         lang = getattr(g, "locale", "en")
@@ -494,10 +494,10 @@ class Bra(db.Model, AutoSerialize, Stats):
     distance = 0
 
     # SECEX relations
-    yb_secex = db.relationship("Yb_secex", backref = 'bra', lazy = 'dynamic')
-    ybp = db.relationship("Ybp", backref = 'bra', lazy = 'dynamic')
-    ybw = db.relationship("Ybw", backref = 'bra', lazy = 'dynamic')
-    ybpw = db.relationship("Ybpw", backref = 'bra', lazy = 'dynamic')
+#     yb_secex = db.relationship("Yb_secex", backref = 'bra', lazy = 'dynamic')
+#     ybp = db.relationship("Ybp", backref = 'bra', lazy = 'dynamic')
+#     ybw = db.relationship("Ybw", backref = 'bra', lazy = 'dynamic')
+#     ybpw = db.relationship("Ybpw", backref = 'bra', lazy = 'dynamic')
     # RAIS relations
     yb_rais = db.relationship("Yb_rais", backref = 'bra', lazy = 'dynamic')
     ybi = db.relationship("Ybi", backref = 'bra', lazy = 'dynamic')
