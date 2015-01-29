@@ -662,6 +662,9 @@
               }
               app.build.data_url = app.build.data_url.replace("all",app.vars.year)
             }
+            else {
+              app.viz.time({"solo": []})
+            }
 
             if (!app.data[app.build.data_url]) {
               q.defer(function(u,callback){
@@ -678,15 +681,17 @@
 
             if (app.build.dataset === "secex") {
               app.build.import_url = app.build.data_url.replace("secex/","secex_import/")
-              q.defer(function(u,callback){
-                d3.json(u)
-                  .header("X-Requested-With", "XMLHttpRequest")
-                  .get(function(error,d){
-                    app.data[app.build.import_url] = {}
-                    app.data[app.build.import_url].raw = dataviva.cleanData(d, app.build.dataset, app.build.output)
-                    callback(error,d)
-                  })
-              },"/"+app.build.import_url)
+              if (!app.data[app.build.import_url]) {
+                q.defer(function(u,callback){
+                  d3.json(u)
+                    .header("X-Requested-With", "XMLHttpRequest")
+                    .get(function(error,d){
+                      app.data[app.build.import_url] = {}
+                      app.data[app.build.import_url].raw = dataviva.cleanData(d, app.build.dataset, app.build.output)
+                      callback(error,d)
+                    })
+                },"/"+app.build.import_url)
+              }
             }
 
             if (app.build.output != "all" && !app.attrs[app.build.output]) {
@@ -1163,9 +1168,9 @@
 
         app.viz
           .labels({"align": "left", "valign": "top"})
-            .active(false)
-            .temp(false)
-            .total(false)
+          .active(false)
+          .temp(false)
+          .total(false)
           .size({"threshold": false})
           .zoom(false)
           .id({"grouping": true})
@@ -1407,7 +1412,7 @@
         .x("year")
         .y({
           "scale": app.vars.scale,
-          "value": "val_usd"
+          "value": app.vars.y
         })
         .axes({"mirror": false})
         .active({"spotlight": false})
