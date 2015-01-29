@@ -232,9 +232,9 @@
     d3.select(window).on(d3plus.client.pointer.click, function() {
 
     	var d3_target = d3.select(d3.event.target)
-
-      if ( !d3_target.classed("searchFld") && !d3_target.classed("searchBox") && !d3_target.classed("searchResult") ) {
-        if( d3.select(".searchBox").style("width") === "465px" || d3.select(".search .searchResult").style("opacity") ) {
+      if ( !d3_target.classed("searchFld") && !d3_target.classed("searchBox") && !d3_target.classed("searchResult")) {
+        var results = d3.select(".search .searchResult")
+        if( d3.select(".searchBox").style("width") === "465px" || (!results.empty() && results.style("opacity")) ) {
           closeSearch()
         }
       }
