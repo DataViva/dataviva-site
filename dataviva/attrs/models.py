@@ -77,7 +77,7 @@ class Stats(object):
     def parse_bras(bra_str):
         if ".show." in bra_str:
             # the '.show.' indicates that we are looking for a specific nesting
-            bar_id, nesting = bra_str.split(".show.")
+            bra_id, nesting = bra_str.split(".show.")
             # filter table by requested nesting level
             bras = Bra.query \
                     .filter(Bra.id.startswith(bra_id)) \
