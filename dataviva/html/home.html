@@ -43,20 +43,36 @@
     transition: border-color .1s, color .1s, opacity .1s;
     width: 826px;
   }
-  .profile {
-    margin: 0px 30px 10px;
+  .carousel {
+    margin: 0px 50px 30px;
+    position: relative;
     width: 800px;
   }
-  .profile .scroller {
+  .carousel > .prev, .carousel > .next {
+    color: #ccc;
+    font-size: 70px;
+    position: absolute;
+    top: 117px;
+  }
+  .carousel > .prev:hover, .carousel > .next:hover {
+    color: #888;
+  }
+  .carousel > .prev {
+    left: -39px;
+  }
+  .carousel > .next {
+    right: -39px;
+  }
+  .carousel .scroller {
     overflow: hidden;
     padding-bottom: 20px;
     position: relative;
   }
-  .profile ul {
+  .carousel ul {
     list-style: none;
     white-space: nowrap;
   }
-  .profile ul li {
+  .carousel ul li {
     display: inline-block;
     margin: 0 10px 0 0;
   }
@@ -125,11 +141,11 @@
 
     {% for carousel in carousels %}
 
-      <div class="profile">
+      <div class="carousel">
 
         <div class="darkbox"><h2>{{ carousel.title }}</h2></div>
-        <a class="prev">Prev</a>
-        <a class="next">Next</a>
+        <a class="prev"><i class="fa fa-angle-left"></i></a>
+        <a class="next"><i class="fa fa-angle-right"></i></a>
 
         <div class="scroller">
           <ul class="set" id="test" data-parameters="{{ carousel.url }}">
@@ -179,7 +195,7 @@
     dataviva.popover.show("#filter_popover");
     d3.event.preventDefault();
   })
-  
+
   prefix = d3plus.client.prefix();
 
   var addLi = function(page, item) {
@@ -246,7 +262,7 @@
       d3.select(this.parentNode).select("a.prev").classed("disabled", next_x == 0);
     }
     page_el.style(prefix + "transform", "translateX(" + (next_x) + "px)");
-  
+
   }
   colorTitles();
   d3.selectAll("a.next,a.prev").on("click", nextClick);
