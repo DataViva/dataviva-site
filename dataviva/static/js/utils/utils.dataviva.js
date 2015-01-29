@@ -301,6 +301,7 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "sc": {"en": "School Census", "pt": "Censo Escolar"},
       "classes": {"en": "Classes", "pt": "Aulas"},
       "enrolled_classes": {"en": "Average Class Size", "pt": "Tamanho da Classe M\u00e9dia"},
+      "age": {"en": "Average Age", "pt": "Idade M\u00e9dia"},
 
       // Key Labels
       "brazil": {"en": "Brazil", "pt": "Brasil"},
