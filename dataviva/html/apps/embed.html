@@ -280,7 +280,7 @@
 
     app.html = function(id,list) {
 
-      var obj = app.attrs[app.build.output][id]
+      var obj = app.build.output !== "all" ? app.attrs[app.build.output][id] : false;
 
       if (app.build.app.type == "rings") {
         if (list) {
@@ -312,9 +312,7 @@
       }
 
       var priority = ["both_filters","filter2","filter1","no_filters"],
-          html_return = "<div class='title'>"+dataviva.format.text("related_apps")+"</div>"
-
-
+          html_return = "<div class='title'>"+dataviva.format.text("related_apps")+"</div>";
 
       priority.forEach(function(p,i){
         if (app.recommendations[p]) {
@@ -323,38 +321,49 @@
             var classname = "decision short icon"
           }
           else {
-            var classname = "decision icon square"
+            var classname = "decision icon"
           }
 
           app.recommendations[p].forEach(function(a){
-            var u = a.url.replace("<"+app.build.output+">",id)
+
+            var u = a.url
+
+            if (app.build.output !== "all") {
+              u = u.replace("<"+app.build.output+">",id)
+            }
 
             if ( u !== app.url ) {
 
-              var t = a.title.replace("<"+app.build.output+">",obj.name)
-              if (t.indexOf("<"+app.build.output+"_") >= 0) {
-                var article = t.match(new RegExp("<"+app.build.output+"_.*?>"))
-                var word = article[0]
-                article = article[0].split("_")[1].split(">")[0]
-                if (obj.article_pt) {
-                  if (obj.gender_pt == "m") {
-                    if (article == "em") var new_article = "no"
-                    if (article == "de") var new_article = "do"
-                    if (article == "para") var new_article = "para o"
+              var t = a.title;
+
+              if (obj) {
+
+                t = t.replace("<"+app.build.output+">",obj.name)
+                if (t.indexOf("<"+app.build.output+"_") >= 0) {
+                  var article = t.match(new RegExp("<"+app.build.output+"_.*?>"))
+                  var word = article[0]
+                  article = article[0].split("_")[1].split(">")[0]
+                  if (obj.article_pt) {
+                    if (obj.gender_pt == "m") {
+                      if (article == "em") var new_article = "no"
+                      if (article == "de") var new_article = "do"
+                      if (article == "para") var new_article = "para o"
+                    }
+                    else if (obj.gender_pt == "f") {
+                      if (article == "em") var new_article = "na"
+                      if (article == "de") var new_article = "da"
+                      if (article == "para") var new_article = "para a"
+                    }
+                    if (obj.plural_pt) {
+                      new_article += "s"
+                    }
                   }
-                  else if (obj.gender_pt == "f") {
-                    if (article == "em") var new_article = "na"
-                    if (article == "de") var new_article = "da"
-                    if (article == "para") var new_article = "para a"
+                  else {
+                    var new_article = article
                   }
-                  if (obj.plural_pt) {
-                    new_article += "s"
-                  }
+                  t = t.replace(word,new_article)
                 }
-                else {
-                  var new_article = article
-                }
-                t = t.replace(word,new_article)
+
               }
 
               html_return += "<div id='"+u+"' class='"+classname+" "+a.app.type+"' "
@@ -599,8 +608,8 @@
           }
           else {
 
-            app.star(data.starred)
-            app.recommendations = data.recommendations
+            app.star(data.starred);
+            app.recommendations = data.recommendations;
 
             if (app.build && app.build.app.type != data.current_build.app.type) {
               builder.app(data.current_build.app.type,true)
