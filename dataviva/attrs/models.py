@@ -498,10 +498,10 @@ class Bra(db.Model, AutoSerialize, Stats):
     distance = 0
 
     # SECEX relations
-#     yb_secex = db.relationship("Yb_secex", backref = 'bra', lazy = 'dynamic')
-#     ybp = db.relationship("Ybp", backref = 'bra', lazy = 'dynamic')
-#     ybw = db.relationship("Ybw", backref = 'bra', lazy = 'dynamic')
-#     ybpw = db.relationship("Ybpw", backref = 'bra', lazy = 'dynamic')
+    yb_secex = db.relationship("Yb_secex", backref = 'bra', lazy = 'dynamic')
+    ybp = db.relationship("Ybp", backref = 'bra', lazy = 'dynamic')
+    ybw = db.relationship("Ybw", backref = 'bra', lazy = 'dynamic')
+    ybpw = db.relationship("Ybpw", backref = 'bra', lazy = 'dynamic')
     # RAIS relations
     yb_rais = db.relationship("Yb_rais", backref = 'bra', lazy = 'dynamic')
     ybi = db.relationship("Ybi", backref = 'bra', lazy = 'dynamic')
