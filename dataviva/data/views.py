@@ -65,10 +65,15 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
     filters["cbo"] = {"items": [], "depths": [1,2,4]}
     filters["hs"] = {"items": [], "depths": [2,4,6]}
     filters["wld"] = {"items": [], "depths": [2,5]}
+    filters["university"] = {"items": [], "depths": [5]}
+    filters["course_hedu"] = {"items": [], "depths": [2,6]}
+    filters["course_sc"] = {"items": [], "depths": [2,5]}
     filter_order = ["bra","cnae","cbo","hs","wld"]
 
     datasets = {"rais": {"filters": ["bra","cnae","cbo"], "years": 1},
-                "secex_export": {"filters": ["bra","hs","wld"], "years": 2}}
+                "secex_export": {"filters": ["bra","hs","wld"], "years": 2},
+                "hedu": {"filters": ["bra","university","course_hedu"], "years": 1},
+                "sc": {"filters": ["bra","course_sc"], "years": 1}}
 
     for d in datasets:
         datasets[d]["years"] = eval(UI.query.get(datasets[d]["years"]).values)
@@ -144,14 +149,20 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
     if filter_1 and filter_1 != "all":
         if data_type == "rais":
             parse_filter(filter_1,"cnae")
-        else:
+        elif data_type.startswith("secex"):
             parse_filter(filter_1,"hs")
+        elif data_type == "hedu":
+            parse_filter(filter_1,"university")
 
     if filter_2 and filter_2 != "all":
         if data_type == "rais":
             parse_filter(filter_2,"cbo")
-        else:
+        elif data_type.startswith("secex"):
             parse_filter(filter_2,"wld")
+        elif data_type == "hedu":
+            parse_filter(filter_2,"course_hedu")
+        elif data_type == "sc":
+            parse_filter(filter_2,"course_sc")
 
     for f in filters:
         if f not in filters_json:

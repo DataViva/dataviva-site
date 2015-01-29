@@ -12,6 +12,7 @@ from dataviva.account.models import User, Starred
 from dataviva.apps.models import UI
 from dataviva.rais.models import Yb_rais, Yi, Yo
 from dataviva.secex_export.models import Yb_secex, Yp, Yw
+from dataviva.hedu.models import Yu, Yc_hedu
 from dataviva.attrs.models import Yb
 
 import json
@@ -42,6 +43,8 @@ def index(year=2012,type="bra",depth=3):
         years = eval(UI.query.get(1).values)
     elif type == "hs" or type == "wld":
         years = eval(UI.query.get(2).values)
+    elif type == "university" or type == "course_hedu":
+        years = eval(UI.query.get(47).values)
 
     year = int(year)
 
@@ -54,6 +57,8 @@ def index(year=2012,type="bra",depth=3):
     depths["cbo"] = [1,2,4]
     depths["hs"] = [2,4,6]
     depths["wld"] = [2,5]
+    depths["university"] = [5]
+    depths["course_hedu"] = [2,6]
 
     order = {}
     order["bra"] = "val_usd"
@@ -61,6 +66,8 @@ def index(year=2012,type="bra",depth=3):
     order["cbo"] = "wage_avg"
     order["hs"] = "val_usd"
     order["wld"] = "val_usd"
+    order["university"] = "enrolled"
+    order["course_hedu"] = "enrolled"
 
     order = request.args.get("order","{0}.desc".format(order[type]))
 
@@ -116,5 +123,13 @@ def data(year=None,type="bra",depth=None):
         request_args["excluding"] = {"wld_id": "xx"}
         request_args["cols"] = ["wld_id","id_mdic","name","val_usd","hs_diversity","hs_diversity_eff"]
         table = Yw
+    elif type == "university":
+        request_args["excluding"] = {}
+        request_args["cols"] = ["university_id","name","enrolled","graduates","entrants","students"]
+        table = Yu
+    elif type == "course_hedu":
+        request_args["excluding"] = {"course_hedu_id": "00"}
+        request_args["cols"] = ["course_hedu_id","name","enrolled","graduates","entrants","students"]
+        table = Yc_hedu
 
     return make_response(make_query(table, request_args, g.locale, **args))
