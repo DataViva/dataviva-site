@@ -11,7 +11,7 @@ from dataviva.utils.make_query import make_query
 from dataviva.account.models import User, Starred
 from dataviva.apps.models import UI
 from dataviva.rais.models import Yb_rais, Yi, Yo
-from dataviva.secex.models import Yb_secex, Yp, Yw
+from dataviva.secex_export.models import Yb_secex, Yp, Yw
 from dataviva.attrs.models import Yb
 
 import json

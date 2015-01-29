@@ -6,7 +6,6 @@ from dataviva import db, view_cache
 
 from dataviva.attrs.models import Bra, Wld
 from dataviva.rais.models import Cnae, Cbo
-from dataviva.secex.models import Hs
 
 from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE_REPLY, Flag
 from dataviva.ask.forms import AskForm, ReplyForm, SearchForm

@@ -12,7 +12,6 @@ from dataviva.secex import models as secex
 from dataviva.general.models import Plan
 from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld
 from dataviva.rais.models import Ybi, Ybo, Yio
-from dataviva.secex.models import Ybp, Ybw, Ypw
 
 from dataviva.utils.cached_query import cached_query, make_cache_key
 

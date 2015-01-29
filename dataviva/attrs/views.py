@@ -5,7 +5,7 @@ from flask import Blueprint, request, jsonify, abort, g, render_template, make_r
 
 from dataviva import db, __latest_year__
 from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University
-from dataviva.secex.models import Yp, Yw
+from dataviva.secex.models import Ymp, Ymw
 from dataviva.rais.models import Yi, Yo
 from dataviva.hedu.models import Yu, Yc_hedu
 from dataviva.sc.models import Yc_sc
@@ -64,11 +64,11 @@ def attrs(attr="bra",Attr_id=None):
         Attr_weight_tbl = Yo
         Attr_weight_col = "num_emp"
     elif attr == "hs":
-        Attr_weight_tbl = Yp
-        Attr_weight_col = "val_usd"
+        Attr_weight_tbl = Ymp
+        Attr_weight_col = "export_val"
     elif attr == "wld":
-        Attr_weight_tbl = Yw
-        Attr_weight_col = "val_usd"
+        Attr_weight_tbl = Ymw
+        Attr_weight_col = "export_val"
     elif attr == "course_hedu":
         Attr_weight_tbl = Yc_hedu
         Attr_weight_col = "enrolled"
