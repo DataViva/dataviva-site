@@ -121,6 +121,8 @@ class Build(db.Model, AutoSerialize):
     def set_filter2(self, filter):
         if self.filter2 != "all":
 
+            name = False
+
             if self.dataset == "rais":
                 name = "cbo"
                 default = "2211"
@@ -130,6 +132,9 @@ class Build(db.Model, AutoSerialize):
             elif self.dataset == "hedu":
                 name = "course_hedu"
                 default = "345A01"
+            elif self.dataset == "sc":
+                name = "course_sc"
+                default = "13182"
 
             items = []
             attr = globals()[name.capitalize()]
@@ -209,7 +214,11 @@ class Build(db.Model, AutoSerialize):
             elif filter2 != "all":
                 filter2 = filter2 + ".show.{}".format(len(filter2))
 
-        return '{}/all/{}/{}/{}/'.format(self.dataset, bra, filter1, filter2)
+        params = ""
+        if self.output == "course_sc" and self.filter2 == "all":
+            params = "?exclude=xx%"
+
+        return '{}/all/{}/{}/{}/{}'.format(self.dataset, bra, filter1, filter2, params)
 
     '''Returns the data table required for this build'''
     def data_table(self):

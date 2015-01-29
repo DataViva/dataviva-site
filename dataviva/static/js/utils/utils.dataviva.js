@@ -204,10 +204,10 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "course_hedu_6_plural": {"en": "Courses", "pt": "Cursos"},
       "course_sc": {"en": "Course", "pt": "Curso"},
       "course_sc_2": {"en": "Field", "pt": "Dom\u00ednio"},
-      "course_sc_6": {"en": "Course", "pt": "Curso"},
+      "course_sc_5": {"en": "Course", "pt": "Curso"},
       "course_sc_plural": {"en": "Courses", "pt": "Cursos"},
       "course_sc_2_plural": {"en": "Fields", "pt": "Dom\u00ednios"},
-      "course_sc_6_plural": {"en": "Courses", "pt": "Cursos"},
+      "course_sc_5_plural": {"en": "Courses", "pt": "Cursos"},
       "university": {"en": "University", "pt": "Universidade"},
       "university_5": {"en": "University", "pt": "Universidade"},
       "university_plural": {"en": "Universities", "pt": "Universidades"},
@@ -272,8 +272,9 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "num_emp_growth": {"en": "Nominal Annual Employee Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Empregados Anual (1 ano)"},
       "num_emp_growth_5": {"en": "Nominal Annual Employee Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento de Empregados Anual (5 anos)"},
 
-      "enrolled_growth": {"en": "Nominal Annual Enrollment Growth Rate", "pt": "Taxa Nominal de Crescimento de Matr\u00edculas Anual"},
-      "graduates_growth": {"en": "Nominal Annual Graduation Growth Rate", "pt": "Taxa Nominal de Crescimento de Gradua\u00e7\u00f5es Anual"},
+      "enrolled_growth": {"en": "Nominal Annual Enrollment Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Matr\u00edculas Anual (1 ano)"},
+      "enrolled_growth_5": {"en": "Nominal Annual Enrollment Growth Rate (5 years)", "pt": "Taxa Nominal de Crescimento de Matr\u00edculas Anual (5 anos)"},
+      "graduates_growth": {"en": "Nominal Annual Graduation Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Gradua\u00e7\u00f5es Anual (1 ano)"},
 
       // RAIS Labels
       "rais": {"en": "Establishments and Employment (RAIS)", "pt": "Estabelecimentos e Emprego (RAIS)"},
@@ -294,9 +295,12 @@ dataviva.format.text = function(text,name,vars,obj,l) {
 
       // HEDU Labels
       "hedu": {"en": "Higher Education", "pt": "Ensino Superior"},
+      "enrolled": {"en": "Enrolled", "pt": "Matriculou"},
 
       // SC Labels
       "sc": {"en": "School Census", "pt": "Censo Escolar"},
+      "classes": {"en": "Classes", "pt": "Aulas"},
+      "enrolled_classes": {"en": "Average Class Size", "pt": "Tamanho da Classe M\u00e9dia"},
 
       // Key Labels
       "brazil": {"en": "Brazil", "pt": "Brasil"},
@@ -320,6 +324,7 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "university_id": {"en": "ID", "pt": "ID"},
       "course_hedu_id": {"en": "ID", "pt": "ID"},
       "course_sc_id": {"en": "ID", "pt": "ID"},
+      "course_id": {"en": "ID", "pt": "ID"},
 
       // Filter Titles
       "bra": {"en": "Location", "pt": "Localidade"},
@@ -808,6 +813,10 @@ dataviva.cleanData = function(data, dataset, output) {
         temp[z] = 0
       }
     })
+
+    if ("classes" in temp && "enrolled" in temp) {
+      temp.enrolled_classes = temp.enrolled/temp.classes
+    }
 
     return temp
 
