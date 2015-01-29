@@ -8,7 +8,8 @@ from dataviva.utils import table_helper, query_helper
 
 mod = Blueprint('ei', __name__, url_prefix='/ei')
 
-@mod.route('/<year>/<month>/<bra_id_s>/<bra_id_r>/')
+@mod.route('/<year>-<month>/<bra_id_s>/<bra_id_r>/')
+@mod.route('/<year>/<bra_id_s>/<bra_id_r>/')
 @gzipped
 # @cache_api("ei")
 def ei_api(**kwargs):
@@ -22,6 +23,9 @@ def ei_api(**kwargs):
     exclude = request.args.get('exclude', None) or kwargs.pop('exclude', None)
     download = request.args.get('download', None) or kwargs.pop('download', None)
 
+    if not "month" in kwargs:
+        kwargs["month"] = query_helper.ALL
+
     allowed_when_not, possible_tables = table_helper.prepare(['bra_id_r', 'bra_id_s', 'month', 'year'], tables)
     table = table_helper.select_best_table(kwargs, allowed_when_not, possible_tables)
 
@@ -29,6 +33,8 @@ def ei_api(**kwargs):
         raise Exception("No table!")
 
     filters, groups, show_column = query_helper.build_filters_and_groups(table, kwargs, exclude=exclude)
+
+
 
     results = query_helper.query_table(table, filters=filters, groups=groups, limit=limit, order=order, sort=sort, serialize=serialize)
 
