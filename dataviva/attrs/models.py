@@ -14,7 +14,7 @@ class Stats(object):
     def stats(self):
         from dataviva.attrs.models import Yb
         from dataviva.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
-        from dataviva.secex.models import Ybp, Ybw, Ypw, Yb_secex, Yp, Yw
+        from dataviva.secex_export.models import Ybp, Ybw, Ypw, Yb_secex, Yp, Yw
 
         stats = []
         attr_type = self.__class__.__name__.lower()
@@ -320,10 +320,10 @@ class Hs(db.Model, AutoSerialize, Stats):
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
 
-#     yp = db.relationship("Yp", backref = 'hs', lazy = 'dynamic')
-#     ypw = db.relationship("Ypw", backref = 'hs', lazy = 'dynamic')
-#     ybp = db.relationship("Ybp", backref = 'hs', lazy = 'dynamic')
-#     ybpw = db.relationship("Ybpw", backref = 'hs', lazy = 'dynamic')
+    yp = db.relationship("Yp", backref = 'hs', lazy = 'dynamic')
+    ypw = db.relationship("Ypw", backref = 'hs', lazy = 'dynamic')
+    ybp = db.relationship("Ybp", backref = 'hs', lazy = 'dynamic')
+    ybpw = db.relationship("Ybpw", backref = 'hs', lazy = 'dynamic')
 
     def name(self):
         lang = getattr(g, "locale", "en")
@@ -460,10 +460,10 @@ class Wld(db.Model, AutoSerialize, Stats):
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
 
-#     yw = db.relationship("Yw", backref = 'wld', lazy = 'dynamic')
-#     ypw = db.relationship("Ypw", backref = 'wld', lazy = 'dynamic')
-#     ybw = db.relationship("Ybw", backref = 'wld', lazy = 'dynamic')
-#     ybpw = db.relationship("Ybpw", backref = 'wld', lazy = 'dynamic')
+    yw = db.relationship("Yw", backref = 'wld', lazy = 'dynamic')
+    ypw = db.relationship("Ypw", backref = 'wld', lazy = 'dynamic')
+    ybw = db.relationship("Ybw", backref = 'wld', lazy = 'dynamic')
+    ybpw = db.relationship("Ybpw", backref = 'wld', lazy = 'dynamic')
 
     def name(self):
         lang = getattr(g, "locale", "en")
