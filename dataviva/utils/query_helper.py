@@ -1,6 +1,7 @@
 import re
 from dataviva import db
 from sqlalchemy import func, desc
+from dataviva.attrs.models import bra_pr
 
 SHOW='show'
 SHOW2='.show.'
@@ -50,8 +51,14 @@ def _show_filters_to_add(column, value, table, colname):
     matches = re.match(pattern, value)
     if matches: 
         prefix, length = matches.groups()
-        if prefix:
+        PLANNING_REGION = "4mgplr"
+        if prefix.startswith(PLANNING_REGION) and length == '9':
+            result = db.session.query(bra_pr).filter_by(pr_id=prefix).all()
+            result = [muni for muni, pr in result]
+            to_add.append(column.in_(result))
+        elif prefix:
             to_add.append(column.startswith(prefix))
+
         if length and hasattr(table, colname + LEN):
             lencol = getattr(table, colname + LEN)
             to_add.append(lencol == length)
