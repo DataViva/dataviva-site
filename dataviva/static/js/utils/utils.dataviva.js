@@ -828,9 +828,9 @@ dataviva.cleanData = function(data, dataset, output) {
 }
 
 dataviva.depths = function(type,flatten) {
-  if (type == "cnae") var array = [1,6];
-  else if (type == "cbo") var array = [1,4];
-  else if (type == "hs") var array = [2,6];
+  if (type == "cnae") var array = [1,3,6];
+  else if (type == "cbo") var array = [1,2,4];
+  else if (type == "hs") var array = [2,4,6];
   else if (type == "bra") var array = [3,5,9];
   else if (type == "wld") var array = [2,5];
   else if (type == "course_hedu") var array = [2,6];
