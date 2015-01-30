@@ -94,12 +94,7 @@
 
   <div id="nav_footer" class="lightbox">
 
-    <!-- Open Data Link -->
-    <a class="opendata" href="http://opendefinition.org/" target="_blank">
-      <img alt="This material is Open Data" border="0"
-      src="http://assets.okfn.org/images/ok_buttons/od_80x15_red_green.png" />
-    </a>
-    <!-- /Open Data Link -->
+    <a href="https://github.com/DataViva/dataviva-site/" class="logo github" target="_blank"></a>
 
     <a href="http://www.fjp.gov.br/" class="logo fjp" target="_blank"></a>
     <a href="http://www.fapemig.br/" class="logo fapemig" target="_blank"></a>
@@ -232,9 +227,9 @@
     d3.select(window).on(d3plus.client.pointer.click, function() {
 
     	var d3_target = d3.select(d3.event.target)
-
-      if ( !d3_target.classed("searchFld") && !d3_target.classed("searchBox") && !d3_target.classed("searchResult") ) {
-        if( d3.select(".searchBox").style("width") === "465px" || d3.select(".search .searchResult").style("opacity") ) {
+      if ( !d3_target.classed("searchFld") && !d3_target.classed("searchBox") && !d3_target.classed("searchResult")) {
+        var results = d3.select(".search .searchResult")
+        if( d3.select(".searchBox").style("width") === "465px" || (!results.empty() && results.style("opacity")) ) {
           closeSearch()
         }
       }

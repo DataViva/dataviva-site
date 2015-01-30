@@ -269,6 +269,10 @@ a.logo:hover {
   opacity: 1;
 }
 
+a.logo.github {
+  background-image: url("/static/img/nav/logo_github.jpg");
+}
+
 a.logo.governo {
   background-image: url("/static/img/nav/logo_governo.jpg");
 }

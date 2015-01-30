@@ -41,10 +41,10 @@ def location_values(ret,cat):
 ''' Returns modified query and return variable for data calls '''
 def parse_filter(kwargs,id_type,query,data_table,ret):
 
-    from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld
+    from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu
 
     query = query.group_by(getattr(data_table, id_type))
-    cat = id_type.split("_")[0]
+    cat = id_type[:-3]
     table = locals()[cat.capitalize()]
     ids = kwargs[id_type].split("_")
     id_list = []
@@ -204,14 +204,14 @@ def compile_query(query):
 def make_query(data_table, url_args, lang, **kwargs):
 
     from dataviva import db
-    from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld
+    from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu
 
     ops = {">": operator.gt,
            ">=": operator.ge,
            "<": operator.lt,
            "<=": operator.le}
 
-    check_keys = ["bra_id", "cnae_id", "cbo_id", "hs_id", "wld_id"]
+    check_keys = ["bra_id", "cnae_id", "cbo_id", "hs_id", "wld_id", "university_id", "course_hedu_id"]
     unique_keys = []
 
     download = url_args.get("download", None)
@@ -387,7 +387,7 @@ def make_query(data_table, url_args, lang, **kwargs):
         new_return = []
         attrs = None
         if ("name" or "id_ibge" or "id_mdic" in cols) and show_id:
-            attr_table = locals()[show_id.split("_")[0].title()]
+            attr_table = locals()[show_id[:-3].capitalize()]
             attrs = [x.serialize() for x in attr_table.query.all()]
             attrs = {x["id"]:x or None for x in attrs}
         for d in ret["data"]:

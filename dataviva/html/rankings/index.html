@@ -33,19 +33,31 @@
         {% trans %}Export Destinations{% endtrans %}
       </a>
 
+      <a class="{% if type == 'university' %}decision{% else %}help{% endif %} icon university" href="/rankings/2012/university/5/">
+        {% trans %}Universities{% endtrans %}
+      </a>
+
+      <a class="{% if type == 'course_hedu' %}decision{% else %}help{% endif %} icon course_hedu" href="/rankings/2012/course_hedu/6/">
+        {% trans %}Courses{% endtrans %}
+      </a>
+
   </div>
 
   <div id="rankings_table" class="grid5col3 lightbox">
     <div id="controls">
-      <div id="depths">
-        <legend id="depth">{% trans %}Depth{% endtrans %}</legend>
-        {% for d in depths %}
-          <input onclick="change_depth(this.value)" type="radio" id="{{type}}_{{d}}" name="depth" value="{{d}}"{% if depth == d %} checked{% endif %}>
-          <label for="{{type}}_{{d}}">{{format(type~"_"~d~"_plural").render(type~"_"~d~"_plural",g.locale)}}</label>
-        {% endfor %}
-      </div>
+
+      {% if depths|length > 1 %}
+        <div id="depths">
+          <legend for="depth">{% trans %}Depth{% endtrans %}</legend>
+          {% for d in depths %}
+            <input type="radio" value="{{type}}_{{d}}" name="depth" {% if depth == d %} checked{% endif %}>
+            <label for="{{type}}_{{d}}">{{format(type~"_"~d~"_plural").render(type~"_"~d~"_plural",g.locale)}}</label>
+          {% endfor %}
+        </div>
+      {% endif %}
+
       <div id="years">
-        <select id="year_select" onchange="change_year(this.value)">
+        <select id="year_select">
           {% for y in years %}
             <option value="{{y}}"{% if y == year %} selected{% endif %}>{{y}}</option>
           {% endfor %}
@@ -68,24 +80,45 @@
         .style("-webkit-overflow-scrolling","touch")
     }
 
-    leon("$depth").color(dataviva.color)
-    leon("#year_select").color(dataviva.color)
-    var depth = "{{depth}}", year = "{{year}}", type = "{{type}}", order = "{{order}}"
+    var depth = "{{depth}}", year = "{{year}}", type = "{{type}}", order = "{{order}}";
+
+    function change_depth(d) {
+      d = d.slice(-1);
+      if (d !== depth) {
+        depth = d;
+        update_table();
+      }
+    }
+
+    function change_year(y) {
+      if (y !== year) {
+        year = y;
+        update_table();
+      }
+    }
+
+    if (!d3.select("#depths").empty()) {
+
+      var depth_form = d3plus.form()
+        .data("[name=depth]")
+        .focus(depth, change_depth)
+        .type("toggle")
+        .ui({"margin": 0})
+        .draw();
+
+    }
+
+    d3plus.form()
+      .data("#year_select")
+      .focus(year, change_year)
+      .type("drop")
+      .ui({"margin": 0})
+      .draw();
 
     function update_table() {
       var url = year+"/"+type+"/"+depth+"/?order="+order
       d3.select("iframe").attr("src","/rankings/table/"+url)
       dataviva.url("/rankings/"+url)
-    }
-
-    function change_depth(d) {
-      depth = d
-      update_table()
-    }
-
-    function change_year(y) {
-      year = y
-      update_table()
     }
 
     var last_w = 500, last_h = 200-49
