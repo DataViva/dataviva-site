@@ -541,7 +541,9 @@ def crosswalk_recs(dataset, build_filter1, raw_filter1, build_filter2, raw_filte
 
     data1 = {"<cnae>": Crosswalk_pi.cnae_id, "<hs>": Crosswalk_pi.hs_id}
     data2 = {"<cbo>": Crosswalk_oc.cbo_id, "<course_hedu>": Crosswalk_oc.course_hedu_id}
-    if build_filter1 in data1 and build_filter1 != "all":
+
+    if build_filter1 in data1 and raw_filter1 != "all":
+
         col = data1[build_filter1]
         results = Crosswalk_pi.query.filter(col == raw_filter1).all()
         ids = [row.get_id(dataset) for row in results]
@@ -561,7 +563,7 @@ def crosswalk_recs(dataset, build_filter1, raw_filter1, build_filter2, raw_filte
                 b.set_filter1(raw_target_filter)
 
             crosswalk["filter1"] = [b.serialize() for b in builds]
-    elif build_filter2 in data2 and build_filter2 != "all":
+    elif build_filter2 in data2 and raw_filter2 != "all":
         col = data2[build_filter2]
         results = Crosswalk_oc.query.filter(col == raw_filter2).all()
         ids = [row.get_id(dataset) for row in results]
