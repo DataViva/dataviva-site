@@ -53,14 +53,14 @@ def compute_table_years(datasets):
     from dataviva.hedu.models import Yc_hedu
     from dataviva.sc.models import Yc_sc
     from dataviva.attrs.models import Yb as Yb_attr
-    
+
     tables = {"ei" : Yms, "hedu": Yc_hedu, "sc": Yc_sc, "secex": Ymb, "rais": Yb_rais, "population": Yb_attr}
-    
+
     results = {}
     for dataset in datasets:
         max_year = str(get_year(tables[dataset], mode='max'))
         min_year = str(get_year(tables[dataset], mode='min'))
-        if dataset == "ei":
+        if dataset == "ei" or dataset == "secex":
             max_year = max_year + "-" + str(get_month(tables[dataset], max_year, 'max'))
             min_year = min_year + "-" + str(get_month(tables[dataset], min_year, 'min'))
         results[dataset] = [min_year, max_year]
