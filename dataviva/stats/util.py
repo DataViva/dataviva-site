@@ -1,7 +1,8 @@
 # Utility functions for stats
 import json
-from dataviva.attrs.models import Bra, Hs, Cbo, Cnae, Course_hedu, University
 
+def parse_year(s):
+    return int(str(s).split("-")[-1])
 
 def compute_allowed(table_dict):
     master_list = set([])
@@ -21,6 +22,8 @@ def gen_table_list(poss_tables):
     return table_dict
 
 def get_profiles(item_list, typestr, serialize=True):
+    from dataviva.attrs.models import Bra, Hs, Cbo, Cnae, Course_hedu, University
+
     typemap = {"bra": Bra, "hs": Hs, "cnae": Cnae, "cbo": Cbo, "course_hedu": Course_hedu, "university": University}
     obj = typemap[typestr]
 
@@ -28,3 +31,46 @@ def get_profiles(item_list, typestr, serialize=True):
     if serialize:
         posters = [p.serialize() for p in posters]
     return posters
+
+def get_year(table, mode):
+    if mode == 'min':
+        year_col = table.year.asc()
+    else:
+        year_col = table.year.desc()
+    return table.query.with_entities(table.year).order_by(year_col).first().year
+
+def get_month(table, year, mode):
+    if mode == 'min':
+        month_col = table.month.asc()
+    else:
+        month_col = table.month.desc()
+    return table.query.with_entities(table.month).filter_by(year=year).order_by(month_col).first().month
+
+def compute_table_years(datasets):
+    from dataviva.ei.models import Yms
+    from dataviva.secex.models import Ymb
+    from dataviva.rais.models import Yb_rais
+    from dataviva.hedu.models import Yc_hedu
+    from dataviva.sc.models import Yc_sc
+    from dataviva.attrs.models import Yb as Yb_attr
+    
+    tables = {"ei" : Yms, "hedu": Yc_hedu, "sc": Yc_sc, "secex": Ymb, "rais": Yb_rais, "population": Yb_attr}
+    
+    results = {}
+    for dataset in datasets:
+        max_year = str(get_year(tables[dataset], mode='max'))
+        min_year = str(get_year(tables[dataset], mode='min'))
+        if dataset == "ei":
+            max_year = max_year + "-" + str(get_month(tables[dataset], max_year, 'max'))
+            min_year = min_year + "-" + str(get_month(tables[dataset], min_year, 'min'))
+        results[dataset] = [min_year, max_year]
+    return results
+
+def get_or_set_years(redis, key):
+    val = redis.get(key)
+    if val:
+        val = json.loads(val)
+    else:
+        val = compute_table_years(['ei', 'hedu', 'sc', 'secex', 'rais', 'population'])
+    redis.set(key, json.dumps(val))
+    return val

@@ -7,7 +7,7 @@ from random import randint
 from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, url_for, redirect, jsonify
 from flask.ext.babel import gettext
 
-from dataviva import db, datavivadir, __latest_year__, view_cache
+from dataviva import db, datavivadir, __year_range__, view_cache
 from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld
@@ -159,9 +159,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
             cached_query(cache_id, ret.data)
     else:
 
-        year_range = {}
-        for dataset in __latest_year__:
-            year_range[dataset] = ["2000", "{}".format(__latest_year__[dataset])]
+        year_range = json.dumps(__year_range__)
 
         ret = make_response(render_template("apps/embed.html",
             all_builds = all_builds,
