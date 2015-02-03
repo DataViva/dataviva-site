@@ -3,7 +3,7 @@ import urllib2
 from sqlalchemy import func, distinct, asc, desc, and_, or_
 from flask import Blueprint, request, jsonify, abort, g, render_template, make_response, redirect, url_for, flash
 
-from dataviva import db, __year_range__
+from dataviva import db, __year_range__, view_cache
 from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University
 from dataviva.secex.models import Ymp, Ymw
 from dataviva.rais.models import Yi, Yo
@@ -15,7 +15,7 @@ from dataviva.utils.gzip_data import gzip_data
 from dataviva.utils.cached_query import cached_query
 from dataviva.utils.exist_or_404 import exist_or_404
 from dataviva.utils.title_case import title_case
-
+from sqlalchemy import desc
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
@@ -260,7 +260,7 @@ def attrs_search(term=None):
 
 
     bra = Bra.query.filter(or_(Bra.id == term, or_(Bra.name_pt.ilike("%"+term+"%"), Bra.name_en.ilike("%"+term+"%"))))
-    items = bra.limit(50).all()
+    items = bra.join(Yb).order_by(desc("population")).limit(50).all()
     items = [i.serialize() for i in items]
 
     for i in items:
