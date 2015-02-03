@@ -27,12 +27,12 @@ def parse_years(year_str):
 ''' Returns array of ECIs given location '''
 def location_values(ret,cat):
 
-    from dataviva.secex.models import Yb_secex
+    from dataviva.secex.models import Ymb
     from dataviva.rais.models import Yb_rais
 
     bra_id = ret[cat][0]["id"]
     if bra_id != "all":
-        ecis = Yb_secex.query.filter_by(bra_id=bra_id).all()
+        ecis = Ymb.query.filter_by(bra_id=bra_id).all()
         ret["eci"] = {}
         for yb in ecis:
             ret["eci"][yb.year] = yb.eci
@@ -138,6 +138,8 @@ def merge_objects(objs):
     averages = ['eci', 'eci_wld', 'pci', 'unique_cnae', 'unique_cbo',
                 'unique_hs', 'unique_wld', 'importance',
                 'val_usd_growth_pct', 'val_usd_growth_pct_5',
+                'export_val_growth_pct', 'export_val_growth_pct_5',
+                'import_val_growth_pct', 'import_val_growth_pct_5',
                 'wage_growth_pct', 'wage_growth_pct_5',
                 'num_emp_growth_pct', 'num_emp_growth_pct_5',
                 'distance', 'distance_wld',

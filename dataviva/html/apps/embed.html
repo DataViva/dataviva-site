@@ -392,7 +392,8 @@
         "num_est",
         "num_emp_est",
 
-        "val_usd",
+        "export_val",
+        "import_val",
 
         "enrolled",
         "students",
@@ -431,8 +432,10 @@
         "num_emp_growth",
         "num_emp_growth_5",
 
-        "val_usd_growth",
-        "val_usd_growth_5",
+        "export_val_growth",
+        "export_val_growth_5",
+        "import_val_growth",
+        "import_val_growth_5",
 
         "enrolled_growth",
         "graduates_growth"
@@ -475,8 +478,10 @@
           "wage_growth_5": "mean",
           "num_emp_growth": "mean",
           "num_emp_growth_5": "mean",
-          "val_usd_growth": "mean",
-          "val_usd_growth_5": "mean",
+          "export_val_growth": "mean",
+          "export_val_growth_5": "mean",
+          "import_val_growth": "mean",
+          "import_val_growth_5": "mean",
           "importance": "mean"
         }
 
@@ -709,7 +714,9 @@
                       a[out+"_display"] = dataviva.displayID(a.id,out)
                       a.icon = dataviva.icon(a.id,out)
                       app.attrs[app.build.output][a.id] = a
-                      if (a["val_usd"]) delete a["val_usd"]
+                      if (a["export_val"]) delete a["export_val"]
+                      if (a["import_val"]) delete a["import_val"]
+                      if (a["enrolled"]) delete a["enrolled"]
                       if (a["num_emp"]) delete a["num_emp"]
                     })
 
@@ -913,7 +920,7 @@
         // Set Global Vars
         if (ui.type == "size") {
           if (app.build.app.type == "occugrid") var default_value = "required"
-          else if (ui.values.indexOf("val_usd") >= 0) var default_value = "val_usd"
+          else if (ui.values.indexOf("export_val") >= 0) var default_value = "export_val"
           else if (ui.values.indexOf("num_emp") >= 0) var default_value = "num_emp"
           else var default_value = ui.values[0]
         }
@@ -1450,7 +1457,8 @@
           text = dataviva.format.text("secex_3")
         }
       }
-      descs["val_usd"] = text
+      descs["export_val"] = text
+      descs["import_val"] = text
       app.viz.descs(descs)
       return text
     }

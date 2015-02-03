@@ -14,7 +14,7 @@ class Stats(object):
     def stats(self):
         from dataviva.attrs.models import Yb
         from dataviva.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
-        from dataviva.secex_export.models import Ybp, Ybw, Ypw, Yb_secex, Yp, Yw
+        from dataviva.secex.models import Ymbp, Ymbw, Ympw, Ymb, Ymp, Ymw
 
         stats = []
         attr_type = self.__class__.__name__.lower()
@@ -26,17 +26,17 @@ class Stats(object):
             stats.append(self.get_top_attr(Yi, "num_emp", attr_type, "cnae", "rais"))
             stats.append(self.get_top_attr(Yo, "num_emp", attr_type, "cbo", "rais"))
             stats.append(self.get_val(Yi, "wage", attr_type, "rais"))
-            stats.append(self.get_top_attr(Yp, "val_usd", attr_type, "hs", "secex_export"))
-            stats.append(self.get_top_attr(Yw, "val_usd", attr_type, "wld", "secex_export"))
-            stats.append(self.get_val(Yp, "val_usd", attr_type, "secex_export"))
+            stats.append(self.get_top_attr(Ymp, "export_val", attr_type, "hs", "secex"))
+            stats.append(self.get_top_attr(Ymw, "export_val", attr_type, "wld", "secex"))
+            stats.append(self.get_val(Ymp, "export_val", attr_type, "secex"))
         elif attr_type == "bra":
             stats.append(self.get_val(Yb,"population",attr_type,"population"))
             stats.append(self.get_top_attr(Ybi, "num_emp", attr_type, "cnae", "rais"))
             stats.append(self.get_top_attr(Ybo, "num_emp", attr_type, "cbo", "rais"))
             stats.append(self.get_val(Yb_rais, "wage", attr_type, "rais"))
-            stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "hs", "secex_export"))
-            stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "wld", "secex_export"))
-            stats.append(self.get_val(Yb_secex, "val_usd", attr_type, "secex_export"))
+            stats.append(self.get_top_attr(Ymbp, "export_val", attr_type, "hs", "secex"))
+            stats.append(self.get_top_attr(Ymbw, "export_val", attr_type, "wld", "secex"))
+            stats.append(self.get_val(Ymb, "export_val", attr_type, "secex"))
         elif attr_type == "cnae":
             dataset = "rais"
             stats.append(self.get_top_attr(Ybi, "num_emp", attr_type, "bra", dataset))
@@ -52,22 +52,22 @@ class Stats(object):
             stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset))
             stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset, __latest_year__[dataset]-5))
         elif attr_type == "hs":
-            dataset = "secex_export"
-            stats.append(self.get_top_attr(Ybp, "val_usd", attr_type, "bra", dataset))
-            stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "wld", dataset))
-            stats.append(self.get_val(Yp, "val_usd_growth", attr_type, dataset))
-            stats.append(self.get_val(Yp, "val_usd_growth_5", attr_type, dataset))
-            stats.append(self.get_val(Yp, "val_usd", attr_type, dataset))
-            stats.append(self.get_val(Yp, "val_usd", attr_type, dataset, __latest_year__[dataset]-5))
+            dataset = "secex"
+            stats.append(self.get_top_attr(Ymbp, "export_val", attr_type, "bra", dataset))
+            stats.append(self.get_top_attr(Ympw, "export_val", attr_type, "wld", dataset))
+            stats.append(self.get_val(Ymp, "export_val_growth", attr_type, dataset))
+            stats.append(self.get_val(Ymp, "export_val_growth_5", attr_type, dataset))
+            stats.append(self.get_val(Ymp, "export_val", attr_type, dataset))
+            stats.append(self.get_val(Ymp, "export_val", attr_type, dataset, __latest_year__[dataset]-5))
         elif attr_type == "wld":
-            dataset = "secex_export"
-            stats.append(self.get_top_attr(Ybw, "val_usd", attr_type, "bra", dataset))
-            stats.append(self.get_top_attr(Ypw, "val_usd", attr_type, "hs", dataset))
-            stats.append(self.get_val(Yw, "val_usd_growth", attr_type, dataset))
-            stats.append(self.get_val(Yw, "val_usd_growth_5", attr_type, dataset))
-            stats.append(self.get_val(Yw, "eci", attr_type, dataset))
-            stats.append(self.get_val(Yw, "val_usd", attr_type, dataset))
-            stats.append(self.get_val(Yw, "val_usd", attr_type, dataset, __latest_year__[dataset]-5))
+            dataset = "secex"
+            stats.append(self.get_top_attr(Ymbw, "export_val", attr_type, "bra", dataset))
+            stats.append(self.get_top_attr(Ympw, "export_val", attr_type, "hs", dataset))
+            stats.append(self.get_val(Ymw, "export_val_growth", attr_type, dataset))
+            stats.append(self.get_val(Ymw, "export_val_growth_5", attr_type, dataset))
+            stats.append(self.get_val(Ymw, "eci", attr_type, dataset))
+            stats.append(self.get_val(Ymw, "export_val", attr_type, dataset))
+            stats.append(self.get_val(Ymw, "export_val", attr_type, dataset, __latest_year__[dataset]-5))
 
         return stats
 
@@ -108,8 +108,8 @@ class Stats(object):
             length = 4
 
         if attr_type == "bra":
-            agg = {'val_usd':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
-                    'val_usd_growth':func.avg, 'val_usd_growth_5':func.avg,
+            agg = {'export_val':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
+                    'export_val_growth':func.avg, 'export_val_growth_5':func.avg,
                     'distance':func.avg, 'distance_wld':func.avg,
                     'opp_gain':func.avg, 'opp_gain_wld':func.avg,
                     'rca':func.avg, 'rca_wld':func.avg,
@@ -173,9 +173,9 @@ class Stats(object):
             calc_var = None
 
         if attr_type == "bra":
-            agg = {'population':func.sum, 'val_usd':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
-                    'val_usd_growth_pct':func.avg, 'val_usd_growth_pct_5':func.avg,
-                    'val_usd_growth_val':func.avg, 'val_usd_growth_val_5':func.avg,
+            agg = {'population':func.sum, 'export_val':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
+                    'export_val_growth_pct':func.avg, 'export_val_growth_pct_5':func.avg,
+                    'export_val_growth_val':func.avg, 'export_val_growth_val_5':func.avg,
                     'distance':func.avg, 'distance_wld':func.avg,
                     'opp_gain':func.avg, 'opp_gain_wld':func.avg,
                     'rca':func.avg, 'rca_wld':func.avg,
@@ -320,10 +320,10 @@ class Hs(db.Model, AutoSerialize, Stats):
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
 
-    yp = db.relationship("Yp", backref = 'hs', lazy = 'dynamic')
-    ypw = db.relationship("Ypw", backref = 'hs', lazy = 'dynamic')
-    ybp = db.relationship("Ybp", backref = 'hs', lazy = 'dynamic')
-    ybpw = db.relationship("Ybpw", backref = 'hs', lazy = 'dynamic')
+    yp = db.relationship("Ymp", backref = 'hs', lazy = 'dynamic')
+    ypw = db.relationship("Ympw", backref = 'hs', lazy = 'dynamic')
+    ybp = db.relationship("Ymbp", backref = 'hs', lazy = 'dynamic')
+    ybpw = db.relationship("Ymbpw", backref = 'hs', lazy = 'dynamic')
 
     def name(self):
         lang = getattr(g, "locale", "en")
@@ -460,10 +460,10 @@ class Wld(db.Model, AutoSerialize, Stats):
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
 
-    yw = db.relationship("Yw", backref = 'wld', lazy = 'dynamic')
-    ypw = db.relationship("Ypw", backref = 'wld', lazy = 'dynamic')
-    ybw = db.relationship("Ybw", backref = 'wld', lazy = 'dynamic')
-    ybpw = db.relationship("Ybpw", backref = 'wld', lazy = 'dynamic')
+    yw = db.relationship("Ymw", backref = 'wld', lazy = 'dynamic')
+    ypw = db.relationship("Ympw", backref = 'wld', lazy = 'dynamic')
+    ybw = db.relationship("Ymbw", backref = 'wld', lazy = 'dynamic')
+    ybpw = db.relationship("Ymbpw", backref = 'wld', lazy = 'dynamic')
 
     def name(self):
         lang = getattr(g, "locale", "en")
@@ -498,10 +498,10 @@ class Bra(db.Model, AutoSerialize, Stats):
     distance = 0
 
     # SECEX relations
-    yb_secex = db.relationship("Yb_secex", backref = 'bra', lazy = 'dynamic')
-    ybp = db.relationship("Ybp", backref = 'bra', lazy = 'dynamic')
-    ybw = db.relationship("Ybw", backref = 'bra', lazy = 'dynamic')
-    ybpw = db.relationship("Ybpw", backref = 'bra', lazy = 'dynamic')
+    yb_secex = db.relationship("Ymb", backref = 'bra', lazy = 'dynamic')
+    ybp = db.relationship("Ymbp", backref = 'bra', lazy = 'dynamic')
+    ybw = db.relationship("Ymbw", backref = 'bra', lazy = 'dynamic')
+    ybpw = db.relationship("Ymbpw", backref = 'bra', lazy = 'dynamic')
     # RAIS relations
     yb_rais = db.relationship("Yb_rais", backref = 'bra', lazy = 'dynamic')
     ybi = db.relationship("Ybi", backref = 'bra', lazy = 'dynamic')

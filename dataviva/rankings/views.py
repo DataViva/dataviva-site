@@ -61,11 +61,11 @@ def index(year=2012,type="bra",depth=3):
     depths["course_hedu"] = [2,6]
 
     order = {}
-    order["bra"] = "val_usd"
+    order["bra"] = "export_val"
     order["cnae"] = "wage_avg"
     order["cbo"] = "wage_avg"
-    order["hs"] = "val_usd"
-    order["wld"] = "val_usd"
+    order["hs"] = "export_val"
+    order["wld"] = "export_val"
     order["university"] = "enrolled"
     order["course_hedu"] = "enrolled"
 
@@ -94,7 +94,7 @@ def data(year=None,type="bra",depth=None):
 
     if type == "bra":
         request_args["excluding"] = {"bra_id": "xx"}
-        request_args["cols"] = ["bra_id","id_ibge","name","wage","wage_avg","val_usd","population","hs_diversity","hs_diversity_eff","cnae_diversity","cnae_diversity_eff"]
+        request_args["cols"] = ["bra_id","id_ibge","name","wage","wage_avg","export_val","import_val","population","hs_diversity","hs_diversity_eff","cnae_diversity","cnae_diversity_eff"]
         args["join"] = [{
                 "table": Yb,
                 "columns": ["population"],
@@ -117,11 +117,11 @@ def data(year=None,type="bra",depth=None):
         table = Yo
     elif type == "hs":
         request_args["excluding"] = {"hs_id": "xx"}
-        request_args["cols"] = ["hs_id","name","val_usd","pci","wld_diversity","wld_diversity_eff"]
+        request_args["cols"] = ["hs_id","name","export_val","import_val","pci","wld_diversity","wld_diversity_eff"]
         table = Yp
     elif type == "wld":
         request_args["excluding"] = {"wld_id": "xx"}
-        request_args["cols"] = ["wld_id","id_mdic","name","val_usd","hs_diversity","hs_diversity_eff"]
+        request_args["cols"] = ["wld_id","id_mdic","name","export_val","import_val","hs_diversity","hs_diversity_eff"]
         table = Yw
     elif type == "university":
         request_args["excluding"] = {}

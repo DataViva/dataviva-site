@@ -852,8 +852,8 @@ function Selector() {
           proximities = [0,30,60,90],
           sort_types = {
             "bra": "population",
-            "hs": "val_usd",
-            "wld": "val_usd",
+            "hs": "export_val",
+            "wld": "export_val",
             "cbo": "num_emp",
             "cnae": "num_emp",
             "course_hedu": "enrolled",

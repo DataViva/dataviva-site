@@ -1,6 +1,6 @@
 from dataviva import db
 from dataviva.utils.auto_serialize import AutoSerialize
-# from dataviva.attrs.models import Wld, Hs, Bra
+from dataviva.attrs.models import Wld, Hs, Bra
 from sqlalchemy.ext.declarative import declared_attr
 
 class BaseSecex(db.Model, AutoSerialize):
@@ -33,21 +33,21 @@ class HsId(object):
 
     @declared_attr
     def hs_id(cls):
-        return db.Column(db.String(6), primary_key=True)
+        return db.Column(db.String(6), db.ForeignKey(Hs.id), primary_key=True)
 
 class WldId(object):
     wld_id_len = db.Column(db.Integer(1))
 
     @declared_attr
     def wld_id(cls):
-        return db.Column(db.String(5), primary_key=True)
+        return db.Column(db.String(5), db.ForeignKey(Wld.id), primary_key=True)
 
 class BraId(object):
     bra_id_len = db.Column(db.Integer(1))
 
     @declared_attr
     def bra_id(cls):
-        return db.Column(db.String(9), primary_key=True)
+        return db.Column(db.String(9), db.ForeignKey(Bra.id), primary_key=True)
 
 class Distance(object):
     distance = db.Column(db.Float())

@@ -9,7 +9,6 @@ from dataviva import db, view_cache
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo
 from dataviva.apps.models import UI
-from dataviva.secex.models import Ymb
 
 from dataviva.utils.cached_query import cached_query, make_cache_key
 

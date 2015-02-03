@@ -264,8 +264,10 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "opp_gain_desc": {"en": "Opportunity gain is a measure that indicates how much diversity is offered by an industry or product should the given location develop it.", "pt": "O ganho de oportunidade \u00e9 uma medida que indica quanta diversidade \u00e9 oferecida por um determinado setor ou produto se uma determinada localidade fosse desenvolv\u00ea-lo."},
       "opp_gain_wld": {"en": "International Opportunity Gain", "pt": "Ganho de Oportunidade Internacional"},
 
-      "val_usd_growth": {"en": "Nominal Annual Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento Anual (1 ano)"},
-      "val_usd_growth_5": {"en": "Nominal Annual Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento Anual (5 anos)"},
+      "export_val_growth": {"en": "Nominal Annual Export Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Exporta\u00e7\u00f5es Anual (1 ano)"},
+      "export_val_growth_5": {"en": "Nominal Annual Export Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento de Exporta\u00e7\u00f5es Anual (5 anos)"},
+      "import_val_growth": {"en": "Nominal Annual Import Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Importa\u00e7\u00f5es Anual (1 ano)"},
+      "import_val_growth_5": {"en": "Nominal Annual Import Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento de Importa\u00e7\u00f5es Anual (5 anos)"},
 
       "wage_growth": {"en": "Nominal Annual Wage Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento dos Sal\u00e1rios Anual (1 ano)"},
       "wage_growth_5": {"en": "Nominal Annual Wage Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento dos Sal\u00e1rios Anual (5 anos)"},
@@ -287,11 +289,11 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "wage_avg_bra": {"en": "Brazilian Average Wage", "pt": "Sal\u00e1rio M\u00e9dio Brasileiro"},
 
       // SECEX Labels
-      "secex": {"en": "Product Trade (SECEX)", "pt": "Com\u00e9rcio Internacional (SECEX)"},
-      "secex_export": {"en": "Product Exports (SECEX)", "pt": "Exporta\u00e7\u00f5es de Produtos (SECEX)"},
-      "secex_import": {"en": "Product Imports (SECEX)", "pt": "Importa\u00e7\u00f5es de Produtos (SECEX)"},
-      "val_usd": {"en": "Trade Value", "pt": "Valor do Com\u00e9rcio"},
-      "total_val_usd": {"en": "Total Exports", "pt": "Total de Exporta\u00e7\u00f5es"},
+      "secex": {"en": "International Trade (SECEX)", "pt": "Com\u00e9rcio Internacional (SECEX)"},
+      "export_val": {"en": "Exports", "pt": "Exporta\u00e7\u00f5es"},
+      "total_export_val": {"en": "Total Exports", "pt": "Total de Exporta\u00e7\u00f5es"},
+      "import_val": {"en": "Imports", "pt": "Importa\u00e7\u00f5es"},
+      "total_import_val": {"en": "Total Imports", "pt": "Total de Importa\u00e7\u00f5es"},
 
       // HEDU Labels
       "hedu": {"en": "Higher Education", "pt": "Ensino Superior"},
@@ -530,7 +532,8 @@ dataviva.format.number = function(value,name,l) {
   }
 
   var total_labels = {
-        "val_usd": ["$"," USD"],
+        "export_val": ["$"," USD"],
+        "import_val": ["$"," USD"],
         "wage": ["$"," BRL"],
         "wage_avg": ["$"," BRL"],
         "wage_avg_bra": ["$"," BRL"]
@@ -760,9 +763,7 @@ dataviva.icon = function(id,type,color) {
 dataviva.cleanData = function(data, dataset, output) {
 
   var zerofills = {
-    "secex": ["val_usd"],
-    "secex_export": ["val_usd"],
-    "secex_import": ["val_usd"],
+    "secex": ["export_val","import_val"],
     "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"],
     "hedu": ["enrolled"],
     "sc": ["enrolled"]

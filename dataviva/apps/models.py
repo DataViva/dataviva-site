@@ -223,7 +223,7 @@ class Build(db.Model, AutoSerialize):
     '''Returns the data table required for this build'''
     def data_table(self):
         from dataviva.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
-        from dataviva.secex.models import Ybp, Ybw, Ypw, Yb_secex, Yp, Yw
+        from dataviva.secex.models import Ymbp, Ymbw, Ympw, Ymb, Ymp, Ymw
 
         # raise Exception(self.output)
         if self.dataset == "rais":
@@ -236,18 +236,16 @@ class Build(db.Model, AutoSerialize):
                 return Ybo
         elif self.dataset.startswith("secex"):
             if self.bra[0].id == "all" and self.output != "bra":
-                return Ypw
+                return Ympw
             elif self.output == "hs" or (self.output == "bra" and self.filter2 == "all"):
-                return Ybp
+                return Ymbp
             elif self.output == "wld" or (self.output == "bra" and self.filter1 == "all"):
-                return Ybw
-
-
+                return Ymbw
 
             if self.filter1 == "all":
-                return Ybw
+                return Ymbw
             elif self.filter1 == "all":
-                return Ybp
+                return Ymbp
 
     '''Returns the english language title of this build.'''
     def title(self, **kwargs):
