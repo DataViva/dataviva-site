@@ -16,3 +16,12 @@ class Ymw(BaseSecex, WldId):
 
 class Ymbp(BaseSecex, BraId, HsId, Rc):
     __tablename__ = "secex_ymbp"
+
+class Ymbpw(BaseSecex, BraId, HsId, WldId, Rc):
+    __tablename__ = "secex_ymbpw"
+
+class Ymbw(BaseSecex, BraId, WldId):
+    __tablename__ = "secex_ymbw"
+
+class Ympw(BaseSecex, HsId, WldId):
+    __tablename__ = "secex_ympw"
