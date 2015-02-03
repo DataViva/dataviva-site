@@ -49,7 +49,21 @@ class BraId(object):
     def bra_id(cls):
         return db.Column(db.String(9), primary_key=True)
 
+class Distance(object):
+    distance = db.Column(db.Float())
+    distance_wld = db.Column(db.Float())
 
-class Rc(object):
+class OppGain(object):
+    opp_gain = db.Column(db.Float())
+    opp_gain_wld = db.Column(db.Float())
+
+class Rca(object):
     rca = db.Column(db.Float())
     rca_wld = db.Column(db.Float())
+
+
+class Eci(object):
+    eci = db.Column(db.Float())
+
+class Rcd(object):
+    rcd = db.Column(db.Float())
