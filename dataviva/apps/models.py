@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import g
-from dataviva import db, __year_range__
+from dataviva import db
 from dataviva.utils.auto_serialize import AutoSerialize
 from dataviva.utils.title_case import title_case
 from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_hedu, Course_sc

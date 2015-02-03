@@ -112,7 +112,6 @@ def attrs(attr="bra",Attr_id=None):
         dataset = "hedu"
     elif Attr == Course_sc:
         dataset = "sc"
-    latest_year = __year_range__[dataset][-1]
 
     cache_id = request.path + lang
     if depth:
@@ -154,8 +153,16 @@ def attrs(attr="bra",Attr_id=None):
         ret["data"] = [fix_name(a.serialize(), lang) for a in attrs]
     # an ID/filter was not provided
     else:
+        latest_year = __year_range__[dataset][-1]
+        latest_month = False
+        if "-" in latest_year:
+            latest_year, latest_month = latest_year.split("-")
+            latest_month = int(latest_month)
+        latest_year = int(latest_year)
         query = db.session.query(Attr,Attr_weight_tbl) \
             .outerjoin(Attr_weight_tbl, and_(getattr(Attr_weight_tbl,"{0}_id".format(attr)) == Attr.id, Attr_weight_tbl.year == latest_year))
+        if latest_month:
+            query = query.filter(Attr_weight_tbl.month == latest_month)
         if depth:
             query = query.filter(func.char_length(Attr.id) == depth)
         else:
@@ -200,7 +207,11 @@ def attrs(attr="bra",Attr_id=None):
         for i, a in enumerate(attrs_all):
             b = a[0].serialize()
             if a[1]:
-                b[Attr_weight_col] = a[1].serialize()[Attr_weight_col]
+                c = a[1].serialize()
+                if Attr_weight_col in c:
+                    b[Attr_weight_col] = c[Attr_weight_col]
+                else:
+                    b[Attr_weight_col] = 0
             else:
                 b[Attr_weight_col] = 0
             a = b
