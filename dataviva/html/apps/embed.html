@@ -1490,7 +1490,6 @@
     app.update = function(value, type) {
 
       if (typeof type !== "string") {
-        console.log(type === app.viz)
         type = type.container(Object).id.slice(3);
       }
 
