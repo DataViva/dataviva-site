@@ -3,7 +3,7 @@ import urllib2
 from sqlalchemy import func, distinct, asc, desc, and_, or_
 from flask import Blueprint, request, jsonify, abort, g, render_template, make_response, redirect, url_for, flash
 
-from dataviva import db, __latest_year__
+from dataviva import db, __year_range__
 from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University
 from dataviva.secex.models import Ymp, Ymw
 from dataviva.rais.models import Yi, Yo
@@ -112,7 +112,7 @@ def attrs(attr="bra",Attr_id=None):
         dataset = "hedu"
     elif Attr == Course_sc:
         dataset = "sc"
-    latest_year = __latest_year__[dataset]
+    latest_year = __year_range__[dataset][-1]
 
     cache_id = request.path + lang
     if depth:

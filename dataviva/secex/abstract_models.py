@@ -40,7 +40,7 @@ class WldId(object):
 
     @declared_attr
     def wld_id(cls):
-        return db.Column(db.String(5), db.ForeignKey(Wld.id), primary_key=True)
+        return db.Column(db.String(5),db.ForeignKey(Wld.id), primary_key=True)
 
 class BraId(object):
     bra_id_len = db.Column(db.Integer(1))

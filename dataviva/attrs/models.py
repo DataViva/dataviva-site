@@ -1,4 +1,4 @@
-from dataviva import db, __latest_year__
+from dataviva import db
 from dataviva.utils.auto_serialize import AutoSerialize
 from dataviva.utils.exist_or_404 import exist_or_404
 from dataviva.utils.title_case import title_case
@@ -7,6 +7,7 @@ from sqlalchemy.sql.expression import cast
 from decimal import *
 
 from flask import g
+from dataviva.stats.util import parse_year
 
 ''' A Mixin class for retrieving quick stats about a particular attribute'''
 class Stats(object):
@@ -15,6 +16,7 @@ class Stats(object):
         from dataviva.attrs.models import Yb
         from dataviva.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
         from dataviva.secex.models import Ymbp, Ymbw, Ympw, Ymb, Ymp, Ymw
+        from dataviva import __year_range__
 
         stats = []
         attr_type = self.__class__.__name__.lower()
@@ -39,35 +41,39 @@ class Stats(object):
             stats.append(self.get_val(Ymb, "export_val", attr_type, "secex"))
         elif attr_type == "cnae":
             dataset = "rais"
+            five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
             stats.append(self.get_top_attr(Ybi, "num_emp", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Yio, "num_emp", attr_type, "cbo", dataset))
             stats.append(self.get_val(Yi, "wage", attr_type, dataset))
             stats.append(self.get_val(Yi, "wage_avg", attr_type, dataset))
-            stats.append(self.get_val(Yi, "wage_avg", attr_type, dataset, __latest_year__[dataset]-5))
+            stats.append(self.get_val(Yi, "wage_avg", attr_type, dataset, five_years_ago))
         elif attr_type == "cbo":
             dataset = "rais"
+            five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
             stats.append(self.get_top_attr(Ybo, "num_emp", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Yio, "num_emp", attr_type, "cnae", dataset))
             stats.append(self.get_val(Yo, "wage", attr_type, dataset))
             stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset))
-            stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset, __latest_year__[dataset]-5))
+            stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset, five_years_ago))
         elif attr_type == "hs":
             dataset = "secex"
+            five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
             stats.append(self.get_top_attr(Ymbp, "export_val", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Ympw, "export_val", attr_type, "wld", dataset))
             stats.append(self.get_val(Ymp, "export_val_growth", attr_type, dataset))
             stats.append(self.get_val(Ymp, "export_val_growth_5", attr_type, dataset))
             stats.append(self.get_val(Ymp, "export_val", attr_type, dataset))
-            stats.append(self.get_val(Ymp, "export_val", attr_type, dataset, __latest_year__[dataset]-5))
+            stats.append(self.get_val(Ymp, "export_val", attr_type, dataset, five_years_ago))
         elif attr_type == "wld":
             dataset = "secex"
+            five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
             stats.append(self.get_top_attr(Ymbw, "export_val", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Ympw, "export_val", attr_type, "hs", dataset))
             stats.append(self.get_val(Ymw, "export_val_growth", attr_type, dataset))
             stats.append(self.get_val(Ymw, "export_val_growth_5", attr_type, dataset))
             stats.append(self.get_val(Ymw, "eci", attr_type, dataset))
             stats.append(self.get_val(Ymw, "export_val", attr_type, dataset))
-            stats.append(self.get_val(Ymw, "export_val", attr_type, dataset, __latest_year__[dataset]-5))
+            stats.append(self.get_val(Ymw, "export_val", attr_type, dataset, five_years_ago))
 
         return stats
 
@@ -97,7 +103,8 @@ class Stats(object):
         return bras
 
     def get_top_attr(self, tbl, val_var, attr_type, key, dataset):
-        latest_year = __latest_year__[dataset]
+        from dataviva import __year_range__
+        latest_year = parse_year(__year_range__[dataset][-1])
         if key == "bra":
             length = 9
         elif key == "hs" or key == "cnae":
@@ -164,7 +171,8 @@ class Stats(object):
     def get_val(self, tbl, val_var, attr_type, dataset, latest_year = None):
 
         if latest_year == None:
-            latest_year = __latest_year__[dataset]
+            from dataviva import __year_range__
+            latest_year = parse_year(__year_range__[dataset][-1])
 
         if val_var == "wage_avg":
             calc_var = val_var
@@ -320,10 +328,10 @@ class Hs(db.Model, AutoSerialize, Stats):
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
 
-    yp = db.relationship("Ymp", backref = 'hs', lazy = 'dynamic')
-    ypw = db.relationship("Ympw", backref = 'hs', lazy = 'dynamic')
-    ybp = db.relationship("Ymbp", backref = 'hs', lazy = 'dynamic')
-    ybpw = db.relationship("Ymbpw", backref = 'hs', lazy = 'dynamic')
+    ymp = db.relationship("Ymp", backref = 'hs', lazy = 'dynamic')
+    ympw = db.relationship("Ympw", backref = 'hs', lazy = 'dynamic')
+    ymbp = db.relationship("Ymbp", backref = 'hs', lazy = 'dynamic')
+    ymbpw = db.relationship("Ymbpw", backref = 'hs', lazy = 'dynamic')
 
     def name(self):
         lang = getattr(g, "locale", "en")
@@ -460,10 +468,10 @@ class Wld(db.Model, AutoSerialize, Stats):
     plural_pt = db.Column(db.Boolean())
     article_pt = db.Column(db.Boolean())
 
-    yw = db.relationship("Ymw", backref = 'wld', lazy = 'dynamic')
-    ypw = db.relationship("Ympw", backref = 'wld', lazy = 'dynamic')
-    ybw = db.relationship("Ymbw", backref = 'wld', lazy = 'dynamic')
-    ybpw = db.relationship("Ymbpw", backref = 'wld', lazy = 'dynamic')
+    ymw = db.relationship("Ymw", backref = 'wld', lazy = 'dynamic')
+    ympw = db.relationship("Ympw", backref = 'wld', lazy = 'dynamic')
+    ymbw = db.relationship("Ymbw", backref = 'wld', lazy = 'dynamic')
+    ymbpw = db.relationship("Ymbpw", backref = 'wld', lazy = 'dynamic')
 
     def name(self):
         lang = getattr(g, "locale", "en")
@@ -498,10 +506,10 @@ class Bra(db.Model, AutoSerialize, Stats):
     distance = 0
 
     # SECEX relations
-    yb_secex = db.relationship("Ymb", backref = 'bra', lazy = 'dynamic')
-    ybp = db.relationship("Ymbp", backref = 'bra', lazy = 'dynamic')
-    ybw = db.relationship("Ymbw", backref = 'bra', lazy = 'dynamic')
-    ybpw = db.relationship("Ymbpw", backref = 'bra', lazy = 'dynamic')
+    ymb = db.relationship("Ymb", backref = 'bra', lazy = 'dynamic')
+    ymbp = db.relationship("Ymbp", backref = 'bra', lazy = 'dynamic')
+    ymbw = db.relationship("Ymbw", backref = 'bra', lazy = 'dynamic')
+    ymbpw = db.relationship("Ymbpw", backref = 'bra', lazy = 'dynamic')
     # RAIS relations
     yb_rais = db.relationship("Yb_rais", backref = 'bra', lazy = 'dynamic')
     ybi = db.relationship("Ybi", backref = 'bra', lazy = 'dynamic')

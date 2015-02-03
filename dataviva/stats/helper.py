@@ -20,7 +20,9 @@ from sqlalchemy import desc, asc
 from dataviva.stats.cache import profile_cache_serialized
 from dataviva.stats.util import gen_table_list
 
-from dataviva import __latest_year__
+from dataviva import __year_range__
+
+__latest_year__ = {k: v[-1] for k,v in __year_range__.items()}
 
 # TODO: Add SECEX once API is updated
 possible_tables = {
