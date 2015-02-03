@@ -3,13 +3,13 @@ from flask import abort, current_app, make_response, Flask, jsonify, request, \
 
 ''' Get/Sets a given ID in the cache. If data is not supplied, 
     used as getter'''
-def cached_query(id, data=None):
+def cached_query(id, data=None, timeout=None):
     c = current_app.config.get('REDIS_CACHE')
     if c is None:
         return None
     if data is None:
         return c.get(id)
-    return c.set(id, data)
+    return c.set(id, data, timeout=timeout)
 
 def make_cache_key(*args, **kwargs):
     path = request.path
