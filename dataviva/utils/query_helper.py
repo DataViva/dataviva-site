@@ -52,7 +52,7 @@ def _show_filters_to_add(column, value, table, colname):
     if matches: 
         prefix, length = matches.groups()
         PLANNING_REGION = "4mgplr"
-        if prefix.startswith(PLANNING_REGION) and length == '9':
+        if prefix and prefix.startswith(PLANNING_REGION) and length == '9':
             result = db.session.query(bra_pr).filter_by(pr_id=prefix).all()
             result = [muni for muni, pr in result]
             to_add.append(column.in_(result))
