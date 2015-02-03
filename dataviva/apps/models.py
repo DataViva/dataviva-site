@@ -277,12 +277,12 @@ class Build(db.Model, AutoSerialize):
              title = title.replace(depths[lang]["plural"]["8"],depths[lang]["plural"]["2"])
              title = title.replace(depths[lang]["single"]["8"],depths[lang]["single"]["2"])
 
-        if self.app_id != 2:
-            if "year" in kwargs:
-                year = kwargs["year"]
-            else:
-                year = __latest_year__[self.dataset]
-            title += " ({0})".format(year)
+        # if self.app_id != 2:
+        #     if "year" in kwargs:
+        #         year = kwargs["year"]
+        #     else:
+        #         year = __latest_year__[self.dataset]
+        #     title += " ({0})".format(year)
 
         def get_article(attr, article):
             if attr.article_pt:

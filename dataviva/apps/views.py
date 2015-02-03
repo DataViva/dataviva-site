@@ -7,7 +7,7 @@ from random import randint
 from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, url_for, redirect, jsonify
 from flask.ext.babel import gettext
 
-from dataviva import db, datavivadir, view_cache
+from dataviva import db, datavivadir, __latest_year__, view_cache
 from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld
@@ -158,13 +158,19 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
         if starred == 0 and cached_q is None:
             cached_query(cache_id, ret.data)
     else:
+
+        year_range = {}
+        for dataset in __latest_year__:
+            year_range[dataset] = ["2000", "{}".format(__latest_year__[dataset])]
+
         ret = make_response(render_template("apps/embed.html",
             all_builds = all_builds,
             starred = starred,
             form = DownloadForm(),
             current_build = current_build,
             global_vars = json.dumps(global_vars),
-            facebook_id = FACEBOOK_OAUTH_ID))
+            facebook_id = FACEBOOK_OAUTH_ID,
+            year_range = year_range))
 
     ret.headers.add('Last-Modified', datetime.now())
     ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')

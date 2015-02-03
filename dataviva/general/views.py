@@ -7,7 +7,7 @@ import time
 
 mod = Blueprint('general', __name__, url_prefix='/')
 
-from dataviva import app, db, babel, __latest_year__, view_cache
+from dataviva import app, db, babel, view_cache
 from dataviva.general.forms import AccessForm
 from dataviva.general.models import Short
 from dataviva.account.models import User
@@ -30,9 +30,6 @@ def before_request():
     g.accounts = True if ACCOUNTS in ["True","true","Yes","yes","Y","y",1] else False
     g.color = "#af1f24"
     g.page_type = mod.name
-    g.latest_year = {}
-    for dataset in __latest_year__:
-        g.latest_year[dataset] = __latest_year__[dataset]
 
     # Save variable in session so we can determine if this is the user's
     # first time on the site

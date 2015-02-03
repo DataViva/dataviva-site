@@ -3,7 +3,6 @@
 {% block head %}
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.apps.css" />
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.key.css" />
 
 {% endblock %}
 
@@ -115,12 +114,8 @@
 
 {% block js %}
 
-  <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>-->
-  <!--<script src="/static/js/libs/d3.geo.tile.js"></script>-->
   <script src="/static/js/libs/topojson.js"></script>
   <script src="/static/js/libs/queue.min.js"></script>
-  <!--<script src="/static/js/libs/jfont-minified.js"></script>-->
-  <script src="/static/js/utils/utils.key.js"></script>
   <script src="/static/js/utils/utils.selector.js"></script>
 
   <script>
@@ -166,7 +161,7 @@
 
   <script type="text/javascript">
 
-    var max_year = {{ g.latest_year|safe }}
+    var year_range = {{ year_range|safe }};
 
     var loading = new dataviva.ui.loading("body")
     loading.color("#ffffff")
@@ -289,7 +284,6 @@
             var id = n[app.build.output+"_id"].slice(0,depths[app.build.output][0])
             if (cats.indexOf(id) < 0) cats.push(id)
           })
-          builder.key(cats)
         }
         var old_url = app.url
         var split_url = app.url.split("/")
@@ -522,6 +516,7 @@
       .container("#app")
       .aggs(averages)
       .time("year")
+      .legend({"size": [25,25]})
       .format({
         "number": dataviva.format.number,
         "text": dataviva.format.text
@@ -535,7 +530,6 @@
       })
       .total("required")
       .temp("elsewhere")
-      .timeline(false)
       .x({
         "label": {"font": {"size": 18}},
         "ticks": {"font": {"size": 14}}
@@ -647,10 +641,9 @@
             })
 
             // Remove unused global_vars
-            uis = []
+            uis = ["year"]
             app.build.ui.forEach(function(ui){
-              if (ui.type == "years") uis.push("year")
-              else uis.push(ui.type)
+              uis.push(ui.type)
             })
             for (v in app.vars) {
               if (uis.indexOf(v) < 0 && ["controls","builder"].indexOf(v) < 0) {
@@ -667,8 +660,8 @@
             if (app.data[app.build.data_url]) app.allyears = true
 
             if (!app.allyears && ["stacked", "line"].indexOf(app.build.app.type) < 0) {
-              if (!app.vars.year || app.vars.year > max_year[app.build.data_url.split("/")[0]]) {
-                app.vars.year = max_year[app.build.data_url.split("/")[0]]
+              if (!app.vars.year || app.vars.year > year_range[app.build.dataset][1]) {
+                app.vars.year = year_range[app.build.dataset][1]
               }
               app.build.data_url = app.build.data_url.replace("all",app.vars.year)
             }
@@ -849,186 +842,174 @@
       d3.select("#ui_bottom").selectAll("*").remove()
       d3.select("#app_controls").selectAll("*").remove()
 
-      // Create Key
-      if (app.build.app.type != "geo_map") {
-        d3.select("#ui_bottom").append("div")
-          .attr("id","key")
-          .datum(app.attrs[app.build.output])
-          .call(Key().type(app.build.output))
+      // Determine current year
+      var data_years = year_range[app.build.dataset];
+      if (!app.vars.year) {
+        app.vars.year = data_years[1];
+      }
+      else if (data_years[1].indexOf("-") > 0) {
+        if (app.vars.year.indexOf("-") < 0) {
+          app.vars.year += "-1"
+        }
+        var y_range = d3.range(parseFloat(data_years[0].split("-")[0]),parseFloat(data_years[1].split("-")[0])+1);
+        app.vars.year = d3plus.util.closest(y_range, parseFloat(app.vars.year.split("-")[0]));
+        if (app.vars.year === data_years[0].split("-")[0]) {
+          app.vars.year = data_years[0];
+        }
+        else if (app.vars.year === data_years[1].split("-")[0]) {
+          app.vars.year = data_years[1];
+        }
+        else {
+          app.vars.year += "-1"
+        }
+      }
+      else {
+        if (app.vars.year.indexOf("-") > 0) {
+          app.vars.year = parseFloat(app.vars.year.split("-")[0])
+        }
+        var y_range = d3.range(parseFloat(data_years[0]),parseFloat(data_years[1])+1);
+        app.vars.year = d3plus.util.closest(y_range, parseFloat(app.vars.year))+"";
+      }
+
+      if (!app.allyears) {
+
+        var year = d3.select("#ui_bottom").append("div")
+            .attr("id","year_slider")
+
+        var b = year.append("input")
+          .attr("type","button")
+          .attr("id","allyears")
+
+        var label = year.append("label")
+          .attr("for","allyears")
+
+        label.append("i")
+          .attr("class","fa fa-play")
+          .attr("style","color:"+app.build.app.color+";")
+
+        label.append("div")
+          .attr("style","display:inline-block;margin-left:5px;")
+          .html(dataviva.format.text("Show All Years"))
+
+        b.node().onclick = function(){
+          app.start(app.url,true)
+        }
+
+        leon("#allyears").color(app.build.app.color)
       }
 
       app.build.ui.forEach(function(ui){
-        if (ui.type == "years") {
 
-          // Determine current year
-          if (!app.vars.year) {
-            app.vars.year = ui.values[ui.values.length-1];
-          }
-          else if (ui.values.indexOf(app.vars.year) < 0) {
-            var closest = null;
-            ui.values.forEach(function(y){
-              if (!closest || Math.abs(y-app.vars.year)
-                  < Math.abs(closest-app.vars.year)) {
-                closest = y;
-              }
-            })
-            app.vars.year = closest;
-          }
-
-          var year = d3.select("#ui_bottom").append("div")
-            .attr("id","year_slider")
-
-          if (app.allyears) {
-
-            leon({
-              "type": "range",
-              "event": app.update,
-              "id": "year",
-              "data": {"min": ui.values[0], "max": ui.values[ui.values.length-1], "step": 1},
-              "default": app.vars.year,
-              "parent": document.getElementById("year_slider"),
-              "label": dataviva.format.text("year")
-            }).color(app.build.app.color)
-
-          }
-          else {
-            var b = year.append("input")
-              .attr("type","button")
-              .attr("id","allyears")
-
-            var label = year.append("label")
-              .attr("for","allyears")
-
-            label.append("i")
-              .attr("class","fa fa-play")
-              .attr("style","color:"+app.build.app.color+";")
-
-            label.append("div")
-              .attr("style","display:inline-block;margin-left:5px;")
-              .html(dataviva.format.text("Show All Years"))
-
-            b.node().onclick = function(){
-              app.start(app.url,true)
-            }
-
-            leon("#allyears").color(app.build.app.color)
-          }
-
+        // Custom Titles
+        if (ui.type == "size") {
+          if (app.build.app.type == "geo_map") var title = "color"
+          else var title = "sizing"
         }
-        else {
+        else if (ui.type == "spotlight" && app.build.app.type == "scatter") {
+          var title = "spotlight_scatter"
+        }
+        else var title = ui.type
 
-          // Custom Titles
-          if (ui.type == "size") {
-            if (app.build.app.type == "geo_map") var title = "color"
-            else var title = "sizing"
+        // Set Global Vars
+        if (ui.type == "size") {
+          if (app.build.app.type == "occugrid") var default_value = "required"
+          else if (ui.values.indexOf("val_usd") >= 0) var default_value = "val_usd"
+          else if (ui.values.indexOf("num_emp") >= 0) var default_value = "num_emp"
+          else var default_value = ui.values[0]
+        }
+        else if (ui.type == "depth") {
+          var bra_id = app.build.bra[0].id
+          if (app.build.output == "bra" && bra_id != "all") {
+            // if (bra_id.indexOf("4mg") == 0) ui.values[1] = "bra_7"
+            if (bra_id.length >= 2) ui.values.splice(0,1)
+            if (bra_id.length >= 4) ui.values.splice(0,1)
           }
-          else if (ui.type == "spotlight" && app.build.app.type == "scatter") {
-            var title = "spotlight_scatter"
+          if (app.build.output == "bra" && app.build.bra[0].id == "all") {
+            var default_value = ui.values[0]
           }
-          else var title = ui.type
-
-          // Set Global Vars
-          if (ui.type == "size") {
-            if (app.build.app.type == "occugrid") var default_value = "required"
-            else if (ui.values.indexOf("val_usd") >= 0) var default_value = "val_usd"
-            else if (ui.values.indexOf("num_emp") >= 0) var default_value = "num_emp"
-            else var default_value = ui.values[0]
-          }
-          else if (ui.type == "depth") {
-            var bra_id = app.build.bra[0].id
-            if (app.build.output == "bra" && bra_id != "all") {
-              // if (bra_id.indexOf("4mg") == 0) ui.values[1] = "bra_7"
-              if (bra_id.length >= 2) ui.values.splice(0,1)
-              if (bra_id.length >= 4) ui.values.splice(0,1)
-            }
-            if (app.build.output == "bra" && app.build.bra[0].id == "all") {
-              var default_value = ui.values[0]
-            }
-            else if (app.build.app.type == "tree_map") {
-              var default_value = ui.values[ui.values.length-1]
-            }
-            else {
-              var default_value = ui.values[0]
-            }
-          }
-          else if (ui.type == "order" && app.build.app.type == "stacked") {
-            var default_value = "color"
-          }
-          else if (ui.type == "spotlight" && app.build.app.type == "scatter") {
-            var default_value = ui.values[1]
-          }
-          else if (ui.type == "rca_scope" && app.build.bra[0].id == "all" && app.build.output == "hs") {
-            var default_value = "wld_rca"
+          else if (app.build.app.type == "tree_map") {
+            var default_value = ui.values[ui.values.length-1]
           }
           else {
             var default_value = ui.values[0]
           }
+        }
+        else if (ui.type == "order" && app.build.app.type == "stacked") {
+          var default_value = "color"
+        }
+        else if (ui.type == "spotlight" && app.build.app.type == "scatter") {
+          var default_value = ui.values[1]
+        }
+        else if (ui.type == "rca_scope" && app.build.bra[0].id == "all" && app.build.output == "hs") {
+          var default_value = "wld_rca"
+        }
+        else {
+          var default_value = ui.values[0]
+        }
 
-    		  if(ui.type == "rca_scope"){
-      			var default_value = "wld_rca"
-    		  }
-    		  if(ui.type == "spotlight"){
-      			var default_value = "true"
-    		  }
+  		  if(ui.type == "rca_scope"){
+    			var default_value = "wld_rca"
+  		  }
+  		  if(ui.type == "spotlight"){
+    			var default_value = "true"
+  		  }
 
-          if((last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
-            app.vars[ui.type] = default_value
+        if((last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
+          app.vars[ui.type] = default_value
+        }
+
+        if (ui.values.length > 1 && app.vars.builder !== "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs") || (ui.type != "color" && app.build.app.type != "stacked"))) {
+
+          var ui_data = []
+          ui.values.forEach(function(v){
+            if(!(v == "bra_rca" &&  app.build.bra[0].id == "all" &&  app.build.app.type == "network")) {
+              ui_data.push({
+                "text": dataviva.format.text(v),
+                "value": v
+              })
+            }
+          })
+
+          var form_type = ui_data.length > 3 ? "drop" : "toggle";
+          if (["color"].indexOf(title) >= 0) {
+            form_type = "drop";
+          }
+          else if (["sizing"].indexOf(title) >= 0) {
+            form_type = "toggle";
           }
 
-          if (ui.values.length > 1 && app.vars.builder !== "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs") || (ui.type != "color" && app.build.app.type != "stacked"))) {
+    			var ui_div = d3.select("#app_controls").append("div")
+      			.attr("class","ui_group alt_tooltip")
+      			.attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
+      			.on(d3plus.client.pointer.over,function(){
+      			  if (form_type === "drop") dataviva.ui.tooltip("alt_tooltip",this,"center right")
+      			  else dataviva.ui.tooltip("alt_tooltip",this)
+      			})
+      			.on(d3plus.client.pointer.out,function(){
+      			  dataviva.ui.tooltip("alt_tooltip",false)
+      			})
 
-            var ui_data = []
-            ui.values.forEach(function(v){
-              if(!(v == "bra_rca" &&  app.build.bra[0].id == "all" &&  app.build.app.type == "network")) {
-                ui_data.push({
-                  "text": dataviva.format.text(v),
-                  "value": v
-                })
-              }
+          if (title === "color") title = "color_toggle";
+
+          d3plus.form()
+            .container({
+              "id": "ui_" + ui.type,
+              "value": ui_div
             })
-
-            var form_type = ui_data.length > 3 ? "drop" : "toggle";
-            if (["color"].indexOf(title) >= 0) {
-              form_type = "drop";
-            }
-            else if (["sizing"].indexOf(title) >= 0) {
-              form_type = "toggle";
-            }
-
-      			var ui_div = d3.select("#app_controls").append("div")
-        			.attr("class","ui_group alt_tooltip")
-        			.attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
-        			.on(d3plus.client.pointer.over,function(){
-        			  if (form_type === "drop") dataviva.ui.tooltip("alt_tooltip",this,"center right")
-        			  else dataviva.ui.tooltip("alt_tooltip",this)
-        			})
-        			.on(d3plus.client.pointer.out,function(){
-        			  dataviva.ui.tooltip("alt_tooltip",false)
-        			})
-
-            if (title === "color") title = "color_toggle";
-
-            d3plus.form()
-              .container({
-                "id": "ui_" + ui.type,
-                "value": ui_div
-              })
-              .type(form_type)
-              .data({
-                "sort": false,
-                "value": ui_data
-              })
-              .text("text")
-              .id("value")
-              .focus(app.vars[ui.type], app.update)
-              .title(dataviva.format.text(title))
-              .ui({
-                // "color": app.build.app.color
-                "margin": 0
-              })
-              .draw()
-
-          }
+            .type(form_type)
+            .data({
+              "sort": false,
+              "value": ui_data
+            })
+            .text("text")
+            .id("value")
+            .focus(app.vars[ui.type], app.update)
+            .title(dataviva.format.text(title))
+            .ui({
+              // "color": app.build.app.color
+              "margin": 0
+            })
+            .draw()
 
         }
 
@@ -1446,9 +1427,6 @@
         //   .datum(app.data[app.build.data_url][format[app.build.app.type]])
       }
 
-      app.viz.legend(app.vars.color !== undefined && app.vars.color !== "color")
-
-      if (app.build.app.type != "rings") builder.key()
       dataviva.resize()
       loading.hide()
       app.first_load = true
@@ -1479,8 +1457,10 @@
 
     app.update = function(value, type) {
 
-
-      if (typeof type !== "string") type = type.container(Object).id.slice(3);
+      if (typeof type !== "string") {
+        console.log(type === app.viz)
+        type = type.container(Object).id.slice(3);
+      }
 
       if (type == "solo" || type == "filter") {
 
@@ -1544,11 +1524,6 @@
         var old_value = app.vars[type]
         app.vars[type] = value
         builder.url()
-
-        if (type == "year" && app.build.app.type != "rings") {
-          builder.key()
-          dataviva.resize(true)
-        }
 
         if (!app.solos.length && !app.filters.length) {
           app.viz.title({"sub": app.sub_title()})
@@ -1671,10 +1646,6 @@
         }
         else {
           app.viz[type](value)
-        }
-
-        if (type === "color") {
-          app.viz.legend(value !== "color")
         }
 
         if (type === "order" && app.build.app.type === "occugrid") {
@@ -2022,14 +1993,14 @@
           app.build.title = app.build.title.replace(old_word,new_word)
         }
       }
-      if (app.vars.year && app.build.app.type != "stacked") {
-        if (app.build.title.indexOf("(") < 0) {
-          app.build.title += " ("+app.vars.year+")"
-        }
-        else {
-          app.build.title = app.build.title.replace(/\(.*?\)/, "("+app.vars.year+")")
-        }
-      }
+      // if (app.vars.year && app.build.app.type != "stacked") {
+      //   if (app.build.title.indexOf("(") < 0) {
+      //     app.build.title += " ("+app.vars.year+")"
+      //   }
+      //   else {
+      //     app.build.title = app.build.title.replace(/\(.*?\)/, "("+app.vars.year+")")
+      //   }
+      // }
       if (same_origin && window.frameElement) {
         var message = {"id": window.frameElement.id, "title": app.build.title, "app": app.build.app.type}
         if (same_origin && window.parent.update_titles) window.parent.update_titles(message)
@@ -2195,54 +2166,6 @@
 
       var doc_title = app.build.app.name+" : "+app.build.title
       dataviva.url("/apps/embed/"+app.url,app.vars,doc_title)
-
-    }
-
-    builder.key = function(cats) {
-
-      if ("geo_map" != app.build.app.type) {
-        if (!cats) {
-          if (app.build.app.type != "network") {
-            if (app.data[app.build.data_url].categories) {
-              if (app.build.app.type != "stacked") {
-                app.categories = app.data[app.build.data_url].categories[app.vars.year]
-              }
-              else {
-                app.categories = app.data[app.build.data_url].categories.all
-              }
-            }
-            else {
-              app.categories = []
-            }
-          }
-          else {
-            app.categories = []
-            app.networks[app.build.output].nodes.forEach(function(n){
-              var id = n[app.build.output+"_id"].slice(0,depths[app.build.output][0])
-              if (app.categories.indexOf(id) < 0) app.categories.push(id)
-            })
-          }
-        }
-        else {
-          app.categories = cats
-        }
-
-        if (!app.categories) app.categories = []
-
-        if (app.categories.length <= 1) {
-          d3.select("div#key").style("display","none")
-        }
-        else {
-          d3.select("div#key").style("display","inline-block")
-
-          d3.selectAll("div.key_icon_container")
-            .style("display",function(){
-              var id = this.id.slice(3)
-              return app.categories.indexOf(id) < 0 ? "none" : "inline-block";
-            })
-        }
-
-      }
 
     }
 
