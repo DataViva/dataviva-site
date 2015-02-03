@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from dataviva import db
-from dataviva.secex.models import Ymb, Ymp, Ymbp
+from dataviva.secex.models import Ymb, Ymp, Ymbp, Ymbpw, Ymbw, Ympw, Ymw
 from dataviva.utils import table_helper, query_helper
 from dataviva.utils.gzip_data import gzipped
 from dataviva.utils.decorators import cache_api
@@ -26,7 +26,7 @@ def secex_api(**kwargs):
     if exclude and "," in exclude:
         exclude = exclude.split(",")
 
-    tables = [Ymp, Ymb, Ymbp]
+    tables = [Ymw, Ymp, Ymb, Ympw, Ymbw, Ymbp, Ymbpw]
     allowed_when_not, possible_tables = table_helper.prepare(['bra_id', 'hs_id', 'wld_id'], tables)
     table = table_helper.select_best_table(kwargs, allowed_when_not, possible_tables)
 
