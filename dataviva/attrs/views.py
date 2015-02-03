@@ -16,6 +16,7 @@ from dataviva.utils.cached_query import cached_query
 from dataviva.utils.exist_or_404 import exist_or_404
 from dataviva.utils.title_case import title_case
 from sqlalchemy import desc
+from dataviva.utils.decorators import cache_api
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
@@ -245,8 +246,8 @@ def attrs_table(attr="bra",depth="2"):
     data_url = "/attrs/{0}/?depth={1}".format(attr,depth)
     return render_template("general/table.html", data_url=data_url)
 
-
 @mod.route('/search/<term>/')
+@cache_api("search", timeout=86400)
 def attrs_search(term=None):
     # Dictionary
     bra_query = {}
@@ -285,7 +286,7 @@ def attrs_search(term=None):
     else:
         cbo = Cbo.query.filter(or_(Cbo.id == term, Cbo.name_en.ilike("%"+term+"%")))
 
-    items = cbo.limit(50).all()
+    items = cbo.join(Yo).order_by(desc("num_emp")).limit(50).all()
     items = [i.serialize() for i in items]
 
     for i in items:
@@ -305,7 +306,7 @@ def attrs_search(term=None):
     else:
         cnae = Cnae.query.filter(and_(Cnae.name_en.ilike("%"+term+"%"), Cnae.id.in_(cnae_match)))
 
-    items = cnae.limit(50).all()
+    items = cnae.join(Yi).order_by(desc("num_emp")).limit(50).all()
     items = [i.serialize() for i in items]
 
     for i in items:
@@ -323,8 +324,7 @@ def attrs_search(term=None):
     else:
         hs = Hs.query.filter(or_(Hs.id.like("%"+term+"%"), Hs.name_en.ilike("%"+term+"%")))
 
-    items = hs.limit(50).all()
-    print(items)
+    items = hs.join(Ymp).order_by(desc("export_val")).limit(50).all()
     items = [i.serialize() for i in items]
 
     for i in items:
@@ -343,7 +343,7 @@ def attrs_search(term=None):
     else:
         wld = Wld.query.filter(or_(Wld.id == term, Wld.name_en.like("%"+term+"%")))
 
-    items = wld.limit(50).all()
+    items = wld.join(Ymw).order_by(desc("export_val")).limit(50).all()
     items = [i.serialize() for i in items]
 
     for i in items:
