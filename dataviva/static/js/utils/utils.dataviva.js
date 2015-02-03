@@ -810,6 +810,10 @@ dataviva.cleanData = function(data, dataset, output) {
       }
     }
 
+    if (temp.month) {
+      temp.year = new Date(temp.month+"/1/"+temp.year);
+    }
+
     zerofills[dataset].forEach(function(z){
       if (!(z in temp)) {
         temp[z] = 0

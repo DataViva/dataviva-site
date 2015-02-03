@@ -665,13 +665,53 @@
             if (app.data[app.build.data_url]) app.allyears = true
 
             if (!app.allyears && ["stacked", "line"].indexOf(app.build.app.type) < 0) {
-              if (!app.vars.year || app.vars.year > year_range[app.build.dataset][1]) {
-                app.vars.year = year_range[app.build.dataset][1]
+
+
+              // Determine current year
+              var data_years = year_range[app.build.dataset];
+              if (!app.vars.year) {
+                app.vars.year = data_years[1];
+              }
+              else if (data_years[1].indexOf("-") > 0) {
+                if (app.vars.year.indexOf("-") < 0) {
+                  app.vars.year += "-1"
+                }
+                var y_range = d3.range(parseFloat(data_years[0].split("-")[0]),parseFloat(data_years[1].split("-")[0])+1);
+                var default_month = parseFloat(app.vars.year.split("-")[1]);
+                app.vars.year = d3plus.util.closest(y_range, parseFloat(app.vars.year.split("-")[0]));
+                if (app.vars.year === data_years[0].split("-")[0]) {
+                  var newest = parseFloat(data_years[0].split("-")[1]);
+                  if (default_month <= newest) {
+                    app.vars.year += "-" + default_month;
+                  }
+                  else {
+                    app.vars.year += "-" + newest;
+                  }
+                }
+                else if (app.vars.year === data_years[1].split("-")[0]) {
+                  var oldest = parseFloat(data_years[0].split("-")[1]);
+                  if (default_month >= oldest) {
+                    app.vars.year += "-" + default_month;
+                  }
+                  else {
+                    app.vars.year += "-" + oldest;
+                  }
+                }
+                else {
+                  app.vars.year += "-" + default_month
+                }
+              }
+              else {
+                if (app.vars.year.indexOf("-") > 0) {
+                  app.vars.year = parseFloat(app.vars.year.split("-")[0])
+                }
+                var y_range = d3.range(parseFloat(data_years[0]),parseFloat(data_years[1])+1);
+                app.vars.year = d3plus.util.closest(y_range, parseFloat(app.vars.year))+"";
               }
               app.build.data_url = app.build.data_url.replace("all",app.vars.year)
             }
             else {
-              app.viz.time({"solo": []})
+              app.viz.time({"solo": false})
             }
 
             if (!app.data[app.build.data_url]) {
@@ -720,16 +760,17 @@
                       if (a["num_emp"]) delete a["num_emp"]
                     })
 
-                    for (id in app.attrs[app.build.output]) {
-                      var obj = app.attrs[app.build.output][id]
-                      depths[out].forEach(function(d){
-                        if (d <= obj.id.length && depths[out].indexOf(obj.id.length) >= 0) {
-                          var id = obj[out+"_id"].slice(0, d)
-                          obj[out+"_"+d] = {"name":app.attrs[app.build.output][id].name}
-                          obj[out+"_"+d][out+"_id"] = id
-                        }
-                      })
-                    }
+                    // for (id in app.attrs[app.build.output]) {
+                    //   var obj = app.attrs[app.build.output][id]
+                    //   depths[out].forEach(function(d){
+                    //     if (d <= obj.id.length && depths[out].indexOf(obj.id.length) >= 0) {
+                    //       obj[out+"_"+d] = obj[out+"_id"].slice(0, d);
+                    //       // var id = obj[out+"_id"].slice(0, d);
+                    //       // obj[out+"_"+d] = {"name":app.attrs[app.build.output][id].name};
+                    //       // obj[out+"_"+d][out+"_id"] = id;
+                    //     }
+                    //   })
+                    // }
 
                     callback(error,d)
                   })
@@ -848,35 +889,6 @@
 
       d3.select("#ui_bottom").selectAll("*").remove()
       d3.select("#app_controls").selectAll("*").remove()
-
-      // Determine current year
-      var data_years = year_range[app.build.dataset];
-      if (!app.vars.year) {
-        app.vars.year = data_years[1];
-      }
-      else if (data_years[1].indexOf("-") > 0) {
-        if (app.vars.year.indexOf("-") < 0) {
-          app.vars.year += "-1"
-        }
-        var y_range = d3.range(parseFloat(data_years[0].split("-")[0]),parseFloat(data_years[1].split("-")[0])+1);
-        app.vars.year = d3plus.util.closest(y_range, parseFloat(app.vars.year.split("-")[0]));
-        if (app.vars.year === data_years[0].split("-")[0]) {
-          app.vars.year = data_years[0];
-        }
-        else if (app.vars.year === data_years[1].split("-")[0]) {
-          app.vars.year = data_years[1];
-        }
-        else {
-          app.vars.year += "-1"
-        }
-      }
-      else {
-        if (app.vars.year.indexOf("-") > 0) {
-          app.vars.year = parseFloat(app.vars.year.split("-")[0])
-        }
-        var y_range = d3.range(parseFloat(data_years[0]),parseFloat(data_years[1])+1);
-        app.vars.year = d3plus.util.closest(y_range, parseFloat(app.vars.year))+"";
-      }
 
       if (!app.allyears) {
 
@@ -1120,8 +1132,20 @@
         .tooltip(app.tooltip)
         .zoom(true)
 
-      if (app.vars.year) app.viz.time({"solo": [app.vars.year]})
-      else app.viz.time({"solo": false})
+      if (app.vars.year) {
+        var year_date = app.vars.year;
+        if (app.vars.year.indexOf("-") > 0) {
+          var y = year_date.split("-");
+          year_date = new Date(y[1]+"/1/"+y[0]);
+        }
+        else {
+          year_date = parseFloat(year_date);
+        }
+        app.viz.time({"solo": [year_date]});
+      }
+      else {
+        app.viz.time({"solo": false});
+      }
 
       // app.viz.type(app.build.app.d3plus)
       //   .title(app.build.title)
