@@ -11,6 +11,9 @@ class BaseSecex(db.Model, AutoSerialize):
     import_val = db.Column(db.Numeric(16,2))
     export_val = db.Column(db.Numeric(16,2))
 
+    import_kg = db.Column(db.Integer(11))
+    export_kg = db.Column(db.Integer(11))
+
     import_val_growth = db.Column(db.Float())
     import_val_growth_5 = db.Column(db.Float())
     export_val_growth = db.Column(db.Float())
@@ -59,6 +62,8 @@ class OppGain(object):
 
 class Rca(object):
     rca = db.Column(db.Float())
+
+class Rca_wld(object):
     rca_wld = db.Column(db.Float())
 
 
