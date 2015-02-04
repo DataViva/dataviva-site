@@ -75,7 +75,7 @@ def build_filters_and_groups(table, kwargs, exclude=None):
         value = str(kwargs[colname])
         if colname == "month" and value == ALL:
             column = getattr(table, colname)
-            filters.append(column != 0)
+            filters.append(column.in_([1,2,3,4,5,6,7,8,9,10,11,12]))
             groups.append(column)
         elif value != ALL: 
             # -- if the value is not "ALL", then we need to group by this column
