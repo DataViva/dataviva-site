@@ -675,54 +675,34 @@
 
             if (app.data[app.build.data_url]) app.allyears = true
 
-            if (!app.allyears && ["stacked", "line"].indexOf(app.build.app.type) < 0) {
-
+            if (["stacked", "line"].indexOf(app.build.app.type) >= 0) {
+              app.viz.time({"solo": false})
+            }
+            else if (!app.allyears) {
 
               // Determine current year
-              var data_years = year_range[app.build.dataset];
+              var data_years = year_range[app.build.dataset].map(function(y){
+                return parseFloat(y.split("-")[0]);
+              });
+
               if (!app.vars.year) {
                 app.vars.year = data_years[1];
               }
-              else if (data_years[1].indexOf("-") > 0) {
-                if (app.vars.year.indexOf("-") < 0) {
-                  app.vars.year += "-1"
-                }
-                var y_range = d3.range(parseFloat(data_years[0].split("-")[0]),parseFloat(data_years[1].split("-")[0])+1);
-                var default_month = parseFloat(app.vars.year.split("-")[1]);
-                app.vars.year = d3plus.util.closest(y_range, parseFloat(app.vars.year.split("-")[0]));
-                if (app.vars.year === data_years[0].split("-")[0]) {
-                  var newest = parseFloat(data_years[0].split("-")[1]);
-                  if (default_month <= newest) {
-                    app.vars.year += "-" + default_month;
-                  }
-                  else {
-                    app.vars.year += "-" + newest;
-                  }
-                }
-                else if (app.vars.year === data_years[1].split("-")[0]) {
-                  var oldest = parseFloat(data_years[0].split("-")[1]);
-                  if (default_month >= oldest) {
-                    app.vars.year += "-" + default_month;
-                  }
-                  else {
-                    app.vars.year += "-" + oldest;
-                  }
-                }
-                else {
-                  app.vars.year += "-" + default_month
-                }
-              }
               else {
-                if (app.vars.year.indexOf("-") > 0) {
-                  app.vars.year = parseFloat(app.vars.year.split("-")[0])
-                }
-                var y_range = d3.range(parseFloat(data_years[0]),parseFloat(data_years[1])+1);
-                app.vars.year = d3plus.util.closest(y_range, parseFloat(app.vars.year))+"";
+                var y_range = d3.range(data_years[0],data_years[1]+1);
+                app.vars.year = d3plus.util.closest(y_range, parseFloat(app.vars.year));
               }
-              app.build.data_url = app.build.data_url.replace("all",app.vars.year)
+              app.vars.year += "";
+
+              var url_year = app.vars.year;
+              if (year_range[app.build.dataset][1].indexOf("-")) {
+                url_year += "-0";
+              }
+
+              app.build.data_url = app.build.data_url.replace("all", url_year)
             }
-            else {
-              app.viz.time({"solo": false})
+            else if (year_range[app.build.dataset][1].indexOf("-")) {
+              app.build.data_url = app.build.data_url.replace("all", "all-0")
             }
 
             if (!app.data[app.build.data_url]) {
@@ -1133,9 +1113,14 @@
 
       if (app.vars.year) {
         var year_date = app.vars.year;
-        if (app.vars.year.indexOf("-") > 0) {
-          var y = year_date.split("-");
-          year_date = new Date(y[1]+"/1/"+y[0]);
+        if (year_date.indexOf("-") > 0 ) {
+          if (year_date.split("-")[1]) {
+            var y = year_date.split("-");
+            year_date = new Date(y[1]+"/1/"+y[0]);
+          }
+          else {
+            year_date = parseFloat(year_date.split("-")[0]);
+          }
         }
         else {
           year_date = parseFloat(year_date);
