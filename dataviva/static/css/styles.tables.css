@@ -191,7 +191,8 @@ table .year {
   min-width: 40px !important;
   width: 40px !important;
 }
-table .population {
+table .population, table .enrolled,
+table .graduates, table .entrants, table .students {
   min-width: 95px !important;
   width: 95px !important;
 }
@@ -203,7 +204,12 @@ table .hs_id, table .wld_id, table.color {
   width: 70px !important;
 }
 table .name {
-  max-width: 200px !important;
-  min-width: 200px !important;
-  width: 200px !important;
+  max-width: 300px !important;
+  min-width: 300px !important;
+  width: 300px !important;
+}
+table#university .name {
+  max-width: 400px !important;
+  min-width: 400px !important;
+  width: 400px !important;
 }

@@ -190,8 +190,12 @@
         CREATE "STICKY" HEADER TABLE
       */
       var selection = d3.select(container_el).select("#sticky")
-      selection.selectAll('table.header').data([0])
-        .enter().append('table').attr("class", "header")
+      var table_elem = selection.selectAll('table.header').data([0])
+        .enter().append('table').attr("class", "header");
+      var ids = sticky_cols.filter(function(c){return c.indexOf("_id") > 0});
+      if (ids.length) {
+        table_elem.attr("id", ids[0].slice(0, ids[0].length - 3));
+      }
       var tbl_sticky_header = selection.select('table.header');
 
       tbl_sticky_header.selectAll('thead').data([0]).enter().append('thead');
@@ -228,8 +232,11 @@
       /*
         CREATE "STICKY" DATA TABLE
       */
-      selection.selectAll('table.data').data([0])
-        .enter().append('table').attr("class", "data")
+      var table_elem = selection.selectAll('table.data').data([0])
+        .enter().append('table').attr("class", "data");
+      if (ids.length) {
+        table_elem.attr("id", ids[0].slice(0, ids[0].length - 3));
+      }
       var tbl_sticky_data = selection.select('table.data');
 
       tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
