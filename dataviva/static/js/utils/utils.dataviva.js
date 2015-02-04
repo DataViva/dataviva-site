@@ -294,6 +294,8 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "total_export_val": {"en": "Total Exports", "pt": "Total de Exporta\u00e7\u00f5es"},
       "import_val": {"en": "Imports", "pt": "Importa\u00e7\u00f5es"},
       "total_import_val": {"en": "Total Imports", "pt": "Total de Importa\u00e7\u00f5es"},
+      "export_kg": {"en": "Export Weight", "pt": "Peso das Exporta\u00e7\u00f5es"},
+      "import_kg": {"en": "Import Weight", "pt": "Peso das Importa\u00e7\u00f5es"},
 
       // HEDU Labels
       "hedu": {"en": "Higher Education", "pt": "Ensino Superior"},
@@ -519,8 +521,8 @@ dataviva.format.number = function(value,name,l) {
         if (digit < 2) symbol = "Milhares"
         else symbol = "Mil"
       }
+      symbol = " "+symbol
     }
-    if (symbol) symbol = " "+symbol
 
     var return_value = value + symbol;
   }
@@ -534,6 +536,8 @@ dataviva.format.number = function(value,name,l) {
   var total_labels = {
         "export_val": ["$"," USD"],
         "import_val": ["$"," USD"],
+        "export_kg": [""," kg"],
+        "import_kg": [""," kg"],
         "wage": ["$"," BRL"],
         "wage_avg": ["$"," BRL"],
         "wage_avg_bra": ["$"," BRL"]
