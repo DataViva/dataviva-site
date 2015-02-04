@@ -107,7 +107,7 @@ def attrs(attr="bra",Attr_id=None):
     lang = request.args.get('lang', None) or g.locale
     ret = {}
     dataset = "rais"
-    if Attr == Cbo or Attr == Hs:
+    if Attr == Wld or Attr == Hs:
         dataset = "secex"
     elif Attr == Course_hedu or Attr == University:
         dataset = "hedu"
