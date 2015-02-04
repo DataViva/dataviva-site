@@ -485,7 +485,15 @@
           "export_val_growth_5": "mean",
           "import_val_growth": "mean",
           "import_val_growth_5": "mean",
-          "importance": "mean"
+          "importance": "mean",
+          "val_usd": function(leaves) {
+            if (leaves.length === 1) {
+              return leaves[0].val_usd;
+            }
+            return d3.sum(leaves, function(l){
+              return l.direction === "secex_import" ? -l.val_usd : l.val_usd
+            })
+          }
         }
 
     var additionals = {}
@@ -728,21 +736,6 @@
                     callback(error,d)
                   })
               },"/"+app.build.data_url)
-            }
-
-            if (app.build.dataset === "secex_export" && app.build.output === "all") {
-              app.build.import_url = app.build.data_url.replace("secex_export/","secex_import/")
-              if (!app.data[app.build.import_url]) {
-                q.defer(function(u,callback){
-                  d3.json(u)
-                    .header("X-Requested-With", "XMLHttpRequest")
-                    .get(function(error,d){
-                      app.data[app.build.import_url] = {}
-                      app.data[app.build.import_url].raw = dataviva.cleanData(d, app.build.dataset, app.build.output)
-                      callback(error,d)
-                    })
-                },"/"+app.build.import_url)
-              }
             }
 
             if (app.build.output != "all" && !app.attrs[app.build.output]) {
@@ -1044,9 +1037,11 @@
 
       var nesting = []
       if (app.build.output === "all") {
-        nesting.push("id")
+        nesting = ["trade_balance", "direction"];
+        app.viz.text({"trade_balance": "trade_balance", "direction": "direction"});
       }
       else {
+        app.viz.text("name");
         depths[app.build.output].forEach(function(d){
           nesting.push(app.build.output+"_"+d)
         })
@@ -1133,7 +1128,8 @@
         })
         .y(false)
         .tooltip(app.tooltip)
-        .zoom(true)
+        .zoom(app.build.output !== "all")
+        .timeline(["stacked", "line"].indexOf(app.build.app.type) < 0)
 
       if (app.vars.year) {
         var year_date = app.vars.year;
@@ -1798,29 +1794,35 @@
           })
           .entries(data.raw)
       }
-      else if (app.build.dataset === "secex_export" && app.build.output === "all") {
+      else if (app.build.dataset === "secex" && app.build.output === "all") {
 
         data.raw.forEach(function(d){
 
-          var obj = d3plus.util.copy(d);
-          obj.name = "secex_export";
-          obj.id = "export";
-          obj.color = "#0b1097";
-          get_keys(obj);
-          data_obj.push(obj);
-
-          var imp = app.data[app.build.import_url].raw.filter(function(i){
-            return i.year === d.year;
-          })
-
-          if (imp.length) {
-            imp = d3plus.util.copy(imp[0]);
-            imp.name = "secex_import";
-            imp.id = "import";
-            imp.color = "#af1f24";
-            get_keys(imp);
-            data_obj.push(imp);
+          var exp = d3plus.util.copy(d);
+          exp.trade_balance = "trade_balance";
+          exp.val_usd = exp.export_val || 0;
+          exp.direction = "export_val";
+          exp.color = "#0b1097";
+          get_keys(exp);
+          for (var k in exp) {
+            if (k.indexOf("import") === 0) {
+              delete exp[k];
+            }
           }
+          data_obj.push(exp);
+
+          var imp = d3plus.util.copy(d);
+          imp.trade_balance = "trade_balance";
+          imp.val_usd = imp.import_val || 0;
+          imp.direction = "import_val";
+          imp.color = "#af1f24";
+          get_keys(imp);
+          for (var k in imp) {
+            if (k.indexOf("export") === 0) {
+              delete exp[k];
+            }
+          }
+          data_obj.push(imp);
 
         })
 
@@ -2082,7 +2084,7 @@
 
         box.select("."+build.dataset).append("div")
           .attr("id",build.url)
-          .attr("class","output "+c+" icon "+build.app.type)
+          .attr("class","output "+c+" short icon "+build.app.type)
           .html(build.title)
           .on(d3plus.client.pointer.click,function(){
             app.start(this.id)

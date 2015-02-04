@@ -154,6 +154,7 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "depth_desc_compare": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
       "depth_desc_occugrid": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
       "depth_desc_scatter": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
+      "depth_desc_line": {"en": "Changes the level of aggregation.", "pt": "Alterar o n\u00edvel de agrega\u00e7\u00e3o."},
       "bra_1": {"en": "Region", "pt": "Regi\u00e3o"},
       "bra_3": {"en": "State", "pt": "Estado"},
       "bra_5": {"en": "Mesoregion", "pt": "Mesorregi\u00e3o"},
@@ -290,12 +291,15 @@ dataviva.format.text = function(text,name,vars,obj,l) {
 
       // SECEX Labels
       "secex": {"en": "International Trade (SECEX)", "pt": "Com\u00e9rcio Internacional (SECEX)"},
+      "val_usd": {"en": "Trade Value", "pt": "Valor do Com\u00e9rcio"},
       "export_val": {"en": "Exports", "pt": "Exporta\u00e7\u00f5es"},
       "total_export_val": {"en": "Total Exports", "pt": "Total de Exporta\u00e7\u00f5es"},
       "import_val": {"en": "Imports", "pt": "Importa\u00e7\u00f5es"},
       "total_import_val": {"en": "Total Imports", "pt": "Total de Importa\u00e7\u00f5es"},
       "export_kg": {"en": "Export Weight", "pt": "Peso das Exporta\u00e7\u00f5es"},
       "import_kg": {"en": "Import Weight", "pt": "Peso das Importa\u00e7\u00f5es"},
+      "trade_balance": {"en": "Trade Balance", "pt": "Balan\u00e7a Comercial"},
+      "direction": {"en": "Direction", "pt": "Dire\u00e7\u00e3o"},
 
       // HEDU Labels
       "hedu": {"en": "Higher Education", "pt": "Ensino Superior"},
