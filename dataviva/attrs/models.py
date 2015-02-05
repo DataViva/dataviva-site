@@ -13,7 +13,7 @@ from dataviva.attrs.abstract_models import BasicAttr, ExpandedAttr
 class Stats(object):
 
     def stats(self):
-        from dataviva.attrs.models import Yb
+        from dataviva.attrs.models import Yb, Ybs
         from dataviva.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
         from dataviva.secex.models import Ymbp, Ymbw, Ympw, Ymb, Ymp, Ymw
         from dataviva import __year_range__
@@ -33,6 +33,9 @@ class Stats(object):
             stats.append(self.get_val(Ymp, "export_val", attr_type, "secex"))
         elif attr_type == "bra":
             stats.append(self.get_val(Yb,"population",attr_type,"population"))
+            stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="gini"))
+            stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="life_exp"))
+            stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="hdi"))
             stats.append(self.get_top_attr(Ybi, "num_emp", attr_type, "cnae", "rais"))
             stats.append(self.get_top_attr(Ybo, "num_emp", attr_type, "cbo", "rais"))
             stats.append(self.get_val(Yb_rais, "wage", attr_type, "rais"))
@@ -168,7 +171,7 @@ class Stats(object):
         else:
             return {"name": "top_{0}".format(key), "value": "-", "group": "{0}_stats_{1}".format(dataset.split("_")[0],latest_year)}
 
-    def get_val(self, tbl, val_var, attr_type, dataset, latest_year = None):
+    def get_val(self, tbl, val_var, attr_type, dataset, latest_year=None, stat_id=None):
 
         if latest_year == None:
             from dataviva import __year_range__
@@ -195,7 +198,6 @@ class Stats(object):
                     'num_emp_growth_val':func.avg, 'num_emp_growth_val_5':func.avg,
                     'distance':func.avg, 'importance':func.avg,
                     'opp_gain':func.avg, 'required':func.avg, 'rca':func.avg}
-
             if self.id == "all":
                 col_names = [val_var]
                 col_vals = [cast(agg[c](getattr(tbl, c)), Float) if c in agg else getattr(tbl, c) for c in col_names]
@@ -216,6 +218,8 @@ class Stats(object):
                     total = tbl.query.with_entities(*col_vals).filter(tbl.bra_id.in_([b["id"] for b in bras]))
                 elif bras[0]["id"] != "all":
                     total = tbl.query.filter(tbl.bra_id == bras[0]["id"])
+            if stat_id:
+                total = total.filter_by(stat_id=stat_id)
         else:
             total = tbl.query.filter(getattr(tbl, attr_type+"_id") == self.id)
 
@@ -236,6 +240,9 @@ class Stats(object):
         if val_var == "population":
             group = ""
             name = "population_{0}".format(latest_year)
+        elif val_var == "stat_val":
+            group = ""
+            name = "{}_{}".format(total.stat.name(), latest_year)
         else:
             group = "{0}_stats_{1}".format(dataset.split("_")[0],latest_year)
             if calc_var:
@@ -492,3 +499,25 @@ class Yb(db.Model, AutoSerialize):
 
     def __repr__(self):
         return '<Yb %r.%r>' % (self.year, self.bra_id)
+
+class Stat(db.Model, AutoSerialize, BasicAttr):
+
+    __tablename__ = 'attrs_stat'
+    id = db.Column(db.String(20), primary_key=True)
+    
+    # name lookup relation
+    ybs = db.relationship("dataviva.attrs.models.Ybs", backref = 'stat', lazy = 'dynamic')
+
+class Ybs(db.Model, AutoSerialize):
+
+    __tablename__ = 'attrs_ybs'
+    year = db.Column(db.Integer(4), primary_key=True)
+    bra_id = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
+    stat_id = db.Column(db.String(20), db.ForeignKey(Stat.id), primary_key=True)
+    stat_val = db.Column(db.Float)
+
+    # def name(self):
+        
+
+    def __repr__(self):
+        return "<Ybs {}.{}.{}>".format(self.year, self.bra_id, self.stat_id)

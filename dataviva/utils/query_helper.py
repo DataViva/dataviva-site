@@ -15,8 +15,9 @@ def parse_value(column, value):
     return column == value
 
 def query_table(table, columns=[], filters=[], groups=[], limit=0, order=None, sort="desc", offset=None, serialize=True, having=[]):
-    headers = [c.key for c in columns] or table.__table__.columns.keys()
-    columns = columns or table.__table__.columns.values()
+    non_len_cols = [c for c in table.__table__.columns if not c.key.endswith("_len")]
+    columns = columns or non_len_cols
+    headers = [c.key for c in columns]
     if isinstance(order, (str, unicode)) and hasattr(table, order):
         filters.append(getattr(table, order) != None)
     # raise Exception(having)
