@@ -576,8 +576,10 @@
 
 
       // Hide popover
-      dataviva.popover.hide()
-      app.allyears = allyears
+      dataviva.popover.hide();
+      app.viz.data([]).draw();
+      app.allyears = allyears;
+
       if (new_url) {
 
 
