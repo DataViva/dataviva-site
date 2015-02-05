@@ -1465,7 +1465,7 @@
           depth = elems[0].id.length,
           secex = app.build.dataset.indexOf("secex") === 0,
           munics = app.build.output == "bra",
-          text = false;
+          text = "";
 
       if (secex && same && !mix) {
         if ((munics && depth >= 3) || (app.build.output === "all" && depth > 3)) {
@@ -1475,10 +1475,15 @@
           text = dataviva.format.text("secex_3")
         }
       }
+      if (["stacked","line"].indexOf(app.build.app.type) >= 0) {
+        var joiner = text.length ? ", " : ""
+        text += joiner + dataviva.format.text("Click to Zoom");
+        if (joiner.length) text += ".";
+      }
       descs["export_val"] = text
       descs["import_val"] = text
       app.viz.descs(descs)
-      return text
+      return text.length ? text : false;
     }
 
     app.update = function(value, type) {
