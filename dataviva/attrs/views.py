@@ -123,6 +123,8 @@ def attrs(attr="bra",Attr_id=None):
         dataset = "hedu"
     elif Attr == Course_sc:
         dataset = "sc"
+    elif Attr == Bra:
+        dataset = "population"
 
     cache_id = request.path + lang
     if depth:
