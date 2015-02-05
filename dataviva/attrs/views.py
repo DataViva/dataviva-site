@@ -4,11 +4,11 @@ from sqlalchemy import func, distinct, asc, desc, and_, or_
 from flask import Blueprint, request, jsonify, abort, g, render_template, make_response, redirect, url_for, flash
 
 from dataviva import db, __year_range__, view_cache
-from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University
+from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University, School
 from dataviva.secex.models import Ymp, Ymw
 from dataviva.rais.models import Yi, Yo
 from dataviva.hedu.models import Yu, Yc_hedu
-from dataviva.sc.models import Yc_sc
+from dataviva.sc.models import Yc_sc, Ys
 from dataviva.ask.models import Question
 
 from dataviva.utils.gzip_data import gzip_data
@@ -17,6 +17,7 @@ from dataviva.utils.exist_or_404 import exist_or_404
 from dataviva.utils.title_case import title_case
 from sqlalchemy import desc
 from dataviva.utils.decorators import cache_api
+from dataviva.utils.gzip_data import gzipped
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
@@ -52,6 +53,12 @@ def fix_name(attr, lang):
 # All attribute views
 #
 ############################################################
+@mod.route('/school/')
+@gzipped
+def school_attr():
+    schools = School.query.filter_by(is_vocational=1).join(Ys).order_by(desc("enrolled")).all()
+    data = [s.serialize() for s in schools]
+    return jsonify({"data": data})
 
 @mod.route('/<attr>/')
 @mod.route('/<attr>/<Attr_id>/')
@@ -81,7 +88,9 @@ def attrs(attr="bra",Attr_id=None):
     elif attr == "university":
         Attr_weight_tbl = Yu
         Attr_weight_col = "enrolled"
-
+    elif attr == "school":
+        Attr_weight_tbl = Ys
+        Attr_weight_col = "enrolled"
     elif attr == "course_sc":
         Attr_weight_tbl = Yc_sc
         Attr_weight_col = "enrolled"
@@ -95,6 +104,7 @@ def attrs(attr="bra",Attr_id=None):
     depths["course_hedu"] = [2,6]
     depths["university"] = [5]
     depths["course_sc"] = [2,5]
+    depths["school"] = [8]
 
     depth = request.args.get('depth', None)
     order = request.args.get('order', None)

@@ -1,6 +1,6 @@
 from dataviva import db
 from dataviva.utils.auto_serialize import AutoSerialize
-from dataviva.attrs.models import Bra, Course_sc
+from dataviva.attrs.models import Bra, Course_sc, School
 
 class Sc(db.Model, AutoSerialize):
     __abstract__ = True
@@ -26,7 +26,7 @@ class Ys(Sc):
 
     __tablename__ = 'sc_ys'
 
-    school_id = db.Column(db.String(8), primary_key=True)
+    school_id = db.Column(db.String(8), db.ForeignKey(School.id), primary_key=True)
 
     def __repr__(self):
         return '<Ys %d.%s.%s>' % (self.year, self.school_id)
