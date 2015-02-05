@@ -30,6 +30,15 @@ RESULTS_PER_PAGE = 10
 def page_not_found(error):
     return error, 404
 
+@mod.route('/status/')
+def check_status():
+    result = g.user.is_authenticated()
+    data = {"logged_in": result}
+    if result:
+        data["user"] = g.user.nickname
+        data["is_admin"] = g.user.is_admin()
+    return jsonify(data)
+
 ###############################
 # User management
 # ---------------------------
