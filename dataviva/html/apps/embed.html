@@ -1020,6 +1020,10 @@
         nesting = ["trade_balance", "direction"];
         app.viz.text({"trade_balance": "trade_balance", "direction": "direction"});
       }
+      else if (app.build.output === "university") {
+        nesting = ["school_type","university_5"];
+        app.viz.text({"school_type": "school_type", "university_5": "name"});
+      }
       else {
         app.viz.text("name");
         depths[app.build.output].forEach(function(d){
@@ -1110,6 +1114,7 @@
         .tooltip(app.tooltip)
         .zoom(app.build.output !== "all")
         .timeline(["stacked", "line"].indexOf(app.build.app.type) < 0)
+        .legend(app.build.output !== "university")
 
       if (!app.allyears) {
         var year_date = app.vars.year;
@@ -2508,6 +2513,7 @@
 
       if (!noDraw) {
         app.viz.draw()
+        console.log(app.viz.id(Object),app.viz.data(Object))
       }
 
       if (!app.first_load) {

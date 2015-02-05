@@ -11600,6 +11600,14 @@ var dataNest = function(vars, flatData, nestingLevels, requirements) {
 
     }
 
+
+    for (var lll = 0; lll < nestingLevels.length; lll++) {
+      var level = nestingLevels[lll];
+      if (!(level in returnObj)) {
+        returnObj[level] = fetchValue(vars, leaves[0], level);
+      }
+    }
+
     groupedData.push(returnObj);
 
     return returnObj;
@@ -18797,8 +18805,6 @@ module.exports = function(vars) {
     }
     if (!textBox.empty()) {
       words = textBox.text().match(/[^\s-]+-?/g);
-      console.log(words);
-      console.log("\n");
       return ellipsis();
     }
   };
@@ -18816,7 +18822,6 @@ module.exports = function(vars) {
   };
   ellipsis = function() {
     var lastChar, lastWord;
-    console.log(words);
     if (words && words.length) {
       lastWord = words.pop();
       lastChar = lastWord.charAt(lastWord.length - 1);
@@ -24995,11 +25000,11 @@ module.exports = function(params) {
         icon = uniques(d, vars.icon.value, fetchValue, vars, vars.id.nesting[depth]),
         tooltip_data = fetchData(vars,d,length,ex,children,depth)
 
-    if (icon.length === 1 && icon[0] !== null) {
-      icon = icon[0]
+    if (icon.length === 1 && typeof icon[0] === "string") {
+      icon = icon[0];
     }
     else {
-      icon = false
+      icon = false;
     }
 
     if ((tooltip_data.length > 0 || footer) || ((!d.d3plus_label && length == "short" && title) || (d.d3plus_label && (!("visible" in d.d3plus_label) || ("visible" in d.d3plus_label && d.d3plus_label.visible === false))))) {
@@ -25849,7 +25854,7 @@ module.exports = function(vars) {
               var icon = uniqueValues(g, vars.icon.value, fetchValue, vars, colorKey),
                   color = fetchColor(vars, g, colorKey);
 
-              if (icon.length === 1 && icon[0] !== null) {
+              if (icon.length === 1 && typeof icon[0] === "string") {
                 icon = icon[0];
                 var short_url = stringStrip(icon+"_"+color),
                     iconStyle = vars.icon.style.value,

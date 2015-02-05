@@ -304,6 +304,7 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       // HEDU Labels
       "hedu": {"en": "Higher Education", "pt": "Ensino Superior"},
       "enrolled": {"en": "Enrolled", "pt": "Matriculou"},
+      "school_type": {"en": "Funding", "pt": "Financiamento"},
 
       // SC Labels
       "sc": {"en": "School Census", "pt": "Censo Escolar"},
