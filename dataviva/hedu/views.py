@@ -19,8 +19,9 @@ def hedu_api(**kwargs):
     idonly = request.args.get('id', False) is not False
     limit = int(request.args.get('limit', 0) or kwargs.pop('limit', 0))
     order = request.args.get('order', None) or kwargs.pop('order', None)
-    order_col = order
     sort = request.args.get('sort', None) or kwargs.pop('sort', 'desc')
+    if order and "." in order:
+        order, sort = order.split(".")
     serialize = request.args.get('serialize', None) or kwargs.pop('serialize', True)
     exclude = request.args.get('exclude', None) or kwargs.pop('exclude', None)
     download = request.args.get('download', None) or kwargs.pop('download', None)

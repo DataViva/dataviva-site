@@ -15,6 +15,8 @@ def secex_api(**kwargs):
     limit = int(kwargs.pop('limit', 0)) or int(request.args.get('limit', 0) )
     order = request.args.get('order', None) or kwargs.pop('order', None)
     sort = request.args.get('sort', None) or kwargs.pop('sort', 'desc')
+    if order and "." in order:
+        order, sort = order.split(".")
     ignore_zeros = request.args.get('zeros', False) or kwargs.pop('zeros', False)
     serialize = request.args.get('serialize', None) or kwargs.pop('serialize', True)
     exclude = request.args.get('exclude', None) or kwargs.pop('exclude', None)

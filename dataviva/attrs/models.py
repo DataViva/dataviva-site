@@ -1,13 +1,13 @@
 from dataviva import db
 from dataviva.utils.auto_serialize import AutoSerialize
 from dataviva.utils.exist_or_404 import exist_or_404
-from dataviva.utils.title_case import title_case
 from sqlalchemy import func, Float
 from sqlalchemy.sql.expression import cast
 from decimal import *
 
 from flask import g
 from dataviva.stats.util import parse_year
+from dataviva.attrs.abstract_models import BasicAttr, ExpandedAttr
 
 ''' A Mixin class for retrieving quick stats about a particular attribute'''
 class Stats(object):
@@ -245,29 +245,15 @@ class Stats(object):
 
         return {"name": name, "value": val, "group": group}
 
-class Cnae(db.Model, AutoSerialize, Stats):
+class Cnae(db.Model, AutoSerialize, Stats, ExpandedAttr):
 
     __tablename__ = 'attrs_cnae'
     id = db.Column(db.String(8), primary_key=True)
-    name_en = db.Column(db.String(200))
-    name_pt = db.Column(db.String(200))
-    desc_en = db.Column(db.Text())
-    desc_pt = db.Column(db.Text())
-    keywords_en = db.Column(db.String(100))
-    keywords_pt = db.Column(db.String(100))
-    color = db.Column(db.String(7))
-    gender_pt = db.Column(db.String(1))
-    plural_pt = db.Column(db.Boolean())
-    article_pt = db.Column(db.Boolean())
 
     yi = db.relationship("Yi", backref = 'cnae', lazy = 'dynamic')
     ybi = db.relationship("Ybi", backref = 'cnae', lazy = 'dynamic')
     yio = db.relationship("Yio", backref = 'cnae', lazy = 'dynamic')
     ybio = db.relationship("Ybio", backref = 'cnae', lazy = 'dynamic')
-
-    def name(self):
-        lang = getattr(g, "locale", "en")
-        return title_case(getattr(self,"name_"+lang))
 
     def icon(self):
         return "/static/img/icons/cnae/cnae_%s.png" % (self.id[:1])
@@ -279,29 +265,15 @@ class Cnae(db.Model, AutoSerialize, Stats):
         return '<Cnae %r>' % (self.name_en)
 
 
-class Cbo(db.Model, AutoSerialize, Stats):
+class Cbo(db.Model, AutoSerialize, Stats, ExpandedAttr):
 
     __tablename__ = 'attrs_cbo'
     id = db.Column(db.String(6), primary_key=True)
-    name_en = db.Column(db.String(200))
-    name_pt = db.Column(db.String(200))
-    desc_en = db.Column(db.Text())
-    desc_pt = db.Column(db.Text())
-    keywords_en = db.Column(db.String(100))
-    keywords_pt = db.Column(db.String(100))
-    color = db.Column(db.String(7))
-    gender_pt = db.Column(db.String(1))
-    plural_pt = db.Column(db.Boolean())
-    article_pt = db.Column(db.Boolean())
 
     yo = db.relationship("Yo", backref = 'cbo', lazy = 'dynamic')
     ybo = db.relationship("Ybo", backref = 'cbo', lazy = 'dynamic')
     yio = db.relationship("Yio", backref = 'cbo', lazy = 'dynamic')
     ybio = db.relationship("Ybio", backref = 'cbo', lazy = 'dynamic')
-
-    def name(self):
-        lang = getattr(g, "locale", "en")
-        return title_case(getattr(self,"name_"+lang))
 
     def icon(self):
         return "/static/img/icons/cbo/cbo_%s.png" % (self.id[:1])
@@ -313,29 +285,15 @@ class Cbo(db.Model, AutoSerialize, Stats):
         return '<Cbo %r>' % (self.name_en)
 
 
-class Hs(db.Model, AutoSerialize, Stats):
+class Hs(db.Model, AutoSerialize, Stats, ExpandedAttr):
 
     __tablename__ = 'attrs_hs'
     id = db.Column(db.String(8), primary_key=True)
-    name_en = db.Column(db.String(200))
-    name_pt = db.Column(db.String(200))
-    desc_en = db.Column(db.Text())
-    desc_pt = db.Column(db.Text())
-    keywords_en = db.Column(db.String(100))
-    keywords_pt = db.Column(db.String(100))
-    color = db.Column(db.String(7))
-    gender_pt = db.Column(db.String(1))
-    plural_pt = db.Column(db.Boolean())
-    article_pt = db.Column(db.Boolean())
 
     ymp = db.relationship("Ymp", backref = 'hs', lazy = 'dynamic')
     ympw = db.relationship("Ympw", backref = 'hs', lazy = 'dynamic')
     ymbp = db.relationship("Ymbp", backref = 'hs', lazy = 'dynamic')
     ymbpw = db.relationship("Ymbpw", backref = 'hs', lazy = 'dynamic')
-
-    def name(self):
-        lang = getattr(g, "locale", "en")
-        return title_case(getattr(self,"name_"+lang))
 
     def icon(self):
         return "/static/img/icons/hs/hs_%s.png" % (self.id[:2])
@@ -344,29 +302,15 @@ class Hs(db.Model, AutoSerialize, Stats):
         return '<Hs %r>' % (self.name_en)
 
 
-class Course_hedu(db.Model, AutoSerialize, Stats):
+class Course_hedu(db.Model, AutoSerialize, Stats, ExpandedAttr):
 
     __tablename__ = 'attrs_course_hedu'
     id = db.Column(db.String(8), primary_key=True)
-    name_en = db.Column(db.String(200))
-    name_pt = db.Column(db.String(200))
-    desc_en = db.Column(db.Text())
-    desc_pt = db.Column(db.Text())
-    keywords_en = db.Column(db.String(100))
-    keywords_pt = db.Column(db.String(100))
-    color = db.Column(db.String(7))
-    gender_pt = db.Column(db.String(1))
-    plural_pt = db.Column(db.Boolean())
-    article_pt = db.Column(db.Boolean())
 
     yc = db.relationship("Yc_hedu", backref = 'course_hedu', lazy = 'dynamic')
     yuc = db.relationship("Yuc", backref = 'course_hedu', lazy = 'dynamic')
     ybc = db.relationship("Ybc_hedu", backref = 'course_hedu', lazy = 'dynamic')
     ybuc = db.relationship("Ybuc", backref = 'course_hedu', lazy = 'dynamic')
-
-    def name(self):
-        lang = getattr(g, "locale", "en")
-        return title_case(getattr(self,"name_"+lang))
 
     def icon(self):
         return "/static/img/icons/course_hedu/course_hedu_%s.png" % (self.id[:2])
@@ -378,29 +322,15 @@ class Course_hedu(db.Model, AutoSerialize, Stats):
         return '<Course_hedu %r>' % (self.name_en)
 
 
-class Course_sc(db.Model, AutoSerialize, Stats):
+class Course_sc(db.Model, AutoSerialize, Stats, ExpandedAttr):
 
     __tablename__ = 'attrs_course_sc'
     id = db.Column(db.String(8), primary_key=True)
-    name_en = db.Column(db.String(200))
-    name_pt = db.Column(db.String(200))
-    desc_en = db.Column(db.Text())
-    desc_pt = db.Column(db.Text())
-    keywords_en = db.Column(db.String(100))
-    keywords_pt = db.Column(db.String(100))
-    color = db.Column(db.String(7))
-    gender_pt = db.Column(db.String(1))
-    plural_pt = db.Column(db.Boolean())
-    article_pt = db.Column(db.Boolean())
 
     yc = db.relationship("Yc_sc", backref = 'course_sc', lazy = 'dynamic')
     ysc = db.relationship("Ysc", backref = 'course_sc', lazy = 'dynamic')
     ybc = db.relationship("Ybc_sc", backref = 'course_sc', lazy = 'dynamic')
     ybsc = db.relationship("Ybsc", backref = 'course_sc', lazy = 'dynamic')
-
-    def name(self):
-        lang = getattr(g, "locale", "en")
-        return title_case(getattr(self,"name_"+lang))
 
     def icon(self):
         return "/static/img/icons/course_sc/course_sc_%s.png" % (self.id[:2])
@@ -408,32 +338,28 @@ class Course_sc(db.Model, AutoSerialize, Stats):
     def __repr__(self):
         return '<Course_sc %r>' % (self.name_en)
 
+class School(db.Model, AutoSerialize, Stats, ExpandedAttr):
 
-class University(db.Model, AutoSerialize, Stats):
+    __tablename__ = 'attrs_school'
+    id = db.Column(db.String(8), primary_key=True)
+    is_vocational = db.Column(db.Integer(1))
+
+    def icon(self):
+        return None
+
+    def __repr__(self):
+        return '<School %r>' % (self.name_en)
+
+
+class University(db.Model, AutoSerialize, Stats, ExpandedAttr):
 
     __tablename__ = 'attrs_university'
     id = db.Column(db.String(8), primary_key=True)
-    name_en = db.Column(db.String(200))
-    name_pt = db.Column(db.String(200))
-    desc_en = db.Column(db.Text())
-    desc_pt = db.Column(db.Text())
-    keywords_en = db.Column(db.String(100))
-    keywords_pt = db.Column(db.String(100))
-    color = db.Column(db.String(7))
-    gender_pt = db.Column(db.String(1))
-    plural_pt = db.Column(db.Boolean())
-    article_pt = db.Column(db.Boolean())
-    school_type_en = db.Column(db.String(32))
-    school_type_pt = db.Column(db.String(32))
 
     yu = db.relationship("Yu", backref = 'university', lazy = 'dynamic')
     yuc = db.relationship("Yuc", backref = 'university', lazy = 'dynamic')
     ybu = db.relationship("Ybu", backref = 'university', lazy = 'dynamic')
     ybuc = db.relationship("Ybuc", backref = 'university', lazy = 'dynamic')
-
-    def name(self):
-        lang = getattr(g, "locale", "en")
-        return title_case(getattr(self,"name_"+lang))
 
     def icon(self):
         return None
@@ -453,7 +379,7 @@ class University(db.Model, AutoSerialize, Stats):
 ############################################################
 
 
-class Wld(db.Model, AutoSerialize, Stats):
+class Wld(db.Model, AutoSerialize, Stats, BasicAttr):
 
     __tablename__ = 'attrs_wld'
     id = db.Column(db.String(5), primary_key=True)
@@ -461,21 +387,11 @@ class Wld(db.Model, AutoSerialize, Stats):
     id_3char = db.Column(db.String(3))
     id_num = db.Column(db.Integer(11))
     id_mdic = db.Column(db.Integer(11))
-    name_en = db.Column(db.String(200))
-    name_pt = db.Column(db.String(200))
-    color = db.Column(db.String(7))
-    gender_pt = db.Column(db.String(1))
-    plural_pt = db.Column(db.Boolean())
-    article_pt = db.Column(db.Boolean())
 
     ymw = db.relationship("Ymw", backref = 'wld', lazy = 'dynamic')
     ympw = db.relationship("Ympw", backref = 'wld', lazy = 'dynamic')
     ymbw = db.relationship("Ymbw", backref = 'wld', lazy = 'dynamic')
     ymbpw = db.relationship("Ymbpw", backref = 'wld', lazy = 'dynamic')
-
-    def name(self):
-        lang = getattr(g, "locale", "en")
-        return title_case(getattr(self,"name_"+lang))
 
     def icon(self):
         if self.id == "all":
@@ -491,17 +407,11 @@ bra_pr = db.Table('attrs_bra_pr',
     db.Column('pr_id', db.Integer, db.ForeignKey('attrs_bra.id'))
 )
 
-class Bra(db.Model, AutoSerialize, Stats):
+class Bra(db.Model, AutoSerialize, Stats, BasicAttr):
 
     __tablename__ = 'attrs_bra'
     id = db.Column(db.String(10), primary_key=True)
     id_ibge = db.Column(db.Integer(7))
-    name_en = db.Column(db.String(200))
-    name_pt = db.Column(db.String(200))
-    color = db.Column(db.String(7))
-    gender_pt = db.Column(db.String(1))
-    plural_pt = db.Column(db.Boolean())
-    article_pt = db.Column(db.Boolean())
 
     distance = 0
 
@@ -532,10 +442,6 @@ class Bra(db.Model, AutoSerialize, Stats):
             secondaryjoin = (bra_pr.c.pr_id == id),
             backref = db.backref('bra2', lazy = 'dynamic'),
             lazy = 'dynamic')
-
-    def name(self):
-        lang = getattr(g, "locale", "en")
-        return title_case(getattr(self,"name_"+lang))
 
     def icon(self):
         return "/static/img/icons/bra/bra_%s.png" % (self.id[:3])
