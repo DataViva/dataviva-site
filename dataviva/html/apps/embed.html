@@ -230,7 +230,8 @@
     /* App Functions and Variables */
     /*******************************/
 
-    var app = {}, last_app = null
+    var last_app = null;
+    window.app = {};
     app.build = null
     app.url = "{{ current_build.url() }}"
     app.data = {}
@@ -574,32 +575,27 @@
     // Start building a new app
     app.start = function(new_url,allyears) {
 
-
       // Hide popover
       dataviva.popover.hide();
       app.viz.data([]).draw();
       app.allyears = allyears;
 
       if (new_url) {
-
-
-
-      	  info = new_url.split("/")
-		  if('network' == info[0] || 'rings' == info[0]) {
-		  	// RULE: Network/Rings forces the location MG when dataset is RAIS and Location is BRA
-		  	if(info[1]=='rais' && info[2] == 'all') {
-		  		info[2] = '4mg'
-		  		new_url = info.join("/")
-		  	}
-		  }
-		  if('occugrid' == info[0] || 'scatter' == info[0]) {
-		  	// RULE: Occugrid/Scatter forces the location MG when Location is BRA
-		  	if(info[2] == 'all') {
-		  		info[2] = '4mg'
-		  		new_url = info.join("/")
-
-		  	}
-		  }
+    	  var info = new_url.split("/")
+  		  if('network' == info[0] || 'rings' == info[0]) {
+  		  	// RULE: Network/Rings forces the location MG when dataset is RAIS and Location is BRA
+  		  	if(info[1]=='rais' && info[2] == 'all') {
+  		  		info[2] = '4mg'
+  		  		new_url = info.join("/")
+  		  	}
+  		  }
+  		  if('occugrid' == info[0] || 'scatter' == info[0]) {
+  		  	// RULE: Occugrid/Scatter forces the location MG when Location is BRA
+  		  	if(info[2] == 'all') {
+  		  		info[2] = '4mg'
+  		  		new_url = info.join("/")
+  		  	}
+  		  }
 
         if (new_url != app.url || allyears) {
           app.url = new_url
@@ -607,6 +603,7 @@
           else var t = "Building App"
           loading.text(dataviva.format.text(t)).show(app.create)
         }
+
       }
       else {
         loading.text(dataviva.format.text("Building App")).show(app.create)
@@ -675,9 +672,10 @@
 
             var q = queue()
 
-            if (app.data[app.build.data_url]) app.allyears = true
+            if (app.data[app.build.data_url]) app.allyears = true;
 
             if (["stacked", "line"].indexOf(app.build.app.type) >= 0) {
+              app.allyears = true;
               app.viz.time({"solo": false})
             }
             else if (!app.allyears) {
@@ -697,13 +695,13 @@
               app.vars.year += "";
 
               var url_year = app.vars.year;
-              if (year_range[app.build.dataset][1].indexOf("-")) {
+              if (year_range[app.build.dataset][1].indexOf("-") > 0) {
                 url_year += "-0";
               }
 
               app.build.data_url = app.build.data_url.replace("all", url_year)
             }
-            else if (year_range[app.build.dataset][1].indexOf("-")) {
+            else if (year_range[app.build.dataset][1].indexOf("-") > 0) {
               app.build.data_url = app.build.data_url.replace("all", "all-0")
             }
 
@@ -789,9 +787,9 @@
               },"/apps/networks/"+app.build.output+"/")
             }
 
-			d3.selectAll("#settings #file").style("display","inline-block");
+      			d3.selectAll("#settings #file").style("display","inline-block");
             if (app.build.app.type == "geo_map") {
-			  d3.selectAll("#settings #file").style("display","none");
+      			  d3.selectAll("#settings #file").style("display","none");
               if (app.build.bra[0].id == "all") {
                 var json_id = "all"
               }
@@ -971,9 +969,9 @@
           if (["color"].indexOf(title) >= 0) {
             form_type = "drop";
           }
-          else if (["sizing"].indexOf(title) >= 0) {
-            form_type = "toggle";
-          }
+          // else if (["sizing"].indexOf(title) >= 0) {
+          //   form_type = "toggle";
+          // }
 
     			var ui_div = d3.select("#app_controls").append("div")
       			.attr("class","ui_group alt_tooltip")
@@ -1113,7 +1111,7 @@
         .zoom(app.build.output !== "all")
         .timeline(["stacked", "line"].indexOf(app.build.app.type) < 0)
 
-      if (app.vars.year) {
+      if (!app.allyears) {
         var year_date = app.vars.year;
         if (year_date.indexOf("-") > 0 ) {
           if (year_date.split("-")[1]) {
@@ -1750,7 +1748,7 @@
           .key(function(d){return d.year})
           .key(function(d){return d[out+"_id"]})
           .rollup(function(leaves){
-            if (leaves.length == 2 && leaves[0][app.vars.axes] && leaves[1][app.vars.axes]) {
+            if (leaves.length == 2) {
               var d = {}
               d.year = leaves[0].year
               d[out+"_id"] = leaves[0][out+"_id"]
@@ -1781,6 +1779,7 @@
             }
           })
           .entries(data.raw)
+
       }
       else if (app.build.dataset === "secex" && app.build.output === "all") {
 
@@ -2175,7 +2174,7 @@
             if (a == s) match = this.id
           })
 
-        if (!match) {
+        if (match === null) {
           if (backup) match = backup
           else if (backup2) match = backup2
           else match = options[0][0].id
