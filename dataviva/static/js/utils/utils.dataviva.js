@@ -473,6 +473,12 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       if (labels["population"][l]) return labels["population"][l] + " ("+year+")"
       else return name.toTitleCase() + " ("+year+")"
     }
+    else if (name.indexOf("_" > -1)) {
+      year = name.split("_")[1]
+      label = name.split("_")[0]
+      // if (labels[label][l]) return labels[label][l] + " ("+year+")"
+      return label.toTitleCase() + " ("+year+")"
+    }
     else return name.toTitleCase()
 
   }
