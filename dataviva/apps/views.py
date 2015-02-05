@@ -303,23 +303,23 @@ def get_geo_location(ip):
     return None
 
 @mod.route('/builder/')
-@mod.route('/builder/tree_map/', defaults={"app_name": "tree_map", "dataset": "secex_export", "bra_id": "4mg",
+@mod.route('/builder/tree_map/', defaults={"app_name": "tree_map", "dataset": "secex", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "hs", "params": ""})
 @mod.route('/builder/stacked/', defaults={"app_name": "stacked", "dataset": "rais", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "cbo", "params": ""})
 @mod.route('/builder/geo_map/', defaults={"app_name": "geo_map", "dataset": "rais", "bra_id": "4mgplr02",
             "filter1": "all", "filter2": "all", "output": "bra", "params": "?value_var=wage"})
-@mod.route('/builder/network/', defaults={"app_name": "network", "dataset": "secex_export", "bra_id": "4mg",
+@mod.route('/builder/network/', defaults={"app_name": "network", "dataset": "secex", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "hs", "params": ""})
 @mod.route('/builder/rings/', defaults={"app_name": "rings", "dataset": "rais", "bra_id": "4mg",
             "filter1": "all", "filter2": "2211", "output": "cbo", "params": ""})
-@mod.route('/builder/scatter/', defaults={"app_name": "scatter", "dataset": "secex_export", "bra_id": "4mg",
+@mod.route('/builder/scatter/', defaults={"app_name": "scatter", "dataset": "secex", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "hs", "params": "?rca_scope=wld_rca"})
 @mod.route('/builder/compare/', defaults={"app_name": "compare", "dataset": "rais", "bra_id": "4mg_rj",
             "filter1": "all", "filter2": "all", "output": "cbo", "params": "?depth=cbo_4&axes=wage_avg"})
 @mod.route('/builder/occugrid/', defaults={"app_name": "occugrid", "dataset": "rais", "bra_id": "4mg030000",
             "filter1": "m7310", "filter2": "all", "output": "cbo", "params": ""})
-@mod.route('/builder/line/', defaults={"app_name": "line", "dataset": "secex_export", "bra_id": "4mg",
+@mod.route('/builder/line/', defaults={"app_name": "line", "dataset": "secex", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "all", "params": ""})
 @mod.route('/builder/box/', defaults={"app_name": "box", "dataset": "rais", "bra_id": "4mg030000",
             "filter1": "m7310", "filter2": "all", "output": "cbo", "params": ""})
@@ -553,9 +553,8 @@ def crosswalk_recs(dataset, build_filter1, raw_filter1, build_filter2, raw_filte
         ids = [row.get_id(dataset) for row in results]
         if ids:
             # Build filter1 must either be <cnae> or <hs>
-            swap_map = { "secex_export" : { "<hs>" : ("rais", "<cnae>") },
-                         "secex_import" : { "<hs>" : ("rais", "<cnae>") },
-                         "rais" : { "<cnae>" : ("secex_export", "<hs>") }}
+            swap_map = { "secex" : { "<hs>" : ("rais", "<cnae>") },
+                         "rais" : { "<cnae>" : ("secex", "<hs>") }}
             dataset2, target_filter = swap_map[dataset][build_filter1]
             raw_target_filter = "_".join(ids)
 

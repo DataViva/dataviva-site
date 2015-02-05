@@ -70,7 +70,7 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
     filter_order = ["bra","cnae","cbo","hs","wld"]
 
     datasets = {"rais": {"filters": ["bra","cnae","cbo"], "years": 1},
-                "secex_export": {"filters": ["bra","hs","wld"], "years": 2},
+                "secex": {"filters": ["bra","hs","wld"], "years": 2},
                 "hedu": {"filters": ["bra","university","course_hedu"], "years": 1},
                 "sc": {"filters": ["bra","course_sc"], "years": 1}}
 

@@ -11,7 +11,7 @@ from dataviva.utils.make_query import make_query
 from dataviva.account.models import User, Starred
 from dataviva.apps.models import UI
 from dataviva.rais.models import Yb_rais, Yi, Yo
-from dataviva.secex_export.models import Yb_secex, Yp, Yw
+from dataviva.secex.models import Ymb, Ymp, Ymw
 from dataviva.hedu.models import Yu, Yc_hedu
 from dataviva.attrs.models import Yb
 
@@ -106,7 +106,7 @@ def data(year=None,type="bra",depth=None):
                 "columns": ["wage","wage_avg","cnae_diversity","cnae_diversity_eff"],
                 "on": ["year","bra_id"]
             })
-        table = Yb_secex
+        table = Ymb
     elif type == "cnae":
         request_args["excluding"] = {"cnae_id": "xx"}
         request_args["cols"] = ["cnae_id","name","wage","wage_avg","num_emp","num_emp_est","cbo_diversity","cbo_diversity_eff"]
@@ -118,11 +118,11 @@ def data(year=None,type="bra",depth=None):
     elif type == "hs":
         request_args["excluding"] = {"hs_id": "xx"}
         request_args["cols"] = ["hs_id","name","export_val","import_val","pci","wld_diversity","wld_diversity_eff"]
-        table = Yp
+        table = Ymp
     elif type == "wld":
         request_args["excluding"] = {"wld_id": "xx"}
         request_args["cols"] = ["wld_id","id_mdic","name","export_val","import_val","hs_diversity","hs_diversity_eff"]
-        table = Yw
+        table = Ymw
     elif type == "university":
         request_args["excluding"] = {}
         request_args["cols"] = ["university_id","name","enrolled","graduates","entrants","students"]
