@@ -11600,7 +11600,6 @@ var dataNest = function(vars, flatData, nestingLevels, requirements) {
 
     }
 
-
     for (var lll = 0; lll < nestingLevels.length; lll++) {
       var level = nestingLevels[lll];
       if (!(level in returnObj)) {
@@ -26280,10 +26279,12 @@ module.exports = function(vars) {
 //------------------------------------------------------------------------------
 module.exports = function(vars,message) {
 
-  var message = vars.messages.value ? message : null,
-      size = message == vars.error.internal ? "large" : vars.messages.style
+  message = vars.messages.value ? message : null;
 
-  if (size == "large") {
+  var size = vars.messages.style.value || (message === vars.error.internal ?
+             "large" : vars.messages.style.backup);
+
+  if (size === "large") {
     var font = vars.messages,
         position = "center"
   }
@@ -28484,6 +28485,10 @@ module.exports = {
     weight: 200
   },
   padding: 5,
+  style: {
+    accepted: [false, "small", "large"],
+    value: false
+  },
   value: true
 };
 
@@ -32409,7 +32414,7 @@ module.exports = function() {
           }
         }
       };
-      vars.messages.style = vars.group && vars.group.attr("opacity") === "1" ? "small" : "large";
+      vars.messages.style.backup = vars.group && vars.group.attr("opacity") === "1" ? "small" : "large";
       steps = getSteps(vars);
       runStep();
     });
