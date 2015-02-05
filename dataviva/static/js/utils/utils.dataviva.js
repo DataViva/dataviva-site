@@ -299,7 +299,7 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "export_kg": {"en": "Export Weight", "pt": "Peso das Exporta\u00e7\u00f5es"},
       "import_kg": {"en": "Import Weight", "pt": "Peso das Importa\u00e7\u00f5es"},
       "trade_balance": {"en": "Trade Balance", "pt": "Balan\u00e7a Comercial"},
-      "direction": {"en": "Direction", "pt": "Dire\u00e7\u00e3o"},
+      "direction": {"en": "Exports/Imports", "pt": "Exporta\u00e7\u00f5es/Importa\u00e7\u00f5es"},
 
       // HEDU Labels
       "hedu": {"en": "Higher Education", "pt": "Ensino Superior"},
