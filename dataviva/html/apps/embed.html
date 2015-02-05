@@ -968,9 +968,9 @@
           if (["color"].indexOf(title) >= 0) {
             form_type = "drop";
           }
-          else if (["sizing"].indexOf(title) >= 0) {
-            form_type = "toggle";
-          }
+          // else if (["sizing"].indexOf(title) >= 0) {
+          //   form_type = "toggle";
+          // }
 
     			var ui_div = d3.select("#app_controls").append("div")
       			.attr("class","ui_group alt_tooltip")
@@ -1747,7 +1747,7 @@
           .key(function(d){return d.year})
           .key(function(d){return d[out+"_id"]})
           .rollup(function(leaves){
-            if (leaves.length == 2 && leaves[0][app.vars.axes] && leaves[1][app.vars.axes]) {
+            if (leaves.length == 2) {
               var d = {}
               d.year = leaves[0].year
               d[out+"_id"] = leaves[0][out+"_id"]
@@ -1778,6 +1778,7 @@
             }
           })
           .entries(data.raw)
+
       }
       else if (app.build.dataset === "secex" && app.build.output === "all") {
 
