@@ -104,7 +104,7 @@ class Stats(object):
 
     def get_top_attr(self, tbl, val_var, attr_type, key, dataset):
         from dataviva import __year_range__
-        latest_year = parse_year(__year_range__[dataset][-1])
+        latest_year = parse_year(__year_range__[dataset][-1].split("-")[0])
         if key == "bra":
             length = 9
         elif key == "hs" or key == "cnae":
@@ -143,12 +143,12 @@ class Stats(object):
                     top = tbl.query.filter(tbl.bra_id == bras[0]["id"])
         else:
             top = tbl.query.filter(getattr(tbl, attr_type+"_id") == self.id)
-
+        
         top = top.filter_by(year=latest_year) \
                     .filter(func.char_length(getattr(tbl, key+"_id")) == length) \
                     .group_by(getattr(tbl, key+"_id")) \
                     .order_by(func.sum(getattr(tbl, val_var)).desc())
-
+        
         percent = 0
         if top.first() != None:
             if isinstance(top.first(),tuple):
@@ -172,7 +172,7 @@ class Stats(object):
 
         if latest_year == None:
             from dataviva import __year_range__
-            latest_year = parse_year(__year_range__[dataset][-1])
+            latest_year = parse_year(__year_range__[dataset][-1].split("-")[0])
 
         if val_var == "wage_avg":
             calc_var = val_var
