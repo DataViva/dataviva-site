@@ -24,11 +24,7 @@
       <div id="nav_controls">
 
         <div id="account">
-          {% if g.user.is_authenticated() %}
-            {{ g.user.nickname }}
-          {% else %}
             {% trans %}Login{% endtrans %}
-          {% endif %}
         </div>
 
         <div id="language">
@@ -40,19 +36,14 @@
           <label for="pt">pt</label>
         </div>
 
-
       </div>
 
-      {% if g.user.is_authenticated() %}
+
       <div id="account_tooltip" style="display:none;">
-        <a class="account" href="{{ url_for('account.user', nickname=g.user.nickname) }}"><i class="fa fa-user"></i>{% trans %}Profile{% endtrans %}</a>
-        {% if g.user.is_admin() %}
-          <a class="account" href="{{ url_for('admin.admin') }}"><i class="fa fa-cogs"></i>{% trans %}Admin Panel{% endtrans %}</a>
-        {% endif %}
+        <a id="profile_link" class="account" href=""><i class="fa fa-user"></i>{% trans %}Profile{% endtrans %}</a>
         <a class="account" href="{{ url_for('account.logout') }}"><i class="fa fa-key"></i>{% trans %}Logout{% endtrans %}</a>
-
       </div>
-      {% endif %}
+
 
     </div>
 
@@ -114,23 +105,16 @@
 
     var crumbs = "{{crumbs|safe}}"
 
-    function change_language(l) {
-      window.location = "/set_lang/" + l + "/?next=" + window.location.pathname;
-    }
+    d3.select("#account").on(d3plus.client.pointer.click,function(){
+       login()
+    })
 
-    leon("$language_select").color("{{ g.color }}").size("small")
-
-    d3.select("#close_message").on(d3plus.client.pointer.click,function(){
-      var div = d3.select("#server_message")
-      var timing = parseFloat(div.style("transition-duration"),10)*1000;
-      div.style("opacity",0);
-      setTimeout(function(){
-        div.remove();
-      },timing)
-    });
-
-    if ("{{ g.user.is_authenticated() }}" != "False") {
-
+    var authenticated = function(username, is_admin) {
+      d3.select("#account").text(username);
+      d3.select("#profile_link").attr("href", "/account/" + username);
+      if (is_admin) {
+        d3.select("#profile_link").attr("href", "/admin/");
+      }
       show_toggle = function() {
         d3.select("#account").attr("class","active")
         d3.select("#d3plus_tooltip_id_account").style("left", x).style("display","block")
@@ -143,7 +127,7 @@
 
       var language_html = d3.select("div#account_tooltip").html()
       d3.select("div#account_tooltip").remove()
-	  diff_screen = ((window.outerWidth-parseInt(d3.select("#header").style("width").replace("px","")))/2)
+      diff_screen = ((window.outerWidth-parseInt(d3.select("#header").style("width").replace("px","")))/2)
       var acct = d3.select("#account").node(),
           w = acct.offsetWidth,
           h = acct.offsetHeight,
@@ -180,13 +164,29 @@
       d3.select("body").on(d3plus.client.pointer.click,function(){
         hide_toggle()
       })
+    };
 
+    d3.json("/account/status", function(error, json) {
+      if (error) return console.warn(error);
+      if (json["logged_in"]) {
+        authenticated(json["user"], json["is_admin"]);
+      }
+    });
+
+    function change_language(l) {
+      window.location = "/set_lang/" + l + "/?next=" + window.location.pathname;
     }
-    else {
-      d3.select("#account").on(d3plus.client.pointer.click,function(){
-        login()
-      })
-    }
+
+    leon("$language_select").color("{{ g.color }}").size("small")
+
+    d3.select("#close_message").on(d3plus.client.pointer.click,function(){
+      var div = d3.select("#server_message")
+      var timing = parseFloat(div.style("transition-duration"),10)*1000;
+      div.style("opacity",0);
+      setTimeout(function(){
+        div.remove();
+      },timing)
+    });
 
     d3.select(".survey-block img").on("click", function(){
     	if(this.getAttribute("open")==1) {
