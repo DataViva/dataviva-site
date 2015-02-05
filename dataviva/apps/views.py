@@ -28,6 +28,7 @@ import random
 import zipfile
 import sys
 import gzip
+from dataviva.utils.decorators import cache_api
 
 mod = Blueprint('apps', __name__, url_prefix='/apps')
 
@@ -77,7 +78,7 @@ def filler(dataset, filter1, filter2):
 
 @mod.route("/embed/")
 @mod.route("/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
-#@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+@cache_api("apps:embed", timeout=604800)
 def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
           filter1="all", filter2="all", output="cbo"):
 
