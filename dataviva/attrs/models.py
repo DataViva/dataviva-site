@@ -355,6 +355,8 @@ class University(db.Model, AutoSerialize, Stats, ExpandedAttr):
 
     __tablename__ = 'attrs_university'
     id = db.Column(db.String(8), primary_key=True)
+    school_type_en = db.Column(db.String(32))
+    school_type_pt = db.Column(db.String(32))
 
     yu = db.relationship("Yu", backref = 'university', lazy = 'dynamic')
     yuc = db.relationship("Yuc", backref = 'university', lazy = 'dynamic')
