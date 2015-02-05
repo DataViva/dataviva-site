@@ -2,6 +2,9 @@ import re
 
 ''' Titlecase Function '''
 def title_case(string):
+    if not string:
+      return ""
+
     exceptions = ['A', 'An', 'And', 'As', 'At', 'But', 'By', 'For', 'From', 'If', \
               'In', 'Into', 'Near', 'Nor', 'Of', 'On', 'Onto', 'Or', 'That', \
               'The', 'To', 'With', 'Via', 'Vs', 'Vs.', \
@@ -10,7 +13,6 @@ def title_case(string):
               'Ou', 'Que', 'O', 'A', 'Com']
     uppers = ['Id', 'Tv', 'R&d', "P&d", "It", "Ti"]
     words = re.split('(\s|-|\/|\()', string)
-    
     def detect_string(s):
         if s in exceptions or s.capitalize() in exceptions:
             return s.lower()
