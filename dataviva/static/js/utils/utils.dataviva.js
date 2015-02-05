@@ -69,6 +69,7 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "x": {"en": "X Axis", "pt": "Eixo X"},
       "x_desc_scatter": {"en": "Changes the X axis variable.", "pt": "Alterar a vari\u00e1vel do eixo X."},
       "y": {"en": "Y Axis", "pt": "Eixo Y"},
+      "y_desc_stacked": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
       "y_desc_scatter": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
       "y_desc_line": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
       "y_desc_box": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
@@ -118,7 +119,6 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       // Sizing Labels
       "sizing": {"en": "Size", "pt": "Tamanho"},
       "sizing_desc_tree_map": {"en": "Changes the variable used to size the rectangles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos ret\u00e2ngulos."},
-      "sizing_desc_stacked": {"en": "Changes the Y axis variable.", "pt": "Alterar a vari\u00e1vel do eixo Y."},
       "sizing_desc_network": {"en": "Changes the variable used to size the circles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
       "sizing_desc_compare": {"en": "Changes the variable used to size the circles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
       "sizing_desc_occugrid": {"en": "Changes the variable used to size the circles.", "pt": "Alterar a vari\u00e1vel usada para o tamanho dos c\u00edrculos."},
@@ -304,6 +304,7 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       // HEDU Labels
       "hedu": {"en": "Higher Education", "pt": "Ensino Superior"},
       "enrolled": {"en": "Enrolled", "pt": "Matriculou"},
+      "school_type": {"en": "Funding", "pt": "Financiamento"},
 
       // SC Labels
       "sc": {"en": "School Census", "pt": "Censo Escolar"},

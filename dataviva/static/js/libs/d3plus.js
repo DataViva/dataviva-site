@@ -11600,6 +11600,13 @@ var dataNest = function(vars, flatData, nestingLevels, requirements) {
 
     }
 
+    for (var lll = 0; lll < nestingLevels.length; lll++) {
+      var level = nestingLevels[lll];
+      if (!(level in returnObj)) {
+        returnObj[level] = fetchValue(vars, leaves[0], level);
+      }
+    }
+
     groupedData.push(returnObj);
 
     return returnObj;
@@ -18797,8 +18804,6 @@ module.exports = function(vars) {
     }
     if (!textBox.empty()) {
       words = textBox.text().match(/[^\s-]+-?/g);
-      console.log(words);
-      console.log("\n");
       return ellipsis();
     }
   };
@@ -18816,7 +18821,6 @@ module.exports = function(vars) {
   };
   ellipsis = function() {
     var lastChar, lastWord;
-    console.log(words);
     if (words && words.length) {
       lastWord = words.pop();
       lastChar = lastWord.charAt(lastWord.length - 1);
@@ -24995,11 +24999,11 @@ module.exports = function(params) {
         icon = uniques(d, vars.icon.value, fetchValue, vars, vars.id.nesting[depth]),
         tooltip_data = fetchData(vars,d,length,ex,children,depth)
 
-    if (icon.length === 1 && icon[0] !== null) {
-      icon = icon[0]
+    if (icon.length === 1 && typeof icon[0] === "string") {
+      icon = icon[0];
     }
     else {
-      icon = false
+      icon = false;
     }
 
     if ((tooltip_data.length > 0 || footer) || ((!d.d3plus_label && length == "short" && title) || (d.d3plus_label && (!("visible" in d.d3plus_label) || ("visible" in d.d3plus_label && d.d3plus_label.visible === false))))) {
@@ -25849,7 +25853,7 @@ module.exports = function(vars) {
               var icon = uniqueValues(g, vars.icon.value, fetchValue, vars, colorKey),
                   color = fetchColor(vars, g, colorKey);
 
-              if (icon.length === 1 && icon[0] !== null) {
+              if (icon.length === 1 && typeof icon[0] === "string") {
                 icon = icon[0];
                 var short_url = stringStrip(icon+"_"+color),
                     iconStyle = vars.icon.style.value,
@@ -26275,10 +26279,12 @@ module.exports = function(vars) {
 //------------------------------------------------------------------------------
 module.exports = function(vars,message) {
 
-  var message = vars.messages.value ? message : null,
-      size = message == vars.error.internal ? "large" : vars.messages.style
+  message = vars.messages.value ? message : null;
 
-  if (size == "large") {
+  var size = vars.messages.style.value || (message === vars.error.internal ?
+             "large" : vars.messages.style.backup);
+
+  if (size === "large") {
     var font = vars.messages,
         position = "center"
   }
@@ -28479,6 +28485,10 @@ module.exports = {
     weight: 200
   },
   padding: 5,
+  style: {
+    accepted: [false, "small", "large"],
+    value: false
+  },
   value: true
 };
 
@@ -32404,7 +32414,7 @@ module.exports = function() {
           }
         }
       };
-      vars.messages.style = vars.group && vars.group.attr("opacity") === "1" ? "small" : "large";
+      vars.messages.style.backup = vars.group && vars.group.attr("opacity") === "1" ? "small" : "large";
       steps = getSteps(vars);
       runStep();
     });
