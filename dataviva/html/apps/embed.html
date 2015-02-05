@@ -477,6 +477,8 @@
           "wage_avg_bra": "mean",
           "wage_growth": "mean",
           "wage_growth_5": "mean",
+          "age": "mean",
+          "enrolled_classes": "mean",
           "num_emp_growth": "mean",
           "num_emp_growth_5": "mean",
           "export_val_growth": "mean",
@@ -574,8 +576,10 @@
 
 
       // Hide popover
-      dataviva.popover.hide()
-      app.allyears = allyears
+      dataviva.popover.hide();
+      app.viz.data([]).draw();
+      app.allyears = allyears;
+
       if (new_url) {
 
 
@@ -1244,6 +1248,7 @@
           .nodes(app.networks[app.build.output].nodes)
           .focus(app.build[app.build.output][0].id)
           .depth(app.viz.id(Object).nesting.length - 1)
+          .size(false)
           .shape("circle")
       }
 

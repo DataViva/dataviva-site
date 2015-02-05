@@ -34,7 +34,7 @@ leon_vars.border = 1
 leon_vars.color = {}
 
 leon_functions = {}
-leon_functions.darken = function(color) {   
+leon_functions.darken = function(color) {
     var percent = -10, num = parseInt(color.slice(1),16),
     amt = Math.round(2.55 * percent),
     R = (num >> 16) + amt,
@@ -44,15 +44,15 @@ leon_functions.darken = function(color) {
 }
 
 leon_functions.text_color = function(color) {
-  
-  var light = "#fff", 
+
+  var light = "#fff",
       dark = "#666",
       hsl = leon_vars.color.hsl(color);
-      
+
   if (hsl.l > 65) return dark;
   else if (hsl.l < 48) return light;
   return hsl.h > 35 && hsl.s >= 3 && hsl.l >= 70 ? dark : light;
-  
+
 }
 
 leon_functions.check_hidden = function(hidden_node) {
@@ -88,7 +88,7 @@ leon_functions.check_hidden = function(hidden_node) {
     }
   }
 }
-  
+
 leon_vars.color.hsl = function(color){
     var r = parseInt(color.substr(1,2),16)
     var g = parseInt(color.substr(3,2),16)
@@ -96,7 +96,7 @@ leon_vars.color.hsl = function(color){
     r /= 255, g /= 255, b /= 255;
     var max = Math.max(r, g, b), min = Math.min(r, g, b);
     var h, s, l = (max + min) / 2;
-    
+
     if(max == min){
         h = s = 0; // achromatic
     }else{
@@ -133,10 +133,10 @@ leon_construct.div = function(classname,parent) {
   return div
 }// Finds all elements that match the passed ID or Class
 leon = function(name) {
-  
+
   var self = {},
       objs = []
-      
+
   if (name instanceof HTMLElement) {
     objs.push(name)
   }
@@ -151,7 +151,7 @@ leon = function(name) {
   else if (typeof name === "string") {
     name = [name]
   }
-  
+
   if (!name) {
     var tags = ["SELECT","INPUT"]
     tags.forEach(function(tag){
@@ -161,7 +161,7 @@ leon = function(name) {
   }
   else if (name instanceof Array) {
     var prefixes = ["#",".","$"]
-    
+
     function get_nodes(n) {
       if (prefixes.indexOf(n.charAt(0)) >= 0) {
         if (n.indexOf("$") == 0) {
@@ -170,20 +170,20 @@ leon = function(name) {
         else {
           var nodelist = document.querySelectorAll(n)
         }
-      } 
+      }
       else {
         var nodelist = document.getElementsByTagName(n)
       }
       for(var i = nodelist.length; i--; objs.unshift(nodelist[i]));
     }
-    
+
     name.forEach(function(n){get_nodes(n)})
   }
-  
+
   function find_var(string,variable,seperator) {
     return obj.outerHTML.split("min=")[1].split(sep)[1]
   }
-  
+
   objs.forEach(function(obj){
     if (obj.type == "text") {
       var text = obj.outerHTML
@@ -195,15 +195,15 @@ leon = function(name) {
       }
     }
   })
-  
+
   var others = objs.filter(function(obj) {
     return obj.type != "radio" && obj.type
   })
-  
+
   var radios = objs.filter(function(obj) {
     return obj.type == "radio" && obj.type
   })
-  
+
   var radio_groups = [], return_radios = []
   radios.forEach(function(radio,i){
     if (return_radios.length) {
@@ -220,7 +220,7 @@ leon = function(name) {
       return_radios.push([radio])
     }
   })
-  
+
   var objs = []
   others.forEach(function(obj) {
     if (obj.type == "text" && obj.min && obj.max && obj.step) var type = "range"
@@ -232,13 +232,13 @@ leon = function(name) {
     }
     objs.push(o)
   })
-  
+
   var labellist = document.getElementsByTagName('LABEL');
   var labels = []
   for(var i = labellist.length; i--; labels.unshift(labellist[i]));
-  
+
   return_radios.forEach(function(radio_group) {
-    
+
     radio_group.forEach(function(obj){
       for (var i = 0; i < labels.length; i++) {
         if (labels[i].getAttribute("for") == obj.id) {
@@ -246,16 +246,16 @@ leon = function(name) {
         }
       }
     })
-    
+
     var temp_obj = {
           "items": radio_group,
           "type": "radio",
           "name": radio_group[0].name
         }
-    
+
     objs.push(temp_obj)
   })
-  
+
   objs.forEach(function(obj){
     for (var i = 0; i < labels.length; i++) {
       if (labels[i].getAttribute("for") == obj.name) {
@@ -263,7 +263,7 @@ leon = function(name) {
       }
     }
   })
-  
+
   var legendlist = document.getElementsByTagName('LEGEND');
   var legends = []
   for(var i = legendlist.length; i--; legends.unshift(legendlist[i]));
@@ -274,7 +274,7 @@ leon = function(name) {
       }
     }
   })
-  
+
   self.leons = {}
   objs.forEach(function(obj){
     var node = document.getElementById("leon_"+obj.name)
@@ -289,40 +289,40 @@ leon = function(name) {
       })
     }
   })
-  
+
   self.color = function(color) {
     for (obj in self.leons) {
       if (self.leons[obj].set_color) self.leons[obj].set_color(color)
     }
     return self
   }
-  
+
   self.size = function(size) {
     for (obj in self.leons) {
       if (self.leons[obj].set_size) self.leons[obj].set_size(size)
     }
     return self
   }
-  
+
   self.hide = function() {
     for (obj in self.leons) {
       if (self.leons[obj].hide) self.leons[obj].hide()
     }
     return self
   }
-  
+
   self.set = function(value) {
     for (obj in self.leons) {
       if (self.leons[obj].set_value) self.leons[obj].set_value(value)
     }
     return self
   }
-  
+
   self.color(leon_vars.color.main.normal)
   self.size(leon_vars.size)
-  
+
   return self
-  
+
 }
 var head = document.getElementsByTagName("head")[0]
 var style = document.createElement("style")
@@ -336,7 +336,7 @@ style.innerHTML = "\
     font-family: "+leon_vars.font.family+";\
     font-weight: "+leon_vars.font.weight+";\
     vertical-align: middle;\
-    z-index: 1000;\
+    z-index: 300;\
   }\
   .leon.button {\
     background: "+leon_vars.color.accent.normal+";\
@@ -438,7 +438,7 @@ style.innerHTML = "\
     position: relative;\
   }\
   .leon.select.active {\
-    z-index: 1005;\
+    z-index: 400;\
   }\
   .leon.select > .leon.button {\
     margin: 0px;\
@@ -622,30 +622,30 @@ CUSTOM BUTTON CREATOR
 Creates a custom button when passed an item
 */
 leon_construct.label = function(item,parent) {
-  
+
   var self = this
 
   var html = item.innerHTML ? item.innerHTML : item.id
-  
+
   if (leon_vars.autohide) item.style.display = "none"
-  
+
   var label = document.createElement("div")
   label.className = "leon label"
   label.innerHTML = html
-  
+
   if (parent) parent.appendChild(label)
   else item.parentNode.insertBefore(label,item)
-  
+
   self.item = item
   self.node = label
-  
+
   self.set_size = function(size) {
     self.node.className = "leon label "+size
     return self
   }
-  
+
   return self
-  
+
 }
 leon_construct.select_input = function(params) {
 
@@ -655,7 +655,7 @@ leon_construct.select_input = function(params) {
     label.setAttribute("for",params.id)
     params.parent.appendChild(label)
   }
-  
+
   select = document.createElement("select")
   if (params.id) select.id = params.id
   if (params.class) select.className = params.class
@@ -663,7 +663,7 @@ leon_construct.select_input = function(params) {
     if (typeof params.event === "string") params.event = window[params.event]
     select.onchange = function(){ params.event(this.value,params.id) }
   }
-  
+
   params.parent.appendChild(select)
   if (params.data instanceof Array) {
     var temp_data = {}
@@ -672,7 +672,7 @@ leon_construct.select_input = function(params) {
     })
     params.data = temp_data
   }
-  
+
   for (name in params.data) {
     if (!params.default) params.default = name
     option = document.createElement("option")
@@ -681,7 +681,7 @@ leon_construct.select_input = function(params) {
     if (name == params.default) option.selected = true
     select.appendChild(option)
   }
-  
+
 }
 
 leon_construct.radio_input = function(params) {
@@ -692,7 +692,7 @@ leon_construct.radio_input = function(params) {
     legend.id = params.id
     params.parent.appendChild(legend)
   }
-  
+
   if (params.data instanceof Array) {
     var temp_data = {}
     params.data.forEach(function(d){
@@ -700,10 +700,10 @@ leon_construct.radio_input = function(params) {
     })
     params.data = temp_data
   }
-  
+
   for (name in params.data) {
     if (!params.default) params.default = name
-    
+
     radio = document.createElement("input")
     radio.type = "radio"
     radio.value = name
@@ -715,13 +715,13 @@ leon_construct.radio_input = function(params) {
     }
     if (name == params.default) radio.checked = true
     params.parent.appendChild(radio)
-    
+
     label = document.createElement("label")
     label.setAttribute("for",name)
     label.innerHTML = params.data[name]
     params.parent.appendChild(label)
   }
-  
+
 }
 
 leon_construct.range_input = function(params) {
@@ -732,7 +732,7 @@ leon_construct.range_input = function(params) {
     label.setAttribute("for",params.id)
     params.parent.appendChild(label)
   }
-  
+
   range = document.createElement("input")
   range.type = "range"
   range.min = params.data.min
@@ -746,7 +746,7 @@ leon_construct.range_input = function(params) {
     range.onchange = function(){ params.event(this.value,params.id) }
   }
   params.parent.appendChild(range)
-  
+
 }
 
 leon_construct.button_input = function(params) {
@@ -757,7 +757,7 @@ leon_construct.button_input = function(params) {
     label.setAttribute("for",params.id)
     params.parent.appendChild(label)
   }
-  
+
   button = document.createElement("input")
   button.type = "button"
   if (params.data) button.value = params.data
@@ -768,18 +768,18 @@ leon_construct.button_input = function(params) {
     button.onclick = function(){ params.event(this.value,params.id) }
   }
   params.parent.appendChild(button)
-  
+
 }
 
 leon_construct.text_input = function(params) {
-  
+
   if (params.label) {
     label = document.createElement("label")
     label.innerHTML = params.label
     label.setAttribute("for",params.id)
     params.parent.appendChild(label)
   }
-  
+
   text = document.createElement("input")
   text.type = "text"
   if (params.data) text.value = params.data
@@ -790,18 +790,18 @@ leon_construct.text_input = function(params) {
     text.onchange = function(){ params.event(this.value,params.id) }
   }
   params.parent.appendChild(text)
-  
+
 }
 
 leon_construct.checkbox_input = function(params) {
-  
+
   if (params.label) {
     label = document.createElement("label")
     label.innerHTML = params.label
     label.setAttribute("for",params.id)
     params.parent.appendChild(label)
   }
-  
+
   checkbox = document.createElement("input")
   checkbox.type = "checkbox"
   if (params.default) checkbox.checked = true
@@ -813,19 +813,19 @@ leon_construct.checkbox_input = function(params) {
     checkbox.onclick = function(){ params.event(this.checked,params.id) }
   }
   params.parent.appendChild(checkbox)
-  
+
 }
 /*
 CUSTOM BUTTON CREATOR
 Creates a custom button when passed an item
 */
 leon_construct.button = function(item,parent) {
-  
+
   var self = this
   self.size = "medium"
-  
+
   self.active = false
-  
+
   if (typeof item == "string") {
     var html = item
   }
@@ -845,17 +845,17 @@ leon_construct.button = function(item,parent) {
   else {
     var html = item.value
   }
-  
+
   if (item.type && item.type == "button") {
     var item = item.items
     if (!html) html = item.value
   }
   self.item = item
-  
+
   if (typeof item != "string" && leon_vars.autohide) item.style.display = "none"
-  
+
   self.node = leon_construct.div("leon button "+self.size)
-  
+
   if (item.attributes && item.attributes.icon) {
     var icon = document.createElement("div")
     icon.className = "leon icon"
@@ -865,7 +865,7 @@ leon_construct.button = function(item,parent) {
     }
     self.node.appendChild(icon)
   }
-  
+
   self.node.innerHTML = self.node.innerHTML + html
   if (item.value) {
     self.node.value = item.value
@@ -873,28 +873,28 @@ leon_construct.button = function(item,parent) {
   if (item.id) {
     self.node.id = "leon_"+item.id
   }
-  
+
   if (parent) {
     parent.appendChild(self.node)
   }
   else {
     item.parentNode.insertBefore(self.node,item)
   }
-  
+
   self.node.addEventListener("mouseover",function(){
     if (!self.active) {
       this.style.background = leon_vars.color.accent.hover
       this.style.color = leon_functions.text_color(leon_vars.color.accent.hover)
     }
   })
-  
+
   self.node.addEventListener("mouseout",function(){
     if (!self.active) {
       this.style.background = leon_vars.color.accent.normal
       this.style.color = leon_functions.text_color(leon_vars.color.accent.highlight)
     }
   })
-  
+
   self.node.addEventListener("mousedown",function(e){
     if (!self.active) {
       self.node.style.background = self.color
@@ -902,7 +902,7 @@ leon_construct.button = function(item,parent) {
       self.node.style.color = leon_functions.text_color(self.color)
     }
   })
-  
+
   self.node.addEventListener("mouseup",function(e){
     if (!self.active) {
       self.node.style.background = leon_vars.color.accent.hover
@@ -910,31 +910,31 @@ leon_construct.button = function(item,parent) {
       self.node.style.color = leon_functions.text_color(leon_vars.color.accent.hover)
     }
   })
-  
+
   self.add_class = function(name) {
     self.node.className = self.node.className+" "+name
   }
-  
+
   self.set_color = function(color) {
     if (color) self.color = color
     else self.color = leon_vars.color.main.normal
     self.active_color()
     return self
   }
-  
+
   self.set_size = function(size) {
     self.node.className = self.node.className.replace(self.size,size)
     self.size = size
     return self
   }
-  
+
   self.set_active = function(bool,miss) {
     if (bool && self.item.onclick && !miss) self.item.onclick()
     self.active = bool
     self.active_color()
     return self
   }
-  
+
   self.active_color = function(bool) {
     if (self.active && self.color) {
       self.node.style.background = self.color
@@ -948,17 +948,17 @@ leon_construct.button = function(item,parent) {
     }
     return self
   }
-  
+
   return self
-  
+
 }
 leon_construct.checkbox = function(obj) {
-  
+
   var self = this
-  
+
   self.item = obj.items
   self.color = leon_vars.color.main.normal
-  
+
   self.set_value = function(value) {
     if (value) {
       self.bg.style.background = self.color
@@ -970,34 +970,34 @@ leon_construct.checkbox = function(obj) {
     }
     self.item.checked = value
   }
-  
+
   if (leon_vars.autohide) self.item.style.display = "none"
-  
+
   self.node = leon_construct.div("leon checkbox")
   self.node.id = "leon_"+obj.name
   self.item.parentNode.insertBefore(self.node,self.item)
-  
+
   if (obj.label) {
     self.label = new leon_construct.label(obj.label,self.node)
   }
-  
+
   self.bg = document.createElement("div")
   self.bg.className = "leon checkbox group"
   self.node.appendChild(self.bg)
-  
+
   self.bg.addEventListener("click",function(e){
     if (self.item.checked) self.set_value(false)
     else self.set_value(true)
     if (self.item.onclick) self.item.onclick()
   })
-  
+
   self.button = document.createElement("div")
   self.button.className = "leon button"
   self.button.innerHTML = "&nbsp;"
   self.bg.appendChild(self.button)
-  
+
   if (self.item.checked) self.set_value(true)
-  
+
   self.set_size = function(size) {
     var hidden_node = leon_functions.check_hidden(self.node)
     self.button.style.padding = leon_vars.padding[size]
@@ -1014,25 +1014,25 @@ leon_construct.checkbox = function(obj) {
     leon_functions.check_hidden(hidden_node)
     return self
   }
-  
+
   self.set_color = function(color) {
     if (color) self.color = color
     else self.color = leon_vars.color.main.normal
     if (self.item.checked) self.bg.style.background = self.color
     return self
   }
-  
+
   return self
-  
+
 }
 /*
 CUSTOM RADIO TOGGLE CREATOR
 Creates a custom toggle menu, when passed the name of a radio button group
 */
 leon_construct.radio = function(obj) {
-  
+
   var self = this
-  
+
   self.set_value = function(value) {
     if (obj.checked.node.value != value) {
       obj.checked.item.checked = false
@@ -1043,62 +1043,62 @@ leon_construct.radio = function(obj) {
       obj.checked = button
     }
   }
-  
+
   self.set_size = function(size) {
     self.buttons.forEach(function(b){
       b.set_size(size)
     })
     if (self.label) self.label.set_size(size)
   }
-  
+
   self.set_color = function(color) {
     self.buttons.forEach(function(b){
       b.set_color(color)
     })
   }
-  
+
   self.node = leon_construct.div("leon radio")
   self.node.id = "leon_"+obj.name
   obj.items[0].parentNode.insertBefore(self.node,obj.items[0])
-  
+
   if (obj.label) {
     self.label = new leon_construct.label(obj.label,self.node)
   }
-  
+
   var buttongroup = document.createElement("div")
   buttongroup.className = "leon radio group"
   self.node.appendChild(buttongroup)
-  
+
   self.buttons = []
   obj.items.forEach(function(item,i){
-    
+
     var button = new leon_construct.button(item,buttongroup)
-    
+
     if (i == 0) button.add_class("first")
     else if (i == obj.items.length-1) button.add_class("last")
     else button.add_class("middle")
-    
+
     button.node.addEventListener("click", function(d){
       self.set_value(this.value)
     })
-    
+
     if (item.checked) {
       button.set_active(true,true)
       obj.checked = button
     }
-    
+
     self.buttons.push(button)
-    
+
   })
-  
+
   return self
-  
+
 }
 /*
 CUSTOM RANGE SLIDER CREATOR
 */
 leon_construct.range = function(obj) {
-  
+
   var self = this
   self.input = obj.items
   self.handles = []
@@ -1115,13 +1115,13 @@ leon_construct.range = function(obj) {
   self.tick_step = self.step
   self.playing = false
   self.frame = self.min
-  
+
   // Determine if slider is a self.range
   if (self.input.alt) self.range = true
-  
+
   // Hide HTML input
   if (leon_vars.autohide) self.input.style.display = "none"
-  
+
   var play_function = function() {
     if (self.frame <= self.max) {
       self.set_value(self.frame);
@@ -1131,31 +1131,31 @@ leon_construct.range = function(obj) {
       }
     }
   }
-      
+
   // Create range group
   this.node = leon_construct.div("leon range")
   this.node.id = "leon_"+obj.name
   this.input.parentNode.insertBefore(self.node,self.input)
-  
+
   // Create label
   if (obj.label) {
     this.label = new leon_construct.label(obj.label,self.node)
   }
-  
+
   // Create Play Button, if not a range slider
   if (!self.range) {
-    
+
     self.play_button = new leon_construct.button("&#9658",self.node)
     self.play_button.node.addEventListener("click",function(){
         if (!self.playing) self.play()
         else self.stop()
     })
-    
+
   }
-  
+
   // Create Background DIV
   self.slider = new leon_construct.div("leon range slider "+self.size,self.node)
-  
+
   // Create Initial Ticks
   self.ticks = []
   var x = 0
@@ -1172,7 +1172,7 @@ leon_construct.range = function(obj) {
     self.ticks.push(tick)
     self.tick_indexes[t+""] = x
     x++
-    
+
     tick.addEventListener("mousedown",function(){
       self.dragging = true
       self.set_value(this.innerHTML)
@@ -1182,17 +1182,17 @@ leon_construct.range = function(obj) {
       self.dragging = false
     })
   }
-  
+
   // Create Main Handle
   self.handles.push(new leon_construct.button(self.input.value,self.slider))
-  
+
   // Create self.range background and handle, if applicable
   if (self.range) {
     self.range = leon_construct.div("leon range "+self.size)
     self.slider.insertBefore(self.range,self.slider.firstChild)
     self.handles.push(new leon_construct.button(self.input.alt,self.slider))
   }
-  
+
   // Add Handle Event Listeners
   self.handles.forEach(function(handle){
     handle.node.setAttribute("unselectable","on")
@@ -1206,13 +1206,13 @@ leon_construct.range = function(obj) {
       self.active_handle = null
     })
   })
-  
+
   // Create Tick Labels
   self.tick_labels = []
   self.ticks.forEach(function(tick,i){
-    
+
     var label = document.createElement("div")
-    
+
     // if (i%self.label_step == 0) {
       label.innerHTML = tick.innerHTML
       label.className = "leon button tick"
@@ -1222,24 +1222,24 @@ leon_construct.range = function(obj) {
     //   label.className = "leon button tick bullet"
     // }
     self.slider.insertBefore(label,self.ticks[0])
-  
+
     self.tick_labels.push(label)
-    
+
   })
-  
+
   /*************/
   /* FUNCTIONS */
   /*************/
-  
+
   self.set_value = function(value) {
-    
+
     if (typeof value == "number") value = value+""
-    
+
     if (self.range) {
-      
+
       var h1 = self.handles[0].node.innerHTML,
           h2 = self.handles[1].node.innerHTML
-          
+
       if (value < h1 || value <= h1+((h2-h1)/2)) {
         h1 = value
         self.handles[0].node.innerHTML = h1
@@ -1254,10 +1254,10 @@ leon_construct.range = function(obj) {
         self.input.value = h2
         self.active_handle = self.handles[1]
       }
-      
+
       self.range.style.left = self.tick_positions[h1]+"px"
       self.range.style.width = (self.tick_positions[h2]-self.tick_positions[h1])+"px"
-      
+
     }
     else if (self.input.value != value) {
       self.input.value = value
@@ -1269,18 +1269,18 @@ leon_construct.range = function(obj) {
 
     return self
   }
-  
+
   self.play = function() {
-    
+
     self.playing = true
     self.play_button.set_active(true)
-          
+
     var current = parseFloat(self.handles[0].node.innerHTML,10)
     if (current == self.max) self.frame = self.min;
     else self.frame = current+self.step;
     self.set_value(self.frame)
     self.frame += self.step;
-          
+
     if (self.frame > self.max) {
       self.stop();
     }
@@ -1297,33 +1297,33 @@ leon_construct.range = function(obj) {
     self.active_handle.set_active(false)
     return self
   }
-  
+
   self.set_color = function(color) {
     self.play_button.set_color(color)
     self.handles.forEach(function(handle){
       handle.set_color(color)
     })
   }
-  
+
   self.set_size = function(size) {
-    
+
     var hidden_node = leon_functions.check_hidden(self.node)
     var available_width = self.max_width
-    
+
     self.handle_width = 0
     self.padding = parseFloat(leon_vars.padding[size].split(" ")[1],10)
-    
+
     self.ticks.forEach(function(tick,i){
-      
+
       tick.style.padding = leon_vars.padding[size]
       tick.style.fontSize = leon_vars.font.size[size]
       tick.style.width = "auto"
-      
+
       var w = tick.offsetWidth
       if (self.handle_width < w) self.handle_width = w
-        
+
     })
-    
+
     // Resize label and minus width from available_width
     if (self.label) {
       self.label.set_size(size)
@@ -1331,24 +1331,24 @@ leon_construct.range = function(obj) {
       available_width -= parseFloat(self.label.node.style.paddingLeft,10)
       available_width -= parseFloat(self.label.node.style.paddingRight,10)
     }
-  
+
     if (self.play_button) {
       self.play_button.set_size(size)
       self.play_button.node.style.marginRight = self.padding+"px"
       available_width -= self.play_button.node.offsetWidth
     }
     // self.play_button.style.width = self.play_button.offsetHeight-leon_vars.padding*2-leon_vars.border*2
-  
+
     self.handles.forEach(function(handle){
       handle.set_size(size)
       handle.node.style.width = (self.handle_width-(self.padding*2))+"px"
       handle.node.style.marginLeft = (-(self.handle_width-(self.padding*2))/2)+"px"
     })
-  
+
     if (self.range) {
       self.range.className = self.range.className.replace(self.size,size)
     }
-  
+
     self.slider.className = self.slider.className.replace(self.size,size)
     self.slider.style.paddingLeft = (self.handle_width/2)+"px"
     self.slider.style.paddingRight = (self.handle_width/2)+"px"
@@ -1361,34 +1361,34 @@ leon_construct.range = function(obj) {
         i--
       }
       self.label_step = total/i
-  
+
       var i = Math.floor(available_width/leon_vars.font.size)-1, total = self.max-self.min
       while ((total/i)%1 != 0) {
         i--
       }
       self.tick_step = total/i
-  
+
     }
     else {
       self.slider.style.width = (self.handle_width*(self.ticks.length-1))+"px"
       self.tick_width = self.handle_width
     }
-  
+
     self.ticks.forEach(function(tick,i){
-    
+
       tick.style.marginLeft = (-(self.tick_width)/2)+"px"
       tick.style.width = self.tick_width-(self.padding*2)+"px"
-  
+
       var percent = i*(100/(self.ticks.length-1))
           x1 = self.handle_width/2,
           x2 = parseFloat(self.slider.style.width,10)+x1-leon_vars.border*2
-      
+
       self.tick_positions[i] = (percent/100) * (x2 - x1) + x1
-  
+
       tick.style.left = self.tick_positions[i]+"px"
-    
+
     })
-  
+
     self.tick_labels.forEach(function(label,i){
       label.style.padding = leon_vars.padding[size]
       label.style.fontSize = leon_vars.font.size[size]
@@ -1396,26 +1396,26 @@ leon_construct.range = function(obj) {
       label.style.width = self.handle_width-(self.padding*2)+"px"
       label.style.left = self.tick_positions[i]+"px"
     })
-  
+
     self.handles.forEach(function(handle){
       var value = self.tick_indexes[parseFloat(handle.node.innerHTML)]
       handle.node.style.marginLeft = (-(self.handle_width)/2)+"px"
       handle.node.style.left = self.tick_positions[value]+"px"
     })
-  
+
     if (self.range) {
       var value = self.tick_indexes[parseFloat(self.handles[0].node.innerHTML)],
           value2 = self.tick_indexes[parseFloat(self.handles[1].node.innerHTML)]
       self.range.style.left = self.tick_positions[value]+"px"
       self.range.style.width = (self.tick_positions[value2]-self.tick_positions[value])+"px"
     }
-  
+
     self.size = size
     hidden_node = leon_functions.check_hidden(hidden_node)
-      
+
     return self
   }
-  
+
   document.addEventListener("mousemove",function(e){
     if (self.dragging) {
       self.active_handle.set_active(true)
@@ -1455,75 +1455,75 @@ leon_construct.range = function(obj) {
         }
         else if (self.max != value) self.set_value(self.max)
       }
-      
+
     }
   })
-  
+
   document.addEventListener("mouseup",function(){
     self.handles.forEach(function(handle){
       handle.set_active(false)
     })
     self.dragging = false
   })
-  
+
   return self
-  
+
 }
 /*
 CUSTOM RADIO TOGGLE CREATOR
 Creates a custom toggle menu, when passed the name of a radio button group
 */
 leon_construct.select = function(obj) {
-  
+
   var self = this
-  
+
   self.set_color = function(color) {
     self.selected.set_color(color)
     self.options.forEach(function(option){
       option.set_color(color)
     })
   }
-  
+
   self.set_size = function(size) {
-    
+
     self.dropdown.style.width = "auto"
-    
+
     self.selected.set_size(size)
     if (self.label) self.label.set_size(size)
-      
+
     var icon = self.selected.node.getElementsByClassName("icon")[0]
     if (icon) icon.className = "leon icon "+size
-    
+
     self.width = 0
     self.padding = parseFloat(leon_vars.padding[size].split(" ")[1],10)
-    
+
     var hidden_node = leon_functions.check_hidden(self.node)
     self.options.forEach(function(option){
-      
+
       option.set_size(size)
-      
+
       var icon = option.node.getElementsByClassName("icon")[0]
       if (icon) icon.className = "leon icon "+size
-        
+
       var html = option.node.innerHTML
       option.node.innerHTML = html + self.arrow
       var arrow_width = option.node.getElementsByTagName("span")[0].offsetHeight
       option.node.innerHTML = html
       var width = option.node.offsetWidth - self.padding*2 + arrow_width
       if (width > self.width) self.width = width
-      
+
     })
-      
+
     self.selected.node.style.width = (self.width)+"px"
-    
+
     self.dropdown.style.width = (self.width+self.padding*2+leon_vars.border*2)+"px"
     self.dropdown.style.left = self.selected.node.offsetLeft+"px"
 
     leon_functions.check_hidden(hidden_node)
-      
+
     return self
   }
-  
+
   self.show = function() {
     self.selected.set_active(true)
     self.node.className = "leon select active"
@@ -1533,7 +1533,7 @@ leon_construct.select = function(obj) {
     self.selected.open = true
     return self
   }
-  
+
   self.hide = function() {
     self.selected.set_active(false)
     self.dropdown.style.opacity = 0
@@ -1545,7 +1545,7 @@ leon_construct.select = function(obj) {
     },leon_vars.time.fade*1000)
     return self
   }
-  
+
   self.set_value = function(value,miss) {
     if (self.input.value != value || miss) {
       var option = self.options.filter(function(o){
@@ -1558,33 +1558,33 @@ leon_construct.select = function(obj) {
     }
     return self
   }
-  
+
   self.input = obj.items
-  
+
   self.arrow = "<span class='leon arrow'>&#8227</span>"
-  
+
   self.node = leon_construct.div("leon select")
   self.node.id = "leon_"+self.input.id
   self.input.parentNode.insertBefore(self.node,self.input)
-  
+
   if (obj.label) {
     self.label = new leon_construct.label(obj.label,self.node)
   }
-  
+
   self.selected = new leon_construct.button(self.input,self.node)
   self.selected.open = false
-  
+
   self.dropdown = document.createElement("div")
   self.dropdown.className = "leon select dropdown"
   self.dropdown.id = "leon_dropdown_"+self.input.id
   self.dropdown.style.left = self.selected.node.offsetLeft+"px"
   self.node.appendChild(self.dropdown)
-  
+
   self.options = []
   for (var i = 0; i < self.input.length; i++) {
     self.options.push(new leon_construct.button(self.input[i],self.dropdown))
   }
-  
+
   self.selected.node.addEventListener("click", function(e){
     e.stopPropagation()
     if (self.selected.open) {
@@ -1594,65 +1594,65 @@ leon_construct.select = function(obj) {
       self.show()
     }
   })
-  
+
   self.options.forEach(function(option,i){
-    
+
     if (option.item.selected) self.set_value(option.item.value,true)
-    
+
     if (i == 0) option.add_class("first")
     else if (i == self.input.length-1) option.add_class("last")
     else option.add_class("middle")
-    
+
     option.node.addEventListener("click", function(e){
       e.stopPropagation()
       self.set_value(option.item.value)
       self.hide()
     })
   })
-  
+
   return self
-  
+
 }
 /*
 CUSTOM RADIO TOGGLE CREATOR
 Creates a custom toggle menu, when passed the name of a radio button group
 */
 leon_construct.text = function(obj) {
-  
+
   var self = this
   self.input = obj.items
   self.node = leon_construct.div("leon text")
   self.node.id = "leon_"+obj.name
   self.input.parentNode.insertBefore(self.node,self.input)
   self.color = leon_vars.color.main.normal
-  
+
   if (obj.label) {
     self.label = obj.label
     self.node.appendChild(self.label)
   }
-  
+
   self.node.appendChild(self.input)
-  
+
   self.input.onfocus = function() {
     this.style.borderColor = self.color
   }
-  
+
   self.input.onblur = function() {
     this.style.borderColor = leon_vars.color.accent.highlight
   }
-  
+
   self.set_color = function(color) {
     self.color = color
     if (self.input == document.activeElement) {
       self.input.style.borderColor = self.color
     }
   }
-  
+
   self.set_size = function(size) {
     self.input.className = self.input.className + "leon textbox "+size
     if (self.label) self.label.className = "leon label "+size
   }
-  
+
   return self
-  
+
 }
