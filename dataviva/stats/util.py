@@ -53,8 +53,9 @@ def compute_table_years(datasets):
     from dataviva.hedu.models import Yc_hedu
     from dataviva.sc.models import Yc_sc
     from dataviva.attrs.models import Yb as Yb_attr
+    from dataviva.attrs.models import Ybs
 
-    tables = {"ei" : Yms, "hedu": Yc_hedu, "sc": Yc_sc, "secex": Ymb, "rais": Yb_rais, "population": Yb_attr}
+    tables = {"ei" : Yms, "hedu": Yc_hedu, "sc": Yc_sc, "secex": Ymb, "rais": Yb_rais, "population": Yb_attr, "stats": Ybs}
 
     results = {}
     for dataset in datasets:
@@ -71,6 +72,6 @@ def get_or_set_years(redis, key):
     if val:
         val = json.loads(val)
     else:
-        val = compute_table_years(['ei', 'hedu', 'sc', 'secex', 'rais', 'population'])
+        val = compute_table_years(['ei', 'hedu', 'sc', 'secex', 'rais', 'population', 'stats'])
     redis.set(key, json.dumps(val))
     return val

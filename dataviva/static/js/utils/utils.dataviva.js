@@ -299,7 +299,7 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "export_kg": {"en": "Export Weight", "pt": "Peso das Exporta\u00e7\u00f5es"},
       "import_kg": {"en": "Import Weight", "pt": "Peso das Importa\u00e7\u00f5es"},
       "trade_balance": {"en": "Trade Balance", "pt": "Balan\u00e7a Comercial"},
-      "direction": {"en": "Direction", "pt": "Dire\u00e7\u00e3o"},
+      "direction": {"en": "Exports/Imports", "pt": "Exporta\u00e7\u00f5es/Importa\u00e7\u00f5es"},
 
       // HEDU Labels
       "hedu": {"en": "Higher Education", "pt": "Ensino Superior"},
@@ -311,6 +311,11 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "classes": {"en": "Classes", "pt": "Aulas"},
       "enrolled_classes": {"en": "Average Class Size", "pt": "Tamanho da Classe M\u00e9dia"},
       "age": {"en": "Average Age", "pt": "Idade M\u00e9dia"},
+
+      // EI Labels
+      "ei": {"en": "Electronic Invoices (EI)", "pt": "Notas Fiscais Eletr\u00f4nicas"},
+      "purchase_value": {"en": "Purchase Value", "pt": "Valor de Compra"},
+      "transportation_cost": {"en": "Transportation Cost", "pt": "Custo de Transporte"},
 
       // Key Labels
       "brazil": {"en": "Brazil", "pt": "Brasil"},
@@ -775,10 +780,12 @@ dataviva.cleanData = function(data, dataset, output) {
     "secex": ["export_val","import_val"],
     "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"],
     "hedu": ["enrolled"],
-    "sc": ["enrolled"]
+    "sc": ["enrolled"],
+    "ei": ["purchase_value"]
   }
 
-  var depths = dataviva.depths(output)
+  var output_attr = output === "bra2" ? "bra" : output;
+  var depths = dataviva.depths(output_attr);
 
   var extras = {}
 
@@ -808,15 +815,30 @@ dataviva.cleanData = function(data, dataset, output) {
     }, {})
 
     if (output !== "all") {
-      var id = temp[output+"_id"];
+
+      var id;
+      if (dataset === "ei") {
+
+        if (output === "bra2") {
+          id = temp.bra_id_r;
+        }
+        else {
+          id = temp.bra_id_s;
+        }
+
+      }
+      else {
+        id = temp[output+"_id"];
+      }
 
       depths.forEach(function(depth){
-        temp[output+"_"+depth] = id.slice(0,depth);
-      })
+        temp[output_attr+"_"+depth] = id.slice(0,depth);
+      });
 
       if (id in extras) {
         temp = d3plus.object.merge(temp, extras[id]);
       }
+
     }
 
     if (temp.month) {
