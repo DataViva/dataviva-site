@@ -672,9 +672,10 @@
 
             var q = queue()
 
-            if (app.data[app.build.data_url]) app.allyears = true
+            if (app.data[app.build.data_url]) app.allyears = true;
 
             if (["stacked", "line"].indexOf(app.build.app.type) >= 0) {
+              app.allyears = true;
               app.viz.time({"solo": false})
             }
             else if (!app.allyears) {
@@ -1110,7 +1111,7 @@
         .zoom(app.build.output !== "all")
         .timeline(["stacked", "line"].indexOf(app.build.app.type) < 0)
 
-      if (app.vars.year) {
+      if (!app.allyears) {
         var year_date = app.vars.year;
         if (year_date.indexOf("-") > 0 ) {
           if (year_date.split("-")[1]) {
