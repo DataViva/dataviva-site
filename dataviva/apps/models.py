@@ -99,12 +99,15 @@ class Build(db.Model, AutoSerialize):
             if self.dataset == "rais":
                 name = "cnae"
                 default = "r90019"
-            elif self.dataset.startswith("secex"):
+            elif self.dataset == "secex":
                 name = "hs"
                 default = "178703"
             elif self.dataset == "hedu":
                 name = "university"
                 default = "00575"
+            elif self.dataset == "ei":
+                name = "bra"
+                default = "4mg"
 
             items = []
             attr = globals()[name.capitalize()]
@@ -116,7 +119,10 @@ class Build(db.Model, AutoSerialize):
                     items.append(attr.query.get(default))
 
             self.filter1 = "_".join([c.id for c in set(items)])
-            setattr(self, name, items)
+            if name == "bra":
+                setattr(self, "bra2", items)
+            else:
+                setattr(self, name, items)
 
     def set_filter2(self, filter):
         if self.filter2 != "all":
@@ -196,6 +202,8 @@ class Build(db.Model, AutoSerialize):
                 filter1 = "show.6"
             elif self.output == "university":
                 filter1 = "show.5"
+            elif self.output == "bra2":
+                filter1 = "show.9"
 
         filter2 = self.filter2
         if filter2 == "all" or self.app.type == "rings":
@@ -218,7 +226,10 @@ class Build(db.Model, AutoSerialize):
         if self.output == "course_sc" and self.filter2 == "all":
             params = "?exclude=xx%"
 
-        return '{}/all/{}/{}/{}/{}'.format(self.dataset, bra, filter1, filter2, params)
+        if self.dataset == "ei":
+            return "{}/all/{}/{}/{}".format(self.dataset, bra, filter1, params)
+
+        return "{}/all/{}/{}/{}/{}".format(self.dataset, bra, filter1, filter2, params)
 
     '''Returns the data table required for this build'''
     def data_table(self):
@@ -357,6 +368,10 @@ class Build(db.Model, AutoSerialize):
         auto_serialized["url"] = self.url()
         auto_serialized["ui"] = [ui.serialize() for ui in self.ui.all()]
         auto_serialized["app"] = self.app.serialize()
+        if self.output == "bra2":
+            auto_serialized["output_attr"] = "bra"
+        else:
+            auto_serialized["output_attr"] = self.output
 
         return auto_serialized
 

@@ -274,22 +274,22 @@
 
     app.html = function(id,list) {
 
-      var obj = app.build.output !== "all" ? app.attrs[app.build.output][id] : false;
+      var obj = app.build.output_attr !== "all" ? app.attrs[app.build.output_attr][id] : false;
 
       if (app.build.app.type == "rings") {
         if (list) {
           var cats = []
           list.forEach(function(n){
-            var id = n[app.build.output+"_id"].slice(0,depths[app.build.output][0])
+            var id = n[app.build.output+"_id"].slice(0,depths[app.build.output_attr][0])
             if (cats.indexOf(id) < 0) cats.push(id)
           })
         }
         var old_url = app.url
         var split_url = app.url.split("/")
-        if (app.build.output == "cbo") var url_index = 4
+        if (app.build.output_attr == "cbo") var url_index = 4
         else var url_index = 3
-        builder.filter(obj,app.build.output+"_0",true)
-        split_url[url_index] = app.build[app.build.output][0].id
+        builder.filter(obj,app.build.output_attr+"_0",true)
+        split_url[url_index] = app.build[app.build.output_attr][0].id
         app.url = split_url.join("/")
         if (app.url != old_url) {
           d3.json("/apps/embed/"+app.url)
@@ -321,7 +321,7 @@
 
             var u = a.url
 
-            if (app.build.output !== "all") {
+            if (app.build.output_attr !== "all") {
               u = u.replace("<"+app.build.output+">",id)
             }
 
@@ -331,9 +331,9 @@
 
               if (obj) {
 
-                t = t.replace("<"+app.build.output+">",obj.name)
-                if (t.indexOf("<"+app.build.output+"_") >= 0) {
-                  var article = t.match(new RegExp("<"+app.build.output+"_.*?>"))
+                t = t.replace("<"+app.build.output_attr+">",obj.name)
+                if (t.indexOf("<"+app.build.output_attr+"_") >= 0) {
+                  var article = t.match(new RegExp("<"+app.build.output_attr+"_.*?>"))
                   var word = article[0]
                   article = article[0].split("_")[1].split(">")[0]
                   if (obj.article_pt) {
@@ -691,18 +691,23 @@
               }
               else {
                 var y_range = d3.range(data_years[0],data_years[1]+1);
-                app.vars.year = d3plus.util.closest(y_range, parseFloat(app.vars.year));
+                var year_int = parseFloat(app.vars.year.split("-")[0]);
+                app.vars.year = d3plus.util.closest(y_range, year_int);
               }
               app.vars.year += "";
 
+              if (app.build.dataset === "ei") {
+                app.vars.year = year_range.ei[1];
+              }
+
               var url_year = app.vars.year;
-              if (year_range[app.build.dataset][1].indexOf("-") > 0) {
+              if (app.vars.year.indexOf("-") < 0 && year_range[app.build.dataset][1].indexOf("-") > 0) {
                 url_year += "-0";
               }
 
               app.build.data_url = app.build.data_url.replace("all", url_year)
             }
-            else if (year_range[app.build.dataset][1].indexOf("-") > 0) {
+            else if (app.build.dataset != "ei" && year_range[app.build.dataset][1].indexOf("-") > 0) {
               app.build.data_url = app.build.data_url.replace("all", "all-0")
             }
 
@@ -719,31 +724,31 @@
               },"/"+app.build.data_url)
             }
 
-            if (app.build.output != "all" && !app.attrs[app.build.output]) {
+            if (app.build.output_attr != "all" && !app.attrs[app.build.output_attr]) {
               q.defer(function(u,callback){
                 d3.json(u)
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
-                    var out = app.build.output
+                    var out = app.build.output_attr
                     app.attrs[out] = {}
                     d.data.forEach(function(a){
                       a[out+"_id"] = a.id
                       a[out+"_display"] = dataviva.displayID(a.id,out)
                       a.icon = dataviva.icon(a.id,out)
-                      app.attrs[app.build.output][a.id] = a
+                      app.attrs[out][a.id] = a
                       if (a["export_val"]) delete a["export_val"]
                       if (a["import_val"]) delete a["import_val"]
                       if (a["enrolled"]) delete a["enrolled"]
                       if (a["num_emp"]) delete a["num_emp"]
                     })
 
-                    // for (id in app.attrs[app.build.output]) {
-                    //   var obj = app.attrs[app.build.output][id]
+                    // for (id in app.attrs[app.build.output_attr]) {
+                    //   var obj = app.attrs[app.build.output_attr][id]
                     //   depths[out].forEach(function(d){
                     //     if (d <= obj.id.length && depths[out].indexOf(obj.id.length) >= 0) {
                     //       obj[out+"_"+d] = obj[out+"_id"].slice(0, d);
                     //       // var id = obj[out+"_id"].slice(0, d);
-                    //       // obj[out+"_"+d] = {"name":app.attrs[app.build.output][id].name};
+                    //       // obj[out+"_"+d] = {"name":app.attrs[app.build.output_attr][id].name};
                     //       // obj[out+"_"+d][out+"_id"] = id;
                     //     }
                     //   })
@@ -751,41 +756,41 @@
 
                     callback(error,d)
                   })
-              },"/attrs/"+app.build.output+"/"+"?lang="+dataviva.language)
+              },"/attrs/"+app.build.output_attr+"/"+"?lang="+dataviva.language)
             }
 
             if (["network","rings"].indexOf(app.build.app.type) >= 0
-                && !app.networks[app.build.output]) {
+                && !app.networks[app.build.output_attr]) {
               q.defer(function(u,callback){
                 d3.json(u)
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
 
                     d.nodes.forEach(function(node){
-                      if (app.build.output === "cnae") {
-                        node[app.build.output+"_id"] = node.cnae_6;
+                      if (app.build.output_attr === "cnae") {
+                        node[app.build.output_attr+"_id"] = node.cnae_6;
                       }
                       else {
-                        var id = node[app.build.output+"_id"];
-                        node[app.build.output+"_"+id.length] = id;
+                        var id = node[app.build.output_attr+"_id"];
+                        node[app.build.output_attr+"_"+id.length] = id;
                       }
                     })
 
                     d.edges.forEach(function(edge){
-                      if (["hs"].indexOf(app.build.output) >= 0) {
+                      if (["hs"].indexOf(app.build.output_attr) >= 0) {
                         edge.source = d.nodes[edge.source]
                         edge.target = d.nodes[edge.target]
                       }
                       else {
-                        edge.source = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.source })[0]
-                        edge.target = d.nodes.filter(function(n){ return n[app.build.output+"_id"] == edge.target })[0]
+                        edge.source = d.nodes.filter(function(n){ return n[app.build.output_attr+"_id"] == edge.source })[0]
+                        edge.target = d.nodes.filter(function(n){ return n[app.build.output_attr+"_id"] == edge.target })[0]
                       }
                     })
 
-                    app.networks[app.build.output] = d
+                    app.networks[app.build.output_attr] = d
                     callback(error,d)
                   })
-              },"/apps/networks/"+app.build.output+"/")
+              },"/apps/networks/"+app.build.output_attr+"/")
             }
 
       			d3.selectAll("#settings #file").style("display","inline-block");
@@ -915,12 +920,12 @@
         }
         else if (ui.type == "depth") {
           var bra_id = app.build.bra[0].id
-          if (app.build.output == "bra" && bra_id != "all") {
+          if (app.build.output_attr == "bra" && bra_id != "all") {
             // if (bra_id.indexOf("4mg") == 0) ui.values[1] = "bra_7"
             if (bra_id.length >= 2) ui.values.splice(0,1)
             if (bra_id.length >= 4) ui.values.splice(0,1)
           }
-          if (app.build.output == "bra" && app.build.bra[0].id == "all") {
+          if (app.build.output_attr == "bra" && app.build.bra[0].id == "all") {
             var default_value = ui.values[0]
           }
           else if (app.build.app.type == "tree_map") {
@@ -936,7 +941,7 @@
         else if (ui.type == "spotlight" && app.build.app.type == "scatter") {
           var default_value = ui.values[1]
         }
-        else if (ui.type == "rca_scope" && app.build.bra[0].id == "all" && app.build.output == "hs") {
+        else if (ui.type == "rca_scope" && app.build.bra[0].id == "all" && app.build.output_attr == "hs") {
           var default_value = "wld_rca"
         }
         else {
@@ -954,7 +959,7 @@
           app.vars[ui.type] = default_value
         }
 
-        if (ui.values.length > 1 && app.vars.builder !== "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output == "hs") || (ui.type != "color" && app.build.app.type != "stacked"))) {
+        if (ui.values.length > 1 && app.vars.builder !== "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output_attr == "hs") || (ui.type != "color" && app.build.app.type != "stacked"))) {
 
           var ui_data = []
           ui.values.forEach(function(v){
@@ -1017,18 +1022,18 @@
       }
 
       var nesting = []
-      if (app.build.output === "all") {
+      if (app.build.output_attr === "all") {
         nesting = ["trade_balance", "direction"];
         app.viz.text({"trade_balance": "trade_balance", "direction": "direction"});
       }
-      else if (app.build.output === "university") {
+      else if (app.build.output_attr === "university") {
         nesting = ["school_type","university_5"];
         app.viz.text({"school_type": "school_type", "university_5": "name"});
       }
       else {
         app.viz.text("name");
-        depths[app.build.output].forEach(function(d){
-          nesting.push(app.build.output+"_"+d)
+        depths[app.build.output_attr].forEach(function(d){
+          nesting.push(app.build.output_attr+"_"+d)
         })
       }
 
@@ -1043,17 +1048,17 @@
       /************************/
       /* Gloabl App Variables */
       /************************/
-      if (app.build.output == "bra" || (app.build.output == "wld" && app.vars.depth == "wld_5")) var style = "default"
+      if (app.build.output_attr == "bra" || (app.build.output_attr == "wld" && app.vars.depth == "wld_5")) var style = "default"
       else var style = "knockout"
 
-      if (app.build.output == "bra") {
+      if (app.build.output_attr == "bra") {
         app.tooltip["short"][""] = ["id_ibge"]
         app.tooltip["long"][""] = ["id_ibge"]
         app.tooltip["short"]["basics"] = [app.vars.size]
       }
       else {
-        app.tooltip["short"][""] = [app.build.output+"_display"]
-        app.tooltip["long"][""] = [app.build.output+"_display"]
+        app.tooltip["short"][""] = [app.build.output_attr+"_display"]
+        app.tooltip["long"][""] = [app.build.output_attr+"_display"]
         if (app.build.app.type == "occugrid") {
           app.tooltip["short"]["calculations"] = ["elsewhere","required"]
         }
@@ -1090,7 +1095,7 @@
           "value": app.build.title
         })
         .color(color_var)
-        .attrs(app.attrs[app.build.output])
+        .attrs(app.attrs[app.build.output_attr])
         .active({"spotlight": app.vars.spotlight})
         .id(nesting)
         .depth(nesting.indexOf(app.vars.depth))
@@ -1113,9 +1118,9 @@
         })
         .y(false)
         .tooltip(app.tooltip)
-        .zoom(app.build.output !== "all")
+        .zoom(app.build.output_attr !== "all")
         .timeline(["stacked", "line"].indexOf(app.build.app.type) < 0)
-        .legend(app.build.output !== "university")
+        .legend(app.build.output_attr !== "university")
 
       if (app.vars.year && ["stacked","line"].indexOf(app.build.app.type) < 0) {
         var year_date = app.vars.year;
@@ -1140,7 +1145,7 @@
       // app.viz.type(app.build.app.d3plus)
       //   .title(app.build.title)
       //   .color_var(color_var)
-      //   .attrs(app.attrs[app.build.output])
+      //   .attrs(app.attrs[app.build.output_attr])
       //   .spotlight(app.vars.spotlight)
       //   .nesting(nesting)
       //   .depth(app.vars.depth)
@@ -1152,7 +1157,7 @@
       //   .year(app.vars.year)
       //   .total_bar(app.total())
       //   .highlight(null)
-      //   .id_var(app.build.output+"_id")
+      //   .id_var(app.build.output_attr+"_id")
       //   .error(false)
       //   .solo(app.solos)
       //   .filter(app.filters)
@@ -1194,10 +1199,10 @@
       /* Network Specific Variables */
       /******************************/
       else if (app.build.app.type == "network") {
-        if ((app.build.bra[0].id === "all" && app.build.output !== "hs") || app.build.output === "cbo") {
+        if ((app.build.bra[0].id === "all" && app.build.output_attr !== "hs") || app.build.output_attr === "cbo") {
           app.viz.active(function(d){return true;})
         }
-        else if (app.build.output == "hs") {
+        else if (app.build.output_attr == "hs") {
           if (app.vars.rca_scope == "wld_rca") {
             app.viz.active(function(d){
               return d.rca_wld >= 1;
@@ -1209,15 +1214,15 @@
             })
           }
         }
-        else if (app.build.output == "cnae") {
+        else if (app.build.output_attr == "cnae") {
           app.viz.active(function(d){
             return d.rca >= 1;
           })
         }
 
         app.viz
-          .edges(app.networks[app.build.output].edges)
-          .nodes(app.networks[app.build.output].nodes)
+          .edges(app.networks[app.build.output_attr].edges)
+          .nodes(app.networks[app.build.output_attr].nodes)
           .depth(app.viz.id(Object).nesting.length - 1)
           .size({"scale": {"min": 3}})
           .shape("circle")
@@ -1227,7 +1232,7 @@
       /* Rings Specific Variables */
       /****************************/
       else if (app.build.app.type == "rings") {
-        if (app.build.output == "hs") {
+        if (app.build.output_attr == "hs") {
           if (app.vars.rca_scope == "wld_rca") {
             app.viz.active(function(d){
               return d.rca_wld >= 1;
@@ -1239,7 +1244,7 @@
             })
           }
         }
-        else if (app.build.output == "cnae") {
+        else if (app.build.output_attr == "cnae") {
           app.viz.active(function(d){
             return d.rca >= 1;
           })
@@ -1248,9 +1253,9 @@
           app.viz.active(function(d){return true;})
         }
         app.viz
-          .edges(app.networks[app.build.output].edges)
-          .nodes(app.networks[app.build.output].nodes)
-          .focus(app.build[app.build.output][0].id)
+          .edges(app.networks[app.build.output_attr].edges)
+          .nodes(app.networks[app.build.output_attr].nodes)
+          .focus(app.build[app.build.output_attr][0].id)
           .depth(app.viz.id(Object).nesting.length - 1)
           .size(false)
           .shape("circle")
@@ -1346,7 +1351,7 @@
       /* Scatter Specific Variables */
       /******************************/
       else if (app.build.app.type == "scatter") {
-        if (app.build.output == "hs") {
+        if (app.build.output_attr == "hs") {
           if (app.vars.rca_scope == "wld_rca") {
             app.viz.active(function(d){
               return d.rca_wld >= 1;
@@ -1363,7 +1368,7 @@
             return d.rca >= 1;
           })
         }
-        if (app.build.output == "hs" && app.vars.rca_scope == "wld_rca") {
+        if (app.build.output_attr == "hs" && app.vars.rca_scope == "wld_rca") {
           var yv = app.vars.y + "_wld",
               xv = app.vars.x + "_wld"
         }
@@ -1374,7 +1379,7 @@
         if (app.vars.y.indexOf("pci") >= 0) yv = app.vars.y
 
         var yval = null
-        if (app.build.output == "hs" && app.ecis[app.build.data_url] && yv == "pci") {
+        if (app.build.output_attr == "hs" && app.ecis[app.build.data_url] && yv == "pci") {
           var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
         }
         app.viz
@@ -1464,11 +1469,11 @@
           mix = elems.length == 2 && (elems[0].id == "all" || elems[1].id == "all") && (elems[0].id.length == 2 || elems[1].id.length == 2)
           depth = elems[0].id.length,
           secex = app.build.dataset.indexOf("secex") === 0,
-          munics = app.build.output == "bra",
+          munics = app.build.output_attr == "bra",
           text = "";
 
       if (secex && same && !mix) {
-        if ((munics && depth >= 3) || (app.build.output === "all" && depth > 3)) {
+        if ((munics && depth >= 3) || (app.build.output_attr === "all" && depth > 3)) {
           text = dataviva.format.text("secex_9")
         }
         else {
@@ -1520,7 +1525,7 @@
 
         var names = []
         ids.forEach(function(id){
-          names.push(app.attrs[app.build.output][id].name)
+          names.push(app.attrs[app.build.output_attr][id].name)
         })
 
         if (names.length > 0) {
@@ -1564,14 +1569,14 @@
           app.viz.title(app.build.title)
         }
 
-        if (type == "depth" && app.build.output == "wld") {
+        if (type == "depth" && app.build.output_attr == "wld") {
           if (app.vars.depth == "wld_5") app.viz.icon({"style": "default"})
           else app.viz.icon({"style": "knockout"})
         }
 
         if (type == "year" && app.build.app.type == "scatter") {
           var yval = null
-          if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.y == "pci") {
+          if (app.build.output_attr == "hs" && app.ecis[app.build.data_url] && app.vars.y == "pci") {
             var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
           }
           app.viz.y({"lines": [yval]})
@@ -1595,7 +1600,7 @@
             })
           }
           if (app.build.app.type == "scatter") {
-            if (app.build.output == "hs" && value == "wld_rca") {
+            if (app.build.output_attr == "hs" && value == "wld_rca") {
               var yv = app.vars.y + "_wld",
                   xv = app.vars.x + "_wld"
             }
@@ -1625,7 +1630,7 @@
           }
 
           var yval = null
-          if (app.build.output == "hs" && app.ecis[app.build.data_url] && app.vars.y == "pci") {
+          if (app.build.output_attr == "hs" && app.ecis[app.build.data_url] && app.vars.y == "pci") {
             var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
           }
 
@@ -1696,9 +1701,9 @@
 
       var data_obj = [],
           data = app.data[app.build.data_url],
-          out = app.build.output,
+          out = app.build.output_attr,
           attr = app.attrs[out],
-          outdepths = dataviva.depths(app.build.output);
+          outdepths = dataviva.depths(app.build.output_attr);
 
       if ("occugrid" == format[app.build.app.type]) {
 
@@ -1747,7 +1752,7 @@
               d[out+"_display"] = dataviva.displayID(d[out+"_id"],out)
               // d.icon = dataviva.icon(d[out+"_id"],out)
 
-              get_keys(d)
+              // get_keys(d)
 
               data_obj.push(d)
 
@@ -1786,7 +1791,7 @@
                 }
               })
 
-              get_keys(d)
+              // get_keys(d)
 
               data_obj.push(d)
 
@@ -1795,7 +1800,7 @@
           .entries(data.raw)
 
       }
-      else if (app.build.dataset === "secex" && app.build.output === "all") {
+      else if (app.build.dataset === "secex" && app.build.output_attr === "all") {
 
         data.raw.forEach(function(d){
 
@@ -1804,7 +1809,7 @@
           exp.val_usd = exp.export_val || 0;
           exp.direction = "export_val";
           exp.color = "#0b1097";
-          get_keys(exp);
+          // get_keys(exp);
           for (var k in exp) {
             if (k.indexOf("import") === 0) {
               delete exp[k];
@@ -1817,7 +1822,7 @@
           imp.val_usd = imp.import_val || 0;
           imp.direction = "import_val";
           imp.color = "#af1f24";
-          get_keys(imp);
+          // get_keys(imp);
           for (var k in imp) {
             if (k.indexOf("export") === 0) {
               delete exp[k];
@@ -1839,7 +1844,7 @@
           obj.bra_rca = obj.rca >=1 ? true : false;
           obj.wld_rca = obj.rca_wld >=1 ? true : false;
 
-          get_keys(obj)
+          // get_keys(obj)
 
           data_obj.push(obj)
 
@@ -1849,14 +1854,14 @@
 
       data[format[app.build.app.type]] = data_obj;
 
-      function get_keys(d) {
-        if (!data.categories) data.categories = {}
-        if (!data.categories[d.year]) data.categories[d.year] = []
-        if (!data.categories.all) data.categories.all = []
-        if (out !== "all") var parent = d[out+"_id"].slice(0,depths[out][0])
-        if (data.categories[d.year].indexOf(parent) < 0) data.categories[d.year].push(parent);
-        if (data.categories.all.indexOf(parent) < 0) data.categories.all.push(parent);
-      }
+      // function get_keys(d) {
+      //   if (!data.categories) data.categories = {}
+      //   if (!data.categories[d.year]) data.categories[d.year] = []
+      //   if (!data.categories.all) data.categories.all = []
+      //   if (out !== "all") var parent = d[out+"_id"].slice(0,depths[out][0])
+      //   if (data.categories[d.year].indexOf(parent) < 0) data.categories[d.year].push(parent);
+      //   if (data.categories.all.indexOf(parent) < 0) data.categories.all.push(parent);
+      // }
 
     }
 
@@ -1880,14 +1885,14 @@
 
       var prefix = dataviva.format.text(val)
       if (app.build.app.type == "scatter") {
-        var prefix = dataviva.format.text(app.build.output+"_plural")
+        var prefix = dataviva.format.text(app.build.output_attr+"_plural")
         prefix += " "+dataviva.format.text("with")
         prefix += " "+dataviva.format.text(app.vars.x)
         if (app.vars.x != app.vars.y) {
           prefix += " "+dataviva.format.text("and")
           prefix += " "+dataviva.format.text(app.vars.y)
         }
-        if (app.build.output != "hs") {
+        if (app.build.output_attr != "hs") {
           prefix += " ("+dataviva.format.text(val)+")"
         }
       }
@@ -2009,7 +2014,7 @@
 
     app.title_update = function() {
 
-      if (app.build.output == "bra") {
+      if (app.build.output_attr == "bra") {
         var words = app.build.title.split(" ")
         if (app.vars.depth) {
           var new_depth = dataviva.format.text(app.vars.depth)
@@ -2354,9 +2359,8 @@
       }
       else {
 
-        var s = id.split("_")
-        var type = s[0]
-        if (s[1]) var index = s[1]
+        var type = id.slice(0,id.length-2);
+        var index = id.slice(id.length-1);
 
         if (type == "file") {
           var init = "all",
@@ -2380,7 +2384,7 @@
           .callback(callback)
           .distance(dist)
           .initial_value(init)
-          .type(id)
+          .type(type)
 
         d3.select("#popover")
           .call(selector);
