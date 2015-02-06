@@ -24,7 +24,7 @@
     vertical-align: bottom;
   }
   .search {
-    margin: 50px 50px 80px;
+    margin: 70px 50px 100px;
     position: relative;
     text-align: center;
   }
@@ -44,7 +44,7 @@
     width: 826px;
   }
   .carousel {
-    margin: 0px 50px 30px;
+    margin: 0px 50px 10px;
     position: relative;
     width: 800px;
   }
@@ -77,29 +77,38 @@
     margin: 0 10px 0 0;
   }
   .poster {
-    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
-            box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
     box-sizing: border-box;
     display: inline-block;
-    height: 170px;
-    position: relative;
-    text-align: center;
-    width: 140px;
+    text-align: left;
   }
-  .poster:hover {
+  div.poster {
+    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
+    height: 130px;
+    position: relative;
+    width: 130px;
+  }
+  div.poster:hover {
     -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
             box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
   }
-  .poster h4 {
-    color: inherit;
+  .poster .title {
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: normal;
     height: 45px;
+    margin: 0;
+    overflow: hidden;
+    padding: 5px;
+    text-align: center;
     white-space: normal;
+    width: 130px;
   }
   .poster img {
     box-sizing: border-box;
     display: inline-block;
-    margin: 0 10px;
-    width: 100px;
+    margin: 10px;
+    width: 110px;
   }
 
   body.home .set {
@@ -107,6 +116,10 @@
     -moz-transition: 0.75s ease-in-out;
     -o-transition: 0.75s ease-in-out;
     transition: 0.75s ease-in-out;
+  }
+
+  body.home .lightbox {
+    background-color: rgba(255,255,255,0.7);
   }
   </style>
 
@@ -143,7 +156,7 @@
 
       <div class="carousel">
 
-        <div class="darkbox"><h2>{{ carousel.title }}</h2></div>
+        <div class="darkbox"><h1>{{ carousel.title }}</h1></div>
         <a class="prev"><i class="fa fa-angle-left"></i></a>
         <a class="next"><i class="fa fa-angle-right"></i></a>
 
@@ -151,9 +164,11 @@
           <ul class="set" id="test" data-parameters="{{ carousel.url }}">
             {% for poster in carousel.posters %}
               <li>
-                <a class="poster" href="{{ poster.url() }}" style="background-color:{{ poster.color }};">
-                  <h4 class="title">{{ poster.name() }}</h4>
-                  <img src="{{ poster.icon() }}"/>
+                <a class="poster" href="{{ poster.url() }}">
+                  <div class="poster" style="background-color:{{ poster.color }};">
+                    <img src="{{ poster.icon() }}"/>
+                  </div>
+                  <div class="title">{{ poster.name() }}</div>
                 </a>
               </li>
             {% endfor %}
@@ -202,9 +217,10 @@
     var a = page.append("li").append("a")
       .attr("class", "poster")
       .attr("href", item.url)
-      .style("background-color",  item.color);
-      a.append("h4").attr("class", "title").text(item.name);
-      a.append("img").attr("src", item.icon);
+    a.append("div").attr("class", "poster")
+      .style("background-color",  item.color)
+      .append("img").attr("src", item.icon);
+    a.append("div").attr("class", "title").text(item.name);
   }
 
   var addNodes = function(page, list) {
