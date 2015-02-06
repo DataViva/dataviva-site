@@ -468,15 +468,15 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       if (labels[label_name][l]) return labels[label_name][l]
       else return name.toTitleCase()
     }
-    else if (name.indexOf("population_") == 0) {
-      year = name.split("_")[1]
-      if (labels["population"][l]) return labels["population"][l] + " ("+year+")"
-      else return name.toTitleCase() + " ("+year+")"
-    }
-    else if (name.indexOf("_" > -1)) {
+    // else if (name.indexOf("population_") == 0) {
+    //   year = name.split("_")[1]
+    //   if (labels["population"][l]) return labels["population"][l] + " ("+year+")"
+    //   else return name.toTitleCase() + " ("+year+")"
+    // }
+    else if (name.indexOf("_") > -1) {
       year = name.split("_")[1]
       label = name.split("_")[0]
-      // if (labels[label][l]) return labels[label][l] + " ("+year+")"
+      if (labels[label]) return labels[label][l] + " ("+year+")"
       return label.toTitleCase() + " ("+year+")"
     }
     else return name.toTitleCase()
