@@ -78,7 +78,7 @@ def filler(dataset, filter1, filter2):
 
 @mod.route("/embed/")
 @mod.route("/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
-# @cache_api("apps:embed", timeout=604800)
+@cache_api("apps:embed", timeout=604800)
 def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
           filter1="all", filter2="all", output="cbo"):
 
