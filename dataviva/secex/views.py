@@ -39,11 +39,11 @@ def secex_api(**kwargs):
 
     results = query_helper.query_table(table, filters=filters, groups=groups, limit=limit, order=order, sort=sort, serialize=serialize)
 
-    # if table is Ybp:
-    #     stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yp, kwargs, remove=['bra_id'])
-    #     stripped_columns = [Yp.year, Yp.hs_id, Yp.pci]
-    #     tmp = query_helper.query_table(Yp, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
-    #     results["pci"] = tmp
+    if table is Ymbp:
+        stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Ymp, kwargs, remove=['bra_id'])
+        stripped_columns = [Ymp.year, Ymp.hs_id, Ymp.pci]
+        tmp = query_helper.query_table(Ymp, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
+        results["pci"] = tmp
 
     if serialize or download:
         response = jsonify(results)
