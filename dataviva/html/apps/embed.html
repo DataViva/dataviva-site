@@ -198,7 +198,6 @@
       "cbo": dataviva.depths("cbo"),
       "hs": dataviva.depths("hs"),
       "bra": dataviva.depths("bra"),
-      "bra2": dataviva.depths("bra"),
       "wld": dataviva.depths("wld"),
       "university": dataviva.depths("university"),
       "course_hedu": dataviva.depths("course_hedu"),
@@ -920,10 +919,10 @@
         }
         else if (ui.type == "depth") {
           var bra_id = app.build.bra[0].id
-          if (app.build.output_attr == "bra" && bra_id != "all") {
+          if (app.build.dataset !== "ei" && app.build.output_attr == "bra" && bra_id != "all") {
             // if (bra_id.indexOf("4mg") == 0) ui.values[1] = "bra_7"
-            if (bra_id.length >= 2) ui.values.splice(0,1)
-            if (bra_id.length >= 4) ui.values.splice(0,1)
+            if (bra_id.length >= 3) ui.values.splice(0,1)
+            if (bra_id.length >= 5) ui.values.splice(0,1)
           }
           if (app.build.output_attr == "bra" && app.build.bra[0].id == "all") {
             var default_value = ui.values[0]

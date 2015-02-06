@@ -204,7 +204,7 @@ class Stats(object):
                 total = tbl.query.with_entities(*col_vals)
                 if dataset == "rais":
                     total = total.filter(func.char_length(getattr(tbl,"cnae_id")) == 1)
-                elif dataset.startswith("secex"):
+                elif dataset == "secex":
                     total = total.filter(func.char_length(getattr(tbl,"hs_id")) == 2)
                 elif dataset == "population":
                     total = total.filter(func.char_length(getattr(tbl,"bra_id")) == 2)

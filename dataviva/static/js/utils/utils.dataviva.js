@@ -790,7 +790,7 @@ dataviva.cleanData = function(data, dataset, output) {
     "ei": ["purchase_value"]
   }
 
-  var output_attr = output === "bra2" ? "bra" : output;
+  var output_attr = output === "bra_r" ? "bra" : output;
   var depths = dataviva.depths(output_attr);
 
   var extras = {}
@@ -825,7 +825,7 @@ dataviva.cleanData = function(data, dataset, output) {
       var id;
       if (dataset === "ei") {
 
-        if (output === "bra2") {
+        if (output === "bra_r") {
           id = temp.bra_id_r;
         }
         else {

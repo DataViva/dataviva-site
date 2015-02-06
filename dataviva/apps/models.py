@@ -57,41 +57,42 @@ class Build(db.Model, AutoSerialize):
         return self.ui.filter(UI.type == ui_type).first()
 
     def set_bra(self, bra_id):
-        '''If build requires 2 bras and only 1 is given, supply a 2nd'''
-        if isinstance(self.bra, list):
-            return
+        if bra_id != "all":
+            '''If build requires 2 bras and only 1 is given, supply a 2nd'''
+            if isinstance(self.bra, list):
+                return
 
-        if bra_id == 'bra':
-            bra_id = 'all'
+            if bra_id == 'bra':
+                bra_id = 'all'
 
-        if "_" in self.bra and "_" not in bra_id:
-            if bra_id == "4rj":
-                bra_id = bra_id + "_4mg"
-            else:
-                bra_id = bra_id + "_4rj"
-        elif "_" not in self.bra and "_" in bra_id:
-            bra_id = bra_id.split("_")[0]
-        self.bra = []
-
-        for i, b in enumerate(bra_id.split("_")):
-            if b == "all":
-                self.bra.append(Wld.query.get("sabra"))
-                self.bra[i].id = "all"
-            else:
-                if "." in b:
-                    split = b.split(".")
-                    b = split[0]
-                    dist = split[1]
+            if "_" in self.bra and "_" not in bra_id:
+                if bra_id == "4rj":
+                    bra_id = bra_id + "_4mg"
                 else:
-                    dist = 0
-                state = b[:3]
-                if self.output == "bra" and len(b) == 9 and dist == 0:
-                    b = state
-                    dist = 0
-                self.bra.append(Bra.query.get(b))
-                self.bra[i].distance = dist
-                self.bra[i].neighbor_ids = [b.bra_id_dest for b in self.bra[i].get_neighbors(dist)]
-                self.bra[i].pr_ids = [b.id for b in self.bra[i].pr.all()]
+                    bra_id = bra_id + "_4rj"
+            elif "_" not in self.bra and "_" in bra_id:
+                bra_id = bra_id.split("_")[0]
+            self.bra = []
+
+            for i, b in enumerate(bra_id.split("_")):
+                if b == "all":
+                    self.bra.append(Wld.query.get("sabra"))
+                    self.bra[i].id = "all"
+                else:
+                    if "." in b:
+                        split = b.split(".")
+                        b = split[0]
+                        dist = split[1]
+                    else:
+                        dist = 0
+                    state = b[:3]
+                    if self.output == "bra" and len(b) == 9 and dist == 0:
+                        b = state
+                        dist = 0
+                    self.bra.append(Bra.query.get(b))
+                    self.bra[i].distance = dist
+                    self.bra[i].neighbor_ids = [b.bra_id_dest for b in self.bra[i].get_neighbors(dist)]
+                    self.bra[i].pr_ids = [b.id for b in self.bra[i].pr.all()]
 
     def set_filter1(self, filter):
         if self.filter1 != "all":
@@ -105,9 +106,6 @@ class Build(db.Model, AutoSerialize):
             elif self.dataset == "hedu":
                 name = "university"
                 default = "00575"
-            elif self.dataset == "ei":
-                name = "bra"
-                default = "4mg"
 
             items = []
             attr = globals()[name.capitalize()]
@@ -119,10 +117,7 @@ class Build(db.Model, AutoSerialize):
                     items.append(attr.query.get(default))
 
             self.filter1 = "_".join([c.id for c in set(items)])
-            if name == "bra":
-                setattr(self, "bra2", items)
-            else:
-                setattr(self, name, items)
+            setattr(self, name, items)
 
     def set_filter2(self, filter):
         if self.filter2 != "all":
@@ -132,7 +127,7 @@ class Build(db.Model, AutoSerialize):
             if self.dataset == "rais":
                 name = "cbo"
                 default = "2211"
-            elif self.dataset.startswith("secex"):
+            elif self.dataset == "secex":
                 name = "wld"
                 default = "aschn"
             elif self.dataset == "hedu":
@@ -191,7 +186,7 @@ class Build(db.Model, AutoSerialize):
         if self.output == "bra":
             if bra == "all" and self.app.type == "geo_map":
                 bra = "show.3"
-            elif bra == "all":
+            elif bra == "all" or self.dataset == "ei":
                 bra = "show.9"
             else:
                 bra = bra + ".show.9"
@@ -202,7 +197,7 @@ class Build(db.Model, AutoSerialize):
                 filter1 = "show.6"
             elif self.output == "university":
                 filter1 = "show.5"
-            elif self.output == "bra2":
+            elif self.output == "bra_r":
                 filter1 = "show.9"
 
         filter2 = self.filter2
@@ -245,7 +240,7 @@ class Build(db.Model, AutoSerialize):
                 return Ybi
             elif self.output == "cbo" or (self.output == "bra" and self.filter1 == "all"):
                 return Ybo
-        elif self.dataset.startswith("secex"):
+        elif self.dataset == "secex":
             if self.bra[0].id == "all" and self.output != "bra":
                 return Ympw
             elif self.output == "hs" or (self.output == "bra" and self.filter2 == "all"):
@@ -352,23 +347,18 @@ class Build(db.Model, AutoSerialize):
                 elif b["id"] != "all" and len(self.bra[i].pr_ids):
                     b["pr_ids"] = self.bra[i].pr_ids
 
-        if hasattr(self, "cnae"):
-            auto_serialized["cnae"] = [i.serialize() for i in self.cnae]
-        if hasattr(self, "hs"):
-            auto_serialized["hs"] = [h.serialize() for h in self.hs]
-        if hasattr(self, "cbo"):
-            auto_serialized["cbo"] = [c.serialize() for c in self.cbo]
-        if hasattr(self, "wld"):
-            auto_serialized["wld"] = [w.serialize() for w in self.wld]
+        for f in ["cnae", "cbo", "hs", "wld", "university", "course_hedu", "course_sc"]:
+            if hasattr(self, f):
+                auto_serialized[f] = [i.serialize() for i in getattr(self, f)]
+
         del auto_serialized["title_en"]
         del auto_serialized["title_pt"]
         auto_serialized["title"] = self.title()
-        #auto_serialized["id_item"] = self.title()
         auto_serialized["data_url"] = self.data_url()
         auto_serialized["url"] = self.url()
         auto_serialized["ui"] = [ui.serialize() for ui in self.ui.all()]
         auto_serialized["app"] = self.app.serialize()
-        if self.output == "bra2":
+        if self.dataset == "ei":
             auto_serialized["output_attr"] = "bra"
         else:
             auto_serialized["output_attr"] = self.output

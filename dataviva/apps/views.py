@@ -58,7 +58,7 @@ def filler(dataset, filter1, filter2):
     if filler1 != "all":
         if dataset == "rais":
             filler1 = "<cnae>"
-        elif dataset.startswith("secex"):
+        elif dataset == "secex":
             filler1 = "<hs>"
         elif dataset == "hedu":
             filler1 = "<university>"
@@ -67,7 +67,7 @@ def filler(dataset, filter1, filter2):
     if filler2 != "all":
         if dataset == "rais":
             filler2 = "<cbo>"
-        elif dataset.startswith("secex"):
+        elif dataset == "secex":
             filler2 = "<wld>"
         elif dataset == "hedu":
             filler2 = "<course_hedu>"
@@ -78,7 +78,7 @@ def filler(dataset, filter1, filter2):
 
 @mod.route("/embed/")
 @mod.route("/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
-@cache_api("apps:embed", timeout=604800)
+# @cache_api("apps:embed", timeout=604800)
 def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
           filter1="all", filter2="all", output="cbo"):
 
@@ -103,7 +103,6 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     current_build.set_filter1(filter1)
     current_build.set_filter2(filter2)
     current_build.set_bra(bra_id)
-
 
     '''Get the recommended app list to pass with data'''
     filler_bra = bra_id

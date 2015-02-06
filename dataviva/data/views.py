@@ -148,7 +148,7 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
     if filter_1 and filter_1 != "all":
         if data_type == "rais":
             parse_filter(filter_1,"cnae")
-        elif data_type.startswith("secex"):
+        elif data_type == "secex":
             parse_filter(filter_1,"hs")
         elif data_type == "hedu":
             parse_filter(filter_1,"university")
@@ -156,7 +156,7 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
     if filter_2 and filter_2 != "all":
         if data_type == "rais":
             parse_filter(filter_2,"cbo")
-        elif data_type.startswith("secex"):
+        elif data_type == "secex":
             parse_filter(filter_2,"wld")
         elif data_type == "hedu":
             parse_filter(filter_2,"course_hedu")
