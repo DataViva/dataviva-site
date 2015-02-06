@@ -937,10 +937,13 @@ function Selector() {
     if (!arguments.length) return name;
     name = value
     if (value.indexOf("_id") > 0) {
-      type = value.slice(0,value.indexOf("_id"))
+      type = value.slice(0,value.indexOf("_id"));
+    }
+    else if (value.indexOf("_") === value.length - 2) {
+      type = value.slice(0,value.length-2);
     }
     else {
-      type = value
+      type = value;
     }
     return util;
   }
