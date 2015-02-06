@@ -32,8 +32,7 @@ class Stats(object):
             stats.append(self.get_top_attr(Ymw, "export_val", attr_type, "wld", "secex"))
             stats.append(self.get_val(Ymp, "export_val", attr_type, "secex"))
         elif attr_type == "bra":
-            # raise Exception(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="demonym"))
-            # stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="demonym"))
+            stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="demonym"))
             stats.append(self.get_val(Yb,"population",attr_type,"population"))
             stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="gini"))
             stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="life_exp"))
@@ -44,6 +43,11 @@ class Stats(object):
             stats.append(self.get_top_attr(Ymbp, "export_val", attr_type, "hs", "secex"))
             stats.append(self.get_top_attr(Ymbw, "export_val", attr_type, "wld", "secex"))
             stats.append(self.get_val(Ymb, "export_val", attr_type, "secex"))
+            if len(self.id) == 9:
+                stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="airport"))
+                stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="airport_dist"))
+                stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="seaport"))
+                stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="seaport_dist"))
         elif attr_type == "cnae":
             dataset = "rais"
             five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
