@@ -57,42 +57,41 @@ class Build(db.Model, AutoSerialize):
         return self.ui.filter(UI.type == ui_type).first()
 
     def set_bra(self, bra_id):
-        if bra_id != "all":
-            '''If build requires 2 bras and only 1 is given, supply a 2nd'''
-            if isinstance(self.bra, list):
-                return
+        '''If build requires 2 bras and only 1 is given, supply a 2nd'''
+        if isinstance(self.bra, list):
+            return
 
-            if bra_id == 'bra':
-                bra_id = 'all'
+        if bra_id == 'bra':
+            bra_id = 'all'
 
-            if "_" in self.bra and "_" not in bra_id:
-                if bra_id == "4rj":
-                    bra_id = bra_id + "_4mg"
+        if "_" in self.bra and "_" not in bra_id:
+            if bra_id == "4rj":
+                bra_id = bra_id + "_4mg"
+            else:
+                bra_id = bra_id + "_4rj"
+        elif "_" not in self.bra and "_" in bra_id:
+            bra_id = bra_id.split("_")[0]
+        self.bra = []
+
+        for i, b in enumerate(bra_id.split("_")):
+            if b == "all":
+                self.bra.append(Wld.query.get("sabra"))
+                self.bra[i].id = "all"
+            else:
+                if "." in b:
+                    split = b.split(".")
+                    b = split[0]
+                    dist = split[1]
                 else:
-                    bra_id = bra_id + "_4rj"
-            elif "_" not in self.bra and "_" in bra_id:
-                bra_id = bra_id.split("_")[0]
-            self.bra = []
-
-            for i, b in enumerate(bra_id.split("_")):
-                if b == "all":
-                    self.bra.append(Wld.query.get("sabra"))
-                    self.bra[i].id = "all"
-                else:
-                    if "." in b:
-                        split = b.split(".")
-                        b = split[0]
-                        dist = split[1]
-                    else:
-                        dist = 0
-                    state = b[:3]
-                    if self.output == "bra" and len(b) == 9 and dist == 0:
-                        b = state
-                        dist = 0
-                    self.bra.append(Bra.query.get(b))
-                    self.bra[i].distance = dist
-                    self.bra[i].neighbor_ids = [b.bra_id_dest for b in self.bra[i].get_neighbors(dist)]
-                    self.bra[i].pr_ids = [b.id for b in self.bra[i].pr.all()]
+                    dist = 0
+                state = b[:3]
+                if self.output == "bra" and len(b) == 9 and dist == 0:
+                    b = state
+                    dist = 0
+                self.bra.append(Bra.query.get(b))
+                self.bra[i].distance = dist
+                self.bra[i].neighbor_ids = [b.bra_id_dest for b in self.bra[i].get_neighbors(dist)]
+                self.bra[i].pr_ids = [b.id for b in self.bra[i].pr.all()]
 
     def set_filter1(self, filter):
         if self.filter1 != "all":
