@@ -271,106 +271,60 @@
     //   "text-shadow": "0px 0px 6px #efefef"
     // }
 
-    app.html = function(id,list) {
+    var filterIndex = {
+      "hs": 3,
+      "wld": 4,
+      "cnae": 3,
+      "cbo": 4,
+      "bra": 2,
+      "bra_s": 2,
+      "bra_r": 2,
+      "university": 3,
+      "course_hedu": 4,
+      "school": 3,
+      "course_sc": 4
+    }
 
-      var obj = app.build.output_attr !== "all" ? app.attrs[app.build.output_attr][id] : false;
-
-      if (app.build.app.type == "rings") {
-        if (list) {
-          var cats = []
-          list.forEach(function(n){
-            var id = n[app.build.output+"_id"].slice(0,depths[app.build.output_attr][0])
-            if (cats.indexOf(id) < 0) cats.push(id)
-          })
-        }
-        var old_url = app.url
-        var split_url = app.url.split("/")
-        if (app.build.output_attr == "cbo") var url_index = 4
-        else var url_index = 3
-        builder.filter(obj,app.build.output_attr+"_0",true)
-        split_url[url_index] = app.build[app.build.output_attr][0].id
-        app.url = split_url.join("/")
-        if (app.url != old_url) {
-          d3.json("/apps/embed/"+app.url)
-            .header("X-Requested-With", "XMLHttpRequest")
-            .get(function(error,data){
-              app.build = data.current_build
-              builder.url()
-              builder.outputs(data.all_builds)
-              app.viz.title(app.build.title).draw()
-              // d3.select("#app").call(app.viz.title(app.build.title))
-            })
-        }
-      }
-
-      var priority = ["both_filters","filter2","filter1","no_filters"],
-          html_return = "<div class='title'>"+dataviva.format.text("related_apps")+"</div>";
-
-      priority.forEach(function(p,i){
-        if (app.recommendations[p]) {
-
-          if (["network","rings","geo_map"].indexOf(app.build.app.type) >= 0) {
-            var classname = "decision short icon"
-          }
-          else {
-            var classname = "decision icon"
-          }
-
-          app.recommendations[p].forEach(function(a){
-
-            var u = a.url
-
-            if (app.build.output_attr !== "all") {
-              u = u.replace("<"+app.build.output+">",id)
-            }
-
-            if ( u !== app.url ) {
-
-              var t = a.title;
-
-              if (obj) {
-
-                t = t.replace("<"+app.build.output_attr+">",obj.name)
-                if (t.indexOf("<"+app.build.output_attr+"_") >= 0) {
-                  var article = t.match(new RegExp("<"+app.build.output_attr+"_.*?>"))
-                  var word = article[0]
-                  article = article[0].split("_")[1].split(">")[0]
-                  if (obj.article_pt) {
-                    if (obj.gender_pt == "m") {
-                      if (article == "em") var new_article = "no"
-                      if (article == "de") var new_article = "do"
-                      if (article == "para") var new_article = "para o"
-                    }
-                    else if (obj.gender_pt == "f") {
-                      if (article == "em") var new_article = "na"
-                      if (article == "de") var new_article = "da"
-                      if (article == "para") var new_article = "para a"
-                    }
-                    if (obj.plural_pt) {
-                      new_article += "s"
-                    }
-                  }
-                  else {
-                    var new_article = article
-                  }
-                  t = t.replace(word,new_article)
-                }
-
-              }
-
-              html_return += "<div id='"+u+"' class='"+classname+" "+a.app.type+"' "
-              html_return += "onclick='app.start(this.id)'>"
-              html_return += t
-              html_return += "</div>"
-
-            }
-
-          })
-        }
+    var createRecs = function(html, arr) {
+      arr.forEach(function(a){
+        html += "<div id='"+a.url+"' class='decision short icon "+a.app.type+"' ";
+        html += "onclick='app.start(this.id)'>";
+        html += a.title;
+        html += "</div>";
       })
+      return html;
+    }
 
-      return html_return
+    var recPriority = ["both_filters","filter2","filter1","no_filters"];
 
+    app.html = {
+      "callback": function(data) {
+
+        var html_return = "";
+
+        if ("crosswalk" in data) {
+          html_return += "<div class='title'>"+dataviva.format.text("crosswalk_"+app.build.output_attr)+"</div>";
+          recPriority.forEach(function(p){
+            if (p in data.crosswalk && data.crosswalk[p].length) {
+              html_return = createRecs(html_return, data.crosswalk[p]);
+            }
+          })
+        }
+
+        html_return += "<div class='title'>"+dataviva.format.text("related_apps")+"</div>";
+        recPriority.forEach(function(p){
+          if (p in data && data[p].length) {
+            html_return = createRecs(html_return, data[p]);
+          }
+        })
+        return html_return;
+      },
+      "url": function(id) {
+        var rec_url = app.build.url.split("/");
+        rec_url[filterIndex[app.build.output]] = id;
+        rec_url = rec_url.join("/")
+        return "/apps/recommend/"+rec_url+"?lang="+dataviva.language
+      }
     }
 
     app.tooltip = {"short": {
