@@ -1,0 +1,65 @@
+<!-- extend from site layout -->
+{% extends "templates/about.html" %}
+
+{% block title %}: {% trans %}Crosswalk{% endtrans %}{% endblock %}
+
+{% block about_content %}
+
+    <h2>{{ title }}</h2>
+    <input type="text" onkeyup="searchTable(this)" placeholder="{% trans %}Search{% endtrans %}"/>
+    <hr/>
+    <table id="ctable" class="data">
+    <thead>
+      <tr>
+      <th>{{ col1 }}</th>
+      <th>{{ col2 }}</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+
+    {% for key in crosswalk %}
+      <tr>
+        <td><a style="color: {{key.color}}" href="{{ key.url() }}">{{ key.name() }}</a></td>
+
+        <td>
+          <ul>
+           {% for value in crosswalk[key] %}
+            <li><a style="color: {{key.color}}" href="{{ value.url() }}">{{ value.name() }}</a></li>
+           {% endfor %}
+           </ul>
+      </td>
+
+      </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+
+{% endblock %}
+
+{% block js %}
+
+  <script>
+  var originalData = d3.selectAll("tbody tr")
+  
+  var searchTable = function(input) {
+    reset();
+    var toFind = input.value.toLowerCase();
+
+    var rowFilter = function() {
+      var me = this.innerText.toLowerCase();
+      var result = me.indexOf(toFind);
+      return result < 0;
+    };
+    
+    d3.selectAll("tbody tr").filter(rowFilter).style("display", "none");
+  }
+
+  var reset = function() {
+    originalData.style("display", "table-row");
+  };
+
+  </script>
+
+{% endblock %}

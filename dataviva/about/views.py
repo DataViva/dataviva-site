@@ -4,7 +4,7 @@ from flask import Blueprint, request, make_response, render_template, flash, g, 
 from flask.ext.babel import gettext
 from dataviva import db, view_cache
 
-from dataviva.attrs.models import Bra, Wld
+from dataviva.attrs.models import Bra, Wld, Course_hedu, Hs
 from dataviva.rais.models import Cnae, Cbo
 
 from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE_REPLY, Flag
@@ -12,6 +12,8 @@ from dataviva.ask.forms import AskForm, ReplyForm, SearchForm
 
 from dataviva.utils.send_mail import send_mail
 from dataviva.utils.cached_query import cached_query, make_cache_key
+
+from dataviva.apps.models import Crosswalk_oc, Crosswalk_pi
 
 from config import ADMINISTRATOR_EMAIL, basedir
 import os
@@ -22,6 +24,85 @@ mod = Blueprint('about', __name__, url_prefix='/about')
 def before_request():
     g.page_type = mod.name
     g.color = "#d67ab0"
+
+@mod.route('/crosswalk/oc/')
+def crosswalk_oc():
+    oc = Crosswalk_oc.query.all()
+    cbos = set([x.cbo_id for x in oc])
+    courses = set([x.course_hedu_id for x in oc])
+
+    cbo_to_course = dict.fromkeys(cbos, set())
+    course_to_cbo = dict.fromkeys(courses, set())
+
+    for x in oc:
+       cbo_to_course[x.cbo_id] = cbo_to_course[x.cbo_id].union([x.course_hedu_id])
+       course_to_cbo[x.course_hedu_id] = course_to_cbo[x.course_hedu_id].union([x.cbo_id])
+
+    # load attrs
+    cbo_attrs = Cbo.query.filter(Cbo.id.in_(cbos)).all()
+    cbo_attrs = {x.id: x for x in cbo_attrs}
+
+    course_attrs = Course_hedu.query.filter(Course_hedu.id.in_(courses)).all()
+    course_attrs = {x.id: x for x in course_attrs}
+
+    oc = {}
+    for cbo in cbo_to_course:
+        cbo_name = cbo_attrs[cbo]
+        course_names = [course_attrs[course] for course in cbo_to_course[cbo] if course in course_attrs]
+        if course_names:
+            oc[cbo_name] = course_names
+    co = {}
+    for course in course_to_cbo:
+        if course in course_attrs:
+            course_name = course_attrs[course]
+            cbo_names = [cbo_attrs[cbo] for cbo in course_to_cbo[course] if cbo in cbo_attrs]
+            if cbo_names:
+                co[course_name] = cbo_names
+
+    full_map = dict(oc.items() + co.items())
+    title=gettext("CBO to Course Crosswalk")
+    col1=gettext("Courses and Occupations")
+    col2=gettext("Associations")
+    return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2)
+
+@mod.route('/crosswalk/pi/')
+def crosswalk_pi():
+    pi = Crosswalk_pi.query.all()
+    hss = set([x.hs_id for x in pi])
+    cnaes = set([x.cnae_id for x in pi])
+
+    hs_to_cnae = dict.fromkeys(hss, set())
+    cnae_to_hs = dict.fromkeys(cnaes, set())
+
+    for x in pi:
+       hs_to_cnae[x.hs_id] = hs_to_cnae[x.hs_id].union([x.cnae_id])
+       cnae_to_hs[x.cnae_id] = cnae_to_hs[x.cnae_id].union([x.hs_id])
+
+    hs_attrs = Hs.query.filter(Hs.id.in_(hss)).all()
+    hs_attrs = {x.id: x for x in hs_attrs}
+
+    cnae_attrs = Cnae.query.filter(Cnae.id.in_(cnaes)).all()
+    cnae_attrs = {x.id: x for x in cnae_attrs}
+
+    pi = {}
+    for hs in hs_to_cnae:
+        cbo_name = hs_attrs[hs]
+        cnae_names = [cnae_attrs[cnae] for cnae in hs_to_cnae[hs] if cnae in cnae_attrs]
+        if cnae_names:
+            pi[cbo_name] = cnae_names
+    ip = {}
+    for cnae in cnae_to_hs:
+        if cnae in cnae_attrs:
+            cnae_name = cnae_attrs[cnae]
+            hs_names = [hs_attrs[hs] for hs in cnae_to_hs[cnae] if hs in hs_attrs]
+            if hs_names:
+                ip[cnae_name] = hs_names
+
+    full_map = dict(pi.items() + ip.items())
+    title=gettext("HS to CNAE Crosswalk")
+    col1=gettext("Products and Industries")
+    col2=gettext("Associations")
+    return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2)
 
 @mod.route('/analysis/')
 def analysis():

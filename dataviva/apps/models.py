@@ -386,8 +386,8 @@ class UI(db.Model, AutoSerialize):
 class Crosswalk_oc(db.Model):
     __tablename__ = 'crosswalk_oc'
 
-    cbo_id = db.Column(db.String(4), primary_key = True)
-    course_hedu_id = db.Column(db.String(6), primary_key = True)
+    cbo_id = db.Column(db.String(4), db.ForeignKey(Cbo.id), primary_key = True)
+    course_hedu_id = db.Column(db.String(6), db.ForeignKey(Course_hedu.id), primary_key = True)
 
     def get_id(self, dataset):
         if dataset == "rais":

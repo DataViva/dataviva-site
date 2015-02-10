@@ -316,6 +316,9 @@ class Hs(db.Model, AutoSerialize, Stats, ExpandedAttr):
     def icon(self):
         return "/static/img/icons/hs/hs_%s.png" % (self.id[:2])
 
+    def url(self):
+        return "/profiles/hs/{}/".format(self.id)
+
     def __repr__(self):
         return '<Hs %r>' % (self.name_en)
 
