@@ -4,7 +4,7 @@ from sqlalchemy import func, distinct, asc, desc, and_, or_
 from flask import Blueprint, request, jsonify, abort, g, render_template, make_response, redirect, url_for, flash
 
 from dataviva import db, __year_range__, view_cache
-from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University, School
+from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University, School, bra_pr
 from dataviva.secex.models import Ymp, Ymw
 from dataviva.rais.models import Yi, Yo
 from dataviva.hedu.models import Yu, Yc_hedu
@@ -59,6 +59,11 @@ def school_attr():
     schools = School.query.filter_by(is_vocational=1).join(Ys).order_by(desc("enrolled")).all()
     data = [s.serialize() for s in schools]
     return jsonify({"data": data})
+
+def get_planning_region_map():
+    prs = db.session.query(bra_pr).all()
+    pr_map = {k:v for k,v in prs}
+    return pr_map
 
 @mod.route('/<attr>/')
 @mod.route('/<attr>/<Attr_id>/')
@@ -217,6 +222,9 @@ def attrs(attr="bra",Attr_id=None):
             attrs_w_data = [a[0].id for a in attrs_w_data]
 
         attrs = []
+
+        all_planning_regions = {}
+
         for i, a in enumerate(attrs_all):
             b = a[0].serialize()
             if a[1]:
@@ -233,8 +241,12 @@ def attrs(attr="bra",Attr_id=None):
                 if a["id"] in attrs_w_data:
                     a["available"] = True
             if Attr_weight_col == "population" and len(a["id"]) == 9 and a["id"][:3] == "4mg":
-                plr = Bra.query.get_or_404(a["id"]).pr2.first()
-                if plr: a["plr"] = plr.id
+                if not all_planning_regions:
+                    all_planning_regions = get_planning_region_map()
+                if a["id"] in all_planning_regions:
+                    plr = all_planning_regions[a["id"]]
+                    a["plr"] = plr
+
             if order:
                 a["rank"] = int(i+offset+1)
             attrs.append(fix_name(a, lang))

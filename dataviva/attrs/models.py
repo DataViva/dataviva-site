@@ -32,6 +32,7 @@ class Stats(object):
             stats.append(self.get_top_attr(Ymw, "export_val", attr_type, "wld", "secex"))
             stats.append(self.get_val(Ymp, "export_val", attr_type, "secex"))
         elif attr_type == "bra":
+            stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="demonym"))
             stats.append(self.get_val(Yb,"population",attr_type,"population"))
             stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="gini"))
             stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="life_exp"))
@@ -42,6 +43,11 @@ class Stats(object):
             stats.append(self.get_top_attr(Ymbp, "export_val", attr_type, "hs", "secex"))
             stats.append(self.get_top_attr(Ymbw, "export_val", attr_type, "wld", "secex"))
             stats.append(self.get_val(Ymb, "export_val", attr_type, "secex"))
+            if len(self.id) == 9:
+                stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="airport"))
+                stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="airport_dist"))
+                stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="seaport"))
+                stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="seaport_dist"))
         elif attr_type == "cnae":
             dataset = "rais"
             five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
@@ -222,8 +228,10 @@ class Stats(object):
                 total = total.filter_by(stat_id=stat_id)
         else:
             total = tbl.query.filter(getattr(tbl, attr_type+"_id") == self.id)
-
-        total = total.filter_by(year=latest_year).first()
+        
+        if "_y" in tbl.__tablename__:
+            total = total.filter_by(year=latest_year)
+        total = total.first()
 
         if total != None:
             if isinstance(total,tuple):
@@ -242,7 +250,10 @@ class Stats(object):
             name = "population_{0}".format(latest_year)
         elif val_var == "stat_val":
             group = ""
-            name = "{}_{}".format(total.stat.name(), latest_year)
+            if "_y" in tbl.__tablename__:
+                name = "{}_{}".format(total.stat.name(), latest_year)
+            else:
+                name = total.stat.name()
         else:
             group = "{0}_stats_{1}".format(dataset.split("_")[0],latest_year)
             if calc_var:
@@ -304,6 +315,9 @@ class Hs(db.Model, AutoSerialize, Stats, ExpandedAttr):
 
     def icon(self):
         return "/static/img/icons/hs/hs_%s.png" % (self.id[:2])
+
+    def url(self):
+        return "/profiles/hs/{}/".format(self.id)
 
     def __repr__(self):
         return '<Hs %r>' % (self.name_en)
@@ -506,7 +520,18 @@ class Stat(db.Model, AutoSerialize, BasicAttr):
     id = db.Column(db.String(20), primary_key=True)
     
     # name lookup relation
+    bs = db.relationship("dataviva.attrs.models.Bs", backref = 'stat', lazy = 'dynamic')
     ybs = db.relationship("dataviva.attrs.models.Ybs", backref = 'stat', lazy = 'dynamic')
+
+class Bs(db.Model, AutoSerialize):
+
+    __tablename__ = 'attrs_bs'
+    bra_id = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
+    stat_id = db.Column(db.String(20), db.ForeignKey(Stat.id), primary_key=True)
+    stat_val = db.Column(db.String(40))
+
+    def __repr__(self):
+        return "<Bs {}.{}>".format(self.bra_id, self.stat_id)
 
 class Ybs(db.Model, AutoSerialize):
 
@@ -514,10 +539,7 @@ class Ybs(db.Model, AutoSerialize):
     year = db.Column(db.Integer(4), primary_key=True)
     bra_id = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
     stat_id = db.Column(db.String(20), db.ForeignKey(Stat.id), primary_key=True)
-    stat_val = db.Column(db.Float)
-
-    # def name(self):
-        
+    stat_val = db.Column(db.Float)        
 
     def __repr__(self):
         return "<Ybs {}.{}.{}>".format(self.year, self.bra_id, self.stat_id)
