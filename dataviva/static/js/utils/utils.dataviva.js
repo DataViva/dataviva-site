@@ -265,19 +265,19 @@ dataviva.format.text = function(text,name,vars,obj,l) {
       "opp_gain_desc": {"en": "Opportunity gain is a measure that indicates how much diversity is offered by an industry or product should the given location develop it.", "pt": "O ganho de oportunidade \u00e9 uma medida que indica quanta diversidade \u00e9 oferecida por um determinado setor ou produto se uma determinada localidade fosse desenvolv\u00ea-lo."},
       "opp_gain_wld": {"en": "International Opportunity Gain", "pt": "Ganho de Oportunidade Internacional"},
 
-      "export_val_growth": {"en": "Nominal Annual Export Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Exporta\u00e7\u00f5es Anual (1 ano)"},
-      "export_val_growth_5": {"en": "Nominal Annual Export Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento de Exporta\u00e7\u00f5es Anual (5 anos)"},
-      "import_val_growth": {"en": "Nominal Annual Import Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Importa\u00e7\u00f5es Anual (1 ano)"},
-      "import_val_growth_5": {"en": "Nominal Annual Import Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento de Importa\u00e7\u00f5es Anual (5 anos)"},
+      "export_val_growth": {"en": "Nominal Export Growth (1 year)", "pt": "Nominal de Crescimento de Exporta\u00e7\u00f5es (1 ano)"},
+      "export_val_growth_5": {"en": "Nominal Export Growth (5 year)", "pt": "Nominal de Crescimento de Exporta\u00e7\u00f5es (5 anos)"},
+      "import_val_growth": {"en": "Nominal Import Growth (1 year)", "pt": "Nominal de Crescimento de Importa\u00e7\u00f5es (1 ano)"},
+      "import_val_growth_5": {"en": "Nominal Import Growth (5 year)", "pt": "Nominal de Crescimento de Importa\u00e7\u00f5es (5 anos)"},
 
-      "wage_growth": {"en": "Nominal Annual Wage Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento dos Sal\u00e1rios Anual (1 ano)"},
-      "wage_growth_5": {"en": "Nominal Annual Wage Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento dos Sal\u00e1rios Anual (5 anos)"},
-      "num_emp_growth": {"en": "Nominal Annual Employee Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Empregados Anual (1 ano)"},
-      "num_emp_growth_5": {"en": "Nominal Annual Employee Growth Rate (5 year)", "pt": "Taxa Nominal de Crescimento de Empregados Anual (5 anos)"},
+      "wage_growth": {"en": "Nominal Wage Growth (1 year)", "pt": "Nominal de Crescimento dos Sal\u00e1rios (1 ano)"},
+      "wage_growth_5": {"en": "Nominal Wage Growth (5 year)", "pt": "Nominal de Crescimento dos Sal\u00e1rios (5 anos)"},
+      "num_emp_growth": {"en": "Nominal Employee Growth (1 year)", "pt": "Nominal de Crescimento de Empregados (1 ano)"},
+      "num_emp_growth_5": {"en": "Nominal Employee Growth (5 year)", "pt": "Nominal de Crescimento de Empregados (5 anos)"},
 
-      "enrolled_growth": {"en": "Nominal Annual Enrollment Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Matr\u00edculas Anual (1 ano)"},
-      "enrolled_growth_5": {"en": "Nominal Annual Enrollment Growth Rate (5 years)", "pt": "Taxa Nominal de Crescimento de Matr\u00edculas Anual (5 anos)"},
-      "graduates_growth": {"en": "Nominal Annual Graduation Growth Rate (1 year)", "pt": "Taxa Nominal de Crescimento de Gradua\u00e7\u00f5es Anual (1 ano)"},
+      "enrolled_growth": {"en": "Nominal Enrollment Growth (1 year)", "pt": "Nominal de Crescimento de Matr\u00edculas (1 ano)"},
+      "enrolled_growth_5": {"en": "Nominal Enrollment Growth (5 years)", "pt": "Nominal de Crescimento de Matr\u00edculas (5 anos)"},
+      "graduates_growth": {"en": "Nominal Graduation Growth (1 year)", "pt": "Nominal de Crescimento de Gradua\u00e7\u00f5es (1 ano)"},
 
       // RAIS Labels
       "rais": {"en": "Establishments and Employment (RAIS)", "pt": "Estabelecimentos e Emprego (RAIS)"},
