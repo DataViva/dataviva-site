@@ -25,8 +25,9 @@ def before_request():
     g.page_type = mod.name
     g.color = "#d67ab0"
 
-@mod.route('/crosswalk/oc/<attr1>/<attr2>/')
-def crosswalk_oc(attr1, attr2):
+@mod.route('/crosswalk/<attr1>/course_hedu/')
+@mod.route('/crosswalk/<attr1>/cbo/')
+def crosswalk_oc(attr1):
     oc = Crosswalk_oc.query.all()
     cbos = set([x.cbo_id for x in oc])
     courses = set([x.course_hedu_id for x in oc])
@@ -68,8 +69,10 @@ def crosswalk_oc(attr1, attr2):
     title=gettext(tmp)
     return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2)
 
-@mod.route('/crosswalk/pi/<attr1>/<attr2>/')
-def crosswalk_pi(attr1, attr2):
+
+@mod.route('/crosswalk/<attr1>/cnae/')
+@mod.route('/crosswalk/<attr1>/hs/')
+def crosswalk_pi(attr1):
     pi = Crosswalk_pi.query.all()
     hss = set([x.hs_id for x in pi])
     cnaes = set([x.cnae_id for x in pi])
@@ -103,8 +106,8 @@ def crosswalk_pi(attr1, attr2):
 
     hs_mode = attr1 == "hs"
     full_map = pi if hs_mode else ip
-    col1 = gettext("Product" if hs_mode else "Course")
-    col2 = gettext("Courses" if hs_mode else "Products")
+    col1 = gettext("Product" if hs_mode else "Indusry")
+    col2 = gettext("Industries" if hs_mode else "Products")
     tmp = "%s to %s Crosswalk" % (col1, col2)
     title=gettext(tmp)
     return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2)
