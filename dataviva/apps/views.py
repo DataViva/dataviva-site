@@ -108,14 +108,15 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     if filter2 != "all":
         filter2_attr = globals()[build_filter2.capitalize()].query.get_or_404(filter2)
 
-    '''This is an instance of the Build class for the selected app,
-    determined by the combination of app_type, dataset, filters and output.
-    '''
-    current_app = App.query.filter_by(type=app_name).first_or_404()
     if build_filter1 != "all":
         build_filter1 = "<{}>".format(build_filter1)
     if build_filter2 != "all":
         build_filter2 = "<{}>".format(build_filter2)
+
+    '''This is an instance of the Build class for the selected app,
+    determined by the combination of app_type, dataset, filters and output.
+    '''
+    current_app = App.query.filter_by(type=app_name).first_or_404()
     current_build = Build.query.filter_by(app=current_app, dataset=dataset, filter1=build_filter1, filter2=build_filter2, output=output).first_or_404()
     current_build.set_filter1(filter1_attr)
     current_build.set_filter2(filter2_attr)
@@ -220,7 +221,25 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
 
     build_filter1, build_filter2 = filler(dataset, filter1, filter2)
 
+    '''Grab attrs for bra and filters
+    '''
+    if bra_id == "all":
+        bra_attr = Wld.query.get_or_404("sabra")
+    else:
+        bra_attr = Bra.query.get_or_404(bra_id)
+    filter1_attr = filter1
+    filter2_attr = filter2
+    if filter1 != "all":
+        filter1_attr = globals()[build_filter1.capitalize()].query.get_or_404(filter1)
+    if filter2 != "all":
+        filter2_attr = globals()[build_filter2.capitalize()].query.get_or_404(filter2)
+
     recommended["crosswalk"] = crosswalk_recs(dataset, build_filter1, filter1, build_filter2, filter2, bra_id)
+
+    if build_filter1 != "all":
+        build_filter1 = "<{}>".format(build_filter1)
+    if build_filter2 != "all":
+        build_filter2 = "<{}>".format(build_filter2)
 
     '''First get the MOST relevent builds (ones that use all filters)'''
     if build_filter1 != "all" and build_filter2 != "all":
@@ -229,12 +248,12 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
         recommended['both_filters'] = []
         for b in builds:
             if bra_id != "filler":
-                b.set_bra(bra_id)
+                b.set_bra(bra_attr)
             if filter1 != "filler":
-                b.set_filter1(filter1)
+                b.set_filter1(filter1_attr)
             if filter2 != "filler":
-                b.set_filter2(filter2)
-            recommended['both_filters'].append(b.serialize())
+                b.set_filter2(filter2_attr)
+            recommended['both_filters'].append(b.json())
     else:
 
         '''Add any builds that rely strictly on the second filter'''
@@ -244,10 +263,10 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
             recommended['filter2'] = []
             for b in builds:
                 if bra_id != "filler":
-                    b.set_bra(bra_id)
+                    b.set_bra(bra_attr)
                 if filter2 != "filler":
-                    b.set_filter2(filter2)
-                recommended['filter2'].append(b.serialize())
+                    b.set_filter2(filter2_attr)
+                recommended['filter2'].append(b.json())
 
         '''Add any builds that rely strictly on the first filter'''
         if build_filter1 != "all":
@@ -256,13 +275,12 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
             recommended['filter1'] = []
             for b in builds:
                 if bra_id != "filler":
-                    b.set_bra(bra_id)
+                    b.set_bra(bra_attr)
                 if filter1 != "filler":
-                    b.set_filter1(filter1)
-                # Municipalities are not allowed to have other municipality within it - Github #141
-                if b.output == "bra" and len(bra_id) > 2:
+                    b.set_filter1(filter1_attr)
+                if b.output == "bra" and len(bra_id) > 3:
                     continue
-                recommended['filter1'].append(b.serialize())
+                recommended['filter1'].append(b.json())
 
         '''Lastly get the rest of the relevent builds'''
         if build_filter1 == "all" and build_filter2 == "all":
@@ -270,8 +288,8 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
             recommended['no_filters'] = []
             for b in builds:
                 if bra_id != "filler":
-                    b.set_bra(bra_id)
-                recommended['no_filters'].append(b.serialize())
+                    b.set_bra(bra_attr)
+                recommended['no_filters'].append(b.json())
 
     return jsonify(recommended)
 
@@ -539,32 +557,27 @@ def shorten_url():
 
 
 def crosswalk_recs(dataset, build_filter1, raw_filter1, build_filter2, raw_filter2, bra_id):
-    crosswalk = {"filter1" : [], "filter2": []}
+    crosswalk = []
 
-    data1 = {"<cnae>": Crosswalk_pi.cnae_id, "<hs>": Crosswalk_pi.hs_id}
-    data2 = {"<cbo>": Crosswalk_oc.cbo_id, "<course_hedu>": Crosswalk_oc.course_hedu_id}
+    attr_swap = {"hs" : "cnae", "cnae": "hs", "cbo" : "course_hedu", "course_hedu": "cbo"}
+    crosswalk_table = {"hs" : "pi", "cnae": "pi", "cbo" : "oc", "course_hedu": "oc"}
 
-    if build_filter1 in data1 and raw_filter1 != "all":
+    filter_match = None
+    if build_filter1 in attr_swap and raw_filter1 != "all":
+        filter_match = build_filter1
+        filter_raw = raw_filter1
+    elif build_filter2 in attr_swap and raw_filter2 != "all":
+        filter_match = build_filter2
+        filter_raw = raw_filter2
 
-        col = data1[build_filter1]
-        results = Crosswalk_pi.query.filter(col == raw_filter1).all()
+    if filter_match:
+        table = globals()["Crosswalk_{}".format(crosswalk_table[filter_match])]
+        col = getattr(table, "{}_id".format(filter_match))
+        results = table.query.filter(col == filter_raw)
         ids = [row.get_id(dataset) for row in results]
         if ids:
-            # Build filter1 must either be <cnae> or <hs>
-            attr_swap = {"<hs>" : Cnae, "<cnae>": Hs}
-            table = attr_swap[build_filter1]
+            table = globals()[attr_swap[filter_match].capitalize()]
             attrs = table.query.filter(table.id.in_(ids)).all()
-            crosswalk["filter1"] = [{"title": a.name(), "url": a.url()} for a in attrs]
-
-    elif build_filter2 in data2 and raw_filter2 != "all":
-        col = data2[build_filter2]
-        results = Crosswalk_oc.query.filter(col == raw_filter2).all()
-        ids = [row.get_id(dataset) for row in results]
-        if ids:
-            # Build filter2 must either be <cbo>, <course_hedu>
-            attr_swap = {"<cbo>" : Course_hedu, "<course_hedu>": Cbo}
-            table = attr_swap[build_filter2]
-            attrs = table.query.filter(table.id.in_(ids)).all()
-            crosswalk["filter2"] = [{"title": a.name(), "url": a.url()} for a in attrs]
+            crosswalk = [{"title": a.name(), "url": a.url()} for a in attrs]
 
     return crosswalk
