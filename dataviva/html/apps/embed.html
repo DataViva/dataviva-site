@@ -309,7 +309,7 @@
 
         var html_return = "";
 
-        if ("crosswalk" in data) {
+        if ("crosswalk" in data && data.crosswalk.length) {
           html_return += "<div class='title'>"+dataviva.format.text("crosswalk_"+app.build.output_attr)+"</div>";
           html_return = createRecs(html_return, data.crosswalk);
         }
