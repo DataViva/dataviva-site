@@ -25,8 +25,8 @@ def before_request():
     g.page_type = mod.name
     g.color = "#d67ab0"
 
-@mod.route('/crosswalk/oc/')
-def crosswalk_oc():
+@mod.route('/crosswalk/oc/<attr1>/<attr2>/')
+def crosswalk_oc(attr1, attr2):
     oc = Crosswalk_oc.query.all()
     cbos = set([x.cbo_id for x in oc])
     courses = set([x.course_hedu_id for x in oc])
@@ -51,6 +51,7 @@ def crosswalk_oc():
         course_names = [course_attrs[course] for course in cbo_to_course[cbo] if course in course_attrs]
         if course_names:
             oc[cbo_name] = course_names
+
     co = {}
     for course in course_to_cbo:
         if course in course_attrs:
@@ -59,14 +60,16 @@ def crosswalk_oc():
             if cbo_names:
                 co[course_name] = cbo_names
 
-    full_map = dict(oc.items() + co.items())
-    title=gettext("CBO to Course Crosswalk")
-    col1=gettext("Courses and Occupations")
-    col2=gettext("Associations")
+    cbo_mode = attr1 == "cbo"
+    full_map = oc if cbo_mode else co
+    col1 = gettext("Occupation" if cbo_mode else "Course")
+    col2 = gettext("Courses" if cbo_mode else "Occupations")
+    tmp = "%s to %s Crosswalk" % (col1, col2)
+    title=gettext(tmp)
     return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2)
 
-@mod.route('/crosswalk/pi/')
-def crosswalk_pi():
+@mod.route('/crosswalk/pi/<attr1>/<attr2>/')
+def crosswalk_pi(attr1, attr2):
     pi = Crosswalk_pi.query.all()
     hss = set([x.hs_id for x in pi])
     cnaes = set([x.cnae_id for x in pi])
@@ -98,10 +101,12 @@ def crosswalk_pi():
             if hs_names:
                 ip[cnae_name] = hs_names
 
-    full_map = dict(pi.items() + ip.items())
-    title=gettext("HS to CNAE Crosswalk")
-    col1=gettext("Products and Industries")
-    col2=gettext("Associations")
+    hs_mode = attr1 == "hs"
+    full_map = pi if hs_mode else ip
+    col1 = gettext("Product" if hs_mode else "Course")
+    col2 = gettext("Courses" if hs_mode else "Products")
+    tmp = "%s to %s Crosswalk" % (col1, col2)
+    title=gettext(tmp)
     return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2)
 
 @mod.route('/analysis/')
