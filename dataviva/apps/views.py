@@ -10,7 +10,7 @@ from flask.ext.babel import gettext
 from dataviva import db, datavivadir, __year_range__, view_cache
 from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
-from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld
+from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld, Course_hedu
 from dataviva.apps.models import Build, UI, App, Crosswalk_oc, Crosswalk_pi
 from dataviva.general.models import Short
 
@@ -534,36 +534,20 @@ def crosswalk_recs(dataset, build_filter1, raw_filter1, build_filter2, raw_filte
         ids = [row.get_id(dataset) for row in results]
         if ids:
             # Build filter1 must either be <cnae> or <hs>
-            swap_map = { "secex" : { "<hs>" : ("rais", "<cnae>") },
-                         "rais" : { "<cnae>" : ("secex", "<hs>") }}
-            dataset2, target_filter = swap_map[dataset][build_filter1]
-            raw_target_filter = "_".join(ids)
+            attr_swap = {"<hs>" : Cnae, "<cnae>": Hs}
+            table = attr_swap[build_filter1]
+            attrs = table.query.filter(table.id.in_(ids)).all()
+            crosswalk["filter1"] = [{"title": a.name(), "url": a.url()} for a in attrs]
 
-            builds = Build.query.filter_by(dataset=dataset2, filter1=target_filter, filter2="all").all()
-
-            for b in builds:
-                if bra_id != "filler":
-                    b.set_bra(bra_id)
-                b.set_filter1(raw_target_filter)
-
-            crosswalk["filter1"] = [b.serialize() for b in builds]
     elif build_filter2 in data2 and raw_filter2 != "all":
         col = data2[build_filter2]
         results = Crosswalk_oc.query.filter(col == raw_filter2).all()
         ids = [row.get_id(dataset) for row in results]
         if ids:
             # Build filter2 must either be <cbo>, <course_hedu>
-            swap_map = { "hedu" : { "<course_hedu>" : ("rais", "<cbo>")},
-                         "rais" : { "<cbo>" : ("hedu", "<course_hedu>") }}
-            dataset2, target_filter = swap_map[dataset][build_filter2]
-            raw_target_filter = "_".join(ids)
-            builds = Build.query.filter_by(dataset=dataset2, filter1="all", filter2=target_filter).all()
-
-            for b in builds:
-                if bra_id != "filler":
-                    b.set_bra(bra_id)
-                b.set_filter2(raw_target_filter)
-
-            crosswalk["filter2"] = [b.serialize() for b in builds]
+            attr_swap = {"<cbo>" : Course_hedu, "<course_hedu>": Cbo}
+            table = attr_swap[build_filter2]
+            attrs = table.query.filter(table.id.in_(ids)).all()
+            crosswalk["filter2"] = [{"title": a.name(), "url": a.url()} for a in attrs]
 
     return crosswalk
