@@ -253,7 +253,7 @@ if (stylesheet("d3plus.css")) {
 
 
 
-},{"./array/comparator.coffee":"/Users/Dave/sites/d3plus/src/array/comparator.coffee","./array/contains.coffee":"/Users/Dave/sites/d3plus/src/array/contains.coffee","./array/sort.coffee":"/Users/Dave/sites/d3plus/src/array/sort.coffee","./array/update.coffee":"/Users/Dave/sites/d3plus/src/array/update.coffee","./client/css.coffee":"/Users/Dave/sites/d3plus/src/client/css.coffee","./client/ie.js":"/Users/Dave/sites/d3plus/src/client/ie.js","./client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","./client/prefix.coffee":"/Users/Dave/sites/d3plus/src/client/prefix.coffee","./client/rtl.coffee":"/Users/Dave/sites/d3plus/src/client/rtl.coffee","./client/scrollbar.coffee":"/Users/Dave/sites/d3plus/src/client/scrollbar.coffee","./client/touch.coffee":"/Users/Dave/sites/d3plus/src/client/touch.coffee","./color/legible.coffee":"/Users/Dave/sites/d3plus/src/color/legible.coffee","./color/lighter.coffee":"/Users/Dave/sites/d3plus/src/color/lighter.coffee","./color/mix.coffee":"/Users/Dave/sites/d3plus/src/color/mix.coffee","./color/random.coffee":"/Users/Dave/sites/d3plus/src/color/random.coffee","./color/scale.coffee":"/Users/Dave/sites/d3plus/src/color/scale.coffee","./color/sort.coffee":"/Users/Dave/sites/d3plus/src/color/sort.coffee","./color/text.coffee":"/Users/Dave/sites/d3plus/src/color/text.coffee","./color/validate.coffee":"/Users/Dave/sites/d3plus/src/color/validate.coffee","./core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","./data/bestRegress.coffee":"/Users/Dave/sites/d3plus/src/data/bestRegress.coffee","./data/lof.coffee":"/Users/Dave/sites/d3plus/src/data/lof.coffee","./data/mad.coffee":"/Users/Dave/sites/d3plus/src/data/mad.coffee","./font/sizes.coffee":"/Users/Dave/sites/d3plus/src/font/sizes.coffee","./font/validate.coffee":"/Users/Dave/sites/d3plus/src/font/validate.coffee","./form/form.js":"/Users/Dave/sites/d3plus/src/form/form.js","./geom/largestRect.coffee":"/Users/Dave/sites/d3plus/src/geom/largestRect.coffee","./geom/offset.coffee":"/Users/Dave/sites/d3plus/src/geom/offset.coffee","./geom/path2poly.coffee":"/Users/Dave/sites/d3plus/src/geom/path2poly.coffee","./network/cluster.coffee":"/Users/Dave/sites/d3plus/src/network/cluster.coffee","./network/normalize.coffee":"/Users/Dave/sites/d3plus/src/network/normalize.coffee","./network/shortestPath.coffee":"/Users/Dave/sites/d3plus/src/network/shortestPath.coffee","./network/smallestGap.coffee":"/Users/Dave/sites/d3plus/src/network/smallestGap.coffee","./network/subgraph.coffee":"/Users/Dave/sites/d3plus/src/network/subgraph.coffee","./number/format.js":"/Users/Dave/sites/d3plus/src/number/format.js","./object/merge.coffee":"/Users/Dave/sites/d3plus/src/object/merge.coffee","./object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","./string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js","./string/list.coffee":"/Users/Dave/sites/d3plus/src/string/list.coffee","./string/strip.js":"/Users/Dave/sites/d3plus/src/string/strip.js","./string/title.coffee":"/Users/Dave/sites/d3plus/src/string/title.coffee","./textwrap/textwrap.coffee":"/Users/Dave/sites/d3plus/src/textwrap/textwrap.coffee","./tooltip/create.js":"/Users/Dave/sites/d3plus/src/tooltip/create.js","./tooltip/move.coffee":"/Users/Dave/sites/d3plus/src/tooltip/move.coffee","./tooltip/remove.coffee":"/Users/Dave/sites/d3plus/src/tooltip/remove.coffee","./util/buckets.coffee":"/Users/Dave/sites/d3plus/src/util/buckets.coffee","./util/child.coffee":"/Users/Dave/sites/d3plus/src/util/child.coffee","./util/closest.coffee":"/Users/Dave/sites/d3plus/src/util/closest.coffee","./util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee","./util/d3selection.coffee":"/Users/Dave/sites/d3plus/src/util/d3selection.coffee","./util/dataURL.coffee":"/Users/Dave/sites/d3plus/src/util/dataURL.coffee","./util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee","./viz/viz.coffee":"/Users/Dave/sites/d3plus/src/viz/viz.coffee"}],"/Users/Dave/sites/d3plus/node_modules/browserify/node_modules/buffer/index.js":[function(require,module,exports){
+},{"./array/comparator.coffee":"/Users/Dave/Sites/d3plus/src/array/comparator.coffee","./array/contains.coffee":"/Users/Dave/Sites/d3plus/src/array/contains.coffee","./array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","./array/update.coffee":"/Users/Dave/Sites/d3plus/src/array/update.coffee","./client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee","./client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","./client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","./client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","./client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","./client/scrollbar.coffee":"/Users/Dave/Sites/d3plus/src/client/scrollbar.coffee","./client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","./color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","./color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","./color/mix.coffee":"/Users/Dave/Sites/d3plus/src/color/mix.coffee","./color/random.coffee":"/Users/Dave/Sites/d3plus/src/color/random.coffee","./color/scale.coffee":"/Users/Dave/Sites/d3plus/src/color/scale.coffee","./color/sort.coffee":"/Users/Dave/Sites/d3plus/src/color/sort.coffee","./color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","./color/validate.coffee":"/Users/Dave/Sites/d3plus/src/color/validate.coffee","./core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./data/bestRegress.coffee":"/Users/Dave/Sites/d3plus/src/data/bestRegress.coffee","./data/lof.coffee":"/Users/Dave/Sites/d3plus/src/data/lof.coffee","./data/mad.coffee":"/Users/Dave/Sites/d3plus/src/data/mad.coffee","./font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","./font/validate.coffee":"/Users/Dave/Sites/d3plus/src/font/validate.coffee","./form/form.js":"/Users/Dave/Sites/d3plus/src/form/form.js","./geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","./geom/offset.coffee":"/Users/Dave/Sites/d3plus/src/geom/offset.coffee","./geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","./network/cluster.coffee":"/Users/Dave/Sites/d3plus/src/network/cluster.coffee","./network/normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee","./network/shortestPath.coffee":"/Users/Dave/Sites/d3plus/src/network/shortestPath.coffee","./network/smallestGap.coffee":"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee","./network/subgraph.coffee":"/Users/Dave/Sites/d3plus/src/network/subgraph.coffee","./number/format.js":"/Users/Dave/Sites/d3plus/src/number/format.js","./object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","./object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","./string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","./string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","./string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","./string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee","./textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","./tooltip/create.js":"/Users/Dave/Sites/d3plus/src/tooltip/create.js","./tooltip/move.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/move.coffee","./tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","./util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","./util/child.coffee":"/Users/Dave/Sites/d3plus/src/util/child.coffee","./util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","./util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee","./util/dataURL.coffee":"/Users/Dave/Sites/d3plus/src/util/dataURL.coffee","./util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./viz/viz.coffee":"/Users/Dave/Sites/d3plus/src/viz/viz.coffee"}],"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/index.js":[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -1571,7 +1571,7 @@ function decodeUtf8Char (str) {
   }
 }
 
-},{"base64-js":"/Users/Dave/sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/base64-js/lib/b64.js","ieee754":"/Users/Dave/sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/ieee754/index.js","is-array":"/Users/Dave/sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/is-array/index.js"}],"/Users/Dave/sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/base64-js/lib/b64.js":[function(require,module,exports){
+},{"base64-js":"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/base64-js/lib/b64.js","ieee754":"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/ieee754/index.js","is-array":"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/is-array/index.js"}],"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/base64-js/lib/b64.js":[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -1697,7 +1697,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],"/Users/Dave/sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/ieee754/index.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/ieee754/index.js":[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -1783,7 +1783,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],"/Users/Dave/sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/is-array/index.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/is-array/index.js":[function(require,module,exports){
 
 /**
  * isArray
@@ -1818,10 +1818,10 @@ module.exports = isArray || function (val) {
   return !! val && '[object Array]' == str.call(val);
 };
 
-},{}],"/Users/Dave/sites/d3plus/node_modules/heap/index.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/heap/index.js":[function(require,module,exports){
 module.exports = require('./lib/heap');
 
-},{"./lib/heap":"/Users/Dave/sites/d3plus/node_modules/heap/lib/heap.js"}],"/Users/Dave/sites/d3plus/node_modules/heap/lib/heap.js":[function(require,module,exports){
+},{"./lib/heap":"/Users/Dave/Sites/d3plus/node_modules/heap/lib/heap.js"}],"/Users/Dave/Sites/d3plus/node_modules/heap/lib/heap.js":[function(require,module,exports){
 // Generated by CoffeeScript 1.8.0
 (function() {
   var Heap, defaultCmp, floor, heapify, heappop, heappush, heappushpop, heapreplace, insort, min, nlargest, nsmallest, updateItem, _siftdown, _siftup;
@@ -2192,7 +2192,7 @@ module.exports = require('./lib/heap');
 
 }).call(this);
 
-},{}],"/Users/Dave/sites/d3plus/node_modules/numeric/numeric-1.2.6.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/numeric/numeric-1.2.6.js":[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -6620,7 +6620,7 @@ numeric.svd= function svd(A) {
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/Users/Dave/sites/d3plus/node_modules/simplify-js/simplify.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/simplify-js/simplify.js":[function(require,module,exports){
 /*
  (c) 2013, Vladimir Agafonkin
  Simplify.js, a high-performance JS polyline simplification library
@@ -6753,7 +6753,7 @@ else window.simplify = simplify;
 
 })();
 
-},{}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/kdtree.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/kdtree.js":[function(require,module,exports){
 "use strict"
 
 module.exports = createKDTree
@@ -7366,7 +7366,7 @@ function deserializeKDTree(data) {
     return new KDTree(null, null, 0, data.d)
   }
 }
-},{"./lib/heap.js":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/lib/heap.js","bit-twiddle":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js","inorder-tree-layout":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/inorder.js","ndarray":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/ndarray.js","ndarray-ops":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/ndarray-ops.js","ndarray-pack":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/convert.js","ndarray-scratch":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/scratch.js","ndarray-select":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-select/select.js","typedarray-pool":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/pool.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/lib/heap.js":[function(require,module,exports){
+},{"./lib/heap.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/lib/heap.js","bit-twiddle":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js","inorder-tree-layout":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/inorder.js","ndarray":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/ndarray.js","ndarray-ops":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/ndarray-ops.js","ndarray-pack":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/convert.js","ndarray-scratch":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/scratch.js","ndarray-select":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-select/select.js","typedarray-pool":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/pool.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/lib/heap.js":[function(require,module,exports){
 "use strict"
 
 module.exports = KDTHeap
@@ -7475,7 +7475,7 @@ proto.dispose = function() {
   pool.freeInt32(this.index)
   pool.freeFloat64(this.data)
 }
-},{"typedarray-pool":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/pool.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
+},{"typedarray-pool":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/pool.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
 /**
  * Bit twiddling hacks for JavaScript.
  *
@@ -7681,7 +7681,7 @@ exports.nextCombination = function(v) {
 }
 
 
-},{}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/inorder.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/inorder.js":[function(require,module,exports){
 "use strict"
 
 var bits = require("bit-twiddle")
@@ -7853,9 +7853,9 @@ function hiInorder(n, x) {
 }
 exports.hi = hiInorder
 
-},{"bit-twiddle":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
-arguments[4]["/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
-},{}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/ndarray-ops.js":[function(require,module,exports){
+},{"bit-twiddle":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/ndarray-ops.js":[function(require,module,exports){
 "use strict"
 
 var compile = require("cwise-compiler")
@@ -8318,7 +8318,7 @@ exports.equals = compile({
 
 
 
-},{"cwise-compiler":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/compiler.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/compiler.js":[function(require,module,exports){
+},{"cwise-compiler":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/compiler.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/compiler.js":[function(require,module,exports){
 "use strict"
 
 var createThunk = require("./lib/thunk.js")
@@ -8426,7 +8426,7 @@ function compileCwise(user_args) {
 
 module.exports = compileCwise
 
-},{"./lib/thunk.js":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/compile.js":[function(require,module,exports){
+},{"./lib/thunk.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/compile.js":[function(require,module,exports){
 "use strict"
 
 var uniq = require("uniq")
@@ -8714,7 +8714,7 @@ function generateCWiseOp(proc, typesig) {
   return f()
 }
 module.exports = generateCWiseOp
-},{"uniq":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/node_modules/uniq/uniq.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js":[function(require,module,exports){
+},{"uniq":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/node_modules/uniq/uniq.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js":[function(require,module,exports){
 "use strict"
 
 var compile = require("./compile.js")
@@ -8763,7 +8763,7 @@ function createThunk(proc) {
 
 module.exports = createThunk
 
-},{"./compile.js":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/compile.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/node_modules/uniq/uniq.js":[function(require,module,exports){
+},{"./compile.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/compile.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/node_modules/uniq/uniq.js":[function(require,module,exports){
 "use strict"
 
 function unique_pred(list, compare) {
@@ -8822,7 +8822,7 @@ function unique(list, compare, sorted) {
 
 module.exports = unique
 
-},{}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/convert.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/convert.js":[function(require,module,exports){
 "use strict"
 
 var ndarray = require("ndarray")
@@ -8845,10 +8845,10 @@ module.exports = function convert(arr, result) {
   return result
 }
 
-},{"./doConvert.js":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/doConvert.js","ndarray":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/ndarray.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/doConvert.js":[function(require,module,exports){
+},{"./doConvert.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/doConvert.js","ndarray":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/ndarray.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/doConvert.js":[function(require,module,exports){
 module.exports=require('cwise-compiler')({"args":["array","scalar","index"],"pre":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"body":{"body":"{\nvar _inline_1_v=_inline_1_arg1_,_inline_1_i\nfor(_inline_1_i=0;_inline_1_i<_inline_1_arg2_.length-1;++_inline_1_i) {\n_inline_1_v=_inline_1_v[_inline_1_arg2_[_inline_1_i]]\n}\n_inline_1_arg0_=_inline_1_v[_inline_1_arg2_[_inline_1_arg2_.length-1]]\n}","args":[{"name":"_inline_1_arg0_","lvalue":true,"rvalue":false,"count":1},{"name":"_inline_1_arg1_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_1_arg2_","lvalue":false,"rvalue":true,"count":4}],"thisVars":[],"localVars":["_inline_1_i","_inline_1_v"]},"post":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"funcName":"convert","blockSize":64})
 
-},{"cwise-compiler":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/compiler.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/compiler.js":[function(require,module,exports){
+},{"cwise-compiler":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/compiler.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/compiler.js":[function(require,module,exports){
 "use strict"
 
 var createThunk = require("./lib/thunk.js")
@@ -8956,7 +8956,7 @@ function compileCwise(user_args) {
 
 module.exports = compileCwise
 
-},{"./lib/thunk.js":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/thunk.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/compile.js":[function(require,module,exports){
+},{"./lib/thunk.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/thunk.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/compile.js":[function(require,module,exports){
 "use strict"
 
 var uniq = require("uniq")
@@ -9240,9 +9240,9 @@ function generateCWiseOp(proc, typesig) {
   return f()
 }
 module.exports = generateCWiseOp
-},{"uniq":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/node_modules/uniq/uniq.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/thunk.js":[function(require,module,exports){
-arguments[4]["/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js"][0].apply(exports,arguments)
-},{"./compile.js":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/compile.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/node_modules/uniq/uniq.js":[function(require,module,exports){
+},{"uniq":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/node_modules/uniq/uniq.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/thunk.js":[function(require,module,exports){
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js"][0].apply(exports,arguments)
+},{"./compile.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/compile.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/node_modules/uniq/uniq.js":[function(require,module,exports){
 "use strict"
 
 function unique_pred(list, compare) {
@@ -9300,9 +9300,9 @@ function unique(list, compare, sorted) {
 }
 
 module.exports = unique
-},{}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
-arguments[4]["/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
-},{}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
 "use strict"
 
 function dupe_array(count, value, i) {
@@ -9352,7 +9352,7 @@ function dupe(count, value) {
 }
 
 module.exports = dupe
-},{}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/pool.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/pool.js":[function(require,module,exports){
 (function (global,Buffer){
 'use strict'
 
@@ -9569,7 +9569,7 @@ exports.clearCache = function clearCache() {
   }
 }
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"bit-twiddle":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/bit-twiddle/twiddle.js","buffer":"/Users/Dave/sites/d3plus/node_modules/browserify/node_modules/buffer/index.js","dup":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/scratch.js":[function(require,module,exports){
+},{"bit-twiddle":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/bit-twiddle/twiddle.js","buffer":"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/index.js","dup":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/scratch.js":[function(require,module,exports){
 "use strict"
 
 var ndarray = require("ndarray")
@@ -9628,7 +9628,7 @@ function zeros(shape, dtype) {
   return ndarray(buf, shape, stride, 0)
 }
 exports.zeros = zeros
-},{"ndarray":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/ndarray.js","ndarray-ops":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/ndarray-ops.js","typedarray-pool":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/pool.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-select/select.js":[function(require,module,exports){
+},{"ndarray":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/ndarray.js","ndarray-ops":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/ndarray-ops.js","typedarray-pool":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/pool.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-select/select.js":[function(require,module,exports){
 "use strict"
 
 module.exports = ndSelect
@@ -9864,7 +9864,7 @@ function ndSelect(array, k, compare) {
     return proc(array, k)
   }
 }
-},{}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/ndarray.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/ndarray.js":[function(require,module,exports){
 (function (Buffer){
 var iota = require("iota-array")
 
@@ -10264,7 +10264,7 @@ function wrappedNDArrayCtor(data, shape, stride, offset) {
 
 module.exports = wrappedNDArrayCtor
 }).call(this,require("buffer").Buffer)
-},{"buffer":"/Users/Dave/sites/d3plus/node_modules/browserify/node_modules/buffer/index.js","iota-array":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/node_modules/iota-array/iota.js"}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/node_modules/iota-array/iota.js":[function(require,module,exports){
+},{"buffer":"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/index.js","iota-array":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/node_modules/iota-array/iota.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/node_modules/iota-array/iota.js":[function(require,module,exports){
 "use strict"
 
 function iota(n) {
@@ -10276,11 +10276,11 @@ function iota(n) {
 }
 
 module.exports = iota
-},{}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
-arguments[4]["/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js"][0].apply(exports,arguments)
-},{}],"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/pool.js":[function(require,module,exports){
-arguments[4]["/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/pool.js"][0].apply(exports,arguments)
-},{"bit-twiddle":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js","buffer":"/Users/Dave/sites/d3plus/node_modules/browserify/node_modules/buffer/index.js","dup":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/node_modules/dup/dup.js"}],"/Users/Dave/sites/d3plus/src/array/comparator.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js"][0].apply(exports,arguments)
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/pool.js":[function(require,module,exports){
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/pool.js"][0].apply(exports,arguments)
+},{"bit-twiddle":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js","buffer":"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/index.js","dup":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/node_modules/dup/dup.js"}],"/Users/Dave/Sites/d3plus/src/array/comparator.coffee":[function(require,module,exports){
 var colorSort;
 
 colorSort = require("../color/sort.coffee");
@@ -10324,7 +10324,7 @@ module.exports = function(a, b, keys, sort, colors, vars, depth) {
 
 
 
-},{"../color/sort.coffee":"/Users/Dave/sites/d3plus/src/color/sort.coffee"}],"/Users/Dave/sites/d3plus/src/array/contains.coffee":[function(require,module,exports){
+},{"../color/sort.coffee":"/Users/Dave/Sites/d3plus/src/color/sort.coffee"}],"/Users/Dave/Sites/d3plus/src/array/contains.coffee":[function(require,module,exports){
 module.exports = function(arr, value) {
   var constructor;
   if (arr instanceof Array) {
@@ -10337,7 +10337,7 @@ module.exports = function(arr, value) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/array/sort.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/array/sort.coffee":[function(require,module,exports){
 var comparator, fetchSort;
 
 comparator = require("./comparator.coffee");
@@ -10376,7 +10376,7 @@ module.exports = function(arr, keys, sort, colors, vars, depth) {
 
 
 
-},{"../core/fetch/sort.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/sort.coffee","./comparator.coffee":"/Users/Dave/sites/d3plus/src/array/comparator.coffee"}],"/Users/Dave/sites/d3plus/src/array/update.coffee":[function(require,module,exports){
+},{"../core/fetch/sort.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/sort.coffee","./comparator.coffee":"/Users/Dave/Sites/d3plus/src/array/comparator.coffee"}],"/Users/Dave/Sites/d3plus/src/array/update.coffee":[function(require,module,exports){
 module.exports = function(arr, x) {
   if (x === void 0) {
     return arr;
@@ -10400,7 +10400,7 @@ module.exports = function(arr, x) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/client/css.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/client/css.coffee":[function(require,module,exports){
 var sheet;
 
 sheet = function(name) {
@@ -10428,11 +10428,11 @@ module.exports = sheet;
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/client/ie.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/client/ie.js":[function(require,module,exports){
 // Determines if the current browser is Internet Explorer.
 module.exports = /*@cc_on!@*/false
 
-},{}],"/Users/Dave/sites/d3plus/src/client/pointer.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/client/pointer.coffee":[function(require,module,exports){
 var ie, touch;
 
 ie = require("./ie.js");
@@ -10461,7 +10461,7 @@ if (touch) {
 
 
 
-},{"./ie.js":"/Users/Dave/sites/d3plus/src/client/ie.js","./touch.coffee":"/Users/Dave/sites/d3plus/src/client/touch.coffee"}],"/Users/Dave/sites/d3plus/src/client/prefix.coffee":[function(require,module,exports){
+},{"./ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","./touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee"}],"/Users/Dave/Sites/d3plus/src/client/prefix.coffee":[function(require,module,exports){
 var prefix;
 
 prefix = function() {
@@ -10487,12 +10487,12 @@ module.exports = prefix;
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/client/rtl.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/client/rtl.coffee":[function(require,module,exports){
 module.exports = d3.select("html").attr("dir") === "rtl";
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/client/scrollbar.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/client/scrollbar.coffee":[function(require,module,exports){
 var scrollbar;
 
 scrollbar = function() {
@@ -10528,12 +10528,12 @@ module.exports = scrollbar;
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/client/touch.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/client/touch.coffee":[function(require,module,exports){
 module.exports = ("ontouchstart" in window) || window.DocumentTouch && document instanceof DocumentTouch ? true : false;
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/color/legible.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/legible.coffee":[function(require,module,exports){
 module.exports = function(color) {
   var hsl;
   hsl = d3.hsl(color);
@@ -10548,7 +10548,7 @@ module.exports = function(color) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/color/lighter.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/lighter.coffee":[function(require,module,exports){
 module.exports = function(color, increment) {
   var c;
   if (increment === void 0) {
@@ -10561,7 +10561,7 @@ module.exports = function(color, increment) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/color/mix.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/mix.coffee":[function(require,module,exports){
 module.exports = function(c1, c2, o1, o2) {
   var b, g, r;
   if (!o1) {
@@ -10580,7 +10580,7 @@ module.exports = function(c1, c2, o1, o2) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/color/random.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/random.coffee":[function(require,module,exports){
 var defaultScale;
 
 defaultScale = require("./scale.coffee");
@@ -10594,12 +10594,12 @@ module.exports = function(x, scale) {
 
 
 
-},{"./scale.coffee":"/Users/Dave/sites/d3plus/src/color/scale.coffee"}],"/Users/Dave/sites/d3plus/src/color/scale.coffee":[function(require,module,exports){
+},{"./scale.coffee":"/Users/Dave/Sites/d3plus/src/color/scale.coffee"}],"/Users/Dave/Sites/d3plus/src/color/scale.coffee":[function(require,module,exports){
 module.exports = d3.scale.ordinal().range(["#b22200", "#EACE3F", "#282F6B", "#B35C1E", "#224F20", "#5F487C", "#759143", "#419391", "#993F88", "#e89c89", "#ffee8d", "#afd5e8", "#f7ba77", "#a5c697", "#c5b5e5", "#d1d392", "#bbefd0", "#e099cf"]);
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/color/sort.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/sort.coffee":[function(require,module,exports){
 module.exports = function(a, b) {
   var aHSL, bHSL;
   aHSL = d3.hsl(a);
@@ -10615,7 +10615,7 @@ module.exports = function(a, b) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/color/text.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/text.coffee":[function(require,module,exports){
 module.exports = function(color) {
   var b, g, r, rgbColor, yiq;
   rgbColor = d3.rgb(color);
@@ -10632,7 +10632,7 @@ module.exports = function(color) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/color/validate.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/validate.coffee":[function(require,module,exports){
 module.exports = function(color) {
   var blackColors, testColor, userBlack;
   color = color + "";
@@ -10651,7 +10651,7 @@ module.exports = function(color) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/core/console/print.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/console/print.coffee":[function(require,module,exports){
 var icon, ie, print, wiki;
 
 ie = require("../../client/ie.js");
@@ -10762,7 +10762,7 @@ module.exports = print;
 
 
 
-},{"../../client/ie.js":"/Users/Dave/sites/d3plus/src/client/ie.js","./wiki.coffee":"/Users/Dave/sites/d3plus/src/core/console/wiki.coffee"}],"/Users/Dave/sites/d3plus/src/core/console/wiki.coffee":[function(require,module,exports){
+},{"../../client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","./wiki.coffee":"/Users/Dave/Sites/d3plus/src/core/console/wiki.coffee"}],"/Users/Dave/Sites/d3plus/src/core/console/wiki.coffee":[function(require,module,exports){
 module.exports = {
   active: "Segmenting-Data#active",
   aggs: "Custom-Aggregations",
@@ -10824,7 +10824,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/core/data/color.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/data/color.js":[function(require,module,exports){
 var buckets = require("../../util/buckets.coffee"),
     fetchValue = require("../fetch/value.coffee"),
     print      = require("../console/print.coffee")
@@ -10886,7 +10886,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../util/buckets.coffee":"/Users/Dave/sites/d3plus/src/util/buckets.coffee","../console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/sites/d3plus/src/core/data/filter.js":[function(require,module,exports){
+},{"../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/data/filter.js":[function(require,module,exports){
 var fetchValue = require("../fetch/value.coffee"),
     print       = require("../console/print.coffee"),
     validObject = require("../../object/validate.coffee")
@@ -10926,24 +10926,24 @@ module.exports = function( vars , data ) {
 
     }
 
-  })
+  });
 
   // if "solo", only check against "solo" (disregard "mute")
   var key = vars.data.solo.length ? "solo" : "mute"
 
-  vars.data[key].forEach( function( v ) {
+  vars.data[key].forEach(function(v) {
 
     function test_value( val ) {
 
-      var arr = vars[v][key].value
+      var arr = vars[v][key].value;
 
-      var match = false
+      var match = false;
       arr.forEach(function(f){
         if (typeof f === "function") {
-          match = f(val)
+          match = f(val);
         }
         else if ( f === val ) {
-          match = true
+          match = true;
         }
 
       })
@@ -10951,14 +10951,14 @@ module.exports = function( vars , data ) {
       return match
     }
 
-    function nest_check( d ) {
+    function nest_check(d) {
 
       // if the variable has nesting, check all levels
       var match = false
       if (vars[v].nesting) {
         var nesting = vars[v].nesting
         if (validObject(nesting)) {
-          nesting = d3.keys(nesting)
+          nesting = d3.values(nesting)
         }
         nesting.forEach(function(n){
           if (!match) {
@@ -10974,7 +10974,9 @@ module.exports = function( vars , data ) {
 
     }
 
+    if (vars.data.value.length === 32) console.log("before", data.length)
     data = data.filter(nest_check)
+    if (vars.data.value.length === 32) console.log("nest", data.length)
 
     if ( v === "id" ) {
 
@@ -11004,7 +11006,7 @@ module.exports = function( vars , data ) {
 
 }
 
-},{"../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/sites/d3plus/src/core/data/format.js":[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/data/format.js":[function(require,module,exports){
 var dataNest   = require("./nest.js"),
     fetchValue = require("../fetch/value.coffee"),
     print      = require("../console/print.coffee"),
@@ -11094,62 +11096,87 @@ module.exports = function( vars ) {
       }
     });
 
-    var stepType = vars.data.time.stepType,
-        totalType = vars.data.time.totalType,
+    var userFormat = vars.time.format.value,
         locale = vars.format.locale.value;
 
-    var getFormat = function(s,t,small) {
+    if (userFormat) {
 
-      if (s === t) {
-        return small && locale.timeFormat[s+"Small"] ? locale.timeFormat[s+"Small"] : locale.timeFormat[s];
+      if (typeof userFormat === "string") {
+        vars.data.time.format = d3.locale(locale.format).timeFormat(userFormat);
       }
-      else {
-        if (periods.indexOf(s) >= 4 || periods.indexOf(t) <= 3) {
-          return locale.timeFormat[t+"-"+s];
+      else if (typeof userFormat === "function") {
+        vars.data.time.format = userFormat;
+      }
+      else if (userFormat instanceof Array) {
+        vars.data.time.format = d3.locale(locale.format).timeFormat.multi(multi);
+      }
+      vars.data.time.multiFormat = vars.data.time.format;
+
+    }
+    else {
+
+      var stepType = vars.data.time.stepType,
+          totalType = vars.data.time.totalType;
+
+      var getFormat = function(s,t,small) {
+
+        if (s === t) {
+          return small && locale.timeFormat[s+"Small"] ? locale.timeFormat[s+"Small"] : locale.timeFormat[s];
         }
         else {
-
-          var format;
-
-          if (t === "Date") {
-            format = locale.timeFormat[t];
+          if (periods.indexOf(s) >= 4 || periods.indexOf(t) <= 3) {
+            return locale.timeFormat[t+"-"+s];
           }
           else {
-            format = locale.timeFormat[t+"-Date"];
-          }
 
-          if (s === "Hours") {
-            return format +" "+ locale.timeFormat[s];
-          }
-          else {
-            return format +" "+ locale.timeFormat["Hours-"+s];
-          }
+            var format;
 
+            if (t === "Date") {
+              format = locale.timeFormat[t];
+            }
+            else {
+              format = locale.timeFormat[t+"-Date"];
+            }
+
+            if (s === "Hours") {
+              return format +" "+ locale.timeFormat[s];
+            }
+            else {
+              return format +" "+ locale.timeFormat["Hours-"+s];
+            }
+
+          }
         }
+
+      };
+
+      var multi = [],
+          functions = [
+            function(d) { return d.getMilliseconds(); },
+            function(d) { return d.getSeconds(); },
+            function(d) { return d.getMinutes(); },
+            function(d) { return d.getHours(); },
+            function(d) { return d.getDate() != 1; },
+            function(d) { return d.getMonth(); },
+            function(d) { return true; }
+          ];
+
+      for (var p = periods.indexOf(stepType); p <= periods.indexOf(totalType); p++) {
+        var prev = p-1 < periods.indexOf(stepType) ? periods[p] : periods[p-1];
+        var small = periods[p] === prev && stepType !== totalType;
+        var format = getFormat(prev,periods[p],small);
+        multi.push([format,functions[p]]);
       }
 
-    };
+      vars.data.time.format = d3.locale(locale.format).timeFormat(getFormat(stepType,totalType));
+      if (multi.length > 1) {
+        vars.data.time.multiFormat = d3.locale(locale.format).timeFormat.multi(multi);
+      }
+      else {
+        vars.data.time.multiFormat = vars.data.time.format
+      }
 
-    var multi = [],
-        functions = [
-          function(d) { return d.getMilliseconds(); },
-          function(d) { return d.getSeconds(); },
-          function(d) { return d.getMinutes(); },
-          function(d) { return d.getHours(); },
-          function(d) { return d.getDate() != 1; },
-          function(d) { return d.getMonth(); },
-          function(d) { return true; }
-        ];
-
-    for (var p = periods.indexOf(stepType); p <= periods.indexOf(totalType); p++) {
-      var prev = p-1 < periods.indexOf(stepType) ? periods[p] : periods[p-1];
-      var small = periods[p] === prev && stepType !== totalType;
-      var format = getFormat(prev,periods[p],small);
-      multi.push([format,functions[p]]);
     }
-
-    vars.data.time.format = d3.locale(locale.format).timeFormat(getFormat(stepType,totalType));
-    vars.data.time.multiFormat = d3.locale(locale.format).timeFormat.multi(multi);
 
     vars.data.time.ticks = [];
     var min = d3.min(vars.data.time.values);
@@ -11211,7 +11238,7 @@ module.exports = function( vars ) {
 
 };
 
-},{"../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee","../console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","./nest.js":"/Users/Dave/sites/d3plus/src/core/data/nest.js"}],"/Users/Dave/sites/d3plus/src/core/data/group.coffee":[function(require,module,exports){
+},{"../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js"}],"/Users/Dave/Sites/d3plus/src/core/data/group.coffee":[function(require,module,exports){
 var fetchValue;
 
 fetchValue = require("../fetch/value.coffee");
@@ -11254,7 +11281,7 @@ module.exports = function(vars, data, nesting) {
 
 
 
-},{"../fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/sites/d3plus/src/core/data/keys.js":[function(require,module,exports){
+},{"../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/data/keys.js":[function(require,module,exports){
 var validObject = require("../../object/validate.coffee");
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Get Key Types from Data
@@ -11297,7 +11324,7 @@ module.exports = function( vars , type ) {
 
 };
 
-},{"../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/sites/d3plus/src/core/data/load.coffee":[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/Sites/d3plus/src/core/data/load.coffee":[function(require,module,exports){
 var print, validObject;
 
 print = require("../console/print.coffee");
@@ -11393,50 +11420,19 @@ module.exports = function(vars, key, next) {
 
 
 
-},{"../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/core/data/nest.js":[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/core/data/nest.js":[function(require,module,exports){
 var fetchValue = require("../fetch/value.coffee"),
     validObject  = require("../../object/validate.coffee"),
     uniqueValues = require("../../util/uniques.coffee");
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Nests and groups the data.
 //------------------------------------------------------------------------------
-var dataNest = function(vars, flatData, nestingLevels, requirements) {
-
-  requirements = requirements || vars.types[vars.type.value].requirements || [];
+var dataNest = function(vars, flatData, nestingLevels) {
 
   var nestedData   = d3.nest(),
       groupedData  = [],
       segments     = "temp" in vars ? [ "active" , "temp" , "total" ] : [],
-      exceptions   = "time" in vars ? [ vars.time.value , vars.icon.value ] : [],
-      checkAxes    = function() {
-
-      //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-      // If the visualization has method requirements, check to see if we need
-      // to key the data by a discrete scale variable.
-      //------------------------------------------------------------------------
-      if ( requirements && requirements.length ) {
-
-        ["x","y"].forEach(function(axis){
-
-          var axisKey = vars[axis].value;
-
-          if (requirements.indexOf(axis) >= 0 && axisKey && vars[axis].scale.value === "discrete") {
-
-            exceptions.push(axisKey);
-
-            nestedData.key(function(d){
-              return fetchValue( vars , d , axisKey );
-            });
-
-          }
-
-        });
-
-      }
-
-    };
-
-  if (!(requirements instanceof Array)) requirements = [requirements];
+      exceptions   = "time" in vars ? [ vars.time.value , vars.icon.value ] : [];
 
   if (!nestingLevels.length) {
     nestedData.key(function(d){ return true; });
@@ -11457,8 +11453,6 @@ var dataNest = function(vars, flatData, nestingLevels, requirements) {
 
   }
 
-  checkAxes();
-
   var deepest_is_id = nestingLevels.length && vars.id.nesting.indexOf(nestingLevels[nestingLevels.length - 1]) >= 0;
   var i = nestingLevels.length && deepest_is_id ? nestingLevels.length - 1 : 0;
   var depthKey = deepest_is_id ? vars.id.nesting[i] : vars.depth.value;
@@ -11475,6 +11469,14 @@ var dataNest = function(vars, flatData, nestingLevels, requirements) {
       groupedData.push(leaves[0]);
       return leaves[0];
     }
+
+    leaves = leaves.reduce(function(arr, ll){
+      if (ll.values instanceof Array) {
+        return arr.concat(ll.values);
+      }
+      arr.push(ll);
+      return arr;
+    }, []);
 
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     // Create the "d3plus" object for the return variable, starting with
@@ -11721,7 +11723,7 @@ var rename_key_value = function(obj) {
 
 module.exports = dataNest;
 
-},{"../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee","../fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/sites/d3plus/src/core/data/threshold.js":[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/data/threshold.js":[function(require,module,exports){
 var arraySort = require("../../array/sort.coffee"),
     dataNest   = require("./nest.js"),
     fetchValue = require("../fetch/value.coffee"),
@@ -11847,6 +11849,9 @@ module.exports = function( vars , rawData , split ) {
       removed = arraySort( removed , vars.size.value , "desc" , [] , vars );
 
       var levels = vars.id.nesting.slice(0,vars.depth.value);
+      if (vars.types[vars.type.value].requirements.indexOf(vars.axes.discrete) >= 0) {
+        levels.push(vars[vars.axes.discrete].value);
+      }
       var merged = dataNest(vars, removed, levels);
 
       merged.forEach(function(m){
@@ -11933,7 +11938,7 @@ module.exports = function( vars , rawData , split ) {
 
 };
 
-},{"../../array/sort.coffee":"/Users/Dave/sites/d3plus/src/array/sort.coffee","../fetch/color.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee","../fetch/text.js":"/Users/Dave/sites/d3plus/src/core/fetch/text.js","../fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","./nest.js":"/Users/Dave/sites/d3plus/src/core/data/nest.js"}],"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee":[function(require,module,exports){
+},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js"}],"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee":[function(require,module,exports){
 var fetchValue, getColor, getRandom, randomColor, uniques, validColor, validObject;
 
 fetchValue = require("./value.coffee");
@@ -11947,7 +11952,7 @@ validObject = require("../../object/validate.coffee");
 uniques = require("../../util/uniques.coffee");
 
 module.exports = function(vars, id, level) {
-  var color, colorLevel, colors, i, obj, returnColor, value;
+  var color, colorLevel, colors, i, obj, value;
   obj = validObject(id);
   if (obj && "d3plus" in id && "color" in id.d3plus) {
     return id.d3plus.color;
@@ -11959,7 +11964,7 @@ module.exports = function(vars, id, level) {
     level = vars.id.nesting[level];
   }
   if (!vars.color.value) {
-    returnColor = getRandom(vars, id, level);
+    return getRandom(vars, id, level);
   } else {
     colors = [];
     i = vars.id.nesting.indexOf(level);
@@ -11978,9 +11983,12 @@ module.exports = function(vars, id, level) {
       }
       i--;
     }
-    returnColor = colors.length === 1 ? colors[0] : vars.color.missing;
+    if (colors.length === 1) {
+      return colors[0];
+    } else {
+      return vars.color.missing;
+    }
   }
-  return returnColor;
 };
 
 getColor = function(vars, id, color, level) {
@@ -12012,7 +12020,7 @@ getRandom = function(vars, c, level) {
 
 
 
-},{"../../color/random.coffee":"/Users/Dave/sites/d3plus/src/color/random.coffee","../../color/validate.coffee":"/Users/Dave/sites/d3plus/src/color/validate.coffee","../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee","./value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/sites/d3plus/src/core/fetch/data.js":[function(require,module,exports){
+},{"../../color/random.coffee":"/Users/Dave/Sites/d3plus/src/color/random.coffee","../../color/validate.coffee":"/Users/Dave/Sites/d3plus/src/color/validate.coffee","../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/fetch/data.js":[function(require,module,exports){
 var dataFilter = require("../data/filter.js"),
     dataNest     = require("../data/nest.js"),
     print        = require("../console/print.coffee"),
@@ -12093,7 +12101,7 @@ module.exports = function(vars, years, depth) {
                   .concat( years ),
       filter  = vars.data.solo.length ? "solo" : "mute",
       cacheKeys = d3.keys(vars.data.cache),
-      vizFilter = vars.types[vars.type.value].filter || null;
+      vizFilter = vars.types[vars.type.value].filter || undefined;
 
   if ( vars.data[filter].length ) {
     for (var di = 0; di < vars.data[filter].length; di++) {
@@ -12141,7 +12149,7 @@ module.exports = function(vars, years, depth) {
     var missing = [];
     returnData = [];
 
-    if ( vars.data.value && vars.data.value.length ) {
+    if (vars.data.value && vars.data.value.length) {
 
       for (var yz = 0; yz < years.length; yz++) {
         var year = years[yz];
@@ -12157,14 +12165,12 @@ module.exports = function(vars, years, depth) {
 
     if (returnData.length === 0 && missing.length && !vars.error.internal) {
 
-      var format = vars.time.format.value || vars.data.time.format;
-
       if (missing.length > 1) {
         missing = d3.extent(missing);
       }
 
       missing = missing.map(function(m){
-        return format(new Date(m));
+        return vars.data.time.format(new Date(m));
       });
       missing = missing.join(" - ");
 
@@ -12200,9 +12206,7 @@ module.exports = function(vars, years, depth) {
         returnData = [];
       }
       else {
-
         returnData = dataFilter(vars, returnData);
-
       }
 
       if ( cacheKeys.length === 20 ) {
@@ -12227,7 +12231,7 @@ module.exports = function(vars, years, depth) {
 
 };
 
-},{"../../string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js","../../string/list.coffee":"/Users/Dave/sites/d3plus/src/string/list.coffee","../console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../data/filter.js":"/Users/Dave/sites/d3plus/src/core/data/filter.js","../data/nest.js":"/Users/Dave/sites/d3plus/src/core/data/nest.js"}],"/Users/Dave/sites/d3plus/src/core/fetch/sort.coffee":[function(require,module,exports){
+},{"../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../data/filter.js":"/Users/Dave/Sites/d3plus/src/core/data/filter.js","../data/nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js"}],"/Users/Dave/Sites/d3plus/src/core/fetch/sort.coffee":[function(require,module,exports){
 var fetchColor, fetchText, fetchValue;
 
 fetchValue = require("./value.coffee");
@@ -12272,7 +12276,7 @@ module.exports = function(vars, d, keys, colors, depth) {
 
 
 
-},{"./color.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee","./text.js":"/Users/Dave/sites/d3plus/src/core/fetch/text.js","./value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/sites/d3plus/src/core/fetch/text.js":[function(require,module,exports){
+},{"./color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","./text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","./value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/fetch/text.js":[function(require,module,exports){
 var fetchValue = require("./value.coffee"),
     validObject = require("../../object/validate.coffee"),
     uniques     = require("../../util/uniques.coffee");
@@ -12354,8 +12358,8 @@ module.exports = function(vars, obj, depth) {
 
 };
 
-},{"../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee","./value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee":[function(require,module,exports){
-var aggregate, cacheInit, checkAttrs, checkData, fetch, fetchArray, filterArray, find, uniqueValues, validObject, valueParse;
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee":[function(require,module,exports){
+var cacheInit, checkAttrs, checkData, fetch, fetchArray, filterArray, find, uniqueValues, validObject, valueParse;
 
 validObject = require("../../object/validate.coffee");
 
@@ -12515,33 +12519,26 @@ valueParse = function(vars, node, depth, variable, val) {
   return val;
 };
 
-aggregate = function(vars, arr, variable) {
-  var agg;
-  if (!(arr instanceof Array)) {
-    return arr;
-  }
-  if (vars.aggs && variable in vars.aggs.value) {
-    agg = vars.aggs.value[variable];
-    if (typeof agg === "function") {
-      return agg(arr);
-    } else {
-      return d3[agg](arr);
-    }
-  } else if (typeof arr[0] === "number") {
-    return d3.sum(arr);
-  }
-  return uniqueValues(arr);
-};
-
 fetchArray = function(vars, arr, variable, depth) {
   var item, v, val, _i, _len;
   val = [];
   for (_i = 0, _len = arr.length; _i < _len; _i++) {
     item = arr[_i];
-    v = find(vars, item, variable, depth);
-    val.push(valueParse(vars, item, depth, variable, v));
+    if (validObject(item)) {
+      v = find(vars, item, variable, depth);
+      val.push(valueParse(vars, item, depth, variable, v));
+    } else {
+      val.push(item);
+    }
   }
-  return aggregate(vars, val, variable);
+  if (typeof val[0] !== "number") {
+    val = uniqueValues(val);
+  }
+  if (val.length === 1) {
+    return val[0];
+  } else {
+    return val;
+  }
 };
 
 fetch = function(vars, node, variable, depth) {
@@ -12573,7 +12570,7 @@ module.exports = fetch;
 
 
 
-},{"../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/sites/d3plus/src/core/font/tester.coffee":[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/core/font/tester.coffee":[function(require,module,exports){
 module.exports = function(type) {
   var attrs, styles, tester;
   if (["div", "svg"].indexOf(type) < 0) {
@@ -12596,7 +12593,7 @@ module.exports = function(type) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/core/locale/languages/en_US.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee":[function(require,module,exports){
 module.exports = {
   dev: {
     accepted: "{0} is not an accepted value for {1}, please use one of the following: {2}.",
@@ -12732,7 +12729,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/core/locale/languages/mk_MK.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/locale/languages/mk_MK.js":[function(require,module,exports){
 module.exports = {
     "dev": {
         "accepted": "{0} не е прифатенa вредноста за {1}, ве молиме користете еднa од следниве вредности: {2}.",
@@ -12862,7 +12859,7 @@ module.exports = {
     "uppercase": ["CEOs", "CFOs", "CNC", "COOs", "HVAC", "TV", "UI"]
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/core/locale/languages/pt_BR.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/locale/languages/pt_BR.js":[function(require,module,exports){
 module.exports = {
     "dev": {
         "accepted": "{0} não é um valor aceito para {1}, por favor, use um dos seguintes procedimentos: {2}.",
@@ -12992,7 +12989,7 @@ module.exports = {
     "uppercase": ["CEOs", "CFOs", "CNC", "COOs", "HVAC", "P&D", "TV", "UI"]
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/core/locale/languages/zh_CN.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/locale/languages/zh_CN.js":[function(require,module,exports){
 module.exports = {
     "dev": {
         "accepted": "{0}不是{1}的可接受值, 请用下列之一的值:{2}",
@@ -13127,7 +13124,7 @@ module.exports = {
     ]
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/core/locale/locale.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/locale/locale.coffee":[function(require,module,exports){
 module.exports = {
   en_US: require("./languages/en_US.coffee"),
   mk_MK: require("./languages/mk_MK.js"),
@@ -13137,7 +13134,7 @@ module.exports = {
 
 
 
-},{"./languages/en_US.coffee":"/Users/Dave/sites/d3plus/src/core/locale/languages/en_US.coffee","./languages/mk_MK.js":"/Users/Dave/sites/d3plus/src/core/locale/languages/mk_MK.js","./languages/pt_BR.js":"/Users/Dave/sites/d3plus/src/core/locale/languages/pt_BR.js","./languages/zh_CN.js":"/Users/Dave/sites/d3plus/src/core/locale/languages/zh_CN.js"}],"/Users/Dave/sites/d3plus/src/core/methods/attach.coffee":[function(require,module,exports){
+},{"./languages/en_US.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee","./languages/mk_MK.js":"/Users/Dave/Sites/d3plus/src/core/locale/languages/mk_MK.js","./languages/pt_BR.js":"/Users/Dave/Sites/d3plus/src/core/locale/languages/pt_BR.js","./languages/zh_CN.js":"/Users/Dave/Sites/d3plus/src/core/locale/languages/zh_CN.js"}],"/Users/Dave/Sites/d3plus/src/core/methods/attach.coffee":[function(require,module,exports){
 var checkObject, copy, createFunction, initialize, print, process, setMethod, stringFormat, validObject;
 
 copy = require("../../util/copy.coffee");
@@ -13312,7 +13309,7 @@ checkObject = function(vars, method, object, key, value) {
 
 
 
-},{"../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js","../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee","../console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","./process/detect.coffee":"/Users/Dave/sites/d3plus/src/core/methods/process/detect.coffee","./set.coffee":"/Users/Dave/sites/d3plus/src/core/methods/set.coffee"}],"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee":[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./process/detect.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/detect.coffee","./set.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/set.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee":[function(require,module,exports){
 module.exports = function(g) {
   if (!g) {
     g = false;
@@ -13331,7 +13328,7 @@ module.exports = function(g) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/core/methods/font/align.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee":[function(require,module,exports){
 var rtl;
 
 rtl = require("../../../client/rtl.coffee");
@@ -13363,7 +13360,7 @@ module.exports = function(align) {
 
 
 
-},{"../../../client/rtl.coffee":"/Users/Dave/sites/d3plus/src/client/rtl.coffee"}],"/Users/Dave/sites/d3plus/src/core/methods/font/decoration.coffee":[function(require,module,exports){
+},{"../../../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee":[function(require,module,exports){
 module.exports = function(decoration) {
   if (!decoration) {
     decoration = "none";
@@ -13376,7 +13373,7 @@ module.exports = function(decoration) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee":[function(require,module,exports){
 var helvetica, validate;
 
 validate = require("../../../font/validate.coffee");
@@ -13395,7 +13392,7 @@ module.exports = function(family) {
 
 
 
-},{"../../../font/validate.coffee":"/Users/Dave/sites/d3plus/src/font/validate.coffee"}],"/Users/Dave/sites/d3plus/src/core/methods/font/position.coffee":[function(require,module,exports){
+},{"../../../font/validate.coffee":"/Users/Dave/Sites/d3plus/src/font/validate.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/font/position.coffee":[function(require,module,exports){
 module.exports = function(position) {
   if (!position) {
     position = "bottom";
@@ -13417,7 +13414,7 @@ module.exports = function(position) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee":[function(require,module,exports){
 module.exports = function(transform) {
   if (!transform) {
     transform = "none";
@@ -13430,7 +13427,7 @@ module.exports = function(transform) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/core/methods/process/data.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee":[function(require,module,exports){
 var d3selection;
 
 d3selection = require("../../../util/d3selection.coffee");
@@ -13457,7 +13454,7 @@ module.exports = function(value, vars, method) {
 
 
 
-},{"../../../util/d3selection.coffee":"/Users/Dave/sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/sites/d3plus/src/core/methods/process/detect.coffee":[function(require,module,exports){
+},{"../../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/process/detect.coffee":[function(require,module,exports){
 var copy, update;
 
 copy = require("../../../util/copy.coffee");
@@ -13478,7 +13475,7 @@ module.exports = function(vars, object, value) {
 
 
 
-},{"../../../array/update.coffee":"/Users/Dave/sites/d3plus/src/array/update.coffee","../../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/sites/d3plus/src/core/methods/process/icon.coffee":[function(require,module,exports){
+},{"../../../array/update.coffee":"/Users/Dave/Sites/d3plus/src/array/update.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/process/icon.coffee":[function(require,module,exports){
 var stylesheet;
 
 stylesheet = require("../../../client/css.coffee");
@@ -13493,7 +13490,7 @@ module.exports = function(value, vars, method) {
 
 
 
-},{"../../../client/css.coffee":"/Users/Dave/sites/d3plus/src/client/css.coffee"}],"/Users/Dave/sites/d3plus/src/core/methods/rejected.coffee":[function(require,module,exports){
+},{"../../../client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/rejected.coffee":[function(require,module,exports){
 var contains, format, list, print;
 
 contains = require("../../array/contains.coffee");
@@ -13525,8 +13522,10 @@ module.exports = function(vars, accepted, value, method, text) {
         recs.push("\"" + a + "\"");
       } else if (typeof a === "function") {
         recs.push(a.toString().split("()")[0].substring(9));
+      } else if (a === void 0) {
+        recs.push("undefined");
       } else {
-        recs.push(a.toString());
+        recs.push(JSON.stringify(a));
       }
     }
     recs = list(recs, vars.format.locale.value.ui.or);
@@ -13544,7 +13543,7 @@ module.exports = function(vars, accepted, value, method, text) {
 
 
 
-},{"../../array/contains.coffee":"/Users/Dave/sites/d3plus/src/array/contains.coffee","../../string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js","../../string/list.coffee":"/Users/Dave/sites/d3plus/src/string/list.coffee","../console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/core/methods/rendering.coffee":[function(require,module,exports){
+},{"../../array/contains.coffee":"/Users/Dave/Sites/d3plus/src/array/contains.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/rendering.coffee":[function(require,module,exports){
 module.exports = function(rendering) {
   var accepted;
   accepted = ["auto", "optimizeSpeed", "crispEdges", "geometricPrecision"];
@@ -13559,7 +13558,7 @@ module.exports = function(rendering) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/core/methods/reset.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/reset.coffee":[function(require,module,exports){
 var reset, validObject;
 
 validObject = require("../../object/validate.coffee");
@@ -13585,7 +13584,7 @@ module.exports = reset;
 
 
 
-},{"../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/sites/d3plus/src/core/methods/set.coffee":[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/set.coffee":[function(require,module,exports){
 var copy, d3selection, mergeObject, print, process, rejected, stringFormat, updateArray, validObject;
 
 copy = require("../../util/copy.coffee");
@@ -13738,7 +13737,7 @@ module.exports = function(vars, method, object, key, value) {
 
 
 
-},{"../../array/update.coffee":"/Users/Dave/sites/d3plus/src/array/update.coffee","../../object/merge.coffee":"/Users/Dave/sites/d3plus/src/object/merge.coffee","../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js","../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee","../../util/d3selection.coffee":"/Users/Dave/sites/d3plus/src/util/d3selection.coffee","../console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","./process/detect.coffee":"/Users/Dave/sites/d3plus/src/core/methods/process/detect.coffee","./rejected.coffee":"/Users/Dave/sites/d3plus/src/core/methods/rejected.coffee"}],"/Users/Dave/sites/d3plus/src/core/parse/edges.js":[function(require,module,exports){
+},{"../../array/update.coffee":"/Users/Dave/Sites/d3plus/src/array/update.coffee","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./process/detect.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/detect.coffee","./rejected.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/rejected.coffee"}],"/Users/Dave/Sites/d3plus/src/core/parse/edges.js":[function(require,module,exports){
 var print = require("../console/print.coffee"),
     stringFormat = require("../../string/format.js")
 
@@ -13818,7 +13817,7 @@ module.exports = function( vars ) {
 
 }
 
-},{"../../string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js","../console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/core/parse/element.js":[function(require,module,exports){
+},{"../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/core/parse/element.js":[function(require,module,exports){
 // Parses an HTML element for data
 module.exports = function( vars ) {
 
@@ -13938,21 +13937,6 @@ module.exports = function( vars ) {
 
   }
 
-  function hideElement( elem ) {
-
-    elem
-      .style("position","absolute","important")
-      .style("clip","rect(1px 1px 1px 1px)","important")
-      .style("clip","rect(1px, 1px, 1px, 1px)","important")
-      .style("width","1px","important")
-      .style("height","1px","important")
-      .style("margin","-1px","important")
-      .style("padding","0","important")
-      .style("border","0","important")
-      .style("overflow","hidden","important")
-
-  }
-
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // If a <legend> element exists, use it as the title.
   //----------------------------------------------------------------------------
@@ -13971,11 +13955,28 @@ module.exports = function( vars ) {
     vars.container.value = d3.select(vars.data.element.value.node().parentNode)
   }
 
+  vars.data.element.value.call(hideElement)
+
   return elementData
+
+};
+
+function hideElement( elem ) {
+
+  elem
+    .style("position","absolute","important")
+    .style("clip","rect(1px 1px 1px 1px)","important")
+    .style("clip","rect(1px, 1px, 1px, 1px)","important")
+    .style("width","1px","important")
+    .style("height","1px","important")
+    .style("margin","-1px","important")
+    .style("padding","0","important")
+    .style("border","0","important")
+    .style("overflow","hidden","important");
 
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/core/parse/nodes.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/parse/nodes.js":[function(require,module,exports){
 var print = require("../console/print.coffee")
 
 // Calculates node positions, if needed for network.
@@ -14032,7 +14033,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/data/bestRegress.coffee":[function(require,module,exports){
+},{"../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/data/bestRegress.coffee":[function(require,module,exports){
 var numeric;
 
 numeric = require('numeric');
@@ -14110,7 +14111,7 @@ module.exports = function(data, options) {
 
 
 
-},{"numeric":"/Users/Dave/sites/d3plus/node_modules/numeric/numeric-1.2.6.js"}],"/Users/Dave/sites/d3plus/src/data/lof.coffee":[function(require,module,exports){
+},{"numeric":"/Users/Dave/Sites/d3plus/node_modules/numeric/numeric-1.2.6.js"}],"/Users/Dave/Sites/d3plus/src/data/lof.coffee":[function(require,module,exports){
 var kdtree;
 
 kdtree = require('static-kdtree');
@@ -14192,7 +14193,7 @@ module.exports = function(points, K) {
 
 
 
-},{"static-kdtree":"/Users/Dave/sites/d3plus/node_modules/static-kdtree/kdtree.js"}],"/Users/Dave/sites/d3plus/src/data/mad.coffee":[function(require,module,exports){
+},{"static-kdtree":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/kdtree.js"}],"/Users/Dave/Sites/d3plus/src/data/mad.coffee":[function(require,module,exports){
 module.exports = function(points) {
   var mad, median, result;
   median = d3.median(points);
@@ -14209,7 +14210,7 @@ module.exports = function(points) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/font/sizes.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/font/sizes.coffee":[function(require,module,exports){
 var fontTester;
 
 fontTester = require("../core/font/tester.coffee");
@@ -14261,7 +14262,7 @@ module.exports = function(words, style, opts) {
 
 
 
-},{"../core/font/tester.coffee":"/Users/Dave/sites/d3plus/src/core/font/tester.coffee"}],"/Users/Dave/sites/d3plus/src/font/validate.coffee":[function(require,module,exports){
+},{"../core/font/tester.coffee":"/Users/Dave/Sites/d3plus/src/core/font/tester.coffee"}],"/Users/Dave/Sites/d3plus/src/font/validate.coffee":[function(require,module,exports){
 var fontTester, validate;
 
 fontTester = require("../core/font/tester.coffee");
@@ -14320,7 +14321,7 @@ module.exports = validate;
 
 
 
-},{"../core/font/tester.coffee":"/Users/Dave/sites/d3plus/src/core/font/tester.coffee"}],"/Users/Dave/sites/d3plus/src/form/form.js":[function(require,module,exports){
+},{"../core/font/tester.coffee":"/Users/Dave/Sites/d3plus/src/core/font/tester.coffee"}],"/Users/Dave/Sites/d3plus/src/form/form.js":[function(require,module,exports){
 var arraySort = require("../array/sort.coffee"),
     attach      = require("../core/methods/attach.coffee"),
     dataFormat  = require("../core/data/format.js"),
@@ -14341,8 +14342,8 @@ module.exports = function() {
   var vars = {
     "types": {
       "auto": require("./types/auto.js"),
-      "button": require("./types/button/button.js"),
-      "drop": require("./types/drop/drop.js"),
+      "button": require("./types/button/button.coffee"),
+      "drop": require("./types/drop/drop.coffee"),
       "toggle": require("./types/toggle.js")
     }
   };
@@ -14515,14 +14516,27 @@ module.exports = function() {
         if (tag === "select") {
           vars.data.element.value.selectAll("option")
             .each(function(d){
-              var level = getLevel(d);
-              if (d[level] === vars.focus.value) {
+              if (d[getLevel(d)] === vars.focus.value) {
                 this.selected = true;
               }
               else {
                 this.selected = false;
               }
             });
+        }
+        else {
+          var tag = vars.data.element.value.attr("type").toLowerCase();
+          if (tag === "radio") {
+            vars.data.element.value
+              .each(function(d){
+                if (this.value === vars.focus.value) {
+                  this.checked = true;
+                }
+                else {
+                  this.checked = false;
+                }
+              })
+          }
         }
       }
 
@@ -14677,7 +14691,7 @@ module.exports = function() {
 
 };
 
-},{"../array/sort.coffee":"/Users/Dave/sites/d3plus/src/array/sort.coffee","../client/ie.js":"/Users/Dave/sites/d3plus/src/client/ie.js","../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../core/data/format.js":"/Users/Dave/sites/d3plus/src/core/data/format.js","../core/data/keys.js":"/Users/Dave/sites/d3plus/src/core/data/keys.js","../core/data/load.coffee":"/Users/Dave/sites/d3plus/src/core/data/load.coffee","../core/fetch/data.js":"/Users/Dave/sites/d3plus/src/core/fetch/data.js","../core/methods/attach.coffee":"/Users/Dave/sites/d3plus/src/core/methods/attach.coffee","../core/methods/reset.coffee":"/Users/Dave/sites/d3plus/src/core/methods/reset.coffee","./methods/active.coffee":"/Users/Dave/sites/d3plus/src/form/methods/active.coffee","./methods/alt.coffee":"/Users/Dave/sites/d3plus/src/form/methods/alt.coffee","./methods/color.coffee":"/Users/Dave/sites/d3plus/src/form/methods/color.coffee","./methods/config.coffee":"/Users/Dave/sites/d3plus/src/form/methods/config.coffee","./methods/container.coffee":"/Users/Dave/sites/d3plus/src/form/methods/container.coffee","./methods/data.js":"/Users/Dave/sites/d3plus/src/form/methods/data.js","./methods/depth.coffee":"/Users/Dave/sites/d3plus/src/form/methods/depth.coffee","./methods/dev.coffee":"/Users/Dave/sites/d3plus/src/form/methods/dev.coffee","./methods/draw.js":"/Users/Dave/sites/d3plus/src/form/methods/draw.js","./methods/focus.coffee":"/Users/Dave/sites/d3plus/src/form/methods/focus.coffee","./methods/font.coffee":"/Users/Dave/sites/d3plus/src/form/methods/font.coffee","./methods/format.coffee":"/Users/Dave/sites/d3plus/src/form/methods/format.coffee","./methods/height.coffee":"/Users/Dave/sites/d3plus/src/form/methods/height.coffee","./methods/history.coffee":"/Users/Dave/sites/d3plus/src/form/methods/history.coffee","./methods/hover.coffee":"/Users/Dave/sites/d3plus/src/form/methods/hover.coffee","./methods/icon.coffee":"/Users/Dave/sites/d3plus/src/form/methods/icon.coffee","./methods/id.coffee":"/Users/Dave/sites/d3plus/src/form/methods/id.coffee","./methods/keywords.coffee":"/Users/Dave/sites/d3plus/src/form/methods/keywords.coffee","./methods/margin.coffee":"/Users/Dave/sites/d3plus/src/form/methods/margin.coffee","./methods/open.coffee":"/Users/Dave/sites/d3plus/src/form/methods/open.coffee","./methods/order.coffee":"/Users/Dave/sites/d3plus/src/form/methods/order.coffee","./methods/remove.coffee":"/Users/Dave/sites/d3plus/src/form/methods/remove.coffee","./methods/search.coffee":"/Users/Dave/sites/d3plus/src/form/methods/search.coffee","./methods/select.coffee":"/Users/Dave/sites/d3plus/src/form/methods/select.coffee","./methods/selectAll.coffee":"/Users/Dave/sites/d3plus/src/form/methods/selectAll.coffee","./methods/text.coffee":"/Users/Dave/sites/d3plus/src/form/methods/text.coffee","./methods/timing.coffee":"/Users/Dave/sites/d3plus/src/form/methods/timing.coffee","./methods/title.coffee":"/Users/Dave/sites/d3plus/src/form/methods/title.coffee","./methods/type.coffee":"/Users/Dave/sites/d3plus/src/form/methods/type.coffee","./methods/ui.coffee":"/Users/Dave/sites/d3plus/src/form/methods/ui.coffee","./methods/width.coffee":"/Users/Dave/sites/d3plus/src/form/methods/width.coffee","./types/auto.js":"/Users/Dave/sites/d3plus/src/form/types/auto.js","./types/button/button.js":"/Users/Dave/sites/d3plus/src/form/types/button/button.js","./types/drop/drop.js":"/Users/Dave/sites/d3plus/src/form/types/drop/drop.js","./types/toggle.js":"/Users/Dave/sites/d3plus/src/form/types/toggle.js"}],"/Users/Dave/sites/d3plus/src/form/methods/active.coffee":[function(require,module,exports){
+},{"../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../core/data/format.js":"/Users/Dave/Sites/d3plus/src/core/data/format.js","../core/data/keys.js":"/Users/Dave/Sites/d3plus/src/core/data/keys.js","../core/data/load.coffee":"/Users/Dave/Sites/d3plus/src/core/data/load.coffee","../core/fetch/data.js":"/Users/Dave/Sites/d3plus/src/core/fetch/data.js","../core/methods/attach.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/attach.coffee","../core/methods/reset.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/reset.coffee","./methods/active.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/active.coffee","./methods/alt.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/alt.coffee","./methods/color.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/color.coffee","./methods/config.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/config.coffee","./methods/container.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/container.coffee","./methods/data.js":"/Users/Dave/Sites/d3plus/src/form/methods/data.js","./methods/depth.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/depth.coffee","./methods/dev.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/dev.coffee","./methods/draw.js":"/Users/Dave/Sites/d3plus/src/form/methods/draw.js","./methods/focus.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/focus.coffee","./methods/font.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/font.coffee","./methods/format.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/format.coffee","./methods/height.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/height.coffee","./methods/history.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/history.coffee","./methods/hover.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/hover.coffee","./methods/icon.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/icon.coffee","./methods/id.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/id.coffee","./methods/keywords.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/keywords.coffee","./methods/margin.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/margin.coffee","./methods/open.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/open.coffee","./methods/order.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/order.coffee","./methods/remove.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/remove.coffee","./methods/search.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/search.coffee","./methods/select.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/select.coffee","./methods/selectAll.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/selectAll.coffee","./methods/text.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/text.coffee","./methods/timing.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/timing.coffee","./methods/title.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/title.coffee","./methods/type.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/type.coffee","./methods/ui.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/ui.coffee","./methods/width.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/width.coffee","./types/auto.js":"/Users/Dave/Sites/d3plus/src/form/types/auto.js","./types/button/button.coffee":"/Users/Dave/Sites/d3plus/src/form/types/button/button.coffee","./types/drop/drop.coffee":"/Users/Dave/Sites/d3plus/src/form/types/drop/drop.coffee","./types/toggle.js":"/Users/Dave/Sites/d3plus/src/form/types/toggle.js"}],"/Users/Dave/Sites/d3plus/src/form/methods/active.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -14689,7 +14703,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/form/methods/alt.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/alt.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -14703,7 +14717,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/form/methods/color.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/color.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [String],
   value: "color"
@@ -14711,7 +14725,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/config.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/config.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Object],
   objectAccess: false,
@@ -14730,7 +14744,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/container.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/container.coffee":[function(require,module,exports){
 var d3selection;
 
 d3selection = require("../../util/d3selection.coffee");
@@ -14755,7 +14769,7 @@ module.exports = {
 
 
 
-},{"../../util/d3selection.coffee":"/Users/Dave/sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/sites/d3plus/src/form/methods/data.js":[function(require,module,exports){
+},{"../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/data.js":[function(require,module,exports){
 var d3selection = require("../../util/d3selection.coffee"),
     process = require("../../core/methods/process/data.coffee");
 
@@ -14778,20 +14792,7 @@ module.exports = {
       }
 
       if (element) {
-
         vars.self.container(d3.select(element.node().parentNode));
-
-        element
-          .style("position","absolute","important")
-          .style("clip","rect(1px 1px 1px 1px)","important")
-          .style("clip","rect(1px, 1px, 1px, 1px)","important")
-          .style("width","1px","important")
-          .style("height","1px","important")
-          .style("margin","-1px","important")
-          .style("padding","0","important")
-          .style("border","0","important")
-          .style("overflow","hidden","important");
-
       }
 
       return element;
@@ -14821,7 +14822,7 @@ module.exports = {
   "value"    : false
 };
 
-},{"../../core/methods/process/data.coffee":"/Users/Dave/sites/d3plus/src/core/methods/process/data.coffee","../../util/d3selection.coffee":"/Users/Dave/sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/sites/d3plus/src/form/methods/depth.coffee":[function(require,module,exports){
+},{"../../core/methods/process/data.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee","../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/depth.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Number],
   value: 0
@@ -14829,7 +14830,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/dev.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/dev.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   value: false
@@ -14837,7 +14838,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/draw.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/draw.js":[function(require,module,exports){
 var d3selection  = require("../../util/d3selection.coffee"),
     parseElement = require("../../core/parse/element.js"),
     print        = require("../../core/console/print.coffee"),
@@ -14904,7 +14905,7 @@ module.exports = {
   "value"    : undefined
 }
 
-},{"../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../core/parse/element.js":"/Users/Dave/sites/d3plus/src/core/parse/element.js","../../string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js","../../util/d3selection.coffee":"/Users/Dave/sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/sites/d3plus/src/form/methods/focus.coffee":[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/parse/element.js":"/Users/Dave/Sites/d3plus/src/core/parse/element.js","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/focus.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number, String],
   deprecates: "highlight",
@@ -14936,7 +14937,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/font.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/font.coffee":[function(require,module,exports){
 var align, decoration, family, transform;
 
 family = require("../../core/methods/font/family.coffee");
@@ -14970,7 +14971,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/align.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/sites/d3plus/src/form/methods/format.coffee":[function(require,module,exports){
+},{"../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/format.coffee":[function(require,module,exports){
 var formatNumber, locale, mergeObject, titleCase;
 
 formatNumber = require("../../number/format.js");
@@ -15026,9 +15027,8 @@ module.exports = {
       vars = {};
     }
     if (vars.time && vars.time.value && key === vars.time.value) {
-      f = vars.time.format.value || vars.data.time.format;
       v = (value.constructor === Date ? value : new Date(value));
-      return f(v);
+      return vars.data.time.format(v);
     } else if (typeof value === "number") {
       f = this.number.value || formatNumber;
       return f(value, key, vars, data);
@@ -15043,7 +15043,7 @@ module.exports = {
 
 
 
-},{"../../core/locale/locale.coffee":"/Users/Dave/sites/d3plus/src/core/locale/locale.coffee","../../number/format.js":"/Users/Dave/sites/d3plus/src/number/format.js","../../object/merge.coffee":"/Users/Dave/sites/d3plus/src/object/merge.coffee","../../string/title.coffee":"/Users/Dave/sites/d3plus/src/string/title.coffee"}],"/Users/Dave/sites/d3plus/src/form/methods/height.coffee":[function(require,module,exports){
+},{"../../core/locale/locale.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/locale.coffee","../../number/format.js":"/Users/Dave/Sites/d3plus/src/number/format.js","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/height.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   max: 600,
@@ -15053,7 +15053,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/history.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/history.coffee":[function(require,module,exports){
 module.exports = {
   back: function() {
     if (this.states.length) {
@@ -15066,15 +15066,15 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/hover.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/hover.coffee":[function(require,module,exports){
 module.exports = {
-  accepted: [false, Number, String],
+  accepted: [Boolean, Number, String],
   value: false
 };
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/icon.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/icon.coffee":[function(require,module,exports){
 var process;
 
 process = require("../../core/methods/process/icon.coffee");
@@ -15130,7 +15130,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/process/icon.coffee":"/Users/Dave/sites/d3plus/src/core/methods/process/icon.coffee"}],"/Users/Dave/sites/d3plus/src/form/methods/id.coffee":[function(require,module,exports){
+},{"../../core/methods/process/icon.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/icon.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/id.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -15146,7 +15146,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/form/methods/keywords.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/keywords.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -15160,7 +15160,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/form/methods/margin.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/margin.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Number, Object, String],
   process: function(value) {
@@ -15229,7 +15229,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/open.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/open.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   flipped: {
@@ -15241,7 +15241,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/order.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/order.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Function, String],
   sort: {
@@ -15254,7 +15254,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/remove.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/remove.coffee":[function(require,module,exports){
 module.exports = {
   accepted: void 0,
   process: function(value, vars) {
@@ -15267,7 +15267,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/search.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/search.coffee":[function(require,module,exports){
 module.exports = {
   accepted: ["auto", Boolean],
   process: function(value) {
@@ -15276,12 +15276,13 @@ module.exports = {
     }
     return value;
   },
+  term: "",
   value: "auto"
 };
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/select.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/select.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [String],
   chainable: false,
@@ -15299,7 +15300,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/selectAll.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/selectAll.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [String],
   chainable: false,
@@ -15317,7 +15318,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/text.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/text.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -15337,7 +15338,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/form/methods/timing.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/timing.coffee":[function(require,module,exports){
 module.exports = {
   mouseevents: 60,
   ui: 200
@@ -15345,7 +15346,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/title.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/title.coffee":[function(require,module,exports){
 var decoration, family, stringStrip, transform;
 
 decoration = require("../../core/methods/font/decoration.coffee");
@@ -15383,7 +15384,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/decoration.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee","../../string/strip.js":"/Users/Dave/sites/d3plus/src/string/strip.js"}],"/Users/Dave/sites/d3plus/src/form/methods/type.coffee":[function(require,module,exports){
+},{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee","../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js"}],"/Users/Dave/Sites/d3plus/src/form/methods/type.coffee":[function(require,module,exports){
 module.exports = {
   accepted: function(vars) {
     return d3.keys(vars.types);
@@ -15393,7 +15394,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/methods/ui.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/ui.coffee":[function(require,module,exports){
 var align, decoration, family, transform;
 
 family = require("../../core/methods/font/family.coffee");
@@ -15443,7 +15444,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/align.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/sites/d3plus/src/form/methods/width.coffee":[function(require,module,exports){
+},{"../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/width.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   secondary: false,
@@ -15452,7 +15453,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/form/types/auto.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/auto.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Determines form type based on data length.
 //------------------------------------------------------------------------------
@@ -15472,155 +15473,101 @@ module.exports = function( vars ) {
 
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/form/types/button/button.js":[function(require,module,exports){
-var print = require("../../../core/console/print.coffee"),
-    color = require("./functions/color.js"),
-    icons = require("./functions/icons.js"),
-    mouseevents = require("./functions/mouseevents.js"),
-    style = require("./functions/style.js")
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-// Creates a Button
-//------------------------------------------------------------------------------
-module.exports = function( vars ) {
-
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Bind Data to Buttons
-  //----------------------------------------------------------------------------
-  var button = vars.container.ui.selectAll("div.d3plus_node")
-    .data(vars.data.viz,function(d){
-      return d[vars.id.value]
-    })
-
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Enter Buttons
-  //----------------------------------------------------------------------------
-  if ( vars.dev.value ) print.time("enter")
-
-  button.enter().append("div")
-    .attr("class","d3plus_node")
-    .call( color , vars )
-    .call( style , vars )
-    .call( icons , vars )
-    .call( mouseevents , vars , color )
-
-  if ( vars.dev.value ) print.timeEnd("enter")
-
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Update Buttons
-  //----------------------------------------------------------------------------
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/button/button.coffee":[function(require,module,exports){
+module.exports = function(vars) {
+  var button, checks, color, icons, mouseevents, print, style, updatedButtons;
+  print = require("../../../core/console/print.coffee");
+  color = require("./functions/color.coffee");
+  icons = require("./functions/icons.js");
+  mouseevents = require("./functions/mouseevents.coffee");
+  style = require("./functions/style.js");
+  button = vars.container.ui.selectAll('div.d3plus_node').data(vars.data.viz, function(d) {
+    return d[vars.id.value];
+  });
+  if (vars.dev.value) {
+    print.time("enter");
+  }
+  button.enter().append("div").attr("class", "d3plus_node").call(color, vars).call(style, vars).call(icons, vars).call(mouseevents, vars);
+  if (vars.dev.value) {
+    print.timeEnd("enter");
+  }
   if (vars.draw.update || vars.draw.timing) {
-
-    if ( vars.dev.value ) print.time("ordering")
-    button.order()
-    if ( vars.dev.value ) print.timeEnd("ordering")
-
-    var updatedButtons = button
-
+    if (vars.dev.value) {
+      print.time("ordering");
+    }
+    button.order();
+    if (vars.dev.value) {
+      print.timeEnd("ordering");
+    }
+    updatedButtons = button;
+  } else {
+    checks = [vars.focus.previous, vars.focus.value, vars.hover.previous, vars.hover.value].filter(function(c) {
+      return c;
+    });
+    updatedButtons = button.filter(function(b) {
+      return checks.indexOf(b[vars.id.value]) >= 0;
+    });
   }
-  else {
-
-    var checks = [ vars.focus.previous
-                 , vars.focus.value
-                 , vars.hover.previous
-                 , vars.hover.value ].filter(function(c){ return c })
-
-    var updatedButtons = button.filter(function(b){
-      return checks.indexOf(b[vars.id.value]) >= 0
-    })
-
+  if (vars.dev.value) {
+    print.time("update");
   }
-
-  if ( vars.dev.value ) print.time("update")
   if (vars.draw.timing) {
-    updatedButtons
-      .transition().duration(vars.draw.timing)
-      .call( color , vars )
-      .call( style , vars )
+    updatedButtons.transition().duration(vars.draw.timing).call(color, vars).call(style, vars);
+  } else {
+    updatedButtons.call(color, vars).call(style, vars);
   }
-  else {
-    updatedButtons
-      .call( color , vars )
-      .call( style , vars )
+  updatedButtons.call(icons, vars).call(mouseevents, vars);
+  if (vars.dev.value) {
+    print.timeEnd("update");
   }
+  return button.exit().remove();
+};
 
-  updatedButtons
-    .call( icons , vars )
-    .call( mouseevents , vars , color )
-  if ( vars.dev.value ) print.timeEnd("update")
 
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Exit Buttons
-  //----------------------------------------------------------------------------
-  button.exit().remove()
 
-}
-
-},{"../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","./functions/color.js":"/Users/Dave/sites/d3plus/src/form/types/button/functions/color.js","./functions/icons.js":"/Users/Dave/sites/d3plus/src/form/types/button/functions/icons.js","./functions/mouseevents.js":"/Users/Dave/sites/d3plus/src/form/types/button/functions/mouseevents.js","./functions/style.js":"/Users/Dave/sites/d3plus/src/form/types/button/functions/style.js"}],"/Users/Dave/sites/d3plus/src/form/types/button/functions/color.js":[function(require,module,exports){
-var legible = require("../../../../color/legible.coffee"),
-    lighter   = require("../../../../color/lighter.coffee"),
-    textColor = require("../../../../color/text.coffee")
-
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-// Defines button color
-//------------------------------------------------------------------------------
-module.exports = function ( elem , vars ) {
-
-  elem
-    .style("background-color",function(d){
-
-      if ( vars.focus.value !== d[vars.id.value] ) {
-
-        if ( vars.hover.value === d[vars.id.value] ) {
-          return lighter(vars.ui.color.secondary.value,.25)
-        }
-        else {
-          return vars.ui.color.secondary.value
-        }
-
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./functions/color.coffee":"/Users/Dave/Sites/d3plus/src/form/types/button/functions/color.coffee","./functions/icons.js":"/Users/Dave/Sites/d3plus/src/form/types/button/functions/icons.js","./functions/mouseevents.coffee":"/Users/Dave/Sites/d3plus/src/form/types/button/functions/mouseevents.coffee","./functions/style.js":"/Users/Dave/Sites/d3plus/src/form/types/button/functions/style.js"}],"/Users/Dave/Sites/d3plus/src/form/types/button/functions/color.coffee":[function(require,module,exports){
+module.exports = function(elem, vars) {
+  var legible, lighter, textColor;
+  legible = require("../../../../color/legible.coffee");
+  lighter = require("../../../../color/lighter.coffee");
+  textColor = require("../../../../color/text.coffee");
+  return elem.style("background-color", function(d) {
+    if (vars.focus.value !== d[vars.id.value]) {
+      if (vars.hover.value === d[vars.id.value]) {
+        return lighter(vars.ui.color.secondary.value, .25);
+      } else {
+        return vars.ui.color.secondary.value;
       }
-      else {
-
-        if ( vars.hover.value === d[vars.id.value] ) {
-          return d3.rgb(vars.ui.color.primary.value).darker(0.15).toString()
-        }
-        else {
-          return vars.ui.color.primary.value
-        }
-
+    } else {
+      if (vars.hover.value === d[vars.id.value]) {
+        return d3.rgb(vars.ui.color.primary.value).darker(0.15).toString();
+      } else {
+        return vars.ui.color.primary.value;
       }
+    }
+  }).style("color", function(d) {
+    var color, image, opacity;
+    if (vars.focus.value === d[vars.id.value]) {
+      opacity = 1;
+    } else {
+      opacity = 0.75;
+    }
+    image = d[vars.icon.value] && vars.data.viz.length < vars.data.large;
+    if (vars.focus.value === d[vars.id.value] && d[vars.color.value] && !image) {
+      color = legible(d[vars.color.value]);
+    } else if (vars.focus.value === d[vars.id.value]) {
+      color = textColor(vars.ui.color.primary.value);
+    } else {
+      color = textColor(vars.ui.color.secondary.value);
+    }
+    color = d3.rgb(color);
+    return "rgba(" + color.r + "," + color.g + "," + color.b + "," + opacity + ")";
+  }).style('border-color', vars.ui.color.secondary.value);
+};
 
-    })
-    .style("color",function(d){
 
-      var image = d[vars.icon.value] && vars.data.viz.length < vars.data.large
 
-      if ( vars.focus.value === d[vars.id.value] ) {
-        var opacity = 1
-      }
-      else {
-        var opacity = 0.75
-      }
-
-      if ( vars.focus.value === d[vars.id.value] && d[vars.color.value] && !image ) {
-        var color = legible(d[vars.color.value])
-      }
-      else if ( vars.focus.value === d[vars.id.value] ) {
-        var color = textColor(vars.ui.color.primary.value)
-      }
-      else {
-        var color = textColor(vars.ui.color.secondary.value)
-      }
-
-      var color = d3.rgb(color)
-
-      return "rgba("+color.r+","+color.g+","+color.b+","+opacity+")"
-
-    })
-    .style("border-color",vars.ui.color.secondary.value)
-
-}
-
-},{"../../../../color/legible.coffee":"/Users/Dave/sites/d3plus/src/color/legible.coffee","../../../../color/lighter.coffee":"/Users/Dave/sites/d3plus/src/color/lighter.coffee","../../../../color/text.coffee":"/Users/Dave/sites/d3plus/src/color/text.coffee"}],"/Users/Dave/sites/d3plus/src/form/types/button/functions/icons.js":[function(require,module,exports){
+},{"../../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../../color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","../../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/button/functions/icons.js":[function(require,module,exports){
 var prefix = require("../../../../client/prefix.coffee"),
     rtl = require("../../../../client/rtl.coffee")
 
@@ -15800,59 +15747,34 @@ module.exports = function ( elem , vars ) {
 
 }
 
-},{"../../../../client/prefix.coffee":"/Users/Dave/sites/d3plus/src/client/prefix.coffee","../../../../client/rtl.coffee":"/Users/Dave/sites/d3plus/src/client/rtl.coffee"}],"/Users/Dave/sites/d3plus/src/form/types/button/functions/mouseevents.js":[function(require,module,exports){
-var events = require("../../../../client/pointer.coffee"),
-    ie = require("../../../../client/ie.js")
+},{"../../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/button/functions/mouseevents.coffee":[function(require,module,exports){
+module.exports = function(elem, vars, color) {
+  var events, ie;
+  color = require("./color.coffee");
+  events = require("../../../../client/pointer.coffee");
+  ie = require("../../../../client/ie.js");
+  return elem.on(events.over, function(d, i) {
+    vars.self.hover(d[vars.id.value]);
+    if (ie || !vars.draw.timing) {
+      return d3.select(this).style("cursor", "pointer").call(color, vars);
+    } else {
+      return d3.select(this).style("cursor", "pointer").transition().duration(vars.timing.mouseevents).call(color, vars);
+    }
+  }).on(events.out, function(d) {
+    vars.self.hover(false);
+    if (ie || !vars.draw.timing) {
+      return d3.select(this).style("cursor", "auto").call(color, vars);
+    } else {
+      return d3.select(this).style("cursor", "auto").transition().duration(vars.timing.mouseevents).call(color, vars);
+    }
+  }).on(events.click, function(d) {
+    return vars.self.focus(d[vars.id.value]).draw();
+  });
+};
 
-module.exports = function ( elem , vars , color ) {
 
-  elem
-    .on(events.over,function(d,i){
 
-      vars.self.hover(d[vars.id.value])
-
-      if ( ie || !vars.draw.timing ) {
-
-        d3.select(this).style("cursor","pointer")
-          .call( color , vars )
-
-      }
-      else {
-
-        d3.select(this).style("cursor","pointer")
-          .transition().duration(vars.timing.mouseevents)
-          .call( color , vars )
-      }
-
-    })
-    .on(events.out,function(d){
-
-      vars.self.hover(false)
-
-      if ( ie || !vars.draw.timing ) {
-        d3.select(this).style("cursor","auto")
-          .call( color , vars )
-      }
-      else {
-        d3.select(this).style("cursor","auto")
-          .transition().duration(vars.timing.mouseevents)
-          .call( color , vars )
-      }
-
-    })
-    .on(events.click,function(d){
-
-      if ( vars.id.value in d ) {
-
-        vars.self.focus(d[vars.id.value]).draw()
-
-      }
-
-    })
-
-}
-
-},{"../../../../client/ie.js":"/Users/Dave/sites/d3plus/src/client/ie.js","../../../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee"}],"/Users/Dave/sites/d3plus/src/form/types/button/functions/style.js":[function(require,module,exports){
+},{"../../../../client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","../../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","./color.coffee":"/Users/Dave/Sites/d3plus/src/form/types/button/functions/color.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/button/functions/style.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
 //------------------------------------------------------------------------------
@@ -15871,85 +15793,38 @@ module.exports = function ( elem , vars ) {
 
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/form/types/drop/drop.js":[function(require,module,exports){
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-// Creates Dropdown Menu
-//------------------------------------------------------------------------------
-module.exports = function( vars ) {
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/drop.coffee":[function(require,module,exports){
+module.exports = function(vars) {
+  var button, data, element, keyboard, list, search, selector, title, update, width, windowevent;
+  element = require("./functions/element.coffee");
+  keyboard = require("./functions/keyboard.coffee");
+  windowevent = require("./functions/window.js");
+  width = require("./functions/width.js");
+  button = require("./functions/button.js");
+  selector = require("./functions/selector.js");
+  title = require("./functions/title.js");
+  search = require("./functions/search.js");
+  list = require("./functions/list.js");
+  data = require("./functions/data.js");
+  update = require("./functions/update.js");
+  vars.margin.top = 0;
+  vars.margin.title = 0;
+  element(vars);
+  keyboard(vars);
+  windowevent(vars);
+  width(vars);
+  button(vars);
+  selector(vars);
+  title(vars);
+  search(vars);
+  list(vars);
+  data(vars);
+  return update(vars);
+};
 
-  var element = require("./functions/element.js")
-    , keyboard = require("./functions/keyboard.js")
-    , windowevent = require("./functions/window.js")
-    , width = require("./functions/width.js")
-    , button = require("./functions/button.js")
-    , selector = require("./functions/selector.js")
-    , title = require("./functions/title.js")
-    , search = require("./functions/search.js")
-    , list = require("./functions/list.js")
-    , data = require("./functions/data.js")
-    , update = require("./functions/update.js")
 
-  vars.margin.top = 0
-  vars.margin.title = 0
 
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Hijack events of original element, if applicable.
-  //----------------------------------------------------------------------------
-  element( vars )
-
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Capture keyboard events
-  //----------------------------------------------------------------------------
-  keyboard( vars )
-
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Apply click function to all parent windows to close dropdown.
-  //----------------------------------------------------------------------------
-  windowevent( vars )
-
-  // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Check to make sure we have both a button and list width.
-  // ---------------------------------------------------------------------------
-  width( vars )
-
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Create main button, if it does not already exist.
-  //----------------------------------------------------------------------------
-  button( vars )
-
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Create "selector" to hold the search box and search vars.container.list.
-  //----------------------------------------------------------------------------
-  selector( vars )
-
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Create and style the title box, if applicable.
-  //----------------------------------------------------------------------------
-  title( vars )
-
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Create and style the search box, if applicable.
-  //----------------------------------------------------------------------------
-  search( vars )
-
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Create and style the item list.
-  //----------------------------------------------------------------------------
-  list( vars )
-
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Filter data based off search term, if applicable.
-  //----------------------------------------------------------------------------
-  data( vars )
-
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Updates all divs
-  //----------------------------------------------------------------------------
-  update( vars )
-
-}
-
-},{"./functions/button.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/button.js","./functions/data.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/data.js","./functions/element.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/element.js","./functions/keyboard.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/keyboard.js","./functions/list.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/list.js","./functions/search.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/search.js","./functions/selector.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/selector.js","./functions/title.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/title.js","./functions/update.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/update.js","./functions/width.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/width.js","./functions/window.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/window.js"}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/active.js":[function(require,module,exports){
+},{"./functions/button.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/button.js","./functions/data.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/data.js","./functions/element.coffee":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/element.coffee","./functions/keyboard.coffee":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/keyboard.coffee","./functions/list.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/list.js","./functions/search.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/search.js","./functions/selector.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/selector.js","./functions/title.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/title.js","./functions/update.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/update.js","./functions/width.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/width.js","./functions/window.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/window.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/active.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Checks to see if a given variable is allowed to be selected.
 //------------------------------------------------------------------------------
@@ -15985,7 +15860,7 @@ module.exports = function ( vars , value , active ) {
 
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/arrow.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/arrow.js":[function(require,module,exports){
 var print = require("../../../../core/console/print.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Toggles the state of the dropdown menu.
@@ -16016,7 +15891,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/button.js":[function(require,module,exports){
+},{"../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/button.js":[function(require,module,exports){
 var copy = require("../../../../util/copy.coffee"),
     events = require("../../../../client/pointer.coffee"),
     form   = require("../../../form.js"),
@@ -16070,12 +15945,15 @@ module.exports = function ( vars ) {
 
   }
 
+  var hover = vars.hover.value === true ? vars.focus.value : false;
+
   vars.container.button
     .draw({
       "update": vars.draw.update
     })
     .focus(vars.focus.value)
     .font( vars.font )
+    .hover(hover)
     .icon({
       "button": vars.icon.drop.value,
       "select": vars.icon.drop.value,
@@ -16102,7 +15980,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee","../../../form.js":"/Users/Dave/sites/d3plus/src/form/form.js"}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/data.js":[function(require,module,exports){
+},{"../../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../../../form.js":"/Users/Dave/Sites/d3plus/src/form/form.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/data.js":[function(require,module,exports){
 var stringFormat = require("../../../../string/format.js"),
     stringStrip = require("../../../../string/strip.js");
 
@@ -16120,7 +15998,7 @@ module.exports = function ( vars ) {
   }
   else if (vars.open.value) {
 
-    if (!vars.text.solo.value.length || vars.text.solo.value[0] === "") {
+    if (!vars.search.term) {
       vars.data.filtered = vars.data.viz;
       vars.data.changed = vars.data.lastFilter !== "viz";
       vars.data.lastFilter = "viz";
@@ -16137,8 +16015,7 @@ module.exports = function ( vars ) {
     }
     else {
 
-      var searchText  = vars.text.solo.value.length ? vars.text.solo.value[0].toLowerCase() : "",
-          searchWords = stringStrip(searchText).split("_"),
+      var searchWords = stringStrip(vars.search.term).split("_"),
           searchKeys  = [vars.id.value, vars.text.value, vars.alt.value, vars.keywords.value ];
 
       searchKeys = searchKeys.filter(function(t){ return t; });
@@ -16163,11 +16040,11 @@ module.exports = function ( vars ) {
 
             var text = d[key].toLowerCase();
 
-            if ( [vars.text.value,vars.id.value].indexOf(key) >= 0 && text.indexOf(searchText) === 0 ) {
+            if ( [vars.text.value,vars.id.value].indexOf(key) >= 0 && text.indexOf(vars.search.term) === 0 ) {
               startMatches.push(d);
               match = true;
             }
-            else if ( text.indexOf(searchText) >= 0 ) {
+            else if ( text.indexOf(vars.search.term) >= 0 ) {
               exactMatches.push(d);
               match = true;
             }
@@ -16213,7 +16090,7 @@ module.exports = function ( vars ) {
       if ( vars.data.filtered.length === 0 ) {
 
         var noData = {}, str = vars.format.value(vars.format.locale.value.ui.noResults);
-        noData[vars.text.value || vars.id.value] = stringFormat(str,"\""+searchText+"\"");
+        noData[vars.text.value || vars.id.value] = stringFormat(str,"\""+vars.search.term+"\"");
         vars.data.filtered = [ noData ];
 
       }
@@ -16227,46 +16104,37 @@ module.exports = function ( vars ) {
 
 };
 
-},{"../../../../string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js","../../../../string/strip.js":"/Users/Dave/sites/d3plus/src/string/strip.js"}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/element.js":[function(require,module,exports){
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-// Overrides keyboard behavior of the original input element.
-//------------------------------------------------------------------------------
-module.exports = function ( vars ) {
-
+},{"../../../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/element.coffee":[function(require,module,exports){
+module.exports = function(vars) {
   if (vars.data.element.value) {
-
-    vars.data.element.value.on("focus."+vars.container.id,function(){
-      vars.self.draw({"update":false}).draw()
-    })
-
-    vars.data.element.value.on("blur."+vars.container.id,function(){
-
-      var search = vars.search.enabled
-                 ? d3.event.relatedTarget != vars.container.value.select("input").node()
-                 : true
-
+    vars.data.element.value.on("focus." + vars.container.id, function() {
+      return vars.self.hover(true).draw();
+    });
+    vars.data.element.value.on("blur." + vars.container.id, function() {
+      var search;
+      if (vars.search.enabled) {
+        search = d3.event.relatedTarget !== vars.container.value.select('input').node();
+      } else {
+        search = true;
+      }
       if (search) {
-        vars.self.draw({"update":false}).draw()
+        return vars.self.open(false).hover(false).draw();
       }
-
-    })
-
-    vars.data.element.value.on("change."+vars.container.id,function(){
-      vars.self.focus(this.value).draw()
-    })
-
-    vars.data.element.value.on("keydown.cancel_"+vars.container.id,function(){
-      var key = d3.event.keyCode
-      if (key != 9) {
-        d3.event.preventDefault()
+    });
+    vars.data.element.value.on("change." + vars.container.id, function() {
+      return vars.self.focus(this.value).draw();
+    });
+    return vars.data.element.value.on("keydown.cancel_" + vars.container.id, function() {
+      if (d3.event.keyCode !== 9) {
+        return d3.event.preventDefault();
       }
-    })
-
+    });
   }
+};
 
-}
 
-},{}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/height.js":[function(require,module,exports){
+
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/height.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Calculates the height and orientation of the dropdown list, based on
 // available screen space.
@@ -16293,7 +16161,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/items.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/items.coffee":[function(require,module,exports){
 var active, copy, form, print;
 
 active = require("./active.js");
@@ -16321,18 +16189,11 @@ module.exports = function(vars) {
     }
     large = vars.draw.timing ? vars.data.large : 1;
     order = copy(vars.order);
-    order.value = (vars.text.solo.value.length && vars.text.solo.value[0] !== "" ? "d3plus_order" : vars.order.value);
+    order.value = vars.search.term.length ? "d3plus_order" : vars.order.value;
     deepest = vars.depth.value === vars.id.nesting.length - 1;
     if (vars.focus.changed || vars.container.items.focus() === false) {
       vars.container.items.focus(vars.focus.value, function(value) {
         var change, data, depth, solo;
-        change = value !== vars.focus.value;
-        if (change && vars.active.value) {
-          change = active(vars, value);
-        }
-        if (change) {
-          vars.self.focus(value);
-        }
         data = vars.data.filtered.filter(function(f) {
           return f[vars.id.value] === value;
         })[0];
@@ -16347,11 +16208,16 @@ module.exports = function(vars) {
           vars.self.depth(vars.depth.value + 1).id({
             solo: [value]
           }).draw();
-        } else if (!vars.depth.changed) {
-          vars.self.open(false).draw();
         } else {
+          if (!vars.depth.changed) {
+            vars.self.open(false);
+          }
+          change = value !== vars.focus.value;
+          if (change && vars.active.value) {
+            change = active(vars, value);
+          }
           if (change) {
-            vars.self.draw();
+            vars.self.focus(value).draw();
           }
         }
       });
@@ -16364,7 +16230,7 @@ module.exports = function(vars) {
     }
     vars.container.items.active(vars.active.value).draw({
       update: vars.draw.update
-    }).font(vars.font.secondary).id(vars.id.value).icon({
+    }).font(vars.font.secondary).hover(vars.hover.value).id(vars.id.value).icon({
       button: (deepest ? false : vars.icon.next),
       select: (deepest ? vars.icon.select : false)
     }).order(order).text(vars.text.secondary.value || vars.text.value).timing({
@@ -16384,117 +16250,87 @@ module.exports = function(vars) {
 
 
 
-},{"../../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee","../../../form.js":"/Users/Dave/sites/d3plus/src/form/form.js","./active.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/active.js"}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/keyboard.js":[function(require,module,exports){
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-// Assigns behavior to the user's keyboard for navigation.
-//------------------------------------------------------------------------------
-module.exports = function ( vars ) {
-
-  d3.select(document).on("keydown."+vars.container.id,function(){
-
-    if (vars.open.value || vars.hover === true) {
-
-      var key = d3.event.keyCode,
-          options = vars.container.list.select("div").selectAll("div.d3plus_node"),
-          index = 0
-
-      if (typeof vars.hover == "boolean") {
-        options.each(function(d,i){
-          if (d.value == vars.focus) {
-            index = i
+},{"../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../../../form.js":"/Users/Dave/Sites/d3plus/src/form/form.js","./active.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/active.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/keyboard.coffee":[function(require,module,exports){
+module.exports = function(vars) {
+  return d3.select(window).on("keydown." + vars.container.id, function() {
+    var d, data, depth, hist, hover, i, index, key, matchKey, solo, _i, _len, _ref;
+    key = d3.event.keyCode;
+    if (vars.open.value || vars.hover.value === true) {
+      matchKey = vars.hover.value === true ? "focus" : "hover";
+      index = false;
+      _ref = vars.data.filtered;
+      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+        d = _ref[i];
+        if (d[vars.id.value] === vars[matchKey].value) {
+          index = i;
+          break;
+        }
+      }
+      if (key === 9 && vars.open.value && (!vars.search.enabled || (vars.search.enabled && !d3.event.shiftKey))) {
+        return vars.self.open(false).hover(false).draw();
+      } else if ([38, 40].indexOf(key) >= 0) {
+        if (index === false) {
+          index = 0;
+        } else if (key === 38) {
+          if (vars.open.value) {
+            if (index <= 0) {
+              index = vars.data.filtered.length - 1;
+            } else {
+              index -= 1;
+            }
           }
-        })
-      }
-      else {
-        options.each(function(d,i){
-          if (d.value == vars.hover) {
-            index = i
+        } else if (key === 40) {
+          if (vars.open.value) {
+            if (index >= vars.data.filtered.length - 1) {
+              index = 0;
+            } else {
+              index += 1;
+            }
           }
-        })
-      }
-
-      // Tab
-      if ([9].indexOf(key) >= 0 && (!vars.search.enabled || (vars.search.enabled && !d3.event.shiftKey))) {
-        vars.self.draw({"update":false}).disable()
-      }
-      // Down Arrow
-      else if ([40].indexOf(key) >= 0) {
+        }
+        if (typeof vars.hover.value !== "boolean") {
+          hover = vars.data.filtered[index][vars.id.value];
+        } else {
+          hover = vars.focus.value;
+        }
+        return vars.self.hover(hover).open(true).draw();
+      } else if (key === 13) {
+        if (typeof vars.hover.value !== "boolean") {
+          data = vars.data.filtered.filter(function(f) {
+            return f[vars.id.value] === vars.hover.value;
+          })[0];
+          depth = vars.depth.value;
+          if (depth < vars.id.nesting.length - 1 && vars.id.nesting[depth + 1] in data) {
+            solo = vars.id.solo.value;
+            hist = function() {
+              return vars.self.depth(depth).id({
+                solo: solo
+              }).draw();
+            };
+            vars.history.states.push(hist);
+            return vars.self.depth(vars.depth.value + 1).id({
+              solo: [vars.hover.value]
+            }).draw();
+          } else {
+            return vars.self.focus(vars.hover.value).hover(true).draw();
+          }
+        } else {
+          return vars.self.hover(vars.focus.value).open(true).draw();
+        }
+      } else if (key === 27) {
         if (vars.open.value) {
-          if (index >= options.size()-1) {
-            index = 0
-          }
-          else {
-            index += 1
-          }
-        }
-
-        if (typeof vars.hover != "boolean") {
-          var hover = options.data()[index].value
-        }
-        else {
-          var hover = vars.focus
-        }
-
-        if (vars.open.value) {
-          vars.self.draw({"update":false}).hover(hover).draw(60)
-        }
-        else {
-          vars.self.draw({"update":false}).hover(hover).enable()
-        }
-
-      }
-      // Up Arrow
-      else if ([38].indexOf(key) >= 0) {
-        if (vars.open.value) {
-          if (index <= 0) {
-            index = options.size()-1
-          }
-          else {
-            index -= 1
-          }
-        }
-
-        if (typeof vars.hover != "boolean") {
-          var hover = options.data()[index].value
-        }
-        else {
-          var hover = vars.focus
-        }
-
-        if (vars.open.value) {
-          vars.self.draw({"update":false}).hover(hover).draw(60)
-        }
-        else {
-          vars.self.draw({"update":false}).hover(hover).enable()
-        }
-
-      }
-      // Enter/Return
-      else if ([13].indexOf(key) >= 0) {
-        if (typeof vars.hover != "boolean") {
-          vars.self.value(vars.hover).draw()
-        }
-        else {
-          vars.self.hover(vars.focus).toggle()
+          return vars.self.open(false).hover(true).draw();
+        } else if (vars.hover.value === true) {
+          return vars.self.hover(false).draw();
         }
       }
-      // Esc
-      else if ([27].indexOf(key) >= 0) {
-        if (vars.open.value) {
-          vars.self.disable()
-        }
-        else if (vars.hover === true) {
-          vars.self.hover(false).draw()
-        }
-      }
-
     }
+  });
+};
 
-  })
 
-}
 
-},{}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/list.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/list.js":[function(require,module,exports){
 var print = require("../../../../core/console/print.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Creates and populates the dropdown list of items.
@@ -16516,7 +16352,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/scroll.js":[function(require,module,exports){
+},{"../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/scroll.js":[function(require,module,exports){
 var print = require("../../../../core/console/print.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Calculates scroll position of list.
@@ -16568,8 +16404,9 @@ module.exports = function ( vars ) {
 
       var options = vars.container.list.select("div").selectAll("div.d3plus_node")
       var option = options[0][0]
+      var matchID = typeof vars.hover.value !== "boolean" ? vars.hover.value : vars.focus.value;
       options.each(function(d,i){
-        if (d[vars.id.value] == vars.focus.value) {
+        if (d[vars.id.value] === matchID) {
           option = this
         }
       })
@@ -16594,6 +16431,7 @@ module.exports = function ( vars ) {
       else {
 
         vars.container.listScroll = list_top
+        // console.log(vars.search.height)
 
         if (button_top < list_top) {
           vars.container.listScroll = button_top
@@ -16619,7 +16457,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/search.js":[function(require,module,exports){
+},{"../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/search.js":[function(require,module,exports){
 var prefix = require("../../../../client/prefix.coffee"),
     print = require("../../../../core/console/print.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -16694,20 +16532,22 @@ module.exports = function ( vars ) {
         .call(inputStyle)
 
   vars.container.search.select("input").on("keyup."+vars.container.id,function(d){
-    if (vars.text.solo[0] !== this.value) {
-      vars.self.text({"solo":[this.value]})
-      data( vars )
-      items( vars )
-      update( vars )
+    var term = this.value;
+    if (vars.search.term !== term) {
+      vars.search.term = term;
+      data(vars);
+      items(vars);
+      update(vars);
     }
-  })
+  });
 
   vars.container.search.exit().remove()
 
-  if (!vars.open.value) {
-    vars.search.height = vars.search.enabled ? vars.container.search.node().offsetHeight || 
-                         vars.container.search.node().getBoundingClientRect().height : 0;
-  }
+  var oldDisplay = vars.container.selector.style("display")
+  vars.container.selector.style("display", "block")
+  vars.search.height = vars.search.enabled ? vars.container.search.node().offsetHeight ||
+                       vars.container.search.node().getBoundingClientRect().height : 0;
+  vars.container.selector.style("display", oldDisplay)
 
   if ( vars.search.enabled ) {
     vars.margin.title += vars.search.height
@@ -16717,7 +16557,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../client/prefix.coffee":"/Users/Dave/sites/d3plus/src/client/prefix.coffee","../../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","./data.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/data.js","./items.coffee":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/items.coffee","./update.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/update.js"}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/selector.js":[function(require,module,exports){
+},{"../../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./data.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/data.js","./items.coffee":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/items.coffee","./update.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/update.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/selector.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Creates and styles the div that holds the search box and item list.
 //------------------------------------------------------------------------------
@@ -16739,7 +16579,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/title.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/title.js":[function(require,module,exports){
 var events = require("../../../../client/pointer.coffee"),
     lighter   = require("../../../../color/lighter.coffee"),
     print     = require("../../../../core/console/print.coffee"),
@@ -16890,7 +16730,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../../../../color/lighter.coffee":"/Users/Dave/sites/d3plus/src/color/lighter.coffee","../../../../color/text.coffee":"/Users/Dave/sites/d3plus/src/color/text.coffee","../../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/update.js":[function(require,module,exports){
+},{"../../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../../color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","../../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/update.js":[function(require,module,exports){
 var items = require("./items.coffee"),
     height     = require("./height.js"),
     print      = require("../../../../core/console/print.coffee"),
@@ -17055,7 +16895,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","./arrow.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/arrow.js","./height.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/height.js","./items.coffee":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/items.coffee","./scroll.js":"/Users/Dave/sites/d3plus/src/form/types/drop/functions/scroll.js"}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/width.js":[function(require,module,exports){
+},{"../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./arrow.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/arrow.js","./height.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/height.js","./items.coffee":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/items.coffee","./scroll.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/scroll.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/width.js":[function(require,module,exports){
 var copy = require("../../../../util/copy.coffee"),
     fontTester  = require("../../../../core/font/tester.coffee"),
     form        = require("../../../form.js"),
@@ -17150,7 +16990,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../../core/font/tester.coffee":"/Users/Dave/sites/d3plus/src/core/font/tester.coffee","../../../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee","../../../form.js":"/Users/Dave/sites/d3plus/src/form/form.js"}],"/Users/Dave/sites/d3plus/src/form/types/drop/functions/window.js":[function(require,module,exports){
+},{"../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../../core/font/tester.coffee":"/Users/Dave/Sites/d3plus/src/core/font/tester.coffee","../../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../../../form.js":"/Users/Dave/Sites/d3plus/src/form/form.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/window.js":[function(require,module,exports){
 var child = require("../../../../util/child.coffee")
 
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -17172,8 +17012,8 @@ var windowEvents = function ( vars , elem ) {
       element = parent.parentNode
     }
 
-    if (element && parent && !child(vars.container.ui, element) && vars.open.value) {
-      vars.self.open(!vars.open.value).draw()
+    if (element && parent && !child(vars.container.ui, element) && (vars.open.value || vars.hover.value)) {
+      vars.self.open(false).hover(false).draw()
     }
 
   })
@@ -17195,7 +17035,7 @@ var windowEvents = function ( vars , elem ) {
 
 module.exports = windowEvents
 
-},{"../../../../util/child.coffee":"/Users/Dave/sites/d3plus/src/util/child.coffee"}],"/Users/Dave/sites/d3plus/src/form/types/toggle.js":[function(require,module,exports){
+},{"../../../../util/child.coffee":"/Users/Dave/Sites/d3plus/src/util/child.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/toggle.js":[function(require,module,exports){
 var form = require("../form.js")
 
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -17258,6 +17098,7 @@ module.exports = function( vars ) {
           }
 
         })
+        .hover(vars.hover.value)
         .icon({
           "select": false,
           "value": vars.icon.value
@@ -17278,9 +17119,19 @@ module.exports = function( vars ) {
 
     })
 
+  if (vars.data.element.value) {
+    vars.data.element.value
+      .on("focus."+vars.container.id, function(){
+        vars.self.focus(this.value).hover(this.value).draw();
+      })
+      .on("blur."+vars.container.id, function(){
+        vars.self.hover(false).draw();
+      })
+  }
+
 }
 
-},{"../form.js":"/Users/Dave/sites/d3plus/src/form/form.js"}],"/Users/Dave/sites/d3plus/src/geom/largestRect.coffee":[function(require,module,exports){
+},{"../form.js":"/Users/Dave/Sites/d3plus/src/form/form.js"}],"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee":[function(require,module,exports){
 var intersectPoints, lineIntersection, pointInPoly, pointInSegmentBox, polyInsidePoly, print, rayIntersectsSegment, rotatePoint, rotatePoly, segmentsIntersect, simplify, squaredDist;
 
 print = require("../core/console/print.coffee");
@@ -17700,7 +17551,7 @@ intersectPoints = function(poly, origin, alpha) {
 
 
 
-},{"../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","simplify-js":"/Users/Dave/sites/d3plus/node_modules/simplify-js/simplify.js"}],"/Users/Dave/sites/d3plus/src/geom/offset.coffee":[function(require,module,exports){
+},{"../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","simplify-js":"/Users/Dave/Sites/d3plus/node_modules/simplify-js/simplify.js"}],"/Users/Dave/Sites/d3plus/src/geom/offset.coffee":[function(require,module,exports){
 module.exports = function(radians, distance, shape) {
   var adjacentLegLength, coords, diagonal, oppositeLegLength;
   coords = {
@@ -17766,7 +17617,7 @@ module.exports = function(radians, distance, shape) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/geom/path2poly.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee":[function(require,module,exports){
 var offset;
 
 offset = require("../geom/offset.coffee");
@@ -17812,7 +17663,7 @@ module.exports = function(path) {
 
 
 
-},{"../geom/offset.coffee":"/Users/Dave/sites/d3plus/src/geom/offset.coffee"}],"/Users/Dave/sites/d3plus/src/network/cluster.coffee":[function(require,module,exports){
+},{"../geom/offset.coffee":"/Users/Dave/Sites/d3plus/src/geom/offset.coffee"}],"/Users/Dave/Sites/d3plus/src/network/cluster.coffee":[function(require,module,exports){
 var normalize;
 
 normalize = require("./normalize.coffee");
@@ -17950,7 +17801,7 @@ module.exports = function(edges, options) {
 
 
 
-},{"./normalize.coffee":"/Users/Dave/sites/d3plus/src/network/normalize.coffee"}],"/Users/Dave/sites/d3plus/src/network/normalize.coffee":[function(require,module,exports){
+},{"./normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee"}],"/Users/Dave/Sites/d3plus/src/network/normalize.coffee":[function(require,module,exports){
 var print;
 
 print = require("../core/console/print.coffee");
@@ -18099,7 +17950,7 @@ module.exports = function(edges, options) {
 
 
 
-},{"../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/network/shortestPath.coffee":[function(require,module,exports){
+},{"../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/network/shortestPath.coffee":[function(require,module,exports){
 var Heap, normalize;
 
 Heap = require('heap');
@@ -18197,7 +18048,7 @@ module.exports = function(edges, source, options) {
 
 
 
-},{"./normalize.coffee":"/Users/Dave/sites/d3plus/src/network/normalize.coffee","heap":"/Users/Dave/sites/d3plus/node_modules/heap/index.js"}],"/Users/Dave/sites/d3plus/src/network/smallestGap.coffee":[function(require,module,exports){
+},{"./normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee","heap":"/Users/Dave/Sites/d3plus/node_modules/heap/index.js"}],"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee":[function(require,module,exports){
 module.exports = function(arr, accessor) {
   var distances, quad;
   distances = [];
@@ -18242,7 +18093,7 @@ module.exports = function(arr, accessor) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/network/subgraph.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/network/subgraph.coffee":[function(require,module,exports){
 var normalize;
 
 normalize = require("./normalize.coffee");
@@ -18313,7 +18164,7 @@ module.exports = function(edges, source, options) {
 
 
 
-},{"./normalize.coffee":"/Users/Dave/sites/d3plus/src/network/normalize.coffee"}],"/Users/Dave/sites/d3plus/src/number/format.js":[function(require,module,exports){
+},{"./normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee"}],"/Users/Dave/Sites/d3plus/src/number/format.js":[function(require,module,exports){
 var defaultLocale = require("../core/locale/languages/en_US.coffee");
 
 // Formats numbers to look "pretty"
@@ -18354,7 +18205,7 @@ module.exports = function(number, key, vars, data) {
 
 }
 
-},{"../core/locale/languages/en_US.coffee":"/Users/Dave/sites/d3plus/src/core/locale/languages/en_US.coffee"}],"/Users/Dave/sites/d3plus/src/object/merge.coffee":[function(require,module,exports){
+},{"../core/locale/languages/en_US.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee"}],"/Users/Dave/Sites/d3plus/src/object/merge.coffee":[function(require,module,exports){
 var d3selection, validate;
 
 d3selection = require("../util/d3selection.coffee");
@@ -18406,7 +18257,7 @@ module.exports = function(obj1, obj2) {
 
 
 
-},{"../util/d3selection.coffee":"/Users/Dave/sites/d3plus/src/util/d3selection.coffee","./validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/sites/d3plus/src/object/validate.coffee":[function(require,module,exports){
+},{"../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee","./validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/Sites/d3plus/src/object/validate.coffee":[function(require,module,exports){
 
 /**
  * This function returns true if the variable passed is a literal javascript keyed Object. It's a small, simple function, but it catches some edge-cases that can throw off your code (such as Arrays and `null`).
@@ -18421,7 +18272,7 @@ module.exports = function(obj) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/string/format.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/string/format.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Formats a string similar to Python's "format"
 //------------------------------------------------------------------------------
@@ -18452,7 +18303,7 @@ module.exports = function() {
 
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/string/list.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/string/list.coffee":[function(require,module,exports){
 var format, locale;
 
 format = require("./format.js");
@@ -18489,7 +18340,7 @@ module.exports = function(list, andText, max, moreText) {
 
 
 
-},{"../core/locale/languages/en_US.coffee":"/Users/Dave/sites/d3plus/src/core/locale/languages/en_US.coffee","./format.js":"/Users/Dave/sites/d3plus/src/string/format.js"}],"/Users/Dave/sites/d3plus/src/string/strip.js":[function(require,module,exports){
+},{"../core/locale/languages/en_US.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee","./format.js":"/Users/Dave/Sites/d3plus/src/string/format.js"}],"/Users/Dave/Sites/d3plus/src/string/strip.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Removes all non ASCII characters
 //------------------------------------------------------------------------------
@@ -18543,7 +18394,7 @@ module.exports = function(str) {
 
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/string/title.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/string/title.coffee":[function(require,module,exports){
 var defaultLocale;
 
 defaultLocale = require("../core/locale/languages/en_US.coffee");
@@ -18590,7 +18441,7 @@ module.exports = function(text, key, vars, data) {
 
 
 
-},{"../core/locale/languages/en_US.coffee":"/Users/Dave/sites/d3plus/src/core/locale/languages/en_US.coffee"}],"/Users/Dave/sites/d3plus/src/textwrap/helpers/flow.coffee":[function(require,module,exports){
+},{"../core/locale/languages/en_US.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee"}],"/Users/Dave/Sites/d3plus/src/textwrap/helpers/flow.coffee":[function(require,module,exports){
 var foreign, tspan;
 
 foreign = require("./foreign.coffee");
@@ -18607,7 +18458,7 @@ module.exports = function(vars) {
 
 
 
-},{"./foreign.coffee":"/Users/Dave/sites/d3plus/src/textwrap/helpers/foreign.coffee","./tspan.coffee":"/Users/Dave/sites/d3plus/src/textwrap/helpers/tspan.coffee"}],"/Users/Dave/sites/d3plus/src/textwrap/helpers/foreign.coffee":[function(require,module,exports){
+},{"./foreign.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/helpers/foreign.coffee","./tspan.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/helpers/tspan.coffee"}],"/Users/Dave/Sites/d3plus/src/textwrap/helpers/foreign.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   var anchor, color, family, opacity, text;
   text = vars.container.value;
@@ -18621,7 +18472,7 @@ module.exports = function(vars) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/helpers/parseSize.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/helpers/parseSize.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   var diff, elem, height, prev, radius, shape, size, width, x, y;
   elem = vars.container.value;
@@ -18715,7 +18566,7 @@ module.exports = function(vars) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/helpers/parseText.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/helpers/parseText.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   var text;
   if (!vars.text.value) {
@@ -18745,7 +18596,7 @@ module.exports = function(vars) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/helpers/tspan.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/helpers/tspan.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   var anchor, dx, dy, ellipsis, fontSize, h, height, line, lineWidth, lines, mirror, newLine, placeWord, progress, reverse, rmod, rotate, rx, ry, space, start, textBox, translate, truncate, valign, width, words, wrap, x, y, yOffset;
   newLine = function(w, first) {
@@ -18932,7 +18783,7 @@ module.exports = function(vars) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/helpers/wrap.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/helpers/wrap.coffee":[function(require,module,exports){
 var flow, fontSizes, resize, wrap;
 
 flow = require("./flow.coffee");
@@ -19009,7 +18860,7 @@ resize = function(vars) {
 
 
 
-},{"../../font/sizes.coffee":"/Users/Dave/sites/d3plus/src/font/sizes.coffee","./flow.coffee":"/Users/Dave/sites/d3plus/src/textwrap/helpers/flow.coffee"}],"/Users/Dave/sites/d3plus/src/textwrap/methods/align.coffee":[function(require,module,exports){
+},{"../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","./flow.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/helpers/flow.coffee"}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/align.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, "start", "middle", "end", "left", "center", "right"],
   process: function(value) {
@@ -19025,7 +18876,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/config.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/config.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Object],
   objectAccess: false,
@@ -19044,7 +18895,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/container.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/container.coffee":[function(require,module,exports){
 var d3selection;
 
 d3selection = require("../../util/d3selection.coffee");
@@ -19069,7 +18920,7 @@ module.exports = {
 
 
 
-},{"../../util/d3selection.coffee":"/Users/Dave/sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/sites/d3plus/src/textwrap/methods/dev.coffee":[function(require,module,exports){
+},{"../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/dev.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   value: false
@@ -19077,7 +18928,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/draw.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/draw.coffee":[function(require,module,exports){
 var print, stringFormat;
 
 print = require("../../core/console/print.coffee");
@@ -19110,7 +18961,7 @@ module.exports = {
 
 
 
-},{"../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js"}],"/Users/Dave/sites/d3plus/src/textwrap/methods/format.coffee":[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js"}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/format.coffee":[function(require,module,exports){
 var locale, mergeObject;
 
 locale = require("../../core/locale/locale.coffee");
@@ -19152,7 +19003,7 @@ module.exports = {
 
 
 
-},{"../../core/locale/locale.coffee":"/Users/Dave/sites/d3plus/src/core/locale/locale.coffee","../../object/merge.coffee":"/Users/Dave/sites/d3plus/src/object/merge.coffee"}],"/Users/Dave/sites/d3plus/src/textwrap/methods/height.coffee":[function(require,module,exports){
+},{"../../core/locale/locale.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/locale.coffee","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee"}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/height.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   value: false
@@ -19160,7 +19011,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/padding.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/padding.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Number],
   value: 0
@@ -19168,7 +19019,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/resize.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/resize.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   value: false
@@ -19176,7 +19027,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/rotate.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/rotate.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [-180, -90, 0, 90, 180],
   value: 0
@@ -19184,7 +19035,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/shape.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/shape.coffee":[function(require,module,exports){
 module.exports = {
   accepted: ["circle", "square"],
   value: false
@@ -19192,7 +19043,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/size.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/size.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Array, false],
   value: false
@@ -19200,7 +19051,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/text.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/text.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Array, Number, String],
   html: {
@@ -19221,7 +19072,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/valign.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/valign.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, "top", "middle", "bottom"],
   value: false
@@ -19229,7 +19080,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/width.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/width.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   value: false
@@ -19237,7 +19088,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/x.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/x.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   value: false
@@ -19245,7 +19096,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/methods/y.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/y.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   value: false
@@ -19253,7 +19104,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/textwrap/textwrap.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee":[function(require,module,exports){
 var attach, print, sizes, text, wrap;
 
 attach = require("../core/methods/attach.coffee");
@@ -19272,7 +19123,7 @@ module.exports = function() {
     self: function(selection) {
       selection.each(function() {
         sizes(vars);
-        if (vars.size.value[0] <= vars.height.value) {
+        if (vars.size.value[0] <= vars.height.inner) {
           text(vars);
           wrap(vars);
         }
@@ -19307,7 +19158,7 @@ module.exports = function() {
 
 
 
-},{"../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../core/methods/attach.coffee":"/Users/Dave/sites/d3plus/src/core/methods/attach.coffee","./helpers/parseSize.coffee":"/Users/Dave/sites/d3plus/src/textwrap/helpers/parseSize.coffee","./helpers/parseText.coffee":"/Users/Dave/sites/d3plus/src/textwrap/helpers/parseText.coffee","./helpers/wrap.coffee":"/Users/Dave/sites/d3plus/src/textwrap/helpers/wrap.coffee","./methods/align.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/align.coffee","./methods/config.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/config.coffee","./methods/container.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/container.coffee","./methods/dev.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/dev.coffee","./methods/draw.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/draw.coffee","./methods/format.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/format.coffee","./methods/height.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/height.coffee","./methods/padding.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/padding.coffee","./methods/resize.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/resize.coffee","./methods/rotate.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/rotate.coffee","./methods/shape.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/shape.coffee","./methods/size.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/size.coffee","./methods/text.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/text.coffee","./methods/valign.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/valign.coffee","./methods/width.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/width.coffee","./methods/x.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/x.coffee","./methods/y.coffee":"/Users/Dave/sites/d3plus/src/textwrap/methods/y.coffee"}],"/Users/Dave/sites/d3plus/src/tooltip/create.js":[function(require,module,exports){
+},{"../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../core/methods/attach.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/attach.coffee","./helpers/parseSize.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/helpers/parseSize.coffee","./helpers/parseText.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/helpers/parseText.coffee","./helpers/wrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/helpers/wrap.coffee","./methods/align.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/align.coffee","./methods/config.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/config.coffee","./methods/container.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/container.coffee","./methods/dev.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/dev.coffee","./methods/draw.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/draw.coffee","./methods/format.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/format.coffee","./methods/height.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/height.coffee","./methods/padding.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/padding.coffee","./methods/resize.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/resize.coffee","./methods/rotate.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/rotate.coffee","./methods/shape.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/shape.coffee","./methods/size.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/size.coffee","./methods/text.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/text.coffee","./methods/valign.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/valign.coffee","./methods/width.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/width.coffee","./methods/x.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/x.coffee","./methods/y.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/y.coffee"}],"/Users/Dave/Sites/d3plus/src/tooltip/create.js":[function(require,module,exports){
 var defaultLocale = require("../core/locale/languages/en_US.coffee"),
     events        = require("../client/pointer.coffee"),
     legible       = require("../color/legible.coffee"),
@@ -19874,7 +19725,7 @@ function close_descriptions() {
   d3.selectAll("div.d3plus_tooltip_data_help").style("background-color","#ccc");
 }
 
-},{"../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../client/prefix.coffee":"/Users/Dave/sites/d3plus/src/client/prefix.coffee","../client/rtl.coffee":"/Users/Dave/sites/d3plus/src/client/rtl.coffee","../color/legible.coffee":"/Users/Dave/sites/d3plus/src/color/legible.coffee","../color/text.coffee":"/Users/Dave/sites/d3plus/src/color/text.coffee","../core/locale/languages/en_US.coffee":"/Users/Dave/sites/d3plus/src/core/locale/languages/en_US.coffee","../string/list.coffee":"/Users/Dave/sites/d3plus/src/string/list.coffee","./move.coffee":"/Users/Dave/sites/d3plus/src/tooltip/move.coffee","./remove.coffee":"/Users/Dave/sites/d3plus/src/tooltip/remove.coffee"}],"/Users/Dave/sites/d3plus/src/tooltip/move.coffee":[function(require,module,exports){
+},{"../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../core/locale/languages/en_US.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee","../string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","./move.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/move.coffee","./remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee"}],"/Users/Dave/Sites/d3plus/src/tooltip/move.coffee":[function(require,module,exports){
 var arrowStyle;
 
 module.exports = function(x, y, id) {
@@ -20040,7 +19891,7 @@ arrowStyle = function(arrow) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/tooltip/remove.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee":[function(require,module,exports){
 module.exports = function(id) {
   if (id) {
     d3.selectAll("div#d3plus_tooltip_curtain_" + id).remove();
@@ -20053,7 +19904,7 @@ module.exports = function(id) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/util/buckets.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/util/buckets.coffee":[function(require,module,exports){
 module.exports = function(arr, n) {
   var buckets, step;
   buckets = [];
@@ -20063,7 +19914,7 @@ module.exports = function(arr, n) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/util/child.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/util/child.coffee":[function(require,module,exports){
 var d3selection;
 
 d3selection = require("./d3selection.coffee");
@@ -20091,7 +19942,7 @@ module.exports = function(parent, child) {
 
 
 
-},{"./d3selection.coffee":"/Users/Dave/sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/sites/d3plus/src/util/closest.coffee":[function(require,module,exports){
+},{"./d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/util/closest.coffee":[function(require,module,exports){
 module.exports = function(arr, value) {
   var closest;
   closest = arr[0];
@@ -20105,7 +19956,7 @@ module.exports = function(arr, value) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/util/copy.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/util/copy.coffee":[function(require,module,exports){
 var copy, objectMerge, objectValidate;
 
 objectMerge = require("../object/merge.coffee");
@@ -20131,7 +19982,7 @@ module.exports = copy;
 
 
 
-},{"../object/merge.coffee":"/Users/Dave/sites/d3plus/src/object/merge.coffee","../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/sites/d3plus/src/util/d3selection.coffee":[function(require,module,exports){
+},{"../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee":[function(require,module,exports){
 var ie;
 
 ie = require("../client/ie.js");
@@ -20146,7 +19997,7 @@ module.exports = function(elem) {
 
 
 
-},{"../client/ie.js":"/Users/Dave/sites/d3plus/src/client/ie.js"}],"/Users/Dave/sites/d3plus/src/util/dataURL.coffee":[function(require,module,exports){
+},{"../client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js"}],"/Users/Dave/Sites/d3plus/src/util/dataURL.coffee":[function(require,module,exports){
 module.exports = function(url, callback) {
   var img;
   img = new Image();
@@ -20166,7 +20017,7 @@ module.exports = function(url, callback) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/util/uniques.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/util/uniques.coffee":[function(require,module,exports){
 var objectValidate, uniques;
 
 objectValidate = require("../object/validate.coffee");
@@ -20240,7 +20091,7 @@ module.exports = uniques;
 
 
 
-},{"../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/container.coffee":[function(require,module,exports){
+},{"../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/container.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   var checkParent, s, _i, _len, _ref;
   vars.container.value.style("position", function() {
@@ -20296,7 +20147,7 @@ module.exports = function(vars) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/helpers/drawSteps.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/drawSteps.js":[function(require,module,exports){
 var dataFormat    = require("../../core/data/format.js"),
     dataColor     = require("../../core/data/color.js"),
     dataKeys      = require("../../core/data/keys.js"),
@@ -20519,7 +20370,7 @@ module.exports = function(vars) {
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     // Groups data by time and nesting.
     //--------------------------------------------------------------------------
-    if (vars.data.changed || vars.time.changed || vars.id.changed) {
+    if (vars.data.changed || vars.time.changed || vars.time.format.changed || vars.id.changed) {
       steps.push({ "function" : dataFormat , "message" : dataMessage })
     }
 
@@ -20670,7 +20521,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../core/data/color.js":"/Users/Dave/sites/d3plus/src/core/data/color.js","../../core/data/format.js":"/Users/Dave/sites/d3plus/src/core/data/format.js","../../core/data/keys.js":"/Users/Dave/sites/d3plus/src/core/data/keys.js","../../core/data/load.coffee":"/Users/Dave/sites/d3plus/src/core/data/load.coffee","../../core/fetch/data.js":"/Users/Dave/sites/d3plus/src/core/fetch/data.js","../../core/parse/edges.js":"/Users/Dave/sites/d3plus/src/core/parse/edges.js","../../core/parse/nodes.js":"/Users/Dave/sites/d3plus/src/core/parse/nodes.js","../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js","../../tooltip/remove.coffee":"/Users/Dave/sites/d3plus/src/tooltip/remove.coffee","./errorCheck.js":"/Users/Dave/sites/d3plus/src/viz/helpers/errorCheck.js","./finish.js":"/Users/Dave/sites/d3plus/src/viz/helpers/finish.js","./focus/tooltip.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/focus/tooltip.coffee","./focus/viz.js":"/Users/Dave/sites/d3plus/src/viz/helpers/focus/viz.js","./shapes/draw.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/draw.js","./svg/enter.js":"/Users/Dave/sites/d3plus/src/viz/helpers/svg/enter.js","./svg/update.js":"/Users/Dave/sites/d3plus/src/viz/helpers/svg/update.js","./types/run.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/types/run.coffee","./ui/drawer.js":"/Users/Dave/sites/d3plus/src/viz/helpers/ui/drawer.js","./ui/history.js":"/Users/Dave/sites/d3plus/src/viz/helpers/ui/history.js","./ui/legend.js":"/Users/Dave/sites/d3plus/src/viz/helpers/ui/legend.js","./ui/timeline.js":"/Users/Dave/sites/d3plus/src/viz/helpers/ui/timeline.js","./ui/titles.js":"/Users/Dave/sites/d3plus/src/viz/helpers/ui/titles.js"}],"/Users/Dave/sites/d3plus/src/viz/helpers/errorCheck.js":[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/data/color.js":"/Users/Dave/Sites/d3plus/src/core/data/color.js","../../core/data/format.js":"/Users/Dave/Sites/d3plus/src/core/data/format.js","../../core/data/keys.js":"/Users/Dave/Sites/d3plus/src/core/data/keys.js","../../core/data/load.coffee":"/Users/Dave/Sites/d3plus/src/core/data/load.coffee","../../core/fetch/data.js":"/Users/Dave/Sites/d3plus/src/core/fetch/data.js","../../core/parse/edges.js":"/Users/Dave/Sites/d3plus/src/core/parse/edges.js","../../core/parse/nodes.js":"/Users/Dave/Sites/d3plus/src/core/parse/nodes.js","../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","./errorCheck.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/errorCheck.js","./finish.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/finish.js","./focus/tooltip.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/tooltip.coffee","./focus/viz.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/viz.js","./shapes/draw.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/draw.js","./svg/enter.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/enter.js","./svg/update.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/update.js","./types/run.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/types/run.coffee","./ui/drawer.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/drawer.js","./ui/history.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/history.js","./ui/legend.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/legend.js","./ui/timeline.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/timeline.js","./ui/titles.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/titles.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/errorCheck.js":[function(require,module,exports){
 var fetchText    = require("../../core/fetch/text.js"),
     print        = require("../../core/console/print.coffee"),
     rejected     = require("../../core/methods/rejected.coffee"),
@@ -20787,7 +20638,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../core/fetch/text.js":"/Users/Dave/sites/d3plus/src/core/fetch/text.js","../../core/methods/rejected.coffee":"/Users/Dave/sites/d3plus/src/core/methods/rejected.coffee","../../string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js","../../string/list.coffee":"/Users/Dave/sites/d3plus/src/string/list.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/finish.js":[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../core/methods/rejected.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/rejected.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/finish.js":[function(require,module,exports){
 var edges = require("./shapes/edges.js"),
     flash       = require("./ui/message.js"),
     methodReset = require("../../core/methods/reset.coffee"),
@@ -20978,7 +20829,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../core/methods/reset.coffee":"/Users/Dave/sites/d3plus/src/core/methods/reset.coffee","../../string/title.coffee":"/Users/Dave/sites/d3plus/src/string/title.coffee","./shapes/edges.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/edges.js","./shapes/labels.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/labels.js","./ui/message.js":"/Users/Dave/sites/d3plus/src/viz/helpers/ui/message.js","./zoom/bounds.js":"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/bounds.js","./zoom/labels.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/labels.coffee","./zoom/mouse.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/mouse.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/focus/tooltip.coffee":[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/methods/reset.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/reset.coffee","../../string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee","./shapes/edges.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/edges.js","./shapes/labels.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/labels.js","./ui/message.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/message.js","./zoom/bounds.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/bounds.js","./zoom/labels.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/labels.coffee","./zoom/mouse.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/mouse.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/tooltip.coffee":[function(require,module,exports){
 var createTooltip, fetchValue, print, removeTooltip;
 
 createTooltip = require("../tooltip/create.js");
@@ -21034,7 +20885,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../tooltip/remove.coffee":"/Users/Dave/sites/d3plus/src/tooltip/remove.coffee","../tooltip/create.js":"/Users/Dave/sites/d3plus/src/viz/helpers/tooltip/create.js"}],"/Users/Dave/sites/d3plus/src/viz/helpers/focus/viz.js":[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../tooltip/create.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/create.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/viz.js":[function(require,module,exports){
 var events = require("../../../client/pointer.coffee"),
     fetchValue   = require("../../../core/fetch/value.coffee"),
     print        = require("../../../core/console/print.coffee"),
@@ -21193,7 +21044,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/arc.coffee":[function(require,module,exports){
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/arc.coffee":[function(require,module,exports){
 var largestRect, path2poly, shapeStyle;
 
 shapeStyle = require("./style.coffee");
@@ -21285,7 +21136,7 @@ module.exports = function(vars, selection, enter, exit) {
 
 
 
-},{"../../../geom/largestRect.coffee":"/Users/Dave/sites/d3plus/src/geom/largestRect.coffee","../../../geom/path2poly.coffee":"/Users/Dave/sites/d3plus/src/geom/path2poly.coffee","./style.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/area.js":[function(require,module,exports){
+},{"../../../geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","../../../geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/area.js":[function(require,module,exports){
 var fetchText = require("../../../core/fetch/text.js"),
     fontSizes   = require("../../../font/sizes.coffee"),
     largestRect = require("../../../geom/largestRect.coffee"),
@@ -21395,7 +21246,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"../../../core/fetch/text.js":"/Users/Dave/sites/d3plus/src/core/fetch/text.js","../../../font/sizes.coffee":"/Users/Dave/sites/d3plus/src/font/sizes.coffee","../../../geom/largestRect.coffee":"/Users/Dave/sites/d3plus/src/geom/largestRect.coffee","./style.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/check.js":[function(require,module,exports){
+},{"../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/check.js":[function(require,module,exports){
 var fetchText = require("../../../core/fetch/text.js"),
     largestRect = require("../../../geom/largestRect.coffee"),
     shapeStyle  = require("./style.coffee")
@@ -21452,7 +21303,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"../../../core/fetch/text.js":"/Users/Dave/sites/d3plus/src/core/fetch/text.js","../../../geom/largestRect.coffee":"/Users/Dave/sites/d3plus/src/geom/largestRect.coffee","./style.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/color.coffee":[function(require,module,exports){
+},{"../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/color.coffee":[function(require,module,exports){
 var fetchColor, fetchValue, lighter;
 
 fetchValue = require("../../../core/fetch/value.coffee");
@@ -21491,7 +21342,7 @@ module.exports = function(d, vars, stroke) {
 
 
 
-},{"../../../color/lighter.coffee":"/Users/Dave/sites/d3plus/src/color/lighter.coffee","../../../core/fetch/color.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/coordinates.js":[function(require,module,exports){
+},{"../../../color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/coordinates.js":[function(require,module,exports){
 var copy = require("../../../util/copy.coffee"),
     fetchText   = require("../../../core/fetch/text.js"),
     fontSizes   = require("../../../font/sizes.coffee"),
@@ -21680,7 +21531,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"../../../core/fetch/text.js":"/Users/Dave/sites/d3plus/src/core/fetch/text.js","../../../font/sizes.coffee":"/Users/Dave/sites/d3plus/src/font/sizes.coffee","../../../geom/largestRect.coffee":"/Users/Dave/sites/d3plus/src/geom/largestRect.coffee","../../../geom/path2poly.coffee":"/Users/Dave/sites/d3plus/src/geom/path2poly.coffee","../../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee","./style.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/cross.js":[function(require,module,exports){
+},{"../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","../../../geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/cross.js":[function(require,module,exports){
 var shapeStyle  = require("./style.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Draws "square" and "circle" shapes using svg:rect
@@ -21733,7 +21584,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"./style.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/diamond.js":[function(require,module,exports){
+},{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/diamond.js":[function(require,module,exports){
 var shapeStyle  = require("./style.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Draws "square" and "circle" shapes using svg:rect
@@ -21786,7 +21637,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"./style.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/donut.js":[function(require,module,exports){
+},{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/donut.js":[function(require,module,exports){
 var shapeStyle = require("./style.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Draws "donut" shapes using svg:path with arcs
@@ -21884,7 +21735,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"./style.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/draw.js":[function(require,module,exports){
+},{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/draw.js":[function(require,module,exports){
 var child         = require("../../../util/child.coffee"),
     closest       = require("../../../util/closest.coffee"),
     createTooltip = require("../tooltip/create.js"),
@@ -22302,7 +22153,7 @@ module.exports = function(vars) {
 
   edge_update()
 
-  if (!touch) {
+  if (!touch && vars.tooltip.value) {
 
     vars.g.data.selectAll("g")
       .on(events.over,function(d){
@@ -22587,7 +22438,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../../../client/touch.coffee":"/Users/Dave/sites/d3plus/src/client/touch.coffee","../../../color/legible.coffee":"/Users/Dave/sites/d3plus/src/color/legible.coffee","../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../core/fetch/color.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../../string/strip.js":"/Users/Dave/sites/d3plus/src/string/strip.js","../../../tooltip/remove.coffee":"/Users/Dave/sites/d3plus/src/tooltip/remove.coffee","../../../util/child.coffee":"/Users/Dave/sites/d3plus/src/util/child.coffee","../../../util/closest.coffee":"/Users/Dave/sites/d3plus/src/util/closest.coffee","../../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee","../tooltip/create.js":"/Users/Dave/sites/d3plus/src/viz/helpers/tooltip/create.js","../zoom/direction.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/direction.coffee","../zoom/propagation.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/propagation.coffee","./arc.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/arc.coffee","./area.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/area.js","./check.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/check.js","./coordinates.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/coordinates.js","./cross.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/cross.js","./diamond.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/diamond.js","./donut.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/donut.js","./fill.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/fill.js","./line.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/line.js","./rect.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/rect.coffee","./triangle_down.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/triangle_down.js","./triangle_up.js":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/triangle_up.js","./whisker.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/whisker.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/edges.js":[function(require,module,exports){
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","../../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../../../util/child.coffee":"/Users/Dave/Sites/d3plus/src/util/child.coffee","../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../tooltip/create.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/create.js","../zoom/direction.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/direction.coffee","../zoom/propagation.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/propagation.coffee","./arc.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/arc.coffee","./area.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/area.js","./check.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/check.js","./coordinates.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/coordinates.js","./cross.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/cross.js","./diamond.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/diamond.js","./donut.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/donut.js","./fill.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/fill.js","./line.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/line.js","./rect.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/rect.coffee","./triangle_down.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/triangle_down.js","./triangle_up.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/triangle_up.js","./whisker.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/whisker.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/edges.js":[function(require,module,exports){
 var buckets = require("../../../util/buckets.coffee"),
     offset  = require("../../../geom/offset.coffee");
 
@@ -23156,7 +23007,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../geom/offset.coffee":"/Users/Dave/sites/d3plus/src/geom/offset.coffee","../../../util/buckets.coffee":"/Users/Dave/sites/d3plus/src/util/buckets.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/fill.js":[function(require,module,exports){
+},{"../../../geom/offset.coffee":"/Users/Dave/Sites/d3plus/src/geom/offset.coffee","../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/fill.js":[function(require,module,exports){
 var copy       = require("../../../util/copy.coffee"),
     fetchColor = require("../../../core/fetch/color.coffee"),
     fetchValue = require("../../../core/fetch/value.coffee"),
@@ -23436,7 +23287,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 };
 
-},{"../../../core/fetch/color.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee","./style.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/labels.js":[function(require,module,exports){
+},{"../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/labels.js":[function(require,module,exports){
 var copy       = require("../../../util/copy.coffee"),
     fetchText  = require("../../../core/fetch/text.js"),
     fetchValue = require("../../../core/fetch/value.coffee"),
@@ -23488,7 +23339,9 @@ module.exports = function( vars , group ) {
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // Label Styling
   //----------------------------------------------------------------------------
-  style = function(text,wrap) {
+  style = function(text) {
+
+    var salign = vars.labels.valign.value === "bottom" ? "top" : "bottom";
 
     text
       .attr("font-weight",vars.labels.font.weight)
@@ -23507,76 +23360,66 @@ module.exports = function( vars , group ) {
         return mix( color , legible , 0.2 , opacity );
 
       })
+      .each(function(t){
 
-    if (wrap) {
+        if (t.resize instanceof Array) {
+          var min = t.resize[0], max = t.resize[1];
+        }
 
-      var salign = vars.labels.valign.value === "bottom" ? "top" : "bottom"
+        var size = t.resize, resize = true;
 
-      text
-        .each(function(t){
+        if (t.text) {
 
-          if (t.resize instanceof Array) {
-            var min = t.resize[0], max = t.resize[1];
+          if ( !(size instanceof Array) ) {
+            size = [9, 50];
+            resize = t.resize;
           }
 
-          var size = t.resize, resize = true;
+          var y = t.y - t.h*scale[1]/2 + t.padding/2;
+          if (salign === "bottom") y += (t.h * scale[1])/2;
 
-          if (t.text) {
+          textWrap()
+            .align("center")
+            .container(d3.select(this))
+            .height((t.h * scale[1])/2)
+            .padding(t.padding/2)
+            .resize( resize )
+            .size( size )
+            .text( vars.format.value(t.text*100,"share")+"%" , vars)
+            .width(t.w * scale[1])
+            .valign(salign)
+            .x(t.x - t.w*scale[1]/2 + t.padding/2)
+            .y(y)
+            .draw();
 
-            if ( !(size instanceof Array) ) {
-              size = [9, 50];
-              resize = t.resize;
-            }
+        }
+        else {
 
-            var y = t.y - t.h*scale[1]/2 + t.padding/2
-            if (salign === "bottom") y += (t.h * scale[1])/2
-
-            textWrap()
-              .align("center")
-              .container(d3.select(this))
-              .height((t.h * scale[1])/2)
-              .padding(t.padding/2)
-              .resize( resize )
-              .size( size )
-              .text( vars.format.value(t.text*100,"share")+"%" , vars)
-              .width(t.w * scale[1])
-              .valign(salign)
-              .x(t.x - t.w*scale[1]/2 + t.padding/2)
-              .y(y)
-              .draw();
-
-          }
-          else {
-
-            if ( !(t.resize instanceof Array) ) {
-              size = [7, 40*(scale[1]/scale[0])];
-              resize = t.resize;
-            }
-
-            var yOffset = vars.labels.valign.value === "bottom" ? t.share : 0;
-
-            textWrap()
-              .align(vars.labels.align.value)
-              .container( d3.select(this) )
-              .height(t.h * scale[1] - t.share)
-              .padding(t.padding/2)
-              .resize( resize )
-              .size( size )
-              .shape(t.shape || "square")
-              .text( t.names )
-              .valign(vars.labels.valign.value)
-              .width(t.w * scale[1])
-              .x(t.x - t.w*scale[1]/2 + t.padding/2)
-              .y(t.y - t.h*scale[1]/2 + t.padding/2 + yOffset)
-              .draw();
-
+          if ( !(t.resize instanceof Array) ) {
+            size = [7, 40*(scale[1]/scale[0])];
+            resize = t.resize;
           }
 
-        });
+          var yOffset = vars.labels.valign.value === "bottom" ? t.share : 0;
 
-    }
+          textWrap()
+            .align(vars.labels.align.value)
+            .container( d3.select(this) )
+            .height(t.h * scale[1] - t.share)
+            .padding(t.padding/2)
+            .resize( resize )
+            .size( size )
+            .shape(t.shape || "square")
+            .text( t.names )
+            .valign(vars.labels.valign.value)
+            .width(t.w * scale[1])
+            .x(t.x - t.w*scale[1]/2 + t.padding/2)
+            .y(t.y - t.h*scale[1]/2 + t.padding/2 + yOffset)
+            .draw();
 
-    text
+        }
+
+      })
       .attr("transform",function(t){
         var translate = d3.select(this).attr("transform") || "";
         var a = t.angle || 0,
@@ -23635,7 +23478,7 @@ module.exports = function( vars , group ) {
 
       if (!disabled && (background || !fill)) {
 
-        if (share && d.d3plus.share && vars.labels.valign.value != "middle") {
+        if (share && d.d3plus.share && share.w-vars.labels.padding*2 >= 10 && share.h-vars.labels.padding*2 >= 10 && vars.labels.valign.value != "middle") {
 
           share.resize = vars.labels.resize.value === false ? false :
             share && "resize" in share ? share.resize : true;
@@ -23660,7 +23503,7 @@ module.exports = function( vars , group ) {
               .attr("id","d3plus_share_"+d.d3plus.id)
               .attr("class","d3plus_share")
               .attr("opacity",0)
-              .call(style,true)
+              .call(style)
               .transition().duration(vars.draw.timing/2)
               .delay(vars.draw.timing/2)
               .attr("opacity",1);
@@ -23676,11 +23519,11 @@ module.exports = function( vars , group ) {
               .attr("id","d3plus_share_"+d.d3plus.id)
               .attr("class","d3plus_share")
               .attr("opacity",1)
-              .call(style,true);
+              .call(style);
 
           }
 
-          share_size = text.node().getBBox().height;
+          share_size = text.node().getBBox().height + vars.labels.padding;
 
           text.exit().call(remove);
 
@@ -23735,7 +23578,7 @@ module.exports = function( vars , group ) {
               .attr("id","d3plus_label_"+d.d3plus.id)
               .attr("class","d3plus_label")
               .attr("opacity",0)
-              .call(style,true)
+              .call(style)
               .transition().duration(vars.draw.timing/2)
                 .delay(vars.draw.timing/2)
                 .call(opacity);
@@ -23752,7 +23595,7 @@ module.exports = function( vars , group ) {
               .attr("font-size",fontSize)
               .attr("id","d3plus_label_"+d.d3plus.id)
               .attr("class","d3plus_label")
-              .call(style,true)
+              .call(style)
               .call(opacity);
 
           }
@@ -23876,7 +23719,7 @@ module.exports = function( vars , group ) {
   }
 }
 
-},{"../../../client/rtl.coffee":"/Users/Dave/sites/d3plus/src/client/rtl.coffee","../../../color/mix.coffee":"/Users/Dave/sites/d3plus/src/color/mix.coffee","../../../color/text.coffee":"/Users/Dave/sites/d3plus/src/color/text.coffee","../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../core/fetch/text.js":"/Users/Dave/sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../string/list.coffee":"/Users/Dave/sites/d3plus/src/string/list.coffee","../../../textwrap/textwrap.coffee":"/Users/Dave/sites/d3plus/src/textwrap/textwrap.coffee","../../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee","./color.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/color.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/line.js":[function(require,module,exports){
+},{"../../../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","../../../color/mix.coffee":"/Users/Dave/Sites/d3plus/src/color/mix.coffee","../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./color.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/color.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/line.js":[function(require,module,exports){
 var copy       = require("../../../util/copy.coffee"),
     closest    = require("../../../util/closest.coffee"),
     events     = require("../../../client/pointer.coffee"),
@@ -24180,7 +24023,7 @@ function mouseStyle(vars, elem, stroke, mod) {
 
 }
 
-},{"../../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../util/closest.coffee":"/Users/Dave/sites/d3plus/src/util/closest.coffee","../../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee","./style.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/rect.coffee":[function(require,module,exports){
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/rect.coffee":[function(require,module,exports){
 var shapeStyle;
 
 shapeStyle = require("./style.coffee");
@@ -24312,7 +24155,7 @@ module.exports = function(vars, selection, enter, exit) {
 
 
 
-},{"./style.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee":[function(require,module,exports){
+},{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee":[function(require,module,exports){
 var color;
 
 color = require("./color.coffee");
@@ -24341,7 +24184,7 @@ module.exports = function(nodes, vars) {
 
 
 
-},{"./color.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/color.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/triangle_down.js":[function(require,module,exports){
+},{"./color.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/color.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/triangle_down.js":[function(require,module,exports){
 var shapeStyle  = require("./style.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Draws "square" and "circle" shapes using svg:rect
@@ -24394,7 +24237,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"./style.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/triangle_up.js":[function(require,module,exports){
+},{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/triangle_up.js":[function(require,module,exports){
 var shapeStyle  = require("./style.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Draws "square" and "circle" shapes using svg:rect
@@ -24447,7 +24290,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"./style.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/shapes/whisker.coffee":[function(require,module,exports){
+},{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/whisker.coffee":[function(require,module,exports){
 module.exports = function(vars, selection, enter, exit) {
   var d, data, init, marker, orient, pos, position, size, style;
   data = function(d) {
@@ -24531,7 +24374,7 @@ module.exports = function(vars, selection, enter, exit) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/helpers/svg/enter.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/enter.js":[function(require,module,exports){
 var events = require("../../../client/pointer.coffee"),
     prefix     = require("../../../client/prefix.coffee"),
     print      = require("../../../core/console/print.coffee"),
@@ -24708,7 +24551,7 @@ module.exports = function(vars) {
 
 };
 
-},{"../../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../../../client/prefix.coffee":"/Users/Dave/sites/d3plus/src/client/prefix.coffee","../../../client/touch.coffee":"/Users/Dave/sites/d3plus/src/client/touch.coffee","../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../zoom/propagation.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/propagation.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/svg/update.js":[function(require,module,exports){
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../zoom/propagation.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/propagation.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/update.js":[function(require,module,exports){
 var print = require("../../../core/console/print.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Updating Elements
@@ -24776,7 +24619,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/tooltip/create.js":[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/create.js":[function(require,module,exports){
 var arraySort     = require("../../../array/sort.coffee"),
     createTooltip = require("../../../tooltip/create.js"),
     dataNest      = require("../../../core/data/nest.js"),
@@ -25087,7 +24930,9 @@ module.exports = function(params) {
       make_tooltip(vars.tooltip.html.value(id))
     }
     else if (vars.tooltip.html.value && typeof vars.tooltip.html.value == "object" && vars.tooltip.html.value.url) {
-      d3.json(vars.tooltip.html.value.url,function(data){
+      var tooltip_url = vars.tooltip.html.value.url;
+      if (typeof tooltip_url === "function") tooltip_url = tooltip_url(id);
+      d3.json(tooltip_url,function(data){
         var html = vars.tooltip.html.value.callback ? vars.tooltip.html.value.callback(data) : data
         make_tooltip(html)
       })
@@ -25103,7 +24948,7 @@ module.exports = function(params) {
 
 }
 
-},{"../../../array/sort.coffee":"/Users/Dave/sites/d3plus/src/array/sort.coffee","../../../core/data/nest.js":"/Users/Dave/sites/d3plus/src/core/data/nest.js","../../../core/fetch/color.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../../tooltip/create.js":"/Users/Dave/sites/d3plus/src/tooltip/create.js","../../../tooltip/remove.coffee":"/Users/Dave/sites/d3plus/src/tooltip/remove.coffee","../../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee","../zoom/direction.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/direction.coffee","./data.js":"/Users/Dave/sites/d3plus/src/viz/helpers/tooltip/data.js"}],"/Users/Dave/sites/d3plus/src/viz/helpers/tooltip/data.js":[function(require,module,exports){
+},{"../../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../../core/data/nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../tooltip/create.js":"/Users/Dave/Sites/d3plus/src/tooltip/create.js","../../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../zoom/direction.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/direction.coffee","./data.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/data.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/data.js":[function(require,module,exports){
 var copy = require("../../../util/copy.coffee"),
     fetchValue   = require("../../../core/fetch/value.coffee"),
     fetchColor   = require("../../../core/fetch/color.coffee"),
@@ -25401,7 +25246,7 @@ module.exports = function(vars, id, length, extras, children, depth) {
 
 }
 
-},{"../../../client/prefix.coffee":"/Users/Dave/sites/d3plus/src/client/prefix.coffee","../../../color/legible.coffee":"/Users/Dave/sites/d3plus/src/color/legible.coffee","../../../core/fetch/color.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../object/merge.coffee":"/Users/Dave/sites/d3plus/src/object/merge.coffee","../../../string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js","../../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/types/run.coffee":[function(require,module,exports){
+},{"../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/types/run.coffee":[function(require,module,exports){
 var print;
 
 print = require("../../../core/console/print.coffee");
@@ -25444,7 +25289,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/ui/drawer.js":[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/drawer.js":[function(require,module,exports){
 var copy        = require("../../../util/copy.coffee"),
     form        = require("../../../form/form.js"),
     print       = require("../../../core/console/print.coffee"),
@@ -25579,7 +25424,7 @@ module.exports = function( vars ) {
 
 };
 
-},{"../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../form/form.js":"/Users/Dave/sites/d3plus/src/form/form.js","../../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/ui/history.js":[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../form/form.js":"/Users/Dave/Sites/d3plus/src/form/form.js","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/history.js":[function(require,module,exports){
 var events = require("../../../client/pointer.coffee"),
     lighter    = require("../../../color/lighter.coffee"),
     print      = require("../../../core/console/print.coffee"),
@@ -25685,7 +25530,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../client/css.coffee":"/Users/Dave/sites/d3plus/src/client/css.coffee","../../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../../../color/lighter.coffee":"/Users/Dave/sites/d3plus/src/color/lighter.coffee","../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/ui/legend.js":[function(require,module,exports){
+},{"../../../client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee","../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/legend.js":[function(require,module,exports){
 var arraySort = require("../../../array/sort.coffee"),
     buckets       = require("../../../util/buckets.coffee"),
     copy          = require("../../../util/copy.coffee"),
@@ -25710,11 +25555,9 @@ var arraySort = require("../../../array/sort.coffee"),
 module.exports = function(vars) {
 
   var key_display = true,
-      square_size = 0,
-      key = vars.color.value,
-      colorName = vars.color.value || "d3plus_color";
+      square_size = 0;
 
-  if (!vars.error.internal && key && !vars.small && vars.legend.value) {
+  if (!vars.error.internal && vars.color.value && !vars.small && vars.legend.value) {
 
     if (!vars.color.valueScale) {
 
@@ -25744,9 +25587,9 @@ module.exports = function(vars) {
           colorDepth = 0,
           colorKey = vars.id.value;
 
-      if (vars.id.nesting.indexOf(colorName) >= 0) {
+      if (vars.id.nesting.indexOf(vars.color.value) >= 0) {
         colorDepth = vars.id.nesting.indexOf(vars.color.value);
-        colorKey = vars.id.nesting[vars.id.nesting.indexOf(colorName)];
+        colorKey = vars.id.nesting[vars.id.nesting.indexOf(vars.color.value)];
       }
       else {
 
@@ -25768,7 +25611,7 @@ module.exports = function(vars) {
 
       }
 
-      var colors = dataNest(vars, data, [colorFunction], []);
+      var colors = dataNest(vars, data, [vars.color.value], []);
 
       if ( vars.dev.value ) print.timeEnd("grouping data by color")
 
@@ -25808,7 +25651,7 @@ module.exports = function(vars) {
 
         var order = vars[vars.legend.order.value].value;
 
-        arraySort(colors, order, vars.legend.order.sort.value, colorName, vars, colorDepth);
+        arraySort(colors, order, vars.legend.order.sort.value, vars.color.value, vars, colorDepth);
 
         if ( vars.dev.value ) print.timeEnd("sorting legend");
 
@@ -25960,9 +25803,13 @@ module.exports = function(vars) {
 
         }
 
+        var colorInt = {};
         var keys = vars.g.legend.selectAll("g.d3plus_color")
           .data(colors,function(d){
-            return fetchColor(vars, d, colorKey);
+            var c = fetchColor(vars, d, colorKey);
+            if (!(c in colorInt)) colorInt[c] = -1;
+            colorInt[c]++;
+            return colorInt[c]+"_"+c;
           });
 
         keys.enter().append("g")
@@ -25985,7 +25832,7 @@ module.exports = function(vars) {
           .attr("opacity",0)
           .remove();
 
-        if (!touch) {
+        if (!touch && vars.legend.tooltip.value) {
 
           keys
             .on(events.over,function(d,i){
@@ -25998,7 +25845,7 @@ module.exports = function(vars) {
 
               var idIndex = vars.id.nesting.indexOf(colorKey),
                   title = idIndex >= 0 ? fetchText(vars,d,idIndex)[0] :
-                          vars.format.value(fetchValue(vars,d,colorName,colorKey), colorName, vars, d);
+                          vars.format.value(fetchValue(vars,d,vars.color.value,colorKey), vars.color.value, vars, d);
 
               createTooltip({
                 "data": d,
@@ -26273,7 +26120,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../array/sort.coffee":"/Users/Dave/sites/d3plus/src/array/sort.coffee","../../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../../../client/touch.coffee":"/Users/Dave/sites/d3plus/src/client/touch.coffee","../../../color/text.coffee":"/Users/Dave/sites/d3plus/src/color/text.coffee","../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../core/data/nest.js":"/Users/Dave/sites/d3plus/src/core/data/nest.js","../../../core/fetch/color.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../../string/strip.js":"/Users/Dave/sites/d3plus/src/string/strip.js","../../../textwrap/textwrap.coffee":"/Users/Dave/sites/d3plus/src/textwrap/textwrap.coffee","../../../tooltip/remove.coffee":"/Users/Dave/sites/d3plus/src/tooltip/remove.coffee","../../../util/buckets.coffee":"/Users/Dave/sites/d3plus/src/util/buckets.coffee","../../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee","../../../util/dataURL.coffee":"/Users/Dave/sites/d3plus/src/util/dataURL.coffee","../../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee","../tooltip/create.js":"/Users/Dave/sites/d3plus/src/viz/helpers/tooltip/create.js"}],"/Users/Dave/sites/d3plus/src/viz/helpers/ui/message.js":[function(require,module,exports){
+},{"../../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/data/nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","../../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../../../util/dataURL.coffee":"/Users/Dave/Sites/d3plus/src/util/dataURL.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../tooltip/create.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/create.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/message.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Creates Centered Server Message
 //------------------------------------------------------------------------------
@@ -26386,7 +26233,7 @@ module.exports = function(vars,message) {
 
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/helpers/ui/timeline.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/timeline.js":[function(require,module,exports){
 var closest = require("../../../util/closest.coffee"),
     fontSizes = require("../../../font/sizes.coffee"),
     events    = require("../../../client/pointer.coffee"),
@@ -26408,8 +26255,8 @@ module.exports = function(vars) {
 
     if ( vars.dev.value ) print.time("drawing timeline")
 
-    var timeFormat = vars.time.format.value || vars.data.time.format
-      , timeMultiFormat = vars.time.format.value || vars.data.time.multiFormat
+    var timeFormat = vars.data.time.format,
+        timeMultiFormat = vars.data.time.multiFormat;
 
     if ((vars.time.value == vars.x.value && vars.x.scale.value == "discrete") || (vars.time.value == vars.y.value && vars.y.scale.value == "discrete")) {
       var min_required = 2
@@ -26829,7 +26676,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../../../client/prefix.coffee":"/Users/Dave/sites/d3plus/src/client/prefix.coffee","../../../color/text.coffee":"/Users/Dave/sites/d3plus/src/color/text.coffee","../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../font/sizes.coffee":"/Users/Dave/sites/d3plus/src/font/sizes.coffee","../../../util/closest.coffee":"/Users/Dave/sites/d3plus/src/util/closest.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/ui/titles.js":[function(require,module,exports){
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/titles.js":[function(require,module,exports){
 var events = require("../../../client/pointer.coffee"),
     fetchValue = require("../../../core/fetch/value.coffee"),
     print      = require("../../../core/console/print.coffee"),
@@ -26947,19 +26794,23 @@ module.exports = function(vars) {
   if (!vars.small) {
 
     if (vars.title.value) {
+      var title = vars.title.value;
+      if (typeof title === "function") title = title(vars.self);
       title_data.push({
         "link": vars.title.link,
         "style": vars.title,
         "type": "title",
-        "value": vars.title.value
+        "value": title
       })
     }
     if (vars.title.sub.value) {
+      var title = vars.title.sub.value;
+      if (typeof title === "function") title = title(vars.self);
       title_data.push({
         "link": vars.title.sub.link,
         "style": vars.title.sub,
         "type": "sub",
-        "value": vars.title.sub.value
+        "value": title
       })
     }
     if (vars.title.total.value && total) {
@@ -27132,7 +26983,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../../../client/rtl.coffee":"/Users/Dave/sites/d3plus/src/client/rtl.coffee","../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../textwrap/textwrap.coffee":"/Users/Dave/sites/d3plus/src/textwrap/textwrap.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/bounds.js":[function(require,module,exports){
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/bounds.js":[function(require,module,exports){
 var labels = require("./labels.coffee"),
     transform = require("./transform.coffee");
 
@@ -27195,7 +27046,7 @@ module.exports = function( vars , b , timing ) {
 
 };
 
-},{"./labels.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/labels.coffee","./transform.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/transform.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/direction.coffee":[function(require,module,exports){
+},{"./labels.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/labels.coffee","./transform.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/direction.coffee":[function(require,module,exports){
 module.exports = function(data, vars) {
   var depth, max_depth, nextDepth;
   max_depth = vars.id.nesting.length - 1;
@@ -27214,7 +27065,7 @@ module.exports = function(data, vars) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/labels.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/labels.coffee":[function(require,module,exports){
 var print;
 
 print = require("../../../core/console/print.coffee");
@@ -27252,7 +27103,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/mouse.coffee":[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/mouse.coffee":[function(require,module,exports){
 var labels, transform;
 
 labels = require("./labels.coffee");
@@ -27302,7 +27153,7 @@ module.exports = function(vars) {
 
 
 
-},{"./labels.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/labels.coffee","./transform.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/transform.coffee"}],"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/propagation.coffee":[function(require,module,exports){
+},{"./labels.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/labels.coffee","./transform.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/propagation.coffee":[function(require,module,exports){
 module.exports = function(vars, event) {
   var enabled, zoom, zoomable, zoomed;
   zoom = vars.zoom;
@@ -27319,7 +27170,7 @@ module.exports = function(vars, event) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/helpers/zoom/transform.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/transform.coffee":[function(require,module,exports){
 module.exports = function(vars, timing) {
   var scale, translate;
   if (typeof timing !== "number") {
@@ -27336,7 +27187,7 @@ module.exports = function(vars, timing) {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/active.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/active.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -27356,7 +27207,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/aggs.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/aggs.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Object],
   deprecated: "nesting_aggs",
@@ -27366,7 +27217,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/attrs.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/attrs.coffee":[function(require,module,exports){
 var process;
 
 process = require("../../core/methods/process/data.coffee");
@@ -27388,7 +27239,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/process/data.coffee":"/Users/Dave/sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/axes.coffee":[function(require,module,exports){
+},{"../../core/methods/process/data.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/axes.coffee":[function(require,module,exports){
 var rendering;
 
 rendering = require("../../core/methods/rendering.coffee");
@@ -27411,7 +27262,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/rendering.coffee":"/Users/Dave/sites/d3plus/src/core/methods/rendering.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/background.coffee":[function(require,module,exports){
+},{"../../core/methods/rendering.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/rendering.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/background.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [String],
   value: "#ffffff"
@@ -27419,7 +27270,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/color.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/color.coffee":[function(require,module,exports){
 var filter, scale;
 
 filter = require("../../core/methods/filter.coffee");
@@ -27457,7 +27308,7 @@ module.exports = {
 
 
 
-},{"../../color/scale.coffee":"/Users/Dave/sites/d3plus/src/color/scale.coffee","../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/cols.js":[function(require,module,exports){
+},{"../../color/scale.coffee":"/Users/Dave/Sites/d3plus/src/color/scale.coffee","../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/cols.js":[function(require,module,exports){
 module.exports = {
   "accepted": [Array, Function, String],
   "index": {
@@ -27471,7 +27322,7 @@ module.exports = {
   "value": false
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/config.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/config.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Object],
   objectAccess: false,
@@ -27490,7 +27341,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/container.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/container.coffee":[function(require,module,exports){
 var d3selection;
 
 d3selection = require("../../util/d3selection.coffee");
@@ -27514,7 +27365,7 @@ module.exports = {
 
 
 
-},{"../../util/d3selection.coffee":"/Users/Dave/sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/coords.coffee":[function(require,module,exports){
+},{"../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/coords.coffee":[function(require,module,exports){
 var filter, process;
 
 filter = require("../../core/methods/filter.coffee");
@@ -27546,7 +27397,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee","../../core/methods/process/data.coffee":"/Users/Dave/sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/csv.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee","../../core/methods/process/data.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/csv.coffee":[function(require,module,exports){
 var fetchValue, ie, stringStrip;
 
 fetchValue = require("../../core/fetch/value.coffee");
@@ -27572,7 +27423,15 @@ module.exports = {
     }
     csv_to_return = [];
     titles = [];
-    title = stringStrip(vars.title.value || "My D3plus App Data");
+    if (vars.title.value) {
+      title = vars.title.string;
+      if (typeof title === "function") {
+        title = title(vars.self);
+      }
+      title = stringStrip(title);
+    } else {
+      title = "D3plus Visualization Data";
+    }
     if (!columns) {
       columns = [vars.id.value];
       if (vars.time.value) {
@@ -27626,7 +27485,7 @@ module.exports = {
 
 
 
-},{"../../client/ie.js":"/Users/Dave/sites/d3plus/src/client/ie.js","../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../string/strip.js":"/Users/Dave/sites/d3plus/src/string/strip.js"}],"/Users/Dave/sites/d3plus/src/viz/methods/data.coffee":[function(require,module,exports){
+},{"../../client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js"}],"/Users/Dave/Sites/d3plus/src/viz/methods/data.coffee":[function(require,module,exports){
 var process;
 
 process = require("../../core/methods/process/data.coffee");
@@ -27671,7 +27530,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/process/data.coffee":"/Users/Dave/sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/depth.coffee":[function(require,module,exports){
+},{"../../core/methods/process/data.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/depth.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Function, Number],
   value: 0
@@ -27679,7 +27538,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/descs.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/descs.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Function, Object],
   value: false
@@ -27687,7 +27546,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/dev.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/dev.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   value: false
@@ -27695,7 +27554,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/draw.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/draw.js":[function(require,module,exports){
 var print        = require("../../core/console/print.coffee"),
     stringFormat = require("../../string/format.js")
 
@@ -27756,7 +27615,7 @@ module.exports = {
   "value"    : undefined
 }
 
-},{"../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../string/format.js":"/Users/Dave/sites/d3plus/src/string/format.js"}],"/Users/Dave/sites/d3plus/src/viz/methods/edges.js":[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js"}],"/Users/Dave/Sites/d3plus/src/viz/methods/edges.js":[function(require,module,exports){
 var process = require("../../core/methods/process/data.coffee");
 
 module.exports = {
@@ -27857,7 +27716,7 @@ module.exports = {
   "value":  false
 };
 
-},{"../../core/methods/process/data.coffee":"/Users/Dave/sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/error.coffee":[function(require,module,exports){
+},{"../../core/methods/process/data.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/error.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean, String],
   value: false
@@ -27865,7 +27724,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/focus.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/focus.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Array, Function, Number, String],
   deprecates: "highlight",
@@ -27887,7 +27746,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/font.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/font.coffee":[function(require,module,exports){
 var align, decoration, family, transform;
 
 align = require("../../core/methods/font/align.coffee");
@@ -27921,7 +27780,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/align.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/footer.coffee":[function(require,module,exports){
+},{"../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/footer.coffee":[function(require,module,exports){
 var decoration, family, transform;
 
 family = require("../../core/methods/font/family.coffee");
@@ -27949,7 +27808,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/decoration.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/format.coffee":[function(require,module,exports){
+},{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/format.coffee":[function(require,module,exports){
 var formatNumber, locale, mergeObject, titleCase;
 
 formatNumber = require("../../number/format.js");
@@ -28005,9 +27864,8 @@ module.exports = {
       vars = {};
     }
     if (vars.time && vars.time.value && key === vars.time.value) {
-      f = vars.time.format.value || vars.data.time.format;
-      v = (value.constructor === Date ? value : new Date(value));
-      return f(v);
+      v = value.constructor === Date ? value : new Date(value);
+      return vars.data.time.format(v);
     } else if (typeof value === "number") {
       f = this.number.value || formatNumber;
       return f(value, key, vars, data);
@@ -28022,7 +27880,7 @@ module.exports = {
 
 
 
-},{"../../core/locale/locale.coffee":"/Users/Dave/sites/d3plus/src/core/locale/locale.coffee","../../number/format.js":"/Users/Dave/sites/d3plus/src/number/format.js","../../object/merge.coffee":"/Users/Dave/sites/d3plus/src/object/merge.coffee","../../string/title.coffee":"/Users/Dave/sites/d3plus/src/string/title.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/height.coffee":[function(require,module,exports){
+},{"../../core/locale/locale.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/locale.coffee","../../number/format.js":"/Users/Dave/Sites/d3plus/src/number/format.js","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/height.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   max: 600,
@@ -28033,7 +27891,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/helpers/axis.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/helpers/axis.coffee":[function(require,module,exports){
 var align, decoration, family, filter, position, rendering, transform;
 
 align = require("../../../core/methods/font/align.coffee");
@@ -28221,7 +28079,7 @@ module.exports = function(axis) {
 
 
 
-},{"../../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee","../../../core/methods/font/align.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/align.coffee","../../../core/methods/font/decoration.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/decoration.coffee","../../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee","../../../core/methods/font/position.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/position.coffee","../../../core/methods/font/transform.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee","../../../core/methods/rendering.coffee":"/Users/Dave/sites/d3plus/src/core/methods/rendering.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/history.coffee":[function(require,module,exports){
+},{"../../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee","../../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../../core/methods/font/position.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/position.coffee","../../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee","../../../core/methods/rendering.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/rendering.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/history.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   back: function() {
@@ -28236,7 +28094,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/icon.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/icon.coffee":[function(require,module,exports){
 var process;
 
 process = require("../../core/methods/process/icon.coffee");
@@ -28262,7 +28120,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/process/icon.coffee":"/Users/Dave/sites/d3plus/src/core/methods/process/icon.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/id.coffee":[function(require,module,exports){
+},{"../../core/methods/process/icon.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/icon.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/id.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -28283,7 +28141,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/labels.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/labels.coffee":[function(require,module,exports){
 var decoration, family, transform;
 
 decoration = require("../../core/methods/font/decoration.coffee");
@@ -28332,7 +28190,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/decoration.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/legend.coffee":[function(require,module,exports){
+},{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/legend.coffee":[function(require,module,exports){
 var family;
 
 family = require("../../core/methods/font/family.coffee");
@@ -28359,6 +28217,10 @@ module.exports = {
     value: "color"
   },
   size: [8, 30],
+  tooltip: {
+    accepted: [Boolean],
+    value: true
+  },
   text: {
     accepted: [false, Function, String],
     value: false
@@ -28368,7 +28230,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/links.coffee":[function(require,module,exports){
+},{"../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/links.coffee":[function(require,module,exports){
 var decoration, family, transform;
 
 decoration = require("../../core/methods/font/decoration.coffee");
@@ -28396,7 +28258,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/decoration.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/margin.coffee":[function(require,module,exports){
+},{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/margin.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Number, Object, String],
   process: function(value) {
@@ -28465,7 +28327,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/messages.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/messages.coffee":[function(require,module,exports){
 var decoration, family, transform;
 
 decoration = require("../../core/methods/font/decoration.coffee");
@@ -28494,7 +28356,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/decoration.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/nodes.coffee":[function(require,module,exports){
+},{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/nodes.coffee":[function(require,module,exports){
 var process;
 
 process = require("../../core/methods/process/data.coffee");
@@ -28516,7 +28378,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/process/data.coffee":"/Users/Dave/sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/order.coffee":[function(require,module,exports){
+},{"../../core/methods/process/data.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/order.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean, Function, String],
   agg: {
@@ -28533,7 +28395,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/shape.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/shape.coffee":[function(require,module,exports){
 var rendering;
 
 rendering = require("../../core/methods/rendering.coffee");
@@ -28562,7 +28424,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/rendering.coffee":"/Users/Dave/sites/d3plus/src/core/methods/rendering.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/size.coffee":[function(require,module,exports){
+},{"../../core/methods/rendering.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/rendering.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/size.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -28597,14 +28459,14 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/style.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/style.coffee":[function(require,module,exports){
 module.exports = {
   value: false
 };
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/temp.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/temp.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -28619,7 +28481,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/text.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/text.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -28635,7 +28497,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/time.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/time.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -28650,7 +28512,7 @@ module.exports = {
     value: true
   },
   format: {
-    accepted: [false, String],
+    accepted: [false, Array, Function, String],
     value: false
   },
   mute: filter(false),
@@ -28660,7 +28522,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/timeline.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/timeline.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   align: "middle",
@@ -28687,7 +28549,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/timing.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/timing.coffee":[function(require,module,exports){
 module.exports = {
   mouseevents: 60,
   transitions: 600,
@@ -28696,7 +28558,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/title.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/title.coffee":[function(require,module,exports){
 var decoration, family, stringStrip, transform;
 
 decoration = require("../../core/methods/font/decoration.coffee");
@@ -28733,7 +28595,7 @@ module.exports = {
     return value;
   },
   sub: {
-    accepted: [false, String],
+    accepted: [false, Function, String],
     deprecates: "sub_title",
     font: {
       align: "center",
@@ -28773,7 +28635,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/decoration.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee","../../string/strip.js":"/Users/Dave/sites/d3plus/src/string/strip.js"}],"/Users/Dave/sites/d3plus/src/viz/methods/tooltip.coffee":[function(require,module,exports){
+},{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee","../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js"}],"/Users/Dave/Sites/d3plus/src/viz/methods/tooltip.coffee":[function(require,module,exports){
 var family, transform;
 
 family = require("../../core/methods/font/family.coffee");
@@ -28781,7 +28643,7 @@ family = require("../../core/methods/font/family.coffee");
 transform = require("../../core/methods/font/transform.coffee");
 
 module.exports = {
-  accepted: [false, Array, Function, Object, String],
+  accepted: [Boolean, Array, Function, Object, String],
   anchor: "top center",
   background: "#ffffff",
   children: {
@@ -28805,7 +28667,7 @@ module.exports = {
     weight: 200
   },
   html: {
-    accepted: [false, Function, String],
+    accepted: [false, Function, Object, String],
     deprecates: "click_function",
     value: false
   },
@@ -28819,12 +28681,12 @@ module.exports = {
     value: true
   },
   small: 225,
-  value: false
+  value: true
 };
 
 
 
-},{"../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/total.coffee":[function(require,module,exports){
+},{"../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/total.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -28839,7 +28701,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":"/Users/Dave/sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/type.coffee":[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/type.coffee":[function(require,module,exports){
 module.exports = {
   accepted: function(vars) {
     return d3.keys(vars.types);
@@ -28855,7 +28717,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/ui.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/ui.coffee":[function(require,module,exports){
 var align, decoration, family, transform;
 
 family = require("../../core/methods/font/family.coffee");
@@ -28911,7 +28773,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/align.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/sites/d3plus/src/viz/methods/width.coffee":[function(require,module,exports){
+},{"../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/width.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   secondary: false,
@@ -28921,7 +28783,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/methods/zoom.js":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/zoom.js":[function(require,module,exports){
 module.exports = {
   "accepted"   : [ Boolean ],
   "behavior"   : d3.behavior.zoom().scaleExtent([ 1 , 1 ]).duration(0),
@@ -28941,7 +28803,7 @@ module.exports = {
   "value"      : true
 }
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/types/bar.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/types/bar.coffee":[function(require,module,exports){
 var bar, fetchValue, graph, nest, stack;
 
 fetchValue = require("../../core/fetch/value.coffee");
@@ -28968,7 +28830,7 @@ bar = function(vars) {
   if (domains.indexOf(void 0) >= 0) {
     return [];
   }
-  nested = nest(vars);
+  nested = vars.data.viz;
   if (vars.axes.stacked) {
     stack(vars, nested);
   }
@@ -29030,6 +28892,10 @@ bar = function(vars) {
   return data;
 };
 
+bar.filter = function(vars, data) {
+  return nest(vars, data);
+};
+
 bar.requirements = ["data", "x", "y"];
 
 bar.setup = function(vars) {
@@ -29048,7 +28914,7 @@ module.exports = bar;
 
 
 
-},{"../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/draw.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/box.coffee":[function(require,module,exports){
+},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/box.coffee":[function(require,module,exports){
 var box, fetchValue, graph, uniques;
 
 fetchValue = require("../../core/fetch/value.coffee");
@@ -29242,7 +29108,7 @@ module.exports = box;
 
 
 
-},{"../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee","./helpers/graph/draw.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/draw.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/bubbles.coffee":[function(require,module,exports){
+},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/bubbles.coffee":[function(require,module,exports){
 var arraySort, bubbles, fetchColor, fetchText, fetchValue, groupData, legible;
 
 arraySort = require("../../array/sort.coffee");
@@ -29373,7 +29239,7 @@ module.exports = bubbles;
 
 
 
-},{"../../array/sort.coffee":"/Users/Dave/sites/d3plus/src/array/sort.coffee","../../color/legible.coffee":"/Users/Dave/sites/d3plus/src/color/legible.coffee","../../core/data/group.coffee":"/Users/Dave/sites/d3plus/src/core/data/group.coffee","../../core/fetch/color.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee","../../core/fetch/text.js":"/Users/Dave/sites/d3plus/src/core/fetch/text.js","../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/deprecated/chart.coffee":[function(require,module,exports){
+},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../core/data/group.coffee":"/Users/Dave/Sites/d3plus/src/core/data/group.coffee","../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/deprecated/chart.coffee":[function(require,module,exports){
 var chart, print;
 
 print = require("../../../core/console/print.coffee");
@@ -29398,7 +29264,7 @@ module.exports = chart;
 
 
 
-},{"../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/geo_map.coffee":[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/geo_map.coffee":[function(require,module,exports){
 var geo_map;
 
 geo_map = function(vars) {
@@ -29439,7 +29305,7 @@ module.exports = geo_map;
 
 
 
-},{}],"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/dataTicks.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/dataTicks.coffee":[function(require,module,exports){
 var color, legible, print;
 
 color = require("../../../../core/fetch/color.coffee");
@@ -29520,7 +29386,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../../color/legible.coffee":"/Users/Dave/sites/d3plus/src/color/legible.coffee","../../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../../core/fetch/color.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/draw.coffee":[function(require,module,exports){
+},{"../../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee":[function(require,module,exports){
 var axes, draw, mouse, plot;
 
 axes = require("./includes/axes.coffee");
@@ -29543,7 +29409,7 @@ module.exports = function(vars, opts) {
 
 
 
-},{"./includes/axes.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/includes/axes.coffee","./includes/mouse.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/includes/mouse.coffee","./includes/plot.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/includes/plot.coffee","./includes/svg.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/includes/svg.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/includes/axes.coffee":[function(require,module,exports){
+},{"./includes/axes.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/axes.coffee","./includes/mouse.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/mouse.coffee","./includes/plot.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/plot.coffee","./includes/svg.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/svg.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/axes.coffee":[function(require,module,exports){
 var axisRange, buckets, buffer, dataChange, fetchData, fetchValue, getData, getScale, print, sizeScale, uniques;
 
 buffer = require("./buffer.coffee");
@@ -29644,7 +29510,7 @@ getData = function(vars) {
 };
 
 axisRange = function(vars, axis, zero, buffer) {
-  var agg, aggType, allNegative, allPositive, axisSums, min, oppAxis, sort, sortKey, valueNest, values;
+  var agg, aggType, allNegative, allPositive, axisSums, d, min, oppAxis, sort, sortKey, splitData, val, valueNest, values, _i, _j, _len, _len1, _ref, _ref1;
   oppAxis = axis === "x" ? "y" : "x";
   if (vars[axis].range.value && vars[axis].range.value.length === 2) {
     return vars[axis].range.value.slice();
@@ -29652,6 +29518,16 @@ axisRange = function(vars, axis, zero, buffer) {
     vars[axis].ticks.values = d3.range(0, 1.1, 0.1);
     return [0, 1];
   } else if (vars[axis].stacked.value) {
+    splitData = [];
+    _ref = vars.axes.dataset;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      d = _ref[_i];
+      if (d.values) {
+        splitData = splitData.concat(d.values);
+      } else {
+        splitData.push(d);
+      }
+    }
     axisSums = d3.nest().key(function(d) {
       return fetchValue(vars, d, vars[oppAxis].value);
     }).rollup(function(leaves) {
@@ -29675,7 +29551,7 @@ axisRange = function(vars, axis, zero, buffer) {
         }
       });
       return [negatives, positives];
-    }).entries(vars.axes.dataset);
+    }).entries(splitData);
     values = d3.merge(axisSums.map(function(d) {
       return d.values;
     }));
@@ -29683,9 +29559,17 @@ axisRange = function(vars, axis, zero, buffer) {
   } else if (vars[axis].value === vars.time.value && vars[axis].ticks.values) {
     return d3.extent(vars[axis].ticks.values);
   } else {
-    values = vars.axes.dataset.map(function(d) {
-      return fetchValue(vars, d, vars[axis].value);
-    });
+    values = [];
+    _ref1 = vars.axes.dataset;
+    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+      d = _ref1[_j];
+      val = fetchValue(vars, d, vars[axis].value);
+      if (val instanceof Array) {
+        values = values.concat(val);
+      } else {
+        values.push(val);
+      }
+    }
     if (typeof values[0] === "string") {
       if (vars.order.value === true) {
         sortKey = vars[oppAxis].value;
@@ -29734,8 +29618,12 @@ axisRange = function(vars, axis, zero, buffer) {
         }
       }
       if (zero) {
-        allPositive = values[0] >= 0 && values[1] >= 0;
-        allNegative = values[0] <= 0 && values[1] <= 0;
+        allPositive = values.every(function(v) {
+          return v > 0;
+        });
+        allNegative = values.every(function(v) {
+          return v < 0;
+        });
         if (allPositive || allNegative) {
           min = allPositive ? 1 : -1;
           values.push(vars[axis].scale.value === "log" ? min : 0);
@@ -29807,7 +29695,7 @@ sizeScale = function(vars, value) {
 
 
 
-},{"../../../../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../../../../core/fetch/data.js":"/Users/Dave/sites/d3plus/src/core/fetch/data.js","../../../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../../../util/buckets.coffee":"/Users/Dave/sites/d3plus/src/util/buckets.coffee","../../../../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee","./buffer.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee":[function(require,module,exports){
+},{"../../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../../../core/fetch/data.js":"/Users/Dave/Sites/d3plus/src/core/fetch/data.js","../../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../../../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./buffer.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee":[function(require,module,exports){
 var buckets, closest;
 
 buckets = require("../../../../../util/buckets.coffee");
@@ -29933,7 +29821,7 @@ module.exports = function(vars, axis, buffer) {
 
 
 
-},{"../../../../../util/buckets.coffee":"/Users/Dave/sites/d3plus/src/util/buckets.coffee","../../../../../util/closest.coffee":"/Users/Dave/sites/d3plus/src/util/closest.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/includes/mouse.coffee":[function(require,module,exports){
+},{"../../../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../../../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/mouse.coffee":[function(require,module,exports){
 var copy, events, fetchColor, fetchValue, legible;
 
 copy = require("../../../../../util/copy.coffee");
@@ -30137,7 +30025,7 @@ module.exports = function(node, vars) {
 
 
 
-},{"../../../../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../../../../../color/legible.coffee":"/Users/Dave/sites/d3plus/src/color/legible.coffee","../../../../../core/fetch/color.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee","../../../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/includes/plot.coffee":[function(require,module,exports){
+},{"../../../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/plot.coffee":[function(require,module,exports){
 var buckets, buffer, createAxis, fetchValue, fontSizes, formatPower, labelPadding, resetMargins, superscript, textwrap, uniques;
 
 buckets = require("../../../../../util/buckets.coffee");
@@ -30435,7 +30323,7 @@ formatPower = function(d) {
 
 
 
-},{"../../../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../../../font/sizes.coffee":"/Users/Dave/sites/d3plus/src/font/sizes.coffee","../../../../../textwrap/textwrap.coffee":"/Users/Dave/sites/d3plus/src/textwrap/textwrap.coffee","../../../../../util/buckets.coffee":"/Users/Dave/sites/d3plus/src/util/buckets.coffee","../../../../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee","./buffer.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/includes/svg.coffee":[function(require,module,exports){
+},{"../../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","../../../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../../../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./buffer.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/svg.coffee":[function(require,module,exports){
 var mix, textwrap, validObject;
 
 mix = require("../../../../../color/mix.coffee");
@@ -30748,7 +30636,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../../../color/mix.coffee":"/Users/Dave/sites/d3plus/src/color/mix.coffee","../../../../../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","../../../../../textwrap/textwrap.coffee":"/Users/Dave/sites/d3plus/src/textwrap/textwrap.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/nest.coffee":[function(require,module,exports){
+},{"../../../../../color/mix.coffee":"/Users/Dave/Sites/d3plus/src/color/mix.coffee","../../../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee":[function(require,module,exports){
 var fetchValue, stringStrip, uniqueValues;
 
 fetchValue = require("../../../../core/fetch/value.coffee");
@@ -30758,25 +30646,36 @@ stringStrip = require("../../../../string/strip.js");
 uniqueValues = require("../../../../util/uniques.coffee");
 
 module.exports = function(vars, data) {
-  var discrete, offsets, opposite, ticks, timeAxis;
+  var discrete, opposite, serialized, ticks, timeAxis;
   if (!data) {
     data = vars.data.viz;
   }
   discrete = vars[vars.axes.discrete];
   opposite = vars[vars.axes.opposite];
   timeAxis = discrete.value === vars.time.value;
-  ticks = timeAxis ? vars.data.time.values : discrete.ticks.values;
-  offsets = {
-    x: vars.axes.margin.left,
-    y: vars.axes.margin.top
-  };
+  if (timeAxis) {
+    ticks = vars.data.time.values;
+    if (vars.time.solo.value.length) {
+      serialized = vars.time.solo.value.map(Number);
+      ticks = ticks.filter(function(f) {
+        return serialized.indexOf(+f) >= 0;
+      });
+    } else if (vars.time.mute.value.length) {
+      serialized = vars.time.mute.value.map(Number);
+      ticks = ticks.filter(function(f) {
+        return serialized.indexOf(+f) < 0;
+      });
+    }
+  } else {
+    ticks = discrete.ticks.values;
+  }
   return d3.nest().key(function(d) {
     var depth, id;
     id = fetchValue(vars, d, vars.id.value);
     depth = "depth" in d.d3plus ? d.d3plus.depth : vars.depth.value;
     return "nested_" + stringStrip(id) + "_" + depth;
   }).rollup(function(leaves) {
-    var availables, i, obj, tester, tick, timeVar, _i, _len;
+    var availables, filler, i, key, obj, tester, tick, timeVar, _i, _j, _len, _len1, _ref;
     availables = uniqueValues(leaves, discrete.value, fetchValue, vars);
     timeVar = availables[0].constructor === Date;
     if (timeVar) {
@@ -30784,17 +30683,37 @@ module.exports = function(vars, data) {
         return t.getTime();
       });
     }
-    for (i = _i = 0, _len = ticks.length; _i < _len; i = ++_i) {
-      tick = ticks[i];
-      tester = tick.constructor === Date ? tick.getTime() : tick;
-      if (availables.indexOf(tester) < 0 && discrete.zerofill.value) {
-        obj = {
-          d3plus: {}
-        };
-        obj[vars.id.value] = leaves[0][vars.id.value];
-        obj[discrete.value] = tick;
-        obj[opposite.value] = opposite.scale.viz.domain()[1];
-        leaves.push(obj);
+    if (discrete.zerofill.value) {
+      if (discrete.scale.value === "log") {
+        if (opposite.scale.viz.domain().every(function(d) {
+          return d < 0;
+        })) {
+          filler = -1;
+        } else {
+          filler = 1;
+        }
+      } else {
+        filler = 0;
+      }
+      for (i = _i = 0, _len = ticks.length; _i < _len; i = ++_i) {
+        tick = ticks[i];
+        tester = tick.constructor === Date ? tick.getTime() : tick;
+        if (availables.indexOf(tester) < 0) {
+          obj = {
+            d3plus: {}
+          };
+          _ref = vars.id.nesting;
+          for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+            key = _ref[_j];
+            if (key in leaves[0]) {
+              obj[key] = leaves[0][key];
+            }
+          }
+          obj[discrete.value] = tick;
+          obj[opposite.value] = 0;
+          obj[opposite.value] = filler;
+          leaves.splice(i, 0, obj);
+        }
       }
     }
     if (typeof leaves[0][discrete.value] === "string") {
@@ -30818,13 +30737,13 @@ module.exports = function(vars, data) {
 
 
 
-},{"../../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../../../string/strip.js":"/Users/Dave/sites/d3plus/src/string/strip.js","../../../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/stack.coffee":[function(require,module,exports){
+},{"../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","../../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee":[function(require,module,exports){
 var fetchValue;
 
 fetchValue = require("../../../../core/fetch/value.coffee");
 
 module.exports = function(vars, data) {
-  var flip, margin, negativeData, offset, opposite, positiveData, scale, stack, stacked;
+  var d, flip, margin, negativeData, offset, opposite, positiveData, scale, stack, stacked, val, _i, _len;
   stacked = vars.axes.stacked;
   flip = vars[stacked].scale.viz(0);
   scale = vars[stacked].scale.value;
@@ -30851,12 +30770,31 @@ module.exports = function(vars, data) {
     d.d3plus[stacked] += margin;
     return d.d3plus[stacked + "0"] += margin;
   });
-  positiveData = data.filter(function(d) {
-    return fetchValue(vars, d, vars[stacked].value) > 0;
-  });
-  negativeData = data.filter(function(d) {
-    return fetchValue(vars, d, vars[stacked].value) < 0;
-  });
+  positiveData = [];
+  negativeData = [];
+  for (_i = 0, _len = data.length; _i < _len; _i++) {
+    d = data[_i];
+    val = fetchValue(vars, d, vars[stacked].value);
+    if (val instanceof Array) {
+      if (val.filter(function(v) {
+        return v > 0;
+      }).length) {
+        positiveData.push(d);
+      }
+      if (val.filter(function(v) {
+        return v < 0;
+      }).length) {
+        negativeData.push(d);
+      }
+    } else {
+      if (val > 0) {
+        positiveData.push(d);
+      }
+      if (val < 0) {
+        negativeData.push(d);
+      }
+    }
+  }
   if (!(positiveData.length || negativeData.length)) {
     return stack(data);
   } else {
@@ -30872,7 +30810,7 @@ module.exports = function(vars, data) {
 
 
 
-},{"../../../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/line.coffee":[function(require,module,exports){
+},{"../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/line.coffee":[function(require,module,exports){
 var fetchValue, graph, line, nest, stack;
 
 fetchValue = require("../../core/fetch/value.coffee");
@@ -30893,7 +30831,7 @@ line = function(vars) {
   if (domains.indexOf(void 0) >= 0) {
     return [];
   }
-  data = nest(vars);
+  data = vars.data.viz;
   for (_i = 0, _len = data.length; _i < _len; _i++) {
     point = data[_i];
     _ref = point.values;
@@ -30910,6 +30848,10 @@ line = function(vars) {
   } else {
     return data;
   }
+};
+
+line.filter = function(vars, data) {
+  return nest(vars, data);
 };
 
 line.requirements = ["data", "x", "y"];
@@ -30939,7 +30881,7 @@ module.exports = line;
 
 
 
-},{"../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/draw.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/network.js":[function(require,module,exports){
+},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/network.js":[function(require,module,exports){
 var smallestGap = require("../../network/smallestGap.coffee"),
     fetchValue = require("../../core/fetch/value.coffee");
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -31082,7 +31024,7 @@ network.zoom         = true
 
 module.exports = network
 
-},{"../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../network/smallestGap.coffee":"/Users/Dave/sites/d3plus/src/network/smallestGap.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/paths.coffee":[function(require,module,exports){
+},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../network/smallestGap.coffee":"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/paths.coffee":[function(require,module,exports){
 var fetchValue, shortestPath, uniqueValues, viz,
   __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
@@ -31340,7 +31282,7 @@ module.exports = viz;
 
 
 
-},{"../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../network/shortestPath.coffee":"/Users/Dave/sites/d3plus/src/network/shortestPath.coffee","../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/pie.coffee":[function(require,module,exports){
+},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../network/shortestPath.coffee":"/Users/Dave/Sites/d3plus/src/network/shortestPath.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/pie.coffee":[function(require,module,exports){
 var comparator, dataThreshold, fetchValue, groupData, order, pie;
 
 comparator = require("../../array/comparator.coffee");
@@ -31408,7 +31350,7 @@ module.exports = pie;
 
 
 
-},{"../../array/comparator.coffee":"/Users/Dave/sites/d3plus/src/array/comparator.coffee","../../core/data/group.coffee":"/Users/Dave/sites/d3plus/src/core/data/group.coffee","../../core/data/threshold.js":"/Users/Dave/sites/d3plus/src/core/data/threshold.js","../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/rings.js":[function(require,module,exports){
+},{"../../array/comparator.coffee":"/Users/Dave/Sites/d3plus/src/array/comparator.coffee","../../core/data/group.coffee":"/Users/Dave/Sites/d3plus/src/core/data/group.coffee","../../core/data/threshold.js":"/Users/Dave/Sites/d3plus/src/core/data/threshold.js","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/rings.js":[function(require,module,exports){
 var arraySort     = require("../../array/sort.coffee"),
     events        = require("../../client/pointer.coffee"),
     fetchValue    = require("../../core/fetch/value.coffee"),
@@ -31895,7 +31837,7 @@ rings.tooltip      = "static"
 
 module.exports = rings
 
-},{"../../array/sort.coffee":"/Users/Dave/sites/d3plus/src/array/sort.coffee","../../client/pointer.coffee":"/Users/Dave/sites/d3plus/src/client/pointer.coffee","../../color/legible.coffee":"/Users/Dave/sites/d3plus/src/color/legible.coffee","../../core/fetch/color.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/color.coffee","../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../network/smallestGap.coffee":"/Users/Dave/sites/d3plus/src/network/smallestGap.coffee","../../tooltip/remove.coffee":"/Users/Dave/sites/d3plus/src/tooltip/remove.coffee","../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/scatter.coffee":[function(require,module,exports){
+},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../network/smallestGap.coffee":"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee","../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/scatter.coffee":[function(require,module,exports){
 var fetchValue, graph, print, scatter, sort, ticks;
 
 fetchValue = require("../../core/fetch/value.coffee");
@@ -31964,7 +31906,7 @@ module.exports = scatter;
 
 
 
-},{"../../array/sort.coffee":"/Users/Dave/sites/d3plus/src/array/sort.coffee","../../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/dataTicks.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/dataTicks.coffee","./helpers/graph/draw.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/draw.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/stacked.coffee":[function(require,module,exports){
+},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/dataTicks.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/dataTicks.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/stacked.coffee":[function(require,module,exports){
 var fetchValue, graph, nest, sort, stack, stacked, threshold;
 
 fetchValue = require("../../core/fetch/value.coffee");
@@ -31988,7 +31930,7 @@ stacked = function(vars) {
   if (domains.indexOf(void 0) >= 0) {
     return [];
   }
-  data = sort(nest(vars), null, null, null, vars);
+  data = sort(vars.data.viz, null, null, null, vars);
   for (_i = 0, _len = data.length; _i < _len; _i++) {
     point = data[_i];
     if (!point.d3plus) {
@@ -32016,7 +31958,7 @@ stacked = function(vars) {
 };
 
 stacked.filter = function(vars, data) {
-  return threshold(vars, data, vars.x.value);
+  return nest(vars, threshold(vars, data, vars.x.value));
 };
 
 stacked.requirements = ["data", "x", "y"];
@@ -32056,7 +31998,7 @@ module.exports = stacked;
 
 
 
-},{"../../array/sort.coffee":"/Users/Dave/sites/d3plus/src/array/sort.coffee","../../core/data/threshold.js":"/Users/Dave/sites/d3plus/src/core/data/threshold.js","../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/draw.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/table.js":[function(require,module,exports){
+},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../core/data/threshold.js":"/Users/Dave/Sites/d3plus/src/core/data/threshold.js","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/table.js":[function(require,module,exports){
 var fetchValue = require("../../core/fetch/value.coffee");
 var uniques    = require("../../util/uniques.coffee");
 var copy       = require("../../util/copy.coffee");
@@ -32211,7 +32153,7 @@ table.requirements = ["data", "cols"]
 
 module.exports = table
 
-},{"../../color/random.coffee":"/Users/Dave/sites/d3plus/src/color/random.coffee","../../core/fetch/value.coffee":"/Users/Dave/sites/d3plus/src/core/fetch/value.coffee","../../util/copy.coffee":"/Users/Dave/sites/d3plus/src/util/copy.coffee","../../util/uniques.coffee":"/Users/Dave/sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/sites/d3plus/src/viz/types/tree_map.coffee":[function(require,module,exports){
+},{"../../color/random.coffee":"/Users/Dave/Sites/d3plus/src/color/random.coffee","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/tree_map.coffee":[function(require,module,exports){
 var dataThreshold, groupData, mergeObject, tree_map;
 
 dataThreshold = require("../../core/data/threshold.js");
@@ -32276,7 +32218,7 @@ module.exports = tree_map;
 
 
 
-},{"../../core/data/group.coffee":"/Users/Dave/sites/d3plus/src/core/data/group.coffee","../../core/data/threshold.js":"/Users/Dave/sites/d3plus/src/core/data/threshold.js","../../object/merge.coffee":"/Users/Dave/sites/d3plus/src/object/merge.coffee"}],"/Users/Dave/sites/d3plus/src/viz/viz.coffee":[function(require,module,exports){
+},{"../../core/data/group.coffee":"/Users/Dave/Sites/d3plus/src/core/data/group.coffee","../../core/data/threshold.js":"/Users/Dave/Sites/d3plus/src/core/data/threshold.js","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/viz.coffee":[function(require,module,exports){
 var attach, axis, container, flash, getSteps, print, validObject;
 
 attach = require("../core/methods/attach.coffee");
@@ -32477,4 +32419,4 @@ module.exports = function() {
 
 
 
-},{"../core/console/print.coffee":"/Users/Dave/sites/d3plus/src/core/console/print.coffee","../core/methods/attach.coffee":"/Users/Dave/sites/d3plus/src/core/methods/attach.coffee","../object/validate.coffee":"/Users/Dave/sites/d3plus/src/object/validate.coffee","./helpers/container.coffee":"/Users/Dave/sites/d3plus/src/viz/helpers/container.coffee","./helpers/drawSteps.js":"/Users/Dave/sites/d3plus/src/viz/helpers/drawSteps.js","./helpers/ui/message.js":"/Users/Dave/sites/d3plus/src/viz/helpers/ui/message.js","./methods/active.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/active.coffee","./methods/aggs.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/aggs.coffee","./methods/attrs.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/attrs.coffee","./methods/axes.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/axes.coffee","./methods/background.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/background.coffee","./methods/color.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/color.coffee","./methods/cols.js":"/Users/Dave/sites/d3plus/src/viz/methods/cols.js","./methods/config.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/config.coffee","./methods/container.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/container.coffee","./methods/coords.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/coords.coffee","./methods/csv.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/csv.coffee","./methods/data.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/data.coffee","./methods/depth.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/depth.coffee","./methods/descs.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/descs.coffee","./methods/dev.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/dev.coffee","./methods/draw.js":"/Users/Dave/sites/d3plus/src/viz/methods/draw.js","./methods/edges.js":"/Users/Dave/sites/d3plus/src/viz/methods/edges.js","./methods/error.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/error.coffee","./methods/focus.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/focus.coffee","./methods/font.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/font.coffee","./methods/footer.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/footer.coffee","./methods/format.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/format.coffee","./methods/height.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/height.coffee","./methods/helpers/axis.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/helpers/axis.coffee","./methods/history.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/history.coffee","./methods/icon.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/icon.coffee","./methods/id.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/id.coffee","./methods/labels.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/labels.coffee","./methods/legend.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/legend.coffee","./methods/links.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/links.coffee","./methods/margin.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/margin.coffee","./methods/messages.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/messages.coffee","./methods/nodes.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/nodes.coffee","./methods/order.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/order.coffee","./methods/shape.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/shape.coffee","./methods/size.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/size.coffee","./methods/style.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/style.coffee","./methods/temp.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/temp.coffee","./methods/text.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/text.coffee","./methods/time.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/time.coffee","./methods/timeline.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/timeline.coffee","./methods/timing.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/timing.coffee","./methods/title.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/title.coffee","./methods/tooltip.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/tooltip.coffee","./methods/total.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/total.coffee","./methods/type.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/type.coffee","./methods/ui.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/ui.coffee","./methods/width.coffee":"/Users/Dave/sites/d3plus/src/viz/methods/width.coffee","./methods/zoom.js":"/Users/Dave/sites/d3plus/src/viz/methods/zoom.js","./types/bar.coffee":"/Users/Dave/sites/d3plus/src/viz/types/bar.coffee","./types/box.coffee":"/Users/Dave/sites/d3plus/src/viz/types/box.coffee","./types/bubbles.coffee":"/Users/Dave/sites/d3plus/src/viz/types/bubbles.coffee","./types/deprecated/chart.coffee":"/Users/Dave/sites/d3plus/src/viz/types/deprecated/chart.coffee","./types/geo_map.coffee":"/Users/Dave/sites/d3plus/src/viz/types/geo_map.coffee","./types/line.coffee":"/Users/Dave/sites/d3plus/src/viz/types/line.coffee","./types/network.js":"/Users/Dave/sites/d3plus/src/viz/types/network.js","./types/paths.coffee":"/Users/Dave/sites/d3plus/src/viz/types/paths.coffee","./types/pie.coffee":"/Users/Dave/sites/d3plus/src/viz/types/pie.coffee","./types/rings.js":"/Users/Dave/sites/d3plus/src/viz/types/rings.js","./types/scatter.coffee":"/Users/Dave/sites/d3plus/src/viz/types/scatter.coffee","./types/stacked.coffee":"/Users/Dave/sites/d3plus/src/viz/types/stacked.coffee","./types/table.js":"/Users/Dave/sites/d3plus/src/viz/types/table.js","./types/tree_map.coffee":"/Users/Dave/sites/d3plus/src/viz/types/tree_map.coffee"}]},{},["./src/init.coffee"]);
+},{"../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../core/methods/attach.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/attach.coffee","../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","./helpers/container.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/container.coffee","./helpers/drawSteps.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/drawSteps.js","./helpers/ui/message.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/message.js","./methods/active.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/active.coffee","./methods/aggs.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/aggs.coffee","./methods/attrs.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/attrs.coffee","./methods/axes.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/axes.coffee","./methods/background.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/background.coffee","./methods/color.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/color.coffee","./methods/cols.js":"/Users/Dave/Sites/d3plus/src/viz/methods/cols.js","./methods/config.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/config.coffee","./methods/container.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/container.coffee","./methods/coords.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/coords.coffee","./methods/csv.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/csv.coffee","./methods/data.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/data.coffee","./methods/depth.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/depth.coffee","./methods/descs.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/descs.coffee","./methods/dev.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/dev.coffee","./methods/draw.js":"/Users/Dave/Sites/d3plus/src/viz/methods/draw.js","./methods/edges.js":"/Users/Dave/Sites/d3plus/src/viz/methods/edges.js","./methods/error.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/error.coffee","./methods/focus.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/focus.coffee","./methods/font.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/font.coffee","./methods/footer.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/footer.coffee","./methods/format.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/format.coffee","./methods/height.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/height.coffee","./methods/helpers/axis.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/helpers/axis.coffee","./methods/history.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/history.coffee","./methods/icon.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/icon.coffee","./methods/id.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/id.coffee","./methods/labels.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/labels.coffee","./methods/legend.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/legend.coffee","./methods/links.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/links.coffee","./methods/margin.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/margin.coffee","./methods/messages.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/messages.coffee","./methods/nodes.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/nodes.coffee","./methods/order.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/order.coffee","./methods/shape.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/shape.coffee","./methods/size.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/size.coffee","./methods/style.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/style.coffee","./methods/temp.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/temp.coffee","./methods/text.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/text.coffee","./methods/time.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/time.coffee","./methods/timeline.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/timeline.coffee","./methods/timing.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/timing.coffee","./methods/title.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/title.coffee","./methods/tooltip.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/tooltip.coffee","./methods/total.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/total.coffee","./methods/type.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/type.coffee","./methods/ui.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/ui.coffee","./methods/width.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/width.coffee","./methods/zoom.js":"/Users/Dave/Sites/d3plus/src/viz/methods/zoom.js","./types/bar.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/bar.coffee","./types/box.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/box.coffee","./types/bubbles.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/bubbles.coffee","./types/deprecated/chart.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/deprecated/chart.coffee","./types/geo_map.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/geo_map.coffee","./types/line.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/line.coffee","./types/network.js":"/Users/Dave/Sites/d3plus/src/viz/types/network.js","./types/paths.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/paths.coffee","./types/pie.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/pie.coffee","./types/rings.js":"/Users/Dave/Sites/d3plus/src/viz/types/rings.js","./types/scatter.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/scatter.coffee","./types/stacked.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/stacked.coffee","./types/table.js":"/Users/Dave/Sites/d3plus/src/viz/types/table.js","./types/tree_map.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/tree_map.coffee"}]},{},["./src/init.coffee"]);
