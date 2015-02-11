@@ -44,21 +44,17 @@
   var originalData = d3.selectAll("tbody tr");
   
   var searchTable = function(input) {
-    reset();
+    originalData.style("display", "table-row"); // reset row visibility
     var toFind = input.value.toLowerCase();
 
     var rowFilter = function() {
       var me = this.innerText.toLowerCase();
-      var result = me.indexOf(toFind);
-      return result < 0;
+      return me.indexOf(toFind) < 0;
     };
     
     d3.selectAll("tbody tr").filter(rowFilter).style("display", "none");
   }
 
-  var reset = function() {
-    originalData.style("display", "table-row");
-  };
 
   </script>
 
