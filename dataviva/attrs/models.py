@@ -1,4 +1,5 @@
 from dataviva import db
+from flask.ext.babel import gettext
 from dataviva.utils.auto_serialize import AutoSerialize
 from dataviva.utils.exist_or_404 import exist_or_404
 from sqlalchemy import func, Float
@@ -33,16 +34,17 @@ class Stats(object):
             stats.append(self.get_val(Ymp, "export_val", attr_type, "secex"))
         elif attr_type == "bra":
             stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="demonym"))
-            stats.append(self.get_val(Yb,"population",attr_type,"population"))
+            stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="pop"))
             stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="gini"))
             stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="life_exp"))
             stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="hdi"))
-            stats.append(self.get_top_attr(Ybi, "num_emp", attr_type, "cnae", "rais"))
+            stats.append(self.get_top_attr(Ybi,"num_emp",attr_type,"cnae","rais"))
             stats.append(self.get_top_attr(Ybo, "num_emp", attr_type, "cbo", "rais"))
-            stats.append(self.get_val(Yb_rais, "wage", attr_type, "rais"))
+            stats.append(self.get_val(Yb_rais, "wage", attr_type, "rais", name=gettext("Total Monthly Wage")))
             stats.append(self.get_top_attr(Ymbp, "export_val", attr_type, "hs", "secex"))
             stats.append(self.get_top_attr(Ymbw, "export_val", attr_type, "wld", "secex"))
-            stats.append(self.get_val(Ymb, "export_val", attr_type, "secex"))
+            stats.append(self.get_val(Ymb, "export_val", attr_type, "secex", name=gettext("Total Exports")))
+            stats.append(self.get_val(Ymb, "import_val", attr_type, "secex", name=gettext("Total Imports")))
             if len(self.id) == 9:
                 stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="airport"))
                 stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="airport_dist"))
@@ -53,36 +55,36 @@ class Stats(object):
             five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
             stats.append(self.get_top_attr(Ybi, "num_emp", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Yio, "num_emp", attr_type, "cbo", dataset))
-            stats.append(self.get_val(Yi, "wage", attr_type, dataset))
-            stats.append(self.get_val(Yi, "wage_avg", attr_type, dataset))
-            stats.append(self.get_val(Yi, "wage_avg", attr_type, dataset, five_years_ago))
+            stats.append(self.get_val(Yi, "wage", attr_type, dataset, name=gettext("Total Monthly Wage")))
+            stats.append(self.get_val(Yi, "wage_avg", attr_type, dataset, name=gettext("Average Monthly Wage")))
+            stats.append(self.get_val(Yi, "wage_avg", attr_type, dataset, five_years_ago, name=gettext("Average Monthly Wage")))
         elif attr_type == "cbo":
             dataset = "rais"
             five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
             stats.append(self.get_top_attr(Ybo, "num_emp", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Yio, "num_emp", attr_type, "cnae", dataset))
-            stats.append(self.get_val(Yo, "wage", attr_type, dataset))
-            stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset))
-            stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset, five_years_ago))
+            stats.append(self.get_val(Yo, "wage", attr_type, dataset, name=gettext("Total Monthly Wage")))
+            stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset, name=gettext("Average Monthly Wage")))
+            stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset, five_years_ago, name=gettext("Average Monthly Wage")))
         elif attr_type == "hs":
             dataset = "secex"
             five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
             stats.append(self.get_top_attr(Ymbp, "export_val", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Ympw, "export_val", attr_type, "wld", dataset))
-            stats.append(self.get_val(Ymp, "export_val_growth", attr_type, dataset))
-            stats.append(self.get_val(Ymp, "export_val_growth_5", attr_type, dataset))
-            stats.append(self.get_val(Ymp, "export_val", attr_type, dataset))
-            stats.append(self.get_val(Ymp, "export_val", attr_type, dataset, five_years_ago))
+            stats.append(self.get_val(Ymp, "export_val_growth", attr_type, dataset, name=gettext("Nominal Annual Growth Rate (1 year)")))
+            stats.append(self.get_val(Ymp, "export_val_growth_5", attr_type, dataset, name=gettext("Nominal Annual Growth Rate (5 year)")))
+            stats.append(self.get_val(Ymp, "export_val", attr_type, dataset, name=gettext("Total Exports")))
+            stats.append(self.get_val(Ymp, "export_val", attr_type, dataset, five_years_ago, name=gettext("Total Exports")))
         elif attr_type == "wld":
             dataset = "secex"
             five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
             stats.append(self.get_top_attr(Ymbw, "export_val", attr_type, "bra", dataset))
             stats.append(self.get_top_attr(Ympw, "export_val", attr_type, "hs", dataset))
-            stats.append(self.get_val(Ymw, "export_val_growth", attr_type, dataset))
-            stats.append(self.get_val(Ymw, "export_val_growth_5", attr_type, dataset))
-            stats.append(self.get_val(Ymw, "eci", attr_type, dataset))
-            stats.append(self.get_val(Ymw, "export_val", attr_type, dataset))
-            stats.append(self.get_val(Ymw, "export_val", attr_type, dataset, five_years_ago))
+            stats.append(self.get_val(Ymw, "export_val_growth", attr_type, dataset, name=gettext("Nominal Annual Growth Rate (1 year)")))
+            stats.append(self.get_val(Ymw, "export_val_growth_5", attr_type, dataset, name=gettext("Nominal Annual Growth Rate (5 year)")))
+            stats.append(self.get_val(Ymw, "eci", attr_type, dataset, name=gettext("Economic Complexity")))
+            stats.append(self.get_val(Ymw, "export_val", attr_type, dataset, name=gettext("Total Exports")))
+            stats.append(self.get_val(Ymw, "export_val", attr_type, dataset, five_years_ago, name=gettext("Total Exports")))
 
         return stats
 
@@ -114,13 +116,21 @@ class Stats(object):
     def get_top_attr(self, tbl, val_var, attr_type, key, dataset):
         from dataviva import __year_range__
         latest_year = parse_year(__year_range__[dataset][-1].split("-")[0])
+        name = gettext("Top")
         if key == "bra":
+            name = gettext("Top Location")
             length = 9
-        elif key == "hs" or key == "cnae":
+        elif key == "hs":
+            name = gettext("Top Product")
             length = 6
         elif key == "wld":
+            name = gettext("Top Export Destination")
             length = 5
+        elif key == "cnae":
+            name = gettext("Top Industry")
+            length = 6
         elif key == "cbo":
+            name = gettext("Top Occupation")
             length = 4
 
         if attr_type == "bra":
@@ -173,11 +183,17 @@ class Stats(object):
                         den += float(value)
                 percent = (num/float(den))*100
 
-            return {"name": "top_{0}".format(key), "value": obj.name(), "percent": percent, "id": obj.id, "group": "{0}_stats_{1}".format(dataset.split("_")[0],latest_year)}
+            return {"name": name, 
+                    "value": obj.name(), 
+                    "percent": percent, 
+                    "id": obj.id, 
+                    "group": "{} {} ({})".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())}
         else:
-            return {"name": "top_{0}".format(key), "value": "-", "group": "{0}_stats_{1}".format(dataset.split("_")[0],latest_year)}
+            return {"name": name, 
+                    "value": "-", 
+                    "group": "{} {} ({})".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())}
 
-    def get_val(self, tbl, val_var, attr_type, dataset, latest_year=None, stat_id=None):
+    def get_val(self, tbl, val_var, attr_type, dataset, latest_year=None, stat_id=None, name=None):
 
         if latest_year == None:
             from dataviva import __year_range__
@@ -232,30 +248,28 @@ class Stats(object):
         if "_y" in tbl.__tablename__:
             total = total.filter_by(year=latest_year)
         total = total.first()
-
+        
         if total != None:
             if isinstance(total,tuple):
                 val = total[0]
             else:
-                val = getattr(total,val_var)
+                val = getattr(total,val_var) or " - "
 
             if calc_var == "wage_avg":
                 val = float(val)/getattr(total,"num_emp")
 
         else:
             val = 0
-
-        if val_var == "population":
-            group = ""
-            name = "population_{0}".format(latest_year)
-        elif val_var == "stat_val":
+        
+        group = u"{} {} ({})".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())
+        
+        if val_var == "stat_val":
             group = ""
             if "_y" in tbl.__tablename__:
-                name = u"{}_{}".format(total.stat.name(), latest_year)
+                name = u"{} ({})".format(total.stat.name(), latest_year)
             else:
                 name = total.stat.name()
-        else:
-            group = u"{0}_stats_{1}".format(dataset.split("_")[0],latest_year)
+        elif not name:
             if calc_var:
                 name = calc_var
             else:

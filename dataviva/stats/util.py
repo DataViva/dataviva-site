@@ -2,7 +2,7 @@
 import json
 
 def parse_year(s):
-    return int(str(s).split("-")[-1])
+    return int(str(s).split("-")[0])
 
 def compute_allowed(table_dict):
     master_list = set([])
