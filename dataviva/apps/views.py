@@ -10,7 +10,7 @@ from flask.ext.babel import gettext
 from dataviva import db, datavivadir, __year_range__, view_cache
 from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
-from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld
+from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_hedu, Course_sc
 from dataviva.apps.models import Build, UI, App, Crosswalk_oc, Crosswalk_pi
 from dataviva.general.models import Short
 
@@ -57,22 +57,22 @@ def filler(dataset, filter1, filter2):
     filler1 = filter1
     if filler1 != "all":
         if dataset == "rais":
-            filler1 = "<cnae>"
+            filler1 = "cnae"
         elif dataset == "secex":
-            filler1 = "<hs>"
+            filler1 = "hs"
         elif dataset == "hedu":
-            filler1 = "<university>"
+            filler1 = "university"
 
     filler2 = filter2
     if filler2 != "all":
         if dataset == "rais":
-            filler2 = "<cbo>"
+            filler2 = "cbo"
         elif dataset == "secex":
-            filler2 = "<wld>"
+            filler2 = "wld"
         elif dataset == "hedu":
-            filler2 = "<course_hedu>"
+            filler2 = "course_hedu"
         elif dataset == "sc":
-            filler2 = "<course_sc>"
+            filler2 = "course_sc"
 
     return filler1, filler2
 
@@ -95,24 +95,41 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
 
     build_filter1, build_filter2 = filler(dataset, filter1, filter2)
 
+    '''Grab attrs for bra and filters
+    '''
+    if bra_id == "all":
+        bra_attr = Wld.query.get_or_404("sabra")
+    else:
+        bra_attr = Bra.query.get_or_404(bra_id)
+    filter1_attr = filter1
+    filter2_attr = filter2
+    if filter1 != "all":
+        filter1_attr = globals()[build_filter1.capitalize()].query.get_or_404(filter1)
+    if filter2 != "all":
+        filter2_attr = globals()[build_filter2.capitalize()].query.get_or_404(filter2)
+
     '''This is an instance of the Build class for the selected app,
     determined by the combination of app_type, dataset, filters and output.
     '''
     current_app = App.query.filter_by(type=app_name).first_or_404()
+    if build_filter1 != "all":
+        build_filter1 = "<{}>".format(build_filter1)
+    if build_filter2 != "all":
+        build_filter2 = "<{}>".format(build_filter2)
     current_build = Build.query.filter_by(app=current_app, dataset=dataset, filter1=build_filter1, filter2=build_filter2, output=output).first_or_404()
-    current_build.set_filter1(filter1)
-    current_build.set_filter2(filter2)
-    current_build.set_bra(bra_id)
+    current_build.set_filter1(filter1_attr)
+    current_build.set_filter2(filter2_attr)
+    current_build.set_bra(bra_attr)
 
     '''Every possible build, required by the embed page for building the build
     dropdown.
     '''
     all_builds = Build.query.all()
-    all_builds.sort(key=lambda x: x.app_id)
+    all_builds.sort(key=lambda x: x.dataset)
     for build in all_builds:
-        build.set_filter1(filter1)
-        build.set_filter2(filter2)
-        build.set_bra(bra_id)
+        build.set_filter1(filter1_attr)
+        build.set_filter2(filter2_attr)
+        build.set_bra(bra_attr)
 
     '''Get URL query parameters from reqest.args object to return to the view.
     '''
@@ -130,7 +147,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     if request.is_xhr:
         ret = jsonify({
             "current_build": current_build.serialize(),
-            "all_builds": [b.serialize() for b in all_builds],
+            "all_builds": [b.json() for b in all_builds],
             "starred": starred
         })
         ret.data = gzip_data(ret.data)

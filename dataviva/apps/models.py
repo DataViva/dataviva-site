@@ -57,24 +57,39 @@ class Build(db.Model, AutoSerialize):
         return self.ui.filter(UI.type == ui_type).first()
 
     def set_bra(self, bra_id):
-        '''If build requires 2 bras and only 1 is given, supply a 2nd'''
-        if isinstance(self.bra, list):
-            return
 
-        if bra_id == 'bra':
-            bra_id = 'all'
+        if isinstance(bra_id, (Bra, Wld)):
+            if isinstance(bra_id, Wld):
+                bra_id.id = "all"
+            bra_id = [bra_id]
+        elif isinstance(bra_id, (list)) and isinstance(bra_id[0], (Bra, Wld)):
+            for b in bra_id:
+                if isinstance(b, Wld):
+                    b.id = "all"
+        else:
+            if bra_id == 'bra':
+                bra_id = 'all'
 
-        if "_" in self.bra and "_" not in bra_id:
-            if bra_id == "4rj":
-                bra_id = bra_id + "_4mg"
-            else:
-                bra_id = bra_id + "_4rj"
-        elif "_" not in self.bra and "_" in bra_id:
-            bra_id = bra_id.split("_")[0]
+            if "_" in self.bra and "_" not in bra_id:
+                if bra_id == "4rj":
+                    bra_id = bra_id + "_4mg"
+                else:
+                    bra_id = bra_id + "_4rj"
+            elif "_" not in self.bra and "_" in bra_id:
+                bra_id = bra_id.split("_")[0]
+
+            bra_id = bra_id.split("_")
+
         self.bra = []
 
-        for i, b in enumerate(bra_id.split("_")):
-            if b == "all":
+        for i, b in enumerate(bra_id):
+            if isinstance(b, (Bra, Wld)):
+                if b.id.startswith("4mg"):
+                    b.pr_ids = [pr.id for pr in b.pr.all()]
+                else:
+                    b.pr_ids = []
+                self.bra.append(b)
+            elif b == "all":
                 self.bra.append(Wld.query.get("sabra"))
                 self.bra[i].id = "all"
             else:
@@ -91,7 +106,10 @@ class Build(db.Model, AutoSerialize):
                 self.bra.append(Bra.query.get(b))
                 self.bra[i].distance = dist
                 self.bra[i].neighbor_ids = [b.bra_id_dest for b in self.bra[i].get_neighbors(dist)]
-                self.bra[i].pr_ids = [b.id for b in self.bra[i].pr.all()]
+                if b.startswith("4mg"):
+                    self.bra[i].pr_ids = [b.id for b in self.bra[i].pr.all()]
+                else:
+                    self.bra[i].pr_ids = []
 
     def set_filter1(self, filter):
         if self.filter1 != "all":
@@ -109,19 +127,22 @@ class Build(db.Model, AutoSerialize):
             items = []
             attr = globals()[name.capitalize()]
 
-            for i, f in enumerate(filter.split("_")):
-                if attr.query.get(f):
-                    items.append(attr.query.get(f))
-                else:
-                    items.append(attr.query.get(default))
+            if isinstance(filter, globals()[name.capitalize()]):
+                items = [filter]
+            elif isinstance(filter, (str, unicode)):
+                for i, f in enumerate(filter.split("_")):
+                    if attr.query.get(f):
+                        items.append(attr.query.get(f))
+                    else:
+                        items.append(attr.query.get(default))
+            else:
+                items.append(attr.query.get(default))
 
             self.filter1 = "_".join([c.id for c in set(items)])
             setattr(self, name, items)
 
     def set_filter2(self, filter):
         if self.filter2 != "all":
-
-            name = False
 
             if self.dataset == "rais":
                 name = "cbo"
@@ -139,11 +160,16 @@ class Build(db.Model, AutoSerialize):
             items = []
             attr = globals()[name.capitalize()]
 
-            for i, f in enumerate(filter.split("_")):
-                if attr.query.get(f):
-                    items.append(attr.query.get(f))
-                else:
-                    items.append(attr.query.get(default))
+            if isinstance(filter, globals()[name.capitalize()]):
+                items = [filter]
+            elif isinstance(filter, (str, unicode)):
+                for i, f in enumerate(filter.split("_")):
+                    if attr.query.get(f):
+                        items.append(attr.query.get(f))
+                    else:
+                        items.append(attr.query.get(default))
+            else:
+                items.append(attr.query.get(default))
 
             self.filter2 = "_".join([c.id for c in set(items)])
             setattr(self, name, items)
@@ -332,6 +358,14 @@ class Build(db.Model, AutoSerialize):
 
         return title
 
+    def json(self):
+        return {
+            "app": self.app.serialize(),
+            "dataset": self.dataset,
+            "title": self.title(),
+            "url": self.url()
+        }
+
 
     def serialize(self, **kwargs):
 
@@ -343,7 +377,7 @@ class Build(db.Model, AutoSerialize):
                 if b["id"] != "all" and self.bra[i].distance:
                     b["distance"] = self.bra[i].distance
                     b["neighbor_ids"] = self.bra[i].neighbor_ids
-                elif b["id"] != "all" and len(self.bra[i].pr_ids):
+                elif b["id"].startswith("4mg"):
                     b["pr_ids"] = self.bra[i].pr_ids
 
         for f in ["cnae", "cbo", "hs", "wld", "university", "course_hedu", "course_sc"]:
