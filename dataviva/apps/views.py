@@ -231,10 +231,12 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
     filter2_attr = filter2
     if filter1 != "all":
         filter1_attr = globals()[build_filter1.capitalize()].query.get_or_404(filter1)
+        if output == build_filter1:
+            recommended["crosswalk"] = crosswalk_recs(dataset, build_filter1, filter1)
     if filter2 != "all":
         filter2_attr = globals()[build_filter2.capitalize()].query.get_or_404(filter2)
-
-    recommended["crosswalk"] = crosswalk_recs(dataset, build_filter1, filter1, build_filter2, filter2, bra_id)
+        if output == build_filter2:
+            recommended["crosswalk"] = crosswalk_recs(dataset, build_filter2, filter2)
 
     if build_filter1 != "all":
         build_filter1 = "<{}>".format(build_filter1)
@@ -556,28 +558,20 @@ def shorten_url():
     return jsonify({"error": "No URL given."})
 
 
-def crosswalk_recs(dataset, build_filter1, raw_filter1, build_filter2, raw_filter2, bra_id):
+def crosswalk_recs(dataset, filter, id):
     crosswalk = []
 
     attr_swap = {"hs" : "cnae", "cnae": "hs", "cbo" : "course_hedu", "course_hedu": "cbo"}
     crosswalk_table = {"hs" : "pi", "cnae": "pi", "cbo" : "oc", "course_hedu": "oc"}
 
-    filter_match = None
-    if build_filter1 in attr_swap and raw_filter1 != "all":
-        filter_match = build_filter1
-        filter_raw = raw_filter1
-    elif build_filter2 in attr_swap and raw_filter2 != "all":
-        filter_match = build_filter2
-        filter_raw = raw_filter2
-
-    if filter_match:
-        table = globals()["Crosswalk_{}".format(crosswalk_table[filter_match])]
-        col = getattr(table, "{}_id".format(filter_match))
-        results = table.query.filter(col == filter_raw)
+    if filter in attr_swap and id != "all":
+        table = globals()["Crosswalk_{}".format(crosswalk_table[filter])]
+        col = getattr(table, "{}_id".format(filter))
+        results = table.query.filter(col == id)
         ids = [row.get_id(dataset) for row in results]
         if ids:
-            table = globals()[attr_swap[filter_match].capitalize()]
+            table = globals()[attr_swap[filter].capitalize()]
             attrs = table.query.filter(table.id.in_(ids)).all()
-            crosswalk = [{"title": a.name(), "url": a.url()} for a in attrs]
+            crosswalk = [{"title": a.name(), "url": a.url(), "type": attr_swap[filter]} for a in attrs]
 
     return crosswalk

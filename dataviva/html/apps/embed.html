@@ -287,10 +287,17 @@
 
     var createRecs = function(html, arr) {
       arr.forEach(function(a){
-        html += "<div id='"+a.url+"' class='decision short icon "+a.app.type+"' ";
-        html += "onclick='app.start(this.id)'>";
+        html += "<a id='"+a.url+"' class='decision short icon "
+        if ("app" in a) {
+          html += a.app.type+"' ";
+          html += "onclick='app.start(this.id)'>";
+        }
+        else {
+          html += a.type+"' ";
+          html += "href='"+a.url+"'>";
+        }
         html += a.title;
-        html += "</div>";
+        html += "</a>";
       })
       return html;
     }
@@ -304,11 +311,7 @@
 
         if ("crosswalk" in data) {
           html_return += "<div class='title'>"+dataviva.format.text("crosswalk_"+app.build.output_attr)+"</div>";
-          recPriority.forEach(function(p){
-            if (p in data.crosswalk && data.crosswalk[p].length) {
-              html_return = createRecs(html_return, data.crosswalk[p]);
-            }
-          })
+          html_return = createRecs(html_return, data.crosswalk);
         }
 
         html_return += "<div class='title'>"+dataviva.format.text("related_apps")+"</div>";
