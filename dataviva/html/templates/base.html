@@ -44,7 +44,8 @@
 
     <script>
       if(d3plus.ie && redirect) window.location = "/upgrade/"
-      dataviva.language = "{{ g.locale }}"
+      dataviva.language = "{{ g.locale }}";
+      dataviva.dictionary = {{ g.dictionary|safe }};
     </script>
 
   </head>
@@ -59,8 +60,8 @@
         window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
       }
 
-      dataviva.color = "{{ g.color }}"
-      dataviva.page = "{{ g.page_type }}"
+      dataviva.color = "{{ g.color }}";
+      dataviva.page = "{{ g.page_type }}";
 
       d3.selectAll(".alt_tooltip")
         .on(d3plus.client.pointer.over,function(){

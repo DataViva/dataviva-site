@@ -5,7 +5,7 @@ from jinja2 import Markup
 class jinja_momentjs:
     def __init__(self, timestamp):
         self.timestamp = timestamp
-        
+
     def __call__(self, *args):
         return self.format(*args)
 
@@ -20,20 +20,20 @@ class jinja_momentjs:
 
     def fromNow(self):
         return self.render("fromNow()")
-        
+
 class jinja_formatter:
     def __init__(self, text):
         self.text = text
-        
+
     def __call__(self, *args):
         return self.format(*args)
-        
+
     def render(self, type, lang):
-        if isinstance(self.text,unicode) or isinstance(self.text,str):
+        if isinstance(self.text, (unicode,str)):
             format = "text"
         else:
             format = "number"
-            
+
         return Markup("<script>\ndocument.write(dataviva.format.%s(\"%s\",\"%s\",\"%s\"))\n</script>" % (format, self.text, type, str(lang)))
 
 ''' A helper funciton for stripping out html tags for showing snippets of user submitted content'''

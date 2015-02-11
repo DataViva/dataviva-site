@@ -251,15 +251,15 @@ class Stats(object):
         elif val_var == "stat_val":
             group = ""
             if "_y" in tbl.__tablename__:
-                name = "{}_{}".format(total.stat.name(), latest_year)
+                name = u"{}_{}".format(total.stat.name(), latest_year)
             else:
                 name = total.stat.name()
         else:
-            group = "{0}_stats_{1}".format(dataset.split("_")[0],latest_year)
+            group = u"{0}_stats_{1}".format(dataset.split("_")[0],latest_year)
             if calc_var:
                 name = calc_var
             else:
-                name = "total_{0}".format(val_var)
+                name = u"total_{0}".format(val_var)
 
         return {"name": name, "value": val, "group": group}
 

@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Blueprint, render_template, g, request, current_app, session, redirect, url_for, flash, abort
+from flask import Blueprint, render_template, g, request, current_app, session, redirect, url_for, flash, abort, json
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.babel import gettext
 
@@ -12,6 +12,7 @@ from dataviva.general.forms import AccessForm
 from dataviva.general.models import Short
 from dataviva.account.models import User
 from dataviva.attrs.models import Bra, Hs, Cbo, Cnae, Course_hedu
+from dataviva.translations.dictionary import dictionary
 from dataviva.stats.helper import stats_list
 
 from dataviva.utils.cached_query import cached_query, make_cache_key
@@ -31,6 +32,7 @@ def before_request():
     g.accounts = True if ACCOUNTS in ["True","true","Yes","yes","Y","y",1] else False
     g.color = "#af1f24"
     g.page_type = mod.name
+    g.dictionary = json.dumps(dictionary())
 
     # Save variable in session so we can determine if this is the user's
     # first time on the site

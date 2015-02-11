@@ -16,8 +16,8 @@ from dataviva.general.models import Short
 
 
 from dataviva.rais.views import rais_api
+from dataviva.translations.translate import translate
 from dataviva.utils.gzip_data import gzip_data
-from dataviva.utils.translates import translate_columns
 from dataviva.utils.cached_query import cached_query, make_cache_key
 
 import json, urllib2, urllib
@@ -432,7 +432,7 @@ def download():
             for cabecalho in item:
                 if cabecalho not in checkHeader:
                    checkHeader.append(cabecalho)
-                   translation = translate_columns(cabecalho, lang)
+                   translation = translate(cabecalho)
                    headerArray.append(unicode(translation,'utf-8'))
 
         for item in data['data']:
