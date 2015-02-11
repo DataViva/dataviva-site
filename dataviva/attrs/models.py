@@ -152,12 +152,12 @@ class Stats(object):
                     top = tbl.query.filter(tbl.bra_id == bras[0]["id"])
         else:
             top = tbl.query.filter(getattr(tbl, attr_type+"_id") == self.id)
-        
+
         top = top.filter_by(year=latest_year) \
                     .filter(func.char_length(getattr(tbl, key+"_id")) == length) \
                     .group_by(getattr(tbl, key+"_id")) \
                     .order_by(func.sum(getattr(tbl, val_var)).desc())
-        
+
         percent = 0
         if top.first() != None:
             if isinstance(top.first(),tuple):
@@ -228,7 +228,7 @@ class Stats(object):
                 total = total.filter_by(stat_id=stat_id)
         else:
             total = tbl.query.filter(getattr(tbl, attr_type+"_id") == self.id)
-        
+
         if "_y" in tbl.__tablename__:
             total = total.filter_by(year=latest_year)
         total = total.first()
@@ -470,6 +470,8 @@ class Bra(db.Model, AutoSerialize, Stats, BasicAttr):
         return "/static/img/icons/bra/bra_%s.png" % (self.id[:3])
 
     def get_neighbors(self, dist, remove_self=False):
+        if dist == 0:
+            return []
         q = self.neighbors.filter(Distances.distance <= dist).order_by(Distances.distance)
         if remove_self:
             q = q.filter(Distances.bra_id_dest != self.id) # filter out self
@@ -518,7 +520,7 @@ class Stat(db.Model, AutoSerialize, BasicAttr):
 
     __tablename__ = 'attrs_stat'
     id = db.Column(db.String(20), primary_key=True)
-    
+
     # name lookup relation
     bs = db.relationship("dataviva.attrs.models.Bs", backref = 'stat', lazy = 'dynamic')
     ybs = db.relationship("dataviva.attrs.models.Ybs", backref = 'stat', lazy = 'dynamic')
@@ -539,7 +541,7 @@ class Ybs(db.Model, AutoSerialize):
     year = db.Column(db.Integer(4), primary_key=True)
     bra_id = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
     stat_id = db.Column(db.String(20), db.ForeignKey(Stat.id), primary_key=True)
-    stat_val = db.Column(db.Float)        
+    stat_val = db.Column(db.Float)
 
     def __repr__(self):
         return "<Ybs {}.{}.{}>".format(self.year, self.bra_id, self.stat_id)
