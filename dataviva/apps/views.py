@@ -78,7 +78,7 @@ def filler(dataset, filter1, filter2):
 
 @mod.route("/embed/")
 @mod.route("/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
-@cache_api("apps:embed", timeout=604800)
+# @cache_api("apps:embed", timeout=604800)
 def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
           filter1="all", filter2="all", output="cbo"):
 
@@ -104,20 +104,6 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     current_build.set_filter2(filter2)
     current_build.set_bra(bra_id)
 
-    '''Get the recommended app list to pass with data'''
-    filler_bra = bra_id
-    filler1 = filter1
-    filler2 = filter2
-    if output == "cnae" or output == "hs" or output == "university":
-        filler1 = "filler"
-    elif output == "cbo" or output == "wld" or output == "course_hedu" or "course_sc":
-        filler2 = "filler"
-    elif output == "bra":
-        filler_bra = "filler"
-
-    recs = recommend(app_name=app_name, dataset=dataset, bra_id=filler_bra, \
-                        filter1=filler1, filter2=filler2, output=output)
-
     '''Every possible build, required by the embed page for building the build
     dropdown.
     '''
@@ -141,15 +127,10 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
         is_starred = Starred.query.filter_by(user=g.user, app_id=app_id).first()
         starred = 1 if is_starred else -1
 
-    '''Get the actual data for the current build'''
-    # view_data = rais_api(bra_id='sp', cnae_id='a0112').data
-    # app.url_map.bind('/').match('/attrs/wld/nausa/')
-
     if request.is_xhr:
         ret = jsonify({
             "current_build": current_build.serialize(),
             "all_builds": [b.serialize() for b in all_builds],
-            "recommendations": json.loads(recs.data),
             "starred": starred
         })
         ret.data = gzip_data(ret.data)
@@ -324,7 +305,7 @@ def get_geo_location(ip):
 @mod.route('/builder/box/', defaults={"app_name": "box", "dataset": "rais", "bra_id": "4mg030000",
             "filter1": "c14126", "filter2": "all", "output": "cbo", "params": ""})
 @mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/')
-#@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+# @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
                 filter2=None, output=None, params=None):
     path = request.path.split("/")

@@ -582,7 +582,6 @@
           else {
 
             app.star(data.starred);
-            app.recommendations = data.recommendations;
 
             if (app.build && app.build.app.type != data.current_build.app.type) {
               builder.app(data.current_build.app.type,true)
