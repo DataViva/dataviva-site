@@ -46,6 +46,7 @@ def fix_name(attr, lang):
         attr["school_type"] = attr[school_type_lang]
         if "school_type_en" in attr: del attr["school_type_en"]
         if "school_type_pt" in attr: del attr["school_type_pt"]
+    if "is_vocational" in attr: del attr["is_vocational"]
     return attr
 
 ############################################################
@@ -53,13 +54,6 @@ def fix_name(attr, lang):
 # All attribute views
 #
 ############################################################
-@mod.route('/school/')
-@gzipped
-def school_attr():
-    schools = School.query.filter_by(is_vocational=1).join(Ys).order_by(desc("enrolled")).all()
-    data = [s.serialize() for s in schools]
-    return jsonify({"data": data})
-
 def get_planning_region_map():
     prs = db.session.query(bra_pr).all()
     pr_map = {k:v for k,v in prs}
@@ -126,7 +120,7 @@ def attrs(attr="bra",Attr_id=None):
         dataset = "secex"
     elif Attr == Course_hedu or Attr == University:
         dataset = "hedu"
-    elif Attr == Course_sc:
+    elif Attr == Course_sc or Attr == School:
         dataset = "sc"
     elif Attr == Bra:
         dataset = "population"
@@ -179,8 +173,13 @@ def attrs(attr="bra",Attr_id=None):
         latest_year = int(latest_year)
         query = db.session.query(Attr,Attr_weight_tbl) \
             .outerjoin(Attr_weight_tbl, and_(getattr(Attr_weight_tbl,"{0}_id".format(attr)) == Attr.id, Attr_weight_tbl.year == latest_year))
+
+        if Attr == School:
+            query = query.filter(Attr.is_vocational == 1)
+
         if latest_month:
             query = query.filter(Attr_weight_tbl.month == latest_month)
+
         if depth:
             query = query.filter(func.char_length(Attr.id) == depth)
         else:
