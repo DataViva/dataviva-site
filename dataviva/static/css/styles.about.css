@@ -40,6 +40,49 @@ img {
   margin: 0px auto;
 }
 
+/**********************/
+/* Crosswalk Specific */
+/**********************/
+table#crosswalk {
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: left;
+}
+
+table#crosswalk thead {
+  color: #888;
+  font-size: 14px;
+  font-weight: lighter;
+  text-align: center;
+}
+
+table#crosswalk tbody tr {
+  color: #888;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+table#crosswalk tbody tr:nth-child(odd) {
+  background-color: rgba(235,235,235,0.75);
+}
+
+table#crosswalk td, table#crosswalk th {
+  font-weight: lighter;
+  padding: 9px;
+}
+
+table#crosswalk ul {
+  list-style-type: none;
+}
+
+table#crosswalk li {
+  margin-bottom: 8px;
+}
+
+table#crosswalk li:last-child {
+  margin-bottom: 0;
+}
+
 /******************/
 /* Attrs Specific */
 /******************/

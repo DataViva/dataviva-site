@@ -5,34 +5,39 @@
 
 {% block about_content %}
 
-    <h2>{{ title }}</h2>
-    <input type="text" onkeyup="searchTable(this)" placeholder="{% trans %}Search{% endtrans %}"/>
+    <h1>{{ title }}</h1>
+    <input id="crosswalkSearch" type="text" onkeyup="searchTable(this)" placeholder="{% trans %}Search{% endtrans %}"/>
     <hr/>
-    <table id="ctable" class="data">
-    <thead>
-      <tr>
-      <th>{{ col1 }}</th>
-      <th>{{ col2 }}</th>
-      </tr>
-    </thead>
-    <tbody>
-    
 
-    {% for key in crosswalk %}
-      <tr>
-        <td><a style="color: {{key.color}}" href="{{ key.url() }}">{{ key.name() }}</a></td>
+    <table id="crosswalk" class="data">
 
-        <td>
-          <ul>
-           {% for value in crosswalk[key] %}
-            <li><a style="color: {{key.color}}" href="{{ value.url() }}">{{ value.name() }}</a></li>
-           {% endfor %}
-           </ul>
-      </td>
+      <thead>
+        <tr>
+          <th colspan=2>{{ col1 }}</th>
+          <th>{{ col2 }}</th>
+        </tr>
+      </thead>
 
-      </tr>
-    {% endfor %}
-    </tbody>
+      <tbody>
+        {% for key in crosswalk %}
+          <tr>
+            <td>
+              <img src="{{ key.icon() }}" width=20 style="background-color: {{ key.color }};">
+            </td>
+            <td>
+              <a href="{{ key.url() }}">{{ key.name() }}</a>
+            </td>
+            <td>
+              <ul>
+                {% for value in crosswalk[key] %}
+                  <li><a href="{{ value.url() }}">{{ value.name() }}</a></li>
+                {% endfor %}
+               </ul>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+
     </table>
 
 
@@ -41,20 +46,22 @@
 {% block js %}
 
   <script>
-  var originalData = d3.selectAll("tbody tr");
-  
-  var searchTable = function(input) {
-    originalData.style("display", "table-row"); // reset row visibility
-    var toFind = input.value.toLowerCase();
 
-    var rowFilter = function() {
-      var me = this.innerText.toLowerCase();
-      return me.indexOf(toFind) < 0;
-    };
-    
-    d3.selectAll("tbody tr").filter(rowFilter).style("display", "none");
-  }
+    leon("#crosswalkSearch").color(dataviva.color).size("large");
 
+    var originalData = d3.selectAll("tbody tr");
+
+    var searchTable = function(input) {
+      originalData.style("display", "table-row"); // reset row visibility
+      var toFind = input.value.toLowerCase();
+
+      var rowFilter = function() {
+        var me = this.innerText.toLowerCase();
+        return me.indexOf(toFind) < 0;
+      };
+
+      d3.selectAll("tbody tr").filter(rowFilter).style("display", "none");
+    }
 
   </script>
 
