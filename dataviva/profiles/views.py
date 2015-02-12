@@ -14,6 +14,9 @@ from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_he
 from dataviva.rais.models import Ybi, Ybo, Yio
 
 from dataviva.utils.decorators import cache_api
+
+from dataviva.utils.cached_query import cached_query, make_cache_key
+
 from dataviva.utils.gzip_data import gzipped
 
 from dataviva.profiles import models as profileModels
