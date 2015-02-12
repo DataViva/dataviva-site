@@ -1,6 +1,6 @@
 ALL = 'all'
 SHOW = 'show'
-SHOW2 = '.show.'
+SHOW2 = '.show'
 LEN = '_len'
 
 def compute_allowed(table_dict):

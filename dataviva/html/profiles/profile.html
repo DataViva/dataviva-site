@@ -45,16 +45,22 @@
       {% endfor %}
     </div>
 
-    {% for build in builds %}
-      <a class="app_links decision short icon {{ build.type }}" id="app{{ build.position }}" onclick="slide(this.id)">{{ build.title }}</a>
+    {% for group in builds %}
+      {% if group.title %}
+        <div class="d3plus_tooltip_data_title">{{ group.title }}</div>
+      {% endif %}
+      {% for build in group.builds %}
+        <a class="app_links decision short icon {{ build.app.type }}" id="app{{ build.position }}" onclick="slide(this.id)">{{ build.title }}</a>
+      {% endfor %}
     {% endfor %}
   </div>
 
-  {% for build in builds %}
-    <div class="lightbox guide_app" id="profile{{ build.position }}">
-      <iframe alt="{{ build.url }}" id="iframe{{ build.position }}"></iframe>
-    </div>
-
+  {% for group in builds %}
+    {% for build in group.builds %}
+      <div class="lightbox guide_app" id="profile{{ build.position }}">
+        <iframe alt="/apps/embed/{{ build.url }}" id="iframe{{ build.position }}"></iframe>
+      </div>
+    {% endfor %}
   {% endfor %}
 
 {% endblock %}
@@ -139,7 +145,7 @@
       })
 
     function update_titles(msg) {
-      d3.select("#app"+msg.id.substr(6,1))
+      d3.select("#app"+msg.id.substr(6))
         .attr("class",function(){
           var c = this.className.split(" ")
           c[4] = msg.app

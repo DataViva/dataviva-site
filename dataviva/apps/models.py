@@ -234,7 +234,7 @@ class Build(db.Model, AutoSerialize):
             elif self.output == "course_hedu":
                 filter2 = "show.6"
 
-        if self.output == "all":
+        if self.output in ("balance", "time", "type"):
             if bra != "all":
                 bra = bra + ".show.{}".format(len(bra))
             elif filter1 != "all":

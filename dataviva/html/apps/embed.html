@@ -679,7 +679,7 @@
               },"/"+app.build.data_url)
             }
 
-            if (app.build.output_attr != "all" && !app.attrs[app.build.output_attr]) {
+            if (["time", "balance", "type"].indexOf(app.build.output_attr) < 0 && !app.attrs[app.build.output_attr]) {
               q.defer(function(u,callback){
                 d3.json(u)
                   .header("X-Requested-With", "XMLHttpRequest")
@@ -978,13 +978,21 @@
       }
 
       var nesting = []
-      if (app.build.output_attr === "all") {
+      if (app.build.output_attr === "balance") {
         nesting = ["trade_balance", "direction"];
         app.viz.text({"trade_balance": "trade_balance", "direction": "direction"});
       }
       else if (app.build.output_attr === "university") {
         nesting = ["school_type","university_5"];
         app.viz.text({"school_type": "school_type", "university_5": "name"});
+      }
+      else if (app.build.output_attr === "time") {
+        nesting = ["time_period"];
+        app.viz.text("name");
+      }
+      else if (app.build.output_attr === "type") {
+        nesting = ["student_type"];
+        app.viz.text("name");
       }
       else {
         app.viz.text("name");
@@ -1074,7 +1082,7 @@
         })
         .y(false)
         .tooltip(app.tooltip)
-        .zoom(app.build.output_attr !== "all")
+        .zoom(app.build.output_attr !== "balance")
         .timeline(["stacked", "line"].indexOf(app.build.app.type) < 0)
         .legend(app.build.output_attr !== "university")
 
@@ -1286,19 +1294,23 @@
       /* Stacked Specific Variables */
       /******************************/
       else if (app.build.app.type == "stacked") {
+        var layout = app.build.ui.filter(function(ui){ return ui.type === "layout"; });
+        if (layout) layout = layout[0].values[0];
+        else layout = "linear"
+        var threshold = ["time", "type"].indexOf(app.build.output_attr) < 0;
         app.viz
           .x({
             "scale": "linear",
             "value": "year"
           })
           .y({
-            "scale": "linear",
+            "scale": layout,
             "value": app.vars.y
           })
           .active(false)
           .temp(false)
           .total(false)
-          .size({"threshold": true})
+          .size({"threshold": threshold})
           .id({"grouping": true})
           .shape("area")
       }
@@ -1429,7 +1441,7 @@
           text = "";
 
       if (secex && same && !mix) {
-        if ((munics && depth >= 3) || (app.build.output_attr === "all" && depth > 3)) {
+        if ((munics && depth >= 3) || (app.build.output_attr === "balance" && depth > 3)) {
           text = dataviva.format.text("secex_9")
         }
         else {
@@ -1756,35 +1768,85 @@
           .entries(data.raw)
 
       }
-      else if (app.build.dataset === "secex" && app.build.output_attr === "all") {
+      else if (out === "balance") {
+
+          data.raw.forEach(function(d){
+
+            var exp = d3plus.util.copy(d);
+            exp.trade_balance = "trade_balance";
+            exp.val_usd = exp.export_val || 0;
+            exp.direction = "export_val";
+            exp.color = "#0b1097";
+            // get_keys(exp);
+            for (var k in exp) {
+              if (k.indexOf("import") === 0) {
+                delete exp[k];
+              }
+            }
+            data_obj.push(exp);
+
+            var imp = d3plus.util.copy(d);
+            imp.trade_balance = "trade_balance";
+            imp.val_usd = imp.import_val || 0;
+            imp.direction = "import_val";
+            imp.color = "#af1f24";
+            // get_keys(imp);
+            for (var k in imp) {
+              if (k.indexOf("export") === 0) {
+                delete exp[k];
+              }
+            }
+            data_obj.push(imp);
+
+          })
+
+      }
+      else if (out === "time") {
+
+        var time_periods = {
+          "morning": "#f7b6d2",
+          "afternoon": "#ffc41c",
+          "night": "#2f2f6d",
+          "full_time": "#105b10"
+        };
 
         data.raw.forEach(function(d){
 
-          var exp = d3plus.util.copy(d);
-          exp.trade_balance = "trade_balance";
-          exp.val_usd = exp.export_val || 0;
-          exp.direction = "export_val";
-          exp.color = "#0b1097";
-          // get_keys(exp);
-          for (var k in exp) {
-            if (k.indexOf("import") === 0) {
-              delete exp[k];
-            }
+          for (var p in time_periods) {
+            data_obj.push({
+              "color": time_periods[p],
+              "icon": "/static/img/icons/time/time_"+p+".png",
+              "name": dataviva.format.text(p),
+              "time_period": p,
+              "students": d[p],
+              "year": d.year
+            })
           }
-          data_obj.push(exp);
 
-          var imp = d3plus.util.copy(d);
-          imp.trade_balance = "trade_balance";
-          imp.val_usd = imp.import_val || 0;
-          imp.direction = "import_val";
-          imp.color = "#af1f24";
-          // get_keys(imp);
-          for (var k in imp) {
-            if (k.indexOf("export") === 0) {
-              delete exp[k];
-            }
+        })
+
+      }
+      else if (out === "type") {
+
+        var student_types = {
+          "enrolled": "#1abbee",
+          "students": "#ffc41c",
+          "graduates": "#742777",
+          "entrants": "#105b10"
+        };
+
+        data.raw.forEach(function(d){
+
+          for (var p in student_types) {
+            data_obj.push({
+              "color": student_types[p],
+              // "icon": "/static/img/icons/time/time_"+p+".png",
+              "name": dataviva.format.text(p),
+              "student_type": p,
+              "students": d[p],
+              "year": d.year
+            })
           }
-          data_obj.push(imp);
 
         })
 
@@ -1795,7 +1857,7 @@
 
           var obj = d
 
-          if (out !== "all") obj[out+"_display"] = dataviva.displayID(obj[out+"_id"],out)
+          obj[out+"_display"] = dataviva.displayID(obj[out+"_id"],out)
 
           obj.bra_rca = obj.rca >=1 ? true : false;
           obj.wld_rca = obj.rca_wld >=1 ? true : false;

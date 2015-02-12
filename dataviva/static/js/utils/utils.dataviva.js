@@ -25,6 +25,8 @@ dataviva.obj2csv = function(obj) {
 dataviva.format = {};
 dataviva.format.text = function(text,name,vars,obj,l) {
 
+  if (typeof name !== "string") name = "";
+
   if (!l) var l = dataviva.language
 
   if (text.indexOf("top_") == 0) {
@@ -91,6 +93,8 @@ dataviva.format.text = function(text,name,vars,obj,l) {
 
 dataviva.format.number = function(value,name,l) {
 
+  if (typeof name !== "string") name = "";
+
   if (!l) var l = dataviva.language
 
   var negative = value < 0
@@ -156,6 +160,7 @@ dataviva.format.number = function(value,name,l) {
   var total_labels = {
         "export_val": ["$"," USD"],
         "import_val": ["$"," USD"],
+        "val_usd": ["$"," USD"],
         "export_kg": [""," kg"],
         "import_kg": [""," kg"],
         "wage": ["$"," BRL"],
@@ -424,7 +429,7 @@ dataviva.cleanData = function(data, dataset, output) {
       return obj
     }, {})
 
-    if (output !== "all") {
+    if (JSON.stringify(depths) !== "[0]") {
 
       var id;
       if (dataset === "ei") {
