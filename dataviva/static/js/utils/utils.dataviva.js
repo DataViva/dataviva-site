@@ -163,6 +163,8 @@ dataviva.format.number = function(value,name,l) {
         "val_usd": ["$"," USD"],
         "export_kg": [""," kg"],
         "import_kg": [""," kg"],
+        "purchase_value": ["$"," BRL"],
+        "transfer_value": ["$"," BRL"],
         "wage": ["$"," BRL"],
         "wage_avg": ["$"," BRL"],
         "wage_avg_bra": ["$"," BRL"]
@@ -396,7 +398,7 @@ dataviva.cleanData = function(data, dataset, output) {
     "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"],
     "hedu": ["enrolled"],
     "sc": ["enrolled"],
-    "ei": ["purchase_value"]
+    "ei": ["purchase_value", "transfer_value"]
   }
 
   var output_attr = output === "bra_r" ? "bra" : output;

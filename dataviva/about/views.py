@@ -30,9 +30,10 @@ def before_request():
 
 @mod.route('/crosswalk/<attr1>/<attr2>/')
 def crosswalk(attr1, attr2):
-    attr_table_map = {"cbo" : Cbo, "course_hedu" : Course_hedu, "hs": Hs, "cnae": Cnae}
-    Attr1_Table = attr_table_map[attr1]
-    Attr2_Table = attr_table_map[attr2]
+    attr_table_map = {"cbo" : ("Occupation", Cbo), "course_hedu" : ("Course", Course_hedu), 
+                      "hs": ("Product", Hs), "cnae": ("Industry", Cnae)}
+    col1, Attr1_Table = attr_table_map[attr1]
+    col2, Attr2_Table = attr_table_map[attr2]
     cbo_mode = "cbo" in [attr1, attr2]
     Crosswalk_table = Crosswalk_oc if cbo_mode else Crosswalk_pi
 
@@ -58,9 +59,7 @@ def crosswalk(attr1, attr2):
         if attr2_objs:
             full_map[attr1_obj] = attr2_objs
 
-    col1 = attr1
-    col2 = attr2
-    title=gettext("Title goes here")
+    title = gettext(col1) + gettext(" to ") + gettext(col2)
     attrs = "cbo-course" if cbo_mode else "course-cbo"
     return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2, page="crosswalk", attrs=attrs)
 

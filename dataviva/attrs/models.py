@@ -2,6 +2,7 @@ from dataviva import db
 from flask.ext.babel import gettext
 from dataviva.utils.auto_serialize import AutoSerialize
 from dataviva.utils.exist_or_404 import exist_or_404
+from dataviva.utils.num_format import num_format
 from sqlalchemy import func, Float
 from sqlalchemy.sql.expression import cast
 from decimal import *
@@ -17,6 +18,7 @@ class Stats(object):
         from dataviva.attrs.models import Yb, Ybs
         from dataviva.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
         from dataviva.secex.models import Ymbp, Ymbw, Ympw, Ymb, Ymp, Ymw
+        from dataviva.hedu.models import Yu, Yuc, Ybu, Yc_hedu
         from dataviva import __year_range__
 
         stats = []
@@ -85,6 +87,21 @@ class Stats(object):
             stats.append(self.get_val(Ymw, "eci", attr_type, dataset, name=gettext("Economic Complexity")))
             stats.append(self.get_val(Ymw, "export_val", attr_type, dataset, name=gettext("Total Exports")))
             stats.append(self.get_val(Ymw, "export_val", attr_type, dataset, five_years_ago, name=gettext("Total Exports")))
+        elif attr_type == "university":
+            dataset = "hedu"
+            stats.append(self.get_top_attr(Yuc, "enrolled", attr_type, "course_hedu", "hedu"))
+            stats.append(self.get_val(Yu, "enrolled", attr_type, dataset, name=gettext("Enrolled")))
+            stats.append(self.get_val(Yu, "graduates", attr_type, dataset, name=gettext("Graduates")))
+        elif attr_type == "university":
+            dataset = "hedu"
+            stats.append(self.get_top_attr(Yuc, "enrolled", attr_type, "course_hedu", "hedu"))
+            stats.append(self.get_val(Yu, "enrolled", attr_type, dataset, name=gettext("Enrolled")))
+            stats.append(self.get_val(Yu, "graduates", attr_type, dataset, name=gettext("Graduates")))
+        elif attr_type == "course_hedu":
+            dataset = "hedu"
+            stats.append(self.get_top_attr(Yuc, "enrolled", attr_type, "university", "hedu"))
+            stats.append(self.get_val(Yc_hedu, "enrolled", attr_type, dataset, name=gettext("Enrolled")))
+            stats.append(self.get_val(Yc_hedu, "graduates", attr_type, dataset, name=gettext("Graduates")))
 
         return stats
 
@@ -132,6 +149,12 @@ class Stats(object):
         elif key == "cbo":
             name = gettext("Top Occupation")
             length = 4
+        elif key == "course_hedu":
+            name = gettext("Top Course")
+            length = 6
+        elif key == "university":
+            name = gettext("Top University")
+            length = 5
 
         if attr_type == "bra":
             agg = {'export_val':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
@@ -169,7 +192,7 @@ class Stats(object):
                     .order_by(func.sum(getattr(tbl, val_var)).desc())
 
         percent = 0
-        if top.first() != None:
+        if top.first() != None and getattr(top.first(),val_var) != None:
             if isinstance(top.first(),tuple):
                 obj = globals()[key.capitalize()].query.get(top.first()[0])
                 percent = None
@@ -257,9 +280,11 @@ class Stats(object):
 
             if calc_var == "wage_avg":
                 val = float(val)/getattr(total,"num_emp")
-
         else:
             val = 0
+        
+        val = num_format(val, key=val_var)
+        # raise Exception(val)
         
         group = u"{} {} ({})".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())
         

@@ -267,7 +267,7 @@ def dictionary():
         # EI Labels
         "ei": gettext("Electronic Invoices (EI)"),
         "purchase_value": gettext("Purchase Value"),
-        "transportation_cost": gettext("Transportation Cost"),
+        "transfer_value": gettext("Transfer Value"),
 
         # Key Labels
         "brazil": gettext("Brazil"),

@@ -6,16 +6,10 @@ class Ei(db.Model, AutoSerialize):
     __abstract__ = True
 
     year = db.Column(db.Integer(4), primary_key=True)    
-    month = db.Column(db.Integer(2), primary_key=True)    
+    month = db.Column(db.Integer(2), primary_key=True)
 
-    tax = db.Column(db.Float())
-    icms_tax = db.Column(db.Float())
-    transportation_cost = db.Column(db.Float())
     purchase_value = db.Column(db.Float())
     transfer_value = db.Column(db.Float())
-    devolution_value = db.Column(db.Float())
-    icms_credit_value = db.Column(db.Float())
-    remit_value = db.Column(db.Float())
 
 
 class Ymr(Ei):
