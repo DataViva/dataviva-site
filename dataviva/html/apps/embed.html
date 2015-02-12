@@ -446,9 +446,16 @@
             if (leaves.length === 1) {
               return leaves[0].val_usd;
             }
-            return d3.sum(leaves, function(l){
-              return l.direction === "secex_import" ? -l.val_usd : l.val_usd
-            })
+            else if (leaves.length === 2) {
+              return d3.sum(leaves, function(l){
+                return l.direction === "import_val" ? -l.val_usd : l.val_usd
+              })
+            }
+            else {
+              return d3.sum(leaves, function(l) {
+                return l.export_val - l.import_val;
+              })
+            }
           }
         }
 
@@ -1768,6 +1775,7 @@
             exp.trade_balance = "trade_balance";
             exp.val_usd = exp.export_val || 0;
             exp.direction = "export_val";
+            exp.icon = "/static/img/icons/balance/export_val.png"
             exp.color = "#0b1097";
             // get_keys(exp);
             for (var k in exp) {
@@ -1781,6 +1789,7 @@
             imp.trade_balance = "trade_balance";
             imp.val_usd = imp.import_val || 0;
             imp.direction = "import_val";
+            imp.icon = "/static/img/icons/balance/import_val.png"
             imp.color = "#af1f24";
             // get_keys(imp);
             for (var k in imp) {
