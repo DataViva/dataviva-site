@@ -25,94 +25,44 @@ def before_request():
     g.page_type = mod.name
     g.color = "#d67ab0"
 
-@mod.route('/crosswalk/<attr1>/course_hedu/')
-@mod.route('/crosswalk/<attr1>/cbo/')
-def crosswalk_oc(attr1):
-    oc = Crosswalk_oc.query.all()
-    cbos = set([x.cbo_id for x in oc])
-    courses = set([x.course_hedu_id for x in oc])
 
-    cbo_to_course = dict.fromkeys(cbos, set())
-    course_to_cbo = dict.fromkeys(courses, set())
 
-    for x in oc:
-       cbo_to_course[x.cbo_id] = cbo_to_course[x.cbo_id].union([x.course_hedu_id])
-       course_to_cbo[x.course_hedu_id] = course_to_cbo[x.course_hedu_id].union([x.cbo_id])
 
-    # load attrs
-    cbo_attrs = Cbo.query.filter(Cbo.id.in_(cbos)).all()
-    cbo_attrs = {x.id: x for x in cbo_attrs}
+@mod.route('/crosswalk/<attr1>/<attr2>/')
+def crosswalk(attr1, attr2):
+    attr_table_map = {"cbo" : ("Occupation", Cbo), "course_hedu" : ("Course", Course_hedu), 
+                      "hs": ("Product", Hs), "cnae": ("Industry", Cnae)}
+    col1, Attr1_Table = attr_table_map[attr1]
+    col2, Attr2_Table = attr_table_map[attr2]
+    cbo_mode = "cbo" in [attr1, attr2]
+    Crosswalk_table = Crosswalk_oc if cbo_mode else Crosswalk_pi
 
-    course_attrs = Course_hedu.query.filter(Course_hedu.id.in_(courses)).all()
-    course_attrs = {x.id: x for x in course_attrs}
+    crosswalks = Crosswalk_table.query.all()
+    attr1_list = set([ getattr(x, attr1+"_id") for x in crosswalks])
+    attr2_list = set([ getattr(x, attr2+"_id") for x in crosswalks])
 
-    oc = {}
-    for cbo in cbo_to_course:
-        cbo_name = cbo_attrs[cbo]
-        course_names = [course_attrs[course] for course in cbo_to_course[cbo] if course in course_attrs]
-        if course_names:
-            oc[cbo_name] = course_names
+    attr1_to_attr2 = dict.fromkeys(attr1_list, set())
 
-    co = {}
-    for course in course_to_cbo:
-        if course in course_attrs:
-            course_name = course_attrs[course]
-            cbo_names = [cbo_attrs[cbo] for cbo in course_to_cbo[course] if cbo in cbo_attrs]
-            if cbo_names:
-                co[course_name] = cbo_names
+    for x in crosswalks:
+       attr1_to_attr2[getattr(x, attr1+"_id")] = attr1_to_attr2[getattr(x, attr1+"_id")].union([getattr(x, attr2+"_id")])
 
-    cbo_mode = attr1 == "cbo"
-    full_map = oc if cbo_mode else co
-    col1 = gettext("Occupation" if cbo_mode else "Course")
-    col2 = gettext("Courses" if cbo_mode else "Occupations")
-    tmp = "%s to %s Crosswalk" % (col1, col2)
-    title=gettext(tmp)
+    attr1_lookup = Attr1_Table.query.filter(Attr1_Table.id.in_(attr1_list)).all()
+    attr1_lookup = {x.id: x for x in attr1_lookup}
+    attr2_lookup = Attr2_Table.query.filter(Attr2_Table.id.in_(attr2_list)).all()
+    attr2_lookup = {x.id: x for x in attr2_lookup}
+
+    full_map = {}
+    for attr_id1 in attr1_to_attr2:
+        if not attr_id1 in attr1_lookup: continue
+        attr1_obj = attr1_lookup[attr_id1]
+        attr2_objs = [attr2_lookup[attr2_id] for attr2_id in attr1_to_attr2[attr_id1] if attr2_id in attr2_lookup]
+        if attr2_objs:
+            full_map[attr1_obj] = attr2_objs
+
+    title = gettext(col1) + gettext(" to ") + gettext(col2)
     attrs = "cbo-course" if cbo_mode else "course-cbo"
     return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2, page="crosswalk", attrs=attrs)
 
-
-@mod.route('/crosswalk/<attr1>/cnae/')
-@mod.route('/crosswalk/<attr1>/hs/')
-def crosswalk_pi(attr1):
-    pi = Crosswalk_pi.query.all()
-    hss = set([x.hs_id for x in pi])
-    cnaes = set([x.cnae_id for x in pi])
-
-    hs_to_cnae = dict.fromkeys(hss, set())
-    cnae_to_hs = dict.fromkeys(cnaes, set())
-
-    for x in pi:
-       hs_to_cnae[x.hs_id] = hs_to_cnae[x.hs_id].union([x.cnae_id])
-       cnae_to_hs[x.cnae_id] = cnae_to_hs[x.cnae_id].union([x.hs_id])
-
-    hs_attrs = Hs.query.filter(Hs.id.in_(hss)).all()
-    hs_attrs = {x.id: x for x in hs_attrs}
-
-    cnae_attrs = Cnae.query.filter(Cnae.id.in_(cnaes)).all()
-    cnae_attrs = {x.id: x for x in cnae_attrs}
-
-    pi = {}
-    for hs in hs_to_cnae:
-        cbo_name = hs_attrs[hs]
-        cnae_names = [cnae_attrs[cnae] for cnae in hs_to_cnae[hs] if cnae in cnae_attrs]
-        if cnae_names:
-            pi[cbo_name] = cnae_names
-    ip = {}
-    for cnae in cnae_to_hs:
-        if cnae in cnae_attrs:
-            cnae_name = cnae_attrs[cnae]
-            hs_names = [hs_attrs[hs] for hs in cnae_to_hs[cnae] if hs in hs_attrs]
-            if hs_names:
-                ip[cnae_name] = hs_names
-
-    hs_mode = attr1 == "hs"
-    full_map = pi if hs_mode else ip
-    col1 = gettext("Product" if hs_mode else "Indusry")
-    col2 = gettext("Industries" if hs_mode else "Products")
-    tmp = "%s to %s Crosswalk" % (col1, col2)
-    title=gettext(tmp)
-    attrs = "hs-cnae" if hs_mode else "cnae-hs"
-    return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2, page="crosswalk", attrs=attrs)
 
 @mod.route('/analysis/')
 def analysis():
