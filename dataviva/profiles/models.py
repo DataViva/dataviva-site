@@ -86,6 +86,7 @@ class Profile(object):
                         q = Ymb.query.filter(Ymb.bra_id == bra.id).all()
                         secex_restricted = len(q) == 0
                     if secex_restricted == True:
+                        group["builds"][i] = None
                         continue
 
                 b.set_bra(bra)
@@ -107,7 +108,9 @@ class Profile(object):
                 position += 1
 
                 group["builds"][i] = b
+            group["builds"] = [b for b in group["builds"] if b != None]
 
+        apps = [g for g in apps if len(g["builds"]) > 0]
         return apps
 
     def __repr__(self):
