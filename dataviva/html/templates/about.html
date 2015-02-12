@@ -104,25 +104,25 @@
 
     {% endif %}
 
-    <a class="{% if page == 'crosswalk' %}decision{% else %}help{% endif %}" href="{{ url_for('about.crosswalk_pi', attr1='hs') }}">
+    <a class="{% if page == 'crosswalk' %}decision{% else %}help{% endif %}" href="{{ url_for('about.crosswalk', attr1='hs', attr2='cnae') }}">
       {% trans %}Crosswalk Tables{% endtrans %}
     </a>
 
     {% if page == 'crosswalk' %}
 
-      <a class="{% if attrs == 'hs-cnae' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.crosswalk_pi', attr1='hs')}}">
+      <a class="{% if attrs == 'hs-cnae' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.crosswalk', attr1='hs', attr2='cnae')}}">
         {% trans %}HS to CNAE{% endtrans %}
       </a>
 
-      <a class="{% if attrs == 'cnae-hs' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.crosswalk_pi', attr1='cnae')}}">
+      <a class="{% if attrs == 'cnae-hs' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.crosswalk', attr1='cnae', attr2='hs')}}">
         {% trans %}CNAE to HS{% endtrans %}
       </a>
 
-      <a class="{% if attrs == 'cbo-course_hedu' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.crosswalk_oc', attr1='cbo')}}">
+      <a class="{% if attrs == 'cbo-course_hedu' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.crosswalk', attr1='cbo', attr2='course_hedu')}}">
         {% trans %}CBO to Course{% endtrans %}
       </a>
 
-      <a class="{% if attrs == 'course_hedu-cbo' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.crosswalk_oc', attr1='course_hedu')}}">
+      <a class="{% if attrs == 'course_hedu-cbo' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.crosswalk', attr1='course_hedu', attr2='cbo')}}">
         {% trans %}Course to CBO{% endtrans %}
       </a>
 
