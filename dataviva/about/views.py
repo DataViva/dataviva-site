@@ -67,7 +67,8 @@ def crosswalk_oc(attr1):
     col2 = gettext("Courses" if cbo_mode else "Occupations")
     tmp = "%s to %s Crosswalk" % (col1, col2)
     title=gettext(tmp)
-    return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2)
+    attrs = "cbo-course" if cbo_mode else "course-cbo"
+    return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2, page="crosswalk", attrs=attrs)
 
 
 @mod.route('/crosswalk/<attr1>/cnae/')
@@ -110,7 +111,8 @@ def crosswalk_pi(attr1):
     col2 = gettext("Industries" if hs_mode else "Products")
     tmp = "%s to %s Crosswalk" % (col1, col2)
     title=gettext(tmp)
-    return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2)
+    attrs = "hs-cnae" if hs_mode else "cnae-hs"
+    return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2, page="crosswalk", attrs=attrs)
 
 @mod.route('/analysis/')
 def analysis():
