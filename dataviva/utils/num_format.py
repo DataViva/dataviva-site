@@ -22,6 +22,7 @@ def affixes(key=None, unit=False):
         "purchase_value": "brl",
         "seaport_dist": "km",
         "students": "stu",
+        "transfer_value": "brl",
         "wage": "brl",
         "wage_avg": "brl",
         "wage_avg_bra": "brl"
