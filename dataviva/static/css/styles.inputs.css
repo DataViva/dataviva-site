@@ -65,13 +65,17 @@ a:hover {
   color: #af1f24;
   font-size: 10px;
   padding: 1px 6px;
+  top: -10px;
 }
 
 .title.square.small, .decision.square.small, .help.square.small {
   display: inline-block;
   font-size: 13px;
+  line-height: 16px;
+  margin: 6px;
   min-height: 75px;
-  width: 75px;
+  padding: 7px 9px !important;
+  width: 71px;
 }
 
 .help.icon.large,
