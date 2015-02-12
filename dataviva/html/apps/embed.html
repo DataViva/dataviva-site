@@ -896,19 +896,12 @@
         else if (ui.type == "spotlight" && app.build.app.type == "scatter") {
           var default_value = ui.values[1]
         }
-        else if (ui.type == "rca_scope" && app.build.bra[0].id == "all" && app.build.output_attr == "hs") {
-          var default_value = "wld_rca"
-        }
+  		  else if(ui.type == "spotlight"){
+    			var default_value = "true"
+  		  }
         else {
           var default_value = ui.values[0]
         }
-
-  		  if(ui.type == "rca_scope"){
-    			var default_value = "wld_rca"
-  		  }
-  		  if(ui.type == "spotlight"){
-    			var default_value = "true"
-  		  }
 
         if((last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
           app.vars[ui.type] = default_value
