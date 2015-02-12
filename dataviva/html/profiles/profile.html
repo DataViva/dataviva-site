@@ -17,6 +17,15 @@
       <div id="guide_title">{{ item.name() }}</div>
     </div>
 
+    {% for group in builds %}
+      {% if group.title %}
+        <div class="d3plus_tooltip_data_title">{{ group.title }}</div>
+      {% endif %}
+      {% for build in group.builds %}
+        <a class="app_links decision short icon {{ build.app.type }}" id="app{{ build.position }}" onclick="slide(this.id)">{{ build.title }}</a>
+      {% endfor %}
+    {% endfor %}
+
     <div class="d3plus_tooltip_data_container" id="guide_stats">
       {% set last_group = "" %}
       {% for stat in item.stats() %}
@@ -50,14 +59,6 @@
       {% endfor %}
     </div>
 
-    {% for group in builds %}
-      {% if group.title %}
-        <div class="d3plus_tooltip_data_title">{{ group.title }}</div>
-      {% endif %}
-      {% for build in group.builds %}
-        <a class="app_links decision short icon {{ build.app.type }}" id="app{{ build.position }}" onclick="slide(this.id)">{{ build.title }}</a>
-      {% endfor %}
-    {% endfor %}
   </div>
 
   {% for group in builds %}
