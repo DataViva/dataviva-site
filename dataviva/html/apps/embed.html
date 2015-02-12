@@ -722,7 +722,7 @@
 
                     d.nodes.forEach(function(node){
                       if (app.build.output_attr === "cnae") {
-                        node[app.build.output_attr+"_id"] = node.cnae_6;
+                        node[app.build.output_attr+"_"+node.id.length] = node.id;
                       }
                       else {
                         var id = node[app.build.output_attr+"_id"];
@@ -730,16 +730,12 @@
                       }
                     })
 
-                    d.edges.forEach(function(edge){
-                      if (["hs"].indexOf(app.build.output_attr) >= 0) {
+                    if (app.build.output_attr === "hs") {
+                      d.edges.forEach(function(edge){
                         edge.source = d.nodes[edge.source]
                         edge.target = d.nodes[edge.target]
-                      }
-                      else {
-                        edge.source = d.nodes.filter(function(n){ return n[app.build.output_attr+"_id"] == edge.source })[0]
-                        edge.target = d.nodes.filter(function(n){ return n[app.build.output_attr+"_id"] == edge.target })[0]
-                      }
-                    })
+                      })
+                    }
 
                     app.networks[app.build.output_attr] = d
                     callback(error,d)
