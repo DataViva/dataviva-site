@@ -190,10 +190,7 @@ class Cbo(Profile):
 class University(Profile):
 
     def build_list(self):
-        apps = [{
-            "builds": [155, 116, {"id": 96, "params": {"color": "graduates_growth"}}, 151]
-        }]
-        return apps
+        return [{"builds": [96, 116, 155, 151]}]
 
 class Course_hedu(Profile):
 
@@ -213,7 +210,4 @@ class Course_hedu(Profile):
 class Course_sc(Profile):
 
     def build_list(self):
-        apps = [{
-            "builds": [119, 124, 159]
-        }]
-        return apps
+        return [{"builds": [119, 124, 159]}]
