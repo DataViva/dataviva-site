@@ -118,11 +118,11 @@
         {% trans %}CNAE to HS{% endtrans %}
       </a>
 
-      <a class="{% if attrs == 'cbo-course' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.crosswalk', attr1='cbo', attr2='course_hedu')}}">
+      <a class="{% if attrs == 'cbo-course_hedu' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.crosswalk', attr1='cbo', attr2='course_hedu')}}">
         {% trans %}CBO to Course{% endtrans %}
       </a>
 
-      <a class="{% if attrs == 'course-cbo' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.crosswalk', attr1='course_hedu', attr2='cbo')}}">
+      <a class="{% if attrs == 'course_hedu-cbo' %}decision{% else %}help{% endif %} short" href="{{ url_for('about.crosswalk', attr1='course_hedu', attr2='cbo')}}">
         {% trans %}Course to CBO{% endtrans %}
       </a>
 
