@@ -16,7 +16,8 @@ body.profiles #container {
 
 div#guide_controls {
   left: 20px;
-  padding: 10px 10px 5px 10px;
+  overflow: scroll;
+  padding: 10px;
   position: fixed;
   top: 88px;
   width: 300px;
