@@ -62,7 +62,7 @@ def index(category = None, id = None):
         article = article)
 
 @mod.route('/<category>/<id>/')
-# @cache_api("profiles", timeout=604800)
+@cache_api("profiles", timeout=604800)
 @gzipped
 def profiles(category = None, id = None):
 

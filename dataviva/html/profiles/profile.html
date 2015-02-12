@@ -22,17 +22,22 @@
       {% for stat in item.stats() %}
         {% if last_group != stat.group %}
           <div class="d3plus_tooltip_data_title">
-            {{ format(stat.group).render(stat.group,g.locale) }}
+            {# {{ format(stat.group).render(stat.group,g.locale) }} #}
+            {{ stat.group }}
           </div>
           {% set last_group = stat.group %}
         {% endif %}
         <div class="d3plus_tooltip_data_block">
-          <div class="d3plus_tooltip_data_name">{{ format(stat.name).render(stat.name,g.locale) }}</div>
+          <div class="d3plus_tooltip_data_name">
+            {# {{ format(stat.name).render(stat.name,g.locale) }} #}
+            {{ stat.name }}
+          </div>
           <div class="d3plus_tooltip_data_value">
             {% if stat.name[:3] == "top" %}
               <a href="/profiles/{{stat.name[4:]}}/{{stat.id}}/">
             {% endif %}
-              {{ format(stat.value).render(stat.name,g.locale) }}
+              {# {{ format(stat.value).render(stat.name,g.locale) }} #}
+              {{ stat.value }}
               {% if stat.percent and stat.percent > 0 %}({{ format(stat.percent).render("share",g.locale) }}%){% endif %}
             {% if stat.name[:3] == "top" %}
               </a>
