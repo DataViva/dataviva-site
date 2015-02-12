@@ -536,7 +536,7 @@ def networks(type="hs"):
     return ret
 
 @mod.route('/')
-#@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def guide():
     return render_template("apps/index.html")
 
