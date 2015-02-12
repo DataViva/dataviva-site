@@ -206,3 +206,11 @@ class Course_hedu(Profile):
                 "builds": [{"id": 49, "filter2": occupation}, {"id": 2, "filter2": occupation}]
             })
         return apps
+
+class Course_sc(Profile):
+
+    def build_list(self):
+        apps = [{
+            "builds": [119, 124, 159]
+        }]
+        return apps

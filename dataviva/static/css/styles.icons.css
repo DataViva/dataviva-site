@@ -173,6 +173,14 @@
   background-image: url("/static/img/icons/course_hedu/course_hedu_all.png");
 }
 
+.decision.icon.school:before {
+  background-image: url("/static/img/icons/school/school_all.png");
+}
+
+.decision.icon.course_sc:before {
+  background-image: url("/static/img/icons/course_sc/course_sc_all.png");
+}
+
 .help.icon.bra:before {
   background-image: url("/static/img/icons/bra/bra_all_alt_black.png");
   opacity: 0.2;
@@ -205,6 +213,16 @@
 
 .help.icon.course_hedu:before {
   background-image: url("/static/img/icons/course_hedu/course_hedu_all_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.school:before {
+  background-image: url("/static/img/icons/school/school_all_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.course_sc:before {
+  background-image: url("/static/img/icons/course_sc/course_sc_all_black.png");
   opacity: 0.2;
 }
 

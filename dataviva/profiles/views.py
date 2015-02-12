@@ -51,6 +51,8 @@ def index(category = None, id = None):
         article = gettext(u"a university")
     elif category == "course_hedu":
         article = gettext(u"a course")
+    elif category == "course_sc":
+        article = gettext(u"a course")
 
     if category:
         page = "general/selector.html"

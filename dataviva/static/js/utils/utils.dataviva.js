@@ -487,6 +487,7 @@ dataviva.depths = function(type,flatten) {
   else if (type == "course_hedu") var array = [2,6];
   else if (type == "university") var array = [5];
   else if (type == "course_sc") var array = [2,5];
+  else if (type == "school") var array = [8];
   else var array = [0];
 
   if (flatten && array.length > 2) {

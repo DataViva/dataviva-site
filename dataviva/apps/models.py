@@ -222,6 +222,8 @@ class Build(db.Model, AutoSerialize):
                 filter1 = "show.6"
             elif self.output == "university":
                 filter1 = "show.5"
+            elif self.output == "school":
+                filter1 = "show.8"
             elif self.output == "bra_r":
                 filter1 = "show.9"
 

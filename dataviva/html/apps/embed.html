@@ -986,6 +986,10 @@
         nesting = ["school_type","university_5"];
         app.viz.text({"school_type": "school_type", "university_5": "name"});
       }
+      else if (app.build.output_attr === "school") {
+        nesting = ["school_type","school_8"];
+        app.viz.text({"school_type": "school_type", "school_8": "name"});
+      }
       else if (app.build.output_attr === "time") {
         nesting = ["time_period"];
         app.viz.text("name");

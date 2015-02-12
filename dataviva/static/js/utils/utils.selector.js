@@ -377,10 +377,20 @@ function Selector() {
       clean_data = function() {
 
         if (data instanceof Array) {
-          data = data.filter(function(d){
-            return d.available || type === "bra";
-            return d.available || (type == "bra" && d.id.length === 9);
-          })
+
+          if (type === "course_sc") {
+            data = data.filter(function(d){
+              return d.available && d.id.substr(0,2) !== "xx";
+            })
+          }
+          else if (type === "bra") {
+            data = data
+          }
+          else {
+            data = data.filter(function(d){
+              return d.available;
+            })
+          }
 
           var temp_dict = {};
           data.forEach(function(d){
@@ -859,6 +869,7 @@ function Selector() {
             "course_hedu": "enrolled",
             "university": "enrolled",
             "course_sc": "enrolled",
+            "school": "enrolled",
           },
           value = sort_types[type] ? sort_types[type] : null,
           sorts = ["name"]
