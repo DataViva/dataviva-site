@@ -78,7 +78,7 @@ def filler(dataset, filter1, filter2):
 
 @mod.route("/embed/")
 @mod.route("/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
-# @cache_api("apps:embed", timeout=604800)
+@cache_api("apps:embed", timeout=604800)
 def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
           filter1="all", filter2="all", output="cbo"):
 
@@ -343,7 +343,7 @@ def get_geo_location(ip):
 @mod.route('/builder/box/', defaults={"app_name": "box", "dataset": "rais", "bra_id": "4mg030000",
             "filter1": "c14126", "filter2": "all", "output": "cbo", "params": ""})
 @mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/')
-# @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
                 filter2=None, output=None, params=None):
     path = request.path.split("/")

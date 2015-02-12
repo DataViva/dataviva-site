@@ -11,14 +11,14 @@ mod = Blueprint('ei', __name__, url_prefix='/ei')
 @mod.route('/<year>-<month>/<bra_id_s>/<bra_id_r>/')
 @mod.route('/<year>/<bra_id_s>/<bra_id_r>/')
 @gzipped
-# @cache_api("ei")
+@cache_api("ei")
 def ei_api(**kwargs):
     tables = [Ymr, Yms, Ymsr]
-    
+
     limit = int(request.args.get('limit', 0) or kwargs.pop('limit', 0))
     order = request.args.get('order', None) or kwargs.pop('order', None)
     if order and "." in order:
-        order, sort = order.split(".") 
+        order, sort = order.split(".")
     sort = request.args.get('sort', None) or kwargs.pop('sort', 'desc')
     serialize = request.args.get('serialize', None) or kwargs.pop('serialize', True)
     exclude = request.args.get('exclude', None) or kwargs.pop('exclude', None)

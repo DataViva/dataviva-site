@@ -12,7 +12,7 @@ mod = Blueprint('hedu', __name__, url_prefix='/hedu')
 
 @mod.route('/<year>/<bra_id>/<university_id>/<course_hedu_id>/')
 @gzipped
-# @cache_api("hedu")
+@cache_api("hedu")
 def hedu_api(**kwargs):
     tables = [hedu.Yb_hedu, hedu.Yc_hedu, hedu.Yu, hedu.Ybc_hedu, hedu.Ybu, hedu.Yuc, hedu.Ybuc]
 
