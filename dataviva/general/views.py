@@ -104,7 +104,7 @@ def after_request(response):
     return response
 
 @mod.route('/', methods=['GET', 'POST'])
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+# @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 @gzipped
 def home():
     # return render_template("test.html")
