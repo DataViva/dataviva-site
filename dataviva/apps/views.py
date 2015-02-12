@@ -161,6 +161,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
         year_range = json.dumps(__year_range__)
 
         ret = make_response(render_template("apps/embed.html",
+            apps = App.query.all(),
             all_builds = all_builds,
             starred = starred,
             form = DownloadForm(),

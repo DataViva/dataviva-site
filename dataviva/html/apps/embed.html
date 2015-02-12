@@ -14,16 +14,11 @@
   <div id="builder">
 
     <select id="app_select" onchange="builder.app(this.options[this.selectedIndex].id)">
-      {% set pre_app = None %}
-      {% for build in all_builds %}
 
-        {% if pre_app != build.app.type %}
-          {% set pre_app = build.app.type %}
-          <option icon="url('/static/img/icons/app/app_{{build.app.type}}.png')" color="{{build.app.color}}" value="{{build.app.type}}" id="{{build.app.type}}"{% if build.app.type == current_build.app.type %} selected="selected"{% endif %}>
-              {{ build.app.name() }}
-          </option>
-        {% endif %}
-
+      {% for app in apps %}
+        <option icon="url('/static/img/icons/app/app_{{app.type}}.png')" color="{{app.color}}" value="{{app.type}}" id="{{app.type}}"{% if app.type == current_build.app.type %} selected="selected"{% endif %}>
+            {{ app.name() }}
+        </option>
       {% endfor %}
     </select>
 
