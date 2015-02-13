@@ -8,8 +8,10 @@ def cache_api(namespace, timeout=None):
             cache_key = namespace + ":" + "-".join(params)
 
             if request.args:
-                lang = request.args.get('lang', None) or g.locale
+                lang = request.args.get('lang', '') or g.locale
                 cache_key += str(request.args) + lang
+            else:
+                cache_key += g.locale
 
             prev = cached_query(cache_key)
             if prev:
