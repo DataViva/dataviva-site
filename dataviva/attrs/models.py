@@ -19,6 +19,7 @@ class Stats(object):
         from dataviva.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
         from dataviva.secex.models import Ymbp, Ymbw, Ympw, Ymb, Ymp, Ymw
         from dataviva.hedu.models import Yu, Yuc, Ybu, Yc_hedu
+        from dataviva.sc.models import Ybc_sc, Yc_sc
         from dataviva import __year_range__
 
         stats = []
@@ -92,16 +93,16 @@ class Stats(object):
             stats.append(self.get_top_attr(Yuc, "enrolled", attr_type, "course_hedu", "hedu"))
             stats.append(self.get_val(Yu, "enrolled", attr_type, dataset, name=gettext("Enrolled")))
             stats.append(self.get_val(Yu, "graduates", attr_type, dataset, name=gettext("Graduates")))
-        elif attr_type == "university":
-            dataset = "hedu"
-            stats.append(self.get_top_attr(Yuc, "enrolled", attr_type, "course_hedu", "hedu"))
-            stats.append(self.get_val(Yu, "enrolled", attr_type, dataset, name=gettext("Enrolled")))
-            stats.append(self.get_val(Yu, "graduates", attr_type, dataset, name=gettext("Graduates")))
         elif attr_type == "course_hedu":
             dataset = "hedu"
             stats.append(self.get_top_attr(Yuc, "enrolled", attr_type, "university", "hedu"))
             stats.append(self.get_val(Yc_hedu, "enrolled", attr_type, dataset, name=gettext("Enrolled")))
             stats.append(self.get_val(Yc_hedu, "graduates", attr_type, dataset, name=gettext("Graduates")))
+        elif attr_type == "course_sc":
+            dataset = "sc"
+            stats.append(self.get_top_attr(Ybc_sc, "enrolled", attr_type, "bra", "sc"))
+            stats.append(self.get_val(Yc_sc, "enrolled", attr_type, dataset, name=gettext("Enrolled")))
+            stats.append(self.get_val(Yc_sc, "age", attr_type, dataset, name=gettext("Average Age")))
 
         return stats
 
@@ -489,6 +490,10 @@ class Bra(db.Model, AutoSerialize, Stats, BasicAttr):
     ybi = db.relationship("Ybi", backref = 'bra', lazy = 'dynamic')
     ybo = db.relationship("Ybo", backref = 'bra', lazy = 'dynamic')
     ybio = db.relationship("Ybio", backref = 'bra', lazy = 'dynamic')
+    # HEDU relations
+    ybu = db.relationship("Ybu", backref = 'bra', lazy = 'dynamic')
+    # SC relations
+    ybc_sc = db.relationship("Ybc_sc", backref = 'bra', lazy = 'dynamic')
     # Neighbors
     neighbors = db.relationship('Distances', primaryjoin = "(Bra.id == Distances.bra_id_origin)", backref='bra_origin', lazy='dynamic')
     bb = db.relationship('Distances', primaryjoin = "(Bra.id == Distances.bra_id_dest)", backref='bra', lazy='dynamic')
