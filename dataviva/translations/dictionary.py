@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask.ext.babel import gettext
+from flask.ext.babel import gettext, ngettext
 
 def dictionary():
 
