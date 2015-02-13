@@ -404,3 +404,19 @@ def dictionary():
         "in": gettext("in"),
 
     }
+
+def plurals(key=None, n=1):
+
+    plurals = {
+
+        # Number Formatting
+        "T": ngettext("Trillion", "Trillions", n),
+        "B": ngettext("Billion", "Billions", n),
+        "M": ngettext("Million", "Millions", n),
+        "k": ngettext("Thousand", "Thousands", n),
+
+    }
+
+    if key:
+        return unicode(plurals[key]) if key in plurals else None
+    return plurals

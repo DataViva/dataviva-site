@@ -3,6 +3,7 @@ import math
 from flask import g
 from flask.ext.babel import gettext, pgettext
 from babel.numbers import format_decimal
+from dataviva.translations.dictionary import plurals
 
 def affixes(key=None, unit=False):
 
