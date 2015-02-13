@@ -22,7 +22,7 @@
         <div class="d3plus_tooltip_data_title">{{ group.title }}</div>
       {% endif %}
       {% for build in group.builds %}
-        <a class="app_links decision short icon {{ build.app.type }}" id="app{{ build.position }}" onclick="slide(this.id)">{{ build.title }}</a>
+        <a class="app_links decision short icon {{ build.app.type }}" id="app{{ build.position }}" onclick="slide(this.id)">{{ build.slug }}</a>
       {% endfor %}
     {% endfor %}
 
@@ -130,7 +130,7 @@
       dataviva.popover.show("#profile_select")
     }
 
-    var width = window.innerWidth-380 - dataviva.scrollbar(),
+    var width = window.innerWidth-330 - dataviva.scrollbar(),
         height = window.innerHeight-159,
         builds = {},
         sliding = false,

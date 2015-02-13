@@ -20,7 +20,7 @@ div#guide_controls {
   padding: 10px;
   position: fixed;
   top: 88px;
-  width: 300px;
+  width: 250px;
 }
 
 div#profile_button {
@@ -61,6 +61,7 @@ div#arrow_clickable {
 div#guide_title {
   font-size: 24px;
   margin-left: 35px;
+  width: 170px;
 }
 
 div#guide_stats {
@@ -72,7 +73,7 @@ div.d3plus_tooltip_data_title {
 }
 
 div.d3plus_tooltip_data_name {
-  width: 130px;
+  width: 110px;
 }
 
 div.d3plus_tooltip_data_name {
@@ -113,13 +114,13 @@ div.d3plus_tooltip_data_title {
 div#guide_controls div.d3plus_tooltip_data_value {
   display: inline-block;
   position: static;
-  width: 150px;
+  width: 120px;
 }
 
 div.guide_app {
   background-color: white;
   margin: 20px 0px;
-  margin-left: 360px;
+  margin-left: 310px;
   white-space: nowrap;
 }
 

@@ -1534,7 +1534,6 @@
 
         if (type == "depth" || type == "year") {
           app.title_update()
-          app.viz.title(app.build.title)
         }
 
         if (type == "depth" && app.build.output_attr == "wld") {
@@ -2034,37 +2033,49 @@
 
     app.title_update = function() {
 
-      if (app.build.output_attr == "bra") {
-        var words = app.build.title.split(" ")
-        if (app.vars.depth) {
-          var new_depth = dataviva.format.text(app.vars.depth)
-          var old_depth = dataviva.format.text(last_depth)
-          if (words[words.length-2] == old_depth) words[words.length-2] = new_depth
-          else if (words[words.length-1] == old_depth) words[words.length-1] = new_depth
-          else {
-            var new_depth = dataviva.format.text(app.vars.depth+"_plural")
-            var old_depth = dataviva.format.text(last_depth+"_plural")
-            if (words[0] == old_depth) words[0] = new_depth
+      function format_title(title) {
+
+        if (app.build.output_attr == "bra") {
+          var words = title.split(" ")
+          if (app.vars.depth) {
+            var new_depth = dataviva.format.text(app.vars.depth)
+            var old_depth = dataviva.format.text(last_depth)
+            if (words[words.length-2] == old_depth) words[words.length-2] = new_depth
+            else if (words[words.length-1] == old_depth) words[words.length-1] = new_depth
+            else {
+              var new_depth = dataviva.format.text(app.vars.depth+"_plural")
+              var old_depth = dataviva.format.text(last_depth+"_plural")
+              if (words[0] == old_depth) words[0] = new_depth
+            }
+            title = words.join(" ")
+            last_depth = app.vars.depth
           }
-          app.build.title = words.join(" ")
-          last_depth = app.vars.depth
+          else if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
+            var old_word = dataviva.format.text("bra_9_plural")
+            var new_word = dataviva.format.text("bra_3_plural")
+            title = title.replace(old_word,new_word)
+          }
         }
-        else if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
-          var old_word = dataviva.format.text("bra_8_plural")
-          var new_word = dataviva.format.text("bra_2_plural")
-          app.build.title = app.build.title.replace(old_word,new_word)
-        }
+
+        // if (app.vars.year && app.build.app.type != "stacked") {
+        //   if (app.build.title.indexOf("(") < 0) {
+        //     app.build.title += " ("+app.vars.year+")"
+        //   }
+        //   else {
+        //     app.build.title = app.build.title.replace(/\(.*?\)/, "("+app.vars.year+")")
+        //   }
+        // }
+
+        return title;
+
       }
-      // if (app.vars.year && app.build.app.type != "stacked") {
-      //   if (app.build.title.indexOf("(") < 0) {
-      //     app.build.title += " ("+app.vars.year+")"
-      //   }
-      //   else {
-      //     app.build.title = app.build.title.replace(/\(.*?\)/, "("+app.vars.year+")")
-      //   }
-      // }
+
+      app.build.title = format_title(app.build.title);
+      app.viz.title(app.build.title);
+
       if (same_origin && window.frameElement) {
-        var message = {"id": window.frameElement.id, "title": app.build.title, "app": app.build.app.type}
+        var slug = format_title(app.build.slug);
+        var message = {"id": window.frameElement.id, "title": slug, "app": app.build.app.type}
         if (same_origin && window.parent.update_titles) window.parent.update_titles(message)
       }
     }

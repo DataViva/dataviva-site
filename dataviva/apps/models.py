@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import g
 from dataviva import db
+from dataviva.translations.dictionary import dictionary
 from dataviva.utils.auto_serialize import AutoSerialize
 from dataviva.utils.title_case import title_case
 from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_hedu, Course_sc
@@ -46,6 +47,8 @@ class Build(db.Model, AutoSerialize):
     output = db.Column(db.String(20))
     title_en = db.Column(db.String(120))
     title_pt = db.Column(db.String(120))
+    slug_en = db.Column(db.String(60))
+    slug_pt = db.Column(db.String(60))
     app_id = db.Column(db.Integer, db.ForeignKey(App.id))
 
     ui = db.relationship('UI', secondary=build_ui,
@@ -280,33 +283,22 @@ class Build(db.Model, AutoSerialize):
             elif self.filter1 == "all":
                 return Ymbp
 
-    '''Returns the english language title of this build.'''
-    def title(self, **kwargs):
+    def format_text(self, title, depth, year):
 
-        lang = g.locale
-        if "lang" in kwargs:
-            lang = kwargs["lang"]
+        lookup = dictionary()
 
-        title_lang = "title_en" if lang == "en" else "title_pt"
-        name_lang = "name_en" if lang == "en" else "name_pt"
+        munic = lookup["bra_9"]
+        munics = lookup["bra_9_plural"]
 
-        title = getattr(self, title_lang)
-
-        depths = {"en":{"plural":{},"single":{}},"pt":{"plural":{},"single":{}}}
-        depths["en"]["single"] = {"2":u"State","4":u"Mesoregion","8":u"Municipality"}
-        depths["en"]["plural"] = {"2":u"States","4":u"Mesoregions","8":u"Municipalities"}
-        depths["pt"]["single"] = {"2":u"Estado","4":u"Mesorregião","8":u"Município"}
-        depths["pt"]["plural"] = {"2":u"Estados","4":u"Mesorregiões","8":u"Municípios"}
-
-        if "depth" in kwargs and u"bra_" in kwargs["depth"][0] and kwargs["depth"][0] != "bra_8":
-            if depths[lang]["plural"]["8"] in title:
-                title = title.replace(depths[lang]["plural"]["8"],depths[lang]["plural"][kwargs["depth"][0][4:]])
-            if depths[lang]["single"]["8"] in title:
-                title = title.replace(depths[lang]["single"]["8"],depths[lang]["single"][kwargs["depth"][0][4:]])
+        if depth and u"bra_" in depth[0] and depth[0] != "bra_8":
+            if munics in title:
+                title = title.replace(munics,lookup["bra_{}_plural".format(depth[0])])
+            if munic in title:
+                title = title.replace(munic,lookup["bra_{}".format(depth[0])])
 
         if self.output == "bra" and isinstance(self.bra,(list,tuple)) and self.bra[0].id == "all":
-             title = title.replace(depths[lang]["plural"]["8"],depths[lang]["plural"]["2"])
-             title = title.replace(depths[lang]["single"]["8"],depths[lang]["single"]["2"])
+             title = title.replace(munics,lookup["bra_3_plural"])
+             title = title.replace(munic,lookup["bra_3"])
 
         # if self.app_id != 2:
         #     if "year" in kwargs:
@@ -314,6 +306,20 @@ class Build(db.Model, AutoSerialize):
         #     else:
         #         year = __latest_year__[self.dataset]
         #     title += " ({0})".format(year)
+        return title
+
+    def slug(self, **kwargs):
+
+        slug = getattr(self, "slug_{}".format(g.locale))
+        slug = self.format_text(slug, kwargs.get("depth", None), kwargs.get("year", None))
+        return slug
+
+
+    '''Returns the english language title of this build.'''
+    def title(self, **kwargs):
+
+        title = getattr(self, "title_{}".format(g.locale))
+        title = self.format_text(title, kwargs.get("depth", None), kwargs.get("year", None))
 
         def get_article(attr, article):
             if attr.article_pt:
@@ -332,14 +338,14 @@ class Build(db.Model, AutoSerialize):
                 return article
 
         if title:
-            if lang == "pt":
+            if g.locale == "pt":
                 joiner = " e "
             else:
                 joiner = " and "
             if "<bra>" in title and isinstance(self.bra,(list,tuple)):
                 bras = []
                 for b in self.bra:
-                    name = title_case(getattr(b, name_lang))
+                    name = title_case(getattr(b, "name_{}".format(g.locale)))
                     if b.id != "all" and b.distance > 0:
                         name = name + " "+b.distance+"km"
                     bras.append(name)
@@ -353,7 +359,7 @@ class Build(db.Model, AutoSerialize):
             for f in ["cnae", "hs", "cbo", "wld", "university", "course_hedu", "course_sc"]:
                 placeholder = "<{}>".format(f)
                 if placeholder in title and hasattr(self, f):
-                    title = title.replace(placeholder, joiner.join([title_case(getattr(a, name_lang)) for a in getattr(self, f)]))
+                    title = title.replace(placeholder, joiner.join([title_case(getattr(a, "name_{}".format(g.locale))) for a in getattr(self, f)]))
                     article_search = re.search("<{}_(\w+)>".format(f), title)
                     if article_search:
                         title = title.replace(article_search.group(0), joiner.join([get_article(a, article_search.group(1)) for a in getattr(self, f)]))
@@ -364,6 +370,7 @@ class Build(db.Model, AutoSerialize):
         return {
             "app": self.app.serialize(),
             "dataset": self.dataset,
+            "slug": self.slug(),
             "title": self.title(),
             "url": self.url()
         }
@@ -389,6 +396,7 @@ class Build(db.Model, AutoSerialize):
         del auto_serialized["title_en"]
         del auto_serialized["title_pt"]
         auto_serialized["title"] = self.title()
+        auto_serialized["slug"] = self.slug()
         auto_serialized["data_url"] = self.data_url()
         auto_serialized["url"] = self.url()
         auto_serialized["ui"] = [ui.serialize() for ui in self.ui.all()]
