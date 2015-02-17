@@ -598,7 +598,10 @@
             }
 
             // Set public current build variable
-            app.build = data.current_build
+            app.build = data.current_build;
+            app.years = year_range[app.build.dataset];
+            app.monthly = app.years[0].indexOf("-") > 0;
+
             last_depth = app.build.bra[0].id == "all" ? "bra_3" : "bra_9"
             leon("#app_select").color(app.build.app.color)
             builder.url()
@@ -829,9 +832,6 @@
 
       d3.select("#ui_bottom").selectAll("*").remove();
       d3.select("#app_controls").selectAll("*").remove();
-
-      app.years = year_range[app.build.dataset];
-      app.monthly = app.years[0].indexOf("-") > 0;
 
       if (!app.allyears) {
 
