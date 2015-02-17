@@ -21,3 +21,17 @@ def make_cache_key(*args, **kwargs):
         cache_key += "/"+msgs
     
     return cache_key
+
+def api_cache_key(namespace, *args, **kwargs):
+    def gen_key(**kwargs):
+        path = request.path
+        lang = g.locale
+        key = namespace + ":" + path + lang + str(request.args)
+        cache_key = key.encode('utf-8')
+
+        if get_flashed_messages():
+            msgs = "|".join([msg[0] for msg in get_flashed_messages(with_categories=True)])
+            cache_key += "/"+msgs
+
+        return cache_key
+    return gen_key

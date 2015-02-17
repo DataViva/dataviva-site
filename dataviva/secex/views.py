@@ -3,14 +3,15 @@ from dataviva import db
 from dataviva.secex.models import Ymb, Ymp, Ymbp, Ymbpw, Ymbw, Ympw, Ymw
 from dataviva.utils import table_helper, query_helper
 from dataviva.utils.gzip_data import gzipped
-from dataviva.utils.decorators import cache_api
+from dataviva import view_cache
+from dataviva.utils.cached_query import api_cache_key
 
 mod = Blueprint('secex', __name__, url_prefix='/secex')
 
 @mod.route('/<year>/<bra_id>/<hs_id>/<wld_id>/')
 @mod.route('/<year>-<month>/<bra_id>/<hs_id>/<wld_id>/')
 @gzipped
-@cache_api('secex')
+@view_cache.cached(key_prefix=api_cache_key("secex"))
 def secex_api(**kwargs):
     limit = int(kwargs.pop('limit', 0)) or int(request.args.get('limit', 0) )
     order = request.args.get('order', None) or kwargs.pop('order', None)

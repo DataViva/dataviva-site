@@ -4,12 +4,14 @@ from dataviva import db
 from dataviva.rais.models import Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio
 from dataviva.utils import table_helper, query_helper
 from dataviva.utils.gzip_data import gzipped
-from dataviva.utils.decorators import cache_api
+from dataviva import view_cache
+from dataviva.utils.cached_query import api_cache_key
+
 mod = Blueprint('rais', __name__, url_prefix='/rais')
 
 @mod.route('/<year>/<bra_id>/<cnae_id>/<cbo_id>/')
 @gzipped
-@cache_api('rais')
+@view_cache.cached(key_prefix=api_cache_key("rais"))
 def rais_api(**kwargs):
     limit = int(kwargs.pop('limit', 0)) or int(request.args.get('limit', 0) )
     order = request.args.get('order', None) or kwargs.pop('order', None)

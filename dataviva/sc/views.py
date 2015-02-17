@@ -3,14 +3,15 @@ from dataviva import db
 from dataviva.sc.models import Yb_sc, Yc_sc, Ys, Ybs, Ybc_sc, Ybsc, Ysc
 from dataviva.utils.gzip_data import gzipped
 from dataviva.utils import make_query
-from dataviva.utils.decorators import cache_api
+from dataviva import view_cache
+from dataviva.utils.cached_query import api_cache_key
 from dataviva.utils import table_helper, query_helper
 
 mod = Blueprint('sc', __name__, url_prefix='/sc')
 
 @mod.route('/<year>/<bra_id>/<school_id>/<course_sc_id>/')
 @gzipped
-@cache_api("sc")
+@view_cache.cached(key_prefix=api_cache_key("sc"))
 def sc_api(**kwargs):
     tables = [Yc_sc, Yb_sc, Ys, Ybc_sc, Ybs, Ysc, Ybsc]
 

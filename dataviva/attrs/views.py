@@ -16,8 +16,8 @@ from dataviva.utils.cached_query import cached_query
 from dataviva.utils.exist_or_404 import exist_or_404
 from dataviva.utils.title_case import title_case
 from sqlalchemy import desc
-from dataviva.utils.decorators import cache_api
 from dataviva.utils.gzip_data import gzipped
+from dataviva.utils.cached_query import api_cache_key
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
@@ -270,7 +270,7 @@ def attrs_table(attr="bra",depth="2"):
     return render_template("general/table.html", data_url=data_url)
 
 @mod.route('/search/<term>/')
-@cache_api("search", timeout=86400)
+@view_cache.cached(timeout=86400, key_prefix=api_cache_key("search"))
 def attrs_search(term=None):
     # Dictionary
     bra_query = {}
