@@ -644,7 +644,7 @@
             else if (!app.allyears) {
 
               // Determine current year
-              var data_years = year_range[app.build.dataset].map(function(y){
+              var data_years = app.years.map(function(y){
                 return parseFloat(y.split("-")[0]);
               });
 
@@ -659,17 +659,17 @@
               app.vars.year += "";
 
               if (app.build.dataset === "ei") {
-                app.vars.year = year_range.ei[1];
+                app.vars.year = app.years[1];
               }
 
               var url_year = app.vars.year;
-              if (app.vars.year.indexOf("-") < 0 && year_range[app.build.dataset][1].indexOf("-") > 0) {
+              if (app.vars.year.indexOf("-") < 0 && app.monthly) {
                 url_year += "-0";
               }
 
               app.build.data_url = app.build.data_url.replace("all", url_year)
             }
-            else if (app.build.dataset != "ei" && year_range[app.build.dataset][1].indexOf("-") > 0) {
+            else if (app.build.dataset != "ei" && app.monthly) {
               app.build.data_url = app.build.data_url.replace("all", "all-0")
             }
 
@@ -827,8 +827,11 @@
 
     app.finish = function() {
 
-      d3.select("#ui_bottom").selectAll("*").remove()
-      d3.select("#app_controls").selectAll("*").remove()
+      d3.select("#ui_bottom").selectAll("*").remove();
+      d3.select("#app_controls").selectAll("*").remove();
+
+      app.years = year_range[app.build.dataset];
+      app.monthly = app.years[0].indexOf("-") > 0;
 
       if (!app.allyears) {
 
@@ -1051,6 +1054,13 @@
         }
       }
 
+      if (app.monthly) {
+        app.tooltip.short[""] = ["year"]
+      }
+      else {
+        app.tooltip.short[""] = []
+      }
+
       app.viz
         .type(app.build.app.d3plus)
         .title({
@@ -1088,7 +1098,7 @@
 
       if (app.vars.year && ["stacked","line"].indexOf(app.build.app.type) < 0) {
         var year_date = app.vars.year;
-        if (year_date.indexOf("-") > 0 ) {
+        if (year_date.indexOf("-") > 0) {
           if (year_date.split("-")[1]) {
             var y = year_date.split("-");
             year_date = new Date(y[1]+"/1/"+y[0]);
@@ -1604,13 +1614,10 @@
           app.viz.y({"lines": [yval], "value": yv}).title({"total": app.total()})
         }
         else if (type == "size") {
-          if (app.build.app.type !== "occugrid") {
-            app.tooltip["short"]["basics"] = [app.vars.size]
-          }
           if (app.viz.order() === app.viz.size()) {
             app.viz.order(value)
           }
-          app.viz[type](value).title({"total": app.total()}).tooltip(app.tooltip)
+          app.viz[type](value).title({"total": app.total()})
         }
         else if (type === "depth") {
           app.viz[type](app.viz.id(Object).nesting.indexOf(value))

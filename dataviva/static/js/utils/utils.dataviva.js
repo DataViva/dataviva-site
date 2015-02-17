@@ -23,11 +23,12 @@ dataviva.obj2csv = function(obj) {
 }
 
 dataviva.format = {};
-dataviva.format.text = function(text,name,vars,obj,l) {
+dataviva.format.text = function(text,name,vars) {
 
   if (typeof name !== "string") name = "";
+  if (text === "year" && app.monthly) text = "month";
 
-  if (!l) var l = dataviva.language
+  var l = dataviva.language;
 
   if (text.indexOf("top_") == 0) {
     var x = text.substring(4)
