@@ -251,7 +251,7 @@
     app.title_width -= d3.select("#settings").node().offsetWidth+12
     app.title_width -= d3.select("#settings").node().offsetWidth
 
-    app.title_height = d3.select("#settings").node().offsetHeight+10
+    app.title_height = d3.select("#settings").node().offsetHeight
 
     app.font = null
     var fonts = ["HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"]
@@ -543,7 +543,7 @@
 
       // Hide popover
       dataviva.popover.hide();
-      app.viz.data([]).coords(false).nodes(false).edges(false).draw();
+      app.viz.data(false).coords(false).nodes(false).edges(false).draw();
       app.allyears = allyears;
 
       if (new_url) {
@@ -1309,6 +1309,7 @@
         var layout = app.build.ui.filter(function(ui){ return ui.type === "layout"; });
         if (layout) layout = layout[0].values[0];
         else layout = "linear"
+        if (layout === "value") layout = "linear";
         var threshold = ["time", "type"].indexOf(app.build.output_attr) < 0;
         app.viz
           .x({
@@ -2500,7 +2501,7 @@
       if (app.vars.controls == "true") {
         app.title_width = window.innerWidth
         d3.select("#controls_toggle").attr("class","leon button square active")
-        app.title_height = 0
+        app.title_height = d3.select("#settings").node().offsetHeight
         var buffer = 0
       }
       else {
