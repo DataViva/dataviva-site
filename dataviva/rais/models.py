@@ -92,7 +92,7 @@ class Ybi(BaseRais, db.Model, AutoSerialize):
     bra_id_len = db.Column(db.Integer(1))
     cnae_id_len = db.Column(db.Integer(1))
 
-    required_bras = db.Column(db.PickleType)
+    # required_bras = db.Column(db.PickleType)
 
     def __repr__(self):
         return '<Ybi %d.%s.%s>' % (self.year, self.bra_id, self.cnae_id)
