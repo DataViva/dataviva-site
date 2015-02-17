@@ -15434,11 +15434,10 @@ module.exports = {
   color: {
     primary: {
       process: function(value, vars) {
-        var primary, secondary;
+        var primary;
         primary = this.value;
-        secondary = vars.ui.color.secondary.value;
-        if (!secondary || secondary === d3.rgb(primary).darker(2).toString()) {
-          vars.ui.color.secondary.value = d3.rgb(value).darker(2).toString();
+        if (!vars.ui.color.secondary.value) {
+          vars.ui.color.secondary.value = d3.rgb(primary).darker(0.75).toString();
         }
         return value;
       },
@@ -15555,33 +15554,28 @@ module.exports = function(elem, vars) {
   lighter = require("../../../../color/lighter.coffee");
   textColor = require("../../../../color/text.coffee");
   return elem.style("background-color", function(d) {
-    if (vars.focus.value !== d[vars.id.value]) {
-      if (vars.hover.value === d[vars.id.value]) {
-        return lighter(vars.ui.color.secondary.value, .25);
-      } else {
-        return vars.ui.color.secondary.value;
-      }
+    var color;
+    if (vars.focus.value === d[vars.id.value]) {
+      color = vars.ui.color.secondary.value;
     } else {
-      if (vars.hover.value === d[vars.id.value]) {
-        return d3.rgb(vars.ui.color.primary.value).darker(0.15).toString();
-      } else {
-        return vars.ui.color.primary.value;
-      }
+      color = vars.ui.color.primary.value;
     }
+    if (vars.hover.value === d[vars.id.value]) {
+      color = d3.rgb(color).darker(0.15).toString();
+    }
+    return color;
   }).style("color", function(d) {
     var color, image, opacity;
     if (vars.focus.value === d[vars.id.value]) {
-      opacity = 1;
-    } else {
       opacity = 0.75;
+    } else {
+      opacity = 1;
     }
     image = d[vars.icon.value] && vars.data.viz.length < vars.data.large;
-    if (vars.focus.value === d[vars.id.value] && d[vars.color.value] && !image) {
+    if (!image && d[vars.color.value]) {
       color = legible(d[vars.color.value]);
-    } else if (vars.focus.value === d[vars.id.value]) {
-      color = textColor(vars.ui.color.primary.value);
     } else {
-      color = textColor(vars.ui.color.secondary.value);
+      color = textColor(d3.select(this).style("background-color"));
     }
     color = d3.rgb(color);
     return "rgba(" + color.r + "," + color.g + "," + color.b + "," + opacity + ")";
@@ -15974,7 +15968,7 @@ module.exports = function ( vars ) {
     .draw({
       "update": vars.draw.update
     })
-    .focus(vars.focus.value)
+    .focus("")
     .font( vars.font )
     .hover(hover)
     .icon({
@@ -16501,18 +16495,17 @@ module.exports = function ( vars ) {
     elem
       .style("padding",vars.ui.padding+"px")
       .style("display","block")
-      .style("background-color",vars.ui.color.secondary.value)
+      .style("background-color",d3.rgb(vars.ui.color.primary.value).darker(0.15).toString())
 
   }
 
   function inputStyle(elem) {
 
-    var width = vars.width.secondary - vars.ui.padding*4 - vars.ui.border*2
+    var width = vars.width.secondary - vars.ui.padding*4 + vars.ui.border*2
 
     elem
-      .style("padding",vars.ui.padding+"px")
+      .style("padding",vars.ui.padding/2+"px")
       .style("width",width+"px")
-      .style("border-style","solid")
       .style("border-width","0px")
       .style("font-family",vars.font.secondary.family.value)
       .style("font-size",vars.font.secondary.size+"px")
@@ -16823,22 +16816,33 @@ module.exports = function ( vars ) {
   //----------------------------------------------------------------------------
   if ( vars.dev.value ) print.time("drawing list")
 
+  function position(elem) {
+    var flipped = vars.open.flipped.value
+    elem
+      .style("top",function(){
+        return flipped ? "auto" : vars.margin.top-vars.ui.border+"px";
+      })
+      .style("bottom",function(){
+        return flipped ? vars.margin.top+vars.ui.border+"px" : "auto";
+      });
+  }
+
   function update(elem) {
 
     elem
       .style("left",function(){
         if (vars.font.align.value === "left") {
-          return vars.margin.left+"px"
+          return vars.margin.left+"px";
         }
         else if (vars.font.align.value === "center") {
-          return vars.margin.left-((vars.width.secondary-vars.width.value)/2)+"px"
+          return vars.margin.left-((vars.width.secondary-vars.width.value)/2)+"px";
         }
         else {
-          return "auto"
+          return "auto";
         }
       })
       .style("right",function(){
-        return vars.font.align.value === "right" ? "0px" : "auto"
+        return vars.font.align.value === "right" ? "0px" : "auto";
       })
       .style("height",vars.container.listHeight+"px")
       .style("padding",vars.ui.border+"px")
@@ -16847,26 +16851,16 @@ module.exports = function ( vars ) {
         return vars.open.value ? "9999" : "-1";
       })
       .style("width",(vars.width.secondary-(vars.ui.border*2))+"px")
-      .style("top",function(){
-        return vars.open.flipped.value ? "auto" : vars.margin.top+"px"
-      })
-      .style("bottom",function(){
-        return vars.open.flipped.value ? vars.margin.top+"px" : "auto"
-      })
       .style("opacity",vars.open.value ? 1 : 0)
+      .call(position);
 
   }
 
   function finish(elem) {
 
-    elem
-      .style("top",function(){
-        return vars.open.flipped.value ? "auto" : vars.margin.top+"px"
-      })
-      .style("bottom",function(){
-        return vars.open.flipped.value ? vars.margin.top+"px" : "auto"
-      })
-      .style("display",!vars.open.value ? "none" : null)
+    elem.style("display", vars.open.value ? null : "none")
+      .call(position);
+
 
     if (vars.search.enabled && vars.open.value) {
       vars.container.selector.select("div.d3plus_drop_search input").node().focus()
@@ -28719,11 +28713,10 @@ module.exports = {
   color: {
     primary: {
       process: function(value, vars) {
-        var primary, secondary;
+        var primary;
         primary = this.value;
-        secondary = vars.ui.color.secondary.value;
-        if (!secondary || secondary === d3.rgb(primary).darker(2).toString()) {
-          vars.ui.color.secondary.value = d3.rgb(value).darker(2).toString();
+        if (!vars.ui.color.secondary.value) {
+          vars.ui.color.secondary.value = d3.rgb(primary).darker(0.75).toString();
         }
         return value;
       },
