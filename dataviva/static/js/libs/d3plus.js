@@ -23,7 +23,7 @@ module.exports = d3plus;
  * @static
  */
 
-d3plus.version = "1.6.9 - Turquoise";
+d3plus.version = "1.6.10 - Turquoise (Dev)";
 
 
 /**
@@ -10974,9 +10974,7 @@ module.exports = function( vars , data ) {
 
     }
 
-    if (vars.data.value.length === 32) console.log("before", data.length)
     data = data.filter(nest_check)
-    if (vars.data.value.length === 32) console.log("nest", data.length)
 
     if ( v === "id" ) {
 
@@ -11431,8 +11429,7 @@ var dataNest = function(vars, flatData, nestingLevels) {
 
   var nestedData   = d3.nest(),
       groupedData  = [],
-      segments     = "temp" in vars ? [ "active" , "temp" , "total" ] : [],
-      exceptions   = "time" in vars ? [ vars.time.value , vars.icon.value ] : [];
+      segments     = "temp" in vars ? [ "active" , "temp" , "total" ] : [];
 
   if (!nestingLevels.length) {
     nestedData.key(function(d){ return true; });
@@ -11451,6 +11448,12 @@ var dataNest = function(vars, flatData, nestingLevels) {
 
     });
 
+  }
+
+  if (vars.axes && vars.axes.discrete) {
+    nestedData.key(function(d){
+      return fetchValue(vars, d, vars[vars.axes.discrete].value);
+    });
   }
 
   var deepest_is_id = nestingLevels.length && vars.id.nesting.indexOf(nestingLevels[nestingLevels.length - 1]) >= 0;
@@ -13334,11 +13337,16 @@ var rtl;
 rtl = require("../../../client/rtl.coffee");
 
 module.exports = function(align) {
-  if (!align) {
+  var accepted;
+  accepted = ["left", "center", "right"];
+  if (align === false) {
+    accepted.unshift(false);
+  }
+  if (accepted.indexOf(align) < 0) {
     align = "left";
   }
   return {
-    accepted: ["left", "center", "right"],
+    accepted: accepted,
     process: function(value) {
       if (rtl) {
         if (value === "left") {
@@ -13362,11 +13370,16 @@ module.exports = function(align) {
 
 },{"../../../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee":[function(require,module,exports){
 module.exports = function(decoration) {
-  if (!decoration) {
+  var accepted;
+  accepted = ["line-through", "none", "overline", "underline"];
+  if (decoration === false) {
+    accepted.unshift(false);
+  }
+  if (accepted.indexOf(decoration) < 0) {
     decoration = "none";
   }
   return {
-    accepted: ["line-through", "none", "overline", "underline"],
+    accepted: accepted,
     value: decoration
   };
 };
@@ -13381,7 +13394,7 @@ validate = require("../../../font/validate.coffee");
 helvetica = ["Helvetica Neue", "HelveticaNeue", "Helvetica", "Arial", "sans-serif"];
 
 module.exports = function(family) {
-  if (!family) {
+  if (family === void 0) {
     family = helvetica;
   }
   return {
@@ -13394,11 +13407,16 @@ module.exports = function(family) {
 
 },{"../../../font/validate.coffee":"/Users/Dave/Sites/d3plus/src/font/validate.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/font/position.coffee":[function(require,module,exports){
 module.exports = function(position) {
-  if (!position) {
+  var accepted;
+  accepted = ["top", "middle", "bottom"];
+  if (position === false) {
+    accepted.unshift(false);
+  }
+  if (accepted.indexOf(position) < 0) {
     position = "bottom";
   }
   return {
-    accepted: ["top", "middle", "bottom"],
+    accepted: accepted,
     mapping: {
       top: "0ex",
       middle: "0.5ex",
@@ -13416,11 +13434,16 @@ module.exports = function(position) {
 
 },{}],"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee":[function(require,module,exports){
 module.exports = function(transform) {
-  if (!transform) {
+  var accepted;
+  accepted = ["capitalize", "lowercase", "none", "uppercase"];
+  if (transform === false) {
+    accepted.unshift(false);
+  }
+  if (accepted.indexOf(transform) < 0) {
     transform = "none";
   }
   return {
-    accepted: ["capitalize", "lowercase", "none", "uppercase"],
+    accepted: accepted,
     value: transform
   };
 };
@@ -16430,8 +16453,7 @@ module.exports = function ( vars ) {
       }
       else {
 
-        vars.container.listScroll = list_top
-        // console.log(vars.search.height)
+        vars.container.listScroll = list_top;
 
         if (button_top < list_top) {
           vars.container.listScroll = button_top
@@ -20023,7 +20045,7 @@ var objectValidate, uniques;
 objectValidate = require("../object/validate.coffee");
 
 uniques = function(data, value, fetch, vars, depth) {
-  var check, d, lookups, val, vals, _i, _j, _k, _len, _len1, _len2;
+  var check, d, lookups, v, val, vals, _i, _j, _k, _l, _len, _len1, _len2, _len3;
   if (data === void 0) {
     return [];
   }
@@ -20058,24 +20080,24 @@ uniques = function(data, value, fetch, vars, depth) {
       }
     }
   };
-  if (typeof fetch === "function") {
+  if (typeof fetch === "function" && vars) {
     for (_i = 0, _len = data.length; _i < _len; _i++) {
       d = data[_i];
       val = uniques(fetch(vars, d, value, depth));
-      if (val.length === 1) {
-        val = val[0];
+      for (_j = 0, _len1 = val.length; _j < _len1; _j++) {
+        v = val[_j];
+        check(v);
       }
-      check(val);
     }
   } else if (typeof value === "function") {
-    for (_j = 0, _len1 = data.length; _j < _len1; _j++) {
-      d = data[_j];
+    for (_k = 0, _len2 = data.length; _k < _len2; _k++) {
+      d = data[_k];
       val = value(d);
       check(val);
     }
   } else {
-    for (_k = 0, _len2 = data.length; _k < _len2; _k++) {
-      d = data[_k];
+    for (_l = 0, _len3 = data.length; _l < _len3; _l++) {
+      d = data[_l];
       if (objectValidate(d)) {
         val = d[value];
         check(val);
@@ -20154,7 +20176,7 @@ var dataFormat    = require("../../core/data/format.js"),
     dataLoad      = require("../../core/data/load.coffee"),
     drawDrawer    = require("./ui/drawer.js"),
     drawLegend    = require("./ui/legend.js"),
-    drawTimeline  = require("./ui/timeline.js"),
+    drawTimeline  = require("./ui/timeline.coffee"),
     errorCheck    = require("./errorCheck.js"),
     fetchData     = require("../../core/fetch/data.js"),
     finish        = require("./finish.js"),
@@ -20370,7 +20392,7 @@ module.exports = function(vars) {
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     // Groups data by time and nesting.
     //--------------------------------------------------------------------------
-    if (vars.data.changed || vars.time.changed || vars.time.format.changed || vars.id.changed) {
+    if (vars.data.changed || vars.time.changed || vars.time.format.changed || vars.id.changed || (vars.x.scale.changed && [vars.x.scale.value, vars.x.scale.previous].indexOf("discrete") >= 0) || (vars.y.scale.changed && [vars.y.scale.value, vars.y.scale.previous].indexOf("discrete") >= 0)) {
       steps.push({ "function" : dataFormat , "message" : dataMessage })
     }
 
@@ -20521,7 +20543,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/data/color.js":"/Users/Dave/Sites/d3plus/src/core/data/color.js","../../core/data/format.js":"/Users/Dave/Sites/d3plus/src/core/data/format.js","../../core/data/keys.js":"/Users/Dave/Sites/d3plus/src/core/data/keys.js","../../core/data/load.coffee":"/Users/Dave/Sites/d3plus/src/core/data/load.coffee","../../core/fetch/data.js":"/Users/Dave/Sites/d3plus/src/core/fetch/data.js","../../core/parse/edges.js":"/Users/Dave/Sites/d3plus/src/core/parse/edges.js","../../core/parse/nodes.js":"/Users/Dave/Sites/d3plus/src/core/parse/nodes.js","../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","./errorCheck.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/errorCheck.js","./finish.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/finish.js","./focus/tooltip.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/tooltip.coffee","./focus/viz.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/viz.js","./shapes/draw.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/draw.js","./svg/enter.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/enter.js","./svg/update.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/update.js","./types/run.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/types/run.coffee","./ui/drawer.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/drawer.js","./ui/history.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/history.js","./ui/legend.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/legend.js","./ui/timeline.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/timeline.js","./ui/titles.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/titles.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/errorCheck.js":[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/data/color.js":"/Users/Dave/Sites/d3plus/src/core/data/color.js","../../core/data/format.js":"/Users/Dave/Sites/d3plus/src/core/data/format.js","../../core/data/keys.js":"/Users/Dave/Sites/d3plus/src/core/data/keys.js","../../core/data/load.coffee":"/Users/Dave/Sites/d3plus/src/core/data/load.coffee","../../core/fetch/data.js":"/Users/Dave/Sites/d3plus/src/core/fetch/data.js","../../core/parse/edges.js":"/Users/Dave/Sites/d3plus/src/core/parse/edges.js","../../core/parse/nodes.js":"/Users/Dave/Sites/d3plus/src/core/parse/nodes.js","../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","./errorCheck.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/errorCheck.js","./finish.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/finish.js","./focus/tooltip.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/tooltip.coffee","./focus/viz.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/viz.js","./shapes/draw.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/draw.js","./svg/enter.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/enter.js","./svg/update.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/update.js","./types/run.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/types/run.coffee","./ui/drawer.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/drawer.js","./ui/history.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/history.js","./ui/legend.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/legend.js","./ui/timeline.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/timeline.coffee","./ui/titles.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/titles.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/errorCheck.js":[function(require,module,exports){
 var fetchText    = require("../../core/fetch/text.js"),
     print        = require("../../core/console/print.coffee"),
     rejected     = require("../../core/methods/rejected.coffee"),
@@ -20668,7 +20690,7 @@ module.exports = function(vars) {
       if (vars.draw.first) {
         bounds(vars,zoom,0)
       }
-      else if (vars.type.changed || vars.focus.changed || vars.height.changed || vars.width.changed || vars.nodes.changed) {
+      else if (vars.type.changed || vars.focus.changed || vars.height.changed || vars.width.changed || vars.nodes.changed || vars.legend.changed || vars.timeline.changed || vars.ui.changed) {
         bounds(vars,zoom)
       }
 
@@ -26233,448 +26255,378 @@ module.exports = function(vars,message) {
 
 }
 
-},{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/timeline.js":[function(require,module,exports){
-var closest = require("../../../util/closest.coffee"),
-    fontSizes = require("../../../font/sizes.coffee"),
-    events    = require("../../../client/pointer.coffee"),
-    prefix    = require("../../../client/prefix.coffee"),
-    print     = require("../../../core/console/print.coffee"),
-    textColor = require("../../../color/text.coffee")
+},{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/timeline.coffee":[function(require,module,exports){
+var closest, events, fontSizes, playInterval, prefix, print, textColor;
 
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-// Creates color key
-//-------------------------------------------------------------------
+closest = require("../../../util/closest.coffee");
+
+fontSizes = require("../../../font/sizes.coffee");
+
+events = require("../../../client/pointer.coffee");
+
+prefix = require("../../../client/prefix.coffee");
+
+print = require("../../../core/console/print.coffee");
+
+textColor = require("../../../color/text.coffee");
+
+playInterval = false;
+
 module.exports = function(vars) {
-
-  if ((!vars.error.internal || !vars.data.missing) && !vars.small && vars.data.time && vars.data.time.values.length > 1 && vars.timeline.value) {
-
-    var years = []
-    vars.data.time.values.forEach(function(d){
-      years.push(new Date(d))
-    })
-
-    if ( vars.dev.value ) print.time("drawing timeline")
-
-    var timeFormat = vars.data.time.format,
-        timeMultiFormat = vars.data.time.multiFormat;
-
-    if ((vars.time.value == vars.x.value && vars.x.scale.value == "discrete") || (vars.time.value == vars.y.value && vars.y.scale.value == "discrete")) {
-      var min_required = 2
+  var availableWidth, background, brush, brushExtent, brush_group, brushed, brushend, d, end, handles, i, init, labelWidth, labels, max_index, min, min_index, min_required, oldWidth, playButton, playIcon, playIconChar, playIconStyle, playStyle, playUpdate, setYears, start, start_x, step, stopPlayback, text, textFill, textRotate, textSizes, textStyle, tickStep, ticks, timeFormat, timeFormatter, timeMultiFormat, timelineBox, timelineHeight, timelineWidth, x, yearHeight, yearMS, yearWidth, yearWidths, year_ticks, years, _i, _len;
+  if (vars.timeline.value && (!vars.error.internal || !vars.data.missing) && !vars.small && vars.data.time && vars.data.time.values.length > 1) {
+    if (vars.dev.value) {
+      print.time("drawing timeline");
     }
-    else {
-      var min_required = 1
+    if (vars.axes.discrete && vars.time.value === vars[vars.axes.discrete].value) {
+      min_required = 2;
+    } else {
+      min_required = 1;
     }
-
+    years = vars.data.time.values.map(function(d) {
+      return new Date(d);
+    });
+    timeFormat = vars.data.time.format;
+    timeMultiFormat = vars.data.time.multiFormat;
     if (vars.time.solo.value.length) {
-      var init = d3.extent(vars.time.solo.value)
-      for (var i = 0; i < init.length; i++) {
-        if (init[i].constructor !== Date) {
-          var d = new Date(init[i].toString())
-          d.setTime( d.getTime() + d.getTimezoneOffset() * 60 * 1000 )
-          init[i] = d
+      init = d3.extent(vars.time.solo.value);
+      for (i = _i = 0, _len = init.length; _i < _len; i = ++_i) {
+        d = init[i];
+        if (d.constructor !== Date) {
+          d = new Date(d.toString());
+          d.setTime(d.getTime() + d.getTimezoneOffset() * 60 * 1000);
+          init[i] = d;
         }
       }
+    } else {
+      init = d3.extent(years);
     }
-    else {
-      var init = d3.extent(years)
-    }
-
-    var min = years[0],
-        start = new Date(init[0]),
-        end = new Date(init[1])
-
-    years = vars.data.time.ticks
-    var year_ticks = years.slice()
-    var d = new Date(min)
-    d["set"+vars.data.time.stepType](d["get"+vars.data.time.stepType]() + years.length)
-    year_ticks.push(d)
-
-    end["set"+vars.data.time.stepType](end["get"+vars.data.time.stepType]() + 1)
-    start = closest(year_ticks,start)
-    end = closest(year_ticks,end)
-
-    var yearMS = year_ticks.slice(0)
-    for (var i = 0; i < yearMS.length; i++) {
-      yearMS[i] = yearMS[i].getTime()
-    }
-
-    var min_index = yearMS.indexOf(start.getTime())
-      , max_index = yearMS.indexOf(end.getTime())
-
-    var brushed = function() {
-
+    min = new Date(years[0]);
+    step = vars.data.time.stepType;
+    min["set" + step](min["get" + step]() + years.length);
+    years = vars.data.time.ticks;
+    year_ticks = years.slice();
+    year_ticks.push(min);
+    start = new Date(init[0]);
+    start = closest(year_ticks, start);
+    end = new Date(init[1]);
+    end["set" + vars.data.time.stepType](end["get" + vars.data.time.stepType]() + 1);
+    end = closest(year_ticks, end);
+    yearMS = year_ticks.map(Number);
+    min_index = yearMS.indexOf(+start);
+    max_index = yearMS.indexOf(+end);
+    brushExtent = [start, end];
+    stopPlayback = function() {
+      clearInterval(playInterval);
+      playInterval = false;
+      return playIcon.call(playIconChar, "icon");
+    };
+    brushed = function() {
+      var extent, max_val, min_val;
       if (d3.event.sourceEvent !== null) {
-
-        brushExtent = brush.extent()
-
-        var min_val = closest(year_ticks,brushExtent[0]),
-            max_val = closest(year_ticks,brushExtent[1])
-
+        if (playInterval) {
+          stopPlayback();
+        }
+        brushExtent = brush.extent();
+        min_val = closest(year_ticks, brushExtent[0]);
+        max_val = closest(year_ticks, brushExtent[1]);
         if (min_val === max_val) {
-          min_index = yearMS.indexOf(min_val.getTime())
+          min_index = yearMS.indexOf(+min_val);
           if (min_val < brushExtent[0] || min_index === 0) {
-            max_val = year_ticks[min_index + 1]
+            max_val = year_ticks[min_index + 1];
+          } else {
+            min_val = year_ticks[min_index - 1];
           }
-          else {
-            min_val = year_ticks[min_index - 1]
-          }
-
         }
-
-        min_index = yearMS.indexOf(min_val.getTime())
-        max_index = yearMS.indexOf(max_val.getTime())
-
-        if (max_index-min_index >= min_required) {
-          var extent = [min_val,max_val]
-        }
-        else if (min_index+min_required <= years.length) {
-          var extent = [min_val,year_ticks[min_index+min_required]]
-        }
-        else {
-
-          var extent = [min_val]
-          for (var i = 1; i <= min_required; i++) {
-            if (min_index+i <= years.length) {
-              extent.push(year_ticks[min_index+i])
+        min_index = yearMS.indexOf(+min_val);
+        max_index = yearMS.indexOf(+max_val);
+        if (max_index - min_index >= min_required) {
+          extent = [min_val, max_val];
+        } else if (min_index + min_required <= years.length) {
+          extent = [min_val, year_ticks[min_index + min_required]];
+        } else {
+          extent = [min_val];
+          i = 1;
+          while (i <= min_required) {
+            if (min_index + i <= years.length) {
+              extent.push(year_ticks[min_index + i]);
+            } else {
+              extent.unshift(year_ticks[min_index - ((min_index + i) - years.length)]);
             }
-            else {
-              extent.unshift(year_ticks[min_index-((min_index+i)-(years.length))])
-            }
+            i++;
           }
-          extent = [extent[0],extent[extent.length-1]]
+          extent = [extent[0], extent[extent.length - 1]];
         }
-
-        brushExtent = extent
-
-        text.attr("fill",textFill)
-
-        d3.select(this).call(brush.extent(extent))
-
+        brushExtent = extent;
+        text.attr("fill", textFill);
+        return d3.select(this).call(brush.extent(extent));
       }
-      else {
-        return;
+    };
+    setYears = function() {
+      var newYears;
+      if (max_index - min_index === years.length) {
+        newYears = [];
+      } else {
+        newYears = d3.range(min_index, max_index).map(function(y) {
+          i = vars.data.time.dataSteps.indexOf(y);
+          if (i >= 0) {
+            return vars.data.time.values[i];
+          } else {
+            return years[y];
+          }
+        });
       }
-
-    }
-
-    var brushend = function() {
-
+      playUpdate();
+      return vars.self.time({
+        "solo": newYears
+      }).draw();
+    };
+    brushend = function() {
+      var change, old_max, old_min, solod;
       if (d3.event.sourceEvent !== null) {
-
         if (vars.time.solo.value.length) {
-          var solod = d3.extent(vars.time.solo.value)
-            , old_min = yearMS.indexOf(closest(year_ticks,solod[0]).getTime())
-            , old_max = yearMS.indexOf(closest(year_ticks,solod[1]).getTime())+1
-            , change = old_min !== min_index || old_max !== max_index
+          solod = d3.extent(vars.time.solo.value);
+          old_min = yearMS.indexOf(+closest(year_ticks, solod[0]));
+          old_max = yearMS.indexOf(+closest(year_ticks, solod[1])) + 1;
+          change = old_min !== min_index || old_max !== max_index;
+        } else {
+          change = max_index - min_index !== years.length;
         }
-        else {
-          var change = max_index-min_index !== years.length
-        }
-
         if (change) {
-
-          if (max_index-min_index == years.length) {
-            var newYears = []
-          }
-          else {
-
-            var newYears = d3.range(min_index,max_index)
-              .map(function(y){
-                var i = vars.data.time.dataSteps.indexOf(y)
-                return i >= 0 ? vars.data.time.values[i] : years[y]
-              })
-
-          }
-
-          vars.self.time({"solo": newYears}).draw()
-
+          return setYears();
         }
-
       }
-      else {
-        return;
-      }
-
-    }
-
-    var textStyle = {
+    };
+    textStyle = {
       "font-weight": vars.ui.font.weight,
       "font-family": vars.ui.font.family.value,
-      "font-size": vars.ui.font.size+"px",
+      "font-size": vars.ui.font.size + "px",
       "text-anchor": "middle"
-    }
-
-    var timeFormatter = function(v,i) {
-      if (i === 0 || i === years.length-1) return timeFormat(v)
-      else return timeMultiFormat(v)
-    }
-
-    var textSizes = fontSizes(years.map(timeFormatter),textStyle)
-      , yearWidths = textSizes.map(function(t){return t.width})
-      , yearWidth = Math.ceil(d3.max(yearWidths))
-      , yearHeight = d3.max(textSizes.map(function(t){return t.height}))
-
-    var labelWidth = yearWidth+vars.ui.padding*2,
-        timelineHeight = yearHeight+vars.ui.padding*2
-        timelineWidth = labelWidth*years.length,
-        availableWidth = vars.width.value-vars.ui.padding*2,
-        tickStep = 1,
-        textRotate = 0
-
+    };
+    timeFormatter = function(v, i) {
+      if (i === 0 || i === years.length - 1) {
+        return timeFormat(v);
+      } else {
+        return timeMultiFormat(v);
+      }
+    };
+    textSizes = fontSizes(years.map(timeFormatter), textStyle);
+    yearWidths = textSizes.map(function(t) {
+      return t.width;
+    });
+    yearWidth = Math.ceil(d3.max(yearWidths));
+    yearHeight = d3.max(textSizes.map(function(t) {
+      return t.height;
+    }));
+    labelWidth = yearWidth + vars.ui.padding * 2;
+    timelineHeight = yearHeight + vars.ui.padding * 2;
+    timelineWidth = labelWidth * years.length;
+    availableWidth = vars.width.value - vars.ui.padding * 2;
+    tickStep = 1;
+    textRotate = 0;
     if (timelineWidth > availableWidth) {
-      labelWidth = yearHeight+vars.ui.padding*2
-      timelineHeight = yearWidth+vars.ui.padding*2
-      timelineWidth = labelWidth*years.length
-      textRotate = 90
+      labelWidth = yearHeight + vars.ui.padding * 2;
+      timelineHeight = yearWidth + vars.ui.padding * 2;
+      timelineWidth = labelWidth * years.length;
+      textRotate = 90;
     }
-
-    timelineHeight = d3.max([timelineHeight,vars.timeline.height.value])
-
-    var oldWidth = labelWidth
+    timelineHeight = d3.max([timelineHeight, vars.timeline.height.value]);
+    oldWidth = labelWidth;
     if (timelineWidth > availableWidth) {
-      timelineWidth = availableWidth
-      oldWidth = labelWidth-vars.ui.padding*2
-      labelWidth = timelineWidth/years.length
+      timelineWidth = availableWidth;
+      oldWidth = labelWidth - vars.ui.padding * 2;
+      labelWidth = timelineWidth / years.length;
       if (oldWidth > labelWidth) {
-        tickStep = Math.ceil(oldWidth/(timelineWidth/years.length))
-        for (tickStep; tickStep < years.length-1; tickStep++) {
-          if ((years.length-1)%tickStep == 0) {
+        tickStep = Math.ceil(oldWidth / (timelineWidth / years.length));
+        while (tickStep < years.length - 1) {
+          if ((years.length - 1) % tickStep === 0) {
             break;
           }
+          tickStep++;
         }
-
       }
     }
-
-    if (vars.timeline.align == "start") {
-      var start_x = vars.ui.padding
+    if (vars.timeline.align === "start") {
+      start_x = vars.ui.padding;
+    } else if (vars.timeline.align === "end") {
+      start_x = vars.width.value - vars.ui.padding - timelineWidth;
+    } else {
+      start_x = vars.width.value / 2 - timelineWidth / 2;
     }
-    else if (vars.timeline.align == "end") {
-      var start_x = vars.width.value - vars.ui.padding - timelineWidth
+    if (vars.timeline.play.value) {
+      start_x += (timelineHeight + vars.ui.padding) / 2;
     }
-    else {
-      var start_x = vars.width.value/2 - timelineWidth/2
-    }
-
-    var brushExtent = [start,end]
-
-    var textFill = function(d) {
-
+    playButton = vars.g.timeline.selectAll("rect.d3plus_timeline_play").data(vars.timeline.play.value ? [0] : []);
+    playStyle = function(btn) {
+      return btn.attr("width", timelineHeight + 1).attr("height", timelineHeight + 1).attr("fill", vars.ui.color.primary.value).attr("stroke", vars.timeline.tick).attr("stroke-width", 1).attr("x", start_x - timelineHeight - 1 - vars.ui.padding).attr("y", vars.ui.padding);
+    };
+    playButton.enter().append("rect").attr("class", "d3plus_timeline_play").attr("shape-rendering", "crispEdges").attr("opacity", 0).call(playStyle);
+    playButton.transition().duration(vars.draw.timing).call(playStyle);
+    playButton.exit().transition().duration(vars.draw.timing).attr("opacity", 0).remove();
+    playIcon = vars.g.timeline.selectAll("text.d3plus_timeline_playIcon").data(vars.timeline.play.value ? [0] : []);
+    playIconChar = function(text, char) {
+      var className;
+      char = vars.timeline.play[char].value;
+      className = char.indexOf("fa-") === 0 ? " fa " + char : "";
+      return text.attr("class", "d3plus_timeline_playIcon" + className).text(char.indexOf("fa-") === 0 ? "" : char);
+    };
+    playIconStyle = function(text) {
+      var y;
+      y = timelineHeight / 2 + vars.ui.padding + 1;
+      return text.attr("fill", textColor(vars.ui.color.primary.value)).attr(textStyle).attr("x", start_x - (timelineHeight - 1) / 2 - vars.ui.padding).attr("y", y).attr("dy", "0.5ex").call(playIconChar, playInterval ? "pause" : "icon");
+    };
+    playIcon.enter().append("text").attr("class", "d3plus_timeline_playIcon").call(playIconStyle).style("pointer-events", "none").attr("opacity", 0);
+    playIcon.call(playIconStyle).transition().duration(vars.draw.timing).attr("opacity", 1);
+    playIcon.exit().transition().duration(vars.draw.timing).attr("opacity", 0).remove();
+    playUpdate = function() {
+      if (max_index - min_index === years.length) {
+        playButton.on(events.hover, null).on(events.click, null).transition().duration(vars.draw.timing).attr("opacity", 0.3);
+        return playIcon.transition().duration(vars.draw.timing).attr("opacity", 0.3);
+      } else {
+        playButton.on(events.over, function() {
+          return d3.select(this).style("cursor", "pointer");
+        }).on(events.out, function() {
+          return d3.select(this).style("cursor", "auto");
+        }).on(events.click, function() {
+          if (playInterval) {
+            return stopPlayback();
+          } else {
+            playIcon.call(playIconChar, "pause");
+            if (max_index === years.length) {
+              max_index = max_index - min_index;
+              min_index = 0;
+            } else {
+              min_index++;
+              max_index++;
+            }
+            setYears();
+            return playInterval = setInterval(function() {
+              if (max_index === years.length) {
+                return stopPlayback();
+              } else {
+                min_index++;
+                max_index++;
+                return setYears();
+              }
+            }, vars.timeline.play.timing.value);
+          }
+        }).transition().duration(vars.draw.timing).attr("opacity", 1);
+        return playIcon.transition().duration(vars.draw.timing).attr("opacity", 1);
+      }
+    };
+    playUpdate();
+    textFill = function(d) {
+      var color, opacity;
       if (d >= brushExtent[0] && d < brushExtent[1]) {
-        var opacity = 1
-          , color = textColor(vars.ui.color.primary.value)
+        opacity = 1;
+        color = textColor(vars.ui.color.primary.value);
+      } else {
+        opacity = 0.5;
+        color = textColor(vars.ui.color.secondary.value);
       }
-      else {
-        var opacity = 0.5
-          , color = textColor(vars.ui.color.secondary.value)
+      color = d3.rgb(color);
+      return "rgba(" + color.r + "," + color.g + "," + color.b + "," + opacity + ")";
+    };
+    background = vars.g.timeline.selectAll("rect.d3plus_timeline_background").data(["background"]);
+    background.enter().append("rect").attr("class", "d3plus_timeline_background").attr("shape-rendering", "crispEdges").attr("width", timelineWidth + 2).attr("height", timelineHeight + 2).attr("fill", vars.ui.color.secondary.value).attr("x", start_x - 1).attr("y", vars.ui.padding);
+    background.transition().duration(vars.draw.timing).attr("width", timelineWidth + 2).attr("height", timelineHeight + 2).attr("fill", vars.ui.color.secondary.value).attr("x", start_x - 1).attr("y", vars.ui.padding);
+    ticks = vars.g.timeline.selectAll("g#ticks").data(["ticks"]);
+    ticks.enter().append("g").attr("id", "ticks").attr("transform", "translate(" + vars.width.value / 2 + "," + vars.ui.padding + ")");
+    brush_group = vars.g.timeline.selectAll("g#brush").data(["brush"]);
+    brush_group.enter().append("g").attr("id", "brush");
+    labels = vars.g.timeline.selectAll("g#labels").data(["labels"]);
+    labels.enter().append("g").attr("id", "labels");
+    text = labels.selectAll("text").data(years, function(d, i) {
+      return i;
+    });
+    text.enter().append("text").attr("y", 0).attr("dy", "0.5ex").attr("x", 0);
+    text.order().attr(textStyle).text(function(d, i) {
+      var data, fits, next, prev;
+      if (i === 0 || i === years.length - 1) {
+        return timeFormat(d);
       }
-
-      var color = d3.rgb(color)
-
-      return "rgba("+color.r+","+color.g+","+color.b+","+opacity+")"
-
-    }
-
-    var background = vars.g.timeline.selectAll("rect.d3plus_timeline_background")
-      .data(["background"])
-
-    background.enter().append("rect")
-      .attr("class","d3plus_timeline_background")
-      .attr("shape-rendering","crispEdges")
-      .attr("width",timelineWidth+2)
-      .attr("height",timelineHeight+2)
-      .attr("fill",vars.ui.color.secondary.value)
-      .attr("x",start_x-1)
-      .attr("y",vars.ui.padding)
-
-    background.transition().duration(vars.draw.timing)
-      .attr("width",timelineWidth+2)
-      .attr("height",timelineHeight+2)
-      .attr("fill",vars.ui.color.secondary.value)
-      .attr("x",start_x-1)
-      .attr("y",vars.ui.padding)
-
-    var ticks = vars.g.timeline.selectAll("g#ticks")
-      .data(["ticks"])
-
-    ticks.enter().append("g")
-      .attr("id","ticks")
-      .attr("transform","translate("+vars.width.value/2+","+vars.ui.padding+")")
-
-    var brush_group = vars.g.timeline.selectAll("g#brush")
-      .data(["brush"])
-
-    brush_group.enter().append("g")
-      .attr("id","brush")
-
-    var labels = vars.g.timeline.selectAll("g#labels")
-      .data(["labels"])
-
-    labels.enter().append("g")
-      .attr("id","labels")
-
-    var text = labels.selectAll("text")
-      .data(years,function(d,i){
-        return i
-      })
-
-    text.enter().append("text")
-      .attr("y",0)
-      .attr("dy","0.5ex")
-      .attr("x",0)
-
-    text
-      .order()
-      .attr(textStyle)
-      .text(function(d,i){
-        if (i === 0 || i === years.length-1) return timeFormat(d)
-
-        var prev = (i-1)%tickStep === 0
-          , next = (i+1)%tickStep === 0
-          , data = vars.data.time.dataSteps.indexOf(i) >= 0
-          , fits = (yearWidths[i-1]/2 + yearWidths[i] + yearWidths[i+1]/2 + vars.ui.padding*4) < labelWidth*2
-
-        return i%tickStep === 0 || (!prev && !next && data && oldWidth < labelWidth*3) ? timeMultiFormat(d) : ""
-      })
-      .attr("opacity",function(d,i){
-        return vars.data.time.dataSteps.indexOf(i) >= 0 ? 1 : 0.4
-      })
-      .attr("fill",textFill)
-      .attr("transform",function(d,i){
-        var x = start_x + (labelWidth*i) + labelWidth/2
-          , y = timelineHeight/2 + vars.ui.padding + 1
-        return "translate("+Math.round(x)+","+Math.round(y)+")rotate("+textRotate+")"
-      })
-
-    text.exit().transition().duration(vars.draw.timing)
-      .attr("opacity",0)
-      .remove()
-
-    var x = d3.time.scale()
-      .domain(d3.extent(year_ticks))
-      .rangeRound([0,timelineWidth])
-
-    var brush = d3.svg.brush()
-      .x(x)
-      .extent(brushExtent)
-      .on("brush", brushed)
-      .on("brushend", brushend)
-
-    ticks
-      .attr("transform","translate("+start_x+","+vars.ui.padding+")")
-      .transition().duration(vars.draw.timing)
-      .call(d3.svg.axis()
-        .scale(x)
-        .orient("top")
-        .ticks(function(){
-          return year_ticks
-        })
-        .tickFormat("")
-        .tickSize(-timelineHeight)
-        .tickPadding(0))
-        .selectAll("path").attr("fill","none")
-
-    ticks.selectAll("line")
-      .attr("stroke",vars.timeline.tick)
-      .attr("stroke-width",1)
-      .attr("shape-rendering","crispEdges")
-
-    brush_group
-      .attr("transform","translate("+start_x+","+(vars.ui.padding+1)+")")
-      .attr("opacity",1)
-      .call(brush)
-
-    text.attr("pointer-events","none")
-
-    brush_group.selectAll("rect.background")
-      .attr("fill","none")
-      // .attr("stroke-width",1)
-      // .attr("stroke",vars.ui.color.secondary.value)
-      .style("visibility","visible")
-      .attr("height",timelineHeight)
-      .attr("shape-rendering","crispEdges")
-      .on(events.move,function(){
-        var c = vars.timeline.hover.value
-        if (["grab","grabbing"].indexOf(c) >= 0) c = prefix()+c
-        d3.select(this).style("cursor",c)
-      })
-
-    brush_group.selectAll("rect.extent")
-      // .attr("stroke-width",1)
-      // .attr("stroke",vars.ui.color.secondary.value)
-      .attr("height",timelineHeight)
-      .attr("fill",vars.ui.color.primary.value)
-      .attr("shape-rendering","crispEdges")
-      .on(events.move,function(){
-        var c = vars.timeline.hover.value
-        if (["grab","grabbing"].indexOf(c) >= 0) c = prefix()+c
-        d3.select(this).style("cursor",c)
-      })
-
+      prev = (i - 1) % tickStep === 0;
+      next = (i + 1) % tickStep === 0;
+      data = vars.data.time.dataSteps.indexOf(i) >= 0;
+      fits = (yearWidths[i - 1] / 2 + yearWidths[i] + yearWidths[i + 1] / 2 + vars.ui.padding * 4) < labelWidth * 2;
+      if (i % tickStep === 0 || (!prev && !next && data && oldWidth < labelWidth * 3)) {
+        return timeMultiFormat(d);
+      } else {
+        return "";
+      }
+    }).attr("opacity", function(d, i) {
+      if (vars.data.time.dataSteps.indexOf(i) >= 0) {
+        return 1;
+      } else {
+        return 0.4;
+      }
+    }).attr("fill", textFill).attr("transform", function(d, i) {
+      var x, y;
+      x = start_x + (labelWidth * i) + labelWidth / 2;
+      y = timelineHeight / 2 + vars.ui.padding + 1;
+      return "translate(" + Math.round(x) + "," + Math.round(y) + ")rotate(" + textRotate + ")";
+    });
+    text.exit().transition().duration(vars.draw.timing).attr("opacity", 0).remove();
+    x = d3.time.scale().domain(d3.extent(year_ticks)).rangeRound([0, timelineWidth]);
+    brush = d3.svg.brush().x(x).extent(brushExtent).on("brush", brushed).on("brushend", brushend);
+    ticks.attr("transform", "translate(" + start_x + "," + vars.ui.padding + ")").transition().duration(vars.draw.timing).call(d3.svg.axis().scale(x).orient("top").ticks(function() {
+      return year_ticks;
+    }).tickFormat("").tickSize(-timelineHeight).tickPadding(0)).selectAll("path").attr("fill", "none");
+    ticks.selectAll("line").attr("stroke", vars.timeline.tick).attr("stroke-width", 1).attr("shape-rendering", "crispEdges");
+    brush_group.attr("transform", "translate(" + start_x + "," + (vars.ui.padding + 1) + ")").attr("opacity", 1).call(brush);
+    text.attr("pointer-events", "none");
+    brush_group.selectAll("rect.background").attr("fill", "none").style("visibility", "visible").attr("height", timelineHeight).attr("shape-rendering", "crispEdges").on(events.move, function() {
+      var c;
+      c = vars.timeline.hover.value;
+      if (["grab", "grabbing"].indexOf(c) >= 0) {
+        c = prefix() + c;
+      }
+      return d3.select(this).style("cursor", c);
+    });
+    brush_group.selectAll("rect.extent").attr("height", timelineHeight).attr("fill", vars.ui.color.primary.value).attr("shape-rendering", "crispEdges").on(events.move, function() {
+      var c;
+      c = vars.timeline.hover.value;
+      if (["grab", "grabbing"].indexOf(c) >= 0) {
+        c = prefix() + c;
+      }
+      return d3.select(this).style("cursor", c);
+    });
     if (vars.timeline.handles.value) {
-
-      var handles = brush_group.selectAll("g.resize").selectAll("rect.d3plus_handle")
-        .data(["d3plus_handle"])
-
-      handles.enter().insert("rect","rect")
-        .attr("class","d3plus_handle")
-
-      handles
-        .attr("fill",vars.timeline.handles.color)
-        .attr("transform",function(d){
-          var mod = this.parentNode.className.baseVal === "resize e" ? -vars.timeline.handles.size : 0
-          return "translate("+mod+",0)"
-        })
-        .attr("width",vars.timeline.handles.size)
-        .style("visibility","visible")
-        .attr("shape-rendering","crispEdges")
-        .attr("opacity",vars.timeline.handles.opacity)
-        .on(events.over,function(){
-          d3.select(this).select("rect")
-            .transition().duration(vars.timing.mouseevents)
-            .attr("fill",vars.timeline.handles.hover)
-        })
-        .on(events.out,function(){
-          d3.select(this).select("rect")
-            .transition().duration(vars.timing.mouseevents)
-            .attr("fill",vars.timeline.handles.color)
-        })
-
-      brush_group.selectAll("g.resize").selectAll("rect")
-        .attr("height",timelineHeight)
-
+      handles = brush_group.selectAll("g.resize").selectAll("rect.d3plus_handle").data(["d3plus_handle"]);
+      handles.enter().insert("rect", "rect").attr("class", "d3plus_handle");
+      handles.attr("fill", vars.timeline.handles.color).attr("transform", function(d) {
+        var mod;
+        if (this.parentNode.className.baseVal === "resize e") {
+          mod = -vars.timeline.handles.size;
+        } else {
+          mod = 0;
+        }
+        return "translate(" + mod + ",0)";
+      }).attr("width", vars.timeline.handles.size).style("visibility", "visible").attr("shape-rendering", "crispEdges").attr("opacity", vars.timeline.handles.opacity).on(events.over, function() {
+        return d3.select(this).select("rect").transition().duration(vars.timing.mouseevents).attr("fill", vars.timeline.handles.hover);
+      }).on(events.out, function() {
+        return d3.select(this).select("rect").transition().duration(vars.timing.mouseevents).attr("fill", vars.timeline.handles.color);
+      });
+      brush_group.selectAll("g.resize").selectAll("rect").attr("height", timelineHeight);
+    } else {
+      brush_group.selectAll("g.resize").remove();
     }
-    else {
-
-      brush_group.selectAll("g.resize")
-        .remove()
-
+    timelineBox = vars.g.timeline.node().getBBox();
+    if (vars.margin.bottom === 0) {
+      vars.margin.bottom += vars.ui.padding;
     }
-
-    if ( vars.margin.bottom === 0 ) {
-      vars.margin.bottom += vars.ui.padding
+    vars.margin.bottom += timelineBox.height + timelineBox.y;
+    vars.g.timeline.transition().duration(vars.draw.timing).attr("transform", "translate(0," + Math.round(vars.height.value - vars.margin.bottom - vars.ui.padding / 2) + ")");
+    vars.margin.bottom += vars.ui.padding;
+    if (vars.dev.value) {
+      return print.time("drawing timeline");
     }
-
-    var timelineBox = vars.g.timeline.node().getBBox()
-
-    vars.margin.bottom += timelineBox.height+timelineBox.y
-
-    vars.g.timeline.transition().duration(vars.draw.timing)
-      .attr("transform","translate(0,"+Math.round(vars.height.value-vars.margin.bottom-vars.ui.padding/2)+")")
-
-    vars.margin.bottom += vars.ui.padding
-
-    if ( vars.dev.value ) print.time("drawing timeline")
-
+  } else {
+    return vars.g.timeline.transition().duration(vars.draw.timing).attr("transform", "translate(0," + vars.height.value + ")");
   }
-  else {
+};
 
-    vars.g.timeline.transition().duration(vars.draw.timing)
-      .attr("transform","translate(0,"+vars.height.value+")")
 
-  }
-
-}
 
 },{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/titles.js":[function(require,module,exports){
 var events = require("../../../client/pointer.coffee"),
@@ -27172,16 +27124,16 @@ module.exports = function(vars, event) {
 
 },{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/transform.coffee":[function(require,module,exports){
 module.exports = function(vars, timing) {
-  var scale, translate;
+  var translate;
   if (typeof timing !== "number") {
     timing = vars.timing.transitions;
   }
-  translate = vars.zoom.translate;
-  scale = vars.zoom.scale;
+  translate = "translate(" + vars.zoom.translate + ")";
+  translate += "scale(" + vars.zoom.scale + ")";
   if (timing) {
-    vars.g.viz.transition().duration(timing).attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+    return vars.g.viz.transition().duration(timing).attr("transform", translate);
   } else {
-    vars.g.viz.attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+    return vars.g.viz.attr("transform", translate);
   }
 };
 
@@ -27915,12 +27867,12 @@ module.exports = function(axis) {
       accepted: [Boolean],
       color: "#444",
       font: {
-        color: "#444",
-        decoration: decoration(),
-        family: family(),
-        size: 10,
-        transform: transform(),
-        weight: 200
+        color: false,
+        decoration: decoration(false),
+        family: family(""),
+        size: false,
+        transform: transform(false),
+        weight: false
       },
       rendering: rendering(),
       value: true
@@ -27938,7 +27890,13 @@ module.exports = function(axis) {
       value: true
     },
     label: {
-      accepted: [false, String],
+      accepted: [Boolean, String],
+      fetch: function(vars) {
+        if (this.value === true) {
+          return vars.format.value(vars[axis].value, axis, vars);
+        }
+        return this.value;
+      },
       font: {
         color: "#444",
         decoration: decoration(),
@@ -27948,7 +27906,7 @@ module.exports = function(axis) {
         weight: 200
       },
       padding: 3,
-      value: false
+      value: true
     },
     lines: {
       accept: [false, Array, Number, Object],
@@ -28523,6 +28481,10 @@ module.exports = {
 
 
 },{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/timeline.coffee":[function(require,module,exports){
+var process;
+
+process = require("../../core/methods/process/icon.coffee");
+
 module.exports = {
   accepted: [Boolean],
   align: "middle",
@@ -28543,13 +28505,35 @@ module.exports = {
     accepted: [Number],
     value: 23
   },
+  play: {
+    accepted: [Boolean],
+    icon: {
+      accepted: [false, String],
+      fallback: "►",
+      process: process,
+      rotate: 0,
+      value: "fa-play"
+    },
+    pause: {
+      accepted: [false, String],
+      fallback: "❚❚",
+      process: process,
+      rotate: 0,
+      value: "fa-pause"
+    },
+    timing: {
+      accepted: [Number],
+      value: 1500
+    },
+    value: true
+  },
   tick: "#818181",
   value: true
 };
 
 
 
-},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/timing.coffee":[function(require,module,exports){
+},{"../../core/methods/process/icon.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/icon.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/timing.coffee":[function(require,module,exports){
 module.exports = {
   mouseevents: 60,
   transitions: 600,
@@ -28804,7 +28788,7 @@ module.exports = {
 }
 
 },{}],"/Users/Dave/Sites/d3plus/src/viz/types/bar.coffee":[function(require,module,exports){
-var bar, fetchValue, graph, nest, stack;
+var bar, fetchValue, graph, nest, stack, uniques;
 
 fetchValue = require("../../core/fetch/value.coffee");
 
@@ -28814,8 +28798,10 @@ nest = require("./helpers/graph/nest.coffee");
 
 stack = require("./helpers/graph/stack.coffee");
 
+uniques = require("../../util/uniques.coffee");
+
 bar = function(vars) {
-  var base, cMargin, d, data, discrete, discreteVal, domains, h, i, length, maxSize, mod, nested, oMargin, offset, oppVal, opposite, padding, point, space, value, w, x, zero, _i, _j, _len, _len1, _ref;
+  var bars, base, cMargin, d, data, discrete, discreteVal, divisions, domains, h, i, length, maxSize, mod, nested, oMargin, offset, oppVal, opposite, padding, point, space, value, w, x, zero, _i, _j, _len, _len1, _ref;
   discrete = vars.axes.discrete;
   h = discrete === "x" ? "height" : "width";
   w = discrete === "x" ? "width" : "height";
@@ -28844,15 +28830,17 @@ bar = function(vars) {
   }
   maxSize = space - padding * 2;
   if (!vars.axes.stacked) {
-    maxSize /= nested.length;
+    bars = uniques(nested, vars.id.value, fetchValue, vars);
+    divisions = bars.length;
+    maxSize /= divisions;
     offset = space / 2 - maxSize / 2 - padding;
-    x = d3.scale.linear().domain([0, nested.length - 1]).range([-offset, offset]);
+    x = d3.scale.linear().domain([0, bars.length - 1]).range([-offset, offset]);
   }
   data = [];
   zero = 0;
   for (i = _i = 0, _len = nested.length; _i < _len; i = ++_i) {
     point = nested[i];
-    mod = vars.axes.stacked ? 0 : x(i);
+    mod = vars.axes.stacked ? 0 : x(i % divisions);
     _ref = point.values;
     for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
       d = _ref[_j];
@@ -28914,7 +28902,7 @@ module.exports = bar;
 
 
 
-},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/box.coffee":[function(require,module,exports){
+},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/box.coffee":[function(require,module,exports){
 var box, fetchValue, graph, uniques;
 
 fetchValue = require("../../core/fetch/value.coffee");
@@ -30172,15 +30160,21 @@ labelPadding = function(vars) {
   });
   yAxisWidth = Math.round(yAxisWidth + vars.labels.padding);
   vars.axes.margin.left += yAxisWidth;
-  yLabel = vars.format.value(vars.y.value, void 0, vars);
-  yLabelAttrs = {
-    "font-family": vars.y.label.font.family.value,
-    "font-weight": vars.y.label.font.weight,
-    "font-size": vars.y.label.font.size + "px"
-  };
-  vars.y.label.height = fontSizes([yLabel], yLabelAttrs)[0].height;
-  vars.axes.margin.left += vars.y.label.height;
-  vars.axes.margin.left += vars.y.label.padding * 2;
+  yLabel = vars.y.label.fetch(vars);
+  if (yLabel) {
+    yLabelAttrs = {
+      "font-family": vars.y.label.font.family.value,
+      "font-weight": vars.y.label.font.weight,
+      "font-size": vars.y.label.font.size + "px"
+    };
+    vars.y.label.height = fontSizes([yLabel], yLabelAttrs)[0].height;
+  } else {
+    vars.y.label.height = 0;
+  }
+  if (vars.y.label.value) {
+    vars.axes.margin.left += vars.y.label.height;
+    vars.axes.margin.left += vars.y.label.padding * 2;
+  }
   vars.axes.width -= vars.axes.margin.left + vars.axes.margin.right;
   vars.x.scale.viz.range(buckets([0, vars.axes.width], xDomain.length));
   xAttrs = {
@@ -30256,24 +30250,29 @@ labelPadding = function(vars) {
   xAxisHeight = Math.round(xAxisHeight);
   xAxisWidth = Math.round(xAxisWidth);
   vars.axes.margin.bottom += xAxisHeight;
-  vars.axes.margin.bottom += vars.x.ticks.size;
   lastTick = vars.x.ticks.values[vars.x.ticks.values.length - 1];
   rightLabel = vars.x.scale.viz(lastTick);
   rightPadding = vars.axes.width - rightLabel;
   if (rightPadding < xAxisWidth) {
     vars.axes.width -= xAxisWidth / 2 - rightPadding;
   }
-  xLabel = vars.format.value(vars.x.value, void 0, vars);
-  xLabelAttrs = {
-    "font-family": vars.x.label.font.family.value,
-    "font-weight": vars.x.label.font.weight,
-    "font-size": vars.x.label.font.size + "px"
-  };
-  vars.x.label.height = fontSizes([xLabel], xLabelAttrs)[0].height;
+  xLabel = vars.x.label.fetch(vars);
+  if (xLabel) {
+    xLabelAttrs = {
+      "font-family": vars.x.label.font.family.value,
+      "font-weight": vars.x.label.font.weight,
+      "font-size": vars.x.label.font.size + "px"
+    };
+    vars.x.label.height = fontSizes([xLabel], xLabelAttrs)[0].height;
+  } else {
+    vars.x.label.height = 0;
+  }
   vars.x.ticks.maxWidth = xMaxWidth;
   vars.x.ticks.maxHeight = xAxisHeight;
-  vars.axes.margin.bottom += vars.x.label.height;
-  vars.axes.margin.bottom += vars.x.label.padding * 2;
+  if (vars.x.label.value) {
+    vars.axes.margin.bottom += vars.x.label.height;
+    vars.axes.margin.bottom += vars.x.label.padding * 2;
+  }
   vars.axes.height -= vars.axes.margin.top + vars.axes.margin.bottom;
   vars.x.scale.viz.range(buckets([0, vars.axes.width], xDomain.length));
   return vars.y.scale.viz.range(buckets([0, vars.axes.height], yDomain.length));
@@ -30333,7 +30332,7 @@ textwrap = require("../../../../../textwrap/textwrap.coffee");
 validObject = require("../../../../../object/validate.coffee");
 
 module.exports = function(vars) {
-  var alignMap, axis, axisData, axisLabel, bg, bgStyle, d, domain, domains, grid, gridData, label, labelStyle, line, lineData, lineFont, lineGroup, lineRects, lineStyle, lines, linetexts, mirror, plane, planeTrans, position, rectData, rectStyle, rotated, textData, textPad, textPos, tickFont, tickPosition, tickStyle, xAxis, xEnter, xStyle, xmod, yAxis, yEnter, yStyle, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
+  var alignMap, axis, axisData, axisLabel, bg, bgStyle, d, domain, domains, getFontStyle, grid, gridData, label, labelData, labelStyle, line, lineData, lineFont, lineGroup, lineRects, lineStyle, lines, linetexts, mirror, plane, planeTrans, position, rectData, rectStyle, rotated, textData, textPad, textPos, tickFont, tickPosition, tickStyle, xAxis, xEnter, xStyle, xmod, yAxis, yEnter, yStyle, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
   domains = vars.x.domain.viz.concat(vars.y.domain.viz);
   if (domains.indexOf(void 0) >= 0) {
     return null;
@@ -30398,29 +30397,33 @@ module.exports = function(vars) {
       }
     }).attr("stroke-width", vars[axis].ticks.width).attr("shape-rendering", vars[axis].ticks.rendering.value);
   };
+  getFontStyle = function(axis, val, style) {
+    var type;
+    type = val === 0 ? "axis" : "ticks";
+    val = vars[axis][type].font[style];
+    if (val && (val.length || typeof val === "number")) {
+      return val;
+    } else {
+      return vars[axis].ticks.font[style];
+    }
+  };
   tickFont = function(tick, axis) {
     var log;
     log = vars[axis].scale.value === "log";
     return tick.attr("font-size", function(d) {
-      var type;
-      type = d === 0 ? "axis" : "ticks";
-      return vars[axis][type].font.size + "px";
+      return getFontStyle(axis, d, "size") + "px";
     }).attr("fill", function(d) {
-      var type;
-      type = d === 0 ? "axis" : "ticks";
+      var color;
+      color = getFontStyle(axis, d, "color");
       if (!log || Math.abs(d).toString().charAt(0) === "1") {
-        return vars[axis][type].font.color;
+        return color;
       } else {
-        return mix(vars[axis][type].font.color, vars.background.value, 0.4, 1);
+        return mix(color, vars.background.value, 0.4, 1);
       }
     }).attr("font-family", function(d) {
-      var type;
-      type = d === 0 ? "axis" : "ticks";
-      return vars[axis][type].font.family.value;
+      return getFontStyle(axis, d, "family").value;
     }).attr("font-weight", function(d) {
-      var type;
-      type = d === 0 ? "axis" : "ticks";
-      return vars[axis][type].font.weight;
+      return getFontStyle(axis, d, "weight");
     });
   };
   lineStyle = function(line, axis) {
@@ -30521,8 +30524,9 @@ module.exports = function(vars) {
     lines.transition().duration(vars.draw.timing).call(tickPosition, axis).call(tickStyle, axis, true);
     lines.enter().append("line").style("opacity", 0).call(tickPosition, axis).call(tickStyle, axis, true).transition().duration(vars.draw.timing).delay(vars.draw.timing / 2).style("opacity", 1);
     lines.exit().transition().duration(vars.draw.timing / 2).style("opacity", 0).remove();
-    axisLabel = vars[axis].label.value || vars.format.value(vars[axis].value, void 0, vars);
-    label = vars.group.selectAll("text#d3plus_graph_" + axis + "label").data(axisData);
+    axisLabel = vars[axis].label.fetch(vars);
+    labelData = axisData && axisLabel ? [0] : [];
+    label = vars.group.selectAll("text#d3plus_graph_" + axis + "label").data(labelData);
     label.text(axisLabel).transition().duration(vars.draw.timing).call(labelStyle, axis);
     label.enter().append("text").attr("id", "d3plus_graph_" + axis + "label").text(axisLabel).call(labelStyle, axis);
     label.exit().transition().duration(vars.data.timing).attr("opacity", 0).remove();
@@ -30670,10 +30674,14 @@ module.exports = function(vars, data) {
     ticks = discrete.ticks.values;
   }
   return d3.nest().key(function(d) {
-    var depth, id;
-    id = fetchValue(vars, d, vars.id.value);
-    depth = "depth" in d.d3plus ? d.d3plus.depth : vars.depth.value;
-    return "nested_" + stringStrip(id) + "_" + depth;
+    var id, return_id, _i, _len, _ref;
+    return_id = "nesting";
+    _ref = vars.id.nesting;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      id = _ref[_i];
+      return_id += "_" + fetchValue(vars, d, id);
+    }
+    return return_id;
   }).rollup(function(leaves) {
     var availables, filler, i, key, obj, tester, tick, timeVar, _i, _j, _len, _len1, _ref;
     availables = uniqueValues(leaves, discrete.value, fetchValue, vars);
