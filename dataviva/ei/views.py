@@ -3,15 +3,16 @@ from dataviva import db
 from dataviva.ei.models import Ymr, Yms, Ymsr
 from dataviva.utils.gzip_data import gzipped
 from dataviva.utils import make_query
-from dataviva.utils.decorators import cache_api
 from dataviva.utils import table_helper, query_helper
+from dataviva import view_cache
+from dataviva.utils.cached_query import api_cache_key
 
 mod = Blueprint('ei', __name__, url_prefix='/ei')
 
 @mod.route('/<year>-<month>/<bra_id_s>/<bra_id_r>/')
 @mod.route('/<year>/<bra_id_s>/<bra_id_r>/')
 @gzipped
-@cache_api("ei")
+@view_cache.cached(key_prefix=api_cache_key("ei"))
 def ei_api(**kwargs):
     tables = [Ymr, Yms, Ymsr]
 

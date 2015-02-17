@@ -13,9 +13,7 @@ from dataviva.general.models import Plan
 from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu, Course_sc
 from dataviva.rais.models import Ybi, Ybo, Yio
 
-from dataviva.utils.decorators import cache_api
-
-from dataviva.utils.cached_query import cached_query, make_cache_key
+from dataviva.utils.cached_query import cached_query, make_cache_key, api_cache_key
 
 from dataviva.utils.gzip_data import gzipped
 
@@ -67,7 +65,7 @@ def index(category = None, id = None):
         article = article)
 
 @mod.route('/<category>/<id>/')
-@cache_api("profiles", timeout=604800)
+@view_cache.cached(timeout=604800, key_prefix=api_cache_key("profiles"))
 @gzipped
 def profiles(category = None, id = None):
 

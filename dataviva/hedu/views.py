@@ -4,15 +4,15 @@ import dataviva.hedu.models as hedu
 from dataviva.utils.gzip_data import gzipped
 from sqlalchemy import func, distinct, desc
 from dataviva.utils import make_query
-from dataviva.utils.decorators import cache_api
+from dataviva import view_cache
+from dataviva.utils.cached_query import api_cache_key
 from dataviva.utils import table_helper, query_helper
-
 
 mod = Blueprint('hedu', __name__, url_prefix='/hedu')
 
 @mod.route('/<year>/<bra_id>/<university_id>/<course_hedu_id>/')
 @gzipped
-@cache_api("hedu")
+@view_cache.cached(key_prefix=api_cache_key("hedu"))
 def hedu_api(**kwargs):
     tables = [hedu.Yb_hedu, hedu.Yc_hedu, hedu.Yu, hedu.Ybc_hedu, hedu.Ybu, hedu.Yuc, hedu.Ybuc]
 
