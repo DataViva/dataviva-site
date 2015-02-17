@@ -29,8 +29,9 @@ def rais_api(**kwargs):
     table = table_helper.select_best_table(kwargs, allowed_when_not, possible_tables)
     filters, groups, show_column = query_helper.build_filters_and_groups(table, kwargs, exclude=exclude)
 
-    if table is Ybi:
-       columns = [c for c in Ybi.__table__.columns if c.key != 'required_bras'] if not required_bras else []
+    columns = []
+    if required_bras and table is Ybi:
+       columns = [c for c in Ybi.__table__.columns if c.key != 'required_bras']
 
     results = query_helper.query_table(table, columns=columns, filters=filters, groups=groups, limit=limit, order=order, sort=sort, serialize=serialize)
 
