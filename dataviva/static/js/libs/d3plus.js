@@ -148,6 +148,7 @@ d3plus.geom = {
 
 d3plus.network = {
   cluster: require("./network/cluster.coffee"),
+  distance: require("./network/distance.coffee"),
   normalize: require("./network/normalize.coffee"),
   shortestPath: require("./network/shortestPath.coffee"),
   smallestGap: require("./network/smallestGap.coffee"),
@@ -253,7 +254,7 @@ if (stylesheet("d3plus.css")) {
 
 
 
-},{"./array/comparator.coffee":"/Users/Dave/Sites/d3plus/src/array/comparator.coffee","./array/contains.coffee":"/Users/Dave/Sites/d3plus/src/array/contains.coffee","./array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","./array/update.coffee":"/Users/Dave/Sites/d3plus/src/array/update.coffee","./client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee","./client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","./client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","./client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","./client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","./client/scrollbar.coffee":"/Users/Dave/Sites/d3plus/src/client/scrollbar.coffee","./client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","./color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","./color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","./color/mix.coffee":"/Users/Dave/Sites/d3plus/src/color/mix.coffee","./color/random.coffee":"/Users/Dave/Sites/d3plus/src/color/random.coffee","./color/scale.coffee":"/Users/Dave/Sites/d3plus/src/color/scale.coffee","./color/sort.coffee":"/Users/Dave/Sites/d3plus/src/color/sort.coffee","./color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","./color/validate.coffee":"/Users/Dave/Sites/d3plus/src/color/validate.coffee","./core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./data/bestRegress.coffee":"/Users/Dave/Sites/d3plus/src/data/bestRegress.coffee","./data/lof.coffee":"/Users/Dave/Sites/d3plus/src/data/lof.coffee","./data/mad.coffee":"/Users/Dave/Sites/d3plus/src/data/mad.coffee","./font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","./font/validate.coffee":"/Users/Dave/Sites/d3plus/src/font/validate.coffee","./form/form.js":"/Users/Dave/Sites/d3plus/src/form/form.js","./geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","./geom/offset.coffee":"/Users/Dave/Sites/d3plus/src/geom/offset.coffee","./geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","./network/cluster.coffee":"/Users/Dave/Sites/d3plus/src/network/cluster.coffee","./network/normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee","./network/shortestPath.coffee":"/Users/Dave/Sites/d3plus/src/network/shortestPath.coffee","./network/smallestGap.coffee":"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee","./network/subgraph.coffee":"/Users/Dave/Sites/d3plus/src/network/subgraph.coffee","./number/format.js":"/Users/Dave/Sites/d3plus/src/number/format.js","./object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","./object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","./string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","./string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","./string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","./string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee","./textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","./tooltip/create.js":"/Users/Dave/Sites/d3plus/src/tooltip/create.js","./tooltip/move.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/move.coffee","./tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","./util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","./util/child.coffee":"/Users/Dave/Sites/d3plus/src/util/child.coffee","./util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","./util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee","./util/dataURL.coffee":"/Users/Dave/Sites/d3plus/src/util/dataURL.coffee","./util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./viz/viz.coffee":"/Users/Dave/Sites/d3plus/src/viz/viz.coffee"}],"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/index.js":[function(require,module,exports){
+},{"./array/comparator.coffee":"/Users/Dave/Sites/d3plus/src/array/comparator.coffee","./array/contains.coffee":"/Users/Dave/Sites/d3plus/src/array/contains.coffee","./array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","./array/update.coffee":"/Users/Dave/Sites/d3plus/src/array/update.coffee","./client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee","./client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","./client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","./client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","./client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","./client/scrollbar.coffee":"/Users/Dave/Sites/d3plus/src/client/scrollbar.coffee","./client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","./color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","./color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","./color/mix.coffee":"/Users/Dave/Sites/d3plus/src/color/mix.coffee","./color/random.coffee":"/Users/Dave/Sites/d3plus/src/color/random.coffee","./color/scale.coffee":"/Users/Dave/Sites/d3plus/src/color/scale.coffee","./color/sort.coffee":"/Users/Dave/Sites/d3plus/src/color/sort.coffee","./color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","./color/validate.coffee":"/Users/Dave/Sites/d3plus/src/color/validate.coffee","./core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./data/bestRegress.coffee":"/Users/Dave/Sites/d3plus/src/data/bestRegress.coffee","./data/lof.coffee":"/Users/Dave/Sites/d3plus/src/data/lof.coffee","./data/mad.coffee":"/Users/Dave/Sites/d3plus/src/data/mad.coffee","./font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","./font/validate.coffee":"/Users/Dave/Sites/d3plus/src/font/validate.coffee","./form/form.js":"/Users/Dave/Sites/d3plus/src/form/form.js","./geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","./geom/offset.coffee":"/Users/Dave/Sites/d3plus/src/geom/offset.coffee","./geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","./network/cluster.coffee":"/Users/Dave/Sites/d3plus/src/network/cluster.coffee","./network/distance.coffee":"/Users/Dave/Sites/d3plus/src/network/distance.coffee","./network/normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee","./network/shortestPath.coffee":"/Users/Dave/Sites/d3plus/src/network/shortestPath.coffee","./network/smallestGap.coffee":"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee","./network/subgraph.coffee":"/Users/Dave/Sites/d3plus/src/network/subgraph.coffee","./number/format.js":"/Users/Dave/Sites/d3plus/src/number/format.js","./object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","./object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","./string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","./string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","./string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","./string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee","./textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","./tooltip/create.js":"/Users/Dave/Sites/d3plus/src/tooltip/create.js","./tooltip/move.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/move.coffee","./tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","./util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","./util/child.coffee":"/Users/Dave/Sites/d3plus/src/util/child.coffee","./util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","./util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee","./util/dataURL.coffee":"/Users/Dave/Sites/d3plus/src/util/dataURL.coffee","./util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./viz/viz.coffee":"/Users/Dave/Sites/d3plus/src/viz/viz.coffee"}],"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/index.js":[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -11253,13 +11254,7 @@ module.exports = function(vars, data, nesting) {
       if (i < vars.depth.value) {
         (function(n) {
           return groupedData.key(function(d) {
-            var val;
-            val = fetchValue(vars, d.d3plus, n);
-            if (val instanceof Array) {
-              return val.join("_");
-            } else {
-              return val;
-            }
+            return fetchValue(vars, d.d3plus, n);
           });
         })(n);
       }
@@ -11472,10 +11467,7 @@ var dataNest = function(vars, flatData, nestingLevels) {
       //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       // Create a nest key for the current level.
       //--------------------------------------------------------------------------
-      nestedData.key(function(d){
-        var val = fetchValue(vars, d, level);
-        return val instanceof Array ? val.join("_") : val; 
-      });
+      nestedData.key(function(d){ return fetchValue(vars, d, level); });
 
     });
 
@@ -11802,8 +11794,7 @@ module.exports = function( vars , rawData , split ) {
     if (split) {
       nest
         .key(function(d){
-          var val = fetchValue(vars, d, split)
-          return val instanceof Array ? val.join("_") : val;
+          return fetchValue(vars, d, split);
         });
     }
 
@@ -17849,7 +17840,23 @@ module.exports = function(edges, options) {
 
 
 
-},{"./normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee"}],"/Users/Dave/Sites/d3plus/src/network/normalize.coffee":[function(require,module,exports){
+},{"./normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee"}],"/Users/Dave/Sites/d3plus/src/network/distance.coffee":[function(require,module,exports){
+module.exports = function(n1, n2) {
+  var xx, yy;
+  if (!(n1 instanceof Array)) {
+    n1 = [n1.x, n1.y];
+  }
+  if (!(n1 instanceof Array)) {
+    n2 = [n2.x, n2.y];
+  }
+  xx = Math.abs(n1[0] - n2[0]);
+  yy = Math.abs(n1[1] - n2[1]);
+  return Math.sqrt((xx * xx) + (yy * yy));
+};
+
+
+
+},{}],"/Users/Dave/Sites/d3plus/src/network/normalize.coffee":[function(require,module,exports){
 var print;
 
 print = require("../core/console/print.coffee");
@@ -18097,38 +18104,45 @@ module.exports = function(edges, source, options) {
 
 
 },{"./normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee","heap":"/Users/Dave/Sites/d3plus/node_modules/heap/index.js"}],"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee":[function(require,module,exports){
-module.exports = function(arr, accessor) {
+var distance;
+
+distance = require("./distance.coffee");
+
+module.exports = function(arr, opts) {
   var distances, quad;
+  if (!opts) {
+    opts = {};
+  }
   distances = [];
   quad = d3.geom.quadtree().x(function(d) {
-    if (accessor) {
-      return accessor(d)[0];
+    if (opts.accessor) {
+      return opts.accessor(d)[0];
     } else {
-      return d.x;
+      return d[0];
     }
   }).y(function(d) {
-    if (accessor) {
-      return accessor(d)[1];
+    if (opts.accessor) {
+      return opts.accessor(d)[1];
     } else {
-      return d.y;
+      return d[1];
     }
   });
   quad(arr).visit(function(node) {
-    var n1, n2, node1, node2, xx, yy, _i, _j, _len, _len1, _ref, _ref1;
+    var n1, n2, _i, _j, _len, _len1, _ref, _ref1;
     if (!node.leaf) {
       _ref = node.nodes;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         n1 = _ref[_i];
         if (n1 && n1.point) {
-          node1 = n1.point;
-          _ref1 = node.nodes;
-          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-            n2 = _ref1[_j];
-            if (n2 && n2.point && n2.point !== node1) {
-              node2 = n2.point;
-              xx = Math.abs(node1.x - node2.x);
-              yy = Math.abs(node1.y - node2.y);
-              distances.push(Math.sqrt((xx * xx) + (yy * yy)));
+          if (opts.origin) {
+            distances.push(distance(n1.point, opts.origin));
+          } else {
+            _ref1 = node.nodes;
+            for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+              n2 = _ref1[_j];
+              if (n2 && n2.point && n2.point !== n1.point) {
+                distances.push(distance(n1.point, n2.point));
+              }
             }
           }
         }
@@ -18136,12 +18150,18 @@ module.exports = function(arr, accessor) {
     }
     return false;
   });
-  return d3.min(distances);
+  if (opts.all) {
+    return distances.sort(function(aa, bb) {
+      return aa - bb;
+    });
+  } else {
+    return d3.min(distances);
+  }
 };
 
 
 
-},{}],"/Users/Dave/Sites/d3plus/src/network/subgraph.coffee":[function(require,module,exports){
+},{"./distance.coffee":"/Users/Dave/Sites/d3plus/src/network/distance.coffee"}],"/Users/Dave/Sites/d3plus/src/network/subgraph.coffee":[function(require,module,exports){
 var normalize;
 
 normalize = require("./normalize.coffee");
@@ -21249,10 +21269,10 @@ module.exports = function(vars,selection,enter,exit) {
         if (lr && lr[0]) {
 
           var label = {
-            "w": Math.floor(lr[0].width),
-            "h": Math.floor(lr[0].height),
-            "x": Math.floor(lr[0].cx),
-            "y": Math.floor(lr[0].cy),
+            "w": ~~(lr[0].width),
+            "h": ~~(lr[0].height),
+            "x": ~~(lr[0].cx),
+            "y": ~~(lr[0].cy),
             "angle": lr[0].angle*-1,
             "padding": 2,
             "names": names
@@ -21391,6 +21411,7 @@ module.exports = function(d, vars, stroke) {
 
 },{"../../../color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/coordinates.js":[function(require,module,exports){
 var copy = require("../../../util/copy.coffee"),
+    distance    = require("../../../network/distance.coffee"),
     fetchText   = require("../../../core/fetch/text.js"),
     fontSizes   = require("../../../font/sizes.coffee"),
     largestRect = require("../../../geom/largestRect.coffee"),
@@ -21448,43 +21469,50 @@ module.exports = function(vars,selection,enter,exit) {
 
     selection.each(function(d){
 
-      var b = vars.path.bounds(d);
-
       if (d.geometry.coordinates.length > 1) {
 
-        var areas = [];
+        var distances = [],
+            areas = [],
+            test = copy(d),
+            largest = copy(d),
+            largest_area = 0;
+
         d.geometry.coordinates = d.geometry.coordinates.filter(function(c,i){
 
-          var test = copy(d);
-          test.geometry.coordinates = [test.geometry.coordinates[i]];
+          test.geometry.coordinates = [c];
           var a = vars.path.area(test);
-          if (a >= vars.coords.threshold) {
+          if (a > 0) {
             areas.push(a);
+            if (a > largest_area) {
+              largest.geometry.coordinates = [c];
+              largest_area = a;
+            }
             return true;
           }
           return false;
 
         });
-        areas.sort(function(a,b){
-          return a-b;
+
+        var center = vars.path.centroid(largest),
+            reduced = copy(d);
+
+        d.geometry.coordinates.forEach(function(c,i){
+          test.geometry.coordinates = [c];
+          distances.push(distance(vars.path.centroid(test),center));
         });
 
-        var reduced = copy(d),
-            largest = copy(d);
+        var dist_values = distances.reduce(function(arr, dist, i){
+              if (dist) {
+                arr.push(areas[i]/dist);
+              }
+              return arr;
+            }, []),
+            dist_cutoff = d3.quantile(dist_values, vars.coords.threshold.value);
 
         reduced.geometry.coordinates = reduced.geometry.coordinates.filter(function(c,i){
-
-          var test = copy(d);
-          test.geometry.coordinates = [test.geometry.coordinates[i]];
-          var a = vars.path.area(test);
-          if (a == areas[areas.length-1]) {
-            largest.geometry.coordinates = test.geometry.coordinates;
-          }
-          return a >= d3.quantile(areas, 0.9);
-
+          var dist = distances[i], a = areas[i];
+          return dist === 0 || a/dist > dist_cutoff;
         });
-
-        vars.zoom.coords[d.d3plus.id] = reduced;
 
         var coords = largest.geometry.coordinates[0];
         if (coords && largest.geometry.type === "MultiPolygon") {
@@ -21496,9 +21524,11 @@ module.exports = function(vars,selection,enter,exit) {
       }
       else {
         var reduced = d, largest = d, coords = d.geometry.coordinates[0];
-        vars.zoom.coords[d.d3plus.id] = d;
-
       }
+
+      vars.zoom.coords[d.d3plus.id] = reduced;
+
+      var b = vars.path.bounds(reduced);
 
       var names = fetchText(vars,d);
 
@@ -21578,7 +21608,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","../../../geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/cross.js":[function(require,module,exports){
+},{"../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","../../../geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","../../../network/distance.coffee":"/Users/Dave/Sites/d3plus/src/network/distance.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/cross.js":[function(require,module,exports){
 var shapeStyle  = require("./style.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Draws "square" and "circle" shapes using svg:rect
@@ -23651,7 +23681,9 @@ module.exports = function( vars , group ) {
 
           if (text.size() === 0 || text.selectAll("tspan").size() === 0) {
             delete d.d3plus_label;
-            group.selectAll("text#d3plus_label_"+d.d3plus.id+", rect#d3plus_label_bg_"+d.d3plus.id)
+            d3.select(this).selectAll("text#d3plus_label_"+d.d3plus.id+", rect#d3plus_label_bg_"+d.d3plus.id)
+              .call(remove);
+            vars.g.labels.selectAll("text#d3plus_label_"+d.d3plus.id+", rect#d3plus_label_bg_"+d.d3plus.id)
               .call(remove);
           }
           else {
@@ -23735,14 +23767,18 @@ module.exports = function( vars , group ) {
         }
         else {
           delete d.d3plus_label;
-          group.selectAll("text#d3plus_label_"+d.d3plus.id+", rect#d3plus_label_bg_"+d.d3plus.id)
+          d3.select(this).selectAll("text#d3plus_label_"+d.d3plus.id+", rect#d3plus_label_bg_"+d.d3plus.id)
+            .call(remove);
+          vars.g.labels.selectAll("text#d3plus_label_"+d.d3plus.id+", rect#d3plus_label_bg_"+d.d3plus.id)
             .call(remove);
         }
 
       }
       else {
         delete d.d3plus_label;
-        group.selectAll("text#d3plus_label_"+d.d3plus.id+", rect#d3plus_label_bg_"+d.d3plus.id)
+        d3.select(this).selectAll("text#d3plus_label_"+d.d3plus.id+", rect#d3plus_label_bg_"+d.d3plus.id)
+          .call(remove);
+        vars.g.labels.selectAll("text#d3plus_label_"+d.d3plus.id+", rect#d3plus_label_bg_"+d.d3plus.id)
           .call(remove);
       }
     });
@@ -23859,6 +23895,7 @@ module.exports = function(vars,selection,enter,exit) {
     //--------------------------------------------------------------------------
     var paths = group.selectAll("path.d3plus_line")
       .data(segments, function(d){
+        if (!d.d3plus) d.d3plus = {};
         d.d3plus.shape = "line";
         return d.segment_key;
       });
@@ -23868,6 +23905,7 @@ module.exports = function(vars,selection,enter,exit) {
     //--------------------------------------------------------------------------
     var rects = group.selectAll("rect.d3plus_anchor")
       .data(nodes, function(d){
+        if (!d.d3plus) d.d3plus = {};
         d.d3plus.r = vars.data.stroke.width * 2;
         return d.d3plus.id;
       });
@@ -25669,7 +25707,9 @@ module.exports = function(vars) {
 
       }
 
-      var colors = dataNest(vars, data, [vars.color.value], []);
+      var legendNesting = [vars.color.value];
+      if (vars.icon.value) legendNesting.push(vars.icon.value);
+      var colors = dataNest(vars, data, legendNesting, []);
 
       if ( vars.dev.value ) print.timeEnd("grouping data by color")
 
@@ -26450,7 +26490,7 @@ module.exports = function(vars) {
     yearWidths = textSizes.map(function(t) {
       return t.width;
     });
-    yearWidth = Math.ceil(d3.max(yearWidths));
+    yearWidth = ~~(d3.max(yearWidths)) + 1;
     yearHeight = d3.max(textSizes.map(function(t) {
       return t.height;
     }));
@@ -26473,7 +26513,7 @@ module.exports = function(vars) {
       oldWidth = labelWidth - vars.ui.padding * 2;
       labelWidth = timelineWidth / years.length;
       if (oldWidth > labelWidth) {
-        tickStep = Math.ceil(oldWidth / (timelineWidth / years.length));
+        tickStep = ~~(oldWidth / (timelineWidth / years.length)) + 1;
         while (tickStep < years.length - 1) {
           if ((years.length - 1) % tickStep === 0) {
             break;
@@ -27379,7 +27419,10 @@ module.exports = {
     value: "mercator"
   },
   solo: filter(false),
-  threshold: 0.1,
+  threshold: {
+    accepted: [Number],
+    value: 0.9
+  },
   value: false
 };
 
@@ -29316,7 +29359,7 @@ geo_map.libs = ["topojson"];
 
 geo_map.nesting = false;
 
-geo_map.requirements = ["color", "coords"];
+geo_map.requirements = ["coords"];
 
 geo_map.scale = 1;
 
@@ -30169,7 +30212,7 @@ resetMargins = function(vars) {
 };
 
 labelPadding = function(vars) {
-  var lastTick, rightLabel, rightPadding, xAttrs, xAxisHeight, xAxisWidth, xDomain, xLabel, xLabelAttrs, xMaxWidth, xSizes, xText, xValues, yAttrs, yAxisWidth, yDomain, yLabel, yLabelAttrs, yText;
+  var lastTick, rightLabel, rightMod, xAttrs, xAxisHeight, xAxisWidth, xDomain, xLabel, xLabelAttrs, xMaxWidth, xSizes, xText, xValues, yAttrs, yAxisWidth, yDomain, yLabel, yLabelAttrs, yText;
   xDomain = vars.x.scale.viz.domain();
   yDomain = vars.y.scale.viz.domain();
   yAttrs = {
@@ -30285,11 +30328,13 @@ labelPadding = function(vars) {
   xAxisHeight = Math.round(xAxisHeight);
   xAxisWidth = Math.round(xAxisWidth);
   vars.axes.margin.bottom += xAxisHeight;
-  lastTick = vars.x.ticks.values[vars.x.ticks.values.length - 1];
+  lastTick = vars.x.ticks.visible[vars.x.ticks.visible.length - 1];
   rightLabel = vars.x.scale.viz(lastTick);
-  rightPadding = vars.axes.width - rightLabel;
-  if (rightPadding < xAxisWidth) {
-    vars.axes.width -= xAxisWidth / 2 - rightPadding;
+  rightLabel += xAxisWidth / 2 + vars.axes.margin.left;
+  if (rightLabel > vars.width.value) {
+    rightMod = rightLabel - vars.width.value + vars.axes.margin.right;
+    vars.axes.width -= rightMod;
+    vars.axes.margin.right += rightMod;
   }
   xLabel = vars.x.label.fetch(vars);
   if (xLabel) {
@@ -30511,7 +30556,7 @@ module.exports = function(vars) {
   xmod = rotated ? vars.x.ticks.size / 2 : 0;
   xStyle = function(axis) {
     return axis.attr("transform", "translate(0," + vars.axes.height + ")").call(vars.x.axis.svg.scale(vars.x.scale.viz)).selectAll("g.tick").select("text").attr("dy", "").style("text-anchor", rotated ? "end" : "middle").call(tickFont, "x").each("end", function(d) {
-      if (vars.x.ticks.wrap && !vars.x.ticks.hidden && vars.x.ticks.visible.indexOf(d) >= 0) {
+      if (!vars.x.ticks.hidden && vars.x.ticks.visible.indexOf(d) >= 0) {
         return textwrap().container(d3.select(this)).height(vars.x.ticks.maxHeight).rotate(vars.x.ticks.rotate).valign(rotated ? "middle" : "top").width(vars.x.ticks.maxWidth).x(-vars.x.ticks.maxWidth / 2 - xmod).draw();
       }
     });
@@ -30711,14 +30756,14 @@ module.exports = function(vars, data) {
   return d3.nest().key(function(d) {
     var id, return_id, val, _i, _len, _ref;
     return_id = "nesting";
-    _ref = vars.id.nesting;
+    _ref = vars.id.nesting.slice(0, vars.depth.value + 1);
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       id = _ref[_i];
       val = fetchValue(vars, d, id);
       if (val instanceof Array) {
         val = val.join("_");
       }
-      return_id += "_" + val;
+      return_id += "_" + stringStrip(val);
     }
     return return_id;
   }).rollup(function(leaves) {
@@ -30962,7 +31007,9 @@ var network = function(vars) {
     var min_size = vars.size.value;
   }
   else {
-    var max_size = smallestGap(nodes);
+    var max_size = smallestGap(nodes, {"accessor": function(n){
+      return [n.x, n.y];
+    }});
 
     var overlap = vars.size.value ? vars.nodes.overlap : 0.4
     max_size = max_size * overlap
@@ -31576,12 +31623,12 @@ var rings = function(vars) {
 
   })
 
-  var primaryDistance = smallestGap(primaries,function(n){
+  var primaryDistance = smallestGap(primaries,{"accessor": function(n){
         return [n.d3plus.x, n.d3plus.y]
-      })
-    , secondaryDistance = smallestGap(secondaries,function(n){
+      }})
+    , secondaryDistance = smallestGap(secondaries,{"accessor": function(n){
         return [n.d3plus.x, n.d3plus.y]
-      })
+      }})
 
   if (!primaryDistance) {
     primaryDistance = ring_width/2
