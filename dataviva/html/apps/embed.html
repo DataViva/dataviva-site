@@ -27,7 +27,7 @@
       <i class="fa fa-list-alt"></i>
     </div>
 
-    <div id="bra_0" class="leon button medium" onclick="builder.selector(this.id)">
+    <div id="bra_0" class="build_filter leon button medium" onclick="builder.selector(this.id)">
       {% set bra = current_build.bra[0] %}
       <div class="leon icon medium" style="background-image:url('{{ bra.icon }}')"></div>
       <span class="list_text">{{ bra.name }}</span>
@@ -35,49 +35,26 @@
     </div>
 
     {% if current_build.bra[1] %}
-    {% set bra = current_build.bra[1] %}
+      {% set bra = current_build.bra[1] %}
     {% endif %}
-    <div id="bra_1" class="leon button medium" onclick="builder.selector(this.id)">
+    <div id="bra_1" class="build_filter leon button medium" onclick="builder.selector(this.id)">
       <div class="leon icon medium"{% if bra %} style="background-image:url('{{ bra.icon }}')"{% endif %}></div>
       <span class="list_text">{% if bra %}{{ bra.name }}{% endif %}</span>
       <i class="fa fa-list-alt"></i>
     </div>
 
-    {% if current_build.cnae %}
-    {% set cnae = current_build.cnae[0] %}
-    {% endif %}
-    <div id="cnae_0" class="leon button medium" onclick="builder.selector(this.id)">
-      <div class="leon icon medium"{% if cnae %} style="background-color:{{ cnae.color }}; background-image:url('/static/img/icons/cnae/cnae_{{ cnae.id[:1] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if cnae %}{{ cnae.name }}{% endif %}</span>
-      <i class="fa fa-list-alt"></i>
-    </div>
-
-    {% if current_build.cbo %}
-    {% set cbo = current_build.cbo[0] %}
-    {% endif %}
-    <div id="cbo_0" class="leon button medium" onclick="builder.selector(this.id)">
-      <div class="leon icon medium"{% if cbo %} style="background-color:{{ cbo.color }}; background-image:url('/static/img/icons/cbo/cbo_{{ cbo.id[:1] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if cbo %}{{ cbo.name }}{% endif %}</span>
-      <i class="fa fa-list-alt"></i>
-    </div>
-
-    {% if current_build.hs %}
-    {% set hs = current_build.hs[0] %}
-    {% endif %}
-    <div id="hs_0" class="leon button medium" onclick="builder.selector(this.id)">
-      <div class="leon icon medium"{% if hs %} style="background-color:{{ hs.color }}; background-image:url('/static/img/icons/hs/hs_{{ hs.id[:2] }}.png')"{% endif %}></div>
-      <span class="list_text">{% if hs %}{{ hs.name }}{% endif %}</span>
-      <i class="fa fa-list-alt"></i>
-    </div>
-
-    {% if current_build.wld %}
-    {% set wld = current_build.wld[0] %}
-    {% endif %}
-    <div id="wld_0" class="leon button medium" onclick="builder.selector(this.id)">
-      <div class="leon icon medium"{% if wld %} style="{% if wld.id|count == 5 %}background-color:{{ wld.color }}; {% endif %}background-image:url('/static/img/icons/wld/wld_{{ wld.id }}.png')"{% endif %}></div>
-      <span class="list_text">{% if wld %}{{ wld.name }}{% endif %}</span>
-      <i class="fa fa-list-alt"></i>
-    </div>
+    {% for a in ["cnae","cbo","hs","wld","university","course_hedu"] %}
+      {% if current_build[a] %}
+        {% set attr = current_build[a][0] %}
+      {% else %}
+        {% set attr = None %}
+      {% endif %}
+      <div id="{{a}}_0" class="build_filter leon button medium" onclick="builder.selector(this.id)">
+        <div class="leon icon medium"></div>
+        <span class="list_text">{% if attr %}{{ attr.name() }}{% endif %}</span>
+        <i class="fa fa-list-alt"></i>
+      </div>
+    {% endfor %}
 
     <div id="app_controls"></div>
 
@@ -605,22 +582,22 @@
             app.years = year_range[app.build.dataset];
             app.monthly = app.years[0].indexOf("-") > 0;
 
-            last_depth = app.build.bra[0].id == "all" ? "bra_3" : "bra_9"
+            last_depth = app.build.bra[0].id == "all" ? "bra_3" : "bra_9";
             leon("#app_select").color(app.build.app.color)
             builder.url()
             builder.outputs(data.all_builds)
 
             // Show/hide filters depending on build requirements
-            var filters = ["bra_0","bra_1","cnae_0","cbo_0","hs_0","wld_0"]
-            filters.forEach(function(filter){
-              var type = filter.split("_")[0],
-                  index = filter.split("_")[1]
+            d3.selectAll("div.build_filter").each(function(){
+              var filter = this.id,
+                  type = filter.slice(0,filter.length-2),
+                  index = filter.slice(-1);
               if (app.build[type] && app.build[type][index]) {
-                d3.select("#"+filter).style("display","inline-block")
+                d3.select(this).style("display","inline-block")
                 builder.filter(app.build[type][index],filter,true)
               }
               else {
-                d3.select("#"+filter).style("display","none")
+                d3.select(this).style("display","none")
               }
             })
 
@@ -2151,8 +2128,8 @@
 
     builder.filter = function(obj,id,static) {
 
-      var type = id.split("_")[0],
-          index = id.split("_")[1],
+      var type = id.slice(0,id.length-2),
+          index = id.slice(-1),
           old_obj = app.build[type][index]
           new_name = obj.name ? obj.name : obj["name_"+dataviva.language]
 
@@ -2402,7 +2379,7 @@
       else {
 
         var type = id.slice(0,id.length-2);
-        var index = id.slice(id.length-1);
+        var index = id.slice(-1);
 
         if (type == "file") {
           var init = "all",

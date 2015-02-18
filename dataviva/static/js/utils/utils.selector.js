@@ -950,7 +950,7 @@ function Selector() {
     if (value.indexOf("_id") > 0) {
       type = value.slice(0,value.indexOf("_id"));
     }
-    else if (value.indexOf("_") === value.length - 2) {
+    else if (value.charAt(value.length - 2) === "_") {
       type = value.slice(0,value.length-2);
     }
     else {
