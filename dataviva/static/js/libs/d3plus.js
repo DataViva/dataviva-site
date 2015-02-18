@@ -17846,7 +17846,7 @@ module.exports = function(n1, n2) {
   if (!(n1 instanceof Array)) {
     n1 = [n1.x, n1.y];
   }
-  if (!(n1 instanceof Array)) {
+  if (!(n2 instanceof Array)) {
     n2 = [n2.x, n2.y];
   }
   xx = Math.abs(n1[0] - n2[0]);
@@ -31007,6 +31007,7 @@ var network = function(vars) {
     var min_size = vars.size.value;
   }
   else {
+
     var max_size = smallestGap(nodes, {"accessor": function(n){
       return [n.x, n.y];
     }});
