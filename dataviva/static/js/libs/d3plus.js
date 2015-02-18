@@ -26350,7 +26350,7 @@ textColor = require("../../../color/text.coffee");
 playInterval = false;
 
 module.exports = function(vars) {
-  var availableWidth, background, brush, brushExtent, brush_group, brushed, brushend, d, end, handles, i, init, labelWidth, labels, max_index, min, min_index, min_required, oldWidth, playButton, playIcon, playIconChar, playIconStyle, playStyle, playUpdate, setYears, start, start_x, step, stopPlayback, text, textFill, textRotate, textSizes, textStyle, tickStep, ticks, timeFormat, timeFormatter, timeMultiFormat, timelineBox, timelineHeight, timelineWidth, x, yearHeight, yearMS, yearWidth, yearWidths, year_ticks, years, _i, _len;
+  var availableWidth, background, brush, brushExtent, brush_group, brushed, brushend, d, end, handles, i, init, labelWidth, labels, max_index, min, min_index, min_required, oldWidth, playButton, playIcon, playIconChar, playIconStyle, playStyle, playUpdate, playbackWidth, setYears, start, start_x, step, stopPlayback, text, textFill, textRotate, textSizes, textStyle, tickStep, ticks, timeFormat, timeFormatter, timeMultiFormat, timelineBox, timelineHeight, timelineWidth, x, yearHeight, yearMS, yearWidth, yearWidths, year_ticks, years, _i, _len;
   if (vars.timeline.value && (!vars.error.internal || !vars.data.missing) && !vars.small && vars.data.time && vars.data.time.values.length > 1) {
     if (vars.dev.value) {
       print.time("drawing timeline");
@@ -26501,6 +26501,10 @@ module.exports = function(vars) {
     availableWidth = vars.width.value - vars.ui.padding * 2;
     tickStep = 1;
     textRotate = 0;
+    playbackWidth = timelineHeight;
+    if (vars.timeline.play.value) {
+      availableWidth -= playbackWidth + vars.ui.padding;
+    }
     if (timelineWidth > availableWidth) {
       labelWidth = yearHeight + vars.ui.padding * 2;
       timelineHeight = yearWidth + vars.ui.padding * 2;
@@ -26531,11 +26535,11 @@ module.exports = function(vars) {
       start_x = vars.width.value / 2 - timelineWidth / 2;
     }
     if (vars.timeline.play.value) {
-      start_x += (timelineHeight + vars.ui.padding) / 2;
+      start_x += (playbackWidth + vars.ui.padding) / 2;
     }
     playButton = vars.g.timeline.selectAll("rect.d3plus_timeline_play").data(vars.timeline.play.value ? [0] : []);
     playStyle = function(btn) {
-      return btn.attr("width", timelineHeight + 1).attr("height", timelineHeight + 1).attr("fill", vars.ui.color.primary.value).attr("stroke", vars.timeline.tick).attr("stroke-width", 1).attr("x", start_x - timelineHeight - 1 - vars.ui.padding).attr("y", vars.ui.padding);
+      return btn.attr("width", playbackWidth + 1).attr("height", timelineHeight + 1).attr("fill", vars.ui.color.primary.value).attr("stroke", vars.timeline.tick).attr("stroke-width", 1).attr("x", start_x - playbackWidth - 1 - vars.ui.padding).attr("y", vars.ui.padding);
     };
     playButton.enter().append("rect").attr("class", "d3plus_timeline_play").attr("shape-rendering", "crispEdges").attr("opacity", 0).call(playStyle);
     playButton.transition().duration(vars.draw.timing).call(playStyle);
@@ -26550,7 +26554,7 @@ module.exports = function(vars) {
     playIconStyle = function(text) {
       var y;
       y = timelineHeight / 2 + vars.ui.padding + 1;
-      return text.attr("fill", textColor(vars.ui.color.primary.value)).attr(textStyle).attr("x", start_x - (timelineHeight - 1) / 2 - vars.ui.padding).attr("y", y).attr("dy", "0.5ex").call(playIconChar, playInterval ? "pause" : "icon");
+      return text.attr("fill", textColor(vars.ui.color.primary.value)).attr(textStyle).attr("x", start_x - (playbackWidth - 1) / 2 - vars.ui.padding).attr("y", y).attr("dy", "0.5ex").call(playIconChar, playInterval ? "pause" : "icon");
     };
     playIcon.enter().append("text").attr("class", "d3plus_timeline_playIcon").call(playIconStyle).style("pointer-events", "none").attr("opacity", 0);
     playIcon.call(playIconStyle).transition().duration(vars.draw.timing).attr("opacity", 1);
@@ -30108,7 +30112,7 @@ textwrap = require("../../../../../textwrap/textwrap.coffee");
 uniques = require("../../../../../util/uniques.coffee");
 
 module.exports = function(vars, opts) {
-  var axis, formatted, l, lengths, opp, t, tens, ticks, values, _i, _j, _len, _len1, _ref, _ref1;
+  var axis, extent, formatted, l, lengths, newtick, opp, step, t, tens, tick, ticks, values, _i, _j, _len, _len1, _ref, _ref1;
   vars.axes.margin = resetMargins(vars);
   vars.axes.height = vars.height.viz;
   vars.axes.width = vars.width.viz;
@@ -30128,6 +30132,15 @@ module.exports = function(vars, opts) {
           });
         } else {
           ticks = vars.data.time.values;
+        }
+        extent = d3.extent(ticks);
+        step = vars.data.time.stepType;
+        ticks = [extent[0]];
+        tick = extent[0];
+        while (tick < extent[1]) {
+          newtick = new Date(tick);
+          tick = new Date(newtick["set" + step](newtick["get" + step]() + 1));
+          ticks.push(tick);
         }
         vars[axis].ticks.values = ticks;
       } else {
