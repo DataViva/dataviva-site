@@ -99,10 +99,12 @@ class Profile(object):
                     b.set_filter2(a["filter2"])
                 elif self.type in ["cbo","wld","course_hedu","course_sc"]:
                     b.set_filter2(self.attr)
-                b = b.json()
 
                 if "params" in a:
+                    b = b.json(**a["params"])
                     b["url"] += "?{}".format(param(a["params"]))
+                else:
+                    b = b.json()
 
                 b["position"] = position
                 position += 1
@@ -120,7 +122,10 @@ class Bra(Profile):
 
     def build_list(self):
         apps = [
-            {"title": gettext("International Trade"), "builds": [91, 9, 11, 35]},
+            {"title": gettext("International Trade"), "builds":
+                [91, {"id":9, "params": {"size": "export_val"}},
+                {"id":9, "params": {"size": "import_val"}}, 11, 35]
+            },
             {"title": gettext("Employment"), "builds": [17, 19]},
             {"title": gettext("Domestic Trade"), "builds": [128, 127]},
             {"title": gettext("Higher Education"), "builds": [93, 105]},

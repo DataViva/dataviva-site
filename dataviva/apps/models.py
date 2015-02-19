@@ -283,9 +283,12 @@ class Build(db.Model, AutoSerialize):
             elif self.filter1 == "all":
                 return Ymbp
 
-    def format_text(self, title, depth, year):
+    def format_text(self, title, kwargs):
 
         lookup = dictionary()
+
+        depth = kwargs.get("depth", None)
+        year = kwargs.get("year", None)
 
         munic = lookup["bra_9"]
         munics = lookup["bra_9_plural"]
@@ -299,6 +302,28 @@ class Build(db.Model, AutoSerialize):
         if self.output == "bra" and isinstance(self.bra,(list,tuple)) and self.bra[0].id == "all":
              title = title.replace(munics,lookup["bra_3_plural"])
              title = title.replace(munic,lookup["bra_3"])
+
+        flow = kwargs.get("size", None)
+        if not flow:
+            flow = kwargs.get("y", None)
+        if not flow:
+            flow = kwargs.get("axes", None)
+        if not flow:
+            flow = "export_val"
+
+        flow = "{}s".format(flow[:-4])
+
+        impexp = "{}/{}".format(lookup["import_val"],lookup["export_val"])
+        if impexp in title:
+            title = title.replace(impexp, lookup[flow])
+
+        impexp = "{}/{}".format(lookup["origins"],lookup["destinations"])
+        if impexp in title:
+            if flow == "exports":
+                rep = lookup["destinations"]
+            else:
+                rep = lookup["origins"]
+            title = title.replace(impexp, rep)
 
         if not year:
             if self.app_id in [2,9]:
@@ -314,7 +339,7 @@ class Build(db.Model, AutoSerialize):
                 if monthly:
                     if m == "0":
                         m = "1"
-                    d = "{} {}".format(dictionary()["month_{}".format(m)], y)
+                    d = "{} {}".format(lookup["month_{}".format(m)], y)
                 else:
                     d = y
             return d
@@ -328,7 +353,7 @@ class Build(db.Model, AutoSerialize):
     def slug(self, **kwargs):
 
         slug = getattr(self, "slug_{}".format(g.locale))
-        slug = self.format_text(slug, kwargs.get("depth", None), kwargs.get("year", None))
+        slug = self.format_text(slug, kwargs)
         return slug
 
 
@@ -336,7 +361,7 @@ class Build(db.Model, AutoSerialize):
     def title(self, **kwargs):
 
         title = getattr(self, "title_{}".format(g.locale))
-        title = self.format_text(title, kwargs.get("depth", None), kwargs.get("year", None))
+        title = self.format_text(title, kwargs)
 
         def get_article(attr, article):
             if attr.article_pt:
@@ -383,12 +408,12 @@ class Build(db.Model, AutoSerialize):
 
         return title
 
-    def json(self):
+    def json(self, **kwargs):
         return {
             "app": self.app.serialize(),
             "dataset": self.dataset,
-            "slug": self.slug(),
-            "title": self.title(),
+            "slug": self.slug(**kwargs),
+            "title": self.title(**kwargs),
             "url": self.url()
         }
 

@@ -381,6 +381,40 @@
           }
         }
 
+        if (app.build.dataset === "secex") {
+
+          var val = false;
+          if (app.vars.size) val = app.vars.size;
+          else if (app.vars.y) val = app.vars.y;
+          else if (app.vars.axes) val = app.vars.axes;
+          else val = "export_val";
+
+          val = val.slice(0,6)+"s";
+
+          var match = false;
+          var exp = dataviva.dictionary.exports;
+          var imp = dataviva.dictionary.imports;
+
+          if (title.indexOf(imp+"/"+exp) === 0) var match = imp+"/"+exp;
+          else if (title.indexOf(imp) === 0) var match = imp;
+          else if (title.indexOf(exp) === 0) var match = exp;
+          if (match) {
+            title = title.replace(match, dataviva.dictionary[val])
+          }
+          else {
+            var orig = dataviva.dictionary.origins;
+            var dest = dataviva.dictionary.destinations;
+            if (title.indexOf(orig+"/"+dest) === 0) var match = orig+"/"+dest;
+            else if (title.indexOf(orig) === 0) var match = orig;
+            else if (title.indexOf(dest) === 0) var match = dest;
+            if (match) {
+              val = val === "exports" ? dest : orig;
+              title = title.replace(match, val)
+            }
+          }
+
+        }
+
         if (title.indexOf("(") < 0) {
           title += " ("+range+")";
         }
@@ -1648,9 +1682,7 @@
           app.viz.title({"sub": app.sub_title()})
         }
 
-        if (type == "depth" || type == "year") {
-          app.title_update()
-        }
+        app.title_update();
 
         if (type == "depth" && app.build.output_attr == "wld") {
           if (app.vars.depth == "wld_5") app.viz.icon({"style": "default"})
