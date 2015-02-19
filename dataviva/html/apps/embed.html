@@ -276,6 +276,133 @@
 
     var recPriority = ["both_filters","filter2","filter1","no_filters"];
 
+    app.timeURL = function(t) {
+
+      if (!t) t = app.years;
+      else if (typeof t === "string") t = t.split("_");
+      else if (!(t instanceof Array)) t = [t];
+
+      function url_format(d) {
+        return d.constructor === Date ? app.timeFormat(d) : d;
+      }
+      var ret = url_format(t[0]);
+      if (t.length > 1) ret += "_"+url_format(t[1]);
+
+      return ""+ret;
+
+    }
+
+    function string2date(s) {
+      s = s.split("-");
+      var m = 1;
+      if (s.length == 2 && s[1] !== "0") m = s[1];
+      var y = s[0];
+      return new Date(m+"/01/"+y)
+    }
+
+    function time2range(t) {
+      var date_extent = t.map(function(y, i){
+        y = string2date(y);
+        if (i === 0) return y;
+        if (app.monthly) return new Date(y.setMonth(y.getMonth()+1))
+        return new Date(y.setFullYear(y.getFullYear()+1))
+      })
+      if (date_extent.length === 1) return date_extent;
+      var date_range = [];
+      var i = new Date(date_extent[0]);
+      while (i < date_extent[1]) {
+        date_range.push(i);
+        i = new Date(i);
+        if (app.monthly) i.setMonth(i.getMonth()+1);
+        else i.setFullYear(i.getFullYear()+1);
+      }
+      return date_range;
+    }
+
+    app.title_update = function(range) {
+
+      function parse_date(s) {
+        if (s.constructor === Date) {
+          if (app.monthly) {
+            return dataviva.dictionary["month_"+(s.getMonth()+1)]+" "+s.getFullYear();
+          }
+          else {
+            return ""+s.getFullYear();
+          }
+        }
+        if (typeof s === "string") {
+          if (s.indexOf("-") > 0) {
+            var y = s.split("-")[0];
+            var m = s.split("-")[1];
+            if (m !== "0") return dataviva.dictionary["month_"+m]+" "+y;
+          }
+          return s;
+        }
+        else {
+          return ""+s;
+        }
+      }
+
+      if (!range || range.length === 0) {
+        range = app.vars.year;
+        if (!range) range = app.years;
+        else range = range.split("_");
+      }
+      else {
+        if (range.length > 1) range = d3.extent(range);
+        app.vars.year = app.timeURL(range);
+      }
+
+      r = parse_date(range[0]);
+      if (range.length > 1) r += "-" + parse_date(range[1]);
+      range = r;
+
+      function format_title(title) {
+
+        if (app.build.output_attr == "bra") {
+          var words = title.split(" ")
+          if (app.vars.depth) {
+            var new_depth = dataviva.dictionary[app.vars.depth]
+            var old_depth = dataviva.dictionary[last_depth]
+            if (words[words.length-2] == old_depth) words[words.length-2] = new_depth
+            else if (words[words.length-1] == old_depth) words[words.length-1] = new_depth
+            else {
+              var new_depth = dataviva.dictionary[app.vars.depth+"_plural"]
+              var old_depth = dataviva.dictionary[last_depth+"_plural"]
+              if (words[0] == old_depth) words[0] = new_depth
+            }
+            title = words.join(" ")
+            last_depth = app.vars.depth
+          }
+          else if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
+            var old_word = dataviva.dictionary["bra_9_plural"]
+            var new_word = dataviva.dictionary["bra_3_plural"]
+            title = title.replace(old_word,new_word)
+          }
+        }
+
+        if (title.indexOf("(") < 0) {
+          title += " ("+range+")";
+        }
+        else {
+          title = title.replace(/\(.*?\)/, "("+range+")");
+        }
+
+        return title;
+
+      }
+
+      app.build.title = format_title(app.build.title);
+      app.viz.title(app.build.title);
+      builder.url();
+
+      if (same_origin && window.frameElement) {
+        var slug = format_title(app.build.slug);
+        var message = {"id": window.frameElement.id, "title": slug, "app": app.build.app.type}
+        if (same_origin && window.parent.update_titles) window.parent.update_titles(message)
+      }
+    }
+
     app.html = {
       "callback": function(data) {
 
@@ -472,6 +599,7 @@
       .container("#app")
       .aggs(averages)
       .time("year")
+      .time({"solo": {"callback": app.title_update}})
       .legend({"size": [25,25]})
       .format({
         "number": dataviva.format.number,
@@ -484,7 +612,7 @@
         "family": app.font,
         "weight": "normal"
       })
-      .color({"missing": "#888"})
+      .color({"missing": "#999"})
       .coords({"mute": ["2pe020000"]})
       .messages({"style": "large"})
       .nodes({"overlap": 1.7})
@@ -580,7 +708,10 @@
             // Set public current build variable
             app.build = data.current_build;
             app.years = year_range[app.build.dataset];
-            app.monthly = app.years[0].indexOf("-") > 0;
+            app.monthly = app.years[0].indexOf("-") > 0 &&
+                          (app.build.dataset !== "secex" || ["stacked","line"].indexOf(app.build.app.type) >= 0);
+            app.timeFormat = app.monthly ? "%Y-%-m" : "%Y";
+            app.timeFormat = d3.time.format(app.timeFormat);
 
             last_depth = app.build.bra[0].id == "all" ? "bra_3" : "bra_9";
             leon("#app_select").color(app.build.app.color)
@@ -618,43 +749,51 @@
 
             var q = queue()
 
-            if (app.data[app.build.data_url]) app.allyears = true;
-
-            if (["stacked", "line"].indexOf(app.build.app.type) >= 0) {
-              app.allyears = true;
-              app.viz.time({"solo": false})
-            }
-            else if (!app.allyears) {
-
-              // Determine current year
-              var data_years = app.years.map(function(y){
-                return parseFloat(y.split("-")[0]);
-              });
-
-              if (!app.vars.year) {
-                app.vars.year = data_years[1];
+            if (!app.vars.year) {
+              if (["stacked","line"].indexOf(app.build.app.type) >= 0) {
+                app.vars.year = app.years.join("_");
               }
               else {
-                var y_range = d3.range(data_years[0],data_years[1]+1);
-                var year_int = parseFloat(app.vars.year.split("-")[0]);
-                app.vars.year = d3plus.util.closest(y_range, year_int);
-              }
-              app.vars.year += "";
-
-              if (app.build.dataset === "ei") {
                 app.vars.year = app.years[1];
+                if (!app.monthly && app.vars.year.indexOf("-")) {
+                  app.vars.year = app.vars.year.slice(0,4);
+                }
               }
-
-              var url_year = app.vars.year;
-              if (app.vars.year.indexOf("-") < 0 && app.monthly) {
-                url_year += "-0";
-              }
-
-              app.build.data_url = app.build.data_url.replace("all", url_year)
             }
-            else if (app.build.dataset != "ei" && app.monthly) {
+            else {
+
+              var date_range = time2range(app.years)
+
+              var years = app.vars.year.split("_").map(function(y){
+                return d3plus.util.closest(date_range, string2date(y));
+              });
+
+              app.vars.year = app.timeURL(d3plus.util.uniques(years));
+
+            }
+
+            if (!app.allyears) {
+              app.allyears = app.data[app.build.data_url] ||
+                             app.vars.year.indexOf("_") > 0 ||
+                             ["stacked", "line"].indexOf(app.build.app.type) >= 0;
+            }
+
+            var zero_add = app.build.dataset === "secex" && !app.monthly;
+
+            if (app.allyears && zero_add) {
               app.build.data_url = app.build.data_url.replace("all", "all-0")
             }
+            else if (!app.allyears) {
+              var y = app.vars.year;
+              if (zero_add) {
+                y = app.vars.year.split("_").map(function(yy){
+                  return yy+"-0";
+                }).join("_");
+              }
+              app.build.data_url = app.build.data_url.replace("all", y)
+            }
+
+
 
             if (!app.data[app.build.data_url]) {
               q.defer(function(u,callback){
@@ -1041,6 +1180,11 @@
         app.tooltip.short[""] = []
       }
 
+      if (["stacked", "line"].indexOf(app.build.app.type) >= 0 &&
+          app.vars.year.indexOf("_") < 0) {
+        app.vars.year = app.timeURL(app.years);
+      }
+
       app.viz
         .type(app.build.app.d3plus)
         .title({
@@ -1071,30 +1215,11 @@
           "value": "icon"
         })
         .y(false)
+        .x({"scale": "linear"})
         .tooltip(app.tooltip)
         .zoom(app.build.output_attr !== "balance")
-        .timeline(["stacked", "line"].indexOf(app.build.app.type) < 0)
         .legend(app.build.output_attr !== "university")
-
-      if (app.vars.year && ["stacked","line"].indexOf(app.build.app.type) < 0) {
-        var year_date = app.vars.year;
-        if (year_date.indexOf("-") > 0) {
-          if (year_date.split("-")[1]) {
-            var y = year_date.split("-");
-            year_date = new Date(y[1]+"/1/"+y[0]);
-          }
-          else {
-            year_date = parseFloat(year_date.split("-")[0]);
-          }
-        }
-        else {
-          year_date = parseFloat(year_date);
-        }
-        app.viz.time({"solo": [year_date]});
-      }
-      else {
-        app.viz.time({"solo": false});
-      }
+        .time({"solo": time2range(app.vars.year.split("_"))})
 
       // app.viz.type(app.build.app.d3plus)
       //   .title(app.build.title)
@@ -1603,9 +1728,6 @@
         else if (type === "depth") {
           app.viz[type](app.viz.id(Object).nesting.indexOf(value))
         }
-        else if (type === "year") {
-          app.viz.time({"solo": [parseFloat(value)]})
-        }
         else if (type === "layout") {
           var yscale = value === "value" ? "linear" : "share";
           app.viz.y({"scale": yscale})
@@ -2017,55 +2139,6 @@
 	    })
 
 
-    }
-
-    app.title_update = function() {
-
-      function format_title(title) {
-
-        if (app.build.output_attr == "bra") {
-          var words = title.split(" ")
-          if (app.vars.depth) {
-            var new_depth = dataviva.format.text(app.vars.depth)
-            var old_depth = dataviva.format.text(last_depth)
-            if (words[words.length-2] == old_depth) words[words.length-2] = new_depth
-            else if (words[words.length-1] == old_depth) words[words.length-1] = new_depth
-            else {
-              var new_depth = dataviva.format.text(app.vars.depth+"_plural")
-              var old_depth = dataviva.format.text(last_depth+"_plural")
-              if (words[0] == old_depth) words[0] = new_depth
-            }
-            title = words.join(" ")
-            last_depth = app.vars.depth
-          }
-          else if (app.build.app.type == "geo_map" && app.build.bra[0].id == "all") {
-            var old_word = dataviva.format.text("bra_9_plural")
-            var new_word = dataviva.format.text("bra_3_plural")
-            title = title.replace(old_word,new_word)
-          }
-        }
-
-        // if (app.vars.year && app.build.app.type != "stacked") {
-        //   if (app.build.title.indexOf("(") < 0) {
-        //     app.build.title += " ("+app.vars.year+")"
-        //   }
-        //   else {
-        //     app.build.title = app.build.title.replace(/\(.*?\)/, "("+app.vars.year+")")
-        //   }
-        // }
-
-        return title;
-
-      }
-
-      app.build.title = format_title(app.build.title);
-      app.viz.title(app.build.title);
-
-      if (same_origin && window.frameElement) {
-        var slug = format_title(app.build.slug);
-        var message = {"id": window.frameElement.id, "title": slug, "app": app.build.app.type}
-        if (same_origin && window.parent.update_titles) window.parent.update_titles(message)
-      }
     }
 
     /*********************/

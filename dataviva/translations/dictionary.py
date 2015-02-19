@@ -95,6 +95,18 @@ def dictionary():
         "grouping_desc_occugrid": gettext("Groups the donut charts into different categorizations."),
         "none": gettext("None"),
         "year": gettext("Year"),
+        "month_1": gettext("Jan"),
+        "month_2": gettext("Feb"),
+        "month_3": gettext("Mar"),
+        "month_4": gettext("Apr"),
+        "month_5": gettext("May"),
+        "month_6": gettext("Jun"),
+        "month_7": gettext("Jul"),
+        "month_8": gettext("Aug"),
+        "month_9": gettext("Sep"),
+        "month_10": gettext("Oct"),
+        "month_11": gettext("Nov"),
+        "month_12": gettext("Dec"),
 
         # Filter Depths
         "depth": gettext("Depth"),

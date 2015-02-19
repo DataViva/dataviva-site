@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import g
-from dataviva import db
+from dataviva import db, __year_range__
 from dataviva.translations.dictionary import dictionary
 from dataviva.utils.auto_serialize import AutoSerialize
 from dataviva.utils.title_case import title_case
@@ -300,12 +300,29 @@ class Build(db.Model, AutoSerialize):
              title = title.replace(munics,lookup["bra_3_plural"])
              title = title.replace(munic,lookup["bra_3"])
 
-        # if self.app_id != 2:
-        #     if "year" in kwargs:
-        #         year = kwargs["year"]
-        #     else:
-        #         year = __latest_year__[self.dataset]
-        #     title += " ({0})".format(year)
+        if not year:
+            if self.app_id in [2,9]:
+                year = "_".join(__year_range__[self.dataset])
+            else:
+                year = __year_range__[self.dataset][1]
+
+        monthly = self.dataset != "secex" or self.app_id in [2,9]
+
+        def format_date(d):
+            if "-" in d:
+                y, m = d.split("-")
+                if monthly:
+                    if m == "0":
+                        m = "1"
+                    d = "{} {}".format(dictionary()["month_{}".format(m)], y)
+                else:
+                    d = y
+            return d
+
+        year = [format_date(y) for y in year.split("_")]
+
+        title += " ({0})".format("-".join(year))
+
         return title
 
     def slug(self, **kwargs):
