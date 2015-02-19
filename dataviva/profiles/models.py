@@ -124,16 +124,19 @@ class Bra(Profile):
         apps = [
             {"title": gettext("International Trade"), "builds":
                 [91, {"id":9, "params": {"size": "export_val"}},
-                {"id":9, "params": {"size": "import_val"}}, 11, 35]
+                {"id":9, "params": {"size": "import_val"}},
+                {"id":11, "params": {"size": "export_val"}},
+                {"id":11, "params": {"size": "import_val"}}, 35]
             },
-            {"title": gettext("Employment"), "builds": [17, 19]},
+            {"title": gettext("Employment"), "builds": [17, 19, 33]},
             {"title": gettext("Domestic Trade"), "builds": [128, 127]},
             {"title": gettext("Higher Education"), "builds": [93, 105]},
             {"title": gettext("School Census"), "builds": [120]}
         ]
         if len(self.attr.id) < 9:
-            apps[0]["builds"].append(13)
-            apps[1]["builds"].append(5)
+            apps[0]["builds"].insert(5, {"id": 13, "params": {"size": "export_val"}})
+            apps[0]["builds"].insert(6, {"id": 13, "params": {"size": "import_val"}})
+            apps[1]["builds"].insert(2, 5)
         return apps
 
 class Hs(Profile):

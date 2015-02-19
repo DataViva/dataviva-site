@@ -264,6 +264,10 @@ def dictionary():
         "import_kg": gettext("Import Weight"),
         "trade_balance": gettext("Trade Balance"),
         "direction": gettext("Exports/Imports"),
+        "exports": gettext("Exports"),
+        "imports": gettext("Imports"),
+        "origins": gettext("Import Origins"),
+        "destinations": gettext("Export Destinations"),
 
         # HEDU Labels
         "hedu": gettext("Higher Education"),
