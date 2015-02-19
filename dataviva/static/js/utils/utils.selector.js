@@ -161,29 +161,16 @@ function Selector() {
         // Sort final generated list
         list.sort(function(a, b){
 
-    		  if(a.id=="4mg" || b.id=="4mg") {
-    		  	var lengthdiff = b.id.length - a.id.length
-    		  } else {
-    		  	var lengthdiff = b.population - a.population
-    		  }
-    		  if (lengthdiff) return lengthdiff
+          if (type === "bra") {
+        		var a_state = a.id.substr(0,3);
+          	var b_state = b.id.substr(0,3);
+            if (a_state !== b_state && [a_state, b_state].indexOf("4mg") >= 0) {
+              return a_state === "4mg" ? -1 : 1;
+            }
 
-          if (type == "bra") {
-        		var a_state = a.id.substr(1,2)
-          	var b_state = b.id.substr(1,2)
-          }
-          else {
-            var a_state = a.id
-            var b_state = b.id
           }
 
-          if (a_state == "mg" && a_state != b_state) {
-            return -1
-          }
-          else if (b_state == "mg" && a_state != b_state) {
-            return 1
-          }
-          else if (["number","string"].indexOf(typeof a[sorting]) >= 0 && ["number","string"].indexOf(typeof b[sorting]) >= 0) {
+          if (["number","string"].indexOf(typeof a[sorting]) >= 0 && ["number","string"].indexOf(typeof b[sorting]) >= 0) {
             var a_first = a[sorting]
             var b_first = b[sorting]
           }
@@ -193,6 +180,7 @@ function Selector() {
             if (d3.rgb(a.color).hsl().s == 0) a_first = 361
             if (d3.rgb(b.color).hsl().s == 0) b_first = 361
           }
+
           if (a_first != b_first) {
             if (typeof a_first === "string") return (a_first.localeCompare(b_first));
             else return (b_first - a_first);
