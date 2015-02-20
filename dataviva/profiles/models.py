@@ -57,6 +57,8 @@ class Profile(object):
         if len(q) > 0:
             q = [getattr(a, setup["id"]) for a in q]
             q = setup["data"].query.filter(getattr(setup["data"], setup["id"]).in_(q)).order_by(getattr(setup["data"], setup["column"]).desc())
+            if len(q.all()) == 0:
+                return None
             return getattr(q.first(), setup["id"])
         return None
 
@@ -148,8 +150,9 @@ class Hs(Profile):
         }]
         industry = self.crosswalk_id()
         if industry:
+            name = attrs.Cnae.query.get(industry).name()
             apps.append({
-                "title": gettext("Most Common Product"),
+                "title": "{} ({})".format(gettext("Most Common Industry"), name),
                 "builds": [{"id": 4, "filter1": industry}, {"id": 48, "filter1": industry}]
             })
         return apps
@@ -173,8 +176,9 @@ class Cnae(Profile):
         }]
         product = self.crosswalk_id()
         if product:
+            name = attrs.Hs.query.get(product).name()
             apps.append({
-                "title": gettext("Most Common Product"),
+                "title": "{} ({})".format(gettext("Most Common Product"), name),
                 "builds": [{"id": 12, "filter1": product}, {"id": 50, "filter1": product}]
             })
         return apps
@@ -189,8 +193,9 @@ class Cbo(Profile):
         }]
         course = self.crosswalk_id()
         if course:
+            name = attrs.Course_hedu.query.get(course).name()
             apps.append({
-                "title": gettext("Most Common Major"),
+                "title": "{} ({})".format(gettext("Most Common Major"), name),
                 "builds": [{"id": 94, "filter2": course, "params": {"color": "graduates_growth"}}]
             })
         return apps
@@ -209,8 +214,9 @@ class Course_hedu(Profile):
         }]
         occupation = self.crosswalk_id()
         if occupation:
+            name = attrs.Cbo.query.get(occupation).name()
             apps.append({
-                "title": gettext("Most Common Occupation"),
+                "title": "{} ({})".format(gettext("Most Common Occupation"), name),
                 "builds": [{"id": 49, "filter2": occupation}, {"id": 2, "filter2": occupation}]
             })
         return apps
