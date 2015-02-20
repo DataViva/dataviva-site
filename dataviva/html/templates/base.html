@@ -98,7 +98,7 @@
       ga('create', 'UA-42576717-1', window.location.host);
       ga('send', 'pageview');
 
-      dataviva.ui.background()
+      if ("{{g.page_type}}" !== "home") dataviva.ui.background();
 
       if (dataviva.resize) {
         var bg_resize = window.onresize

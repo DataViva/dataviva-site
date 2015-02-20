@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  background-color: #fafafa;
+  background-color: #ffffff;
   color: #333333;
   height: 100%;
   margin: 0 auto;
@@ -16,12 +16,12 @@ body {
 }
 
 hr {
-  background-color: #cccccc;
+  background-color: #eee;
   border: 0;
   clear: both;
-  color: #cccccc;
+  color: #eee;
   height: 1px;
-  margin: 10px;
+  margin: 10px 60px;
 }
 
 #fullscreen {

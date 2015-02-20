@@ -212,6 +212,8 @@ div#language .leon.radio {
 
 #nav_footer {
   background-color: white;
+  -webkit-box-shadow: none;
+          box-shadow: none;
   display: block;
   margin: 15px auto 0 auto;
   padding: 5px 10px;

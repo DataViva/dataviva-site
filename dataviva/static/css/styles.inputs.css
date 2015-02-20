@@ -70,12 +70,12 @@ a:hover {
 
 .title.square.small, .decision.square.small, .help.square.small {
   display: inline-block;
-  font-size: 13px;
-  line-height: 16px;
+  font-size: 11px;
+  line-height: 13px;
   margin: 6px;
-  min-height: 75px;
+  min-height: 65px;
   padding: 7px 9px !important;
-  width: 71px;
+  width: 61px;
 }
 
 .help.icon.large,

@@ -3,50 +3,128 @@
 {% block head %}
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.home.css" />
+
+  <!--[if gte IE 9]>
+    <style type="text/css">
+      #white_gradient {
+         filter: none;
+      }
+    </style>
+  <![endif]-->
+
   <style>
-  /**, body {
-    text-align: left;
+
+  #spotlight {
+    height: 400px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
   }
-  h2 {
-    font-size: 36px;
-    line-height: 40px;
-    text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
-  }*/
-  button {
-    border: solid rgba(0, 0, 0, 0.4) 1px;
-    background: rgba(255, 255, 255, 0.6);
+
+  #spotlight a.feature:hover h1 {
+    color: #444;
+  }
+
+  #spotlight img {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+  }
+
+  #spotlight .title {
+    background-image: url("/static/img/home/triangles.png");
+    /*background-color: #888;*/
+    color: #444;
+    margin: 0;
+    padding: 10px 0;
+    position: absolute;
+    text-align: center;
+    top: 125px;
+    width: 100%;
+    z-index: 2;
+  }
+
+  #spotlight .title h1 {
+    margin: 10px 0;
+  }
+
+  #spotlight .title p {
+    display: inline-block;
     font-size: 16px;
-    font-weight: bold;
-    padding: 10px;
+    line-height: 20px;
+    margin: 0 0 10px;
+    width: 620px;
   }
-  button i {
-    margin: 0 0 0 5px;
-    vertical-align: bottom;
+
+  #white_gradient {
+    bottom: 0;
+    height: 150px;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C */
+
   }
-  .search {
-    margin: 70px 50px 100px;
+
+  #home_search {
+    display: inline-block;
+    margin: 180px 0 80px;
     position: relative;
     text-align: center;
+    z-index: 10;
   }
-  .search input {
+
+  #home_search i {
+    background-color: #ccc;
+    color: white;
+    font-size: 24px;
+    padding: 10px;
+  }
+
+  #home_search input {
     background-color: white;
-    border: solid rgba(0, 0, 0, 0.4) 1px;
+    border: solid #ccc 1px;
     box-sizing: border-box;
     /*display: block;*/
     font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
     font-size: 18px;
     margin-bottom: 10px;
     outline: none;
-    opacity: 0.75;
+    opacity: 1;
     padding: 10px;
     -webkit-transition: border-color .1s, color .1s, opacity .1s;
     transition: border-color .1s, color .1s, opacity .1s;
-    width: 826px;
+    width: 400px;
   }
+
+  #quick_links {
+    margin: 30px auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  #quick_links span {
+    color: #af1f24;
+    display: inline-block;
+    margin: 28px 10px 0 10px;
+  }
+
   .carousel {
     margin: 0px 50px 10px;
     position: relative;
-    width: 800px;
   }
   .carousel > .prev, .carousel > .next {
     color: #888;
@@ -85,7 +163,7 @@
     -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
             box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
     height: 120px;
-    opacity: 0.7;
+    opacity: 0.9;
     margin: 5px;
     position: relative;
     width: 120px;
@@ -136,55 +214,75 @@
       <br>
     {% trans %}through more than 100 million interactive visualizations.{% endtrans %}
   </div> -->
-  <div class="search">
+  <div id="spotlight">
 
-    <div class="darkbox"><h1>What are you looking for?</h1></div>
-    <input class="searchFld" type="text" placeholder="Minas Gerais, Iron ore, Leather tanning, Computer Science etc." autofocus />
-    <div class="searchResult">search results</div>
-
-  </div>
-
-  <a href="#" class="decision square small icon bra" data-type="bra">Brazilian Locations</a>
-  <a href="#" class="decision square small icon hs" data-type="hs">Products</a>
-  <a href="#" class="decision square small icon wld" data-type="wld">Trade Partners</a>
-  <a href="#" class="decision square small icon cnae" data-type="cnae">Industries</a>
-  <a href="#" class="decision square small icon cbo" data-type="cbo">Occupations</a>
-  <a href="#" class="decision square small icon university" data-type="university">
-    <div class="new">{% trans %}New{% endtrans %}</div>Universities</a>
-  <a href="#" class="decision square small icon course_hedu" data-type="course_hedu">
-    <div class="new">{% trans %}New{% endtrans %}</div>Higher Education Courses</a>
-  <a href="#" class="decision square small icon course_sc" data-type="course_sc">
-    <div class="new">{% trans %}New{% endtrans %}</div>Vocational Courses</a>
-
-  <div class="lightbox">
-
-    {% for carousel in carousels %}
-
-      <div class="carousel">
-
-        <div class="darkbox"><h1>{{ carousel.title }}</h1></div>
-        <a class="prev"><i class="fa fa-angle-left"></i></a>
-        <a class="next"><i class="fa fa-angle-right"></i></a>
-
-        <div class="scroller">
-          <ul class="set" id="test" data-parameters="{{ carousel.url }}">
-            {% for poster in carousel.posters %}
-              <li>
-                <a class="poster" href="{{ poster.url() }}">
-                  <div class="poster" style="background-color:{{ poster.color }};">
-                    <img src="{{ poster.icon() }}"/>
-                  </div>
-                  <div class="title">{{ poster.name() }}</div>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
+    <a href="/profiles/bra/4mg/" class="feature">
+      <div class="title">
+        <h1>What is the monthly trade balance for Minas Gerais?</h1>
+        <p>Click here to see information about Minas Gerais, including trade, industrial activity, and education, or use the search box and see what you can discover!</p>
       </div>
+      <img src="/static/img/home/balance-4mg.png">
+    </a>
 
-    {% endfor %}
+    <div id="white_gradient"></div>
 
   </div>
+
+  <div id="home_search">
+    <i class="fa fa-search"></i><input class="searchFld" type="text" placeholder="Minas Gerais" autofocus />
+    <div class="searchResult">search results</div>
+  </div>
+
+  <div id="quick_links">
+    <span>{% trans %}Quick<br>Links{% endtrans %}</span>
+    <a href="#" class="decision square small icon bra" data-type="bra">
+      {% trans %}Brazilian Locations{% endtrans %}</a>
+    <a href="#" class="decision square small icon hs" data-type="hs">
+      {% trans %}Products{% endtrans %}</a>
+    <a href="#" class="decision square small icon wld" data-type="wld">
+      {% trans %}Trade Partners{% endtrans %}</a>
+    <a href="#" class="decision square small icon cnae" data-type="cnae">
+      {% trans %}Industries{% endtrans %}</a>
+    <a href="#" class="decision square small icon cbo" data-type="cbo">
+      {% trans %}Occupations{% endtrans %}</a>
+    <a href="#" class="decision square small icon university" data-type="university">
+      <div class="new">{% trans %}New{% endtrans %}</div>
+      {% trans %}Universities{% endtrans %}</a>
+    <a href="#" class="decision square small icon course_hedu" data-type="course_hedu">
+      <div class="new">{% trans %}New{% endtrans %}</div>
+      {% trans %}Higher Education Courses{% endtrans %}</a>
+    <a href="#" class="decision square small icon course_sc" data-type="course_sc">
+      <div class="new">{% trans %}New{% endtrans %}</div>
+      {% trans %}Vocational Courses{% endtrans %}</a>
+  </div>
+
+  {% for carousel in carousels %}
+
+    <hr>
+
+    <div class="carousel">
+
+      <div class="darkbox"><h1>{{ carousel.title }}</h1></div>
+      <a class="prev"><i class="fa fa-angle-left"></i></a>
+      <a class="next"><i class="fa fa-angle-right"></i></a>
+
+      <div class="scroller">
+        <ul class="set" id="test" data-parameters="{{ carousel.url }}">
+          {% for poster in carousel.posters %}
+            <li>
+              <a class="poster" href="{{ poster.url() }}">
+                <div class="poster" style="background-color:{{ poster.color }};">
+                  <img src="{{ poster.icon() }}"/>
+                </div>
+                <div class="title">{{ poster.name() }}</div>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+  {% endfor %}
 
 {% endblock %}
 
