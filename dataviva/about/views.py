@@ -85,7 +85,7 @@ def apps(app):
     return render_template("about/apps/index.html", app=app, page = "apps")
 
 @mod.route('/classification/<attr>/<depth>/')
-def attrs(attr="bra",depth="2"):
+def attrs(attr="bra",depth="3"):
 
     data_url = "/attrs/table/{0}/{1}/".format(attr,depth)
 

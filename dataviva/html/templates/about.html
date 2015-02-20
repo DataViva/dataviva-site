@@ -36,13 +36,13 @@
 
     {% endif %}
 
-    <a class="{% if page == 'attrs' %}decision{% else %}help{% endif %}" href="{{ url_for('about.attrs', attr='bra', depth='2') }}">
+    <a class="{% if page == 'attrs' %}decision{% else %}help{% endif %}" href="{{ url_for('about.attrs', attr='bra', depth='3') }}">
       {% trans %}Classifications{% endtrans %}
     </a>
 
     {% if page == 'attrs' %}
 
-      <a class="{% if attr == 'bra' %}decision{% else %}help{% endif %} short icon bra" href="{{ url_for('about.attrs', attr='bra', depth='2')}}">
+      <a class="{% if attr == 'bra' %}decision{% else %}help{% endif %} short icon bra" href="{{ url_for('about.attrs', attr='bra', depth='3')}}">
         {% trans %}Brazilian Locations{% endtrans %}
       </a>
 
