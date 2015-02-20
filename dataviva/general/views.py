@@ -174,7 +174,7 @@ def home():
         "url" : carousel_base.format(metric, show, profile, limit)
     })
 
-    return render_template("home.html", carousels = carousels)
+    return render_template("general/home.html", carousels = carousels)
 
 @mod.route('close/')
 def close():
