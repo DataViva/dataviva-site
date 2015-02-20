@@ -411,28 +411,18 @@
   }
 
   var last_w = 320, last_h = 320
-  function iframe_size(w,h) {
-    if (!w) w = last_w
-    if (!h) h = last_h
-    w += dataviva.scrollbar()
-    last_w = w
-    last_h = h
+  function table_size() {
 
     d3.select(".data_table")
-      .style("width",function(){
-        var allowed =  window.innerWidth - 380
-        return w < allowed ? w+"px" : allowed+"px"
-      })
-      .style("height",function(){
-        var allowed =  window.innerHeight - 159
-        return h < allowed ? h+"px" : allowed+"px"
-      })
+      .style("width", window.innerWidth - 380 + "px")
+      .style("height", window.innerHeight - 157 + "px")
 
   }
 
+  table_size()
   update_table()
 
-  dataviva.resize = iframe_size
+  dataviva.resize = table_size
 
 </script>
 {% endblock %}

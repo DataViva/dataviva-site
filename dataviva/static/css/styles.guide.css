@@ -2,11 +2,6 @@ body.plan::-webkit-scrollbar {
   display: none;
 }
 
-body.plan #inner_container {
-  display: block;
-  vertical-align: top;
-}
-
 body.plan #container {
   padding: 98px 0px 49px 0px;
   text-align: left;

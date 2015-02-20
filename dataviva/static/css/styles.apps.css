@@ -8,7 +8,6 @@ body {
   width: 100%;
 }
 
-
 #builder #app_title {
   text-align: left;
   font-weight: bold;
@@ -43,15 +42,15 @@ div#builder {
   top: 0px;
 }
 
-div#settings { 
-  position: absolute; 
+div#settings {
+  position: absolute;
   right: 10px;
   top: 5px;
   z-index: 50;
 }
 
-div#toggles { 
-  position: absolute; 
+div#toggles {
+  position: absolute;
   left: 5px;
   top: 0px;
   z-index: 50;

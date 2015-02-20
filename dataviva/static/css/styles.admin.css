@@ -1,8 +1,3 @@
-body.admin #inner_container {
-  display: block;
-  vertical-align: top;
-}
-
 #admin_nav {
   left: 50%;
   margin-left: -478px;

@@ -1,16 +1,16 @@
-body.about #inner_container {
-  display: block;
-  vertical-align: top;
-}
-
 #about_nav {
-  display: inline-block;
-  margin-right: 20px;
-  width: 200px;
+  position: fixed;
+  left: 20px;
+  top: 88px;
+  width: 250px;
 }
 
-#about_nav > a {
-  margin: 0px 0px 6px 0px !important;
+#nav_footer {
+  margin: 0 30px 10px 290px;
+}
+
+#about_nav > a.short {
+  margin: 5px 15px !important;
 }
 
 #about_nav > a.decision::after {
@@ -27,12 +27,9 @@ body.about #inner_container {
 }
 
 #about_content > .lightbox {
-  min-height: 180px;
+  margin: 10px 30px 30px 290px;
   padding: 20px 20px 16px 20px;
   position: relative;
-  -webkit-transition: height 1s;
-          transition: height 1s;
-  width: 526px;
 }
 
 img {
@@ -93,7 +90,7 @@ div#controls {
   position: absolute;
   text-align: center;
   top: 0px;
-  width: 535px;
+  width: 100%;
   z-index: 2;
 }
 
@@ -103,15 +100,16 @@ div#controls > div {
 
 div#iframe {
   position: relative;
-  margin: 28px 0px -10px -20px;
-  width: 566px;
+  /*margin: 28px 0px -10px -20px;*/
+  /*width: 566px;*/
   z-index: 1;
 }
 
 iframe.attrs {
   border-top: 1px solid #ccc;
-  min-height: 181px;
-  width: 566px;
+  margin-top: 50px;
+  /*min-height: 181px;*/
+  /*width: 566px;*/
 }
 
 iframe.youtube {
@@ -121,6 +119,10 @@ iframe.youtube {
 /****************/
 /* Ask Specific */
 /****************/
+
+#question_list {
+  display: block;
+}
 
 div#ask_type_toggle_form {
   margin: 18px 10px 10px;

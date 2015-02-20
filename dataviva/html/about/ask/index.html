@@ -7,7 +7,7 @@
   <p>{% trans %}The DataViva is a visualization tool that provides official data on exports, economic activities, locations and occupations throughout Brazil, in eight applications and over 100 million views. {% endtrans %}</p>
 
   <p>{% trans %}Through its views, the DataViva provides valuable for promoting exports to investment decisions and policymaking information. Moreover, by providing facts about economic development, localities and their respective opportunities, DataViva helps create a solid basis for dialogue between the public and the private sector, supported by empirical data.{% endtrans %}</p>
-  
+
   <p>{% trans %}To contact the Dataviva team please send a email to contato@dataviva.info{% endtrans %}</p>
 
   <div style="display:none;opacity:0;">
@@ -18,20 +18,20 @@
 
 
 
-  </div><br><br>
-  
-  <div class="lightbox">
+  </div>
+
+  <div id="question_list" class="lightbox">
 
 	  <div id="search_div">
 	    <h1>{% trans %}What do you want to know?{% endtrans %}</h1>
 	    {{ search_form.search(size=60, id='ask_search', placeholder=_("Search")) }}
 	    <div id="sabrina_head"></div>
 	  </div>
-	
+
 	  <a {% if g.user.is_authenticated() %}href="/about/ask/"{%else%}onclick="login()"{%endif%} class="decision icon short questions">
 	    {% trans %}Can´t find an answer?{% endtrans %} {% trans %}Send your question to us here!{% endtrans %}
 	  </a>
-	
+
 	<br><br>
 
   <div id="list_title">

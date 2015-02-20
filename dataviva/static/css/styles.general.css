@@ -38,26 +38,11 @@ hr {
           transition: background-image 1s;
 }
 
-#outer_container {
-  display: table;
-  height: 100%;
-  left: 0px;
-  position: absolute;
-  top: 0px;
-  width: 100%;
-}
-
-#inner_container {
-  display: table-cell;
-  vertical-align: middle;
-}
-
 #container {
   display: block;
-  margin: 0px auto;
-  padding: 90px 0px 66px 0px;
+  margin: 0 auto;
+  padding: 90px 0 20px 0;
   text-align: center;
-  max-width: 980px;
   width:100%;
 }
 
@@ -123,7 +108,7 @@ div#error_code {
 
 
 div#extra_error {
-	font-size:20px; 
+	font-size:20px;
 	margin-top:20px;
 }
 
@@ -305,7 +290,7 @@ div.popover {
 .survey-block a:hover {
 	color: #fff;
 	background-color:#cc1f20;
-	
+
 }
 
 .survey-block {

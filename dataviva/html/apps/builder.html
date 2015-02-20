@@ -5,9 +5,16 @@
 
   <style>
 
-    body.builder #container {
-      padding: 90px 20px 68px 20px;
-      max-width:100%;
+    #container {
+      padding: 68px 0 0 0;
+    }
+
+    #nav_footer {
+      margin: 0 auto;
+    }
+
+    .builder_embed {
+      margin: 20px;
     }
 
   </style>
@@ -18,7 +25,7 @@
 
 {% block body %}
 
-  <div class="lightbox">
+  <div class="lightbox builder_embed">
     <iframe id="bulder_iframe" width="600px" height="400px"></iframe>
   </div>
 
@@ -28,23 +35,16 @@
 
   <script>
 
-    var width = window.innerWidth-50,
-        height = window.innerHeight-177
-
-    if (height < 500) height = 500
-
     d3.select("iframe")
       .attr("src",window.location.href.replace("builder","embed"))
 
     dataviva.resize = function() {
 
-      var width = window.innerWidth-50,
-          height = window.innerHeight-177
+      var width = window.innerWidth-40-d3plus.client.scrollbar(),
+          height = window.innerHeight-157;
 
-      if (height < 500) height = 500
+      if (height < 500) height = 500;
 
-      d3.select("#container")
-        .style("width",width+"px")
       d3.select("iframe")
         .attr("height",height+"px")
         .attr("width",width+"px")

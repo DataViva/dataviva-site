@@ -64,9 +64,7 @@
         </select>
       </div>
     </div>
-    <div id="iframe">
-      <iframe src="/rankings/table/{{year}}/{{type}}/{{depth}}/?order={{order}}" width="100%"></iframe>
-    </div>
+    <iframe src="/rankings/table/{{year}}/{{type}}/{{depth}}/?order={{order}}" width="100%"></iframe>
   </div>
 
 {% endblock %}
@@ -121,37 +119,19 @@
       dataviva.url("/rankings/"+url)
     }
 
-    var last_w = 500, last_h = 200-49
-
-    function iframe_size(w,h) {
-      if (!w) w = last_w
-      if (!h) h = last_h
-      last_w = w
-      last_h = h
-      var container_height = d3.select("#outer_container").node().offsetHeight
+    function table_size() {
+      var w = window.innerWidth - 330 - d3plus.client.scrollbar() + "px";
+      var h = window.innerHeight - 179;
       d3.select("#rankings_table")
-        .style("height",function(){
-          var allowed = container_height - 169
-          return h < allowed ? h+49+"px" : allowed+"px"
-        })
-        .style("width",function(){
-          var allowed = window.innerWidth - 320 - dataviva.scrollbar()
-          return w < allowed ? w+"px" : allowed+"px"
-        })
-      d3.select("#iframe")
-        .style("height",function(){
-          var allowed = container_height - 169 - 49
-          return h < allowed ? h+"px" : allowed+"px"
-        })
+        .style("width", w)
+        .style("height", h+"px")
       d3.select("iframe")
-        .attr("height",function(){
-          var allowed = container_height - 169 - 49
-          return h < allowed ? h+"px" : allowed+"px"
-        })
+        .attr("width", w)
+        .attr("height", h-50+"px")
     }
 
-    dataviva.resize = iframe_size
-
+    dataviva.resize = table_size
+    table_size()
     update_table()
 
   </script>

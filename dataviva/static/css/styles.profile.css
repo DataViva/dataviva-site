@@ -2,16 +2,15 @@ body.profiles::-webkit-scrollbar {
   display: none;
 }
 
-body.profiles #inner_container {
-  display: block;
-  vertical-align: top;
-}
-
 body.profiles #container {
-  padding: 68px 0px 49px 0px;
+  padding: 68px 0px 20px 0px;
   text-align: left;
   width: 100%;
   max-width:100%;
+}
+
+body.profiles #nav_footer {
+  margin: 0 20px 0 310px;
 }
 
 div#guide_controls {

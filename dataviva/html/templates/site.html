@@ -63,38 +63,31 @@
 
   <div id="fullscreen"></div>
 
-  <div id="outer_container">
-    <div id="inner_container">
-      <div id="container">
+  <div id="container">
 
-        {% for category, msg in get_flashed_messages(with_categories=true) %}
-        <div id="server_message">
-          <div class="decision flash-{{ category }}">
-            {{ msg|safe }}
-            <i id="close_message" class="fa fa-times-circle"></i>
-          </div>
-        </div>
-        {% endfor %}
-
-        {% block body %}
-        {% endblock %}
-
+    {% for category, msg in get_flashed_messages(with_categories=true) %}
+    <div id="server_message">
+      <div class="decision flash-{{ category }}">
+        {{ msg|safe }}
+        <i id="close_message" class="fa fa-times-circle"></i>
       </div>
     </div>
-  </div>
+    {% endfor %}
 
-  <div id="nav_footer" class="lightbox">
+    {% block body %}
+    {% endblock %}
 
-    <a href="https://github.com/DataViva/dataviva-site/" class="logo github" target="_blank"></a>
+    <div id="nav_footer" class="lightbox">
 
-    <a href="http://www.fapemig.br/" class="logo fapemig" target="_blank"></a>
-    <a href="http://www.mg.gov.br/" class="logo governo" target="_blank"></a>
+      <a href="https://github.com/DataViva/dataviva-site/" class="logo github" target="_blank"></a>
 
-    <a href="http://macroconnections.media.mit.edu/" class="logo mc" target="_blank"></a>
-    <a href="http://www.datawheel.us/" class="logo datawheel" target="_blank"></a>
+      <a href="http://www.fapemig.br/" class="logo fapemig" target="_blank"></a>
+      <a href="http://www.mg.gov.br/" class="logo governo" target="_blank"></a>
 
+      <a href="http://macroconnections.media.mit.edu/" class="logo mc" target="_blank"></a>
+      <a href="http://www.datawheel.us/" class="logo datawheel" target="_blank"></a>
 
-
+    </div>
 
   </div>
 

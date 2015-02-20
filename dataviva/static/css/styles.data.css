@@ -1,13 +1,10 @@
-body.query #inner_container {
-  display: block;
-  vertical-align: top;
+#container {
+  padding: 68px 0 0 0;
+  text-align: left;
 }
 
-body.query #container {
-  padding: 68px 0px 49px 0px;
-  text-align: left;
-  width: 100%;
-  max-width:100%;
+#nav_footer {
+  margin: 0 auto;
 }
 
 /***********************/
@@ -46,8 +43,6 @@ span.show {
   width: 320px;
   height: 320px;
   white-space: nowrap;
-  -webkit-transition: width 0.4s, height 0.4s;
-          transition: width 0.4s, height 0.4s;
 }
 
 #table_container {
