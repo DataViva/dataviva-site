@@ -26,7 +26,6 @@ dataviva.format = {};
 dataviva.format.text = function(text,name,vars) {
 
   if (typeof name !== "string") name = "";
-  if (text === "year" && app.monthly) text = "month";
 
   var l = dataviva.language;
 
@@ -460,7 +459,7 @@ dataviva.cleanData = function(data, dataset, output) {
     }
 
     if (temp.month) {
-      temp.year = new Date(temp.month+"/1/"+temp.year);
+      temp.month = new Date(temp.month+"/1/"+temp.year);
     }
 
     zerofills[dataset].forEach(function(z){

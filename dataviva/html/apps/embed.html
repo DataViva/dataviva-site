@@ -624,7 +624,6 @@
     app.viz = d3plus.viz()
       .container("#app")
       .aggs(averages)
-      .time("year")
       .time({"solo": {"callback": app.title_update}})
       .legend({"size": [25,25]})
       .format({
@@ -1200,7 +1199,7 @@
       }
 
       if (app.monthly) {
-        app.tooltip.short[""] = ["year"]
+        app.tooltip.short[""] = ["month"]
       }
       else {
         app.tooltip.short[""] = []
@@ -1245,6 +1244,7 @@
         .tooltip(app.tooltip)
         .zoom(app.build.output_attr !== "balance")
         .legend(app.build.output_attr !== "university")
+        .time(app.monthly ? "month" : "year")
         .time({"solo": time2range(app.vars.year.split("_"))})
 
       // app.viz.type(app.build.app.d3plus)
@@ -1445,7 +1445,7 @@
         app.viz
           .x({
             "scale": "linear",
-            "value": "year"
+            "value": app.monthly ? "month" : "year"
           })
           .y({
             "scale": layout,
@@ -1542,7 +1542,7 @@
       else if (app.build.app.type === "line") {
 
         app.viz
-        .x("year")
+        .x(app.monthly ? "month" : "year")
         .y({
           "scale": app.vars.scale,
           "value": app.vars.y
