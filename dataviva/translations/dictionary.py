@@ -245,6 +245,7 @@ def dictionary():
 
         # RAIS Labels
         "rais": gettext("Establishments and Employment (RAIS)"),
+        "rais_footer": gettext("Data provided by RAIS"),
         "num_emp": gettext("Total Employees"),
         "num_est": gettext("Total Establishments"),
         "num_emp_est": gettext("Employees per Establishment"),
@@ -255,6 +256,7 @@ def dictionary():
 
         # SECEX Labels
         "secex": gettext("International Trade (SECEX)"),
+        "secex_footer": gettext("Data provided by SECEX"),
         "val_usd": gettext("Trade Value"),
         "export_val": gettext("Exports"),
         "total_export_val": gettext("Total Exports"),
@@ -271,17 +273,20 @@ def dictionary():
 
         # HEDU Labels
         "hedu": gettext("Higher Education"),
+        "hedu_footer": gettext("Data provided by INEP/MEC"),
         "enrolled": gettext("Enrolled"),
         "school_type": gettext("Funding"),
 
         # SC Labels
         "sc": gettext("School Census"),
+        "sc_footer": gettext("Data provided by INEP/MEC"),
         "classes": gettext("Classes"),
         "enrolled_classes": gettext("Average Class Size"),
         "age": gettext("Average Age"),
 
         # EI Labels
         "ei": gettext("Electronic Invoices (EI)"),
+        "ei_footer": gettext("Data provided by SEF/MG"),
         "purchase_value": gettext("Purchase Value"),
         "transfer_value": gettext("Transfer Value"),
 
@@ -368,6 +373,7 @@ def dictionary():
         "social_media": gettext("Social Networks"),
         "secex_3": gettext("Based on State Production"),
         "secex_9": gettext("Based on the Exporting Municipality"),
+        "embed_footer": gettext("View more visualizations on the full DataViva.info website."),
 
         # D3plus Text
         "Click for More Info": gettext("Click for more data and related apps."),

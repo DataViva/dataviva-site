@@ -192,11 +192,6 @@
       d3.select("#full_screen").remove();
     }
 
-    var footer = {
-      "secex": dataviva.format.text("Data Provided by") + " SECEX",
-      "rais": dataviva.format.text("Data Provided by") + " RAIS"
-    }
-
     /*******************************/
     /* App Functions and Variables */
     /*******************************/
@@ -214,9 +209,6 @@
     app.solos = []
     app.filters = []
     app.first_load = false
-
-    app.embed_footer = "<a href='http://www.dataviva.info' target='_blank'>"
-    app.embed_footer += dataviva.format.text("View more visualizations on the full DataViva.info website.") + "</a>"
 
     if (app.vars.builder == "false") {
       app.vars.controls = "false"
@@ -1283,10 +1275,12 @@
           (window.parent.location.href.indexOf("dataviva.info") >= 0 ||
           window.parent.location.href.indexOf("localhost") >= 0 ||
           window.parent.location.href.indexOf("datawheel.us") >= 0)) {
-        app.viz.footer(footer[app.build.dataset])
+        app.viz.footer(dataviva.dictionary[app.build.dataset+"_footer"]);
       }
       else {
-        app.viz.footer(app.embed_footer)
+        var f = "<a href='http://www.dataviva.info' target='_blank'>";
+        f += dataviva.dictionary.embed_footer + "</a>";
+        app.viz.footer(f);
       }
 
       app.viz.labels({"align": "center", "valign": "middle"})
