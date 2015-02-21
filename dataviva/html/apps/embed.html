@@ -198,17 +198,17 @@
 
     var last_app = null;
     window.app = {};
-    app.build = null
-    app.url = "{{ current_build.url() }}"
-    app.data = {}
-    app.ecis = {}
-    app.networks = {}
-    app.coords = {}
-    app.attrs = {}
-    app.vars = {{ global_vars|safe }}
-    app.solos = []
-    app.filters = []
-    app.first_load = false
+    app.build = null;
+    app.url = "{{ current_build.url() }}";
+    app.data = {};
+    app.ecis = {};
+    app.networks = {};
+    app.coords = {};
+    app.attrs = {};
+    app.vars = {{ global_vars|safe }};
+    app.solos = [];
+    app.filters = [];
+    app.first_load = false;
 
     if (app.vars.builder == "false") {
       app.vars.controls = "false"
@@ -247,6 +247,20 @@
       "course_hedu": 4,
       "school": 3,
       "course_sc": 4
+    }
+
+    var cleanAttrs = function(d, o) {
+      app.attrs[o] = d.data.reduce(function(obj, a){
+        a[o+"_id"] = a.id;
+        a[o+"_display"] = dataviva.displayID(a.id,o);
+        a.icon = dataviva.icon(a.id,o);
+        if (a["export_val"]) delete a["export_val"];
+        if (a["import_val"]) delete a["import_val"];
+        if (a["enrolled"]) delete a["enrolled"];
+        if (a["num_emp"]) delete a["num_emp"];
+        obj[a.id] = a;
+        return obj;
+      }, {});
     }
 
     var createRecs = function(html, arr) {
@@ -838,32 +852,9 @@
                 d3.json(u)
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
-                    var out = app.build.output_attr
-                    app.attrs[out] = {}
-                    d.data.forEach(function(a){
-                      a[out+"_id"] = a.id
-                      a[out+"_display"] = dataviva.displayID(a.id,out)
-                      a.icon = dataviva.icon(a.id,out)
-                      app.attrs[out][a.id] = a
-                      if (a["export_val"]) delete a["export_val"]
-                      if (a["import_val"]) delete a["import_val"]
-                      if (a["enrolled"]) delete a["enrolled"]
-                      if (a["num_emp"]) delete a["num_emp"]
-                    })
-
-                    // for (id in app.attrs[app.build.output_attr]) {
-                    //   var obj = app.attrs[app.build.output_attr][id]
-                    //   depths[out].forEach(function(d){
-                    //     if (d <= obj.id.length && depths[out].indexOf(obj.id.length) >= 0) {
-                    //       obj[out+"_"+d] = obj[out+"_id"].slice(0, d);
-                    //       // var id = obj[out+"_id"].slice(0, d);
-                    //       // obj[out+"_"+d] = {"name":app.attrs[app.build.output_attr][id].name};
-                    //       // obj[out+"_"+d][out+"_id"] = id;
-                    //     }
-                    //   })
-                    // }
-
-                    callback(error,d)
+                    localforage.setItem(u, d);
+                    cleanAttrs(d, app.build.output_attr);
+                    callback(error,d);
                   })
               },"/attrs/"+app.build.output_attr+"/"+"?lang="+dataviva.language)
             }
@@ -2660,9 +2651,23 @@
     /************************/
     /* Initialize First App */
     /************************/
-   app.start()
+    var attrs = d3.keys(depths);
+    function load_attr() {
+      if (attrs.length) {
+        var a = attrs.pop();
+        var url = "/attrs/"+a+"/?lang="+dataviva.language;
+        localforage.getItem(url,function(error, data){
+          if (data) cleanAttrs(data, a);
+          load_attr();
+        });
+      }
+      else {
+        app.start();
+      }
+    }
+    load_attr();
 
-   if (Modernizr.history) {
+    if (Modernizr.history) {
      window.onpopstate = function() {
        if (app.first_load) {
          var u = window.location.href.split("/embed/")[1].split("/?")[0]
@@ -2670,7 +2675,7 @@
          if (u != app.url) app.start(u)
        }
      }
-   }
+    }
 
   </script>
 

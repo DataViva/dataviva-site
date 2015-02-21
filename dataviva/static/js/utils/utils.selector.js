@@ -897,12 +897,22 @@ function Selector() {
         create_elements()
       }
       else {
-        d3.json("/"+"attrs/"+type+"/?lang="+dataviva.language)
-          .header("X-Requested-With", "XMLHttpRequest")
-          .get(function(error,attrs) {
-            data = attrs.data
-            clean_data()
-          })
+        var attr_url = "/attrs/"+type+"/?lang="+dataviva.language;
+        localforage.getItem(attr_url, function(error, attrs){
+          if (attrs)  {
+            data = attrs.data;
+            clean_data();
+          }
+          else {
+            d3.json(attr_url)
+              .header("X-Requested-With", "XMLHttpRequest")
+              .get(function(error, attrs) {
+                localforage.setItem(attr_url, attrs);
+                data = attrs.data;
+                clean_data();
+              })
+          }
+        })
       }
 
     })
