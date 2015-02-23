@@ -272,7 +272,7 @@
 	      .send("GET", '', function(error, text) {
 
           var litems = ""
-            , type_curr = "", $ct_bra = 1, $ct_cbo = 1, $ct_cnae = 1, $ct_hs = 1, $ct_wld = 1;
+            , type_curr = "", $ct_bra = 1, $ct_cbo = 1, $ct_cnae = 1, $ct_hs = 1, $ct_wld = 1, $ct_course_hedu = 1, $ct_course_sc = 1;
 
 
           if (!error) {
@@ -369,6 +369,42 @@
 				            item.bg = "transparent"
 				        }
 				        $ct_wld++;
+				    } else {
+				        exclude = true
+				    }
+				}
+        
+				if (item.content_type === "course_hedu") {
+				    if ($ct_course_hedu < 6) {
+			        if (item.id.length == 2) {
+			            type = "course_hedu_2"
+			            icon = item.id
+  				        $ct_course_hedu++;
+			        } else if (item.id.length == 6) {
+			            type = "course_hedu_6"
+			            icon = item.id.substr(0, 2)
+  				        $ct_course_hedu++;
+			        } else {
+			            exclude = true
+			        }
+				    } else {
+				        exclude = true
+				    }
+				}
+        
+				if (item.content_type === "course_sc") {
+				    if ($ct_course_sc < 6) {
+			        if (item.id.length == 2) {
+			            type = "course_sc_2"
+			            icon = item.id
+  				        $ct_course_sc++;
+			        } else if (item.id.length == 5) {
+			            type = "course_sc_5"
+			            icon = item.id.substr(0, 2)
+  				        $ct_course_sc++;
+			        } else {
+			            exclude = true
+			        }
 				    } else {
 				        exclude = true
 				    }
