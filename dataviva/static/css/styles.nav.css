@@ -49,11 +49,12 @@
 #header > a.link {
   background-position: top center;
   background-repeat: no-repeat;
-  background-size: 35px 35px;
+  background-size: 35px;
   color: black;
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 600;
   margin: -4px 0px 0px 18px;
-  opacity: 0.25;
+  opacity: 0.4;
   padding-left: 1px;
   padding-top: 34px;
   text-align: center;
