@@ -744,9 +744,9 @@
 
             app.star(data.starred);
 
-            if (app.build && app.build.app.type != data.current_build.app.type) {
-              builder.app(data.current_build.app.type,true)
-            }
+            // if (app.build && app.build.app.type != data.current_build.app.type) {
+            //   builder.app(data.current_build.app.type,true)
+            // }
 
             // Set public current build variable
             app.build = data.current_build;
@@ -2276,46 +2276,46 @@
 
     }
 
-    builder.app = function(app_name,static) {
-
-      document.getElementById("app_select").value = app_name
-
-      var options = d3.select("#output_"+app_name).selectAll(".output")
-
-      if (options[0].length > 1) {
-        d3.select("#output").style("display","inline-block")
-      }
-      else {
-        d3.select("#output").style("display","none")
-      }
-
-      if (!static) {
-
-        var match = null, backup = null, backup2 = null
-
-        options
-          .each(function(d){
-            var a = app.url.split("/")
-            var s = this.id.split("/")
-            if (!backup && s[s.length-2] == a[a.length-2] && s[1] == a[1]) backup = this.id
-            if (!backup2 && s[1] == a[1]) backup2 = this.id
-            a.shift()
-            a = a.join("/")
-            s.shift()
-            s = s.join("/")
-            if (a == s) match = this.id
-          })
-
-        if (match === null) {
-          if (backup) match = backup
-          else if (backup2) match = backup2
-          else match = options[0][0].id
-        }
-
-        app.start(match)
-      }
-
-    }
+    // builder.app = function(app_name,static) {
+    //
+    //   document.getElementById("app_select").value = app_name
+    //
+    //   var options = d3.select("#output_"+app_name).selectAll(".output")
+    //
+    //   if (options[0].length > 1) {
+    //     d3.select("#output").style("display","inline-block")
+    //   }
+    //   else {
+    //     d3.select("#output").style("display","none")
+    //   }
+    //
+    //   if (!static) {
+    //
+    //     var match = null, backup = null, backup2 = null
+    //
+    //     options
+    //       .each(function(d){
+    //         var a = app.url.split("/")
+    //         var s = this.id.split("/")
+    //         if (!backup && s[s.length-2] == a[a.length-2] && s[1] == a[1]) backup = this.id
+    //         if (!backup2 && s[1] == a[1]) backup2 = this.id
+    //         a.shift()
+    //         a = a.join("/")
+    //         s.shift()
+    //         s = s.join("/")
+    //         if (a == s) match = this.id
+    //       })
+    //
+    //     if (match === null) {
+    //       if (backup) match = backup
+    //       else if (backup2) match = backup2
+    //       else match = options[0][0].id
+    //     }
+    //
+    //     app.start(match)
+    //   }
+    //
+    // }
 
     builder.url = function() {
 
