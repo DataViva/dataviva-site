@@ -49,6 +49,8 @@ class Build(db.Model, AutoSerialize):
     title_pt = db.Column(db.String(120))
     slug_en = db.Column(db.String(60))
     slug_pt = db.Column(db.String(60))
+    slug2_en = db.Column(db.String(80))
+    slug2_pt = db.Column(db.String(80))
     app_id = db.Column(db.Integer, db.ForeignKey(App.id))
 
     ui = db.relationship('UI', secondary=build_ui,
@@ -180,20 +182,45 @@ class Build(db.Model, AutoSerialize):
     '''Returns the URL for the specific build.'''
     def url(self, **kwargs):
 
-        if isinstance(self.bra,(list,tuple)):
-            bras = []
-            for b in self.bra:
-                if b.id != "all" and b.distance > 0:
-                    bras.append(b.id+"."+b.distance)
-                else:
-                    bras.append(b.id)
-            bra_id = "_".join(bras)
+        fill = kwargs.get("fill", True)
+
+        if fill:
+            if isinstance(self.bra,(list,tuple)):
+                bras = []
+                for b in self.bra:
+                    if b.id != "all" and b.distance > 0:
+                        bras.append(b.id+"."+b.distance)
+                    else:
+                        bras.append(b.id)
+                bra_id = "_".join(bras)
+            else:
+                bra_id = "<bra>"
+            f1 = self.filter1
+            f2 = self.filter2
         else:
             bra_id = "<bra>"
 
-        url = '{0}/{1}/{2}/{3}/{4}/{5}/'.format(self.app.type,
-                self.dataset, bra_id, self.filter1, self.filter2, self.output)
-        return url
+            f1 = self.filter1
+            if f1 != "all":
+                if self.dataset == "rais":
+                    f1 = "<cnae>"
+                elif self.dataset == "secex":
+                    f1 = "<hs>"
+                elif self.dataset == "hedu":
+                    f1 = "<university>"
+
+            f2 = self.filter2
+            if f2 != "all":
+                if self.dataset == "rais":
+                    f2 = "<cbo>"
+                elif self.dataset == "secex":
+                    f2 = "<wld>"
+                elif self.dataset == "hedu":
+                    f2 = "<course_hedu>"
+                elif self.dataset == "sc":
+                    f2 = "<course_sc>"
+
+        return "{0}/{1}/{2}/{3}/{4}/{5}/".format(self.app.type, self.dataset, bra_id, f1, f2, self.output)
 
     '''Returns the data URL for the specific build. This URL will return the
     data required for building a viz of this app.
@@ -285,6 +312,9 @@ class Build(db.Model, AutoSerialize):
 
     def format_text(self, title, kwargs):
 
+        if kwargs.get("dumb") == True:
+            return title
+
         lookup = dictionary()
 
         depth = kwargs.get("depth", None)
@@ -355,6 +385,9 @@ class Build(db.Model, AutoSerialize):
         slug = getattr(self, "slug_{}".format(g.locale))
         slug = self.format_text(slug, kwargs)
         return slug
+
+    def slug2(self):
+        return getattr(self, "slug2_{}".format(g.locale))
 
 
     '''Returns the english language title of this build.'''
