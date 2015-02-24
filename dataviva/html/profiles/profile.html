@@ -42,15 +42,15 @@
             {{ stat.name }}
           </div>
           <div class="d3plus_tooltip_data_value">
-            {% if stat.name[:3] == "top" %}
-              <a href="/profiles/{{stat.name[4:]}}/{{stat.id}}/">
+            {% if stat.url %}
+              <a href="{{ stat.url }}">
             {% endif %}
               {# {{ format(stat.value).render(stat.name,g.locale) }} #}
               {{ stat.value }}
-              {% if stat.percent and stat.percent > 0 %}({{ format(stat.percent).render("share",g.locale) }}%){% endif %}
-            {% if stat.name[:3] == "top" %}
+            {% if stat.url %}
               </a>
             {% endif %}
+            {% if stat.percent and stat.percent > 0 %}({{ format(stat.percent).render("share",g.locale) }}%){% endif %}
           </div>
         </div>
         {% if loop.last == False and stat.group == item.stats()[loop.index].group %}

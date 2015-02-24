@@ -211,6 +211,7 @@ class Stats(object):
                     "value": obj.name(), 
                     "percent": percent, 
                     "id": obj.id, 
+                    "url": obj.url(),
                     "group": "{} {} ({})".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())}
         else:
             return {"name": name, 
@@ -433,6 +434,9 @@ class University(db.Model, AutoSerialize, Stats, ExpandedAttr):
         lang = getattr(g, "locale", "en")
         return getattr(self, "school_type_" + lang)
 
+    def url(self):
+        return "/profiles/university/{}/".format(self.id)
+
     def __repr__(self):
         return '<University %r>' % (self.name_en)
 
@@ -463,6 +467,9 @@ class Wld(db.Model, AutoSerialize, Stats, BasicAttr):
             return "/static/img/icons/wld/wld_sabra.png"
         else:
             return "/static/img/icons/wld/wld_%s.png" % (self.id)
+
+    def url(self):
+        return "/profiles/wld/{}/".format(self.id)
 
     def __repr__(self):
         return '<Wld %r>' % (self.id_3char)
