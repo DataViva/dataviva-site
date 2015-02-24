@@ -128,10 +128,14 @@
     {% set dataset = None %}
     {% for b in builds %}
 
-      {% if dataset and dataset != b.dataset %}</div>{% endif %}
+      {% if app and app != b.app.type %}
+        </div></div>
+        {% set dataset = None %}
+      {% elif dataset and dataset != b.dataset %}
+        </div>
+      {% endif %}
 
       {% if app != b.app.type %}
-        {% if app != None %}</div>{% endif %}
         {% set app = b.app.type %}
         <div id="builds_{{ app }}" class="app_group">
       {% endif %}
@@ -189,7 +193,6 @@
         if (!heights[a]) heights[a] = {};
         heights[a][d] = h;
       });
-
 
     // Changes the open/active dataset accordion.
     function change_dataset(d) {
