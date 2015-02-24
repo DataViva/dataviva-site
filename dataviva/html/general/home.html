@@ -377,8 +377,7 @@
       next_x = current_x - row_size*poster_w ;
 
       max_left = (page_el.selectAll("li").size() * poster_w) * -1;
-
-      if (next_x >= max_left) {
+      if (next_x - (row_size*poster_w)  <= max_left) {
         loadMore(this.parentNode, page_el);
         d3.select(this.parentNode).select("a.next").classed("disabled", true);
       }
