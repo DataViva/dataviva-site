@@ -130,11 +130,20 @@ a:hover {
   position: absolute;
   right: 12px;
   text-decoration: inherit;
+  -webkit-transition: transform 0.1s;
+     -moz-transition: transform 0.1s;
+          transition: transform 0.1s;
 }
 
 .decision.square:after,
 .help.square:after {
   content: "";
+}
+
+.decision.active:after,
+.help.active:after {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 .help.short:after,
@@ -150,6 +159,12 @@ a:hover {
   -webkit-transition: opacity 0.1s, -webkit-box-shadow 0.1s;
      -moz-transition: opacity 0.1s, box-shadow 0.1s;
           transition: opacity 0.1s, box-shadow 0.1s;
+}
+
+.flat {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .decision {
@@ -169,6 +184,11 @@ a:hover {
 
 .help:hover {
   color: #888;
+}
+
+.flat:hover {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 body.general .decision,

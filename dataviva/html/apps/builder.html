@@ -13,8 +13,73 @@
       margin: 0 auto;
     }
 
+    #nav_sidebar {
+      left: 20px;
+      overflow-y: scroll;
+      padding: 0 10px;
+      position: absolute;
+      text-align: left;
+      top: 88px;
+      width: 250px;
+    }
+
+    #nav_sidebar h3 {
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    .accordion_list {
+      overflow: hidden;
+    }
+
     .builder_embed {
-      margin: 20px;
+      margin: 20px 20px 20px 310px;
+    }
+
+    .accordion_btn.active, .accordion_btn:hover {
+      color: #333;
+    }
+
+    .accordion_list {
+      -webkit-transition: height 0.3s;
+         -moz-transition: height 0.3s;
+              transition: height 0.3s;
+    }
+
+    .build_filter {
+      border: 1px solid #ccc;
+      color: #444;
+      font-size: 12px;
+      margin-bottom: 5px;
+      padding: 5px;
+      position: relative;
+      width: 110px;
+    }
+
+    .build_filter:hover {
+      cursor: pointer;
+    }
+
+    .attr_icon {
+      background-repeat: no-repeat;
+      background-size: 100%;
+      display: inline-block;
+      height: 14px;
+      margin-right: 5px;
+      padding: 0;
+      width: 14px;
+    }
+
+    .attr_name {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 85px;
+    }
+
+    #build_btn {
+      margin: 5px 0 !important;
     }
 
   </style>
@@ -25,40 +90,288 @@
 
 {% block body %}
 
+  <div id="nav_sidebar" class="lightbox">
+
+    <!-- <legend for="app_select">
+      {% trans %}Visualization{% endtrans %}
+    </legend> -->
+    <select id="app_select">
+      {% for app in apps -%}
+        <option value="{{app.type}}" data-icon="/static/img/icons/app/app_{{app.type}}.png" data-style="knockout" data-color="{{app.color}}"{% if app.type == build.app.type %} selected{% endif %}>
+          {{ app.name() }}
+        </option>
+      {%- endfor %}
+    </select>
+
+    {% for f in filters %}
+      {% set a = f[0] %}
+      {% if a == "bra_1" and build.bra[1] %}
+        {% set bra = build.bra[1] %}
+      {% elif build[a] %}
+        {% set attr = build[a][0] %}
+      {% else %}
+        {% set attr = None %}
+      {% endif %}
+      <div id="{{a}}" class="build_filter" onclick="filter_open(this.id)">
+        <div class="attr_icon"{% if attr %} style="background-image:url('{{ attr.icon() }}');background-color:{% if a == 'bra' or a == 'bra_1' or (a == 'wld' and attr.id|length == 5)%}{{transparent}}{% else %}{{ attr.color }}{% endif %};"{% endif %}></div>
+        <span class="attr_name">{% if attr %}{{ attr.name() }}{% endif %}</span>
+      </div>
+    {% endfor %}
+
+    <a id="build_btn" onclick="create_build()" class="decision short icon apps">
+      {% trans %}Build visualization{% endtrans %}
+    </a>
+
+    <h3>{% trans %}Visualizations{% endtrans %}</h3>
+
+    {% set app = None %}
+    {% set dataset = None %}
+    {% for b in builds %}
+
+      {% if dataset and dataset != b.dataset %}</div>{% endif %}
+
+      {% if app != b.app.type %}
+        {% if app != None %}</div>{% endif %}
+        {% set app = b.app.type %}
+        <div id="builds_{{ app }}" class="app_group">
+      {% endif %}
+
+      {% if dataset != b.dataset %}
+        {% set dataset = b.dataset %}
+        <div class="accordion_btn help flat short icon {{ dataset }}" data-btn="{{ dataset }}">{{ datatset_names[dataset] }}</div>
+        <div class="accordion_list" data-list="{{ dataset }}">
+      {% endif %}
+
+      <a id="build_{{ b.id }}" class="build_title decision short icon {{ b.app.type }}" data-url="{{ b.url(fill=False) }}" onclick="change_build(this.id)">{{ b.slug2() }}</a>
+
+      {% if loop.last %}</div></div>{% endif %}
+
+    {% endfor %}
+
+  </div>
+
   <div class="lightbox builder_embed">
-    <iframe id="bulder_iframe" width="600px" height="400px"></iframe>
+    <iframe id="bulder_iframe" src="{{ request.url|replace('builder', 'embed') }}"></iframe>
   </div>
 
 {% endblock %}
 
 {% block js %}
 
+  <script src="/static/js/utils/utils.selector.js"></script>
+
   <script>
 
-    d3.select("iframe")
-      .attr("src",window.location.href.replace("builder","embed"))
+    var app = "{{ app }}";
+    var heights = {};
+    var datasets = {};
+    var filters = {{ filters|safe }};
+    var distances = {};
+    var iframe = "{{ build.id }}";
+    var build = "{{ build.id }}";
+    datasets[app] = "{{ dataset }}";
 
-    dataviva.resize = function() {
+    var attrs = {
+      "secex": ["bra", "bra_1", "hs", "wld"],
+      "rais": ["bra", "bra_1", "cnae", "cbo"],
+      "ei": ["bra", "bra_1"],
+      "sc": ["bra", "bra_1", "school", "course_sc"],
+      "hedu": ["bra", "bra_1", "university", "course_hedu"],
+    };
 
-      var width = window.innerWidth-40-d3plus.client.scrollbar(),
-          height = window.innerHeight-157;
+    // Close each accordion list and detect heights.
+    d3.selectAll(".accordion_list")
+      .each(function(){
+        var a = this.parentNode.id.slice(7);
+        var d = d3.select(this).attr("data-list");
+        var h = d3.select(this).style("height");
+        d3.select(this).style("height","0px");
+        if (!heights[a]) heights[a] = {};
+        heights[a][d] = h;
+      });
 
-      if (height < 500) height = 500;
 
-      d3.select("iframe")
-        .attr("height",height+"px")
-        .attr("width",width+"px")
-
+    // Changes the open/active dataset accordion.
+    function change_dataset(d) {
+      d3.select("#builds_"+app).select("[data-btn="+datasets[app]+"]")
+        .classed("active", false);
+      d3.select("#builds_"+app).select("[data-list="+datasets[app]+"]")
+        .style("height", "0px");
+      datasets[app] = d;
+      d3.select("#builds_"+app).select("[data-btn="+d+"]")
+        .classed("active", true);
+      d3.select("#builds_"+app).select("[data-list="+d+"]")
+        .style("height", heights[app][d]);
+      change_build();
     }
 
-    dataviva.resize()
+    d3.selectAll(".accordion_btn").on("click",function(){
+      change_dataset(d3.select(this).attr("data-btn"));
+    });
 
+    // Changes the visualization type.
+    function change_app(a, form) {
+      d3.selectAll(".app_group").style("display", "none");
+      d3.select("#builds_"+a).style("display", "block");
+      var d = datasets[a];
+      if (!d) {
+        d = datasets[app];
+        var set = d3.select("#builds_"+a).select("[data-list="+d+"]");
+        if (set.empty()) {
+          d = datasets[a] ||
+              d3.select("#builds_"+a+" .accordion_list").attr("data-list");
+        }
+      }
+      app = a;
+      change_dataset(d);
+    }
+
+    d3plus.form()
+      .data("#app_select")
+      .focus(app, change_app)
+      .font({"size": 22})
+      .width(230)
+      .ui({"margin": 10})
+      .draw();
+
+    // Creates a selector window when a filter button is clicked.
+    var selector = Selector();
+    dataviva.popover.create({
+      "id": "popover",
+      "width": 600,
+      "height": "80%"
+    });
+    function filter_open(id, callback) {
+
+      if (!callback) callback = filter_select;
+
+      d3.select("#popover")
+        .call(selector.type(id)
+          .callback(callback)
+          .distance(distances[id])
+          .initial_value(filters[id])
+        );
+
+      dataviva.popover.show("#popover");
+
+    }
+    function filter_select(obj, id, persist) {
+
+      var type = id === "bra_1" ? "bra" : id;
+
+      if (obj === "all") {
+        var icon = type === "bra" ? "bra_all_alt" : type+"_all";
+        obj = {
+          "id": "all",
+          "name": dataviva.dictionary[type],
+          "icon": "/static/img/icons/"+type+"/"+icon+"_black.png",
+          "color": "transparent"
+        }
+      }
+
+      var color = ["wld","bra"].indexOf(type) < 0 ||
+                  (type === "wld" && obj.id.length !== 5) ?
+                  obj.color : "transparent";
+
+      var button = d3.select("#"+id)
+      button.select(".attr_icon")
+        .style("background-image","url("+obj.icon+")")
+        .style("background-color", color);
+
+      var new_name = obj.name;
+      if (!obj.distance) obj.distance = 0;
+      if (obj.distance && obj.distance > 0 && type === "bra") {
+        new_name += " "+obj.distance+"km"
+      };
+
+      button.select(".attr_name").text(new_name)
+
+      filters[id] = obj.id;
+      distances[id] = obj.distance;
+      if (!persist) dataviva.popover.hide();
+
+    }
+    filters = filters.reduce(function(obj, f){
+      distances[f[0]] = 0;
+      obj[f[0]] = f[1];
+      if (f[1] === "all") filter_select(f[1], f[0]);
+      return obj;
+    }, {});
+
+    function create_build() {
+      if (build !== iframe) {
+        var allowed = check_filters(true);
+        if (allowed) {
+            var u = d3.select("#build_"+build).attr("data-url");
+            for (var i = 0; i < attrs[datasets[app]].length; i++) {
+              var f = attrs[datasets[app]][i];
+              if (u.indexOf("<"+f+">") >= 0) {
+                u = u.replace("<"+f+">", filters[f]);
+              }
+            }
+            d3.select("#bulder_iframe").node().contentWindow.app.start(u);
+            iframe = build;
+            change_build();
+        }
+      }
+    }
+
+    function change_build(id) {
+      if (!id) id = "build_"+build;
+      d3.selectAll(".build_title").style("opacity", 0.6);
+      build = id.slice(6);
+      d3.select("#build_"+build).style("opacity", 1);
+      d3.select("#build_btn").style("background-color", iframe === build ? "#ddd" : "#af1f24");
+      var u = d3.select("#build_"+build).attr("data-url");
+      d3.selectAll(".build_filter").style("display",function(){
+        return u.indexOf("<"+this.id+">") >= 0 ? "inline-block": "none";
+      });
+    }
+    change_build();
+
+    function check_filters(first) {
+      var u = d3.select("#build_"+build).attr("data-url");
+      for (var i = 0; i < attrs[datasets[app]].length; i++) {
+        var f = attrs[datasets[app]][i];
+        if (u.indexOf("<"+f+">") >= 0 && filters[f] === "all" && f !== "bra") {
+          filter_open(f, function(obj, type){
+            filter_select(obj, type, true);
+            check_filters();
+          });
+          return false;
+        }
+      }
+      if (!first) {
+        dataviva.popover.hide();
+        create_build();
+      }
+      return true;
+    }
+
+    // Resize function for when the user resizes their browser window.
+    dataviva.resize = function() {
+
+      var width = window.innerWidth-330-d3plus.client.scrollbar(),
+          height = window.innerHeight-157;
+
+      if (height < 400) height = 400;
+
+      d3.select("iframe")
+        .attr("height", height+"px")
+        .attr("width", width+"px");
+
+      d3.select("#nav_sidebar").style("height", height+"px");
+
+    };
+    dataviva.resize();
+
+    // Updates the title and url of the current page with the embedded information.
     if (Modernizr.history) {
       window.onpopstate = function() {
-        var u = window.location.href.split("/builder/")[1].split("/?")[0]
-        var app = document.getElementById("bulder_iframe").contentWindow.app
-        if (app && u != app.url) app.start(u)
-      }
+        var u = window.location.href.split("/builder/")[1].split("/?")[0];
+        var app = document.getElementById("bulder_iframe").contentWindow.app;
+        if (app && u != app.url) app.start(u);
+      };
     }
 
   </script>

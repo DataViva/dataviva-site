@@ -461,7 +461,7 @@ function Selector() {
             icon.style("background-color",x.color)
           }
 
-          if (typeof app === "undefined") {
+          if (typeof app !== "object") {
           	appType = "";
             dataset = false;
             rca = false;
@@ -562,7 +562,7 @@ function Selector() {
         results.forEach(function(v,i){
 
           if (v) {
-      		 if (typeof app === "undefined") {
+      		 if (typeof app !== "object") {
   		    	current_app = "";
   		     } else {
   		  	    current_app = app.build.app.type;

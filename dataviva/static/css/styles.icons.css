@@ -476,11 +476,18 @@
 .decision.icon.short.rais:before {
   background-image: url("/static/img/icons/cbo/cbo_all.png");
 }
-
 .decision.icon.short.secex:before {
+  background-image: url("/static/img/icons/cnae/cnae_u.png");
+}
+.decision.icon.short.hedu:before {
+  background-image: url("/static/img/icons/course_hedu/course_hedu_all.png");
+}
+.decision.icon.short.sc:before {
+  background-image: url("/static/img/icons/course_sc/course_sc_all.png");
+}
+.decision.icon.short.ei:before {
   background-image: url("/static/img/icons/hs/hs_all.png");
 }
-
 .decision.icon.short.comtrade:before {
   background-image: url("/static/img/icons/wld/wld_all.png");
 }
@@ -489,12 +496,22 @@
   background-image: url("/static/img/icons/cbo/cbo_all_black.png");
   opacity: 0.2;
 }
-
 .help.icon.short.secex:before {
+  background-image: url("/static/img/icons/cnae/cnae_u_black.png");
+  opacity: 0.2;
+}
+.help.icon.short.hedu:before {
+  background-image: url("/static/img/icons/course_hedu/course_hedu_all_black.png");
+  opacity: 0.2;
+}
+.help.icon.short.sc:before {
+  background-image: url("/static/img/icons/course_sc/course_sc_all_black.png");
+  opacity: 0.2;
+}
+.help.icon.short.ei:before {
   background-image: url("/static/img/icons/hs/hs_all_black.png");
   opacity: 0.2;
 }
-
 .help.icon.short.comtrade:before {
   background-image: url("/static/img/icons/wld/wld_all_black.png");
   opacity: 0.2;

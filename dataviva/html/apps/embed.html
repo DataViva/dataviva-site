@@ -13,7 +13,7 @@
 
   <div id="builder">
 
-    <select id="app_select" onchange="builder.app(this.options[this.selectedIndex].id)">
+    <!-- <select id="app_select" onchange="builder.app(this.options[this.selectedIndex].id)">
 
       {% for app in apps %}
         <option icon="url('/static/img/icons/app/app_{{app.type}}.png')" color="{{app.color}}" value="{{app.type}}" id="{{app.type}}"{% if app.type == current_build.app.type %} selected="selected"{% endif %}>
@@ -54,7 +54,7 @@
         <span class="list_text">{% if attr %}{{ attr.name() }}{% endif %}</span>
         <i class="fa fa-list-alt"></i>
       </div>
-    {% endfor %}
+    {% endfor %} -->
 
     <div id="app_controls"></div>
 
@@ -217,8 +217,7 @@
 
     // Set the max-width for the builder div and app_title
     app.title_width = window.innerWidth
-    app.title_width -= d3.select("#settings").node().offsetWidth+12
-    app.title_width -= d3.select("#settings").node().offsetWidth
+    app.title_width -= d3.select("#settings").node().offsetWidth+10
 
     app.title_height = d3.select("#settings").node().offsetHeight
 
@@ -655,7 +654,12 @@
       .coords({"mute": ["2pe020000"]})
       .messages({"style": "large"})
       .nodes({"overlap": 1.7})
-      .title({"font": {"size": 20}})
+      .title({
+        "font": {"size": 22, "align": "left"},
+        "padding": 5,
+        "sub": {"font": {"align": "left"}},
+        "total": {"font": {"align": "left"}}
+      })
       .total("required")
       .temp("elsewhere")
       .x({
@@ -725,7 +729,7 @@
     app.create = function() {
 
       d3.select("#ui_bottom").selectAll("*").remove();
-      d3.select("#app_controls").selectAll("*").remove();
+      d3.select("#builder").selectAll("*").remove();
       d3plus.tooltip.remove();
 
       d3.json("/apps/embed/"+app.url+"?lang="+dataviva.language)
@@ -755,21 +759,21 @@
             last_depth = app.build.bra[0].id == "all" ? "bra_3" : "bra_9";
             leon("#app_select").color(app.build.app.color)
             builder.url()
-            builder.outputs(data.all_builds)
+            // builder.outputs(data.all_builds)
 
             // Show/hide filters depending on build requirements
-            d3.selectAll("div.build_filter").each(function(){
-              var filter = this.id,
-                  type = filter.slice(0,filter.length-2),
-                  index = filter.slice(-1);
-              if (app.build[type] && app.build[type][index]) {
-                d3.select(this).style("display","inline-block")
-                builder.filter(app.build[type][index],filter,true)
-              }
-              else {
-                d3.select(this).style("display","none")
-              }
-            })
+            // d3.selectAll("div.build_filter").each(function(){
+            //   var filter = this.id,
+            //       type = filter.slice(0,filter.length-2),
+            //       index = filter.slice(-1);
+            //   if (app.build[type] && app.build[type][index]) {
+            //     d3.select(this).style("display","inline-block")
+            //     builder.filter(app.build[type][index],filter,true)
+            //   }
+            //   else {
+            //     d3.select(this).style("display","none")
+            //   }
+            // })
 
             // Remove unused global_vars
             uis = ["year"]
@@ -966,7 +970,7 @@
     app.finish = function() {
 
       d3.select("#ui_bottom").selectAll("*").remove();
-      d3.select("#app_controls").selectAll("*").remove();
+      d3.select("#builder").selectAll("*").remove();
 
       if (!app.allyears) {
 
@@ -1069,7 +1073,7 @@
           //   form_type = "toggle";
           // }
 
-    			var ui_div = d3.select("#app_controls").append("div")
+    			var ui_div = d3.select("#builder").append("div")
       			.attr("class","ui_group alt_tooltip")
       			.attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
       			.on(d3plus.client.pointer.over,function(){
@@ -2163,58 +2167,58 @@
     /*********************/
 
     var builder = {}
-    builder.outputs = function(builds) {
-
-      app.all_builds = builds
-
-      app.all_builds.forEach(function(build){
-        d3.select("#output_"+build.app.type).remove()
-      })
-
-      app.all_builds.forEach(function(build){
-
-        if (d3.select("#output_"+build.app.type).empty()) {
-          dataviva.popover.create({
-            "id": "output_"+build.app.type,
-            "width": 600,
-            "height": "80%",
-            "color": build.app.color
-          })
-          d3.select("#output_"+build.app.type)
-            .append("div").attr("class","scrolling_content")
-        }
-
-        var box = d3.select("#output_"+build.app.type).select("div.scrolling_content")
-
-        if (box.select("."+build.dataset).empty()) {
-          box.append("div")
-            .attr("class",build.dataset+" output_list")
-            .append("div")
-              .attr("class","title")
-              .text(dataviva.format.text(build.dataset))
-        }
-
-        if (build.url == app.build.url) var c = "decision"
-        else var c = "help"
-
-        box.select("."+build.dataset).append("div")
-          .attr("id",build.url)
-          .attr("class","output "+c+" short icon "+build.app.type)
-          .html(build.title)
-          .on(d3plus.client.pointer.click,function(){
-            app.start(this.id)
-          })
-
-      })
-
-      if (d3.selectAll("#output_"+app.build.app.type+" .output")[0].length == 1) {
-        d3.select("#output").style("display","none")
-      }
-      else {
-        d3.select("#output").style("display","inline-block")
-      }
-
-    }
+    // builder.outputs = function(builds) {
+    //
+    //   app.all_builds = builds
+    //
+    //   app.all_builds.forEach(function(build){
+    //     d3.select("#output_"+build.app.type).remove()
+    //   })
+    //
+    //   app.all_builds.forEach(function(build){
+    //
+    //     if (d3.select("#output_"+build.app.type).empty()) {
+    //       dataviva.popover.create({
+    //         "id": "output_"+build.app.type,
+    //         "width": 600,
+    //         "height": "80%",
+    //         "color": build.app.color
+    //       })
+    //       d3.select("#output_"+build.app.type)
+    //         .append("div").attr("class","scrolling_content")
+    //     }
+    //
+    //     var box = d3.select("#output_"+build.app.type).select("div.scrolling_content")
+    //
+    //     if (box.select("."+build.dataset).empty()) {
+    //       box.append("div")
+    //         .attr("class",build.dataset+" output_list")
+    //         .append("div")
+    //           .attr("class","title")
+    //           .text(dataviva.format.text(build.dataset))
+    //     }
+    //
+    //     if (build.url == app.build.url) var c = "decision"
+    //     else var c = "help"
+    //
+    //     box.select("."+build.dataset).append("div")
+    //       .attr("id",build.url)
+    //       .attr("class","output "+c+" short icon "+build.app.type)
+    //       .html(build.title)
+    //       .on(d3plus.client.pointer.click,function(){
+    //         app.start(this.id)
+    //       })
+    //
+    //   })
+    //
+    //   if (d3.selectAll("#output_"+app.build.app.type+" .output")[0].length == 1) {
+    //     d3.select("#output").style("display","none")
+    //   }
+    //   else {
+    //     d3.select("#output").style("display","inline-block")
+    //   }
+    //
+    // }
 
     builder.filter = function(obj,id,static) {
 
@@ -2471,23 +2475,23 @@
         var type = id.slice(0,id.length-2);
         var index = id.slice(-1);
 
-        if (type == "file") {
+        // if (type == "file") {
           var init = "all",
               callback = app.download,
               dist = 0
-        }
-        else {
-          var init = app.build[type][index].id,
-              callback = builder.filter
-
-          if (type == "bra" && app.build.bra[index].distance) {
-            var dist = app.build.bra[index].distance
-          }
-          else {
-            var dist = 0
-          }
-
-        }
+        // }
+        // else {
+        //   var init = app.build[type][index].id,
+        //       callback = builder.filter
+        //
+        //   if (type == "bra" && app.build.bra[index].distance) {
+        //     var dist = app.build.bra[index].distance
+        //   }
+        //   else {
+        //     var dist = 0
+        //   }
+        //
+        // }
 
         selector
           .callback(callback)
@@ -2529,33 +2533,33 @@
       // Set the max-width for the builder div and app_title
       d3.select("#builder").style("max-width",window.innerWidth+"px")
       app.title_width = window.innerWidth
-      app.title_width -= (d3.select("#settings").node().offsetWidth*2)
+      app.title_width -= (d3.select("#settings").node().offsetWidth)
 
       d3.selectAll("#builder > br").remove()
-      d3.selectAll("#app_controls > br").remove()
+      // d3.selectAll("#app_controls > br").remove()
 
       var total_width = 0,
           settings_width = d3.select("#settings").node().offsetWidth,
-          builder_width = d3.select("#app_controls").node().offsetLeft,
-          avail_width = window.innerWidth - settings_width - builder_width
+          // builder_width = d3.select("#app_controls").node().offsetLeft,
+          avail_width = window.innerWidth - settings_width;
 
-      d3.selectAll("#app_controls > div")
+      d3.selectAll("#builder > div")
         .each(function(){
           total_width += this.offsetWidth
         })
 
-      if (total_width > avail_width) {
-        avail_width = window.innerWidth
-        firstbreak = false
-        var br = document.createElement("br")
-        document.getElementById("builder").insertBefore(br,document.getElementById("app_controls"))
-      }
+      // if (total_width > avail_width) {
+      //   avail_width = window.innerWidth
+      //   firstbreak = false
+      //   var br = document.createElement("br")
+      //   document.getElementById("builder").insertBefore(br,document.getElementById("app_controls"))
+      // }
 
       if (total_width > avail_width) {
 
         var w = 0
 
-        d3.selectAll("#app_controls > div")
+        d3.selectAll("#builder > div")
           .each(function(){
             if (w > avail_width/2) {
               w = 0
@@ -2573,7 +2577,7 @@
         var buffer = 0
       }
       else {
-        app.title_width = window.innerWidth - d3.select("#settings").node().offsetWidth*2
+        app.title_width = window.innerWidth - d3.select("#settings").node().offsetWidth
         d3.select("#controls_toggle").attr("class","leon button square")
         if (app.title_width < 200) {
           app.title_width = window.innerWidth

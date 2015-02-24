@@ -14851,6 +14851,7 @@ module.exports = {
     "value"    : false
   },
   "filters"  : [],
+  "large": 400,
   "mute"     : [],
   "process"  : function(value, vars) {
 
@@ -16272,7 +16273,8 @@ module.exports = function(vars) {
       update: vars.draw.update
     }).font(vars.font.secondary).hover(vars.hover.value).id(vars.id.value).icon({
       button: (deepest ? false : vars.icon.next),
-      select: (deepest ? vars.icon.select : false)
+      select: (deepest ? vars.icon.select : false),
+      value: vars.icon.value
     }).order(order).text(vars.text.secondary.value || vars.text.value).timing({
       ui: vars.draw.timing
     }).ui({
@@ -26897,43 +26899,46 @@ module.exports = function(vars) {
       return t.type
     })
 
-  var titleWidth = vars.title.width || vars.width.value
+  var titleWidth = vars.title.width || vars.width.value-vars.margin.left-vars.margin.right;
 
   titles.enter().append("g")
     .attr("class","d3plus_title")
     .attr("opacity",0)
-    .attr("transform",function(t){
-      var y = t.style.position == "top" ? 0 : vars.height.value
-      if (vars.title.width) {
-        var x = vars.width.value/2 - vars.title.width/2;
-      }
-      else {
-        var x = 0;
-      }
-      return "translate("+x+","+y+")";
-    })
+    // .attr("transform",function(t){
+    //   var y = t.style.position == "top" ? 0 : vars.height.value
+    //   if (vars.title.width) {
+    //     var x = vars.width.value/2 - vars.title.width/2;
+    //   }
+    //   else {
+    //     var x = 0;
+    //   }
+    //   return "translate("+x+","+y+")";
+    // })
     .append("text")
       .call(style)
 
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // Wrap text and calculate positions, then transition style and opacity
   //----------------------------------------------------------------------------
+  function getAlign(d) {
+    var align = d.style.font.align;
+    if (align == "center") {
+      return "middle";
+    }
+    else if ((align == "left" && !rtl) || (align == "right" && rtl)) {
+      return "start";
+    }
+    else if ((align == "left" && rtl) || (align == "right" && !rtl)) {
+      return "end";
+    }
+    return align;
+  }
   titles
     .each(function(d){
 
       var container = d3.select(this).select("text").call(style);
 
-      var align = d.style.font.align
-
-      if (align == "center") {
-        align = "middle"
-      }
-      else if ((align == "left" && !rtl) || (align == "right" && rtl)) {
-        align = "start"
-      }
-      else if ((align == "left" && rtl) || (align == "right" && !rtl)) {
-        align = "end"
-      }
+      var align = getAlign(d);
 
       textWrap()
         .align(align)
@@ -26987,11 +26992,18 @@ module.exports = function(vars) {
         else {
           y += t.style.padding
         }
-        if (vars.title.width) {
-          var x = vars.width.value/2 - vars.title.width/2;
+        var align = getAlign(t);
+        if (align === "start") {
+          var x = vars.margin.left + vars.title.padding;
         }
         else {
-          var x = 0;
+          var w = d3.select(this).select("text").node().getBBox().width;
+          if (align === "middle") {
+            x = vars.width.value/2 - titleWidth/2;
+          }
+          else {
+            x = vars.width.value - titleWidth - vars.margin.right - vars.title.padding;
+          }
         }
         return "translate("+x+","+y+")";
       })
@@ -29575,7 +29587,7 @@ getData = function(vars) {
 };
 
 axisRange = function(vars, axis, zero, buffer) {
-  var agg, aggType, allNegative, allPositive, axisSums, d, min, oppAxis, sort, sortKey, splitData, val, valueNest, values, _i, _j, _len, _len1, _ref, _ref1;
+  var agg, aggType, allNegative, allPositive, axisSums, counts, d, group, k, min, oppAxis, sort, sortKey, splitData, v, val, values, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref, _ref1, _ref2, _ref3;
   oppAxis = axis === "x" ? "y" : "x";
   if (vars[axis].range.value && vars[axis].range.value.length === 2) {
     return vars[axis].range.value.slice();
@@ -29645,25 +29657,37 @@ axisRange = function(vars, axis, zero, buffer) {
         sort = vars.order.sort.value;
         agg = vars.order.agg.value || vars.aggs.value[sortKey] || "max";
         aggType = typeof agg;
-        valueNest = d3.nest().key(function(d) {
-          return fetchValue(vars, d, vars[axis].value);
-        }).rollup(function(leaves) {
-          if (aggType === "string") {
-            return d3[agg](leaves, function(d) {
-              return fetchValue(vars, d, sortKey);
-            });
-          } else if (aggType === "function") {
-            return agg(leaves, sortKey);
+        counts = values.reduce(function(obj, val) {
+          obj[val] = [];
+          return obj;
+        }, {});
+        _ref2 = vars.axes.dataset;
+        for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+          d = _ref2[_k];
+          _ref3 = d.values;
+          for (_l = 0, _len3 = _ref3.length; _l < _len3; _l++) {
+            v = _ref3[_l];
+            group = fetchValue(vars, v, vars[axis].value);
+            counts[group].push(fetchValue(vars, v, sortKey));
           }
-        }).entries(vars.axes.dataset);
-        valueNest.sort(function(a, b) {
+        }
+        for (k in counts) {
+          v = counts[k];
+          if (aggType === "string") {
+            counts[k] = d3[agg](v);
+          } else if (aggType === "function") {
+            counts[k] = agg(v, sortKey);
+          }
+        }
+        counts = d3.entries(counts);
+        counts.sort(function(a, b) {
           if (sort === "desc") {
-            return b.values - a.values;
+            return b.value - a.value;
           } else {
-            return a.values - b.values;
+            return a.value - b.value;
           }
         });
-        return valueNest.reduce(function(arr, v) {
+        return counts.reduce(function(arr, v) {
           arr.push(v.key);
           return arr;
         }, []);

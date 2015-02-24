@@ -70,6 +70,7 @@ div#settings > .leon.button.square {
 
 div#builder {
   left: 0px;
+  padding: 5px 0;
   position: absolute;
   text-align: left;
   width: 100%;
@@ -78,7 +79,8 @@ div#builder {
 
 div#builder > div {
   display: inline-block;
-  margin: 10px -5px 5px 10px;
+  margin: 0;
+  /*margin: 10px -5px 5px 10px;*/
 }
 
 div#builder div.leon.label {

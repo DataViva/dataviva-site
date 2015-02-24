@@ -125,12 +125,12 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     '''Every possible build, required by the embed page for building the build
     dropdown.
     '''
-    all_builds = Build.query.all()
-    all_builds.sort(key=lambda x: x.dataset)
-    for build in all_builds:
-        build.set_filter1(filter1_attr)
-        build.set_filter2(filter2_attr)
-        build.set_bra(bra_attr)
+    # all_builds = Build.query.all()
+    # all_builds.sort(key=lambda x: x.dataset)
+    # for build in all_builds:
+    #     build.set_filter1(filter1_attr)
+    #     build.set_filter2(filter2_attr)
+    #     build.set_bra(bra_attr)
 
     '''Get URL query parameters from reqest.args object to return to the view.
     '''
@@ -148,7 +148,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     if request.is_xhr:
         ret = jsonify({
             "current_build": current_build.serialize(),
-            "all_builds": [b.json() for b in all_builds],
+            # "all_builds": [b.json() for b in all_builds],
             "starred": starred
         })
         ret.data = gzip_data(ret.data)
@@ -161,8 +161,8 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
         year_range = json.dumps(__year_range__)
 
         ret = make_response(render_template("apps/embed.html",
-            apps = App.query.all(),
-            all_builds = all_builds,
+            # apps = App.query.all(),
+            # all_builds = all_builds,
             starred = starred,
             form = DownloadForm(),
             current_build = current_build,
@@ -346,15 +346,83 @@ def get_geo_location(ip):
 @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
                 filter2=None, output=None, params=None):
-    path = request.path.split("/")
     if bra_id == 'bra':
         bra_id = 'all'
-        params = request.query_string
-        return redirect('/{0}/{1}/{2}/{3}/{4}/{5}/{6}?{7}'.format('apps/builder',app_name,dataset,bra_id,filter1,filter2,output,params))
-    if len(path) == 5:
-        return redirect('{0}{1}/{2}/{3}/{4}/{5}/{6}'.format("/".join(path),dataset,bra_id,filter1,filter2,output,params))
+        return redirect('/{0}/{1}/{2}/{3}/{4}/{5}/{6}?{7}'.format('apps/builder',app_name,dataset,bra_id,filter1,filter2,output,request.query_string))
+    if len(request.path.split("/")) == 5:
+        return redirect('{0}{1}/{2}/{3}/{4}/{5}/{6}'.format(request.path,dataset,bra_id,filter1,filter2,output,request.query_string))
     g.page_type = "builder"
-    return render_template("apps/builder.html")
+    builds = Build.query.all()
+    dataset_sort = ["rais", "hedu", "sc", "secex", "ei"]
+    builds.sort(key=lambda x: (x.app_id, dataset_sort.index(x.dataset)))
+    datatset_names = {
+        "secex": gettext("International Trade"),
+        "rais": gettext("Employment"),
+        "ei": gettext("Domestic Trade"),
+        "hedu": gettext("Higher Education"),
+        "sc": gettext("School Census")
+    }
+    if "_" in bra_id:
+        bra_id, bra_1_id = bra_id.split("_")
+    else:
+        bra_1_id = "all"
+    filters = [
+        ["bra", str(bra_id)],
+        ["bra_1", str(bra_1_id)],
+        ["cnae", "all"],
+        ["cbo", "all"],
+        ["hs", "all"],
+        ["wld", "all"],
+        ["university", "all"],
+        ["course_hedu", "all"],
+        ["school", "all"],
+        ["course_sc", "all"]
+    ]
+    if dataset == "secex":
+        filters[4][1] = str(filter1)
+        filters[5][1] = str(filter2)
+    elif dataset == "rais":
+        filters[2][1] = str(filter1)
+        filters[3][1] = str(filter2)
+    elif dataset == "hedu":
+        filters[6][1] = str(filter1)
+        filters[7][1] = str(filter2)
+    elif dataset == "sc":
+        filters[8][1] = str(filter1)
+        filters[9][1] = str(filter2)
+
+    build_filter1, build_filter2 = filler(dataset, filter1, filter2)
+
+    '''Grab attrs for bra and filters
+    '''
+    if bra_id == "all":
+        bra_attr = Wld.query.get_or_404("sabra")
+    else:
+        bra_attr = Bra.query.get_or_404(bra_id)
+    filter1_attr = filter1
+    filter2_attr = filter2
+    if filter1 != "all":
+        filter1_attr = globals()[build_filter1.capitalize()].query.get_or_404(filter1)
+    if filter2 != "all":
+        filter2_attr = globals()[build_filter2.capitalize()].query.get_or_404(filter2)
+
+    if build_filter1 != "all":
+        build_filter1 = "<{}>".format(build_filter1)
+    if build_filter2 != "all":
+        build_filter2 = "<{}>".format(build_filter2)
+
+    '''This is an instance of the Build class for the selected app,
+    determined by the combination of app_type, dataset, filters and output.
+    '''
+    current_app = App.query.filter_by(type=app_name).first_or_404()
+    build = Build.query.filter_by(app=current_app, dataset=dataset, filter1=build_filter1, filter2=build_filter2, output=output).first_or_404()
+    build.set_filter1(filter1_attr)
+    build.set_filter2(filter2_attr)
+    build.set_bra(bra_attr)
+
+    return render_template("apps/builder.html",
+        app=app_name, apps=App.query.all(), builds=builds, build=build,
+        filters=filters, dataset=dataset, datatset_names=datatset_names)
 
 @mod.route('/download/', methods=['GET', 'POST'])
 def download():
