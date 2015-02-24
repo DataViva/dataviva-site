@@ -279,6 +279,8 @@ def attrs_search(term=None):
     hs_query = {}
     question_query = {}
     wld = {}
+    course_hedu_query = {}
+    course_sc_query = {}
     lang = request.args.get('lang', None) or g.locale
     result = []
 
@@ -378,6 +380,40 @@ def attrs_search(term=None):
         wld_query["content_type"] = "wld"
         wld_query = fix_name(wld_query, lang)
         result.append(wld_query)
+    
+    # Majors
+    if lang == "pt":
+        major = Course_hedu.query.filter(or_(Course_hedu.id == term, Course_hedu.name_pt.like("%"+term+"%")))
+    else:
+        major = Course_hedu.query.filter(or_(Course_hedu.id == term, Course_hedu.name_en.like("%"+term+"%")))
+    items = major.join(Yc_hedu).order_by(desc("enrolled")).limit(50).all()
+    items = [i.serialize() for i in items]
+    for i in items:
+        course_hedu_query = {}
+        course_hedu_query["id"] = i["id"]
+        course_hedu_query["name_pt"] = i["name_pt"]
+        course_hedu_query["name_en"] = i["name_en"]
+        course_hedu_query["color"] = i["color"]
+        course_hedu_query["content_type"] = "course_hedu"
+        course_hedu_query = fix_name(course_hedu_query, lang)
+        result.append(course_hedu_query)
+
+    # Vocational Courses
+    if lang == "pt":
+        major = Course_sc.query.filter(or_(Course_sc.id == term, Course_sc.name_pt.like("%"+term+"%")))
+    else:
+        major = Course_sc.query.filter(or_(Course_sc.id == term, Course_sc.name_en.like("%"+term+"%")))
+    items = major.join(Yc_sc).order_by(desc("enrolled")).limit(50).all()
+    items = [i.serialize() for i in items]
+    for i in items:
+        course_sc_query = {}
+        course_sc_query["id"] = i["id"]
+        course_sc_query["name_pt"] = i["name_pt"]
+        course_sc_query["name_en"] = i["name_en"]
+        course_sc_query["color"] = i["color"]
+        course_sc_query["content_type"] = "course_sc"
+        course_sc_query = fix_name(course_sc_query, lang)
+        result.append(course_sc_query)
 
     question = Question.query.filter(and_(Question.language == lang, or_(Question.question.ilike("%"+term+"%"), Question.body.ilike("%"+term+"%"))))
 

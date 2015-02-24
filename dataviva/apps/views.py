@@ -14,7 +14,6 @@ from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_he
 from dataviva.apps.models import Build, UI, App, Crosswalk_oc, Crosswalk_pi
 from dataviva.general.models import Short
 
-
 from dataviva.rais.views import rais_api
 from dataviva.translations.translate import translate
 from dataviva.utils.gzip_data import gzip_data
@@ -22,12 +21,7 @@ from dataviva.utils.cached_query import cached_query, make_cache_key
 
 import json, urllib2, urllib
 from config import FACEBOOK_OAUTH_ID, basedir,GZIP_DATA
-import os
-import urlparse
-import random
-import zipfile
-import sys
-import gzip
+import os, urlparse, random, zipfile, sys, gzip
 from dataviva.utils.cached_query import api_cache_key
 
 mod = Blueprint('apps', __name__, url_prefix='/apps')
@@ -75,6 +69,94 @@ def filler(dataset, filter1, filter2):
             filler2 = "course_sc"
 
     return filler1, filler2
+
+@mod.route('/')
+@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+def guide():
+    apps = []
+    
+    # Tree Map
+    builds = Build.query.filter(Build.id.in_([1,3,9,93,95])).all()
+    apps.append({
+        "summary": "A visualization using the area of rectangles to show shares of the specified value. The data is nested heirarchically by its given classificaiton.",
+        "builds": builds,
+        "title": gettext(u"Tree Map"),
+        "type": "tree_map"
+    })
+    # Stacked
+    builds = Build.query.filter(Build.id.in_([17,19,25,22,105])).all()
+    apps.append({
+        "summary": "Similar to to a line chart, stacked area charts use an X and Y axis to show values across time. The data is nested heirarchically by its given classificaiton.",
+        "builds": builds,
+        "title": gettext(u"Stacked"),
+        "type": "stacked"
+    })
+    # Geo Map
+    builds = Build.query.filter(Build.id.in_([36,40,41,109,123])).all()
+    apps.append({
+        "summary": "Data values overlayed on a geographic map varying their color by the value they represent.",
+        "builds": builds,
+        "title": gettext(u"Geo Map"),
+        "type": "geo_map"
+    })
+    # Network
+    builds = Build.query.filter(Build.id.in_([33,35])).all()
+    apps.append({
+        "summary": "A visualization showing the connections between a specified dataset. The specified attributes are then overlayed on this network to show their position in this fictional space.",
+        "builds": builds,
+        "title": gettext(u"Network"),
+        "type": "network"
+    })
+    # Line
+    builds = Build.query.filter(Build.id.in_([91,115,126,132,154])).all()
+    apps.append({
+        "summary": "A type of chart which displays data as a time series with an X and Y axis.",
+        "builds": builds,
+        "title": gettext(u"Line Chart"),
+        "type": "line"
+    })
+    # Rings
+    builds = Build.query.filter(Build.id.in_([48,49,50])).all()
+    apps.append({
+        "summary": "A visualization showing a network centered on a single node. The depth of nodes shown is computed by their distance from the root.",
+        "builds": builds,
+        "title": gettext(u"Rings"),
+        "type": "rings"
+    })
+    # Scatter
+    builds = Build.query.filter(Build.id.in_([44,46])).all()
+    apps.append({
+        "summary": "A visualization showing two variables plotted along an X and Y axis.",
+        "builds": builds,
+        "title": gettext(u"Scatter"),
+        "type": "scatter"
+    })
+    # Compare
+    builds = Build.query.filter(Build.id.in_([52,53,113,125])).all()
+    apps.append({
+        "summary": "Similar to the scatter visualization except this form of a scatter shows the same variable along both axes varrying the location for comparison purposes.",
+        "builds": builds,
+        "title": gettext(u"Compare"),
+        "type": "compare"
+    })
+    # Occugrid
+    builds = Build.query.filter(Build.id.in_([51])).all()
+    apps.append({
+        "summary": "A visualization showing the main occupations employed in various industries, their importance to that industry and the number of employees who work in these activities.",
+        "builds": builds,
+        "title": gettext(u"Occugrid"),
+        "type": "occugrid"
+    })
+    # Box Plot
+    builds = []
+    apps.append({
+        "summary": "A visualization, also known as box and whisker diagram, used to display the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum",
+        "builds": builds,
+        "title": gettext(u"Box Plot"),
+        "type": "box"
+    })
+    
+    return render_template("apps/index.html", apps=apps)
 
 @mod.route("/embed/")
 @mod.route("/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
@@ -602,11 +684,6 @@ def networks(type="hs"):
     ret.headers['Content-Length'] = str(len(ret.data))
 
     return ret
-
-@mod.route('/')
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
-def guide():
-    return render_template("apps/index.html")
 
 @mod.route('/shorten/', methods=['GET', 'POST'])
 def shorten_url():

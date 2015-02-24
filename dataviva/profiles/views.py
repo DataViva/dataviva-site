@@ -3,6 +3,7 @@ from flask import Blueprint, request, render_template, g, url_for
 from flask.ext.babel import gettext
 from sqlalchemy import func, distinct
 from werkzeug import urls
+import time
 
 from dataviva import db, view_cache
 from dataviva.attrs import models as attrs
@@ -11,15 +12,18 @@ from dataviva.secex import models as secex
 
 from dataviva.general.models import Plan
 from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu, Course_sc
-from dataviva.rais.models import Ybi, Ybo, Yio
+from dataviva.secex.models import Ymb, Ymp, Ymw
+from dataviva.rais.models import Ybi, Ybo, Yio, Yi, Yo
+from dataviva.hedu.models import Yu, Yc_hedu
+from dataviva.sc.models import Yc_sc
 
 from dataviva.utils.cached_query import cached_query, make_cache_key, api_cache_key
-
 from dataviva.utils.gzip_data import gzipped
-
 from dataviva.profiles import models as profileModels
 
-import time
+from dataviva import __year_range__
+from dataviva.stats.util import parse_year
+
 
 mod = Blueprint('profiles', __name__, url_prefix='/profiles')
 
@@ -31,9 +35,101 @@ def before_request():
     g.color = "#e0902d"
 
 @mod.route('/')
+@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+def index():
+    
+    profile_types = []
+    
+    # Bra
+    most_recent_year = parse_year(__year_range__["secex"][-1])
+    top = Ymb.query.filter_by(year=most_recent_year, month=0, bra_id_len=9).order_by(Ymb.export_val.desc()).limit(10).all()
+    top = [t.bra for t in top]
+    profile_types.append({
+        "summary": "Showing exports, employment and education data, statistics and visualizations about the chosen Brazilian location.",
+        "top": top,
+        "top_title": gettext(u"Top Locations"),
+        "type": "bra"
+    })
+    
+    # Occupations
+    most_recent_year = parse_year(__year_range__["rais"][-1])
+    top = Yo.query.filter_by(year=most_recent_year, cbo_id_len=4).order_by(Yo.num_emp.desc()).limit(10).all()
+    top = [t.cbo for t in top]
+    profile_types.append({
+        "summary": "Showing industries and locations that employ the selected occupation.",
+        "top": top,
+        "top_title": gettext(u"Top Occupations"),
+        "type": "cbo"
+    })
+    
+    # Industries
+    top = Yi.query.filter_by(year=most_recent_year, cnae_id_len=6).order_by(Yi.num_emp.desc()).limit(10).all()
+    top = [t.cnae for t in top]
+    profile_types.append({
+        "summary": "Showing the occupations and locations with employees in the selected industry.",
+        "top": top,
+        "top_title": gettext(u"Top Industries"),
+        "type": "cnae"
+    })
+    
+    # Prods
+    most_recent_year = parse_year(__year_range__["secex"][-1])
+    top = Ymp.query.filter_by(year=most_recent_year, month=0, hs_id_len=6).order_by(Ymp.export_val.desc()).limit(10).all()
+    top = [t.hs for t in top]
+    profile_types.append({
+        "summary": "Showing locations in Brazil that export and import the selected product and their destinations and origins.",
+        "top": top,
+        "top_title": gettext(u"Top Products"),
+        "type": "hs"
+    })
+    
+    # Countries
+    top = Ymw.query.filter_by(year=most_recent_year, month=0, wld_id_len=5).order_by(Ymw.export_val.desc()).limit(10).all()
+    top = [t.wld for t in top]
+    profile_types.append({
+        "summary": "Showing locations in brazil that trade with the selected country and the products they export and import from them.",
+        "top": top,
+        "top_title": gettext(u"Top Trade Partners"),
+        "type": "wld"
+    })
+    
+    # Universities
+    most_recent_year = parse_year(__year_range__["hedu"][-1])
+    top = Yu.query.filter_by(year=most_recent_year).order_by(Yu.enrolled.desc()).limit(10).all()
+    top = [t.university for t in top]
+    profile_types.append({
+        "summary": "Showing the majors found in the selected univserity.",
+        "top": top,
+        "top_title": gettext(u"Top Universities"),
+        "type": "university"
+    })
+    
+    # Majors
+    top = Yc_hedu.query.filter_by(year=most_recent_year).order_by(Yc_hedu.enrolled.desc()).limit(10).all()
+    top = [t.course_hedu for t in top]
+    profile_types.append({
+        "summary": "Showing the university and locations in Brazil where the selected major is found.",
+        "top": top,
+        "top_title": gettext(u"Top Majors"),
+        "type": "course_hedu"
+    })
+    
+    # Vocations
+    most_recent_year = parse_year(__year_range__["sc"][-1])
+    top = Yc_sc.query.filter_by(year=most_recent_year).order_by(Yc_sc.enrolled.desc()).limit(10).all()
+    top = [t.course_sc for t in top]
+    profile_types.append({
+        "summary": "Showing ...",
+        "top": top,
+        "top_title": gettext(u"Top Vocations"),
+        "type": "course_sc"
+    })
+
+    return render_template("profiles/index.html", profile_types=profile_types)
+
 @mod.route('/<category>/select/')
 @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
-def index(category = None, id = None):
+def index_selector(category = None, id = None):
     selector = category
 
     article = None
