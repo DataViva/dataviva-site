@@ -73,9 +73,10 @@ a:hover {
   font-size: 11px;
   line-height: 13px;
   margin: 6px;
-  min-height: 65px;
-  padding: 7px 9px !important;
-  width: 61px;
+  min-height: 50px;
+  padding: 0px !important;
+  /*padding: 7px 9px !important;*/
+  width: 50px;
 }
 
 .help.icon.large,

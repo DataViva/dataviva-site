@@ -15,7 +15,7 @@
   <style>
 
   #spotlight {
-    height: 400px;
+    height: 447px;
     position: absolute;
     top: 0;
     width: 100%;
@@ -23,7 +23,7 @@
   }
 
   #spotlight a.feature:hover h1 {
-    color: #444;
+    color: white;
   }
 
   #spotlight img {
@@ -35,9 +35,9 @@
   }
 
   #spotlight .title {
-    background-image: url("/static/img/home/triangles.png");
+    /*background-image: url("/static/img/home/triangles.png");*/
     /*background-color: #888;*/
-    color: #444;
+    color: white;
     margin: 0;
     padding: 10px 0;
     position: absolute;
@@ -48,15 +48,39 @@
   }
 
   #spotlight .title h1 {
-    margin: 10px 0;
+    font-size: 60px;
+    font-weight: 600;
+    margin: 0 0 35px;
+    text-shadow: 0 2px 4px black;
   }
 
   #spotlight .title p {
     display: inline-block;
-    font-size: 16px;
+    font-size: 37px;
+    font-weight: bold;
     line-height: 20px;
-    margin: 0 0 10px;
     width: 620px;
+    text-shadow: 0 2px 6px black;
+  }
+
+  #pagination  {
+    margin-top: 407px;
+    position: relative;
+    z-index: 100;
+  }
+
+  #pagination .page {
+    background-color: white;
+    border-radius: 10px;
+    display: inline-block;
+    height: 15px;
+    margin: 0 10px;
+    opacity: 0.5;
+    width: 15px;
+  }
+
+  #pagination .page.active {
+    opacity: 0.9;
   }
 
   #white_gradient {
@@ -81,7 +105,7 @@
 
   #home_search {
     display: inline-block;
-    margin: 180px 0 80px;
+    margin-top: 170px;
     position: relative;
     text-align: center;
     z-index: 10;
@@ -110,16 +134,24 @@
     width: 400px;
   }
 
+  #home_search #result {
+    border: 1px solid #ccc;
+    top: 43px;
+    width: 440px;
+  }
+
   #quick_links {
-    margin: 30px auto;
+    margin: 10px auto 60px;
     position: relative;
-    z-index: 10;
   }
 
   #quick_links span {
-    color: #af1f24;
+    color: white;
     display: inline-block;
-    margin: 28px 10px 0 10px;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 12px 5px 0 5px;
+    text-shadow: 0 2px 6px black;
   }
 
   .carousel {
@@ -216,44 +248,42 @@
   </div> -->
   <div id="spotlight">
 
-    <a href="/profiles/bra/4mg/" class="feature">
+    <a href="/profiles/bra/4mg/?app=10" class="feature">
       <div class="title">
-        <h1>What is the monthly trade balance for Minas Gerais?</h1>
-        <p>Click here to see information about Minas Gerais, including trade, industrial activity, and education, or use the search box and see what you can discover!</p>
+        <h1>Who is getting hired?</h1>
+        <p>Visualize employement data now.</p>
       </div>
-      <img src="/static/img/home/balance-4mg.png">
+      <img src="/static/img/home/minas-map.jpg">
     </a>
 
-    <div id="white_gradient"></div>
+    <div id="pagination">
+      <span class="page active"></span>
+      <span class="page"></span>
+      <span class="page"></span>
+    </div>
+
+    <!-- <div id="white_gradient"></div> -->
 
   </div>
 
   <div id="home_search">
-    <i class="fa fa-search"></i><input class="searchFld" type="text" placeholder="Minas Gerais" autofocus />
-    <div class="searchResult">search results</div>
+    <i class="fa fa-search"></i><input class="searchFld" type="text" placeholder="Minas Gerais, Iron Ore, Leather Tanning, etc." autofocus />
+    <div id="result" class="searchResult">search results</div>
   </div>
 
   <div id="quick_links">
     <span>{% trans %}Quick<br>Links{% endtrans %}</span>
-    <a href="#" class="decision square small icon bra" data-type="bra">
-      {% trans %}Brazilian Locations{% endtrans %}</a>
-    <a href="#" class="decision square small icon hs" data-type="hs">
-      {% trans %}Products{% endtrans %}</a>
-    <a href="#" class="decision square small icon wld" data-type="wld">
-      {% trans %}Trade Partners{% endtrans %}</a>
-    <a href="#" class="decision square small icon cnae" data-type="cnae">
-      {% trans %}Industries{% endtrans %}</a>
-    <a href="#" class="decision square small icon cbo" data-type="cbo">
-      {% trans %}Occupations{% endtrans %}</a>
+    <a href="#" class="decision square small icon bra" data-type="bra"></a>
+    <a href="#" class="decision square small icon hs" data-type="hs"></a>
+    <a href="#" class="decision square small icon wld" data-type="wld"></a>
+    <a href="#" class="decision square small icon cnae" data-type="cnae"></a>
+    <a href="#" class="decision square small icon cbo" data-type="cbo"></a>
     <a href="#" class="decision square small icon university" data-type="university">
-      <div class="new">{% trans %}New{% endtrans %}</div>
-      {% trans %}Universities{% endtrans %}</a>
+      <div class="new">{% trans %}New{% endtrans %}</div></a>
     <a href="#" class="decision square small icon course_hedu" data-type="course_hedu">
-      <div class="new">{% trans %}New{% endtrans %}</div>
-      {% trans %}Higher Education Courses{% endtrans %}</a>
+      <div class="new">{% trans %}New{% endtrans %}</div></a>
     <a href="#" class="decision square small icon course_sc" data-type="course_sc">
-      <div class="new">{% trans %}New{% endtrans %}</div>
-      {% trans %}Vocational Courses{% endtrans %}</a>
+      <div class="new">{% trans %}New{% endtrans %}</div></a>
   </div>
 
   {% for carousel in carousels %}
