@@ -127,7 +127,7 @@ def home():
     #     "type": "hs",
     #     "posters": [Hs.query.get(b) for b in prods]
     # })
-    limit = 10
+    limit = 20
     carousel_base = "/stats/carosel/?metric={}&show={}&profile={}&limit={}"
     metric, show, profile = "wage_avg", "cbo_id", "cbo"
     cbos = stats_list(metric, show, limit=limit)

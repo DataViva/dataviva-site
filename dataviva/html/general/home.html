@@ -152,7 +152,7 @@
   }
   .carousel ul li {
     display: inline-block;
-    margin: 0 10px 0 0;
+    margin: 0 15px 0 0;
   }
   .poster {
     box-sizing: border-box;
@@ -164,7 +164,7 @@
             box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
     height: 120px;
     opacity: 0.9;
-    margin: 5px;
+    margin: 0px;
     position: relative;
     width: 120px;
   }
@@ -180,10 +180,10 @@
     height: 45px;
     margin: 0;
     overflow: hidden;
-    padding: 5px;
+    padding: 5px 0;
     text-align: center;
     white-space: normal;
-    width: 130px;
+    width: 120px;
   }
   .poster img {
     box-sizing: border-box;
@@ -268,7 +268,7 @@
 
       <div class="scroller">
         <ul class="set" id="test" data-parameters="{{ carousel.url }}">
-          {% for poster in carousel.posters %}
+          {% for poster in carousel.posters -%}
             <li>
               <a class="poster" href="{{ poster.url() }}">
                 <div class="poster" style="background-color:{{ poster.color }};">
@@ -277,7 +277,7 @@
                 <div class="title">{{ poster.name() }}</div>
               </a>
             </li>
-          {% endfor %}
+          {%- endfor %}
         </ul>
       </div>
     </div>
@@ -361,23 +361,31 @@
     else
       current_x = d3.transform(transform).translate[0];
 
-    poster_w = parseInt(d3.select(".poster").style("width"));
-    poster_w += parseInt(d3.select(".poster").style("margin-left")) * 2;
+    var liNode = d3.select(".poster").node().parentNode;
+    liNode = d3.select(liNode);
+
+    poster_w = parseInt(liNode.style("width"));
+    poster_w += parseInt(d3.select(".poster").style("margin-left"));
+    poster_w += parseInt(liNode.style("margin-right"));
+
     container_w = parseInt(d3.select(".set").style("width"));
+
+    var row_size = Math.floor(container_w / poster_w);
+
     if (d3.select(this).attr("class").indexOf("next") > -1) {
       d3.select(this.parentNode).select("a.prev").classed("disabled", false);
-      next_x = current_x - container_w;
+      next_x = current_x - row_size*poster_w ;
+
       max_left = (page_el.selectAll("li").size() * poster_w) * -1;
-      max_left += container_w;
-      next_x =  next_x < max_left ? max_left : next_x;
-      next_x = next_x > 0 ? 0 : next_x;
-      if (next_x == max_left) {
+
+      if (next_x >= max_left) {
         loadMore(this.parentNode, page_el);
         d3.select(this.parentNode).select("a.next").classed("disabled", true);
       }
     } else {
       d3.select(this.parentNode).select("a.next").classed("disabled", false);
-      next_x = current_x + container_w;
+      next_x = current_x + row_size*poster_w;
+
       next_x = next_x > 0 ? 0 : next_x;
       d3.select(this.parentNode).select("a.prev").classed("disabled", next_x == 0);
     }
