@@ -102,6 +102,14 @@ div.d3plus_tooltip_data_block {
   position: relative;
 }
 
+div.d3plus_tooltip_data_block a {
+  color: #000;
+  text-decoration: underline;
+}
+div.d3plus_tooltip_data_block a:hover {
+  text-decoration: none;
+}
+
 div.d3plus_tooltip_data_title {
   color: #333;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
