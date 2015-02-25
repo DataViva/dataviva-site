@@ -45,7 +45,7 @@ def crawl_page(page):
                     link.click()
                     driver.switch_to_frame(driver.find_element_by_id(frame.get_attribute("id")))
                     element = WebDriverWait(driver, 10).until(
-                        EC.element_to_be_clickable((By.ID, "key"))
+                        EC.element_to_be_clickable((By.ID, "data"))
                     )
                     driver.switch_to_default_content()
 
