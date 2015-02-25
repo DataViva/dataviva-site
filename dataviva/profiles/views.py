@@ -37,91 +37,91 @@ def before_request():
 @mod.route('/')
 @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def index():
-    
+
     profile_types = []
-    
+
     # Bra
     most_recent_year = parse_year(__year_range__["secex"][-1])
-    top = Ymb.query.filter_by(year=most_recent_year, month=0, bra_id_len=9).order_by(Ymb.export_val.desc()).limit(10).all()
+    top = Ymb.query.filter_by(year=most_recent_year, month=0, bra_id_len=9).order_by(Ymb.export_val.desc()).limit(5).all()
     top = [t.bra for t in top]
     profile_types.append({
         "summary": "Showing exports, employment and education data, statistics and visualizations about the chosen Brazilian location.",
         "top": top,
-        "top_title": gettext(u"Top Locations"),
+        "title": gettext(u"Brazilian Locations"),
         "type": "bra"
     })
-    
+
     # Occupations
     most_recent_year = parse_year(__year_range__["rais"][-1])
-    top = Yo.query.filter_by(year=most_recent_year, cbo_id_len=4).order_by(Yo.num_emp.desc()).limit(10).all()
+    top = Yo.query.filter_by(year=most_recent_year, cbo_id_len=4).order_by(Yo.num_emp.desc()).limit(5).all()
     top = [t.cbo for t in top]
     profile_types.append({
         "summary": "Showing industries and locations that employ the selected occupation.",
         "top": top,
-        "top_title": gettext(u"Top Occupations"),
+        "title": gettext(u"Occupations"),
         "type": "cbo"
     })
-    
+
     # Industries
-    top = Yi.query.filter_by(year=most_recent_year, cnae_id_len=6).order_by(Yi.num_emp.desc()).limit(10).all()
+    top = Yi.query.filter_by(year=most_recent_year, cnae_id_len=6).order_by(Yi.num_emp.desc()).limit(5).all()
     top = [t.cnae for t in top]
     profile_types.append({
         "summary": "Showing the occupations and locations with employees in the selected industry.",
         "top": top,
-        "top_title": gettext(u"Top Industries"),
+        "title": gettext(u"Industries"),
         "type": "cnae"
     })
-    
+
     # Prods
     most_recent_year = parse_year(__year_range__["secex"][-1])
-    top = Ymp.query.filter_by(year=most_recent_year, month=0, hs_id_len=6).order_by(Ymp.export_val.desc()).limit(10).all()
+    top = Ymp.query.filter_by(year=most_recent_year, month=0, hs_id_len=6).order_by(Ymp.export_val.desc()).limit(5).all()
     top = [t.hs for t in top]
     profile_types.append({
         "summary": "Showing locations in Brazil that export and import the selected product and their destinations and origins.",
         "top": top,
-        "top_title": gettext(u"Top Products"),
+        "title": gettext(u"Products"),
         "type": "hs"
     })
-    
+
     # Countries
-    top = Ymw.query.filter_by(year=most_recent_year, month=0, wld_id_len=5).order_by(Ymw.export_val.desc()).limit(10).all()
+    top = Ymw.query.filter_by(year=most_recent_year, month=0, wld_id_len=5).order_by(Ymw.export_val.desc()).limit(5).all()
     top = [t.wld for t in top]
     profile_types.append({
         "summary": "Showing locations in brazil that trade with the selected country and the products they export and import from them.",
         "top": top,
-        "top_title": gettext(u"Top Trade Partners"),
+        "title": gettext(u"Trade Partners"),
         "type": "wld"
     })
-    
+
     # Universities
     most_recent_year = parse_year(__year_range__["hedu"][-1])
-    top = Yu.query.filter_by(year=most_recent_year).order_by(Yu.enrolled.desc()).limit(10).all()
+    top = Yu.query.filter_by(year=most_recent_year).order_by(Yu.enrolled.desc()).limit(5).all()
     top = [t.university for t in top]
     profile_types.append({
         "summary": "Showing the majors found in the selected univserity.",
         "top": top,
-        "top_title": gettext(u"Top Universities"),
+        "title": gettext(u"Universities"),
         "type": "university"
     })
-    
+
     # Majors
-    top = Yc_hedu.query.filter_by(year=most_recent_year).order_by(Yc_hedu.enrolled.desc()).limit(10).all()
+    top = Yc_hedu.query.filter_by(year=most_recent_year).order_by(Yc_hedu.enrolled.desc()).limit(5).all()
     top = [t.course_hedu for t in top]
     profile_types.append({
         "summary": "Showing the university and locations in Brazil where the selected major is found.",
         "top": top,
-        "top_title": gettext(u"Top Majors"),
+        "title": gettext(u"Majors"),
         "type": "course_hedu"
     })
-    
+
     # Vocations
     most_recent_year = parse_year(__year_range__["sc"][-1])
-    top = Yc_sc.query.filter_by(year=most_recent_year).order_by(Yc_sc.enrolled.desc()).limit(10).all()
+    top = Yc_sc.query.filter_by(year=most_recent_year).order_by(Yc_sc.enrolled.desc()).limit(5).all()
     top = [t.course_sc for t in top]
     profile_types.append({
         "summary": "Showing ...",
         "top": top,
-        "top_title": gettext(u"Top Vocations"),
+        "title": gettext(u"Vocational Courses"),
         "type": "course_sc"
     })
 
