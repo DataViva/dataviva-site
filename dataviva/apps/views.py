@@ -74,9 +74,14 @@ def filler(dataset, filter1, filter2):
 @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def guide():
     apps = []
+    default_bra = '4mg'
+    default_cnae = 'i56112'
+    default_cbo = '2235'
+    default_hs = '052601'
     
     # Tree Map
     builds = Build.query.filter(Build.id.in_([1,3,9,93,95])).all()
+    for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": "A visualization using the area of rectangles to show shares of the specified value. The data is nested heirarchically by its given classificaiton.",
         "builds": builds,
@@ -85,6 +90,7 @@ def guide():
     })
     # Stacked
     builds = Build.query.filter(Build.id.in_([17,19,25,22,105])).all()
+    for b in builds: b.set_bra(default_bra); b.set_filter1(default_cnae);
     apps.append({
         "summary": "Similar to to a line chart, stacked area charts use an X and Y axis to show values across time. The data is nested heirarchically by its given classificaiton.",
         "builds": builds,
@@ -93,6 +99,7 @@ def guide():
     })
     # Geo Map
     builds = Build.query.filter(Build.id.in_([36,40,41,109,123])).all()
+    for b in builds: b.set_bra(default_bra); b.set_filter1(default_hs);
     apps.append({
         "summary": "Data values overlayed on a geographic map varying their color by the value they represent.",
         "builds": builds,
@@ -101,6 +108,7 @@ def guide():
     })
     # Network
     builds = Build.query.filter(Build.id.in_([33,35])).all()
+    for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": "A visualization showing the connections between a specified dataset. The specified attributes are then overlayed on this network to show their position in this fictional space.",
         "builds": builds,
@@ -109,6 +117,7 @@ def guide():
     })
     # Line
     builds = Build.query.filter(Build.id.in_([91,115,126,132,154])).all()
+    for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": "A type of chart which displays data as a time series with an X and Y axis.",
         "builds": builds,
@@ -117,6 +126,10 @@ def guide():
     })
     # Rings
     builds = Build.query.filter(Build.id.in_([48,49,50])).all()
+    for b in builds: b.set_bra(default_bra)
+    builds[0].set_filter1(default_cnae);
+    builds[1].set_filter2(default_cbo);
+    builds[2].set_filter1(default_hs);
     apps.append({
         "summary": "A visualization showing a network centered on a single node. The depth of nodes shown is computed by their distance from the root.",
         "builds": builds,
@@ -125,6 +138,7 @@ def guide():
     })
     # Scatter
     builds = Build.query.filter(Build.id.in_([44,46])).all()
+    for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": "A visualization showing two variables plotted along an X and Y axis.",
         "builds": builds,
@@ -133,6 +147,7 @@ def guide():
     })
     # Compare
     builds = Build.query.filter(Build.id.in_([52,53,113,125])).all()
+    for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": "Similar to the scatter visualization except this form of a scatter shows the same variable along both axes varrying the location for comparison purposes.",
         "builds": builds,
@@ -141,6 +156,7 @@ def guide():
     })
     # Occugrid
     builds = Build.query.filter(Build.id.in_([51])).all()
+    for b in builds: b.set_bra(default_bra); b.set_filter1(default_cnae);
     apps.append({
         "summary": "A visualization showing the main occupations employed in various industries, their importance to that industry and the number of employees who work in these activities.",
         "builds": builds,
