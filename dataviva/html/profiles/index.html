@@ -2,49 +2,121 @@
 
 {% block title %}: {% trans %}Generate a Profile{% endtrans %}{% endblock %}
 
+{% block head %}
+
+  <style>
+
+    #container {
+      padding-bottom: 0;
+    }
+
+    .decision.square {
+      display: block;
+      margin: 20px auto 40px;
+      padding-left: 220px !important;
+      position: relative;
+      width: 400px;
+    }
+
+    .decision.square h1 {
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 50px;
+      margin: 10px 0;
+    }
+
+    .decision.square p {
+      font-size: 17px;
+      font-weight: 200;
+      line-height: 20px;
+      margin: 10px 10px 20px 0;
+    }
+
+    .decision.square:before {
+      background-position: 0 50%;
+      background-size: 200px !important;
+    }
+
+    .profile {
+      background-color: rgba(255,255,255,0.8);
+      border: 1px solid #555;
+      color: #555;
+      display: inline-block;
+      font-size: 13px;
+      margin: 0 2px 4px;
+      padding: 2px 4px;
+      whitespace: nowrap;
+      z-index: 100;
+    }
+
+    .profile:hover {
+      background-color: rgba(255,255,255,1);
+      color: #555;
+    }
+
+    .profile .icon {
+      background-position: 50%;
+      background-size: 100%;
+      height: 17px;
+      display: inline-block;
+      margin-top: 1px;
+      width: 17px;
+    }
+
+  </style>
+
+{% endblock %}
+
 {% block body %}
 
   <div class="darkbox">
     <h1>{% trans %}What would you like to learn more about?{% endtrans %}</h1>
   </div>
-  <br>
-  <a class="decision icon square bra" href="/profiles/bra/select/">
-    {% trans %}Brazilian Location{% endtrans %}
-  </a>
-
-  <a class="decision icon square cbo" href="/profiles/cbo/select/">
-    {% trans %}Occupation{% endtrans %}
-  </a>
-
-  <a class="decision icon square cnae" href="/profiles/cnae/select/">
-    {% trans %}Industry{% endtrans %}
-  </a>
-
-  <a class="decision icon square hs" href="/profiles/hs/select/">
-    {% trans %}Product{% endtrans %}
-  </a>
 
   <br>
 
-  <a class="decision icon square wld" href="/profiles/wld/select/">
-    {% trans %}Trade Partner{% endtrans %}
-  </a>
+  {% for profile in profile_types %}
+    {% set a = profile.type %}
+    <div id="{{ a }}" class="decision icon square {{ a }}" onclick="select_attr(this.id)">
+      <h1>{{ profile.title }}</h1>
+      <p>
+        {{ profile.summary }}
+      </p>
+      <b>{% trans %}Common searches{% endtrans %}:</b>
+      {% for attr in profile.top -%}
+        <a href="{{ attr.url() }}" class="profile">
+          <div class="icon" style="background-image:url('{{ attr.icon() }}');background-color:{% if a == 'bra' or a == 'bra_1' or (a == 'wld' and attr.id|length == 5)%}{{transparent}}{% else %}{{ attr.color }}{% endif %};"></div>
+          {{ attr.name() }}
+        </a>
+      {%- endfor %}
+    </div>
 
-  <a class="decision icon square university" href="/profiles/university/select/">
-    <div class="new">{% trans %}New{% endtrans %}</div>
-    {% trans %}University{% endtrans %}
-  </a>
+  {% endfor %}
 
-  <a class="decision icon square course_hedu" href="/profiles/course_hedu/select/">
-    <div class="new">{% trans %}New{% endtrans %}</div>
-    {% trans %}Higher Education Course{% endtrans %}
-  </a>
+{% endblock %}
 
-  <a class="decision icon square course_sc" href="/profiles/course_sc/select/">
-    <div class="new">{% trans %}New{% endtrans %}</div>
-    {% trans %}Vocational Course{% endtrans %}
-  </a>
+{% block js %}
 
-  <br><br>
+  <script src="/static/js/utils/utils.selector.js"></script>
+  <script>
+
+    // Create Filter Selector
+    dataviva.popover.create({
+      "id": "filter_popover",
+      "width": 600,
+      "height": "80%",
+      "close": true
+    })
+    var selector = Selector()
+      .callback(function(d){
+        window.location = "/profiles/" + selector.type() + "/" + d.id + "/";
+      });
+
+    function select_attr(id) {
+      d3.select("#filter_popover").call(selector.type(id));
+      dataviva.popover.show("#filter_popover");
+    }
+
+  </script>
 
 {% endblock %}
