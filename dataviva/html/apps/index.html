@@ -4,66 +4,67 @@
 
 {% block head %}
 
-  <style>
+<style>
 
-    #container {
-      padding-bottom: 0;
-    }
+  #container {
+    padding-bottom: 0;
+  }
 
-    .decision.square {
-      display: block;
-      margin: 20px auto 40px;
-      padding-left: 220px !important;
-      position: relative;
-      width: 400px;
-    }
+  .decision.square {
+    display: block;
+    font-size: 15px;
+    margin: 20px auto 40px;
+    padding-left: 110px !important;
+    position: relative;
+    width: 600px;
+  }
 
-    .decision.square h1 {
-      font-size: 40px;
-      font-weight: 600;
-      line-height: 50px;
-      margin: 10px 0;
-    }
+  .decision.square h1 {
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 5px 0;
+  }
 
-    .decision.square p {
-      font-size: 17px;
-      font-weight: 200;
-      line-height: 20px;
-      margin: 10px 10px 20px 0;
-    }
+  .decision.square p {
+    font-size: 15px;
+    font-weight: 200;
+    line-height: 17px;
+    margin: 10px 10px 20px 0;
+  }
 
-    .decision.square:before {
-      background-position: 0 50%;
-      background-size: 200px !important;
-    }
+  .decision.square:before {
+    background-position: 0 10%;
+    background-size: 100px !important;
+  }
 
-    .profile {
-      background-color: rgba(255,255,255,0.8);
-      border: 1px solid #555;
-      color: #555;
-      display: inline-block;
-      font-size: 13px;
-      margin: 0 2px 4px;
-      padding: 2px 4px;
-      whitespace: nowrap;
-      z-index: 100;
-    }
+  .profile {
+    background-color: rgba(255,255,255,0.8);
+    border: 1px solid #555;
+    color: #555;
+    display: inline-block;
+    font-size: 13px;
+    margin: 0 2px 4px;
+    padding: 2px 4px;
+    whitespace: nowrap;
+    z-index: 100;
+  }
 
-    .profile:hover {
-      background-color: rgba(255,255,255,1);
-      color: #555;
-    }
+  .profile:hover {
+    background-color: rgba(255,255,255,1);
+    color: #555;
+  }
 
-    .profile .icon {
-      background-position: 50%;
-      background-size: 100%;
-      height: 17px;
-      display: inline-block;
-      margin-top: 1px;
-      width: 17px;
-    }
+  .profile .icon {
+    background-position: 50%;
+    background-size: 100%;
+    height: 17px;
+    display: inline-block;
+    margin-top: 1px;
+    width: 17px;
+  }
 
-  </style>
+</style>
 
 {% endblock %}
 
@@ -79,10 +80,8 @@
     <div id="{{ app.type }}" class="decision icon square {{ app.type }}" onclick="app_link(this.id)">
       <h1>{{ app.title }}</h1>
       <p>
-        {{ app.summary }}
+        {{ app.summary }} {% trans %}Here are some commonly built examples:{% endtrans %}
       </p>
-      <b>{% trans %}Common visualizations{% endtrans %}:</b>
-      <br><br>
       {% for build in app.builds -%}
         <a href="/apps/builder/{{ build.url() }}" class="help short icon {{ app.type }}">
           {{ build.title() }}

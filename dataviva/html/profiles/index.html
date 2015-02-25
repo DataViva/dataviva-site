@@ -12,29 +12,30 @@
 
     .decision.square {
       display: block;
+      font-size: 15px;
       margin: 20px auto 40px;
-      padding-left: 220px !important;
+      padding-left: 110px !important;
       position: relative;
-      width: 400px;
+      width: 600px;
     }
 
     .decision.square h1 {
-      font-size: 40px;
+      font-size: 25px;
       font-weight: 600;
-      line-height: 50px;
-      margin: 10px 0;
+      line-height: 28px;
+      margin: 5px 0;
     }
 
     .decision.square p {
-      font-size: 17px;
+      font-size: 15px;
       font-weight: 200;
-      line-height: 20px;
+      line-height: 17px;
       margin: 10px 10px 20px 0;
     }
 
     .decision.square:before {
-      background-position: 0 50%;
-      background-size: 200px !important;
+      background-position: 0 10%;
+      background-size: 100px !important;
     }
 
     .profile {
@@ -82,7 +83,7 @@
       <p>
         {{ profile.summary }}
       </p>
-      <b>{% trans %}Common searches{% endtrans %}:</b>
+      {% trans %}Common searches{% endtrans %}:
       {% for attr in profile.top -%}
         <a href="{{ attr.url() }}" class="profile">
           <div class="icon" style="background-image:url('{{ attr.icon() }}');background-color:{% if a == 'bra' or a == 'bra_1' or (a == 'wld' and attr.id|length == 5)%}{{transparent}}{% else %}{{ attr.color }}{% endif %};"></div>
