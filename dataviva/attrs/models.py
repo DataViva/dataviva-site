@@ -207,15 +207,15 @@ class Stats(object):
                         den += float(value)
                 percent = (num/float(den))*100
 
-            return {"name": name, 
-                    "value": obj.name(), 
-                    "percent": percent, 
-                    "id": obj.id, 
+            return {"name": name,
+                    "value": obj.name(),
+                    "percent": percent,
+                    "id": obj.id,
                     "url": obj.url(),
                     "group": "{} {} ({})".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())}
         else:
-            return {"name": name, 
-                    "value": "-", 
+            return {"name": name,
+                    "value": "-",
                     "group": "{} {} ({})".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())}
 
     def get_val(self, tbl, val_var, attr_type, dataset, latest_year=None, stat_id=None, name=None):
@@ -273,7 +273,7 @@ class Stats(object):
         if "_y" in tbl.__tablename__:
             total = total.filter_by(year=latest_year)
         total = total.first()
-        
+
         if total != None:
             if isinstance(total,tuple):
                 val = total[0]
@@ -284,12 +284,12 @@ class Stats(object):
                 val = float(val)/getattr(total,"num_emp")
         else:
             val = 0
-        
+
         val = num_format(val, key=val_var)
         # raise Exception(val)
-        
+
         group = u"{} {} ({})".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())
-        
+
         if val_var == "stat_val":
             group = ""
             if "_y" in tbl.__tablename__:
@@ -397,6 +397,9 @@ class Course_sc(db.Model, AutoSerialize, Stats, ExpandedAttr):
     def icon(self):
         return "/static/img/icons/course_sc/course_sc_%s.png" % (self.id[:2])
 
+    def url(self):
+        return "/profiles/course_sc/{}/".format(self.id)
+
     def __repr__(self):
         return '<Course_sc %r>' % (self.name_en)
 
@@ -410,6 +413,9 @@ class School(db.Model, AutoSerialize, Stats, ExpandedAttr):
 
     def icon(self):
         return None
+
+    def url(self):
+        return "/profiles/school/{}/".format(self.id)
 
     def __repr__(self):
         return '<School %r>' % (self.name_en)
