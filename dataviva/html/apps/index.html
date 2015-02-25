@@ -1,91 +1,107 @@
-<!-- extend from base layout -->
 {% extends "templates/site.html" %}
 
-{% block title %}: {% trans %}Apps{% endtrans %}{% endblock %}
+{% block title %}: {% trans %}Advanced Builder{% endtrans %}{% endblock %}
+
+{% block head %}
+
+  <style>
+
+    #container {
+      padding-bottom: 0;
+    }
+
+    .decision.square {
+      display: block;
+      margin: 20px auto 40px;
+      padding-left: 220px !important;
+      position: relative;
+      width: 400px;
+    }
+
+    .decision.square h1 {
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 50px;
+      margin: 10px 0;
+    }
+
+    .decision.square p {
+      font-size: 17px;
+      font-weight: 200;
+      line-height: 20px;
+      margin: 10px 10px 20px 0;
+    }
+
+    .decision.square:before {
+      background-position: 0 50%;
+      background-size: 200px !important;
+    }
+
+    .profile {
+      background-color: rgba(255,255,255,0.8);
+      border: 1px solid #555;
+      color: #555;
+      display: inline-block;
+      font-size: 13px;
+      margin: 0 2px 4px;
+      padding: 2px 4px;
+      whitespace: nowrap;
+      z-index: 100;
+    }
+
+    .profile:hover {
+      background-color: rgba(255,255,255,1);
+      color: #555;
+    }
+
+    .profile .icon {
+      background-position: 50%;
+      background-size: 100%;
+      height: 17px;
+      display: inline-block;
+      margin-top: 1px;
+      width: 17px;
+    }
+
+  </style>
+
+{% endblock %}
 
 {% block body %}
 
-  <div class="darkbox"><h1>{% trans %}Which app would you like to build?{% endtrans %}</h1></div>
-  <br>
-
-  <a class="decision icon square tree_map" href="/apps/builder/tree_map/">
-    <h2>{% trans %}Tree Map{% endtrans %}</h2>
-  	<i class="fa fa-question-circle" rel="tree_map"></i>
-  </a>
-
-  <a class="decision icon square stacked" href="/apps/builder/stacked/">
-    <h2>{% trans %}Stacked{% endtrans %}</h2>
-  	<i class="fa fa-question-circle" rel="stacked"></i>
-  </a>
-
-  <a class="decision icon square geo_map" href="/apps/builder/geo_map/">
-    <h2>{% trans %}Geo Map{% endtrans %}</h2>
-  	<i class="fa fa-question-circle" rel="geo_map"></i>
-  </a>
-
-  <a class="decision icon square network" href="/apps/builder/network/">
-    <h2>{% trans %}Network{% endtrans %}</h2>
-  	<i class="fa fa-question-circle" rel="network"></i>
-  </a>
-
-  <a class="decision icon square line" href="/apps/builder/line/">
-    <div class="new">{% trans %}New{% endtrans %}</div>
-    <h2>{% trans %}Line Plot{% endtrans %}</h2>
-  </a>
+  <div class="darkbox">
+    <h1>{% trans %}Which app would you like to build?{% endtrans %}</h1>
+  </div>
 
   <br>
 
-  <a class="decision icon square rings" href="/apps/builder/rings/">
-    <h2>{% trans %}Rings{% endtrans %}</h2>
-  	<i class="fa fa-question-circle" rel="rings"></i>
-  </a>
+  {% for app in apps %}
+    <div id="{{ app.type }}" class="decision icon square {{ app.type }}" onclick="app_link(this.id)">
+      <h1>{{ app.title }}</h1>
+      <p>
+        {{ app.summary }}
+      </p>
+      <b>{% trans %}Common visualizations{% endtrans %}:</b>
+      <br><br>
+      {% for build in app.builds -%}
+        <a href="/apps/builder/{{ build.url() }}" class="help short icon {{ app.type }}">
+          {{ build.title() }}
+        </a>
+      {%- endfor %}
+    </div>
 
-  <a class="decision icon square scatter" href="/apps/builder/scatter/">
-    <h2>{% trans %}Scatter{% endtrans %}</h2>
-  	<i class="fa fa-question-circle" rel="scatter"></i>
-  </a>
-
-  <a class="decision icon square compare" href="/apps/builder/compare/">
-    <h2>{% trans %}Compare{% endtrans %}</h2>
-  	<i class="fa fa-question-circle" rel="compare"></i>
-  </a>
-
-  <a class="decision icon square occugrid" href="/apps/builder/occugrid/">
-    <h2>{% trans %}Occugrid{% endtrans %}</h2>
-  	<i class="fa fa-question-circle" rel="occugrid"></i>
-  </a>
-
-  <a class="decision icon square box" href="/apps/builder/box/">
-    <div class="new">{% trans %}New{% endtrans %}</div>
-    <h2>{% trans %}Box Plot{% endtrans %}</h2>
-  </a>
-
-  <br><br>
+  {% endfor %}
 
 {% endblock %}
 
 {% block js %}
 
-<script>
+  <script>
 
-dataviva.popover.create({
-  "id": "popover",
-  "width": "80%",
-  "height": "80%"
-})
+    function app_link(id) {
+      window.location = "/apps/builder/"+id;
+    }
 
-d3.selectAll("i")
-	.on(d3plus.client.pointer.click,function(){
-		var app_type = d3.select(this).attr("rel"),
-			h = parseInt(d3.select("#popover").style("height")),
-			w = parseInt(d3.select("#popover").style("width"));
-		d3.select("#popover").style("overflow", "hidden")
-	    dataviva.popover.show("#popover");
-		d3.select("#popover").html("<iframe scrolling='no' width='100%' height='"+h+"' src='/apps/info/"+app_type+"/' />")
-		d3.event.preventDefault()
-	})
-
-
-</script>
+  </script>
 
 {% endblock %}
