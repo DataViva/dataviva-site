@@ -80,7 +80,7 @@ def guide():
     default_hs = '052601'
     
     # Tree Map
-    builds = Build.query.filter(Build.id.in_([1,3,9,93,95])).all()
+    builds = Build.query.filter(Build.id.in_([1,3,9])).all()
     for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": "A visualization using the area of rectangles to show shares of the specified value. The data is nested heirarchically by its given classificaiton.",
@@ -89,7 +89,7 @@ def guide():
         "type": "tree_map"
     })
     # Stacked
-    builds = Build.query.filter(Build.id.in_([17,19,25,22,105])).all()
+    builds = Build.query.filter(Build.id.in_([17,19,25])).all()
     for b in builds: b.set_bra(default_bra); b.set_filter1(default_cnae);
     apps.append({
         "summary": "Similar to to a line chart, stacked area charts use an X and Y axis to show values across time. The data is nested heirarchically by its given classificaiton.",
@@ -98,7 +98,7 @@ def guide():
         "type": "stacked"
     })
     # Geo Map
-    builds = Build.query.filter(Build.id.in_([36,40,41,109,123])).all()
+    builds = Build.query.filter(Build.id.in_([36,40,41])).all()
     for b in builds: b.set_bra(default_bra); b.set_filter1(default_hs);
     apps.append({
         "summary": "Data values overlayed on a geographic map varying their color by the value they represent.",
@@ -116,7 +116,7 @@ def guide():
         "type": "network"
     })
     # Line
-    builds = Build.query.filter(Build.id.in_([91,115,126,132,154])).all()
+    builds = Build.query.filter(Build.id.in_([91,115,126])).all()
     for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": "A type of chart which displays data as a time series with an X and Y axis.",
@@ -146,7 +146,7 @@ def guide():
         "type": "scatter"
     })
     # Compare
-    builds = Build.query.filter(Build.id.in_([52,53,113,125])).all()
+    builds = Build.query.filter(Build.id.in_([52,53,113])).all()
     for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": "Similar to the scatter visualization except this form of a scatter shows the same variable along both axes varrying the location for comparison purposes.",

@@ -13,7 +13,7 @@
     .decision.square {
       display: block;
       font-size: 15px;
-      margin: 20px auto 40px;
+      margin: 0px auto 15px;
       padding-left: 110px !important;
       position: relative;
       width: 600px;
@@ -30,7 +30,7 @@
       font-size: 15px;
       font-weight: 200;
       line-height: 17px;
-      margin: 10px 10px 20px 0;
+      margin: 10px 0;
     }
 
     .decision.square:before {
@@ -63,7 +63,23 @@
       margin-top: 1px;
       width: 17px;
     }
-
+    
+    .profile_simple {
+      color: white;
+      position: relative;
+      text-decoration: underline;
+    }
+    .profile_simple:hover {
+      color: white;
+      text-decoration: none;
+    }
+    .examples {
+      font-size: 12px !important;
+      margin: 0 !important;
+    }
+    .title.square, .decision.square, .help.square {
+       min-height: 0px;
+    }
   </style>
 
 {% endblock %}
@@ -74,8 +90,6 @@
     <h1>{% trans %}What would you like to learn more about?{% endtrans %}</h1>
   </div>
 
-  <br>
-
   {% for profile in profile_types %}
     {% set a = profile.type %}
     <div id="{{ a }}" class="decision icon square {{ a }}" onclick="select_attr(this.id)">
@@ -83,13 +97,17 @@
       <p>
         {{ profile.summary }}
       </p>
-      {% trans %}Common searches{% endtrans %}:
+      <p class="examples">
+      <!-- {% trans %}Common searches{% endtrans %}: -->
+      {% trans %}Ex{% endtrans %}:
       {% for attr in profile.top -%}
-        <a href="{{ attr.url() }}" class="profile">
+        <!-- <a href="{{ attr.url() }}" class="profile">
           <div class="icon" style="background-image:url('{{ attr.icon() }}');background-color:{% if a == 'bra' or a == 'bra_1' or (a == 'wld' and attr.id|length == 5)%}{{transparent}}{% else %}{{ attr.color }}{% endif %};"></div>
           {{ attr.name() }}
-        </a>
+        </a> -->
+        <a href="{{ attr.url() }}" class="profile_simple">{{ attr.name() }}</a>
       {%- endfor %}
+      </p>
     </div>
 
   {% endfor %}
