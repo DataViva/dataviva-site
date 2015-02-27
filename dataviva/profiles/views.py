@@ -119,7 +119,7 @@ def index():
     top = Yc_sc.query.filter_by(year=most_recent_year).order_by(Yc_sc.enrolled.desc()).limit(5).all()
     top = [t.course_sc for t in top]
     profile_types.append({
-        "summary": "Showing ...",
+        "summary": "Showing the locations and schools in which these vocations are taught.",
         "top": top,
         "title": gettext(u"Vocational Courses"),
         "type": "course_sc"
