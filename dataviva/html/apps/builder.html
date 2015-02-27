@@ -170,10 +170,19 @@
     var heights = {};
     var datasets = {};
     var filters = {{ filters|safe }};
+    var iframe_filters = {};
     var distances = {};
     var iframe = "{{ build.id }}";
     var build = "{{ build.id }}";
     datasets[app] = "{{ dataset }}";
+
+    filters = filters.reduce(function(obj, f){
+      distances[f[0]] = 0;
+      obj[f[0]] = f[1];
+      iframe_filters[f[0]] = f[1];
+      if (f[1] === "all") filter_select(f[1], f[0]);
+      return obj;
+    }, {});
 
     var attrs = {
       "secex": ["bra", "bra_1", "hs", "wld"],
@@ -291,18 +300,13 @@
 
       filters[id] = obj.id;
       distances[id] = obj.distance;
+      check_button();
       if (!persist) dataviva.popover.hide();
 
     }
-    filters = filters.reduce(function(obj, f){
-      distances[f[0]] = 0;
-      obj[f[0]] = f[1];
-      if (f[1] === "all") filter_select(f[1], f[0]);
-      return obj;
-    }, {});
 
     function create_build() {
-      if (build !== iframe) {
+      if (check_button()) {
         var allowed = check_filters(true);
         if (allowed) {
             var u = d3.select("#build_"+build).attr("data-url");
@@ -314,6 +318,7 @@
             }
             d3.select("#bulder_iframe").node().contentWindow.app.start(u);
             iframe = build;
+            iframe_filters = d3plus.util.copy(filters);
             change_build();
         }
       }
@@ -324,7 +329,7 @@
       d3.selectAll(".build_title").style("opacity", 0.6);
       build = id.slice(6);
       d3.select("#build_"+build).style("opacity", 1);
-      d3.select("#build_btn").style("background-color", iframe === build ? "#ddd" : "#af1f24");
+      check_button();
       var u = d3.select("#build_"+build).attr("data-url");
       d3.selectAll(".build_filter").style("display",function(){
         return u.indexOf("<"+this.id+">") >= 0 ? "inline-block": "none";
@@ -349,6 +354,12 @@
         create_build();
       }
       return true;
+    }
+
+    function check_button() {
+      var same = d3.values(filters).join(",") === d3.values(iframe_filters).join(",") && iframe === build;
+      d3.select("#build_btn").style("background-color", same ? "#ddd" : "#af1f24");
+      return !same;
     }
 
     // Resize function for when the user resizes their browser window.
