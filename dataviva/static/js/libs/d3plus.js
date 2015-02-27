@@ -18294,17 +18294,17 @@ validate = require("./validate.coffee");
 
 module.exports = function(obj1, obj2) {
   var copyObject, obj3;
-  copyObject = function(obj, ret) {
+  copyObject = function(obj, ret, plus) {
     var k, v, _results;
     _results = [];
     for (k in obj) {
       v = obj[k];
-      if (!(typeof v === "undefined" || k.indexOf("d3plus") === 0)) {
-        if (validate(v)) {
+      if (typeof v !== "undefined") {
+        if (!plus && validate(v)) {
           if (typeof ret[k] !== "object") {
             ret[k] = {};
           }
-          _results.push(copyObject(v, ret[k]));
+          _results.push(copyObject(v, ret[k], k === "d3plus"));
         } else if (!d3selection(v) && v instanceof Array) {
           _results.push(ret[k] = v.slice(0));
         } else {
