@@ -170,50 +170,42 @@ function Selector() {
 
           }
 
-          if (["number","string"].indexOf(typeof a[sorting]) >= 0 && ["number","string"].indexOf(typeof b[sorting]) >= 0) {
-            var a_first = a[sorting]
-            var b_first = b[sorting]
-          }
-          else {
-            var a_first = d3.rgb(a.color).hsl().h
-            var b_first = d3.rgb(b.color).hsl().h
-            if (d3.rgb(a.color).hsl().s == 0) a_first = 361
-            if (d3.rgb(b.color).hsl().s == 0) b_first = 361
-          }
+          var a_first = a[sorting];
+          var b_first = b[sorting];
 
           if (a_first != b_first) {
             if (typeof a_first === "string") return (a_first.localeCompare(b_first));
             else return (b_first - a_first);
           }
           else {
-            var a_second = a.name.toTitleCase()
-            var b_second = b.name.toTitleCase()
-            return (a_second.localeCompare(b_second))
+            var a_second = a.name.toTitleCase();
+            var b_second = b.name.toTitleCase();
+            return (a_second.localeCompare(b_second));
           }
-        })
+        });
 
         var parent = container.node().parentNode,
-            display = d3.select(parent).style("display")
+            display = d3.select(parent).style("display");
 
         if (display == "none") {
-          parent.style.visibility = "hidden"
-          parent.style.display = "block"
+          parent.style.visibility = "hidden";
+          parent.style.display = "block";
         }
 
         // Initially add some results
-        add_results(20);
+        add_results(40);
 
         if (display == "none") {
-          parent.style.visibility = "visible"
-          parent.style.display = "none"
+          parent.style.visibility = "visible";
+          parent.style.display = "none";
         }
 
         // Add more results on scroll
         body.on("scroll",function(){
           if(this.scrollTop + this.clientHeight + 10 >= this.scrollHeight) {
-            if (list.length > 0) add_results(20);
+            if (list.length > 0) add_results(40);
           }
-        })
+        });
 
         body.node().scrollTop = 0;
 
@@ -221,7 +213,7 @@ function Selector() {
 
       select_value = function(x,depth) {
 
-        search.node().value = ""
+        search.node().value = "";
 
         if (depths.indexOf(x.id.length) == depths.length-1) {
           x = data[x.parents[0]]
