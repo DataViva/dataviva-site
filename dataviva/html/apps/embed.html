@@ -639,6 +639,7 @@
 
     // Define global D3plus app parameters
     app.viz = d3plus.viz()
+      .axes({"background": {"color": "white"}})
       .container("#app")
       .aggs(averages)
       .time({"solo": {"callback": app.title_update}})
