@@ -28,6 +28,7 @@
 
   #spotlight img {
     bottom: 0;
+    height: 100%;
     left: 0;
     position: absolute;
     width: 100%;
@@ -42,7 +43,7 @@
     padding: 10px 0;
     position: absolute;
     text-align: center;
-    top: 125px;
+    top: 63px;
     width: 100%;
     z-index: 2;
   }
@@ -50,15 +51,17 @@
   #spotlight .title h1 {
     font-size: 60px;
     font-weight: 600;
-    margin: 0 0 35px;
+    line-height: 66px;
+    margin: 0 auto 10px;
     text-shadow: 0 2px 4px black;
+    width: 700px;
   }
 
   #spotlight .title p {
     display: inline-block;
-    font-size: 37px;
+    font-size: 27px;
     font-weight: bold;
-    line-height: 20px;
+    line-height: 30px;
     width: 620px;
     text-shadow: 0 2px 6px black;
   }
@@ -73,14 +76,19 @@
     background-color: white;
     border-radius: 10px;
     display: inline-block;
-    height: 15px;
-    margin: 0 10px;
+    height: 10px;
+    margin: 3px 10px;
     opacity: 0.5;
-    width: 15px;
+    width: 10px;
   }
 
   #pagination .page.active {
     opacity: 0.9;
+  }
+
+  #pagination .page:hover {
+    cursor: pointer;
+    opacity: 0.7;
   }
 
   #white_gradient {
@@ -143,6 +151,7 @@
   #quick_links {
     margin: 10px auto 60px;
     position: relative;
+    width: 650px;
   }
 
   #quick_links span {
@@ -250,17 +259,29 @@
 
     <a href="/profiles/bra/4mg/?app=10" class="feature">
       <div class="title">
-        <h1>Who is getting hired?</h1>
-        <p>Visualize employement data now.</p>
+        <h1>{% trans %}Who is getting hired in Minas Gerais?{% endtrans %}</h1>
+        <p>{% trans %}Visualize employement data now.{% endtrans %}</p>
       </div>
       <img src="/static/img/home/minas-map.jpg">
     </a>
 
-    <div id="pagination">
-      <span class="page active"></span>
-      <span class="page"></span>
-      <span class="page"></span>
-    </div>
+    <a href="/profiles/cbo/2131/?app=2" class="feature">
+      <div class="title">
+        <h1>{% trans %}Where do Physicists get paid the highest?{% endtrans %}</h1>
+        <p>{% trans %}Compare wages across locations.{% endtrans %}</p>
+      </div>
+      <img src="/static/img/home/physicists.jpg">
+    </a>
+
+    <a href="/profiles/hs/042009/?app=5" class="feature">
+      <div class="title">
+        <h1>{% trans %}Which occupations make Fruit Juice?{% endtrans %}</h1>
+        <p>{% trans %}Examine the common industries for a product.{% endtrans %}</p>
+      </div>
+      <img src="/static/img/home/fruitjuice.jpg">
+    </a>
+
+    <div id="pagination"></div>
 
     <!-- <div id="white_gradient"></div> -->
 
@@ -273,16 +294,16 @@
 
   <div id="quick_links">
     <span>{% trans %}Quick<br>Links{% endtrans %}</span>
-    <a href="#" class="decision square small icon bra" data-type="bra"></a>
-    <a href="#" class="decision square small icon hs" data-type="hs"></a>
-    <a href="#" class="decision square small icon wld" data-type="wld"></a>
-    <a href="#" class="decision square small icon cnae" data-type="cnae"></a>
-    <a href="#" class="decision square small icon cbo" data-type="cbo"></a>
-    <a href="#" class="decision square small icon university" data-type="university">
+    <a href="#" class="decision square small icon bra" data-type="bra" alt="{% trans %}Brazilian Locations{% endtrans %}"></a>
+    <a href="#" class="decision square small icon hs" data-type="hs" alt="{% trans %}Products{% endtrans %}"></a>
+    <a href="#" class="decision square small icon wld" data-type="wld" alt="{% trans %}Trade Partners{% endtrans %}"></a>
+    <a href="#" class="decision square small icon cnae" data-type="cnae" alt="{% trans %}Industries{% endtrans %}"></a>
+    <a href="#" class="decision square small icon cbo" data-type="cbo" alt="{% trans %}Occupations{% endtrans %}"></a>
+    <a href="#" class="decision square small icon university" data-type="university" alt="{% trans %}Universities{% endtrans %}">
       <div class="new">{% trans %}New{% endtrans %}</div></a>
-    <a href="#" class="decision square small icon course_hedu" data-type="course_hedu">
+    <a href="#" class="decision square small icon course_hedu" data-type="course_hedu" alt="{% trans %}Majors{% endtrans %}">
       <div class="new">{% trans %}New{% endtrans %}</div></a>
-    <a href="#" class="decision square small icon course_sc" data-type="course_sc">
+    <a href="#" class="decision square small icon course_sc" data-type="course_sc" alt="{% trans %}Vocational Courses{% endtrans %}">
       <div class="new">{% trans %}New{% endtrans %}</div></a>
   </div>
 
@@ -339,13 +360,65 @@
     window.location = "/profiles/" + selector.type() + "/" + d.id + "/";
   });
 
-  d3.selectAll("a.decision.square").on("click", function(){
-    d3.select("#filter_popover").call(selector.type(d3.select(this).attr('data-type')));
-    dataviva.popover.show("#filter_popover");
-    d3.event.preventDefault();
-  })
-
   prefix = d3plus.client.prefix();
+
+  d3.selectAll("#quick_links a")
+    .on(d3plus.client.pointer.over, function(){
+      dataviva.ui.tooltip("quick", this);
+    })
+    .on(d3plus.client.pointer.out, function(){
+      dataviva.ui.tooltip("quick", false);
+    })
+    .on("click", function(){
+      dataviva.ui.tooltip("quick", false);
+      d3.select("#filter_popover")
+        .call(selector.type(d3.select(this).attr('data-type')));
+      dataviva.popover.show("#filter_popover");
+      d3.event.preventDefault();
+    })
+
+  var page = 0, pages = 0;
+  d3.selectAll(".feature")
+    .style("display", function(d, i){ return i ? "none" : "block"; })
+    .style("opacity", function(d, i){ return i ? 0 : 1; })
+    .each(function(d, i){
+      pages++;
+      d3.select(this).attr("data-page",i);
+      d3.select("#pagination").append("div")
+        .attr("class","page")
+        .attr("data-page",i)
+        .classed("active", i === 0)
+    })
+
+  var changePage = function(newPage) {
+    d3.select(".page[data-page='"+page+"']").classed("active", false);
+    d3.select(".feature[data-page='"+page+"']")
+      .transition().duration(600)
+        .style("opacity", 0)
+        .each("end",function(){
+          d3.select(this).style("display", "none")
+        });
+
+    page = newPage;
+
+    d3.select(".page[data-page='"+page+"']").classed("active", true);
+    d3.select(".feature[data-page='"+page+"']")
+      .style("display", "block")
+      .transition().duration(600)
+        .style("opacity", 1);
+
+  }
+
+  var pageTurning = setInterval(function(){
+    var newPage = page + 1;
+    if (newPage === pages) newPage = 0;
+    changePage(newPage);
+  }, 4000)
+
+  d3.selectAll(".page").on("click", function(){
+    clearInterval(pageTurning);
+    changePage(d3.select(this).attr("data-page"))
+  })
 
   var addLi = function(page, item) {
     var a = page.append("li").append("a")
