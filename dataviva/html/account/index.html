@@ -12,18 +12,18 @@
 {% block body %}
 
   <div class="grid5col4 lightbox">
-    
+
     <div id="user_header">
-    
+
       <div id="user_pic" style="background-image: url('{{ user.avatar(100) }}')" alt="{{ user.fullname }} icon"></div>
       <h1>{{ user.fullname }}</h1>
       {% trans %}Activity sorted by date{% endtrans %}
-    
+
       <div id="activity_sorter">
         <input type="radio" onclick="show(this.value)" name="activity" id="all" value="all" checked>
         <label for="all">{% trans %}All{% endtrans %}</label>
         <input type="radio" onclick="show(this.value)" name="activity" id="starred" value="starred">
-        <label for="starred">{% trans %}Starred Apps{% endtrans %}</label>
+        <label for="starred">{% trans %}Starred Visualizations{% endtrans %}</label>
         <input type="radio" onclick="show(this.value)" name="activity" id="questions" value="questions">
         <label for="questions">{% trans %}Questions{% endtrans %}</label>
         <input type="radio" onclick="show(this.value)" name="activity" id="replies" value="replies">
@@ -33,9 +33,9 @@
           <label for="preferences">{% trans %}Preferences{% endtrans %}</label>
         {% endif %}
       </div>
-    
+
     </div>
-    
+
     <div id="activity_list">
       {% for a in activity %}
         {% if a.app_name %}
@@ -72,27 +72,27 @@
           </div>
         {% endif %}
     </div>
-    
+
   </div>
-  
+
 {% endblock %}
 
 {% block js %}
 
   <script>
-  	
+
     leon("$activity")
-  
+
     {% if g.user.is_authenticated() and user.nickname == g.user.nickname %}
-    
+
       leon("#receive_email")
-    
+
     	function update_email_preference(){
     		location.href = '/account/preferences/change_email_preference';
     	}
-      
+
     {% endif %}
-    
+
     function show(category) {
       if (category == "all") {
         d3.selectAll("#activity_list > a").style("display","block")
@@ -104,11 +104,11 @@
         	d3.selectAll("#active_preferences").style("display","block")
         } else {
         	d3.selectAll("#active_preferences").style("display","none")
-			d3.selectAll("#activity_list > a."+category).style("display","block")        	
+			d3.selectAll("#activity_list > a."+category).style("display","block")
         }
       }
     }
-  
+
   </script>
-  
+
 {% endblock %}
