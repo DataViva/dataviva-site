@@ -526,6 +526,8 @@ class Bra(db.Model, AutoSerialize, Stats, BasicAttr):
             lazy = 'dynamic')
 
     def icon(self):
+        if len(self.id) == 1:
+            return None
         return "/static/img/icons/bra/bra_%s.png" % (self.id[:3])
 
     def get_neighbors(self, dist, remove_self=False):

@@ -378,9 +378,11 @@ dataviva.displayID = function(id,type) {
 dataviva.icon = function(id,type,color) {
 
   if (type === "university" && id !== "all") return false;
+  if (type === "bra" && id.length === 1) return false;
 
   if (type !== "wld" && id !== "all"){
-    var depth = dataviva.depths(type)[0],
+    var i = type === "bra" ? 1 : 0,
+        depth = dataviva.depths(type)[i],
         id = id.slice(0,depth);
   }
   else {
@@ -488,7 +490,7 @@ dataviva.depths = function(type,flatten) {
   if (type == "cnae") var array = [1,3,6];
   else if (type == "cbo") var array = [1,2,4];
   else if (type == "hs") var array = [2,4,6];
-  else if (type == "bra") var array = [3,5,9];
+  else if (type == "bra") var array = [1,3,5,7,9];
   else if (type == "wld") var array = [2,5];
   else if (type == "course_hedu") var array = [2,6];
   else if (type == "university") var array = [5];
