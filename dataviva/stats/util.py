@@ -44,7 +44,7 @@ def get_month(table, year, mode):
         month_col = table.month.asc()
     else:
         month_col = table.month.desc()
-    return table.query.with_entities(table.month).filter_by(year=year).order_by(month_col).first().month
+    return table.query.with_entities(table.month).filter_by(year=year).filter(table.month!=0).order_by(month_col).first().month
 
 def compute_table_years(datasets):
     from dataviva.ei.models import Yms
