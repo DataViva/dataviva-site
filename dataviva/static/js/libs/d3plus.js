@@ -30359,7 +30359,7 @@ labelPadding = function(vars) {
   }
   xAxisHeight = Math.round(xAxisHeight);
   xAxisWidth = Math.round(xAxisWidth);
-  vars.axes.margin.bottom += xAxisHeight;
+  vars.axes.margin.bottom += xAxisHeight + vars.labels.padding;
   lastTick = vars.x.ticks.visible[vars.x.ticks.visible.length - 1];
   rightLabel = vars.x.scale.viz(lastTick);
   rightLabel += xAxisWidth / 2 + vars.axes.margin.left;
