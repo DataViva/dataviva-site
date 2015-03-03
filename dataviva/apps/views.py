@@ -78,7 +78,7 @@ def guide():
     default_cnae = 'i56112'
     default_cbo = '2235'
     default_hs = '052601'
-    
+
     # Tree Map
     builds = Build.query.filter(Build.id.in_([1,3,9])).all()
     for b in builds: b.set_bra(default_bra)
@@ -171,7 +171,7 @@ def guide():
         "title": gettext(u"Box Plot"),
         "type": "box"
     })
-    
+
     return render_template("apps/index.html", apps=apps)
 
 @mod.route("/embed/")
@@ -328,14 +328,25 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
         bra_attr = Bra.query.get_or_404(bra_id)
     filter1_attr = filter1
     filter2_attr = filter2
+    profile = False
     if filter1 != "all":
         filter1_attr = globals()[build_filter1.capitalize()].query.get_or_404(filter1)
+        profile = filter1_attr
         if output == build_filter1:
             recommended["crosswalk"] = crosswalk_recs(dataset, build_filter1, filter1)
     if filter2 != "all":
         filter2_attr = globals()[build_filter2.capitalize()].query.get_or_404(filter2)
+        profile = filter2_attr
         if output == build_filter2:
             recommended["crosswalk"] = crosswalk_recs(dataset, build_filter2, filter2)
+
+    if profile == False and output == "bra":
+        profile = bra_attr
+    if profile and output != "school":
+        recommended["profile"] = {
+            "title": u"{} {}".format(gettext("Profile for"),profile.name()),
+            "url": profile.url()
+        }
 
     if build_filter1 != "all":
         build_filter1 = "<{}>".format(build_filter1)

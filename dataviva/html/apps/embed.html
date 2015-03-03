@@ -194,12 +194,7 @@
 
     function open_builder() {
       var new_url = window.location.href.replace("embed", "builder");
-      if (window.frameElement) {
-        window.parent.location = new_url;
-      }
-      else {
-        window.location = new_url;
-      }
+      app.redirect(new_url);
     }
 
     /*******************************/
@@ -478,6 +473,15 @@
 
         var html_return = "";
 
+        if ("profile" in data) {
+          var p = data.profile;
+          html_return += "<a id='"+p.url+"' class='decision icon "
+          html_return += app.build.output_attr + "' ";
+          html_return += "onclick='app.redirect(this.id)'>";
+          html_return += p.title;
+          html_return += "</a><br>";
+        }
+
         if ("crosswalk" in data && data.crosswalk.length) {
           html_return += "<div class='title'>"+dataviva.format.text("crosswalk_"+app.build.output_attr)+"</div>";
           html_return = createRecs(html_return, data.crosswalk);
@@ -719,6 +723,15 @@
     //   .total_var("required")
     //   .else_var("elsewhere")
     //   .info_style(app.loader_style)
+
+    app.redirect = function(url) {
+      if (window.frameElement) {
+        window.parent.location = url;
+      }
+      else {
+        window.location = url;
+      }
+    }
 
     // Start building a new app
     app.start = function(new_url,allyears) {
