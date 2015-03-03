@@ -2534,7 +2534,7 @@
       // Set the max-width for the builder div and app_title
       d3.select("#controls").style("max-width",window.innerWidth+"px")
       app.title_width = window.innerWidth
-      app.title_width -= (d3.select("#settings").node().offsetWidth)
+      app.title_width -= d3.select("#settings").node().offsetWidth
 
       d3.selectAll("#controls > br").remove()
 
@@ -2562,23 +2562,23 @@
       //     })
       // }
 
-      if (app.vars.controls == "true") {
-        app.title_width = window.innerWidth
-        d3.select("#controls_toggle").attr("class","leon button square active")
-        app.title_height = d3.select("#settings").node().offsetHeight
-        var buffer = 0
-      }
-      else {
-        app.title_width = window.innerWidth - d3.select("#settings").node().offsetWidth
-        d3.select("#controls_toggle").attr("class","leon button square")
-        if (app.title_width < 200) {
-          app.title_width = window.innerWidth
-          var buffer = d3.select("#settings").node().offsetHeight
-        }
-        else {
-          var buffer = 0
-        }
-      }
+      // if (app.vars.controls == "true") {
+      //   app.title_width = window.innerWidth
+      //   d3.select("#controls_toggle").attr("class","leon button square active")
+      //   app.title_height = d3.select("#settings").node().offsetHeight
+      //   var buffer = 0
+      // }
+      // else {
+      //   app.title_width = window.innerWidth - d3.select("#settings").node().offsetWidth
+      //   d3.select("#controls_toggle").attr("class","leon button square")
+      //   if (app.title_width < 200) {
+      //     app.title_width = window.innerWidth
+      //     var buffer = d3.select("#settings").node().offsetHeight
+      //   }
+      //   else {
+      //     var buffer = 0
+      //   }
+      // }
 
       if (d3.select("#key").node() && app.categories && app.categories.length > 1) {
         d3.select("#key").style("display","inline-block")
