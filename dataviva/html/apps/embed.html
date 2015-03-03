@@ -11,55 +11,6 @@
 
   <div id="mask" class="loading"></div>
 
-  <div id="builder">
-
-    <!-- <select id="app_select" onchange="builder.app(this.options[this.selectedIndex].id)">
-
-      {% for app in apps %}
-        <option icon="url('/static/img/icons/app/app_{{app.type}}.png')" color="{{app.color}}" value="{{app.type}}" id="{{app.type}}"{% if app.type == current_build.app.type %} selected="selected"{% endif %}>
-            {{ app.name() }}
-        </option>
-      {% endfor %}
-    </select>
-
-    <div id="output" class="leon button medium" onclick="builder.selector(this.id)">
-      <span class="list_text">{% trans %}Change Output{% endtrans %}</span>
-      <i class="fa fa-list-alt"></i>
-    </div>
-
-    <div id="bra_0" class="build_filter leon button medium" onclick="builder.selector(this.id)">
-      {% set bra = current_build.bra[0] %}
-      <div class="leon icon medium" style="background-image:url('{{ bra.icon }}')"></div>
-      <span class="list_text">{{ bra.name }}</span>
-      <i class="fa fa-list-alt"></i>
-    </div>
-
-    {% if current_build.bra[1] %}
-      {% set bra = current_build.bra[1] %}
-    {% endif %}
-    <div id="bra_1" class="build_filter leon button medium" onclick="builder.selector(this.id)">
-      <div class="leon icon medium"{% if bra %} style="background-image:url('{{ bra.icon }}')"{% endif %}></div>
-      <span class="list_text">{% if bra %}{{ bra.name }}{% endif %}</span>
-      <i class="fa fa-list-alt"></i>
-    </div>
-
-    {% for a in ["cnae","cbo","hs","wld","university","course_hedu"] %}
-      {% if current_build[a] %}
-        {% set attr = current_build[a][0] %}
-      {% else %}
-        {% set attr = None %}
-      {% endif %}
-      <div id="{{a}}_0" class="build_filter leon button medium" onclick="builder.selector(this.id)">
-        <div class="leon icon medium"></div>
-        <span class="list_text">{% if attr %}{{ attr.name() }}{% endif %}</span>
-        <i class="fa fa-list-alt"></i>
-      </div>
-    {% endfor %} -->
-
-    <div id="app_controls"></div>
-
-  </div>
-
   <div id="settings">
 
     <a id="refresh" class="leon button square alt_tooltip" onclick="app.start()" alt="{% trans %}Refresh the Visualization{% endtrans %}"><i class="fa fa-refresh"></i></a>
@@ -73,7 +24,8 @@
   </div>
 
   <div id="app"></div>
-  <div id="ui_bottom"></div>
+
+  <div id="controls"></div>
 
   <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it
        to SVG/PDF/PNG downloadable file. -->
@@ -774,8 +726,7 @@
 
     app.create = function() {
 
-      d3.select("#ui_bottom").selectAll("*").remove();
-      d3.select("#builder").selectAll("*").remove();
+      d3.select("#controls").selectAll("*").remove();
       d3plus.tooltip.remove();
 
       d3.json("/apps/embed/"+app.url+"?lang="+dataviva.language)
@@ -1015,35 +966,7 @@
 
     app.finish = function() {
 
-      d3.select("#ui_bottom").selectAll("*").remove();
-      d3.select("#builder").selectAll("*").remove();
-
-      if (!app.allyears) {
-
-        var year = d3.select("#ui_bottom").append("div")
-            .attr("id","year_slider")
-
-        var b = year.append("input")
-          .attr("type","button")
-          .attr("id","allyears")
-
-        var label = year.append("label")
-          .attr("for","allyears")
-
-        label.append("i")
-          .attr("class","fa fa-play")
-          .attr("style","color:"+app.build.app.color+";")
-
-        label.append("div")
-          .attr("style","display:inline-block;margin-left:5px;")
-          .html(dataviva.format.text("Show All Years"))
-
-        b.node().onclick = function(){
-          app.start(app.url,true)
-        }
-
-        leon("#allyears").color(app.build.app.color)
-      }
+      d3.select("#controls").selectAll("*").remove();
 
       app.build.ui.forEach(function(ui){
 
@@ -1119,7 +1042,7 @@
           //   form_type = "toggle";
           // }
 
-    			var ui_div = d3.select("#builder").append("div")
+    			var ui_div = d3.select("#controls").append("div")
       			.attr("class","ui_group alt_tooltip")
       			.attr("alt",dataviva.format.text(title+"_desc_"+app.build.app.type))
       			.on(d3plus.client.pointer.over,function(){
@@ -1155,6 +1078,38 @@
         }
 
       })
+
+      if (!app.allyears) {
+
+        var year = d3.select("#controls").append("div")
+            .attr("class","ui_group alt_tooltip")
+            .attr("alt", dataviva.format.text("all_years"))
+            .attr("id","year_slider")
+            .on(d3plus.client.pointer.over,function(){
+      			  dataviva.ui.tooltip("alt_tooltip",this)
+      			})
+      			.on(d3plus.client.pointer.out,function(){
+      			  dataviva.ui.tooltip("alt_tooltip",false)
+      			})
+            // .html("<i class='fa fa-play'></i>"+dataviva.format.text("Show All Years"))
+            // .on(d3plus.client.pointer.click, function(){
+            //   app.start(app.url,true);
+            // })
+
+        d3plus.form()
+          .container(year)
+          .id("id")
+          .text("text")
+          .type("button")
+          .icon({"button": "fa-calendar"})
+          .data([{"id": "all", "text": dataviva.format.text("Show All Years")}])
+          .focus("none",function(){
+            app.start(app.url, true);
+          })
+          .ui({"margin": 0})
+          .draw()
+
+      }
 
       // Format Data if it hasn't already been formatted
       if (!app.data[app.build.data_url][format[app.build.app.type]]) {
@@ -2564,60 +2519,48 @@
 
     dataviva.resize = function(noDraw) {
 
-      var children = d3.select("#ui_bottom").node().childNodes,
-          min_width = 300;
+      var min_width = 300;
 
       if (window.innerWidth < min_width || window.innerHeight <= 400) {
         app.vars.controls = "false";
-        d3.select("#ui_bottom").style("display","none")
         d3.select("#settings").style("display","none")
-        d3.select("#builder").style("display","none")
+        d3.select("#controls").style("display","none")
       }
       else {
-        d3.select("#ui_bottom").style("display","block")
         d3.select("#settings").style("display","block")
-        d3.select("#builder").style("display","block")
+        d3.select("#controls").style("display","block")
       }
 
       // Set the max-width for the builder div and app_title
-      d3.select("#builder").style("max-width",window.innerWidth+"px")
+      d3.select("#controls").style("max-width",window.innerWidth+"px")
       app.title_width = window.innerWidth
       app.title_width -= (d3.select("#settings").node().offsetWidth)
 
-      d3.selectAll("#builder > br").remove()
-      // d3.selectAll("#app_controls > br").remove()
+      d3.selectAll("#controls > br").remove()
 
       var total_width = 0,
           settings_width = d3.select("#settings").node().offsetWidth,
-          // builder_width = d3.select("#app_controls").node().offsetLeft,
           avail_width = window.innerWidth - settings_width;
 
-      d3.selectAll("#builder > div")
-        .each(function(){
-          total_width += this.offsetWidth
-        })
-
+      // d3.selectAll("#controls > div")
+      //   .each(function(){
+      //     total_width += this.offsetWidth
+      //   })
+      //
       // if (total_width > avail_width) {
-      //   avail_width = window.innerWidth
-      //   firstbreak = false
-      //   var br = document.createElement("br")
-      //   document.getElementById("builder").insertBefore(br,document.getElementById("app_controls"))
+      //
+      //   var w = 0
+      //
+      //   d3.selectAll("#controls > div")
+      //     .each(function(){
+      //       if (w > avail_width/2) {
+      //         w = 0
+      //         var br = document.createElement("br")
+      //         this.parentNode.insertBefore(br,this)
+      //       }
+      //       w += this.offsetWidth
+      //     })
       // }
-
-      if (total_width > avail_width) {
-
-        var w = 0
-
-        d3.selectAll("#builder > div")
-          .each(function(){
-            if (w > avail_width/2) {
-              w = 0
-              var br = document.createElement("br")
-              this.parentNode.insertBefore(br,this)
-            }
-            w += this.offsetWidth
-          })
-      }
 
       if (app.vars.controls == "true") {
         app.title_width = window.innerWidth
@@ -2651,26 +2594,19 @@
         }
       }
 
-      app.height = window.innerHeight
-      app.height -= (d3.select("#ui_bottom").node().offsetHeight+buffer)
-      if (app.vars.controls != "false") app.height -= d3.select("#builder").node().offsetHeight
+      app.height = window.innerHeight-10;
+      if (app.vars.controls != "false") app.height -= d3.select("#controls").node().offsetHeight
       app.width = window.innerWidth-10;
 
-      d3.select("#builder").style("top",function(d){
-        if (app.vars.controls != "false") var u = 0
-        else var u = 1
-        return "-"+((this.offsetHeight+5)*u)+"px"
-      })
+      // d3.select("#controls").style("bottom",function(d){
+      //   if (app.vars.controls != "false") var u = 0
+      //   else var u = 1
+      //   return "-"+((this.offsetHeight+5)*u)+"px"
+      // })
 
       d3.select("#app")
         .style("height",app.height+"px")
         .style("width",app.width+"px")
-        .style("top",function(d){
-          if (app.vars.controls != "false") var u = 1
-          else var u = 0
-
-          return (((d3.select("#builder").node().offsetHeight)*u)+buffer)+"px"
-        })
         // .call(app.viz
         //     .height(app.height)
         //     .width(app.width)
@@ -2692,11 +2628,11 @@
 
       if (!app.first_load) {
         d3.select("#app")
-          .style("-webkit-transition","top 0.6s, height 0.6s")
-          .style("transition","top 0.6s, height 0.6s")
-        d3.select("#builder")
-          .style("-webkit-transition","top 0.6s")
-          .style("transition","top 0.6s")
+          .style("-webkit-transition","height 0.6s")
+          .style("transition","height 0.6s")
+        // d3.select("#controls")
+        //   .style("-webkit-transition","bottom 0.6s")
+        //   .style("transition","bottom 0.6s")
       }
 
     }

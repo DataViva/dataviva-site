@@ -8,24 +8,13 @@ body {
   width: 100%;
 }
 
-#builder #app_title {
-  text-align: left;
-  font-weight: bold;
-  font-size: 24px;
-  width: 90%;
-  min-height: 26px;
-  padding-top: 4px;
-  line-height: 28px;
-  margin-bottom: 5px;
-  display: none;
-  vertical-align: top;
-}
-
 #app {
-  margin: 0px 5px;
   background-color: #ffffff;
-  position: absolute;
-  top: 0px;
+  display: block;
+  padding: 5px;
+  position: relative;
+  z-index: 10;
+  /*top: 0px;*/
 }
 
 div.loading {
@@ -36,23 +25,10 @@ div.loading {
 /* Top Controls */
 /****************/
 
-div#toggles,
-div#settings,
-div#builder {
-  top: 0px;
-}
-
 div#settings {
   position: absolute;
   right: 10px;
   top: 5px;
-  z-index: 50;
-}
-
-div#toggles {
-  position: absolute;
-  left: 5px;
-  top: 0px;
   z-index: 50;
 }
 
@@ -68,30 +44,21 @@ div#settings > .leon.button.square {
   background-color: rgb(239,239,239);
 }
 
-div#builder {
-  left: 0px;
-  padding: 5px 0;
-  position: absolute;
-  text-align: left;
+div#controls {
+  /*bottom: 0px;*/
+  /*left: 0px;*/
+  display: block;
+  padding: 0 0 5px;
+  position: relative;
+  text-align: center;
   width: 100%;
   -webkit-user-select: none;
+  z-index: 0;
 }
 
-div#builder > div {
+div#controls > div {
   display: inline-block;
   margin: 0;
-  /*margin: 10px -5px 5px 10px;*/
-}
-
-div#builder div.leon.label {
-  padding-left: 0px;
-}
-
-div#builder div#app_controls {
-  background-color: #f9f9f9;
-  -webkit-box-shadow: inset 0px 1px 6px rgba(0,0,0,0.1);
-          box-shadow: inset 0px 1px 6px rgba(0,0,0,0.1);
-  margin: 5px 5px 5px 10px;
 }
 
 div.filter_button {
@@ -149,27 +116,6 @@ div.filter_button > div.leon.button {
 /*******************/
 /* Bottom Controls */
 /*******************/
-
-div#ui_bottom {
-  padding: 0px;
-  display: block;
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  text-align: center;
-  background-color: #ffffff;
-  z-index: 500;
-}
-
-div#year_slider {
-  display: inline-block;
-  margin-bottom: 5px;
-  white-space: nowrap;
-}
-
-div#year_slider > .leon.range {
-  margin: 0px;
-}
 
 div.scrolling_content {
   height: 100%;
