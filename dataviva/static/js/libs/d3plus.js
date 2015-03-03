@@ -301,7 +301,7 @@ Buffer.TYPED_ARRAY_SUPPORT = (function () {
     var buf = new ArrayBuffer(0)
     var arr = new Uint8Array(buf)
     arr.foo = function () { return 42 }
-    return 42 === arr.foo() && // typed array instances can be augmented
+    return arr.foo() === 42 && // typed array instances can be augmented
         typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
         new Uint8Array(1).subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
   } catch (e) {
@@ -329,60 +329,67 @@ function Buffer (subject, encoding, noZero) {
 
   // Find the length
   var length
-  if (type === 'number')
-    length = subject > 0 ? subject >>> 0 : 0
-  else if (type === 'string') {
+  if (type === 'number') {
+    length = +subject
+  } else if (type === 'string') {
     length = Buffer.byteLength(subject, encoding)
   } else if (type === 'object' && subject !== null) { // assume object is array-like
     if (subject.type === 'Buffer' && isArray(subject.data))
       subject = subject.data
-    length = +subject.length > 0 ? Math.floor(+subject.length) : 0
-  } else
+    length = +subject.length
+  } else {
     throw new TypeError('must start with number, buffer, array or string')
+  }
 
   if (length > kMaxLength)
     throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
       'size: 0x' + kMaxLength.toString(16) + ' bytes')
 
-  var buf
+  if (length < 0)
+    length = 0
+  else
+    length >>>= 0 // Coerce to uint32.
+
+  var self = this
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     // Preferred: Return an augmented `Uint8Array` instance for best performance
-    buf = Buffer._augment(new Uint8Array(length))
+    /*eslint-disable consistent-this */
+    self = Buffer._augment(new Uint8Array(length))
+    /*eslint-enable consistent-this */
   } else {
     // Fallback: Return THIS instance of Buffer (created by `new`)
-    buf = this
-    buf.length = length
-    buf._isBuffer = true
+    self.length = length
+    self._isBuffer = true
   }
 
   var i
   if (Buffer.TYPED_ARRAY_SUPPORT && typeof subject.byteLength === 'number') {
     // Speed optimization -- use set if we're copying from a typed array
-    buf._set(subject)
+    self._set(subject)
   } else if (isArrayish(subject)) {
     // Treat array-ish objects as a byte array
     if (Buffer.isBuffer(subject)) {
       for (i = 0; i < length; i++)
-        buf[i] = subject.readUInt8(i)
+        self[i] = subject.readUInt8(i)
     } else {
       for (i = 0; i < length; i++)
-        buf[i] = ((subject[i] % 256) + 256) % 256
+        self[i] = ((subject[i] % 256) + 256) % 256
     }
   } else if (type === 'string') {
-    buf.write(subject, 0, encoding)
+    self.write(subject, 0, encoding)
   } else if (type === 'number' && !Buffer.TYPED_ARRAY_SUPPORT && !noZero) {
     for (i = 0; i < length; i++) {
-      buf[i] = 0
+      self[i] = 0
     }
   }
 
   if (length > 0 && length <= Buffer.poolSize)
-    buf.parent = rootParent
+    self.parent = rootParent
 
-  return buf
+  return self
 }
 
-function SlowBuffer(subject, encoding, noZero) {
+function SlowBuffer (subject, encoding, noZero) {
   if (!(this instanceof SlowBuffer))
     return new SlowBuffer(subject, encoding, noZero)
 
@@ -398,6 +405,8 @@ Buffer.isBuffer = function (b) {
 Buffer.compare = function (a, b) {
   if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b))
     throw new TypeError('Arguments must be Buffers')
+
+  if (a === b) return 0
 
   var x = a.length
   var y = b.length
@@ -539,6 +548,7 @@ Buffer.prototype.toString = function (encoding, start, end) {
 
 Buffer.prototype.equals = function (b) {
   if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
+  if (this === b) return true
   return Buffer.compare(this, b) === 0
 }
 
@@ -555,6 +565,7 @@ Buffer.prototype.inspect = function () {
 
 Buffer.prototype.compare = function (b) {
   if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
+  if (this === b) return 0
   return Buffer.compare(this, b)
 }
 
@@ -617,7 +628,7 @@ function base64Write (buf, string, offset, length) {
 }
 
 function utf16leWrite (buf, string, offset, length) {
-  var charsWritten = blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length, 2)
+  var charsWritten = blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length)
   return charsWritten
 }
 
@@ -639,7 +650,7 @@ Buffer.prototype.write = function (string, offset, length, encoding) {
   offset = Number(offset) || 0
 
   if (length < 0 || offset < 0 || offset > this.length)
-    throw new RangeError('attempt to write outside buffer bounds');
+    throw new RangeError('attempt to write outside buffer bounds')
 
   var remaining = this.length - offset
   if (!length) {
@@ -762,7 +773,7 @@ Buffer.prototype.slice = function (start, end) {
   end = end === undefined ? len : ~~end
 
   if (start < 0) {
-    start += len;
+    start += len
     if (start < 0)
       start = 0
   } else if (start > len) {
@@ -831,7 +842,7 @@ Buffer.prototype.readUIntBE = function (offset, byteLength, noAssert) {
   var val = this[offset + --byteLength]
   var mul = 1
   while (byteLength > 0 && (mul *= 0x100))
-    val += this[offset + --byteLength] * mul;
+    val += this[offset + --byteLength] * mul
 
   return val
 }
@@ -1239,7 +1250,7 @@ Buffer.prototype.writeDoubleBE = function (value, offset, noAssert) {
 
 // copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
 Buffer.prototype.copy = function (target, target_start, start, end) {
-  var source = this
+  var self = this // source
 
   if (!start) start = 0
   if (!end && end !== 0) end = this.length
@@ -1249,12 +1260,12 @@ Buffer.prototype.copy = function (target, target_start, start, end) {
 
   // Copy 0 bytes; we're done
   if (end === start) return 0
-  if (target.length === 0 || source.length === 0) return 0
+  if (target.length === 0 || self.length === 0) return 0
 
   // Fatal error conditions
   if (target_start < 0)
     throw new RangeError('targetStart out of bounds')
-  if (start < 0 || start >= source.length) throw new RangeError('sourceStart out of bounds')
+  if (start < 0 || start >= self.length) throw new RangeError('sourceStart out of bounds')
   if (end < 0) throw new RangeError('sourceEnd out of bounds')
 
   // Are we oob?
@@ -1428,61 +1439,50 @@ function toHex (n) {
   return n.toString(16)
 }
 
-function utf8ToBytes(string, units) {
-  var codePoint, length = string.length
-  var leadSurrogate = null
+function utf8ToBytes (string, units) {
   units = units || Infinity
+  var codePoint
+  var length = string.length
+  var leadSurrogate = null
   var bytes = []
   var i = 0
 
-  for (; i<length; i++) {
+  for (; i < length; i++) {
     codePoint = string.charCodeAt(i)
 
     // is surrogate component
     if (codePoint > 0xD7FF && codePoint < 0xE000) {
-
       // last char was a lead
       if (leadSurrogate) {
-
         // 2 leads in a row
         if (codePoint < 0xDC00) {
           if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
           leadSurrogate = codePoint
           continue
-        }
-
-        // valid surrogate pair
-        else {
+        } else {
+          // valid surrogate pair
           codePoint = leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00 | 0x10000
           leadSurrogate = null
         }
-      }
+      } else {
+        // no lead yet
 
-      // no lead yet
-      else {
-
-        // unexpected trail
         if (codePoint > 0xDBFF) {
+          // unexpected trail
           if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
           continue
-        }
-
-        // unpaired lead
-        else if (i + 1 === length) {
+        } else if (i + 1 === length) {
+          // unpaired lead
           if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
           continue
-        }
-
-        // valid lead
-        else {
+        } else {
+          // valid lead
           leadSurrogate = codePoint
           continue
         }
       }
-    }
-
-    // valid bmp char, but last char was a lead
-    else if (leadSurrogate) {
+    } else if (leadSurrogate) {
+      // valid bmp char, but last char was a lead
       if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
       leadSurrogate = null
     }
@@ -1491,32 +1491,28 @@ function utf8ToBytes(string, units) {
     if (codePoint < 0x80) {
       if ((units -= 1) < 0) break
       bytes.push(codePoint)
-    }
-    else if (codePoint < 0x800) {
+    } else if (codePoint < 0x800) {
       if ((units -= 2) < 0) break
       bytes.push(
         codePoint >> 0x6 | 0xC0,
         codePoint & 0x3F | 0x80
-      );
-    }
-    else if (codePoint < 0x10000) {
+      )
+    } else if (codePoint < 0x10000) {
       if ((units -= 3) < 0) break
       bytes.push(
         codePoint >> 0xC | 0xE0,
         codePoint >> 0x6 & 0x3F | 0x80,
         codePoint & 0x3F | 0x80
-      );
-    }
-    else if (codePoint < 0x200000) {
+      )
+    } else if (codePoint < 0x200000) {
       if ((units -= 4) < 0) break
       bytes.push(
         codePoint >> 0x12 | 0xF0,
         codePoint >> 0xC & 0x3F | 0x80,
         codePoint >> 0x6 & 0x3F | 0x80,
         codePoint & 0x3F | 0x80
-      );
-    }
-    else {
+      )
+    } else {
       throw new Error('Invalid code point')
     }
   }
@@ -1537,7 +1533,6 @@ function utf16leToBytes (str, units) {
   var c, hi, lo
   var byteArray = []
   for (var i = 0; i < str.length; i++) {
-
     if ((units -= 2) < 0) break
 
     c = str.charCodeAt(i)
@@ -1554,8 +1549,7 @@ function base64ToBytes (str) {
   return base64.toByteArray(base64clean(str))
 }
 
-function blitBuffer (src, dst, offset, length, unitSize) {
-  if (unitSize) length -= length % unitSize;
+function blitBuffer (src, dst, offset, length) {
   for (var i = 0; i < length; i++) {
     if ((i + offset >= dst.length) || (i >= src.length))
       break
@@ -9302,7 +9296,7 @@ function unique(list, compare, sorted) {
 
 module.exports = unique
 },{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
-arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
 },{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
 "use strict"
 
@@ -13474,33 +13468,25 @@ module.exports = function(transform) {
 
 
 },{}],"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee":[function(require,module,exports){
-var d3selection;
-
-d3selection = require("../../../util/d3selection.coffee");
-
 module.exports = function(value, vars, method) {
-  var maybeURL;
-  if (typeof value !== "string" && !d3selection(value)) {
-    return value;
-  } else {
-    maybeURL = value.indexOf("/") >= 0;
-    if (!maybeURL && d3selection(value)) {
-      return value;
-    } else {
-      if (!maybeURL && !d3.selectAll(value).empty()) {
-        return d3.selectAll(value);
-      } else {
-        method.url = value;
-        return [];
-      }
+  if (typeof value === "string") {
+    if (value.indexOf("/") >= 0) {
+      method.url = value;
+      return [];
     }
-    return [];
+    if (d3.selectAll(value).size()) {
+      return d3.selectAll(value);
+    } else {
+      return [];
+    }
+  } else {
+    return value;
   }
 };
 
 
 
-},{"../../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/process/detect.coffee":[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/process/detect.coffee":[function(require,module,exports){
 var copy, update;
 
 copy = require("../../../util/copy.coffee");
@@ -13681,6 +13667,9 @@ module.exports = function(vars, method, object, key, value) {
       }
     } else {
       object.changed = true;
+      if (object.loaded) {
+        object.loaded = false;
+      }
       if ("history" in vars && method !== "draw") {
         c = copy(object);
         c.method = method;
@@ -21114,13 +21103,18 @@ module.exports = function(vars) {
 }
 
 },{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/arc.coffee":[function(require,module,exports){
-var largestRect, path2poly, shapeStyle;
+var angles, largestRect, path2poly, shapeStyle;
 
 shapeStyle = require("./style.coffee");
 
 largestRect = require("../../../geom/largestRect.coffee");
 
 path2poly = require("../../../geom/path2poly.coffee");
+
+angles = {
+  start: {},
+  end: {}
+};
 
 module.exports = function(vars, selection, enter, exit) {
   var arc, arcTween, data, newarc;
@@ -21159,21 +21153,21 @@ module.exports = function(vars, selection, enter, exit) {
     newarc = d3.svg.arc().innerRadius(0).outerRadius(function(d) {
       return d.d3plus.r;
     }).startAngle(function(d) {
-      if (d.d3plus.startAngleCurrent === void 0) {
-        d.d3plus.startAngleCurrent = 0;
+      if (angles.start[d.d3plus.id] === void 0) {
+        angles.start[d.d3plus.id] = 0;
       }
-      if (isNaN(d.d3plus.startAngleCurrent)) {
-        d.d3plus.startAngleCurrent = d.d3plus.startAngle;
+      if (isNaN(angles.start[d.d3plus.id])) {
+        angles.start[d.d3plus.id] = d.d3plus.startAngle;
       }
-      return d.d3plus.startAngleCurrent;
+      return angles.start[d.d3plus.id];
     }).endAngle(function(d) {
-      if (d.d3plus.endAngleCurrent === void 0) {
-        d.d3plus.endAngleCurrent = 0;
+      if (angles.end[d.d3plus.id] === void 0) {
+        angles.end[d.d3plus.id] = 0;
       }
-      if (isNaN(d.d3plus.endAngleCurrent)) {
-        d.d3plus.endAngleCurrent = d.d3plus.endAngle;
+      if (isNaN(angles.end[d.d3plus.id])) {
+        angles.end[d.d3plus.id] = d.d3plus.endAngle;
       }
-      return d.d3plus.endAngleCurrent;
+      return angles.end[d.d3plus.id];
     });
     arcTween = function(arcs, newAngle) {
       return arcs.attrTween("d", function(d) {
@@ -21185,11 +21179,11 @@ module.exports = function(vars, selection, enter, exit) {
           s = 0;
           e = 0;
         }
-        interpolateS = d3.interpolate(d.d3plus.startAngleCurrent, s);
-        interpolateE = d3.interpolate(d.d3plus.endAngleCurrent, e);
+        interpolateS = d3.interpolate(angles.start[d.d3plus.id], s);
+        interpolateE = d3.interpolate(angles.end[d.d3plus.id], e);
         return function(t) {
-          d.d3plus.startAngleCurrent = interpolateS(t);
-          d.d3plus.endAngleCurrent = interpolateE(t);
+          angles.start[d.d3plus.id] = interpolateS(t);
+          angles.end[d.d3plus.id] = interpolateE(t);
           return newarc(d);
         };
       });
@@ -21209,11 +21203,11 @@ module.exports = function(vars, selection, enter, exit) {
 var fetchText = require("../../../core/fetch/text.js"),
     fontSizes   = require("../../../font/sizes.coffee"),
     largestRect = require("../../../geom/largestRect.coffee"),
-    shapeStyle  = require("./style.coffee")
+    shapeStyle  = require("./style.coffee");
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Draws "square" and "circle" shapes using svg:rect
 //------------------------------------------------------------------------------
-module.exports = function(vars,selection,enter,exit) {
+module.exports = function(vars, selection, enter, exit) {
 
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // D3 area definition
@@ -21222,14 +21216,20 @@ module.exports = function(vars,selection,enter,exit) {
     .x(function(d) { return d.d3plus.x; })
     .y0(function(d) { return d.d3plus.y0; })
     .y1(function(d) { return d.d3plus.y; })
-    .interpolate(vars.shape.interpolate.value)
+    .interpolate(vars.shape.interpolate.value);
+
+  var startArea = d3.svg.area()
+    .x(function(d) { return d.d3plus.x; })
+    .y0(function(d) { return d.d3plus.y0; })
+    .y1(function(d) { return d.d3plus.y0; })
+    .interpolate(vars.shape.interpolate.value);
 
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // "paths" Enter
   //----------------------------------------------------------------------------
   enter.append("path").attr("class","d3plus_data")
-    .attr("d",function(d){ return area(d.values) })
-    .call(shapeStyle,vars)
+    .attr("d",function(d){ return startArea(d.values); })
+    .call(shapeStyle,vars);
 
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // "paths" Update
@@ -29502,7 +29502,7 @@ print = require("../../../../../core/console/print.coffee");
 uniques = require("../../../../../util/uniques.coffee");
 
 module.exports = function(vars, opts) {
-  var axis, changed, domains, filtered, modified, oppAxis, range, reorder, zero, _i, _len, _ref;
+  var axis, changed, domains, oppAxis, range, reorder, zero, _i, _len, _ref;
   changed = dataChange(vars);
   if (changed || !vars.axes.dataset) {
     vars.axes.dataset = getData(vars);
@@ -29512,10 +29512,8 @@ module.exports = function(vars, opts) {
   for (_i = 0, _len = _ref.length; _i < _len; _i++) {
     axis = _ref[_i];
     oppAxis = axis === "x" ? "y" : "x";
-    filtered = vars[axis].solo.changed || vars[axis].mute.changed;
-    modified = changed || vars[axis].changed || (vars.time.fixed.value && filtered) || vars[axis].scale.changed;
     reorder = vars.order.changed || vars.order.sort.changed || (vars.order.value === true && vars[oppAxis].changed);
-    if (!("values" in vars[axis].ticks) || modified || vars[axis].stacked.changed || vars[axis].range.changed || reorder) {
+    if (!("values" in vars[axis].ticks) || changed || reorder) {
       if (vars.dev.value) {
         print.time("calculating " + axis + " axis");
       }
@@ -29547,8 +29545,7 @@ module.exports = function(vars, opts) {
 };
 
 dataChange = function(vars) {
-  var changed, check, k, _i, _len;
-  check = ["data", "time", "id", "depth", "type"];
+  var axis, changed, check, k, sub, subs, _i, _j, _k, _len, _len1, _len2, _ref;
   changed = vars.time.fixed.value && (vars.time.solo.changed || vars.time.mute.changed);
   if (!changed) {
     changed = vars.id.solo.changed || vars.id.mute.changed;
@@ -29556,11 +29553,24 @@ dataChange = function(vars) {
   if (changed) {
     return changed;
   }
+  check = ["data", "time", "id", "depth", "type", "x", "y"];
   for (_i = 0, _len = check.length; _i < _len; _i++) {
     k = check[_i];
     if (vars[k].changed) {
       changed = true;
       break;
+    }
+  }
+  subs = ["mute", "range", "scale", "solo", "stacked"];
+  _ref = ["x", "y"];
+  for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+    axis = _ref[_j];
+    for (_k = 0, _len2 = subs.length; _k < _len2; _k++) {
+      sub = subs[_k];
+      if (vars[axis][sub].changed) {
+        changed = true;
+        break;
+      }
     }
   }
   return changed;
