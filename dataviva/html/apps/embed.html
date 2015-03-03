@@ -1595,7 +1595,7 @@
           text = dataviva.format.text("secex_3")
         }
       }
-      if (["stacked","line"].indexOf(app.build.app.type) >= 0) {
+      if (["stacked","line"].indexOf(app.build.app.type) >= 0 && !app.monthly) {
         var joiner = text.length ? ", " : ""
         text += joiner + dataviva.format.text("Click to Zoom");
         if (joiner.length) text += ".";
