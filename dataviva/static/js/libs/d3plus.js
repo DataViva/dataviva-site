@@ -9296,7 +9296,7 @@ function unique(list, compare, sorted) {
 
 module.exports = unique
 },{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
-arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
 },{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
 "use strict"
 
@@ -13522,7 +13522,69 @@ module.exports = function(value, vars, method) {
 
 
 
-},{"../../../client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/rejected.coffee":[function(require,module,exports){
+},{"../../../client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/process/margin.coffee":[function(require,module,exports){
+module.exports = function(value, self) {
+  var i, side, sides, v, _i, _j, _k, _l, _len, _len1, _len2, _len3, _results;
+  if (typeof value === "string") {
+    value = value.split(" ");
+    for (i = _i = 0, _len = value.length; _i < _len; i = ++_i) {
+      v = value[i];
+      value[i] = parseFloat(v, 10);
+    }
+    if (value.length === 1) {
+      value = value[0];
+    } else if (value.length === 2) {
+      value = {
+        top: value[0],
+        right: value[1],
+        bottom: value[0],
+        left: value[1]
+      };
+    } else if (value.length === 3) {
+      value = {
+        top: value[0],
+        right: value[1],
+        bottom: value[2],
+        left: value[1]
+      };
+    } else if (value.length === 4) {
+      value = {
+        top: value[0],
+        right: value[1],
+        bottom: value[2],
+        left: value[3]
+      };
+    } else {
+      value = 0;
+    }
+  }
+  sides = ["top", "right", "bottom", "left"];
+  if (typeof value === "number") {
+    for (_j = 0, _len1 = sides.length; _j < _len1; _j++) {
+      side = sides[_j];
+      self[side] = value;
+    }
+  } else {
+    for (_k = 0, _len2 = sides.length; _k < _len2; _k++) {
+      side = sides[_k];
+      self[side] = value[side];
+    }
+  }
+  self.css = "";
+  _results = [];
+  for (i = _l = 0, _len3 = sides.length; _l < _len3; i = ++_l) {
+    side = sides[i];
+    if (i) {
+      self.css += " ";
+    }
+    _results.push(self.css += self[side] + "px");
+  }
+  return _results;
+};
+
+
+
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/rejected.coffee":[function(require,module,exports){
 var contains, format, list, print;
 
 contains = require("../../array/contains.coffee");
@@ -14624,10 +14686,10 @@ module.exports = function() {
         // Update Container
         //------------------------------------------------------------------------
         vars.container.ui
-          .style("display",vars.ui.display.value);
+          .style("display", vars.ui.display.value);
 
         vars.container.ui.transition().duration(vars.draw.timing)
-          .style("margin",vars.ui.margin+"px");
+          .style("margin", vars.ui.margin.css);
 
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         // Create title, if available.
@@ -14644,7 +14706,7 @@ module.exports = function() {
           .style("font-family",vars.font.family.value)
           .style("font-size",vars.font.size+"px")
           .style("font-weight",vars.font.weight)
-          .style("padding",vars.ui.padding+"px")
+          .style("padding",vars.ui.padding.css)
           .style("border-color","transparent")
           .style("border-style","solid")
           .style("border-width",vars.ui.border+"px")
@@ -15197,67 +15259,19 @@ module.exports = {
 
 
 },{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/margin.coffee":[function(require,module,exports){
+var process;
+
+process = require("../../core/methods/process/margin.coffee");
+
 module.exports = {
   accepted: [Number, Object, String],
   process: function(value) {
-    var i, k, self, side, sideIndex, sides, userValue, v, _i, _j, _k, _len, _len1, _len2;
-    self = this;
-    sides = ["top", "right", "bottom", "left"];
+    var userValue;
     if (value === void 0) {
-      value = self.value;
+      value = this.value;
     }
     userValue = value;
-    if (typeof value === "string") {
-      value = value.split(" ");
-      for (i = _i = 0, _len = value.length; _i < _len; i = ++_i) {
-        v = value[i];
-        value[i] = parseFloat(v, 10);
-      }
-      if (value.length === 1) {
-        value = value[0];
-      } else if (value.length === 2) {
-        value = {
-          top: value[0],
-          right: value[1],
-          bottom: value[0],
-          left: value[1]
-        };
-      } else if (value.length === 3) {
-        value = {
-          top: value[0],
-          right: value[1],
-          bottom: value[2],
-          left: value[1]
-        };
-      } else if (value.length === 4) {
-        value = {
-          top: value[0],
-          right: value[1],
-          bottom: value[2],
-          left: value[3]
-        };
-      } else {
-        value = 0;
-      }
-    }
-    if (typeof value === "number") {
-      for (_j = 0, _len1 = sides.length; _j < _len1; _j++) {
-        side = sides[_j];
-        self[side] = value;
-      }
-    } else {
-      for (side in value) {
-        sideIndex = sides.indexOf(side);
-        if (sideIndex >= 0) {
-          sides.splice(sideIndex, 1);
-          self[side] = value[side];
-        }
-      }
-      for (_k = 0, _len2 = sides.length; _k < _len2; _k++) {
-        k = sides[_k];
-        self[k] = 0;
-      }
-    }
+    process(value, this);
     return userValue;
   },
   value: 0
@@ -15265,7 +15279,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/Sites/d3plus/src/form/methods/open.coffee":[function(require,module,exports){
+},{"../../core/methods/process/margin.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/margin.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/open.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   flipped: {
@@ -15431,13 +15445,15 @@ module.exports = {
 
 
 },{}],"/Users/Dave/Sites/d3plus/src/form/methods/ui.coffee":[function(require,module,exports){
-var align, decoration, family, transform;
+var align, decoration, family, margin, transform;
 
 family = require("../../core/methods/font/family.coffee");
 
 align = require("../../core/methods/font/align.coffee");
 
 decoration = require("../../core/methods/font/decoration.coffee");
+
+margin = require("../../core/methods/process/margin.coffee");
 
 transform = require("../../core/methods/font/transform.coffee");
 
@@ -15473,13 +15489,35 @@ module.exports = {
     transform: transform(),
     weight: 200
   },
-  margin: 5,
-  padding: 5
+  margin: {
+    process: function(value) {
+      var userValue;
+      if (value === void 0) {
+        value = this.value;
+      }
+      userValue = value;
+      margin(value, this);
+      return userValue;
+    },
+    value: 5
+  },
+  padding: {
+    process: function(value) {
+      var userValue;
+      if (value === void 0) {
+        value = this.value;
+      }
+      userValue = value;
+      margin(value, this);
+      return userValue;
+    },
+    value: 5
+  }
 };
 
 
 
-},{"../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/width.coffee":[function(require,module,exports){
+},{"../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee","../../core/methods/process/margin.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/margin.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/width.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   secondary: false,
@@ -15679,10 +15717,10 @@ module.exports = function ( elem , vars ) {
           }
 
           if (vars.height.value) {
-            buffer = (vars.height.value-(vars.ui.padding*2)-(vars.ui.border*2))
+            buffer = (vars.height.value-(vars.ui.padding.top + vars.ui.padding.bottom)-(vars.ui.border*2));
           }
           else {
-            buffer = vars.font.size+vars.ui.padding+vars.ui.border
+            buffer = vars.font.size+vars.ui.border;
           }
           return buffer+"px"
         })
@@ -15712,13 +15750,13 @@ module.exports = function ( elem , vars ) {
         })
         .style("left",function(c){
           if ((c === "icon" && !reversed) || (c === "selected" && reversed)) {
-            return vars.ui.padding+"px"
+            return vars.ui.padding.left+"px"
           }
           return "auto"
         })
         .style("right",function(c){
           if ((c === "icon" && reversed) || (c === "selected" && !reversed)) {
-            return vars.ui.padding+"px"
+            return vars.ui.padding.right+"px"
           }
           return "auto"
         })
@@ -15739,25 +15777,23 @@ module.exports = function ( elem , vars ) {
 
       if (buffer > 0) {
 
-        buffer += vars.ui.padding*2
-
-        var p = vars.ui.padding
+        var p = vars.ui.padding;
 
         if (children.length === 3) {
-          var padding = p+"px "+buffer+"px"
+          p = p.top+"px "+(p.right*2+buffer)+"px "+p.bottom+"px "+(p.left*2+buffer)+"px";
         }
         else if ((children.indexOf("icon") >= 0 && !rtl) || (children.indexOf("selected") >= 0 && rtl)) {
-          var padding = p+"px "+p+"px "+p+"px "+buffer+"px"
+          p = p.top+"px "+p.right+"px "+p.bottom+"px "+(p.left*2+buffer)+"px";
         }
         else {
-          var padding = p+"px "+buffer+"px "+p+"px "+p+"px"
+          p = p.top+"px "+(p.right*2+buffer)+"px "+p.bottom+"px "+p.left+"px";
         }
 
-        text.style("padding",padding)
+        text.style("padding", p)
 
       }
       else {
-        text.style("padding",vars.ui.padding+"px")
+        text.style("padding",vars.ui.padding.css)
       }
 
       if (typeof vars.width.value === "number") {
@@ -15812,7 +15848,7 @@ module.exports = function ( elem , vars ) {
 
   elem
     .style("position","relative")
-    .style("margin",vars.ui.margin+"px")
+    .style("margin",vars.ui.margin.css)
     .style("display",vars.ui.display.value)
     .style("border-style","solid")
     .style("border-width",vars.ui.border+"px")
@@ -15995,7 +16031,7 @@ module.exports = function ( vars ) {
     })
     .ui({
       "color": vars.ui.color,
-      "padding": vars.ui.padding
+      "padding": vars.ui.padding.css
     })
     .width(vars.width.value)
     .draw()
@@ -16171,25 +16207,27 @@ module.exports = function(vars) {
 //------------------------------------------------------------------------------
 module.exports = function ( vars ) {
 
-  var button = vars.container.button.container().node().getBoundingClientRect()
+  var button = vars.container.button.container().node().getBoundingClientRect();
 
-  vars.height.secondary = window.innerHeight - button.bottom - vars.ui.margin
-                         - vars.ui.padding*2 - vars.ui.border*2
+  vars.height.secondary = window.innerHeight - button.bottom -
+                          vars.ui.margin.top - vars.ui.margin.bottom -
+                          vars.ui.padding.top - vars.ui.padding.bottom -
+                          vars.ui.border * 2;
 
   if ( vars.height.secondary < button.height*3 ) {
-    vars.height.secondary = button.top-10
-    vars.self.open({"flipped": true})
+    vars.height.secondary = button.top-10;
+    vars.self.open({"flipped": true});
   }
   else {
-    vars.self.open({"flipped": false})
+    vars.self.open({"flipped": false});
   }
 
-  var scrolling = false
+  var scrolling = false;
   if (vars.height.secondary > vars.height.max) {
-    vars.height.secondary = vars.height.max
+    vars.height.secondary = vars.height.max;
   }
 
-}
+};
 
 },{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/items.coffee":[function(require,module,exports){
 var active, copy, form, print;
@@ -16271,7 +16309,7 @@ module.exports = function(vars) {
         primary: (vars.id.nesting.length === 1 ? vars.ui.color.primary.value : vars.ui.color.secondary.value),
         secondary: vars.ui.color.secondary.value
       },
-      padding: vars.ui.padding
+      padding: vars.ui.padding.css
     }).draw();
     if (vars.dev.value) {
       print.timeEnd("updating list items");
@@ -16507,7 +16545,7 @@ module.exports = function ( vars ) {
   function searchStyle(elem) {
 
     elem
-      .style("padding",vars.ui.padding+"px")
+      .style("padding",vars.ui.padding.css)
       .style("display","block")
       .style("background-color",d3.rgb(vars.ui.color.primary.value).darker(0.15).toString())
 
@@ -16515,10 +16553,10 @@ module.exports = function ( vars ) {
 
   function inputStyle(elem) {
 
-    var width = vars.width.secondary - vars.ui.padding*4 + vars.ui.border*2
+    var width = vars.width.secondary - vars.ui.padding.left*2 - vars.ui.padding.right*2 + vars.ui.border*2
 
     elem
-      .style("padding",vars.ui.padding/2+"px")
+      .style("padding",vars.ui.padding.left/2+vars.ui.padding.right/2+"px")
       .style("width",width+"px")
       .style("border-width","0px")
       .style("font-family",vars.font.secondary.family.value)
@@ -16643,7 +16681,7 @@ module.exports = function ( vars ) {
     function boxStyle(elem) {
 
       elem
-        .style("padding",vars.ui.padding+"px")
+        .style("padding",vars.ui.padding.css)
         .style("display","block")
         .style("background-color",vars.ui.color.secondary.value)
         .style("font-family",vars.font.secondary.family.value)
@@ -16666,7 +16704,7 @@ module.exports = function ( vars ) {
         elem
           .style("position","absolute")
           .attr("class",className)
-          .style("top",vars.ui.padding+(vars.font.secondary.size/2)/2.5+"px")
+          .style("top",vars.ui.padding.top+(vars.font.secondary.size/2)/2.5+"px")
           .html(text)
 
       }
@@ -16679,7 +16717,7 @@ module.exports = function ( vars ) {
 
       elem
         .text(vars.format.value(text))
-        .style("padding","0px "+vars.ui.padding*2+"px")
+        .style("padding","0px "+(vars.ui.padding.left+vars.ui.padding.right)+"px")
 
     }
 
@@ -16782,7 +16820,7 @@ module.exports = function ( vars ) {
           d3.select(this).style("z-index",9999)
         }
       })
-      .style("margin",vars.ui.margin+"px")
+      .style("margin",vars.ui.margin.css)
       .each("end",function(){
         if (!vars.open.value) {
           d3.select(this).style("z-index","auto")
@@ -16793,7 +16831,7 @@ module.exports = function ( vars ) {
   else {
 
     vars.container.ui
-      .style("margin",vars.ui.margin+"px")
+      .style("margin",vars.ui.margin.css)
       .style("z-index",function(){
         if (vars.open.value) {
           return 9999
@@ -16982,7 +17020,7 @@ module.exports = function ( vars ) {
         "border": type === "primary" ? vars.ui.border : 0,
         "display": "inline-block",
         "margin": 0,
-        "padding": vars.ui.padding
+        "padding": vars.ui.padding.css
       })
       .width(false)
       .draw()
@@ -17142,7 +17180,7 @@ module.exports = function( vars ) {
           "color": vars.ui.color,
           "display": "inline-block",
           "margin": 0,
-          "padding": vars.ui.padding
+          "padding": vars.ui.padding.css
         })
         .width(buttonWidth)
         .draw()
@@ -28317,67 +28355,19 @@ module.exports = {
 
 
 },{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/margin.coffee":[function(require,module,exports){
+var process;
+
+process = require("../../core/methods/process/margin.coffee");
+
 module.exports = {
   accepted: [Number, Object, String],
   process: function(value) {
-    var i, k, self, side, sideIndex, sides, userValue, v, _i, _j, _k, _len, _len1, _len2;
-    self = this;
-    sides = ["top", "right", "bottom", "left"];
+    var userValue;
     if (value === void 0) {
-      value = self.value;
+      value = this.value;
     }
     userValue = value;
-    if (typeof value === "string") {
-      value = value.split(" ");
-      for (i = _i = 0, _len = value.length; _i < _len; i = ++_i) {
-        v = value[i];
-        value[i] = parseFloat(v, 10);
-      }
-      if (value.length === 1) {
-        value = value[0];
-      } else if (value.length === 2) {
-        value = {
-          top: value[0],
-          right: value[1],
-          bottom: value[0],
-          left: value[1]
-        };
-      } else if (value.length === 3) {
-        value = {
-          top: value[0],
-          right: value[1],
-          bottom: value[2],
-          left: value[1]
-        };
-      } else if (value.length === 4) {
-        value = {
-          top: value[0],
-          right: value[1],
-          bottom: value[2],
-          left: value[3]
-        };
-      } else {
-        value = 0;
-      }
-    }
-    if (typeof value === "number") {
-      for (_j = 0, _len1 = sides.length; _j < _len1; _j++) {
-        side = sides[_j];
-        self[side] = value;
-      }
-    } else {
-      for (side in value) {
-        sideIndex = sides.indexOf(side);
-        if (sideIndex >= 0) {
-          sides.splice(sideIndex, 1);
-          self[side] = value[side];
-        }
-      }
-      for (_k = 0, _len2 = sides.length; _k < _len2; _k++) {
-        k = sides[_k];
-        self[k] = 0;
-      }
-    }
+    process(value, this);
     return userValue;
   },
   value: 0
@@ -28385,7 +28375,7 @@ module.exports = {
 
 
 
-},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/messages.coffee":[function(require,module,exports){
+},{"../../core/methods/process/margin.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/margin.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/messages.coffee":[function(require,module,exports){
 var decoration, family, transform;
 
 decoration = require("../../core/methods/font/decoration.coffee");
