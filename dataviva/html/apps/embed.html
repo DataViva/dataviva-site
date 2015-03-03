@@ -2704,7 +2704,18 @@
         app.start();
       }
     }
-    load_attr();
+    localforage.getItem("version", function(error, version){
+
+      if (error || version !== dataviva.attr_version) {
+        localforage.clear(function(){
+          localforage.setItem("version", dataviva.attr_version);
+          load_attr();
+        })
+      }
+      else {
+        load_attr();
+      }
+    })
 
     if (Modernizr.history) {
      window.onpopstate = function() {

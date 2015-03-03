@@ -889,21 +889,35 @@ function Selector() {
         create_elements()
       }
       else {
-        var attr_url = "/attrs/"+type+"/?lang="+dataviva.language;
-        localforage.getItem(attr_url, function(error, attrs){
-          if (attrs)  {
-            data = attrs.data;
-            clean_data();
+        function loadattrs() {
+          var attr_url = "/attrs/"+type+"/?lang="+dataviva.language;
+          localforage.getItem(attr_url, function(error, attrs){
+            if (attrs)  {
+              data = attrs.data;
+              clean_data();
+            }
+            else {
+              d3.json(attr_url)
+                .header("X-Requested-With", "XMLHttpRequest")
+                .get(function(error, attrs) {
+                  localforage.setItem(attr_url, attrs);
+                  data = attrs.data;
+                  clean_data();
+                })
+            }
+          })
+        }
+        localforage.getItem("version", function(error, version){
+          if (error || version !== dataviva.attr_version) {
+            localforage.clear(function(){
+              localforage.setItem("version", dataviva.attr_version);
+              loadattrs();
+            })
           }
           else {
-            d3.json(attr_url)
-              .header("X-Requested-With", "XMLHttpRequest")
-              .get(function(error, attrs) {
-                localforage.setItem(attr_url, attrs);
-                data = attrs.data;
-                clean_data();
-              })
+              loadattrs();
           }
+
         })
       }
 

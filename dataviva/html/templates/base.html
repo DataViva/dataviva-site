@@ -47,6 +47,7 @@
       if(d3plus.ie && redirect) window.location = "/upgrade/"
       dataviva.language = "{{ g.locale }}";
       dataviva.dictionary = {{ g.dictionary|safe }};
+      dataviva.attr_version = {{ g.attr_version|safe }};
     </script>
 
   </head>
