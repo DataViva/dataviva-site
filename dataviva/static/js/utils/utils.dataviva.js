@@ -178,12 +178,16 @@ dataviva.format.number = function(value,name,l) {
   }
   else var label_name = name
 
+  var growth = label_name.indexOf("_growth") > 0;
+
   if (total_labels[label_name]) {
     var labels = total_labels[label_name]
     return_value = labels[0] + return_value + labels[1]
   }
-  else if (label_name.indexOf("_growth") > 0) {
+  else if (growth) {
     return_value += "%";
+    var arrow = negative ? "down" : "up";
+    return_value = "<i class='growth-arrow "+arrow+" fa fa-arrow-circle-"+arrow+"'></i>" + return_value;
   }
 
   return_value = String(return_value)
@@ -194,7 +198,7 @@ dataviva.format.number = function(value,name,l) {
     return_value = n.join(",")
   }
 
-  if (negative) return_value = "-"+return_value
+  if (negative && !growth) return_value = "-"+return_value
 
   return return_value
 
