@@ -56,11 +56,9 @@ class Profile(object):
         q = setup["table"].query.filter(getattr(setup["table"], "{}_id".format(self.type)) == self.attr.id).all()
         if len(q) > 0:
             q = [getattr(a, setup["id"]) for a in q]
-            q = setup["data"].query.filter(getattr(setup["data"], setup["id"]).in_(q)).order_by(getattr(setup["data"], setup["column"]).desc())
-            if len(q.all()) == 0:
-                return None
-            return getattr(q.first(), setup["id"])
-        return None
+            q = setup["data"].query.filter(getattr(setup["data"], setup["id"]).in_(q)).group_by(getattr(setup["data"], setup["id"])).order_by(getattr(setup["data"], setup["column"]).desc()).limit(3)
+            return [getattr(a, setup["id"]) for a in q.all()]
+        return []
 
     def builds(self):
 
@@ -109,6 +107,9 @@ class Profile(object):
                     b = b.json()
 
                 b["position"] = position
+                b["titlelock"] = "title" in a
+                if b["titlelock"]:
+                    b["slug"] = a["title"]
                 position += 1
 
                 group["builds"][i] = b
@@ -124,104 +125,133 @@ class Bra(Profile):
 
     def build_list(self):
         apps = [
-            {"title": gettext("International Trade"), "builds":
-                [91, {"id":9, "params": {"size": "export_val"}},
-                {"id":9, "params": {"size": "import_val"}},
-                {"id":11, "params": {"size": "export_val"}},
-                {"id":11, "params": {"size": "import_val"}}, 35]
+            {"builds": [91]},
+            {"title": gettext("Exports by:"), "builds":
+                [{"id":9, "params": {"size": "export_val"}},
+                {"id":11, "params": {"size": "export_val"}}]
             },
-            {"title": gettext("Employment"), "builds": [17, 19, 33]},
-            {"title": gettext("Domestic Trade"), "builds": [128, 127]},
-            {"title": gettext("Higher Education"), "builds": [93, 105]},
-            {"title": gettext("School Census"), "builds": [120]}
+            {"title": gettext("Imports by:"), "builds":
+                [{"id":9, "params": {"size": "import_val"}},
+                {"id":11, "params": {"size": "import_val"}}]
+            },
+            {"title": gettext("Employment by:"), "builds": [17, 19]},
+            {"title": gettext("Economic Opportunities:"), "builds": [35, 33]},
+            {"title": gettext("Domestic Trade* by:"), "builds": [128, 127]},
+            {"title": gettext("University Enrollment by:"), "builds": [93, 105]},
+            {"title": gettext("Vocational Enrollment by:"), "builds": [120]}
         ]
         if len(self.attr.id) < 9:
-            apps[0]["builds"].insert(5, {"id": 13, "params": {"size": "export_val"}})
-            apps[0]["builds"].insert(6, {"id": 13, "params": {"size": "import_val"}})
-            apps[1]["builds"].insert(2, 5)
+            apps[1]["builds"].append({"id": 13, "params": {"size": "export_val"}})
+            apps[2]["builds"].append({"id": 13, "params": {"size": "import_val"}})
+            apps[3]["builds"].append(5)
         return apps
 
 class Hs(Profile):
 
     def build_list(self):
-        apps = [{
-            "title": gettext("Industrial Activity"),
-            "builds": [148, 12, 137, 50]
-        }]
-        industry = self.crosswalk_id()
-        if industry:
-            name = attrs.Cnae.query.get(industry).name()
-            apps.append({
-                "title": "{} ({})".format(gettext("Most Common Industry"), name),
-                "builds": [{"id": 4, "filter1": industry}, {"id": 48, "filter1": industry}]
-            })
+
+        apps = [
+            {"builds": [148]},
+            {"title": gettext("Exports by:"),
+            "builds": [{"id": 12, "params": {"size": "export_val"}},
+            {"id": 137, "params": {"y": "export_val"}}]},
+            {"title": gettext("Imports by:"),
+            "builds": [{"id": 12, "params": {"size": "import_val"}},
+            {"id": 137, "params": {"y": "import_val"}}]},
+            {"title": gettext("Economic Opportunities:"), "builds": [50]}
+        ]
+
+        industries = self.crosswalk_id()
+        if len(industries):
+            cross_apps = {"title": gettext("Common Industries by Occupation:"), "builds": []}
+            for industry in industries:
+                name = attrs.Cnae.query.get(industry).name()
+                cross_apps["builds"].append({"title": name, "id": 4, "filter1": industry})
+            apps.append(cross_apps)
+
         return apps
 
 class Wld(Profile):
 
     def build_list(self):
-        apps = [{
-            "title": gettext("International Trade"),
-            "builds": [92, 10, 138]
-        }]
-        return apps
+        return [
+            {"builds": [138]},
+            {"title": gettext("Imports by:"),
+            "builds": [{"id": 10, "params": {"size": "export_val"}},
+            {"id": 138, "params": {"y": "export_val"}}]},
+            {"title": gettext("Exports by:"),
+            "builds": [{"id": 10, "params": {"size": "import_val"}},
+            {"id": 138, "params": {"y": "import_val"}}]}
+        ]
 
 class Cnae(Profile):
 
     def build_list(self):
-        apps = [{
-            "title": gettext("Industrial Activity"),
+
+        apps = [
+            {"title": gettext("Employment by:"),
+            "builds": [{"id": 143, "params": {"y": "num_emp"}},
+            {"id": 22, "params": {"y": "num_emp"}}]},
+            {"title": gettext("Average Wage by:"),
             "builds": [{"id": 143, "params": {"y": "wage_avg"}},
-            {"id": 22, "params": {"y": "wage_avg"}}, 4, 48]
-        }]
-        product = self.crosswalk_id()
-        if product:
-            name = attrs.Hs.query.get(product).name()
-            apps.append({
-                "title": "{} ({})".format(gettext("Most Common Product"), name),
-                "builds": [{"id": 12, "filter1": product}, {"id": 50, "filter1": product}]
-            })
+            {"id": 22, "params": {"y": "wage_avg"}}]},
+            {"title": gettext("Economic Opportunities:"), "builds": [4, 48]}
+        ]
+
+        products = self.crosswalk_id()
+        if len(products):
+            cross_apps = {"title": gettext("Common Products by Trade Partner:"), "builds": []}
+            for product in products:
+                name = attrs.Hs.query.get(product).name()
+                cross_apps["builds"].append({"title": name, "id": 12, "filter1": product})
+            apps.append(cross_apps)
+
         return apps
 
 class Cbo(Profile):
 
     def build_list(self):
-        apps = [{
-            "title": gettext("Employment"),
+        apps = [
+            {"title": gettext("Employment by:"),
+            "builds": [{"id": 141, "params": {"y": "num_emp"}},
+            {"id": 23, "params": {"y": "num_emp"}}]},
+            {"title": gettext("Average Wage by:"),
             "builds": [{"id": 141, "params": {"y": "wage_avg"}},
-            {"id": 23, "params": {"y": "wage_avg"}}, 2, 49]
-        }]
-        course = self.crosswalk_id()
-        if course:
-            name = attrs.Course_hedu.query.get(course).name()
-            apps.append({
-                "title": "{} ({})".format(gettext("Most Common Major"), name),
-                "builds": [{"id": 94, "filter2": course, "params": {"color": "graduates_growth"}}]
-            })
+            {"id": 23, "params": {"y": "wage_avg"}}]},
+            {"title": gettext("Economic Opportunities:"), "builds": [49]}
+        ]
+        courses = self.crosswalk_id()
+        if len(courses):
+            cross_apps = {"title": gettext("Common Majors by University:"), "builds": []}
+            for course in courses:
+                name = attrs.Course_hedu.query.get(course).name()
+                cross_apps["builds"].append({"title": name, "id": 94, "filter2": course, "params": {"color": "graduates_growth"}})
+            apps.append(cross_apps)
         return apps
 
 class University(Profile):
 
     def build_list(self):
-        return [{"builds": [96, 116, 155, 151]}]
+        return [{"title": gettext("Enrollment by:"), "builds": [116, 155, 151]}]
 
 class Course_hedu(Profile):
 
     def build_list(self):
         apps = [{
-            "title": gettext("Enrollment"),
-            "builds": [156, 108, {"id": 94, "params": {"y": "graduates_growth"}}, 152]
+            "title": gettext("Enrollment by:"),
+            "builds": [{"id": 94, "params": {"y": "graduates_growth"}}, 108, 156, 152]
         }]
-        occupation = self.crosswalk_id()
-        if occupation:
-            name = attrs.Cbo.query.get(occupation).name()
-            apps.append({
-                "title": "{} ({})".format(gettext("Most Common Occupation"), name),
-                "builds": [{"id": 49, "filter2": occupation}, {"id": 2, "filter2": occupation}]
-            })
+
+        occupations = self.crosswalk_id()
+        if len(occupations):
+            cross_apps = {"title": gettext("Common Occupations by Industry:"), "builds": []}
+            for occupation in occupations:
+                name = attrs.Cbo.query.get(occupation).name()
+                cross_apps["builds"].append({"title": name, "id": 2, "filter2": occupation})
+            apps.append(cross_apps)
         return apps
 
 class Course_sc(Profile):
 
     def build_list(self):
-        return [{"builds": [119, 124, 159]}]
+        return [{"title": gettext("Vocational Enrollment by:"), "builds": [124, 159]}]

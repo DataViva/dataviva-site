@@ -419,10 +419,15 @@
           else if (title.indexOf(exp) === 0) var match = exp;
           if (match) {
             title = title.replace(match, dataviva.dictionary[val])
+            var to = " " + dataviva.dictionary.to + " ",
+                from = " " + dataviva.dictionary.from + " ",
+                joiner = val === "exports" ? to : from;
+            if (title.indexOf(to) > 0) title = title.replace(to, joiner);
+            else if (title.indexOf(from) > 0) title = title.replace(from, joiner);
           }
           else {
-            var orig = dataviva.dictionary.origins;
-            var dest = dataviva.dictionary.destinations;
+            var orig = dataviva.dictionary.origin;
+            var dest = dataviva.dictionary.destination;
             if (title.indexOf(orig+"/"+dest) === 0) var match = orig+"/"+dest;
             else if (title.indexOf(orig) === 0) var match = orig;
             else if (title.indexOf(dest) === 0) var match = dest;
@@ -430,6 +435,18 @@
               val = val === "exports" ? dest : orig;
               title = title.replace(match, val)
             }
+            else {
+              var orig = dataviva.dictionary.origins;
+              var dest = dataviva.dictionary.destinations;
+              if (title.indexOf(orig+"/"+dest) === 0) var match = orig+"/"+dest;
+              else if (title.indexOf(orig) === 0) var match = orig;
+              else if (title.indexOf(dest) === 0) var match = dest;
+              if (match) {
+                val = val === "exports" ? dest : orig;
+                title = title.replace(match, val)
+              }
+            }
+
           }
 
         }

@@ -212,11 +212,11 @@ class Stats(object):
                     "percent": percent,
                     "id": obj.id,
                     "url": obj.url(),
-                    "group": "{} {} ({})".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())}
+                    "group": "{} {} ({}):".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())}
         else:
             return {"name": name,
                     "value": "-",
-                    "group": "{} {} ({})".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())}
+                    "group": "{} {} ({}):".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())}
 
     def get_val(self, tbl, val_var, attr_type, dataset, latest_year=None, stat_id=None, name=None):
 
@@ -288,10 +288,10 @@ class Stats(object):
         val = num_format(val, key=val_var)
         # raise Exception(val)
 
-        group = u"{} {} ({})".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())
+        group = u"{} {} ({}):".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())
 
         if val_var == "stat_val":
-            group = ""
+            group = "General Stats:"
             if "_y" in tbl.__tablename__:
                 name = u"{} ({})".format(total.stat.name(), latest_year)
             else:

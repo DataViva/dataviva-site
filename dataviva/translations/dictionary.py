@@ -268,8 +268,12 @@ def dictionary():
         "direction": gettext("Exports/Imports"),
         "exports": gettext("Exports"),
         "imports": gettext("Imports"),
+        "origin": gettext("Origin"),
+        "destination": gettext("Destination"),
         "origins": gettext("Import Origins"),
         "destinations": gettext("Export Destinations"),
+        "to": gettext("to"),
+        "from": gettext("from"),
 
         # HEDU Labels
         "hedu": gettext("Higher Education"),

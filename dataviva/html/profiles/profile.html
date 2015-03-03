@@ -22,7 +22,7 @@
         <div class="d3plus_tooltip_data_title">{{ group.title }}</div>
       {% endif %}
       {% for build in group.builds %}
-        <a class="app_links decision short icon {{ build.app.type }}" id="app{{ build.position }}" onclick="slide(this.id)">{{ build.slug }}</a>
+        <a class="app_links decision short icon {{ build.app.type }}" id="app{{ build.position }}" onclick="slide(this.id)" data-lock="{{ build.titlelock }}">{{ build.slug }}</a>
       {% endfor %}
     {% endfor %}
 
@@ -153,13 +153,15 @@
       })
 
     function update_titles(msg) {
-      d3.select("#app"+msg.id.substr(6))
+      var btn = d3.select("#app"+msg.id.substr(6));
+      var title = btn.attr("data-lock") === "False" ? msg.title : btn.html();
+      btn
         .attr("class",function(){
           var c = this.className.split(" ")
           c[4] = msg.app
           return c.join(" ")
         })
-        .text(msg.title)
+        .text(title)
     }
 
     function slide(id) {
