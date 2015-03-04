@@ -59,6 +59,13 @@
       {% endfor %}
     </div>
 
+    {% if category == "wld" %}
+      <br>
+      <a href="http://atlas.media.mit.edu/profile/country/{{ item.id_3char }}/" class="decision short icon oec" target="_blank">
+        {% trans %}To view additional data regarding world trade, click here to visit the Observatory.{% endtrans %}
+      </a>
+    {% endif %}
+
   </div>
 
   {% for group in builds %}

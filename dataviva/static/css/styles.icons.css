@@ -441,6 +441,14 @@
   content: "\f074";
 }
 
+.decision.icon.oec {
+  background-color: #0085BF;
+}
+
+.decision.icon.oec:before {
+  content: "\f0ac";
+}
+
 /****************/
 /* Data Buttons */
 /****************/
