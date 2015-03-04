@@ -142,11 +142,11 @@
 
       {% if dataset != b.dataset %}
         {% set dataset = b.dataset %}
-        <div class="accordion_btn help flat short icon {{ dataset }}" data-btn="{{ dataset }}">{{ datatset_names[dataset] }}</div>
+        <div class="accordion_btn help short icon {{ dataset }}" data-btn="{{ dataset }}">{{ datatset_names[dataset] }}</div>
         <div class="accordion_list" data-list="{{ dataset }}">
       {% endif %}
 
-      <a id="build_{{ b.id }}" class="build_title decision short icon {{ b.app.type }}" data-url="{{ b.url(fill=False) }}" onclick="change_build(this.id)">{{ b.slug2() }}</a>
+      <a id="build_{{ b.id }}" class="build_title help flat short icon {{ b.app.type }}" data-url="{{ b.url(fill=False) }}" onclick="change_build(this.id)">{{ b.slug2() }}</a>
 
       {% if loop.last %}</div></div>{% endif %}
 
@@ -223,22 +223,27 @@
 
     // Changes the visualization type.
     function change_app(a, form) {
-      d3.selectAll(".app_group").style("display", "none");
-      d3.select("#builds_"+a).style("display", "block");
-      var d = datasets[a];
-      if (!d) {
-        d = datasets[app];
-        var set = d3.select("#builds_"+a).select("[data-list="+d+"]");
-        if (set.empty()) {
-          d = datasets[a] ||
-              d3.select("#builds_"+a+" .accordion_list").attr("data-list");
-        }
+      if (!form) {
+        app_form.focus(a).draw();
       }
-      app = a;
-      change_dataset(d);
+      else {
+        d3.selectAll(".app_group").style("display", "none");
+        d3.select("#builds_"+a).style("display", "block");
+        var d = datasets[a];
+        if (!d) {
+          d = datasets[app];
+          var set = d3.select("#builds_"+a).select("[data-list="+d+"]");
+          if (set.empty()) {
+            d = datasets[a] ||
+                d3.select("#builds_"+a+" .accordion_list").attr("data-list");
+          }
+        }
+        app = a;
+        change_dataset(d);
+      }
     }
 
-    d3plus.form()
+    var app_form = d3plus.form()
       .data("#app_select")
       .focus(app, change_app)
       .font({"size": 22})
@@ -326,9 +331,11 @@
 
     function change_build(id) {
       if (!id) id = "build_"+build;
-      d3.selectAll(".build_title").style("opacity", 0.6);
+      d3.selectAll(".build_title").classed("help", true).classed("decision", false);
+      // d3.selectAll(".build_title").style("opacity", 0.6);
       build = id.slice(6);
-      d3.select("#build_"+build).style("opacity", 1);
+      d3.select("#build_"+build).classed("help", false).classed("decision", true);
+      // d3.select("#build_"+build).style("opacity", 1);
       check_button();
       var u = d3.select("#build_"+build).attr("data-url");
       d3.selectAll(".build_filter").style("display",function(){
@@ -360,6 +367,21 @@
       var same = d3.values(filters).join(",") === d3.values(iframe_filters).join(",") && iframe === build;
       d3.select("#build_btn").style("background-color", same ? "#ddd" : "#af1f24");
       return !same;
+    }
+
+    function update_titles(msg) {
+      if (app !== msg.app) change_app(msg.app);
+      change_build("build_"+msg.build.id);
+      ["bra","hs","wld","cnae","cbo","university","course_hedu","school","course_sc"].forEach(function(f){
+        if (msg.build[f]) {
+          msg.build[f].forEach(function(a){
+            filter_select(a, f);
+          })
+        }
+      })
+      iframe = build;
+      iframe_filters = d3plus.util.copy(filters);
+      check_button();
     }
 
     // Resize function for when the user resizes their browser window.
