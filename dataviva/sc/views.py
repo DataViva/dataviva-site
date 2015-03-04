@@ -12,7 +12,7 @@ mod = Blueprint('sc', __name__, url_prefix='/sc')
 
 @mod.route('/<year>/<bra_id>/<school_id>/<course_sc_id>/')
 @gzipped
-# @view_cache.cached(key_prefix=api_cache_key("sc"))
+@view_cache.cached(key_prefix=api_cache_key("sc"))
 def sc_api(**kwargs):
     tables = [Yc_sc, Yb_sc, Ys, Ybc_sc, Ybs, Ysc, Ybsc]
 
