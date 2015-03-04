@@ -410,6 +410,7 @@ class School(db.Model, AutoSerialize, Stats, ExpandedAttr):
     is_vocational = db.Column(db.Integer(1))
     school_type_en = db.Column(db.String(32))
     school_type_pt = db.Column(db.String(32))
+    is_vocational = db.Column(db.Integer)
 
     def icon(self):
         return None
