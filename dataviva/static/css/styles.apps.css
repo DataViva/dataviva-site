@@ -53,7 +53,7 @@ div#controls {
   text-align: center;
   width: 100%;
   -webkit-user-select: none;
-  z-index: 0;
+  z-index: 20;
 }
 
 div#controls > div {

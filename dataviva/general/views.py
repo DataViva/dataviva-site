@@ -33,7 +33,7 @@ def before_request():
     g.color = "#af1f24"
     g.page_type = mod.name
     g.dictionary = json.dumps(dictionary())
-    g.attr_version = 1
+    g.attr_version = 3
 
     # Save variable in session so we can determine if this is the user's
     # first time on the site

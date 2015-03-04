@@ -95,7 +95,7 @@ def attrs(attr="bra",Attr_id=None):
         Attr_weight_col = "enrolled"
 
     depths = {}
-    depths["bra"] = [1,3,5,8,9]
+    depths["bra"] = [1,3,5,7,8,9]
     depths["cnae"] = [1,3,6]
     depths["cbo"] = [1,2,4]
     depths["hs"] = [2,4,6]
@@ -380,7 +380,7 @@ def attrs_search(term=None):
         wld_query["content_type"] = "wld"
         wld_query = fix_name(wld_query, lang)
         result.append(wld_query)
-    
+
     # Majors
     if lang == "pt":
         major = Course_hedu.query.filter(or_(Course_hedu.id == term, Course_hedu.name_pt.like("%"+term+"%")))
