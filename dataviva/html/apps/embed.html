@@ -1381,7 +1381,7 @@
           coords.transform = app.coords[app.build.bra[0].id.substr(0,3)].transform
           coords.arcs = app.coords[app.build.bra[0].id.substr(0,3)].arcs
           coords.objects.geojson.geometries = app.coords[app.build.bra[0].id.substr(0,3)].objects.geojson.geometries.filter(function(g){
-            return app.build.bra[0].pr_ids.indexOf(g.bra_id) >= 0
+            return app.build.bra[0].pr_ids.indexOf(g.id) >= 0
           })
         }
         else if (app.build.bra[0].id.length == 5) {
@@ -1389,7 +1389,7 @@
           coords.transform = app.coords[app.build.bra[0].id.substr(0,3)].transform
           coords.arcs = app.coords[app.build.bra[0].id.substr(0,3)].arcs
           coords.objects.geojson.geometries = app.coords[app.build.bra[0].id.substr(0,3)].objects.geojson.geometries.filter(function(g){
-            return g.bra_id.substr(0,5) == app.build.bra[0].id
+            return g.id.substr(0,5) == app.build.bra[0].id
           })
         }
         else if (app.build.bra[0].distance > 0) {
@@ -1397,7 +1397,7 @@
           coords.transform = app.coords[app.build.bra[0].id.substr(0,3)].transform
           coords.arcs = app.coords[app.build.bra[0].id.substr(0,3)].arcs
           coords.objects.geojson.geometries = app.coords[app.build.bra[0].id.substr(0,3)].objects.geojson.geometries.filter(function(g){
-            return app.build.bra[0].neighbor_ids.indexOf(g.bra_id) >= 0
+            return app.build.bra[0].neighbor_ids.indexOf(g.id) >= 0
           })
         }
         else {
