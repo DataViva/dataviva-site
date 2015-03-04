@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from dataviva import db
 from dataviva.sc.models import Yb_sc, Yc_sc, Ys, Ybs, Ybc_sc, Ybsc, Ysc
+from dataviva.attrs.models import School
 from dataviva.utils.gzip_data import gzipped
 from dataviva.utils import make_query
 from dataviva import view_cache
@@ -25,9 +26,11 @@ def sc_api(**kwargs):
     exclude = request.args.get('exclude', None) or kwargs.pop('exclude', None)
     download = request.args.get('download', None) or kwargs.pop('download', None)
 
+    only_vocational = False
     if "school_id" in kwargs:
         # -- there is no nesting for university ids
         kwargs["school_id"] = kwargs["school_id"].replace("show.5", "show")
+        only_vocational = "show" in kwargs["school_id"]
 
     # -- 2. select table
     allowed_when_not, possible_tables = table_helper.prepare(['bra_id', 'school_id', 'course_sc_id'], tables)
@@ -37,6 +40,11 @@ def sc_api(**kwargs):
         raise Exception("No table!")
 
     filters, groups, show_column = query_helper.build_filters_and_groups(table, kwargs, exclude=exclude)
+
+    if only_vocational:
+        vschools = School.query.with_entities(School.id).filter(School.is_vocational == 1).all()
+        vschools = [v.id for v in vschools]
+        filters.append(table.school_id.in_(vschools))
 
     results = query_helper.query_table(table, filters=filters, groups=groups, limit=limit, order=order, sort=sort, serialize=serialize)
 
