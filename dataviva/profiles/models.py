@@ -175,7 +175,7 @@ class Wld(Profile):
 
     def build_list(self):
         return [
-            {"builds": [138]},
+            {"builds": [92]},
             {"title": gettext("Imports by:"),
             "builds": [{"id": 10, "params": {"size": "export_val"}},
             {"id": 138, "params": {"y": "export_val"}}]},
