@@ -164,7 +164,7 @@ d3plus.network = {
  */
 
 d3plus.number = {
-  format: require("./number/format.js")
+  format: require("./number/format.coffee")
 };
 
 
@@ -254,7 +254,7 @@ if (stylesheet("d3plus.css")) {
 
 
 
-},{"./array/comparator.coffee":"/Users/Dave/Sites/d3plus/src/array/comparator.coffee","./array/contains.coffee":"/Users/Dave/Sites/d3plus/src/array/contains.coffee","./array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","./array/update.coffee":"/Users/Dave/Sites/d3plus/src/array/update.coffee","./client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee","./client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","./client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","./client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","./client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","./client/scrollbar.coffee":"/Users/Dave/Sites/d3plus/src/client/scrollbar.coffee","./client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","./color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","./color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","./color/mix.coffee":"/Users/Dave/Sites/d3plus/src/color/mix.coffee","./color/random.coffee":"/Users/Dave/Sites/d3plus/src/color/random.coffee","./color/scale.coffee":"/Users/Dave/Sites/d3plus/src/color/scale.coffee","./color/sort.coffee":"/Users/Dave/Sites/d3plus/src/color/sort.coffee","./color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","./color/validate.coffee":"/Users/Dave/Sites/d3plus/src/color/validate.coffee","./core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./data/bestRegress.coffee":"/Users/Dave/Sites/d3plus/src/data/bestRegress.coffee","./data/lof.coffee":"/Users/Dave/Sites/d3plus/src/data/lof.coffee","./data/mad.coffee":"/Users/Dave/Sites/d3plus/src/data/mad.coffee","./font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","./font/validate.coffee":"/Users/Dave/Sites/d3plus/src/font/validate.coffee","./form/form.js":"/Users/Dave/Sites/d3plus/src/form/form.js","./geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","./geom/offset.coffee":"/Users/Dave/Sites/d3plus/src/geom/offset.coffee","./geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","./network/cluster.coffee":"/Users/Dave/Sites/d3plus/src/network/cluster.coffee","./network/distance.coffee":"/Users/Dave/Sites/d3plus/src/network/distance.coffee","./network/normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee","./network/shortestPath.coffee":"/Users/Dave/Sites/d3plus/src/network/shortestPath.coffee","./network/smallestGap.coffee":"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee","./network/subgraph.coffee":"/Users/Dave/Sites/d3plus/src/network/subgraph.coffee","./number/format.js":"/Users/Dave/Sites/d3plus/src/number/format.js","./object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","./object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","./string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","./string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","./string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","./string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee","./textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","./tooltip/create.js":"/Users/Dave/Sites/d3plus/src/tooltip/create.js","./tooltip/move.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/move.coffee","./tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","./util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","./util/child.coffee":"/Users/Dave/Sites/d3plus/src/util/child.coffee","./util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","./util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee","./util/dataURL.coffee":"/Users/Dave/Sites/d3plus/src/util/dataURL.coffee","./util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./viz/viz.coffee":"/Users/Dave/Sites/d3plus/src/viz/viz.coffee"}],"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/index.js":[function(require,module,exports){
+},{"./array/comparator.coffee":"/Users/Dave/Sites/d3plus/src/array/comparator.coffee","./array/contains.coffee":"/Users/Dave/Sites/d3plus/src/array/contains.coffee","./array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","./array/update.coffee":"/Users/Dave/Sites/d3plus/src/array/update.coffee","./client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee","./client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","./client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","./client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","./client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","./client/scrollbar.coffee":"/Users/Dave/Sites/d3plus/src/client/scrollbar.coffee","./client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","./color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","./color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","./color/mix.coffee":"/Users/Dave/Sites/d3plus/src/color/mix.coffee","./color/random.coffee":"/Users/Dave/Sites/d3plus/src/color/random.coffee","./color/scale.coffee":"/Users/Dave/Sites/d3plus/src/color/scale.coffee","./color/sort.coffee":"/Users/Dave/Sites/d3plus/src/color/sort.coffee","./color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","./color/validate.coffee":"/Users/Dave/Sites/d3plus/src/color/validate.coffee","./core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./data/bestRegress.coffee":"/Users/Dave/Sites/d3plus/src/data/bestRegress.coffee","./data/lof.coffee":"/Users/Dave/Sites/d3plus/src/data/lof.coffee","./data/mad.coffee":"/Users/Dave/Sites/d3plus/src/data/mad.coffee","./font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","./font/validate.coffee":"/Users/Dave/Sites/d3plus/src/font/validate.coffee","./form/form.js":"/Users/Dave/Sites/d3plus/src/form/form.js","./geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","./geom/offset.coffee":"/Users/Dave/Sites/d3plus/src/geom/offset.coffee","./geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","./network/cluster.coffee":"/Users/Dave/Sites/d3plus/src/network/cluster.coffee","./network/distance.coffee":"/Users/Dave/Sites/d3plus/src/network/distance.coffee","./network/normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee","./network/shortestPath.coffee":"/Users/Dave/Sites/d3plus/src/network/shortestPath.coffee","./network/smallestGap.coffee":"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee","./network/subgraph.coffee":"/Users/Dave/Sites/d3plus/src/network/subgraph.coffee","./number/format.coffee":"/Users/Dave/Sites/d3plus/src/number/format.coffee","./object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","./object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","./string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","./string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","./string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","./string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee","./textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","./tooltip/create.js":"/Users/Dave/Sites/d3plus/src/tooltip/create.js","./tooltip/move.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/move.coffee","./tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","./util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","./util/child.coffee":"/Users/Dave/Sites/d3plus/src/util/child.coffee","./util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","./util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee","./util/dataURL.coffee":"/Users/Dave/Sites/d3plus/src/util/dataURL.coffee","./util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./viz/viz.coffee":"/Users/Dave/Sites/d3plus/src/viz/viz.coffee"}],"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/index.js":[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -9296,7 +9296,7 @@ function unique(list, compare, sorted) {
 
 module.exports = unique
 },{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
-arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
 },{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
 "use strict"
 
@@ -15072,7 +15072,7 @@ module.exports = {
 },{"../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/format.coffee":[function(require,module,exports){
 var formatNumber, locale, mergeObject, titleCase;
 
-formatNumber = require("../../number/format.js");
+formatNumber = require("../../number/format.coffee");
 
 locale = require("../../core/locale/locale.coffee");
 
@@ -15141,7 +15141,7 @@ module.exports = {
 
 
 
-},{"../../core/locale/locale.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/locale.coffee","../../number/format.js":"/Users/Dave/Sites/d3plus/src/number/format.js","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/height.coffee":[function(require,module,exports){
+},{"../../core/locale/locale.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/locale.coffee","../../number/format.coffee":"/Users/Dave/Sites/d3plus/src/number/format.coffee","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/height.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   max: 600,
@@ -18261,46 +18261,42 @@ module.exports = function(edges, source, options) {
 
 
 
-},{"./normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee"}],"/Users/Dave/Sites/d3plus/src/number/format.js":[function(require,module,exports){
-var defaultLocale = require("../core/locale/languages/en_US.coffee");
+},{"./normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee"}],"/Users/Dave/Sites/d3plus/src/number/format.coffee":[function(require,module,exports){
+var defaultLocale;
 
-// Formats numbers to look "pretty"
+defaultLocale = require("../core/locale/languages/en_US.coffee");
+
 module.exports = function(number, key, vars, data) {
-
-  if ( "locale" in this ) {
-    var time = this.locale.value.time
+  var symbol, time;
+  if ("locale" in this) {
+    time = this.locale.value.time;
+  } else {
+    time = defaultLocale.time;
   }
-  else {
-    var time = defaultLocale.time
+  if (vars && vars.time && typeof vars.time.value === "string") {
+    time.push(vars.time.value);
   }
-
-  if ( vars && vars.time && typeof vars.time.value === "string") {
-    time.push(vars.time.value)
-  }
-
   if (typeof key === "string" && time.indexOf(key.toLowerCase()) >= 0) {
-    return number
-  }
-  else if (number < 10 && number > -10) {
-    return d3.round(number,2)
-  }
-  else if (number.toString().split(".")[0].length > 3) {
-    var symbol = d3.formatPrefix(number).symbol
-    symbol = symbol.replace("G", "B") // d3 uses G for giga
-
-    // Format number to precision level using proper scale
-    number = d3.formatPrefix(number).scale(number)
-    number = parseFloat(d3.format(".3g")(number))
+    return number;
+  } else if (key === "share") {
+    if (number === 100) {
+      return number;
+    }
+    return d3.format(".2g")(number);
+  } else if (number < 10 && number > -10) {
+    return d3.round(number, 2);
+  } else if (number.toString().split(".")[0].length > 3) {
+    symbol = d3.formatPrefix(number).symbol;
+    symbol = symbol.replace("G", "B");
+    number = d3.formatPrefix(number).scale(number);
+    number = parseFloat(d3.format(".3g")(number));
     return number + symbol;
+  } else {
+    return d3.format(",f")(number);
   }
-  else if (key == "share") {
-    return d3.format(".2g")(number)
-  }
-  else {
-    return d3.format(",f")(number)
-  }
+};
 
-}
+
 
 },{"../core/locale/languages/en_US.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee"}],"/Users/Dave/Sites/d3plus/src/object/merge.coffee":[function(require,module,exports){
 var d3selection, validate;
@@ -27902,7 +27898,7 @@ module.exports = {
 },{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/format.coffee":[function(require,module,exports){
 var formatNumber, locale, mergeObject, titleCase;
 
-formatNumber = require("../../number/format.js");
+formatNumber = require("../../number/format.coffee");
 
 locale = require("../../core/locale/locale.coffee");
 
@@ -27971,7 +27967,7 @@ module.exports = {
 
 
 
-},{"../../core/locale/locale.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/locale.coffee","../../number/format.js":"/Users/Dave/Sites/d3plus/src/number/format.js","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/height.coffee":[function(require,module,exports){
+},{"../../core/locale/locale.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/locale.coffee","../../number/format.coffee":"/Users/Dave/Sites/d3plus/src/number/format.coffee","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/height.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   max: 600,
