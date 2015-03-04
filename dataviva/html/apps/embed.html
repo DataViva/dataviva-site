@@ -215,6 +215,9 @@
         if (a["enrolled"]) delete a["enrolled"];
         if (a["num_emp"]) delete a["num_emp"];
         obj[a.id] = a;
+        if (["university","school"].indexOf(o) >= 0 && !(a["school_type_id"] in obj)) {
+          obj[a["school_type_id"]] = {"color": a.color, "name": a["school_type"]};
+        }
         return obj;
       }, {});
     }
@@ -1122,12 +1125,12 @@
         app.viz.text({"trade_balance": "trade_balance", "direction": "direction"});
       }
       else if (app.build.output_attr === "university") {
-        nesting = ["school_type","university_5"];
-        app.viz.text({"school_type": "school_type", "university_5": "name"});
+        nesting = ["school_type_id","university_5"];
+        app.viz.text("name");
       }
       else if (app.build.output_attr === "school") {
-        nesting = ["school_type","school_8"];
-        app.viz.text({"school_type": "school_type", "school_8": "name"});
+        nesting = ["school_type_id","school_8"];
+        app.viz.text("name");
       }
       else if (app.build.output_attr === "time") {
         nesting = ["time_period"];
@@ -1242,7 +1245,6 @@
         .x({"scale": "linear"})
         .tooltip(app.tooltip)
         .zoom(app.build.output_attr !== "balance")
-        .legend(app.build.output_attr !== "university")
         .time(app.monthly ? "month" : "year")
         .time({"solo": timeSolo})
 

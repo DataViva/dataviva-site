@@ -377,7 +377,7 @@ dataviva.displayID = function(id,type) {
 
 dataviva.icon = function(id,type,color) {
 
-  if (type === "university" && id !== "all") return false;
+  if (["university","school"].indexOf(type) >= 0 && id !== "all") return false;
   if (type === "bra" && id.length === 1) return false;
 
   if (type !== "wld" && id !== "all"){
