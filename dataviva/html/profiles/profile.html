@@ -6,6 +6,22 @@
 
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.profile.css" />
 
+    <style>
+
+      .build_btn {
+        position: relative;
+        text-align: right;
+      }
+
+      .build_title {
+        display: inline-block;
+        font-size: 12px;
+        float: left;
+        padding: 5px 4px 4px 12px;
+      }
+
+    </style>
+
 {% endblock %}
 
 {% block body %}
@@ -17,13 +33,20 @@
       <div id="guide_title">{{ item.name() }}</div>
     </div>
 
+    {% set counter = 1 %}
     {% for group in builds %}
       {% if group.title %}
         <div class="d3plus_tooltip_data_title">{{ group.title }}</div>
       {% endif %}
       {% for build in group.builds %}
-        <a class="app_links decision short icon {{ build.app.type }}" id="app{{ build.position }}" onclick="slide(this.id)" data-lock="{{ build.titlelock }}">{{ build.slug }}</a>
+        <div class="build_btn" data-build="{{ counter + loop.index0 }}" data-lock="{{ build[0].titlelock }}">
+          <span class="build_title">{{ build[0].slug }}</span>
+          {% for b in build %}
+            <a class="app_links decision icon short tiny {{ b.app.type }}" id="app_{{ b.position }}" data-url="{{ b.url }}" alt="{{ b.app.name }}" onclick="app_select(this.id)"></a>
+          {% endfor %}
+        </div>
       {% endfor %}
+      {% set counter = counter + group|length %}
     {% endfor %}
 
     <div class="d3plus_tooltip_data_container" id="guide_stats">
@@ -68,12 +91,14 @@
 
   </div>
 
+  {% set counter = 1 %}
   {% for group in builds %}
     {% for build in group.builds %}
-      <div class="lightbox guide_app" id="profile{{ build.position }}">
-        <iframe alt="/apps/embed/{{ build.url }}" id="iframe{{ build.position }}"></iframe>
+      <div class="lightbox guide_app" id="profile{{ counter + loop.index0 }}">
+        <iframe id="iframe{{ counter + loop.index0 }}"></iframe>
       </div>
     {% endfor %}
+    {% set counter = counter + group|length %}
   {% endfor %}
 
 {% endblock %}
@@ -83,6 +108,17 @@
   <script src="/static/js/utils/utils.selector.js"></script>
   <script src="/static/js/libs/jquery-2.0.3.min.js"></script>
   <script>
+
+    // d3.selectAll(".app_links")
+    //   .on(d3plus.client.pointer.over, function(){
+    //     dataviva.ui.tooltip("quick", this);
+    //   })
+    //   .on(d3plus.client.pointer.out, function(){
+    //     dataviva.ui.tooltip("quick", false);
+    //   })
+    //   .on("click", function(){
+    //     dataviva.ui.tooltip("quick", false);
+    //   })
 
     function callback(obj) {
       split = window.location.pathname.split("/")
@@ -102,24 +138,20 @@
           "height": "80%",
           "close": true,
           "color": dataviva.color
-        })
+        });
 
-        if (type == "bra" && id.indexOf(".") > 0) {
-          var dist = id.split(".")[1]
-          id = id.split(".")[0]
-        }
-        else {
-          var dist = 0
+        var dist = 0;
+        if (type === "bra" && id.indexOf(".") > 0) {
+          dist = id.split(".")[1];
+          id = id.split(".")[0];
         }
 
-        if (type == "hs" || type == "wld") {
-          var limit = 2
+        var limit = null;
+        if (type === "hs" || type === "wld") {
+          limit = 2;
         }
-        else if (type == "cnae" || type == "cbo") {
-          var limit = 1
-        }
-        else if (type == "bra") {
-         var limit = null
+        else if (type === "cnae" || type === "cbo") {
+          limit = 1;
         }
 
         var selector = Selector()
@@ -141,9 +173,12 @@
         height = window.innerHeight-108,
         builds = {},
         sliding = false,
-        selected = null,
+        loading = false,
+        build = null,
         scrollinterval = null,
-        starting_app = "{{starting_app}}"
+        url = false,
+        build = false,
+        app = "{{starting_app}}";
 
     d3.select("#guide_controls").style("max-height", height-20+"px")
 
@@ -151,58 +186,76 @@
       .style("width",width+"px")
       .style("height",height+"px")
       .each(function(){
-        var p = this.id.substring(7),
-            t = this.offsetTop-88
-        builds[p] = {"loaded": false, "top": t}
-        if (p == starting_app) {
-          slide("app"+p)
+        var p = this.id.substring(7);
+        builds[p] = {"loaded": false, "top": this.offsetTop-88};
+      })
+
+    function app_select(id) {
+
+      if (!id) id = "app_"+app;
+
+      dataviva.url(window.location.pathname, {"app": id.split("_")[1]});
+      clearInterval(scrollinterval);
+
+      var btn = d3.select("#"+id);
+      url = btn.attr("data-url");
+
+      var build_btn, new_build;
+      d3.selectAll(".build_btn").each(function(d,i){
+        if (this === btn.node().parentNode) {
+          build_btn = d3.select(this);
+          new_build = i+1+"";
         }
       })
 
-    function update_titles(msg) {
-      var btn = d3.select("#app"+msg.id.substr(6));
-      var title = btn.attr("data-lock") === "False" ? msg.title : btn.html();
-      btn
-        .attr("class",function(){
-          var c = this.className.split(" ")
-          c[4] = msg.app
-          return c.join(" ")
-        })
-        .text(title)
-    }
+      d3.selectAll(".app_links").classed("decision", false).classed("help", true);
+      build_btn.select("[data-url='"+url+"']").classed("decision", true).classed("help", false)
 
-    function slide(id) {
-      sliding = true
-      var id = id.substring(3)
-      scroll(id)
-    }
-
-    function load(id) {
-      if (!builds[id].loaded) {
-        d3.select("#iframe"+id)
-          .attr("src",function(){
-            return this.getAttribute("alt")
-          })
-        builds[id].loaded = true
+      if (new_build !== build) {
+        build = new_build;
+        slide();
       }
+      else {
+        load();
+      }
+
     }
 
-    function select(id) {
-      dataviva.url(window.location.pathname,{"app":id})
-      clearInterval(scrollinterval)
-      selected = id
-      d3.selectAll(".app_links")
-        .attr("class",function(){
-          if (this.id.substring(3) == id) return this.className.replace("help","decision")
-          else return this.className.replace("decision","help")
-        })
+    app_select();
+
+    function update_titles(msg) {
+      loading = false;
+      // var btn = d3.select("#app"+msg.id.substr(6));
+      // var title = btn.attr("data-lock") === "False" ? msg.title : btn.html();
+      // btn
+      //   .attr("class",function(){
+      //     var c = this.className.split(" ")
+      //     c[4] = msg.app
+      //     return c.join(" ")
+      //   })
+      //   .text(title)
     }
 
-    function scroll(id) {
+    function load() {
 
-      select(id)
+      var iframe = d3.select("#iframe"+build);
 
-      var position = builds[id].top,
+      if (!builds[build].loaded) {
+        builds[build].loaded = true;
+        iframe.attr("src", "/apps/embed/"+url);
+      }
+      else if (!loading && iframe.node().contentWindow.app.url.indexOf(url) < 0) {
+        loading = true;
+        iframe.node().contentWindow.app.start(url);
+      }
+
+    }
+
+    function slide() {
+
+      sliding = true;
+
+      var position = builds[build].top,
           start = window.pageYOffset,
           difference = position - start,
           ticks = 50
@@ -216,7 +269,7 @@
         i++
         if (i == ticks) {
           window.scrollTo(0,position)
-          load(id)
+          load()
           clearInterval(scrollinterval)
           setTimeout(function(){
             sliding = false
@@ -235,41 +288,56 @@
     	return c/2*(t*t*t + 2) + b;
     }
 
-    if (Object.keys(builds).length > 1) {
-      document.onscroll = function() {
-        if (!sliding) {
-          var page = window.pageYOffset
-          for (b in builds) {
-            if(page < ((builds[2].top*(b))-20) && page > ((builds[2].top*(b-2))+20)) {
-              if (page+(builds[2].top/2) < builds[b].top+builds[2].top
-                  && page+(builds[2].top/2) > builds[b].top && selected != b) {
-                    select(b)
-                  }
-              if (!builds[b].loaded) load(b)
-            }
-          }
-        }
-      }
+    document.onscroll = function() {
+      if (!sliding) {
 
-      document.onkeydown = function(e) {
-        var trans = null
-        if (e.keyCode == 34 || e.keyCode == 39 || e.keyCode == 40) {
-          if (selected < Object.keys(builds).length) trans = parseInt(selected)+1
-          else trans = selected
+        var current_top = d3.select("#profile"+build).node().getBoundingClientRect().top;
+        var new_build = false;
+        d3.selectAll(".guide_app").each(function(d, i){
+          d = i+1;
+          if (d != build) {
+
+            var rect = this.getBoundingClientRect();
+            var top = rect.top;
+            var height = rect.height;
+            // console.log(i, current_top, top, window.innerHeight/2+34)
+            if (current_top < top && top < window.innerHeight/2+34) {
+              new_build = d;
+            }
+            else if (current_top > top && top+this.getBoundingClientRect().height > window.innerHeight/2-34) {
+              new_build = d;
+            }
+
+          }
+        })
+
+        if (new_build && !builds[new_build].loaded) {
+          var btn = d3.select("[data-build='"+new_build+"']").select(".app_links")
+          var app_id = btn.node().id;
+          app_select(app_id);
         }
-        else if (e.keyCode == 33 || e.keyCode == 37 || e.keyCode == 38) {
-          if (selected > 1) trans = parseInt(selected)-1
-          else trans = selected
-        }
-        else if (e.keyCode == 36) {
-          trans = 1
-        }
-        else if (e.keyCode == 35) {
-          trans = Object.keys(builds).length
-        }
-        if (trans) slide("app"+trans)
-      };
+
+      }
     }
+
+    // document.onkeydown = function(e) {
+    //   var trans = null
+    //   if (e.keyCode == 34 || e.keyCode == 39 || e.keyCode == 40) {
+    //     if (build < Object.keys(builds).length) trans = parseInt(build)+1
+    //     else trans = build
+    //   }
+    //   else if (e.keyCode == 33 || e.keyCode == 37 || e.keyCode == 38) {
+    //     if (build > 1) trans = parseInt(build)-1
+    //     else trans = build
+    //   }
+    //   else if (e.keyCode == 36) {
+    //     trans = 1
+    //   }
+    //   else if (e.keyCode == 35) {
+    //     trans = Object.keys(builds).length
+    //   }
+    //   if (trans) slide("app"+trans)
+    // };
 
   </script>
 

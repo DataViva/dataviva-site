@@ -233,7 +233,7 @@ dataviva.ui.background = function() {
   }
 }
 
-dataviva.ui.tooltip = function(id,obj,align) {
+dataviva.ui.tooltip = function(id, obj, align, parent) {
   if (obj) {
 
     var size = obj.getBoundingClientRect(),
@@ -255,6 +255,7 @@ dataviva.ui.tooltip = function(id,obj,align) {
       "width": "auto",
       "id": id,
       "align": align,
+      "parent": parent,
       "max_width": 180
     })
 

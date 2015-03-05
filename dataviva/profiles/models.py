@@ -73,46 +73,53 @@ class Profile(object):
         secex_restricted = None
         position = 1
         for group in apps:
-            for i, a in enumerate(group["builds"]):
+            for i, v in enumerate(group["builds"]):
 
-                if isinstance(a, (int)):
-                    a = {"id": a}
+                if not isinstance(v, list):
+                    v = [v]
 
-                b = Build.query.get_or_404(a["id"])
+                for ii, a in enumerate(v):
 
-                # removes SECEX builds if not data, test with '4mg050305'
-                if b.dataset == "secex" and bra.id != "all":
-                    if secex_restricted == None:
-                        q = Ymb.query.filter(Ymb.bra_id == bra.id).all()
-                        secex_restricted = len(q) == 0
-                    if secex_restricted == True:
-                        group["builds"][i] = None
-                        continue
+                    if isinstance(a, int):
+                        a = {"id": a}
 
-                b.set_bra(bra)
+                    b = Build.query.get_or_404(a["id"])
 
-                if "filter1" in a:
-                    b.set_filter1(a["filter1"])
-                elif self.type in ["cnae","hs","university","school"]:
-                    b.set_filter1(self.attr)
-                if "filter2" in a:
-                    b.set_filter2(a["filter2"])
-                elif self.type in ["cbo","wld","course_hedu","course_sc"]:
-                    b.set_filter2(self.attr)
+                    # removes SECEX builds if not data, test with '4mg050305'
+                    if b.dataset == "secex" and bra.id != "all":
+                        if secex_restricted == None:
+                            q = Ymb.query.filter(Ymb.bra_id == bra.id).all()
+                            secex_restricted = len(q) == 0
+                        if secex_restricted == True:
+                            group["builds"][i] = None
+                            continue
 
-                if "params" in a:
-                    b = b.json(**a["params"])
-                    b["url"] += "?{}".format(param(a["params"]))
-                else:
-                    b = b.json()
+                    b.set_bra(bra)
 
-                b["position"] = position
-                b["titlelock"] = "title" in a
-                if b["titlelock"]:
-                    b["slug"] = a["title"]
-                position += 1
+                    if "filter1" in a:
+                        b.set_filter1(a["filter1"])
+                    elif self.type in ["cnae","hs","university","school"]:
+                        b.set_filter1(self.attr)
+                    if "filter2" in a:
+                        b.set_filter2(a["filter2"])
+                    elif self.type in ["cbo","wld","course_hedu","course_sc"]:
+                        b.set_filter2(self.attr)
 
-                group["builds"][i] = b
+                    if "params" in a:
+                        b = b.json(**a["params"])
+                        b["url"] += "?{}".format(param(a["params"]))
+                    else:
+                        b = b.json()
+
+                    b["position"] = position
+                    b["titlelock"] = "title" in a
+                    if b["titlelock"]:
+                        b["slug"] = a["title"]
+                    position += 1
+
+                    v[ii] = b
+
+                group["builds"][i] = v
             group["builds"] = [b for b in group["builds"] if b != None]
 
         apps = [g for g in apps if len(g["builds"]) > 0]
@@ -126,24 +133,43 @@ class Bra(Profile):
     def build_list(self):
         apps = [
             {"builds": [91]},
-            {"title": gettext("Exports by:"), "builds":
-                [{"id":9, "params": {"size": "export_val"}},
-                {"id":11, "params": {"size": "export_val"}}]
-            },
-            {"title": gettext("Imports by:"), "builds":
-                [{"id":9, "params": {"size": "import_val"}},
-                {"id":11, "params": {"size": "import_val"}}]
-            },
-            {"title": gettext("Employment by:"), "builds": [17, 19]},
+            {"title": gettext("Exports by:"), "builds": [
+                [
+                    {"id":9, "params": {"size": "export_val"}},
+                    {"id":25, "params": {"size": "export_val"}},
+                    {"id":46, "params": {"size": "export_val"}}
+                ],
+                [
+                    {"id":11, "params": {"size": "export_val"}},
+                    {"id":27, "params": {"size": "export_val"}},
+                    {"id":134, "params": {"size": "export_val"}}
+                ],
+            ]},
+            {"title": gettext("Imports by:"), "builds": [
+                [
+                    {"id":9, "params": {"size": "import_val"}},
+                    {"id":25, "params": {"size": "import_val"}},
+                    {"id":46, "params": {"size": "import_val"}}
+                ],
+                [
+                    {"id":11, "params": {"size": "import_val"}},
+                    {"id":27, "params": {"size": "import_val"}},
+                    {"id":134, "params": {"size": "import_val"}}
+                ],
+            ]},
+            {"title": gettext("Employment by:"), "builds": [[1,17, 140], [3, 19, 142]]},
             {"title": gettext("Economic Opportunities:"), "builds": [35, 33]},
             {"title": gettext("Domestic Trade* by:"), "builds": [128, 127]},
-            {"title": gettext("University Enrollment by:"), "builds": [93, 105]},
-            {"title": gettext("Vocational Enrollment by:"), "builds": [120]}
+            {"title": gettext("University Enrollment by:"), "builds": [93, [95, 105, 115]]},
+            {"title": gettext("Vocational Enrollment by:"), "builds": [[117, 120, 126]]}
         ]
         if len(self.attr.id) < 9:
-            apps[1]["builds"].append({"id": 13, "params": {"size": "export_val"}})
-            apps[2]["builds"].append({"id": 13, "params": {"size": "import_val"}})
-            apps[3]["builds"].append(5)
+            for i, val in enumerate(["export_val", "import_val"]):
+                exp_builds = []
+                for b in [40,13,29]:
+                    exp_builds.append({"id": b, "params": {"size": val}})
+                apps[i+1]["builds"].append(exp_builds)
+            apps[3]["builds"].append([36,5,21])
         return apps
 
 class Hs(Profile):
@@ -153,11 +179,31 @@ class Hs(Profile):
         apps = [
             {"builds": [148]},
             {"title": gettext("Exports by:"),
-            "builds": [{"id": 12, "params": {"size": "export_val"}},
-            {"id": 137, "params": {"y": "export_val"}}]},
+            "builds": [
+                [
+                    {"id": 12, "params": {"size": "export_val"}},
+                    {"id": 28, "params": {"size": "export_val"}},
+                    {"id": 135, "params": {"size": "export_val"}}
+                ],
+                [
+                    {"id": 41, "params": {"size": "export_val"}},
+                    {"id": 14, "params": {"size": "export_val"}},
+                    {"id": 30, "params": {"size": "export_val"}}
+                ]
+            ]},
             {"title": gettext("Imports by:"),
-            "builds": [{"id": 12, "params": {"size": "import_val"}},
-            {"id": 137, "params": {"y": "import_val"}}]},
+            "builds": [
+                [
+                    {"id": 12, "params": {"size": "import_val"}},
+                    {"id": 28, "params": {"size": "import_val"}},
+                    {"id": 135, "params": {"size": "import_val"}}
+                ],
+                [
+                    {"id": 41, "params": {"size": "import_val"}},
+                    {"id": 14, "params": {"size": "import_val"}},
+                    {"id": 30, "params": {"size": "import_val"}}
+                ]
+            ]},
             {"title": gettext("Economic Opportunities:"), "builds": [50]}
         ]
 
@@ -166,7 +212,10 @@ class Hs(Profile):
             cross_apps = {"title": gettext("Common Industries by Occupation:"), "builds": []}
             for industry in industries:
                 name = attrs.Cnae.query.get(industry).name()
-                cross_apps["builds"].append({"title": name, "id": 4, "filter1": industry})
+                ind_builds = []
+                for i in [4, 143, 51]:
+                    ind_builds.append({"title": name, "id": i, "filter1": industry})
+                cross_apps["builds"].append(ind_builds)
             apps.append(cross_apps)
 
         return apps
@@ -177,11 +226,31 @@ class Wld(Profile):
         return [
             {"builds": [92]},
             {"title": gettext("Imports by:"),
-            "builds": [{"id": 10, "params": {"size": "export_val"}},
-            {"id": 138, "params": {"y": "export_val"}}]},
+            "builds": [
+                [
+                    {"id": 10, "params": {"size": "export_val"}},
+                    {"id": 26, "params": {"y": "export_val"}},
+                    {"id": 133, "params": {"y": "export_val"}}
+                ],
+                [
+                    {"id": 15, "params": {"size": "export_val"}},
+                    {"id": 31, "params": {"y": "export_val"}},
+                    {"id": 42, "params": {"color": "export_val"}}
+                ]
+            ]},
             {"title": gettext("Exports by:"),
-            "builds": [{"id": 10, "params": {"size": "import_val"}},
-            {"id": 138, "params": {"y": "import_val"}}]}
+            "builds": [
+                [
+                    {"id": 10, "params": {"size": "import_val"}},
+                    {"id": 26, "params": {"y": "import_val"}},
+                    {"id": 133, "params": {"y": "import_val"}}
+                ],
+                [
+                    {"id": 15, "params": {"size": "import_val"}},
+                    {"id": 31, "params": {"y": "import_val"}},
+                    {"id": 42, "params": {"color": "import_val"}}
+                ]
+            ]}
         ]
 
 class Cnae(Profile):
@@ -190,12 +259,30 @@ class Cnae(Profile):
 
         apps = [
             {"title": gettext("Employment by:"),
-            "builds": [{"id": 143, "params": {"y": "num_emp"}},
-            {"id": 22, "params": {"y": "num_emp"}}]},
+            "builds": [
+                [
+                    {"id": 143, "params": {"size": "num_emp"}},
+                    {"id": 4, "params": {"y": "num_emp"}},
+                    {"id": 20, "params": {"y": "num_emp"}}
+                ],
+                [
+                    {"id": 37, "params": {"size": "num_emp"}},
+                    {"id": 6, "params": {"y": "num_emp"}},
+                    {"id": 22, "params": {"color": "num_emp"}}
+                ]
+            ]},
             {"title": gettext("Average Wage by:"),
-            "builds": [{"id": 143, "params": {"y": "wage_avg"}},
-            {"id": 22, "params": {"y": "wage_avg"}}]},
-            {"title": gettext("Economic Opportunities:"), "builds": [4, 48]}
+            "builds": [
+                [
+                    {"id": 143, "params": {"size": "wage_avg"}},
+                    {"id": 20, "params": {"y": "wage_avg"}}
+                ],
+                [
+                    {"id": 37, "params": {"size": "wage_avg"}},
+                    {"id": 22, "params": {"color": "wage_avg"}}
+                ]
+            ]},
+            {"title": gettext("Economic Opportunities:"), "builds": [51, 48]}
         ]
 
         products = self.crosswalk_id()
@@ -203,7 +290,10 @@ class Cnae(Profile):
             cross_apps = {"title": gettext("Common Products by Trade Partner:"), "builds": []}
             for product in products:
                 name = attrs.Hs.query.get(product).name()
-                cross_apps["builds"].append({"title": name, "id": 12, "filter1": product})
+                prod_builds = []
+                for i in [12,28,135]:
+                    prod_builds.append({"title": name, "id": i, "filter1": product})
+                cross_apps["builds"].append(prod_builds)
             apps.append(cross_apps)
 
         return apps
@@ -213,11 +303,31 @@ class Cbo(Profile):
     def build_list(self):
         apps = [
             {"title": gettext("Employment by:"),
-            "builds": [{"id": 141, "params": {"y": "num_emp"}},
-            {"id": 23, "params": {"y": "num_emp"}}]},
+            "builds": [
+                [
+                    {"id": 141, "params": {"y": "num_emp"}},
+                    {"id": 2, "params": {"size": "num_emp"}},
+                    {"id": 18, "params": {"y": "num_emp"}}
+                ],
+                [
+                    {"id": 38, "params": {"color": "num_emp"}},
+                    {"id": 7, "params": {"size": "num_emp"}},
+                    {"id": 23, "params": {"y": "num_emp"}}
+                ],
+            ]},
             {"title": gettext("Average Wage by:"),
-            "builds": [{"id": 141, "params": {"y": "wage_avg"}},
-            {"id": 23, "params": {"y": "wage_avg"}}]},
+            "builds": [
+                [
+                    {"id": 141, "params": {"y": "wage_avg"}},
+                    {"id": 2, "params": {"size": "wage_avg"}},
+                    {"id": 18, "params": {"y": "wage_avg"}}
+                ],
+                [
+                    {"id": 38, "params": {"color": "wage_avg"}},
+                    {"id": 7, "params": {"size": "wage_avg"}},
+                    {"id": 23, "params": {"y": "wage_avg"}}
+                ],
+            ]},
             {"title": gettext("Economic Opportunities:"), "builds": [49]}
         ]
         courses = self.crosswalk_id()
@@ -232,14 +342,14 @@ class Cbo(Profile):
 class University(Profile):
 
     def build_list(self):
-        return [{"title": gettext("Enrollment by:"), "builds": [116, 155, 151]}]
+        return [{"title": gettext("Enrollment by:"), "builds": [[96,106,116], 155, 151]}]
 
 class Course_hedu(Profile):
 
     def build_list(self):
         apps = [{
             "title": gettext("Enrollment by:"),
-            "builds": [{"id": 94, "params": {"y": "graduates_growth"}}, 108, 156, 152]
+            "builds": [{"id": 94, "params": {"y": "graduates_growth"}}, [110,108,99], 156, 152]
         }]
 
         occupations = self.crosswalk_id()
@@ -247,11 +357,14 @@ class Course_hedu(Profile):
             cross_apps = {"title": gettext("Common Occupations by Industry:"), "builds": []}
             for occupation in occupations:
                 name = attrs.Cbo.query.get(occupation).name()
-                cross_apps["builds"].append({"title": name, "id": 2, "filter2": occupation})
+                occ_builds = []
+                for i in [2,18,141]:
+                    occ_builds.append({"title": name, "id": i, "filter2": occupation})
+                cross_apps["builds"].append(occ_builds)
             apps.append(cross_apps)
         return apps
 
 class Course_sc(Profile):
 
     def build_list(self):
-        return [{"title": gettext("Vocational Enrollment by:"), "builds": [124, 159]}]
+        return [{"title": gettext("Vocational Enrollment by:"), "builds": [[124, 122, 119], 159]}]

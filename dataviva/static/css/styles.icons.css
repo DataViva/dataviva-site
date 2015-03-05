@@ -77,6 +77,17 @@
   line-height: 27px;
 }
 
+.decision.icon.short.tiny, .help.icon.short.tiny {
+  display: inline-block;
+  height: 25px;
+  padding: 0 !important;
+  width: 25px;
+}
+
+.decision.icon.short.tiny:after, .help.icon.short.tiny:after {
+  content: "";
+}
+
 /*******/
 /* Nav */
 /*******/
