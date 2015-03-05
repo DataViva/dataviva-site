@@ -116,7 +116,7 @@ def index():
 
     # Vocations
     most_recent_year = parse_year(__year_range__["sc"][-1])
-    top = Yc_sc.query.filter_by(year=most_recent_year).order_by(Yc_sc.enrolled.desc()).limit(5).all()
+    top = Yc_sc.query.filter_by(year=most_recent_year, course_sc_id_len=5).order_by(Yc_sc.enrolled.desc()).filter(~Yc_sc.course_sc_id.startswith('xx')).limit(5).all()
     top = [t.course_sc for t in top]
     profile_types.append({
         "summary": "Showing the locations and schools in which these vocations are taught.",
