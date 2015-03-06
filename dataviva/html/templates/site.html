@@ -191,7 +191,7 @@
     })
 
      d3.select("a#search").on(d3plus.client.pointer.click, function() {
-     	d3.select(".searchBox").style("display","block").transition().style("width", "465px")
+     	d3.select(".searchBox").style("display","block").transition().style("width", "445px")
        .each("end",function(){
          d3.select(this).style("overflow","visible")
          d3.select("#searchFld").node().focus()
@@ -221,13 +221,13 @@
     	var d3_target = d3.select(d3.event.target)
       if ( !d3_target.classed("searchFld") && !d3_target.classed("searchBox") && !d3_target.classed("searchResult")) {
         var results = d3.select(".search .searchResult")
-        if( d3.select(".searchBox").style("width") === "465px" || (!results.empty() && results.style("opacity")) ) {
+        if( d3.select(".searchBox").style("width") === "445px" || (!results.empty() && results.style("opacity")) ) {
           closeSearch()
         }
       }
 
       // if ( !d3_target.classed("searchFld") && !d3_target.classed("searchBox") ) {
-      //   if( d3.select(".searchBox").style("width") === "465px" ) {
+      //   if( d3.select(".searchBox").style("width") === "445px" ) {
       //     closeSearch()
       //   }
       // }
@@ -373,7 +373,7 @@
 				        exclude = true
 				    }
 				}
-        
+
 				if (item.content_type === "course_hedu") {
 				    if ($ct_course_hedu < 6) {
 			        if (item.id.length == 2) {
@@ -391,7 +391,7 @@
 				        exclude = true
 				    }
 				}
-        
+
 				if (item.content_type === "course_sc") {
 				    if ($ct_course_sc < 6) {
 			        if (item.id.length == 2) {
@@ -419,21 +419,21 @@
 
                if(exclude!=true) {
 
-                 if (type_curr !== item.content_type) {
-
-                   results_el.append("div")
-                     .attr("class","selector_title")
-                     .text(dataviva.format.text(item.content_type+"_plural"))
-
-                   type_curr = item.content_type
-
-                 }
-                 else {
-
-                   // results_el.append("div")
-                   //   .attr("class","d3plus_tooltip_data_seperator")
-
-                 }
+                //  if (type_curr !== item.content_type) {
+                 //
+                //    results_el.append("div")
+                //      .attr("class","selector_title")
+                //      .text(dataviva.format.text(item.content_type+"_plural"))
+                 //
+                //    type_curr = item.content_type
+                 //
+                //  }
+                //  else {
+                 //
+                //    // results_el.append("div")
+                //    //   .attr("class","d3plus_tooltip_data_seperator")
+                 //
+                //  }
 
                  var link = results_el.append("a")
                    .attr("class","search_result");
@@ -459,7 +459,7 @@
 
                  text.append("div")
                    .attr("class","search_sub")
-                   .text(dataviva.format.text(type))
+                   .text(dataviva.format.text(item.content_type) + " - " + dataviva.format.text(type))
 
                }
 
