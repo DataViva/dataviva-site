@@ -29015,11 +29015,13 @@ module.exports = bar;
 
 
 },{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/box.coffee":[function(require,module,exports){
-var box, fetchValue, graph, uniques;
+var box, fetchValue, graph, strip, uniques;
 
 fetchValue = require("../../core/fetch/value.coffee");
 
 graph = require("./helpers/graph/draw.coffee");
+
+strip = require("../../string/strip.js");
 
 uniques = require("../../util/uniques.coffee");
 
@@ -29114,6 +29116,7 @@ box = function(vars) {
     if (key.constructor === Date) {
       key = key.getTime();
     }
+    key = strip(key);
     boxData = mergeData(boxData);
     boxData.d3plus = {
       color: "white",
@@ -29138,7 +29141,7 @@ box = function(vars) {
         position: h === "height" ? "top" : "right",
         shape: "whisker",
         "static": true,
-        text: median
+        text: boxData.d3plus[h] > 20 ? median : false
       }
     };
     medianData.d3plus[w] = space;
@@ -29211,7 +29214,7 @@ module.exports = box;
 
 
 
-},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/bubbles.coffee":[function(require,module,exports){
+},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/bubbles.coffee":[function(require,module,exports){
 var arraySort, bubbles, fetchColor, fetchText, fetchValue, groupData, legible;
 
 arraySort = require("../../array/sort.coffee");
@@ -29513,7 +29516,9 @@ module.exports = function(vars, opts) {
 
 
 },{"./includes/axes.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/axes.coffee","./includes/mouse.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/mouse.coffee","./includes/plot.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/plot.coffee","./includes/svg.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/svg.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/axes.coffee":[function(require,module,exports){
-var axisRange, buckets, buffer, dataChange, fetchData, fetchValue, getData, getScale, print, sizeScale, uniques;
+var arraySort, axisRange, buckets, buffer, dataChange, fetchData, fetchValue, getData, getScale, print, sizeScale, uniques;
+
+arraySort = require("../../../../../array/sort.coffee");
 
 buffer = require("./buffer.coffee");
 
@@ -29700,11 +29705,16 @@ axisRange = function(vars, axis, zero, buffer) {
         _ref2 = vars.axes.dataset;
         for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
           d = _ref2[_k];
-          _ref3 = d.values;
-          for (_l = 0, _len3 = _ref3.length; _l < _len3; _l++) {
-            v = _ref3[_l];
-            group = fetchValue(vars, v, vars[axis].value);
-            counts[group].push(fetchValue(vars, v, sortKey));
+          if (d.values) {
+            _ref3 = d.values;
+            for (_l = 0, _len3 = _ref3.length; _l < _len3; _l++) {
+              v = _ref3[_l];
+              group = fetchValue(vars, v, vars[axis].value);
+              counts[group].push(fetchValue(vars, v, sortKey));
+            }
+          } else {
+            group = fetchValue(vars, d, vars[axis].value);
+            counts[group].push(fetchValue(vars, d, sortKey));
           }
         }
         for (k in counts) {
@@ -29715,18 +29725,12 @@ axisRange = function(vars, axis, zero, buffer) {
             counts[k] = agg(v, sortKey);
           }
         }
-        counts = d3.entries(counts);
-        counts.sort(function(a, b) {
-          if (sort === "desc") {
-            return b.value - a.value;
-          } else {
-            return a.value - b.value;
-          }
-        });
-        return counts.reduce(function(arr, v) {
+        counts = arraySort(d3.entries(counts), "value", sort);
+        counts = counts.reduce(function(arr, v) {
           arr.push(v.key);
           return arr;
         }, []);
+        return counts;
       } else {
         return uniques(values);
       }
@@ -29820,7 +29824,7 @@ sizeScale = function(vars, value) {
 
 
 
-},{"../../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../../../core/fetch/data.js":"/Users/Dave/Sites/d3plus/src/core/fetch/data.js","../../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../../../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./buffer.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee":[function(require,module,exports){
+},{"../../../../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../../../core/fetch/data.js":"/Users/Dave/Sites/d3plus/src/core/fetch/data.js","../../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../../../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./buffer.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee":[function(require,module,exports){
 var buckets, closest;
 
 buckets = require("../../../../../util/buckets.coffee");

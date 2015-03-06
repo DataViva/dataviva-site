@@ -161,7 +161,7 @@ class Bra(Profile):
             {"title": gettext("Economic Opportunities:"), "builds": [35, 33]},
             {"title": gettext("Domestic Trade* by:"), "builds": [128, 127]},
             {"title": gettext("University Enrollment by:"), "builds": [93, [95, 105, 115]]},
-            {"title": gettext("Vocational Enrollment by:"), "builds": [[117, 120, 126]]}
+            {"title": gettext("Vocational Enrollment by:"), "builds": [[117, 120, 126],160]}
         ]
         if len(self.attr.id) < 9:
             for i, val in enumerate(["export_val", "import_val"]):

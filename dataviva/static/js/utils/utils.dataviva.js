@@ -29,6 +29,10 @@ dataviva.format.text = function(text, opts) {
   var name = opts.key || "";
   if (typeof name !== "string") name = "";
 
+  if (text.indexOf("xx") === 0 && name === "course_sc_5" && app && app.attrs && app.attrs.course_sc) {
+    return app.attrs.course_sc[text].name;
+  }
+
   var l = dataviva.language;
 
   if (text.indexOf("top_") == 0) {
@@ -410,7 +414,7 @@ dataviva.cleanData = function(data, dataset, output) {
     "ei": ["purchase_value", "transfer_value"]
   }
 
-  var output_attr = output === "bra_r" ? "bra" : output;
+  var output_attr = output === "bra_r" ? "bra" : output === "age" ? "course_sc" : output;
   var depths = dataviva.depths(output_attr);
 
   var extras = {}
@@ -454,7 +458,7 @@ dataviva.cleanData = function(data, dataset, output) {
 
       }
       else {
-        id = temp[output+"_id"];
+        id = temp[output_attr+"_id"];
       }
 
       depths.forEach(function(depth){

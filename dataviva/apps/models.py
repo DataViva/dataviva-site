@@ -273,6 +273,9 @@ class Build(db.Model, AutoSerialize):
                 filter1 = filter1 + ".show.{}".format(len(filter1))
             elif filter2 != "all":
                 filter2 = filter2 + ".show.{}".format(len(filter2))
+        elif self.output == "age":
+            filter1 = "show.8"
+            filter2 = "xx.show.5"
 
         params = ""
         if self.output == "course_sc" and self.filter2 == "all":
@@ -489,6 +492,8 @@ class Build(db.Model, AutoSerialize):
         auto_serialized["app"] = self.app.serialize()
         if self.dataset == "ei":
             auto_serialized["output_attr"] = "bra"
+        elif self.output == "age":
+            auto_serialized["output_attr"] = "course_sc"
         else:
             auto_serialized["output_attr"] = self.output
 

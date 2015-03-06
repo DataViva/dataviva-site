@@ -659,8 +659,7 @@
       .total("required")
       .temp("elsewhere")
       .x({
-        "label": false,
-        "ticks": {"font": {"size": 16}}
+        "label": false
       })
       .y({
         "label": {"font": {"size": 22, "weight": "normal"}},
@@ -1123,29 +1122,33 @@
         app.format_data()
       }
 
-      var nesting = []
       if (app.build.output_attr === "balance") {
-        nesting = ["trade_balance", "direction"];
         app.viz.text({"trade_balance": "trade_balance", "direction": "direction"});
-      }
-      else if (app.build.output_attr === "university") {
-        nesting = ["school_type_id","university_5"];
-        app.viz.text("name");
-      }
-      else if (app.build.output_attr === "school") {
-        nesting = ["school_type_id","school_8"];
-        app.viz.text("name");
-      }
-      else if (app.build.output_attr === "time") {
-        nesting = ["time_period"];
-        app.viz.text("name");
-      }
-      else if (app.build.output_attr === "type") {
-        nesting = ["student_type"];
-        app.viz.text("name");
       }
       else {
         app.viz.text("name");
+      }
+
+      var nesting = [];
+      if (app.build.output_attr === "balance") {
+        nesting = ["trade_balance", "direction"];
+      }
+      else if (app.build.output_attr === "university") {
+        nesting = ["school_type_id","university_5"];
+      }
+      else if (app.build.output_attr === "school") {
+        nesting = ["school_type_id","school_8"];
+      }
+      else if (app.build.output_attr === "time") {
+        nesting = ["time_period"];
+      }
+      else if (app.build.output_attr === "type") {
+        nesting = ["student_type"];
+      }
+      else if (app.build.output === "age") {
+        nesting = ["course_sc_5","school_id"];
+      }
+      else {
         depths[app.build.output_attr].forEach(function(d){
           nesting.push(app.build.output_attr+"_"+d)
         })
@@ -1245,12 +1248,14 @@
           "value": "icon"
         })
         .legend({"icons": app.build.output_attr !== "bra"})
+        .legend(app.build.output !== "age")
         .y(false)
         .x({"scale": "linear"})
         .tooltip(app.tooltip)
         .zoom(app.build.output_attr !== "balance")
         .time(app.monthly ? "month" : "year")
         .time({"solo": timeSolo})
+        .x({"ticks": {"font": {"size": app.build.output === "age" ? 12 : 16}}})
 
       // app.viz.type(app.build.app.d3plus)
       //   .title(app.build.title)
@@ -1304,6 +1309,8 @@
           .zoom(false)
           .id({"grouping": true})
           .shape("square")
+          .type({"mode": "squarify"})
+          .order(false)
 
       }
 
@@ -1338,6 +1345,7 @@
           .depth(app.viz.id(Object).nesting.length - 1)
           .size({"scale": {"min": 3}})
           .shape("circle")
+          .order(false)
       }
 
       /****************************/
@@ -1371,6 +1379,7 @@
           .depth(app.viz.id(Object).nesting.length - 1)
           .size(false)
           .shape("circle")
+          .order(false)
       }
 
       /******************************/
@@ -1416,6 +1425,7 @@
           .total(false)
           .depth(app.viz.id(Object).nesting.length - 1)
           .shape("coordinates")
+          .order(false)
 
       }
 
@@ -1462,6 +1472,7 @@
           .size({"threshold": threshold})
           .id({"grouping": true})
           .shape("area")
+          .order(false)
       }
 
       /******************************/
@@ -1515,6 +1526,7 @@
           .size({"scale": {"min": 3}})
           .id({"grouping": true})
           .shape("circle")
+          .order(false)
       }
 
       /******************************/
@@ -1539,12 +1551,13 @@
           .size({"scale": {"min": 3}})
           .id({"grouping": true})
           .shape("circle")
+          .order(false)
 
       }
 
-      /******************************/
+      /***************************/
       /* Line Specific Variables */
-      /******************************/
+      /***************************/
       else if (app.build.app.type === "line") {
 
         app.viz
@@ -1560,6 +1573,31 @@
         .total(false)
         .id({"grouping": true})
         .shape("line")
+        .order(false)
+
+      }
+
+      /**************************/
+      /* Box Specific Variables */
+      /**************************/
+      else if (app.build.app.type === "box") {
+
+        app.viz
+        .x("course_sc_5")
+        .y({
+          "scale": "linear",
+          "value": "age"
+        })
+        .axes({"mirror": false})
+        .active({"spotlight": false})
+        .active(false)
+        .temp(false)
+        .total(false)
+        .id({"grouping": true})
+        .shape("circle")
+        .type({"mode": "extent"})
+        .order("course_sc_5")
+        .order({"sort": "asc"})
 
       }
 

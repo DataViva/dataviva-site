@@ -164,7 +164,8 @@ def guide():
         "type": "occugrid"
     })
     # Box Plot
-    builds = []
+    builds = Build.query.filter(Build.id.in_([160])).all()
+    for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": "A visualization, also known as box and whisker diagram, used to display the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum",
         "builds": builds,
@@ -449,8 +450,8 @@ def get_geo_location(ip):
             "filter1": "c14126", "filter2": "all", "output": "cbo", "params": ""})
 @mod.route('/builder/line/', defaults={"app_name": "line", "dataset": "secex", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "balance", "params": ""})
-@mod.route('/builder/box/', defaults={"app_name": "box", "dataset": "rais", "bra_id": "4mg030000",
-            "filter1": "c14126", "filter2": "all", "output": "cbo", "params": ""})
+@mod.route('/builder/box/', defaults={"app_name": "box", "dataset": "sc", "bra_id": "4mg030000",
+            "filter1": "all", "filter2": "all", "output": "age", "params": ""})
 @mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/')
 @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
