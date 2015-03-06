@@ -450,7 +450,7 @@ def get_geo_location(ip):
             "filter1": "c14126", "filter2": "all", "output": "cbo", "params": ""})
 @mod.route('/builder/line/', defaults={"app_name": "line", "dataset": "secex", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "balance", "params": ""})
-@mod.route('/builder/box/', defaults={"app_name": "box", "dataset": "sc", "bra_id": "4mg030000",
+@mod.route('/builder/box/', defaults={"app_name": "box", "dataset": "sc", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "age", "params": ""})
 @mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/')
 @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
