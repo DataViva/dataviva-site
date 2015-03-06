@@ -79,13 +79,18 @@
 
 .decision.icon.short.tiny, .help.icon.short.tiny {
   display: inline-block;
-  height: 25px;
+  height: 20px;
   padding: 0 !important;
-  width: 25px;
+  position: relative;
+  width: 20px;
 }
 
 .decision.icon.short.tiny:after, .help.icon.short.tiny:after {
   content: "";
+}
+
+.decision.icon.short.tiny:before, .help.icon.short.tiny:before {
+  width: 20px !important;
 }
 
 /*******/

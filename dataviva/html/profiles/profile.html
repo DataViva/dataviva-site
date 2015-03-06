@@ -9,6 +9,7 @@
     <style>
 
       .build_btn {
+        display: block;
         position: relative;
         text-align: right;
       }
@@ -17,7 +18,12 @@
         display: inline-block;
         font-size: 12px;
         float: left;
-        padding: 5px 4px 4px 12px;
+        padding: 3px 4px 4px 12px;
+      }
+
+      .build_title:hover {
+        cursor: pointer;
+        text-decoration: underline;
       }
 
     </style>
@@ -40,7 +46,7 @@
       {% endif %}
       {% for build in group.builds %}
         <div class="build_btn" data-build="{{ counter + loop.index0 }}" data-lock="{{ build[0].titlelock }}">
-          <span class="build_title">{{ build[0].slug }}</span>
+          <span class="build_title" id="group_{{ build[0].position }}" onclick="app_select(this.id)">{{ build[0].slug }}</span>
           {% for b in build %}
             <a class="app_links decision icon short tiny {{ b.app.type }}" id="app_{{ b.position }}" data-url="{{ b.url }}" alt="{{ b.app.name }}" onclick="app_select(this.id)"></a>
           {% endfor %}
@@ -197,16 +203,27 @@
       dataviva.url(window.location.pathname, {"app": id.split("_")[1]});
       clearInterval(scrollinterval);
 
-      var btn = d3.select("#"+id);
-      url = btn.attr("data-url");
+      var btn, build_btn, new_build;
+      if (id.indexOf("group_") === 0) {
+        build_btn = d3.select(d3.select("#"+id).node().parentNode);
+        d3.selectAll(".build_btn").each(function(d,i){
+          if (this === build_btn.node()) {
+            new_build = i+1+"";
+          }
+        })
+        btn = build_btn.select(".app_links");
+      }
+      else {
+        btn = d3.select("#"+id);
+        d3.selectAll(".build_btn").each(function(d,i){
+          if (this === btn.node().parentNode) {
+            build_btn = d3.select(this);
+            new_build = i+1+"";
+          }
+        })
+      }
 
-      var build_btn, new_build;
-      d3.selectAll(".build_btn").each(function(d,i){
-        if (this === btn.node().parentNode) {
-          build_btn = d3.select(this);
-          new_build = i+1+"";
-        }
-      })
+      url = btn.attr("data-url");
 
       d3.selectAll(".app_links").classed("decision", false).classed("help", true);
       build_btn.select("[data-url='"+url+"']").classed("decision", true).classed("help", false)
