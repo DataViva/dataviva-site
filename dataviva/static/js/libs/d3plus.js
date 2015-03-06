@@ -9296,7 +9296,7 @@ function unique(list, compare, sorted) {
 
 module.exports = unique
 },{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
-arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
 },{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
 "use strict"
 
@@ -11919,18 +11919,18 @@ module.exports = function( vars , rawData , split ) {
 
           var textLabel;
           if (vars.depth.value === 0) {
-            textLabel = vars.format.value(vars.format.locale.value.ui.values, "threshold", vars);
-            textLabel += " < "+vars.format.value(cutoff, vars.size.value, vars);
+            textLabel = vars.format.value(vars.format.locale.value.ui.values, {"key": "threshold", "vars": vars});
+            textLabel += " < "+vars.format.value(cutoff, {"key": vars.size.value, "vars": vars});
           }
           else {
             textLabel = fetchText(vars,m,vars.depth.value-1);
-            textLabel = textLabel.length ? textLabel[0].split(" < ")[0] : vars.format.value(vars.format.locale.value.ui.values, "threshold", vars);
+            textLabel = textLabel.length ? textLabel[0].split(" < ")[0] : vars.format.value(vars.format.locale.value.ui.values, {"key": "threshold", "vars": vars});
             if (p_id, labelException.indexOf(p_id) < 0) {
-              textLabel += " < "+vars.format.value(cutoff[p_id], vars.size.value, vars);
+              textLabel += " < "+vars.format.value(cutoff[p_id], {"key": vars.size.value, "vars": vars});
             }
           }
           if (p_id, labelException.indexOf(p_id) < 0) {
-            textLabel += " ("+vars.format.value(threshold*100, "share", vars)+"%)";
+            textLabel += " ("+vars.format.value(threshold*100, {"key": "share", "vars": vars})+"%)";
           }
 
           m.d3plus.threshold = cutoff;
@@ -12332,7 +12332,7 @@ module.exports = function(vars, obj, depth) {
 
   if (validObject(obj) && "d3plus" in obj && obj.d3plus.text) {
     names.push(obj.d3plus.text.toString());
-    names.push(vars.format.value(obj.d3plus.text.toString(), undefined, vars, obj));
+    names.push(vars.format.value(obj.d3plus.text.toString(), {"vars": vars, "data": obj}));
   }
   else {
 
@@ -12359,11 +12359,11 @@ module.exports = function(vars, obj, depth) {
           if (n instanceof Array) {
             n = n.filter(function(nn){ return nn; });
             return n.map(function(nn){
-              return vars.format.value(nn.toString(), t, vars, formatObj);
+              return vars.format.value(nn.toString(), {"vars": vars, "data": formatObj, "key": t});
             });
           }
           else if (n) {
-            return vars.format.value(n.toString(), t, vars, formatObj);
+            return vars.format.value(n.toString(), {"vars": vars, "data": formatObj, "key": t});
           }
         });
         if (name.length === 1) name = name[0];
@@ -13212,7 +13212,7 @@ initialize = function(vars, obj, method) {
       if (!(method in vars)) {
         vars[method] = [];
       }
-    } else {
+    } else if (o !== "value") {
       if (validObject(obj[o])) {
         initialize(vars, obj[o], o);
       }
@@ -13314,11 +13314,7 @@ checkObject = function(vars, method, object, key, value) {
     objectOnly = validObject(object[key]) && "objectAccess" in object[key] && object[key]["objectAccess"] === false;
     approvedObject = passingObject && (objectOnly || ((!("value" in value)) && (!(d3.keys(value)[0] in object[key]))));
     if (value === null || !passingObject || approvedObject) {
-      if (approvedObject) {
-        setMethod(vars, method, object[key], "value", value);
-      } else {
-        setMethod(vars, method, object, key, value);
-      }
+      setMethod(vars, method, object, key, value);
     } else if (passingObject) {
       for (d in value) {
         checkObject(vars, method, object[key], d, value[d]);
@@ -13790,7 +13786,7 @@ module.exports = function(vars, method, object, key, value) {
         if (typeof vars.text.nesting === "object") {
           n = vars.text.nesting[vars.id.value];
           if (n) {
-            vars.text.nesting[vars.id.value] = (typeof n === "string" ? [n] : n);
+            vars.text.nesting[vars.id.value] = typeof n === "string" ? [n] : n;
             vars.text.value = (n instanceof Array ? n[0] : n);
           }
         }
@@ -15082,6 +15078,11 @@ titleCase = require("../../string/title.coffee");
 
 module.exports = {
   accepted: [Function, String],
+  affixes: {
+    accepted: [Object],
+    objectAccess: false,
+    value: {}
+  },
   deprecates: ["number_format", "text_format"],
   locale: {
     accepted: function() {
@@ -15119,20 +15120,21 @@ module.exports = {
     accepted: [false, Function],
     value: false
   },
-  value: function(value, key, vars, data) {
-    var f, v;
-    if (!vars) {
-      vars = {};
+  value: function(value, opts) {
+    var f, v, vars;
+    if (!opts) {
+      opts = {};
     }
-    if (vars.time && vars.time.value && key === vars.time.value) {
-      v = (value.constructor === Date ? value : new Date(value));
+    vars = opts.vars || {};
+    if (vars.time && vars.time.value && opts.key === vars.time.value) {
+      v = value.constructor === Date ? value : new Date(value);
       return vars.data.time.format(v);
     } else if (typeof value === "number") {
       f = this.number.value || formatNumber;
-      return f(value, key, vars, data);
+      return f(value, opts);
     } else if (typeof value === "string") {
       f = this.text.value || titleCase;
-      return f(value, key, vars, data);
+      return f(value, opts);
     } else {
       return JSON.stringify(value);
     }
@@ -18266,33 +18268,42 @@ var defaultLocale;
 
 defaultLocale = require("../core/locale/languages/en_US.coffee");
 
-module.exports = function(number, key, vars, data) {
-  var symbol, time;
+module.exports = function(number, opts) {
+  var affixes, key, labels, ret, symbol, time, vars;
   if ("locale" in this) {
     time = this.locale.value.time;
   } else {
     time = defaultLocale.time;
   }
-  if (vars && vars.time && typeof vars.time.value === "string") {
+  if (!opts) {
+    opts = {};
+  }
+  vars = opts.vars || {};
+  key = opts.key;
+  labels = "labels" in opts ? opts.labels : true;
+  if (vars.time && vars.time.value) {
     time.push(vars.time.value);
   }
   if (typeof key === "string" && time.indexOf(key.toLowerCase()) >= 0) {
-    return number;
+    ret = number;
   } else if (key === "share") {
-    if (number === 100) {
-      return number;
-    }
-    return d3.format(".2g")(number);
+    ret = number === 100 ? number : d3.format(".2g")(number);
   } else if (number < 10 && number > -10) {
-    return d3.round(number, 2);
+    ret = d3.round(number, 2);
   } else if (number.toString().split(".")[0].length > 3) {
     symbol = d3.formatPrefix(number).symbol;
     symbol = symbol.replace("G", "B");
     number = d3.formatPrefix(number).scale(number);
     number = parseFloat(d3.format(".3g")(number));
-    return number + symbol;
+    ret = number + symbol;
   } else {
-    return d3.format(",f")(number);
+    ret = d3.format(",f")(number);
+  }
+  if (labels && key && "format" in vars && key in vars.format.affixes.value) {
+    affixes = vars.format.affixes.value[key];
+    return affixes[0] + ret + affixes[1];
+  } else {
+    return ret;
   }
 };
 
@@ -18493,11 +18504,15 @@ var defaultLocale;
 
 defaultLocale = require("../core/locale/languages/en_US.coffee");
 
-module.exports = function(text, key, vars, data) {
-  var biglow, bigs, locale, smalls;
+module.exports = function(text, opts) {
+  var biglow, bigs, key, locale, smalls;
   if (!text) {
     return "";
   }
+  if (!opts) {
+    opts = {};
+  }
+  key = opts.key;
   if (text.charAt(text.length - 1) === ".") {
     return text.charAt(0).toUpperCase() + text.substr(1);
   }
@@ -23498,7 +23513,7 @@ module.exports = function( vars , group ) {
             .padding(t.padding/2)
             .resize( resize )
             .size( size )
-            .text( vars.format.value(t.text*100,"share")+"%" , vars)
+            .text( vars.format.value(t.text*100,{"key": "share", "vars": vars})+"%")
             .width(t.w * scale[1])
             .valign(salign)
             .x(t.x - t.w*scale[1]/2 + t.padding/2)
@@ -24808,7 +24823,7 @@ module.exports = function(params) {
       var text = ""
     }
 
-    var footer = text.length ? vars.format.value(text,"footer", vars) : false
+    var footer = text.length ? vars.format.value(text,{"key": "footer", "vars": vars}) : false
 
   }
 
@@ -24913,7 +24928,7 @@ module.exports = function(params) {
           var value = fetchValue(vars, obj, vars.size.value, nestKey),
               color = fetchColor(vars, obj, nestKey);
 
-          children[name] = value && !(value instanceof Array) ? vars.format.value(value, vars.size.value, vars, obj) : "";
+          children[name] = value && !(value instanceof Array) ? vars.format.value(value, {"key": vars.size.value, "vars": vars, "data": obj}) : "";
 
           if (color) {
             if ( !children.d3plus_colors ) children.d3plus_colors = {};
@@ -24947,17 +24962,17 @@ module.exports = function(params) {
         total  = vars.total.value ? fetchValue(vars, d, vars.total.value) : d.d3plus.total;
 
     if (typeof active == "number" && active > 0 && total) {
-      var label = vars.active.value || "active"
-      ex[label] = active+"/"+total+" ("+vars.format.value((active/total)*100, "share", vars, d)+"%)"
+      var label = vars.active.value || "active";
+      ex[label] = active+"/"+total+" ("+vars.format.value((active/total)*100, {"key": "share", "vars": vars, "data": d})+"%)";
     }
 
     if (typeof temp == "number" && temp > 0 && total) {
-      var label = vars.temp.value || "temp"
-      ex[label] = temp+"/"+total+" ("+vars.format.value((temp/total)*100, "share", vars, d)+"%)"
+      var label = vars.temp.value || "temp";
+      ex[label] = temp+"/"+total+" ("+vars.format.value((temp/total)*100, {"key": "share", "vars": vars, "data": d})+"%)";
     }
 
     if ( vars.tooltip.share.value && d.d3plus.share ) {
-      ex.share = vars.format.value(d.d3plus.share*100, "share", vars, d)+"%"
+      ex.share = vars.format.value(d.d3plus.share*100, {"key": "share", "vars": vars, "data": d})+"%";
     }
 
     var depth = "depth" in params ? params.depth : dataDepth,
@@ -25165,11 +25180,11 @@ module.exports = function(vars, id, length, extras, children, depth) {
 
       if ( value instanceof Array ) {
         value.forEach(function(v){
-          v = vars.format.value(v, key, vars, id)
+          v = vars.format.value(v, {"key": key, "vars": vars, "data": id})
         })
       }
       else {
-        value = vars.format.value(value, key, vars, id)
+        value = vars.format.value(value, {"key": key, "vars": vars, "data": id})
       }
 
       var obj = {"name": name, "value": value, "highlight": h, "group": group}
@@ -25981,7 +25996,7 @@ module.exports = function(vars) {
 
               var idIndex = vars.id.nesting.indexOf(colorKey),
                   title = idIndex >= 0 ? fetchText(vars,d,idIndex)[0] :
-                          vars.format.value(fetchValue(vars,d,vars.color.value,colorKey), vars.color.value, vars, d);
+                          vars.format.value(fetchValue(vars,d,vars.color.value,colorKey), {"key": vars.color.value, "vars": vars, "data": d});
 
               createTooltip({
                 "data": d,
@@ -26108,7 +26123,7 @@ module.exports = function(vars) {
         .style("text-anchor",vars.legend.font.align)
         .attr("fill",vars.legend.font.color)
         .text(function(d){
-          return vars.format.value(values[d], key, vars);
+          return vars.format.value(values[d], {"key": key, "vars": vars});
         })
         .attr("y",function(d){
           return this.getBBox().height+vars.legend.gradient.height+vars.ui.padding*2;
@@ -26822,14 +26837,14 @@ module.exports = function(vars) {
         if (overall_total > total) {
 
           var pct = (total/overall_total)*100,
-              ot = vars.format.value(overall_total,vars.size.value, vars)
+              ot = vars.format.value(overall_total, {"key": vars.size.value, "vars": vars});
 
-          var pct = " ("+vars.format.value(pct,"share")+"% of "+ot+", vars)"
+          pct = " ("+vars.format.value(pct,{"key": "share", "vars": vars})+"% of "+ot+")";
 
         }
       }
 
-      total = vars.format.value(total,vars.size.value, vars)
+      total = vars.format.value(total, {"key": vars.size.value, "vars": vars})
       var obj = vars.title.total.value
         , prefix = obj.prefix || vars.format.value(vars.format.locale.value.ui.total)+": "
       total = prefix + total
@@ -27908,6 +27923,11 @@ titleCase = require("../../string/title.coffee");
 
 module.exports = {
   accepted: [Function, String],
+  affixes: {
+    accepted: [Object],
+    objectAccess: false,
+    value: {}
+  },
   deprecates: ["number_format", "text_format"],
   locale: {
     accepted: function() {
@@ -27945,20 +27965,21 @@ module.exports = {
     accepted: [false, Function],
     value: false
   },
-  value: function(value, key, vars, data) {
-    var f, v;
-    if (!vars) {
-      vars = {};
+  value: function(value, opts) {
+    var f, v, vars;
+    if (!opts) {
+      opts = {};
     }
-    if (vars.time && vars.time.value && key === vars.time.value) {
+    vars = opts.vars || {};
+    if (vars.time && vars.time.value && opts.key === vars.time.value) {
       v = value.constructor === Date ? value : new Date(value);
       return vars.data.time.format(v);
     } else if (typeof value === "number") {
       f = this.number.value || formatNumber;
-      return f(value, key, vars, data);
+      return f(value, opts);
     } else if (typeof value === "string") {
       f = this.text.value || titleCase;
-      return f(value, key, vars, data);
+      return f(value, opts);
     } else {
       return JSON.stringify(value);
     }
@@ -27998,6 +28019,14 @@ transform = require("../../../core/methods/font/transform.coffee");
 module.exports = function(axis) {
   return {
     accepted: [Array, Boolean, Function, Object, String],
+    affixes: {
+      accepted: [Boolean],
+      separator: {
+        accepted: [Boolean, Array],
+        value: true
+      },
+      value: false
+    },
     axis: {
       accepted: [Boolean],
       color: "#444",
@@ -28028,7 +28057,10 @@ module.exports = function(axis) {
       accepted: [Boolean, String],
       fetch: function(vars) {
         if (this.value === true) {
-          return vars.format.value(vars[axis].value, axis, vars);
+          return vars.format.value(vars[axis].value, {
+            key: axis,
+            vars: vars
+          });
         }
         return this.value;
       },
@@ -29075,7 +29107,10 @@ box = function(vars) {
     key = fetchValue(vars, leaves[0], vars[discrete].value);
     x = vars[discrete].scale.viz(key);
     x += disMargin;
-    label = vars.format.value(key, vars[discrete].value, vars);
+    label = vars.format.value(key, {
+      key: vars[discrete].value,
+      vars: vars
+    });
     if (key.constructor === Date) {
       key = key.getTime();
     }
@@ -30057,7 +30092,10 @@ module.exports = function(node, vars) {
     var axis, val;
     axis = vars.axes.stacked || d;
     val = fetchValue(vars, node, vars[axis].value);
-    return vars.format.value(val, vars[axis].value, vars);
+    return vars.format.value(val, {
+      key: vars[axis].value,
+      vars: vars
+    });
   });
   if (timing) {
     texts.transition().duration(timing).delay(timing).attr("opacity", 1).call(textStyle);
@@ -30263,7 +30301,11 @@ labelPadding = function(vars) {
     });
   } else {
     yText = vars.y.ticks.visible.map(function(d) {
-      return vars.format.value(d, vars.y.value, vars);
+      return vars.format.value(d, {
+        key: vars.y.value,
+        vars: vars,
+        labels: vars.y.affixes.value
+      });
     });
   }
   yAxisWidth = d3.max(fontSizes(yText, yAttrs), function(d) {
@@ -30309,7 +30351,11 @@ labelPadding = function(vars) {
       });
     }
     xText = xValues.map(function(d) {
-      return vars.format.value(d, vars.x.value, vars);
+      return vars.format.value(d, {
+        key: vars.x.value,
+        vars: vars,
+        labels: vars.x.affixes.value
+      });
     });
   }
   xSizes = fontSizes(xText, xAttrs);
@@ -30406,7 +30452,11 @@ createAxis = function(vars, axis) {
       } else if (scale === "log") {
         return formatPower(d);
       } else {
-        return vars.format.value(d, vars[axis].value, vars);
+        return vars.format.value(d, {
+          key: vars[axis].value,
+          vars: vars,
+          labels: vars[axis].affixes.value
+        });
       }
     } else {
       return null;
@@ -30445,7 +30495,7 @@ textwrap = require("../../../../../textwrap/textwrap.coffee");
 validObject = require("../../../../../object/validate.coffee");
 
 module.exports = function(vars) {
-  var alignMap, axis, axisData, axisLabel, bg, bgStyle, d, domain, domains, getFontStyle, grid, gridData, label, labelData, labelStyle, line, lineData, lineFont, lineGroup, lineRects, lineStyle, lines, linetexts, mirror, plane, planeTrans, position, rectData, rectStyle, rotated, textData, textPad, textPos, tickFont, tickPosition, tickStyle, xAxis, xEnter, xStyle, xmod, yAxis, yEnter, yStyle, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
+  var affixes, alignMap, axis, axisData, axisLabel, bg, bgStyle, d, domain, domains, getFontStyle, grid, gridData, label, labelData, labelStyle, line, lineData, lineFont, lineGroup, lineRects, lineStyle, lines, linetexts, mirror, plane, planeTrans, position, rectData, rectStyle, rotated, sep, textData, textPad, textPos, tickFont, tickPosition, tickStyle, xAxis, xEnter, xStyle, xmod, yAxis, yEnter, yStyle, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
   domains = vars.x.domain.viz.concat(vars.y.domain.viz);
   if (domains.indexOf(void 0) >= 0) {
     return null;
@@ -30639,6 +30689,16 @@ module.exports = function(vars) {
     lines.exit().transition().duration(vars.draw.timing / 2).style("opacity", 0).remove();
     axisLabel = vars[axis].label.fetch(vars);
     labelData = axisData && axisLabel ? [0] : [];
+    affixes = vars.format.affixes.value[vars[axis].value];
+    if (axisLabel && !vars[axis].affixes.value && affixes) {
+      sep = vars[axis].affixes.separator.value;
+      if (sep === true) {
+        sep = ["[", "]"];
+      } else if (sep === false) {
+        sep = ["", ""];
+      }
+      axisLabel += " " + sep[0] + affixes[0] + " " + affixes[1] + sep[1];
+    }
     label = vars.group.selectAll("text#d3plus_graph_" + axis + "label").data(labelData);
     label.text(axisLabel).transition().duration(vars.draw.timing).call(labelStyle, axis);
     label.enter().append("text").attr("id", "d3plus_graph_" + axis + "label").text(axisLabel).call(labelStyle, axis);

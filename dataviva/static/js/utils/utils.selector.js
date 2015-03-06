@@ -643,7 +643,7 @@ function Selector() {
             if (v[value]) {
               text.append("div")
                 .attr("class","search_data")
-                .text(dataviva.format.text(value)+": "+dataviva.format.number(v[value],value))
+                .text(dataviva.format.text(value)+": "+dataviva.format.number(v[value],{"key": value}))
             }
 
             var buttons = item.append("div")

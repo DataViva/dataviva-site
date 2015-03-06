@@ -23,8 +23,10 @@ dataviva.obj2csv = function(obj) {
 }
 
 dataviva.format = {};
-dataviva.format.text = function(text,name,vars) {
+dataviva.format.text = function(text, opts) {
 
+  if (!opts) opts = {};
+  var name = opts.key || "";
   if (typeof name !== "string") name = "";
 
   var l = dataviva.language;
@@ -91,16 +93,30 @@ dataviva.format.text = function(text,name,vars) {
 
 }
 
-dataviva.format.number = function(value,name,l) {
+dataviva.format.affixes = {
+  "export_val": ["$"," USD"],
+  "import_val": ["$"," USD"],
+  "val_usd": ["$"," USD"],
+  "export_kg": [""," kg"],
+  "import_kg": [""," kg"],
+  "purchase_value": ["$"," BRL"],
+  "transfer_value": ["$"," BRL"],
+  "wage": ["$"," BRL"],
+  "wage_avg": ["$"," BRL"],
+  "wage_avg_bra": ["$"," BRL"]
+};
 
+dataviva.format.number = function(value, opts) {
+
+  if (!opts) opts = {};
+  var name = opts.key || "";
+  var labels = "labels" in opts ? opts.labels : true;
   if (typeof name !== "string") name = "";
 
-  if (!l) var l = dataviva.language
+  var negative = value < 0;
+  value = Math.abs(value);
 
-  var negative = value < 0
-  value = Math.abs(value)
-
-  if (name.indexOf("_growth") >= 0) value = value * 100
+  if (name.indexOf("_growth") >= 0) value = value * 100;
 
   var smalls = ["rca","rca_bra","rca_wld","distance","eci","pci","bra_diversity_eff","cnae_diversity_eff","cbo_diversity_eff","hs_diversity_eff","wld_diversity_eff"]
 
@@ -110,13 +126,12 @@ dataviva.format.number = function(value,name,l) {
     var return_value = value
   }
   else if (smalls.indexOf(name) >= 0 || value < 1) {
-    var r = value.toString().split(""), l = false
+    var r = value.toString().split(""), len = false;
     r.forEach(function(n,i){
-      if (n != "0" && n != "." && !l) l = i
+      if (n != "0" && n != "." && !len) len = i
     })
-    if (l > 5) l = 5
-    var return_value = d3.round(value,l)
-
+    if (len > 5) len = 5
+    var return_value = d3.round(value,len)
   }
   else if (value.toString().split(".")[0].length > 4) {
 
@@ -127,7 +142,7 @@ dataviva.format.number = function(value,name,l) {
     value = d3.formatPrefix(value).scale(value)
     value = parseFloat(d3.format(".3g")(value))
 
-    if (symbol && l == "pt") {
+    if (symbol && dataviva.language === "pt") {
       var digit = parseFloat(value.toString().split(".")[0])
       if (symbol == "T") {
         if (digit < 2) symbol = "Trilh\u00e3o"
@@ -157,19 +172,6 @@ dataviva.format.number = function(value,name,l) {
     var return_value = d3.format(",f")(value)
   }
 
-  var total_labels = {
-        "export_val": ["$"," USD"],
-        "import_val": ["$"," USD"],
-        "val_usd": ["$"," USD"],
-        "export_kg": [""," kg"],
-        "import_kg": [""," kg"],
-        "purchase_value": ["$"," BRL"],
-        "transfer_value": ["$"," BRL"],
-        "wage": ["$"," BRL"],
-        "wage_avg": ["$"," BRL"],
-        "wage_avg_bra": ["$"," BRL"]
-      }
-
   if (name.indexOf("total_") == 0) {
     var label_name = name.substr(6)
   }
@@ -180,8 +182,8 @@ dataviva.format.number = function(value,name,l) {
 
   var growth = label_name.indexOf("_growth") > 0;
 
-  if (total_labels[label_name]) {
-    var labels = total_labels[label_name]
+  if (labels && dataviva.format.affixes[label_name]) {
+    var labels = dataviva.format.affixes[label_name]
     return_value = labels[0] + return_value + labels[1]
   }
   else if (growth) {
@@ -192,7 +194,7 @@ dataviva.format.number = function(value,name,l) {
 
   return_value = String(return_value)
 
-  if (l == "pt") {
+  if (dataviva.language === "pt") {
     var n = return_value.split(".")
     n[0] = n[0].replace(",",".")
     return_value = n.join(",")

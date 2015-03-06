@@ -380,10 +380,10 @@
       var row_data = {}
       columns.forEach(function(c){
         if (typeof d[c] == "string") {
-          row_data[c] = dataviva.format.text(d[c],c)
+          row_data[c] = dataviva.format.text(d[c],{"key": c})
         }
         else if (typeof d[c] == "number") {
-          row_data[c] = dataviva.format.number(d[c],c)
+          row_data[c] = dataviva.format.number(d[c],{"key": c})
         }
         else if (!d[c]) {
           row_data[c] = " &mdash; "

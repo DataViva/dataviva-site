@@ -634,6 +634,7 @@
       .time({"solo": {"callback": app.title_update}})
       .legend({"size": [25,25]})
       .format({
+        "affixes": dataviva.format.affixes,
         "number": dataviva.format.number,
         "text": dataviva.format.text
       })
@@ -1498,6 +1499,7 @@
         if (app.build.output_attr == "hs" && app.ecis[app.build.data_url] && yv == "pci") {
           var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
         }
+
         app.viz
           .x({
             "scale": "linear",
@@ -1712,8 +1714,8 @@
               return d.rca >= 1;
             })
           }
-          if (app.build.app.type == "scatter") {
-            if (app.build.output_attr == "hs" && value == "wld_rca") {
+          if (app.build.app.type === "scatter") {
+            if (app.build.output_attr === "hs" && value === "wld_rca") {
               var yv = app.vars.y + "_wld",
                   xv = app.vars.x + "_wld"
             }
@@ -1721,7 +1723,7 @@
               var yv = app.vars.y,
                   xv = app.vars.x
             }
-            if (app.vars.y.indexOf("pci") >= 0) yv = app.vars.y
+            if (app.vars.y.indexOf("pci") >= 0) yv = app.vars.y;
             app.viz.x(xv).y(yv)
           }
         }

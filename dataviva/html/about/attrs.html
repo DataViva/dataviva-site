@@ -56,7 +56,7 @@
     	depthElem = d3.select(depthSelected[0][1]);
     	depth = depthElem[0][0].value;
     	id = depthElem[0][0].id.split("_");
-    	title = "["+dataviva.format.text("classifications")+"] "+dataviva.format.text(id[0])+" - "+dataviva.format.text(depthElem[0][0].id+"_plural",depthElem[0][0].id+"_plural",dataviva.language)
+    	title = "["+dataviva.format.text("classifications")+"] "+dataviva.format.text(id[0])+" - "+dataviva.format.text(depthElem[0][0].id+"_plural")
 
     	url = "http://dataviva.info/attrs/"+id[0]+"/?depth="+depth;
     	 d3.xhr("/apps/download/")

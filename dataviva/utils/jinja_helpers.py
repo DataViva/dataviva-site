@@ -28,13 +28,13 @@ class jinja_formatter:
     def __call__(self, *args):
         return self.format(*args)
 
-    def render(self, type, lang):
+    def render(self, type):
         if isinstance(self.text, (unicode,str)):
             format = "text"
         else:
             format = "number"
 
-        return Markup("<script>\ndocument.write(dataviva.format.%s(\"%s\",\"%s\",\"%s\"))\n</script>" % (format, self.text, type, str(lang)))
+        return Markup("<script>\ndocument.write(dataviva.format.%s(\"%s\",{\"key\": \"%s\"}))\n</script>" % (format, self.text, type))
 
 ''' A helper funciton for stripping out html tags for showing snippets of user submitted content'''
 def jinja_strip_html(s):
