@@ -52,7 +52,7 @@
           {% endfor %}
         </div>
       {% endfor %}
-      {% set counter = counter + group|length + 1 %}
+      {% set counter = counter + group.builds|length %}
     {% endfor %}
 
     <div class="d3plus_tooltip_data_container" id="guide_stats">
@@ -97,14 +97,14 @@
 
   </div>
 
-  {% set counter2 = 1 %}
+  {% set counter = 1 %}
   {% for group in builds %}
     {% for build in group.builds %}
-      <div class="lightbox guide_app" id="profile{{ counter2 + loop.index0 }}">
-        <iframe id="iframe{{ counter2 + loop.index0 }}"></iframe>
+      <div class="lightbox guide_app" id="profile{{ counter + loop.index0 }}">
+        <iframe id="iframe{{ counter + loop.index0 }}"></iframe>
       </div>
     {% endfor %}
-    {% set counter2 = counter2 + group|length + 1 %}
+    {% set counter = counter + group.builds|length %}
   {% endfor %}
 
 {% endblock %}
