@@ -161,7 +161,7 @@ def index_selector(category = None, id = None):
         article = article)
 
 @mod.route('/<category>/<id>/')
-# @view_cache.cached(timeout=604800, key_prefix=api_cache_key("profiles"))
+@view_cache.cached(timeout=604800, key_prefix=api_cache_key("profiles"))
 @gzipped
 def profiles(category = None, id = None):
 
