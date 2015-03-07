@@ -319,12 +319,10 @@ class Cbo(Profile):
             "builds": [
                 [
                     {"id": 141, "params": {"y": "wage_avg"}},
-                    {"id": 2, "params": {"size": "wage_avg"}},
                     {"id": 18, "params": {"y": "wage_avg"}}
                 ],
                 [
                     {"id": 38, "params": {"color": "wage_avg"}},
-                    {"id": 7, "params": {"size": "wage_avg"}},
                     {"id": 23, "params": {"y": "wage_avg"}}
                 ],
             ]},
