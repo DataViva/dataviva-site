@@ -48,12 +48,12 @@
           {% set text = a.body %}
           {% set type = "replies" %}
           {% set prefix = "Replied on " %}
-          {% set url = "/ask/question/"+a.slug() %}
+          {% set url = "/about/question/"+a.slug() %}
         {% elif a.question %}
           {% set text = a.question %}
           {% set type = "questions" %}
           {% set prefix = "Asked on " %}
-          {% set url = "/ask/question/"+a.slug %}
+          {% set url = "/about/question/"+a.slug %}
         {% endif %}
         {% if text %}
           <a href="{{url}}" class="decision icon {{type}}">
