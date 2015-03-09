@@ -318,7 +318,7 @@
       <a class="next"><i class="fa fa-angle-right"></i></a>
 
       <div class="scroller">
-        <ul class="set" id="test" data-parameters="{{ carousel.url }}">
+        <ul class="set" id="test" data-parameters="{{ carousel.url }}" data-metric="{{ carousel.metric}}">
           {% for itm in carousel['items'] -%}
             {% set poster = itm['poster'] %}
             {% set value = itm['value'] %}
@@ -330,6 +330,7 @@
                 <div class="title">{{ poster.name() }}</div>
                 <div class="value">{{ value }}</div>
                 <div class="rank"> {{ loop.index }}</div>
+                <div class="metric"> {{ carousel.metric }}</div>
               </a>
             </li>
           {%- endfor %}
@@ -425,6 +426,8 @@
   })
 
   var addLi = function(page, item, rank) {
+    var metric = page.attr("data-metric");
+
     var poster = item.poster;
     var a = page.append("li").append("a")
       .attr("class", "poster")
@@ -435,6 +438,7 @@
     a.append("div").attr("class", "title").text(poster.name);
     a.append("div").attr("class", "value").text(item.value);
     a.append("div").attr("class", "rank").text(rank)
+    a.append("div").attr("class", "metric").text(metric)
   }
 
   var addNodes = function(page, list, offset) {
@@ -449,6 +453,7 @@
   var loadMore = function(parentNode, page, callback) {
     var offset = page.selectAll("li").size();
     var params = page.attr("data-parameters");
+
     var url = params + "&offset=" + offset
     d3.json(url, function(error, json) {
       if (error)

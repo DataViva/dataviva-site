@@ -137,7 +137,8 @@ def home():
         "title": "Occupations by Highest Average Wage",
         "type": profile,
         "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit)
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
     })
 
     metric, show, profile = "num_emp", "cnae_id", "cnae"
@@ -147,7 +148,8 @@ def home():
         "title": "Largest Industries by Employment",
         "type": profile,
         "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit)
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
     })
 
     metric, show, profile = "num_emp_growth", "cnae_id", "cnae"
@@ -157,7 +159,8 @@ def home():
         "title": "Industries by Employment Growth",
         "type": profile,
         "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit)
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
     })
 
     metric, show, profile = "enrolled", "course_hedu_id", "course_hedu"
@@ -167,7 +170,8 @@ def home():
         "title": "Most Popular Courses by Enrollment",
         "type": profile,
         "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit)
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
     })
 
     metric, show, profile = "enrolled", "bra_id", "bra"
@@ -177,7 +181,8 @@ def home():
         "title": "Cities by Largest University Enrollment",
         "type": profile,
         "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit)
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
     })
 
     return render_template("general/home.html", carousels = carousels)
