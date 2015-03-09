@@ -11143,6 +11143,8 @@ module.exports = function( vars ) {
 
       };
 
+      vars.data.time.getFormat = getFormat;
+
       var multi = [],
           functions = [
             function(d) { return d.getMilliseconds(); },
@@ -11153,6 +11155,8 @@ module.exports = function( vars ) {
             function(d) { return d.getMonth(); },
             function(d) { return true; }
           ];
+
+      vars.data.time.functions = functions;
 
       for (var p = periods.indexOf(stepType); p <= periods.indexOf(totalType); p++) {
         var prev = p-1 < periods.indexOf(stepType) ? periods[p] : periods[p-1];
@@ -11169,14 +11173,15 @@ module.exports = function( vars ) {
         vars.data.time.multiFormat = vars.data.time.format
       }
 
-    }
+      vars.data.time.ticks = [];
+      var min = d3.min(vars.data.time.values);
+      var max = d3.max(vars.data.time.values);
+      for (var s = 0; s <= vars.data.time.stepIntervals; s++) {
+        var m = new Date(min);
+        m["set"+vars.data.time.stepType](m["get"+vars.data.time.stepType]() + s);
+        if (m <= max) vars.data.time.ticks.push(m);
+      }
 
-    vars.data.time.ticks = [];
-    var min = d3.min(vars.data.time.values);
-    for (var s = 0; s <= vars.data.time.stepIntervals; s++) {
-      var m = new Date(min);
-      m["set"+vars.data.time.stepType](m["get"+vars.data.time.stepType]() + s);
-      vars.data.time.ticks.push(m);
     }
 
     if ( vars.dev.value ) print.timeEnd( timerString );
@@ -11958,7 +11963,78 @@ module.exports = function( vars , rawData , split ) {
 
 };
 
-},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js"}],"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee":[function(require,module,exports){
+},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js"}],"/Users/Dave/Sites/d3plus/src/core/data/time.coffee":[function(require,module,exports){
+var sizes;
+
+sizes = require("../../font/sizes.coffee");
+
+module.exports = function(vars, opts) {
+  var f, format, func, getFormat, limit, locale, p, periods, pp, prev, render, small, step, style, time, total, vals, values;
+  values = opts.values || vars.data.time.ticks;
+  style = opts.style || {};
+  limit = opts.limit || vars.width.value;
+  time = {};
+  periods = vars.data.time.periods;
+  step = vars.data.time.stepType;
+  total = vars.data.time.totalType;
+  func = vars.data.time.functions;
+  getFormat = vars.data.time.getFormat;
+  locale = vars.format.locale.value.format;
+  p = periods.indexOf(step);
+  while (p <= periods.indexOf(total)) {
+    vals = values.filter(function(t) {
+      var match, pp;
+      if (p === periods.indexOf(step)) {
+        return true;
+      }
+      match = true;
+      pp = p - 1;
+      if (p < 0) {
+        return true;
+      }
+      while (pp >= periods.indexOf(step)) {
+        if (!match) {
+          break;
+        }
+        match = !func[pp](t);
+        pp--;
+      }
+      return match;
+    });
+    if (periods[p] === total) {
+      format = d3.locale(locale).timeFormat(getFormat(periods[p], total));
+    } else {
+      pp = p;
+      format = [];
+      while (pp <= periods.indexOf(total)) {
+        prev = pp - 1 < periods.indexOf(step) ? pp : pp - 1;
+        prev = periods[prev];
+        small = periods[pp] === prev && step !== total;
+        f = getFormat(prev, periods[pp], small);
+        format.push([f, func[pp]]);
+        pp++;
+      }
+      format = d3.locale(locale).timeFormat.multi(format);
+    }
+    render = sizes(vals.map(function(v) {
+      return format(v);
+    }), style);
+    if (d3.sum(render, function(r) {
+      return r.width;
+    }) < limit) {
+      time.format = format;
+      time.values = vals;
+      time.sizes = render;
+      break;
+    }
+    p++;
+  }
+  return time;
+};
+
+
+
+},{"../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee"}],"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee":[function(require,module,exports){
 var fetchValue, getColor, getRandom, randomColor, uniques, validColor, validObject;
 
 fetchValue = require("./value.coffee");
@@ -26385,7 +26461,7 @@ module.exports = function(vars,message) {
 }
 
 },{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/timeline.coffee":[function(require,module,exports){
-var closest, css, events, fontSizes, playInterval, prefix, print, textColor;
+var closest, css, events, fontSizes, mix, playInterval, prefix, print, textColor, timeDetect;
 
 closest = require("../../../util/closest.coffee");
 
@@ -26395,30 +26471,39 @@ fontSizes = require("../../../font/sizes.coffee");
 
 events = require("../../../client/pointer.coffee");
 
+mix = require("../../../color/mix.coffee");
+
 prefix = require("../../../client/prefix.coffee");
 
 print = require("../../../core/console/print.coffee");
 
 textColor = require("../../../color/text.coffee");
 
+timeDetect = require("../../../core/data/time.coffee");
+
 playInterval = false;
 
 module.exports = function(vars) {
-  var availableWidth, background, brush, brushExtent, brush_group, brushed, brushend, d, end, handles, i, init, labelWidth, labels, max_index, min, min_index, min_required, oldWidth, playButton, playIcon, playIconChar, playIconStyle, playStyle, playUpdate, playbackWidth, setYears, start, start_x, step, stopPlayback, text, textFill, textRotate, textSizes, textStyle, tickStep, ticks, timeFormat, timeFormatter, timeMultiFormat, timelineBox, timelineHeight, timelineWidth, x, yearHeight, yearMS, yearWidth, yearWidths, year_ticks, years, _i, _len;
+  var availableWidth, background, brush, brushExtent, brush_group, brushed, brushend, d, end, handles, i, init, labelWidth, labels, max_index, min, min_index, playButton, playIcon, playIconChar, playIconStyle, playStyle, playUpdate, playbackWidth, setYears, start, start_x, step, stopPlayback, text, textFill, textStyle, tickColor, ticks, timeFormat, timeReturn, timelineBox, timelineHeight, timelineOffset, timelineWidth, visible, x, yearHeight, yearMS, year_ticks, years, _i, _len;
   if (vars.timeline.value && (!vars.error.internal || !vars.data.missing) && !vars.small && vars.data.time && vars.data.time.values.length > 1) {
     if (vars.dev.value) {
       print.time("drawing timeline");
     }
-    if (vars.axes.discrete && vars.time.value === vars[vars.axes.discrete].value) {
-      min_required = 2;
-    } else {
-      min_required = 1;
-    }
-    years = vars.data.time.values.map(function(d) {
+    textStyle = {
+      "font-weight": vars.ui.font.weight,
+      "font-family": vars.ui.font.family.value,
+      "font-size": vars.ui.font.size + "px",
+      "text-anchor": "middle"
+    };
+    years = vars.data.time.ticks.map(function(d) {
       return new Date(d);
     });
-    timeFormat = vars.data.time.format;
-    timeMultiFormat = vars.data.time.multiFormat;
+    timeReturn = timeDetect(vars, {
+      values: years,
+      style: textStyle
+    });
+    visible = timeReturn.values.map(Number);
+    timeFormat = timeReturn.format;
     if (vars.time.solo.value.length) {
       init = d3.extent(vars.time.solo.value);
       for (i = _i = 0, _len = init.length; _i < _len; i = ++_i) {
@@ -26432,21 +26517,53 @@ module.exports = function(vars) {
     } else {
       init = d3.extent(years);
     }
-    min = new Date(years[0]);
-    step = vars.data.time.stepType;
-    min["set" + step](min["get" + step]() + years.length);
-    years = vars.data.time.ticks;
     year_ticks = years.slice();
-    year_ticks.push(min);
+    yearHeight = d3.max(timeReturn.sizes.map(function(t) {
+      return t.height;
+    }));
+    labelWidth = ~~(d3.max(timeReturn.sizes.map(function(t) {
+      return t.width;
+    }))) + 1;
+    labelWidth += vars.ui.padding * 2;
+    timelineHeight = yearHeight + vars.ui.padding * 2;
+    timelineWidth = labelWidth * years.length;
+    playbackWidth = timelineHeight;
+    availableWidth = vars.width.value - vars.ui.padding * 2;
+    if (vars.timeline.play.value) {
+      availableWidth -= playbackWidth + vars.ui.padding;
+    }
+    if (visible.length < years.length) {
+      labelWidth = (availableWidth - labelWidth) / years.length;
+      timelineWidth = labelWidth * years.length;
+      timelineOffset = 1;
+    } else {
+      timelineOffset = 0;
+      min = new Date(years[0]);
+      step = vars.data.time.stepType;
+      min["set" + step](min["get" + step]() + years.length);
+      year_ticks.push(min);
+    }
     start = new Date(init[0]);
     start = closest(year_ticks, start);
     end = new Date(init[1]);
-    end["set" + vars.data.time.stepType](end["get" + vars.data.time.stepType]() + 1);
+    if (!timelineOffset) {
+      end["set" + vars.data.time.stepType](end["get" + vars.data.time.stepType]() + 1);
+    }
     end = closest(year_ticks, end);
     yearMS = year_ticks.map(Number);
     min_index = yearMS.indexOf(+start);
     max_index = yearMS.indexOf(+end);
     brushExtent = [start, end];
+    if (vars.timeline.align === "start") {
+      start_x = vars.ui.padding;
+    } else if (vars.timeline.align === "end") {
+      start_x = vars.width.value - vars.ui.padding - timelineWidth;
+    } else {
+      start_x = vars.width.value / 2 - timelineWidth / 2;
+    }
+    if (vars.timeline.play.value) {
+      start_x += (playbackWidth + vars.ui.padding) / 2;
+    }
     stopPlayback = function() {
       clearInterval(playInterval);
       playInterval = false;
@@ -26471,14 +26588,14 @@ module.exports = function(vars) {
         }
         min_index = yearMS.indexOf(+min_val);
         max_index = yearMS.indexOf(+max_val);
-        if (max_index - min_index >= min_required) {
+        if (max_index - min_index >= 1) {
           extent = [min_val, max_val];
-        } else if (min_index + min_required <= years.length) {
-          extent = [min_val, year_ticks[min_index + min_required]];
+        } else if (min_index + 1 <= years.length) {
+          extent = [min_val, year_ticks[min_index + 1]];
         } else {
           extent = [min_val];
           i = 1;
-          while (i <= min_required) {
+          while (i <= 1) {
             if (min_index + i <= years.length) {
               extent.push(year_ticks[min_index + i]);
             } else {
@@ -26495,16 +26612,14 @@ module.exports = function(vars) {
     };
     setYears = function() {
       var newYears;
-      if (max_index - min_index === years.length) {
+      if (max_index - min_index === years.length - timelineOffset) {
         newYears = [];
       } else {
-        newYears = d3.range(min_index, max_index).map(function(y) {
-          i = vars.data.time.dataSteps.indexOf(y);
-          if (i >= 0) {
-            return vars.data.time.values[i];
-          } else {
-            return years[y];
-          }
+        newYears = yearMS.filter(function(t, i) {
+          return i >= min_index && i < (max_index + timelineOffset);
+        });
+        newYears = newYears.map(function(t) {
+          return new Date(t);
         });
       }
       playUpdate();
@@ -26513,84 +26628,21 @@ module.exports = function(vars) {
       }).draw();
     };
     brushend = function() {
-      var change, old_max, old_min, solod;
+      var change, old_max, old_min, solo;
       if (d3.event.sourceEvent !== null) {
         if (vars.time.solo.value.length) {
-          solod = d3.extent(vars.time.solo.value);
-          old_min = yearMS.indexOf(+closest(year_ticks, solod[0]));
-          old_max = yearMS.indexOf(+closest(year_ticks, solod[1])) + 1;
+          solo = d3.extent(vars.time.solo.value);
+          old_min = yearMS.indexOf(+closest(year_ticks, solo[0]));
+          old_max = yearMS.indexOf(+closest(year_ticks, solo[1]));
           change = old_min !== min_index || old_max !== max_index;
         } else {
-          change = max_index - min_index !== years.length;
+          change = max_index - min_index !== years.length - timelineOffset;
         }
         if (change) {
           return setYears();
         }
       }
     };
-    textStyle = {
-      "font-weight": vars.ui.font.weight,
-      "font-family": vars.ui.font.family.value,
-      "font-size": vars.ui.font.size + "px",
-      "text-anchor": "middle"
-    };
-    timeFormatter = function(v, i) {
-      if (i === 0 || i === years.length - 1) {
-        return timeFormat(v);
-      } else {
-        return timeMultiFormat(v);
-      }
-    };
-    textSizes = fontSizes(years.map(timeFormatter), textStyle);
-    yearWidths = textSizes.map(function(t) {
-      return t.width;
-    });
-    yearWidth = ~~(d3.max(yearWidths)) + 1;
-    yearHeight = d3.max(textSizes.map(function(t) {
-      return t.height;
-    }));
-    labelWidth = yearWidth + vars.ui.padding * 2;
-    timelineHeight = yearHeight + vars.ui.padding * 2;
-    timelineWidth = labelWidth * years.length;
-    availableWidth = vars.width.value - vars.ui.padding * 2;
-    tickStep = 1;
-    textRotate = 0;
-    playbackWidth = timelineHeight;
-    if (vars.timeline.play.value) {
-      availableWidth -= playbackWidth + vars.ui.padding;
-    }
-    if (timelineWidth > availableWidth) {
-      labelWidth = yearHeight + vars.ui.padding * 2;
-      timelineHeight = yearWidth + vars.ui.padding * 2;
-      timelineWidth = labelWidth * years.length;
-      textRotate = 90;
-    }
-    timelineHeight = d3.max([timelineHeight, vars.timeline.height.value]);
-    oldWidth = labelWidth;
-    if (timelineWidth > availableWidth) {
-      timelineWidth = availableWidth;
-      oldWidth = labelWidth - vars.ui.padding * 2;
-      labelWidth = timelineWidth / years.length;
-      if (oldWidth > labelWidth) {
-        tickStep = ~~(oldWidth / (timelineWidth / years.length)) + 1;
-        while (tickStep < years.length - 1) {
-          if ((years.length - 1) % tickStep === 0) {
-            break;
-          }
-          tickStep++;
-        }
-      }
-    }
-    if (vars.timeline.align === "start") {
-      start_x = vars.ui.padding;
-    } else if (vars.timeline.align === "end") {
-      start_x = vars.width.value - vars.ui.padding - timelineWidth;
-    } else {
-      start_x = vars.width.value / 2 - timelineWidth / 2;
-    }
-    if (vars.timeline.play.value) {
-      start_x += (playbackWidth + vars.ui.padding) / 2;
-    }
     playButton = vars.g.timeline.selectAll("rect.d3plus_timeline_play").data(vars.timeline.play.value ? [0] : []);
     playStyle = function(btn) {
       return btn.attr("width", playbackWidth + 1).attr("height", timelineHeight + 1).attr("fill", vars.ui.color.primary.value).attr("stroke", vars.ui.color.primary.value).attr("stroke-width", 1).attr("x", start_x - playbackWidth - 1 - vars.ui.padding).attr("y", vars.ui.padding);
@@ -26620,7 +26672,7 @@ module.exports = function(vars) {
     playIcon.call(playIconStyle).transition().duration(vars.draw.timing).attr("opacity", 1);
     playIcon.exit().transition().duration(vars.draw.timing).attr("opacity", 0).remove();
     playUpdate = function() {
-      if (max_index - min_index === years.length) {
+      if (max_index - min_index === years.length - timelineOffset) {
         playButton.on(events.hover, null).on(events.click, null).transition().duration(vars.draw.timing).attr("opacity", 0.3);
         return playIcon.transition().duration(vars.draw.timing).attr("opacity", 0.3);
       } else {
@@ -26642,7 +26694,7 @@ module.exports = function(vars) {
             }
             setYears();
             return playInterval = setInterval(function() {
-              if (max_index === years.length) {
+              if (max_index === years.length - timelineOffset) {
                 return stopPlayback();
               } else {
                 min_index++;
@@ -26657,8 +26709,9 @@ module.exports = function(vars) {
     };
     playUpdate();
     textFill = function(d) {
-      var color, opacity;
-      if (d >= brushExtent[0] && d < brushExtent[1]) {
+      var color, less, opacity;
+      less = timelineOffset ? d <= brushExtent[1] : d < brushExtent[1];
+      if (d >= brushExtent[0] && less) {
         opacity = 1;
         color = textColor(vars.ui.color.secondary.value);
       } else {
@@ -26681,17 +26734,10 @@ module.exports = function(vars) {
       return i;
     });
     text.enter().append("text").attr("y", 0).attr("dy", "0.5ex").attr("x", 0);
+    x = d3.time.scale().domain(d3.extent(year_ticks)).rangeRound([0, timelineWidth]);
     text.order().attr(textStyle).text(function(d, i) {
-      var data, fits, next, prev;
-      if (i === 0 || i === years.length - 1) {
+      if (visible.indexOf(+d) >= 0) {
         return timeFormat(d);
-      }
-      prev = (i - 1) % tickStep === 0;
-      next = (i + 1) % tickStep === 0;
-      data = vars.data.time.dataSteps.indexOf(i) >= 0;
-      fits = (yearWidths[i - 1] / 2 + yearWidths[i] + yearWidths[i + 1] / 2 + vars.ui.padding * 4) < labelWidth * 2;
-      if (i % tickStep === 0 || (!prev && !next && data && oldWidth < labelWidth * 3)) {
-        return timeMultiFormat(d);
       } else {
         return "";
       }
@@ -26702,19 +26748,35 @@ module.exports = function(vars) {
         return 0.4;
       }
     }).attr("fill", textFill).attr("transform", function(d, i) {
-      var x, y;
-      x = start_x + (labelWidth * i) + labelWidth / 2;
-      y = timelineHeight / 2 + vars.ui.padding + 1;
-      return "translate(" + Math.round(x) + "," + Math.round(y) + ")rotate(" + textRotate + ")";
+      var dx, dy;
+      dx = start_x + x(d);
+      if (!timelineOffset) {
+        dx += labelWidth / 2;
+      }
+      dy = timelineHeight / 2 + vars.ui.padding + 1;
+      if (timelineOffset) {
+        dy += timelineHeight;
+      }
+      return "translate(" + Math.round(dx) + "," + Math.round(dy) + ")";
     });
     text.exit().transition().duration(vars.draw.timing).attr("opacity", 0).remove();
-    x = d3.time.scale().domain(d3.extent(year_ticks)).rangeRound([0, timelineWidth]);
     brush = d3.svg.brush().x(x).extent(brushExtent).on("brush", brushed).on("brushend", brushend);
+    if (vars[vars.axes.discrete].value === vars.time.value) {
+      tickColor = vars[vars.axes.discrete].ticks.color;
+    } else {
+      tickColor = vars.x.ticks.color;
+    }
     ticks.attr("transform", "translate(" + start_x + "," + vars.ui.padding + ")").transition().duration(vars.draw.timing).call(d3.svg.axis().scale(x).orient("top").ticks(function() {
       return year_ticks;
-    }).tickFormat("").tickSize(-timelineHeight).tickPadding(0)).selectAll("path").attr("fill", "none");
-    ticks.selectAll("line").attr("stroke", vars.ui.color.secondary.color).attr("stroke-width", 1).attr("shape-rendering", "crispEdges");
-    brush_group.attr("transform", "translate(" + start_x + "," + (vars.ui.padding + 1) + ")").attr("opacity", 1).call(brush);
+    }).tickFormat("").tickSize(-timelineHeight).tickPadding(0)).selectAll("line").attr("stroke-width", 1).attr("shape-rendering", "crispEdges").attr("stroke", function(d) {
+      if (visible.indexOf(+d) >= 0) {
+        return tickColor;
+      } else {
+        return mix(tickColor, vars.background.value, 0.4, 1);
+      }
+    });
+    ticks.selectAll("path").attr("fill", "none");
+    brush_group.attr("transform", "translate(" + start_x + "," + vars.ui.padding + ")").attr("opacity", 1).call(brush);
     text.attr("pointer-events", "none");
     brush_group.selectAll("rect.background").attr("fill", "none").style("visibility", "visible").attr("height", timelineHeight).attr("shape-rendering", "crispEdges").on(events.move, function() {
       var c;
@@ -26724,7 +26786,7 @@ module.exports = function(vars) {
       }
       return d3.select(this).style("cursor", c);
     });
-    brush_group.selectAll("rect.extent").attr("height", timelineHeight).attr("fill", vars.ui.color.secondary.value).attr("shape-rendering", "crispEdges").on(events.move, function() {
+    brush_group.selectAll("rect.extent").attr("opacity", 0.75).attr("height", timelineHeight).attr("fill", vars.ui.color.secondary.value).attr("shape-rendering", "crispEdges").on(events.move, function() {
       var c;
       c = vars.timeline.hover.value;
       if (["grab", "grabbing"].indexOf(c) >= 0) {
@@ -26765,7 +26827,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee","../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/titles.js":[function(require,module,exports){
+},{"../../../client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee","../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../color/mix.coffee":"/Users/Dave/Sites/d3plus/src/color/mix.coffee","../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/data/time.coffee":"/Users/Dave/Sites/d3plus/src/core/data/time.coffee","../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/titles.js":[function(require,module,exports){
 var events = require("../../../client/pointer.coffee"),
     fetchValue = require("../../../core/fetch/value.coffee"),
     print      = require("../../../core/console/print.coffee"),
@@ -30158,7 +30220,7 @@ module.exports = function(node, vars) {
 
 
 },{"../../../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/plot.coffee":[function(require,module,exports){
-var buckets, buffer, createAxis, fetchValue, fontSizes, formatPower, labelPadding, resetMargins, superscript, textwrap, uniques;
+var buckets, buffer, createAxis, fetchValue, fontSizes, formatPower, labelPadding, resetMargins, superscript, textwrap, timeDetect, uniques;
 
 buckets = require("../../../../../util/buckets.coffee");
 
@@ -30170,10 +30232,12 @@ fontSizes = require("../../../../../font/sizes.coffee");
 
 textwrap = require("../../../../../textwrap/textwrap.coffee");
 
+timeDetect = require("../../../../../core/data/time.coffee");
+
 uniques = require("../../../../../util/uniques.coffee");
 
 module.exports = function(vars, opts) {
-  var axis, extent, formatted, l, lengths, newtick, opp, step, t, tens, tick, ticks, values, _i, _j, _len, _len1, _ref, _ref1;
+  var axis, axisStyle, extent, newtick, opp, step, tens, tick, ticks, timeReturn, values, _i, _j, _len, _len1, _ref, _ref1;
   vars.axes.margin = resetMargins(vars);
   vars.axes.height = vars.height.viz;
   vars.axes.width = vars.width.viz;
@@ -30221,29 +30285,18 @@ module.exports = function(vars, opts) {
     }
     vars[axis].reset = false;
     if (vars[axis].value === vars.time.value) {
-      ticks = vars[axis].ticks.values;
-      formatted = ticks.map(function(t) {
-        return vars.data.time.multiFormat(t);
+      axisStyle = {
+        "font-family": vars[axis].label.font.family.value,
+        "font-weight": vars[axis].label.font.weight,
+        "font-size": vars[axis].label.font.size + "px"
+      };
+      timeReturn = timeDetect(vars, {
+        values: vars[axis].ticks.values,
+        limit: vars.width.viz,
+        style: axisStyle
       });
-      lengths = uniques(formatted.map(function(f) {
-        return f.length;
-      }));
-      lengths.sort(function(a, b) {
-        return b - a;
-      });
-      while (lengths.length) {
-        l = lengths.pop();
-        t = formatted.filter(function(f) {
-          return f.length >= l;
-        });
-        if (t.length > 0 && t.length < vars.width.viz / 40) {
-          ticks = vars[axis].ticks.values.filter(function(t) {
-            return vars.data.time.multiFormat(t).length >= l;
-          });
-          break;
-        }
-      }
-      vars[axis].ticks.visible = ticks;
+      vars[axis].ticks.visible = timeReturn.values.map(Number);
+      vars[axis].ticks.format = timeReturn.format;
     } else if (vars[axis].scale.value === "log") {
       ticks = vars[axis].ticks.values;
       tens = ticks.filter(function(t) {
@@ -30287,7 +30340,7 @@ resetMargins = function(vars) {
 };
 
 labelPadding = function(vars) {
-  var lastTick, rightLabel, rightMod, xAttrs, xAxisHeight, xAxisWidth, xDomain, xLabel, xLabelAttrs, xMaxWidth, xSizes, xText, xValues, yAttrs, yAxisWidth, yDomain, yLabel, yLabelAttrs, yText;
+  var lastTick, rightLabel, rightMod, xAttrs, xAxisHeight, xAxisWidth, xDomain, xLabel, xLabelAttrs, xMaxWidth, xSizes, xText, xValues, yAttrs, yAxisWidth, yDomain, yLabel, yLabelAttrs, yText, yValues;
   xDomain = vars.x.scale.viz.domain();
   yDomain = vars.y.scale.viz.domain();
   yAttrs = {
@@ -30295,16 +30348,26 @@ labelPadding = function(vars) {
     "font-family": vars.y.ticks.font.family.value,
     "font-weight": vars.y.ticks.font.weight
   };
+  yValues = vars.x.ticks.visible;
   if (vars.y.scale.value === "log") {
-    yText = vars.y.ticks.visible.map(function(d) {
+    yText = yValues.map(function(d) {
       return formatPower(d);
     });
   } else if (vars.y.scale.value === "share") {
-    yText = vars.y.ticks.visible.map(function(d) {
+    yText = yValues.map(function(d) {
       return d * 100 + "%";
     });
+  } else if (vars.y.value === vars.time.value) {
+    yText = yValues.map(function(d, i) {
+      return vars.y.ticks.format(new Date(d));
+    });
   } else {
-    yText = vars.y.ticks.visible.map(function(d) {
+    if (typeof yValues[0] === "string") {
+      yValues = vars.y.scale.viz.domain().filter(function(d) {
+        return d.indexOf("d3plus_buffer_") !== 0;
+      });
+    }
+    yText = yValues.map(function(d) {
       return vars.format.value(d, {
         key: vars.y.value,
         vars: vars,
@@ -30345,8 +30408,12 @@ labelPadding = function(vars) {
       return formatPower(d);
     });
   } else if (vars.x.scale.value === "share") {
-    xText = vars.x.ticks.visible.map(function(d) {
+    xText = xValues.map(function(d) {
       return d * 100 + "%";
+    });
+  } else if (vars.x.value === vars.time.value) {
+    xText = xValues.map(function(d, i) {
+      return vars.x.ticks.format(new Date(d));
     });
   } else {
     if (typeof xValues[0] === "string") {
@@ -30443,16 +30510,17 @@ labelPadding = function(vars) {
 
 createAxis = function(vars, axis) {
   return d3.svg.axis().tickSize(vars[axis].ticks.size).tickPadding(5).orient(axis === "x" ? "bottom" : "left").scale(vars[axis].scale.viz).tickValues(vars[axis].ticks.values).tickFormat(function(d, i) {
-    var scale;
+    var c, scale;
     if (vars[axis].ticks.hidden) {
       return null;
     }
     scale = vars[axis].scale.value;
-    if (vars[axis].ticks.visible.indexOf(d) >= 0) {
+    c = d.constructor === Date ? +d : d;
+    if (vars[axis].ticks.visible.indexOf(c) >= 0) {
       if (scale === "share") {
         return d * 100 + "%";
       } else if (d.constructor === Date) {
-        return vars.data.time.multiFormat(d);
+        return vars[axis].ticks.format(d);
       } else if (scale === "log") {
         return formatPower(d);
       } else {
@@ -30489,7 +30557,7 @@ formatPower = function(d) {
 
 
 
-},{"../../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","../../../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../../../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./buffer.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/svg.coffee":[function(require,module,exports){
+},{"../../../../../core/data/time.coffee":"/Users/Dave/Sites/d3plus/src/core/data/time.coffee","../../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","../../../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../../../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./buffer.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/svg.coffee":[function(require,module,exports){
 var mix, textwrap, validObject;
 
 mix = require("../../../../../color/mix.coffee");
@@ -30553,6 +30621,9 @@ module.exports = function(vars) {
       var visible;
       if (d === 0) {
         return vars[axis].axis.color;
+      }
+      if (d.constructor === Date) {
+        d = +d;
       }
       visible = vars[axis].ticks.visible.indexOf(d) >= 0;
       if (visible && (!log || Math.abs(d).toString().charAt(0) === "1")) {
@@ -30643,6 +30714,9 @@ module.exports = function(vars) {
   xmod = rotated ? vars.x.ticks.size / 2 : 0;
   xStyle = function(axis) {
     return axis.attr("transform", "translate(0," + vars.axes.height + ")").call(vars.x.axis.svg.scale(vars.x.scale.viz)).selectAll("g.tick").select("text").attr("dy", "").style("text-anchor", rotated ? "end" : "middle").call(tickFont, "x").each("end", function(d) {
+      if (d.constructor === Date) {
+        d = +d;
+      }
       if (!vars.x.ticks.hidden && vars.x.ticks.visible.indexOf(d) >= 0) {
         return textwrap().container(d3.select(this)).height(vars.x.ticks.maxHeight).rotate(vars.x.ticks.rotate).valign(rotated ? "middle" : "top").width(vars.x.ticks.maxWidth).x(-vars.x.ticks.maxWidth / 2 - xmod).draw();
       }
