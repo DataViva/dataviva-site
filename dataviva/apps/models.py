@@ -238,10 +238,10 @@ class Build(db.Model, AutoSerialize):
         else:
             bra = "<bra>"
 
-        if self.output == "bra":
+        if self.output == "bra" and self.dataset != "ei":
             if bra == "all" and self.app.type == "geo_map":
                 bra = "show.3"
-            elif bra == "all" or self.dataset == "ei":
+            elif bra == "all":
                 bra = "show.9"
             else:
                 bra = bra + ".show.9"
@@ -254,8 +254,6 @@ class Build(db.Model, AutoSerialize):
                 filter1 = "show.5"
             elif self.output == "school":
                 filter1 = "show.8"
-            elif self.output == "bra_r":
-                filter1 = "show.9"
 
         filter2 = self.filter2
         if filter2 == "all" or self.app.type == "rings":
@@ -282,7 +280,10 @@ class Build(db.Model, AutoSerialize):
             params = "?exclude=xx%"
 
         if self.dataset == "ei":
-            return "{}/all/{}/{}/{}".format(self.dataset, bra, filter1, params)
+            if self.output == "bra":
+                return "ei/all/show.9/{}/{}".format(bra, params)
+            else:
+                return "ei/all/{}/show.9/{}".format(bra, params)
 
         return "{}/all/{}/{}/{}/{}".format(self.dataset, bra, filter1, filter2, params)
 
