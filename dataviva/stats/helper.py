@@ -75,10 +75,7 @@ def stats_list(metric, shows, limit=None, offset=None, sort="desc", depth=None, 
     if type(shows) is str:
         shows = [shows]
     raw = compute_stats(metric, shows, limit=limit, offset=offset, sort=sort, depth=depth)
-    # assumes there is only 1 metric possible and it is last column
-    if len(shows) > 1 or listify:
-        return [x[:-1] for x in raw["data"]]
-    return [x[0] for x in raw["data"]]
+    return raw["data"]
 
 
 def compute_stats(metric, shows, limit=None, offset=None, sort="desc", depth=None, filters=[]):
@@ -164,3 +161,7 @@ def generic_join_breakdown(namespace, params, left_table, right_table, join_crit
 
     object_cache(cache_key, pickle.dumps(results))
     return results
+
+def make_items(data, Kind):
+    items = [{"value": item[-1], "poster": Kind.query.get(item[0])} for item in data]
+    return items

@@ -27,9 +27,7 @@ def get_profiles(item_list, typestr, serialize=True):
     typemap = {"bra": Bra, "hs": Hs, "cnae": Cnae, "cbo": Cbo, "course_hedu": Course_hedu, "university": University}
     obj = typemap[typestr]
 
-    posters = [obj.query.get(me)for me in item_list]
-    if serialize:
-        posters = [p.serialize() for p in posters]
+    posters = [{"poster": obj.query.get(me).serialize(), "value": float(data)} for me,data in item_list]
     return posters
 
 def get_year(table, mode):
