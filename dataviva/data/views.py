@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
-import urllib2
-import json
-from datetime import datetime
+import urllib2, json
+from datetime import datetime as dt
 from sqlalchemy import func
 from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, redirect, url_for
-
-from dataviva import db, view_cache
+from flask.ext.babel import gettext as _
+from dataviva import db, view_cache, __year_range__
+from dataviva.translations.dictionary import dictionary
 from dataviva.account.models import User, Starred
-from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo
+from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, University, Course_hedu, Course_sc
 from dataviva.apps.models import UI
-
 from dataviva.utils.cached_query import cached_query, make_cache_key
 
-import json
 
 mod = Blueprint('data', __name__, url_prefix='/data')
 
@@ -55,124 +53,103 @@ def table(data_type="rais", year="all", bra_id="4mg", filter_1="show.1", filter_
 
 @mod.route('/')
 @mod.route('/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
-#@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
-
-    filters = {}
-    filters["bra"] = {"items": [], "depths": [1,3,5,8,9]}
-    filters["cnae"] = {"items": [], "depths": [1,3,6]}
-    filters["cbo"] = {"items": [], "depths": [1,2,4]}
-    filters["hs"] = {"items": [], "depths": [2,4,6]}
-    filters["wld"] = {"items": [], "depths": [2,5]}
-    filters["university"] = {"items": [], "depths": [5]}
-    filters["course_hedu"] = {"items": [], "depths": [2,6]}
-    filters["course_sc"] = {"items": [], "depths": [2,5]}
-    filter_order = ["bra","cnae","cbo","hs","wld"]
-
-    datasets = {"rais": {"filters": ["bra","cnae","cbo"], "years": 1},
-                "secex": {"filters": ["bra","hs","wld"], "years": 2},
-                "hedu": {"filters": ["bra","university","course_hedu"], "years": 1},
-                "sc": {"filters": ["bra","course_sc"], "years": 1}}
-
+    # /hedu/all/show.3/01298.show.5/all/
+    
+    def get_filter_by_id(f):
+        match = [v for v in filters if v["id"] == f]
+        if match:
+            return match[0]
+        return None
+    
+    datasets = [["rais", _('Employment')],
+                ["secex", _('International Trade')],
+                ["hedu", _('Higher Education')],
+                ["sc", _('School Census')],
+                ["ei", _('Electronic Invoice')]]
     for d in datasets:
-        datasets[d]["years"] = eval(UI.query.get(datasets[d]["years"]).values)
-        if data_type == d:
-            datasets[d]["active"] = 1
-        else:
-            datasets[d]["active"] = 0
-        if year != "all":
-            if int(year) in datasets[d]["years"]:
-                datasets[d]["year"] = int(year)
-            elif int(year) > datasets[d]["years"][-1]:
-                datasets[d]["year"] = datasets[d]["years"][-1]
-            elif int(year) < datasets[d]["years"][0]:
-                datasets[d]["year"] = datasets[d]["years"][0]
-        else:
-            datasets[d]["year"] = "all"
-
-    g.page_type = "query"
-    filters_json = {}
-
-    def parse_filter(list,type):
-        table = globals()[type.capitalize()]
-        ids = list.split("_")
-        filters_json[type] = {}
-        for id in ids:
-            obj_split = id.split(".")
-            obj = {}
-            obj_id = obj_split[0]
-
-            if obj_id == "show":
-                filters[type]["active"] = True
-                filters[type]["depth"] = float(obj_split[1])
-                filters_json[type]["show"] = float(obj_split[1])
-            else:
-                obj["item"] = table.query.get_or_404(obj_id)
-                if len(obj_split) == 3 and float(obj_split[2]) > len(obj_id):
-                    obj["depth"] = obj_split[2]
-                else:
-                    obj["depth"] = str(len(obj_id))
-                filters[type]["active"] = True
-                filters[type]["depth"] = filters[type]["depths"][0]
-                filters[type]["items"].append(obj)
-                if len(obj_split) >= 2 and obj_split[1] != "show":
-                    obj["kms"] = int(obj_split[1])
-                    json_id = "distance".join([obj["item"].id,obj_split[1]])
-                else:
-                    obj["kms"] = 0
-                    json_id = obj["item"].id
-                filters_json[type][json_id] = obj["depth"]
-
-    if not bra_id:
-        '''try getting the user's ip address, since the live server is using
-            proxy nginx, we need to use the "X-Forwarded-For" remote address
-            otherwise this will always be 127.0.0.1 ie localhost'''
-        # if not request.headers.getlist("X-Forwarded-For"):
-        #     ip = request.remote_addr
-        # else:
-        #     ip = request.headers.getlist("X-Forwarded-For")[0]
-
-        # next try geolocating the user's ip
-        # bra = get_geo_location(ip) or None
-
-        '''if the city or region is not found in the db use Belo Horizonte as
-            default'''
-        bra_id = "4mg.show.8"
-        # if not bra:
-        #     bra_id = "4mg.show.8"
-        # else:
-        #     bra_id = bra.id
-
-    parse_filter(bra_id,"bra")
-
-    if filter_1 and filter_1 != "all":
-        if data_type == "rais":
-            parse_filter(filter_1,"cnae")
-        elif data_type == "secex":
-            parse_filter(filter_1,"hs")
-        elif data_type == "hedu":
-            parse_filter(filter_1,"university")
-
-    if filter_2 and filter_2 != "all":
-        if data_type == "rais":
-            parse_filter(filter_2,"cbo")
-        elif data_type == "secex":
-            parse_filter(filter_2,"wld")
-        elif data_type == "hedu":
-            parse_filter(filter_2,"course_hedu")
-        elif data_type == "sc":
-            parse_filter(filter_2,"course_sc")
-
+        start_year, end_year = __year_range__[d[0]]
+        years = reversed(range(int(start_year.split("-")[0]), int(end_year.split("-")[0])+1))
+        d.append(years)
+        if "-" in start_year:
+            months = range(int(start_year.split("-")[1]), int(end_year.split("-")[1])+1)
+            months = [(m, dt.strptime(str(m),"%m").strftime("%B")) for m in months]
+            d.append(months)
+    
+    trans_lookup = dictionary()
+    filters = [
+        {"name": _('Brazilian Location'), "id": "bra", "datasets": "rais secex hedu sc", "nestings": [1, 3, 5, 7, 8, 9]},
+        {"name": _('Brazilian Receiver Location'), "id": "bra_r", "datasets": "ei", "nestings": [1, 3, 5, 7, 8, 9]},
+        {"name": _('Brazilian Sender Location'), "id": "bra_s", "datasets": "ei", "nestings": [1, 3, 5, 7, 8, 9]},
+        {"name": _('Occupations'), "id": "cbo", "datasets": "rais", "nestings":[1, 2, 4]},
+        {"name": _('Industries'), "id": "cnae", "datasets": "rais", "nestings":[1, 3, 6]},
+        {"name": _('Products'), "id": "hs", "datasets": "secex", "nestings":[2, 4, 6]},
+        {"name": _('Trade Partners'), "id": "wld", "datasets": "secex", "nestings":[2, 5]},
+        {"name": _('Universities'), "id": "university", "datasets": "hedu", "nestings":[5]},
+        {"name": _('Majors'), "id": "course_hedu", "datasets": "hedu", "nestings":[2, 6]},
+        {"name": _('Vocational Courses'), "id": "course_sc", "datasets": "sc"}
+    ]
     for f in filters:
-        if f not in filters_json:
-            filters_json[f] = {"active": 0, "show": filters[f]["depths"][0]}
-        else:
-            if "show" not in filters_json[f]:
-                filters_json[f]["show"] = filters[f]["depths"][0]
-            if len(filters_json[f]) == 0:
-                filters_json[f]["active"] = 0
-            else:
-                filters_json[f]["active"] = 1
-
-    return render_template("data/index.html",
-        datasets = datasets, filters = filters, filter_order = filter_order, filters_json = json.dumps(filters_json))
+        if "nestings" in f:
+            attr_type = f["id"].replace("_r", "").replace("_s", "")
+            f["nestings"] = [(n, trans_lookup["{}_{}".format(attr_type, n)]) for n in f["nestings"]]
+    
+    selected_filters = []
+    
+    '''
+        Determine the selected dataset/filters/output from URL
+    '''
+    output = {"filters":[]}
+    
+    # get selected dataset
+    output["dataset"] = [v for v in datasets if v[0] == data_type][0]
+    
+    # get filters
+    filter_type_lookup = {
+        "rais": [("bra", Bra), ("cnae", Cnae), ("cbo", Cbo)],
+        "secex": [("bra", Bra), ("hs", Hs), ("wld", Wld)],
+        "hedu": [("bra", Bra), ("university", University), ("course_hedu", Course_hedu)],
+        "sc": [("bra", Bra), None, ("course_sc", Course_sc)],
+    }
+    
+    # parse year
+    if year == "all":
+        output["year"] = year
+    elif "-" in year:
+        y, m = year.split("-")
+        output["year"], output["month"] = int(y), int(m)
+    else:
+        output["year"] = int(year)
+    
+    if bra_id and filter_1 and filter_2:
+        for i, f in enumerate([bra_id, filter_1, filter_2]):
+            filter = f
+            depth = None
+            if f == "all": continue
+            if f == "show": filter = None
+            if "show" in f:
+                output_filter = filter_type_lookup[output["dataset"][0]][i][0]
+                output["output_filter"] = get_filter_by_id(output_filter)
+            if "." in f:
+                f_split = f.split(".")
+                if len(f_split) == 3:
+                    filter, show, depth = f_split
+                if len(f_split) == 2:
+                    filter = None
+                    show, depth = f_split
+            if depth:
+                output["nesting"] = int(depth)
+            if filter:
+                filter_type = filter_type_lookup[output["dataset"][0]][i]
+                possible_datasets = get_filter_by_id(filter_type[0])["datasets"]
+                filter = filter_type[1].query.get(filter)
+                output["filters"].append({"id":filter_type[0], "datasets":possible_datasets, "filter":filter})
+    else:
+        output["output_filter"] = get_filter_by_id("bra")
+        output["nesting"] = 8
+        filter = Bra.query.get("4mg")
+        output["filters"].append({"id":"bra", "datasets":"rais secex hedu sc", "filter":filter})
+    
+    # raise Exception(output["dataset"], datasets, output["dataset"] == datasets[0])
+    return render_template("data/index.html", datasets=datasets, filters=filters, selected_filters=selected_filters, output=output)

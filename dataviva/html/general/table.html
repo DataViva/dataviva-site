@@ -148,7 +148,7 @@
       d3.event.preventDefault()
     }
 
-    function item_formatter(container_el, dataset, offset, manual){
+    function item_formatter(container_el, dataset, offset, manual, header){
 
       if(dataset != DATA){
         DATA = DATA.concat(dataset)
@@ -159,19 +159,19 @@
       */
 
       // Gets all possible columns from new 'dataset'
-      var all_cols = []
-      dataset.forEach(function(d){
-        all_cols = all_cols.concat(d3.keys(d))
-      })
-      all_cols = all_cols.filter(function(itm, i){
-          return all_cols.indexOf(itm)== i;
-      });
+      var all_cols = header;
+      
+      // dataset.forEach(function(d){
+      //   all_cols = all_cols.concat(d3.keys(d))
+      // })
+      // all_cols = all_cols.filter(function(itm, i){
+      //     return all_cols.indexOf(itm)== i;
+      // });
 
 
       var all_data_cols;
       var data_url = "{{data_url}}";
-      all_data_cols = DATA_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1 || i == current_order[0]});
-
+      var all_data_cols = DATA_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1 || i == current_order[0]});
 
       // Filter data columns by user-specified columns
       var active_data_cols = all_data_cols;
@@ -245,10 +245,10 @@
       // create a row for each object in the data
       var rows = tbl_sticky_data.selectAll("tr").data(dataset, JSON.stringify)
       rows.enter().append("tr")
-
+      
       rows.each(function(d){
         var self = d3.select(this)
-        data_printer(d,self,sticky_cols)
+        data_printer(d,self,sticky_cols,all_cols)
       })
 
       /*
@@ -311,7 +311,7 @@
 
       rows.each(function(d){
         var self = d3.select(this)
-        data_printer(d,self,active_data_cols)
+        data_printer(d,self,active_data_cols,all_cols)
       })
 
       d3.select("#dt_query #sticky").style("width","5px")
@@ -376,20 +376,21 @@
     d3.select("#dt_query")
       .call(is.url("{{data_url}}").offset(0))
 
-    function data_printer(d, self, columns){
+    function data_printer(d, self, columns, all_cols){
       var row_data = {}
       columns.forEach(function(c){
-        if (typeof d[c] == "string") {
-          row_data[c] = dataviva.format.text(d[c],{"key": c})
+        var i = all_cols.indexOf(c);
+        if (typeof d[i] == "string") {
+          row_data[c] = dataviva.format.text(d[i],{"key": c})
         }
-        else if (typeof d[c] == "number") {
-          row_data[c] = dataviva.format.number(d[c],{"key": c})
+        else if (typeof d[i] == "number") {
+          row_data[c] = dataviva.format.number(d[i],{"key": c})
         }
-        else if (!d[c]) {
+        else if (!d[i]) {
           row_data[c] = " &mdash; "
         }
         else {
-          row_data[c] = d[c]
+          row_data[c] = d[i]
         }
       })
       var row_keys = d3.keys(row_data)

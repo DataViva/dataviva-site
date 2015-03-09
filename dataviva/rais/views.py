@@ -16,6 +16,7 @@ def rais_api(**kwargs):
     limit = int(kwargs.pop('limit', 0)) or int(request.args.get('limit', 0) )
     order = request.args.get('order', None) or kwargs.pop('order', None)
     sort = request.args.get('sort', None) or kwargs.pop('sort', 'desc')
+    offset = request.args.get('offset', None) or kwargs.pop('offset', None)
     if order and "." in order:
         order, sort = order.split(".")
     # ignore_zeros = request.args.get('zeros', True) or kwargs.pop('zeros', True)
@@ -35,7 +36,7 @@ def rais_api(**kwargs):
     if required_bras and table is Ybi:
        columns = [c for c in Ybi.__table__.columns if c.key != 'required_bras']
 
-    results = query_helper.query_table(table, columns=columns, filters=filters, groups=groups, limit=limit, order=order, sort=sort, serialize=serialize)
+    results = query_helper.query_table(table, columns=columns, filters=filters, groups=groups, limit=limit, order=order, sort=sort, offset=offset, serialize=serialize)
 
     if table is Ybi:
         stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yi, kwargs, remove=['bra_id'])
