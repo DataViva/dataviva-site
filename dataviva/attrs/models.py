@@ -286,16 +286,18 @@ class Stats(object):
             val = 0
 
         val = num_format(val, key=val_var)
-        # raise Exception(val)
 
         group = u"{} {} ({}):".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())
 
         if val_var == "stat_val":
             group = "General Stats:"
-            if "_y" in tbl.__tablename__:
-                name = u"{} ({})".format(total.stat.name(), latest_year)
+            if total:
+                if "_y" in tbl.__tablename__:
+                    name = u"{} ({})".format(total.stat.name(), latest_year)
+                else:
+                    name = total.stat.name()
             else:
-                name = total.stat.name()
+                name = stat_id or val_var or u""
         elif not name:
             if calc_var:
                 name = calc_var
