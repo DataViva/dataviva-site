@@ -92,7 +92,10 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
     ]
     for f in filters:
         if "nestings" in f:
-            attr_type = f["id"].replace("_r", "").replace("_s", "")
+            if "bra" in f["id"]:
+                attr_type = f["id"].replace("_r", "").replace("_s", "")
+            else:
+                attr_type = f["id"]
             f["nestings"] = [(n, trans_lookup["{}_{}".format(attr_type, n)]) for n in f["nestings"]]
 
     selected_filters = []
