@@ -15,6 +15,11 @@ def dictionary():
         "stacked": gettext("Stacked"),
         "tree_map": gettext("Tree Map"),
 
+        # Time Resolution Toggle
+        "time": gettext("Time Resolution"),
+        "time_desc_stacked": gettext("Changes the time resolution between yearly and monthly."),
+        "time_desc_line": gettext("Changes the time resolution between yearly and monthly."),
+
         # Axes
         "axes": gettext("Axes"),
         "axes_desc_compare": gettext("Changes the X and Y variables used in the chart."),

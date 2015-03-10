@@ -756,6 +756,8 @@
             app.years = year_range[app.build.dataset];
             app.monthly = app.years[0].indexOf("-") > 0 &&
                           (app.build.dataset !== "secex" || ["stacked","line"].indexOf(app.build.app.type) >= 0);
+            app.build.timeToggle = app.monthly && app.build.output !== "balance" &&
+                                   ["stacked","line"].indexOf(app.build.app.type) >= 0;
             app.timeFormat = app.monthly ? "%Y-%-m" : "%Y";
             app.timeFormat = d3.time.format(app.timeFormat);
 
@@ -779,10 +781,14 @@
             // })
 
             // Remove unused global_vars
-            uis = ["year"]
+            var uis = ["year"];
             app.build.ui.forEach(function(ui){
-              uis.push(ui.type)
+              uis.push(ui.type);
             })
+            if (app.build.timeToggle) {
+              uis.push("time");
+              app.vars.time = "year";
+            }
             for (v in app.vars) {
               if (uis.indexOf(v) < 0 && ["controls","builder"].indexOf(v) < 0) {
                 delete app.vars[v];
@@ -974,6 +980,13 @@
 
       d3.select("#controls").selectAll("*").remove();
 
+      if (app.build.timeToggle) {
+        app.build.ui.push({
+          "type": "time",
+          "values": ["year", "month"]
+        })
+      }
+
       app.build.ui.forEach(function(ui){
 
         // Custom Titles
@@ -1044,9 +1057,9 @@
           if (["color"].indexOf(title) >= 0) {
             form_type = "drop";
           }
-          // else if (["sizing"].indexOf(title) >= 0) {
-          //   form_type = "toggle";
-          // }
+          else if (["time"].indexOf(title) >= 0) {
+            form_type = "toggle";
+          }
 
     			var ui_div = d3.select("#controls").append("div")
       			.attr("class","ui_group alt_tooltip")
@@ -1204,7 +1217,7 @@
         }
       }
 
-      if (app.monthly) {
+      if (app.monthly && (!app.vars.time || app.vars.time === "month")) {
         app.tooltip.short[""] = ["month"]
       }
       else {
@@ -1253,7 +1266,7 @@
         .x({"scale": "linear"})
         .tooltip(app.tooltip)
         .zoom(app.build.output_attr !== "balance")
-        .time(app.monthly ? "month" : "year")
+        .time(app.vars.time || (app.monthly ? "month" : "year"))
         .time({"solo": timeSolo})
         .x({"ticks": {"font": {"size": app.build.output === "age" ? 12 : 16}}})
 
@@ -1460,7 +1473,7 @@
         app.viz
           .x({
             "scale": "linear",
-            "value": app.monthly ? "month" : "year"
+            "value": app.vars.time || (app.monthly ? "month" : "year")
           })
           .y({
             "scale": layout,
@@ -1561,7 +1574,7 @@
       else if (app.build.app.type === "line") {
 
         app.viz
-        .x(app.monthly ? "month" : "year")
+        .x(app.vars.time || (app.monthly ? "month" : "year"))
         .y({
           "scale": app.vars.scale,
           "value": app.vars.y
@@ -1826,8 +1839,17 @@
           }
           app.viz.id({"grouping": value})
         }
+        else if (type === "time") {
+          app.viz[type](value).x(value);
+          if (value === "month") {
+            app.tooltip.short[""] = ["month"]
+          }
+          else {
+            app.tooltip.short[""] = []
+          }
+        }
         else {
-          app.viz[type](value)
+          app.viz[type](value);
         }
 
         if (type === "order" && app.build.app.type === "occugrid") {
