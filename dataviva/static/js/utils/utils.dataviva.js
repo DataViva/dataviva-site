@@ -170,7 +170,8 @@ dataviva.format.number = function(value, opts) {
     var return_value = value + symbol;
   }
   else if (name == "share") {
-    var return_value = d3.format(".2g")(value)
+    if (value === 100) var return_value = 100+"";
+    else var return_value = d3.format(".2g")(value);
   }
   else {
     var return_value = d3.format(",f")(value)
