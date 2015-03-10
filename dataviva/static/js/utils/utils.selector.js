@@ -116,22 +116,9 @@ function Selector() {
           update_header(search_term);
 
           // Create master list by matching both name and id
-          var strings = ["name","id","desc","keywords"]
           list = d3.values(data).filter(function(v){
-
-            var match = false
-            strings.forEach(function(s){
-              if (v[s]) {
-                var str = v[s].toLowerCase().removeAccents()
-                if (str.indexOf(search_term) >= 0) {
-                  match = true
-                }
-              }
-            })
-
-            return match && depths.indexOf(v.id.length) >= 0
-
-          })
+            return v.search.indexOf(search_term) >= 0;
+          });
 
         }
         else {
@@ -354,6 +341,19 @@ function Selector() {
 
       }
 
+      search_string = function(d) {
+        var strings = ["name","id","desc","keywords"];
+        var str = "";
+        for (var s = 0; s < strings.length; s++) {
+          var val = d[strings[s]];
+          if (val) {
+            if (s) str += "_";
+            str += val.toLowerCase().removeAccents();
+          }
+        }
+        return str;
+      }
+
       clean_data = function() {
 
         if (data instanceof Array) {
@@ -372,16 +372,20 @@ function Selector() {
             })
           }
 
-          var temp_dict = {};
-          data.forEach(function(d){
-            temp_dict[d.id] = d;
-          })
-          data = temp_dict;
+          data = data.reduce(function(obj, d){
+            d.search = search_string(d);
+            obj[d.id] = d;
+            return obj;
+          }, {});
+
         }
         else {
           var temp_dict = {};
           for (var d in data) {
-            if (d.available) temp_dict[d] = data[d]
+            if (d.available) {
+              d.search = search_string(d);
+              temp_dict[d] = data[d];
+            }
           }
           data = temp_dict;
         }
@@ -394,7 +398,8 @@ function Selector() {
             "color": c,
             "id": "all",
             "display_id": "All",
-            "name": dataviva.format.text(title)
+            "name": dataviva.format.text(title),
+            "search": dataviva.format.text(title).toLowerCase().removeAccents()
           };
         }
 
