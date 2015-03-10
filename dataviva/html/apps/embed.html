@@ -1007,21 +1007,20 @@
           else var default_value = ui.values[0]
         }
         else if (ui.type == "depth") {
-          var bra_id = app.build.bra[0].id
-          if (app.build.dataset !== "ei" && app.build.output_attr == "bra" && bra_id != "all") {
-            // if (bra_id.indexOf("4mg") == 0) ui.values[1] = "bra_7"
-            if (bra_id.length >= 3) ui.values.splice(0,1)
-            if (bra_id.length >= 5) ui.values.splice(0,1)
+          if (app.build.dataset !== "ei" && app.build.output_attr === "bra") {
+            var bra_id = app.build.bra[0].id;
+            if (bra_id !== "all") {
+              ui.values = ui.values.splice(ui.values.indexOf("bra_"+bra_id.length)+1)
+            }
           }
-          if (app.build.output_attr == "bra" && app.build.bra[0].id == "all") {
-            var default_value = ui.values[0]
-          }
-          else if (app.build.app.type == "tree_map") {
+
+          if (app.build.app.type == "tree_map") {
             var default_value = ui.values[ui.values.length-1]
           }
           else {
             var default_value = ui.values[0]
           }
+
         }
         else if (ui.type == "order" && app.build.app.type == "stacked") {
           var default_value = "color"
@@ -1871,8 +1870,7 @@
       var data_obj = [],
           data = app.data[app.build.data_url],
           out = app.build.output_attr,
-          attr = app.attrs[out],
-          outdepths = dataviva.depths(app.build.output_attr);
+          attr = app.attrs[out];
 
       if ("occugrid" == format[app.build.app.type]) {
 
@@ -1942,7 +1940,7 @@
               d[out+"_id"] = leaves[0][out+"_id"]
               d[out+"_display"] = dataviva.displayID(d[out+"_id"],out)
 
-              outdepths.forEach(function(dd){
+              depths[out].forEach(function(dd){
                 d[out+"_"+dd] = leaves[0][out+"_"+dd]
               })
 
