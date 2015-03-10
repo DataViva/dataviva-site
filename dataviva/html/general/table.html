@@ -32,6 +32,7 @@
 
                     "rank",
                     "year",
+                    "month",
 
                     "id",
 
@@ -160,7 +161,7 @@
 
       // Gets all possible columns from new 'dataset'
       var all_cols = header;
-      
+
       // dataset.forEach(function(d){
       //   all_cols = all_cols.concat(d3.keys(d))
       // })
@@ -245,7 +246,7 @@
       // create a row for each object in the data
       var rows = tbl_sticky_data.selectAll("tr").data(dataset, JSON.stringify)
       rows.enter().append("tr")
-      
+
       rows.each(function(d){
         var self = d3.select(this)
         data_printer(d,self,sticky_cols,all_cols)

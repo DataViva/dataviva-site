@@ -183,12 +183,9 @@ table .wld_diversity, table .wld_diversity_eff {
   min-width: 100px !important;
   width: 100px !important;
 }
-table .rank {
+table .rank, table .year, table .month {
   min-width: 40px !important;
-  width: 40px !important;
-}
-table .year {
-  min-width: 40px !important;
+  text-align: center;
   width: 40px !important;
 }
 table .population, table .enrolled,
