@@ -218,13 +218,19 @@
     box-sizing: border-box;
     font-size: 14px;
     font-weight: normal;
-    height: 45px;
+    line-height: 17px;
+    max-height: 60px;
     margin: 0;
     overflow: hidden;
     padding: 5px 0;
     text-align: center;
     white-space: normal;
     width: 120px;
+  }
+  .poster .title.sub {
+    font-size: 12px;
+    margin-top: -8px;
+    opacity: 0.8;
   }
   .poster img {
     box-sizing: border-box;
@@ -243,6 +249,20 @@
   body.home .lightbox {
     background-color: rgba(255,255,255,0.7);
   }
+
+  .growth-arrow {
+    margin-right: 3px;
+    margin-top: 3px;
+  }
+
+  .growth-arrow.down {
+    color: #af1f24;
+  }
+
+  .growth-arrow.up {
+    color: #3daf49;
+  }
+
   </style>
 
 {% endblock %}
@@ -327,10 +347,8 @@
                 <div class="poster" style="background-color:{{ poster.color }};">
                   <img src="{{ poster.icon() }}"/>
                 </div>
-                <div class="title">{{ poster.name() }}</div>
-                <div class="value">{{ value }}</div>
-                <div class="rank"> {{ loop.index }}</div>
-                <div class="metric"> {{ carousel.metric }}</div>
+                <div class="title">{{ loop.index }}. {{ poster.name() }}</div>
+                <div class="title sub">{{ format(value).render(carousel.metric) }}</div>
               </a>
             </li>
           {%- endfor %}
@@ -435,10 +453,9 @@
     a.append("div").attr("class", "poster")
       .style("background-color",  poster.color)
       .append("img").attr("src", poster.icon);
-    a.append("div").attr("class", "title").text(poster.name);
-    a.append("div").attr("class", "value").text(item.value);
-    a.append("div").attr("class", "rank").text(rank)
-    a.append("div").attr("class", "metric").text(metric)
+    a.append("div").attr("class", "title").text(rank + ". " + poster.name);
+    a.append("div").attr("class", "title sub").html(dataviva.format.number(item.value, {"key": metric}));
+    a.append("div").attr("class", "rank")
   }
 
   var addNodes = function(page, list, offset) {
