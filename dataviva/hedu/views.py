@@ -20,6 +20,7 @@ def hedu_api(**kwargs):
     limit = int(request.args.get('limit', 0) or kwargs.pop('limit', 0))
     order = request.args.get('order', None) or kwargs.pop('order', None)
     sort = request.args.get('sort', None) or kwargs.pop('sort', 'desc')
+    offset = request.args.get('offset', None) or kwargs.pop('offset', None)
     if order and "." in order:
         order, sort = order.split(".")
     serialize = request.args.get('serialize', None) or kwargs.pop('serialize', True)
@@ -35,7 +36,7 @@ def hedu_api(**kwargs):
 
     filters, groups, show_column = query_helper.build_filters_and_groups(table, kwargs, exclude=exclude)
 
-    results = query_helper.query_table(table, filters=filters, groups=groups, limit=limit, order=order, sort=sort, serialize=serialize)
+    results = query_helper.query_table(table, filters=filters, groups=groups, limit=limit, order=order, sort=sort, offset=offset, serialize=serialize)
 
     if serialize or download:
         response = jsonify(results)

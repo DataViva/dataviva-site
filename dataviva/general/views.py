@@ -13,7 +13,7 @@ from dataviva.general.models import Short
 from dataviva.account.models import User
 from dataviva.attrs.models import Bra, Hs, Cbo, Cnae, Course_hedu
 from dataviva.translations.dictionary import dictionary
-from dataviva.stats.helper import stats_list
+from dataviva.stats.helper import stats_list, make_items
 
 from dataviva.utils.cached_query import cached_query, make_cache_key
 from dataviva.utils.gzip_data import gzipped
@@ -131,48 +131,58 @@ def home():
     limit = 20
     carousel_base = "/stats/carosel/?metric={}&show={}&profile={}&limit={}"
     metric, show, profile = "wage_avg", "cbo_id", "cbo"
-    cbos = stats_list(metric, show, limit=limit)
+    data = stats_list(metric, show, limit=limit)
+    items = make_items(data, Cbo)
     carousels.append({
         "title": "Occupations by Highest Average Wage",
         "type": profile,
-        "posters": [Cbo.query.get(c) for c in cbos],
-        "url" : carousel_base.format(metric, show, profile, limit)
+        "items": items,
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
     })
 
     metric, show, profile = "num_emp", "cnae_id", "cnae"
-    cnaes = stats_list(metric, show, limit=limit)
+    data = stats_list(metric, show, limit=limit)
+    items = make_items(data, Cnae)
     carousels.append({
         "title": "Largest Industries by Employment",
         "type": profile,
-        "posters": [Cnae.query.get(c) for c in cnaes],
-        "url" : carousel_base.format(metric, show, profile, limit)
+        "items": items,
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
     })
 
     metric, show, profile = "num_emp_growth", "cnae_id", "cnae"
-    cnaes = stats_list(metric, show, limit=limit)
+    data = stats_list(metric, show, limit=limit)
+    items = make_items(data, Cnae)
     carousels.append({
         "title": "Industries by Employment Growth",
         "type": profile,
-        "posters": [Cnae.query.get(c) for c in cnaes],
-        "url" : carousel_base.format(metric, show, profile, limit)
+        "items": items,
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
     })
 
     metric, show, profile = "enrolled", "course_hedu_id", "course_hedu"
-    courses = stats_list(metric, show, limit=limit)
+    data = stats_list(metric, show, limit=limit)
+    items = make_items(data, Course_hedu)
     carousels.append({
         "title": "Most Popular Courses by Enrollment",
         "type": profile,
-        "posters": [Course_hedu.query.get(c) for c in courses],
-        "url" : carousel_base.format(metric, show, profile, limit)
+        "items": items,
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
     })
 
     metric, show, profile = "enrolled", "bra_id", "bra"
-    bras = stats_list(metric, show, limit=limit)
+    data = stats_list(metric, show, limit=limit)
+    items = make_items(data, Bra)
     carousels.append({
         "title": "Cities by Largest University Enrollment",
         "type": profile,
-        "posters":  [Bra.query.get(b) for b in bras],
-        "url" : carousel_base.format(metric, show, profile, limit)
+        "items": items,
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
     })
 
     return render_template("general/home.html", carousels = carousels)

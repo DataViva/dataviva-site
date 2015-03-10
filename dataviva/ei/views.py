@@ -21,6 +21,7 @@ def ei_api(**kwargs):
     if order and "." in order:
         order, sort = order.split(".")
     sort = request.args.get('sort', None) or kwargs.pop('sort', 'desc')
+    offset = request.args.get('offset', None) or kwargs.pop('offset', None)
     serialize = request.args.get('serialize', None) or kwargs.pop('serialize', True)
     exclude = request.args.get('exclude', None) or kwargs.pop('exclude', None)
     download = request.args.get('download', None) or kwargs.pop('download', None)
@@ -36,7 +37,7 @@ def ei_api(**kwargs):
 
     filters, groups, show_column = query_helper.build_filters_and_groups(table, kwargs, exclude=exclude)
 
-    results = query_helper.query_table(table, filters=filters, groups=groups, limit=limit, order=order, sort=sort, serialize=serialize)
+    results = query_helper.query_table(table, filters=filters, groups=groups, limit=limit, order=order, sort=sort, offset=offset, serialize=serialize)
 
     if serialize or download:
         response = jsonify(results)
