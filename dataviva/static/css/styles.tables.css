@@ -213,3 +213,16 @@ table#university .name {
   min-width: 400px !important;
   width: 400px !important;
 }
+
+.growth-arrow {
+  margin-right: 3px;
+  margin-top: 1px;
+}
+
+.growth-arrow.down {
+  color: #af1f24;
+}
+
+.growth-arrow.up {
+  color: #3daf49;
+}
