@@ -337,6 +337,10 @@ def dictionary():
         "school_plural": gettext("Vocational Schools"),
         "course_sc": gettext("Vocational Course"),
         "course_sc_plural": gettext("Vocational Courses"),
+        "bra_s": gettext("Sending Location"),
+        "bra_s_plural": gettext("Sending Locations"),
+        "bra_r": gettext("Receiving Location"),
+        "bra_r_plural": gettext("Receiving Locations"),
         "icon": gettext("Icon"),
 
         "bra_add": gettext("add a location"),

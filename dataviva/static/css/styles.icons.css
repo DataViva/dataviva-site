@@ -470,8 +470,8 @@
 /****************/
 
 .decision.icon.database:before {
-  content: "\f022";
-  line-height: 180px;
+  content: "\f1c0";
+  line-height: 39px;
 }
 
 .decision.icon.source:before {

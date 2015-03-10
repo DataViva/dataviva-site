@@ -79,16 +79,16 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
 
     trans_lookup = dictionary()
     filters = [
-        {"name": _('Brazilian Location'), "id": "bra", "datasets": "rais secex hedu sc", "nestings": [1, 3, 5, 7, 8, 9]},
-        {"name": _('Brazilian Receiver Location'), "id": "bra_r", "datasets": "ei", "nestings": [1, 3, 5, 7, 8, 9]},
-        {"name": _('Brazilian Sender Location'), "id": "bra_s", "datasets": "ei", "nestings": [1, 3, 5, 7, 8, 9]},
-        {"name": _('Occupations'), "id": "cbo", "datasets": "rais", "nestings":[1, 2, 4]},
-        {"name": _('Industries'), "id": "cnae", "datasets": "rais", "nestings":[1, 3, 6]},
-        {"name": _('Products'), "id": "hs", "datasets": "secex", "nestings":[2, 4, 6]},
-        {"name": _('Trade Partners'), "id": "wld", "datasets": "secex", "nestings":[2, 5]},
-        {"name": _('Universities'), "id": "university", "datasets": "hedu", "nestings":[5]},
-        {"name": _('Majors'), "id": "course_hedu", "datasets": "hedu", "nestings":[2, 6]},
-        {"name": _('Vocational Courses'), "id": "course_sc", "datasets": "sc", "nestings":[2, 5]}
+        {"id": "bra", "datasets": "rais secex hedu sc", "nestings": [1, 3, 5, 7, 8, 9]},
+        {"id": "bra_r", "datasets": "ei", "nestings": [1, 3, 5, 7, 8, 9]},
+        {"id": "bra_s", "datasets": "ei", "nestings": [1, 3, 5, 7, 8, 9]},
+        {"id": "cbo", "datasets": "rais", "nestings":[1, 2, 4]},
+        {"id": "cnae", "datasets": "rais", "nestings":[1, 3, 6]},
+        {"id": "hs", "datasets": "secex", "nestings":[2, 4, 6]},
+        {"id": "wld", "datasets": "secex", "nestings":[2, 5]},
+        {"id": "university", "datasets": "hedu", "nestings":[5]},
+        {"id": "course_hedu", "datasets": "hedu", "nestings":[2, 6]},
+        {"id": "course_sc", "datasets": "sc", "nestings":[2, 5]}
     ]
     for f in filters:
         if "nestings" in f:
@@ -96,7 +96,8 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
                 attr_type = f["id"].replace("_r", "").replace("_s", "")
             else:
                 attr_type = f["id"]
-            f["nestings"] = [(n, trans_lookup["{}_{}".format(attr_type, n)]) for n in f["nestings"]]
+            f["nestings"] = [(n, trans_lookup["{}_{}_plural".format(attr_type, n)]) for n in f["nestings"]]
+            f["name"] = trans_lookup["{}".format(f["id"])]
 
     selected_filters = []
 
