@@ -389,6 +389,7 @@ a#search {
   display: block;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
+  margin: 10px !important;
   outline: none;
 	padding: 11px 10px;
 	width: 91%;
