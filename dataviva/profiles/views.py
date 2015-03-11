@@ -45,7 +45,7 @@ def index():
     top = Ymb.query.filter_by(year=most_recent_year, month=0, bra_id_len=9).order_by(Ymb.export_val.desc()).limit(5).all()
     top = [t.bra for t in top]
     profile_types.append({
-        "summary": "Showing exports, employment and education data, statistics and visualizations about the chosen Brazilian location.",
+        "summary": gettext("Showing exports, employment and education data, statistics and visualizations about the chosen Brazilian location."),
         "top": top,
         "title": gettext(u"Brazilian Locations"),
         "type": "bra"
@@ -56,7 +56,7 @@ def index():
     top = Yo.query.filter_by(year=most_recent_year, cbo_id_len=4).order_by(Yo.num_emp.desc()).limit(5).all()
     top = [t.cbo for t in top]
     profile_types.append({
-        "summary": "Showing industries and locations that employ the selected occupation.",
+        "summary": gettext("Showing industries and locations that employ the selected occupation."),
         "top": top,
         "title": gettext(u"Occupations"),
         "type": "cbo"
@@ -66,7 +66,7 @@ def index():
     top = Yi.query.filter_by(year=most_recent_year, cnae_id_len=6).order_by(Yi.num_emp.desc()).limit(5).all()
     top = [t.cnae for t in top]
     profile_types.append({
-        "summary": "Showing the occupations and locations with employees in the selected industry.",
+        "summary": gettext("Showing the occupations and locations with employees in the selected industry."),
         "top": top,
         "title": gettext(u"Industries"),
         "type": "cnae"
@@ -77,7 +77,7 @@ def index():
     top = Ymp.query.filter_by(year=most_recent_year, month=0, hs_id_len=6).order_by(Ymp.export_val.desc()).limit(5).all()
     top = [t.hs for t in top]
     profile_types.append({
-        "summary": "Showing locations in Brazil that export and import the selected product and their destinations and origins.",
+        "summary": gettext("Showing locations in Brazil that export and import the selected product and their destinations and origins."),
         "top": top,
         "title": gettext(u"Products"),
         "type": "hs"
@@ -87,7 +87,7 @@ def index():
     top = Ymw.query.filter_by(year=most_recent_year, month=0, wld_id_len=5).order_by(Ymw.export_val.desc()).limit(5).all()
     top = [t.wld for t in top]
     profile_types.append({
-        "summary": "Showing locations in brazil that trade with the selected country and the products they export and import from them.",
+        "summary": gettext("Showing locations in brazil that trade with the selected country and the products they export and import from them."),
         "top": top,
         "title": gettext(u"Trade Partners"),
         "type": "wld"
@@ -98,7 +98,7 @@ def index():
     top = Yu.query.filter_by(year=most_recent_year).order_by(Yu.enrolled.desc()).limit(5).all()
     top = [t.university for t in top]
     profile_types.append({
-        "summary": "Showing the majors found in the selected univserity.",
+        "summary": gettext("Showing the majors found in the selected univserity."),
         "top": top,
         "title": gettext(u"Universities"),
         "type": "university"
@@ -108,7 +108,7 @@ def index():
     top = Yc_hedu.query.filter_by(year=most_recent_year).order_by(Yc_hedu.enrolled.desc()).limit(5).all()
     top = [t.course_hedu for t in top]
     profile_types.append({
-        "summary": "Showing the university and locations in Brazil where the selected major is found.",
+        "summary": gettext("Showing the university and locations in Brazil where the selected major is found."),
         "top": top,
         "title": gettext(u"Majors"),
         "type": "course_hedu"
@@ -119,7 +119,7 @@ def index():
     top = Yc_sc.query.filter_by(year=most_recent_year, course_sc_id_len=5).order_by(Yc_sc.enrolled.desc()).filter(~Yc_sc.course_sc_id.startswith('xx')).limit(5).all()
     top = [t.course_sc for t in top]
     profile_types.append({
-        "summary": "Showing the locations and schools in which these vocations are taught.",
+        "summary": gettext("Showing the locations and schools in which these vocations are taught."),
         "top": top,
         "title": gettext(u"Vocational Courses"),
         "type": "course_sc"

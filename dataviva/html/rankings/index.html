@@ -13,31 +13,31 @@
 
   <div id="rankings_nav">
 
-      <a class="{% if type == 'bra' %}decision{% else %}help{% endif %} icon bra" href="/rankings/2012/bra/3/">
+      <a class="{% if type == 'bra' %}decision{% else %}help{% endif %} short icon bra" href="/rankings/2012/bra/3/">
         {% trans %}Brazilian Locations{% endtrans %}
       </a>
 
-      <a class="{% if type == 'cnae' %}decision{% else %}help{% endif %} icon cnae" href="/rankings/2012/cnae/6/">
+      <a class="{% if type == 'cnae' %}decision{% else %}help{% endif %} short icon cnae" href="/rankings/2012/cnae/6/">
         {% trans %}Industries{% endtrans %}
       </a>
 
-      <a class="{% if type == 'cbo' %}decision{% else %}help{% endif %} icon cbo" href="/rankings/2012/cbo/4/">
+      <a class="{% if type == 'cbo' %}decision{% else %}help{% endif %} short icon cbo" href="/rankings/2012/cbo/4/">
         {% trans %}Occupations{% endtrans %}
       </a>
 
-      <a class="{% if type == 'hs' %}decision{% else %}help{% endif %} icon hs" href="/rankings/2012/hs/6/">
+      <a class="{% if type == 'hs' %}decision{% else %}help{% endif %} short icon hs" href="/rankings/2012/hs/6/">
         {% trans %}Products{% endtrans %}
       </a>
 
-      <a class="{% if type == 'wld' %}decision{% else %}help{% endif %} icon wld" href="/rankings/2012/wld/5/">
+      <a class="{% if type == 'wld' %}decision{% else %}help{% endif %} short icon wld" href="/rankings/2012/wld/5/">
         {% trans %}Export Destinations{% endtrans %}
       </a>
 
-      <a class="{% if type == 'university' %}decision{% else %}help{% endif %} icon university" href="/rankings/2012/university/5/">
+      <a class="{% if type == 'university' %}decision{% else %}help{% endif %} short icon university" href="/rankings/2012/university/5/">
         {% trans %}Universities{% endtrans %}
       </a>
 
-      <a class="{% if type == 'course_hedu' %}decision{% else %}help{% endif %} icon course_hedu" href="/rankings/2012/course_hedu/6/">
+      <a class="{% if type == 'course_hedu' %}decision{% else %}help{% endif %} short icon course_hedu" href="/rankings/2012/course_hedu/6/">
         {% trans %}Courses{% endtrans %}
       </a>
 
@@ -51,7 +51,7 @@
           <legend for="depth">{% trans %}Depth{% endtrans %}</legend>
           {% for d in depths %}
             <input type="radio" value="{{type}}_{{d}}" name="depth" {% if depth == d %} checked{% endif %}>
-            <label for="{{type}}_{{d}}">{{format(type~"_"~d~"_plural").render(type~"_"~d~"_plural",g.locale)}}</label>
+            <label for="{{type}}_{{d}}">{{format(type~"_"~d~"_plural").render(type~"_"~d~"_plural")}}</label>
           {% endfor %}
         </div>
       {% endif %}
@@ -120,8 +120,8 @@
     }
 
     function table_size() {
-      var w = window.innerWidth - 330 - d3plus.client.scrollbar() + "px";
-      var h = window.innerHeight - 179;
+      var w = window.innerWidth - 260 - d3plus.client.scrollbar() + "px";
+      var h = window.innerHeight - 160;
       d3.select("#rankings_table")
         .style("width", w)
         .style("height", h+"px")

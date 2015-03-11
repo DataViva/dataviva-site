@@ -348,12 +348,6 @@ def dictionary():
         "bra_r_plural": gettext("Receiving Locations"),
         "icon": gettext("Icon"),
 
-        "bra_add": gettext("add a location"),
-        "cbo_add": gettext("add an occupation"),
-        "hs_add": gettext("add a product"),
-        "cnae_add": gettext("add an industry"),
-        "wld_add": gettext("add an export destination"),
-
         # File Types
         "download": gettext("Download"),
         "download_desc": gettext("Choose from the following file types:"),

@@ -3,22 +3,21 @@
 }
 
 #nav_footer {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 #rankings_nav {
   left: 20px;
   position: absolute;
-  width: 250px;
+  width: 200px;
 }
 
-#rankings_nav > a.decision:after {
+/*#rankings_nav > a.decision:after {
   content: '';
-}
+}*/
 
 div#rankings_table {
-  margin-left: 280px;
-  margin-top: 10px;
+  margin-left: 225px;
 }
 
 div#controls {

@@ -635,6 +635,7 @@
       .legend({"size": [25,25]})
       .format({
         "affixes": dataviva.format.affixes,
+        "locale": dataviva.language === "pt" ? "pt_BR" : "en_US",
         "number": dataviva.format.number,
         "text": dataviva.format.text
       })

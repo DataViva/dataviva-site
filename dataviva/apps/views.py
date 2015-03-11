@@ -83,7 +83,7 @@ def guide():
     builds = Build.query.filter(Build.id.in_([1,3,9])).all()
     for b in builds: b.set_bra(default_bra)
     apps.append({
-        "summary": "A visualization using the area of rectangles to show shares of the specified value. The data is nested heirarchically by its given classificaiton.",
+        "summary": gettext("A visualization using the area of rectangles to show shares of the specified value. The data is nested heirarchically by its given classificaiton."),
         "builds": builds,
         "title": gettext(u"Tree Map"),
         "type": "tree_map"
@@ -92,7 +92,7 @@ def guide():
     builds = Build.query.filter(Build.id.in_([17,19,25])).all()
     for b in builds: b.set_bra(default_bra); b.set_filter1(default_cnae);
     apps.append({
-        "summary": "Similar to to a line chart, stacked area charts use an X and Y axis to show values across time. The data is nested heirarchically by its given classificaiton.",
+        "summary": gettext("Similar to to a line chart, stacked area charts use an X and Y axis to show values across time. The data is nested heirarchically by its given classificaiton."),
         "builds": builds,
         "title": gettext(u"Stacked"),
         "type": "stacked"
@@ -101,7 +101,7 @@ def guide():
     builds = Build.query.filter(Build.id.in_([36,40,41])).all()
     for b in builds: b.set_bra(default_bra); b.set_filter1(default_hs);
     apps.append({
-        "summary": "Data values overlayed on a geographic map varying their color by the value they represent.",
+        "summary": gettext("Data values overlayed on a geographic map varying their color by the value they represent."),
         "builds": builds,
         "title": gettext(u"Geo Map"),
         "type": "geo_map"
@@ -110,7 +110,7 @@ def guide():
     builds = Build.query.filter(Build.id.in_([33,35])).all()
     for b in builds: b.set_bra(default_bra)
     apps.append({
-        "summary": "A visualization showing the connections between a specified dataset. The specified attributes are then overlayed on this network to show their position in this fictional space.",
+        "summary": gettext("A visualization showing the connections between a specified dataset. The specified attributes are then overlayed on this network to show their position in this fictional space."),
         "builds": builds,
         "title": gettext(u"Network"),
         "type": "network"
@@ -119,7 +119,7 @@ def guide():
     builds = Build.query.filter(Build.id.in_([91,115,126])).all()
     for b in builds: b.set_bra(default_bra)
     apps.append({
-        "summary": "A type of chart which displays data as a time series with an X and Y axis.",
+        "summary": gettext("A type of chart which displays data as a time series with an X and Y axis."),
         "builds": builds,
         "title": gettext(u"Line Chart"),
         "type": "line"
@@ -131,7 +131,7 @@ def guide():
     builds[1].set_filter2(default_cbo);
     builds[2].set_filter1(default_hs);
     apps.append({
-        "summary": "A visualization showing a network centered on a single node. The depth of nodes shown is computed by their distance from the root.",
+        "summary": gettext("A visualization showing a network centered on a single node. The depth of nodes shown is computed by their distance from the root."),
         "builds": builds,
         "title": gettext(u"Rings"),
         "type": "rings"
@@ -140,7 +140,7 @@ def guide():
     builds = Build.query.filter(Build.id.in_([44,46])).all()
     for b in builds: b.set_bra(default_bra)
     apps.append({
-        "summary": "A visualization showing two variables plotted along an X and Y axis.",
+        "summary": gettext("A visualization showing two variables plotted along an X and Y axis."),
         "builds": builds,
         "title": gettext(u"Scatter"),
         "type": "scatter"
@@ -149,7 +149,7 @@ def guide():
     builds = Build.query.filter(Build.id.in_([52,53,113])).all()
     for b in builds: b.set_bra(default_bra)
     apps.append({
-        "summary": "Similar to the scatter visualization except this form of a scatter shows the same variable along both axes varrying the location for comparison purposes.",
+        "summary": gettext("Similar to the scatter visualization except this form of a scatter shows the same variable along both axes varrying the location for comparison purposes."),
         "builds": builds,
         "title": gettext(u"Compare"),
         "type": "compare"
@@ -158,7 +158,7 @@ def guide():
     builds = Build.query.filter(Build.id.in_([51])).all()
     for b in builds: b.set_bra(default_bra); b.set_filter1(default_cnae);
     apps.append({
-        "summary": "A visualization showing the main occupations employed in various industries, their importance to that industry and the number of employees who work in these activities.",
+        "summary": gettext("A visualization showing the main occupations employed in various industries, their importance to that industry and the number of employees who work in these activities."),
         "builds": builds,
         "title": gettext(u"Occugrid"),
         "type": "occugrid"
@@ -167,7 +167,7 @@ def guide():
     builds = Build.query.filter(Build.id.in_([160])).all()
     for b in builds: b.set_bra(default_bra)
     apps.append({
-        "summary": "A visualization, also known as box and whisker diagram, used to display the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum",
+        "summary": gettext("A visualization, also known as box and whisker diagram, used to display the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum."),
         "builds": builds,
         "title": gettext(u"Box Plot"),
         "type": "box"

@@ -347,14 +347,14 @@ class Build(db.Model, AutoSerialize):
 
         flow = "{}s".format(flow[:-4])
 
-        impexp = "{}/{}".format(lookup["import_val"],lookup["export_val"])
+        impexp = u"{}/{}".format(lookup["import_val"],lookup["export_val"])
         if impexp in title:
             title = title.replace(impexp, lookup[flow])
             if flow is "imports":
                 title = title.replace(" {} ".format(lookup["to"]), " {} ".format(lookup["from"]))
 
 
-        impexp = "{}/{}".format(lookup["origin"],lookup["destination"])
+        impexp = u"{}/{}".format(lookup["origin"],lookup["destination"])
         if impexp in title:
             if flow == "exports":
                 rep = lookup["destination"]
@@ -362,7 +362,7 @@ class Build(db.Model, AutoSerialize):
                 rep = lookup["origin"]
             title = title.replace(impexp, rep)
 
-        impexp = "{}/{}".format(lookup["origins"],lookup["destinations"])
+        impexp = u"{}/{}".format(lookup["origins"],lookup["destinations"])
         if impexp in title:
             if flow == "exports":
                 rep = lookup["destinations"]

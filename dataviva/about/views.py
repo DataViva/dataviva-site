@@ -30,8 +30,8 @@ def before_request():
 
 @mod.route('/crosswalk/<attr1>/<attr2>/')
 def crosswalk(attr1, attr2):
-    attr_table_map = {"cbo" : ("Occupation", Cbo), "course_hedu" : ("Course", Course_hedu),
-                      "hs": ("Product", Hs), "cnae": ("Industry", Cnae)}
+    attr_table_map = {"cbo" : (gettext("Occupation"), Cbo), "course_hedu" : (gettext("Course"), Course_hedu),
+                      "hs": (gettext("Product"), Hs), "cnae": (gettext("Industry"), Cnae)}
     col1, Attr1_Table = attr_table_map[attr1]
     col2, Attr2_Table = attr_table_map[attr2]
     cbo_mode = "cbo" in [attr1, attr2]

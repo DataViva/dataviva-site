@@ -108,33 +108,20 @@ def after_request(response):
 @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 @gzipped
 def home():
+
     # return render_template("test.html")
 
-    # raise Exception('asfd')
     g.page_type = "home"
 
     carousels = []
 
-    # bras = ["1pa040304", "4sp090607", "5rs050101", "4rj020212", "4sp090504", "4sp140505", "4rj050000", "5pr030305", "4sp090605", "4rj040102"]
-    # carousels.append({
-    #     "title": "Top Exporting Municipalities",
-    #     "type": "bra",
-    #     "posters": [Bra.query.get(b) for b in bras]
-    # })
-
-    # prods = ["052601", "021201", "052709", "041701", "178905", "010207", "042304", "021005", "178703", "229999"]
-    # carousels.append({
-    #     "title": "Top Brazilian Exports",
-    #     "type": "hs",
-    #     "posters": [Hs.query.get(b) for b in prods]
-    # })
     limit = 20
     carousel_base = "/stats/carosel/?metric={}&show={}&profile={}&limit={}"
     metric, show, profile = "wage_avg", "cbo_id", "cbo"
     data = stats_list(metric, show, limit=limit)
     items = make_items(data, Cbo)
     carousels.append({
-        "title": "Occupations by Highest Average Wage",
+        "title": gettext("Occupations by Highest Average Wage"),
         "type": profile,
         "items": items,
         "url" : carousel_base.format(metric, show, profile, limit),
@@ -145,7 +132,7 @@ def home():
     data = stats_list(metric, show, limit=limit)
     items = make_items(data, Cnae)
     carousels.append({
-        "title": "Largest Industries by Employment",
+        "title": gettext("Largest Industries by Employment"),
         "type": profile,
         "items": items,
         "url" : carousel_base.format(metric, show, profile, limit),
@@ -156,7 +143,7 @@ def home():
     data = stats_list(metric, show, limit=limit)
     items = make_items(data, Cnae)
     carousels.append({
-        "title": "Industries by Employment Growth",
+        "title": gettext("Industries by Employment Growth"),
         "type": profile,
         "items": items,
         "url" : carousel_base.format(metric, show, profile, limit),
@@ -167,7 +154,7 @@ def home():
     data = stats_list(metric, show, limit=limit)
     items = make_items(data, Course_hedu)
     carousels.append({
-        "title": "Most Popular Courses by Enrollment",
+        "title": gettext("Most Popular Courses by Enrollment"),
         "type": profile,
         "items": items,
         "url" : carousel_base.format(metric, show, profile, limit),
@@ -178,7 +165,7 @@ def home():
     data = stats_list(metric, show, limit=limit)
     items = make_items(data, Bra)
     carousels.append({
-        "title": "Cities by Largest University Enrollment",
+        "title": gettext("Cities by Largest University Enrollment"),
         "type": profile,
         "items": items,
         "url" : carousel_base.format(metric, show, profile, limit),

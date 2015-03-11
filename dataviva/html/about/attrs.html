@@ -10,7 +10,7 @@
         <legend id="depth">{% trans %}Depth{% endtrans %}</legend>
         {% for d in depths %}
           <input onclick="change_depth(this.value)" type="radio" id="{{attr}}_{{d}}" name="depth" value="{{d}}"{% if depth == d %} checked{% endif %}>
-          <label for="{{attr}}_{{d}}">{{format(attr~"_"~d~"_plural").render(attr~"_"~d~"_plural",g.locale)}}</label>
+          <label for="{{attr}}_{{d}}">{{format(attr~"_"~d~"_plural").render(attr~"_"~d~"_plural")}}</label>
         {% endfor %}
 
         <a id="file" class="alt_tooltip download_classification" onclick="download_classfication()" alt="{%trans%}Download{%endtrans%}"><i class="fa fa-save"></i></a>
