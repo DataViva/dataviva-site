@@ -37,26 +37,28 @@ def crawl_page(page):
     for url in urls:    
         driver.get(url)
         if "profiles/" in url and not url.endswith("profiles/"):
-            try:
                 iframes = driver.find_elements_by_xpath("//div[@class='lightbox guide_app']/iframe")
                 links = driver.find_elements_by_class_name("app_links")
                 for idx, link in enumerate(links):
-                    frame = iframes[idx]
-                    link.click()
-                    driver.switch_to_frame(driver.find_element_by_id(frame.get_attribute("id")))
-                    element = WebDriverWait(driver, 10).until(
-                        EC.element_to_be_clickable((By.ID, "data"))
-                    )
-                    driver.switch_to_default_content()
+                    try:
+                        frame = iframes[idx]
+                        link.click()
+                        driver.switch_to_frame(driver.find_element_by_id(frame.get_attribute("id")))
+                        element = WebDriverWait(driver, 10).until(
+                            EC.element_to_be_clickable((By.ID, "data"))
+                        )
+                        driver.switch_to_default_content()
 
-            except Exception, exception:
-                print "Moving on after 10 second wait.", str(exception)
+                    except Exception, exception:
+                        print "Moving on after 20 second wait.", str(exception)
+                        driver.switch_to_default_content()
+                        print "Error occured with link", link
         elif "/apps/builder" in url:
             frame = driver.find_element_by_xpath("//div[@class='lightbox']/iframe")
             driver.switch_to_frame(driver.find_element_by_id(frame.get_attribute("id")))
             try:
-                element = WebDriverWait(driver, 10).until(
-                    EC.element_to_be_clickable((By.ID, "key"))
+                element = WebDriverWait(driver, 20).until(
+                    EC.element_to_be_clickable((By.ID, "data"))
                 )
             except Exception, exception:
                 print "Moving on after 10 second wait.", str(exception)
