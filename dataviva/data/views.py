@@ -45,24 +45,28 @@ def get_geo_location(ip):
     return None
 
 @mod.route('/table/')
+@mod.route('/table/<data_type>/<year>/<bra_id>/<filter_1>/')
 @mod.route('/table/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
 def table(data_type="rais", year="all", bra_id="4mg", filter_1="show.1", filter_2="all"):
     g.page_type = "table"
-    data_url = "/{0}/{1}/{2}/{3}/{4}/".format(data_type,year,bra_id,filter_1,filter_2)
+    data_url = "/{}/{}/{}/{}/{}/".format(data_type,year,bra_id,filter_1,filter_2)
+    if data_type == "ei":
+        data_url = "/{}/{}/{}/{}/".format(data_type,year,bra_id,filter_1)
     return render_template("general/table.html",data_url = data_url)
 
 @mod.route('/')
+@mod.route('/<data_type>/<year>/<bra_id>/<filter_1>/')
 @mod.route('/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
 @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
     # /hedu/all/show.3/01298.show.5/all/
-
+    
     def get_filter_by_id(f):
         match = [v for v in filters if v["id"] == f]
         if match:
             return match[0]
         return None
-
+    
     datasets = [["rais", _('Employment')],
                 ["secex", _('International Trade')],
                 ["hedu", _('Higher Education')],
@@ -76,47 +80,44 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
             months = range(int(start_year.split("-")[1]), int(end_year.split("-")[1])+1)
             months = [(m, dt.strptime(str(m),"%m").strftime("%B")) for m in months]
             d.append(months)
-
+    
     trans_lookup = dictionary()
     filters = [
-        {"id": "bra", "datasets": "rais secex hedu sc", "nestings": [1, 3, 5, 7, 8, 9]},
-        {"id": "bra_r", "datasets": "ei", "nestings": [1, 3, 5, 7, 8, 9]},
-        {"id": "bra_s", "datasets": "ei", "nestings": [1, 3, 5, 7, 8, 9]},
-        {"id": "cbo", "datasets": "rais", "nestings":[1, 2, 4]},
-        {"id": "cnae", "datasets": "rais", "nestings":[1, 3, 6]},
-        {"id": "hs", "datasets": "secex", "nestings":[2, 4, 6]},
-        {"id": "wld", "datasets": "secex", "nestings":[2, 5]},
-        {"id": "university", "datasets": "hedu", "nestings":[5]},
-        {"id": "course_hedu", "datasets": "hedu", "nestings":[2, 6]},
-        {"id": "course_sc", "datasets": "sc", "nestings":[2, 5]}
+        {"name": _('Brazilian Location'), "id": "bra", "datasets": "rais secex hedu sc", "nestings": [1, 3, 5, 7, 8, 9]},
+        {"name": _('Brazilian Receiver Location'), "id": "bra_r", "datasets": "ei", "nestings": [1, 3, 5, 7, 8, 9]},
+        {"name": _('Brazilian Sender Location'), "id": "bra_s", "datasets": "ei", "nestings": [1, 3, 5, 7, 8, 9]},
+        {"name": _('Occupations'), "id": "cbo", "datasets": "rais", "nestings":[1, 2, 4]},
+        {"name": _('Industries'), "id": "cnae", "datasets": "rais", "nestings":[1, 3, 6]},
+        {"name": _('Products'), "id": "hs", "datasets": "secex", "nestings":[2, 4, 6]},
+        {"name": _('Trade Partners'), "id": "wld", "datasets": "secex", "nestings":[2, 5]},
+        {"name": _('Universities'), "id": "university", "datasets": "hedu", "nestings":[5]},
+        {"name": _('Majors'), "id": "course_hedu", "datasets": "hedu", "nestings":[2, 6]},
+        {"name": _('Vocational Courses'), "id": "course_sc", "datasets": "sc"}
     ]
     for f in filters:
         if "nestings" in f:
-            if "bra" in f["id"]:
-                attr_type = f["id"].replace("_r", "").replace("_s", "")
-            else:
-                attr_type = f["id"]
-            f["nestings"] = [(n, trans_lookup["{}_{}_plural".format(attr_type, n)]) for n in f["nestings"]]
-            f["name"] = trans_lookup["{}".format(f["id"])]
-
+            attr_type = f["id"].replace("_r", "").replace("_s", "")
+            f["nestings"] = [(n, trans_lookup["{}_{}".format(attr_type, n)]) for n in f["nestings"]]
+    
     selected_filters = []
-
+    
     '''
         Determine the selected dataset/filters/output from URL
     '''
     output = {"filters":[]}
-
+    
     # get selected dataset
     output["dataset"] = [v for v in datasets if v[0] == data_type][0]
-
+    
     # get filters
     filter_type_lookup = {
         "rais": [("bra", Bra), ("cnae", Cnae), ("cbo", Cbo)],
         "secex": [("bra", Bra), ("hs", Hs), ("wld", Wld)],
         "hedu": [("bra", Bra), ("university", University), ("course_hedu", Course_hedu)],
         "sc": [("bra", Bra), None, ("course_sc", Course_sc)],
+        "ei": [("bra_r", Bra), ("bra_s", Bra)]
     }
-
+    
     # parse year
     if year == "all":
         output["year"] = year
@@ -125,12 +126,12 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
         output["year"], output["month"] = int(y), int(m)
     else:
         output["year"] = int(year)
-
-    if bra_id and filter_1 and filter_2:
+    
+    if bra_id and filter_1:
         for i, f in enumerate([bra_id, filter_1, filter_2]):
             filter = f
             depth = None
-            if f == "all": continue
+            if f == "all" or f is None: continue
             if f == "show": filter = None
             if "show" in f:
                 output_filter = filter_type_lookup[output["dataset"][0]][i][0]
@@ -154,6 +155,6 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
         output["nesting"] = 8
         filter = Bra.query.get("4mg")
         output["filters"].append({"id":"bra", "datasets":"rais secex hedu sc", "filter":filter})
-
+    
     # raise Exception(output["dataset"], datasets, output["dataset"] == datasets[0])
     return render_template("data/index.html", datasets=datasets, filters=filters, selected_filters=selected_filters, output=output)
