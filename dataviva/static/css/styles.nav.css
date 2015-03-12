@@ -179,6 +179,10 @@ a.account:hover {
   color: #af1f24;
 }
 
+#d3plus_tooltip_id_account {
+  font-size: 12px;
+}
+
 div#language .leon.radio {
   margin: 1px !important;
 }
