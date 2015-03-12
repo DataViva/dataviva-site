@@ -206,14 +206,14 @@
     }
 
     var cleanAttrs = function(d, o) {
-      app.attrs[o] = d.data.reduce(function(obj, a){
+      return d.data.reduce(function(obj, a){
         a[o+"_id"] = a.id;
         a[o+"_display"] = dataviva.displayID(a.id,o);
         a.icon = dataviva.icon(a.id,o);
-        if (a["export_val"]) delete a["export_val"];
-        if (a["import_val"]) delete a["import_val"];
-        if (a["enrolled"]) delete a["enrolled"];
-        if (a["num_emp"]) delete a["num_emp"];
+        delete a["export_val"];
+        delete a["import_val"];
+        delete a["enrolled"];
+        delete a["num_emp"];
         obj[a.id] = a;
         if (["university","school"].indexOf(o) >= 0 && !(a["school_type_id"] in obj)) {
           obj[a["school_type_id"]] = {"color": a.color, "name": a["school_type"]};
@@ -867,7 +867,7 @@
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
                     localforage.setItem(u, d);
-                    cleanAttrs(d, app.build.output_attr);
+                    app.attrs[app.build.output_attr] = cleanAttrs(d, app.build.output_attr);
                     callback(error,d);
                   })
               },"/attrs/"+app.build.output_attr+"/"+"?lang="+dataviva.language)
@@ -2712,7 +2712,7 @@
         var a = attrs.pop();
         var url = "/attrs/"+a+"/?lang="+dataviva.language;
         localforage.getItem(url,function(error, data){
-          if (data) cleanAttrs(data, a);
+          if (data) app.attrs[a] = cleanAttrs(data, a);
           load_attr();
         });
       }

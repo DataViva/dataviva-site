@@ -12209,6 +12209,7 @@ module.exports = function(vars, years, depth) {
   }
 
   cacheID = cacheID.join("_");
+  vars.data.cacheID = cacheID;
 
   var match = false;
 
@@ -12471,9 +12472,9 @@ find = function(vars, node, variable, depth) {
     if (variable in node) {
       return node[variable];
     }
-    cacheInit(node, depth);
-    if (variable in node.d3plus.data[depth]) {
-      return node.d3plus.data[depth][variable];
+    cacheInit(node, vars.data.cacheID);
+    if (variable in node.d3plus.data[vars.data.cacheID]) {
+      return node.d3plus.data[vars.data.cacheID][variable];
     }
     if (depth in node) {
       node = node[depth];
@@ -12574,15 +12575,15 @@ filterArray = function(arr, node, depth) {
   }
 };
 
-cacheInit = function(node, depth) {
+cacheInit = function(node, cache) {
   if (!("d3plus" in node)) {
     node.d3plus = {};
   }
   if (!("data" in node.d3plus)) {
     node.d3plus.data = {};
   }
-  if (!(depth in node.d3plus.data)) {
-    node.d3plus.data[depth] = {};
+  if (!(cache in node.d3plus.data)) {
+    node.d3plus.data[cache] = {};
   }
   return node;
 };
@@ -12610,7 +12611,7 @@ valueParse = function(vars, node, depth, variable, val) {
     val = val[0];
   }
   if (val !== null && validObject(node) && typeof variable === "string" && !(variable in node)) {
-    node.d3plus.data[depth][variable] = val;
+    node.d3plus.data[vars.data.cacheID][variable] = val;
   }
   return val;
 };
@@ -13740,7 +13741,7 @@ reset = function(obj, method) {
     obj.first = false;
   }
   for (o in obj) {
-    if (validObject(obj[o])) {
+    if (o.indexOf("d3plus") < 0 && validObject(obj[o])) {
       reset(obj[o], o);
     }
   }
@@ -14380,7 +14381,7 @@ module.exports = function(points) {
 
 
 },{}],"/Users/Dave/Sites/d3plus/src/font/sizes.coffee":[function(require,module,exports){
-var fontTester;
+var fontTester, getHeight, getWidth;
 
 fontTester = require("../core/font/tester.coffee");
 
@@ -14397,25 +14398,29 @@ module.exports = function(words, style, opts) {
   }
   tspans = tester.selectAll("tspan").data(words);
   attr = {
+    left: "0px",
+    position: "absolute",
+    top: "0px",
     x: 0,
     y: 0
   };
-  tspans.enter().append("tspan").text(String).attr("position", "absolute").attr("top", "0px").attr("left", "0px").style(style).attr(attr).each(function(d) {
-    var children, height, width;
+  tspans.enter().append("tspan").text(String).style(style).attr(attr).each(function(d) {
     if (typeof opts.mod === "function") {
-      opts.mod(this);
+      return opts.mod(this);
     }
+  }).each(function(d) {
+    var children, height, width;
     children = d3.select(this).selectAll("tspan");
     if (children.size()) {
       width = [];
       children.each(function() {
-        return width.push(this.getComputedTextLength());
+        return width.push(getWidth(this));
       });
       width = d3.max(width);
     } else {
-      width = this.getComputedTextLength();
+      width = getWidth(this);
     }
-    height = this.offsetHeight || this.getBoundingClientRect().height || this.parentNode.getBBox().height;
+    height = getHeight(this);
     return sizes.push({
       height: height,
       text: d,
@@ -14427,6 +14432,14 @@ module.exports = function(words, style, opts) {
     tester.remove();
   }
   return sizes;
+};
+
+getWidth = function(elem) {
+  return elem.getComputedTextLength();
+};
+
+getHeight = function(elem) {
+  return elem.offsetHeight || elem.getBoundingClientRect().height || elem.parentNode.getBBox().height;
 };
 
 
@@ -18404,17 +18417,17 @@ validate = require("./validate.coffee");
 
 module.exports = function(obj1, obj2) {
   var copyObject, obj3;
-  copyObject = function(obj, ret, plus) {
+  copyObject = function(obj, ret) {
     var k, v, _results;
     _results = [];
     for (k in obj) {
       v = obj[k];
-      if (typeof v !== "undefined") {
-        if (!plus && validate(v)) {
+      if (!(typeof v === "undefined" || k.indexOf("d3plus") === 0)) {
+        if (validate(v)) {
           if (typeof ret[k] !== "object") {
             ret[k] = {};
           }
-          _results.push(copyObject(v, ret[k], k === "d3plus"));
+          _results.push(copyObject(v, ret[k]));
         } else if (!d3selection(v) && v instanceof Array) {
           _results.push(ret[k] = v.slice(0));
         } else {
@@ -18775,7 +18788,7 @@ module.exports = function(vars) {
     vars.text.phrases = [vars.text.value + ""];
   }
   if (!vars.align.value) {
-    return vars.container.align = vars.container.value.attr("text-anchor") || vars.container.value.style("text-anchor");
+    return vars.container.align = vars.container.value.style("text-anchor") || vars.container.value.attr("text-anchor");
   }
 };
 
@@ -19311,6 +19324,8 @@ module.exports = function() {
         if (vars.size.value[0] <= vars.height.inner) {
           text(vars);
           wrap(vars);
+        } else {
+          vars.container.value.html(false);
         }
         if (vars.dev.value) {
           print.timeEnd("total draw time");
@@ -20497,42 +20512,47 @@ module.exports = function(vars) {
     steps.push({
       "function": function(vars) {
 
-          if (vars.color.changed && vars.color.value) {
+          if (!vars.color.type || vars.color.changed || vars.data.changed ||
+              vars.attrs.changed || vars.id.changed || vars.depth.changed ||
+              (vars.time.fixed.value &&
+                (vars.time.solo.changed || vars.time.mute.changed))) {
 
-            vars.color.valueScale = null
+            vars.color.valueScale = false;
 
             if ( vars.dev.value ) {
-              var timerString = "determining color type"
-              print.time( timerString )
+              var timerString = "checking color type";
+              print.time(timerString);
             }
 
-            var colorKey = vars.color.value
+            vars.color.type = false;
 
-            if ( validObject(colorKey) ) {
-              if (colorKey[vars.id.value]) {
-                colorKey = colorKey[vars.id.value]
+            if (vars.color.value) {
+
+              var colorKey = vars.color.value;
+
+              if ( validObject(colorKey) ) {
+                if (colorKey[vars.id.value]) {
+                  colorKey = colorKey[vars.id.value];
+                }
+                else {
+                  colorKey = colorKey[d3.keys(colorKey)[0]];
+                }
               }
-              else {
-                colorKey = colorKey[d3.keys(colorKey)[0]]
+
+              if (vars.data.keys && colorKey in vars.data.keys) {
+                vars.color.type = vars.data.keys[colorKey];
               }
+              else if (vars.attrs.keys && colorKey in vars.attrs.keys) {
+                vars.color.type = vars.attrs.keys[colorKey];
+              }
+
+            }
+            else if (vars.data.keys) {
+              vars.color.type = vars.data.keys[vars.id.value];
             }
 
-            if ( vars.data.keys && colorKey in vars.data.keys ) {
-              vars.color.type = vars.data.keys[colorKey]
-            }
-            else if ( vars.attrs.keys && colorKey in vars.attrs.keys ) {
-              vars.color.type = vars.attrs.keys[colorKey]
-            }
-            else {
-              vars.color.type = undefined
-            }
+            if (vars.dev.value) print.timeEnd(timerString);
 
-            if ( vars.dev.value ) print.timeEnd( timerString )
-
-          }
-          else if (!vars.color.value) {
-            vars.color.type = "keys" in vars.data
-                            ? vars.data.keys[vars.id.value] : false
           }
 
       },
@@ -20598,13 +20618,7 @@ module.exports = function(vars) {
         "check": function(vars) {
 
           return vars.color.value && vars.color.type === "number" &&
-                 vars.id.nesting.indexOf(vars.color.value) < 0 &&
-                 vars.data.value && vars.color.value != vars.id.value &&
-                   (vars.color.changed || vars.data.changed || vars.depth.changed ||
-                     (vars.time.fixed.value &&
-                       (vars.time.solo.changed || vars.time.mute.changed)
-                     )
-                   )
+                 vars.color.valueScale === false
 
         },
         "function": dataColor,
@@ -20831,7 +20845,7 @@ var edges = require("./shapes/edges.js"),
     shapeLabels = require("./shapes/labels.js"),
     titleCase   = require("../../string/title.coffee")
 
-var bounds = require("./zoom/bounds.js")
+var bounds = require("./zoom/bounds.coffee")
 var labels = require("./zoom/labels.coffee")
 var mouse  = require("./zoom/mouse.coffee")
 
@@ -20850,11 +20864,11 @@ module.exports = function(vars) {
 
       if ( vars.dev.value ) print.time("calculating zoom")
 
-      if (vars.draw.first) {
-        bounds(vars,zoom,0)
+      if (vars.draw.first || vars.zoom.reset) {
+        bounds(vars, zoom, 0);
       }
       else if (vars.type.changed || vars.focus.changed || vars.height.changed || vars.width.changed || vars.nodes.changed || vars.legend.changed || vars.timeline.changed || vars.ui.changed) {
-        bounds(vars,zoom)
+        bounds(vars, zoom);
       }
 
       if ( vars.dev.value ) print.timeEnd("calculating zoom")
@@ -21014,7 +21028,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/methods/reset.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/reset.coffee","../../string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee","./shapes/edges.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/edges.js","./shapes/labels.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/labels.js","./ui/message.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/message.js","./zoom/bounds.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/bounds.js","./zoom/labels.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/labels.coffee","./zoom/mouse.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/mouse.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/tooltip.coffee":[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/methods/reset.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/reset.coffee","../../string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee","./shapes/edges.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/edges.js","./shapes/labels.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/labels.js","./ui/message.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/message.js","./zoom/bounds.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/bounds.coffee","./zoom/labels.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/labels.coffee","./zoom/mouse.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/mouse.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/tooltip.coffee":[function(require,module,exports){
 var createTooltip, fetchValue, print, removeTooltip;
 
 createTooltip = require("../tooltip/create.js");
@@ -21522,9 +21536,12 @@ module.exports = function(d, vars, stroke) {
   } else if (d.d3plus["static"]) {
     return lighter(fetchColor(vars, d), .75);
   }
-  active = vars.active.value ? fetchValue(vars, d, vars.active.value) : d.d3plus.active;
-  temp = vars.temp.value ? fetchValue(vars, d, vars.temp.value) : d.d3plus.temp;
-  total = vars.total.value ? fetchValue(vars, d, vars.total.value) : d.d3plus.total;
+  active = vars.active.value;
+  active = active ? fetchValue(vars, d, active) : d.d3plus.active;
+  temp = vars.temp.value;
+  temp = temp ? fetchValue(vars, d, temp) : d.d3plus.temp;
+  total = vars.total.value;
+  total = total ? fetchValue(vars, d, total) : d.d3plus.total;
   if ((!vars.active.value && !vars.temp.value) || active === true || (active && total && active >= total && !temp) || (active && !total)) {
     return fetchColor(vars, d);
   } else if (vars.active.spotlight.value) {
@@ -21536,204 +21553,162 @@ module.exports = function(d, vars, stroke) {
 
 
 
-},{"../../../color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/coordinates.js":[function(require,module,exports){
-var copy = require("../../../util/copy.coffee"),
-    distance    = require("../../../network/distance.coffee"),
-    fetchText   = require("../../../core/fetch/text.js"),
-    fontSizes   = require("../../../font/sizes.coffee"),
-    largestRect = require("../../../geom/largestRect.coffee"),
-    path2poly   = require("../../../geom/path2poly.coffee"),
-    shapeStyle  = require("./style.coffee")
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-// Draws "square" and "circle" shapes using svg:rect
-//------------------------------------------------------------------------------
-module.exports = function(vars,selection,enter,exit) {
+},{"../../../color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/coordinates.coffee":[function(require,module,exports){
+var copy, distance, fetchText, fontSizes, labels, largestRect, path2poly, shapeStyle;
 
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Define the geographical projection
-  //----------------------------------------------------------------------------
-  var projection = d3.geo[vars.coords.projection.value]()
-    .center(vars.coords.center)
+copy = require("../../../util/copy.coffee");
 
+distance = require("../../../network/distance.coffee");
+
+fetchText = require("../../../core/fetch/text.js");
+
+fontSizes = require("../../../font/sizes.coffee");
+
+largestRect = require("../../../geom/largestRect.coffee");
+
+path2poly = require("../../../geom/path2poly.coffee");
+
+shapeStyle = require("./style.coffee");
+
+labels = {};
+
+module.exports = function(vars, selection, enter, exit) {
+  var projection, size_change;
+  projection = d3.geo[vars.coords.projection.value]().center(vars.coords.center);
   if (!vars.zoom.scale) {
-    vars.zoom.scale = 1
+    vars.zoom.scale = 1;
   }
-
-  vars.zoom.area = 1/vars.zoom.scale/vars.zoom.scale
-
-  vars.path = d3.geo.path()
-    .projection(projection)
-
-  enter.append("path")
-    .attr("id",function(d){
-      return d.id
-    })
-    .attr("class","d3plus_data")
-    .attr("d",vars.path)
-    .call(shapeStyle,vars)
-
+  vars.zoom.area = 1 / vars.zoom.scale / vars.zoom.scale;
+  vars.path = d3.geo.path().projection(projection);
+  enter.append("path").attr("id", function(d) {
+    return d.id;
+  }).attr("class", "d3plus_data").attr("d", vars.path).call(shapeStyle, vars);
   if (vars.draw.timing) {
-    selection.selectAll("path.d3plus_data")
-      .transition().duration(vars.draw.timing)
-        .call(shapeStyle,vars)
+    selection.selectAll("path.d3plus_data").transition().duration(vars.draw.timing).call(shapeStyle, vars);
+  } else {
+    selection.selectAll("path.d3plus_data").call(shapeStyle, vars);
   }
-  else {
-    selection.selectAll("path.d3plus_data")
-      .call(shapeStyle,vars)
-  }
-
-  var size_change = vars.old_height != vars.height.viz || vars.height.changed
-    || vars.old_width != vars.width.viz || vars.width.changed
-
-  vars.old_height = vars.height.viz
-  vars.old_width = vars.width.viz
-
-  if (vars.coords.changed || size_change || vars.coords.mute.changed || vars.coords.solo.changed) {
-
+  size_change = vars.old_height !== vars.height.viz || vars.height.changed || vars.old_width !== vars.width.viz || vars.width.changed;
+  vars.old_height = vars.height.viz;
+  vars.old_width = vars.width.viz;
+  if (vars.coords.changed || size_change || vars.coords.mute.changed || vars.coords.solo.changed || vars.type.changed) {
     vars.zoom.bounds = null;
+    vars.zoom.reset = true;
     vars.zoom.coords = {};
-    vars.zoom.labels = {};
-
-    selection.each(function(d){
-
+    return selection.each(function(d) {
+      var areaM, areas, b, c, center, coords, dist_cutoff, dist_values, distances, i, largest, names, path, ratio, rect, reduced, size, style, test, _i, _len, _ref;
       if (d.geometry.coordinates.length > 1) {
-
-        var distances = [],
-            areas = [],
-            test = copy(d),
-            largest = copy(d),
-            largest_area = 0;
-
-        d.geometry.coordinates = d.geometry.coordinates.filter(function(c,i){
-
+        distances = [];
+        areas = [];
+        areaM = 0;
+        test = copy(d);
+        largest = copy(d);
+        d.geometry.coordinates = d.geometry.coordinates.filter(function(c, i) {
+          var a;
           test.geometry.coordinates = [c];
-          var a = vars.path.area(test);
+          a = vars.path.area(test);
           if (a > 0) {
             areas.push(a);
-            if (a > largest_area) {
+            if (a > areaM) {
               largest.geometry.coordinates = [c];
-              largest_area = a;
+              areaM = a;
             }
             return true;
+          } else {
+            return false;
           }
-          return false;
-
         });
-
-        var center = vars.path.centroid(largest),
-            reduced = copy(d);
-
-        d.geometry.coordinates.forEach(function(c,i){
+        center = vars.path.centroid(largest);
+        reduced = copy(d);
+        _ref = d.geometry.coordinates;
+        for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+          c = _ref[i];
           test.geometry.coordinates = [c];
-          distances.push(distance(vars.path.centroid(test),center));
+          distances.push(distance(vars.path.centroid(test), center));
+        }
+        dist_values = distances.reduce(function(arr, dist, i) {
+          if (dist) {
+            arr.push(areas[i] / dist);
+          }
+          return arr;
+        }, []);
+        dist_cutoff = d3.quantile(dist_values, vars.coords.threshold.value);
+        reduced.geometry.coordinates = reduced.geometry.coordinates.filter(function(c, i) {
+          var a, dist;
+          dist = distances[i];
+          a = areas[i];
+          return dist === 0 || a / dist > dist_cutoff;
         });
-
-        var dist_values = distances.reduce(function(arr, dist, i){
-              if (dist) {
-                arr.push(areas[i]/dist);
-              }
-              return arr;
-            }, []),
-            dist_cutoff = d3.quantile(dist_values, vars.coords.threshold.value);
-
-        reduced.geometry.coordinates = reduced.geometry.coordinates.filter(function(c,i){
-          var dist = distances[i], a = areas[i];
-          return dist === 0 || a/dist > dist_cutoff;
-        });
-
-        var coords = largest.geometry.coordinates[0];
+        coords = largest.geometry.coordinates[0];
         if (coords && largest.geometry.type === "MultiPolygon") {
           coords = coords[0];
           largest.geometry.coordinates[0] = coords;
           largest.geometry.type = "Polygon";
         }
-
+      } else {
+        reduced = d;
+        largest = d;
+        coords = d.geometry.coordinates[0];
       }
-      else {
-        var reduced = d, largest = d, coords = d.geometry.coordinates[0];
-      }
-
       vars.zoom.coords[d.d3plus.id] = reduced;
-
-      var b = vars.path.bounds(reduced);
-
-      var names = fetchText(vars,d);
-
+      b = vars.path.bounds(reduced);
+      names = fetchText(vars, d);
+      delete d.d3plus_label;
       if (coords && names.length) {
-
-        var path = path2poly(vars.path(largest));
-
-        var style = {
+        path = path2poly(vars.path(largest));
+        style = {
           "font-weight": vars.labels.font.weight,
           "font-family": vars.labels.font.family.value
         };
-
+        ratio = null;
         if (names[0].split(" ").length === 1) {
-          var size = fontSizes(names[0],style)[0],
-              ratio = size.width/size.height;
+          size = fontSizes(names[0], style)[0];
+          ratio = size.width / size.height;
         }
-        else {
-          var ratio = null;
-        }
-
-        var rect = largestRect(path,{
-          "angle": 0,
-          "aspectRatio": ratio
+        rect = largestRect(path, {
+          angle: 0,
+          aspectRatio: ratio
         });
-
         if (rect) {
-
           rect = rect[0];
-
-          var label = {
-            "anchor": "middle",
-            "valign": "center",
-            "group": vars.g.labels,
-            "h": rect.height,
-            "w": rect.width,
-            "x": rect.cx,
-            "y": rect.cy,
-            "names": names
-          }
-
-          vars.zoom.labels[d.d3plus.id] = label
-
+          d.d3plus_label = {
+            anchor: "middle",
+            valign: "center",
+            h: rect.height,
+            w: rect.width,
+            x: rect.cx,
+            y: rect.cy,
+            names: names
+          };
         }
-        else {
-          delete vars.zoom.labels[d.d3plus.id]
-        }
-
       }
-      else {
-        delete vars.zoom.labels[d.d3plus.id]
-      }
-
+      labels[d.id] = d.d3plus_label;
       if (!vars.zoom.bounds) {
-        vars.zoom.bounds =  b
-      }
-      else {
+        return vars.zoom.bounds = b;
+      } else {
         if (vars.zoom.bounds[0][0] > b[0][0]) {
-          vars.zoom.bounds[0][0] = b[0][0]
+          vars.zoom.bounds[0][0] = b[0][0];
         }
         if (vars.zoom.bounds[0][1] > b[0][1]) {
-          vars.zoom.bounds[0][1] = b[0][1]
+          vars.zoom.bounds[0][1] = b[0][1];
         }
         if (vars.zoom.bounds[1][0] < b[1][0]) {
-          vars.zoom.bounds[1][0] = b[1][0]
+          vars.zoom.bounds[1][0] = b[1][0];
         }
         if (vars.zoom.bounds[1][1] < b[1][1]) {
-          vars.zoom.bounds[1][1] = b[1][1]
+          return vars.zoom.bounds[1][1] = b[1][1];
         }
       }
-
-    })
-
+    });
+  } else if (!vars.focus.value.length) {
+    vars.zoom.viewport = false;
+    return selection.each(function(d) {
+      return d.d3plus_label = labels[d.id];
+    });
   }
-  else if (!vars.focus.value.length) {
-    vars.zoom.viewport = false
-  }
+};
 
-}
+
 
 },{"../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","../../../geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","../../../network/distance.coffee":"/Users/Dave/Sites/d3plus/src/network/distance.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/cross.js":[function(require,module,exports){
 var shapeStyle  = require("./style.coffee")
@@ -21962,7 +21937,7 @@ var drawShape = {
   "arc":           require("./arc.coffee"),
   "area":          require("./area.js"),
   "check":         require("./check.js"),
-  "coordinates":   require("./coordinates.js"),
+  "coordinates":   require("./coordinates.coffee"),
   "cross":         require("./cross.js"),
   "diamond":       require("./diamond.js"),
   "donut":         require("./donut.js"),
@@ -22087,17 +22062,18 @@ module.exports = function(vars) {
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // Remove old groups
   //----------------------------------------------------------------------------
-  for (shape in shapeLookup) {
-    if (!(shapeLookup[shape] in shapes) || d3.keys(shapes).length === 0) {
+  for (var s in shapeLookup) {
+    if (!(shapeLookup[s] in shapes) || d3.keys(shapes).length === 0) {
+      var oldShapes = vars.g.data.selectAll("g.d3plus_"+shapeLookup[s]);
       if (vars.draw.timing) {
-        vars.g.data.selectAll("g.d3plus_"+shapeLookup[shape])
+        oldShapes
           .transition().duration(vars.draw.timing)
           .attr("opacity",0)
-          .remove()
+          .remove();
       }
       else {
-        vars.g.data.selectAll("g.d3plus_"+shapeLookup[shape])
-          .remove()
+        oldShapes
+          .remove();
       }
     }
   }
@@ -22105,8 +22081,7 @@ module.exports = function(vars) {
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // Initialize arrays for labels and sizes
   //----------------------------------------------------------------------------
-  var labels = [],
-      shares = []
+  var labels = [], shares = [];
 
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // Create groups by shape, apply data, and call specific shape drawing class.
@@ -22642,7 +22617,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","../../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../../../util/child.coffee":"/Users/Dave/Sites/d3plus/src/util/child.coffee","../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../tooltip/create.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/create.js","../zoom/direction.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/direction.coffee","../zoom/propagation.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/propagation.coffee","./arc.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/arc.coffee","./area.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/area.js","./check.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/check.js","./coordinates.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/coordinates.js","./cross.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/cross.js","./diamond.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/diamond.js","./donut.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/donut.js","./fill.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/fill.js","./line.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/line.js","./rect.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/rect.coffee","./triangle_down.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/triangle_down.js","./triangle_up.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/triangle_up.js","./whisker.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/whisker.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/edges.js":[function(require,module,exports){
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","../../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../../../util/child.coffee":"/Users/Dave/Sites/d3plus/src/util/child.coffee","../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../tooltip/create.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/create.js","../zoom/direction.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/direction.coffee","../zoom/propagation.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/propagation.coffee","./arc.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/arc.coffee","./area.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/area.js","./check.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/check.js","./coordinates.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/coordinates.coffee","./cross.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/cross.js","./diamond.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/diamond.js","./donut.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/donut.js","./fill.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/fill.js","./line.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/line.js","./rect.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/rect.coffee","./triangle_down.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/triangle_down.js","./triangle_up.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/triangle_up.js","./whisker.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/whisker.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/edges.js":[function(require,module,exports){
 var buckets = require("../../../util/buckets.coffee"),
     offset  = require("../../../geom/offset.coffee");
 
@@ -23633,7 +23608,6 @@ module.exports = function( vars , group ) {
         if (translate.length) {
           translate = translate.split(")").slice(-3).join(")");
         }
-
         return "rotate("+a+","+x+","+y+")scale("+1/scale[1]+")translate("+(t.x*scale[1]-t.x)+","+(t.y*scale[1]-t.y)+")" + translate;
 
       });
@@ -23653,7 +23627,7 @@ module.exports = function( vars , group ) {
     selection.each(function(d){
 
       var disabled = d.d3plus && "label" in d.d3plus && !d.d3plus.label,
-          label = d.d3plus_label ? d.d3plus_label : vars.zoom.labels ? vars.zoom.labels[d.d3plus.id] : null,
+          label = d.d3plus_label || null,
           share = d.d3plus_share,
           names = d.d3plus.text ? d.d3plus.text :
                   label && label.names ? label.names :
@@ -23687,7 +23661,7 @@ module.exports = function( vars , group ) {
           share.resize = vars.labels.resize.value === false ? false :
             share && "resize" in share ? share.resize : true;
 
-          share.padding = vars.labels.padding * 2;
+          share.padding = vars.labels.padding;
 
           share.text = d.d3plus.share;
           share.parent = d;
@@ -23697,7 +23671,7 @@ module.exports = function( vars , group ) {
               return t.w+""+t.h+""+t.text;
             });
 
-          if (vars.draw.timing) {
+          if (vars.draw.timing && vars.zoom.scale === 1) {
 
             text
               .transition().duration(vars.draw.timing/2)
@@ -23742,8 +23716,7 @@ module.exports = function( vars , group ) {
           label.resize = vars.labels.resize.value === false ? false :
             label && "resize" in label ? label.resize : true;
 
-          var padding = typeof label.padding === "number" ? label.padding : vars.labels.padding;
-          label.padding = padding * 2;
+          label.padding = typeof label.padding === "number" ? label.padding : vars.labels.padding;
 
         }
 
@@ -23770,7 +23743,7 @@ module.exports = function( vars , group ) {
             }), fontSize = label.resize ? undefined :
                            (vars.labels.font.size * scale[0]) + "px";
 
-          if ( vars.draw.timing ) {
+          if (vars.draw.timing && vars.zoom.scale === 1) {
 
             text
               .transition().duration(vars.draw.timing/2)
@@ -24078,8 +24051,7 @@ module.exports = function(vars,selection,enter,exit) {
     }
     else {
 
-      paths.exit().attr("opacity", 0)
-        .remove();
+      paths.exit().remove();
 
       paths.enter().append("path")
         .attr("class","d3plus_line")
@@ -24094,6 +24066,8 @@ module.exports = function(vars,selection,enter,exit) {
         .attr("id",function(d){
           return d.d3plus.id;
         });
+
+      rects.exit().remove();
 
       rects.call(update)
         .call(shapeStyle,vars);
@@ -26761,7 +26735,7 @@ module.exports = function(vars) {
     });
     text.exit().transition().duration(vars.draw.timing).attr("opacity", 0).remove();
     brush = d3.svg.brush().x(x).extent(brushExtent).on("brush", brushed).on("brushend", brushend);
-    if (vars[vars.axes.discrete].value === vars.time.value) {
+    if (vars.axes.discrete && vars[vars.axes.discrete].value === vars.time.value) {
       tickColor = vars[vars.axes.discrete].ticks.color;
     } else {
       tickColor = vars.x.ticks.color;
@@ -27144,68 +27118,57 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/bounds.js":[function(require,module,exports){
-var labels = require("./labels.coffee"),
-    transform = require("./transform.coffee");
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/bounds.coffee":[function(require,module,exports){
+var labels, transform;
 
-module.exports = function( vars , b , timing ) {
+labels = require("./labels.coffee");
 
+transform = require("./transform.coffee");
+
+module.exports = function(vars, b, timing) {
+  var aspect, extent, fit, max_scale, min, padding, scale, translate, type;
   if (!b) {
     b = vars.zoom.bounds;
   }
-
   if (typeof timing !== "number") {
     timing = vars.timing.transitions;
   }
-
   vars.zoom.size = {
-    "height": b[1][1]-b[0][1],
-    "width": b[1][0]-b[0][0]
+    height: b[1][1] - b[0][1],
+    width: b[1][0] - b[0][0]
   };
-
-  var fit = vars.coords.fit.value, aspect;
-  if (fit == "auto" || vars.types[vars.type.value].requirements.indexOf("coords") < 0) {
-    aspect = d3.max([vars.zoom.size.width/vars.width.viz,vars.zoom.size.height/vars.height.viz]);
+  type = vars.types[vars.type.value];
+  fit = vars.coords.fit.value;
+  if (fit === "auto" || type.requirements.indexOf("coords") < 0) {
+    aspect = d3.max([vars.zoom.size.width / vars.width.viz, vars.zoom.size.height / vars.height.viz]);
+  } else {
+    aspect = vars.zoom.size[fit] / vars["app_" + fit];
   }
-  else {
-    aspect = vars.zoom.size[fit]/vars["app_"+fit];
+  min = d3.min([vars.width.viz, vars.height.viz]);
+  padding = type.zoom ? vars.coords.padding * 2 : 0;
+  scale = ((min - padding) / min) / aspect;
+  extent = vars.zoom.behavior.scaleExtent();
+  if (extent[0] === extent[1] || b === vars.zoom.bounds) {
+    vars.zoom.behavior.scaleExtent([scale, scale * 16]);
   }
-
-  var min = d3.min([vars.width.viz,vars.height.viz]);
-
-  var padding = vars.types[vars.type.value].zoom ? vars.coords.padding*2 : 0;
-
-  var scale = ((min-padding) / min) / aspect;
-
-  var extent = vars.zoom.behavior.scaleExtent();
-
-  if (extent[0] == extent[1] || b == vars.zoom.bounds) {
-    vars.zoom.behavior.scaleExtent([scale,scale*16]);
-  }
-
-  var max_scale = vars.zoom.behavior.scaleExtent()[1];
+  max_scale = vars.zoom.behavior.scaleExtent()[1];
   if (scale > max_scale) {
     scale = max_scale;
   }
   vars.zoom.scale = scale;
-
-  var translate = [];
-
-  translate[0] = vars.width.viz/2-(vars.zoom.size.width*scale)/2-(b[0][0]*scale);
-  translate[1] = vars.height.viz/2-(vars.zoom.size.height*scale)/2-(b[0][1]*scale);
-
+  translate = [vars.width.viz / 2 - (vars.zoom.size.width * scale) / 2 - (b[0][0] * scale), vars.height.viz / 2 - (vars.zoom.size.height * scale) / 2 - (b[0][1] * scale)];
   vars.zoom.translate = translate;
   vars.zoom.behavior.translate(translate).scale(scale);
-
   vars.zoom.size = {
-    "height": vars.zoom.bounds[1][1]-vars.zoom.bounds[0][1],
-    "width": vars.zoom.bounds[1][0]-vars.zoom.bounds[0][0]
+    height: vars.zoom.bounds[1][1] - vars.zoom.bounds[0][1],
+    width: vars.zoom.bounds[1][0] - vars.zoom.bounds[0][0]
   };
-
+  vars.zoom.reset = false;
   labels(vars);
-  transform(vars,timing);
-
+  return transform(vars, timing);
 };
+
+
 
 },{"./labels.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/labels.coffee","./transform.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/direction.coffee":[function(require,module,exports){
 module.exports = function(data, vars) {
@@ -30286,9 +30249,9 @@ module.exports = function(vars, opts) {
     vars[axis].reset = false;
     if (vars[axis].value === vars.time.value) {
       axisStyle = {
-        "font-family": vars[axis].label.font.family.value,
-        "font-weight": vars[axis].label.font.weight,
-        "font-size": vars[axis].label.font.size + "px"
+        "font-family": vars[axis].ticks.font.family.value,
+        "font-weight": vars[axis].ticks.font.weight,
+        "font-size": vars[axis].ticks.font.size + "px"
       };
       timeReturn = timeDetect(vars, {
         values: vars[axis].ticks.values,
@@ -30348,7 +30311,7 @@ labelPadding = function(vars) {
     "font-family": vars.y.ticks.font.family.value,
     "font-weight": vars.y.ticks.font.weight
   };
-  yValues = vars.x.ticks.visible;
+  yValues = vars.y.ticks.visible;
   if (vars.y.scale.value === "log") {
     yText = yValues.map(function(d) {
       return formatPower(d);
@@ -30378,7 +30341,7 @@ labelPadding = function(vars) {
   yAxisWidth = d3.max(fontSizes(yText, yAttrs), function(d) {
     return d.width;
   });
-  yAxisWidth = Math.round(yAxisWidth + vars.labels.padding);
+  yAxisWidth = Math.ceil(yAxisWidth + vars.labels.padding);
   vars.axes.margin.left += yAxisWidth;
   yLabel = vars.y.label.fetch(vars);
   if (yLabel) {
@@ -30461,12 +30424,18 @@ labelPadding = function(vars) {
   vars.x.ticks.hidden = false;
   vars.x.ticks.baseline = "auto";
   if (xAxisWidth <= xMaxWidth) {
-    xAxisWidth += vars.labels.padding;
     vars.x.ticks.rotate = 0;
   } else if (xAxisWidth < vars.axes.height / 2) {
-    xAxisWidth = xAxisHeight;
+    xSizes = fontSizes(xText, xAttrs, {
+      mod: function(elem) {
+        return textwrap().container(d3.select(elem)).width(vars.axes.height / 2).height(xMaxWidth).draw();
+      }
+    });
     xAxisHeight = d3.max(xSizes, function(d) {
       return d.width;
+    });
+    xAxisWidth = d3.max(xSizes, function(d) {
+      return d.height;
     });
     vars.x.ticks.rotate = -90;
   } else {
@@ -30475,8 +30444,10 @@ labelPadding = function(vars) {
     xAxisWidth = 0;
     xAxisHeight = 0;
   }
-  xAxisHeight = Math.round(xAxisHeight);
-  xAxisWidth = Math.round(xAxisWidth);
+  xAxisHeight = Math.ceil(xAxisHeight);
+  xAxisWidth = Math.ceil(xAxisWidth);
+  vars.x.ticks.maxHeight = xAxisHeight;
+  vars.x.ticks.maxWidth = xAxisWidth;
   vars.axes.margin.bottom += xAxisHeight + vars.labels.padding;
   lastTick = vars.x.ticks.visible[vars.x.ticks.visible.length - 1];
   rightLabel = vars.x.scale.viz(lastTick);
@@ -30497,8 +30468,6 @@ labelPadding = function(vars) {
   } else {
     vars.x.label.height = 0;
   }
-  vars.x.ticks.maxWidth = xMaxWidth;
-  vars.x.ticks.maxHeight = xAxisHeight;
   if (vars.x.label.value) {
     vars.axes.margin.bottom += vars.x.label.height;
     vars.axes.margin.bottom += vars.x.label.padding * 2;
@@ -30567,7 +30536,7 @@ textwrap = require("../../../../../textwrap/textwrap.coffee");
 validObject = require("../../../../../object/validate.coffee");
 
 module.exports = function(vars) {
-  var affixes, alignMap, axis, axisData, axisLabel, bg, bgStyle, d, domain, domains, getFontStyle, grid, gridData, label, labelData, labelStyle, line, lineData, lineFont, lineGroup, lineRects, lineStyle, lines, linetexts, mirror, plane, planeTrans, position, rectData, rectStyle, rotated, sep, textData, textPad, textPos, tickFont, tickPosition, tickStyle, xAxis, xEnter, xStyle, xmod, yAxis, yEnter, yStyle, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
+  var affixes, alignMap, axis, axisData, axisLabel, bg, bgStyle, d, domain, domains, getFontStyle, grid, gridData, label, labelData, labelStyle, line, lineData, lineFont, lineGroup, lineRects, lineStyle, lines, linetexts, mirror, plane, planeTrans, position, rectData, rectStyle, rotated, sep, textData, textPad, textPos, tickFont, tickPosition, tickStyle, xAxis, xEnter, xStyle, yAxis, yEnter, yStyle, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
   domains = vars.x.domain.viz.concat(vars.y.domain.viz);
   if (domains.indexOf(void 0) >= 0) {
     return null;
@@ -30711,14 +30680,27 @@ module.exports = function(vars) {
     return "M " + w + " " + h + " L 0 " + h + " L " + w + " 0 Z";
   });
   rotated = vars.x.ticks.rotate !== 0;
-  xmod = rotated ? vars.x.ticks.size / 2 : 0;
   xStyle = function(axis) {
-    return axis.attr("transform", "translate(0," + vars.axes.height + ")").call(vars.x.axis.svg.scale(vars.x.scale.viz)).selectAll("g.tick").select("text").attr("dy", "").style("text-anchor", rotated ? "end" : "middle").call(tickFont, "x").each("end", function(d) {
+    var groups;
+    groups = axis.attr("transform", "translate(0," + vars.axes.height + ")").call(vars.x.axis.svg.scale(vars.x.scale.viz)).selectAll("g.tick");
+    groups.selectAll("line").attr("y2", function(d) {
+      var y2;
+      if (d.constructor === Date) {
+        d = +d;
+      }
+      y2 = d3.select(this).attr("y2");
+      if (vars.x.ticks.visible.indexOf(d) >= 0) {
+        return y2;
+      } else {
+        return y2 / 2;
+      }
+    });
+    return groups.select("text").attr("dy", "").style("text-anchor", rotated ? "end" : "middle").call(tickFont, "x").each("end", function(d) {
       if (d.constructor === Date) {
         d = +d;
       }
       if (!vars.x.ticks.hidden && vars.x.ticks.visible.indexOf(d) >= 0) {
-        return textwrap().container(d3.select(this)).height(vars.x.ticks.maxHeight).rotate(vars.x.ticks.rotate).valign(rotated ? "middle" : "top").width(vars.x.ticks.maxWidth).x(-vars.x.ticks.maxWidth / 2 - xmod).draw();
+        return textwrap().container(d3.select(this)).rotate(vars.x.ticks.rotate).valign(rotated ? "middle" : "top").width(vars.x.ticks.maxWidth).height(vars.x.ticks.maxHeight).padding(0).x(-vars.x.ticks.maxWidth / 2).draw();
       }
     });
   };
@@ -30730,7 +30712,21 @@ module.exports = function(vars) {
   xEnter.selectAll("line").call(tickStyle, "x");
   xAxis.exit().transition().duration(vars.data.timing).attr("opacity", 0).remove();
   yStyle = function(axis) {
-    return axis.call(vars.y.axis.svg.scale(vars.y.scale.viz)).selectAll("g.tick").select("text").call(tickFont, "y");
+    var groups;
+    groups = axis.call(vars.y.axis.svg.scale(vars.y.scale.viz)).selectAll("g.tick");
+    groups.selectAll("line").attr("y2", function(d) {
+      var y2;
+      if (d.constructor === Date) {
+        d = +d;
+      }
+      y2 = d3.select(this).attr("y2");
+      if (vars.x.ticks.visible.indexOf(d) >= 0) {
+        return y2;
+      } else {
+        return y2 / 2;
+      }
+    });
+    return groups.select("text").call(tickFont, "y");
   };
   yAxis = plane.selectAll("g#d3plus_graph_yticks").data(axisData);
   yAxis.transition().duration(vars.draw.timing).call(yStyle);
