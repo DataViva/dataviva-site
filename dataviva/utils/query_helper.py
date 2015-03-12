@@ -10,6 +10,8 @@ LEN='_len'
 OR='_'
 
 def bra_profiles(bra_ids):
+    if not bra_ids:
+        return []
     return Bra.query.filter(Bra.id.in_(bra_ids)).all()
 
 def parse_value(column, value):
