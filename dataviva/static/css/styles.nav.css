@@ -436,4 +436,5 @@ a#search {
 .searchResult .search_text * {
   display: block !important;
   margin-left: 6px !important;
+  width: 350px !important;
 }
