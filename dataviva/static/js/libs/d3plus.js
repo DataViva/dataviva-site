@@ -18422,7 +18422,7 @@ module.exports = function(obj1, obj2) {
     _results = [];
     for (k in obj) {
       v = obj[k];
-      if (!(typeof v === "undefined" || k.indexOf("d3plus") === 0)) {
+      if (typeof v !== "undefined") {
         if (validate(v)) {
           if (typeof ret[k] !== "object") {
             ret[k] = {};

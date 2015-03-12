@@ -75,6 +75,24 @@ div.filter_button > div.leon.button {
   opacity: 0.5;
 }
 
+div#controls #required_bras {
+  color: #888;
+  display: inline-block;
+  font-size: 12px;
+  margin: 6px;
+  padding: 5px;
+}
+
+div#controls #required_bras:hover {
+  color: black;
+  cursor: pointer;
+}
+
+div#controls #required_bras i {
+  margin-left: 5px;
+  margin-top: 2px;
+}
+
 #settings > #starred > #status_-1 {
   color: #333;
 }

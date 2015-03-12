@@ -223,6 +223,8 @@ def dictionary():
         "elsewhere": gettext("Employees Available In Other Industries"),
         "required": gettext("Estimated Employees"),
         "required_desc": gettext("The estimated number of employees per establishment needed in order to have a successful establishment in an industry in a particular location."),
+        "required_bras": gettext("Similar Locations"),
+        "required_bras_desc": gettext("These are the locations that were used to calculate the number of Estimated Employees for this location:"),
         "growth_val": gettext("Wage Growth"),
         "growth_val_total": gettext("Cumulative Wage Growth"),
         "proximity": gettext("Proximity"),

@@ -960,6 +960,23 @@
                 },"/"+app.build.else_url)
               }
 
+              var url = app.build.data_url.split("/");
+              url[3] = url[3] + ".show." + url[3].length;
+              url[4] = "all";
+              url[5] = "?required_bras=true";
+              app.build.bra_prox = url.join("/");
+
+              if (!app.data[app.build.bra_prox]) {
+                q.defer(function(u,callback){
+                  d3.json(u)
+                  .header("X-Requested-With", "XMLHttpRequest")
+                  .get(function(error,d){
+                    app.data[app.build.bra_prox] = d.data
+                    callback(error,d)
+                  })
+                },"/"+app.build.bra_prox)
+              }
+
             }
 
             q.awaitAll(app.finish)
@@ -1110,10 +1127,6 @@
       			.on(d3plus.client.pointer.out,function(){
       			  dataviva.ui.tooltip("alt_tooltip",false)
       			})
-            // .html("<i class='fa fa-play'></i>"+dataviva.format.text("Show All Years"))
-            // .on(d3plus.client.pointer.click, function(){
-            //   app.start(app.url,true);
-            // })
 
         d3plus.form()
           .container(year)
@@ -1127,6 +1140,32 @@
           })
           .ui({"margin": 0})
           .draw()
+
+      }
+
+      if (app.build.bra_prox && app.data[app.build.bra_prox].length) {
+
+        var text = dataviva.format.text("required_bras_desc") + " "
+        app.data[app.build.bra_prox].forEach(function(b, i){
+          if (i) text += ", ";
+          if (i === app.data[app.build.bra_prox].length - 1) {
+            text += dataviva.format.text("and") + " ";
+          }
+          text += b.name;
+        })
+
+        d3.select("#controls").append("div")
+            .attr("class","ui_group alt_tooltip")
+            .attr("id", "required_bras")
+            .attr("alt", text)
+            .on(d3plus.client.pointer.over,function(){
+      			  dataviva.ui.tooltip("alt_tooltip",this)
+      			})
+      			.on(d3plus.client.pointer.out,function(){
+      			  dataviva.ui.tooltip("alt_tooltip",false)
+      			})
+            .text( dataviva.format.text("required_bras"))
+            .append("i").attr("class", "fa fa-location-arrow")
 
       }
 
