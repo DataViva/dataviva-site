@@ -85,7 +85,7 @@
       </div>
       {%- endfor %}
       {%- for f in filters %}
-      <div class="output_nesting {{ f.id }}" {% if output.output_filter.id != f.id %}style="display:none;"{% endif %}>
+      <div class="{{ f.datasets }} output_nestings {{ f.id }}" {% if output.output_filter.id != f.id %}style="display:none;"{% endif %}>
         <legend for="output_nesting_{{ f.id }}">{% trans %}Depth{% endtrans %}</legend>
         <select id="output_nesting_{{ f.id }}">
           {%- for n in f.nestings %}
@@ -212,7 +212,11 @@ d3.selectAll(".output_nesting select")
       .draw();
   })
 
-//
+// d3.selectAll(".output_filters select").on("change", function(){
+//   d3.selectAll(".output_nestings").style("display", "none");
+//   d3.select(".output_nestings."+this.value).style("display", "block");
+// })
+// 
 d3.select("#go").on("click", function(){
   var url = make_url();
   console.log(url);
@@ -233,10 +237,14 @@ function show_hide_filters(filter){
   d3.selectAll(".month").style("display", "none");
   // only show what pertains
   d3.selectAll(".filters ."+filter).style("display", "inline-block");
-  d3.selectAll(".selected_filter."+filter).style("display", "block");
+  d3.selectAll(".selected_filters ."+filter).style("display", "block");
   d3.selectAll(".output_filters."+filter).style("display", "inline-block");
   d3.selectAll(".year."+filter).style("display", "inline-block");
   d3.selectAll(".month."+filter).style("display", "inline-block");
+  // special case for displaying proper nesting dropdown
+  var current_output = d3.select(".output_filters."+filter+" select").property("value");
+  d3.selectAll(".output_nestings").style("display", "none");
+  d3.selectAll(".output_nestings."+current_output).style("display", "block");
 }
 function make_url(){
   var urls = {
@@ -244,14 +252,14 @@ function make_url(){
     "secex": {"format":"/secex/<time>/<bra>/<hs>/<wld>/", "filters":["bra", "hs", "wld"], "time":["year", "month"]},
     "hedu": {"format":"/hedu/<time>/<bra>/<university>/<course_hedu>/", "filters":["bra", "university", "course_hedu"], "time":["year"]},
     "sc": {"format":"/sc/<time>/<bra>/all/<course_sc>/", "filters":["bra", "course_sc"], "time":["year"]},
-    "ei": {"format":"/ei/<time>/<bra_r>/<bra_s>/all/", "filters":["bra_r", "bra_s"], "time":["year", "month"]},
+    "ei": {"format":"/ei/<time>/<bra_r>/<bra_s>/", "filters":["bra_r", "bra_s"], "time":["year", "month"]},
   }
 
   var current_dataset = d3.select(".datasets select").property("value");
   var current_url = urls[current_dataset];
   var current_output = d3.select(".output_filters."+current_dataset+" select").property("value");
-  var current_nesting = d3.select(".output_nesting."+current_output+" select").property("value");
-
+  var current_nesting = d3.select(".output_nestings."+current_output+" select").property("value");
+  
   var time = []
   current_url.time.forEach(function(t){
     var t = d3.selectAll("."+t+"."+current_dataset+" select").property("value");
@@ -262,7 +270,8 @@ function make_url(){
 
   current_url.filters.forEach(function(f){
     filters = []
-    d3.selectAll(".selected_filters p[data-type='"+f+"']").each(function(){
+    console.log(".selected_filters div[data-type='"+f+"']")
+    d3.selectAll(".selected_filters div[data-type='"+f+"']").each(function(){
       filters.push(d3.select(this).attr("data-value"))
     })
     if(filters.length){
@@ -282,7 +291,7 @@ function make_url(){
       }
     }
   })
-
+  
   return current_url.format;
 }
 function table_size() {

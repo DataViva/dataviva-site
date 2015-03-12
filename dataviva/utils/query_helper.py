@@ -1,13 +1,16 @@
 import re
 from dataviva import db
 from sqlalchemy import func, desc
-from dataviva.attrs.models import bra_pr
+from dataviva.attrs.models import bra_pr, Bra
 
 SHOW='show'
 SHOW2='.show.'
 ALL='all'
 LEN='_len'
 OR='_'
+
+def bra_profiles(bra_ids):
+    return Bra.query.filter(Bra.id.in_(bra_ids)).all()
 
 def parse_value(column, value):
     if OR in str(value):

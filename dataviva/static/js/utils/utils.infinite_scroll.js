@@ -45,7 +45,7 @@ function infinite_scroll(selection){
         if(isNaN(offset)){
           offset = 0;
         }
-        console.log(done, fetching, offset, loading_div_y-50, innerHeight, refresh)
+        // console.log(done, fetching, offset, loading_div_y-50, innerHeight, refresh)
         if ((!done && !fetching && offset >= 0 && loading_div_y-50 < innerHeight) || refresh) {
           fetch();
         }
