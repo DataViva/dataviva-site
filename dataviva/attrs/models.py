@@ -12,8 +12,26 @@ from dataviva.stats.util import parse_year
 from dataviva.attrs.abstract_models import BasicAttr, ExpandedAttr
 
 
-''' A Mixin class for retrieving quick stats about a particular attribute'''
+class Search(db.Model):
+    __tablename__ = 'attrs_search'
+    id = db.Column(db.String(9), primary_key=True)
+    kind = db.Column(db.String(9), primary_key=True)
 
+    weight = db.Column(db.Float())
+    name_en =  db.Column(db.String(200))
+    name_pt =  db.Column(db.String(200))
+    color =  db.Column(db.String(7))
+
+    def serialize(self, pt=False):
+        return {
+            "color": self.color,
+            "content_type": self.kind,
+            "id": self.id,
+            "name" : self.name_en if not pt else self.name_pt
+        }
+
+    def __repr__(self):
+        return "<SearchAttr {} {}>".format(self.id, self.kind)
 
 class Cnae(db.Model, AutoSerialize, ExpandedAttr):
 

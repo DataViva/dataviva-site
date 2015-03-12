@@ -4,7 +4,7 @@ from sqlalchemy import func, distinct, asc, desc, and_, or_
 from flask import Blueprint, request, jsonify, abort, g, render_template, make_response, redirect, url_for, flash
 
 from dataviva import db, __year_range__, view_cache
-from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University, School, bra_pr
+from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University, School, bra_pr, Search
 from dataviva.secex.models import Ymp, Ymw
 from dataviva.rais.models import Yi, Yo
 from dataviva.hedu.models import Yu, Yc_hedu
@@ -272,164 +272,10 @@ def attrs_table(attr="bra",depth="2"):
 @mod.route('/search/<term>/')
 @view_cache.cached(timeout=86400, key_prefix=api_cache_key("search"))
 def attrs_search(term=None):
-    # Dictionary
-    bra_query = {}
-    cbo_query = {}
-    cnae_query = {}
-    hs_query = {}
-    question_query = {}
-    wld = {}
-    course_hedu_query = {}
-    course_sc_query = {}
-    lang = request.args.get('lang', None) or g.locale
     result = []
-
-
-    bra = Bra.query.filter(or_(Bra.id == term, or_(Bra.name_pt.ilike("%"+term+"%"), Bra.name_en.ilike("%"+term+"%"))))
-    items = bra.join(Yb).order_by(desc("population")).limit(50).all()
-    items = [i.serialize() for i in items]
-
-    for i in items:
-        bra_query = {}
-        bra_query["id"] = i["id"]
-        bra_query["name_pt"] = i["name_pt"]
-
-        if i["id"] == "bra":
-            icon = "all"
-        else:
-            icon = i["id"][0:2]
-
-        bra_query["icon"] = "/static/images/icons/bra/bra_" + icon
-        bra_query["name_en"] = i["name_en"]
-        bra_query["color"] = i["color"]
-        bra_query["content_type"] = "bra"
-        bra_query = fix_name(bra_query, lang)
-        result.append(bra_query)
-
-    if lang == "pt":
-        cbo = Cbo.query.filter(or_(Cbo.id == term, Cbo.name_pt.ilike("%"+term+"%")))
-    else:
-        cbo = Cbo.query.filter(or_(Cbo.id == term, Cbo.name_en.ilike("%"+term+"%")))
-
-    items = cbo.join(Yo).order_by(desc("num_emp")).limit(50).all()
-    items = [i.serialize() for i in items]
-
-    for i in items:
-        cbo_query = {}
-        cbo_query["id"] = i["id"]
-        cbo_query["name_pt"] = i["name_pt"]
-        cbo_query["name_en"] = i["name_en"]
-        cbo_query["color"] = i["color"]
-        cbo_query["content_type"] = "cbo"
-        cbo_query = fix_name(cbo_query, lang)
-        result.append(cbo_query)
-
-    cnae_match = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u"]
-
-    if lang == "pt":
-        cnae = Cnae.query.filter(and_(Cnae.name_pt.ilike("%"+term+"%"), Cnae.id.in_(cnae_match)))
-    else:
-        cnae = Cnae.query.filter(and_(Cnae.name_en.ilike("%"+term+"%"), Cnae.id.in_(cnae_match)))
-
-    items = cnae.join(Yi).order_by(desc("num_emp")).limit(50).all()
-    items = [i.serialize() for i in items]
-
-    for i in items:
-        cnae_query = {}
-        cnae_query["id"] = i["id"]
-        cnae_query["name_pt"] = i["name_pt"]
-        cnae_query["name_en"] = i["name_en"]
-        cnae_query["color"] = i["color"]
-        cnae_query["content_type"] = "cnae"
-        cnae_query = fix_name(cnae_query, lang)
-        result.append(cnae_query)
-
-    if lang == "pt":
-        hs = Hs.query.filter(or_(Hs.id.like("%"+term+"%"), Hs.name_pt.like("%"+term+"%")))
-    else:
-        hs = Hs.query.filter(or_(Hs.id.like("%"+term+"%"), Hs.name_en.ilike("%"+term+"%")))
-
-    items = hs.join(Ymp).order_by(desc("export_val")).limit(50).all()
-    items = [i.serialize() for i in items]
-
-    for i in items:
-        hs_query = {}
-        hs_query["id"] = i["id"]
-        hs_query["name_pt"] = i["name_pt"]
-        hs_query["name_en"] = i["name_en"]
-        hs_query["color"] = i["color"]
-        hs_query["content_type"] = "hs"
-        hs_query = fix_name(hs_query,lang)
-        result.append(hs_query)
-
-
-    if lang == "pt":
-        wld = Wld.query.filter(or_(Wld.id == term, Wld.name_pt.like("%"+term+"%")))
-    else:
-        wld = Wld.query.filter(or_(Wld.id == term, Wld.name_en.like("%"+term+"%")))
-
-    items = wld.join(Ymw).order_by(desc("export_val")).limit(50).all()
-    items = [i.serialize() for i in items]
-
-    for i in items:
-        wld_query = {}
-        wld_query["id"] = i["id"]
-        wld_query["name_pt"] = i["name_pt"]
-        wld_query["name_en"] = i["name_en"]
-        wld_query["color"] = i["color"]
-        wld_query["content_type"] = "wld"
-        wld_query = fix_name(wld_query, lang)
-        result.append(wld_query)
-
-    # Majors
-    if lang == "pt":
-        major = Course_hedu.query.filter(or_(Course_hedu.id == term, Course_hedu.name_pt.like("%"+term+"%")))
-    else:
-        major = Course_hedu.query.filter(or_(Course_hedu.id == term, Course_hedu.name_en.like("%"+term+"%")))
-    items = major.join(Yc_hedu).order_by(desc("enrolled")).limit(50).all()
-    items = [i.serialize() for i in items]
-    for i in items:
-        course_hedu_query = {}
-        course_hedu_query["id"] = i["id"]
-        course_hedu_query["name_pt"] = i["name_pt"]
-        course_hedu_query["name_en"] = i["name_en"]
-        course_hedu_query["color"] = i["color"]
-        course_hedu_query["content_type"] = "course_hedu"
-        course_hedu_query = fix_name(course_hedu_query, lang)
-        result.append(course_hedu_query)
-
-    # Vocational Courses
-    if lang == "pt":
-        major = Course_sc.query.filter(or_(Course_sc.id == term, Course_sc.name_pt.like("%"+term+"%")))
-    else:
-        major = Course_sc.query.filter(or_(Course_sc.id == term, Course_sc.name_en.like("%"+term+"%")))
-    items = major.join(Yc_sc).order_by(desc("enrolled")).limit(50).all()
-    items = [i.serialize() for i in items]
-    for i in items:
-        course_sc_query = {}
-        course_sc_query["id"] = i["id"]
-        course_sc_query["name_pt"] = i["name_pt"]
-        course_sc_query["name_en"] = i["name_en"]
-        course_sc_query["color"] = i["color"]
-        course_sc_query["content_type"] = "course_sc"
-        course_sc_query = fix_name(course_sc_query, lang)
-        result.append(course_sc_query)
-
-    question = Question.query.filter(and_(Question.language == lang, or_(Question.question.ilike("%"+term+"%"), Question.body.ilike("%"+term+"%"))))
-
-    items = question.limit(50).all()
-    items = [i.serialize() for i in items]
-
-    for i in items:
-        question_query = {}
-        question_query["id"] = i["slug"]
-        question_query["name"] = i["question"]
-        question_query["color"] = '#D67AB0'
-        question_query["content_type"] = "learnmore"
-        question_query = fix_name(question_query, lang)
-        result.append(question_query)
-
-
+    lang = request.args.get('lang', 'en') or g.locale
+    name_col = Search.name_en if lang == 'en' else Search.name_pt
+    profiles = Search.query.filter(name_col.like('%{}%'.format(term))).order_by(Search.weight.desc()).limit(20)
+    result = [p.serialize() for p in profiles]
     ret = jsonify({"activities":result})
-
     return ret
