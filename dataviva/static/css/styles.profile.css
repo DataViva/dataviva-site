@@ -78,6 +78,7 @@ table.stat_table {
   font-size: 12px;
   padding: 3px 6px;
   position: relative;
+  width: 100%;
 }
 
 table.stat_table a {
