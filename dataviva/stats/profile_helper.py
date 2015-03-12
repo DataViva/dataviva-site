@@ -124,7 +124,7 @@ def cbo_stats(pobj, rais_year):
 
 def hs_stats(pobj, secex_year):
     stats =[]
-    group = '{} Stats ({}):'.format(rais_year, "SECEX")
+    group = '{} Stats ({}):'.format(secex_year, "SECEX")
     five_years_ago = secex_year - 5
 
     filters = [Ymbp.year == secex_year, Ymbp.month == 0, Ymbp.hs_id == pobj.id, Ymbp.bra_id_len == 9]
