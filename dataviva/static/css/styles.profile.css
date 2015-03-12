@@ -63,38 +63,16 @@ div#guide_title {
   width: 170px;
 }
 
-div#guide_stats {
-  margin-bottom: 5px;
-}
-
-div.d3plus_tooltip_data_title {
+div.group_title {
+  color: #333;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
   margin-top: 5px;
+  padding: 6px 3px;
 }
 
-div.d3plus_tooltip_data_name {
-  width: 110px;
-}
-
-div.d3plus_tooltip_data_name {
-  display: inline-block;
-}
-
-div.d3plus_tooltip_data_value {
-  display: block;
-  position: absolute;
-  right: 6px;
-  text-align: right;
-  top: 3px;
-}
-
-div.d3plus_tooltip_data_seperator {
-  background-color: #ddd;
-  display: block;
-  height: 1px;
-  margin: 0px 3px;
-}
-
-div.d3plus_tooltip_data_block {
+table.stat_table {
   color: #333;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
@@ -102,26 +80,28 @@ div.d3plus_tooltip_data_block {
   position: relative;
 }
 
-div.d3plus_tooltip_data_block a {
+table.stat_table a {
   color: #000;
   text-decoration: underline;
 }
-div.d3plus_tooltip_data_block a:hover {
+table.stat_table a:hover {
   text-decoration: none;
 }
 
-div.d3plus_tooltip_data_title {
-  color: #333;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 6px 3px;
+table.stat_table tr {
+  border-bottom: 1px solid #ddd;
 }
 
-div#guide_controls div.d3plus_tooltip_data_value {
-  display: inline-block;
-  position: static;
-  width: 120px;
+table.stat_table tr:last-child {
+  border-bottom: 0;
+}
+
+table.stat_table td {
+  padding: 3px 6px;
+}
+
+table.stat_table td:last-child {
+  text-align: right;
 }
 
 div.guide_app {

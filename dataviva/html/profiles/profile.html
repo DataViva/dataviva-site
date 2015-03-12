@@ -18,7 +18,7 @@
         display: inline-block;
         font-size: 12px;
         float: left;
-        padding: 3px 4px 4px 12px;
+        padding: 3px 4px 4px 6px;
       }
 
       .build_title:hover {
@@ -42,7 +42,7 @@
     {% set counter = 1 %}
     {% for group in builds %}
       {% if group.title %}
-        <div class="d3plus_tooltip_data_title">{{ group.title }}</div>
+        <div class="group_title">{{ group.title }}</div>
       {% endif %}
       {% for build in group.builds %}
         <div class="build_btn" data-build="{{ counter + loop.index0 }}" data-lock="{{ build[0].titlelock }}">
@@ -55,36 +55,36 @@
       {% set counter = counter + group.builds|length %}
     {% endfor %}
 
-    <div class="d3plus_tooltip_data_container" id="guide_stats">
+    <div id="guide_stats">
       {% set last_group = "" %}
       {% for stat in stats %}
         {% if last_group != stat.group %}
-          <div class="d3plus_tooltip_data_title">
+          {% if loop.index != 1 %}</table>{% endif %}
+          <div class="group_title">
             {# {{ format(stat.group).render(stat.group) }} #}
             {{ stat.group }}
           </div>
+          <table class="stat_table">
           {% set last_group = stat.group %}
         {% endif %}
-        <div class="d3plus_tooltip_data_block">
-          <div class="d3plus_tooltip_data_name">
-            {# {{ format(stat.name).render(stat.name) }} #}
-            {{ stat.name }}
-          </div>
-          <div class="d3plus_tooltip_data_value">
-            {% if stat.url %}
-              <a href="{{ stat.url }}">
-            {% endif %}
+          <tr>
+            <td>
               {# {{ format(stat.name).render(stat.name) }} #}
-              {{ format(stat.desc).render(stat.mode) }}
-            {% if stat.url %}
-              </a>
-            {% endif %}
-            {% if stat.value %} ({{ format(stat.value).render(stat.mode) }}){% endif %}
-          </div>
-        </div>
-        {% if loop.last == False and stat.group == stats[loop.index].group %}
-          <div class="d3plus_tooltip_data_seperator"></div>
-        {% endif %}
+              {{ stat.name }}
+            </td>
+            <td>
+              {% if stat.url %}
+                <a href="{{ stat.url }}">
+              {% endif %}
+                {# {{ format(stat.name).render(stat.name) }} #}
+                {{ format(stat.desc).render(stat.mode) }}
+              {% if stat.url %}
+                </a>
+              {% endif %}
+              {% if stat.value %} ({{ format(stat.value).render(stat.mode) }}){% endif %}
+            </td>
+          </tr>
+        {% if loop.index == stats|length %}</table>{% endif %}
       {% endfor %}
     </div>
 
