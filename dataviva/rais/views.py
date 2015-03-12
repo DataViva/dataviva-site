@@ -1,6 +1,7 @@
 import StringIO, csv
 from flask import Blueprint, request, jsonify, Response
 from dataviva import db
+from dataviva.attrs.models import Bra
 from dataviva.rais.models import Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio
 from dataviva.utils import table_helper, query_helper
 from dataviva.utils.gzip_data import gzipped
@@ -34,14 +35,23 @@ def rais_api(**kwargs):
 
     columns = []
     if not required_bras:
-       columns = [c for c in table.__table__.columns if c.key != 'required_bras']
+        columns = [c for c in table.__table__.columns if c.key != 'required_bras']
+    elif kwargs["year"] != "2013":
+        # TODO: Remove this elif when all years are available
+        return jsonify(data=[])
 
     results = query_helper.query_table(table, columns=columns, filters=filters, groups=groups, limit=limit, order=order, sort=sort, offset=offset, serialize=serialize)
 
     if required_bras and table is Ybi and results['data']:
         required_idx = results['headers'].index(Ybi.required_bras.key)
         bras = results['data'][0][required_idx]
-        results = [bra.serialize() for bra in query_helper.bra_profiles(bras)]
+        if not bras:
+            return jsonify(data=[])
+        results = []
+        for bra in bras:
+            b = Bra.query.get(bra)
+            if b:
+                results.append(b.serialize())
         return jsonify(data=results)
 
     if table is Ybi:
