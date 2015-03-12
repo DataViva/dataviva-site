@@ -264,215 +264,71 @@
     })
 
     find_search = function(search, el) {
+
       var results_el = d3.select(el.parentNode).select(".searchResult").html("")
-  	if ( search !== "" ) {
+    	if (search !== "") {
 
-	    d3.json("/attrs/search/"+search+"/")
-	      .header("Content-type", "application/json")
-	      .send("GET", '', function(error, text) {
+  	    d3.json("/attrs/search/"+search+"/")
+  	      .header("Content-type", "application/json")
+  	      .send("GET", '', function(error, text) {
 
-          var litems = ""
-            , type_curr = "", $ct_bra = 1, $ct_cbo = 1, $ct_cnae = 1, $ct_hs = 1, $ct_wld = 1, $ct_course_hedu = 1, $ct_course_sc = 1;
+            if (!error) {
 
+              text.activities = text.activities.slice(0, 20);
 
-          if (!error) {
+              text.activities.forEach(function(item){
 
-            text.activities.forEach(function(item){
+                var type = item.content_type;
 
-              var urlSearch = item.content_type+"/"+item.id
-                , exclude = false;
+                var url = "/profiles/"+item.content_type+"/"+item.id;
+                if (type === "learnmore") {
+                  url = "/about/question/"+item.id;
+                }
 
-              if (typeof item.content_type !== "undefined") {
+                item.bgcolor = item.color;
+                if ((type === "bra" && item.id.length > 1) ||
+                    (type === "wld" && item.id.length === 5)) {
+                  item.bgcolor = "none";
+                }
 
-                item.bg = item.color
+                var icon, sub;
+                if (type === "learnmore") {
+                  icon = dataviva.icon("22", "hs");
+                  sub = dataviva.format.text("learnmore");
+                }
+                else {
+                  icon = dataviva.icon(item.id, type);
+                  sub = dataviva.format.text(type) + " - " + dataviva.format.text(type+"_"+item.id.length);
+                }
 
-                if (item.content_type === "bra") {
-					if ( $ct_bra < 6 ) {
-					    if (item.id.length === 6) {
-					        exclude = true
-					    } else {
-					        type = "bra_" + item.id.length
-					        $ct_bra++;
+                var link = results_el.append("a")
+                  .attr("class","search_result")
+                  .attr("href", url);
 
+                link.append("div")
+                  .attr("class","search_icon")
+                  .style("background-image","url('"+icon+"')")
+                  .style("background-color", item.bgcolor);
 
-					        item.bg = "transparent"
+                var text = link.append("div").attr("class","search_text");
 
-					        if (item.id !== "bra") {
-					            var icon = item.id.substr(0, 3);
-					        } else {
-					            var icon = "all";
-					        }
-				    	}
-				    } else {
-				    	exclude = true
-				    }
+                text.append("div")
+                  .attr("class","search_title")
+                  .style("color", d3plus.color.legible(item.color))
+                  .text(item.name);
 
-				}
+                text.append("div")
+                  .attr("class","search_sub")
+                  .text(sub);
 
-				if (item.content_type === "cbo") {
-				    if ($ct_cbo < 6) {
-				        if (item.id.length === 1) {
-				            type = "cbo_1"
-				            icon = item.id
-				            $ct_cbo++;
-				        } else if (item.id.length === 4) {
-				            type = "cbo_4"
-				            icon = item.id.substr(0, 1)
-				            $ct_cbo++;
-				        } else {
-				            exclude = true
-				        }
-				    } else {
-				        exclude = true
-				    }
-				}
+              });
 
-				if (item.content_type === "cnae") {
-				    if ($ct_cnae < 6) {
-				        type = "cnae_" + item.id.length
-				        icon = item.id;
-				        $ct_cnae++;
-				    } else {
-				        exclude = true
-				    }
-				}
+            }
 
+  	      });
 
-				if (item.content_type === "hs") {
-
-				    if ($ct_hs < 6) {
-
-				        if (item.id.length == 2) {
-				            type = "hs_2"
-				            icon = item.id
-				            $ct_hs++;
-				        } else if (item.id.length == 6) {
-				            type = "hs_6"
-				            icon = item.id.substr(0, 2)
-				            $ct_hs++;
-				        } else {
-				            exclude = true
-
-				        }
-				    } else {
-				        exclude = true
-				    }
-
-				}
-
-				if (item.content_type === "wld") {
-				    if ($ct_wld < 6) {
-				        type = "wld_" + item.id.length
-				        icon = item.id
-
-				        if (item.id.length === 5) {
-				            item.bg = "transparent"
-				        }
-				        $ct_wld++;
-				    } else {
-				        exclude = true
-				    }
-				}
-
-				if (item.content_type === "course_hedu") {
-				    if ($ct_course_hedu < 6) {
-			        if (item.id.length == 2) {
-			            type = "course_hedu_2"
-			            icon = item.id
-  				        $ct_course_hedu++;
-			        } else if (item.id.length == 6) {
-			            type = "course_hedu_6"
-			            icon = item.id.substr(0, 2)
-  				        $ct_course_hedu++;
-			        } else {
-			            exclude = true
-			        }
-				    } else {
-				        exclude = true
-				    }
-				}
-
-				if (item.content_type === "course_sc") {
-				    if ($ct_course_sc < 6) {
-			        if (item.id.length == 2) {
-			            type = "course_sc_2"
-			            icon = item.id
-  				        $ct_course_sc++;
-			        } else if (item.id.length == 5) {
-			            type = "course_sc_5"
-			            icon = item.id.substr(0, 2)
-  				        $ct_course_sc++;
-			        } else {
-			            exclude = true
-			        }
-				    } else {
-				        exclude = true
-				    }
-				}
-
-				if (item.content_type === "learnmore") {
-
-				    type = ""
-				    icon = "icon"
-
-				}
-
-               if(exclude!=true) {
-
-                //  if (type_curr !== item.content_type) {
-                 //
-                //    results_el.append("div")
-                //      .attr("class","selector_title")
-                //      .text(dataviva.format.text(item.content_type+"_plural"))
-                 //
-                //    type_curr = item.content_type
-                 //
-                //  }
-                //  else {
-                 //
-                //    // results_el.append("div")
-                //    //   .attr("class","d3plus_tooltip_data_seperator")
-                 //
-                //  }
-
-                 var link = results_el.append("a")
-                   .attr("class","search_result");
-
-                   if(item.content_type=="learnmore") {
-                   	link.attr("href","/about/question/"+item.id)
-                   } else {
-                   	link.attr("href","/profiles/"+urlSearch)
-                   }
-
-                 link.append("div")
-                   .attr("class","search_icon")
-                   .style("background-image","url(/static/img/icons/"+item.content_type+"/"+item.content_type+"_"+icon+".png)")
-                   .style("background-color",item.bg)
-
-                 var text = link.append("div")
-                   .attr("class","search_text")
-
-                 text.append("div")
-                   .attr("class","search_title")
-                   .style("color",d3plus.color.legible(item.color))
-                   .text(item.name)
-
-                 text.append("div")
-                   .attr("class","search_sub")
-                   .text(dataviva.format.text(item.content_type) + " - " + dataviva.format.text(type))
-
-               }
-
-              }
-
-            })
-
-          }
-
-	      })
-
-      }
-    }
+        }
+    };
 
     var selected_el;
     var selected_i;

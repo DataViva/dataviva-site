@@ -413,6 +413,7 @@ def dictionary():
         "votes": gettext("Most Active"),
         "newest": gettext("Most Recent"),
         "questions": gettext("Questions"),
+        "learnmore": gettext("User Question"),
         "learnmore_plural": gettext("Learn more"),
         "flagged": gettext("This reply has been flagged."),
         "unflagged": gettext("This flag on this reply has been removed."),

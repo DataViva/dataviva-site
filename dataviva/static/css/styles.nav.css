@@ -420,13 +420,10 @@ a#search {
 	width: 445px;
 }
 
-.searchResult > .d3plus_tooltip_data_seperator {
-  margin: 0px 6px !important;
-}
-
 .searchResult > a {
   background-color: #f7f7f7;
-  margin: 0px 6px;
+  margin: 0;
+  padding: 10px;
   -webkit-transition: background-color .1s;
           transition: background-color .1s;
 }
@@ -434,7 +431,6 @@ a#search {
 .searchResult > a:hover,
 .searchResult > a.active {
   background-color: #e2e2e2;
-  margin: 0px 6px;
 }
 
 .searchResult .search_text * {
