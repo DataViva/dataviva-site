@@ -197,14 +197,14 @@ d3.selectAll(".output_filters select")
     d3plus.form()
       .data(d3.select(this))
       .focus(undefined, function(value) {
-        d3.selectAll(".output_nesting").style("display", "none");
-        d3.select(".output_nesting." + value).style("display", "inline-block");
+        d3.selectAll(".output_nestings").style("display", "none");
+        d3.select(".output_nestings." + value).style("display", "inline-block");
       })
       .type("drop")
       .draw();
   })
 
-d3.selectAll(".output_nesting select")
+d3.selectAll(".output_nestings select")
   .each(function(){
     d3plus.form()
       .data(d3.select(this))
@@ -212,11 +212,6 @@ d3.selectAll(".output_nesting select")
       .draw();
   })
 
-// d3.selectAll(".output_filters select").on("change", function(){
-//   d3.selectAll(".output_nestings").style("display", "none");
-//   d3.select(".output_nestings."+this.value).style("display", "block");
-// })
-// 
 d3.select("#go").on("click", function(){
   var url = make_url();
   console.log(url);
@@ -259,7 +254,7 @@ function make_url(){
   var current_url = urls[current_dataset];
   var current_output = d3.select(".output_filters."+current_dataset+" select").property("value");
   var current_nesting = d3.select(".output_nestings."+current_output+" select").property("value");
-  
+
   var time = []
   current_url.time.forEach(function(t){
     var t = d3.selectAll("."+t+"."+current_dataset+" select").property("value");
@@ -269,8 +264,7 @@ function make_url(){
 
 
   current_url.filters.forEach(function(f){
-    filters = []
-    console.log(".selected_filters div[data-type='"+f+"']")
+    filters = [];
     d3.selectAll(".selected_filters div[data-type='"+f+"']").each(function(){
       filters.push(d3.select(this).attr("data-value"))
     })
@@ -291,7 +285,7 @@ function make_url(){
       }
     }
   })
-  
+
   return current_url.format;
 }
 function table_size() {
