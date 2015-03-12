@@ -34,7 +34,7 @@
 
   <div id="guide_controls" class="lightbox guide_controls">
     <div id="profile_button" onclick="selector('{{category}}','{{item.id}}')">
-    	<div id="arrow_clickable"><i class="fa fa fa-list-alt"></i></div>
+        <div id="arrow_clickable"><i class="fa fa fa-list-alt"></i></div>
       <div id="guide_icon" style="background-image: url('{{ item.icon() }}');{% if category != 'wld' and category != 'bra' or (category == 'wld' and item.id|count == 2) %} background-color: {{ item.color }};{% endif %}"></div>
       <div id="guide_title">{{ item.name() }}</div>
     </div>
@@ -57,7 +57,7 @@
 
     <div class="d3plus_tooltip_data_container" id="guide_stats">
       {% set last_group = "" %}
-      {% for stat in item.stats() %}
+      {% for stat in stats %}
         {% if last_group != stat.group %}
           <div class="d3plus_tooltip_data_title">
             {# {{ format(stat.group).render(stat.group) }} #}
@@ -71,18 +71,18 @@
             {{ stat.name }}
           </div>
           <div class="d3plus_tooltip_data_value">
-            {%- if stat.url -%}
+            {% if stat.url %}
               <a href="{{ stat.url }}">
-            {%- endif -%}
-              {# {{ format(stat.value).render(stat.name) }} #}
-              {{ stat.value }}
-            {%- if stat.url -%}
+            {% endif %}
+              {# {{ format(stat.name).render(stat.name) }} #}
+              {{ format(stat.desc).render(stat.mode) }}
+            {% if stat.url %}
               </a>
-            {%- endif -%}
-            {% if stat.percent and stat.percent > 0 %} ({{ format(stat.percent).render("share") }}%){% endif %}
+            {% endif %}
+            {% if stat.value %} ({{ format(stat.value).render(stat.mode) }}){% endif %}
           </div>
         </div>
-        {% if loop.last == False and stat.group == item.stats()[loop.index].group %}
+        {% if loop.last == False and stat.group == stats[loop.index].group %}
           <div class="d3plus_tooltip_data_seperator"></div>
         {% endif %}
       {% endfor %}
@@ -299,10 +299,10 @@
     }
 
     Math.easeInOutCubic = function (t, b, c, d) {
-    	t /= d/2;
-    	if (t < 1) return c/2*t*t*t + b;
-    	t -= 2;
-    	return c/2*(t*t*t + 2) + b;
+        t /= d/2;
+        if (t < 1) return c/2*t*t*t + b;
+        t -= 2;
+        return c/2*(t*t*t + 2) + b;
     }
 
     document.onscroll = function() {

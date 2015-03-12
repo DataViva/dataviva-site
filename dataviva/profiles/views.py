@@ -23,7 +23,7 @@ from dataviva.profiles import models as profileModels
 
 from dataviva import __year_range__
 from dataviva.stats.util import parse_year
-
+from dataviva.stats.profile_helper import compute_stats
 
 mod = Blueprint('profiles', __name__, url_prefix='/profiles')
 
@@ -174,7 +174,7 @@ def profiles(category = None, id = None):
     builds = profile.builds()
 
     start = request.args.get("app", 1)
-
+    stats = compute_stats(item)
     return render_template("profiles/profile.html",
-                category=category, item=item,
+                category=category, item=item, stats=stats,
                 starting_app = start, builds=builds)

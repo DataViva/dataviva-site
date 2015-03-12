@@ -11,302 +11,11 @@ from flask import g
 from dataviva.stats.util import parse_year
 from dataviva.attrs.abstract_models import BasicAttr, ExpandedAttr
 
+
 ''' A Mixin class for retrieving quick stats about a particular attribute'''
-class Stats(object):
 
-    def stats(self):
-        from dataviva.attrs.models import Yb, Ybs
-        from dataviva.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
-        from dataviva.secex.models import Ymbp, Ymbw, Ympw, Ymb, Ymp, Ymw
-        from dataviva.hedu.models import Yu, Yuc, Ybu, Yc_hedu
-        from dataviva.sc.models import Ybc_sc, Yc_sc
-        from dataviva import __year_range__
 
-        stats = []
-        attr_type = self.__class__.__name__.lower()
-        if attr_type == "wld" and self.id == "all":
-            attr_type = "bra"
-
-        if attr_type == "bra" and self.id == "all":
-            stats.append(self.get_val(Yb,"population",attr_type,"population"))
-            stats.append(self.get_top_attr(Yi, "num_emp", attr_type, "cnae", "rais"))
-            stats.append(self.get_top_attr(Yo, "num_emp", attr_type, "cbo", "rais"))
-            stats.append(self.get_val(Yi, "wage", attr_type, "rais"))
-            stats.append(self.get_top_attr(Ymp, "export_val", attr_type, "hs", "secex"))
-            stats.append(self.get_top_attr(Ymw, "export_val", attr_type, "wld", "secex"))
-            stats.append(self.get_val(Ymp, "export_val", attr_type, "secex"))
-        elif attr_type == "bra":
-            stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="demonym"))
-            stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="pop"))
-            stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="gini"))
-            stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="life_exp"))
-            stats.append(self.get_val(Ybs,"stat_val",attr_type,"stats",stat_id="hdi"))
-            stats.append(self.get_top_attr(Ybi,"num_emp",attr_type,"cnae","rais"))
-            stats.append(self.get_top_attr(Ybo, "num_emp", attr_type, "cbo", "rais"))
-            stats.append(self.get_val(Yb_rais, "wage", attr_type, "rais", name=gettext("Total Monthly Wage")))
-            stats.append(self.get_top_attr(Ymbp, "export_val", attr_type, "hs", "secex"))
-            stats.append(self.get_top_attr(Ymbw, "export_val", attr_type, "wld", "secex"))
-            stats.append(self.get_val(Ymb, "export_val", attr_type, "secex", name=gettext("Total Exports")))
-            stats.append(self.get_val(Ymb, "import_val", attr_type, "secex", name=gettext("Total Imports")))
-            if len(self.id) == 9:
-                stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="airport"))
-                stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="airport_dist"))
-                stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="seaport"))
-                stats.append(self.get_val(Bs,"stat_val",attr_type,"stats",stat_id="seaport_dist"))
-        elif attr_type == "cnae":
-            dataset = "rais"
-            five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
-            stats.append(self.get_top_attr(Ybi, "num_emp", attr_type, "bra", dataset))
-            stats.append(self.get_top_attr(Yio, "num_emp", attr_type, "cbo", dataset))
-            stats.append(self.get_val(Yi, "wage", attr_type, dataset, name=gettext("Total Monthly Wage")))
-            stats.append(self.get_val(Yi, "wage_avg", attr_type, dataset, name=gettext("Average Monthly Wage")))
-            stats.append(self.get_val(Yi, "wage_avg", attr_type, dataset, five_years_ago, name=gettext("Average Monthly Wage")))
-        elif attr_type == "cbo":
-            dataset = "rais"
-            five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
-            stats.append(self.get_top_attr(Ybo, "num_emp", attr_type, "bra", dataset))
-            stats.append(self.get_top_attr(Yio, "num_emp", attr_type, "cnae", dataset))
-            stats.append(self.get_val(Yo, "wage", attr_type, dataset, name=gettext("Total Monthly Wage")))
-            stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset, name=gettext("Average Monthly Wage")))
-            stats.append(self.get_val(Yo, "wage_avg", attr_type, dataset, five_years_ago, name=gettext("Average Monthly Wage")))
-        elif attr_type == "hs":
-            dataset = "secex"
-            five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
-            stats.append(self.get_top_attr(Ymbp, "export_val", attr_type, "bra", dataset))
-            stats.append(self.get_top_attr(Ympw, "export_val", attr_type, "wld", dataset))
-            stats.append(self.get_val(Ymp, "export_val_growth", attr_type, dataset, name=gettext("Nominal Annual Growth Rate (1 year)")))
-            stats.append(self.get_val(Ymp, "export_val_growth_5", attr_type, dataset, name=gettext("Nominal Annual Growth Rate (5 year)")))
-            stats.append(self.get_val(Ymp, "export_val", attr_type, dataset, name=gettext("Total Exports")))
-            stats.append(self.get_val(Ymp, "export_val", attr_type, dataset, five_years_ago, name=gettext("Total Exports")))
-        elif attr_type == "wld":
-            dataset = "secex"
-            five_years_ago = parse_year(__year_range__[dataset][-1]) - 5
-            stats.append(self.get_top_attr(Ymbw, "export_val", attr_type, "bra", dataset))
-            stats.append(self.get_top_attr(Ympw, "export_val", attr_type, "hs", dataset))
-            stats.append(self.get_val(Ymw, "export_val_growth", attr_type, dataset, name=gettext("Nominal Annual Growth Rate (1 year)")))
-            stats.append(self.get_val(Ymw, "export_val_growth_5", attr_type, dataset, name=gettext("Nominal Annual Growth Rate (5 year)")))
-            stats.append(self.get_val(Ymw, "eci", attr_type, dataset, name=gettext("Economic Complexity")))
-            stats.append(self.get_val(Ymw, "export_val", attr_type, dataset, name=gettext("Total Exports")))
-            stats.append(self.get_val(Ymw, "export_val", attr_type, dataset, five_years_ago, name=gettext("Total Exports")))
-        elif attr_type == "university":
-            dataset = "hedu"
-            stats.append(self.get_top_attr(Yuc, "enrolled", attr_type, "course_hedu", "hedu"))
-            stats.append(self.get_val(Yu, "enrolled", attr_type, dataset, name=gettext("Enrolled")))
-            stats.append(self.get_val(Yu, "graduates", attr_type, dataset, name=gettext("Graduates")))
-        elif attr_type == "course_hedu":
-            dataset = "hedu"
-            stats.append(self.get_top_attr(Yuc, "enrolled", attr_type, "university", "hedu"))
-            stats.append(self.get_val(Yc_hedu, "enrolled", attr_type, dataset, name=gettext("Enrolled")))
-            stats.append(self.get_val(Yc_hedu, "graduates", attr_type, dataset, name=gettext("Graduates")))
-        elif attr_type == "course_sc":
-            dataset = "sc"
-            stats.append(self.get_top_attr(Ybc_sc, "enrolled", attr_type, "bra", "sc"))
-            stats.append(self.get_val(Yc_sc, "enrolled", attr_type, dataset, name=gettext("Enrolled")))
-            stats.append(self.get_val(Yc_sc, "age", attr_type, dataset, name=gettext("Average Age")))
-
-        return stats
-
-    ''' Given a "bra" string from URL, turn this into an array of Bra
-        objects'''
-    @staticmethod
-    def parse_bras(bra_str):
-        if ".show." in bra_str:
-            # the '.show.' indicates that we are looking for a specific nesting
-            bra_id, nesting = bra_str.split(".show.")
-            # filter table by requested nesting level
-            bras = Bra.query \
-                    .filter(Bra.id.startswith(bra_id)) \
-                    .filter(func.char_length(Attr.id) == nesting).all()
-            bras = [b.serialize() for b in bras]
-        elif "." in bra_str:
-            # the '.' indicates we are looking for bras within a given distance
-            bra_id, distance = bra_str.split(".")
-            bras = exist_or_404(Bra, bra_id)
-            neighbors = bras.get_neighbors(distance)
-            bras = [g.bra.serialize() for g in neighbors]
-        else:
-            # we allow the user to specify bras separated by '+'
-            bras = bra_str.split("+")
-            # Make sure the bra_id requested actually exists in the DB
-            bras = [exist_or_404(Bra, bra_id).serialize() for bra_id in bras]
-        return bras
-
-    def get_top_attr(self, tbl, val_var, attr_type, key, dataset):
-        from dataviva import __year_range__
-        latest_year = parse_year(__year_range__[dataset][-1].split("-")[0])
-        name = gettext("Top")
-        if key == "bra":
-            name = gettext("Top Location")
-            length = 9
-        elif key == "hs":
-            name = gettext("Top Product")
-            length = 6
-        elif key == "wld":
-            name = gettext("Top Export Destination")
-            length = 5
-        elif key == "cnae":
-            name = gettext("Top Industry")
-            length = 6
-        elif key == "cbo":
-            name = gettext("Top Occupation")
-            length = 4
-        elif key == "course_hedu":
-            name = gettext("Top Course")
-            length = 6
-        elif key == "university":
-            name = gettext("Top University")
-            length = 5
-
-        if attr_type == "bra":
-            agg = {'export_val':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
-                    'export_val_growth':func.avg, 'export_val_growth_5':func.avg,
-                    'distance':func.avg, 'distance_wld':func.avg,
-                    'opp_gain':func.avg, 'opp_gain_wld':func.avg,
-                    'rca':func.avg, 'rca_wld':func.avg,
-                    'wage':func.sum, 'num_emp':func.sum, 'num_est':func.sum,
-                    'ici':func.avg, 'oci':func.avg,
-                    'wage_growth_pct':func.avg, 'wage_growth_pct_5':func.avg,
-                    'wage_growth_val':func.avg, 'wage_growth_val_5':func.avg,
-                    'num_emp_growth_pct':func.avg, 'num_emp_pct_5':func.avg,
-                    'num_emp_growth_val':func.avg, 'num_emp_growth_val_5':func.avg,
-                    'distance':func.avg, 'importance':func.avg,
-                    'opp_gain':func.avg, 'required':func.avg, 'rca':func.avg}
-
-            if self.id == "all":
-                top = tbl.query
-            else:
-                bras = self.parse_bras(self.id)
-
-                # filter query
-                if len(bras) > 1:
-                    col_names = ["{0}_id".format(key)]
-                    col_vals = [cast(agg[c](getattr(tbl, c)), Float) if c in agg else getattr(tbl, c) for c in col_names]
-                    top = tbl.query.with_entities(*col_vals).filter(tbl.bra_id.in_([b["id"] for b in bras]))
-                elif bras[0]["id"] != "all":
-                    top = tbl.query.filter(tbl.bra_id == bras[0]["id"])
-        else:
-            top = tbl.query.filter(getattr(tbl, attr_type+"_id") == self.id)
-
-        top = top.filter_by(year=latest_year) \
-                    .filter(func.char_length(getattr(tbl, key+"_id")) == length) \
-                    .group_by(getattr(tbl, key+"_id")) \
-                    .order_by(func.sum(getattr(tbl, val_var)).desc())
-
-        percent = 0
-        if top.first() != None and getattr(top.first(),val_var) != None:
-            if isinstance(top.first(),tuple):
-                obj = globals()[key.capitalize()].query.get(top.first()[0])
-                percent = None
-            else:
-                obj = getattr(top.first(),key)
-                num = float(getattr(top.first(),val_var))
-                den = 0
-                for x in top.all():
-                    value = getattr(x,val_var)
-                    if value:
-                        den += float(value)
-                percent = (num/float(den))*100
-
-            return {"name": name,
-                    "value": obj.name(),
-                    "percent": percent,
-                    "id": obj.id,
-                    "url": obj.url(),
-                    "group": "{} {} ({}):".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())}
-        else:
-            return {"name": name,
-                    "value": "-",
-                    "group": "{} {} ({}):".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())}
-
-    def get_val(self, tbl, val_var, attr_type, dataset, latest_year=None, stat_id=None, name=None):
-
-        if latest_year == None:
-            from dataviva import __year_range__
-            latest_year = parse_year(__year_range__[dataset][-1].split("-")[0])
-
-        if val_var == "wage_avg":
-            calc_var = val_var
-            val_var = "wage"
-        else:
-            calc_var = None
-
-        if attr_type == "bra":
-            agg = {'population':func.sum, 'export_val':func.sum, 'eci':func.avg, 'eci_wld':func.avg, 'pci':func.avg,
-                    'export_val_growth_pct':func.avg, 'export_val_growth_pct_5':func.avg,
-                    'export_val_growth_val':func.avg, 'export_val_growth_val_5':func.avg,
-                    'distance':func.avg, 'distance_wld':func.avg,
-                    'opp_gain':func.avg, 'opp_gain_wld':func.avg,
-                    'rca':func.avg, 'rca_wld':func.avg,
-                    'wage':func.sum, 'num_emp':func.sum, 'num_est':func.sum,
-                    'ici':func.avg, 'oci':func.avg,
-                    'wage_growth_pct':func.avg, 'wage_growth_pct_5':func.avg,
-                    'wage_growth_val':func.avg, 'wage_growth_val_5':func.avg,
-                    'num_emp_growth_pct':func.avg, 'num_emp_pct_5':func.avg,
-                    'num_emp_growth_val':func.avg, 'num_emp_growth_val_5':func.avg,
-                    'distance':func.avg, 'importance':func.avg,
-                    'opp_gain':func.avg, 'required':func.avg, 'rca':func.avg}
-            if self.id == "all":
-                col_names = [val_var]
-                col_vals = [cast(agg[c](getattr(tbl, c)), Float) if c in agg else getattr(tbl, c) for c in col_names]
-                total = tbl.query.with_entities(*col_vals)
-                if dataset == "rais":
-                    total = total.filter(func.char_length(getattr(tbl,"cnae_id")) == 1)
-                elif dataset == "secex":
-                    total = total.filter(func.char_length(getattr(tbl,"hs_id")) == 2)
-                elif dataset == "population":
-                    total = total.filter(func.char_length(getattr(tbl,"bra_id")) == 2)
-            else:
-                bras = self.parse_bras(self.id)
-
-                # filter query
-                if len(bras) > 1:
-                    col_names = [val_var]
-                    col_vals = [cast(agg[c](getattr(tbl, c)), Float) if c in agg else getattr(tbl, c) for c in col_names]
-                    total = tbl.query.with_entities(*col_vals).filter(tbl.bra_id.in_([b["id"] for b in bras]))
-                elif bras[0]["id"] != "all":
-                    total = tbl.query.filter(tbl.bra_id == bras[0]["id"])
-            if stat_id:
-                total = total.filter_by(stat_id=stat_id)
-        else:
-            total = tbl.query.filter(getattr(tbl, attr_type+"_id") == self.id)
-
-        if "_y" in tbl.__tablename__:
-            total = total.filter_by(year=latest_year)
-        total = total.first()
-
-        if total != None:
-            if isinstance(total,tuple):
-                val = total[0]
-            else:
-                val = getattr(total,val_var) or " - "
-
-            if calc_var == "wage_avg":
-                val = float(val)/getattr(total,"num_emp")
-        else:
-            val = 0
-
-        val = num_format(val, key=val_var)
-
-        group = u"{} {} ({}):".format(latest_year, gettext("Stats"), dataset.split("_")[0].upper())
-
-        if val_var == "stat_val":
-            group = "General Stats:"
-            if total:
-                if "_y" in tbl.__tablename__:
-                    name = u"{} ({})".format(total.stat.name(), latest_year)
-                else:
-                    name = total.stat.name()
-            else:
-                name = stat_id or val_var or u""
-        elif not name:
-            if calc_var:
-                name = calc_var
-            else:
-                name = u"total_{0}".format(val_var)
-
-        return {"name": name, "value": val, "group": group}
-
-class Cnae(db.Model, AutoSerialize, Stats, ExpandedAttr):
+class Cnae(db.Model, AutoSerialize, ExpandedAttr):
 
     __tablename__ = 'attrs_cnae'
     id = db.Column(db.String(8), primary_key=True)
@@ -326,7 +35,7 @@ class Cnae(db.Model, AutoSerialize, Stats, ExpandedAttr):
         return '<Cnae %r>' % (self.name_en)
 
 
-class Cbo(db.Model, AutoSerialize, Stats, ExpandedAttr):
+class Cbo(db.Model, AutoSerialize, ExpandedAttr):
 
     __tablename__ = 'attrs_cbo'
     id = db.Column(db.String(6), primary_key=True)
@@ -346,7 +55,7 @@ class Cbo(db.Model, AutoSerialize, Stats, ExpandedAttr):
         return '<Cbo %r>' % (self.name_en)
 
 
-class Hs(db.Model, AutoSerialize, Stats, ExpandedAttr):
+class Hs(db.Model, AutoSerialize, ExpandedAttr):
 
     __tablename__ = 'attrs_hs'
     id = db.Column(db.String(8), primary_key=True)
@@ -366,7 +75,7 @@ class Hs(db.Model, AutoSerialize, Stats, ExpandedAttr):
         return '<Hs %r>' % (self.name_en)
 
 
-class Course_hedu(db.Model, AutoSerialize, Stats, ExpandedAttr):
+class Course_hedu(db.Model, AutoSerialize, ExpandedAttr):
 
     __tablename__ = 'attrs_course_hedu'
     id = db.Column(db.String(8), primary_key=True)
@@ -386,7 +95,7 @@ class Course_hedu(db.Model, AutoSerialize, Stats, ExpandedAttr):
         return '<Course_hedu %r>' % (self.name_en)
 
 
-class Course_sc(db.Model, AutoSerialize, Stats, ExpandedAttr):
+class Course_sc(db.Model, AutoSerialize, ExpandedAttr):
 
     __tablename__ = 'attrs_course_sc'
     id = db.Column(db.String(8), primary_key=True)
@@ -405,7 +114,7 @@ class Course_sc(db.Model, AutoSerialize, Stats, ExpandedAttr):
     def __repr__(self):
         return '<Course_sc %r>' % (self.name_en)
 
-class School(db.Model, AutoSerialize, Stats, ExpandedAttr):
+class School(db.Model, AutoSerialize, ExpandedAttr):
 
     __tablename__ = 'attrs_school'
     id = db.Column(db.String(8), primary_key=True)
@@ -425,7 +134,7 @@ class School(db.Model, AutoSerialize, Stats, ExpandedAttr):
         return '<School %r>' % (self.name_en)
 
 
-class University(db.Model, AutoSerialize, Stats, ExpandedAttr):
+class University(db.Model, AutoSerialize, ExpandedAttr):
 
     __tablename__ = 'attrs_university'
     id = db.Column(db.String(8), primary_key=True)
@@ -459,7 +168,7 @@ class University(db.Model, AutoSerialize, Stats, ExpandedAttr):
 ############################################################
 
 
-class Wld(db.Model, AutoSerialize, Stats, BasicAttr):
+class Wld(db.Model, AutoSerialize, BasicAttr):
 
     __tablename__ = 'attrs_wld'
     id = db.Column(db.String(5), primary_key=True)
@@ -490,7 +199,7 @@ bra_pr = db.Table('attrs_bra_pr',
     db.Column('pr_id', db.Integer, db.ForeignKey('attrs_bra.id'))
 )
 
-class Bra(db.Model, AutoSerialize, Stats, BasicAttr):
+class Bra(db.Model, AutoSerialize, BasicAttr):
 
     __tablename__ = 'attrs_bra'
     id = db.Column(db.String(10), primary_key=True)
