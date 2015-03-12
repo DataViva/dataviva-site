@@ -33,10 +33,16 @@ def rais_api(**kwargs):
     filters, groups, show_column = query_helper.build_filters_and_groups(table, kwargs, exclude=exclude)
 
     columns = []
-    if required_bras and table is Ybi:
-       columns = [c for c in Ybi.__table__.columns if c.key != 'required_bras']
+    if not required_bras:
+       columns = [c for c in table.__table__.columns if c.key != 'required_bras']
 
     results = query_helper.query_table(table, columns=columns, filters=filters, groups=groups, limit=limit, order=order, sort=sort, offset=offset, serialize=serialize)
+
+    if required_bras and table is Ybi and results['data']:
+        required_idx = results['headers'].index(Ybi.required_bras.key)
+        bras = results['data'][0][required_idx]
+        results = [bra.serialize() for bra in query_helper.bra_profiles(bras)]
+        return jsonify(data=results)
 
     if table is Ybi:
         stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yi, kwargs, remove=['bra_id'])
