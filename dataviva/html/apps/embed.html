@@ -217,15 +217,19 @@
             }
           }
           else {
-            a[o+"_id"] = a.id;
-            a[o+"_display"] = dataviva.displayID(a.id,o);
-            a.icon = dataviva.icon(a.id,o);
-            delete a.export_val;
-            delete a.import_val;
-            delete a.enrolled;
-            delete a.num_emp;
-            delete a.school_type;
-            obj[a.id] = a;
+            var d = level.split("_");
+            d = parseFloat(d[d.length-1]);
+            if (d === a.id.length) {
+              a[o+"_id"] = a.id;
+              a[o+"_display"] = dataviva.displayID(a.id,o);
+              a.icon = dataviva.icon(a.id,o);
+              delete a.export_val;
+              delete a.import_val;
+              delete a.enrolled;
+              delete a.num_emp;
+              delete a.school_type;
+              obj[a.id] = a;
+            }
           }
           return obj;
         }, {});
@@ -738,7 +742,7 @@
 
       // Hide popover
       dataviva.popover.hide();
-      app.viz.data(false).coords(false).nodes(false).edges(false).draw();
+      app.viz.data(false).attrs(false).coords(false).nodes(false).edges(false).draw();
       app.allyears = allyears;
 
       if (new_url) {
