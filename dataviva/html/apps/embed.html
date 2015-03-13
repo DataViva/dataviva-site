@@ -1173,7 +1173,7 @@
         var text = dataviva.format.text("required_bras_desc") + " "
         app.data[app.build.bra_prox].forEach(function(b, i){
           if (i) text += ", ";
-          if (i === app.data[app.build.bra_prox].length - 1) {
+          if (i && i === app.data[app.build.bra_prox].length - 1) {
             text += dataviva.format.text("and") + " ";
           }
           text += b.name;
@@ -2078,7 +2078,7 @@
 
         var student_types = {
           "enrolled": "#1abbee",
-          "students": "#ffc41c",
+          // "students": "#ffc41c",
           "graduates": "#742777",
           "entrants": "#105b10"
         };
