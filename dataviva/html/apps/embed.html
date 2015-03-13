@@ -669,6 +669,7 @@
         "sub": {"font": {"align": "left"}},
         "total": {"font": {"align": "left"}}
       })
+      .size({"threshold": false})
       .total("required")
       .temp("elsewhere")
       .y({
@@ -1364,7 +1365,6 @@
           .active(false)
           .temp(false)
           .total(false)
-          .size({"threshold": false})
           .zoom(false)
           .id({"grouping": true})
           .shape("square")
@@ -1515,7 +1515,6 @@
         if (layout) layout = layout[0].values[0];
         else layout = "linear"
         if (layout === "value") layout = "linear";
-        var threshold = ["time", "type"].indexOf(app.build.output_attr) < 0;
         app.viz
           .x({
             "scale": "linear",
@@ -1528,7 +1527,6 @@
           .active(false)
           .temp(false)
           .total(false)
-          .size({"threshold": threshold})
           .id({"grouping": true})
           .shape("area")
           .order(false)
