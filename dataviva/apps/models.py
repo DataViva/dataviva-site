@@ -61,19 +61,30 @@ class Build(db.Model, AutoSerialize):
     def get_ui(self, ui_type):
         return self.ui.filter(UI.type == ui_type).first()
 
+    def brazil_allowed(self):
+        return (self.app_id not in [6,8]) and ((self.app_id not in [4,5]) or self.dataset != "rais")
+
+    def limit_bra(self, bra):
+        if isinstance(bra, Wld):
+            if not self.brazil_allowed():
+                return Bra.query.get("4mg")
+            else:
+                bra.id = "all"
+        return bra
+
     def set_bra(self, bra_id):
 
         if isinstance(bra_id, (Bra, Wld)):
-            if isinstance(bra_id, Wld):
-                bra_id.id = "all"
+            bra_id = self.limit_bra(bra_id)
             bra_id = [bra_id]
         elif isinstance(bra_id, (list)) and isinstance(bra_id[0], (Bra, Wld)):
-            for b in bra_id:
-                if isinstance(b, Wld):
-                    b.id = "all"
+            bra_id = [self.limit_bra(b) for b in bra_id]
         else:
-            if bra_id == 'bra':
-                bra_id = 'all'
+            if bra_id == "bra":
+                bra_id = "all"
+
+            if bra_id == "all" and not self.brazil_allowed():
+                bra_id = "4mg"
 
             if "_" in self.bra and "_" not in bra_id:
                 if bra_id == "4rj":
