@@ -199,7 +199,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     if bra_id == "all":
         bra_attr = Wld.query.get_or_404("sabra")
     else:
-        bra_attr = Bra.query.get_or_404(bra_id)
+        bra_attr = [Bra.query.get_or_404(b) for b in bra_id.split("_")]
     filter1_attr = filter1
     filter2_attr = filter2
     if filter1 != "all":
@@ -326,7 +326,7 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
     if bra_id == "all":
         bra_attr = Wld.query.get_or_404("sabra")
     else:
-        bra_attr = Bra.query.get_or_404(bra_id)
+        bra_attr = [Bra.query.get_or_404(b) for b in bra_id.split("_")]
     filter1_attr = filter1
     filter2_attr = filter2
     profile = False
@@ -508,7 +508,7 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
     if bra_id == "all":
         bra_attr = Wld.query.get_or_404("sabra")
     else:
-        bra_attr = Bra.query.get_or_404(bra_id)
+        bra_attr = [Bra.query.get_or_404(b) for b in bra_id.split("_")]
     filter1_attr = filter1
     filter2_attr = filter2
     if filter1 != "all":

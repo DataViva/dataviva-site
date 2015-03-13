@@ -659,9 +659,6 @@
       })
       .total("required")
       .temp("elsewhere")
-      .x({
-        "label": false
-      })
       .y({
         "label": {"font": {"size": 22, "weight": "normal"}},
         "ticks": {"font": {"size": 16}}
@@ -1307,6 +1304,7 @@
         .zoom(app.build.output_attr !== "balance")
         .time(app.vars.time || (app.monthly ? "month" : "year"))
         .time({"solo": timeSolo})
+        .x({"label": app.build.app.type === "compare" ? {"font": {"size": 22, "weight": "normal"}} : false})
         .x({"ticks": {"font": {"size": app.build.output === "age" ? 12 : 16}}})
 
       // app.viz.type(app.build.app.d3plus)
