@@ -221,9 +221,13 @@ class Hs(Profile):
                     {"id": 14, "params": {"size": "import_val"}},
                     {"id": 30, "params": {"size": "import_val"}}
                 ]
-            ]},
-            {"title": gettext("Economic Opportunities:"), "builds": [50]}
+            ]}
         ]
+
+        if len(self.attr.id) == 6:
+            apps.append({
+                "title": gettext("Economic Opportunities:"), "builds": [50]
+            })
 
         industries = self.crosswalk_id()
         if len(industries):
@@ -302,7 +306,7 @@ class Cnae(Profile):
             ]}
         ]
 
-        if len(self.attr.id) > 1:
+        if len(self.attr.id) == 6:
             apps.append({
                 "title": gettext("Economic Opportunities:"), "builds": [51, 48]
             })
@@ -347,9 +351,14 @@ class Cbo(Profile):
                     {"id": 38, "params": {"color": "wage_avg"}},
                     {"id": 23, "params": {"y": "wage_avg"}}
                 ],
-            ]},
-            {"title": gettext("Economic Opportunities:"), "builds": [49]}
+            ]}
         ]
+
+        if len(self.attr.id) == 4:
+            apps.append({
+                "title": gettext("Economic Opportunities:"), "builds": [49]
+            })
+
         courses = self.crosswalk_id()
         if len(courses):
             cross_apps = {"title": gettext("Common Majors by University:"), "builds": []}
