@@ -13544,6 +13544,9 @@ module.exports = function(transform) {
 
 },{}],"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee":[function(require,module,exports){
 module.exports = function(value, vars, method) {
+  if (vars.history) {
+    vars.history.reset();
+  }
   if (typeof value === "string") {
     if (value.indexOf("/") >= 0) {
       method.url = value;
@@ -15248,10 +15251,18 @@ module.exports = {
 module.exports = {
   back: function() {
     if (this.states.length) {
-      this.states.pop()();
+      return this.states.pop()();
     }
   },
   chain: [],
+  reset: function() {
+    var _results;
+    _results = [];
+    while (this.states.length) {
+      _results.push(this.states.pop()());
+    }
+    return _results;
+  },
   states: []
 };
 
@@ -28240,10 +28251,18 @@ module.exports = {
   accepted: [Boolean],
   back: function() {
     if (this.states.length) {
-      this.states.pop()();
+      return this.states.pop()();
     }
   },
   chain: [],
+  reset: function() {
+    var _results;
+    _results = [];
+    while (this.states.length) {
+      _results.push(this.states.pop()());
+    }
+    return _results;
+  },
   states: [],
   value: true
 };
