@@ -2,13 +2,14 @@
 {% extends "templates/base.html" %}
 
 {% block content %}
-
   <div id="header_container" class="lightbox">
     <div id="header">
 
       <div class="searchBox">
   	    <input type="text" autocomplete="false" name="searchFld_1" id="searchFld" class="searchFld"  placeholder="{%trans%}What would you like to learn more about?{%endtrans%}">
-      	<div class="searchResult"></div>
+        {% if "home" not in request.endpoint %}
+        <div id="result" class="searchResult"></div>
+        {% endif %}
       </div>
       <a id="logo" href="{{ url_for('general.home') }}"></a>
       <a id="profiles" href="{{ url_for('profiles.index') }}" class="link{% if g.page_type == 'profiles' or g.page_type == 'profile' %} active{% endif %}">{% trans %}Profiles{% endtrans %}</a>
@@ -249,7 +250,8 @@
 
       // Close search box if "esc" key is pressed
       if ( d3.event.keyCode === 27 ) {
-        closeSearch()
+        closeSearch();
+        selected_i = -1;
       }
       else {
         searchInterval = setTimeout(function(){
@@ -263,6 +265,9 @@
 
     })
 
+    // check to prevent mouse events triggering without user moving
+    var allow_mouse_entry = false;
+
     find_search = function(search, el) {
 
       var results_el = d3.select(el.parentNode).select(".searchResult").html("")
@@ -271,12 +276,12 @@
   	    d3.json("/attrs/search/"+search+"/")
   	      .header("Content-type", "application/json")
   	      .send("GET", '', function(error, text) {
-
+            selected_i = -1;
             if (!error) {
 
               text.activities = text.activities.slice(0, 20);
 
-              text.activities.forEach(function(item){
+              text.activities.forEach(function(item, idx){
 
                 var type = item.content_type;
 
@@ -321,6 +326,18 @@
                   .attr("class","search_sub")
                   .text(sub);
 
+                link.on("mouseenter", function(){
+                  if (!allow_mouse_entry) return;
+                  d3.selectAll("a.search_result").classed("active", false);
+                  link.classed("active", true);
+                  selected_i = idx;
+                });
+
+                link.on("mouseleave", function(){
+                  if (!allow_mouse_entry) return;
+                  link.classed("active", false);
+                });
+
               });
 
             }
@@ -330,27 +347,47 @@
         }
     };
 
-    var selected_el;
+    var handleScrolling = function(results_size) {
+      var searchResult = d3.selectAll("div#result.searchResult");
+      var resultBoxHeight = searchResult.node().getBoundingClientRect().height;
+      var resultScroll = searchResult.property("scrollTop");
+      var currPos = searchResult.property("scrollTop");
+      var resultNode = d3.select("a.search_result").node();
+      if (!resultNode) {
+        selected_i = -1;
+      }
+      var resultHeight = resultNode.getBoundingClientRect().height;
+      var max = (resultScroll + resultBoxHeight);
+      max = max - max % resultHeight;
+      if (selected_i <= 0) {
+        searchResult.property("scrollTop", 0);
+      } else if (selected_i == results_size - 1) {
+        searchResult.property("scrollTop", results_size * resultHeight);
+      } else if ( (selected_i * resultHeight) >= max ) {
+        searchResult.property("scrollTop", currPos + resultHeight * 1);
+      } else if ( (selected_i * resultHeight) < resultScroll ) {
+        searchResult.property("scrollTop", currPos - resultHeight);
+      }
+    }
+
     var selected_i;
-    d3.selectAll(".search")
+    d3.selectAll(".searchFld")
       .on("keydown", function() {
-        var results = d3.selectAll("a.search_result")
+
+
+        var results = d3.selectAll("a.search_result");
         if(d3.event.keyCode === 40 || d3.event.keyCode === 38){ // down || up
           results.classed("active", false);
-          var incr = 1;
-          if(d3.event.keyCode === 38) incr = -1;
+          var incr = (d3.event.keyCode === 38) ? -1 : 1 ;
+
           d3.event.preventDefault();
-          if(selected_el){
-            selected_i = (selected_i+incr) % results.size();
-            if(selected_i < 0) selected_i = results.size()-1;
-            selected_el = results.filter(function(d, i) { return i === selected_i; });
-          }
-          else {
-            selected_i = 0;
-            if(d3.event.keyCode === 38) selected_i = results.size()-1;
-            selected_el = results.filter(function(d, i) { return i === selected_i; });
-          }
+          selected_i = (selected_i + incr) % results.size();
+          if (selected_i < 0) selected_i = results.size() - 1;
+          var selected_el = results.filter(function(d, i) { return i === selected_i; });
+
+          allow_mouse_entry = false;
           selected_el.classed("active", true);
+          handleScrolling(results.size());
         }
         else if(d3.event.keyCode === 13){ // enter
           var selected = d3.select("a.search_result.active");
@@ -360,15 +397,9 @@
         }
       })
 
-    d3.selectAll(".searchResult")
-      .on("mouseover", function(){
-        d3.select(this).selectAll(".active").classed("temp_inactive", true);
-        d3.select(this).selectAll(".active").classed("active", false);
-      })
-      .on("mouseout", function(){
-        d3.select(this).selectAll(".temp_inactive").classed("active", true);
-        d3.select(this).selectAll(".temp_inactive").classed("temp_inactive", false);
-      })
+    d3.selectAll("body").on("mousemove", function() {
+      allow_mouse_entry = true;
+    });
   </script>
 
 {% endblock %}
