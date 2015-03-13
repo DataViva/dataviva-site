@@ -170,11 +170,12 @@ dataviva.format.number = function(value, opts) {
     var return_value = value + symbol;
   }
   else if (name == "share") {
-    if (value === 100) var return_value = 100+"";
+    if (value === 100) var return_value = 100;
     else var return_value = d3.format(".2g")(value);
+    return_value += "%";
   }
   else {
-    var return_value = d3.format(",f")(value)
+    var return_value = d3.format(",f")(value);
   }
 
   if (name.indexOf("total_") == 0) {

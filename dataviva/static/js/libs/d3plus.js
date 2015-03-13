@@ -12463,7 +12463,7 @@ validObject = require("../../object/validate.coffee");
 uniqueValues = require("../../util/uniques.coffee");
 
 find = function(vars, node, variable, depth) {
-  var nodeObject, returned, val;
+  var cache, nodeObject, returned, val;
   nodeObject = validObject(node);
   if (typeof variable === "function" && nodeObject) {
     return variable(node, vars);
@@ -12472,9 +12472,10 @@ find = function(vars, node, variable, depth) {
     if (variable in node) {
       return node[variable];
     }
-    cacheInit(node, vars.data.cacheID);
-    if (variable in node.d3plus.data[vars.data.cacheID]) {
-      return node.d3plus.data[vars.data.cacheID][variable];
+    cache = vars.data.cacheID + "_" + depth;
+    cacheInit(node, cache);
+    if (variable in node.d3plus.data[cache]) {
+      return node.d3plus.data[cache][variable];
     }
     if (depth in node) {
       node = node[depth];
@@ -12589,7 +12590,7 @@ cacheInit = function(node, cache) {
 };
 
 valueParse = function(vars, node, depth, variable, val) {
-  var d, i, timeVar, v, _i, _len;
+  var cache, d, i, timeVar, v, _i, _len;
   if (val === null) {
     return val;
   }
@@ -12611,7 +12612,8 @@ valueParse = function(vars, node, depth, variable, val) {
     val = val[0];
   }
   if (val !== null && validObject(node) && typeof variable === "string" && !(variable in node)) {
-    node.d3plus.data[vars.data.cacheID][variable] = val;
+    cache = vars.data.cacheID + "_" + depth;
+    node.d3plus.data[cache][variable] = val;
   }
   return val;
 };
@@ -12805,7 +12807,7 @@ module.exports = {
     total: "total",
     values: "values"
   },
-  uppercase: ["CEOs", "CFOs", "CNC", "COOs", "HVAC", "R&D", "TV", "UI"],
+  uppercase: ["CEO", "CFO", "CNC", "COO", "CPU", "HVAC", "R&D", "TV", "UI"],
   visualization: {
     bar: "Bar Chart",
     box: "Box Plot",
@@ -18377,6 +18379,7 @@ module.exports = function(number, opts) {
     ret = number;
   } else if (key === "share") {
     ret = number === 100 ? number : d3.format(".2g")(number);
+    ret += "%";
   } else if (number < 10 && number > -10) {
     ret = d3.round(number, 2);
   } else if (number.toString().split(".")[0].length > 3) {
@@ -18417,17 +18420,17 @@ validate = require("./validate.coffee");
 
 module.exports = function(obj1, obj2) {
   var copyObject, obj3;
-  copyObject = function(obj, ret) {
+  copyObject = function(obj, ret, shallow) {
     var k, v, _results;
     _results = [];
     for (k in obj) {
       v = obj[k];
       if (typeof v !== "undefined") {
-        if (validate(v)) {
+        if (!shallow && validate(v)) {
           if (typeof ret[k] !== "object") {
             ret[k] = {};
           }
-          _results.push(copyObject(v, ret[k]));
+          _results.push(copyObject(v, ret[k], k.indexOf("d3plus") === 0));
         } else if (!d3selection(v) && v instanceof Array) {
           _results.push(ret[k] = v.slice(0));
         } else {
@@ -18610,19 +18613,22 @@ module.exports = function(text, opts) {
     return b.toLowerCase();
   });
   bigs = locale.uppercase;
+  bigs = bigs.concat(bigs.map(function(b) {
+    return b + "s";
+  }));
   biglow = bigs.map(function(b) {
     return b.toLowerCase();
   });
   return text.replace(/\S*/g, function(txt, i) {
     var bigindex, new_txt, prefix;
     if (txt) {
-      bigindex = biglow.indexOf(txt.toLowerCase());
       if (/^[^\W\s]/.test(txt)) {
         prefix = "";
       } else {
         prefix = txt.charAt(0);
         txt = txt.slice(1);
       }
+      bigindex = biglow.indexOf(txt.toLowerCase());
       if (bigindex >= 0) {
         new_txt = bigs[bigindex];
       } else if (smalls.indexOf(txt.toLowerCase()) >= 0 && i !== 0 && i !== text.length - 1) {
@@ -19325,7 +19331,7 @@ module.exports = function() {
           text(vars);
           wrap(vars);
         } else {
-          vars.container.value.html(false);
+          vars.container.value.html("");
         }
         if (vars.dev.value) {
           print.timeEnd("total draw time");
@@ -23562,9 +23568,9 @@ module.exports = function( vars , group ) {
             .container(d3.select(this))
             .height((t.h * scale[1])/2)
             .padding(t.padding/2)
-            .resize( resize )
-            .size( size )
-            .text( vars.format.value(t.text*100,{"key": "share", "vars": vars})+"%")
+            .resize(resize)
+            .size(size)
+            .text(vars.format.value(t.text*100,{"key": "share", "vars": vars}))
             .width(t.w * scale[1])
             .valign(salign)
             .x(t.x - t.w*scale[1]/2 + t.padding/2)
@@ -25022,7 +25028,7 @@ module.exports = function(params) {
     }
 
     if ( vars.tooltip.share.value && d.d3plus.share ) {
-      ex.share = vars.format.value(d.d3plus.share*100, {"key": "share", "vars": vars, "data": d})+"%";
+      ex.share = vars.format.value(d.d3plus.share*100, {"key": "share", "vars": vars, "data": d});
     }
 
     var depth = "depth" in params ? params.depth : dataDepth,
@@ -30318,7 +30324,10 @@ labelPadding = function(vars) {
     });
   } else if (vars.y.scale.value === "share") {
     yText = yValues.map(function(d) {
-      return d * 100 + "%";
+      return vars.format.value(d * 100, {
+        key: "share",
+        vars: vars
+      });
     });
   } else if (vars.y.value === vars.time.value) {
     yText = yValues.map(function(d, i) {
@@ -30372,7 +30381,10 @@ labelPadding = function(vars) {
     });
   } else if (vars.x.scale.value === "share") {
     xText = xValues.map(function(d) {
-      return d * 100 + "%";
+      return vars.format.value(d * 100, {
+        key: "share",
+        vars: vars
+      });
     });
   } else if (vars.x.value === vars.time.value) {
     xText = xValues.map(function(d, i) {
@@ -30487,7 +30499,11 @@ createAxis = function(vars, axis) {
     c = d.constructor === Date ? +d : d;
     if (vars[axis].ticks.visible.indexOf(c) >= 0) {
       if (scale === "share") {
-        return d * 100 + "%";
+        return vars.format.value(d * 100, {
+          key: "share",
+          vars: vars,
+          labels: vars[axis].affixes.value
+        });
       } else if (d.constructor === Date) {
         return vars[axis].ticks.format(d);
       } else if (scale === "log") {

@@ -26,6 +26,19 @@
         text-decoration: underline;
       }
 
+      .stat_table .growth-arrow {
+        margin-right: 2px;
+        margin-top: 2px;
+      }
+
+      .stat_table .growth-arrow.down {
+        color: #af1f24;
+      }
+
+      .stat_table .growth-arrow.up {
+        color: #3daf49;
+      }
+
     </style>
 
 {% endblock %}
@@ -261,9 +274,12 @@
         builds[build].loaded = true;
         iframe.attr("src", "/apps/embed/"+url);
       }
-      else if (!loading && iframe.node().contentWindow.app.url.indexOf(url) < 0) {
-        loading = true;
-        iframe.node().contentWindow.app.start(url);
+      else {
+        var stripped_url = url.split("?")[0];
+        if (!loading && iframe.node().contentWindow.app.url !== stripped_url) {
+          loading = true;
+          iframe.node().contentWindow.app.start(url);
+        }
       }
 
     }

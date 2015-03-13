@@ -206,20 +206,30 @@
     }
 
     var cleanAttrs = function(d, o) {
-      return d.data.reduce(function(obj, a){
-        a[o+"_id"] = a.id;
-        a[o+"_display"] = dataviva.displayID(a.id,o);
-        a.icon = dataviva.icon(a.id,o);
-        delete a["export_val"];
-        delete a["import_val"];
-        delete a["enrolled"];
-        delete a["num_emp"];
-        obj[a.id] = a;
-        if (["university","school"].indexOf(o) >= 0 && !(a["school_type_id"] in obj)) {
-          obj[a["school_type_id"]] = {"color": a.color, "name": a["school_type"]};
-        }
-        return obj;
-      }, {});
+      var n = app.nesting(o), ret_obj = {};
+      for (var i = 0; i < n.length; i++) {
+        var level = n[i];
+        ret_obj[level] = d.data.reduce(function(obj, a) {
+          if (level === "school_type_id") {
+            if (!(a.school_type_id in obj)) {
+              obj[a.school_type_id] = {"color": a.color, "name": a.school_type};
+            }
+          }
+          else {
+            a[o+"_id"] = a.id;
+            a[o+"_display"] = dataviva.displayID(a.id,o);
+            a.icon = dataviva.icon(a.id,o);
+            delete a.export_val;
+            delete a.import_val;
+            delete a.enrolled;
+            delete a.num_emp;
+            delete a.school_type;
+            obj[a.id] = a;
+          }
+          return obj;
+        }, {});
+      }
+      return ret_obj;
     }
 
     var createRecs = function(html, arr) {
@@ -646,6 +656,7 @@
         "family": app.font,
         "weight": "normal"
       })
+      .data({"padding": 0})
       .color({"missing": "#999"})
       .coords({"mute": ["2pe020000"]})
       .messages({"style": "large"})
@@ -689,6 +700,37 @@
       }
     }
 
+    app.nesting = function(out) {
+
+      if (!out) out = app.build.output_attr;
+
+      if (out === "balance") {
+        return ["trade_balance", "direction"];
+      }
+      else if (out === "university") {
+        return ["school_type_id", "university_5"];
+      }
+      else if (out === "school") {
+        return ["school_type_id", "school_8"];
+      }
+      else if (out === "time") {
+        return ["time_period"];
+      }
+      else if (out === "type") {
+        return ["student_type"];
+      }
+      else if (out === "age") {
+        return ["course_sc_5","school_id"];
+      }
+
+      var nesting = [];
+      depths[out].forEach(function(d){
+        nesting.push(out+"_"+d);
+      })
+      return nesting;
+
+    }
+
     // Start building a new app
     app.start = function(new_url,allyears) {
 
@@ -698,21 +740,6 @@
       app.allyears = allyears;
 
       if (new_url) {
-    	  var info = new_url.split("/")
-  		  if('network' == info[0] || 'rings' == info[0]) {
-  		  	// RULE: Network/Rings forces the location MG when dataset is RAIS and Location is BRA
-  		  	if(info[1]=='rais' && info[2] == 'all') {
-  		  		info[2] = '4mg'
-  		  		new_url = info.join("/")
-  		  	}
-  		  }
-  		  if('occugrid' == info[0] || 'scatter' == info[0]) {
-  		  	// RULE: Occugrid/Scatter forces the location MG when Location is BRA
-  		  	if(info[2] == 'all') {
-  		  		info[2] = '4mg'
-  		  		new_url = info.join("/")
-  		  	}
-  		  }
 
         if (new_url != app.url || allyears) {
           app.url = new_url
@@ -1174,34 +1201,14 @@
       if (app.build.output_attr === "balance") {
         app.viz.text({"trade_balance": "trade_balance", "direction": "direction"});
       }
+      // else if (["university", "school"].indexOf(app.build.output_attr) >= 0) {
+      //   app.viz.text({"school_type_id": "school_type", "university_5": "name"});
+      // }
       else {
         app.viz.text("name");
       }
 
-      var nesting = [];
-      if (app.build.output_attr === "balance") {
-        nesting = ["trade_balance", "direction"];
-      }
-      else if (app.build.output_attr === "university") {
-        nesting = ["school_type_id","university_5"];
-      }
-      else if (app.build.output_attr === "school") {
-        nesting = ["school_type_id","school_8"];
-      }
-      else if (app.build.output_attr === "time") {
-        nesting = ["time_period"];
-      }
-      else if (app.build.output_attr === "type") {
-        nesting = ["student_type"];
-      }
-      else if (app.build.output === "age") {
-        nesting = ["course_sc_5","school_id"];
-      }
-      else {
-        depths[app.build.output_attr].forEach(function(d){
-          nesting.push(app.build.output_attr+"_"+d)
-        })
-      }
+      var nesting = app.nesting(app.build.output === "age" ? "age" : app.build.output_attr);
 
       app.solos = []
       app.filters = []
@@ -1265,7 +1272,8 @@
         app.vars.year = app.timeURL(app.years);
       }
 
-      var timeSolo = app.vars.year && app.vars.year !== app.years.join("_") ? time2range(app.vars.year.split("_")) : [];
+      var timeSolo = app.vars.year && app.vars.year !== app.years.join("_") ?
+                     time2range(app.vars.year.split("_")) : [];
 
       app.viz
         .type(app.build.app.d3plus)
@@ -1280,6 +1288,7 @@
         .id(nesting)
         .depth(nesting.indexOf(app.vars.depth))
         .id({"grouping": app.vars.grouping})
+        .id({"solo": [], "mute": []})
         .order({
           "sort": app.vars.sort,
           "value": app.vars.order
@@ -1931,7 +1940,7 @@
             })[0]
             if (d && d.required) {
               d.importance = job.importance
-              d.category = attr[d[out+"_id"].slice(0,depths[out][0])].name
+              d.category = attr.cbo_1[d[out+"_id"].slice(0,depths[out][0])].name
               d.none = 1
 
               d.required = Math.ceil(d.required)

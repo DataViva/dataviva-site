@@ -182,6 +182,8 @@ def dictionary():
         "university_5": gettext("University"),
         "university_plural": gettext("Universities"),
         "university_5_plural": gettext("Universities"),
+        "school_8": gettext("Vocational School"),
+        "school_8_plural": gettext("Vocational Schools"),
 
         # Calculation Labels
         "eci": gettext("Economic Complexity"),

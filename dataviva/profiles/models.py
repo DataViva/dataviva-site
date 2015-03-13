@@ -299,9 +299,13 @@ class Cnae(Profile):
                     {"id": 37, "params": {"size": "wage_avg"}},
                     {"id": 22, "params": {"color": "wage_avg"}}
                 ]
-            ]},
-            {"title": gettext("Economic Opportunities:"), "builds": [51, 48]}
+            ]}
         ]
+
+        if len(self.attr.id) > 1:
+            apps.append({
+                "title": gettext("Economic Opportunities:"), "builds": [51, 48]
+            })
 
         products = self.crosswalk_id()
         if len(products):
