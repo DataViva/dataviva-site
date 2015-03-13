@@ -324,7 +324,7 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
     '''Grab attrs for bra and filters
     '''
     if bra_id == "all":
-        bra_attr = Wld.query.get_or_404("sabra")
+        bra_attr = [Wld.query.get_or_404("sabra")]
     else:
         bra_attr = [Bra.query.get_or_404(b) for b in bra_id.split("_")]
     filter1_attr = filter1
@@ -332,17 +332,17 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
     profile = False
     if filter1 != "all":
         filter1_attr = globals()[build_filter1.capitalize()].query.get_or_404(filter1)
-        profile = filter1_attr
         if output == build_filter1:
+            profile = filter1_attr
             recommended["crosswalk"] = crosswalk_recs(dataset, build_filter1, filter1)
     if filter2 != "all":
         filter2_attr = globals()[build_filter2.capitalize()].query.get_or_404(filter2)
-        profile = filter2_attr
         if output == build_filter2:
+            profile = filter2_attr
             recommended["crosswalk"] = crosswalk_recs(dataset, build_filter2, filter2)
 
     if profile == False and output == "bra":
-        profile = bra_attr
+        profile = bra_attr[0]
     if profile and output != "school":
         recommended["profile"] = {
             "title": u"{} {}".format(gettext("Profile for"),profile.name()),
