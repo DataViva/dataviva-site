@@ -73,14 +73,14 @@
               {{ stat.name }}
             </td>
             <td>
-              {% if stat.url %}
+              {%- if stat.url -%}
                 <a href="{{ stat.url }}">
-              {% endif %}
+              {%- endif -%}
                 {# {{ format(stat.name).render(stat.name) }} #}
                 {{ format(stat.desc).render(stat.mode) }}
-              {% if stat.url %}
+              {%- if stat.url -%}
                 </a>
-              {% endif %}
+              {%- endif -%}
               {% if stat.value %} ({{ format(stat.value).render(stat.mode) }}){% endif %}
             </td>
           </tr>
