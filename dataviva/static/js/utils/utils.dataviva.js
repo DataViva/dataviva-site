@@ -389,7 +389,7 @@ dataviva.icon = function(id,type,color) {
   if (["university","school"].indexOf(type) >= 0 && id !== "all") return false;
   if (type === "bra" && id.length === 1) return false;
 
-  if (type !== "wld" && id !== "all"){
+  if (type !== "file" && type !== "wld" && id !== "all"){
     var i = type === "bra" ? 1 : 0,
         depth = dataviva.depths(type)[i],
         id = id.slice(0,depth);
