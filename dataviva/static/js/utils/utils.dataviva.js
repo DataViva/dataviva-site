@@ -495,24 +495,18 @@ dataviva.cleanData = function(data, dataset, output) {
 
 }
 
-dataviva.depths = function(type,flatten) {
-  if (type == "cnae") var array = [1,3,6];
-  else if (type == "cbo") var array = [1,2,4];
-  else if (type == "hs") var array = [2,4,6];
-  else if (type == "bra") var array = [1,3,5,7,9];
-  else if (type == "wld") var array = [2,5];
-  else if (type == "course_hedu") var array = [2,6];
-  else if (type == "university") var array = [5];
-  else if (type == "course_sc") var array = [2,5];
-  else if (type == "school") var array = [8];
-  else var array = [0];
+dataviva.depths = function(type) {
 
-  if (flatten && array.length > 2) {
-    return [array[0],array[array.length-1]];
-  }
-  else {
-    return array;
-  }
+  if (type == "cnae") return [1,3,6];
+  else if (type == "cbo") return [1,4];
+  else if (type == "hs") return [2,6];
+  else if (type == "bra") return [1,3,5,7,9];
+  else if (type == "wld") return [2,5];
+  else if (type == "course_hedu") return [2,6];
+  else if (type == "university") return [5];
+  else if (type == "course_sc") return [2,5];
+  else if (type == "school") return [8];
+  else return [0];
 
 }
 

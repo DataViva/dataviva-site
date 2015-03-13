@@ -859,12 +859,7 @@ function Selector() {
           value = sort_types[type] ? sort_types[type] : null,
           sorts = ["name"]
 
-      if (type == "bra") {
-        var depths = dataviva.depths(type,false)
-      }
-      else {
-        var depths = dataviva.depths(type,true)
-      }
+      var depths = dataviva.depths(type);
 
       if (value) {
         sorts.push(value)
