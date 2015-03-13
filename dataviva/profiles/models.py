@@ -143,7 +143,7 @@ class Bra(Profile):
                     {"id":11, "params": {"size": "export_val"}},
                     {"id":27, "params": {"size": "export_val"}},
                     {"id":134, "params": {"size": "export_val"}}
-                ],
+                ]
             ]},
             {"title": gettext("Imports by:"), "builds": [
                 [
@@ -155,9 +155,21 @@ class Bra(Profile):
                     {"id":11, "params": {"size": "import_val"}},
                     {"id":27, "params": {"size": "import_val"}},
                     {"id":134, "params": {"size": "import_val"}}
-                ],
+                ]
             ]},
-            {"title": gettext("Employment by:"), "builds": [[1,17, 140], [3, 19, 142]]},
+            {"title": gettext("Employment by:"), "builds": [[1, 17, 140], [3, 19, 142]]},
+            {"title": gettext("Wages by:"), "builds": [
+                [
+                    {"id": 1, "params": {"size": "wage"}},
+                    {"id": 17, "params": {"size": "wage"}},
+                    {"id": 140, "params": {"size": "wage"}}
+                ],
+                [
+                    {"id": 3, "params": {"size": "wage"}},
+                    {"id": 19, "params": {"size": "wage"}},
+                    {"id": 142, "params": {"size": "wage"}}
+                ]
+            ]},
             {"title": gettext("Economic Opportunities:"), "builds": [35, 33]},
             {"title": gettext("Domestic Trade by:"), "builds": [128, 127]},
             {"title": gettext("University Enrollment by:"), "builds": [93, [95, 105, 115]]},
@@ -170,7 +182,12 @@ class Bra(Profile):
                 for b in [40,13,29]:
                     exp_builds.append({"id": b, "params": {"size": val}})
                 apps[i+1]["builds"].append(exp_builds)
-            apps[3]["builds"].append([36,5,21])
+            apps[3]["builds"].append([36, 5, 21])
+            apps[4]["builds"].append([
+                {"id": 36, "params": {"color": "wage"}},
+                {"id": 5, "params": {"size": "wage"}},
+                {"id": 21, "params": {"size": "wage"}}
+            ])
         return apps
 
 class Hs(Profile):
