@@ -207,9 +207,10 @@
 
     var cleanAttrs = function(d, o) {
       var n = app.nesting(o), ret_obj = {};
+      var attr_copy = d3plus.util.copy(d.data);
       for (var i = 0; i < n.length; i++) {
         var level = n[i];
-        ret_obj[level] = d.data.reduce(function(obj, a) {
+        ret_obj[level] = attr_copy.reduce(function(obj, a) {
           if (level === "school_type_id") {
             if (!(a.school_type_id in obj)) {
               obj[a.school_type_id] = {"color": a.color, "name": a.school_type};
