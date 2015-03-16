@@ -106,10 +106,18 @@
           .call(is.url(url).offset(0).remove(true))
       }
 
-      function item_formatter(feed, activity){
+      function item_formatter(feed, activity, offset, manual, header){
 
         var formatDate = d3.time.format("%B %-d, %Y"),
             parseDate = d3.time.format.iso.parse;
+
+        activity = activity.map(function(a){
+          var obj = {};
+          header.forEach(function(h, i){
+            obj[h] = a[i];
+          });
+          return obj;
+        })
 
         var questions = d3.select(feed).selectAll(".question_block")
           .data(activity, function(d){ return d.id; })
