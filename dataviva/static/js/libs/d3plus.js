@@ -11472,11 +11472,11 @@ var dataNest = function(vars, flatData, nestingLevels) {
 
   }
 
-  if (vars.axes && vars.axes.discrete) {
-    nestedData.key(function(d){
-      return fetchValue(vars, d, vars[vars.axes.discrete].value);
-    });
-  }
+  // if (vars.axes && vars.axes.discrete) {
+  //   nestedData.key(function(d){
+  //     return fetchValue(vars, d, vars[vars.axes.discrete].value);
+  //   });
+  // }
 
   var deepest_is_id = nestingLevels.length && vars.id.nesting.indexOf(nestingLevels[nestingLevels.length - 1]) >= 0;
   var i = nestingLevels.length && deepest_is_id ? nestingLevels.length - 1 : 0;
@@ -23955,11 +23955,9 @@ module.exports = function(vars,selection,enter,exit) {
 
   var stroke = vars.data.stroke.width * 2,
       hitarea = stroke < 15 ? 15 : stroke,
-      discrete = vars[vars.axes.discrete],
-      ticks = discrete.value === vars.time.value ?
-              vars.data.time.values : discrete.ticks.values;
+      discrete = vars[vars.axes.discrete];
 
-  ticks = ticks.map(function(d){
+  var ticks = discrete.ticks.values.map(function(d){
     if (d.constructor === Date) return d.getTime();
     else return d;
   });
@@ -24094,13 +24092,11 @@ module.exports = function(vars,selection,enter,exit) {
 
     }
 
-    var mouseData = selection.size() * discrete.ticks.values.length < vars.data.large ? segments : [];
-
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     // Create mouse event lines
     //--------------------------------------------------------------------------
     var mouse = group.selectAll("path.d3plus_mouse")
-      .data(mouseData, function(d){
+      .data(segments, function(d){
         return d.segment_key;
       });
 
@@ -26988,16 +26984,6 @@ module.exports = function(vars) {
       return "d3plus_title " + t.type;
     })
     .attr("opacity",0)
-    // .attr("transform",function(t){
-    //   var y = t.style.position == "top" ? 0 : vars.height.value
-    //   if (vars.title.width) {
-    //     var x = vars.width.value/2 - vars.title.width/2;
-    //   }
-    //   else {
-    //     var x = 0;
-    //   }
-    //   return "translate("+x+","+y+")";
-    // })
     .append("text")
       .call(style)
 
@@ -27065,32 +27051,31 @@ module.exports = function(vars) {
         window.open(t.link,target)
       }
     })
-    .transition().duration(vars.draw.timing)
-      .attr("opacity",1)
-      .attr("transform",function(t){
-        var pos = t.style.position,
-            y = pos == "top" ? 0+t.y : vars.height.value-t.y
-        if (pos == "bottom") {
-          y -= this.getBBox().height+t.style.padding
+    .attr("opacity",1)
+    .attr("transform",function(t){
+      var pos = t.style.position,
+          y = pos == "top" ? 0+t.y : vars.height.value-t.y
+      if (pos == "bottom") {
+        y -= this.getBBox().height+t.style.padding
+      }
+      else {
+        y += t.style.padding
+      }
+      var align = getAlign(t);
+      if (align === "start") {
+        var x = vars.margin.left + vars.title.padding;
+      }
+      else {
+        var w = d3.select(this).select("text").node().getBBox().width;
+        if (align === "middle") {
+          x = vars.width.value/2 - titleWidth/2;
         }
         else {
-          y += t.style.padding
+          x = vars.width.value - titleWidth - vars.margin.right - vars.title.padding;
         }
-        var align = getAlign(t);
-        if (align === "start") {
-          var x = vars.margin.left + vars.title.padding;
-        }
-        else {
-          var w = d3.select(this).select("text").node().getBBox().width;
-          if (align === "middle") {
-            x = vars.width.value/2 - titleWidth/2;
-          }
-          else {
-            x = vars.width.value - titleWidth - vars.margin.right - vars.title.padding;
-          }
-        }
-        return "translate("+x+","+y+")";
-      })
+      }
+      return "translate("+x+","+y+")";
+    })
 
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // Exit unused titles
@@ -30928,7 +30913,7 @@ module.exports = function(vars, data) {
   opposite = vars[vars.axes.opposite];
   timeAxis = discrete.value === vars.time.value;
   if (timeAxis) {
-    ticks = vars.data.time.values;
+    ticks = vars.data.time.ticks;
     if (vars.time.solo.value.length) {
       serialized = vars.time.solo.value.map(Number);
       ticks = ticks.filter(function(f) {
@@ -30961,9 +30946,7 @@ module.exports = function(vars, data) {
     availables = uniqueValues(leaves, discrete.value, fetchValue, vars);
     timeVar = availables[0].constructor === Date;
     if (timeVar) {
-      availables = availables.map(function(t) {
-        return t.getTime();
-      });
+      availables = availables.map(Number);
     }
     if (discrete.zerofill.value) {
       if (discrete.scale.value === "log") {
@@ -30979,7 +30962,7 @@ module.exports = function(vars, data) {
       }
       for (i = _i = 0, _len = ticks.length; _i < _len; i = ++_i) {
         tick = ticks[i];
-        tester = tick.constructor === Date ? tick.getTime() : tick;
+        tester = timeAxis ? +tick : tick;
         if (availables.indexOf(tester) < 0) {
           obj = {
             d3plus: {}
@@ -31058,16 +31041,7 @@ module.exports = function(vars, data) {
     d = data[_i];
     val = fetchValue(vars, d, vars[stacked].value);
     if (val instanceof Array) {
-      if (val.filter(function(v) {
-        return v > 0;
-      }).length) {
-        positiveData.push(d);
-      }
-      if (val.filter(function(v) {
-        return v < 0;
-      }).length) {
-        negativeData.push(d);
-      }
+      positiveData.push(d);
     } else {
       if (val > 0) {
         positiveData.push(d);
@@ -32192,7 +32166,9 @@ module.exports = scatter;
 
 
 },{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/dataTicks.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/dataTicks.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/stacked.coffee":[function(require,module,exports){
-var fetchValue, graph, nest, sort, stack, stacked, threshold;
+var closest, fetchValue, graph, nest, sort, stack, stacked, threshold;
+
+closest = require("../../util/closest.coffee");
 
 fetchValue = require("../../core/fetch/value.coffee");
 
@@ -32207,7 +32183,7 @@ stack = require("./helpers/graph/stack.coffee");
 threshold = require("../../core/data/threshold.js");
 
 stacked = function(vars) {
-  var d, data, domains, point, _i, _j, _len, _len1, _ref;
+  var d, data, discrete, domains, opposite, point, _i, _j, _len, _len1, _ref;
   graph(vars, {
     buffer: vars.axes.opposite
   });
@@ -32216,6 +32192,8 @@ stacked = function(vars) {
     return [];
   }
   data = sort(vars.data.viz, null, null, null, vars);
+  discrete = vars[vars.axes.discrete];
+  opposite = vars[vars.axes.opposite];
   for (_i = 0, _len = data.length; _i < _len; _i++) {
     point = data[_i];
     if (!point.d3plus) {
@@ -32224,9 +32202,12 @@ stacked = function(vars) {
     _ref = point.values;
     for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
       d = _ref[_j];
-      d.d3plus.x = vars.x.scale.viz(fetchValue(vars, d, vars.x.value));
+      if (!d.d3plus) {
+        d.d3plus = {};
+      }
+      d.d3plus.x = discrete.scale.viz(fetchValue(vars, d, discrete.value));
       d.d3plus.x += vars.axes.margin.left;
-      d.d3plus.y = vars.y.scale.viz(fetchValue(vars, d, vars.y.value));
+      d.d3plus.y = opposite.scale.viz(fetchValue(vars, d, opposite.value));
       d.d3plus.y += vars.axes.margin.top;
       if (d.d3plus.merged instanceof Array) {
         if (!point.d3plus.merged) {
@@ -32243,7 +32224,7 @@ stacked = function(vars) {
 };
 
 stacked.filter = function(vars, data) {
-  return nest(vars, threshold(vars, data, vars.x.value));
+  return nest(vars, threshold(vars, data, vars[vars.axes.discrete].value));
 };
 
 stacked.requirements = ["data", "x", "y"];
@@ -32283,7 +32264,7 @@ module.exports = stacked;
 
 
 
-},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../core/data/threshold.js":"/Users/Dave/Sites/d3plus/src/core/data/threshold.js","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/table.js":[function(require,module,exports){
+},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../core/data/threshold.js":"/Users/Dave/Sites/d3plus/src/core/data/threshold.js","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/table.js":[function(require,module,exports){
 var fetchValue = require("../../core/fetch/value.coffee");
 var uniques    = require("../../util/uniques.coffee");
 var copy       = require("../../util/copy.coffee");
