@@ -227,12 +227,6 @@
         }
       }
 
-      // if ( !d3_target.classed("searchFld") && !d3_target.classed("searchBox") ) {
-      //   if( d3.select(".searchBox").style("width") === "445px" ) {
-      //     closeSearch()
-      //   }
-      // }
-
     })
 
     var searchInterval = "";
@@ -310,10 +304,11 @@
                   .attr("class","search_result")
                   .attr("href", url);
 
-                link.append("div")
+                var image = link.append("div")
                   .attr("class","search_icon")
-                  .style("background-image","url('"+icon+"')")
                   .style("background-color", item.bgcolor);
+
+                if (icon) image.style("background-image","url('"+icon+"')");
 
                 var text = link.append("div").attr("class","search_text");
 
