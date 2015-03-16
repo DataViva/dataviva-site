@@ -6,6 +6,7 @@ function infinite_scroll(selection){
       limit = 50,
       offset = 0,
       order = null,
+      order_clicked = null,
       format_items = function(d){ return d };
 
   // Initialize variables
@@ -58,17 +59,25 @@ function infinite_scroll(selection){
         refresh = false;
 
         // conver url to Location object
-        a = url
+        a = url;
         // decide whether to use '?' or '&'
-        if(a.indexOf("?") >= 0){
-          a += "&limit="+limit+"&offset="+offset
+        if (order) {
+          a = a.split("?")[0]
+          if(order_clicked){
+            a += "?limit="+limit+"&order="+order
+            order_clicked = false;
+          }
+          else {
+            a += "?limit="+limit+"&offset="+offset+"&order="+order
+          }
         }
         else {
-          a += "?limit="+limit+"&offset="+offset
-        }
-
-        if (order) {
-          a += "&limit="+limit+"&order="+order
+          if(a.indexOf("?") >= 0){
+            a += "&limit="+limit+"&offset="+offset
+          }
+          else {
+            a += "?limit="+limit+"&offset="+offset
+          }
         }
 
         // Here we set the header X-Requested-With to XMLHttpRequest so the
@@ -166,6 +175,7 @@ function infinite_scroll(selection){
   scroll.order = function(value) {
     if(!arguments.length) return order;
     order = value;
+    order_clicked = true;
     return scroll;
   }
 
