@@ -313,6 +313,25 @@ def app_star(app_name, data_type, bra_id, filter1, filter2, output):
     else:
         return jsonify({"success": -1})
 
+def get_builds(bra_attr, dataset, profile1, filter1, profile2, filter2, skip_mode=False, bra_id="", all_brazil=False):
+    builds = Build.query.filter_by(dataset=dataset, filter1=profile1, filter2=profile2).all()
+    build_list = []
+    for b in builds:
+        if 'filler' in [filter1, filter2]:
+            raise Exception('wtf?')
+        if bra_attr:
+            b.set_bra(bra_attr)
+        if filter1 != 'all':
+            b.set_filter1(filter1)
+        if filter2 != 'all':
+            b.set_filter2(filter2)
+        if skip_mode and b.output == 'bra' and len(bra_id) > 3:
+            continue
+        elif all_brazil and b.id in [48, 51]: # -- when looking at all Brazil, skip Occugrid/Rings
+            continue
+        build_list.append(b.json())
+    return build_list
+
 @mod.route('/recommend/', methods=['GET', 'POST'])
 @mod.route('/recommend/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
 def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=None, output=None):
@@ -323,8 +342,9 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
 
     '''Grab attrs for bra and filters
     '''
+    bra_all = [Wld.query.get_or_404("sabra")]
     if bra_id == "all":
-        bra_attr = [Wld.query.get_or_404("sabra")]
+        bra_attr = bra_all
     else:
         bra_attr = [Bra.query.get_or_404(b) for b in bra_id.split("_")]
     filter1_attr = filter1
@@ -356,53 +376,25 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
 
     '''First get the MOST relevent builds (ones that use all filters)'''
     if build_filter1 != "all" and build_filter2 != "all":
-        builds = Build.query.filter_by(dataset=dataset, filter1=build_filter1,
-                    filter2=build_filter2).all()
-        recommended['both_filters'] = []
-        for b in builds:
-            if bra_id != "filler":
-                b.set_bra(bra_attr)
-            if filter1 != "filler":
-                b.set_filter1(filter1_attr)
-            if filter2 != "filler":
-                b.set_filter2(filter2_attr)
-            recommended['both_filters'].append(b.json())
+        recommended['both_filters'] = get_builds(bra_attr, dataset, build_filter1, filter1, build_filter2, filter2)
+        if bra_all != bra_attr:
+            recommended['both_filters'] += get_builds(bra_all, dataset, build_filter1, filter1, build_filter2, filter2)
     else:
-
         '''Add any builds that rely strictly on the second filter'''
         if build_filter2 != "all":
-            builds = Build.query.filter_by(dataset=dataset, filter1="all",
-                        filter2=build_filter2).all()
-            recommended['filter2'] = []
-            for b in builds:
-                if bra_id != "filler":
-                    b.set_bra(bra_attr)
-                if filter2 != "filler":
-                    b.set_filter2(filter2_attr)
-                recommended['filter2'].append(b.json())
+            recommended['filter2'] = get_builds(bra_attr, dataset, 'all', 'all', build_filter2, filter2)
+            if bra_all != bra_attr:
+                recommended['filter2'] += get_builds(bra_all, dataset, 'all', 'all', build_filter2, filter2, all_brazil=True)
 
         '''Add any builds that rely strictly on the first filter'''
         if build_filter1 != "all":
-            builds = Build.query.filter_by(dataset=dataset, filter1=build_filter1,
-                        filter2="all").all()
-            recommended['filter1'] = []
-            for b in builds:
-                if bra_id != "filler":
-                    b.set_bra(bra_attr)
-                if filter1 != "filler":
-                    b.set_filter1(filter1_attr)
-                if b.output == "bra" and len(bra_id) > 3:
-                    continue
-                recommended['filter1'].append(b.json())
+            recommended['filter1'] = get_builds(bra_attr, dataset, build_filter1, filter1, 'all', 'all', skip_mode=True, bra_id=bra_id)
+            if bra_all != bra_attr:
+                recommended['filter1'] += get_builds(bra_all, dataset, build_filter1, filter1, 'all', 'all', skip_mode=True, bra_id=bra_id, all_brazil=True)
 
         '''Lastly get the rest of the relevent builds'''
         if build_filter1 == "all" and build_filter2 == "all":
-            builds = Build.query.filter_by(dataset=dataset, filter1="all", filter2="all").all()
-            recommended['no_filters'] = []
-            for b in builds:
-                if bra_id != "filler":
-                    b.set_bra(bra_attr)
-                recommended['no_filters'].append(b.json())
+            recommended['no_filters'] = get_builds(bra_all, dataset, 'all', 'all', 'all', 'all')
 
     return jsonify(recommended)
 
