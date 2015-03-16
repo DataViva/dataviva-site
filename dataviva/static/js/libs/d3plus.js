@@ -18371,7 +18371,7 @@ var defaultLocale;
 defaultLocale = require("../core/locale/languages/en_US.coffee");
 
 module.exports = function(number, opts) {
-  var affixes, key, labels, ret, symbol, time, vars;
+  var affixes, key, labels, length, ret, symbol, time, vars;
   if ("locale" in this) {
     time = this.locale.value.time;
   } else {
@@ -18383,6 +18383,7 @@ module.exports = function(number, opts) {
   vars = opts.vars || {};
   key = opts.key;
   labels = "labels" in opts ? opts.labels : true;
+  length = number.toString().split(".")[0].length;
   if (vars.time && vars.time.value) {
     time.push(vars.time.value);
   }
@@ -18393,14 +18394,16 @@ module.exports = function(number, opts) {
     ret += "%";
   } else if (number < 10 && number > -10) {
     ret = d3.round(number, 2);
-  } else if (number.toString().split(".")[0].length > 3) {
+  } else if (length > 3) {
     symbol = d3.formatPrefix(number).symbol;
     symbol = symbol.replace("G", "B");
     number = d3.formatPrefix(number).scale(number);
     number = parseFloat(d3.format(".3g")(number));
     ret = number + symbol;
-  } else {
+  } else if (length === 3) {
     ret = d3.format(",f")(number);
+  } else {
+    ret = d3.format(".3g")(number);
   }
   if (labels && key && "format" in vars && key in vars.format.affixes.value) {
     affixes = vars.format.affixes.value[key];
@@ -29110,7 +29113,7 @@ box = function(vars) {
   d3.nest().key(function(d) {
     return fetchValue(vars, d, vars[discrete].value);
   }).rollup(function(leaves) {
-    var bottom, bottomWhisker, boxData, d, first, iqr, key, label, median, medianData, outliers, scale, second, top, topWhisker, val, values, x, y, _i, _j, _len, _len1;
+    var bottom, bottomWhisker, boxData, d, first, iqr, key, label, median, medianData, medianText, outliers, scale, second, top, topWhisker, val, values, x, y, _i, _j, _len, _len1;
     scale = vars[opposite].scale.viz;
     values = leaves.map(function(d) {
       return fetchValue(vars, d, vars[opposite].value);
@@ -29185,13 +29188,20 @@ box = function(vars) {
     y += oppMargin;
     boxData.d3plus[opposite] = y;
     returnData.push(boxData);
+    if (boxData.d3plus[h] < 20) {
+      medianText = false;
+    } else {
+      medianText = vars.format.value(median, {
+        key: vars[opposite].value
+      });
+    }
     medianData = {
       d3plus: {
         id: "median_line_" + key,
         position: h === "height" ? "top" : "right",
         shape: "whisker",
         "static": true,
-        text: boxData.d3plus[h] > 20 ? median : false
+        text: medianText
       }
     };
     medianData.d3plus[w] = space;
