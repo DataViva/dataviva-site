@@ -18371,7 +18371,7 @@ var defaultLocale;
 defaultLocale = require("../core/locale/languages/en_US.coffee");
 
 module.exports = function(number, opts) {
-  var affixes, key, labels, ret, symbol, time, vars;
+  var affixes, key, labels, length, ret, symbol, time, vars;
   if ("locale" in this) {
     time = this.locale.value.time;
   } else {
@@ -18383,6 +18383,7 @@ module.exports = function(number, opts) {
   vars = opts.vars || {};
   key = opts.key;
   labels = "labels" in opts ? opts.labels : true;
+  length = number.toString().split(".")[0].length;
   if (vars.time && vars.time.value) {
     time.push(vars.time.value);
   }
@@ -18393,14 +18394,16 @@ module.exports = function(number, opts) {
     ret += "%";
   } else if (number < 10 && number > -10) {
     ret = d3.round(number, 2);
-  } else if (number.toString().split(".")[0].length > 3) {
+  } else if (length > 3) {
     symbol = d3.formatPrefix(number).symbol;
     symbol = symbol.replace("G", "B");
     number = d3.formatPrefix(number).scale(number);
     number = parseFloat(d3.format(".3g")(number));
     ret = number + symbol;
-  } else {
+  } else if (length === 3) {
     ret = d3.format(",f")(number);
+  } else {
+    ret = d3.format(".3g")(number);
   }
   if (labels && key && "format" in vars && key in vars.format.affixes.value) {
     affixes = vars.format.affixes.value[key];
@@ -20377,7 +20380,7 @@ var dataFormat    = require("../../core/data/format.js"),
     finish        = require("./finish.js"),
     focusTooltip  = require("./focus/tooltip.coffee"),
     focusViz      = require("./focus/viz.js"),
-    history       = require("./ui/history.js"),
+    history       = require("./ui/history.coffee"),
     parseEdges    = require("../../core/parse/edges.js"),
     parseNodes    = require("../../core/parse/nodes.js"),
     print         = require("../../core/console/print.coffee"),
@@ -20737,7 +20740,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/data/color.js":"/Users/Dave/Sites/d3plus/src/core/data/color.js","../../core/data/format.js":"/Users/Dave/Sites/d3plus/src/core/data/format.js","../../core/data/keys.coffee":"/Users/Dave/Sites/d3plus/src/core/data/keys.coffee","../../core/data/load.coffee":"/Users/Dave/Sites/d3plus/src/core/data/load.coffee","../../core/fetch/data.js":"/Users/Dave/Sites/d3plus/src/core/fetch/data.js","../../core/parse/edges.js":"/Users/Dave/Sites/d3plus/src/core/parse/edges.js","../../core/parse/nodes.js":"/Users/Dave/Sites/d3plus/src/core/parse/nodes.js","../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","./errorCheck.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/errorCheck.js","./finish.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/finish.js","./focus/tooltip.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/tooltip.coffee","./focus/viz.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/viz.js","./shapes/draw.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/draw.js","./svg/enter.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/enter.js","./svg/update.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/update.js","./types/run.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/types/run.coffee","./ui/drawer.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/drawer.js","./ui/history.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/history.js","./ui/legend.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/legend.js","./ui/timeline.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/timeline.coffee","./ui/titles.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/titles.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/errorCheck.js":[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/data/color.js":"/Users/Dave/Sites/d3plus/src/core/data/color.js","../../core/data/format.js":"/Users/Dave/Sites/d3plus/src/core/data/format.js","../../core/data/keys.coffee":"/Users/Dave/Sites/d3plus/src/core/data/keys.coffee","../../core/data/load.coffee":"/Users/Dave/Sites/d3plus/src/core/data/load.coffee","../../core/fetch/data.js":"/Users/Dave/Sites/d3plus/src/core/fetch/data.js","../../core/parse/edges.js":"/Users/Dave/Sites/d3plus/src/core/parse/edges.js","../../core/parse/nodes.js":"/Users/Dave/Sites/d3plus/src/core/parse/nodes.js","../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","./errorCheck.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/errorCheck.js","./finish.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/finish.js","./focus/tooltip.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/tooltip.coffee","./focus/viz.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/viz.js","./shapes/draw.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/draw.js","./svg/enter.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/enter.js","./svg/update.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/update.js","./types/run.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/types/run.coffee","./ui/drawer.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/drawer.js","./ui/history.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/history.coffee","./ui/legend.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/legend.js","./ui/timeline.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/timeline.coffee","./ui/titles.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/titles.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/errorCheck.js":[function(require,module,exports){
 var fetchText    = require("../../core/fetch/text.js"),
     print        = require("../../core/console/print.coffee"),
     rejected     = require("../../core/methods/rejected.coffee"),
@@ -25638,111 +25641,87 @@ module.exports = function( vars ) {
 
 };
 
-},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../form/form.js":"/Users/Dave/Sites/d3plus/src/form/form.js","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/history.js":[function(require,module,exports){
-var events = require("../../../client/pointer.coffee"),
-    lighter    = require("../../../color/lighter.coffee"),
-    print      = require("../../../core/console/print.coffee"),
-    stylesheet = require("../../../client/css.coffee")
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../form/form.js":"/Users/Dave/Sites/d3plus/src/form/form.js","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/history.coffee":[function(require,module,exports){
+var events, lighter, print, stylesheet;
 
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-// Creates "back" button, if applicable
-//------------------------------------------------------------------------------
+events = require("../../../client/pointer.coffee");
+
+lighter = require("../../../color/lighter.coffee");
+
+print = require("../../../core/console/print.coffee");
+
+stylesheet = require("../../../client/css.coffee");
+
 module.exports = function(vars) {
-
+  var button, color, containerPadding, enter, family, left, min_height, padding, size, stripY, style, titleClass, titleGroup, top, weight;
   if (!vars.small && vars.history.states.length > 0) {
-
-    if ( vars.dev.value ) print.time("drawing back button");
-
-    var button = vars.container.value.selectAll("div#d3plus_back_button")
-      .data(["d3plus_back_button"]);
-
-    var size = vars.title.sub.font.size;
-    var color = vars.title.sub.font.color;
-    var family = vars.title.sub.font.family.value;
-    var weight = vars.title.sub.font.weight;
-    var padding = vars.title.sub.padding;
-
-    function style(elem) {
-
-        elem
-          .style("position","absolute")
-          .style("left",size/2+"px")
-          .style("top",vars.margin.top/2-size/2+"px")
-          .style("color", color)
-          .style("font-family", family)
-          .style("font-weight", weight)
-          .style("font-size",size+"px")
-          .style("z-index",2000)
-
+    if (vars.dev.value) {
+      print.time("drawing back button");
     }
-
-    var min_height = size + padding*2
-    if (vars.margin.top < min_height) {
-      vars.margin.top = min_height
+    button = vars.container.value.selectAll("div#d3plus_back_button").data(["d3plus_back_button"]).style("position", "relative").style("z-index", 1900);
+    size = vars.title.sub.font.size;
+    color = vars.title.sub.font.color;
+    family = vars.title.sub.font.family.value;
+    weight = vars.title.sub.font.weight;
+    padding = vars.title.sub.padding;
+    titleClass = false;
+    if (vars.title.sub.value && ["start", "left"].indexOf(vars.title.sub.font.align) < 0) {
+      titleClass = "sub";
+    } else if (vars.title.total.value && ["start", "left"].indexOf(vars.title.total.font.align) < 0) {
+      titleClass = "total";
+    } else if (vars.title.value && ["start", "left"].indexOf(vars.title.font.align) < 0) {
+      titleClass = "title";
     }
-
-    var enter = button.enter().append("div")
-      .attr("id","d3plus_back_button")
-      .style("opacity",0)
-      .call(style)
-      .html(function(){
-
-        if (stylesheet("font-awesome")) {
-          var arrow = "<span style='font-family:FontAwesome;margin-right:5px;'>&#xf104</span>"
-        }
-        else {
-          var arrow = "&laquo; "
-        }
-
-        return arrow+vars.format.value(vars.format.locale.value.ui.back)
-
-      })
-
-    button
-      .on(events.over,function(){
-
-        if (!vars.small && vars.history.states.length > 0) {
-
-          d3.select(this)
-            .style("cursor","pointer")
-            .transition().duration(vars.timing.mouseevents)
-              .style("color",lighter(color,.25))
-
-        }
-
-      })
-      .on(events.out,function(){
-
-        if (!vars.small && vars.history.states.length > 0) {
-
-          d3.select(this)
-            .style("cursor","auto")
-            .transition().duration(vars.timing.mouseevents)
-              .style("color",color)
-
-        }
-
-      })
-      .on(events.click,function(){
-
-        vars.history.back()
-
-      })
-      .transition().duration(vars.draw.timing)
-        .style("opacity",1)
-        .call(style)
-
-    if ( vars.dev.value ) print.timeEnd("drawing back button")
-
+    if (titleClass) {
+      stripY = function(elem) {
+        var y;
+        y = elem.attr("transform").split(",");
+        y = y[y.length - 1];
+        return parseFloat(y.substring(0, y.length - 1));
+      };
+      titleGroup = vars.svg.select(".d3plus_title." + titleClass);
+      top = stripY(titleGroup) + stripY(titleGroup.select("text"));
+    } else {
+      top = vars.margin.top - vars.title.padding;
+      min_height = size + padding * 2;
+      vars.margin.top += min_height;
+    }
+    containerPadding = parseFloat(vars.container.value.style("padding-top"), 10);
+    top += containerPadding;
+    containerPadding = parseFloat(vars.container.value.style("padding-left"), 10);
+    left = vars.margin.left + size / 2 + containerPadding;
+    style = function(elem) {
+      return elem.style("position", "absolute").style("left", left + "px").style("top", top + "px").style("color", color).style("font-family", family).style("font-weight", weight).style("font-size", size + "px");
+    };
+    enter = button.enter().append("div").attr("id", "d3plus_back_button").style("opacity", 0).call(style).html(function() {
+      var arrow;
+      if (stylesheet("font-awesome")) {
+        arrow = "<i class='fa fa-angle-left' style='margin-top:2px;margin-right:4px;'></i>";
+      } else {
+        arrow = "&laquo; ";
+      }
+      return arrow + vars.format.value(vars.format.locale.value.ui.back);
+    });
+    button.on(events.over, function() {
+      if (!vars.small && vars.history.states.length > 0) {
+        return d3.select(this).style("cursor", "pointer").transition().duration(vars.timing.mouseevents).style("color", lighter(color, .25));
+      }
+    }).on(events.out, function() {
+      if (!vars.small && vars.history.states.length > 0) {
+        return d3.select(this).style("cursor", "auto").transition().duration(vars.timing.mouseevents).style("color", color);
+      }
+    }).on(events.click, function() {
+      return vars.history.back();
+    }).transition().duration(vars.draw.timing).style("opacity", 1).call(style);
+    if (vars.dev.value) {
+      return print.timeEnd("drawing back button");
+    }
+  } else {
+    return vars.container.value.selectAll("div#d3plus_back_button").transition().duration(vars.draw.timing).style("opacity", 0).remove();
   }
-  else {
-    vars.container.value.selectAll("div#d3plus_back_button")
-      .transition().duration(vars.draw.timing)
-      .style("opacity",0)
-      .remove()
-  }
+};
 
-}
+
 
 },{"../../../client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee","../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/legend.js":[function(require,module,exports){
 var arraySort = require("../../../array/sort.coffee"),
@@ -27005,7 +26984,9 @@ module.exports = function(vars) {
   var titleWidth = vars.title.width || vars.width.value-vars.margin.left-vars.margin.right;
 
   titles.enter().append("g")
-    .attr("class","d3plus_title")
+    .attr("class", function(t){
+      return "d3plus_title " + t.type;
+    })
     .attr("opacity",0)
     // .attr("transform",function(t){
     //   var y = t.style.position == "top" ? 0 : vars.height.value
@@ -29110,7 +29091,7 @@ box = function(vars) {
   d3.nest().key(function(d) {
     return fetchValue(vars, d, vars[discrete].value);
   }).rollup(function(leaves) {
-    var bottom, bottomWhisker, boxData, d, first, iqr, key, label, median, medianData, outliers, scale, second, top, topWhisker, val, values, x, y, _i, _j, _len, _len1;
+    var bottom, bottomWhisker, boxData, d, first, iqr, key, label, median, medianData, medianText, outliers, scale, second, top, topWhisker, val, values, x, y, _i, _j, _len, _len1;
     scale = vars[opposite].scale.viz;
     values = leaves.map(function(d) {
       return fetchValue(vars, d, vars[opposite].value);
@@ -29185,13 +29166,20 @@ box = function(vars) {
     y += oppMargin;
     boxData.d3plus[opposite] = y;
     returnData.push(boxData);
+    if (boxData.d3plus[h] < 20) {
+      medianText = false;
+    } else {
+      medianText = vars.format.value(median, {
+        key: vars[opposite].value
+      });
+    }
     medianData = {
       d3plus: {
         id: "median_line_" + key,
         position: h === "height" ? "top" : "right",
         shape: "whisker",
         "static": true,
-        text: boxData.d3plus[h] > 20 ? median : false
+        text: medianText
       }
     };
     medianData.d3plus[w] = space;
