@@ -173,7 +173,7 @@
     }
 
     // Set the max-width for the builder div and app_title
-    app.title_width = window.innerWidth
+    app.title_width = window.innerWidth - 20
     app.title_width -= d3.select("#settings").node().offsetWidth+10
 
     app.title_height = d3.select("#settings").node().offsetHeight
@@ -2658,7 +2658,7 @@
 
       // Set the max-width for the builder div and app_title
       d3.select("#controls").style("max-width",window.innerWidth+"px")
-      app.title_width = window.innerWidth
+      app.title_width = window.innerWidth - 20
       app.title_width -= d3.select("#settings").node().offsetWidth
 
       d3.selectAll("#controls > br").remove()
