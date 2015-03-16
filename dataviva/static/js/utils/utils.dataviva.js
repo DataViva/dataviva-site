@@ -30,7 +30,7 @@ dataviva.format.text = function(text, opts) {
   if (typeof name !== "string") name = "";
 
   if (text.indexOf("xx") === 0 && name === "course_sc_5" && app && app.attrs && app.attrs.course_sc) {
-    return app.attrs.course_sc[text].name;
+    return app.attrs.course_sc.course_sc_5[text].name;
   }
 
   var l = dataviva.language;
