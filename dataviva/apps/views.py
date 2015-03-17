@@ -80,7 +80,7 @@ def guide():
     default_hs = '052601'
 
     # Tree Map
-    builds = Build.query.filter(Build.id.in_([1,3,9])).all()
+    builds = Build.query.filter(Build.id.in_([3,95,117])).all()
     for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": gettext("A visualization using the area of rectangles to show shares of the specified value. The data is nested heirarchically by its given classificaiton."),
@@ -89,7 +89,7 @@ def guide():
         "type": "tree_map"
     })
     # Stacked
-    builds = Build.query.filter(Build.id.in_([17,19,25])).all()
+    builds = Build.query.filter(Build.id.in_([20,27,150])).all()
     for b in builds: b.set_bra(default_bra); b.set_filter1(default_cnae);
     apps.append({
         "summary": gettext("Similar to to a line chart, stacked area charts use an X and Y axis to show values across time. The data is nested heirarchically by its given classificaiton."),
@@ -98,7 +98,7 @@ def guide():
         "type": "stacked"
     })
     # Geo Map
-    builds = Build.query.filter(Build.id.in_([36,40,41])).all()
+    builds = Build.query.filter(Build.id.in_([36,41,123])).all()
     for b in builds: b.set_bra(default_bra); b.set_filter1(default_hs);
     apps.append({
         "summary": gettext("Data values overlayed on a geographic map varying their color by the value they represent."),
@@ -116,7 +116,7 @@ def guide():
         "type": "network"
     })
     # Line
-    builds = Build.query.filter(Build.id.in_([91,115,126])).all()
+    builds = Build.query.filter(Build.id.in_([91,115,154])).all()
     for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": gettext("A type of chart which displays data as a time series with an X and Y axis."),
