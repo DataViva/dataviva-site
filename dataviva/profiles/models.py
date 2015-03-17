@@ -91,7 +91,7 @@ class Profile(object):
                             q = Ymb.query.filter(Ymb.bra_id == bra.id).all()
                             secex_restricted = len(q) == 0
                         if secex_restricted == True:
-                            group["builds"][i] = None
+                            v[ii] = None
                             continue
 
                     b.set_bra(bra)
@@ -119,7 +119,8 @@ class Profile(object):
 
                     v[ii] = b
 
-                group["builds"][i] = v
+                v = [b for b in v if b != None]
+                group["builds"][i] = v if len(v) else None
             group["builds"] = [b for b in group["builds"] if b != None]
 
         apps = [g for g in apps if len(g["builds"]) > 0]
