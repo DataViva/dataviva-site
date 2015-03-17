@@ -136,7 +136,7 @@ var selector = Selector().callback(function(d){
   var t = selector.type();
 
   var datasets = d3.select(".filters [data-type='"+selector.type()+"']").attr("class");
-  datasets = datasets.replace(" filter_button decision short icon", "");
+  datasets = datasets.replace(" filter_button decision square small icon", "");
   // window.location = "/profiles/" + selector.type() + "/" + d.id + "/";
   var button = d3.select(".selected_filters").append("div")
     .attr("class", datasets + " selected_filter")
