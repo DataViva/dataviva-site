@@ -202,8 +202,8 @@ table .hs_id, table .wld_id, table.color {
 }
 table .name {
   max-width: 200px !important;
-/*  min-width: 200px !important;*/
-/*  width: 200px !important;*/
+  min-width: 200px !important;
+  width: 200px !important;
 }
 table#university .name {
   max-width: 400px !important;
