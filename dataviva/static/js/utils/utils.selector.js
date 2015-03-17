@@ -364,7 +364,9 @@ function Selector() {
             })
           }
           else if (type === "bra") {
-            data = data
+            data = data.filter(function(d){
+              return d.id.substr(0,1) !== "0";
+            })
           }
           else {
             data = data.filter(function(d){
