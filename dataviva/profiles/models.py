@@ -62,16 +62,22 @@ class Profile(object):
 
     def builds(self):
 
+        secex_restricted = False
         if self.type == "bra":
             bra = self.attr
+
+            # removes SECEX builds if not data, test with '4mg050305'
+            if bra.id != "all":
+                q = Ymb.query.filter(Ymb.bra_id == bra.id).first()
+                secex_restricted = q
+
         else:
             bra = attrs.Wld.query.get("sabra")
             bra.id = "all"
 
         apps = self.build_list()
 
-        secex_restricted = None
-        position = 1
+        build_ids = []
         for group in apps:
             for i, v in enumerate(group["builds"]):
 
@@ -83,16 +89,28 @@ class Profile(object):
                     if isinstance(a, int):
                         a = {"id": a}
 
-                    b = Build.query.get_or_404(a["id"])
+                    if not a["id"] in build_ids:
+                        build_ids.append(a["id"])
+
+                    v[ii] = a
+
+                group["builds"][i] = v
+
+        build_ids = Build.query.filter(Build.id.in_(build_ids)).all()
+        build_ids = {b.id: b for b in build_ids}
+
+        position = 1
+        for group in apps:
+            for i, v in enumerate(group["builds"]):
+
+                for ii, a in enumerate(v):
+
+                    b = build_ids[a["id"]]
 
                     # removes SECEX builds if not data, test with '4mg050305'
-                    if b.dataset == "secex" and bra.id != "all":
-                        if secex_restricted == None:
-                            q = Ymb.query.filter(Ymb.bra_id == bra.id).all()
-                            secex_restricted = len(q) == 0
-                        if secex_restricted == True:
-                            v[ii] = None
-                            continue
+                    if b.dataset == "secex" and secex_restricted == None:
+                        v[ii] = None
+                        continue
 
                     b.set_bra(bra)
 
