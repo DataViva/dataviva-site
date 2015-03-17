@@ -206,12 +206,15 @@ function Selector() {
           x = data[x.parents[0]]
         }
 
-        selected = x
+        selected = x;
+        if (depth_path.indexOf(depth) > 0) {
+          depth_path.pop();
+        }
+        else if ((!depth_path.length || depth_path[depth_path.length-1] < current_depth) && x.id != "all" && current_depth) {
+          depth_path.push(current_depth);
+        }
 
-        if (depth_path.indexOf(depth) > 0) depth_path.pop()
-        else if ((!depth_path.length || depth_path[depth_path.length-1] < current_depth) && x.id != "all" && current_depth) depth_path.push(current_depth)
-
-        current_depth = depth
+        current_depth = depth;
 
         if (depths.length > 1) {
 
@@ -221,7 +224,7 @@ function Selector() {
               .attr("class","site_crumb")
               .html("&laquo; "+dataviva.format.text("back"))
               .on(d3plus.client.pointer.click,function(){
-                search.node().value = ""
+                search.node().value = "";
                 select_value(data[selected.parents[0]],depth_path[depth_path.length-1]);
               })
               .on(d3plus.client.pointer.over,function(){
@@ -307,10 +310,10 @@ function Selector() {
 
         if (initial_value != "all") {
           if (type == "bra" && initial_value == "4mg") {
-            var depth = 8
+            var depth = 8;
           }
-          else if (type == "bra" && initial_value.length == 7) {
-            var depth = 9
+          else if (type == "bra" && initial_value.length == 8) {
+            var depth = 9;
           }
           else {
             var d = depths.indexOf(initial_value.length)
@@ -319,10 +322,10 @@ function Selector() {
           }
           if (type == "bra" && initial_value.length >= 8) {
             if (initial_value.substr(0,3) === "4mg") {
-              depth_path = [3,8]
+              depth_path = [1, 3, 8]
             }
             else {
-              depth_path = [3,5]
+              depth_path = [1, 3, 5]
             }
           }
           else {
