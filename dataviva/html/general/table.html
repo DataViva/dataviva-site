@@ -212,18 +212,37 @@
     function make_sticky_header(attrs, sticky_cols, container_el){
       sticky_cols_w_names = []
       sticky_cols.forEach(function(col){
-        sticky_cols_w_names.push(col)
-        if(col.indexOf("_id") > -1){
+        // sticky_cols_w_names.push(col)
+        // if(col.indexOf("_id") > -1){
+        //   var attr_type = col.replace("_id", "")
+        //   if(attr_type === "bra"){ var col_name = "Location" }
+        //   else if(attr_type === "hs"){ var col_name = "Product" }
+        //   else if(attr_type === "cbo"){ var col_name = "Occupation" }
+        //   else if(attr_type === "cnae"){ var col_name = "Industry" }
+        //   else if(attr_type === "wld"){ var col_name = "Destination" }
+        //   else if(attr_type === "university"){ var col_name = "University" }
+        //   else if(attr_type === "course_hedu"){ var col_name = "Major" }
+        //   else if(attr_type === "course_sc"){ var col_name = "Course" }
+        //   sticky_cols_w_names.push([attr_type, "name", col_name])
+        // }
+        if(col.indexOf("bra_id") > -1){
+          sticky_cols_w_names.push(["bra", "id_ibge", "IBGE"])
+          sticky_cols_w_names.push(["bra", "name", "Location"])
+        }
+        else if(col.indexOf("_id") > -1){
           var attr_type = col.replace("_id", "")
-          if(attr_type === "bra"){ var col_name = "Location" }
-          else if(attr_type === "hs"){ var col_name = "Product" }
+          if(attr_type === "hs"){ var col_name = "Product" }
           else if(attr_type === "cbo"){ var col_name = "Occupation" }
           else if(attr_type === "cnae"){ var col_name = "Industry" }
           else if(attr_type === "wld"){ var col_name = "Destination" }
           else if(attr_type === "university"){ var col_name = "University" }
           else if(attr_type === "course_hedu"){ var col_name = "Major" }
           else if(attr_type === "course_sc"){ var col_name = "Course" }
+          sticky_cols_w_names.push([attr_type, "id", "ID"])
           sticky_cols_w_names.push([attr_type, "name", col_name])
+        }
+        else {
+          sticky_cols_w_names.push(col)
         }
       })
 
@@ -247,7 +266,7 @@
 
       ths
         .attr("class",function(d){
-          if(d instanceof Array) d = "name";
+          if(d instanceof Array) d = d.join(" ");
           var o = current_order || init_order
           if (o.length && d == o[0]) var x = " "+o[1]
           else var x = ""
@@ -256,7 +275,7 @@
 
       ths.enter().append("th")
         .attr("class",function(d){
-          if(d instanceof Array) d = "name";
+          if(d instanceof Array) d = d.join(" ");
           var o = current_order || init_order
           if (o.length && d == o[0]) var x = " "+o[1]
           else var x = ""
@@ -323,7 +342,7 @@
 
       ths
         .attr("class",function(d){
-          if(d instanceof Array) d = "name";
+          if(d instanceof Array) d = d.join(" ");
           var o = current_order || init_order
           if (o.length && d == o[0]) var x = " "+o[1]
           else var x = ""
@@ -332,7 +351,7 @@
 
       ths.enter().append("th")
         .attr("class",function(d){
-          if(d instanceof Array) d = "name";
+          if(d instanceof Array) d = d.join(" ");
           var o = current_order || init_order
           if (o.length && d == o[0]) var x = " "+o[1]
           else var x = ""
@@ -395,9 +414,9 @@
         return d3.select("#data table.header thead").node().offsetWidth + "px";
       })
       
-      d3.select("#sticky table.header th.name:last-child").style("width", function(){
-        return d3.select("td.name:last-child").node().offsetWidth-20 + "px";
-      })
+      // d3.select("#sticky table.header th.name:last-child").style("width", function(){
+      //   return d3.select("td.name:last-child").node().offsetWidth-20 + "px";
+      // })
 
       try {
         var same_origin = window.parent.location.host == window.location.host;
@@ -495,7 +514,7 @@
         if (c instanceof Array){
           var id = c[0]+"_id";
           var attr_id = d[all_cols.indexOf(id)];
-          row_data[c] = attrs[c[0]][attr_id][c[1]]
+          row_data[c] = attrs[c[0]][attr_id][c[1]] || " &mdash; ";
         }
         else if (typeof d[i] == "string") {
           row_data[c] = dataviva.format.text(d[i],{"key": c})
