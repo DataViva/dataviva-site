@@ -1244,13 +1244,17 @@
       else {
         app.tooltip["short"][""] = [app.build.output_attr+"_display"]
         app.tooltip["long"][""] = [app.build.output_attr+"_display"]
+        app.tooltip["short"]["basics"] = []
+        app.tooltip["short"]["calculations"] = []
         if (app.build.app.type == "occugrid") {
-          app.tooltip["short"]["calculations"] = ["elsewhere","required"]
+          app.tooltip["short"][""].push("required");
+          app.tooltip["short"][""].push("num_emp");
+          app.tooltip["short"][""].push("elsewhere");
         }
-        else {
-          app.tooltip["short"]["basics"] = [app.vars.size]
-          app.tooltip["short"]["calculations"] = []
-        }
+      }
+
+      if (app.monthly && (!app.vars.time || app.vars.time === "month")) {
+        app.tooltip.short[""].push("month");
       }
 
       if (app.build.bra[0].id == "all" && app.build.app.type == "network") {
@@ -1270,13 +1274,6 @@
         else if (app.vars.grouping === "false") {
           app.vars.grouping = false
         }
-      }
-
-      if (app.monthly && (!app.vars.time || app.vars.time === "month")) {
-        app.tooltip.short[""] = ["month"]
-      }
-      else {
-        app.tooltip.short[""] = []
       }
 
       if (["stacked", "line"].indexOf(app.build.app.type) >= 0 &&
@@ -1511,7 +1508,7 @@
         }
 
         app.viz
-          .active("num_emp_est")
+          .active("num_emp")
           .shape("donut")
           .size({"scale": {"min": 10}})
           .depth(app.viz.id(Object).nesting.length - 1)
