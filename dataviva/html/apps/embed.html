@@ -1456,6 +1456,12 @@
       /******************************/
       else if (app.build.app.type == "geo_map") {
         if (app.build.bra[0].id == "all") {
+          var depth = 1;
+        }
+        else {
+          var depth = 4;
+        }
+        if (app.build.bra[0].id == "all") {
           var coords = app.coords.all
         }
         else if (app.build.bra[0].id.indexOf("plr") >= 0) {
@@ -1492,7 +1498,7 @@
           .active(false)
           .temp(false)
           .total(false)
-          .depth(app.viz.id(Object).nesting.length - 1)
+          .depth(depth)
           .shape("coordinates")
           .order(false)
 
