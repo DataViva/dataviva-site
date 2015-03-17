@@ -84,6 +84,9 @@ iframe {
 
 .filter_button {
   box-sizing: border-box;
+  min-height: 39px !important;
+  height: 39px !important;
+  width: 39px !important;
 }
 
 /*#column_toggles {

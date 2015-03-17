@@ -50,6 +50,14 @@
     </div>
     <hr />
 
+    <!-- FILTER CHOOSERS -->
+    <div class="filters">
+      <div class="section_title">{% trans %}Add Filters{% endtrans %}</div><br>
+      {%- for f in filters %}
+      <div class="{{ f.datasets }} filter_button decision square small icon {{ f.id }}" data-type="{{ f.id }}" alt="{{ f.name }}"></div>
+      {%- endfor %}
+    </div>
+
     <!-- SELECTED FILTERS -->
     <div class="selected_filters">
       {%- if output.filters %}
@@ -61,13 +69,6 @@
       {%- endif %}
     </div>
 
-    <!-- FILTER CHOOSERS -->
-    <div class="filters">
-      <div class="section_title">{% trans %}New Filter:{% endtrans %}</div>
-      {%- for f in filters %}
-      <div class="{{ f.datasets }} filter_button decision short icon {{ f.id }}" data-type="{{ f.id }}">{{ f.name }}</div>
-      {%- endfor %}
-    </div>
     <hr />
 
     <!-- OUTPUT -->
@@ -185,11 +186,19 @@ d3.selectAll(".selected_filters .remove").on("click", function(){
 })
 
 // trigger the selector on click of filters button
-d3.selectAll(".filter_button").on("click", function(){
-  var attr_type = d3.select(this).attr("data-type");
-  d3.select("#filter_popover").call(selector.type(attr_type));
-  dataviva.popover.show("#filter_popover");
-})
+d3.selectAll(".filter_button")
+  .on(d3plus.client.pointer.over, function(){
+    dataviva.ui.tooltip("quick", this);
+  })
+  .on(d3plus.client.pointer.out, function(){
+    dataviva.ui.tooltip("quick", false);
+  })
+  .on(d3plus.client.pointer.click, function(){
+    dataviva.ui.tooltip("quick", false);
+    var attr_type = d3.select(this).attr("data-type");
+    d3.select("#filter_popover").call(selector.type(attr_type));
+    dataviva.popover.show("#filter_popover");
+  })
 
 // listen for when user changes output filter to change nestings as well
 d3.selectAll(".output_filters select")
