@@ -14,16 +14,21 @@
       display: block;
       font-size: 15px;
       margin: 0px auto 15px;
-      padding-left: 110px !important;
+      min-height: 68px !important;
+      padding-left: 210px !important;
       position: relative;
-      width: 600px;
+      width: 500px;
     }
 
     .decision.square h1 {
       font-size: 25px;
       font-weight: 600;
+      left: 0;
       line-height: 28px;
       margin: 5px 0;
+      position: absolute;
+      text-align: center;
+      width: 210px;
     }
 
     .decision.square p {
@@ -34,8 +39,8 @@
     }
 
     .decision.square:before {
-      background-position: 0 10%;
-      background-size: 100px !important;
+      background-position: 65px 50%;
+      background-size: 80px !important;
     }
 
     .profile {
@@ -63,7 +68,7 @@
       margin-top: 1px;
       width: 17px;
     }
-    
+
     .profile_simple {
       color: white;
       position: relative;
@@ -135,7 +140,7 @@
       d3.select("#filter_popover").call(selector.type(id));
       dataviva.popover.show("#filter_popover");
     }
-    
+
     d3.selectAll(".profile_simple").on("click", function(){
       // stop from bubbling up so selector isn't triggered
       d3.event.stopPropagation();
