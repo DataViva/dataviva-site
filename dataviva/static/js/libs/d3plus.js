@@ -19013,9 +19013,14 @@ flow = require("./flow.coffee");
 fontSizes = require("../../font/sizes.coffee");
 
 wrap = function(vars) {
+  var firstChar;
   if (vars.text.phrases.length) {
     vars.text.current = vars.text.phrases.shift() + "";
     vars.text.words = vars.text.current.match(vars.text["break"]);
+    firstChar = vars.text.current.charAt(0);
+    if (firstChar !== vars.text.words[0].charAt(0)) {
+      vars.text.words[0] = firstChar + vars.text.words[0];
+    }
     vars.container.value.text("");
     if (vars.resize.value) {
       resize(vars);
@@ -19042,8 +19047,7 @@ resize = function(vars) {
   sizeMax = Math.floor(vars.size.value[1]);
   lineWidth = vars.shape.value === "circle" ? width * 0.75 : width;
   sizes = fontSizes(words, {
-    "font-size": sizeMax + "px"
-  }, {
+    "font-size": sizeMax + "px",
     parent: vars.container.value
   });
   maxWidth = d3.max(sizes, function(d) {
@@ -29941,9 +29945,10 @@ module.exports = function(vars, axis, buffer) {
       maxSize = vars.axes.scale.range()[1];
       domainHigh = vars[axis].scale.viz.invert(-maxSize * 2);
       domainLow = vars[axis].scale.viz.invert(rangeMax + maxSize * 2);
+      difference = Math.abs(domainHigh - domainLow);
       if (Math.round(domainHigh) === Math.round(domainLow)) {
-        domainHigh += 1;
-        domainLow -= 1;
+        domainHigh -= difference / 8;
+        domainLow += difference / 8;
       }
       return vars[axis].scale.viz.domain([domainHigh, domainLow]);
     }
@@ -30386,6 +30391,7 @@ labelPadding = function(vars) {
     xMaxWidth = vars.axes.width;
   } else {
     xMaxWidth = vars.x.scale.viz(xValues[1]) - vars.x.scale.viz(xValues[0]);
+    xMaxWidth = Math.abs(xMaxWidth);
     xMaxWidth -= vars.labels.padding * 2;
   }
   if (xAxisWidth > xMaxWidth && xText.join("").indexOf(" ") > 0) {
