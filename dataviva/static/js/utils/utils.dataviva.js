@@ -98,11 +98,13 @@ dataviva.format.text = function(text, opts) {
 }
 
 dataviva.format.affixes = {
+  "val_usd": ["$"," USD"],
   "export_val": ["$"," USD"],
   "import_val": ["$"," USD"],
-  "val_usd": ["$"," USD"],
   "export_kg": [""," kg"],
   "import_kg": [""," kg"],
+  "export_val_kg": ["$"," USD"],
+  "import_val_kg": ["$"," USD"],
   "purchase_value": ["$"," BRL"],
   "transfer_value": ["$"," BRL"],
   "wage": ["$"," BRL"],
@@ -409,7 +411,7 @@ dataviva.icon = function(id,type,color) {
 dataviva.cleanData = function(data, dataset, output) {
 
   var zerofills = {
-    "secex": ["export_val","import_val"],
+    "secex": ["export_val","import_val", "import_kg", "export_kg"],
     "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"],
     "hedu": ["enrolled"],
     "sc": ["enrolled"],
@@ -482,6 +484,11 @@ dataviva.cleanData = function(data, dataset, output) {
         temp[z] = 0
       }
     })
+
+    if (dataset === "secex") {
+      temp.export_val_kg = temp.export_kg ? temp.export_val/temp.export_kg : 0;
+      temp.import_val_kg = temp.import_kg ? temp.import_val/temp.import_kg : 0;
+    }
 
     if ("classes" in temp && "enrolled" in temp) {
       temp.enrolled_classes = temp.enrolled/temp.classes
