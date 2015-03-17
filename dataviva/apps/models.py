@@ -100,7 +100,7 @@ class Build(db.Model, AutoSerialize):
 
         for i, b in enumerate(bra_id):
             if isinstance(b, (Bra, Wld)):
-                if b.id.startswith("4mg"):
+                if b.id.startswith("4mgplr"):
                     b.pr_ids = [pr.id for pr in b.pr.all()]
                 else:
                     b.pr_ids = []
