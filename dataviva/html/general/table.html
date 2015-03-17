@@ -27,9 +27,12 @@
     var columns = {}
 
     var DATA = [];
+    var ATTRS = {};
     var CURRENT_DATASET = 'rais';
+    var PRETTY_COLUMNS = {
+      "id_ibge": "IBGE",
+    }
     var STICKY_COLUMNS = [
-
                     "rank",
                     "year",
                     "month",
@@ -153,6 +156,279 @@
 
       d3.event.preventDefault()
     }
+    
+    function load(attrs, sticky_cols, container_el, dataset, all_cols, active_data_cols){
+      if(attrs.length){
+        var attr = attrs.pop();
+        var attr_url = "/attrs/"+attr+"/?lang="+dataviva.language;
+        localforage.getItem(attr_url, function(error, resp){
+          if (resp)  {
+            ATTRS[attr] = resp.data.reduce(function(obj, d){
+              obj[d.id] = d;
+              return obj
+            }, {});
+            if(attrs.length){
+              load(attrs, sticky_cols, container_el, dataset, all_cols, active_data_cols)
+            }
+            else {
+              make_table(ATTRS, sticky_cols, container_el, dataset, all_cols, active_data_cols)
+            }
+          }
+          else {
+            d3.json(attr_url)
+              .header("X-Requested-With", "XMLHttpRequest")
+              .get(function(error, resp) {
+                localforage.setItem(attr_url, resp);
+                ATTRS[attr] = resp.data.reduce(function(obj, d){
+                  obj[d.id] = d;
+                  return obj
+                }, {});
+                if(attrs.length){
+                  load(attrs, sticky_cols, container_el, dataset, all_cols, active_data_cols)
+                }
+                else {
+                  make_table(ATTRS, sticky_cols, container_el, dataset, all_cols, active_data_cols)
+                }
+              })
+          }
+        })
+      }
+      else {
+        make_table(ATTRS, sticky_cols, container_el, dataset, all_cols, active_data_cols)
+      }
+    }
+    
+    function make_table(attrs, sticky_cols, container_el, dataset, all_cols, active_data_cols){
+      var sticky_header_cols = make_sticky_header(attrs, sticky_cols, container_el);
+      make_sticky_data(attrs, sticky_header_cols, container_el, dataset, all_cols);
+      make_data_header(container_el, active_data_cols);
+      make_data(container_el, all_cols, active_data_cols);
+      reset_size();
+    }
+    
+    /*
+      CREATE "STICKY" HEADER TABLE
+    */
+    function make_sticky_header(attrs, sticky_cols, container_el){
+      sticky_cols_w_names = []
+      sticky_cols.forEach(function(col){
+        sticky_cols_w_names.push(col)
+        if(col.indexOf("_id") > -1){
+          var attr_type = col.replace("_id", "")
+          if(attr_type === "bra"){ var col_name = "Location" }
+          else if(attr_type === "hs"){ var col_name = "Product" }
+          else if(attr_type === "cbo"){ var col_name = "Occupation" }
+          else if(attr_type === "cnae"){ var col_name = "Industry" }
+          else if(attr_type === "wld"){ var col_name = "Destination" }
+          else if(attr_type === "university"){ var col_name = "University" }
+          else if(attr_type === "course_hedu"){ var col_name = "Major" }
+          else if(attr_type === "course_sc"){ var col_name = "Course" }
+          sticky_cols_w_names.push([attr_type, "name", col_name])
+        }
+      })
+
+      var selection = d3.select(container_el).select("#sticky")
+      var table_elem = selection.selectAll('table.header').data([0])
+        .enter().append('table').attr("class", "header");
+      // var ids = sticky_cols.filter(function(c){return c.indexOf("_id") > 0});
+      // if (ids.length) {
+      //   table_elem.attr("id", ids[0].slice(0, ids[0].length - 3));
+      // }
+      var tbl_sticky_header = selection.select('table.header');
+
+      tbl_sticky_header.selectAll('thead').data([0]).enter().append('thead');
+      tbl_sticky_header = tbl_sticky_header.select('thead');
+
+      tbl_sticky_header.selectAll('tr').data([0]).enter().append('tr');
+      tbl_sticky_header = tbl_sticky_header.select('tr');
+
+      var ths = tbl_sticky_header.selectAll("th")
+        .data(sticky_cols_w_names)
+
+      ths
+        .attr("class",function(d){
+          if(d instanceof Array) d = "name";
+          var o = current_order || init_order
+          if (o.length && d == o[0]) var x = " "+o[1]
+          else var x = ""
+          return d+x
+        })
+
+      ths.enter().append("th")
+        .attr("class",function(d){
+          if(d instanceof Array) d = "name";
+          var o = current_order || init_order
+          if (o.length && d == o[0]) var x = " "+o[1]
+          else var x = ""
+          return d+x
+        })
+
+      ths
+        .text(function(d) {
+          if(d.constructor === Array){
+            return d[2];
+          }
+          return PRETTY_COLUMNS[d] || dataviva.format.text(d);
+        })
+        .on(d3plus.client.pointer.click, column_sort)
+
+      ths.exit().remove()
+      
+      return sticky_cols_w_names;
+    }
+    
+    /*
+      CREATE "STICKY" DATA TABLE
+    */
+    function make_sticky_data(attrs, sticky_cols, container_el, dataset, all_cols){
+      var selection = d3.select(container_el).select("#sticky")
+      var table_elem = selection.selectAll('table.data').data([0])
+        .enter().append('table').attr("class", "data");
+      // if (ids.length) {
+      //   table_elem.attr("id", ids[0].slice(0, ids[0].length - 3));
+      // }
+      var tbl_sticky_data = selection.select('table.data');
+
+      tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
+      tbl_sticky_data = tbl_sticky_data.select('tbody');
+
+      // create a row for each object in the data
+      var rows = tbl_sticky_data.selectAll("tr").data(dataset, JSON.stringify)
+      rows.enter().append("tr")
+
+      rows.each(function(d){
+        var self = d3.select(this)
+        data_printer(d,self,sticky_cols,all_cols,attrs)
+      })
+    }
+    
+    /*
+      CREATE DATA HEADER TABLE
+    */
+    function make_data_header(container_el, active_data_cols){
+      var selection = d3.select(container_el).select("#data")
+      selection.selectAll('table.header').data([0])
+        .enter().append('table').attr("class", "header")
+
+      var tbl_data_header = selection.select('table.header');
+
+      tbl_data_header.selectAll('thead').data([0]).enter().append('thead');
+      tbl_data_header = tbl_data_header.select('thead');
+
+      tbl_data_header.selectAll('tr').data([0]).enter().append('tr');
+      tbl_data_header = tbl_data_header.select('tr');
+
+      var ths = tbl_data_header.selectAll("th")
+        .data(active_data_cols)
+
+      ths
+        .attr("class",function(d){
+          if(d instanceof Array) d = "name";
+          var o = current_order || init_order
+          if (o.length && d == o[0]) var x = " "+o[1]
+          else var x = ""
+          return d+x
+        })
+
+      ths.enter().append("th")
+        .attr("class",function(d){
+          if(d instanceof Array) d = "name";
+          var o = current_order || init_order
+          if (o.length && d == o[0]) var x = " "+o[1]
+          else var x = ""
+          return d+x
+        })
+
+      ths
+        .text(function(d) {
+          if (d == "color") d = "color_var"
+          return dataviva.format.text(d)
+        })
+        .on(d3plus.client.pointer.click, column_sort)
+
+      ths.exit().remove()
+    }
+    
+    function make_data(container_el, all_cols, active_data_cols){
+      /*
+        CREATE DATA DATA TABLE
+      */
+      var selection = d3.select(container_el).select("#data")
+      selection.selectAll('table.data').data([0])
+        .enter().append('table').attr("class", "data")
+      var tbl_sticky_data = selection.select('table.data');
+
+      tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
+      tbl_sticky_data = tbl_sticky_data.select('tbody');
+
+      // create a row for each object in the data
+      var rows = tbl_sticky_data.selectAll("tr").data(DATA, JSON.stringify)
+
+      rows.enter().append("tr")
+
+      rows.each(function(d){
+        var self = d3.select(this)
+        data_printer(d,self,active_data_cols,all_cols)
+      })
+    }
+    
+    function reset_size(){
+      
+      d3.select("#dt_query #sticky").style("width","5px")
+      d3.select("#dt_query #sticky").style("width", function(){
+        return d3.select("#sticky table.data").node().offsetWidth + "px";
+      })
+      sticky_width = d3.select("#dt_query #sticky").node().offsetWidth;
+      d3.select("#dt_query #data table.header thead").style("left", sticky_width+"px")
+
+      d3.selectAll("#dt_query table.data").style("margin-top", function(){
+        return d3.select("#data table.header tr").node().offsetHeight+"px";
+      })
+
+      d3.selectAll("#dt_query table.header th").style("height", function(){
+        var padding = parseInt(d3.select(this).style("padding-top")) * 2
+        var h = d3.select("#data table.header tr").node().offsetHeight;
+        return h - padding + "px";
+      })
+
+      d3.selectAll("#data table.data").style("width", function(){
+        return d3.select("#data table.header thead").node().offsetWidth + "px";
+      })
+      
+      d3.select("#sticky table.header th.name:last-child").style("width", function(){
+        return d3.select("td.name:last-child").node().offsetWidth-20 + "px";
+      })
+
+      try {
+        var same_origin = window.parent.location.host == window.location.host;
+      }
+      catch (e) {
+        var same_origin = false
+      }
+
+      // Sends parent window column states
+      if(same_origin && window.parent.update_cols && !manual){
+        var data_col_status = []
+        all_data_cols.forEach(function(d){
+          var active = false;
+          if (active_data_cols.indexOf(d) > -1){
+            active = true;
+          }
+          data_col_status.push({"name":d, "active":active})
+        })
+        window.parent.update_cols(data_col_status)
+      }
+
+      var data_div = d3.select("div#data table.data")
+      table_width = data_div.node().offsetWidth + sticky_width
+      table_height = data_div.node().offsetHeight + parseFloat(data_div.style("margin-top"),10)
+
+      if (same_origin && window.parent.iframe_size) window.parent.iframe_size(table_width,table_height)
+
+      check_headers()
+      dataviva.resize()
+      
+    }
 
     function item_formatter(container_el, dataset, offset, manual, header){
 
@@ -184,191 +460,21 @@
       if(current_data_cols.length){
         active_data_cols = all_data_cols.filter(function(i) {return current_data_cols.indexOf(i) > -1});
       }
+
       // Get sticky columns present in new 'dataset'
-      var sticky_cols = STICKY_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1});
+      sticky_cols = STICKY_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1});
+      // Get attr cols
+      attr_cols = sticky_cols
+                    .filter(function(col) {return col.indexOf("_id") > -1})
+                    .map(function(col) {return col.replace("_id", "")});
 
       if (active_data_cols.indexOf(current_order[0]) >= 0) {
         active_data_cols.splice(active_data_cols.indexOf(current_order[0]),1)
         sticky_cols.push(current_order[0])
       }
-
-      /*
-        CREATE "STICKY" HEADER TABLE
-      */
-      var selection = d3.select(container_el).select("#sticky")
-      var table_elem = selection.selectAll('table.header').data([0])
-        .enter().append('table').attr("class", "header");
-      var ids = sticky_cols.filter(function(c){return c.indexOf("_id") > 0});
-      if (ids.length) {
-        table_elem.attr("id", ids[0].slice(0, ids[0].length - 3));
-      }
-      var tbl_sticky_header = selection.select('table.header');
-
-      tbl_sticky_header.selectAll('thead').data([0]).enter().append('thead');
-      tbl_sticky_header = tbl_sticky_header.select('thead');
-
-      tbl_sticky_header.selectAll('tr').data([0]).enter().append('tr');
-      tbl_sticky_header = tbl_sticky_header.select('tr');
-
-      var ths = tbl_sticky_header.selectAll("th")
-        .data(sticky_cols)
-
-      ths
-        .attr("class",function(d){
-          var o = current_order || init_order
-          if (o.length && d == o[0]) var x = " "+o[1]
-          else var x = ""
-          return d+x
-        })
-
-      ths.enter().append("th")
-        .attr("class",function(d){
-          var o = current_order || init_order
-          if (o.length && d == o[0]) var x = " "+o[1]
-          else var x = ""
-          return d+x
-        })
-
-      ths
-        .text(function(d) { return dataviva.format.text(d)})
-        .on(d3plus.client.pointer.click, column_sort)
-
-      ths.exit().remove()
-
-      /*
-        CREATE "STICKY" DATA TABLE
-      */
-      var table_elem = selection.selectAll('table.data').data([0])
-        .enter().append('table').attr("class", "data");
-      if (ids.length) {
-        table_elem.attr("id", ids[0].slice(0, ids[0].length - 3));
-      }
-      var tbl_sticky_data = selection.select('table.data');
-
-      tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
-      tbl_sticky_data = tbl_sticky_data.select('tbody');
-
-      // create a row for each object in the data
-      var rows = tbl_sticky_data.selectAll("tr").data(dataset, JSON.stringify)
-      rows.enter().append("tr")
-
-      rows.each(function(d){
-        var self = d3.select(this)
-        data_printer(d,self,sticky_cols,all_cols)
-      })
-
-      /*
-        CREATE DATA HEADER TABLE
-      */
-      var selection = d3.select(container_el).select("#data")
-      selection.selectAll('table.header').data([0])
-        .enter().append('table').attr("class", "header")
-
-      var tbl_data_header = selection.select('table.header');
-
-      tbl_data_header.selectAll('thead').data([0]).enter().append('thead');
-      tbl_data_header = tbl_data_header.select('thead');
-
-      tbl_data_header.selectAll('tr').data([0]).enter().append('tr');
-      tbl_data_header = tbl_data_header.select('tr');
-
-      var ths = tbl_data_header.selectAll("th")
-        .data(active_data_cols)
-
-      ths
-        .attr("class",function(d){
-          var o = current_order || init_order
-          if (o.length && d == o[0]) var x = " "+o[1]
-          else var x = ""
-          return d+x
-        })
-
-      ths.enter().append("th")
-        .attr("class",function(d){
-          var o = current_order || init_order
-          if (o.length && d == o[0]) var x = " "+o[1]
-          else var x = ""
-          return d+x
-        })
-
-      ths
-        .text(function(d) {
-          if (d == "color") d = "color_var"
-          return dataviva.format.text(d)
-        })
-        .on(d3plus.client.pointer.click, column_sort)
-
-      ths.exit().remove()
-
-      /*
-        CREATE DATA DATA TABLE
-      */
-      selection.selectAll('table.data').data([0])
-        .enter().append('table').attr("class", "data")
-      var tbl_sticky_data = selection.select('table.data');
-
-      tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
-      tbl_sticky_data = tbl_sticky_data.select('tbody');
-
-      // create a row for each object in the data
-      var rows = tbl_sticky_data.selectAll("tr").data(DATA, JSON.stringify)
-
-      rows.enter().append("tr")
-
-      rows.each(function(d){
-        var self = d3.select(this)
-        data_printer(d,self,active_data_cols,all_cols)
-      })
-
-      d3.select("#dt_query #sticky").style("width","5px")
-      d3.select("#dt_query #sticky").style("width", function(){
-        return d3.select("#sticky table.data").node().offsetWidth + "px"
-      })
-      sticky_width = d3.select("#dt_query #sticky").node().offsetWidth;
-      d3.select("#dt_query #data table.header thead").style("left", sticky_width+"px")
-
-      d3.selectAll("#dt_query table.data").style("margin-top", function(){
-        return d3.select("#data table.header tr").node().offsetHeight+"px";
-      })
-
-      d3.selectAll("#dt_query table.header th").style("height", function(){
-        var padding = parseInt(d3.select(this).style("padding-top")) * 2
-        var h = d3.select("#data table.header tr").node().offsetHeight;
-        return h - padding + "px";
-      })
-
-      d3.selectAll("#data table.data").style("width", function(){
-        return d3.select("#data table.header thead").node().offsetWidth + "px";
-      })
-
-      try {
-        var same_origin = window.parent.location.host == window.location.host;
-      }
-      catch (e) {
-        var same_origin = false
-      }
-
-      // Sends parent window column states
-      if(same_origin && window.parent.update_cols && !manual){
-        var data_col_status = []
-        all_data_cols.forEach(function(d){
-          var active = false;
-          if (active_data_cols.indexOf(d) > -1){
-            active = true;
-          }
-          data_col_status.push({"name":d, "active":active})
-        })
-        window.parent.update_cols(data_col_status)
-      }
-
-      var data_div = d3.select("div#data table.data")
-      table_width = data_div.node().offsetWidth + sticky_width
-      table_height = data_div.node().offsetHeight + parseFloat(data_div.style("margin-top"),10)
-
-      if (same_origin && window.parent.iframe_size) window.parent.iframe_size(table_width,table_height)
-
-      check_headers()
-      dataviva.resize()
+      
+      // console.log(attr_cols)
+      load(attr_cols, sticky_cols, container_el, dataset, all_cols, active_data_cols)
 
     }
 
@@ -382,11 +488,16 @@
     d3.select("#dt_query")
       .call(is.url("{{data_url}}").offset(0))
 
-    function data_printer(d, self, columns, all_cols){
+    function data_printer(d, self, columns, all_cols, attrs){
       var row_data = {}
       columns.forEach(function(c){
         var i = all_cols.indexOf(c);
-        if (typeof d[i] == "string") {
+        if (c instanceof Array){
+          var id = c[0]+"_id";
+          var attr_id = d[all_cols.indexOf(id)];
+          row_data[c] = attrs[c[0]][attr_id][c[1]]
+        }
+        else if (typeof d[i] == "string") {
           row_data[c] = dataviva.format.text(d[i],{"key": c})
         }
         else if (typeof d[i] == "number") {
@@ -404,7 +515,10 @@
         .data(row_keys)
 
       tds.enter().append("td")
-        .attr("class",function(dd){return dd})
+        .attr("class",function(dd){
+          dd = dd.split(",")
+          return dd.join(" ")
+        })
 
       tds
         .html(function(dd){return row_data[dd]})
@@ -496,6 +610,7 @@
       check_headers()
     }
     dataviva.resize_snap = true
+    
 
   </script>
 
