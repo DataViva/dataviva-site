@@ -118,7 +118,7 @@
                     "num_emp_growth_5",
 
                     "color",
-        
+
                     "purchase_value",
                     "transfer_value"
 
@@ -156,7 +156,7 @@
 
       d3.event.preventDefault()
     }
-    
+
     function load(attrs, sticky_cols, container_el, dataset, all_cols, active_data_cols){
       if(attrs.length){
         var attr = attrs.pop();
@@ -197,7 +197,7 @@
         make_table(ATTRS, sticky_cols, container_el, dataset, all_cols, active_data_cols)
       }
     }
-    
+
     function make_table(attrs, sticky_cols, container_el, dataset, all_cols, active_data_cols){
       var sticky_header_cols = make_sticky_header(attrs, sticky_cols, container_el);
       make_sticky_data(attrs, sticky_header_cols, container_el, dataset, all_cols);
@@ -205,7 +205,7 @@
       make_data(container_el, all_cols, active_data_cols);
       reset_size();
     }
-    
+
     /*
       CREATE "STICKY" HEADER TABLE
     */
@@ -292,10 +292,10 @@
         .on(d3plus.client.pointer.click, column_sort)
 
       ths.exit().remove()
-      
+
       return sticky_cols_w_names;
     }
-    
+
     /*
       CREATE "STICKY" DATA TABLE
     */
@@ -320,7 +320,7 @@
         data_printer(d,self,sticky_cols,all_cols,attrs)
       })
     }
-    
+
     /*
       CREATE DATA HEADER TABLE
     */
@@ -360,14 +360,14 @@
 
       ths
         .text(function(d) {
-          if (d == "color") d = "color_var"
+          if (d == "color") d = "color_toggle"
           return dataviva.format.text(d)
         })
         .on(d3plus.client.pointer.click, column_sort)
 
       ths.exit().remove()
     }
-    
+
     function make_data(container_el, all_cols, active_data_cols){
       /*
         CREATE DATA DATA TABLE
@@ -390,9 +390,9 @@
         data_printer(d,self,active_data_cols,all_cols)
       })
     }
-    
+
     function reset_size(){
-      
+
       d3.select("#dt_query #sticky").style("width","5px")
       d3.select("#dt_query #sticky").style("width", function(){
         return d3.select("#sticky table.data").node().offsetWidth + "px";
@@ -413,7 +413,7 @@
       d3.selectAll("#data table.data").style("width", function(){
         return d3.select("#data table.header thead").node().offsetWidth + "px";
       })
-      
+
       // d3.select("#sticky table.header th.name:last-child").style("width", function(){
       //   return d3.select("td.name:last-child").node().offsetWidth-20 + "px";
       // })
@@ -446,7 +446,7 @@
 
       check_headers()
       dataviva.resize()
-      
+
     }
 
     function item_formatter(container_el, dataset, offset, manual, header){
@@ -491,7 +491,7 @@
         active_data_cols.splice(active_data_cols.indexOf(current_order[0]),1)
         sticky_cols.push(current_order[0])
       }
-      
+
       // console.log(attr_cols)
       load(attr_cols, sticky_cols, container_el, dataset, all_cols, active_data_cols)
 
@@ -629,7 +629,7 @@
       check_headers()
     }
     dataviva.resize_snap = true
-    
+
 
   </script>
 
