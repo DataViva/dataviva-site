@@ -106,10 +106,16 @@ function infinite_scroll(selection){
         if (!activities.length) {
           if(offset == 0){
             d3.select(container_el).selectAll("p.no_data")
-              .data(['No items here'])
+              .data([0])
               .enter().append("p")
               .attr("class", "no_data")
-              .text(String)
+              .style({
+                "font-size": "16px",
+                "margin": "20px 0 0 0",
+                "opacity": 0.5,
+                "padding": "20px"
+              })
+              .text(dataviva.dictionary.no_items)
             if(remove){
               // d3.select(container_el).html('')
             }
