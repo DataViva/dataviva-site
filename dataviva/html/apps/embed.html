@@ -340,20 +340,25 @@
 
       function format_title(title) {
 
-        if (app.build.output_attr === "bra") {
+        var depth = depth = app.viz.id();
+        if (app.build.output_attr === "bra" && depth !== "id") {
 
-          var words = title.split(" "), depth = app.viz.id()
-          var new_depth = dataviva.dictionary[depth]
-          var old_depth = dataviva.dictionary[last_depth]
-          if (words[words.length-2] == old_depth) words[words.length-2] = new_depth
-          else if (words[words.length-1] == old_depth) words[words.length-1] = new_depth
+          var words = title.split(" ");
+
+          var new_depth = dataviva.dictionary[depth];
+          var old_depth = dataviva.dictionary[last_depth];
+          var index = words.indexOf(old_depth);
+
+          if (index >= 0) words[index] = new_depth;
           else {
-            var new_depth = dataviva.dictionary[depth+"_plural"]
-            var old_depth = dataviva.dictionary[last_depth+"_plural"]
-            if (words[0] == old_depth) words[0] = new_depth
+            new_depth = dataviva.dictionary[depth+"_plural"];
+            old_depth = dataviva.dictionary[last_depth+"_plural"];
+            index = words.indexOf(old_depth);
+            if (index >= 0) words[index] = new_depth;
           }
-          title = words.join(" ")
-          last_depth = depth
+
+          title = words.join(" ");
+          last_depth = depth;
 
         }
 
