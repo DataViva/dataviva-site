@@ -303,7 +303,9 @@ def dictionary():
         "ei": gettext("Electronic Invoices (EI)"),
         "ei_footer": gettext("Data provided by SEF/MG"),
         "purchase_value": gettext("Purchase Value"),
+        "purchase": gettext("Purchase"),
         "transfer_value": gettext("Transfer Value"),
+        "transfer": gettext("Transfer"),
 
         # Key Labels
         "brazil": gettext("Brazil"),

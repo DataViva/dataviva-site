@@ -374,7 +374,17 @@
 
         }
 
-        if (app.build.dataset === "secex") {
+        if (app.build.dataset === "ei") {
+
+          var value = dataviva.dictionary[app.vars.size.split("_")[0]],
+              purch = dataviva.dictionary.purchase,
+              trans = dataviva.dictionary.transfer;
+
+          if (title.indexOf(purch) >= 0) title = title.replace(purch, value);
+          else if (title.indexOf(trans) >= 0) title = title.replace(trans, value);
+
+        }
+        else if (app.build.dataset === "secex") {
 
           var val = false;
           if (app.vars.size) val = app.vars.size;
@@ -1257,13 +1267,10 @@
       if (app.build.output_attr == "bra") {
         app.tooltip["short"][""] = ["id_ibge"]
         app.tooltip["long"][""] = ["id_ibge"]
-        app.tooltip["short"]["basics"] = [app.vars.size]
       }
       else {
         app.tooltip["short"][""] = [app.build.output_attr+"_display"]
         app.tooltip["long"][""] = [app.build.output_attr+"_display"]
-        app.tooltip["short"]["basics"] = []
-        app.tooltip["short"]["calculations"] = []
         if (app.build.app.type == "occugrid") {
           app.tooltip["short"][""].push("required");
           app.tooltip["short"][""].push("num_emp");
