@@ -10,7 +10,7 @@ ROLE_SUPER_ADMIN = 2
 class User(db.Model, AutoSerialize):
 
     __tablename__ = 'account_user'
-    
+
     id = db.Column(db.Integer, primary_key = True)
     google_id = db.Column(db.String(120), unique = True)
     twitter_id = db.Column(db.String(120), unique = True)
@@ -32,31 +32,31 @@ class User(db.Model, AutoSerialize):
     flag = db.relationship("Flag", backref = 'user', lazy = 'dynamic')
     starred = db.relationship("Starred", backref = 'user', lazy = 'dynamic')
     agree_mailer = db.Column(db.Integer)
-    
+
     def is_authenticated(self):
         return True
-    
+
     def is_admin(self):
         return self.role
-    
+
     def is_active(self):
         return True
-    
+
     def is_anonymous(sef):
         return False
-    
+
     def get_id(self):
         return unicode(self.id)
-    
+
     def avatar(self, size):
         if self.email:
             return 'http://www.gravatar.com/avatar/' + md5(self.email).hexdigest() + '?d=mm&s=' + str(size)
         else:
             return 'http://www.gravatar.com/avatar/{0}?s=' + str(size) + '&d=identicon'.format(self.nickname.encode('hex'))
-    
+
     def __repr__(self):
         return '<User %r>' % (self.nickname)
-        
+
     @staticmethod
     def make_unique_nickname(nickname):
         if User.query.filter_by(nickname = nickname).first() == None:
@@ -68,13 +68,19 @@ class User(db.Model, AutoSerialize):
                 break
             version += 1
         return new_nickname
-    
-    def serialize(self):
-        auto_serialized = super(User, self).serialize()
-        auto_serialized["avatar"] = self.avatar(50)
 
-        return auto_serialized
-        
+    def serialize(self):
+        return {
+            "agree_mailer": self.agree_mailer,
+            "avatar": self.avatar(50),
+            "email": self.email,
+            "fullname": self.fullname.encode("utf-8"),
+            "id": self.id,
+            "language": self.language,
+            "nickname": self.nickname.encode("utf-8"),
+            "role": self.role
+        }
+
 class Starred(db.Model, AutoSerialize):
 
     __tablename__ = 'account_starred'
