@@ -20,7 +20,7 @@
 </style>
 
 <div class="feed">
-  
+
   <table>
     <thead>
       <tr>
@@ -40,12 +40,20 @@
 <script src="/static/js/utils/utils.infinite_scroll.js"></script>
 <script>
 
-function item_formatter(container_el, activities){
-  
+function item_formatter(container_el, dataset, offset, manual, header){
+
+	var activities = dataset.map(function(d){
+		obj = {};
+		header.forEach(function(h, i){
+			obj[h] = d[i];
+		})
+		return obj;
+	});
+
 	roles = {}
 	roles[dataviva.format.text("visible")] = 0
 	roles[dataviva.format.text("hidden")] = 2
-	
+
 
 	var attrs_enter = d3.select(container_el).select("tbody").selectAll("tr")
 		.data(activities, function(d){ return d.id; })
@@ -54,24 +62,24 @@ function item_formatter(container_el, activities){
     attrs_enter.append("td").html(function(d){ return '<b style="font-size:10px">('+ d.question_title +')</b> <br>' + d.body; })
     attrs_enter.append("td").text(function(d){ return d.user.fullname; })
     attrs_enter.append("td").text(function(d){ return d.flags; })
-  
+
   change_role = function(reply,value) {
     d3.json("/admin/reply/"+reply+"/")
       .header("Content-type", "application/json")
-      .send("PUT", '{"hidden": '+value+'}', function(error, text) { 
+      .send("PUT", '{"hidden": '+value+'}', function(error, text) {
         if (error || (text && text.error)) location.reload()
       });
   }
-  
+
 	attrs_enter.append("td").attr("class","hidden_toggle").selectAll("input")
 		.data(d3.entries(roles))
     	.enter().append("input")
       		.attr("type","radio")
 			.attr("value", function(d){ return dataviva.format.text(d.key); })
 			.attr("id", function(d){ return "hiddn_"+d.value; })
-			.attr("name", function(d){ 
+			.attr("name", function(d){
 				var parent_data = d3.select(this.parentNode).datum();
-				return "hidden_"+parent_data.id; 
+				return "hidden_"+parent_data.id;
 			})
 			.attr("checked", function(d){
 				var parent_data = d3.select(this.parentNode).datum();
@@ -81,31 +89,31 @@ function item_formatter(container_el, activities){
 			})
 			.each(function(d){
 				var parent_data = d3.select(this.parentNode).datum();
-				
+
 				leon("$hidden_"+parent_data.id).size("small")
-				
+
 			})
       .attr("onclick",function(d){
         var parent_data = d3.select(this.parentNode).datum();
         return "change_role('"+parent_data.id+"',this.id.split('_')[1])"
       })
-      
+
        delete_reply = function(reply) {
-	    
+
 	  }
-      
+
       attrs_enter.append("td").append("a")
      .attr("href", function(d){
        return window.location.href.replace("replies", "reply") + "delete/" + d.id;
      }).attr("class", "delete_btn").attr("style", "margin: 0; display:block")
      .text(dataviva.format.text("remove"))
-     .on("click", function(e) { 
+     .on("click", function(e) {
      	if(!confirm(dataviva.format.text("remove_confirmation"))) {
      		d3.event.preventDefault();
      	}
      })
 
-      
+
 
 }
 
@@ -113,7 +121,7 @@ var is = infinite_scroll().url(window.location.href.replace("replies","repliesli
 
 d3.select(".feed")
   .call(is)
-  
+
 </script>
 
 {% endblock %}

@@ -1,21 +1,22 @@
 #admin_nav {
-  left: 50%;
-  margin-left: -478px;
+  left: 20px;
   position: fixed;
-  top: 100px;
+  top: 90px;
+  width: 150px;
 }
 
 #admin_nav > a {
   margin: 0px 0px 6px 0px !important;
 }
 
-#admin_content {
-  padding: 22px 25px 25px 200px;
+#nav_footer {
+  margin: 0 20px 20px 190px;
 }
 
 #admin_content > .lightbox {
+  display: block;
+  margin: 0 20px 0 190px;
   padding: 20px;
-  width: 724px;
 }
 
 .user-image {

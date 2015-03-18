@@ -449,6 +449,7 @@ def dictionary():
         "No municipalities within that distance.": gettext("No municipalities within that distance."),
         "Including": gettext("Including"),
         "in": gettext("in"),
+        "no_items": gettext("No Data Available")
 
     }
 

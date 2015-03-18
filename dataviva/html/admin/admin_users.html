@@ -5,7 +5,7 @@
 {% block admin_content %}
 
 <div class="feed">
-  
+
   <table>
     <thead>
       <tr>
@@ -24,10 +24,26 @@
 <script src="/static/js/utils/utils.infinite_scroll.js"></script>
 <script>
 
-function item_formatter(container_el, activities){
-  
+var change_role = function(user, value) {
+  d3.json("/admin/user/"+user+"/")
+    .header("Content-type", "application/json")
+    .send("PUT", '{"role": '+value+'}', function(error, text) {
+      if (error || (text && text.error)) location.reload()
+    });
+}
+
+function item_formatter(container_el, dataset, offset, manual, header){
+
+  var activities = dataset.map(function(d){
+    obj = {};
+    header.forEach(function(h, i){
+      obj[h] = d[i]
+    })
+    return obj;
+  })
+
   roles = {"user": 0, "admin": 1}
-  
+
   var attrs_enter = d3.select(container_el).select("tbody").selectAll("tr")
     .data(activities, function(d){ return d.nickname; })
     .enter().append("tr")
@@ -39,28 +55,20 @@ function item_formatter(container_el, activities){
       return "url('"+d.avatar+"')";
     })
   first.append("div").text(function(d){ return d.fullname; })
-  attrs_enter.append("td").html(function(d){ 
-    return "<a href='/account/"+d.nickname+"'>"+d.nickname+"</a>"; 
+  attrs_enter.append("td").html(function(d){
+    return "<a href='/account/"+d.nickname+"'>"+d.nickname+"</a>";
   })
   attrs_enter.append("td").text(function(d){ return d.email; })
-  
-  change_role = function(user,value) {
-    d3.json("/admin/user/"+user+"/")
-      .header("Content-type", "application/json")
-      .send("PUT", '{"role": '+value+'}', function(error, text) { 
-        if (error || (text && text.error)) location.reload()
-      });
-  }
-  
+
   attrs_enter.append("td").attr("class","role_toggle").selectAll("input")
     .data(d3.entries(roles))
     .enter().append("input")
       .attr("type","radio")
       .attr("value", function(d){ return dataviva.format.text(d.key); })
       .attr("id", function(d){ return "role_"+d.value; })
-      .attr("name", function(d){ 
+      .attr("name", function(d){
         var parent_data = d3.select(this.parentNode).datum();
-        return "role_"+parent_data.nickname; 
+        return "role_"+parent_data.nickname;
       })
       .attr("checked", function(d){
         var parent_data = d3.select(this.parentNode).datum();
@@ -83,7 +91,7 @@ var is = infinite_scroll().url(window.location.href.replace("users","userslist")
 
 d3.select(".feed")
   .call(is)
-  
+
 </script>
 
 {% endblock %}

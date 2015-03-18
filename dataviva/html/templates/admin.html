@@ -10,16 +10,16 @@
 
 
 {% block body %}
-  
-  <div id="admin_content" class="grid5col4">
+
+  <div id="admin_content">
     <div class="lightbox">
       {% block admin_content %}
       {% endblock %}
     </div>
   </div>
 
-  <div id="admin_nav" class="grid5col1">
-    
+  <div id="admin_nav">
+
     {% set navigation_bar = [
         ('admin.admin_users', _('Users')),
         ('admin.admin_questions', _('Questions')),
@@ -44,7 +44,7 @@
         </ul>
       {% endif %}
     {% endfor %}
-    
+
   </div>
 
 </div>
