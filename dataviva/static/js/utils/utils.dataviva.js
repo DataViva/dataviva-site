@@ -124,29 +124,34 @@ dataviva.format.number = function(value, opts) {
 
   if (name.indexOf("_growth") >= 0) value = value * 100;
 
-  var smalls = ["rca","rca_bra","rca_wld","distance","eci","pci","bra_diversity_eff","cnae_diversity_eff","cbo_diversity_eff","hs_diversity_eff","wld_diversity_eff"]
+  var smalls = ["rca", "rca_bra", "rca_wld", "rcd", "distance", "distance_wld",
+                "eci", "pci", "opp_gain", "opp_gain_wld",
+                "bra_diversity_eff", "cnae_diversity_eff", "cbo_diversity_eff",
+                "hs_diversity_eff", "wld_diversity_eff"];
 
-  var ids = ["cbo_id","cnae_id","wld_id","hs_id","bra_id","id_ibge"]
-  if (ids.indexOf(name) >= 0) return value.toString().toUpperCase()
-  else if (name == "year") {
-    var return_value = value
+  var ids = ["cbo_id","cnae_id","wld_id","hs_id","bra_id","id_ibge"];
+  if (ids.indexOf(name) >= 0) return value.toString().toUpperCase();
+
+  var return_value;
+  if (name === "year") {
+    return_value = value;
   }
   else if (smalls.indexOf(name) >= 0 || value < 1) {
     var r = value.toString().split(""), len = false;
     r.forEach(function(n,i){
-      if (n != "0" && n != "." && !len) len = i
-    })
-    if (len > 5) len = 5
-    var return_value = d3.round(value,len)
+      if (n != "0" && n != "." && !len) len = i;
+    });
+    if (len > 5) len = 5;
+    return_value = d3.round(value, len + 1);
   }
   else if (value.toString().split(".")[0].length > 4) {
 
-    var symbol = d3.formatPrefix(value).symbol
-    symbol = symbol.replace("G", "B") // d3 uses G for giga
+    var symbol = d3.formatPrefix(value).symbol;
+    symbol = symbol.replace("G", "B"); // d3 uses G for giga
 
     // Format number to precision level using proper scale
-    value = d3.formatPrefix(value).scale(value)
-    value = parseFloat(d3.format(".3g")(value))
+    value = d3.formatPrefix(value).scale(value);
+    value = parseFloat(d3.format(".3g")(value));
 
     if (symbol && dataviva.language === "pt") {
       var digit = parseFloat(value.toString().split(".")[0])
@@ -169,15 +174,15 @@ dataviva.format.number = function(value, opts) {
       symbol = " "+symbol
     }
 
-    var return_value = value + symbol;
+    return_value = value + symbol;
   }
   else if (name == "share") {
-    if (value >= 100) var return_value = d3.format(",f")(value);
-    else var return_value = d3.format(".2g")(value);
+    if (value >= 100) return_value = d3.format(",f")(value);
+    else return_value = d3.format(".2g")(value);
     return_value += "%";
   }
   else {
-    var return_value = d3.format(",f")(value);
+    return_value = d3.format(",f")(value);
   }
 
   if (name.indexOf("total_") == 0) {
