@@ -24,9 +24,11 @@
 #about_content {
   display: inline-block;
   text-align: left;
+  width: 100%;
 }
 
 #about_content > .lightbox {
+  display: block;
   margin: 10px 30px 30px 290px;
   padding: 20px 20px 16px 20px;
   position: relative;

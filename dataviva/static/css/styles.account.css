@@ -1,6 +1,5 @@
 body #container {
-  padding: 78px 0px 59px 0px;
-  width: 100%;
+  padding-bottom: 0;
 }
 
 #user_header {

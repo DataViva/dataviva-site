@@ -109,6 +109,14 @@
       }
     }
 
+    var min_height = function() {
+      var h = window.innerHeight - 117 - 139;
+      d3.select("#activity_list").style("min-height", h+"px");
+    };
+
+    min_height();
+    dataviva.resize = min_height;
+
   </script>
 
 {% endblock %}
