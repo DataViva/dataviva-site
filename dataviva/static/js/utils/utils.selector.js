@@ -308,17 +308,20 @@ function Selector() {
 
         selector_load.hide()
 
-        if (initial_value != "all") {
-          if (type == "bra" && initial_value == "4mg") {
+        if (initial_value !== "all") {
+          if (type === "bra" && initial_value === "4mg") {
             var depth = 8;
           }
-          else if (type == "bra" && initial_value.length == 8) {
+          else if (type === "bra" && initial_value.length === 8) {
             var depth = 9;
           }
           else {
             var d = depths.indexOf(initial_value.length)
-            if (d+1 == depths.length) var depth = depths[d]
-            else var depth = depths[d+1]
+            if (d+1 == depths.length) {
+              var depth = depths[d];
+              initial_value = initial_value.slice(0,depths[d-1])
+            }
+            else var depth = depths[d+1];
           }
           if (type == "bra" && initial_value.length >= 8) {
             if (initial_value.substr(0,3) === "4mg") {
