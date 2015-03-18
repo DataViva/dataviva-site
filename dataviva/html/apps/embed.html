@@ -299,6 +299,18 @@
 
     app.title_update = function(range) {
 
+      if (app.build.app.type == "scatter") {
+        var yval = [];
+        if (app.vars.year.indexOf("_") < 0 &&
+            app.ecis[app.build.data_url] && app.vars.y == "pci") {
+          yval = [{
+            "position": app.ecis[app.build.data_url][app.vars.year],
+            "text": dataviva.format.text("eci")
+          }];
+        }
+        app.viz.y({"lines": yval})
+      }
+
       function parse_date(s) {
         if (s.constructor === Date) {
           if (app.monthly) {
@@ -1590,18 +1602,12 @@
         }
         if (app.vars.y.indexOf("pci") >= 0) yv = app.vars.y
 
-        var yval = null
-        if (app.build.output_attr == "hs" && app.ecis[app.build.data_url] && yv == "pci") {
-          var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
-        }
-
         app.viz
           .x({
             "scale": "linear",
             "value": xv
           })
           .y({
-            "lines": [yval],
             "scale": "linear",
             "value": yv
           })
@@ -1809,14 +1815,6 @@
           else app.viz.icon({"style": "knockout"})
         }
 
-        if (type == "year" && app.build.app.type == "scatter") {
-          var yval = null
-          if (app.build.output_attr == "hs" && app.ecis[app.build.data_url] && app.vars.y == "pci") {
-            var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
-          }
-          app.viz.y({"lines": [yval]})
-        }
-
         if (type == "axes") {
           app.viz.x("cp_bra_1_"+value).y("cp_bra_0_"+value)
         }
@@ -1863,13 +1861,7 @@
           else {
             var yv = app.vars.y
           }
-
-          var yval = null
-          if (app.build.output_attr == "hs" && app.ecis[app.build.data_url] && app.vars.y == "pci") {
-            var yval = {"eci": app.ecis[app.build.data_url][app.vars.year]}
-          }
-
-          app.viz.y({"lines": [yval], "value": yv}).title({"total": app.total()})
+          app.viz.y(yv).title({"total": app.total()})
         }
         else if (type == "size") {
           if (app.viz.order() === app.viz.size()) {

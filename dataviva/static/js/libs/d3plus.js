@@ -30529,7 +30529,7 @@ textwrap = require("../../../../../textwrap/textwrap.coffee");
 validObject = require("../../../../../object/validate.coffee");
 
 module.exports = function(vars) {
-  var affixes, alignMap, axis, axisData, axisLabel, bg, bgStyle, d, domain, domains, getFontStyle, grid, gridData, label, labelData, labelStyle, line, lineData, lineFont, lineGroup, lineRects, lineStyle, lines, linetexts, mirror, plane, planeTrans, position, rectData, rectStyle, rotated, sep, textData, textPad, textPos, tickFont, tickPosition, tickStyle, xAxis, xEnter, xStyle, yAxis, yEnter, yStyle, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
+  var affixes, alignMap, axis, axisData, axisLabel, bg, bgStyle, d, domain, domains, getFontStyle, grid, gridData, label, labelData, labelStyle, line, lineData, lineFont, lineGroup, lineRects, lineStyle, lines, linetexts, mirror, plane, planeTrans, position, rectData, rectStyle, rotated, sep, textData, textPad, textPos, tickFont, tickPosition, tickStyle, userLines, xAxis, xEnter, xStyle, yAxis, yEnter, yStyle, _i, _j, _k, _len, _len1, _len2, _ref, _ref1;
   domains = vars.x.domain.viz.concat(vars.y.domain.viz);
   if (domains.indexOf(void 0) >= 0) {
     return null;
@@ -30776,105 +30776,111 @@ module.exports = function(vars) {
     axis = _ref1[_j];
     lineGroup = plane.selectAll("g#d3plus_graph_" + axis + "_userlines").data([0]);
     lineGroup.enter().append("g").attr("id", "d3plus_graph_" + axis + "_userlines");
-    if (vars[axis].lines.value.length) {
-      domain = vars[axis].scale.viz.domain();
-      if (axis === "y") {
-        domain = domain.slice().reverse();
-      }
-      textData = [];
-      lineData = [];
-      _ref2 = vars[axis].lines.value;
-      for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
-        line = _ref2[_k];
-        d = validObject(line) ? line.position : line;
-        if (!isNaN(d)) {
-          d = parseFloat(d);
-          if (d > domain[0] && d < domain[1]) {
-            d = !validObject(line) ? {
-              "position": d
-            } : line;
-            d.coords = {
-              line: vars[axis].scale.viz(d.position)
-            };
-            lineData.push(d);
-            if (d.text) {
-              d.axis = axis;
-              d.padding = vars[axis].lines.font.padding.value * 0.5;
-              d.align = vars[axis].lines.font.align.value;
-              position = vars[axis].lines.font.position.text;
-              textPad = position === "middle" ? 0 : d.padding * 2;
-              if (position === "top") {
-                textPad = -textPad;
-              }
-              if (axis === "x") {
-                textPos = d.align === "left" ? vars.axes.height : d.align === "center" ? vars.axes.height / 2 : 0;
-                if (d.align === "left") {
-                  textPos -= d.padding * 2;
-                }
-                if (d.align === "right") {
-                  textPos += d.padding * 2;
-                }
-              } else {
-                textPos = d.align === "left" ? 0 : d.align === "center" ? vars.axes.width / 2 : vars.axes.width;
-                if (d.align === "right") {
-                  textPos -= d.padding * 2;
-                }
-                if (d.align === "left") {
-                  textPos += d.padding * 2;
-                }
-              }
-              d.coords.text = {};
-              d.coords.text[axis === "x" ? "y" : "x"] = textPos;
-              d.coords.text[axis] = vars[axis].scale.viz(d.position) + textPad;
-              d.transform = axis === "x" ? "rotate(-90," + d.coords.text.x + "," + d.coords.text.y + ")" : null;
-              textData.push(d);
+    domain = vars[axis].scale.viz.domain();
+    if (axis === "y") {
+      domain = domain.slice().reverse();
+    }
+    textData = [];
+    lineData = [];
+    userLines = vars[axis].lines.value || [];
+    for (_k = 0, _len2 = userLines.length; _k < _len2; _k++) {
+      line = userLines[_k];
+      d = validObject(line) ? line.position : line;
+      if (!isNaN(d)) {
+        d = parseFloat(d);
+        if (d > domain[0] && d < domain[1]) {
+          d = !validObject(line) ? {
+            "position": d
+          } : line;
+          d.coords = {
+            line: vars[axis].scale.viz(d.position)
+          };
+          lineData.push(d);
+          if (d.text) {
+            d.axis = axis;
+            d.padding = vars[axis].lines.font.padding.value * 0.5;
+            d.align = vars[axis].lines.font.align.value;
+            position = vars[axis].lines.font.position.text;
+            textPad = position === "middle" ? 0 : d.padding * 2;
+            if (position === "top") {
+              textPad = -textPad;
             }
+            if (axis === "x") {
+              textPos = d.align === "left" ? vars.axes.height : d.align === "center" ? vars.axes.height / 2 : 0;
+              if (d.align === "left") {
+                textPos -= d.padding * 2;
+              }
+              if (d.align === "right") {
+                textPos += d.padding * 2;
+              }
+            } else {
+              textPos = d.align === "left" ? 0 : d.align === "center" ? vars.axes.width / 2 : vars.axes.width;
+              if (d.align === "right") {
+                textPos -= d.padding * 2;
+              }
+              if (d.align === "left") {
+                textPos += d.padding * 2;
+              }
+            }
+            d.coords.text = {};
+            d.coords.text[axis === "x" ? "y" : "x"] = textPos;
+            d.coords.text[axis] = vars[axis].scale.viz(d.position) + textPad;
+            d.transform = axis === "x" ? "rotate(-90," + d.coords.text.x + "," + d.coords.text.y + ")" : null;
+            textData.push(d);
           }
         }
       }
-      lines = lineGroup.selectAll("line.d3plus_graph_" + axis + "line").data(lineData, function(d) {
-        return d.position;
-      });
-      lines.enter().append("line").attr("class", "d3plus_graph_" + axis + "line").attr("opacity", 0).call(lineStyle, axis);
-      lines.transition().duration(vars.draw.timing).attr("opacity", 1).call(lineStyle, axis);
-      lines.exit().transition().duration(vars.draw.timing).attr("opacity", 0).remove();
-      linetexts = lineGroup.selectAll("text.d3plus_graph_" + axis + "line_text").data(textData, function(d) {
-        return d.position;
-      });
-      linetexts.enter().append("text").attr("class", "d3plus_graph_" + axis + "line_text").attr("id", function(d) {
-        return "d3plus_graph_" + axis + "line_text_" + d.position;
-      }).attr("opacity", 0).call(lineFont, axis);
-      linetexts.text(function(d) {
-        return d.text;
-      }).transition().duration(vars.draw.timing).attr("opacity", 1).call(lineFont, axis);
-      linetexts.exit().transition().duration(vars.draw.timing).attr("opacity", 0).remove();
-      rectStyle = function(rect) {
-        var getText;
-        getText = function(d) {
-          return plane.select("text#d3plus_graph_" + d.axis + "line_text_" + d.position).node().getBBox();
-        };
-        return rect.attr("x", function(d) {
-          return getText(d).x - d.padding;
-        }).attr("y", function(d) {
-          return getText(d).y - d.padding;
-        }).attr("transform", function(d) {
-          return d.transform;
-        }).attr("width", function(d) {
-          return getText(d).width + (d.padding * 2);
-        }).attr("height", function(d) {
-          return getText(d).height + (d.padding * 2);
-        }).attr("fill", vars.axes.background.color);
-      };
-      rectData = vars[axis].lines.font.background.value ? textData : [];
-      lineRects = lineGroup.selectAll("rect.d3plus_graph_" + axis + "line_rect").data(rectData, function(d) {
-        return d.position;
-      });
-      lineRects.enter().insert("rect", "text.d3plus_graph_" + axis + "line_text").attr("class", "d3plus_graph_" + axis + "line_rect").attr("pointer-events", "none").attr("opacity", 0).call(rectStyle);
-      lineRects.transition().delay(vars.draw.timing).each("end", function(d) {
-        return d3.select(this).transition().duration(vars.draw.timing).attr("opacity", 1).call(rectStyle);
-      });
-      lineRects.exit().transition().duration(vars.draw.timing).attr("opacity", 0).remove();
     }
+    lines = lineGroup.selectAll("line.d3plus_graph_" + axis + "line").data(lineData, function(d) {
+      return d.position;
+    });
+    lines.enter().append("line").attr("class", "d3plus_graph_" + axis + "line").attr("opacity", 0).call(lineStyle, axis);
+    lines.transition().duration(vars.draw.timing).attr("opacity", 1).call(lineStyle, axis);
+    lines.exit().transition().duration(vars.draw.timing).attr("opacity", 0).remove();
+    linetexts = lineGroup.selectAll("text.d3plus_graph_" + axis + "line_text").data(textData, function(d) {
+      return d.position;
+    });
+    linetexts.enter().append("text").attr("class", "d3plus_graph_" + axis + "line_text").attr("id", function(d) {
+      var id;
+      id = d.position + "";
+      id = id.replace("-", "neg");
+      id = id.replace(".", "p");
+      return "d3plus_graph_" + axis + "line_text_" + id;
+    }).attr("opacity", 0).call(lineFont, axis);
+    linetexts.text(function(d) {
+      return d.text;
+    }).transition().duration(vars.draw.timing).attr("opacity", 1).call(lineFont, axis);
+    linetexts.exit().transition().duration(vars.draw.timing).attr("opacity", 0).remove();
+    rectStyle = function(rect) {
+      var getText;
+      getText = function(d) {
+        var id;
+        id = d.position + "";
+        id = id.replace("-", "neg");
+        id = id.replace(".", "p");
+        return plane.select("text#d3plus_graph_" + d.axis + "line_text_" + id).node().getBBox();
+      };
+      return rect.attr("x", function(d) {
+        return getText(d).x - d.padding;
+      }).attr("y", function(d) {
+        return getText(d).y - d.padding;
+      }).attr("transform", function(d) {
+        return d.transform;
+      }).attr("width", function(d) {
+        return getText(d).width + (d.padding * 2);
+      }).attr("height", function(d) {
+        return getText(d).height + (d.padding * 2);
+      }).attr("fill", vars.axes.background.color);
+    };
+    rectData = vars[axis].lines.font.background.value ? textData : [];
+    lineRects = lineGroup.selectAll("rect.d3plus_graph_" + axis + "line_rect").data(rectData, function(d) {
+      return d.position;
+    });
+    lineRects.enter().insert("rect", "text.d3plus_graph_" + axis + "line_text").attr("class", "d3plus_graph_" + axis + "line_rect").attr("pointer-events", "none").attr("opacity", 0).call(rectStyle);
+    lineRects.transition().delay(vars.draw.timing).each("end", function(d) {
+      return d3.select(this).transition().duration(vars.draw.timing).attr("opacity", 1).call(rectStyle);
+    });
+    lineRects.exit().transition().duration(vars.draw.timing).attr("opacity", 0).remove();
   }
 };
 
