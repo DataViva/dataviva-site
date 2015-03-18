@@ -39,9 +39,9 @@
 
       </div>
 
-
       <div id="account_tooltip" style="display:none;">
         <a id="profile_link" class="account" href=""><i class="fa fa-user"></i>{% trans %}Profile{% endtrans %}</a>
+        <a id="admin_link" class="account" href="{{ url_for('admin.admin') }}"><i class="fa fa-cogs"></i>{% trans %}Admin Panel{% endtrans %}</a>
         <a class="account" href="{{ url_for('account.logout') }}"><i class="fa fa-key"></i>{% trans %}Logout{% endtrans %}</a>
       </div>
 
@@ -105,8 +105,8 @@
     var authenticated = function(username, is_admin) {
       d3.select("#account").text(username);
       d3.select("#profile_link").attr("href", "/account/" + username);
-      if (is_admin) {
-        d3.select("#profile_link").attr("href", "/admin/");
+      if (!is_admin) {
+        d3.select("#admin_link").remove();
       }
       show_toggle = function() {
         d3.select("#account").attr("class","active")
