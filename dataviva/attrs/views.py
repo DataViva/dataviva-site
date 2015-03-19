@@ -171,14 +171,15 @@ def attrs(attr="bra",Attr_id=None):
             latest_year, latest_month = latest_year.split("-")
             latest_month = int(latest_month)
         latest_year = int(latest_year)
-        query = db.session.query(Attr,Attr_weight_tbl) \
-            .outerjoin(Attr_weight_tbl, and_(getattr(Attr_weight_tbl,"{0}_id".format(attr)) == Attr.id, Attr_weight_tbl.year == latest_year))
 
+        conds = [getattr(Attr_weight_tbl,"{0}_id".format(attr)) == Attr.id, Attr_weight_tbl.year == latest_year]
+        if latest_month:
+            conds.append(Attr_weight_tbl.month == latest_month)
+
+        query = db.session.query(Attr,Attr_weight_tbl).outerjoin(Attr_weight_tbl, and_(*conds))
         if Attr == School:
             query = query.filter(Attr.is_vocational == 1)
 
-        if latest_month:
-            query = query.filter(Attr_weight_tbl.month == latest_month)
 
         if depth:
             query = query.filter(func.char_length(Attr.id) == depth)
