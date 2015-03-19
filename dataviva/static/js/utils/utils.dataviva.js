@@ -136,6 +136,12 @@ dataviva.format.number = function(value, opts) {
   if (name === "year") {
     return_value = value;
   }
+  else if (name === "share") {
+    if (value >= 100) return_value = d3.format(",f")(value);
+    else if (value > 99) return_value = d3.format(".3g")(value);
+    else return_value = d3.format(".2g")(value);
+    return_value += "%";
+  }
   else if (smalls.indexOf(name) >= 0 || value < 1) {
     var r = value.toString().split(""), len = false;
     r.forEach(function(n,i){
@@ -175,11 +181,6 @@ dataviva.format.number = function(value, opts) {
     }
 
     return_value = value + symbol;
-  }
-  else if (name == "share") {
-    if (value >= 100) return_value = d3.format(",f")(value);
-    else return_value = d3.format(".2g")(value);
-    return_value += "%";
   }
   else {
     return_value = d3.format(",f")(value);
