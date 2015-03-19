@@ -164,7 +164,7 @@ def guide():
         "type": "occugrid"
     })
     # Box Plot
-    builds = Build.query.filter(Build.id.in_([160])).all()
+    builds = Build.query.filter(Build.id.in_([160,161])).all()
     for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": gettext("A visualization, also known as box and whisker diagram, used to display the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum."),
