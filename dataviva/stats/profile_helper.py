@@ -50,14 +50,14 @@ def bra_stats(pobj, rais_year, secex_year):
     if result:
         profile,value=result
         stats.append(make_stat(group, gettext("Top Destination by Export Value"), profile=profile, value=value, mode="export_val"))
-    
+
     filters = [Ymb.year == secex_year, Ymb.month == 0, Ymb.bra_id == pobj.id]
     result = get_stat_val(Ymb, [Ymb.export_val, Ymb.import_val], filters)
     if result:
         export_val, import_val = result
         stats.append(make_stat(group, gettext("Total Exports"), desc=export_val, mode="export_val"))
         stats.append(make_stat(group, gettext("Total Imports"), desc=import_val, mode="export_val"))
-    
+
     if len(pobj.id) == 9:
         group = "General Stats"
         stat_ids = ["airport", "airport_dist", "seaport", "seaport_dist"]
@@ -66,11 +66,11 @@ def bra_stats(pobj, rais_year, secex_year):
             stats.append(make_stat(group, name, desc=val))
     return stats
 
-def cnae_stats(pobj, rais_year): 
-    stats = []   
+def cnae_stats(pobj, rais_year):
+    stats = []
     five_years_ago = rais_year - 5
     group = '{} Stats ({}):'.format(rais_year, "RAIS")
-    
+
     filters = [Ybi.year == rais_year, Ybi.cnae_id == pobj.id, Ybi.bra_id_len == 9]
     profile, value = get_top_stat(Ybi, Ybi.bra_id, Ybi.num_emp, Bra, filters)
     stats.append(make_stat(group, gettext("Top Municipality by Employment"), profile=profile, value=value, mode="num_emp"))
@@ -103,7 +103,7 @@ def cbo_stats(pobj, rais_year):
 
     filters = [Yio.year == rais_year, Yio.cbo_id == pobj.id, Yio.cnae_id_len == 6]
     profile, value = get_top_stat(Yio, Yio.cnae_id, Yio.num_emp, Cnae, filters)
-    stats.append(make_stat(group, gettext("Top Occupation by Employment"), profile=profile, value=value, mode="num_emp"))
+    stats.append(make_stat(group, gettext("Top Industry by Employment"), profile=profile, value=value, mode="num_emp"))
 
     filters = [Yo.year == rais_year, Yo.cbo_id == pobj.id]
     res = get_stat_val(Yo, [Yo.wage, Yo.wage_avg], filters)
@@ -188,7 +188,7 @@ def university_stats(pobj, hedu_year):
     filters = [Yuc.year == hedu_year, Yuc.university_id == pobj.id, Yuc.course_hedu_id_len == 6]
     profile, value = get_top_stat(Yuc, Yuc.course_hedu_id, Yuc.enrolled, Course_hedu, filters)
     stats.append(make_stat(group, gettext("Top Course by Enrollment"), profile=profile, value=value, mode="enrolled"))
-    
+
     filters = [Yu.year == hedu_year, Yu.university_id == pobj.id]
     enrolled, graduates = get_stat_val(Ymw, [Yu.enrolled, Yu.graduates], filters)
     stats.append(make_stat(group, gettext("Total Enrollment"), desc=enrolled, mode="enrolled"))
@@ -284,20 +284,20 @@ def get_top_stat(Tbl, show_col, metric_col, Profile, filters):
 def make_stat(group, name, desc=None, value=None, url=None, mode=None, year=None, profile=None):
     if year:
         name += " ({})".format(year)
-    
+
     if profile:
         url = profile.url()
         desc = profile.name()
-    
+
     if not value:
         if not desc:
             desc = gettext("-")
 
     return {
-                'group': group, 
-                'name': name, 
-                'url': url, 
+                'group': group,
+                'name': name,
+                'url': url,
                 'desc' : desc,
-                'value': value, 
+                'value': value,
                 'mode' : mode,
     }
