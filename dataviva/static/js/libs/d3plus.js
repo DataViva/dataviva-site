@@ -24519,6 +24519,8 @@ module.exports = function(vars, selection, enter, exit) {
         resize: false,
         angle: ["left", "right"].indexOf(d.d3plus.position) >= 0 ? 90 : 0
       };
+    } else if (d.d3plus.label) {
+      d.d3plus_label = d.d3plus.label;
     } else {
       delete d.d3plus_label;
     }
@@ -29028,7 +29030,7 @@ box = function(vars) {
   h = discrete === "x" ? "height" : "width";
   w = discrete === "x" ? "width" : "height";
   space = vars.axes[w] / vars[discrete].ticks.values.length;
-  space = d3.max([d3.min([space / 2, 40]), 10]);
+  space = d3.min([space - vars.labels.padding * 2, 100]);
   mode = vars.type.mode.value;
   if (!(mode instanceof Array)) {
     mode = [mode, mode];
@@ -29046,7 +29048,7 @@ box = function(vars) {
   d3.nest().key(function(d) {
     return fetchValue(vars, d, vars[discrete].value);
   }).rollup(function(leaves) {
-    var bottom, bottomWhisker, boxData, d, first, iqr, key, label, median, medianData, medianText, outliers, scale, second, top, topWhisker, val, values, x, y, _i, _j, _len, _len1;
+    var bottom, bottomWhisker, boxData, d, diff1, diff2, first, iqr, key, label, median, medianBuffer, medianData, medianHeight, medianText, outliers, scale, second, top, topWhisker, val, values, x, y, _i, _j, _len, _len1;
     scale = vars[opposite].scale.viz;
     values = leaves.map(function(d) {
       return fetchValue(vars, d, vars[opposite].value);
@@ -29121,22 +29123,33 @@ box = function(vars) {
     y += oppMargin;
     boxData.d3plus[opposite] = y;
     returnData.push(boxData);
-    if (boxData.d3plus[h] < 20) {
-      medianText = false;
-    } else {
-      medianText = vars.format.value(median, {
-        key: vars[opposite].value
-      });
-    }
     medianData = {
       d3plus: {
         id: "median_line_" + key,
         position: h === "height" ? "top" : "right",
         shape: "whisker",
-        "static": true,
-        text: medianText
+        "static": true
       }
     };
+    medianText = vars.format.value(median, {
+      key: vars[opposite].value,
+      vars: vars
+    });
+    label = {
+      background: "#fff",
+      names: [medianText],
+      padding: 0,
+      resize: false,
+      x: 0,
+      y: 0
+    };
+    diff1 = Math.abs(scale(median) - scale(first));
+    diff2 = Math.abs(scale(median) - scale(second));
+    medianHeight = d3.min([diff1, diff2]) * 2;
+    medianBuffer = vars.data.stroke.width * 2 + vars.labels.padding * 2;
+    label[w === "width" ? "w" : "h"] = space - medianBuffer;
+    label[h === "width" ? "w" : "h"] = medianHeight - medianBuffer;
+    medianData.d3plus.label = label;
     medianData.d3plus[w] = space;
     medianData.d3plus[discrete] = x;
     medianData.d3plus[opposite] = scale(median) + oppMargin;

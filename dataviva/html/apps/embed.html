@@ -333,10 +333,13 @@
         }
       }
 
-      if (!range || !range.length) {
+      if (!range) {
         range = app.vars.year;
         if (!range) range = app.years;
         else range = range.split("_");
+      }
+      else if (!range.length) {
+        range = app.years;
       }
       else if (range.length === 0) {
         var viztime = app.viz.data(Object).time
@@ -816,9 +819,11 @@
             app.build = data.current_build;
             app.years = year_range[app.build.dataset];
             app.monthly = app.years[0].indexOf("-") > 0 &&
-                          (app.build.dataset !== "secex" || ["stacked","line"].indexOf(app.build.app.type) >= 0);
-            app.build.timeToggle = app.monthly && app.build.output !== "balance" &&
-                                   ["stacked","line"].indexOf(app.build.app.type) >= 0;
+                          (app.build.dataset !== "secex" || ["stacked", "line"].indexOf(app.build.app.type) >= 0);
+            app.timeRange = ["stacked", "line"].indexOf(app.build.app.type) >= 0 ||
+                            ("box" === app.build.app.type && app.build.output !== "age");
+            app.build.timeToggle = app.monthly && app.timeRange &&
+                                   app.build.output !== "balance";
             app.timeFormat = app.monthly ? "%Y-%-m" : "%Y";
             app.timeFormat = d3.time.format(app.timeFormat);
 
@@ -863,7 +868,7 @@
             var q = queue();
 
             if (!app.vars.year) {
-              if (["stacked","line"].indexOf(app.build.app.type) >= 0) {
+              if (app.timeRange) {
                 app.vars.year = app.years.join("_");
               }
               else {
@@ -887,8 +892,7 @@
 
             if (!app.allyears) {
               app.allyears = app.data[app.build.data_url] ||
-                             app.vars.year.indexOf("_") > 0 ||
-                             ["stacked", "line"].indexOf(app.build.app.type) >= 0;
+                             app.vars.year.indexOf("_") > 0 || app.timeRange;
             }
 
             var zero_add = app.build.dataset === "secex" && !app.monthly;
@@ -1249,6 +1253,9 @@
       }
 
       var nesting = app.nesting(app.build.output === "age" ? "age" : app.build.output_attr);
+      if (app.build.app.type === "box" && app.build.output !== "age") {
+        nesting = [nesting[nesting.length-1]]
+      }
 
       app.solos = []
       app.filters = []
@@ -1301,7 +1308,7 @@
         }
       }
 
-      if (["stacked", "line"].indexOf(app.build.app.type) >= 0 &&
+      if (app.timeRange &&
           app.vars.year.indexOf("_") < 0) {
         app.vars.year = app.timeURL(app.years);
       }
@@ -1682,11 +1689,7 @@
       else if (app.build.app.type === "box") {
 
         app.viz
-        .x("course_sc_5")
-        .y({
-          "scale": "linear",
-          "value": "age"
-        })
+        .y({"scale": "linear"})
         .axes({"mirror": false})
         .active({"spotlight": false})
         .active(false)
@@ -1695,8 +1698,19 @@
         .id({"grouping": true})
         .shape("circle")
         .type({"mode": "extent"})
-        .order("course_sc_5")
-        .order({"sort": "asc"})
+        .y(app.vars.y)
+
+        if (app.build.output === "age") {
+          app.viz
+            .order("course_sc_5")
+            .order({"sort": "asc"})
+            .x("course_sc_5")
+        }
+        else {
+          app.viz
+            .order(false)
+            .x(app.vars.time || (app.monthly ? "month" : "year"))
+        }
 
       }
 
@@ -1735,7 +1749,7 @@
           text = dataviva.format.text("secex_3")
         }
       }
-      if (["stacked","line"].indexOf(app.build.app.type) >= 0 && !app.monthly && app.build.output !== "time") {
+      if (["stacked", "line"].indexOf(app.build.app.type) >= 0 && !app.monthly && app.build.output !== "time") {
         var joiner = text.length ? ", " : ""
         text += joiner + dataviva.format.text("Click to Zoom");
         if (joiner.length) text += ".";
