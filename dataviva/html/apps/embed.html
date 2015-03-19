@@ -1349,6 +1349,7 @@
         .legend({"icons": app.build.output_attr !== "bra"})
         .legend(app.build.output !== "age")
         .y(false)
+        .y({"stacked": false})
         .x({"scale": "linear"})
         .tooltip(app.tooltip)
         .zoom(app.build.output_attr !== "balance")
@@ -1568,6 +1569,7 @@
           })
           .y({
             "scale": layout,
+            "stacked": true,
             "value": app.vars.y
           })
           .active(false)

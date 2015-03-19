@@ -18392,8 +18392,10 @@ module.exports = function(number, opts) {
   if (typeof key === "string" && time.indexOf(key.toLowerCase()) >= 0) {
     ret = number;
   } else if (key === "share") {
-    if (length > 2) {
+    if (number >= 100) {
       ret = d3.format(",f")(number);
+    } else if (number > 99) {
+      ret = d3.format(".3g")(number);
     } else {
       ret = d3.format(".2g")(number);
     }
@@ -24055,7 +24057,7 @@ module.exports = function(vars,selection,enter,exit) {
       paths.enter().append("path")
         .attr("class","d3plus_line")
         .style("stroke-linecap","round")
-        .attr("d",function(d){ return line(d.values); })
+        .attr("d", function(d){ return line(d.values); })
         .call(shapeStyle,vars)
         .attr("opacity", 0)
         .transition().duration(vars.draw.timing)
@@ -24063,9 +24065,7 @@ module.exports = function(vars,selection,enter,exit) {
 
       rects.enter().append("rect")
         .attr("class","d3plus_anchor")
-        .attr("id",function(d){
-          return d.d3plus.id;
-        })
+        .attr("id",function(d){ return d.d3plus.id; })
         .call(init)
         .call(shapeStyle,vars);
 
@@ -31021,7 +31021,7 @@ module.exports = function(vars, data) {
     if (val instanceof Array) {
       positiveData.push(d);
     } else {
-      if (val > 0) {
+      if (val >= 0) {
         positiveData.push(d);
       }
       if (val < 0) {
