@@ -97,8 +97,8 @@ def attrs(attr="bra",Attr_id=None):
     depths = {}
     depths["bra"] = [1,3,5,7,8,9]
     depths["cnae"] = [1,3,6]
-    depths["cbo"] = [1,2,4]
-    depths["hs"] = [2,4,6]
+    depths["cbo"] = [1,4]
+    depths["hs"] = [2,6]
     depths["wld"] = [2,5]
     depths["course_hedu"] = [2,6]
     depths["university"] = [5]
@@ -217,7 +217,6 @@ def attrs(attr="bra",Attr_id=None):
             attrs_w_data = db.session.query(Attr, Attr_weight_tbl) \
                 .filter(getattr(Attr_weight_tbl, Attr_weight_mergeid) == Attr.id) \
                 .group_by(Attr.id)
-            # raise Exception(attrs_w_data.all())
             attrs_w_data = [a[0].id for a in attrs_w_data]
 
         attrs = []
