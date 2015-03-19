@@ -499,9 +499,12 @@
         return html_return;
       },
       "url": function(id) {
-        var rec_url = app.build.url.split("/");
-        rec_url[filterIndex[app.build.output]] = id;
-        rec_url = rec_url.join("/")
+        var rec_url = app.build.url;
+        if (id.constructor !== Array) {
+          rec_url = app.build.url.split("/");
+          rec_url[filterIndex[app.build.output]] = id;
+          rec_url = rec_url.join("/")
+        }
         return "/apps/recommend/"+rec_url+"?lang="+dataviva.language
       }
     }
