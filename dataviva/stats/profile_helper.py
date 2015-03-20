@@ -15,7 +15,7 @@ from flask.ext.babel import gettext
 def bra_stats(pobj, rais_year, secex_year):
     stats = []
     group = "General Stats"
-    stat_ids = ["pop", "gini", "life_exp", "hdi"]
+    stat_ids = ["pop", "gini", "life_exp", "hdi", "gdp", "gdp_pc", "pop_density"]
     stats_year = parse_year(__year_range__["stats"][-1].split("-")[0])
     results = batch_stats(Ybs, pobj.id, stat_ids, stats_year)
     for name, val in results.items():
@@ -57,12 +57,28 @@ def bra_stats(pobj, rais_year, secex_year):
         export_val, import_val = result
         stats.append(make_stat(group, gettext("Total Exports"), desc=export_val, mode="export_val"))
         stats.append(make_stat(group, gettext("Total Imports"), desc=import_val, mode="export_val"))
-
+    
+    if len(pobj.id) > 1:
+        geo = Bra.query.get(pobj.id[:1])
+        stats.append(make_stat("General Stats", gettext("Region"), profile=geo))
+    if len(pobj.id) > 3:
+        geo = Bra.query.get(pobj.id[:3])
+        stats.append(make_stat("General Stats", gettext("State"), profile=geo))
+    if len(pobj.id) > 5:
+        geo = Bra.query.get(pobj.id[:5])
+        stats.append(make_stat("General Stats", gettext("Mesoregion"), profile=geo))
+    if len(pobj.id) > 7:
+        geo = Bra.query.get(pobj.id[:7])
+        stats.append(make_stat("General Stats", gettext("Microregion"), profile=geo))
+    
     if len(pobj.id) == 9:
         group = "General Stats"
-        stat_ids = ["airport", "airport_dist", "seaport", "seaport_dist"]
+        stat_ids = ["airport", "airport_dist", "seaport", "seaport_dist", "area", "capital_dist", "neighbors"]
         results = batch_stats(Bs, pobj.id, stat_ids)
         for name, val in results.items():
+            if name.lower() == "neighbors":
+                bras = Bra.query.filter(Bra.id.in_(val.split(","))).all()
+                val = ", ".join([u"<a href='{}'>{}</a>".format(b.url(), b.name()) for b in bras])
             stats.append(make_stat(group, name, desc=val))
     return stats
 
