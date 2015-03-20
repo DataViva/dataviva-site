@@ -4,7 +4,6 @@
 .pydevproject
 *.prefs
 db
-dataviva/static/downloads/*
 dataviva/static/json/coords/*.json
 dataviva/static/json/networks/*.json
 .htpasswd
