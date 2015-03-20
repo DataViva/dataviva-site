@@ -135,6 +135,7 @@
     var is = infinite_scroll().format_items(item_formatter);
 
     function column_sort(d) {
+
       if (["rank","name","id_ibge","id_mdic"].indexOf(d) < 0) {
 
         if (d == current_order[0]) var direction = current_order[1]
