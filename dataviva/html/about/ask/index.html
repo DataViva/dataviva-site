@@ -153,14 +153,14 @@
         question_info.append("p")
           .attr("class","question_body")
           .html(function(d){
-            if (d.body) return d.body.replace(/<\/?[^>]+(>|$)/g, "")
+            if (d.body) return d.body.replace(/<(?!p>|\/p>)\/?[^>]+(>|$)/g, "")
             else d3.select(this).remove()
           })
 
         question_info.append("p")
           .attr("class","question_answer")
           .html(function(d){
-            return d.status_notes.replace(/<\/?[^>]+(>|$)/g, "")
+            return d.status_notes.replace(/<(?!p>|\/p>)\/?[^>]+(>|$)/g, "")
           })
 
         question_info.append("p")

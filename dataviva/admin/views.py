@@ -176,7 +176,8 @@ def admin_questions_edit(status, question_id):
         subject = gettext('DataViva Reply')
 
         if (status_id == "2" or status_id == "3") and int(user.agree_mailer) > 0 :
-            send_mail(subject, [user.email], render_template('admin/mail/ask_feedback.html', title=subject, status=status_id, user=user))
+            if user.email:
+                send_mail.send_mail(subject, [user.email], render_template('admin/mail/ask_feedback.html', title=subject, status=status_id, user=user))
 
         flash(gettext('This question has now been updated.'))
 
