@@ -17,6 +17,7 @@ function infinite_scroll(selection){
 
   scroll = function(selection) {
     selection.each(function(data_passed) {
+
       var container_el = this;
 
       // On first time add
@@ -47,7 +48,7 @@ function infinite_scroll(selection){
           offset = 0;
         }
         // console.log(done, fetching, offset, loading_div_y-50, innerHeight, refresh)
-        if ((!done && !fetching && offset >= 0 && loading_div_y-50 < innerHeight) || refresh) {
+        if ((!done && !fetching && offset >= 0 && loading_div_y-50 < innerHeight) || refresh || order_clicked) {
           fetch();
         }
 
