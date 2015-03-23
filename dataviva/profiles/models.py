@@ -180,13 +180,13 @@ class Bra(Profile):
             {"title": gettext("Wages by:"), "builds": [
                 [
                     {"id": 1, "params": {"size": "wage"}},
-                    {"id": 17, "params": {"size": "wage"}},
-                    {"id": 140, "params": {"size": "wage"}}
+                    {"id": 17, "params": {"y": "wage"}},
+                    {"id": 140, "params": {"y": "wage"}}
                 ],
                 [
                     {"id": 3, "params": {"size": "wage"}},
-                    {"id": 19, "params": {"size": "wage"}},
-                    {"id": 142, "params": {"size": "wage"}}
+                    {"id": 19, "params": {"y": "wage"}},
+                    {"id": 142, "params": {"y": "wage"}}
                 ]
             ]},
             {"title": gettext("Economic Opportunities:"), "builds": [35, 33]},
@@ -205,7 +205,7 @@ class Bra(Profile):
             apps[4]["builds"].append([
                 {"id": 36, "params": {"color": "wage"}},
                 {"id": 5, "params": {"size": "wage"}},
-                {"id": 21, "params": {"size": "wage"}}
+                {"id": 21, "params": {"y": "wage"}}
             ])
         return apps
 
