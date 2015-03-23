@@ -67,7 +67,7 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
             return match[0]
         return None
 
-    datasets = [["rais", _('Employment')],
+    datasets = [["rais", _('Wages and Employment')],
                 ["secex", _('International Trade')],
                 ["hedu", _('Higher Education')],
                 ["sc", _('School Census')],

@@ -463,7 +463,7 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
     builds.sort(key=lambda x: (x.app_id, dataset_sort.index(x.dataset)))
     datatset_names = {
         "secex": gettext("International Trade"),
-        "rais": gettext("Employment"),
+        "rais": gettext("Wages and Employment"),
         "ei": gettext("Domestic Trade"),
         "hedu": gettext("Higher Education"),
         "sc": gettext("School Census")
