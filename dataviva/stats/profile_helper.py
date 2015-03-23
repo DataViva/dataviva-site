@@ -14,72 +14,93 @@ from flask.ext.babel import gettext
 
 def bra_stats(pobj, rais_year, secex_year):
     stats = []
-    group = "General Stats"
-    stat_ids = ["pop", "gini", "life_exp", "hdi", "gdp", "gdp_pc", "pop_density"]
-    stats_year = parse_year(__year_range__["stats"][-1].split("-")[0])
-    results = batch_stats(Ybs, pobj.id, stat_ids, stats_year)
-    for name, val in results.items():
-        stats.append(make_stat(group, name, desc=val, year=stats_year))
+
+    if pobj.id != "all":
+        group = "General Stats"
+        stat_ids = ["pop", "gini", "life_exp", "hdi", "gdp", "gdp_pc", "pop_density"]
+        stats_year = parse_year(__year_range__["stats"][-1].split("-")[0])
+        results = batch_stats(Ybs, pobj.id, stat_ids, stats_year)
+        for name, val in results.items():
+            stats.append(make_stat(group, name, desc=val, year=stats_year))
 
     group = '{} Stats ({}):'.format(rais_year, "RAIS")
-    filters = [Ybi.year == rais_year, Ybi.bra_id == pobj.id, Ybi.cnae_id_len == 6]
-    result = get_top_stat(Ybi, Ybi.cnae_id, Ybi.num_emp, Cnae, filters)
+    if pobj.id == "all":
+        filters = [Yi.year == rais_year, Yi.cnae_id_len == 6]
+        result = get_top_stat(Yi, Yi.cnae_id, Yi.num_emp, Cnae, filters)
+    else:
+        filters = [Ybi.year == rais_year, Ybi.bra_id == pobj.id, Ybi.cnae_id_len == 6]
+        result = get_top_stat(Ybi, Ybi.cnae_id, Ybi.num_emp, Cnae, filters)
     if result:
         profile, value = result
         stat = make_stat(group, gettext("Top Industry by Employment"), profile=profile, value=value, mode="num_emp")
         stats.append(stat)
 
-    filters = [Ybo.year == rais_year, Ybo.bra_id == pobj.id, Ybo.cbo_id_len == 4]
-    profile, value = get_top_stat(Ybo, Ybo.cbo_id, Ybo.num_emp, Cbo, filters)
+    if pobj.id == "all":
+        filters = [Yo.year == rais_year, Yo.cbo_id_len == 4]
+        profile, value = get_top_stat(Yo, Yo.cbo_id, Yo.num_emp, Cbo, filters)
+    else:
+        filters = [Ybo.year == rais_year, Ybo.bra_id == pobj.id, Ybo.cbo_id_len == 4]
+        profile, value = get_top_stat(Ybo, Ybo.cbo_id, Ybo.num_emp, Cbo, filters)
     stat = make_stat(group, gettext("Top Occupation by Employment"), profile=profile, value=value, mode="num_emp")
     stats.append(stat)
 
-    value = get_stat_val(Yb_rais, Yb_rais.wage, [Yb_rais.year == rais_year, Yb_rais.bra_id == pobj.id])
-    stats.append(make_stat(group, gettext("Total Monthly Wage"), desc=value, mode="wage"))
+    if pobj.id != "all":
+        value = get_stat_val(Yb_rais, Yb_rais.wage, [Yb_rais.year == rais_year, Yb_rais.bra_id == pobj.id])
+        stats.append(make_stat(group, gettext("Total Monthly Wage"), desc=value, mode="wage"))
 
     group = '{} Stats ({}):'.format(secex_year, "SECEX")
-    filters = [Ymbp.year == secex_year, Ymbp.month == 0, Ymbp.bra_id == pobj.id, Ymbp.hs_id_len == 6]
-    result = get_top_stat(Ymbp, Ymbp.hs_id, Ymbp.export_val, Hs, filters)
+    if pobj.id == "all":
+        filters = [Ymp.year == secex_year, Ymp.month == 0, Ymp.hs_id_len == 6]
+        result = get_top_stat(Ymp, Ymp.hs_id, Ymp.export_val, Hs, filters)
+    else:
+        filters = [Ymbp.year == secex_year, Ymbp.month == 0, Ymbp.bra_id == pobj.id, Ymbp.hs_id_len == 6]
+        result = get_top_stat(Ymbp, Ymbp.hs_id, Ymbp.export_val, Hs, filters)
     if result:
         profile, value = result
         stat = make_stat(group, gettext("Top Product by Export Value"), profile=profile, value=value, mode="export_val")
         stats.append(stat)
 
-    filters = [Ymbw.year == secex_year, Ymbw.month == 0, Ymbw.bra_id == pobj.id, Ymbw.wld_id_len == 5]
-    result = get_top_stat(Ymbw, Ymbw.wld_id, Ymbw.export_val, Wld, filters)
+    if pobj.id == "all":
+        filters = [Ymw.year == secex_year, Ymw.month == 0, Ymw.wld_id_len == 5]
+        result = get_top_stat(Ymw, Ymw.wld_id, Ymw.export_val, Wld, filters)
+    else:
+        filters = [Ymbw.year == secex_year, Ymbw.month == 0, Ymbw.bra_id == pobj.id, Ymbw.wld_id_len == 5]
+        result = get_top_stat(Ymbw, Ymbw.wld_id, Ymbw.export_val, Wld, filters)
     if result:
         profile,value=result
         stats.append(make_stat(group, gettext("Top Destination by Export Value"), profile=profile, value=value, mode="export_val"))
 
-    filters = [Ymb.year == secex_year, Ymb.month == 0, Ymb.bra_id == pobj.id]
-    result = get_stat_val(Ymb, [Ymb.export_val, Ymb.import_val], filters)
-    if result:
-        export_val, import_val = result
-        stats.append(make_stat(group, gettext("Total Exports"), desc=export_val, mode="export_val"))
-        stats.append(make_stat(group, gettext("Total Imports"), desc=import_val, mode="export_val"))
-    
-    if len(pobj.id) > 1:
-        geo = Bra.query.get(pobj.id[:1])
-        stats.append(make_stat("General Stats", gettext("Region"), profile=geo))
-    if len(pobj.id) > 3:
-        geo = Bra.query.get(pobj.id[:3])
-        stats.append(make_stat("General Stats", gettext("State"), profile=geo))
-    if len(pobj.id) > 5:
-        geo = Bra.query.get(pobj.id[:5])
-        stats.append(make_stat("General Stats", gettext("Mesoregion"), profile=geo))
-    if len(pobj.id) > 7:
-        geo = Bra.query.get(pobj.id[:7])
-        stats.append(make_stat("General Stats", gettext("Microregion"), profile=geo))
-    
-    if len(pobj.id) == 9:
-        group = "General Stats"
-        stat_ids = ["airport", "airport_dist", "seaport", "seaport_dist", "area", "capital_dist", "neighbors"]
-        results = batch_stats(Bs, pobj.id, stat_ids)
-        for name, val in results.items():
-            if name.lower() == "neighbors":
-                bras = Bra.query.filter(Bra.id.in_(val.split(","))).all()
-                val = ", ".join([u"<a href='{}'>{}</a>".format(b.url(), b.name()) for b in bras])
-            stats.append(make_stat(group, name, desc=val))
+    if pobj.id != "all":
+        filters = [Ymb.year == secex_year, Ymb.month == 0, Ymb.bra_id == pobj.id]
+        result = get_stat_val(Ymb, [Ymb.export_val, Ymb.import_val], filters)
+        if result:
+            export_val, import_val = result
+            stats.append(make_stat(group, gettext("Total Exports"), desc=export_val, mode="export_val"))
+            stats.append(make_stat(group, gettext("Total Imports"), desc=import_val, mode="export_val"))
+
+        if len(pobj.id) > 1:
+            geo = Bra.query.get(pobj.id[:1])
+            stats.append(make_stat("General Stats", gettext("Region"), profile=geo))
+        if len(pobj.id) > 3:
+            geo = Bra.query.get(pobj.id[:3])
+            stats.append(make_stat("General Stats", gettext("State"), profile=geo))
+        if len(pobj.id) > 5:
+            geo = Bra.query.get(pobj.id[:5])
+            stats.append(make_stat("General Stats", gettext("Mesoregion"), profile=geo))
+        if len(pobj.id) > 7:
+            geo = Bra.query.get(pobj.id[:7])
+            stats.append(make_stat("General Stats", gettext("Microregion"), profile=geo))
+
+        if len(pobj.id) == 9:
+            group = "General Stats"
+            stat_ids = ["airport", "airport_dist", "seaport", "seaport_dist", "area", "capital_dist", "neighbors"]
+            results = batch_stats(Bs, pobj.id, stat_ids)
+            for name, val in results.items():
+                if name.lower() == "neighbors":
+                    bras = Bra.query.filter(Bra.id.in_(val.split(","))).all()
+                    val = ", ".join([u"<a href='{}'>{}</a>".format(b.url(), b.name()) for b in bras])
+                stats.append(make_stat(group, name, desc=val))
+
     return stats
 
 def cnae_stats(pobj, rais_year):

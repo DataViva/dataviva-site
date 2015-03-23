@@ -42,11 +42,11 @@ class Profile(object):
 
     def __init__(self, type, id):
         self.type = type
-        attr = getattr(attrs, type.capitalize())
-        if isinstance(id, attr):
-            self.attr = id
-        else:
+        if isinstance(id, (str)):
+            attr = getattr(attrs, type.capitalize())
             self.attr = attr.query.get_or_404(id)
+        else:
+            self.attr = id
 
     def name(self):
         return self.attr.name()
@@ -67,9 +67,11 @@ class Profile(object):
             bra = self.attr
 
             # removes SECEX builds if not data, test with '4mg050305'
-            if bra.id != "all":
+            if bra.id != "sabra":
                 q = Ymb.query.filter(Ymb.bra_id == bra.id).first()
                 secex_restricted = q
+            else:
+                bra.id = "all"
 
         else:
             bra = attrs.Wld.query.get("sabra")
