@@ -18,6 +18,7 @@ from dataviva.rais.views import rais_api
 from dataviva.translations.translate import translate
 from dataviva.utils.gzip_data import gzip_data
 from dataviva.utils.cached_query import cached_query, make_cache_key
+from dataviva.utils.title_format import title_format
 
 import json, urllib2, urllib
 from config import FACEBOOK_OAUTH_ID, basedir,GZIP_DATA
@@ -364,8 +365,12 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
     if profile == False and output == "bra":
         profile = bra_attr[0]
     if profile and output != "school":
+        if g.locale == "pt":
+            title = u"Perfil <{0}_para> <{0}>".format(output)
+        else:
+            title = u"Profile for <{0}>".format(output)
         recommended["profile"] = {
-            "title": u"{} {}".format(gettext("Profile for"),profile.name()),
+            "title": title_format(title, profile),
             "url": profile.url()
         }
 

@@ -10,7 +10,6 @@ from dataviva.attrs import models as attrs
 from dataviva.rais import models as rais
 from dataviva.secex import models as secex
 
-from dataviva.general.models import Plan
 from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu, Course_sc
 from dataviva.secex.models import Ymb, Ymp, Ymw
 from dataviva.rais.models import Ybi, Ybo, Yio, Yi, Yo

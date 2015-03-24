@@ -4,6 +4,7 @@ from dataviva import db, __year_range__
 from dataviva.translations.dictionary import dictionary
 from dataviva.utils.auto_serialize import AutoSerialize
 from dataviva.utils.title_case import title_case
+from dataviva.utils.title_format import title_format
 from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_hedu, Course_sc
 
 import ast, re
@@ -422,48 +423,10 @@ class Build(db.Model, AutoSerialize):
         title = getattr(self, "title_{}".format(g.locale))
         title = self.format_text(title, kwargs)
 
-        def get_article(attr, article):
-            if attr.article_pt:
-                if attr.gender_pt == "m":
-                    if article == "em": new_article = "no"
-                    if article == "de": new_article = "do"
-                    if article == "para": new_article = "para o"
-                elif attr.gender_pt == "f":
-                    if article == "em": new_article = "na"
-                    if article == "de": new_article = "da"
-                    if article == "para": new_article = "para a"
-                if attr.plural_pt:
-                    new_article = new_article + "s"
-                return new_article
-            else:
-                return article
-
         if title:
-            if g.locale == "pt":
-                joiner = " e "
-            else:
-                joiner = " and "
-            if "<bra>" in title and isinstance(self.bra,(list,tuple)):
-                bras = []
-                for b in self.bra:
-                    name = title_case(getattr(b, "name_{}".format(g.locale)))
-                    if b.id != "all" and b.distance > 0:
-                        name = name + " "+b.distance+"km"
-                    bras.append(name)
-                article_search = re.search('<bra_(\w+)>', title)
-                if article_search:
-                    title = title.replace(" <bra>", "")
-                    title = title.replace(article_search.group(0), joiner.join([get_article(b, article_search.group(1)) + " " + bras[i] for i, b in enumerate(self.bra)]))
-                else:
-                    title = title.replace("<bra>", joiner.join(bras))
-
-            for f in ["cnae", "hs", "cbo", "wld", "university", "course_hedu", "course_sc"]:
-                placeholder = "<{}>".format(f)
-                if placeholder in title and hasattr(self, f):
-                    title = title.replace(placeholder, joiner.join([title_case(getattr(a, "name_{}".format(g.locale))) for a in getattr(self, f)]))
-                    article_search = re.search("<{}_(\w+)>".format(f), title)
-                    if article_search:
-                        title = title.replace(article_search.group(0), joiner.join([get_article(a, article_search.group(1)) for a in getattr(self, f)]))
+            for f in ["bra", "cnae", "hs", "cbo", "wld", "university", "course_hedu", "course_sc"]:
+                if hasattr(self, f):
+                    title = title_format(title, getattr(self, f))
 
         return title
 
