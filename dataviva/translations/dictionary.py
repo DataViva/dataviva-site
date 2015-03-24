@@ -45,9 +45,9 @@ def dictionary():
 
         # RCA Scope Toggle
         "rca_scope": gettext("RCA Scope"),
-        "rca_scope_desc_network": gettext("Changes which RCA variable is used when highlighting products in the app."),
-        "rca_scope_desc_rings": gettext("Changes which RCA variable is used when highlighting products in the app."),
-        "rca_scope_desc_scatter": gettext("Changes which RCA variable is used when highlighting products in the app."),
+        "rca_scope_desc_network": gettext("Changes which RCA variable is used when highlighting products in the visualization."),
+        "rca_scope_desc_rings": gettext("Changes which RCA variable is used when highlighting products in the visualization."),
+        "rca_scope_desc_scatter": gettext("Changes which RCA variable is used when highlighting products in the visualization."),
         "bra_rca": gettext("Domestic"),
         "wld_rca": gettext("International"),
 
@@ -253,7 +253,7 @@ def dictionary():
         "graduates_growth": gettext("Nominal Graduation Growth (1 year)"),
 
         # RAIS Labels
-        "rais": gettext("Establishments and Employment (RAIS)"),
+        "rais": gettext("Wages and Employment (RAIS)"),
         "rais_footer": gettext("Data provided by RAIS"),
         "num_emp": gettext("Total Employees"),
         "num_est": gettext("Total Establishments"),
@@ -400,7 +400,7 @@ def dictionary():
         "embed_footer": gettext("View more visualizations on the full DataViva.info website."),
 
         # D3plus Text
-        "Click for More Info": gettext("Click for more data and related apps."),
+        "Click for More Info": gettext("Click for more data and related visualizations."),
         "Click to Zoom": gettext("Click to Zoom"),
         "filter": gettext("Hide Group"),
         "solo": gettext("Solo Group"),

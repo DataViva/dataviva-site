@@ -283,7 +283,7 @@ def app_star(app_name, data_type, bra_id, filter1, filter2, output):
     # if request.method == 'POST' and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
     #     g.user = User.query.get(request.form["user"])
     if g.user is None or not g.user.is_authenticated():
-        return jsonify({"error": gettext("You need to be logged in to star apps.")})
+        return jsonify({"error": gettext("You need to be logged in to star visualizations.")})
 
     starred = Starred.query.filter_by(user=g.user, app_id=app_id).first()
 
