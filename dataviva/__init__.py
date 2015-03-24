@@ -76,7 +76,6 @@ from dataviva.general.views import mod as general_module
 from dataviva.admin.views import mod as admin_module
 from dataviva.account.views import mod as account_module
 from dataviva.apps.views import mod as apps_module
-from dataviva.guide.views import mod as guide_module
 from dataviva.data.views import mod as data_module
 from dataviva.ask.views import mod as ask_module
 from dataviva.rankings.views import mod as rankings_module
@@ -96,7 +95,6 @@ app.register_blueprint(general_module)
 app.register_blueprint(admin_module)
 app.register_blueprint(account_module)
 app.register_blueprint(apps_module)
-app.register_blueprint(guide_module)
 app.register_blueprint(data_module)
 app.register_blueprint(ask_module)
 app.register_blueprint(rankings_module)

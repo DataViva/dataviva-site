@@ -101,16 +101,11 @@
   background-size: 95%;
 }
 
-.decision.icon.guide:before,
 .decision.icon.profiles:before,
 .decision.icon.data:before,
 .decision.icon.rankings:before,
 .decision.icon.learn:before {
   background-size: 80%;
-}
-
-.decision.icon.guide:before {
-  background-image: url("/static/img/nav/icons/guide_white.png");
 }
 
 .decision.icon.profiles:before {
@@ -131,10 +126,6 @@
 
 .decision.icon.learn:before {
   background-image: url("/static/img/nav/icons/learn_white.png");
-}
-
-.decision.icon.guide {
-  background-color: #3daf49;
 }
 
 .decision.icon.profiles {

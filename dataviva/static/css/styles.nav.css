@@ -61,10 +61,6 @@
   width: 70px;
 }
 
-#header a#guide {
-  background-image: url("/static/img/nav/icons/guide.png");
-}
-
 #header a#profiles {
   background-image: url("/static/img/nav/icons/profiles.png");
 }
@@ -105,12 +101,6 @@
 #header a#profiles:hover {
   background-image: url("/static/img/nav/icons/profiles_active.png");
   color: #e0902d !important; /* orange */
-}
-
-#header a#guide.link.active,
-#header a#guide:hover {
-  background-image: url("/static/img/nav/icons/guide_active.png");
-  color: #3daf49 !important; /* green */
 }
 
 #header a#data.link.active,
