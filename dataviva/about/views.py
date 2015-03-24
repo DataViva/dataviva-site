@@ -90,11 +90,14 @@ def attrs(attr="bra",depth="3"):
     data_url = "/attrs/table/{0}/{1}/".format(attr,depth)
 
     depths = {}
-    depths["bra"] = [1,3,5,8,9]
+    depths["bra"] = [1,3,5,7,8,9]
     depths["cnae"] = [1,3,6]
-    depths["cbo"] = [1,2,4]
-    depths["hs"] = [2,4,6]
+    depths["cbo"] = [1,4]
+    depths["hs"] = [2,6]
     depths["wld"] = [2,5]
+    depths["course_hedu"] = [2,6]
+    depths["university"] = [5]
+    depths["course_sc"] = [2,5]
 
     return render_template("about/attrs.html", data_url=data_url, depths = depths[attr], page = "attrs", attr = attr, depth = int(depth))
 

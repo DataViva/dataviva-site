@@ -62,6 +62,18 @@
         {% trans %}Export Destinations{% endtrans %}
       </a>
 
+      <a class="{% if attr == 'course_hedu' %}decision{% else %}help{% endif %} short icon course_hedu" href="{{ url_for('about.attrs', attr='course_hedu', depth='2')}}">
+        {% trans %}Majors{% endtrans %}
+      </a>
+
+      <a class="{% if attr == 'university' %}decision{% else %}help{% endif %} short icon university" href="{{ url_for('about.attrs', attr='university', depth='5')}}">
+        {% trans %}Universities{% endtrans %}
+      </a>
+
+      <a class="{% if attr == 'course_sc' %}decision{% else %}help{% endif %} short icon course_sc" href="{{ url_for('about.attrs', attr='course_sc', depth='2')}}">
+        {% trans %}Vocational Courses{% endtrans %}
+      </a>
+
     {% endif %}
 
     <a class="{% if page == 'apps' %}decision{% else %}help{% endif %}" href="{{ url_for('about.apps', app='about') }}">
