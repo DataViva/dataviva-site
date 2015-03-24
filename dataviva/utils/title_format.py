@@ -10,7 +10,10 @@ def title_format(title, attr):
         attr = [attr]
 
     joiner = " {} ".format(gettext("and"))
-    type = attr[0].__class__.__name__.lower()
+    if attr[0].id == "all":
+        type = "bra"
+    else:
+        type = attr[0].__class__.__name__.lower()
 
     names = []
     for a in attr:
