@@ -146,7 +146,7 @@ def index_selector(category = None, id = None):
     elif category == "university":
         article = gettext(u"a university")
     elif category == "course_hedu":
-        article = gettext(u"a course")
+        article = gettext(u"a major")
     elif category == "course_sc":
         article = gettext(u"a course")
 

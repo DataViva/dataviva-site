@@ -224,7 +224,7 @@ def university_stats(pobj, hedu_year):
     group = '{} Stats ({}):'.format(hedu_year, "HEDU")
     filters = [Yuc.year == hedu_year, Yuc.university_id == pobj.id, Yuc.course_hedu_id_len == 6]
     profile, value = get_top_stat(Yuc, Yuc.course_hedu_id, Yuc.enrolled, Course_hedu, filters)
-    stats.append(make_stat(group, gettext("Top Course by Enrollment"), profile=profile, value=value, mode="enrolled"))
+    stats.append(make_stat(group, gettext("Top Major by Enrollment"), profile=profile, value=value, mode="enrolled"))
 
     filters = [Yu.year == hedu_year, Yu.university_id == pobj.id]
     enrolled, graduates = get_stat_val(Ymw, [Yu.enrolled, Yu.graduates], filters)
@@ -328,7 +328,7 @@ def make_stat(group, name, desc=None, value=None, url=None, mode=None, year=None
 
     if not value:
         if not desc:
-            desc = gettext("-")
+            desc = "-"
 
     return {
                 'group': group,
