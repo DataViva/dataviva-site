@@ -114,7 +114,10 @@ class Profile(object):
                         v[ii] = None
                         continue
 
-                    b.set_bra(bra)
+                    if "bra" in a:
+                        b.set_bra(a["bra"])
+                    else:
+                        b.set_bra(bra)
 
                     if "filter1" in a:
                         b.set_filter1(a["filter1"])
@@ -329,7 +332,7 @@ class Cnae(Profile):
 
         if len(self.attr.id) == 6:
             apps.append({
-                "title": gettext("Economic Opportunities:"), "builds": [51, 48]
+                "title": gettext("Economic Opportunities:"), "builds": [{"id": 51, "bra": "4mg"}, {"id": 48, "bra": "4mg"}]
             })
 
         products = self.crosswalk_id()
