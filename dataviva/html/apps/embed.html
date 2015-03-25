@@ -2057,7 +2057,42 @@
       }
       else if (out === "balance") {
 
-          data.raw.forEach(function(d){
+          if (app.build.bra[0].id === "all") {
+            var new_data = [];
+            d3.nest()
+              .key(function(d){ return d.year; })
+              .key(function(d){ return d.month; })
+              .rollup(function(leaves){
+                var temp = {};
+                for (var key in leaves[0]) {
+                  if (key === "bra_id") {
+                    temp[key] = "sabra";
+                  }
+                  else if (key === "month" || key === "year") {
+                    temp[key] = leaves[0][key];
+                  }
+                  else {
+                    var vals = leaves.filter(function(d){ return d[key] !== null; });
+                    if (vals.length) {
+                      temp[key] = d3.sum(vals, function(d){ return d[key]; });
+                    }
+                    else {
+                      temp[key] = null;
+                    }
+                  }
+                }
+                temp.export_val_kg = temp.export_kg ? temp.export_val/temp.export_kg : 0;
+                temp.import_val_kg = temp.import_kg ? temp.import_val/temp.import_kg : 0;
+                new_data.push(temp);
+                return leaves;
+              })
+              .entries(data.raw);
+          }
+          else {
+            var new_data = data.raw;
+          }
+
+          new_data.forEach(function(d){
 
             var exp = d3plus.util.copy(d);
             exp.trade_balance = "trade_balance";
