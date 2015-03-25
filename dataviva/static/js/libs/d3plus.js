@@ -14571,11 +14571,9 @@ module.exports = function() {
       //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       // Sort the data, if needed.
       //------------------------------------------------------------------------
-      if ( vars.data.sort.value && (vars.data.changed || vars.order.changed || vars.order.sort.changed) ) {
-
+      if (vars.data.sort.value && (vars.data.changed || vars.order.changed || vars.order.sort.changed) ) {
         arraySort( vars.data.viz , vars.order.value || vars.text.value,
                    vars.order.sort.value , vars.color.value , vars );
-
       }
 
       //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -16357,9 +16355,7 @@ module.exports = function(vars) {
       print.time("updating list items");
     }
     if (!("items" in vars.container)) {
-      vars.container.items = form().container(vars.container.list).data({
-        "sort": false
-      }).type("button").ui({
+      vars.container.items = form().container(vars.container.list).type("button").ui({
         border: 0,
         display: "block",
         margin: 0
@@ -16406,7 +16402,9 @@ module.exports = function(vars) {
         value: vars.data.filtered
       });
     }
-    vars.container.items.active(vars.active.value).draw({
+    vars.container.items.active(vars.active.value).data({
+      "sort": vars.data.sort.value
+    }).draw({
       update: vars.draw.update
     }).font(vars.font.secondary).hover(vars.hover.value).id(vars.id.value).icon({
       button: (deepest ? false : vars.icon.next),
