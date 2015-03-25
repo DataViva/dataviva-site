@@ -1719,14 +1719,27 @@
 
       last_app = app.build.app.type
 
-      var data_array = app.data[app.build.data_url][format[app.build.app.type]];
-      app.viz.data(data_array);
-      if (!data_array.length) {
-        // put custom error handling here
+      var data_array = app.data[app.build.data_url][format[app.build.app.type]],
+          error = false;
+      if (app.build.bra[0].id === "all") {
+          if (["scatter", "occugrid"].indexOf(app.build.app.type) >= 0) {
+            error = dataviva.dictionary.no_brazil;
+          }
+          else if (["network", "rings"].indexOf(app.build.app.type) >= 0 && app.build.dataset === "rais") {
+            error = dataviva.dictionary.no_brazil;
+          }
       }
-      else {
-        app.viz.error(false);
+      if (app.build.app.type === "occugrid") {
+        if (app.build.cnae[0].id.length !== depths.cnae[depths.cnae.length - 1]) {
+          error = dataviva.dictionary.no_deepest;
+        }
       }
+      else if (app.build.app.type === "rings") {
+        if (app.build[app.build.output_attr][0].id.length !== depths[app.build.output_attr][depths[app.build.output_attr].length - 1]) {
+          error = dataviva.dictionary.no_deepest;
+        }
+      }
+      app.viz.data(data_array).error(error);
 
       dataviva.resize()
       loading.hide()

@@ -62,15 +62,15 @@ class Build(db.Model, AutoSerialize):
     def get_ui(self, ui_type):
         return self.ui.filter(UI.type == ui_type).first()
 
-    def brazil_allowed(self):
-        return (self.app_id not in [6,8]) and ((self.app_id not in [4,5]) or self.dataset != "rais")
+    # def brazil_allowed(self):
+    #     return (self.app_id not in [6,8]) and ((self.app_id not in [4,5]) or self.dataset != "rais")
 
     def limit_bra(self, bra):
         if isinstance(bra, Wld):
-            if not self.brazil_allowed():
-                return Bra.query.get("4mg")
-            else:
-                bra.id = "all"
+            # if not self.brazil_allowed():
+            #     return Bra.query.get("4mg")
+            # else:
+            bra.id = "all"
         return bra
 
     def set_bra(self, bra_id):
@@ -84,8 +84,8 @@ class Build(db.Model, AutoSerialize):
             if bra_id == "bra":
                 bra_id = "all"
 
-            if bra_id == "all" and not self.brazil_allowed():
-                bra_id = "4mg"
+            # if bra_id == "all" and not self.brazil_allowed():
+            #     bra_id = "4mg"
 
             if "_" in self.bra and "_" not in bra_id:
                 if bra_id == "4rj":
@@ -283,6 +283,8 @@ class Build(db.Model, AutoSerialize):
                 filter1 = filter1 + ".show.{}".format(len(filter1))
             elif filter2 != "all":
                 filter2 = filter2 + ".show.{}".format(len(filter2))
+            else:
+                bra = "show.1"
         elif self.output == "age":
             filter1 = "show.8"
             filter2 = "xx.show.5"

@@ -399,6 +399,9 @@ def dictionary():
         "secex_9": gettext("Based on the Exporting Municipality"),
         "embed_footer": gettext("View more visualizations on the full DataViva.info website."),
 
+        "no_brazil": gettext("This visualization is not available when selecting the entirity of Brazil. Please select a more grainular location."),
+        "no_deepest": gettext("This visualization is only available at the deepest nesting. Please select a more grainular filter."),
+
         # D3plus Text
         "Click for More Info": gettext("Click for more data and related visualizations."),
         "Click to Zoom": gettext("Click to Zoom"),
