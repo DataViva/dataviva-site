@@ -544,7 +544,9 @@ def download():
     format = form.output_format.data
     title = form.title.data
     downloadToken = form.downloadToken.data
-    filenameDownload = title+"-"+downloadToken
+    max_length = 250 - (len(downloadToken) + 1)
+    title_safe = title[:max_length]
+    filenameDownload = title_safe + "-" + downloadToken
 
 
 
@@ -636,24 +638,23 @@ def download():
         response_data = data.encode("utf-16")
         #print response_data
 
-
-    content_disposition = "attachment;filename=%s.%s" % (title, format)
+    content_disposition = "attachment;filename=%s.%s" % (title_safe, format)
     content_disposition = content_disposition.replace(",", "_")
 
     download_file = make_response(Response(response_data,
                        mimetype=mimetype,
                         headers={"Content-Disposition": content_disposition}))
 
-    with open(os.path.join(basedir, "dataviva/static/downloads/"+title+"."+format),"wb") as fo:
+    with open(os.path.join(basedir, "dataviva/static/downloads/"+title_safe+"."+format),"wb") as fo:
         fo.write(response_data)
 
     zf = zipfile.ZipFile(os.path.join(basedir, "dataviva/static/downloads/"+filenameDownload+".zip"), mode='w')
     try:
-        zf.write(os.path.join(basedir, "dataviva/static/downloads/"+title+"."+format), title+"."+format)
+        zf.write(os.path.join(basedir, "dataviva/static/downloads/"+title_safe+"."+format), title_safe+"."+format)
     finally:
         zf.close()
 
-    os.remove(os.path.join(basedir, "dataviva/static/downloads/"+title+"."+format))
+    os.remove(os.path.join(basedir, "dataviva/static/downloads/"+title_safe+"."+format))
 
     return "/static/downloads/"+filenameDownload+".zip"
 

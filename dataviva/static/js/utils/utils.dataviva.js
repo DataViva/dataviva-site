@@ -50,6 +50,9 @@ dataviva.format.text = function(text, opts) {
     arr.shift()
     var index = arr.shift()
     text = arr.join("_")
+    if (index >= app.build.bra.length)
+      index = index % app.build.bra.length;
+
     return app.build.bra[index]["name_"+l] + " ("+format_name(text)+")"
   }
   else if (!name || (name.indexOf("_display") < 0 && name.indexOf("_id") < 0)) {
