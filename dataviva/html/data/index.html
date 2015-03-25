@@ -177,6 +177,8 @@ d3.selectAll(".time select").each(function(){
   d3plus.form()
     .data(d3.select(this))
     .search(false)
+    .height({"secondary": 150})
+    .data({"order":false})
     .draw();
 })
 
@@ -212,6 +214,7 @@ d3.selectAll(".output_filters select")
           d3.select(".output_nestings." + value).style("display", "inline-block");
         }
       })
+      .open({"flipped": true})
       .type("drop")
       .draw();
   })
@@ -221,6 +224,7 @@ d3.selectAll(".output_nestings select")
   .each(function(){
     d3plus.form()
       .data(d3.select(this))
+      .open({"flipped": true})
       .type("drop")
       .draw();
   })
@@ -267,7 +271,6 @@ function make_url(){
   var current_url = urls[current_dataset];
   var current_output = d3.select(".output_filters."+current_dataset+" select").property("value");
   var current_nesting = d3.select(".output_nestings."+current_output+" select").property("value");
-  console.log(current_dataset, current_output, current_nesting)
 
   var time = []
   current_url.time.forEach(function(t){
@@ -306,6 +309,8 @@ function table_size() {
   d3.select(".data_table")
     .style("width", window.innerWidth - 330 + "px")
     .style("height", window.innerHeight - 157 + "px")
+  d3.select("#filter_selects")
+    .style("max-height", window.innerHeight - 177 + "px")
 }
 
 table_size()
