@@ -27493,7 +27493,7 @@ module.exports = {
   chainable: false,
   data: [],
   process: function(value, vars) {
-    var arr, blob, c, columns, csv_data, csv_to_return, dataString, encodedUri, i, link, n, title, titles, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref;
+    var arr, blob, c, columns, csv_data, csv_to_return, dataString, encodedUri, i, link, max_filename_len, n, title, titles, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref;
     if (vars.returned === void 0) {
       return [];
     }
@@ -27506,11 +27506,13 @@ module.exports = {
     csv_to_return = [];
     titles = [];
     if (vars.title.value) {
-      title = vars.title.string;
+      title = vars.title.value;
       if (typeof title === "function") {
         title = title(vars.self);
       }
       title = stringStrip(title);
+      max_filename_len = 250;
+      title = title.substr(0, max_filename_len);
     } else {
       title = "D3plus Visualization Data";
     }
