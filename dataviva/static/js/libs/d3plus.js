@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./src/init.coffee":[function(require,module,exports){
 
 /**
  * @class d3plus
@@ -254,7 +254,7 @@ if (stylesheet("d3plus.css")) {
 
 
 
-},{"./array/comparator.coffee":32,"./array/contains.coffee":33,"./array/sort.coffee":34,"./array/update.coffee":35,"./client/css.coffee":36,"./client/ie.js":37,"./client/pointer.coffee":38,"./client/prefix.coffee":39,"./client/rtl.coffee":40,"./client/scrollbar.coffee":41,"./client/touch.coffee":42,"./color/legible.coffee":43,"./color/lighter.coffee":44,"./color/mix.coffee":45,"./color/random.coffee":46,"./color/scale.coffee":47,"./color/sort.coffee":48,"./color/text.coffee":49,"./color/validate.coffee":50,"./core/console/print.coffee":51,"./data/bestRegress.coffee":91,"./data/lof.coffee":92,"./data/mad.coffee":93,"./font/sizes.coffee":94,"./font/validate.coffee":95,"./form/form.js":96,"./geom/largestRect.coffee":152,"./geom/offset.coffee":153,"./geom/path2poly.coffee":154,"./network/cluster.coffee":155,"./network/distance.coffee":156,"./network/normalize.coffee":157,"./network/shortestPath.coffee":158,"./network/smallestGap.coffee":159,"./network/subgraph.coffee":160,"./number/format.coffee":161,"./object/merge.coffee":162,"./object/validate.coffee":163,"./string/format.js":164,"./string/list.coffee":165,"./string/strip.js":166,"./string/title.coffee":167,"./textwrap/textwrap.coffee":191,"./tooltip/create.js":192,"./tooltip/move.coffee":193,"./tooltip/remove.coffee":194,"./util/buckets.coffee":195,"./util/child.coffee":196,"./util/closest.coffee":197,"./util/copy.coffee":198,"./util/d3selection.coffee":199,"./util/dataURL.coffee":200,"./util/uniques.coffee":201,"./viz/viz.coffee":315}],2:[function(require,module,exports){
+},{"./array/comparator.coffee":"/Users/Dave/Sites/d3plus/src/array/comparator.coffee","./array/contains.coffee":"/Users/Dave/Sites/d3plus/src/array/contains.coffee","./array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","./array/update.coffee":"/Users/Dave/Sites/d3plus/src/array/update.coffee","./client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee","./client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","./client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","./client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","./client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","./client/scrollbar.coffee":"/Users/Dave/Sites/d3plus/src/client/scrollbar.coffee","./client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","./color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","./color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","./color/mix.coffee":"/Users/Dave/Sites/d3plus/src/color/mix.coffee","./color/random.coffee":"/Users/Dave/Sites/d3plus/src/color/random.coffee","./color/scale.coffee":"/Users/Dave/Sites/d3plus/src/color/scale.coffee","./color/sort.coffee":"/Users/Dave/Sites/d3plus/src/color/sort.coffee","./color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","./color/validate.coffee":"/Users/Dave/Sites/d3plus/src/color/validate.coffee","./core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./data/bestRegress.coffee":"/Users/Dave/Sites/d3plus/src/data/bestRegress.coffee","./data/lof.coffee":"/Users/Dave/Sites/d3plus/src/data/lof.coffee","./data/mad.coffee":"/Users/Dave/Sites/d3plus/src/data/mad.coffee","./font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","./font/validate.coffee":"/Users/Dave/Sites/d3plus/src/font/validate.coffee","./form/form.js":"/Users/Dave/Sites/d3plus/src/form/form.js","./geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","./geom/offset.coffee":"/Users/Dave/Sites/d3plus/src/geom/offset.coffee","./geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","./network/cluster.coffee":"/Users/Dave/Sites/d3plus/src/network/cluster.coffee","./network/distance.coffee":"/Users/Dave/Sites/d3plus/src/network/distance.coffee","./network/normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee","./network/shortestPath.coffee":"/Users/Dave/Sites/d3plus/src/network/shortestPath.coffee","./network/smallestGap.coffee":"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee","./network/subgraph.coffee":"/Users/Dave/Sites/d3plus/src/network/subgraph.coffee","./number/format.coffee":"/Users/Dave/Sites/d3plus/src/number/format.coffee","./object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","./object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","./string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","./string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","./string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","./string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee","./textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","./tooltip/create.js":"/Users/Dave/Sites/d3plus/src/tooltip/create.js","./tooltip/move.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/move.coffee","./tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","./util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","./util/child.coffee":"/Users/Dave/Sites/d3plus/src/util/child.coffee","./util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","./util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee","./util/dataURL.coffee":"/Users/Dave/Sites/d3plus/src/util/dataURL.coffee","./util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./viz/viz.coffee":"/Users/Dave/Sites/d3plus/src/viz/viz.coffee"}],"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/index.js":[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -321,36 +321,41 @@ Buffer.TYPED_ARRAY_SUPPORT = (function () {
  * By augmenting the instances, we can avoid modifying the `Uint8Array`
  * prototype.
  */
-function Buffer (subject, encoding) {
-  var self = this
-  if (!(self instanceof Buffer)) return new Buffer(subject, encoding)
+function Buffer (subject, encoding, noZero) {
+  if (!(this instanceof Buffer))
+    return new Buffer(subject, encoding, noZero)
 
   var type = typeof subject
-  var length
 
+  // Find the length
+  var length
   if (type === 'number') {
     length = +subject
   } else if (type === 'string') {
     length = Buffer.byteLength(subject, encoding)
-  } else if (type === 'object' && subject !== null) {
-    // assume object is array-like
-    if (subject.type === 'Buffer' && isArray(subject.data)) subject = subject.data
+  } else if (type === 'object' && subject !== null) { // assume object is array-like
+    if (subject.type === 'Buffer' && isArray(subject.data))
+      subject = subject.data
     length = +subject.length
   } else {
     throw new TypeError('must start with number, buffer, array or string')
   }
 
-  if (length > kMaxLength) {
-    throw new RangeError('Attempt to allocate Buffer larger than maximum size: 0x' +
-      kMaxLength.toString(16) + ' bytes')
-  }
+  if (length > kMaxLength)
+    throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
+      'size: 0x' + kMaxLength.toString(16) + ' bytes')
 
-  if (length < 0) length = 0
-  else length >>>= 0 // coerce to uint32
+  if (length < 0)
+    length = 0
+  else
+    length >>>= 0 // Coerce to uint32.
 
+  var self = this
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     // Preferred: Return an augmented `Uint8Array` instance for best performance
-    self = Buffer._augment(new Uint8Array(length)) // eslint-disable-line consistent-this
+    /*eslint-disable consistent-this */
+    self = Buffer._augment(new Uint8Array(length))
+    /*eslint-enable consistent-this */
   } else {
     // Fallback: Return THIS instance of Buffer (created by `new`)
     self.length = length
@@ -364,43 +369,42 @@ function Buffer (subject, encoding) {
   } else if (isArrayish(subject)) {
     // Treat array-ish objects as a byte array
     if (Buffer.isBuffer(subject)) {
-      for (i = 0; i < length; i++) {
+      for (i = 0; i < length; i++)
         self[i] = subject.readUInt8(i)
-      }
     } else {
-      for (i = 0; i < length; i++) {
+      for (i = 0; i < length; i++)
         self[i] = ((subject[i] % 256) + 256) % 256
-      }
     }
   } else if (type === 'string') {
     self.write(subject, 0, encoding)
-  } else if (type === 'number' && !Buffer.TYPED_ARRAY_SUPPORT) {
+  } else if (type === 'number' && !Buffer.TYPED_ARRAY_SUPPORT && !noZero) {
     for (i = 0; i < length; i++) {
       self[i] = 0
     }
   }
 
-  if (length > 0 && length <= Buffer.poolSize) self.parent = rootParent
+  if (length > 0 && length <= Buffer.poolSize)
+    self.parent = rootParent
 
   return self
 }
 
-function SlowBuffer (subject, encoding) {
-  if (!(this instanceof SlowBuffer)) return new SlowBuffer(subject, encoding)
+function SlowBuffer (subject, encoding, noZero) {
+  if (!(this instanceof SlowBuffer))
+    return new SlowBuffer(subject, encoding, noZero)
 
-  var buf = new Buffer(subject, encoding)
+  var buf = new Buffer(subject, encoding, noZero)
   delete buf.parent
   return buf
 }
 
-Buffer.isBuffer = function isBuffer (b) {
+Buffer.isBuffer = function (b) {
   return !!(b != null && b._isBuffer)
 }
 
-Buffer.compare = function compare (a, b) {
-  if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) {
+Buffer.compare = function (a, b) {
+  if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b))
     throw new TypeError('Arguments must be Buffers')
-  }
 
   if (a === b) return 0
 
@@ -416,7 +420,7 @@ Buffer.compare = function compare (a, b) {
   return 0
 }
 
-Buffer.isEncoding = function isEncoding (encoding) {
+Buffer.isEncoding = function (encoding) {
   switch (String(encoding).toLowerCase()) {
     case 'hex':
     case 'utf8':
@@ -435,8 +439,8 @@ Buffer.isEncoding = function isEncoding (encoding) {
   }
 }
 
-Buffer.concat = function concat (list, totalLength) {
-  if (!isArray(list)) throw new TypeError('list argument must be an Array of Buffers.')
+Buffer.concat = function (list, totalLength) {
+  if (!isArray(list)) throw new TypeError('Usage: Buffer.concat(list[, length])')
 
   if (list.length === 0) {
     return new Buffer(0)
@@ -462,7 +466,7 @@ Buffer.concat = function concat (list, totalLength) {
   return buf
 }
 
-Buffer.byteLength = function byteLength (str, encoding) {
+Buffer.byteLength = function (str, encoding) {
   var ret
   str = str + ''
   switch (encoding || 'utf8') {
@@ -498,7 +502,7 @@ Buffer.prototype.length = undefined
 Buffer.prototype.parent = undefined
 
 // toString(encoding, start=0, end=buffer.length)
-Buffer.prototype.toString = function toString (encoding, start, end) {
+Buffer.prototype.toString = function (encoding, start, end) {
   var loweredCase = false
 
   start = start >>> 0
@@ -534,84 +538,45 @@ Buffer.prototype.toString = function toString (encoding, start, end) {
         return utf16leSlice(this, start, end)
 
       default:
-        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        if (loweredCase)
+          throw new TypeError('Unknown encoding: ' + encoding)
         encoding = (encoding + '').toLowerCase()
         loweredCase = true
     }
   }
 }
 
-Buffer.prototype.equals = function equals (b) {
+Buffer.prototype.equals = function (b) {
   if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
   if (this === b) return true
   return Buffer.compare(this, b) === 0
 }
 
-Buffer.prototype.inspect = function inspect () {
+Buffer.prototype.inspect = function () {
   var str = ''
   var max = exports.INSPECT_MAX_BYTES
   if (this.length > 0) {
     str = this.toString('hex', 0, max).match(/.{2}/g).join(' ')
-    if (this.length > max) str += ' ... '
+    if (this.length > max)
+      str += ' ... '
   }
   return '<Buffer ' + str + '>'
 }
 
-Buffer.prototype.compare = function compare (b) {
+Buffer.prototype.compare = function (b) {
   if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
   if (this === b) return 0
   return Buffer.compare(this, b)
 }
 
-Buffer.prototype.indexOf = function indexOf (val, byteOffset) {
-  if (byteOffset > 0x7fffffff) byteOffset = 0x7fffffff
-  else if (byteOffset < -0x80000000) byteOffset = -0x80000000
-  byteOffset >>= 0
-
-  if (this.length === 0) return -1
-  if (byteOffset >= this.length) return -1
-
-  // Negative offsets start from the end of the buffer
-  if (byteOffset < 0) byteOffset = Math.max(this.length + byteOffset, 0)
-
-  if (typeof val === 'string') {
-    if (val.length === 0) return -1 // special case: looking for empty string always fails
-    return String.prototype.indexOf.call(this, val, byteOffset)
-  }
-  if (Buffer.isBuffer(val)) {
-    return arrayIndexOf(this, val, byteOffset)
-  }
-  if (typeof val === 'number') {
-    if (Buffer.TYPED_ARRAY_SUPPORT && Uint8Array.prototype.indexOf === 'function') {
-      return Uint8Array.prototype.indexOf.call(this, val, byteOffset)
-    }
-    return arrayIndexOf(this, [ val ], byteOffset)
-  }
-
-  function arrayIndexOf (arr, val, byteOffset) {
-    var foundIndex = -1
-    for (var i = 0; byteOffset + i < arr.length; i++) {
-      if (arr[byteOffset + i] === val[foundIndex === -1 ? 0 : i - foundIndex]) {
-        if (foundIndex === -1) foundIndex = i
-        if (i - foundIndex + 1 === val.length) return byteOffset + foundIndex
-      } else {
-        foundIndex = -1
-      }
-    }
-    return -1
-  }
-
-  throw new TypeError('val must be string, number or Buffer')
-}
-
 // `get` will be removed in Node 0.13+
-Buffer.prototype.get = function get (offset) {
+Buffer.prototype.get = function (offset) {
   console.log('.get() is deprecated. Access using array indexes instead.')
   return this.readUInt8(offset)
 }
 
 // `set` will be removed in Node 0.13+
-Buffer.prototype.set = function set (v, offset) {
+Buffer.prototype.set = function (v, offset) {
   console.log('.set() is deprecated. Access using array indexes instead.')
   return this.writeUInt8(v, offset)
 }
@@ -636,9 +601,9 @@ function hexWrite (buf, string, offset, length) {
     length = strLen / 2
   }
   for (var i = 0; i < length; i++) {
-    var parsed = parseInt(string.substr(i * 2, 2), 16)
-    if (isNaN(parsed)) throw new Error('Invalid hex string')
-    buf[offset + i] = parsed
+    var byte = parseInt(string.substr(i * 2, 2), 16)
+    if (isNaN(byte)) throw new Error('Invalid hex string')
+    buf[offset + i] = byte
   }
   return i
 }
@@ -667,7 +632,7 @@ function utf16leWrite (buf, string, offset, length) {
   return charsWritten
 }
 
-Buffer.prototype.write = function write (string, offset, length, encoding) {
+Buffer.prototype.write = function (string, offset, length, encoding) {
   // Support both (string, offset, length, encoding)
   // and the legacy (string, encoding, offset, length)
   if (isFinite(offset)) {
@@ -684,9 +649,8 @@ Buffer.prototype.write = function write (string, offset, length, encoding) {
 
   offset = Number(offset) || 0
 
-  if (length < 0 || offset < 0 || offset > this.length) {
+  if (length < 0 || offset < 0 || offset > this.length)
     throw new RangeError('attempt to write outside buffer bounds')
-  }
 
   var remaining = this.length - offset
   if (!length) {
@@ -729,7 +693,7 @@ Buffer.prototype.write = function write (string, offset, length, encoding) {
   return ret
 }
 
-Buffer.prototype.toJSON = function toJSON () {
+Buffer.prototype.toJSON = function () {
   return {
     type: 'Buffer',
     data: Array.prototype.slice.call(this._arr || this, 0)
@@ -803,39 +767,43 @@ function utf16leSlice (buf, start, end) {
   return res
 }
 
-Buffer.prototype.slice = function slice (start, end) {
+Buffer.prototype.slice = function (start, end) {
   var len = this.length
   start = ~~start
   end = end === undefined ? len : ~~end
 
   if (start < 0) {
     start += len
-    if (start < 0) start = 0
+    if (start < 0)
+      start = 0
   } else if (start > len) {
     start = len
   }
 
   if (end < 0) {
     end += len
-    if (end < 0) end = 0
+    if (end < 0)
+      end = 0
   } else if (end > len) {
     end = len
   }
 
-  if (end < start) end = start
+  if (end < start)
+    end = start
 
   var newBuf
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     newBuf = Buffer._augment(this.subarray(start, end))
   } else {
     var sliceLen = end - start
-    newBuf = new Buffer(sliceLen, undefined)
+    newBuf = new Buffer(sliceLen, undefined, true)
     for (var i = 0; i < sliceLen; i++) {
       newBuf[i] = this[i + start]
     }
   }
 
-  if (newBuf.length) newBuf.parent = this.parent || this
+  if (newBuf.length)
+    newBuf.parent = this.parent || this
 
   return newBuf
 }
@@ -844,58 +812,62 @@ Buffer.prototype.slice = function slice (start, end) {
  * Need to make sure that buffer isn't trying to write out of bounds.
  */
 function checkOffset (offset, ext, length) {
-  if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint')
-  if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length')
+  if ((offset % 1) !== 0 || offset < 0)
+    throw new RangeError('offset is not uint')
+  if (offset + ext > length)
+    throw new RangeError('Trying to access beyond buffer length')
 }
 
-Buffer.prototype.readUIntLE = function readUIntLE (offset, byteLength, noAssert) {
+Buffer.prototype.readUIntLE = function (offset, byteLength, noAssert) {
   offset = offset >>> 0
   byteLength = byteLength >>> 0
-  if (!noAssert) checkOffset(offset, byteLength, this.length)
+  if (!noAssert)
+    checkOffset(offset, byteLength, this.length)
 
   var val = this[offset]
   var mul = 1
   var i = 0
-  while (++i < byteLength && (mul *= 0x100)) {
+  while (++i < byteLength && (mul *= 0x100))
     val += this[offset + i] * mul
-  }
 
   return val
 }
 
-Buffer.prototype.readUIntBE = function readUIntBE (offset, byteLength, noAssert) {
+Buffer.prototype.readUIntBE = function (offset, byteLength, noAssert) {
   offset = offset >>> 0
   byteLength = byteLength >>> 0
-  if (!noAssert) {
+  if (!noAssert)
     checkOffset(offset, byteLength, this.length)
-  }
 
   var val = this[offset + --byteLength]
   var mul = 1
-  while (byteLength > 0 && (mul *= 0x100)) {
+  while (byteLength > 0 && (mul *= 0x100))
     val += this[offset + --byteLength] * mul
-  }
 
   return val
 }
 
-Buffer.prototype.readUInt8 = function readUInt8 (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 1, this.length)
+Buffer.prototype.readUInt8 = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 1, this.length)
   return this[offset]
 }
 
-Buffer.prototype.readUInt16LE = function readUInt16LE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 2, this.length)
+Buffer.prototype.readUInt16LE = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 2, this.length)
   return this[offset] | (this[offset + 1] << 8)
 }
 
-Buffer.prototype.readUInt16BE = function readUInt16BE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 2, this.length)
+Buffer.prototype.readUInt16BE = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 2, this.length)
   return (this[offset] << 8) | this[offset + 1]
 }
 
-Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 4, this.length)
+Buffer.prototype.readUInt32LE = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 4, this.length)
 
   return ((this[offset]) |
       (this[offset + 1] << 8) |
@@ -903,104 +875,117 @@ Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
       (this[offset + 3] * 0x1000000)
 }
 
-Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 4, this.length)
+Buffer.prototype.readUInt32BE = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 4, this.length)
 
   return (this[offset] * 0x1000000) +
-    ((this[offset + 1] << 16) |
-    (this[offset + 2] << 8) |
-    this[offset + 3])
+      ((this[offset + 1] << 16) |
+      (this[offset + 2] << 8) |
+      this[offset + 3])
 }
 
-Buffer.prototype.readIntLE = function readIntLE (offset, byteLength, noAssert) {
+Buffer.prototype.readIntLE = function (offset, byteLength, noAssert) {
   offset = offset >>> 0
   byteLength = byteLength >>> 0
-  if (!noAssert) checkOffset(offset, byteLength, this.length)
+  if (!noAssert)
+    checkOffset(offset, byteLength, this.length)
 
   var val = this[offset]
   var mul = 1
   var i = 0
-  while (++i < byteLength && (mul *= 0x100)) {
+  while (++i < byteLength && (mul *= 0x100))
     val += this[offset + i] * mul
-  }
   mul *= 0x80
 
-  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+  if (val >= mul)
+    val -= Math.pow(2, 8 * byteLength)
 
   return val
 }
 
-Buffer.prototype.readIntBE = function readIntBE (offset, byteLength, noAssert) {
+Buffer.prototype.readIntBE = function (offset, byteLength, noAssert) {
   offset = offset >>> 0
   byteLength = byteLength >>> 0
-  if (!noAssert) checkOffset(offset, byteLength, this.length)
+  if (!noAssert)
+    checkOffset(offset, byteLength, this.length)
 
   var i = byteLength
   var mul = 1
   var val = this[offset + --i]
-  while (i > 0 && (mul *= 0x100)) {
+  while (i > 0 && (mul *= 0x100))
     val += this[offset + --i] * mul
-  }
   mul *= 0x80
 
-  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+  if (val >= mul)
+    val -= Math.pow(2, 8 * byteLength)
 
   return val
 }
 
-Buffer.prototype.readInt8 = function readInt8 (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 1, this.length)
-  if (!(this[offset] & 0x80)) return (this[offset])
+Buffer.prototype.readInt8 = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 1, this.length)
+  if (!(this[offset] & 0x80))
+    return (this[offset])
   return ((0xff - this[offset] + 1) * -1)
 }
 
-Buffer.prototype.readInt16LE = function readInt16LE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 2, this.length)
+Buffer.prototype.readInt16LE = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 2, this.length)
   var val = this[offset] | (this[offset + 1] << 8)
   return (val & 0x8000) ? val | 0xFFFF0000 : val
 }
 
-Buffer.prototype.readInt16BE = function readInt16BE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 2, this.length)
+Buffer.prototype.readInt16BE = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 2, this.length)
   var val = this[offset + 1] | (this[offset] << 8)
   return (val & 0x8000) ? val | 0xFFFF0000 : val
 }
 
-Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 4, this.length)
+Buffer.prototype.readInt32LE = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 4, this.length)
 
   return (this[offset]) |
-    (this[offset + 1] << 8) |
-    (this[offset + 2] << 16) |
-    (this[offset + 3] << 24)
+      (this[offset + 1] << 8) |
+      (this[offset + 2] << 16) |
+      (this[offset + 3] << 24)
 }
 
-Buffer.prototype.readInt32BE = function readInt32BE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 4, this.length)
+Buffer.prototype.readInt32BE = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 4, this.length)
 
   return (this[offset] << 24) |
-    (this[offset + 1] << 16) |
-    (this[offset + 2] << 8) |
-    (this[offset + 3])
+      (this[offset + 1] << 16) |
+      (this[offset + 2] << 8) |
+      (this[offset + 3])
 }
 
-Buffer.prototype.readFloatLE = function readFloatLE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 4, this.length)
+Buffer.prototype.readFloatLE = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 4, this.length)
   return ieee754.read(this, offset, true, 23, 4)
 }
 
-Buffer.prototype.readFloatBE = function readFloatBE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 4, this.length)
+Buffer.prototype.readFloatBE = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 4, this.length)
   return ieee754.read(this, offset, false, 23, 4)
 }
 
-Buffer.prototype.readDoubleLE = function readDoubleLE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 8, this.length)
+Buffer.prototype.readDoubleLE = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 8, this.length)
   return ieee754.read(this, offset, true, 52, 8)
 }
 
-Buffer.prototype.readDoubleBE = function readDoubleBE (offset, noAssert) {
-  if (!noAssert) checkOffset(offset, 8, this.length)
+Buffer.prototype.readDoubleBE = function (offset, noAssert) {
+  if (!noAssert)
+    checkOffset(offset, 8, this.length)
   return ieee754.read(this, offset, false, 52, 8)
 }
 
@@ -1010,42 +995,43 @@ function checkInt (buf, value, offset, ext, max, min) {
   if (offset + ext > buf.length) throw new RangeError('index out of range')
 }
 
-Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, noAssert) {
+Buffer.prototype.writeUIntLE = function (value, offset, byteLength, noAssert) {
   value = +value
   offset = offset >>> 0
   byteLength = byteLength >>> 0
-  if (!noAssert) checkInt(this, value, offset, byteLength, Math.pow(2, 8 * byteLength), 0)
+  if (!noAssert)
+    checkInt(this, value, offset, byteLength, Math.pow(2, 8 * byteLength), 0)
 
   var mul = 1
   var i = 0
   this[offset] = value & 0xFF
-  while (++i < byteLength && (mul *= 0x100)) {
+  while (++i < byteLength && (mul *= 0x100))
     this[offset + i] = (value / mul) >>> 0 & 0xFF
-  }
 
   return offset + byteLength
 }
 
-Buffer.prototype.writeUIntBE = function writeUIntBE (value, offset, byteLength, noAssert) {
+Buffer.prototype.writeUIntBE = function (value, offset, byteLength, noAssert) {
   value = +value
   offset = offset >>> 0
   byteLength = byteLength >>> 0
-  if (!noAssert) checkInt(this, value, offset, byteLength, Math.pow(2, 8 * byteLength), 0)
+  if (!noAssert)
+    checkInt(this, value, offset, byteLength, Math.pow(2, 8 * byteLength), 0)
 
   var i = byteLength - 1
   var mul = 1
   this[offset + i] = value & 0xFF
-  while (--i >= 0 && (mul *= 0x100)) {
+  while (--i >= 0 && (mul *= 0x100))
     this[offset + i] = (value / mul) >>> 0 & 0xFF
-  }
 
   return offset + byteLength
 }
 
-Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
+Buffer.prototype.writeUInt8 = function (value, offset, noAssert) {
   value = +value
   offset = offset >>> 0
-  if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0)
+  if (!noAssert)
+    checkInt(this, value, offset, 1, 0xff, 0)
   if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
   this[offset] = value
   return offset + 1
@@ -1059,29 +1045,27 @@ function objectWriteUInt16 (buf, value, offset, littleEndian) {
   }
 }
 
-Buffer.prototype.writeUInt16LE = function writeUInt16LE (value, offset, noAssert) {
+Buffer.prototype.writeUInt16LE = function (value, offset, noAssert) {
   value = +value
   offset = offset >>> 0
-  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (!noAssert)
+    checkInt(this, value, offset, 2, 0xffff, 0)
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     this[offset] = value
     this[offset + 1] = (value >>> 8)
-  } else {
-    objectWriteUInt16(this, value, offset, true)
-  }
+  } else objectWriteUInt16(this, value, offset, true)
   return offset + 2
 }
 
-Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert) {
+Buffer.prototype.writeUInt16BE = function (value, offset, noAssert) {
   value = +value
   offset = offset >>> 0
-  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (!noAssert)
+    checkInt(this, value, offset, 2, 0xffff, 0)
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     this[offset] = (value >>> 8)
     this[offset + 1] = value
-  } else {
-    objectWriteUInt16(this, value, offset, false)
-  }
+  } else objectWriteUInt16(this, value, offset, false)
   return offset + 2
 }
 
@@ -1092,144 +1076,139 @@ function objectWriteUInt32 (buf, value, offset, littleEndian) {
   }
 }
 
-Buffer.prototype.writeUInt32LE = function writeUInt32LE (value, offset, noAssert) {
+Buffer.prototype.writeUInt32LE = function (value, offset, noAssert) {
   value = +value
   offset = offset >>> 0
-  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (!noAssert)
+    checkInt(this, value, offset, 4, 0xffffffff, 0)
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     this[offset + 3] = (value >>> 24)
     this[offset + 2] = (value >>> 16)
     this[offset + 1] = (value >>> 8)
     this[offset] = value
-  } else {
-    objectWriteUInt32(this, value, offset, true)
-  }
+  } else objectWriteUInt32(this, value, offset, true)
   return offset + 4
 }
 
-Buffer.prototype.writeUInt32BE = function writeUInt32BE (value, offset, noAssert) {
+Buffer.prototype.writeUInt32BE = function (value, offset, noAssert) {
   value = +value
   offset = offset >>> 0
-  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (!noAssert)
+    checkInt(this, value, offset, 4, 0xffffffff, 0)
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     this[offset] = (value >>> 24)
     this[offset + 1] = (value >>> 16)
     this[offset + 2] = (value >>> 8)
     this[offset + 3] = value
-  } else {
-    objectWriteUInt32(this, value, offset, false)
-  }
+  } else objectWriteUInt32(this, value, offset, false)
   return offset + 4
 }
 
-Buffer.prototype.writeIntLE = function writeIntLE (value, offset, byteLength, noAssert) {
+Buffer.prototype.writeIntLE = function (value, offset, byteLength, noAssert) {
   value = +value
   offset = offset >>> 0
   if (!noAssert) {
-    checkInt(
-      this, value, offset, byteLength,
-      Math.pow(2, 8 * byteLength - 1) - 1,
-      -Math.pow(2, 8 * byteLength - 1)
-    )
+    checkInt(this,
+             value,
+             offset,
+             byteLength,
+             Math.pow(2, 8 * byteLength - 1) - 1,
+             -Math.pow(2, 8 * byteLength - 1))
   }
 
   var i = 0
   var mul = 1
   var sub = value < 0 ? 1 : 0
   this[offset] = value & 0xFF
-  while (++i < byteLength && (mul *= 0x100)) {
+  while (++i < byteLength && (mul *= 0x100))
     this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
-  }
 
   return offset + byteLength
 }
 
-Buffer.prototype.writeIntBE = function writeIntBE (value, offset, byteLength, noAssert) {
+Buffer.prototype.writeIntBE = function (value, offset, byteLength, noAssert) {
   value = +value
   offset = offset >>> 0
   if (!noAssert) {
-    checkInt(
-      this, value, offset, byteLength,
-      Math.pow(2, 8 * byteLength - 1) - 1,
-      -Math.pow(2, 8 * byteLength - 1)
-    )
+    checkInt(this,
+             value,
+             offset,
+             byteLength,
+             Math.pow(2, 8 * byteLength - 1) - 1,
+             -Math.pow(2, 8 * byteLength - 1))
   }
 
   var i = byteLength - 1
   var mul = 1
   var sub = value < 0 ? 1 : 0
   this[offset + i] = value & 0xFF
-  while (--i >= 0 && (mul *= 0x100)) {
+  while (--i >= 0 && (mul *= 0x100))
     this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
-  }
 
   return offset + byteLength
 }
 
-Buffer.prototype.writeInt8 = function writeInt8 (value, offset, noAssert) {
+Buffer.prototype.writeInt8 = function (value, offset, noAssert) {
   value = +value
   offset = offset >>> 0
-  if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80)
+  if (!noAssert)
+    checkInt(this, value, offset, 1, 0x7f, -0x80)
   if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
   if (value < 0) value = 0xff + value + 1
   this[offset] = value
   return offset + 1
 }
 
-Buffer.prototype.writeInt16LE = function writeInt16LE (value, offset, noAssert) {
+Buffer.prototype.writeInt16LE = function (value, offset, noAssert) {
   value = +value
   offset = offset >>> 0
-  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (!noAssert)
+    checkInt(this, value, offset, 2, 0x7fff, -0x8000)
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     this[offset] = value
     this[offset + 1] = (value >>> 8)
-  } else {
-    objectWriteUInt16(this, value, offset, true)
-  }
+  } else objectWriteUInt16(this, value, offset, true)
   return offset + 2
 }
 
-Buffer.prototype.writeInt16BE = function writeInt16BE (value, offset, noAssert) {
+Buffer.prototype.writeInt16BE = function (value, offset, noAssert) {
   value = +value
   offset = offset >>> 0
-  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (!noAssert)
+    checkInt(this, value, offset, 2, 0x7fff, -0x8000)
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     this[offset] = (value >>> 8)
     this[offset + 1] = value
-  } else {
-    objectWriteUInt16(this, value, offset, false)
-  }
+  } else objectWriteUInt16(this, value, offset, false)
   return offset + 2
 }
 
-Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) {
+Buffer.prototype.writeInt32LE = function (value, offset, noAssert) {
   value = +value
   offset = offset >>> 0
-  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (!noAssert)
+    checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     this[offset] = value
     this[offset + 1] = (value >>> 8)
     this[offset + 2] = (value >>> 16)
     this[offset + 3] = (value >>> 24)
-  } else {
-    objectWriteUInt32(this, value, offset, true)
-  }
+  } else objectWriteUInt32(this, value, offset, true)
   return offset + 4
 }
 
-Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) {
+Buffer.prototype.writeInt32BE = function (value, offset, noAssert) {
   value = +value
   offset = offset >>> 0
-  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (!noAssert)
+    checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
   if (value < 0) value = 0xffffffff + value + 1
   if (Buffer.TYPED_ARRAY_SUPPORT) {
     this[offset] = (value >>> 24)
     this[offset + 1] = (value >>> 16)
     this[offset + 2] = (value >>> 8)
     this[offset + 3] = value
-  } else {
-    objectWriteUInt32(this, value, offset, false)
-  }
+  } else objectWriteUInt32(this, value, offset, false)
   return offset + 4
 }
 
@@ -1240,39 +1219,39 @@ function checkIEEE754 (buf, value, offset, ext, max, min) {
 }
 
 function writeFloat (buf, value, offset, littleEndian, noAssert) {
-  if (!noAssert) {
+  if (!noAssert)
     checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -3.4028234663852886e+38)
-  }
   ieee754.write(buf, value, offset, littleEndian, 23, 4)
   return offset + 4
 }
 
-Buffer.prototype.writeFloatLE = function writeFloatLE (value, offset, noAssert) {
+Buffer.prototype.writeFloatLE = function (value, offset, noAssert) {
   return writeFloat(this, value, offset, true, noAssert)
 }
 
-Buffer.prototype.writeFloatBE = function writeFloatBE (value, offset, noAssert) {
+Buffer.prototype.writeFloatBE = function (value, offset, noAssert) {
   return writeFloat(this, value, offset, false, noAssert)
 }
 
 function writeDouble (buf, value, offset, littleEndian, noAssert) {
-  if (!noAssert) {
+  if (!noAssert)
     checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -1.7976931348623157E+308)
-  }
   ieee754.write(buf, value, offset, littleEndian, 52, 8)
   return offset + 8
 }
 
-Buffer.prototype.writeDoubleLE = function writeDoubleLE (value, offset, noAssert) {
+Buffer.prototype.writeDoubleLE = function (value, offset, noAssert) {
   return writeDouble(this, value, offset, true, noAssert)
 }
 
-Buffer.prototype.writeDoubleBE = function writeDoubleBE (value, offset, noAssert) {
+Buffer.prototype.writeDoubleBE = function (value, offset, noAssert) {
   return writeDouble(this, value, offset, false, noAssert)
 }
 
 // copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
-Buffer.prototype.copy = function copy (target, target_start, start, end) {
+Buffer.prototype.copy = function (target, target_start, start, end) {
+  var self = this // source
+
   if (!start) start = 0
   if (!end && end !== 0) end = this.length
   if (target_start >= target.length) target_start = target.length
@@ -1281,20 +1260,19 @@ Buffer.prototype.copy = function copy (target, target_start, start, end) {
 
   // Copy 0 bytes; we're done
   if (end === start) return 0
-  if (target.length === 0 || this.length === 0) return 0
+  if (target.length === 0 || self.length === 0) return 0
 
   // Fatal error conditions
-  if (target_start < 0) {
+  if (target_start < 0)
     throw new RangeError('targetStart out of bounds')
-  }
-  if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds')
+  if (start < 0 || start >= self.length) throw new RangeError('sourceStart out of bounds')
   if (end < 0) throw new RangeError('sourceEnd out of bounds')
 
   // Are we oob?
-  if (end > this.length) end = this.length
-  if (target.length - target_start < end - start) {
+  if (end > this.length)
+    end = this.length
+  if (target.length - target_start < end - start)
     end = target.length - target_start + start
-  }
 
   var len = end - start
 
@@ -1310,7 +1288,7 @@ Buffer.prototype.copy = function copy (target, target_start, start, end) {
 }
 
 // fill(value, start=0, end=buffer.length)
-Buffer.prototype.fill = function fill (value, start, end) {
+Buffer.prototype.fill = function (value, start, end) {
   if (!value) value = 0
   if (!start) start = 0
   if (!end) end = this.length
@@ -1344,7 +1322,7 @@ Buffer.prototype.fill = function fill (value, start, end) {
  * Creates a new `ArrayBuffer` with the *copied* memory of the buffer instance.
  * Added in Node 0.12. Only available in browsers that support ArrayBuffer.
  */
-Buffer.prototype.toArrayBuffer = function toArrayBuffer () {
+Buffer.prototype.toArrayBuffer = function () {
   if (typeof Uint8Array !== 'undefined') {
     if (Buffer.TYPED_ARRAY_SUPPORT) {
       return (new Buffer(this)).buffer
@@ -1368,11 +1346,12 @@ var BP = Buffer.prototype
 /**
  * Augment a Uint8Array *instance* (not the Uint8Array class!) with Buffer methods
  */
-Buffer._augment = function _augment (arr) {
+Buffer._augment = function (arr) {
   arr.constructor = Buffer
   arr._isBuffer = true
 
-  // save reference to original Uint8Array set method before overwriting
+  // save reference to original Uint8Array get/set methods before overwriting
+  arr._get = arr.get
   arr._set = arr.set
 
   // deprecated, will be removed in node 0.13+
@@ -1385,7 +1364,6 @@ Buffer._augment = function _augment (arr) {
   arr.toJSON = BP.toJSON
   arr.equals = BP.equals
   arr.compare = BP.compare
-  arr.indexOf = BP.indexOf
   arr.copy = BP.copy
   arr.slice = BP.slice
   arr.readUIntLE = BP.readUIntLE
@@ -1573,7 +1551,8 @@ function base64ToBytes (str) {
 
 function blitBuffer (src, dst, offset, length) {
   for (var i = 0; i < length; i++) {
-    if ((i + offset >= dst.length) || (i >= src.length)) break
+    if ((i + offset >= dst.length) || (i >= src.length))
+      break
     dst[i + offset] = src[i]
   }
   return i
@@ -1587,7 +1566,7 @@ function decodeUtf8Char (str) {
   }
 }
 
-},{"base64-js":3,"ieee754":4,"is-array":5}],3:[function(require,module,exports){
+},{"base64-js":"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/base64-js/lib/b64.js","ieee754":"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/ieee754/index.js","is-array":"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/is-array/index.js"}],"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/base64-js/lib/b64.js":[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -1713,7 +1692,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],4:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/ieee754/index.js":[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -1799,7 +1778,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],5:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/node_modules/is-array/index.js":[function(require,module,exports){
 
 /**
  * isArray
@@ -1834,10 +1813,10 @@ module.exports = isArray || function (val) {
   return !! val && '[object Array]' == str.call(val);
 };
 
-},{}],6:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/heap/index.js":[function(require,module,exports){
 module.exports = require('./lib/heap');
 
-},{"./lib/heap":7}],7:[function(require,module,exports){
+},{"./lib/heap":"/Users/Dave/Sites/d3plus/node_modules/heap/lib/heap.js"}],"/Users/Dave/Sites/d3plus/node_modules/heap/lib/heap.js":[function(require,module,exports){
 // Generated by CoffeeScript 1.8.0
 (function() {
   var Heap, defaultCmp, floor, heapify, heappop, heappush, heappushpop, heapreplace, insort, min, nlargest, nsmallest, updateItem, _siftdown, _siftup;
@@ -2200,21 +2179,15 @@ module.exports = require('./lib/heap');
 
   })();
 
-  (function(root, factory) {
-    if (typeof define === 'function' && define.amd) {
-      return define([], factory);
-    } else if (typeof exports === 'object') {
-      return module.exports = factory();
-    } else {
-      return root.Heap = factory();
-    }
-  })(this, function() {
-    return Heap;
-  });
+  if (typeof module !== "undefined" && module !== null ? module.exports : void 0) {
+    module.exports = Heap;
+  } else {
+    window.Heap = Heap;
+  }
 
 }).call(this);
 
-},{}],8:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/numeric/numeric-1.2.6.js":[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -6642,7 +6615,7 @@ numeric.svd= function svd(A) {
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],9:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/simplify-js/simplify.js":[function(require,module,exports){
 /*
  (c) 2013, Vladimir Agafonkin
  Simplify.js, a high-performance JS polyline simplification library
@@ -6775,7 +6748,7 @@ else window.simplify = simplify;
 
 })();
 
-},{}],10:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/kdtree.js":[function(require,module,exports){
 "use strict"
 
 module.exports = createKDTree
@@ -7388,7 +7361,7 @@ function deserializeKDTree(data) {
     return new KDTree(null, null, 0, data.d)
   }
 }
-},{"./lib/heap.js":11,"bit-twiddle":12,"inorder-tree-layout":13,"ndarray":28,"ndarray-ops":15,"ndarray-pack":20,"ndarray-scratch":26,"ndarray-select":27,"typedarray-pool":31}],11:[function(require,module,exports){
+},{"./lib/heap.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/lib/heap.js","bit-twiddle":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js","inorder-tree-layout":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/inorder.js","ndarray":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/ndarray.js","ndarray-ops":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/ndarray-ops.js","ndarray-pack":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/convert.js","ndarray-scratch":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/scratch.js","ndarray-select":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-select/select.js","typedarray-pool":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/pool.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/lib/heap.js":[function(require,module,exports){
 "use strict"
 
 module.exports = KDTHeap
@@ -7497,7 +7470,7 @@ proto.dispose = function() {
   pool.freeInt32(this.index)
   pool.freeFloat64(this.data)
 }
-},{"typedarray-pool":31}],12:[function(require,module,exports){
+},{"typedarray-pool":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/pool.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
 /**
  * Bit twiddling hacks for JavaScript.
  *
@@ -7703,7 +7676,7 @@ exports.nextCombination = function(v) {
 }
 
 
-},{}],13:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/inorder.js":[function(require,module,exports){
 "use strict"
 
 var bits = require("bit-twiddle")
@@ -7875,9 +7848,9 @@ function hiInorder(n, x) {
 }
 exports.hi = hiInorder
 
-},{"bit-twiddle":14}],14:[function(require,module,exports){
-arguments[4][12][0].apply(exports,arguments)
-},{"dup":12}],15:[function(require,module,exports){
+},{"bit-twiddle":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/ndarray-ops.js":[function(require,module,exports){
 "use strict"
 
 var compile = require("cwise-compiler")
@@ -8340,7 +8313,7 @@ exports.equals = compile({
 
 
 
-},{"cwise-compiler":16}],16:[function(require,module,exports){
+},{"cwise-compiler":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/compiler.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/compiler.js":[function(require,module,exports){
 "use strict"
 
 var createThunk = require("./lib/thunk.js")
@@ -8448,7 +8421,7 @@ function compileCwise(user_args) {
 
 module.exports = compileCwise
 
-},{"./lib/thunk.js":18}],17:[function(require,module,exports){
+},{"./lib/thunk.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/compile.js":[function(require,module,exports){
 "use strict"
 
 var uniq = require("uniq")
@@ -8736,7 +8709,7 @@ function generateCWiseOp(proc, typesig) {
   return f()
 }
 module.exports = generateCWiseOp
-},{"uniq":19}],18:[function(require,module,exports){
+},{"uniq":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/node_modules/uniq/uniq.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js":[function(require,module,exports){
 "use strict"
 
 var compile = require("./compile.js")
@@ -8785,7 +8758,7 @@ function createThunk(proc) {
 
 module.exports = createThunk
 
-},{"./compile.js":17}],19:[function(require,module,exports){
+},{"./compile.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/compile.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/node_modules/uniq/uniq.js":[function(require,module,exports){
 "use strict"
 
 function unique_pred(list, compare) {
@@ -8844,7 +8817,7 @@ function unique(list, compare, sorted) {
 
 module.exports = unique
 
-},{}],20:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/convert.js":[function(require,module,exports){
 "use strict"
 
 var ndarray = require("ndarray")
@@ -8867,10 +8840,10 @@ module.exports = function convert(arr, result) {
   return result
 }
 
-},{"./doConvert.js":21,"ndarray":28}],21:[function(require,module,exports){
+},{"./doConvert.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/doConvert.js","ndarray":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/ndarray.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/doConvert.js":[function(require,module,exports){
 module.exports=require('cwise-compiler')({"args":["array","scalar","index"],"pre":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"body":{"body":"{\nvar _inline_1_v=_inline_1_arg1_,_inline_1_i\nfor(_inline_1_i=0;_inline_1_i<_inline_1_arg2_.length-1;++_inline_1_i) {\n_inline_1_v=_inline_1_v[_inline_1_arg2_[_inline_1_i]]\n}\n_inline_1_arg0_=_inline_1_v[_inline_1_arg2_[_inline_1_arg2_.length-1]]\n}","args":[{"name":"_inline_1_arg0_","lvalue":true,"rvalue":false,"count":1},{"name":"_inline_1_arg1_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_1_arg2_","lvalue":false,"rvalue":true,"count":4}],"thisVars":[],"localVars":["_inline_1_i","_inline_1_v"]},"post":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"funcName":"convert","blockSize":64})
 
-},{"cwise-compiler":22}],22:[function(require,module,exports){
+},{"cwise-compiler":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/compiler.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/compiler.js":[function(require,module,exports){
 "use strict"
 
 var createThunk = require("./lib/thunk.js")
@@ -8978,7 +8951,7 @@ function compileCwise(user_args) {
 
 module.exports = compileCwise
 
-},{"./lib/thunk.js":24}],23:[function(require,module,exports){
+},{"./lib/thunk.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/thunk.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/compile.js":[function(require,module,exports){
 "use strict"
 
 var uniq = require("uniq")
@@ -9262,9 +9235,9 @@ function generateCWiseOp(proc, typesig) {
   return f()
 }
 module.exports = generateCWiseOp
-},{"uniq":25}],24:[function(require,module,exports){
-arguments[4][18][0].apply(exports,arguments)
-},{"./compile.js":23,"dup":18}],25:[function(require,module,exports){
+},{"uniq":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/node_modules/uniq/uniq.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/thunk.js":[function(require,module,exports){
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/node_modules/cwise-compiler/lib/thunk.js"][0].apply(exports,arguments)
+},{"./compile.js":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/lib/compile.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-pack/node_modules/cwise-compiler/node_modules/uniq/uniq.js":[function(require,module,exports){
 "use strict"
 
 function unique_pred(list, compare) {
@@ -9322,7 +9295,276 @@ function unique(list, compare, sorted) {
 }
 
 module.exports = unique
-},{}],26:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/bit-twiddle/twiddle.js":[function(require,module,exports){
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/inorder-tree-layout/node_modules/bit-twiddle/twiddle.js"][0].apply(exports,arguments)
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
+"use strict"
+
+function dupe_array(count, value, i) {
+  var c = count[i]|0
+  if(c <= 0) {
+    return []
+  }
+  var result = new Array(c), j
+  if(i === count.length-1) {
+    for(j=0; j<c; ++j) {
+      result[j] = value
+    }
+  } else {
+    for(j=0; j<c; ++j) {
+      result[j] = dupe_array(count, value, i+1)
+    }
+  }
+  return result
+}
+
+function dupe_number(count, value) {
+  var result, i
+  result = new Array(count)
+  for(i=0; i<count; ++i) {
+    result[i] = value
+  }
+  return result
+}
+
+function dupe(count, value) {
+  if(typeof value === "undefined") {
+    value = 0
+  }
+  switch(typeof count) {
+    case "number":
+      if(count > 0) {
+        return dupe_number(count|0, value)
+      }
+    break
+    case "object":
+      if(typeof (count.length) === "number") {
+        return dupe_array(count, value, 0)
+      }
+    break
+  }
+  return []
+}
+
+module.exports = dupe
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/pool.js":[function(require,module,exports){
+(function (global,Buffer){
+'use strict'
+
+var bits = require('bit-twiddle')
+var dup = require('dup')
+
+//Legacy pool support
+if(!global.__TYPEDARRAY_POOL) {
+  global.__TYPEDARRAY_POOL = {
+      UINT8   : dup([32, 0])
+    , UINT16  : dup([32, 0])
+    , UINT32  : dup([32, 0])
+    , INT8    : dup([32, 0])
+    , INT16   : dup([32, 0])
+    , INT32   : dup([32, 0])
+    , FLOAT   : dup([32, 0])
+    , DOUBLE  : dup([32, 0])
+    , DATA    : dup([32, 0])
+    , UINT8C  : dup([32, 0])
+    , BUFFER  : dup([32, 0])
+  }
+}
+
+var hasUint8C = (typeof Uint8ClampedArray) !== 'undefined'
+var POOL = global.__TYPEDARRAY_POOL
+
+//Upgrade pool
+if(!POOL.UINT8C) {
+  POOL.UINT8C = dup([32, 0])
+}
+if(!POOL.BUFFER) {
+  POOL.BUFFER = dup([32, 0])
+}
+
+//New technique: Only allocate from ArrayBufferView and Buffer
+var DATA    = POOL.DATA
+  , BUFFER  = POOL.BUFFER
+
+exports.free = function free(array) {
+  if(Buffer.isBuffer(array)) {
+    BUFFER[bits.log2(array.length)].push(array)
+  } else {
+    if(Object.prototype.toString.call(array) !== '[object ArrayBuffer]') {
+      array = array.buffer
+    }
+    if(!array) {
+      return
+    }
+    var n = array.length || array.byteLength
+    var log_n = bits.log2(n)|0
+    DATA[log_n].push(array)
+  }
+}
+
+function freeArrayBuffer(buffer) {
+  if(!buffer) {
+    return
+  }
+  var n = buffer.length || buffer.byteLength
+  var log_n = bits.log2(n)
+  DATA[log_n].push(buffer)
+}
+
+function freeTypedArray(array) {
+  freeArrayBuffer(array.buffer)
+}
+
+exports.freeUint8 =
+exports.freeUint16 =
+exports.freeUint32 =
+exports.freeInt8 =
+exports.freeInt16 =
+exports.freeInt32 =
+exports.freeFloat32 = 
+exports.freeFloat =
+exports.freeFloat64 = 
+exports.freeDouble = 
+exports.freeUint8Clamped = 
+exports.freeDataView = freeTypedArray
+
+exports.freeArrayBuffer = freeArrayBuffer
+
+exports.freeBuffer = function freeBuffer(array) {
+  BUFFER[bits.log2(array.length)].push(array)
+}
+
+exports.malloc = function malloc(n, dtype) {
+  if(dtype === undefined || dtype === 'arraybuffer') {
+    return mallocArrayBuffer(n)
+  } else {
+    switch(dtype) {
+      case 'uint8':
+        return mallocUint8(n)
+      case 'uint16':
+        return mallocUint16(n)
+      case 'uint32':
+        return mallocUint32(n)
+      case 'int8':
+        return mallocInt8(n)
+      case 'int16':
+        return mallocInt16(n)
+      case 'int32':
+        return mallocInt32(n)
+      case 'float':
+      case 'float32':
+        return mallocFloat(n)
+      case 'double':
+      case 'float64':
+        return mallocDouble(n)
+      case 'uint8_clamped':
+        return mallocUint8Clamped(n)
+      case 'buffer':
+        return mallocBuffer(n)
+      case 'data':
+      case 'dataview':
+        return mallocDataView(n)
+
+      default:
+        return null
+    }
+  }
+  return null
+}
+
+function mallocArrayBuffer(n) {
+  var n = bits.nextPow2(n)
+  var log_n = bits.log2(n)
+  var d = DATA[log_n]
+  if(d.length > 0) {
+    return d.pop()
+  }
+  return new ArrayBuffer(n)
+}
+exports.mallocArrayBuffer = mallocArrayBuffer
+
+function mallocUint8(n) {
+  return new Uint8Array(mallocArrayBuffer(n), 0, n)
+}
+exports.mallocUint8 = mallocUint8
+
+function mallocUint16(n) {
+  return new Uint16Array(mallocArrayBuffer(2*n), 0, n)
+}
+exports.mallocUint16 = mallocUint16
+
+function mallocUint32(n) {
+  return new Uint32Array(mallocArrayBuffer(4*n), 0, n)
+}
+exports.mallocUint32 = mallocUint32
+
+function mallocInt8(n) {
+  return new Int8Array(mallocArrayBuffer(n), 0, n)
+}
+exports.mallocInt8 = mallocInt8
+
+function mallocInt16(n) {
+  return new Int16Array(mallocArrayBuffer(2*n), 0, n)
+}
+exports.mallocInt16 = mallocInt16
+
+function mallocInt32(n) {
+  return new Int32Array(mallocArrayBuffer(4*n), 0, n)
+}
+exports.mallocInt32 = mallocInt32
+
+function mallocFloat(n) {
+  return new Float32Array(mallocArrayBuffer(4*n), 0, n)
+}
+exports.mallocFloat32 = exports.mallocFloat = mallocFloat
+
+function mallocDouble(n) {
+  return new Float64Array(mallocArrayBuffer(8*n), 0, n)
+}
+exports.mallocFloat64 = exports.mallocDouble = mallocDouble
+
+function mallocUint8Clamped(n) {
+  if(hasUint8C) {
+    return new Uint8ClampedArray(mallocArrayBuffer(n), 0, n)
+  } else {
+    return mallocUint8(n)
+  }
+}
+exports.mallocUint8Clamped = mallocUint8Clamped
+
+function mallocDataView(n) {
+  return new DataView(mallocArrayBuffer(n), 0, n)
+}
+exports.mallocDataView = mallocDataView
+
+function mallocBuffer(n) {
+  n = bits.nextPow2(n)
+  var log_n = bits.log2(n)
+  var cache = BUFFER[log_n]
+  if(cache.length > 0) {
+    return cache.pop()
+  }
+  return new Buffer(n)
+}
+exports.mallocBuffer = mallocBuffer
+
+exports.clearCache = function clearCache() {
+  for(var i=0; i<32; ++i) {
+    POOL.UINT8[i].length = 0
+    POOL.UINT16[i].length = 0
+    POOL.UINT32[i].length = 0
+    POOL.INT8[i].length = 0
+    POOL.INT16[i].length = 0
+    POOL.INT32[i].length = 0
+    POOL.FLOAT[i].length = 0
+    POOL.DOUBLE[i].length = 0
+    POOL.UINT8C[i].length = 0
+    DATA[i].length = 0
+    BUFFER[i].length = 0
+  }
+}
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
+},{"bit-twiddle":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/bit-twiddle/twiddle.js","buffer":"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/index.js","dup":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/scratch.js":[function(require,module,exports){
 "use strict"
 
 var ndarray = require("ndarray")
@@ -9381,7 +9623,7 @@ function zeros(shape, dtype) {
   return ndarray(buf, shape, stride, 0)
 }
 exports.zeros = zeros
-},{"ndarray":28,"ndarray-ops":15,"typedarray-pool":31}],27:[function(require,module,exports){
+},{"ndarray":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/ndarray.js","ndarray-ops":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-ops/ndarray-ops.js","typedarray-pool":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/pool.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-select/select.js":[function(require,module,exports){
 "use strict"
 
 module.exports = ndSelect
@@ -9617,9 +9859,25 @@ function ndSelect(array, k, compare) {
     return proc(array, k)
   }
 }
-},{}],28:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/ndarray.js":[function(require,module,exports){
 (function (Buffer){
 var iota = require("iota-array")
+
+var arrayMethods = [
+  "concat",
+  "join",
+  "slice",
+  "toString",
+  "indexOf",
+  "lastIndexOf",
+  "forEach",
+  "every",
+  "some",
+  "filter",
+  "map",
+  "reduce",
+  "reduceRight"
+]
 
 var hasTypedArrays  = ((typeof Float64Array) !== "undefined")
 var hasBuffer       = ((typeof Buffer) !== "undefined")
@@ -9708,26 +9966,62 @@ return function construct_"+className+"(a,b,c,d){return new "+className+"(a,d)}"
   var indices = iota(dimension)
   var args = indices.map(function(i) { return "i"+i })
   var index_str = "this.offset+" + indices.map(function(i) {
-        return "this.stride[" + i + "]*i" + i
+        return "this._stride" + i + "*i" + i
       }).join("+")
-  var shapeArg = indices.map(function(i) {
+  code.push("function "+className+"(a,"+
+    indices.map(function(i) {
       return "b"+i
-    }).join(",")
-  var strideArg = indices.map(function(i) {
+    }).join(",") + "," +
+    indices.map(function(i) {
       return "c"+i
-    }).join(",")
-  code.push(
-    "function "+className+"(a," + shapeArg + "," + strideArg + ",d){this.data=a",
-      "this.shape=[" + shapeArg + "]",
-      "this.stride=[" + strideArg + "]",
-      "this.offset=d|0}",
+    }).join(",") + ",d){this.data=a")
+  for(var i=0; i<dimension; ++i) {
+    code.push("this._shape"+i+"=b"+i+"|0")
+  }
+  for(var i=0; i<dimension; ++i) {
+    code.push("this._stride"+i+"=c"+i+"|0")
+  }
+  code.push("this.offset=d|0}",
     "var proto="+className+".prototype",
     "proto.dtype='"+dtype+"'",
     "proto.dimension="+dimension)
   
+  //view.stride and view.shape
+  var strideClassName = "VStride" + dimension + "d" + dtype
+  var shapeClassName = "VShape" + dimension + "d" + dtype
+  var props = {"stride":strideClassName, "shape":shapeClassName}
+  for(var prop in props) {
+    var arrayName = props[prop]
+    code.push(
+      "function " + arrayName + "(v) {this._v=v} var aproto=" + arrayName + ".prototype",
+      "aproto.length="+dimension)
+    
+    var array_elements = []
+    for(var i=0; i<dimension; ++i) {
+      array_elements.push(["this._v._", prop, i].join(""))
+    }
+    code.push(
+      "aproto.toJSON=function " + arrayName + "_toJSON(){return [" + array_elements.join(",") + "]}",
+      "aproto.valueOf=aproto.toString=function " + arrayName + "_toString(){return [" + array_elements.join(",") + "].join()}")
+    
+    for(var i=0; i<dimension; ++i) {
+      code.push("Object.defineProperty(aproto,"+i+",{get:function(){return this._v._"+prop+i+"},set:function(v){return this._v._"+prop+i+"=v|0},enumerable:true})")
+    }
+    for(var i=0; i<arrayMethods.length; ++i) {
+      if(arrayMethods[i] in Array.prototype) {
+        code.push("aproto."+arrayMethods[i]+"=Array.prototype."+arrayMethods[i])
+      }
+    }
+    code.push(["Object.defineProperty(proto,'",prop,"',{get:function ", arrayName, "_get(){return new ", arrayName, "(this)},set: function ", arrayName, "_set(v){"].join(""))
+    for(var i=0; i<dimension; ++i) {
+      code.push("this._"+prop+i+"=v["+i+"]|0")
+    }
+    code.push("return v}})")
+  }
+  
   //view.size:
   code.push("Object.defineProperty(proto,'size',{get:function "+className+"_size(){\
-return "+indices.map(function(i) { return "this.shape["+i+"]" }).join("*"),
+return "+indices.map(function(i) { return "this._shape"+i }).join("*"),
 "}})")
 
   //view.order:
@@ -9738,10 +10032,10 @@ return "+indices.map(function(i) { return "this.shape["+i+"]" }).join("*"),
     if(dimension < 4) {
       code.push("function "+className+"_order(){")
       if(dimension === 2) {
-        code.push("return (Math.abs(this.stride[0])>Math.abs(this.stride[1]))?[1,0]:[0,1]}})")
+        code.push("return (Math.abs(this._stride0)>Math.abs(this._stride1))?[1,0]:[0,1]}})")
       } else if(dimension === 3) {
         code.push(
-"var s0=Math.abs(this.stride[0]),s1=Math.abs(this.stride[1]),s2=Math.abs(this.stride[2]);\
+"var s0=Math.abs(this._stride0),s1=Math.abs(this._stride1),s2=Math.abs(this._stride2);\
 if(s0>s1){\
 if(s1>s2){\
 return [2,1,0];\
@@ -9787,15 +10081,15 @@ return [0,2,1];\
   //view.hi():
   code.push("proto.hi=function "+className+"_hi("+args.join(",")+"){return new "+className+"(this.data,"+
     indices.map(function(i) {
-      return ["(typeof i",i,"!=='number'||i",i,"<0)?this.shape[", i, "]:i", i,"|0"].join("")
+      return ["(typeof i",i,"!=='number'||i",i,"<0)?this._shape", i, ":i", i,"|0"].join("")
     }).join(",")+","+
     indices.map(function(i) {
-      return "this.stride["+i + "]"
+      return "this._stride"+i
     }).join(",")+",this.offset)}")
   
   //view.lo():
-  var a_vars = indices.map(function(i) { return "a"+i+"=this.shape["+i+"]" })
-  var c_vars = indices.map(function(i) { return "c"+i+"=this.stride["+i+"]" })
+  var a_vars = indices.map(function(i) { return "a"+i+"=this._shape"+i })
+  var c_vars = indices.map(function(i) { return "c"+i+"=this._stride"+i })
   code.push("proto.lo=function "+className+"_lo("+args.join(",")+"){var b=this.offset,d=0,"+a_vars.join(",")+","+c_vars.join(","))
   for(var i=0; i<dimension; ++i) {
     code.push(
@@ -9815,10 +10109,10 @@ a"+i+"-=d}")
   //view.step():
   code.push("proto.step=function "+className+"_step("+args.join(",")+"){var "+
     indices.map(function(i) {
-      return "a"+i+"=this.shape["+i+"]"
+      return "a"+i+"=this._shape"+i
     }).join(",")+","+
     indices.map(function(i) {
-      return "b"+i+"=this.stride["+i+"]"
+      return "b"+i+"=this._stride"+i
     }).join(",")+",c=this.offset,d=0,ceil=Math.ceil")
   for(var i=0; i<dimension; ++i) {
     code.push(
@@ -9855,7 +10149,7 @@ b"+i+"*=d\
   //view.pick():
   code.push("proto.pick=function "+className+"_pick("+args+"){var a=[],b=[],c=this.offset")
   for(var i=0; i<dimension; ++i) {
-    code.push("if(typeof i"+i+"==='number'&&i"+i+">=0){c=(c+this.stride["+i+"]*i"+i+")|0}else{a.push(this.shape["+i+"]);b.push(this.stride["+i+"])}")
+    code.push("if(typeof i"+i+"==='number'&&i"+i+">=0){c=(c+this._stride"+i+"*i"+i+")|0}else{a.push(this._shape"+i+");b.push(this._stride"+i+")}")
   }
   code.push("var ctor=CTOR_LIST[a.length+1];return ctor(this.data,a,b,c)}")
     
@@ -9965,7 +10259,7 @@ function wrappedNDArrayCtor(data, shape, stride, offset) {
 
 module.exports = wrappedNDArrayCtor
 }).call(this,require("buffer").Buffer)
-},{"buffer":2,"iota-array":29}],29:[function(require,module,exports){
+},{"buffer":"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/index.js","iota-array":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/node_modules/iota-array/iota.js"}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray/node_modules/iota-array/iota.js":[function(require,module,exports){
 "use strict"
 
 function iota(n) {
@@ -9977,274 +10271,11 @@ function iota(n) {
 }
 
 module.exports = iota
-},{}],30:[function(require,module,exports){
-"use strict"
-
-function dupe_array(count, value, i) {
-  var c = count[i]|0
-  if(c <= 0) {
-    return []
-  }
-  var result = new Array(c), j
-  if(i === count.length-1) {
-    for(j=0; j<c; ++j) {
-      result[j] = value
-    }
-  } else {
-    for(j=0; j<c; ++j) {
-      result[j] = dupe_array(count, value, i+1)
-    }
-  }
-  return result
-}
-
-function dupe_number(count, value) {
-  var result, i
-  result = new Array(count)
-  for(i=0; i<count; ++i) {
-    result[i] = value
-  }
-  return result
-}
-
-function dupe(count, value) {
-  if(typeof value === "undefined") {
-    value = 0
-  }
-  switch(typeof count) {
-    case "number":
-      if(count > 0) {
-        return dupe_number(count|0, value)
-      }
-    break
-    case "object":
-      if(typeof (count.length) === "number") {
-        return dupe_array(count, value, 0)
-      }
-    break
-  }
-  return []
-}
-
-module.exports = dupe
-},{}],31:[function(require,module,exports){
-(function (global,Buffer){
-'use strict'
-
-var bits = require('bit-twiddle')
-var dup = require('dup')
-
-//Legacy pool support
-if(!global.__TYPEDARRAY_POOL) {
-  global.__TYPEDARRAY_POOL = {
-      UINT8   : dup([32, 0])
-    , UINT16  : dup([32, 0])
-    , UINT32  : dup([32, 0])
-    , INT8    : dup([32, 0])
-    , INT16   : dup([32, 0])
-    , INT32   : dup([32, 0])
-    , FLOAT   : dup([32, 0])
-    , DOUBLE  : dup([32, 0])
-    , DATA    : dup([32, 0])
-    , UINT8C  : dup([32, 0])
-    , BUFFER  : dup([32, 0])
-  }
-}
-
-var hasUint8C = (typeof Uint8ClampedArray) !== 'undefined'
-var POOL = global.__TYPEDARRAY_POOL
-
-//Upgrade pool
-if(!POOL.UINT8C) {
-  POOL.UINT8C = dup([32, 0])
-}
-if(!POOL.BUFFER) {
-  POOL.BUFFER = dup([32, 0])
-}
-
-//New technique: Only allocate from ArrayBufferView and Buffer
-var DATA    = POOL.DATA
-  , BUFFER  = POOL.BUFFER
-
-exports.free = function free(array) {
-  if(Buffer.isBuffer(array)) {
-    BUFFER[bits.log2(array.length)].push(array)
-  } else {
-    if(Object.prototype.toString.call(array) !== '[object ArrayBuffer]') {
-      array = array.buffer
-    }
-    if(!array) {
-      return
-    }
-    var n = array.length || array.byteLength
-    var log_n = bits.log2(n)|0
-    DATA[log_n].push(array)
-  }
-}
-
-function freeArrayBuffer(buffer) {
-  if(!buffer) {
-    return
-  }
-  var n = buffer.length || buffer.byteLength
-  var log_n = bits.log2(n)
-  DATA[log_n].push(buffer)
-}
-
-function freeTypedArray(array) {
-  freeArrayBuffer(array.buffer)
-}
-
-exports.freeUint8 =
-exports.freeUint16 =
-exports.freeUint32 =
-exports.freeInt8 =
-exports.freeInt16 =
-exports.freeInt32 =
-exports.freeFloat32 = 
-exports.freeFloat =
-exports.freeFloat64 = 
-exports.freeDouble = 
-exports.freeUint8Clamped = 
-exports.freeDataView = freeTypedArray
-
-exports.freeArrayBuffer = freeArrayBuffer
-
-exports.freeBuffer = function freeBuffer(array) {
-  BUFFER[bits.log2(array.length)].push(array)
-}
-
-exports.malloc = function malloc(n, dtype) {
-  if(dtype === undefined || dtype === 'arraybuffer') {
-    return mallocArrayBuffer(n)
-  } else {
-    switch(dtype) {
-      case 'uint8':
-        return mallocUint8(n)
-      case 'uint16':
-        return mallocUint16(n)
-      case 'uint32':
-        return mallocUint32(n)
-      case 'int8':
-        return mallocInt8(n)
-      case 'int16':
-        return mallocInt16(n)
-      case 'int32':
-        return mallocInt32(n)
-      case 'float':
-      case 'float32':
-        return mallocFloat(n)
-      case 'double':
-      case 'float64':
-        return mallocDouble(n)
-      case 'uint8_clamped':
-        return mallocUint8Clamped(n)
-      case 'buffer':
-        return mallocBuffer(n)
-      case 'data':
-      case 'dataview':
-        return mallocDataView(n)
-
-      default:
-        return null
-    }
-  }
-  return null
-}
-
-function mallocArrayBuffer(n) {
-  var n = bits.nextPow2(n)
-  var log_n = bits.log2(n)
-  var d = DATA[log_n]
-  if(d.length > 0) {
-    return d.pop()
-  }
-  return new ArrayBuffer(n)
-}
-exports.mallocArrayBuffer = mallocArrayBuffer
-
-function mallocUint8(n) {
-  return new Uint8Array(mallocArrayBuffer(n), 0, n)
-}
-exports.mallocUint8 = mallocUint8
-
-function mallocUint16(n) {
-  return new Uint16Array(mallocArrayBuffer(2*n), 0, n)
-}
-exports.mallocUint16 = mallocUint16
-
-function mallocUint32(n) {
-  return new Uint32Array(mallocArrayBuffer(4*n), 0, n)
-}
-exports.mallocUint32 = mallocUint32
-
-function mallocInt8(n) {
-  return new Int8Array(mallocArrayBuffer(n), 0, n)
-}
-exports.mallocInt8 = mallocInt8
-
-function mallocInt16(n) {
-  return new Int16Array(mallocArrayBuffer(2*n), 0, n)
-}
-exports.mallocInt16 = mallocInt16
-
-function mallocInt32(n) {
-  return new Int32Array(mallocArrayBuffer(4*n), 0, n)
-}
-exports.mallocInt32 = mallocInt32
-
-function mallocFloat(n) {
-  return new Float32Array(mallocArrayBuffer(4*n), 0, n)
-}
-exports.mallocFloat32 = exports.mallocFloat = mallocFloat
-
-function mallocDouble(n) {
-  return new Float64Array(mallocArrayBuffer(8*n), 0, n)
-}
-exports.mallocFloat64 = exports.mallocDouble = mallocDouble
-
-function mallocUint8Clamped(n) {
-  if(hasUint8C) {
-    return new Uint8ClampedArray(mallocArrayBuffer(n), 0, n)
-  } else {
-    return mallocUint8(n)
-  }
-}
-exports.mallocUint8Clamped = mallocUint8Clamped
-
-function mallocDataView(n) {
-  return new DataView(mallocArrayBuffer(n), 0, n)
-}
-exports.mallocDataView = mallocDataView
-
-function mallocBuffer(n) {
-  n = bits.nextPow2(n)
-  var log_n = bits.log2(n)
-  var cache = BUFFER[log_n]
-  if(cache.length > 0) {
-    return cache.pop()
-  }
-  return new Buffer(n)
-}
-exports.mallocBuffer = mallocBuffer
-
-exports.clearCache = function clearCache() {
-  for(var i=0; i<32; ++i) {
-    POOL.UINT8[i].length = 0
-    POOL.UINT16[i].length = 0
-    POOL.UINT32[i].length = 0
-    POOL.INT8[i].length = 0
-    POOL.INT16[i].length = 0
-    POOL.INT32[i].length = 0
-    POOL.FLOAT[i].length = 0
-    POOL.DOUBLE[i].length = 0
-    POOL.UINT8C[i].length = 0
-    DATA[i].length = 0
-    BUFFER[i].length = 0
-  }
-}
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"bit-twiddle":12,"buffer":2,"dup":30}],32:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/node_modules/dup/dup.js":[function(require,module,exports){
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/node_modules/dup/dup.js"][0].apply(exports,arguments)
+},{}],"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/pool.js":[function(require,module,exports){
+arguments[4]["/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/ndarray-scratch/node_modules/typedarray-pool/pool.js"][0].apply(exports,arguments)
+},{"bit-twiddle":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/bit-twiddle/twiddle.js","buffer":"/Users/Dave/Sites/d3plus/node_modules/browserify/node_modules/buffer/index.js","dup":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/node_modules/typedarray-pool/node_modules/dup/dup.js"}],"/Users/Dave/Sites/d3plus/src/array/comparator.coffee":[function(require,module,exports){
 var colorSort;
 
 colorSort = require("../color/sort.coffee");
@@ -10288,7 +10319,7 @@ module.exports = function(a, b, keys, sort, colors, vars, depth) {
 
 
 
-},{"../color/sort.coffee":48}],33:[function(require,module,exports){
+},{"../color/sort.coffee":"/Users/Dave/Sites/d3plus/src/color/sort.coffee"}],"/Users/Dave/Sites/d3plus/src/array/contains.coffee":[function(require,module,exports){
 module.exports = function(arr, value) {
   var constructor;
   if (arr instanceof Array) {
@@ -10301,7 +10332,7 @@ module.exports = function(arr, value) {
 
 
 
-},{}],34:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/array/sort.coffee":[function(require,module,exports){
 var comparator, fetchSort;
 
 comparator = require("./comparator.coffee");
@@ -10309,7 +10340,7 @@ comparator = require("./comparator.coffee");
 fetchSort = require("../core/fetch/sort.coffee");
 
 module.exports = function(arr, keys, sort, colors, vars, depth) {
-  var d, data, i, len;
+  var d, data, _i, _len;
   if (!arr || arr.length <= 1) {
     return arr || [];
   } else {
@@ -10323,8 +10354,8 @@ module.exports = function(arr, keys, sort, colors, vars, depth) {
       if (!colors) {
         colors = vars.color.value || [];
       }
-      for (i = 0, len = arr.length; i < len; i++) {
-        d = arr[i];
+      for (_i = 0, _len = arr.length; _i < _len; _i++) {
+        d = arr[_i];
         if (!d.d3plus) {
           d.d3plus = {};
         }
@@ -10340,7 +10371,7 @@ module.exports = function(arr, keys, sort, colors, vars, depth) {
 
 
 
-},{"../core/fetch/sort.coffee":64,"./comparator.coffee":32}],35:[function(require,module,exports){
+},{"../core/fetch/sort.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/sort.coffee","./comparator.coffee":"/Users/Dave/Sites/d3plus/src/array/comparator.coffee"}],"/Users/Dave/Sites/d3plus/src/array/update.coffee":[function(require,module,exports){
 module.exports = function(arr, x) {
   if (x === void 0) {
     return arr;
@@ -10364,7 +10395,7 @@ module.exports = function(arr, x) {
 
 
 
-},{}],36:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/client/css.coffee":[function(require,module,exports){
 var sheet;
 
 sheet = function(name) {
@@ -10392,11 +10423,11 @@ module.exports = sheet;
 
 
 
-},{}],37:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/client/ie.js":[function(require,module,exports){
 // Determines if the current browser is Internet Explorer.
 module.exports = /*@cc_on!@*/false
 
-},{}],38:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/client/pointer.coffee":[function(require,module,exports){
 var ie, touch;
 
 ie = require("./ie.js");
@@ -10425,7 +10456,7 @@ if (touch) {
 
 
 
-},{"./ie.js":37,"./touch.coffee":42}],39:[function(require,module,exports){
+},{"./ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","./touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee"}],"/Users/Dave/Sites/d3plus/src/client/prefix.coffee":[function(require,module,exports){
 var prefix;
 
 prefix = function() {
@@ -10451,12 +10482,12 @@ module.exports = prefix;
 
 
 
-},{}],40:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/client/rtl.coffee":[function(require,module,exports){
 module.exports = d3.select("html").attr("dir") === "rtl";
 
 
 
-},{}],41:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/client/scrollbar.coffee":[function(require,module,exports){
 var scrollbar;
 
 scrollbar = function() {
@@ -10492,12 +10523,12 @@ module.exports = scrollbar;
 
 
 
-},{}],42:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/client/touch.coffee":[function(require,module,exports){
 module.exports = ("ontouchstart" in window) || window.DocumentTouch && document instanceof DocumentTouch ? true : false;
 
 
 
-},{}],43:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/legible.coffee":[function(require,module,exports){
 module.exports = function(color) {
   var hsl;
   hsl = d3.hsl(color);
@@ -10512,7 +10543,7 @@ module.exports = function(color) {
 
 
 
-},{}],44:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/lighter.coffee":[function(require,module,exports){
 module.exports = function(color, increment) {
   var c;
   if (increment === void 0) {
@@ -10525,7 +10556,7 @@ module.exports = function(color, increment) {
 
 
 
-},{}],45:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/mix.coffee":[function(require,module,exports){
 module.exports = function(c1, c2, o1, o2) {
   var b, g, r;
   if (!o1) {
@@ -10544,7 +10575,7 @@ module.exports = function(c1, c2, o1, o2) {
 
 
 
-},{}],46:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/random.coffee":[function(require,module,exports){
 var defaultScale;
 
 defaultScale = require("./scale.coffee");
@@ -10558,12 +10589,12 @@ module.exports = function(x, scale) {
 
 
 
-},{"./scale.coffee":47}],47:[function(require,module,exports){
+},{"./scale.coffee":"/Users/Dave/Sites/d3plus/src/color/scale.coffee"}],"/Users/Dave/Sites/d3plus/src/color/scale.coffee":[function(require,module,exports){
 module.exports = d3.scale.ordinal().range(["#b22200", "#EACE3F", "#282F6B", "#B35C1E", "#224F20", "#5F487C", "#759143", "#419391", "#993F88", "#e89c89", "#ffee8d", "#afd5e8", "#f7ba77", "#a5c697", "#c5b5e5", "#d1d392", "#bbefd0", "#e099cf"]);
 
 
 
-},{}],48:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/sort.coffee":[function(require,module,exports){
 module.exports = function(a, b) {
   var aHSL, bHSL;
   aHSL = d3.hsl(a);
@@ -10579,7 +10610,7 @@ module.exports = function(a, b) {
 
 
 
-},{}],49:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/text.coffee":[function(require,module,exports){
 module.exports = function(color) {
   var b, g, r, rgbColor, yiq;
   rgbColor = d3.rgb(color);
@@ -10596,7 +10627,7 @@ module.exports = function(color) {
 
 
 
-},{}],50:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/color/validate.coffee":[function(require,module,exports){
 module.exports = function(color) {
   var blackColors, testColor, userBlack;
   color = color + "";
@@ -10615,7 +10646,7 @@ module.exports = function(color) {
 
 
 
-},{}],51:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/console/print.coffee":[function(require,module,exports){
 var icon, ie, print, wiki;
 
 ie = require("../../client/ie.js");
@@ -10726,7 +10757,7 @@ module.exports = print;
 
 
 
-},{"../../client/ie.js":37,"./wiki.coffee":52}],52:[function(require,module,exports){
+},{"../../client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","./wiki.coffee":"/Users/Dave/Sites/d3plus/src/core/console/wiki.coffee"}],"/Users/Dave/Sites/d3plus/src/core/console/wiki.coffee":[function(require,module,exports){
 module.exports = {
   active: "Segmenting-Data#active",
   aggs: "Custom-Aggregations",
@@ -10788,7 +10819,7 @@ module.exports = {
 
 
 
-},{}],53:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/data/color.js":[function(require,module,exports){
 var buckets = require("../../util/buckets.coffee"),
     fetchValue = require("../fetch/value.coffee"),
     print      = require("../console/print.coffee")
@@ -10850,7 +10881,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../util/buckets.coffee":195,"../console/print.coffee":51,"../fetch/value.coffee":66}],54:[function(require,module,exports){
+},{"../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/data/filter.js":[function(require,module,exports){
 var fetchValue = require("../fetch/value.coffee"),
     print       = require("../console/print.coffee"),
     validObject = require("../../object/validate.coffee")
@@ -10968,7 +10999,7 @@ module.exports = function( vars , data ) {
 
 }
 
-},{"../../object/validate.coffee":163,"../console/print.coffee":51,"../fetch/value.coffee":66}],55:[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/data/format.js":[function(require,module,exports){
 var dataNest   = require("./nest.js"),
     fetchValue = require("../fetch/value.coffee"),
     print      = require("../console/print.coffee"),
@@ -11205,19 +11236,19 @@ module.exports = function( vars ) {
 
 };
 
-},{"../../util/uniques.coffee":201,"../console/print.coffee":51,"../fetch/value.coffee":66,"./nest.js":59}],56:[function(require,module,exports){
+},{"../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js"}],"/Users/Dave/Sites/d3plus/src/core/data/group.coffee":[function(require,module,exports){
 var fetchValue;
 
 fetchValue = require("../fetch/value.coffee");
 
 module.exports = function(vars, data, nesting) {
-  var d, groupedData, i, j, k, len, len1, n, strippedData, val;
+  var d, groupedData, i, n, strippedData, val, _i, _j, _len, _len1;
   groupedData = d3.nest();
   if (vars.id.grouping.value) {
     if (nesting === void 0) {
       nesting = vars.id.nesting;
     }
-    for (i = j = 0, len = nesting.length; j < len; i = ++j) {
+    for (i = _i = 0, _len = nesting.length; _i < _len; i = ++_i) {
       n = nesting[i];
       if (i < vars.depth.value) {
         (function(n) {
@@ -11229,8 +11260,8 @@ module.exports = function(vars, data, nesting) {
     }
   }
   strippedData = [];
-  for (k = 0, len1 = data.length; k < len1; k++) {
-    d = data[k];
+  for (_j = 0, _len1 = data.length; _j < _len1; _j++) {
+    d = data[_j];
     val = vars.size.value ? fetchValue(vars, d, vars.size.value) : 1;
     if (val && typeof val === "number" && val > 0) {
       delete d.d3plus.r;
@@ -11248,48 +11279,48 @@ module.exports = function(vars, data, nesting) {
 
 
 
-},{"../fetch/value.coffee":66}],57:[function(require,module,exports){
+},{"../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/data/keys.coffee":[function(require,module,exports){
 var print, validObject,
-  indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+  __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 print = require("../console/print.coffee");
 
 validObject = require("../../object/validate.coffee");
 
 module.exports = function(vars, type) {
-  var get_keys, k, kk, lengthMatch, ref, ref1, timerString, v, vv;
+  var get_keys, k, kk, lengthMatch, timerString, v, vv, _ref, _ref1;
   timerString = type + " key analysis";
   if (vars.dev.value) {
     print.time(timerString);
   }
   vars[type].keys = {};
   get_keys = function(arr) {
-    var a, i, k, len, results, results1, v;
+    var a, k, v, _i, _len, _results, _results1;
     if (arr instanceof Array) {
-      results = [];
-      for (i = 0, len = arr.length; i < len; i++) {
-        a = arr[i];
-        results.push(get_keys(a));
+      _results = [];
+      for (_i = 0, _len = arr.length; _i < _len; _i++) {
+        a = arr[_i];
+        _results.push(get_keys(a));
       }
-      return results;
+      return _results;
     } else if (validObject(arr)) {
-      results1 = [];
+      _results1 = [];
       for (k in arr) {
         v = arr[k];
-        if (k.indexOf("d3plus") !== 0 && !(indexOf.call(vars[type].keys, k) >= 0) && v !== null) {
-          results1.push(vars[type].keys[k] = typeof v);
+        if (k.indexOf("d3plus") !== 0 && !(__indexOf.call(vars[type].keys, k) >= 0) && v !== null) {
+          _results1.push(vars[type].keys[k] = typeof v);
         } else {
-          results1.push(void 0);
+          _results1.push(void 0);
         }
       }
-      return results1;
+      return _results1;
     }
   };
   if (validObject(vars[type].value)) {
     lengthMatch = d3.keys(vars[type].value).length === vars.id.nesting.length;
-    ref = vars[type].value;
-    for (k in ref) {
-      v = ref[k];
+    _ref = vars[type].value;
+    for (k in _ref) {
+      v = _ref[k];
       if (lengthMatch && vars.id.nesting.indexOf(k) >= 0 && validObject(v)) {
         for (kk in v) {
           vv = v[kk];
@@ -11300,9 +11331,9 @@ module.exports = function(vars, type) {
       }
     }
   } else {
-    ref1 = vars[type].value;
-    for (k in ref1) {
-      v = ref1[k];
+    _ref1 = vars[type].value;
+    for (k in _ref1) {
+      v = _ref1[k];
       get_keys(v);
     }
   }
@@ -11313,7 +11344,7 @@ module.exports = function(vars, type) {
 
 
 
-},{"../../object/validate.coffee":163,"../console/print.coffee":51}],58:[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/core/data/load.coffee":[function(require,module,exports){
 var print, validObject;
 
 print = require("../console/print.coffee");
@@ -11373,26 +11404,26 @@ module.exports = function(vars, key, next) {
       }
       if (["json"].indexOf(fileType) < 0) {
         vars[key].value.forEach(function(d) {
-          var results;
-          results = [];
+          var _results;
+          _results = [];
           for (k in d) {
             if (!isNaN(d[k])) {
-              results.push(d[k] = parseFloat(d[k]));
+              _results.push(d[k] = parseFloat(d[k]));
             } else if (d[k].toLowerCase() === "false") {
-              results.push(d[k] = false);
+              _results.push(d[k] = false);
             } else if (d[k].toLowerCase() === "true") {
-              results.push(d[k] = true);
+              _results.push(d[k] = true);
             } else if (d[k].toLowerCase() === "null") {
-              results.push(d[k] = null);
+              _results.push(d[k] = null);
             } else {
               if (d[k].toLowerCase() === "undefined") {
-                results.push(d[k] = void 0);
+                _results.push(d[k] = void 0);
               } else {
-                results.push(void 0);
+                _results.push(void 0);
               }
             }
           }
-          return results;
+          return _results;
         });
       }
       vars[key].changed = true;
@@ -11409,7 +11440,7 @@ module.exports = function(vars, key, next) {
 
 
 
-},{"../../object/validate.coffee":163,"../console/print.coffee":51}],59:[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/core/data/nest.js":[function(require,module,exports){
 var fetchValue = require("../fetch/value.coffee"),
     validObject  = require("../../object/validate.coffee"),
     uniqueValues = require("../../util/uniques.coffee");
@@ -11719,7 +11750,7 @@ var rename_key_value = function(obj) {
 
 module.exports = dataNest;
 
-},{"../../object/validate.coffee":163,"../../util/uniques.coffee":201,"../fetch/value.coffee":66}],60:[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/data/threshold.js":[function(require,module,exports){
 var arraySort = require("../../array/sort.coffee"),
     dataNest   = require("./nest.js"),
     fetchValue = require("../fetch/value.coffee"),
@@ -11934,7 +11965,7 @@ module.exports = function( vars , rawData , split ) {
 
 };
 
-},{"../../array/sort.coffee":34,"../fetch/color.coffee":62,"../fetch/text.js":65,"../fetch/value.coffee":66,"./nest.js":59}],61:[function(require,module,exports){
+},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js"}],"/Users/Dave/Sites/d3plus/src/core/data/time.coffee":[function(require,module,exports){
 var sizes;
 
 sizes = require("../../font/sizes.coffee");
@@ -12005,7 +12036,7 @@ module.exports = function(vars, opts) {
 
 
 
-},{"../../font/sizes.coffee":94}],62:[function(require,module,exports){
+},{"../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee"}],"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee":[function(require,module,exports){
 var fetchValue, getColor, getRandom, randomColor, uniques, validColor, validObject;
 
 fetchValue = require("./value.coffee");
@@ -12087,7 +12118,7 @@ getRandom = function(vars, c, level) {
 
 
 
-},{"../../color/random.coffee":46,"../../color/validate.coffee":50,"../../object/validate.coffee":163,"../../util/uniques.coffee":201,"./value.coffee":66}],63:[function(require,module,exports){
+},{"../../color/random.coffee":"/Users/Dave/Sites/d3plus/src/color/random.coffee","../../color/validate.coffee":"/Users/Dave/Sites/d3plus/src/color/validate.coffee","../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/fetch/data.js":[function(require,module,exports){
 var dataFilter = require("../data/filter.js"),
     dataNest     = require("../data/nest.js"),
     print        = require("../console/print.coffee"),
@@ -12299,7 +12330,7 @@ module.exports = function(vars, years, depth) {
 
 };
 
-},{"../../string/format.js":164,"../../string/list.coffee":165,"../console/print.coffee":51,"../data/filter.js":54,"../data/nest.js":59}],64:[function(require,module,exports){
+},{"../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../data/filter.js":"/Users/Dave/Sites/d3plus/src/core/data/filter.js","../data/nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js"}],"/Users/Dave/Sites/d3plus/src/core/fetch/sort.coffee":[function(require,module,exports){
 var fetchColor, fetchText, fetchValue;
 
 fetchValue = require("./value.coffee");
@@ -12309,7 +12340,7 @@ fetchColor = require("./color.coffee");
 fetchText = require("./text.js");
 
 module.exports = function(vars, d, keys, colors, depth) {
-  var i, key, len, obj, value;
+  var key, obj, value, _i, _len;
   if (!(keys instanceof Array)) {
     keys = [keys];
   }
@@ -12320,8 +12351,8 @@ module.exports = function(vars, d, keys, colors, depth) {
     depth = vars.id.nesting.indexOf(depth);
   }
   obj = {};
-  for (i = 0, len = keys.length; i < len; i++) {
-    key = keys[i];
+  for (_i = 0, _len = keys.length; _i < _len; _i++) {
+    key = keys[_i];
     if (vars) {
       if (colors.indexOf(key) >= 0) {
         value = fetchColor(vars, d, depth);
@@ -12344,7 +12375,7 @@ module.exports = function(vars, d, keys, colors, depth) {
 
 
 
-},{"./color.coffee":62,"./text.js":65,"./value.coffee":66}],65:[function(require,module,exports){
+},{"./color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","./text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","./value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/fetch/text.js":[function(require,module,exports){
 var fetchValue = require("./value.coffee"),
     validObject = require("../../object/validate.coffee"),
     uniques     = require("../../util/uniques.coffee");
@@ -12426,7 +12457,7 @@ module.exports = function(vars, obj, depth) {
 
 };
 
-},{"../../object/validate.coffee":163,"../../util/uniques.coffee":201,"./value.coffee":66}],66:[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee":[function(require,module,exports){
 var cacheInit, checkAttrs, checkData, fetch, fetchArray, filterArray, find, uniqueValues, validObject, valueParse;
 
 validObject = require("../../object/validate.coffee");
@@ -12511,14 +12542,14 @@ checkAttrs = function(vars, node, variable, depth) {
     } else if (node instanceof Array) {
       attrList = [
         (function() {
-          var j, len, results;
+          var _i, _len, _results;
           if (n in attrList) {
-            results = [];
-            for (j = 0, len = node.length; j < len; j++) {
-              n = node[j];
-              results.push(attrList[n]);
+            _results = [];
+            for (_i = 0, _len = node.length; _i < _len; _i++) {
+              n = node[_i];
+              _results.push(attrList[n]);
             }
-            return results;
+            return _results;
           }
         })()
       ];
@@ -12561,7 +12592,7 @@ cacheInit = function(node, cache) {
 };
 
 valueParse = function(vars, node, depth, variable, val) {
-  var cache, d, i, j, len, timeVar, v;
+  var cache, d, i, timeVar, v, _i, _len;
   if (val === null) {
     return val;
   }
@@ -12569,7 +12600,7 @@ valueParse = function(vars, node, depth, variable, val) {
   if (!(val instanceof Array)) {
     val = [val];
   }
-  for (i = j = 0, len = val.length; j < len; i = ++j) {
+  for (i = _i = 0, _len = val.length; _i < _len; i = ++_i) {
     v = val[i];
     if (timeVar && v !== null && v.constructor !== Date) {
       d = new Date(v.toString());
@@ -12590,10 +12621,10 @@ valueParse = function(vars, node, depth, variable, val) {
 };
 
 fetchArray = function(vars, arr, variable, depth) {
-  var item, j, len, v, val;
+  var item, v, val, _i, _len;
   val = [];
-  for (j = 0, len = arr.length; j < len; j++) {
-    item = arr[j];
+  for (_i = 0, _len = arr.length; _i < _len; _i++) {
+    item = arr[_i];
     if (validObject(item)) {
       v = find(vars, item, variable, depth);
       val.push(valueParse(vars, item, depth, variable, v));
@@ -12640,7 +12671,7 @@ module.exports = fetch;
 
 
 
-},{"../../object/validate.coffee":163,"../../util/uniques.coffee":201}],67:[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/core/font/tester.coffee":[function(require,module,exports){
 module.exports = function(type) {
   var attrs, styles, tester;
   if (["div", "svg"].indexOf(type) < 0) {
@@ -12663,7 +12694,7 @@ module.exports = function(type) {
 
 
 
-},{}],68:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee":[function(require,module,exports){
 module.exports = {
   dev: {
     accepted: "{0} is not an accepted value for {1}, please use one of the following: {2}.",
@@ -12799,7 +12830,7 @@ module.exports = {
 
 
 
-},{}],69:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/locale/languages/mk_MK.js":[function(require,module,exports){
 module.exports = {
     "dev": {
         "accepted": "{0} не е прифатенa вредноста за {1}, ве молиме користете еднa од следниве вредности: {2}.",
@@ -12929,7 +12960,7 @@ module.exports = {
     "uppercase": ["CEOs", "CFOs", "CNC", "COOs", "HVAC", "TV", "UI"]
 }
 
-},{}],70:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/locale/languages/pt_BR.js":[function(require,module,exports){
 module.exports = {
     "dev": {
         "accepted": "{0} não é um valor aceito para {1}, por favor, use um dos seguintes procedimentos: {2}.",
@@ -13059,7 +13090,7 @@ module.exports = {
     "uppercase": ["CEOs", "CFOs", "CNC", "COOs", "HVAC", "P&D", "TV", "UI"]
 }
 
-},{}],71:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/locale/languages/zh_CN.js":[function(require,module,exports){
 module.exports = {
     "dev": {
         "accepted": "{0}不是{1}的可接受值, 请用下列之一的值:{2}",
@@ -13194,7 +13225,7 @@ module.exports = {
     ]
 }
 
-},{}],72:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/locale/locale.coffee":[function(require,module,exports){
 module.exports = {
   en_US: require("./languages/en_US.coffee"),
   mk_MK: require("./languages/mk_MK.js"),
@@ -13204,7 +13235,7 @@ module.exports = {
 
 
 
-},{"./languages/en_US.coffee":68,"./languages/mk_MK.js":69,"./languages/pt_BR.js":70,"./languages/zh_CN.js":71}],73:[function(require,module,exports){
+},{"./languages/en_US.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee","./languages/mk_MK.js":"/Users/Dave/Sites/d3plus/src/core/locale/languages/mk_MK.js","./languages/pt_BR.js":"/Users/Dave/Sites/d3plus/src/core/locale/languages/pt_BR.js","./languages/zh_CN.js":"/Users/Dave/Sites/d3plus/src/core/locale/languages/zh_CN.js"}],"/Users/Dave/Sites/d3plus/src/core/methods/attach.coffee":[function(require,module,exports){
 var checkObject, copy, createFunction, initialize, print, process, setMethod, stringFormat, validObject;
 
 copy = require("../../util/copy.coffee");
@@ -13220,19 +13251,19 @@ stringFormat = require("../../string/format.js");
 validObject = require("../../object/validate.coffee");
 
 module.exports = function(vars, methods) {
-  var method, obj, results;
-  results = [];
+  var method, obj, _results;
+  _results = [];
   for (method in methods) {
     obj = methods[method];
     vars[method] = copy(obj);
     vars[method].initialized = initialize(vars, vars[method], method);
-    results.push(vars.self[method] = createFunction(vars, method));
+    _results.push(vars.self[method] = createFunction(vars, method));
   }
-  return results;
+  return _results;
 };
 
 initialize = function(vars, obj, method) {
-  var d, deps, i, len, o;
+  var d, deps, o, _i, _len;
   obj.previous = false;
   obj.changed = false;
   obj.initialized = false;
@@ -13246,8 +13277,8 @@ initialize = function(vars, obj, method) {
   for (o in obj) {
     if (o === "deprecates") {
       deps = obj[o] instanceof Array ? obj[o] : [obj[o]];
-      for (i = 0, len = deps.length; i < len; i++) {
-        d = deps[i];
+      for (_i = 0, _len = deps.length; _i < _len; _i++) {
+        d = deps[_i];
         vars.self[d] = (function(dep, n) {
           return function(x) {
             var str;
@@ -13375,7 +13406,7 @@ checkObject = function(vars, method, object, key, value) {
 
 
 
-},{"../../object/validate.coffee":163,"../../string/format.js":164,"../../util/copy.coffee":198,"../console/print.coffee":51,"./process/detect.coffee":81,"./set.coffee":87}],74:[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./process/detect.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/detect.coffee","./set.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/set.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee":[function(require,module,exports){
 module.exports = function(g) {
   if (!g) {
     g = false;
@@ -13394,7 +13425,7 @@ module.exports = function(g) {
 
 
 
-},{}],75:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee":[function(require,module,exports){
 var rtl;
 
 rtl = require("../../../client/rtl.coffee");
@@ -13431,7 +13462,7 @@ module.exports = function(align) {
 
 
 
-},{"../../../client/rtl.coffee":40}],76:[function(require,module,exports){
+},{"../../../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee":[function(require,module,exports){
 module.exports = function(decoration) {
   var accepted;
   accepted = ["line-through", "none", "overline", "underline"];
@@ -13449,7 +13480,7 @@ module.exports = function(decoration) {
 
 
 
-},{}],77:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee":[function(require,module,exports){
 var helvetica, validate;
 
 validate = require("../../../font/validate.coffee");
@@ -13468,7 +13499,7 @@ module.exports = function(family) {
 
 
 
-},{"../../../font/validate.coffee":95}],78:[function(require,module,exports){
+},{"../../../font/validate.coffee":"/Users/Dave/Sites/d3plus/src/font/validate.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/font/position.coffee":[function(require,module,exports){
 module.exports = function(position) {
   var accepted;
   accepted = ["top", "middle", "bottom"];
@@ -13495,7 +13526,7 @@ module.exports = function(position) {
 
 
 
-},{}],79:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee":[function(require,module,exports){
 module.exports = function(transform) {
   var accepted;
   accepted = ["capitalize", "lowercase", "none", "uppercase"];
@@ -13513,7 +13544,7 @@ module.exports = function(transform) {
 
 
 
-},{}],80:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee":[function(require,module,exports){
 module.exports = function(value, vars, method) {
   if (vars.history) {
     vars.history.reset();
@@ -13535,7 +13566,7 @@ module.exports = function(value, vars, method) {
 
 
 
-},{}],81:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/process/detect.coffee":[function(require,module,exports){
 var copy, update;
 
 copy = require("../../../util/copy.coffee");
@@ -13556,7 +13587,7 @@ module.exports = function(vars, object, value) {
 
 
 
-},{"../../../array/update.coffee":35,"../../../util/copy.coffee":198}],82:[function(require,module,exports){
+},{"../../../array/update.coffee":"/Users/Dave/Sites/d3plus/src/array/update.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/process/icon.coffee":[function(require,module,exports){
 var stylesheet;
 
 stylesheet = require("../../../client/css.coffee");
@@ -13571,12 +13602,12 @@ module.exports = function(value, vars, method) {
 
 
 
-},{"../../../client/css.coffee":36}],83:[function(require,module,exports){
+},{"../../../client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/process/margin.coffee":[function(require,module,exports){
 module.exports = function(value, self) {
-  var i, j, k, l, len, len1, len2, len3, m, results, side, sides, v;
+  var i, side, sides, v, _i, _j, _k, _l, _len, _len1, _len2, _len3, _results;
   if (typeof value === "string") {
     value = value.split(" ");
-    for (i = j = 0, len = value.length; j < len; i = ++j) {
+    for (i = _i = 0, _len = value.length; _i < _len; i = ++_i) {
       v = value[i];
       value[i] = parseFloat(v, 10);
     }
@@ -13609,31 +13640,31 @@ module.exports = function(value, self) {
   }
   sides = ["top", "right", "bottom", "left"];
   if (typeof value === "number") {
-    for (k = 0, len1 = sides.length; k < len1; k++) {
-      side = sides[k];
+    for (_j = 0, _len1 = sides.length; _j < _len1; _j++) {
+      side = sides[_j];
       self[side] = value;
     }
   } else {
-    for (l = 0, len2 = sides.length; l < len2; l++) {
-      side = sides[l];
+    for (_k = 0, _len2 = sides.length; _k < _len2; _k++) {
+      side = sides[_k];
       self[side] = value[side];
     }
   }
   self.css = "";
-  results = [];
-  for (i = m = 0, len3 = sides.length; m < len3; i = ++m) {
+  _results = [];
+  for (i = _l = 0, _len3 = sides.length; _l < _len3; i = ++_l) {
     side = sides[i];
     if (i) {
       self.css += " ";
     }
-    results.push(self.css += self[side] + "px");
+    _results.push(self.css += self[side] + "px");
   }
-  return results;
+  return _results;
 };
 
 
 
-},{}],84:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/rejected.coffee":[function(require,module,exports){
 var contains, format, list, print;
 
 contains = require("../../array/contains.coffee");
@@ -13645,7 +13676,7 @@ list = require("../../string/list.coffee");
 print = require("../console/print.coffee");
 
 module.exports = function(vars, accepted, value, method, text) {
-  var a, allowed, app, i, len, recs, str, val;
+  var a, allowed, app, recs, str, val, _i, _len;
   if (typeof accepted === "function") {
     accepted = accepted(vars);
   }
@@ -13659,8 +13690,8 @@ module.exports = function(vars, accepted, value, method, text) {
     if (typeof value !== "string") {
       val = "\"" + val + "\"";
     }
-    for (i = 0, len = accepted.length; i < len; i++) {
-      a = accepted[i];
+    for (_i = 0, _len = accepted.length; _i < _len; _i++) {
+      a = accepted[_i];
       if (typeof a === "string") {
         recs.push("\"" + a + "\"");
       } else if (typeof a === "function") {
@@ -13686,7 +13717,7 @@ module.exports = function(vars, accepted, value, method, text) {
 
 
 
-},{"../../array/contains.coffee":33,"../../string/format.js":164,"../../string/list.coffee":165,"../console/print.coffee":51}],85:[function(require,module,exports){
+},{"../../array/contains.coffee":"/Users/Dave/Sites/d3plus/src/array/contains.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/rendering.coffee":[function(require,module,exports){
 module.exports = function(rendering) {
   var accepted;
   accepted = ["auto", "optimizeSpeed", "crispEdges", "geometricPrecision"];
@@ -13701,7 +13732,7 @@ module.exports = function(rendering) {
 
 
 
-},{}],86:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/methods/reset.coffee":[function(require,module,exports){
 var reset, validObject;
 
 validObject = require("../../object/validate.coffee");
@@ -13727,7 +13758,7 @@ module.exports = reset;
 
 
 
-},{"../../object/validate.coffee":163}],87:[function(require,module,exports){
+},{"../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/Sites/d3plus/src/core/methods/set.coffee":[function(require,module,exports){
 var copy, d3selection, mergeObject, print, process, rejected, stringFormat, updateArray, validObject;
 
 copy = require("../../util/copy.coffee");
@@ -13883,7 +13914,7 @@ module.exports = function(vars, method, object, key, value) {
 
 
 
-},{"../../array/update.coffee":35,"../../object/merge.coffee":162,"../../object/validate.coffee":163,"../../string/format.js":164,"../../util/copy.coffee":198,"../../util/d3selection.coffee":199,"../console/print.coffee":51,"./process/detect.coffee":81,"./rejected.coffee":84}],88:[function(require,module,exports){
+},{"../../array/update.coffee":"/Users/Dave/Sites/d3plus/src/array/update.coffee","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./process/detect.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/detect.coffee","./rejected.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/rejected.coffee"}],"/Users/Dave/Sites/d3plus/src/core/parse/edges.js":[function(require,module,exports){
 var print = require("../console/print.coffee"),
     stringFormat = require("../../string/format.js")
 
@@ -13963,7 +13994,7 @@ module.exports = function( vars ) {
 
 }
 
-},{"../../string/format.js":164,"../console/print.coffee":51}],89:[function(require,module,exports){
+},{"../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/core/parse/element.js":[function(require,module,exports){
 // Parses an HTML element for data
 module.exports = function( vars ) {
 
@@ -14122,7 +14153,7 @@ function hideElement( elem ) {
 
 }
 
-},{}],90:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/core/parse/nodes.js":[function(require,module,exports){
 var print = require("../console/print.coffee")
 
 // Calculates node positions, if needed for network.
@@ -14179,13 +14210,13 @@ module.exports = function(vars) {
 
 }
 
-},{"../console/print.coffee":51}],91:[function(require,module,exports){
+},{"../console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/data/bestRegress.coffee":[function(require,module,exports){
 var numeric;
 
 numeric = require('numeric');
 
 module.exports = function(data, options) {
-  var N, X, Xfulltr, Xtr, bestResult, beta_hat, bic, degree, degrees, i, j, k, l, loglike, m, point, prevBIC, q, ref, ref1, residual, sigma2, sse, y, y_hat;
+  var N, X, Xfulltr, Xtr, bestResult, beta_hat, bic, degree, degrees, i, j, k, loglike, point, prevBIC, q, residual, sigma2, sse, y, y_hat, _i, _j, _ref, _ref1;
   if (options == null) {
     options = {};
   }
@@ -14196,43 +14227,43 @@ module.exports = function(data, options) {
   prevBIC = Number.MAX_VALUE;
   bestResult = null;
   Xfulltr = (function() {
-    var l, ref, results;
-    results = [];
-    for (degree = l = 1, ref = options.maxDegree + 1; 1 <= ref ? l < ref : l > ref; degree = 1 <= ref ? ++l : --l) {
-      results.push((function() {
-        var len, m, results1;
-        results1 = [];
-        for (m = 0, len = data.length; m < len; m++) {
-          point = data[m];
-          results1.push(Math.pow(point[0], degree));
+    var _i, _ref, _results;
+    _results = [];
+    for (degree = _i = 1, _ref = options.maxDegree + 1; 1 <= _ref ? _i < _ref : _i > _ref; degree = 1 <= _ref ? ++_i : --_i) {
+      _results.push((function() {
+        var _j, _len, _results1;
+        _results1 = [];
+        for (_j = 0, _len = data.length; _j < _len; _j++) {
+          point = data[_j];
+          _results1.push(Math.pow(point[0], degree));
         }
-        return results1;
+        return _results1;
       })());
     }
-    return results;
+    return _results;
   })();
   y = (function() {
-    var l, len, results;
-    results = [];
-    for (l = 0, len = data.length; l < len; l++) {
-      point = data[l];
-      results.push(point[1]);
+    var _i, _len, _results;
+    _results = [];
+    for (_i = 0, _len = data.length; _i < _len; _i++) {
+      point = data[_i];
+      _results.push(point[1]);
     }
-    return results;
+    return _results;
   })();
-  for (i = l = 0, ref = 1 << options.maxDegree; 0 <= ref ? l < ref : l > ref; i = 0 <= ref ? ++l : --l) {
+  for (i = _i = 0, _ref = 1 << options.maxDegree; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
     Xtr = [
       (function() {
-        var m, ref1, results;
-        results = [];
-        for (q = m = 0, ref1 = N; 0 <= ref1 ? m < ref1 : m > ref1; q = 0 <= ref1 ? ++m : --m) {
-          results.push(1);
+        var _j, _results;
+        _results = [];
+        for (q = _j = 0; 0 <= N ? _j < N : _j > N; q = 0 <= N ? ++_j : --_j) {
+          _results.push(1);
         }
-        return results;
+        return _results;
       })()
     ];
     degrees = [0];
-    for (j = m = 0, ref1 = options.maxDegree; 0 <= ref1 ? m < ref1 : m > ref1; j = 0 <= ref1 ? ++m : --m) {
+    for (j = _j = 0, _ref1 = options.maxDegree; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; j = 0 <= _ref1 ? ++_j : --_j) {
       if ((i & 1 << j) > 0) {
         Xtr.push(Xfulltr[j]);
         degrees.push(j + 1);
@@ -14257,7 +14288,7 @@ module.exports = function(data, options) {
 
 
 
-},{"numeric":8}],92:[function(require,module,exports){
+},{"numeric":"/Users/Dave/Sites/d3plus/node_modules/numeric/numeric-1.2.6.js"}],"/Users/Dave/Sites/d3plus/src/data/lof.coffee":[function(require,module,exports){
 var kdtree;
 
 kdtree = require('static-kdtree');
@@ -14269,68 +14300,68 @@ module.exports = function(points, K) {
   }
   tree = kdtree(points);
   neighbors = (function() {
-    var k, len, results;
-    results = [];
-    for (k = 0, len = points.length; k < len; k++) {
-      p = points[k];
-      results.push(tree.knn(p, K + 1).slice(1));
+    var _i, _len, _results;
+    _results = [];
+    for (_i = 0, _len = points.length; _i < _len; _i++) {
+      p = points[_i];
+      _results.push(tree.knn(p, K + 1).slice(1));
     }
-    return results;
+    return _results;
   })();
   sqDist = function(i, j) {
-    var A, B, delta, dist, k, ref;
+    var A, B, delta, dist, _i, _ref;
     A = points[i];
     B = points[j];
     dist = 0;
-    for (i = k = 0, ref = A.length; 0 <= ref ? k < ref : k > ref; i = 0 <= ref ? ++k : --k) {
+    for (i = _i = 0, _ref = A.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
       delta = A[i] - B[i];
       dist += delta * delta;
     }
     return dist;
   };
   kdists = (function() {
-    var k, ref, results;
-    results = [];
-    for (i = k = 0, ref = points.length; 0 <= ref ? k < ref : k > ref; i = 0 <= ref ? ++k : --k) {
-      results.push(sqDist(i, neighbors[i][K - 1]));
+    var _i, _ref, _results;
+    _results = [];
+    for (i = _i = 0, _ref = points.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+      _results.push(sqDist(i, neighbors[i][K - 1]));
     }
-    return results;
+    return _results;
   })();
   reachDist = function(i, j) {
     return Math.max(sqDist(i, j), kdists[j]);
   };
   ldr = function(i) {
-    var j, k, len, rDist, ref;
+    var j, rDist, _i, _len, _ref;
     rDist = 0;
-    ref = neighbors[i];
-    for (k = 0, len = ref.length; k < len; k++) {
-      j = ref[k];
+    _ref = neighbors[i];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      j = _ref[_i];
       rDist += reachDist(i, j);
     }
     return K / rDist;
   };
   ldrs = (function() {
-    var k, ref, results;
-    results = [];
-    for (i = k = 0, ref = points.length; 0 <= ref ? k < ref : k > ref; i = 0 <= ref ? ++k : --k) {
-      results.push(ldr(i));
+    var _i, _ref, _results;
+    _results = [];
+    for (i = _i = 0, _ref = points.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+      _results.push(ldr(i));
     }
-    return results;
+    return _results;
   })();
   result = (function() {
-    var k, l, len, ref, ref1, results;
-    results = [];
-    for (i = k = 0, ref = points.length; 0 <= ref ? k < ref : k > ref; i = 0 <= ref ? ++k : --k) {
+    var _i, _j, _len, _ref, _ref1, _results;
+    _results = [];
+    for (i = _i = 0, _ref = points.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
       avg_lrd = 0;
-      ref1 = neighbors[i];
-      for (l = 0, len = ref1.length; l < len; l++) {
-        j = ref1[l];
+      _ref1 = neighbors[i];
+      for (_j = 0, _len = _ref1.length; _j < _len; _j++) {
+        j = _ref1[_j];
         avg_lrd += ldrs[j];
       }
       avg_lrd /= K;
-      results.push([i, avg_lrd / ldrs[i]]);
+      _results.push([i, avg_lrd / ldrs[i]]);
     }
-    return results;
+    return _results;
   })();
   return result.sort(function(a, b) {
     return b[1] - a[1];
@@ -14339,7 +14370,7 @@ module.exports = function(points, K) {
 
 
 
-},{"static-kdtree":10}],93:[function(require,module,exports){
+},{"static-kdtree":"/Users/Dave/Sites/d3plus/node_modules/static-kdtree/kdtree.js"}],"/Users/Dave/Sites/d3plus/src/data/mad.coffee":[function(require,module,exports){
 module.exports = function(points) {
   var mad, median, result;
   median = d3.median(points);
@@ -14356,7 +14387,7 @@ module.exports = function(points) {
 
 
 
-},{}],94:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/font/sizes.coffee":[function(require,module,exports){
 var fontTester, getHeight, getWidth;
 
 fontTester = require("../core/font/tester.coffee");
@@ -14420,18 +14451,18 @@ getHeight = function(elem) {
 
 
 
-},{"../core/font/tester.coffee":67}],95:[function(require,module,exports){
+},{"../core/font/tester.coffee":"/Users/Dave/Sites/d3plus/src/core/font/tester.coffee"}],"/Users/Dave/Sites/d3plus/src/font/validate.coffee":[function(require,module,exports){
 var fontTester, validate;
 
 fontTester = require("../core/font/tester.coffee");
 
 validate = function(fontList) {
-  var completed, family, font, fontString, i, j, len, len1, monospace, proportional, testElement, testWidth, tester, valid;
+  var completed, family, font, fontString, monospace, proportional, testElement, testWidth, tester, valid, _i, _j, _len, _len1;
   if (!(fontList instanceof Array)) {
     fontList = fontList.split(",");
   }
-  for (i = 0, len = fontList.length; i < len; i++) {
-    font = fontList[i];
+  for (_i = 0, _len = fontList.length; _i < _len; _i++) {
+    font = fontList[_i];
     font.trim();
   }
   fontString = fontList.join(", ");
@@ -14453,8 +14484,8 @@ validate = function(fontList) {
   tester = fontTester("div");
   monospace = testElement("monospace");
   proportional = testElement("sans-serif");
-  for (j = 0, len1 = fontList.length; j < len1; j++) {
-    family = fontList[j];
+  for (_j = 0, _len1 = fontList.length; _j < _len1; _j++) {
+    family = fontList[_j];
     valid = testWidth(family + ",monospace", monospace);
     if (!valid) {
       valid = testWidth(family + ",sans-serif", proportional);
@@ -14479,7 +14510,7 @@ module.exports = validate;
 
 
 
-},{"../core/font/tester.coffee":67}],96:[function(require,module,exports){
+},{"../core/font/tester.coffee":"/Users/Dave/Sites/d3plus/src/core/font/tester.coffee"}],"/Users/Dave/Sites/d3plus/src/form/form.js":[function(require,module,exports){
 var arraySort = require("../array/sort.coffee"),
     attach      = require("../core/methods/attach.coffee"),
     dataFormat  = require("../core/data/format.js"),
@@ -14849,7 +14880,7 @@ module.exports = function() {
 
 };
 
-},{"../array/sort.coffee":34,"../client/ie.js":37,"../core/console/print.coffee":51,"../core/data/format.js":55,"../core/data/keys.coffee":57,"../core/data/load.coffee":58,"../core/fetch/data.js":63,"../core/methods/attach.coffee":73,"../core/methods/reset.coffee":86,"./methods/active.coffee":97,"./methods/alt.coffee":98,"./methods/color.coffee":99,"./methods/config.coffee":100,"./methods/container.coffee":101,"./methods/data.js":102,"./methods/depth.coffee":103,"./methods/dev.coffee":104,"./methods/draw.js":105,"./methods/focus.coffee":106,"./methods/font.coffee":107,"./methods/format.coffee":108,"./methods/height.coffee":109,"./methods/history.coffee":110,"./methods/hover.coffee":111,"./methods/icon.coffee":112,"./methods/id.coffee":113,"./methods/keywords.coffee":114,"./methods/margin.coffee":115,"./methods/open.coffee":116,"./methods/order.coffee":117,"./methods/remove.coffee":118,"./methods/search.coffee":119,"./methods/select.coffee":120,"./methods/selectAll.coffee":121,"./methods/text.coffee":122,"./methods/timing.coffee":123,"./methods/title.coffee":124,"./methods/type.coffee":125,"./methods/ui.coffee":126,"./methods/width.coffee":127,"./types/auto.js":128,"./types/button/button.coffee":129,"./types/drop/drop.coffee":134,"./types/toggle.js":151}],97:[function(require,module,exports){
+},{"../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../core/data/format.js":"/Users/Dave/Sites/d3plus/src/core/data/format.js","../core/data/keys.coffee":"/Users/Dave/Sites/d3plus/src/core/data/keys.coffee","../core/data/load.coffee":"/Users/Dave/Sites/d3plus/src/core/data/load.coffee","../core/fetch/data.js":"/Users/Dave/Sites/d3plus/src/core/fetch/data.js","../core/methods/attach.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/attach.coffee","../core/methods/reset.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/reset.coffee","./methods/active.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/active.coffee","./methods/alt.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/alt.coffee","./methods/color.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/color.coffee","./methods/config.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/config.coffee","./methods/container.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/container.coffee","./methods/data.js":"/Users/Dave/Sites/d3plus/src/form/methods/data.js","./methods/depth.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/depth.coffee","./methods/dev.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/dev.coffee","./methods/draw.js":"/Users/Dave/Sites/d3plus/src/form/methods/draw.js","./methods/focus.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/focus.coffee","./methods/font.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/font.coffee","./methods/format.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/format.coffee","./methods/height.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/height.coffee","./methods/history.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/history.coffee","./methods/hover.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/hover.coffee","./methods/icon.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/icon.coffee","./methods/id.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/id.coffee","./methods/keywords.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/keywords.coffee","./methods/margin.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/margin.coffee","./methods/open.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/open.coffee","./methods/order.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/order.coffee","./methods/remove.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/remove.coffee","./methods/search.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/search.coffee","./methods/select.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/select.coffee","./methods/selectAll.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/selectAll.coffee","./methods/text.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/text.coffee","./methods/timing.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/timing.coffee","./methods/title.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/title.coffee","./methods/type.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/type.coffee","./methods/ui.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/ui.coffee","./methods/width.coffee":"/Users/Dave/Sites/d3plus/src/form/methods/width.coffee","./types/auto.js":"/Users/Dave/Sites/d3plus/src/form/types/auto.js","./types/button/button.coffee":"/Users/Dave/Sites/d3plus/src/form/types/button/button.coffee","./types/drop/drop.coffee":"/Users/Dave/Sites/d3plus/src/form/types/drop/drop.coffee","./types/toggle.js":"/Users/Dave/Sites/d3plus/src/form/types/toggle.js"}],"/Users/Dave/Sites/d3plus/src/form/methods/active.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -14861,7 +14892,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74}],98:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/alt.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -14875,7 +14906,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74}],99:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/color.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [String],
   value: "color"
@@ -14883,7 +14914,7 @@ module.exports = {
 
 
 
-},{}],100:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/config.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Object],
   objectAccess: false,
@@ -14902,7 +14933,7 @@ module.exports = {
 
 
 
-},{}],101:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/container.coffee":[function(require,module,exports){
 var d3selection;
 
 d3selection = require("../../util/d3selection.coffee");
@@ -14927,7 +14958,7 @@ module.exports = {
 
 
 
-},{"../../util/d3selection.coffee":199}],102:[function(require,module,exports){
+},{"../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/data.js":[function(require,module,exports){
 var d3selection = require("../../util/d3selection.coffee"),
     process = require("../../core/methods/process/data.coffee");
 
@@ -14981,7 +15012,7 @@ module.exports = {
   "value"    : false
 };
 
-},{"../../core/methods/process/data.coffee":80,"../../util/d3selection.coffee":199}],103:[function(require,module,exports){
+},{"../../core/methods/process/data.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee","../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/depth.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Number],
   value: 0
@@ -14989,7 +15020,7 @@ module.exports = {
 
 
 
-},{}],104:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/dev.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   value: false
@@ -14997,7 +15028,7 @@ module.exports = {
 
 
 
-},{}],105:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/draw.js":[function(require,module,exports){
 var d3selection  = require("../../util/d3selection.coffee"),
     parseElement = require("../../core/parse/element.js"),
     print        = require("../../core/console/print.coffee"),
@@ -15064,27 +15095,27 @@ module.exports = {
   "value"    : undefined
 }
 
-},{"../../core/console/print.coffee":51,"../../core/parse/element.js":89,"../../string/format.js":164,"../../util/d3selection.coffee":199}],106:[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/parse/element.js":"/Users/Dave/Sites/d3plus/src/core/parse/element.js","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/focus.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number, String],
   deprecates: "highlight",
   process: function(value, vars) {
-    var d, element, elementTag, elementType, i, j, k, len, len1, ref;
+    var d, element, elementTag, elementType, i, _i, _j, _len, _len1, _ref;
     element = vars.data.element.value;
     if (element && ["string", "number"].indexOf(typeof value) >= 0) {
       elementTag = element.node().tagName.toLowerCase();
       elementType = element.attr("type");
       if (elementTag === "select") {
-        ref = element.selectAll("option");
-        for (i = j = 0, len = ref.length; j < len; i = ++j) {
-          d = ref[i];
+        _ref = element.selectAll("option");
+        for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+          d = _ref[i];
           if (d && d[vars.id.value] === value) {
             element.node().selectedIndex = i;
           }
         }
       } else if (elementTag === "input" && elementType === "radio") {
-        for (k = 0, len1 = element.length; k < len1; k++) {
-          d = element[k];
+        for (_j = 0, _len1 = element.length; _j < _len1; _j++) {
+          d = element[_j];
           this.checked = d && d[vars.id.value] === value;
         }
       }
@@ -15096,7 +15127,7 @@ module.exports = {
 
 
 
-},{}],107:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/font.coffee":[function(require,module,exports){
 var align, decoration, family, transform;
 
 family = require("../../core/methods/font/family.coffee");
@@ -15130,7 +15161,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/align.coffee":75,"../../core/methods/font/decoration.coffee":76,"../../core/methods/font/family.coffee":77,"../../core/methods/font/transform.coffee":79}],108:[function(require,module,exports){
+},{"../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/format.coffee":[function(require,module,exports){
 var formatNumber, locale, mergeObject, titleCase;
 
 formatNumber = require("../../number/format.coffee");
@@ -15208,7 +15239,7 @@ module.exports = {
 
 
 
-},{"../../core/locale/locale.coffee":72,"../../number/format.coffee":161,"../../object/merge.coffee":162,"../../string/title.coffee":167}],109:[function(require,module,exports){
+},{"../../core/locale/locale.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/locale.coffee","../../number/format.coffee":"/Users/Dave/Sites/d3plus/src/number/format.coffee","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/height.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   max: 600,
@@ -15218,7 +15249,7 @@ module.exports = {
 
 
 
-},{}],110:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/history.coffee":[function(require,module,exports){
 module.exports = {
   back: function() {
     if (this.states.length) {
@@ -15227,19 +15258,19 @@ module.exports = {
   },
   chain: [],
   reset: function() {
-    var results;
-    results = [];
+    var _results;
+    _results = [];
     while (this.states.length) {
-      results.push(this.states.pop()());
+      _results.push(this.states.pop()());
     }
-    return results;
+    return _results;
   },
   states: []
 };
 
 
 
-},{}],111:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/hover.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean, Number, String],
   value: false
@@ -15247,7 +15278,7 @@ module.exports = {
 
 
 
-},{}],112:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/icon.coffee":[function(require,module,exports){
 var process;
 
 process = require("../../core/methods/process/icon.coffee");
@@ -15303,7 +15334,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/process/icon.coffee":82}],113:[function(require,module,exports){
+},{"../../core/methods/process/icon.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/icon.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/id.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -15319,7 +15350,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74}],114:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/keywords.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -15333,7 +15364,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74}],115:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/margin.coffee":[function(require,module,exports){
 var process;
 
 process = require("../../core/methods/process/margin.coffee");
@@ -15354,7 +15385,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/process/margin.coffee":83}],116:[function(require,module,exports){
+},{"../../core/methods/process/margin.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/margin.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/open.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   flipped: {
@@ -15366,7 +15397,7 @@ module.exports = {
 
 
 
-},{}],117:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/order.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Function, String],
   sort: {
@@ -15379,7 +15410,7 @@ module.exports = {
 
 
 
-},{}],118:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/remove.coffee":[function(require,module,exports){
 module.exports = {
   accepted: void 0,
   process: function(value, vars) {
@@ -15392,7 +15423,7 @@ module.exports = {
 
 
 
-},{}],119:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/search.coffee":[function(require,module,exports){
 module.exports = {
   accepted: ["auto", Boolean],
   process: function(value) {
@@ -15407,7 +15438,7 @@ module.exports = {
 
 
 
-},{}],120:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/select.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [String],
   chainable: false,
@@ -15425,7 +15456,7 @@ module.exports = {
 
 
 
-},{}],121:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/selectAll.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [String],
   chainable: false,
@@ -15443,7 +15474,7 @@ module.exports = {
 
 
 
-},{}],122:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/text.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -15463,7 +15494,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74}],123:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/timing.coffee":[function(require,module,exports){
 module.exports = {
   mouseevents: 60,
   ui: 200
@@ -15471,7 +15502,7 @@ module.exports = {
 
 
 
-},{}],124:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/title.coffee":[function(require,module,exports){
 var decoration, family, stringStrip, transform;
 
 decoration = require("../../core/methods/font/decoration.coffee");
@@ -15509,7 +15540,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/decoration.coffee":76,"../../core/methods/font/family.coffee":77,"../../core/methods/font/transform.coffee":79,"../../string/strip.js":166}],125:[function(require,module,exports){
+},{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee","../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js"}],"/Users/Dave/Sites/d3plus/src/form/methods/type.coffee":[function(require,module,exports){
 module.exports = {
   accepted: function(vars) {
     return d3.keys(vars.types);
@@ -15519,7 +15550,7 @@ module.exports = {
 
 
 
-},{}],126:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/methods/ui.coffee":[function(require,module,exports){
 var align, decoration, family, margin, transform;
 
 family = require("../../core/methods/font/family.coffee");
@@ -15592,7 +15623,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/align.coffee":75,"../../core/methods/font/decoration.coffee":76,"../../core/methods/font/family.coffee":77,"../../core/methods/font/transform.coffee":79,"../../core/methods/process/margin.coffee":83}],127:[function(require,module,exports){
+},{"../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee","../../core/methods/process/margin.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/margin.coffee"}],"/Users/Dave/Sites/d3plus/src/form/methods/width.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   secondary: false,
@@ -15601,7 +15632,7 @@ module.exports = {
 
 
 
-},{}],128:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/auto.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Determines form type based on data length.
 //------------------------------------------------------------------------------
@@ -15621,7 +15652,7 @@ module.exports = function( vars ) {
 
 }
 
-},{}],129:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/button/button.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   var button, checks, color, icons, mouseevents, print, style, updatedButtons;
   print = require("../../../core/console/print.coffee");
@@ -15673,7 +15704,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../core/console/print.coffee":51,"./functions/color.coffee":130,"./functions/icons.js":131,"./functions/mouseevents.coffee":132,"./functions/style.js":133}],130:[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./functions/color.coffee":"/Users/Dave/Sites/d3plus/src/form/types/button/functions/color.coffee","./functions/icons.js":"/Users/Dave/Sites/d3plus/src/form/types/button/functions/icons.js","./functions/mouseevents.coffee":"/Users/Dave/Sites/d3plus/src/form/types/button/functions/mouseevents.coffee","./functions/style.js":"/Users/Dave/Sites/d3plus/src/form/types/button/functions/style.js"}],"/Users/Dave/Sites/d3plus/src/form/types/button/functions/color.coffee":[function(require,module,exports){
 module.exports = function(elem, vars) {
   var legible, lighter, textColor;
   legible = require("../../../../color/legible.coffee");
@@ -15710,7 +15741,7 @@ module.exports = function(elem, vars) {
 
 
 
-},{"../../../../color/legible.coffee":43,"../../../../color/lighter.coffee":44,"../../../../color/text.coffee":49}],131:[function(require,module,exports){
+},{"../../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../../color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","../../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/button/functions/icons.js":[function(require,module,exports){
 var prefix = require("../../../../client/prefix.coffee"),
     rtl = require("../../../../client/rtl.coffee")
 
@@ -15888,7 +15919,7 @@ module.exports = function ( elem , vars ) {
 
 }
 
-},{"../../../../client/prefix.coffee":39,"../../../../client/rtl.coffee":40}],132:[function(require,module,exports){
+},{"../../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/button/functions/mouseevents.coffee":[function(require,module,exports){
 module.exports = function(elem, vars, color) {
   var events, ie;
   color = require("./color.coffee");
@@ -15915,7 +15946,7 @@ module.exports = function(elem, vars, color) {
 
 
 
-},{"../../../../client/ie.js":37,"../../../../client/pointer.coffee":38,"./color.coffee":130}],133:[function(require,module,exports){
+},{"../../../../client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","../../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","./color.coffee":"/Users/Dave/Sites/d3plus/src/form/types/button/functions/color.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/button/functions/style.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
 //------------------------------------------------------------------------------
@@ -15934,7 +15965,7 @@ module.exports = function ( elem , vars ) {
 
 }
 
-},{}],134:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/drop.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   var button, data, element, keyboard, list, search, selector, title, update, width, windowevent;
   element = require("./functions/element.coffee");
@@ -15965,7 +15996,7 @@ module.exports = function(vars) {
 
 
 
-},{"./functions/button.js":137,"./functions/data.js":138,"./functions/element.coffee":139,"./functions/keyboard.coffee":142,"./functions/list.js":143,"./functions/search.js":145,"./functions/selector.js":146,"./functions/title.js":147,"./functions/update.js":148,"./functions/width.js":149,"./functions/window.js":150}],135:[function(require,module,exports){
+},{"./functions/button.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/button.js","./functions/data.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/data.js","./functions/element.coffee":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/element.coffee","./functions/keyboard.coffee":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/keyboard.coffee","./functions/list.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/list.js","./functions/search.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/search.js","./functions/selector.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/selector.js","./functions/title.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/title.js","./functions/update.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/update.js","./functions/width.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/width.js","./functions/window.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/window.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/active.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Checks to see if a given variable is allowed to be selected.
 //------------------------------------------------------------------------------
@@ -16001,7 +16032,7 @@ module.exports = function ( vars , value , active ) {
 
 }
 
-},{}],136:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/arrow.js":[function(require,module,exports){
 var print = require("../../../../core/console/print.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Toggles the state of the dropdown menu.
@@ -16032,7 +16063,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../core/console/print.coffee":51}],137:[function(require,module,exports){
+},{"../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/button.js":[function(require,module,exports){
 var copy = require("../../../../util/copy.coffee"),
     events = require("../../../../client/pointer.coffee"),
     form   = require("../../../form.js"),
@@ -16121,7 +16152,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../client/pointer.coffee":38,"../../../../core/console/print.coffee":51,"../../../../util/copy.coffee":198,"../../../form.js":96}],138:[function(require,module,exports){
+},{"../../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../../../form.js":"/Users/Dave/Sites/d3plus/src/form/form.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/data.js":[function(require,module,exports){
 var stringFormat = require("../../../../string/format.js"),
     stringStrip = require("../../../../string/strip.js");
 
@@ -16245,7 +16276,7 @@ module.exports = function ( vars ) {
 
 };
 
-},{"../../../../string/format.js":164,"../../../../string/strip.js":166}],139:[function(require,module,exports){
+},{"../../../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/element.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   if (vars.data.element.value) {
     vars.data.element.value.on("focus." + vars.container.id, function() {
@@ -16275,36 +16306,40 @@ module.exports = function(vars) {
 
 
 
-},{}],140:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/height.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Calculates the height and orientation of the dropdown list, based on
 // available screen space.
 //------------------------------------------------------------------------------
 module.exports = function ( vars ) {
 
-  var button = vars.container.button.container().node().getBoundingClientRect();
+  var height = vars.height.secondary,
+      button = vars.container.button.container().node().getBoundingClientRect(),
+      available = window.innerHeight - button.bottom - vars.ui.border * 2 -
+                  vars.ui.margin.top - vars.ui.margin.bottom -
+                  vars.ui.padding.top - vars.ui.padding.bottom;
 
-  vars.height.secondary = window.innerHeight - button.bottom -
-                          vars.ui.margin.top - vars.ui.margin.bottom -
-                          vars.ui.padding.top - vars.ui.padding.bottom -
-                          vars.ui.border * 2;
-
-  if ( vars.height.secondary < button.height*3 ) {
-    vars.height.secondary = button.top-10;
+  if (available < button.height * 3) {
+    available = button.top-10;
     vars.self.open({"flipped": true});
   }
-  else {
-    vars.self.open({"flipped": false});
+  // else {
+  //   vars.self.open({"flipped": false});
+  // }
+
+  if (typeof height !== "number") {
+    height = available;
   }
 
-  var scrolling = false;
-  if (vars.height.secondary > vars.height.max) {
-    vars.height.secondary = vars.height.max;
+  if (height > vars.height.max) {
+    height = vars.height.max;
   }
+
+  vars.self.height({"secondary": height});
 
 };
 
-},{}],141:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/items.coffee":[function(require,module,exports){
 var active, copy, form, print;
 
 active = require("./active.js");
@@ -16394,17 +16429,17 @@ module.exports = function(vars) {
 
 
 
-},{"../../../../core/console/print.coffee":51,"../../../../util/copy.coffee":198,"../../../form.js":96,"./active.js":135}],142:[function(require,module,exports){
+},{"../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../../../form.js":"/Users/Dave/Sites/d3plus/src/form/form.js","./active.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/active.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/keyboard.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   return d3.select(window).on("keydown." + vars.container.id, function() {
-    var d, data, depth, hist, hover, i, index, j, key, len, matchKey, ref, solo;
+    var d, data, depth, hist, hover, i, index, key, matchKey, solo, _i, _len, _ref;
     key = d3.event.keyCode;
     if (vars.open.value || vars.hover.value === true) {
       matchKey = vars.hover.value === true ? "focus" : "hover";
       index = false;
-      ref = vars.data.filtered;
-      for (i = j = 0, len = ref.length; j < len; i = ++j) {
-        d = ref[i];
+      _ref = vars.data.filtered;
+      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+        d = _ref[i];
         if (d[vars.id.value] === vars[matchKey].value) {
           index = i;
           break;
@@ -16474,7 +16509,7 @@ module.exports = function(vars) {
 
 
 
-},{}],143:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/list.js":[function(require,module,exports){
 var print = require("../../../../core/console/print.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Creates and populates the dropdown list of items.
@@ -16496,7 +16531,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../core/console/print.coffee":51}],144:[function(require,module,exports){
+},{"../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/scroll.js":[function(require,module,exports){
 var print = require("../../../../core/console/print.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Calculates scroll position of list.
@@ -16600,7 +16635,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../core/console/print.coffee":51}],145:[function(require,module,exports){
+},{"../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/search.js":[function(require,module,exports){
 var prefix = require("../../../../client/prefix.coffee"),
     print = require("../../../../core/console/print.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -16699,7 +16734,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../client/prefix.coffee":39,"../../../../core/console/print.coffee":51,"./data.js":138,"./items.coffee":141,"./update.js":148}],146:[function(require,module,exports){
+},{"../../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./data.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/data.js","./items.coffee":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/items.coffee","./update.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/update.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/selector.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Creates and styles the div that holds the search box and item list.
 //------------------------------------------------------------------------------
@@ -16721,7 +16756,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{}],147:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/title.js":[function(require,module,exports){
 var events = require("../../../../client/pointer.coffee"),
     lighter   = require("../../../../color/lighter.coffee"),
     print     = require("../../../../core/console/print.coffee"),
@@ -16872,7 +16907,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../client/pointer.coffee":38,"../../../../color/lighter.coffee":44,"../../../../color/text.coffee":49,"../../../../core/console/print.coffee":51}],148:[function(require,module,exports){
+},{"../../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../../color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","../../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/update.js":[function(require,module,exports){
 var items = require("./items.coffee"),
     height     = require("./height.js"),
     print      = require("../../../../core/console/print.coffee"),
@@ -17038,7 +17073,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../core/console/print.coffee":51,"./arrow.js":136,"./height.js":140,"./items.coffee":141,"./scroll.js":144}],149:[function(require,module,exports){
+},{"../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","./arrow.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/arrow.js","./height.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/height.js","./items.coffee":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/items.coffee","./scroll.js":"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/scroll.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/width.js":[function(require,module,exports){
 var copy = require("../../../../util/copy.coffee"),
     fontTester  = require("../../../../core/font/tester.coffee"),
     form        = require("../../../form.js"),
@@ -17133,7 +17168,7 @@ module.exports = function ( vars ) {
 
 }
 
-},{"../../../../core/console/print.coffee":51,"../../../../core/font/tester.coffee":67,"../../../../object/validate.coffee":163,"../../../../util/copy.coffee":198,"../../../form.js":96}],150:[function(require,module,exports){
+},{"../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../../core/font/tester.coffee":"/Users/Dave/Sites/d3plus/src/core/font/tester.coffee","../../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../../../form.js":"/Users/Dave/Sites/d3plus/src/form/form.js"}],"/Users/Dave/Sites/d3plus/src/form/types/drop/functions/window.js":[function(require,module,exports){
 var child = require("../../../../util/child.coffee")
 
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -17178,7 +17213,7 @@ var windowEvents = function ( vars , elem ) {
 
 module.exports = windowEvents
 
-},{"../../../../util/child.coffee":196}],151:[function(require,module,exports){
+},{"../../../../util/child.coffee":"/Users/Dave/Sites/d3plus/src/util/child.coffee"}],"/Users/Dave/Sites/d3plus/src/form/types/toggle.js":[function(require,module,exports){
 var form = require("../form.js")
 
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -17274,7 +17309,7 @@ module.exports = function( vars ) {
 
 }
 
-},{"../form.js":96}],152:[function(require,module,exports){
+},{"../form.js":"/Users/Dave/Sites/d3plus/src/form/form.js"}],"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee":[function(require,module,exports){
 var intersectPoints, lineIntersection, pointInPoly, pointInSegmentBox, polyInsidePoly, print, rayIntersectsSegment, rotatePoint, rotatePoly, segmentsIntersect, simplify, squaredDist;
 
 print = require("../core/console/print.coffee");
@@ -17282,7 +17317,7 @@ print = require("../core/console/print.coffee");
 simplify = require("simplify-js");
 
 module.exports = function(poly, options) {
-  var aRatio, aRatios, angle, angleRad, angleStep, angles, area, aspectRatioStep, aspectRatios, bBox, boxHeight, boxWidth, centroid, events, height, i, insidePoly, j, k, l, left, len, len1, len2, len3, m, maxArea, maxAspectRatio, maxHeight, maxRect, maxWidth, maxx, maxy, minAspectRatio, minSqDistH, minSqDistW, minx, miny, modifOrigins, origOrigin, origin, origins, p, p1H, p1W, p2H, p2W, rectPoly, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8, right, rndPoint, rndX, rndY, tempPoly, tolerance, width, widthStep, x0, y0;
+  var aRatio, aRatios, angle, angleRad, angleStep, angles, area, aspectRatioStep, aspectRatios, bBox, boxHeight, boxWidth, centroid, events, height, i, insidePoly, left, maxArea, maxAspectRatio, maxHeight, maxRect, maxWidth, maxx, maxy, minAspectRatio, minSqDistH, minSqDistW, minx, miny, modifOrigins, origOrigin, origin, origins, p, p1H, p1W, p2H, p2W, rectPoly, right, rndPoint, rndX, rndY, tempPoly, tolerance, width, widthStep, x0, y0, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
   if (poly.length < 3) {
     print.error('polygon has to have at least 3 points');
     return null;
@@ -17343,35 +17378,35 @@ module.exports = function(poly, options) {
     print.error('polygon has 0 area');
     return null;
   }
-  ref = d3.extent(poly, function(d) {
+  _ref = d3.extent(poly, function(d) {
     return d[0];
-  }), minx = ref[0], maxx = ref[1];
-  ref1 = d3.extent(poly, function(d) {
+  }), minx = _ref[0], maxx = _ref[1];
+  _ref1 = d3.extent(poly, function(d) {
     return d[1];
-  }), miny = ref1[0], maxy = ref1[1];
+  }), miny = _ref1[0], maxy = _ref1[1];
   tolerance = Math.min(maxx - minx, maxy - miny) * options.tolerance;
   tempPoly = (function() {
-    var j, len, results;
-    results = [];
-    for (j = 0, len = poly.length; j < len; j++) {
-      p = poly[j];
-      results.push({
+    var _i, _len, _results;
+    _results = [];
+    for (_i = 0, _len = poly.length; _i < _len; _i++) {
+      p = poly[_i];
+      _results.push({
         x: p[0],
         y: p[1]
       });
     }
-    return results;
+    return _results;
   })();
   if (tolerance > 0) {
     tempPoly = simplify(tempPoly, tolerance);
     poly = (function() {
-      var j, len, results;
-      results = [];
-      for (j = 0, len = tempPoly.length; j < len; j++) {
-        p = tempPoly[j];
-        results.push([p.x, p.y]);
+      var _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = tempPoly.length; _i < _len; _i++) {
+        p = tempPoly[_i];
+        _results.push([p.x, p.y]);
       }
-      return results;
+      return _results;
     })();
   }
   if (options.vdebug) {
@@ -17380,14 +17415,14 @@ module.exports = function(poly, options) {
       poly: poly
     });
   }
-  ref2 = d3.extent(poly, function(d) {
+  _ref2 = d3.extent(poly, function(d) {
     return d[0];
-  }), minx = ref2[0], maxx = ref2[1];
-  ref3 = d3.extent(poly, function(d) {
+  }), minx = _ref2[0], maxx = _ref2[1];
+  _ref3 = d3.extent(poly, function(d) {
     return d[1];
-  }), miny = ref3[0], maxy = ref3[1];
+  }), miny = _ref3[0], maxy = _ref3[1];
   bBox = [[minx, miny], [maxx, miny], [maxx, maxy], [minx, maxy]];
-  ref4 = [maxx - minx, maxy - miny], boxWidth = ref4[0], boxHeight = ref4[1];
+  _ref4 = [maxx - minx, maxy - miny], boxWidth = _ref4[0], boxHeight = _ref4[1];
   widthStep = Math.min(boxWidth, boxHeight) / 50;
   if (origins == null) {
     origins = [];
@@ -17412,8 +17447,8 @@ module.exports = function(poly, options) {
   }
   maxArea = 0;
   maxRect = null;
-  for (j = 0, len = angles.length; j < len; j++) {
-    angle = angles[j];
+  for (_i = 0, _len = angles.length; _i < _len; _i++) {
+    angle = angles[_i];
     angleRad = -angle * Math.PI / 180;
     if (options.vdebug) {
       events.push({
@@ -17421,10 +17456,10 @@ module.exports = function(poly, options) {
         angle: angle
       });
     }
-    for (i = k = 0, len1 = origins.length; k < len1; i = ++k) {
+    for (i = _j = 0, _len1 = origins.length; _j < _len1; i = ++_j) {
       origOrigin = origins[i];
-      ref5 = intersectPoints(poly, origOrigin, angleRad), p1W = ref5[0], p2W = ref5[1];
-      ref6 = intersectPoints(poly, origOrigin, angleRad + Math.PI / 2), p1H = ref6[0], p2H = ref6[1];
+      _ref5 = intersectPoints(poly, origOrigin, angleRad), p1W = _ref5[0], p2W = _ref5[1];
+      _ref6 = intersectPoints(poly, origOrigin, angleRad + Math.PI / 2), p1H = _ref6[0], p2H = _ref6[1];
       modifOrigins = [];
       if ((p1W != null) && (p2W != null)) {
         modifOrigins.push([(p1W[0] + p2W[0]) / 2, (p1W[1] + p2W[1]) / 2]);
@@ -17443,8 +17478,8 @@ module.exports = function(poly, options) {
           modifOrigins: modifOrigins
         });
       }
-      for (l = 0, len2 = modifOrigins.length; l < len2; l++) {
-        origin = modifOrigins[l];
+      for (_k = 0, _len2 = modifOrigins.length; _k < _len2; _k++) {
+        origin = modifOrigins[_k];
         if (options.vdebug) {
           events.push({
             type: 'origin',
@@ -17452,13 +17487,13 @@ module.exports = function(poly, options) {
             cy: origin[1]
           });
         }
-        ref7 = intersectPoints(poly, origin, angleRad), p1W = ref7[0], p2W = ref7[1];
+        _ref7 = intersectPoints(poly, origin, angleRad), p1W = _ref7[0], p2W = _ref7[1];
         if (p1W === null || p2W === null) {
           continue;
         }
         minSqDistW = Math.min(squaredDist(origin, p1W), squaredDist(origin, p2W));
         maxWidth = 2 * Math.sqrt(minSqDistW);
-        ref8 = intersectPoints(poly, origin, angleRad + Math.PI / 2), p1H = ref8[0], p2H = ref8[1];
+        _ref8 = intersectPoints(poly, origin, angleRad + Math.PI / 2), p1H = _ref8[0], p2H = _ref8[1];
         if (p1H === null || p2H === null) {
           continue;
         }
@@ -17474,8 +17509,8 @@ module.exports = function(poly, options) {
           maxAspectRatio = Math.min(options.maxAspectRatio, maxWidth / options.minHeight, (maxWidth * maxWidth) / maxArea);
           aRatios = d3.range(minAspectRatio, maxAspectRatio + aspectRatioStep, aspectRatioStep);
         }
-        for (m = 0, len3 = aRatios.length; m < len3; m++) {
-          aRatio = aRatios[m];
+        for (_l = 0, _len3 = aRatios.length; _l < _len3; _l++) {
+          aRatio = aRatios[_l];
           left = Math.max(options.minWidth, Math.sqrt(maxArea * aRatio));
           right = Math.min(maxWidth, maxHeight * aRatio);
           if (right * maxHeight < maxArea) {
@@ -17538,8 +17573,8 @@ squaredDist = function(a, b) {
 };
 
 rayIntersectsSegment = function(p, p1, p2) {
-  var a, b, mAB, mAP, ref;
-  ref = p1[1] < p2[1] ? [p1, p2] : [p2, p1], a = ref[0], b = ref[1];
+  var a, b, mAB, mAP, _ref;
+  _ref = p1[1] < p2[1] ? [p1, p2] : [p2, p1], a = _ref[0], b = _ref[1];
   if (p[1] === b[1] || p[1] === a[1]) {
     p[1] += Number.MIN_VALUE;
   }
@@ -17644,13 +17679,13 @@ rotatePoint = function(p, alpha, origin) {
 };
 
 rotatePoly = function(poly, alpha, origin) {
-  var j, len, point, results;
-  results = [];
-  for (j = 0, len = poly.length; j < len; j++) {
-    point = poly[j];
-    results.push(rotatePoint(point, alpha, origin));
+  var point, _i, _len, _results;
+  _results = [];
+  for (_i = 0, _len = poly.length; _i < _len; _i++) {
+    point = poly[_i];
+    _results.push(rotatePoint(point, alpha, origin));
   }
-  return results;
+  return _results;
 };
 
 intersectPoints = function(poly, origin, alpha) {
@@ -17694,7 +17729,7 @@ intersectPoints = function(poly, origin, alpha) {
 
 
 
-},{"../core/console/print.coffee":51,"simplify-js":9}],153:[function(require,module,exports){
+},{"../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","simplify-js":"/Users/Dave/Sites/d3plus/node_modules/simplify-js/simplify.js"}],"/Users/Dave/Sites/d3plus/src/geom/offset.coffee":[function(require,module,exports){
 module.exports = function(radians, distance, shape) {
   var adjacentLegLength, coords, diagonal, oppositeLegLength;
   coords = {
@@ -17760,17 +17795,17 @@ module.exports = function(radians, distance, shape) {
 
 
 
-},{}],154:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee":[function(require,module,exports){
 var offset;
 
 offset = require("../geom/offset.coffee");
 
 module.exports = function(path) {
-  var angle, i, j, last, len, length, o, obtuse, p, poly, prev, radius, segments, start, step, width;
+  var angle, i, last, length, o, obtuse, p, poly, prev, radius, segments, start, step, width, _i, _len;
   path = path.slice(1).slice(0, -1).split(/L|A/);
   poly = [];
-  for (j = 0, len = path.length; j < len; j++) {
-    p = path[j];
+  for (_i = 0, _len = path.length; _i < _len; _i++) {
+    p = path[_i];
     p = p.split(" ");
     if (p.length === 1) {
       poly.push(p[0].split(",").map(function(d) {
@@ -17806,19 +17841,19 @@ module.exports = function(path) {
 
 
 
-},{"../geom/offset.coffee":153}],155:[function(require,module,exports){
+},{"../geom/offset.coffee":"/Users/Dave/Sites/d3plus/src/geom/offset.coffee"}],"/Users/Dave/Sites/d3plus/src/network/cluster.coffee":[function(require,module,exports){
 var normalize;
 
 normalize = require("./normalize.coffee");
 
 module.exports = function(edges, options) {
-  var Q, a, b, cid, commSize, commSizes, communities, community, deltaQ, distance, edge, endpoint, events, i, id, iter, j, k, len, len1, linksMap, m, maxa, maxb, node, nodeid, nodes, nodesMap, ref, ref1, result, startpoint;
+  var Q, a, b, cid, commSize, commSizes, communities, community, deltaQ, distance, edge, endpoint, events, id, iter, k, linksMap, m, maxa, maxb, node, nodeid, nodes, nodesMap, result, startpoint, _i, _j, _len, _len1, _ref, _ref1;
   events = [];
   if (options == null) {
     options = {};
   }
   if ((options.nodes == null) || typeof options.nodes !== 'object') {
-    ref = normalize(edges, options), edges = ref[0], options = ref[1];
+    _ref = normalize(edges, options), edges = _ref[0], options = _ref[1];
     if (options === null) {
       return null;
     }
@@ -17833,8 +17868,8 @@ module.exports = function(edges, options) {
   }
   m = 0;
   linksMap = {};
-  for (i = 0, len = edges.length; i < len; i++) {
-    edge = edges[i];
+  for (_i = 0, _len = edges.length; _i < _len; _i++) {
+    edge = edges[_i];
     a = nodeid(startpoint(edge));
     b = nodeid(endpoint(edge));
     if (!(a in linksMap)) {
@@ -17899,9 +17934,9 @@ module.exports = function(edges, options) {
         linksMap[k][maxb] = linksMap[maxb][k];
       }
     }
-    ref1 = communities[maxa].nodes;
-    for (j = 0, len1 = ref1.length; j < len1; j++) {
-      node = ref1[j];
+    _ref1 = communities[maxa].nodes;
+    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+      node = _ref1[_j];
       communities[maxb].nodes.push(node);
     }
     communities[maxb].score += communities[maxa].score;
@@ -17919,32 +17954,32 @@ module.exports = function(edges, options) {
     iter++;
   }
   commSizes = (function() {
-    var results;
-    results = [];
+    var _results;
+    _results = [];
     for (cid in communities) {
       community = communities[cid];
-      results.push([cid, community.nodes.length]);
+      _results.push([cid, community.nodes.length]);
     }
-    return results;
+    return _results;
   })();
   commSizes.sort(function(a, b) {
     return b[1] - a[1];
   });
   result = (function() {
-    var l, len2, results;
-    results = [];
-    for (l = 0, len2 = commSizes.length; l < len2; l++) {
-      commSize = commSizes[l];
-      results.push(communities[commSize[0]].nodes);
+    var _k, _len2, _results;
+    _results = [];
+    for (_k = 0, _len2 = commSizes.length; _k < _len2; _k++) {
+      commSize = commSizes[_k];
+      _results.push(communities[commSize[0]].nodes);
     }
-    return results;
+    return _results;
   })();
   return [result, events];
 };
 
 
 
-},{"./normalize.coffee":157}],156:[function(require,module,exports){
+},{"./normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee"}],"/Users/Dave/Sites/d3plus/src/network/distance.coffee":[function(require,module,exports){
 module.exports = function(n1, n2) {
   var xx, yy;
   if (!(n1 instanceof Array)) {
@@ -17960,13 +17995,13 @@ module.exports = function(n1, n2) {
 
 
 
-},{}],157:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/network/normalize.coffee":[function(require,module,exports){
 var print;
 
 print = require("../core/console/print.coffee");
 
 module.exports = function(edges, options) {
-  var K, a, b, directed, distance, edge, edge2distance, endpoint, errormsg, i, id, id1, idA, idB, j, k, l, len, len1, len2, node, nodeA, nodeB, nodeid, nodes, ref, ref1, source, startpoint, target, vdebug;
+  var K, a, b, directed, distance, edge, edge2distance, endpoint, errormsg, i, id, id1, idA, idB, node, nodeA, nodeB, nodeid, nodes, source, startpoint, target, vdebug, _i, _j, _k, _len, _len1, _len2, _ref, _ref1;
   source = options.source, target = options.target, directed = options.directed, distance = options.distance, nodeid = options.nodeid, startpoint = options.startpoint, endpoint = options.endpoint, K = options.K, vdebug = options.vdebug;
   if (!directed) {
     directed = false;
@@ -18031,7 +18066,7 @@ module.exports = function(edges, options) {
     })(distance);
   } else if (distance instanceof Array) {
     edge2distance = {};
-    for (i = j = 0, len = edges.length; j < len; i = ++j) {
+    for (i = _i = 0, _len = edges.length; _i < _len; i = ++_i) {
       edge = edges[i];
       a = nodeid(startpoint(edge));
       b = nodeid(endpoint(edge));
@@ -18044,15 +18079,15 @@ module.exports = function(edges, options) {
     };
   }
   nodes = {};
-  for (k = 0, len1 = edges.length; k < len1; k++) {
-    edge = edges[k];
+  for (_j = 0, _len1 = edges.length; _j < _len1; _j++) {
+    edge = edges[_j];
     nodeA = startpoint(edge);
     nodeB = endpoint(edge);
     idA = nodeid(nodeA);
     idB = nodeid(nodeB);
-    ref = [nodeA, nodeB];
-    for (l = 0, len2 = ref.length; l < len2; l++) {
-      node = ref[l];
+    _ref = [nodeA, nodeB];
+    for (_k = 0, _len2 = _ref.length; _k < _len2; _k++) {
+      node = _ref[_k];
       id = nodeid(node);
       if (!(id in nodes)) {
         nodes[id] = {
@@ -18079,7 +18114,7 @@ module.exports = function(edges, options) {
     errormsg = 'Check the endpoint function/attribute';
   } else {
     id1 = nodeid(startpoint(edges[0]));
-    if ((id1 == null) || ((ref1 = typeof id1) !== 'string' && ref1 !== 'number')) {
+    if ((id1 == null) || ((_ref1 = typeof id1) !== 'string' && _ref1 !== 'number')) {
       errormsg = 'Check the nodeid function/attribute';
     } else if ((source != null) && !(source in nodes)) {
       errormsg = 'The source is not in the graph';
@@ -18109,7 +18144,7 @@ module.exports = function(edges, options) {
 
 
 
-},{"../core/console/print.coffee":51}],158:[function(require,module,exports){
+},{"../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/network/shortestPath.coffee":[function(require,module,exports){
 var Heap, normalize;
 
 Heap = require('heap');
@@ -18117,13 +18152,13 @@ Heap = require('heap');
 normalize = require("./normalize.coffee");
 
 module.exports = function(edges, source, options) {
-  var K, a, alt, b, directed, distance, edge, endpoint, getPath, heap, i, id, j, len, len1, maxsize, node, nodeid, nodes, path, ref, ref1, ref2, res, result, startpoint, target, u, visited;
+  var K, a, alt, b, directed, distance, edge, endpoint, getPath, heap, id, maxsize, node, nodeid, nodes, path, res, result, startpoint, target, u, visited, _i, _j, _len, _len1, _ref, _ref1, _ref2;
   if (options == null) {
     options = {};
   }
   options.source = source;
   if ((options.nodes == null) || typeof options.nodes !== 'object') {
-    ref = normalize(edges, options), edges = ref[0], options = ref[1];
+    _ref = normalize(edges, options), edges = _ref[0], options = _ref[1];
     if (options === null) {
       return null;
     }
@@ -18161,13 +18196,13 @@ module.exports = function(edges, source, options) {
       break;
     }
     if (nodes[u].count <= K) {
-      ref1 = nodes[u].outedges;
-      for (i = 0, len = ref1.length; i < len; i++) {
-        edge = ref1[i];
+      _ref1 = nodes[u].outedges;
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        edge = _ref1[_i];
         a = nodeid(startpoint(edge));
         b = nodeid(endpoint(edge));
         if (!directed && b === u) {
-          ref2 = [b, a], a = ref2[0], b = ref2[1];
+          _ref2 = [b, a], a = _ref2[0], b = _ref2[1];
         }
         if (target == null) {
           if (visited[b]) {
@@ -18193,8 +18228,8 @@ module.exports = function(edges, source, options) {
     }
     return edges.reverse();
   };
-  for (j = 0, len1 = result.length; j < len1; j++) {
-    res = result[j];
+  for (_j = 0, _len1 = result.length; _j < _len1; _j++) {
+    res = result[_j];
     if (target != null) {
       delete res.target;
       res.edges = getPath(res);
@@ -18207,7 +18242,7 @@ module.exports = function(edges, source, options) {
 
 
 
-},{"./normalize.coffee":157,"heap":6}],159:[function(require,module,exports){
+},{"./normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee","heap":"/Users/Dave/Sites/d3plus/node_modules/heap/index.js"}],"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee":[function(require,module,exports){
 var distance;
 
 distance = require("./distance.coffee");
@@ -18232,18 +18267,18 @@ module.exports = function(arr, opts) {
     }
   });
   quad(arr).visit(function(node) {
-    var i, j, len, len1, n1, n2, ref, ref1;
+    var n1, n2, _i, _j, _len, _len1, _ref, _ref1;
     if (!node.leaf) {
-      ref = node.nodes;
-      for (i = 0, len = ref.length; i < len; i++) {
-        n1 = ref[i];
+      _ref = node.nodes;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        n1 = _ref[_i];
         if (n1 && n1.point) {
           if (opts.origin) {
             distances.push(distance(n1.point, opts.origin));
           } else {
-            ref1 = node.nodes;
-            for (j = 0, len1 = ref1.length; j < len1; j++) {
-              n2 = ref1[j];
+            _ref1 = node.nodes;
+            for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+              n2 = _ref1[_j];
               if (n2 && n2.point && n2.point !== n1.point) {
                 distances.push(distance(n1.point, n2.point));
               }
@@ -18265,19 +18300,19 @@ module.exports = function(arr, opts) {
 
 
 
-},{"./distance.coffee":156}],160:[function(require,module,exports){
+},{"./distance.coffee":"/Users/Dave/Sites/d3plus/src/network/distance.coffee"}],"/Users/Dave/Sites/d3plus/src/network/subgraph.coffee":[function(require,module,exports){
 var normalize;
 
 normalize = require("./normalize.coffee");
 
 module.exports = function(edges, source, options) {
-  var K, dfs, directed, distance, edge, endpoint, id, nodeid, nodes, ref, startpoint, visited;
+  var K, dfs, directed, distance, edge, endpoint, id, nodeid, nodes, startpoint, visited, _ref;
   if (options == null) {
     options = {};
   }
   options.source = source;
   if ((options.nodes == null) || typeof options.nodes !== 'object') {
-    ref = normalize(edges, options), edges = ref[0], options = ref[1];
+    _ref = normalize(edges, options), edges = _ref[0], options = _ref[1];
     if (options === null) {
       return null;
     }
@@ -18286,57 +18321,57 @@ module.exports = function(edges, source, options) {
   visited = {};
   visited[source] = true;
   dfs = function(origin, curr_distance) {
-    var a, b, edge, i, len, new_distance, ref1, ref2, results;
-    ref1 = nodes[origin].outedges;
-    results = [];
-    for (i = 0, len = ref1.length; i < len; i++) {
-      edge = ref1[i];
+    var a, b, edge, new_distance, _i, _len, _ref1, _ref2, _results;
+    _ref1 = nodes[origin].outedges;
+    _results = [];
+    for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+      edge = _ref1[_i];
       a = nodeid(startpoint(edge));
       b = nodeid(endpoint(edge));
       if (!directed && b === origin) {
-        ref2 = [b, a], a = ref2[0], b = ref2[1];
+        _ref2 = [b, a], a = _ref2[0], b = _ref2[1];
       }
       if (!(b in visited)) {
         new_distance = curr_distance + distance(edge);
         if (new_distance <= K) {
           visited[b] = true;
-          results.push(dfs(b, new_distance));
+          _results.push(dfs(b, new_distance));
         } else {
-          results.push(void 0);
+          _results.push(void 0);
         }
       } else {
-        results.push(void 0);
+        _results.push(void 0);
       }
     }
-    return results;
+    return _results;
   };
   dfs(source, 0);
   return {
     nodes: (function() {
-      var results;
-      results = [];
+      var _results;
+      _results = [];
       for (id in visited) {
-        results.push(nodes[id].node);
+        _results.push(nodes[id].node);
       }
-      return results;
+      return _results;
     })(),
     edges: (function() {
-      var i, len, results;
-      results = [];
-      for (i = 0, len = edges.length; i < len; i++) {
-        edge = edges[i];
+      var _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = edges.length; _i < _len; _i++) {
+        edge = edges[_i];
         if (nodeid(startpoint(edge)) in visited && nodeid(endpoint(edge)) in visited) {
-          results.push(edge);
+          _results.push(edge);
         }
       }
-      return results;
+      return _results;
     })()
   };
 };
 
 
 
-},{"./normalize.coffee":157}],161:[function(require,module,exports){
+},{"./normalize.coffee":"/Users/Dave/Sites/d3plus/src/network/normalize.coffee"}],"/Users/Dave/Sites/d3plus/src/number/format.coffee":[function(require,module,exports){
 var defaultLocale;
 
 defaultLocale = require("../core/locale/languages/en_US.coffee");
@@ -18392,7 +18427,7 @@ module.exports = function(number, opts) {
 
 
 
-},{"../core/locale/languages/en_US.coffee":68}],162:[function(require,module,exports){
+},{"../core/locale/languages/en_US.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee"}],"/Users/Dave/Sites/d3plus/src/object/merge.coffee":[function(require,module,exports){
 var d3selection, validate;
 
 d3selection = require("../util/d3selection.coffee");
@@ -18412,8 +18447,8 @@ validate = require("./validate.coffee");
 module.exports = function(obj1, obj2) {
   var copyObject, obj3;
   copyObject = function(obj, ret, shallow) {
-    var k, results, v;
-    results = [];
+    var k, v, _results;
+    _results = [];
     for (k in obj) {
       v = obj[k];
       if (typeof v !== "undefined") {
@@ -18421,17 +18456,17 @@ module.exports = function(obj1, obj2) {
           if (typeof ret[k] !== "object") {
             ret[k] = {};
           }
-          results.push(copyObject(v, ret[k], k.indexOf("d3plus") === 0));
+          _results.push(copyObject(v, ret[k], k.indexOf("d3plus") === 0));
         } else if (!d3selection(v) && v instanceof Array) {
-          results.push(ret[k] = v.slice(0));
+          _results.push(ret[k] = v.slice(0));
         } else {
-          results.push(ret[k] = v);
+          _results.push(ret[k] = v);
         }
       } else {
-        results.push(void 0);
+        _results.push(void 0);
       }
     }
-    return results;
+    return _results;
   };
   obj3 = {};
   if (obj1) {
@@ -18445,7 +18480,7 @@ module.exports = function(obj1, obj2) {
 
 
 
-},{"../util/d3selection.coffee":199,"./validate.coffee":163}],163:[function(require,module,exports){
+},{"../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee","./validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/Sites/d3plus/src/object/validate.coffee":[function(require,module,exports){
 
 /**
  * This function returns true if the variable passed is a literal javascript keyed Object. It's a small, simple function, but it catches some edge-cases that can throw off your code (such as Arrays and `null`).
@@ -18460,7 +18495,7 @@ module.exports = function(obj) {
 
 
 
-},{}],164:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/string/format.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Formats a string similar to Python's "format"
 //------------------------------------------------------------------------------
@@ -18491,7 +18526,7 @@ module.exports = function() {
 
 }
 
-},{}],165:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/string/list.coffee":[function(require,module,exports){
 var format, locale;
 
 format = require("./format.js");
@@ -18528,7 +18563,7 @@ module.exports = function(list, andText, max, moreText) {
 
 
 
-},{"../core/locale/languages/en_US.coffee":68,"./format.js":164}],166:[function(require,module,exports){
+},{"../core/locale/languages/en_US.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee","./format.js":"/Users/Dave/Sites/d3plus/src/string/format.js"}],"/Users/Dave/Sites/d3plus/src/string/strip.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Removes all non ASCII characters
 //------------------------------------------------------------------------------
@@ -18582,7 +18617,7 @@ module.exports = function(str) {
 
 }
 
-},{}],167:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/string/title.coffee":[function(require,module,exports){
 var defaultLocale;
 
 defaultLocale = require("../core/locale/languages/en_US.coffee");
@@ -18636,7 +18671,7 @@ module.exports = function(text, opts) {
 
 
 
-},{"../core/locale/languages/en_US.coffee":68}],168:[function(require,module,exports){
+},{"../core/locale/languages/en_US.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee"}],"/Users/Dave/Sites/d3plus/src/textwrap/helpers/flow.coffee":[function(require,module,exports){
 var foreign, tspan;
 
 foreign = require("./foreign.coffee");
@@ -18653,7 +18688,7 @@ module.exports = function(vars) {
 
 
 
-},{"./foreign.coffee":169,"./tspan.coffee":172}],169:[function(require,module,exports){
+},{"./foreign.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/helpers/foreign.coffee","./tspan.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/helpers/tspan.coffee"}],"/Users/Dave/Sites/d3plus/src/textwrap/helpers/foreign.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   var anchor, color, family, opacity, text;
   text = vars.container.value;
@@ -18667,7 +18702,7 @@ module.exports = function(vars) {
 
 
 
-},{}],170:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/helpers/parseSize.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   var diff, elem, height, prev, radius, shape, size, width, x, y;
   elem = vars.container.value;
@@ -18761,7 +18796,7 @@ module.exports = function(vars) {
 
 
 
-},{}],171:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/helpers/parseText.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   var text;
   if (!vars.text.value) {
@@ -18791,7 +18826,7 @@ module.exports = function(vars) {
 
 
 
-},{}],172:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/helpers/tspan.coffee":[function(require,module,exports){
 module.exports = function(vars) {
   var anchor, dx, dy, ellipsis, fontSize, h, height, line, lineWidth, lines, mirror, newLine, placeWord, progress, reverse, rmod, rotate, rx, ry, space, start, textBox, translate, truncate, valign, width, words, wrap, x, y, yOffset;
   newLine = function(w, first) {
@@ -18913,7 +18948,7 @@ module.exports = function(vars) {
   line = null;
   lines = null;
   wrap = function() {
-    var i, len, next_char, unsafe, word;
+    var next_char, unsafe, word, _i, _len;
     vars.container.value.selectAll("tspan").remove();
     vars.container.value.html("");
     words = vars.text.words.slice(0);
@@ -18923,8 +18958,8 @@ module.exports = function(vars) {
     progress = words[0];
     textBox = newLine(words.shift(), true);
     line = start;
-    for (i = 0, len = words.length; i < len; i++) {
-      word = words[i];
+    for (_i = 0, _len = words.length; _i < _len; _i++) {
+      word = words[_i];
       if (line * dy > height) {
         truncate();
         break;
@@ -18978,7 +19013,7 @@ module.exports = function(vars) {
 
 
 
-},{}],173:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/helpers/wrap.coffee":[function(require,module,exports){
 var flow, fontSizes, resize, wrap;
 
 flow = require("./flow.coffee");
@@ -19059,7 +19094,7 @@ resize = function(vars) {
 
 
 
-},{"../../font/sizes.coffee":94,"./flow.coffee":168}],174:[function(require,module,exports){
+},{"../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","./flow.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/helpers/flow.coffee"}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/align.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, "start", "middle", "end", "left", "center", "right"],
   process: function(value) {
@@ -19075,7 +19110,7 @@ module.exports = {
 
 
 
-},{}],175:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/config.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Object],
   objectAccess: false,
@@ -19094,7 +19129,7 @@ module.exports = {
 
 
 
-},{}],176:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/container.coffee":[function(require,module,exports){
 var d3selection;
 
 d3selection = require("../../util/d3selection.coffee");
@@ -19119,7 +19154,7 @@ module.exports = {
 
 
 
-},{"../../util/d3selection.coffee":199}],177:[function(require,module,exports){
+},{"../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/dev.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   value: false
@@ -19127,7 +19162,7 @@ module.exports = {
 
 
 
-},{}],178:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/draw.coffee":[function(require,module,exports){
 var print, stringFormat;
 
 print = require("../../core/console/print.coffee");
@@ -19160,7 +19195,7 @@ module.exports = {
 
 
 
-},{"../../core/console/print.coffee":51,"../../string/format.js":164}],179:[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js"}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/format.coffee":[function(require,module,exports){
 var locale, mergeObject;
 
 locale = require("../../core/locale/locale.coffee");
@@ -19202,7 +19237,7 @@ module.exports = {
 
 
 
-},{"../../core/locale/locale.coffee":72,"../../object/merge.coffee":162}],180:[function(require,module,exports){
+},{"../../core/locale/locale.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/locale.coffee","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee"}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/height.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   value: false
@@ -19210,7 +19245,7 @@ module.exports = {
 
 
 
-},{}],181:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/padding.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Number],
   value: 0
@@ -19218,7 +19253,7 @@ module.exports = {
 
 
 
-},{}],182:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/resize.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   value: false
@@ -19226,7 +19261,7 @@ module.exports = {
 
 
 
-},{}],183:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/rotate.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [-180, -90, 0, 90, 180],
   value: 0
@@ -19234,7 +19269,7 @@ module.exports = {
 
 
 
-},{}],184:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/shape.coffee":[function(require,module,exports){
 module.exports = {
   accepted: ["circle", "square"],
   value: false
@@ -19242,7 +19277,7 @@ module.exports = {
 
 
 
-},{}],185:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/size.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Array, false],
   value: false
@@ -19250,7 +19285,7 @@ module.exports = {
 
 
 
-},{}],186:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/text.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Array, Number, String],
   html: {
@@ -19271,7 +19306,7 @@ module.exports = {
 
 
 
-},{}],187:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/valign.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, "top", "middle", "bottom"],
   value: false
@@ -19279,7 +19314,7 @@ module.exports = {
 
 
 
-},{}],188:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/width.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   value: false
@@ -19287,7 +19322,7 @@ module.exports = {
 
 
 
-},{}],189:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/x.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   value: false
@@ -19295,7 +19330,7 @@ module.exports = {
 
 
 
-},{}],190:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/methods/y.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   value: false
@@ -19303,7 +19338,7 @@ module.exports = {
 
 
 
-},{}],191:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee":[function(require,module,exports){
 var attach, print, sizes, text, wrap;
 
 attach = require("../core/methods/attach.coffee");
@@ -19359,7 +19394,7 @@ module.exports = function() {
 
 
 
-},{"../core/console/print.coffee":51,"../core/methods/attach.coffee":73,"./helpers/parseSize.coffee":170,"./helpers/parseText.coffee":171,"./helpers/wrap.coffee":173,"./methods/align.coffee":174,"./methods/config.coffee":175,"./methods/container.coffee":176,"./methods/dev.coffee":177,"./methods/draw.coffee":178,"./methods/format.coffee":179,"./methods/height.coffee":180,"./methods/padding.coffee":181,"./methods/resize.coffee":182,"./methods/rotate.coffee":183,"./methods/shape.coffee":184,"./methods/size.coffee":185,"./methods/text.coffee":186,"./methods/valign.coffee":187,"./methods/width.coffee":188,"./methods/x.coffee":189,"./methods/y.coffee":190}],192:[function(require,module,exports){
+},{"../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../core/methods/attach.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/attach.coffee","./helpers/parseSize.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/helpers/parseSize.coffee","./helpers/parseText.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/helpers/parseText.coffee","./helpers/wrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/helpers/wrap.coffee","./methods/align.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/align.coffee","./methods/config.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/config.coffee","./methods/container.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/container.coffee","./methods/dev.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/dev.coffee","./methods/draw.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/draw.coffee","./methods/format.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/format.coffee","./methods/height.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/height.coffee","./methods/padding.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/padding.coffee","./methods/resize.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/resize.coffee","./methods/rotate.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/rotate.coffee","./methods/shape.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/shape.coffee","./methods/size.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/size.coffee","./methods/text.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/text.coffee","./methods/valign.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/valign.coffee","./methods/width.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/width.coffee","./methods/x.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/x.coffee","./methods/y.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/methods/y.coffee"}],"/Users/Dave/Sites/d3plus/src/tooltip/create.js":[function(require,module,exports){
 var defaultLocale = require("../core/locale/languages/en_US.coffee"),
     events        = require("../client/pointer.coffee"),
     legible       = require("../color/legible.coffee"),
@@ -19926,7 +19961,7 @@ function close_descriptions() {
   d3.selectAll("div.d3plus_tooltip_data_help").style("background-color","#ccc");
 }
 
-},{"../client/pointer.coffee":38,"../client/prefix.coffee":39,"../client/rtl.coffee":40,"../color/legible.coffee":43,"../color/text.coffee":49,"../core/locale/languages/en_US.coffee":68,"../string/list.coffee":165,"./move.coffee":193,"./remove.coffee":194}],193:[function(require,module,exports){
+},{"../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../core/locale/languages/en_US.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/languages/en_US.coffee","../string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","./move.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/move.coffee","./remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee"}],"/Users/Dave/Sites/d3plus/src/tooltip/move.coffee":[function(require,module,exports){
 var arrowStyle;
 
 module.exports = function(x, y, id) {
@@ -20092,7 +20127,7 @@ arrowStyle = function(arrow) {
 
 
 
-},{}],194:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee":[function(require,module,exports){
 module.exports = function(id) {
   if (id) {
     d3.selectAll("div#d3plus_tooltip_curtain_" + id).remove();
@@ -20105,7 +20140,7 @@ module.exports = function(id) {
 
 
 
-},{}],195:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/util/buckets.coffee":[function(require,module,exports){
 module.exports = function(arr, n) {
   var buckets, step;
   buckets = [];
@@ -20115,7 +20150,7 @@ module.exports = function(arr, n) {
 
 
 
-},{}],196:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/util/child.coffee":[function(require,module,exports){
 var d3selection;
 
 d3selection = require("./d3selection.coffee");
@@ -20143,7 +20178,7 @@ module.exports = function(parent, child) {
 
 
 
-},{"./d3selection.coffee":199}],197:[function(require,module,exports){
+},{"./d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/util/closest.coffee":[function(require,module,exports){
 module.exports = function(arr, value) {
   var closest;
   closest = arr[0];
@@ -20157,7 +20192,7 @@ module.exports = function(arr, value) {
 
 
 
-},{}],198:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/util/copy.coffee":[function(require,module,exports){
 var copy, objectMerge, objectValidate;
 
 objectMerge = require("../object/merge.coffee");
@@ -20183,7 +20218,7 @@ module.exports = copy;
 
 
 
-},{"../object/merge.coffee":162,"../object/validate.coffee":163}],199:[function(require,module,exports){
+},{"../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee":[function(require,module,exports){
 var ie;
 
 ie = require("../client/ie.js");
@@ -20198,7 +20233,7 @@ module.exports = function(elem) {
 
 
 
-},{"../client/ie.js":37}],200:[function(require,module,exports){
+},{"../client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js"}],"/Users/Dave/Sites/d3plus/src/util/dataURL.coffee":[function(require,module,exports){
 module.exports = function(url, callback) {
   var img;
   img = new Image();
@@ -20218,13 +20253,13 @@ module.exports = function(url, callback) {
 
 
 
-},{}],201:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/util/uniques.coffee":[function(require,module,exports){
 var objectValidate, uniques;
 
 objectValidate = require("../object/validate.coffee");
 
 uniques = function(data, value, fetch, vars, depth) {
-  var check, d, i, j, k, len, len1, len2, len3, lookups, m, v, val, vals;
+  var check, d, lookups, v, val, vals, _i, _j, _k, _l, _len, _len1, _len2, _len3;
   if (data === void 0) {
     return [];
   }
@@ -20260,23 +20295,23 @@ uniques = function(data, value, fetch, vars, depth) {
     }
   };
   if (typeof fetch === "function" && vars) {
-    for (i = 0, len = data.length; i < len; i++) {
-      d = data[i];
+    for (_i = 0, _len = data.length; _i < _len; _i++) {
+      d = data[_i];
       val = uniques(fetch(vars, d, value, depth));
-      for (j = 0, len1 = val.length; j < len1; j++) {
-        v = val[j];
+      for (_j = 0, _len1 = val.length; _j < _len1; _j++) {
+        v = val[_j];
         check(v);
       }
     }
   } else if (typeof value === "function") {
-    for (k = 0, len2 = data.length; k < len2; k++) {
-      d = data[k];
+    for (_k = 0, _len2 = data.length; _k < _len2; _k++) {
+      d = data[_k];
       val = value(d);
       check(val);
     }
   } else {
-    for (m = 0, len3 = data.length; m < len3; m++) {
-      d = data[m];
+    for (_l = 0, _len3 = data.length; _l < _len3; _l++) {
+      d = data[_l];
       if (objectValidate(d)) {
         val = d[value];
         check(val);
@@ -20292,9 +20327,9 @@ module.exports = uniques;
 
 
 
-},{"../object/validate.coffee":163}],202:[function(require,module,exports){
+},{"../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/container.coffee":[function(require,module,exports){
 module.exports = function(vars) {
-  var checkParent, i, len, ref, s;
+  var checkParent, s, _i, _len, _ref;
   vars.container.value.style("position", function() {
     var current, remain;
     current = d3.select(this).style("position");
@@ -20305,9 +20340,9 @@ module.exports = function(vars) {
       return "relative";
     }
   }).html("");
-  ref = ["width", "height"];
-  for (i = 0, len = ref.length; i < len; i++) {
-    s = ref[i];
+  _ref = ["width", "height"];
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    s = _ref[_i];
     if (!vars[s].value) {
       checkParent = function(element) {
         var elem, val;
@@ -20348,7 +20383,7 @@ module.exports = function(vars) {
 
 
 
-},{}],203:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/drawSteps.js":[function(require,module,exports){
 var dataFormat    = require("../../core/data/format.js"),
     dataColor     = require("../../core/data/color.js"),
     dataKeys      = require("../../core/data/keys.coffee"),
@@ -20721,7 +20756,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../core/console/print.coffee":51,"../../core/data/color.js":53,"../../core/data/format.js":55,"../../core/data/keys.coffee":57,"../../core/data/load.coffee":58,"../../core/fetch/data.js":63,"../../core/parse/edges.js":88,"../../core/parse/nodes.js":90,"../../object/validate.coffee":163,"../../string/format.js":164,"../../tooltip/remove.coffee":194,"./errorCheck.js":204,"./finish.js":205,"./focus/tooltip.coffee":206,"./focus/viz.js":207,"./shapes/draw.js":216,"./svg/enter.js":226,"./svg/update.js":227,"./types/run.coffee":230,"./ui/drawer.js":231,"./ui/history.coffee":232,"./ui/legend.js":233,"./ui/timeline.coffee":235,"./ui/titles.js":236}],204:[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/data/color.js":"/Users/Dave/Sites/d3plus/src/core/data/color.js","../../core/data/format.js":"/Users/Dave/Sites/d3plus/src/core/data/format.js","../../core/data/keys.coffee":"/Users/Dave/Sites/d3plus/src/core/data/keys.coffee","../../core/data/load.coffee":"/Users/Dave/Sites/d3plus/src/core/data/load.coffee","../../core/fetch/data.js":"/Users/Dave/Sites/d3plus/src/core/fetch/data.js","../../core/parse/edges.js":"/Users/Dave/Sites/d3plus/src/core/parse/edges.js","../../core/parse/nodes.js":"/Users/Dave/Sites/d3plus/src/core/parse/nodes.js","../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","./errorCheck.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/errorCheck.js","./finish.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/finish.js","./focus/tooltip.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/tooltip.coffee","./focus/viz.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/viz.js","./shapes/draw.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/draw.js","./svg/enter.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/enter.js","./svg/update.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/update.js","./types/run.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/types/run.coffee","./ui/drawer.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/drawer.js","./ui/history.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/history.coffee","./ui/legend.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/legend.js","./ui/timeline.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/timeline.coffee","./ui/titles.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/titles.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/errorCheck.js":[function(require,module,exports){
 var fetchText    = require("../../core/fetch/text.js"),
     print        = require("../../core/console/print.coffee"),
     rejected     = require("../../core/methods/rejected.coffee"),
@@ -20838,7 +20873,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../core/console/print.coffee":51,"../../core/fetch/text.js":65,"../../core/methods/rejected.coffee":84,"../../string/format.js":164,"../../string/list.coffee":165}],205:[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../core/methods/rejected.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/rejected.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/finish.js":[function(require,module,exports){
 var edges = require("./shapes/edges.js"),
     flash       = require("./ui/message.js"),
     methodReset = require("../../core/methods/reset.coffee"),
@@ -21029,7 +21064,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../core/console/print.coffee":51,"../../core/methods/reset.coffee":86,"../../string/title.coffee":167,"./shapes/edges.js":217,"./shapes/labels.js":219,"./ui/message.js":234,"./zoom/bounds.coffee":237,"./zoom/labels.coffee":239,"./zoom/mouse.coffee":240}],206:[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/methods/reset.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/reset.coffee","../../string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee","./shapes/edges.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/edges.js","./shapes/labels.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/labels.js","./ui/message.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/message.js","./zoom/bounds.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/bounds.coffee","./zoom/labels.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/labels.coffee","./zoom/mouse.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/mouse.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/tooltip.coffee":[function(require,module,exports){
 var createTooltip, fetchValue, print, removeTooltip;
 
 createTooltip = require("../tooltip/create.js");
@@ -21083,7 +21118,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../core/console/print.coffee":51,"../../../core/fetch/value.coffee":66,"../../../tooltip/remove.coffee":194,"../tooltip/create.js":228}],207:[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../tooltip/create.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/create.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/focus/viz.js":[function(require,module,exports){
 var events = require("../../../client/pointer.coffee"),
     fetchValue   = require("../../../core/fetch/value.coffee"),
     print        = require("../../../core/console/print.coffee"),
@@ -21242,7 +21277,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../client/pointer.coffee":38,"../../../core/console/print.coffee":51,"../../../core/fetch/value.coffee":66,"../../../util/uniques.coffee":201}],208:[function(require,module,exports){
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/arc.coffee":[function(require,module,exports){
 var angles, largestRect, path2poly, shapeStyle;
 
 shapeStyle = require("./style.coffee");
@@ -21339,7 +21374,7 @@ module.exports = function(vars, selection, enter, exit) {
 
 
 
-},{"../../../geom/largestRect.coffee":152,"../../../geom/path2poly.coffee":154,"./style.coffee":222}],209:[function(require,module,exports){
+},{"../../../geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","../../../geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/area.js":[function(require,module,exports){
 var fetchText = require("../../../core/fetch/text.js"),
     fontSizes   = require("../../../font/sizes.coffee"),
     largestRect = require("../../../geom/largestRect.coffee"),
@@ -21455,7 +21490,7 @@ module.exports = function(vars, selection, enter, exit) {
 
 }
 
-},{"../../../core/fetch/text.js":65,"../../../font/sizes.coffee":94,"../../../geom/largestRect.coffee":152,"./style.coffee":222}],210:[function(require,module,exports){
+},{"../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/check.js":[function(require,module,exports){
 var fetchText = require("../../../core/fetch/text.js"),
     largestRect = require("../../../geom/largestRect.coffee"),
     shapeStyle  = require("./style.coffee")
@@ -21512,7 +21547,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"../../../core/fetch/text.js":65,"../../../geom/largestRect.coffee":152,"./style.coffee":222}],211:[function(require,module,exports){
+},{"../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/color.coffee":[function(require,module,exports){
 var fetchColor, fetchValue, lighter;
 
 fetchValue = require("../../../core/fetch/value.coffee");
@@ -21554,7 +21589,7 @@ module.exports = function(d, vars, stroke) {
 
 
 
-},{"../../../color/lighter.coffee":44,"../../../core/fetch/color.coffee":62,"../../../core/fetch/value.coffee":66}],212:[function(require,module,exports){
+},{"../../../color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/coordinates.coffee":[function(require,module,exports){
 var copy, distance, fetchText, fontSizes, labels, largestRect, path2poly, shapeStyle;
 
 copy = require("../../../util/copy.coffee");
@@ -21597,7 +21632,7 @@ module.exports = function(vars, selection, enter, exit) {
     vars.zoom.reset = true;
     vars.zoom.coords = {};
     return selection.each(function(d) {
-      var areaM, areas, b, c, center, coords, dist_cutoff, dist_values, distances, i, j, largest, len, names, path, ratio, rect, reduced, ref, size, style, test;
+      var areaM, areas, b, c, center, coords, dist_cutoff, dist_values, distances, i, largest, names, path, ratio, rect, reduced, size, style, test, _i, _len, _ref;
       if (d.geometry.coordinates.length > 1) {
         distances = [];
         areas = [];
@@ -21621,9 +21656,9 @@ module.exports = function(vars, selection, enter, exit) {
         });
         center = vars.path.centroid(largest);
         reduced = copy(d);
-        ref = d.geometry.coordinates;
-        for (i = j = 0, len = ref.length; j < len; i = ++j) {
-          c = ref[i];
+        _ref = d.geometry.coordinates;
+        for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+          c = _ref[i];
           test.geometry.coordinates = [c];
           distances.push(distance(vars.path.centroid(test), center));
         }
@@ -21711,7 +21746,7 @@ module.exports = function(vars, selection, enter, exit) {
 
 
 
-},{"../../../core/fetch/text.js":65,"../../../font/sizes.coffee":94,"../../../geom/largestRect.coffee":152,"../../../geom/path2poly.coffee":154,"../../../network/distance.coffee":156,"../../../util/copy.coffee":198,"./style.coffee":222}],213:[function(require,module,exports){
+},{"../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../geom/largestRect.coffee":"/Users/Dave/Sites/d3plus/src/geom/largestRect.coffee","../../../geom/path2poly.coffee":"/Users/Dave/Sites/d3plus/src/geom/path2poly.coffee","../../../network/distance.coffee":"/Users/Dave/Sites/d3plus/src/network/distance.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/cross.js":[function(require,module,exports){
 var shapeStyle  = require("./style.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Draws "square" and "circle" shapes using svg:rect
@@ -21764,7 +21799,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"./style.coffee":222}],214:[function(require,module,exports){
+},{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/diamond.js":[function(require,module,exports){
 var shapeStyle  = require("./style.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Draws "square" and "circle" shapes using svg:rect
@@ -21817,7 +21852,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"./style.coffee":222}],215:[function(require,module,exports){
+},{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/donut.js":[function(require,module,exports){
 var shapeStyle = require("./style.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Draws "donut" shapes using svg:path with arcs
@@ -21915,7 +21950,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"./style.coffee":222}],216:[function(require,module,exports){
+},{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/draw.js":[function(require,module,exports){
 var child         = require("../../../util/child.coffee"),
     closest       = require("../../../util/closest.coffee"),
     createTooltip = require("../tooltip/create.js"),
@@ -22619,7 +22654,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../client/pointer.coffee":38,"../../../client/touch.coffee":42,"../../../color/legible.coffee":43,"../../../core/console/print.coffee":51,"../../../core/fetch/color.coffee":62,"../../../core/fetch/text.js":65,"../../../core/fetch/value.coffee":66,"../../../object/validate.coffee":163,"../../../string/strip.js":166,"../../../tooltip/remove.coffee":194,"../../../util/child.coffee":196,"../../../util/closest.coffee":197,"../../../util/uniques.coffee":201,"../tooltip/create.js":228,"../zoom/direction.coffee":238,"../zoom/propagation.coffee":241,"./arc.coffee":208,"./area.js":209,"./check.js":210,"./coordinates.coffee":212,"./cross.js":213,"./diamond.js":214,"./donut.js":215,"./fill.js":218,"./line.js":220,"./rect.coffee":221,"./triangle_down.js":223,"./triangle_up.js":224,"./whisker.coffee":225}],217:[function(require,module,exports){
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","../../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../../../util/child.coffee":"/Users/Dave/Sites/d3plus/src/util/child.coffee","../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../tooltip/create.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/create.js","../zoom/direction.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/direction.coffee","../zoom/propagation.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/propagation.coffee","./arc.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/arc.coffee","./area.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/area.js","./check.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/check.js","./coordinates.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/coordinates.coffee","./cross.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/cross.js","./diamond.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/diamond.js","./donut.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/donut.js","./fill.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/fill.js","./line.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/line.js","./rect.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/rect.coffee","./triangle_down.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/triangle_down.js","./triangle_up.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/triangle_up.js","./whisker.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/whisker.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/edges.js":[function(require,module,exports){
 var buckets = require("../../../util/buckets.coffee"),
     offset  = require("../../../geom/offset.coffee");
 
@@ -23188,7 +23223,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../geom/offset.coffee":153,"../../../util/buckets.coffee":195}],218:[function(require,module,exports){
+},{"../../../geom/offset.coffee":"/Users/Dave/Sites/d3plus/src/geom/offset.coffee","../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/fill.js":[function(require,module,exports){
 var copy       = require("../../../util/copy.coffee"),
     fetchColor = require("../../../core/fetch/color.coffee"),
     fetchValue = require("../../../core/fetch/value.coffee"),
@@ -23468,7 +23503,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 };
 
-},{"../../../core/fetch/color.coffee":62,"../../../core/fetch/value.coffee":66,"../../../util/copy.coffee":198,"./style.coffee":222}],219:[function(require,module,exports){
+},{"../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/labels.js":[function(require,module,exports){
 var copy       = require("../../../util/copy.coffee"),
     fetchText  = require("../../../core/fetch/text.js"),
     fetchValue = require("../../../core/fetch/value.coffee"),
@@ -23906,7 +23941,7 @@ module.exports = function( vars , group ) {
   }
 }
 
-},{"../../../client/rtl.coffee":40,"../../../color/mix.coffee":45,"../../../color/text.coffee":49,"../../../core/console/print.coffee":51,"../../../core/fetch/text.js":65,"../../../core/fetch/value.coffee":66,"../../../string/list.coffee":165,"../../../textwrap/textwrap.coffee":191,"../../../util/copy.coffee":198,"./color.coffee":211}],220:[function(require,module,exports){
+},{"../../../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","../../../color/mix.coffee":"/Users/Dave/Sites/d3plus/src/color/mix.coffee","../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../string/list.coffee":"/Users/Dave/Sites/d3plus/src/string/list.coffee","../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./color.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/color.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/line.js":[function(require,module,exports){
 var copy       = require("../../../util/copy.coffee"),
     closest    = require("../../../util/closest.coffee"),
     events     = require("../../../client/pointer.coffee"),
@@ -24207,7 +24242,7 @@ function mouseStyle(vars, elem, stroke, mod) {
 
 }
 
-},{"../../../client/pointer.coffee":38,"../../../core/fetch/value.coffee":66,"../../../util/closest.coffee":197,"../../../util/copy.coffee":198,"./style.coffee":222}],221:[function(require,module,exports){
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/rect.coffee":[function(require,module,exports){
 var shapeStyle;
 
 shapeStyle = require("./style.coffee");
@@ -24339,7 +24374,7 @@ module.exports = function(vars, selection, enter, exit) {
 
 
 
-},{"./style.coffee":222}],222:[function(require,module,exports){
+},{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee":[function(require,module,exports){
 var color;
 
 color = require("./color.coffee");
@@ -24368,7 +24403,7 @@ module.exports = function(nodes, vars) {
 
 
 
-},{"./color.coffee":211}],223:[function(require,module,exports){
+},{"./color.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/color.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/triangle_down.js":[function(require,module,exports){
 var shapeStyle  = require("./style.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Draws "square" and "circle" shapes using svg:rect
@@ -24421,7 +24456,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"./style.coffee":222}],224:[function(require,module,exports){
+},{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/triangle_up.js":[function(require,module,exports){
 var shapeStyle  = require("./style.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Draws "square" and "circle" shapes using svg:rect
@@ -24474,7 +24509,7 @@ module.exports = function(vars,selection,enter,exit) {
 
 }
 
-},{"./style.coffee":222}],225:[function(require,module,exports){
+},{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/whisker.coffee":[function(require,module,exports){
 module.exports = function(vars, selection, enter, exit) {
   var d, data, init, marker, orient, pos, position, size, style;
   data = function(d) {
@@ -24488,6 +24523,8 @@ module.exports = function(vars, selection, enter, exit) {
         resize: false,
         angle: ["left", "right"].indexOf(d.d3plus.position) >= 0 ? 90 : 0
       };
+    } else if (d.d3plus.label) {
+      d.d3plus_label = d.d3plus.label;
     } else {
       delete d.d3plus_label;
     }
@@ -24558,7 +24595,7 @@ module.exports = function(vars, selection, enter, exit) {
 
 
 
-},{}],226:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/enter.js":[function(require,module,exports){
 var events = require("../../../client/pointer.coffee"),
     prefix     = require("../../../client/prefix.coffee"),
     print      = require("../../../core/console/print.coffee"),
@@ -24735,7 +24772,7 @@ module.exports = function(vars) {
 
 };
 
-},{"../../../client/pointer.coffee":38,"../../../client/prefix.coffee":39,"../../../client/touch.coffee":42,"../../../core/console/print.coffee":51,"../zoom/propagation.coffee":241}],227:[function(require,module,exports){
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../zoom/propagation.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/propagation.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/svg/update.js":[function(require,module,exports){
 var print = require("../../../core/console/print.coffee")
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Updating Elements
@@ -24803,7 +24840,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../core/console/print.coffee":51}],228:[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/create.js":[function(require,module,exports){
 var arraySort     = require("../../../array/sort.coffee"),
     createTooltip = require("../../../tooltip/create.js"),
     dataNest      = require("../../../core/data/nest.js"),
@@ -25132,7 +25169,7 @@ module.exports = function(params) {
 
 }
 
-},{"../../../array/sort.coffee":34,"../../../core/data/nest.js":59,"../../../core/fetch/color.coffee":62,"../../../core/fetch/text.js":65,"../../../core/fetch/value.coffee":66,"../../../object/validate.coffee":163,"../../../tooltip/create.js":192,"../../../tooltip/remove.coffee":194,"../../../util/uniques.coffee":201,"../zoom/direction.coffee":238,"./data.js":229}],229:[function(require,module,exports){
+},{"../../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../../core/data/nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../tooltip/create.js":"/Users/Dave/Sites/d3plus/src/tooltip/create.js","../../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../zoom/direction.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/direction.coffee","./data.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/data.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/data.js":[function(require,module,exports){
 var copy = require("../../../util/copy.coffee"),
     fetchValue   = require("../../../core/fetch/value.coffee"),
     fetchColor   = require("../../../core/fetch/color.coffee"),
@@ -25389,13 +25426,13 @@ module.exports = function(vars, id, length, extras, children, depth) {
 
 }
 
-},{"../../../client/prefix.coffee":39,"../../../color/legible.coffee":43,"../../../core/fetch/color.coffee":62,"../../../core/fetch/text.js":65,"../../../core/fetch/value.coffee":66,"../../../object/merge.coffee":162,"../../../string/format.js":164,"../../../util/copy.coffee":198}],230:[function(require,module,exports){
+},{"../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/types/run.coffee":[function(require,module,exports){
 var print;
 
 print = require("../../../core/console/print.coffee");
 
 module.exports = function(vars) {
-  var app, d, dataRequired, drawable, i, len, ref, requirements, returned, visualization;
+  var app, d, dataRequired, drawable, requirements, returned, visualization, _i, _len, _ref;
   vars.group = vars.g.apps[vars.type.value];
   vars.mouse = {};
   visualization = vars.types[vars.type.value];
@@ -25407,9 +25444,9 @@ module.exports = function(vars) {
     if (vars.dev.value) {
       print.time("running " + app);
     }
-    ref = vars.data.viz;
-    for (i = 0, len = ref.length; i < len; i++) {
-      d = ref[i];
+    _ref = vars.data.viz;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      d = _ref[_i];
       if (d.d3plus) {
         delete d.d3plus.shape;
         delete d.d3plus.label;
@@ -25441,7 +25478,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../core/console/print.coffee":51}],231:[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/drawer.js":[function(require,module,exports){
 var copy        = require("../../../util/copy.coffee"),
     form        = require("../../../form/form.js"),
     print       = require("../../../core/console/print.coffee"),
@@ -25576,7 +25613,7 @@ module.exports = function( vars ) {
 
 };
 
-},{"../../../core/console/print.coffee":51,"../../../form/form.js":96,"../../../object/validate.coffee":163,"../../../util/copy.coffee":198}],232:[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../form/form.js":"/Users/Dave/Sites/d3plus/src/form/form.js","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/history.coffee":[function(require,module,exports){
 var events, lighter, print, stylesheet;
 
 events = require("../../../client/pointer.coffee");
@@ -25658,7 +25695,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../client/css.coffee":36,"../../../client/pointer.coffee":38,"../../../color/lighter.coffee":44,"../../../core/console/print.coffee":51}],233:[function(require,module,exports){
+},{"../../../client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee","../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../color/lighter.coffee":"/Users/Dave/Sites/d3plus/src/color/lighter.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/legend.js":[function(require,module,exports){
 var arraySort = require("../../../array/sort.coffee"),
     buckets       = require("../../../util/buckets.coffee"),
     copy          = require("../../../util/copy.coffee"),
@@ -26252,7 +26289,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../array/sort.coffee":34,"../../../client/pointer.coffee":38,"../../../client/touch.coffee":42,"../../../color/text.coffee":49,"../../../core/console/print.coffee":51,"../../../core/data/nest.js":59,"../../../core/fetch/color.coffee":62,"../../../core/fetch/text.js":65,"../../../core/fetch/value.coffee":66,"../../../object/validate.coffee":163,"../../../string/strip.js":166,"../../../textwrap/textwrap.coffee":191,"../../../tooltip/remove.coffee":194,"../../../util/buckets.coffee":195,"../../../util/copy.coffee":198,"../../../util/dataURL.coffee":200,"../../../util/uniques.coffee":201,"../tooltip/create.js":228}],234:[function(require,module,exports){
+},{"../../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/touch.coffee":"/Users/Dave/Sites/d3plus/src/client/touch.coffee","../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/data/nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","../../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../../../util/dataURL.coffee":"/Users/Dave/Sites/d3plus/src/util/dataURL.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../tooltip/create.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/create.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/message.js":[function(require,module,exports){
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Creates Centered Server Message
 //------------------------------------------------------------------------------
@@ -26365,7 +26402,7 @@ module.exports = function(vars,message) {
 
 }
 
-},{}],235:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/timeline.coffee":[function(require,module,exports){
 var closest, css, events, fontSizes, mix, playInterval, prefix, print, textColor, timeDetect;
 
 closest = require("../../../util/closest.coffee");
@@ -26389,7 +26426,7 @@ timeDetect = require("../../../core/data/time.coffee");
 playInterval = false;
 
 module.exports = function(vars) {
-  var availableWidth, background, brush, brushExtent, brush_group, brushed, brushend, d, end, handles, i, init, j, labelWidth, labels, len, max_index, min, min_index, playButton, playIcon, playIconChar, playIconStyle, playStyle, playUpdate, playbackWidth, setYears, start, start_x, step, stopPlayback, text, textFill, textStyle, tickColor, ticks, timeFormat, timeReturn, timelineBox, timelineHeight, timelineOffset, timelineWidth, visible, x, yearHeight, yearMS, year_ticks, years;
+  var availableWidth, background, brush, brushExtent, brush_group, brushed, brushend, d, end, handles, i, init, labelWidth, labels, max_index, min, min_index, playButton, playIcon, playIconChar, playIconStyle, playStyle, playUpdate, playbackWidth, setYears, start, start_x, step, stopPlayback, text, textFill, textStyle, tickColor, ticks, timeFormat, timeReturn, timelineBox, timelineHeight, timelineOffset, timelineWidth, visible, x, yearHeight, yearMS, year_ticks, years, _i, _len;
   if (vars.timeline.value && (!vars.error.internal || !vars.data.missing) && !vars.small && vars.data.time && vars.data.time.values.length > 1) {
     if (vars.dev.value) {
       print.time("drawing timeline");
@@ -26411,7 +26448,7 @@ module.exports = function(vars) {
     timeFormat = timeReturn.format;
     if (vars.time.solo.value.length) {
       init = d3.extent(vars.time.solo.value);
-      for (i = j = 0, len = init.length; j < len; i = ++j) {
+      for (i = _i = 0, _len = init.length; _i < _len; i = ++_i) {
         d = init[i];
         if (d.constructor !== Date) {
           d = new Date(d.toString());
@@ -26732,7 +26769,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../client/css.coffee":36,"../../../client/pointer.coffee":38,"../../../client/prefix.coffee":39,"../../../color/mix.coffee":45,"../../../color/text.coffee":49,"../../../core/console/print.coffee":51,"../../../core/data/time.coffee":61,"../../../font/sizes.coffee":94,"../../../util/closest.coffee":197}],236:[function(require,module,exports){
+},{"../../../client/css.coffee":"/Users/Dave/Sites/d3plus/src/client/css.coffee","../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../color/mix.coffee":"/Users/Dave/Sites/d3plus/src/color/mix.coffee","../../../color/text.coffee":"/Users/Dave/Sites/d3plus/src/color/text.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/data/time.coffee":"/Users/Dave/Sites/d3plus/src/core/data/time.coffee","../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/titles.js":[function(require,module,exports){
 var events = require("../../../client/pointer.coffee"),
     fetchValue = require("../../../core/fetch/value.coffee"),
     print      = require("../../../core/console/print.coffee"),
@@ -27040,7 +27077,7 @@ module.exports = function(vars) {
 
 }
 
-},{"../../../client/pointer.coffee":38,"../../../client/rtl.coffee":40,"../../../core/console/print.coffee":51,"../../../core/fetch/value.coffee":66,"../../../textwrap/textwrap.coffee":191}],237:[function(require,module,exports){
+},{"../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../client/rtl.coffee":"/Users/Dave/Sites/d3plus/src/client/rtl.coffee","../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/bounds.coffee":[function(require,module,exports){
 var labels, transform;
 
 labels = require("./labels.coffee");
@@ -27092,7 +27129,7 @@ module.exports = function(vars, b, timing) {
 
 
 
-},{"./labels.coffee":239,"./transform.coffee":242}],238:[function(require,module,exports){
+},{"./labels.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/labels.coffee","./transform.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/direction.coffee":[function(require,module,exports){
 module.exports = function(data, vars) {
   var depth, max_depth, nextDepth;
   max_depth = vars.id.nesting.length - 1;
@@ -27111,7 +27148,7 @@ module.exports = function(data, vars) {
 
 
 
-},{}],239:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/labels.coffee":[function(require,module,exports){
 var print;
 
 print = require("../../../core/console/print.coffee");
@@ -27149,7 +27186,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../core/console/print.coffee":51}],240:[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/mouse.coffee":[function(require,module,exports){
 var labels, transform;
 
 labels = require("./labels.coffee");
@@ -27199,7 +27236,7 @@ module.exports = function(vars) {
 
 
 
-},{"./labels.coffee":239,"./transform.coffee":242}],241:[function(require,module,exports){
+},{"./labels.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/labels.coffee","./transform.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/propagation.coffee":[function(require,module,exports){
 module.exports = function(vars, event) {
   var enabled, zoom, zoomable, zoomed;
   zoom = vars.zoom;
@@ -27216,7 +27253,7 @@ module.exports = function(vars, event) {
 
 
 
-},{}],242:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/transform.coffee":[function(require,module,exports){
 module.exports = function(vars, timing) {
   var translate;
   if (typeof timing !== "number") {
@@ -27233,7 +27270,7 @@ module.exports = function(vars, timing) {
 
 
 
-},{}],243:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/active.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -27253,7 +27290,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74}],244:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/aggs.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Object],
   deprecated: "nesting_aggs",
@@ -27263,7 +27300,7 @@ module.exports = {
 
 
 
-},{}],245:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/attrs.coffee":[function(require,module,exports){
 var process;
 
 process = require("../../core/methods/process/data.coffee");
@@ -27285,7 +27322,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/process/data.coffee":80}],246:[function(require,module,exports){
+},{"../../core/methods/process/data.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/axes.coffee":[function(require,module,exports){
 var rendering;
 
 rendering = require("../../core/methods/rendering.coffee");
@@ -27308,7 +27345,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/rendering.coffee":85}],247:[function(require,module,exports){
+},{"../../core/methods/rendering.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/rendering.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/background.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [String],
   value: "#ffffff"
@@ -27316,7 +27353,7 @@ module.exports = {
 
 
 
-},{}],248:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/color.coffee":[function(require,module,exports){
 var filter, scale;
 
 filter = require("../../core/methods/filter.coffee");
@@ -27354,7 +27391,7 @@ module.exports = {
 
 
 
-},{"../../color/scale.coffee":47,"../../core/methods/filter.coffee":74}],249:[function(require,module,exports){
+},{"../../color/scale.coffee":"/Users/Dave/Sites/d3plus/src/color/scale.coffee","../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/cols.js":[function(require,module,exports){
 module.exports = {
   "accepted": [Array, Function, String],
   "index": {
@@ -27368,7 +27405,7 @@ module.exports = {
   "value": false
 }
 
-},{}],250:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/config.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Object],
   objectAccess: false,
@@ -27387,7 +27424,7 @@ module.exports = {
 
 
 
-},{}],251:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/container.coffee":[function(require,module,exports){
 var d3selection;
 
 d3selection = require("../../util/d3selection.coffee");
@@ -27411,7 +27448,7 @@ module.exports = {
 
 
 
-},{"../../util/d3selection.coffee":199}],252:[function(require,module,exports){
+},{"../../util/d3selection.coffee":"/Users/Dave/Sites/d3plus/src/util/d3selection.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/coords.coffee":[function(require,module,exports){
 var filter, process;
 
 filter = require("../../core/methods/filter.coffee");
@@ -27446,7 +27483,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74,"../../core/methods/process/data.coffee":80}],253:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee","../../core/methods/process/data.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/csv.coffee":[function(require,module,exports){
 var fetchValue, ie, stringStrip;
 
 fetchValue = require("../../core/fetch/value.coffee");
@@ -27460,7 +27497,7 @@ module.exports = {
   chainable: false,
   data: [],
   process: function(value, vars) {
-    var blob, c, col, columns, csv_data, csv_to_return, dataString, encodedUri, i, j, k, l, len, len1, len2, len3, len4, len5, link, m, max_filename_len, n, node, o, ref, ref1, row, title, titles, val;
+    var blob, c, col, columns, csv_data, csv_to_return, dataString, encodedUri, i, link, max_filename_len, node, row, title, titles, val, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref, _ref1;
     if (vars.returned === void 0) {
       return [];
     }
@@ -27495,37 +27532,37 @@ module.exports = {
         columns.push(vars.text.value);
       }
     }
-    for (j = 0, len = columns.length; j < len; j++) {
-      c = columns[j];
+    for (_i = 0, _len = columns.length; _i < _len; _i++) {
+      c = columns[_i];
       titles.push(vars.format.value(c));
     }
     csv_to_return.push(titles);
-    ref = vars.returned.nodes;
-    for (k = 0, len1 = ref.length; k < len1; k++) {
-      node = ref[k];
+    _ref = vars.returned.nodes;
+    for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+      node = _ref[_j];
       console.log(node.values);
       if ((node.values != null) && node.values instanceof Array) {
-        ref1 = node.values;
-        for (l = 0, len2 = ref1.length; l < len2; l++) {
-          val = ref1[l];
+        _ref1 = node.values;
+        for (_k = 0, _len2 = _ref1.length; _k < _len2; _k++) {
+          val = _ref1[_k];
           row = [];
-          for (m = 0, len3 = columns.length; m < len3; m++) {
-            col = columns[m];
+          for (_l = 0, _len3 = columns.length; _l < _len3; _l++) {
+            col = columns[_l];
             row.push(fetchValue(vars, val, col));
           }
           csv_to_return.push(row);
         }
       } else {
         row = [];
-        for (n = 0, len4 = columns.length; n < len4; n++) {
-          col = columns[n];
+        for (_m = 0, _len4 = columns.length; _m < _len4; _m++) {
+          col = columns[_m];
           row.push(fetchValue(vars, node, col));
         }
         csv_to_return.push(row);
       }
     }
     csv_data = "data:text/csv;charset=utf-8,";
-    for (i = o = 0, len5 = csv_to_return.length; o < len5; i = ++o) {
+    for (i = _n = 0, _len5 = csv_to_return.length; _n < _len5; i = ++_n) {
       c = csv_to_return[i];
       dataString = c.join(",");
       csv_data += (i < csv_to_return.length ? dataString + "\n" : dataString);
@@ -27550,7 +27587,7 @@ module.exports = {
 
 
 
-},{"../../client/ie.js":37,"../../core/fetch/value.coffee":66,"../../string/strip.js":166}],254:[function(require,module,exports){
+},{"../../client/ie.js":"/Users/Dave/Sites/d3plus/src/client/ie.js","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js"}],"/Users/Dave/Sites/d3plus/src/viz/methods/data.coffee":[function(require,module,exports){
 var process;
 
 process = require("../../core/methods/process/data.coffee");
@@ -27595,7 +27632,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/process/data.coffee":80}],255:[function(require,module,exports){
+},{"../../core/methods/process/data.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/depth.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Function, Number],
   value: 0
@@ -27603,7 +27640,7 @@ module.exports = {
 
 
 
-},{}],256:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/descs.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Function, Object],
   value: false
@@ -27611,7 +27648,7 @@ module.exports = {
 
 
 
-},{}],257:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/dev.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   value: false
@@ -27619,7 +27656,7 @@ module.exports = {
 
 
 
-},{}],258:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/draw.js":[function(require,module,exports){
 var print        = require("../../core/console/print.coffee"),
     stringFormat = require("../../string/format.js")
 
@@ -27680,7 +27717,7 @@ module.exports = {
   "value"    : undefined
 }
 
-},{"../../core/console/print.coffee":51,"../../string/format.js":164}],259:[function(require,module,exports){
+},{"../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js"}],"/Users/Dave/Sites/d3plus/src/viz/methods/edges.js":[function(require,module,exports){
 var process = require("../../core/methods/process/data.coffee");
 
 module.exports = {
@@ -27781,7 +27818,7 @@ module.exports = {
   "value":  false
 };
 
-},{"../../core/methods/process/data.coffee":80}],260:[function(require,module,exports){
+},{"../../core/methods/process/data.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/error.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean, String],
   value: false
@@ -27789,7 +27826,7 @@ module.exports = {
 
 
 
-},{}],261:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/focus.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Array, Function, Number, String],
   deprecates: "highlight",
@@ -27811,7 +27848,7 @@ module.exports = {
 
 
 
-},{}],262:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/font.coffee":[function(require,module,exports){
 var align, decoration, family, transform;
 
 align = require("../../core/methods/font/align.coffee");
@@ -27845,7 +27882,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/align.coffee":75,"../../core/methods/font/decoration.coffee":76,"../../core/methods/font/family.coffee":77,"../../core/methods/font/transform.coffee":79}],263:[function(require,module,exports){
+},{"../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/footer.coffee":[function(require,module,exports){
 var decoration, family, transform;
 
 family = require("../../core/methods/font/family.coffee");
@@ -27873,7 +27910,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/decoration.coffee":76,"../../core/methods/font/family.coffee":77,"../../core/methods/font/transform.coffee":79}],264:[function(require,module,exports){
+},{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/format.coffee":[function(require,module,exports){
 var formatNumber, locale, mergeObject, titleCase;
 
 formatNumber = require("../../number/format.coffee");
@@ -27951,7 +27988,7 @@ module.exports = {
 
 
 
-},{"../../core/locale/locale.coffee":72,"../../number/format.coffee":161,"../../object/merge.coffee":162,"../../string/title.coffee":167}],265:[function(require,module,exports){
+},{"../../core/locale/locale.coffee":"/Users/Dave/Sites/d3plus/src/core/locale/locale.coffee","../../number/format.coffee":"/Users/Dave/Sites/d3plus/src/number/format.coffee","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../string/title.coffee":"/Users/Dave/Sites/d3plus/src/string/title.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/height.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   max: 600,
@@ -27962,7 +27999,7 @@ module.exports = {
 
 
 
-},{}],266:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/helpers/axis.coffee":[function(require,module,exports){
 var align, decoration, family, filter, position, rendering, transform;
 
 align = require("../../../core/methods/font/align.coffee");
@@ -28109,10 +28146,10 @@ module.exports = function(axis) {
       accepted: ["linear", "log", "discrete", "share"],
       deprecates: ["layout", "unique_axis", axis + "axis_scale"],
       process: function(value, vars) {
-        var i, len, ref, scale;
-        ref = ["log", "discrete", "share"];
-        for (i = 0, len = ref.length; i < len; i++) {
-          scale = ref[i];
+        var scale, _i, _len, _ref;
+        _ref = ["log", "discrete", "share"];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          scale = _ref[_i];
           if (scale === value) {
             vars.axes[scale] = axis;
           } else {
@@ -28167,7 +28204,7 @@ module.exports = function(axis) {
 
 
 
-},{"../../../core/methods/filter.coffee":74,"../../../core/methods/font/align.coffee":75,"../../../core/methods/font/decoration.coffee":76,"../../../core/methods/font/family.coffee":77,"../../../core/methods/font/position.coffee":78,"../../../core/methods/font/transform.coffee":79,"../../../core/methods/rendering.coffee":85}],267:[function(require,module,exports){
+},{"../../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee","../../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../../core/methods/font/position.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/position.coffee","../../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee","../../../core/methods/rendering.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/rendering.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/history.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   back: function() {
@@ -28177,12 +28214,12 @@ module.exports = {
   },
   chain: [],
   reset: function() {
-    var results;
-    results = [];
+    var _results;
+    _results = [];
     while (this.states.length) {
-      results.push(this.states.pop()());
+      _results.push(this.states.pop()());
     }
-    return results;
+    return _results;
   },
   states: [],
   value: true
@@ -28190,7 +28227,7 @@ module.exports = {
 
 
 
-},{}],268:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/icon.coffee":[function(require,module,exports){
 var process;
 
 process = require("../../core/methods/process/icon.coffee");
@@ -28216,7 +28253,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/process/icon.coffee":82}],269:[function(require,module,exports){
+},{"../../core/methods/process/icon.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/icon.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/id.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -28237,7 +28274,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74}],270:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/labels.coffee":[function(require,module,exports){
 var decoration, family, transform;
 
 decoration = require("../../core/methods/font/decoration.coffee");
@@ -28286,7 +28323,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/decoration.coffee":76,"../../core/methods/font/family.coffee":77,"../../core/methods/font/transform.coffee":79}],271:[function(require,module,exports){
+},{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/legend.coffee":[function(require,module,exports){
 var family;
 
 family = require("../../core/methods/font/family.coffee");
@@ -28330,7 +28367,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/family.coffee":77}],272:[function(require,module,exports){
+},{"../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/links.coffee":[function(require,module,exports){
 var decoration, family, transform;
 
 decoration = require("../../core/methods/font/decoration.coffee");
@@ -28358,7 +28395,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/decoration.coffee":76,"../../core/methods/font/family.coffee":77,"../../core/methods/font/transform.coffee":79}],273:[function(require,module,exports){
+},{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/margin.coffee":[function(require,module,exports){
 var process;
 
 process = require("../../core/methods/process/margin.coffee");
@@ -28379,7 +28416,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/process/margin.coffee":83}],274:[function(require,module,exports){
+},{"../../core/methods/process/margin.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/margin.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/messages.coffee":[function(require,module,exports){
 var decoration, family, transform;
 
 decoration = require("../../core/methods/font/decoration.coffee");
@@ -28408,7 +28445,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/decoration.coffee":76,"../../core/methods/font/family.coffee":77,"../../core/methods/font/transform.coffee":79}],275:[function(require,module,exports){
+},{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/nodes.coffee":[function(require,module,exports){
 var process;
 
 process = require("../../core/methods/process/data.coffee");
@@ -28430,7 +28467,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/process/data.coffee":80}],276:[function(require,module,exports){
+},{"../../core/methods/process/data.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/process/data.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/order.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean, Function, String],
   agg: {
@@ -28447,7 +28484,7 @@ module.exports = {
 
 
 
-},{}],277:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/shape.coffee":[function(require,module,exports){
 var rendering;
 
 rendering = require("../../core/methods/rendering.coffee");
@@ -28476,7 +28513,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/rendering.coffee":85}],278:[function(require,module,exports){
+},{"../../core/methods/rendering.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/rendering.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/size.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -28511,14 +28548,14 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74}],279:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/style.coffee":[function(require,module,exports){
 module.exports = {
   value: false
 };
 
 
 
-},{}],280:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/temp.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -28533,7 +28570,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74}],281:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/text.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -28549,7 +28586,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74}],282:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/time.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -28574,7 +28611,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74}],283:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/timeline.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [Boolean],
   align: "middle",
@@ -28617,7 +28654,7 @@ module.exports = {
 
 
 
-},{}],284:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/timing.coffee":[function(require,module,exports){
 module.exports = {
   mouseevents: 60,
   transitions: 600,
@@ -28626,7 +28663,7 @@ module.exports = {
 
 
 
-},{}],285:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/title.coffee":[function(require,module,exports){
 var decoration, family, stringStrip, transform;
 
 decoration = require("../../core/methods/font/decoration.coffee");
@@ -28703,7 +28740,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/decoration.coffee":76,"../../core/methods/font/family.coffee":77,"../../core/methods/font/transform.coffee":79,"../../string/strip.js":166}],286:[function(require,module,exports){
+},{"../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee","../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js"}],"/Users/Dave/Sites/d3plus/src/viz/methods/tooltip.coffee":[function(require,module,exports){
 var family, transform;
 
 family = require("../../core/methods/font/family.coffee");
@@ -28754,7 +28791,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/family.coffee":77,"../../core/methods/font/transform.coffee":79}],287:[function(require,module,exports){
+},{"../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/total.coffee":[function(require,module,exports){
 var filter;
 
 filter = require("../../core/methods/filter.coffee");
@@ -28769,7 +28806,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/filter.coffee":74}],288:[function(require,module,exports){
+},{"../../core/methods/filter.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/filter.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/type.coffee":[function(require,module,exports){
 module.exports = {
   accepted: function(vars) {
     return d3.keys(vars.types);
@@ -28785,7 +28822,7 @@ module.exports = {
 
 
 
-},{}],289:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/ui.coffee":[function(require,module,exports){
 var align, decoration, family, transform;
 
 family = require("../../core/methods/font/family.coffee");
@@ -28840,7 +28877,7 @@ module.exports = {
 
 
 
-},{"../../core/methods/font/align.coffee":75,"../../core/methods/font/decoration.coffee":76,"../../core/methods/font/family.coffee":77,"../../core/methods/font/transform.coffee":79}],290:[function(require,module,exports){
+},{"../../core/methods/font/align.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/align.coffee","../../core/methods/font/decoration.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/decoration.coffee","../../core/methods/font/family.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/family.coffee","../../core/methods/font/transform.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/font/transform.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/methods/width.coffee":[function(require,module,exports){
 module.exports = {
   accepted: [false, Number],
   secondary: false,
@@ -28850,7 +28887,7 @@ module.exports = {
 
 
 
-},{}],291:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/methods/zoom.js":[function(require,module,exports){
 module.exports = {
   "accepted"   : [ Boolean ],
   "behavior"   : d3.behavior.zoom().scaleExtent([ 1 , 1 ]).duration(0),
@@ -28870,7 +28907,7 @@ module.exports = {
   "value"      : true
 }
 
-},{}],292:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/types/bar.coffee":[function(require,module,exports){
 var bar, fetchValue, graph, nest, stack, uniques;
 
 fetchValue = require("../../core/fetch/value.coffee");
@@ -28884,7 +28921,7 @@ stack = require("./helpers/graph/stack.coffee");
 uniques = require("../../util/uniques.coffee");
 
 bar = function(vars) {
-  var bars, base, cMargin, d, data, discrete, discreteVal, divisions, domains, h, i, j, k, len, len1, length, maxSize, mod, nested, oMargin, offset, oppVal, opposite, padding, point, ref, space, value, w, x, zero;
+  var bars, base, cMargin, d, data, discrete, discreteVal, divisions, domains, h, i, length, maxSize, mod, nested, oMargin, offset, oppVal, opposite, padding, point, space, value, w, x, zero, _i, _j, _len, _len1, _ref;
   discrete = vars.axes.discrete;
   h = discrete === "x" ? "height" : "width";
   w = discrete === "x" ? "width" : "height";
@@ -28921,12 +28958,12 @@ bar = function(vars) {
   }
   data = [];
   zero = 0;
-  for (i = j = 0, len = nested.length; j < len; i = ++j) {
+  for (i = _i = 0, _len = nested.length; _i < _len; i = ++_i) {
     point = nested[i];
     mod = vars.axes.stacked ? 0 : x(i % divisions);
-    ref = point.values;
-    for (k = 0, len1 = ref.length; k < len1; k++) {
-      d = ref[k];
+    _ref = point.values;
+    for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+      d = _ref[_j];
       if (vars.axes.stacked) {
         value = d.d3plus[opposite];
         base = d.d3plus[opposite + "0"];
@@ -28985,7 +29022,7 @@ module.exports = bar;
 
 
 
-},{"../../core/fetch/value.coffee":66,"../../util/uniques.coffee":201,"./helpers/graph/draw.coffee":298,"./helpers/graph/nest.coffee":304,"./helpers/graph/stack.coffee":305}],293:[function(require,module,exports){
+},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/box.coffee":[function(require,module,exports){
 var box, fetchValue, graph, strip, uniques;
 
 fetchValue = require("../../core/fetch/value.coffee");
@@ -29013,7 +29050,7 @@ box = function(vars) {
   h = discrete === "x" ? "height" : "width";
   w = discrete === "x" ? "width" : "height";
   space = vars.axes[w] / vars[discrete].ticks.values.length;
-  space = d3.max([d3.min([space / 2, 40]), 10]);
+  space = d3.min([space - vars.labels.padding * 2, 100]);
   mode = vars.type.mode.value;
   if (!(mode instanceof Array)) {
     mode = [mode, mode];
@@ -29031,7 +29068,7 @@ box = function(vars) {
   d3.nest().key(function(d) {
     return fetchValue(vars, d, vars[discrete].value);
   }).rollup(function(leaves) {
-    var bottom, bottomWhisker, boxData, d, first, i, iqr, j, key, label, len, len1, median, medianData, medianText, outliers, scale, second, top, topWhisker, val, values, x, y;
+    var bottom, bottomWhisker, boxData, d, diff1, diff2, first, iqr, key, label, median, medianBuffer, medianData, medianHeight, medianText, outliers, scale, second, top, topWhisker, val, values, x, y, _i, _j, _len, _len1;
     scale = vars[opposite].scale.viz;
     values = leaves.map(function(d) {
       return fetchValue(vars, d, vars[opposite].value);
@@ -29064,8 +29101,8 @@ box = function(vars) {
     bottomWhisker = [];
     topWhisker = [];
     outliers = [];
-    for (i = 0, len = leaves.length; i < len; i++) {
-      d = leaves[i];
+    for (_i = 0, _len = leaves.length; _i < _len; _i++) {
+      d = leaves[_i];
       val = fetchValue(vars, d, vars[opposite].value);
       if (val >= first && val <= second) {
         boxData.push(d);
@@ -29106,22 +29143,33 @@ box = function(vars) {
     y += oppMargin;
     boxData.d3plus[opposite] = y;
     returnData.push(boxData);
-    if (boxData.d3plus[h] < 20) {
-      medianText = false;
-    } else {
-      medianText = vars.format.value(median, {
-        key: vars[opposite].value
-      });
-    }
     medianData = {
       d3plus: {
         id: "median_line_" + key,
         position: h === "height" ? "top" : "right",
         shape: "whisker",
-        "static": true,
-        text: medianText
+        "static": true
       }
     };
+    medianText = vars.format.value(median, {
+      key: vars[opposite].value,
+      vars: vars
+    });
+    label = {
+      background: "#fff",
+      names: [medianText],
+      padding: 0,
+      resize: false,
+      x: 0,
+      y: 0
+    };
+    diff1 = Math.abs(scale(median) - scale(first));
+    diff2 = Math.abs(scale(median) - scale(second));
+    medianHeight = d3.min([diff1, diff2]) * 2;
+    medianBuffer = vars.data.stroke.width * 2 + vars.labels.padding * 2;
+    label[w === "width" ? "w" : "h"] = space - medianBuffer;
+    label[h === "width" ? "w" : "h"] = medianHeight - medianBuffer;
+    medianData.d3plus.label = label;
     medianData.d3plus[w] = space;
     medianData.d3plus[discrete] = x;
     medianData.d3plus[opposite] = scale(median) + oppMargin;
@@ -29158,8 +29206,8 @@ box = function(vars) {
     topWhisker.d3plus[discrete] = x;
     topWhisker.d3plus[opposite] = y;
     returnData.push(topWhisker);
-    for (j = 0, len1 = outliers.length; j < len1; j++) {
-      d = outliers[j];
+    for (_j = 0, _len1 = outliers.length; _j < _len1; _j++) {
+      d = outliers[_j];
       d.d3plus[discrete] = x;
       d.d3plus[opposite] = scale(fetchValue(vars, d, vars.y.value));
       d.d3plus[opposite] += oppMargin;
@@ -29192,7 +29240,7 @@ module.exports = box;
 
 
 
-},{"../../core/fetch/value.coffee":66,"../../string/strip.js":166,"../../util/uniques.coffee":201,"./helpers/graph/draw.coffee":298}],294:[function(require,module,exports){
+},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/bubbles.coffee":[function(require,module,exports){
 var arraySort, bubbles, fetchColor, fetchText, fetchValue, groupData, legible;
 
 arraySort = require("../../array/sort.coffee");
@@ -29208,7 +29256,7 @@ legible = require("../../color/legible.coffee");
 groupData = require("../../core/data/group.coffee");
 
 bubbles = function(vars) {
-  var column_height, column_width, columns, d, data, dataLength, domain, domainMax, domainMin, downscale, groupedData, i, j, k, l, labelHeight, len, len1, len2, obj, pack, padding, row, rows, screenRatio, size, size_max, size_min, t, temp, xPadding, xoffset, yPadding, yoffset;
+  var column_height, column_width, columns, d, data, dataLength, domain, domainMax, domainMin, downscale, groupedData, i, labelHeight, obj, pack, padding, row, rows, screenRatio, size, size_max, size_min, t, temp, xPadding, xoffset, yPadding, yoffset, _i, _j, _k, _len, _len1, _len2;
   groupedData = groupData(vars, vars.data.viz);
   groupedData = arraySort(groupedData, null, null, null, vars);
   dataLength = groupedData.length;
@@ -29253,13 +29301,13 @@ bubbles = function(vars) {
   });
   data = [];
   row = 0;
-  for (i = j = 0, len = groupedData.length; j < len; i = ++j) {
+  for (i = _i = 0, _len = groupedData.length; _i < _len; i = ++_i) {
     d = groupedData[i];
     temp = pack.nodes(d);
     xoffset = (column_width * i) % vars.width.viz;
     yoffset = column_height * row;
-    for (k = 0, len1 = temp.length; k < len1; k++) {
-      t = temp[k];
+    for (_j = 0, _len1 = temp.length; _j < _len1; _j++) {
+      t = temp[_j];
       if (t.children) {
         obj = {
           d3plus: {}
@@ -29285,8 +29333,8 @@ bubbles = function(vars) {
   });
   xPadding = pack.size()[0] / 2;
   yPadding = pack.size()[1] / 2;
-  for (l = 0, len2 = data.length; l < len2; l++) {
-    d = data[l];
+  for (_k = 0, _len2 = data.length; _k < _len2; _k++) {
+    d = data[_k];
     d.d3plus.x = ((d.d3plus.x - xPadding) * downscale) + xPadding + d.d3plus.xOffset;
     d.d3plus.y = ((d.d3plus.y - yPadding) * downscale) + yPadding + d.d3plus.yOffset;
     d.d3plus.r = d.d3plus.r * downscale;
@@ -29323,7 +29371,7 @@ module.exports = bubbles;
 
 
 
-},{"../../array/sort.coffee":34,"../../color/legible.coffee":43,"../../core/data/group.coffee":56,"../../core/fetch/color.coffee":62,"../../core/fetch/text.js":65,"../../core/fetch/value.coffee":66}],295:[function(require,module,exports){
+},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../core/data/group.coffee":"/Users/Dave/Sites/d3plus/src/core/data/group.coffee","../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/deprecated/chart.coffee":[function(require,module,exports){
 var chart, print;
 
 print = require("../../../core/console/print.coffee");
@@ -29348,7 +29396,7 @@ module.exports = chart;
 
 
 
-},{"../../../core/console/print.coffee":51}],296:[function(require,module,exports){
+},{"../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/geo_map.coffee":[function(require,module,exports){
 var geo_map;
 
 geo_map = function(vars) {
@@ -29389,7 +29437,7 @@ module.exports = geo_map;
 
 
 
-},{}],297:[function(require,module,exports){
+},{}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/dataTicks.coffee":[function(require,module,exports){
 var color, legible, print;
 
 color = require("../../../../core/fetch/color.coffee");
@@ -29399,7 +29447,7 @@ legible = require("../../../../color/legible.coffee");
 print = require("../../../../core/console/print.coffee");
 
 module.exports = function(vars) {
-  var axes, axis, axisData, data, i, len, ref, style, tick, ticks, timing;
+  var axes, axis, axisData, data, style, tick, ticks, timing, _i, _len, _ref;
   axes = vars.axes;
   data = axes.stacked ? [] : vars.data.viz;
   timing = data.length * 2 > vars.data.large ? 0 : vars.draw.timing;
@@ -29433,9 +29481,9 @@ module.exports = function(vars) {
   if (vars.dev.value) {
     print.timeEnd("creating axis tick groups");
   }
-  ref = ["x", "y"];
-  for (i = 0, len = ref.length; i < len; i++) {
-    axis = ref[i];
+  _ref = ["x", "y"];
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    axis = _ref[_i];
     if (vars.dev.value && timing) {
       print.time("creating " + axis + " ticks");
     }
@@ -29470,7 +29518,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../../color/legible.coffee":43,"../../../../core/console/print.coffee":51,"../../../../core/fetch/color.coffee":62}],298:[function(require,module,exports){
+},{"../../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee":[function(require,module,exports){
 var axes, draw, mouse, plot;
 
 axes = require("./includes/axes.coffee");
@@ -29493,7 +29541,7 @@ module.exports = function(vars, opts) {
 
 
 
-},{"./includes/axes.coffee":299,"./includes/mouse.coffee":301,"./includes/plot.coffee":302,"./includes/svg.coffee":303}],299:[function(require,module,exports){
+},{"./includes/axes.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/axes.coffee","./includes/mouse.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/mouse.coffee","./includes/plot.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/plot.coffee","./includes/svg.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/svg.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/axes.coffee":[function(require,module,exports){
 var arraySort, axisRange, buckets, buffer, dataChange, fetchData, fetchValue, getData, getScale, print, sizeScale, uniques;
 
 arraySort = require("../../../../../array/sort.coffee");
@@ -29511,15 +29559,15 @@ print = require("../../../../../core/console/print.coffee");
 uniques = require("../../../../../util/uniques.coffee");
 
 module.exports = function(vars, opts) {
-  var axis, changed, domains, i, len, oppAxis, range, ref, reorder, zero;
+  var axis, changed, domains, oppAxis, range, reorder, zero, _i, _len, _ref;
   changed = dataChange(vars);
   if (changed || !vars.axes.dataset) {
     vars.axes.dataset = getData(vars);
   }
   vars.axes.scale = opts.buffer && opts.buffer !== true ? sizeScale(vars, opts.buffer) : false;
-  ref = ["x", "y"];
-  for (i = 0, len = ref.length; i < len; i++) {
-    axis = ref[i];
+  _ref = ["x", "y"];
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    axis = _ref[_i];
     oppAxis = axis === "x" ? "y" : "x";
     reorder = vars.order.changed || vars.order.sort.changed || (vars.order.value === true && vars[oppAxis].changed);
     if (!("values" in vars[axis].ticks) || changed || reorder) {
@@ -29554,7 +29602,7 @@ module.exports = function(vars, opts) {
 };
 
 dataChange = function(vars) {
-  var axis, changed, check, i, j, k, l, len, len1, len2, ref, sub, subs;
+  var axis, changed, check, k, sub, subs, _i, _j, _k, _len, _len1, _len2, _ref;
   changed = vars.time.fixed.value && (vars.time.solo.changed || vars.time.mute.changed);
   if (!changed) {
     changed = vars.id.solo.changed || vars.id.mute.changed;
@@ -29563,19 +29611,19 @@ dataChange = function(vars) {
     return changed;
   }
   check = ["data", "time", "id", "depth", "type", "x", "y"];
-  for (i = 0, len = check.length; i < len; i++) {
-    k = check[i];
+  for (_i = 0, _len = check.length; _i < _len; _i++) {
+    k = check[_i];
     if (vars[k].changed) {
       changed = true;
       break;
     }
   }
   subs = ["mute", "range", "scale", "solo", "stacked"];
-  ref = ["x", "y"];
-  for (j = 0, len1 = ref.length; j < len1; j++) {
-    axis = ref[j];
-    for (l = 0, len2 = subs.length; l < len2; l++) {
-      sub = subs[l];
+  _ref = ["x", "y"];
+  for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+    axis = _ref[_j];
+    for (_k = 0, _len2 = subs.length; _k < _len2; _k++) {
+      sub = subs[_k];
       if (vars[axis][sub].changed) {
         changed = true;
         break;
@@ -29593,20 +29641,20 @@ getData = function(vars) {
     depths = d3.range(0, vars.id.nesting.length);
     return d3.merge([
       (function() {
-        var i, len, results;
-        results = [];
-        for (i = 0, len = depths.length; i < len; i++) {
-          d = depths[i];
-          results.push(fetchData(vars, "all", d));
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = depths.length; _i < _len; _i++) {
+          d = depths[_i];
+          _results.push(fetchData(vars, "all", d));
         }
-        return results;
+        return _results;
       })()
     ]);
   }
 };
 
 axisRange = function(vars, axis, zero, buffer) {
-  var agg, aggType, allNegative, allPositive, axisSums, counts, d, group, i, j, k, l, len, len1, len2, len3, m, min, oppAxis, ref, ref1, ref2, ref3, sort, sortKey, splitData, v, val, values;
+  var agg, aggType, allNegative, allPositive, axisSums, counts, d, group, k, min, oppAxis, sort, sortKey, splitData, v, val, values, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref, _ref1, _ref2, _ref3;
   oppAxis = axis === "x" ? "y" : "x";
   if (vars[axis].range.value && vars[axis].range.value.length === 2) {
     return vars[axis].range.value.slice();
@@ -29615,9 +29663,9 @@ axisRange = function(vars, axis, zero, buffer) {
     return [0, 1];
   } else if (vars[axis].stacked.value) {
     splitData = [];
-    ref = vars.axes.dataset;
-    for (i = 0, len = ref.length; i < len; i++) {
-      d = ref[i];
+    _ref = vars.axes.dataset;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      d = _ref[_i];
       if (d.values) {
         splitData = splitData.concat(d.values);
       } else {
@@ -29656,9 +29704,9 @@ axisRange = function(vars, axis, zero, buffer) {
     return d3.extent(vars[axis].ticks.values);
   } else {
     values = [];
-    ref1 = vars.axes.dataset;
-    for (j = 0, len1 = ref1.length; j < len1; j++) {
-      d = ref1[j];
+    _ref1 = vars.axes.dataset;
+    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+      d = _ref1[_j];
       val = fetchValue(vars, d, vars[axis].value);
       if (val instanceof Array) {
         values = values.concat(val);
@@ -29680,13 +29728,13 @@ axisRange = function(vars, axis, zero, buffer) {
           obj[val] = [];
           return obj;
         }, {});
-        ref2 = vars.axes.dataset;
-        for (l = 0, len2 = ref2.length; l < len2; l++) {
-          d = ref2[l];
+        _ref2 = vars.axes.dataset;
+        for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+          d = _ref2[_k];
           if (d.values) {
-            ref3 = d.values;
-            for (m = 0, len3 = ref3.length; m < len3; m++) {
-              v = ref3[m];
+            _ref3 = d.values;
+            for (_l = 0, _len3 = _ref3.length; _l < _len3; _l++) {
+              v = _ref3[_l];
               group = fetchValue(vars, v, vars[axis].value);
               counts[group].push(fetchValue(vars, v, sortKey));
             }
@@ -29802,7 +29850,7 @@ sizeScale = function(vars, value) {
 
 
 
-},{"../../../../../array/sort.coffee":34,"../../../../../core/console/print.coffee":51,"../../../../../core/fetch/data.js":63,"../../../../../core/fetch/value.coffee":66,"../../../../../util/buckets.coffee":195,"../../../../../util/uniques.coffee":201,"./buffer.coffee":300}],300:[function(require,module,exports){
+},{"../../../../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../../../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../../../../core/fetch/data.js":"/Users/Dave/Sites/d3plus/src/core/fetch/data.js","../../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../../../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./buffer.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee":[function(require,module,exports){
 var buckets, closest;
 
 buckets = require("../../../../../util/buckets.coffee");
@@ -29929,7 +29977,7 @@ module.exports = function(vars, axis, buffer) {
 
 
 
-},{"../../../../../util/buckets.coffee":195,"../../../../../util/closest.coffee":197}],301:[function(require,module,exports){
+},{"../../../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../../../../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/mouse.coffee":[function(require,module,exports){
 var copy, events, fetchColor, fetchValue, legible;
 
 copy = require("../../../../../util/copy.coffee");
@@ -30136,7 +30184,7 @@ module.exports = function(node, vars) {
 
 
 
-},{"../../../../../client/pointer.coffee":38,"../../../../../color/legible.coffee":43,"../../../../../core/fetch/color.coffee":62,"../../../../../core/fetch/value.coffee":66,"../../../../../util/copy.coffee":198}],302:[function(require,module,exports){
+},{"../../../../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/plot.coffee":[function(require,module,exports){
 var buckets, buffer, createAxis, fetchValue, fontSizes, formatPower, labelPadding, resetMargins, superscript, textwrap, timeDetect, uniques;
 
 buckets = require("../../../../../util/buckets.coffee");
@@ -30154,13 +30202,13 @@ timeDetect = require("../../../../../core/data/time.coffee");
 uniques = require("../../../../../util/uniques.coffee");
 
 module.exports = function(vars, opts) {
-  var axis, axisStyle, extent, j, k, len, len1, newtick, opp, ref, ref1, step, tens, tick, ticks, timeReturn, values;
+  var axis, axisStyle, extent, newtick, opp, step, tens, tick, ticks, timeReturn, values, _i, _j, _len, _len1, _ref, _ref1;
   vars.axes.margin = resetMargins(vars);
   vars.axes.height = vars.height.viz;
   vars.axes.width = vars.width.viz;
-  ref = ["x", "y"];
-  for (j = 0, len = ref.length; j < len; j++) {
-    axis = ref[j];
+  _ref = ["x", "y"];
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    axis = _ref[_i];
     if (vars[axis].ticks.values === false) {
       if (vars[axis].value === vars.time.value) {
         ticks = vars.time.solo.value;
@@ -30231,9 +30279,9 @@ module.exports = function(vars, opts) {
   if (!vars.small) {
     labelPadding(vars);
   }
-  ref1 = ["x", "y"];
-  for (k = 0, len1 = ref1.length; k < len1; k++) {
-    axis = ref1[k];
+  _ref1 = ["x", "y"];
+  for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+    axis = _ref1[_j];
     vars[axis].axis.svg = createAxis(vars, axis);
   }
 };
@@ -30491,7 +30539,7 @@ formatPower = function(d) {
 
 
 
-},{"../../../../../core/data/time.coffee":61,"../../../../../core/fetch/value.coffee":66,"../../../../../font/sizes.coffee":94,"../../../../../textwrap/textwrap.coffee":191,"../../../../../util/buckets.coffee":195,"../../../../../util/uniques.coffee":201,"./buffer.coffee":300}],303:[function(require,module,exports){
+},{"../../../../../core/data/time.coffee":"/Users/Dave/Sites/d3plus/src/core/data/time.coffee","../../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../../font/sizes.coffee":"/Users/Dave/Sites/d3plus/src/font/sizes.coffee","../../../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee","../../../../../util/buckets.coffee":"/Users/Dave/Sites/d3plus/src/util/buckets.coffee","../../../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","./buffer.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/buffer.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/includes/svg.coffee":[function(require,module,exports){
 var mix, textwrap, validObject;
 
 mix = require("../../../../../color/mix.coffee");
@@ -30501,7 +30549,7 @@ textwrap = require("../../../../../textwrap/textwrap.coffee");
 validObject = require("../../../../../object/validate.coffee");
 
 module.exports = function(vars) {
-  var affixes, alignMap, axis, axisData, axisLabel, bg, bgStyle, d, domain, domains, getFontStyle, grid, gridData, j, k, l, label, labelData, labelStyle, len, len1, len2, line, lineData, lineFont, lineGroup, lineRects, lineStyle, lines, linetexts, mirror, plane, planeTrans, position, rectData, rectStyle, ref, ref1, rotated, sep, textData, textPad, textPos, tickFont, tickPosition, tickStyle, userLines, xAxis, xEnter, xStyle, yAxis, yEnter, yStyle;
+  var affixes, alignMap, axis, axisData, axisLabel, bg, bgStyle, d, domain, domains, getFontStyle, grid, gridData, label, labelData, labelStyle, line, lineData, lineFont, lineGroup, lineRects, lineStyle, lines, linetexts, mirror, plane, planeTrans, position, rectData, rectStyle, rotated, sep, textData, textPad, textPos, tickFont, tickPosition, tickStyle, userLines, xAxis, xEnter, xStyle, yAxis, yEnter, yStyle, _i, _j, _k, _len, _len1, _len2, _ref, _ref1;
   domains = vars.x.domain.viz.concat(vars.y.domain.viz);
   if (domains.indexOf(void 0) >= 0) {
     return null;
@@ -30703,9 +30751,9 @@ module.exports = function(vars) {
   labelStyle = function(label, axis) {
     return label.attr("x", axis === "x" ? vars.width.viz / 2 : -(vars.axes.height / 2 + vars.axes.margin.top)).attr("y", axis === "x" ? vars.height.viz - vars[axis].label.height / 2 - vars[axis].label.padding : vars[axis].label.height / 2 + vars[axis].label.padding).attr("transform", axis === "y" ? "rotate(-90)" : null).attr("font-family", vars[axis].label.font.family.value).attr("font-weight", vars[axis].label.font.weight).attr("font-size", vars[axis].label.font.size + "px").attr("fill", vars[axis].label.font.color).style("text-anchor", "middle").attr("dominant-baseline", "central");
   };
-  ref = ["x", "y"];
-  for (j = 0, len = ref.length; j < len; j++) {
-    axis = ref[j];
+  _ref = ["x", "y"];
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    axis = _ref[_i];
     if (vars[axis].grid.value) {
       gridData = vars[axis].ticks.values;
     } else {
@@ -30743,9 +30791,9 @@ module.exports = function(vars) {
     label.enter().append("text").attr("id", "d3plus_graph_" + axis + "label").text(axisLabel).call(labelStyle, axis);
     label.exit().transition().duration(vars.data.timing).attr("opacity", 0).remove();
   }
-  ref1 = ["x", "y"];
-  for (k = 0, len1 = ref1.length; k < len1; k++) {
-    axis = ref1[k];
+  _ref1 = ["x", "y"];
+  for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+    axis = _ref1[_j];
     lineGroup = plane.selectAll("g#d3plus_graph_" + axis + "_userlines").data([0]);
     lineGroup.enter().append("g").attr("id", "d3plus_graph_" + axis + "_userlines");
     domain = vars[axis].scale.viz.domain();
@@ -30755,8 +30803,8 @@ module.exports = function(vars) {
     textData = [];
     lineData = [];
     userLines = vars[axis].lines.value || [];
-    for (l = 0, len2 = userLines.length; l < len2; l++) {
-      line = userLines[l];
+    for (_k = 0, _len2 = userLines.length; _k < _len2; _k++) {
+      line = userLines[_k];
       d = validObject(line) ? line.position : line;
       if (!isNaN(d)) {
         d = parseFloat(d);
@@ -30858,7 +30906,7 @@ module.exports = function(vars) {
 
 
 
-},{"../../../../../color/mix.coffee":45,"../../../../../object/validate.coffee":163,"../../../../../textwrap/textwrap.coffee":191}],304:[function(require,module,exports){
+},{"../../../../../color/mix.coffee":"/Users/Dave/Sites/d3plus/src/color/mix.coffee","../../../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../../../textwrap/textwrap.coffee":"/Users/Dave/Sites/d3plus/src/textwrap/textwrap.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee":[function(require,module,exports){
 var fetchValue, stringStrip, uniqueValues;
 
 fetchValue = require("../../../../core/fetch/value.coffee");
@@ -30892,11 +30940,11 @@ module.exports = function(vars, data) {
     ticks = discrete.ticks.values;
   }
   return d3.nest().key(function(d) {
-    var id, j, len, ref, return_id, val;
+    var id, return_id, val, _i, _len, _ref;
     return_id = "nesting";
-    ref = vars.id.nesting.slice(0, vars.depth.value + 1);
-    for (j = 0, len = ref.length; j < len; j++) {
-      id = ref[j];
+    _ref = vars.id.nesting.slice(0, vars.depth.value + 1);
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      id = _ref[_i];
       val = fetchValue(vars, d, id);
       if (val instanceof Array) {
         val = val.join("_");
@@ -30905,7 +30953,7 @@ module.exports = function(vars, data) {
     }
     return return_id;
   }).rollup(function(leaves) {
-    var availables, filler, i, j, k, key, len, len1, obj, ref, tester, tick, timeVar;
+    var availables, filler, i, key, obj, tester, tick, timeVar, _i, _j, _len, _len1, _ref;
     availables = uniqueValues(leaves, discrete.value, fetchValue, vars);
     timeVar = availables[0].constructor === Date;
     if (timeVar) {
@@ -30923,16 +30971,16 @@ module.exports = function(vars, data) {
       } else {
         filler = 0;
       }
-      for (i = j = 0, len = ticks.length; j < len; i = ++j) {
+      for (i = _i = 0, _len = ticks.length; _i < _len; i = ++_i) {
         tick = ticks[i];
         tester = timeAxis ? +tick : tick;
         if (availables.indexOf(tester) < 0) {
           obj = {
             d3plus: {}
           };
-          ref = vars.id.nesting;
-          for (k = 0, len1 = ref.length; k < len1; k++) {
-            key = ref[k];
+          _ref = vars.id.nesting;
+          for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+            key = _ref[_j];
             if (key in leaves[0]) {
               obj[key] = leaves[0][key];
             }
@@ -30965,13 +31013,13 @@ module.exports = function(vars, data) {
 
 
 
-},{"../../../../core/fetch/value.coffee":66,"../../../../string/strip.js":166,"../../../../util/uniques.coffee":201}],305:[function(require,module,exports){
+},{"../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../../string/strip.js":"/Users/Dave/Sites/d3plus/src/string/strip.js","../../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee":[function(require,module,exports){
 var fetchValue;
 
 fetchValue = require("../../../../core/fetch/value.coffee");
 
 module.exports = function(vars, data) {
-  var d, flip, i, len, margin, negativeData, offset, opposite, positiveData, scale, stack, stacked, val;
+  var d, flip, margin, negativeData, offset, opposite, positiveData, scale, stack, stacked, val, _i, _len;
   stacked = vars.axes.stacked;
   flip = vars[stacked].scale.viz(0);
   scale = vars[stacked].scale.value;
@@ -31000,8 +31048,8 @@ module.exports = function(vars, data) {
   });
   positiveData = [];
   negativeData = [];
-  for (i = 0, len = data.length; i < len; i++) {
-    d = data[i];
+  for (_i = 0, _len = data.length; _i < _len; _i++) {
+    d = data[_i];
     val = fetchValue(vars, d, vars[stacked].value);
     if (val instanceof Array) {
       positiveData.push(d);
@@ -31029,7 +31077,7 @@ module.exports = function(vars, data) {
 
 
 
-},{"../../../../core/fetch/value.coffee":66}],306:[function(require,module,exports){
+},{"../../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/line.coffee":[function(require,module,exports){
 var fetchValue, graph, line, nest, stack;
 
 fetchValue = require("../../core/fetch/value.coffee");
@@ -31041,7 +31089,7 @@ nest = require("./helpers/graph/nest.coffee");
 stack = require("./helpers/graph/stack.coffee");
 
 line = function(vars) {
-  var d, data, domains, i, j, len, len1, point, ref;
+  var d, data, domains, point, _i, _j, _len, _len1, _ref;
   graph(vars, {
     buffer: vars.axes.opposite,
     mouse: true
@@ -31051,11 +31099,11 @@ line = function(vars) {
     return [];
   }
   data = vars.data.viz;
-  for (i = 0, len = data.length; i < len; i++) {
-    point = data[i];
-    ref = point.values;
-    for (j = 0, len1 = ref.length; j < len1; j++) {
-      d = ref[j];
+  for (_i = 0, _len = data.length; _i < _len; _i++) {
+    point = data[_i];
+    _ref = point.values;
+    for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+      d = _ref[_j];
       d.d3plus.x = vars.x.scale.viz(fetchValue(vars, d, vars.x.value));
       d.d3plus.x += vars.axes.margin.left;
       d.d3plus.y = vars.y.scale.viz(fetchValue(vars, d, vars.y.value));
@@ -31100,7 +31148,7 @@ module.exports = line;
 
 
 
-},{"../../core/fetch/value.coffee":66,"./helpers/graph/draw.coffee":298,"./helpers/graph/nest.coffee":304,"./helpers/graph/stack.coffee":305}],307:[function(require,module,exports){
+},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/network.js":[function(require,module,exports){
 var smallestGap = require("../../network/smallestGap.coffee"),
     fetchValue = require("../../core/fetch/value.coffee");
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -31246,9 +31294,9 @@ network.zoom         = true
 
 module.exports = network
 
-},{"../../core/fetch/value.coffee":66,"../../network/smallestGap.coffee":159}],308:[function(require,module,exports){
+},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../network/smallestGap.coffee":"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/paths.coffee":[function(require,module,exports){
 var fetchValue, shortestPath, uniqueValues, viz,
-  indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+  __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 shortestPath = require("../../network/shortestPath.coffee");
 
@@ -31257,7 +31305,7 @@ fetchValue = require("../../core/fetch/value.coffee");
 uniqueValues = require("../../util/uniques.coffee");
 
 viz = function(vars) {
-  var base, base1, base2, base3, col, colIndex, columnWidth, columns, edge, edgeInt, edges, i, id, j, k, l, labelSpace, lastDir, lastHop, len, len1, len2, len3, len4, len5, len6, len7, m, maxRadius, minRadius, n, newPath, next, nextDir, nextHop, nextIndex, node, o, p, path, pathInt, pathLookup, paths, prev, prevIndex, q, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7, rowHeight, rows, size, sizeDomain, val, x, xDiff, y, yDomain;
+  var col, colIndex, columnWidth, columns, edge, edgeInt, edges, i, id, labelSpace, lastDir, lastHop, maxRadius, minRadius, newPath, next, nextDir, nextHop, nextIndex, node, path, pathInt, pathLookup, paths, prev, prevIndex, rowHeight, rows, size, sizeDomain, val, x, xDiff, y, yDomain, _base, _base1, _base2, _base3, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _len6, _len7, _m, _n, _o, _p, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7;
   edges = [];
   pathLookup = {};
   pathLookup[vars.focus.value[0]] = 0;
@@ -31265,15 +31313,15 @@ viz = function(vars) {
   paths = {
     all: [[vars.focus.value[0]], [vars.focus.value[1]]]
   };
-  ref = viz.paths;
-  for (pathInt = j = 0, len = ref.length; j < len; pathInt = ++j) {
-    path = ref[pathInt];
+  _ref = viz.paths;
+  for (pathInt = _i = 0, _len = _ref.length; _i < _len; pathInt = ++_i) {
+    path = _ref[pathInt];
     edges = edges.concat(path.edges);
     lastHop = vars.focus.value[0];
     paths[pathInt] = [lastHop];
-    ref1 = path.edges;
-    for (edgeInt = k = 0, len1 = ref1.length; k < len1; edgeInt = ++k) {
-      edge = ref1[edgeInt];
+    _ref1 = path.edges;
+    for (edgeInt = _j = 0, _len1 = _ref1.length; _j < _len1; edgeInt = ++_j) {
+      edge = _ref1[edgeInt];
       edge[vars.edges.source] = vars.data.viz.filter(function(d) {
         return edge[vars.edges.source][vars.id.value] === d[vars.id.value];
       })[0];
@@ -31294,7 +31342,7 @@ viz = function(vars) {
     path = paths[pathInt];
     if (pathInt !== "all") {
       newPath = 0;
-      for (i = l = 0, len2 = path.length; l < len2; i = ++l) {
+      for (i = _k = 0, _len2 = path.length; _k < _len2; i = ++_k) {
         id = path[i];
         if ((i !== 0 && i !== (path.length - 1)) && pathLookup[id] === parseFloat(pathInt)) {
           newPath = 1;
@@ -31302,13 +31350,13 @@ viz = function(vars) {
           next = path[i + 1];
           prevIndex = null;
           nextIndex = null;
-          ref2 = paths.all;
-          for (colIndex = m = 0, len3 = ref2.length; m < len3; colIndex = ++m) {
-            col = ref2[colIndex];
-            if (indexOf.call(col, prev) >= 0) {
+          _ref2 = paths.all;
+          for (colIndex = _l = 0, _len3 = _ref2.length; _l < _len3; colIndex = ++_l) {
+            col = _ref2[colIndex];
+            if (__indexOf.call(col, prev) >= 0) {
               prevIndex = colIndex;
             }
-            if (indexOf.call(col, next) >= 0) {
+            if (__indexOf.call(col, next) >= 0) {
               nextIndex = colIndex;
             }
           }
@@ -31352,16 +31400,16 @@ viz = function(vars) {
     return val || 0;
   });
   size = vars.size.scale.value.domain(sizeDomain).rangeRound([minRadius, maxRadius]);
-  ref3 = vars.data.viz;
-  for (n = 0, len4 = ref3.length; n < len4; n++) {
-    node = ref3[n];
+  _ref3 = vars.data.viz;
+  for (_m = 0, _len4 = _ref3.length; _m < _len4; _m++) {
+    node = _ref3[_m];
     if (node.d3plus == null) {
       node.d3plus = {};
     }
-    ref4 = paths["all"];
-    for (colIndex = o = 0, len5 = ref4.length; o < len5; colIndex = ++o) {
-      col = ref4[colIndex];
-      if (ref5 = node[vars.id.value], indexOf.call(col, ref5) >= 0) {
+    _ref4 = paths["all"];
+    for (colIndex = _n = 0, _len5 = _ref4.length; _n < _len5; colIndex = ++_n) {
+      col = _ref4[colIndex];
+      if (_ref5 = node[vars.id.value], __indexOf.call(col, _ref5) >= 0) {
         node.d3plus.x = x(colIndex);
       }
     }
@@ -31384,13 +31432,13 @@ viz = function(vars) {
       delete node.d3plus.label;
     }
   }
-  ref6 = viz.paths;
-  for (pathInt = p = 0, len6 = ref6.length; p < len6; pathInt = ++p) {
-    path = ref6[pathInt];
+  _ref6 = viz.paths;
+  for (pathInt = _o = 0, _len6 = _ref6.length; _o < _len6; pathInt = ++_o) {
+    path = _ref6[pathInt];
     lastHop = vars.focus.value[0];
-    ref7 = path.edges;
-    for (edgeInt = q = 0, len7 = ref7.length; q < len7; edgeInt = ++q) {
-      edge = ref7[edgeInt];
+    _ref7 = path.edges;
+    for (edgeInt = _p = 0, _len7 = _ref7.length; _p < _len7; edgeInt = ++_p) {
+      edge = _ref7[edgeInt];
       nextDir = edge[vars.edges.source][vars.id.value] === lastHop ? "target" : "source";
       lastDir = nextDir === "target" ? "source" : "target";
       nextHop = edge[vars.edges[nextDir]][vars.id.value];
@@ -31398,17 +31446,17 @@ viz = function(vars) {
         edge.d3plus = {
           spline: true
         };
-        if ((base = edge[vars.edges.source]).d3plus == null) {
-          base.d3plus = {};
+        if ((_base = edge[vars.edges.source]).d3plus == null) {
+          _base.d3plus = {};
         }
-        if ((base1 = edge[vars.edges.source].d3plus).edges == null) {
-          base1.edges = {};
+        if ((_base1 = edge[vars.edges.source].d3plus).edges == null) {
+          _base1.edges = {};
         }
-        if ((base2 = edge[vars.edges.target]).d3plus == null) {
-          base2.d3plus = {};
+        if ((_base2 = edge[vars.edges.target]).d3plus == null) {
+          _base2.d3plus = {};
         }
-        if ((base3 = edge[vars.edges.target].d3plus).edges == null) {
-          base3.edges = {};
+        if ((_base3 = edge[vars.edges.target].d3plus).edges == null) {
+          _base3.edges = {};
         }
         xDiff = edge[nextDir].d3plus.x - edge[lastDir].d3plus.x;
         edge[lastDir].d3plus.edges[edge[nextDir][vars.id.value]] = {
@@ -31433,7 +31481,7 @@ viz = function(vars) {
 };
 
 viz.filter = function(vars, data) {
-  var added, d, edge, edges, id, ids, j, k, l, len, len1, len2, obj, path, ref, ref1, returnData, source, target;
+  var added, d, edge, edges, id, ids, obj, path, returnData, source, target, _i, _j, _k, _len, _len1, _len2, _ref, _ref1;
   edges = vars.edges.filtered || vars.edges.value;
   viz.paths = shortestPath(edges, vars.focus.value[0], {
     target: vars.focus.value[1],
@@ -31445,12 +31493,12 @@ viz.filter = function(vars, data) {
   });
   viz.nodes = [];
   added = [];
-  ref = viz.paths;
-  for (j = 0, len = ref.length; j < len; j++) {
-    path = ref[j];
-    ref1 = path.edges;
-    for (k = 0, len1 = ref1.length; k < len1; k++) {
-      edge = ref1[k];
+  _ref = viz.paths;
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    path = _ref[_i];
+    _ref1 = path.edges;
+    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+      edge = _ref1[_j];
       source = edge[vars.edges.source];
       target = edge[vars.edges.target];
       if (added.indexOf(source[vars.id.value]) < 0) {
@@ -31465,8 +31513,8 @@ viz.filter = function(vars, data) {
   }
   ids = uniqueValues(viz.nodes, vars.id.value, fetchValue, vars);
   returnData = [];
-  for (l = 0, len2 = ids.length; l < len2; l++) {
-    id = ids[l];
+  for (_k = 0, _len2 = ids.length; _k < _len2; _k++) {
+    id = ids[_k];
     d = data.filter(function(d) {
       return d[vars.id.value] === id;
     });
@@ -31504,7 +31552,7 @@ module.exports = viz;
 
 
 
-},{"../../core/fetch/value.coffee":66,"../../network/shortestPath.coffee":158,"../../util/uniques.coffee":201}],309:[function(require,module,exports){
+},{"../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../network/shortestPath.coffee":"/Users/Dave/Sites/d3plus/src/network/shortestPath.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/pie.coffee":[function(require,module,exports){
 var comparator, dataThreshold, fetchValue, groupData, order, pie;
 
 comparator = require("../../array/comparator.coffee");
@@ -31518,7 +31566,7 @@ groupData = require("../../core/data/group.coffee");
 order = {};
 
 pie = function(vars) {
-  var d, groupedData, i, item, len, pieData, pieLayout, radius, returnData;
+  var d, groupedData, item, pieData, pieLayout, radius, returnData, _i, _len;
   pieLayout = d3.layout.pie().value(function(d) {
     return d.value;
   }).sort(function(a, b) {
@@ -31545,8 +31593,8 @@ pie = function(vars) {
   pieData = pieLayout(groupedData);
   returnData = [];
   radius = d3.min([vars.width.viz, vars.height.viz]) / 2 - vars.labels.padding * 2;
-  for (i = 0, len = pieData.length; i < len; i++) {
-    d = pieData[i];
+  for (_i = 0, _len = pieData.length; _i < _len; _i++) {
+    d = pieData[_i];
     item = d.data.d3plus;
     item.d3plus.startAngle = d.startAngle;
     item.d3plus.endAngle = d.endAngle;
@@ -31572,7 +31620,7 @@ module.exports = pie;
 
 
 
-},{"../../array/comparator.coffee":32,"../../core/data/group.coffee":56,"../../core/data/threshold.js":60,"../../core/fetch/value.coffee":66}],310:[function(require,module,exports){
+},{"../../array/comparator.coffee":"/Users/Dave/Sites/d3plus/src/array/comparator.coffee","../../core/data/group.coffee":"/Users/Dave/Sites/d3plus/src/core/data/group.coffee","../../core/data/threshold.js":"/Users/Dave/Sites/d3plus/src/core/data/threshold.js","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/rings.js":[function(require,module,exports){
 var arraySort     = require("../../array/sort.coffee"),
     events        = require("../../client/pointer.coffee"),
     fetchValue    = require("../../core/fetch/value.coffee"),
@@ -32059,7 +32107,7 @@ rings.tooltip      = "static"
 
 module.exports = rings
 
-},{"../../array/sort.coffee":34,"../../client/pointer.coffee":38,"../../color/legible.coffee":43,"../../core/fetch/color.coffee":62,"../../core/fetch/value.coffee":66,"../../network/smallestGap.coffee":159,"../../tooltip/remove.coffee":194,"../../util/uniques.coffee":201}],311:[function(require,module,exports){
+},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../client/pointer.coffee":"/Users/Dave/Sites/d3plus/src/client/pointer.coffee","../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../network/smallestGap.coffee":"/Users/Dave/Sites/d3plus/src/network/smallestGap.coffee","../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/scatter.coffee":[function(require,module,exports){
 var fetchValue, graph, print, scatter, sort, ticks;
 
 fetchValue = require("../../core/fetch/value.coffee");
@@ -32073,7 +32121,7 @@ sort = require("../../array/sort.coffee");
 ticks = require("./helpers/graph/dataTicks.coffee");
 
 scatter = function(vars) {
-  var d, domains, i, len, ref;
+  var d, domains, _i, _len, _ref;
   graph(vars, {
     buffer: "size",
     mouse: true
@@ -32082,9 +32130,9 @@ scatter = function(vars) {
   if (domains.indexOf(void 0) >= 0) {
     return [];
   }
-  ref = vars.data.viz;
-  for (i = 0, len = ref.length; i < len; i++) {
-    d = ref[i];
+  _ref = vars.data.viz;
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    d = _ref[_i];
     d.d3plus.x = vars.x.scale.viz(fetchValue(vars, d, vars.x.value));
     d.d3plus.x += vars.axes.margin.left;
     d.d3plus.y = vars.y.scale.viz(fetchValue(vars, d, vars.y.value));
@@ -32128,7 +32176,7 @@ module.exports = scatter;
 
 
 
-},{"../../array/sort.coffee":34,"../../core/console/print.coffee":51,"../../core/fetch/value.coffee":66,"./helpers/graph/dataTicks.coffee":297,"./helpers/graph/draw.coffee":298}],312:[function(require,module,exports){
+},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","./helpers/graph/dataTicks.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/dataTicks.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/stacked.coffee":[function(require,module,exports){
 var closest, fetchValue, graph, nest, sort, stack, stacked, threshold;
 
 closest = require("../../util/closest.coffee");
@@ -32146,7 +32194,7 @@ stack = require("./helpers/graph/stack.coffee");
 threshold = require("../../core/data/threshold.js");
 
 stacked = function(vars) {
-  var d, data, discrete, domains, i, j, len, len1, opposite, point, ref;
+  var d, data, discrete, domains, opposite, point, _i, _j, _len, _len1, _ref;
   graph(vars, {
     buffer: vars.axes.opposite
   });
@@ -32157,14 +32205,14 @@ stacked = function(vars) {
   data = sort(vars.data.viz, null, null, null, vars);
   discrete = vars[vars.axes.discrete];
   opposite = vars[vars.axes.opposite];
-  for (i = 0, len = data.length; i < len; i++) {
-    point = data[i];
+  for (_i = 0, _len = data.length; _i < _len; _i++) {
+    point = data[_i];
     if (!point.d3plus) {
       point.d3plus = {};
     }
-    ref = point.values;
-    for (j = 0, len1 = ref.length; j < len1; j++) {
-      d = ref[j];
+    _ref = point.values;
+    for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+      d = _ref[_j];
       if (!d.d3plus) {
         d.d3plus = {};
       }
@@ -32227,7 +32275,7 @@ module.exports = stacked;
 
 
 
-},{"../../array/sort.coffee":34,"../../core/data/threshold.js":60,"../../core/fetch/value.coffee":66,"../../util/closest.coffee":197,"./helpers/graph/draw.coffee":298,"./helpers/graph/nest.coffee":304,"./helpers/graph/stack.coffee":305}],313:[function(require,module,exports){
+},{"../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../core/data/threshold.js":"/Users/Dave/Sites/d3plus/src/core/data/threshold.js","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../util/closest.coffee":"/Users/Dave/Sites/d3plus/src/util/closest.coffee","./helpers/graph/draw.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/draw.coffee","./helpers/graph/nest.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/nest.coffee","./helpers/graph/stack.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/helpers/graph/stack.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/table.js":[function(require,module,exports){
 var fetchValue = require("../../core/fetch/value.coffee");
 var uniques    = require("../../util/uniques.coffee");
 var copy       = require("../../util/copy.coffee");
@@ -32382,7 +32430,7 @@ table.requirements = ["data", "cols"]
 
 module.exports = table
 
-},{"../../color/random.coffee":46,"../../core/fetch/value.coffee":66,"../../util/copy.coffee":198,"../../util/uniques.coffee":201}],314:[function(require,module,exports){
+},{"../../color/random.coffee":"/Users/Dave/Sites/d3plus/src/color/random.coffee","../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee","../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/types/tree_map.coffee":[function(require,module,exports){
 var dataThreshold, groupData, mergeObject, tree_map;
 
 dataThreshold = require("../../core/data/threshold.js");
@@ -32392,7 +32440,7 @@ groupData = require("../../core/data/group.coffee");
 mergeObject = require("../../object/merge.coffee");
 
 tree_map = function(vars) {
-  var d, data, groupedData, i, len, returnData, root;
+  var d, data, groupedData, returnData, root, _i, _len;
   groupedData = groupData(vars, vars.data.viz);
   data = d3.layout.treemap().mode(vars.type.mode.value).round(true).size([vars.width.viz, vars.height.viz]).children(function(d) {
     return d.values;
@@ -32416,8 +32464,8 @@ tree_map = function(vars) {
       root = root.parent;
     }
     returnData = [];
-    for (i = 0, len = data.length; i < len; i++) {
-      d = data[i];
+    for (_i = 0, _len = data.length; _i < _len; _i++) {
+      d = data[_i];
       d.d3plus.d3plus = mergeObject(d.d3plus.d3plus, {
         x: d.x + d.dx / 2,
         y: d.y + d.dy / 2,
@@ -32447,7 +32495,7 @@ module.exports = tree_map;
 
 
 
-},{"../../core/data/group.coffee":56,"../../core/data/threshold.js":60,"../../object/merge.coffee":162}],315:[function(require,module,exports){
+},{"../../core/data/group.coffee":"/Users/Dave/Sites/d3plus/src/core/data/group.coffee","../../core/data/threshold.js":"/Users/Dave/Sites/d3plus/src/core/data/threshold.js","../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/viz.coffee":[function(require,module,exports){
 var attach, axis, container, flash, getSteps, print, validObject;
 
 attach = require("../core/methods/attach.coffee");
@@ -32648,4 +32696,4 @@ module.exports = function() {
 
 
 
-},{"../core/console/print.coffee":51,"../core/methods/attach.coffee":73,"../object/validate.coffee":163,"./helpers/container.coffee":202,"./helpers/drawSteps.js":203,"./helpers/ui/message.js":234,"./methods/active.coffee":243,"./methods/aggs.coffee":244,"./methods/attrs.coffee":245,"./methods/axes.coffee":246,"./methods/background.coffee":247,"./methods/color.coffee":248,"./methods/cols.js":249,"./methods/config.coffee":250,"./methods/container.coffee":251,"./methods/coords.coffee":252,"./methods/csv.coffee":253,"./methods/data.coffee":254,"./methods/depth.coffee":255,"./methods/descs.coffee":256,"./methods/dev.coffee":257,"./methods/draw.js":258,"./methods/edges.js":259,"./methods/error.coffee":260,"./methods/focus.coffee":261,"./methods/font.coffee":262,"./methods/footer.coffee":263,"./methods/format.coffee":264,"./methods/height.coffee":265,"./methods/helpers/axis.coffee":266,"./methods/history.coffee":267,"./methods/icon.coffee":268,"./methods/id.coffee":269,"./methods/labels.coffee":270,"./methods/legend.coffee":271,"./methods/links.coffee":272,"./methods/margin.coffee":273,"./methods/messages.coffee":274,"./methods/nodes.coffee":275,"./methods/order.coffee":276,"./methods/shape.coffee":277,"./methods/size.coffee":278,"./methods/style.coffee":279,"./methods/temp.coffee":280,"./methods/text.coffee":281,"./methods/time.coffee":282,"./methods/timeline.coffee":283,"./methods/timing.coffee":284,"./methods/title.coffee":285,"./methods/tooltip.coffee":286,"./methods/total.coffee":287,"./methods/type.coffee":288,"./methods/ui.coffee":289,"./methods/width.coffee":290,"./methods/zoom.js":291,"./types/bar.coffee":292,"./types/box.coffee":293,"./types/bubbles.coffee":294,"./types/deprecated/chart.coffee":295,"./types/geo_map.coffee":296,"./types/line.coffee":306,"./types/network.js":307,"./types/paths.coffee":308,"./types/pie.coffee":309,"./types/rings.js":310,"./types/scatter.coffee":311,"./types/stacked.coffee":312,"./types/table.js":313,"./types/tree_map.coffee":314}]},{},[1]);
+},{"../core/console/print.coffee":"/Users/Dave/Sites/d3plus/src/core/console/print.coffee","../core/methods/attach.coffee":"/Users/Dave/Sites/d3plus/src/core/methods/attach.coffee","../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","./helpers/container.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/container.coffee","./helpers/drawSteps.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/drawSteps.js","./helpers/ui/message.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/ui/message.js","./methods/active.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/active.coffee","./methods/aggs.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/aggs.coffee","./methods/attrs.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/attrs.coffee","./methods/axes.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/axes.coffee","./methods/background.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/background.coffee","./methods/color.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/color.coffee","./methods/cols.js":"/Users/Dave/Sites/d3plus/src/viz/methods/cols.js","./methods/config.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/config.coffee","./methods/container.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/container.coffee","./methods/coords.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/coords.coffee","./methods/csv.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/csv.coffee","./methods/data.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/data.coffee","./methods/depth.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/depth.coffee","./methods/descs.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/descs.coffee","./methods/dev.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/dev.coffee","./methods/draw.js":"/Users/Dave/Sites/d3plus/src/viz/methods/draw.js","./methods/edges.js":"/Users/Dave/Sites/d3plus/src/viz/methods/edges.js","./methods/error.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/error.coffee","./methods/focus.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/focus.coffee","./methods/font.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/font.coffee","./methods/footer.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/footer.coffee","./methods/format.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/format.coffee","./methods/height.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/height.coffee","./methods/helpers/axis.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/helpers/axis.coffee","./methods/history.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/history.coffee","./methods/icon.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/icon.coffee","./methods/id.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/id.coffee","./methods/labels.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/labels.coffee","./methods/legend.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/legend.coffee","./methods/links.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/links.coffee","./methods/margin.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/margin.coffee","./methods/messages.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/messages.coffee","./methods/nodes.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/nodes.coffee","./methods/order.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/order.coffee","./methods/shape.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/shape.coffee","./methods/size.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/size.coffee","./methods/style.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/style.coffee","./methods/temp.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/temp.coffee","./methods/text.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/text.coffee","./methods/time.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/time.coffee","./methods/timeline.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/timeline.coffee","./methods/timing.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/timing.coffee","./methods/title.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/title.coffee","./methods/tooltip.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/tooltip.coffee","./methods/total.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/total.coffee","./methods/type.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/type.coffee","./methods/ui.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/ui.coffee","./methods/width.coffee":"/Users/Dave/Sites/d3plus/src/viz/methods/width.coffee","./methods/zoom.js":"/Users/Dave/Sites/d3plus/src/viz/methods/zoom.js","./types/bar.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/bar.coffee","./types/box.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/box.coffee","./types/bubbles.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/bubbles.coffee","./types/deprecated/chart.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/deprecated/chart.coffee","./types/geo_map.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/geo_map.coffee","./types/line.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/line.coffee","./types/network.js":"/Users/Dave/Sites/d3plus/src/viz/types/network.js","./types/paths.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/paths.coffee","./types/pie.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/pie.coffee","./types/rings.js":"/Users/Dave/Sites/d3plus/src/viz/types/rings.js","./types/scatter.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/scatter.coffee","./types/stacked.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/stacked.coffee","./types/table.js":"/Users/Dave/Sites/d3plus/src/viz/types/table.js","./types/tree_map.coffee":"/Users/Dave/Sites/d3plus/src/viz/types/tree_map.coffee"}]},{},["./src/init.coffee"]);
