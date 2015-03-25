@@ -448,6 +448,7 @@ def dictionary():
         "loading_items": gettext("Loading More Items"),
         "wait": gettext("Please Wait"),
         "back": gettext("Back"),
+        "remove_filter": gettext("Remove this Filter"),
         "Municipalities within": gettext("Municipalities within"),
         "No municipalities within that distance.": gettext("No municipalities within that distance."),
         "Including": gettext("Including"),

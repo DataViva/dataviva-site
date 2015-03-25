@@ -21,19 +21,24 @@ div.selector_header > div.selector_header_icon {
   background-size: 100%;
   display: inline-block;
   height: 50px;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   width: 50px;
 }
 
 div.selector_title_div {
   display: inline-block;
-  margin: 6px 0px 12px 12px;
+  margin: 6px 0px 6px 12px;
 }
 
 div.selector_title {
   display: inline-block;
   font-size: 18px;
   line-height: 20px;
+}
+
+div.selector_depth {
+  margin-bottom: 6px;
+  text-align: center;
 }
 
 div.selector_toggles {
@@ -61,7 +66,16 @@ div.selector_header input {
 }
 
 div.selector_title_div > div.breadcrumb {
-  margin: 6px 0px;
+  margin: 3px 0 0;
+}
+
+.site_crumb {
+  color: #888;
+}
+
+.site_crumb i {
+  float: left;
+  margin: 2px 3px 0 0;
 }
 
 /* Body Div */
@@ -142,6 +156,12 @@ div.selector_toggles > div,
 div.search_buttons > div {
   display: inline-block;
   margin: 0px 0px 6px 6px;
+}
+
+.selector_depth_links > a {
+  display: inline-block;
+  margin-left: 5px;
+  text-decoration: underline;
 }
 
 div.search_buttons > div.proximity_toggles {
