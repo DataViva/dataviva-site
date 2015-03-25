@@ -201,17 +201,21 @@ d3.selectAll(".filter_button")
   })
 
 // listen for when user changes output filter to change nestings as well
+var first_load = true;
 d3.selectAll(".output_filters select")
   .each(function(){
     d3plus.form()
       .data(d3.select(this))
       .focus(undefined, function(value) {
-        d3.selectAll(".output_nestings").style("display", "none");
-        d3.select(".output_nestings." + value).style("display", "inline-block");
+        if (!first_load) {
+          d3.selectAll(".output_nestings").style("display", "none");
+          d3.select(".output_nestings." + value).style("display", "inline-block");
+        }
       })
       .type("drop")
       .draw();
   })
+first_load = false;
 
 d3.selectAll(".output_nestings select")
   .each(function(){
@@ -263,6 +267,7 @@ function make_url(){
   var current_url = urls[current_dataset];
   var current_output = d3.select(".output_filters."+current_dataset+" select").property("value");
   var current_nesting = d3.select(".output_nestings."+current_output+" select").property("value");
+  console.log(current_dataset, current_output, current_nesting)
 
   var time = []
   current_url.time.forEach(function(t){
