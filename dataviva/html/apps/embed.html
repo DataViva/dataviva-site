@@ -1568,9 +1568,11 @@
       /* Stacked Specific Variables */
       /******************************/
       else if (app.build.app.type == "stacked") {
-        var layout = app.build.ui.filter(function(ui){ return ui.type === "layout"; });
-        if (layout) layout = layout[0].values[0];
-        else layout = "linear"
+
+        // var layout = app.build.ui.filter(function(ui){ return ui.type === "layout"; });
+        // if (layout) layout = layout[0].values[0];
+        // else layout = "linear"
+        var layout = app.vars.layout;
         if (layout === "value") layout = "linear";
         app.viz
           .x({
@@ -1587,7 +1589,8 @@
           .total(false)
           .id({"grouping": true})
           .shape("area")
-          .order(false)
+          .order(app.vars.order)
+          .depth(app.build.output_attr === "bra" ? 1 : 0)
       }
 
       /******************************/
@@ -1725,7 +1728,7 @@
           if (["scatter", "occugrid"].indexOf(app.build.app.type) >= 0) {
             error = dataviva.dictionary.no_brazil;
           }
-          else if (["network", "rings"].indexOf(app.build.app.type) >= 0 && app.build.dataset === "rais") {
+          else if (["network"].indexOf(app.build.app.type) >= 0 && app.build.dataset === "rais") {
             error = dataviva.dictionary.no_brazil;
           }
       }
