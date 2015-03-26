@@ -1488,6 +1488,8 @@
           .focus(app.build[app.build.output_attr][0].id)
           .depth(app.viz.id(Object).nesting.length - 1)
           .size(false)
+          // .nodes({"overlap": 0.5})
+          .size({"scale": {"min": 3}})
           .shape("circle")
           .order(false)
       }
