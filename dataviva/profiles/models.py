@@ -320,12 +320,12 @@ class Cnae(Profile):
             {"title": gettext("Average Wage by:"),
             "builds": [
                 [
-                    {"id": 143, "params": {"size": "wage_avg"}},
+                    {"id": 143, "params": {"y": "wage_avg"}},
                     {"id": 20, "params": {"y": "wage_avg"}}
                 ],
                 [
-                    {"id": 37, "params": {"size": "wage_avg"}},
-                    {"id": 22, "params": {"color": "wage_avg"}}
+                    {"id": 37, "params": {"color": "wage_avg"}},
+                    {"id": 22, "params": {"y": "wage_avg"}}
                 ]
             ]}
         ]

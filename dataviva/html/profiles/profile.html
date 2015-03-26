@@ -48,7 +48,7 @@
   <div id="guide_controls" class="lightbox guide_controls">
     <div id="profile_button" onclick="selector('{{category}}','{{item.id}}')">
         <div id="arrow_clickable"><i class="fa fa fa-list-alt"></i></div>
-      <div id="guide_icon" style="background-image: url('{{ item.icon() }}');{% if category != 'wld' and category != 'bra' or (category == 'wld' and item.id|count == 2) %} background-color: {{ item.color }};{% endif %}"></div>
+      <div id="guide_icon" style="{% if category != 'university' %}background-image: url('{{ item.icon() }}');{% endif %}{% if category != 'wld' and category != 'bra' or (category == 'wld' and item.id|count == 2) %} background-color: {{ item.color }};{% endif %}"></div>
       <div id="guide_title">{{ item.name() }}</div>
     </div>
 
@@ -165,20 +165,20 @@
           id = id.split(".")[0];
         }
 
-        var limit = null;
-        if (type === "hs" || type === "wld") {
-          limit = 2;
-        }
-        else if (type === "cnae" || type === "cbo") {
-          limit = 1;
-        }
+        // var limit = null;
+        // if (type === "hs" || type === "wld") {
+        //   limit = 2;
+        // }
+        // else if (type === "cnae" || type === "cbo") {
+        //   limit = 1;
+        // }
 
         var selector = Selector()
           .callback(callback)
           .distance(dist)
           .initial_value(id)
           .type(type)
-          .limit(limit)
+          // .limit(limit)
 
         d3.select("#profile_select")
           .call(selector);
