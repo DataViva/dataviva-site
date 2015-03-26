@@ -18600,13 +18600,11 @@ module.exports = function(str) {
     }
 
     var ret = chr;
-    for ( var d in diacritics ) {
-
+    for (var d = 0; d < diacritics.length; d++) {
       if (diacritics[d][0].test(chr)) {
-        ret = diacritics[d][1]
+        ret = diacritics[d][1];
         break;
       }
-
     }
 
     return ret;
