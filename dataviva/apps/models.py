@@ -101,10 +101,10 @@ class Build(db.Model, AutoSerialize):
 
         for i, b in enumerate(bra_id):
             if isinstance(b, (Bra, Wld)):
-                if b.id.startswith("4mgplr"):
-                    b.pr_ids = [pr.id for pr in b.pr.all()]
-                else:
-                    b.pr_ids = []
+                # if b.id.startswith("4mgplr"):
+                #     b.pr_ids = [pr.id for pr in b.pr.all()]
+                # else:
+                #     b.pr_ids = []
                 self.bra.append(b)
             elif b == "all":
                 self.bra.append(Wld.query.get("sabra"))
@@ -123,10 +123,10 @@ class Build(db.Model, AutoSerialize):
                 self.bra.append(Bra.query.get(b))
                 self.bra[i].distance = dist
                 self.bra[i].neighbor_ids = [b.bra_id_dest for b in self.bra[i].get_neighbors(dist)]
-                if b.startswith("4mg"):
-                    self.bra[i].pr_ids = [b.id for b in self.bra[i].pr.all()]
-                else:
-                    self.bra[i].pr_ids = []
+                # if b.startswith("4mg"):
+                #     self.bra[i].pr_ids = [b.id for b in self.bra[i].pr.all()]
+                # else:
+                #     self.bra[i].pr_ids = []
 
     def set_filter1(self, filter):
         if self.filter1 != "all":
@@ -452,8 +452,8 @@ class Build(db.Model, AutoSerialize):
                 if b["id"] != "all" and self.bra[i].distance:
                     b["distance"] = self.bra[i].distance
                     b["neighbor_ids"] = self.bra[i].neighbor_ids
-                elif b["id"].startswith("4mg"):
-                    b["pr_ids"] = self.bra[i].pr_ids
+                # elif b["id"].startswith("4mg"):
+                #     b["pr_ids"] = self.bra[i].pr_ids
 
         for f in ["cnae", "cbo", "hs", "wld", "university", "course_hedu", "course_sc"]:
             if hasattr(self, f):

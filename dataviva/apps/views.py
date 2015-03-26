@@ -437,7 +437,7 @@ def get_geo_location(ip):
             "filter1": "all", "filter2": "all", "output": "hs", "params": ""})
 @mod.route('/builder/stacked/', defaults={"app_name": "stacked", "dataset": "rais", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "cbo", "params": ""})
-@mod.route('/builder/geo_map/', defaults={"app_name": "geo_map", "dataset": "rais", "bra_id": "4mgplr02",
+@mod.route('/builder/geo_map/', defaults={"app_name": "geo_map", "dataset": "rais", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "bra", "params": "?value_var=wage"})
 @mod.route('/builder/network/', defaults={"app_name": "network", "dataset": "secex", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "hs", "params": ""})

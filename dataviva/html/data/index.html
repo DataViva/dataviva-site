@@ -170,17 +170,22 @@ var selector = Selector().callback(function(d){
 // listen for when user updates dataset dropdown
 d3plus.form()
   .data(".datasets select")
+  .type("drop")
   .focus(undefined, show_hide_filters)
   .draw();
 
 d3.selectAll(".time select").each(function(){
-  d3plus.form()
+
+  var form = d3plus.form()
     .data(d3.select(this))
     .search(false)
     .height({"secondary": 150})
     .data({"sort":true})
-    .order({"sort":"desc"})
+    .order({"sort": this.id ? "desc" : "asc"})
+    .order("value")
+    .type("drop")
     .draw();
+
 })
 
 // remove filter if user clicks X
@@ -233,6 +238,7 @@ d3.selectAll(".output_nestings select")
 d3.select("#go").on("click", function(){
   var url = make_url();
   console.log(url);
+  dataviva.url("/data"+url);
   d3.select("#table_frame").attr("src", "/data/table"+url);
 })
 

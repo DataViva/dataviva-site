@@ -55,14 +55,14 @@ def _show_filters_to_add(column, value, table, colname):
     to_add = []
     pattern = '(\w+)?\.?show\.?(\w+)?'
     matches = re.match(pattern, value)
-    if matches: 
+    if matches:
         prefix, length = matches.groups()
-        PLANNING_REGION = "4mgplr"
-        if prefix and prefix.startswith(PLANNING_REGION) and length == '9':
-            result = db.session.query(bra_pr).filter_by(pr_id=prefix).all()
-            result = [muni for muni, pr in result]
-            to_add.append(column.in_(result))
-        elif prefix:
+        # PLANNING_REGION = "4mgplr"
+        # if prefix and prefix.startswith(PLANNING_REGION) and length == '9':
+        #     result = db.session.query(bra_pr).filter_by(pr_id=prefix).all()
+        #     result = [muni for muni, pr in result]
+        #     to_add.append(column.in_(result))
+        if prefix:
             to_add.append(column.startswith(prefix))
 
         if length and hasattr(table, colname + LEN):
@@ -76,18 +76,18 @@ def build_filters_and_groups(table, kwargs, exclude=None):
     filters = []
     groups = []
     show_column = None
-    
+
     for colname in kwargs:
         value = str(kwargs[colname])
         if colname == "month" and value == ALL:
             column = getattr(table, colname)
             filters.append(column.in_([1,2,3,4,5,6,7,8,9,10,11,12]))
             groups.append(column)
-        elif value != ALL: 
+        elif value != ALL:
             # -- if the value is not "ALL", then we need to group by this column
             column = getattr(table, colname)
             groups.append(column)
-            
+
             if not SHOW in value: # -- if the value does not include a SHOW operation, then just filter based on value
                 filters.append(parse_value(column, value))
             else:

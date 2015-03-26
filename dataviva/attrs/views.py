@@ -95,7 +95,7 @@ def attrs(attr="bra",Attr_id=None):
         Attr_weight_col = "enrolled"
 
     depths = {}
-    depths["bra"] = [1,3,5,7,8,9]
+    depths["bra"] = [1,3,5,7,9]
     depths["cnae"] = [1,3,6]
     depths["cbo"] = [1,4]
     depths["hs"] = [2,6]
@@ -222,7 +222,7 @@ def attrs(attr="bra",Attr_id=None):
 
         attrs = []
 
-        all_planning_regions = {}
+        # all_planning_regions = {}
 
         for i, a in enumerate(attrs_all):
             b = a[0].serialize()
@@ -239,12 +239,12 @@ def attrs(attr="bra",Attr_id=None):
                 a["available"] = False
                 if a["id"] in attrs_w_data:
                     a["available"] = True
-            if Attr_weight_col == "population" and len(a["id"]) == 9 and a["id"][:3] == "4mg":
-                if not all_planning_regions:
-                    all_planning_regions = get_planning_region_map()
-                if a["id"] in all_planning_regions:
-                    plr = all_planning_regions[a["id"]]
-                    a["plr"] = plr
+            # if Attr_weight_col == "population" and len(a["id"]) == 9 and a["id"][:3] == "4mg":
+            #     if not all_planning_regions:
+            #         all_planning_regions = get_planning_region_map()
+            #     if a["id"] in all_planning_regions:
+            #         plr = all_planning_regions[a["id"]]
+            #         a["plr"] = plr
 
             if order:
                 a["rank"] = int(i+offset+1)

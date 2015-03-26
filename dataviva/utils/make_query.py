@@ -90,16 +90,16 @@ def parse_filter(kwargs,id_type,query,data_table,ret):
                     ret["aggregate"] = True
                 id_list = id_list + obj_list
             elif obj_depth and obj_depth > len(obj_id):
-                if "plr" in obj_id:
-                    obj_list = table.query.get(obj_id).pr.all()
-                    obj_list = [m.id for m in obj_list]
-                    id_list = id_list + obj_list
-                else:
-                    obj_list = table.query.filter(\
-                        and_(func.char_length(getattr(table,"id")) == obj_depth, \
-                        getattr(table,"id").startswith(obj_id)))
-                    munic_list = [d.id for d in obj_list.all()]
-                    id_list = id_list + munic_list
+                # if "plr" in obj_id:
+                #     obj_list = table.query.get(obj_id).pr.all()
+                #     obj_list = [m.id for m in obj_list]
+                #     id_list = id_list + obj_list
+                # else:
+                obj_list = table.query.filter(\
+                    and_(func.char_length(getattr(table,"id")) == obj_depth, \
+                    getattr(table,"id").startswith(obj_id)))
+                munic_list = [d.id for d in obj_list.all()]
+                id_list = id_list + munic_list
             elif obj_id == "all":
                 if cat == "bra" or cat == "hs" or cat == "wld":
                     parent_depth = 2

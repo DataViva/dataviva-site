@@ -47,13 +47,7 @@
     <div id="controls">
 
       {% if depths|length > 1 %}
-        <div id="depths">
-          <legend for="depth">{% trans %}Depth{% endtrans %}</legend>
-          {% for d in depths %}
-            <input type="radio" value="{{type}}_{{d}}" name="depth" {% if depth == d %} checked{% endif %}>
-            <label for="{{type}}_{{d}}">{{format(type~"_"~d~"_plural").render(type~"_"~d~"_plural")}}</label>
-          {% endfor %}
-        </div>
+        <div id="depths"></div>
       {% endif %}
 
       <div id="years">
@@ -95,11 +89,20 @@
       }
     }
 
-    if (!d3.select("#depths").empty()) {
+    var depths = {{ depths|safe }};
+
+    if (depths.length > 1) {
+
+      depths = depths.map(function(d){
+        return {"text": dataviva.dictionary[type+"_"+d+"_plural"], "value": d+""};
+      })
 
       var depth_form = d3plus.form()
-        .data("[name=depth]")
+        .container("#depths")
+        .data(depths)
         .focus(depth, change_depth)
+        .text("text")
+        .title(dataviva.dictionary.depth)
         .type("toggle")
         .ui({"margin": 0})
         .draw();
@@ -108,7 +111,10 @@
 
     d3plus.form()
       .data("#year_select")
+      .data({"sort": true})
+      .order({"sort": "desc"})
       .focus(year, change_year)
+      .search(false)
       .type("drop")
       .ui({"margin": 0})
       .draw();
