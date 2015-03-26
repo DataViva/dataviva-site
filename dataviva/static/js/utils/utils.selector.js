@@ -290,7 +290,8 @@ function Selector() {
         search.node().value = "";
 
         if (depths.indexOf(x.id.length) === depths.length-1) {
-          x = data[x.parents[0]];
+          if (depths.length === 1) x = data.all;
+          else x = data[x.parents[0]];
         }
 
         selected = x;
@@ -554,7 +555,7 @@ function Selector() {
             icon.style("background-color",x.color);
           }
 
-          if (type != "file" && ((x.id != "all" && (!limit || x.id.length >= limit)) || (!limit && x.id == "all"))) {
+          if (type !== "file" && (x.id !== "all" || type === "bra")) {
             header_select_div.style("display","inline-block");
             header_select.leons.header_select.node.onclick = function(){
               selector_load.text(dataviva.format.text("wait")).show();
