@@ -159,9 +159,15 @@ div.search_buttons > div {
 }
 
 .selector_depth_links > a {
+  color: #444;
   display: inline-block;
   margin-left: 5px;
   text-decoration: underline;
+}
+
+.selector_depth_links > a:hover {
+  color: #888;
+  /*text-decoration: none;*/
 }
 
 div.search_buttons > div.proximity_toggles {
