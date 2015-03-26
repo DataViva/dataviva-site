@@ -5,7 +5,8 @@ function Selector() {
       name = "bra",
       initial_value = "all",
       distance = 0,
-      limit = null;
+      limit = null,
+      header_color = "#333";
 
   var lists = {
     "file": {
@@ -55,6 +56,18 @@ function Selector() {
   function util(selection) {
 
     selection.each(function(data) {
+
+      get_article = function(x) {
+        var connect = "in";
+        if (dataviva.language == "pt") {
+          if (x.id == "all") connect = "do";
+          else if (x.article_pt && x.gender_pt == "m") connect = "no";
+          else if (x.article_pt && x.gender_pt == "f") connect = "na";
+          else connect = "em";
+          if (x.plural_pt && x.article_pt) connect += "s";
+        }
+        return connect;
+      };
 
       update_distance = function(dist,id) {
 
@@ -115,15 +128,87 @@ function Selector() {
         if (searching) {
 
           // update_header(search_term);
-
-          // Create master list by matching both name and id
-          list = d3.values(data).filter(function(v){
-            var child = true;
-            if (parent.id != "all") {
-              child = v.parents.indexOf(parent.id) >= 0;
+          depth_list = [];
+          other_list = [];
+          for (var i in data) {
+            var d = data[i];
+            if (d.id !== "all" && d.search.indexOf(search_term) >= 0) {
+              if (d.id.length === current_depth && (parent.id === "all" || d.parents.indexOf(parent.id) >= 0)) {
+                depth_list.push(d);
+              }
+              else {
+                other_list.push(d);
+              }
             }
-            return v.id.length === current_depth && v.id != "all" && child && v.search.indexOf(search_term) >= 0;
+          }
+
+          // Sort final generated list
+          depth_list.sort(function(a, b){
+
+            var a_first = a[sorting];
+            var b_first = b[sorting];
+
+            if (a_first != b_first) {
+              if (typeof a_first === "string") return (a_first.localeCompare(b_first));
+              else return (b_first - a_first);
+            }
+            else {
+              var a_second = a.name.toTitleCase();
+              var b_second = b.name.toTitleCase();
+              return (a_second.localeCompare(b_second));
+            }
           });
+
+          // Sort final generated list
+          other_list.sort(function(a, b){
+
+            var a_first = a[sorting];
+            var b_first = b[sorting];
+
+            if (a_first != b_first) {
+              if (typeof a_first === "string") return (a_first.localeCompare(b_first));
+              else return (b_first - a_first);
+            }
+            else {
+              var a_second = a.name.toTitleCase();
+              var b_second = b.name.toTitleCase();
+              return (a_second.localeCompare(b_second));
+            }
+          });
+
+          var no_results = {"error": dataviva.dictionary.no_items};
+
+          var prefix = dataviva.dictionary[type+"_"+current_depth+"_plural"],
+              connect,
+              depth_title = prefix,
+              other_title = dataviva.dictionary.other + " " + dataviva.dictionary[type+"_plural"];
+          if (type === "bra") {
+            connect = " " + get_article(parent) + " ";
+            depth_title += connect + parent.name.toTitleCase();
+            var all_connect = " " + get_article(data.all) + " ";
+            other_title += all_connect + data.all.name.toTitleCase();
+          }
+          else if (parent.id !== "all") {
+            connect = " " + get_article(parent) + " ";
+            depth_title += connect + parent.name.toTitleCase();
+          }
+          depth_list.unshift({"title": depth_title});
+          other_list.unshift({"title": other_title});
+
+          if (depth_list.length === 1 && other_list.length === 1) {
+            list = [no_results];
+          }
+          else if (depth_list.length === 1) {
+            other_list.shift();
+            list = other_list;
+          }
+          else if (other_list.length === 1) {
+            depth_list.shift();
+            list = depth_list;
+          }
+          else {
+            list = depth_list.concat(other_list);
+          }
 
         }
         else {
@@ -146,32 +231,32 @@ function Selector() {
             });
           }
 
-        }
+          // Sort final generated list
+          list.sort(function(a, b){
 
-        // Sort final generated list
-        list.sort(function(a, b){
-
-          if (type === "bra" && current_depth === 3) {
-        		var a_state = a.id.substr(0,3);
-          	var b_state = b.id.substr(0,3);
-            if (a_state !== b_state && [a_state, b_state].indexOf("4mg") >= 0) {
-              return a_state === "4mg" ? -1 : 1;
+            if (type === "bra" && current_depth === 3) {
+          		var a_state = a.id;
+            	var b_state = b.id;
+              if (a_state !== b_state && [a_state, b_state].indexOf("4mg") >= 0) {
+                return a_state === "4mg" ? -1 : 1;
+              }
             }
-          }
 
-          var a_first = a[sorting];
-          var b_first = b[sorting];
+            var a_first = a[sorting];
+            var b_first = b[sorting];
 
-          if (a_first != b_first) {
-            if (typeof a_first === "string") return (a_first.localeCompare(b_first));
-            else return (b_first - a_first);
-          }
-          else {
-            var a_second = a.name.toTitleCase();
-            var b_second = b.name.toTitleCase();
-            return (a_second.localeCompare(b_second));
-          }
-        });
+            if (a_first != b_first) {
+              if (typeof a_first === "string") return (a_first.localeCompare(b_first));
+              else return (b_first - a_first);
+            }
+            else {
+              var a_second = a.name.toTitleCase();
+              var b_second = b.name.toTitleCase();
+              return (a_second.localeCompare(b_second));
+            }
+          });
+
+        }
 
         parent = container.node().parentNode;
         var display = d3.select(parent).style("display");
@@ -449,7 +534,7 @@ function Selector() {
 
       update_header = function(x) {
 
-        var header_color = "#333333";
+        header_color = "#333333";
         if (typeof x === "string") {
           header_select_div.style("display","none");
           icon.style("display","none");
@@ -581,12 +666,20 @@ function Selector() {
 
         results.forEach(function(v,i){
 
-          if (v) {
-      		 if (typeof app !== "object") {
-  		    	current_app = "";
-  		     } else {
-  		  	    current_app = app.build.app.type;
-  		     }
+          if (v && v.title) {
+            var item = body.append("div")
+              .attr("class","search_header")
+              .text(v.title);
+            if (i) {
+              item.style("margin-top", "18px")
+            }
+          }
+          else if (v && v.error) {
+            body.append("div")
+              .attr("class","search_error")
+              .text(v.error);
+          }
+          else if (v) {
 
             var item = body.append("div")
               .attr("id","result_"+v.id)

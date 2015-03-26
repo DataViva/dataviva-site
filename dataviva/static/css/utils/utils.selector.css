@@ -92,7 +92,25 @@ div.selector_body > div.d3plus_tooltip_data_seperator {
 .search_result {
   display: block;
   padding: 6px;
-  position: relative ;
+  position: relative;
+}
+
+.search_header {
+  color: #444;
+  display: block;
+  font-size: 18px;
+  padding: 0 0 12px;
+  position: relative;
+  text-align: center;
+}
+
+.search_error {
+  color: #888;
+  display: block;
+  font-size: 14px;
+  padding: 6px;
+  position: relative;
+  text-align: center;
 }
 
 div#result_4mg {
