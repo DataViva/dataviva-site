@@ -194,6 +194,7 @@
   .carousel ul li {
     display: inline-block;
     margin: 0 15px 0 0;
+    opacity: 0.85;
   }
   .poster {
     box-sizing: border-box;
@@ -204,15 +205,24 @@
     -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
             box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
     height: 120px;
-    opacity: 0.9;
     margin: 0px;
     position: relative;
     width: 120px;
   }
-  div.poster:hover {
+  div.poster.bra {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  .carousel li:hover {
     opacity: 1;
+  }
+  .carousel li:hover div.poster {
     -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
             box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+  }
+  .carousel li:hover div.poster.bra {
+    -webkit-box-shadow: none;
+            box-shadow: none;
   }
   .poster .title {
     box-sizing: border-box;
@@ -227,6 +237,9 @@
     white-space: normal;
     width: 120px;
   }
+  .carousel li:hover div.title {
+    text-decoration: underline;
+  }
   .poster .title.sub {
     font-size: 12px;
     margin-top: -8px;
@@ -237,6 +250,12 @@
     display: inline-block;
     margin: 15px;
     width: 90px;
+  }
+  .poster.bra img {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 5px;
+    width: 110px;
   }
 
   body.home .set {
@@ -352,7 +371,7 @@
             {% set value = itm['value'] %}
             <li>
               <a class="poster" href="{{ poster.url() }}">
-                <div class="poster" style="background-color:{{ poster.color }};">
+                <div class="poster {{ carousel.type }}"{% if carousel.type != "bra" %} style="background-color:{{ poster.color }};"{% endif %}>
                   <img src="{{ poster.icon() }}"/>
                 </div>
                 <div class="title">{{ loop.index }}. {{ poster.name() }}</div>
@@ -453,14 +472,16 @@
 
   var addLi = function(page, item, rank) {
     var metric = page.attr("data-metric");
-
+    var type = page.select("div.poster").node().className.split(" ")[1];
     var poster = item.poster;
     var a = page.append("li").append("a")
       .attr("class", "poster")
       .attr("href", poster.url)
-    a.append("div").attr("class", "poster")
-      .style("background-color",  poster.color)
-      .append("img").attr("src", poster.icon);
+    var p = a.append("div").attr("class", "poster "+type);
+
+    if (type !== "bra") p.style("background-color",  poster.color);
+
+    p.append("img").attr("src", poster.icon);
     a.append("div").attr("class", "title").text(rank + ". " + poster.name);
     a.append("div").attr("class", "title sub").html(dataviva.format.number(item.value, {"key": metric}));
     a.append("div").attr("class", "rank")
