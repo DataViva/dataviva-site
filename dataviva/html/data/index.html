@@ -178,7 +178,8 @@ d3.selectAll(".time select").each(function(){
     .data(d3.select(this))
     .search(false)
     .height({"secondary": 150})
-    .data({"order":false})
+    .data({"sort":true})
+    .order({"sort":"desc"})
     .draw();
 })
 
