@@ -51,7 +51,7 @@ no_length_column = { attrs.Bra: 9 }
 CAROSEL_NS = "carosel:"
 
 filters_map = {
-    secex.Ymb : [secex.Ymb.year == __latest_year__['secex']],
+    secex.Ymb : [secex.Ymb.year == __latest_year__['secex'], secex.Ymb.month == 0],
     rais.Yb_rais : [rais.Yb_rais.year == __latest_year__['rais']],
     rais.Yi : [rais.Yi.year == __latest_year__['rais']],
     rais.Yo : [rais.Yo.year == __latest_year__['rais'], rais.Yo.cbo_id != u'xxxx'],
