@@ -117,6 +117,18 @@ def home():
 
     limit = 20
     carousel_base = "/stats/carosel/?metric={}&show={}&profile={}&limit={}"
+
+    metric, show, profile = "export_val", "bra_id", "bra"
+    data = stats_list(metric, show, limit=limit)
+    items = make_items(data, Bra)
+    carousels.append({
+        "title": gettext("Top Exporting Municipalities"),
+        "type": profile,
+        "items": items,
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
+    })
+
     metric, show, profile = "wage_avg", "cbo_id", "cbo"
     data = stats_list(metric, show, limit=limit)
     items = make_items(data, Cbo)

@@ -10,6 +10,7 @@ from dataviva import db
 
 import dataviva.ei.models as ei
 import dataviva.rais.models as rais
+import dataviva.secex.models as secex
 import dataviva.hedu.models as hedu
 import dataviva.attrs.models as attrs
 from dataviva.stats.util import get_profiles
@@ -28,7 +29,7 @@ __latest_year__ = {k: v[-1] for k,v in __year_range__.items()}
 possible_tables = {
     "bra_id_r" : [ei.Ymr],
     "bra_id_s" : [ei.Yms],
-    "bra_id" : [rais.Yb_rais, hedu.Yb_hedu, hedu.Ybu, attrs.Bra],
+    "bra_id" : [rais.Yb_rais, secex.Ymb, hedu.Yb_hedu, hedu.Ybu, attrs.Bra],
     "cnae_id" : [rais.Yi],
     "cbo_id" : [rais.Yo],
     "university_id" : [hedu.Yu, hedu.Ybu],
@@ -50,6 +51,7 @@ no_length_column = { attrs.Bra: 9 }
 CAROSEL_NS = "carosel:"
 
 filters_map = {
+    secex.Ymb : [secex.Ymb.year == __latest_year__['secex']],
     rais.Yb_rais : [rais.Yb_rais.year == __latest_year__['rais']],
     rais.Yi : [rais.Yi.year == __latest_year__['rais']],
     rais.Yo : [rais.Yo.year == __latest_year__['rais'], rais.Yo.cbo_id != u'xxxx'],
