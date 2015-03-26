@@ -109,7 +109,7 @@ function Selector() {
 
         // Get current search box value
         search_term = search.node().value.toLowerCase().removeAccents();
-        searching = search_term.length > 0;
+        searching = search_term.length > 1;
 
         // User is searching, so do this stuff!
         if (searching) {
