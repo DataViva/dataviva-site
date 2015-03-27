@@ -120,6 +120,8 @@
   info has been supplied.
 */
 
+// are there any url params?
+var url_params = window.location.search;
 // find selected dataset
 var selected_dataset = d3.select(".datasets select").property("value");
 // show / hide filters based on selected dataset
@@ -309,8 +311,12 @@ function make_url(){
       }
     }
   })
-
-  return current_url.format;
+  
+  var url = current_url.format+url_params;
+  // clear URL params since we only need this on first page load
+  url_params = "";
+  
+  return url;
 }
 function table_size() {
   d3.select(".data_table")
