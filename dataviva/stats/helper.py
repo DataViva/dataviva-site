@@ -1,5 +1,5 @@
 import pickle
-
+import re
 from dataviva.utils import table_helper, query_helper
 from dataviva.stats.util import compute_allowed
 
@@ -113,6 +113,13 @@ def compute_stats(metric, shows, limit=None, offset=None, sort="desc", depth=Non
 
     if table in filters_map:
         filters += filters_map[table]
+
+    growth_regex = re.match('(num_emp)_growth(_5)?', metric)
+    VAL_THRESOLD = 10000
+    if growth_regex:
+        orig_col_name = growth_regex.group(1)
+        orig_col = getattr(table, orig_col_name)
+        filters.append(orig_col >= VAL_THRESOLD)
 
     columns = show_columns + [metric_col]
     results = query_helper.query_table(table, columns, filters, order=metric, limit=limit, sort=sort, offset=offset)
