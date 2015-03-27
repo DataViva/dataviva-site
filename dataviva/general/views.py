@@ -156,6 +156,7 @@ def home():
     items = make_items(data, Cnae)
     carousels.append({
         "title": gettext("Industries by Employment Growth"),
+        "sub": gettext("Excluding industries with less than 10,000 employees."),
         "type": profile,
         "items": items,
         "url" : carousel_base.format(metric, show, profile, limit),

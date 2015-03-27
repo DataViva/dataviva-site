@@ -288,12 +288,6 @@
 
 {% block body %}
 
-  <!-- <div class="darkbox"><h1>{% trans %}Visualizing the Economy of Brazil{% endtrans %}</h1></div>
-  <div class="home_sub">
-    {% trans %}DataViva is opening up data for the entire formal sector of the Brazilian economy{% endtrans %}
-      <br>
-    {% trans %}through more than 100 million interactive visualizations.{% endtrans %}
-  </div> -->
   <div id="spotlight">
 
     <a href="/profiles/bra/4mg/?app=26" class="feature">
@@ -360,7 +354,10 @@
 
     <div class="carousel">
 
-      <div class="darkbox"><h1>{{ carousel.title }}</h1></div>
+      <div class="darkbox">
+        <h1>{{ carousel.title }}</h1>
+        {% if carousel.sub %}<h3>{{ carousel.sub }}</h3>{% endif %}
+      </div>
       <a class="prev"><i class="fa fa-angle-left"></i></a>
       <a class="next"><i class="fa fa-angle-right"></i></a>
 
