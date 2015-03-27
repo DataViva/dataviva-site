@@ -21914,37 +21914,77 @@ module.exports = function(vars,selection,enter,exit) {
     })
   }
 
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // "paths" Exit
-  //----------------------------------------------------------------------------
-  exit.selectAll("path.d3plus_data").transition().duration(vars.draw.timing)
-    .call(size,0,0)
-    .each("end",function(d){
-      delete vars.arcs[d.d3plus.shape][d.d3plus.id]
-    })
+  function data(d) {
 
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // "paths" Update
-  //----------------------------------------------------------------------------
-  selection.selectAll("path.d3plus_data")
-    .data(function(d) { return [d]; })
-    .transition().duration(vars.draw.timing)
-      .call(size)
-      .call(shapeStyle,vars)
+    if (d.d3plus.label) {
+      d.d3plus_label = d.d3plus.label;
+    }
+    else {
+      delete d.d3plus_label;
+    }
 
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // "paths" Enter
-  //----------------------------------------------------------------------------
-  enter.append("path")
-    .attr("class","d3plus_data")
-    .transition().duration(0)
+    return [d];
+  }
+
+  if (vars.draw.timing) {
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // "paths" Exit
+    //----------------------------------------------------------------------------
+    exit.selectAll("path.d3plus_data").transition().duration(vars.draw.timing)
       .call(size,0,0)
-      .call(shapeStyle,vars)
+      .each("end",function(d){
+        delete vars.arcs[d.d3plus.shape][d.d3plus.id];
+      });
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // "paths" Update
+    //----------------------------------------------------------------------------
+    selection.selectAll("path.d3plus_data")
+      .data(data)
       .transition().duration(vars.draw.timing)
         .call(size)
-        .call(shapeStyle,vars)
+        .call(shapeStyle,vars);
 
-}
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // "paths" Enter
+    //----------------------------------------------------------------------------
+    enter.append("path")
+      .attr("class","d3plus_data")
+      .transition().duration(0)
+        .call(size,0,0)
+        .call(shapeStyle,vars)
+        .transition().duration(vars.draw.timing)
+          .call(size)
+          .call(shapeStyle,vars);
+
+  }
+  else {
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // "paths" Exit
+    //----------------------------------------------------------------------------
+    exit.selectAll("path.d3plus_data")
+      .each(function(d){
+        delete vars.arcs[d.d3plus.shape][d.d3plus.id];
+      });
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // "paths" Enter
+    //----------------------------------------------------------------------------
+    enter.append("path")
+      .attr("class","d3plus_data");
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // "paths" Update
+    //----------------------------------------------------------------------------
+    selection.selectAll("path.d3plus_data")
+      .data(data)
+      .call(size)
+      .call(shapeStyle,vars);
+  }
+
+};
 
 },{"./style.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/style.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/shapes/draw.js":[function(require,module,exports){
 var child         = require("../../../util/child.coffee"),
@@ -23682,12 +23722,12 @@ module.exports = function( vars , group ) {
           var active = vars.active.value ? fetchValue(vars, d, vars.active.value) : d.d3plus.active,
               temp   = vars.temp.value ? fetchValue(vars, d, vars.temp.value) : d.d3plus.temp,
               total  = vars.total.value ? fetchValue(vars, d, vars.total.value) : d.d3plus.total,
-              background = (!temp && !active) || (active === total);
+              background = (!temp && !active) || (active >= total) || (!active && temp >= total);
         }
 
       }
 
-      if (!disabled && (background || !fill)) {
+      if (!disabled && ((label && label.force) || background || !fill)) {
 
         if (share && d.d3plus.share && share.w-vars.labels.padding*2 >= 10 && share.h-vars.labels.padding*2 >= 10 && vars.labels.valign.value != "middle") {
 
@@ -24263,10 +24303,10 @@ module.exports = function(vars, selection, enter, exit) {
         y: 0
       };
       d.d3plus_label.shape = (d.d3plus.shape === "circle" ? "circle" : "square");
+    } else if (d.d3plus.label) {
+      d.d3plus_label = d.d3plus.label;
     } else {
-      if (d.d3plus.label) {
-        d.d3plus_label = d.d3plus.label;
-      }
+      delete d.d3plus_label;
     }
     return [d];
   };
@@ -29280,7 +29320,7 @@ legible = require("../../color/legible.coffee");
 groupData = require("../../core/data/group.coffee");
 
 bubbles = function(vars) {
-  var column_height, column_width, columns, d, data, dataLength, domain, domainMax, domainMin, downscale, groupedData, i, labelHeight, obj, pack, padding, row, rows, screenRatio, size, size_max, size_min, t, temp, xPadding, xoffset, yPadding, yoffset, _i, _j, _k, _len, _len1, _len2;
+  var column_height, column_width, columns, d, data, dataLength, domain, domainMax, domainMin, downscale, groupedData, i, labelHeight, obj, pack, padding, row, rows, screenRatio, size, size_max, size_min, t, temp, xPadding, xoffset, yMod, yPadding, yoffset, _i, _j, _k, _len, _len1, _len2;
   groupedData = groupData(vars, vars.data.viz);
   groupedData = arraySort(groupedData, null, null, null, vars);
   dataLength = groupedData.length;
@@ -29366,13 +29406,17 @@ bubbles = function(vars) {
     delete d.d3plus.yOffset;
     d.d3plus["static"] = d.d3plus.depth < vars.depth.value && vars.id.grouping.value;
     if (labelHeight && (d.d3plus.depth === 0 || vars.id.grouping.value === false)) {
+      d.d3plus.text = fetchText(vars, d[vars.id.value], d.d3plus.depth);
+      yMod = labelHeight > vars.labels.padding * 3 ? vars.labels.padding : 0;
       d.d3plus.label = {
         x: 0,
-        y: -(size_max + labelHeight / 2),
+        y: -(size_max + yMod + labelHeight / 2),
         w: size_max * 2,
-        h: labelHeight,
+        h: labelHeight - yMod,
         padding: 0,
-        color: legible(fetchColor(vars, d, d.d3plus.depth))
+        resize: false,
+        color: legible(fetchColor(vars, d, d.d3plus.depth)),
+        force: true
       };
     } else {
       delete d.d3plus.label;

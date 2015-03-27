@@ -1367,6 +1367,7 @@
         .time({"solo": timeSolo})
         .x({"label": app.build.app.type === "compare" ? {"font": {"size": 22, "weight": "normal"}} : false})
         .x({"ticks": {"font": {"size": app.build.output === "age" ? 12 : 16}}})
+        .labels({"font": {"size": 11}})
 
       // app.viz.type(app.build.app.d3plus)
       //   .title(app.build.title)
@@ -1563,6 +1564,7 @@
           .active("num_emp")
           .shape("donut")
           .size({"scale": {"min": 10}})
+          .labels({"font": {"size": 13}})
           .depth(app.viz.id(Object).nesting.length - 1)
       }
 
