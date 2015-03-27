@@ -22671,7 +22671,7 @@ module.exports = function(vars) {
           }
 
         }
-        else {
+        else if (vars.types[vars.type.value].requirements.indexOf("focus") < 0) {
 
           edge_update()
 
