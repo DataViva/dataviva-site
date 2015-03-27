@@ -18569,7 +18569,7 @@ module.exports = function(str) {
 
   var removed = [ "!","@","#","$","%","^","&","*","(",")",
                   "[","]","{","}",".",",","/","\\","|",
-                  "'","\"",";",":","<",">","?","=","+"]
+                  "'","\"",";",":","<",">","?","=","+"];
 
   var diacritics = [
       [/[\300-\306]/g, "A"],
@@ -18585,23 +18585,23 @@ module.exports = function(str) {
       [/[\321]/g, "N"],
       [/[\361]/g, "n"],
       [/[\307]/g, "C"],
-      [/[\347]/g, "c"],
+      [/[\347]/g, "c"]
   ];
 
-  str += ""
+  str += "";
 
   return ""+str.replace(/[^A-Za-z0-9\-_]/g, function(chr) {
 
-    if (" " == chr) {
-      return "_"
+    if (" " === chr) {
+      return "_";
     }
     else if (removed.indexOf(chr) >= 0) {
-      return ""
+      return "";
     }
 
     var ret = chr;
     for (var d = 0; d < diacritics.length; d++) {
-      if (diacritics[d][0].test(chr)) {
+      if (new RegExp(diacritics[d][0]).test(chr)) {
         ret = diacritics[d][1];
         break;
       }
@@ -18611,7 +18611,7 @@ module.exports = function(str) {
 
   });
 
-}
+};
 
 },{}],"/Users/Dave/Sites/d3plus/src/string/title.coffee":[function(require,module,exports){
 var defaultLocale;
@@ -24844,6 +24844,7 @@ var arraySort     = require("../../../array/sort.coffee"),
     fetchColor    = require("../../../core/fetch/color.coffee"),
     fetchText     = require("../../../core/fetch/text.js"),
     fetchValue    = require("../../../core/fetch/value.coffee"),
+    mergeObject   = require("../../../object/merge.coffee"),
     removeTooltip = require("../../../tooltip/remove.coffee"),
     uniques       = require("../../../util/uniques.coffee"),
     validObject   = require("../../../object/validate.coffee"),
@@ -25026,13 +25027,18 @@ module.exports = function(params) {
       }
 
     }
-
+    if (d.d3plus.tooltip) {
+      ex = mergeObject(ex, d.d3plus.tooltip);
+    }
     if ( vars.tooltip.size.value ) {
       if (dataValue && typeof vars.size.value !== "number") {
         ex[vars.size.value] = dataValue;
       }
       if (vars.axes.opposite && vars[vars.axes.opposite].value !== vars.size.value) {
         ex[vars[vars.axes.opposite].value] = fetchValue(vars, d, vars[vars.axes.opposite].value);
+      }
+      if (vars.color.valueScale) {
+        ex[vars.color.value] = fetchValue(vars, d, vars.color.value);
       }
     }
 
@@ -25165,7 +25171,7 @@ module.exports = function(params) {
 
 }
 
-},{"../../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../../core/data/nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../tooltip/create.js":"/Users/Dave/Sites/d3plus/src/tooltip/create.js","../../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../zoom/direction.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/direction.coffee","./data.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/data.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/data.js":[function(require,module,exports){
+},{"../../../array/sort.coffee":"/Users/Dave/Sites/d3plus/src/array/sort.coffee","../../../core/data/nest.js":"/Users/Dave/Sites/d3plus/src/core/data/nest.js","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../tooltip/create.js":"/Users/Dave/Sites/d3plus/src/tooltip/create.js","../../../tooltip/remove.coffee":"/Users/Dave/Sites/d3plus/src/tooltip/remove.coffee","../../../util/uniques.coffee":"/Users/Dave/Sites/d3plus/src/util/uniques.coffee","../zoom/direction.coffee":"/Users/Dave/Sites/d3plus/src/viz/helpers/zoom/direction.coffee","./data.js":"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/data.js"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/tooltip/data.js":[function(require,module,exports){
 var copy = require("../../../util/copy.coffee"),
     fetchValue   = require("../../../core/fetch/value.coffee"),
     fetchColor   = require("../../../core/fetch/color.coffee"),
@@ -25173,7 +25179,8 @@ var copy = require("../../../util/copy.coffee"),
     legible      = require("../../../color/legible.coffee"),
     mergeObject  = require("../../../object/merge.coffee"),
     prefix       = require("../../../client/prefix.coffee"),
-    stringFormat = require("../../../string/format.js")
+    stringFormat = require("../../../string/format.js"),
+    validObject  = require("../../../object/validate.coffee");
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // Creates a data object for the Tooltip
 //------------------------------------------------------------------------------
@@ -25251,7 +25258,14 @@ module.exports = function(vars, id, length, extras, children, depth) {
 
     var value = extra_data[key] || fetchValue(vars,id,key,id_var)
 
-    if (value != null && value != "undefined" && !(value instanceof Array) && ((typeof value === "string" && value.indexOf("d3plus_other") < 0) || !(typeof value === "string"))) {
+    if (validObject(value)) {
+      tooltip_data.push({
+        "name": vars.format.value(key),
+        "value": vars.format.value(value.value, {"key": value.key, "vars": vars}),
+        "group": group
+      })
+    }
+    else if (value != null && value != "undefined" && !(value instanceof Array) && ((typeof value === "string" && value.indexOf("d3plus_other") < 0) || !(typeof value === "string"))) {
       var name = vars.format.locale.value.ui[key]
                ? vars.format.value(vars.format.locale.value.ui[key])
                : vars.format.value(key),
@@ -25422,7 +25436,7 @@ module.exports = function(vars, id, length, extras, children, depth) {
 
 }
 
-},{"../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/types/run.coffee":[function(require,module,exports){
+},{"../../../client/prefix.coffee":"/Users/Dave/Sites/d3plus/src/client/prefix.coffee","../../../color/legible.coffee":"/Users/Dave/Sites/d3plus/src/color/legible.coffee","../../../core/fetch/color.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/color.coffee","../../../core/fetch/text.js":"/Users/Dave/Sites/d3plus/src/core/fetch/text.js","../../../core/fetch/value.coffee":"/Users/Dave/Sites/d3plus/src/core/fetch/value.coffee","../../../object/merge.coffee":"/Users/Dave/Sites/d3plus/src/object/merge.coffee","../../../object/validate.coffee":"/Users/Dave/Sites/d3plus/src/object/validate.coffee","../../../string/format.js":"/Users/Dave/Sites/d3plus/src/string/format.js","../../../util/copy.coffee":"/Users/Dave/Sites/d3plus/src/util/copy.coffee"}],"/Users/Dave/Sites/d3plus/src/viz/helpers/types/run.coffee":[function(require,module,exports){
 var print;
 
 print = require("../../../core/console/print.coffee");
@@ -29138,6 +29152,20 @@ box = function(vars) {
     y = d3.min([scale(first), scale(second)]) + boxData.d3plus[h] / 2;
     y += oppMargin;
     boxData.d3plus[opposite] = y;
+    boxData.d3plus.tooltip = {
+      "third quartile": {
+        key: vars[opposite].value,
+        value: second
+      },
+      "median": {
+        key: vars[opposite].value,
+        value: median
+      },
+      "first quartile": {
+        key: vars[opposite].value,
+        value: first
+      }
+    };
     returnData.push(boxData);
     medianData = {
       d3plus: {
