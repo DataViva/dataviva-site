@@ -176,7 +176,7 @@ function Selector() {
             }
           });
 
-          var no_results = {"error": dataviva.dictionary.no_items};
+          var no_results = {"error": dataviva.dictionary.search_empty};
 
           var prefix = dataviva.dictionary[type+"_"+current_depth+"_plural"],
               connect,
@@ -198,15 +198,9 @@ function Selector() {
           if (depth_list.length === 1 && other_list.length === 1) {
             list = [no_results];
           }
-          else if (depth_list.length === 1) {
-            other_list.shift();
-            list = other_list;
-          }
-          else if (other_list.length === 1) {
-            depth_list.shift();
-            list = depth_list;
-          }
           else {
+            if (depth_list.length === 1) depth_list.push(no_results);
+            if (other_list.length === 1) other_list.push(no_results);
             list = depth_list.concat(other_list);
           }
 

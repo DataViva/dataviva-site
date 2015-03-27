@@ -446,6 +446,7 @@ def dictionary():
         # Selector & Search
         "search": gettext("Search"),
         "search_results": gettext("Search Results"),
+        "search_empty": gettext("No Matches"),
         "other": gettext("Other"),
         "select": gettext("Select"),
         "show": gettext("Show"),
