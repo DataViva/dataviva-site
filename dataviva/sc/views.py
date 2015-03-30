@@ -7,12 +7,13 @@ from dataviva.utils import make_query
 from dataviva import view_cache
 from dataviva.utils.cached_query import api_cache_key
 from dataviva.utils import table_helper, query_helper
+from dataviva.utils.csv_helper import gen_csv, is_download
 
 mod = Blueprint('sc', __name__, url_prefix='/sc')
 
 @mod.route('/<year>/<bra_id>/<school_id>/<course_sc_id>/')
 @gzipped
-@view_cache.cached(key_prefix=api_cache_key("sc"))
+@view_cache.cached(key_prefix=api_cache_key("sc"), unless=is_download)
 def sc_api(**kwargs):
     tables = [Yc_sc, Yb_sc, Ys, Ybc_sc, Ybs, Ysc, Ybsc]
 
@@ -52,7 +53,7 @@ def sc_api(**kwargs):
     if serialize or download:
         response = jsonify(results)
         if download:
-            response.headers["Content-Disposition"] = "attachment;filename=hedu_data.json"
+            return gen_csv(results, "sc")
         return response
 
     return results
