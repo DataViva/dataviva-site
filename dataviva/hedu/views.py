@@ -7,12 +7,13 @@ from dataviva.utils import make_query
 from dataviva import view_cache
 from dataviva.utils.cached_query import api_cache_key
 from dataviva.utils import table_helper, query_helper
+from dataviva.utils.csv_helper import gen_csv, is_download
 
 mod = Blueprint('hedu', __name__, url_prefix='/hedu')
 
 @mod.route('/<year>/<bra_id>/<university_id>/<course_hedu_id>/')
 @gzipped
-@view_cache.cached(key_prefix=api_cache_key("hedu"))
+@view_cache.cached(key_prefix=api_cache_key("hedu"), unless=is_download)
 def hedu_api(**kwargs):
     tables = [hedu.Yb_hedu, hedu.Yc_hedu, hedu.Yu, hedu.Ybc_hedu, hedu.Ybu, hedu.Yuc, hedu.Ybuc]
 
@@ -41,7 +42,7 @@ def hedu_api(**kwargs):
     if serialize or download:
         response = jsonify(results)
         if download:
-            response.headers["Content-Disposition"] = "attachment;filename=hedu_data.json"
+            return gen_csv(results, "hedu")
         return response
 
     return results

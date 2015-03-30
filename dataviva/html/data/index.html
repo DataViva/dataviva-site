@@ -100,6 +100,8 @@
     <a class="decision icon database" id="go">
       {% trans %}Run Query{% endtrans %}
     </a>
+    
+    <a id="download" class="help flat icon download">{% trans %}Download{% endtrans %}</a>
 
   </div>
 </div>
@@ -239,9 +241,15 @@ d3.selectAll(".output_nestings select")
 
 d3.select("#go").on("click", function(){
   var url = make_url();
-  console.log(url);
+  // console.log(url);
   dataviva.url("/data"+url);
   d3.select("#table_frame").attr("src", "/data/table"+url);
+})
+
+d3.select("#download").on("click", function(){
+  var url = make_url();
+  url += "?download=true";
+  window.location = url;
 })
 
 /*

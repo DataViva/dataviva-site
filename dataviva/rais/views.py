@@ -7,12 +7,13 @@ from dataviva.utils import table_helper, query_helper
 from dataviva.utils.gzip_data import gzipped
 from dataviva import view_cache
 from dataviva.utils.cached_query import api_cache_key
+from dataviva.utils.csv_helper import gen_csv, is_download
 
 mod = Blueprint('rais', __name__, url_prefix='/rais')
 
 @mod.route('/<year>/<bra_id>/<cnae_id>/<cbo_id>/')
 @gzipped
-@view_cache.cached(key_prefix=api_cache_key("rais"))
+@view_cache.cached(key_prefix=api_cache_key("rais"), unless=is_download)
 def rais_api(**kwargs):
     limit = int(kwargs.pop('limit', 0)) or int(request.args.get('limit', 0) )
     order = request.args.get('order', None) or kwargs.pop('order', None)
@@ -68,6 +69,6 @@ def rais_api(**kwargs):
     if serialize or download:
         response = jsonify(results)
         if download:
-            response.headers["Content-Disposition"] = "attachment;filename=rais_data.json"
+            return gen_csv(results, "rais")
         return response
     return results

@@ -540,6 +540,13 @@
   line-height: 39px;
 }
 
+.help.icon.download:before {
+  color: #1abbee;
+  content: "\f019";
+  font-size: 14px;
+  line-height: 39px;
+}
+
 .decision.icon.source:before {
   content: "\f14e";
 }
