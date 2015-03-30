@@ -44,6 +44,29 @@
         <a class="account" href="{{ url_for('account.logout') }}"><i class="fa fa-key"></i>{% trans %}Logout{% endtrans %}</a>
       </div>
 
+      <div id="profiles_drop">
+        <a class="drop icon bra" href="/profiles/bra/select/">{% trans %}Location{% endtrans %}</a>
+        <a class="drop icon hs" href="/profiles/hs/select/">{% trans %}Product{% endtrans %}</a>
+        <a class="drop icon wld" href="/profiles/wld/select/">{% trans %}Trade Partner{% endtrans %}</a>
+        <a class="drop icon cnae" href="/profiles/cnae/select/">{% trans %}Industry{% endtrans %}</a>
+        <a class="drop icon cbo" href="/profiles/cbo/select/">{% trans %}Occupation{% endtrans %}</a>
+        <a class="drop icon university" href="/profiles/university/select/">{% trans %}University{% endtrans %}</a>
+        <a class="drop icon course_hedu" href="/profiles/course_hedu/select/">{% trans %}Major{% endtrans %}</a>
+        <a class="drop icon course_sc" href="/profiles/course_sc/select/">{% trans %}Vocational Course{% endtrans %}</a>
+      </div>
+
+      <div id="apps_drop">
+        <a class="drop icon tree_map" href="/apps/builder/tree_map/">{% trans %}Tree Map{% endtrans %}</a>
+        <a class="drop icon stacked" href="/apps/builder/stacked/">{% trans %}Stacked{% endtrans %}</a>
+        <a class="drop icon geo_map" href="/apps/builder/geo_map/">{% trans %}Geo Map{% endtrans %}</a>
+        <a class="drop icon network" href="/apps/builder/network/">{% trans %}Network{% endtrans %}</a>
+        <a class="drop icon line" href="/apps/builder/line/">{% trans %}Line{% endtrans %}</a>
+        <a class="drop icon rings" href="/apps/builder/rings/">{% trans %}Rings{% endtrans %}</a>
+        <a class="drop icon scatter" href="/apps/builder/scatter/">{% trans %}Scatter{% endtrans %}</a>
+        <a class="drop icon compare" href="/apps/builder/compare/">{% trans %}Compare{% endtrans %}</a>
+        <a class="drop icon occugrid" href="/apps/builder/occugrid/">{% trans %}Occugrid{% endtrans %}</a>
+        <a class="drop icon box" href="/apps/builder/box/">{% trans %}Box Plot{% endtrans %}</a>
+      </div>
 
     </div>
 
@@ -100,6 +123,50 @@
     d3.select("#account").on(d3plus.client.pointer.click,function(){
        login()
     })
+
+    var drop_height = {
+      "profiles": d3.select("#profiles_drop").style("height"),
+      "apps": d3.select("#apps_drop").style("height")
+    };
+    d3.select("#profiles_drop").style("height", "0px").style("border-width", "0px");
+    d3.select("#apps_drop").style("height", "0px").style("border-width", "0px");
+
+    function dropdown(type, show) {
+      if (show) {
+        d3.select("#"+type+"_drop")
+          .transition().duration(300)
+          .style("border-width", "4px")
+          .style("height", drop_height[type]);
+      }
+      else {
+        d3.select(window).on(d3plus.client.pointer.move, null);
+        d3.select("#"+type+"_drop")
+          .transition().duration(300)
+          .style("border-width", "0px")
+          .style("height", "0px");
+      }
+    }
+
+    function drop_out(type) {
+      setTimeout(function(){
+        d3.select(window).on(d3plus.client.pointer.move, function(){
+          var target = d3.event.target;
+          var allowed = [type, type+"_drop", "header", "header_container"];
+          if ((allowed.indexOf(target.id) < 0 && allowed.indexOf(target.parentNode.id) < 0) ||
+              ["logo", "data", "rankings", "about", "search"].indexOf(target.id) >= 0) {
+            dropdown(type, false);
+          }
+        });
+      }, 500);
+    }
+
+    d3.selectAll("#profiles, #apps")
+      .on(d3plus.client.pointer.over, function(){
+        if (this.id === "profiles") dropdown("apps", false);
+        else dropdown("profiles", false);
+        dropdown(this.id, true);
+        drop_out(this.id);
+      })
 
     var authenticated = function(username, is_admin) {
       d3.select("#account").text(username);

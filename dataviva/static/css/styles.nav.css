@@ -177,6 +177,42 @@ div#language .leon.radio {
   margin: 1px !important;
 }
 
+#profiles_drop, #apps_drop {
+  background-color: #f7f7f7;
+  overflow: hidden;
+  position: absolute;
+  text-align: left;
+  top: 59px;
+  z-index: 999;
+}
+
+#profiles_drop {
+  border-bottom: 4px solid #e0902d;
+  left: 206px;
+  width: 165px;
+}
+
+#apps_drop {
+  border-bottom: 4px solid #af1f24;
+  left: 289px;
+  width: 140px;
+}
+
+#profiles_drop a, #apps_drop a {
+  border-top: 1px solid #ddd;
+  color: black;
+  opacity: 0.4;
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 5px;
+}
+
+#profiles_drop a:hover, #apps_drop a:hover {
+  color: black;
+  opacity: 0.8;
+}
+
 /***********************/
 /* Breadcrumb Specific */
 /***********************/

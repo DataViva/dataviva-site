@@ -152,6 +152,24 @@
 /* Filters */
 /***********/
 
+.drop.icon {
+  padding-left: 20px !important;
+  position: relative;
+}
+
+.drop.icon:before {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 90%;
+  content: "";
+  display: block;
+  height: 100%;
+  left: 2px;
+  position: absolute;
+  top: 0px;
+  width: 15px;
+}
+
 .decision.icon.bra:before {
   background-image: url("/static/img/icons/bra/bra_all_alt.png");
 }
@@ -192,45 +210,72 @@
   background-image: url("/static/img/icons/bra/bra_all_alt_black.png");
   opacity: 0.2;
 }
+.drop.icon.bra:before {
+  background-image: url("/static/img/icons/bra/bra_all_alt_black.png");
+}
 
 .help.icon.cnae:before {
   background-image: url("/static/img/icons/cnae/cnae_all_black.png");
   opacity: 0.2;
+}
+.drop.icon.cnae:before {
+  background-image: url("/static/img/icons/cnae/cnae_all_black.png");
 }
 
 .help.icon.hs:before {
   background-image: url("/static/img/icons/hs/hs_all_black.png");
   opacity: 0.2;
 }
+.drop.icon.hs:before {
+  background-image: url("/static/img/icons/hs/hs_all_black.png");
+}
 
 .help.icon.cbo:before {
   background-image: url("/static/img/icons/cbo/cbo_all_black.png");
   opacity: 0.2;
+}
+.drop.icon.cbo:before {
+  background-image: url("/static/img/icons/cbo/cbo_all_black.png");
 }
 
 .help.icon.wld:before {
   background-image: url("/static/img/icons/wld/wld_all_black.png");
   opacity: 0.2;
 }
+.drop.icon.wld:before {
+  background-image: url("/static/img/icons/wld/wld_all_black.png");
+}
 
 .help.icon.university:before {
   background-image: url("/static/img/icons/university/university_all_black.png");
   opacity: 0.2;
+}
+.drop.icon.university:before {
+  background-image: url("/static/img/icons/university/university_all_black.png");
 }
 
 .help.icon.course_hedu:before {
   background-image: url("/static/img/icons/course_hedu/course_hedu_all_black.png");
   opacity: 0.2;
 }
+.drop.icon.course_hedu:before {
+  background-image: url("/static/img/icons/course_hedu/course_hedu_all_black.png");
+}
 
 .help.icon.school:before {
   background-image: url("/static/img/icons/school/school_all_black.png");
   opacity: 0.2;
 }
+.drop.icon.school:before {
+  background-image: url("/static/img/icons/school/school_all_black.png");
+}
 
 .help.icon.course_sc:before {
   background-image: url("/static/img/icons/course_sc/course_sc_all_black.png");
   opacity: 0.2;
+}
+.drop.icon.course_sc:before {
+  background-image: url("/static/img/icons/course_sc/course_sc_all_black.png");
 }
 
 /********/
@@ -259,12 +304,18 @@
 .decision.icon.tree_map:before {
   background-image: url("/static/img/icons/app/app_tree_map.png");
 }
+.drop.icon.tree_map:before {
+  background-image: url("/static/img/icons/app/app_tree_map_black.png");
+}
 
 .decision.icon.stacked {
   background-color: #742777 !important;
 }
 .decision.icon.stacked:before {
   background-image: url("/static/img/icons/app/app_stacked.png");
+}
+.drop.icon.stacked:before {
+  background-image: url("/static/img/icons/app/app_stacked_black.png");
 }
 
 .decision.icon.network {
@@ -273,12 +324,18 @@
 .decision.icon.network:before {
   background-image: url("/static/img/icons/app/app_network.png");
 }
+.drop.icon.network:before {
+  background-image: url("/static/img/icons/app/app_network_black.png");
+}
 
 .decision.icon.rings {
   background-color: #d67ab0 !important;
 }
 .decision.icon.rings:before {
   background-image: url("/static/img/icons/app/app_rings.png");
+}
+.drop.icon.rings:before {
+  background-image: url("/static/img/icons/app/app_rings_black.png");
 }
 
 .decision.icon.scatter {
@@ -287,12 +344,18 @@
 .decision.icon.scatter:before {
   background-image: url("/static/img/icons/app/app_scatter.png");
 }
+.drop.icon.scatter:before {
+  background-image: url("/static/img/icons/app/app_scatter_black.png");
+}
 
 .decision.icon.compare {
   background-color: #1abbee !important;
 }
 .decision.icon.compare:before {
   background-image: url("/static/img/icons/app/app_compare.png");
+}
+.drop.icon.compare:before {
+  background-image: url("/static/img/icons/app/app_compare_black.png");
 }
 
 .decision.icon.geo_map {
@@ -301,12 +364,18 @@
 .decision.icon.geo_map:before {
   background-image: url("/static/img/icons/app/app_geo_map.png");
 }
+.drop.icon.geo_map:before {
+  background-image: url("/static/img/icons/app/app_geo_map_black.png");
+}
 
 .decision.icon.occugrid {
   background-color: #e0902d !important;
 }
 .decision.icon.occugrid:before {
   background-image: url("/static/img/icons/app/app_occugrid.png");
+}
+.drop.icon.occugrid:before {
+  background-image: url("/static/img/icons/app/app_occugrid_black.png");
 }
 
 .decision.icon.line {
@@ -315,12 +384,18 @@
 .decision.icon.line:before {
   background-image: url("/static/img/icons/app/app_line.png");
 }
+.drop.icon.line:before {
+  background-image: url("/static/img/icons/app/app_line_black.png");
+}
 
 .decision.icon.box {
   background-color: #93789e !important;
 }
 .decision.icon.box:before {
   background-image: url("/static/img/icons/app/app_box.png");
+}
+.drop.icon.box:before {
+  background-image: url("/static/img/icons/app/app_box_black.png");
 }
 
 .help.icon.tree_map:before {
