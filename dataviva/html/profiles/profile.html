@@ -14,6 +14,21 @@
         text-align: right;
       }
 
+      .build_mask {
+        background-color: rgba(255,255,255,0.5);
+        bottom: 0;
+        display: none;
+        left: 0;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        top: 0;
+      }
+
+      .build_mask > i {
+        margin-top: 3px;
+      }
+
       .build_title {
         display: inline-block;
         font-size: 12px;
@@ -61,8 +76,9 @@
         <div class="build_btn" data-build="{{ counter + loop.index0 }}" data-lock="{{ build[0].titlelock }}">
           <span class="build_title" id="group_{{ build[0].position }}" onclick="app_select(this.id)">{{ build[0].slug }}</span>
           {% for b in build %}
-            <a class="app_links decision icon short tiny {{ b.app.type }}" id="app_{{ b.position }}" data-url="{{ b.url }}" alt="{{ b.app.name }}" onclick="app_select(this.id)"></a>
+            <a class="app_links decision icon short tiny {{ b.app.type }}" id="app_{{ b.position }}" data-url="{{ b.url }}" alt="{{ b.app.name }}" onclick="app_select(this.id)" data-active="false"></a>
           {% endfor %}
+          <a class="build_mask" id="mask_{{ build[0].position }}" onclick="app_select(this.id)"><i class="fa fa-spinner fa-spin"></i></a>
         </div>
       {% endfor %}
       {% set counter = counter + group.builds|length %}
@@ -192,7 +208,6 @@
         height = window.innerHeight-108,
         builds = {},
         sliding = false,
-        loading = false,
         build = null,
         scrollinterval = null,
         url = false,
@@ -206,47 +221,50 @@
       .style("height",height+"px")
       .each(function(){
         var p = this.id.substring(7);
-        builds[p] = {"loaded": false, "top": this.offsetTop-88};
+        builds[p] = {"loaded": false, "loading": false, "top": this.offsetTop-88};
       })
 
-    function app_select(id) {
+    function app_select(id, scrolling) {
 
-      if (!id) id = "app_"+app;
+      if (!sliding) {
 
-      dataviva.url(window.location.pathname, {"app": id.split("_")[1]});
-      clearInterval(scrollinterval);
+        if (!id) id = "app_"+app;
 
-      var btn, build_btn, new_build;
-      if (id.indexOf("group_") === 0) {
-        build_btn = d3.select(d3.select("#"+id).node().parentNode);
-        d3.selectAll(".build_btn").each(function(d,i){
-          if (this === build_btn.node()) {
-            new_build = i+1+"";
-          }
-        })
-        btn = build_btn.select(".app_links");
-      }
-      else {
-        btn = d3.select("#"+id);
-        d3.selectAll(".build_btn").each(function(d,i){
-          if (this === btn.node().parentNode) {
-            build_btn = d3.select(this);
-            new_build = i+1+"";
-          }
-        })
-      }
+        dataviva.url(window.location.pathname, {"app": id.split("_")[1]});
+        clearInterval(scrollinterval);
 
-      url = btn.attr("data-url");
+        var btn, new_build;
+        var build_btn = d3.select(d3.select("#"+id).node().parentNode);
+        if (id.indexOf("group_") === 0 || id.indexOf("mask_") === 0) {
+          new_build = d3.select(d3.select("#"+id).node().parentNode).attr("data-build");
+          build_btn.selectAll(".app_links").each(function(d, i){
+            if (i === 0 || d3.select(this).attr("data-active") === "true") {
+              btn = d3.select(this);
+            }
+          });
+        }
+        else {
+          btn = d3.select("#"+id);
+          new_build = d3.select(btn.node().parentNode).attr("data-build");
+        }
 
-      d3.selectAll(".app_links").classed("decision", false).classed("help", true);
-      build_btn.select("[data-url='"+url+"']").classed("decision", true).classed("help", false)
+        url = btn.attr("data-url");
 
-      if (new_build !== build) {
+        d3.selectAll(".app_links")
+          .classed("decision", false)
+          .classed("help", true);
+
+        build_btn.selectAll(".app_links").attr("data-active", "false");
+        btn.classed("decision", true).classed("help", false).attr("data-active", "true");
+
         build = new_build;
-        slide();
-      }
-      else {
-        load();
+        if (!scrolling) {
+          slide();
+        }
+        else {
+          load();
+        }
+
       }
 
     }
@@ -254,7 +272,10 @@
     app_select();
 
     function update_titles(msg) {
-      loading = false;
+      var b = msg.id.substr(6);
+      d3.select(".build_btn[data-build='"+b+"']")
+        .select(".build_mask").style("display","none");
+      builds[b].loading = false;
       // var btn = d3.select("#app"+msg.id.substr(6));
       // var title = btn.attr("data-lock") === "False" ? msg.title : btn.html();
       // btn
@@ -269,17 +290,22 @@
     function load() {
 
       var iframe = d3.select("#iframe"+build);
-
       if (!builds[build].loaded) {
         builds[build].loaded = true;
+        builds[build].loading = true;
         iframe.attr("src", "/apps/embed/"+url);
       }
       else {
         var stripped_url = url.split("?")[0];
-        if (!loading && iframe.node().contentWindow.app.url !== stripped_url) {
-          loading = true;
+        if (!builds[build].loading && iframe.node().contentWindow.app.url.indexOf(stripped_url) !== 0) {
+          builds[build].loading = true;
           iframe.node().contentWindow.app.start(url);
         }
+      }
+
+      if (builds[build].loading) {
+        d3.select("[data-build='"+build+"']").select(".build_mask")
+          .style("display", "block");
       }
 
     }
@@ -291,7 +317,7 @@
       var position = builds[build].top,
           start = window.pageYOffset,
           difference = position - start,
-          ticks = 50
+          ticks = 25;
 
       var i = 0
 
@@ -306,11 +332,14 @@
           clearInterval(scrollinterval)
           setTimeout(function(){
             sliding = false
-          },1000)
+          },250)
         }
       }
 
       scrollinterval = setInterval(scrollto,10)
+
+      // window.scrollTo(0, position);
+      // load();
 
     }
 
@@ -344,10 +373,16 @@
           }
         })
 
-        if (new_build && !builds[new_build].loaded) {
-          var btn = d3.select("[data-build='"+new_build+"']").select(".app_links")
+        if (new_build) {
+          var btn = d3.select("[data-build='"+new_build+"']");
+          if (!builds[new_build].loaded) {
+            btn = btn.select(".app_links");
+          }
+          else {
+            btn = btn.select(".app_links[data-active='true']");
+          }
           var app_id = btn.node().id;
-          app_select(app_id);
+          app_select(app_id, true);
         }
 
       }
