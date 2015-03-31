@@ -335,7 +335,7 @@ function Selector() {
 
         }
         else if (type === "bra") {
-          depth = 3;
+          depth = 9;
         }
         else {
           depth = depths[0];
