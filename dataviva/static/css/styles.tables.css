@@ -66,6 +66,7 @@ table tbody tr:last-child {
 
 table td {
   padding: 9px;
+  text-align: right;
 }
 
 table .id, table .bra_id, table .id_ibge, table .cnae_id, table .cbo_id,
@@ -203,6 +204,7 @@ table .hs_id, table .wld_id, table.color {
 table .name {
   max-width: 200px !important;
   min-width: 200px !important;
+  text-align: left;
   width: 200px !important;
 }
 table#university .name {
@@ -212,7 +214,7 @@ table#university .name {
 }
 
 .growth-arrow {
-  margin-right: 3px;
+  margin-left: 3px;
   margin-top: 1px;
 }
 
