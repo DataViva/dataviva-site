@@ -573,6 +573,9 @@
 .decision.icon.short.rais:before {
   background-image: url("/static/img/icons/cbo/cbo_all.png");
 }
+.decision.icon.short.rais_wages:before {
+  content: "\f155";
+}
 .decision.icon.short.secex:before {
   background-image: url("/static/img/icons/cnae/cnae_u.png");
 }
@@ -591,6 +594,11 @@
 
 .help.icon.short.rais:before {
   background-image: url("/static/img/icons/cbo/cbo_all_black.png");
+  opacity: 0.2;
+}
+.help.icon.short.rais_wages:before {
+  color: black;
+  content: "\f155";
   opacity: 0.2;
 }
 .help.icon.short.secex:before {

@@ -783,12 +783,18 @@
 
       if (new_url) {
 
-        if (new_url != app.url || allyears) {
-          app.url = new_url
-          if (allyears) var t = "Downloading Additional Years"
-          else var t = "Building Visualization"
-          loading.text(dataviva.format.text(t)).show(app.create)
+        var url_split = new_url.split("?")
+        app.url = url_split[0]
+        if (url_split.length > 1) {
+          var new_params = url_split[1].split("&");
+          new_params.forEach(function(p){
+            var p_split = p.split("=");
+            app.vars[p_split[0]] = p_split[1];
+          })
         }
+        if (allyears) var t = "Downloading Additional Years"
+        else var t = "Building Visualization"
+        loading.text(dataviva.format.text(t)).show(app.create)
 
       }
       else {
@@ -1120,7 +1126,7 @@
           var default_value = ui.values[0]
         }
 
-        if((last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
+        if((ui.type === "depth" && last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
           app.vars[ui.type] = default_value
         }
 

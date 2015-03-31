@@ -464,11 +464,31 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
         return redirect('{0}{1}/{2}/{3}/{4}/{5}/{6}'.format(request.path,dataset,bra_id,filter1,filter2,output,request.query_string))
     g.page_type = "builder"
     builds = Build.query.all()
-    dataset_sort = ["rais", "hedu", "sc", "secex", "ei"]
-    builds.sort(key=lambda x: (x.app_id, dataset_sort.index(x.dataset)))
+    builds = [b.json(fill=False) for b in builds]
+    rais_builds = [b.copy() for b in builds if b["dataset"] == "rais" and b["app"]["type"] not in ("network", "occugrid", "rings")]
+    def size_var(b):
+        app = b["app"]["type"]
+        if app in ["line", "stacked"]:
+            return "y"
+        elif app == "geo_map":
+            return "color"
+        elif app == "compare":
+            return "axes"
+        return "size"
+    for b in builds:
+        if b["dataset"] == "rais":
+            b["url"] = "{}?{}=num_emp".format(b["url"], size_var(b))
+    for b in rais_builds:
+        b["id"] = "{}b".format(int(b["id"]))
+        b["url"] = "{}?{}=wage".format(b["url"], size_var(b))
+        b["dataset"] = "rais_wages"
+    builds = rais_builds + builds
+    dataset_sort = ["rais_wages", "rais", "hedu", "sc", "secex", "ei"]
+    builds.sort(key=lambda x: (x["app"]["id"], dataset_sort.index(x["dataset"])))
     datatset_names = {
         "secex": gettext("International Trade"),
-        "rais": gettext("Wages and Employment"),
+        "rais": gettext("Employment"),
+        "rais_wages": gettext("Wages"),
         "ei": gettext("Domestic Trade"),
         "hedu": gettext("Higher Education"),
         "sc": gettext("School Census")
@@ -509,7 +529,9 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
     if bra_id == "all":
         bra_attr = Wld.query.get_or_404("sabra")
     else:
-        bra_attr = [Bra.query.get_or_404(b) for b in bra_id.split("_")]
+        bra_attr = [Bra.query.get_or_404(bra_id)]
+        if bra_1_id != "all":
+            bra_attr.append(Bra.query.get_or_404(bra_1_id))
     filter1_attr = filter1
     filter2_attr = filter2
     if filter1 != "all":
@@ -530,6 +552,13 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
     build.set_filter1(filter1_attr)
     build.set_filter2(filter2_attr)
     build.set_bra(bra_attr)
+    build = build.serialize()
+    for p, v in request.args.items():
+        if v == "wage":
+            build["id"] = "{}b".format(int(build["id"]))
+            build["url"] = "{}?{}=wage".format(build["url"], size_var(build))
+            build["dataset"] = "rais_wages"
+            break
 
     return render_template("apps/builder.html",
         app=app_name, apps=App.query.all(), builds=builds, build=build,

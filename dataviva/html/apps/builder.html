@@ -40,6 +40,10 @@
       color: #333;
     }
 
+    .accordion_btn.active:before, .accordion_btn:hover:before {
+      opacity: 0.7 !important;
+    }
+
     .accordion_list {
       -webkit-transition: height 0.3s;
          -moz-transition: height 0.3s;
@@ -106,15 +110,15 @@
     {% for f in filters %}
       {% set a = f[0] %}
       {% if a == "bra_1" and build.bra[1] %}
-        {% set bra = build.bra[1] %}
+        {% set attr = build.bra[1] %}
       {% elif build[a] %}
         {% set attr = build[a][0] %}
       {% else %}
         {% set attr = None %}
       {% endif %}
       <div id="{{a}}" class="build_filter" onclick="filter_open(this.id)">
-        <div class="attr_icon"{% if attr %} style="background-image:url('{{ attr.icon() }}');background-color:{% if a == 'bra' or a == 'bra_1' or (a == 'wld' and attr.id|length == 5)%}{{transparent}}{% else %}{{ attr.color }}{% endif %};"{% endif %}></div>
-        <span class="attr_name">{% if attr %}{{ attr.name() }}{% endif %}</span>
+        <div class="attr_icon"{% if attr %} style="background-image:url('{{ attr.icon }}');background-color:{% if a == 'bra' or a == 'bra_1' or (a == 'wld' and attr.id|length == 5)%}{{transparent}}{% else %}{{ attr.color }}{% endif %};"{% endif %}></div>
+        <span class="attr_name">{% if attr %}{{ attr.name }}{% endif %}</span>
       </div>
     {% endfor %}
 
@@ -146,7 +150,7 @@
         <div class="accordion_list" data-list="{{ dataset }}">
       {% endif %}
 
-      <a id="build_{{ b.id }}" class="build_title help flat short icon {{ b.app.type }}" data-url="{{ b.url(fill=False) }}" onclick="change_build(this.id)">{{ b.slug2() }}</a>
+      <a id="build_{{ b.id }}" class="build_title help flat short icon {{ b.app.type }}" data-url="{{ b.url }}" onclick="change_build(this.id)">{{ b.slug2 }}</a>
 
       {% if loop.last %}</div></div>{% endif %}
 
@@ -174,7 +178,7 @@
     var distances = {};
     var iframe = "{{ build.id }}";
     var build = "{{ build.id }}";
-    datasets[app] = "{{ dataset }}";
+    datasets[app] = "{{ build.dataset }}";
 
     filters = filters.reduce(function(obj, f){
       distances[f[0]] = 0;
@@ -187,6 +191,7 @@
     var attrs = {
       "secex": ["bra", "bra_1", "hs", "wld"],
       "rais": ["bra", "bra_1", "cnae", "cbo"],
+      "rais_wages": ["bra", "bra_1", "cnae", "cbo"],
       "ei": ["bra", "bra_1"],
       "sc": ["bra", "bra_1", "school", "course_sc"],
       "hedu": ["bra", "bra_1", "university", "course_hedu"],
@@ -371,11 +376,16 @@
 
     function update_titles(msg) {
       if (app !== msg.app) change_app(msg.app);
-      change_build("build_"+msg.build.id);
+      var b = msg.build.id;
+      if (b === parseFloat(build,10)) {
+        b = build;
+      }
+      change_build("build_"+b);
       ["bra","hs","wld","cnae","cbo","university","course_hedu","school","course_sc"].forEach(function(f){
         if (msg.build[f]) {
-          msg.build[f].forEach(function(a){
-            filter_select(a, f);
+          msg.build[f].forEach(function(a, i){
+            var filt = i ? f+"_"+i : f;
+            filter_select(a, filt);
           })
         }
       })

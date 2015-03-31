@@ -7,7 +7,7 @@ from dataviva.utils.title_case import title_case
 from dataviva.utils.title_format import title_format
 from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_hedu, Course_sc
 
-import ast, re
+import ast, re, urllib
 
 build_ui = db.Table('apps_build_ui',
          db.Column('build_id', db.Integer,db.ForeignKey('apps_build.id')),
@@ -58,6 +58,8 @@ class Build(db.Model, AutoSerialize):
             backref=db.backref('Builds'), lazy='dynamic')
     app = db.relationship('App',
             backref=db.backref('Builds', lazy='dynamic'))
+
+    params = None
 
     def get_ui(self, ui_type):
         return self.ui.filter(UI.type == ui_type).first()
@@ -211,6 +213,8 @@ class Build(db.Model, AutoSerialize):
             f2 = self.filter2
         else:
             bra_id = "<bra>"
+            if self.app.type == "compare":
+                bra_id = "<bra>_<bra_1>"
 
             f1 = self.filter1
             if f1 != "all":
@@ -232,7 +236,12 @@ class Build(db.Model, AutoSerialize):
                 elif self.dataset == "sc":
                     f2 = "<course_sc>"
 
-        return "{0}/{1}/{2}/{3}/{4}/{5}/".format(self.app.type, self.dataset, bra_id, f1, f2, self.output)
+        if self.params:
+            params = "?{}".format(urllib.urlencode(self.params))
+        else:
+            params = ""
+
+        return "{}/{}/{}/{}/{}/{}/{}".format(self.app.type, self.dataset, bra_id, f1, f2, self.output, params)
 
     '''Returns the data URL for the specific build. This URL will return the
     data required for building a viz of this app.
@@ -428,7 +437,9 @@ class Build(db.Model, AutoSerialize):
         if title:
             for f in ["bra", "cnae", "hs", "cbo", "wld", "university", "course_hedu", "course_sc"]:
                 if hasattr(self, f):
-                    title = title_format(title, getattr(self, f))
+                    attr = getattr(self, f)
+                    if not isinstance(attr, (unicode, str)):
+                        title = title_format(title, attr)
 
         return title
 
@@ -436,9 +447,11 @@ class Build(db.Model, AutoSerialize):
         return {
             "app": self.app.serialize(),
             "dataset": self.dataset,
+            "id": int(self.id),
             "slug": self.slug(**kwargs),
+            "slug2": self.slug2(),
             "title": self.title(**kwargs),
-            "url": self.url()
+            "url": self.url(**kwargs)
         }
 
 
@@ -461,6 +474,7 @@ class Build(db.Model, AutoSerialize):
 
         del auto_serialized["title_en"]
         del auto_serialized["title_pt"]
+        auto_serialized["id"] = int(self.id)
         auto_serialized["title"] = self.title()
         auto_serialized["slug"] = self.slug()
         auto_serialized["data_url"] = self.data_url()
