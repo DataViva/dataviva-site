@@ -320,12 +320,11 @@ class Cnae(Profile):
             {"title": gettext("Average Wage by:"),
             "builds": [
                 [
-                    {"id": 143, "params": {"y": "wage_avg"}},
-                    {"id": 20, "params": {"y": "wage_avg"}}
+                    {"id": 143, "params": {"y": "wage_avg"}}
                 ],
                 [
                     {"id": 37, "params": {"color": "wage_avg"}},
-                    {"id": 22, "params": {"y": "wage_avg"}}
+                    {"id": 145, "params": {"y": "wage_avg"}}
                 ]
             ]}
         ]
@@ -368,12 +367,11 @@ class Cbo(Profile):
             {"title": gettext("Average Wage by:"),
             "builds": [
                 [
-                    {"id": 141, "params": {"y": "wage_avg"}},
-                    {"id": 18, "params": {"y": "wage_avg"}}
+                    {"id": 141, "params": {"y": "wage_avg"}}
                 ],
                 [
                     {"id": 38, "params": {"color": "wage_avg"}},
-                    {"id": 23, "params": {"y": "wage_avg"}}
+                    {"id": 146, "params": {"y": "wage_avg"}}
                 ],
             ]}
         ]
