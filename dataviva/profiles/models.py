@@ -186,12 +186,12 @@ class Bra(Profile):
                 [
                     {"id": 1, "params": {"size": "wage"}},
                     {"id": 17, "params": {"y": "wage"}},
-                    {"id": 140, "params": {"y": "wage"}}
+                    {"id": 140, "params": {"y": "wage_avg"}}
                 ],
                 [
                     {"id": 3, "params": {"size": "wage"}},
                     {"id": 19, "params": {"y": "wage"}},
-                    {"id": 142, "params": {"y": "wage"}}
+                    {"id": 142, "params": {"y": "wage_avg"}}
                 ]
             ]},
             {"title": gettext("Economic Opportunities:"), "builds": [35, 33]},
