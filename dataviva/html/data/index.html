@@ -16,7 +16,7 @@
 
     <!-- DATASET CHOOSER -->
     <div class="datasets">
-      <legend for="dataset_select">{% trans %}Dataset{% endtrans %}</legend>
+      <legend for="dataset_select">{% trans %}Source{% endtrans %}</legend>
       <select id="dataset_select">
         {%- for d in datasets %}
         <option value="{{ d[0] }}" {% if output.dataset == d %}selected="selected"{% endif %}>{{ d[1] }}</option>
@@ -100,7 +100,7 @@
     <a class="decision icon database" id="go">
       {% trans %}Run Query{% endtrans %}
     </a>
-    
+
     <a id="download" class="help flat icon download">{% trans %}Download{% endtrans %}</a>
 
   </div>
@@ -319,11 +319,11 @@ function make_url(){
       }
     }
   })
-  
+
   var url = current_url.format+url_params;
   // clear URL params since we only need this on first page load
   url_params = "";
-  
+
   return url;
 }
 function table_size() {
