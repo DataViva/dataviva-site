@@ -185,6 +185,9 @@ dataviva.format.number = function(value, opts) {
 
     return_value = value + symbol;
   }
+  else if (name === "age") {
+    return_value = d3.format(".3g")(value);
+  }
   else {
     return_value = d3.format(",f")(value);
   }
