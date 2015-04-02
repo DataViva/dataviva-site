@@ -211,7 +211,7 @@ div.selector_close {
   text-align: center;
   top: -10px;
   width: 18px;
-  z-index: 10;
+  z-index: 10001;
 }
 
 div.selector_close:hover {
