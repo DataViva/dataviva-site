@@ -334,8 +334,8 @@ function Selector() {
           }
 
         }
-        else if (type === "bra") {
-          depth = 9;
+        else if (["bra", "wld"].indexOf(type) >= 0) {
+          depth = depths[depths.length-1];
         }
         else {
           depth = depths[0];
@@ -343,7 +343,7 @@ function Selector() {
 
         return depth;
 
-      }
+      };
 
       create_elements = function() {
 
