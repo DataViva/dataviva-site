@@ -29118,7 +29118,7 @@ box = function(vars) {
   d3.nest().key(function(d) {
     return fetchValue(vars, d, vars[discrete].value);
   }).rollup(function(leaves) {
-    var bottom, bottomWhisker, boxData, d, diff1, diff2, first, iqr, key, label, median, medianBuffer, medianData, medianHeight, medianText, outliers, scale, second, top, topWhisker, val, values, x, y, _i, _j, _len, _len1;
+    var bottom, bottomLabel, bottomWhisker, boxData, d, diff1, diff2, first, iqr, key, label, median, medianBuffer, medianData, medianHeight, medianText, outliers, scale, second, tooltipData, top, topLabel, topWhisker, val, values, x, y, _i, _j, _len, _len1;
     scale = vars[opposite].scale.viz;
     values = leaves.map(function(d) {
       return fetchValue(vars, d, vars[opposite].value);
@@ -29129,24 +29129,51 @@ box = function(vars) {
     first = d3.quantile(values, 0.25);
     median = d3.quantile(values, 0.50);
     second = d3.quantile(values, 0.75);
-    if (mode[0] === "tukey") {
-      iqr = first - second;
-      bottom = first + iqr * 1.5;
-    } else if (mode[0] === "extent") {
-      bottom = d3.min(values);
-    } else if (typeof mode[0] === "number") {
-      bottom = d3.quantile(values, mode[0] / 100);
-    }
+    tooltipData = {};
     if (mode[1] === "tukey") {
       iqr = first - second;
       top = second - iqr * 1.5;
+      topLabel = "top tukey";
     } else if (mode[1] === "extent") {
       top = d3.max(values);
+      topLabel = "maximum";
     } else if (typeof mode[1] === "number") {
       top = d3.quantile(values, (100 - mode[1]) / 100);
+      topLabel = mode[1] + " percentile";
+    }
+    top = d3.min([d3.max(values), top]);
+    tooltipData[topLabel] = {
+      key: vars[opposite].value,
+      value: top
+    };
+    tooltipData["third quartile"] = {
+      key: vars[opposite].value,
+      value: second
+    };
+    tooltipData["median"] = {
+      key: vars[opposite].value,
+      value: median
+    };
+    tooltipData["first quartile"] = {
+      key: vars[opposite].value,
+      value: first
+    };
+    if (mode[0] === "tukey") {
+      iqr = first - second;
+      bottom = first + iqr * 1.5;
+      bottomLabel = "bottom tukey";
+    } else if (mode[0] === "extent") {
+      bottom = d3.min(values);
+      bottomLabel = "minimum";
+    } else if (typeof mode[0] === "number") {
+      bottom = d3.quantile(values, mode[0] / 100);
+      bottomLabel = mode[0] + " percentile";
     }
     bottom = d3.max([d3.min(values), bottom]);
-    top = d3.min([d3.max(values), top]);
+    tooltipData[bottomLabel] = {
+      key: vars[opposite].value,
+      value: bottom
+    };
     boxData = [];
     bottomWhisker = [];
     topWhisker = [];
@@ -29192,20 +29219,7 @@ box = function(vars) {
     y = d3.min([scale(first), scale(second)]) + boxData.d3plus[h] / 2;
     y += oppMargin;
     boxData.d3plus[opposite] = y;
-    boxData.d3plus.tooltip = {
-      "third quartile": {
-        key: vars[opposite].value,
-        value: second
-      },
-      "median": {
-        key: vars[opposite].value,
-        value: median
-      },
-      "first quartile": {
-        key: vars[opposite].value,
-        value: first
-      }
-    };
+    boxData.d3plus.tooltip = tooltipData;
     returnData.push(boxData);
     medianData = {
       d3plus: {
