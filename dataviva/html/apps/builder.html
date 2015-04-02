@@ -315,6 +315,20 @@
 
     }
 
+    function get_params(url) {
+      var params = url.split("?")
+      if (params.length === 2) {
+        return params[1].split("&").reduce(function(obj, p){
+          p = p.split("=");
+          obj[p[0]] = p[1];
+          return obj;
+        }, {});
+      }
+      else {
+        return {}
+      }
+    }
+
     function create_build() {
       if (check_button()) {
         var allowed = check_filters(true);
@@ -326,6 +340,16 @@
                 u = u.replace("<"+f+">", filters[f]);
               }
             }
+            var params = get_params(location.search);
+            var forced_params = get_params(u);
+            if (d3.keys(forced_params).length) {
+              u = u.split("?")[0];
+              for (var p_key in forced_params) {
+                params[p_key] = forced_params[p_key];
+              }
+            }
+            params = d3.keys(params).map(function(p){ return p + "=" + params[p]; })
+            u += "?" + params.join("&");
             d3.select("#bulder_iframe").node().contentWindow.app.start(u+location.search);
             iframe = build;
             iframe_filters = d3plus.util.copy(filters);
