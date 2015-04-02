@@ -639,7 +639,7 @@
             }
             else {
               return d3.sum(leaves, function(l) {
-                return l.export_val - l.import_val;
+                return l.val_usd;
               })
             }
           }
@@ -831,8 +831,7 @@
                           (app.build.dataset !== "secex" || ["stacked", "line"].indexOf(app.build.app.type) >= 0);
             app.timeRange = ["stacked", "line"].indexOf(app.build.app.type) >= 0 ||
                             ("box" === app.build.app.type && app.build.output !== "age");
-            app.build.timeToggle = app.monthly && app.timeRange &&
-                                   app.build.output !== "balance";
+            app.build.timeToggle = app.monthly && app.timeRange;
             app.timeFormat = app.monthly ? "%Y-%-m" : "%Y";
             app.timeFormat = d3.time.format(app.timeFormat);
 
@@ -862,7 +861,7 @@
             })
             if (app.build.timeToggle) {
               uis.push("time");
-              app.vars.time = "year";
+              app.vars.time = app.vars.time || (app.build.output === "balance" ? "month": "year");
             }
             for (v in app.vars) {
               if (uis.indexOf(v) < 0 && ["controls","builder"].indexOf(v) < 0) {
@@ -1089,7 +1088,6 @@
           var title = "spotlight_scatter"
         }
         else var title = ui.type
-
         // Set Global Vars
         if (ui.type == "size") {
           if (app.build.app.type == "occugrid") var default_value = "required"
@@ -2141,11 +2139,11 @@
             imp.icon = "/static/img/icons/balance/import_val.png"
             imp.color = "#af1f24";
             // get_keys(imp);
-            for (var k in imp) {
-              if (k.indexOf("export") === 0) {
-                delete exp[k];
-              }
-            }
+            // for (var k in imp) {
+            //   if (k.indexOf("export") === 0) {
+            //     delete imp[k];
+            //   }
+            // }
             data_obj.push(imp);
 
           })
