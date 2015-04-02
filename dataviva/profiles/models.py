@@ -224,26 +224,26 @@ class Hs(Profile):
             "builds": [
                 [
                     {"id": 12, "params": {"size": "export_val"}},
-                    {"id": 28, "params": {"size": "export_val"}},
-                    {"id": 135, "params": {"size": "export_val"}}
+                    {"id": 28, "params": {"y": "export_val"}},
+                    {"id": 135, "params": {"y": "export_val"}}
                 ],
                 [
-                    {"id": 41, "params": {"size": "export_val"}},
+                    {"id": 41, "params": {"color": "export_val"}},
                     {"id": 14, "params": {"size": "export_val"}},
-                    {"id": 30, "params": {"size": "export_val"}}
+                    {"id": 30, "params": {"y": "export_val"}}
                 ]
             ]},
             {"title": gettext("Imports by:"),
             "builds": [
                 [
                     {"id": 12, "params": {"size": "import_val"}},
-                    {"id": 28, "params": {"size": "import_val"}},
-                    {"id": 135, "params": {"size": "import_val"}}
+                    {"id": 28, "params": {"y": "import_val"}},
+                    {"id": 135, "params": {"y": "import_val"}}
                 ],
                 [
-                    {"id": 41, "params": {"size": "import_val"}},
+                    {"id": 41, "params": {"color": "import_val"}},
                     {"id": 14, "params": {"size": "import_val"}},
-                    {"id": 30, "params": {"size": "import_val"}}
+                    {"id": 30, "params": {"y": "import_val"}}
                 ]
             ]}
         ]
@@ -307,14 +307,14 @@ class Cnae(Profile):
             {"title": gettext("Employment by:"),
             "builds": [
                 [
-                    {"id": 143, "params": {"size": "num_emp"}},
-                    {"id": 4, "params": {"y": "num_emp"}},
+                    {"id": 143, "params": {"y": "num_emp"}},
+                    {"id": 4, "params": {"size": "num_emp"}},
                     {"id": 20, "params": {"y": "num_emp"}}
                 ],
                 [
-                    {"id": 37, "params": {"size": "num_emp"}},
-                    {"id": 6, "params": {"y": "num_emp"}},
-                    {"id": 22, "params": {"color": "num_emp"}}
+                    {"id": 37, "params": {"color": "num_emp"}},
+                    {"id": 6, "params": {"size": "num_emp"}},
+                    {"id": 22, "params": {"y": "num_emp"}}
                 ]
             ]},
             {"title": gettext("Average Wage by:"),
