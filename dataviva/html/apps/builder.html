@@ -326,7 +326,7 @@
                 u = u.replace("<"+f+">", filters[f]);
               }
             }
-            d3.select("#bulder_iframe").node().contentWindow.app.start(u);
+            d3.select("#bulder_iframe").node().contentWindow.app.start(u+location.search);
             iframe = build;
             iframe_filters = d3plus.util.copy(filters);
             change_build();
