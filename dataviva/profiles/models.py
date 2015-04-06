@@ -160,25 +160,25 @@ class Bra(Profile):
             {"title": gettext("Exports by:"), "builds": [
                 [
                     {"id":9, "params": {"size": "export_val"}},
-                    {"id":25, "params": {"size": "export_val"}},
+                    {"id":25, "params": {"y": "export_val"}},
                     {"id":46, "params": {"size": "export_val"}}
                 ],
                 [
                     {"id":11, "params": {"size": "export_val"}},
-                    {"id":27, "params": {"size": "export_val"}},
-                    {"id":134, "params": {"size": "export_val"}}
+                    {"id":27, "params": {"y": "export_val"}},
+                    {"id":134, "params": {"y": "export_val"}}
                 ]
             ]},
             {"title": gettext("Imports by:"), "builds": [
                 [
                     {"id":9, "params": {"size": "import_val"}},
-                    {"id":25, "params": {"size": "import_val"}},
+                    {"id":25, "params": {"y": "import_val"}},
                     {"id":46, "params": {"size": "import_val"}}
                 ],
                 [
                     {"id":11, "params": {"size": "import_val"}},
-                    {"id":27, "params": {"size": "import_val"}},
-                    {"id":134, "params": {"size": "import_val"}}
+                    {"id":27, "params": {"y": "import_val"}},
+                    {"id":134, "params": {"y": "import_val"}}
                 ]
             ]},
             {"title": gettext("Employment by:"), "builds": [[1, 17, 140], [3, 19, 142]]},
