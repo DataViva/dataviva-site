@@ -8,7 +8,7 @@ from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Cour
 from dataviva.secex.models import Ymp, Ymw
 from dataviva.rais.models import Yi, Yo
 from dataviva.hedu.models import Yu, Yc_hedu
-from dataviva.sc.models import Yc_sc, Ys
+from dataviva.sc.models import Yc_sc, Ys, Ybs
 from dataviva.ask.models import Question
 
 from dataviva.utils.gzip_data import gzip_data
@@ -58,6 +58,25 @@ def get_planning_region_map():
     prs = db.session.query(bra_pr).all()
     pr_map = {k:v for k,v in prs}
     return pr_map
+
+@mod.route("/school/in/<bra_id>/")
+@gzipped
+@view_cache.cached(key_prefix=api_cache_key("attrs"))
+def school_attrs(bra_id):
+    lang = request.args.get('lang', None) or g.locale or 'en'
+    if not lang in ['en', 'pt']:
+        raise Exception("Invalid language.")
+    results = db.engine.execute('''
+        SELECT id, school_type_{}
+        FROM attrs_school
+        LEFT JOIN sc_ybs
+        ON attrs_school.id=sc_ybs.school_id
+        WHERE sc_ybs.bra_id = %s;
+    '''.format(lang), bra_id)
+
+    data = [{'id': row[0], 'school_type': row[1]} for row in results]
+
+    return jsonify(data=data)
 
 @mod.route('/<attr>/')
 @mod.route('/<attr>/<Attr_id>/')

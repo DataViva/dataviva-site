@@ -36,7 +36,7 @@ class Ybs(Sc):
     __tablename__ = 'sc_ybs'
 
     bra_id = db.Column(db.String(9), db.ForeignKey(Bra.id), primary_key=True)
-    school_id = db.Column(db.String(8), primary_key=True)
+    school_id = db.Column(db.String(8), db.ForeignKey(School.id), primary_key=True)
 
     bra_id_len = db.Column(db.Integer(1))
 
