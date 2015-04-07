@@ -430,7 +430,10 @@ dataviva.cleanData = function(data, dataset, output) {
     "ei": ["purchase_value", "transfer_value"]
   }
 
-  var output_attr = output === "bra_r" ? "bra" : output === "age" ? "course_sc" : output;
+  var output_attr = output === "bra_r" ? "bra" :
+                    ["age", "basic"].indexOf(output) >= 0 ? "course_sc" :
+                    output === "adm" ? "school" : output;
+
   var depths = dataviva.depths(output_attr);
 
   var extras = {}

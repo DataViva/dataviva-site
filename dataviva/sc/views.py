@@ -31,8 +31,10 @@ def sc_api(**kwargs):
     only_vocational = False
     if "school_id" in kwargs:
         # -- there is no nesting for school ids
-        kwargs["school_id"] = kwargs["school_id"].replace("show.5", "show")
-        only_vocational = "show" in kwargs["school_id"] and not "xx" in kwargs["course_sc_id"]
+        kwargs["school_id"] = kwargs["school_id"].replace("show.8", "show")
+        only_vocational = "show" in kwargs["school_id"] and not "xx" in kwargs["course_sc_id"] and exclude == "xx%"
+        if only_vocational:
+            exclude = None
 
     # -- 2. select table
     allowed_when_not, possible_tables = table_helper.prepare(['bra_id', 'school_id', 'course_sc_id'], tables)

@@ -291,6 +291,7 @@ def dictionary():
         "hedu_footer": gettext("Data provided by INEP/MEC"),
         "enrolled": gettext("Enrolled"),
         "school_type": gettext("Funding"),
+        "school_type_id": gettext("Funding"),
         "morning": gettext("Morning"),
         "afternoon": gettext("Afternoon"),
         "night": gettext("Night"),

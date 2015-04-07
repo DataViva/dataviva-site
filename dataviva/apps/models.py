@@ -297,9 +297,15 @@ class Build(db.Model, AutoSerialize):
         elif self.output == "age":
             filter1 = "show.8"
             filter2 = "xx.show.5"
+        elif self.output == "basic":
+            filter2 = "xx.show.5"
+        elif self.output == "adm":
+            filter1 = "show.8"
 
         params = ""
         if self.output == "course_sc" and self.filter2 == "all":
+            params = "?exclude=xx%"
+        if self.output == "school":
             params = "?exclude=xx%"
 
         if self.dataset == "ei":
@@ -483,8 +489,10 @@ class Build(db.Model, AutoSerialize):
         auto_serialized["app"] = self.app.serialize()
         if self.dataset == "ei":
             auto_serialized["output_attr"] = "bra"
-        elif self.output == "age":
+        elif self.output == "age" or self.output == "basic":
             auto_serialized["output_attr"] = "course_sc"
+        elif self.output == "adm":
+            auto_serialized["output_attr"] = "school"
         else:
             auto_serialized["output_attr"] = self.output
 

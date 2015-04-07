@@ -761,6 +761,9 @@
       else if (out === "age") {
         return ["course_sc_5","school_id"];
       }
+      else if (out === "basic") {
+        return ["course_sc_5"];
+      }
 
       var nesting = [];
       depths[out].forEach(function(d){
@@ -941,6 +944,28 @@
                     callback(error,d);
                   })
               },"/attrs/"+app.build.output_attr+"/"+"?lang="+dataviva.language)
+            }
+
+            if (app.build.output === "adm") {
+              app.build.bra.forEach(function(b){
+
+                if (!app.attrs["school_"+b.id]) {
+
+                  q.defer(function(u, callback){
+                    d3.json(u)
+                      .header("X-Requested-With", "XMLHttpRequest")
+                      .get(function(error,d){
+                        app.attrs["school_"+b.id] = d.data.reduce(function(obj, s){
+                          obj[s.id] = s.school_type;
+                          return obj;
+                        }, {});
+                        callback(error,d);
+                      })
+                  },"/attrs/school/in/"+b.id+"/?lang="+dataviva.language)
+
+                }
+
+              })
             }
 
             if (["network","rings"].indexOf(app.build.app.type) >= 0
@@ -1364,7 +1389,7 @@
         .y({"stacked": false})
         .x({"scale": "linear"})
         .tooltip(app.tooltip)
-        .zoom(app.build.output_attr !== "balance")
+        .zoom(["balance", "adm"].indexOf(app.build.output) < 0)
         .time(app.vars.time || (app.monthly ? "month" : "year"))
         .time({"solo": timeSolo})
         .x({"label": app.build.app.type === "compare" ? {"font": {"size": 22, "weight": "normal"}} : false})
@@ -1598,7 +1623,7 @@
           .id({"grouping": true})
           .shape("area")
           .order(app.vars.order)
-          .depth(app.build.output_attr === "bra" ? 1 : 0)
+          .depth(app.build.output_attr === "bra" ? 1 : app.build.output === "basic" ? 1 : 0)
       }
 
       /******************************/
@@ -1986,6 +2011,20 @@
           out = app.build.output_attr,
           attr = app.attrs[out];
 
+      if (out === "school") {
+        data.raw.forEach(function(d){
+
+          var sb = "school_"+d.bra_id;
+          if (app.attrs[sb]) {
+            d.school_type_id = app.attrs[sb][d.school_8];
+          }
+          else {
+            d.school_type_id = attr.school_8[d.school_8].school_type_id;
+          }
+
+        })
+      }
+
       if ("occugrid" == format[app.build.app.type]) {
 
         var jobs = app.data[app.build.imp_url].raw.sort(function(a,b){
@@ -2043,28 +2082,40 @@
 
       }
       else if ("compare" == format[app.build.app.type]) {
-
+        
         d3.nest()
           .key(function(d){return d.year})
-          .key(function(d){return d[out+"_id"]})
+          .key(function(d){
+            return app.build.output === "adm" ? d.school_type_id : d[out+"_id"];
+          })
           .rollup(function(leaves){
-            if (leaves.length == 2) {
+
+            if (leaves.length > 1) {
+
               var d = {}
               d.year = leaves[0].year
-              d[out+"_id"] = leaves[0][out+"_id"]
-              d[out+"_display"] = dataviva.displayID(d[out+"_id"],out)
 
-              depths[out].forEach(function(dd){
-                d[out+"_"+dd] = leaves[0][out+"_"+dd]
-              })
+              if (app.build.output === "adm") {
+                d.school_type_id = leaves[0].school_type_id;
+              }
+              else {
+                d[out+"_id"] = leaves[0][out+"_id"]
+                d[out+"_display"] = dataviva.displayID(d[out+"_id"],out)
+                depths[out].forEach(function(dd){
+                  d[out+"_"+dd] = leaves[0][out+"_"+dd]
+                })
+              }
+
+              for (var key in leaves[0]) {
+                if (typeof leaves[0][key] === "number" && key !== "year") {
+                  var agg = averages[key] || "sum";
+                  d[key] = d3[agg](leaves, function(a){ return a[key] })
+                }
+              }
 
               leaves.forEach(function(leaf){
                 for (key in leaf) {
-                  if (key != "bra_id" && key != out+"_id") {
-                    if (typeof leaf[key] === "number" && key != "year") {
-                      if (!d[key]) d[key] = 0
-                      d[key] += leaf[key]
-                    }
+                  if (key != "bra_id" && key != out+"_id" && key != "school_type_id") {
                     if (leaf.bra_id == app.build.bra[0].id) var k = "cp_bra_0_"+key
                     else if (leaf.bra_id == app.build.bra[1].id) var k = "cp_bra_1_"+key
                     d[k] = leaf[key]
