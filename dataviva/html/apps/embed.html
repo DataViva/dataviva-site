@@ -709,8 +709,6 @@
         "total": {"font": {"align": "left"}}
       })
       .size({"threshold": false})
-      .total("required")
-      .temp("elsewhere")
       .y({
         "label": {"font": {"size": 22, "weight": "normal"}},
         "ticks": {"font": {"size": 16}}
@@ -1566,6 +1564,8 @@
 
         app.viz
           .active("num_emp")
+          .temp("elsewhere")
+          .total("required")
           .shape("donut")
           .size({"scale": {"min": 10}})
           .labels({"font": {"size": 13}})
@@ -1643,6 +1643,8 @@
           })
           .axes({"mirror": false})
           .active({"spotlight": app.vars.spotlight})
+          .temp(false)
+          .total(false)
           .size({"scale": {"min": 3}})
           .id({"grouping": true})
           .shape("circle")
