@@ -153,7 +153,7 @@ dataviva.format.number = function(value, opts) {
     if (len > 5) len = 5;
     return_value = d3.round(value, len + 1);
   }
-  else if (value.toString().split(".")[0].length > 4) {
+  else if (value.toString().split(".")[0].length > 3) {
 
     var symbol = d3.formatPrefix(value).symbol;
     symbol = symbol.replace("G", "B"); // d3 uses G for giga
