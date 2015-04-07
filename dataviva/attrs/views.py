@@ -63,16 +63,13 @@ def get_planning_region_map():
 @gzipped
 @view_cache.cached(key_prefix=api_cache_key("attrs"))
 def school_attrs(bra_id):
-    lang = request.args.get('lang', None) or g.locale or 'en'
-    if not lang in ['en', 'pt']:
-        raise Exception("Invalid language.")
     results = db.engine.execute('''
-        SELECT id, school_type_{}
+        SELECT id, school_type_id
         FROM attrs_school
         LEFT JOIN sc_ybs
         ON attrs_school.id=sc_ybs.school_id
         WHERE sc_ybs.bra_id = %s;
-    '''.format(lang), bra_id)
+    ''', bra_id)
 
     data = [{'id': row[0], 'school_type': row[1]} for row in results]
 
