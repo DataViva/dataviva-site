@@ -20,8 +20,8 @@ def bra_stats(pobj, rais_year, secex_year):
         stat_ids = ["pop", "gini", "life_exp", "hdi", "gdp", "gdp_pc", "pop_density"]
         stats_year = parse_year(__year_range__["stats"][-1].split("-")[0])
         results = batch_stats(Ybs, pobj.id, stat_ids, stats_year)
-        for name, val in results.items():
-            stats.append(make_stat(group, name, desc=val, year=stats_year))
+        for stat, val in results:
+            stats.append(make_stat(group, stat.name(), desc=val, year=stats_year, mode=stat.id))
 
     group = '{} Stats ({}):'.format(rais_year, "RAIS")
     if pobj.id == "all":
@@ -95,11 +95,11 @@ def bra_stats(pobj, rais_year, secex_year):
             group = "General Stats"
             stat_ids = ["airport", "airport_dist", "seaport", "seaport_dist", "area", "capital_dist", "neighbors"]
             results = batch_stats(Bs, pobj.id, stat_ids)
-            for name, val in results.items():
-                if name.lower() == "neighbors":
+            for stat, val in results:
+                if stat.name().lower() == "neighbors":
                     bras = Bra.query.filter(Bra.id.in_(val.split(","))).all()
                     val = ", ".join([u"<a href='{}'>{}</a>".format(b.url(), b.name()) for b in bras])
-                stats.append(make_stat(group, name, desc=val))
+                stats.append(make_stat(group, stat.name(), desc=val, mode=stat.id))
 
     return stats
 
@@ -296,9 +296,10 @@ def batch_stats(Tbl, bra_id, stat_ids, year=None):
     if year:
         filters.append(Tbl.year == year)
     results = Tbl.query.join(Stat).with_entities(Stat, Tbl.stat_val).filter(*filters).all()
-
-    values = {stat.name() : val for stat,val in results}
-    return values
+    return results
+    #
+    # values = {stat.name() : val for stat,val in results}
+    # return values
 
 def get_stat_val(Tbl, metric_col, filters):
     if not type(metric_col) == list:
