@@ -26515,7 +26515,7 @@ timeDetect = require("../../../core/data/time.coffee");
 playInterval = false;
 
 module.exports = function(vars) {
-  var availableWidth, background, brush, brushExtent, brush_group, brushed, brushend, d, end, handles, i, init, labelWidth, labels, max_index, min, min_index, playButton, playIcon, playIconChar, playIconStyle, playStyle, playUpdate, playbackWidth, setYears, start, start_x, step, stopPlayback, text, textFill, textStyle, tickColor, ticks, timeFormat, timeReturn, timelineBox, timelineHeight, timelineOffset, timelineWidth, visible, x, yearHeight, yearMS, year_ticks, years, _i, _len;
+  var availableWidth, background, brush, brushExtent, brush_group, brushed, brushend, d, end, handles, i, init, labelWidth, labels, max_index, min, min_index, oldWidth, playButton, playIcon, playIconChar, playIconStyle, playStyle, playUpdate, playbackWidth, setYears, start, start_x, step, stopPlayback, text, textFill, textStyle, tickColor, tickStep, ticks, timeFormat, timeReturn, timelineBox, timelineHeight, timelineOffset, timelineWidth, visible, x, yearHeight, yearMS, year_ticks, years, _i, _len;
   if (vars.timeline.value && (!vars.error.internal || !vars.data.missing) && !vars.small && vars.data.time && vars.data.time.values.length > 1) {
     if (vars.dev.value) {
       print.time("drawing timeline");
@@ -26563,10 +26563,21 @@ module.exports = function(vars) {
     if (vars.timeline.play.value) {
       availableWidth -= playbackWidth + vars.ui.padding;
     }
-    if (visible.length < years.length) {
+    if (visible.length < years.length || availableWidth < labelWidth * visible.length) {
+      oldWidth = labelWidth;
       labelWidth = (availableWidth - labelWidth) / years.length;
       timelineWidth = labelWidth * years.length;
       timelineOffset = 1;
+      tickStep = ~~(oldWidth / (timelineWidth / visible.length)) + 1;
+      while (tickStep < visible.length - 1) {
+        if ((visible.length - 1) % tickStep === 0) {
+          break;
+        }
+        tickStep++;
+      }
+      visible = visible.filter(function(t, i) {
+        return i % tickStep === 0;
+      });
     } else {
       timelineOffset = 0;
       min = new Date(years[0]);
