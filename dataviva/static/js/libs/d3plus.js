@@ -22457,7 +22457,7 @@ module.exports = function(vars) {
             vars.mouse[events.over](d.d3plus_data || d, vars)
           }
 
-          // edge_update(d)
+          edge_update(d)
 
         }
 
@@ -24993,6 +24993,7 @@ module.exports = function(params) {
     if (params.length !== "long") {
       y += window.scrollX;
       x += vars.container.value.node().getBoundingClientRect().left;
+      x += parseFloat(vars.container.value.style("padding-left"), 10);
     }
   }
   else {
@@ -25011,6 +25012,7 @@ module.exports = function(params) {
     if (params.length !== "long") {
       y += window.scrollY;
       y += vars.container.value.node().getBoundingClientRect().top;
+      y += parseFloat(vars.container.value.style("padding-top"), 10);
     }
   }
   else {
