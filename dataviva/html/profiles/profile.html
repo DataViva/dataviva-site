@@ -90,7 +90,6 @@
         {% if last_group != stat.group %}
           {% if loop.index != 1 %}</table>{% endif %}
           <div class="group_title">
-            {# {{ format(stat.group).render(stat.group) }} #}
             {{ stat.group }}
           </div>
           <table class="stat_table">
@@ -98,19 +97,15 @@
         {% endif %}
           <tr>
             <td>
-              {# {{ format(stat.name).render(stat.name) }} #}
               {{ stat.name }}
             </td>
             <td>
-              {%- if stat.url -%}
-                <a href="{{ stat.url }}">
-              {%- endif -%}
-                {# {{ format(stat.name).render(stat.name) }} #}
+              {%- if stat.url %}
+                <a href="{{ stat.url }}">{{ format(stat.desc).render(stat.mode) }}</a>
+              {% else -%}
                 {{ format(stat.desc).render(stat.mode) }}
-              {%- if stat.url -%}
-                </a>
-              {%- endif -%}
-              {% if stat.value %} ({{ format(stat.value).render(stat.mode) }}){% endif %}
+              {% endif -%}
+              {%- if stat.value %} ({{ format(stat.value).render(stat.mode) }}){% endif -%}
             </td>
           </tr>
         {% if loop.index == stats|length %}</table>{% endif %}

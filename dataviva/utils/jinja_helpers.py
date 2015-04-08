@@ -1,5 +1,6 @@
 from re import sub
 from jinja2 import Markup
+from dataviva.utils.num_format import num_format
 
 ''' A helper class for dealing with injecting times into the page using moment.js'''
 class jinja_momentjs:
@@ -27,14 +28,22 @@ class jinja_formatter:
 
     def __call__(self, *args):
         return self.format(*args)
-
+    
+    @staticmethod
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+    
     def render(self, type):
-        if isinstance(self.text, (unicode,str)):
-            format = "text"
+        if self.is_number(self.text):
+            num = float(self.text) if "." in str(self.text) else int(self.text)
+            return Markup(num_format(num, type))
         else:
-            format = "number"
+            return Markup(self.text)
 
-        return Markup("<script>\ndocument.write(dataviva.format.%s(\"%s\",{\"key\": \"%s\"}))\n</script>" % (format, self.text, type))
 
 ''' A helper funciton for stripping out html tags for showing snippets of user submitted content'''
 def jinja_strip_html(s):
