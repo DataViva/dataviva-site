@@ -64,14 +64,14 @@ def get_planning_region_map():
 @view_cache.cached(key_prefix=api_cache_key("attrs"))
 def school_attrs(bra_id):
     results = db.engine.execute('''
-        SELECT id, school_type_id
+        SELECT id, school_type_id, name_pt, color
         FROM attrs_school
         LEFT JOIN sc_ybs
         ON attrs_school.id=sc_ybs.school_id
         WHERE sc_ybs.bra_id = %s;
     ''', bra_id)
 
-    data = [{'id': row[0], 'school_type': row[1]} for row in results]
+    data = [{'id': row[0], 'school_type_id': row[1], 'name': row[2], 'color': row[3]} for row in results]
 
     return jsonify(data=data)
 

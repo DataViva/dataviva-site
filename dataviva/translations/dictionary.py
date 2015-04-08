@@ -182,8 +182,8 @@ def dictionary():
         "university_5": gettext("University"),
         "university_plural": gettext("Universities"),
         "university_5_plural": gettext("Universities"),
-        "school_8": gettext("Vocational School"),
-        "school_8_plural": gettext("Vocational Schools"),
+        "school_8": gettext("School"),
+        "school_8_plural": gettext("Schools"),
 
         # Calculation Labels
         "eci": gettext("Economic Complexity"),
@@ -338,6 +338,7 @@ def dictionary():
         "rank": " ",
         "university_id": gettext("ID"),
         "course_hedu_id": gettext("ID"),
+        "school_id": gettext("ID"),
         "course_sc_id": gettext("ID"),
         "course_id": gettext("ID"),
 
@@ -356,10 +357,10 @@ def dictionary():
         "university_plural": gettext("Universities"),
         "course_hedu": gettext("Major"),
         "course_hedu_plural": gettext("Majors"),
-        "school": gettext("Vocational School"),
-        "school_plural": gettext("Vocational Schools"),
-        "course_sc": gettext("Vocational Course"),
-        "course_sc_plural": gettext("Vocational Courses"),
+        "school": gettext("School"),
+        "school_plural": gettext("Schools"),
+        "course_sc": gettext("Basic Course"),
+        "course_sc_plural": gettext("Basic Courses"),
         "bra_s": gettext("Sending Location"),
         "bra_s_plural": gettext("Sending Locations"),
         "bra_r": gettext("Receiving Location"),

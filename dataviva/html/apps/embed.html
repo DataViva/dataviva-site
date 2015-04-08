@@ -944,7 +944,7 @@
               },"/attrs/"+app.build.output_attr+"/"+"?lang="+dataviva.language)
             }
 
-            if (["adm", "age"].indexOf(app.build.output) >= 0) {
+            if (["adm", "age", "school"].indexOf(app.build.output) >= 0) {
               app.build.bra.forEach(function(b){
 
                 if (!app.attrs["school_"+b.id]) {
@@ -954,7 +954,8 @@
                       .header("X-Requested-With", "XMLHttpRequest")
                       .get(function(error,d){
                         app.attrs["school_"+b.id] = d.data.reduce(function(obj, s){
-                          obj[s.id] = s.school_type;
+                          obj[s.id] = s;
+                          app.attrs.school.school_8[s.id] = s;
                           return obj;
                         }, {});
                         callback(error,d);
@@ -1124,7 +1125,7 @@
             }
           }
 
-          if (app.build.app.type == "tree_map") {
+          if (app.build.app.type == "tree_map" && app.build.output !== "school") {
             var default_value = ui.values[ui.values.length-1]
           }
           else {
@@ -2030,11 +2031,11 @@
         data.raw.forEach(function(d){
           d.school_8 = d.school_id;
           var sb = "school_"+d.bra_id;
-          if (app.attrs[sb]) {
-            d.school_type_id = app.attrs[sb][d.school_8];
-          }
-          else {
+          if (out === "school") {
             d.school_type_id = attr.school_8[d.school_8].school_type_id;
+          }
+          else if (app.attrs[sb]) {
+            d.school_type_id = app.attrs[sb][d.school_8].school_type_id;
           }
 
         })

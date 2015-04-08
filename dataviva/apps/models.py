@@ -305,8 +305,6 @@ class Build(db.Model, AutoSerialize):
         params = ""
         if self.output == "course_sc" and self.filter2 == "all":
             params = "?exclude=xx%"
-        if self.output == "school":
-            params = "?exclude=xx%"
 
         if self.dataset == "ei":
             if self.output == "bra":

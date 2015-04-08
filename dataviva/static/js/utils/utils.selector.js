@@ -446,12 +446,7 @@ function Selector() {
 
         if (data instanceof Array) {
 
-          if (type === "course_sc") {
-            data = data.filter(function(d){
-              return d.available && d.id.substr(0,2) !== "xx";
-            });
-          }
-          else if (type === "bra") {
+          if (type === "bra") {
             data = data.filter(function(d){
               return d.id.substr(0,1) !== "0";
             });
