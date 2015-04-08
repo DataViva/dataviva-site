@@ -29720,7 +29720,7 @@ module.exports = function(vars, opts) {
     axis = _ref[_i];
     oppAxis = axis === "x" ? "y" : "x";
     reorder = vars.order.changed || vars.order.sort.changed || (vars.order.value === true && vars[oppAxis].changed);
-    if (!("values" in vars[axis].ticks) || changed || reorder) {
+    if (!vars[axis].ticks.values || changed || reorder) {
       if (vars.dev.value) {
         print.time("calculating " + axis + " axis");
       }
@@ -29768,7 +29768,10 @@ dataChange = function(vars) {
       break;
     }
   }
-  subs = ["mute", "range", "scale", "solo", "stacked"];
+  if (changed) {
+    return changed;
+  }
+  subs = ["mute", "range", "scale", "solo", "stacked", "zerofill"];
   _ref = ["x", "y"];
   for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
     axis = _ref[_j];
@@ -32419,12 +32422,16 @@ stacked.setup = function(vars) {
       scale: "discrete"
     });
   }
-  vars.self[vars.axes.discrete]({
-    zerofill: true
-  });
-  vars.self[vars.axes.opposite]({
-    stacked: true
-  });
+  if (!vars[vars.axes.discrete].zerofill.value) {
+    vars.self[vars.axes.discrete]({
+      zerofill: true
+    });
+  }
+  if (!vars[vars.axes.opposite].stacked.value) {
+    vars.self[vars.axes.opposite]({
+      stacked: true
+    });
+  }
   y = vars[vars.axes.opposite];
   size = vars.size;
   if ((!y.value && size.value) || (size.changed && size.previous === y.value)) {

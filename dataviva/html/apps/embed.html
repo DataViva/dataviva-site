@@ -1366,7 +1366,7 @@
         .active({"spotlight": app.vars.spotlight})
         .id(nesting)
         .depth(depth, function(){ app.title_update() })
-        .id({"grouping": app.vars.grouping})
+        .id({"grouping": app.vars.grouping || false})
         .order({
           "sort": app.vars.sort,
           "value": app.vars.order
@@ -1375,10 +1375,10 @@
         .size(app.vars.size)
         .focus(false)
         .error(false)
-        .id({
-          "solo": app.solos,
-          "mute": app.filters
-        })
+        // .id({
+        //   "solo": app.solos,
+        //   "mute": app.filters
+        // })
         .icon({
           "style": style,
           "value": "icon"
@@ -1386,7 +1386,8 @@
         .legend({"icons": app.build.output_attr !== "bra"})
         .legend(app.build.output !== "age")
         .y(false)
-        .y({"stacked": false})
+        .y({"stacked": app.build.app.type === "stacked"})
+        .y({"ticks": {"values": false}})
         .x({"scale": "linear"})
         .tooltip(app.tooltip)
         .tooltip({"children": app.build.output !== "balance"})
@@ -1615,7 +1616,6 @@
           })
           .y({
             "scale": layout,
-            "stacked": true,
             "value": app.vars.y
           })
           .active(false)
