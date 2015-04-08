@@ -213,7 +213,7 @@
         ret_obj[level] = attr_copy.reduce(function(obj, a) {
           if (level === "school_type_id") {
             if (!(a.school_type_id in obj)) {
-              obj[a.school_type_id] = {"color": a.color, "name": a.school_type};
+              obj[a.school_type_id] = {"color": a.color, "name": a.school_type, "icon": "/static/img/icons/school/school_"+a.school_type_id.toLowerCase()+".png"};
             }
           }
           else {
@@ -222,7 +222,7 @@
             if (d === a.id.length) {
               a[o+"_id"] = a.id;
               a[o+"_display"] = dataviva.displayID(a.id,o);
-              a.icon = dataviva.icon(a.id,o);
+              // a.icon = dataviva.icon(a.id,o);
               delete a.export_val;
               delete a.import_val;
               delete a.enrolled;

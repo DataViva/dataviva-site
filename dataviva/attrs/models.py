@@ -143,7 +143,7 @@ class School(db.Model, AutoSerialize, ExpandedAttr):
     is_vocational = db.Column(db.Integer)
 
     def icon(self):
-        return None
+        return "/static/img/icons/school/school_{}.png".format(self.school_type_id.lower())
 
     def url(self):
         return "/profiles/school/{}/".format(self.id)
@@ -166,7 +166,7 @@ class University(db.Model, AutoSerialize, ExpandedAttr):
     ybuc = db.relationship("Ybuc", backref = 'university', lazy = 'dynamic')
 
     def icon(self):
-        return None
+        return "/static/img/icons/university/university_{}.png".format(self.school_type_id.lower())
 
     def school_type(self):
         lang = getattr(g, "locale", "en")

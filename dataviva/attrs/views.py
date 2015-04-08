@@ -71,7 +71,7 @@ def school_attrs(bra_id):
         WHERE sc_ybs.bra_id = %s;
     ''', bra_id)
 
-    data = [{'id': row[0], 'school_type_id': row[1], 'name': row[2], 'color': row[3]} for row in results]
+    data = [{'id': row[0], 'school_type_id': row[1], 'name': row[2], 'color': row[3], 'icon': '/static/img/icons/school/school_{}.png'.format(row[1].lower())} for row in results]
 
     return jsonify(data=data)
 
