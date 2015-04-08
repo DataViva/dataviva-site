@@ -291,6 +291,7 @@ def dictionary():
         "hedu_footer": gettext("Data provided by INEP/MEC"),
         "enrolled": gettext("Enrolled"),
         "school_type": gettext("Funding"),
+        "school_type_desc_box": gettext("Filters the data based on the administrative dependency of the school."),
         "school_type_id": gettext("Funding"),
         "morning": gettext("Morning"),
         "afternoon": gettext("Afternoon"),
@@ -303,6 +304,10 @@ def dictionary():
         "classes": gettext("Classes"),
         "enrolled_classes": gettext("Average Class Size"),
         "age": gettext("Average Age"),
+        "funding_p": gettext("Federal Public"),
+        "funding_q": gettext("State Public"),
+        "funding_r": gettext("Municipal Public"),
+        "funding_s": gettext("Private"),
 
         # EI Labels
         "ei": gettext("Electronic Invoices (EI)"),

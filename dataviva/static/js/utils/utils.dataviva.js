@@ -424,7 +424,7 @@ dataviva.cleanData = function(data, dataset, output) {
 
   var zerofills = {
     "secex": ["export_val","import_val", "import_kg", "export_kg"],
-    "rais": ["wage","wage_avg","num_emp","num_est","num_emp_est"],
+    "rais": ["wage","wage_avg","num_emp","num_est"],
     "hedu": ["enrolled"],
     "sc": ["enrolled"],
     "ei": ["purchase_value", "transfer_value"]
@@ -503,6 +503,10 @@ dataviva.cleanData = function(data, dataset, output) {
     if (dataset === "secex") {
       temp.export_val_kg = temp.export_kg ? temp.export_val/temp.export_kg : 0;
       temp.import_val_kg = temp.import_kg ? temp.import_val/temp.import_kg : 0;
+    }
+    else if (dataset === "rais") {
+      if (temp.num_est) temp.num_emp_est = Math.ceil(temp.num_emp/temp.num_est);
+      else temp.num_emp_est = 0;
     }
 
     if ("classes" in temp && "enrolled" in temp) {

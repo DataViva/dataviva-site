@@ -10910,7 +10910,7 @@ module.exports = function( vars , data ) {
   vars.data.filters.forEach( function( key ) {
 
     if (availableKeys.indexOf(vars[key].value) >= 0 &&
-        typeReqs.indexOf(vars[key].value) >= 0) {
+        typeReqs.indexOf(key) >= 0) {
 
       data = data.filter( function( d ) {
 
@@ -29133,7 +29133,7 @@ strip = require("../../string/strip.js");
 uniques = require("../../util/uniques.coffee");
 
 box = function(vars) {
-  var disMargin, discrete, domains, h, mergeData, mode, oppMargin, opposite, returnData, space, w;
+  var disMargin, discrete, domains, h, mergeData, mode, noData, oppMargin, opposite, returnData, space, w;
   graph(vars, {
     buffer: true,
     mouse: true
@@ -29163,11 +29163,12 @@ box = function(vars) {
     }
     return obj;
   };
+  noData = false;
   returnData = [];
   d3.nest().key(function(d) {
     return fetchValue(vars, d, vars[discrete].value);
   }).rollup(function(leaves) {
-    var bottom, bottomLabel, bottomWhisker, boxData, d, diff1, diff2, first, iqr, key, label, median, medianBuffer, medianData, medianHeight, medianText, outliers, scale, second, tooltipData, top, topLabel, topWhisker, val, values, x, y, _i, _j, _len, _len1;
+    var bottom, bottomLabel, bottomWhisker, boxData, d, diff1, diff2, first, iqr, key, label, median, medianBuffer, medianData, medianHeight, medianText, outliers, scale, second, tooltipData, top, topLabel, topWhisker, uniqs, val, values, x, y, _i, _j, _len, _len1;
     scale = vars[opposite].scale.viz;
     values = leaves.map(function(d) {
       return fetchValue(vars, d, vars[opposite].value);
@@ -29175,6 +29176,7 @@ box = function(vars) {
     values.sort(function(a, b) {
       return a - b;
     });
+    uniqs = uniques(values);
     first = d3.quantile(values, 0.25);
     median = d3.quantile(values, 0.50);
     second = d3.quantile(values, 0.75);
@@ -29341,10 +29343,15 @@ box = function(vars) {
       d.d3plus.r = 4;
       d.d3plus.shape = vars.shape.value;
     }
+    noData = !outliers.length && top - bottom === 0;
     returnData = returnData.concat(outliers);
     return leaves;
   }).entries(vars.data.viz);
-  return returnData;
+  if (noData) {
+    return [];
+  } else {
+    return returnData;
+  }
 };
 
 box.modes = ["tukey", "extent", Array, Number];

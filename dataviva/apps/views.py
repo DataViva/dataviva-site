@@ -466,6 +466,7 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
     builds = Build.query.all()
     builds = [b.json(fill=False) for b in builds]
     rais_builds = [b.copy() for b in builds if b["dataset"] == "rais" and b["app"]["type"] not in ("network", "occugrid", "rings")]
+    builds = [b for b in builds if b["app"]["type"] != "box" or b["dataset"] != "rais"]
     def size_var(b):
         app = b["app"]["type"]
         if app in ["line", "stacked"]:
@@ -479,8 +480,9 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
         if b["dataset"] == "rais":
             b["url"] = "{}?{}=num_emp".format(b["url"], size_var(b))
     for b in rais_builds:
-        b["id"] = "{}b".format(int(b["id"]))
-        b["url"] = "{}?{}=wage".format(b["url"], size_var(b))
+        if b["app"]["type"] != "box":
+            b["id"] = "{}b".format(int(b["id"]))
+            b["url"] = "{}?{}=wage".format(b["url"], size_var(b))
         b["dataset"] = "rais_wages"
     builds = rais_builds + builds
     dataset_sort = ["rais_wages", "rais", "hedu", "sc", "secex", "ei"]
@@ -553,12 +555,15 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
     build.set_filter2(filter2_attr)
     build.set_bra(bra_attr)
     build = build.serialize()
-    for p, v in request.args.items():
-        if v == "wage":
-            build["id"] = "{}b".format(int(build["id"]))
-            build["url"] = "{}?{}=wage".format(build["url"], size_var(build))
-            build["dataset"] = "rais_wages"
-            break
+    if build["app"]["type"] == "box" and build["dataset"] == "rais":
+        build["dataset"] = "rais_wages"
+    else:
+        for p, v in request.args.items():
+            if v == "wage":
+                build["id"] = "{}b".format(int(build["id"]))
+                build["url"] = "{}?{}=wage".format(build["url"], size_var(build))
+                build["dataset"] = "rais_wages"
+                break
 
     return render_template("apps/builder.html",
         app=app_name, apps=App.query.all(), builds=builds, build=build,

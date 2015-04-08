@@ -946,7 +946,7 @@
               },"/attrs/"+app.build.output_attr+"/"+"?lang="+dataviva.language)
             }
 
-            if (app.build.output === "adm") {
+            if (["adm", "age"].indexOf(app.build.output) >= 0) {
               app.build.bra.forEach(function(b){
 
                 if (!app.attrs["school_"+b.id]) {
@@ -1148,7 +1148,7 @@
         }
 
         if((ui.type === "depth" && last_app && last_app != app.build.app.type) || (!app.vars[ui.type] || ui.values.indexOf(app.vars[ui.type]) < 0)) {
-          app.vars[ui.type] = default_value
+          app.vars[ui.type] = default_value;
         }
 
         if (ui.values.length > 1 && app.vars.builder !== "false" && (app.build.app.type != "network" || app.build.bra[0].id != "all" || (ui.type != "spotlight" && ui.type != "rca_scope") || (ui.type == "spotlight" && app.build.output_attr == "hs") || (ui.type != "color" && app.build.app.type != "stacked"))) {
@@ -1168,7 +1168,7 @@
           if (["color"].indexOf(title) >= 0) {
             form_type = "drop";
           }
-          else if (["time"].indexOf(title) >= 0) {
+          else if (["time", "school_type"].indexOf(title) >= 0) {
             form_type = "toggle";
           }
 
@@ -1362,6 +1362,7 @@
           "value": app.build.title
         })
         .color(color_var)
+        .id({"solo": false})
         .attrs(app.attrs[app.build.output_attr])
         .active({"spotlight": app.vars.spotlight})
         .id(nesting)
@@ -1746,6 +1747,12 @@
             .order("course_sc_5")
             .order({"sort": "asc"})
             .x("course_sc_5")
+
+          app.school_filter = app.vars.school_type === "all" ? false : app.vars.school_type.split("_")[1].toUpperCase();
+          app.viz.id({"solo": function(id){
+            if (!app.school_filter) return true;
+            return id.length === 8 ? app.attrs["school_"+app.build.bra[0].id][id] === app.school_filter : false;
+          }})
         }
         else {
           app.viz
@@ -1819,7 +1826,16 @@
         type = type.container(Object).id.slice(3);
       }
 
-      if (type == "solo" || type == "filter") {
+      if (type == "school_type") {
+        app.vars[type] = value;
+        builder.url();
+        app.school_filter = value === "all" ? false : value.split("_")[1].toUpperCase();
+        app.viz.id({"solo": function(id) {
+              if (!app.school_filter) return true;
+              return id.length === 8 ? app.attrs["school_"+app.build.bra[0].id][id] === app.school_filter : false;
+          }}).draw()
+      }
+      else if (type == "solo" || type == "filter") {
 
         app[type+"s"] = value
 
@@ -2011,9 +2027,9 @@
           out = app.build.output_attr,
           attr = app.attrs[out];
 
-      if (out === "school") {
+      if (out === "school" || app.build.output === "age") {
         data.raw.forEach(function(d){
-
+          d.school_8 = d.school_id;
           var sb = "school_"+d.bra_id;
           if (app.attrs[sb]) {
             d.school_type_id = app.attrs[sb][d.school_8];
@@ -2051,13 +2067,6 @@
 
               d.required = Math.ceil(d.required)
 
-              if (!d.wage) d.wage = 0
-              if (!d.num_emp) d.num_emp = 0
-              if (!d.num_est) d.num_est = 0
-              if (!d.wage_avg) d.wage_avg = 0
-
-              d.num_emp_est = Math.ceil(d.num_emp/d.num_est);
-
               d.wage_avg_bra = job.wage_avg
 
               var else_data = app.data[app.build.else_url].raw.filter(function(e){
@@ -2082,7 +2091,7 @@
 
       }
       else if ("compare" == format[app.build.app.type]) {
-        
+
         d3.nest()
           .key(function(d){return d.year})
           .key(function(d){
