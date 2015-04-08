@@ -629,10 +629,8 @@
           "import_val_growth_5": "mean",
           "importance": "mean",
           "val_usd": function(leaves) {
-            if (leaves.length === 1) {
-              return leaves[0].val_usd;
-            }
-            else if (leaves.length === 2) {
+            var directions = d3plus.util.uniques(leaves, function(l){ return l.direction; });
+            if (directions.length === 2) {
               return d3.sum(leaves, function(l){
                 return l.direction === "import_val" ? -l.val_usd : l.val_usd
               })
@@ -1390,6 +1388,7 @@
         .y({"stacked": false})
         .x({"scale": "linear"})
         .tooltip(app.tooltip)
+        .tooltip({"children": app.build.output !== "balance"})
         .zoom(["balance", "adm"].indexOf(app.build.output) < 0)
         .time(app.vars.time || (app.monthly ? "month" : "year"))
         .time({"solo": timeSolo})
