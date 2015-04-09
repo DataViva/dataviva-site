@@ -105,7 +105,7 @@ def num_format(number, key = None, labels = True):
     if suffix:
         if g.locale != "en":
             suffix = u" {0}".format(plurals(key=suffix, n=n))
-        n = u"{0} {1}".format(n,suffix)
+        n = u"{0}{1}".format(n,suffix)
 
     if key and labels:
         affix = affixes(key)
