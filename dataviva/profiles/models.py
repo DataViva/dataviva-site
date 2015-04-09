@@ -160,8 +160,7 @@ class Bra(Profile):
             {"title": gettext("Exports by:"), "builds": [
                 [
                     {"id":9, "params": {"size": "export_val"}},
-                    {"id":25, "params": {"y": "export_val"}},
-                    {"id":46, "params": {"size": "export_val"}}
+                    {"id":25, "params": {"y": "export_val"}}
                 ],
                 [
                     {"id":11, "params": {"size": "export_val"}},
@@ -172,8 +171,7 @@ class Bra(Profile):
             {"title": gettext("Imports by:"), "builds": [
                 [
                     {"id":9, "params": {"size": "import_val"}},
-                    {"id":25, "params": {"y": "import_val"}},
-                    {"id":46, "params": {"size": "import_val"}}
+                    {"id":25, "params": {"y": "import_val"}}
                 ],
                 [
                     {"id":11, "params": {"size": "import_val"}},
@@ -194,12 +192,20 @@ class Bra(Profile):
                     {"id": 142, "params": {"y": "wage_avg"}}
                 ]
             ]},
-            {"title": gettext("Economic Opportunities:"), "builds": [35, 33]},
+            {"title": gettext("Economic Opportunities:"), "builds": [35]},
             # {"title": gettext("Domestic Trade by:"), "builds": [128, 127]},
             {"title": gettext("University Enrollment by:"), "builds": [93, [95, 105, 115]]},
             {"title": gettext("Vocational Enrollment by:"), "builds": [[117, 120, 126]]},
-            {"title": gettext("Basic Education by:"), "builds": [[123, 118, 121], [162, 165, 167], [163, 166, 168], [160]]}
+            {"title": gettext("Basic Education by:"), "builds": [[123, 118, 121], [162, 165, 167]]}
         ]
+
+        if self.attr.id != "all":
+            apps[1]["builds"][0].append({"id":46, "params": {"size": "export_val"}})
+            apps[2]["builds"][0].append({"id":46, "params": {"size": "import_val"}})
+            apps[5]["builds"].append(33)
+            apps[-1]["builds"].append([163, 166, 168])
+            apps[-1]["builds"].append([160])
+
         if len(self.attr.id) < 9:
             for i, val in enumerate(["export_val", "import_val"]):
                 exp_builds = []
@@ -418,4 +424,4 @@ class Course_hedu(Profile):
 class Course_sc(Profile):
 
     def build_list(self):
-        return [{"title": gettext("Vocational Enrollment by:"), "builds": [[124, 122, 119], 159]}]
+        return [{"title": gettext("Enrollment by:"), "builds": [[124, 122, 119]]}]

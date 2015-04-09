@@ -811,9 +811,39 @@
         .header("X-Requested-With", "XMLHttpRequest")
         .get(function(error,data){
 
+          if (!error) {
+            app.build = data.current_build;
+            if (app.build.bra[0].id === "all") {
+                if (["scatter", "occugrid"].indexOf(app.build.app.type) >= 0) {
+                  error = dataviva.dictionary.no_brazil;
+                }
+                else if (["network"].indexOf(app.build.app.type) >= 0 && app.build.dataset === "rais") {
+                  error = dataviva.dictionary.no_brazil;
+                }
+                else if (["adm", "age", "school"].indexOf(app.build.output) >= 0) {
+                  error = dataviva.dictionary.no_brazil;
+                }
+            }
+            if (app.build.app.type === "occugrid") {
+              if (app.build.cnae[0].id.length !== depths.cnae[depths.cnae.length - 1]) {
+                error = dataviva.dictionary.no_deepest;
+              }
+            }
+            else if (app.build.app.type === "rings") {
+              if (app.build[app.build.output_attr][0].id.length !== depths[app.build.output_attr][depths[app.build.output_attr].length - 1]) {
+                error = dataviva.dictionary.no_deepest;
+              }
+            }
+          }
+          else {
+            console.log(error)
+            error = dataviva.format.text("Build Not Available")
+          }
+
           if (error) {
-          	console.log(error)
-           // app.error(dataviva.format.text("Build Not Available"))
+          	app.viz.error(error);
+            dataviva.resize()
+            loading.hide()
           }
           else {
 
@@ -824,7 +854,6 @@
             // }
 
             // Set public current build variable
-            app.build = data.current_build;
             app.years = year_range[app.build.dataset];
             app.monthly = app.years[0].indexOf("-") > 0 &&
                           (app.build.dataset !== "secex" || ["stacked", "line"].indexOf(app.build.app.type) >= 0);
@@ -955,13 +984,18 @@
                       .get(function(error,d){
                         app.attrs["school_"+b.id] = d.data.reduce(function(obj, s){
                           obj[s.id] = s;
-                          app.attrs.school.school_8[s.id] = s;
+                          if (app.attrs.school) app.attrs.school.school_8[s.id] = s;
                           return obj;
                         }, {});
                         callback(error,d);
                       })
                   },"/attrs/school/in/"+b.id+"/?lang="+dataviva.language)
 
+                }
+                else if (app.attrs.school) {
+                  for (var s in app.attrs["school_"+b.id]) {
+                    app.attrs.school.school_8[s] = app.attrs["school_"+b.id][s];
+                  }
                 }
 
               })
@@ -1751,7 +1785,7 @@
           app.school_filter = app.vars.school_type === "all" ? false : app.vars.school_type.split("_")[1].toUpperCase();
           app.viz.id({"solo": function(id){
             if (!app.school_filter) return true;
-            return id.length === 8 ? app.attrs["school_"+app.build.bra[0].id][id] === app.school_filter : false;
+            return id.length === 8 ? app.attrs["school_"+app.build.bra[0].id][id].school_type_id === app.school_filter : false;
           }})
         }
         else {
@@ -1764,27 +1798,9 @@
 
       last_app = app.build.app.type
 
-      var data_array = app.data[app.build.data_url][format[app.build.app.type]],
-          error = false;
-      if (app.build.bra[0].id === "all") {
-          if (["scatter", "occugrid"].indexOf(app.build.app.type) >= 0) {
-            error = dataviva.dictionary.no_brazil;
-          }
-          else if (["network"].indexOf(app.build.app.type) >= 0 && app.build.dataset === "rais") {
-            error = dataviva.dictionary.no_brazil;
-          }
-      }
-      if (app.build.app.type === "occugrid") {
-        if (app.build.cnae[0].id.length !== depths.cnae[depths.cnae.length - 1]) {
-          error = dataviva.dictionary.no_deepest;
-        }
-      }
-      else if (app.build.app.type === "rings") {
-        if (app.build[app.build.output_attr][0].id.length !== depths[app.build.output_attr][depths[app.build.output_attr].length - 1]) {
-          error = dataviva.dictionary.no_deepest;
-        }
-      }
-      app.viz.data(data_array).error(error);
+      var data_array = app.data[app.build.data_url][format[app.build.app.type]];
+
+      app.viz.data(data_array);
 
       dataviva.resize()
       loading.hide()
@@ -1832,7 +1848,7 @@
         app.school_filter = value === "all" ? false : value.split("_")[1].toUpperCase();
         app.viz.id({"solo": function(id) {
               if (!app.school_filter) return true;
-              return id.length === 8 ? app.attrs["school_"+app.build.bra[0].id][id] === app.school_filter : false;
+              return id.length === 8 ? app.attrs["school_"+app.build.bra[0].id][id].school_type_id === app.school_filter : false;
           }}).draw()
       }
       else if (type == "solo" || type == "filter") {
