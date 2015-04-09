@@ -29145,7 +29145,7 @@ strip = require("../../string/strip.js");
 uniques = require("../../util/uniques.coffee");
 
 box = function(vars) {
-  var disMargin, discrete, domains, h, mergeData, mode, noData, oppMargin, opposite, returnData, space, w;
+  var disMargin, discrete, domains, h, medians, mergeData, mode, noData, oppMargin, opposite, returnData, space, w;
   graph(vars, {
     buffer: true,
     mouse: true
@@ -29176,6 +29176,7 @@ box = function(vars) {
     return obj;
   };
   noData = false;
+  medians = [];
   returnData = [];
   d3.nest().key(function(d) {
     return fetchValue(vars, d, vars[discrete].value);
@@ -29356,10 +29357,11 @@ box = function(vars) {
       d.d3plus.shape = vars.shape.value;
     }
     noData = !outliers.length && top - bottom === 0;
+    medians.push(median);
     returnData = returnData.concat(outliers);
     return leaves;
   }).entries(vars.data.viz);
-  if (noData) {
+  if (noData && uniques(medians).length === 1) {
     return [];
   } else {
     return returnData;
