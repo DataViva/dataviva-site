@@ -160,46 +160,47 @@ def index_selector(category = None, id = None):
         article = article)
 
 @mod.route("/<category>/")
+def randomProfile(category = None):
+
+    if category == "bra":
+        ids = db.session.query(Ymb.bra_id).filter(Ymb.bra_id_len == "9") \
+                .filter(Ymb.year == __year_range__["secex"][1].split("-")[0]) \
+                .filter(not_(Ymb.bra_id.contains("0xx"))) \
+                .filter(Ymb.month == 0).distinct()
+    elif category == "hs":
+        ids = db.session.query(Ymp.hs_id).filter(Ymp.hs_id_len == "6") \
+                .filter(Ymp.year == __year_range__["secex"][1].split("-")[0]) \
+                .filter(Ymp.month == 0).distinct()
+    elif category == "wld":
+        ids = db.session.query(Ymw.wld_id).filter(Ymw.wld_id_len == "5") \
+                .filter(Ymw.year == __year_range__["secex"][1].split("-")[0]) \
+                .filter(Ymw.month == 0).distinct()
+    elif category == "cnae":
+        ids = db.session.query(Yi.cnae_id).filter(Yi.cnae_id_len == "6") \
+                .filter(Yi.year == __year_range__["rais"][1]).distinct()
+    elif category == "cbo":
+        ids = db.session.query(Yo.cbo_id).filter(Yo.cbo_id_len == "4") \
+                .filter(Yo.year == __year_range__["rais"][1]).distinct()
+    elif category == "university":
+        ids = db.session.query(Yu.university_id) \
+                .filter(Yu.year == __year_range__["hedu"][1]).distinct()
+    elif category == "course_hedu":
+        ids = db.session.query(Yc_hedu.course_hedu_id).filter(Yc_hedu.course_hedu_id_len == "6") \
+                .filter(Yc_hedu.course_hedu_id != "000000") \
+                .filter(Yc_hedu.year == __year_range__["hedu"][1]).distinct()
+    elif category == "course_sc":
+        ids = db.session.query(Yc_sc.course_sc_id).filter(Yc_sc.course_sc_id_len == "5") \
+                .filter(Yc_sc.course_sc_id != "000000") \
+                .filter(not_(Yc_sc.course_sc_id.contains("xx"))) \
+                .filter(Yc_sc.year == __year_range__["sc"][1]).distinct()
+    rand = random.randrange(0, ids.count())
+    id = ids[rand][0]
+    return redirect(url_for("profiles.profiles", category=category, id=id))
+
 @mod.route("/<category>/<id>/")
 @view_cache.cached(timeout=604800, key_prefix=api_cache_key("profiles"))
 @gzipped
 def profiles(category = None, id = None):
-
-    if not id:
-        if category == "bra":
-            ids = db.session.query(Ymb.bra_id).filter(Ymb.bra_id_len == "9") \
-                    .filter(Ymb.year == __year_range__["secex"][1].split("-")[0]) \
-                    .filter(not_(Ymb.bra_id.contains("0xx"))) \
-                    .filter(Ymb.month == 0).distinct()
-        elif category == "hs":
-            ids = db.session.query(Ymp.hs_id).filter(Ymp.hs_id_len == "6") \
-                    .filter(Ymp.year == __year_range__["secex"][1].split("-")[0]) \
-                    .filter(Ymp.month == 0).distinct()
-        elif category == "wld":
-            ids = db.session.query(Ymw.wld_id).filter(Ymw.wld_id_len == "5") \
-                    .filter(Ymw.year == __year_range__["secex"][1].split("-")[0]) \
-                    .filter(Ymw.month == 0).distinct()
-        elif category == "cnae":
-            ids = db.session.query(Yi.cnae_id).filter(Yi.cnae_id_len == "6") \
-                    .filter(Yi.year == __year_range__["rais"][1]).distinct()
-        elif category == "cbo":
-            ids = db.session.query(Yo.cbo_id).filter(Yo.cbo_id_len == "4") \
-                    .filter(Yo.year == __year_range__["rais"][1]).distinct()
-        elif category == "university":
-            ids = db.session.query(Yu.university_id) \
-                    .filter(Yu.year == __year_range__["hedu"][1]).distinct()
-        elif category == "course_hedu":
-            ids = db.session.query(Yc_hedu.course_hedu_id).filter(Yc_hedu.course_hedu_id_len == "6") \
-                    .filter(Yc_hedu.course_hedu_id != "000000") \
-                    .filter(Yc_hedu.year == __year_range__["hedu"][1]).distinct()
-        elif category == "course_sc":
-            ids = db.session.query(Yc_sc.course_sc_id).filter(Yc_sc.course_sc_id_len == "5") \
-                    .filter(Yc_sc.course_sc_id != "000000") \
-                    .filter(not_(Yc_sc.course_sc_id.contains("xx"))) \
-                    .filter(Yc_sc.year == __year_range__["sc"][1]).distinct()
-        rand = random.randrange(0, ids.count())
-        id = ids[rand][0]
-        return redirect(url_for("profiles.profiles", category=category, id=id))
 
     if category == "bra" and id == "all":
         item = Wld.query.get("sabra")
