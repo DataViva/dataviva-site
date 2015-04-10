@@ -1756,7 +1756,7 @@
         .id({"grouping": true})
         .shape("line")
         .order(false)
-        .depth(app.build.output_attr === "bra" ? 1 : app.build.output === "basic" ? 1 : 0)
+        .depth(app.build.output_attr === "bra" ? 1 : ["basic", "balance"].indexOf(app.build.output) >= 0 ? 1 : 0)
 
       }
 
