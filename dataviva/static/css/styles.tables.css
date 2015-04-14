@@ -198,8 +198,8 @@ table .bra_id, table .id, table .id_ibge,
 table .cnae_id, table .cbo_id,
 table .university_id, table .course_hedu_id, table .course_sc_id,
 table .hs_id, table .wld_id, table.color {
-  min-width: 70px !important;
-  width: 70px !important;
+  min-width: 80px !important;
+  width: 80px !important;
 }
 table .name {
   max-width: 200px !important;
