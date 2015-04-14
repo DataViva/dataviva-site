@@ -62,23 +62,20 @@ function infinite_scroll(selection){
         // conver url to Location object
         a = url;
         // decide whether to use '?' or '&'
+        a = a.split("?");
+        var joiner = a.length > 1 ? "&" : "?";
+        a = a.join("?");
         if (order) {
-          a = a.split("?")[0]
           if(order_clicked){
-            a += "?limit="+limit+"&order="+order
+            a += joiner + "limit="+limit+"&offset=0&order="+order;
             order_clicked = false;
           }
           else {
-            a += "?limit="+limit+"&offset="+offset+"&order="+order
+            a += joiner + "limit="+limit+"&offset="+offset+"&order="+order;
           }
         }
         else {
-          if(a.indexOf("?") >= 0){
-            a += "&limit="+limit+"&offset="+offset
-          }
-          else {
-            a += "?limit="+limit+"&offset="+offset
-          }
+          a += joiner + "limit="+limit+"&offset="+offset;
         }
 
         // Here we set the header X-Requested-With to XMLHttpRequest so the
@@ -94,6 +91,7 @@ function infinite_scroll(selection){
 
         activities = new_data.activities || new_data.data;
         header = new_data.headers;
+        console.log(activities)
         if (!header && activities.length) {
           header = d3.keys(activities[0]);
           activities = activities.map(function(d){ return d3.values(d); });
