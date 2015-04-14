@@ -41,7 +41,9 @@ dataviva.format.text = function(text, opts) {
     else return format_name("top") + " " + format_name(x)
   }
 
-  var exceptions = ["id","cbo_id","cnae_id","wld_id","hs_id","bra_id","id_ibge"]
+  var exceptions = ["id", "bra_id", "id_ibge", "cnae_id", "cbo_id",
+                    "hs_id", "wld_id", "university_id", "course_hedu_id",
+                    "school_id", "course_sc_id"];
 
   if (exceptions.indexOf(name) >= 0) return text.toUpperCase()
   else if (text.indexOf("cp_bra_") == 0 && app) {
@@ -132,8 +134,11 @@ dataviva.format.number = function(value, opts) {
                 "bra_diversity_eff", "cnae_diversity_eff", "cbo_diversity_eff",
                 "hs_diversity_eff", "wld_diversity_eff"];
 
-  var ids = ["cbo_id","cnae_id","wld_id","hs_id","bra_id","id_ibge"];
-  if (ids.indexOf(name) >= 0) return value.toString().toUpperCase();
+  var exceptions = ["id", "bra_id", "id_ibge", "cnae_id", "cbo_id",
+                    "hs_id", "wld_id", "university_id", "course_hedu_id",
+                    "school_id", "course_sc_id"];
+
+  if (exceptions.indexOf(name) >= 0) return value.toString().toUpperCase();
 
   var return_value;
   if (name === "year") {
