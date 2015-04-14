@@ -264,6 +264,8 @@ def attrs(attr="bra",Attr_id=None):
 
             if order:
                 a["rank"] = int(i+offset+1)
+            if attr == "bra" and "id_ibge" not in a:
+                a["id_ibge"] = False
             attrs.append(fix_name(a, lang))
 
         ret["data"] = attrs
