@@ -55,10 +55,10 @@ def index(year=2012,type="bra",depth=3):
     depths["bra"] = [1,3,5,7,9]
     depths["cnae"] = [1,3,6]
     depths["cbo"] = [1,2,4]
-    depths["hs"] = [2,4,6]
+    depths["hs"] = [2,6]
     depths["wld"] = [2,5]
-    depths["university"] = [5]
     depths["course_hedu"] = [2,6]
+    depths["university"] = [5]
 
     order = {}
     order["bra"] = "export_val"
