@@ -1297,9 +1297,9 @@
       }
 
       // Format Data if it hasn't already been formatted
-      if (!app.data[app.build.data_url][format[app.build.app.type]]) {
-        app.format_data()
-      }
+      // if (!app.data[app.build.data_url][format[app.build.app.type]]) {
+      app.format_data()
+      // }
 
       if (app.build.output_attr === "balance") {
         app.viz.text({"trade_balance": "trade_balance", "direction": "direction"});
