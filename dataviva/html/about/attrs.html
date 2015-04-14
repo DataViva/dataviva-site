@@ -79,16 +79,15 @@
 
     d3.select("#about_content .lightbox").style("padding", "0")
 
-    function iframe_size(w, h) {
-
-      var w = window.innerWidth - 320 - d3plus.client.scrollbar() + "px";
-      if (!h) h = 200;
+    function iframe_size() {
+      var w = window.innerWidth - 320 - d3plus.client.scrollbar() + "px",
+          h = window.innerHeight - 251;
       d3.select("#about_content .lightbox")
         .style("width", w)
-        .style("height", h+84+"px")
+        .style("height", h+49+"px")
       d3.select("iframe")
         .attr("width", w)
-        .attr("height", h+35+"px")
+        .attr("height", h+"px")
 
     }
 
