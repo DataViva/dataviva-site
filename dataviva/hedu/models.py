@@ -7,7 +7,7 @@ class Hedu(db.Model, AutoSerialize):
     enrolled = db.Column(db.Integer(11))
     graduates = db.Column(db.Integer(11))
     entrants = db.Column(db.Integer(11))
-    students = db.Column(db.Integer(11))
+    # students = db.Column(db.Integer(11))
     morning = db.Column(db.Integer(11))
     afternoon = db.Column(db.Integer(11))
     night = db.Column(db.Integer(11))

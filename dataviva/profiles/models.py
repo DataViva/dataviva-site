@@ -13,7 +13,7 @@ crosswalk_dict = {
     "cbo": {
         "table": Crosswalk_oc,
         "data": Yc_hedu,
-        "column": "students",
+        "column": "enrolled",
         "id": "course_hedu_id"
     },
     "course_hedu": {
