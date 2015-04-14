@@ -13,32 +13,36 @@
 
   <div id="rankings_nav">
 
-      <a class="{% if type == 'bra' %}decision{% else %}help{% endif %} short icon bra" href="/rankings/2012/bra/3/">
+      <a class="{% if type == 'bra' %}decision{% else %}help{% endif %} short icon bra" href="/rankings/{{ latest_year['bra'] }}/bra/3/">
         {% trans %}Brazilian Locations{% endtrans %}
       </a>
 
-      <a class="{% if type == 'cnae' %}decision{% else %}help{% endif %} short icon cnae" href="/rankings/2012/cnae/6/">
+      <a class="{% if type == 'cnae' %}decision{% else %}help{% endif %} short icon cnae" href="/rankings/{{ latest_year['cnae'] }}/cnae/6/">
         {% trans %}Industries{% endtrans %}
       </a>
 
-      <a class="{% if type == 'cbo' %}decision{% else %}help{% endif %} short icon cbo" href="/rankings/2012/cbo/4/">
+      <a class="{% if type == 'cbo' %}decision{% else %}help{% endif %} short icon cbo" href="/rankings/{{ latest_year['cbo'] }}/cbo/4/">
         {% trans %}Occupations{% endtrans %}
       </a>
 
-      <a class="{% if type == 'hs' %}decision{% else %}help{% endif %} short icon hs" href="/rankings/2012/hs/6/">
+      <a class="{% if type == 'hs' %}decision{% else %}help{% endif %} short icon hs" href="/rankings/{{ latest_year['hs'] }}/hs/6/">
         {% trans %}Products{% endtrans %}
       </a>
 
-      <a class="{% if type == 'wld' %}decision{% else %}help{% endif %} short icon wld" href="/rankings/2012/wld/5/">
+      <a class="{% if type == 'wld' %}decision{% else %}help{% endif %} short icon wld" href="/rankings/{{ latest_year['wld'] }}/wld/5/">
         {% trans %}Export Destinations{% endtrans %}
       </a>
 
-      <a class="{% if type == 'university' %}decision{% else %}help{% endif %} short icon university" href="/rankings/2012/university/5/">
+      <a class="{% if type == 'university' %}decision{% else %}help{% endif %} short icon university" href="/rankings/{{ latest_year['university'] }}/university/5/">
         {% trans %}Universities{% endtrans %}
       </a>
 
-      <a class="{% if type == 'course_hedu' %}decision{% else %}help{% endif %} short icon course_hedu" href="/rankings/2012/course_hedu/6/">
+      <a class="{% if type == 'course_hedu' %}decision{% else %}help{% endif %} short icon course_hedu" href="/rankings/{{ latest_year['course_hedu'] }}/course_hedu/6/">
         {% trans %}Majors{% endtrans %}
+      </a>
+
+      <a class="{% if type == 'course_sc' %}decision{% else %}help{% endif %} short icon course_sc" href="/rankings/{{ latest_year['course_sc'] }}/course_sc/5/">
+        {% trans %}Basic Courses{% endtrans %}
       </a>
 
   </div>

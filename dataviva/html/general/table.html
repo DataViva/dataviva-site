@@ -82,6 +82,9 @@
                     "entrants",
                     "students",
 
+                    "classes",
+                    "age",
+
                     "rca",
                     "rca_wld",
 
@@ -233,7 +236,7 @@
           sticky_cols_w_names.push(["bra", "id_ibge", "IBGE"])
           sticky_cols_w_names.push(["bra", "name", "Location"])
         }
-        else if(col.indexOf("_id") > -1){
+        else if(col.indexOf("_id") > -1 && sticky_cols.indexOf("name") < 0){
           var attr_type = col.replace("_id", "")
           if(attr_type === "hs"){ var col_name = "Product" }
           else if(attr_type === "cbo"){ var col_name = "Occupation" }

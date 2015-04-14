@@ -41,7 +41,7 @@ def location_values(ret,cat):
 ''' Returns modified query and return variable for data calls '''
 def parse_filter(kwargs,id_type,query,data_table,ret):
 
-    from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu
+    from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu, Course_sc
 
     query = query.group_by(getattr(data_table, id_type))
     cat = id_type[:-3]
@@ -206,14 +206,14 @@ def compile_query(query):
 def make_query(data_table, url_args, lang, **kwargs):
 
     from dataviva import db
-    from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu
+    from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu, Course_sc
 
     ops = {">": operator.gt,
            ">=": operator.ge,
            "<": operator.lt,
            "<=": operator.le}
 
-    check_keys = ["bra_id", "cnae_id", "cbo_id", "hs_id", "wld_id", "university_id", "course_hedu_id"]
+    check_keys = ["bra_id", "cnae_id", "cbo_id", "hs_id", "wld_id", "university_id", "course_hedu_id", "course_sc_id"]
     unique_keys = []
 
     download = url_args.get("download", None)
