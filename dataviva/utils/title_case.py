@@ -3,7 +3,9 @@ import re
 ''' Titlecase Function '''
 def title_case(string):
     if not string:
-      return ""
+        return ""
+    elif not isinstance(string, (unicode, str)):
+        return string
 
     exceptions = ['A', 'An', 'And', 'As', 'At', 'But', 'By', 'For', 'From', 'If', \
               'In', 'Into', 'Near', 'Nor', 'Of', 'On', 'Onto', 'Or', 'That', \
@@ -20,11 +22,10 @@ def title_case(string):
             return s.upper()
         else:
             return s.capitalize()
-    
+
     for i, word in enumerate(words):
         words[i] = detect_string(word)
-        
-    words[0] = words[0].capitalize()
-    
-    return "".join(words)
 
+    words[0] = words[0].capitalize()
+
+    return "".join(words)
