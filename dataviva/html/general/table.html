@@ -26,6 +26,9 @@
 
     var columns = {}
 
+    var UNSORTABLE_COLUMNS = location.href.indexOf("/attrs/table/") >= 0 ?
+                             ["rank"] : ["rank","name","id_ibge","id_mdic"];
+
     var DATA = [];
     var ATTRS = {};
     var CURRENT_DATASET = 'rais';
@@ -136,7 +139,7 @@
 
     function column_sort(d) {
 
-      if (["rank","name","id_ibge","id_mdic"].indexOf(d) < 0) {
+      if (!(d instanceof Array) && UNSORTABLE_COLUMNS.indexOf(d) < 0) {
 
         if (d == current_order[0]) var direction = current_order[1]
         else var direction = ""
@@ -469,7 +472,6 @@
       // all_cols = all_cols.filter(function(itm, i){
       //     return all_cols.indexOf(itm)== i;
       // });
-
 
       var all_data_cols;
       var data_url = "{{data_url}}";

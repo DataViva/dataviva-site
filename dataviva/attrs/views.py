@@ -26,26 +26,22 @@ def page_not_found(error):
     return error, 404
 
 def fix_name(attr, lang):
-    name_lang = "name_" + lang
-    desc_lang = "desc_" + lang
-    keywords_lang = "keywords_" + lang
+
+    for col in ["desc", "name", "gender", "article", "keywords"]:
+        # raise Exception("{}_{}".format(col, lang) in attr)
+        if "{}_{}".format(col, lang) in attr:
+            attr[col] = title_case(attr["{}_{}".format(col, lang)])
+        else:
+            attr[col] = False
+        if "{}_en".format(col) in attr: del attr["{}_en".format(col)]
+        if "{}_pt".format(col) in attr: del attr["{}_pt".format(col)]
+
     school_type_lang = "school_type_" + lang
-    if desc_lang in attr:
-        attr["desc"] = title_case(attr[desc_lang])
-        if "desc_en" in attr: del attr["desc_en"]
-        if "desc_pt" in attr: del attr["desc_pt"]
-    if name_lang in attr:
-        attr["name"] = title_case(attr[name_lang])
-        if "name_en" in attr: del attr["name_en"]
-        if "name_pt" in attr: del attr["name_pt"]
-    if keywords_lang in attr:
-        attr["keywords"] = title_case(attr[keywords_lang])
-        if "keywords_en" in attr: del attr["keywords_en"]
-        if "keywords_pt" in attr: del attr["keywords_pt"]
     if school_type_lang in attr:
         attr["school_type"] = attr[school_type_lang]
-        if "school_type_en" in attr: del attr["school_type_en"]
-        if "school_type_pt" in attr: del attr["school_type_pt"]
+    if "school_type_en" in attr: del attr["school_type_en"]
+    if "school_type_pt" in attr: del attr["school_type_pt"]
+
     if "is_vocational" in attr: del attr["is_vocational"]
     return attr
 
@@ -128,6 +124,8 @@ def attrs(attr="bra",Attr_id=None):
     if offset:
         offset = float(offset)
         limit = limit or 50
+    elif limit:
+        offset = float(0)
 
     lang = request.args.get('lang', None) or g.locale
     ret = {}
@@ -261,7 +259,6 @@ def attrs(attr="bra",Attr_id=None):
             #     if a["id"] in all_planning_regions:
             #         plr = all_planning_regions[a["id"]]
             #         a["plr"] = plr
-
             if order:
                 a["rank"] = int(i+offset+1)
             if attr == "bra" and "id_ibge" not in a:
