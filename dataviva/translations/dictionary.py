@@ -290,6 +290,8 @@ def dictionary():
         "hedu": gettext("Higher Education"),
         "hedu_footer": gettext("Data provided by INEP/MEC"),
         "enrolled": gettext("Enrolled"),
+        "entrants": gettext("Entrants"),
+        "graduates": gettext("Graduates"),
         "school_type": gettext("Funding"),
         "school_type_desc_box": gettext("Filters the data based on the administrative dependency of the school."),
         "school_type_id": gettext("Funding"),
@@ -411,7 +413,8 @@ def dictionary():
         "embed_footer": gettext("View more visualizations on the full DataViva.info website."),
 
         "no_brazil": gettext("This visualization is not available when selecting the entirity of Brazil. Please select a more grainular location."),
-        "no_deepest": gettext("This visualization is only available at the deepest nesting. Please select a more grainular filter."),
+        "only_brazil": gettext("Industry and Occupation distributions are only available when viewing the entirity of Brazil."),
+        "only_deepest": gettext("This visualization is only available at the deepest nesting. Please select a more grainular filter."),
 
         # D3plus Text
         "Click for More Info": gettext("Click for more data and related visualizations."),

@@ -80,6 +80,18 @@ def guide():
     default_cbo = '2235'
     default_hs = '052601'
 
+    # Bar Chart
+    builds = Build.query.filter(Build.id.in_([176,177,178])).all()
+    builds[0].set_bra(default_bra)
+    builds[1].set_filter1(default_cnae)
+    builds[2].set_filter2(default_cbo)
+    apps.append({
+        "summary": gettext("A visualization using the height of bars to show the number of employees in a specific wage bracket."),
+        "builds": builds,
+        "title": gettext(u"Bar Chart"),
+        "type": "bar"
+    })
+
     # Tree Map
     builds = Build.query.filter(Build.id.in_([3,95,117])).all()
     for b in builds: b.set_bra(default_bra)
@@ -453,6 +465,8 @@ def get_geo_location(ip):
             "filter1": "all", "filter2": "all", "output": "balance", "params": ""})
 @mod.route('/builder/box/', defaults={"app_name": "box", "dataset": "sc", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "age", "params": ""})
+@mod.route('/builder/bar/', defaults={"app_name": "box", "dataset": "rais", "bra_id": "all",
+            "filter1": "all", "filter2": "all", "output": "bra", "params": ""})
 @mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/')
 @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
@@ -466,7 +480,7 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
     builds = Build.query.all()
     builds = [b.json(fill=False) for b in builds]
     rais_builds = [b.copy() for b in builds if b["dataset"] == "rais" and b["app"]["type"] not in ("network", "occugrid", "rings")]
-    builds = [b for b in builds if b["app"]["type"] != "box" or b["dataset"] != "rais"]
+    builds = [b for b in builds if b["app"]["type"] not in ("bar", "box") or b["dataset"] != "rais"]
     def size_var(b):
         app = b["app"]["type"]
         if app in ["line", "stacked"]:
@@ -480,7 +494,7 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
         if b["dataset"] == "rais":
             b["url"] = "{}?{}=num_emp".format(b["url"], size_var(b))
     for b in rais_builds:
-        if b["app"]["type"] != "box":
+        if b["app"]["type"] not in ("bar", "box"):
             b["id"] = "{}b".format(int(b["id"]))
             b["url"] = "{}?{}=wage".format(b["url"], size_var(b))
         b["dataset"] = "rais_wages"
@@ -555,7 +569,7 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
     build.set_filter2(filter2_attr)
     build.set_bra(bra_attr)
     build = build.serialize()
-    if build["app"]["type"] == "box" and build["dataset"] == "rais":
+    if build["app"]["type"] in ("bar", "box") and build["dataset"] == "rais":
         build["dataset"] = "rais_wages"
     else:
         for p, v in request.args.items():

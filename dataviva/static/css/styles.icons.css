@@ -398,6 +398,16 @@
   background-image: url("/static/img/icons/app/app_box_black.png");
 }
 
+.decision.icon.bar {
+  background-color: #aa824b !important;
+}
+.decision.icon.bar:before {
+  background-image: url("/static/img/icons/app/app_bar.png");
+}
+.drop.icon.bar:before {
+  background-image: url("/static/img/icons/app/app_bar_black.png");
+}
+
 .help.icon.tree_map:before {
   background-image: url("/static/img/icons/app/app_tree_map_black.png");
   opacity: 0.2;
@@ -445,6 +455,11 @@
 
 .help.icon.box:before {
   background-image: url("/static/img/icons/app/app_box_black.png");
+  opacity: 0.2;
+}
+
+.help.icon.bar:before {
+  background-image: url("/static/img/icons/app/app_bar_black.png");
   opacity: 0.2;
 }
 

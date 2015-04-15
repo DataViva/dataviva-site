@@ -208,11 +208,11 @@ class Build(db.Model, AutoSerialize):
                         bras.append(b.id)
                 bra_id = "_".join(bras)
             else:
-                bra_id = "<bra>"
+                bra_id = self.bra
             f1 = self.filter1
             f2 = self.filter2
         else:
-            bra_id = "<bra>"
+            bra_id = self.bra
             if self.app.type == "compare":
                 bra_id = "<bra>_<bra_1>"
 
@@ -260,30 +260,45 @@ class Build(db.Model, AutoSerialize):
             bra = "<bra>"
 
         if self.output == "bra" and self.dataset != "ei":
-            if bra == "all" and self.app.type == "geo_map":
-                bra = "show.3"
-            elif bra == "all":
-                bra = "show.9"
+            if bra == "all":
+                if self.app.type == "geo_map":
+                    bra = "show.3"
+                elif self.app.type == "bar":
+                    bra = "show.1"
+                else:
+                    bra = "show.9"
+            elif self.app.type == "bar":
+                bra = "{}.show.{}".format(bra, len(bra))
             else:
                 bra = bra + ".show.9"
 
         filter1 = self.filter1
-        if filter1 == "all" or self.app.type == "rings":
-            if self.output == "cnae" or self.output == "hs":
-                filter1 = "show.6"
-            elif self.output == "university":
-                filter1 = "show.5"
-            elif self.output == "school":
-                filter1 = "show.8"
+        filter1_out = None
+        if self.output == "cnae" or self.output == "hs":
+            filter1_out = "show.6"
+        elif self.output == "university":
+            filter1_out = "show.5"
+        elif self.output == "school":
+            filter1_out = "show.8"
+        if filter1_out:
+            if filter1 == "all":
+                filter1 = filter1_out
+            else:
+                filter1 = "{}.{}".format(filter1, filter1_out)
 
         filter2 = self.filter2
-        if filter2 == "all" or self.app.type == "rings":
-            if self.output == "cbo":
-                filter2 = "show.4"
-            elif self.output == "wld" or self.output == "course_sc":
-                filter2 = "show.5"
-            elif self.output == "course_hedu":
-                filter2 = "show.6"
+        filter2_out = None
+        if self.output == "cbo":
+            filter2_out = "show.4"
+        elif self.output == "wld" or self.output == "course_sc":
+            filter2_out = "show.5"
+        elif self.output == "course_hedu":
+            filter2_out = "show.6"
+        if filter2_out:
+            if filter2 == "all":
+                filter2 = filter2_out
+            else:
+                filter2 = "{}.{}".format(filter2, filter2_out)
 
         if self.output in ("balance", "time", "type"):
             if bra != "all":
