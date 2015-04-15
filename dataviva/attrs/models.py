@@ -207,7 +207,10 @@ class Wld(db.Model, AutoSerialize, BasicAttr):
             return "/static/img/icons/wld/wld_%s.png" % (self.id)
 
     def url(self):
-        return "/profiles/wld/{}/".format(self.id)
+        if self.id == "sabra":
+            return "/profiles/bra/all/"
+        else:
+            return "/profiles/wld/{}/".format(self.id)
 
     def __repr__(self):
         return '<Wld %r>' % (self.id_3char)
