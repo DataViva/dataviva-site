@@ -46,8 +46,6 @@ class Ybuc(Hedu):
     university_id = db.Column(db.String(5), db.ForeignKey(University.id), primary_key=True)
     course_hedu_id = db.Column(db.String(6), db.ForeignKey(Course_hedu.id), primary_key=True)
 
-    enrolled_rca = db.Column(db.Float())
-
     bra_id_len = db.Column(db.Integer(1))
     course_hedu_id_len = db.Column(db.Integer(1))
 
@@ -97,7 +95,6 @@ class Yuc(Hedu):
     year = db.Column(db.Integer(4), primary_key=True)
     university_id = db.Column(db.String(5), db.ForeignKey(University.id), primary_key=True)
     course_hedu_id = db.Column(db.Integer(6), db.ForeignKey(Course_hedu.id), primary_key=True)
-    enrolled_rca = db.Column(db.Float())
 
     course_hedu_id_len = db.Column(db.Integer(1))
 
