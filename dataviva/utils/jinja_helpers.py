@@ -44,7 +44,7 @@ class jinja_formatter:
             return Markup(num_format(num, type))
         else:
             dict = dictionary()
-            if dict[self.text]:
+            if self.text in dict:
                 return Markup(dict[self.text])
             else:
                 return Markup(self.text)
