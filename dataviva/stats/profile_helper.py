@@ -96,7 +96,7 @@ def bra_stats(pobj, rais_year, secex_year):
             stat_ids = ["airport", "airport_dist", "seaport", "seaport_dist", "area", "capital_dist", "neighbors"]
             results = batch_stats(Bs, pobj.id, stat_ids)
             for stat, val in results:
-                if stat.name().lower() == "neighbors":
+                if stat.id == "neighbors":
                     bras = Bra.query.filter(Bra.id.in_(val.split(","))).all()
                     val = ", ".join([u"<a href='{}'>{}</a>".format(b.url(), b.name()) for b in bras])
                 stats.append(make_stat(group, stat.name(), desc=val, mode=stat.id))
