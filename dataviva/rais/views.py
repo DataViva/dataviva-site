@@ -2,7 +2,7 @@ import StringIO, csv
 from flask import Blueprint, request, jsonify, Response
 from dataviva import db
 from dataviva.attrs.models import Bra
-from dataviva.rais.models import Yb_rais, Yi, Yo, Ybi, Ybo, Yio, Ybio
+from dataviva.rais.models import Yb_rais, Yi, Yo, Ybi, Ybi_reqs, Ybo, Yio, Ybio
 from dataviva.utils import table_helper, query_helper
 from dataviva.utils.gzip_data import gzipped
 from dataviva import view_cache
@@ -27,6 +27,20 @@ def rais_api(**kwargs):
     download = request.args.get('download', None) or kwargs.pop('download', None)
     required_bras = request.args.get('required_bras', False) or kwargs.pop('required_bras', False)
 
+    if required_bras:
+        bra_id = kwargs.get("bra_id")
+        cnae_id = kwargs.get("cnae_id").split(".")[0]
+        reqs = Ybi_reqs.query.filter(Ybi_reqs.bra_id == bra_id).filter(Ybi_reqs.cnae_id == cnae_id)
+        year = kwargs.get("year")
+        if year != "all":
+            reqs = reqs.filter(Ybi_reqs.year == year)
+        reqs = reqs.all()
+        results = {}
+        for req in reqs:
+            bras = [Bra.query.get(b).serialize() for b in req.required_bras.split(",")]
+            results[req.year] = bras
+        return jsonify(data=results)
+
     if exclude and "," in exclude:
         exclude = exclude.split(",")
 
@@ -34,26 +48,7 @@ def rais_api(**kwargs):
     table = table_helper.select_best_table(kwargs, allowed_when_not, possible_tables)
     filters, groups, show_column = query_helper.build_filters_and_groups(table, kwargs, exclude=exclude)
 
-    columns = []
-    if not required_bras:
-        columns = [c for c in table.__table__.columns if c.key != 'required_bras']
-    elif kwargs["year"] != "2013":
-        # TODO: Remove this elif when all years are available
-        return jsonify(data=[])
-
-    results = query_helper.query_table(table, columns=columns, filters=filters, groups=groups, limit=limit, order=order, sort=sort, offset=offset, serialize=serialize)
-
-    if required_bras and table is Ybi and results['data']:
-        required_idx = results['headers'].index(Ybi.required_bras.key)
-        bras = results['data'][0][required_idx]
-        if not bras:
-            return jsonify(data=[])
-        results = []
-        for bra in bras:
-            b = Bra.query.get(bra)
-            if b:
-                results.append(b.serialize())
-        return jsonify(data=results)
+    results = query_helper.query_table(table, filters=filters, groups=groups, limit=limit, order=order, sort=sort, offset=offset, serialize=serialize)
 
     if table is Ybi:
         stripped_filters, stripped_groups, show_column2 = query_helper.convert_filters(Yi, kwargs, remove=['bra_id'])

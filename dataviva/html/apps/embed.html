@@ -452,6 +452,7 @@
 
       app.build.title = format_title(app.build.title);
       app.viz.title(app.build.title);
+      required_bras();
       builder.url();
 
       if (same_origin && window.frameElement) {
@@ -1126,6 +1127,45 @@
       // d3.select("#app").html("").datum([]).call(app.viz.error(error))
     }
 
+    var required_bras = function() {
+
+      if (app.build.bra_prox) {
+
+        var locs = app.data[app.build.bra_prox][app.vars.year.length > 4 ? "2013" : app.vars.year];
+
+        var btn = d3.select("#controls").selectAll("#required_bras")
+          .data(locs.length ? [0] : []);
+
+        var text = dataviva.format.text(locs.length === 10 ? "required_bras_desc_top" : "required_bras_desc") + " "
+        locs.forEach(function(b, i){
+          if (i && locs.length > 2) text += ", ";
+          if (i && i === locs.length - 1) {
+            text += dataviva.format.text("and") + " ";
+          }
+          text += b.name;
+        })
+
+        btn.exit().remove();
+
+        btn.enter().append("div")
+          .attr("class","ui_group alt_tooltip")
+          .attr("id", "required_bras")
+          .text(dataviva.format.text("required_bras"))
+          .append("i").attr("class", "fa fa-location-arrow")
+
+        btn
+          .attr("alt", text)
+          .on(d3plus.client.pointer.over,function(){
+            dataviva.ui.tooltip("alt_tooltip",this)
+          })
+          .on(d3plus.client.pointer.out,function(){
+            dataviva.ui.tooltip("alt_tooltip",false)
+          })
+
+      }
+
+    };
+
     app.finish = function() {
 
       d3.select("#controls").selectAll("*").remove();
@@ -1274,31 +1314,7 @@
 
       }
 
-      if (app.build.bra_prox && app.data[app.build.bra_prox].length) {
-
-        var text = dataviva.format.text("required_bras_desc") + " "
-        app.data[app.build.bra_prox].forEach(function(b, i){
-          if (i) text += ", ";
-          if (i && i === app.data[app.build.bra_prox].length - 1) {
-            text += dataviva.format.text("and") + " ";
-          }
-          text += b.name;
-        })
-
-        d3.select("#controls").append("div")
-            .attr("class","ui_group alt_tooltip")
-            .attr("id", "required_bras")
-            .attr("alt", text)
-            .on(d3plus.client.pointer.over,function(){
-      			  dataviva.ui.tooltip("alt_tooltip",this)
-      			})
-      			.on(d3plus.client.pointer.out,function(){
-      			  dataviva.ui.tooltip("alt_tooltip",false)
-      			})
-            .text( dataviva.format.text("required_bras"))
-            .append("i").attr("class", "fa fa-location-arrow")
-
-      }
+      required_bras();
 
       // Format Data if it hasn't already been formatted
       // if (!app.data[app.build.data_url][format[app.build.app.type]]) {
