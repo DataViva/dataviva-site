@@ -213,7 +213,7 @@ class Bra(Profile):
                     exp_builds.append({"id": b, "params": {"size": val}})
                 apps[i+1]["builds"].append(exp_builds)
             apps[3]["builds"].append([36, 5, 21])
-            apps[4]["builds"].append([
+            apps[4]["builds"].insert(2, [
                 {"id": 36, "params": {"color": "wage"}},
                 {"id": 5, "params": {"size": "wage"}},
                 {"id": 21, "params": {"y": "wage"}}
