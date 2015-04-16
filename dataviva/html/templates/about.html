@@ -30,6 +30,14 @@
         SECEX/MDIC
       </a>
 
+      <a class="{% if data == 'sc' %}decision{% else %}help{% endif %} short icon sc" href="{{ url_for('about.data', data='sc')}}">
+        {% trans %}School Census{% endtrans %}
+      </a>
+
+      <a class="{% if data == 'hedu' %}decision{% else %}help{% endif %} short icon hedu" href="{{ url_for('about.data', data='hedu')}}">
+        {% trans %}Higher Education{% endtrans %}
+      </a>
+
       <a class="{% if data == 'comtrade' %}decision{% else %}help{% endif %} short icon comtrade" href="{{ url_for('about.data', data='comtrade')}}">
         UN Comtrade
       </a>
