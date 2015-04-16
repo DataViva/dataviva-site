@@ -15,15 +15,17 @@ from flask.ext.babel import gettext
 def bra_stats(pobj, rais_year, secex_year):
     stats = []
 
+    gen_title = gettext("General Stats")
+    stat_title = gettext("Stats")
+
     if pobj.id != "all":
-        group = "General Stats"
         stat_ids = ["pop", "gini", "life_exp", "hdi", "gdp", "gdp_pc", "pop_density"]
         stats_year = parse_year(__year_range__["stats"][-1].split("-")[0])
         results = batch_stats(Ybs, pobj.id, stat_ids, stats_year)
         for stat, val in results:
-            stats.append(make_stat(group, stat.name(), desc=val, year=stats_year, mode=stat.id))
+            stats.append(make_stat(gen_title, stat.name(), desc=val, year=stats_year, mode=stat.id))
 
-    group = '{} Stats ({}):'.format(rais_year, "RAIS")
+    group = u'{} {} (RAIS):'.format(rais_year, stat_title)
     if pobj.id == "all":
         filters = [Yi.year == rais_year, Yi.cnae_id_len == 6]
         result = get_top_stat(Yi, Yi.cnae_id, Yi.num_emp, Cnae, filters)
@@ -48,7 +50,7 @@ def bra_stats(pobj, rais_year, secex_year):
         value = get_stat_val(Yb_rais, Yb_rais.wage, [Yb_rais.year == rais_year, Yb_rais.bra_id == pobj.id])
         stats.append(make_stat(group, gettext("Total Monthly Wage"), desc=value, mode="wage"))
 
-    group = '{} Stats ({}):'.format(secex_year, "SECEX")
+    group = u'{} {} (SECEX):'.format(secex_year, stat_title)
     if pobj.id == "all":
         filters = [Ymp.year == secex_year, Ymp.month == 0, Ymp.hs_id_len == 6]
         result = get_top_stat(Ymp, Ymp.hs_id, Ymp.export_val, Hs, filters)
@@ -80,33 +82,32 @@ def bra_stats(pobj, rais_year, secex_year):
 
         if len(pobj.id) > 1:
             geo = Bra.query.get(pobj.id[:1])
-            stats.append(make_stat("General Stats", gettext("Region"), profile=geo))
+            stats.append(make_stat(gen_title, gettext("Region"), profile=geo))
         if len(pobj.id) > 3:
             geo = Bra.query.get(pobj.id[:3])
-            stats.append(make_stat("General Stats", gettext("State"), profile=geo))
+            stats.append(make_stat(gen_title, gettext("State"), profile=geo))
         if len(pobj.id) > 5:
             geo = Bra.query.get(pobj.id[:5])
-            stats.append(make_stat("General Stats", gettext("Mesoregion"), profile=geo))
+            stats.append(make_stat(gen_title, gettext("Mesoregion"), profile=geo))
         if len(pobj.id) > 7:
             geo = Bra.query.get(pobj.id[:7])
-            stats.append(make_stat("General Stats", gettext("Microregion"), profile=geo))
+            stats.append(make_stat(gen_title, gettext("Microregion"), profile=geo))
 
         if len(pobj.id) == 9:
-            group = "General Stats"
             stat_ids = ["airport", "airport_dist", "seaport", "seaport_dist", "area", "capital_dist", "neighbors"]
             results = batch_stats(Bs, pobj.id, stat_ids)
             for stat, val in results:
                 if stat.id == "neighbors":
                     bras = Bra.query.filter(Bra.id.in_(val.split(","))).all()
                     val = ", ".join([u"<a href='{}'>{}</a>".format(b.url(), b.name()) for b in bras])
-                stats.append(make_stat(group, stat.name(), desc=val, mode=stat.id))
+                stats.append(make_stat(gen_title, stat.name(), desc=val, mode=stat.id))
 
     return stats
 
 def cnae_stats(pobj, rais_year):
     stats = []
     five_years_ago = rais_year - 5
-    group = '{} Stats ({}):'.format(rais_year, "RAIS")
+    group = u'{} {} (RAIS):'.format(rais_year, gettext("Stats"))
 
     filters = [Ybi.year == rais_year, Ybi.cnae_id == pobj.id, Ybi.bra_id_len == 9]
     profile, value = get_top_stat(Ybi, Ybi.bra_id, Ybi.num_emp, Bra, filters)
@@ -121,7 +122,7 @@ def cnae_stats(pobj, rais_year):
     stats.append(make_stat(group, gettext("Total Monthly Wage"), desc=wage, mode="wage"))
     stats.append(make_stat(group, gettext("Average Monthly Wage"), desc=wage_avg, mode="wage"))
 
-    group = '{} Stats ({}):'.format(five_years_ago, "RAIS")
+    group = u'{} {} (RAIS):'.format(five_years_ago, gettext("Stats"))
     wage, wage_avg = get_stat_val(Yi, [Yi.wage, Yi.wage_avg], filters)
     filters = [Yi.year == five_years_ago, Yi.cnae_id == pobj.id]
     wage, wage_avg = get_stat_val(Yi, [Yi.wage, Yi.wage_avg], filters)
@@ -132,7 +133,7 @@ def cnae_stats(pobj, rais_year):
 def cbo_stats(pobj, rais_year):
     stats = []
     five_years_ago = rais_year - 5
-    group = '{} Stats ({}):'.format(rais_year, "RAIS")
+    group = u'{} {} (RAIS):'.format(rais_year, gettext("Stats"))
 
     filters = [Ybo.year == rais_year, Ybo.cbo_id == pobj.id, Ybo.bra_id_len == 9]
     profile, value = get_top_stat(Ybo, Ybo.bra_id, Ybo.num_emp, Bra, filters)
@@ -149,7 +150,7 @@ def cbo_stats(pobj, rais_year):
         stats.append(make_stat(group, gettext("Total Monthly Wage"), desc=wage, mode="wage"))
         stats.append(make_stat(group, gettext("Average Monthly Wage"), desc=wage_avg, mode="wage"))
 
-    group = '{} Stats ({}):'.format(five_years_ago, "RAIS")
+    group = u'{} {} (RAIS):'.format(five_years_ago, gettext("Stats"))
     filters = [Yo.year == five_years_ago, Yo.cbo_id == pobj.id]
     res = get_stat_val(Yo, [Yo.wage, Yo.wage_avg], filters)
     if res:
@@ -161,7 +162,7 @@ def cbo_stats(pobj, rais_year):
 
 def hs_stats(pobj, secex_year):
     stats =[]
-    group = '{} Stats ({}):'.format(secex_year, "SECEX")
+    group = u'{} {} (SECEX):'.format(secex_year, gettext("Stats"))
     five_years_ago = secex_year - 5
 
     filters = [Ymbp.year == secex_year, Ymbp.month == 0, Ymbp.hs_id == pobj.id, Ymbp.bra_id_len == 9]
@@ -178,7 +179,7 @@ def hs_stats(pobj, secex_year):
     stats.append(make_stat(group, gettext("Nominal Annual Growth Rate (5 year)"), desc=g5, mode="export_val_growth"))
     stats.append(make_stat(group, gettext("Total Exports"), desc=total_exports, mode="export_val"))
 
-    group = '{} Stats ({}):'.format(five_years_ago, "SECEX")
+    group = u'{} {} (SECEX):'.format(five_years_ago, gettext("Stats"))
     filters = [Ymp.year == five_years_ago, Ymp.month == 0, Ymp.hs_id == pobj.id]
     total_exports = get_stat_val(Ymp, Ymp.export_val, filters)
     stats.append(make_stat(group, gettext("Total Exports"), desc=total_exports, mode="export_val"))
@@ -189,7 +190,7 @@ def wld_stats(pobj, secex_year):
     dataset = "secex"
     five_years_ago = secex_year - 5
 
-    group = '{} Stats ({}):'.format(secex_year, "SECEX")
+    group = u'{} {} (SECEX):'.format(secex_year, gettext("Stats"))
     filters = [Ymbw.year == secex_year, Ymbw.month == 0, Ymbw.wld_id == pobj.id, Ymbw.bra_id_len == 9]
     profile, value = get_top_stat(Ymbw, Ymbw.bra_id, Ymbw.export_val, Bra, filters)
     stats.append(make_stat(group, gettext("Top Destination by Export Value"), profile=profile, value=value, mode="export_val"))
@@ -209,7 +210,7 @@ def wld_stats(pobj, secex_year):
     stats.append(make_stat(group, gettext("Nominal Annual Growth Rate (5 year)"), desc=g5e, mode="export_val_growth"))
     stats.append(make_stat(group, gettext("Economic Complexity"), desc=eci, mode="eci"))
 
-    group = '{} Stats ({}):'.format(five_years_ago, "SECEX")
+    group = u'{} {} (SECEX):'.format(five_years_ago, gettext("Stats"))
     filters = [Ymw.year == five_years_ago, Ymw.month == 0, Ymw.wld_id == pobj.id]
 
     total_exports, total_imports, eci = get_stat_val(Ymw, [Ymw.export_val, Ymw.import_val, Ymw.eci], filters)
@@ -221,7 +222,7 @@ def wld_stats(pobj, secex_year):
 
 def university_stats(pobj, hedu_year):
     stats = []
-    group = '{} Stats ({}):'.format(hedu_year, "HEDU")
+    group = u'{} {} (HEDU):'.format(hedu_year, gettext("Stats"))
     filters = [Yuc.year == hedu_year, Yuc.university_id == pobj.id, Yuc.course_hedu_id_len == 6]
     profile, value = get_top_stat(Yuc, Yuc.course_hedu_id, Yuc.enrolled, Course_hedu, filters)
     stats.append(make_stat(group, gettext("Top Major by Enrollment"), profile=profile, value=value, mode="enrolled"))
@@ -234,7 +235,7 @@ def university_stats(pobj, hedu_year):
 
 def course_hedu_stats(pobj, hedu_year):
     stats = []
-    group = '{} Stats ({}):'.format(hedu_year, "HEDU")
+    group = u'{} {} (HEDU):'.format(hedu_year, gettext("Stats"))
 
     filters = [Yuc.year == hedu_year, Yuc.course_hedu_id == pobj.id] # -- no nesting for university_ids
     profile, value = get_top_stat(Yuc, Yuc.university_id, Yuc.enrolled, University, filters)
@@ -249,7 +250,7 @@ def course_hedu_stats(pobj, hedu_year):
 def course_sc_stats(pobj):
     stats = []
     sc_year = parse_year(__year_range__["sc"][-1].split("-")[0])
-    group = '{} Stats ({}):'.format(sc_year, "SC")
+    group = u'{} {} (SC):'.format(sc_year, gettext("Stats"))
 
     filters = [Ybc_sc.year == sc_year, Ybc_sc.course_sc_id == pobj.id, Ybc_sc.bra_id_len == 9]
     profile, value = get_top_stat(Ybc_sc, Ybc_sc.bra_id, Ybc_sc.enrolled, Bra, filters)
