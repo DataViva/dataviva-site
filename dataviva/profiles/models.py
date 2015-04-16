@@ -190,7 +190,7 @@ class Bra(Profile):
                     {"id": 3, "params": {"size": "wage"}},
                     {"id": 19, "params": {"y": "wage"}},
                     {"id": 142, "params": {"y": "wage_avg"}}
-                ]
+                ], 176
             ]},
             {"title": gettext("Economic Opportunities:"), "builds": [35]},
             # {"title": gettext("Domestic Trade by:"), "builds": [128, 127]},
@@ -331,7 +331,7 @@ class Cnae(Profile):
                 [
                     {"id": 37, "params": {"color": "wage_avg"}},
                     {"id": 145, "params": {"y": "wage_avg"}}
-                ]
+                ], 177
             ]}
         ]
 
@@ -368,7 +368,7 @@ class Cbo(Profile):
                     {"id": 38, "params": {"color": "num_emp"}},
                     {"id": 7, "params": {"size": "num_emp"}},
                     {"id": 23, "params": {"y": "num_emp"}}
-                ],
+                ]
             ]},
             {"title": gettext("Average Wage by:"),
             "builds": [
@@ -378,7 +378,7 @@ class Cbo(Profile):
                 [
                     {"id": 38, "params": {"color": "wage_avg"}},
                     {"id": 146, "params": {"y": "wage_avg"}}
-                ],
+                ], 178
             ]}
         ]
 
