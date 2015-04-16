@@ -377,3 +377,25 @@ class Yww(db.Model, AutoSerialize):
 
     def __repr__(self):
         return "<Yww {}.{}.{}>".format(self.year, self.wld_id, self.wld_id_target)
+
+class Yii(db.Model, AutoSerialize):
+
+    __tablename__ = 'attrs_yii'
+    year = db.Column(db.Integer(4), primary_key=True)
+    cnae_id = db.Column(db.String(8), db.ForeignKey(Cnae.id), primary_key=True)
+    cnae_id_target = db.Column(db.String(8), db.ForeignKey(Cnae.id), primary_key=True)
+    prox_bra = db.Column(db.Float)
+
+    def __repr__(self):
+        return "<Yii {}.{}.{}>".format(self.year, self.cnae_id, self.cnae_id_target)
+
+class Yoo(db.Model, AutoSerialize):
+
+    __tablename__ = 'attrs_yoo'
+    year = db.Column(db.Integer(4), primary_key=True)
+    cbo_id = db.Column(db.String(6), db.ForeignKey(Cbo.id), primary_key=True)
+    cbo_id_target = db.Column(db.String(6), db.ForeignKey(Cbo.id), primary_key=True)
+    prox_bra = db.Column(db.Float)
+
+    def __repr__(self):
+        return "<Yoo {}.{}.{}>".format(self.year, self.cbo_id, self.cbo_id_target)
