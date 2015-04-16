@@ -334,7 +334,7 @@
       var results_el = d3.select(el.parentNode).select(".searchResult").html("")
     	if (search !== "") {
 
-  	    d3.json("/attrs/search/"+search+"/")
+  	    d3.json("/attrs/search/"+search+"/?lang="+dataviva.language)
   	      .header("Content-type", "application/json")
   	      .send("GET", '', function(error, text) {
             selected_i = -1;
