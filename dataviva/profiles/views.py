@@ -11,6 +11,7 @@ from dataviva.rais import models as rais
 from dataviva.secex import models as secex
 
 from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu, Course_sc
+from dataviva.attrs.models import Ybb, Yii, Yoo, Ypp, Yww, Yuu
 from dataviva.secex.models import Ymb, Ymp, Ymw
 from dataviva.rais.models import Ybi, Ybo, Yio, Yi, Yo
 from dataviva.hedu.models import Yu, Yc_hedu
@@ -212,6 +213,47 @@ def profiles(category = None, id = None):
 
     start = request.args.get("app", 1)
     stats = compute_stats(item)
+
+    related = []
+    def get_related(table, attr, title):
+        if attr == "bra":
+            data_attr = category
+        else:
+            data_attr = attr
+        if data_attr == "hs" or data_attr == "wld":
+            dataset = "secex"
+        elif data_attr == "cnae" or data_attr == "cbo":
+            dataset = "rais"
+        elif data_attr == "university" or data_attr == "course_hedu":
+            dataset = "hedu"
+        elif data_attr == "course_sc":
+            dataset = "sc"
+        else:
+            return
+        q = table.query.filter(getattr(table, "{}_id".format(category)) == id) \
+                 .filter(getattr(table, "year") == parse_year(__year_range__[dataset][1])) \
+                 .order_by(getattr(table, "prox_{}".format(attr)).desc()).limit(5).all()
+        if len(q) > 0:
+            m = globals()[category.capitalize()]
+            q = [m.query.get(getattr(a, "{}_id_target".format(category))) for a in q]
+            related.append({"title": title, "pages": q})
+
+    if category == "bra":
+        get_related(Ybb, "hs", gettext("Locations with Similar Product Exports"))
+        get_related(Ybb, "wld", gettext("Locations with Similar Trade Partners"))
+        get_related(Ybb, "cnae", gettext("Locations with Similar Industries"))
+        get_related(Ybb, "cbo", gettext("Locations with Similar Occupations"))
+    if category == "cnae":
+        get_related(Yii, "bra", gettext("Similar Industries by Co-location"))
+    if category == "cbo":
+        get_related(Yoo, "bra", gettext("Similar Occupations by Co-location"))
+    if category == "hs":
+        get_related(Ypp, "bra", gettext("Similar Products by Co-location"))
+    if category == "wld":
+        get_related(Yww, "bra", gettext("Destinations with Similar Brazilian Origins"))
+    if category == "university":
+        get_related(Yuu, "course_hedu", gettext("Universities with Similar Course Offerings"))
+
     return render_template("profiles/profile.html",
                 category=category, item=item, stats=stats,
-                starting_app = start, builds=builds)
+                starting_app = start, builds=builds, related=related)

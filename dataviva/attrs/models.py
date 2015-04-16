@@ -349,7 +349,7 @@ class Ybb(db.Model, AutoSerialize):
     bra_id = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
     bra_id_target = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
     prox_cnae = db.Column(db.Float)
-    prox_cbp = db.Column(db.Float)
+    prox_cbo = db.Column(db.Float)
     prox_hs = db.Column(db.Float)
     prox_wld = db.Column(db.Float)
 
@@ -399,3 +399,14 @@ class Yoo(db.Model, AutoSerialize):
 
     def __repr__(self):
         return "<Yoo {}.{}.{}>".format(self.year, self.cbo_id, self.cbo_id_target)
+
+class Yuu(db.Model, AutoSerialize):
+
+    __tablename__ = 'attrs_yuu'
+    year = db.Column(db.Integer(4), primary_key=True)
+    university_id = db.Column(db.String(6), db.ForeignKey(Cbo.id), primary_key=True)
+    university_id_target = db.Column(db.String(6), db.ForeignKey(Cbo.id), primary_key=True)
+    prox_course_hedu = db.Column(db.Float)
+
+    def __repr__(self):
+        return "<Yuu {}.{}.{}>".format(self.year, self.cbo_id, self.cbo_id_target)

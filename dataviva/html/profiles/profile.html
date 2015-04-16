@@ -54,6 +54,83 @@
         color: #3daf49;
       }
 
+      .related {
+        margin: 0 20px 20px 310px;
+        padding-bottom: 20px;
+        text-align: center;
+      }
+
+      .related .darkbox {
+        display: block;
+        margin: 10px 0;
+        max-width: none;
+      }
+
+      .poster {
+        box-sizing: border-box;
+        display: inline-block;
+        margin: 0 5px;
+        text-align: left;
+      }
+
+      div.poster {
+        -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
+                box-shadow: 0px 1px 3px rgba(0,0,0,0.25);
+        height: 100px;
+        margin: 0px;
+        position: relative;
+        width: 100px;
+      }
+
+      div.poster.bra, div.poster.wld {
+        height: 70px;
+        -webkit-box-shadow: none;
+                box-shadow: none;
+      }
+
+      a.poster:hover {
+        opacity: 1;
+      }
+      a.poster:hover div.poster {
+        -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+                box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+      }
+      a.poster:hover div.poster.bra,
+      a.poster:hover div.poster.wld {
+        -webkit-box-shadow: none;
+                box-shadow: none;
+      }
+
+      .poster .title {
+        box-sizing: border-box;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 17px;
+        max-height: 60px;
+        margin: 0;
+        overflow: hidden;
+        padding: 5px 0;
+        text-align: center;
+        white-space: normal;
+        width: 100px;
+      }
+      a.poster:hover div.title {
+        text-decoration: underline;
+      }
+      .poster img {
+        box-sizing: border-box;
+        display: inline-block;
+        margin: 15px;
+        width: 70px;
+      }
+      .poster.bra img, .poster.wld img {
+        box-sizing: border-box;
+        display: inline-block;
+        margin: 5px;
+        margin-top: -10px;
+        width: 90px;
+      }
+
     </style>
 
 {% endblock %}
@@ -129,6 +206,20 @@
       </div>
     {% endfor %}
     {% set counter = counter + group.builds|length %}
+  {% endfor %}
+
+  {% for group in related %}
+    <div class="related lightbox">
+      <div class="darkbox"><h1>{{ group.title }}</h1></div>
+      {% for attr in group.pages %}
+        <a class="poster" href="{{ attr.url() }}" alt="{{ attr.name() }}">
+          <div class="poster {{ category }}"{% if category != "bra" and category != "wld" %} style="background-color:{{ attr.color }};"{% endif %}>
+            <img src="{{ attr.icon() }}"/>
+          </div>
+          <div class="title">{{ attr.name() }}</div>
+        </a>
+      {% endfor %}
+    </div>
   {% endfor %}
 
 {% endblock %}
@@ -218,6 +309,8 @@
         var p = this.id.substring(7);
         builds[p] = {"loaded": false, "loading": false, "top": this.offsetTop-88};
       })
+
+    d3.selectAll(".related").style("width",width+"px");
 
     function app_select(id, scrolling) {
 
@@ -332,9 +425,6 @@
       }
 
       scrollinterval = setInterval(scrollto,10)
-
-      // window.scrollTo(0, position);
-      // load();
 
     }
 
