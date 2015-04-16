@@ -91,7 +91,7 @@ function infinite_scroll(selection){
 
         activities = new_data.activities || new_data.data;
         header = new_data.headers;
-        console.log(activities)
+
         if (!header && activities.length) {
           header = d3.keys(activities[0]);
           activities = activities.map(function(d){ return d3.values(d); });
