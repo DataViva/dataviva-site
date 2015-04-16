@@ -341,3 +341,61 @@ class Ybs(db.Model, AutoSerialize):
 
     def __repr__(self):
         return "<Ybs {}.{}.{}>".format(self.year, self.bra_id, self.stat_id)
+
+class Ybb(db.Model, AutoSerialize):
+
+    __tablename__ = 'attrs_ybb'
+    year = db.Column(db.Integer(4), primary_key=True)
+    bra_id = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
+    bra_id_target = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
+    prox_cnae = db.Column(db.Float)
+    prox_cbp = db.Column(db.Float)
+    prox_hs = db.Column(db.Float)
+    prox_wld = db.Column(db.Float)
+
+    def __repr__(self):
+        return "<Ybb {}.{}.{}>".format(self.year, self.bra_id, self.bra_id_target)
+
+class Ypp(db.Model, AutoSerialize):
+
+    __tablename__ = 'attrs_ypp'
+    year = db.Column(db.Integer(4), primary_key=True)
+    hs_id = db.Column(db.String(8), db.ForeignKey(Hs.id), primary_key=True)
+    hs_id_target = db.Column(db.String(8), db.ForeignKey(Hs.id), primary_key=True)
+    prox_bra = db.Column(db.Float)
+
+    def __repr__(self):
+        return "<Ypp {}.{}.{}>".format(self.year, self.hs_id, self.hs_id_target)
+
+class Yww(db.Model, AutoSerialize):
+
+    __tablename__ = 'attrs_yww'
+    year = db.Column(db.Integer(4), primary_key=True)
+    wld_id = db.Column(db.String(5), db.ForeignKey(Wld.id), primary_key=True)
+    wld_id_target = db.Column(db.String(5), db.ForeignKey(Wld.id), primary_key=True)
+    prox_bra = db.Column(db.Float)
+
+    def __repr__(self):
+        return "<Yww {}.{}.{}>".format(self.year, self.wld_id, self.wld_id_target)
+
+class Yii(db.Model, AutoSerialize):
+
+    __tablename__ = 'attrs_yii'
+    year = db.Column(db.Integer(4), primary_key=True)
+    cnae_id = db.Column(db.String(8), db.ForeignKey(Cnae.id), primary_key=True)
+    cnae_id_target = db.Column(db.String(8), db.ForeignKey(Cnae.id), primary_key=True)
+    prox_bra = db.Column(db.Float)
+
+    def __repr__(self):
+        return "<Yii {}.{}.{}>".format(self.year, self.cnae_id, self.cnae_id_target)
+
+class Yoo(db.Model, AutoSerialize):
+
+    __tablename__ = 'attrs_yoo'
+    year = db.Column(db.Integer(4), primary_key=True)
+    cbo_id = db.Column(db.String(6), db.ForeignKey(Cbo.id), primary_key=True)
+    cbo_id_target = db.Column(db.String(6), db.ForeignKey(Cbo.id), primary_key=True)
+    prox_bra = db.Column(db.Float)
+
+    def __repr__(self):
+        return "<Yoo {}.{}.{}>".format(self.year, self.cbo_id, self.cbo_id_target)
