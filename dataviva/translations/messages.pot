@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-04-15 15:28-0400\n"
+"POT-Creation-Date: 2015-04-16 12:12-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -971,7 +971,7 @@ msgid "comparative advantage"
 msgstr ""
 
 #: dataviva/html/about/glossary/complexity.html:10
-#: dataviva/stats/profile_helper.py:210 dataviva/stats/profile_helper.py:218
+#: dataviva/stats/profile_helper.py:211 dataviva/stats/profile_helper.py:219
 #: dataviva/translations/dictionary.py:189
 msgid "Economic Complexity"
 msgstr ""
@@ -1938,105 +1938,118 @@ msgstr ""
 msgid "a course"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:35 dataviva/stats/profile_helper.py:143
+#: dataviva/stats/profile_helper.py:18
+msgid "General Stats"
+msgstr ""
+
+#: dataviva/stats/profile_helper.py:19 dataviva/stats/profile_helper.py:110
+#: dataviva/stats/profile_helper.py:125 dataviva/stats/profile_helper.py:136
+#: dataviva/stats/profile_helper.py:153 dataviva/stats/profile_helper.py:165
+#: dataviva/stats/profile_helper.py:182 dataviva/stats/profile_helper.py:193
+#: dataviva/stats/profile_helper.py:213 dataviva/stats/profile_helper.py:225
+#: dataviva/stats/profile_helper.py:238 dataviva/stats/profile_helper.py:253
+msgid "Stats"
+msgstr ""
+
+#: dataviva/stats/profile_helper.py:37 dataviva/stats/profile_helper.py:144
 msgid "Top Industry by Employment"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:44 dataviva/stats/profile_helper.py:117
+#: dataviva/stats/profile_helper.py:46 dataviva/stats/profile_helper.py:118
 msgid "Top Occupation by Employment"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:49 dataviva/stats/profile_helper.py:121
-#: dataviva/stats/profile_helper.py:128 dataviva/stats/profile_helper.py:149
-#: dataviva/stats/profile_helper.py:157 dataviva/translations/dictionary.py:262
+#: dataviva/stats/profile_helper.py:51 dataviva/stats/profile_helper.py:122
+#: dataviva/stats/profile_helper.py:129 dataviva/stats/profile_helper.py:150
+#: dataviva/stats/profile_helper.py:158 dataviva/translations/dictionary.py:262
 msgid "Total Monthly Wage"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:60 dataviva/stats/profile_helper.py:199
+#: dataviva/stats/profile_helper.py:62 dataviva/stats/profile_helper.py:200
 msgid "Top Product by Export Value"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:71 dataviva/stats/profile_helper.py:195
+#: dataviva/stats/profile_helper.py:73 dataviva/stats/profile_helper.py:196
 msgid "Top Destination by Export Value"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:78 dataviva/stats/profile_helper.py:179
-#: dataviva/stats/profile_helper.py:184 dataviva/stats/profile_helper.py:207
-#: dataviva/stats/profile_helper.py:216 dataviva/translations/dictionary.py:273
+#: dataviva/stats/profile_helper.py:80 dataviva/stats/profile_helper.py:180
+#: dataviva/stats/profile_helper.py:185 dataviva/stats/profile_helper.py:208
+#: dataviva/stats/profile_helper.py:217 dataviva/translations/dictionary.py:273
 msgid "Total Exports"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:79 dataviva/stats/profile_helper.py:204
-#: dataviva/stats/profile_helper.py:217 dataviva/translations/dictionary.py:277
+#: dataviva/stats/profile_helper.py:81 dataviva/stats/profile_helper.py:205
+#: dataviva/stats/profile_helper.py:218 dataviva/translations/dictionary.py:277
 msgid "Total Imports"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:83 dataviva/translations/dictionary.py:127
+#: dataviva/stats/profile_helper.py:85 dataviva/translations/dictionary.py:127
 msgid "Region"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:86 dataviva/translations/dictionary.py:128
+#: dataviva/stats/profile_helper.py:88 dataviva/translations/dictionary.py:128
 msgid "State"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:89 dataviva/translations/dictionary.py:129
+#: dataviva/stats/profile_helper.py:91 dataviva/translations/dictionary.py:129
 msgid "Mesoregion"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:92 dataviva/translations/dictionary.py:130
+#: dataviva/stats/profile_helper.py:94 dataviva/translations/dictionary.py:130
 msgid "Microregion"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:113 dataviva/stats/profile_helper.py:139
+#: dataviva/stats/profile_helper.py:114 dataviva/stats/profile_helper.py:140
 msgid "Top Municipality by Employment"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:122 dataviva/stats/profile_helper.py:129
-#: dataviva/stats/profile_helper.py:150 dataviva/stats/profile_helper.py:158
+#: dataviva/stats/profile_helper.py:123 dataviva/stats/profile_helper.py:130
+#: dataviva/stats/profile_helper.py:151 dataviva/stats/profile_helper.py:159
 #: dataviva/translations/dictionary.py:263
 msgid "Average Monthly Wage"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:169
+#: dataviva/stats/profile_helper.py:170
 msgid "Top Municipality by Exports"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:173
+#: dataviva/stats/profile_helper.py:174
 msgid "Top Country by Exports"
-msgstr ""
-
-#: dataviva/stats/profile_helper.py:177 dataviva/stats/profile_helper.py:205
-#: dataviva/stats/profile_helper.py:208
-msgid "Nominal Annual Growth Rate (1 year)"
 msgstr ""
 
 #: dataviva/stats/profile_helper.py:178 dataviva/stats/profile_helper.py:206
 #: dataviva/stats/profile_helper.py:209
+msgid "Nominal Annual Growth Rate (1 year)"
+msgstr ""
+
+#: dataviva/stats/profile_helper.py:179 dataviva/stats/profile_helper.py:207
+#: dataviva/stats/profile_helper.py:210
 msgid "Nominal Annual Growth Rate (5 year)"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:227
+#: dataviva/stats/profile_helper.py:228
 msgid "Top Major by Enrollment"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:231 dataviva/stats/profile_helper.py:245
-#: dataviva/stats/profile_helper.py:260
+#: dataviva/stats/profile_helper.py:232 dataviva/stats/profile_helper.py:246
+#: dataviva/stats/profile_helper.py:261
 msgid "Total Enrollment"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:232 dataviva/stats/profile_helper.py:246
+#: dataviva/stats/profile_helper.py:233 dataviva/stats/profile_helper.py:247
 msgid "Total Graduates"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:241
+#: dataviva/stats/profile_helper.py:242
 msgid "Top University by Enrollment"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:256
+#: dataviva/stats/profile_helper.py:257
 msgid "Top Municipality by Enrollment"
 msgstr ""
 
-#: dataviva/stats/profile_helper.py:261 dataviva/translations/dictionary.py:308
+#: dataviva/stats/profile_helper.py:262 dataviva/translations/dictionary.py:308
 msgid "Average Age"
 msgstr ""
 
