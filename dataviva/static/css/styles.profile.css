@@ -57,7 +57,7 @@ div#arrow_clickable {
 	right:10px;
 	font-size:15px
 }
-div#guide_title {
+h1#guide_title {
   font-size: 24px;
   margin-left: 35px;
   width: 170px;
