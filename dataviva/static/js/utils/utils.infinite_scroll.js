@@ -96,6 +96,32 @@ function infinite_scroll(selection){
           header = d3.keys(activities[0]);
           activities = activities.map(function(d){ return d3.values(d); });
         }
+        
+        if (new_data.pci){
+          var pci_lookup = {}
+          var pci_year_i = new_data.pci.headers.indexOf("year")
+          var pci_hs_id_i = new_data.pci.headers.indexOf("hs_id")
+          var pci_pci_i = new_data.pci.headers.indexOf("pci")
+          
+          // create PCI lookup
+          new_data.pci.data.forEach(function(pci){
+            if(!pci_lookup[pci[pci_year_i]]){
+              pci_lookup[pci[pci_year_i]] = {}
+            }
+            pci_lookup[pci[pci_year_i]][pci[pci_hs_id_i]] = pci[pci_pci_i]
+          })
+          
+          // add "pci" to header
+          header.push('pci')
+          
+          // add pci value to data
+          var year_i = header.indexOf("year")
+          var hs_id_i = header.indexOf("hs_id")
+          activities.forEach(function(d){
+            var pci_val = pci_lookup[d[year_i]][d[hs_id_i]]
+            d.push(pci_val)
+          })
+        }
 
         // we're obviously no longer fetching
         fetching = false;
