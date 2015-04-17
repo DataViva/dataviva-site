@@ -262,6 +262,7 @@ def dictionary():
         "wage": gettext("Total Monthly Wages"),
         "total_wage": gettext("Total Monthly Wage"),
         "wage_avg": gettext("Average Monthly Wage"),
+        "wage_month": gettext("Monthly Wage"),
         "wage_avg_bra": gettext("Brazilian Average Wage"),
 
         # SECEX Labels

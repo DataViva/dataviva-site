@@ -114,6 +114,7 @@ dataviva.format.affixes = {
   "transfer_value": ["$"," BRL"],
   "wage": ["$"," BRL"],
   "wage_avg": ["$"," BRL"],
+  "wage_month": ["$"," BRL"],
   "wage_avg_bra": ["$"," BRL"]
 };
 
