@@ -274,12 +274,20 @@ class Build(db.Model, AutoSerialize):
 
         filter1 = self.filter1
         filter1_out = None
-        if self.output == "cnae" or self.output == "hs":
-            filter1_out = "show.6"
-        elif self.output == "university":
-            filter1_out = "show.5"
-        elif self.output == "school":
-            filter1_out = "show.8"
+
+        depths = {
+            "cnae": 6,
+            "hs": 6,
+            "university": 5,
+            "school": 8
+        }
+        if self.output in depths:
+            if self.app.type == "bar" and filter1 != "all":
+                depth = len(filter1)
+            else:
+                depth = depths[self.output]
+            filter1_out = "show.{}".format(depth)
+
         if filter1_out:
             if filter1 == "all":
                 filter1 = filter1_out
@@ -288,12 +296,20 @@ class Build(db.Model, AutoSerialize):
 
         filter2 = self.filter2
         filter2_out = None
-        if self.output == "cbo":
-            filter2_out = "show.4"
-        elif self.output == "wld" or self.output == "course_sc":
-            filter2_out = "show.5"
-        elif self.output == "course_hedu":
-            filter2_out = "show.6"
+
+        depths = {
+            "cbo": 4,
+            "wld": 5,
+            "course_sc": 5,
+            "course_hedu": 6
+        }
+        if self.output in depths:
+            if self.app.type == "bar" and filter2 != "all":
+                depth = len(filter2)
+            else:
+                depth = depths[self.output]
+            filter2_out = "show.{}".format(depth)
+
         if filter2_out:
             if filter2 == "all":
                 filter2 = filter2_out
