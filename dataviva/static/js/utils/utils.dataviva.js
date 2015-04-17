@@ -737,7 +737,7 @@ dataviva.url = function(url,args,title) {
 
     if (iframe && same_origin) {
 
-      if (title) window.parent.document.title = "DataViva : "+title
+      if (title && app_builder) window.parent.document.title = "DataViva : "+title
 
       if (app_builder) {
         var parent_url = full_url.replace("embed","builder")
