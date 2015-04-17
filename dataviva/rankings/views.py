@@ -111,7 +111,7 @@ def data(year=None, type="bra", depth=None):
 
     if type == "bra":
         request_args["excluding"] = {"bra_id": "xx"}
-        request_args["cols"] = ["bra_id","id_ibge","name","wage","wage_avg","export_val","import_val","population","hs_diversity","hs_diversity_eff","cnae_diversity","cnae_diversity_eff"]
+        request_args["cols"] = ["bra_id","id_ibge","name","wage","wage_avg","export_val","import_val","population","eci","hs_diversity","hs_diversity_eff","cnae_diversity","cnae_diversity_eff"]
         args["join"] = []
         ry = [int(y) for y in __year_range__["rais"]]
         ry = range(ry[0], ry[1]+1)
