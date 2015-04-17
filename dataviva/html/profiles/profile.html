@@ -54,6 +54,10 @@
         color: #3daf49;
       }
 
+      #relatedBtn {
+        margin-top: 5px !important;
+      }
+
       .related {
         margin: 0 20px 20px 310px;
         padding-bottom: 20px;
@@ -161,6 +165,10 @@
       {% set counter = counter + group.builds|length %}
     {% endfor %}
 
+    {% if related|length > 0 %}
+      <a href="#related" id="relatedBtn" class="help short icon {{ category }}">{% trans %}Show Related Profiles{% endtrans %}</a>
+    {% endif %}
+
     <div id="guide_stats">
       {% set last_group = "" %}
       {% for stat in stats %}
@@ -208,19 +216,21 @@
     {% set counter = counter + group.builds|length %}
   {% endfor %}
 
-  {% for group in related %}
-    <div class="related lightbox">
-      <div class="darkbox"><h1>{{ group.title }}</h1></div>
-      {% for attr in group.pages %}
-        <a class="poster" href="{{ attr.url() }}" alt="{{ attr.name() }}">
-          <div class="poster {{ category }}"{% if category != "bra" and category != "wld" %} style="background-color:{{ attr.color }};"{% endif %}>
-            <img src="{{ attr.icon() }}"/>
-          </div>
-          <div class="title">{{ attr.name() }}</div>
-        </a>
-      {% endfor %}
+  {% if related|length > 0 %}
+    <div id="related" class="related lightbox">
+    {% for group in related %}
+        <div class="darkbox"><h1>{{ group.title }}</h1></div>
+        {% for attr in group.pages %}
+          <a class="poster" href="{{ attr.url() }}" alt="{{ attr.name() }}">
+            <div class="poster {{ category }}"{% if category != "bra" and category != "wld" %} style="background-color:{{ attr.color }};"{% endif %}>
+              <img src="{{ attr.icon() }}"/>
+            </div>
+            <div class="title">{{ attr.name() }}</div>
+          </a>
+        {% endfor %}
+    {% endfor %}
     </div>
-  {% endfor %}
+  {% endif %}
 
 {% endblock %}
 
