@@ -231,8 +231,16 @@ def profiles(category = None, id = None):
         else:
             return
         q = table.query.filter(getattr(table, "{}_id".format(category)) == id) \
-                 .filter(getattr(table, "year") == parse_year(__year_range__[dataset][1])) \
-                 .order_by(getattr(table, "prox_{}".format(attr)).desc()).limit(5).all()
+                 .filter(getattr(table, "year") == parse_year(__year_range__[dataset][1]))
+
+        if category in ("bra"):
+            q = q.filter(not_(getattr(table, "{}_id_target".format(category)).startswith("0xx")))
+        elif category in ("cnae", "cbo", "hs", "wld"):
+            q = q.filter(not_(getattr(table, "{}_id_target".format(category)).startswith("xx")))
+        elif category in ("course_hedu", "course_sc"):
+            q = q.filter(not_(getattr(table, "{}_id_target".format(category)).startswith("00")))
+
+        q = q.order_by(getattr(table, "prox_{}".format(attr)).desc()).limit(5).all()
         if len(q) > 0:
             m = globals()[category.capitalize()]
             q = [m.query.get(getattr(a, "{}_id_target".format(category))) for a in q]
