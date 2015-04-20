@@ -196,7 +196,7 @@ class Bra(Profile):
             # {"title": gettext("Domestic Trade by:"), "builds": [128, 127]},
             {"title": gettext("University Enrollment by:"), "builds": [93, [95, 105, 115]]},
             {"title": gettext("Vocational Enrollment by:"), "builds": [[117, 120, 126]]},
-            {"title": gettext("Basic Education by:"), "builds": [[123, 118, 121], [162, 165, 167]]}
+            {"title": gettext("Basic Education by:"), "builds": [[162, 165, 167]]}
         ]
 
         if self.attr.id != "all":
@@ -218,6 +218,7 @@ class Bra(Profile):
                 {"id": 5, "params": {"size": "wage"}},
                 {"id": 21, "params": {"y": "wage"}}
             ])
+            apps[-1]["builds"].insert(0, [123, 118, 121])
         return apps
 
 class Hs(Profile):
