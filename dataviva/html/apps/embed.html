@@ -1351,8 +1351,12 @@
       /************************/
       /* Gloabl App Variables */
       /************************/
-      if (app.build.output_attr == "bra" || (app.build.output_attr == "wld" && app.vars.depth == "wld_5")) var style = "default"
-      else var style = "knockout"
+      var style = {}
+      nesting.forEach(function(n){
+        style[n] = (app.build.output_attr == "bra" && n !== "bra_1") ||
+                   (app.build.output_attr == "wld" && n == "wld_5") ?
+                   "default" : "knockout"
+      });
 
       if (app.build.output_attr == "bra") {
         app.tooltip["short"][""] = ["id_ibge"]
@@ -1960,11 +1964,6 @@
 
         if (!app.solos.length && !app.filters.length) {
           app.viz.title({"sub": app.sub_title()})
-        }
-
-        if (type == "depth" && app.build.output_attr == "wld") {
-          if (app.vars.depth == "wld_5") app.viz.icon({"style": "default"})
-          else app.viz.icon({"style": "knockout"})
         }
 
         if (type == "axes") {
