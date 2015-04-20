@@ -300,18 +300,6 @@
 
     app.title_update = function(range) {
 
-      if (app.build.app.type == "scatter") {
-        var yval = [];
-        if (app.vars.year.indexOf("_") < 0 &&
-            app.ecis[app.build.data_url] && app.vars.y == "pci") {
-          yval = [{
-            "position": app.ecis[app.build.data_url][app.vars.year],
-            "text": dataviva.format.text("eci")
-          }];
-        }
-        app.viz.y({"lines": yval})
-      }
-
       function parse_date(s) {
         if (s.constructor === Date) {
           if (app.monthly) {
@@ -353,6 +341,18 @@
       r = parse_date(range[0]);
       if (range.length > 1) r += "-" + parse_date(range[1]);
       range = r;
+
+      if (app.build.app.type == "scatter") {
+        var yval = [];
+        if (app.vars.year.indexOf("_") < 0 &&
+            app.ecis[app.build.data_url] && app.vars.y == "pci") {
+          yval = [{
+            "position": app.ecis[app.build.data_url][app.vars.year],
+            "text": dataviva.format.text("eci")
+          }];
+        }
+        app.viz.y({"lines": yval})
+      }
 
       function format_title(title) {
 
@@ -617,12 +617,16 @@
           "opp_gain": "mean",
           "opp_gain_wld": "mean",
           "num_emp_est": "mean",
-          "wage_avg": "mean",
+          "wage_avg": function(d) {
+            return d3.sum(d, function(p){ return p.wage; })/d3.sum(d, function(p){ return p.num_emp; });
+          },
           "wage_avg_bra": "mean",
           "wage_growth": "mean",
           "wage_growth_5": "mean",
           "age": "mean",
-          "enrolled_classes": "mean",
+          "enrolled_classes": function(d) {
+            return d3.sum(d, function(p){ return p.enrolled; })/d3.sum(d, function(p){ return p.classes; });
+          },
           "num_emp_growth": "mean",
           "num_emp_growth_5": "mean",
           "export_val_growth": "mean",
@@ -1346,8 +1350,6 @@
 
       var color_var = app.vars.color ? app.vars.color : "color"
 
-      app.title_update()
-
       /************************/
       /* Gloabl App Variables */
       /************************/
@@ -1833,8 +1835,7 @@
         .active(false)
         .temp(false)
         .total(false)
-        .id(app.build.output + "_id")
-        .depth(0)
+        .depth(nesting.indexOf(app.build.output+"_"+app.build[app.build.output][0].id.length))
         .id({"grouping": true})
         .shape("rect")
         .y("num_emp")
@@ -1844,15 +1845,16 @@
 
       }
 
-      last_app = app.build.app.type
+      last_app = app.build.app.type;
 
       var data_array = app.data[app.build.data_url][format[app.build.app.type]];
 
       app.viz.data(data_array);
 
-      dataviva.resize()
-      loading.hide()
-      app.first_load = true
+      app.title_update();
+      dataviva.resize();
+      loading.hide();
+      app.first_load = true;
 
     }
 
@@ -1864,7 +1866,6 @@
           secex = app.build.dataset.indexOf("secex") === 0,
           munics = app.build.output_attr == "bra",
           text = "";
-
       if (secex && same && !mix) {
         if ((munics && depth >= 3) || (app.build.output_attr === "balance" && depth > 3)) {
           text = dataviva.format.text("secex_9")
@@ -1872,15 +1873,19 @@
         else {
           text = dataviva.format.text("secex_3")
         }
+        descs["export_val"] = text
+        descs["import_val"] = text
+        app.viz.descs(descs)
       }
+      else if (app.build.app.type === "bar" && app.wage_avgs && app.wage_avgs[app.vars.year]) {
+        text = dataviva.format.text("wage_avg") + ": " + dataviva.format.number(app.wage_avgs[app.vars.year], {"key": "wage_avg"});
+      }
+
       if (["stacked", "line"].indexOf(app.build.app.type) >= 0 && !app.monthly && app.build.output !== "time") {
         var joiner = text.length ? ", " : ""
         text += joiner + dataviva.format.text("Click to Zoom");
         if (joiner.length) text += ".";
       }
-      descs["export_val"] = text
-      descs["import_val"] = text
-      app.viz.descs(descs)
       return text.length ? text : false;
     }
 
@@ -2119,14 +2124,18 @@
             }, {});
             var obj = {
               "hist": JSON.stringify(histMerge),
-              "year": d[0].year
+              "year": d[0].year,
+              "wage_avg": d3.sum(d, function(p){ return p.wage; })/d3.sum(d, function(p){ return p.num_emp; })
             }
-            obj[out+"_id"] = "all";
+            obj[out+"_id"] = app.build[app.build.output][0].id;
             arr.push(obj);
             return arr;
           }, []);
         }
+        app.wage_avgs = {};
         new_data.forEach(function(point){
+
+          app.wage_avgs[point.year] = point.wage_avg;
 
           var id = point[out+"_id"];
           attr = app.build[out][0];
@@ -2148,15 +2157,12 @@
               label = label.join("-");
             }
             var obj = {
-              "color": attr.color,
-              "icon": attr.icon,
-              "name": attr.name,
               "num_emp": hist[range],
               "wage_month": label,
               "wage_order": i,
               "year": point.year
             };
-            obj[out+"_id"] = point[out+"_id"];
+            obj[out+"_"+id.length] = id;
             data_obj.push(obj);
           })
 
