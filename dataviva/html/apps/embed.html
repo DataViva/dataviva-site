@@ -649,13 +649,10 @@
           }
         }
 
-    var additionals = {}
     for (k in averages) {
-      additionals["cp_bra_0_"+k] = averages[k]
-      additionals["cp_bra_1_"+k] = averages[k]
+      averages["cp_bra_0_"+k] = averages[k]
+      averages["cp_bra_1_"+k] = averages[k]
     }
-
-    averages = d3plus.object.merge(averages,additionals)
 
     var descs = {
       "distance": dataviva.format.text("distance_desc"),
@@ -1200,6 +1197,7 @@
           else var default_value = ui.values[0]
         }
         else if (ui.type == "depth") {
+
           if (app.build.dataset !== "ei" && app.build.output_attr === "bra") {
             var bra_id = app.build.bra[0].id;
             if (bra_id !== "all") {
@@ -1207,7 +1205,8 @@
             }
           }
 
-          if (app.build.app.type == "tree_map" && app.build.output !== "school") {
+          if ((app.build.app.type === "tree_map" && app.build.output !== "school") ||
+              app.build.app.type === "compare") {
             var default_value = ui.values[ui.values.length-1]
           }
           else {
@@ -1406,11 +1405,16 @@
                      time2range(app.vars.year.split("_")) : [];
 
       var depth = nesting.indexOf(app.vars.depth);
-      if (depth < 0 && app.build.dataset !== "ei" && app.build.output_attr === "bra") {
-       var bra_id = app.build.bra[0].id;
-       if (bra_id !== "all") {
-         depth = nesting.indexOf("bra_"+bra_id.length)+1;
-       }
+      if (depth < 0) {
+        if (app.build.dataset !== "ei" && app.build.output_attr === "bra") {
+          var bra_id = app.build.bra[0].id;
+          if (bra_id !== "all") {
+             depth = nesting.indexOf("bra_"+bra_id.length)+1;
+          }
+        }
+        else {
+          depth = 0;
+        }
       }
 
       app.viz
@@ -2245,7 +2249,12 @@
               for (var key in leaves[0]) {
                 if (typeof leaves[0][key] === "number" && key !== "year") {
                   var agg = averages[key] || "sum";
-                  d[key] = d3[agg](leaves, function(a){ return a[key] })
+                  if (typeof agg === "function") {
+                    d[key] = agg(leaves);
+                  }
+                  else {
+                    d[key] = d3[agg](leaves, function(a){ return a[key]; });
+                  }
                 }
               }
 
