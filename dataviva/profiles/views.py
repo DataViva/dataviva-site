@@ -10,7 +10,7 @@ from dataviva.attrs import models as attrs
 from dataviva.rais import models as rais
 from dataviva.secex import models as secex
 
-from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu, Course_sc
+from dataviva.attrs.models import Search, Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu, Course_sc
 from dataviva.attrs.models import Ybb, Yii, Yoo, Ypp, Yww, Yuu
 from dataviva.secex.models import Ymb, Ymp, Ymw
 from dataviva.rais.models import Ybi, Ybo, Yio, Yi, Yo
@@ -163,39 +163,30 @@ def index_selector(category = None, id = None):
 @mod.route("/<category>/")
 def randomProfile(category = None):
 
+    ids = db.session.query(Search.id).filter(Search.kind == category)
+
+    if category in ("bra"):
+        ids = ids.filter(not_(Search.id.startswith("0xx")))
+    elif category in ("cnae", "cbo", "wld"):
+        ids = ids.filter(not_(Search.id.startswith("xx")))
+    elif category in ("hs"):
+        ids = ids.filter(not_(Search.id.startswith("22")))
+    elif category in ("course_hedu", "course_sc"):
+        ids = ids.filter(not_(Search.id.startswith("00")))
+
     if category == "bra":
-        ids = db.session.query(Ymb.bra_id).filter(Ymb.bra_id_len == "9") \
-                .filter(Ymb.year == __year_range__["secex"][1].split("-")[0]) \
-                .filter(not_(Ymb.bra_id.contains("0xx"))) \
-                .filter(Ymb.month == 0).distinct()
-    elif category == "hs":
-        ids = db.session.query(Ymp.hs_id).filter(Ymp.hs_id_len == "6") \
-                .filter(Ymp.year == __year_range__["secex"][1].split("-")[0]) \
-                .filter(Ymp.month == 0).distinct()
-    elif category == "wld":
-        ids = db.session.query(Ymw.wld_id).filter(Ymw.wld_id_len == "5") \
-                .filter(Ymw.year == __year_range__["secex"][1].split("-")[0]) \
-                .filter(Ymw.month == 0).distinct()
+        ids = ids.filter(func.length(Search.id) == 9)
+    elif category in ("cnae", "hs", "course_hedu"):
+        ids = ids.filter(func.length(Search.id) == 6)
+    elif category == ("wld", "course_sc"):
+        ids = ids.filter(func.length(Search.id) == 5)
     elif category == "cnae":
-        ids = db.session.query(Yi.cnae_id).filter(Yi.cnae_id_len == "6") \
-                .filter(Yi.year == __year_range__["rais"][1]).distinct()
-    elif category == "cbo":
-        ids = db.session.query(Yo.cbo_id).filter(Yo.cbo_id_len == "4") \
-                .filter(Yo.year == __year_range__["rais"][1]).distinct()
-    elif category == "university":
-        ids = db.session.query(Yu.university_id) \
-                .filter(Yu.year == __year_range__["hedu"][1]).distinct()
-    elif category == "course_hedu":
-        ids = db.session.query(Yc_hedu.course_hedu_id).filter(Yc_hedu.course_hedu_id_len == "6") \
-                .filter(Yc_hedu.course_hedu_id != "000000") \
-                .filter(Yc_hedu.year == __year_range__["hedu"][1]).distinct()
-    elif category == "course_sc":
-        ids = db.session.query(Yc_sc.course_sc_id).filter(Yc_sc.course_sc_id_len == "5") \
-                .filter(Yc_sc.course_sc_id != "000000") \
-                .filter(not_(Yc_sc.course_sc_id.contains("xx"))) \
-                .filter(Yc_sc.year == __year_range__["sc"][1]).distinct()
-    rand = random.randrange(0, ids.count())
+        ids = ids.filter(func.length(Search.id) == 4)
+
+    ids = ids.order_by(Search.weight.desc()).limit(100).all()
+    rand = random.randrange(0, len(ids))
     id = ids[rand][0]
+
     return redirect(url_for("profiles.profiles", category=category, id=id))
 
 @mod.route("/<category>/<id>/")
@@ -235,8 +226,10 @@ def profiles(category = None, id = None):
 
         if category in ("bra"):
             q = q.filter(not_(getattr(table, "{}_id_target".format(category)).startswith("0xx")))
-        elif category in ("cnae", "cbo", "hs", "wld"):
+        elif category in ("cnae", "cbo", "wld"):
             q = q.filter(not_(getattr(table, "{}_id_target".format(category)).startswith("xx")))
+        elif category in ("hs"):
+            q = q.filter(not_(getattr(table, "{}_id_target".format(category)).startswith("22")))
         elif category in ("course_hedu", "course_sc"):
             q = q.filter(not_(getattr(table, "{}_id_target".format(category)).startswith("00")))
 
