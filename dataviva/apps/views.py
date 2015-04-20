@@ -140,7 +140,7 @@ def guide():
     # Rings
     builds = Build.query.filter(Build.id.in_([48,49,50])).all()
     for b in builds: b.set_bra(default_bra)
-    builds[0].set_filter1(default_cnae);
+    builds[0].set_filter1("f41204");
     builds[1].set_filter2(default_cbo);
     builds[2].set_filter1(default_hs);
     apps.append({
