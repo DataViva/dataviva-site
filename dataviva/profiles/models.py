@@ -390,7 +390,7 @@ class Cbo(Profile):
 
         courses = self.crosswalk_id()
         if len(courses):
-            cross_apps = {"title": gettext("Common Majors by University:"), "builds": []}
+            cross_apps = {"title": gettext("Universities offering:"), "builds": []}
             for course in courses:
                 name = attrs.Course_hedu.query.get(course).name()
                 cross_apps["builds"].append({"title": name, "id": 94, "filter2": course, "params": {"color": "graduates_growth"}})
