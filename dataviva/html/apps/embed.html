@@ -1448,7 +1448,7 @@
         .zoom(["balance", "adm"].indexOf(app.build.output) < 0)
         .time(app.vars.time || (app.monthly ? "month" : "year"))
         .time({"solo": timeSolo})
-        .x({"label": ["compare", "bar"].indexOf(app.build.app.type) >= 0 ? {"font": {"size": 22, "weight": "normal"}} : false})
+        .x({"label": ["compare", "bar", "scatter"].indexOf(app.build.app.type) >= 0 ? {"font": {"size": 22, "weight": "normal"}} : false})
         .x({"ticks": {"font": {"size": app.build.output === "age" || app.build.app.type === "bar" ? 12 : 16}}})
         .labels({"font": {"size": 11}})
 
