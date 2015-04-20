@@ -298,10 +298,16 @@ function make_url(){
 
 
   current_url.filters.forEach(function(f){
-    filters = [];
+    var filters = [];
     d3.selectAll(".selected_filters div[data-type='"+f+"']").each(function(){
       filters.push(d3.select(this).attr("data-value"))
     })
+    
+    // remove any "all" filters aka "Brazil"
+    if(filters.indexOf("all") > -1){
+      filters = [];
+    }
+    
     if(filters.length){
       if(f == current_output){
         current_url.format = current_url.format.replace("<"+f+">", filters.join("_")+".show."+current_nesting)
