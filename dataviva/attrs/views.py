@@ -290,7 +290,7 @@ def attrs_search(term=None):
     result = []
     lang = request.args.get('lang', 'en') or g.locale
     name_col = Search.name_en if lang == 'en' else Search.name_pt
-    profiles = Search.query.filter(name_col.like('%{}%'.format(term))).order_by(Search.weight.desc()).limit(20)
+    profiles = Search.query.filter(name_col.like(u'%{}%'.format(term))).order_by(Search.weight.desc()).limit(20)
     result = [p.serialize(lang == "pt") for p in profiles]
     ret = jsonify({"activities":result})
     return ret
