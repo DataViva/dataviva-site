@@ -412,7 +412,7 @@ class Course_hedu(Profile):
 
         occupations = self.crosswalk_id()
         if len(occupations):
-            cross_apps = {"title": gettext("Common Occupations by Industry:"), "builds": []}
+            cross_apps = {"title": gettext("Industries that employ:"), "builds": []}
             for occupation in occupations:
                 name = attrs.Cbo.query.get(occupation).name()
                 occ_builds = []
