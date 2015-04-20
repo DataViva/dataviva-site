@@ -112,6 +112,15 @@ def num_format(number, key = None, labels = True):
         if affix:
             return u"{0}{1}{2}".format(unicode(affix[0]), n, unicode(affix[1]))
         elif "growth" in key:
-            return "{0}%".format(n)
+            arrow = False
+            if n > 0:
+                arrow = "up"
+            elif n < 0:
+                arrow = "down"
+            if arrow:
+                arrow = "<i class='growth-arrow {0} fa fa-arrow-circle-{0}'></i>".format(arrow)
+            else:
+                arrow = ""
+            return "{}%{}".format(float(n)*100, arrow)
 
     return n
