@@ -10,6 +10,7 @@ class Sc(db.Model, AutoSerialize):
     classes = db.Column(db.Integer(11))
     enrolled = db.Column(db.Integer(11))
     enrolled_growth = db.Column(db.Float())
+    enrolled_growth_5 = db.Column(db.Float())
 
 class Yb_sc(Sc):
     __tablename__ = 'sc_yb'
