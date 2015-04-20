@@ -334,11 +334,8 @@ function Selector() {
           }
 
         }
-        else if (["bra", "wld"].indexOf(type) >= 0) {
-          depth = depths[depths.length-1];
-        }
         else {
-          depth = depths[0];
+          depth = depths[depths.length-1];
         }
 
         return depth;
