@@ -36,6 +36,12 @@
       margin: 20px 20px 20px 310px;
     }
 
+    .accordion_btn.active {
+      background-color: transparent;
+      -webkit-box-shadow: none;
+              box-shadow: none;
+    }
+
     .accordion_btn.active, .accordion_btn:hover {
       color: #333;
     }
@@ -48,6 +54,25 @@
       -webkit-transition: height 0.3s;
          -moz-transition: height 0.3s;
               transition: height 0.3s;
+    }
+
+    .decision.short.build_title, .help.short.build_title {
+      margin: 0 !important;
+      opacity: 0.75 !important;
+      padding: 6px 8px 6px 25px !important;
+    }
+
+    .decision.short.build_title:hover, .help.short.build_title:hover {
+      background-color: #eee;
+      opacity: 1 !important;
+    }
+
+    .decision.short.build_title:last-child, .help.short.build_title:last-child {
+      margin: 0 0 12px 0 !important;
+    }
+
+    .build_title:after {
+      content: "";
     }
 
     .build_filter {
@@ -150,7 +175,7 @@
         <div class="accordion_list" data-list="{{ dataset }}">
       {% endif %}
 
-      <a id="build_{{ b.id }}" class="build_title help flat short icon {{ b.app.type }}" data-url="{{ b.url }}" onclick="change_build(this.id)">{{ b.slug2 }}</a>
+      <a id="build_{{ b.id }}" class="build_title help flat short {{ b.app.type }}" data-url="{{ b.url }}" onclick="change_build(this.id)">{{ b.slug2 }}</a>
 
       {% if loop.last %}</div></div>{% endif %}
 

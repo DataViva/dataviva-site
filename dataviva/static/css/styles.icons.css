@@ -298,7 +298,7 @@
   opacity: 1;
 }
 
-.decision.icon.tree_map {
+.decision.tree_map {
   background-color: #ffc41c !important;
 }
 .decision.icon.tree_map:before {
@@ -308,7 +308,7 @@
   background-image: url("/static/img/icons/app/app_tree_map_black.png");
 }
 
-.decision.icon.stacked {
+.decision.stacked {
   background-color: #742777 !important;
 }
 .decision.icon.stacked:before {
@@ -318,7 +318,7 @@
   background-image: url("/static/img/icons/app/app_stacked_black.png");
 }
 
-.decision.icon.network {
+.decision.network {
   background-color: #af1f24 !important;
 }
 .decision.icon.network:before {
@@ -328,7 +328,7 @@
   background-image: url("/static/img/icons/app/app_network_black.png");
 }
 
-.decision.icon.rings {
+.decision.rings {
   background-color: #d67ab0 !important;
 }
 .decision.icon.rings:before {
@@ -338,7 +338,7 @@
   background-image: url("/static/img/icons/app/app_rings_black.png");
 }
 
-.decision.icon.scatter {
+.decision.scatter {
   background-color: #0b1097 !important;
 }
 .decision.icon.scatter:before {
@@ -348,7 +348,7 @@
   background-image: url("/static/img/icons/app/app_scatter_black.png");
 }
 
-.decision.icon.compare {
+.decision.compare {
   background-color: #1abbee !important;
 }
 .decision.icon.compare:before {
@@ -358,7 +358,7 @@
   background-image: url("/static/img/icons/app/app_compare_black.png");
 }
 
-.decision.icon.geo_map {
+.decision.geo_map {
   background-color: #3daf49 !important;
 }
 .decision.icon.geo_map:before {
@@ -368,7 +368,7 @@
   background-image: url("/static/img/icons/app/app_geo_map_black.png");
 }
 
-.decision.icon.occugrid {
+.decision.occugrid {
   background-color: #e0902d !important;
 }
 .decision.icon.occugrid:before {
@@ -378,7 +378,7 @@
   background-image: url("/static/img/icons/app/app_occugrid_black.png");
 }
 
-.decision.icon.line {
+.decision.line {
   background-color: #a4bd99 !important;
 }
 .decision.icon.line:before {
@@ -388,7 +388,7 @@
   background-image: url("/static/img/icons/app/app_line_black.png");
 }
 
-.decision.icon.box {
+.decision.box {
   background-color: #93789e !important;
 }
 .decision.icon.box:before {
@@ -398,7 +398,7 @@
   background-image: url("/static/img/icons/app/app_box_black.png");
 }
 
-.decision.icon.bar {
+.decision.bar {
   background-color: #aa824b !important;
 }
 .decision.icon.bar:before {
