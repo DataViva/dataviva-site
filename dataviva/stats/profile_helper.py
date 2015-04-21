@@ -29,22 +29,22 @@ def bra_stats(pobj, rais_year, secex_year):
     key = "rais"
     if pobj.id == "all":
         filters = [Yi.year == rais_year, Yi.cnae_id_len == 6]
-        result = get_top_stat(Yi, Yi.cnae_id, Yi.num_emp, Cnae, filters)
+        result = get_top_stat(Yi, Yi.cnae_id, Yi.num_jobs, Cnae, filters)
     else:
         filters = [Ybi.year == rais_year, Ybi.bra_id == pobj.id, Ybi.cnae_id_len == 6]
-        result = get_top_stat(Ybi, Ybi.cnae_id, Ybi.num_emp, Cnae, filters)
+        result = get_top_stat(Ybi, Ybi.cnae_id, Ybi.num_jobs, Cnae, filters)
     if result:
         profile, value = result
-        stat = make_stat(key, group, gettext("Top Industry by Employment"), profile=profile, value=value, mode="num_emp")
+        stat = make_stat(key, group, gettext("Top Industry by Employment"), profile=profile, value=value, mode="num_jobs")
         stats.append(stat)
 
     if pobj.id == "all":
         filters = [Yo.year == rais_year, Yo.cbo_id_len == 4]
-        profile, value = get_top_stat(Yo, Yo.cbo_id, Yo.num_emp, Cbo, filters)
+        profile, value = get_top_stat(Yo, Yo.cbo_id, Yo.num_jobs, Cbo, filters)
     else:
         filters = [Ybo.year == rais_year, Ybo.bra_id == pobj.id, Ybo.cbo_id_len == 4]
-        profile, value = get_top_stat(Ybo, Ybo.cbo_id, Ybo.num_emp, Cbo, filters)
-    stat = make_stat(key, group, gettext("Top Occupation by Employment"), profile=profile, value=value, mode="num_emp")
+        profile, value = get_top_stat(Ybo, Ybo.cbo_id, Ybo.num_jobs, Cbo, filters)
+    stat = make_stat(key, group, gettext("Top Occupation by Employment"), profile=profile, value=value, mode="num_jobs")
     stats.append(stat)
 
     if pobj.id != "all":
@@ -114,12 +114,12 @@ def cnae_stats(pobj, rais_year):
     key = "rais"
 
     filters = [Ybi.year == rais_year, Ybi.cnae_id == pobj.id, Ybi.bra_id_len == 9]
-    profile, value = get_top_stat(Ybi, Ybi.bra_id, Ybi.num_emp, Bra, filters)
-    stats.append(make_stat(key, group, gettext("Top Municipality by Employment"), profile=profile, value=value, mode="num_emp"))
+    profile, value = get_top_stat(Ybi, Ybi.bra_id, Ybi.num_jobs, Bra, filters)
+    stats.append(make_stat(key, group, gettext("Top Municipality by Employment"), profile=profile, value=value, mode="num_jobs"))
 
     filters = [Yio.year == rais_year, Yio.cnae_id == pobj.id, Yio.cbo_id_len == 4]
-    profile, value = get_top_stat(Yio, Yio.cbo_id, Yio.num_emp, Cbo, filters)
-    stats.append(make_stat(key, group, gettext("Top Occupation by Employment"), profile=profile, value=value, mode="num_emp"))
+    profile, value = get_top_stat(Yio, Yio.cbo_id, Yio.num_jobs, Cbo, filters)
+    stats.append(make_stat(key, group, gettext("Top Occupation by Employment"), profile=profile, value=value, mode="num_jobs"))
 
     filters = [Yi.year == rais_year, Yi.cnae_id == pobj.id]
     wage, wage_avg = get_stat_val(Yi, [Yi.wage, Yi.wage_avg], filters)
@@ -141,12 +141,12 @@ def cbo_stats(pobj, rais_year):
     key = "rais"
 
     filters = [Ybo.year == rais_year, Ybo.cbo_id == pobj.id, Ybo.bra_id_len == 9]
-    profile, value = get_top_stat(Ybo, Ybo.bra_id, Ybo.num_emp, Bra, filters)
-    stats.append(make_stat(key, group, gettext("Top Municipality by Employment"), profile=profile, value=value, mode="num_emp"))
+    profile, value = get_top_stat(Ybo, Ybo.bra_id, Ybo.num_jobs, Bra, filters)
+    stats.append(make_stat(key, group, gettext("Top Municipality by Employment"), profile=profile, value=value, mode="num_jobs"))
 
     filters = [Yio.year == rais_year, Yio.cbo_id == pobj.id, Yio.cnae_id_len == 6]
-    profile, value = get_top_stat(Yio, Yio.cnae_id, Yio.num_emp, Cnae, filters)
-    stats.append(make_stat(key, group, gettext("Top Industry by Employment"), profile=profile, value=value, mode="num_emp"))
+    profile, value = get_top_stat(Yio, Yio.cnae_id, Yio.num_jobs, Cnae, filters)
+    stats.append(make_stat(key, group, gettext("Top Industry by Employment"), profile=profile, value=value, mode="num_jobs"))
 
     filters = [Yo.year == rais_year, Yo.cbo_id == pobj.id]
     res = get_stat_val(Yo, [Yo.wage, Yo.wage_avg], filters)

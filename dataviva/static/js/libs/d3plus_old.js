@@ -1615,7 +1615,7 @@ d3plus_old.viz = function() {
               })
               to_return[prefix+key] = wage/num_emp
             }
-            else if (key == "num_emp_est") {
+            else if (key == "num_jobs_est") {
               var num_est = 0, num_emp = 0
               leaves.forEach(function(d){
                 num_est += d[prefix+"num_est"] ? d[prefix+"num_est"] : 0

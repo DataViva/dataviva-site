@@ -139,7 +139,7 @@ def top_occupations(year, bra_id):
     cbos = [x[0] for x in raw["data"]]
     table = raisd.Ybod
     filters = [table.bra_id == bra_id, table.year == year, table.cbo_id.in_(cbos), table.d_id.in_(["A", "B"])]
-    columns = [table.cbo_id, table.d_id, table.num_emp, table.wage_avg, table.wage_growth]
+    columns = [table.cbo_id, table.d_id, table.num_jobs, table.wage_avg, table.wage_growth]
     results = query_helper.query_table(table, columns, filters, order=table.wage_avg)
     
     object_cache(cache_key, pickle.dumps(results))

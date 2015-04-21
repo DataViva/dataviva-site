@@ -86,7 +86,7 @@ def guide():
     builds[1].set_filter1(default_cnae)
     builds[2].set_filter2(default_cbo)
     apps.append({
-        "summary": gettext("A visualization using the height of bars to show the number of employees in a specific wage bracket."),
+        "summary": gettext("A visualization using the height of bars to show the number of jobs in a specific wage bracket."),
         "builds": builds,
         "title": gettext(u"Bar Chart"),
         "type": "bar"
@@ -492,7 +492,7 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
         return "size"
     for b in builds:
         if b["dataset"] == "rais":
-            b["url"] = "{}?{}=num_emp".format(b["url"], size_var(b))
+            b["url"] = "{}?{}=num_jobs".format(b["url"], size_var(b))
     for b in rais_builds:
         if b["app"]["type"] not in ("bar", "box"):
             b["id"] = "{}b".format(int(b["id"]))

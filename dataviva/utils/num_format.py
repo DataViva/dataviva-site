@@ -19,7 +19,7 @@ def affixes(key=None, unit=False):
         "import_val": "usd",
         "gdp": "brl",
         "gdp_pc": "brl",
-        "num_emp": "emp",
+        "num_jobs": "jobs",
         "purchase_value": "brl",
         "seaport_dist": "km",
         "students": "stu",
@@ -38,7 +38,7 @@ def affixes(key=None, unit=False):
         "brl": ["BRL ", ""],
         "km": ["", "km"],
         "km2": ["", u"km²"],
-        "emp": ["", u" {0}".format(gettext("employees"))],
+        "jobs": ["", u" {0}".format(gettext("jobs"))],
         "stu": ["", u" {0}".format(gettext("students"))],
         "usd": ["USD ", ""]
     }
@@ -98,13 +98,13 @@ def num_format(number, key = None, labels = True):
 
         # Initializes the number suffix based on the group.
         suffix = groups[m]
-    
+
     arrow = False
     if "growth" in key:
         if n > 0:
             arrow = "up"
         elif n < 0:
-            arrow = "down"        
+            arrow = "down"
         n = float(n)*100
     n = format_decimal(n, locale=g.locale)
 

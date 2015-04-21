@@ -151,8 +151,8 @@ def merge_objects(objs):
         for k in obj:
             values = []
             if k == "wage_avg":
-                num_emp = []
-            elif k == "num_emp_est":
+                num_jobs = []
+            elif k == "num_jobs_est":
                 num_est = []
             for obj2 in objs:
                 if k in obj2:
@@ -160,20 +160,20 @@ def merge_objects(objs):
                         values = obj2[k]
                     elif isinstance(obj2[k],Decimal) or isinstance(obj2[k],long) \
                       or isinstance(obj2[k],float) or isinstance(obj2[k],int):
-                        if k == "num_emp_est":
+                        if k == "num_jobs_est":
                             num_est.append(float(obj2["num_est"]))
-                            values.append(float(obj2["num_emp"]))
+                            values.append(float(obj2["num_jobs"]))
                         elif k == "wage_avg":
-                            num_emp.append(float(obj2["num_emp"]))
+                            num_jobs.append(float(obj2["num_jobs"]))
                             values.append(float(obj2["wage"]))
                         else:
                             values.append(float(obj2[k]))
             if len(values) > 0:
                 if not isinstance(values,str) and not isinstance(values,unicode):
-                    if k == "num_emp_est":
+                    if k == "num_jobs_est":
                         ret_obj[k] = sum(values)/sum(num_est)
                     elif k == "wage_avg":
-                        ret_obj[k] = sum(values)/sum(num_emp)
+                        ret_obj[k] = sum(values)/sum(num_jobs)
                     elif k in averages:
                         ret_obj[k] = sum(values)/len(values)
                     else:

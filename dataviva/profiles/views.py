@@ -53,7 +53,7 @@ def index():
 
     # Occupations
     most_recent_year = parse_year(__year_range__["rais"][-1])
-    top = Yo.query.filter_by(year=most_recent_year, cbo_id_len=4).order_by(Yo.num_emp.desc()).limit(5).all()
+    top = Yo.query.filter_by(year=most_recent_year, cbo_id_len=4).order_by(Yo.num_jobs.desc()).limit(5).all()
     top = [t.cbo for t in top]
     profile_types.append({
         "summary": gettext("Showing industries and locations that employ the selected occupation."),
@@ -63,10 +63,10 @@ def index():
     })
 
     # Industries
-    top = Yi.query.filter_by(year=most_recent_year, cnae_id_len=6).order_by(Yi.num_emp.desc()).limit(5).all()
+    top = Yi.query.filter_by(year=most_recent_year, cnae_id_len=6).order_by(Yi.num_jobs.desc()).limit(5).all()
     top = [t.cnae for t in top]
     profile_types.append({
-        "summary": gettext("Showing the occupations and locations with employees in the selected industry."),
+        "summary": gettext("Showing the occupations and locations with jobs in the selected industry."),
         "top": top,
         "title": gettext(u"Industries"),
         "type": "cnae"

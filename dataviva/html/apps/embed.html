@@ -227,7 +227,7 @@
               delete a.export_val;
               delete a.import_val;
               delete a.enrolled;
-              delete a.num_emp;
+              delete a.num_jobs;
               delete a.school_type;
               obj[a.id] = a;
             }
@@ -524,9 +524,9 @@
         "wage",
         "wage_avg",
         "wage_avg_bra",
-        "num_emp",
+        "num_jobs",
         "num_est",
-        "num_emp_est",
+        "num_jobs_est",
 
         "export_val",
         "export_kg",
@@ -616,9 +616,9 @@
           "distance_wld": "mean",
           "opp_gain": "mean",
           "opp_gain_wld": "mean",
-          "num_emp_est": "mean",
+          "num_jobs_est": "mean",
           "wage_avg": function(d) {
-            return d3.sum(d, function(p){ return p.wage; })/d3.sum(d, function(p){ return p.num_emp; });
+            return d3.sum(d, function(p){ return p.wage; })/d3.sum(d, function(p){ return p.num_jobs; });
           },
           "wage_avg_bra": "mean",
           "wage_growth": "mean",
@@ -1193,7 +1193,7 @@
         if (ui.type == "size") {
           if (app.build.app.type == "occugrid") var default_value = "required"
           else if (ui.values.indexOf("export_val") >= 0) var default_value = "export_val"
-          else if (ui.values.indexOf("num_emp") >= 0) var default_value = "num_emp"
+          else if (ui.values.indexOf("num_jobs") >= 0) var default_value = "num_jobs"
           else var default_value = ui.values[0]
         }
         else if (ui.type == "depth") {
@@ -1368,7 +1368,7 @@
         app.tooltip["long"][""] = [app.build.output_attr+"_display"]
         if (app.build.app.type == "occugrid") {
           app.tooltip["short"][""].push("required");
-          app.tooltip["short"][""].push("num_emp");
+          app.tooltip["short"][""].push("num_jobs");
           app.tooltip["short"][""].push("elsewhere");
         }
       }
@@ -1654,7 +1654,7 @@
         }
 
         app.viz
-          .active("num_emp")
+          .active("num_jobs")
           .temp("elsewhere")
           .total("required")
           .shape("donut")
@@ -1842,7 +1842,7 @@
         .depth(nesting.indexOf(app.build.output+"_"+app.build[app.build.output][0].id.length))
         .id({"grouping": true})
         .shape("rect")
-        .y("num_emp")
+        .y("num_jobs")
         .x("wage_month")
         .order("wage_order")
         .order({"sort": "asc"})
@@ -2142,7 +2142,7 @@
             var obj = {
               "hist": JSON.stringify(histMerge),
               "year": d[0].year,
-              "wage_avg": d3.sum(d, function(p){ return p.wage; })/d3.sum(d, function(p){ return p.num_emp; })
+              "wage_avg": d3.sum(d, function(p){ return p.wage; })/d3.sum(d, function(p){ return p.num_jobs; })
             }
             obj[out+"_id"] = app.build[app.build.output][0].id;
             arr.push(obj);
@@ -2174,7 +2174,7 @@
               label = label.join("-");
             }
             var obj = {
-              "num_emp": hist[range],
+              "num_jobs": hist[range],
               "wage_month": label,
               "wage_order": i,
               "year": point.year
@@ -2217,10 +2217,10 @@
                 return e.cbo_id == d.cbo_id && e.year == d.year
               })[0]
 
-              d.active = d.num_emp/d.required >= 1 ? true : false
+              d.active = d.num_jobs/d.required >= 1 ? true : false
 
               if (!else_data) d.elsewhere = 0
-              else d.elsewhere = else_data.num_emp-d.num_emp
+              else d.elsewhere = else_data.num_jobs-d.num_jobs
 
               d[out+"_display"] = dataviva.displayID(d[out+"_id"],out)
               // d.icon = dataviva.icon(d[out+"_id"],out)
