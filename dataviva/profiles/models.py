@@ -2,6 +2,7 @@
 from abc import ABCMeta
 from urllib import urlencode as param
 from flask.ext.babel import gettext
+from sqlalchemy import func
 
 from dataviva.attrs import models as attrs
 from dataviva.apps.models import Build, Crosswalk_oc, Crosswalk_pi
@@ -50,6 +51,19 @@ class Profile(object):
 
     def name(self):
         return self.attr.name()
+    
+    def prev(self):
+        attr_class = getattr(attrs, self.type.capitalize())
+        return attr_class.query \
+                .filter(attr_class.id < self.attr.id) \
+                .filter(func.char_length(attr_class.id) == len(self.attr.id)) \
+                .order_by(attr_class.id.desc()).first()
+
+    def next(self):
+        attr_class = getattr(attrs, self.type.capitalize())
+        return attr_class.query \
+                .filter(func.char_length(attr_class.id) == len(self.attr.id)) \
+                .filter(attr_class.id > self.attr.id).first()
 
     def crosswalk_id(self):
         setup = crosswalk_dict[self.type]
