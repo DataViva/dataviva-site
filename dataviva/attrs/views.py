@@ -83,10 +83,10 @@ def attrs(attr="bra",Attr_id=None):
         Attr_weight_col = "population"
     elif attr == "cnae":
         Attr_weight_tbl = Yi
-        Attr_weight_col = "num_emp"
+        Attr_weight_col = "num_jobs"
     elif attr == "cbo":
         Attr_weight_tbl = Yo
-        Attr_weight_col = "num_emp"
+        Attr_weight_col = "num_jobs"
     elif attr == "hs":
         Attr_weight_tbl = Ymp
         Attr_weight_col = "export_val"

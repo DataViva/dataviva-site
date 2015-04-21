@@ -162,7 +162,7 @@ def home():
         "metric" : metric
     })
 
-    metric, show, profile = "num_emp", "cnae_id", "cnae"
+    metric, show, profile = "num_jobs", "cnae_id", "cnae"
     data = stats_list(metric, show, limit=limit)
     items = make_items(data, Cnae)
     carousels.append({

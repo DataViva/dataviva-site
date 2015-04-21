@@ -132,11 +132,11 @@ def data(year=None, type="bra", depth=None):
         table = Ymb
     elif type == "cnae":
         request_args["excluding"] = {"cnae_id": "xx"}
-        request_args["cols"] = ["cnae_id","name","wage","wage_avg","num_emp","num_emp_est","cbo_diversity","cbo_diversity_eff"]
+        request_args["cols"] = ["cnae_id","name","wage","wage_avg","num_jobs","num_jobs_est","cbo_diversity","cbo_diversity_eff"]
         table = Yi
     elif type == "cbo":
         request_args["excluding"] = {"cbo_id": "xx"}
-        request_args["cols"] = ["cbo_id","name","wage","wage_avg","num_emp","num_emp_est","cnae_diversity","cnae_diversity_eff"]
+        request_args["cols"] = ["cbo_id","name","wage","wage_avg","num_jobs","num_jobs_est","cnae_diversity","cnae_diversity_eff"]
         table = Yo
     elif type == "hs":
         request_args["excluding"] = {"hs_id": "xx"}

@@ -67,9 +67,9 @@
 
                     "wage",
                     "wage_avg",
-                    "num_emp",
+                    "num_jobs",
                     "num_est",
-                    "num_emp_est",
+                    "num_jobs_est",
 
                     "export_val",
                     "import_val",
@@ -513,15 +513,19 @@
       .call(is.url("{{data_url}}").offset(0))
 
     function data_printer(d, self, columns, all_cols, attrs){
-      var row_data = {}
-      var id_index = 0
-      var attr_type = "bra"
+      var row_data = {};
+      var id_index;
+      var url_index;
+      var attr_type;
       
       all_cols.forEach(function(c, i) { 
         if(c.indexOf("_id") > -1){ 
           id_index = i;
           var attr_id = c.split("_id");
           attr_type = attr_id[0];
+        }
+        if(c.indexOf("url") > -1){ 
+          url_index = i;
         }
       })
       
@@ -541,8 +545,14 @@
         else if (typeof d[i] == "string") {
           var this_val = dataviva.format.text(d[i],{"key": c});
           if(c == "name"){
-            var this_id = d[id_index];
-            row_data[c] = "<a target='_top' href='/profiles/"+attr_type+"/"+this_id+"/'>"+this_val+"</a>"
+            if(id_index){
+              var this_id = d[id_index];
+              row_data[c] = "<a target='_top' href='/profiles/"+attr_type+"/"+this_id+"/'>"+this_val+"</a>"
+            }
+            if(url_index){
+              var this_url = d[url_index];
+              row_data[c] = "<a target='_top' href='"+this_url.toLowerCase()+"'>"+this_val+"</a>"
+            }
           }
           else {
             row_data[c] = this_val

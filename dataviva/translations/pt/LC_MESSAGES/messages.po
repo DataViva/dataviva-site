@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-04-21 12:04-0400\n"
-"PO-Revision-Date: 2015-04-21 12:04-0500\n"
+"POT-Creation-Date: 2015-04-21 16:07-0400\n"
+"PO-Revision-Date: 2015-04-21 16:07-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language-Team: pt <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
@@ -98,11 +98,11 @@ msgstr "O item foi excluído com sucesso."
 
 #: dataviva/apps/views.py:89
 msgid ""
-"A visualization using the height of bars to show the number of employees "
-"in a specific wage bracket."
+"A visualization using the height of bars to show the number of jobs in a "
+"specific wage bracket."
 msgstr ""
 "A visualização usando a altura das barras para mostrar o número de "
-"funcionários em um suporte de salário específico."
+"empregos em um suporte de salário específico."
 
 #: dataviva/apps/views.py:91 dataviva/html/templates/site.html:69
 msgid "Bar Chart"
@@ -257,6 +257,7 @@ msgid "You need to be logged in to star visualizations."
 msgstr "Você precisa fazer o login para favoritar visualizações."
 
 #: dataviva/apps/views.py:505 dataviva/data/views.py:71
+#: dataviva/profiles/models.py:173 dataviva/profiles/models.py:244
 msgid "International Trade"
 msgstr "Comércio Internacional"
 
@@ -292,7 +293,8 @@ msgstr "Você precisa fazer o login para votar."
 msgid "You need to be logged in to flag replies."
 msgstr "Você precisa fazer o login para marcar respostas."
 
-#: dataviva/data/views.py:70
+#: dataviva/data/views.py:70 dataviva/profiles/models.py:198
+#: dataviva/profiles/models.py:329 dataviva/profiles/models.py:376
 msgid "Wages and Employment"
 msgstr "Salários e Emprego"
 
@@ -668,16 +670,16 @@ msgid ""
 "output, because it was created especially for the analysis of occupations"
 " (and related economic activities). However, the output can use different"
 " parameters and types of grouping. One of the possible visualizations "
-"shows the average number of employees per establishment for the “Arts and"
-" Entertainment” industry in Minas Gerais."
+"shows the average number of jobs per establishment for the “Arts and "
+"Entertainment” industry in Minas Gerais."
 msgstr ""
 "Diferentemente dos demais visualizações, Ocupações permite apenas um tipo"
 " de visualização, pois foi criado especialmente para a análise das "
 "ocupações (relacionadas com as atividades econômicas). Porém, a "
 "visualização pode ser feita utilizando diferentes parâmetros e tipos de "
 "agrupamento. Na visualização padrão do DataViva, apresenta-se a média de "
-"empregados por estabelecimento para a atividade artes e entretenimento em"
-" Minas Gerais."
+"empregos por estabelecimento para a atividade artes e entretenimento em "
+"Minas Gerais."
 
 #: dataviva/html/about/apps/rings.html:3
 msgid ""
@@ -1002,7 +1004,7 @@ msgstr "Tipo"
 msgid "Ex. Where does the data come from?"
 msgstr "Ex. De onde vem os dados?"
 
-#: dataviva/html/about/ask/ask.html:39 dataviva/html/apps/builder.html:100
+#: dataviva/html/about/ask/ask.html:39 dataviva/html/apps/builder.html:122
 msgid "Visualization"
 msgstr "Visualização"
 
@@ -1235,21 +1237,14 @@ msgstr ""
 
 #: dataviva/html/about/data/rais.html:10
 msgid ""
-"DataViva presents information about the number of employees, wages and "
-"number of establishments. The level of aggregation, in geographic terms, "
-"is available for Brazil, States, Mesoregions, Microregions and "
+"DataViva presents information about the number of jobs, wages and number "
+"of establishments. The level of aggregation, in geographic terms, is "
+"available for Brazil, States, Mesoregions, Microregions and "
 "Municipalities; in sector terms, Sections, Divisions and Classes, "
 "according to the National Classification of Economic Activities (CNAE); "
 "and in terms of occupations, Main Groups and Families, following the "
 "Brazilian Occupations Classification (CBO 2002)."
 msgstr ""
-"O DataViva contêm informações sobre número de empregos, massa salarial e "
-"número de estabelecimentos. O nível de agregação, segundo recortes "
-"geográficos, é feito para o Brasil, Unidades da Federação, Mesorregião, "
-"Microrregião e Municípios; em nível setorial: Seção, Divisão e Classe, de"
-" acordo com a Classificação Nacional de Atividades Econômicas (CNAE "
-"Rev.4); e nível de ocupação: Grande Grupo e Família, de acordo com a "
-"Classificação Brasileira de Ocupações (CBO 2002).\r"
 
 #: dataviva/html/about/data/sc.html:8
 msgid ""
@@ -1382,7 +1377,7 @@ msgid "comparative advantage"
 msgstr "vantagem comparativa"
 
 #: dataviva/html/about/glossary/complexity.html:10
-#: dataviva/stats/profile_helper.py:211 dataviva/stats/profile_helper.py:219
+#: dataviva/stats/profile_helper.py:218 dataviva/stats/profile_helper.py:226
 #: dataviva/translations/dictionary.py:190
 msgid "Economic Complexity"
 msgstr "Complexidade Econômica"
@@ -1729,16 +1724,11 @@ msgstr "Emprego Estimado"
 
 #: dataviva/html/about/glossary/required.html:3
 msgid ""
-"Estimated Employment is a reference to the number of employees, by "
-"occupation, in a given industry. This reference is calculated by defining"
-" similar regions to the region examined, and then finding the average "
-"number of employees in these regions for the select industry."
+"Estimated Employment is a reference to the number of jobs, by occupation,"
+" in a given industry. This reference is calculated by defining similar "
+"regions to the region examined, and then finding the average number of "
+"jobs in these regions for the select industry."
 msgstr ""
-"O Emprego Estimado é uma referência do número de empregados, por "
-"ocupação, em uma dada atividade econômica. Esta referência é calculada a "
-"partir da definição de regiões similares àquela analisada, sendo uma "
-"média do número de empregados nestas regiões numa dada atividade "
-"econômica."
 
 #: dataviva/html/account/index.html:20
 msgid "Activity sorted by date"
@@ -1917,15 +1907,15 @@ msgstr "Atenciosamente,"
 msgid "The DataViva Team"
 msgstr "Equipe DataViva"
 
-#: dataviva/html/apps/builder.html:93
+#: dataviva/html/apps/builder.html:115
 msgid "Advanced Visualization Builder"
 msgstr "Construtor de Visualização Avançada"
 
-#: dataviva/html/apps/builder.html:126
+#: dataviva/html/apps/builder.html:148
 msgid "Build visualization"
 msgstr "Construir visualização"
 
-#: dataviva/html/apps/builder.html:129 dataviva/html/apps/info.html:4
+#: dataviva/html/apps/builder.html:151 dataviva/html/apps/info.html:4
 msgid "Visualizations"
 msgstr "Visualizações"
 
@@ -2228,11 +2218,11 @@ msgstr "Pesquisas comuns"
 msgid "Ex"
 msgstr "Ex"
 
-#: dataviva/html/profiles/profile.html:174
+#: dataviva/html/profiles/profile.html:249
 msgid "Show Related Profiles"
 msgstr ""
 
-#: dataviva/html/profiles/profile.html:208
+#: dataviva/html/profiles/profile.html:283
 msgid ""
 "To view additional data regarding world trade, click here to visit the "
 "Observatory."
@@ -2342,66 +2332,78 @@ msgstr "Cursos Básicos"
 msgid "Line"
 msgstr "Linha"
 
-#: dataviva/profiles/models.py:160 dataviva/profiles/models.py:230
-#: dataviva/profiles/models.py:294
+#: dataviva/profiles/models.py:174 dataviva/profiles/models.py:245
+#: dataviva/profiles/models.py:309
 msgid "Exports by:"
 msgstr "Exportações por:"
 
-#: dataviva/profiles/models.py:171 dataviva/profiles/models.py:243
-#: dataviva/profiles/models.py:281
+#: dataviva/profiles/models.py:186 dataviva/profiles/models.py:258
+#: dataviva/profiles/models.py:296
 msgid "Imports by:"
 msgstr "Importações por:"
 
-#: dataviva/profiles/models.py:182 dataviva/profiles/models.py:314
-#: dataviva/profiles/models.py:361
+#: dataviva/profiles/models.py:198 dataviva/profiles/models.py:329
+#: dataviva/profiles/models.py:376
 msgid "Employment by:"
 msgstr "Emprego por:"
 
-#: dataviva/profiles/models.py:183
+#: dataviva/profiles/models.py:199
 msgid "Wages by:"
 msgstr "Salários por:"
 
-#: dataviva/profiles/models.py:195 dataviva/profiles/models.py:260
-#: dataviva/profiles/models.py:341 dataviva/profiles/models.py:388
-msgid "Economic Opportunities:"
-msgstr "Oportunidades Econômicas:"
+#: dataviva/profiles/models.py:211 dataviva/profiles/models.py:275
+#: dataviva/profiles/models.py:403
+msgid "Economic Opportunities"
+msgstr "Oportunidades Econômicas"
 
-#: dataviva/profiles/models.py:197
+#: dataviva/profiles/models.py:213
+msgid "Education"
+msgstr "Educação"
+
+#: dataviva/profiles/models.py:213
 msgid "University Enrollment by:"
 msgstr "Matrículas na Universidade por:"
 
-#: dataviva/profiles/models.py:198
+#: dataviva/profiles/models.py:214
 msgid "Vocational Enrollment by:"
 msgstr "Matrículas na Educação Profissional por:"
 
-#: dataviva/profiles/models.py:199
+#: dataviva/profiles/models.py:215
 msgid "Basic Education by:"
 msgstr "Educação Básica por:"
 
-#: dataviva/profiles/models.py:265
-msgid "Common Industries by Occupation:"
-msgstr "Atividades Comuns por Ocupação:"
+#: dataviva/profiles/models.py:280
+msgid "Common Industries by Occupation"
+msgstr "Atividades Comuns por Ocupação"
 
-#: dataviva/profiles/models.py:327 dataviva/profiles/models.py:374
+#: dataviva/profiles/models.py:295
+msgid "Trade with Brazil"
+msgstr ""
+
+#: dataviva/profiles/models.py:342 dataviva/profiles/models.py:389
 msgid "Average Wage by:"
 msgstr "Salário Médio por:"
 
-#: dataviva/profiles/models.py:346
-msgid "Common Products by Trade Partner:"
-msgstr "Produtos Comuns por Parceiro Comercial:"
+#: dataviva/profiles/models.py:356
+msgid "Economic Opportunities:"
+msgstr "Oportunidades Econômicas:"
 
-#: dataviva/profiles/models.py:393
-msgid "Universities offering:"
-msgstr "Universidades que oferecem:"
+#: dataviva/profiles/models.py:361
+msgid "Common Products by Trade Partner"
+msgstr "Produtos Comuns por Parceiro Comercial"
 
-#: dataviva/profiles/models.py:403 dataviva/profiles/models.py:409
-#: dataviva/profiles/models.py:428
-msgid "Enrollment by:"
-msgstr "Matrículas por:"
+#: dataviva/profiles/models.py:408
+msgid "Majors by University"
+msgstr "Cursos de Universidade"
 
-#: dataviva/profiles/models.py:415
-msgid "Industries that employ:"
-msgstr ""
+#: dataviva/profiles/models.py:418 dataviva/profiles/models.py:424
+#: dataviva/profiles/models.py:443
+msgid "Enrollment"
+msgstr "Matrículas"
+
+#: dataviva/profiles/models.py:430
+msgid "Common Occupations by Industry"
+msgstr "Ocupações Comuns por Atividade"
 
 #: dataviva/profiles/views.py:48
 msgid ""
@@ -2418,9 +2420,7 @@ msgstr ""
 "selecionada."
 
 #: dataviva/profiles/views.py:69
-msgid ""
-"Showing the occupations and locations with employees in the selected "
-"industry."
+msgid "Showing the occupations and locations with jobs in the selected industry."
 msgstr ""
 "Mostrando as ocupações e locais com empregos na atividade econômica "
 "selecionada."
@@ -2489,39 +2489,39 @@ msgstr "um curso"
 msgid "a course"
 msgstr "um curso"
 
-#: dataviva/profiles/views.py:243
+#: dataviva/profiles/views.py:248
 msgid "Locations with Similar Product Exports"
 msgstr ""
 
-#: dataviva/profiles/views.py:244
+#: dataviva/profiles/views.py:249
 msgid "Locations with Similar Trade Partners"
 msgstr ""
 
-#: dataviva/profiles/views.py:245
+#: dataviva/profiles/views.py:250
 msgid "Locations with Similar Industries"
 msgstr ""
 
-#: dataviva/profiles/views.py:246
+#: dataviva/profiles/views.py:251
 msgid "Locations with Similar Occupations"
 msgstr ""
 
-#: dataviva/profiles/views.py:248
+#: dataviva/profiles/views.py:253
 msgid "Similar Industries by Co-location"
 msgstr ""
 
-#: dataviva/profiles/views.py:250
+#: dataviva/profiles/views.py:255
 msgid "Similar Occupations by Co-location"
 msgstr ""
 
-#: dataviva/profiles/views.py:252
+#: dataviva/profiles/views.py:257
 msgid "Similar Products by Co-location"
 msgstr ""
 
-#: dataviva/profiles/views.py:254
+#: dataviva/profiles/views.py:259
 msgid "Destinations with Similar Brazilian Origins"
 msgstr ""
 
-#: dataviva/profiles/views.py:256
+#: dataviva/profiles/views.py:261
 msgid "Universities with Similar Course Offerings"
 msgstr ""
 
@@ -2529,114 +2529,122 @@ msgstr ""
 msgid "General Stats"
 msgstr "Estatísticas Gerais"
 
-#: dataviva/stats/profile_helper.py:19 dataviva/stats/profile_helper.py:110
-#: dataviva/stats/profile_helper.py:125 dataviva/stats/profile_helper.py:136
-#: dataviva/stats/profile_helper.py:153 dataviva/stats/profile_helper.py:165
-#: dataviva/stats/profile_helper.py:182 dataviva/stats/profile_helper.py:193
-#: dataviva/stats/profile_helper.py:213 dataviva/stats/profile_helper.py:225
-#: dataviva/stats/profile_helper.py:238 dataviva/stats/profile_helper.py:253
-msgid "Stats"
-msgstr "Estatísticas"
+#: dataviva/stats/profile_helper.py:28 dataviva/stats/profile_helper.py:113
+#: dataviva/stats/profile_helper.py:129 dataviva/stats/profile_helper.py:140
+#: dataviva/stats/profile_helper.py:158
+msgid "Employment Stats"
+msgstr "Estatísticas de Emprego"
 
-#: dataviva/stats/profile_helper.py:37 dataviva/stats/profile_helper.py:144
+#: dataviva/stats/profile_helper.py:38 dataviva/stats/profile_helper.py:149
 msgid "Top Industry by Employment"
 msgstr "Principais Atividades por Empregos"
 
-#: dataviva/stats/profile_helper.py:46 dataviva/stats/profile_helper.py:118
+#: dataviva/stats/profile_helper.py:47 dataviva/stats/profile_helper.py:122
 msgid "Top Occupation by Employment"
 msgstr "Principal Ocupação por Empregos"
 
-#: dataviva/stats/profile_helper.py:51 dataviva/stats/profile_helper.py:122
-#: dataviva/stats/profile_helper.py:129 dataviva/stats/profile_helper.py:150
-#: dataviva/stats/profile_helper.py:158 dataviva/translations/dictionary.py:264
+#: dataviva/stats/profile_helper.py:52 dataviva/stats/profile_helper.py:126
+#: dataviva/stats/profile_helper.py:133 dataviva/stats/profile_helper.py:155
+#: dataviva/stats/profile_helper.py:163 dataviva/translations/dictionary.py:264
 msgid "Total Monthly Wage"
 msgstr "Renda Mensal Total"
 
-#: dataviva/stats/profile_helper.py:62 dataviva/stats/profile_helper.py:200
+#: dataviva/stats/profile_helper.py:54 dataviva/stats/profile_helper.py:170
+#: dataviva/stats/profile_helper.py:188 dataviva/stats/profile_helper.py:199
+#: dataviva/stats/profile_helper.py:220
+msgid "Trade Stats"
+msgstr "Estatísticas de Comércio"
+
+#: dataviva/stats/profile_helper.py:64 dataviva/stats/profile_helper.py:207
 msgid "Top Product by Export Value"
 msgstr "Principal Produto por Valor Exportado"
 
-#: dataviva/stats/profile_helper.py:73 dataviva/stats/profile_helper.py:196
+#: dataviva/stats/profile_helper.py:75 dataviva/stats/profile_helper.py:203
 msgid "Top Destination by Export Value"
 msgstr "Principal Destino por Valor Exportado"
 
-#: dataviva/stats/profile_helper.py:80 dataviva/stats/profile_helper.py:180
-#: dataviva/stats/profile_helper.py:185 dataviva/stats/profile_helper.py:208
-#: dataviva/stats/profile_helper.py:217 dataviva/translations/dictionary.py:276
+#: dataviva/stats/profile_helper.py:82 dataviva/stats/profile_helper.py:186
+#: dataviva/stats/profile_helper.py:191 dataviva/stats/profile_helper.py:215
+#: dataviva/stats/profile_helper.py:224 dataviva/translations/dictionary.py:276
 msgid "Total Exports"
 msgstr "Total de Exportações"
 
-#: dataviva/stats/profile_helper.py:81 dataviva/stats/profile_helper.py:205
-#: dataviva/stats/profile_helper.py:218 dataviva/translations/dictionary.py:280
+#: dataviva/stats/profile_helper.py:83 dataviva/stats/profile_helper.py:212
+#: dataviva/stats/profile_helper.py:225 dataviva/translations/dictionary.py:280
 msgid "Total Imports"
 msgstr "Total de Importações"
 
-#: dataviva/stats/profile_helper.py:85 dataviva/translations/dictionary.py:128
+#: dataviva/stats/profile_helper.py:88 dataviva/translations/dictionary.py:128
 msgid "Region"
 msgstr "Região"
 
-#: dataviva/stats/profile_helper.py:88 dataviva/translations/dictionary.py:129
+#: dataviva/stats/profile_helper.py:91 dataviva/translations/dictionary.py:129
 msgid "State"
 msgstr "Estado"
 
-#: dataviva/stats/profile_helper.py:91 dataviva/translations/dictionary.py:130
+#: dataviva/stats/profile_helper.py:94 dataviva/translations/dictionary.py:130
 msgid "Mesoregion"
 msgstr "Mesorregião"
 
-#: dataviva/stats/profile_helper.py:94 dataviva/translations/dictionary.py:131
+#: dataviva/stats/profile_helper.py:97 dataviva/translations/dictionary.py:131
 msgid "Microregion"
 msgstr "Microrregião"
 
-#: dataviva/stats/profile_helper.py:114 dataviva/stats/profile_helper.py:140
+#: dataviva/stats/profile_helper.py:118 dataviva/stats/profile_helper.py:145
 msgid "Top Municipality by Employment"
 msgstr "Principal Município por Empregos"
 
-#: dataviva/stats/profile_helper.py:123 dataviva/stats/profile_helper.py:130
-#: dataviva/stats/profile_helper.py:151 dataviva/stats/profile_helper.py:159
+#: dataviva/stats/profile_helper.py:127 dataviva/stats/profile_helper.py:134
+#: dataviva/stats/profile_helper.py:156 dataviva/stats/profile_helper.py:164
 #: dataviva/translations/dictionary.py:265
 msgid "Average Monthly Wage"
 msgstr "Renda Mensal Média"
 
-#: dataviva/stats/profile_helper.py:170
+#: dataviva/stats/profile_helper.py:176
 msgid "Top Municipality by Exports"
 msgstr "Principal Município por Exportações"
 
-#: dataviva/stats/profile_helper.py:174
+#: dataviva/stats/profile_helper.py:180
 msgid "Top Country by Exports"
 msgstr "Principal País por Exportação"
 
-#: dataviva/stats/profile_helper.py:178 dataviva/stats/profile_helper.py:206
-#: dataviva/stats/profile_helper.py:209
+#: dataviva/stats/profile_helper.py:184 dataviva/stats/profile_helper.py:213
+#: dataviva/stats/profile_helper.py:216
 msgid "Nominal Annual Growth Rate (1 year)"
 msgstr "Taxa Nominal de Crescimento Anual (1 ano)"
 
-#: dataviva/stats/profile_helper.py:179 dataviva/stats/profile_helper.py:207
-#: dataviva/stats/profile_helper.py:210
+#: dataviva/stats/profile_helper.py:185 dataviva/stats/profile_helper.py:214
+#: dataviva/stats/profile_helper.py:217
 msgid "Nominal Annual Growth Rate (5 year)"
 msgstr "Taxa Nominal de Crescimento Anual (5 anos)"
 
-#: dataviva/stats/profile_helper.py:228
+#: dataviva/stats/profile_helper.py:232 dataviva/stats/profile_helper.py:246
+#: dataviva/stats/profile_helper.py:262
+msgid "Enrollment Stats"
+msgstr "Estatísticas de Matrículas"
+
+#: dataviva/stats/profile_helper.py:236
 msgid "Top Major by Enrollment"
 msgstr "Principal Curso por Matrículas"
 
-#: dataviva/stats/profile_helper.py:232 dataviva/stats/profile_helper.py:246
-#: dataviva/stats/profile_helper.py:261
+#: dataviva/stats/profile_helper.py:240 dataviva/stats/profile_helper.py:255
+#: dataviva/stats/profile_helper.py:271
 msgid "Total Enrollment"
 msgstr "Total de Matrículas"
 
-#: dataviva/stats/profile_helper.py:233 dataviva/stats/profile_helper.py:247
+#: dataviva/stats/profile_helper.py:241 dataviva/stats/profile_helper.py:256
 msgid "Total Graduates"
 msgstr "Total de Concluintes"
 
-#: dataviva/stats/profile_helper.py:242
+#: dataviva/stats/profile_helper.py:251
 msgid "Top University by Enrollment"
 msgstr "Principal Universidade por Matrículas"
 
-#: dataviva/stats/profile_helper.py:257
+#: dataviva/stats/profile_helper.py:267
 msgid "Top Municipality by Enrollment"
 msgstr "Principal Município por Matrículas"
 
-#: dataviva/stats/profile_helper.py:262 dataviva/translations/dictionary.py:311
+#: dataviva/stats/profile_helper.py:272 dataviva/translations/dictionary.py:311
 msgid "Average Age"
 msgstr "Idade Média"
 
@@ -3154,7 +3162,7 @@ msgstr "Estimativa de Empregos"
 
 #: dataviva/translations/dictionary.py:228
 msgid ""
-"The number of employees needed in order to have RCA in an industry in a "
+"The number of jobs needed in order to have RCA in an industry in a "
 "particular location, based on the averages of locations with similar "
 "industrial composition and RCA in the specific industry."
 msgstr ""
@@ -3273,7 +3281,7 @@ msgid "Data provided by RAIS"
 msgstr "Dados Fornecidos por RAIS"
 
 #: dataviva/translations/dictionary.py:260
-msgid "Total Employees"
+msgid "Total Jobs"
 msgstr "Total de Empregos"
 
 #: dataviva/translations/dictionary.py:261
@@ -3281,7 +3289,7 @@ msgid "Total Establishments"
 msgstr "Total de Estabelecimentos"
 
 #: dataviva/translations/dictionary.py:262
-msgid "Employees per Establishment"
+msgid "Jobs per Establishment"
 msgstr "Empregos por Estabelecimento"
 
 #: dataviva/translations/dictionary.py:263
@@ -3875,8 +3883,8 @@ msgstr[0] "Mil"
 msgstr[1] "Milhares"
 
 #: dataviva/utils/num_format.py:41
-msgid "employees"
-msgstr "empregados"
+msgid "jobs"
+msgstr "empregos"
 
 #: dataviva/utils/num_format.py:42
 msgid "students"

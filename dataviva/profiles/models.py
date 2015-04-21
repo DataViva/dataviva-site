@@ -20,13 +20,13 @@ crosswalk_dict = {
     "course_hedu": {
         "table": Crosswalk_oc,
         "data": Yo,
-        "column": "num_emp",
+        "column": "num_jobs",
         "id": "cbo_id"
     },
     "hs": {
         "table": Crosswalk_pi,
         "data": Yi,
-        "column": "num_emp",
+        "column": "num_jobs",
         "id": "cnae_id"
     },
     "cnae": {
@@ -329,14 +329,14 @@ class Cnae(Profile):
             {"group": gettext("Wages and Employment"), "icon": "rais", "title": gettext("Employment by:"),
             "builds": [
                 [
-                    {"id": 143, "params": {"y": "num_emp"}},
-                    {"id": 4, "params": {"size": "num_emp"}},
-                    {"id": 20, "params": {"y": "num_emp"}}
+                    {"id": 143, "params": {"y": "num_jobs"}},
+                    {"id": 4, "params": {"size": "num_jobs"}},
+                    {"id": 20, "params": {"y": "num_jobs"}}
                 ],
                 [
-                    {"id": 37, "params": {"color": "num_emp"}},
-                    {"id": 6, "params": {"size": "num_emp"}},
-                    {"id": 22, "params": {"y": "num_emp"}}
+                    {"id": 37, "params": {"color": "num_jobs"}},
+                    {"id": 6, "params": {"size": "num_jobs"}},
+                    {"id": 22, "params": {"y": "num_jobs"}}
                 ]
             ]},
             {"title": gettext("Average Wage by:"),
@@ -376,14 +376,14 @@ class Cbo(Profile):
             {"group": gettext("Wages and Employment"), "icon": "rais", "title": gettext("Employment by:"),
             "builds": [
                 [
-                    {"id": 141, "params": {"y": "num_emp"}},
-                    {"id": 2, "params": {"size": "num_emp"}},
-                    {"id": 18, "params": {"y": "num_emp"}}
+                    {"id": 141, "params": {"y": "num_jobs"}},
+                    {"id": 2, "params": {"size": "num_jobs"}},
+                    {"id": 18, "params": {"y": "num_jobs"}}
                 ],
                 [
-                    {"id": 38, "params": {"color": "num_emp"}},
-                    {"id": 7, "params": {"size": "num_emp"}},
-                    {"id": 23, "params": {"y": "num_emp"}}
+                    {"id": 38, "params": {"color": "num_jobs"}},
+                    {"id": 7, "params": {"size": "num_jobs"}},
+                    {"id": 23, "params": {"y": "num_jobs"}}
                 ]
             ]},
             {"title": gettext("Average Wage by:"),
