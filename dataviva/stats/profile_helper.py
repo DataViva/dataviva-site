@@ -305,8 +305,11 @@ def batch_stats(Tbl, bra_id, stat_ids, year=None):
 def get_stat_val(Tbl, metric_col, filters):
     if not type(metric_col) == list:
         q = Tbl.query.with_entities(metric_col).filter(*filters)
-        res, = q.first()
-        return res
+        res = q.first()
+        if res:
+            return res[0]
+        else:
+            return None
     else:
         q = Tbl.query.with_entities(*metric_col).filter(*filters)
         return q.first()

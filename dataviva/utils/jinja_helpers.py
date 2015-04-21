@@ -32,6 +32,8 @@ class jinja_formatter:
 
     @staticmethod
     def is_number(s):
+        if s is None:
+            return False
         try:
             float(s)
             return True
