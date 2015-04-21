@@ -514,15 +514,39 @@
 
     function data_printer(d, self, columns, all_cols, attrs){
       var row_data = {}
+      var id_index = 0
+      var attr_type = "bra"
+      
+      all_cols.forEach(function(c, i) { 
+        if(c.indexOf("_id") > -1){ 
+          id_index = i;
+          var attr_id = c.split("_id");
+          attr_type = attr_id[0];
+        }
+      })
+      
       columns.forEach(function(c){
         var i = all_cols.indexOf(c);
         if (c instanceof Array){
           var id = c[0]+"_id";
           var attr_id = d[all_cols.indexOf(id)];
-          row_data[c] = attrs[c[0]][attr_id][c[1]] || " &mdash; ";
+          var val = attrs[c[0]][attr_id][c[1]];
+          if(c[1] == "name" && val){
+            row_data[c] = "<a target='_top' href='"+attrs[c[0]][attr_id]['url']+"'>"+val+"</a>";
+          }
+          else {
+            row_data[c] = val || " &mdash; ";
+          }
         }
         else if (typeof d[i] == "string") {
-          row_data[c] = dataviva.format.text(d[i],{"key": c})
+          var this_val = dataviva.format.text(d[i],{"key": c});
+          if(c == "name"){
+            var this_id = d[id_index];
+            row_data[c] = "<a target='_top' href='/profiles/"+attr_type+"/"+this_id+"/'>"+this_val+"</a>"
+          }
+          else {
+            row_data[c] = this_val
+          }
         }
         else if (typeof d[i] == "number") {
           row_data[c] = dataviva.format.number(d[i],{"key": c})
