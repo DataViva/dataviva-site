@@ -189,6 +189,9 @@
         <div id="arrow_clickable"><i class="fa fa fa-list-alt"></i></div>
       <div id="guide_icon" style="background-image: url('{{ item.icon() }}');{% if category != 'wld' and category != 'bra' or (category == 'wld' and item.id|count == 2) %} background-color: {{ item.color }};{% endif %}"></div>
       <h1 id="guide_title">{{ item.name() }}</h1>
+      {% if item.id != "all" %}
+        <h2 id="guide_sub">{{ format(category+'_'+item.id|length|string).render('text') }}</h2>
+      {% endif %}
     </div>
 
     {% set counter = 1 %}
