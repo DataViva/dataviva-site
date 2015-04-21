@@ -54,6 +54,7 @@ if "DATAVIVA_PRODUCTION" in os.environ:
     SQLALCHEMY_ECHO = False
     DEBUG = False
     ERROR_EMAIL = True
+    JSONIFY_PRETTYPRINT_REGULAR = False
 
 ''' Available languages '''
 LANGUAGES = {
