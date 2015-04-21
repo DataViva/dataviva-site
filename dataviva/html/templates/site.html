@@ -234,7 +234,7 @@
     });
 
     function change_language(l) {
-      window.location = "/set_lang/" + l + "/?next=" + window.location.pathname;
+      window.location = "/set_lang/" + l + "/?next=" + window.location.pathname + window.location.search;
     }
 
     leon("$language_select").color("{{ g.color }}").size("small")
