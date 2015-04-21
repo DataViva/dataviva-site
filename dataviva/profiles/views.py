@@ -204,6 +204,11 @@ def profiles(category = None, id = None):
 
     start = request.args.get("app", 1)
     stats = compute_stats(item)
+    stat_groups = {}
+    for s in stats:
+        if s["key"] not in stat_groups:
+            stat_groups[s["key"]] = []
+        stat_groups[s["key"]].append(s)
 
     related = []
     def get_related(table, attr, title):
@@ -256,5 +261,5 @@ def profiles(category = None, id = None):
         get_related(Yuu, "course_hedu", gettext("Universities with Similar Course Offerings"))
 
     return render_template("profiles/profile.html",
-                category=category, item=item, stats=stats,
+                category=category, item=item, stats=stat_groups,
                 starting_app = start, builds=builds, related=related)

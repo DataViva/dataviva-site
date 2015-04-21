@@ -51,7 +51,7 @@ class Profile(object):
 
     def name(self):
         return self.attr.name()
-    
+
     def prev(self):
         attr_class = getattr(attrs, self.type.capitalize())
         return attr_class.query \
@@ -170,11 +170,12 @@ class Bra(Profile):
 
     def build_list(self):
         apps = [
-            {"builds": [91]},
+            {"group": gettext("International Trade"), "icon": "secex", "builds": [91]},
             {"title": gettext("Exports by:"), "builds": [
                 [
                     {"id":9, "params": {"size": "export_val"}},
-                    {"id":25, "params": {"y": "export_val"}}
+                    {"id":25, "params": {"y": "export_val"}},
+                    {"id":132, "params": {"y": "export_val"}}
                 ],
                 [
                     {"id":11, "params": {"size": "export_val"}},
@@ -185,7 +186,8 @@ class Bra(Profile):
             {"title": gettext("Imports by:"), "builds": [
                 [
                     {"id":9, "params": {"size": "import_val"}},
-                    {"id":25, "params": {"y": "import_val"}}
+                    {"id":25, "params": {"y": "import_val"}},
+                    {"id":132, "params": {"y": "import_val"}}
                 ],
                 [
                     {"id":11, "params": {"size": "import_val"}},
@@ -193,7 +195,7 @@ class Bra(Profile):
                     {"id":134, "params": {"y": "import_val"}}
                 ]
             ]},
-            {"title": gettext("Employment by:"), "builds": [[1, 17, 140], [3, 19, 142]]},
+            {"group": gettext("Wages and Employment"), "icon": "rais", "title": gettext("Employment by:"), "builds": [[1, 17, 140], [3, 19, 142]]},
             {"title": gettext("Wages by:"), "builds": [
                 [
                     {"id": 1, "params": {"size": "wage"}},
@@ -206,17 +208,16 @@ class Bra(Profile):
                     {"id": 142, "params": {"y": "wage_avg"}}
                 ], 176
             ]},
-            {"title": gettext("Economic Opportunities:"), "builds": [35]},
+            {"group": gettext("Economic Opportunities"), "icon": "network", "builds": [[35]]},
             # {"title": gettext("Domestic Trade by:"), "builds": [128, 127]},
-            {"title": gettext("University Enrollment by:"), "builds": [93, [95, 105, 115]]},
+            {"group": gettext("Education"), "icon": "hedu", "title": gettext("University Enrollment by:"), "builds": [93, [95, 105, 115]]},
             {"title": gettext("Vocational Enrollment by:"), "builds": [[117, 120, 126]]},
             {"title": gettext("Basic Education by:"), "builds": [[162, 165, 167]]}
         ]
 
         if self.attr.id != "all":
-            apps[1]["builds"][0].append({"id":46, "params": {"size": "export_val"}})
-            apps[2]["builds"][0].append({"id":46, "params": {"size": "import_val"}})
-            apps[5]["builds"].append(33)
+            apps[5]["builds"][0].append(46)
+            apps[5]["builds"].append([33, 44])
             apps[-1]["builds"].append([163, 166, 168])
             apps[-1]["builds"].append([160])
 
@@ -240,7 +241,7 @@ class Hs(Profile):
     def build_list(self):
 
         apps = [
-            {"builds": [148]},
+            {"group": gettext("International Trade"), "icon": "secex", "builds": [148]},
             {"title": gettext("Exports by:"),
             "builds": [
                 [
@@ -271,12 +272,12 @@ class Hs(Profile):
 
         if len(self.attr.id) == 6:
             apps.append({
-                "title": gettext("Economic Opportunities:"), "builds": [50]
+                "group": gettext("Economic Opportunities"), "icon": "network", "builds": [50]
             })
 
         industries = self.crosswalk_id()
         if len(industries):
-            cross_apps = {"title": gettext("Common Industries by Occupation:"), "builds": []}
+            cross_apps = {"group": gettext("Common Industries by Occupation"), "icon": "cnae", "builds": []}
             for industry in industries:
                 name = attrs.Cnae.query.get(industry).name()
                 ind_builds = []
@@ -291,7 +292,7 @@ class Wld(Profile):
 
     def build_list(self):
         return [
-            {"builds": [92]},
+            {"group": gettext("Trade with Brazil"), "icon": "secex", "builds": [92]},
             {"title": gettext("Imports by:"),
             "builds": [
                 [
@@ -325,7 +326,7 @@ class Cnae(Profile):
     def build_list(self):
 
         apps = [
-            {"title": gettext("Employment by:"),
+            {"group": gettext("Wages and Employment"), "icon": "rais", "title": gettext("Employment by:"),
             "builds": [
                 [
                     {"id": 143, "params": {"y": "num_emp"}},
@@ -352,12 +353,12 @@ class Cnae(Profile):
 
         if len(self.attr.id) == 6:
             apps.append({
-                "title": gettext("Economic Opportunities:"), "builds": [{"id": 51, "bra": "4mg"}, {"id": 48, "bra": "4mg"}]
+                "group": gettext("Economic Opportunities:"), "icon": "network", "builds": [{"id": 51, "bra": "4mg"}, {"id": 48, "bra": "4mg"}]
             })
 
         products = self.crosswalk_id()
         if len(products):
-            cross_apps = {"title": gettext("Common Products by Trade Partner:"), "builds": []}
+            cross_apps = {"group": gettext("Common Products by Trade Partner"), "icon": "hs", "builds": []}
             for product in products:
                 name = attrs.Hs.query.get(product).name()
                 prod_builds = []
@@ -372,7 +373,7 @@ class Cbo(Profile):
 
     def build_list(self):
         apps = [
-            {"title": gettext("Employment by:"),
+            {"group": gettext("Wages and Employment"), "icon": "rais", "title": gettext("Employment by:"),
             "builds": [
                 [
                     {"id": 141, "params": {"y": "num_emp"}},
@@ -399,12 +400,12 @@ class Cbo(Profile):
 
         if len(self.attr.id) == 4:
             apps.append({
-                "title": gettext("Economic Opportunities:"), "builds": [49]
+                "group": gettext("Economic Opportunities"), "icon": "network", "builds": [49]
             })
 
         courses = self.crosswalk_id()
         if len(courses):
-            cross_apps = {"title": gettext("Universities offering:"), "builds": []}
+            cross_apps = {"group": gettext("Majors by University"), "icon": "university", "builds": []}
             for course in courses:
                 name = attrs.Course_hedu.query.get(course).name()
                 cross_apps["builds"].append({"title": name, "id": 94, "filter2": course, "params": {"color": "graduates_growth"}})
@@ -414,19 +415,19 @@ class Cbo(Profile):
 class University(Profile):
 
     def build_list(self):
-        return [{"title": gettext("Enrollment by:"), "builds": [[96,106,116], 155, 151]}]
+        return [{"group": gettext("Enrollment"), "icon": "hedu", "builds": [[96,106,116], 155, 151]}]
 
 class Course_hedu(Profile):
 
     def build_list(self):
         apps = [{
-            "title": gettext("Enrollment by:"),
+            "group": gettext("Enrollment"), "icon": "hedu",
             "builds": [{"id": 94, "params": {"y": "graduates_growth"}}, [110,108,99], 156, 152]
         }]
 
         occupations = self.crosswalk_id()
         if len(occupations):
-            cross_apps = {"title": gettext("Industries that employ:"), "builds": []}
+            cross_apps = {"group": gettext("Common Occupations by Industry"), "icon": "cbo", "builds": []}
             for occupation in occupations:
                 name = attrs.Cbo.query.get(occupation).name()
                 occ_builds = []
@@ -439,4 +440,4 @@ class Course_hedu(Profile):
 class Course_sc(Profile):
 
     def build_list(self):
-        return [{"title": gettext("Enrollment by:"), "builds": [[124, 122, 119]]}]
+        return [{"group": gettext("Enrollment"), "icon": "sc", "builds": [[124, 122, 119]]}]

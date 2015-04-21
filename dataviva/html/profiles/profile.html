@@ -8,10 +8,36 @@
 
     <style>
 
+      .accordion_btn.sidebar_btn.help.active {
+        background-color: transparent;
+        /*margin-bottom: 0 !important;*/
+        -webkit-box-shadow: none;
+                box-shadow: none;
+      }
+
+      .sidebar_btn.active, .sidebar_btn:hover {
+        color: #333;
+      }
+
+      .sidebar_btn.active:before, .sidebar_btn:hover:before {
+        opacity: 0.7 !important;
+      }
+
+      .accordion_list {
+        overflow: hidden;
+        -webkit-transition: height 0.3s;
+           -moz-transition: height 0.3s;
+                transition: height 0.3s;
+      }
+
       .build_btn {
         display: block;
         position: relative;
         text-align: right;
+      }
+
+      .build_btn:last-child {
+        margin-bottom: 6px;
       }
 
       .build_mask {
@@ -46,6 +72,10 @@
         text-decoration: underline;
       }
 
+      .stat_table:last-child {
+        margin-bottom: 6px;
+      }
+
       .stat_table .growth-arrow {
         margin-left: 2px;
         margin-top: 2px;
@@ -57,10 +87,6 @@
 
       .stat_table .growth-arrow.up {
         color: #3daf49;
-      }
-
-      #relatedBtn {
-        margin-top: 5px !important;
       }
 
       .related {
@@ -154,10 +180,21 @@
     </div>
 
     {% set counter = 1 %}
+    {% set icon = None %}
+    {% set current_group = None %}
     {% for group in builds %}
+
+      {% if group.group and group.group != current_group %}
+        {% if current_group %}</div>{% endif %}
+        {% set current_group = group.group %}
+        {% set icon = group.icon %}
+        <a class="accordion_btn sidebar_btn help short icon {{ group.icon }}" onclick="open_acc(this)">{{ current_group }}</a>
+        <div class="accordion_list">
+      {% endif %}
       {% if group.title %}
         <div class="group_title">{{ group.title }}</div>
       {% endif %}
+
       {% for build in group.builds %}
         <div class="build_btn" data-build="{{ counter + loop.index0 }}" data-lock="{{ build[0].titlelock }}">
           <span class="build_title" id="group_{{ build[0].position }}" onclick="app_select(this.id)" title="{{ build[0].slug }}">{{ build[0].slug }}</span>
@@ -167,16 +204,54 @@
           <a class="build_mask" id="mask_{{ build[0].position }}" onclick="app_select(this.id)"><i class="fa fa-spinner fa-spin"></i></a>
         </div>
       {% endfor %}
+
       {% set counter = counter + group.builds|length %}
+
+      {% if loop.index == builds|length %}
+        {% set next = "last" %}
+      {% else %}
+        {% set next = builds[loop.index].icon %}
+      {% endif %}
+      {% if next == "last" or (next and next != icon) %}
+        {% set last_group = "" %}
+        {% if stats[icon] %}
+          {% for stat in stats[icon] %}
+            {% if last_group != stat.group %}
+              {% if loop.index != 1 %}</table>{% endif %}
+              <div class="group_title">
+                {{ stat.group }}
+              </div>
+              <table class="stat_table">
+              {% set last_group = stat.group %}
+            {% endif %}
+              <tr>
+                <td>
+                  {{ stat.name }}
+                </td>
+                <td>
+                  {%- if stat.url %}
+                    <a href="{{ stat.url }}">{{ format(stat.desc).render(stat.mode) }}</a>
+                  {% else -%}
+                    {{ format(stat.desc).render(stat.mode) }}
+                  {% endif -%}
+                  {%- if stat.value %} ({{ format(stat.value).render(stat.mode) }}){% endif -%}
+                </td>
+              </tr>
+            {% if loop.index == stats[icon]|length %}</table>{% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+
     {% endfor %}
+    </div>
 
     {% if related|length > 0 %}
-      <a href="#related" id="relatedBtn" class="help short icon {{ category }}">{% trans %}Show Related Profiles{% endtrans %}</a>
+      <a href="#related" id="relatedBtn" class="sidebar_btn help short icon {{ category }}">{% trans %}Show Related Profiles{% endtrans %}</a>
     {% endif %}
 
-    <div id="guide_stats">
-      {% set last_group = "" %}
-      {% for stat in stats %}
+    {% set last_group = "" %}
+    {% if stats.general %}
+      {% for stat in stats.general %}
         {% if last_group != stat.group %}
           {% if loop.index != 1 %}</table>{% endif %}
           <div class="group_title">
@@ -198,9 +273,9 @@
               {%- if stat.value %} ({{ format(stat.value).render(stat.mode) }}){% endif -%}
             </td>
           </tr>
-        {% if loop.index == stats|length %}</table>{% endif %}
+        {% if loop.index == stats.general|length %}</table>{% endif %}
       {% endfor %}
-    </div>
+    {% endif %}
 
     {% if category == "wld" %}
       <br>
@@ -242,8 +317,30 @@
 {% block js %}
 
   <script src="/static/js/utils/utils.selector.js"></script>
-  <script src="/static/js/libs/jquery-2.0.3.min.js"></script>
   <script>
+
+    // Close each accordion list and detect heights.
+    var heights = {};
+    d3.selectAll(".accordion_list")
+      .each(function(d, i){
+        heights[i] = d3.select(this).style("height")
+        d3.select(this).style("height","0px");
+      });
+
+    function open_acc(acc) {
+      var list = acc.nextElementSibling;
+      d3.selectAll(".accordion_btn").each(function(d, i){
+        var list = this.nextElementSibling;
+        if (this === acc) {
+          d3.select(this).classed("active", true);
+          d3.select(list).style("height", heights[i]);
+        }
+        else {
+          d3.select(this).classed("active", false);
+          d3.select(list).style("height", "0px");
+        }
+      })
+    }
 
     // d3.selectAll(".app_links")
     //   .on(d3plus.client.pointer.over, function(){
@@ -350,6 +447,8 @@
           btn = d3.select("#"+id);
           new_build = d3.select(btn.node().parentNode).attr("data-build");
         }
+
+        open_acc(btn.node().parentNode.parentNode.previousElementSibling);
 
         url = btn.attr("data-url");
 
@@ -462,7 +561,7 @@
             var rect = this.getBoundingClientRect();
             var top = rect.top;
             var height = rect.height;
-            // console.log(i, current_top, top, window.innerHeight/2+34)
+
             if (current_top < top && top < window.innerHeight/2+34) {
               new_build = d;
             }
