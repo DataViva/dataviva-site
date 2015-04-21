@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-04-16 17:36-0400\n"
-"PO-Revision-Date: 2015-04-16 17:36-0500\n"
+"POT-Creation-Date: 2015-04-21 12:04-0400\n"
+"PO-Revision-Date: 2015-04-21 12:04-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language-Team: pt <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
@@ -18,25 +18,25 @@ msgstr ""
 "Generated-By: Babel 0.9.6\n"
 
 #: dataviva/about/views.py:33 dataviva/html/templates/site.html:52
-#: dataviva/translations/dictionary.py:137
-#: dataviva/translations/dictionary.py:351
+#: dataviva/translations/dictionary.py:138
+#: dataviva/translations/dictionary.py:353
 msgid "Occupation"
 msgstr "Ocupação"
 
 #: dataviva/about/views.py:33 dataviva/html/templates/site.html:54
-#: dataviva/translations/dictionary.py:169
-#: dataviva/translations/dictionary.py:171
-#: dataviva/translations/dictionary.py:361
+#: dataviva/translations/dictionary.py:170
+#: dataviva/translations/dictionary.py:172
+#: dataviva/translations/dictionary.py:363
 msgid "Major"
 msgstr "Curso"
 
 #: dataviva/about/views.py:34 dataviva/html/templates/site.html:49
-#: dataviva/translations/dictionary.py:353
+#: dataviva/translations/dictionary.py:355
 msgid "Product"
 msgstr "Produto"
 
 #: dataviva/about/views.py:34 dataviva/html/templates/site.html:51
-#: dataviva/translations/dictionary.py:355
+#: dataviva/translations/dictionary.py:357
 msgid "Industry"
 msgstr "Atividade Econômica"
 
@@ -274,13 +274,13 @@ msgstr "Comércio Doméstico"
 
 #: dataviva/apps/views.py:509 dataviva/data/views.py:72
 #: dataviva/html/templates/about.html:38
-#: dataviva/translations/dictionary.py:291
+#: dataviva/translations/dictionary.py:293
 msgid "Higher Education"
 msgstr "Ensino Superior"
 
 #: dataviva/apps/views.py:510 dataviva/data/views.py:73
 #: dataviva/html/templates/about.html:34
-#: dataviva/translations/dictionary.py:305
+#: dataviva/translations/dictionary.py:307
 msgid "School Census"
 msgstr "Censo Escolar"
 
@@ -339,7 +339,7 @@ msgstr ""
 "DataViva"
 
 #: dataviva/html/about/analysis.html:14 dataviva/html/about/analysis.html:18
-#: dataviva/translations/dictionary.py:287
+#: dataviva/translations/dictionary.py:289
 msgid "to"
 msgstr "a"
 
@@ -349,22 +349,22 @@ msgid "Crosswalk"
 msgstr "Conversão"
 
 #: dataviva/html/about/attrs.html:4 dataviva/html/templates/about.html:48
-#: dataviva/translations/dictionary.py:446
+#: dataviva/translations/dictionary.py:448
 msgid "Classifications"
 msgstr "Classificações"
 
 #: dataviva/html/about/attrs.html:10 dataviva/html/data/index.html:90
-#: dataviva/translations/dictionary.py:117
+#: dataviva/translations/dictionary.py:118
 msgid "Depth"
 msgstr "Agregação"
 
 #: dataviva/html/about/attrs.html:16 dataviva/html/data/index.html:104
-#: dataviva/translations/dictionary.py:374
+#: dataviva/translations/dictionary.py:376
 msgid "Download"
 msgstr "Download"
 
 #: dataviva/html/about/crosswalk.html:9 dataviva/html/about/ask/index.html:27
-#: dataviva/html/templates/site.html:21 dataviva/translations/dictionary.py:458
+#: dataviva/html/templates/site.html:21 dataviva/translations/dictionary.py:460
 msgid "Search"
 msgstr "Pesquisar"
 
@@ -905,14 +905,14 @@ msgstr ""
 "econômicas, ocupações, localidades e cruzamentos entre estas variáveis."
 
 #: dataviva/html/about/ask/answer.html:18
-#: dataviva/translations/dictionary.py:433
+#: dataviva/translations/dictionary.py:435
 msgid "Point"
 msgstr "Ponto"
 
 #: dataviva/html/about/ask/answer.html:20
 #: dataviva/html/about/ask/answer.html:71
 #: dataviva/html/admin/admin_replies_question.html:118
-#: dataviva/translations/dictionary.py:434
+#: dataviva/translations/dictionary.py:436
 msgid "Points"
 msgstr "Pontos"
 
@@ -931,13 +931,13 @@ msgstr ""
 
 #: dataviva/html/about/ask/answer.html:49
 #: dataviva/html/admin/admin_replies_question.html:110
-#: dataviva/translations/dictionary.py:431
+#: dataviva/translations/dictionary.py:433
 msgid "Asked"
 msgstr "Perguntado"
 
 #: dataviva/html/about/ask/answer.html:49
 #: dataviva/html/admin/admin_replies_question.html:110
-#: dataviva/translations/dictionary.py:432
+#: dataviva/translations/dictionary.py:434
 msgid "by"
 msgstr "por"
 
@@ -977,7 +977,7 @@ msgstr "Deixe uma Resposta"
 #: dataviva/html/about/ask/answer.html:132
 #: dataviva/html/admin/admin_questions_edit.html:38
 #: dataviva/html/admin/admin_replies.html:27
-#: dataviva/translations/dictionary.py:435
+#: dataviva/translations/dictionary.py:437
 msgid "Reply"
 msgstr "Responder"
 
@@ -1079,12 +1079,12 @@ msgid "Order"
 msgstr "Ordem"
 
 #: dataviva/html/about/ask/index.html:43
-#: dataviva/translations/dictionary.py:437
+#: dataviva/translations/dictionary.py:439
 msgid "Most Active"
 msgstr "Mais Frequente"
 
 #: dataviva/html/about/ask/index.html:45
-#: dataviva/translations/dictionary.py:438
+#: dataviva/translations/dictionary.py:440
 msgid "Most Recent"
 msgstr "Mais Recente"
 
@@ -1351,7 +1351,7 @@ msgid "Complexity"
 msgstr "Complexidade"
 
 #: dataviva/html/about/glossary/complexity.html:3
-#: dataviva/translations/dictionary.py:191
+#: dataviva/translations/dictionary.py:192
 msgid "Product Complexity"
 msgstr "Complexidade do Produto"
 
@@ -1383,7 +1383,7 @@ msgstr "vantagem comparativa"
 
 #: dataviva/html/about/glossary/complexity.html:10
 #: dataviva/stats/profile_helper.py:211 dataviva/stats/profile_helper.py:219
-#: dataviva/translations/dictionary.py:189
+#: dataviva/translations/dictionary.py:190
 msgid "Economic Complexity"
 msgstr "Complexidade Econômica"
 
@@ -1406,7 +1406,7 @@ msgstr ""
 
 #: dataviva/html/about/glossary/distance.html:1
 #: dataviva/html/templates/about.html:162
-#: dataviva/translations/dictionary.py:219
+#: dataviva/translations/dictionary.py:220
 msgid "Distance"
 msgstr "Distância"
 
@@ -1461,22 +1461,22 @@ msgid "Diversity"
 msgstr "Diversidade"
 
 #: dataviva/html/about/glossary/diversity.html:3
-#: dataviva/translations/dictionary.py:194
+#: dataviva/translations/dictionary.py:195
 msgid "Location Diversity"
 msgstr "Diversidade de Localidades"
 
 #: dataviva/html/about/glossary/diversity.html:4
-#: dataviva/translations/dictionary.py:195
+#: dataviva/translations/dictionary.py:196
 msgid "The number of unique municipalities where a given variable is present."
 msgstr "O número de municípios únicos nos quais uma dada variável está presente."
 
 #: dataviva/html/about/glossary/diversity.html:6
-#: dataviva/translations/dictionary.py:199
+#: dataviva/translations/dictionary.py:200
 msgid "Industry Diversity"
 msgstr "Diversidade de Atividades"
 
 #: dataviva/html/about/glossary/diversity.html:7
-#: dataviva/translations/dictionary.py:200
+#: dataviva/translations/dictionary.py:201
 msgid ""
 "The number of unique 6-digit CNAE industries that are present for a given"
 " variable."
@@ -1485,12 +1485,12 @@ msgstr ""
 "uma dada variável."
 
 #: dataviva/html/about/glossary/diversity.html:9
-#: dataviva/translations/dictionary.py:204
+#: dataviva/translations/dictionary.py:205
 msgid "Occupation Diversity"
 msgstr "Diversidade de Ocupações"
 
 #: dataviva/html/about/glossary/diversity.html:10
-#: dataviva/translations/dictionary.py:205
+#: dataviva/translations/dictionary.py:206
 msgid ""
 "The number of unique 4-digit CBO occupations that are present for a given"
 " variable."
@@ -1499,24 +1499,24 @@ msgstr ""
 "uma dada variável."
 
 #: dataviva/html/about/glossary/diversity.html:12
-#: dataviva/translations/dictionary.py:209
+#: dataviva/translations/dictionary.py:210
 msgid "Product Diversity"
 msgstr "Diversidade de Produtos"
 
 #: dataviva/html/about/glossary/diversity.html:13
-#: dataviva/translations/dictionary.py:210
+#: dataviva/translations/dictionary.py:211
 msgid "The number of unique HS4 products that are present for a given variable."
 msgstr ""
 "O número de produtos únicos HS4 que estão presentes para uma dada "
 "variável."
 
 #: dataviva/html/about/glossary/diversity.html:15
-#: dataviva/translations/dictionary.py:214
+#: dataviva/translations/dictionary.py:215
 msgid "Export Destination Diversity"
 msgstr "Diversidade de Destino das Exportações"
 
 #: dataviva/html/about/glossary/diversity.html:16
-#: dataviva/translations/dictionary.py:215
+#: dataviva/translations/dictionary.py:216
 msgid ""
 "The number of unique import countries that are present for a given "
 "variable."
@@ -1546,7 +1546,7 @@ msgstr ""
 
 #: dataviva/html/about/glossary/importance.html:1
 #: dataviva/html/templates/about.html:170
-#: dataviva/translations/dictionary.py:223
+#: dataviva/translations/dictionary.py:224
 msgid "Importance"
 msgstr "Importância"
 
@@ -1574,7 +1574,7 @@ msgstr "Glossário"
 
 #: dataviva/html/about/glossary/opp_gain.html:1
 #: dataviva/html/templates/about.html:174
-#: dataviva/translations/dictionary.py:238
+#: dataviva/translations/dictionary.py:239
 msgid "Opportunity Gain"
 msgstr "Ganho de Oportunidade"
 
@@ -1634,7 +1634,7 @@ msgstr ""
 
 #: dataviva/html/about/glossary/proximity.html:1
 #: dataviva/html/templates/about.html:178
-#: dataviva/translations/dictionary.py:233
+#: dataviva/translations/dictionary.py:234
 msgid "Proximity"
 msgstr "Proximidade"
 
@@ -1749,7 +1749,7 @@ msgid "Starred Visualizations"
 msgstr "Visualizações Favoritadas"
 
 #: dataviva/html/account/index.html:28 dataviva/html/templates/admin.html:25
-#: dataviva/translations/dictionary.py:439
+#: dataviva/translations/dictionary.py:441
 msgid "Questions"
 msgstr "Perguntas"
 
@@ -1797,13 +1797,13 @@ msgstr "Lembrar-me"
 #: dataviva/html/admin/admin_questions.html:29
 #: dataviva/html/admin/admin_replies.html:28
 #: dataviva/html/admin/admin_users.html:12
-#: dataviva/translations/dictionary.py:452
+#: dataviva/translations/dictionary.py:454
 msgid "User"
 msgstr "Usuário"
 
 #: dataviva/html/admin/admin_questions.html:30
 #: dataviva/html/templates/admin.html:26
-#: dataviva/translations/dictionary.py:436
+#: dataviva/translations/dictionary.py:438
 msgid "Replies"
 msgstr "Respostas"
 
@@ -1816,7 +1816,7 @@ msgid "Delete"
 msgstr "Excluir"
 
 #: dataviva/html/admin/admin_questions.html:49
-#: dataviva/translations/dictionary.py:455
+#: dataviva/translations/dictionary.py:457
 msgid "Are you sure to delete this item?"
 msgstr "Tem certeza que deseja remover este item?"
 
@@ -1869,7 +1869,7 @@ msgid "Visibility"
 msgstr "Visibilidade"
 
 #: dataviva/html/admin/admin_replies_question.html:126
-#: dataviva/translations/dictionary.py:454
+#: dataviva/translations/dictionary.py:456
 msgid "Remove"
 msgstr "Remover"
 
@@ -1957,7 +1957,7 @@ msgstr "Abrir a Visualização no Construtor Avançado"
 msgid "Show/Hide Controls"
 msgstr "Mostrar/Ocultar Controles"
 
-#: dataviva/html/apps/embed.html:2848 dataviva/html/templates/base.html:6
+#: dataviva/html/apps/embed.html:2875 dataviva/html/templates/base.html:6
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
 " economy"
@@ -1965,7 +1965,7 @@ msgstr ""
 "O DataViva está disponibilizando dados sobre todo o setor formal da "
 "economia"
 
-#: dataviva/html/apps/embed.html:2850 dataviva/html/templates/base.html:6
+#: dataviva/html/apps/embed.html:2877 dataviva/html/templates/base.html:6
 msgid "through more than 100 million interactive visualizations."
 msgstr "brasileira em mais de 100 milhões de visualizações interativas."
 
@@ -2102,33 +2102,33 @@ msgstr "Localidades Brasileiras"
 
 #: dataviva/html/general/home.html:340 dataviva/html/rankings/index.html:29
 #: dataviva/html/templates/about.html:66 dataviva/profiles/views.py:82
-#: dataviva/translations/dictionary.py:354
+#: dataviva/translations/dictionary.py:356
 msgid "Products"
 msgstr "Produtos"
 
 #: dataviva/html/general/home.html:341 dataviva/profiles/views.py:92
-#: dataviva/translations/dictionary.py:358
+#: dataviva/translations/dictionary.py:360
 msgid "Trade Partners"
 msgstr "Parceiros Comerciais"
 
 #: dataviva/html/general/home.html:342 dataviva/html/general/select.html:24
 #: dataviva/html/rankings/index.html:21 dataviva/html/templates/about.html:58
-#: dataviva/profiles/views.py:71 dataviva/translations/dictionary.py:356
+#: dataviva/profiles/views.py:71 dataviva/translations/dictionary.py:358
 msgid "Industries"
 msgstr "Atividades Econômicas"
 
 #: dataviva/html/general/home.html:343 dataviva/html/general/select.html:29
 #: dataviva/html/rankings/index.html:25 dataviva/html/templates/about.html:62
-#: dataviva/profiles/views.py:61 dataviva/translations/dictionary.py:158
-#: dataviva/translations/dictionary.py:352
+#: dataviva/profiles/views.py:61 dataviva/translations/dictionary.py:159
+#: dataviva/translations/dictionary.py:354
 msgid "Occupations"
 msgstr "Ocupações"
 
 #: dataviva/html/general/home.html:344 dataviva/html/rankings/index.html:37
 #: dataviva/html/templates/about.html:78 dataviva/profiles/views.py:103
-#: dataviva/translations/dictionary.py:183
 #: dataviva/translations/dictionary.py:184
-#: dataviva/translations/dictionary.py:360
+#: dataviva/translations/dictionary.py:185
+#: dataviva/translations/dictionary.py:362
 msgid "Universities"
 msgstr "Universidades"
 
@@ -2139,15 +2139,15 @@ msgstr "Novo"
 
 #: dataviva/html/general/home.html:346 dataviva/html/rankings/index.html:41
 #: dataviva/html/templates/about.html:74 dataviva/profiles/views.py:113
-#: dataviva/translations/dictionary.py:172
-#: dataviva/translations/dictionary.py:174
-#: dataviva/translations/dictionary.py:362
+#: dataviva/translations/dictionary.py:173
+#: dataviva/translations/dictionary.py:175
+#: dataviva/translations/dictionary.py:364
 msgid "Majors"
 msgstr "Cursos"
 
 #: dataviva/html/general/home.html:348 dataviva/html/rankings/index.html:45
 #: dataviva/html/templates/about.html:82 dataviva/profiles/views.py:124
-#: dataviva/translations/dictionary.py:366
+#: dataviva/translations/dictionary.py:368
 msgid "Basic Courses"
 msgstr "Cursos Básicos"
 
@@ -2163,7 +2163,7 @@ msgstr "Qual classificação você gostaria de pesquisar?"
 msgid "Product Exports"
 msgstr "Produtos Exportados"
 
-#: dataviva/html/general/select.html:33 dataviva/translations/dictionary.py:153
+#: dataviva/html/general/select.html:33 dataviva/translations/dictionary.py:154
 msgid "Municipalities"
 msgstr "Municípios"
 
@@ -2171,13 +2171,13 @@ msgstr "Municípios"
 msgid "Geographical locations within Brazil"
 msgstr "Localizações geográficas no Brasil"
 
-#: dataviva/html/general/select.html:38 dataviva/translations/dictionary.py:168
+#: dataviva/html/general/select.html:38 dataviva/translations/dictionary.py:169
 msgid "Countries"
 msgstr "Países"
 
 #: dataviva/html/general/select.html:39 dataviva/html/rankings/index.html:33
 #: dataviva/html/templates/about.html:70
-#: dataviva/translations/dictionary.py:286
+#: dataviva/translations/dictionary.py:288
 msgid "Export Destinations"
 msgstr "Destinos das Exportações"
 
@@ -2228,7 +2228,11 @@ msgstr "Pesquisas comuns"
 msgid "Ex"
 msgstr "Ex"
 
-#: dataviva/html/profiles/profile.html:195
+#: dataviva/html/profiles/profile.html:174
+msgid "Show Related Profiles"
+msgstr ""
+
+#: dataviva/html/profiles/profile.html:208
 msgid ""
 "To view additional data regarding world trade, click here to visit the "
 "Observatory."
@@ -2316,21 +2320,21 @@ msgstr "Perfil"
 msgid "Logout"
 msgstr "Sair"
 
-#: dataviva/html/templates/site.html:48 dataviva/translations/dictionary.py:349
+#: dataviva/html/templates/site.html:48 dataviva/translations/dictionary.py:351
 msgid "Location"
 msgstr "Localidade"
 
-#: dataviva/html/templates/site.html:50 dataviva/translations/dictionary.py:357
+#: dataviva/html/templates/site.html:50 dataviva/translations/dictionary.py:359
 msgid "Trade Partner"
 msgstr "Parceiro Comercial"
 
-#: dataviva/html/templates/site.html:53 dataviva/translations/dictionary.py:181
-#: dataviva/translations/dictionary.py:182
-#: dataviva/translations/dictionary.py:359
+#: dataviva/html/templates/site.html:53 dataviva/translations/dictionary.py:182
+#: dataviva/translations/dictionary.py:183
+#: dataviva/translations/dictionary.py:361
 msgid "University"
 msgstr "Universidade"
 
-#: dataviva/html/templates/site.html:55 dataviva/translations/dictionary.py:365
+#: dataviva/html/templates/site.html:55 dataviva/translations/dictionary.py:367
 msgid "Basic Course"
 msgstr "Cursos Básicos"
 
@@ -2338,18 +2342,18 @@ msgstr "Cursos Básicos"
 msgid "Line"
 msgstr "Linha"
 
-#: dataviva/profiles/models.py:160 dataviva/profiles/models.py:229
-#: dataviva/profiles/models.py:293
+#: dataviva/profiles/models.py:160 dataviva/profiles/models.py:230
+#: dataviva/profiles/models.py:294
 msgid "Exports by:"
 msgstr "Exportações por:"
 
-#: dataviva/profiles/models.py:171 dataviva/profiles/models.py:242
-#: dataviva/profiles/models.py:280
+#: dataviva/profiles/models.py:171 dataviva/profiles/models.py:243
+#: dataviva/profiles/models.py:281
 msgid "Imports by:"
 msgstr "Importações por:"
 
-#: dataviva/profiles/models.py:182 dataviva/profiles/models.py:313
-#: dataviva/profiles/models.py:360
+#: dataviva/profiles/models.py:182 dataviva/profiles/models.py:314
+#: dataviva/profiles/models.py:361
 msgid "Employment by:"
 msgstr "Emprego por:"
 
@@ -2357,8 +2361,8 @@ msgstr "Emprego por:"
 msgid "Wages by:"
 msgstr "Salários por:"
 
-#: dataviva/profiles/models.py:195 dataviva/profiles/models.py:259
-#: dataviva/profiles/models.py:340 dataviva/profiles/models.py:387
+#: dataviva/profiles/models.py:195 dataviva/profiles/models.py:260
+#: dataviva/profiles/models.py:341 dataviva/profiles/models.py:388
 msgid "Economic Opportunities:"
 msgstr "Oportunidades Econômicas:"
 
@@ -2374,30 +2378,30 @@ msgstr "Matrículas na Educação Profissional por:"
 msgid "Basic Education by:"
 msgstr "Educação Básica por:"
 
-#: dataviva/profiles/models.py:264
+#: dataviva/profiles/models.py:265
 msgid "Common Industries by Occupation:"
 msgstr "Atividades Comuns por Ocupação:"
 
-#: dataviva/profiles/models.py:326 dataviva/profiles/models.py:373
+#: dataviva/profiles/models.py:327 dataviva/profiles/models.py:374
 msgid "Average Wage by:"
 msgstr "Salário Médio por:"
 
-#: dataviva/profiles/models.py:345
+#: dataviva/profiles/models.py:346
 msgid "Common Products by Trade Partner:"
 msgstr "Produtos Comuns por Parceiro Comercial:"
 
-#: dataviva/profiles/models.py:392
-msgid "Common Majors by University:"
-msgstr "Cursos Comuns por Universidade:"
+#: dataviva/profiles/models.py:393
+msgid "Universities offering:"
+msgstr "Universidades que oferecem:"
 
-#: dataviva/profiles/models.py:402 dataviva/profiles/models.py:408
-#: dataviva/profiles/models.py:427
+#: dataviva/profiles/models.py:403 dataviva/profiles/models.py:409
+#: dataviva/profiles/models.py:428
 msgid "Enrollment by:"
 msgstr "Matrículas por:"
 
-#: dataviva/profiles/models.py:414
-msgid "Common Occupations by Industry:"
-msgstr "Ocupações Comuns por Atividade:"
+#: dataviva/profiles/models.py:415
+msgid "Industries that employ:"
+msgstr ""
 
 #: dataviva/profiles/views.py:48
 msgid ""
@@ -2485,39 +2489,39 @@ msgstr "um curso"
 msgid "a course"
 msgstr "um curso"
 
-#: dataviva/profiles/views.py:242
+#: dataviva/profiles/views.py:243
 msgid "Locations with Similar Product Exports"
 msgstr ""
 
-#: dataviva/profiles/views.py:243
+#: dataviva/profiles/views.py:244
 msgid "Locations with Similar Trade Partners"
 msgstr ""
 
-#: dataviva/profiles/views.py:244
+#: dataviva/profiles/views.py:245
 msgid "Locations with Similar Industries"
 msgstr ""
 
-#: dataviva/profiles/views.py:245
+#: dataviva/profiles/views.py:246
 msgid "Locations with Similar Occupations"
 msgstr ""
 
-#: dataviva/profiles/views.py:247
+#: dataviva/profiles/views.py:248
 msgid "Similar Industries by Co-location"
 msgstr ""
 
-#: dataviva/profiles/views.py:249
+#: dataviva/profiles/views.py:250
 msgid "Similar Occupations by Co-location"
 msgstr ""
 
-#: dataviva/profiles/views.py:251
+#: dataviva/profiles/views.py:252
 msgid "Similar Products by Co-location"
 msgstr ""
 
-#: dataviva/profiles/views.py:253
+#: dataviva/profiles/views.py:254
 msgid "Destinations with Similar Brazilian Origins"
 msgstr ""
 
-#: dataviva/profiles/views.py:255
+#: dataviva/profiles/views.py:256
 msgid "Universities with Similar Course Offerings"
 msgstr ""
 
@@ -2544,7 +2548,7 @@ msgstr "Principal Ocupação por Empregos"
 
 #: dataviva/stats/profile_helper.py:51 dataviva/stats/profile_helper.py:122
 #: dataviva/stats/profile_helper.py:129 dataviva/stats/profile_helper.py:150
-#: dataviva/stats/profile_helper.py:158 dataviva/translations/dictionary.py:263
+#: dataviva/stats/profile_helper.py:158 dataviva/translations/dictionary.py:264
 msgid "Total Monthly Wage"
 msgstr "Renda Mensal Total"
 
@@ -2558,28 +2562,28 @@ msgstr "Principal Destino por Valor Exportado"
 
 #: dataviva/stats/profile_helper.py:80 dataviva/stats/profile_helper.py:180
 #: dataviva/stats/profile_helper.py:185 dataviva/stats/profile_helper.py:208
-#: dataviva/stats/profile_helper.py:217 dataviva/translations/dictionary.py:274
+#: dataviva/stats/profile_helper.py:217 dataviva/translations/dictionary.py:276
 msgid "Total Exports"
 msgstr "Total de Exportações"
 
 #: dataviva/stats/profile_helper.py:81 dataviva/stats/profile_helper.py:205
-#: dataviva/stats/profile_helper.py:218 dataviva/translations/dictionary.py:278
+#: dataviva/stats/profile_helper.py:218 dataviva/translations/dictionary.py:280
 msgid "Total Imports"
 msgstr "Total de Importações"
 
-#: dataviva/stats/profile_helper.py:85 dataviva/translations/dictionary.py:127
+#: dataviva/stats/profile_helper.py:85 dataviva/translations/dictionary.py:128
 msgid "Region"
 msgstr "Região"
 
-#: dataviva/stats/profile_helper.py:88 dataviva/translations/dictionary.py:128
+#: dataviva/stats/profile_helper.py:88 dataviva/translations/dictionary.py:129
 msgid "State"
 msgstr "Estado"
 
-#: dataviva/stats/profile_helper.py:91 dataviva/translations/dictionary.py:129
+#: dataviva/stats/profile_helper.py:91 dataviva/translations/dictionary.py:130
 msgid "Mesoregion"
 msgstr "Mesorregião"
 
-#: dataviva/stats/profile_helper.py:94 dataviva/translations/dictionary.py:130
+#: dataviva/stats/profile_helper.py:94 dataviva/translations/dictionary.py:131
 msgid "Microregion"
 msgstr "Microrregião"
 
@@ -2589,7 +2593,7 @@ msgstr "Principal Município por Empregos"
 
 #: dataviva/stats/profile_helper.py:123 dataviva/stats/profile_helper.py:130
 #: dataviva/stats/profile_helper.py:151 dataviva/stats/profile_helper.py:159
-#: dataviva/translations/dictionary.py:264
+#: dataviva/translations/dictionary.py:265
 msgid "Average Monthly Wage"
 msgstr "Renda Mensal Média"
 
@@ -2632,7 +2636,7 @@ msgstr "Principal Universidade por Matrículas"
 msgid "Top Municipality by Enrollment"
 msgstr "Principal Município por Matrículas"
 
-#: dataviva/stats/profile_helper.py:262 dataviva/translations/dictionary.py:309
+#: dataviva/stats/profile_helper.py:262 dataviva/translations/dictionary.py:311
 msgid "Average Age"
 msgstr "Idade Média"
 
@@ -2840,54 +2844,57 @@ msgid "Year"
 msgstr "Ano"
 
 #: dataviva/translations/dictionary.py:103
+msgid "Month"
+msgstr "Mês"
+
+#: dataviva/translations/dictionary.py:104
 msgid "Jan"
 msgstr "Jan"
 
-#: dataviva/translations/dictionary.py:104
+#: dataviva/translations/dictionary.py:105
 msgid "Feb"
 msgstr "Fev"
 
-#: dataviva/translations/dictionary.py:105
+#: dataviva/translations/dictionary.py:106
 msgid "Mar"
 msgstr "Mar"
 
-#: dataviva/translations/dictionary.py:106
+#: dataviva/translations/dictionary.py:107
 msgid "Apr"
 msgstr "Abr"
 
-#: dataviva/translations/dictionary.py:107
+#: dataviva/translations/dictionary.py:108
 msgid "May"
 msgstr "Mai"
 
-#: dataviva/translations/dictionary.py:108
+#: dataviva/translations/dictionary.py:109
 msgid "Jun"
 msgstr "Jun"
 
-#: dataviva/translations/dictionary.py:109
+#: dataviva/translations/dictionary.py:110
 msgid "Jul"
 msgstr "Jul"
 
-#: dataviva/translations/dictionary.py:110
+#: dataviva/translations/dictionary.py:111
 msgid "Aug"
 msgstr "Ago"
 
-#: dataviva/translations/dictionary.py:111
+#: dataviva/translations/dictionary.py:112
 msgid "Sep"
 msgstr "Set"
 
-#: dataviva/translations/dictionary.py:112
+#: dataviva/translations/dictionary.py:113
 msgid "Oct"
 msgstr "Out"
 
-#: dataviva/translations/dictionary.py:113
+#: dataviva/translations/dictionary.py:114
 msgid "Nov"
 msgstr "Nov"
 
-#: dataviva/translations/dictionary.py:114
+#: dataviva/translations/dictionary.py:115
 msgid "Dec"
 msgstr "Dez"
 
-#: dataviva/translations/dictionary.py:118
 #: dataviva/translations/dictionary.py:119
 #: dataviva/translations/dictionary.py:120
 #: dataviva/translations/dictionary.py:121
@@ -2896,171 +2903,172 @@ msgstr "Dez"
 #: dataviva/translations/dictionary.py:124
 #: dataviva/translations/dictionary.py:125
 #: dataviva/translations/dictionary.py:126
+#: dataviva/translations/dictionary.py:127
 msgid "Changes the level of aggregation."
 msgstr "Alterar o nível de agregação."
 
-#: dataviva/translations/dictionary.py:131
+#: dataviva/translations/dictionary.py:132
 msgid "Planning Region"
 msgstr "Região de Planejamento"
 
-#: dataviva/translations/dictionary.py:132
+#: dataviva/translations/dictionary.py:133
 msgid "Municipality"
 msgstr "Municipalidade"
 
-#: dataviva/translations/dictionary.py:133
+#: dataviva/translations/dictionary.py:134
 msgid "Main Group"
 msgstr "Grande Grupo"
 
-#: dataviva/translations/dictionary.py:134
+#: dataviva/translations/dictionary.py:135
 msgid "Principal Subgroup"
 msgstr "SubGrupo Principal"
 
-#: dataviva/translations/dictionary.py:135
+#: dataviva/translations/dictionary.py:136
 msgid "Subgroup"
 msgstr "SubGrupo"
 
-#: dataviva/translations/dictionary.py:136
+#: dataviva/translations/dictionary.py:137
 msgid "Family"
 msgstr "Família"
 
-#: dataviva/translations/dictionary.py:138
-#: dataviva/translations/dictionary.py:142
+#: dataviva/translations/dictionary.py:139
+#: dataviva/translations/dictionary.py:143
 msgid "Section"
 msgstr "Seção"
 
-#: dataviva/translations/dictionary.py:139
+#: dataviva/translations/dictionary.py:140
 msgid "Division"
 msgstr "Divisão"
 
-#: dataviva/translations/dictionary.py:140
+#: dataviva/translations/dictionary.py:141
 msgid "Group"
 msgstr "Grupo"
 
-#: dataviva/translations/dictionary.py:141
+#: dataviva/translations/dictionary.py:142
 msgid "Class"
 msgstr "Classe"
 
-#: dataviva/translations/dictionary.py:143
+#: dataviva/translations/dictionary.py:144
 msgid "Chapter"
 msgstr "Capítulo"
 
-#: dataviva/translations/dictionary.py:144
+#: dataviva/translations/dictionary.py:145
 msgid "Position"
 msgstr "Posição"
 
-#: dataviva/translations/dictionary.py:145
+#: dataviva/translations/dictionary.py:146
 msgid "Sub-Position"
 msgstr "Sub-Posição"
 
-#: dataviva/translations/dictionary.py:146
+#: dataviva/translations/dictionary.py:147
 msgid "Continent"
 msgstr "Continente"
 
-#: dataviva/translations/dictionary.py:147
+#: dataviva/translations/dictionary.py:148
 msgid "Country"
 msgstr "País"
 
-#: dataviva/translations/dictionary.py:148
+#: dataviva/translations/dictionary.py:149
 msgid "Regions"
 msgstr "Regiões"
 
-#: dataviva/translations/dictionary.py:149
+#: dataviva/translations/dictionary.py:150
 msgid "States"
 msgstr "Estados"
 
-#: dataviva/translations/dictionary.py:150
+#: dataviva/translations/dictionary.py:151
 msgid "Mesoregions"
 msgstr "Mesorregiões"
 
-#: dataviva/translations/dictionary.py:151
+#: dataviva/translations/dictionary.py:152
 msgid "Microregions"
 msgstr "Microrregiões"
 
-#: dataviva/translations/dictionary.py:152
+#: dataviva/translations/dictionary.py:153
 msgid "Planning Regions"
 msgstr "Regiões de Planejamento"
 
-#: dataviva/translations/dictionary.py:154
+#: dataviva/translations/dictionary.py:155
 msgid "Main Groups"
 msgstr "Grandes Grupos"
 
-#: dataviva/translations/dictionary.py:155
+#: dataviva/translations/dictionary.py:156
 msgid "Principal Subgroups"
 msgstr "SubGrupos Principais"
 
-#: dataviva/translations/dictionary.py:156
+#: dataviva/translations/dictionary.py:157
 msgid "Subgroups"
 msgstr "SubGrupos"
 
-#: dataviva/translations/dictionary.py:157
+#: dataviva/translations/dictionary.py:158
 msgid "Families"
 msgstr "Famílias"
 
-#: dataviva/translations/dictionary.py:159
-#: dataviva/translations/dictionary.py:163
+#: dataviva/translations/dictionary.py:160
+#: dataviva/translations/dictionary.py:164
 msgid "Sections"
 msgstr "Seções"
 
-#: dataviva/translations/dictionary.py:160
+#: dataviva/translations/dictionary.py:161
 msgid "Divisions"
 msgstr "Divisões"
 
-#: dataviva/translations/dictionary.py:161
+#: dataviva/translations/dictionary.py:162
 msgid "Groups"
 msgstr "Grupos"
 
-#: dataviva/translations/dictionary.py:162
-#: dataviva/translations/dictionary.py:307
+#: dataviva/translations/dictionary.py:163
+#: dataviva/translations/dictionary.py:309
 msgid "Classes"
 msgstr "Classes"
 
-#: dataviva/translations/dictionary.py:164
+#: dataviva/translations/dictionary.py:165
 msgid "Chapters"
 msgstr "Capítulos"
 
-#: dataviva/translations/dictionary.py:165
+#: dataviva/translations/dictionary.py:166
 msgid "Positions"
 msgstr "Posições"
 
-#: dataviva/translations/dictionary.py:166
+#: dataviva/translations/dictionary.py:167
 msgid "Sub-Positions"
 msgstr "Sub-Posições"
 
-#: dataviva/translations/dictionary.py:167
+#: dataviva/translations/dictionary.py:168
 msgid "Continents"
 msgstr "Continentes"
 
-#: dataviva/translations/dictionary.py:170
-#: dataviva/translations/dictionary.py:176
+#: dataviva/translations/dictionary.py:171
+#: dataviva/translations/dictionary.py:177
 msgid "Field"
 msgstr "Campo"
 
-#: dataviva/translations/dictionary.py:173
-#: dataviva/translations/dictionary.py:179
+#: dataviva/translations/dictionary.py:174
+#: dataviva/translations/dictionary.py:180
 msgid "Fields"
 msgstr "Campos"
 
-#: dataviva/translations/dictionary.py:175
-#: dataviva/translations/dictionary.py:177
+#: dataviva/translations/dictionary.py:176
+#: dataviva/translations/dictionary.py:178
 msgid "Course"
 msgstr "Curso"
 
-#: dataviva/translations/dictionary.py:178
-#: dataviva/translations/dictionary.py:180
+#: dataviva/translations/dictionary.py:179
+#: dataviva/translations/dictionary.py:181
 msgid "Courses"
 msgstr "Cursos"
 
-#: dataviva/translations/dictionary.py:185
-#: dataviva/translations/dictionary.py:363
+#: dataviva/translations/dictionary.py:186
+#: dataviva/translations/dictionary.py:365
 msgid "School"
 msgstr "Escola"
 
-#: dataviva/translations/dictionary.py:186
-#: dataviva/translations/dictionary.py:364
+#: dataviva/translations/dictionary.py:187
+#: dataviva/translations/dictionary.py:366
 msgid "Schools"
 msgstr "Escolas"
 
-#: dataviva/translations/dictionary.py:190
+#: dataviva/translations/dictionary.py:191
 msgid ""
 "Economic Complexity measures how diversified and complex a location's "
 "export production is."
@@ -3068,7 +3076,7 @@ msgstr ""
 "Complexidade Econômica mede quão diversificada e complexa são as "
 "exportações de uma localidade."
 
-#: dataviva/translations/dictionary.py:192
+#: dataviva/translations/dictionary.py:193
 msgid ""
 "Product Complexity is a measure of how complex a product is, based on how"
 " many countries export the product and how diversified those exporters "
@@ -3078,15 +3086,15 @@ msgstr ""
 "baseada no número de países que exportam o produto e quão diversificados "
 "são estes exportadores."
 
-#: dataviva/translations/dictionary.py:196
+#: dataviva/translations/dictionary.py:197
 msgid "Effective Location Diversity"
 msgstr "Diversidade Efetiva de Localidades"
 
-#: dataviva/translations/dictionary.py:197
-#: dataviva/translations/dictionary.py:202
-#: dataviva/translations/dictionary.py:207
-#: dataviva/translations/dictionary.py:212
-#: dataviva/translations/dictionary.py:217
+#: dataviva/translations/dictionary.py:198
+#: dataviva/translations/dictionary.py:203
+#: dataviva/translations/dictionary.py:208
+#: dataviva/translations/dictionary.py:213
+#: dataviva/translations/dictionary.py:218
 msgid ""
 "The diversity of a given variable corrected for the share that each unit "
 "represents."
@@ -3094,23 +3102,23 @@ msgstr ""
 "A diversidade de uma dada variável corrigida pela participação que cada "
 "unidade representa."
 
-#: dataviva/translations/dictionary.py:201
+#: dataviva/translations/dictionary.py:202
 msgid "Effective Industry Diversity"
 msgstr "Diversidade Efetiva de Atividades"
 
-#: dataviva/translations/dictionary.py:206
+#: dataviva/translations/dictionary.py:207
 msgid "Effective Occupation Diversity"
 msgstr "Diversidade Efetiva de Ocupações"
 
-#: dataviva/translations/dictionary.py:211
+#: dataviva/translations/dictionary.py:212
 msgid "Effective Product Diversity"
 msgstr "Diversidade Efetiva de Produtos"
 
-#: dataviva/translations/dictionary.py:216
+#: dataviva/translations/dictionary.py:217
 msgid "Effective Export Destination Diversity"
 msgstr "Diversidade Efetiva de Destino das Exportações"
 
-#: dataviva/translations/dictionary.py:220
+#: dataviva/translations/dictionary.py:221
 msgid ""
 "Distance is a measure used to indicate how \"far away\" any given "
 "location is from a particular industry, occupation or product."
@@ -3118,15 +3126,15 @@ msgstr ""
 "Distância é uma medida utilizada para indicar o quão longe uma localidade"
 " específica está de um determinado setor, ocupação ou produto."
 
-#: dataviva/translations/dictionary.py:221
+#: dataviva/translations/dictionary.py:222
 msgid "International Distance"
 msgstr "Distância Internacional"
 
-#: dataviva/translations/dictionary.py:222
+#: dataviva/translations/dictionary.py:223
 msgid "Employed"
 msgstr "Empregado"
 
-#: dataviva/translations/dictionary.py:224
+#: dataviva/translations/dictionary.py:225
 msgid ""
 "Importance measures the ubiquity of a given occupation in a particular "
 "industry. Occupations with a high importance in an industry are commonly "
@@ -3136,15 +3144,15 @@ msgstr ""
 "específico. As ocupações com um alto grau de importância em uma "
 "determinada atividade são geralmente empregadas na atividade mencionada."
 
-#: dataviva/translations/dictionary.py:225
+#: dataviva/translations/dictionary.py:226
 msgid "Employees Available In Other Industries"
 msgstr "Profissionais em Outras Indústrias"
 
-#: dataviva/translations/dictionary.py:226
+#: dataviva/translations/dictionary.py:227
 msgid "Estimated Employees"
 msgstr "Estimativa de Empregos"
 
-#: dataviva/translations/dictionary.py:227
+#: dataviva/translations/dictionary.py:228
 msgid ""
 "The number of employees needed in order to have RCA in an industry in a "
 "particular location, based on the averages of locations with similar "
@@ -3154,12 +3162,11 @@ msgstr ""
 "localidade tenha vantagem comparativa, com base na média de localidades "
 "similares que possuem vantagem comparativa na atividade."
 
-#: dataviva/translations/dictionary.py:228
+#: dataviva/translations/dictionary.py:229
 msgid "Similar Locations"
 msgstr "Localidades Similares"
 
-#: dataviva/translations/dictionary.py:229
-#, fuzzy
+#: dataviva/translations/dictionary.py:230
 msgid ""
 "These are the similar locations used to calculate the number of Estimated"
 " Employees:"
@@ -3167,28 +3174,27 @@ msgstr ""
 "Localidades utilizadas para calcular o número de Empregos Estimados para "
 "esta localidade:"
 
-#: dataviva/translations/dictionary.py:230
-#, fuzzy
+#: dataviva/translations/dictionary.py:231
 msgid ""
 "These are the top 10 most similar locations used to calculate the number "
 "of Estimated Employees:"
 msgstr ""
-"Localidades utilizadas para calcular o número de Empregos Estimados para "
-"esta localidade:"
+"10 localidades principais utilizadas para calcular o número de Empregos "
+"Estimados para esta localidade:"
 
-#: dataviva/translations/dictionary.py:231
+#: dataviva/translations/dictionary.py:232
 msgid "Wage Growth"
 msgstr "Crescimento dos Salários"
 
-#: dataviva/translations/dictionary.py:232
+#: dataviva/translations/dictionary.py:233
 msgid "Cumulative Wage Growth"
 msgstr "Crescimento Salarial Acumulado"
 
-#: dataviva/translations/dictionary.py:234
+#: dataviva/translations/dictionary.py:235
 msgid "Domestic RCA"
 msgstr "RCA Doméstico"
 
-#: dataviva/translations/dictionary.py:235
+#: dataviva/translations/dictionary.py:236
 msgid ""
 "Revealed Comparative Advantage is a numeric value used to connote whether"
 " a particular product or industry is especially prominent in a location."
@@ -3197,11 +3203,11 @@ msgstr ""
 "denotar se um produto ou atividade em particular é especialmente "
 "proeminente em uma localidade."
 
-#: dataviva/translations/dictionary.py:236
+#: dataviva/translations/dictionary.py:237
 msgid "International RCA"
 msgstr "RCA Internacional"
 
-#: dataviva/translations/dictionary.py:239
+#: dataviva/translations/dictionary.py:240
 msgid ""
 "Opportunity gain is a measure that indicates how much diversity is "
 "offered by an industry or product should the given location develop it."
@@ -3210,330 +3216,334 @@ msgstr ""
 "oferecida por uma determinada atividade ou produto se uma determinada "
 "localidade fosse desenvolvê-lo."
 
-#: dataviva/translations/dictionary.py:240
+#: dataviva/translations/dictionary.py:241
 msgid "International Opportunity Gain"
 msgstr "Ganho de Oportunidade Internacional"
 
-#: dataviva/translations/dictionary.py:242
+#: dataviva/translations/dictionary.py:243
 msgid "Nominal Export Growth (1 year)"
 msgstr "Crescimento Nominal das Exportações (1 ano)"
 
-#: dataviva/translations/dictionary.py:243
+#: dataviva/translations/dictionary.py:244
 msgid "Nominal Export Growth (5 year)"
 msgstr "Crescimento Nominal das Exportações (5 anos)"
 
-#: dataviva/translations/dictionary.py:244
+#: dataviva/translations/dictionary.py:245
 msgid "Nominal Import Growth (1 year)"
 msgstr "Crescimento Nominal das Importações (1 ano)"
 
-#: dataviva/translations/dictionary.py:245
+#: dataviva/translations/dictionary.py:246
 msgid "Nominal Import Growth (5 year)"
 msgstr "Crescimento Nominal das Importações (5 anos)"
 
-#: dataviva/translations/dictionary.py:247
+#: dataviva/translations/dictionary.py:248
 msgid "Nominal Wage Growth (1 year)"
 msgstr "Crescimento Nominal dos Salários (1 ano)"
 
-#: dataviva/translations/dictionary.py:248
+#: dataviva/translations/dictionary.py:249
 msgid "Nominal Wage Growth (5 year)"
 msgstr "Crescimento Nominal dos Salários (5 anos)"
 
-#: dataviva/translations/dictionary.py:249
+#: dataviva/translations/dictionary.py:250
 msgid "Nominal Employee Growth (1 year)"
 msgstr "Crescimento Nominal dos Empregos (1 ano)"
 
-#: dataviva/translations/dictionary.py:250
+#: dataviva/translations/dictionary.py:251
 msgid "Nominal Employee Growth (5 year)"
 msgstr "Crescimento Nominal dos Empregos (5 anos)"
 
-#: dataviva/translations/dictionary.py:252
+#: dataviva/translations/dictionary.py:253
 msgid "Nominal Enrollment Growth (1 year)"
 msgstr "Crescimento Nominal das Matrículas (1 ano)"
 
-#: dataviva/translations/dictionary.py:253
+#: dataviva/translations/dictionary.py:254
 msgid "Nominal Enrollment Growth (5 years)"
 msgstr "Crescimento Nominal das Matrículas (5 anos)"
 
-#: dataviva/translations/dictionary.py:254
+#: dataviva/translations/dictionary.py:255
 msgid "Nominal Graduation Growth (1 year)"
 msgstr "Crescimento Nominal dos Concluintes (1 ano)"
 
-#: dataviva/translations/dictionary.py:257
+#: dataviva/translations/dictionary.py:258
 msgid "Wages and Employment (RAIS)"
 msgstr "Salários e Emprego (RAIS)"
 
-#: dataviva/translations/dictionary.py:258
+#: dataviva/translations/dictionary.py:259
 msgid "Data provided by RAIS"
 msgstr "Dados Fornecidos por RAIS"
 
-#: dataviva/translations/dictionary.py:259
+#: dataviva/translations/dictionary.py:260
 msgid "Total Employees"
 msgstr "Total de Empregos"
 
-#: dataviva/translations/dictionary.py:260
+#: dataviva/translations/dictionary.py:261
 msgid "Total Establishments"
 msgstr "Total de Estabelecimentos"
 
-#: dataviva/translations/dictionary.py:261
+#: dataviva/translations/dictionary.py:262
 msgid "Employees per Establishment"
 msgstr "Empregos por Estabelecimento"
 
-#: dataviva/translations/dictionary.py:262
+#: dataviva/translations/dictionary.py:263
 msgid "Total Monthly Wages"
 msgstr "Renda Mensal Total"
 
-#: dataviva/translations/dictionary.py:265
+#: dataviva/translations/dictionary.py:266
+msgid "Monthly Wage"
+msgstr "Renda Mensal"
+
+#: dataviva/translations/dictionary.py:267
 msgid "Brazilian Average Wage"
 msgstr "Salário Médio Brasileiro"
 
-#: dataviva/translations/dictionary.py:268
+#: dataviva/translations/dictionary.py:270
 msgid "International Trade (SECEX)"
 msgstr "Comércio Internacional (SECEX)"
 
-#: dataviva/translations/dictionary.py:269
+#: dataviva/translations/dictionary.py:271
 msgid "Data provided by SECEX"
 msgstr "Dados Fornecidos por SECEX"
 
-#: dataviva/translations/dictionary.py:270
+#: dataviva/translations/dictionary.py:272
 msgid "Trade Value"
 msgstr "Valor do Comércio"
 
-#: dataviva/translations/dictionary.py:271
-#: dataviva/translations/dictionary.py:281
+#: dataviva/translations/dictionary.py:273
+#: dataviva/translations/dictionary.py:283
 msgid "Exports"
 msgstr "Exportações"
 
-#: dataviva/translations/dictionary.py:272
+#: dataviva/translations/dictionary.py:274
 msgid "Export Weight"
 msgstr "Peso das Exportações"
 
-#: dataviva/translations/dictionary.py:273
+#: dataviva/translations/dictionary.py:275
 msgid "Exports per kg"
 msgstr "Exportações por peso"
 
-#: dataviva/translations/dictionary.py:275
-#: dataviva/translations/dictionary.py:282
+#: dataviva/translations/dictionary.py:277
+#: dataviva/translations/dictionary.py:284
 msgid "Imports"
 msgstr "Importações"
 
-#: dataviva/translations/dictionary.py:276
+#: dataviva/translations/dictionary.py:278
 msgid "Import Weight"
 msgstr "Peso das Importações"
 
-#: dataviva/translations/dictionary.py:277
+#: dataviva/translations/dictionary.py:279
 msgid "Imports per kg"
 msgstr "Importações por peso"
 
-#: dataviva/translations/dictionary.py:279
+#: dataviva/translations/dictionary.py:281
 msgid "Trade Balance"
 msgstr "Balança Comercial"
 
-#: dataviva/translations/dictionary.py:280
+#: dataviva/translations/dictionary.py:282
 msgid "Exports/Imports"
 msgstr "Exportações/Importações"
 
-#: dataviva/translations/dictionary.py:283
+#: dataviva/translations/dictionary.py:285
 msgid "Origin"
 msgstr "Origem"
 
-#: dataviva/translations/dictionary.py:284
+#: dataviva/translations/dictionary.py:286
 msgid "Destination"
 msgstr "Destino"
 
-#: dataviva/translations/dictionary.py:285
+#: dataviva/translations/dictionary.py:287
 msgid "Import Origins"
 msgstr "Origens de Importação"
 
-#: dataviva/translations/dictionary.py:288
+#: dataviva/translations/dictionary.py:290
 msgid "from"
 msgstr "de"
 
-#: dataviva/translations/dictionary.py:292
-#: dataviva/translations/dictionary.py:306
+#: dataviva/translations/dictionary.py:294
+#: dataviva/translations/dictionary.py:308
 msgid "Data provided by INEP/MEC"
 msgstr "Dados Fornecidos por INEP/MEC"
 
-#: dataviva/translations/dictionary.py:293
+#: dataviva/translations/dictionary.py:295
 msgid "Enrolled"
 msgstr "Matrículas"
 
-#: dataviva/translations/dictionary.py:294
+#: dataviva/translations/dictionary.py:296
 msgid "Entrants"
 msgstr "Ingressantes"
 
-#: dataviva/translations/dictionary.py:295
+#: dataviva/translations/dictionary.py:297
 msgid "Graduates"
 msgstr "Concluintes"
 
-#: dataviva/translations/dictionary.py:296
 #: dataviva/translations/dictionary.py:298
+#: dataviva/translations/dictionary.py:300
 msgid "Funding"
 msgstr "Financiamento"
 
-#: dataviva/translations/dictionary.py:297
+#: dataviva/translations/dictionary.py:299
 msgid "Filters the data based on the administrative dependency of the school."
 msgstr "Filtra os dados com base na dependência administrativa da escola."
 
-#: dataviva/translations/dictionary.py:299
+#: dataviva/translations/dictionary.py:301
 msgid "Morning"
 msgstr "Manhã"
 
-#: dataviva/translations/dictionary.py:300
+#: dataviva/translations/dictionary.py:302
 msgid "Afternoon"
 msgstr "Tarde"
 
-#: dataviva/translations/dictionary.py:301
+#: dataviva/translations/dictionary.py:303
 msgid "Night"
 msgstr "Noite"
 
-#: dataviva/translations/dictionary.py:302
+#: dataviva/translations/dictionary.py:304
 msgid "Full Time"
 msgstr "Integral"
 
-#: dataviva/translations/dictionary.py:308
+#: dataviva/translations/dictionary.py:310
 msgid "Average Class Size"
 msgstr "Tamanho Médio da Turma"
 
-#: dataviva/translations/dictionary.py:310
+#: dataviva/translations/dictionary.py:312
 msgid "Federal Public"
 msgstr "Pública Federal"
 
-#: dataviva/translations/dictionary.py:311
+#: dataviva/translations/dictionary.py:313
 msgid "State Public"
 msgstr "Pública Estadual"
 
-#: dataviva/translations/dictionary.py:312
+#: dataviva/translations/dictionary.py:314
 msgid "Municipal Public"
 msgstr "Pública Municipal"
 
-#: dataviva/translations/dictionary.py:313
+#: dataviva/translations/dictionary.py:315
 msgid "Private"
 msgstr "Privada"
 
-#: dataviva/translations/dictionary.py:316
+#: dataviva/translations/dictionary.py:318
 msgid "Electronic Invoices (EI)"
 msgstr "Notas Fiscais Eletrônicas (NFe)"
 
-#: dataviva/translations/dictionary.py:317
+#: dataviva/translations/dictionary.py:319
 msgid "Data provided by SEF/MG"
 msgstr "Dados Fornecidos por SEF/MG"
 
-#: dataviva/translations/dictionary.py:318
+#: dataviva/translations/dictionary.py:320
 msgid "Purchase Value"
 msgstr "Valor de Compra"
 
-#: dataviva/translations/dictionary.py:319
+#: dataviva/translations/dictionary.py:321
 msgid "Purchase"
 msgstr "Valor de Compra"
 
-#: dataviva/translations/dictionary.py:320
+#: dataviva/translations/dictionary.py:322
 msgid "Transfer Value"
 msgstr "Valor de Transferência"
 
-#: dataviva/translations/dictionary.py:321
+#: dataviva/translations/dictionary.py:323
 msgid "Transfer"
 msgstr "Valor de Transferência"
 
-#: dataviva/translations/dictionary.py:324
+#: dataviva/translations/dictionary.py:326
 msgid "Brazil"
 msgstr "Brasil"
 
-#: dataviva/translations/dictionary.py:325
+#: dataviva/translations/dictionary.py:327
 msgid "BRA ID"
 msgstr "ID BRA"
 
-#: dataviva/translations/dictionary.py:326
 #: dataviva/translations/dictionary.py:328
+#: dataviva/translations/dictionary.py:330
 msgid "Sector"
 msgstr "Setor"
 
-#: dataviva/translations/dictionary.py:327
+#: dataviva/translations/dictionary.py:329
 msgid "CBO ID"
 msgstr "ID CBO"
 
-#: dataviva/translations/dictionary.py:329
-#: dataviva/translations/dictionary.py:332
-#: dataviva/translations/dictionary.py:342
-#: dataviva/translations/dictionary.py:343
+#: dataviva/translations/dictionary.py:331
+#: dataviva/translations/dictionary.py:334
 #: dataviva/translations/dictionary.py:344
 #: dataviva/translations/dictionary.py:345
 #: dataviva/translations/dictionary.py:346
+#: dataviva/translations/dictionary.py:347
+#: dataviva/translations/dictionary.py:348
 msgid "ID"
 msgstr "ID"
 
-#: dataviva/translations/dictionary.py:330
+#: dataviva/translations/dictionary.py:332
 msgid "HS ID"
 msgstr "ID HS"
 
-#: dataviva/translations/dictionary.py:331
+#: dataviva/translations/dictionary.py:333
 msgid "IBGE ID"
 msgstr "ID IBGE"
 
-#: dataviva/translations/dictionary.py:333
+#: dataviva/translations/dictionary.py:335
 msgid "CNAE ID"
 msgstr "ID CNAE"
 
-#: dataviva/translations/dictionary.py:334
+#: dataviva/translations/dictionary.py:336
 msgid "Name"
 msgstr "Nome"
 
-#: dataviva/translations/dictionary.py:335
+#: dataviva/translations/dictionary.py:337
 msgid "Name (English)"
 msgstr "Nome (Inglês)"
 
-#: dataviva/translations/dictionary.py:336
+#: dataviva/translations/dictionary.py:338
 msgid "Name (Portuguese)"
 msgstr "Nome (Português)"
 
-#: dataviva/translations/dictionary.py:337
+#: dataviva/translations/dictionary.py:339
 msgid "Population"
 msgstr "População"
 
-#: dataviva/translations/dictionary.py:338
+#: dataviva/translations/dictionary.py:340
 msgid "Top"
 msgstr "Principal"
 
-#: dataviva/translations/dictionary.py:339
+#: dataviva/translations/dictionary.py:341
 msgid "WLD ID"
 msgstr "ID WLD"
 
-#: dataviva/translations/dictionary.py:340
+#: dataviva/translations/dictionary.py:342
 msgid "MDIC ID"
 msgstr "ID MDIC"
 
-#: dataviva/translations/dictionary.py:350
+#: dataviva/translations/dictionary.py:352
 msgid "Locations"
 msgstr "Localidades"
 
-#: dataviva/translations/dictionary.py:367
+#: dataviva/translations/dictionary.py:369
 msgid "Sending Location"
 msgstr "Localização de Envio"
 
-#: dataviva/translations/dictionary.py:368
+#: dataviva/translations/dictionary.py:370
 msgid "Sending Locations"
 msgstr "Localizações de Envio"
 
-#: dataviva/translations/dictionary.py:369
+#: dataviva/translations/dictionary.py:371
 msgid "Receiving Location"
 msgstr "Localização de Recepção"
 
-#: dataviva/translations/dictionary.py:370
+#: dataviva/translations/dictionary.py:372
 msgid "Receiving Locations"
 msgstr "Localizações de Recepção"
 
-#: dataviva/translations/dictionary.py:371
+#: dataviva/translations/dictionary.py:373
 msgid "Icon"
 msgstr "Ícone"
 
-#: dataviva/translations/dictionary.py:375
+#: dataviva/translations/dictionary.py:377
 msgid "Choose from the following file types:"
 msgstr "Escolha um dos seguintes tipos de arquivo:"
 
-#: dataviva/translations/dictionary.py:376
+#: dataviva/translations/dictionary.py:378
 msgid "Save as CSV"
 msgstr "Salvar como CSV"
 
-#: dataviva/translations/dictionary.py:377
+#: dataviva/translations/dictionary.py:379
 msgid ""
 "A table format that can be imported into a database or opened with "
 "Microsoft Excel."
@@ -3541,11 +3551,11 @@ msgstr ""
 "Um formato de tabela que pode ser importado para um banco de dados ou "
 "aberto com o Microsoft Excel."
 
-#: dataviva/translations/dictionary.py:378
+#: dataviva/translations/dictionary.py:380
 msgid "Save as PDF"
 msgstr "Salvar como PDF"
 
-#: dataviva/translations/dictionary.py:379
+#: dataviva/translations/dictionary.py:381
 msgid ""
 "Similar to SVG files, PDF files are vector-based and can be dynamically "
 "scaled."
@@ -3553,19 +3563,19 @@ msgstr ""
 "Semelhante a arquivos SVG, arquivos PDF são baseados em vetores e podem "
 "ser dimensionados de forma dinâmica."
 
-#: dataviva/translations/dictionary.py:380
+#: dataviva/translations/dictionary.py:382
 msgid "Save as PNG"
 msgstr "Salvar como PNG"
 
-#: dataviva/translations/dictionary.py:381
+#: dataviva/translations/dictionary.py:383
 msgid "A standard image file, similar to JPG or BMP."
 msgstr "Um arquivo de imagem padrão, similar ao JPG ou BMP."
 
-#: dataviva/translations/dictionary.py:382
+#: dataviva/translations/dictionary.py:384
 msgid "Save as SVG"
 msgstr "Salvar como SVG"
 
-#: dataviva/translations/dictionary.py:383
+#: dataviva/translations/dictionary.py:385
 msgid ""
 "A vector-based file that can be resized without worrying about pixel "
 "resolution."
@@ -3573,68 +3583,68 @@ msgstr ""
 "Um arquivo com base em vetor que pode ser redimensionado sem se preocupar"
 " com pixel de resolução."
 
-#: dataviva/translations/dictionary.py:386
+#: dataviva/translations/dictionary.py:388
 msgid "Basic Values"
 msgstr "Valores Básicos"
 
-#: dataviva/translations/dictionary.py:387
+#: dataviva/translations/dictionary.py:389
 msgid "Growth"
 msgstr "Crescimento"
 
-#: dataviva/translations/dictionary.py:388
+#: dataviva/translations/dictionary.py:390
 msgid "Strategic Indicators"
 msgstr "Indicadores Estratégicos"
 
-#: dataviva/translations/dictionary.py:389
+#: dataviva/translations/dictionary.py:391
 msgid "Data Provided by"
 msgstr "Dados Fornecidos por"
 
-#: dataviva/translations/dictionary.py:390
-#: dataviva/translations/dictionary.py:414
+#: dataviva/translations/dictionary.py:392
+#: dataviva/translations/dictionary.py:416
 msgid "View more visualizations on the full DataViva.info website."
 msgstr "Veja mais visualizações na versão completa do site DataViva.info."
 
-#: dataviva/translations/dictionary.py:391
+#: dataviva/translations/dictionary.py:393
 msgid "Related Visualizations"
 msgstr "Visualizações Relacionados"
 
-#: dataviva/translations/dictionary.py:392
+#: dataviva/translations/dictionary.py:394
 msgid "Other Visualizations"
 msgstr "Outras Visualizações"
 
-#: dataviva/translations/dictionary.py:393
+#: dataviva/translations/dictionary.py:395
 msgid "Common Industries"
 msgstr "Atividades Econômicas Comuns"
 
-#: dataviva/translations/dictionary.py:394
+#: dataviva/translations/dictionary.py:396
 msgid "Common Products"
 msgstr "Produtos Comuns"
 
-#: dataviva/translations/dictionary.py:395
+#: dataviva/translations/dictionary.py:397
 msgid "Common Majors"
 msgstr "Cursos Comuns"
 
-#: dataviva/translations/dictionary.py:396
+#: dataviva/translations/dictionary.py:398
 msgid "Common Occupations"
 msgstr "Ocupações Comuns"
 
-#: dataviva/translations/dictionary.py:397
+#: dataviva/translations/dictionary.py:399
 msgid "Show Historical Data"
 msgstr "Mostrar Dados Históricos"
 
-#: dataviva/translations/dictionary.py:398
+#: dataviva/translations/dictionary.py:400
 msgid "Build Not Available"
 msgstr "Construção Não Disponível"
 
-#: dataviva/translations/dictionary.py:399
+#: dataviva/translations/dictionary.py:401
 msgid "Building Visualization"
 msgstr "Construindo Visualização"
 
-#: dataviva/translations/dictionary.py:400
+#: dataviva/translations/dictionary.py:402
 msgid "Downloading Historical Data"
 msgstr "Carregando os Dados Históricos"
 
-#: dataviva/translations/dictionary.py:401
+#: dataviva/translations/dictionary.py:403
 msgid ""
 "Click to download all available historical data. This may take a long "
 "time depending on your internet connection."
@@ -3642,52 +3652,52 @@ msgstr ""
 "Clique para baixar todos os dados históricos disponíveis. Isso pode levar"
 " um longo tempo, dependendo da sua conexão com a internet."
 
-#: dataviva/translations/dictionary.py:402
-#: dataviva/translations/dictionary.py:407 dataviva/utils/title_format.py:12
+#: dataviva/translations/dictionary.py:404
+#: dataviva/translations/dictionary.py:409 dataviva/utils/title_format.py:12
 msgid "and"
 msgstr "e"
 
-#: dataviva/translations/dictionary.py:403
+#: dataviva/translations/dictionary.py:405
 msgid "Showing only"
 msgstr "Mostrando somente"
 
-#: dataviva/translations/dictionary.py:404
+#: dataviva/translations/dictionary.py:406
 msgid "Excluding"
 msgstr "Excluindo"
 
-#: dataviva/translations/dictionary.py:405
+#: dataviva/translations/dictionary.py:407
 msgid "of"
 msgstr "de"
 
-#: dataviva/translations/dictionary.py:406
+#: dataviva/translations/dictionary.py:408
 msgid "with"
 msgstr "com"
 
-#: dataviva/translations/dictionary.py:408
+#: dataviva/translations/dictionary.py:410
 msgid "Fill"
 msgstr "Preenchido"
 
-#: dataviva/translations/dictionary.py:409
+#: dataviva/translations/dictionary.py:411
 msgid "Embed URL"
 msgstr "URL para Incorporar"
 
-#: dataviva/translations/dictionary.py:410
+#: dataviva/translations/dictionary.py:412
 msgid "Shortened URL"
 msgstr "URL Abreviada"
 
-#: dataviva/translations/dictionary.py:411
+#: dataviva/translations/dictionary.py:413
 msgid "Social Networks"
 msgstr "Redes Sociais"
 
-#: dataviva/translations/dictionary.py:412
+#: dataviva/translations/dictionary.py:414
 msgid "Based on State Production"
 msgstr "Baseado nos Estados Produtores"
 
-#: dataviva/translations/dictionary.py:413
+#: dataviva/translations/dictionary.py:415
 msgid "Based on the Exporting Municipality"
 msgstr "Baseado nos Municípios Exportadores"
 
-#: dataviva/translations/dictionary.py:416
+#: dataviva/translations/dictionary.py:418
 msgid ""
 "This visualization is not available when selecting the entirity of "
 "Brazil. Please select a more grainular location."
@@ -3695,7 +3705,7 @@ msgstr ""
 "Esta visualização não está disponível para Brasil. Favor selecione um "
 "nível inferior de agregação."
 
-#: dataviva/translations/dictionary.py:417
+#: dataviva/translations/dictionary.py:419
 msgid ""
 "Industry and Occupation distributions are only available when viewing the"
 " entirity of Brazil."
@@ -3703,7 +3713,7 @@ msgstr ""
 "Distribuições para a Atividade Econômica e Ocupação só estão disponíveis "
 "ao visualizar todo o Brasil."
 
-#: dataviva/translations/dictionary.py:418
+#: dataviva/translations/dictionary.py:420
 msgid ""
 "This visualization is only available at the deepest nesting. Please "
 "select a more grainular filter."
@@ -3711,154 +3721,154 @@ msgstr ""
 "Esta visualização está disponível apenas para o nível mais desagradado. "
 "Favor selecionar neste nível."
 
-#: dataviva/translations/dictionary.py:421
+#: dataviva/translations/dictionary.py:423
 msgid "Click for more data and related visualizations."
 msgstr "Clique para dados adicionais e visualizações relacionados."
 
-#: dataviva/translations/dictionary.py:422
+#: dataviva/translations/dictionary.py:424
 msgid "Click to Zoom"
 msgstr "Clique para Ampliar"
 
-#: dataviva/translations/dictionary.py:423
+#: dataviva/translations/dictionary.py:425
 msgid "Hide Group"
 msgstr "Ocultar Grupo"
 
-#: dataviva/translations/dictionary.py:424
+#: dataviva/translations/dictionary.py:426
 msgid "Solo Group"
 msgstr "Isolar Grupo"
 
-#: dataviva/translations/dictionary.py:425
+#: dataviva/translations/dictionary.py:427
 msgid "Click to Reset all Filters"
 msgstr "Clique para Eliminar todos os Filtros"
 
-#: dataviva/translations/dictionary.py:426
+#: dataviva/translations/dictionary.py:428
 msgid "Primary Connections"
 msgstr "Conexões Primárias"
 
-#: dataviva/translations/dictionary.py:427
-#: dataviva/translations/dictionary.py:473
+#: dataviva/translations/dictionary.py:429
+#: dataviva/translations/dictionary.py:475
 msgid "No Data Available"
 msgstr "Não há Dados Disponíveis"
 
-#: dataviva/translations/dictionary.py:428
+#: dataviva/translations/dictionary.py:430
 msgid "No Connections Available"
 msgstr "Não há Conexões Disponíveis"
 
-#: dataviva/translations/dictionary.py:440
+#: dataviva/translations/dictionary.py:442
 msgid "User Question"
 msgstr "Pergunta do Usuário"
 
-#: dataviva/translations/dictionary.py:441
+#: dataviva/translations/dictionary.py:443
 msgid "Learn more"
 msgstr "Saiba mais"
 
-#: dataviva/translations/dictionary.py:442
+#: dataviva/translations/dictionary.py:444
 msgid "This reply has been flagged."
 msgstr "Esta resposta foi marcada."
 
-#: dataviva/translations/dictionary.py:443
+#: dataviva/translations/dictionary.py:445
 msgid "This flag on this reply has been removed."
 msgstr "A marcação desta resposta foi retirada."
 
-#: dataviva/translations/dictionary.py:444
+#: dataviva/translations/dictionary.py:446
 msgid "Your vote has been added."
 msgstr "Seu voto foi enviado."
 
-#: dataviva/translations/dictionary.py:445
+#: dataviva/translations/dictionary.py:447
 msgid "Your vote was removed."
 msgstr "Seu voto foi removido."
 
-#: dataviva/translations/dictionary.py:449
+#: dataviva/translations/dictionary.py:451
 msgid "Edit"
 msgstr "Editar"
 
-#: dataviva/translations/dictionary.py:450
+#: dataviva/translations/dictionary.py:452
 msgid "Visible"
 msgstr "Visível"
 
-#: dataviva/translations/dictionary.py:451
+#: dataviva/translations/dictionary.py:453
 msgid "Hidden"
 msgstr "Oculto"
 
-#: dataviva/translations/dictionary.py:453
+#: dataviva/translations/dictionary.py:455
 msgid "Admin"
 msgstr "Administrador"
 
-#: dataviva/translations/dictionary.py:459
+#: dataviva/translations/dictionary.py:461
 msgid "Search Results"
 msgstr "Resultados da Pesquisa"
 
-#: dataviva/translations/dictionary.py:460
+#: dataviva/translations/dictionary.py:462
 msgid "No Matches"
 msgstr "Sem Correspondência"
 
-#: dataviva/translations/dictionary.py:461
+#: dataviva/translations/dictionary.py:463
 msgid "Other"
 msgstr "Outro"
 
-#: dataviva/translations/dictionary.py:462
+#: dataviva/translations/dictionary.py:464
 msgid "Select"
 msgstr "Escolher"
 
-#: dataviva/translations/dictionary.py:463
+#: dataviva/translations/dictionary.py:465
 msgid "Show"
 msgstr "Mostrar"
 
-#: dataviva/translations/dictionary.py:464
+#: dataviva/translations/dictionary.py:466
 msgid "Loading Attribute List"
 msgstr "Carregando Lista de Atributos"
 
-#: dataviva/translations/dictionary.py:465
+#: dataviva/translations/dictionary.py:467
 msgid "Loading More Items"
 msgstr "Carregar Mais Itens"
 
-#: dataviva/translations/dictionary.py:466
+#: dataviva/translations/dictionary.py:468
 msgid "Please Wait"
 msgstr "Por favor aguarde"
 
-#: dataviva/translations/dictionary.py:467
+#: dataviva/translations/dictionary.py:469
 msgid "Back"
 msgstr "Voltar"
 
-#: dataviva/translations/dictionary.py:468
+#: dataviva/translations/dictionary.py:470
 msgid "Remove this Filter"
 msgstr "Remover este Filtro"
 
-#: dataviva/translations/dictionary.py:469
+#: dataviva/translations/dictionary.py:471
 msgid "Municipalities within"
 msgstr "Municípios dentro de"
 
-#: dataviva/translations/dictionary.py:470
+#: dataviva/translations/dictionary.py:472
 msgid "No municipalities within that distance."
 msgstr "Não existem municípios dentro desta distância."
 
-#: dataviva/translations/dictionary.py:471
+#: dataviva/translations/dictionary.py:473
 msgid "Including"
 msgstr "Incluindo"
 
-#: dataviva/translations/dictionary.py:472
+#: dataviva/translations/dictionary.py:474
 msgid "in"
 msgstr "em"
 
-#: dataviva/translations/dictionary.py:482
+#: dataviva/translations/dictionary.py:484
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:483
+#: dataviva/translations/dictionary.py:485
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:484
+#: dataviva/translations/dictionary.py:486
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:485
+#: dataviva/translations/dictionary.py:487
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"
