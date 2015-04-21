@@ -98,7 +98,14 @@ def num_format(number, key = None, labels = True):
 
         # Initializes the number suffix based on the group.
         suffix = groups[m]
-
+    
+    arrow = False
+    if "growth" in key:
+        if n > 0:
+            arrow = "up"
+        elif n < 0:
+            arrow = "down"        
+        n = float(n)*100
     n = format_decimal(n, locale=g.locale)
 
     # If the language is not English, translate the suffix.
@@ -112,15 +119,10 @@ def num_format(number, key = None, labels = True):
         if affix:
             return u"{0}{1}{2}".format(unicode(affix[0]), n, unicode(affix[1]))
         elif "growth" in key:
-            arrow = False
-            if n > 0:
-                arrow = "up"
-            elif n < 0:
-                arrow = "down"
             if arrow:
                 arrow = "<i class='growth-arrow {0} fa fa-arrow-circle-{0}'></i>".format(arrow)
             else:
                 arrow = ""
-            return "{}%{}".format(float(n)*100, arrow)
+            return "{}%{}".format(n, arrow)
 
     return n
