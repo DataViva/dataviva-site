@@ -775,7 +775,7 @@
     }
 
     // Start building a new app
-    app.start = function(new_url,allyears) {
+    app.start = function(new_url, allyears) {
 
       // Hide popover
       dataviva.popover.hide();
@@ -932,19 +932,19 @@
 
             }
 
+            app.zero_add = app.vars.time !== "month" && app.build.dataset === "secex" && (!app.monthly || (!app.allyears && ["stacked", "line"].indexOf(app.build.app.type) >= 0));
+
             if (!app.allyears) {
               app.allyears = app.data[app.build.data_url] ||
                              app.vars.year.indexOf("_") > 0 || app.timeRange;
             }
 
-            var zero_add = app.build.dataset === "secex" && !app.monthly;
-
-            if (app.allyears && zero_add) {
+            if (app.allyears && app.zero_add) {
               app.build.data_url = app.build.data_url.replace("all", "all-0")
             }
             else if (!app.allyears) {
               var y = app.vars.year;
-              if (zero_add) {
+              if (app.zero_add) {
                 y = app.vars.year.split("_").map(function(yy){
                   return yy+"-0";
                 }).join("_");
@@ -1962,7 +1962,29 @@
         }
 
         app.viz.id(filterObj).title({"sub": sub}).draw()
-        // d3.select("#app").call(app.viz[type](app[type+"s"]).sub_title(sub))
+
+      }
+      else if (type === "time") {
+
+          var old_value = app.vars[type];
+          app.vars[type] = value;
+
+          if (value === "month") {
+            app.tooltip.short[""] = ["month"];
+          }
+          else {
+            app.tooltip.short[""] = [];
+          }
+
+          if (app.zero_add && value === "month") {
+            app.start(app.url, true);
+          }
+          else {
+            builder.url();
+            app.viz.time(value).x(value);
+            app.title_update();
+            app.viz.draw();
+          }
 
       }
       else {
@@ -2060,15 +2082,6 @@
           }
           app.viz.id({"grouping": value})
         }
-        else if (type === "time") {
-          app.viz[type](value).x(value);
-          if (value === "month") {
-            app.tooltip.short[""] = ["month"]
-          }
-          else {
-            app.tooltip.short[""] = []
-          }
-        }
         else {
           app.viz[type](value);
         }
@@ -2084,7 +2097,7 @@
 
         app.title_update();
         app.viz.draw();
-        // d3.select("#app").call(app.viz)
+
       }
     }
 
