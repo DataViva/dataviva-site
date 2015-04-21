@@ -6,7 +6,51 @@
 
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.profile.css" />
 
+    {% if item.id != "all" %}
+      {% if profile.prev() %}
+        <link rel="prev" href="{{ profile.prev().url() }}" />
+      {% endif %}
+      {% if profile.next() %}
+        <link rel="next" href="{{ profile.next().url() }}" />
+      {% endif %}
+    {% endif %}
+
     <style>
+
+      #guide_shuffle {
+        margin-bottom: 4px;
+        padding: 0 6px;
+        text-align: center;
+      }
+
+      #guide_shuffle a {
+        color: #999;
+        font-size: 12px;
+      }
+
+      #guide_shuffle a:hover {
+        color: #333;
+      }
+
+      #guide_shuffle i {
+        margin-top: 2px;
+      }
+
+      #prev {
+        float: left;
+      }
+
+      #next {
+        float: right;
+      }
+
+      #prev i, #random i {
+        margin-right: 3px;
+      }
+
+      #next i {
+        margin-left: 3px;
+      }
 
       .accordion_btn.sidebar_btn.help.active {
         border-color: #ccc #ccc transparent #ccc;
@@ -193,6 +237,18 @@
         <h2 id="guide_sub">{{ format(category+'_'+item.id|length|string).render('text') }}</h2>
       {% endif %}
     </div>
+
+    {% if item.id != "all" %}
+      <div id="guide_shuffle">
+        {% if profile.prev() %}
+          <a href="{{ profile.prev().url() }}" id="prev"><i class="fa fa-backward"></i>{% trans %}Prev{% endtrans %}</a>
+        {% endif %}
+        <a href="/profiles/{{ category }}/" id="random"><i class="fa fa-random"></i>{% trans %}Random{% endtrans %}</a>
+        {% if profile.next() %}
+          <a href="{{ profile.next().url() }}" id="next">{% trans %}Next{% endtrans %}<i class="fa fa-forward"></i></a>
+        {% endif %}
+      </div>
+    {% endif %}
 
     {% set counter = 1 %}
     {% set icon = None %}

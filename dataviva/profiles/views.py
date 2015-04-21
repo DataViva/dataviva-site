@@ -260,6 +260,6 @@ def profiles(category = None, id = None):
     if category == "university":
         get_related(Yuu, "course_hedu", gettext("Universities with Similar Course Offerings"))
 
-    return render_template("profiles/profile.html",
+    return render_template("profiles/profile.html", profile=profile,
                 category=category, item=item, stats=stat_groups,
                 starting_app = start, builds=builds, related=related)

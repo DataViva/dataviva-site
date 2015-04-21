@@ -25,7 +25,7 @@ div#guide_controls {
 div#profile_button {
   background-color: #fff;
   border: solid 1px #ccc;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   padding: 6px;
   position: relative;
   -webkit-transition: background-color .1s;
