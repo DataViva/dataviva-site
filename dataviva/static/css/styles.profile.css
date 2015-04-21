@@ -68,16 +68,20 @@ div.group_title {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
   font-weight: bold;
-  padding: 6px 3px;
+  padding: 6px 6px;
 }
 
 table.stat_table {
   color: #333;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
-  padding: 3px 6px;
+  margin: 0 6px;
   position: relative;
-  width: 100%;
+  width: calc(100% - 12px);
+}
+
+table.stat_table:last-child {
+  margin-bottom: 6px;
 }
 
 table.stat_table a {

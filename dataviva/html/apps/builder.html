@@ -33,7 +33,11 @@
     }
 
     .accordion_btn.active {
-      background-color: transparent;
+      border-color: #ccc #ccc transparent #ccc;
+      border-width: 1px 1px 0 1px;
+      border-style: solid;
+      background-color: white;
+      margin-bottom: 0 !important;
       -webkit-box-shadow: none;
               box-shadow: none;
     }
@@ -47,10 +51,18 @@
     }
 
     .accordion_list {
+      background-color: white;
       overflow: hidden;
       -webkit-transition: height 0.3s;
          -moz-transition: height 0.3s;
               transition: height 0.3s;
+    }
+
+    .accordion_list.active {
+      border-color: transparent #ccc #ccc #ccc;
+      border-width: 0 1px 1px 1px;
+      border-style: solid;
+      margin-bottom: 6px;
     }
 
     .decision.short.build_title, .help.short.build_title {
@@ -235,12 +247,14 @@
       d3.select("#builds_"+app).select("[data-btn="+datasets[app]+"]")
         .classed("active", false);
       d3.select("#builds_"+app).select("[data-list="+datasets[app]+"]")
-        .style("height", "0px");
+        .style("height", "0px")
+        .classed("active", false);
       datasets[app] = d;
       d3.select("#builds_"+app).select("[data-btn="+d+"]")
         .classed("active", true);
       d3.select("#builds_"+app).select("[data-list="+d+"]")
-        .style("height", heights[app][d]);
+        .style("height", heights[app][d])
+        .classed("active", true);
       change_build();
     }
 

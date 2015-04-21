@@ -9,8 +9,11 @@
     <style>
 
       .accordion_btn.sidebar_btn.help.active {
-        background-color: transparent;
-        /*margin-bottom: 0 !important;*/
+        border-color: #ccc #ccc transparent #ccc;
+        border-width: 1px 1px 0 1px;
+        border-style: solid;
+        background-color: white;
+        margin-bottom: 0 !important;
         -webkit-box-shadow: none;
                 box-shadow: none;
       }
@@ -24,14 +27,27 @@
       }
 
       .accordion_list {
+        background-color: white;
         overflow: hidden;
         -webkit-transition: height 0.3s;
            -moz-transition: height 0.3s;
                 transition: height 0.3s;
       }
 
+      .accordion_list.active {
+        border-color: transparent #ccc #ccc #ccc;
+        border-width: 0 1px 1px 1px;
+        border-style: solid;
+        margin-bottom: 6px;
+      }
+
+      .build_btn:first-child {
+        margin-top: 6px;
+      }
+
       .build_btn {
         display: block;
+        padding: 0 6px;
         position: relative;
         text-align: right;
       }
@@ -59,7 +75,7 @@
         display: inline-block;
         font-size: 12px;
         float: left;
-        max-width: 170px;
+        max-width: 150px;
         overflow: hidden;
         padding: 3px 4px 4px 6px;
         text-align: left;
@@ -70,10 +86,6 @@
       .build_title:hover {
         cursor: pointer;
         text-decoration: underline;
-      }
-
-      .stat_table:last-child {
-        margin-bottom: 6px;
       }
 
       .stat_table .growth-arrow {
@@ -333,11 +345,11 @@
         var list = this.nextElementSibling;
         if (this === acc) {
           d3.select(this).classed("active", true);
-          d3.select(list).style("height", heights[i]);
+          d3.select(list).style("height", heights[i]).classed("active", true);
         }
         else {
           d3.select(this).classed("active", false);
-          d3.select(list).style("height", "0px");
+          d3.select(list).style("height", "0px").classed("active", false);
         }
       })
     }
