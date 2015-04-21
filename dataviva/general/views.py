@@ -129,11 +129,33 @@ def home():
         "metric" : metric
     })
 
+    metric, show, profile = "pci", "hs_id", "hs"
+    data = stats_list(metric, show, limit=limit)
+    items = make_items(data, Hs)
+    carousels.append({
+        "title": gettext("Most Complex Products"),
+        "type": profile,
+        "items": items,
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
+    })
+
+    metric, show, profile = "wage_avg", "bra_id", "bra"
+    data = stats_list(metric, show, limit=limit)
+    items = make_items(data, Bra)
+    carousels.append({
+        "title": gettext("Richest Municipalities"),
+        "type": profile,
+        "items": items,
+        "url" : carousel_base.format(metric, show, profile, limit),
+        "metric" : metric
+    })
+
     metric, show, profile = "wage_avg", "cbo_id", "cbo"
     data = stats_list(metric, show, limit=limit)
     items = make_items(data, Cbo)
     carousels.append({
-        "title": gettext("Occupations by Highest Average Wage"),
+        "title": gettext("Best Paid Occupations"),
         "type": profile,
         "items": items,
         "url" : carousel_base.format(metric, show, profile, limit),

@@ -34,6 +34,7 @@ possible_tables = {
     "cbo_id" : [rais.Yo],
     "university_id" : [hedu.Yu, hedu.Ybu],
     "course_hedu_id" : [hedu.Yc_hedu],
+    "hs_id": [secex.Ymp]
 }
 
 allowed_when_not = compute_allowed(gen_table_list(possible_tables))
@@ -52,6 +53,7 @@ CAROSEL_NS = "carosel:"
 
 filters_map = {
     secex.Ymb : [secex.Ymb.year == __latest_year__['secex'], secex.Ymb.month == 0],
+    secex.Ymp : [secex.Ymp.year == __latest_year__['secex'], secex.Ymp.month == 0],
     rais.Yb_rais : [rais.Yb_rais.year == __latest_year__['rais']],
     rais.Yi : [rais.Yi.year == __latest_year__['rais']],
     rais.Yo : [rais.Yo.year == __latest_year__['rais'], rais.Yo.cbo_id != u'xxxx'],
@@ -79,6 +81,14 @@ def stats_list(metric, shows, limit=None, offset=None, sort="desc", depth=None, 
     raw = compute_stats(metric, shows, limit=limit, offset=offset, sort=sort, depth=depth)
     return raw["data"]
 
+
+def cities_by_pop(value):
+    Ybs = attrs.Ybs
+    filters = [Ybs.stat_id == 'pop', Ybs.stat_val >= value, Ybs.year == __latest_year__['stats'], func.char_length(Ybs.bra_id) == 9]
+    res = Ybs.query.filter(*filters).with_entities(Ybs.bra_id).all()
+    if res:
+        return [row[0] for row in res]
+    return res
 
 def compute_stats(metric, shows, limit=None, offset=None, sort="desc", depth=None, filters=[]):
     cache_key = CAROSEL_NS + "".join(([metric] + shows) + ([str(limit), str(offset),sort,str(depth)]))
@@ -120,7 +130,11 @@ def compute_stats(metric, shows, limit=None, offset=None, sort="desc", depth=Non
         orig_col_name = growth_regex.group(1)
         orig_col = getattr(table, orig_col_name)
         filters.append(orig_col >= VAL_THRESOLD)
-
+    elif metric == "wage_avg" and len(shows) == 1 and shows[0] == "bra_id":
+        # when looking at wage_avg for cities, only look at places
+        # with >= 50k people
+        cities = cities_by_pop(50000)
+        filters.append(table.bra_id.in_(cities))
     columns = show_columns + [metric_col]
     results = query_helper.query_table(table, columns, filters, order=metric, limit=limit, sort=sort, offset=offset)
 
