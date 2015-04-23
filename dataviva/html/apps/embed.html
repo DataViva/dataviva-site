@@ -709,7 +709,6 @@
         "sub": {"font": {"align": "left"}},
         "total": {"font": {"align": "left"}}
       })
-      .size({"threshold": false})
       .y({
         "label": {"font": {"size": 22, "weight": "normal"}},
         "ticks": {"font": {"size": 16}}
@@ -1125,7 +1124,6 @@
       dataviva.resize()
       app.viz.error(error).draw()
       loading.hide()
-      // d3.select("#app").html("").datum([]).call(app.viz.error(error))
     }
 
     var required_bras = function() {
@@ -1437,6 +1435,10 @@
         })
         // .layout(app.vars.layout)
         .size(app.vars.size)
+        .size({"threshold": ["stacked", "line"].indexOf(app.build.app.type) >= 0 ?
+                            function(vars){
+                              return vars.depth.value > 0 ? 10/vars.height.viz : 0;
+                            } : false })
         .focus(false)
         .error(false)
         // .id({
@@ -1461,30 +1463,6 @@
         .x({"label": ["compare", "bar", "scatter"].indexOf(app.build.app.type) >= 0 ? {"font": {"size": 22, "weight": "normal"}} : false})
         .x({"ticks": {"font": {"size": app.build.output === "age" || app.build.app.type === "bar" ? 12 : 16}}})
         .labels({"font": {"size": 11}})
-
-      // app.viz.type(app.build.app.d3plus)
-      //   .title(app.build.title)
-      //   .color_var(color_var)
-      //   .attrs(app.attrs[app.build.output_attr])
-      //   .spotlight(app.vars.spotlight)
-      //   .nesting(nesting)
-      //   .depth(app.vars.depth)
-      //   .sort(app.vars.sort)
-      //   .grouping(app.vars.grouping)
-      //   .order(app.vars.order)
-      //   .layout(app.vars.layout)
-      //   .value_var(app.vars.size)
-      //   .year(app.vars.year)
-      //   .total_bar(app.total())
-      //   .highlight(null)
-      //   .id_var(app.build.output_attr+"_id")
-      //   .error(false)
-      //   .solo(app.solos)
-      //   .filter(app.filters)
-      //   .sub_title(app.sub_title())
-      //   .icon_style(style)
-      //   .yaxis_val(null)
-      //   .tooltip_info(app.tooltip)
 
       if (same_origin &&
           (window.parent.location.href.indexOf("dataviva.info") >= 0 ||
@@ -3036,12 +3014,6 @@
       d3.select("#app")
         .style("height",app.height+"px")
         .style("width",app.width+"px")
-        // .call(app.viz
-        //     .height(app.height)
-        //     .width(app.width)
-        //     .title_width(app.title_width)
-        //     .title_height(app.title_height)
-        //   )
 
       app.viz
         .height(app.height)
