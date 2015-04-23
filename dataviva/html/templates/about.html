@@ -122,6 +122,18 @@
         {% trans %}Occugrid{% endtrans %}
       </a>
 
+      <a class="{% if app == 'line' %}decision{% else %}help{% endif %} short icon line" href="{{ url_for('about.apps', app='line')}}">
+        {% trans %}Line{% endtrans %}
+      </a>
+
+      <a class="{% if app == 'box' %}decision{% else %}help{% endif %} short icon box" href="{{ url_for('about.apps', app='box')}}">
+        {% trans %}Box Plot{% endtrans %}
+      </a>
+
+      <a class="{% if app == 'bar' %}decision{% else %}help{% endif %} short icon bar" href="{{ url_for('about.apps', app='bar')}}">
+        {% trans %}Bar Chart{% endtrans %}
+      </a>
+
     {% endif %}
 
     <a class="{% if page == 'crosswalk' %}decision{% else %}help{% endif %}" href="{{ url_for('about.crosswalk', attr1='hs', attr2='cnae') }}">
