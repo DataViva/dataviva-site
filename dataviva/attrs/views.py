@@ -21,10 +21,6 @@ from dataviva.utils.cached_query import api_cache_key
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
-@mod.errorhandler(404)
-def page_not_found(error):
-    return error, 404
-
 def fix_name(attr, lang):
 
     for col in ["desc", "name", "gender", "article", "keywords"]:

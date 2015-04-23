@@ -5,6 +5,10 @@
   background-size: 100%;
   display: inline-block;
   height: 550px;
+  left: 50%;
+  margin-left: -387px;
+  position: absolute;
+  top: 182px;
   width: 260px;
 }
 

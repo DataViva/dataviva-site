@@ -26,10 +26,6 @@ mod = Blueprint('account', __name__, url_prefix='/account')
 
 RESULTS_PER_PAGE = 10
 
-@mod.errorhandler(404)
-def page_not_found(error):
-    return error, 404
-
 @mod.route('/status/')
 def check_status():
     result = g.user.is_authenticated()
@@ -45,7 +41,7 @@ def check_status():
 @lm.user_loader
 def load_user(id):
     return User.query.get(int(id))
-    
+
 ###############################
 # Views for ALL logged in users
 # ---------------------------
@@ -61,7 +57,7 @@ def logout():
 def login():
     form = LoginForm()
     providers = ["Facebook", "Google", "Twitter"]
-    
+
     if form.validate_on_submit():
         provider = form.provider.data
         session['remember_me'] = form.remember_me.data
@@ -79,8 +75,8 @@ def login():
                 next=request.args.get('next') or request.referrer or None,
                 _external=True)
             return facebook.authorize(callback=callback)
-    
-    return render_template('account/login.html', 
+
+    return render_template('account/login.html',
         form = form,
         providers = providers)
 
@@ -88,20 +84,20 @@ def login():
 def user(nickname):
     user = User.query.filter_by(nickname=nickname).first_or_404()
     activity = None
-    
+
     stars = Starred.query.filter_by(user=user) \
                 .order_by("timestamp desc").all()
-                
+
     questions = Question.query.filter_by(user=user) \
                 .order_by("timestamp desc").all()
-                
+
     replies = Reply.query.filter_by(user=user) \
                 .order_by("timestamp desc").all()
-                
+
     activity = stars + questions + replies
     activity.sort(key=lambda a: a.timestamp, reverse=True)
-                
-    return render_template("account/index.html", 
+
+    return render_template("account/index.html",
         user = user,
         activity = activity)
 
@@ -112,41 +108,41 @@ def update_email_preferences(id, nickname, agree):
         user.agree_mailer = agree
         db.session.add(user)
         db.session.commit()
-        
+
     return user
-        
-@mod.route('/remove_email/<id>/<nickname>')        
+
+@mod.route('/remove_email/<id>/<nickname>')
 def remove_email_list(id, nickname):
     update_email_preferences(id, nickname, 0)
     flash(gettext("Preferences updated."))
     return redirect('/')
 
-@mod.route('/preferences/change_email_preference')        
+@mod.route('/preferences/change_email_preference')
 def preferences():
     if g.user.is_authenticated() :
         if g.user.agree_mailer == 1:
             agree = 0
         else:
             agree = 1
-            
+
         user = update_email_preferences(g.user.id, g.user.nickname, agree)
         flash(gettext("Preferences updated."))
         return redirect('/account/' + user.nickname )
     else:
         return redirect('/')
 
-    
+
 @mod.route('/complete_login/', methods=['GET', 'POST'])
 def after_login(**user_fields):
     import re
-    
+
     if request.method == "POST":
         user_fields = {k:v for k,v in request.form.items() if v is not None}
     else:
         user_fields = {k:v for k,v in user_fields.items() if v is not None}
-    
+
     print(request.host)
-    
+
     if "google_id" in user_fields:
         user = User.query.filter_by(google_id = user_fields["google_id"]).first()
     elif "twitter_id" in user_fields:
@@ -155,9 +151,9 @@ def after_login(**user_fields):
         user = User.query.filter_by(facebook_id = user_fields["facebook_id"]).first()
     elif None is not re.match(r'^(localhost|127.0.0.1)', request.host ):
         user = User(id = 1)
-        
+
     if user is None:
-    
+
         nickname = user_fields["nickname"] if "nickname" in user_fields else None
         if nickname is None or nickname == "":
             nickname = user_fields["email"].split('@')[0]
@@ -167,7 +163,7 @@ def after_login(**user_fields):
         user = User(**user_fields)
         db.session.add(user)
         db.session.commit()
-        
+
     remember_me = False
     if 'remember_me' in session:
         remember_me = session['remember_me']
@@ -208,7 +204,7 @@ def twitter_authorized(resp):
     the application submitted.  Note that Twitter itself does not really
     redirect back unless the user clicks on the application name.
     """
-    
+
     session['twitter_token'] = (
         resp['oauth_token'],
         resp['oauth_token_secret']
@@ -243,14 +239,14 @@ def facebook_authorized(resp):
         )
     session['facebook_token'] = (resp['access_token'], '')
     response = facebook.get('/me/?fields=picture,username,name,id,location,locale,email').data
-    
+
     email = response["email"] if "email" in response else None
     fullname = response["name"] if "name" in response else None
     language = response["locale"] if "locale" in response else None
     country = response["location"]["name"] if "location" in response else None
     image = response["picture"]["data"]["url"] if "picture" in response else None
     id = response["id"] if "id" in response else None
-    
+
     return after_login(facebook_id=id, fullname=fullname, email=email, language=language, country=country, image=image)
 
 @facebook.tokengetter
@@ -267,10 +263,10 @@ def get_facebook_oauth_token():
 @mod.route('/google_authorized/')
 @google.authorized_handler
 def google_authorized(resp):
-    
+
     access_token = resp['access_token']
     session['google_token'] = access_token, ''
-    
+
     req = Request('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+access_token)
     try:
         res = urlopen(req)
@@ -282,7 +278,7 @@ def google_authorized(resp):
             # return redirect(url_for('login'))
         return res.read()
         raise Exception('ERROR!', res.read())
-    
+
     response = json.loads(res.read())
     email = response["email"] if "email" in response else None
     fullname = response["name"] if "name" in response else None

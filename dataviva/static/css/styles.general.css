@@ -83,15 +83,34 @@ p {
 /* Error Styling */
 /*****************/
 
-body.error #container {
-  background-image: url('/static/img/bgs/error.png');
-  background-position: center 140px;
-  background-repeat: no-repeat;
-  background-size: 60%;
-}
-
 body.error #fullscreen {
   background-image: none !important;
+}
+
+body.error h1 {
+  margin-top: 20px;
+}
+
+div#extra_error {
+	font-size: 20px;
+  height: 50px;
+	margin-top: 20px;
+}
+
+div.computer {
+  display: block;
+  position: relative;
+  margin-top: -20px;
+  z-index: -1;
+}
+
+div#computer {
+  background-image: url('/static/img/bgs/error.png');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 40%;
+  height: 600px;
+  width: 100%;
 }
 
 div#error_code {
@@ -99,17 +118,13 @@ div#error_code {
   font-family: "HelveticaNeue-Thin", "Helvetica Neue Thin", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 38px;
   font-weight: 200;
+  left: 50%;
+  margin-left: -101px;
   opacity: 0.75;
   position: absolute;
   text-align: center;
-  top: 283px;
+  top: 262px;
   width: 80px;
-}
-
-
-div#extra_error {
-	font-size:20px;
-	margin-top:20px;
 }
 
 /*****************/
