@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-04-21 16:07-0400\n"
+"POT-Creation-Date: 2015-04-23 18:43-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -98,7 +98,8 @@ msgid ""
 "specific wage bracket."
 msgstr ""
 
-#: dataviva/apps/views.py:91 dataviva/html/templates/site.html:69
+#: dataviva/apps/views.py:91 dataviva/html/about/apps/bar.html:1
+#: dataviva/html/templates/about.html:134 dataviva/html/templates/site.html:69
 msgid "Bar Chart"
 msgstr ""
 
@@ -216,7 +217,8 @@ msgid ""
 " quartile, median, third quartile, and maximum."
 msgstr ""
 
-#: dataviva/apps/views.py:185 dataviva/html/templates/site.html:68
+#: dataviva/apps/views.py:185 dataviva/html/about/apps/box.html:1
+#: dataviva/html/templates/about.html:130 dataviva/html/templates/site.html:68
 msgid "Box Plot"
 msgstr ""
 
@@ -271,26 +273,38 @@ msgid "Top Exporting Municipalities"
 msgstr ""
 
 #: dataviva/general/views.py:136
-msgid "Occupations by Highest Average Wage"
+msgid "Most Complex Products"
 msgstr ""
 
 #: dataviva/general/views.py:147
-msgid "Largest Industries by Employment"
+msgid "Richest Municipalities"
 msgstr ""
 
-#: dataviva/general/views.py:158
-msgid "Industries by Employment Growth"
+#: dataviva/general/views.py:148
+msgid "Municipalities with the highest average wage."
 msgstr ""
 
 #: dataviva/general/views.py:159
-msgid "Excluding industries with less than 10,000 employees."
+msgid "Best Paid Occupations"
 msgstr ""
 
 #: dataviva/general/views.py:170
-msgid "Most Popular Courses by Enrollment"
+msgid "Largest Industries by Employment"
 msgstr ""
 
 #: dataviva/general/views.py:181
+msgid "Industries by Employment Growth"
+msgstr ""
+
+#: dataviva/general/views.py:182
+msgid "Excluding industries with less than 10,000 employees."
+msgstr ""
+
+#: dataviva/general/views.py:193
+msgid "Most Popular Courses by Enrollment"
+msgstr ""
+
+#: dataviva/general/views.py:204
 msgid "Cities by Largest University Enrollment"
 msgstr ""
 
@@ -348,6 +362,36 @@ msgstr ""
 
 #: dataviva/html/about/testimonial.html:13
 msgid "Learn how DataViva was Created"
+msgstr ""
+
+#: dataviva/html/about/apps/bar.html:3
+msgid ""
+"The Bar Chart visualization allows analyzing values as a histogram. The "
+"y-axis represents the frequency of occurances in each bucket display on "
+"the x-axis. The buckets are calculated from 2 times the standard "
+"deviation above and below the mean value."
+msgstr ""
+
+#: dataviva/html/about/apps/bar.html:5
+msgid ""
+"This visualization is helpful when showing wage distribution for a single"
+" filter, such as location or occupation."
+msgstr ""
+
+#: dataviva/html/about/apps/box.html:3
+msgid ""
+"The Box Plot visualization allows analyzing the change of a variable's "
+"range across a series of distinct points. Each box represents the IQR, or"
+" Interquartile Range for a series of data. This range is defined by the "
+"first and third quartiles, with a bisection line repesenting the median. "
+"Whiskers extend from the IQR to show the minimum and maximum values for "
+"the data series."
+msgstr ""
+
+#: dataviva/html/about/apps/box.html:5
+msgid ""
+"This visualization is helpful when showing wage distribution over time, "
+"or age distribution across different education levels."
 msgstr ""
 
 #: dataviva/html/about/apps/compare.html:3
@@ -448,6 +492,40 @@ msgstr ""
 
 #: dataviva/html/about/apps/index.html:26
 msgid "View the Visualization"
+msgstr ""
+
+#: dataviva/html/about/apps/line.html:1 dataviva/html/templates/about.html:126
+#: dataviva/html/templates/site.html:63
+msgid "Line"
+msgstr ""
+
+#: dataviva/html/about/apps/line.html:3
+msgid ""
+"The Line visualization allows analyzing the change of a variable over "
+"time. This view follows the same color pattern of the other "
+"visualizations, facilitating the identification of large groups to which "
+"each item belongs. Therefore, this visualization facilitates an "
+"understanding of the growth patterns and trends of any of the variables "
+"available in DataViva."
+msgstr ""
+
+#: dataviva/html/about/apps/line.html:5 dataviva/html/about/apps/stacked.html:5
+msgid ""
+"The purpose of this visualization is to allow the visualization of the "
+"data in a time series, revealing product, economic activities, "
+"occupations or localities with greater participation over time and its "
+"history of growth or decrease, either in gross or percentage. One of the "
+"visualizations, for instance, is for economic activities of Minas Gerais,"
+" revealing the overall growth of the state economy and which sectors had "
+"the greatest contribution to this growth since 2002."
+msgstr ""
+
+#: dataviva/html/about/apps/line.html:7 dataviva/html/about/apps/stacked.html:7
+msgid ""
+"Like the other visualizations, you can modify the data displayed for any "
+"of the basic variables available in DataViva (products, activities, "
+"occupations) and their intersections with localities all over Brazil at "
+"different levels (state, region, municipality)."
 msgstr ""
 
 #: dataviva/html/about/apps/network.html:3
@@ -621,25 +699,6 @@ msgid ""
 "available in DataViva."
 msgstr ""
 
-#: dataviva/html/about/apps/stacked.html:5
-msgid ""
-"The purpose of this visualization is to allow the visualization of the "
-"data in a time series, revealing product, economic activities, "
-"occupations or localities with greater participation over time and its "
-"history of growth or decrease, either in gross or percentage. One of the "
-"visualizations, for instance, is for economic activities of Minas Gerais,"
-" revealing the overall growth of the state economy and which sectors had "
-"the greatest contribution to this growth since 2002."
-msgstr ""
-
-#: dataviva/html/about/apps/stacked.html:7
-msgid ""
-"Like the other visualizations, you can modify the data displayed for any "
-"of the basic variables available in DataViva (products, activities, "
-"occupations) and their intersections with localities all over Brazil at "
-"different levels (state, region, municipality)."
-msgstr ""
-
 #: dataviva/html/about/apps/tree_map.html:3
 msgid ""
 "The Tree Map is a descriptive visualization which allows visualizing "
@@ -763,7 +822,7 @@ msgstr ""
 msgid "Ex. Where does the data come from?"
 msgstr ""
 
-#: dataviva/html/about/ask/ask.html:39 dataviva/html/apps/builder.html:122
+#: dataviva/html/about/ask/ask.html:39 dataviva/html/apps/builder.html:134
 msgid "Visualization"
 msgstr ""
 
@@ -1008,7 +1067,7 @@ msgid ""
 msgstr ""
 
 #: dataviva/html/about/glossary/complexity.html:1
-#: dataviva/html/templates/about.html:158
+#: dataviva/html/templates/about.html:170
 msgid "Complexity"
 msgstr ""
 
@@ -1056,7 +1115,7 @@ msgid ""
 msgstr ""
 
 #: dataviva/html/about/glossary/distance.html:1
-#: dataviva/html/templates/about.html:162
+#: dataviva/html/templates/about.html:174
 #: dataviva/translations/dictionary.py:220
 msgid "Distance"
 msgstr ""
@@ -1090,7 +1149,7 @@ msgid ""
 msgstr ""
 
 #: dataviva/html/about/glossary/diversity.html:1
-#: dataviva/html/templates/about.html:166
+#: dataviva/html/templates/about.html:178
 msgid "Diversity"
 msgstr ""
 
@@ -1165,7 +1224,7 @@ msgid ""
 msgstr ""
 
 #: dataviva/html/about/glossary/importance.html:1
-#: dataviva/html/templates/about.html:170
+#: dataviva/html/templates/about.html:182
 #: dataviva/translations/dictionary.py:224
 msgid "Importance"
 msgstr ""
@@ -1181,12 +1240,12 @@ msgid ""
 msgstr ""
 
 #: dataviva/html/about/glossary/index.html:4
-#: dataviva/html/templates/about.html:152
+#: dataviva/html/templates/about.html:164
 msgid "Glossary"
 msgstr ""
 
 #: dataviva/html/about/glossary/opp_gain.html:1
-#: dataviva/html/templates/about.html:174
+#: dataviva/html/templates/about.html:186
 #: dataviva/translations/dictionary.py:239
 msgid "Opportunity Gain"
 msgstr ""
@@ -1226,7 +1285,7 @@ msgid ""
 msgstr ""
 
 #: dataviva/html/about/glossary/proximity.html:1
-#: dataviva/html/templates/about.html:178
+#: dataviva/html/templates/about.html:190
 #: dataviva/translations/dictionary.py:234
 msgid "Proximity"
 msgstr ""
@@ -1282,7 +1341,7 @@ msgid ""
 msgstr ""
 
 #: dataviva/html/about/glossary/required.html:1
-#: dataviva/html/templates/about.html:186
+#: dataviva/html/templates/about.html:198
 msgid "Estimated Employment"
 msgstr ""
 
@@ -1463,15 +1522,15 @@ msgstr ""
 msgid "The DataViva Team"
 msgstr ""
 
-#: dataviva/html/apps/builder.html:115
+#: dataviva/html/apps/builder.html:127
 msgid "Advanced Visualization Builder"
 msgstr ""
 
-#: dataviva/html/apps/builder.html:148
+#: dataviva/html/apps/builder.html:160
 msgid "Build visualization"
 msgstr ""
 
-#: dataviva/html/apps/builder.html:151 dataviva/html/apps/info.html:4
+#: dataviva/html/apps/builder.html:163 dataviva/html/apps/info.html:4
 msgid "Visualizations"
 msgstr ""
 
@@ -1503,13 +1562,13 @@ msgstr ""
 msgid "Show/Hide Controls"
 msgstr ""
 
-#: dataviva/html/apps/embed.html:2875 dataviva/html/templates/base.html:6
+#: dataviva/html/apps/embed.html:2853 dataviva/html/templates/base.html:6
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
 " economy"
 msgstr ""
 
-#: dataviva/html/apps/embed.html:2877 dataviva/html/templates/base.html:6
+#: dataviva/html/apps/embed.html:2855 dataviva/html/templates/base.html:6
 msgid "through more than 100 million interactive visualizations."
 msgstr ""
 
@@ -1529,7 +1588,7 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: dataviva/html/apps/info.html:29
+#: dataviva/html/apps/info.html:29 dataviva/html/profiles/profile.html:248
 msgid "Next"
 msgstr ""
 
@@ -1764,11 +1823,19 @@ msgstr ""
 msgid "Ex"
 msgstr ""
 
-#: dataviva/html/profiles/profile.html:249
+#: dataviva/html/profiles/profile.html:244
+msgid "Prev"
+msgstr ""
+
+#: dataviva/html/profiles/profile.html:246
+msgid "Random"
+msgstr ""
+
+#: dataviva/html/profiles/profile.html:320
 msgid "Show Related Profiles"
 msgstr ""
 
-#: dataviva/html/profiles/profile.html:283
+#: dataviva/html/profiles/profile.html:354
 msgid ""
 "To view additional data regarding world trade, click here to visit the "
 "Observatory."
@@ -1778,27 +1845,27 @@ msgstr ""
 msgid "Rankings"
 msgstr ""
 
-#: dataviva/html/templates/about.html:128
+#: dataviva/html/templates/about.html:140
 msgid "Crosswalk Tables"
 msgstr ""
 
-#: dataviva/html/templates/about.html:134
+#: dataviva/html/templates/about.html:146
 msgid "HS to CNAE"
 msgstr ""
 
-#: dataviva/html/templates/about.html:138
+#: dataviva/html/templates/about.html:150
 msgid "CNAE to HS"
 msgstr ""
 
-#: dataviva/html/templates/about.html:142
+#: dataviva/html/templates/about.html:154
 msgid "CBO to Major"
 msgstr ""
 
-#: dataviva/html/templates/about.html:146
+#: dataviva/html/templates/about.html:158
 msgid "Major to CBO"
 msgstr ""
 
-#: dataviva/html/templates/about.html:182
+#: dataviva/html/templates/about.html:194
 msgid "Comparative Advantage"
 msgstr ""
 
@@ -1870,10 +1937,6 @@ msgstr ""
 
 #: dataviva/html/templates/site.html:55 dataviva/translations/dictionary.py:367
 msgid "Basic Course"
-msgstr ""
-
-#: dataviva/html/templates/site.html:63
-msgid "Line"
 msgstr ""
 
 #: dataviva/profiles/models.py:174 dataviva/profiles/models.py:245
