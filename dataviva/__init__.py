@@ -18,6 +18,15 @@ from utils.jinja_helpers import jinja_momentjs, jinja_formatter, jinja_strip_htm
 from utils.redis import RedisSessionInterface
 from flask.ext.mail import Mail
 
+def get_env_variable(var_name, default=-1):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        if default != -1:
+            return default
+        error_msg = "Set the %s os.environment variable" % var_name
+        raise Exception(error_msg)
+
 ''' Base directory of where the site is held '''
 datavivadir = os.path.abspath(os.path.dirname(__file__))
 
@@ -36,8 +45,9 @@ db = SQLAlchemy(app)
 
 # Initialize cache for views
 view_cache = Cache(app, config={'CACHE_TYPE': 'redis', \
-                'CACHE_REDIS_HOST':'localhost', 'CACHE_REDIS_PORT':6379, \
-                'CACHE_REDIS_PASSWORD':None})
+                'CACHE_REDIS_HOST':get_env_variable("DATAVIVA_REDIS_HOST", "localhost"), \
+                'CACHE_REDIS_PORT':get_env_variable("DATAVIVA_REDIS_PORT", 6379), \
+                'CACHE_REDIS_PASSWORD':get_env_variable("DATAVIVA_REDIS_PW", None)})
 
 # Set session store as server side (Redis)
 redis_sesh = RedisSessionInterface()
