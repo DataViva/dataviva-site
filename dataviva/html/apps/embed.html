@@ -2157,6 +2157,11 @@
               "wage_order": i,
               "year": point.year
             };
+            if (id === "all") {
+              obj.name = dataviva.dictionary.brazil;
+              obj.color = "#00923f";
+              obj.icon = dataviva.icon("all", "bra");
+            }
             obj[out+"_"+id.length] = id;
             data_obj.push(obj);
           })
