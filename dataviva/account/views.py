@@ -33,6 +33,17 @@ def check_status():
     if result:
         data["user"] = g.user.nickname
         data["is_admin"] = g.user.is_admin()
+
+    # Save variable in session so we can determine if this is the user's
+    # first time on the site
+    if 'first_time' in session:
+        del session["first_time"]
+    if 'first_visit' in session:
+        session['first_visit'] = False
+    else:
+        data["flash"] = gettext("Welcome to the new version of DataViva! %(click_here)s for the complete list of new features.", click_here="<a target='_blank' href='https://github.com/DataViva/dataviva-site/releases/tag/2.0'>{}</a>".format(gettext("Click here")))
+        session['first_visit'] = True
+
     return jsonify(data)
 
 ###############################

@@ -674,25 +674,20 @@ dataviva.flash = function(text) {
 
 	d3.selectAll("#server_message").remove();
 
-	flash_cont = d3.select("#container").insert("div", ":first-child")
-
-	flash_inner = flash_cont.attr("id", "server_message")
-					.append("div")
-					.attr("class", "decision")
-					.text(text)
-
-	flash_inner.append("i")
-		.attr("id", "close_message")
-		.attr("class", "fa fa-times-circle")
-		.on(d3plus.client.pointer.click, function(d){
-	        var div = d3.select("#server_message")
-	        var timing = parseFloat(div.style("transition-duration"),10)*1000;
-	        div.style("opacity",0);
-	        setTimeout(function(){
-	          div.remove();
-	        },timing)
-		})
-}
+	d3.select("body").append("div")
+    .attr("id", "server_message").html(text)
+    .append("i")
+        .attr("id", "close_message")
+        .attr("class", "fa fa-times-circle")
+        .on(d3plus.client.pointer.click, function(d){
+        var div = d3.select("#server_message")
+        var timing = parseFloat(div.style("transition-duration"),10)*1000;
+        div.style("opacity",0);
+        setTimeout(function(){
+          div.remove();
+        }, timing)
+      });
+};
 
 dataviva.url = function(url,args,title) {
 

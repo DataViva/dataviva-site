@@ -2,6 +2,15 @@
 {% extends "templates/base.html" %}
 
 {% block content %}
+
+  {% set flashmsg = get_flashed_messages(with_categories=true) %}
+  {% if flashmsg %}
+    <div id="server_message">
+      {{ flashmsg[-1][1] }}
+      <i id="close_message" class="fa fa-times-circle"></i>
+    </div>
+  {% endif %}
+
   <div id="header_container" class="lightbox">
     <div id="header">
 
@@ -44,33 +53,33 @@
         <a class="account" href="{{ url_for('account.logout') }}"><i class="fa fa-key"></i>{% trans %}Logout{% endtrans %}</a>
       </div>
 
-      <div id="profiles_drop">
-        <a class="drop icon bra" href="/profiles/bra/">{% trans %}Location{% endtrans %}</a>
-        <a class="drop icon hs" href="/profiles/hs/">{% trans %}Product{% endtrans %}</a>
-        <a class="drop icon wld" href="/profiles/wld/">{% trans %}Trade Partner{% endtrans %}</a>
-        <a class="drop icon cnae" href="/profiles/cnae/">{% trans %}Industry{% endtrans %}</a>
-        <a class="drop icon cbo" href="/profiles/cbo/">{% trans %}Occupation{% endtrans %}</a>
-        <a class="drop icon university" href="/profiles/university/">{% trans %}University{% endtrans %}</a>
-        <a class="drop icon course_hedu" href="/profiles/course_hedu/">{% trans %}Major{% endtrans %}</a>
-        <a class="drop icon course_sc" href="/profiles/course_sc/">{% trans %}Basic Course{% endtrans %}</a>
-      </div>
-
-      <div id="apps_drop">
-        <a class="drop icon tree_map" href="/apps/builder/tree_map/">{% trans %}Tree Map{% endtrans %}</a>
-        <a class="drop icon stacked" href="/apps/builder/stacked/">{% trans %}Stacked{% endtrans %}</a>
-        <a class="drop icon geo_map" href="/apps/builder/geo_map/">{% trans %}Geo Map{% endtrans %}</a>
-        <a class="drop icon network" href="/apps/builder/network/">{% trans %}Network{% endtrans %}</a>
-        <a class="drop icon line" href="/apps/builder/line/">{% trans %}Line{% endtrans %}</a>
-        <a class="drop icon rings" href="/apps/builder/rings/">{% trans %}Rings{% endtrans %}</a>
-        <a class="drop icon scatter" href="/apps/builder/scatter/">{% trans %}Scatter{% endtrans %}</a>
-        <a class="drop icon compare" href="/apps/builder/compare/">{% trans %}Compare{% endtrans %}</a>
-        <a class="drop icon occugrid" href="/apps/builder/occugrid/">{% trans %}Occugrid{% endtrans %}</a>
-        <a class="drop icon box" href="/apps/builder/box/">{% trans %}Box Plot{% endtrans %}</a>
-        <a class="drop icon bar" href="/apps/builder/bar/">{% trans %}Bar Chart{% endtrans %}</a>
-      </div>
-
     </div>
 
+  </div>
+
+  <div id="profiles_drop">
+    <a class="drop icon bra" href="/profiles/bra/">{% trans %}Location{% endtrans %}</a>
+    <a class="drop icon hs" href="/profiles/hs/">{% trans %}Product{% endtrans %}</a>
+    <a class="drop icon wld" href="/profiles/wld/">{% trans %}Trade Partner{% endtrans %}</a>
+    <a class="drop icon cnae" href="/profiles/cnae/">{% trans %}Industry{% endtrans %}</a>
+    <a class="drop icon cbo" href="/profiles/cbo/">{% trans %}Occupation{% endtrans %}</a>
+    <a class="drop icon university" href="/profiles/university/">{% trans %}University{% endtrans %}</a>
+    <a class="drop icon course_hedu" href="/profiles/course_hedu/">{% trans %}Major{% endtrans %}</a>
+    <a class="drop icon course_sc" href="/profiles/course_sc/">{% trans %}Basic Course{% endtrans %}</a>
+  </div>
+
+  <div id="apps_drop">
+    <a class="drop icon tree_map" href="/apps/builder/tree_map/">{% trans %}Tree Map{% endtrans %}</a>
+    <a class="drop icon stacked" href="/apps/builder/stacked/">{% trans %}Stacked{% endtrans %}</a>
+    <a class="drop icon geo_map" href="/apps/builder/geo_map/">{% trans %}Geo Map{% endtrans %}</a>
+    <a class="drop icon network" href="/apps/builder/network/">{% trans %}Network{% endtrans %}</a>
+    <a class="drop icon line" href="/apps/builder/line/">{% trans %}Line{% endtrans %}</a>
+    <a class="drop icon rings" href="/apps/builder/rings/">{% trans %}Rings{% endtrans %}</a>
+    <a class="drop icon scatter" href="/apps/builder/scatter/">{% trans %}Scatter{% endtrans %}</a>
+    <a class="drop icon compare" href="/apps/builder/compare/">{% trans %}Compare{% endtrans %}</a>
+    <a class="drop icon occugrid" href="/apps/builder/occugrid/">{% trans %}Occugrid{% endtrans %}</a>
+    <a class="drop icon box" href="/apps/builder/box/">{% trans %}Box Plot{% endtrans %}</a>
+    <a class="drop icon bar" href="/apps/builder/bar/">{% trans %}Bar Chart{% endtrans %}</a>
   </div>
 
   {% if crumbs|length %}
@@ -88,15 +97,6 @@
   <div id="fullscreen"></div>
 
   <div id="container">
-
-    {% for category, msg in get_flashed_messages(with_categories=true) %}
-    <div id="server_message">
-      <div class="decision flash-{{ category }}">
-        {{ msg|safe }}
-        <i id="close_message" class="fa fa-times-circle"></i>
-      </div>
-    </div>
-    {% endfor %}
 
     {% block body %}
     {% endblock %}
@@ -230,6 +230,9 @@
       if (error) return console.warn(error);
       if (json["logged_in"]) {
         authenticated(json["user"], json["is_admin"]);
+      }
+      if (json.flash) {
+        dataviva.flash(json.flash);
       }
     });
 

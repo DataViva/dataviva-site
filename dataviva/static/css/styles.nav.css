@@ -179,22 +179,23 @@ div#language .leon.radio {
 
 #profiles_drop, #apps_drop {
   background-color: #f7f7f7;
+  left: 50%;
   overflow: hidden;
   position: absolute;
   text-align: left;
-  top: 59px;
-  z-index: 999;
+  top: 64px;
+  z-index: 30000;
 }
 
 #profiles_drop {
   border-bottom: 4px solid #e0902d;
-  left: 206px;
+  margin-left: -204px;
   width: 150px;
 }
 
 #apps_drop {
   border-bottom: 4px solid #af1f24;
-  left: 289px;
+  margin-left: -121px;
   width: 140px;
 }
 
@@ -348,30 +349,38 @@ a.opendata:hover {
 /*******************/
 
 #server_message {
-  position: relative;
+  background-color: #666;
+  -webkit-box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+          box-shadow: 0px 3px 7px rgba(0,0,0,0.25);
+  color: white;
+  display: block;
+  left: 0;
   margin: 0px auto;
+  padding: 6px 0;
+  position: fixed;
   text-align: center;
-  width: 800px;
+  top: 64px;
+  width: 100%;
+  z-index: 2000;
   -webkit-transition: opacity 0.5s;
      -moz-transition: opacity 0.5s;
           transition: opacity 0.5s;
 }
 
-#server_message > .decision {
-  background-color: #af1f24;
-  display: inline-block;
-  padding-right: 40px;
+#server_message a {
+  color: white;
+  text-decoration: underline;
 }
 
-#server_message > .decision::after {
-  content: "";
+#server_message a:hover {
+  color: #ddd;
 }
 
 #server_message i {
+  opacity: 0.5;
   position: absolute;
   right: 10px;
-  top: 10px;
-  opacity: 0.5;
+  top: 8px;
   -webkit-transition: opacity 0.1s;
      -moz-transition: opacity 0.1s;
           transition: opacity 0.1s;

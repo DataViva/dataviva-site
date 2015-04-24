@@ -35,13 +35,6 @@ def before_request():
     g.dictionary = json.dumps(dictionary())
     g.attr_version = 11
 
-    # Save variable in session so we can determine if this is the user's
-    # first time on the site
-    if 'first_time' in session:
-        session['first_time'] = False
-    else:
-        session['first_time'] = True
-
     # Check if the user is logged in, if so give the global object
     # a reference to the user from DB
     g.user = current_user
