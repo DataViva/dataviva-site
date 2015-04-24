@@ -42,9 +42,10 @@ def crawl_page(page):
                 for idx, link in enumerate(links):
                     try:
                         frame = iframes[idx]
-                        link.click()
+                        # this way will allow us to click into hidden accordion links
+                        driver.execute_script("arguments[0].click();", link);
                         driver.switch_to_frame(driver.find_element_by_id(frame.get_attribute("id")))
-                        element = WebDriverWait(driver, 10).until(
+                        element = WebDriverWait(driver, 15).until(
                             EC.element_to_be_clickable((By.ID, "data"))
                         )
                         driver.switch_to_default_content()
