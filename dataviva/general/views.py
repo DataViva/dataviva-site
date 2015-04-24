@@ -138,7 +138,7 @@ def home():
     items = make_items(data, Bra)
     carousels.append({
         "title": gettext("Richest Municipalities"),
-        "sub": gettext("Municipalities with the highest average wage."),
+        "sub": gettext("Municipalities with the highest average wage, excluding those with less than 50,000 people."),
         "type": profile,
         "items": items,
         "url" : carousel_base.format(metric, show, profile, limit),
