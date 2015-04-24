@@ -75,13 +75,14 @@ def filler(dataset, filter1, filter2):
 @view_cache.cached(timeout=604800, key_prefix=make_cache_key)
 def guide():
     apps = []
-    default_bra = '4mg'
-    default_cnae = 'i56112'
-    default_cbo = '2235'
-    default_hs = '052601'
+    default_bra = Bra.query.get("4mg")
+    default_cnae = Cnae.query.get("i56112")
+    default_cbo = Cbo.query.get("2235")
+    default_hs = Hs.query.get("052601")
+    build_list = Build.query.all()
 
     # Bar Chart
-    builds = Build.query.filter(Build.id.in_([176,177,178])).all()
+    builds = [b for b in build_list if b.id in (176,177,178)]
     builds[0].set_bra(default_bra)
     builds[1].set_filter1(default_cnae)
     builds[2].set_filter2(default_cbo)
@@ -93,7 +94,7 @@ def guide():
     })
 
     # Tree Map
-    builds = Build.query.filter(Build.id.in_([3,95,117])).all()
+    builds = [b for b in build_list if b.id in (3,95,117)]
     for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": gettext("A visualization using the area of rectangles to show shares of the specified value. The data is nested heirarchically by its given classificaiton."),
@@ -102,7 +103,7 @@ def guide():
         "type": "tree_map"
     })
     # Stacked
-    builds = Build.query.filter(Build.id.in_([20,27,150])).all()
+    builds = [b for b in build_list if b.id in (20,27,150)]
     for b in builds: b.set_bra(default_bra); b.set_filter1(default_cnae);
     apps.append({
         "summary": gettext("Similar to to a line chart, stacked area charts use an X and Y axis to show values across time. The data is nested heirarchically by its given classificaiton."),
@@ -111,7 +112,7 @@ def guide():
         "type": "stacked"
     })
     # Geo Map
-    builds = Build.query.filter(Build.id.in_([36,41,123])).all()
+    builds = [b for b in build_list if b.id in (36,41,123)]
     for b in builds: b.set_bra(default_bra); b.set_filter1(default_hs);
     apps.append({
         "summary": gettext("Data values overlayed on a geographic map varying their color by the value they represent."),
@@ -120,7 +121,7 @@ def guide():
         "type": "geo_map"
     })
     # Network
-    builds = Build.query.filter(Build.id.in_([33,35])).all()
+    builds = [b for b in build_list if b.id in (33,35)]
     for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": gettext("A visualization showing the connections between a specified dataset. The specified attributes are then overlayed on this network to show their position in this fictional space."),
@@ -129,7 +130,7 @@ def guide():
         "type": "network"
     })
     # Line
-    builds = Build.query.filter(Build.id.in_([91,115,154])).all()
+    builds = [b for b in build_list if b.id in (91,115,154)]
     for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": gettext("A type of chart which displays data as a time series with an X and Y axis."),
@@ -138,7 +139,7 @@ def guide():
         "type": "line"
     })
     # Rings
-    builds = Build.query.filter(Build.id.in_([48,49,50])).all()
+    builds = [b for b in build_list if b.id in (48,49,50)]
     for b in builds: b.set_bra(default_bra)
     builds[0].set_filter1("f41204");
     builds[1].set_filter2(default_cbo);
@@ -150,7 +151,7 @@ def guide():
         "type": "rings"
     })
     # Scatter
-    builds = Build.query.filter(Build.id.in_([44,46])).all()
+    builds = [b for b in build_list if b.id in (44,46)]
     for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": gettext("A visualization showing two variables plotted along an X and Y axis."),
@@ -159,7 +160,7 @@ def guide():
         "type": "scatter"
     })
     # Compare
-    builds = Build.query.filter(Build.id.in_([52,53,113])).all()
+    builds = [b for b in build_list if b.id in (52,53,113)]
     for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": gettext("Similar to the scatter visualization except this form of a scatter shows the same variable along both axes varrying the location for comparison purposes."),
@@ -168,7 +169,7 @@ def guide():
         "type": "compare"
     })
     # Occugrid
-    builds = Build.query.filter(Build.id.in_([51])).all()
+    builds = [b for b in build_list if b.id == 51]
     for b in builds: b.set_bra(default_bra); b.set_filter1(default_cnae);
     apps.append({
         "summary": gettext("A visualization showing the main occupations employed in various industries, their importance to that industry and the number of employees who work in these activities."),
@@ -177,7 +178,7 @@ def guide():
         "type": "occugrid"
     })
     # Box Plot
-    builds = Build.query.filter(Build.id.in_([160,161])).all()
+    builds = [b for b in build_list if b.id in (160,161)]
     for b in builds: b.set_bra(default_bra)
     apps.append({
         "summary": gettext("A visualization, also known as box and whisker diagram, used to display the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum."),
