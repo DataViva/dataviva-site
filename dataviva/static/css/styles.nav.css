@@ -181,7 +181,7 @@ div#language .leon.radio {
   background-color: #f7f7f7;
   left: 50%;
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   text-align: left;
   top: 64px;
   z-index: 30000;
