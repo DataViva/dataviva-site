@@ -240,12 +240,13 @@
 
     var createRecs = function(html, arr) {
       arr.forEach(function(a){
-        html += "<a id='"+a.url+"' class='decision short icon "
         if ("app" in a) {
+          html += "<a id='"+a.url+"' class='help short icon "
           html += a.app.type+"' ";
           html += "onclick='app.start(this.id)'>";
         }
         else {
+          html += "<a id='"+a.url+"' class='decision short icon "
           html += a.type+"' ";
           html += "onclick='app.redirect(this.id)'>";
         }
@@ -481,7 +482,7 @@
         }
         else if ("profile" in data) {
           var p = data.profile;
-          html_return += "<a id='"+p.url+"' class='decision icon "
+          html_return += "<br><a id='"+p.url+"' class='decision icon "
           html_return += app.build.output_attr + "' ";
           html_return += "onclick='app.redirect(this.id)'>";
           html_return += p.title;
