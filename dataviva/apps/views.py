@@ -10,7 +10,7 @@ from flask.ext.babel import gettext
 from dataviva import db, datavivadir, __year_range__, view_cache
 from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
-from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_hedu, Course_sc
+from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_hedu, Course_sc, Search
 from dataviva.apps.models import Build, UI, App, Crosswalk_oc, Crosswalk_pi
 from dataviva.general.models import Short
 
@@ -795,6 +795,8 @@ def crosswalk_recs(dataset, filter, id):
         results = table.query.filter(col == id)
         ids = [row.get_id(dataset) for row in results]
         if ids:
+            ids = Search.query.filter(Search.id.in_(ids)).filter(Search.kind == attr_swap[filter]).all()
+            ids = [a.id for a in ids]
             table = globals()[attr_swap[filter].capitalize()]
             attrs = table.query.filter(table.id.in_(ids)).all()
             crosswalk = [{"title": a.name(), "url": a.url(), "type": attr_swap[filter]} for a in attrs]
