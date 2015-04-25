@@ -348,6 +348,7 @@ def get_builds(bra_attr, dataset, profile1, filter1, profile2, filter2, skip_mod
 
 @mod.route('/recommend/', methods=['GET', 'POST'])
 @mod.route('/recommend/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
+@view_cache.cached(timeout=604800, key_prefix=api_cache_key("apps:recommend"))
 def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=None, output=None):
 
     recommended = {}
