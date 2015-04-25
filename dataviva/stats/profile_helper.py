@@ -172,18 +172,22 @@ def hs_stats(pobj, secex_year):
     five_years_ago = secex_year - 5
 
     filters = [Ymbp.year == secex_year, Ymbp.month == 0, Ymbp.hs_id == pobj.id, Ymbp.bra_id_len == 9]
-    profile, value = get_top_stat(Ymbp, Ymbp.bra_id, Ymbp.export_val, Bra, filters)
-    stats.append(make_stat(key, group, gettext("Top Municipality by Exports"), profile=profile, value=value, mode="export_val"))
+    top_stat = get_top_stat(Ymbp, Ymbp.bra_id, Ymbp.export_val, Bra, filters)
+    if top_stat:
+        stats.append(make_stat(key, group, gettext("Top Municipality by Exports"), profile=top_stat[0], value=top_stat[1], mode="export_val"))
 
     filters = [Ympw.year == secex_year, Ympw.month == 0, Ympw.hs_id == pobj.id, Ympw.wld_id_len == 5]
-    profile, value = get_top_stat(Ympw, Ympw.wld_id, Ympw.export_val, Wld, filters)
-    stats.append(make_stat(key, group, gettext("Top Country by Exports"), profile=profile, value=value, mode="export_val"))
+    top_stat = get_top_stat(Ympw, Ympw.wld_id, Ympw.export_val, Wld, filters)
+    if top_stat:
+        stats.append(make_stat(key, group, gettext("Top Country by Exports"), profile=top_stat[0], value=top_stat[1], mode="export_val"))
 
     filters = [Ymp.year == secex_year, Ymp.month == 0, Ymp.hs_id == pobj.id]
-    g1, g5, total_exports = get_stat_val(Ymp, [Ymp.export_val_growth, Ymp.export_val_growth_5, Ymp.export_val], filters)
-    stats.append(make_stat(key, group, gettext("Nominal Annual Growth Rate (1 year)"), desc=g1, mode="export_val_growth"))
-    stats.append(make_stat(key, group, gettext("Nominal Annual Growth Rate (5 year)"), desc=g5, mode="export_val_growth"))
-    stats.append(make_stat(key, group, gettext("Total Exports"), desc=total_exports, mode="export_val"))
+    stat_val = get_stat_val(Ymp, [Ymp.export_val_growth, Ymp.export_val_growth_5, Ymp.export_val], filters)
+    if stat_val:
+        g1, g5, total_exports = stat_val
+        stats.append(make_stat(key, group, gettext("Nominal Annual Growth Rate (1 year)"), desc=g1, mode="export_val_growth"))
+        stats.append(make_stat(key, group, gettext("Nominal Annual Growth Rate (5 year)"), desc=g5, mode="export_val_growth"))
+        stats.append(make_stat(key, group, gettext("Total Exports"), desc=total_exports, mode="export_val"))
 
     group = u'{1} {0}'.format(gettext("Trade Stats"), five_years_ago)
     filters = [Ymp.year == five_years_ago, Ymp.month == 0, Ymp.hs_id == pobj.id]
@@ -247,13 +251,16 @@ def course_hedu_stats(pobj, hedu_year):
     key = "hedu"
 
     filters = [Yuc.year == hedu_year, Yuc.course_hedu_id == pobj.id] # -- no nesting for university_ids
-    profile, value = get_top_stat(Yuc, Yuc.university_id, Yuc.enrolled, University, filters)
-    stats.append(make_stat(key, group, gettext("Top University by Enrollment"), profile=profile, value=value, mode="enrolled"))
+    top_stat = get_top_stat(Yuc, Yuc.university_id, Yuc.enrolled, University, filters)
+    if top_stat:
+        stats.append(make_stat(key, group, gettext("Top University by Enrollment"), profile=top_stat[0], value=top_stat[1], mode="enrolled"))
 
     filters = [Yc_hedu.year == hedu_year, Yc_hedu.course_hedu_id == pobj.id]
-    enrolled, graduates = get_stat_val(Ymw, [Yc_hedu.enrolled, Yc_hedu.graduates], filters)
-    stats.append(make_stat(key, group, gettext("Total Enrollment"), desc=enrolled, mode="enrolled"))
-    stats.append(make_stat(key, group, gettext("Total Graduates"), desc=graduates, mode="graduates"))
+    stat_val = get_stat_val(Ymw, [Yc_hedu.enrolled, Yc_hedu.graduates], filters)
+    if stat_val:
+        enrolled, graduates = stat_val
+        stats.append(make_stat(key, group, gettext("Total Enrollment"), desc=enrolled, mode="enrolled"))
+        stats.append(make_stat(key, group, gettext("Total Graduates"), desc=graduates, mode="graduates"))
     return stats
 
 def course_sc_stats(pobj):
