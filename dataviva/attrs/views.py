@@ -51,6 +51,14 @@ def get_planning_region_map():
     pr_map = {k:v for k,v in prs}
     return pr_map
 
+@mod.route("/school/")
+@view_cache.cached(key_prefix=api_cache_key("attrs"))
+def voc_schools():
+    attrs = School.query.filter(School.is_vocational == 1).all()
+    lang = request.args.get('lang', None) or g.locale
+    data = [fix_name(a.serialize(), lang) for a in attrs]
+    return jsonify(data=data)
+
 @mod.route("/school/in/<bra_id>/")
 @gzipped
 @view_cache.cached(key_prefix=api_cache_key("attrs"))
