@@ -237,7 +237,13 @@
     });
 
     function change_language(l) {
-      window.location = "/set_lang/" + l + "/?next=" + window.location.pathname + window.location.search;
+      var full_url = window.location.href;
+      var sub = full_url.substr(0, full_url.indexOf('.'));
+      var rest_of_url = full_url.substr(full_url.indexOf('.')+1);
+      
+      var new_url = 'http://' + l + '.' + rest_of_url;
+      
+      window.location = new_url;
     }
 
     leon("$language_select").color("{{ g.color }}").size("small")

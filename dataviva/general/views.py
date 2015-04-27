@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import Blueprint, render_template, g, request, current_app, session, redirect, url_for, flash, abort, json
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.babel import gettext
-
+from urlparse import urlparse
 import time
 
 mod = Blueprint('general', __name__, url_prefix='/')
@@ -45,7 +45,21 @@ def before_request():
 
     # Set the locale to either 'pt' or 'en' on the global object
     if request.endpoint != 'static':
-        g.locale = get_locale()
+        
+        # Determine subdomain (if specified)
+        url = urlparse(request.url)
+        subdomain = None
+        domain = url.netloc.split('.')
+        if len(domain) > 1:
+            subdomain = domain[0]
+        
+        # Get lang w/ subdomain trumping all
+        g.locale = get_locale(lang=subdomain)
+        
+        # If subdomain not specified redirect TO subdomain w/ "best match" lang
+        if not subdomain:
+            new_url = "{}://{}.{}{}?{}".format(url.scheme, g.locale, domain[-1], url.path, url.query)
+            return redirect(new_url)
 
 @babel.localeselector
 def get_locale(lang=None):
