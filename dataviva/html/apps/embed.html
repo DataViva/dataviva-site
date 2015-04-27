@@ -2091,10 +2091,10 @@
         data.raw.forEach(function(d){
           d.school_8 = d.school_id;
           var sb = "school_"+d.bra_id;
-          if (out === "school") {
+          if (out === "school" && attr.school_8[d.school_8]) {
             d.school_type_id = attr.school_8[d.school_8].school_type_id;
           }
-          else if (app.attrs[sb]) {
+          else if (app.attrs[sb] && app.attrs[sb][d.school_8]) {
             d.school_type_id = app.attrs[sb][d.school_8].school_type_id;
           }
 
