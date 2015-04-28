@@ -50,7 +50,7 @@ def before_request():
         url = urlparse(request.url)
         subdomain = None
         domain = url.netloc.split('.')
-        if len(domain) > 1:
+        if domain[0] == "en" or domain[0] == "pt":
             subdomain = domain[0]
 
         # Get lang w/ subdomain trumping all
@@ -58,7 +58,10 @@ def before_request():
 
         # If subdomain not specified redirect TO subdomain w/ "best match" lang
         if not subdomain:
-            new_url = "{}://{}.{}{}?{}".format(url.scheme, g.locale, domain[-1], url.path, url.query)
+            if url.query:
+                new_url = "{}://{}.{}{}?{}".format(url.scheme, g.locale, domain[-1], url.path, url.query)
+            else:
+                new_url = "{}://{}.{}{}".format(url.scheme, g.locale, domain[-1], url.path)
             return redirect(new_url)
 
 @babel.localeselector
