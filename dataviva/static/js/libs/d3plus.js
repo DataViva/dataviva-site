@@ -18914,13 +18914,12 @@ module.exports = function(vars) {
   vars.container.value.attr("text-anchor", anchor).attr("font-size", fontSize + "px").style("font-size", fontSize + "px").attr("x", vars.container.x).attr("y", vars.container.y);
   truncate = function() {
     textBox.remove();
-    line--;
-    if (line !== 1) {
-      if (reverse) {
-        textBox = vars.container.value.select("tspan");
-      } else {
-        textBox = d3.select(vars.container.value.node().lastChild);
-      }
+    if (reverse) {
+      line++;
+      textBox = vars.container.value.select("tspan");
+    } else {
+      line--;
+      textBox = d3.select(vars.container.value.node().lastChild);
     }
     if (!textBox.empty()) {
       words = textBox.text().match(/[^\s-]+-?/g);
@@ -18950,7 +18949,7 @@ module.exports = function(vars) {
         if (vars.text.split.value.indexOf(lastChar) >= 0) {
           lastWord = lastWord.substr(0, lastWord.length - 1);
         }
-        textBox.text(words.join(" ") + " " + lastWord + " ...");
+        textBox.text(words.join(" ") + " " + lastWord + "...");
         if (textBox.node().getComputedTextLength() > lineWidth()) {
           return ellipsis();
         }
@@ -19012,6 +19011,9 @@ module.exports = function(vars) {
           placeWord(next_char);
         }
       }
+    }
+    if (line * dy > height) {
+      truncate();
     }
     return lines = Math.abs(line - start) + 1;
   };
@@ -30637,7 +30639,6 @@ labelPadding = function(vars) {
   } else {
     xMaxWidth = vars.x.scale.viz(xValues[1]) - vars.x.scale.viz(xValues[0]);
     xMaxWidth = Math.abs(xMaxWidth);
-    xMaxWidth -= vars.labels.padding * 2;
   }
   if (xAxisWidth > xMaxWidth && xText.join("").indexOf(" ") > 0) {
     vars.x.ticks.wrap = true;
@@ -30673,10 +30674,12 @@ labelPadding = function(vars) {
     });
     vars.x.ticks.rotate = -90;
   } else {
-    vars.x.ticks.hidden = true;
-    vars.x.ticks.rotate = 0;
     xAxisWidth = 0;
     xAxisHeight = 0;
+  }
+  if (!(xAxisWidth && xAxisHeight)) {
+    vars.x.ticks.hidden = true;
+    vars.x.ticks.rotate = 0;
   }
   xAxisHeight = Math.ceil(xAxisHeight);
   xAxisWidth = Math.ceil(xAxisWidth);
