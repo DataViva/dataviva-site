@@ -1472,9 +1472,10 @@
         app.viz.footer(dataviva.dictionary[app.build.dataset+"_footer"]);
       }
       else {
-        var f = "<a href='http://www.dataviva.info' target='_blank'>";
-        f += dataviva.dictionary.embed_footer + "</a>";
-        app.viz.footer(f);
+        app.viz.footer({
+          "value": dataviva.dictionary.embed_footer,
+          "link": location.href.replace("embed", "builder")
+        });
       }
 
       app.viz.labels({"align": "center", "valign": "middle"})
