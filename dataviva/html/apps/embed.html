@@ -1358,6 +1358,8 @@
                    "default" : "knockout"
       });
 
+      app.tooltip["short"][""] = [""]
+      app.tooltip["long"][""] = [""]
       if (app.build.output_attr == "bra") {
         app.tooltip["short"][""] = ["id_ibge"]
         app.tooltip["long"][""] = ["id_ibge"]
@@ -1374,6 +1376,10 @@
 
       if (app.monthly && (!app.vars.time || app.vars.time === "month")) {
         app.tooltip.short[""].push("month");
+      }
+      else if (app.build.app.type === "bar") {
+        app.tooltip.short[""].push("share");
+        app.tooltip.long[""].push("share");
       }
 
       if (app.build.bra[0].id == "all" && app.build.app.type == "network") {
@@ -2138,7 +2144,9 @@
           attr = app.build[out][0];
           if (!point.hist) point.hist = '{}';
           var hist = JSON.parse(point.hist.replace(/'/g,"\"")),
-              ranges = d3.keys(hist).sort(function(a, b){ return a.split(",")[0] - b.split(",")[0]; });
+              ranges = d3.keys(hist).sort(function(a, b){ return a.split(",")[0] - b.split(",")[0]; }),
+              total = d3.sum(d3.values(hist));
+
           ranges.forEach(function(range, i){
             var label = range.split(",").map(function(r){ return d3.format(",")(r); });
             if (dataviva.language === "pt") {
@@ -2157,7 +2165,8 @@
               "num_jobs": hist[range],
               "wage_month": label,
               "wage_order": i,
-              "year": point.year
+              "year": point.year,
+              "share": (hist[range]/total) * 100
             };
             if (id === "all") {
               obj.name = dataviva.dictionary.brazil;
