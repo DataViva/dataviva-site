@@ -1,6 +1,6 @@
 import re
 from dataviva import db
-from sqlalchemy import func, desc
+from sqlalchemy import func, desc, or_
 from dataviva.attrs.models import bra_pr, Bra
 
 SHOW='show'
@@ -63,7 +63,12 @@ def _show_filters_to_add(column, value, table, colname):
         #     result = [muni for muni, pr in result]
         #     to_add.append(column.in_(result))
         if prefix:
-            to_add.append(column.startswith(prefix))
+            if OR in prefix:
+                prefixes = prefix.split(OR)
+                prefix_conds = [column.startswith(p) for p in prefixes]
+                to_add.append(or_(*prefix_conds))
+            else:
+                to_add.append(column.startswith(prefix))
 
         if length and hasattr(table, colname + LEN):
             lencol = getattr(table, colname + LEN)
