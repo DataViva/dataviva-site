@@ -106,7 +106,11 @@ def num_format(number, key = None, labels = True):
         elif n < 0:
             arrow = "down"
         n = float(n)*100
-    n = format_decimal(n, locale=g.locale)
+    
+    if "age" in key:
+        n = int(round(n))
+    else:
+        n = format_decimal(n, locale=g.locale)
 
     # If the language is not English, translate the suffix.
     if suffix:
