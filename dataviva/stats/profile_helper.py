@@ -9,6 +9,8 @@ from dataviva.rais.models import Ybi, Ybo, Yio, Yb_rais, Yi, Yo
 from dataviva.hedu.models import Yu, Yuc, Ybu, Yc_hedu
 from dataviva.sc.models import Ybc_sc, Yc_sc
 
+from dataviva.utils.title_case import title_case
+
 from flask.ext.babel import gettext
 
 
@@ -355,7 +357,7 @@ def make_stat(key, group, name, desc=None, value=None, url=None, mode=None, year
     return {
                 "group": group,
                 "key": key,
-                "name": name,
+                "name": title_case(name),
                 "url": url,
                 "desc" : desc,
                 "value": value,

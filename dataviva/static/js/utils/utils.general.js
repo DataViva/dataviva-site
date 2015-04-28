@@ -4,13 +4,13 @@ String.prototype.toTitleCase = function() {
   // they are the first or last words in the string
   var lowers = ['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'from', 'if',
             'in', 'into', 'near', 'nor', 'of', 'on', 'onto', 'or', 'that',
-            'the', 'to', 'with', 'via', 'vs', 'vs.',
+            'the', 'to', 'with', 'via', 'vs', 'vs.', 'per',
             'um', 'uma', 'e', 'como', 'em', 'no', 'na', 'mas', 'por',
             'para', 'pelo', 'pela', 'de', 'do', 'da', 'se', 'perto', 'nem',
             'ou', 'que', 'o', 'a', 'com'];
 
   // Certain words such as initialisms or acronyms should be left uppercase
-  var uppers = ["ID", "CEO", "CEOs", "CFO", "CFOs", "CNC", "COO", "COOs", "CPU", "HVAC", "R&D", "P&D", "IT", "TI", "TV", "UI"];
+  var uppers = ["ID", "CEO", "CEOs", "CFO", "CFOs", "CNC", "COO", "COOs", "CPU", "HVAC", "GDP", "GINI", "IDHM", "R&D", "P&D", "PIB", "IT", "TI", "TV", "UI"];
   var smalls = uppers.map(function(u){ return u.toLowerCase(); });
 
   var str = this.replace(/([^\s:\-:\/:\(])([^\s:\-:\/:\(]*)/g, function(txt) {

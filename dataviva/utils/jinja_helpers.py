@@ -2,6 +2,7 @@ from re import sub
 from jinja2 import Markup
 from dataviva.translations.dictionary import dictionary
 from dataviva.utils.num_format import num_format
+from dataviva.utils.title_case import title_case
 
 ''' A helper class for dealing with injecting times into the page using moment.js'''
 class jinja_momentjs:
@@ -49,7 +50,7 @@ class jinja_formatter:
             if self.text in dict:
                 return Markup(dict[self.text])
             else:
-                return Markup(self.text)
+                return Markup(title_case(self.text))
 
 
 ''' A helper funciton for stripping out html tags for showing snippets of user submitted content'''
