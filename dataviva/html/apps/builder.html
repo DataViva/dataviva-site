@@ -193,7 +193,7 @@
   </div>
 
   <div class="lightbox builder_embed">
-    <iframe id="bulder_iframe" src="{{ request.url|replace('builder', 'embed') }}"></iframe>
+    <iframe id="bulder_iframe" src="{{ request.path|replace('builder', 'embed') ~ '?' ~ request.query_string }}"></iframe>
   </div>
 
 {% endblock %}
