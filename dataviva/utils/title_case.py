@@ -7,19 +7,22 @@ def title_case(string):
     elif not isinstance(string, (unicode, str)):
         return string
 
-    exceptions = ['A', 'An', 'And', 'As', 'At', 'But', 'By', 'For', 'From', 'If', \
-              'In', 'Into', 'Near', 'Nor', 'Of', 'On', 'Onto', 'Or', 'That', \
-              'The', 'To', 'With', 'Via', 'Vs', 'Vs.', \
-              'Um', 'Uma', 'E', 'Como', 'Em', 'No', 'Na', 'Mas', 'Por', \
-              'Para', 'Pelo', 'Pela', 'De', 'Do', 'Da', 'Se', 'Perto', 'Nem', \
-              'Ou', 'Que', 'O', 'A', 'Com']
-    uppers = ['Id', 'Tv', 'R&d', "P&d", "It", "Ti"]
+    exceptions = ['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'from', 'if', \
+              'in', 'into', 'near', 'nor', 'of', 'on', 'onto', 'or', 'that', \
+              'the', 'to', 'with', 'via', 'vs', 'vs.', \
+              'um', 'uma', 'e', 'como', 'em', 'no', 'na', 'mas', 'por', \
+              'para', 'pelo', 'pela', 'de', 'do', 'da', 'se', 'perto', 'nem', \
+              'ou', 'que', 'o', 'a', 'com']
+    uppers = ["ID", "CEO", "CEOs", "CFO", "CFOs", "CNC", "COO", "COOs", "CPU", "HVAC", "R&D", "P&D", "IT", "TI", "TV", "UI"]
+    smalls = [s.lower() for s in uppers]
+
     words = re.split('(\s|-|\/|\()', string)
+
     def detect_string(s):
-        if s in exceptions or s.capitalize() in exceptions:
+        if s.lower() in exceptions:
             return s.lower()
-        elif s in uppers or s.capitalize() in uppers:
-            return s.upper()
+        elif s.lower() in smalls:
+            return uppers[smalls.index(s.lower())]
         else:
             return s.capitalize()
 

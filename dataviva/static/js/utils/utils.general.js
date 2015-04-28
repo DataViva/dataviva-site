@@ -1,22 +1,23 @@
 String.prototype.toTitleCase = function() {
-  var i, str, lowers, uppers;
+
   // Certain minor words should be left lowercase unless
   // they are the first or last words in the string
-  lowers = ['A', 'An', 'And', 'As', 'At', 'But', 'By', 'For', 'From', 'If',
-            'In', 'Into', 'Near', 'Nor', 'Of', 'On', 'Onto', 'Or', 'That',
-            'The', 'To', 'With', 'Via', 'Vs', 'Vs.',
-            'Um', 'Uma', 'E', 'Como', 'Em', 'No', 'Na', 'Mas', 'Por',
-            'Para', 'Pelo', 'Pela', 'De', 'Do', 'Da', 'Se', 'Perto', 'Nem',
-            'Ou', 'Que', 'O', 'A', 'Com'];
+  var lowers = ['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'from', 'if',
+            'in', 'into', 'near', 'nor', 'of', 'on', 'onto', 'or', 'that',
+            'the', 'to', 'with', 'via', 'vs', 'vs.',
+            'um', 'uma', 'e', 'como', 'em', 'no', 'na', 'mas', 'por',
+            'para', 'pelo', 'pela', 'de', 'do', 'da', 'se', 'perto', 'nem',
+            'ou', 'que', 'o', 'a', 'com'];
 
   // Certain words such as initialisms or acronyms should be left uppercase
-  uppers = ['Id', 'Tv', 'R&d', "P&d", "It", "Ti"];
+  var uppers = ["ID", "CEO", "CEOs", "CFO", "CFOs", "CNC", "COO", "COOs", "CPU", "HVAC", "R&D", "P&D", "IT", "TI", "TV", "UI"];
+  var smalls = uppers.map(function(u){ return u.toLowerCase(); });
 
-  str = this.replace(/([^\s:\-:\/:\(])([^\s:\-:\/:\(]*)/g, function(txt) {
-    var us = txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-    if (lowers.indexOf(txt) >= 0 || lowers.indexOf(us) >= 0) return txt.toLowerCase()
-    else if (uppers.indexOf(txt) >= 0 || uppers.indexOf(us) >= 0) return txt.toUpperCase()
-    else return us
+  var str = this.replace(/([^\s:\-:\/:\(])([^\s:\-:\/:\(]*)/g, function(txt) {
+    var low = txt.toLowerCase();
+    if (lowers.indexOf(low) >= 0) return low
+    else if (smalls.indexOf(low) >= 0) return uppers[smalls.indexOf(low)];
+    else return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 
   return str.charAt(0).toUpperCase() + str.substr(1);
