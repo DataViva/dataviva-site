@@ -812,7 +812,7 @@
 
       d3.json("/apps/embed/"+app.url+"?lang="+dataviva.language)
         .header("X-Requested-With", "XMLHttpRequest")
-        .get(function(error,data){
+        .get(function(error, data){
 
           if (!error) {
             app.build = data.current_build;
@@ -855,9 +855,9 @@
 
             app.star(data.starred);
 
-            // if (app.build && app.build.app.type != data.current_build.app.type) {
-            //   builder.app(data.current_build.app.type,true)
-            // }
+            if (last_app && app.build.app.type !== last_app) {
+              delete app.vars.year;
+            }
 
             // Set public current build variable
             app.years = year_range[app.build.dataset];
@@ -872,21 +872,6 @@
             last_depth = app.build.bra[0].id == "all" ? "bra_3" : "bra_9";
             leon("#app_select").color(app.build.app.color)
             builder.url()
-            // builder.outputs(data.all_builds)
-
-            // Show/hide filters depending on build requirements
-            // d3.selectAll("div.build_filter").each(function(){
-            //   var filter = this.id,
-            //       type = filter.slice(0,filter.length-2),
-            //       index = filter.slice(-1);
-            //   if (app.build[type] && app.build[type][index]) {
-            //     d3.select(this).style("display","inline-block")
-            //     builder.filter(app.build[type][index],filter,true)
-            //   }
-            //   else {
-            //     d3.select(this).style("display","none")
-            //   }
-            // })
 
             // Remove unused global_vars
             var uis = ["year"];
