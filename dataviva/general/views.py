@@ -53,7 +53,7 @@ def before_request():
         if domain[0] == "en" or domain[0] == "pt":
             subdomain = domain.pop(0)
         
-        domain = u"".join(domain)
+        domain = u".".join(domain)
 
         # Get lang w/ subdomain trumping all
         g.locale = get_locale(lang=subdomain)
