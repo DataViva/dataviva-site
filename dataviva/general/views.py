@@ -18,10 +18,10 @@ from dataviva.stats.helper import stats_list, make_items
 from dataviva.utils.cached_query import cached_query, make_cache_key
 from dataviva.utils.gzip_data import gzipped
 
-from config import ACCOUNTS, ERROR_EMAIL, DEBUG
+from config import ACCOUNTS, DEBUG
 
 #utils
-# from ..utils import send_mail
+from ..utils import send_mail
 
 ###############################
 # General functions for ALL views
@@ -45,17 +45,17 @@ def before_request():
 
     # Set the locale to either 'pt' or 'en' on the global object
     if request.endpoint != 'static':
-        
+
         # Determine subdomain (if specified)
         url = urlparse(request.url)
         subdomain = None
         domain = url.netloc.split('.')
         if len(domain) > 1:
             subdomain = domain[0]
-        
+
         # Get lang w/ subdomain trumping all
         g.locale = get_locale(lang=subdomain)
-        
+
         # If subdomain not specified redirect TO subdomain w/ "best match" lang
         if not subdomain:
             new_url = "{}://{}.{}{}?{}".format(url.scheme, g.locale, domain[-1], url.path, url.query)
@@ -289,7 +289,7 @@ if not DEBUG:
         if "fancybox" in request.url:
           allowed = False
 
-        if allowed and ERROR_EMAIL and error_code != 404:
+        if allowed and error_code != 404:
             admins = User.query.filter(User.role == 1).filter(User.email != "").filter(User.agree_mailer == 1).all()
             emails = [str(getattr(a,"email")) for a in admins]
 
