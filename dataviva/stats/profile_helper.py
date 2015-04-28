@@ -124,9 +124,11 @@ def cnae_stats(pobj, rais_year):
     stats.append(make_stat(key, group, gettext("Top Occupation by Employment"), profile=profile, value=value, mode="num_jobs"))
 
     filters = [Yi.year == rais_year, Yi.cnae_id == pobj.id]
-    wage, wage_avg = get_stat_val(Yi, [Yi.wage, Yi.wage_avg], filters)
+    wage, wage_avg, num_est, age_avg = get_stat_val(Yi, [Yi.wage, Yi.wage_avg, Yi.num_est, Yi.age_avg], filters)
     stats.append(make_stat(key, group, gettext("Total Monthly Wage"), desc=wage, mode="wage"))
     stats.append(make_stat(key, group, gettext("Average Monthly Wage"), desc=wage_avg, mode="wage"))
+    stats.append(make_stat(key, group, gettext("Number of Establishments"), desc=num_est, mode="num_est"))
+    stats.append(make_stat(key, group, gettext("Average Employee Age"), desc=age_avg, mode="age"))
 
     group = u'{1} {0}'.format(gettext("Employment Stats"), five_years_ago)
     wage, wage_avg = get_stat_val(Yi, [Yi.wage, Yi.wage_avg], filters)
@@ -151,11 +153,12 @@ def cbo_stats(pobj, rais_year):
     stats.append(make_stat(key, group, gettext("Top Industry by Employment"), profile=profile, value=value, mode="num_jobs"))
 
     filters = [Yo.year == rais_year, Yo.cbo_id == pobj.id]
-    res = get_stat_val(Yo, [Yo.wage, Yo.wage_avg], filters)
+    res = get_stat_val(Yo, [Yo.wage, Yo.wage_avg, Yo.age_avg], filters)
     if res:
-        wage, wage_avg = res
+        wage, wage_avg, age_avg = res
         stats.append(make_stat(key, group, gettext("Total Monthly Wage"), desc=wage, mode="wage"))
         stats.append(make_stat(key, group, gettext("Average Monthly Wage"), desc=wage_avg, mode="wage"))
+        stats.append(make_stat(key, group, gettext("Average Employee Age"), desc=age_avg, mode="age"))
 
     group = u'{1} {0}'.format(gettext("Employment Stats"), five_years_ago)
     filters = [Yo.year == five_years_ago, Yo.cbo_id == pobj.id]
@@ -184,12 +187,13 @@ def hs_stats(pobj, secex_year):
         stats.append(make_stat(key, group, gettext("Top Country by Exports"), profile=top_stat[0], value=top_stat[1], mode="export_val"))
 
     filters = [Ymp.year == secex_year, Ymp.month == 0, Ymp.hs_id == pobj.id]
-    stat_val = get_stat_val(Ymp, [Ymp.export_val_growth, Ymp.export_val_growth_5, Ymp.export_val], filters)
+    stat_val = get_stat_val(Ymp, [Ymp.export_val_growth, Ymp.export_val_growth_5, Ymp.export_val, Ymp.import_val], filters)
     if stat_val:
-        g1, g5, total_exports = stat_val
+        g1, g5, total_exports, total_imports = stat_val
         stats.append(make_stat(key, group, gettext("Nominal Annual Growth Rate (1 year)"), desc=g1, mode="export_val_growth"))
         stats.append(make_stat(key, group, gettext("Nominal Annual Growth Rate (5 year)"), desc=g5, mode="export_val_growth"))
         stats.append(make_stat(key, group, gettext("Total Exports"), desc=total_exports, mode="export_val"))
+        stats.append(make_stat(key, group, gettext("Total Imports"), desc=total_imports, mode="import_val"))
 
     group = u'{1} {0}'.format(gettext("Trade Stats"), five_years_ago)
     filters = [Ymp.year == five_years_ago, Ymp.month == 0, Ymp.hs_id == pobj.id]
@@ -215,7 +219,7 @@ def wld_stats(pobj, secex_year):
 
     filters = [Ymw.year == secex_year, Ymw.month == 0, Ymw.wld_id == pobj.id]
     g1e, g5e, total_exports, g1i, g5i, total_imports, eci = get_stat_val(Ymw, [Ymw.export_val_growth, Ymw.export_val_growth_5, Ymw.export_val, Ymw.import_val_growth, Ymw.import_val_growth_5, Ymw.import_val, Ymw.eci], filters)
-    stats.append(make_stat(key, group, gettext("Total Imports"), desc=total_exports, mode="import_val"))
+    stats.append(make_stat(key, group, gettext("Total Imports"), desc=total_imports, mode="import_val"))
     stats.append(make_stat(key, group, gettext("Nominal Annual Growth Rate (1 year)"), desc=g1i, mode="import_val_growth"))
     stats.append(make_stat(key, group, gettext("Nominal Annual Growth Rate (5 year)"), desc=g5i, mode="import_val_growth"))
     stats.append(make_stat(key, group, gettext("Total Exports"), desc=total_exports, mode="export_val"))
