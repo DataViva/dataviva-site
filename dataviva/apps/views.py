@@ -333,7 +333,7 @@ def app_star(app_name, data_type, bra_id, filter1, filter2, output):
     else:
         return jsonify({"success": -1})
 
-def get_builds(bra_attr, dataset, profile1, filter1, profile2, filter2):
+def get_builds(bra_attr, dataset, profile1, filter1, profile2, filter2, kwargs):
     builds = Build.query.filter_by(dataset=dataset, filter1=profile1, filter2=profile2).all()
     build_list = []
     for b in builds:
@@ -345,7 +345,7 @@ def get_builds(bra_attr, dataset, profile1, filter1, profile2, filter2):
             b.set_filter1(filter1)
         if filter2 != 'all':
             b.set_filter2(filter2)
-        build_list.append(b.json())
+        build_list.append(b.json(**kwargs))
     return build_list
 
 @mod.route('/recommend/', methods=['GET', 'POST'])
@@ -395,17 +395,18 @@ def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=N
     if build_filter2 != "all":
         build_filter2 = "<{}>".format(build_filter2)
 
+    kwargs = {k: v for k, v in request.args.items()}
     if app_name == "geo_map" and len(bra_id) < 9:
         custom = Build.query.filter_by(app_id=3, dataset=dataset, filter1=build_filter1, filter2=build_filter2, output=output).first()
         custom.set_bra(bra_attr)
         custom.set_filter1(filter1_attr)
         custom.set_filter2(filter2_attr)
-        recommended["custom"] = custom.json()
+        recommended["custom"] = custom.json(**kwargs)
 
     for bra in bra_attr:
-        recommended['builds'] = get_builds(bra, dataset, build_filter1, filter1_attr, build_filter2, filter2_attr)
+        recommended['builds'] = get_builds(bra, dataset, build_filter1, filter1_attr, build_filter2, filter2_attr, kwargs)
     if bra_id != "all" and output != "bra":
-        recommended['builds'] += get_builds(bra_all[0], dataset, build_filter1, filter1_attr, build_filter2, filter2_attr)
+        recommended['builds'] += get_builds(bra_all[0], dataset, build_filter1, filter1_attr, build_filter2, filter2_attr, kwargs)
 
     return jsonify(recommended)
 

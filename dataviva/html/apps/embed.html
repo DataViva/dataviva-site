@@ -508,7 +508,7 @@
           rec_url[filterIndex[app.build.output]] = id;
           rec_url = rec_url.join("/")
         }
-        return "/apps/recommend/"+rec_url+"?lang="+dataviva.language
+        return "/apps/recommend/"+rec_url+location.search;
       }
     }
 
