@@ -268,7 +268,7 @@
 
       {% for build in group.builds %}
         <div class="build_btn" data-build="{{ counter + loop.index0 }}" data-lock="{{ build[0].titlelock }}">
-          <span class="build_title" id="group_{{ build[0].position }}" onclick="app_select(this.id)" title="{{ build[0].slug }}">{{ build[0].slug }}</span>
+          <span class="build_title" id="group_{{ build[0].position }}" onclick="app_select(this.id)" title="{% if group.title %}{{ group.title|replace(':','') }}{% endif %} {{ build[0].slug }}">{{ build[0].slug }}</span>
           {% for b in build %}
             <a class="app_links decision icon short tiny {{ b.app.type }}" id="app_{{ b.position }}" data-url="{{ b.url }}" alt="{{ b.app.name }}" onclick="app_select(this.id)" data-active="false"></a>
           {% endfor %}
