@@ -143,7 +143,7 @@ def attrs(attr="bra",Attr_id=None):
     elif Attr == Bra:
         dataset = "population"
 
-    cache_id = request.path + lang
+    cache_id = "attrs:" + request.path + lang
     if depth:
         cache_id = cache_id + "/" + depth
     # first lets test if this query is cached
@@ -289,7 +289,7 @@ def attrs_table(attr="bra",depth="2"):
     return render_template("general/table.html", data_url=data_url)
 
 @mod.route('/search/<term>/')
-@view_cache.cached(timeout=86400, key_prefix=api_cache_key("search"))
+@view_cache.cached(key_prefix=api_cache_key("search"))
 def attrs_search(term=None):
     result = []
     lang = request.args.get('lang', 'en') or g.locale

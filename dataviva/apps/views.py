@@ -17,7 +17,7 @@ from dataviva.general.models import Short
 from dataviva.rais.views import rais_api
 from dataviva.translations.translate import translate
 from dataviva.utils.gzip_data import gzip_data
-from dataviva.utils.cached_query import cached_query, make_cache_key
+from dataviva.utils.cached_query import cached_query, api_cache_key
 from dataviva.utils.title_format import title_format
 
 import json, urllib2, urllib
@@ -72,7 +72,7 @@ def filler(dataset, filter1, filter2):
     return filler1, filler2
 
 @mod.route('/')
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+@view_cache.cached(key_prefix=api_cache_key("apps:guide"))
 def guide():
     apps = []
     default_bra = Bra.query.get("4mg")
@@ -189,16 +189,19 @@ def guide():
 
     return render_template("apps/index.html", apps=apps)
 
+def is_xhr():
+    return request.is_xhr
+
 @mod.route("/embed/")
 @mod.route("/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
-@view_cache.cached(timeout=604800, key_prefix=api_cache_key("apps:embed"))
+@view_cache.cached(key_prefix=api_cache_key("apps:embed"), unless=is_xhr)
 def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
           filter1="all", filter2="all", output="cbo"):
-
+    prefix = "apps:embed:xhr:"
     lang = request.args.get('lang', None) or g.locale
 
     if (g.user is None or not g.user.is_authenticated()) and request.is_xhr:
-        cache_id = request.path + lang
+        cache_id = prefix + request.path + lang
         cached_q = cached_query(cache_id)
         if cached_q:
             ret = make_response(cached_q)
@@ -282,6 +285,9 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
             global_vars = json.dumps(global_vars),
             facebook_id = FACEBOOK_OAUTH_ID,
             year_range = year_range))
+        ret.data = gzip_data(ret.data)
+        ret.headers['Content-Encoding'] = 'gzip'
+        ret.headers['Content-Length'] = str(len(ret.data))
 
     ret.headers.add('Last-Modified', datetime.now())
     ret.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
@@ -348,7 +354,7 @@ def get_builds(bra_attr, dataset, profile1, filter1, profile2, filter2, skip_mod
 
 @mod.route('/recommend/', methods=['GET', 'POST'])
 @mod.route('/recommend/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
-@view_cache.cached(timeout=604800, key_prefix=api_cache_key("apps:recommend"))
+@view_cache.cached(key_prefix=api_cache_key("apps:recommend"))
 def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=None, output=None):
 
     recommended = {}
@@ -470,7 +476,7 @@ def get_geo_location(ip):
 @mod.route('/builder/bar/', defaults={"app_name": "box", "dataset": "rais", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "bra", "params": ""})
 @mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/')
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+@view_cache.cached(key_prefix=api_cache_key("apps:builder"))
 def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
                 filter2=None, output=None, params=None):
     if bra_id == 'bra':

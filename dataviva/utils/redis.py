@@ -1,6 +1,5 @@
 import pickle
 from uuid import uuid4
-from config import REDIS
 from datetime import timedelta
 from werkzeug.datastructures import CallbackDict
 from flask.sessions import SessionInterface, SessionMixin
@@ -22,15 +21,9 @@ class RedisSessionInterface(SessionInterface):
     serializer = pickle
     session_class = RedisSession
 
-    def __init__(self, redis=None, prefix='session:'):
-        if redis is None:
-            redis = REDIS
-        if redis is None:
-            self.redis = None
-            self.prefix = None
-        else:
-            self.redis = redis
-            self.prefix = prefix
+    def __init__(self, redis, prefix='session:'):
+        self.redis = redis
+        self.prefix = prefix
 
     def generate_sid(self):
         return str(uuid4())
@@ -62,8 +55,8 @@ class RedisSessionInterface(SessionInterface):
         redis_exp = self.get_redis_expiration_time(app, session)
         cookie_exp = self.get_expiration_time(app, session)
         val = self.serializer.dumps(dict(session))
-        self.redis.setex(self.prefix + session.sid, val,
-                         int(redis_exp.total_seconds()))
+        self.redis.set(self.prefix + session.sid, val,
+                         timeout=int(redis_exp.total_seconds()))
         response.set_cookie(app.session_cookie_name, session.sid,
                             expires=cookie_exp, httponly=True,
                             domain=domain)

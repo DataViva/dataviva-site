@@ -9,7 +9,7 @@ from dataviva.translations.dictionary import dictionary
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, University, Course_hedu, Course_sc
 from dataviva.apps.models import UI
-from dataviva.utils.cached_query import cached_query, make_cache_key
+from dataviva.utils.cached_query import cached_query, api_cache_key
 
 
 mod = Blueprint('data', __name__, url_prefix='/data')
@@ -57,7 +57,7 @@ def table(data_type="rais", year="all", bra_id="4mg", filter_1="show.1", filter_
 @mod.route('/')
 @mod.route('/<data_type>/<year>/<bra_id>/<filter_1>/')
 @mod.route('/<data_type>/<year>/<bra_id>/<filter_1>/<filter_2>/')
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+@view_cache.cached(key_prefix=api_cache_key("dataviewer"))
 def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=None):
     # /hedu/all/show.3/01298.show.5/all/
 

@@ -13,6 +13,12 @@ def gzip_data(json):
     gzip_file.close()
     return gzip_buffer.getvalue()
 
+def gzip_response(response):
+    response.headers.add('Content-Encoding', 'gzip')
+    response.headers.add('Content-Length', str(len(response.data)))
+    response.data = gzip_data(response.data)
+    return response
+
 ''' Decorator for returning gzipped content via http://flask.pocoo.org/snippets/122/ '''
 def gzipped(f):
     @functools.wraps(f)

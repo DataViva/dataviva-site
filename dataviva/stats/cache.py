@@ -1,5 +1,5 @@
 # cache.py
-from config import REDIS_CACHE as cache
+from dataviva import view_cache as cache
 import pickle
 
 def object_cache(key, value=None):

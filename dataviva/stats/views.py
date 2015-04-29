@@ -36,7 +36,7 @@ def compute():
     return jsonify(data)
 
 @mod.route('/carosel/')
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+@view_cache.cached(key_prefix=make_cache_key)
 def carosel():
     limit = int(request.args.get('limit', 10))
     offset = int(request.args.get('offset', 0))

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, g, jsonify
 from dataviva import db
 import dataviva.hedu.models as hedu
-from dataviva.utils.gzip_data import gzipped
+from dataviva.utils.gzip_data import gzip_response
 from sqlalchemy import func, distinct, desc
 from dataviva.utils import make_query
 from dataviva import view_cache
@@ -12,7 +12,6 @@ from dataviva.utils.csv_helper import gen_csv, is_download
 mod = Blueprint('hedu', __name__, url_prefix='/hedu')
 
 @mod.route('/<year>/<bra_id>/<university_id>/<course_hedu_id>/')
-@gzipped
 @view_cache.cached(key_prefix=api_cache_key("hedu"), unless=is_download)
 def hedu_api(**kwargs):
     tables = [hedu.Yb_hedu, hedu.Yc_hedu, hedu.Yu, hedu.Ybc_hedu, hedu.Ybu, hedu.Yuc, hedu.Ybuc]
@@ -43,6 +42,6 @@ def hedu_api(**kwargs):
         response = jsonify(results)
         if download:
             return gen_csv(results, "hedu")
-        return response
+        return gzip_response(response)
 
     return results

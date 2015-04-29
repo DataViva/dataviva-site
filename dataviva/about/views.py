@@ -11,7 +11,7 @@ from dataviva.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TY
 from dataviva.ask.forms import AskForm, ReplyForm, SearchForm
 
 from dataviva.utils.send_mail import send_mail
-from dataviva.utils.cached_query import cached_query, make_cache_key
+from dataviva.utils.cached_query import cached_query, api_cache_key
 
 from dataviva.apps.models import Crosswalk_oc, Crosswalk_pi
 

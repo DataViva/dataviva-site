@@ -15,7 +15,7 @@ from dataviva.attrs.models import Bra, Hs, Cbo, Cnae, Course_hedu
 from dataviva.translations.dictionary import dictionary
 from dataviva.stats.helper import stats_list, make_items
 
-from dataviva.utils.cached_query import cached_query, make_cache_key
+from dataviva.utils.cached_query import cached_query, api_cache_key
 from dataviva.utils.gzip_data import gzipped
 
 from config import ACCOUNTS, DEBUG
@@ -117,7 +117,7 @@ def after_request(response):
     return response
 
 @mod.route('/', methods=['GET', 'POST'])
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+@view_cache.cached(key_prefix=api_cache_key("homepage"))
 @gzipped
 def home():
 

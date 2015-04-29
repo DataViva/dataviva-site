@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from dataviva import db
 from dataviva.secex.models import Ymb, Ymp, Ymbp, Ymbpw, Ymbw, Ympw, Ymw
 from dataviva.utils import table_helper, query_helper
-from dataviva.utils.gzip_data import gzipped
+from dataviva.utils.gzip_data import gzip_response
 from dataviva import view_cache
 from dataviva.utils.cached_query import api_cache_key
 from dataviva.utils.csv_helper import gen_csv, is_download
@@ -11,7 +11,6 @@ mod = Blueprint('secex', __name__, url_prefix='/secex')
 
 @mod.route('/<year>/<bra_id>/<hs_id>/<wld_id>/')
 @mod.route('/<year>-<month>/<bra_id>/<hs_id>/<wld_id>/')
-@gzipped
 @view_cache.cached(key_prefix=api_cache_key("secex"), unless=is_download)
 def secex_api(**kwargs):
     limit = int(kwargs.pop('limit', 0)) or int(request.args.get('limit', 0) )
@@ -39,7 +38,6 @@ def secex_api(**kwargs):
 
     # if ignore_zeros:
         # filters.append( getattr(table, "val_usd") > 0 )
-
     results = query_helper.query_table(table, filters=filters, groups=groups, limit=limit, order=order, sort=sort, offset=offset, serialize=serialize)
 
     if table is Ymbp:
@@ -60,6 +58,6 @@ def secex_api(**kwargs):
         response = jsonify(results)
         if download:
             return gen_csv(results, "secex")
-        return response
+        return gzip_response(response)
 
     return results

@@ -63,21 +63,6 @@ LANGUAGES = {
 ''' For full text search '''
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
-'''
-    Setup redis caching connection to be used throughout the site. Credentials
-    are set in their respective env vars.
-'''
-REDIS = Redis(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"),
-         port=get_env_variable("DATAVIVA_REDIS_PORT", 6379),
-         password=get_env_variable("DATAVIVA_REDIS_PW", None))
-REDIS_CACHE = RedisCache(host=get_env_variable("DATAVIVA_REDIS_HOST", "localhost"),
-         port=get_env_variable("DATAVIVA_REDIS_PORT", 6379),
-         password=get_env_variable("DATAVIVA_REDIS_PW", None), default_timeout=2591999, key_prefix="dv2015:")
-
-try:
-    REDIS.client_list()
-except ConnectionError:
-    REDIS, REDIS_CACHE = [None]*2
 
 '''
     Oauth tokens set in environment variables from their respecive sources

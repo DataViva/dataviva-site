@@ -15,8 +15,9 @@ from flask.ext.cache import Cache
 
 # for new filters, redis sessions
 from utils.jinja_helpers import jinja_momentjs, jinja_formatter, jinja_strip_html, jinja_split
-from utils.redis import RedisSessionInterface
 from flask.ext.mail import Mail
+
+from utils.redis import RedisSessionInterface
 
 def get_env_variable(var_name, default=-1):
     try:
@@ -43,20 +44,25 @@ mail = Mail(app)
 # DB connection object
 db = SQLAlchemy(app)
 
+cache_prefix = get_env_variable("DATAVIVA_REDIS_PREFIX", "dv2015:")
+cache_timeout = get_env_variable("DATAVIVA_REDIS_TIMEOUT", 60000000)
+
 # Initialize cache for views
-view_cache = Cache(app, config={'CACHE_TYPE': 'redis', \
-                'CACHE_REDIS_HOST':get_env_variable("DATAVIVA_REDIS_HOST", "localhost"), \
-                'CACHE_REDIS_PORT':get_env_variable("DATAVIVA_REDIS_PORT", 6379), \
+view_cache = Cache(app, config={'CACHE_TYPE': 'redis',
+                'CACHE_KEY_PREFIX' : cache_prefix,
+                'CACHE_DEFAULT_TIMEOUT': cache_timeout,
+                'CACHE_REDIS_HOST':get_env_variable("DATAVIVA_REDIS_HOST", "localhost"),
+                'CACHE_REDIS_PORT':get_env_variable("DATAVIVA_REDIS_PORT", 6379),
                 'CACHE_REDIS_PASSWORD':get_env_variable("DATAVIVA_REDIS_PW", None)})
 
 # Set session store as server side (Redis)
-redis_sesh = RedisSessionInterface()
+redis_sesh = RedisSessionInterface(view_cache, "session:")
 if redis_sesh.redis:
     app.session_interface = redis_sesh
 
 # Global Latest Year Variables
 from dataviva.stats.util import get_or_set_years
-__year_range__ = get_or_set_years(view_cache, "__year_range__")
+__year_range__ = get_or_set_years(view_cache, "general:data_years")
 
 # login manager for user management
 lm = LoginManager()

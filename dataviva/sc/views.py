@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from dataviva import db
 from dataviva.sc.models import Yb_sc, Yc_sc, Ys, Ybs, Ybc_sc, Ybsc, Ysc
 from dataviva.attrs.models import School
-from dataviva.utils.gzip_data import gzipped
+from dataviva.utils.gzip_data import gzip_response
 from dataviva.utils import make_query
 from dataviva import view_cache
 from dataviva.utils.cached_query import api_cache_key
@@ -12,7 +12,6 @@ from dataviva.utils.csv_helper import gen_csv, is_download
 mod = Blueprint('sc', __name__, url_prefix='/sc')
 
 @mod.route('/<year>/<bra_id>/<school_id>/<course_sc_id>/')
-@gzipped
 @view_cache.cached(key_prefix=api_cache_key("sc"), unless=is_download)
 def sc_api(**kwargs):
     tables = [Yc_sc, Yb_sc, Ys, Ybc_sc, Ybs, Ysc, Ybsc]
@@ -56,6 +55,6 @@ def sc_api(**kwargs):
         response = jsonify(results)
         if download:
             return gen_csv(results, "sc")
-        return response
+        return gzip_response(response)
 
     return results

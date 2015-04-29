@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, redirect, request, render_template, g, url_for
+from flask import Blueprint, redirect, request, render_template, g, url_for, make_response
 from flask.ext.babel import gettext
 from sqlalchemy import func, not_
 from werkzeug import urls
@@ -17,8 +17,8 @@ from dataviva.rais.models import Ybi, Ybo, Yio, Yi, Yo
 from dataviva.hedu.models import Yu, Yc_hedu
 from dataviva.sc.models import Yc_sc
 
-from dataviva.utils.cached_query import cached_query, make_cache_key, api_cache_key
-from dataviva.utils.gzip_data import gzipped
+from dataviva.utils.cached_query import cached_query, api_cache_key
+from dataviva.utils.gzip_data import gzip_response
 from dataviva.profiles import models as profileModels
 
 from dataviva import __year_range__
@@ -35,7 +35,7 @@ def before_request():
     g.color = "#e0902d"
 
 @mod.route('/')
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+@view_cache.cached(key_prefix=api_cache_key("profile"))
 def index():
 
     profile_types = []
@@ -128,7 +128,7 @@ def index():
     return render_template("profiles/index.html", profile_types=profile_types)
 
 @mod.route('/<category>/select/')
-@view_cache.cached(timeout=604800, key_prefix=make_cache_key)
+@view_cache.cached(key_prefix=api_cache_key("profiles"))
 def index_selector(category = None, id = None):
     selector = category
 
@@ -191,7 +191,6 @@ def randomProfile(category = None):
 
 @mod.route("/<category>/<id>/")
 @view_cache.cached(timeout=604800, key_prefix=api_cache_key("profiles"))
-@gzipped
 def profiles(category = None, id = None):
 
     if category == "bra" and id == "all":
@@ -260,6 +259,7 @@ def profiles(category = None, id = None):
     if category == "university":
         get_related(Yuu, "course_hedu", gettext("Universities with Similar Course Offerings"))
 
-    return render_template("profiles/profile.html", profile=profile,
+    response = make_response(render_template("profiles/profile.html", profile=profile,
                 category=category, item=item, stats=stat_groups,
-                starting_app = start, builds=builds, related=related)
+                starting_app = start, builds=builds, related=related))
+    return gzip_response(response)
