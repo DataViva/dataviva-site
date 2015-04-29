@@ -146,7 +146,8 @@ dataviva.format.number = function(value, opts) {
     return_value = value;
   }
   else if (name === "share") {
-    if (value >= 100) return_value = d3.format(",f")(value);
+    if (value === 0) return_value = 0;
+    else if (value >= 100) return_value = d3.format(",f")(value);
     else if (value > 99) return_value = d3.format(".3g")(value);
     else return_value = d3.format(".2g")(value);
     return_value += "%";
@@ -193,6 +194,9 @@ dataviva.format.number = function(value, opts) {
   }
   else if (name === "age") {
     return_value = d3.format(".3g")(value);
+  }
+  else if (value === 0) {
+    return_value = 0;
   }
   else {
     return_value = d3.format(",f")(value);
