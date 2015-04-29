@@ -27630,11 +27630,11 @@ ie = require("../../client/ie.js");
 stringStrip = require("../../string/strip.js");
 
 module.exports = {
-  accepted: [void 0, Array, String],
+  accepted: [void 0, true, Array, String],
   chainable: false,
   data: [],
   process: function(value, vars) {
-    var blob, c, col, columns, csv_data, csv_to_return, dataString, encodedUri, i, j, k, l, len, len1, len2, len3, len4, len5, link, m, max_filename_len, n, node, o, ref, ref1, row, title, titles, val;
+    var blob, c, col, columns, csv_data, csv_to_return, d, dataString, encodedUri, i, j, k, l, len, len1, len2, len3, len4, len5, len6, len7, link, m, max_filename_len, n, node, o, p, q, ref, ref1, ref2, row, title, titles, val;
     if (vars.returned === void 0) {
       return [];
     }
@@ -27657,49 +27657,71 @@ module.exports = {
     } else {
       title = "D3plus Visualization Data";
     }
-    if (!columns) {
-      columns = [vars.id.value];
-      if (vars.time.value) {
-        columns.push(vars.time.value);
-      }
-      if (vars.size.value) {
-        columns.push(vars.size.value);
-      }
-      if (vars.text.value) {
-        columns.push(vars.text.value);
-      }
-    }
-    for (j = 0, len = columns.length; j < len; j++) {
-      c = columns[j];
-      titles.push(vars.format.value(c));
-    }
-    csv_to_return.push(titles);
-    ref = vars.returned.nodes;
-    for (k = 0, len1 = ref.length; k < len1; k++) {
-      node = ref[k];
-      console.log(node.values);
-      if ((node.values != null) && node.values instanceof Array) {
-        ref1 = node.values;
-        for (l = 0, len2 = ref1.length; l < len2; l++) {
-          val = ref1[l];
-          row = [];
-          for (m = 0, len3 = columns.length; m < len3; m++) {
-            col = columns[m];
-            row.push(fetchValue(vars, val, col));
-          }
-          csv_to_return.push(row);
-        }
-      } else {
+    if (value === true) {
+      columns = d3.keys(vars.data.keys);
+      csv_to_return.push(columns);
+      ref = vars.data.value;
+      for (j = 0, len = ref.length; j < len; j++) {
+        d = ref[j];
         row = [];
-        for (n = 0, len4 = columns.length; n < len4; n++) {
-          col = columns[n];
-          row.push(fetchValue(vars, node, col));
+        for (k = 0, len1 = columns.length; k < len1; k++) {
+          c = columns[k];
+          val = d[c];
+          if (vars.data.keys[c] === "string") {
+            val = '"' + val + '"';
+          }
+          row.push(val);
         }
         csv_to_return.push(row);
       }
+    } else {
+      if (!columns) {
+        columns = [vars.id.value];
+        if (vars.time.value) {
+          columns.push(vars.time.value);
+        }
+        if (vars.size.value) {
+          columns.push(vars.size.value);
+        }
+        if (vars.text.value) {
+          columns.push(vars.text.value);
+        }
+      }
+      for (l = 0, len2 = columns.length; l < len2; l++) {
+        c = columns[l];
+        titles.push(vars.format.value(c));
+      }
+      csv_to_return.push(titles);
+      ref1 = vars.returned.nodes;
+      for (m = 0, len3 = ref1.length; m < len3; m++) {
+        node = ref1[m];
+        if ((node.values != null) && node.values instanceof Array) {
+          ref2 = node.values;
+          for (n = 0, len4 = ref2.length; n < len4; n++) {
+            val = ref2[n];
+            row = [];
+            for (o = 0, len5 = columns.length; o < len5; o++) {
+              col = columns[o];
+              val = fetchValue(vars, val, col);
+              if (typeof val === "string") {
+                val = '"' + val + '"';
+              }
+              row.push(val);
+            }
+            csv_to_return.push(row);
+          }
+        } else {
+          row = [];
+          for (p = 0, len6 = columns.length; p < len6; p++) {
+            col = columns[p];
+            row.push(fetchValue(vars, node, col));
+          }
+          csv_to_return.push(row);
+        }
+      }
     }
     csv_data = "data:text/csv;charset=utf-8,";
-    for (i = o = 0, len5 = csv_to_return.length; o < len5; i = ++o) {
+    for (i = q = 0, len7 = csv_to_return.length; q < len7; i = ++q) {
       c = csv_to_return[i];
       dataString = c.join(",");
       csv_data += (i < csv_to_return.length ? dataString + "\n" : dataString);

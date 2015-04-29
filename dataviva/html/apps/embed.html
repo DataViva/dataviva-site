@@ -715,22 +715,6 @@
         "ticks": {"font": {"size": 16}}
       })
 
-    // app.viz = d3plus.viz()
-    //   .name_array(["name","display_id"])
-    //   .nesting_aggs(averages)
-    //   .text_var("name")
-    //   .year_var("year")
-    //   .text_format(dataviva.format.text)
-    //   .number_format(dataviva.format.number)
-    //   .name_array(["name","display_id"])
-    //   .background("#ffffff")
-    //   .click_function(app.html)
-    //   .font(app.font)
-    //   .font_weight("normal")
-    //   .total_var("required")
-    //   .else_var("elsewhere")
-    //   .info_style(app.loader_style)
-
     app.redirect = function(url) {
       if (window.frameElement) {
         window.parent.location = url;
@@ -2526,7 +2510,7 @@
       var form = document.getElementById("svgform");
 
       if(type == "csv"){
-        app.viz.csv();
+        app.viz.csv(true);
         // CSV is generated on the client and finishes synchronously
         downloadDone();
       }
