@@ -490,7 +490,7 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
             b["url"] = "{}?{}=wage".format(b["url"], size_var(b))
         b["dataset"] = "rais_wages"
     builds = rais_builds + builds
-    dataset_sort = ["rais_wages", "rais", "hedu", "sc", "secex", "ei"]
+    dataset_sort = ["rais_wages", "rais", "hedu", "sc", "secex"]
     builds.sort(key=lambda x: (x["app"]["id"], dataset_sort.index(x["dataset"])))
     datatset_names = {
         "secex": gettext("International Trade"),
@@ -560,13 +560,13 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
     build.set_filter2(filter2_attr)
     build.set_bra(bra_attr)
     build = build.serialize()
-    if build["app"]["type"] in ("bar", "box") and build["dataset"] == "rais":
+    if build["dataset"] == "rais" and build["app"]["type"] in ("bar", "box"):
         build["dataset"] = "rais_wages"
     else:
         for p, v in request.args.items():
-            if v == "wage":
+            if (v == "wage" or v == "wage_avg") and build["dataset"] == "rais" and build["app"]["type"] in ("bar", "box") and b["app"]["type"] not in ("network", "occugrid", "rings"):
                 build["id"] = "{}b".format(int(build["id"]))
-                build["url"] = "{}?{}=wage".format(build["url"], size_var(build))
+                build["url"] = "{}?{}={}".format(build["url"], size_var(build), v)
                 build["dataset"] = "rais_wages"
                 break
 
