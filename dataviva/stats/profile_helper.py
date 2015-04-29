@@ -239,6 +239,25 @@ def wld_stats(pobj, secex_year):
 
 def university_stats(pobj, hedu_year):
     stats = []
+    
+    gen_title = gettext("General Stats")
+    key = "general"
+    filters = [Ybu.year == hedu_year, Ybu.university_id == pobj.id, Ybu.bra_id_len == 9, Ybu.bra_id != "0xx000007"]
+    campuses, num_campuses = get_top_stats(Ybu, Ybu.bra_id, Ybu.enrolled, Bra, filters, max=5)
+    if num_campuses:
+        val = ", ".join([u"<a href='{}'>{}</a>".format(c[0].url(), c[0].name()) for c in campuses])
+        if num_campuses > len(campuses):
+            val += "<br /> +{} more".format(num_campuses-len(campuses))
+        if num_campuses > 1:
+            stats.append(make_stat(key, gen_title, gettext("Top Campuses"), desc=val))
+        else:
+            stats.append(make_stat(key, gen_title, gettext("Location"), desc=val))
+    stats.append(make_stat(key, gen_title, gettext("School Type"), desc=pobj.school_type()))
+    # filters = [Yu.year == hedu_year, Yu.university_id == pobj.id]
+    # enrolled = get_stat_val(Yu, [Yu.enrolled], filters)
+    # raise Exception(enrolled)
+    # stats.append(make_stat(key, gen_title, gettext("Enrolled"), desc=enrolled, mode="enrolled"))
+    
     group = u'{1} {0}'.format(gettext("Enrollment Stats"), hedu_year)
     key = "hedu"
     filters = [Yuc.year == hedu_year, Yuc.university_id == pobj.id, Yuc.course_hedu_id_len == 6]
@@ -246,9 +265,12 @@ def university_stats(pobj, hedu_year):
     stats.append(make_stat(key, group, gettext("Top Major by Enrollment"), profile=profile, value=value, mode="enrolled"))
 
     filters = [Yu.year == hedu_year, Yu.university_id == pobj.id]
-    enrolled, graduates = get_stat_val(Ymw, [Yu.enrolled, Yu.graduates], filters)
-    stats.append(make_stat(key, group, gettext("Total Enrollment"), desc=enrolled, mode="enrolled"))
-    stats.append(make_stat(key, group, gettext("Total Graduates"), desc=graduates, mode="graduates"))
+    stat_vals = get_stat_val(Ymw, [Yu.enrolled, Yu.graduates], filters)
+    if stat_vals:
+        enrolled, graduates = stat_vals
+        # raise Exception(enrolled, graduates)
+        stats.append(make_stat(key, group, gettext("Total Enrollment"), desc=enrolled, mode="enrolled"))
+        stats.append(make_stat(key, group, gettext("Total Graduates"), desc=graduates, mode="graduates"))
     return stats
 
 def course_hedu_stats(pobj, hedu_year):
@@ -344,7 +366,19 @@ def get_top_stat(Tbl, show_col, metric_col, Profile, filters):
         pk, val = res
         profile = Profile.query.get(pk)
         return profile, val
-    return res
+    return (None, None)
+
+def get_top_stats(Tbl, show_col, metric_col, Profile, filters, max=5):
+    q = Tbl.query.with_entities(show_col, metric_col).filter(*filters)
+    res = q.order_by(desc(metric_col)).all()
+    if res:
+        top_stats = []
+        for r in res[:max]:
+            pk, val = r
+            profile = Profile.query.get(pk)
+            top_stats.append((profile, val))
+        return top_stats, len(res)
+    return ([], 0)
 
 def make_stat(key, group, name, desc=None, value=None, url=None, mode=None, year=None, profile=None):
     if year:
