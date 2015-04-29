@@ -983,14 +983,17 @@
                   .header("X-Requested-With", "XMLHttpRequest")
                   .get(function(error,d){
 
+                    var out = app.build.output_attr;
                     d.nodes.forEach(function(node){
-                      if (app.build.output_attr === "cnae") {
-                        node[app.build.output_attr+"_"+node.id.length] = node.id;
+                      if (out === "cnae") {
+                        var id = node.id;
                       }
                       else {
-                        var id = node[app.build.output_attr+"_id"];
-                        node[app.build.output_attr+"_"+id.length] = id;
+                        var id = node[out+"_id"];
                       }
+                      depths[out].forEach(function(depth){
+                        node[out+"_"+depth] = id.substr(0,depth);
+                      })
                     })
 
                     if (app.build.output_attr === "hs") {
