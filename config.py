@@ -53,6 +53,7 @@ if "DATAVIVA_PRODUCTION" in os.environ:
     SQLALCHEMY_ECHO = False
     DEBUG = False
     JSONIFY_PRETTYPRINT_REGULAR = False
+    SESSION_COOKIE_DOMAIN = ".dataviva.info"
 
 ''' Available languages '''
 LANGUAGES = {
