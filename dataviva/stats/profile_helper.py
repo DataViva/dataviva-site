@@ -127,7 +127,7 @@ def cnae_stats(pobj, rais_year):
     wage, wage_avg, num_est, age_avg = get_stat_val(Yi, [Yi.wage, Yi.wage_avg, Yi.num_est, Yi.age_avg], filters)
     stats.append(make_stat(key, group, gettext("Total Monthly Wage"), desc=wage, mode="wage"))
     stats.append(make_stat(key, group, gettext("Average Monthly Wage"), desc=wage_avg, mode="wage"))
-    stats.append(make_stat(key, group, gettext("Number of Establishments"), desc=num_est, mode="num_est"))
+    stats.append(make_stat(key, group, gettext("Total Establishments"), desc=num_est, mode="num_est"))
     stats.append(make_stat(key, group, gettext("Average Employee Age"), desc=age_avg, mode="age"))
 
     group = u'{1} {0}'.format(gettext("Employment Stats"), five_years_ago)
@@ -252,11 +252,7 @@ def university_stats(pobj, hedu_year):
             stats.append(make_stat(key, gen_title, gettext("Top Campuses"), desc=val))
         else:
             stats.append(make_stat(key, gen_title, gettext("Location"), desc=val))
-    stats.append(make_stat(key, gen_title, gettext("School Type"), desc=pobj.school_type()))
-    # filters = [Yu.year == hedu_year, Yu.university_id == pobj.id]
-    # enrolled = get_stat_val(Yu, [Yu.enrolled], filters)
-    # raise Exception(enrolled)
-    # stats.append(make_stat(key, gen_title, gettext("Enrolled"), desc=enrolled, mode="enrolled"))
+    stats.append(make_stat(key, gen_title, gettext("Administrative Dependency"), desc=pobj.school_type()))
     
     group = u'{1} {0}'.format(gettext("Enrollment Stats"), hedu_year)
     key = "hedu"
