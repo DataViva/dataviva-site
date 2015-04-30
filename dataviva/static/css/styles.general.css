@@ -73,6 +73,16 @@ div#selector {
           transition: color 1s;
 }
 
+.darkbox a {
+  color: #129cc0;
+  text-decoration: underline;
+}
+
+.darkbox a:hover {
+  color: #127aa0;
+  text-decoration: none;
+}
+
 p {
   font-size: 13px;
   line-height: 16px;
