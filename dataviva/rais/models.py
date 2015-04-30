@@ -42,6 +42,7 @@ class Yi(BaseRais, db.Model, AutoSerialize):
     cnae_id_len = db.Column(db.Integer(1))
 
     hist = db.Column(db.Text())
+    gini = db.Column(db.Float())
 
     def __repr__(self):
         return '<Yi %d.%s>' % (self.year, self.cnae_id)
@@ -59,6 +60,7 @@ class Yb_rais(BaseRais, db.Model, AutoSerialize):
     bra_id_len = db.Column(db.Integer(1))
 
     hist = db.Column(db.Text())
+    gini = db.Column(db.Float())
 
     def __repr__(self):
         return '<Yb_rais %d.%s>' % (self.year, self.bra_id)
@@ -76,6 +78,7 @@ class Yo(BaseRais, db.Model, AutoSerialize):
     cbo_id_len = db.Column(db.Integer(1))
 
     hist = db.Column(db.Text())
+    gini = db.Column(db.Float())
 
     def __repr__(self):
         return '<Yo %d.%s>' % (self.year, self.cbo_id)
