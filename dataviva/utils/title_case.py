@@ -1,10 +1,27 @@
 import re
+from HTMLParser import HTMLParser
+
+class TestHTMLParser(HTMLParser):
+    def __init__(self, *args, **kwargs):
+        HTMLParser.__init__(self, *args, **kwargs)
+        self.elements = set()
+    def handle_starttag(self, tag, attrs):
+        self.elements.add(tag)
+    def handle_endtag(self, tag):
+        self.elements.add(tag)
+
+def is_html(text):
+    parser = TestHTMLParser()
+    parser.feed(text)
+    return True if parser.elements else False
 
 ''' Titlecase Function '''
 def title_case(string):
     if not string:
         return ""
     elif not isinstance(string, (unicode, str)):
+        return string
+    elif is_html(string):
         return string
 
     exceptions = ['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'from', 'if', \
