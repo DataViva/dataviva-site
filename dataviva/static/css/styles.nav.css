@@ -289,8 +289,18 @@ a.logo {
   width: 77px;
 }
 
+a.logo.big {
+  height: 58px;
+  margin: 10px;
+  width: 155px;
+}
+
 a.logo:hover {
   opacity: 1;
+}
+
+a.logo.aws {
+  background-image: url("/static/img/nav/logo_aws.jpg");
 }
 
 a.logo.github {
