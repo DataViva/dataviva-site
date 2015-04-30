@@ -1839,8 +1839,17 @@
         descs["import_val"] = text
         app.viz.descs(descs)
       }
-      else if (app.build.app.type === "bar" && app.wage_avgs && app.wage_avgs[app.vars.year]) {
-        text = dataviva.format.text("wage_avg") + ": " + dataviva.format.number(app.wage_avgs[app.vars.year], {"key": "wage_avg"});
+      else if (app.build.app.type === "bar" && app.sub_data && app.sub_data[app.vars.year]) {
+        var d = app.sub_data[app.vars.year];
+
+        if (d.wage_avg) {
+          text += dataviva.format.text("wage_avg") + ": " + dataviva.format.number(d.wage_avg, {"key": "wage_avg"});
+        }
+        if (d.gini) {
+          if (text.length) text += ", ";
+          text += "GINI: " + dataviva.format.number(d.gini, {"key": "gini"});
+        }
+
       }
 
       if (["stacked", "line"].indexOf(app.build.app.type) >= 0 && !app.monthly && app.build.output !== "time") {
@@ -2100,17 +2109,18 @@
             var obj = {
               "hist": JSON.stringify(histMerge),
               "year": d[0].year,
-              "wage_avg": d3.sum(d, function(p){ return p.wage; })/d3.sum(d, function(p){ return p.num_jobs; })
+              "wage_avg": d3.sum(d, function(p){ return p.wage; })/d3.sum(d, function(p){ return p.num_jobs; }),
+              "gini": d3.mean(d, function(p){ return p.gini; })
             }
             obj[out+"_id"] = app.build[app.build.output][0].id;
             arr.push(obj);
             return arr;
           }, []);
         }
-        app.wage_avgs = {};
+        app.sub_data = {};
         new_data.forEach(function(point){
 
-          app.wage_avgs[point.year] = point.wage_avg;
+          app.sub_data[point.year] = point;
 
           var id = point[out+"_id"];
           attr = app.build[out][0];
