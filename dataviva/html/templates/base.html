@@ -27,7 +27,7 @@
     <script src="/static/js/libs/localforage.js"></script>
     <script src="/static/js/libs/modernizr.custom.js"></script>
     <script src="/static/js/libs/d3.min.js"></script>
-    <script src="/static/js/libs/d3plus.js"></script>
+    <script src="/static/js/libs/d3plus{% if g.production %}.min{% endif %}.js"></script>
     <script src="/static/js/libs/leon.js"></script>
     <script src="/static/js/libs/moment.min.js"></script>
     <script>moment.lang("{{g.locale}}")</script>

@@ -18437,7 +18437,9 @@ module.exports = function(number, opts) {
   if (typeof key === "string" && time.indexOf(key.toLowerCase()) >= 0) {
     ret = number;
   } else if (key === "share") {
-    if (number >= 100) {
+    if (number === 0) {
+      ret = 0;
+    } else if (number >= 100) {
       ret = d3.format(",f")(number);
     } else if (number > 99) {
       ret = d3.format(".3g")(number);
@@ -18455,6 +18457,8 @@ module.exports = function(number, opts) {
     ret = number + symbol;
   } else if (length === 3) {
     ret = d3.format(",f")(number);
+  } else if (number === 0) {
+    ret = 0;
   } else {
     ret = d3.format(".3g")(number);
   }

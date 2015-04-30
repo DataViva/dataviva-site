@@ -34,6 +34,7 @@ def before_request():
     g.page_type = mod.name
     g.dictionary = json.dumps(dictionary())
     g.attr_version = 13
+    g.production = False if DEBUG else True
 
     # Check if the user is logged in, if so give the global object
     # a reference to the user from DB
@@ -52,7 +53,7 @@ def before_request():
         domain = url.netloc.split('.')
         if domain[0] == "en" or domain[0] == "pt":
             subdomain = domain.pop(0)
-        
+
         domain = u".".join(domain)
 
         # Get lang w/ subdomain trumping all
