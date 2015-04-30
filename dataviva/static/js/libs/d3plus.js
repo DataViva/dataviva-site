@@ -29787,15 +29787,15 @@ print = require("../../../../../core/console/print.coffee");
 uniques = require("../../../../../util/uniques.coffee");
 
 module.exports = function(vars, opts) {
-  var axis, changed, domains, i, len, oppAxis, range, ref, reorder, zero;
+  var axes, axis, changed, domains, i, len, oppAxis, range, reorder, zero;
   changed = dataChange(vars);
   if (changed || !vars.axes.dataset) {
     vars.axes.dataset = getData(vars);
   }
   vars.axes.scale = opts.buffer && opts.buffer !== true ? sizeScale(vars, opts.buffer) : false;
-  ref = ["x", "y"];
-  for (i = 0, len = ref.length; i < len; i++) {
-    axis = ref[i];
+  axes = vars.width.viz > vars.height.viz ? ["y", "x"] : ["x", "y"];
+  for (i = 0, len = axes.length; i < len; i++) {
+    axis = axes[i];
     oppAxis = axis === "x" ? "y" : "x";
     reorder = vars.order.changed || vars.order.sort.changed || (vars.order.value === true && vars[oppAxis].changed);
     if (!vars[axis].ticks.values || changed || reorder) {
@@ -30089,7 +30089,7 @@ buckets = require("../../../../../util/buckets.coffee");
 closest = require("../../../../../util/closest.coffee");
 
 module.exports = function(vars, axis, buffer) {
-  var additional, allNegative, allPositive, closestTime, diff, difference, domain, domainCompare, domainHigh, domainLow, i, lowerDiff, lowerMod, lowerScale, lowerValue, maxSize, range, rangeMax, timeIndex, upperDiff, upperMod, upperScale, upperValue, zero;
+  var additional, allNegative, allPositive, closestTime, copy, diff, difference, domain, domainCompare, domainHigh, domainLow, i, lowerDiff, lowerMod, lowerScale, lowerValue, maxSize, opp, range, rangeMax, timeIndex, upperDiff, upperMod, upperScale, upperValue, zero;
   if (vars[axis].scale.value !== "share" && !vars[axis].range.value) {
     if (axis === vars.axes.discrete) {
       domain = vars[axis].scale.viz.domain();
@@ -30192,22 +30192,31 @@ module.exports = function(vars, axis, buffer) {
       }
       return vars[axis].scale.viz.domain(domain);
     } else if (vars.axes.scale) {
-      rangeMax = vars[axis].scale.viz.range()[1];
-      maxSize = vars.axes.scale.range()[1];
-      domainLow = vars[axis].scale.viz.invert(-maxSize * 1.5);
-      domainHigh = vars[axis].scale.viz.invert(rangeMax + maxSize * 1.5);
-      domain = [domainLow, domainHigh];
-      if (axis === "y") {
-        domain = domain.reverse();
+      copy = false;
+      if (vars.axes.mirror.value) {
+        opp = axis === "y" ? "x" : "y";
+        copy = vars[opp].scale.viz;
       }
-      domainCompare = vars[axis].scale.viz.domain();
-      domainCompare = domainCompare[1] - domainCompare[0];
-      if (!domainCompare) {
-        domain[0] -= 1;
-        domain[1] += 1;
-      }
-      if (axis === "y") {
-        domain = domain.reverse();
+      if (copy) {
+        domain = copy.domain().slice().reverse();
+      } else {
+        rangeMax = vars[axis].scale.viz.range()[1];
+        maxSize = vars.axes.scale.range()[1];
+        domainLow = vars[axis].scale.viz.invert(-maxSize * 1.5);
+        domainHigh = vars[axis].scale.viz.invert(rangeMax + maxSize * 1.5);
+        domain = [domainLow, domainHigh];
+        if (axis === "y") {
+          domain = domain.reverse();
+        }
+        domainCompare = vars[axis].scale.viz.domain();
+        domainCompare = domainCompare[1] - domainCompare[0];
+        if (!domainCompare) {
+          domain[0] -= 1;
+          domain[1] += 1;
+        }
+        if (axis === "y") {
+          domain = domain.reverse();
+        }
       }
       return vars[axis].scale.viz.domain(domain);
     }
@@ -30455,13 +30464,13 @@ timeDetect = require("../../../../../core/data/time.coffee");
 uniques = require("../../../../../util/uniques.coffee");
 
 module.exports = function(vars, opts) {
-  var axis, axisStyle, extent, j, k, len, len1, newtick, opp, ref, ref1, step, tens, tick, ticks, timeReturn, values;
+  var axes, axis, axisStyle, extent, j, k, len, len1, newtick, opp, ref, step, tens, tick, ticks, timeReturn, values;
   vars.axes.margin = resetMargins(vars);
   vars.axes.height = vars.height.viz;
   vars.axes.width = vars.width.viz;
-  ref = ["x", "y"];
-  for (j = 0, len = ref.length; j < len; j++) {
-    axis = ref[j];
+  axes = vars.width.viz > vars.height.viz ? ["y", "x"] : ["x", "y"];
+  for (j = 0, len = axes.length; j < len; j++) {
+    axis = axes[j];
     if (vars[axis].ticks.values === false) {
       if (vars[axis].value === vars.time.value) {
         ticks = vars.time.solo.value;
@@ -30532,9 +30541,9 @@ module.exports = function(vars, opts) {
   if (!vars.small) {
     labelPadding(vars);
   }
-  ref1 = ["x", "y"];
-  for (k = 0, len1 = ref1.length; k < len1; k++) {
-    axis = ref1[k];
+  ref = ["x", "y"];
+  for (k = 0, len1 = ref.length; k < len1; k++) {
+    axis = ref[k];
     vars[axis].axis.svg = createAxis(vars, axis);
   }
 };
