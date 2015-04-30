@@ -357,7 +357,7 @@
 
       <div class="darkbox">
         <h1>{{ carousel.title }}</h1>
-        {% if carousel.sub %}<h3>{{ carousel.sub }}</h3>{% endif %}
+        {% if carousel.sub %}<h3>{{ carousel.sub|safe }}</h3>{% endif %}
       </div>
       <a class="prev"><i class="fa fa-angle-left"></i></a>
       <a class="next"><i class="fa fa-angle-right"></i></a>
