@@ -190,7 +190,7 @@ def randomProfile(category = None):
     return redirect(url_for("profiles.profiles", category=category, id=id))
 
 @mod.route("/<category>/<id>/")
-@view_cache.cached(timeout=604800, key_prefix=api_cache_key("profiles"))
+@view_cache.cached(key_prefix=api_cache_key("profiles"))
 def profiles(category = None, id = None):
 
     if category == "bra" and id == "all":
