@@ -147,6 +147,7 @@ def home():
     items = make_items(data, Hs)
     carousels.append({
         "title": gettext("Most Complex Products"),
+        "sub": gettext("%(link)s for more information on product complexity.", link = "<a href='/about/glossary/complexity/'>{}</a>".format(gettext("Click here"))),
         "type": profile,
         "items": items,
         "url" : carousel_base.format(metric, show, profile, limit),
