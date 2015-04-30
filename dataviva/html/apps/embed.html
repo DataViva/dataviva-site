@@ -1103,7 +1103,7 @@
 
       if (app.build.bra_prox) {
 
-        var locs = app.data[app.build.bra_prox][app.vars.year.length > 4 ? "2013" : app.vars.year];
+        var locs = app.data[app.build.bra_prox][app.vars.year.length > 4 ? "2013" : app.vars.year] || [];
 
         var btn = d3.select("#controls").selectAll("#required_bras")
           .data(locs.length ? [0] : []);
