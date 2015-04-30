@@ -237,10 +237,10 @@ def profiles(category = None, id = None):
         elif category in ("course_hedu", "course_sc"):
             q = q.filter(not_(getattr(table, "{}_id_target".format(category)).startswith("00")))
 
-        q = q.order_by(getattr(table, "prox_{}".format(attr)).desc()).limit(5).all()
+        q = q.order_by(getattr(table, "prox_{}".format(attr)).desc()).limit(40).all()
         if len(q) > 0:
             m = globals()[category.capitalize()]
-            q = [m.query.get(getattr(a, "{}_id_target".format(category))) for a in q]
+            q = [(m.query.get(getattr(a, "{}_id_target".format(category))), getattr(a, "prox_{}".format(attr))) for a in q]
             related.append({"title": title, "pages": q})
 
     if category == "bra":

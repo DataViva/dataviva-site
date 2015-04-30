@@ -100,13 +100,13 @@ def num_format(number, key = None, labels = True):
         suffix = groups[m]
 
     arrow = False
-    if "growth" in key:
+    if "growth" in key or key == "share":
         if n > 0:
             arrow = "up"
         elif n < 0:
             arrow = "down"
         n = float(n)*100
-    
+
     if "age" in key:
         n = int(round(n))
     else:
@@ -128,5 +128,7 @@ def num_format(number, key = None, labels = True):
             else:
                 arrow = ""
             return "{}%{}".format(n, arrow)
+        elif key == "share":
+            return "{}%".format(n)
 
     return n

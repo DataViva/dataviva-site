@@ -169,9 +169,17 @@
   }
   .carousel > .prev, .carousel > .next {
     color: #888;
+    cursor: pointer;
     font-size: 50px;
+    opacity: 1;
     position: absolute;
+    -webkit-transition: opacity 0.1s;
+            transition: opacity 0.1s;
     top: 117px;
+  }
+  .carousel > .prev.disabled, .carousel > .next.disabled {
+    cursor: auto;
+    opacity: 0;
   }
   .carousel > .prev:hover, .carousel > .next:hover {
     color: #444;
@@ -359,7 +367,7 @@
         <h1>{{ carousel.title }}</h1>
         {% if carousel.sub %}<h3>{{ carousel.sub|safe }}</h3>{% endif %}
       </div>
-      <a class="prev"><i class="fa fa-angle-left"></i></a>
+      <a class="prev disabled"><i class="fa fa-angle-left"></i></a>
       <a class="next"><i class="fa fa-angle-right"></i></a>
 
       <div class="scroller">

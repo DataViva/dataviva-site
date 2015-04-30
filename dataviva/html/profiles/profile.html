@@ -157,11 +157,56 @@
         max-width: none;
       }
 
+      .carousel {
+        margin: 0px 50px 10px;
+        position: relative;
+      }
+      .carousel > .prev, .carousel > .next {
+        color: #888;
+        cursor: pointer;
+        font-size: 50px;
+        opacity: 1;
+        position: absolute;
+        -webkit-transition: opacity 0.1s;
+                transition: opacity 0.1s;
+        top: 86px;
+      }
+      .carousel > .prev.disabled, .carousel > .next.disabled {
+        cursor: auto;
+        opacity: 0;
+      }
+      .carousel > .prev:hover, .carousel > .next:hover {
+        color: #444;
+      }
+      .carousel > .prev {
+        left: -35px;
+      }
+      .carousel > .next {
+        right: -35px;
+      }
+      .carousel .scroller {
+        overflow: hidden;
+        padding-bottom: 20px;
+        position: relative;
+      }
+      .carousel ul {
+        list-style: none;
+        white-space: nowrap;
+        -webkit-transition: 0.6s ease-in-out;
+           -moz-transition: 0.6s ease-in-out;
+             -o-transition: 0.6s ease-in-out;
+                transition: 0.6s ease-in-out;
+      }
+
       .poster {
         box-sizing: border-box;
         display: inline-block;
         margin: 0 5px;
         text-align: left;
+      }
+
+      .carousel ul li {
+        display: inline-block;
       }
 
       div.poster {
@@ -205,6 +250,12 @@
         white-space: normal;
         width: 100px;
       }
+      .poster .title.sub {
+        font-size: 12px;
+        margin-top: -8px;
+        opacity: 0.8;
+      }
+
       a.poster:hover div.title {
         text-decoration: underline;
       }
@@ -369,17 +420,29 @@
 
   {% if related|length > 0 %}
     <div id="related" class="related lightbox">
-    {% for group in related %}
-        <div class="darkbox"><h1>{{ group.title }}</h1></div>
-        {% for attr in group.pages %}
-          <a class="poster" href="{{ attr.url() }}" alt="{{ attr.name() }}">
-            <div class="poster {{ category }}"{% if category != "bra" and category != "wld" %} style="background-color:{{ attr.color }};"{% endif %}>
-              <img src="{{ attr.icon() }}"/>
-            </div>
-            <div class="title">{{ attr.name() }}</div>
-          </a>
-        {% endfor %}
-    {% endfor %}
+
+      {% for group in related %}
+        <div class="carousel">
+          <div class="darkbox"><h1>{{ group.title }}</h1></div>
+          <a class="prev disabled"><i class="fa fa-angle-left"></i></a>
+          <a class="next"><i class="fa fa-angle-right"></i></a>
+          <div class="scroller"><ul class="set">
+            {% for page in group.pages %}
+              {% set attr = page[0] %}
+              <li><a class="poster" href="{{ attr.url() }}" alt="{{ attr.name() }}">
+                <div class="poster {{ category }}"{% if category != "bra" and category != "wld" %} style="background-color:{{ attr.color }};"{% endif %}>
+                  <img src="{{ attr.icon() }}"/>
+                </div>
+                <div class="title">{{ loop.index }}. {{ attr.name() }}</div>
+                {% if page[1] %}
+                  <div class="title sub">{{ format(page[1]).render('share') }} {% trans %}Similar{% endtrans %}</div>
+                {% endif %}
+              </a></li>
+            {% endfor %}
+          </ul></div>
+        </div>
+      {% endfor %}
+
     </div>
   {% endif %}
 
@@ -389,6 +452,51 @@
 
   <script src="/static/js/utils/utils.selector.js"></script>
   <script>
+
+    var prefix = d3plus.client.prefix();
+    d3.selectAll("a.next, a.prev").on("click", function(x,y,x){
+
+      if (!d3.select(this).classed("disabled")) {
+
+        page_el = d3.select(this.parentNode).select(".set");
+        transform = page_el.style(prefix + "transform");
+
+        if (transform === "none") current_x = 0;
+        else current_x = d3.transform(transform).translate[0];
+
+        var liNode = d3.select(".poster").node().parentNode;
+        liNode = d3.select(liNode);
+
+        poster_w = parseInt(liNode.style("width"));
+        poster_w += parseInt(d3.select(".poster").style("margin-left"));
+        poster_w += parseInt(liNode.style("margin-right"));
+
+        container_w = parseInt(d3.select(".set").style("width"));
+
+        var row_size = Math.floor(container_w / poster_w);
+
+        if (d3.select(this).attr("class").indexOf("next") > -1) {
+          d3.select(this.parentNode).select("a.prev").classed("disabled", false);
+          next_x = current_x - row_size * poster_w;
+
+          max_left = (page_el.selectAll("li").size() * poster_w - container_w) * -1;
+          if (next_x <= max_left) {
+            next_x = max_left;
+            d3.select(this.parentNode).select("a.next").classed("disabled", true);
+          }
+        }
+        else {
+          d3.select(this.parentNode).select("a.next").classed("disabled", false);
+          next_x = current_x + row_size*poster_w;
+
+          next_x = next_x > 0 ? 0 : next_x;
+          d3.select(this.parentNode).select("a.prev").classed("disabled", next_x == 0);
+        }
+        page_el.style(prefix + "transform", "translateX(" + (next_x) + "px)");
+
+      }
+
+    });
 
     // Close each accordion list and detect heights.
     var heights = {};
