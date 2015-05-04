@@ -21454,39 +21454,44 @@ module.exports = function(vars, selection, enter, exit) {
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   // "paths" Update
   //----------------------------------------------------------------------------
+
+  var style = {
+    "font-weight": vars.labels.font.weight,
+    "font-family": vars.labels.font.family.value
+  };
+
   selection.selectAll("path.d3plus_data")
     .data(function(d) {
 
       if (vars.labels.value && d.values.length > 1) {
 
-        var tops = []
-          , bottoms = []
-          , names = fetchText(vars,d)
+        var max = d3.max(d.values, function(v){
+          return v.d3plus.y0 - v.d3plus.y;
+        }), lr = false;
 
-        d.values.forEach(function(v){
-          tops.push([v.d3plus.x,v.d3plus.y])
-          bottoms.push([v.d3plus.x,v.d3plus.y0])
-        })
-        tops = tops.concat(bottoms.reverse())
+        if (max > vars.labels.font.size) {
 
-        var style = {
-          "font-weight": vars.labels.font.weight,
-          "font-family": vars.labels.font.family.value
+          var tops = [], bottoms = [], names = fetchText(vars, d);
+
+          d.values.forEach(function(v){
+            tops.push([v.d3plus.x,v.d3plus.y]);
+            bottoms.push([v.d3plus.x,v.d3plus.y0]);
+          });
+          tops = tops.concat(bottoms.reverse());
+
+          var ratio = null;
+          if (names.length) {
+            var size = fontSizes(names[0],style);
+            ratio = size[0].width/size[0].height;
+          }
+
+          lr = largestRect(tops,{
+            "angle": d3.range(-70, 71, 1),
+            "aspectRatio": ratio,
+            "tolerance": 0
+          });
+
         }
-
-        if (names.length) {
-          var size = fontSizes(names[0],style)
-            , ratio = size[0].width/size[0].height
-        }
-        else {
-          var ratio = null
-        }
-
-        var lr = largestRect(tops,{
-          "angle": d3.range(-70,71,1),
-          "aspectRatio": ratio,
-          "tolerance": 0
-        })
 
         if (lr && lr[0]) {
 
@@ -29188,12 +29193,19 @@ bar.filter = function(vars, data) {
 bar.requirements = ["data", "x", "y"];
 
 bar.setup = function(vars) {
-  var axis;
+  var axis, size, y;
   if (!vars.axes.discrete) {
     axis = vars.time.value === vars.y.value ? "y" : "x";
-    return vars.self[axis]({
+    vars.self[axis]({
       scale: "discrete"
     });
+  }
+  y = vars[vars.axes.opposite];
+  size = vars.size;
+  if ((!y.value && size.value) || (size.changed && size.previous === y.value)) {
+    return vars.self[vars.axes.opposite](size.value);
+  } else if ((!size.value && y.value) || (y.changed && y.previous === size.value)) {
+    return vars.self.size(y.value);
   }
 };
 
