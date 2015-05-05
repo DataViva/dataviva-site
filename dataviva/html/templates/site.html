@@ -16,8 +16,8 @@
 
       <div class="searchBox">
   	    <input type="text" autocomplete="false" name="searchFld_1" id="searchFld" class="searchFld"  placeholder="{%trans%}What would you like to learn more about?{%endtrans%}">
-        {% if "home" not in request.endpoint %}
-        <div id="result" class="searchResult"></div>
+        {% if "home" != g.page_type %}
+          <div id="result" class="searchResult"></div>
         {% endif %}
       </div>
       <a id="logo" href="{{ url_for('general.home') }}"></a>
@@ -26,7 +26,7 @@
       <a id="data" href="{{ url_for('data.index') }}" class="link{% if g.page_type == 'data' or g.page_type == 'query' or g.page_type == 'classifications' %} active{% endif %}">{% trans %}Data{% endtrans %}</a>
       <a id="rankings" href="{{ url_for('rankings.index') }}" class="link{% if g.page_type == 'rankings' %} active{% endif %}">{% trans %}Rankings{% endtrans %}</a>
       <a id="about" href="{{ url_for('about.contact') }}" class="link{% if g.page_type == 'about' %} active{% endif %}">{% trans %}Learn More{% endtrans %}</a>
-      {% if "home" not in request.endpoint %}
+      {% if "home" != g.page_type %}
         <a id="search" href="#" class="link">{%trans%}Search{%endtrans%}</a>
       {% endif %}
 
@@ -240,9 +240,9 @@
       var full_url = window.location.href;
       var sub = full_url.substr(0, full_url.indexOf('.'));
       var rest_of_url = full_url.substr(full_url.indexOf('.')+1);
-      
+
       var new_url = 'http://' + l + '.' + rest_of_url;
-      
+
       window.location = new_url;
     }
 
