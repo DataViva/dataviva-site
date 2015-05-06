@@ -650,9 +650,19 @@
           }
         }
 
-    for (k in averages) {
-      averages["cp_bra_0_"+k] = averages[k]
-      averages["cp_bra_1_"+k] = averages[k]
+    for (var k in averages) {
+      if (k === "wage_avg") {
+        averages["cp_bra_0_"+k] = function(d) {
+          return d3.sum(d, function(p){ return p.cp_bra_0_wage; })/d3.sum(d, function(p){ return p.cp_bra_0_num_jobs; });
+        }
+        averages["cp_bra_1_"+k] = function(d) {
+          return d3.sum(d, function(p){ return p.cp_bra_1_wage; })/d3.sum(d, function(p){ return p.cp_bra_1_num_jobs; });
+        }
+      }
+      else {
+        averages["cp_bra_0_"+k] = averages[k]
+        averages["cp_bra_1_"+k] = averages[k]
+      }
     }
 
     var descs = {
@@ -710,8 +720,11 @@
         "sub": {"font": {"align": "left"}},
         "total": {"font": {"align": "left"}}
       })
+      .x({
+        "label": {"font": {"weight": "normal"}}
+      })
       .y({
-        "label": {"font": {"size": 22, "weight": "normal"}},
+        "label": {"font": {"weight": "normal"}},
         "ticks": {"font": {"size": 16}}
       })
 
@@ -1439,7 +1452,9 @@
         .zoom(["balance", "adm"].indexOf(app.build.output) < 0)
         .time(app.vars.time || (app.monthly ? "month" : "year"))
         .time({"solo": timeSolo})
-        .x({"label": ["compare", "bar", "scatter"].indexOf(app.build.app.type) >= 0 ? {"font": {"size": 22, "weight": "normal"}} : false})
+        .y({"label": {"font": {"size": app.build.app.type === "compare" ? 16 : 22 }}})
+        .x({"label": {"font": {"size": app.build.app.type === "compare" ? 16 : 22 }}})
+        .x({"label": ["compare", "bar", "scatter"].indexOf(app.build.app.type) >= 0 ? true : false})
         .x({"ticks": {"font": {"size": app.build.output === "age" || app.build.app.type === "bar" ? 12 : 16}}})
         .labels({"font": {"size": 11}})
 
@@ -2250,8 +2265,8 @@
               leaves.forEach(function(leaf){
                 for (key in leaf) {
                   if (key != "bra_id" && key != out+"_id" && key != "school_type_id") {
-                    if (leaf.bra_id == app.build.bra[0].id) var k = "cp_bra_0_"+key
-                    else if (leaf.bra_id == app.build.bra[1].id) var k = "cp_bra_1_"+key
+                    if (leaf.bra_id == app.build.bra[0].id) var k = "cp_bra_0_"+key;
+                    else if (leaf.bra_id == app.build.bra[1].id) var k = "cp_bra_1_"+key;
                     d[k] = leaf[key]
                   }
                 }

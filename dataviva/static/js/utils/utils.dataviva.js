@@ -55,7 +55,7 @@ dataviva.format.text = function(text, opts) {
     if (index >= app.build.bra.length)
       index = index % app.build.bra.length;
 
-    return app.build.bra[index]["name_"+l] + " ("+format_name(text)+")"
+    return app.build.bra[index]["name_"+l] + " - "+format_name(text);
   }
   else if (!name || (name.indexOf("_display") < 0 && name.indexOf("_id") < 0)) {
     return format_name(text)
@@ -117,6 +117,11 @@ dataviva.format.affixes = {
   "wage_month": ["$"," BRL"],
   "wage_avg_bra": ["$"," BRL"]
 };
+
+for (var a in dataviva.format.affixes) {
+  dataviva.format.affixes["cp_bra_0_" + a] = dataviva.format.affixes[a];
+  dataviva.format.affixes["cp_bra_1_" + a] = dataviva.format.affixes[a];
+}
 
 dataviva.format.number = function(value, opts) {
 
