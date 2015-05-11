@@ -231,9 +231,9 @@
       if (json["logged_in"]) {
         authenticated(json["user"], json["is_admin"]);
       }
-      if (json.flash) {
-        dataviva.flash(json.flash);
-      }
+      // if (json.flash) {
+      //   dataviva.flash(json.flash);
+      // }
     });
 
     function change_language(l) {
