@@ -41,7 +41,7 @@ def check_status():
     if 'first_visit' in session:
         session['first_visit'] = False
     else:
-        data["flash"] = gettext("Welcome to the new version of DataViva! %(click_here)s for the complete list of new features.", click_here="<a target='_blank' href='https://github.com/DataViva/dataviva-site/releases/tag/v2.0'>{}</a>".format(gettext("Click here")))
+        # data["flash"] = gettext("Welcome to the new version of DataViva! %(click_here)s for the complete list of new features.", click_here="<a target='_blank' href='https://github.com/DataViva/dataviva-site/releases/tag/v2.0'>{}</a>".format(gettext("Click here")))
         session['first_visit'] = True
 
     return jsonify(data)
