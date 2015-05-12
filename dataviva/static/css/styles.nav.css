@@ -345,11 +345,8 @@ a.opendata:hover {
 }
 
 @media only screen and (max-device-width: 980px) {
-  #header_container, #nav_footer {
-    position: static;
-  }
-  #container {
-    padding: 20px 0px !important;
+  #header_container {
+    position: absolute;
   }
 }
 
