@@ -408,8 +408,6 @@ class Build(db.Model, AutoSerialize):
         impexp = u"{}/{}".format(lookup["import_val"],lookup["export_val"])
         if impexp in title and flow in lookup:
             title = title.replace(impexp, lookup[flow])
-            if flow is "imports":
-                title = title.replace(" {} ".format(lookup["to"]), " {} ".format(lookup["from"]))
 
 
         impexp = u"{}/{}".format(lookup["origin"],lookup["destination"])

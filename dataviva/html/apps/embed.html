@@ -407,12 +407,7 @@
           else if (title.indexOf(imp) === 0) var match = imp;
           else if (title.indexOf(exp) === 0) var match = exp;
           if (match) {
-            title = title.replace(match, dataviva.dictionary[val])
-            var to = " " + dataviva.dictionary.to + " ",
-                from = " " + dataviva.dictionary.from + " ",
-                joiner = val === "exports" ? to : from;
-            if (title.indexOf(to) > 0) title = title.replace(to, joiner);
-            else if (title.indexOf(from) > 0) title = title.replace(from, joiner);
+            title = title.replace(match, dataviva.dictionary[val]);
           }
           else {
             var orig = dataviva.dictionary.origin;
