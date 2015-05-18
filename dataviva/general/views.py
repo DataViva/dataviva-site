@@ -129,7 +129,7 @@ def home():
     carousels = []
 
     limit = 20
-    carousel_base = "/stats/carosel/?metric={}&show={}&profile={}&limit={}"
+    carousel_base = "/stats/carousel/?metric={}&show={}&profile={}&limit={}"
 
     metric, show, profile = "export_val", "bra_id", "bra"
     data = stats_list(metric, show, limit=limit)
