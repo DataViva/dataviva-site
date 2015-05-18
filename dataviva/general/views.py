@@ -33,7 +33,7 @@ def before_request():
     g.color = "#af1f24"
     g.page_type = mod.name
     g.dictionary = json.dumps(dictionary())
-    g.attr_version = 13
+    g.attr_version = 14
     g.production = False if DEBUG else True
 
     # Check if the user is logged in, if so give the global object
