@@ -607,65 +607,6 @@ def download():
         p = subprocess.Popen(["rsvg-convert", "-z", zoom, "-f", format, "--background-color={0}".format(background), temp.name], stdout=subprocess.PIPE)
         out, err = p.communicate()
         response_data = out
-    elif format == "url2csv":
-
-        format = "csv"
-
-        lang = request.args.get('lang', None) or g.locale
-        txdata = None
-        txheaders = {
-            'User-Agent': 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)',
-            'Accept-Language': lang,
-            'encoding': 'UTF-8',
-            'Content-type': 'text/html',
-            'Keep-Alive': '300',
-            'Connection': 'keep-alive',
-            'Cache-Control': 'max-age=0',
-        }
-        reqq = urllib2.Request(data, txdata, txheaders)
-        reqq.add_header('Accept-encoding', 'gzip')
-        req = urllib2.urlopen(reqq)
-
-        if req.info().get('Content-Encoding') == 'gzip':
-            buf = StringIO(req.read())
-            f = gzip.GzipFile(fileobj=buf)
-            data = f.read()
-        else:
-            data = req.read()
-
-        data = json.loads(str(data))
-
-        cvs = ""
-        i = 0
-        lineArray = []
-        linesArray = []
-        headerArray = []
-        checkHeader = []
-
-        for item in data['data']:
-            for h in item:
-                if h not in checkHeader:
-                   checkHeader.append(h)
-                   translation = translate(h)
-                   headerArray.append(unicode(translation,'utf-8'))
-
-        for item in data['data']:
-            print item
-            lineArray = []
-            for header in checkHeader:
-                if header in item:
-                    if (type(item[header]) is unicode):
-                        lineArray.append(item[header])
-                    else:
-                        lineArray.append(str(item[header]))
-                else:
-                    lineArray.append("")
-
-            linesArray.append('\t'.join(lineArray))
-            i = 1
-        cvs = '\t'.join(headerArray) + '\n' + '\n'.join(linesArray)
-        response_data = cvs.encode("utf-16", 'ignore')
-
     else:
         response_data = data.encode("utf-16")
         #print response_data

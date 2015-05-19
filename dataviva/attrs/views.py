@@ -1,7 +1,9 @@
-import urllib2
+import gzip
+import json
+from StringIO import StringIO
 
 from sqlalchemy import func, distinct, asc, desc, and_, or_
-from flask import Blueprint, request, jsonify, abort, g, render_template, make_response, redirect, url_for, flash
+from flask import Response, Blueprint, request, jsonify, abort, g, render_template, make_response, redirect, url_for, flash
 
 from dataviva import db, __year_range__, view_cache
 from dataviva.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University, School, bra_pr, Search
@@ -18,6 +20,7 @@ from dataviva.utils.title_case import title_case
 from sqlalchemy import desc
 from dataviva.utils.gzip_data import gzipped
 from dataviva.utils.cached_query import api_cache_key
+from dataviva.translations.translate import translate
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
@@ -77,7 +80,7 @@ def school_attrs(bra_id):
 
 @mod.route('/<attr>/')
 @mod.route('/<attr>/<Attr_id>/')
-def attrs(attr="bra",Attr_id=None):
+def attrs(attr="bra",Attr_id=None, depth=None):
 
     Attr = globals()[attr.capitalize()]
     Attr_weight_mergeid = "{0}_id".format(attr)
@@ -121,7 +124,7 @@ def attrs(attr="bra",Attr_id=None):
     depths["course_sc"] = [2,5]
     depths["school"] = [8]
 
-    depth = request.args.get('depth', None)
+    depth = request.args.get('depth', depth)
     order = request.args.get('order', None)
     offset = request.args.get('offset', None)
     limit = request.args.get('limit', None)
@@ -281,6 +284,56 @@ def attrs(attr="bra",Attr_id=None):
     ret.headers['Content-Length'] = str(len(ret.data))
 
     return ret
+
+def wrapcsv(x):
+    if "," in x or u"," in x:
+        return '"{}"'.format(x)
+    return x
+
+@mod.route('/download/', methods=['GET'])
+def dl_csv():
+    attr_type = request.args.get('attr_type')
+    depth = request.args.get('depth')
+
+    req = attrs(attr=attr_type, depth=depth)
+    data = req.get_data()
+    buf = StringIO(data)
+    f = gzip.GzipFile(fileobj=buf)
+    data = json.load(f)
+
+    cvs = ""
+    lineArray = []
+    linesArray = []
+    headerArray = []
+    checkHeader = []
+
+    for item in data['data']:
+        for h in item:
+            if h not in checkHeader:
+               checkHeader.append(h)
+               translation = translate(h)
+               headerArray.append(wrapcsv(translation))
+
+    for item in data['data']:
+        lineArray = []
+        for header in checkHeader:
+            if header in item:
+                if (type(item[header]) is unicode):
+                    lineArray.append(wrapcsv(item[header]))
+                else:
+                    lineArray.append(wrapcsv(str(item[header])))
+            else:
+                lineArray.append("")
+
+        linesArray.append(','.join(lineArray))
+
+    csv_str = ','.join(headerArray) + '\n' + '\n'.join(linesArray)
+
+    response = make_response(csv_str)
+    response.headers['Content-Disposition'] = "attachment; filename=attr.csv"
+    response.headers["Content-type"] = "text/csv"
+
+    return response
 
 @mod.route('/table/<attr>/<depth>/')
 def attrs_table(attr="bra",depth="2"):
