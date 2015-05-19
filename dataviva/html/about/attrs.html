@@ -59,8 +59,8 @@
     	title = dataviva.format.text("classifications")+"-"+dataviva.format.text(id[0])+"-"+dataviva.format.text(depthElem[0][0].id+"_plural")
 
     	url = "http://"+location.host+"/attrs/"+id[0]+"/?depth="+depth;
-    	 d3.xhr("/apps/download/")
-  		  .header("Content-Type", "visualization/x-www-form-urlencoded")
+      d3.xhr("/apps/download/")
+        .header("Content-Type", "application/x-www-form-urlencoded")
         .post("output_format=url2csv&title="+title+"&downloadToken="+ new Date().getTime() +"&data="+ url, function(e, data){
 			    top.location.href = data.response;
 			    downloadDone();
