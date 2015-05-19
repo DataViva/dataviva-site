@@ -3,7 +3,7 @@ from dataviva import db, lm
 from dataviva.utils.exist_or_404 import exist_or_404
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, jsonify, abort, current_app
 from dataviva.stats.helper import compute_stats, stats_list, top_occupations
-from dataviva.stats.helper import CAROSEL_NS
+from dataviva.stats.helper import CAROUSEL_NS
 from dataviva.stats.util import get_profiles
 from dataviva import view_cache
 from dataviva.utils.cached_query import make_cache_key
@@ -20,7 +20,7 @@ def make_cache_key(*args, **kwargs):
     path = request.path
     args = str(hash(frozenset(request.args.items())))
     lang = str(get_locale())
-    return CAROSEL_NS + (path + args + lang).encode('utf-8')
+    return CAROUSEL_NS + (path + args + lang).encode('utf-8')
 
 @mod.route('/compute/')
 def compute():
@@ -35,9 +35,9 @@ def compute():
     data = compute_stats(metric, shows, limit=limit, offset=offset, depth=depth, sort=sort)
     return jsonify(data)
 
-@mod.route('/carosel/')
+@mod.route('/carousel/')
 @view_cache.cached(key_prefix=make_cache_key)
-def carosel():
+def carousel():
     limit = int(request.args.get('limit', 10))
     offset = int(request.args.get('offset', 0))
     depth = request.args.get('depth', None)

@@ -49,7 +49,7 @@ max_depth = {
 }
 
 no_length_column = { attrs.Bra: 9 }
-CAROSEL_NS = "carosel:"
+CAROUSEL_NS = "carousel:"
 
 filters_map = {
     secex.Ymb : [secex.Ymb.year == __latest_year__['secex'], secex.Ymb.month == 0],
@@ -91,7 +91,7 @@ def cities_by_pop(value):
     return res
 
 def compute_stats(metric, shows, limit=None, offset=None, sort="desc", depth=None, filters=[]):
-    cache_key = CAROSEL_NS + "".join(([metric] + shows) + ([str(limit), str(offset),sort,str(depth)]))
+    cache_key = CAROUSEL_NS + "".join(([metric] + shows) + ([str(limit), str(offset),sort,str(depth)]))
     prev = cached_query(cache_key)
     if prev:
         return pickle.loads(prev)
@@ -142,7 +142,7 @@ def compute_stats(metric, shows, limit=None, offset=None, sort="desc", depth=Non
     return results
 
 def top_occupations(year, bra_id):
-    cache_key = CAROSEL_NS + "top_occupations" + str(year) + bra_id
+    cache_key = CAROUSEL_NS + "top_occupations" + str(year) + bra_id
     prev = object_cache(cache_key)
     if prev:
         return pickle.loads(prev)
@@ -162,7 +162,7 @@ def top_occupations(year, bra_id):
 def generic_join_breakdown(namespace, params, left_table, right_table, join_criteria, columns, order_col="ratio", filters=[], 
                            limit=10, sort_order="desc", offset=0, col_select=None):
 
-    cache_key = CAROSEL_NS + namespace + "_" + str(params)
+    cache_key = CAROUSEL_NS + namespace + "_" + str(params)
     
     prev = object_cache(cache_key)
     if prev:
