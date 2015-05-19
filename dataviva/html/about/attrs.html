@@ -62,9 +62,21 @@
 
       d3.xhr("/attrs/download/?attr_type="+ attr_type + "&depth=" + depth)
         .get("", function(e, data){
-          var csvContent = "data:text/csv;charset=utf-8," + data.response;
-          var encodedUri = encodeURI(csvContent);
-          window.open(encodedUri)
+
+          var csv_data = "data:text/csv;charset=utf-8," + data.response;
+
+          if (d3plus.client.ie) {
+            var blob = new Blob([csv_data], {type: "text/csv;charset=utf-8;"});
+            navigator.msSaveBlob(blob, title + ".csv");
+          }
+          else {
+            var encodedUri = encodeURI(csv_data);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", title + ".csv");
+            link.click();
+          }
+
   			});
     }
 

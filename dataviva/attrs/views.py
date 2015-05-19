@@ -311,8 +311,7 @@ def dl_csv():
         for h in item:
             if h not in checkHeader:
                checkHeader.append(h)
-               translation = translate(h)
-               headerArray.append(wrapcsv(translation))
+               headerArray.append(wrapcsv(h))
 
     for item in data['data']:
         lineArray = []
