@@ -587,8 +587,6 @@ def download():
     title_safe = title[:max_length]
     filenameDownload = title_safe + "-" + downloadToken
 
-
-
     if format == "png":
         mimetype='image/png'
     elif format == "pdf":
@@ -600,10 +598,6 @@ def download():
     elif format == "url2csv":
         mimetype="text/csv;charset=UTF-16"
 
-    def getRows(data):
-        # ?? this totally depends on what's in your data
-        return []
-
     if format == "png" or format == "pdf":
         temp = tempfile.NamedTemporaryFile()
         temp.write(data.encode("utf-16"))
@@ -614,7 +608,7 @@ def download():
         out, err = p.communicate()
         response_data = out
     elif format == "url2csv":
-        urrll = data
+
         format = "csv"
 
         lang = request.args.get('lang', None) or g.locale
@@ -648,12 +642,11 @@ def download():
         headerArray = []
         checkHeader = []
 
-
         for item in data['data']:
-            for cabecalho in item:
-                if cabecalho not in checkHeader:
-                   checkHeader.append(cabecalho)
-                   translation = translate(cabecalho)
+            for h in item:
+                if h not in checkHeader:
+                   checkHeader.append(h)
+                   translation = translate(h)
                    headerArray.append(unicode(translation,'utf-8'))
 
         for item in data['data']:
