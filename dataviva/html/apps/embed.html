@@ -689,7 +689,7 @@
       .container("#app")
       .aggs(averages)
       .time({"solo": {"callback": app.title_update}})
-      .legend({"size": [25,25]})
+      .legend({"size": [25,25], "filters": true})
       .format({
         "affixes": dataviva.format.affixes,
         "locale": dataviva.language === "pt" ? "pt_BR" : "en_US",
@@ -1388,6 +1388,12 @@
 
       var timeSolo = app.vars.year && app.vars.year !== app.years.join("_") ?
                      time2range(app.vars.year.split("_")) : [];
+
+      if (!app.monthly) {
+        timeSolo = timeSolo.map(function(d){
+          return new Date(d.getFullYear()+"");
+        })
+      }
 
       var depth = nesting.indexOf(app.vars.depth);
       if (depth < 0) {
