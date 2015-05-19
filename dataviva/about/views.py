@@ -36,6 +36,8 @@ def crosswalk(attr1, attr2):
     col2, Attr2_Table = attr_table_map[attr2]
     cbo_mode = "cbo" in [attr1, attr2]
     Crosswalk_table = Crosswalk_oc if cbo_mode else Crosswalk_pi
+    filename = "cbo-course" if cbo_mode else "hs-cnae"
+    filename = filename + "_" + g.locale + ".csv"
 
     crosswalks = Crosswalk_table.query.all()
     attr1_list = set([ getattr(x, attr1+"_id") for x in crosswalks])
@@ -61,7 +63,7 @@ def crosswalk(attr1, attr2):
 
     title = gettext(col1) + gettext(" to ") + gettext(col2)
 
-    return render_template("about/crosswalk.html", crosswalk=full_map, title=title, col1=col1, col2=col2, page="crosswalk", attrs="{}-{}".format(attr1, attr2))
+    return render_template("about/crosswalk.html", filename=filename, crosswalk=full_map, title=title, col1=col1, col2=col2, page="crosswalk", attrs="{}-{}".format(attr1, attr2))
 
 
 @mod.route('/analysis/')

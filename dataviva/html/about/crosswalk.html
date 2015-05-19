@@ -6,6 +6,7 @@
 {% block about_content %}
 
     <h1>{{ title }}</h1>
+    <a href="/static/crosswalks/{{ filename }}"><i class="fa fa-save" style="margin-top:1px;margin-right:5px;"></i>{% trans %}Download{% endtrans %}</a><br>
     <input id="crosswalkSearch" type="text" onkeyup="searchTable(this)" placeholder="{% trans %}Search{% endtrans %}"/>
     <hr/>
 
@@ -25,12 +26,12 @@
               <img src="{{ key.icon() }}" width=20 style="background-color: {{ key.color }};">
             </td>
             <td>
-              <a href="{{ key.url() }}">{{ key.name() }}</a>
+              <a href="{{ key.url() }}">{{ key.name() }} ({{ key.id }})</a>
             </td>
             <td>
               <ul>
                 {% for value in crosswalk[key] %}
-                  <li><a href="{{ value.url() }}">{{ value.name() }}</a></li>
+                  <li><a href="{{ value.url() }}">{{ value.name() }} ({{ value.id }})</a></li>
                 {% endfor %}
                </ul>
             </td>
