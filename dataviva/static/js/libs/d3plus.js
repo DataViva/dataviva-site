@@ -12725,7 +12725,11 @@ valueParse = function(vars, node, depth, variable, val) {
   for (i = j = 0, len = val.length; j < len; i = ++j) {
     v = val[i];
     if (timeVar && v !== null && v.constructor !== Date) {
-      d = new Date(v.toString());
+      v = v + "";
+      if (v.length === 4 && parseInt(v) + "" === v) {
+        v += "/01/01";
+      }
+      d = new Date(v);
       if (d !== "Invalid Date") {
         val[i] = d;
       }

@@ -1389,12 +1389,6 @@
       var timeSolo = app.vars.year && app.vars.year !== app.years.join("_") ?
                      time2range(app.vars.year.split("_")) : [];
 
-      if (!app.monthly) {
-        timeSolo = timeSolo.map(function(d){
-          return new Date(d.getFullYear()+"");
-        })
-      }
-
       var depth = nesting.indexOf(app.vars.depth);
       if (depth < 0) {
         if (app.build.dataset !== "ei" && app.build.output_attr === "bra") {
