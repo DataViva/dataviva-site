@@ -33,9 +33,13 @@ Note: Internet Explorer versions 8 and below will not work as they do not have S
 
         apt-get install librsvg2-bin (Ubuntu)
         brew install librsvg (Mac)
-5.	Create a MySQL database and import the latest dump from [dataviva.info/static/db/](http://dataviva.info/static/db/)
+5.	Create a MySQL database and import the latest [database dump](datavivadb.s3-sa-east-1.amazonaws.com/DV2015_DB.zip)
 
-        bunzip2 < dataviva_xxxx-xx-xx.sql.bz2 | mysql -u USERNAME -p -h localhost DB_NAME
+        # Import the schema
+        gzip -dc DV2015_DB/*/schema/*.sql.gz | mysql -u USERNAME -p -h 127.0.0.1 DB_NAME
+        # Import the content
+        gzip -dc DV2015_DB/*/content/*.sql.gz | mysql -u USERNAME -p -h 127.0.0.1 DB_NAME
+        
 6.	Set the following environment variables
 
 	**(if using virtualenv)** add the following to to the bottom of your virtualenv activate file (virtualenv_root/bin/activate).
