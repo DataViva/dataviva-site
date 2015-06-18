@@ -76,6 +76,7 @@ def filler(dataset, filter1, filter2):
 def guide():
     apps = []
     default_bra = Bra.query.get("4mg")
+    compare_bra = Bra.query.get("4sp")
     default_cnae = Cnae.query.get("i56112")
     default_cbo = Cbo.query.get("2235")
     default_hs = Hs.query.get("052601")
@@ -161,7 +162,7 @@ def guide():
     })
     # Compare
     builds = [b for b in build_list if b.id in (52,53,113)]
-    for b in builds: b.set_bra(default_bra)
+    for b in builds: b.set_bra([default_bra, compare_bra])
     apps.append({
         "summary": gettext("Similar to the scatter visualization except this form of a scatter shows the same variable along both axes varrying the location for comparison purposes."),
         "builds": builds,
