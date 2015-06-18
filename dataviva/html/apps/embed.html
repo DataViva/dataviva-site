@@ -493,7 +493,7 @@
           html_return += "<div class='title'>"+dataviva.format.text("related_apps")+"</div>";
           html_return = createRecs(html_return, data.builds);
         }
-
+        loading.hide();
         return html_return;
       },
       "url": function(id) {
@@ -503,6 +503,7 @@
           rec_url[filterIndex[app.build.output]] = id;
           rec_url = rec_url.join("/")
         }
+        loading.text(dataviva.dictionary.wait).show();
         return "/apps/recommend/"+rec_url+location.search;
       }
     }
