@@ -2942,16 +2942,16 @@
 
     dataviva.resize = function(noDraw) {
 
-      var min_width = 300;
-
-      if (window.innerWidth < min_width || window.innerHeight <= 400) {
+      if (window.innerWidth < 500 || window.innerHeight < 400) {
         app.vars.controls = "false";
-        d3.select("#settings").style("display","none")
-        d3.select("#controls").style("display","none")
+        d3.select("#settings").style("display","none");
+        d3.select("#controls").style("display","none");
+        app.viz.tooltip({"html": false, "children": false});
       }
       else {
-        d3.select("#settings").style("display","block")
-        d3.select("#controls").style("display","block")
+        d3.select("#settings").style("display","block");
+        d3.select("#controls").style("display","block");
+        app.viz.tooltip({"html": app.html, "children": true});
       }
 
       // Set the max-width for the builder div and app_title
