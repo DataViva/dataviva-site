@@ -719,18 +719,13 @@
       .nodes({"overlap": 1.7})
       .shape({"interpolate": "monotone"})
       .title({
-        "font": {"size": 22, "align": "left"},
+        "font": {"align": "left"},
         "padding": 5,
         "sub": {"font": {"align": "left"}},
         "total": {"font": {"align": "left"}}
       })
-      .x({
-        "label": {"font": {"weight": "normal"}}
-      })
-      .y({
-        "label": {"font": {"weight": "normal"}},
-        "ticks": {"font": {"size": 16}}
-      })
+      .x({"label": {"font": {"weight": "normal"}}})
+      .y({"label": {"font": {"weight": "normal"}}})
 
     app.redirect = function(url) {
       if (window.frameElement) {
@@ -1459,7 +1454,6 @@
         .y({"label": {"font": {"size": app.build.app.type === "compare" ? 16 : 22 }}})
         .x({"label": {"font": {"size": app.build.app.type === "compare" ? 16 : 22 }}})
         .x({"label": ["compare", "bar", "scatter"].indexOf(app.build.app.type) >= 0 ? true : false})
-        .x({"ticks": {"font": {"size": app.build.output === "age" || app.build.app.type === "bar" ? 12 : 16}}})
         .labels({"font": {"size": 11}})
 
       if (same_origin &&
@@ -2947,12 +2941,22 @@
         app.vars.controls = "false";
         d3.select("#settings").style("display","none");
         d3.select("#controls").style("display","none");
-        app.viz.tooltip({"html": false, "children": false});
+        app.viz.tooltip({"html": false, "children": false})
+          .title({"font": {"size": 16}})
+          .y({"label": {"font": {"size": app.build.app.type === "compare" ? 12 : 16 }}})
+          .y({"ticks": {"font": {"size": 12}}})
+          .x({"label": {"font": {"size": app.build.app.type === "compare" ? 12 : 16 }}})
+          .x({"ticks": {"font": {"size": 12}}});
       }
       else {
         d3.select("#settings").style("display","block");
         d3.select("#controls").style("display","block");
-        app.viz.tooltip({"html": app.html, "children": true});
+        app.viz.tooltip({"html": app.html, "children": true})
+          .title({"font": {"size": 22}})
+          .y({"label": {"font": {"size": app.build.app.type === "compare" ? 16 : 22 }}})
+          .y({"ticks": {"font": {"size": 16}}})
+          .x({"label": {"font": {"size": app.build.app.type === "compare" ? 16 : 22 }}})
+          .x({"ticks": {"font": {"size": app.build.output === "age" || app.build.app.type === "bar" ? 12 : 16}}});
       }
 
       // Set the max-width for the builder div and app_title
