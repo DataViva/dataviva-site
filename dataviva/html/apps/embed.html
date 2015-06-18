@@ -614,14 +614,18 @@
           "opp_gain_wld": "mean",
           "num_jobs_est": "mean",
           "wage_avg": function(d) {
-            return d3.sum(d, function(p){ return p.wage; })/d3.sum(d, function(p){ return p.num_jobs; });
+            var t = d3.sum(d, function(p){ return p.wage; });
+            if (!t) return null;
+            return t/d3.sum(d, function(p){ return p.num_jobs; });
           },
           "wage_avg_bra": "mean",
           "wage_growth": "mean",
           "wage_growth_5": "mean",
           "age": "mean",
           "enrolled_classes": function(d) {
-            return d3.sum(d, function(p){ return p.enrolled; })/d3.sum(d, function(p){ return p.classes; });
+            var t = d3.sum(d, function(p){ return p.enrolled; });
+            if (!t) return null;
+            return t/d3.sum(d, function(p){ return p.classes; });
           },
           "num_emp_growth": "mean",
           "num_emp_growth_5": "mean",
@@ -648,10 +652,14 @@
     for (var k in averages) {
       if (k === "wage_avg") {
         averages["cp_bra_0_"+k] = function(d) {
-          return d3.sum(d, function(p){ return p.cp_bra_0_wage; })/d3.sum(d, function(p){ return p.cp_bra_0_num_jobs; });
+          var t = d3.sum(d, function(p){ return p.cp_bra_0_wage; });
+          if (!t) return null;
+          return t/d3.sum(d, function(p){ return p.cp_bra_0_num_jobs; });
         }
         averages["cp_bra_1_"+k] = function(d) {
-          return d3.sum(d, function(p){ return p.cp_bra_1_wage; })/d3.sum(d, function(p){ return p.cp_bra_1_num_jobs; });
+          var t = d3.sum(d, function(p){ return p.cp_bra_1_wage; });
+          if (!t) return null;
+          return t/d3.sum(d, function(p){ return p.cp_bra_1_num_jobs; });
         }
       }
       else {
