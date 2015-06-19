@@ -287,7 +287,7 @@ def attrs(attr="bra",Attr_id=None, depth=None):
 
 def wrapcsv(x):
     if "," in x or u"," in x:
-        return '"{}"'.format(x)
+        return u'"{}"'.format(x)
     return x
 
 @mod.route('/download/', methods=['GET'])
@@ -329,7 +329,7 @@ def dl_csv():
     csv_str = ','.join(headerArray) + '\n' + '\n'.join(linesArray)
 
     response = make_response(csv_str)
-    response.headers['Content-Disposition'] = "attachment; filename=attr.csv"
+    response.headers['Content-Disposition'] = "attachment; filename=dataviva_attr_{}_{}.csv".format(attr_type, depth)
     response.headers["Content-type"] = "text/csv"
 
     return response
