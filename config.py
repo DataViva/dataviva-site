@@ -89,4 +89,4 @@ MAIL_PASSWORD = get_env_variable("DATAVIVA_MAIL_PASSWORD","")
 '''
     Administrator email
 '''
-ADMINISTRATOR_EMAIL = 'daniela.caetano@escritorio.mg.gov.br'
+ADMINISTRATOR_EMAIL = 'contato@dataviva.info'
