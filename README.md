@@ -33,7 +33,7 @@ Note: Internet Explorer versions 8 and below will not work as they do not have S
 
         apt-get install librsvg2-bin (Ubuntu)
         brew install librsvg (Mac)
-5.	Create a MySQL database and import the latest [database dump](http://datavivadb.s3-sa-east-1.amazonaws.com/DV2015_DB.zip)
+5.	Create a MySQL database and import the latest [database dump](https://s3-sa-east-1.amazonaws.com/datavivadb/dv2015_db.tar.gz)
 
         # Import the schema
         gzip -dc DV2015_DB/*/schema/*.sql.gz | mysql -u USERNAME -p -h 127.0.0.1 DB_NAME
