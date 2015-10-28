@@ -57,6 +57,12 @@ Note: Internet Explorer versions 8 and below will not work as they do not have S
         * export DATAVIVA_ACCOUNTS=True
         
         * only necessary if you want to enable user accounts
-7. Run the site locally!
+
+7. Handle en/pt subdomains for translations. For example, when testing locally you may add these lines to /etc/hosts
+
+        127.0.0.1 en.localhost
+        127.0.0.1 pt.localhost
+
+8. Run the site locally!
 
         python run.py runserver
