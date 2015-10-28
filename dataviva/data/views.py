@@ -50,8 +50,6 @@ def get_geo_location(ip):
 def table(data_type="rais", year="all", bra_id="4mg", filter_1="show.1", filter_2="all"):
     g.page_type = "table"
     data_url = "/{}/{}/{}/{}/{}/".format(data_type,year,bra_id,filter_1,filter_2)
-    # if data_type == "ei":
-    #     data_url = "/{}/{}/{}/{}/".format(data_type,year,bra_id,filter_1)
     return render_template("general/table.html",data_url = data_url)
 
 @mod.route('/')
@@ -71,7 +69,6 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
                 ["secex", _('International Trade')],
                 ["hedu", _('Higher Education')],
                 ["sc", _('School Census')]]
-                # ["ei", _('Electronic Invoice')]]
     for d in datasets:
         start_year, end_year = __year_range__[d[0]]
         years = reversed(range(int(start_year.split("-")[0]), int(end_year.split("-")[0])+1))
@@ -84,8 +81,6 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
     trans_lookup = dictionary()
     filters = [
         {"id": "bra", "datasets": "rais secex hedu sc", "nestings": [1, 3, 5, 7, 9]},
-        # {"id": "bra_r", "datasets": "ei", "nestings": [1, 3, 5, 7, 9]},
-        # {"id": "bra_s", "datasets": "ei", "nestings": [1, 3, 5, 7, 9]},
         {"id": "cbo", "datasets": "rais", "nestings":[1, 4]},
         {"id": "cnae", "datasets": "rais", "nestings":[1, 3, 6]},
         {"id": "hs", "datasets": "secex", "nestings":[2, 6]},
@@ -119,7 +114,6 @@ def index(data_type="rais", year="all", bra_id=None, filter_1=None, filter_2=Non
         "secex": [("bra", Bra), ("hs", Hs), ("wld", Wld)],
         "hedu": [("bra", Bra), ("university", University), ("course_hedu", Course_hedu)],
         "sc": [("bra", Bra), None, ("course_sc", Course_sc)]
-        # "ei": [("bra_r", Bra), ("bra_s", Bra)]
     }
 
     # parse year

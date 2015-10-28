@@ -45,7 +45,6 @@ def get_month(table, year, mode):
     return table.query.with_entities(table.month).filter_by(year=year).filter(table.month!=0).order_by(month_col).first().month
 
 def compute_table_years(datasets):
-    from dataviva.ei.models import Yms
     from dataviva.secex.models import Ymb
     from dataviva.rais.models import Yb_rais
     from dataviva.hedu.models import Yc_hedu
@@ -53,13 +52,13 @@ def compute_table_years(datasets):
     from dataviva.attrs.models import Yb as Yb_attr
     from dataviva.attrs.models import Ybs
 
-    tables = {"ei" : Yms, "hedu": Yc_hedu, "sc": Yc_sc, "secex": Ymb, "rais": Yb_rais, "population": Yb_attr, "stats": Ybs}
+    tables = {"hedu": Yc_hedu, "sc": Yc_sc, "secex": Ymb, "rais": Yb_rais, "population": Yb_attr, "stats": Ybs}
 
     results = {}
     for dataset in datasets:
         max_year = str(get_year(tables[dataset], mode='max'))
         min_year = str(get_year(tables[dataset], mode='min'))
-        if dataset == "ei" or dataset == "secex":
+        if dataset == "secex":
             max_year = max_year + "-" + str(get_month(tables[dataset], max_year, 'max'))
             min_year = min_year + "-" + str(get_month(tables[dataset], min_year, 'min'))
         results[dataset] = [min_year, max_year]
@@ -70,6 +69,6 @@ def get_or_set_years(redis, key):
     if val:
         val = json.loads(val)
     else:
-        val = compute_table_years(['ei', 'hedu', 'sc', 'secex', 'rais', 'population', 'stats'])
+        val = compute_table_years(['hedu', 'sc', 'secex', 'rais', 'population', 'stats'])
     redis.set(key, json.dumps(val))
     return val

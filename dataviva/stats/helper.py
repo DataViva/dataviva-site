@@ -8,7 +8,6 @@ from dataviva.stats.cache import object_cache
 
 from dataviva import db
 
-import dataviva.ei.models as ei
 import dataviva.rais.models as rais
 import dataviva.secex.models as secex
 import dataviva.hedu.models as hedu
@@ -27,8 +26,6 @@ __latest_year__ = {k: v[-1] for k,v in __year_range__.items()}
 
 # TODO: Add SECEX once API is updated
 possible_tables = {
-    "bra_id_r" : [ei.Ymr],
-    "bra_id_s" : [ei.Yms],
     "bra_id" : [rais.Yb_rais, secex.Ymb, hedu.Yb_hedu, hedu.Ybu, attrs.Bra],
     "cnae_id" : [rais.Yi],
     "cbo_id" : [rais.Yo],
