@@ -545,7 +545,7 @@
         else if (typeof d[i] == "string") {
           var this_val = dataviva.format.text(d[i],{"key": c});
           if(c == "name"){
-            if(id_index){
+            if(id_index >- 1){
               var this_id = d[id_index];
               row_data[c] = "<a target='_top' href='/profiles/"+attr_type+"/"+this_id+"/'>"+this_val+"</a>"
             }
