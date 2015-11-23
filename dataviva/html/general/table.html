@@ -233,7 +233,7 @@
         // }
         if(col.indexOf("bra_id") > -1){
           sticky_cols_w_names.push(["bra", "id_ibge", "IBGE"])
-          sticky_cols_w_names.push(["bra", "name", "Location"])
+          sticky_cols_w_names.push(["bra", "name", "{% trans %}Location{% endtrans %}"])
         }
         else if(col.indexOf("_id") > -1 && sticky_cols.indexOf("name") < 0){
           var attr_type = col.replace("_id", "")
