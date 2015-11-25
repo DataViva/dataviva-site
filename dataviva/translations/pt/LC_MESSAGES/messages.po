@@ -2164,7 +2164,7 @@ msgstr "Visualize dados de emprego agora."
 
 #: dataviva/html/general/home.html:312
 msgid "What are students<br>studying at UFMG?"
-msgstr "O que os alunos<br>estudam no UFMG?"
+msgstr "O que os alunos<br>estudam na UFMG?"
 
 #: dataviva/html/general/home.html:313
 msgid "Analyze enrollment for every university in Brazil."
