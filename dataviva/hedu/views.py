@@ -9,7 +9,7 @@ from dataviva.utils.cached_query import api_cache_key
 from dataviva.utils import table_helper, query_helper
 from dataviva.utils.csv_helper import gen_csv, is_download
 
-mod = Blueprint('hedu', __name__, url_prefix='/hedu')
+mod = Blueprint('hedu', __name__, url_prefix='/<lang_code>/hedu')
 
 @mod.url_defaults
 def add_language_code(endpoint, values):
@@ -17,7 +17,7 @@ def add_language_code(endpoint, values):
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-    g.local = values.pop('lang_code')
+    g.locale = values.pop('lang_code')
 
 @mod.route('/<year>/<bra_id>/<university_id>/<course_hedu_id>/')
 @view_cache.cached(key_prefix=api_cache_key("hedu"), unless=is_download)

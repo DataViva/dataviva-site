@@ -12,7 +12,7 @@ from dataviva.apps.models import UI
 from dataviva.utils.cached_query import cached_query, api_cache_key
 
 
-mod = Blueprint('data', __name__, url_prefix='/data')
+mod = Blueprint('data', __name__, url_prefix='/<lang_code>/data')
 
 @mod.before_request
 def before_request():
@@ -25,7 +25,7 @@ def add_language_code(endpoint, values):
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-    g.local = values.pop('lang_code')
+    g.locale = values.pop('lang_code')
 
 def get_geo_location(ip):
     req = urllib2.Request("http://freegeoip.net/json/" + ip)

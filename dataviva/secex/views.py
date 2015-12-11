@@ -7,7 +7,7 @@ from dataviva import view_cache
 from dataviva.utils.cached_query import api_cache_key
 from dataviva.utils.csv_helper import gen_csv, is_download
 
-mod = Blueprint('secex', __name__, url_prefix='/secex')
+mod = Blueprint('secex', __name__, url_prefix='/<lang_code>/secex')
 
 @mod.url_defaults
 def add_language_code(endpoint, values):
@@ -15,7 +15,7 @@ def add_language_code(endpoint, values):
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-    g.local = values.pop('lang_code')
+    g.locale = values.pop('lang_code')
 
 @mod.route('/<year>/<bra_id>/<hs_id>/<wld_id>/')
 @mod.route('/<year>-<month>/<bra_id>/<hs_id>/<wld_id>/')
