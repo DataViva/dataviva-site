@@ -47,7 +47,7 @@ class Cnae(db.Model, AutoSerialize, ExpandedAttr):
         return "/static/img/icons/cnae/cnae_%s.png" % (self.id[:1])
 
     def url(self):
-        return "/profiles/cnae/{}/".format(self.id)
+        return "{}/profiles/cnae/{}/".format(g.locale, self.id)
 
     def __repr__(self):
         return '<Cnae %r>' % (self.name_en)
@@ -67,7 +67,7 @@ class Cbo(db.Model, AutoSerialize, ExpandedAttr):
         return "/static/img/icons/cbo/cbo_%s.png" % (self.id[:1])
 
     def url(self):
-        return "/profiles/cbo/{}/".format(self.id)
+        return "{}/profiles/cbo/{}/".format(g.locale, self.id)
 
     def __repr__(self):
         return '<Cbo %r>' % (self.name_en)
@@ -87,7 +87,7 @@ class Hs(db.Model, AutoSerialize, ExpandedAttr):
         return "/static/img/icons/hs/hs_%s.png" % (self.id[:2])
 
     def url(self):
-        return "/profiles/hs/{}/".format(self.id)
+        return "{}/profiles/hs/{}/".format(g.locale, self.id)
 
     def __repr__(self):
         return '<Hs %r>' % (self.name_en)
@@ -107,7 +107,7 @@ class Course_hedu(db.Model, AutoSerialize, ExpandedAttr):
         return "/static/img/icons/course_hedu/course_hedu_%s.png" % (self.id[:2])
 
     def url(self):
-        return "/profiles/course_hedu/{}/".format(self.id)
+        return "{}/profiles/course_hedu/{}/".format(g.locale, self.id)
 
     def __repr__(self):
         return '<Course_hedu %r>' % (self.name_en)
@@ -127,7 +127,7 @@ class Course_sc(db.Model, AutoSerialize, ExpandedAttr):
         return "/static/img/icons/course_sc/course_sc_%s.png" % (self.id[:2])
 
     def url(self):
-        return "/profiles/course_sc/{}/".format(self.id)
+        return "{}/profiles/course_sc/{}/".format(g.locale, self.id)
 
     def __repr__(self):
         return '<Course_sc %r>' % (self.name_en)
@@ -146,7 +146,7 @@ class School(db.Model, AutoSerialize, ExpandedAttr):
         return "/static/img/icons/school/school_{}.png".format(self.school_type_id.lower())
 
     def url(self):
-        return "/profiles/school/{}/".format(self.id)
+        return "{}/profiles/school/{}/".format(g.locale, self.id)
 
     def __repr__(self):
         return '<School %r>' % (self.name_en)
@@ -173,7 +173,7 @@ class University(db.Model, AutoSerialize, ExpandedAttr):
         return getattr(self, "school_type_" + lang)
 
     def url(self):
-        return "/profiles/university/{}/".format(self.id)
+        return "{}/profiles/university/{}/".format(g.locale, self.id)
 
     def __repr__(self):
         return '<University %r>' % (self.name_en)
@@ -210,7 +210,7 @@ class Wld(db.Model, AutoSerialize, BasicAttr):
         if self.id == "sabra":
             return "/profiles/bra/all/"
         else:
-            return "/profiles/wld/{}/".format(self.id)
+            return "{}/profiles/wld/{}/".format(g.locale, self.id)
 
     def __repr__(self):
         return '<Wld %r>' % (self.id_3char)
@@ -274,7 +274,7 @@ class Bra(db.Model, AutoSerialize, BasicAttr):
         return q.all()
 
     def url(self):
-        return "/profiles/bra/{}/".format(self.id)
+        return "{}/profiles/bra/{}/".format(g.locale, self.id)
 
     def __repr__(self):
         return '<Bra %r>' % (self.name_en)
