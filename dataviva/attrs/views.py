@@ -345,7 +345,7 @@ def dl_csv():
 @mod.route('/table/<attr>/<depth>/')
 def attrs_table(attr="bra",depth="2"):
     g.page_type = "attrs"
-    data_url = "/attrs/{0}/?depth={1}".format(attr,depth)
+    data_url = "{0}/attrs/{1}/?depth={2}".format(g.locale, attr,depth)
     return render_template("general/table.html", data_url=data_url)
 
 @mod.route('/search/<term>/')
