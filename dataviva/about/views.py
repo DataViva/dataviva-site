@@ -25,8 +25,13 @@ def before_request():
     g.page_type = mod.name
     g.color = "#d67ab0"
 
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.locale)
 
-
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.local = values.pop('lang_code')
 
 @mod.route('/crosswalk/<attr1>/<attr2>/')
 def crosswalk(attr1, attr2):

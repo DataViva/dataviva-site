@@ -24,6 +24,14 @@ from dataviva.translations.translate import translate
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.locale)
+
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.local = values.pop('lang_code')
+
 def fix_name(attr, lang):
 
     for col in ["desc", "name", "gender", "article", "keywords"]:

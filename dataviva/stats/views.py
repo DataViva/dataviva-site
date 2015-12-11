@@ -16,6 +16,14 @@ import json
 
 mod = Blueprint('stats', __name__, url_prefix='/stats')
 
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.locale)
+
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.local = values.pop('lang_code')
+
 def make_cache_key(*args, **kwargs):
     path = request.path
     args = str(hash(frozenset(request.args.items())))
@@ -50,5 +58,5 @@ def carousel():
 
     data = stats_list(metric, shows, limit=limit, offset=offset, sort=sort, depth=depth, listify=True)
     items = get_profiles(data, profile)
-    
+
     return json.dumps(items)
