@@ -239,13 +239,15 @@
     });
 
     function change_language(l) {
-      var full_url = window.location.href;
-      var sub = full_url.substr(0, full_url.indexOf('.'));
-      var rest_of_url = full_url.substr(full_url.indexOf('.')+1);
+      var url_path = window.location.href.split('/');
 
-      var new_url = 'http://' + l + '.' + rest_of_url;
+      if (url_path[3] === 'en' || url_path[3] === 'pt') {
+        url_path[3] = l;
+      } else {
+        url_path.splice(3, 0, l)
+      }
 
-      window.location = new_url;
+      window.location = url_path.join('/');
     }
 
     leon("$language_select").color("{{ g.color }}").size("small")
