@@ -9,6 +9,14 @@ from dataviva.utils.csv_helper import gen_csv, is_download
 
 mod = Blueprint('secex', __name__, url_prefix='/secex')
 
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.locale)
+
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.local = values.pop('lang_code')
+
 @mod.route('/<year>/<bra_id>/<hs_id>/<wld_id>/')
 @mod.route('/<year>-<month>/<bra_id>/<hs_id>/<wld_id>/')
 @view_cache.cached(key_prefix=api_cache_key("secex"), unless=is_download)

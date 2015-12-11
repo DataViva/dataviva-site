@@ -5,7 +5,7 @@ from flask.ext.babel import gettext
 from urlparse import urlparse
 import time
 
-mod = Blueprint('general', __name__, url_prefix='/')
+mod = Blueprint('general', __name__, url_prefix='/<lang_code>')
 
 from dataviva import app, db, babel, view_cache
 from dataviva.general.forms import AccessForm
@@ -44,28 +44,26 @@ def before_request():
         db.session.add(g.user)
         db.session.commit()
 
-    # Set the locale to either 'pt' or 'en' on the global object
+    url = urlparse(request.url)
+    url_path = url.path.split('/')
+
+    g.locale = get_locale(lang=url_path[1])
+
     if request.endpoint != 'static':
-
-        # Determine subdomain (if specified)
-        url = urlparse(request.url)
-        subdomain = None
-        domain = url.netloc.split('.')
-        if domain[0] == "en" or domain[0] == "pt":
-            subdomain = domain.pop(0)
-
-        domain = u".".join(domain)
-
-        # Get lang w/ subdomain trumping all
-        g.locale = get_locale(lang=subdomain)
-
-        # If subdomain not specified redirect TO subdomain w/ "best match" lang
-        if not subdomain:
+        if g.locale not in url_path:
             if url.query:
-                new_url = "{}://{}.{}{}?{}".format(url.scheme, g.locale, domain, url.path, url.query)
+                new_url= "{}://{}/{}{}?{}".format(url.scheme, url.netloc,  g.locale, url.path, url.query)
             else:
-                new_url = "{}://{}.{}{}".format(url.scheme, g.locale, domain, url.path)
+                new_url= "{}://{}/{}{}".format(url.scheme, url.netloc,  g.locale, url.path)
             return redirect(new_url)
+
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.locale)
+
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.locale = values.pop('lang_code')
 
 @babel.localeselector
 def get_locale(lang=None):
@@ -241,7 +239,7 @@ def access():
 ###############################
 # Set language views
 # ---------------------------
-@mod.route('set_lang/<lang>/')
+@mod.route('set_lang/<lang>')
 def set_lang(lang):
     g.locale = get_locale(lang)
     return redirect(request.args.get('next') or \
@@ -251,7 +249,7 @@ def set_lang(lang):
 ###############################
 # Handle shortened URLs
 # ---------------------------
-@mod.route('<slug>/')
+@mod.route('/<slug>/')
 def redirect_short_url(slug):
     short = Short.query.filter_by(slug = slug).first_or_404()
     short.clicks += 1

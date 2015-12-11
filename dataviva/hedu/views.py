@@ -11,6 +11,14 @@ from dataviva.utils.csv_helper import gen_csv, is_download
 
 mod = Blueprint('hedu', __name__, url_prefix='/hedu')
 
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.locale)
+
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.local = values.pop('lang_code')
+
 @mod.route('/<year>/<bra_id>/<university_id>/<course_hedu_id>/')
 @view_cache.cached(key_prefix=api_cache_key("hedu"), unless=is_download)
 def hedu_api(**kwargs):

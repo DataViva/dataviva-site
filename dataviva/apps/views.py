@@ -39,6 +39,14 @@ def before_request():
         "hat": "glasses"
     }
 
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.locale)
+
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.local = values.pop('lang_code')
+
 def filler(dataset, filter1, filter2):
 
     '''Since the "builds" are held in the database with placeholders for

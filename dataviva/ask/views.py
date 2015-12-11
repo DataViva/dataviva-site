@@ -17,6 +17,14 @@ mod = Blueprint('ask', __name__, url_prefix='/ask')
 
 RESULTS_PER_PAGE = 10
 
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.locale)
+
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.local = values.pop('lang_code')
+
 @mod.route('/questions/', methods=['GET', 'POST'], defaults={'page': 1})
 def question_list(page):
 
