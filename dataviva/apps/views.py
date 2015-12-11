@@ -25,7 +25,7 @@ from config import FACEBOOK_OAUTH_ID, basedir,GZIP_DATA
 import os, urlparse, random, zipfile, sys, gzip
 from dataviva.utils.cached_query import api_cache_key
 
-mod = Blueprint('apps', __name__, url_prefix='/apps')
+mod = Blueprint('apps', __name__, url_prefix='/<lang_code>/apps')
 
 @mod.before_request
 def before_request():
@@ -45,7 +45,7 @@ def add_language_code(endpoint, values):
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-    g.local = values.pop('lang_code')
+    g.locale = values.pop('lang_code')
 
 def filler(dataset, filter1, filter2):
 

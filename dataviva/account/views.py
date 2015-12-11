@@ -22,7 +22,7 @@ import json
 # from config import SITE_MIRROR
 # import urllib2, urllib
 
-mod = Blueprint('account', __name__, url_prefix='/account')
+mod = Blueprint('account', __name__, url_prefix='/<lang_code>/account')
 
 RESULTS_PER_PAGE = 10
 
@@ -32,7 +32,7 @@ def add_language_code(endpoint, values):
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-    g.local = values.pop('lang_code')
+    g.locale = values.pop('lang_code')
 
 @mod.route('/status/')
 def check_status():

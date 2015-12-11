@@ -20,7 +20,7 @@ from functools import wraps
 # import urllib2, urllib
 # from config import SITE_MIRROR
 
-mod = Blueprint('admin', __name__, url_prefix='/admin')
+mod = Blueprint('admin', __name__, url_prefix='/<lang_code>/admin')
 
 def get_current_user_role():
     return g.user.role
@@ -45,7 +45,7 @@ def add_language_code(endpoint, values):
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-    g.local = values.pop('lang_code')
+    g.locale = values.pop('lang_code')
 
 ###############################
 # Views for ALL logged in users

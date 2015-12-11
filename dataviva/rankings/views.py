@@ -18,7 +18,7 @@ from dataviva.attrs.models import Yb
 
 import json
 
-mod = Blueprint('rankings', __name__, url_prefix='/rankings')
+mod = Blueprint('rankings', __name__, url_prefix='/<lang_code>/rankings')
 
 @mod.before_request
 def before_request():
@@ -31,7 +31,7 @@ def add_language_code(endpoint, values):
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-    g.local = values.pop('lang_code')
+    g.locale = values.pop('lang_code')
 
 @mod.after_request
 def per_request_callbacks(response):

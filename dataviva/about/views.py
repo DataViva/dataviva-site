@@ -18,7 +18,7 @@ from dataviva.apps.models import Crosswalk_oc, Crosswalk_pi
 from config import ADMINISTRATOR_EMAIL, basedir
 import os
 
-mod = Blueprint('about', __name__, url_prefix='/about')
+mod = Blueprint('about', __name__, url_prefix='/<lang_code>/about')
 
 @mod.before_request
 def before_request():
@@ -31,7 +31,7 @@ def add_language_code(endpoint, values):
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-    g.local = values.pop('lang_code')
+    g.locale = values.pop('lang_code')
 
 @mod.route('/crosswalk/<attr1>/<attr2>/')
 def crosswalk(attr1, attr2):
