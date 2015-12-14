@@ -455,6 +455,7 @@ class Build(db.Model, AutoSerialize):
 
         slug = getattr(self, "slug_{}".format(g.locale))
         slug = self.format_text(slug, kwargs)
+
         return slug
 
     def slug2(self):
