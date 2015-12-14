@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-10 08:48-0200\n"
+"POT-Creation-Date: 2015-12-14 19:27-0200\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -2285,7 +2285,7 @@ msgstr "Por favor, escolha %(name)s"
 msgid "Database Table"
 msgstr "Tabela do Banco de Dados"
 
-#: dataviva/html/general/table.html:236 dataviva/html/templates/site.html:61
+#: dataviva/html/general/table.html:238 dataviva/html/templates/site.html:61
 #: dataviva/stats/profile_helper.py:254 dataviva/translations/dictionary.py:351
 msgid "Location"
 msgstr "Localidade"
@@ -3048,7 +3048,7 @@ msgstr "Região de Planejamento"
 
 #: dataviva/translations/dictionary.py:133
 msgid "Municipality"
-msgstr "Municipalidade"
+msgstr "Município"
 
 #: dataviva/translations/dictionary.py:134
 msgid "Main Group"
@@ -4072,11 +4072,5 @@ msgid "th"
 msgstr "com"
 
 #~ msgid ""
-#~ "Welcome to the new version of "
-#~ "DataViva! %(click_here)s for the complete "
-#~ "list of new features."
 #~ msgstr ""
-#~ "Bem vindo à nova versão do "
-#~ "DataViva! %(click_here)s para ver a "
-#~ "lista completa das novidades."
 
