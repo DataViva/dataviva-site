@@ -130,8 +130,8 @@ def index():
 @mod.route('/<category>/select/')
 @view_cache.cached(key_prefix=api_cache_key("profiles"))
 def index_selector(category = None, id = None):
-    selector = category
 
+    selector = category
     article = None
 
     if category == "cbo":
