@@ -34,8 +34,6 @@ datavivadir = os.path.abspath(os.path.dirname(__file__))
 # Initialize app
 app = Flask(__name__, template_folder=os.path.join(datavivadir, 'html'))
 
-
-
 # Load default configuration from config.py
 app.config.from_object('config')
 
