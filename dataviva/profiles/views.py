@@ -134,8 +134,6 @@ def index_selector(category = None, id = None):
     selector = category
     article = None
 
-    #teste crontab
-
     if category == "cbo":
         article = gettext(u"an occupation")
     elif category == "cnae":
