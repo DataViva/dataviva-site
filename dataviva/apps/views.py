@@ -474,9 +474,9 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
                 filter2=None, output=None, params=None):
     if bra_id == 'bra':
         bra_id = 'all'
-        return redirect('/{0}/{1}/{2}/{3}/{4}/{5}/{6}?{7}'.format('apps/builder',app_name,dataset,bra_id,filter1,filter2,output,request.query_string))
-    if len(request.path.split("/")) == 5:
-        return redirect('{0}{1}/{2}/{3}/{4}/{5}/{6}'.format(request.path,dataset,bra_id,filter1,filter2,output,request.query_string))
+        return redirect('/{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}?{8}'.format(g.locale, 'apps/builder', app_name, dataset, bra_id, filter1, filter2, output, request.query_string))
+    if len(request.path.split("/")) == 6:
+        return redirect('{0}{1}/{2}/{3}/{4}/{5}/{6}'.format(request.path, dataset, bra_id, filter1, filter2, output, request.query_string))
     g.page_type = "builder"
     builds = Build.query.all()
     builds = [b.json(fill=False) for b in builds]
