@@ -7,7 +7,7 @@ import time
 
 mod = Blueprint('general', __name__, url_prefix='/<lang_code>')
 
-from dataviva import app, db, babel, view_cache
+from dataviva import app, db, babel, view_cache, data_api
 from dataviva.general.forms import AccessForm
 from dataviva.general.models import Short
 from dataviva.account.models import User
@@ -28,6 +28,18 @@ from config import ACCOUNTS, DEBUG
 # ---------------------------
 @app.before_request
 def before_request():
+    url = urlparse(request.url)
+    url_path = url.path.split('/')
+
+    g.locale = get_locale(lang=url_path[1])
+
+    if url_path[1] not in data_api:
+        if request.endpoint != 'static' and g.locale not in url_path:
+            if url.query:
+                new_url= "{}://{}/{}{}?{}".format(url.scheme, url.netloc, g.locale, url.path, url.query)
+            else:
+                new_url= "{}://{}/{}{}".format(url.scheme, url.netloc, g.locale, url.path)
+            return redirect(new_url)
 
     g.accounts = True if ACCOUNTS in ["True","true","Yes","yes","Y","y",1] else False
     g.color = "#af1f24"
@@ -44,26 +56,13 @@ def before_request():
         db.session.add(g.user)
         db.session.commit()
 
-    url = urlparse(request.url)
-    url_path = url.path.split('/')
-
-    g.locale = get_locale(lang=url_path[1])
-
-    if request.endpoint != 'static':
-        if g.locale not in url_path:
-            if url.query:
-                new_url= "{}://{}/{}{}?{}".format(url.scheme, url.netloc,  g.locale, url.path, url.query)
-            else:
-                new_url= "{}://{}/{}{}".format(url.scheme, url.netloc,  g.locale, url.path)
-            return redirect(new_url)
-
-@mod.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.locale)
-
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
+
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', get_locale())
 
 @babel.localeselector
 def get_locale(lang=None):
