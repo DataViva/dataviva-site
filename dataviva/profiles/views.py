@@ -6,6 +6,7 @@ from werkzeug import urls
 import random, time
 
 from dataviva import db, view_cache
+from dataviva.general.views import get_locale
 from dataviva.attrs import models as attrs
 from dataviva.rais import models as rais
 from dataviva.secex import models as secex
@@ -34,13 +35,13 @@ def before_request():
 
     g.color = "#e0902d"
 
-@mod.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.locale)
-
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
+
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', get_locale())
 
 @mod.route('/')
 @view_cache.cached(key_prefix=api_cache_key("profile"))

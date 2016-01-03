@@ -8,6 +8,7 @@ from flask import Blueprint, request, render_template, g, Response, make_respons
 from flask.ext.babel import gettext
 
 from dataviva import db, datavivadir, __year_range__, view_cache
+from dataviva.general.views import get_locale
 from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_hedu, Course_sc, Search
@@ -41,7 +42,7 @@ def before_request():
 
 @mod.url_defaults
 def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.locale)
+    values.setdefault('lang_code', get_locale())
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
@@ -465,7 +466,7 @@ def get_geo_location(ip):
             "filter1": "all", "filter2": "all", "output": "balance", "params": ""})
 @mod.route('/builder/box/', defaults={"app_name": "box", "dataset": "sc", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "age", "params": ""})
-@mod.route('/builder/bar/', defaults={"app_name": "box", "dataset": "rais", "bra_id": "4mg",
+@mod.route('/builder/bar/', defaults={"app_name": "bar", "dataset": "rais", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "bra", "params": ""})
 @mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/')
 @view_cache.cached(key_prefix=api_cache_key("apps:builder"))

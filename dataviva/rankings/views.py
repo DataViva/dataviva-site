@@ -7,6 +7,7 @@ from sqlalchemy import func
 from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, redirect, url_for
 
 from dataviva import db, __year_range__
+from dataviva.general.views import get_locale
 from dataviva.utils.make_query import make_query
 from dataviva.account.models import User, Starred
 from dataviva.apps.models import UI
@@ -27,7 +28,7 @@ def before_request():
 
 @mod.url_defaults
 def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.locale)
+    values.setdefault('lang_code', get_locale())
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):

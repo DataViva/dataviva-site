@@ -4,6 +4,7 @@ from flask import Blueprint, request, make_response, render_template, flash, g, 
 from flask.ext.babel import gettext
 from dataviva import db, view_cache
 
+from dataviva.general.views import get_locale
 from dataviva.attrs.models import Bra, Wld, Course_hedu, Hs
 from dataviva.rais.models import Cnae, Cbo
 
@@ -27,7 +28,7 @@ def before_request():
 
 @mod.url_defaults
 def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.locale)
+    values.setdefault('lang_code', get_locale())
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):

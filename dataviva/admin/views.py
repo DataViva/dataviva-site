@@ -5,6 +5,7 @@ from flask.ext.login import login_required
 from flask.ext.babel import gettext
 from dataviva import db
 from datetime import datetime
+from dataviva.general.views import get_locale
 # models
 from dataviva.account.models import User
 from dataviva.ask.models import Question, Status, Reply, Flag, Vote
@@ -41,7 +42,7 @@ def before_request():
 
 @mod.url_defaults
 def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.locale)
+    values.setdefault('lang_code', get_locale())
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
