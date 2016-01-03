@@ -14,15 +14,7 @@ from dataviva.stats.cache import profile_cache_serialized
 
 import json
 
-mod = Blueprint('stats', __name__, url_prefix='/<lang_code>/stats')
-
-@mod.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.locale)
-
-@mod.url_value_preprocessor
-def pull_lang_code(endpoint, values):
-    g.locale = values.pop('lang_code')
+mod = Blueprint('stats', __name__, url_prefix='/stats')
 
 def make_cache_key(*args, **kwargs):
     path = request.path
