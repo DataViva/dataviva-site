@@ -674,7 +674,7 @@
       if (!builds[build].loaded) {
         builds[build].loaded = true;
         builds[build].loading = true;
-        iframe.attr("src", "/apps/embed/"+url);
+        iframe.attr("src", "/{{g.locale}}/apps/embed/"+url);
       }
       else {
         var stripped_url = url.split("?")[0];
