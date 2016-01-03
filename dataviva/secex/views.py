@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from dataviva import db
+from dataviva.general.views import get_locale
 from dataviva.secex.models import Ymb, Ymp, Ymbp, Ymbpw, Ymbw, Ympw, Ymw
 from dataviva.utils import table_helper, query_helper
 from dataviva.utils.gzip_data import gzip_response
@@ -7,15 +8,7 @@ from dataviva import view_cache
 from dataviva.utils.cached_query import api_cache_key
 from dataviva.utils.csv_helper import gen_csv, is_download
 
-mod = Blueprint('secex', __name__, url_prefix='/<lang_code>/secex')
-
-@mod.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.locale)
-
-@mod.url_value_preprocessor
-def pull_lang_code(endpoint, values):
-    g.locale = values.pop('lang_code')
+mod = Blueprint('secex', __name__, url_prefix='/secex')
 
 @mod.route('/<year>/<bra_id>/<hs_id>/<wld_id>/')
 @mod.route('/<year>-<month>/<bra_id>/<hs_id>/<wld_id>/')
