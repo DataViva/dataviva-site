@@ -58,28 +58,28 @@
   </div>
 
   <div id="profiles_drop">
-    <a class="drop icon bra" href="/profiles/bra/">{% trans %}Location{% endtrans %}</a>
-    <a class="drop icon hs" href="/profiles/hs/">{% trans %}Product{% endtrans %}</a>
-    <a class="drop icon wld" href="/profiles/wld/">{% trans %}Trade Partner{% endtrans %}</a>
-    <a class="drop icon cnae" href="/profiles/cnae/">{% trans %}Industry{% endtrans %}</a>
-    <a class="drop icon cbo" href="/profiles/cbo/">{% trans %}Occupation{% endtrans %}</a>
-    <a class="drop icon university" href="/profiles/university/">{% trans %}University{% endtrans %}</a>
-    <a class="drop icon course_hedu" href="/profiles/course_hedu/">{% trans %}Major{% endtrans %}</a>
-    <a class="drop icon course_sc" href="/profiles/course_sc/">{% trans %}Basic Course{% endtrans %}</a>
+    <a class="drop icon bra" href="/{{g.locale}}/profiles/bra/">{% trans %}Location{% endtrans %}</a>
+    <a class="drop icon hs" href="/{{g.locale}}/profiles/hs/">{% trans %}Product{% endtrans %}</a>
+    <a class="drop icon wld" href="/{{g.locale}}/profiles/wld/">{% trans %}Trade Partner{% endtrans %}</a>
+    <a class="drop icon cnae" href="/{{g.locale}}/profiles/cnae/">{% trans %}Industry{% endtrans %}</a>
+    <a class="drop icon cbo" href="/{{g.locale}}/profiles/cbo/">{% trans %}Occupation{% endtrans %}</a>
+    <a class="drop icon university" href="/{{g.locale}}/profiles/university/">{% trans %}University{% endtrans %}</a>
+    <a class="drop icon course_hedu" href="/{{g.locale}}/profiles/course_hedu/">{% trans %}Major{% endtrans %}</a>
+    <a class="drop icon course_sc" href="/{{g.locale}}/profiles/course_sc/">{% trans %}Basic Course{% endtrans %}</a>
   </div>
 
   <div id="apps_drop">
-    <a class="drop icon tree_map" href="/apps/builder/tree_map/">{% trans %}Tree Map{% endtrans %}</a>
-    <a class="drop icon stacked" href="/apps/builder/stacked/">{% trans %}Stacked{% endtrans %}</a>
-    <a class="drop icon geo_map" href="/apps/builder/geo_map/">{% trans %}Geo Map{% endtrans %}</a>
-    <a class="drop icon network" href="/apps/builder/network/">{% trans %}Network{% endtrans %}</a>
-    <a class="drop icon line" href="/apps/builder/line/">{% trans %}Line{% endtrans %}</a>
-    <a class="drop icon rings" href="/apps/builder/rings/">{% trans %}Rings{% endtrans %}</a>
-    <a class="drop icon scatter" href="/apps/builder/scatter/">{% trans %}Scatter{% endtrans %}</a>
-    <a class="drop icon compare" href="/apps/builder/compare/">{% trans %}Compare{% endtrans %}</a>
-    <a class="drop icon occugrid" href="/apps/builder/occugrid/">{% trans %}Occugrid{% endtrans %}</a>
-    <a class="drop icon box" href="/apps/builder/box/">{% trans %}Box Plot{% endtrans %}</a>
-    <a class="drop icon bar" href="/apps/builder/bar/">{% trans %}Bar Chart{% endtrans %}</a>
+    <a class="drop icon tree_map" href="/{{g.locale}}/apps/builder/tree_map/">{% trans %}Tree Map{% endtrans %}</a>
+    <a class="drop icon stacked" href="/{{g.locale}}/apps/builder/stacked/">{% trans %}Stacked{% endtrans %}</a>
+    <a class="drop icon geo_map" href="/{{g.locale}}/apps/builder/geo_map/">{% trans %}Geo Map{% endtrans %}</a>
+    <a class="drop icon network" href="/{{g.locale}}/apps/builder/network/">{% trans %}Network{% endtrans %}</a>
+    <a class="drop icon line" href="/{{g.locale}}/apps/builder/line/">{% trans %}Line{% endtrans %}</a>
+    <a class="drop icon rings" href="/{{g.locale}}/apps/builder/rings/">{% trans %}Rings{% endtrans %}</a>
+    <a class="drop icon scatter" href="/{{g.locale}}/apps/builder/scatter/">{% trans %}Scatter{% endtrans %}</a>
+    <a class="drop icon compare" href="/{{g.locale}}/apps/builder/compare/">{% trans %}Compare{% endtrans %}</a>
+    <a class="drop icon occugrid" href="/{{g.locale}}/apps/builder/occugrid/">{% trans %}Occugrid{% endtrans %}</a>
+    <a class="drop icon box" href="/{{g.locale}}/apps/builder/box/">{% trans %}Box Plot{% endtrans %}</a>
+    <a class="drop icon bar" href="/{{g.locale}}/apps/builder/bar/">{% trans %}Bar Chart{% endtrans %}</a>
   </div>
 
   {% if crumbs|length %}
@@ -228,7 +228,7 @@
       })
     };
 
-    d3.json("/account/status", function(error, json) {
+    d3.json("/{{g.locale}}/account/status", function(error, json) {
       if (error) return console.warn(error);
       if (json["logged_in"]) {
         authenticated(json["user"], json["is_admin"]);
