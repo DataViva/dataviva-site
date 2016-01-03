@@ -43,17 +43,17 @@
           {% set app = a.app_id.split("/")[0] %}
           {% set type = "starred "+app %}
           {% set prefix = "Saved on " %}
-          {% set url = "/apps/builder/"+a.app_id %}
+          {% set url = "{{g.locale}}/apps/builder/"+a.app_id %}
         {% elif a.parent_id %}
           {% set text = a.body %}
           {% set type = "replies" %}
           {% set prefix = "Replied on " %}
-          {% set url = "/about/question/"+a.slug() %}
+          {% set url = "{{g.locale}}/about/question/"+a.slug() %}
         {% elif a.question %}
           {% set text = a.question %}
           {% set type = "questions" %}
           {% set prefix = "Asked on " %}
-          {% set url = "/about/question/"+a.slug %}
+          {% set url = "{{g.locale}}/about/question/"+a.slug %}
         {% endif %}
         {% if text %}
           <a href="{{url}}" class="decision icon {{type}}">
