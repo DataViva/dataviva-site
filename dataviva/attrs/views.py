@@ -22,15 +22,7 @@ from dataviva.utils.gzip_data import gzipped
 from dataviva.utils.cached_query import api_cache_key
 from dataviva.translations.translate import translate
 
-mod = Blueprint('attrs', __name__, url_prefix='/<lang_code>/attrs')
-
-@mod.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.locale)
-
-@mod.url_value_preprocessor
-def pull_lang_code(endpoint, values):
-    g.locale = values.pop('lang_code')
+mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
 def fix_name(attr, lang):
 

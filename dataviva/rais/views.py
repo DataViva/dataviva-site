@@ -9,15 +9,7 @@ from dataviva import view_cache
 from dataviva.utils.cached_query import api_cache_key
 from dataviva.utils.csv_helper import gen_csv, is_download
 
-mod = Blueprint('rais', __name__, url_prefix='/<lang_code>/rais')
-
-@mod.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.locale)
-
-@mod.url_value_preprocessor
-def pull_lang_code(endpoint, values):
-    g.locale = values.pop('lang_code')
+mod = Blueprint('rais', __name__, url_prefix='/rais')
 
 @mod.route('/<year>/<bra_id>/<cnae_id>/<cbo_id>/')
 @view_cache.cached(key_prefix=api_cache_key("rais"), unless=is_download)

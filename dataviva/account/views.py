@@ -1,4 +1,5 @@
 from dataviva import db, lm
+from dataviva.general.views import get_locale
 from dataviva.account.login_providers import facebook, twitter, google
 from dataviva.account.models import User, Starred, ROLE_USER, ROLE_ADMIN
 from dataviva.ask.forms import AskForm
@@ -28,7 +29,7 @@ RESULTS_PER_PAGE = 10
 
 @mod.url_defaults
 def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.locale)
+    values.setdefault('lang_code', get_locale())
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
