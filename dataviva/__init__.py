@@ -46,12 +46,14 @@ cache_prefix = get_env_variable("DATAVIVA_REDIS_PREFIX", "dv2015:")
 cache_timeout = get_env_variable("DATAVIVA_REDIS_TIMEOUT", 60000000)
 
 # Initialize cache for views
-view_cache = Cache(app, config={'CACHE_TYPE': 'redis',
-                'CACHE_KEY_PREFIX' : cache_prefix,
-                'CACHE_DEFAULT_TIMEOUT': cache_timeout,
-                'CACHE_REDIS_HOST':get_env_variable("DATAVIVA_REDIS_HOST", "localhost"),
-                'CACHE_REDIS_PORT':get_env_variable("DATAVIVA_REDIS_PORT", 6379),
-                'CACHE_REDIS_PASSWORD':get_env_variable("DATAVIVA_REDIS_PW", None)})
+view_cache = Cache(app, config={
+    'CACHE_TYPE': 'redis',
+    'CACHE_KEY_PREFIX': cache_prefix,
+    'CACHE_DEFAULT_TIMEOUT': cache_timeout,
+    'CACHE_REDIS_HOST': get_env_variable("DATAVIVA_REDIS_HOST", "localhost"),
+    'CACHE_REDIS_PORT': get_env_variable("DATAVIVA_REDIS_PORT", 6379),
+    'CACHE_REDIS_PASSWORD': get_env_variable("DATAVIVA_REDIS_PW", None)
+})
 
 # Set session store as server side (Redis)
 redis_sesh = RedisSessionInterface(view_cache, "session:")

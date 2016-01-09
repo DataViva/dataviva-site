@@ -2,6 +2,7 @@ from dataviva import db
 from flask import g
 from dataviva.utils.title_case import title_case
 
+
 class BasicAttr(object):
     name_en = db.Column(db.String(200))
     name_pt = db.Column(db.String(200))
@@ -13,6 +14,7 @@ class BasicAttr(object):
     def name(self):
         lang = getattr(g, "locale", "en")
         return title_case(getattr(self,"name_"+lang))
+
 
 class ExpandedAttr(BasicAttr):
     desc_en = db.Column(db.Text())
