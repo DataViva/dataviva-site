@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import os
-from werkzeug.contrib.cache import RedisCache
-from redis import Redis, ConnectionError
 
 '''
     Used for finding environment variables through configuration
     if a default is not given, the site will raise an exception
 '''
+
+
 def get_env_variable(var_name, default=-1):
     try:
         return os.environ[var_name]
@@ -32,7 +32,7 @@ SQLALCHEMY_ECHO = True
 GZIP_DATA = get_env_variable("DATAVIVA_GZIP_DATA", True)
 
 ''' Whether or not to allow User Account Activity '''
-ACCOUNTS = get_env_variable("DATAVIVA_ACCOUNTS",True)
+ACCOUNTS = get_env_variable("DATAVIVA_ACCOUNTS", True)
 
 '''
     Details for connecting to the database, credentials set as environment

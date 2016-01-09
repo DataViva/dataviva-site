@@ -33,6 +33,7 @@ class Search(db.Model):
     def __repr__(self):
         return "<SearchAttr {} {}>".format(self.id, self.kind)
 
+
 class Cnae(db.Model, AutoSerialize, ExpandedAttr):
 
     __tablename__ = 'attrs_cnae'
@@ -132,6 +133,7 @@ class Course_sc(db.Model, AutoSerialize, ExpandedAttr):
     def __repr__(self):
         return '<Course_sc %r>' % (self.name_en)
 
+
 class School(db.Model, AutoSerialize, ExpandedAttr):
 
     __tablename__ = 'attrs_school'
@@ -220,6 +222,7 @@ bra_pr = db.Table('attrs_bra_pr',
     db.Column('pr_id', db.Integer, db.ForeignKey('attrs_bra.id'))
 )
 
+
 class Bra(db.Model, AutoSerialize, BasicAttr):
 
     __tablename__ = 'attrs_bra'
@@ -233,32 +236,40 @@ class Bra(db.Model, AutoSerialize, BasicAttr):
     ymbp = db.relationship("Ymbp", backref = 'bra', lazy = 'dynamic')
     ymbw = db.relationship("Ymbw", backref = 'bra', lazy = 'dynamic')
     ymbpw = db.relationship("Ymbpw", backref = 'bra', lazy = 'dynamic')
+
     # RAIS relations
     yb_rais = db.relationship("Yb_rais", backref = 'bra', lazy = 'dynamic')
     ybi = db.relationship("Ybi", backref = 'bra', lazy = 'dynamic')
     ybo = db.relationship("Ybo", backref = 'bra', lazy = 'dynamic')
     ybio = db.relationship("Ybio", backref = 'bra', lazy = 'dynamic')
+
     # HEDU relations
     ybu = db.relationship("Ybu", backref = 'bra', lazy = 'dynamic')
+
     # SC relations
     ybc_sc = db.relationship("Ybc_sc", backref = 'bra', lazy = 'dynamic')
+
     # Neighbors
     neighbors = db.relationship('Distances', primaryjoin = "(Bra.id == Distances.bra_id_origin)", backref='bra_origin', lazy='dynamic')
     bb = db.relationship('Distances', primaryjoin = "(Bra.id == Distances.bra_id_dest)", backref='bra', lazy='dynamic')
+
     # Planning Regions
     pr = db.relationship('Bra',
-            secondary = bra_pr,
-            primaryjoin = (bra_pr.c.pr_id == id),
-            secondaryjoin = (bra_pr.c.bra_id == id),
-            backref = db.backref('bra', lazy = 'dynamic'),
-            lazy = 'dynamic')
+        secondary = bra_pr,
+        primaryjoin = (bra_pr.c.pr_id == id),
+        secondaryjoin = (bra_pr.c.bra_id == id),
+        backref = db.backref('bra', lazy = 'dynamic'),
+        lazy = 'dynamic'
+    )
 
-    pr2 = db.relationship('Bra',
-            secondary = bra_pr,
-            primaryjoin = (bra_pr.c.bra_id == id),
-            secondaryjoin = (bra_pr.c.pr_id == id),
-            backref = db.backref('bra2', lazy = 'dynamic'),
-            lazy = 'dynamic')
+    pr2 = db.relationship(
+        'Bra',
+        secondary = bra_pr,
+        primaryjoin = (bra_pr.c.bra_id == id),
+        secondaryjoin = (bra_pr.c.pr_id == id),
+        backref = db.backref('bra2', lazy = 'dynamic'),
+        lazy = 'dynamic'
+    )
 
     def icon(self):
         if len(self.id) == 1:
@@ -312,6 +323,7 @@ class Yb(db.Model, AutoSerialize):
     def __repr__(self):
         return '<Yb %r.%r>' % (self.year, self.bra_id)
 
+
 class Stat(db.Model, AutoSerialize, BasicAttr):
 
     __tablename__ = 'attrs_stat'
@@ -320,6 +332,7 @@ class Stat(db.Model, AutoSerialize, BasicAttr):
     # name lookup relation
     bs = db.relationship("dataviva.attrs.models.Bs", backref = 'stat', lazy = 'dynamic')
     ybs = db.relationship("dataviva.attrs.models.Ybs", backref = 'stat', lazy = 'dynamic')
+
 
 class Bs(db.Model, AutoSerialize):
 
