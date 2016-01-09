@@ -210,7 +210,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     prefix = "apps:embed:xhr:"
     lang = request.args.get('lang', None) or g.locale
 
-    if (g.user is None or not g.user.is_authenticated()) and request.is_xhr:
+    if (g.user is None or not g.user.is_authenticated) and request.is_xhr:
         cache_id = prefix + request.path + lang
         cached_q = cached_query(cache_id)
         if cached_q:
@@ -267,7 +267,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     '''If user is logged in see if they have starred this app.'''
     starred = 0
     app_id = "/".join([app_name, dataset, bra_id, filter1, filter2, output])
-    if g.user and g.user.is_authenticated():
+    if g.user and g.user.is_authenticated:
         is_starred = Starred.query.filter_by(user=g.user, app_id=app_id).first()
         starred = 1 if is_starred else -1
 
@@ -312,7 +312,7 @@ def app_star(app_name, data_type, bra_id, filter1, filter2, output):
 
     # if request.method == 'POST' and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
     #     g.user = User.query.get(request.form["user"])
-    if g.user is None or not g.user.is_authenticated():
+    if g.user is None or not g.user.is_authenticated:
         return jsonify({"error": gettext("You need to be logged in to star visualizations.")})
 
     starred = Starred.query.filter_by(user=g.user, app_id=app_id).first()

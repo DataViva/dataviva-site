@@ -107,7 +107,7 @@ def question_vote(slug, user=None):
     q = Question.query.filter_by(slug=slug).first_or_404()
     if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
         g.user = User.query.get(user)
-    elif g.user is None or not g.user.is_authenticated():
+    elif g.user is None or not g.user.is_authenticated:
         return jsonify({"error": gettext("You need to be logged in to vote.")})
     elif user is None and g.user is None:
         abort(404)
@@ -135,7 +135,7 @@ def reply_vote(id, user=None):
     reply = Reply.query.get_or_404(id)
     # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
     #     g.user = User.query.get(user)
-    if g.user is None or not g.user.is_authenticated():
+    if g.user is None or not g.user.is_authenticated:
         return jsonify({"error": gettext("You need to be logged in to vote.")})
     # elif user is None and g.user is None:
     #     abort(404)
@@ -165,7 +165,7 @@ def reply_flag(id, user=None):
 
     # if user and request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
     #     g.user = User.query.get(user)
-    if g.user is None or not g.user.is_authenticated():
+    if g.user is None or not g.user.is_authenticated:
         return jsonify({"error": gettext("You need to be logged in to flag replies.")})
     # elif user is None and g.user is None:
     #     abort(404)

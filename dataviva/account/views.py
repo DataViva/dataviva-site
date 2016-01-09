@@ -37,7 +37,7 @@ def pull_lang_code(endpoint, values):
 
 @mod.route('/status/')
 def check_status():
-    result = g.user.is_authenticated()
+    result = g.user.is_authenticated
     data = {"logged_in": result}
     if result:
         data["user"] = g.user.nickname
@@ -139,7 +139,7 @@ def remove_email_list(id, nickname):
 
 @mod.route('/preferences/change_email_preference')
 def preferences():
-    if g.user.is_authenticated() :
+    if g.user.is_authenticated :
         if g.user.agree_mailer == 1:
             agree = 0
         else:

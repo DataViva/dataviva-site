@@ -51,7 +51,7 @@ def before_request():
     # Check if the user is logged in, if so give the global object
     # a reference to the user from DB
     g.user = current_user
-    if g.user.is_authenticated() and request.endpoint != 'static':
+    if g.user.is_authenticated and request.endpoint != 'static':
         g.user.last_seen = datetime.utcnow()
         db.session.add(g.user)
         db.session.commit()
@@ -73,7 +73,7 @@ def get_locale(lang=None):
     if lang:
         if lang in supported_langs:
             new_lang = lang
-        if user.is_authenticated():
+        if user.is_authenticated:
             # set users preferred lang
             user.language = new_lang
             db.session.add(user)
@@ -85,7 +85,7 @@ def get_locale(lang=None):
         # return new_lang
         if current_locale:
             new_lang = current_locale
-        elif user.is_authenticated():
+        elif user.is_authenticated:
             user_preferred_lang = getattr(user, 'language', None)
             if user_preferred_lang and user_preferred_lang in supported_langs:
                 new_lang = user_preferred_lang

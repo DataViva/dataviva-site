@@ -6,14 +6,14 @@
 {% block about_content %}
 
   <h1>
-    {% if g.user.is_authenticated() %}
+    {% if g.user.is_authenticated %}
       {% trans %}What would you like to know?{% endtrans %}
     {% else %}
       {% trans %}You need to login for this functionality.{% endtrans %}
     {% endif %}
   </h1>
 
-  {% if g.user.is_authenticated() %}
+  {% if g.user.is_authenticated %}
 
     <form id="ask_form" action="" method="post">
 
