@@ -122,7 +122,7 @@ def ask(user=None):
     form = AskForm()
     if request.method == 'POST':
 
-        if g.user is None or not g.user.is_authenticated():
+        if g.user is None or not g.user.is_authenticated:
             flash(gettext('You need to be logged in to ask questions.'))
             return redirect(url_for('account.login'))
 
@@ -171,7 +171,7 @@ def answer(slug):
 
         # if request.remote_addr == SITE_MIRROR.split(":")[1][2:]:
         #     g.user = User.query.get(request.form["user"])
-        if g.user is None or not g.user.is_authenticated():
+        if g.user is None or not g.user.is_authenticated:
             flash(gettext('You need to be signed in to reply to questions.'))
             return redirect(url_for('about.answer', slug=question.slug))
 
@@ -221,7 +221,7 @@ def answer(slug):
     else:
 
         question.vote = False
-        if g.user.is_authenticated():
+        if g.user.is_authenticated:
             vote = Vote.query.filter_by(type = 0, type_id = question.id, user_id = g.user.id).first()
             if vote:
                 question.vote = True

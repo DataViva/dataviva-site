@@ -2488,7 +2488,7 @@
       if ( status !== undefined ) {
         update_star(status)
       }
-      else if ( "{{g.user.is_authenticated()}}" === "False" ) {
+      else if ( "{{g.user.is_authenticated}}" === "False" ) {
         login()
       }
       else {

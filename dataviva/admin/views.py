@@ -99,7 +99,7 @@ def update_user(user_id):
     # curl -i -H "Content-Type: application/json" -X PUT
     #   -d '{"role":2}' http://localhost:5000/admin/user/1
 
-    if g.user.is_authenticated() and g.user.role == 1:
+    if g.user.is_authenticated and g.user.role == 1:
 
         user = User.query.get(user_id)
 
@@ -342,7 +342,7 @@ def update_reply(reply_id):
     # curl -i -H "Content-Type: application/json" -X PUT
     #   -d '{"role":2}' http://localhost:5000/admin/user/1
 
-    if g.user.is_authenticated() and g.user.role == 1:
+    if g.user.is_authenticated and g.user.role == 1:
 
         reply = Reply.query.get(reply_id)
 
