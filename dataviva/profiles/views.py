@@ -6,6 +6,7 @@ from werkzeug import urls
 import random, time
 
 from dataviva import db, view_cache
+from dataviva.general.views import get_locale
 from dataviva.attrs import models as attrs
 from dataviva.rais import models as rais
 from dataviva.secex import models as secex
@@ -25,7 +26,7 @@ from dataviva import __year_range__
 from dataviva.stats.util import parse_year
 from dataviva.stats.profile_helper import compute_stats
 
-mod = Blueprint('profiles', __name__, url_prefix='/profiles')
+mod = Blueprint('profiles', __name__, url_prefix='/<lang_code>/profiles')
 
 @mod.before_request
 def before_request():
@@ -33,6 +34,14 @@ def before_request():
     g.path = request.path
 
     g.color = "#e0902d"
+
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.locale = values.pop('lang_code')
+
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', get_locale())
 
 @mod.route('/')
 @view_cache.cached(key_prefix=api_cache_key("profile"))
@@ -130,8 +139,8 @@ def index():
 @mod.route('/<category>/select/')
 @view_cache.cached(key_prefix=api_cache_key("profiles"))
 def index_selector(category = None, id = None):
-    selector = category
 
+    selector = category
     article = None
 
     if category == "cbo":

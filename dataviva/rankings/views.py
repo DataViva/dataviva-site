@@ -7,6 +7,7 @@ from sqlalchemy import func
 from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, redirect, url_for
 
 from dataviva import db, __year_range__
+from dataviva.general.views import get_locale
 from dataviva.utils.make_query import make_query
 from dataviva.account.models import User, Starred
 from dataviva.apps.models import UI
@@ -18,12 +19,20 @@ from dataviva.attrs.models import Yb
 
 import json
 
-mod = Blueprint('rankings', __name__, url_prefix='/rankings')
+mod = Blueprint('rankings', __name__, url_prefix='/<lang_code>/rankings')
 
 @mod.before_request
 def before_request():
     g.page_type = mod.name
     g.color = "#752277"
+
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', get_locale())
+
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.locale = values.pop('lang_code')
 
 @mod.after_request
 def per_request_callbacks(response):
@@ -65,7 +74,7 @@ def index(year=2012,type="bra",depth=3):
     depths = {}
     depths["bra"] = [1,3,5,7,9]
     depths["cnae"] = [1,3,6]
-    depths["cbo"] = [1,2,4]
+    depths["cbo"] = [1,4]
     depths["hs"] = [2,6]
     depths["wld"] = [2,5]
     depths["course_hedu"] = [2,6]

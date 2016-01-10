@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from dataviva import db
+from dataviva.general.views import get_locale
 from dataviva.secex.models import Ymb, Ymp, Ymbp, Ymbpw, Ymbw, Ympw, Ymw
 from dataviva.utils import table_helper, query_helper
 from dataviva.utils.gzip_data import gzip_response

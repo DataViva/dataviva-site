@@ -5,6 +5,7 @@ from flask.ext.login import login_required
 from flask.ext.babel import gettext
 from dataviva import db
 from datetime import datetime
+from dataviva.general.views import get_locale
 # models
 from dataviva.account.models import User
 from dataviva.ask.models import Question, Status, Reply, Flag, Vote
@@ -20,7 +21,7 @@ from functools import wraps
 # import urllib2, urllib
 # from config import SITE_MIRROR
 
-mod = Blueprint('admin', __name__, url_prefix='/admin')
+mod = Blueprint('admin', __name__, url_prefix='/<lang_code>/admin')
 
 def get_current_user_role():
     return g.user.role
@@ -38,6 +39,14 @@ def required_roles(*roles):
 @mod.before_request
 def before_request():
     g.page_type = "admin"
+
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', get_locale())
+
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.locale = values.pop('lang_code')
 
 ###############################
 # Views for ALL logged in users
@@ -193,8 +202,8 @@ def admin_questions_edit(status, question_id):
 
     return render_template("admin/admin_questions_edit.html",
                             question=q, status=status, form=form)
-    
-    
+
+
 @mod.route('/questions/delete/<int:question_id>/', methods=['GET', 'POST'])
 @required_roles(1)
 def admin_questions_delete(question_id):
@@ -205,9 +214,9 @@ def admin_questions_delete(question_id):
     db.session.delete(q)
     db.session.commit()
     flash(gettext('The item was successfully deleted.'))
-    
+
     return redirect(url_for(".admin_questions", status=status))
-    
+
 
 @mod.route('/replies/')
 @login_required
@@ -231,7 +240,7 @@ def admin_replies_list():
     limit = 50
 
     # get all users EXCEPT the logged in user
-   
+
     reply = Reply.query.filter_by(hidden=2)
     question = Question.query
 
@@ -241,7 +250,7 @@ def admin_replies_list():
         i["body"] = strip_html(i["body"])
         q = question.get(i["question_id"])
         i['question_title'] = q.question
-        
+
     ret = jsonify({"activities":items})
 
     ret.headers.add('Last-Modified', datetime.now())
@@ -255,16 +264,16 @@ def admin_replies_list():
 @login_required
 @required_roles(1)
 def admin_replies_question(question_id):
-   
+
     questions = Question.query.get_or_404(question_id)
     reply = Reply.query.filter_by(question_id=question_id)
     replies = reply.order_by(Reply.hidden.asc(), Reply.timestamp.desc()).limit(50).offset(0).all()
     user = User.query.get(questions.user_id)
     questions.replies = replies
     #questions.user = user
-    
+
     return render_template("admin/admin_replies_question.html", q=questions)
-    
+
 
 @mod.route('/replieslist/question/<int:questionid>/')
 @login_required
@@ -275,16 +284,16 @@ def admin_replies_question_list(questionid):
     limit = 50
 
     # get all users EXCEPT the logged in user
-   
+
     reply = Reply.query.filter_by(question_id=questionid)
     items = reply.order_by(Reply.hidden.desc(), Reply.timestamp.desc()).limit(limit).offset(offset).all()
-    
+
     items = [i.serialize() for i in items]
-    
+
     for i in items:
         i["body"] = strip_html(i["body"])
-        
-        
+
+
     ret = jsonify({"activities":items})
 
     ret.headers.add('Last-Modified', datetime.now())
@@ -296,33 +305,33 @@ def admin_replies_question_list(questionid):
 @mod.route('/replies/delete/<int:reply_id>/')
 @required_roles(1)
 def delete_reply_question(reply_id):
-    
+
     vote = Vote.query.filter_by(type_id=reply_id).delete()
-    
+
     reply = Reply.query.get(reply_id)
     question = reply.question_id
-    
+
     db.session.delete(reply)
     db.session.commit()
-    
+
     flash(gettext('The item was successfully deleted.'))
-    
+
     return redirect(url_for(".admin_replies_question", question_id=question))
-    
+
 
 
 @mod.route('/reply/delete/<int:reply_id>/', methods = ['GET'])
 @required_roles(1)
 def delete_reply(reply_id):
-    
-    
-    
+
+
+
     reply = Reply.query.get(reply_id)
-    
+
     db.session.delete(reply)
     db.session.commit()
     flash(gettext('The item was successfully deleted.'))
-    
+
     return redirect(url_for(".admin_replies"))
 
 

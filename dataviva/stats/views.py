@@ -50,5 +50,5 @@ def carousel():
 
     data = stats_list(metric, shows, limit=limit, offset=offset, sort=sort, depth=depth, listify=True)
     items = get_profiles(data, profile)
-    
+
     return json.dumps(items)

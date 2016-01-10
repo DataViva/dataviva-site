@@ -8,6 +8,7 @@ from flask import Blueprint, request, render_template, g, Response, make_respons
 from flask.ext.babel import gettext
 
 from dataviva import db, datavivadir, __year_range__, view_cache
+from dataviva.general.views import get_locale
 from dataviva.data.forms import DownloadForm
 from dataviva.account.models import User, Starred
 from dataviva.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_hedu, Course_sc, Search
@@ -25,7 +26,7 @@ from config import FACEBOOK_OAUTH_ID, basedir,GZIP_DATA
 import os, urlparse, random, zipfile, sys, gzip
 from dataviva.utils.cached_query import api_cache_key
 
-mod = Blueprint('apps', __name__, url_prefix='/apps')
+mod = Blueprint('apps', __name__, url_prefix='/<lang_code>/apps')
 
 @mod.before_request
 def before_request():
@@ -38,6 +39,14 @@ def before_request():
         "face": "smirk",
         "hat": "glasses"
     }
+
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', get_locale())
+
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.locale = values.pop('lang_code')
 
 def filler(dataset, filter1, filter2):
 
@@ -457,7 +466,7 @@ def get_geo_location(ip):
             "filter1": "all", "filter2": "all", "output": "balance", "params": ""})
 @mod.route('/builder/box/', defaults={"app_name": "box", "dataset": "sc", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "age", "params": ""})
-@mod.route('/builder/bar/', defaults={"app_name": "box", "dataset": "rais", "bra_id": "4mg",
+@mod.route('/builder/bar/', defaults={"app_name": "bar", "dataset": "rais", "bra_id": "4mg",
             "filter1": "all", "filter2": "all", "output": "bra", "params": ""})
 @mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/')
 @view_cache.cached(key_prefix=api_cache_key("apps:builder"))
@@ -465,9 +474,9 @@ def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
                 filter2=None, output=None, params=None):
     if bra_id == 'bra':
         bra_id = 'all'
-        return redirect('/{0}/{1}/{2}/{3}/{4}/{5}/{6}?{7}'.format('apps/builder',app_name,dataset,bra_id,filter1,filter2,output,request.query_string))
-    if len(request.path.split("/")) == 5:
-        return redirect('{0}{1}/{2}/{3}/{4}/{5}/{6}'.format(request.path,dataset,bra_id,filter1,filter2,output,request.query_string))
+        return redirect('/{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}?{8}'.format(g.locale, 'apps/builder', app_name, dataset, bra_id, filter1, filter2, output, request.query_string))
+    if len(request.path.split("/")) == 6:
+        return redirect('{0}{1}/{2}/{3}/{4}/{5}/{6}'.format(request.path, dataset, bra_id, filter1, filter2, output, request.query_string))
     g.page_type = "builder"
     builds = Build.query.all()
     builds = [b.json(fill=False) for b in builds]
