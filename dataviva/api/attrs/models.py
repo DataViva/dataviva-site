@@ -330,8 +330,8 @@ class Stat(db.Model, AutoSerialize, BasicAttr):
     id = db.Column(db.String(20), primary_key=True)
 
     # name lookup relation
-    bs = db.relationship("dataviva.attrs.models.Bs", backref = 'stat', lazy = 'dynamic')
-    ybs = db.relationship("dataviva.attrs.models.Ybs", backref = 'stat', lazy = 'dynamic')
+    bs = db.relationship("dataviva.api.attrs.models.Bs", backref = 'stat', lazy = 'dynamic')
+    ybs = db.relationship("dataviva.api.attrs.models.Ybs", backref = 'stat', lazy = 'dynamic')
 
 
 class Bs(db.Model, AutoSerialize):
