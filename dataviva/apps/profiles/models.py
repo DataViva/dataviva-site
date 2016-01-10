@@ -5,7 +5,7 @@ from flask.ext.babel import gettext
 from sqlalchemy import func
 
 from dataviva.api.attrs import models as attrs
-from dataviva.apps.charts.models import Build, Crosswalk_oc, Crosswalk_pi
+from dataviva.apps.graphs.models import Build, Crosswalk_oc, Crosswalk_pi
 from dataviva.api.secex.models import Ymb, Ymp
 from dataviva.api.rais.models import Yo, Yi
 from dataviva.api.hedu.models import Yc_hedu

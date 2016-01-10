@@ -12,7 +12,7 @@ from dataviva.translations.dictionary import dictionary
 
 from dataviva.apps.account.models import User, Starred
 from dataviva.apps.general.views import get_locale
-from dataviva.apps.charts.models import UI
+from dataviva.apps.graphs.models import UI
 from dataviva.api.attrs.models import Bra, Wld, Hs, Cnae, Cbo, University, Course_hedu, Course_sc
 
 
