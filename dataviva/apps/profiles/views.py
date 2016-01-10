@@ -143,7 +143,6 @@ def index():
 @mod.route('/<category>/select/')
 @view_cache.cached(key_prefix=api_cache_key("profiles"))
 def index_selector(category = None, id = None):
-
     selector = category
     article = None
 
@@ -210,7 +209,7 @@ def profiles(category = None, id = None):
     if category == "bra" and id == "all":
         item = Wld.query.get("sabra")
     else:
-        item = globals()[category.capitalize()].get_or_404(id)
+        item = globals()[category.capitalize()].query.get_or_404(id)
 
     profile = getattr(profileModels, category.capitalize())(category, item)
     builds = profile.builds()
