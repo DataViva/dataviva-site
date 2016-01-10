@@ -66,7 +66,7 @@ __year_range__ = get_or_set_years(view_cache, "general:data_years")
 
 # login manager for user management
 lm = LoginManager()
-lm.setup_app(app)
+lm.init_app(app)
 
 # babel configuration for lang support
 babel = Babel(app)
