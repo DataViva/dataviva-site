@@ -32,7 +32,7 @@ def get_env_variable(var_name, default=-1):
 datavivadir = os.path.abspath(os.path.dirname(__file__))
 
 # Initialize app
-app = Flask(__name__, template_folder=os.path.join(datavivadir, 'html'))
+app = Flask(__name__, template_folder=os.path.join(datavivadir, 'html'), static_folder=os.path.join(datavivadir, 'static'))
 
 # Load default configuration from config.py
 app.config.from_object('config')
@@ -88,18 +88,16 @@ from dataviva.api.sc.views import mod as sc_module
 from dataviva.api.secex.views import mod as secex_module
 from dataviva.api.stats.views import mod as stats_module
 
-
 ''' front facing views/models of site '''
 from dataviva.apps.general.views import mod as general_module
 from dataviva.apps.admin.views import mod as admin_module
 from dataviva.apps.account.views import mod as account_module
-from dataviva.apps.charts.views import mod as charts_module
+from dataviva.apps.graphs.views import mod as graphs_module
 from dataviva.apps.data.views import mod as data_module
 from dataviva.apps.ask.views import mod as ask_module
 from dataviva.apps.rankings.views import mod as rankings_module
 from dataviva.apps.about.views import mod as about_module
 from dataviva.apps.profiles.views import mod as profiles_module
-
 
 ''' Register these modules as blueprints '''
 app.register_blueprint(attrs_module)
@@ -112,7 +110,7 @@ app.register_blueprint(stats_module)
 app.register_blueprint(general_module)
 app.register_blueprint(admin_module)
 app.register_blueprint(account_module)
-app.register_blueprint(charts_module)
+app.register_blueprint(graphs_module)
 app.register_blueprint(data_module)
 app.register_blueprint(ask_module)
 app.register_blueprint(rankings_module)

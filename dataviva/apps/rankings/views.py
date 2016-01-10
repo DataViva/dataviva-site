@@ -10,7 +10,7 @@ from dataviva import db, __year_range__
 from dataviva.apps.general.views import get_locale
 from dataviva.utils.make_query import make_query
 from dataviva.apps.account.models import User, Starred
-from dataviva.apps.charts.models import UI
+from dataviva.apps.graphs.models import UI
 from dataviva.api.rais.models import Yb_rais, Yi, Yo
 from dataviva.api.secex.models import Ymb, Ymp, Ymw
 from dataviva.api.hedu.models import Yu, Yc_hedu

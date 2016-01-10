@@ -9,14 +9,14 @@ from flask.ext.babel import gettext
 
 from dataviva import db, datavivadir, __year_range__, view_cache
 from dataviva.api.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_hedu, Course_sc, Search
+from dataviva.api.rais.views import rais_api
 
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.data.forms import DownloadForm
 from dataviva.apps.account.models import User, Starred
-from dataviva.apps.charts.models import Build, UI, App, Crosswalk_oc, Crosswalk_pi
+from dataviva.apps.graphs.models import Build, UI, App, Crosswalk_oc, Crosswalk_pi
 from dataviva.apps.general.models import Short
 
-from dataviva.api.rais.views import rais_api
 from dataviva.translations.translate import translate
 from dataviva.utils.gzip_data import gzip_data
 from dataviva.utils.cached_query import cached_query, api_cache_key
