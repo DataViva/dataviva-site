@@ -117,112 +117,12 @@ def get_timezone():
 def after_request(response):
     return response
 
-@mod.route('/', methods=['GET', 'POST'])
+
+@mod.route('/', methods=['GET'])
 @view_cache.cached(key_prefix=api_cache_key("homepage"))
-@gzipped
 def home():
+    return render_template("general/index.html")
 
-    # return render_template("test.html")
-
-    g.page_type = "home"
-
-    carousels = []
-
-    limit = 20
-    carousel_base = "/stats/carousel/?metric={}&show={}&profile={}&limit={}"
-
-    metric, show, profile = "export_val", "bra_id", "bra"
-    data = stats_list(metric, show, limit=limit)
-    items = make_items(data, Bra)
-    carousels.append({
-        "title": gettext("Top Exporting Municipalities"),
-        "type": profile,
-        "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit),
-        "metric" : metric
-    })
-
-    metric, show, profile = "pci", "hs_id", "hs"
-    data = stats_list(metric, show, limit=limit)
-    items = make_items(data, Hs)
-    carousels.append({
-        "title": gettext("Most Complex Products"),
-        "sub": gettext("%(link)s for more information on product complexity.", link = "<a href='/about/glossary/complexity/'>{}</a>".format(gettext("Click here"))),
-        "type": profile,
-        "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit),
-        "metric" : metric
-    })
-
-    metric, show, profile = "wage_avg", "bra_id", "bra"
-    data = stats_list(metric, show, limit=limit)
-    items = make_items(data, Bra)
-    carousels.append({
-        "title": gettext("Richest Municipalities"),
-        "sub": gettext("Municipalities with the highest average wage, excluding those with less than 50,000 people."),
-        "type": profile,
-        "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit),
-        "metric" : metric
-    })
-
-    metric, show, profile = "wage_avg", "cbo_id", "cbo"
-    data = stats_list(metric, show, limit=limit)
-    items = make_items(data, Cbo)
-    carousels.append({
-        "title": gettext("Best Paid Occupations"),
-        "type": profile,
-        "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit),
-        "metric" : metric
-    })
-
-    metric, show, profile = "num_jobs", "cnae_id", "cnae"
-    data = stats_list(metric, show, limit=limit)
-    items = make_items(data, Cnae)
-    carousels.append({
-        "title": gettext("Largest Industries by Employment"),
-        "type": profile,
-        "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit),
-        "metric" : metric
-    })
-
-    metric, show, profile = "num_emp_growth", "cnae_id", "cnae"
-    data = stats_list(metric, show, limit=limit)
-    items = make_items(data, Cnae)
-    carousels.append({
-        "title": gettext("Industries by Employment Growth"),
-        "sub": gettext("Excluding industries with less than 10,000 employees."),
-        "type": profile,
-        "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit),
-        "metric" : metric
-    })
-
-    metric, show, profile = "enrolled", "course_hedu_id", "course_hedu"
-    data = stats_list(metric, show, limit=limit)
-    items = make_items(data, Course_hedu)
-    carousels.append({
-        "title": gettext("Most Popular Courses by Enrollment"),
-        "type": profile,
-        "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit),
-        "metric" : metric
-    })
-
-    metric, show, profile = "enrolled", "bra_id", "bra"
-    data = stats_list(metric, show, limit=limit)
-    items = make_items(data, Bra)
-    carousels.append({
-        "title": gettext("Cities by Largest University Enrollment"),
-        "type": profile,
-        "items": items,
-        "url" : carousel_base.format(metric, show, profile, limit),
-        "metric" : metric
-    })
-
-    return render_template("general/home.html", carousels = carousels)
 
 @mod.route('close/')
 def close():
