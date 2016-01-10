@@ -16,10 +16,8 @@
     <body class="home">
 
         {% include "base/includes/header.html" %}
-
         {% block main_content %}
         {% endblock main_content %}
-
         {% include "base/includes/footer.html" %}
 
         <div class="modal fade dataviva" tabindex="-1" role="dialog" id="dataviva-login" data-show="true">
@@ -113,27 +111,28 @@
                                     </div>
                                     </div><!-- /.modal-dialog -->
                                     </div><!-- /.modal -->
-                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-                                    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-                                    <script type="text/javascript">
-                                    $(function(){
-                                    $('[data-toggle="popover"]').popover({
-                                    'trigger' : 'hover click'
-                                    });
-                                    $('a[href*=#]:not([href=#])').click(function() {
-                                    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-                                    var target = $(this.hash);
-                                    target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-                                    if (target.length) {
-                                    $('html,body').animate({
-                                    scrollTop: target.offset().top
-                                    }, 1000);
-                                    return false;
-                                    }
-                                    }
-                                    });
-                                    });
-                                    </script>
-                                </body>
-                            </html>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $('[data-toggle="popover"]').popover({
+                    'trigger' : 'hover click'
+                });
+
+                $('a[href*=#]:not([href=#])').click(function() {
+                    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                        var target = $(this.hash);
+                        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                        if (target.length) {
+                            $('html,body').animate({
+                            scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
 
