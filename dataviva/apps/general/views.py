@@ -124,7 +124,7 @@ def home():
     return render_template("general/index.html")
 
 
-@mod.route('/inicie-sua-pesquisa/', methods=['GET'])
+@mod.route('/inicie-uma-pesquisa/', methods=['GET'])
 @view_cache.cached(key_prefix=api_cache_key("browsecat"))
 def browse_categories():
     return render_template("general/browse_categories.html")
