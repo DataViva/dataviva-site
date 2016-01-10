@@ -29,7 +29,7 @@
 
   <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it
        to SVG/PDF/PNG downloadable file. -->
-  <form id="svgform" action="/apps/download/" method="post">
+  <form id="svgform" action="/{{g.locale}}/apps/download/" method="post">
       {{ form.hidden_tag() }}
   </form>
 
@@ -504,7 +504,7 @@
           rec_url = rec_url.join("/")
         }
         loading.text(dataviva.dictionary.wait).show();
-        return "/apps/recommend/"+rec_url+location.search;
+        return "/{{g.locale}}/apps/recommend/"+rec_url+location.search;
       }
     }
 
@@ -806,7 +806,7 @@
       d3.select("#controls").selectAll("*").remove();
       d3plus.tooltip.remove();
 
-      d3.json("/apps/embed/"+app.url+"?lang="+dataviva.language)
+      d3.json("/{{g.locale}}/apps/embed/"+app.url+"?lang="+dataviva.language)
         .header("X-Requested-With", "XMLHttpRequest")
         .get(function(error, data){
 
@@ -1018,7 +1018,7 @@
                     app.networks[app.build.output_attr] = d
                     callback(error,d)
                   })
-              },"/apps/networks/"+app.build.output_attr+"/")
+              },"/{{g.locale}}/apps/networks/"+app.build.output_attr+"/")
             }
 
       			d3.selectAll("#settings #file").style("display","inline-block");
@@ -1039,7 +1039,7 @@
                       app.coords[json_id] = d
                       callback(error,d)
                     })
-                },"/apps/coords/"+json_id+"/")
+                },"/{{g.locale}}/apps/coords/"+json_id+"/")
               }
 
             }
@@ -2488,7 +2488,7 @@
       if ( status !== undefined ) {
         update_star(status)
       }
-      else if ( "{{g.user.is_authenticated()}}" === "False" ) {
+      else if ( "{{g.user.is_authenticated}}" === "False" ) {
         login()
       }
       else {
@@ -2558,7 +2558,7 @@
         csrf_token = document.getElementById("csrf_token").value;
         form['data'].value = form['data'].value.replace(/&/g, "%26")
         progress = 0
-        d3.xhr("/apps/download/")
+        d3.xhr("/{{g.locale}}/apps/download/")
         .header("Content-Type", "application/x-www-form-urlencoded")
             .post("output_format="+type+"&title="+ title+"&downloadToken="+ new Date().getTime() +"&data="+ form['data'].value +"&csrf_token="+ csrf_token, function(e, data){
           urlFile = data.response
@@ -2742,7 +2742,7 @@
     builder.url = function() {
 
       var doc_title = app.build.app.name+" : "+app.build.title
-      dataviva.url("/apps/embed/"+app.url,app.vars,doc_title)
+      dataviva.url("/{{g.locale}}/apps/embed/"+app.url,app.vars,doc_title)
 
     }
 
@@ -2782,7 +2782,7 @@
           d3.select(pid).append("iframe")
             .attr("width","100%")
             .attr("height","100%")
-            .attr("src","/apps/info/"+app.build.app.type+"/")
+            .attr("src","/{{g.locale}}/apps/info/"+app.build.app.type+"/")
 
         }
 
@@ -2810,7 +2810,7 @@
             var url = encodeURIComponent(window.location.pathname + window.location.search)
           }
 
-          d3.json("/apps/shorten/")
+          d3.json("/{{g.locale}}/apps/shorten/")
             .header("Content-type","application/x-www-form-urlencoded")
             .post("url="+url, function(error,data) {
               if (data.error) {

@@ -28,7 +28,7 @@
 	    <div id="sabrina_head"></div>
 	  </div>
 
-	  <a {% if g.user.is_authenticated() %}href="/about/ask/"{%else%}onclick="login()"{%endif%} class="decision icon short questions">
+	  <a {% if g.user.is_authenticated %}href="/about/ask/"{%else%}onclick="login()"{%endif%} class="decision icon short questions">
 	    {% trans %}Can´t find an answer?{% endtrans %} {% trans %}Send your question to us here!{% endtrans %}
 	  </a>
 

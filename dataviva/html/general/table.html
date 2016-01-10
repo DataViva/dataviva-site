@@ -217,6 +217,7 @@
     */
     function make_sticky_header(attrs, sticky_cols, container_el){
       sticky_cols_w_names = []
+      var bra_id = (sticky_cols.indexOf("bra_id") > -1);
       sticky_cols.forEach(function(col){
         // sticky_cols_w_names.push(col)
         // if(col.indexOf("_id") > -1){
@@ -231,8 +232,9 @@
         //   else if(attr_type === "course_sc"){ var col_name = "Course" }
         //   sticky_cols_w_names.push([attr_type, "name", col_name])
         // }
+
         if(col.indexOf("bra_id") > -1){
-          sticky_cols_w_names.push(["bra", "id_ibge", "IBGE"])
+          sticky_cols_w_names.push(["bra", "id_ibge", "IBGE ID"])
           sticky_cols_w_names.push(["bra", "name", "{% trans %}Location{% endtrans %}"])
         }
         else if(col.indexOf("_id") > -1 && sticky_cols.indexOf("name") < 0){
@@ -248,7 +250,8 @@
           sticky_cols_w_names.push([attr_type, "name", col_name])
         }
         else {
-          sticky_cols_w_names.push(col)
+          if((col === "name" && bra_id) || (col === "id_ibge" && bra_id)) return
+          else sticky_cols_w_names.push(col)
         }
       })
 
