@@ -20,6 +20,18 @@
         {% endblock main_content %}
         {% include "base/includes/footer.html" %}
 
+
+
+        <div class="modal fade dataviva" tabindex="-1" role="dialog" id="modal-wizard" data-show="true" data-ng-app="wizard" data-ng-controller="WizardController">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h2>HERES THE MODAL BODY!</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade dataviva" tabindex="-1" role="dialog" id="dataviva-login" data-show="true">
             <div class="modal-dialog modal-clear">
                 <div class="modal-content">
@@ -113,6 +125,11 @@
                                     </div><!-- /.modal -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <script src="/static/js/libs/angular.min.js"></script>
+        <script src="/static/js/wizard/remote.js"></script>
+        <script src="/static/js/wizard/main.js"></script>
+
         <script src="/static/js/libs/bootstrap.min.js"></script>
         <script type="text/javascript">
             $(function(){
