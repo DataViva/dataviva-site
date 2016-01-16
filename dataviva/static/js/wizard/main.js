@@ -2,7 +2,7 @@
     "use strict";
 
     var app = angular.module('wizard', [
-        "wizard.remote",
+        "wizard.models",
     ]);
 
     app.config(['$httpProvider', '$interpolateProvider',
@@ -13,15 +13,26 @@
     }]);
 
     app.controller('WizardController',[
-        '$scope', "Remote",
-        function ($scope, Remote) {
+        '$scope', "Wizard", "WizardStep",
+        function ($scope, Wizard, WizardStep) {
 
             console.log("Staring wiz controller");
-            $scope.remote = new Remote();
 
-            this.submit = function() {
-                $scope.remote.submit();
+            $scope.start_session = function(session_name) {
+                alert("here!");
+                $scope.wizard = new Wizard(session_name);
+            };
+
+            $scope.submit = function() {
+                $scope.wizard.submit();
             };
 
         }]);
 }());
+
+
+fire_wizard = function(session_name) {
+    $("#modal-wizard").modal();
+    var el = document.getElementById('wizcont');
+    angular.element(el).scope().start_session(session_name);
+}

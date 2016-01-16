@@ -22,9 +22,9 @@
 
 
 
-        <div class="modal fade dataviva" tabindex="-1" role="dialog" id="modal-wizard" data-show="true" data-ng-app="wizard" data-ng-controller="WizardController">
+        <div class="modal fade dataviva" tabindex="-1" role="dialog" id="modal-wizard" data-show="true" data-ng-app="wizard" >
             <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+                <div class="modal-content" id="wizcont" data-ng-controller="WizardController">
                     <div class="modal-body">
                         <h2>HERES THE MODAL BODY!</h2>
                     </div>
@@ -128,6 +128,7 @@
 
         <script src="/static/js/libs/angular.min.js"></script>
         <script src="/static/js/wizard/remote.js"></script>
+        <script src="/static/js/wizard/models.js"></script>
         <script src="/static/js/wizard/main.js"></script>
 
         <script src="/static/js/libs/bootstrap.min.js"></script>
