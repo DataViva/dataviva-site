@@ -3,19 +3,6 @@
 
     var app = angular.module("wizard.remote", []);
 
-    app.service('WizardStep', ["$filter",  function ($filter) {
-        return function WizardStep(args) {
-
-            var self = this;
-            var defaults = {
-                title: null,
-                results: [],
-            };
-            angular.extend(this, defaults, args);
-            alert("initialized wizard step");
-        }
-    }]);
-
     app.service('Remote', ["$http", "WizardStep",
 
         function ($http, WizardStep, Result) {

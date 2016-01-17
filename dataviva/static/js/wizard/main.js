@@ -13,18 +13,29 @@
     }]);
 
     app.controller('WizardController',[
-        '$scope', "Wizard", "WizardStep",
-        function ($scope, Wizard, WizardStep) {
-
-            console.log("Staring wiz controller");
+        '$scope', '$http', "Wizard", "WizardStep",
+        function ($scope, $http, Wizard, WizardStep) {
 
             $scope.start_session = function(session_name) {
-                alert("here!");
                 $scope.wizard = new Wizard(session_name);
             };
 
             $scope.submit = function() {
-                $scope.wizard.submit();
+
+                var data = {
+                    "session_name": "locations",
+                    "previous_answers": [["COM_INTERNACIONAL_STEP", true], ["EXPORTACOES_STEP", true]],
+                    "current_answer": ["PRODUTO_STEP", true]
+                };
+
+                $http({
+                    method: "POST",
+                    url: "/en/wizard/submit_answer/",
+                    data: data,
+                })
+                .success(function(resp){
+                    $scope.wizard.current_step = resp.current_step;
+                });
             };
 
         }]);

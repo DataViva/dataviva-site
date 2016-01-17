@@ -18,9 +18,26 @@
         }
     }]);
 
-    app.service('Wizard', ["Remote", "$filter",  function (Remote, $filter) {
+    app.service('Wizard', ["Remote", "$http", "$filter",  function (Remote, $http, $filter) {
         return function WizardStep(session_name) {
-            alert("TODO fetch wiz/flow from server for: " + session_name);
+            var self = this;
+            self.session_name = session_name;
+            self.current_step = {
+                "title": "Aguarde",
+                "options": null,
+            };
+
+            $http({
+                method: "GET",
+                url: "/en/wizard/start_session/" + self.session_name,
+            })
+            .success(function(resp){
+                self.current_step.title = resp.current_step.title;
+                self.current_step.options = resp.current_step.options;
+            })
+            .error(function(resp){
+                console.log(resp);
+            })
         }
     }]);
 }());

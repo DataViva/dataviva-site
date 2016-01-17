@@ -98,6 +98,8 @@ from dataviva.apps.ask.views import mod as ask_module
 from dataviva.apps.rankings.views import mod as rankings_module
 from dataviva.apps.about.views import mod as about_module
 from dataviva.apps.profiles.views import mod as profiles_module
+from dataviva.apps.wizard.views import mod as wizard_module
+
 
 ''' Register these modules as blueprints '''
 app.register_blueprint(attrs_module)
@@ -116,3 +118,5 @@ app.register_blueprint(ask_module)
 app.register_blueprint(rankings_module)
 app.register_blueprint(about_module)
 app.register_blueprint(profiles_module)
+app.register_blueprint(wizard_module)
+
