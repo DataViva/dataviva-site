@@ -1,7 +1,7 @@
 import re
 from dataviva import db
 from sqlalchemy import func, desc, or_
-from dataviva.attrs.models import bra_pr, Bra
+from dataviva.api.attrs.models import bra_pr, Bra
 
 SHOW='show'
 SHOW2='.show.'
