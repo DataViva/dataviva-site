@@ -4,7 +4,7 @@ from dataviva.utils.cached_query import api_cache_key
 from dataviva.apps.general.views import get_locale
 
 mod = Blueprint('location', __name__, template_folder='templates',
-                url_prefix='/<lang_code>/location')
+                url_prefix='/<lang_code>/location', static_folder='static')
 
 
 @mod.url_value_preprocessor
