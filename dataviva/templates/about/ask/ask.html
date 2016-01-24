@@ -1,0 +1,88 @@
+<!-- extend from about base layout -->
+{% extends "about.html" %}
+
+{% block title %}: {% trans %}Contact Us{% endtrans %}{% endblock %}
+
+{% block about_content %}
+
+  <h1>
+    {% if g.user.is_authenticated %}
+      {% trans %}What would you like to know?{% endtrans %}
+    {% else %}
+      {% trans %}You need to login for this functionality.{% endtrans %}
+    {% endif %}
+  </h1>
+
+  {% if g.user.is_authenticated %}
+
+    <form id="ask_form" action="" method="post">
+
+      {{ form.hidden_tag() }}
+
+      <div id="ask_type_toggle_form">
+      <label for="type">{% trans %}Type{% endtrans %}</label>
+        {% for subfield in form.type %}
+          {{ subfield }}
+          {{ subfield.label }}
+        {% endfor %}
+     	</div>
+      {{ form.question(id="question", placeholder=_("Ex. Where does the data come from?")) }}
+      {% for error in form.errors.question %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+
+      {{ form.body(id="wysiwyg_textarea") }}
+      {% for error in form.errors.body %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+      <!--
+      <label for="app_link">{% trans %}Visualization{% endtrans %}</label>
+      {{ form.app(id="app_link", placeholder="Ex. /tree_map/secex/mg/all/all/hs/") }}
+
+      <label for="tag_field" class="leon label large">{% trans %}Tags{% endtrans %}</label>
+      {{ form.tags(id="tag_field") }}
+      <div id="tag_input" class="leon textbox large"></div>
+      -->
+
+      <a href="#" class="decision submit">{% trans %}Submit your question to Fapemig!{% endtrans %}</a>
+
+    </form>
+
+  {% else %}
+    <a id="login" class="decision" onclick="login()">{% trans %}Click here to login{% endtrans %}</a>
+  {% endif %}
+
+{% endblock %}
+
+{% block js %}
+
+  <script src="/static/js/libs/jquery-2.0.3.min.js"></script>
+  <script src="/static/js/libs/redactor.min.js"></script>
+  <script src="/static/js/libs/pt_br.js"></script>
+  <script>
+
+    leon("#question").size("large").color(dataviva.color)
+    leon("#app_link").size("large").color(dataviva.color)
+  	leon("$type").color(dataviva.color)
+
+    // Initialize redactor wysiwyg textarea
+    $(document).ready(function() {
+
+        var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
+
+    		$('#wysiwyg_textarea').redactor({
+          buttons: buttons,
+          lang: "{{g.locale}}"
+    		});
+
+    });
+
+    // submit form
+    d3.selectAll("#ask_form .submit").on(d3plus.client.pointer.click, function(){
+      this.parentNode.submit()
+      d3.event.preventDefault();
+    })
+
+  </script>
+
+{% endblock %}
