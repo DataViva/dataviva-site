@@ -3,9 +3,9 @@
 
     var app = angular.module("wizard.remote", []);
 
-    app.service('Remote', ["$http", "WizardStep",
+    app.service('Remote', ["$http", "Question",
 
-        function ($http, WizardStep, Result) {
+        function ($http, Question, Result) {
 
             return function Remote(args) {
 

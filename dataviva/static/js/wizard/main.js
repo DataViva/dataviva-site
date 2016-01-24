@@ -13,11 +13,15 @@
     }]);
 
     app.controller('WizardController',[
-        '$scope', '$http', "Wizard", "WizardStep",
-        function ($scope, $http, Wizard, WizardStep) {
+        '$scope', '$http', "Wizard", "Question",
+        function ($scope, $http, Wizard, Question) {
 
             $scope.start_session = function(session_name) {
                 $scope.wizard = new Wizard(session_name);
+            };
+
+            $scope.select = function(q) {
+                alert(q);
             };
 
             $scope.submit = function() {
