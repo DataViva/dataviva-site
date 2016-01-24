@@ -33,7 +33,8 @@ def get_env_variable(var_name, default=-1):
 datavivadir = os.path.abspath(os.path.dirname(__file__))
 
 # Initialize app
-app = Flask(__name__, template_folder=os.path.join(datavivadir, 'html'), static_folder=os.path.join(datavivadir, 'static'))
+app = Flask(__name__, template_folder=os.path.join(datavivadir, 'templates'),
+            static_folder=os.path.join(datavivadir, 'static'))
 
 # Load default configuration from config.py
 app.config.from_object('config')
