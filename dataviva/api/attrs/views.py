@@ -4,7 +4,7 @@ from StringIO import StringIO
 
 from sqlalchemy import func, asc, desc, and_
 from flask import (Blueprint, request, jsonify, g,
-                   render_template, make_response)
+                   render_template, make_response, Response)
 
 from dataviva import db, __year_range__, view_cache
 from dataviva.api.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University, School, bra_pr, Search
@@ -377,5 +377,7 @@ def location():
         returned_entries = query.filter(func.char_length(Bra.id) == depth)
     elif bra_id:
         returned_entries = query.filter(Bra.id == bra_id)
+    else:
+        return Response("You must specify a querying parameter!", status=400)
 
     return json.dumps(map(lambda x: x.serialize(), returned_entries))
