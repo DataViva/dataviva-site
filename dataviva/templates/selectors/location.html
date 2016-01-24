@@ -1,0 +1,97 @@
+<link href="/static/css/libs/bootstrap.css" rel="stylesheet">
+
+<div class="institucional search" ng-app="selector" ng-controller="LocationSelector">
+    <h2>Escolha um localidade da lista abaixo ou busque pelo nome</h2>
+    <form action="" class="form-dataviva form-inline filter">
+        <div class="form-group">
+            <ul class="btn-group nav nav-tabs" role="tablist">
+
+                <button type="button" href="#regions" aria-controls="regions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="load_depth_entries(regions)">
+                Regiões
+                </button>
+
+                <button type="button" href="#states" aria-controls="states" role="tab" data-toggle="tab" class="btn btn-default" ng-click="load_depth_entries(states)" ng-click="load_depth_entries(states)">
+                Estados
+                </button>
+
+                <button type="button" href="#mesoregions" aria-controls="mesoregions" role="tab" data-toggle="tab" class="btn btn-default"  ng-click="load_depth_entries(mesoregions)">
+                Mesorregiões
+                </button>
+
+                <button type="button" href="#mircroregions" aria-controls="mircroregions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="load_depth_entries(mircroregions)">
+                Microregiões
+                </button>
+
+                <button type="button" href="#municipality" aria-controls="municipality" role="tab" data-toggle="tab" class="btn btn-default" ng-click="load_depth_entries(municipalities)">
+                Municípios
+                </button>
+
+            </ul>
+        </div>
+        <hr>
+
+        <div class="search-items tab-content">
+
+            <!-- TAB: REGIONS -->
+            <div role="tabpanel" class="tab-pane search-items" id="regions">
+                <div class="form-group">
+                    <i class="fa fa-search"></i>
+                    <input id="field-search" type="text" class="busca form-control">
+                </div>
+                <div class="list-group list-stripped">
+                    <a ng-repeat="loc in regions.entries" href="03-perfil-comercio-internacional.html" class="list-group-item">{$ loc.name $}</a>
+                </div>
+            </div>
+
+            <!-- TAB: STATES -->
+            <div role="tabpanel" class="tab-pane search-items" id="states">
+                <div class="form-group">
+                    <i class="fa fa-search"></i>
+                    <input id="field-search" type="text" class="busca form-control">
+                </div>
+                <div class="list-group list-stripped">
+                    <a ng-repeat="loc in states.entries" href="03-perfil-comercio-internacional.html" class="list-group-item">{$ loc.name $}</a>
+                </div>
+            </div>
+
+            <!-- TAB: MESOREGIONS -->
+            <div role="tabpanel" class="tab-pane search-items" id="mesoregions">
+                <div class="form-group">
+                    <i class="fa fa-search"></i>
+                    <input id="field-search" type="text" class="busca form-control">
+                </div>
+                <div class="list-group list-stripped">
+                    <a ng-repeat="loc in mesoregions.entries" href="03-perfil-comercio-internacional.html" class="list-group-item">{$ loc.name $}</a>
+                </div>
+            </div>
+
+            <!-- TAB: mircroregions -->
+            <div role="tabpanel" class="tab-pane search-items" id="mircroregions">
+                <div class="form-group">
+                    <i class="fa fa-search"></i>
+                    <input id="field-search" type="text" class="busca form-control">
+                </div>
+                <div class="list-group list-stripped">
+                    <a ng-repeat="loc in mircroregions.entries" href="03-perfil-comercio-internacional.html" class="list-group-item">{$ loc.name $}</a>
+                </div>
+            </div>
+
+            <!-- TAB: MUNICIPALITY -->
+            <div role="tabpanel" class="tab-pane search-items" id="municipality">
+                <div class="form-group">
+                    <i class="fa fa-search"></i>
+                    <input id="field-search" type="text" class="busca form-control">
+                </div>
+                <div class="list-group list-stripped">
+                    <a ng-repeat="loc in municipalities.entries" href="03-perfil-comercio-internacional.html" class="list-group-item">{$ loc.name $}</a>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/static/js/libs/angular.min.js"></script>
+<script src="/static/js/libs/bootstrap.min.js"></script>
+<script src="/static/js/wizard/selector.js"></script>

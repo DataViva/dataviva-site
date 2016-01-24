@@ -1,0 +1,7 @@
+/* TODO - ORGANIZE THE CSS TO PREVENT THE USE OF !IMPORTANT */
+
+a.selected {
+	background-color: #23527c !important;
+	color: white !important;
+	font-weight: bold !important;
+}

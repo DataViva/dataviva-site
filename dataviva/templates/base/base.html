@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>DataViva</title>
         <link href="/static/css/libs/bootstrap.css" rel="stylesheet">
+        <link href="/static/css/custom.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -40,7 +41,7 @@
                                             class="list-group-item"
                                             ng-repeat="question in wizard.questions"
                                             ng-click="wizard.select(question)"
-                                            data-ng-class="{'selected-question': question.selected }"
+                                            data-ng-class="{'selected': question.selected }"
                                         >{$ question.label $}</a>
                                     </div>
                                 </div>
@@ -154,6 +155,7 @@
                                 <script src="/static/js/wizard/models.js"></script>
                                 <script src="/static/js/wizard/main.js"></script>
                                 <script src="/static/js/libs/bootstrap.min.js"></script>
+
                                 <script type="text/javascript">
                                 $(function(){
                                 $('[data-toggle="popover"]').popover({
