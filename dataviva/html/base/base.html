@@ -20,6 +20,23 @@
         {% endblock main_content %}
         {% include "base/includes/footer.html" %}
 
+        <div class="modal fade dataviva" tabindex="-1" role="dialog" id="modal-wizard" data-show="true" data-ng-app="wizard" >
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" id="wizcont" data-ng-controller="WizardController">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{$ wizard.current_step.title $}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <select ng-if="wizard.current_step.options" ng-model="wizard.current_answer" ng-options="op[0] as op[1] for op in wizard.current_step.options"></select>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="pull-left btn btn-link">Cancelar</a>
+                        <a class="pull-right btn btn-info" data-ng-click="submit()">Avancar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade dataviva" tabindex="-1" role="dialog" id="dataviva-login" data-show="true">
             <div class="modal-dialog modal-clear">
                 <div class="modal-content">
@@ -111,8 +128,15 @@
                                     </div>
                                     </div><!-- /.modal-dialog -->
                                     </div><!-- /.modal -->
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <script src="/static/js/libs/angular.min.js"></script>
+        <script src="/static/js/wizard/remote.js"></script>
+        <script src="/static/js/wizard/models.js"></script>
+        <script src="/static/js/wizard/main.js"></script>
+        <script src="/static/js/libs/bootstrap.min.js"></script>
+
         <script type="text/javascript">
             $(function(){
                 $('[data-toggle="popover"]').popover({
