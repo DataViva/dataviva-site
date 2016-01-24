@@ -13,8 +13,9 @@ from flask.ext.babel import Babel
 from flask.ext.cache import Cache
 
 # for new filters, redis sessions
-from utils.jinja_helpers import jinja_momentjs, jinja_formatter, jinja_strip_html, jinja_split
 from flask.ext.mail import Mail
+from utils.jinja_helpers import jinja_formatter, jinja_momentjs, jinja_split, \
+ jinja_strip_html
 
 from utils.redis import RedisSessionInterface
 
@@ -89,16 +90,18 @@ from dataviva.api.secex.views import mod as secex_module
 from dataviva.api.stats.views import mod as stats_module
 
 ''' front facing views/models of site '''
-from dataviva.apps.general.views import mod as general_module
-from dataviva.apps.admin.views import mod as admin_module
-from dataviva.apps.account.views import mod as account_module
-from dataviva.apps.graphs.views import mod as graphs_module
-from dataviva.apps.data.views import mod as data_module
-from dataviva.apps.ask.views import mod as ask_module
-from dataviva.apps.rankings.views import mod as rankings_module
 from dataviva.apps.about.views import mod as about_module
+from dataviva.apps.account.views import mod as account_module
+from dataviva.apps.admin.views import mod as admin_module
+from dataviva.apps.ask.views import mod as ask_module
+from dataviva.apps.data.views import mod as data_module
+from dataviva.apps.general.views import mod as general_module
+from dataviva.apps.graphs.views import mod as graphs_module
+from dataviva.apps.location.views import mod as location_module
 from dataviva.apps.profiles.views import mod as profiles_module
+from dataviva.apps.rankings.views import mod as rankings_module
 from dataviva.apps.wizard.views import mod as wizard_module
+
 
 
 ''' Register these modules as blueprints '''
@@ -118,4 +121,5 @@ app.register_blueprint(ask_module)
 app.register_blueprint(rankings_module)
 app.register_blueprint(about_module)
 app.register_blueprint(profiles_module)
+app.register_blueprint(location_module)
 app.register_blueprint(wizard_module)
