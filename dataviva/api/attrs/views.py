@@ -2,8 +2,9 @@ import gzip
 import json
 from StringIO import StringIO
 
-from sqlalchemy import func, distinct, asc, desc, and_, or_
-from flask import Response, Blueprint, request, jsonify, abort, g, render_template, make_response, redirect, url_for, flash
+from sqlalchemy import func, asc, desc, and_
+from flask import (Blueprint, request, jsonify, g,
+                   render_template, make_response)
 
 from dataviva import db, __year_range__, view_cache
 from dataviva.api.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University, School, bra_pr, Search
@@ -23,6 +24,15 @@ from dataviva.utils.cached_query import api_cache_key
 from dataviva.translations.translate import translate
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
+
+
+class LOCATION_DEPTHS:
+    REGION = 1
+    STATE = 3
+    MESOREGION = 5
+    MICROREGION = 7
+    MUNICIPALITY = 9
+
 
 def fix_name(attr, lang):
 
@@ -114,20 +124,21 @@ def attrs(attr="bra",Attr_id=None, depth=None):
         Attr_weight_col = "enrolled"
 
     depths = {}
-    depths["bra"] = [1,3,5,7,9]
-    depths["cnae"] = [1,3,6]
-    depths["cbo"] = [1,4]
-    depths["hs"] = [2,6]
-    depths["wld"] = [2,5]
-    depths["course_hedu"] = [2,6]
+    depths["bra"] = [1, 3, 5, 7, 9]
+    depths["cnae"] = [1, 3, 6]
+    depths["cbo"] = [1, 4]
+    depths["hs"] = [2, 6]
+    depths["wld"] = [2, 5]
+    depths["course_hedu"] = [2, 6]
     depths["university"] = [5]
-    depths["course_sc"] = [2,5]
+    depths["course_sc"] = [2, 5]
     depths["school"] = [8]
 
     depth = request.args.get('depth', depth)
     order = request.args.get('order', None)
     offset = request.args.get('offset', None)
     limit = request.args.get('limit', None)
+
     if offset:
         offset = float(offset)
         limit = limit or 50
@@ -334,11 +345,13 @@ def dl_csv():
 
     return response
 
+
 @mod.route('/table/<attr>/<depth>/')
 def attrs_table(attr="bra",depth="2"):
     g.page_type = "attrs"
     data_url = "{0}/attrs/{1}/?depth={2}".format(g.locale, attr,depth)
     return render_template("general/table.html", data_url=data_url)
+
 
 @mod.route('/search/<term>/')
 @view_cache.cached(key_prefix=api_cache_key("search"))
@@ -348,5 +361,21 @@ def attrs_search(term=None):
     name_col = Search.name_en if lang == 'en' else Search.name_pt
     profiles = Search.query.filter(name_col.like(u'%{}%'.format(term))).order_by(Search.weight.desc()).limit(20)
     result = [p.serialize(lang == "pt") for p in profiles]
-    ret = jsonify({"activities":result})
+    ret = jsonify({"activities": result})
     return ret
+
+
+@mod.route('/location/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_location"))
+def location():
+
+    depth = request.args.get('depth', None)
+    bra_id = request.args.get('bra', None)
+    query = db.session.query(Bra)
+
+    if depth:
+        returned_entries = query.filter(func.char_length(Bra.id) == depth)
+    elif bra_id:
+        returned_entries = query.filter(Bra.id == bra_id)
+
+    return json.dumps(map(lambda x: x.serialize(), returned_entries))
