@@ -1,96 +1,170 @@
 <link href="/static/css/libs/bootstrap.css" rel="stylesheet">
-
+<link href="/static/css/custom.css" rel="stylesheet">
 <div class="institucional search" ng-app="selector" ng-controller="LocationSelector">
     <h2>Escolha um localidade da lista abaixo ou busque pelo nome</h2>
     <form action="" class="form-dataviva form-inline filter">
         <div class="form-group">
             <ul class="btn-group nav nav-tabs" role="tablist">
-
                 <button type="button" href="#regions" aria-controls="regions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="load_depth_entries(regions)">
                 Regiões
                 </button>
-
                 <button type="button" href="#states" aria-controls="states" role="tab" data-toggle="tab" class="btn btn-default" ng-click="load_depth_entries(states)" ng-click="load_depth_entries(states)">
                 Estados
                 </button>
-
                 <button type="button" href="#mesoregions" aria-controls="mesoregions" role="tab" data-toggle="tab" class="btn btn-default"  ng-click="load_depth_entries(mesoregions)">
                 Mesorregiões
                 </button>
-
                 <button type="button" href="#mircroregions" aria-controls="mircroregions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="load_depth_entries(mircroregions)">
                 Microregiões
                 </button>
-
                 <button type="button" href="#municipality" aria-controls="municipality" role="tab" data-toggle="tab" class="btn btn-default" ng-click="load_depth_entries(municipalities)">
                 Municípios
                 </button>
-
             </ul>
         </div>
         <hr>
-
         <div class="search-items tab-content">
-
             <!-- TAB: REGIONS -->
             <div role="tabpanel" class="tab-pane search-items" id="regions">
                 <div class="form-group">
                     <i class="fa fa-search"></i>
-                    <input id="field-search" type="text" class="busca form-control">
+                    <input type="text"
+                           name="regions_filter"
+                           class="busca form-control"
+                           ng-model="regions.filter_string"
+                           ng-keyup="filter(regions, $event)"
+                           ng-trim="true"
+                           autocomplete="false" />
                 </div>
                 <div class="list-group list-stripped">
-                    <a ng-repeat="loc in regions.entries" href="03-perfil-comercio-internacional.html" class="list-group-item">{$ loc.name $}</a>
+                    <div class="list-group list-stripped">
+                        <div ng-repeat="loc in regions.entries|filter:regions.filter_string" class="list-group-item col-md-12" >
+                            <div class="col-md-1 hidden-xs hidden-sm">
+                                <img src="{$ loc.icon $}" class="loc-flag-icon"/>
+                            </div>
+                            <div class="col-md-8">
+                                {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-default">Selecionar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
             <!-- TAB: STATES -->
             <div role="tabpanel" class="tab-pane search-items" id="states">
                 <div class="form-group">
                     <i class="fa fa-search"></i>
-                    <input id="field-search" type="text" class="busca form-control">
+                    <input type="text"
+                           name="states_filter"
+                           class="busca form-control"
+                           ng-model="states.filter_string"
+                           ng-keyup="filter(states, $event)"
+                           ng-trim="true"
+                           autocomplete="false" />
                 </div>
                 <div class="list-group list-stripped">
-                    <a ng-repeat="loc in states.entries" href="03-perfil-comercio-internacional.html" class="list-group-item">{$ loc.name $}</a>
+                    <div class="list-group list-stripped">
+                        <div ng-repeat="loc in states.entries | filter:states.filter_string" class="list-group-item col-md-12" >
+                            <div class="col-md-1 hidden-xs hidden-sm">
+                                <img src="{$ loc.icon $}" class="loc-flag-icon"/>
+                            </div>
+                            <div class="col-md-8">
+                                {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-default">Selecionar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
             <!-- TAB: MESOREGIONS -->
             <div role="tabpanel" class="tab-pane search-items" id="mesoregions">
                 <div class="form-group">
                     <i class="fa fa-search"></i>
-                    <input id="field-search" type="text" class="busca form-control">
+                    <input type="text"
+                           name="mesoregions_filter"
+                           class="busca form-control"
+                           ng-model="mesoregions.filter_string"
+                           ng-keyup="filter(mesoregions, $event)"
+                           ng-trim="true"
+                           placeholder="Busque pelo nome ou pelo No. IBGE"/>
                 </div>
                 <div class="list-group list-stripped">
-                    <a ng-repeat="loc in mesoregions.entries" href="03-perfil-comercio-internacional.html" class="list-group-item">{$ loc.name $}</a>
+                    <div ng-repeat="loc in mesoregions.entries | filter:mesoregions.filter_string" class="list-group-item col-md-12" >
+                        <div class="col-md-1 hidden-xs hidden-sm">
+                            <img src="{$ loc.icon $}" class="loc-flag-icon"/>
+                        </div>
+                        <div class="col-md-8">
+                            {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default">Selecionar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-
             <!-- TAB: mircroregions -->
             <div role="tabpanel" class="tab-pane search-items" id="mircroregions">
                 <div class="form-group">
                     <i class="fa fa-search"></i>
-                    <input id="field-search" type="text" class="busca form-control">
+                    <input type="text"
+                           name="mircroregions_filter"
+                           class="busca form-control"
+                           ng-model="mircroregions.filter_string"
+                           ng-keyup="filter(mircroregions, $event)"
+                           ng-trim="true"
+                           placeholder="Busque pelo nome ou pelo No. IBGE"/>
                 </div>
                 <div class="list-group list-stripped">
-                    <a ng-repeat="loc in mircroregions.entries" href="03-perfil-comercio-internacional.html" class="list-group-item">{$ loc.name $}</a>
+                    <div class="list-group list-stripped">
+                        <div ng-repeat="loc in mircroregions.entries | filter:mircroregions.filter_string" class="list-group-item col-md-12" >
+                            <div class="col-md-1 hidden-xs hidden-sm">
+                                <img src="{$ loc.icon $}" class="loc-flag-icon"/>
+                            </div>
+                            <div class="col-md-8">
+                                {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-default">Selecionar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
             <!-- TAB: MUNICIPALITY -->
             <div role="tabpanel" class="tab-pane search-items" id="municipality">
                 <div class="form-group">
                     <i class="fa fa-search"></i>
-                    <input id="field-search" type="text" class="busca form-control">
+                    <input type="text"
+                           name="states_filter"
+                           class="busca form-control"
+                           ng-model="municipalities.filter_string"
+                           ng-keyup="filter(municipalities, $event)"
+                           ng-trim="true"
+                           placeholder="Busque pelo nome ou pelo No. IBGE"/>
                 </div>
                 <div class="list-group list-stripped">
-                    <a ng-repeat="loc in municipalities.entries" href="03-perfil-comercio-internacional.html" class="list-group-item">{$ loc.name $}</a>
+                    <div class="list-group list-stripped">
+                        <div ng-repeat="loc in municipalities.entries | filter:municipalities.filter_string" class="list-group-item col-md-12" >
+                            <div class="col-md-1 hidden-xs hidden-sm">
+                                <img src="{$ loc.icon $}" class="loc-flag-icon"/>
+                            </div>
+                            <div class="col-md-8">
+                                {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-default">Selecionar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </form>
 </div>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="/static/js/libs/angular.min.js"></script>
 <script src="/static/js/libs/bootstrap.min.js"></script>

@@ -18,27 +18,40 @@
 
             $scope.regions = {
                 depth_factor: 1,
+                filter_string: '',
                 entries: []
             };
 
             $scope.states = {
                 depth_factor: 3,
+                filter_string: '',
                 entries: []
             };
 
             $scope.mesoregions = {
                 depth_factor: 5,
+                filter_string: '',
                 entries: []
             };
 
             $scope.mircroregions = {
                 depth_factor: 7,
+                filter_string: '',
                 entries: []
             };
 
             $scope.municipalities = {
                 depth_factor: 9,
+                filter_string: '',
                 entries: [],
+            };
+
+            $scope.filter = function(group){
+                if(group.filter_string.length > 2) {
+                    console.log("x: " + group.filter_string);
+                } else {
+                    group.filtered_entries = group.entries;
+                }
             };
 
             $scope.load_depth_entries = function(group){

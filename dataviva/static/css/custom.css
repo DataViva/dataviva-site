@@ -5,3 +5,8 @@ a.selected {
 	color: white !important;
 	font-weight: bold !important;
 }
+
+img.loc-flag-icon {
+	width: 30px;
+	height: 30px;
+}
