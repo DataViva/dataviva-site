@@ -20,4 +20,4 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 # @view_cache.cached(key_prefix=api_cache_key("location"))
 def index():
-    return render_template('index.html')
+    return render_template('index.html', body_class='perfil-estado')
