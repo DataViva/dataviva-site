@@ -5,6 +5,7 @@
 *.prefs
 *.sublime-project
 *.sublime-workspace
+.swp
 db
 dataviva/static/json/coords/*.json
 dataviva/static/json/networks/*.json
