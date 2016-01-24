@@ -26,7 +26,7 @@ from dataviva import __year_range__
 from dataviva.api.stats.util import parse_year
 from dataviva.api.stats.profile_helper import compute_stats
 
-mod = Blueprint('profiles', __name__, url_prefix='/<lang_code>/profiles')
+mod = Blueprint('location', __name__, url_prefix='/<lang_code>/location')
 
 
 @mod.before_request

@@ -3,6 +3,8 @@
 .project
 .pydevproject
 *.prefs
+*.sublime-project
+*.sublime-workspace
 db
 dataviva/static/json/coords/*.json
 dataviva/static/json/networks/*.json

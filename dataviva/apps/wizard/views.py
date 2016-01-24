@@ -14,18 +14,22 @@ def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
 
-@mod.route('/start_session/<session_name>', methods=['GET'])
-def start_session(session_name):
-    wiz = WizTree.get(session_name, None)
-    next_step = get_next_step(wiz, [])
-    ns = {
-        "title": next_step["title"],
-        "options": get_step_options(next_step),
-    }
+@mod.route('/session/<session_name>', methods=['GET'])
+def session(session_name):
+
+    # TEMP - filling out some random questions
+    from hashlib import md5
+
+    questions = map(lambda x: {
+        "id": x,
+        "label": md5(str(x)).hexdigest(),
+        "steps": ("product", "location",),
+    }, range(8))
+
     return jsonify({
         "session_name": session_name,
-        "previous_answers": [],
-        "current_step": ns,
+        "title": "%s title" % session_name,
+        "questions": questions,
     })
 
 
