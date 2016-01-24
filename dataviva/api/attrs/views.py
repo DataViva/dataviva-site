@@ -380,4 +380,7 @@ def location():
     else:
         return Response("You must specify a querying parameter!", status=400)
 
-    return json.dumps(map(lambda x: x.serialize(), returned_entries))
+    return Response(
+        json.dumps(map(lambda x: x.serialize(), returned_entries)),
+        status=(200 if returned_entries.count() else 404)
+    )
