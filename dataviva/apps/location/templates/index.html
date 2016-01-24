@@ -1,5 +1,691 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-zzzzzzzz
+<div class="container">
+        <ol class="breadcrumb">
+            <li><a href="01-index.html">Home</a></li>
+            <li><a href="#">Atividade Econômica</a></li>
+            <li class="active"><span>Teleatendimento<span></span></span></li>
+            </ol>
+            <div class="tit-area" style="background-image: url('static/img/bg-profile-location.jpg')">
+                <div class="row">
+                    <div class="col-xs-15 col-md-offset-4 col-md-11">
+                        <h1>
+                            Minas Gerais
+                            <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar">
+                                (trocar)</a>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="sidebar has-img col-xs-15 col-md-4">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110" width="200" height="150" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
+                        <ul class="nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab">Comércio Internacional</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab">Salário e emprego</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidade Econômica</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#educacao" aria-controls="educacao" role="tab" data-toggle="tab">Educação</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#saude" aria-controls="saude" role="tab" data-toggle="tab">Saúde</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#empresas" aria-controls="empresas" role="tab" data-toggle="tab">Empresas</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="main-content col-xs-15 col-md-11">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="geral">
+                                <div class="mod mod-datainfo">
+                                    <div class="numbers-top smaller">
+                                        <div class="row">
+                                            <div class="col-xs-15 col-sm-2 item">
+                                                <p class="label">PIB</p>
+                                                <div class="number">
+                                                    R$ <strong class="counter">351</strong><small>bilhões</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-15 col-sm-2 item">
+                                                <p class="label">PIB Per Capta</p>
+                                                <div class="number">
+                                                    R$ <strong class="counter">17.9</strong><small>mil</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-15 col-sm-2 item">
+                                                <p class="label">GNI Index</p>
+                                                <div class="number">
+                                                    <strong class="counter">6.8</strong><small>milhões</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-15 col-sm-2 item">
+                                                <p class="label">IDHM</p>
+                                                <div class="number">
+                                                    <strong class="counter">6.8</strong><small>milhões</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-15 col-sm-2 item">
+                                                <p class="label">Esperança de Vida</p>
+                                                <div class="number">
+                                                    <strong class="counter">75.3</strong><small>anos</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-15 col-sm-2 item">
+                                                <p class="label">População Total</p>
+                                                <div class="number">
+                                                    <strong class="counter">17.9</strong><small>milhões</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-15 col-sm-15 year">
+                                                Ano: 2010
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h2>Perfil Geral</h2>
+                                    <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes. Limita-se ao sul e sudoeste com São Paulo, a oeste com o Mato Grosso do Sul, a noroeste com Goiás e Distrito Federal, a norte e nordeste com a Bahia, a leste com o Espírito Santo e a sudeste com o Rio de Janeiro. Seu território é subdividido em 853 municípios, a maior quantidade dentre os estados brasileiros.</p>
+                                    <div class="row">
+                                        <div class="col-xs-15 col-sm-15 col-md-5">
+                                            <h3>Comércio Internacional</h3>
+                                            <div class="table-responsive">
+                                                <table class="table data-2-columns margin-none-bottom">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>
+                                                                Principal Produto por Valor Exportado
+                                                            </th>
+                                                            <td>
+                                                                <p class="label">Minério de Ferro</p>
+                                                                USD <strong class="counter">12.2</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Principal Produto por Valor Exportado
+                                                            </th>
+                                                            <td>
+                                                                <p class="label">China</p>
+                                                                USD <strong class="counter">8.82</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Total de Exportações
+                                                            </th>
+                                                            <td>
+                                                                USD <strong class="counter">29.3</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Total de Importações
+                                                            </th>
+                                                            <td>
+                                                                USD <strong class="counter">11</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                                                    mais detalhes
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-15 col-sm-15 col-md-5">
+                                            <h3>Salário e Emprego</h3>
+                                            <div class="table-responsive">
+                                                <table class="table data-2-columns margin-none-bottom">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>
+                                                                Principal Produto por Valor Exportado
+                                                            </th>
+                                                            <td>
+                                                                <p class="label">Minério de Ferro</p>
+                                                                USD <strong class="counter">12.2</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Principal Produto por Valor Exportado
+                                                            </th>
+                                                            <td>
+                                                                <p class="label">China</p>
+                                                                USD <strong class="counter">8.82</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Total de Exportações
+                                                            </th>
+                                                            <td>
+                                                                USD <strong class="counter">29.3</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Total de Importações
+                                                            </th>
+                                                            <td>
+                                                                USD <strong class="counter">11</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                                                    mais detalhes
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-15 col-sm-15 col-md-5">
+                                            <h3>Oportunidades Econômicas</h3>
+                                            <div class="table-responsive">
+                                                <table class="table data-2-columns margin-none-bottom">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>
+                                                                Principal Produto por Valor Exportado
+                                                            </th>
+                                                            <td>
+                                                                <p class="label">Minério de Ferro</p>
+                                                                USD <strong class="counter">12.2</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Principal Produto por Valor Exportado
+                                                            </th>
+                                                            <td>
+                                                                <p class="label">China</p>
+                                                                USD <strong class="counter">8.82</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Total de Exportações
+                                                            </th>
+                                                            <td>
+                                                                USD <strong class="counter">29.3</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Total de Importações
+                                                            </th>
+                                                            <td>
+                                                                USD <strong class="counter">11</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                                                    mais detalhes
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-15 col-sm-15 col-md-5">
+                                            <h3>Educação</h3>
+                                            <div class="table-responsive">
+                                                <table class="table data-2-columns margin-none-bottom">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>
+                                                                Principal Produto por Valor Exportado
+                                                            </th>
+                                                            <td>
+                                                                <p class="label">Minério de Ferro</p>
+                                                                USD <strong class="counter">12.2</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Principal Produto por Valor Exportado
+                                                            </th>
+                                                            <td>
+                                                                <p class="label">China</p>
+                                                                USD <strong class="counter">8.82</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Total de Exportações
+                                                            </th>
+                                                            <td>
+                                                                USD <strong class="counter">29.3</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Total de Importações
+                                                            </th>
+                                                            <td>
+                                                                USD <strong class="counter">11</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <a href="#educacao" aria-controls="educacao" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                                                    mais detalhes
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-15 col-sm-15 col-md-5">
+                                            <h3>Saúde</h3>
+                                            <div class="table-responsive">
+                                                <table class="table data-2-columns margin-none-bottom">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>
+                                                                Principal Produto por Valor Exportado
+                                                            </th>
+                                                            <td>
+                                                                <p class="label">Minério de Ferro</p>
+                                                                USD <strong class="counter">12.2</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Principal Produto por Valor Exportado
+                                                            </th>
+                                                            <td>
+                                                                <p class="label">China</p>
+                                                                USD <strong class="counter">8.82</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Total de Exportações
+                                                            </th>
+                                                            <td>
+                                                                USD <strong class="counter">29.3</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Total de Importações
+                                                            </th>
+                                                            <td>
+                                                                USD <strong class="counter">11</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <a href="#saude" aria-controls="saude" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                                                    mais detalhes
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-15 col-sm-15 col-md-5">
+                                            <h3>Empresas</h3>
+                                            <div class="table-responsive">
+                                                <table class="table data-2-columns margin-none-bottom">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>
+                                                                Principal Produto por Valor Exportado
+                                                            </th>
+                                                            <td>
+                                                                <p class="label">Minério de Ferro</p>
+                                                                USD <strong class="counter">12.2</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Principal Produto por Valor Exportado
+                                                            </th>
+                                                            <td>
+                                                                <p class="label">China</p>
+                                                                USD <strong class="counter">8.82</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Total de Exportações
+                                                            </th>
+                                                            <td>
+                                                                USD <strong class="counter">29.3</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                Total de Importações
+                                                            </th>
+                                                            <td>
+                                                                USD <strong class="counter">11</strong> <span>bilhões</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <a href="#empresas" aria-controls="empresas" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                                                    mais detalhes
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="comercio-internacional">
+                                <h2>Comércio Internacional</h2>
+                                <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes. Limita-se ao sul e sudoeste com São Paulo, a oeste com o Mato Grosso do Sul, a noroeste com Goiás e Distrito Federal, a norte e nordeste com a Bahia, a leste com o Espírito Santo e a sudeste com o Rio de Janeiro. Seu território é subdividido em 853 municípios, a maior quantidade dentre os estados brasileiros.</p>
+                                <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes.</p>
+                                <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes.</p>
+                                <h3>Estatísticas de Salário e Emprego</h3>
+                                <div class="row">
+                                    <div class="col-xs-15 col-sm-15 col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table data-blue">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Principal Produto
+                                                            <small>por Valor Exportado</small>
+                                                        </th>
+                                                        <th>
+                                                            Principal Destino
+                                                            <small>por Valor Exportado</small>
+                                                        </th>
+                                                        <th>
+                                                            Total de Exportações
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p class="label">Minério de Ferro</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">12.2</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="label">China</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">8.82</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="label">Total de Exportações</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">29.3</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="salario-emprego">
+                                <h2>Salário e Emprego</h2>
+                                <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes. Limita-se ao sul e sudoeste com São Paulo, a oeste com o Mato Grosso do Sul, a noroeste com Goiás e Distrito Federal, a norte e nordeste com a Bahia, a leste com o Espírito Santo e a sudeste com o Rio de Janeiro. Seu território é subdividido em 853 municípios, a maior quantidade dentre os estados brasileiros.</p>
+                                <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes.</p>
+                                <h3>Estatísticas de Salário e Emprego</h3>
+                                <div class="row">
+                                    <div class="col-xs-15 col-sm-15 col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table data-blue">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Principal Produto
+                                                            <small>por Valor Exportado</small>
+                                                        </th>
+                                                        <th>
+                                                            Principal Destino
+                                                            <small>por Valor Exportado</small>
+                                                        </th>
+                                                        <th>
+                                                            Total de Exportações
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p class="label">Minério de Ferro</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">12.2</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="label">China</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">8.82</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="label">Total de Exportações</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">29.3</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="oportunidade-economica">
+                                <h2>Oportunidade Econômica</h2>
+                                <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes. Limita-se ao sul e sudoeste com São Paulo, a oeste com o Mato Grosso do Sul, a noroeste com Goiás e Distrito Federal, a norte e nordeste com a Bahia, a leste com o Espírito Santo e a sudeste com o Rio de Janeiro. Seu território é subdividido em 853 municípios, a maior quantidade dentre os estados brasileiros.</p>
+                                <h3>Estatísticas de Oportunidades Econômicas</h3>
+                                <div class="row">
+                                    <div class="col-xs-15 col-sm-15 col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table data-blue">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Principal Produto
+                                                            <small>por Valor Exportado</small>
+                                                        </th>
+                                                        <th>
+                                                            Principal Destino
+                                                            <small>por Valor Exportado</small>
+                                                        </th>
+                                                        <th>
+                                                            Total de Exportações
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p class="label">Minério de Ferro</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">12.2</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="label">China</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">8.82</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="label">Total de Exportações</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">29.3</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="educacao">
+                                <h2>Educação</h2>
+                                <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes. Limita-se ao sul e sudoeste com São Paulo, a oeste com o Mato Grosso do Sul, a noroeste com Goiás e Distrito Federal, a norte e nordeste com a Bahia, a leste com o Espírito Santo e a sudeste com o Rio de Janeiro. Seu território é subdividido em 853 municípios, a maior quantidade dentre os estados brasileiros.</p>
+                                <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes.</p>
+                                <h3>Estatísticas de Educação</h3>
+                                <div class="row">
+                                    <div class="col-xs-15 col-sm-15 col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table data-blue">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Principal Produto
+                                                            <small>por Valor Exportado</small>
+                                                        </th>
+                                                        <th>
+                                                            Principal Destino
+                                                            <small>por Valor Exportado</small>
+                                                        </th>
+                                                        <th>
+                                                            Total de Exportações
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p class="label">Minério de Ferro</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">12.2</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="label">China</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">8.82</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="label">Total de Exportações</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">29.3</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="saude">
+                                <h2>Saúde</h2>
+                                <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes. Limita-se ao sul e sudoeste com São Paulo, a oeste com o Mato Grosso do Sul, a noroeste com Goiás e Distrito Federal, a norte e nordeste com a Bahia, a leste com o Espírito Santo e a sudeste com o Rio de Janeiro. Seu território é subdividido em 853 municípios, a maior quantidade dentre os estados brasileiros.</p>
+
+                                <h3>Estatísticas de Saúde</h3>
+                                <div class="row">
+                                    <div class="col-xs-15 col-sm-15 col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table data-blue">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Principal Produto
+                                                            <small>por Valor Exportado</small>
+                                                        </th>
+                                                        <th>
+                                                            Principal Destino
+                                                            <small>por Valor Exportado</small>
+                                                        </th>
+                                                        <th>
+                                                            Total de Exportações
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p class="label">Minério de Ferro</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">12.2</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="label">China</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">8.82</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="label">Total de Exportações</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">29.3</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="empresas">
+                                <h2>Empresas</h2>
+                                <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes. Limita-se ao sul e sudoeste com São Paulo, a oeste com o Mato Grosso do Sul, a noroeste com Goiás e Distrito Federal, a norte e nordeste com a Bahia, a leste com o Espírito Santo e a sudeste com o Rio de Janeiro. Seu território é subdividido em 853 municípios, a maior quantidade dentre os estados brasileiros.</p>
+                                <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes.</p>
+                                <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes.</p>
+                                <h3>Estatísticas de Empresas</h3>
+                                <div class="row">
+                                    <div class="col-xs-15 col-sm-15 col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table data-blue">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Principal Produto
+                                                            <small>por Valor Exportado</small>
+                                                        </th>
+                                                        <th>
+                                                            Principal Destino
+                                                            <small>por Valor Exportado</small>
+                                                        </th>
+                                                        <th>
+                                                            Total de Exportações
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p class="label">Minério de Ferro</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">12.2</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="label">China</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">8.82</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="label">Total de Exportações</p>
+                                                            <div class="number">
+                                                                USD <strong class="counter">29.3</strong><span>B</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 {% endblock main_content %}
