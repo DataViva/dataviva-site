@@ -1,5 +1,4 @@
 import os
-from os import environ
 
 # general flask library
 from flask import Flask
@@ -18,6 +17,7 @@ from utils.jinja_helpers import jinja_momentjs, jinja_formatter, jinja_strip_htm
 from flask.ext.mail import Mail
 
 from utils.redis import RedisSessionInterface
+
 
 def get_env_variable(var_name, default=-1):
     try:
@@ -98,6 +98,8 @@ from dataviva.apps.ask.views import mod as ask_module
 from dataviva.apps.rankings.views import mod as rankings_module
 from dataviva.apps.about.views import mod as about_module
 from dataviva.apps.profiles.views import mod as profiles_module
+from dataviva.apps.wizard.views import mod as wizard_module
+
 
 ''' Register these modules as blueprints '''
 app.register_blueprint(attrs_module)
@@ -116,3 +118,4 @@ app.register_blueprint(ask_module)
 app.register_blueprint(rankings_module)
 app.register_blueprint(about_module)
 app.register_blueprint(profiles_module)
+app.register_blueprint(wizard_module)
