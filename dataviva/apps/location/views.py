@@ -3,8 +3,10 @@ from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.models import Ybs
 
-mod = Blueprint('location', __name__, template_folder='templates',
-                url_prefix='/<lang_code>/location', static_folder='static')
+mod = Blueprint('location', __name__,
+                template_folder='templates',
+                url_prefix='/<lang_code>/location',
+                static_folder='static')
 
 
 @mod.url_value_preprocessor
@@ -19,15 +21,4 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    # from dataviva.utils.cached_query import api_cache_key
-    # @view_cache.cached(key_prefix=api_cache_key("location"))
-
-    filters = [
-        Ybs.bra_id == '4mg',
-        Ybs.year == 2010,
-    ]
-
-    PIB = Ybs.query.filter(*filters).all()
-    import pdb; pdb.set_trace()
-
-    return render_template('index.html', body_class='perfil-estado', PIB=PIB)
+    return render_template('index.html', body_class='perfil-estado')
