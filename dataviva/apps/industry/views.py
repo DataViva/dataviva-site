@@ -3,9 +3,11 @@ from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 
 mod = Blueprint('industry', __name__,
-                template_folder='templates/industry',
+                template_folder='templates',
                 url_prefix='/<lang_code>/industry',
                 static_folder='static')
+
+
 
 
 @mod.url_value_preprocessor
@@ -20,4 +22,6 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    return render_template('index.html', body_class='perfil-estado')
+    dic = {'location' : False}
+    return render_template('industry/index.html', body_class='perfil-estado', dic=dic)
+
