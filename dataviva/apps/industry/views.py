@@ -22,6 +22,19 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    dic = {'location' : False}
+    dic = { 'location' : False ,
+            'average_monthly_income' : 371,
+            'salary_mass' : 17.9,
+            'total_jobs' 6.8, 
+            'total_establishments' 6.8,
+            'rca_domestic' : 6.8,
+            'distance' : 75.3,
+            'opportunity_gain' 17.9,
+
+            'occupation_max_number_jobs' : 12.2,
+            'county_max_number_' : 8.82,
+            'occupation_max_monthly_income' : 29.3,
+            'county_max_monthly_income' : 11        
+    }
     return render_template('industry/index.html', body_class='perfil-estado', dic=dic)
 
