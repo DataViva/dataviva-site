@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, g, jsonify, request
+from flask import Blueprint, g, jsonify, request, render_template
 from dataviva.apps.wizard.questions_tree import (
     WizTree,
     get_next_step,
@@ -55,3 +55,9 @@ def submit_answer():
         "previous_answers": prev,
         "current_step": ns,
     })
+
+
+
+@mod.route('/location_selector/', methods=['GET'])
+def location_selector():
+    return render_template("selectors/location.html")
