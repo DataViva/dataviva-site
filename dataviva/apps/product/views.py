@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 
 mod = Blueprint('product', __name__,
-                template_folder='templates/product',
+                template_folder='templates',
                 url_prefix='/<lang_code>/product',
                 static_folder='static')
 
