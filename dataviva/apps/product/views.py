@@ -20,4 +20,33 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    return render_template('product/index.html', body_class='perfil-estado')
+        mock_dict = {
+        'page_nav1':'Home',
+        'page_nav2':'Atividade Economica',
+        'page_nav3':'Produto',
+        'product':'Produto',
+        'background_image':'Imagem de background',
+        'product_image':'Imagem do Produto',
+        'saldo_da_balanca_comercial': 1,
+        'valor_total_exportado': 1,
+        'relacao_peso_liquidoVTE': 1,
+        'valor_total_importado': 1,
+        'relacao_peso_liquidoVTI': 1,
+        'indice_complexidade_produto': 1,
+        'rca_internacional': 1,
+        'distancia_internacional': 1,
+        'ganho_oportunidade_internacional': 1,
+        'year': 9999,
+        'desc': 'Sucinta descricao do produto',
+        'principal_produtoVTE': 'Produto',
+        'principal_produtoVTE_value': 1,
+        'principal_produtoVTI': 'Produto',
+        'principal_produtoVTI_value': 1,
+        'principal_destinoVTE': 'Brasil',
+        'principal_destinoVTE_value': 1,
+        'principal_origemVTI': 'Brasil',
+        'principal_origemVTI_value': 1,
+        'selector_index': 'posicoes',  #posicoes ou secoes
+        'region': 'Regiao' #Brazil for filter test
+    }
+    return render_template('product/index.html', body_class='perfil-estado', data=mock_dict)
