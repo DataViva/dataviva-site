@@ -22,7 +22,11 @@ dict = {
 	'texto_perfil':'Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.',
 	'municipio_por_empregos' : 'Sao Paulo',
 	'num_empregos_principal_municipio' : 1.62 ,
-	'unidade_empregos_principal_municipio' : 'milhares'
+	'unidade_empregos_principal_municipio' : 'milhares',
+	'atividade_por_empregos' : 'atividade x',
+	'valor_atividade_por_empregos': 1.0,
+	'unidade_atividade_por_empregos': 'bilhao'
+
 } 
 
 @mod.route('/')
