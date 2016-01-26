@@ -28,7 +28,7 @@
                 <li role="presentation">
                     <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab">Salário e emprego</a>
                 </li>
-                {%if family %}
+                {%if dic.family %}
                 <li role="presentation">
                     <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidades Economicas</a>
                 </li>
@@ -39,7 +39,7 @@
             <div class="tab-content">
                 {% include "occupation/tab-geral.html" %}
                 {% include "occupation/tab-salario-emprego.html" %}
-                {% if family %}
+                {% if dic.family %}
                     {% include "occupation/tab-oportunidade-economica.html" %}
                 {% endif %}
 
