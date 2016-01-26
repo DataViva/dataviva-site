@@ -20,4 +20,5 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    return render_template('index.html', body_class='perfil-estado')
+	occupation = 'Engenheiros em Computaçāo'
+    return render_template('occupation/index.html', body_class='perfil-estado', occupation = occupation)
