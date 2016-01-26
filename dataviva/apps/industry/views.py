@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-#from dataviva.api.attrs.models import Ybs
 
 mod = Blueprint('industry', __name__,
-                template_folder='templates',
+                template_folder='templates/industry',
                 url_prefix='/<lang_code>/industry',
                 static_folder='static')
 
