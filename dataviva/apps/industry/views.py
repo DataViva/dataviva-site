@@ -31,8 +31,10 @@ def index():
             'distance' : 75.3,
             'opportunity_gain' 17.9,
 
-            'occupation_max_number_jobs' : 12.2,
-            'county_max_number_' : 8.82,
+            'occupation_max_number_jobs_name' : 'Ministério de Ferro',
+            'occupation_max_number_jobs_value' : 12.2,
+            'county_max_number_jobs_name' : 'China',
+            'county_max_number_jobs_value' : 8.82,            
             'occupation_max_monthly_income' : 29.3,
             'county_max_monthly_income' : 11        
     }
