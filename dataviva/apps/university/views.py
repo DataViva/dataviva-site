@@ -11,11 +11,20 @@ mod = Blueprint('university', __name__,
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
-
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 @mod.route('/')
 def index():
-    return render_template('index.html', body_class='perfil-estado')
+    context = {
+        'body_class' : 'perfil-estado', 
+        'university_name' : 'Universidade Federal de Minas Gerais',
+        'enrollment_number' : str(33),
+        'newcomers_number' : str(3.4),
+        'graduates_number' : str(4.02),
+        'year' : 2013
+    }
+    return render_template('index.html', context=context)
+
+
