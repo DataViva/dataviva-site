@@ -28,6 +28,9 @@
                 <li role="presentation">
                     <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab">Comércio Internacional</a>
                 </li>
+
+                {IF POSICAO}
+
                 <li role="presentation">
                     <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidade Econômica</a>
                 </li>
@@ -37,6 +40,9 @@
             <div class="tab-content">
                 {% include "product/tab-geral.html" %}
                 {% include "product/tab-comercio-internacional.html" %}
+
+                {IF POSICAO}
+
                 {% include "product/tab-oportunidade-economica.html" %}
             </div>
         </div>
