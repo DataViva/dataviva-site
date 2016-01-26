@@ -20,27 +20,27 @@ def add_language_code(endpoint, values):
 dic = {
 	#index
 	'occupation' : 'Engenheiros em Computacao', 
-	'texto_perfil':'Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.',
+	'text_profile':'Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.',
 	'family' : True,
 	#header 
-	'renda_media_mensal' : 8,
+	'renda_media_mensal' : 8, #Average monthly income
 	'unidade_renda_media_mensal': 'Milhares',
-	'massa_salarial': 17.9,
+	'massa_salarial': 17.9, #salary mass
 	'unidade_massa_salarial' : 'mil',
-	'total_empregos' : 1.6,
+	'total_empregos' : 1.6, #total employment
 	'unidade_total_empregos' : 'milhares', 
-	'total_estabelecimentos': 6.8,
+	'total_estabelecimentos': 6.8, #total number of establishments
 	'unidade_total_estabelecimentos' : 'milhoes',
 	#tabela responsiva 
 	'municipio_por_empregos' : 'Sao Paulo',
 	'num_empregos_principal_municipio' : 1.62 ,
 	'unidade_empregos_principal_municipio' : 'milhares',
-	'atividade_por_empregos' : 'atividade x',
+	'atividade_por_empregos' : 'atividade x', #activity for job
 	'valor_atividade_por_empregos': 1.0,
 	'unidade_atividade_por_empregos': 'bilhao',
-	'valor_maior_renda_media_mensal': 12.3,
+	'valor_maior_renda_media_mensal': 12.3, #Bigger Average monthly income
 	'unidade_maior_renda_media_mensal': 'bilhoes',
-	'atividade_maior_renda': 'Desenvolvimento Sob Encomenda ',
+	'atividade_maior_renda': 'Desenvolvimento Sob Encomenda ', 
 	'valor_atividade_maior_renda' : 990
 } 
 
