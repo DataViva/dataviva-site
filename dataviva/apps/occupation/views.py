@@ -17,9 +17,11 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
-occupation = 'Engenheiros em Computacao'
-text_perfil_geral = 'Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'
+dict = {
+	'occupation' : 'Engenheiros em Computacao', 
+	'texto_perfil':'Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'
+} 
 
 @mod.route('/')
 def index():
-	return render_template('occupation/index.html', body_class='perfil-estado', occupation = occupation, texto_perfil = text_perfil_geral)
+	return render_template('occupation/index.html', body_class='perfil-estado', dic = dict)#occupation = occupation, texto_perfil = text_perfil_geral, family = True)
