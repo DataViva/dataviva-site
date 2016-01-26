@@ -20,4 +20,4 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    return render_template('index.html', body_class='perfil-estado')
+    return render_template('product/index.html', body_class='perfil-estado')
