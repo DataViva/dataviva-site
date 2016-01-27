@@ -20,33 +20,32 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-        mock_dict = {
-        'page_nav1':'Home',
-        'page_nav2':'Atividade Economica',
-        'page_nav3':'Produto',
-        'product':'Produto',
+    context = {
+        'name':'Produto',
         'background_image':'Imagem de background',
-        'product_image':'Imagem do Produto',
-        'saldo_da_balanca_comercial': 1,
-        'valor_total_exportado': 1,
-        'relacao_peso_liquidoVTE': 1,
-        'valor_total_importado': 1,
-        'relacao_peso_liquidoVTI': 1,
-        'indice_complexidade_produto': 1,
-        'rca_internacional': 1,
-        'distancia_internacional': 1,
+        'portrait':'Imagem do Produto',
+        'trade_balance': 1,
+        'total_value_exp': 1,
+        'rel_net_weight_tve': 1,
+        'total_value_imp': 1,
+        'rel_net_weight_tvi': 1,
+        'prod_complex_index': 1,
+        'rca_international': 1,
+        'international_distance': 1,
         'ganho_oportunidade_internacional': 1,
         'year': 9999,
-        'desc': 'Sucinta descricao do produto',
-        'principal_produtoVTE': 'Produto',
-        'principal_produtoVTE_value': 1,
-        'principal_produtoVTI': 'Produto',
-        'principal_produtoVTI_value': 1,
-        'principal_destinoVTE': 'Brasil',
-        'principal_destinoVTE_value': 1,
-        'principal_origemVTI': 'Brasil',
-        'principal_origemVTI_value': 1,
+        'description': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',
+        'main_munic_total_exp': 'Produto',
+        'main_munic_total_exp_value': 1,
+        'main_munic_total_imp': 'Produto',
+        'main_munic_total_imp_value': 1,
+        'main_destination_total_exp': 'Brasil',
+        'main_destination_total_exp_value': 1,
+        'main_source_total_imp': 'Brasil',
+        'main_source_total_imp_value': 1,
+        'desc_international_trade': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',
+        'desc_economic_opp': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',
         'selector_index': 'posicoes',  #posicoes ou secoes
         'region': 'Regiao' #Brazil for filter test
     }
-    return render_template('product/index.html', body_class='perfil-estado', data=mock_dict)
+    return render_template('product/index.html', body_class='perfil-estado', context=context)
