@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-15 year">
-                    Ano: 2010
+                    Ano: {{context.year}}
                 </div>
             </div>
         </div>
@@ -62,6 +62,7 @@
                                     Município com maior renda média mensal
                                 </th>
                                 <td>
+                                    <p class = "label">{{context.county_bigger_average_monsthly_income}}</p>
                                     USD <strong class="counter">{{context.bigger_average_monsthly_income}}</strong> <span>{{context.bigger_average_monsthly_income_unity}}</span>
                                 </td>
                             </tr>
@@ -70,7 +71,8 @@
                                     Atividade com maior renda média mensal
                                 </th>
                                 <td>
-                                    {{context.activity_higher_income}}<strong class="counter">{{context.value_activity_higher_income}}</strong> <span>empregos</span>
+                                    <p class = "label">{{context.activity_higher_income}}</p>
+                                    <strong class="counter">{{context.value_activity_higher_income}}</strong> <span>empregos</span>
                                 </td>
                             </tr>
                         </tbody>
