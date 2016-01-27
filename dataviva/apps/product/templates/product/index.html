@@ -5,22 +5,22 @@
 
 <div class="container">
     <ol class="breadcrumb">
-        <li><a href="01-index.html">{{ data.page_nav1 }}</a></li>
-        <li><a href="#">{{ data.page_nav2 }}</a></li>
-        <li class="active"><span>{{ data.page_nav3 }}<span></span></span></li>
+        <li><a href="01-index.html">Home</a></li>
+        <li><a href="#">Atividade Econômica</a></li>
+        <li class="active"><span>Produto<span></span></span></li>
     </ol>
     <div class="tit-area" style="background-image: url('{{ background_image }}')">
         <div class="row">
             <div class="col-xs-15 col-md-offset-4 col-md-11">
                 <h1>
-                    {{ data.product}} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
+                    {{ context.name}} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
                 </h1>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="sidebar has-img col-xs-15 col-md-4">
-            <iframe src={{ data.product_image }} width="200" height="150" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
+            <iframe src="{{ context.portrait }}" width="200" height="150" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active">
                     <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
@@ -29,7 +29,7 @@
                     <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab">Comércio Internacional</a>
                 </li>
 
-                {% if data.selector_index == 'posicoes' %}
+                {% if context.selector_index == 'posicoes' %}
 
                     <li role="presentation">
                         <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidade Econômica</a>
@@ -43,7 +43,7 @@
                 {% include "product/tab-geral.html" %}
                 {% include "product/tab-comercio-internacional.html" %}
 
-                {% if data.selector_index == 'posicoes' %}
+                {% if context.selector_index == 'posicoes' %}
 
                     {% include "product/tab-oportunidade-economica.html" %}
 
