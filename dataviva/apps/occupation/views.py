@@ -41,7 +41,7 @@ context = {
 	'num_activity_for_job': 1.0, #valor_atividade_por_empregos
 	'activity_for_job_unit': unicode('bilhāo','utf8'), #unidade_atividade_por_empregos
 	'county_bigger_average_monsthly_income': unicode('Sāo Paulo', 'utf8'),
-	'bigger_average_monsthly_income': 12.3, #MUNICIPO Valor_maior_renda_media_mensal
+	'bigger_average_monsthly_income': 12.3, #Valor_maior_renda_media_mensal
 	'bigger_average_monsthly_income_unity': unicode('bilhões','utf-8'),
 	'activity_higher_income': 'Desenvolvimento Sob Encomenda ',  #atividade_maior_renda
 	'value_activity_higher_income' : 990 
