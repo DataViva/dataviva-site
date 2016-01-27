@@ -57,7 +57,8 @@ def index():
                 'county_max_monthly_income_name' : unicode('China2', 'utf8'),
                 'county_max_monthly_income_value' : 11, 
                 'text_profile' : unicode('Texto de perfil para Supermercados.', 'utf8'),
-                'text_salary_job' : unicode('Texto para Salários e empregos', 'utf8')       
+                'text_salary_job' : unicode('Texto para Salários e empregos', 'utf8'),
+                'text_economic_opportunity' : unicode('Texto para Oportunidades Econômicas', 'utf8')
     }
 
 
