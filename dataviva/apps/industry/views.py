@@ -20,23 +20,36 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+'''
+ano
+imagens 
+
+resolver ascci html
+''' 
+
+
+
+
 @mod.route('/')
 def index():
-    dic = { 'location' : False ,
+    dic = { 'location' : True ,
+            'year' : 2010,
+            'background_image':  'static/img/bg-profile-location.jpg',  
             'average_monthly_income' : 371,
             'salary_mass' : 17.9,
-            'total_jobs' 6.8, 
-            'total_establishments' 6.8,
+            'total_jobs' : 6.8, 
+            'total_establishments' : 6.8,
             'rca_domestic' : 6.8,
             'distance' : 75.3,
-            'opportunity_gain' 17.9,
+            'opportunity_gain' : 17.9,
 
-            'occupation_max_number_jobs_name' : 'Ministério de Ferro',
+            'occupation_max_number_jobs_name' : 'Ministerio de Ferro',
             'occupation_max_number_jobs_value' : 12.2,
             'county_max_number_jobs_name' : 'China',
             'county_max_number_jobs_value' : 8.82,            
             'occupation_max_monthly_income' : 29.3,
-            'county_max_monthly_income' : 11        
+            'county_max_monthly_income' : 11, 
+            'text_profile' : 'Texto de perfil para Supermercados.'       
     }
     return render_template('industry/index.html', body_class='perfil-estado', dic=dic)
 
