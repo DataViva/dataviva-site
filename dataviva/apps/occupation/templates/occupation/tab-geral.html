@@ -5,25 +5,25 @@
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Renda Média Mensal</p>
                     <div class="number">
-                        R$ <strong class="counter">{{dic.average_monthly_income}}</strong><small>{{dic.average_monthly_income_unity}}</small>
+                        R$ <strong class="counter">{{context.average_monthly_income}}</strong><small>{{context.average_monthly_income_unity}}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Massa Salarial</p>
                     <div class="number">
-                        R$ <strong class="counter">{{dic.salary_mass}}</strong><small>{{dic.salary_mass_unity}}</small>
+                        R$ <strong class="counter">{{context.salary_mass}}</strong><small>{{context.salary_mass_unity}}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Total de Empregos</p>
                     <div class="number">
-                        <strong class="counter">{{dic.total_employment}}</strong><small>{{dic.total_employment_unity}}</small>
+                        <strong class="counter">{{context.total_employment}}</strong><small>{{context.total_employment_unity}}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Total de Estabelecimentos</p>
                     <div class="number">
-                        <strong class="counter">{{dic.total_establishments}}</strong><small>{{dic.total_establishments_unity}}</small>
+                        <strong class="counter">{{context.total_establishments}}</strong><small>{{context.total_establishments_unity}}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-15 year">
@@ -32,7 +32,7 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>{{ dic.text_profile}}</p>
+        <p>{{ context.text_profile}}</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Salário e Emprego</h3>
@@ -44,8 +44,8 @@
                                     Principal Município por Empregos
                                 </th>
                                 <td>
-                                    <p class="label">{{dic.county_for_jobs}}</p>
-                                    <strong class="counter">{{dic.num_jobs_county}}</strong> <span>{{dic.jobs_county_unity}} de empregos</span>
+                                    <p class="label">{{context.county_for_jobs}}</p>
+                                    <strong class="counter">{{context.num_jobs_county}}</strong> <span>{{context.jobs_county_unity}} de empregos</span>
                                 </td>
                             </tr>
                             <tr>
@@ -53,8 +53,8 @@
                                     Principal Atividade por Empregos
                                 </th>
                                 <td>
-                                    <p class="label">{{dic.activity_for_job}}</p>
-                                    USD <strong class="counter">{{dic.num_activity_for_job}}</strong> <span>{{dic.activity_for_job_unit}}</span>
+                                    <p class="label">{{context.activity_for_job}}</p>
+                                    USD <strong class="counter">{{context.num_activity_for_job}}</strong> <span>{{context.activity_for_job_unit}}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -62,7 +62,7 @@
                                     Município com maior renda média mensal
                                 </th>
                                 <td>
-                                    USD <strong class="counter">{{dic.bigger_average_monsthly_income}}</strong> <span>{{dic.bigger_average_monsthly_income_unity}}</span>
+                                    USD <strong class="counter">{{context.bigger_average_monsthly_income}}</strong> <span>{{context.bigger_average_monsthly_income_unity}}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -70,7 +70,7 @@
                                     Atividade com maior renda média mensal
                                 </th>
                                 <td>
-                                    {{dic.activity_higher_income}}<strong class="counter">{{dic.value_activity_higher_income}}</strong> <span>empregos</span>
+                                    {{context.activity_higher_income}}<strong class="counter">{{context.value_activity_higher_income}}</strong> <span>empregos</span>
                                 </td>
                             </tr>
                         </tbody>

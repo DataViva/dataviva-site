@@ -17,10 +17,11 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
-dicionario = {
+context = {
 	#index
-	'occupation' : 'Engenheiros em Computacao', 
-	'text_profile':'Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.',
+	'occupation' : unicode('Engenheiros em Computaçāo', 'utf8') ,
+	'text_profile': unicode('Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'),
+	'background_image': unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
 	'family' : True,
 	#header 
 	'average_monthly_income' : 8, #'renda_media_mensal' 
@@ -37,16 +38,16 @@ dicionario = {
 	'jobs_county_unity' : 'milhares', #'unidade_empregos_principal_municipio'
 	'activity_for_job' : 'atividade x', #atividade_por_empregos
 	'num_activity_for_job': 1.0, #valor_atividade_por_empregos
-	'activity_for_job_unit': 'bilhao', #unidade_atividade_por_empregos
-	'bigger_average_monsthly_income': 12.3, #Bigger Average monthly income valor_maior_renda_media_mensal
-	'bigger_average_monsthly_income_unity': 'bilhoes',
+	'activity_for_job_unit': unicode('bilhāo','utf8'), #unidade_atividade_por_empregos
+	'bigger_average_monsthly_income': 12.3, #MUNICIPO Valor_maior_renda_media_mensal
+	'bigger_average_monsthly_income_unity': unicode('bilhões','utf-8'),
 	'activity_higher_income': 'Desenvolvimento Sob Encomenda ',  #atividade_maior_renda
 	'value_activity_higher_income' : 990 #
 } 
 
 @mod.route('/')
 def index():
-	return render_template('occupation/index.html', body_class='perfil-estado', dic = dicionario)
+	return render_template('occupation/index.html', body_class='perfil-estado', context=context)
 
 
 	

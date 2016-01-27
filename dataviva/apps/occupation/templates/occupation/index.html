@@ -6,14 +6,14 @@
 <div class="container">
     <ol class="breadcrumb">
         <li><a href="01-index.html">Home</a></li>
-        <li><a href="#">Ocupaçāo</a></li>
-        <li class="active"><span>{{dic.occupation}}<span></span></span></li>
+        <li><a href="#">Atividade Econômica</a></li>
+        <li class="active"><span>Teleatendimento<span></span></span></li>
     </ol>
-    <div class="tit-area" style="background-image: url('static/img/bg-profile-location.jpg')">
+    <div class="tit-area" style="background-image: url({{context.background_image}})">
         <div class="row">
             <div class="col-xs-15 col-md-offset-4 col-md-11">
                 <h1>
-                    {{dic.occupation}} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
+                    {{context.occupation}} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
                 </h1>
             </div>
         </div>
@@ -28,9 +28,9 @@
                 <li role="presentation">
                     <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab">Salário e emprego</a>
                 </li>
-                {%if dic.family %}
+                {%if context.family %}
                 <li role="presentation">
-                    <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidades Economicas</a>
+                    <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidades Econômicas</a>
                 </li>
                 {%endif%}
             </ul>
@@ -39,7 +39,7 @@
             <div class="tab-content">
                 {% include "occupation/tab-geral.html" %}
                 {% include "occupation/tab-salario-emprego.html" %}
-                {% if dic.family %}
+                {% if context.family %}
                     {% include "occupation/tab-oportunidade-economica.html" %}
                 {% endif %}
 
