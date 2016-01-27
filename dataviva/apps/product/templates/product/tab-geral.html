@@ -6,61 +6,61 @@
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Saldo da Balança Comercial</p>
                     <div class="number">
-                        R$ <strong class="counter">{{ data.saldo_da_balanca_comercial }}</strong><small>bilhões</small>
+                        R$ <strong class="counter">{{ context.trade_balance }}</strong><small>bilhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Valor Total Exportado</p>
                     <div class="number">
-                        R$ <strong class="counter">{{ data.valor_total_exportado }}</strong><small>mil</small>
+                        R$ <strong class="counter">{{ context.total_value_exp }}</strong><small>mil</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Relação Peso Líquido(kg)/Valor Total Exportado</p>
                     <div class="number">
-                        <strong class="counter">{{ data.relacao_peso_liquidoVTE }}</strong><small>milhões</small>
+                        <strong class="counter">{{ context.rel_net_weight_tve }}</strong><small>milhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Valor Total Importado</p>
                     <div class="number">
-                        <strong class="counter">{{ data.valor_total_importado }}</strong><small>milhões</small>
+                        <strong class="counter">{{ context.total_value_imp }}</strong><small>milhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Relação Peso Líquido(kg)/Valor Total Importado</p>
                     <div class="number">
-                        <strong class="counter">{{ data.relacao_peso_liquidoVTI }}</strong><small>anos</small>
+                        <strong class="counter">{{ context.rel_net_weight_tvi }}</strong><small>anos</small>
                     </div>
                 </div>
 
-                {% if data.selector_index == 'posicoes' %}
+                {% if context.selector_index == 'posicoes' %}
 
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Índice de Complexidade do Produto</p>
                     <div class="number">
-                        <strong class="counter">{{ data.indice_complexidade_produto }}</strong><small>milhões</small>
+                        <strong class="counter">{{ context.prod_complex_index }}</strong><small>milhões</small>
                     </div>
                 </div>
 
-                    {% if data.region and data.region != 'Brazil' %}
+                    {% if context.region and context.region != 'Brazil' %}
 
                     <div class="col-xs-15 col-sm-2 item">
                         <p class="label">RCA internacional</p>
                         <div class="number">
-                            <strong class="counter">{{ data.rca_internacional }}</strong><small>milhões</small>
+                            <strong class="counter">{{ context.rca_international }}</strong><small>milhões</small>
                         </div>
                     </div>
                     <div class="col-xs-15 col-sm-2 item">
                         <p class="label">Distância internacional</p>
                         <div class="number">
-                            <strong class="counter">{{ data.distancia_internacional }}</strong><small>milhões</small>
+                            <strong class="counter">{{ context.international_distance }}</strong><small>milhões</small>
                         </div>
                     </div>
                     <div class="col-xs-15 col-sm-2 item">
                         <p class="label">Ganho de Oportunidade internacional</p>
                         <div class="number">
-                            <strong class="counter">{{ data.ganho_oportunidade_internacional }}</strong><small>milhões</small>
+                            <strong class="counter">{{ context.ganho_oportunidade_internacional }}</strong><small>milhões</small>
                         </div>
                     </div>
 
@@ -69,13 +69,13 @@
                 {% endif %}
 
                 <div class="col-xs-15 col-sm-15 year">
-                    Ano: {{ data.year}}
+                    Ano: {{ context.year}}
                 </div>
             </div>
         </div>
 
         <h2>Perfil Geral</h2>
-        <p>{{ data.desc }}</p>
+        <p>{{ context.description }}</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Comércio Internacional</h3>
@@ -84,20 +84,20 @@
                         <tbody>
                             <tr>
                                 <th>
-                                    Principal Produto por valor total exportado
+                                    Principal Município por valor total exportado
                                 </th>
                                 <td>
-                                    <p class="label">{{ data.principal_produtoVTE }}</p>
-                                    USD <strong class="counter">{{ data.principal_produtoVTE_value }}</strong> <span>bilhões</span>
+                                    <p class="label">{{ context.main_munic_total_exp }}</p>
+                                    USD <strong class="counter">{{ context.main_munic_total_exp_value }}</strong> <span>bilhões</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Principal Produto por valor total importado
+                                    Principal Município por valor total importado
                                 </th>
                                 <td>
-                                    <p class="label">{{ data.principal_produtoVTI}}</p>
-                                    USD <strong class="counter">{{ data.principal_produtoVTI_value }}</strong> <span>bilhões</span>
+                                    <p class="label">{{ context.main_munic_total_imp}}</p>
+                                    USD <strong class="counter">{{ context.main_munic_total_imp_value }}</strong> <span>bilhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -105,8 +105,8 @@
                                     Principal Destino por valor total exportado
                                 </th>
                                 <td>
-                                    <p class="label">{{ data.principal_destinoVTE }}</p>
-                                    USD <strong class="counter">{{ data.principal_destinoVTE_value }}</strong> <span>bilhões</span>
+                                    <p class="label">{{ context.main_destination_total_exp }}</p>
+                                    USD <strong class="counter">{{ context.main_destination_total_exp_value }}</strong> <span>bilhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -114,8 +114,8 @@
                                     Principal Origem por valor total importado
                                 </th>
                                 <td>
-                                    <p class="label">{{ data.principal_origemVTI }}</p>
-                                    USD <strong class="counter">{{ data.principal_origemVTI_value }}</strong> <span>bilhões</span>
+                                    <p class="label">{{ context.main_source_total_imp }}</p>
+                                    USD <strong class="counter">{{ context.main_source_total_imp_value }}</strong> <span>bilhões</span>
                                 </td>
                             </tr>
                         </tbody>
