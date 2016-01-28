@@ -12,18 +12,22 @@
                                 Ocupação
                                 <small>com maior número de empregos</small>
                             </th>
-                            <th>
-                                Município
-                                <small>com maior número de empregos</small>
-                            </th>
+                            {%if context.county %}
+                                <th>
+                                    Município
+                                    <small>com maior número de empregos</small>
+                                </th>
+                            {% endif %}
                             <th>
                                 Ocupação
                                 <small>com maior renda média mensal</small>
                             </th>
-                            <th>
-                                Município
-                                <small>com maior renda média mensal</small>
-                            </th>                            
+                            {%if context.county %}
+                                <th>
+                                    Município
+                                    <small>com maior renda média mensal</small>
+                                </th> 
+                            {% endif %}                           
                         </tr>
                     </thead>
                     <tbody>
@@ -34,24 +38,28 @@
                                     USD <strong class="counter">{{context.occupation_max_number_jobs_value}}</strong><span>B</span>
                                 </div>
                             </td>
-                            <td>
-                                <p class="label">{{context.county_max_number_jobs_name}}</p>
-                                <div class="number">
-                                    USD <strong class="counter">{{context.county_max_number_jobs_value}}</strong><span>B</span>
-                                </div>
-                            </td>
+                            {%if context.county %}
+                                <td>
+                                    <p class="label">{{context.county_max_number_jobs_name}}</p>
+                                    <div class="number">
+                                        USD <strong class="counter">{{context.county_max_number_jobs_value}}</strong><span>B</span>
+                                    </div>
+                                </td>
+                            {% endif %}    
                             <td>
                                 <p class="label">{{context.occupation_max_monthly_income_name}}</p>
                                 <div class="number">
                                     USD <strong class="counter">{{context.occupation_max_monthly_income_value}}</strong><span>B</span>
                                 </div>
                             </td>
-                            <td>
-                                <p class="label">{{context.county_max_monthly_income_name}}</p>
-                                <div class="number">
-                                    USD <strong class="counter">{{context.county_max_monthly_income_value}}</strong><span>B</span>
-                                </div>
-                            </td>
+                            {%if context.county %}
+                                <td>
+                                    <p class="label">{{context.county_max_monthly_income_name}}</p>
+                                    <div class="number">
+                                        USD <strong class="counter">{{context.county_max_monthly_income_value}}</strong><span>B</span>
+                                    </div>
+                                </td>
+                            {% endif %}
                         </tr>
                     </tbody>
                 </table>

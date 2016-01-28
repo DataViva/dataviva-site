@@ -71,15 +71,17 @@
                                     USD <strong class="counter">{{context.occupation_max_number_jobs_value}}</strong> <span>bilhões</span>
                                 </td>
                             </tr>
-                            <tr>
-                                <th>
-                                    Município com maior número de empregos
-                                </th>
-                                <td>
-                                    <p class="label">{{context.county_max_number_jobs_name}}</p>
-                                    USD <strong class="counter">{{context.county_max_number_jobs_value}}</strong> <span>bilhões</span>
-                                </td>
-                            </tr>
+                            {% if context.county %}
+                                <tr>
+                                    <th>
+                                        Município com maior número de empregos
+                                    </th>
+                                    <td>
+                                        <p class="label">{{context.county_max_number_jobs_name}}</p>
+                                        USD <strong class="counter">{{context.county_max_number_jobs_value}}</strong> <span>bilhões</span>
+                                    </td>
+                                </tr>
+                            {% endif %}
                             <tr>
                                 <th>
                                     Ocupação com maior renda média mensal
@@ -89,15 +91,17 @@
                                     USD <strong class="counter">{{context.occupation_max_monthly_income_value}}</strong> <span>bilhões</span>
                                 </td>
                             </tr>
-                            <tr>
-                                <th>
-                                    Município com maior renda média mensal
-                                </th>
-                                <td>
-                                    <p class="label">{{context.county_max_monthly_income_name}}</p>
-                                    USD <strong class="counter">{{context.county_max_monthly_income_value}}</strong> <span>bilhões</span>
-                                </td>
-                            </tr>
+                            {% if context.county %}
+                                <tr>
+                                    <th>
+                                        Município com maior renda média mensal
+                                    </th>
+                                    <td>
+                                        <p class="label">{{context.county_max_monthly_income_name}}</p>
+                                        USD <strong class="counter">{{context.county_max_monthly_income_value}}</strong> <span>bilhões</span>
+                                    </td>
+                                </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                     <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
