@@ -1,0 +1,61 @@
+<div role="tabpanel" class="tab-pane" id="salario-emprego">
+    <h2>Salário e Emprego</h2>
+    <p>{{context.text_salario_e_emprego}}</p>
+    <h3>Estatísticas de Salário e Emprego</h3>
+    <div class="row">
+        <div class="col-xs-15 col-sm-15 col-md-12">
+            <div class="table-responsive">
+                <table class="table data-blue">
+                    <thead>
+                        <tr>
+                            <th>
+                                Principal Município
+                                <small>por Empregos</small>
+                            </th>
+                            <th>
+                                Principal Atividade
+                                <small>por Empregos</small>
+                            </th>
+                            <th>
+                                Município
+                                <small>com maior renda média mensal</small>
+                            </th>
+                            <th>
+                                Atividade
+                                <small>com maior renda média mensal</small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p class="label">{{context.county_for_jobs}}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{context.num_jobs_county}}</strong><span>B</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{context.activity_for_job}}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{context.num_activity_for_job}}</strong><span>B</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{context.county_bigger_average_monsthly_income}}</p>
+                                <div class="number">
+                                    <strong class="counter">{{context.bigger_average_monsthly_income}}</strong><span>EMPREGOS</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{context.activity_higher_income}}</p>
+                                <div class="number">
+                                    <strong class="counter">{{context.value_activity_higher_income}}</strong><span>EMPREGOS</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
