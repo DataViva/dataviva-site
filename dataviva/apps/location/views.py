@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.attrs.models import Ybs
 
 mod = Blueprint('location', __name__,
                 template_folder='templates',
@@ -21,4 +20,4 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    return render_template('index.html', body_class='perfil-estado')
+    return render_template('location/index.html', body_class='perfil-estado')
