@@ -1,0 +1,91 @@
+<div role="tabpanel" class="tab-pane active" id="geral">
+    <div class="mod mod-datainfo">
+        <div class="numbers-top smaller">
+            <div class="row">
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de matrículas</p>
+                    <div class="number">
+                        <strong class="counter">{{context.indicador01}}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de turmas</p>
+                    <div class="number">
+                        <strong class="counter">{{context.indicador02}}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de escolas</p>
+                    <div class="number">
+                        <strong class="counter">{{context.indicador03}}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Tamanho médio das turmas</p>
+                    <div class="number">
+                        <strong class="counter">{{context.indicador04}}</strong><small>alunos</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Média de idade</p>
+                    <div class="number">
+                        <strong class="counter">{{context.indicador05}}</strong><small>anos</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-15 year">
+                    Ano: {{context.anoPrincipal}}
+                </div>
+            </div>
+        </div>
+        <h2>Perfil Geral</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tellus magna, consectetur eu convallis sed, malesuada sed ipsum. Integer ligula sapien, ullamcorper id tristique eu, ullamcorper eget eros. Maecenas pretium consectetur tempus. Nam blandit vestibulum justo. Etiam quis dignissim magna, at lacinia enim. Mauris fermentum blandit dui ac pellentesque. Vivamus eget ullamcorper eros. Mauris in feugiat est. Suspendisse venenatis tincidunt tempor. Maecenas ut est id libero rutrum feugiat. Mauris at convallis odio.</p>
+        <div class="row">
+            <div class="col-xs-15 col-sm-15 col-md-5">
+                <h3>Matrículas</h3>
+                <div class="table-responsive">
+                    <table class="table data-2-columns margin-none-bottom">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Principal Escola por Número de Alunos Matriculados
+                                </th>
+                                <td>
+                                    <p class="label">{{context.indicador06}}</p>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Município por Número de Alunos Matriculados
+                                </th>
+                                <td>
+                                    <p class="label">{{context.indicador07}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Escola com Menor Tamanho Médio das Turmas
+                                </th>
+                                <td>
+                                    <p class="label">{{context.indicador08}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Escola com Maior Tamanho Médio das Turmas
+                                </th>
+                                <td>
+                                    <p class="label">{{context.indicador09}}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#matricula" aria-controls="matricula" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                        mais detalhes
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
