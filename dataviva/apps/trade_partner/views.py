@@ -24,14 +24,16 @@ context = {
 	'background_image': unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
 	'year' : 2010,
 	#header 
-	'average_monthly_income' : 8, #'renda_media_mensal' 
-	'average_monthly_income_unity' : 'Milhares', #'unidade_renda_media_mensal'
-	'salary_mass': 17.9, #'massa_salarial'
-	'salary_mass_unity' : 'mil',
-	'total_employment' : 1.6, #total de empregos
-	'total_employment_unity' : 'milhares', 
-	'total_establishments' : 6.8, #'total_estabelecimentos'
-	'total_establishments_unity' : 'milhares', #'unidade_total_estabelecimentos' 
+	'trade_balance' : 80, #balanca comercial 
+	'trade_balance_unity' : 'Bilhoes', 
+	'total_exported': 17.9, #'total exportado
+	'total_exported_unity' : 'milhoes',
+	'weight_exported_value' : 1.6, #pelo/valor exportado
+	'weight_exported_value_unity' : 'milhares', 
+	'total_imported': 17.9, #'total exportado
+	'total_imported_unity' : 'milhoes',
+	'weight_imported_value' : 1.6, #pelo/valor exportado
+	'weight_imported_value_unity' : 'milharess', 
 	#tab-geral
 	'county_for_jobs': unicode('Sāo Paulo', 'utf8'), #'municipio_por_empregos' 
 	'num_jobs_county' : 1.62 , #num_empregos_principal_municipio

@@ -3,27 +3,33 @@
         <div class="numbers-top smaller">
             <div class="row">
                 <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Renda Média Mensal</p>
+                    <p class="label">Saldo da Balança Comercial</p>
                     <div class="number">
-                        R$ <strong class="counter">{{context.average_monthly_income}}</strong><small>{{context.average_monthly_income_unity}}</small>
+                        R$ <strong class="counter">{{context.trade_balance}}</strong><small>{{context.trade_balance_unity}}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Massa Salarial</p>
+                    <p class="label">Valor Total Exportado</p>
                     <div class="number">
-                        R$ <strong class="counter">{{context.salary_mass}}</strong><small>{{context.salary_mass_unity}}</small>
+                        R$ <strong class="counter">{{context.total_exported}}</strong><small>{{context.total_exported_unity}}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Total de Empregos</p>
+                    <p class="label">Relação Peso Líquido(kg)/ Valor Total Exportado</p>
                     <div class="number">
-                        <strong class="counter">{{context.total_employment}}</strong><small>{{context.total_employment_unity}}</small>
+                        <strong class="counter">{{context.weight_exported_value}}</strong><small>{{context.weight_exported_value_unity}}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Total de Estabelecimentos</p>
+                    <p class="label">Valor Total Importado</p>
                     <div class="number">
-                        <strong class="counter">{{context.total_establishments}}</strong><small>{{context.total_establishments_unity}}</small>
+                        R$ <strong class="counter">{{context.total_imported}}</strong><small>{{context.total_imported_unity}}</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Relação Peso Líquido(kg)/ Valor Total Importado</p>
+                    <div class="number">
+                        <strong class="counter">{{context.weight_imported_value}}</strong><small>{{context.weight_imported_value_unity}}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-15 year">
@@ -35,13 +41,13 @@
         <p>{{ context.text_profile}}</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
-                <h3>Salário e Emprego</h3>
+                <h3>Comércio Internacional</h3>
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
                         <tbody>
                             <tr>
                                 <th>
-                                    Principal Município por Empregos
+                                    Principal Município por Valor Total Exportado
                                 </th>
                                 <td>
                                     <p class="label">{{context.county_for_jobs}}</p>
@@ -50,7 +56,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    Principal Atividade por Empregos
+                                    Principal Município por Valor Total Importado
                                 </th>
                                 <td>
                                     <p class="label">{{context.activity_for_job}}</p>
@@ -59,7 +65,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    Município com maior renda média mensal
+                                    Principal Produto por Valor Total Exportado
                                 </th>
                                 <td>
                                     <p class = "label">{{context.county_bigger_average_monsthly_income}}</p>
@@ -68,7 +74,25 @@
                             </tr>
                             <tr>
                                 <th>
-                                    Atividade com maior renda média mensal
+                                    Principal Produto por Valor Total Importado
+                                </th>
+                                <td>
+                                    <p class = "label">{{context.activity_higher_income}}</p>
+                                    <strong class="counter">{{context.value_activity_higher_income}}</strong> <span>empregos</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Produto com maior Saldo da Balança Comercial
+                                </th>
+                                <td>
+                                    <p class = "label">{{context.activity_higher_income}}</p>
+                                    <strong class="counter">{{context.value_activity_higher_income}}</strong> <span>empregos</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Produto com menor Saldo da Balança Comercial
                                 </th>
                                 <td>
                                     <p class = "label">{{context.activity_higher_income}}</p>
@@ -77,7 +101,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                    <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
                         mais detalhes
                     </a>
                 </div>
