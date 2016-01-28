@@ -1,0 +1,130 @@
+<div role="tabpanel" class="tab-pane active" id="geral">
+    <div class="mod mod-datainfo">
+        <div class="numbers-top smaller">
+            <div class="row">
+
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Saldo da Balança Comercial</p>
+                    <div class="number">
+                        R$ <strong class="counter">{{ context.trade_balance }}</strong><small>bilhões</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Valor Total Exportado</p>
+                    <div class="number">
+                        R$ <strong class="counter">{{ context.total_value_exp }}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Relação Peso Líquido(kg)/Valor Total Exportado</p>
+                    <div class="number">
+                        <strong class="counter">{{ context.rel_net_weight_tve }}</strong><small>milhões</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Valor Total Importado</p>
+                    <div class="number">
+                        <strong class="counter">{{ context.total_value_imp }}</strong><small>milhões</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Relação Peso Líquido(kg)/Valor Total Importado</p>
+                    <div class="number">
+                        <strong class="counter">{{ context.rel_net_weight_tvi }}</strong><small>anos</small>
+                    </div>
+                </div>
+
+                {% if context.selector_index == 'posicoes' %}
+
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Índice de Complexidade do Produto</p>
+                    <div class="number">
+                        <strong class="counter">{{ context.prod_complex_index }}</strong><small>milhões</small>
+                    </div>
+                </div>
+
+                    {% if context.region and context.region != 'Brazil' %}
+
+                    <div class="col-xs-15 col-sm-2 item">
+                        <p class="label">RCA internacional</p>
+                        <div class="number">
+                            <strong class="counter">{{ context.rca_international }}</strong><small>milhões</small>
+                        </div>
+                    </div>
+                    <div class="col-xs-15 col-sm-2 item">
+                        <p class="label">Distância internacional</p>
+                        <div class="number">
+                            <strong class="counter">{{ context.international_distance }}</strong><small>milhões</small>
+                        </div>
+                    </div>
+                    <div class="col-xs-15 col-sm-2 item">
+                        <p class="label">Ganho de Oportunidade internacional</p>
+                        <div class="number">
+                            <strong class="counter">{{ context.ganho_oportunidade_internacional }}</strong><small>milhões</small>
+                        </div>
+                    </div>
+
+                    {% endif %}
+
+                {% endif %}
+
+                <div class="col-xs-15 col-sm-15 year">
+                    Ano: {{ context.year}}
+                </div>
+            </div>
+        </div>
+
+        <h2>Perfil Geral</h2>
+        <p>{{ context.description }}</p>
+        <div class="row">
+            <div class="col-xs-15 col-sm-15 col-md-5">
+                <h3>Comércio Internacional</h3>
+                <div class="table-responsive">
+                    <table class="table data-2-columns margin-none-bottom">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Principal Município por valor total exportado
+                                </th>
+                                <td>
+                                    <p class="label">{{ context.main_munic_total_exp }}</p>
+                                    USD <strong class="counter">{{ context.main_munic_total_exp_value }}</strong> <span>bilhões</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Município por valor total importado
+                                </th>
+                                <td>
+                                    <p class="label">{{ context.main_munic_total_imp}}</p>
+                                    USD <strong class="counter">{{ context.main_munic_total_imp_value }}</strong> <span>bilhões</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Destino por valor total exportado
+                                </th>
+                                <td>
+                                    <p class="label">{{ context.main_destination_total_exp }}</p>
+                                    USD <strong class="counter">{{ context.main_destination_total_exp_value }}</strong> <span>bilhões</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Origem por valor total importado
+                                </th>
+                                <td>
+                                    <p class="label">{{ context.main_source_total_imp }}</p>
+                                    USD <strong class="counter">{{ context.main_source_total_imp_value }}</strong> <span>bilhões</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                        mais detalhes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
