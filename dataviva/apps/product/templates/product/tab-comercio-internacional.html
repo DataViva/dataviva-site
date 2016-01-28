@@ -28,6 +28,9 @@
                     </thead>
                     <tbody>
                         <tr>
+
+                            {% if context.bra_id_len != 9 %}
+
                             <td>
                                 <p class="label">{{ context.main_munic_total_exp }}</p>
                                 <div class="number">
@@ -40,6 +43,9 @@
                                     USD <strong class="counter">{{ context.main_munic_total_imp_value }}</strong><span>B</span>
                                 </div>
                             </td>
+
+                            {% endif %}
+
                             <td>
                                 <p class="label">{{ context.main_destination_total_exp }}</p>
                                 <div class="number">
