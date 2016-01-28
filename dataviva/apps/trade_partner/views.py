@@ -44,8 +44,8 @@ context = {
 	'bigger_average_monsthly_income_unity': unicode('bilhões','utf-8'),
 	'activity_higher_income': 'Desenvolvimento Sob Encomenda ',  #atividade_maior_renda
 	'value_activity_higher_income' : 990 
-	#tab-salario-emprego - utiliza as mesmas variaveis da tab geral salario e emprego
-
+	#tab-comercio-internacional
+	
 } 
 
 @mod.route('/')
