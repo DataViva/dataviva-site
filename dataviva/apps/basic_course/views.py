@@ -21,21 +21,23 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
 
-    context = {
+    header = {
         'title': unicode('Quinta Série', 'utf8'),
-        'header_num_enrolled':10.3,
-        'header_num_classes':6.8,
-        'header_num_schools':11.3,
-        'header_size_avg_classes':27.3,
-        'header_avg_age':12.7,
-        'indicador06':unicode('Colégio Magnum', 'utf8'),
+        'num_enrolled':10.3,
+        'num_classes':6.8,
+        'num_schools':11.3,
+        'size_avg_classes':27.3,
+        'avg_age':12.7,
+        'body_school_max_num_enrolled':unicode('Colégio Magnum', 'utf8'),        
+        'year':2014,
+    }
+
+    body = {
+        'indicador06':'Escola Municipal',
         'indicador07':'Belo Horizonte',
-        'indicador08':'Escola Municipal',
-        'indicador09':'Escola Estadual',
         'label01':'Belo Horizonte',
         'label02': unicode('Colégio Magnum','utf8'),
         'indicadorLabel01':2.2,
         'indicadorLabel02':15,
-        'year':2014,
     }
-    return render_template('basic_course/index.html', context=context, body_class='perfil-estado')
+    return render_template('basic_course/index.html', header=header, body=body, body_class='perfil-estado')
