@@ -1,0 +1,72 @@
+<div role="tabpanel" class="tab-pane active" id="geral">
+    <div class="mod mod-datainfo">
+        <div class="numbers-top smaller">
+            <div class="row">
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de Matrículas</p>
+                    <div class="number">
+                        <strong class="counter">{{ context.enrollment_number }}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de Ingressantes</p>
+                    <div class="number">
+                        <strong class="counter">{{ context.newcomers_number }}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de Concluintes</p>
+                    <div class="number">
+                        <strong class="counter">{{ context.graduates_number }}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-15 year">
+                    Ano: {{ context.year }}
+                </div>
+            </div>
+        </div>
+        <h2>Perfil Geral</h2>
+        <p>{{ context.profile }}</p>
+        <div class="row">
+            <div class="col-xs-15 col-sm-15 col-md-5">
+                <h3>Matrículas</h3>
+                <div class="table-responsive">
+                    <table class="table data-2-columns margin-none-bottom">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Principal Curso por Número de Alunos Matriculados
+                                </th>
+                                <td>
+                                    <p class="label">{{ context.main_enrollment_area }}</p>
+                                    <strong class="counter">{{ context.main_enrollment_number }}</strong> <span>mil</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Curso por Número de Alunos Ingressantes
+                                </th>
+                                <td>
+                                    <p class="label">{{ context.main_newcomers_area }}</p>
+                                    <strong class="counter">{{ context.main_newcomers_number }}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Curso por Número de Alunos Concluintes
+                                </th>
+                                <td>
+                                    <p class="label">{{ context.main_graduates_area }}</p>
+                                    <strong class="counter">{{ context.main_graduates_number }}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#matriculas" aria-controls="matriculas" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                        mais detalhes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

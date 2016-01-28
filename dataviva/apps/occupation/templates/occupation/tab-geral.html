@@ -1,0 +1,87 @@
+<div role="tabpanel" class="tab-pane active" id="geral">
+    <div class="mod mod-datainfo">
+        <div class="numbers-top smaller">
+            <div class="row">
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Renda Média Mensal</p>
+                    <div class="number">
+                        R$ <strong class="counter">{{context.average_monthly_income}}</strong><small>{{context.average_monthly_income_unity}}</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Massa Salarial</p>
+                    <div class="number">
+                        R$ <strong class="counter">{{context.salary_mass}}</strong><small>{{context.salary_mass_unity}}</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Total de Empregos</p>
+                    <div class="number">
+                        <strong class="counter">{{context.total_employment}}</strong><small>{{context.total_employment_unity}}</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Total de Estabelecimentos</p>
+                    <div class="number">
+                        <strong class="counter">{{context.total_establishments}}</strong><small>{{context.total_establishments_unity}}</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-15 year">
+                    Ano: {{context.year}}
+                </div>
+            </div>
+        </div>
+        <h2>Perfil Geral</h2>
+        <p>{{ context.text_profile}}</p>
+        <div class="row">
+            <div class="col-xs-15 col-sm-15 col-md-5">
+                <h3>Salário e Emprego</h3>
+                <div class="table-responsive">
+                    <table class="table data-2-columns margin-none-bottom">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Principal Município por Empregos
+                                </th>
+                                <td>
+                                    <p class="label">{{context.county_for_jobs}}</p>
+                                    <strong class="counter">{{context.num_jobs_county}}</strong> <span>{{context.jobs_county_unity}} de empregos</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Atividade por Empregos
+                                </th>
+                                <td>
+                                    <p class="label">{{context.activity_for_job}}</p>
+                                    USD <strong class="counter">{{context.num_activity_for_job}}</strong> <span>{{context.activity_for_job_unit}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Município com maior renda média mensal
+                                </th>
+                                <td>
+                                    <p class = "label">{{context.county_bigger_average_monsthly_income}}</p>
+                                    USD <strong class="counter">{{context.bigger_average_monsthly_income}}</strong> <span>{{context.bigger_average_monsthly_income_unity}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Atividade com maior renda média mensal
+                                </th>
+                                <td>
+                                    <p class = "label">{{context.activity_higher_income}}</p>
+                                    <strong class="counter">{{context.value_activity_higher_income}}</strong> <span>empregos</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                        mais detalhes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
