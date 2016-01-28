@@ -35,17 +35,19 @@ context = {
 	'weight_imported_value' : 1.6, #pelo/valor exportado
 	'weight_imported_value_unity' : 'milharess', 
 	#tab-geral
-	'county_for_jobs': unicode('Sāo Paulo', 'utf8'), #'municipio_por_empregos' 
-	'num_jobs_county' : 1.62 , #num_empregos_principal_municipio
-	'jobs_county_unity' : 'milhares', #'unidade_empregos_principal_municipio'
-	'activity_for_job' : 'atividade x', #atividade_por_empregos
-	'num_activity_for_job': 1.0, #valor_atividade_por_empregos
-	'activity_for_job_unit': unicode('bilhāo','utf8'), #unidade_atividade_por_empregos
-	'county_bigger_average_monsthly_income': unicode('Sāo Paulo', 'utf8'),
-	'bigger_average_monsthly_income': 12.3, #MUNICIPO Valor_maior_renda_media_mensal
-	'bigger_average_monsthly_income_unity': unicode('bilhões','utf-8'),
-	'activity_higher_income': 'Desenvolvimento Sob Encomenda ',  #atividade_maior_renda
-	'value_activity_higher_income' : 990 ,
+	'county_for_exported_value': unicode('Sāo Paulo', 'utf8'), #'municipio_por_valor exportado' 
+	'num_county_for_exported_value' : 1.62 , 
+	'county_for_imported_value': unicode('Municipio X', 'utf8'), #'municipio_por_valor importado' 
+	'num_county_for_imported_value' : 1.62 , 
+	'product_for_exported_value': unicode('Minerio', 'utf8'), #'produto_por_valor exportado' 
+	'num_product_for_exported_value' : 1.62 , 
+	'product_for_imported_value': unicode('Produto X', 'utf8'), #'produto_por_valor importado' 
+	'num_product_for_imported_value' : 1.62 , 
+
+	'product_bigger_trade_balance' : unicode('Produto Y', 'utf8'),
+	'value_product_bigger_trade_balance' : 10.88,
+	'product_smaller_trade_balance' : unicode('Produto Z', 'utf8'),
+	'value_product_smaller_trade_balance' : 1.88,
 	#tab-comercio-internacional
 	'text_comercio_internacional' : 'Texto sobre o comercio internacional. '
 	
