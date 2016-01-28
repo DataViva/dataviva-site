@@ -102,6 +102,7 @@ from dataviva.apps.location.views import mod as location_module
 from dataviva.apps.occupation.views import mod as occupation_module
 from dataviva.apps.trade_partner.views import mod as trade_partner_module
 from dataviva.apps.rankings.views import mod as rankings_module
+from dataviva.apps.university.views import mod as university_module
 from dataviva.apps.wizard.views import mod as wizard_module
 
 
@@ -125,4 +126,5 @@ app.register_blueprint(about_module)
 app.register_blueprint(location_module)
 app.register_blueprint(occupation_module)
 app.register_blueprint(trade_partner_module)
+app.register_blueprint(university_module)
 app.register_blueprint(wizard_module)
