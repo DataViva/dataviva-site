@@ -1,7 +1,6 @@
 <div role="tabpanel" class="tab-pane" id="salario-emprego">
     <h2>Salário e Emprego</h2>
-    <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes. Limita-se ao sul e sudoeste com São Paulo, a oeste com o Mato Grosso do Sul, a noroeste com Goiás e Distrito Federal, a norte e nordeste com a Bahia, a leste com o Espírito Santo e a sudeste com o Rio de Janeiro. Seu território é subdividido em 853 municípios, a maior quantidade dentre os estados brasileiros.</p>
-    <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes.</p>
+    <p>{{context.text_salario_e_emprego}}</p>
     <h3>Estatísticas de Salário e Emprego</h3>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
@@ -10,36 +9,47 @@
                     <thead>
                         <tr>
                             <th>
-                                Principal Produto
-                                <small>por Valor Exportado</small>
+                                Principal Município
+                                <small>por Empregos</small>
                             </th>
                             <th>
-                                Principal Destino
-                                <small>por Valor Exportado</small>
+                                Principal Atividade
+                                <small>por Empregos</small>
                             </th>
                             <th>
-                                Total de Exportações
+                                Município
+                                <small>com maior renda média mensal</small>
+                            </th>
+                            <th>
+                                Atividade
+                                <small>com maior renda média mensal</small>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
-                                <p class="label">Minério de Ferro</p>
+                                <p class="label">{{context.county_for_jobs}}</p>
                                 <div class="number">
-                                    USD <strong class="counter">12.2</strong><span>B</span>
+                                    USD <strong class="counter">{{context.num_jobs_county}}</strong><span>B</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">China</p>
+                                <p class="label">{{context.activity_for_job}}</p>
                                 <div class="number">
-                                    USD <strong class="counter">8.82</strong><span>B</span>
+                                    USD <strong class="counter">{{context.num_activity_for_job}}</strong><span>B</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">Total de Exportações</p>
+                                <p class="label">{{context.county_bigger_average_monsthly_income}}</p>
                                 <div class="number">
-                                    USD <strong class="counter">29.3</strong><span>B</span>
+                                    <strong class="counter">{{context.bigger_average_monsthly_income}}</strong><span>EMPREGOS</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{context.activity_higher_income}}</p>
+                                <div class="number">
+                                    <strong class="counter">{{context.value_activity_higher_income}}</strong><span>EMPREGOS</span>
                                 </div>
                             </td>
                         </tr>
