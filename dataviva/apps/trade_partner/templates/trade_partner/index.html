@@ -26,24 +26,15 @@
                     <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
                 </li>
                 <li role="presentation">
-                    <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab">Salário e emprego</a>
+                    <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab">Comércio com o Brasil</a>
                 </li>
-                {%if context.family %}
-                <li role="presentation">
-                    <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidades Econômicas</a>
-                </li>
-                {%endif%}
             </ul>
         </div>
         <div class="main-content col-xs-15 col-md-11">
             <div class="tab-content">
-                {% include "occupation/tab-geral.html" %}
-                {% include "occupation/tab-salario-emprego.html" %}
-                {% if context.family %}
-                    {% include "occupation/tab-oportunidade-economica.html" %}
-                {% endif %}
-
-
+                {% include "trade_partner/tab-geral.html" %}
+                {% include "trade_partner/tab-comercio-internacional.html" %}
+                
             </div>
         </div>
     </div>

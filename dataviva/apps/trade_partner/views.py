@@ -19,10 +19,9 @@ def add_language_code(endpoint, values):
 
 context = {
 	#index
-	'name' : unicode('Engenheiros em Computaçāo', 'utf8') ,
-	'text_profile': unicode('Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'),
+	'name' : unicode('China', 'utf8') ,
+	'text_profile': unicode('Texto sobre a parceria economica entre Brasil e China.'),
 	'background_image': unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
-	'family' : True,
 	'year' : 2010,
 	#header 
 	'average_monthly_income' : 8, #'renda_media_mensal' 
