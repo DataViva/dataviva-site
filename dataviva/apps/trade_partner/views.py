@@ -2,9 +2,9 @@
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 
-mod = Blueprint('occupation', __name__,
+mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
-                url_prefix='/<lang_code>/occupation',
+                url_prefix='/<lang_code>/trade_partner',
                 static_folder='static')
 
 
@@ -51,7 +51,7 @@ context = {
 
 @mod.route('/')
 def index():
-	return render_template('occupation/index.html', body_class='perfil-estado', context=context)
+	return render_template('trade_partner/index.html', body_class='perfil-estado', context=context)
 
 
 	
