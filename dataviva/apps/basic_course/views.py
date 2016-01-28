@@ -23,11 +23,11 @@ def index():
 
     context = {
         'title': unicode('Quinta Série', 'utf8'),
-        'indicador01':10.3,
-        'indicador02':6.8,
-        'indicador03':11.3,
-        'indicador04':27.3,
-        'indicador05':12.7,
+        'header_num_enrolled':10.3,
+        'header_num_classes':6.8,
+        'header_num_schools':11.3,
+        'header_size_avg_classes':27.3,
+        'header_avg_age':12.7,
         'indicador06':unicode('Colégio Magnum', 'utf8'),
         'indicador07':'Belo Horizonte',
         'indicador08':'Escola Municipal',
@@ -36,6 +36,6 @@ def index():
         'label02': unicode('Colégio Magnum','utf8'),
         'indicadorLabel01':2.2,
         'indicadorLabel02':15,
-        'anoPrincipal':2014,
+        'year':2014,
     }
     return render_template('basic_course/index.html', context=context, body_class='perfil-estado')
