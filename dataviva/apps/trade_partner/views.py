@@ -43,8 +43,9 @@ context = {
 	'bigger_average_monsthly_income': 12.3, #MUNICIPO Valor_maior_renda_media_mensal
 	'bigger_average_monsthly_income_unity': unicode('bilhões','utf-8'),
 	'activity_higher_income': 'Desenvolvimento Sob Encomenda ',  #atividade_maior_renda
-	'value_activity_higher_income' : 990 
+	'value_activity_higher_income' : 990 ,
 	#tab-comercio-internacional
+	'text_comercio_internacional' : 'Texto sobre o comercio internacional. '
 	
 } 
 
