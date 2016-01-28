@@ -34,7 +34,7 @@ context = {
 	'total_imported_unity' : 'milhoes',
 	'weight_imported_value' : 1.6, #pelo/valor exportado
 	'weight_imported_value_unity' : 'milharess', 
-	#tab-geral
+	#tab-geral e valores tab-comercio-internacional
 	'county_for_exported_value': unicode('Sāo Paulo', 'utf8'), #'municipio_por_valor exportado' 
 	'num_county_for_exported_value' : 1.62 , 
 	'county_for_imported_value': unicode('Municipio X', 'utf8'), #'municipio_por_valor importado' 
@@ -43,7 +43,6 @@ context = {
 	'num_product_for_exported_value' : 1.62 , 
 	'product_for_imported_value': unicode('Produto X', 'utf8'), #'produto_por_valor importado' 
 	'num_product_for_imported_value' : 1.62 , 
-
 	'product_bigger_trade_balance' : unicode('Produto Y', 'utf8'),
 	'value_product_bigger_trade_balance' : 10.88,
 	'product_smaller_trade_balance' : unicode('Produto Z', 'utf8'),
