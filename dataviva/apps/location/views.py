@@ -73,8 +73,8 @@ def index():
 
     for id, name_pt, stat_val in statistics_generator:
         context[id] = {
-            'name_pt': name_pt,
-            'stat_val': stat_val,
+            'name': name_pt,
+            'value': stat_val,
         }
 
     ''' Query básica para SECEX'''
