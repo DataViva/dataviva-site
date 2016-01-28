@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-
+from dataviva.api.attrs.models import Ybs, Stat
+from dataviva.api.rais.models import Yi , Yo, Yb_rais, Yo, Ybi, Ybi_reqs, Ybo, Yio, Ybio
+from dataviva import db
+from sqlalchemy import func, desc
 
 
 mod = Blueprint('industry', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/industry',
                 static_folder='static')
-
-
 
 
 @mod.url_value_preprocessor
@@ -22,18 +23,9 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-'''
-ano 
-imagens 
-
-resolver ascci html
-Template css para alinhar headers 
-
-''' 
-
-
 @mod.route('/')
 def index():
+
     context = { 'industry_name': unicode('Supermercados', 'utf8'), 
                 'location' : True ,
                 'class' : True,
@@ -59,7 +51,7 @@ def index():
                 'text_profile' : unicode('Texto de perfil para Supermercados.', 'utf8'),
                 'text_salary_job' : unicode('Texto para Salários e empregos', 'utf8'),
                 'text_economic_opportunity' : unicode('Texto para Oportunidades Econômicas', 'utf8'),
-                'county' : False
+                'county' : True
     }
 
 
