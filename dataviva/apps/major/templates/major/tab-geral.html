@@ -1,0 +1,100 @@
+<div role="tabpanel" class="tab-pane active" id="geral">
+    <div class="mod mod-datainfo">
+        <div class="numbers-top smaller">
+            <div class="row">
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de Matrículas</p>
+                    <div class="number">
+                        <strong class="counter">{{ major_context.enrollments_number }}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de Ingressantes</p>
+                    <div class="number">
+                        <strong class="counter">{{ major_context.entrants_number }}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de Concluintes</p>
+                    <div class="number">
+                        <strong class="counter">{{ major_context.graduates_number }}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-15 year">
+                    Ano: {{ major_context.year }}
+                </div>
+            </div>
+        </div>
+        <h2>Perfil Geral</h2>
+        <p>{{ major_context.profile }}</p>
+        <div class="row">
+            <div class="col-xs-15 col-sm-15 col-md-5">
+                <h3>Matrículas</h3>
+                <div class="table-responsive">
+                    <table class="table data-2-columns margin-none-bottom">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Principal Universidade por Número de Alunos Matriculados
+                                </th>
+                                <td>
+                                    <p class="label">{{ major_context.main_enrollments_university }}</p>
+                                    <strong class="counter">{{ major_context.main_enrollments_university_number }}</strong> <span>mil</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Município por Número de Alunos Matriculados
+                                </th>
+                                <td>
+                                    <p class="label">{{ major_context.main_enrollments_county }}</p>
+                                    <strong class="counter">{{ major_context.main_enrollments_county_number }}</strong>
+                                    <span>mil</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Universidade por Número de Alunos Ingressantes
+                                </th>
+                                <td>
+                                    <p class="label">{{ major_context.main_entrants_university }}</p>
+                                    <strong class="counter">{{ major_context.main_entrants_university_number }}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Município por Número de Alunos Ingressantes
+                                </th>
+                                <td>
+                                    <p class="label">{{ major_context.main_entrants_county }}</p>
+                                    <strong class="counter">{{ major_context.main_entrants_county_number }}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Universidade por Número de Alunos Concluintes
+                                </th>
+                                <td>
+                                    <p class="label">{{ major_context.main_graduates_university }}</p>
+                                    <strong class="counter">{{ major_context.main_graduates_university_number }}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Município por Número de Alunos Concluintes
+                                </th>
+                                <td>
+                                    <p class="label">{{ major_context.main_graduates_county }}</p>
+                                    <strong class="counter">{{ major_context.main_graduates_county_number }}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#matriculas" aria-controls="matriculas" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                        mais detalhes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
