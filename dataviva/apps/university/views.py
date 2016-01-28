@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
+from dataviva.api.attrs.models import Yuu, Stat
+from dataviva import db
+from sqlalchemy.sql.expression import func, desc
 
 mod = Blueprint('university', __name__,
                 template_folder='templates/university',
@@ -17,24 +20,16 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
+    university_id = '00575'
+
+    # subquery do ano máximo no Yuu
+    yu_max_year = db.session.query(
+        func.max(Yuu.year).label('maximum')).filter_by(university_id=university_id).first()
+
     context = {
-        'body_class' : 'perfil-estado', 
-        'university_name' : 'Universidade Federal de Minas Gerais',
-        'enrollment_number' : str(33),
-        'newcomers_number' : str(3.4),
-        'graduates_number' : str(4.02),
-        'enrollment_profile' : 'A UFMG teve 33 mil matriculas em 2013.',
-        'profile' : 'A UFMG esta localizada no bairro da Pampulha em BH.',
-        'year' : 2013,
-        'main_enrollment_area' : 'Direito',
-        'main_enrollment_number': str(2.28),
-        'main_newcomers_area' : 'Medicina',
-        'main_newcomers_number' : str(260),
-        'main_graduates_area' : 'Administracao',
-        'main_graduates_number' : str(50),
-        'logo_name' : 'university-logo',
-        'background_name' : 'bg-profile-university'
+        'university_name' : 'UFMG',
+        'year' : yu_max_year.maximum
     }
-    return render_template('index.html', context=context)
+    return render_template('index.html', context=context, body_class='perfil_estado')
 
 
