@@ -2,6 +2,12 @@
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 
+from dataviva.api.attrs.models import Cbo
+from dataviva.api.hedu.models import Yo, Ybo, Yio, Ybio
+
+from dataviva import db
+from sqlalchemy.sql.expression import func, desc
+
 mod = Blueprint('occupation', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/occupation',
