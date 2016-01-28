@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane" id="matriculas">
     <h2>Matrículas</h2>
-    <p>{{ context.enrollment_info }}</p>
+    <p>{{ university.enrollment_info }}</p>
     <h3>Estatísticas de Matrículas</h3>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
@@ -25,21 +25,21 @@
                     <tbody>
                         <tr>
                             <td>
-                                <p class="label">{{ context.main_enrollment_area }}</p>
+                                <p class="label">{{ university.main_enrollment_area }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ context.main_enrollment_number }}</strong><span>mil</span>
+                                    <strong class="counter">{{ university.main_enrollment_number }}</strong><span>mil</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">{{ context.main_newcomers_area }}</p>
+                                <p class="label">{{ university.main_newcomers_area }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ context.main_newcomers_number }}</strong>
+                                    <strong class="counter">{{ university.main_newcomers_number }}</strong>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">{{ context.main_graduates_area }}</p>
+                                <p class="label">{{ university.main_graduates_area }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ context.main_graduates_number }}</strong>
+                                    <strong class="counter">{{ university.main_graduates_number }}</strong>
                                 </div>
                             </td>
                         </tr>
