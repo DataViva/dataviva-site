@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.attrs.models import Yuu, Stat
+from dataviva.api.attrs.models import University
+from dataviva.api.hedu.models import Yu
 from dataviva import db
 from sqlalchemy.sql.expression import func, desc
 
@@ -22,13 +23,31 @@ def add_language_code(endpoint, values):
 def index():
     university_id = '00575'
 
-    # subquery do ano máximo no Yuu
-    yu_max_year = db.session.query(
-        func.max(Yuu.year).label('maximum')).filter_by(university_id=university_id).first()
+
+    # subquery do ano máximo no hedu_yu
+    ''' Query que pega o ano mais recente dos dados '''
+    yu_max_year_query = db.session.query(func.max(Yu.year)).filter_by(university_id=university_id)
+
+
+    yu_query = Yu.query.join(University).filter(
+            Yu.university_id == university_id,
+            Yu.year == yu_max_year_query)
+
+    print yu_query
+
+    yu_results = yu_query.values(
+        University.name_pt,
+        Yu.enrolled,
+        Yu.entrants,
+        Yu.graduates)
+
+    university = []
+    for name_pt, enrolled, entrants, graduates in yu_results:
+        university +=  (name_pt, enrolled, entrants, graduates)
 
     context = {
-        'university_name' : 'UFMG',
-        'year' : yu_max_year.maximum
+        'university_name' : university[0],
+        'year' : 'yu_max_year.maximum'
     }
     return render_template('index.html', context=context, body_class='perfil_estado')
 
