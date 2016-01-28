@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
+from dataviva.api.attrs.models import Hs
+from dataviva import db
 
 mod = Blueprint('product', __name__,
                 template_folder='templates',
@@ -52,6 +54,17 @@ def index():
         'desc_economic_opp': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',
         #vars to application rules
         'selector_index': 'posicoes',  #'posicoes' or 'secoes' for filter test
-        'region': 'Regiao' #'Brazil' for filter test
+        'region': 'Regiao', #'Brazil' for filter test
+        'context.bra_id_len': 9
     }
+
+    product_id = '052601'
+
+    product = Hs.query.filter(
+        Hs.id == product_id) \
+        .first()
+
+    context['name'] = product.name()
+
+    import pdb; pdb.set_trace()
     return render_template('product/index.html', body_class='perfil-estado', context=context)
