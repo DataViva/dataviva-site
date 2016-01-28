@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 
 from dataviva.api.attrs.models import Cbo
-from dataviva.api.hedu.models import Yo, Ybo, Yio, Ybio
+from dataviva.api.rais.models import Yo, Ybo, Yio, Ybio
 
 from dataviva import db
 from sqlalchemy.sql.expression import func, desc
@@ -23,13 +23,22 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
-context = {
+
+@mod.route('/')
+def index():
+
+	occupation_id = '2122'
+
+	#encontrando o ano mais recente dos dados
+	yo_max_year_query = db.session.query(func.max(Yo.year).label('year')).filter_by(cbo_id=occupation_id).first()
+
+	context = {
 	#index
 	'name' : unicode('Engenheiros em Computaçāo', 'utf8') ,
 	'text_profile': unicode('Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'),
 	'background_image': unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
 	'family' : True,
-	'year' : 2010,
+	'year' : yo_max_year_query.year ,
 	#header 
 	'average_monthly_income' : 8, #'renda_media_mensal' 
 	'average_monthly_income_unity' : 'Milhares', #'unidade_renda_media_mensal'
@@ -56,10 +65,9 @@ context = {
 	#tab-oportunidades-economicas
 	'text_oportunidades_economicas' : unicode('Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste ','utf8')
 
-} 
+	} 
 
-@mod.route('/')
-def index():
+	
 	return render_template('occupation/index.html', body_class='perfil-estado', context=context)
 
 
