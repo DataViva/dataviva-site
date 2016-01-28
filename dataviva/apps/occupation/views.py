@@ -30,15 +30,39 @@ def index():
 	occupation_id = '2122'
 
 	#encontrando o ano mais recente dos dados
-	yo_max_year_query = db.session.query(func.max(Yo.year).label('year')).filter_by(cbo_id=occupation_id).first()
+	yo_max_year_query = db.session.query(func.max(Yo.year)).filter_by(cbo_id=occupation_id)
+
+	yo_query = Yo.query.join(Cbo).filter(
+		Yo.cbo_id == occupation_id,
+		Yo.year == yo_max_year_query)
+
+	yo_results = yo_query.values(
+		Cbo.name_pt,
+		Yo.num_emp,
+		Yo.num_jobs)
+
+	data = []
+	for name_pt, num_emp, num_jobs in yo_results:
+		data += (name_pt, num_emp, num_jobs)
 
 	context = {
+		'name' : data[0],
+		'text_profile': unicode('Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'),
+		'year' : yo_max_year
+	}
+
+	
+	return render_template('occupation/index.html', body_class='perfil-estado', context=context)
+
+
+'''
+context = {
 	#index
 	'name' : unicode('Engenheiros em Computaçāo', 'utf8') ,
 	'text_profile': unicode('Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'),
 	'background_image': unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
 	'family' : True,
-	'year' : yo_max_year_query.year ,
+	'year' : yo_max_year_query ,
 	#header 
 	'average_monthly_income' : 8, #'renda_media_mensal' 
 	'average_monthly_income_unity' : 'Milhares', #'unidade_renda_media_mensal'
@@ -66,9 +90,5 @@ def index():
 	'text_oportunidades_economicas' : unicode('Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste ','utf8')
 
 	} 
-
-	
-	return render_template('occupation/index.html', body_class='perfil-estado', context=context)
-
-
+'''
 	
