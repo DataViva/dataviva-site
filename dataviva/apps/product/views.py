@@ -61,14 +61,14 @@ def lp(bra_id, product_id, product, ymbp_max_year_subquery, name, pci):
                                   Ymbp.import_val,
                                   Ymbp.export_kg,
                                   Ymbp.import_kg,
-                                  ymbp.rca_wld,
-                                  ymbp.distance_wld,
-                                  ymbp.opp_gain_wld)
+                                  Ymbp.rca_wld,
+                                  Ymbp.distance_wld,
+                                  Ymbp.opp_gain_wld)
 
     product['name'] = name
     product['pci'] = pci
 
-    for year, export_val, import_val, export_kg, import_kg, pci, rca_wld, distance_wld, opp_gain_wld in ymbp_data:
+    for year, export_val, import_val, export_kg, import_kg, rca_wld, distance_wld, opp_gain_wld in ymbp_data:
         product['year'] = year
         product['export_val'] = export_val
         product['import_val'] = import_val
@@ -77,7 +77,6 @@ def lp(bra_id, product_id, product, ymbp_max_year_subquery, name, pci):
         product['trade_balance'] = export_val - import_val
         product['export_net_weight'] = export_kg / export_val
         product['import_net_weight'] = import_kg / import_val
-        product['pci'] = pci
         product['rca_wld'] = rca_wld
         product['distance_wld'] = distance_wld
         product['opp_gain_wld'] = opp_gain_wld
@@ -118,9 +117,7 @@ def index():
     context = {
         #vars in index.html
         'background_image':'static/img/bg-profile-location.jpg',
-        'name':'Produto',
         'portrait':'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110',
-        'year': 9999,
         'description': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',
         #vars in tab-geral.html and tab-comercio-internacional.html
         'main_munic_total_exp': 'Produto',
@@ -137,8 +134,8 @@ def index():
         'desc_economic_opp': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.'
     }
 
-    product_id = '052601'
-    bra_id = None
+    product_id = '05'
+    bra_id = '4mg'
     product = {}
 
     context['bra_id'] = bra_id
@@ -157,8 +154,7 @@ def index():
     ymp_pci_query = Ymp.query.filter(Ymp.hs_id==product_id,
                                      Ymp.year==ymp_max_year_subquery,
                                      Ymp.month==0).limit(1)
-
-    pci = ymp_pci_query.values(Ymp.pci)
+    pci = ymp_pci_query.one().pci
 
     '''
 
@@ -167,13 +163,19 @@ def index():
     '''
     ##### 'BRASIL' (bra_id == None) and 'SEÇÃO' (depth == 2) #####
     ##### 'BRASIL' (bra_id == None) and 'POSIÇÃO' (depth == 6) ##### >>>> Show pci
-    bps(bra_id=bra_id, product_id=product_id, product=product, ymp_max_year_subquery=ymp_max_year_subquery, name=name, pci=pci)
+    if bra_id == None and len(product_id) == 2 or len(product_id) == 6:
+        bps(bra_id=bra_id, product_id=product_id, product=product, ymp_max_year_subquery=ymp_max_year_subquery, 
+            name=name, pci=pci)
 
     ##### 'LOCALIDADE' and 'POSIÇÃO' (depth == 6) #####
-    #lp(bra_id=bra_id, product_id=product_id, product=product, ymp_max_year_subquery=ymp_max_year_subquery, name=name, pci=pci)
+    if bra_id != None and len(product_id) == 6:
+        lp(bra_id=bra_id, product_id=product_id, product=product, ymbp_max_year_subquery=ymbp_max_year_subquery,
+           name=name, pci=pci)
 
     ##### 'LOCALIDADE' and 'SEÇÃO' (depth == 2) #####
-    #ls(bra_id, product_id, product, ymbp_max_year_subquery, name=name)
+    if bra_id != None and len(product_id) == 2:
+        ls(bra_id=bra_id, product_id=product_id, product=product_id, ymbp_max_year_subquery=ymbp_max_year_subquery,
+           name=name)
 
     '''
 
