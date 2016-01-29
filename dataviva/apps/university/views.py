@@ -31,10 +31,20 @@ def index():
             Yu.university_id == university_id,
             Yu.year == yu_max_year_query)
 
-    yuc_query = Yuc.query.join(Course_hedu).filter(
+    yuc_enrollments_query = Yuc.query.join(Course_hedu).filter(
             Yuc.university_id == university_id,
             Yuc.year == yuc_max_year_query,
-            func.length(Yuc.course_hedu) == 6).order_by(desc(Yuc.enrolled)).limit(1)
+            func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.enrolled)).limit(1)
+
+    yuc_entrants_query = Yuc.query.join(Course_hedu).filter(
+            Yuc.university_id == university_id,
+            Yuc.year == yuc_max_year_query,
+            func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.entrants)).limit(1)
+
+    yuc_graduates_query = Yuc.query.join(Course_hedu).filter(
+            Yuc.university_id == university_id,
+            Yuc.year == yuc_max_year_query,
+            func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.graduates)).limit(1)
 
     yu_query_data = yu_query.values(
         University.name_pt,
@@ -43,9 +53,19 @@ def index():
         Yu.graduates,
         Yu.year)
 
-    yuc_query_data = yuc_query.values(
+    yuc_enrollments_query_data = yuc_enrollments_query.values(
         Course_hedu.name_pt,
         Yuc.enrolled
+    )
+
+    yuc_entrants_query_data = yuc_entrants_query.values(
+        Course_hedu.name_pt,
+        Yuc.entrants
+    )
+
+    yuc_graduates_query_data = yuc_graduates_query.values(
+        Course_hedu.name_pt,
+        Yuc.graduates
     )
 
     university = {}
@@ -57,13 +77,19 @@ def index():
         university['graduates'] =  graduates
         university['year'] =  year
 
-
-
     course = {}
 
-    for name_pt, enrolled in yuc_query_data:
-        course['name'] = name_pt,
+    for name_pt, enrolled in yuc_enrollments_query_data:
+        course['enrollments_name'] = name_pt
         course['enrollments'] = enrolled
+
+    for name_pt, entrants in yuc_entrants_query_data:
+        course['entrants_name'] = name_pt
+        course['entrants'] = entrants
+
+    for name_pt, graduates in yuc_graduates_query_data:
+        course['graduates_name'] = name_pt
+        course['graduates'] = graduates
 
     return render_template('index.html', university=university, course=course, body_class='perfil_estado')
 

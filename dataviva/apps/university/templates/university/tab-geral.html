@@ -38,7 +38,7 @@
                                     Principal Curso por Número de Alunos Matriculados
                                 </th>
                                 <td>
-                                    <p class="label">{{ course.name }}</p>
+                                    <p class="label">{{ course.enrollments_name }}</p>
                                     <strong class="counter">{{ course.enrollments }}</strong> <span>mil</span>
                                 </td>
                             </tr>
@@ -47,8 +47,8 @@
                                     Principal Curso por Número de Alunos Ingressantes
                                 </th>
                                 <td>
-                                    <p class="label">{{ university.main_newcomers_area }}</p>
-                                    <strong class="counter">{{ university.main_newcomers_number }}</strong>
+                                    <p class="label">{{ course.entrants_name }}</p>
+                                    <strong class="counter">{{ course.entrants }}</strong>
                                 </td>
                             </tr>
                             <tr>
@@ -56,8 +56,8 @@
                                     Principal Curso por Número de Alunos Concluintes
                                 </th>
                                 <td>
-                                    <p class="label">{{ university.main_graduates_area }}</p>
-                                    <strong class="counter">{{ university.main_graduates_number }}</strong>
+                                    <p class="label">{{ course.graduates_name }}</p>
+                                    <strong class="counter">{{ course.graduates }}</strong>
                                 </td>
                             </tr>
                         </tbody>
