@@ -1,0 +1,76 @@
+<div role="tabpanel" class="tab-pane active" id="geral">
+    <div class="mod mod-datainfo">
+        <div class="numbers-top smaller">
+            <div class="row">
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de matrículas</p>
+                    <div class="number">
+                        <strong class="counter">{{context.num_enrolled_br}}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de turmas</p>
+                    <div class="number">
+                        <strong class="counter">{{context.num_classes_br}}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de escolas</p>
+                    <div class="number">
+                        <strong class="counter">{{context.num_schools_br}}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Tamanho médio das turmas</p>
+                    <div class="number">
+                        <strong class="counter">{{context.size_avg_classes_br}}</strong><small>alunos</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Média de idade</p>
+                    <div class="number">
+                        <strong class="counter">{{context.avg_age_br}}</strong><small>anos</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-15 year">
+                    Ano: {{context.year}}
+                </div>
+            </div>
+        </div>
+        <h2>Perfil Geral</h2>
+        <p>{{context.general_description}}</p>
+        <div class="row">
+            <div class="col-xs-15 col-sm-15 col-md-5">
+                <h3>Matrículas</h3>
+                <div class="table-responsive">
+                    <table class="table data-2-columns margin-none-bottom">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Principal Escola por Número de Alunos Matriculados
+                                </th>
+                                <td>
+                                    <p class="label">{{context.school_max_num_enrolled_br}}</p>
+                                    <strong class="counter">{{context.value_school_max_num_enrolled_br}}</strong> <span>mil</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Município por Número de Alunos Matriculados
+                                </th>
+                                <td>
+                                    <p class="label">{{context.city_max_num_enrolled_br}}</p>
+                                    <strong class="counter">{{context.value_city_max_num_enrolled_br}}</strong> <span>mil</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#matricula" aria-controls="matricula" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                        mais detalhes
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
