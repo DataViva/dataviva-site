@@ -134,11 +134,12 @@ def index():
         'desc_economic_opp': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.'
     }
 
-    product_id = '05'
-    bra_id = '4mg'
+    product_id = '05' #052601
+    bra_id = '4mg' #'4mg'
     product = {}
 
     context['bra_id'] = bra_id
+    if bra_id: context['bra_id_len'] = len(bra_id)
     context['depth'] = len(product_id)
 
     ###### Product Name #####
@@ -174,7 +175,7 @@ def index():
 
     ##### 'LOCALIDADE' and 'SEÇÃO' (depth == 2) #####
     if bra_id != None and len(product_id) == 2:
-        ls(bra_id=bra_id, product_id=product_id, product=product_id, ymbp_max_year_subquery=ymbp_max_year_subquery,
+        ls(bra_id=bra_id, product_id=product_id, product=product, ymbp_max_year_subquery=ymbp_max_year_subquery,
            name=name)
 
     '''
@@ -182,6 +183,8 @@ def index():
     tab-comercio-internacional query's
 
     '''
+
+    
 
     ##### 'BRASIL' (bra_id == None)
     #select name_pt, export_val
