@@ -22,7 +22,7 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-def bsp(bra_id, product_id, product, ymp_max_year_subquery, pci):
+def bps(bra_id, product_id, product, ymp_max_year_subquery, name, pci):
 
     ymp_query = Ymp.query.filter(Ymp.hs_id==product_id,
                         Ymp.year==ymp_max_year_subquery,
@@ -34,7 +34,7 @@ def bsp(bra_id, product_id, product, ymp_max_year_subquery, pci):
                                 Ymp.export_kg,
                                 Ymp.import_kg)
 
-    product['name'] = hs_query.first().name()
+    product['name'] = name
     product['pci'] = pci
 
     for year, export_val, import_val, export_kg, import_kg in ymp_data:
@@ -49,7 +49,7 @@ def bsp(bra_id, product_id, product, ymp_max_year_subquery, pci):
 
     return product
 
-def lp(bra_id, product_id, product, ymbp_max_year_subquery, pci):
+def lp(bra_id, product_id, product, ymbp_max_year_subquery, name, pci):
 
     ymbp_query = Ymbp.query.filter(Ymbp.hs_id==product_id,
                                    Ymbp.year==ymbp_max_year_subquery,
@@ -65,7 +65,7 @@ def lp(bra_id, product_id, product, ymbp_max_year_subquery, pci):
                                   ymbp.distance_wld,
                                   ymbp.opp_gain_wld)
 
-    product['name'] = hs_query.first().name()
+    product['name'] = name
     product['pci'] = pci
 
     for year, export_val, import_val, export_kg, import_kg, pci, rca_wld, distance_wld, opp_gain_wld in ymbp_data:
@@ -84,7 +84,7 @@ def lp(bra_id, product_id, product, ymbp_max_year_subquery, pci):
 
     return product
 
-def ls(bra_id, product_id, product, ymbp_max_year_subquery):
+def ls(bra_id, product_id, product, ymbp_max_year_subquery, name):
 
     ymbp_query = Ymbp.query.filter(Ymbp.hs_id==product_id,
                                    Ymbp.year==ymbp_max_year_subquery,
@@ -97,7 +97,7 @@ def ls(bra_id, product_id, product, ymbp_max_year_subquery):
                                   Ymbp.export_kg,
                                   Ymbp.import_kg)
 
-    product['name'] = hs_query.first().name()
+    product['name'] = name
 
     for year, export_val, import_val, export_kg, import_kg in ymbp_data:
         product['year'] = year
@@ -145,7 +145,7 @@ def index():
     context['depth'] = len(product_id)
 
     ###### Product Name #####
-    hs_query = Hs.query.filter(Hs.id == product_id)
+    name = Hs.query.filter(Hs.id == product_id).first().name()
 
     ##### Max year Ymp
     ymp_max_year_subquery = db.session.query(func.max(Ymp.year)).filter_by(hs_id=product_id)
@@ -158,7 +158,7 @@ def index():
                                      Ymp.year==ymp_max_year_subquery,
                                      Ymp.month==0).limit(1)
 
-    ymp_pci_data = ymp_pci_query.values(Ymp.pci)
+    pci = ymp_pci_query.values(Ymp.pci)
 
     '''
 
@@ -167,13 +167,13 @@ def index():
     '''
     ##### 'BRASIL' (bra_id == None) and 'SEÇÃO' (depth == 2) #####
     ##### 'BRASIL' (bra_id == None) and 'POSIÇÃO' (depth == 6) ##### >>>> Show pci
-    bps(bra_id=bra_id, product_id=product_id, product=product, ymp_max_year_subquery=ymp_max_year_subquery, pci=ymp_pci_data)
+    bps(bra_id=bra_id, product_id=product_id, product=product, ymp_max_year_subquery=ymp_max_year_subquery, name=name, pci=pci)
 
     ##### 'LOCALIDADE' and 'POSIÇÃO' (depth == 6) #####
-    #lp(bra_id=bra_id, product_id=product_id, product=product, ymp_max_year_subquery=ymp_max_year_subquery, pci=ymp_pci_data)
+    #lp(bra_id=bra_id, product_id=product_id, product=product, ymp_max_year_subquery=ymp_max_year_subquery, name=name, pci=pci)
 
     ##### 'LOCALIDADE' and 'SEÇÃO' (depth == 2) #####
-    #ls(bra_id, product_id, product, ymbp_max_year_subquery)
+    #ls(bra_id, product_id, product, ymbp_max_year_subquery, name=name)
 
     '''
 
@@ -182,29 +182,29 @@ def index():
     '''
 
     ##### 'BRASIL' (bra_id == None)
-    select name_pt, export_val
-    from secex_ymbp ymbp
-    inner join attrs_bra bra on bra.id = ymbp.bra_id
-    where hs_id ='052601' and
-    year = (select max(year) from secex_ymbp where hs_id ='052601') and
-    month = 0 and
-    bra_id_len = 9
-    order by export_val desc
-    limit 1;
+    #select name_pt, export_val
+    #from secex_ymbp ymbp
+    #inner join attrs_bra bra on bra.id = ymbp.bra_id
+    #where hs_id ='052601' and
+    #year = (select max(year) from secex_ymbp where hs_id ='052601') and
+    #month = 0 and
+    #bra_id_len = 9
+    #order by export_val desc
+    #limit 1;
 
 
     ##### 'LOCALIDADE' and 'LOCALIDADE' IS NOT 'MUNÍCIPIO' (depth != 9) #####
-    select name_pt, export_val
-    from secex_ymbp ymbp
-    inner join attrs_bra bra on bra.id = ymbp.bra_id
-    where hs_id ='052601' and
-    year = (select max(year) from secex_ymbp where hs_id ='052601' and bra_id like '4mg01%') and
-    month = 0 and
-    bra_id_len = 9 and
-    bra_id like '4mg01%' and
-    export_val is not NULL
-    order by export_val desc
-    limit 1;
+    #select name_pt, export_val
+    #from secex_ymbp ymbp
+    #inner join attrs_bra bra on bra.id = ymbp.bra_id
+    #where hs_id ='052601' and
+    #year = (select max(year) from secex_ymbp where hs_id ='052601' and bra_id like '4mg01%') and
+    #month = 0 and
+    #bra_id_len = 9 and
+    #bra_id like '4mg01%' and
+    #export_val is not NULL
+    #order by export_val desc
+    #limit 1;
 
 
     return render_template('product/index.html', body_class='perfil-estado', product=product, context=context)
