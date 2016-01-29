@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-xs-15 col-md-offset-4 col-md-11">
                 <h1>
-                    {{ context.name}} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
+                    {{ product.name }} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
                 </h1>
             </div>
         </div>
@@ -29,7 +29,7 @@
                     <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab">Comércio Internacional</a>
                 </li>
 
-                {% if context.selector_index == 'posicoes' %}
+                {% if context.bra_id %}
 
                     <li role="presentation">
                         <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidade Econômica</a>
@@ -43,7 +43,7 @@
                 {% include "product/tab-geral.html" %}
                 {% include "product/tab-comercio-internacional.html" %}
 
-                {% if context.selector_index == 'posicoes' %}
+                {% if context.bra_id %}
 
                     {% include "product/tab-oportunidade-economica.html" %}
 

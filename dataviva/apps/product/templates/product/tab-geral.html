@@ -6,61 +6,61 @@
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Saldo da Balança Comercial</p>
                     <div class="number">
-                        R$ <strong class="counter">{{ context.trade_balance }}</strong><small>bilhões</small>
+                        R$ <strong class="counter">{{ product.trade_balance }}</strong><small>bilhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Valor Total Exportado</p>
                     <div class="number">
-                        R$ <strong class="counter">{{ context.total_value_exp }}</strong><small>mil</small>
+                        R$ <strong class="counter">{{ product.export_val }}</strong><small>mil</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Relação Peso Líquido(kg)/Valor Total Exportado</p>
                     <div class="number">
-                        <strong class="counter">{{ context.rel_net_weight_tve }}</strong><small>milhões</small>
+                        <strong class="counter">{{ product.export_net_weight }}</strong><small>milhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Valor Total Importado</p>
                     <div class="number">
-                        <strong class="counter">{{ context.total_value_imp }}</strong><small>milhões</small>
+                        <strong class="counter">{{ product.import_val }}</strong><small>{{ product.imp_val }}milhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Relação Peso Líquido(kg)/Valor Total Importado</p>
                     <div class="number">
-                        <strong class="counter">{{ context.rel_net_weight_tvi }}</strong><small>anos</small>
+                        <strong class="counter">{{ product.import_net_weight }}</strong><small>anos</small>
                     </div>
                 </div>
 
-                {% if context.selector_index == 'posicoes' %}
+                {% if context.depth == 6 %}
 
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Índice de Complexidade do Produto</p>
                     <div class="number">
-                        <strong class="counter">{{ context.prod_complex_index }}</strong><small>milhões</small>
+                        <strong class="counter">{{ product.pci }}</strong><small>milhões</small>
                     </div>
                 </div>
 
-                    {% if context.region and context.region != 'Brazil' %}
+                    {% if context.bra_id %}
 
                     <div class="col-xs-15 col-sm-2 item">
                         <p class="label">RCA internacional</p>
                         <div class="number">
-                            <strong class="counter">{{ context.rca_international }}</strong><small>milhões</small>
+                            <strong class="counter">{{ context.rca_wld }}</strong><small>milhões</small>
                         </div>
                     </div>
                     <div class="col-xs-15 col-sm-2 item">
                         <p class="label">Distância internacional</p>
                         <div class="number">
-                            <strong class="counter">{{ context.international_distance }}</strong><small>milhões</small>
+                            <strong class="counter">{{ context.distance_wld }}</strong><small>milhões</small>
                         </div>
                     </div>
                     <div class="col-xs-15 col-sm-2 item">
                         <p class="label">Ganho de Oportunidade internacional</p>
                         <div class="number">
-                            <strong class="counter">{{ context.ganho_oportunidade_internacional }}</strong><small>milhões</small>
+                            <strong class="counter">{{ context.opp_gain_wld }}</strong><small>milhões</small>
                         </div>
                     </div>
 
@@ -69,7 +69,7 @@
                 {% endif %}
 
                 <div class="col-xs-15 col-sm-15 year">
-                    Ano: {{ context.year}}
+                    Ano: {{ product.year }}
                 </div>
             </div>
         </div>
