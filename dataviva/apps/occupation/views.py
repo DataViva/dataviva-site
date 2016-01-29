@@ -2,11 +2,11 @@
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 
-from dataviva.api.attrs.models import Cbo
+from dataviva.api.attrs.models import Cbo, Bra
 from dataviva.api.rais.models import Yo, Ybo, Yio, Ybio
 
 from dataviva import db
-from sqlalchemy.sql.expression import func, desc
+from sqlalchemy.sql.expression import func, desc, asc
 
 mod = Blueprint('occupation', __name__,
                 template_folder='templates',
@@ -62,6 +62,20 @@ def index():
 			header['salary_mass'] = float(wage)
 			header['total_employment'] = int(num_jobs)
 			header['total_establishments'] = int(num_est)
+
+		ybo_county_num_jobs_query = Ybo.query.join(Bra).filter(
+				Ybo.cbo_id == occupation_id,
+				Ybo.bra_id.like(location_id+'%'),
+				Ybo.year == occupation_basic['year'],
+				Ybo.bra_id_len == 9)\
+			.order_by(asc(Ybo.num_jobs))\
+			.values(Bra.name_pt,
+					Ybo.num_jobs)
+
+		body = {}
+		for name_pt, num_jobs in ybo_county_num_jobs_query:
+			body['county_for_jobs'] = name_pt
+			body['num_jobs_county'] = num_jobs
 	
 		
 	
@@ -72,7 +86,9 @@ def index():
 		'average_monthly_income' : header['average_monthly_income'],
 		'salary_mass': header['salary_mass'],
 		'total_employment' : header['total_employment'],
-		'total_establishments' : header['total_establishments']
+		'total_establishments' : header['total_establishments'],
+		'county_for_jobs' : body['county_for_jobs'],
+		'num_jobs_county' : body['num_jobs_county'],
 	}
 
 	#acessar o contex do diogo com context.id.oqeuquero
