@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 
-from dataviva.api.attrs.models import Cbo, Bra
+from dataviva.api.attrs.models import Cbo, Bra, Cnae
 from dataviva.api.rais.models import Yo, Ybo, Yio, Ybio
 
 from dataviva import db
@@ -28,7 +28,7 @@ def add_language_code(endpoint, values):
 def index():
 
 	occupation_id = '2122'
-	location_id = '4mg'
+	location_id = '1ac'
 	has_location = True
 
 	#se tiver sido selecionada uma localidade especific
@@ -40,15 +40,14 @@ def index():
 			Ybo.bra_id == location_id)\
 			.one()
 			
-		occupation_basic = {}
+		year = 0
 		for year in ybo_max_year:
-			occupation_basic['year'] = year
-	
+			year = year
 
 		ybo_header_query = Ybo.query.join(Cbo).filter(
 			Ybo.cbo_id == occupation_id,
 			Ybo.bra_id == location_id,
-			Ybo.year == occupation_basic['year'])\
+			Ybo.year == year)\
 			.values(Cbo.name_pt,
 					Ybo.wage_avg,
 					Ybo.wage,
@@ -66,9 +65,9 @@ def index():
 		ybo_county_num_jobs_query = Ybo.query.join(Bra).filter(
 				Ybo.cbo_id == occupation_id,
 				Ybo.bra_id.like(location_id+'%'),
-				Ybo.year == occupation_basic['year'],
+				Ybo.year == year,
 				Ybo.bra_id_len == 9)\
-			.order_by(asc(Ybo.num_jobs))\
+			.order_by(desc(Ybo.num_jobs)).limit(1)\
 			.values(Bra.name_pt,
 					Ybo.num_jobs)
 
@@ -76,19 +75,64 @@ def index():
 		for name_pt, num_jobs in ybo_county_num_jobs_query:
 			body['county_for_jobs'] = name_pt
 			body['num_jobs_county'] = num_jobs
-	
+
+		ybo_county_wage_avg_query = Ybo.query.join(Bra).filter(
+				Ybo.cbo_id == occupation_id,
+				Ybo.bra_id.like(location_id+'%'),
+				Ybo.year == year,
+				Ybo.bra_id_len == 9)\
+			.order_by(desc(Ybo.wage_avg)).limit(1)\
+			.values(Bra.name_pt,
+					Ybo.wage_avg)
 		
-	
+		for name_pt, wage_avg in ybo_county_wage_avg_query:
+			body['county_bigger_average_monsthly_income'] = name_pt
+			body['bigger_average_monsthly_income'] = wage_avg
+
+		ybio_activity_num_jobs_query = Ybio.query.join(Cnae).filter(
+				Ybio.cbo_id == occupation_id,
+				Ybio.bra_id.like(location_id+'%'),
+				Ybio.year == year,
+				Ybio.cnae_id_len == 6,
+				Ybo.num_jobs.isnot(None))\
+			.order_by(desc(Ybio.num_jobs)).limit(1)\
+			.values(Cnae.name_pt,
+					Ybio.num_jobs)
+		
+		for name_pt, num_jobs in ybo_county_num_jobs_query:
+			body['activity_for_job'] = name_pt
+			body['num_activity_for_job'] = num_jobs
+
+		ybio_activity_wage_avg_query = Ybio.query.join(Cnae).filter(
+				Ybio.cbo_id == occupation_id,
+				Ybio.bra_id.like(location_id+'%'),
+				Ybio.year == year,
+				Ybio.cnae_id_len == 6)\
+			.order_by(desc(Ybio.wage_avg)).limit(1)\
+			.values(Cnae.name_pt,
+					Ybio.wage_avg)
+
+		for name_pt, wage_avg in ybio_activity_wage_avg_query:
+			body['activity_higher_income'] = name_pt
+			body['value_activity_higher_income'] = wage_avg		
+
 	context = {
 		'name' : header['name'],
 		'text_profile': unicode('Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'),
-		'year' : occupation_basic['year'],
+		'year' : year,
 		'average_monthly_income' : header['average_monthly_income'],
 		'salary_mass': header['salary_mass'],
 		'total_employment' : header['total_employment'],
 		'total_establishments' : header['total_establishments'],
 		'county_for_jobs' : body['county_for_jobs'],
 		'num_jobs_county' : body['num_jobs_county'],
+		'county_bigger_average_monsthly_income' : body['county_bigger_average_monsthly_income'],
+		'bigger_average_monsthly_income': body['bigger_average_monsthly_income'],
+		'activity_higher_income' : body['activity_higher_income'],
+		'value_activity_higher_income' : body['value_activity_higher_income'],
+		#'activity_for_job' : body['activity_for_job'],
+		#'num_activity_for_job' : body['num_activity_for_job'],
+
 	}
 
 	#acessar o contex do diogo com context.id.oqeuquero
