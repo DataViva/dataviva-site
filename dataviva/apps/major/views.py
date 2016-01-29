@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
+from dataviva.api.attrs.models import Course_hedu
+from dataviva.api.hedu.models import Yc_hedu
+from dataviva import db
+from sqlalchemy.sql.expression import func, desc
 
 mod = Blueprint('major', __name__,
                 template_folder='templates',
@@ -17,8 +21,33 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
+    course_id = '523E04'
+
+    ''' Queries que pegam o ano mais recente dos dados '''
+    yc_max_year_query = db.session.query(func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_id)
+
+    yc_query = Yc_hedu.query.join(Course_hedu).filter(
+        Yc_hedu.course_hedu_id == course_id,
+        Yc_hedu.year == yc_max_year_query)
+
+    yc_data = yc_query.values(
+        Course_hedu.name_pt,
+        Yc_hedu.year,
+        Yc_hedu.enrolled,
+        Yc_hedu.entrants,
+        Yc_hedu.graduates
+    )
+
+    major = {}
+
+    for name_pt, year, enrolled, entrants, graduates in yc_data:
+        major['name'] = name_pt
+        major['year'] = year
+        major['enrolled'] = enrolled
+        major['entrants'] = entrants
+        major['graduates'] = graduates
+
     context = {
-        'body_class' : 'perfil-estado', 
         'major_name' : 'Engenharia de Computacao',
         'enrollments_number' : str(280),
         'entrants_number' : str(8),
@@ -41,6 +70,6 @@ def index():
         'logo_name' : 'university-logo',
         'background_name' : 'bg-profile-university'
     }
-    return render_template('major/index.html', major_context=context)
+    return render_template('major/index.html', major=major, body_class='perfil-estado')
 
 
