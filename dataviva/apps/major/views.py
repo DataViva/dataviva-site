@@ -68,6 +68,7 @@ def index():
 
     yc_data = yc_query.values(
         Course_hedu.name_pt,
+        Course_hedu.desc_pt,
         Yc_hedu.year,
         Yc_hedu.enrolled,
         Yc_hedu.entrants,
@@ -76,6 +77,7 @@ def index():
 
     yuc_enrolled_data = yuc_enrolled_query.values(
         University.name_pt,
+        Course_hedu.desc_pt,
         Yuc.enrolled
     )
 
@@ -106,49 +108,41 @@ def index():
 
 
     major = {}
+    enrollments = {}
 
-    for name_pt, year, enrolled, entrants, graduates in yc_data:
+    for name_pt, desc_pt, year, enrolled, entrants, graduates in yc_data:
         major['name'] = name_pt
+        major['profile'] = desc_pt
         major['year'] = year
         major['enrolled'] = enrolled
         major['entrants'] = entrants
         major['graduates'] = graduates
 
-    for name_pt, enrolled in yuc_enrolled_data:
-        major['enrolled_university'] = name_pt
-        major['enrolled_university_data'] = enrolled
+    for name_pt, desc_pt, enrolled in yuc_enrolled_data:
+        enrollments['enrolled_university'] = name_pt
+        enrollments['profile'] = desc_pt
+        enrollments['enrolled_university_data'] = enrolled
 
     for name_pt, enrolled in ybc_enrolled_data:
-        major['enrolled_county'] = name_pt
-        major['enrolled_county_data'] = enrolled
+        enrollments['enrolled_county'] = name_pt
+        enrollments['enrolled_county_data'] = enrolled
 
     for name_pt, entrants in yuc_entrants_data:
-        major['entrants_university'] = name_pt
-        major['entrants_university_data'] = entrants
+        enrollments['entrants_university'] = name_pt
+        enrollments['entrants_university_data'] = entrants
 
     for name_pt, entrants in ybc_entrants_data:
-        major['entrants_county'] = name_pt
-        major['entrants_county_data'] = entrants    
+        enrollments['entrants_county'] = name_pt
+        enrollments['entrants_county_data'] = entrants    
 
     for name_pt, graduates in yuc_graduates_data:
-        major['graduates_university'] = name_pt
-        major['graduates_university_data'] = graduates
+        enrollments['graduates_university'] = name_pt
+        enrollments['graduates_university_data'] = graduates
 
     for name_pt, graduates in ybc_graduates_data:
-        major['graduates_county'] = name_pt
-        major['graduates_county_data'] = graduates 
+        enrollments['graduates_county'] = name_pt
+        enrollments['graduates_county_data'] = graduates 
 
-    context = {
-        'enrollments_profile' : 'Engenharia de Computacao e um curso denominado nota 5 pelo MEC em algumas universidades.',
-        'profile' : 'Engenharia de Computacao e um curso denominado nota 5 pelo MEC em algumas universidades.',
-        'year' : 2013,
-        'main_graduates_university' : 'UFRGS',
-        'main_graduates_university_number' : str(15),
-        'main_graduates_county' : 'Porto Alegre',
-        'main_graduates_county_number' : str(500),
-        'logo_name' : 'university-logo',
-        'background_name' : 'bg-profile-university'
-    }
-    return render_template('major/index.html', major=major, body_class='perfil-estado')
+    return render_template('major/index.html', major=major, enrollments=enrollments, body_class='perfil-estado')
 
 
