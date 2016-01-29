@@ -26,11 +26,11 @@ def add_language_code(endpoint, values):
 def index():
 
     course_sc_id = '01006'
-    bra_id = None
+    bra_id = '4mg030000'
+    course = {}
 
-    if not bra_id:
-        pass
-
+    if bra_id == None:
+        
         max_year_subquery = db.session.query(
             func.max(Yc_sc.year)).filter_by(course_sc_id=course_sc_id)
 
@@ -42,21 +42,48 @@ def index():
 
         ysc_query = Ysc.query.filter(Ysc.course_sc_id == course_sc_id,
                                      Ysc.year == ysc_max_year_subquery)
-
-    course = {}
-    course['schools_count'] = ysc_query.count()
+        
+        course['schools_count'] = ysc_query.count()
     
-    yc_data = yc_query.values(Yc_sc.classes,
-                               Yc_sc.age,
-                               Yc_sc.enrolled,
-                               Yc_sc.year)
+        yc_data = yc_query.values(Yc_sc.classes,
+                                   Yc_sc.age,
+                                   Yc_sc.enrolled,
+                                   Yc_sc.year)
 
-    for classes, age, enrolled, year in yc_data:
-        course['classes'] = classes
-        course['age'] = age
-        course['enrolled'] = enrolled
-        course['average_class_size'] = enrolled / classes
-        course['year'] = year
+        for classes, age, enrolled, year in yc_data:
+            course['classes'] = classes
+            course['age'] = age
+            course['enrolled'] = enrolled
+            course['average_class_size'] = enrolled / classes
+            course['year'] = year
+
+    else:
+        
+        max_year_subquery = db.session.query(
+            func.max(Ybc_sc.year)).filter_by(course_sc_id=course_sc_id, bra_id=bra_id)
+
+        ysc_max_year_subquery = db.session.query(
+            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id, bra_id=bra_id)
+
+        ybc_query = Ybc_sc.query.filter(Ybc_sc.course_sc_id == course_sc_id,
+                                      Ybc_sc.year == max_year_subquery)
+
+        ybsc_query = Ybsc.query.filter(Ysc.course_sc_id == course_sc_id,
+                                     Ybsc.year == ysc_max_year_subquery)
+
+        course['schools_count'] = ybsc_query.count()
+    
+        ybc_data = ybc_query.values(Ybc_sc.classes,
+                                   Ybc_sc.age,
+                                   Ybc_sc.enrolled,
+                                   Ybc_sc.year)
+
+        for classes, age, enrolled, year in ybc_data:
+            course['classes'] = classes
+            course['age'] = age
+            course['enrolled'] = enrolled
+            course['average_class_size'] = enrolled / classes
+            course['year'] = year
 
     context = {
         'title': unicode('Quinta Série', 'utf8'),
