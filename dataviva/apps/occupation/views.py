@@ -29,28 +29,50 @@ def index():
 
 	occupation_id = '2122'
 	location_id = '4mg'
+	has_location = True
 
-	#encontrando o tamanho da localidade e o ano mais recente dela
-	ybo_max_year_and_location_query = db.session.query(func.max(Ybo.year)).filter(
-		Ybo.cbo_id == occupation_id, 
-		Ybo.bra_id == location_id)\
-		.values(Ybo.bra_id_len,
-				Ybo.year)
+	#se tiver sido selecionada uma localidade especific
+	if has_location:
 
-	occupation_basic = {}
-	for bra_id_len, year in ybo_max_year_and_location_query:
-		occupation_basic['bra_id_len'] = bra_id_len
-		occupation_basic['year'] = year
-
-	#se estivermos tratando um municipio
-	#if bra_id_len == 9 :
-
+		#encontrando o ano mais recente 
+		ybo_max_year= db.session.query(func.max(Ybo.year)).filter(
+			Ybo.cbo_id == occupation_id, 
+			Ybo.bra_id == location_id)\
+			.one()
+			
+		occupation_basic = {}
+		for year in ybo_max_year:
+			occupation_basic['year'] = year
 	
 
+		ybo_header_query = Ybo.query.join(Cbo).filter(
+			Ybo.cbo_id == occupation_id,
+			Ybo.bra_id == location_id,
+			Ybo.year == occupation_basic['year'])\
+			.values(Cbo.name_pt,
+					Ybo.wage_avg,
+					Ybo.wage,
+					Ybo.num_jobs,
+					Ybo.num_est)
+
+		header = {}
+		for name_pt, wage_avg, wage, num_jobs, num_est in ybo_header_query:
+			header['name'] = name_pt
+			header['average_monthly_income'] = float(wage_avg)
+			header['salary_mass'] = float(wage)
+			header['total_employment'] = int(num_jobs)
+			header['total_establishments'] = int(num_est)
+	
+		
+	
 	context = {
-		'name' : 'name_pt',
-		'text_profile': occupation_basic['bra_id_len'], #unicode('Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'),
-		'year' : occupation_basic['year'] ,
+		'name' : header['name'],
+		'text_profile': unicode('Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'),
+		'year' : occupation_basic['year'],
+		'average_monthly_income' : header['average_monthly_income'],
+		'salary_mass': header['salary_mass'],
+		'total_employment' : header['total_employment'],
+		'total_establishments' : header['total_establishments']
 	}
 
 	#acessar o contex do diogo com context.id.oqeuquero
