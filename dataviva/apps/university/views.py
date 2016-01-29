@@ -24,8 +24,8 @@ def index():
     university_id = '00575'
 
     ''' Queries que pegam o ano mais recente dos dados '''
-    yu_max_year_query = db.session.query(func.max(Yu.year)).filter_by(university_id=university_id)
-    yuc_max_year_query = db.session.query(func.max(Yuc.year)).filter_by(university_id=university_id)
+    yu_max_year_query = db.session.query(func.max(Yu.year))
+    yuc_max_year_query = db.session.query(func.max(Yuc.year))
 
     yu_query = Yu.query.join(University).filter(
             Yu.university_id == university_id,
