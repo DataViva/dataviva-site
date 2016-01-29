@@ -48,6 +48,7 @@ def index():
 
     yu_query_data = yu_query.values(
         University.name_pt,
+        University.desc_pt,
         Yu.enrolled,
         Yu.entrants,
         Yu.graduates,
@@ -70,11 +71,12 @@ def index():
 
     university = {}
 
-    for name_pt, enrolled, entrants, graduates, year in yu_query_data:
+    for name_pt, profile, enrolled, entrants, graduates, year in yu_query_data:
         university['name'] = name_pt
         university['enrollments'] = enrolled
         university['entrants'] = entrants
         university['graduates'] =  graduates
+        university['profile'] = profile
         university['year'] =  year
 
     course = {}
