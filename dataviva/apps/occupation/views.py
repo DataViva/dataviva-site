@@ -28,27 +28,29 @@ def add_language_code(endpoint, values):
 def index():
 
 	occupation_id = '2122'
+	location_id = '4mg'
 
-	#encontrando o ano mais recente dos dados
-	yo_max_year_query = db.session.query(func.max(Yo.year)).filter_by(cbo_id=occupation_id)
+	#encontrando o tamanho da localidade e o ano mais recente dela
+	ybo_max_year_and_location_query = db.session.query(func.max(Ybo.year)).filter(
+		Ybo.cbo_id == occupation_id, 
+		Ybo.bra_id == location_id)\
+		.values(Ybo.bra_id_len,
+				Ybo.year)
 
-	yo_query = Yo.query.join(Cbo).filter(
-		Yo.cbo_id == occupation_id,
-		Yo.year == yo_max_year_query)
+	occupation_basic = {}
+	for bra_id_len, year in ybo_max_year_and_location_query:
+		occupation_basic['bra_id_len'] = bra_id_len
+		occupation_basic['year'] = year
 
-	yo_results = yo_query.values(
-		Cbo.name_pt,
-		Yo.num_emp,
-		Yo.num_jobs)
+	#se estivermos tratando um municipio
+	#if bra_id_len == 9 :
 
-	data = []
-	for name_pt, num_emp, num_jobs in yo_results:
-		data += (name_pt, num_emp, num_jobs)
+	
 
 	context = {
-		'name' : data[0],
-		'text_profile': unicode('Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'),
-		'year' : yo_max_year
+		'name' : 'name_pt',
+		'text_profile': occupation_basic['bra_id_len'], #unicode('Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'),
+		'year' : occupation_basic['year'] ,
 	}
 
 	#acessar o contex do diogo com context.id.oqeuquero
@@ -93,4 +95,20 @@ context = {
 
 	} 
 '''
+
+'''yo_query = Ybo.query.join(Cbo).filter(
+		Ybo.cbo_id == occupation_id,
+		Ybo.year == ybo_max_year_query)
+
+	yo_results = yo_query.values(
+		Cbo.name_pt,
+		Ybo.num_emp,
+		Ybo.num_jobs)
+
+	data = {}
+	for name_pt, num_emp, num_jobs in yo_results:
+		data['name'] = name_pt
+		data['total_employment'] = num_emp
+		#data['total']
+		#data += (name_pt, num_emp, num_jobs)'''
 	
