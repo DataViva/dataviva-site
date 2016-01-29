@@ -29,6 +29,8 @@ def index():
 
     occupation_id = '2122'
     bra_id = '1ac'
+    header = {}
+    body = {}
 
     #se tiver sido selecionada uma localidade especific
     if bra_id:
@@ -92,8 +94,6 @@ def index():
                     Ybio.wage_avg)
 
         
-        header = {}
-        body = {}
         header['year'] = year
 
         for name_pt, wage_avg, wage, num_jobs, num_est in ybo_header_generator:
@@ -118,6 +118,10 @@ def index():
         for name_pt, num_jobs in ybio_activity_num_jobs_generator:
             body['activity_for_job'] = name_pt
             body['num_activity_for_job'] = num_jobs 
+
+
+    else: 
+        pass
 
 
     context = {
