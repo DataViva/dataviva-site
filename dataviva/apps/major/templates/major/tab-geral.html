@@ -1,0 +1,99 @@
+<div role="tabpanel" class="tab-pane active" id="geral">
+    <div class="mod mod-datainfo">
+        <div class="numbers-top smaller">
+            <div class="row">
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de Matrículas</p>
+                    <div class="number">
+                        <strong class="counter">{{ major.enrolled }}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de Ingressantes</p>
+                    <div class="number">
+                        <strong class="counter">{{ major.entrants }}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">Número de Concluintes</p>
+                    <div class="number">
+                        <strong class="counter">{{ major.graduates }}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-15 year">
+                    Ano: {{ major.year }}
+                </div>
+            </div>
+        </div>
+        <h2>Perfil Geral</h2>
+        <p>{{ major.profile }}</p>
+        <div class="row">
+            <div class="col-xs-15 col-sm-15 col-md-5">
+                <h3>Matrículas</h3>
+                <div class="table-responsive">
+                    <table class="table data-2-columns margin-none-bottom">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Principal Universidade por Número de Alunos Matriculados
+                                </th>
+                                <td>
+                                    <p class="label">{{ enrollments.enrolled_university }}</p>
+                                    <strong class="counter">{{ enrollments.enrolled_university_data }}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Município por Número de Alunos Matriculados
+                                </th>
+                                <td>
+                                    <p class="label">{{ enrollments.enrolled_county }}</p>
+                                    <strong class="counter">{{ enrollments.enrolled_county_data }}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Universidade por Número de Alunos Ingressantes
+                                </th>
+                                <td>
+                                    <p class="label">{{ enrollments.entrants_university }}</p>
+                                    <strong class="counter">{{ enrollments.entrants_university_data }}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Município por Número de Alunos Ingressantes
+                                </th>
+                                <td>
+                                    <p class="label">{{ enrollments.entrants_county }}</p>
+                                    <strong class="counter">{{ enrollments.entrants_county_data }}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Universidade por Número de Alunos Concluintes
+                                </th>
+                                <td>
+                                    <p class="label">{{ enrollments.graduates_university }}</p>
+                                    <strong class="counter">{{ enrollments.graduates_university_data }}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Município por Número de Alunos Concluintes
+                                </th>
+                                <td>
+                                    <p class="label">{{ enrollments.graduates_county }}</p>
+                                    <strong class="counter">{{ enrollments.graduates_county_data }}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#matriculas" aria-controls="matriculas" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                        mais detalhes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<div role="tabpanel" class="tab-pane" id="matriculas">
+    <h2>Matrículas</h2>
+    <p>{{ enrollments.profile }}</p>
+    <h3>Estatísticas de Matrículas</h3>
+    <div class="row">
+        <div class="col-xs-15 col-sm-15 col-md-12">
+            <div class="table-responsive">
+                <table class="table data-blue">
+                    <thead>
+                        <tr>
+                            <th>
+                                Principal Universidade
+                                <small>por Número de Alunos Matriculados</small>
+                            </th>
+                            <th>
+                                Principal Município
+                                <small>por Número de Alunos Matriculados</small>
+                            </th>
+                            <th>
+                                Principal Universidade
+                                <small>por Número de Alunos Ingressantes</small>
+                            </th>
+                            <th>
+                                Principal Município
+                                <small>por Número de Alunos Ingressantes</small>
+                            </th>
+                            <th>
+                                Principal Universidade
+                                <small>por Número de Alunos Concluintes</small>
+                            </th>
+                            <th>
+                                Principal Município
+                                <small>por Número de Alunos Concluintes</small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p class="label">{{ enrollments.enrolled_university }}</p>
+                                <div class="number">
+                                    <strong class="counter">{{ enrollments.enrolled_university_data }}</strong>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{ enrollments.enrolled_county }}</p>
+                                <div class="number">
+                                    <strong class="counter">{{ enrollments.enrolled_county_data }}</strong>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{ enrollments.entrants_university }}</p>
+                                <div class="number">
+                                    <strong class="counter">{{ enrollments.entrants_university_data }}</strong>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{ enrollments.entrants_county }}</p>
+                                <div class="number">
+                                    <strong class="counter">{{ enrollments.entrants_county_data }}</strong>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{ enrollments.graduates_university }}</p>
+                                <div class="number">
+                                    <strong class="counter">{{ enrollments.graduates_university_data }}</strong>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{ enrollments.graduates_county }}</p>
+                                <div class="number">
+                                    <strong class="counter">{{ enrollments.graduates_county_data }}</strong>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
