@@ -99,6 +99,9 @@
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
                         <tbody>
+
+                            {% if context.bra_id_len != 9 %}
+
                             <tr>
                                 <th>
                                     Principal Município por valor total exportado
@@ -117,6 +120,9 @@
                                     USD <strong class="counter">{{ context.main_munic_total_imp_value }}</strong> <span>bilhões</span>
                                 </td>
                             </tr>
+
+                            {% endif %}
+
                             <tr>
                                 <th>
                                     Principal Destino por valor total exportado
