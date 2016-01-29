@@ -8,6 +8,9 @@
                 <table class="table data-blue">
                     <thead>
                         <tr>
+
+                            {% if context.bra_id_len != 9 %}
+
                             <th>
                                 Principal Município
                                 <small>por Valor Total Exportado</small>
@@ -16,6 +19,9 @@
                                 Principal Município
                                 <small>por Valor Total Importado</small>
                             </th>
+
+                            {% endif %}
+                            
                             <th>
                                 Principal Destino
                                 <small>por Valor Total Exportado</small>
@@ -29,7 +35,7 @@
                     <tbody>
                         <tr>
 
-                            {% if context.depth != 9 %}
+                            {% if context.bra_id_len != 9 %}
 
                             <td>
                                 <p class="label">{{ context.main_munic_total_exp }}</p>
