@@ -44,7 +44,7 @@ def index():
 		for year in ybo_max_year:
 			year = year
 
-		ybo_header_query = Ybo.query.join(Cbo).filter(
+		ybo_header_generator = Ybo.query.join(Cbo).filter(
 			Ybo.cbo_id == occupation_id,
 			Ybo.bra_id == location_id,
 			Ybo.year == year)\
@@ -54,15 +54,7 @@ def index():
 					Ybo.num_jobs,
 					Ybo.num_est)
 
-		header = {}
-		for name_pt, wage_avg, wage, num_jobs, num_est in ybo_header_query:
-			header['name'] = name_pt
-			header['average_monthly_income'] = float(wage_avg)
-			header['salary_mass'] = float(wage)
-			header['total_employment'] = int(num_jobs)
-			header['total_establishments'] = int(num_est)
-
-		ybo_county_num_jobs_query = Ybo.query.join(Bra).filter(
+		ybo_county_num_jobs_generator = Ybo.query.join(Bra).filter(
 				Ybo.cbo_id == occupation_id,
 				Ybo.bra_id.like(location_id+'%'),
 				Ybo.year == year,
@@ -71,12 +63,7 @@ def index():
 			.values(Bra.name_pt,
 					Ybo.num_jobs)
 
-		body = {}
-		for name_pt, num_jobs in ybo_county_num_jobs_query:
-			body['county_for_jobs'] = name_pt
-			body['num_jobs_county'] = num_jobs
-
-		ybo_county_wage_avg_query = Ybo.query.join(Bra).filter(
+		ybo_county_wage_avg_generator = Ybo.query.join(Bra).filter(
 				Ybo.cbo_id == occupation_id,
 				Ybo.bra_id.like(location_id+'%'),
 				Ybo.year == year,
@@ -85,25 +72,18 @@ def index():
 			.values(Bra.name_pt,
 					Ybo.wage_avg)
 		
-		for name_pt, wage_avg in ybo_county_wage_avg_query:
-			body['county_bigger_average_monsthly_income'] = name_pt
-			body['bigger_average_monsthly_income'] = wage_avg
 
-		ybio_activity_num_jobs_query = Ybio.query.join(Cnae).filter(
+		ybio_activity_num_jobs_generator = Ybio.query.join(Cnae).filter(
 				Ybio.cbo_id == occupation_id,
 				Ybio.bra_id.like(location_id+'%'),
 				Ybio.year == year,
-				Ybio.cnae_id_len == 6,
-				Ybo.num_jobs.isnot(None))\
+				Ybio.cnae_id_len == 6)\
 			.order_by(desc(Ybio.num_jobs)).limit(1)\
 			.values(Cnae.name_pt,
 					Ybio.num_jobs)
 		
-		for name_pt, num_jobs in ybo_county_num_jobs_query:
-			body['activity_for_job'] = name_pt
-			body['num_activity_for_job'] = num_jobs
 
-		ybio_activity_wage_avg_query = Ybio.query.join(Cnae).filter(
+		ybio_activity_wage_avg_generator = Ybio.query.join(Cnae).filter(
 				Ybio.cbo_id == occupation_id,
 				Ybio.bra_id.like(location_id+'%'),
 				Ybio.year == year,
@@ -112,85 +92,49 @@ def index():
 			.values(Cnae.name_pt,
 					Ybio.wage_avg)
 
-		for name_pt, wage_avg in ybio_activity_wage_avg_query:
+		
+		header = {}
+		body = {}
+		header['year'] = year
+		for name_pt, wage_avg, wage, num_jobs, num_est in ybo_header_generator:
+			header['name'] = name_pt
+			header['average_monthly_income'] = wage_avg
+			header['salary_mass'] = wage
+			header['total_employment'] = num_jobs
+			header['total_establishments'] = num_est
+		for name_pt, num_jobs in ybo_county_num_jobs_generator:
+			body['county_for_jobs'] = name_pt
+			body['num_jobs_county'] = num_jobs
+		for name_pt, wage_avg in ybio_activity_wage_avg_generator:
 			body['activity_higher_income'] = name_pt
 			body['value_activity_higher_income'] = wage_avg		
+		for name_pt, wage_avg in ybo_county_wage_avg_generator:
+			body['county_bigger_average_monsthly_income'] = name_pt
+			body['bigger_average_monsthly_income'] = wage_avg	
+		for name_pt, num_jobs in ybio_activity_num_jobs_generator:
+			body['activity_for_job'] = name_pt
+			body['num_activity_for_job'] = num_jobs	
+
 
 	context = {
-		'name' : header['name'],
-		'text_profile': unicode('Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'),
-		'year' : year,
-		'average_monthly_income' : header['average_monthly_income'],
-		'salary_mass': header['salary_mass'],
-		'total_employment' : header['total_employment'],
-		'total_establishments' : header['total_establishments'],
-		'county_for_jobs' : body['county_for_jobs'],
-		'num_jobs_county' : body['num_jobs_county'],
-		'county_bigger_average_monsthly_income' : body['county_bigger_average_monsthly_income'],
-		'bigger_average_monsthly_income': body['bigger_average_monsthly_income'],
-		'activity_higher_income' : body['activity_higher_income'],
-		'value_activity_higher_income' : body['value_activity_higher_income'],
-		#'activity_for_job' : body['activity_for_job'],
-		#'num_activity_for_job' : body['num_activity_for_job'],
+		'family' : True,
+		#unidades
+		'average_monthly_income_unity' : 'Milhares', #'unidade_renda_media_mensal'
+		'salary_mass_unity' : 'mil',
+		'total_employment_unity' : 'milhares', 
+		'total_establishments_unity' : 'milhares', #'unidade_total_estabelecimentos' 
+		#unidades
+		'jobs_county_unity' : 'milhares de', #'unidade_empregos_principal_municipio'
+		'activity_for_job_unity': unicode('bilhões','utf8'), #unidade_atividade_por_empregos
+		'bigger_average_monsthly_income_unity': unicode('bilhões','utf8'),
+		'activity_for_job_unity' : unicode('bilhoes','utf8'),
+		#tab-salario-emprego
+		'text_salario_e_emprego': unicode('Minas Gerais é uma das 27 unidades feder...','utf8'),
+		#tab-oportunidades-economicas
+		'text_oportunidades_economicas' : unicode('Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste ','utf8')
 
-	}
-
+	} 
 	#acessar o contex do diogo com context.id.oqeuquero
 
 	
-	return render_template('occupation/index.html', body_class='perfil-estado', context=context)
-
-
-'''
-context = {
-	#index
-	'name' : unicode('Engenheiros em Computaçāo', 'utf8') ,
-	'text_profile': unicode('Engenharia de Computacao e o ramo da engenharia que lida com a realizacao de projeto e construcaoo de computadores e de sistemas que integram hardware e software, viabilizando a producao de novas maquinas e de equipamentos computacionais para serem utilizados em diversos setores.'),
-	'background_image': unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
-	'family' : True,
-	'year' : yo_max_year_query ,
-	#header 
-	'average_monthly_income' : 8, #'renda_media_mensal' 
-	'average_monthly_income_unity' : 'Milhares', #'unidade_renda_media_mensal'
-	'salary_mass': 17.9, #'massa_salarial'
-	'salary_mass_unity' : 'mil',
-	'total_employment' : 1.6, #total de empregos
-	'total_employment_unity' : 'milhares', 
-	'total_establishments' : 6.8, #'total_estabelecimentos'
-	'total_establishments_unity' : 'milhares', #'unidade_total_estabelecimentos' 
-	#tab-geral
-	'county_for_jobs': unicode('Sāo Paulo', 'utf8'), #'municipio_por_empregos' 
-	'num_jobs_county' : 1.62 , #num_empregos_principal_municipio
-	'jobs_county_unity' : 'milhares', #'unidade_empregos_principal_municipio'
-	'activity_for_job' : 'atividade x', #atividade_por_empregos
-	'num_activity_for_job': 1.0, #valor_atividade_por_empregos
-	'activity_for_job_unit': unicode('bilhāo','utf8'), #unidade_atividade_por_empregos
-	'county_bigger_average_monsthly_income': unicode('Sāo Paulo', 'utf8'),
-	'bigger_average_monsthly_income': 12.3, #Valor_maior_renda_media_mensal
-	'bigger_average_monsthly_income_unity': unicode('bilhões','utf8'),
-	'activity_higher_income': 'Desenvolvimento Sob Encomenda ',  #atividade_maior_renda
-	'value_activity_higher_income' : 990 ,
-	#tab-salario-emprego - utiliza as mesmas variaveis da tab geral salario e emprego
-	'text_salario_e_emprego': unicode('Minas Gerais é uma das 27 unidades feder...','utf8'),
-	#tab-oportunidades-economicas
-	'text_oportunidades_economicas' : unicode('Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste ','utf8')
-
-	} 
-'''
-
-'''yo_query = Ybo.query.join(Cbo).filter(
-		Ybo.cbo_id == occupation_id,
-		Ybo.year == ybo_max_year_query)
-
-	yo_results = yo_query.values(
-		Cbo.name_pt,
-		Ybo.num_emp,
-		Ybo.num_jobs)
-
-	data = {}
-	for name_pt, num_emp, num_jobs in yo_results:
-		data['name'] = name_pt
-		data['total_employment'] = num_emp
-		#data['total']
-		#data += (name_pt, num_emp, num_jobs)'''
-	
+	return render_template('occupation/index.html', body_class='perfil-estado', context=context, header = header, body = body)
