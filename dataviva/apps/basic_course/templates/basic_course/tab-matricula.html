@@ -1,8 +1,6 @@
 <div role="tabpanel" class="tab-pane" id="matricula">
     <h2>Matrícula</h2>
-    <p>O Censo Escolar é aplicado anualmente em todo o Brasil, coletando informações sobre diversos aspectos das escolas brasileiras, em especial as matrículas e infraestrutura. Todos os níveis de ensino são envolvidos: ensino infantil, ensino fundamental, ensino médio e EJA.</p>
-    <p>O Censo Escolar é aplicado anualmente em todo o Brasil, coletando informações sobre diversos aspectos das escolas brasileiras, em especial as matrículas e infraestrutura. Todos os níveis de ensino são envolvidos: ensino infantil, ensino fundamental, ensino médio e EJA.</p>
-    <p>O Censo Escolar é aplicado anualmente em todo o Brasil, coletando informações sobre diversos aspectos das escolas brasileiras, em especial as matrículas e infraestrutura. Todos os níveis de ensino são envolvidos: ensino infantil, ensino fundamental, ensino médio e EJA.</p>
+    <p>{{context.enrollment_statistics_description}}</p>    
     <h3>Estatísticas de matrículas do Brasil</h3>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
@@ -23,15 +21,15 @@
                     <tbody>
                         <tr>
                             <td>
-                                <p class="label">{{body.label01}}</p>
+                                <p class="label">{{context.city_max_num_enrolled_br}}</p>
                                 <div class="number">
-                                    <strong class="counter">{{body.indicadorLabel01}}</strong><span> mil</span>
+                                    <strong class="counter">{{context.value_city_max_num_enrolled_br}}</strong><span> mil</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">{{body.label02}}</p>
+                                <p class="label">{{context.school_max_num_enrolled_br}}</p>
                                 <div class="number">
-                                    <strong class="counter">{{body.indicadorLabel02}}</strong><span> mil</span>                                
+                                    <strong class="counter">{{context.value_school_max_num_enrolled_br}}</strong><span> mil</span>                                
                                 </div>
                             </td>                            
                         </tr>

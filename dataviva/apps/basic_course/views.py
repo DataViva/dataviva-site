@@ -21,24 +21,29 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
 
-    header = {
+    context = {
         'title': unicode('Quinta Série', 'utf8'),
-        'num_enrolled':10.3,
-        'num_classes':6.8,
-        'num_schools':11.3,
-        'size_avg_classes':27.3,
-        'avg_age':12.7,
-        'body_school_max_num_enrolled':unicode('Colégio Magnum', 'utf8'),        
+        'num_enrolled_br':10.3,
+        'num_enrolled_location':10.3,
+        'num_classes_br':6.8,
+        'num_classes_location':6.8,
+        'num_schools_br':11.3,
+        'num_schools_location':11.3,
+        'size_avg_classes_br':27.3,
+        'size_avg_classes_location':27.3,
+        'avg_age_br':12.7,
+        'avg_age_location':12.7,
+        'school_max_num_enrolled_br':unicode('Colégio Magnum', 'utf8'),
+        'school_max_num_enrolled_location':unicode('Colégio Magnum', 'utf8'),
+        'value_school_max_num_enrolled_br':2.2,
+        'value_school_max_num_enrolled_location':2.2,
+        'city_max_num_enrolled_br':unicode('Belo Horizonte', 'utf8'),
+        'city_max_num_enrolled_location':unicode('Belo Horizonte', 'utf8'),
+        'value_city_max_num_enrolled_br':15,
+        'value_city_max_num_enrolled_location':15,
         'year':2014,
-    }
+        'general_description': unicode('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tellus magna, consectetur eu convallis sed, malesuada sed ipsum. Integer ligula sapien, ullamcorper id tristique eu, ullamcorper eget eros. Maecenas pretium consectetur tempus. Nam blandit vestibulum justo. Etiam quis dignissim magna, at lacinia enim. Mauris fermentum blandit dui ac pellentesque. Vivamus eget ullamcorper eros. Mauris in feugiat est. Suspendisse venenatis tincidunt tempor. Maecenas ut est id libero rutrum feugiat. Mauris at convallis odio.','utf8'),
+        'enrollment_statistics_description': unicode('O Censo Escolar é aplicado anualmente em todo o Brasil, coletando informações sobre diversos aspectos das escolas brasileiras, em especial as matrículas e infraestrutura. Todos os níveis de ensino são envolvidos: ensino infantil, ensino fundamental, ensino médio e EJA.', 'utf8'),        
+            }
 
-    body = {
-        'general_description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tellus magna, consectetur eu convallis sed, malesuada sed ipsum. Integer ligula sapien, ullamcorper id tristique eu, ullamcorper eget eros. Maecenas pretium consectetur tempus. Nam blandit vestibulum justo. Etiam quis dignissim magna, at lacinia enim. Mauris fermentum blandit dui ac pellentesque. Vivamus eget ullamcorper eros. Mauris in feugiat est. Suspendisse venenatis tincidunt tempor. Maecenas ut est id libero rutrum feugiat. Mauris at convallis odio.',
-        'indicador06':'Escola Municipal',
-        'indicador07':'Belo Horizonte',
-        'label01':'Belo Horizonte',
-        'label02': unicode('Colégio Magnum','utf8'),
-        'indicadorLabel01':2.2,
-        'indicadorLabel02':15,
-    }
-    return render_template('basic_course/index.html', header=header, body=body, body_class='perfil-estado')
+    return render_template('basic_course/index.html', context=context, body_class='perfil-estado')
