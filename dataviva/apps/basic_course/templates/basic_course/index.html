@@ -6,34 +6,34 @@
 <div class="container">
     <ol class="breadcrumb">
         <li><a href="01-index.html">Home</a></li>
-        <li><a href="#">Inicie uma pesquisa</a></li>
-        <li class="active"><span>Cursos de Ensino Superior<span></span></span></li>
+        <li><a href="#">Atividade Econômica</a></li>
+        <li class="active"><span>Teleatendimento<span></span></span></li>
     </ol>
-    <div class="tit-area" style="background-image: url('static/{{ major.background_name }}.jpg')">
+    <div class="tit-area" style="background-image: url('static/img/sala.jpg')">
         <div class="row">
             <div class="col-xs-15 col-md-offset-4 col-md-11">
                 <h1>
-                    {{ major.name }}<a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
+                    {{context.title}} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
                 </h1>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="sidebar has-img col-xs-15 col-md-4">
-            <img src="static/{{ major.logo_name }}.jpg" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
+            <iframe src="static/img/capelo.jpg" width="200" height="150" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active">
                     <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
                 </li>
                 <li role="presentation">
-                    <a href="#matriculas" aria-controls="matriculas" role="tab" data-toggle="tab">Matrículas</a>
-                </li>
+                    <a href="#matricula" aria-controls="matricula" role="tab" data-toggle="tab">Matrícula</a>
+                </li>                
             </ul>
         </div>
         <div class="main-content col-xs-15 col-md-11">
             <div class="tab-content">
-                {% include "major/tab-geral.html" %}
-                {% include "major/tab-matriculas.html" %}
+                {% include "basic_course/tab-geral.html" %}
+                {% include "basic_course/tab-matricula.html" %}                
             </div>
         </div>
     </div>
