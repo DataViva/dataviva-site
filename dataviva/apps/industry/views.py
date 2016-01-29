@@ -27,11 +27,12 @@ def add_language_code(endpoint, values):
 def index():
  
     bra_id = '4mg' # localidade Minas Gerais 
-    cnae_id = 'g'
+    #cnae_id = 'g'   # comercio
+    cnae_id = 'g47113' # supermercados
     industry = {}
 
     industry = { 
-        'industry_name': unicode('Supermercados', 'utf8'), 
+        'name': unicode('Supermercados', 'utf8'), 
         'location' : True ,
         'class' : True,
         'year' : 2010,
@@ -84,7 +85,7 @@ def index():
     industry['year'] = yi_max_year.scalar() 
 
     #Pega o nome da atividade economica
-    industry['industry_name'] = Cnae.query.filter_by(id=cnae_id).one().name()
+    industry['name'] = Cnae.query.filter_by(id=cnae_id).one().name()
 
     #Pegar Headers
     headers_generator = Yi.query.filter(
@@ -99,9 +100,39 @@ def index():
         industry['total_jobs'] = num_jobs
         industry['total_establishments'] = num_est
 
+    
+    #Pegar Dados das Estatisticas de Salario e Emprego
+        
+        # Ocupação 
+    #--Ocupação com maior número de empregos (caso seja Brasil) : (nome e valor)
+    occupation_jobs_generaitor = Yio.query.join(Cbo).filter(
+        Yio.cbo_id == Cbo.id,
+        Yio.cnae_id == cnae_id,
+        Yio.cbo_id_len == 4,                #as atividades mais detallhadas  
+        Yio.year == yi_max_year 
+        ).order_by(desc(Yio.num_jobs)).limit(1).values(Cbo.name_pt, Yio.num_jobs)
+
+    for  name, value in occupation_jobs_generaitor:        
+        industry['occupation_max_number_jobs_name'] = name
+        industry['occupation_max_number_jobs_value'] = value
+      
+    #--Ocupação com maior renda média mensal (caso seja Brasil) 
+    occupation_jobs_generaitor = Yio.query.join(Cbo).filter(
+        Yio.cbo_id == Cbo.id,
+        Yio.cnae_id == cnae_id,
+        Yio.cbo_id_len == 4,                #as atividades mais detallhadas  
+        Yio.year == yi_max_year 
+        ).order_by(desc(Yio.wage_avg)).limit(1).values(Cbo.name_pt, Yio.wage_avg)
+
+    for  name, value in occupation_jobs_generaitor:        
+        industry['occupation_max_monthly_income_name'] = name
+        industry['occupation_max_monthly_income_value'] = value
+
+ 
+                
 
 
-    return render_template('industry/index.html', body_class='perfil-estado', context=industry)
+    return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
 
 
 
