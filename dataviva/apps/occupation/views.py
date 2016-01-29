@@ -51,6 +51,8 @@ def index():
 		'year' : yo_max_year
 	}
 
+	#acessar o contex do diogo com context.id.oqeuquero
+
 	
 	return render_template('occupation/index.html', body_class='perfil-estado', context=context)
 
