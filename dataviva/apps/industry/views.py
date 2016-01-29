@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.attrs.models import Cnae, Cbo
+from dataviva.api.attrs.models import Cnae, Cbo, Bra
 from dataviva.api.rais.models import Yi , Ybi, Yio
 from dataviva import db
 from sqlalchemy import func, desc
@@ -117,20 +117,48 @@ def index():
         industry['occupation_max_number_jobs_value'] = value
       
     #--Ocupação com maior renda média mensal (caso seja Brasil) 
-    occupation_jobs_generaitor = Yio.query.join(Cbo).filter(
+    occupation_wage_avg_generaitor = Yio.query.join(Cbo).filter(
         Yio.cbo_id == Cbo.id,
         Yio.cnae_id == cnae_id,
         Yio.cbo_id_len == 4,                #as atividades mais detallhadas  
         Yio.year == yi_max_year 
         ).order_by(desc(Yio.wage_avg)).limit(1).values(Cbo.name_pt, Yio.wage_avg)
 
-    for  name, value in occupation_jobs_generaitor:        
+    for  name, value in occupation_wage_avg_generaitor:        
         industry['occupation_max_monthly_income_name'] = name
         industry['occupation_max_monthly_income_value'] = value
 
- 
-                
 
+    ''' #TESTAR
+        # Municípios (só e feito se não for município)
+    #--Município com maior número de empregos (caso seja Brasil) :            
+    if len(bra_id) != 9 : 
+
+        county_jobs_generaitor = Ybi.query.join(Bra).filer(
+            Bra.id == Ybi.id,
+            Ybi.cnae_id == cnae_id,
+            Ybi.bra_id_len == 9,
+            year == yi_max_year,    # e o mesmo max_year    
+            ).order_by(desc(Ybi.num_jobs)).limit(1).values(Bra.name_pt, Ybi.num_jobs)
+    
+        for  name, value in county_jobs_generaitor:        
+            industry['county_max_number_jobs_name'] = name
+            industry['county_max_number_jobs_values'] = value
+        
+
+        #--Município com maior renda média mensal (caso seja Brasil):
+        #os nomes esati em outra tabel a Bra     
+        county_wage_avg_generaitor = Ybi.query.join(Bra).filer(
+            Bra.id == Ybi.id,
+            Ybi.cnae_id == cnae_id,
+            Ybi.bra_id_len == 9,
+            year == yi_max_year,    # e o mesmo max_year    
+            ).order_by(desc(Ybi.wage_avg)).limit(1).values(Bra.name_pt, Ybi.wage_avg)   
+        
+        for  name, value in county_wage_avg_generaitor:        
+            industry['county_max_monthly_income_name'] = name
+            industry['county_max_monthly_income_values'] = value    
+        '''
 
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
 
