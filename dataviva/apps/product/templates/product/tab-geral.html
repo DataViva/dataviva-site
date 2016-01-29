@@ -1,6 +1,9 @@
 <div role="tabpanel" class="tab-pane active" id="geral">
     <div class="mod mod-datainfo">
 
+        {{context.bra_id}} </br>
+        {{context.depth}} </br>
+        {{product.name}} </br>
         {{product.year}} </br>
         {{product.export_val}} </br>
         {{product.import_val}} </br>
@@ -9,6 +12,10 @@
         {{product.trade_balance}} </br>
         {{product.export_net_weight}} </br>
         {{product.import_net_weight}} </br>
+        {{product.pci}} </br>
+        {{product.rca_wld}} </br>
+        {{product.distance_wld}} </br>
+        {{product.opp_gain_wld}} </br>
 
         <div class="numbers-top smaller">
             <div class="row">
@@ -58,19 +65,19 @@
                     <div class="col-xs-15 col-sm-2 item">
                         <p class="label">RCA internacional</p>
                         <div class="number">
-                            <strong class="counter">{{ context.rca_wld }}</strong><small>milhões</small>
+                            <strong class="counter">{{ product.rca_wld }}</strong><small>milhões</small>
                         </div>
                     </div>
                     <div class="col-xs-15 col-sm-2 item">
                         <p class="label">Distância internacional</p>
                         <div class="number">
-                            <strong class="counter">{{ context.distance_wld }}</strong><small>milhões</small>
+                            <strong class="counter">{{ product.distance_wld }}</strong><small>milhões</small>
                         </div>
                     </div>
                     <div class="col-xs-15 col-sm-2 item">
                         <p class="label">Ganho de Oportunidade internacional</p>
                         <div class="number">
-                            <strong class="counter">{{ context.opp_gain_wld }}</strong><small>milhões</small>
+                            <strong class="counter">{{ product.opp_gain_wld }}</strong><small>milhões</small>
                         </div>
                     </div>
 
