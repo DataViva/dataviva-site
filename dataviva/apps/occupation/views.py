@@ -123,12 +123,12 @@ def index():
     else: 
         
         #encontrando o ano mais recente 
-        ybo_max_year= db.session.query(func.max(Ybo.year)).filter(
+        yo_max_year= db.session.query(func.max(Yo.year)).filter(
             Ybo.cbo_id == occupation_id)\
             .one()
             
         year = 0
-        for year in ybo_max_year:
+        for year in yo_max_year:
             year = year
 
         #quando nao temos a localidade, buscamos em todo o brasil - rais_yo
@@ -158,22 +158,22 @@ def index():
                     Ybo.wage_avg)
         
 
-        ybio_activity_num_jobs_generator = Ybio.query.join(Cnae).filter(
-                Ybio.cbo_id == occupation_id,
-                Ybio.year == year,
-                Ybio.cnae_id_len == 6)\
-            .order_by(desc(Ybio.num_jobs)).limit(1)\
+        yio_activity_num_jobs_generator = Yio.query.join(Cnae).filter(
+                Yio.cbo_id == occupation_id,
+                Yio.year == year,
+                Yio.cnae_id_len == 6)\
+            .order_by(desc(Yio.num_jobs)).limit(1)\
             .values(Cnae.name_pt,
-                    Ybio.num_jobs)
+                    Yio.num_jobs)
         
 
-        ybio_activity_wage_avg_generator = Ybio.query.join(Cnae).filter(
-                Ybio.cbo_id == occupation_id,
-                Ybio.year == year,
-                Ybio.cnae_id_len == 6)\
-            .order_by(desc(Ybio.wage_avg)).limit(1)\
+        yio_activity_wage_avg_generator = Yio.query.join(Cnae).filter(
+                Yio.cbo_id == occupation_id,
+                Yio.year == year,
+                Yio.cnae_id_len == 6)\
+            .order_by(desc(Yio.wage_avg)).limit(1)\
             .values(Cnae.name_pt,
-                    Ybio.wage_avg)
+                    Yio.wage_avg)
 
         
         header['year'] = year
@@ -189,7 +189,7 @@ def index():
             body['county_for_jobs'] = name_pt
             body['num_jobs_county'] = num_jobs
 
-        for name_pt, wage_avg in ybio_activity_wage_avg_generator:
+        for name_pt, wage_avg in yio_activity_wage_avg_generator:
             body['activity_higher_income'] = name_pt
             body['value_activity_higher_income'] = wage_avg     
 
@@ -197,7 +197,7 @@ def index():
             body['county_bigger_average_monsthly_income'] = name_pt
             body['bigger_average_monsthly_income'] = wage_avg   
 
-        for name_pt, num_jobs in ybio_activity_num_jobs_generator:
+        for name_pt, num_jobs in yio_activity_num_jobs_generator:
             body['activity_for_job'] = name_pt
             body['num_activity_for_job'] = num_jobs 
 
