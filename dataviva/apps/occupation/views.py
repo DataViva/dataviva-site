@@ -28,7 +28,7 @@ def add_language_code(endpoint, values):
 def index():
 
     occupation_id = '2122'
-    bra_id = None #'1ac'
+    bra_id = '4mg' #None
     header = {}
     body = {}
 
