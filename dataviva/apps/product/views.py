@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.attrs.models import Hs, Bra
-from dataviva.api.secex.models import Ymp, Ymbp
+from dataviva.api.attrs.models import Hs, Bra, Wld
+from dataviva.api.secex.models import Ymp, Ymbp, Ympw, Ymbpw
 from dataviva import db
 from sqlalchemy import func, desc
 
@@ -21,9 +21,17 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
+def get_ymp_max_year_subquery(product_id):
+    return db.session.query(func.max(Ymp.year)).filter_by(hs_id=product_id)
+
+def get_pci(product_id, ymp_max_year_subquery):
+    ymp_pci_query = Ymp.query.filter(Ymp.hs_id==product_id,
+                                     Ymp.year==ymp_max_year_subquery,
+                                     Ymp.month==0).limit(1)
+    return ymp_pci_query.one().pci
+
 
 def brasil_posicao_secao(bra_id, product_id, product, ymp_max_year_subquery, name, pci):
-
     ymp_query = Ymp.query.filter(
         Ymp.hs_id==product_id,
         Ymp.year==ymp_max_year_subquery,
@@ -53,8 +61,83 @@ def brasil_posicao_secao(bra_id, product_id, product, ymp_max_year_subquery, nam
 
     return product
 
-def localidade_posicao(bra_id, product_id, product, ymbp_max_year_subquery, name, pci):
+def brasil_export(product_id, product, ymbp_max_year_subquery):
+    ymbp_query = Ymbp.query.join(Bra).filter(
+        Ymbp.hs_id==product_id,
+        Ymbp.year==ymbp_max_year_subquery,
+        Ymbp.bra_id_len==9,
+        Ymbp.month==0
+    ).order_by(desc(Ymbp.export_val)).limit(1)
 
+    ymbp_bra_data = ymbp_query.values(
+        Bra.name_pt,
+        Ymbp.export_val
+    )
+
+    for name_pt, export_val in ymbp_bra_data:
+        product['munic_name_export'] = name_pt
+        product['munic_export_value'] = export_val
+
+    return product
+
+def brasil_import(product_id, product, ymbp_max_year_subquery):
+    ymbp_query = Ymbp.query.join(Bra).filter(
+        Ymbp.hs_id==product_id,
+        Ymbp.year==ymbp_max_year_subquery,
+        Ymbp.bra_id_len==9,
+        Ymbp.month==0
+    ).order_by(desc(Ymbp.import_val)).limit(1)
+
+    ymbp_bra_data = ymbp_query.values(
+        Bra.name_pt,
+        Ymbp.import_val
+    )
+
+    for name_pt, import_val in ymbp_bra_data:
+        product['munic_name_import'] = name_pt
+        product['munic_import_value'] = import_val
+
+    return product
+
+def brasil_dest_export(product_id, product, ympw_max_year_subquery):
+    ympw_query = Ympw.query.join(Wld).filter(
+        Ympw.hs_id==product_id,
+        Ympw.year==ympw_max_year_subquery,
+        Ympw.wld_id_len==5,
+        Ympw.month==0
+    ).order_by(desc(Ympw.export_val)).limit(1)
+
+    ympw_wld_data = ympw_query.values(
+        Wld.name_pt,
+        Ympw.export_val
+    )
+
+    for name_pt, export_val in ympw_wld_data:
+        product['dest_name_export'] = name_pt
+        product['dest_export_value'] = export_val
+
+    return product
+
+def brasil_dest_import(product_id, product, ympw_max_year_subquery):
+    ympw_query = Ympw.query.join(Wld).filter(
+        Ympw.hs_id==product_id,
+        Ympw.year==ympw_max_year_subquery,
+        Ympw.wld_id_len==5,
+        Ympw.month==0
+    ).order_by(desc(Ympw.import_val)).limit(1)
+
+    ympw_wld_data = ympw_query.values(
+        Wld.name_pt,
+        Ympw.import_val
+    )
+
+    for name_pt, import_val in ympw_wld_data:
+        product['dest_name_import'] = name_pt
+        product['dest_import_value'] = import_val
+
+    return product
+
+def localidade_posicao(bra_id, product_id, product, ymbp_max_year_subquery, name, pci):
     ymbp_query = Ymbp.query.filter(
         Ymbp.hs_id==product_id,
         Ymbp.year==ymbp_max_year_subquery,
@@ -92,7 +175,6 @@ def localidade_posicao(bra_id, product_id, product, ymbp_max_year_subquery, name
     return product
 
 def localidade_secao(bra_id, product_id, product, ymbp_max_year_subquery, name):
-
     ymbp_query = Ymbp.query.filter(
         Ymbp.hs_id==product_id,
         Ymbp.year==ymbp_max_year_subquery,
@@ -122,28 +204,47 @@ def localidade_secao(bra_id, product_id, product, ymbp_max_year_subquery, name):
 
     return product
 
-def brasil_export(product_id, product, ymbp_max_year_subquery):
+def localidade_dest_export(bra_id, product_id, product, ymbpw_max_year_subquery):
+    ymbpw_query = Ymbpw.query.join(Wld).filter(
+        Ymbpw.hs_id==product_id,
+        Ymbpw.year==ymbpw_max_year_subquery,
+        Ymbpw.wld_id_len==5,
+        Ymbpw.bra_id.like(str(bra_id)+'%'),
+        Ymbpw.month==0
+    ).order_by(desc(Ymbpw.export_val)).limit(1)
 
-    ymbp_query = Ymbp.query.join(Bra).filter(
-        Ymbp.hs_id==product_id,
-        Ymbp.year==ymbp_max_year_subquery,
-        Ymbp.bra_id_len==9,
-        Ymbp.month==0
-    ).order_by(desc(Ymbp.export_val)).limit(1)
-
-    ymbp_bra_data = ymbp_query.values(
-        Bra.name_pt,
-        Ymbp.export_val
+    ymbpw_wld_data = ymbpw_query.values(
+        Wld.name_pt,
+        Ymbpw.export_val
     )
 
-    for name_pt, export_val in ymbp_bra_data:
-        product['munic_name_export'] = name_pt
-        product['munic_export_value'] = export_val
+    for name_pt, export_val in ymbpw_wld_data:
+        product['dest_name_export'] = name_pt
+        product['dest_export_value'] = export_val
+
+    return product
+
+def localidade_dest_import(bra_id, product_id, product, ymbpw_max_year_subquery):
+    ymbpw_query = Ymbpw.query.join(Wld).filter(
+        Ymbpw.hs_id==product_id,
+        Ymbpw.year==ymbpw_max_year_subquery,
+        Ymbpw.wld_id_len==5,
+        Ymbpw.bra_id.like(str(bra_id)+'%'),
+        Ymbpw.month==0
+    ).order_by(desc(Ymbpw.import_val)).limit(1)
+
+    ymbpw_wld_data = ymbpw_query.values(
+        Wld.name_pt,
+        Ymbpw.import_val
+    )
+
+    for name_pt, import_val in ymbpw_wld_data:
+        product['dest_name_import'] = name_pt
+        product['dest_import_value'] = import_val
 
     return product
 
 def localidade_diff_municipio_export(bra_id, product_id, product, ymbp_max_year_subquery):
-
     ymbp_query = Ymbp.query.join(Bra).filter(
         Ymbp.hs_id==product_id,
         Ymbp.year==ymbp_max_year_subquery,
@@ -163,28 +264,7 @@ def localidade_diff_municipio_export(bra_id, product_id, product, ymbp_max_year_
 
     return product
 
-def brasil_import(product_id, product, ymbp_max_year_subquery):
-
-    ymbp_query = Ymbp.query.join(Bra).filter(
-        Ymbp.hs_id==product_id,
-        Ymbp.year==ymbp_max_year_subquery,
-        Ymbp.bra_id_len==9,
-        Ymbp.month==0
-    ).order_by(desc(Ymbp.import_val)).limit(1)
-
-    ymbp_bra_data = ymbp_query.values(
-        Bra.name_pt,
-        Ymbp.import_val
-    )
-
-    for name_pt, import_val in ymbp_bra_data:
-        product['munic_name_import'] = name_pt
-        product['munic_import_value'] = import_val
-
-    return product
-
 def localidade_diff_municipio_import(bra_id, product_id, product, ymbp_max_year_subquery):
-
     ymbp_query = Ymbp.query.join(Bra).filter(
         Ymbp.hs_id==product_id,
         Ymbp.year==ymbp_max_year_subquery,
@@ -202,95 +282,130 @@ def localidade_diff_municipio_import(bra_id, product_id, product, ymbp_max_year_
         product['munic_name_import'] = name_pt
         product['munic_import_value'] = import_val
 
-
+    return product
 
 @mod.route('/')
 def index():
 
-    context = {
-        #vars in index.html
-        'background_image':'static/img/bg-profile-location.jpg',
-        'portrait':'static/img/mineric_product.jpg',
-        'description': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',
-        #vars in tab-geral.html and tab-comercio-internacional.html
-        'main_destination_total_exp': 'Brasil',
-        'main_destination_total_exp_value': 1,
-        'main_source_total_imp': 'Brasil',
-        'main_source_total_imp_value': 1,
-        #vars in tab-comercio-internacional.html
-        'desc_international_trade': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.',
-        #vars in tab-oportunidade-economica.html
-        'desc_economic_opp': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.'
-    }
+    #None database fields must be treated to do math operations...
+    
+    #'SEÇÃO' (depth == 2)
+    #'POSIÇÃO' (depth == 6)
+    #'BRASIL' (bra_id == None)
 
-    product_id = '05' #052601
-    bra_id = '4mg01' #None #'4mg'
+    product_id = '06' #05 #052601 
+    bra_id = '4mg010206' #None #4mg #4mg01 #4mg0000 #4mg010206
     product = {}
 
+    context = {
+        'background_image':'static/img/bg-profile-location.jpg',
+        'portrait':'static/img/mineric_product.jpg',
+        'desc_general': 'Sample Text',
+        'desc_international_trade': 'Sample Text',
+        'desc_economic_opp': 'Sample Text'
+    }
+
     context['bra_id'] = bra_id
-    if bra_id: context['bra_id_len'] = len(bra_id)
+    if bra_id:
+        context['bra_id_len'] = len(bra_id)
     context['depth'] = len(product_id)
 
-    '''
-
-    general query's
-
-    '''
-
-    ###### Product Name #####
+    #Product Name
     name = Hs.query.filter(Hs.id == product_id).first().name()
 
-    ##### Max year Ymp
-    ymp_max_year_subquery = db.session.query(func.max(Ymp.year)).filter_by(hs_id=product_id)
-
-    ##### Max year Ymbp
     if bra_id == None:
         ymbp_max_year_subquery = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id)
+        ympw_max_year_subquery = db.session.query(func.max(Ympw.year)).filter_by(hs_id=product_id)
+
+        ymp_max_year_subquery = get_ymp_max_year_subquery(product_id=product_id)
+        pci = get_pci(product_id=product_id, ymp_max_year_subquery=ymp_max_year_subquery)
+
+        brasil_posicao_secao(
+            bra_id=bra_id, 
+            product_id=product_id, 
+            product=product, 
+            ymp_max_year_subquery=ymp_max_year_subquery, 
+            name=name, 
+            pci=pci
+        )
+
+        brasil_export(
+            product_id=product_id,
+            product=product,
+            ymbp_max_year_subquery=ymbp_max_year_subquery
+        )
+
+        brasil_import(
+            product_id=product_id,
+            product=product,
+            ymbp_max_year_subquery=ymbp_max_year_subquery
+        )
+
+        brasil_dest_export(
+            product_id=product_id,
+            product=product,
+            ympw_max_year_subquery=ympw_max_year_subquery
+        )
+
+        brasil_dest_import(
+            product_id=product_id,
+            product=product,
+            ympw_max_year_subquery=ympw_max_year_subquery
+        )
+    
     else:
         ymbp_max_year_subquery = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id, bra_id=bra_id)
-        
-    ##### pci Ymp
-    ymp_pci_query = Ymp.query.filter(Ymp.hs_id==product_id,
-                                     Ymp.year==ymp_max_year_subquery,
-                                     Ymp.month==0).limit(1)
-    pci = ymp_pci_query.one().pci
+        ymbpw_max_year_subquery = db.session.query(func.max(Ymbpw.year)).filter_by(hs_id=product_id, bra_id=bra_id)
 
-    '''
+        ymp_max_year_subquery = get_ymp_max_year_subquery(product_id=product_id)
+        pci = get_pci(product_id=product_id, ymp_max_year_subquery=ymp_max_year_subquery)
 
-    tab-geral query's
+        if len(product_id) == 6:
+            localidade_posicao(
+                bra_id=bra_id,
+                product_id=product_id,
+                product=product,
+                ymbp_max_year_subquery=ymbp_max_year_subquery,
+                name=name,
+                pci=pci
+            )
 
-    '''
+        elif len(product_id) == 2:
+            localidade_secao(
+                bra_id=bra_id,
+                product_id=product_id,
+                product=product,
+                ymbp_max_year_subquery=ymbp_max_year_subquery,
+                name=name
+            )  
 
-    ##### 'BRASIL' (bra_id == None) and 'SEÇÃO' (depth == 2) #####
-    ##### 'BRASIL' (bra_id == None) and 'POSIÇÃO' (depth == 6) ##### > Show pci
-    if bra_id == None and len(product_id) == 2 or len(product_id) == 6:
-        brasil_posicao_secao(bra_id=bra_id, product_id=product_id, product=product, ymp_max_year_subquery=ymp_max_year_subquery, 
-            name=name, pci=pci)
+        localidade_dest_export(
+            bra_id=bra_id,
+            product_id=product_id,
+            product=product,
+            ymbpw_max_year_subquery=ymbpw_max_year_subquery
+        )
 
-    ##### 'LOCALIDADE' and 'POSIÇÃO' (depth == 6) #####
-    if bra_id != None and len(product_id) == 6:
-        localidade_posicao(bra_id=bra_id, product_id=product_id, product=product, ymbp_max_year_subquery=ymbp_max_year_subquery,
-           name=name, pci=pci)
+        localidade_dest_import(
+            bra_id=bra_id,
+            product_id=product_id,
+            product=product,
+            ymbpw_max_year_subquery=ymbpw_max_year_subquery
+        )
 
-    ##### 'LOCALIDADE' and 'SEÇÃO' (depth == 2) #####
-    if bra_id != None and len(product_id) == 2:
-        localidade_secao(bra_id=bra_id, product_id=product_id, product=product, ymbp_max_year_subquery=ymbp_max_year_subquery,
-           name=name)        
+        if len(bra_id) != 9:
+            localidade_diff_municipio_export(
+                bra_id=bra_id,
+                product_id=product_id,
+                product=product,
+                ymbp_max_year_subquery=ymbp_max_year_subquery
+            )
 
-    '''
-
-    tab-comercio-internacional query's
-
-    '''
-
-    ##### 'BRASIL' (bra_id == None) #####
-    if bra_id == None:
-        brasil_export(product_id=product_id, product=product, ymbp_max_year_subquery=ymbp_max_year_subquery)
-        brasil_import(product_id=product_id, product=product, ymbp_max_year_subquery=ymbp_max_year_subquery)
-
-    ##### 'LOCALIDADE' (bra_id == None) and 'LOCALIDADE' != 'MUNICIPIO' (len(bra_id) !=9 #####
-    if bra_id != None and len(bra_id) != 9:
-        localidade_diff_municipio_export(bra_id=bra_id, product_id=product_id, product=product, ymbp_max_year_subquery=ymbp_max_year_subquery)
-        localidade_diff_municipio_import(bra_id=bra_id, product_id=product_id, product=product, ymbp_max_year_subquery=ymbp_max_year_subquery)
+            localidade_diff_municipio_import(
+                bra_id=bra_id,
+                product_id=product_id,
+                product=product,
+                ymbp_max_year_subquery=ymbp_max_year_subquery
+            )
 
     return render_template('product/index.html', body_class='perfil-estado', product=product, context=context)
