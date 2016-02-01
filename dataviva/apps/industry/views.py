@@ -205,7 +205,20 @@ def index():
         for id, name_en, name_pt in bra_generate:
             dic_names_bra[id] = [name_en, name_pt]
 
-        print dic_names_cbo       
+        ##--Ocupação com maior número de empregos (caso a localidade seja diferente de Brasil):
+
+        occ_jobs_generate = Ybio.query.filter(
+            Ybio.cnae_id == cnae_id,
+            Ybio.cbo_id_len == 4,
+            Ybio.bra_id == bra_id,
+            Ybio.year == ybio_max_year_bra_id
+            ).order_by(desc(Ybio.num_jobs)).limit(1).values(Ybio.cbo_id, Ybio.num_jobs)  
+
+        
+
+        for cbo_id, num_jobs in occ_jobs_generate : 
+            industry['occupation_max_number_jobs_value'] = num_jobs
+            industry['occupation_max_number_jobs_name'] = dic_names_cbo[cbo_id][1]      
 
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
 
