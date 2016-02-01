@@ -31,7 +31,7 @@ def get_pci(product_id, ymp_max_year_subquery):
     return ymp_pci_query.one().pci
 
 
-def brasil_posicao_secao(bra_id, product_id, product, ymp_max_year_subquery, name, pci):
+def brazil_section_position(bra_id, product_id, product, ymp_max_year_subquery, name, pci):
     ymp_query = Ymp.query.filter(
         Ymp.hs_id==product_id,
         Ymp.year==ymp_max_year_subquery,
@@ -61,7 +61,7 @@ def brasil_posicao_secao(bra_id, product_id, product, ymp_max_year_subquery, nam
 
     return product
 
-def brasil_export(product_id, product, ymbp_max_year_subquery):
+def brazil_export(product_id, product, ymbp_max_year_subquery):
     ymbp_query = Ymbp.query.join(Bra).filter(
         Ymbp.hs_id==product_id,
         Ymbp.year==ymbp_max_year_subquery,
@@ -80,7 +80,7 @@ def brasil_export(product_id, product, ymbp_max_year_subquery):
 
     return product
 
-def brasil_import(product_id, product, ymbp_max_year_subquery):
+def brazil_import(product_id, product, ymbp_max_year_subquery):
     ymbp_query = Ymbp.query.join(Bra).filter(
         Ymbp.hs_id==product_id,
         Ymbp.year==ymbp_max_year_subquery,
@@ -99,7 +99,7 @@ def brasil_import(product_id, product, ymbp_max_year_subquery):
 
     return product
 
-def brasil_dest_export(product_id, product, ympw_max_year_subquery):
+def brazil_dest_export(product_id, product, ympw_max_year_subquery):
     ympw_query = Ympw.query.join(Wld).filter(
         Ympw.hs_id==product_id,
         Ympw.year==ympw_max_year_subquery,
@@ -118,7 +118,7 @@ def brasil_dest_export(product_id, product, ympw_max_year_subquery):
 
     return product
 
-def brasil_dest_import(product_id, product, ympw_max_year_subquery):
+def brazil_dest_import(product_id, product, ympw_max_year_subquery):
     ympw_query = Ympw.query.join(Wld).filter(
         Ympw.hs_id==product_id,
         Ympw.year==ympw_max_year_subquery,
@@ -137,7 +137,7 @@ def brasil_dest_import(product_id, product, ympw_max_year_subquery):
 
     return product
 
-def localidade_posicao(bra_id, product_id, product, ymbp_max_year_subquery, name, pci):
+def location_postion(bra_id, product_id, product, ymbp_max_year_subquery, name, pci):
     ymbp_query = Ymbp.query.filter(
         Ymbp.hs_id==product_id,
         Ymbp.year==ymbp_max_year_subquery,
@@ -171,24 +171,24 @@ def localidade_posicao(bra_id, product_id, product, ymbp_max_year_subquery, name
         product['export_kg'] = export_kg
         product['import_kg'] = import_kg
         product['trade_balance'] = export_val - import_val
-        
+
         if export_val == 0:
             product['export_net_weight'] = None
         else:
             product['export_net_weight'] = export_kg / export_val
-        
+
         if import_val == 0:
             product['import_net_weight'] = None
         else:
             product['import_net_weight'] = import_kg / import_val
-        
+
         product['rca_wld'] = rca_wld
         product['distance_wld'] = distance_wld
         product['opp_gain_wld'] = opp_gain_wld
 
     return product
 
-def localidade_secao(bra_id, product_id, product, ymbp_max_year_subquery, name):
+def location_section(bra_id, product_id, product, ymbp_max_year_subquery, name):
     ymbp_query = Ymbp.query.filter(
         Ymbp.hs_id==product_id,
         Ymbp.year==ymbp_max_year_subquery,
@@ -218,7 +218,7 @@ def localidade_secao(bra_id, product_id, product, ymbp_max_year_subquery, name):
 
     return product
 
-def localidade_dest_export(bra_id, product_id, product, ymbpw_max_year_subquery):
+def location_dest_export(bra_id, product_id, product, ymbpw_max_year_subquery):
     ymbpw_query = Ymbpw.query.join(Wld).filter(
         Ymbpw.hs_id==product_id,
         Ymbpw.year==ymbpw_max_year_subquery,
@@ -238,7 +238,7 @@ def localidade_dest_export(bra_id, product_id, product, ymbpw_max_year_subquery)
 
     return product
 
-def localidade_dest_import(bra_id, product_id, product, ymbpw_max_year_subquery):
+def location_dest_import(bra_id, product_id, product, ymbpw_max_year_subquery):
     ymbpw_query = Ymbpw.query.join(Wld).filter(
         Ymbpw.hs_id==product_id,
         Ymbpw.year==ymbpw_max_year_subquery,
@@ -258,7 +258,7 @@ def localidade_dest_import(bra_id, product_id, product, ymbpw_max_year_subquery)
 
     return product
 
-def localidade_diff_municipio_export(bra_id, product_id, product, ymbp_max_year_subquery):
+def location_diff_munic_export(bra_id, product_id, product, ymbp_max_year_subquery):
     ymbp_query = Ymbp.query.join(Bra).filter(
         Ymbp.hs_id==product_id,
         Ymbp.year==ymbp_max_year_subquery,
@@ -278,7 +278,7 @@ def localidade_diff_municipio_export(bra_id, product_id, product, ymbp_max_year_
 
     return product
 
-def localidade_diff_municipio_import(bra_id, product_id, product, ymbp_max_year_subquery):
+def location_diff_munic_import(bra_id, product_id, product, ymbp_max_year_subquery):
     ymbp_query = Ymbp.query.join(Bra).filter(
         Ymbp.hs_id==product_id,
         Ymbp.year==ymbp_max_year_subquery,
@@ -302,12 +302,12 @@ def localidade_diff_municipio_import(bra_id, product_id, product, ymbp_max_year_
 def index():
 
     #None database fields must be treated to do math operations and templates with no data...
-    
+
     #'SEÇÃO' (depth == 2)
     #'POSIÇÃO' (depth == 6)
     #'BRASIL' (bra_id == None)
 
-    product_id = '052601' #05 #052601 
+    product_id = '052601' #05 #052601
     bra_id = '2ce020008' #None #4mg #4mg01 #4mg0000 #4mg010206
     product = {}
 
@@ -334,39 +334,39 @@ def index():
         ymp_max_year_subquery = get_ymp_max_year_subquery(product_id=product_id)
         pci = get_pci(product_id=product_id, ymp_max_year_subquery=ymp_max_year_subquery)
 
-        brasil_posicao_secao(
-            bra_id=bra_id, 
-            product_id=product_id, 
-            product=product, 
-            ymp_max_year_subquery=ymp_max_year_subquery, 
-            name=name, 
+        brazil_section_position(
+            bra_id=bra_id,
+            product_id=product_id,
+            product=product,
+            ymp_max_year_subquery=ymp_max_year_subquery,
+            name=name,
             pci=pci
         )
 
-        brasil_export(
+        brazil_export(
             product_id=product_id,
             product=product,
             ymbp_max_year_subquery=ymbp_max_year_subquery
         )
 
-        brasil_import(
+        brazil_import(
             product_id=product_id,
             product=product,
             ymbp_max_year_subquery=ymbp_max_year_subquery
         )
 
-        brasil_dest_export(
+        brazil_dest_export(
             product_id=product_id,
             product=product,
             ympw_max_year_subquery=ympw_max_year_subquery
         )
 
-        brasil_dest_import(
+        brazil_dest_import(
             product_id=product_id,
             product=product,
             ympw_max_year_subquery=ympw_max_year_subquery
         )
-    
+
     else:
         ymbp_max_year_subquery = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id, bra_id=bra_id)
         ymbpw_max_year_subquery = db.session.query(func.max(Ymbpw.year)).filter_by(hs_id=product_id, bra_id=bra_id)
@@ -375,7 +375,7 @@ def index():
         pci = get_pci(product_id=product_id, ymp_max_year_subquery=ymp_max_year_subquery)
 
         if len(product_id) == 6:
-            localidade_posicao(
+            location_postion(
                 bra_id=bra_id,
                 product_id=product_id,
                 product=product,
@@ -385,22 +385,22 @@ def index():
             )
 
         elif len(product_id) == 2:
-            localidade_secao(
+            location_section(
                 bra_id=bra_id,
                 product_id=product_id,
                 product=product,
                 ymbp_max_year_subquery=ymbp_max_year_subquery,
                 name=name
-            )  
+            )
 
-        localidade_dest_export(
+        location_dest_export(
             bra_id=bra_id,
             product_id=product_id,
             product=product,
             ymbpw_max_year_subquery=ymbpw_max_year_subquery
         )
 
-        localidade_dest_import(
+        location_dest_import(
             bra_id=bra_id,
             product_id=product_id,
             product=product,
@@ -408,14 +408,14 @@ def index():
         )
 
         if len(bra_id) != 9:
-            localidade_diff_municipio_export(
+            location_diff_munic_export(
                 bra_id=bra_id,
                 product_id=product_id,
                 product=product,
                 ymbp_max_year_subquery=ymbp_max_year_subquery
             )
 
-            localidade_diff_municipio_import(
+            location_diff_munic_import(
                 bra_id=bra_id,
                 product_id=product_id,
                 product=product,
