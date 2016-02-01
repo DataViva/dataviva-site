@@ -28,7 +28,7 @@ def add_language_code(endpoint, values):
 def index():
 
     occupation_id = '2122'
-    bra_id = '4mg' #None
+    bra_id = None #'4mg'
     header = {}
     body = {}
 
@@ -119,7 +119,7 @@ def index():
             body['activity_for_job'] = name_pt
             body['num_activity_for_job'] = num_jobs 
 
-
+    ######################## else ##########################
     else: 
         
         #encontrando o ano mais recente 
