@@ -220,6 +220,23 @@ def index():
             industry['occupation_max_number_jobs_value'] = num_jobs
             industry['occupation_max_number_jobs_name'] = dic_names_cbo[cbo_id][1]      
 
+
+        ##-- Ocupação com maior renda média mensal (Caso a Localidade seja diferente de Brasil) :
+     
+        occ_wage_avg_generate = Ybio.query.filter(
+            Ybio.cnae_id == cnae_id,
+            Ybio.cbo_id_len == 4,
+            Ybio.bra_id == bra_id,
+            Ybio.year == ybio_max_year_bra_id
+            ).order_by(desc(Ybio.wage_avg)).limit(1).values(Ybio.cbo_id, Ybio.wage_avg)  
+
+      
+        for cbo_id, wage_avg in occ_wage_avg_generate : 
+            industry['occupation_max_monthly_income_value'] = wage_avg
+            industry['occupation_max_monthly_income_name'] = dic_names_cbo[cbo_id][1]         
+
+
+
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
 
 
