@@ -1,10 +1,10 @@
 <div role="tabpanel" class="tab-pane" id="matricula">
     <h2>Matrícula</h2>
-    <p>{{context.enrollment_statistics_description}}</p>    
+    <p>{{course.enrollment_statistics_description}}</p>
     <h3>Estatísticas de matrículas do Brasil</h3>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
-            <div class="table-responsive">
+            <div class="table-responsive"> 
                 <table class="table data-blue">
                     <thead>
                         <tr>
@@ -15,7 +15,7 @@
                             <th>
                                 Principal Escola
                                 <small>por Número de Alunos Matriculados</small>
-                            </th>                            
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,9 +29,9 @@
                             <td>
                                 <p class="label">{{school.name}}</p>
                                 <div class="number">
-                                    <strong class="counter">{{school.enrolled}}</strong><span> mil</span>                                
+                                    <strong class="counter">{{school.enrolled}}</strong><span> mil</span>
                                 </div>
-                            </td>                            
+                            </td>
                         </tr>
                     </tbody>
                 </table>
