@@ -257,7 +257,7 @@ def index():
 
             ## --Município com maior renda média mensal (caso não seja Brasil) :
             ##error : retornado valores errado 
-            print '\n\n'+str(cnae_id)+' '+str(bra_id)+'\n'
+        
             county_wage_avg_generate = Ybi.query.filter(
                 Ybi.cnae_id == cnae_id,
                 Ybi.bra_id_len == 9,
