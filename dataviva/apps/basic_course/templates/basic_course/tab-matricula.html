@@ -8,10 +8,12 @@
                 <table class="table data-blue">
                     <thead>
                         <tr>
-                            <th>
-                                Principal Município
-                                <small>por Número de Alunos Matriculados</small>
-                            </th>
+                            {% if city.enrolled %}
+                                <th>
+                                    Principal Município
+                                    <small>por Número de Alunos Matriculados</small>
+                                </th>
+                            {% endif %}
                             <th>
                                 Principal Escola
                                 <small>por Número de Alunos Matriculados</small>
@@ -20,12 +22,14 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
-                                <p class="label">{{city.name}}</p>
-                                <div class="number">
-                                    <strong class="counter">{{city.enrolled}}</strong><span> mil</span>
-                                </div>
-                            </td>
+                            {% if city.enrolled %}
+                                <td>
+                                    <p class="label">{{city.name}}</p>
+                                    <div class="number">
+                                        <strong class="counter">{{city.enrolled}}</strong><span> mil</span>
+                                    </div>
+                                </td>
+                            {% endif %}
                             <td>
                                 <p class="label">{{school.name}}</p>
                                 <div class="number">
