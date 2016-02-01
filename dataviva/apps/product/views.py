@@ -160,14 +160,28 @@ def localidade_posicao(bra_id, product_id, product, ymbp_max_year_subquery, name
     product['pci'] = pci
 
     for year, export_val, import_val, export_kg, import_kg, rca_wld, distance_wld, opp_gain_wld in ymbp_data:
+        export_val = export_val or 0
+        import_val = import_val or 0
+        export_kg = export_kg or 0
+        import_kg = import_kg or 0
+
         product['year'] = year
         product['export_val'] = export_val
         product['import_val'] = import_val
         product['export_kg'] = export_kg
         product['import_kg'] = import_kg
         product['trade_balance'] = export_val - import_val
-        product['export_net_weight'] = export_kg / export_val
-        product['import_net_weight'] = import_kg / import_val
+        
+        if export_val == 0:
+            product['export_net_weight'] = None
+        else:
+            product['export_net_weight'] = export_kg / export_val
+        
+        if import_val == 0:
+            product['import_net_weight'] = None
+        else:
+            product['import_net_weight'] = import_kg / import_val
+        
         product['rca_wld'] = rca_wld
         product['distance_wld'] = distance_wld
         product['opp_gain_wld'] = opp_gain_wld
@@ -287,14 +301,14 @@ def localidade_diff_municipio_import(bra_id, product_id, product, ymbp_max_year_
 @mod.route('/')
 def index():
 
-    #None database fields must be treated to do math operations...
+    #None database fields must be treated to do math operations and templates with no data...
     
     #'SEÇÃO' (depth == 2)
     #'POSIÇÃO' (depth == 6)
     #'BRASIL' (bra_id == None)
 
-    product_id = '06' #05 #052601 
-    bra_id = '4mg010206' #None #4mg #4mg01 #4mg0000 #4mg010206
+    product_id = '052601' #05 #052601 
+    bra_id = '2ce020008' #None #4mg #4mg01 #4mg0000 #4mg010206
     product = {}
 
     context = {
