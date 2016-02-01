@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.attrs.models import School, Bra
+from dataviva.api.attrs.models import School, Bra, Course_sc
 from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc
 from dataviva import db
 from sqlalchemy import func, desc
@@ -39,27 +39,33 @@ def index():
         ybsc_max_year_subquery = db.session.query(
             func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
 
-        ybc_query = Ybc_sc.query.filter(Ybc_sc.course_sc_id == course_sc_id,
-                                      Ybc_sc.year == max_year_subquery,
-                                      Ybc_sc.bra_id == bra_id)
+        ybc_query = Ybc_sc.query.join(Course_sc).filter(Ybc_sc.course_sc_id == course_sc_id,
+                                                        Ybc_sc.year == max_year_subquery,
+                                                        Ybc_sc.bra_id == bra_id)
 
         ybsc_query = Ybsc.query.filter(Ybsc.course_sc_id == course_sc_id,
-                                     Ybsc.year == ybsc_max_year_subquery,
-                                     Ybsc.bra_id == bra_id)
+                                       Ybsc.year == ybsc_max_year_subquery,
+                                       Ybsc.bra_id == bra_id)
 
         course['schools_count'] = ybsc_query.count()
 
-        ybc_data = ybc_query.values(Ybc_sc.classes,
-                                   Ybc_sc.age,
-                                   Ybc_sc.enrolled,
-                                   Ybc_sc.year)
+        ybc_data = ybc_query.values(Course_sc.name_pt,
+                                    Course_sc.desc_pt,
+                                    Ybc_sc.classes,
+                                    Ybc_sc.age,
+                                    Ybc_sc.enrolled,
+                                    Ybc_sc.year)
 
-        for classes, age, enrolled, year in ybc_data:
+        for name_pt, desc_pt, classes, age, enrolled, year in ybc_data:
+            course['name'] = name_pt
+            course['description'] = desc_pt or 'Não há descrição para este curso.'
             course['classes'] = classes
             course['age'] = age
             course['enrolled'] = enrolled
             course['average_class_size'] = enrolled / classes
             course['year'] = year
+        
+        course['enrollment_statistics_description'] = desc_pt or 'Enrollment Statistics Description'
 
         school_max_enrolled_query = db.session.query(Ybsc, School).filter(Ybsc.school_id == School.id) \
                                         .filter(Ybsc.course_sc_id == course_sc_id,
@@ -67,12 +73,11 @@ def index():
                                         Ybsc.bra_id == bra_id).order_by(Ybsc.enrolled)
 
         school_data = school_max_enrolled_query.values(School.name_pt,
-                                                        Ybsc.enrolled)
+                                                       Ybsc.enrolled)
 
         for name_pt, enrolled in school_data:
             school['name'] = name_pt
             school['enrolled'] = enrolled
-
 
         city_max_enrolled_query = db.session.query(Ybc_sc, Bra).filter(Ybc_sc.bra_id == Bra.id) \
                                         .filter(Ybc_sc.course_sc_id == course_sc_id,
@@ -81,7 +86,7 @@ def index():
                                         Ybc_sc.bra_id.like(str(bra_id)+'%')).order_by(Ybc_sc.enrolled)
 
         city_data = city_max_enrolled_query.values(Bra.name_pt,
-                                                        Ybc_sc.enrolled)
+                                                   Ybc_sc.enrolled)
 
         for name_pt, enrolled in city_data:
             city['name'] = name_pt
