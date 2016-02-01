@@ -87,6 +87,12 @@ def index():
             course['average_class_size'] = enrolled / classes
             course['year'] = year
 
+        #school_max_enrolled_query = Ysc.query.filter(Ysc.course_sc_id == course_sc_id,
+          #                            Ysc.year == max_year_subquery)
+
+        #session.query(Ysc.school_id,
+        #func.count(Ysc.enrolled)).group_by(Ysc.column).order_by(model.Entry.amount.desc().first())
+
     context = {
         'title': unicode('Quinta Série', 'utf8'),
         'num_enrolled_br':10.3,
