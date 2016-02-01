@@ -187,7 +187,25 @@ def index():
            industry['distance'] =  distance
            industry['opportunity_gain'] =  opp_gain 
 
-           
+
+        ######colocar Cbo +-6000 e Bra +- 3000 em um lista e para simplificar o select
+        ''' 
+            select id, name_en, name_pt from attrs_cbo;  
+            select id, name_en, name_pt from attrs_bra;
+        '''
+        dic_names_cbo = {}
+        dic_names_bra = {}
+
+        cbo_generate = Cbo.query.values(Cbo.id, Cbo.name_en, Cbo.name_pt)
+        bra_generate = Bra.query.values(Bra.id, Bra.name_en, Bra.name_pt)
+
+        for id, name_en, name_pt in cbo_generate:
+            dic_names_cbo[id] = [name_en, name_pt]
+
+        for id, name_en, name_pt in bra_generate:
+            dic_names_bra[id] = [name_en, name_pt]
+
+        print dic_names_cbo       
 
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
 
