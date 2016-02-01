@@ -112,9 +112,7 @@ def index():
                                                         Ybc_sc.enrolled)
 
 
-    course['schools_count'] = total_schools_query.count()
-
-    course['enrollment_statistics_description'] = desc_pt or 'Enrollment Statistics Description'
+    course['schools_count'] = total_schools_query.count()    
 
     for name_pt, desc_pt, classes, age, enrolled, year in course_data:
         course['name'] = name_pt
@@ -124,6 +122,8 @@ def index():
         course['enrolled'] = enrolled
         course['average_class_size'] = enrolled / classes
         course['year'] = year
+
+    course['enrollment_statistics_description'] = desc_pt or 'Enrollment Statistics Description'
 
     for name_pt, enrolled in school_data:
         school['name'] = name_pt
