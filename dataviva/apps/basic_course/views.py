@@ -79,18 +79,19 @@ def index():
             school['name'] = name_pt
             school['enrolled'] = enrolled
 
-        city_max_enrolled_query = db.session.query(Ybc_sc, Bra).filter(Ybc_sc.bra_id == Bra.id) \
-                                        .filter(Ybc_sc.course_sc_id == course_sc_id,
-                                        Ybc_sc.year == max_year_subquery,
-                                        Ybc_sc.bra_id_len == 9,
-                                        Ybc_sc.bra_id.like(str(bra_id)+'%')).order_by(Ybc_sc.enrolled)
+        if len(bra_id) < 9:
+            city_max_enrolled_query = db.session.query(Ybc_sc, Bra).filter(Ybc_sc.bra_id == Bra.id) \
+                                            .filter(Ybc_sc.course_sc_id == course_sc_id,
+                                            Ybc_sc.year == max_year_subquery,
+                                            Ybc_sc.bra_id_len == 9,
+                                            Ybc_sc.bra_id.like(str(bra_id)+'%')).order_by(Ybc_sc.enrolled)
 
-        city_data = city_max_enrolled_query.values(Bra.name_pt,
-                                                   Ybc_sc.enrolled)
+            city_data = city_max_enrolled_query.values(Bra.name_pt,
+                                                       Ybc_sc.enrolled)
 
-        for name_pt, enrolled in city_data:
-            city['name'] = name_pt
-            city['enrolled'] = enrolled
+            for name_pt, enrolled in city_data:
+                city['name'] = name_pt
+                city['enrolled'] = enrolled
 
     else:
 
