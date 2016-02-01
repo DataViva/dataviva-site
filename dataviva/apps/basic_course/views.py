@@ -26,12 +26,12 @@ def add_language_code(endpoint, values):
 def index():
 
     course_sc_id = 'xx006'
-    bra_id = '4mg030001'
+    bra_id = '1ac'
     course = {}    
     school = {}
     city = {}
 
-    if bra_id == '4mg030000':
+    if bra_id == '1ac':
 
         max_year_subquery = db.session.query(
             func.max(Ybc_sc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
@@ -75,6 +75,22 @@ def index():
             school['name_pt'] = name_pt
             school['enrolled'] = enrolled
 
+
+        city_max_enrolled_query = db.session.query(Ybc_sc, Bra).filter(Ybc_sc.bra_id == Bra.id) \
+                                        .filter(Ybc_sc.course_sc_id == course_sc_id,
+                                        Ybc_sc.year == max_year_subquery,
+                                        Ybc_sc.bra_id_len == 9,
+                                        Ybc_sc.bra_id.like(str(bra_id)+'%')).order_by(Ybc_sc.enrolled)
+
+        city['enrolled_count'] = city_max_enrolled_query.first()
+
+        city_data = city_max_enrolled_query.values(Bra.name_pt,
+                                                        Ybc_sc.enrolled)
+
+        for name_pt, enrolled in city_data:
+            city['name_pt'] = name_pt
+            city['enrolled'] = enrolled
+
     else:
 
         max_year_subquery = db.session.query(
@@ -102,6 +118,7 @@ def index():
             course['enrolled'] = enrolled
             course['average_class_size'] = enrolled / classes
             course['year'] = year
+
         
         school_max_enrolled_query = db.session.query(Ysc, School).filter(Ysc.school_id == School.id) \
                                         .filter(Ysc.course_sc_id == course_sc_id,
@@ -116,7 +133,6 @@ def index():
             school['name_pt'] = name_pt
             school['enrolled'] = enrolled
 
-        
 
         city_max_enrolled_query = db.session.query(Ybc_sc, Bra).filter(Ybc_sc.bra_id == Bra.id) \
                                         .filter(Ybc_sc.course_sc_id == course_sc_id,
