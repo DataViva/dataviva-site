@@ -24,14 +24,14 @@ def index():
     university_id = '00575'
 
     ''' Queries que pegam o ano mais recente dos dados '''
-    yu_max_year_query = db.session.query(func.max(Yu.year)).filter_by(university_id=university_id)
-    yuc_max_year_query = db.session.query(func.max(Yuc.year)).filter_by(university_id=university_id)
+    yu_max_year_query = db.session.query(func.max(Yu.year))
+    yuc_max_year_query = db.session.query(func.max(Yuc.year))
 
     yu_query = Yu.query.join(University).filter(
             Yu.university_id == university_id,
             Yu.year == yu_max_year_query)
 
-    yuc_enrollments_query = Yuc.query.join(Course_hedu).filter(
+    yuc_enrolled_query = Yuc.query.join(Course_hedu).filter(
             Yuc.university_id == university_id,
             Yuc.year == yuc_max_year_query,
             func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.enrolled)).limit(1)
@@ -46,7 +46,7 @@ def index():
             Yuc.year == yuc_max_year_query,
             func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.graduates)).limit(1)
 
-    yu_query_data = yu_query.values(
+    yu_data = yu_query.values(
         University.name_pt,
         Yu.enrolled,
         Yu.entrants,
@@ -55,27 +55,27 @@ def index():
         University.desc_pt
     )
 
-    yuc_enrollments_query_data = yuc_enrollments_query.values(
+    yuc_enrolled_data = yuc_enrolled_query.values(
         Course_hedu.name_pt,
         Yuc.enrolled,
         Course_hedu.desc_pt
     )
 
-    yuc_entrants_query_data = yuc_entrants_query.values(
+    yuc_entrants_data = yuc_entrants_query.values(
         Course_hedu.name_pt,
         Yuc.entrants
     )
 
-    yuc_graduates_query_data = yuc_graduates_query.values(
+    yuc_graduates_data = yuc_graduates_query.values(
         Course_hedu.name_pt,
         Yuc.graduates
     )
 
     university = {}
 
-    for name_pt, enrolled, entrants, graduates, year, profile in yu_query_data:
+    for name_pt, enrolled, entrants, graduates, year, profile in yu_data:
         university['name'] = name_pt
-        university['enrollments'] = enrolled
+        university['enrolled'] = enrolled
         university['entrants'] = entrants
         university['graduates'] =  graduates
         university['profile'] = profile
@@ -83,16 +83,16 @@ def index():
 
     course = {}
 
-    for name_pt, enrolled, profile in yuc_enrollments_query_data:
-        course['enrollments_name'] = name_pt
-        course['enrollments'] = enrolled
+    for name_pt, enrolled, profile in yuc_enrolled_data:
+        course['enrolled_name'] = name_pt
+        course['enrolled'] = enrolled
         course['profile'] = profile
 
-    for name_pt, entrants in yuc_entrants_query_data:
+    for name_pt, entrants in yuc_entrants_data:
         course['entrants_name'] = name_pt
         course['entrants'] = entrants
 
-    for name_pt, graduates in yuc_graduates_query_data:
+    for name_pt, graduates in yuc_graduates_data:
         course['graduates_name'] = name_pt
         course['graduates'] = graduates
 

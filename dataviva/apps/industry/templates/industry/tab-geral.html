@@ -1,0 +1,115 @@
+<div role="tabpanel" class="tab-pane active" id="geral">
+    <div class="mod mod-datainfo">
+        <div class="numbers-top smaller">
+            <div class="row">
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">RENDA MÉDIA MENSAL</p>
+                    <div class="number">
+                        R$ <strong class="counter">{{industry.average_monthly_income}}</strong><small>milhares</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">MASSA SALARIAL</p>
+                    <div class="number">
+                        R$ <strong class="counter">{{industry.salary_mass}}</strong><small>mil</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">TOTAL DE EMPREGOS</p>
+                    <div class="number">
+                        <strong class="counter">{{industry.total_jobs}}</strong><small>milhões</small>
+                    </div>
+                </div>
+                <div class="col-xs-15 col-sm-2 item">
+                    <p class="label">TOTAL DE ESTABELECIMENTOS</p>
+                    <div class="number">
+                        <strong class="counter">{{industry.total_establishments}}</strong><small>milhões</small>
+                    </div>
+                </div>
+
+                {% if industry.location %}
+
+                    <div class="col-xs-15 col-sm-2 item">
+                        <p class="label">RCA DOMÉSTICO</p>
+                        <div class="number">
+                            <strong class="counter">{{industry.rca_domestic}}</strong><small>milhões</small>
+                        </div>
+                    </div>
+                    <div class="col-xs-15 col-sm-2 item">
+                        <p class="label">DISTÂNCIA</p>
+                        <div class="number">
+                            <strong class="counter">{{industry.distance}}</strong><small>KM</small>
+                        </div>
+                    </div>
+                    <div class="col-xs-15 col-sm-2 item">
+                        <p class="label">GANHO DE OPORTUNIDADE</p>
+                        <div class="number">
+                            <strong class="counter">{{industry.opportunity_gain}}</strong><small>milhões</small>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="col-xs-15 col-sm-15 year">
+                    Ano: {{industry.year}}
+                </div>
+                    
+
+            </div>
+        </div>
+        <h2>Perfil Geral</h2>
+        <p>{{industry.text_profile}}</p>
+        <div class="row">
+            <div class="col-xs-15 col-sm-15 col-md-5">
+                <h3>Salário e Emprego</h3>
+                <div class="table-responsive">
+                    <table class="table data-2-columns margin-none-bottom">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Ocupação com maior número de empregos
+                                </th>
+                                <td>
+                                    <p class="label">{{industry.occupation_max_number_jobs_name}}</p>
+                                    USD <strong class="counter">{{industry.occupation_max_number_jobs_value}}</strong> <span>bilhões</span>
+                                </td>
+                            </tr>
+                            {% if industry.county %}
+                                <tr>
+                                    <th>
+                                        Município com maior número de empregos
+                                    </th>
+                                    <td>
+                                        <p class="label">{{industry.county_max_number_jobs_name}}</p>
+                                        USD <strong class="counter">{{industry.county_max_number_jobs_value}}</strong> <span>bilhões</span>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            <tr>
+                                <th>
+                                    Ocupação com maior renda média mensal
+                                </th>
+                                <td>
+                                    <p class="label">{{industry.occupation_max_monthly_income_name}}</p>
+                                    USD <strong class="counter">{{industry.occupation_max_monthly_income_value}}</strong> <span>bilhões</span>
+                                </td>
+                            </tr>
+                            {% if industry.county %}
+                                <tr>
+                                    <th>
+                                        Município com maior renda média mensal
+                                    </th>
+                                    <td>
+                                        <p class="label">{{industry.county_max_monthly_income_name}}</p>
+                                        USD <strong class="counter">{{industry.county_max_monthly_income_value}}</strong> <span>bilhões</span>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                        mais detalhes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
