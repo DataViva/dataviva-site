@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.attrs.models import School
+from dataviva.api.attrs.models import School, Bra
 from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc
 from dataviva import db
 from sqlalchemy import func, desc
@@ -25,11 +25,11 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
 
-    course_sc_id = '01006'
+    course_sc_id = 'xx006'
     bra_id = '4mg030001'
-    course = {}
-    enrollment = {}
+    course = {}    
     school = {}
+    city = {}
 
     if bra_id == '4mg030000':
 
@@ -61,6 +61,20 @@ def index():
             course['average_class_size'] = enrolled / classes
             course['year'] = year
 
+        school_max_enrolled_query = db.session.query(Ybsc, School).filter(Ybsc.school_id == School.id) \
+                                        .filter(Ybsc.course_sc_id == course_sc_id,
+                                        Ybsc.year == max_year_subquery,
+                                        Ybsc.bra_id == bra_id).order_by(Ybsc.enrolled)
+
+        school['enrolled_count'] = school_max_enrolled_query.first()
+
+        school_data = school_max_enrolled_query.values(School.name_pt,
+                                                        Ybsc.enrolled)
+
+        for name_pt, enrolled in school_data:
+            school['name_pt'] = name_pt
+            school['enrolled'] = enrolled
+
     else:
 
         max_year_subquery = db.session.query(
@@ -88,27 +102,37 @@ def index():
             course['enrolled'] = enrolled
             course['average_class_size'] = enrolled / classes
             course['year'] = year
+        
+        school_max_enrolled_query = db.session.query(Ysc, School).filter(Ysc.school_id == School.id) \
+                                        .filter(Ysc.course_sc_id == course_sc_id,
+                                        Ysc.year == max_year_subquery).order_by(Ysc.enrolled)
 
-        school_max_enrolled_query = Ysc.query.filter(Ysc.course_sc_id == course_sc_id,
-                                      Ysc.year == max_year_subquery).order_by(Ysc.enrolled)
+        school['enrolled_count'] = school_max_enrolled_query.first()
 
-        enrollment['enrolled_count'] = school_max_enrolled_query.first()
-
-        school_data = school_max_enrolled_query.values(Ysc.school_id,
+        school_data = school_max_enrolled_query.values(School.name_pt,
                                                         Ysc.enrolled)
 
-        for school_id, enrolled in school_data:
-            enrollment['school_id'] = school_id
-            enrollment['enrolled'] = enrolled
-
-        school_name_max_enrolled_query = db.session.query(
-            (School.name_pt)).filter_by(id=school_id)
-
-        school['name'] = school_name_max_enrolled_query.one()
-        school_name = school_name_max_enrolled_query.values(School.name_pt)
-
-        for name_pt in school_name:
+        for name_pt, enrolled in school_data:
             school['name_pt'] = name_pt
+            school['enrolled'] = enrolled
+
+        
+
+        city_max_enrolled_query = db.session.query(Ybc_sc, Bra).filter(Ybc_sc.bra_id == Bra.id) \
+                                        .filter(Ybc_sc.course_sc_id == course_sc_id,
+                                        Ybc_sc.year == max_year_subquery,
+                                        Ybc_sc.bra_id_len == 9).order_by(Ybc_sc.enrolled)
+
+        city['enrolled_count'] = city_max_enrolled_query.first()
+
+        city_data = city_max_enrolled_query.values(Bra.name_pt,
+                                                        Ybc_sc.enrolled)
+
+        for name_pt, enrolled in city_data:
+            city['name_pt'] = name_pt
+            city['enrolled'] = enrolled
+
+        #bra_id.like(str(bra_id)+'%'),
 
     context = {
         'title': unicode('Quinta Série', 'utf8'),
@@ -135,4 +159,4 @@ def index():
         'enrollment_statistics_description': unicode('O Censo Escolar é aplicado anualmente em todo o Brasil, coletando informações sobre diversos aspectos das escolas brasileiras, em especial as matrículas e infraestrutura. Todos os níveis de ensino são envolvidos: ensino infantil, ensino fundamental, ensino médio e EJA.', 'utf8'),
             }
 
-    return render_template('basic_course/index.html', context=context, course=course, enrollment=enrollment, school=school, body_class='perfil-estado')
+    return render_template('basic_course/index.html', context=context, course=course, school=school, city=city, body_class='perfil-estado')
