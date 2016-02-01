@@ -46,8 +46,6 @@ def index():
                                        Ybsc.year == ybsc_max_year_subquery,
                                        Ybsc.bra_id == bra_id)
 
-        course['schools_count'] = total_schools_query.count()
-
         course_data = course_query.values(Course_sc.name_pt,
                                     Course_sc.desc_pt,
                                     Ybc_sc.classes,
@@ -89,8 +87,6 @@ def index():
         total_schools_query = Ysc.query.filter(Ysc.course_sc_id == course_sc_id,
                                      Ysc.year == ysc_max_year_subquery)
 
-        course['schools_count'] = total_schools_query.count()
-
         course_data = course_query.values(Yc_sc.classes,
                                    Yc_sc.age,
                                    Yc_sc.enrolled,
@@ -100,8 +96,6 @@ def index():
                                         .filter(Ysc.course_sc_id == course_sc_id,
                                         Ysc.year == ysc_max_year_subquery).order_by(Ysc.enrolled)
 
-        school['enrolled_count'] = most_enrolled_school_query.first()
-
         school_data = most_enrolled_school_query.values(School.name_pt,
                                                         Ysc.enrolled)
 
@@ -110,10 +104,11 @@ def index():
                                         Ybc_sc.year == max_year_subquery,
                                         Ybc_sc.bra_id_len == 9).order_by(Ybc_sc.enrolled)
 
-        city['enrolled_count'] = most_enrolled_city_query.first()
-
         city_data = most_enrolled_city_query.values(Bra.name_pt,
                                                         Ybc_sc.enrolled)
+
+
+    course['schools_count'] = total_schools_query.count()
 
     for name_pt, desc_pt, classes, age, enrolled, year in course_data:
         course['name'] = name_pt
