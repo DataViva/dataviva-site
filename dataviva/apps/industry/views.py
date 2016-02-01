@@ -26,15 +26,13 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
  
-    bra_id = '4mg' # localidade Minas Gerais 
-    #bra_id = None
-    #cnae_id = 'g'   # comercio
-    cnae_id = 'g47113' # supermercados
+    bra_id = '4mg'
+    cnae_id = 'g47113' #supermarkets
     industry = {}
 
     industry = { 
         'name': unicode('Supermercados', 'utf8'), 
-        'location' : False , # diferente de Brasil
+        'location' : False , 
         'class' : False,
         'year' : 2010,
         'background_image':  unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
@@ -46,38 +44,29 @@ def index():
         'county' : False
     }
 
-
-    #trata municipio
     if bra_id == None : 
         bra_id = ""
 
-    # É diferente Brasil, coloca alguns campos nos heads 
     if bra_id == "" :
         industry['location'] = False
     else : 
         industry['location'] = True    
-    
-    # Se for município não mostra indicadores de max município    
+     
     if len(bra_id) == 9 : 
         industry['county'] = True
     else :
         industry['county'] = True    
 
-    #Se for uma classe aparece oportunidades economicas no menu 
     if len(cnae_id) == 1 : 
         industry['class'] = True
     else : 
         industry['class'] = False
 
     ####EXTRACTY 
-
-
-    #Pega o nome da atividade economica
     industry['name'] = Cnae.query.filter_by(id=cnae_id).one().name()
       
-    # É Brasil
     if bra_id == "" :
-        #subquery do ano máximo Cnae  com localidade igual a Brasil
+
         yi_max_year = db.session.query(func.max(Yi.year)).filter_by(cnae_id=cnae_id)
         industry['year'] = yi_max_year.scalar() 
 
@@ -85,7 +74,6 @@ def index():
 
         ybi_max_year = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
 
-        #Pegar Headers
         headers_generator = Yi.query.filter(
             Yi.cnae_id == cnae_id,
             Yi.year == yi_max_year    
@@ -98,59 +86,46 @@ def index():
             industry['total_jobs'] = num_jobs
             industry['total_establishments'] = num_est
 
-        
-        #Pegar Dados das Estatisticas de Salario e Emprego
-            
-            # Ocupação 
-        #--Ocupação com maior número de empregos (caso seja Brasil) : (nome e valor)
         occupation_jobs_generaitor = Yio.query.join(Cbo).filter(
             Yio.cbo_id == Cbo.id,
             Yio.cnae_id == cnae_id,
-            Yio.cbo_id_len == 4,                #as atividades mais detallhadas  
+            Yio.cbo_id_len == 4,                
             Yio.year == yio_max_year 
             ).order_by(desc(Yio.num_jobs)).limit(1).values(Cbo.name_pt, Yio.num_jobs)
 
         for  name, value in occupation_jobs_generaitor:        
             industry['occupation_max_number_jobs_name'] = name
             industry['occupation_max_number_jobs_value'] = value
-          
-        #--Ocupação com maior renda média mensal (caso seja Brasil) 
+
         occupation_wage_avg_generaitor = Yio.query.join(Cbo).filter(
             Yio.cbo_id == Cbo.id,
             Yio.cnae_id == cnae_id,
-            Yio.cbo_id_len == 4,                #as atividades mais detallhadas  
+            Yio.cbo_id_len == 4,                 
             Yio.year == yio_max_year 
             ).order_by(desc(Yio.wage_avg)).limit(1).values(Cbo.name_pt, Yio.wage_avg)
 
         for  name, value in occupation_wage_avg_generaitor:        
             industry['occupation_max_monthly_income_name'] = name
             industry['occupation_max_monthly_income_value'] = value
-
-
-        #TESTAR
-            # Municípios (só e feito se não for município)
-        #--Município com maior número de empregos (caso seja Brasil) :            
+           
         if len(bra_id) != 9 : 
 
             county_jobs_generaitor = Ybi.query.join(Bra).filter(
                 Bra.id == Ybi.bra_id,
                 Ybi.cnae_id == cnae_id,
                 Ybi.bra_id_len == 9,
-                Ybi.year == ybi_max_year,    # e o mesmo max_year    
+                Ybi.year == ybi_max_year,      
                 ).order_by(desc(Ybi.num_jobs)).limit(1).values(Bra.name_pt, Ybi.num_jobs)
         
             for  name, value in county_jobs_generaitor:        
                 industry['county_max_number_jobs_name'] = name
                 industry['county_max_number_jobs_value'] = value
-            
-                
-            #--Município com maior renda média mensal (caso seja Brasil):
-            #os nomes esati em outra tabel a Bra     
+   
             county_wage_avg_generaitor = Ybi.query.join(Bra).filter(
                 Bra.id == Ybi.bra_id,
                 Ybi.cnae_id == cnae_id,
                 Ybi.bra_id_len == 9,
-                Ybi.year == ybi_max_year,    # e o mesmo max_year    
+                Ybi.year == ybi_max_year,    
                 ).order_by(desc(Ybi.wage_avg)).limit(1).values(Bra.name_pt, Ybi.wage_avg)   
             
             for  name, value in county_wage_avg_generaitor:        
@@ -158,7 +133,7 @@ def index():
                 industry['county_max_monthly_income_value'] = value    
     
     else : 
-        # ano maximo de uma localidade é o dos seus municípios 
+        # Max year, location diferent Brazil
         ybi_max_year_bra_id=db.session.query(
             func.max(Ybi.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
         
@@ -168,7 +143,7 @@ def index():
             func.max(Ybio.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
           
 
-        ##Indicadores Headers 
+        ##Get Headers 
         headers_generate = Ybi.query.filter(
             Ybi.cnae_id==cnae_id,
             Ybi.bra_id == bra_id,
@@ -188,12 +163,6 @@ def index():
            industry['distance'] =  distance
            industry['opportunity_gain'] =  opp_gain 
 
-
-        ######colocar Cbo +-6000 e Bra +- 3000 em um lista e para simplificar o select
-        ''' 
-            select id, name_en, name_pt from attrs_cbo;  
-            select id, name_en, name_pt from attrs_bra;
-        '''
         dic_names_cbo = {}
         dic_names_bra = {}
 
@@ -205,8 +174,6 @@ def index():
 
         for id, name_en, name_pt in bra_generate:
             dic_names_bra[id] = [name_en, name_pt]
-
-        ##--Ocupação com maior número de empregos (caso a localidade seja diferente de Brasil):
 
         occ_jobs_generate = Ybio.query.filter(
             Ybio.cnae_id == cnae_id,
@@ -221,9 +188,6 @@ def index():
             industry['occupation_max_number_jobs_value'] = num_jobs
             industry['occupation_max_number_jobs_name'] = dic_names_cbo[cbo_id][1]      
 
-
-        ##--Ocupação com maior renda média mensal (Caso a Localidade seja diferente de Brasil) :
-     
         occ_wage_avg_generate = Ybio.query.filter(
             Ybio.cnae_id == cnae_id,
             Ybio.cbo_id_len == 4,
@@ -236,14 +200,9 @@ def index():
             industry['occupation_max_monthly_income_value'] = wage_avg
             industry['occupation_max_monthly_income_name'] = dic_names_cbo[cbo_id][1]         
             
-            # nao pode ser municipio
-        if len(bra_id) != 9 :
-            #ano para municipio  de regiao x 
-            # outra tabela pra municipios, ybi - ybio e de ocupaçoes q pode ser por regiao
-
-            ##-- Município com maior número de empregos (caso seja selecionado localidade diferente de Brasil)
-           
             
+        if len(bra_id) != 9 :
+
             county_jobs_generate = Ybi.query.filter(
                 Ybi.cnae_id == cnae_id,
                 Ybi.bra_id_len == 9,
@@ -255,14 +214,11 @@ def index():
                 industry['county_max_number_jobs_value'] = num_jobs
                 industry['county_max_number_jobs_name'] = dic_names_bra[id][1]
 
-            ## --Município com maior renda média mensal (caso não seja Brasil) :
-            ##error : retornado valores errado 
-        
             county_wage_avg_generate = Ybi.query.filter(
                 Ybi.cnae_id == cnae_id,
                 Ybi.bra_id_len == 9,
                 Ybi.bra_id.like(bra_id+'%'),
-                Ybi.year == 2013 #ybi_max_year_bra_id
+                Ybi.year == 2013 
                 ).order_by(desc(Ybi.wage_avg)).limit(1).values(Ybi.bra_id, Ybi.wage_avg)
             
 
