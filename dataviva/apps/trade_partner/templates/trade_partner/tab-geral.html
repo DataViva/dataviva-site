@@ -17,7 +17,7 @@
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Relação Peso Líquido(kg)/ Valor Total Exportado</p>
                     <div class="number">
-                        <strong class="counter">{{country.weight_exported_value}}</strong><small>{{country.weight_exported_value_unity}}</small>
+                        <strong class="counter">{{country.unity_weight_export_price}}</strong>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
@@ -29,7 +29,7 @@
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Relação Peso Líquido(kg)/ Valor Total Importado</p>
                     <div class="number">
-                        <strong class="counter">{{country.weight_imported_value}}</strong><small>{{country.weight_imported_value_unity}}</small>
+                        <strong class="counter">{{country.unity_weight_import_price}}</strong>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-15 year">
@@ -50,8 +50,8 @@
                                     Principal Município por Valor Total Exportado
                                 </th>
                                 <td>
-                                    <p class="label">{{country.county_for_exported_value}}</p>
-                                    USD<strong class="counter">{{country.num_county_for_exported_value}}</strong> <span>milhões</span>
+                                    <p class="label">{{trade.leading_export_county}}</p>
+                                    USD<strong class="counter">{{trade.leading_export_county_value}}</strong> <span>milhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -59,8 +59,8 @@
                                     Principal Município por Valor Total Importado
                                 </th>
                                 <td>
-                                    <p class="label">{{country.county_for_imported_value}}</p>
-                                    USD<strong class="counter">{{country.num_county_for_imported_value}}</strong> <span>milhões</span>
+                                    <p class="label">{{trade.leading_import_county}}</p>
+                                    USD<strong class="counter">{{trade.leading_import_county_value}}</strong> <span>milhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -68,8 +68,8 @@
                                     Principal Produto por Valor Total Exportado
                                 </th>
                                 <td>
-                                    <p class="label">{{country.product_for_exported_value}}</p>
-                                    USD<strong class="counter">{{country.num_product_for_exported_value}}</strong> <span>milhões</span>
+                                    <p class="label">{{trade.product_for_exported_value}}</p>
+                                    USD<strong class="counter">{{trade.num_product_for_exported_value}}</strong> <span>milhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -77,8 +77,8 @@
                                     Principal Produto por Valor Total Importado
                                 </th>
                                 <td>
-                                    <p class="label">{{country.product_for_imported_value}}</p>
-                                    USD<strong class="counter">{{country.num_product_for_imported_value}}</strong> <span>milhões</span>
+                                    <p class="label">{{trade.product_for_imported_value}}</p>
+                                    USD<strong class="counter">{{trade.num_product_for_imported_value}}</strong> <span>milhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -86,8 +86,8 @@
                                     Produto com maior Saldo da Balança Comercial
                                 </th>
                                 <td>
-                                    <p class = "label">{{country.product_bigger_trade_balance}}</p>
-                                    USD<strong class="counter">{{country.value_product_bigger_trade_balance}}</strong> <span>milhoes</span>
+                                    <p class = "label">{{trade.product_bigger_trade_balance}}</p>
+                                    USD<strong class="counter">{{trade.value_product_bigger_trade_balance}}</strong> <span>milhoes</span>
                                 </td>
                             </tr>
                             <tr>
@@ -95,8 +95,8 @@
                                     Produto com menor Saldo da Balança Comercial
                                 </th>
                                 <td>
-                                    <p class = "label">{{country.product_smaller_trade_balance}}</p>
-                                    USD<strong class="counter">{{country.value_product_smaller_trade_balance}}</strong> <span>milhoes</span>
+                                    <p class = "label">{{trade.product_smaller_trade_balance}}</p>
+                                    USD<strong class="counter">{{trade.value_product_smaller_trade_balance}}</strong> <span>milhoes</span>
                                 </td>
                             </tr>
                         </tbody>
