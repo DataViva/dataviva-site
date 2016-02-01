@@ -26,16 +26,16 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
  
-    bra_id = '4mg' # localidade Minas Gerais 
-    #bra_id = ""
+    #bra_id = '4mg' # localidade Minas Gerais 
+    bra_id = None
     #cnae_id = 'g'   # comercio
     cnae_id = 'g47113' # supermercados
     industry = {}
 
     industry = { 
         'name': unicode('Supermercados', 'utf8'), 
-        'location' : True , # diferente de Brasil
-        'class' : True,
+        'location' : False , # diferente de Brasil
+        'class' : False,
         'year' : 2010,
         'background_image':  unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
         'portrait' : unicode('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110', 'utf8') ,
@@ -43,17 +43,25 @@ def index():
        'text_profile' : unicode('Texto de perfil para Supermercados.', 'utf8'),
         'text_salary_job' : unicode('Texto para Salários e empregos', 'utf8'),
         'text_economic_opportunity' : unicode('Texto para Oportunidades Econômicas', 'utf8'),
-        'county' : True
+        'county' : False
     }
 
-    # É ! Brasil, coloca alguns campos nos heads 
-    industry['location'] = True
 
     #trata municipio
-    if len(bra_id) == 4 : 
-        industry['contry'] = False
+    if bra_id == None : 
+        bra_id = ""
+
+    # É diferente Brasil, coloca alguns campos nos heads 
+    if bra_id == "" :
+        industry['location'] = False
+    else : 
+        industry['location'] = True    
+    
+    # Se for município não mostra indicadores de max município    
+    if len(bra_id) == 9 : 
+        industry['county'] = True
     else :
-        industry['contry'] = True    
+        industry['county'] = True    
 
     #Se for uma classe aparece oportunidades economicas no menu 
     if len(cnae_id) == 1 : 
@@ -150,6 +158,7 @@ def index():
                 industry['county_max_monthly_income_value'] = value    
     
     else : 
+        # ano maximo de uma localidade é o dos seus municípios 
         ybi_max_year_bra_id=db.session.query(
             func.max(Ybi.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
         
@@ -157,15 +166,7 @@ def index():
 
         ybio_max_year_bra_id=db.session.query(
             func.max(Ybio.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
-        
-        
-        #maximo ano com localidade de um regiao
-        ybi_max_year_bra_id_region=db.session.query(
-            func.max(Ybi.year)).filter(Ybi.bra_id.like(bra_id+'%'), cnae_id==cnae_id)
-
-        ybio_max_year_bra_id_region=db.session.query(
-            func.max(Ybio.year)).filter(Ybio.bra_id.like(bra_id+'%'), cnae_id==cnae_id)       
-
+          
 
         ##Indicadores Headers 
         headers_generate = Ybi.query.filter(
@@ -234,8 +235,7 @@ def index():
         for cbo_id, wage_avg in occ_wage_avg_generate : 
             industry['occupation_max_monthly_income_value'] = wage_avg
             industry['occupation_max_monthly_income_name'] = dic_names_cbo[cbo_id][1]         
-
-
+            
 
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
 
