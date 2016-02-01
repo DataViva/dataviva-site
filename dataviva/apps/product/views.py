@@ -118,7 +118,7 @@ def brasil_dest_export(product_id, product, ympw_max_year_subquery):
 
     return product
 
-def brasil_dest_import(product_id, product, ympw_max_year_subquery):
+def brasil_src_import(product_id, product, ympw_max_year_subquery):
     ympw_query = Ympw.query.join(Wld).filter(
         Ympw.hs_id==product_id,
         Ympw.year==ympw_max_year_subquery,
@@ -132,8 +132,8 @@ def brasil_dest_import(product_id, product, ympw_max_year_subquery):
     )
 
     for name_pt, import_val in ympw_wld_data:
-        product['dest_name_import'] = name_pt
-        product['dest_import_value'] = import_val
+        product['src_name_import'] = name_pt
+        product['src_import_value'] = import_val
 
     return product
 
@@ -238,7 +238,7 @@ def localidade_dest_export(bra_id, product_id, product, ymbpw_max_year_subquery)
 
     return product
 
-def localidade_dest_import(bra_id, product_id, product, ymbpw_max_year_subquery):
+def localidade_src_import(bra_id, product_id, product, ymbpw_max_year_subquery):
     ymbpw_query = Ymbpw.query.join(Wld).filter(
         Ymbpw.hs_id==product_id,
         Ymbpw.year==ymbpw_max_year_subquery,
@@ -253,8 +253,8 @@ def localidade_dest_import(bra_id, product_id, product, ymbpw_max_year_subquery)
     )
 
     for name_pt, import_val in ymbpw_wld_data:
-        product['dest_name_import'] = name_pt
-        product['dest_import_value'] = import_val
+        product['src_name_import'] = name_pt
+        product['src_import_value'] = import_val
 
     return product
 
@@ -361,7 +361,7 @@ def index():
             ympw_max_year_subquery=ympw_max_year_subquery
         )
 
-        brasil_dest_import(
+        brasil_src_import(
             product_id=product_id,
             product=product,
             ympw_max_year_subquery=ympw_max_year_subquery
@@ -400,7 +400,7 @@ def index():
             ymbpw_max_year_subquery=ymbpw_max_year_subquery
         )
 
-        localidade_dest_import(
+        localidade_src_import(
             bra_id=bra_id,
             product_id=product_id,
             product=product,
