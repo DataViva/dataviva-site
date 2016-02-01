@@ -26,8 +26,8 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
  
-    #bra_id = '4mg' # localidade Minas Gerais 
-    bra_id = None
+    bra_id = '4mg' # localidade Minas Gerais 
+    #bra_id = None
     #cnae_id = 'g'   # comercio
     cnae_id = 'g47113' # supermercados
     industry = {}
@@ -222,7 +222,7 @@ def index():
             industry['occupation_max_number_jobs_name'] = dic_names_cbo[cbo_id][1]      
 
 
-        ##-- Ocupação com maior renda média mensal (Caso a Localidade seja diferente de Brasil) :
+        ##--Ocupação com maior renda média mensal (Caso a Localidade seja diferente de Brasil) :
      
         occ_wage_avg_generate = Ybio.query.filter(
             Ybio.cnae_id == cnae_id,
@@ -236,6 +236,25 @@ def index():
             industry['occupation_max_monthly_income_value'] = wage_avg
             industry['occupation_max_monthly_income_name'] = dic_names_cbo[cbo_id][1]         
             
+            # nao pode ser municipio
+        if len(bra_id) != 9 :
+            #ano para municipio  de regiao x 
+            # outra tabela pra municipios, ybi - ybio e de ocupaçoes q pode ser por regiao
+
+            ##-- Município com maior número de empregos (caso seja selecionado localidade diferente de Brasil)
+           
+            
+            county_jobs_generate = Ybi.query.filter(
+                Ybi.cnae_id == cnae_id,
+                Ybi.bra_id_len == 9,
+                Ybi.bra_id.like(bra_id+'%'), # Ybi.bra_id == bra_id, #
+                Ybi.year == ybi_max_year_bra_id     
+                ).order_by(desc(Ybi.num_jobs)).limit(1).values(Ybi.bra_id, Ybi.num_jobs)
+            
+            for bra_id, num_jobs in county_jobs_generate : 
+                industry['county_max_number_jobs_value'] = num_jobs
+                industry['county_max_number_jobs_name'] = dic_names_bra[bra_id][1]
+
 
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
 
