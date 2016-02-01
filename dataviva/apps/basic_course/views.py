@@ -25,8 +25,8 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
 
-    course_sc_id = 'xx'
-    bra_id = '4mg030000'
+    course_sc_id = 'xx002'
+    bra_id = None
     course = {}    
     school = {}
     city = {}
@@ -50,7 +50,7 @@ def index():
                                         Ybsc.course_sc_id == course_sc_id,
                                         Ybsc.year == ybsc_max_year_subquery,
                                         Ybsc.bra_id == bra_id) \
-                                    .order_by(Ybsc.enrolled).limit(1)
+                                    .order_by(Ybsc.enrolled.desc()).limit(1)
 
         course_data = course_query.values(Course_sc.name_pt,
                                     Course_sc.desc_pt,
@@ -65,10 +65,10 @@ def index():
         if len(bra_id) < 9:
             most_enrolled_city_query = Ybc_sc.query.join(Bra).filter(
                                             Ybc_sc.course_sc_id == course_sc_id,
-                                            Ybc_sc.year == ybc_max_year_subquery,
-                                            Ybc_sc.bra_id_len == 9,
-                                            Ybc_sc.bra_id.like(str(bra_id)+'%')) \
-                                        .order_by(Ybc_sc.enrolled).limit(1)
+                                            Ybc_sc.year == ybc_max_year_subquery,                                            
+                                            Ybc_sc.bra_id.like(str(bra_id)+'%'),
+                                            Ybc_sc.bra_id_len == 9) \
+                                        .order_by(Ybc_sc.enrolled.desc()).limit(1)
 
             city_data = most_enrolled_city_query.values(Bra.name_pt,
                                                        Ybc_sc.enrolled)
@@ -97,13 +97,15 @@ def index():
 
         most_enrolled_city_query = db.session.query(Ybc_sc, Bra).filter(Ybc_sc.bra_id == Bra.id) \
                                         .filter(Ybc_sc.course_sc_id == course_sc_id,
-                                        Ybc_sc.year == max_year_subquery,
+                                        Ybc_sc.year == ysc_max_year_subquery,
                                         Ybc_sc.bra_id_len == 9).order_by(Ybc_sc.enrolled)
 
-        course_data = course_query.values(Yc_sc.classes,
-                                   Yc_sc.age,
-                                   Yc_sc.enrolled,
-                                   Yc_sc.year)
+        course_data = course_query.values(Course_sc.name_pt,
+                                    Course_sc.desc_pt,
+                                    Ybc_sc.classes,
+                                    Ybc_sc.age,
+                                    Ybc_sc.enrolled,
+                                    Ybc_sc.year)
 
         school_data = most_enrolled_school_query.values(School.name_pt,
                                                         Ysc.enrolled)
