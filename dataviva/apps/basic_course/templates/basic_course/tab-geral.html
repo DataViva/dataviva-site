@@ -26,12 +26,15 @@
                         <strong class="counter">{{course.average_class_size}}</strong><small>alunos</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Média de idade</p>
-                    <div class="number">
-                        <strong class="counter">{{course.age}}</strong><small>anos</small>
+
+                {% if course.age %}
+                    <div class="col-xs-15 col-sm-2 item">
+                        <p class="label">Média de idade</p>
+                        <div class="number">
+                            <strong class="counter">{{course.age}}</strong><small>anos</small>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
                 <div class="col-xs-15 col-sm-15 year">
                     Ano: {{course.year}}
                 </div>
