@@ -40,7 +40,7 @@ def index():
         'background_image':  unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
         'portrait' : unicode('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110', 'utf8') ,
         
-       'text_profile' : unicode('Texto de perfil para Supermercados.', 'utf8'),
+        'text_profile' : unicode('Texto de perfil para Supermercados.', 'utf8'),
         'text_salary_job' : unicode('Texto para Salários e empregos', 'utf8'),
         'text_economic_opportunity' : unicode('Texto para Oportunidades Econômicas', 'utf8'),
         'county' : False
@@ -247,13 +247,29 @@ def index():
             county_jobs_generate = Ybi.query.filter(
                 Ybi.cnae_id == cnae_id,
                 Ybi.bra_id_len == 9,
-                Ybi.bra_id.like(bra_id+'%'), # Ybi.bra_id == bra_id, #
+                Ybi.bra_id.like(bra_id+'%'), 
                 Ybi.year == ybi_max_year_bra_id     
                 ).order_by(desc(Ybi.num_jobs)).limit(1).values(Ybi.bra_id, Ybi.num_jobs)
             
-            for bra_id, num_jobs in county_jobs_generate : 
+            for id, num_jobs in county_jobs_generate : 
                 industry['county_max_number_jobs_value'] = num_jobs
-                industry['county_max_number_jobs_name'] = dic_names_bra[bra_id][1]
+                industry['county_max_number_jobs_name'] = dic_names_bra[id][1]
+
+            ## --Município com maior renda média mensal (caso não seja Brasil) :
+            ##error : retornado valores errado 
+            print '\n\n'+str(cnae_id)+' '+str(bra_id)+'\n'
+            county_wage_avg_generate = Ybi.query.filter(
+                Ybi.cnae_id == cnae_id,
+                Ybi.bra_id_len == 9,
+                Ybi.bra_id.like(bra_id+'%'),
+                Ybi.year == 2013 #ybi_max_year_bra_id
+                ).order_by(desc(Ybi.wage_avg)).limit(1).values(Ybi.bra_id, Ybi.wage_avg)
+            
+
+            for id, wage_avg in county_wage_avg_generate : 
+                industry['county_max_monthly_income_value'] = wage_avg
+                industry['county_max_monthly_income_name'] = dic_names_bra[id][1]           
+
 
 
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
