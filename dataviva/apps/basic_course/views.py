@@ -72,6 +72,8 @@ def index():
 
             city_data = most_enrolled_city_query.values(Bra.name_pt,
                                                        Ybc_sc.enrolled)
+        else:
+            city_data = None
 
     else:
 
@@ -123,9 +125,10 @@ def index():
         school['name'] = name_pt
         school['enrolled'] = enrolled
 
-    for name_pt, enrolled in city_data:
-        city['name'] = name_pt
-        city['enrolled'] = enrolled
+    if city_data:
+        for name_pt, enrolled in city_data:
+            city['name'] = name_pt
+            city['enrolled'] = enrolled
 
     course['enrollment_statistics_description'] = desc_pt or 'Enrollment Statistics Description'
 
