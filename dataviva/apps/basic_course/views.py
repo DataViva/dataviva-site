@@ -25,11 +25,12 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
 
-    course_sc_id = 'xx006'
+    course_sc_id = '01006'
     bra_id = '4mg030001'
     course = {}
+    school = {}
 
-    if bra_id:
+    if bra_id == '4mg030000':
 
         max_year_subquery = db.session.query(
             func.max(Ybc_sc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
@@ -87,11 +88,18 @@ def index():
             course['average_class_size'] = enrolled / classes
             course['year'] = year
 
-        #school_max_enrolled_query = Ysc.query.filter(Ysc.course_sc_id == course_sc_id,
-          #                            Ysc.year == max_year_subquery)
 
-        #session.query(Ysc.school_id,
-        #func.count(Ysc.enrolled)).group_by(Ysc.column).order_by(model.Entry.amount.desc().first())
+        school_max_enrolled_query = Ysc.query.filter(Ysc.course_sc_id == course_sc_id,
+                                      Ysc.year == max_year_subquery).order_by(Ysc.enrolled)
+
+        school['enrolled_count'] = school_max_enrolled_query.first()
+
+        school_data = school_max_enrolled_query.values(Ysc.school_id,
+                                                        Ysc.enrolled)
+
+        for school_id, enrolled in school_data:
+            school['school_id'] = school_id
+            school['enrolled'] = enrolled        
 
     context = {
         'title': unicode('Quinta Série', 'utf8'),
@@ -118,4 +126,4 @@ def index():
         'enrollment_statistics_description': unicode('O Censo Escolar é aplicado anualmente em todo o Brasil, coletando informações sobre diversos aspectos das escolas brasileiras, em especial as matrículas e infraestrutura. Todos os níveis de ensino são envolvidos: ensino infantil, ensino fundamental, ensino médio e EJA.', 'utf8'),
             }
 
-    return render_template('basic_course/index.html', context=context, course=course, body_class='perfil-estado')
+    return render_template('basic_course/index.html', context=context, course=course, school=school, body_class='perfil-estado')
