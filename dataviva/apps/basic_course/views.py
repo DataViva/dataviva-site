@@ -66,13 +66,11 @@ def index():
                                         Ybsc.year == max_year_subquery,
                                         Ybsc.bra_id == bra_id).order_by(Ybsc.enrolled)
 
-        school['enrolled_count'] = school_max_enrolled_query.first()
-
         school_data = school_max_enrolled_query.values(School.name_pt,
                                                         Ybsc.enrolled)
 
         for name_pt, enrolled in school_data:
-            school['name_pt'] = name_pt
+            school['name'] = name_pt
             school['enrolled'] = enrolled
 
 
@@ -82,13 +80,11 @@ def index():
                                         Ybc_sc.bra_id_len == 9,
                                         Ybc_sc.bra_id.like(str(bra_id)+'%')).order_by(Ybc_sc.enrolled)
 
-        city['enrolled_count'] = city_max_enrolled_query.first()
-
         city_data = city_max_enrolled_query.values(Bra.name_pt,
                                                         Ybc_sc.enrolled)
 
         for name_pt, enrolled in city_data:
-            city['name_pt'] = name_pt
+            city['name'] = name_pt
             city['enrolled'] = enrolled
 
     else:
@@ -130,7 +126,7 @@ def index():
                                                         Ysc.enrolled)
 
         for name_pt, enrolled in school_data:
-            school['name_pt'] = name_pt
+            school['name'] = name_pt
             school['enrolled'] = enrolled
 
 
@@ -145,7 +141,7 @@ def index():
                                                         Ybc_sc.enrolled)
 
         for name_pt, enrolled in city_data:
-            city['name_pt'] = name_pt
+            city['name'] = name_pt
             city['enrolled'] = enrolled
 
     return render_template('basic_course/index.html', course=course, school=school, city=city, body_class='perfil-estado')

@@ -38,7 +38,7 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>{{context.general_description}}</p>
+        <p>{{course.description}}</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Matrículas</h3>
@@ -50,7 +50,7 @@
                                     Principal Escola por Número de Alunos Matriculados
                                 </th>
                                 <td>
-                                    <p class="label">{{school.name_pt}}</p>
+                                    <p class="label">{{school.name}}</p>
                                     <strong class="counter">{{school.enrolled}}</strong> <span>mil</span>
                                 </td>
                             </tr>
@@ -59,7 +59,7 @@
                                     Principal Município por Número de Alunos Matriculados
                                 </th>
                                 <td>
-                                    <p class="label">{{city.name_pt}}</p>
+                                    <p class="label">{{city.name}}</p>
                                     <strong class="counter">{{city.enrolled}}</strong> <span>mil</span>
                                 </td>
                             </tr>
