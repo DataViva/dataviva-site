@@ -61,23 +61,22 @@ def index():
     else : 
         industry['class'] = False
 
-    
+    ####EXTRACTY 
 
-    ####EXTRACTY   
-
-    #subquery do ano máximo Cnae  com localidade igual a Brasil
-    yi_max_year = db.session.query(func.max(Yi.year)).filter_by(cnae_id=cnae_id)
-    industry['year'] = yi_max_year.scalar() 
-
-    yio_max_year = db.session.query(func.max(Yio.year)).filter_by(cnae_id=cnae_id)
-
-    ybi_max_year = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
 
     #Pega o nome da atividade economica
     industry['name'] = Cnae.query.filter_by(id=cnae_id).one().name()
-
+      
     # É Brasil
-    if bra_id == "" : 
+    if bra_id == "" :
+        #subquery do ano máximo Cnae  com localidade igual a Brasil
+        yi_max_year = db.session.query(func.max(Yi.year)).filter_by(cnae_id=cnae_id)
+        industry['year'] = yi_max_year.scalar() 
+
+        yio_max_year = db.session.query(func.max(Yio.year)).filter_by(cnae_id=cnae_id)
+
+        ybi_max_year = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
+
         #Pegar Headers
         headers_generator = Yi.query.filter(
             Yi.cnae_id == cnae_id,
@@ -151,7 +150,44 @@ def index():
                 industry['county_max_monthly_income_value'] = value    
     
     else : 
+        ybi_max_year_bra_id=db.session.query(
+            func.max(Ybi.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
+        
+        industry['year'] = ybi_max_year_bra_id.scalar()
 
+        ybio_max_year_bra_id=db.session.query(
+            func.max(Ybio.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
+        
+        
+        #maximo ano com localidade de um regiao
+        ybi_max_year_bra_id_region=db.session.query(
+            func.max(Ybi.year)).filter(Ybi.bra_id.like(bra_id+'%'), cnae_id==cnae_id)
+
+        ybio_max_year_bra_id_region=db.session.query(
+            func.max(Ybio.year)).filter(Ybio.bra_id.like(bra_id+'%'), cnae_id==cnae_id)       
+
+
+        ##Indicadores Headers 
+        headers_generate = Ybi.query.filter(
+            Ybi.cnae_id==cnae_id,
+            Ybi.bra_id == bra_id,
+            Ybi.year==ybi_max_year_bra_id).values(
+                Ybi.wage, Ybi.num_jobs, 
+                Ybi.num_est, Ybi.wage_avg, 
+                Ybi.rca, Ybi.distance, 
+                Ybi.opp_gain) 
+
+        lista = []
+        for wage, num_jobs, num_est, wage_avg, rca, distance, opp_gain in headers_generate:
+           industry['average_monthly_income'] = wage
+           industry['salary_mass'] =  num_jobs
+           industry['total_jobs'] =  num_est
+           industry['total_establishments'] =  wage_avg
+           industry['rca_domestic'] =  rca
+           industry['distance'] =  distance
+           industry['opportunity_gain'] =  opp_gain 
+
+           
 
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
 
