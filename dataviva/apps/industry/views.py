@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.attrs.models import Cnae, Cbo, Bra
-from dataviva.api.rais.models import Yi , Ybi, Yio, Ybio
-from dataviva import db
-from sqlalchemy import func, desc
+from dataviva.api.rais.services import Industry as RaisIndustryService
 
 
 mod = Blueprint('industry', __name__,
@@ -26,7 +23,7 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
  
-    bra_id = '4mg000000' # Alfredo Vasconcelos
+    bra_id = '4mg' # '4mg000000' # Alfredo Vasconcelos
     cnae_id = 'g47113' #supermarkets
     industry = {}
 
@@ -57,171 +54,28 @@ def index():
     else : 
         industry['class'] = False
 
+
     ####EXTRACTY 
-    industry['name'] = Cnae.query.filter_by(id=cnae_id).one().name()
-      
+    
+
+    rais_industry_service = RaisIndustryService(bra_id=bra_id, cnae_id=cnae_id)
+
+    industry['name'] = rais_industry_service.get_name()
+
     if bra_id == None :
+        pass
+    else:
+        industry['year'] = rais_industry_service.get_year()
 
-        yi_max_year = db.session.query(func.max(Yi.year)).filter_by(cnae_id=cnae_id)
-        industry['year'] = yi_max_year.scalar() 
-
-        yio_max_year = db.session.query(func.max(Yio.year)).filter_by(cnae_id=cnae_id)
-
-        ybi_max_year = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
-
-        headers_generator = Yi.query.filter(
-            Yi.cnae_id == cnae_id,
-            Yi.year == yi_max_year    
-            ).values(Yi.wage, Yi.num_jobs, Yi.num_est, Yi.wage_avg )
-
-
-        for  wage, num_jobs, num_est, wage_avg in headers_generator:        
-            industry['average_monthly_income'] = wage_avg
-            industry['salary_mass'] = wage
-            industry['total_jobs'] = num_jobs
-            industry['total_establishments'] = num_est
-
-        occupation_jobs_generaitor = Yio.query.join(Cbo).filter(
-            Yio.cbo_id == Cbo.id,
-            Yio.cnae_id == cnae_id,
-            Yio.cbo_id_len == 4,                
-            Yio.year == yio_max_year 
-            ).order_by(desc(Yio.num_jobs)).limit(1).values(Cbo.name_pt, Yio.num_jobs)
-
-        for  name, value in occupation_jobs_generaitor:        
-            industry['occupation_max_number_jobs_name'] = name
-            industry['occupation_max_number_jobs_value'] = value
-
-        occupation_wage_avg_generaitor = Yio.query.join(Cbo).filter(
-            Yio.cbo_id == Cbo.id,
-            Yio.cnae_id == cnae_id,
-            Yio.cbo_id_len == 4,                 
-            Yio.year == yio_max_year 
-            ).order_by(desc(Yio.wage_avg)).limit(1).values(Cbo.name_pt, Yio.wage_avg)
-
-        for  name, value in occupation_wage_avg_generaitor:        
-            industry['occupation_max_monthly_income_name'] = name
-            industry['occupation_max_monthly_income_value'] = value
-
-        county_jobs_generaitor = Ybi.query.join(Bra).filter(
-            Bra.id == Ybi.bra_id,
-            Ybi.cnae_id == cnae_id,
-            Ybi.bra_id_len == 9,
-            Ybi.year == ybi_max_year,      
-            ).order_by(desc(Ybi.num_jobs)).limit(1).values(Bra.name_pt, Ybi.num_jobs)
-    
-        for  name, value in county_jobs_generaitor:        
-            industry['county_max_number_jobs_name'] = name
-            industry['county_max_number_jobs_value'] = value
-
-        county_wage_avg_generaitor = Ybi.query.join(Bra).filter(
-            Bra.id == Ybi.bra_id,
-            Ybi.cnae_id == cnae_id,
-            Ybi.bra_id_len == 9,
-            Ybi.year == ybi_max_year,    
-            ).order_by(desc(Ybi.wage_avg)).limit(1).values(Bra.name_pt, Ybi.wage_avg)   
+        industry.update(rais_industry_service.get_headers_indicators())
         
-        for  name, value in county_wage_avg_generaitor:        
-            industry['county_max_monthly_income_name'] = name
-            industry['county_max_monthly_income_value'] = value    
-    
-    else : 
-        # Max year, location diferent Brazil
-        ybi_max_year_bra_id=db.session.query(
-            func.max(Ybi.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
-        
-        industry['year'] = ybi_max_year_bra_id.scalar()
+        industry.update(rais_industry_service.get_acc_max_number_jobs())
 
-        ybio_max_year_bra_id=db.session.query(
-            func.max(Ybio.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
-          
+        industry.update(rais_industry_service.get_occ_max_wage_avg())
 
-        ##Get Headers 
-        headers_generate = Ybi.query.filter(
-            Ybi.cnae_id==cnae_id,
-            Ybi.bra_id == bra_id,
-            Ybi.year==ybi_max_year_bra_id).values(
-                Ybi.wage, Ybi.num_jobs, 
-                Ybi.num_est, Ybi.wage_avg, 
-                Ybi.rca, Ybi.distance, 
-                Ybi.opp_gain) 
-
-        lista = []
-        for wage, num_jobs, num_est, wage_avg, rca, distance, opp_gain in headers_generate:
-           industry['average_monthly_income'] = wage
-           industry['salary_mass'] =  num_jobs
-           industry['total_jobs'] =  num_est
-           industry['total_establishments'] =  wage_avg
-           industry['rca_domestic'] =  rca
-           industry['distance'] =  distance
-           industry['opportunity_gain'] =  opp_gain 
-
-        dic_names_cbo = {}
-        dic_names_bra = {}
-
-        cbo_generate = Cbo.query.values(Cbo.id, Cbo.name_en, Cbo.name_pt)
-        bra_generate = Bra.query.values(Bra.id, Bra.name_en, Bra.name_pt)
-
-        for id, name_en, name_pt in cbo_generate:
-            dic_names_cbo[id] = [name_en, name_pt]
-
-        for id, name_en, name_pt in bra_generate:
-            dic_names_bra[id] = [name_en, name_pt]
-
-        occ_jobs_generate = Ybio.query.filter(
-            Ybio.cnae_id == cnae_id,
-            Ybio.cbo_id_len == 4,
-            Ybio.bra_id == bra_id,
-            Ybio.year == ybio_max_year_bra_id
-            ).order_by(desc(Ybio.num_jobs)).limit(1).values(Ybio.cbo_id, Ybio.num_jobs)  
-
-        
-
-        for cbo_id, num_jobs in occ_jobs_generate : 
-            industry['occupation_max_number_jobs_value'] = num_jobs
-            industry['occupation_max_number_jobs_name'] = dic_names_cbo[cbo_id][1]      
-
-        occ_wage_avg_generate = Ybio.query.filter(
-            Ybio.cnae_id == cnae_id,
-            Ybio.cbo_id_len == 4,
-            Ybio.bra_id == bra_id,
-            Ybio.year == ybio_max_year_bra_id
-            ).order_by(desc(Ybio.wage_avg)).limit(1).values(Ybio.cbo_id, Ybio.wage_avg)  
-
-      
-        for cbo_id, wage_avg in occ_wage_avg_generate : 
-            industry['occupation_max_monthly_income_value'] = wage_avg
-            industry['occupation_max_monthly_income_name'] = dic_names_cbo[cbo_id][1]         
-            
-            
         if len(bra_id) != 9 :
-
-            county_jobs_generate = Ybi.query.filter(
-                Ybi.cnae_id == cnae_id,
-                Ybi.bra_id_len == 9,
-                Ybi.bra_id.like(bra_id+'%'), 
-                Ybi.year == ybi_max_year_bra_id     
-                ).order_by(desc(Ybi.num_jobs)).limit(1).values(Ybi.bra_id, Ybi.num_jobs)
-            
-            for id, num_jobs in county_jobs_generate : 
-                industry['county_max_number_jobs_value'] = num_jobs
-                industry['county_max_number_jobs_name'] = dic_names_bra[id][1]
-
-            county_wage_avg_generate = Ybi.query.filter(
-                Ybi.cnae_id == cnae_id,
-                Ybi.bra_id_len == 9,
-                Ybi.bra_id.like(bra_id+'%'),
-                Ybi.year == 2013 
-                ).order_by(desc(Ybi.wage_avg)).limit(1).values(Ybi.bra_id, Ybi.wage_avg)
-            
-
-            for id, wage_avg in county_wage_avg_generate : 
-                industry['county_max_monthly_income_value'] = wage_avg
-                industry['county_max_monthly_income_name'] = dic_names_bra[id][1]           
-
-
-    
-
+            industry.update(rais_industry_service.get_county_max_num_jobs())
+            industry.update(rais_industry_service.get_county_max_wage_avg())
 
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
 
