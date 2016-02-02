@@ -5,6 +5,8 @@ from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.models import Cbo, Bra, Cnae
 from dataviva.api.rais.models import Yo, Ybo, Yio, Ybio
 
+from dataviva.api.rais.services import Occupation as RaisOccupationService
+
 from dataviva import db
 from sqlalchemy.sql.expression import func, desc, asc
 
@@ -24,15 +26,16 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/')
-def index():
+@mod.route('/<occupation_id>')
+def index(occupation_id):
 
-    occupation_id = '2122'
-    bra_id = None #'4mg'
+    #occupation_id = '2122'
+    bra_id = None#'4mg'
     header = {}
     body = {}
 
     #se tiver sido selecionada uma localidade especific
+    '''
     if bra_id:
 
         #encontrando o ano mais recente 
@@ -202,7 +205,11 @@ def index():
             body['num_activity_for_job'] = num_jobs 
 
     #dados que ainda sofrerāo alteracoes  
-
+    '''
+    rais_occupation_service = RaisOccupationService(occupation_id = occupation_id, bra_id = bra_id)
+    header['year'] = rais_occupation_service.year
+    
+    
     context = {
         #'family' : True,
         'portrait' : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110',
