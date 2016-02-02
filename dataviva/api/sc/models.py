@@ -70,7 +70,7 @@ class Ysc(Sc):
 
     __tablename__ = 'sc_ysc'
 
-    school_id = db.Column(db.String(8), primary_key=True)
+    school_id = db.Column(db.String(8), db.ForeignKey(School.id), primary_key=True)
     course_sc_id = db.Column(db.String(5), db.ForeignKey(Course_sc.id), primary_key=True)
 
     course_sc_id_len = db.Column(db.Integer(1))
