@@ -3,7 +3,6 @@ from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.services import Location as AttrsLocationService
 from dataviva.api.secex.models import Ymb
-from sqlalchemy import func, desc
 
 mod = Blueprint('location', __name__,
                 template_folder='templates',
@@ -24,7 +23,7 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
 
-    location_service = AttrsLocationService(bra_id='4mg')
+    attrs_location_service = AttrsLocationService(bra_id='4mg')
     location_statistics = attrs_location_service.statistics()
 
     ''' Query básica para SECEX'''
