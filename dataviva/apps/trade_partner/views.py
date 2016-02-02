@@ -28,6 +28,7 @@ def index():
 	''' Queries que pegam o ano mais recente dos dados '''
 	ymw_max_year = db.session.query(func.max(Ymw.year)).filter_by(wld_id=wld_id)
 	ymbw_max_year = db.session.query(func.max(Ymbw.year)).filter_by(wld_id=wld_id)
+	ympw_max_year = db.session.query(func.max(Ympw.year)).filter_by(wld_id=wld_id)
 
 	ymw_query = Ymw.query.join(Wld).filter(
 		Ymw.wld_id == wld_id,
@@ -46,7 +47,29 @@ def index():
 		Ymbw.year == ymbw_max_year,
 		func.length(Ymbw.bra_id) == 9).order_by(desc(Ymbw.import_val)).limit(1)
 
-	ympw_county_export_query = Ympw.query.join(Hs)
+	ympw_product_export_query = Ympw.query.join(Hs).filter(
+		Ympw.wld_id == wld_id,
+		Ympw.month == 0,
+		Ympw.hs_id_len == 6,
+		Ympw.year == ympw_max_year).order_by(desc(Ympw.export_val)).limit(1)
+
+	ympw_product_import_query = Ympw.query.join(Hs).filter(
+		Ympw.wld_id == wld_id,
+		Ympw.month == 0,
+		Ympw.hs_id_len == 6,
+		Ympw.year == ympw_max_year).order_by(desc(Ympw.import_val)).limit(1)
+
+	ympw_highest_balance_query = Ympw.query.join(Hs).filter(
+		Ympw.wld_id == wld_id,
+		Ympw.month == 0,
+		Ympw.hs_id_len == 6,
+		Ympw.year == ympw_max_year).order_by(desc(Ympw.export_val-Ympw.import_val)).limit(1)
+
+	ympw_lowest_balance_query = Ympw.query.join(Hs).filter(
+		Ympw.wld_id == wld_id,
+		Ympw.month == 0,
+		Ympw.hs_id_len == 6,
+		Ympw.year == ympw_max_year).order_by(asc(Ympw.export_val-Ympw.import_val)).limit(1)
 
 	ymw_data = ymw_query.values(
 		Wld.name_pt,
@@ -64,6 +87,23 @@ def index():
 	ymbw_county_import_data = ymbw_county_import_query.values(
 		Bra.name_pt,
 		Ymbw.import_val)
+
+	ympw_product_export_data = ympw_product_export_query.values(
+		Hs.name_pt,
+		Ympw.export_val)
+
+	ympw_product_import_data = ympw_product_import_query.values(
+		Hs.name_pt,
+		Ympw.import_val)
+
+	ympw_highest_balance_data = ympw_highest_balance_query.values(
+		Hs.name_pt,
+		(Ympw.export_val - Ympw.import_val))
+
+	ympw_lowest_balance_data = ympw_lowest_balance_query.values(
+		Hs.name_pt,
+		(Ympw.export_val - Ympw.import_val))
+
 
 	country = {}
 	trade = {}
@@ -84,6 +124,14 @@ def index():
 	for name_pt, import_val in ymbw_county_import_data:
 		trade['leading_import_county'] = name_pt
 		trade['leading_import_county_value'] = import_val
+
+	for name_pt, export_val in ympw_product_export_data:
+		trade['leading_export_product'] = name_pt
+		trade['leading_export_product_value'] = export_val
+
+	for name_pt, import_val in ympw_product_import_data:
+		trade['leading_import_product'] = name_pt
+		trade['leading_import_product_value'] = import_val
 
 	return render_template('trade_partner/index.html', body_class='perfil-estado', country=country, trade=trade)
 
