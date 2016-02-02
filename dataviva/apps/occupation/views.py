@@ -39,25 +39,6 @@ def index(occupation_id):
     if bra_id:
 
 
-
-        ybo_county_wage_avg_generator = Ybo.query.join(Bra).filter(
-                Ybo.cbo_id == occupation_id,
-                Ybo.bra_id.like(bra_id+'%'),
-                Ybo.year == year,
-                Ybo.bra_id_len == 9)\
-            .order_by(desc(Ybo.wage_avg)).limit(1)\
-            .values(Bra.name_pt,
-                    Ybo.wage_avg)
-        
-
-        ybio_activity_num_jobs_generator = Ybio.query.join(Cnae).filter(
-                Ybio.cbo_id == occupation_id,
-                Ybio.bra_id.like(bra_id+'%'),
-                Ybio.year == year,
-                Ybio.cnae_id_len == 6)\
-            .order_by(desc(Ybio.num_jobs)).limit(1)\
-            .values(Cnae.name_pt,
-                    Ybio.num_jobs)
         
 
         ybio_activity_wage_avg_generator = Ybio.query.join(Cnae).filter(
@@ -70,19 +51,12 @@ def index(occupation_id):
                     Ybio.wage_avg)
 
 
-
-
         for name_pt, wage_avg in ybio_activity_wage_avg_generator:
             body['activity_higher_income'] = name_pt
-            body['value_activity_higher_income'] = wage_avg     
+            body['value_activity_higher_income'] = wage_avg 
+  
 
-        for name_pt, wage_avg in ybo_county_wage_avg_generator:
-            body['county_bigger_average_monsthly_income'] = name_pt
-            body['bigger_average_monsthly_income'] = wage_avg   
 
-        for name_pt, num_jobs in ybio_activity_num_jobs_generator:
-            body['activity_for_job'] = name_pt
-            body['num_activity_for_job'] = num_jobs 
 
     ######################## else ##########################
     else: 
@@ -152,6 +126,9 @@ def index(occupation_id):
         header['year'] = rais_occupation_service.year
         header.update(rais_occupation_service.get_ybo_header())
         body.update(rais_occupation_service.get_ybo_county_num_jobs_with_bra_id())
+        body.update(rais_occupation_service.get_ybo_county_wage_avg_generator_with_bra_id())
+        body.update(rais_occupation_service.get_ybio_activity_num_jobs_generator())
+
 
     else:
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id)
