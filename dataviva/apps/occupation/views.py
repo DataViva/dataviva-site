@@ -34,20 +34,6 @@ def index(occupation_id):
     header = {}
     body = {}
 
-    #se tiver sido selecionada uma localidade especific
-    '''
-
-
-        
-
-
-
-
-
-
-
-    #dados que ainda sofrerāo alteracoes  
-    '''
     if bra_id: 
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id, bra_id = bra_id)
         header['year'] = rais_occupation_service.year
@@ -66,18 +52,13 @@ def index(occupation_id):
         body.update(rais_occupation_service.get_yio_activity_num_jobs())
         body.update(rais_occupation_service.get_yio_activity_wage_avg())
 
-
-
-
     context = {
-        #'family' : True,
         'portrait' : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110',
         #unidades
         'average_monthly_income_unity' : 'Milhares', #'unidade_renda_media_mensal'
         'salary_mass_unity' : 'mil',
         'total_employment_unity' : 'milhares', 
         'total_establishments_unity' : 'milhares', #'unidade_total_estabelecimentos' 
-        #unidades
         'jobs_county_unity' : 'milhares de', #'unidade_empregos_principal_municipio'
         'activity_for_job_unity': unicode('bilhões','utf8'), #unidade_atividade_por_empregos
         'bigger_average_monsthly_income_unity': unicode('bilhões','utf8'),
