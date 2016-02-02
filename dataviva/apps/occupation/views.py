@@ -202,8 +202,10 @@ def index():
             body['num_activity_for_job'] = num_jobs 
 
     #dados que ainda sofrerāo alteracoes  
+
     context = {
-        'family' : True,
+        #'family' : True,
+        'portrait' : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110',
         #unidades
         'average_monthly_income_unity' : 'Milhares', #'unidade_renda_media_mensal'
         'salary_mass_unity' : 'mil',
@@ -220,6 +222,11 @@ def index():
         'text_oportunidades_economicas' : unicode('Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste ','utf8')
 
     } 
+
+    if len(occupation_id) == 4: 
+        context['family'] = True
+    else:
+         context['family'] = False  
     #acessar o contex do diogo com context.id.oqeuquero
 
     
