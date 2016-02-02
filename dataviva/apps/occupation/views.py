@@ -30,40 +30,12 @@ def add_language_code(endpoint, values):
 def index(occupation_id):
 
     #occupation_id = '2122'
-    bra_id = '4mg'
+    bra_id = None #'4mg'
     header = {}
     body = {}
 
     #se tiver sido selecionada uma localidade especific
     '''
-    if bra_id:
-
-  
-
-
-
-    ######################## else ##########################
-    else: 
-
-        #quando nao temos a localidade, buscamos em todo o brasil - rais_yo
-
-
-        ybo_county_num_jobs_generator = Ybo.query.join(Bra).filter(
-                Ybo.cbo_id == occupation_id,
-                Ybo.year == year,
-                Ybo.bra_id_len == 9)\
-            .order_by(desc(Ybo.num_jobs)).limit(1)\
-            .values(Bra.name_pt,
-                    Ybo.num_jobs)
-
-        ybo_county_wage_avg_generator = Ybo.query.join(Bra).filter(
-                Ybo.cbo_id == occupation_id,
-                Ybo.year == year,
-                Ybo.bra_id_len == 9)\
-            .order_by(desc(Ybo.wage_avg)).limit(1)\
-            .values(Bra.name_pt,
-                    Ybo.wage_avg)
-        
 
         yio_activity_num_jobs_generator = Yio.query.join(Cnae).filter(
                 Yio.cbo_id == occupation_id,
@@ -87,17 +59,13 @@ def index(occupation_id):
 
 
 
-        for name_pt, num_jobs in ybo_county_num_jobs_generator:
-            body['county_for_jobs'] = name_pt
-            body['num_jobs_county'] = num_jobs
+
 
         for name_pt, wage_avg in yio_activity_wage_avg_generator:
             body['activity_higher_income'] = name_pt
             body['value_activity_higher_income'] = wage_avg     
 
-        for name_pt, wage_avg in ybo_county_wage_avg_generator:
-            body['county_bigger_average_monsthly_income'] = name_pt
-            body['bigger_average_monsthly_income'] = wage_avg   
+
 
         for name_pt, num_jobs in yio_activity_num_jobs_generator:
             body['activity_for_job'] = name_pt
@@ -114,11 +82,14 @@ def index(occupation_id):
         body.update(rais_occupation_service.get_ybio_activity_num_jobs())
         body.update(rais_occupation_service.get_ybio_activity_wage_avg())
 
-
     else:
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id)
         header['year'] = rais_occupation_service.year
         header.update(rais_occupation_service.get_yo_header())
+        body.update(rais_occupation_service.get_ybo_county_num_jobs())
+        body.update(rais_occupation_service.get_ybo_county_wage_avg())
+        
+
 
 
     context = {

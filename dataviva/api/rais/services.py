@@ -140,3 +140,38 @@ class Occupation:
             body['value_activity_higher_income'] = wage_avg 
 
         return body
+
+    def get_ybo_county_num_jobs(self):
+
+        ybo_county_num_jobs_generator = Ybo.query.join(Bra).filter(
+            Ybo.cbo_id == self.occupation_id,
+            Ybo.year == self.year,
+            Ybo.bra_id_len == 9)\
+        .order_by(desc(Ybo.num_jobs)).limit(1)\
+        .values(Bra.name_pt,
+                Ybo.num_jobs)
+
+        body = {}
+        for name_pt, num_jobs in ybo_county_num_jobs_generator:
+            body['county_for_jobs'] = name_pt
+            body['num_jobs_county'] = num_jobs
+
+        return body
+
+
+    def get_ybo_county_wage_avg(self):
+
+        ybo_county_wage_avg_generator = Ybo.query.join(Bra).filter(
+            Ybo.cbo_id == self.occupation_id,
+            Ybo.year == self.year,
+            Ybo.bra_id_len == 9)\
+        .order_by(desc(Ybo.wage_avg)).limit(1)\
+        .values(Bra.name_pt,
+                Ybo.wage_avg)
+
+        body = {}
+        for name_pt, wage_avg in ybo_county_wage_avg_generator:
+            body['county_bigger_average_monsthly_income'] = name_pt
+            body['bigger_average_monsthly_income'] = wage_avg   
+            
+        return body
