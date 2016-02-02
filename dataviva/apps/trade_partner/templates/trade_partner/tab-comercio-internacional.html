@@ -1,0 +1,81 @@
+<div role="tabpanel" class="tab-pane" id="comercio-internacional">
+    <h2>Comércio Internacional</h2>
+    <p>{{context.text_comercio_internacional}}</p>
+    <h3>Estatísticas de Comércio Internacional</h3>
+    <div class="row">
+        <div class="col-xs-15 col-sm-15 col-md-12">
+            <div class="table-responsive">
+                <table class="table data-blue">
+                    <thead>
+                        <tr>
+                            <th>
+                                Principal Municipio
+                                <small>por Valor Exportado</small>
+                            </th>
+                            <th>
+                                Principal Municipio
+                                <small>por Valor Total Exportado</small>
+                            </th>
+                            <th>
+                                Principal Produto
+                                <small>por Valor Total Exportado</small>
+                            </th>
+                            <th>
+                                Principal Produto
+                                <small>por Valor Total Importado</small>
+                            </th>
+                            <th>
+                                Produto com maior
+                                <small>Saldo na Balança Comercial</small>
+                            </th>
+                            <th>
+                                Produto com menor
+                                <small>Saldo na Balança Comercial</small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p class="label">{{context.county_for_exported_value}}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{context.num_county_for_exported_value}}</strong><span>B</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{context.county_for_imported_value}}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{context.num_county_for_imported_value}}</strong><span>B</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{context.product_for_exported_value}}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{context.num_product_for_exported_value}}</strong><span>B</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{context.product_for_imported_value}}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{context.num_product_for_imported_value}}</strong><span>B</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{context.product_bigger_trade_balance}}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{context.value_product_bigger_trade_balance}}</strong><span>B</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{context.product_smaller_trade_balance}}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{context.value_product_smaller_trade_balance}}</strong><span>B</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
