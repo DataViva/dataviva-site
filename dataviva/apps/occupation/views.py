@@ -37,39 +37,14 @@ def index(occupation_id):
     #se tiver sido selecionada uma localidade especific
     '''
 
-        yio_activity_num_jobs_generator = Yio.query.join(Cnae).filter(
-                Yio.cbo_id == occupation_id,
-                Yio.year == year,
-                Yio.cnae_id_len == 6)\
-            .order_by(desc(Yio.num_jobs)).limit(1)\
-            .values(Cnae.name_pt,
-                    Yio.num_jobs)
-        
-
-        yio_activity_wage_avg_generator = Yio.query.join(Cnae).filter(
-                Yio.cbo_id == occupation_id,
-                Yio.year == year,
-                Yio.cnae_id_len == 6)\
-            .order_by(desc(Yio.wage_avg)).limit(1)\
-            .values(Cnae.name_pt,
-                    Yio.wage_avg)
 
         
-        header['year'] = year
 
 
 
 
 
-        for name_pt, wage_avg in yio_activity_wage_avg_generator:
-            body['activity_higher_income'] = name_pt
-            body['value_activity_higher_income'] = wage_avg     
 
-
-
-        for name_pt, num_jobs in yio_activity_num_jobs_generator:
-            body['activity_for_job'] = name_pt
-            body['num_activity_for_job'] = num_jobs 
 
     #dados que ainda sofrerāo alteracoes  
     '''
@@ -88,7 +63,9 @@ def index(occupation_id):
         header.update(rais_occupation_service.get_yo_header())
         body.update(rais_occupation_service.get_ybo_county_num_jobs())
         body.update(rais_occupation_service.get_ybo_county_wage_avg())
-        
+        body.update(rais_occupation_service.get_yio_activity_num_jobs())
+        body.update(rais_occupation_service.get_yio_activity_wage_avg())
+
 
 
 

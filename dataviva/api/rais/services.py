@@ -173,5 +173,39 @@ class Occupation:
         for name_pt, wage_avg in ybo_county_wage_avg_generator:
             body['county_bigger_average_monsthly_income'] = name_pt
             body['bigger_average_monsthly_income'] = wage_avg   
-            
+
         return body
+
+    def get_yio_activity_num_jobs(self):
+
+        yio_activity_num_jobs_generator = Yio.query.join(Cnae).filter(
+            Yio.cbo_id == self.occupation_id,
+            Yio.year == self.year,
+            Yio.cnae_id_len == 6)\
+        .order_by(desc(Yio.num_jobs)).limit(1)\
+        .values(Cnae.name_pt,
+                Yio.num_jobs)
+
+        body = {}
+        for name_pt, num_jobs in yio_activity_num_jobs_generator:
+            body['activity_for_job'] = name_pt
+            body['num_activity_for_job'] = num_jobs 
+
+        return body
+
+    def get_yio_activity_wage_avg(self):
+
+        yio_activity_wage_avg_generator = Yio.query.join(Cnae).filter(
+            Yio.cbo_id == self.occupation_id,
+            Yio.year == self.year,
+            Yio.cnae_id_len == 6)\
+        .order_by(desc(Yio.wage_avg)).limit(1)\
+        .values(Cnae.name_pt,
+                Yio.wage_avg)
+
+        body = {}
+        for name_pt, wage_avg in yio_activity_wage_avg_generator:
+            body['activity_higher_income'] = name_pt
+            body['value_activity_higher_income'] = wage_avg  
+
+        return body   
