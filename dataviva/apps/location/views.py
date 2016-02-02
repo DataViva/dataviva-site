@@ -22,7 +22,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-
+    bra_id = '4mg'
     attrs_location_service = AttrsLocationService(bra_id='4mg')
     location_statistics = attrs_location_service.statistics()
 
