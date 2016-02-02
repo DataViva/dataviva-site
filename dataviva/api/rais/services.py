@@ -86,7 +86,7 @@ class Occupation:
 
         return body
 
-    def get_ybo_county_wage_avg_generator_with_bra_id(self):
+    def get_ybo_county_wage_avg_with_bra_id(self):
 
         ybo_county_wage_avg_generator = Ybo.query.join(Bra).filter(
             Ybo.cbo_id == self.occupation_id,
@@ -104,7 +104,7 @@ class Occupation:
 
         return body 
 
-    def get_ybio_activity_num_jobs_generator(self):
+    def get_ybio_activity_num_jobs(self):
 
         ybio_activity_num_jobs_generator = Ybio.query.join(Cnae).filter(
             Ybio.cbo_id == self.occupation_id,
@@ -119,5 +119,24 @@ class Occupation:
         for name_pt, num_jobs in ybio_activity_num_jobs_generator:
             body['activity_for_job'] = name_pt
             body['num_activity_for_job'] = num_jobs 
+
+        return body
+
+        
+    def get_ybio_activity_wage_avg(self):
+
+        ybio_activity_wage_avg_generator = Ybio.query.join(Cnae).filter(
+                Ybio.cbo_id == self.occupation_id,
+                Ybio.bra_id.like(self.bra_id+'%'),
+                Ybio.year == self.year,
+                Ybio.cnae_id_len == 6)\
+            .order_by(desc(Ybio.wage_avg)).limit(1)\
+            .values(Cnae.name_pt,
+                    Ybio.wage_avg)
+
+        body = {}
+        for name_pt, wage_avg in ybio_activity_wage_avg_generator:
+            body['activity_higher_income'] = name_pt
+            body['value_activity_higher_income'] = wage_avg 
 
         return body

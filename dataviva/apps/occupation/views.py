@@ -38,22 +38,6 @@ def index(occupation_id):
     '''
     if bra_id:
 
-
-        
-
-        ybio_activity_wage_avg_generator = Ybio.query.join(Cnae).filter(
-                Ybio.cbo_id == occupation_id,
-                Ybio.bra_id.like(bra_id+'%'),
-                Ybio.year == year,
-                Ybio.cnae_id_len == 6)\
-            .order_by(desc(Ybio.wage_avg)).limit(1)\
-            .values(Cnae.name_pt,
-                    Ybio.wage_avg)
-
-
-        for name_pt, wage_avg in ybio_activity_wage_avg_generator:
-            body['activity_higher_income'] = name_pt
-            body['value_activity_higher_income'] = wage_avg 
   
 
 
@@ -126,8 +110,9 @@ def index(occupation_id):
         header['year'] = rais_occupation_service.year
         header.update(rais_occupation_service.get_ybo_header())
         body.update(rais_occupation_service.get_ybo_county_num_jobs_with_bra_id())
-        body.update(rais_occupation_service.get_ybo_county_wage_avg_generator_with_bra_id())
-        body.update(rais_occupation_service.get_ybio_activity_num_jobs_generator())
+        body.update(rais_occupation_service.get_ybo_county_wage_avg_with_bra_id())
+        body.update(rais_occupation_service.get_ybio_activity_num_jobs())
+        body.update(rais_occupation_service.get_ybio_activity_wage_avg())
 
 
     else:
