@@ -9,18 +9,18 @@
         <li><a href="#">Atividade Econômica</a></li>
         <li class="active"><span>Teleatendimento<span></span></span></li>
     </ol>
-    <div class="tit-area" style="background-image: url({{context.background_image}})">
+    <div class="tit-area" style="background-image: url({{industry.background_image}})">
         <div class="row">
             <div class="col-xs-15 col-md-offset-4 col-md-11">
                 <h1>
-                    {{context.industry_name}} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
+                    {{industry.name}} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
                 </h1>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="sidebar has-img col-xs-15 col-md-4">
-            <iframe src="{{context.portrait}}" width="200" height="150" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
+            <iframe src="{{industry.portrait}}" width="200" height="150" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active">
                     <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
@@ -29,7 +29,7 @@
                     <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab">Salário e emprego</a>
                 </li>
 
-                {% if context.class %}    
+                {% if industry.class %}    
                     <li role="presentation">
                         <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidade Econômica</a>
                     </li>
