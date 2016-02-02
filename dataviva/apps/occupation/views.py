@@ -38,26 +38,6 @@ def index(occupation_id):
     '''
     if bra_id:
 
-        #encontrando o ano mais recente 
-        ybo_max_year= db.session.query(func.max(Ybo.year)).filter(
-            Ybo.cbo_id == occupation_id, 
-            Ybo.bra_id == bra_id)\
-            .one()
-            
-        year = 0
-        for year in ybo_max_year:
-            year = year
-
-        ybo_header_generator = Ybo.query.join(Cbo).filter(
-            Ybo.cbo_id == occupation_id,
-            Ybo.bra_id == bra_id,
-            Ybo.year == year)\
-            .values(Cbo.name_pt,
-                    Ybo.wage_avg,
-                    Ybo.wage,
-                    Ybo.num_jobs,
-                    Ybo.num_est)
-
         ybo_county_num_jobs_generator = Ybo.query.join(Bra).filter(
                 Ybo.cbo_id == occupation_id,
                 Ybo.bra_id.like(bra_id+'%'),
@@ -96,15 +76,6 @@ def index(occupation_id):
             .values(Cnae.name_pt,
                     Ybio.wage_avg)
 
-        
-        header['year'] = year
-
-        for name_pt, wage_avg, wage, num_jobs, num_est in ybo_header_generator:
-            header['name'] = name_pt
-            header['average_monthly_income'] = wage_avg
-            header['salary_mass'] = wage
-            header['total_employment'] = num_jobs
-            header['total_establishments'] = num_est
 
         for name_pt, num_jobs in ybo_county_num_jobs_generator:
             body['county_for_jobs'] = name_pt
@@ -124,25 +95,9 @@ def index(occupation_id):
 
     ######################## else ##########################
     else: 
-        
-        #encontrando o ano mais recente 
-        yo_max_year= db.session.query(func.max(Yo.year)).filter(
-            Ybo.cbo_id == occupation_id)\
-            .one()
-            
-        year = 0
-        for year in yo_max_year:
-            year = year
 
         #quando nao temos a localidade, buscamos em todo o brasil - rais_yo
-        yo_header_generator = Yo.query.join(Cbo).filter(
-            Yo.cbo_id == occupation_id,
-            Yo.year == year)\
-            .values(Cbo.name_pt,
-                    Yo.wage_avg,
-                    Yo.wage,
-                    Yo.num_jobs,
-                    Yo.num_est)
+
 
         ybo_county_num_jobs_generator = Ybo.query.join(Bra).filter(
                 Ybo.cbo_id == occupation_id,
@@ -181,12 +136,7 @@ def index(occupation_id):
         
         header['year'] = year
 
-        for name_pt, wage_avg, wage, num_jobs, num_est in yo_header_generator:
-            header['name'] = name_pt
-            header['average_monthly_income'] = wage_avg
-            header['salary_mass'] = wage
-            header['total_employment'] = num_jobs
-            header['total_establishments'] = num_est
+
 
         for name_pt, num_jobs in ybo_county_num_jobs_generator:
             body['county_for_jobs'] = name_pt
@@ -206,10 +156,17 @@ def index(occupation_id):
 
     #dados que ainda sofrerāo alteracoes  
     '''
-    rais_occupation_service = RaisOccupationService(occupation_id = occupation_id, bra_id = bra_id)
-    header['year'] = rais_occupation_service.year
-    
-    
+    if bra_id: 
+        rais_occupation_service = RaisOccupationService(occupation_id = occupation_id, bra_id = bra_id)
+        header['year'] = rais_occupation_service.year
+        header.update(rais_occupation_service.get_ybo_header())
+
+    else:
+        rais_occupation_service = RaisOccupationService(occupation_id = occupation_id)
+        header['year'] = rais_occupation_service.year
+        header.update(rais_occupation_service.get_yo_header())
+
+
     context = {
         #'family' : True,
         'portrait' : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110',
