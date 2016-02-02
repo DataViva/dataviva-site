@@ -30,8 +30,8 @@ def index(occupation_id):
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id, bra_id = bra_id)
         header['year'] = rais_occupation_service.year
         header.update(rais_occupation_service.get_ybo_header())
-        body.update(rais_occupation_service.get_ybo_county_num_jobs_with_bra_id())
-        body.update(rais_occupation_service.get_ybo_county_wage_avg_with_bra_id())
+        body.update(rais_occupation_service.get_ybo_municipality_num_jobs_with_bra_id())
+        body.update(rais_occupation_service.get_ybo_municipality_wage_avg_with_bra_id())
         body.update(rais_occupation_service.get_ybio_activity_num_jobs())
         body.update(rais_occupation_service.get_ybio_activity_wage_avg())
 
@@ -39,8 +39,8 @@ def index(occupation_id):
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id)
         header['year'] = rais_occupation_service.year
         header.update(rais_occupation_service.get_yo_header())
-        body.update(rais_occupation_service.get_ybo_county_num_jobs())
-        body.update(rais_occupation_service.get_ybo_county_wage_avg())
+        body.update(rais_occupation_service.get_ybo_municipality_num_jobs())
+        body.update(rais_occupation_service.get_ybo_municipality_wage_avg())
         body.update(rais_occupation_service.get_yio_activity_num_jobs())
         body.update(rais_occupation_service.get_yio_activity_wage_avg())
 
@@ -51,7 +51,7 @@ def index(occupation_id):
         'salary_mass_unity' : 'mil',
         'total_employment_unity' : 'milhares', 
         'total_establishments_unity' : 'milhares', #'unidade_total_estabelecimentos' 
-        'jobs_county_unity' : 'milhares de', #'unidade_empregos_principal_municipio'
+        'jobs_municipality_unity' : 'milhares de', #'unidade_empregos_principal_municipio'
         'activity_for_job_unity': unicode('bilhões','utf8'), #unidade_atividade_por_empregos
         'bigger_average_monsthly_income_unity': unicode('bilhões','utf8'),
         'activity_for_job_unity' : unicode('bilhoes','utf8'),

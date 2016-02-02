@@ -68,9 +68,9 @@ class Occupation:
 
         return header
 
-    def get_ybo_county_num_jobs_with_bra_id(self):
+    def get_ybo_municipality_num_jobs_with_bra_id(self):
 
-        ybo_county_num_jobs_generator = Ybo.query.join(Bra).filter(
+        ybo_municipality_num_jobs_generator = Ybo.query.join(Bra).filter(
                 Ybo.cbo_id == self.occupation_id,
                 Ybo.bra_id.like(self.bra_id+'%'),
                 Ybo.year == self.year,
@@ -80,15 +80,15 @@ class Occupation:
                     Ybo.num_jobs)
 
         body = {}
-        for name_pt, num_jobs in ybo_county_num_jobs_generator:
-            body['county_for_jobs'] = name_pt
-            body['num_jobs_county'] = num_jobs
+        for name_pt, num_jobs in ybo_municipality_num_jobs_generator:
+            body['municipality_for_jobs'] = name_pt
+            body['num_jobs_municipality'] = num_jobs
 
         return body
 
-    def get_ybo_county_wage_avg_with_bra_id(self):
+    def get_ybo_municipality_wage_avg_with_bra_id(self):
 
-        ybo_county_wage_avg_generator = Ybo.query.join(Bra).filter(
+        ybo_municipality_wage_avg_generator = Ybo.query.join(Bra).filter(
             Ybo.cbo_id == self.occupation_id,
             Ybo.bra_id.like(self.bra_id+'%'),
             Ybo.year == self.year,
@@ -98,8 +98,8 @@ class Occupation:
                 Ybo.wage_avg)
 
         body = {}
-        for name_pt, wage_avg in ybo_county_wage_avg_generator:
-            body['county_bigger_average_monsthly_income'] = name_pt
+        for name_pt, wage_avg in ybo_municipality_wage_avg_generator:
+            body['municipality_bigger_average_monsthly_income'] = name_pt
             body['bigger_average_monsthly_income'] = wage_avg  
 
         return body 
@@ -141,9 +141,9 @@ class Occupation:
 
         return body
 
-    def get_ybo_county_num_jobs(self):
+    def get_ybo_municipality_num_jobs(self):
 
-        ybo_county_num_jobs_generator = Ybo.query.join(Bra).filter(
+        ybo_municipality_num_jobs_generator = Ybo.query.join(Bra).filter(
             Ybo.cbo_id == self.occupation_id,
             Ybo.year == self.year,
             Ybo.bra_id_len == 9)\
@@ -152,16 +152,16 @@ class Occupation:
                 Ybo.num_jobs)
 
         body = {}
-        for name_pt, num_jobs in ybo_county_num_jobs_generator:
-            body['county_for_jobs'] = name_pt
-            body['num_jobs_county'] = num_jobs
+        for name_pt, num_jobs in ybo_municipality_num_jobs_generator:
+            body['municipality_for_jobs'] = name_pt
+            body['num_jobs_municipality'] = num_jobs
 
         return body
 
 
-    def get_ybo_county_wage_avg(self):
+    def get_ybo_municipality_wage_avg(self):
 
-        ybo_county_wage_avg_generator = Ybo.query.join(Bra).filter(
+        ybo_municipality_wage_avg_generator = Ybo.query.join(Bra).filter(
             Ybo.cbo_id == self.occupation_id,
             Ybo.year == self.year,
             Ybo.bra_id_len == 9)\
@@ -170,8 +170,8 @@ class Occupation:
                 Ybo.wage_avg)
 
         body = {}
-        for name_pt, wage_avg in ybo_county_wage_avg_generator:
-            body['county_bigger_average_monsthly_income'] = name_pt
+        for name_pt, wage_avg in ybo_municipality_wage_avg_generator:
+            body['municipality_bigger_average_monsthly_income'] = name_pt
             body['bigger_average_monsthly_income'] = wage_avg   
 
         return body
