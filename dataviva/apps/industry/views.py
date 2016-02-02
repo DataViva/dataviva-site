@@ -26,36 +26,31 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
  
-    bra_id = '4mg'
+    bra_id = '4mg000000' # Alfredo Vasconcelos
     cnae_id = 'g47113' #supermarkets
     industry = {}
 
     industry = { 
-        'name': unicode('Supermercados', 'utf8'), 
-        'location' : False , 
-        'class' : False,
-        'year' : 2010,
         'background_image':  unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
         'portrait' : unicode('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110', 'utf8') ,
         
         'text_profile' : unicode('Texto de perfil para Supermercados.', 'utf8'),
         'text_salary_job' : unicode('Texto para Salários e empregos', 'utf8'),
         'text_economic_opportunity' : unicode('Texto para Oportunidades Econômicas', 'utf8'),
-        'county' : False
     }
 
-    if bra_id == None : 
-        bra_id = ""
 
-    if bra_id == "" :
+    if bra_id == None :
         industry['location'] = False
+        industry['county'] = True # view county where no country
     else : 
         industry['location'] = True    
      
-    if len(bra_id) == 9 : 
-        industry['county'] = True
-    else :
-        industry['county'] = True    
+        if len(bra_id) == 9 : 
+            industry['county'] = False
+        else :
+            industry['county'] = True    
+
 
     if len(cnae_id) == 1 : 
         industry['class'] = True
@@ -65,7 +60,7 @@ def index():
     ####EXTRACTY 
     industry['name'] = Cnae.query.filter_by(id=cnae_id).one().name()
       
-    if bra_id == "" :
+    if bra_id == None :
 
         yi_max_year = db.session.query(func.max(Yi.year)).filter_by(cnae_id=cnae_id)
         industry['year'] = yi_max_year.scalar() 
@@ -107,30 +102,28 @@ def index():
         for  name, value in occupation_wage_avg_generaitor:        
             industry['occupation_max_monthly_income_name'] = name
             industry['occupation_max_monthly_income_value'] = value
-           
-        if len(bra_id) != 9 : 
 
-            county_jobs_generaitor = Ybi.query.join(Bra).filter(
-                Bra.id == Ybi.bra_id,
-                Ybi.cnae_id == cnae_id,
-                Ybi.bra_id_len == 9,
-                Ybi.year == ybi_max_year,      
-                ).order_by(desc(Ybi.num_jobs)).limit(1).values(Bra.name_pt, Ybi.num_jobs)
+        county_jobs_generaitor = Ybi.query.join(Bra).filter(
+            Bra.id == Ybi.bra_id,
+            Ybi.cnae_id == cnae_id,
+            Ybi.bra_id_len == 9,
+            Ybi.year == ybi_max_year,      
+            ).order_by(desc(Ybi.num_jobs)).limit(1).values(Bra.name_pt, Ybi.num_jobs)
+    
+        for  name, value in county_jobs_generaitor:        
+            industry['county_max_number_jobs_name'] = name
+            industry['county_max_number_jobs_value'] = value
+
+        county_wage_avg_generaitor = Ybi.query.join(Bra).filter(
+            Bra.id == Ybi.bra_id,
+            Ybi.cnae_id == cnae_id,
+            Ybi.bra_id_len == 9,
+            Ybi.year == ybi_max_year,    
+            ).order_by(desc(Ybi.wage_avg)).limit(1).values(Bra.name_pt, Ybi.wage_avg)   
         
-            for  name, value in county_jobs_generaitor:        
-                industry['county_max_number_jobs_name'] = name
-                industry['county_max_number_jobs_value'] = value
-   
-            county_wage_avg_generaitor = Ybi.query.join(Bra).filter(
-                Bra.id == Ybi.bra_id,
-                Ybi.cnae_id == cnae_id,
-                Ybi.bra_id_len == 9,
-                Ybi.year == ybi_max_year,    
-                ).order_by(desc(Ybi.wage_avg)).limit(1).values(Bra.name_pt, Ybi.wage_avg)   
-            
-            for  name, value in county_wage_avg_generaitor:        
-                industry['county_max_monthly_income_name'] = name
-                industry['county_max_monthly_income_value'] = value    
+        for  name, value in county_wage_avg_generaitor:        
+            industry['county_max_monthly_income_name'] = name
+            industry['county_max_monthly_income_value'] = value    
     
     else : 
         # Max year, location diferent Brazil
@@ -226,6 +219,8 @@ def index():
                 industry['county_max_monthly_income_value'] = wage_avg
                 industry['county_max_monthly_income_name'] = dic_names_bra[id][1]           
 
+
+    
 
 
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
