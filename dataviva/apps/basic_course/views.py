@@ -26,8 +26,8 @@ def add_language_code(endpoint, values):
 def index():
 
     course_sc_id = 'xx002'
-    bra_id = None
-    course = {}    
+    bra_id = '4sp'
+    course = {}
     school = {}
     city = {}
 
@@ -65,7 +65,7 @@ def index():
         if len(bra_id) < 9:
             most_enrolled_city_query = Ybc_sc.query.join(Bra).filter(
                                             Ybc_sc.course_sc_id == course_sc_id,
-                                            Ybc_sc.year == ybc_max_year_subquery,                                            
+                                            Ybc_sc.year == ybc_max_year_subquery,
                                             Ybc_sc.bra_id.like(str(bra_id)+'%'),
                                             Ybc_sc.bra_id_len == 9) \
                                         .order_by(Ybc_sc.enrolled.desc()).limit(1)
@@ -89,7 +89,7 @@ def index():
         total_schools_query = Ysc.query.filter(Ysc.course_sc_id == course_sc_id,
                                      Ysc.year == ysc_max_year_subquery)
 
-        
+
         most_enrolled_school_query = db.session.query(Ysc, School).filter(Ysc.school_id == School.id) \
                                         .filter(Ysc.course_sc_id == course_sc_id,
                                         Ysc.year == ysc_max_year_subquery).order_by(Ysc.enrolled)
@@ -114,7 +114,7 @@ def index():
                                                         Ybc_sc.enrolled)
 
 
-    course['schools_count'] = total_schools_query.count()    
+    course['schools_count'] = total_schools_query.count()
 
     for name_pt, desc_pt, classes, age, enrolled, year in course_data:
         course['name'] = name_pt
