@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g
+from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.secex.services import Product as SecexProductService
 
@@ -20,17 +20,20 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/')
-def index():
+@mod.route('/<product_id>')
+def index(product_id):
 
-    #None database fields must be treated to do math operations and templates with no data...
+    bra_id = request.args.get('bra_id')
+
+    #None database fields must be treated to do math operations
+    #and templates with no data shall be omitted...
+    
+    #Vars to do tests:
     #section (depth == 2)
     #positon (depth == 6)
     #brazil (bra_id == None)
-
-    product_id = '052601' #05 #052601
-    bra_id = None #None #4mg #4mg01 #4mg0000 #4mg010206 #2ce020008
-    product = {}
+    #product_id = #05 #052601
+    #bra_id = #None #4mg #4mg01 #4mg0000 #4mg010206 #2ce020008
 
     context = {
         'background_image':'static/img/bg-profile-location.jpg',
@@ -44,6 +47,8 @@ def index():
     if bra_id:
         context['bra_id_len'] = len(bra_id)
     context['depth'] = len(product_id)
+
+    product = {}
 
     secex_product_service = SecexProductService(bra_id=bra_id, product_id=product_id)
     product.update(secex_product_service.name())
