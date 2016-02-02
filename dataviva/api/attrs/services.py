@@ -1,5 +1,6 @@
 from dataviva.api.attrs.models import Ybs, Stat
 from dataviva import db
+from sqlalchemy import func
 
 class Location:
     def __init__(self, bra_id):
