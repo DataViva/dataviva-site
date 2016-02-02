@@ -1,14 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-
-from dataviva.api.attrs.models import Cbo, Bra, Cnae
-from dataviva.api.rais.models import Yo, Ybo, Yio, Ybio
-
 from dataviva.api.rais.services import Occupation as RaisOccupationService
-
-from dataviva import db
-from sqlalchemy.sql.expression import func, desc, asc
 
 mod = Blueprint('occupation', __name__,
                 template_folder='templates',
@@ -29,7 +22,6 @@ def add_language_code(endpoint, values):
 @mod.route('/<occupation_id>')
 def index(occupation_id):
 
-    #occupation_id = '2122'
     bra_id = None #'4mg'
     header = {}
     body = {}
@@ -74,7 +66,6 @@ def index(occupation_id):
         context['family'] = True
     else:
          context['family'] = False  
-    #acessar o contex do diogo com context.id.oqeuquero
 
     
     return render_template('occupation/index.html', body_class='perfil-estado', context=context, header = header, body = body)
