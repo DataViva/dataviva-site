@@ -4,7 +4,7 @@ from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.models import Wld, Bra, Hs
 from dataviva.api.secex.models import Ymw, Ymbw, Ympw
 from dataviva import db
-from sqlalchemy.sql.expression import func, desc
+from sqlalchemy.sql.expression import func, desc, asc
 
 mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
@@ -132,6 +132,14 @@ def index():
 	for name_pt, import_val in ympw_product_import_data:
 		trade['leading_import_product'] = name_pt
 		trade['leading_import_product_value'] = import_val
+
+	for name_pt, trade_balance in ympw_highest_balance_data:
+		trade['highest_product_balance'] = name_pt
+		trade['highest_product_balance_value'] = trade_balance
+
+	for name_pt, trade_balance in ympw_lowest_balance_data:
+		trade['lowest_product_balance'] = name_pt
+		trade['lowest_product_balance_value'] = trade_balance
 
 	return render_template('trade_partner/index.html', body_class='perfil-estado', country=country, trade=trade)
 

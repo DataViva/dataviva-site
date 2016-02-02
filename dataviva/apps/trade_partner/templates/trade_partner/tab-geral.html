@@ -38,7 +38,7 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>{{ country.text_profile}}</p>
+        <p>{{ country.profile}}</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Comércio Internacional</h3>
@@ -86,8 +86,8 @@
                                     Produto com maior Saldo da Balança Comercial
                                 </th>
                                 <td>
-                                    <p class = "label">{{trade.product_bigger_trade_balance}}</p>
-                                    USD<strong class="counter">{{trade.value_product_bigger_trade_balance}}</strong> <span>milhoes</span>
+                                    <p class = "label">{{trade.highest_product_balance}}</p>
+                                    USD<strong class="counter">{{trade.highest_product_balance_value}}</strong> <span>milhoes</span>
                                 </td>
                             </tr>
                             <tr>
@@ -95,8 +95,8 @@
                                     Produto com menor Saldo da Balança Comercial
                                 </th>
                                 <td>
-                                    <p class = "label">{{trade.product_smaller_trade_balance}}</p>
-                                    USD<strong class="counter">{{trade.value_product_smaller_trade_balance}}</strong> <span>milhoes</span>
+                                    <p class = "label">{{trade.lowest_product_balance}}</p>
+                                    USD<strong class="counter">{{trade.lowest_product_balance_value}}</strong> <span>milhoes</span>
                                 </td>
                             </tr>
                         </tbody>
