@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.models import Course_hedu
 from dataviva.api.hedu.models import Yuc
-from dataviva.api.hedu.services import UniversityYu
+from dataviva.api.hedu.services import University
 from dataviva import db
 from sqlalchemy.sql.expression import func, desc
 
@@ -22,7 +22,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    university_service = UniversityYu(university_id='00575')
+    university_service = University(university_id='00575')
     university = university_service.main_info()
     course = university_service.course_info()
     
