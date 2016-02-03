@@ -21,8 +21,16 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-	trade_partner_service = TradePartner(wld_id='nausa')
-	country = trade_partner_service.main_info()
-	trade = trade_partner_service.trade_info()
+    trade_partner_service = TradePartner(wld_id='nausa')
+    header = trade_partner_service.country_info()
 
-	return render_template('trade_partner/index.html', body_class='perfil-estado', country=country, trade=trade)
+    trade = {
+        'municipality_with_more_exports': trade_partner_service.municipality_with_more_exports(),
+        'municipality_with_more_imports': trade_partner_service.municipality_with_more_imports(),
+        'product_with_more_exports': trade_partner_service.product_with_more_exports(),
+        'product_with_more_imports': trade_partner_service.product_with_more_imports(),
+        'product_with_highest_balance': trade_partner_service.product_with_highest_balance(),
+        'product_with_lowest_balance': trade_partner_service.product_with_lowest_balance()
+    }
+
+    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, trade=trade)
