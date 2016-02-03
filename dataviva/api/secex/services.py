@@ -4,8 +4,7 @@ from dataviva import db
 from sqlalchemy import func, desc
 
 class Product:
-    def __init__(self, bra_id, product_id):
-        self.bra_id = bra_id
+    def __init__(self, product_id):
         self.product_id = product_id
         self.ymp_max_year_query = db.session.query(
             func.max(Ymp.year)).filter_by(hs_id=product_id)
@@ -15,48 +14,82 @@ class Product:
             func.max(Ympw.year)).filter_by(hs_id=product_id)
         self.ymbpw_max_year_query = db.session.query(
             func.max(Ymbpw.year)).filter_by(hs_id=product_id, bra_id=bra_id)
-        self.product = {}
-
-    def name(self):
-        name = Hs.query.filter(
-            Hs.id == self.product_id).first().name()
-        return {'name': name}
+        self._secex_values = None
 
     def pci(self):
         ymp_pci_query = Ymp.query.filter(Ymp.hs_id==self.product_id,
                                      Ymp.year==self.ymp_max_year_query,
                                      Ymp.month==0).limit(1)
         pci = ymp_pci_query.one().pci
-        return {'pci': pci}
+        return pci
 
-    def brazil_section_position(self):
-        ymp_query = Ymp.query.filter(
-            Ymp.hs_id==self.product_id,
-            Ymp.year==self.ymp_max_year_query,
-            Ymp.month==0
-        ).limit(1)
+    def __secex_values__(self):
+        if not self._secex_values:
+            ymp_query = Ymp.query.filter(
+                Ymp.hs_id==self.product_id,
+                Ymp.year==self.ymp_max_year_query,
+                Ymp.month==0
+            ).limit(1)
 
-        ymp_data = ymp_query.values(
-            Ymp.year,
-            Ymp.export_val,
-            Ymp.import_val,
-            Ymp.export_kg,
-            Ymp.import_kg
-        )
+            ymp_data = ymp_query.values(
+                Ymp.year,
+                Ymp.export_val,
+                Ymp.import_val,
+                Ymp.export_kg,
+                Ymp.import_kg
+            )
 
-        for year, export_val, import_val, export_kg, import_kg in ymp_data:
-            self.product['year'] = year
-            self.product['export_val'] = export_val
-            self.product['import_val'] = import_val
-            self.product['export_kg'] = export_kg
-            self.product['import_kg'] = import_kg
-            self.product['trade_balance'] = export_val - import_val
-            self.product['export_net_weight'] = export_kg / export_val
-            self.product['import_net_weight'] = import_kg / import_val
+            secex_values = {}
 
-        return self.product
+            for year, export_val, import_val, export_kg, import_kg in ymp_data:
+                export_val = export_val or 0
+                import_val = import_val or 0
+                export_kg = export_kg or 0
+                import_kg = import_kg or 0
 
-    def brazil_municipality_with_more_exports(self):
+                secex_values['year'] = year
+                secex_values['export_val'] = export_val
+                secex_values['import_val'] = import_val
+                secex_values['export_kg'] = export_kg
+                secex_values['import_kg'] = import_kg
+                secex_values['trade_balance'] = export_val - import_val
+
+                if export_val == 0:
+                    secex_values['export_net_weight'] = None
+                else:
+                    secex_values['export_net_weight'] = export_kg / export_val
+
+                if import_val == 0:
+                    secex_values['import_net_weight'] = None
+                else:
+                    secex_values['import_net_weight'] = import_kg / import_val
+
+            self._secex_values = secex_values
+
+        return self._secex_values
+
+    def year(self):
+        return self.__secex_values__()['year']
+
+    def export_val(self):
+        return self.__secex_values__()['export_val']
+
+    def export_val(self):
+        return self.__secex_values__()['export_val']
+
+    def export_kg(self):
+        return self.__secex_values__()['export_kg']
+
+    def trade_balance(self):
+        return self.__secex_values__()['trade_balance']
+
+    def export_net_weight(self):
+        return self.__secex_values__()['export_net_weight']
+
+    def import_net_weight(self):
+        return self.__secex_values__()['import_net_weight']
+
+    def municipality_with_more_exports(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id==self.product_id,
             Ymbp.year==self.ymbp_max_year_query,
@@ -69,12 +102,15 @@ class Product:
             Ymbp.export_val
         )
 
-        for name_pt, export_val in ymbp_bra_data:
-            self.product['munic_name_export'] = name_pt
-            self.product['munic_export_value'] = export_val
-        return self.product
+        municipality_with_more_exports = {}
 
-    def brazil_municipality_with_more_imports(self):
+        for name_pt, export_val in ymbp_bra_data:
+            municipality_with_more_exports['munic_name_export'] = name_pt
+            municipality_with_more_exports['munic_export_value'] = export_val
+
+        return municipality_with_more_exports
+
+    def municipality_with_more_imports(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id==self.product_id,
             Ymbp.year==self.ymbp_max_year_query,
@@ -87,13 +123,15 @@ class Product:
             Ymbp.import_val
         )
 
+        municipality_with_more_imports = {}
+
         for name_pt, import_val in ymbp_bra_data:
-            self.product['munic_name_import'] = name_pt
-            self.product['munic_import_value'] = import_val
+            municipality_with_more_imports['munic_name_import'] = name_pt
+            municipality_with_more_imports['munic_import_value'] = import_val
 
-        return self.product
+        return municipality_with_more_imports
 
-    def brazil_destination_with_more_exports(self):
+    def destination_with_more_exports(self):
         ympw_query = Ympw.query.join(Wld).filter(
             Ympw.hs_id==self.product_id,
             Ympw.year==self.ympw_max_year_query,
@@ -106,13 +144,15 @@ class Product:
             Ympw.export_val
         )
 
+        destination_with_more_exports = {}
+
         for name_pt, export_val in ympw_wld_data:
-            self.product['dest_name_export'] = name_pt
-            self.product['dest_export_value'] = export_val
+            destination_with_more_exports['dest_name_export'] = name_pt
+            destination_with_more_exports['dest_export_value'] = export_val
 
-        return self.product
+        return destination_with_more_exports
 
-    def brazil_origin_with_more_import(self):
+    def origin_with_more_import(self):
         ympw_query = Ympw.query.join(Wld).filter(
             Ympw.hs_id==self.product_id,
             Ympw.year==self.ympw_max_year_query,
@@ -125,89 +165,107 @@ class Product:
             Ympw.import_val
         )
 
+        origin_with_more_import = {}
+
         for name_pt, import_val in ympw_wld_data:
-            self.product['src_name_import'] = name_pt
-            self.product['src_import_value'] = import_val
+            origin_with_more_import['src_name_import'] = name_pt
+            origin_with_more_import['src_import_value'] = import_val
 
-        return self.product
+        return origin_with_more_import
 
-    def location_postion(self):
-        ymbp_query = Ymbp.query.filter(
-            Ymbp.hs_id==self.product_id,
-            Ymbp.year==self.ymbp_max_year_query,
-            Ymbp.bra_id==self.bra_id,
-            Ymbp.month==0
-        ).limit(1)
+class ProductByLocation:
+    def __init__(self, bra_id, product_id):
+        self.bra_id = bra_id
+        self.product_id = product_id
+        self.ymbp_max_year_query = db.session.query(
+            func.max(Ymbp.year)).filter_by(hs_id=product_id)
+        self.ymbpw_max_year_query = db.session.query(
+            func.max(Ymbpw.year)).filter_by(hs_id=product_id, bra_id=bra_id)
+        self._secex_values = None
 
-        ymbp_data = ymbp_query.values(
-            Ymbp.year,
-            Ymbp.export_val,
-            Ymbp.import_val,
-            Ymbp.export_kg,
-            Ymbp.import_kg,
-            Ymbp.rca_wld,
-            Ymbp.distance_wld,
-            Ymbp.opp_gain_wld
-        )
+    def __secex_values__(self):
+        if not self._secex_values:
+            ymbp_query = Ymbp.query.filter(
+                Ymbp.hs_id==self.product_id,
+                Ymbp.year==self.ymbp_max_year_query,
+                Ymbp.bra_id==self.bra_id,
+                Ymbp.month==0
+            ).limit(1)
 
-        for year, export_val, import_val, export_kg, import_kg, rca_wld, distance_wld, opp_gain_wld in ymbp_data:
-            export_val = export_val or 0
-            import_val = import_val or 0
-            export_kg = export_kg or 0
-            import_kg = import_kg or 0
+            ymbp_data = ymbp_query.values(
+                Ymbp.year,
+                Ymbp.export_val,
+                Ymbp.import_val,
+                Ymbp.export_kg,
+                Ymbp.import_kg,
+                Ymbp.rca_wld,
+                Ymbp.distance_wld,
+                Ymbp.opp_gain_wld
+            )
 
-            self.product['year'] = year
-            self.product['export_val'] = export_val
-            self.product['import_val'] = import_val
-            self.product['export_kg'] = export_kg
-            self.product['import_kg'] = import_kg
-            self.product['trade_balance'] = export_val - import_val
+            for year, export_val, import_val, export_kg, import_kg, rca_wld, distance_wld, opp_gain_wld in ymbp_data:
+                export_val = export_val or 0
+                import_val = import_val or 0
+                export_kg = export_kg or 0
+                import_kg = import_kg or 0
 
-            if export_val == 0:
-                self.product['export_net_weight'] = None
-            else:
-                self.product['export_net_weight'] = export_kg / export_val
+                secex_values['year'] = year
+                secex_values['export_val'] = export_val
+                secex_values['import_val'] = import_val
+                secex_values['export_kg'] = export_kg
+                secex_values['import_kg'] = import_kg
+                secex_values['trade_balance'] = export_val - import_val
 
-            if import_val == 0:
-                self.product['import_net_weight'] = None
-            else:
-                self.product['import_net_weight'] = import_kg / import_val
+                if export_val == 0:
+                    secex_values['export_net_weight'] = None
+                else:
+                    secex_values['export_net_weight'] = export_kg / export_val
 
-            self.product['rca_wld'] = rca_wld
-            self.product['distance_wld'] = distance_wld
-            self.product['opp_gain_wld'] = opp_gain_wld
+                if import_val == 0:
+                    secex_values['import_net_weight'] = None
+                else:
+                    secex_values['import_net_weight'] = import_kg / import_val
 
-        return self.product
+                secex_values['rca_wld'] = rca_wld
+                secex_values['distance_wld'] = distance_wld
+                secex_values['opp_gain_wld'] = opp_gain_wld
 
-    def location_section(self):
-        ymbp_query = Ymbp.query.filter(
-            Ymbp.hs_id==self.product_id,
-            Ymbp.year==self.ymbp_max_year_query,
-            Ymbp.bra_id==self.bra_id,
-            Ymbp.month==0
-        ).limit(1)
+        self._secex_values = secex_values
 
-        ymbp_data = ymbp_query.values(
-            Ymbp.year,
-            Ymbp.export_val,
-            Ymbp.import_val,
-            Ymbp.export_kg,
-            Ymbp.import_kg
-        )
+        return self._secex_values
 
-        for year, export_val, import_val, export_kg, import_kg in ymbp_data:
-            self.product['year'] = year
-            self.product['export_val'] = export_val
-            self.product['import_val'] = import_val
-            self.product['export_kg'] = export_kg
-            self.product['import_kg'] = import_kg
-            self.product['trade_balance'] = export_val - import_val
-            self.product['export_net_weight'] = export_kg / export_val
-            self.product['import_net_weight'] = import_kg / import_val
+    def year(self):
+        return self.__secex_values__()['year']
 
-        return self.product
+    def export_val(self):
+        return self.__secex_values__()['export_val']
 
-    def location_destination_with_more_exports(self):
+    def export_val(self):
+        return self.__secex_values__()['export_val']
+
+    def export_kg(self):
+        return self.__secex_values__()['export_kg']
+
+    def trade_balance(self):
+        return self.__secex_values__()['trade_balance']
+
+    def export_net_weight(self):
+        return self.__secex_values__()['export_net_weight']
+
+    def import_net_weight(self):
+        return self.__secex_values__()['import_net_weight']
+
+    def import_net_weight(self):
+        return self.__secex_values__()['rca_wld']
+
+    def import_net_weight(self):
+        return self.__secex_values__()['distance_wld']
+
+    def import_net_weight(self):
+        return self.__secex_values__()['opp_gain_wld']
+
+
+    def destination_with_more_exports(self):
         ymbpw_query = Ymbpw.query.join(Wld).filter(
             Ymbpw.hs_id==self.product_id,
             Ymbpw.year==self.ymbpw_max_year_query,
@@ -221,13 +279,15 @@ class Product:
             Ymbpw.export_val
         )
 
+        destination_with_more_exports = {}
+
         for name_pt, export_val in ymbpw_wld_data:
-            self.product['dest_name_export'] = name_pt
-            self.product['dest_export_value'] = export_val
+            destination_with_more_exports['dest_name_export'] = name_pt
+            destination_with_more_exports['dest_export_value'] = export_val
 
-        return self.product
+        return destination_with_more_exports
 
-    def location_origin_with_more_imports(self):
+    def origin_with_more_imports(self):
         ymbpw_query = Ymbpw.query.join(Wld).filter(
             Ymbpw.hs_id==self.product_id,
             Ymbpw.year==self.ymbpw_max_year_query,
@@ -241,13 +301,15 @@ class Product:
             Ymbpw.import_val
         )
 
+        origin_with_more_imports = {}
+
         for name_pt, import_val in ymbpw_wld_data:
-            self.product['src_name_import'] = name_pt
-            self.product['src_import_value'] = import_val
+            origin_with_more_imports['src_name_import'] = name_pt
+            origin_with_more_imports['src_import_value'] = import_val
 
-        return self.product
+        return origin_with_more_imports
 
-    def location_municipality_with_more_exports(self):
+    def municipality_with_more_exports(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id==self.product_id,
             Ymbp.year==self.ymbp_max_year_query,
@@ -261,13 +323,15 @@ class Product:
             Ymbp.export_val
         )
 
+        municipality_with_more_exports = {}
+
         for name_pt, export_val in ymbp_bra_data:
-            self.product['munic_name_export'] = name_pt
-            self.product['munic_export_value'] = export_val
+            municipality_with_more_exports['munic_name_export'] = name_pt
+            municipality_with_more_exports['munic_export_value'] = export_val
 
         return self.product
 
-    def location_municipality_with_more_imports(self):
+    def municipality_with_more_imports(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id==self.product_id,
             Ymbp.year==self.ymbp_max_year_query,
@@ -281,8 +345,10 @@ class Product:
             Ymbp.import_val
         )
 
-        for name_pt, import_val in ymbp_bra_data:
-            self.product['munic_name_import'] = name_pt
-            self.product['munic_import_value'] = import_val
+        municipality_with_more_imports = {}
 
-        return self.product
+        for name_pt, import_val in ymbp_bra_data:
+            municipality_with_more_imports['munic_name_import'] = name_pt
+            municipality_with_more_imports['munic_import_value'] = import_val
+
+        return municipality_with_more_imports

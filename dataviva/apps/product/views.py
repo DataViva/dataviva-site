@@ -50,22 +50,56 @@ def index(product_id):
 
     product = {}
 
-    secex_product_service = SecexProductService(bra_id=bra_id, product_id=product_id)
+    #criar o name service na HS
+    #verificar local pci
+    #verificar as tabelas usadas em cada classe
+
+    if bra_id:
+        secex_product_service = SecexProductByLocationService(bra_id=bra_id, product_id=product_id)
+
+        #product.update(secex_product_service.location_destination_with_more_imports())
+        #product.update(secex_product_service.location_origin_with_more_imports())
+
+    else:
+        secex_product_service = SecexProductService(product_id=product_id)
+
+
+    product['year'] = secex_product_service.year()
+    product['export_val'] = secex_product_service.export_val()
+    product['import_val'] = secex_product_service.import_val()
+    product['export_kg'] = secex_product_service.export_kg()
+    product['import_kg'] = secex_product_service.import_kg()
+    product['trade_balance'] = secex_product_service.trade_balance()
+    product['export_net_weight'] = secex_product_service.export_net_weight()
+    product['import_net_weight'] = secex_product_service.import_net_weight()
+    product.update(secex_product_service.brazil_municipality_with_more_exports())
+    product.update(secex_product_service.brazil_municipality_with_more_imports())
+    product.update(secex_product_service.brazil_destination_with_more_exports())
+    product.update(secex_product_service.brazil_origin_with_more_import())
     product.update(secex_product_service.name())
     product.update(secex_product_service.pci())
 
+    #verificar campo year
+    #return object pci name
+
     if bra_id == None:
-        product.update(secex_product_service.brazil_section_position())
+        product['year'] = secex_product_service.year()
+        product['export_val'] = secex_product_service.export_val()
+        product['import_val'] = secex_product_service.import_val()
+        product['export_kg'] = secex_product_service.export_kg()
+        product['import_kg'] = secex_product_service.import_kg()
+        product['trade_balance'] = secex_product_service.trade_balance()
+        product['export_net_weight'] = secex_product_service.export_net_weight()
+        product['import_net_weight'] = secex_product_service.import_net_weight()
         product.update(secex_product_service.brazil_municipality_with_more_exports())
         product.update(secex_product_service.brazil_municipality_with_more_imports())
         product.update(secex_product_service.brazil_destination_with_more_exports())
         product.update(secex_product_service.brazil_origin_with_more_import())
 
     else:
-        product.update(secex_product_service.location_destination_with_more_imports())
-        product.update(secex_product_service.location_origin_with_more_imports())
 
         if len(product_id) == 6:
+            secex_product_service.
             product.update(secex_product_service.location_postion())
 
         elif len(product_id) == 2:
