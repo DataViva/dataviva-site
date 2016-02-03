@@ -8,6 +8,7 @@ class Industry :
     def __init__(self, bra_id, cnae_id):
         self.bra_id = bra_id
         self.cnae_id = cnae_id
+        self.industry_headers = {}  
         self.yi_max_year_br = db.session.query(func.max(Yi.year)).filter_by(cnae_id=cnae_id)
         self.yio_max_year_br = db.session.query(func.max(Yio.year)).filter_by(cnae_id=cnae_id)
         self.ybi_max_year_br = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
@@ -53,20 +54,34 @@ class Industry :
 
         return industry     
 
+
+
     def get_headers_indicators_br(self):
-        headers_generator = Yi.query.filter(
-            Yi.cnae_id == self.cnae_id,
-            Yi.year == self.yi_max_year_br    
-            ).values(Yi.wage, Yi.num_jobs, Yi.num_est, Yi.wage_avg )
+        if not self.industry_headers  :
+            headers_generator = Yi.query.filter(
+                Yi.cnae_id == self.cnae_id,
+                Yi.year == self.yi_max_year_br    
+                ).values(Yi.wage, Yi.num_jobs, Yi.num_est, Yi.wage_avg )
 
-        industry = {}
-        for  wage, num_jobs, num_est, wage_avg in headers_generator:        
-            industry['average_monthly_income'] = wage_avg
-            industry['salary_mass'] = wage
-            industry['total_jobs'] = num_jobs
-            industry['total_establishments'] = num_est
+            for  wage, num_jobs, num_est, wage_avg in headers_generator:        
+                self.industry_headers['average_monthly_income'] = wage_avg
+                self.industry_headers['salary_mass'] = wage
+                self.industry_headers['total_jobs'] = num_jobs
+                self.industry_headers['total_establishments'] = num_est
 
-        return industry
+        return self.industry_headers
+
+    def wage_avg(self): 
+        return self.get_headers_indicators_br()['average_monthly_income']
+
+    def wage(self):
+        return self.get_headers_indicators_br()['salary_mass']
+
+    def num_jobs(self):
+        return self.get_headers_indicators_br()['total_jobs']
+
+    def num_est(self):
+        return self.get_headers_indicators_br()['total_establishments'] 
 
     
     #-----

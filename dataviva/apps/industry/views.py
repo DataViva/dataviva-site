@@ -48,6 +48,11 @@ def index():
     if bra_id == None :
         industry['year'] = rais_industry_service.get_year_br()
         industry.update(rais_industry_service.get_headers_indicators_br())
+
+        industry['average_monthly_income'] = rais_industry_service.wage_avg()
+
+        
+
         industry.update(rais_industry_service.get_occ_with_more_number_jobs_br())
         industry.update(rais_industry_service.get_occ_with_more_wage_avg_br())
         industry.update(rais_industry_service.get_municipality_with_more_num_jobs_br())
