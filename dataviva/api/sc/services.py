@@ -7,6 +7,7 @@ from sqlalchemy import func
 class Basic_course:
     def __init__(self, course_sc_id, bra_id):
         self._statistics = None
+        
         self.course_sc_id = course_sc_id
         self.bra_id = bra_id
         self.ybc_max_year_subquery = db.session.query(
@@ -126,5 +127,41 @@ class Basic_course:
 
         return self._statistics
 
-        def course_name(self):
-            return self.__statistics__()['course_name']
+    def course_name(self):
+        return self.__statistics__()['course_name']
+
+    def course_description(self):
+        return self.__statistics__()['course_description']
+
+    def course_classes(self):
+        return self.__statistics__()['course_classes']
+
+    def course_age(self):
+        return self.__statistics__()['course_age']
+
+    def course_enrolled(self):
+        return self.__statistics__()['course_enrolled']
+
+    def course_average_class_size(self):
+        return self.__statistics__()['course_average_class_size']
+    
+    def course_year(self):
+        return self.__statistics__()['course_year']
+    
+    def schools_count(self):
+        return self.__statistics__()['schools_count']
+
+    def enrollment_statistics_description(self):
+        return self.__statistics__()['enrollment_statistics_description']
+
+    def school_name(self):
+        return self.__statistics__()['school_name']
+
+    def school_enrolled(self):
+        return self.__statistics__()['school_enrolled']
+
+    def city_name(self):
+        return self.__statistics__()['city_name']
+
+    def city_enrolled(self):
+        return self.__statistics__()['city_enrolled']
