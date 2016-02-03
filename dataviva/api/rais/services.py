@@ -31,32 +31,54 @@ class Industry :
     
     #-----
         
-    def get_headers_indicators(self):
-        headers_generate = Ybi.query.filter(
-            Ybi.cnae_id==self.cnae_id,
-            Ybi.bra_id == self.bra_id,
-            Ybi.year==self.ybi_max_year
-            ).values(
-                Ybi.wage, Ybi.num_jobs, 
-                Ybi.num_est, Ybi.wage_avg, 
-                Ybi.rca, Ybi.distance, 
-                Ybi.opp_gain) 
+    def __rais_values_by_location__(self):
+        if not self.industry_headers : 
+            headers_generate = Ybi.query.filter(
+                Ybi.cnae_id==self.cnae_id,
+                Ybi.bra_id == self.bra_id,
+                Ybi.year==self.ybi_max_year
+                ).values(
+                    Ybi.wage, Ybi.num_jobs, 
+                    Ybi.num_est, Ybi.wage_avg, 
+                    Ybi.rca, Ybi.distance, 
+                    Ybi.opp_gain) 
 
-        industry = {}
-        for wage, num_jobs, num_est, wage_avg, rca, distance, opp_gain in headers_generate:
-           industry['average_monthly_income'] = wage_avg
-           industry['salary_mass'] = wage
-           industry['total_jobs'] = num_jobs
-           industry['total_establishments'] =  num_est
-           industry['rca_domestic'] =  rca
-           industry['distance'] =  distance
-           industry['opportunity_gain'] =  opp_gain          
+            
+            for wage, num_jobs, num_est, wage_avg, rca, distance, opp_gain in headers_generate:
+               self.industry_headers['average_monthly_income'] = wage_avg
+               self.industry_headers['salary_mass'] = wage
+               self.industry_headers['total_jobs'] = num_jobs
+               self.industry_headers['total_establishments'] =  num_est
+               self.industry_headers['rca_domestic'] =  rca
+               self.industry_headers['distance'] =  distance
+               self.industry_headers['opportunity_gain'] =  opp_gain          
 
-        return industry     
+        return self.industry_headers     
+
+    def average_monthly_income_by_location(self): 
+        return self.__rais_values_by_location__()['average_monthly_income']
+
+    def salary_mass_by_location(self):
+        return self.__rais_values_by_location__()['salary_mass']
+
+    def num_jobs_by_location(self):
+        return self.__rais_values_by_location__()['total_jobs']
+
+    def num_establishments_by_location(self):
+        return self.__rais_values_by_location__()['total_establishments'] 
+
+    def rca_by_location(self):
+        return self.__rais_values_by_location__()['rca_domestic']
+
+    def distance_by_location(self):
+        return self.__rais_values_by_location__()['distance']
+
+    def opportunity_gain_by_location(self):
+        return self.__rais_values_by_location__()['opportunity_gain']    
 
 
 
-    def get_headers_indicators_br(self):
+    def __rais_values__(self):
         if not self.industry_headers  :
             headers_generator = Yi.query.filter(
                 Yi.cnae_id == self.cnae_id,
@@ -71,22 +93,22 @@ class Industry :
 
         return self.industry_headers
 
-    def wage_avg(self): 
-        return self.get_headers_indicators_br()['average_monthly_income']
+    def average_monthly_income(self): 
+        return self.__rais_values__()['average_monthly_income']
 
-    def wage(self):
-        return self.get_headers_indicators_br()['salary_mass']
+    def salary_mass(self):
+        return self.__rais_values__()['salary_mass']
 
     def num_jobs(self):
-        return self.get_headers_indicators_br()['total_jobs']
+        return self.__rais_values__()['total_jobs']
 
-    def num_est(self):
-        return self.get_headers_indicators_br()['total_establishments'] 
+    def num_establishments(self):
+        return self.__rais_values__()['total_establishments'] 
 
     
     #-----
 
-    def  get_occ_with_more_number_jobs(self) : 
+    def  get_occ_with_more_number_jobs_by_location(self) : 
         occ_jobs_generate = Ybio.query.join(Cbo).filter(
             Cbo.id == Ybio.cbo_id,
             Ybio.cnae_id == self.cnae_id,
@@ -103,7 +125,7 @@ class Industry :
 
         return industry      
 
-    def  get_occ_with_more_number_jobs_br(self) :
+    def  get_occ_with_more_number_jobs(self) :
         occupation_jobs_generaitor = Yio.query.join(Cbo).filter(
             Yio.cbo_id == Cbo.id,
             Yio.cnae_id == self.cnae_id,
@@ -121,7 +143,7 @@ class Industry :
 
     #-----
 
-    def get_occ_with_more_wage_avg(self):
+    def get_occ_with_more_wage_avg_by_location(self):
         
         occ_wage_avg_generate = Ybio.query.join(Cbo).filter(
             Cbo.id == Ybio.cbo_id,
@@ -138,7 +160,7 @@ class Industry :
 
         return industry
 
-    def get_occ_with_more_wage_avg_br(self):
+    def get_occ_with_more_wage_avg(self):
         occupation_wage_avg_generaitor = Yio.query.join(Cbo).filter(
             Yio.cbo_id == Cbo.id,
             Yio.cnae_id == self.cnae_id,
@@ -156,7 +178,7 @@ class Industry :
     
     #-----
 
-    def get_municipality_with_more_num_jobs(self):
+    def get_municipality_with_more_num_jobs_by_location(self):
 
         county_jobs_generate = Ybi.query.join(Bra).filter(
             Bra.id == Ybi.bra_id,
@@ -172,7 +194,7 @@ class Industry :
             industry['county_max_number_jobs_name'] = name_pt
         return industry    
 
-    def get_municipality_with_more_num_jobs_br(self):
+    def get_municipality_with_more_num_jobs(self):
         county_jobs_generaitor = Ybi.query.join(Bra).filter(
             Bra.id == Ybi.bra_id,
             Ybi.cnae_id == self.cnae_id,
@@ -190,7 +212,7 @@ class Industry :
 
     #-----
 
-    def get_municipality_with_more_wage_avg(self):
+    def get_municipality_with_more_wage_avg_by_location(self):
 
         county_wage_avg_generate = Ybi.query.join(Bra).filter(
             Bra.id == Ybi.bra_id,
@@ -207,7 +229,7 @@ class Industry :
 
         return industry    
 
-    def get_municipality_with_more_wage_avg_br(self):
+    def get_municipality_with_more_wage_avg(self):
         county_wage_avg_generaitor = Ybi.query.join(Bra).filter(
             Bra.id == Ybi.bra_id,
             Ybi.cnae_id == self.cnae_id,
