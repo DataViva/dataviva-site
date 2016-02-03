@@ -68,7 +68,7 @@ class Occupation:
 
         return header
 
-    def ybo_municipality_num_jobs_with_bra_id(self):
+    def ybo_municipality_with_more_jobs_with_bra_id(self):
 
         ybo_municipality_num_jobs_generator = Ybo.query.join(Bra).filter(
                 Ybo.cbo_id == self.occupation_id,
@@ -86,7 +86,7 @@ class Occupation:
 
         return body
 
-    def ybo_municipality_wage_avg_with_bra_id(self):
+    def ybo_municipality_with_biggest_wage_avg_with_bra_id(self):
 
         ybo_municipality_wage_avg_generator = Ybo.query.join(Bra).filter(
             Ybo.cbo_id == self.occupation_id,
@@ -104,7 +104,7 @@ class Occupation:
 
         return body 
 
-    def ybio_activity_num_jobs(self):
+    def ybio_activity_with_more_jobs(self):
 
         ybio_activity_num_jobs_generator = Ybio.query.join(Cnae).filter(
             Ybio.cbo_id == self.occupation_id,
@@ -123,7 +123,7 @@ class Occupation:
         return body
 
         
-    def ybio_activity_wage_avg(self):
+    def ybio_activity_with_biggest_wage_avg(self):
 
         ybio_activity_wage_avg_generator = Ybio.query.join(Cnae).filter(
                 Ybio.cbo_id == self.occupation_id,

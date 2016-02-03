@@ -22,7 +22,7 @@ def add_language_code(endpoint, values):
 @mod.route('/<occupation_id>')
 def index(occupation_id):
 
-    bra_id = None #'4mg'
+    bra_id = '4mg'
     header = {}
     body = {}
 
@@ -31,9 +31,9 @@ def index(occupation_id):
         header['year'] = rais_occupation_service.year
         header.update(rais_occupation_service.ybo_header())
         body.update(rais_occupation_service.ybo_municipality_with_more_jobs_with_bra_id())
-        body.update(rais_occupation_service.ybo_municipality_wage_avg_with_bra_id())
-        body.update(rais_occupation_service.ybio_activity_num_jobs())
-        body.update(rais_occupation_service.ybio_activity_wage_avg())
+        body.update(rais_occupation_service.ybo_municipality_with_biggest_wage_avg_with_bra_id())
+        body.update(rais_occupation_service.ybio_activity_with_more_jobs())
+        body.update(rais_occupation_service.ybio_activity_with_biggest_wage_avg())
 
     else:
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id)
