@@ -19,8 +19,8 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
     major_service = Major(course_hedu_id='523E04')
-    major = major_service.main_info()
-    enrollments = major_service.enrollments_info()
+    major = major_service.major_info()
+    enrollments = major_service.university_and_county_with_more_enrollments()
 
     ''' Queries que pegam o ano mais recente dos dados '''
 

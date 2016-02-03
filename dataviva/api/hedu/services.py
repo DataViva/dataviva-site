@@ -90,7 +90,7 @@ class Major:
         self.yuc_max_year_query = db.session.query(func.max(Yuc.year))
         self.ybc_max_year_query = db.session.query(func.max(Ybc_hedu.year))
 
-    def main_info(self):
+    def major_info(self):
         yc_query = Yc_hedu.query.join(Course_hedu).filter(
             Yc_hedu.course_hedu_id == self.course_hedu_id,
             Yc_hedu.year == self.yc_max_year_query
@@ -117,7 +117,7 @@ class Major:
 
         return major
 
-    def enrollments_info(self):
+    def university_and_county_with_more_enrollments(self):
         yuc_enrolled_query = Yuc.query.join(uni).filter(
             Yuc.course_hedu_id == self.course_hedu_id,
             Yuc.year == self.yuc_max_year_query
