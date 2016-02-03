@@ -8,7 +8,7 @@
                 <table class="table data-blue">
                     <thead>
                         <tr>
-                            {% if city.enrolled %}
+                            {% if basic_course_statistics["city_enrolled"] %}
                                 <th>
                                     Principal Município
                                     <small>por Número de Alunos Matriculados</small>
@@ -22,18 +22,18 @@
                     </thead>
                     <tbody>
                         <tr>
-                            {% if city.enrolled %}
+                            {% if basic_course_statistics["city_enrolled"] %}
                                 <td>
-                                    <p class="label">{{city.name}}</p>
+                                    <p class="label">{{basic_course_statistics["city_name"]}}</p>
                                     <div class="number">
-                                        <strong class="counter">{{city.enrolled}}</strong><span> mil</span>
+                                        <strong class="counter">{{basic_course_statistics["city_enrolled"]}}</strong><span> mil</span>
                                     </div>
                                 </td>
                             {% endif %}
                             <td>
-                                <p class="label">{{school.name}}</p>
+                                <p class="label">{{basic_course_statistics["school_name"]}}</p>
                                 <div class="number">
-                                    <strong class="counter">{{school.enrolled}}</strong><span> mil</span>
+                                    <strong class="counter">{{basic_course_statistics["school_enrolled"]}}</strong><span> mil</span>
                                 </div>
                             </td>
                         </tr>
