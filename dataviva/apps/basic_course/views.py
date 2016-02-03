@@ -28,12 +28,9 @@ def index():
 
     course_sc_id = '01006'
     bra_id = None
-    course = {}    
-    school = {}
-    city = {}
 
     sc_service = ScBasicCourse(course_sc_id= course_sc_id,bra_id=bra_id)
-    basic_course_statistics = sc_service.statistics()
+    basic_course_statistics = sc_service.__statistics__()
 
     
     return render_template('basic_course/index.html', basic_course_statistics=basic_course_statistics, body_class='perfil-estado')
