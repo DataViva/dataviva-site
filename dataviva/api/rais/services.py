@@ -71,7 +71,7 @@ class Industry :
     
     #-----
 
-    def  get_occ_max_number_jobs(self) : 
+    def  get_occ_with_more_number_jobs(self) : 
         occ_jobs_generate = Ybio.query.join(Cbo).filter(
             Cbo.id == Ybio.cbo_id,
             Ybio.cnae_id == self.cnae_id,
@@ -88,7 +88,7 @@ class Industry :
 
         return industry      
 
-    def  get_occ_max_number_jobs_br(self) :
+    def  get_occ_with_more_number_jobs_br(self) :
         occupation_jobs_generaitor = Yio.query.join(Cbo).filter(
             Yio.cbo_id == Cbo.id,
             Yio.cnae_id == self.cnae_id,
@@ -106,7 +106,7 @@ class Industry :
 
     #-----
 
-    def get_occ_max_wage_avg(self):
+    def get_occ_with_more_wage_avg(self):
         
         occ_wage_avg_generate = Ybio.query.join(Cbo).filter(
             Cbo.id == Ybio.cbo_id,
@@ -123,7 +123,7 @@ class Industry :
 
         return industry
 
-    def get_occ_max_wage_avg_br(self):
+    def get_occ_with_more_wage_avg_br(self):
         occupation_wage_avg_generaitor = Yio.query.join(Cbo).filter(
             Yio.cbo_id == Cbo.id,
             Yio.cnae_id == self.cnae_id,
@@ -141,7 +141,7 @@ class Industry :
     
     #-----
 
-    def get_county_max_num_jobs(self):
+    def get_municipality_with_more_num_jobs(self):
 
         county_jobs_generate = Ybi.query.join(Bra).filter(
             Bra.id == Ybi.bra_id,
@@ -157,7 +157,7 @@ class Industry :
             industry['county_max_number_jobs_name'] = name_pt
         return industry    
 
-    def get_county_max_num_jobs_br(self):
+    def get_municipality_with_more_num_jobs_br(self):
         county_jobs_generaitor = Ybi.query.join(Bra).filter(
             Bra.id == Ybi.bra_id,
             Ybi.cnae_id == self.cnae_id,
@@ -175,7 +175,7 @@ class Industry :
 
     #-----
 
-    def get_county_max_wage_avg(self):
+    def get_municipality_with_more_wage_avg(self):
 
         county_wage_avg_generate = Ybi.query.join(Bra).filter(
             Bra.id == Ybi.bra_id,
@@ -192,7 +192,7 @@ class Industry :
 
         return industry    
 
-    def get_county_max_wage_avg_br(self):
+    def get_municipality_with_more_wage_avg_br(self):
         county_wage_avg_generaitor = Ybi.query.join(Bra).filter(
             Bra.id == Ybi.bra_id,
             Ybi.cnae_id == self.cnae_id,
