@@ -43,10 +43,10 @@ class Industry :
 
         industry = {}
         for wage, num_jobs, num_est, wage_avg, rca, distance, opp_gain in headers_generate:
-           industry['average_monthly_income'] = wage
-           industry['salary_mass'] =  num_jobs
-           industry['total_jobs'] =  num_est
-           industry['total_establishments'] =  wage_avg
+           industry['average_monthly_income'] = wage_avg
+           industry['salary_mass'] = wage
+           industry['total_jobs'] = num_jobs
+           industry['total_establishments'] =  num_est
            industry['rca_domestic'] =  rca
            industry['distance'] =  distance
            industry['opportunity_gain'] =  opp_gain          
