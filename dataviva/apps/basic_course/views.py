@@ -31,6 +31,19 @@ def index():
 
     sc_service = ScBasicCourse(course_sc_id= course_sc_id,bra_id=bra_id)
     basic_course_statistics = sc_service.__statistics__()
-
     
+    basic_course_statistics['course_name'] = sc_service.course_name()
+    basic_course_statistics['course_description'] = sc_service.course_description()
+    basic_course_statistics['course_classes'] = sc_service.course_classes()
+    basic_course_statistics['course_age'] = sc_service.course_age()
+    basic_course_statistics['course_enrolled'] = sc_service.course_enrolled()
+    basic_course_statistics['course_average_class_size'] = sc_service.course_average_class_size()
+    basic_course_statistics['course_year'] = sc_service.course_year()
+    basic_course_statistics['schools_count'] = sc_service.schools_count()
+    basic_course_statistics['enrollment_statistics_description'] = sc_service.enrollment_statistics_description()
+    basic_course_statistics['school_name'] = sc_service.school_name()
+    basic_course_statistics['school_enrolled'] = sc_service.school_enrolled()
+    basic_course_statistics['city_name'] = sc_service.city_name()
+    basic_course_statistics['city_enrolled'] = sc_service.city_enrolled()
+
     return render_template('basic_course/index.html', basic_course_statistics=basic_course_statistics, body_class='perfil-estado')
