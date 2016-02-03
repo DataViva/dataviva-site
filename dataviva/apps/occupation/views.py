@@ -29,20 +29,20 @@ def index(occupation_id):
     if bra_id: 
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id, bra_id = bra_id)
         header['year'] = rais_occupation_service.year
-        header.update(rais_occupation_service.get_ybo_header())
-        body.update(rais_occupation_service.get_ybo_municipality_num_jobs_with_bra_id())
-        body.update(rais_occupation_service.get_ybo_municipality_wage_avg_with_bra_id())
-        body.update(rais_occupation_service.get_ybio_activity_num_jobs())
-        body.update(rais_occupation_service.get_ybio_activity_wage_avg())
+        header.update(rais_occupation_service.ybo_header())
+        body.update(rais_occupation_service.ybo_municipality_with_more_jobs_with_bra_id())
+        body.update(rais_occupation_service.ybo_municipality_wage_avg_with_bra_id())
+        body.update(rais_occupation_service.ybio_activity_num_jobs())
+        body.update(rais_occupation_service.ybio_activity_wage_avg())
 
     else:
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id)
         header['year'] = rais_occupation_service.year
-        header.update(rais_occupation_service.get_yo_header())
-        body.update(rais_occupation_service.get_ybo_municipality_num_jobs())
-        body.update(rais_occupation_service.get_ybo_municipality_wage_avg())
-        body.update(rais_occupation_service.get_yio_activity_num_jobs())
-        body.update(rais_occupation_service.get_yio_activity_wage_avg())
+        header.update(rais_occupation_service.yo_header())
+        body.update(rais_occupation_service.ybo_municipality_num_jobs())
+        body.update(rais_occupation_service.ybo_municipality_wage_avg())
+        body.update(rais_occupation_service.yio_activity_num_jobs())
+        body.update(rais_occupation_service.yio_activity_wage_avg())
 
     context = {
         'portrait' : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110',
