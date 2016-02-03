@@ -4,9 +4,12 @@ from dataviva import db
 from sqlalchemy.sql.expression import func, desc, asc
 
 class Occupation:
+
     def __init__(self, occupation_id, bra_id=None):
+        
         self.occupation_id = occupation_id
         self.bra_id = bra_id
+        self._header = None 
 
         year=0
         if bra_id: 
@@ -24,6 +27,48 @@ class Occupation:
                 year = years
 
         self.year = year
+
+
+    def __header_with_bra_id__(self):
+        
+        if not self._header:
+
+            ybo_header_generator = Ybo.query.join(Cbo).filter(
+                Ybo.cbo_id == self.occupation_id,
+                Ybo.bra_id == self.bra_id,
+                Ybo.year == self.year)\
+                .values(Cbo.name_pt,
+                        Ybo.wage_avg,
+                        Ybo.wage,
+                        Ybo.num_jobs,
+                        Ybo.num_est)
+            header = {}
+            for name_pt, wage_avg, wage, num_jobs, num_est in ybo_header_generator:
+                header['name'] = name_pt
+                header['average_monthly_income'] = wage_avg
+                header['salary_mass'] = wage
+                header['total_employment'] = num_jobs
+                header['total_establishments'] = num_est                
+
+            self._header = header
+
+        return self._header
+
+
+    def name(self):
+        return self.__header_with_bra_id__()['name']
+
+    def average_monthly_income(self):
+        return self.__header_with_bra_id__()['average_monthly_income']
+
+    def salary_mass(self):
+        return self.__header_with_bra_id__()['salary_mass']
+
+    def total_employment(self):
+        return self.__header_with_bra_id__()['total_employment']
+        
+    def total_establishments(self):
+        return self.__header_with_bra_id__()['total_establishments']
 
 
     def header_with_bra_id(self):

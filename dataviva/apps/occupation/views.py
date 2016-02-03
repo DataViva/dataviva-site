@@ -28,8 +28,16 @@ def index(occupation_id):
 
     if bra_id: 
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id, bra_id = bra_id)
+        header = rais_occupation_service.__header_with_bra_id__()
+
+        header['name'] = rais_occupation_service.name()
+        header['average_monthly_income'] = rais_occupation_service.average_monthly_income()
+        header['salary_mass'] = rais_occupation_service.salary_mass()
+        header['total_employment'] = rais_occupation_service.total_employment()
+        header['total_establishments'] = rais_occupation_service.total_establishments()
+        
         header['year'] = rais_occupation_service.year
-        header.update(rais_occupation_service.header_with_bra_id())
+        #header.update(rais_occupation_service.header_with_bra_id())
         body.update(rais_occupation_service.municipality_with_more_jobs_with_bra_id())
         body.update(rais_occupation_service.municipality_with_biggest_wage_avg_with_bra_id())
         body.update(rais_occupation_service.activity_with_more_jobs_with_bra_id())
