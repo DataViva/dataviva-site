@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Industry as RaisIndustryService
+from dataviva.apps.industry.controler import templates_preview_controler
 
 
 mod = Blueprint('industry', __name__,
@@ -23,37 +24,20 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
  
-    bra_id = '4mg' # '4mg000000' # Alfredo Vasconcelos
+    bra_id = None # '4mg000000' # Alfredo Vasconcelos
     cnae_id = 'g47113' #supermarkets
     industry = {}
 
     industry = { 
         'background_image':  unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
-        'portrait' : unicode('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110', 'utf8') ,
-        
+        'portrait' : unicode('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110', 'utf8') ,        
         'text_profile' : unicode('Texto de perfil para Supermercados.', 'utf8'),
         'text_salary_job' : unicode('Texto para Salários e empregos', 'utf8'),
         'text_economic_opportunity' : unicode('Texto para Oportunidades Econômicas', 'utf8'),
     }
 
 
-    if bra_id == None :
-        industry['location'] = False
-        industry['county'] = True # view county where no country
-    else : 
-        industry['location'] = True    
-     
-        if len(bra_id) == 9 : 
-            industry['county'] = False
-        else :
-            industry['county'] = True    
-
-
-    if len(cnae_id) == 1 : 
-        industry['class'] = True
-    else : 
-        industry['class'] = False
-
+    industry.update(templates_preview_controler(bra_id=bra_id, cnae_id=cnae_id))
 
     ####EXTRACTY 
     
@@ -63,16 +47,18 @@ def index():
     industry['name'] = rais_industry_service.get_name()
 
     if bra_id == None :
-        pass
+        industry['year'] = rais_industry_service.get_year_br()
+        industry.update(rais_industry_service.get_headers_indicators_br())
+        industry.update(rais_industry_service.get_acc_max_number_jobs_br())
+        industry.update(rais_industry_service.get_occ_max_wage_avg_br())
+        industry.update(rais_industry_service.get_county_max_num_jobs_br())
+        industry.update(rais_industry_service.get_county_max_wage_avg_br())
+
     else:
         industry['year'] = rais_industry_service.get_year()
-
         industry.update(rais_industry_service.get_headers_indicators())
-        
         industry.update(rais_industry_service.get_acc_max_number_jobs())
-
         industry.update(rais_industry_service.get_occ_max_wage_avg())
-
         if len(bra_id) != 9 :
             industry.update(rais_industry_service.get_county_max_num_jobs())
             industry.update(rais_industry_service.get_county_max_wage_avg())
