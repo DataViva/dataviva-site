@@ -71,7 +71,7 @@ class Industry :
     
     #-----
 
-    def  get_acc_max_number_jobs(self) : 
+    def  get_occ_max_number_jobs(self) : 
         occ_jobs_generate = Ybio.query.join(Cbo).filter(
             Cbo.id == Ybio.cbo_id,
             Ybio.cnae_id == self.cnae_id,
@@ -88,7 +88,7 @@ class Industry :
 
         return industry      
 
-    def  get_acc_max_number_jobs_br(self) :
+    def  get_occ_max_number_jobs_br(self) :
         occupation_jobs_generaitor = Yio.query.join(Cbo).filter(
             Yio.cbo_id == Cbo.id,
             Yio.cnae_id == self.cnae_id,

@@ -48,7 +48,7 @@ def index():
     if bra_id == None :
         industry['year'] = rais_industry_service.get_year_br()
         industry.update(rais_industry_service.get_headers_indicators_br())
-        industry.update(rais_industry_service.get_acc_max_number_jobs_br())
+        industry.update(rais_industry_service.get_occ_max_number_jobs_br())
         industry.update(rais_industry_service.get_occ_max_wage_avg_br())
         industry.update(rais_industry_service.get_county_max_num_jobs_br())
         industry.update(rais_industry_service.get_county_max_wage_avg_br())
@@ -56,7 +56,7 @@ def index():
     else:
         industry['year'] = rais_industry_service.get_year()
         industry.update(rais_industry_service.get_headers_indicators())
-        industry.update(rais_industry_service.get_acc_max_number_jobs())
+        industry.update(rais_industry_service.get_occ_max_number_jobs())
         industry.update(rais_industry_service.get_occ_max_wage_avg())
         if len(bra_id) != 9 :
             industry.update(rais_industry_service.get_county_max_num_jobs())
