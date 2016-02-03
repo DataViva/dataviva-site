@@ -71,27 +71,7 @@ class Occupation:
         return self.__header_with_bra_id__()['total_establishments']
 
 
-    def header_with_bra_id(self):
 
-        ybo_header_generator = Ybo.query.join(Cbo).filter(
-            Ybo.cbo_id == self.occupation_id,
-            Ybo.bra_id == self.bra_id,
-            Ybo.year == self.year)\
-            .values(Cbo.name_pt,
-                    Ybo.wage_avg,
-                    Ybo.wage,
-                    Ybo.num_jobs,
-                    Ybo.num_est)
-
-        header = {}
-        for name_pt, wage_avg, wage, num_jobs, num_est in ybo_header_generator:
-            header['name'] = name_pt
-            header['average_monthly_income'] = wage_avg
-            header['salary_mass'] = wage
-            header['total_employment'] = num_jobs
-            header['total_establishments'] = num_est
-
-        return header
 
     def header(self):
 
