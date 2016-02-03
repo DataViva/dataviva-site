@@ -6,6 +6,7 @@ from sqlalchemy import func
 
 class Basic_course:
     def __init__(self, course_sc_id, bra_id):
+        self._statistics = None
         self.course_sc_id = course_sc_id
         self.bra_id = bra_id
         self.ybc_max_year_subquery = db.session.query(
@@ -17,7 +18,7 @@ class Basic_course:
         self.ysc_max_year_subquery = db.session.query(
                 func.max(Ysc.year)).filter_by(course_sc_id=course_sc_id)
 
-    def statistics(self):
+    def __statistics__(self):
 
         basic_course = {}
 
@@ -121,4 +122,9 @@ class Basic_course:
                 basic_course['city_name'] = name_pt
                 basic_course['city_enrolled'] = enrolled
 
-        return basic_course
+        self._statistics = basic_course
+
+        return self._statistics
+
+        def course_name(self):
+            return self.__statistics__()['course_name']
