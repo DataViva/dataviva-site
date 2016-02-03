@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Industry as RaisIndustryService
+from dataviva.api.rais.services import IndustryByLocation as RaisIndustryByLocationService
 from dataviva.apps.industry.controler import templates_preview_controler
 
 
@@ -24,7 +25,7 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
  
-    bra_id = '4mg' # Alfredo Vasconcelos
+    bra_id = None #'4mg000000' # Alfredo Vasconcelos
     cnae_id = 'g47113' #supermarkets
     industry = {}
 
@@ -41,12 +42,12 @@ def index():
 
     ####EXTRACTY 
     
-    rais_industry_service = RaisIndustryService(bra_id=bra_id, cnae_id=cnae_id)
+    rais_industry_service = RaisIndustryService(cnae_id=cnae_id)
 
     industry['name'] = rais_industry_service.get_name()
 
     if bra_id == None :
-        industry['year'] = rais_industry_service.get_year_br()
+        industry['year'] = rais_industry_service.get_year()
  
         industry['average_monthly_income'] = rais_industry_service.average_monthly_income()
         industry['salary_mass'] = rais_industry_service.salary_mass()
@@ -59,23 +60,26 @@ def index():
         industry.update(rais_industry_service.get_municipality_with_more_wage_avg())
 
     else:
-        industry['year'] = rais_industry_service.get_year()
-        
-        industry['average_monthly_income'] = rais_industry_service.average_monthly_income_by_location()
-        industry['salary_mass'] = rais_industry_service.salary_mass_by_location()
-        industry['total_jobs'] = rais_industry_service.num_jobs_by_location()
-        industry['total_establishments'] = rais_industry_service.num_establishments_by_location()
-        industry['rca_domestic'] = rais_industry_service.rca_by_location()
-        industry['distance'] = rais_industry_service.distance_by_location()
-        industry['opportunity_gain'] = rais_industry_service.opportunity_gain_by_location()
+        rais_industry_by_location_service = RaisIndustryByLocationService(bra_id=bra_id, cnae_id=cnae_id)
+
+        industry['year'] = rais_industry_by_location_service.get_year()
+            
+        industry['average_monthly_income'] = rais_industry_by_location_service.average_monthly_income()
+        industry['salary_mass'] = rais_industry_by_location_service.salary_mass()
+        industry['total_jobs'] = rais_industry_by_location_service.num_jobs()
+        industry['total_establishments'] = rais_industry_by_location_service.num_establishments()
+        industry['rca_domestic'] = rais_industry_by_location_service.rca()
+        industry['distance'] = rais_industry_by_location_service.distance()
+        industry['opportunity_gain'] = rais_industry_by_location_service.opportunity_gain()
 
 
-        industry.update(rais_industry_service.get_occ_with_more_number_jobs_by_location())
-        industry.update(rais_industry_service.get_occ_with_more_wage_avg_by_location())
+        industry.update(rais_industry_by_location_service.get_occ_with_more_number_jobs())
+        industry.update(rais_industry_by_location_service.get_occ_with_more_wage_avg())
         if len(bra_id) != 9 :
-            industry.update(rais_industry_service.get_municipality_with_more_num_jobs_by_location())
-            industry.update(rais_industry_service.get_municipality_with_more_wage_avg_by_location())
-
+            industry.update(rais_industry_by_location_service.get_municipality_with_more_num_jobs())
+            industry.update(rais_industry_by_location_service.get_municipality_with_more_wage_avg())
+        
+            
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
 
 
