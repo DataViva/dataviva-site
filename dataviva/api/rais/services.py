@@ -28,7 +28,7 @@ class Occupation:
 
         self.year = year
 
-    def __header_with_bra_id__(self):
+    def __rais_data_by_location__(self):
         
         if not self._header:
 
@@ -54,22 +54,22 @@ class Occupation:
         return self._header
 
 
-    def name_with_bra_id(self):
-        return self.__header_with_bra_id__()['name']
+    def name_by_location(self):
+        return self.__rais_data_by_location__()['name']
 
-    def average_monthly_income_with_bra_id(self):
-        return self.__header_with_bra_id__()['average_monthly_income']
+    def average_monthly_income_by_location(self):
+        return self.__rais_data_by_location__()['average_monthly_income']
 
-    def salary_mass_with_bra_id(self):
-        return self.__header_with_bra_id__()['salary_mass']
+    def salary_mass_by_location(self):
+        return self.__rais_data_by_location__()['salary_mass']
 
-    def total_employment_with_bra_id(self):
-        return self.__header_with_bra_id__()['total_employment']
+    def total_employment_by_location(self):
+        return self.__rais_data_by_location__()['total_employment']
 
-    def total_establishments_with_bra_id(self):
-        return self.__header_with_bra_id__()['total_establishments']
+    def total_establishments_by_location(self):
+        return self.__rais_data_by_location__()['total_establishments']
 
-    def municipality_with_more_jobs_with_bra_id(self):
+    def municipality_with_more_jobs_by_location(self):
 
         ybo_municipality_num_jobs_generator = Ybo.query.join(Bra).filter(
                 Ybo.cbo_id == self.occupation_id,
@@ -87,7 +87,7 @@ class Occupation:
 
         return body
 
-    def municipality_with_biggest_wage_avg_with_bra_id(self):
+    def municipality_with_biggest_wage_average_by_location(self):
 
         ybo_municipality_wage_avg_generator = Ybo.query.join(Bra).filter(
             Ybo.cbo_id == self.occupation_id,
@@ -105,7 +105,7 @@ class Occupation:
 
         return body 
 
-    def activity_with_more_jobs_with_bra_id(self):
+    def activity_with_more_jobs_by_location(self):
 
         ybio_activity_num_jobs_generator = Ybio.query.join(Cnae).filter(
             Ybio.cbo_id == self.occupation_id,
@@ -124,7 +124,7 @@ class Occupation:
         return body
 
         
-    def activity_with_biggest_wage_avg_with_bra_id(self):
+    def activity_with_biggest_wage_average_by_location(self):
 
         ybio_activity_wage_avg_generator = Ybio.query.join(Cnae).filter(
                 Ybio.cbo_id == self.occupation_id,
@@ -142,7 +142,7 @@ class Occupation:
         return body
 
 
-    def __header__(self):
+    def __rais_data__(self):
         
         if not self._header:
 
@@ -168,19 +168,19 @@ class Occupation:
 
 
     def name(self):
-        return self.__header__()['name']
+        return self.__rais_data__()['name']
 
     def average_monthly_income(self):
-        return self.__header__()['average_monthly_income']
+        return self.__rais_data__()['average_monthly_income']
 
     def salary_mass(self):
-        return self.__header__()['salary_mass']
+        return self.__rais_data__()['salary_mass']
 
     def total_employment(self):
-        return self.__header__()['total_employment']
+        return self.__rais_data__()['total_employment']
 
     def total_establishments(self):
-        return self.__header__()['total_establishments']  
+        return self.__rais_data__()['total_establishments']  
 
     def municipality_with_more_jobs(self):
 
@@ -200,7 +200,7 @@ class Occupation:
         return body
 
 
-    def municipality_with_biggest_wage_avg(self):
+    def municipality_with_biggest_wage_average(self):
 
         ybo_municipality_wage_avg_generator = Ybo.query.join(Bra).filter(
             Ybo.cbo_id == self.occupation_id,
@@ -234,7 +234,7 @@ class Occupation:
 
         return body
 
-    def activity_with_biggest_wage_avg(self):
+    def activity_with_biggest_wage_average(self):
 
         yio_activity_wage_avg_generator = Yio.query.join(Cnae).filter(
             Yio.cbo_id == self.occupation_id,

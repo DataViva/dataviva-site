@@ -29,17 +29,17 @@ def index(occupation_id):
     if bra_id: 
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id, bra_id = bra_id)
         
-        header['name'] = rais_occupation_service.name_with_bra_id()
-        header['average_monthly_income'] = rais_occupation_service.average_monthly_income_with_bra_id()
-        header['salary_mass'] = rais_occupation_service.salary_mass_with_bra_id()
-        header['total_employment'] = rais_occupation_service.total_employment_with_bra_id()
-        header['total_establishments'] = rais_occupation_service.total_establishments_with_bra_id()
+        header['name'] = rais_occupation_service.name_by_location()
+        header['average_monthly_income'] = rais_occupation_service.average_monthly_income_by_location()
+        header['salary_mass'] = rais_occupation_service.salary_mass_by_location()
+        header['total_employment'] = rais_occupation_service.total_employment_by_location()
+        header['total_establishments'] = rais_occupation_service.total_establishments_by_location()
         header['year'] = rais_occupation_service.year
 
-        body.update(rais_occupation_service.municipality_with_more_jobs_with_bra_id())
-        body.update(rais_occupation_service.municipality_with_biggest_wage_avg_with_bra_id())
-        body.update(rais_occupation_service.activity_with_more_jobs_with_bra_id())
-        body.update(rais_occupation_service.activity_with_biggest_wage_avg_with_bra_id())
+        body.update(rais_occupation_service.municipality_with_more_jobs_by_location())
+        body.update(rais_occupation_service.municipality_with_biggest_wage_average_by_location())
+        body.update(rais_occupation_service.activity_with_more_jobs_by_location())
+        body.update(rais_occupation_service.activity_with_biggest_wage_average_by_location())
 
     else:
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id)
@@ -52,9 +52,9 @@ def index(occupation_id):
         header['year'] = rais_occupation_service.year
         
         body.update(rais_occupation_service.municipality_with_more_jobs())
-        body.update(rais_occupation_service.municipality_with_biggest_wage_avg())
+        body.update(rais_occupation_service.municipality_with_biggest_wage_average())
         body.update(rais_occupation_service.activity_with_more_jobs())
-        body.update(rais_occupation_service.activity_with_biggest_wage_avg())
+        body.update(rais_occupation_service.activity_with_biggest_wage_average())
 
     context = {
         'portrait' : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110',
@@ -77,6 +77,5 @@ def index(occupation_id):
         context['family'] = True
     else:
          context['family'] = False  
-
     
     return render_template('occupation/index.html', body_class='perfil-estado', context=context, header = header, body = body)
