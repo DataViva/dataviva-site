@@ -26,7 +26,7 @@ class Occupation:
         self.year = year
 
 
-    def ybo_header(self):
+    def header_with_bra_id(self):
 
         ybo_header_generator = Ybo.query.join(Cbo).filter(
             Ybo.cbo_id == self.occupation_id,
@@ -48,7 +48,7 @@ class Occupation:
 
         return header
 
-    def yo_header(self):
+    def header(self):
 
         yo_header_generator = Yo.query.join(Cbo).filter(
             Yo.cbo_id == self.occupation_id,
