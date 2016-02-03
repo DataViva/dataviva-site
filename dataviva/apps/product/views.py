@@ -27,7 +27,7 @@ def index(product_id):
 
     #None database fields must be treated to do math operations
     #and templates with no data shall be omitted...
-    
+
     #Vars to do tests:
     #section (depth == 2)
     #positon (depth == 6)
@@ -56,15 +56,15 @@ def index(product_id):
 
     if bra_id == None:
         product.update(secex_product_service.brazil_section_position())
-        product.update(secex_product_service.brazil_export())
-        product.update(secex_product_service.brazil_import())
-        product.update(secex_product_service.brazil_dest_export())
-        product.update(secex_product_service.brazil_src_import())
+        product.update(secex_product_service.brazil_municipality_with_more_exports())
+        product.update(secex_product_service.brazil_municipality_with_more_imports())
+        product.update(secex_product_service.brazil_destination_with_more_exports())
+        product.update(secex_product_service.brazil_origin_with_more_import())
 
     else:
-        product.update(secex_product_service.location_dest_export())
-        product.update(secex_product_service.location_src_import()) 
-        
+        product.update(secex_product_service.location_destination_with_more_imports())
+        product.update(secex_product_service.location_origin_with_more_imports())
+
         if len(product_id) == 6:
             product.update(secex_product_service.location_postion())
 
@@ -72,7 +72,7 @@ def index(product_id):
             product.update(secex_product_service.location_section())
 
         if len(bra_id) != 9:
-            product.update(secex_product_service.location_diff_munic_export())
-            product.update(secex_product_service.location_diff_munic_import())
+            product.update(secex_product_service.location_municipality_with_more_exports())
+            product.update(secex_product_service.location_municipality_with_more_imports())
 
     return render_template('product/index.html', body_class='perfil-estado', product=product, context=context)
