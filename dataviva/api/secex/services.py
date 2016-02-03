@@ -5,38 +5,64 @@ from sqlalchemy.sql.expression import func, desc, asc
 
 class TradePartner:
     def __init__(self, wld_id):
+        self._country_info = None
+
         self.wld_id = wld_id
         self.ymw_max_year = db.session.query(func.max(Ymw.year)).filter_by(wld_id=wld_id)
         self.ymbw_max_year = db.session.query(func.max(Ymbw.year)).filter_by(wld_id=wld_id)
         self.ympw_max_year = db.session.query(func.max(Ympw.year)).filter_by(wld_id=wld_id)
 
-    def country_info(self):
-        ymw_query = Ymw.query.join(Wld).filter(
-            Ymw.wld_id == self.wld_id,
-            Ymw.month == 0,
-            Ymw.year == self.ymw_max_year)
+    def __country_info__(self):
+        if not self._country_info:
+            ymw_query = Ymw.query.join(Wld).filter(
+                Ymw.wld_id == self.wld_id,
+                Ymw.month == 0,
+                Ymw.year == self.ymw_max_year)
 
-        ymw_data = ymw_query.values(
-            Wld.name_pt,
-            Ymw.year,
-            (Ymw.export_val-Ymw.import_val),
-            Ymw.export_val,
-            (Ymw.export_kg/Ymw.export_val),
-            Ymw.import_val,
-            (Ymw.import_kg/Ymw.import_val))
+            ymw_data = ymw_query.values(
+                Wld.name_pt,
+                Ymw.year,
+                (Ymw.export_val-Ymw.import_val),
+                Ymw.export_val,
+                (Ymw.export_kg/Ymw.export_val),
+                Ymw.import_val,
+                (Ymw.import_kg/Ymw.import_val))
 
-        country = {}
+            country = {}
 
-        for name_pt, year, trade_balance, total_exported, unity_weight_export_price, total_imported, unity_weight_import_price in ymw_data:
-            country['name'] = name_pt
-            country['year'] = year
-            country['trade_balance'] = trade_balance
-            country['total_exported'] = total_exported
-            country['unity_weight_export_price'] = unity_weight_export_price
-            country['total_imported'] = total_imported
-            country['unity_weight_import_price'] = unity_weight_import_price
+            for name_pt, year, trade_balance, total_exported, unity_weight_export_price, total_imported, unity_weight_import_price in ymw_data:
+                country['name'] = name_pt
+                country['year'] = year
+                country['trade_balance'] = trade_balance
+                country['total_exported'] = total_exported
+                country['unity_weight_export_price'] = unity_weight_export_price
+                country['total_imported'] = total_imported
+                country['unity_weight_import_price'] = unity_weight_import_price
 
-        return country
+            self._country_info = country
+
+        return self._country_info
+
+    def country_name(self):
+        return self.__country_info__()['name']
+
+    def year(self):
+        return self.__country_info__()['year']
+
+    def trade_balance(self):
+        return self.__country_info__()['trade_balance']
+
+    def total_exported(self):
+        return self.__country_info__()['total_exported']
+
+    def unity_weight_export_price(self):
+        return self.__country_info__()['unity_weight_export_price']
+
+    def total_imported(self):
+        return self.__country_info__()['total_imported']
+
+    def unity_weight_import_price(self):
+        return self.__country_info__()['unity_weight_import_price']
 
     def municipality_with_more_exports(self):
         ymbw_municipality_export_query = Ymbw.query.join(Bra).filter(

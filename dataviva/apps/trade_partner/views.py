@@ -22,7 +22,18 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
     trade_partner_service = TradePartner(wld_id='nausa')
-    header = trade_partner_service.country_info()
+
+    header = trade_partner_service.__country_info__()
+
+    header = {
+        'name': trade_partner_service.country_name(),
+        'year': trade_partner_service.year(),
+        'trade_balance': trade_partner_service.trade_balance(),
+        'total_exported': trade_partner_service.total_exported(),
+        'unity_weight_export_price': trade_partner_service.unity_weight_export_price(),
+        'total_imported': trade_partner_service.total_imported(),
+        'unity_weight_import_price': trade_partner_service.unity_weight_import_price()
+    }
 
     trade = {
         'municipality_with_more_exports': trade_partner_service.municipality_with_more_exports(),
