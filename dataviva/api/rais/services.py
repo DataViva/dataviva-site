@@ -28,7 +28,6 @@ class Occupation:
 
         self.year = year
 
-
     def __header_with_bra_id__(self):
         
         if not self._header:
@@ -69,48 +68,6 @@ class Occupation:
 
     def total_establishments_with_bra_id(self):
         return self.__header_with_bra_id__()['total_establishments']
-
-
-    def __header__(self):
-        
-        if not self._header:
-
-            yo_header_generator = Yo.query.join(Cbo).filter(
-                Yo.cbo_id == self.occupation_id,
-                Yo.year == self.year)\
-                .values(Cbo.name_pt,
-                        Yo.wage_avg,
-                        Yo.wage,
-                        Yo.num_jobs,
-                        Yo.num_est)
-            header = {}
-            for name_pt, wage_avg, wage, num_jobs, num_est in yo_header_generator:
-                header['name'] = name_pt
-                header['average_monthly_income'] = wage_avg
-                header['salary_mass'] = wage
-                header['total_employment'] = num_jobs
-                header['total_establishments'] = num_est              
-
-            self._header = header
-
-        return self._header
-
-
-    def name(self):
-        return self.__header__()['name']
-
-    def average_monthly_income(self):
-        return self.__header__()['average_monthly_income']
-
-    def salary_mass(self):
-        return self.__header__()['salary_mass']
-
-    def total_employment(self):
-        return self.__header__()['total_employment']
-
-    def total_establishments(self):
-        return self.__header__()['total_establishments']  
-
 
     def municipality_with_more_jobs_with_bra_id(self):
 
@@ -183,6 +140,47 @@ class Occupation:
             body['activity_with_biggest_wage_avg'] = name_pt
             body['activity_with_biggest_wage_avg_value'] = wage_avg 
         return body
+
+
+    def __header__(self):
+        
+        if not self._header:
+
+            yo_header_generator = Yo.query.join(Cbo).filter(
+                Yo.cbo_id == self.occupation_id,
+                Yo.year == self.year)\
+                .values(Cbo.name_pt,
+                        Yo.wage_avg,
+                        Yo.wage,
+                        Yo.num_jobs,
+                        Yo.num_est)
+            header = {}
+            for name_pt, wage_avg, wage, num_jobs, num_est in yo_header_generator:
+                header['name'] = name_pt
+                header['average_monthly_income'] = wage_avg
+                header['salary_mass'] = wage
+                header['total_employment'] = num_jobs
+                header['total_establishments'] = num_est              
+
+            self._header = header
+
+        return self._header
+
+
+    def name(self):
+        return self.__header__()['name']
+
+    def average_monthly_income(self):
+        return self.__header__()['average_monthly_income']
+
+    def salary_mass(self):
+        return self.__header__()['salary_mass']
+
+    def total_employment(self):
+        return self.__header__()['total_employment']
+
+    def total_establishments(self):
+        return self.__header__()['total_establishments']  
 
     def municipality_with_more_jobs(self):
 
