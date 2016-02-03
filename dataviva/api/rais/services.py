@@ -81,8 +81,8 @@ class Occupation:
 
         body = {}
         for name_pt, num_jobs in ybo_municipality_num_jobs_generator:
-            body['municipality_for_jobs'] = name_pt
-            body['num_jobs_municipality'] = num_jobs
+            body['municipality_with_more_jobs'] = name_pt
+            body['municipality_with_more_jobs_value'] = num_jobs
 
         return body
 
@@ -99,8 +99,8 @@ class Occupation:
 
         body = {}
         for name_pt, wage_avg in ybo_municipality_wage_avg_generator:
-            body['municipality_bigger_average_monsthly_income'] = name_pt
-            body['bigger_average_monsthly_income'] = wage_avg  
+            body['municipality_with_bigger_wage_avg'] = name_pt
+            body['municipality_with_bigger_wage_avg_value'] = wage_avg  
 
         return body 
 
@@ -117,8 +117,8 @@ class Occupation:
 
         body = {}
         for name_pt, num_jobs in ybio_activity_num_jobs_generator:
-            body['activity_for_job'] = name_pt
-            body['num_activity_for_job'] = num_jobs 
+            body['activity_with_more_jobs'] = name_pt
+            body['activity_with_more_jobs_value'] = num_jobs 
 
         return body
 
@@ -136,9 +136,8 @@ class Occupation:
 
         body = {}
         for name_pt, wage_avg in ybio_activity_wage_avg_generator:
-            body['activity_higher_income'] = name_pt
-            body['value_activity_higher_income'] = wage_avg 
-
+            body['activity_with_biggest_wage_avg'] = name_pt
+            body['activity_with_biggest_wage_avg_value'] = wage_avg 
         return body
 
     def municipality_with_more_jobs(self):
@@ -153,8 +152,8 @@ class Occupation:
 
         body = {}
         for name_pt, num_jobs in ybo_municipality_num_jobs_generator:
-            body['municipality_for_jobs'] = name_pt
-            body['num_jobs_municipality'] = num_jobs
+            body['municipality_with_more_jobs'] = name_pt
+            body['municipality_with_more_jobs_value'] = num_jobs
 
         return body
 
@@ -171,8 +170,8 @@ class Occupation:
 
         body = {}
         for name_pt, wage_avg in ybo_municipality_wage_avg_generator:
-            body['municipality_bigger_average_monsthly_income'] = name_pt
-            body['bigger_average_monsthly_income'] = wage_avg   
+            body['municipality_with_bigger_wage_avg'] = name_pt
+            body['municipality_with_bigger_wage_avg_value'] = wage_avg  
 
         return body
 
@@ -188,8 +187,8 @@ class Occupation:
 
         body = {}
         for name_pt, num_jobs in yio_activity_num_jobs_generator:
-            body['activity_for_job'] = name_pt
-            body['num_activity_for_job'] = num_jobs 
+            body['activity_with_more_jobs'] = name_pt
+            body['activity_with_more_jobs_value'] = num_jobs
 
         return body
 
@@ -205,7 +204,7 @@ class Occupation:
 
         body = {}
         for name_pt, wage_avg in yio_activity_wage_avg_generator:
-            body['activity_higher_income'] = name_pt
-            body['value_activity_higher_income'] = wage_avg  
+            body['activity_with_biggest_wage_avg'] = name_pt
+            body['activity_with_biggest_wage_avg_value'] = wage_avg  
 
         return body   

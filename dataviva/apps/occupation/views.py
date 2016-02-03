@@ -22,7 +22,7 @@ def add_language_code(endpoint, values):
 @mod.route('/<occupation_id>')
 def index(occupation_id):
 
-    bra_id = None #'4mg'
+    bra_id = '4mg'
     header = {}
     body = {}
 
