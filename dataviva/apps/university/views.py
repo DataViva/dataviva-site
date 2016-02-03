@@ -23,9 +23,9 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
     university_service = University(university_id='00575')
-    university = university_service.main_info()
-    course = university_service.course_info()
+    university = university_service.university_info()
+    major = university_service.majors_with_more_enrollments()
     
-    return render_template('index.html', university=university, course=course, body_class='perfil_estado')
+    return render_template('index.html', university=university, major=major, body_class='perfil_estado')
 
 

@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane" id="matriculas">
     <h2>Matrículas</h2>
-    <p>{{ course.profile }}</p>
+    <p>{{ major.profile }}</p>
     <h3>Estatísticas de Matrículas</h3>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
@@ -25,21 +25,21 @@
                     <tbody>
                         <tr>
                             <td>
-                                <p class="label">{{ course.enrolled_name }}</p>
+                                <p class="label">{{ major.enrolled_name }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ course.enrolled }}</strong><span>mil</span>
+                                    <strong class="counter">{{ major.enrolled }}</strong><span>mil</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">{{ course.entrants_name}}</p>
+                                <p class="label">{{ major.entrants_name}}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ course.entrants }}</strong>
+                                    <strong class="counter">{{ major.entrants }}</strong>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">{{ course.graduates_name }}</p>
+                                <p class="label">{{ major.graduates_name }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ course.graduates }}</strong>
+                                    <strong class="counter">{{ major.graduates }}</strong>
                                 </div>
                             </td>
                         </tr>

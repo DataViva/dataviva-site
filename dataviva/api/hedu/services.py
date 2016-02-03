@@ -9,7 +9,7 @@ class University:
         self.yu_max_year_query = db.session.query(func.max(Yu.year)).filter_by(university_id=university_id)
         self.yuc_max_year_query = db.session.query(func.max(Yuc.year))
 
-    def main_info(self):
+    def university_info(self):
         yu_query = Yu.query.join(uni).filter(Yu.university_id == self.university_id, Yu.year == self.yu_max_year_query)
 
         yu_data = yu_query.values(
@@ -33,7 +33,7 @@ class University:
 
         return university
 
-    def course_info(self):
+    def majors_with_more_enrollments(self):
 
         yuc_enrolled_query = Yuc.query.join(Course_hedu).filter(
             Yuc.university_id == self.university_id,
@@ -66,22 +66,22 @@ class University:
             Yuc.graduates
         )
 
-        course = {}
+        major = {}
 
         for name_pt, enrolled, profile in yuc_enrolled_data:
-            course['enrolled_name'] = name_pt
-            course['enrolled'] = enrolled
-            course['profile'] = profile
+            major['enrolled_name'] = name_pt
+            major['enrolled'] = enrolled
+            major['profile'] = profile
 
         for name_pt, entrants in yuc_entrants_data:
-            course['entrants_name'] = name_pt
-            course['entrants'] = entrants
+            major['entrants_name'] = name_pt
+            major['entrants'] = entrants
 
         for name_pt, graduates in yuc_graduates_data:
-            course['graduates_name'] = name_pt
-            course['graduates'] = graduates
+            major['graduates_name'] = name_pt
+            major['graduates'] = graduates
 
-        return course
+        return major
 
 class Major:
     def __init__ (self, course_hedu_id):
