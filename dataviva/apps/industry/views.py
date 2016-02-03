@@ -24,7 +24,7 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
  
-    bra_id = None # '4mg000000' # Alfredo Vasconcelos
+    bra_id = None #'4mg000000' # Alfredo Vasconcelos
     cnae_id = 'g47113' #supermarkets
     industry = {}
 
@@ -41,7 +41,6 @@ def index():
 
     ####EXTRACTY 
     
-
     rais_industry_service = RaisIndustryService(bra_id=bra_id, cnae_id=cnae_id)
 
     industry['name'] = rais_industry_service.get_name()

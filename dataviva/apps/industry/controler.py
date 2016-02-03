@@ -1,3 +1,4 @@
+#sets controler variables for preview of canvas
 def templates_preview_controler(bra_id, cnae_id):
     industry = {}
     if bra_id == None :
