@@ -33,22 +33,12 @@ class University:
 
         return university
 
-    def majors_with_more_enrollments(self):
+    def major_with_more_enrollments(self):
 
         yuc_enrolled_query = Yuc.query.join(Course_hedu).filter(
             Yuc.university_id == self.university_id,
             Yuc.year == self.yuc_max_year_query,
             func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.enrolled)).limit(1)
-
-        yuc_entrants_query = Yuc.query.join(Course_hedu).filter(
-            Yuc.university_id == self.university_id,
-            Yuc.year == self.yuc_max_year_query,
-            func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.entrants)).limit(1)
-
-        yuc_graduates_query = Yuc.query.join(Course_hedu).filter(
-            Yuc.university_id == self.university_id,
-            Yuc.year == self.yuc_max_year_query,
-            func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.graduates)).limit(1)
 
         yuc_enrolled_data = yuc_enrolled_query.values(
             Course_hedu.name_pt,
@@ -56,10 +46,39 @@ class University:
             Course_hedu.desc_pt
         )
 
+        major = {}
+
+        for name_pt, enrolled, profile in yuc_enrolled_data:
+            major['name'] = name_pt
+            major['value'] = enrolled
+            major['profile'] = profile
+
+        return major
+
+    def major_with_more_entrants(self):
+        yuc_entrants_query = Yuc.query.join(Course_hedu).filter(
+            Yuc.university_id == self.university_id,
+            Yuc.year == self.yuc_max_year_query,
+            func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.entrants)).limit(1)
+
         yuc_entrants_data = yuc_entrants_query.values(
             Course_hedu.name_pt,
             Yuc.entrants
         )
+
+        major = {}
+
+        for name_pt, entrants in yuc_entrants_data:
+            major['name'] = name_pt
+            major['value'] = entrants
+
+        return major
+
+    def major_with_more_graduates(self):
+        yuc_graduates_query = Yuc.query.join(Course_hedu).filter(
+            Yuc.university_id == self.university_id,
+            Yuc.year == self.yuc_max_year_query,
+            func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.graduates)).limit(1)
 
         yuc_graduates_data = yuc_graduates_query.values(
             Course_hedu.name_pt,
@@ -68,18 +87,9 @@ class University:
 
         major = {}
 
-        for name_pt, enrolled, profile in yuc_enrolled_data:
-            major['enrolled_name'] = name_pt
-            major['enrolled'] = enrolled
-            major['profile'] = profile
-
-        for name_pt, entrants in yuc_entrants_data:
-            major['entrants_name'] = name_pt
-            major['entrants'] = entrants
-
         for name_pt, graduates in yuc_graduates_data:
-            major['graduates_name'] = name_pt
-            major['graduates'] = graduates
+            major['name'] = name_pt
+            major['value'] = graduates
 
         return major
 

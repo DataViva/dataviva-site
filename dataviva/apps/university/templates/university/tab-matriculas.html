@@ -25,21 +25,21 @@
                     <tbody>
                         <tr>
                             <td>
-                                <p class="label">{{ major.enrolled_name }}</p>
+                                <p class="label">{{ major.major_with_more_enrollments.name }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ major.enrolled }}</strong><span>mil</span>
+                                    <strong class="counter">{{ major.major_with_more_enrollments.value }}</strong><span>mil</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">{{ major.entrants_name}}</p>
+                                <p class="label">{{ major.major_with_more_entrants.name}}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ major.entrants }}</strong>
+                                    <strong class="counter">{{ major.major_with_more_entrants.value }}</strong>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">{{ major.graduates_name }}</p>
+                                <p class="label">{{ major.major_with_more_graduates.name }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ major.graduates }}</strong>
+                                    <strong class="counter">{{ major.major_with_more_graduates.value }}</strong>
                                 </div>
                             </td>
                         </tr>

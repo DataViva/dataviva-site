@@ -38,8 +38,8 @@
                                     Principal Curso por Número de Alunos Matriculados
                                 </th>
                                 <td>
-                                    <p class="label">{{ major.enrolled_name }}</p>
-                                    <strong class="counter">{{ major.enrolled }}</strong> <span>mil</span>
+                                    <p class="label">{{ major.major_with_more_enrollments.name }}</p>
+                                    <strong class="counter">{{ major.major_with_more_enrollments.value }}</strong> <span>mil</span>
                                 </td>
                             </tr>
                             <tr>
@@ -47,8 +47,8 @@
                                     Principal Curso por Número de Alunos Ingressantes
                                 </th>
                                 <td>
-                                    <p class="label">{{ major.entrants_name }}</p>
-                                    <strong class="counter">{{ major.entrants }}</strong>
+                                    <p class="label">{{ major.major_with_more_entrants.name }}</p>
+                                    <strong class="counter">{{ major.major_with_more_entrants.value }}</strong>
                                 </td>
                             </tr>
                             <tr>
@@ -56,8 +56,8 @@
                                     Principal Curso por Número de Alunos Concluintes
                                 </th>
                                 <td>
-                                    <p class="label">{{ major.graduates_name }}</p>
-                                    <strong class="counter">{{ major.graduates }}</strong>
+                                    <p class="label">{{ major.major_with_more_graduates.name }}</p>
+                                    <strong class="counter">{{ major.major_with_more_graduates.value }}</strong>
                                 </td>
                             </tr>
                         </tbody>

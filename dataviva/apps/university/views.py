@@ -24,8 +24,11 @@ def add_language_code(endpoint, values):
 def index():
     university_service = University(university_id='00575')
     university = university_service.university_info()
-    major = university_service.majors_with_more_enrollments()
-    
+    major = {
+        'major_with_more_enrollments' : university_service.major_with_more_enrollments(),
+        'major_with_more_entrants' : university_service.major_with_more_entrants(),
+        'major_with_more_graduates' : university_service.major_with_more_graduates()
+    }
     return render_template('index.html', university=university, major=major, body_class='perfil_estado')
 
 
