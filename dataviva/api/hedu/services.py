@@ -127,39 +127,11 @@ class Major:
 
         return major
 
-    def university_and_county_with_more_enrollments(self):
+    def university_with_more_enrolled(self):
         yuc_enrolled_query = Yuc.query.join(uni).filter(
             Yuc.course_hedu_id == self.course_hedu_id,
             Yuc.year == self.yuc_max_year_query
         ).order_by(desc(Yuc.enrolled)).limit(1)
-
-        ybc_enrolled_query =  Ybc_hedu.query.join(Bra).filter(
-            Ybc_hedu.course_hedu_id == self.course_hedu_id,
-            Ybc_hedu.year == self.ybc_max_year_query,
-            func.length(Ybc_hedu.bra_id) == 9
-        ).order_by(desc(Ybc_hedu.enrolled)).limit(1)
-
-        yuc_entrants_query = Yuc.query.join(uni).filter(
-            Yuc.course_hedu_id == self.course_hedu_id,
-            Yuc.year == self.yuc_max_year_query
-        ).order_by(desc(Yuc.entrants)).limit(1)
-
-        ybc_entrants_query =  Ybc_hedu.query.join(Bra).filter(
-            Ybc_hedu.course_hedu_id == self.course_hedu_id,
-            Ybc_hedu.year == self.ybc_max_year_query,
-            func.length(Ybc_hedu.bra_id) == 9
-        ).order_by(desc(Ybc_hedu.entrants)).limit(1)
-
-        yuc_graduates_query = Yuc.query.join(uni).filter(
-            Yuc.course_hedu_id == self.course_hedu_id,
-            Yuc.year == self.yuc_max_year_query
-        ).order_by(desc(Yuc.graduates)).limit(1)
-
-        ybc_graduates_query =  Ybc_hedu.query.join(Bra).filter(
-            Ybc_hedu.course_hedu_id == self.course_hedu_id,
-            Ybc_hedu.year == self.ybc_max_year_query,
-            func.length(Ybc_hedu.bra_id) == 9
-        ).order_by(desc(Ybc_hedu.graduates)).limit(1)
 
         yuc_enrolled_data = yuc_enrolled_query.values(
             uni.name_pt,
@@ -167,57 +139,110 @@ class Major:
             Yuc.enrolled
         )
 
+        university = {}
+
+        for name_pt, desc_pt, enrolled in yuc_enrolled_data:
+            university['name'] = name_pt
+            university['profile'] = desc_pt
+            university['value'] = enrolled
+
+        return university
+
+    def municipality_with_more_enrolled(self):
+        ybc_enrolled_query =  Ybc_hedu.query.join(Bra).filter(
+            Ybc_hedu.course_hedu_id == self.course_hedu_id,
+            Ybc_hedu.year == self.ybc_max_year_query,
+            func.length(Ybc_hedu.bra_id) == 9
+        ).order_by(desc(Ybc_hedu.enrolled)).limit(1)
+
         ybc_enrolled_data = ybc_enrolled_query.values(
             Bra.name_pt,
             Ybc_hedu.enrolled
         )
+
+        municipality = {}
+
+        for name_pt, enrolled in ybc_enrolled_data:
+            municipality['name'] = name_pt
+            municipality['value'] = enrolled
+
+        return municipality
+
+    def university_with_more_entrants(self):
+        yuc_entrants_query = Yuc.query.join(uni).filter(
+            Yuc.course_hedu_id == self.course_hedu_id,
+            Yuc.year == self.yuc_max_year_query
+        ).order_by(desc(Yuc.entrants)).limit(1)
 
         yuc_entrants_data = yuc_entrants_query.values(
             uni.name_pt,
             Yuc.entrants
         )
 
+        university = {}
+
+        for name_pt, entrants in yuc_entrants_data:
+            university['name'] = name_pt
+            university['value'] = entrants
+
+        return university
+
+    def municipality_with_more_entrants(self):
+        ybc_entrants_query =  Ybc_hedu.query.join(Bra).filter(
+            Ybc_hedu.course_hedu_id == self.course_hedu_id,
+            Ybc_hedu.year == self.ybc_max_year_query,
+            func.length(Ybc_hedu.bra_id) == 9
+        ).order_by(desc(Ybc_hedu.entrants)).limit(1)
+
         ybc_entrants_data = ybc_entrants_query.values(
             Bra.name_pt,
             Ybc_hedu.entrants
         )
+
+        municipality = {}
+
+        for name_pt, entrants in ybc_entrants_data:
+            municipality['name'] = name_pt
+            municipality['value'] = entrants
+
+        return municipality
+
+    def university_with_more_graduates(self):
+        yuc_graduates_query = Yuc.query.join(uni).filter(
+            Yuc.course_hedu_id == self.course_hedu_id,
+            Yuc.year == self.yuc_max_year_query
+        ).order_by(desc(Yuc.graduates)).limit(1)
 
         yuc_graduates_data = yuc_graduates_query.values(
             uni.name_pt,
             Yuc.graduates
         )
 
+        university = {}
+
+        for name_pt, graduates in yuc_graduates_data:
+            university['name'] = name_pt
+            university['value'] = graduates
+
+        return university
+
+    def municipality_with_more_graduates(self):
+        ybc_graduates_query =  Ybc_hedu.query.join(Bra).filter(
+            Ybc_hedu.course_hedu_id == self.course_hedu_id,
+            Ybc_hedu.year == self.ybc_max_year_query,
+            func.length(Ybc_hedu.bra_id) == 9
+        ).order_by(desc(Ybc_hedu.graduates)).limit(1)
+
         ybc_graduates_data = ybc_graduates_query.values(
             Bra.name_pt,
             Ybc_hedu.graduates
         )
         
-        enrollments = {}
-
-        for name_pt, desc_pt, enrolled in yuc_enrolled_data:
-            enrollments['enrolled_university'] = name_pt
-            enrollments['profile'] = desc_pt
-            enrollments['enrolled_university_data'] = enrolled
-
-        for name_pt, enrolled in ybc_enrolled_data:
-            enrollments['enrolled_county'] = name_pt
-            enrollments['enrolled_county_data'] = enrolled
-
-        for name_pt, entrants in yuc_entrants_data:
-            enrollments['entrants_university'] = name_pt
-            enrollments['entrants_university_data'] = entrants
-
-        for name_pt, entrants in ybc_entrants_data:
-            enrollments['entrants_county'] = name_pt
-            enrollments['entrants_county_data'] = entrants    
-
-        for name_pt, graduates in yuc_graduates_data:
-            enrollments['graduates_university'] = name_pt
-            enrollments['graduates_university_data'] = graduates
+        municipality = {}  
 
         for name_pt, graduates in ybc_graduates_data:
-            enrollments['graduates_county'] = name_pt
-            enrollments['graduates_county_data'] = graduates
+            municipality['name'] = name_pt
+            municipality['value'] = graduates
 
-        return enrollments
+        return municipality
 

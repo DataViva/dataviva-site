@@ -20,10 +20,15 @@ def add_language_code(endpoint, values):
 def index():
     major_service = Major(course_hedu_id='523E04')
     major = major_service.major_info()
-    enrollments = major_service.university_and_county_with_more_enrollments()
-
-    ''' Queries que pegam o ano mais recente dos dados '''
-
+    enrollments = {
+        'university_with_more_enrolled' : major_service.university_with_more_enrolled(),
+        'municipality_with_more_enrolled' : major_service.municipality_with_more_enrolled(),
+        'university_with_more_entrants' : major_service.university_with_more_entrants(),
+        'municipality_with_more_entrants' : major_service.municipality_with_more_entrants(),
+        'university_with_more_graduates' : major_service.university_with_more_graduates(),
+        'municipality_with_more_graduates' : major_service.municipality_with_more_graduates()
+    }
+    
     return render_template('major/index.html', major=major, enrollments=enrollments, body_class='perfil-estado')
 
 
