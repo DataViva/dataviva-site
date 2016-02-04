@@ -65,8 +65,8 @@ class Product:
     def export_val(self):
         return self.__secex_values__()['export_val']
 
-    def export_val(self):
-        return self.__secex_values__()['export_val']
+    def import_val(self):
+        return self.__secex_values__()['import_val']
 
     def export_kg(self):
         return self.__secex_values__()['export_kg']
@@ -159,10 +159,10 @@ class Product:
         municipality_with_more_imports = {}
 
         for name_pt, import_val in ymbp_bra_data:
-            municipality_with_more_imports['munic_name_import'] = name_pt
-            municipality_with_more_imports['munic_import_value'] = import_val
+            name = name_pt
+            import_value = import_val
 
-        return municipality_with_more_imports
+        return name, import_value
 
 class ProductByLocation:
     def __init__(self, bra_id, product_id):
@@ -184,7 +184,7 @@ class ProductByLocation:
         ).limit(1)
 
         pci = ymp_pci_query.one().pci
-        
+
         return pci
 
     def __secex_values__(self):
@@ -206,6 +206,8 @@ class ProductByLocation:
                 Ymbp.distance_wld,
                 Ymbp.opp_gain_wld
             )
+
+            secex_values = {}
 
             for year, export_val, import_val, export_kg, import_kg, rca_wld, distance_wld, opp_gain_wld in ymbp_data:
                 export_val = export_val or 0
@@ -234,18 +236,18 @@ class ProductByLocation:
                 secex_values['distance_wld'] = distance_wld
                 secex_values['opp_gain_wld'] = opp_gain_wld
 
-        self._secex_values = secex_values
+            self._secex_values = secex_values
 
         return self._secex_values
 
     def year(self):
         return self.__secex_values__()['year']
 
-    def export_val(self):
+    def import_val(self):
         return self.__secex_values__()['export_val']
 
     def export_val(self):
-        return self.__secex_values__()['export_val']
+        return self.__secex_values__()['import_val']
 
     def export_kg(self):
         return self.__secex_values__()['export_kg']
@@ -259,13 +261,13 @@ class ProductByLocation:
     def import_net_weight(self):
         return self.__secex_values__()['import_net_weight']
 
-    def import_net_weight(self):
+    def rca_wld(self):
         return self.__secex_values__()['rca_wld']
 
-    def import_net_weight(self):
+    def distance_wld(self):
         return self.__secex_values__()['distance_wld']
 
-    def import_net_weight(self):
+    def opp_gain_wld(self):
         return self.__secex_values__()['opp_gain_wld']
 
 
@@ -333,7 +335,7 @@ class ProductByLocation:
             municipality_with_more_exports['munic_name_export'] = name_pt
             municipality_with_more_exports['munic_export_value'] = export_val
 
-        return self.product
+        return municipality_with_more_exports
 
     def municipality_with_more_imports(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
