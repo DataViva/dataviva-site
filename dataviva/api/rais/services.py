@@ -228,13 +228,11 @@ class OccupationByLocation(Occupation):
                 Ybo.year == self.year,
                 Ybo.bra_id_len == 9)\
             .order_by(desc(Ybo.num_jobs)).limit(1)\
-            .values(Bra.name_pt,
-                    Ybo.num_jobs)
+            .one()
     
             municipality_with_more_jobs = {}
-            for name_pt, num_jobs in ybo_municipality_num_jobs_generator:
-                municipality_with_more_jobs['municipality_with_more_jobs'] = name_pt
-                municipality_with_more_jobs['municipality_with_more_jobs_value'] = num_jobs
+            municipality_with_more_jobs['municipality_with_more_jobs'] = ybo_municipality_num_jobs_generator.bra.name()
+            municipality_with_more_jobs['municipality_with_more_jobs_value'] = ybo_municipality_num_jobs_generator.num_jobs
 
             self._municipality_with_more_jobs = municipality_with_more_jobs
 
