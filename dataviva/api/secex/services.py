@@ -44,24 +44,24 @@ class Product:
 
     def trade_balance(self):
         secex_data = self.__secex_values__()
-        secex_data.export_val = secex_data.export_val or 0
-        secex_data.import_val = secex_data.import_val or 0
+        export_val = secex_data.export_val or 0
+        import_val = secex_data.import_val or 0
 
-        return secex_data.export_val - secex_data.import_val
+        return export_val - import_val
 
     def export_net_weight(self):
         secex_data = self.__secex_values__()
-        secex_data.export_kg = secex_data.export_kg or 0
-        secex_data.export_val = secex_data.export_val or 0
+        export_kg = secex_data.export_kg
+        export_val = secex_data.export_val
 
-        return secex_data.export_kg / secex_data.export_val
+        return export_val if not export_val else export_kg / export_val
 
     def import_net_weight(self):
         secex_data = self.__secex_values__()
-        secex_data.import_kg = secex_data.import_kg or 0
-        secex_data.import_val = secex_data.import_val or 0
+        import_kg = secex_data.import_kg
+        import_val = secex_data.import_val
 
-        return secex_data.import_kg / secex_data.import_val
+        return import_kg if not import_kg else import_kg / import_val
 
     def __destination_with_more_exports__(self):
         ympw_query = Ympw.query.join(Wld).filter(
@@ -176,58 +176,21 @@ class ProductByLocation(Product):
                 Ymbp.month==0
             ).limit(1)
 
-            secex_data = ymbp_query.values(
-                Ymbp.year,
-                Ymbp.export_val,
-                Ymbp.import_val,
-                Ymbp.export_kg,
-                Ymbp.import_kg,
-                Ymbp.rca_wld,
-                Ymbp.distance_wld,
-                Ymbp.opp_gain_wld
-            )
+            secex_data = ymbp_query.one()
 
-            secex_values = {}
-
-            for year, export_val, import_val, export_kg, import_kg, rca_wld, distance_wld, opp_gain_wld in secex_data:
-                export_val = export_val or 0
-                import_val = import_val or 0
-                export_kg = export_kg or 0
-                import_kg = import_kg or 0
-
-                secex_values['year'] = year
-                secex_values['export_val'] = export_val
-                secex_values['import_val'] = import_val
-                secex_values['export_kg'] = export_kg
-                secex_values['import_kg'] = import_kg
-                secex_values['trade_balance'] = export_val - import_val
-
-                if export_val == 0:
-                    secex_values['export_net_weight'] = None
-                else:
-                    secex_values['export_net_weight'] = export_kg / export_val
-
-                if import_val == 0:
-                    secex_values['import_net_weight'] = None
-                else:
-                    secex_values['import_net_weight'] = import_kg / import_val
-
-                secex_values['rca_wld'] = rca_wld
-                secex_values['distance_wld'] = distance_wld
-                secex_values['opp_gain_wld'] = opp_gain_wld
-
-            self._secex_values = secex_values
-
-        return self._secex_values
+        return secex_data
 
     def rca_wld(self):
-        return self.__secex_values__()['rca_wld']
+        secex_data = self.__secex_values__()
+        return secex_data.rca_wld
 
     def distance_wld(self):
-        return self.__secex_values__()['distance_wld']
+        secex_data = self.__secex_values__()
+        return secex_data.distance_wld
 
     def opp_gain_wld(self):
-        return self.__secex_values__()['opp_gain_wld']
+        secex_data = self.__secex_values__()
+        return secex_data.opp_gain_wld
 
     def __destination_with_more_exports__(self):
         ymbpw_query = Ymbpw.query.join(Wld).filter(
