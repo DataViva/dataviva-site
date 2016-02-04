@@ -1,4 +1,4 @@
-from dataviva.api.attrs.models import Hs, Bra, Wld
+from dataviva.api.attrs.models import Bra, Wld
 from dataviva.api.secex.models import Ymp, Ymbp, Ympw, Ymbpw
 from dataviva import db
 from sqlalchemy import func, desc
@@ -12,8 +12,6 @@ class Product:
             func.max(Ymbp.year)).filter_by(hs_id=product_id)
         self.ympw_max_year_query = db.session.query(
             func.max(Ympw.year)).filter_by(hs_id=product_id)
-        self.ymbpw_max_year_query = db.session.query(
-            func.max(Ymbpw.year)).filter_by(hs_id=product_id, bra_id=bra_id)
         self._secex_values = None
 
     def pci(self):
@@ -89,48 +87,6 @@ class Product:
     def import_net_weight(self):
         return self.__secex_values__()['import_net_weight']
 
-    def municipality_with_more_exports(self):
-        ymbp_query = Ymbp.query.join(Bra).filter(
-            Ymbp.hs_id==self.product_id,
-            Ymbp.year==self.ymbp_max_year_query,
-            Ymbp.bra_id_len==9,
-            Ymbp.month==0
-        ).order_by(desc(Ymbp.export_val)).limit(1)
-
-        ymbp_bra_data = ymbp_query.values(
-            Bra.name_pt,
-            Ymbp.export_val
-        )
-
-        municipality_with_more_exports = {}
-
-        for name_pt, export_val in ymbp_bra_data:
-            municipality_with_more_exports['munic_name_export'] = name_pt
-            municipality_with_more_exports['munic_export_value'] = export_val
-
-        return municipality_with_more_exports
-
-    def municipality_with_more_imports(self):
-        ymbp_query = Ymbp.query.join(Bra).filter(
-            Ymbp.hs_id==self.product_id,
-            Ymbp.year==self.ymbp_max_year_query,
-            Ymbp.bra_id_len==9,
-            Ymbp.month==0
-        ).order_by(desc(Ymbp.import_val)).limit(1)
-
-        ymbp_bra_data = ymbp_query.values(
-            Bra.name_pt,
-            Ymbp.import_val
-        )
-
-        municipality_with_more_imports = {}
-
-        for name_pt, import_val in ymbp_bra_data:
-            municipality_with_more_imports['munic_name_import'] = name_pt
-            municipality_with_more_imports['munic_import_value'] = import_val
-
-        return municipality_with_more_imports
-
     def destination_with_more_exports(self):
         ympw_query = Ympw.query.join(Wld).filter(
             Ympw.hs_id==self.product_id,
@@ -172,6 +128,48 @@ class Product:
             origin_with_more_import['src_import_value'] = import_val
 
         return origin_with_more_import
+
+    def municipality_with_more_exports(self):
+        ymbp_query = Ymbp.query.join(Bra).filter(
+            Ymbp.hs_id==self.product_id,
+            Ymbp.year==self.ymbp_max_year_query,
+            Ymbp.bra_id_len==9,
+            Ymbp.month==0
+        ).order_by(desc(Ymbp.export_val)).limit(1)
+
+        ymbp_bra_data = ymbp_query.values(
+            Bra.name_pt,
+            Ymbp.export_val
+        )
+
+        municipality_with_more_exports = {}
+
+        for name_pt, export_val in ymbp_bra_data:
+            municipality_with_more_exports['munic_name_export'] = name_pt
+            municipality_with_more_exports['munic_export_value'] = export_val
+
+        return municipality_with_more_exports
+
+    def municipality_with_more_imports(self):
+        ymbp_query = Ymbp.query.join(Bra).filter(
+            Ymbp.hs_id==self.product_id,
+            Ymbp.year==self.ymbp_max_year_query,
+            Ymbp.bra_id_len==9,
+            Ymbp.month==0
+        ).order_by(desc(Ymbp.import_val)).limit(1)
+
+        ymbp_bra_data = ymbp_query.values(
+            Bra.name_pt,
+            Ymbp.import_val
+        )
+
+        municipality_with_more_imports = {}
+
+        for name_pt, import_val in ymbp_bra_data:
+            municipality_with_more_imports['munic_name_import'] = name_pt
+            municipality_with_more_imports['munic_import_value'] = import_val
+
+        return municipality_with_more_imports
 
 class ProductByLocation:
     def __init__(self, bra_id, product_id):
