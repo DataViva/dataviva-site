@@ -227,12 +227,12 @@ class TradePartnerProducts(TradePartner):
         import_val = secex.import_val or 0
         return export_val - import_val
 
-    def product_with_lowest_balance(self):
-        secex = self.__secex_sorted_by_balance__()[-1]
-        return secex.hs.name()
-
     def lowest_balance(self):
         secex = self.__secex_sorted_by_balance__()[-1]
         export_val = secex.export_val or 0
         import_val = secex.import_val or 0
         return export_val - import_val
+
+    def product_with_lowest_balance(self):
+        secex = self.__secex_sorted_by_balance__()[-1]
+        return secex.hs.name()
