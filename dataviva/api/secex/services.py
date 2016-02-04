@@ -22,7 +22,7 @@ class Product:
                 Ymp.month==0
             ).limit(1)
 
-            ymp_data = ymp_query.values(
+            secex_data = ymp_query.values(
                 Ymp.year,
                 Ymp.export_val,
                 Ymp.import_val,
@@ -32,7 +32,7 @@ class Product:
 
             secex_values = {}
 
-            for year, export_val, import_val, export_kg, import_kg in ymp_data:
+            for year, export_val, import_val, export_kg, import_kg in secex_data:
                 export_val = export_val or 0
                 import_val = import_val or 0
                 export_kg = export_kg or 0
@@ -88,17 +88,17 @@ class Product:
             Ympw.month==0
         ).order_by(desc(Ympw.export_val)).limit(1)
 
-        ympw_wld_data = ympw_query.one()
+        secex_data = ympw_query.one()
 
-        return ympw_wld_data
+        return secex_data
 
     def destination_with_more_exports(self):
-        ympw = self.__destination_with_more_exports__()
-        return ympw.wld.name()
+        secex_data = self.__destination_with_more_exports__()
+        return secex_data.wld.name()
 
     def highest_export_value_by_destination(self):
-        ympw = self.__destination_with_more_exports__()
-        return ympw.export_val
+        secex_data = self.__destination_with_more_exports__()
+        return secex_data.export_val
 
     def __origin_with_more_imports__(self):
         ympw_query = Ympw.query.join(Wld).filter(
@@ -108,17 +108,17 @@ class Product:
             Ympw.month==0
         ).order_by(desc(Ympw.import_val)).limit(1)
 
-        ympw_wld_data = ympw_query.one()
+        secex_data = ympw_query.one()
 
-        return ympw_wld_data
+        return secex_data
 
     def origin_with_more_imports(self):
-        ympw = self.__origin_with_more_imports__()
-        return ympw.wld.name()
+        secex_data = self.__origin_with_more_imports__()
+        return secex_data.wld.name()
 
     def highest_import_value_by_origin(self):
-        ympw = self.__origin_with_more_imports__()
-        return ympw.import_val
+        secex_data = self.__origin_with_more_imports__()
+        return secex_data.import_val
 
     def __municipality_with_more_exports__(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
@@ -128,17 +128,17 @@ class Product:
             Ymbp.month==0
         ).order_by(desc(Ymbp.export_val)).limit(1)
 
-        ymbp_bra_data = ymbp_query.one()
+        secex_data = ymbp_query.one()
 
-        return ymbp_bra_data
+        return secex_data
 
     def municipality_with_more_exports(self):
-        ymbp = self.__municipality_with_more_exports__()
-        return ymbp.bra.name()
+        secex_data = self.__municipality_with_more_exports__()
+        return secex_data.bra.name()
 
     def highest_export_value_by_municipality(self):
-        ymbp = self.__municipality_with_more_exports__()
-        return ymbp.export_val
+        secex_data = self.__municipality_with_more_exports__()
+        return secex_data.export_val
 
     def __municipality_with_more_imports__(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
@@ -148,17 +148,17 @@ class Product:
             Ymbp.month==0
         ).order_by(desc(Ymbp.import_val)).limit(1)
 
-        ymbp_bra_data = ymbp_query.one()
+        secex_data = ymbp_query.one()
 
-        return ymbp_bra_data
+        return secex_data
 
     def municipality_with_more_imports(self):
-        ymbp = self.__municipality_with_more_imports__()
-        return ymbp.bra.name()
+        secex_data = self.__municipality_with_more_imports__()
+        return secex_data.bra.name()
 
     def highest_import_value_by_municipality(self):
-        ymbp = self.__municipality_with_more_imports__()
-        return ymbp.import_val
+        secex_data = self.__municipality_with_more_imports__()
+        return secex_data.import_val
 
 
 class ProductByLocation(Product):
@@ -193,7 +193,7 @@ class ProductByLocation(Product):
                 Ymbp.month==0
             ).limit(1)
 
-            ymbp_data = ymbp_query.values(
+            secex_data = ymbp_query.values(
                 Ymbp.year,
                 Ymbp.export_val,
                 Ymbp.import_val,
@@ -206,7 +206,7 @@ class ProductByLocation(Product):
 
             secex_values = {}
 
-            for year, export_val, import_val, export_kg, import_kg, rca_wld, distance_wld, opp_gain_wld in ymbp_data:
+            for year, export_val, import_val, export_kg, import_kg, rca_wld, distance_wld, opp_gain_wld in secex_data:
                 export_val = export_val or 0
                 import_val = import_val or 0
                 export_kg = export_kg or 0
@@ -255,17 +255,17 @@ class ProductByLocation(Product):
             Ymbpw.month==0
         ).order_by(desc(Ymbpw.export_val)).limit(1)
 
-        ymbpw_wld_data = ymbpw_query.one()
+        secex_data = ymbpw_query.one()
 
-        return ymbpw_wld_data
+        return secex_data
 
     def destination_with_more_exports(self):
-        ymbpw = self.__destination_with_more_exports__()
-        return ymbpw.wld.name()
+        secex_data = self.__destination_with_more_exports__()
+        return secex_data.wld.name()
 
     def highest_export_value_by_destination(self):
-        ymbpw = self.__destination_with_more_exports__()
-        return ymbpw.export_val
+        secex_data = self.__destination_with_more_exports__()
+        return secex_data.export_val
 
     def __origin_with_more_imports__(self):
         ymbpw_query = Ymbpw.query.join(Wld).filter(
@@ -276,17 +276,17 @@ class ProductByLocation(Product):
             Ymbpw.month==0
         ).order_by(desc(Ymbpw.import_val)).limit(1)
 
-        ymbpw_wld_data = ymbpw_query.one()
+        secex_data = ymbpw_query.one()
 
-        return ymbpw_wld_data
+        return secex_data
 
     def origin_with_more_imports(self):
-        ymbpw = self.__origin_with_more_imports__()
-        return ymbpw.wld.name()
+        secex_data = self.__origin_with_more_imports__()
+        return secex_data.wld.name()
 
     def highest_import_value_by_origin(self):
-        ymbpw = self.__origin_with_more_imports__()
-        return ymbpw.import_val
+        secex_data = self.__origin_with_more_imports__()
+        return secex_data.import_val
 
     def __municipality_with_more_exports__(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
@@ -297,17 +297,17 @@ class ProductByLocation(Product):
             Ymbp.month==0
         ).order_by(desc(Ymbp.export_val)).limit(1)
 
-        ymbp_bra_data = ymbp_query.one()
+        secex_data = ymbp_query.one()
 
-        return ymbp_bra_data
+        return secex_data
 
     def municipality_with_more_exports(self):
-        ymbp = self.__municipality_with_more_exports__()
-        return ymbp.bra.name()
+        secex_data = self.__municipality_with_more_exports__()
+        return secex_data.bra.name()
 
     def highest_export_value_by_municipality(self):
-        ymbp = self.__municipality_with_more_exports__()
-        return ymbp.export_val
+        secex_data = self.__municipality_with_more_exports__()
+        return secex_data.export_val
 
     def __municipality_with_more_imports__(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
@@ -318,14 +318,14 @@ class ProductByLocation(Product):
             Ymbp.month==0
         ).order_by(desc(Ymbp.import_val)).limit(1)
 
-        ymbp_bra_data = ymbp_query.one()
+        secex_data = ymbp_query.one()
 
-        return ymbp_bra_data
+        return secex_data
 
     def municipality_with_more_imports(self):
-        ymbp = self.__municipality_with_more_imports__()
-        return ymbp.bra.name()
+        secex_data = self.__municipality_with_more_imports__()
+        return secex_data.bra.name()
 
     def highest_import_value_by_municipality(self):
-        ymbp = self.__municipality_with_more_imports__()
-        return ymbp.import_val
+        secex_data = self.__municipality_with_more_imports__()
+        return secex_data.import_val
