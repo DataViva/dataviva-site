@@ -41,8 +41,7 @@ def index():
     industry.update(templates_preview_controler(bra_id=bra_id, cnae_id=cnae_id))
 
     ####EXTRACTY 
-    
-    
+        
     if bra_id :
         rais_industry_service = RaisIndustryByLocationService(bra_id=bra_id, cnae_id=cnae_id)
         industry['rca_domestic'] = rais_industry_service.rca()
@@ -66,9 +65,7 @@ def index():
     if bra_id == None  or len(bra_id) != 9 :
         industry.update(rais_industry_service.get_municipality_with_more_num_jobs())
         industry.update(rais_industry_service.get_municipality_with_more_wage_avg())   
-
-
-        
+    
             
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
 

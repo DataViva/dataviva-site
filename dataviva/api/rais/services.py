@@ -125,7 +125,7 @@ class Industry :
 #########################
 
 
-class IndustryByLocation :
+class IndustryByLocation(Industry) :
     def __init__(self, bra_id, cnae_id):
         self.bra_id = bra_id
         self.cnae_id = cnae_id
@@ -133,9 +133,6 @@ class IndustryByLocation :
         self.ybi_max_year=db.session.query(func.max(Ybi.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)        
         self.ybio_max_year=db.session.query(func.max(Ybio.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
 
-
-    def get_name(self): 
-        return Cnae.query.filter_by(id=self.cnae_id).one().name()
 
     def get_year(self):
         return self.ybi_max_year.scalar()
@@ -163,18 +160,6 @@ class IndustryByLocation :
                self.industry_headers['opportunity_gain'] =  opp_gain          
 
         return self.industry_headers     
-
-    def average_monthly_income(self): 
-        return self.__rais_values__()['average_monthly_income']
-
-    def salary_mass(self):
-        return self.__rais_values__()['salary_mass']
-
-    def num_jobs(self):
-        return self.__rais_values__()['total_jobs']
-
-    def num_establishments(self):
-        return self.__rais_values__()['total_establishments'] 
 
     def rca(self):
         return self.__rais_values__()['rca_domestic']
