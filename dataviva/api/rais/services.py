@@ -249,41 +249,50 @@ class OccupationByLocation(Occupation):
         return self._municipality_with_more_jobs
 
 
-    def municipality_with_biggest_wage_average(self):
+    def __municipality_with_biggest_wage_average__(self):
 
-        ybo_municipality_wage_avg_generator = Ybo.query.join(Bra).filter(
-            Ybo.cbo_id == self.occupation_id,
-            Ybo.bra_id.like(self.bra_id+'%'),
-            Ybo.year == self.year,
-            Ybo.bra_id_len == 9)\
-        .order_by(desc(Ybo.wage_avg)).limit(1)\
-        .values(Bra.name_pt,
-                Ybo.wage_avg)
+        if not self._municipality_with_biggest_wage_average:
 
-        municipality_with_bigger_wage_avg = {}
-        for name_pt, wage_avg in ybo_municipality_wage_avg_generator:
-            municipality_with_bigger_wage_avg['municipality_with_biggest_wage_avg'] = name_pt
-            municipality_with_bigger_wage_avg['municipality_with_biggest_wage_avg_value'] = wage_avg  
+            ybo_municipality_wage_avg_generator = Ybo.query.join(Bra).filter(
+                Ybo.cbo_id == self.occupation_id,
+                Ybo.bra_id.like(self.bra_id+'%'),
+                Ybo.year == self.year,
+                Ybo.bra_id_len == 9)\
+            .order_by(desc(Ybo.wage_avg)).limit(1)\
+            .values(Bra.name_pt,
+                    Ybo.wage_avg)
+    
+            municipality_with_biggest_wage_avg = {}
+            for name_pt, wage_avg in ybo_municipality_wage_avg_generator:
+                municipality_with_biggest_wage_avg['municipality_with_biggest_wage_avg'] = name_pt
+                municipality_with_biggest_wage_avg['municipality_with_biggest_wage_avg_value'] = wage_avg  
 
-        return municipality_with_bigger_wage_avg 
+            self._municipality_with_biggest_wage_average = municipality_with_biggest_wage_avg
 
-    def activity_with_more_jobs(self):
+        return self._municipality_with_biggest_wage_average
 
-        ybio_activity_num_jobs_generator = Ybio.query.join(Cnae).filter(
-            Ybio.cbo_id == self.occupation_id,
-            Ybio.bra_id.like(self.bra_id+'%'),
-            Ybio.year == self.year,
-            Ybio.cnae_id_len == 6)\
-        .order_by(desc(Ybio.num_jobs)).limit(1)\
-        .values(Cnae.name_pt,
-                Ybio.num_jobs)
+    def __activity_with_more_jobs__(self):
 
-        activity_with_more_jobs = {}
-        for name_pt, num_jobs in ybio_activity_num_jobs_generator:
-            activity_with_more_jobs['activity_with_more_jobs'] = name_pt
-            activity_with_more_jobs['activity_with_more_jobs_value'] = num_jobs 
+        if not self._activity_with_more_jobs:
 
-        return activity_with_more_jobs
+            ybio_activity_num_jobs_generator = Ybio.query.join(Cnae).filter(
+                Ybio.cbo_id == self.occupation_id,
+                Ybio.bra_id.like(self.bra_id+'%'),
+                Ybio.year == self.year,
+                Ybio.cnae_id_len == 6)\
+            .order_by(desc(Ybio.num_jobs)).limit(1)\
+            .values(Cnae.name_pt,
+                    Ybio.num_jobs)
+
+            activity_with_more_jobs = {}
+            for name_pt, num_jobs in ybio_activity_num_jobs_generator:
+                activity_with_more_jobs['activity_with_more_jobs'] = name_pt
+                activity_with_more_jobs['activity_with_more_jobs_value'] = num_jobs 
+
+            self._activity_with_more_jobs = activity_with_more_jobs
+
+        return self._activity_with_more_jobs
+
 
         
     def activity_with_biggest_wage_average(self):
