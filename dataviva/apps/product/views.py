@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.services import Product as AttrsProductService
 from dataviva.api.secex.services import Product as SecexProductService
+from dataviva.api.secex.services import ProductByLocation as SecexProductByLocationService
 
 
 mod = Blueprint('product', __name__,
