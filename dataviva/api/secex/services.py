@@ -143,7 +143,7 @@ class Product:
 
         return municipality_with_more_exports
 
-    def municipality_with_more_imports(self):
+    def __municipality_with_more_imports__(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id==self.product_id,
             Ymbp.year==self.ymbp_max_year_query,
@@ -151,18 +151,17 @@ class Product:
             Ymbp.month==0
         ).order_by(desc(Ymbp.import_val)).limit(1)
 
-        ymbp_bra_data = ymbp_query.values(
-            Bra.name_pt,
-            Ymbp.import_val
-        )
+        ymbp_bra_data = ymbp_query.one()
 
-        municipality_with_more_imports = {}
+        return ymbp_bra_data
 
-        for name_pt, import_val in ymbp_bra_data:
-            municipality_with_more_imports['munic_name_import'] = name_pt
-            municipality_with_more_imports['munic_import_value'] = import_val
+    def municipality_with_more_imports(self):
+        ymbp = self.__municipality_with_more_imports__()
+        return ymbp.bra.name()
 
-        return municipality_with_more_imports
+    def highest_import_value_by_municipality(self):
+        ymbp = self.__municipality_with_more_imports__()
+        return ymbp.import_val
 
 
 class ProductByLocation:
