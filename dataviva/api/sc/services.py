@@ -55,8 +55,9 @@ class Basic_course:
                                         Ybc_sc.enrolled,
                                         Ybc_sc.year)
 
-            school_data = most_enrolled_school_query.values(School.name_pt,
-                                                           Ybsc.enrolled)
+            school_data = most_enrolled_school_query.values(
+                School.name_pt,
+                Ybsc.enrolled)
 
             if len(self.bra_id) < 9:
                 city_data = most_enrolled_city_query.values(
@@ -108,7 +109,6 @@ class Basic_course:
             basic_course['course_classes'] = classes
             basic_course['course_age'] = age
             basic_course['course_enrolled'] = enrolled
-            basic_course['course_average_class_size'] = enrolled / classes
             basic_course['course_year'] = year
 
         basic_course['schools_count'] = total_schools_query.count()
@@ -143,7 +143,10 @@ class Basic_course:
         return self.__statistics__()['course_enrolled']
 
     def course_average_class_size(self):
-        return self.__statistics__()['course_average_class_size']
+        total_class_number = self.__statistics__()['course_classes']
+        total_enrolled_number = self.__statistics__()['course_enrolled']
+
+        return total_enrolled_number / total_class_number
     
     def course_year(self):
         return self.__statistics__()['course_year']
