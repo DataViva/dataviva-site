@@ -53,7 +53,7 @@ def index(occupation_id):
         'total_establishments_unity' : 'milhares', 
         'jobs_municipality_unity' : 'milhares de', 
         'activity_for_job_unity': unicode('bilhões','utf8'), 
-        'bigger_average_monsthly_income_unity': unicode('bilhões','utf8'),
+        'biggest_average_monsthly_income_unity': unicode('bilhões','utf8'),
         'activity_for_job_unity' : unicode('bilhoes','utf8'),
         'text_salario_e_emprego': unicode('Minas Gerais é uma das 27 unidades feder...','utf8'),
         'text_oportunidades_economicas' : unicode('Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste ','utf8'),
