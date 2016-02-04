@@ -80,7 +80,7 @@ class Product:
     def import_net_weight(self):
         return self.__secex_values__()['import_net_weight']
 
-    def destination_with_more_exports(self):
+    def __destination_with_more_exports__(self):
         ympw_query = Ympw.query.join(Wld).filter(
             Ympw.hs_id==self.product_id,
             Ympw.year==self.ympw_max_year_query,
@@ -88,20 +88,20 @@ class Product:
             Ympw.month==0
         ).order_by(desc(Ympw.export_val)).limit(1)
 
-        ympw_wld_data = ympw_query.values(
-            Wld.name_pt,
-            Ympw.export_val
-        )
+        ympw_wld_data = ympw_query.one()
 
-        destination_with_more_exports = {}
+        return ympw_wld_data
 
-        for name_pt, export_val in ympw_wld_data:
-            destination_with_more_exports['dest_name_export'] = name_pt
-            destination_with_more_exports['dest_export_value'] = export_val
+    def destination_with_more_exports(self):
+        import pdb; pdb.set_trace()
+        ympw = self.__destination_with_more_exports__()
+        return ympw.wld.name()
 
-        return destination_with_more_exports
+    def highest_export_value_by_destination(self):
+        ympw = self.__destination_with_more_exports__()
+        return ympw.export_val
 
-    def origin_with_more_imports(self):
+    def __origin_with_more_imports__(self):
         ympw_query = Ympw.query.join(Wld).filter(
             Ympw.hs_id==self.product_id,
             Ympw.year==self.ympw_max_year_query,
@@ -109,18 +109,17 @@ class Product:
             Ympw.month==0
         ).order_by(desc(Ympw.import_val)).limit(1)
 
-        ympw_wld_data = ympw_query.values(
-            Wld.name_pt,
-            Ympw.import_val
-        )
+        ympw_wld_data = ympw_query.one()
 
-        origin_with_more_import = {}
+        return ympw_wld_data
 
-        for name_pt, import_val in ympw_wld_data:
-            origin_with_more_import['src_name_import'] = name_pt
-            origin_with_more_import['src_import_value'] = import_val
+    def origin_with_more_imports(self):
+        ympw = self.__origin_with_more_imports__()
+        return ympw.wld.name()
 
-        return origin_with_more_import
+    def highest_import_value_by_origin(self):
+        ympw = self.__origin_with_more_imports__()
+        return ympw.import_val
 
     def __municipality_with_more_exports__(self):
         ymbp_query = Ymbp.query.join(Bra).filter(

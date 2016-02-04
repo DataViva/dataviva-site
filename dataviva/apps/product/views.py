@@ -82,8 +82,11 @@ def index(product_id):
         product['munic_name_import'] = secex_product_service.municipality_with_more_imports()
         product['munic_import_value'] = secex_product_service.highest_import_value_by_municipality()
 
-        product.update(secex_product_service.destination_with_more_exports())
-        product.update(secex_product_service.origin_with_more_imports())
+        product['dest_name_export'] = secex_product_service.destination_with_more_exports()
+        product['dest_export_value'] = secex_product_service.highest_export_value_by_destination()
+
+        product['src_name_import'] = secex_product_service.origin_with_more_imports()
+        product['src_import_value'] = secex_product_service.highest_import_value_by_origin()
 
     product['year'] = secex_product_service.year()
     product['trade_balance'] = secex_product_service.trade_balance()
