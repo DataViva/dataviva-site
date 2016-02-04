@@ -73,6 +73,27 @@ class TradePartner:
         import_kg = self.__secex__().import_kg
         return import_val / import_kg
 
+    def highest_import_value(self):
+        secex = self.__secex_sorted_by_imports__()[0]
+        return secex.import_val
+
+    def highest_export_value(self):
+        secex = self.__secex_sorted_by_exports__()[0]
+        return secex.export_val
+
+    def highest_balance(self):
+        secex = self.__secex_sorted_by_balance__()[0]
+        export_val = secex.export_val or 0
+        import_val = secex.import_val or 0
+        return export_val - import_val
+
+    def lowest_balance(self):
+        secex = self.__secex_sorted_by_balance__()[-1]
+        export_val = secex.export_val or 0
+        import_val = secex.import_val or 0
+        return export_val - import_val
+
+
 class TradePartnerMunicipalities(TradePartner):
 
 
@@ -92,17 +113,10 @@ class TradePartnerMunicipalities(TradePartner):
         secex = self.__secex_sorted_by_imports__()[0]
         return secex.bra.name()
 
-    def highest_import_value(self):
-        secex = self.__secex_sorted_by_imports__()[0]
-        return secex.import_val
-
     def municipality_with_more_exports(self):
         secex = self.__secex_sorted_by_exports__()[0]
         return secex.bra.name()
 
-    def highest_export_value(self):
-        secex = self.__secex_sorted_by_exports__()[0]
-        return secex.export_val
 
 class TradePartnerProducts(TradePartner):
 
@@ -124,33 +138,13 @@ class TradePartnerProducts(TradePartner):
         secex = self.__secex_sorted_by_exports__()[0]
         return secex.hs.name()
 
-    def highest_export_value(self):
-        secex = self.__secex_sorted_by_exports__()[0]
-        return secex.export_val
-
     def product_with_more_imports(self):
         secex = self.__secex_sorted_by_imports__()[0]
         return secex.hs.name()
 
-    def highest_import_value(self):
-        secex = self.__secex_sorted_by_imports__()[0]
-        return secex.import_val
-
     def product_with_highest_balance(self):
         secex = self.__secex_sorted_by_balance__()[0]
         return secex.hs.name()
-
-    def highest_balance(self):
-        secex = self.__secex_sorted_by_balance__()[0]
-        export_val = secex.export_val or 0
-        import_val = secex.import_val or 0
-        return export_val - import_val
-
-    def lowest_balance(self):
-        secex = self.__secex_sorted_by_balance__()[-1]
-        export_val = secex.export_val or 0
-        import_val = secex.import_val or 0
-        return export_val - import_val
 
     def product_with_lowest_balance(self):
         secex = self.__secex_sorted_by_balance__()[-1]
