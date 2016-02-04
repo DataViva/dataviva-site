@@ -4,35 +4,20 @@ from sqlalchemy import func
 
 class Location:
     def __init__(self, bra_id):
-
-        self._statistics = None
-
+        self._attrs_list = None
         self.bra_id = bra_id
-        self.ybs_max_year_query = db.session.query(
+        self.max_year_query = db.session.query(
             func.max(Ybs.year)).filter_by(bra_id=bra_id)
+        self.attrs_query = Ybs.query.join(Stat).filter(
+            Ybs.bra_id == self.bra_id,
+            Ybs.year == self.max_year_query)
 
-    def __statistics__(self):
-        if not self._statistics:
-            statistics_query = Ybs.query.join(Stat).filter(
-                Ybs.bra_id == self.bra_id,
-                Ybs.year == self.ybs_max_year_query)
-
-            statistics_data = statistics_query.values(
-                Stat.id,
-                Stat.name_pt,
-                Ybs.stat_val)
-
-            statistics = {}
-
-            for id, name_pt, stat_val in statistics_data:
-                statistics[id] = {
-                    'name': name_pt,
-                    'value': stat_val,
-                }
-
-            self._statistics = statistics
-
-        return self._statistics
+    def __attrs_list__(self):
+        if not self._attrs_list:
+            attrs_data = self.attrs_query.all()
+            self._attrs_list = attrs_data
+        return self._attrs_list
 
     def gdp(self):
-        return self.__statistics__()['gdp']
+        statistic_list = self.__attrs_list__()
+        return next((s for s in statistic_list if s.id == 'gdp'), None)
