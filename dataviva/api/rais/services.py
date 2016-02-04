@@ -32,7 +32,7 @@ class Occupation:
                 Yo.cbo_id == self.occupation_id,
                 Yo.year == self.year)\
                 .one()
-                
+
             data = {}
             data['name'] = yo_data_generator.cbo.name()
             data['average_monthly_income'] = yo_data_generator.wage_avg
@@ -196,18 +196,19 @@ class OccupationByLocation(Occupation):
                 Ybo.cbo_id == self.occupation_id,
                 Ybo.bra_id == self.bra_id,
                 Ybo.year == self.year)\
-                .values(Cbo.name_pt,
-                        Ybo.wage_avg,
-                        Ybo.wage,
-                        Ybo.num_jobs,
-                        Ybo.num_est)
+                .one()
+                #.values(Cbo.name_pt,
+                #        Ybo.wage_avg,
+                #        Ybo.wage,
+                #        Ybo.num_jobs,
+                #        Ybo.num_est)
             data = {}
-            for name_pt, wage_avg, wage, num_jobs, num_est in ybo_data_generator:
-                data['name'] = name_pt
-                data['average_monthly_income'] = wage_avg
-                data['salary_mass'] = wage
-                data['total_employment'] = num_jobs
-                data['total_establishments'] = num_est                
+            #for name_pt, wage_avg, wage, num_jobs, num_est in ybo_data_generator:
+            data['name'] = ybo_data_generator.cbo.name()
+            data['average_monthly_income'] = ybo_data_generator.wage_avg
+            data['salary_mass'] = ybo_data_generator.wage
+            data['total_employment'] = ybo_data_generator.num_jobs
+            data['total_establishments'] = ybo_data_generator.num_est                
 
             self._data = data
 
