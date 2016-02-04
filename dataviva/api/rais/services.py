@@ -64,7 +64,7 @@ class Industry :
                 Yio.cnae_id == self.cnae_id,
                 Yio.cbo_id_len == 4,                
                 Yio.year == self.yio_max_year_br 
-                ).order_by(desc(Yio.num_jobs)).limit(1).one()
+                ).order_by(desc(Yio.num_jobs)).limit(1).first_or_404()
 
                        
             self.occ_jobs['occ_with_more_number_jobs_name'] = occupation_jobs_obj.cbo.name() 
@@ -88,7 +88,7 @@ class Industry :
                 Yio.cnae_id == self.cnae_id,
                 Yio.cbo_id_len == 4,                 
                 Yio.year == self.yio_max_year_br 
-                ).order_by(desc(Yio.wage_avg)).limit(1).one()
+                ).order_by(desc(Yio.wage_avg)).limit(1).first_or_404()
 
                   
             self.occ_wage_avg['occ_with_more_wage_avg_name'] = occupation_wage_avg_obj.cbo.name()
@@ -112,7 +112,7 @@ class Industry :
                 Ybi.cnae_id == self.cnae_id,
                 Ybi.bra_id_len == 9,
                 Ybi.year == self.ybi_max_year_br,      
-                ).order_by(desc(Ybi.num_jobs)).limit(1).one()
+                ).order_by(desc(Ybi.num_jobs)).limit(1).first_or_404()
         
               
             self.municipality_jobs['municipality_with_more_num_jobs_name'] = county_jobs_obj.bra.name()
@@ -136,7 +136,7 @@ class Industry :
                 Ybi.cnae_id == self.cnae_id,
                 Ybi.bra_id_len == 9,
                 Ybi.year == self.ybi_max_year_br,    
-                ).order_by(desc(Ybi.wage_avg)).limit(1).one()
+                ).order_by(desc(Ybi.wage_avg)).limit(1).first_or_404()
             
 
                   
@@ -215,7 +215,7 @@ class IndustryByLocation(Industry) :
                 Ybio.cbo_id_len == 4,
                 Ybio.bra_id == self.bra_id,
                 Ybio.year == self.ybio_max_year
-                ).order_by(desc(Ybio.num_jobs)).limit(1).one()  
+                ).order_by(desc(Ybio.num_jobs)).limit(1).first_or_404()  
 
  
             self.occ_jobs['occ_with_more_number_jobs_value'] = occ_jobs_obj.num_jobs
@@ -234,7 +234,7 @@ class IndustryByLocation(Industry) :
                 Ybio.cbo_id_len == 4,
                 Ybio.bra_id == self.bra_id,
                 Ybio.year == self.ybio_max_year
-                ).order_by(desc(Ybio.wage_avg)).limit(1).one() 
+                ).order_by(desc(Ybio.wage_avg)).limit(1).first_or_404() 
 
             self.occ_wage_avg['occ_with_more_wage_avg_value'] = occ_wage_avg_obj.wage_avg
             self.occ_wage_avg['occ_with_more_wage_avg_name'] = occ_wage_avg_obj.cbo.name()
@@ -252,7 +252,7 @@ class IndustryByLocation(Industry) :
                 Ybi.bra_id_len == 9,
                 Ybi.bra_id.like(self.bra_id+'%'), 
                 Ybi.year == self.ybi_max_year    
-                ).order_by(desc(Ybi.num_jobs)).limit(1).one()
+                ).order_by(desc(Ybi.num_jobs)).limit(1).first_or_404()
                       
             self.municipality_jobs['municipality_with_more_num_jobs_value'] = county_jobs_obj.num_jobs
             self.municipality_jobs['municipality_with_more_num_jobs_name'] = county_jobs_obj.bra.name()
@@ -270,7 +270,7 @@ class IndustryByLocation(Industry) :
                 Ybi.bra_id_len == 9,
                 Ybi.bra_id.like(self.bra_id+'%'),
                 Ybi.year == self.ybi_max_year 
-                ).order_by(desc(Ybi.wage_avg)).limit(1).one()
+                ).order_by(desc(Ybi.wage_avg)).limit(1).first_or_404()
 
             self.municipality_wage_avg['municipality_with_more_wage_avg_value'] = county_wage_avg_obj.wage_avg
             self.municipality_wage_avg['municipality_with_more_wage_avg_name'] = county_wage_avg_obj.bra.name()   
