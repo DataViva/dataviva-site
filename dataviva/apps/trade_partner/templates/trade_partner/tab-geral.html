@@ -50,8 +50,8 @@
                                     Principal Município por Valor Total Exportado
                                 </th>
                                 <td>
-                                    <p class="label">{{trade.municipality_with_more_exports.name}}</p>
-                                    USD<strong class="counter">{{trade.municipality_with_more_exports.value}}</strong> <span>milhões</span>
+                                    <p class="label">{{body.municipality_with_more_exports}}</p>
+                                    USD<strong class="counter">{{body.highest_export_value_by_municipality}}</strong> <span>milhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -59,8 +59,8 @@
                                     Principal Município por Valor Total Importado
                                 </th>
                                 <td>
-                                    <p class="label">{{trade.municipality_with_more_imports.name}}</p>
-                                    USD<strong class="counter">{{trade.municipality_with_more_imports.value}}</strong> <span>milhões</span>
+                                    <p class="label">{{body.municipality_with_more_imports}}</p>
+                                    USD<strong class="counter">{{body.highest_import_value_by_municipality}}</strong> <span>milhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -68,8 +68,8 @@
                                     Principal Produto por Valor Total Exportado
                                 </th>
                                 <td>
-                                    <p class="label">{{trade.product_with_more_exports.name}}</p>
-                                    USD<strong class="counter">{{trade.product_with_more_exports.value}}</strong> <span>milhões</span>
+                                    <p class="label">{{body.product_with_more_exports}}</p>
+                                    USD<strong class="counter">{{body.highest_export_value_by_product}}</strong> <span>milhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -77,8 +77,8 @@
                                     Principal Produto por Valor Total Importado
                                 </th>
                                 <td>
-                                    <p class="label">{{trade.product_with_more_imports.name}}</p>
-                                    USD<strong class="counter">{{trade.product_with_more_imports.value}}</strong> <span>milhões</span>
+                                    <p class="label">{{body.product_with_more_imports}}</p>
+                                    USD<strong class="counter">{{body.highest_import_value_by_product}}</strong> <span>milhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -86,8 +86,8 @@
                                     Produto com maior Saldo da Balança Comercial
                                 </th>
                                 <td>
-                                    <p class = "label">{{trade.product_with_highest_balance.name}}</p>
-                                    USD<strong class="counter">{{trade.product_with_highest_balance.value}}</strong> <span>milhoes</span>
+                                    <p class = "label">{{body.product_with_highest_balance}}</p>
+                                    USD<strong class="counter">{{body.highest_balance_by_product}}</strong> <span>milhoes</span>
                                 </td>
                             </tr>
                             <tr>
@@ -95,8 +95,8 @@
                                     Produto com menor Saldo da Balança Comercial
                                 </th>
                                 <td>
-                                    <p class = "label">{{trade.product_with_lowest_balance.name}}</p>
-                                    USD<strong class="counter">{{trade.product_with_lowest_balance.value}}</strong> <span>milhoes</span>
+                                    <p class = "label">{{body.product_with_lowest_balance}}</p>
+                                    USD<strong class="counter">{{body.lowest_balance_by_product}}</strong> <span>milhoes</span>
                                 </td>
                             </tr>
                         </tbody>
