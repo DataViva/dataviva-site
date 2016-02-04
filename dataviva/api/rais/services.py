@@ -31,18 +31,14 @@ class Occupation:
             yo_data_generator = Yo.query.join(Cbo).filter(
                 Yo.cbo_id == self.occupation_id,
                 Yo.year == self.year)\
-                .values(Cbo.name_pt,
-                        Yo.wage_avg,
-                        Yo.wage,
-                        Yo.num_jobs,
-                        Yo.num_est)
+                .one()
+                
             data = {}
-            for name_pt, wage_avg, wage, num_jobs, num_est in yo_data_generator:
-                data['name'] = name_pt
-                data['average_monthly_income'] = wage_avg
-                data['salary_mass'] = wage
-                data['total_employment'] = num_jobs
-                data['total_establishments'] = num_est              
+            data['name'] = yo_data_generator.cbo.name()
+            data['average_monthly_income'] = yo_data_generator.wage_avg
+            data['salary_mass'] = yo_data_generator.wage
+            data['total_employment'] = yo_data_generator.num_jobs
+            data['total_establishments'] = yo_data_generator.num_est              
 
             self._data = data
 
