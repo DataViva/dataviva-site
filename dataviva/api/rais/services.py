@@ -138,7 +138,7 @@ class OccupationByLocation(Occupation):
         
         self.occupation_id = occupation_id
         self.bra_id = bra_id
-        self._header = None 
+        self._data = None 
 
         year=0
         ybo_max_year= db.session.query(func.max(Ybo.year)).filter(
@@ -152,9 +152,9 @@ class OccupationByLocation(Occupation):
 
     def __rais_data__(self):
         
-        if not self._header:
+        if not self._data:
 
-            ybo_header_generator = Ybo.query.join(Cbo).filter(
+            ybo_data_generator = Ybo.query.join(Cbo).filter(
                 Ybo.cbo_id == self.occupation_id,
                 Ybo.bra_id == self.bra_id,
                 Ybo.year == self.year)\
@@ -163,17 +163,17 @@ class OccupationByLocation(Occupation):
                         Ybo.wage,
                         Ybo.num_jobs,
                         Ybo.num_est)
-            header = {}
-            for name_pt, wage_avg, wage, num_jobs, num_est in ybo_header_generator:
-                header['name'] = name_pt
-                header['average_monthly_income'] = wage_avg
-                header['salary_mass'] = wage
-                header['total_employment'] = num_jobs
-                header['total_establishments'] = num_est                
+            data = {}
+            for name_pt, wage_avg, wage, num_jobs, num_est in ybo_data_generator:
+                data['name'] = name_pt
+                data['average_monthly_income'] = wage_avg
+                data['salary_mass'] = wage
+                data['total_employment'] = num_jobs
+                data['total_establishments'] = num_est                
 
-            self._header = header
+            self._data = data
 
-        return self._header
+        return self._data
 
 
     def municipality_with_more_jobs(self):
