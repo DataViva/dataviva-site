@@ -58,17 +58,18 @@ class Industry :
     #-----
       
     def  __occ_with_more_number_jobs__(self) :
+
         if not self.occ_jobs : 
-            occupation_jobs_generaitor = Yio.query.join(Cbo).filter(
+            occupation_jobs_obj = Yio.query.join(Cbo).filter(
                 Yio.cbo_id == Cbo.id,
                 Yio.cnae_id == self.cnae_id,
                 Yio.cbo_id_len == 4,                
                 Yio.year == self.yio_max_year_br 
-                ).order_by(desc(Yio.num_jobs)).limit(1).values(Cbo.name_en, Cbo.name_pt, Yio.num_jobs)
+                ).order_by(desc(Yio.num_jobs)).limit(1).one()
 
-            for  name_en, name_pt, value in occupation_jobs_generaitor:        
-                self.occ_jobs['occ_with_more_number_jobs_name'] = name_pt
-                self.occ_jobs['occ_with_more_number_jobs_value'] = value  
+                       
+            self.occ_jobs['occ_with_more_number_jobs_name'] = occupation_jobs_obj.cbo.name() 
+            self.occ_jobs['occ_with_more_number_jobs_value'] = occupation_jobs_obj.num_jobs
 
         return self.occ_jobs 
 
@@ -215,7 +216,7 @@ class IndustryByLocation(Industry) :
 
             for name_en, name_pt, num_jobs in occ_jobs_generate : 
                 self.occ_jobs['occ_with_more_number_jobs_value'] = num_jobs
-                self.occ_jobs['occ_with_more_number_jobs_name'] =  name_pt 
+                self.occ_jobs['occ_with_more_number_jobs_name'] =  name_pt
 
         return self.occ_jobs
 

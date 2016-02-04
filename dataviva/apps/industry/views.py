@@ -27,6 +27,7 @@ def index():
  
     bra_id = None #'4mg000000' # Alfredo Vasconcelos
     cnae_id = 'g47113' #supermarkets
+    
     industry = {}
 
     industry = { 
