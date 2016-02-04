@@ -14,13 +14,6 @@ class Product:
             func.max(Ympw.year)).filter_by(hs_id=product_id)
         self._secex_values = None
 
-    def pci(self):
-        ymp_pci_query = Ymp.query.filter(Ymp.hs_id==self.product_id,
-                                     Ymp.year==self.ymp_max_year_query,
-                                     Ymp.month==0).limit(1)
-        pci = ymp_pci_query.one().pci
-        return pci
-
     def __secex_values__(self):
         if not self._secex_values:
             ymp_query = Ymp.query.filter(
@@ -108,7 +101,7 @@ class Product:
 
         return destination_with_more_exports
 
-    def origin_with_more_import(self):
+    def origin_with_more_imports(self):
         ympw_query = Ympw.query.join(Wld).filter(
             Ympw.hs_id==self.product_id,
             Ympw.year==self.ympw_max_year_query,
@@ -175,11 +168,24 @@ class ProductByLocation:
     def __init__(self, bra_id, product_id):
         self.bra_id = bra_id
         self.product_id = product_id
+        self.ymp_max_year_query = db.session.query(
+            func.max(Ymp.year)).filter_by(hs_id=product_id)
         self.ymbp_max_year_query = db.session.query(
             func.max(Ymbp.year)).filter_by(hs_id=product_id)
         self.ymbpw_max_year_query = db.session.query(
             func.max(Ymbpw.year)).filter_by(hs_id=product_id, bra_id=bra_id)
         self._secex_values = None
+
+    def pci(self):
+        ymp_pci_query = Ymp.query.filter(
+            Ymp.hs_id==self.product_id,
+            Ymp.year==self.ymp_max_year_query,
+            Ymp.month==0
+        ).limit(1)
+
+        pci = ymp_pci_query.one().pci
+        
+        return pci
 
     def __secex_values__(self):
         if not self._secex_values:
