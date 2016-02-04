@@ -68,9 +68,9 @@ def index(product_id):
             product['distance_wld'] = secex_product_service.distance_wld()
             product['opp_gain_wld'] = secex_product_service.opp_gain_wld()
 
-            if len(bra_id) != 9:
-                product.update(secex_product_service.municipality_with_more_exports())
-                product.update(secex_product_service.municipality_with_more_imports())
+        if len(bra_id) != 9:
+            product.update(secex_product_service.municipality_with_more_exports())
+            product.update(secex_product_service.municipality_with_more_imports())
 
     else:
         secex_product_service = SecexProductService(product_id=product_id)
