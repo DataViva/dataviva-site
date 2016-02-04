@@ -22,9 +22,7 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
     trade_partner_service = TradePartner(wld_id='nausa')
-
-    header = trade_partner_service.__country_info__()
-
+    
     header = {
         'name': trade_partner_service.country_name(),
         'year': trade_partner_service.year(),
