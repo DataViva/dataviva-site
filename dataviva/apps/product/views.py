@@ -53,6 +53,7 @@ def index(product_id):
     product = {}
 
     #dividir entre indicadores header e body
+    #mudar nomes das variaveis, querys
     #implementar heranca para os metodos do service iguais
 
     attrs_product_service = AttrsProductService(product_id=product_id)
@@ -61,8 +62,10 @@ def index(product_id):
     if bra_id:
         secex_product_service = SecexProductByLocationService(bra_id=bra_id, product_id=product_id)
 
-        product.update(secex_product_service.destination_with_more_exports())
-        product.update(secex_product_service.origin_with_more_imports())
+        product['dest_name_export'] = secex_product_service.destination_with_more_exports()
+        product['dest_export_value'] = secex_product_service.highest_export_value_by_destination()
+        product['src_name_import'] =  secex_product_service.origin_with_more_imports()
+        product['src_import_value'] =  secex_product_service.highest_import_value_by_origin()
 
         if len(product_id) == 6:
             product['pci'] = secex_product_service.pci()
@@ -71,20 +74,19 @@ def index(product_id):
             product['opp_gain_wld'] = secex_product_service.opp_gain_wld()
 
         if len(bra_id) != 9:
-            product.update(secex_product_service.municipality_with_more_exports())
-            product.update(secex_product_service.municipality_with_more_imports())
+            product['munic_name_export'] = secex_product_service.municipality_with_more_exports()
+            product['munic_export_value'] = secex_product_service.highest_export_value_by_municipality()
+            product['munic_name_import'] = secex_product_service.municipality_with_more_imports()
+            product['munic_import_value'] = secex_product_service.highest_import_value_by_municipality()
 
     else:
         secex_product_service = SecexProductService(product_id=product_id)
         product['munic_name_export'] = secex_product_service.municipality_with_more_exports()
         product['munic_export_value'] = secex_product_service.highest_export_value_by_municipality()
-
         product['munic_name_import'] = secex_product_service.municipality_with_more_imports()
         product['munic_import_value'] = secex_product_service.highest_import_value_by_municipality()
-
         product['dest_name_export'] = secex_product_service.destination_with_more_exports()
         product['dest_export_value'] = secex_product_service.highest_export_value_by_destination()
-
         product['src_name_import'] = secex_product_service.origin_with_more_imports()
         product['src_import_value'] = secex_product_service.highest_import_value_by_origin()
 

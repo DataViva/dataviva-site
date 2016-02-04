@@ -267,8 +267,7 @@ class ProductByLocation:
     def opp_gain_wld(self):
         return self.__secex_values__()['opp_gain_wld']
 
-
-    def destination_with_more_exports(self):
+    def __destination_with_more_exports__(self):
         ymbpw_query = Ymbpw.query.join(Wld).filter(
             Ymbpw.hs_id==self.product_id,
             Ymbpw.year==self.ymbpw_max_year_query,
@@ -277,20 +276,19 @@ class ProductByLocation:
             Ymbpw.month==0
         ).order_by(desc(Ymbpw.export_val)).limit(1)
 
-        ymbpw_wld_data = ymbpw_query.values(
-            Wld.name_pt,
-            Ymbpw.export_val
-        )
+        ymbpw_wld_data = ymbpw_query.one()
 
-        destination_with_more_exports = {}
+        return ymbpw_wld_data
 
-        for name_pt, export_val in ymbpw_wld_data:
-            destination_with_more_exports['dest_name_export'] = name_pt
-            destination_with_more_exports['dest_export_value'] = export_val
+    def destination_with_more_exports(self):
+        ymbpw = self.__destination_with_more_exports__()
+        return ymbpw.wld.name()
 
-        return destination_with_more_exports
+    def highest_export_value_by_destination(self):
+        ymbpw = self.__destination_with_more_exports__()
+        return ymbpw.export_val
 
-    def origin_with_more_imports(self):
+    def __origin_with_more_imports__(self):
         ymbpw_query = Ymbpw.query.join(Wld).filter(
             Ymbpw.hs_id==self.product_id,
             Ymbpw.year==self.ymbpw_max_year_query,
@@ -299,20 +297,19 @@ class ProductByLocation:
             Ymbpw.month==0
         ).order_by(desc(Ymbpw.import_val)).limit(1)
 
-        ymbpw_wld_data = ymbpw_query.values(
-            Wld.name_pt,
-            Ymbpw.import_val
-        )
+        ymbpw_wld_data = ymbpw_query.one()
 
-        origin_with_more_imports = {}
+        return ymbpw_wld_data
 
-        for name_pt, import_val in ymbpw_wld_data:
-            origin_with_more_imports['src_name_import'] = name_pt
-            origin_with_more_imports['src_import_value'] = import_val
+    def origin_with_more_imports(self):
+        ymbpw = self.__origin_with_more_imports__()
+        return ymbpw.wld.name()
 
-        return origin_with_more_imports
+    def highest_import_value_by_origin(self):
+        ymbpw = self.__origin_with_more_imports__()
+        return ymbpw.import_val
 
-    def municipality_with_more_exports(self):
+    def __municipality_with_more_exports__(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id==self.product_id,
             Ymbp.year==self.ymbp_max_year_query,
@@ -321,20 +318,19 @@ class ProductByLocation:
             Ymbp.month==0
         ).order_by(desc(Ymbp.export_val)).limit(1)
 
-        ymbp_bra_data = ymbp_query.values(
-            Bra.name_pt,
-            Ymbp.export_val
-        )
+        ymbp_bra_data = ymbp_query.one()
 
-        municipality_with_more_exports = {}
+        return ymbp_bra_data
 
-        for name_pt, export_val in ymbp_bra_data:
-            municipality_with_more_exports['munic_name_export'] = name_pt
-            municipality_with_more_exports['munic_export_value'] = export_val
+    def municipality_with_more_exports(self):
+        ymbp = self.__municipality_with_more_exports__()
+        return ymbp.bra.name()
 
-        return municipality_with_more_exports
+    def highest_export_value_by_municipality(self):
+        ymbp = self.__municipality_with_more_exports__()
+        return ymbp.export_val
 
-    def municipality_with_more_imports(self):
+    def __municipality_with_more_imports__(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id==self.product_id,
             Ymbp.year==self.ymbp_max_year_query,
@@ -343,15 +339,14 @@ class ProductByLocation:
             Ymbp.month==0
         ).order_by(desc(Ymbp.import_val)).limit(1)
 
-        ymbp_bra_data = ymbp_query.values(
-            Bra.name_pt,
-            Ymbp.import_val
-        )
+        ymbp_bra_data = ymbp_query.one()
 
-        municipality_with_more_imports = {}
+        return ymbp_bra_data
 
-        for name_pt, import_val in ymbp_bra_data:
-            municipality_with_more_imports['munic_name_import'] = name_pt
-            municipality_with_more_imports['munic_import_value'] = import_val
+    def municipality_with_more_imports(self):
+        ymbp = self.__municipality_with_more_imports__()
+        return ymbp.bra.name()
 
-        return municipality_with_more_imports
+    def highest_import_value_by_municipality(self):
+        ymbp = self.__municipality_with_more_imports__()
+        return ymbp.import_val
