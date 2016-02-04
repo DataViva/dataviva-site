@@ -46,8 +46,8 @@ def index():
     body = {
         'municipality_with_more_exports' : municipality_by_export_service.municipality_with_more_exports(),
         'highest_export_value_by_municipality' : municipality_by_export_service.highest_export_value_by_municipality(),
-        'municipality_with_more_imports' : product_by_import_service.municipality_with_more_imports(),
-        'highest_import_value_by_municipality' : product_by_import_service.highest_import_value_by_municipality(),
+        'municipality_with_more_imports' : municipality_by_import_service.municipality_with_more_imports(),
+        'highest_import_value_by_municipality' : municipality_by_import_service.highest_import_value_by_municipality(),
         'product_with_more_imports' : product_by_import_service.product_with_more_imports(),
         'highest_import_value_by_product' : product_by_import_service.highest_import_value_by_product(),
         'product_with_more_exports' : product_by_export_service.product_with_more_exports(),
@@ -59,4 +59,4 @@ def index():
         'world_trade_description' : 'World trade description.',
     }
 
-    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, trade=trade)
+    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body)
