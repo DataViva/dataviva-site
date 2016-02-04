@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
+from dataviva.api.attrs.services import Product as AttrsProductService
 from dataviva.api.secex.services import Product as SecexProductService
 
 
@@ -53,6 +54,11 @@ def index(product_id):
     #criar o name service na HS
     #verificar local pci
     #verificar as tabelas usadas em cada classe
+    #vericar imports
+
+    secex_product_service = SecexProductByLocationService(bra_id=bra_id, product_id=product_id)
+    product['name'] = secex_product_service.name()
+
 
     if bra_id:
         secex_product_service = SecexProductByLocationService(bra_id=bra_id, product_id=product_id)
