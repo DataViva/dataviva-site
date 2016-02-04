@@ -27,7 +27,7 @@ def index(product_id):
 
     bra_id = request.args.get('bra_id')
 
-    #None database fields must be treated to do math operations
+    #None database fields must be treated (/05?bra_id=2ce020008)
     #and templates with no data shall be omitted...
 
     #Vars to do tests:
@@ -52,9 +52,6 @@ def index(product_id):
 
     header = {}
     body = {}
-
-    #mudar nomes das variaveis, querys
-    #implementar heranca para os metodos do service iguais
 
     attrs_product_service = AttrsProductService(product_id=product_id)
     header['name'] = attrs_product_service.name()
