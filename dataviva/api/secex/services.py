@@ -22,63 +22,46 @@ class Product:
                 Ymp.month==0
             ).limit(1)
 
-            secex_data = ymp_query.values(
-                Ymp.year,
-                Ymp.export_val,
-                Ymp.import_val,
-                Ymp.export_kg,
-                Ymp.import_kg
-            )
+            secex_data = ymp_query.one()
 
-            secex_values = {}
-
-            for year, export_val, import_val, export_kg, import_kg in secex_data:
-                export_val = export_val or 0
-                import_val = import_val or 0
-                export_kg = export_kg or 0
-                import_kg = import_kg or 0
-
-                secex_values['year'] = year
-                secex_values['export_val'] = export_val
-                secex_values['import_val'] = import_val
-                secex_values['export_kg'] = export_kg
-                secex_values['import_kg'] = import_kg
-                secex_values['trade_balance'] = export_val - import_val
-
-                if export_val == 0:
-                    secex_values['export_net_weight'] = None
-                else:
-                    secex_values['export_net_weight'] = export_kg / export_val
-
-                if import_val == 0:
-                    secex_values['import_net_weight'] = None
-                else:
-                    secex_values['import_net_weight'] = import_kg / import_val
-
-            self._secex_values = secex_values
-
-        return self._secex_values
+        return secex_data
 
     def year(self):
-        return self.__secex_values__()['year']
+        secex_data = self.__secex_values__()
+        return secex_data.year
 
     def export_val(self):
-        return self.__secex_values__()['export_val']
+        secex_data = self.__secex_values__()
+        return secex_data.export_val
 
     def import_val(self):
-        return self.__secex_values__()['import_val']
+        secex_data = self.__secex_values__()
+        return secex_data.import_val
 
     def export_kg(self):
-        return self.__secex_values__()['export_kg']
+        secex_data = self.__secex_values__()
+        return secex_data.export_kg
 
     def trade_balance(self):
-        return self.__secex_values__()['trade_balance']
+        secex_data = self.__secex_values__()
+        secex_data.export_val = secex_data.export_val or 0
+        secex_data.import_val = secex_data.import_val or 0
+
+        return secex_data.export_val - secex_data.import_val
 
     def export_net_weight(self):
-        return self.__secex_values__()['export_net_weight']
+        secex_data = self.__secex_values__()
+        secex_data.export_kg = secex_data.export_kg or 0
+        secex_data.export_val = secex_data.export_val or 0
+
+        return secex_data.export_kg / secex_data.export_val
 
     def import_net_weight(self):
-        return self.__secex_values__()['import_net_weight']
+        secex_data = self.__secex_values__()
+        secex_data.import_kg = secex_data.import_kg or 0
+        secex_data.import_val = secex_data.import_val or 0
+
+        return secex_data.import_kg / secex_data.import_val
 
     def __destination_with_more_exports__(self):
         ympw_query = Ympw.query.join(Wld).filter(
