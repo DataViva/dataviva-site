@@ -43,7 +43,7 @@ def index():
         'unity_weight_import_price': trade_partner_service.unity_weight_import_price()
     }
 
-    body {
+    body = {
         'municipality_with_more_exports' : municipality_by_export_service.municipality_with_more_exports(),
         'highest_export_value_by_municipality' : municipality_by_export_service.highest_export_value_by_municipality(),
         'municipality_with_more_imports' : product_by_import_service.municipality_with_more_imports(),
