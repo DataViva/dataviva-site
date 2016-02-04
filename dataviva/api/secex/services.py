@@ -122,7 +122,7 @@ class Product:
 
         return origin_with_more_import
 
-    def municipality_with_more_exports(self):
+    def __municipality_with_more_exports__(self):
         ymbp_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id==self.product_id,
             Ymbp.year==self.ymbp_max_year_query,
@@ -130,18 +130,17 @@ class Product:
             Ymbp.month==0
         ).order_by(desc(Ymbp.export_val)).limit(1)
 
-        ymbp_bra_data = ymbp_query.values(
-            Bra.name_pt,
-            Ymbp.export_val
-        )
+        ymbp_bra_data = ymbp_query.one()
 
-        municipality_with_more_exports = {}
+        return ymbp_bra_data
 
-        for name_pt, export_val in ymbp_bra_data:
-            municipality_with_more_exports['munic_name_export'] = name_pt
-            municipality_with_more_exports['munic_export_value'] = export_val
+    def municipality_with_more_exports(self):
+        ymbp = self.__municipality_with_more_exports__()
+        return ymbp.bra.name()
 
-        return municipality_with_more_exports
+    def highest_export_value_by_municipality(self):
+        ymbp = self.__municipality_with_more_exports__()
+        return ymbp.export_val
 
     def __municipality_with_more_imports__(self):
         ymbp_query = Ymbp.query.join(Bra).filter(

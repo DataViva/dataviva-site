@@ -76,7 +76,8 @@ def index(product_id):
 
     else:
         secex_product_service = SecexProductService(product_id=product_id)
-        product.update(secex_product_service.municipality_with_more_exports())
+        product['munic_name_export'] = secex_product_service.municipality_with_more_exports()
+        product['munic_export_value'] = secex_product_service.highest_export_value_by_municipality()
 
         product['munic_name_import'] = secex_product_service.municipality_with_more_imports()
         product['munic_import_value'] = secex_product_service.highest_import_value_by_municipality()
