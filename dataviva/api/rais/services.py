@@ -9,6 +9,7 @@ class Occupation:
         
         self.occupation_id = occupation_id
         self._data = None 
+        self._municipality_with_more_jobs = None
 
         year=0
 
@@ -60,22 +61,33 @@ class Occupation:
     def total_establishments(self):
         return self.__rais_data__()['total_establishments']  
 
-    def municipality_with_more_jobs(self):
 
-        ybo_municipality_num_jobs_generator = Ybo.query.join(Bra).filter(
-            Ybo.cbo_id == self.occupation_id,
-            Ybo.year == self.year,
-            Ybo.bra_id_len == 9)\
-        .order_by(desc(Ybo.num_jobs)).limit(1)\
-        .values(Bra.name_pt,
-                Ybo.num_jobs)
+    def __municipality_with_more_jobs__(self):
 
-        municipality_with_more_jobs = {}
-        for name_pt, num_jobs in ybo_municipality_num_jobs_generator:
-            municipality_with_more_jobs['municipality_with_more_jobs'] = name_pt
+        if not self._municipality_with_more_jobs: 
+            
+            ybo_municipality_num_jobs_generator = Ybo.query.join(Bra).filter(
+                Ybo.cbo_id == self.occupation_id,
+                Ybo.year == self.year,
+                Ybo.bra_id_len == 9)\
+            .order_by(desc(Ybo.num_jobs)).limit(1)\
+            .values(Bra.name_pt,
+                    Ybo.num_jobs)
+    
+            municipality_with_more_jobs = {}
+            for name_pt, num_jobs in ybo_municipality_num_jobs_generator:
+                municipality_with_more_jobs['municipality_with_more_jobs'] = name_pt
             municipality_with_more_jobs['municipality_with_more_jobs_value'] = num_jobs
 
-        return municipality_with_more_jobs
+            self._municipality_with_more_jobs = municipality_with_more_jobs
+
+        return self._municipality_with_more_jobs
+
+    def municipality_with_more_jobs(self):
+        return self.__municipality_with_more_jobs__()['municipality_with_more_jobs']
+
+    def num_jobs_of_municipality_with_more_jobs (self):
+        return self.__municipality_with_more_jobs__()['municipality_with_more_jobs_value']
 
 
     def municipality_with_biggest_wage_average(self):
