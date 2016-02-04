@@ -83,16 +83,16 @@ class Industry :
 
     def __occ_with_more_wage_avg__(self):
         if not self.occ_wage_avg :
-            occupation_wage_avg_generaitor = Yio.query.join(Cbo).filter(
+            occupation_wage_avg_obj = Yio.query.join(Cbo).filter(
                 Yio.cbo_id == Cbo.id,
                 Yio.cnae_id == self.cnae_id,
                 Yio.cbo_id_len == 4,                 
                 Yio.year == self.yio_max_year_br 
-                ).order_by(desc(Yio.wage_avg)).limit(1).values(Cbo.name_en, Cbo.name_pt, Yio.wage_avg)
+                ).order_by(desc(Yio.wage_avg)).limit(1).one()
 
-            for  name_en, name_pt, value in occupation_wage_avg_generaitor:        
-                self.occ_wage_avg['occ_with_more_wage_avg_name'] = name_pt
-                self.occ_wage_avg['occ_with_more_wage_avg_value'] = value
+                  
+            self.occ_wage_avg['occ_with_more_wage_avg_name'] = occupation_wage_avg_obj.cbo.name()
+            self.occ_wage_avg['occ_with_more_wage_avg_value'] = occupation_wage_avg_obj.wage_avg
 
         return self.occ_wage_avg     
 
