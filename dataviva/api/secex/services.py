@@ -20,7 +20,7 @@ class TradePartner:
 
     def __secex__(self):
         if not self._secex:
-            secex_data = self.secex_query.one()
+            secex_data = self.secex_query.first_or_404()
             self._secex = secex_data
         return self._secex
 
