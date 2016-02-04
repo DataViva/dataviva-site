@@ -161,7 +161,7 @@ class Product:
         return ymbp.import_val
 
 
-class ProductByLocation:
+class ProductByLocation(Product):
     def __init__(self, bra_id, product_id):
         self.bra_id = bra_id
         self.product_id = product_id
@@ -236,27 +236,6 @@ class ProductByLocation:
             self._secex_values = secex_values
 
         return self._secex_values
-
-    def year(self):
-        return self.__secex_values__()['year']
-
-    def import_val(self):
-        return self.__secex_values__()['export_val']
-
-    def export_val(self):
-        return self.__secex_values__()['import_val']
-
-    def export_kg(self):
-        return self.__secex_values__()['export_kg']
-
-    def trade_balance(self):
-        return self.__secex_values__()['trade_balance']
-
-    def export_net_weight(self):
-        return self.__secex_values__()['export_net_weight']
-
-    def import_net_weight(self):
-        return self.__secex_values__()['import_net_weight']
 
     def rca_wld(self):
         return self.__secex_values__()['rca_wld']
