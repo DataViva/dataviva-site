@@ -1,4 +1,4 @@
-from dataviva.api.attrs.models import Ybs, Stat
+from dataviva.api.attrs.models import Ybs, Stat, Hs
 from dataviva import db
 from sqlalchemy import func
 
@@ -27,3 +27,12 @@ class Location:
             }
 
         return statistics
+
+
+class Product:
+    def __init__(self, product_id):
+        self.product_id = product_id
+
+    def name(self):
+        name = Hs.query.filter(Hs.id == self.product_id).first().name()
+        return name
