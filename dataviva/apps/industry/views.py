@@ -28,6 +28,8 @@ def index(cnae_id):
     bra_id = request.args.get('bra_id')
 
     industry = {}
+    header = {}
+    body = {}
 
     industry = { 
         'background_image':  unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
@@ -41,36 +43,36 @@ def index(cnae_id):
 
     if bra_id :
         rais_industry_service = RaisIndustryByLocationService(bra_id=bra_id, cnae_id=cnae_id)
-        industry['rca'] = rais_industry_service.rca()
-        industry['distance'] = rais_industry_service.distance()
-        industry['opportunity_gain'] = rais_industry_service.opportunity_gain()
+        header['rca'] = rais_industry_service.rca()
+        header['distance'] = rais_industry_service.distance()
+        header['opportunity_gain'] = rais_industry_service.opportunity_gain()
     else:
         rais_industry_service = RaisIndustryService(cnae_id=cnae_id)
    
-    industry['name'] = rais_industry_service.get_name() 
-    industry['year'] = rais_industry_service.get_year()
+    header['name'] = rais_industry_service.get_name() 
+    header['year'] = rais_industry_service.get_year()
     
-    industry['average_monthly_income'] = rais_industry_service.average_monthly_income()
-    industry['salary_mass'] = rais_industry_service.salary_mass()
-    industry['num_jobs'] = rais_industry_service.num_jobs()
-    industry['num_establishments'] = rais_industry_service.num_establishments()
+    header['average_monthly_income'] = rais_industry_service.average_monthly_income()
+    header['salary_mass'] = rais_industry_service.salary_mass()
+    header['num_jobs'] = rais_industry_service.num_jobs()
+    header['num_establishments'] = rais_industry_service.num_establishments()
 
     
-    industry['occ_with_more_number_jobs_name'] = rais_industry_service.get_occ_with_more_number_jobs_name()
-    industry['occ_with_more_number_jobs_value'] = rais_industry_service.get_occ_with_more_number_jobs_value()
+    body['occ_with_more_number_jobs_name'] = rais_industry_service.get_occ_with_more_number_jobs_name()
+    body['occ_with_more_number_jobs_value'] = rais_industry_service.get_occ_with_more_number_jobs_value()
     
-    industry['occ_with_more_wage_avg_name'] = rais_industry_service.get_occ_with_more_wage_avg_name()
-    industry['occ_with_more_wage_avg_value'] = rais_industry_service.get_occ_with_more_wage_avg_value()
+    body['occ_with_more_wage_avg_name'] = rais_industry_service.get_occ_with_more_wage_avg_name()
+    body['occ_with_more_wage_avg_value'] = rais_industry_service.get_occ_with_more_wage_avg_value()
 
     if bra_id == None  or len(bra_id) != 9 :
-        industry['municipality_with_more_num_jobs_value'] = rais_industry_service.get_municipality_with_more_num_jobs_value()
-        industry['municipality_with_more_num_jobs_name'] = rais_industry_service.get_municipality_with_more_num_jobs_name()
+        body['municipality_with_more_num_jobs_value'] = rais_industry_service.get_municipality_with_more_num_jobs_value()
+        body['municipality_with_more_num_jobs_name'] = rais_industry_service.get_municipality_with_more_num_jobs_name()
 
-        industry['municipality_with_more_wage_avg_name'] = rais_industry_service.get_municipality_with_more_wage_avg_name()
-        industry['municipality_with_more_wage_avg_value'] = rais_industry_service.get_municipality_with_more_wage_avg_value()
+        body['municipality_with_more_wage_avg_name'] = rais_industry_service.get_municipality_with_more_wage_avg_name()
+        body['municipality_with_more_wage_avg_value'] = rais_industry_service.get_municipality_with_more_wage_avg_value()
              
             
-    return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
+    return render_template('industry/index.html', body_class='perfil-estado', header=header, body=body, industry=industry)
 
 
 
