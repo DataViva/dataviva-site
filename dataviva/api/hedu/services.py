@@ -15,8 +15,6 @@ class University:
             Yu.university_id == self.university_id, 
             Yu.year == self.max_year_query)
 
-        self.yuc_max_year_query = db.session.query(func.max(Yuc.year))
-
     def __hedu__(self):
         if not self._hedu:
             hedu_data = self.hedu_query.one()
@@ -25,7 +23,7 @@ class University:
         return self._hedu
 
     def name(self):
-        return self.__hedu__().university.name_pt
+        return self.__hedu__().university.name()
 
     def enrolled(self):
         return self.__hedu__().enrolled
@@ -42,65 +40,53 @@ class University:
     def year(self):
         return self.__hedu__().year
 
-    def major_with_more_enrollments(self):
+class UniversityMajorByEnrollments(University):
 
-        yuc_enrolled_query = Yuc.query.join(Course_hedu).filter(
+    def __init__(self, university_id):
+        University.__init__(self, university_id)
+        self.max_year_query = db.session.query(func.max(Yuc.year))
+        self.hedu_query = Yuc.query.join(Course_hedu).filter(
             Yuc.university_id == self.university_id,
-            Yuc.year == self.yuc_max_year_query,
+            Yuc.year == self.max_year_query,
             func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.enrolled)).limit(1)
 
-        yuc_enrolled_data = yuc_enrolled_query.values(
-            Course_hedu.name_pt,
-            Yuc.enrolled,
-            Course_hedu.desc_pt
-        )
+    def major_with_more_enrollments(self):
+        return self.__hedu__().course_hedu.name()
 
-        major = {}
+    def highest_enrollment_number_by_major(self):
+        return self.__hedu__().enrolled
 
-        for name_pt, enrolled, profile in yuc_enrolled_data:
-            major['name'] = name_pt
-            major['value'] = enrolled
-            major['profile'] = profile
+class UniversityMajorByEntrants(University):
 
-        return major
-
-    def major_with_more_entrants(self):
-        yuc_entrants_query = Yuc.query.join(Course_hedu).filter(
+    def __init__(self, university_id):
+        University.__init__(self, university_id)
+        self.max_year_query = db.session.query(func.max(Yuc.year))
+        self.hedu_query = Yuc.query.join(Course_hedu).filter(
             Yuc.university_id == self.university_id,
-            Yuc.year == self.yuc_max_year_query,
+            Yuc.year == self.max_year_query,
             func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.entrants)).limit(1)
 
-        yuc_entrants_data = yuc_entrants_query.values(
-            Course_hedu.name_pt,
-            Yuc.entrants
-        )
+    def major_with_more_entrants(self):
+        return self.__hedu__().course_hedu.name()
 
-        major = {}
+    def highest_entrant_number_by_major(self):
+        return self.__hedu__().entrants
 
-        for name_pt, entrants in yuc_entrants_data:
-            major['name'] = name_pt
-            major['value'] = entrants
-
-        return major
-
-    def major_with_more_graduates(self):
-        yuc_graduates_query = Yuc.query.join(Course_hedu).filter(
+class UniversityMajorByGraduates(University):
+    def __init__(self, university_id):
+        University.__init__(self, university_id)
+        self.max_year_query = db.session.query(func.max(Yuc.year))
+        self.hedu_query = Yuc.query.join(Course_hedu).filter(
             Yuc.university_id == self.university_id,
-            Yuc.year == self.yuc_max_year_query,
+            Yuc.year == self.max_year_query,
             func.length(Yuc.course_hedu_id) == 6).order_by(desc(Yuc.graduates)).limit(1)
 
-        yuc_graduates_data = yuc_graduates_query.values(
-            Course_hedu.name_pt,
-            Yuc.graduates
-        )
+    def major_with_more_graduates(self):
+        return self.__hedu__().course_hedu.name()
 
-        major = {}
+    def highest_graduate_number_by_major(self):
+        return self.__hedu__().graduates
 
-        for name_pt, graduates in yuc_graduates_data:
-            major['name'] = name_pt
-            major['value'] = graduates
-
-        return major
 
 class Major:
     def __init__ (self, course_hedu_id):

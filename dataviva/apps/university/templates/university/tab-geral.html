@@ -38,8 +38,8 @@
                                     Principal Curso por Número de Alunos Matriculados
                                 </th>
                                 <td>
-                                    <p class="label">{{ major.major_with_more_enrollments.name }}</p>
-                                    <strong class="counter">{{ major.major_with_more_enrollments.value }}</strong> <span>mil</span>
+                                    <p class="label">{{ major.major_with_more_enrollments }}</p>
+                                    <strong class="counter">{{ major.highest_enrollment_number_by_major }}</strong> <span>mil</span>
                                 </td>
                             </tr>
                             <tr>
@@ -47,8 +47,8 @@
                                     Principal Curso por Número de Alunos Ingressantes
                                 </th>
                                 <td>
-                                    <p class="label">{{ major.major_with_more_entrants.name }}</p>
-                                    <strong class="counter">{{ major.major_with_more_entrants.value }}</strong>
+                                    <p class="label">{{ major.major_with_more_entrants }}</p>
+                                    <strong class="counter">{{ major.highest_entrant_number_by_major }}</strong>
                                 </td>
                             </tr>
                             <tr>
@@ -56,8 +56,8 @@
                                     Principal Curso por Número de Alunos Concluintes
                                 </th>
                                 <td>
-                                    <p class="label">{{ major.major_with_more_graduates.name }}</p>
-                                    <strong class="counter">{{ major.major_with_more_graduates.value }}</strong>
+                                    <p class="label">{{ major.major_with_more_graduates }}</p>
+                                    <strong class="counter">{{ major.highest_graduate_number_by_major }}</strong>
                                 </td>
                             </tr>
                         </tbody>
