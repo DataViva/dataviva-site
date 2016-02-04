@@ -70,12 +70,12 @@ class Occupation:
         .values(Bra.name_pt,
                 Ybo.num_jobs)
 
-        body = {}
+        municipality_with_more_jobs = {}
         for name_pt, num_jobs in ybo_municipality_num_jobs_generator:
-            body['municipality_with_more_jobs'] = name_pt
-            body['municipality_with_more_jobs_value'] = num_jobs
+            municipality_with_more_jobs['municipality_with_more_jobs'] = name_pt
+            municipality_with_more_jobs['municipality_with_more_jobs_value'] = num_jobs
 
-        return body
+        return municipality_with_more_jobs
 
 
     def municipality_with_biggest_wage_average(self):
@@ -88,12 +88,12 @@ class Occupation:
         .values(Bra.name_pt,
                 Ybo.wage_avg)
 
-        body = {}
+        municipality_with_biggest_wage_average = {}
         for name_pt, wage_avg in ybo_municipality_wage_avg_generator:
-            body['municipality_with_bigger_wage_avg'] = name_pt
-            body['municipality_with_bigger_wage_avg_value'] = wage_avg  
+            municipality_with_biggest_wage_average['municipality_with_biggest_wage_avg'] = name_pt
+            municipality_with_biggest_wage_average['municipality_with_biggest_wage_avg_value'] = wage_avg  
 
-        return body
+        return municipality_with_biggest_wage_average
 
     def activity_with_more_jobs(self):
 
@@ -105,12 +105,12 @@ class Occupation:
         .values(Cnae.name_pt,
                 Yio.num_jobs)
 
-        body = {}
+        activity_with_more_jobs = {}
         for name_pt, num_jobs in yio_activity_num_jobs_generator:
-            body['activity_with_more_jobs'] = name_pt
-            body['activity_with_more_jobs_value'] = num_jobs
+            activity_with_more_jobs['activity_with_more_jobs'] = name_pt
+            activity_with_more_jobs['activity_with_more_jobs_value'] = num_jobs
 
-        return body
+        return activity_with_more_jobs
 
     def activity_with_biggest_wage_average(self):
 
@@ -122,12 +122,12 @@ class Occupation:
         .values(Cnae.name_pt,
                 Yio.wage_avg)
 
-        body = {}
+        activity_with_biggest_wage_avg = {}
         for name_pt, wage_avg in yio_activity_wage_avg_generator:
-            body['activity_with_biggest_wage_avg'] = name_pt
-            body['activity_with_biggest_wage_avg_value'] = wage_avg  
+            activity_with_biggest_wage_avg['activity_with_biggest_wage_avg'] = name_pt
+            activity_with_biggest_wage_avg['activity_with_biggest_wage_avg_value'] = wage_avg  
 
-        return body   
+        return activity_with_biggest_wage_avg   
 
 
 
@@ -207,8 +207,8 @@ class OccupationByLocation(Occupation):
 
         municipality_with_bigger_wage_avg = {}
         for name_pt, wage_avg in ybo_municipality_wage_avg_generator:
-            municipality_with_bigger_wage_avg['municipality_with_bigger_wage_avg'] = name_pt
-            municipality_with_bigger_wage_avg['municipality_with_bigger_wage_avg_value'] = wage_avg  
+            municipality_with_bigger_wage_avg['municipality_with_biggest_wage_avg'] = name_pt
+            municipality_with_bigger_wage_avg['municipality_with_biggest_wage_avg_value'] = wage_avg  
 
         return municipality_with_bigger_wage_avg 
 
