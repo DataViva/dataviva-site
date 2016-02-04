@@ -7,7 +7,7 @@ from sqlalchemy import func
 class Basic_course:
     def __init__(self, course_sc_id, bra_id):
         self._statistics = None
-        
+
         self.course_sc_id = course_sc_id
         self.bra_id = bra_id
         self.ybc_max_year_subquery = db.session.query(
@@ -47,7 +47,7 @@ class Basic_course:
                 Ybc_sc.bra_id.like(str(self.bra_id)+'%'),
                 Ybc_sc.bra_id_len == 9) \
                 .order_by(Ybc_sc.enrolled.desc()).limit(1)
-         
+
             course_data = course_query.values(Course_sc.name_pt,
                                         Course_sc.desc_pt,
                                         Ybc_sc.classes,
@@ -75,7 +75,7 @@ class Basic_course:
             total_schools_query = Ysc.query.filter(
                 Ysc.course_sc_id == self.course_sc_id,
                 Ysc.year == self.ysc_max_year_subquery)
-            
+
             most_enrolled_school_query = Ysc.query.join(School).filter(
                 Ysc.course_sc_id == self.course_sc_id,
                 Ysc.year == self.ysc_max_year_subquery) \
@@ -122,6 +122,9 @@ class Basic_course:
             for name_pt, enrolled in city_data:
                 basic_course['city_name'] = name_pt
                 basic_course['city_enrolled'] = enrolled
+        else:
+            basic_course['city_name'] = None
+            basic_course['city_enrolled'] = None
 
         self._statistics = basic_course
 
@@ -147,10 +150,10 @@ class Basic_course:
         total_enrolled_number = self.__statistics__()['course_enrolled']
 
         return total_enrolled_number / total_class_number
-    
+
     def course_year(self):
         return self.__statistics__()['course_year']
-    
+
     def schools_count(self):
         return self.__statistics__()['schools_count']
 
