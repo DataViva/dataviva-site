@@ -34,7 +34,7 @@ class Location:
 
         return self._statistics
 
-     def gdp(self):
+    def gdp(self):
         return self.__statistics__()['gdp']
 
 
@@ -49,4 +49,4 @@ class Product:
         return self._name
 
     def name(self):
-        return self.__product_name__()['name']
+        return self.__product_name__()
