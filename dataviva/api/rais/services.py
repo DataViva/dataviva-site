@@ -152,13 +152,11 @@ class Occupation:
                 Yio.year == self.year,
                 Yio.cnae_id_len == 6)\
             .order_by(desc(Yio.wage_avg)).limit(1)\
-            .values(Cnae.name_pt,
-                    Yio.wage_avg)
+            .one()
 
             activity_with_biggest_wage_avg = {}
-            for name_pt, wage_avg in yio_activity_wage_avg_generator:
-                activity_with_biggest_wage_avg['activity_with_biggest_wage_avg'] = name_pt
-                activity_with_biggest_wage_avg['activity_with_biggest_wage_avg_value'] = wage_avg  
+            activity_with_biggest_wage_avg['activity_with_biggest_wage_avg'] = yio_activity_wage_avg_generator.cnae.name()
+            activity_with_biggest_wage_avg['activity_with_biggest_wage_avg_value'] = yio_activity_wage_avg_generator.wage_avg  
 
             self._activity_with_biggest_wage_average = activity_with_biggest_wage_avg
 
