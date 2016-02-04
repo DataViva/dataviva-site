@@ -17,13 +17,13 @@
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">TOTAL DE EMPREGOS</p>
                     <div class="number">
-                        <strong class="counter">{{industry.total_jobs}}</strong><small>milhões</small>
+                        <strong class="counter">{{industry.num_jobs}}</strong><small>milhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">TOTAL DE ESTABELECIMENTOS</p>
                     <div class="number">
-                        <strong class="counter">{{industry.total_establishments}}</strong><small>milhões</small>
+                        <strong class="counter">{{industry.num_establishments}}</strong><small>milhões</small>
                     </div>
                 </div>
 
@@ -32,7 +32,7 @@
                     <div class="col-xs-15 col-sm-2 item">
                         <p class="label">RCA DOMÉSTICO</p>
                         <div class="number">
-                            <strong class="counter">{{industry.rca_domestic}}</strong><small>milhões</small>
+                            <strong class="counter">{{industry.rca}}</strong><small>milhões</small>
                         </div>
                     </div>
                     <div class="col-xs-15 col-sm-2 item">
@@ -68,8 +68,8 @@
                                     Ocupação com maior número de empregos
                                 </th>
                                 <td>
-                                    <p class="label">{{industry.occupation_max_number_jobs_name}}</p>
-                                    USD <strong class="counter">{{industry.occupation_max_number_jobs_value}}</strong> <span>bilhões</span>
+                                    <p class="label">{{industry.occ_with_more_number_jobs_name}}</p>
+                                    USD <strong class="counter">{{industry.occ_with_more_number_jobs_value}}</strong> <span>bilhões</span>
                                 </td>
                             </tr>
                             {% if industry.county %}
@@ -78,8 +78,8 @@
                                         Município com maior número de empregos
                                     </th>
                                     <td>
-                                        <p class="label">{{industry.county_max_number_jobs_name}}</p>
-                                        USD <strong class="counter">{{industry.county_max_number_jobs_value}}</strong> <span>bilhões</span>
+                                        <p class="label">{{industry.municipality_with_more_num_jobs_name}}</p>
+                                        USD <strong class="counter">{{industry.municipality_with_more_num_jobs_value}}</strong> <span>bilhões</span>
                                     </td>
                                 </tr>
                             {% endif %}
@@ -88,8 +88,8 @@
                                     Ocupação com maior renda média mensal
                                 </th>
                                 <td>
-                                    <p class="label">{{industry.occupation_max_monthly_income_name}}</p>
-                                    USD <strong class="counter">{{industry.occupation_max_monthly_income_value}}</strong> <span>bilhões</span>
+                                    <p class="label">{{industry.occ_with_more_wage_avg_name}}</p>
+                                    USD <strong class="counter">{{industry.occ_with_more_wage_avg_value}}</strong> <span>bilhões</span>
                                 </td>
                             </tr>
                             {% if industry.county %}
@@ -98,8 +98,8 @@
                                         Município com maior renda média mensal
                                     </th>
                                     <td>
-                                        <p class="label">{{industry.county_max_monthly_income_name}}</p>
-                                        USD <strong class="counter">{{industry.county_max_monthly_income_value}}</strong> <span>bilhões</span>
+                                        <p class="label">{{industry.municipality_with_more_wage_avg_name}}</p>
+                                        USD <strong class="counter">{{industry.municipality_with_more_wage_avg_value}}</strong> <span>bilhões</span>
                                     </td>
                                 </tr>
                             {% endif %}

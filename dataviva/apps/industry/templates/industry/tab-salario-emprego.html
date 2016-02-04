@@ -33,30 +33,30 @@
                     <tbody>
                         <tr>
                             <td>
-                                <p class="label">{{industry.occupation_max_number_jobs_name}}</p>
+                                <p class="label">{{industry.occ_with_more_number_jobs_name}}</p>
                                 <div class="number">
-                                    USD <strong class="counter">{{industry.occupation_max_number_jobs_value}}</strong><span>B</span>
+                                    USD <strong class="counter">{{industry.occ_with_more_number_jobs_value}}</strong><span>B</span>
                                 </div>
                             </td>
                             {%if industry.county %}
                                 <td>
-                                    <p class="label">{{industry.county_max_number_jobs_name}}</p>
+                                    <p class="label">{{industry.municipality_with_more_num_jobs_name}}</p>
                                     <div class="number">
-                                        USD <strong class="counter">{{industry.county_max_number_jobs_value}}</strong><span>B</span>
+                                        USD <strong class="counter">{{industry.municipality_with_more_num_jobs_value}}</strong><span>B</span>
                                     </div>
                                 </td>
                             {% endif %}    
                             <td>
-                                <p class="label">{{industry.occupation_max_monthly_income_name}}</p>
+                                <p class="label">{{industry.occ_with_more_wage_avg_name}}</p>
                                 <div class="number">
-                                    USD <strong class="counter">{{industry.occupation_max_monthly_income_value}}</strong><span>B</span>
+                                    USD <strong class="counter">{{industry.occ_with_more_wage_avg_value}}</strong><span>B</span>
                                 </div>
                             </td>
                             {%if industry.county %}
                                 <td>
-                                    <p class="label">{{industry.county_max_monthly_income_name}}</p>
+                                    <p class="label">{{industry.municipality_with_more_wage_avg_name}}</p>
                                     <div class="number">
-                                        USD <strong class="counter">{{industry.county_max_monthly_income_value}}</strong><span>B</span>
+                                        USD <strong class="counter">{{industry.municipality_with_more_wage_avg_value}}</strong><span>B</span>
                                     </div>
                                 </td>
                             {% endif %}

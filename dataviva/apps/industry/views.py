@@ -25,7 +25,7 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
  
-    bra_id = None  #'4mg000000' # Alfredo Vasconcelos
+    bra_id = '4mg' # Alfredo Vasconcelos
     cnae_id = 'g47113' #supermarkets
     industry = {}
 
@@ -44,7 +44,7 @@ def index():
         
     if bra_id :
         rais_industry_service = RaisIndustryByLocationService(bra_id=bra_id, cnae_id=cnae_id)
-        industry['rca_domestic'] = rais_industry_service.rca()
+        industry['rca'] = rais_industry_service.rca()
         industry['distance'] = rais_industry_service.distance()
         industry['opportunity_gain'] = rais_industry_service.opportunity_gain()
 
@@ -56,8 +56,8 @@ def index():
     
     industry['average_monthly_income'] = rais_industry_service.average_monthly_income()
     industry['salary_mass'] = rais_industry_service.salary_mass()
-    industry['total_jobs'] = rais_industry_service.num_jobs()
-    industry['total_establishments'] = rais_industry_service.num_establishments()
+    industry['num_jobs'] = rais_industry_service.num_jobs()
+    industry['num_establishments'] = rais_industry_service.num_establishments()
 
     industry.update(rais_industry_service.get_occ_with_more_number_jobs())
     industry.update(rais_industry_service.get_occ_with_more_wage_avg())

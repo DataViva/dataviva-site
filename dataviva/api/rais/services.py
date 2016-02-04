@@ -32,8 +32,8 @@ class Industry :
             for  wage, num_jobs, num_est, wage_avg in headers_generator:        
                 self.industry_headers['average_monthly_income'] = wage_avg
                 self.industry_headers['salary_mass'] = wage
-                self.industry_headers['total_jobs'] = num_jobs
-                self.industry_headers['total_establishments'] = num_est
+                self.industry_headers['num_jobs'] = num_jobs
+                self.industry_headers['num_establishments'] = num_est
 
         return self.industry_headers
 
@@ -44,10 +44,10 @@ class Industry :
         return self.__rais_values__()['salary_mass']
 
     def num_jobs(self):
-        return self.__rais_values__()['total_jobs']
+        return self.__rais_values__()['num_jobs']
 
     def num_establishments(self):
-        return self.__rais_values__()['total_establishments'] 
+        return self.__rais_values__()['num_establishments'] 
 
     
     #-----
@@ -62,8 +62,8 @@ class Industry :
 
         industry = {}
         for  name_en, name_pt, value in occupation_jobs_generaitor:        
-            industry['occupation_max_number_jobs_name'] = name_pt
-            industry['occupation_max_number_jobs_value'] = value  
+            industry['occ_with_more_number_jobs_name'] = name_pt
+            industry['occ_with_more_number_jobs_value'] = value  
 
         return industry   
 
@@ -80,8 +80,8 @@ class Industry :
 
         industry = {}
         for  name_en, name_pt, value in occupation_wage_avg_generaitor:        
-            industry['occupation_max_monthly_income_name'] = name_pt
-            industry['occupation_max_monthly_income_value'] = value
+            industry['occ_with_more_wage_avg_name'] = name_pt
+            industry['occ_with_more_wage_avg_value'] = value
 
         return industry     
 
@@ -98,8 +98,8 @@ class Industry :
     
         industry = {}
         for name_en, name_pt, num_jobs in county_jobs_generaitor:        
-            industry['county_max_number_jobs_name'] = name_pt
-            industry['county_max_number_jobs_value'] = num_jobs
+            industry['municipality_with_more_num_jobs_name'] = name_pt
+            industry['municipality_with_more_num_jobs_value'] = num_jobs
 
         return industry
 
@@ -116,8 +116,8 @@ class Industry :
         
         industry = {}
         for  name_en, name_pt, wage_avg in county_wage_avg_generaitor:        
-            industry['county_max_monthly_income_name'] = name_pt
-            industry['county_max_monthly_income_value'] =  wage_avg    
+            industry['municipality_with_more_wage_avg_name'] = name_pt
+            industry['municipality_with_more_wage_avg_value'] =  wage_avg    
         return industry
 
 
@@ -153,16 +153,16 @@ class IndustryByLocation(Industry) :
             for wage, num_jobs, num_est, wage_avg, rca, distance, opp_gain in headers_generate:
                self.industry_headers['average_monthly_income'] = wage_avg
                self.industry_headers['salary_mass'] = wage
-               self.industry_headers['total_jobs'] = num_jobs
-               self.industry_headers['total_establishments'] =  num_est
-               self.industry_headers['rca_domestic'] =  rca
+               self.industry_headers['num_jobs'] = num_jobs
+               self.industry_headers['num_establishments'] =  num_est
+               self.industry_headers['rca'] =  rca
                self.industry_headers['distance'] =  distance
                self.industry_headers['opportunity_gain'] =  opp_gain          
 
         return self.industry_headers     
 
     def rca(self):
-        return self.__rais_values__()['rca_domestic']
+        return self.__rais_values__()['rca']
 
     def distance(self):
         return self.__rais_values__()['distance']
@@ -184,8 +184,8 @@ class IndustryByLocation(Industry) :
         
         industry = {}
         for name_en, name_pt, num_jobs in occ_jobs_generate : 
-            industry['occupation_max_number_jobs_value'] = num_jobs
-            industry['occupation_max_number_jobs_name'] =  name_pt 
+            industry['occ_with_more_number_jobs_value'] = num_jobs
+            industry['occ_with_more_number_jobs_name'] =  name_pt 
 
         return industry
 
@@ -203,8 +203,8 @@ class IndustryByLocation(Industry) :
 
         industry = {}
         for name_en, name_pt, wage_avg in occ_wage_avg_generate : 
-            industry['occupation_max_monthly_income_value'] = wage_avg
-            industry['occupation_max_monthly_income_name'] = name_pt
+            industry['occ_with_more_wage_avg_value'] = wage_avg
+            industry['occ_with_more_wage_avg_name'] = name_pt
 
         return industry
 
@@ -222,8 +222,8 @@ class IndustryByLocation(Industry) :
         
         industry = {}
         for name_en, name_pt, num_jobs in county_jobs_generate : 
-            industry['county_max_number_jobs_value'] = num_jobs
-            industry['county_max_number_jobs_name'] = name_pt
+            industry['municipality_with_more_num_jobs_value'] = num_jobs
+            industry['municipality_with_more_num_jobs_name'] = name_pt
         return industry 
 
 
@@ -241,8 +241,8 @@ class IndustryByLocation(Industry) :
         
         industry = {}
         for name_en, name_pt, wage_avg in county_wage_avg_generate : 
-            industry['county_max_monthly_income_value'] = wage_avg
-            industry['county_max_monthly_income_name'] = name_pt   
+            industry['municipality_with_more_wage_avg_value'] = wage_avg
+            industry['municipality_with_more_wage_avg_name'] = name_pt   
 
         return industry
 
