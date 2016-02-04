@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g
+from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Occupation as RaisOccupationService
 from dataviva.api.rais.services import OccupationByLocation as RaisOccupationByLocationService
@@ -23,7 +23,7 @@ def add_language_code(endpoint, values):
 @mod.route('/<occupation_id>')
 def index(occupation_id):
 
-    bra_id = '4mg'
+    bra_id = request.args.get('bra_id')
     header = {}
     body = {}
 
