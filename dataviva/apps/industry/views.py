@@ -25,9 +25,9 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
  
-    bra_id = None #'4mg000000' # Alfredo Vasconcelos
+    bra_id = '4mg' # Alfredo Vasconcelos
     cnae_id = 'g47113' #supermarkets
-    
+
     industry = {}
 
     industry = { 
