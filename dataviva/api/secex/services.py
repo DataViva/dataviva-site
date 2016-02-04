@@ -92,7 +92,7 @@ class TradePartnerMunicipalities(TradePartner):
         secex = self.__secex_sorted_by_imports__()[0]
         return secex.bra.name()
 
-    def highest_import_value_by_municipality(self):
+    def highest_import_value(self):
         secex = self.__secex_sorted_by_imports__()[0]
         return secex.import_val
 
@@ -100,7 +100,7 @@ class TradePartnerMunicipalities(TradePartner):
         secex = self.__secex_sorted_by_exports__()[0]
         return secex.bra.name()
 
-    def highest_export_value_by_municipality(self):
+    def highest_export_value(self):
         secex = self.__secex_sorted_by_exports__()[0]
         return secex.export_val
 
