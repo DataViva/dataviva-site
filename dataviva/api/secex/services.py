@@ -52,7 +52,7 @@ class TradePartner:
         import_kg = self.__secex__().import_kg
         return import_val / import_kg
 
-class TradePartnerMunicipalityByExport(TradePartner):
+class TradePartnerMunicipalities(TradePartner):
 
 
     def __init__(self, wld_id):
@@ -62,32 +62,47 @@ class TradePartnerMunicipalityByExport(TradePartner):
             Ymbw.wld_id == self.wld_id,
             Ymbw.month == 0,
             Ymbw.year == self.max_year_query,
-            func.length(Ymbw.bra_id) == 9).order_by(desc(Ymbw.export_val)).limit(1)
+            func.length(Ymbw.bra_id) == 9)
 
-    def municipality_with_more_exports(self):
-        return self.__secex__().bra.name()
+        self._secex_sorted_by_exports = None
+        self._secex_sorted_by_imports = None
 
-    def highest_export_value_by_municipality(self):
-        return self.__secex__().export_val
+    def __secex__(self):
+        if not self._secex:
+            secex_data = self.secex_query.all()
+            self._secex = secex_data
+        return self._secex
 
-class TradePartnerMunicipalityByImport(TradePartner):
+    def __secex_sorted_by_balance__(self):
+        self._secex_sorted_by_balance = self.__secex__()
+        self._secex_sorted_by_balance.sort(key=lambda secex: (secex.export_val or 0) - (secex.import_val or 0), reverse=True)
+        return self._secex_sorted_by_balance
 
+    def __secex_sorted_by_exports__(self):
+        self._secex_sorted_by_exports = self.__secex__()
+        self._secex_sorted_by_exports.sort(key=lambda secex: secex.export_val, reverse=True)
+        return self._secex_sorted_by_exports
 
-    def __init__(self, wld_id):
-        TradePartner.__init__(self, wld_id)
-        self.max_year_query = db.session.query(func.max(Ymbw.year)).filter_by(wld_id=wld_id)
-        self.secex_query = Ymbw.query.join(Bra).filter(
-            Ymbw.wld_id == self.wld_id,
-            Ymbw.month == 0,
-            Ymbw.year == self.max_year_query,
-            func.length(Ymbw.bra_id) == 9).order_by(desc(Ymbw.import_val)).limit(1)
+    def __secex_sorted_by_imports__(self):
+        self._secex_sorted_by_imports = self.__secex__()
+        self._secex_sorted_by_imports.sort(key=lambda secex: secex.import_val, reverse=True)
+        return self._secex_sorted_by_imports
 
     def municipality_with_more_imports(self):
-        return self.__secex__().bra.name()
+        secex = self.__secex_sorted_by_imports__()[0]
+        return secex.bra.name()
 
     def highest_import_value_by_municipality(self):
-        return self.__secex__().import_val
+        secex = self.__secex_sorted_by_imports__()[0]
+        return secex.import_val
 
+    def municipality_with_more_exports(self):
+        secex = self.__secex_sorted_by_exports__()[0]
+        return secex.bra.name()
+
+    def highest_export_value_by_municipality(self):
+        secex = self.__secex_sorted_by_exports__()[0]
+        return secex.export_val
 
 class TradePartnerProducts(TradePartner):
 
