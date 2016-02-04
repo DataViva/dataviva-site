@@ -44,18 +44,19 @@ def index():
     }
 
     body {
-        'municipality_with_more_exports' : municipality_by_export_service.municipality_with_more_exports()
-        'highest_export_value_by_municipality' : municipality_by_export_service.highest_export_value_by_municipality()
-        'municipality_with_more_imports' : product_by_import_service.municipality_with_more_imports()
-        'highest_import_value_by_municipality' : product_by_import_service.highest_import_value_by_municipality()
-        'product_with_more_imports' : product_by_import_service.product_with_more_imports()
-        'highest_import_value_by_product' : product_by_import_service.highest_import_value_by_product()
-        'product_with_more_exports' : product_by_export_service.product_with_more_exports()
-        'highest_export_value_by_product' : product_by_export_service.highest_export_value_by_product()
-        'product_with_highest_balance' : product_by_highest_balance_service.product_with_highest_balance()
-        'highest_balance_by_product' : product_by_highest_balance_service.highest_balance_by_product()
-        'product_with_lowest_balance' : product_by_lowest_balance_service.product_with_lowest_balance()
-        'lowest_balance_by_product' : product_by_lowest_balance_service.lowest_balance_by_product()
+        'municipality_with_more_exports' : municipality_by_export_service.municipality_with_more_exports(),
+        'highest_export_value_by_municipality' : municipality_by_export_service.highest_export_value_by_municipality(),
+        'municipality_with_more_imports' : product_by_import_service.municipality_with_more_imports(),
+        'highest_import_value_by_municipality' : product_by_import_service.highest_import_value_by_municipality(),
+        'product_with_more_imports' : product_by_import_service.product_with_more_imports(),
+        'highest_import_value_by_product' : product_by_import_service.highest_import_value_by_product(),
+        'product_with_more_exports' : product_by_export_service.product_with_more_exports(),
+        'highest_export_value_by_product' : product_by_export_service.highest_export_value_by_product(),
+        'product_with_highest_balance' : product_by_highest_balance_service.product_with_highest_balance(),
+        'highest_balance_by_product' : product_by_highest_balance_service.highest_balance_by_product(),
+        'product_with_lowest_balance' : product_by_lowest_balance_service.product_with_lowest_balance(),
+        'lowest_balance_by_product' : product_by_lowest_balance_service.lowest_balance_by_product(),
+        'world_trade_description' : 'World trade description.',
     }
 
     return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, trade=trade)
