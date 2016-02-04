@@ -134,7 +134,7 @@ class Occupation:
 
 class OccupationByLocation:
 
-    def __init__(self, occupation_id, bra_id=None):
+    def __init__(self, occupation_id, bra_id):
         
         self.occupation_id = occupation_id
         self.bra_id = bra_id
