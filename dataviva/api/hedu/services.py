@@ -3,57 +3,44 @@ from dataviva.api.attrs.models import University as uni, Course_hedu, Bra
 from dataviva import db
 from sqlalchemy.sql.expression import func, desc
 
-class University:
-    def __init__ (self, university_id):
-        self._university = None
 
+class University:
+    def __init__(self, university_id):
+        self._hedu = None
         self.university_id = university_id
-        self.yu_max_year_query = db.session.query(func.max(Yu.year)).filter_by(university_id=university_id)
+
+        self.max_year_query = db.session.query(func.max(Yu.year)).filter_by(university_id=university_id)
+
+        self.hedu_query = Yu.query.join(uni).filter(
+            Yu.university_id == self.university_id, 
+            Yu.year == self.max_year_query)
+
         self.yuc_max_year_query = db.session.query(func.max(Yuc.year))
 
-    def __university_info__(self):
-        if not self._university:
-            yu_query = Yu.query.join(uni).filter(Yu.university_id == self.university_id, Yu.year == self.yu_max_year_query)
+    def __hedu__(self):
+        if not self._hedu:
+            hedu_data = self.hedu_query.one()
+            self._hedu = hedu_data
 
-            yu_data = yu_query.values(
-                uni.name_pt,
-                Yu.enrolled,
-                Yu.entrants,
-                Yu.graduates,
-                Yu.year,
-                uni.desc_pt
-            )
-
-            university = {}
-
-            for name_pt, enrolled, entrants, graduates, year, profile in yu_data:
-                university['name'] = name_pt
-                university['enrolled'] = enrolled
-                university['entrants'] = entrants
-                university['graduates'] =  graduates
-                university['profile'] = profile
-                university['year'] =  year
-            self._university = university
-
-        return self._university
+        return self._hedu
 
     def name(self):
-        return self.__university_info__()['name']
+        return self.__hedu__().university.name_pt
 
     def enrolled(self):
-        return self.__university_info__()['enrolled']
+        return self.__hedu__().enrolled
 
     def entrants(self):
-        return self.__university_info__()['entrants']
+        return self.__hedu__().entrants
 
     def graduates(self):
-        return self.__university_info__()['graduates']
+        return self.__hedu__().graduates
 
     def profile(self):
-        return self.__university_info__()['profile']
+        return self.__hedu__().university.desc_pt
 
     def year(self):
-        return self.__university_info__()['year']
+        return self.__hedu__().year
 
     def major_with_more_enrollments(self):
 
