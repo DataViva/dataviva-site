@@ -77,7 +77,7 @@ class Occupation:
             .one()
     
             municipality_with_more_jobs = {}
-            municipality_with_more_jobs['municipality_with_more_jobs'] = ybo_municipality_num_jobs_generator.cbo.name()
+            municipality_with_more_jobs['municipality_with_more_jobs'] = ybo_municipality_num_jobs_generator.bra.name()
             municipality_with_more_jobs['municipality_with_more_jobs_value'] = ybo_municipality_num_jobs_generator.num_jobs
 
             self._municipality_with_more_jobs = municipality_with_more_jobs
@@ -101,13 +101,11 @@ class Occupation:
                 Ybo.year == self.year,
                 Ybo.bra_id_len == 9)\
             .order_by(desc(Ybo.wage_avg)).limit(1)\
-            .values(Bra.name_pt,
-                    Ybo.wage_avg)
+            .one()
     
             municipality_with_biggest_wage_average = {}
-            for name_pt, wage_avg in ybo_municipality_wage_avg_generator:
-                municipality_with_biggest_wage_average['municipality_with_biggest_wage_avg'] = name_pt
-            municipality_with_biggest_wage_average['municipality_with_biggest_wage_avg_value'] = wage_avg  
+            municipality_with_biggest_wage_average['municipality_with_biggest_wage_avg'] = ybo_municipality_wage_avg_generator.bra.name()
+            municipality_with_biggest_wage_average['municipality_with_biggest_wage_avg_value'] = ybo_municipality_wage_avg_generator.wage_avg  
 
             self._municipality_with_biggest_wage_average = municipality_with_biggest_wage_average
 
