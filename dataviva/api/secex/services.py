@@ -23,6 +23,7 @@ class Product:
             ).limit(1)
 
             secex_data = ymp_query.one()
+
         return secex_data
 
     def year(self):
@@ -167,7 +168,8 @@ class ProductByLocation(Product):
                 Ymbp.month==0
             ).limit(1)
 
-            secex_data = ymbp_query.one()
+            secex_data = ymbp_query.first_or_404()
+
         return secex_data
 
     def rca_wld(self):
