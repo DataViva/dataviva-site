@@ -132,7 +132,7 @@ class Occupation:
 
 
 
-class OccupationByLocation:
+class OccupationByLocation(Occupation):
 
     def __init__(self, occupation_id, bra_id):
         
@@ -175,21 +175,6 @@ class OccupationByLocation:
 
         return self._header
 
-
-    def name(self):
-        return self.__rais_data__()['name']
-
-    def average_monthly_income(self):
-        return self.__rais_data__()['average_monthly_income']
-
-    def salary_mass(self):
-        return self.__rais_data__()['salary_mass']
-
-    def total_employment(self):
-        return self.__rais_data__()['total_employment']
-
-    def total_establishments(self):
-        return self.__rais_data__()['total_establishments']
 
     def municipality_with_more_jobs(self):
 
