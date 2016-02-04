@@ -5,14 +5,13 @@ from flask import g
 from sqlalchemy.sql.expression import func, desc, asc
 
 class TradePartner:
-
-
     def __init__(self, wld_id):
         self._secex = None
+        self._secex_sorted_by_balance = None
+        self._secex_sorted_by_exports = None
+        self._secex_sorted_by_imports = None
         self.wld_id = wld_id
-
         self.max_year_query = db.session.query(func.max(Ymw.year)).filter_by(wld_id=wld_id)
-
         self.secex_query = Ymw.query.join(Wld).filter(
             Ymw.wld_id == self.wld_id,
             Ymw.month == 0,
@@ -95,8 +94,6 @@ class TradePartner:
 
 
 class TradePartnerMunicipalities(TradePartner):
-
-
     def __init__(self, wld_id):
         TradePartner.__init__(self, wld_id)
         self.max_year_query = db.session.query(func.max(Ymbw.year)).filter_by(wld_id=wld_id)
@@ -105,9 +102,6 @@ class TradePartnerMunicipalities(TradePartner):
             Ymbw.month == 0,
             Ymbw.year == self.max_year_query,
             func.length(Ymbw.bra_id) == 9)
-
-        self._secex_sorted_by_exports = None
-        self._secex_sorted_by_imports = None
 
     def municipality_with_more_imports(self):
         secex = self.__secex_sorted_by_imports__()[0]
@@ -119,8 +113,6 @@ class TradePartnerMunicipalities(TradePartner):
 
 
 class TradePartnerProducts(TradePartner):
-
-
     def __init__(self, wld_id):
         TradePartner.__init__(self, wld_id)
         self.max_year_query = db.session.query(func.max(Ympw.year)).filter_by(wld_id=wld_id)
@@ -129,10 +121,6 @@ class TradePartnerProducts(TradePartner):
             Ympw.month == 0,
             Ympw.hs_id_len == 6,
             Ympw.year == self.max_year_query)
-
-        self._secex_sorted_by_balance = None
-        self._secex_sorted_by_exports = None
-        self._secex_sorted_by_imports = None
 
     def product_with_more_exports(self):
         secex = self.__secex_sorted_by_exports__()[0]
