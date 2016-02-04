@@ -12,6 +12,7 @@ class Occupation:
         self._municipality_with_more_jobs = None
         self._municipality_with_biggest_wage_average = None
         self._activity_with_more_jobs = None
+        self._activity_with_biggest_wage_average = None
 
         year=0
 
@@ -148,23 +149,32 @@ class Occupation:
     def num_jobs_of_activity_with_more_jobs(self):
         return self.__activity_with_more_jobs__()['activity_with_more_jobs_value']
 
+    def __activity_with_biggest_wage_average__(self):
+
+        if not self._activity_with_biggest_wage_average:
+
+            yio_activity_wage_avg_generator = Yio.query.join(Cnae).filter(
+                Yio.cbo_id == self.occupation_id,
+                Yio.year == self.year,
+                Yio.cnae_id_len == 6)\
+            .order_by(desc(Yio.wage_avg)).limit(1)\
+            .values(Cnae.name_pt,
+                    Yio.wage_avg)
+
+            activity_with_biggest_wage_avg = {}
+            for name_pt, wage_avg in yio_activity_wage_avg_generator:
+                activity_with_biggest_wage_avg['activity_with_biggest_wage_avg'] = name_pt
+                activity_with_biggest_wage_avg['activity_with_biggest_wage_avg_value'] = wage_avg  
+
+            self._activity_with_biggest_wage_average = activity_with_biggest_wage_avg
+
+        return self._activity_with_biggest_wage_average   
+
     def activity_with_biggest_wage_average(self):
+        return self.__activity_with_biggest_wage_average__()['activity_with_biggest_wage_avg']
 
-        yio_activity_wage_avg_generator = Yio.query.join(Cnae).filter(
-            Yio.cbo_id == self.occupation_id,
-            Yio.year == self.year,
-            Yio.cnae_id_len == 6)\
-        .order_by(desc(Yio.wage_avg)).limit(1)\
-        .values(Cnae.name_pt,
-                Yio.wage_avg)
-
-        activity_with_biggest_wage_avg = {}
-        for name_pt, wage_avg in yio_activity_wage_avg_generator:
-            activity_with_biggest_wage_avg['activity_with_biggest_wage_avg'] = name_pt
-            activity_with_biggest_wage_avg['activity_with_biggest_wage_avg_value'] = wage_avg  
-
-        return activity_with_biggest_wage_avg   
-
+    def num_jobs_of_activity_with_biggest_wage_avg(self):
+        return self.__activity_with_biggest_wage_average__()['activity_with_biggest_wage_avg_value']
 
 
 
