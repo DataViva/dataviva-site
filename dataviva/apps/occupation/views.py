@@ -23,7 +23,7 @@ def add_language_code(endpoint, values):
 @mod.route('/<occupation_id>')
 def index(occupation_id):
 
-    bra_id = None#'4mg'
+    bra_id = '4mg'
     header = {}
     body = {}
 
@@ -40,19 +40,15 @@ def index(occupation_id):
     header['total_establishments'] = rais_occupation_service.total_establishments()
     header['year'] = rais_occupation_service.year
     
-    #body.update(rais_occupation_service.municipality_with_more_jobs())
     body['municipality_with_more_jobs'] = rais_occupation_service.municipality_with_more_jobs()
     body['municipality_with_more_jobs_value'] = rais_occupation_service.num_jobs_of_municipality_with_more_jobs()
 
-    #body.update(rais_occupation_service.municipality_with_biggest_wage_average())
     body['municipality_with_biggest_wage_avg'] = rais_occupation_service.municipality_with_biggest_wage_average()
     body['municipality_with_biggest_wage_avg_value'] = rais_occupation_service.wage_average_of_municipality_with_biggest_wage_average()
 
-    #body.update(rais_occupation_service.activity_with_more_jobs())
     body['activity_with_more_jobs'] = rais_occupation_service.activity_with_more_jobs()
     body['activity_with_more_jobs_value'] = rais_occupation_service.num_jobs_of_activity_with_more_jobs()
     
-    #body.update(rais_occupation_service.activity_with_biggest_wage_average())
     body['activity_with_biggest_wage_avg'] = rais_occupation_service.activity_with_biggest_wage_average()
     body['activity_with_biggest_wage_avg_value'] = rais_occupation_service.num_jobs_of_activity_with_biggest_wage_avg()
 
