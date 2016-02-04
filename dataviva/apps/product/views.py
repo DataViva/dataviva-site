@@ -74,17 +74,17 @@ def index(product_id):
             product['opp_gain_wld'] = secex_product_service.opp_gain_wld()
 
         if len(bra_id) != 9:
-            product['munic_name_export'] = secex_product_service.municipality_with_more_exports()
-            product['munic_export_value'] = secex_product_service.highest_export_value_by_municipality()
-            product['munic_name_import'] = secex_product_service.municipality_with_more_imports()
-            product['munic_import_value'] = secex_product_service.highest_import_value_by_municipality()
+            product['municipality_name_export'] = secex_product_service.municipality_with_more_exports()
+            product['municipality_export_value'] = secex_product_service.highest_export_value_by_municipality()
+            product['municipality_name_import'] = secex_product_service.municipality_with_more_imports()
+            product['municipality_import_value'] = secex_product_service.highest_import_value_by_municipality()
 
     else:
         secex_product_service = SecexProductService(product_id=product_id)
-        product['munic_name_export'] = secex_product_service.municipality_with_more_exports()
-        product['munic_export_value'] = secex_product_service.highest_export_value_by_municipality()
-        product['munic_name_import'] = secex_product_service.municipality_with_more_imports()
-        product['munic_import_value'] = secex_product_service.highest_import_value_by_municipality()
+        product['municipality_name_export'] = secex_product_service.municipality_with_more_exports()
+        product['municipality_export_value'] = secex_product_service.highest_export_value_by_municipality()
+        product['municipality_name_import'] = secex_product_service.municipality_with_more_imports()
+        product['municipality_import_value'] = secex_product_service.highest_import_value_by_municipality()
         product['dest_name_export'] = secex_product_service.destination_with_more_exports()
         product['dest_export_value'] = secex_product_service.highest_export_value_by_destination()
         product['src_name_import'] = secex_product_service.origin_with_more_imports()
