@@ -51,68 +51,40 @@ def index(product_id):
 
     product = {}
 
-    #criar o name service na HS
-    #verificar local pci
-    #verificar as tabelas usadas em cada classe
-    #vericar imports
+    #dividir entre indicadores header e body
 
-    secex_product_service = SecexProductByLocationService(bra_id=bra_id, product_id=product_id)
-    product['name'] = secex_product_service.name()
-
+    attrs_product_service = AttrsProductService(product_id=product_id)
+    product['name'] = attrs_product_service.name()
 
     if bra_id:
         secex_product_service = SecexProductByLocationService(bra_id=bra_id, product_id=product_id)
 
-        #product.update(secex_product_service.location_destination_with_more_imports())
-        #product.update(secex_product_service.location_origin_with_more_imports())
+        product.update(secex_product_service.destination_with_more_exports())
+        product.update(secex_product_service.origin_with_more_imports())
+
+        if len(product_id) == 6:
+            product['pci'] = secex_product_service.pci()
+            product['rca_wld'] = secex_product_service.rca_wld()
+            product['distance_wld'] = secex_product_service.distance_wld()
+            product['opp_gain_wld'] = secex_product_service.opp_gain_wld()
+
+            if len(bra_id) != 9:
+                product.update(secex_product_service.municipality_with_more_exports())
+                product.update(secex_product_service.municipality_with_more_imports())
 
     else:
         secex_product_service = SecexProductService(product_id=product_id)
 
+        product.update(secex_product_service.municipality_with_more_exports())
+        product.update(secex_product_service.municipality_with_more_imports())
+        product.update(secex_product_service.destination_with_more_exports())
+        product.update(secex_product_service.origin_with_more_imports())
 
     product['year'] = secex_product_service.year()
-    product['export_val'] = secex_product_service.export_val()
-    product['import_val'] = secex_product_service.import_val()
-    product['export_kg'] = secex_product_service.export_kg()
-    product['import_kg'] = secex_product_service.import_kg()
     product['trade_balance'] = secex_product_service.trade_balance()
+    product['export_val'] = secex_product_service.export_val()
     product['export_net_weight'] = secex_product_service.export_net_weight()
+    product['import_val'] = secex_product_service.import_val()
     product['import_net_weight'] = secex_product_service.import_net_weight()
-    product.update(secex_product_service.brazil_municipality_with_more_exports())
-    product.update(secex_product_service.brazil_municipality_with_more_imports())
-    product.update(secex_product_service.brazil_destination_with_more_exports())
-    product.update(secex_product_service.brazil_origin_with_more_import())
-    product.update(secex_product_service.name())
-    product.update(secex_product_service.pci())
-
-    #verificar campo year
-    #return object pci name
-
-    if bra_id == None:
-        product['year'] = secex_product_service.year()
-        product['export_val'] = secex_product_service.export_val()
-        product['import_val'] = secex_product_service.import_val()
-        product['export_kg'] = secex_product_service.export_kg()
-        product['import_kg'] = secex_product_service.import_kg()
-        product['trade_balance'] = secex_product_service.trade_balance()
-        product['export_net_weight'] = secex_product_service.export_net_weight()
-        product['import_net_weight'] = secex_product_service.import_net_weight()
-        product.update(secex_product_service.brazil_municipality_with_more_exports())
-        product.update(secex_product_service.brazil_municipality_with_more_imports())
-        product.update(secex_product_service.brazil_destination_with_more_exports())
-        product.update(secex_product_service.brazil_origin_with_more_import())
-
-    else:
-
-        if len(product_id) == 6:
-            secex_product_service.
-            product.update(secex_product_service.location_postion())
-
-        elif len(product_id) == 2:
-            product.update(secex_product_service.location_section())
-
-        if len(bra_id) != 9:
-            product.update(secex_product_service.location_municipality_with_more_exports())
-            product.update(secex_product_service.location_municipality_with_more_imports())
 
     return render_template('product/index.html', body_class='perfil-estado', product=product, context=context)
