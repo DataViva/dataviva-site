@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.secex.services import TradePartner, TradePartnerMunicipalityByExport, \
-TradePartnerMunicipalityByImport, TradePartnerProducts
+from dataviva.api.secex.services import TradePartner, \
+    TradePartnerMunicipalities, TradePartnerProducts
 from sqlalchemy.sql.expression import func, desc, asc
 
 mod = Blueprint('trade_partner', __name__,
@@ -25,9 +25,7 @@ def index():
     wld_id = 'nausa'
 
     trade_partner_service = TradePartner(wld_id=wld_id)
-    municipality_by_export_service = TradePartnerMunicipalityByExport(wld_id=wld_id)
-    municipality_by_import_service = TradePartnerMunicipalityByImport(wld_id=wld_id)
-
+    municipalities_service = TradePartnerMunicipalities(wld_id=wld_id)
     products_service = TradePartnerProducts(wld_id=wld_id)
 
     header = {
@@ -41,10 +39,10 @@ def index():
     }
 
     body = {
-        'municipality_with_more_exports' : municipality_by_export_service.municipality_with_more_exports(),
-        'highest_export_value_by_municipality' : municipality_by_export_service.highest_export_value_by_municipality(),
-        'municipality_with_more_imports' : municipality_by_import_service.municipality_with_more_imports(),
-        'highest_import_value_by_municipality' : municipality_by_import_service.highest_import_value_by_municipality(),
+        'municipality_with_more_exports' : municipalities_service.municipality_with_more_exports(),
+        'highest_export_value_by_municipality' : municipalities_service.highest_export_value_by_municipality(),
+        'municipality_with_more_imports' : municipalities_service.municipality_with_more_imports(),
+        'highest_import_value_by_municipality' : municipalities_service.highest_import_value_by_municipality(),
 
         'product_with_more_imports' : products_service.product_with_more_imports(),
         'highest_import_value' : products_service.highest_import_value(),
