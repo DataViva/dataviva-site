@@ -197,13 +197,8 @@ class OccupationByLocation(Occupation):
                 Ybo.bra_id == self.bra_id,
                 Ybo.year == self.year)\
                 .one()
-                #.values(Cbo.name_pt,
-                #        Ybo.wage_avg,
-                #        Ybo.wage,
-                #        Ybo.num_jobs,
-                #        Ybo.num_est)
+                
             data = {}
-            #for name_pt, wage_avg, wage, num_jobs, num_est in ybo_data_generator:
             data['name'] = ybo_data_generator.cbo.name()
             data['average_monthly_income'] = ybo_data_generator.wage_avg
             data['salary_mass'] = ybo_data_generator.wage
