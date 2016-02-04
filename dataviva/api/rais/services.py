@@ -11,6 +11,7 @@ class Occupation:
         self._data = None 
         self._municipality_with_more_jobs = None
         self._municipality_with_biggest_wage_average = None
+        self._activity_with_more_jobs = None
 
         year=0
 
@@ -120,22 +121,32 @@ class Occupation:
     def wage_average_of_municipality_with_biggest_wage_average(self):
         return self.__municipality_with_biggest_wage_average__()['municipality_with_biggest_wage_avg_value']
 
+    def __activity_with_more_jobs__(self):
+
+        if not self._activity_with_more_jobs:
+
+            yio_activity_num_jobs_generator = Yio.query.join(Cnae).filter(
+                Yio.cbo_id == self.occupation_id,
+                Yio.year == self.year,
+                Yio.cnae_id_len == 6)\
+            .order_by(desc(Yio.num_jobs)).limit(1)\
+            .values(Cnae.name_pt,
+                    Yio.num_jobs)
+
+            activity_with_more_jobs = {}
+            for name_pt, num_jobs in yio_activity_num_jobs_generator:
+                activity_with_more_jobs['activity_with_more_jobs'] = name_pt
+                activity_with_more_jobs['activity_with_more_jobs_value'] = num_jobs
+
+            self._activity_with_more_jobs = activity_with_more_jobs
+
+        return self._activity_with_more_jobs
+
     def activity_with_more_jobs(self):
+        return self.__activity_with_more_jobs__()['activity_with_more_jobs']
 
-        yio_activity_num_jobs_generator = Yio.query.join(Cnae).filter(
-            Yio.cbo_id == self.occupation_id,
-            Yio.year == self.year,
-            Yio.cnae_id_len == 6)\
-        .order_by(desc(Yio.num_jobs)).limit(1)\
-        .values(Cnae.name_pt,
-                Yio.num_jobs)
-
-        activity_with_more_jobs = {}
-        for name_pt, num_jobs in yio_activity_num_jobs_generator:
-            activity_with_more_jobs['activity_with_more_jobs'] = name_pt
-            activity_with_more_jobs['activity_with_more_jobs_value'] = num_jobs
-
-        return activity_with_more_jobs
+    def num_jobs_of_activity_with_more_jobs(self):
+        return self.__activity_with_more_jobs__()['activity_with_more_jobs_value']
 
     def activity_with_biggest_wage_average(self):
 
