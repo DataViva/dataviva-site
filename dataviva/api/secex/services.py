@@ -6,6 +6,7 @@ from sqlalchemy.sql.expression import func, desc, asc
 
 class TradePartner:
 
+
     def __init__(self, wld_id):
         self._secex = None
         self.wld_id = wld_id
@@ -57,7 +58,8 @@ class TradePartner:
 
 class TradePartnerMunicipalityByExport(TradePartner):
 
-   def __init__(self, wld_id):
+
+    def __init__(self, wld_id):
         super(TradePartnerByLocation, self).__init__(wld_id)
         self.max_year_query = db.session.query(func.max(Ymbw.year)).filter_by(wld_id=wld_id)
         self.secex_query = Ymbw.query.join(Bra).filter(
@@ -73,7 +75,9 @@ class TradePartnerMunicipalityByExport(TradePartner):
         return self.__secex__().export_val
 
 class TradePartnerMunicipalityByImport(TradePartner):
-   def __init__(self, wld_id):
+
+
+    def __init__(self, wld_id):
         super(TradePartnerByLocation, self).__init__(wld_id)
         self.max_year_query = db.session.query(func.max(Ymbw.year)).filter_by(wld_id=wld_id)
         self.secex_query = Ymbw.query.join(Bra).filter(
@@ -90,7 +94,7 @@ class TradePartnerMunicipalityByImport(TradePartner):
 
 class TradePartnerProductByImport(TradePartner):
 
-   def __init__(self, wld_id):
+    def __init__(self, wld_id):
         super(TradePartnerByLocation, self).__init__(wld_id)
         self.max_year_query = db.session.query(func.max(Ympw.year)).filter_by(wld_id=wld_id)
         self.secex_query = Ympw.query.join(Hs).filter(
@@ -107,7 +111,7 @@ class TradePartnerProductByImport(TradePartner):
 
 class TradePartnerProductByExport(TradePartner):
 
-   def __init__(self, wld_id):
+    def __init__(self, wld_id):
         super(TradePartnerByLocation, self).__init__(wld_id)
         self.max_year_query = db.session.query(func.max(Ympw.year)).filter_by(wld_id=wld_id)
         self.secex_query = Ympw.query.join(Hs).filter(
@@ -125,7 +129,8 @@ class TradePartnerProductByExport(TradePartner):
 
 class TradePartnerProductByHighestBalance(TradePartner):
 
-   def __init__(self, wld_id):
+
+    def __init__(self, wld_id):
         super(TradePartnerByLocation, self).__init__(wld_id)
         self.max_year_query = db.session.query(func.max(Ympw.year)).filter_by(wld_id=wld_id)
         ympw_highest_balance_query = Ympw.query.join(Hs).filter(
@@ -143,7 +148,8 @@ class TradePartnerProductByHighestBalance(TradePartner):
 
 class TradePartnerProductByLowestBalance(TradePartner):
 
-   def __init__(self, wld_id):
+
+    def __init__(self, wld_id):
         super(TradePartnerByLocation, self).__init__(wld_id)
         self.max_year_query = db.session.query(func.max(Ympw.year)).filter_by(wld_id=wld_id)
         ympw_highest_balance_query = Ympw.query.join(Hs).filter(
