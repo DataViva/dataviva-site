@@ -58,6 +58,7 @@
                                 </td>
                             </tr>
                             <tr>
+                            {% if basic_course_statistics["city_enrolled"] %}
                                 <th>
                                     Principal Município por Número de Alunos Matriculados
                                 </th>
@@ -65,6 +66,7 @@
                                     <p class="label">{{basic_course_statistics["city_name"]}}</p>
                                     <strong class="counter">{{basic_course_statistics["city_enrolled"]}}</strong> <span>mil</span>
                                 </td>
+                                {% endif %}
                             </tr>
                         </tbody>
                     </table>
@@ -73,7 +75,7 @@
                     </a>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
