@@ -93,7 +93,6 @@ class Product:
         return ympw_wld_data
 
     def destination_with_more_exports(self):
-        import pdb; pdb.set_trace()
         ympw = self.__destination_with_more_exports__()
         return ympw.wld.name()
 
