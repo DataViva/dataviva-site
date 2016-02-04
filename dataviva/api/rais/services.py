@@ -7,7 +7,12 @@ from sqlalchemy import func, desc
 class Industry :
     def __init__(self, cnae_id):
         self.cnae_id = cnae_id
-        self.industry_headers = {}  
+        self.industry_headers = {}
+        self.occ_jobs = {}
+        self.occ_wage_avg = {}  
+        self.municipality_jobs = {}
+        self.municipality_wage_avg = {}
+
         self.yi_max_year_br = db.session.query(func.max(Yi.year)).filter_by(cnae_id=cnae_id)
         self.yio_max_year_br = db.session.query(func.max(Yio.year)).filter_by(cnae_id=cnae_id)
         self.ybi_max_year_br = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
@@ -52,74 +57,95 @@ class Industry :
     
     #-----
       
-    def  get_occ_with_more_number_jobs(self) :
-        occupation_jobs_generaitor = Yio.query.join(Cbo).filter(
-            Yio.cbo_id == Cbo.id,
-            Yio.cnae_id == self.cnae_id,
-            Yio.cbo_id_len == 4,                
-            Yio.year == self.yio_max_year_br 
-            ).order_by(desc(Yio.num_jobs)).limit(1).values(Cbo.name_en, Cbo.name_pt, Yio.num_jobs)
+    def  __occ_with_more_number_jobs__(self) :
+        if not self.occ_jobs : 
+            occupation_jobs_generaitor = Yio.query.join(Cbo).filter(
+                Yio.cbo_id == Cbo.id,
+                Yio.cnae_id == self.cnae_id,
+                Yio.cbo_id_len == 4,                
+                Yio.year == self.yio_max_year_br 
+                ).order_by(desc(Yio.num_jobs)).limit(1).values(Cbo.name_en, Cbo.name_pt, Yio.num_jobs)
 
-        industry = {}
-        for  name_en, name_pt, value in occupation_jobs_generaitor:        
-            industry['occ_with_more_number_jobs_name'] = name_pt
-            industry['occ_with_more_number_jobs_value'] = value  
+            for  name_en, name_pt, value in occupation_jobs_generaitor:        
+                self.occ_jobs['occ_with_more_number_jobs_name'] = name_pt
+                self.occ_jobs['occ_with_more_number_jobs_value'] = value  
 
-        return industry   
+        return self.occ_jobs 
 
+    def get_occ_with_more_number_jobs_name(self):
+        return self.__occ_with_more_number_jobs__()['occ_with_more_number_jobs_name']    
+
+    def get_occ_with_more_number_jobs_value(self):
+        return self.__occ_with_more_number_jobs__()['occ_with_more_number_jobs_value'] 
+
+    #-----
+
+    def __occ_with_more_wage_avg__(self):
+        if not self.occ_wage_avg :
+            occupation_wage_avg_generaitor = Yio.query.join(Cbo).filter(
+                Yio.cbo_id == Cbo.id,
+                Yio.cnae_id == self.cnae_id,
+                Yio.cbo_id_len == 4,                 
+                Yio.year == self.yio_max_year_br 
+                ).order_by(desc(Yio.wage_avg)).limit(1).values(Cbo.name_en, Cbo.name_pt, Yio.wage_avg)
+
+            for  name_en, name_pt, value in occupation_wage_avg_generaitor:        
+                self.occ_wage_avg['occ_with_more_wage_avg_name'] = name_pt
+                self.occ_wage_avg['occ_with_more_wage_avg_value'] = value
+
+        return self.occ_wage_avg     
+
+    def get_occ_with_more_wage_avg_name(self):
+        return self.__occ_with_more_wage_avg__()['occ_with_more_wage_avg_name']
+
+    def get_occ_with_more_wage_avg_value(self):
+        return self.__occ_with_more_wage_avg__()['occ_with_more_wage_avg_value']
 
     #-----
 
-    def get_occ_with_more_wage_avg(self):
-        occupation_wage_avg_generaitor = Yio.query.join(Cbo).filter(
-            Yio.cbo_id == Cbo.id,
-            Yio.cnae_id == self.cnae_id,
-            Yio.cbo_id_len == 4,                 
-            Yio.year == self.yio_max_year_br 
-            ).order_by(desc(Yio.wage_avg)).limit(1).values(Cbo.name_en, Cbo.name_pt, Yio.wage_avg)
-
-        industry = {}
-        for  name_en, name_pt, value in occupation_wage_avg_generaitor:        
-            industry['occ_with_more_wage_avg_name'] = name_pt
-            industry['occ_with_more_wage_avg_value'] = value
-
-        return industry     
-
-    
-    #-----
-
-    def get_municipality_with_more_num_jobs(self):
-        county_jobs_generaitor = Ybi.query.join(Bra).filter(
-            Bra.id == Ybi.bra_id,
-            Ybi.cnae_id == self.cnae_id,
-            Ybi.bra_id_len == 9,
-            Ybi.year == self.ybi_max_year_br,      
-            ).order_by(desc(Ybi.num_jobs)).limit(1).values(Bra.name_en, Bra.name_pt, Ybi.num_jobs)
-    
-        industry = {}
-        for name_en, name_pt, num_jobs in county_jobs_generaitor:        
-            industry['municipality_with_more_num_jobs_name'] = name_pt
-            industry['municipality_with_more_num_jobs_value'] = num_jobs
-
-        return industry
-
-
-    #-----
-    
-    def get_municipality_with_more_wage_avg(self):
-        county_wage_avg_generaitor = Ybi.query.join(Bra).filter(
-            Bra.id == Ybi.bra_id,
-            Ybi.cnae_id == self.cnae_id,
-            Ybi.bra_id_len == 9,
-            Ybi.year == self.ybi_max_year_br,    
-            ).order_by(desc(Ybi.wage_avg)).limit(1).values(Bra.name_en, Bra.name_pt, Ybi.wage_avg)   
+    def __municipality_with_more_num_jobs__(self):
+        if not self.municipality_jobs:
+            county_jobs_generaitor = Ybi.query.join(Bra).filter(
+                Bra.id == Ybi.bra_id,
+                Ybi.cnae_id == self.cnae_id,
+                Ybi.bra_id_len == 9,
+                Ybi.year == self.ybi_max_year_br,      
+                ).order_by(desc(Ybi.num_jobs)).limit(1).values(Bra.name_en, Bra.name_pt, Ybi.num_jobs)
         
-        industry = {}
-        for  name_en, name_pt, wage_avg in county_wage_avg_generaitor:        
-            industry['municipality_with_more_wage_avg_name'] = name_pt
-            industry['municipality_with_more_wage_avg_value'] =  wage_avg    
-        return industry
+            for name_en, name_pt, num_jobs in county_jobs_generaitor:        
+                self.municipality_jobs['municipality_with_more_num_jobs_name'] = name_pt
+                self.municipality_jobs['municipality_with_more_num_jobs_value'] = num_jobs
 
+        return self.municipality_jobs
+
+    def get_municipality_with_more_num_jobs_name(self):
+        return self.__municipality_with_more_num_jobs__()['municipality_with_more_num_jobs_name']
+    
+    def get_municipality_with_more_num_jobs_value(self):
+        return self.__municipality_with_more_num_jobs__()['municipality_with_more_num_jobs_value']
+
+    #-----
+    
+    def __municipality_with_more_wage_avg__(self):
+        if not self.municipality_wage_avg:
+            county_wage_avg_generaitor = Ybi.query.join(Bra).filter(
+                Bra.id == Ybi.bra_id,
+                Ybi.cnae_id == self.cnae_id,
+                Ybi.bra_id_len == 9,
+                Ybi.year == self.ybi_max_year_br,    
+                ).order_by(desc(Ybi.wage_avg)).limit(1).values(Bra.name_en, Bra.name_pt, Ybi.wage_avg)   
+            
+
+            for  name_en, name_pt, wage_avg in county_wage_avg_generaitor:        
+                self.municipality_wage_avg['municipality_with_more_wage_avg_name'] = name_pt
+                self.municipality_wage_avg['municipality_with_more_wage_avg_value'] =  wage_avg    
+        return self.municipality_wage_avg
+
+    def get_municipality_with_more_wage_avg_name(self):
+        return self.__municipality_with_more_wage_avg__()['municipality_with_more_wage_avg_name']    
+    
+    def get_municipality_with_more_wage_avg_value(self):
+        return self.__municipality_with_more_wage_avg__()['municipality_with_more_wage_avg_value']
 
 
 #########################
@@ -130,6 +156,11 @@ class IndustryByLocation(Industry) :
         self.bra_id = bra_id
         self.cnae_id = cnae_id
         self.industry_headers = {} 
+        self.occ_jobs = {} 
+        self.occ_wage_avg = {}  
+        self.municipality_jobs = {} 
+        self.municipality_wage_avg = {}
+
         self.ybi_max_year=db.session.query(func.max(Ybi.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)        
         self.ybio_max_year=db.session.query(func.max(Ybio.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
 
@@ -172,77 +203,74 @@ class IndustryByLocation(Industry) :
 
     #-----
 
-    def  get_occ_with_more_number_jobs(self) : 
-        occ_jobs_generate = Ybio.query.join(Cbo).filter(
-            Cbo.id == Ybio.cbo_id,
-            Ybio.cnae_id == self.cnae_id,
-            Ybio.cbo_id_len == 4,
-            Ybio.bra_id == self.bra_id,
-            Ybio.year == self.ybio_max_year
-            ).order_by(desc(Ybio.num_jobs)).limit(1).values(Cbo.name_en, Cbo.name_pt, Ybio.num_jobs)  
+    def  __occ_with_more_number_jobs__(self) : 
+        if not self.occ_jobs : 
+            occ_jobs_generate = Ybio.query.join(Cbo).filter(
+                Cbo.id == Ybio.cbo_id,
+                Ybio.cnae_id == self.cnae_id,
+                Ybio.cbo_id_len == 4,
+                Ybio.bra_id == self.bra_id,
+                Ybio.year == self.ybio_max_year
+                ).order_by(desc(Ybio.num_jobs)).limit(1).values(Cbo.name_en, Cbo.name_pt, Ybio.num_jobs)  
 
-        
-        industry = {}
-        for name_en, name_pt, num_jobs in occ_jobs_generate : 
-            industry['occ_with_more_number_jobs_value'] = num_jobs
-            industry['occ_with_more_number_jobs_name'] =  name_pt 
+            for name_en, name_pt, num_jobs in occ_jobs_generate : 
+                self.occ_jobs['occ_with_more_number_jobs_value'] = num_jobs
+                self.occ_jobs['occ_with_more_number_jobs_name'] =  name_pt 
 
-        return industry
+        return self.occ_jobs
 
     #-----
 
-    def get_occ_with_more_wage_avg(self):
-        
-        occ_wage_avg_generate = Ybio.query.join(Cbo).filter(
-            Cbo.id == Ybio.cbo_id,
-            Ybio.cnae_id == self.cnae_id,
-            Ybio.cbo_id_len == 4,
-            Ybio.bra_id == self.bra_id,
-            Ybio.year == self.ybio_max_year
-            ).order_by(desc(Ybio.wage_avg)).limit(1).values(Cbo.name_en, Cbo.name_pt, Ybio.wage_avg)  
+    def __occ_with_more_wage_avg__(self):
+        if not self.occ_wage_avg:
+            occ_wage_avg_generate = Ybio.query.join(Cbo).filter(
+                Cbo.id == Ybio.cbo_id,
+                Ybio.cnae_id == self.cnae_id,
+                Ybio.cbo_id_len == 4,
+                Ybio.bra_id == self.bra_id,
+                Ybio.year == self.ybio_max_year
+                ).order_by(desc(Ybio.wage_avg)).limit(1).values(Cbo.name_en, Cbo.name_pt, Ybio.wage_avg)  
 
-        industry = {}
-        for name_en, name_pt, wage_avg in occ_wage_avg_generate : 
-            industry['occ_with_more_wage_avg_value'] = wage_avg
-            industry['occ_with_more_wage_avg_name'] = name_pt
+            for name_en, name_pt, wage_avg in occ_wage_avg_generate : 
+                self.occ_wage_avg['occ_with_more_wage_avg_value'] = wage_avg
+                self.occ_wage_avg['occ_with_more_wage_avg_name'] = name_pt
 
-        return industry
+        return self.occ_wage_avg
 
     #-----
         
-    def get_municipality_with_more_num_jobs(self):
-
-        county_jobs_generate = Ybi.query.join(Bra).filter(
-            Bra.id == Ybi.bra_id,
-            Ybi.cnae_id == self.cnae_id,
-            Ybi.bra_id_len == 9,
-            Ybi.bra_id.like(self.bra_id+'%'), 
-            Ybi.year == self.ybi_max_year    
-            ).order_by(desc(Ybi.num_jobs)).limit(1).values(Bra.name_en, Bra.name_pt, Ybi.num_jobs)
+    def __municipality_with_more_num_jobs__(self):
+        if not self.municipality_jobs :
+            county_jobs_generate = Ybi.query.join(Bra).filter(
+                Bra.id == Ybi.bra_id,
+                Ybi.cnae_id == self.cnae_id,
+                Ybi.bra_id_len == 9,
+                Ybi.bra_id.like(self.bra_id+'%'), 
+                Ybi.year == self.ybi_max_year    
+                ).order_by(desc(Ybi.num_jobs)).limit(1).values(Bra.name_en, Bra.name_pt, Ybi.num_jobs)
+            
+            for name_en, name_pt, num_jobs in county_jobs_generate : 
+                self.municipality_jobs['municipality_with_more_num_jobs_value'] = num_jobs
+                self.municipality_jobs['municipality_with_more_num_jobs_name'] = name_pt
         
-        industry = {}
-        for name_en, name_pt, num_jobs in county_jobs_generate : 
-            industry['municipality_with_more_num_jobs_value'] = num_jobs
-            industry['municipality_with_more_num_jobs_name'] = name_pt
-        return industry 
+        return self.municipality_jobs 
 
 
     #-----
         
-    def get_municipality_with_more_wage_avg(self):
+    def __municipality_with_more_wage_avg__(self):
+        if not self.municipality_wage_avg:
+            county_wage_avg_generate = Ybi.query.join(Bra).filter(
+                Bra.id == Ybi.bra_id,
+                Ybi.cnae_id == self.cnae_id,
+                Ybi.bra_id_len == 9,
+                Ybi.bra_id.like(self.bra_id+'%'),
+                Ybi.year == self.ybi_max_year 
+                ).order_by(desc(Ybi.wage_avg)).limit(1).values(Bra.name_en, Bra.name_pt, Ybi.wage_avg)
+            
+            for name_en, name_pt, wage_avg in county_wage_avg_generate : 
+                self.municipality_wage_avg['municipality_with_more_wage_avg_value'] = wage_avg
+                self.municipality_wage_avg['municipality_with_more_wage_avg_name'] = name_pt   
 
-        county_wage_avg_generate = Ybi.query.join(Bra).filter(
-            Bra.id == Ybi.bra_id,
-            Ybi.cnae_id == self.cnae_id,
-            Ybi.bra_id_len == 9,
-            Ybi.bra_id.like(self.bra_id+'%'),
-            Ybi.year == self.ybi_max_year 
-            ).order_by(desc(Ybi.wage_avg)).limit(1).values(Bra.name_en, Bra.name_pt, Ybi.wage_avg)
-        
-        industry = {}
-        for name_en, name_pt, wage_avg in county_wage_avg_generate : 
-            industry['municipality_with_more_wage_avg_value'] = wage_avg
-            industry['municipality_with_more_wage_avg_name'] = name_pt   
-
-        return industry
+        return self.municipality_wage_avg
 

@@ -25,7 +25,7 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
  
-    bra_id = '4mg' # Alfredo Vasconcelos
+    bra_id = None #'4mg000000' # Alfredo Vasconcelos
     cnae_id = 'g47113' #supermarkets
     industry = {}
 
@@ -59,12 +59,20 @@ def index():
     industry['num_jobs'] = rais_industry_service.num_jobs()
     industry['num_establishments'] = rais_industry_service.num_establishments()
 
-    industry.update(rais_industry_service.get_occ_with_more_number_jobs())
-    industry.update(rais_industry_service.get_occ_with_more_wage_avg())
+    
+    industry['occ_with_more_number_jobs_name'] = rais_industry_service.get_occ_with_more_number_jobs_name()
+    industry['occ_with_more_number_jobs_value'] = rais_industry_service.get_occ_with_more_number_jobs_value()
+    
+    industry['occ_with_more_wage_avg_name'] = rais_industry_service.get_occ_with_more_wage_avg_name()
+    industry['occ_with_more_wage_avg_value'] = rais_industry_service.get_occ_with_more_wage_avg_value()
 
     if bra_id == None  or len(bra_id) != 9 :
-        industry.update(rais_industry_service.get_municipality_with_more_num_jobs())
-        industry.update(rais_industry_service.get_municipality_with_more_wage_avg())   
+        industry['municipality_with_more_num_jobs_value'] = rais_industry_service.get_municipality_with_more_num_jobs_value()
+        industry['municipality_with_more_num_jobs_name'] = rais_industry_service.get_municipality_with_more_num_jobs_name()
+
+        industry['municipality_with_more_wage_avg_name'] = rais_industry_service.get_municipality_with_more_wage_avg_name()
+        industry['municipality_with_more_wage_avg_value'] = rais_industry_service.get_municipality_with_more_wage_avg_value()
+          
     
             
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)
