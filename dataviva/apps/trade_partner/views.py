@@ -40,9 +40,9 @@ def index():
 
     body = {
         'municipality_with_more_exports' : municipalities_service.municipality_with_more_exports(),
-        'highest_export_value_by_municipality' : municipalities_service.highest_export_value_by_municipality(),
+        'highest_export_value' : municipalities_service.highest_export_value(),
         'municipality_with_more_imports' : municipalities_service.municipality_with_more_imports(),
-        'highest_import_value_by_municipality' : municipalities_service.highest_import_value_by_municipality(),
+        'highest_import_value' : municipalities_service.highest_import_value(),
 
         'product_with_more_imports' : products_service.product_with_more_imports(),
         'highest_import_value' : products_service.highest_import_value(),
