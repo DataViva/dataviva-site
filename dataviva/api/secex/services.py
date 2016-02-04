@@ -23,7 +23,6 @@ class Product:
             ).limit(1)
 
             secex_data = ymp_query.one()
-
         return secex_data
 
     def year(self):
@@ -46,21 +45,18 @@ class Product:
         secex_data = self.__secex_values__()
         export_val = secex_data.export_val or 0
         import_val = secex_data.import_val or 0
-
         return export_val - import_val
 
     def export_net_weight(self):
         secex_data = self.__secex_values__()
         export_kg = secex_data.export_kg
         export_val = secex_data.export_val
-
         return export_val if not export_val else export_kg / export_val
 
     def import_net_weight(self):
         secex_data = self.__secex_values__()
         import_kg = secex_data.import_kg
         import_val = secex_data.import_val
-
         return import_kg if not import_kg else import_kg / import_val
 
     def __destination_with_more_exports__(self):
@@ -72,7 +68,6 @@ class Product:
         ).order_by(desc(Ympw.export_val)).limit(1)
 
         secex_data = ympw_query.one()
-
         return secex_data
 
     def destination_with_more_exports(self):
@@ -92,7 +87,6 @@ class Product:
         ).order_by(desc(Ympw.import_val)).limit(1)
 
         secex_data = ympw_query.one()
-
         return secex_data
 
     def origin_with_more_imports(self):
@@ -112,7 +106,6 @@ class Product:
         ).order_by(desc(Ymbp.export_val)).limit(1)
 
         secex_data = ymbp_query.one()
-
         return secex_data
 
     def municipality_with_more_exports(self):
@@ -132,7 +125,6 @@ class Product:
         ).order_by(desc(Ymbp.import_val)).limit(1)
 
         secex_data = ymbp_query.one()
-
         return secex_data
 
     def municipality_with_more_imports(self):
@@ -164,7 +156,6 @@ class ProductByLocation(Product):
         ).limit(1)
 
         pci = ymp_pci_query.one().pci
-
         return pci
 
     def __secex_values__(self):
@@ -177,7 +168,6 @@ class ProductByLocation(Product):
             ).limit(1)
 
             secex_data = ymbp_query.one()
-
         return secex_data
 
     def rca_wld(self):
@@ -202,7 +192,6 @@ class ProductByLocation(Product):
         ).order_by(desc(Ymbpw.export_val)).limit(1)
 
         secex_data = ymbpw_query.one()
-
         return secex_data
 
     def destination_with_more_exports(self):
@@ -223,7 +212,6 @@ class ProductByLocation(Product):
         ).order_by(desc(Ymbpw.import_val)).limit(1)
 
         secex_data = ymbpw_query.one()
-
         return secex_data
 
     def origin_with_more_imports(self):
@@ -244,7 +232,6 @@ class ProductByLocation(Product):
         ).order_by(desc(Ymbp.export_val)).limit(1)
 
         secex_data = ymbp_query.one()
-
         return secex_data
 
     def municipality_with_more_exports(self):
@@ -265,7 +252,6 @@ class ProductByLocation(Product):
         ).order_by(desc(Ymbp.import_val)).limit(1)
 
         secex_data = ymbp_query.one()
-
         return secex_data
 
     def municipality_with_more_imports(self):
