@@ -7,18 +7,15 @@ def templates_preview_controler(bra_id, cnae_id):
     else : 
         industry['flag_preview_headers'] = True    
      
-        if len(bra_id) == 9 : 
+        if len(bra_id) == 9 : # municipatity
             industry['county'] = False
         else :
             industry['county'] = True    
 
 
-    if len(cnae_id) == 1 : 
+    if len(cnae_id) == 6 : # class 
         industry['class'] = True
     else : 
         industry['class'] = False
-
-    if len(cnae_id) == 1 :
-        industry['flag_preview_headers'] = False 
 
     return industry
