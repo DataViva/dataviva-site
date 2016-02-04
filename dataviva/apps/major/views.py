@@ -19,7 +19,16 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
     major_service = Major(course_hedu_id='523E04')
-    major = major_service.major_info()
+
+    major = {
+        'name' : major_service.name(),
+        'enrolled' : major_service.enrolled(),
+        'entrants' : major_service.entrants(),
+        'graduates' : major_service.graduates(),
+        'profile' : major_service.profile(),
+        'year' : major_service.year()
+    }
+
     enrollments = {
         'university_with_more_enrolled' : major_service.university_with_more_enrolled(),
         'municipality_with_more_enrolled' : major_service.municipality_with_more_enrolled(),

@@ -117,37 +117,61 @@ class University:
 
 class Major:
     def __init__ (self, course_hedu_id):
+
+        self._major = None
+
         self.course_hedu_id = course_hedu_id
         self.yc_max_year_query = db.session.query(func.max(Yc_hedu.year))
         self.yuc_max_year_query = db.session.query(func.max(Yuc.year))
         self.ybc_max_year_query = db.session.query(func.max(Ybc_hedu.year))
 
-    def major_info(self):
-        yc_query = Yc_hedu.query.join(Course_hedu).filter(
-            Yc_hedu.course_hedu_id == self.course_hedu_id,
-            Yc_hedu.year == self.yc_max_year_query
-        )
+    def __major_info__(self):
+        if not self._major:
+            yc_query = Yc_hedu.query.join(Course_hedu).filter(
+                Yc_hedu.course_hedu_id == self.course_hedu_id,
+                Yc_hedu.year == self.yc_max_year_query
+            )
 
-        yc_data = yc_query.values(
-            Course_hedu.name_pt,
-            Course_hedu.desc_pt,
-            Yc_hedu.year,
-            Yc_hedu.enrolled,
-            Yc_hedu.entrants,
-            Yc_hedu.graduates
-        )
+            yc_data = yc_query.values(
+                Course_hedu.name_pt,
+                Course_hedu.desc_pt,
+                Yc_hedu.year,
+                Yc_hedu.enrolled,
+                Yc_hedu.entrants,
+                Yc_hedu.graduates
+            )
 
-        major = {}
+            major = {}
 
-        for name_pt, desc_pt, year, enrolled, entrants, graduates in yc_data:
-            major['name'] = name_pt
-            major['profile'] = desc_pt
-            major['year'] = year
-            major['enrolled'] = enrolled
-            major['entrants'] = entrants
-            major['graduates'] = graduates
+            for name_pt, desc_pt, year, enrolled, entrants, graduates in yc_data:
+                major['name'] = name_pt
+                major['profile'] = desc_pt
+                major['year'] = year
+                major['enrolled'] = enrolled
+                major['entrants'] = entrants
+                major['graduates'] = graduates
 
-        return major
+            self._major = major
+
+        return self._major
+
+    def name(self):
+        return self.__major_info__()['name']
+
+    def enrolled(self):
+        return self.__major_info__()['enrolled']
+
+    def entrants(self):
+        return self.__major_info__()['entrants']
+
+    def graduates(self):
+        return self.__major_info__()['graduates']
+
+    def profile(self):
+        return self.__major_info__()['profile']
+
+    def year(self):
+        return self.__major_info__()['year']
 
     def university_with_more_enrolled(self):
         yuc_enrolled_query = Yuc.query.join(uni).filter(

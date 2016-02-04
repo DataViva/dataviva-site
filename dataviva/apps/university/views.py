@@ -25,11 +25,11 @@ def index():
     university_service = University(university_id='00575')
 
     university = {
-        'name' : university_service.name()
-        'enrolled' : university_service.enrolled()
-        'entrants' : university_service.entrants()
-        'graduates' : university_service.graduates()
-        'profile' : university_service.profile()
+        'name' : university_service.name(),
+        'enrolled' : university_service.enrolled(),
+        'entrants' : university_service.entrants(),
+        'graduates' : university_service.graduates(),
+        'profile' : university_service.profile(),
         'year' : university_service.year()
     }
 
