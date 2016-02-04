@@ -39,6 +39,7 @@
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
                         <tbody>
+                           {% if context.is_municipality %}
                             <tr>
                                 <th>
                                     Principal Município por Empregos
@@ -48,6 +49,7 @@
                                     <strong class="counter">{{body.municipality_with_more_jobs_value}}</strong> <span>{{context.jobs_county_unity}} empregos</span>
                                 </td>
                             </tr>
+                            {% endif %}
                             <tr>
                                 <th>
                                     Principal Atividade por Empregos
@@ -57,6 +59,7 @@
                                     <strong class="counter">{{body.activity_with_more_jobs_value}}</strong> <span>{{context.activity_for_job_unit}} empregos</span>
                                 </td>
                             </tr>
+                            {% if context.is_municipality %}
                             <tr>
                                 <th>
                                     Município com maior renda média mensal
@@ -66,6 +69,7 @@
                                     USD <strong class="counter">{{body.municipality_with_biggest_wage_avg_value}}</strong> <span>{{context.biggest_average_monsthly_income_unity}}</span>
                                 </td>
                             </tr>
+                            {%endif%}
                             <tr>
                                 <th>
                                     Atividade com maior renda média mensal

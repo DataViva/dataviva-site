@@ -26,12 +26,23 @@ def index(occupation_id):
     bra_id = request.args.get('bra_id')
     header = {}
     body = {}
+    context = {}
 
     if bra_id: 
         rais_occupation_service = RaisOccupationByLocationService(occupation_id = occupation_id, bra_id = bra_id)
 
     else:
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id)
+
+    if len(occupation_id) == 4: 
+        context['is_family'] = True
+    else:
+         context['is_family'] = False  
+
+    if len(bra_id) == 9:
+        context['is_municipality'] = True
+    else:
+        context['is_municipality'] = True
         
     header['name'] = rais_occupation_service.name()
     header['average_monthly_income'] = rais_occupation_service.average_monthly_income()
@@ -40,11 +51,13 @@ def index(occupation_id):
     header['total_establishments'] = rais_occupation_service.total_establishments()
     header['year'] = rais_occupation_service.year
     
-    body['municipality_with_more_jobs'] = rais_occupation_service.municipality_with_more_jobs()
-    body['municipality_with_more_jobs_value'] = rais_occupation_service.num_jobs_of_municipality_with_more_jobs()
+    if not context['is_municipality']:
 
-    body['municipality_with_biggest_wage_avg'] = rais_occupation_service.municipality_with_biggest_wage_average()
-    body['municipality_with_biggest_wage_avg_value'] = rais_occupation_service.wage_average_of_municipality_with_biggest_wage_average()
+        body['municipality_with_more_jobs'] = rais_occupation_service.municipality_with_more_jobs()
+        body['municipality_with_more_jobs_value'] = rais_occupation_service.num_jobs_of_municipality_with_more_jobs()
+    
+        body['municipality_with_biggest_wage_avg'] = rais_occupation_service.municipality_with_biggest_wage_average()
+        body['municipality_with_biggest_wage_avg_value'] = rais_occupation_service.wage_average_of_municipality_with_biggest_wage_average()
 
     body['activity_with_more_jobs'] = rais_occupation_service.activity_with_more_jobs()
     body['activity_with_more_jobs_value'] = rais_occupation_service.num_jobs_of_activity_with_more_jobs()
@@ -59,16 +72,12 @@ def index(occupation_id):
         'total_employment_unity' : 'milhares', 
         'total_establishments_unity' : 'milhares', 
         'jobs_municipality_unity' : 'milhares de', 
-        'activity_for_job_unity': unicode('bilhões','utf8'), 
+        'activity_for_job_unity': unicode('milhares','utf8'), 
         'biggest_average_monsthly_income_unity': unicode('bilhões','utf8'),
-        'activity_for_job_unity' : unicode('bilhoes','utf8'),
+        'activity_for_job_unity' : unicode('milhares','utf8'),
         'text_salario_e_emprego': unicode('Minas Gerais é uma das 27 unidades feder...','utf8'),
         'text_oportunidades_economicas' : unicode('Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste ','utf8'),
     } 
 
-    if len(occupation_id) == 4: 
-        context['family'] = True
-    else:
-         context['family'] = False  
     
     return render_template('occupation/index.html', body_class='perfil-estado', context=context, header = header, body = body)

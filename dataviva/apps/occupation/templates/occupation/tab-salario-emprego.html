@@ -8,18 +8,22 @@
                 <table class="table data-blue">
                     <thead>
                         <tr>
+                            {% if context.is_municipality %}
                             <th>
                                 Principal Município
                                 <small>por Empregos</small>
                             </th>
+                            {% endif %}
                             <th>
                                 Principal Atividade
                                 <small>por Empregos</small>
                             </th>
+                            {% if context.is_municipality %}
                             <th>
                                 Município
                                 <small>com maior renda média mensal</small>
                             </th>
+                            {% endif %}
                             <th>
                                 Atividade
                                 <small>com maior renda média mensal</small>
@@ -28,24 +32,28 @@
                     </thead>
                     <tbody>
                         <tr>
+                            {% if context.is_municipality %}
                             <td>
                                 <p class="label">{{body.municipality_with_more_jobs}}</p>
                                 <div class="number">
                                     <strong class="counter">{{body.municipality_with_more_jobs_value}}</strong><span>EMPREGOS</span>
                                 </div>
                             </td>
+                            {% endif %}
                             <td>
                                 <p class="label">{{body.activity_with_more_jobs}}</p>
                                 <div class="number">
                                     <strong class="counter">{{body.activity_with_more_jobs_value}}</strong><span>EMPREGOS</span>
                                 </div>
                             </td>
+                            {% if context.is_municipality %}
                             <td>
                                 <p class="label">{{body.municipality_with_biggest_wage_avg}}</p>
                                 <div class="number">
-                                    USD<strong class="counter">{{body.municipality_with_biggest_wage_avg_value}}</strong><span></span>
+                                    USD<strong class="counter">{{body.municipality_with_biggest_wage_avg_value}}</strong><span>Milhares</span>
                                 </div>
                             </td>
+                            {% endif %}
                             <td>
                                 <p class="label">{{body.activity_with_biggest_wage_avg}}</p>
                                 USD<div class="number">
