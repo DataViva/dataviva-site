@@ -127,13 +127,11 @@ class Occupation:
                 Yio.year == self.year,
                 Yio.cnae_id_len == 6)\
             .order_by(desc(Yio.num_jobs)).limit(1)\
-            .values(Cnae.name_pt,
-                    Yio.num_jobs)
+            .one()
 
             activity_with_more_jobs = {}
-            for name_pt, num_jobs in yio_activity_num_jobs_generator:
-                activity_with_more_jobs['activity_with_more_jobs'] = name_pt
-                activity_with_more_jobs['activity_with_more_jobs_value'] = num_jobs
+            activity_with_more_jobs['activity_with_more_jobs'] = yio_activity_num_jobs_generator.cnae.name()
+            activity_with_more_jobs['activity_with_more_jobs_value'] = yio_activity_num_jobs_generator.num_jobs
 
             self._activity_with_more_jobs = activity_with_more_jobs
 
