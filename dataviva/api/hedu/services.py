@@ -5,33 +5,55 @@ from sqlalchemy.sql.expression import func, desc
 
 class University:
     def __init__ (self, university_id):
+        self._university = None
+
         self.university_id = university_id
         self.yu_max_year_query = db.session.query(func.max(Yu.year)).filter_by(university_id=university_id)
         self.yuc_max_year_query = db.session.query(func.max(Yuc.year))
 
-    def university_info(self):
-        yu_query = Yu.query.join(uni).filter(Yu.university_id == self.university_id, Yu.year == self.yu_max_year_query)
+    def __university_info__(self):
+        if not self._university:
+            yu_query = Yu.query.join(uni).filter(Yu.university_id == self.university_id, Yu.year == self.yu_max_year_query)
 
-        yu_data = yu_query.values(
-            uni.name_pt,
-            Yu.enrolled,
-            Yu.entrants,
-            Yu.graduates,
-            Yu.year,
-            uni.desc_pt
-        )
+            yu_data = yu_query.values(
+                uni.name_pt,
+                Yu.enrolled,
+                Yu.entrants,
+                Yu.graduates,
+                Yu.year,
+                uni.desc_pt
+            )
 
-        university = {}
+            university = {}
 
-        for name_pt, enrolled, entrants, graduates, year, profile in yu_data:
-            university['name'] = name_pt
-            university['enrolled'] = enrolled
-            university['entrants'] = entrants
-            university['graduates'] =  graduates
-            university['profile'] = profile
-            university['year'] =  year
+            for name_pt, enrolled, entrants, graduates, year, profile in yu_data:
+                university['name'] = name_pt
+                university['enrolled'] = enrolled
+                university['entrants'] = entrants
+                university['graduates'] =  graduates
+                university['profile'] = profile
+                university['year'] =  year
+            self._university = university
 
-        return university
+        return self._university
+
+    def name(self):
+        return self.__university_info__()['name']
+
+    def enrolled(self):
+        return self.__university_info__()['enrolled']
+
+    def entrants(self):
+        return self.__university_info__()['entrants']
+
+    def graduates(self):
+        return self.__university_info__()['graduates']
+
+    def profile(self):
+        return self.__university_info__()['profile']
+
+    def year(self):
+        return self.__university_info__()['year']
 
     def major_with_more_enrollments(self):
 
