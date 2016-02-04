@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.secex.services import TradePartner, TradePartnerMunicipalityByExport, \
 TradePartnerMunicipalityByImport, TradePartnerProductByImport, TradePartnerProductByExport, \
-TradePartnerProductByHighestBalance, TradePartnerProductByLowestBalance
+TradePartnerProductByHighestBalance, TradePartnerProductByLowestBalance, TradePartnerProducts
 from sqlalchemy.sql.expression import func, desc, asc
 
 mod = Blueprint('trade_partner', __name__,
@@ -33,6 +33,8 @@ def index():
     product_by_highest_balance_service = TradePartnerProductByHighestBalance(wld_id=wld_id)
     product_by_lowest_balance_service = TradePartnerProductByLowestBalance(wld_id=wld_id)
 
+    products_service = TradePartnerProducts(wld_id=wld_id)
+
     header = {
         'name': trade_partner_service.country_name(),
         'year': trade_partner_service.year(),
@@ -48,14 +50,15 @@ def index():
         'highest_export_value_by_municipality' : municipality_by_export_service.highest_export_value_by_municipality(),
         'municipality_with_more_imports' : municipality_by_import_service.municipality_with_more_imports(),
         'highest_import_value_by_municipality' : municipality_by_import_service.highest_import_value_by_municipality(),
-        'product_with_more_imports' : product_by_import_service.product_with_more_imports(),
-        'highest_import_value_by_product' : product_by_import_service.highest_import_value_by_product(),
-        'product_with_more_exports' : product_by_export_service.product_with_more_exports(),
-        'highest_export_value_by_product' : product_by_export_service.highest_export_value_by_product(),
-        'product_with_highest_balance' : product_by_highest_balance_service.product_with_highest_balance(),
-        'highest_balance_by_product' : product_by_highest_balance_service.highest_balance_by_product(),
-        'product_with_lowest_balance' : product_by_lowest_balance_service.product_with_lowest_balance(),
-        'lowest_balance_by_product' : product_by_lowest_balance_service.lowest_balance_by_product(),
+
+        'product_with_more_imports' : products_service.product_with_more_imports(),
+        'highest_import_value' : products_service.highest_import_value(),
+        'product_with_more_exports' : products_service.product_with_more_exports(),
+        'highest_export_value' : products_service.highest_export_value(),
+        'product_with_highest_balance' : products_service.product_with_highest_balance(),
+        'highest_balance' : products_service.highest_balance(),
+        'product_with_lowest_balance' : products_service.product_with_lowest_balance(),
+        'lowest_balance' : products_service.lowest_balance(),
         'world_trade_description' : 'World trade description.',
     }
 
