@@ -69,7 +69,7 @@ class TradePartnerMunicipalityByExport(TradePartner):
             func.length(Ymbw.bra_id) == 9).order_by(desc(Ymbw.export_val)).limit(1)
 
     def municipality_with_more_exports(self):
-        return self.__secex__().name()
+        return self.__secex__().bra.name()
 
     def highest_export_value_by_municipality(self):
         return self.__secex__().export_val
@@ -87,10 +87,11 @@ class TradePartnerMunicipalityByImport(TradePartner):
             func.length(Ymbw.bra_id) == 9).order_by(desc(Ymbw.import_val)).limit(1)
 
     def municipality_with_more_imports(self):
-        return self.__secex__().name()
+        return self.__secex__().bra.name()
 
     def highest_import_value_by_municipality(self):
         return self.__secex__().import_val
+
 
 class TradePartnerProductByImport(TradePartner):
 
@@ -104,7 +105,7 @@ class TradePartnerProductByImport(TradePartner):
             Ympw.year == self.max_year_query).order_by(desc(Ympw.import_val)).limit(1)
 
     def product_with_more_imports(self):
-        return self.__secex__().name()
+        return self.__secex__().hs.name()
 
     def highest_import_value_by_product(self):
         return self.__secex__().import_val
@@ -121,7 +122,7 @@ class TradePartnerProductByExport(TradePartner):
             Ympw.year == self.max_year_query).order_by(desc(Ympw.export_val)).limit(1)
 
     def product_with_more_exports(self):
-        return self.__secex__().name()
+        return self.__secex__().hs.name()
 
     def highest_export_value_by_product(self):
         return self.__secex__().export_val
@@ -133,14 +134,14 @@ class TradePartnerProductByHighestBalance(TradePartner):
     def __init__(self, wld_id):
         TradePartner.__init__(self, wld_id)
         self.max_year_query = db.session.query(func.max(Ympw.year)).filter_by(wld_id=wld_id)
-        ympw_highest_balance_query = Ympw.query.join(Hs).filter(
+        self.secex_query = Ympw.query.join(Hs).filter(
             Ympw.wld_id == self.wld_id,
             Ympw.month == 0,
             Ympw.hs_id_len == 6,
             Ympw.year == self.max_year_query).order_by(desc(Ympw.export_val-Ympw.import_val)).limit(1)
 
     def product_with_highest_balance(self):
-        return self.__secex__().name()
+        return self.__secex__().hs.name()
 
     def highest_balance_by_product(self):
         return self.__secex__().export_val - self.__secex__().import_val
@@ -152,14 +153,17 @@ class TradePartnerProductByLowestBalance(TradePartner):
     def __init__(self, wld_id):
         TradePartner.__init__(self, wld_id)
         self.max_year_query = db.session.query(func.max(Ympw.year)).filter_by(wld_id=wld_id)
-        ympw_highest_balance_query = Ympw.query.join(Hs).filter(
+        self.secex_query = Ympw.query.join(Hs).filter(
             Ympw.wld_id == self.wld_id,
             Ympw.month == 0,
             Ympw.hs_id_len == 6,
             Ympw.year == self.max_year_query).order_by(asc(Ympw.export_val-Ympw.import_val)).limit(1)
 
     def product_with_lowest_balance(self):
-        return self.__secex__().name()
+        return self.__secex__().hs.name()
 
     def lowest_balance_by_product(self):
-        return self.__secex__().export_val - self.__secex__().import_val
+        export_val = self.__secex__().export_val or 0
+        import_val = self.__secex__().import_val or 0
+
+        return export_val - import_val
