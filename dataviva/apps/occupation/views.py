@@ -44,7 +44,10 @@ def index(occupation_id):
     body['municipality_with_more_jobs'] = rais_occupation_service.municipality_with_more_jobs()
     body['municipality_with_more_jobs_value'] = rais_occupation_service.num_jobs_of_municipality_with_more_jobs()
 
-    body.update(rais_occupation_service.municipality_with_biggest_wage_average())
+    #body.update(rais_occupation_service.municipality_with_biggest_wage_average())
+    body['municipality_with_biggest_wage_avg'] = rais_occupation_service.municipality_with_biggest_wage_average()
+    body['municipality_with_biggest_wage_avg_value'] = rais_occupation_service.wage_average_of_municipality_with_biggest_wage_average()
+
     body.update(rais_occupation_service.activity_with_more_jobs())
     body.update(rais_occupation_service.activity_with_biggest_wage_average())
 

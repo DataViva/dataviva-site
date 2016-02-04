@@ -10,6 +10,7 @@ class Occupation:
         self.occupation_id = occupation_id
         self._data = None 
         self._municipality_with_more_jobs = None
+        self._municipality_with_biggest_wage_average = None
 
         year=0
 
@@ -83,6 +84,7 @@ class Occupation:
 
         return self._municipality_with_more_jobs
 
+    
     def municipality_with_more_jobs(self):
         return self.__municipality_with_more_jobs__()['municipality_with_more_jobs']
 
@@ -90,22 +92,33 @@ class Occupation:
         return self.__municipality_with_more_jobs__()['municipality_with_more_jobs_value']
 
 
-    def municipality_with_biggest_wage_average(self):
+    def __municipality_with_biggest_wage_average__(self):
 
-        ybo_municipality_wage_avg_generator = Ybo.query.join(Bra).filter(
-            Ybo.cbo_id == self.occupation_id,
-            Ybo.year == self.year,
-            Ybo.bra_id_len == 9)\
-        .order_by(desc(Ybo.wage_avg)).limit(1)\
-        .values(Bra.name_pt,
-                Ybo.wage_avg)
+        if not self._municipality_with_biggest_wage_average:
 
-        municipality_with_biggest_wage_average = {}
-        for name_pt, wage_avg in ybo_municipality_wage_avg_generator:
-            municipality_with_biggest_wage_average['municipality_with_biggest_wage_avg'] = name_pt
+            ybo_municipality_wage_avg_generator = Ybo.query.join(Bra).filter(
+                Ybo.cbo_id == self.occupation_id,
+                Ybo.year == self.year,
+                Ybo.bra_id_len == 9)\
+            .order_by(desc(Ybo.wage_avg)).limit(1)\
+            .values(Bra.name_pt,
+                    Ybo.wage_avg)
+    
+            municipality_with_biggest_wage_average = {}
+            for name_pt, wage_avg in ybo_municipality_wage_avg_generator:
+                municipality_with_biggest_wage_average['municipality_with_biggest_wage_avg'] = name_pt
             municipality_with_biggest_wage_average['municipality_with_biggest_wage_avg_value'] = wage_avg  
 
-        return municipality_with_biggest_wage_average
+            self._municipality_with_biggest_wage_average = municipality_with_biggest_wage_average
+
+        return self._municipality_with_biggest_wage_average
+
+
+    def municipality_with_biggest_wage_average(self):
+        return self.__municipality_with_biggest_wage_average__()['municipality_with_biggest_wage_avg']
+
+    def wage_average_of_municipality_with_biggest_wage_average(self):
+        return self.__municipality_with_biggest_wage_average__()['municipality_with_biggest_wage_avg_value']
 
     def activity_with_more_jobs(self):
 
