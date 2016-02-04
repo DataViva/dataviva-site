@@ -56,3 +56,4 @@ def index():
     }
 
     return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body)
+
