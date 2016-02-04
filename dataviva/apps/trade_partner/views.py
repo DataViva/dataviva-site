@@ -2,8 +2,7 @@
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.secex.services import TradePartner, TradePartnerMunicipalityByExport, \
-TradePartnerMunicipalityByImport, TradePartnerProductByImport, TradePartnerProductByExport, \
-TradePartnerProductByHighestBalance, TradePartnerProductByLowestBalance, TradePartnerProducts
+TradePartnerMunicipalityByImport, TradePartnerProducts
 from sqlalchemy.sql.expression import func, desc, asc
 
 mod = Blueprint('trade_partner', __name__,
@@ -28,10 +27,6 @@ def index():
     trade_partner_service = TradePartner(wld_id=wld_id)
     municipality_by_export_service = TradePartnerMunicipalityByExport(wld_id=wld_id)
     municipality_by_import_service = TradePartnerMunicipalityByImport(wld_id=wld_id)
-    product_by_import_service = TradePartnerProductByImport(wld_id=wld_id)
-    product_by_export_service = TradePartnerProductByExport(wld_id=wld_id)
-    product_by_highest_balance_service = TradePartnerProductByHighestBalance(wld_id=wld_id)
-    product_by_lowest_balance_service = TradePartnerProductByLowestBalance(wld_id=wld_id)
 
     products_service = TradePartnerProducts(wld_id=wld_id)
 
