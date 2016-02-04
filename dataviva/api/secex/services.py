@@ -1,6 +1,7 @@
 from dataviva.api.attrs.models import Wld, Bra, Hs
 from dataviva.api.secex.models import Ymw, Ymbw, Ympw
 from dataviva import db
+from flask import g
 from sqlalchemy.sql.expression import func, desc, asc
 
 class TradePartner:
@@ -21,48 +22,58 @@ class TradePartner:
 
             ymw_data = ymw_query.values(
                 Wld.name_pt,
+                Wld.name_en,
                 Ymw.year,
-                (Ymw.export_val-Ymw.import_val),
                 Ymw.export_val,
-                (Ymw.export_kg/Ymw.export_val),
                 Ymw.import_val,
-                (Ymw.import_kg/Ymw.import_val))
+                Ymw.export_kg,
+                Ymw.import_kg)
 
             country = {}
 
-            for name_pt, year, trade_balance, total_exported, unity_weight_export_price, total_imported, unity_weight_import_price in ymw_data:
-                country['name'] = name_pt
+            for name_pt, name_en, year, export_val, import_val, export_kg, import_kg in ymw_data:
+                country['name_pt'] = name_pt
+                country['name_en'] = name_en
                 country['year'] = year
-                country['trade_balance'] = trade_balance
-                country['total_exported'] = total_exported
-                country['unity_weight_export_price'] = unity_weight_export_price
-                country['total_imported'] = total_imported
-                country['unity_weight_import_price'] = unity_weight_import_price
+                country['export_val'] = export_val
+                country['import_val'] = import_val
+                country['export_kg'] = export_kg
+                country['import_kg'] = import_kg
 
             self._country_info = country
 
         return self._country_info
 
     def country_name(self):
-        return self.__country_info__()['name']
+        language = getattr(g, "locale", "en")
+        return getattr(.__country_info__()["name_"+language])
 
     def year(self):
         return self.__country_info__()['year']
 
     def trade_balance(self):
-        return self.__country_info__()['trade_balance']
+        export_val = self.__country_info__()['export_val']
+        import_val = self.__country_info__()['import_val']
+
+        return export_val - import_val
 
     def total_exported(self):
-        return self.__country_info__()['total_exported']
+        return self.__country_info__()['export_val']
 
     def unity_weight_export_price(self):
-        return self.__country_info__()['unity_weight_export_price']
+        export_val = self.__country_info__()['export_val']
+        export_kg = self.__country_info__()['export_kg']
+
+        return export_val / export_kg
 
     def total_imported(self):
-        return self.__country_info__()['total_imported']
+        return self.__country_info__()['import_val']
 
     def unity_weight_import_price(self):
-        return self.__country_info__()['unity_weight_import_price']
+        import_val = self.__country_info__()['import_val']
+        import_kg = self.__country_info__()['import_kg']
+
+        return import_val / import_kg
 
     def municipality_with_more_exports(self):
         ymbw_municipality_export_query = Ymbw.query.join(Bra).filter(
