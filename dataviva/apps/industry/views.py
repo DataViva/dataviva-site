@@ -25,7 +25,7 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
  
-    bra_id = None #'4mg000000' # Alfredo Vasconcelos
+    bra_id = None  #'4mg000000' # Alfredo Vasconcelos
     cnae_id = 'g47113' #supermarkets
     industry = {}
 
@@ -42,42 +42,32 @@ def index():
 
     ####EXTRACTY 
     
-    rais_industry_service = RaisIndustryService(cnae_id=cnae_id)
-
-    industry['name'] = rais_industry_service.get_name()
-
-    if bra_id == None :
-        industry['year'] = rais_industry_service.get_year()
- 
-        industry['average_monthly_income'] = rais_industry_service.average_monthly_income()
-        industry['salary_mass'] = rais_industry_service.salary_mass()
-        industry['total_jobs'] = rais_industry_service.num_jobs()
-        industry['total_establishments'] = rais_industry_service.num_establishments()
-
-        industry.update(rais_industry_service.get_occ_with_more_number_jobs())
-        industry.update(rais_industry_service.get_occ_with_more_wage_avg())
-        industry.update(rais_industry_service.get_municipality_with_more_num_jobs())
-        industry.update(rais_industry_service.get_municipality_with_more_wage_avg())
+    
+    if bra_id :
+        rais_industry_service = RaisIndustryByLocationService(bra_id=bra_id, cnae_id=cnae_id)
+        industry['rca_domestic'] = rais_industry_service.rca()
+        industry['distance'] = rais_industry_service.distance()
+        industry['opportunity_gain'] = rais_industry_service.opportunity_gain()
 
     else:
-        rais_industry_by_location_service = RaisIndustryByLocationService(bra_id=bra_id, cnae_id=cnae_id)
+        rais_industry_service = RaisIndustryService(cnae_id=cnae_id)
+   
+    industry['name'] = rais_industry_service.get_name() 
+    industry['year'] = rais_industry_service.get_year()
+    
+    industry['average_monthly_income'] = rais_industry_service.average_monthly_income()
+    industry['salary_mass'] = rais_industry_service.salary_mass()
+    industry['total_jobs'] = rais_industry_service.num_jobs()
+    industry['total_establishments'] = rais_industry_service.num_establishments()
 
-        industry['year'] = rais_industry_by_location_service.get_year()
-            
-        industry['average_monthly_income'] = rais_industry_by_location_service.average_monthly_income()
-        industry['salary_mass'] = rais_industry_by_location_service.salary_mass()
-        industry['total_jobs'] = rais_industry_by_location_service.num_jobs()
-        industry['total_establishments'] = rais_industry_by_location_service.num_establishments()
-        industry['rca_domestic'] = rais_industry_by_location_service.rca()
-        industry['distance'] = rais_industry_by_location_service.distance()
-        industry['opportunity_gain'] = rais_industry_by_location_service.opportunity_gain()
+    industry.update(rais_industry_service.get_occ_with_more_number_jobs())
+    industry.update(rais_industry_service.get_occ_with_more_wage_avg())
+
+    if bra_id == None  or len(bra_id) != 9 :
+        industry.update(rais_industry_service.get_municipality_with_more_num_jobs())
+        industry.update(rais_industry_service.get_municipality_with_more_wage_avg())   
 
 
-        industry.update(rais_industry_by_location_service.get_occ_with_more_number_jobs())
-        industry.update(rais_industry_by_location_service.get_occ_with_more_wage_avg())
-        if len(bra_id) != 9 :
-            industry.update(rais_industry_by_location_service.get_municipality_with_more_num_jobs())
-            industry.update(rais_industry_by_location_service.get_municipality_with_more_wage_avg())
         
             
     return render_template('industry/index.html', body_class='perfil-estado', industry=industry)

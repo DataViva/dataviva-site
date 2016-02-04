@@ -134,6 +134,9 @@ class IndustryByLocation :
         self.ybio_max_year=db.session.query(func.max(Ybio.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
 
 
+    def get_name(self): 
+        return Cnae.query.filter_by(id=self.cnae_id).one().name()
+
     def get_year(self):
         return self.ybi_max_year.scalar()
 
