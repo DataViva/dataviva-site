@@ -46,7 +46,7 @@ class TradePartner:
 
     def country_name(self):
         language = getattr(g, "locale", "en")
-        return getattr(.__country_info__()["name_"+language])
+        return self.__country_info__()["name_"+language]
 
     def year(self):
         return self.__country_info__()['year']
