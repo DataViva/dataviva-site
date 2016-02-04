@@ -100,7 +100,7 @@ class TradePartnerMunicipalities(TradePartner):
     def __init__(self, wld_id):
         TradePartner.__init__(self, wld_id)
         self.max_year_query = db.session.query(func.max(Ymbw.year)).filter_by(wld_id=wld_id)
-        self.secex_query = Ymbw.query.join(Bra).filter(
+        self.secex_query = Ymbw.query.join(Wld).join(Bra).filter(
             Ymbw.wld_id == self.wld_id,
             Ymbw.month == 0,
             Ymbw.year == self.max_year_query,
@@ -124,7 +124,7 @@ class TradePartnerProducts(TradePartner):
     def __init__(self, wld_id):
         TradePartner.__init__(self, wld_id)
         self.max_year_query = db.session.query(func.max(Ympw.year)).filter_by(wld_id=wld_id)
-        self.secex_query = Ympw.query.join(Hs).filter(
+        self.secex_query = Ympw.query.join(Wld).join(Hs).filter(
             Ympw.wld_id == self.wld_id,
             Ympw.month == 0,
             Ympw.hs_id_len == 6,
