@@ -25,8 +25,6 @@ def add_language_code(endpoint, values):
 @mod.route('/<cnae_id>')
 def index(cnae_id):
  
-    #bra_id = None # '4mg000000' # Alfredo Vasconcelos
-    #cnae_id = 'g47113' #supermarkets
     bra_id = request.args.get('bra_id')
 
     industry = {}
@@ -39,11 +37,8 @@ def index(cnae_id):
         'text_economic_opportunity' : unicode('Texto para Oportunidades Econômicas', 'utf8'),
     }
 
-
     industry.update(templates_preview_controler(bra_id=bra_id, cnae_id=cnae_id))
 
-    ####EXTRACTY 
-        
     if bra_id :
         rais_industry_service = RaisIndustryByLocationService(bra_id=bra_id, cnae_id=cnae_id)
         industry['rca'] = rais_industry_service.rca()

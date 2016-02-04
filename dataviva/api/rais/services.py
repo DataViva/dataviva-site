@@ -20,7 +20,6 @@ class Industry :
     def get_name(self): 
         return Cnae.query.filter_by(id=self.cnae_id).one().name()  
 
-
     def get_year(self):
         return self.yi_max_year_br.scalar()         
 
@@ -79,6 +78,7 @@ class Industry :
     def get_occ_with_more_number_jobs_value(self):
         return self.__occ_with_more_number_jobs__()['occ_with_more_number_jobs_value'] 
 
+
     #-----
 
     def __occ_with_more_wage_avg__(self):
@@ -102,6 +102,7 @@ class Industry :
     def get_occ_with_more_wage_avg_value(self):
         return self.__occ_with_more_wage_avg__()['occ_with_more_wage_avg_value']
 
+ 
     #-----
 
     def __municipality_with_more_num_jobs__(self):
@@ -124,6 +125,7 @@ class Industry :
     
     def get_municipality_with_more_num_jobs_value(self):
         return self.__municipality_with_more_num_jobs__()['municipality_with_more_num_jobs_value']
+
 
     #-----
     
@@ -149,7 +151,7 @@ class Industry :
         return self.__municipality_with_more_wage_avg__()['municipality_with_more_wage_avg_value']
 
 
-#########################
+
 
 
 class IndustryByLocation(Industry) :
@@ -202,6 +204,7 @@ class IndustryByLocation(Industry) :
     def opportunity_gain(self):
         return self.__rais_values__()['opportunity_gain'] 
 
+
     #-----
 
     def  __occ_with_more_number_jobs__(self) : 
@@ -220,6 +223,7 @@ class IndustryByLocation(Industry) :
 
         return self.occ_jobs
 
+ 
     #-----
 
     def __occ_with_more_wage_avg__(self):
@@ -237,6 +241,7 @@ class IndustryByLocation(Industry) :
 
         return self.occ_wage_avg
 
+ 
     #-----
         
     def __municipality_with_more_num_jobs__(self):

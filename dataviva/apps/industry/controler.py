@@ -12,7 +12,6 @@ def templates_preview_controler(bra_id, cnae_id):
         else :
             industry['county'] = True    
 
-
     if len(cnae_id) == 6 : # class 
         industry['class'] = True
     else : 
