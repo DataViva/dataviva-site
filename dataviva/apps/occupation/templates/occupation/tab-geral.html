@@ -39,7 +39,7 @@
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
                         <tbody>
-                           {% if context.is_municipality %}
+                           {% if context.is_not_municipality %}
                             <tr>
                                 <th>
                                     Principal Município por Empregos
@@ -59,7 +59,7 @@
                                     <strong class="counter">{{body.activity_with_more_jobs_value}}</strong> <span>{{context.activity_for_job_unit}} empregos</span>
                                 </td>
                             </tr>
-                            {% if context.is_municipality %}
+                            {% if context.is_not_municipality %}
                             <tr>
                                 <th>
                                     Município com maior renda média mensal

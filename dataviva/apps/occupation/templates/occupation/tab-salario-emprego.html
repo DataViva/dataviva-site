@@ -8,7 +8,7 @@
                 <table class="table data-blue">
                     <thead>
                         <tr>
-                            {% if context.is_municipality %}
+                            {% if context.is_not_municipality %}
                             <th>
                                 Principal Município
                                 <small>por Empregos</small>
@@ -18,7 +18,7 @@
                                 Principal Atividade
                                 <small>por Empregos</small>
                             </th>
-                            {% if context.is_municipality %}
+                            {% if context.is_not_municipality %}
                             <th>
                                 Município
                                 <small>com maior renda média mensal</small>
@@ -32,7 +32,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            {% if context.is_municipality %}
+                            {% if context.is_not_municipality %}
                             <td>
                                 <p class="label">{{body.municipality_with_more_jobs}}</p>
                                 <div class="number">
@@ -46,7 +46,7 @@
                                     <strong class="counter">{{body.activity_with_more_jobs_value}}</strong><span>EMPREGOS</span>
                                 </div>
                             </td>
-                            {% if context.is_municipality %}
+                            {% if context.is_not_municipality %}
                             <td>
                                 <p class="label">{{body.municipality_with_biggest_wage_avg}}</p>
                                 <div class="number">
