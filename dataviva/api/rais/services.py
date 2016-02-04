@@ -269,13 +269,11 @@ class OccupationByLocation(Occupation):
                 Ybio.year == self.year,
                 Ybio.cnae_id_len == 6)\
             .order_by(desc(Ybio.num_jobs)).limit(1)\
-            .values(Cnae.name_pt,
-                    Ybio.num_jobs)
+            .one()
 
             activity_with_more_jobs = {}
-            for name_pt, num_jobs in ybio_activity_num_jobs_generator:
-                activity_with_more_jobs['activity_with_more_jobs'] = name_pt
-                activity_with_more_jobs['activity_with_more_jobs_value'] = num_jobs 
+            activity_with_more_jobs['activity_with_more_jobs'] = ybio_activity_num_jobs_generator.cnae.name()
+            activity_with_more_jobs['activity_with_more_jobs_value'] = ybio_activity_num_jobs_generator.num_jobs 
 
             self._activity_with_more_jobs = activity_with_more_jobs
 
