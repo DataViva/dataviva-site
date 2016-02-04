@@ -159,10 +159,11 @@ class Product:
         municipality_with_more_imports = {}
 
         for name_pt, import_val in ymbp_bra_data:
-            name = name_pt
-            import_value = import_val
+            municipality_with_more_imports['munic_name_import'] = name_pt
+            municipality_with_more_imports['munic_import_value'] = import_val
 
-        return name, import_value
+        return municipality_with_more_imports
+
 
 class ProductByLocation:
     def __init__(self, bra_id, product_id):

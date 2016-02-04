@@ -53,6 +53,7 @@ def index(product_id):
     product = {}
 
     #dividir entre indicadores header e body
+    #implementar heranca para os metodos do service iguais
 
     attrs_product_service = AttrsProductService(product_id=product_id)
     product['name'] = attrs_product_service.name()
@@ -75,7 +76,6 @@ def index(product_id):
 
     else:
         secex_product_service = SecexProductService(product_id=product_id)
-
         product.update(secex_product_service.municipality_with_more_exports())
         product.update(secex_product_service.municipality_with_more_imports())
         product.update(secex_product_service.destination_with_more_exports())
