@@ -8,7 +8,7 @@ class Occupation:
     def __init__(self, occupation_id):
         
         self.occupation_id = occupation_id
-        self._header = None 
+        self._data = None 
 
         year=0
 
@@ -22,9 +22,9 @@ class Occupation:
 
     def __rais_data__(self):
         
-        if not self._header:
+        if not self._data:
 
-            yo_header_generator = Yo.query.join(Cbo).filter(
+            yo_data_generator = Yo.query.join(Cbo).filter(
                 Yo.cbo_id == self.occupation_id,
                 Yo.year == self.year)\
                 .values(Cbo.name_pt,
@@ -32,17 +32,17 @@ class Occupation:
                         Yo.wage,
                         Yo.num_jobs,
                         Yo.num_est)
-            header = {}
-            for name_pt, wage_avg, wage, num_jobs, num_est in yo_header_generator:
-                header['name'] = name_pt
-                header['average_monthly_income'] = wage_avg
-                header['salary_mass'] = wage
-                header['total_employment'] = num_jobs
-                header['total_establishments'] = num_est              
+            data = {}
+            for name_pt, wage_avg, wage, num_jobs, num_est in yo_data_generator:
+                data['name'] = name_pt
+                data['average_monthly_income'] = wage_avg
+                data['salary_mass'] = wage
+                data['total_employment'] = num_jobs
+                data['total_establishments'] = num_est              
 
-            self._header = header
+            self._data = data
 
-        return self._header
+        return self._data
 
 
     def name(self):
