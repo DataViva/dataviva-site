@@ -21,7 +21,7 @@
                             </th>
 
                             {% endif %}
-
+                            
                             <th>
                                 Principal Destino
                                 <small>por Valor Total Exportado</small>
@@ -38,30 +38,30 @@
                             {% if context.bra_id_len != 9 %}
 
                             <td>
-                                <p class="label">{{ body.municipality_name_export }}</p>
+                                <p class="label">{{ product.munic_name_export }}</p>
                                 <div class="number">
-                                    USD <strong class="counter">{{ body.municipality_export_value }}</strong><span>B</span>
+                                    USD <strong class="counter">{{ product.munic_export_value }}</strong><span>B</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">{{ body.municipality_name_import}}</p>
+                                <p class="label">{{ product.munic_name_import}}</p>
                                 <div class="number">
-                                    USD <strong class="counter">{{ body.municipality_import_value }}</strong><span>B</span>
+                                    USD <strong class="counter">{{ product.munic_import_value }}</strong><span>B</span>
                                 </div>
                             </td>
 
                             {% endif %}
 
                             <td>
-                                <p class="label">{{ body.dest_name_export }}</p>
+                                <p class="label">{{ product.dest_name_export }}</p>
                                 <div class="number">
-                                    USD <strong class="counter">{{ body.dest_export_value }}</strong><span>B</span>
+                                    USD <strong class="counter">{{ product.dest_export_value }}</strong><span>B</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">{{ body.src_name_import }}</p>
+                                <p class="label">{{ product.dest_name_import }}</p>
                                 <div class="number">
-                                    USD <strong class="counter">{{ body.src_import_value }}</strong><span>B</span>
+                                    USD <strong class="counter">{{ product.dest_import_value }}</strong><span>B</span>
                                 </div>
                             </td>
                         </tr>
