@@ -71,14 +71,14 @@ def index(occupation_id):
         body['municipality_with_more_jobs'] = rais_occupation_municipalities_service.municipality_with_more_jobs()
         body['municipality_with_more_jobs_value'] = rais_occupation_municipalities_service.num_jobs_of_municipality_with_more_jobs()
 
-        #body['municipality_with_biggest_wage_avg'] = rais_occupation_service.municipality_with_biggest_wage_average()
-        #body['municipality_with_biggest_wage_avg_value'] = rais_occupation_service.wage_average_of_municipality_with_biggest_wage_average()
+        body['municipality_with_biggest_wage_avg'] = rais_occupation_municipalities_service.municipality_with_biggest_wage_average()
+        body['municipality_with_biggest_wage_avg_value'] = rais_occupation_municipalities_service.wage_average_of_municipality_with_biggest_wage_average()
 
-    body['activity_with_more_jobs'] = rais_occupation_service.activity_with_more_jobs()
-    body['activity_with_more_jobs_value'] = rais_occupation_service.num_jobs_of_activity_with_more_jobs()
+    #body['activity_with_more_jobs'] = rais_occupation_service.activity_with_more_jobs()
+    #body['activity_with_more_jobs_value'] = rais_occupation_service.num_jobs_of_activity_with_more_jobs()
     
-    body['activity_with_biggest_wage_avg'] = rais_occupation_service.activity_with_biggest_wage_average()
-    body['activity_with_biggest_wage_avg_value'] = rais_occupation_service.num_jobs_of_activity_with_biggest_wage_avg()
+    #body['activity_with_biggest_wage_avg'] = rais_occupation_service.activity_with_biggest_wage_average()
+    #body['activity_with_biggest_wage_avg_value'] = rais_occupation_service.num_jobs_of_activity_with_biggest_wage_avg()
 
     
     return render_template('occupation/index.html', body_class='perfil-estado', context=context, header = header, body = body)

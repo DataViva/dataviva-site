@@ -12,6 +12,8 @@ class Occupation:
         self._municipality_with_biggest_wage_average = None
         self._activity_with_more_jobs = None
         self._activity_with_biggest_wage_average = None
+        self._rais_sorted_by_num_jobs = None
+        self._rais_sorted_by_wage_average = None
         year=0
         yo_max_year= db.session.query(func.max(Yo.year)).filter(
             Ybo.cbo_id == occupation_id)\
@@ -166,6 +168,11 @@ class Occupation:
         self._rais_sorted_by_num_jobs.sort(key=lambda rais: rais.num_jobs, reverse=True)
         return self._rais_sorted_by_num_jobs
 
+    def __rais_sorted_by_wage_average__(self):
+        self._rais_sorted_by_wage_average = self.__rais_list__()
+        self._rais_sorted_by_wage_average.sort(key=lambda rais: rais.wage_avg , reverse=True)
+        return self._rais_sorted_by_wage_average
+
 #-----------------------------
 class OccupationMunicipalities(Occupation):
     def __init__ (self, occupation_id):
@@ -183,6 +190,15 @@ class OccupationMunicipalities(Occupation):
     def num_jobs_of_municipality_with_more_jobs(self):
         num_jobs_of_municipality_with_more_jobs = self.__rais_sorted_by_num_jobs__()[0]
         return num_jobs_of_municipality_with_more_jobs.num_jobs
+
+    def municipality_with_biggest_wage_average(self):
+        municipality_with_biggest_wage_average = self.__rais_sorted_by_wage_average__()[0]
+        return municipality_with_biggest_wage_average.bra.name()
+
+    def wage_average_of_municipality_with_biggest_wage_average(self):
+        wage_average_of_municipality_with_biggest_wage_average = self.__rais_sorted_by_wage_average__()[0]
+        return wage_average_of_municipality_with_biggest_wage_average.wage_avg
+
 
 
 
