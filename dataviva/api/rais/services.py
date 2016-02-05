@@ -178,10 +178,10 @@ class OccupationMunicipalities(Occupation):
     def __init__ (self, occupation_id):
         Occupation.__init__(self, occupation_id)
         self.rais_query = Ybo.query.join(Bra).filter(
-                    Ybo.cbo_id == self.occupation_id,
-                    Ybo.year == self.year,
-                    Ybo.bra_id_len == 9)
-        self.municipality_data = None
+                            Ybo.cbo_id == self.occupation_id,
+                            Ybo.year == self.year,
+                            Ybo.bra_id_len == 9)
+        #self.municipality_data = None
 
     def municipality_with_more_jobs(self):
         municipality_with_more_jobs = self.__rais_sorted_by_num_jobs__()[0]
@@ -199,6 +199,22 @@ class OccupationMunicipalities(Occupation):
         wage_average_of_municipality_with_biggest_wage_average = self.__rais_sorted_by_wage_average__()[0]
         return wage_average_of_municipality_with_biggest_wage_average.wage_avg
 
+#-------------------
+class OccupationActivities(Occupation):
+    def __init__(self, occupation_id):
+        Occupation.__init__(self, occupation_id)
+        self.rais_query = Yio.query.join(Cnae).filter(
+                            Yio.cbo_id == self.occupation_id,
+                            Yio.year == self.year,
+                            Yio.cnae_id_len == 6)
+
+    def activity_with_more_jobs(self):
+        activity_with_more_jobs = self.__rais_sorted_by_num_jobs__()[0]
+        return activity_with_more_jobs.cnae.name()
+
+    def num_jobs_of_activity_with_more_jobs(self):
+        num_jobs_of_activity_with_more_jobs = self.__rais_sorted_by_num_jobs__()[0]
+        return num_jobs_of_activity_with_more_jobs.num_jobs
 
 
 
