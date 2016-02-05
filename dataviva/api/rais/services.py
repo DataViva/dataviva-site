@@ -17,8 +17,8 @@ class Occupation:
         year=0
 
         yo_max_year= db.session.query(func.max(Yo.year)).filter(
-        Ybo.cbo_id == occupation_id)\
-        .one()
+            Ybo.cbo_id == occupation_id)\
+            .one()
         for years in yo_max_year:
             year = years
 
@@ -31,7 +31,7 @@ class Occupation:
             yo_data_generator = Yo.query.join(Cbo).filter(
                     Yo.cbo_id == self.occupation_id,
                     Yo.year == self.year)\
-                .one()
+                .first_or_404()
 
             data = {}
             data['name'] = yo_data_generator.cbo.name()
@@ -70,7 +70,7 @@ class Occupation:
                     Ybo.year == self.year,
                     Ybo.bra_id_len == 9)\
                 .order_by(desc(Ybo.num_jobs)).limit(1)\
-                .one()
+                .first_or_404()
     
             municipality_with_more_jobs = {}
             municipality_with_more_jobs['municipality_with_more_jobs'] = ybo_municipality_num_jobs_generator.bra.name()
@@ -97,7 +97,7 @@ class Occupation:
                     Ybo.year == self.year,
                     Ybo.bra_id_len == 9)\
                 .order_by(desc(Ybo.wage_avg)).limit(1)\
-                .one()
+                .first_or_404()
     
             municipality_with_biggest_wage_average = {}
             municipality_with_biggest_wage_average['municipality_with_biggest_wage_avg'] = ybo_municipality_wage_avg_generator.bra.name()
@@ -123,7 +123,7 @@ class Occupation:
                     Yio.year == self.year,
                     Yio.cnae_id_len == 6)\
                 .order_by(desc(Yio.num_jobs)).limit(1)\
-                .one()
+                .first_or_404()
 
             activity_with_more_jobs = {}
             activity_with_more_jobs['activity_with_more_jobs'] = yio_activity_num_jobs_generator.cnae.name()
@@ -148,7 +148,7 @@ class Occupation:
                     Yio.year == self.year,
                     Yio.cnae_id_len == 6)\
                 .order_by(desc(Yio.wage_avg)).limit(1)\
-                .one()
+                .first_or_404()
 
             activity_with_biggest_wage_avg = {}
             activity_with_biggest_wage_avg['activity_with_biggest_wage_avg'] = yio_activity_wage_avg_generator.cnae.name()
@@ -183,6 +183,7 @@ class OccupationByLocation(Occupation):
             Ybo.cbo_id == occupation_id, 
             Ybo.bra_id == bra_id)\
             .one()
+        
         for years in ybo_max_year:
             year = years
 
@@ -196,7 +197,7 @@ class OccupationByLocation(Occupation):
                     Ybo.cbo_id == self.occupation_id,
                     Ybo.bra_id == self.bra_id,
                     Ybo.year == self.year)\
-                .one()
+                .first_or_404()
 
             data = {}
             data['name'] = ybo_data_generator.cbo.name()
@@ -220,7 +221,7 @@ class OccupationByLocation(Occupation):
                     Ybo.year == self.year,
                     Ybo.bra_id_len == 9)\
                 .order_by(desc(Ybo.num_jobs)).limit(1)\
-                .one()
+                .first_or_404()
     
             municipality_with_more_jobs = {}
             municipality_with_more_jobs['municipality_with_more_jobs'] = ybo_municipality_num_jobs_generator.bra.name()
@@ -241,7 +242,7 @@ class OccupationByLocation(Occupation):
                     Ybo.year == self.year,
                     Ybo.bra_id_len == 9)\
                 .order_by(desc(Ybo.wage_avg)).limit(1)\
-                .one()
+                .first_or_404()
     
             municipality_with_biggest_wage_avg = {}
             municipality_with_biggest_wage_avg['municipality_with_biggest_wage_avg'] = ybo_municipality_wage_avg_generator.bra.name()
@@ -261,7 +262,7 @@ class OccupationByLocation(Occupation):
                     Ybio.year == self.year,
                     Ybio.cnae_id_len == 6)\
                 .order_by(desc(Ybio.num_jobs)).limit(1)\
-                .one()
+                .first_or_404()
 
             activity_with_more_jobs = {}
             activity_with_more_jobs['activity_with_more_jobs'] = ybio_activity_num_jobs_generator.cnae.name()
@@ -281,7 +282,7 @@ class OccupationByLocation(Occupation):
                     Ybio.year == self.year,
                     Ybio.cnae_id_len == 6)\
                 .order_by(desc(Ybio.wage_avg)).limit(1)\
-                .one()
+                .first_or_404()
 
             activity_with_biggest_wage_avg = {}
             activity_with_biggest_wage_avg['activity_with_biggest_wage_avg'] = ybio_activity_wage_avg_generator.cnae.name()

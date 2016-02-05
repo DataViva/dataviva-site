@@ -46,14 +46,13 @@ def index(occupation_id):
     else:
          context['is_family'] = False  
 
-    if len(bra_id) == 9:
-        context['is_not_municipality'] = False
-    else:
-        context['is_not_municipality'] = True
+    #defaut
+    context['is_not_municipality'] = True
 
-    
     if bra_id: 
         rais_occupation_service = RaisOccupationByLocationService(occupation_id = occupation_id, bra_id = bra_id)
+        if len(bra_id) == 9:
+            context['is_not_municipality'] = False
 
     else:
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id)

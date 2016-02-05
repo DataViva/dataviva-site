@@ -39,7 +39,7 @@
             <div class="tab-content">
                 {% include "occupation/tab-geral.html" %}
                 {% include "occupation/tab-salario-emprego.html" %}
-                {% if context.family %}
+                {% if context.is_family %}
                     {% include "occupation/tab-oportunidade-economica.html" %}
                 {% endif %}
 
