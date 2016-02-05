@@ -115,6 +115,51 @@ class IndustryMunicipality(Industry):
         return rais.wage
 
 
+class IndustryByLocation : 
+    def __init__(self, bra_id, cnae_id):  
+        self.bra_id = bra_id
+        self.cnae_id = cnae_id
+        self._rais = None
+        self.ybi_max_year=db.session.query(func.max(Ybi.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
+        self.rais_query = Ybi.query.filter(
+                Ybi.cnae_id==self.cnae_id,
+                Ybi.bra_id == self.bra_id,
+                Ybi.year==self.ybi_max_year
+                )
+    
+    def __rais__(self):
+        if not self._rais:
+            rais_data = self.rais_query.first_or_404()
+            self._rais = rais_data
+        return self._rais
+
+    def get_name(self):
+        base_industry = self.__rais__().cnae
+        return base_industry.name() 
+    
+    def get_year(self):
+        return self.__rais__().year         
+
+    def average_monthly_income(self): 
+        return self.__rais__().wage_avg
+
+    def salary_mass(self):
+        return self.__rais__().wage
+
+    def num_jobs(self):
+        return self.__rais__().num_jobs
+
+    def num_establishments(self):
+        return self.__rais__().num_est
+
+    def rca(self):
+        return self.__rais__().rca
+
+    def distance(self):
+        return self.__rais__().distance
+
+    def opportunity_gain(self):
+        return self.__rais__().opp_gain 
 
 
 
