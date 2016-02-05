@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
-from dataviva.api.rais.services import Industry as RaisIndustryService
-from dataviva.api.rais.services import IndustryOccupation as RaisIndustryOccupation
-from dataviva.api.rais.services import IndustryMunicipality as RaisIndustryMunicipality
+from dataviva.api.rais.services import Industry
+from dataviva.api.rais.services import IndustryOccupation
+from dataviva.api.rais.services import IndustryMunicipality
 from dataviva.apps.industry.controler import templates_preview_controler
 
 
@@ -43,38 +43,38 @@ def index(cnae_id):
     industry.update(templates_preview_controler(bra_id=bra_id, cnae_id=cnae_id))
 
     if bra_id :
-        rais_industry_service = RaisIndustryByLocationService(bra_id=bra_id, cnae_id=cnae_id)
-        header['rca'] = rais_industry_service.rca()
-        header['distance'] = rais_industry_service.distance()
-        header['opportunity_gain'] = rais_industry_service.opportunity_gain()
+        industry_service = RaisIndustryByLocationService(bra_id=bra_id, cnae_id=cnae_id)
+        header['rca'] = industry_service.rca()
+        header['distance'] = industry_service.distance()
+        header['opportunity_gain'] = industry_service.opportunity_gain()
     else:
-        rais_industry_service = RaisIndustryService(cnae_id=cnae_id)
-        rais_industry_occupation_service = RaisIndustryOccupation(cnae_id=cnae_id)
-        rais_industry_municipality_service = RaisIndustryMunicipality(cnae_id=cnae_id)
+        industry_service = Industry(cnae_id=cnae_id)
+        industry_occupation_service = IndustryOccupation(cnae_id=cnae_id)
+        industry_municipality_service = IndustryMunicipality(cnae_id=cnae_id)
    
-    header['name'] = rais_industry_service.get_name() 
-    header['year'] = rais_industry_service.get_year()
+    header['name'] = industry_service.get_name() 
+    header['year'] = industry_service.get_year()
     
-    header['average_monthly_income'] = rais_industry_service.average_monthly_income()
-    header['salary_mass'] = rais_industry_service.salary_mass()
-    header['num_jobs'] = rais_industry_service.num_jobs()
-    header['num_establishments'] = rais_industry_service.num_establishments()
+    header['average_monthly_income'] = industry_service.average_monthly_income()
+    header['salary_mass'] = industry_service.salary_mass()
+    header['num_jobs'] = industry_service.num_jobs()
+    header['num_establishments'] = industry_service.num_establishments()
 
     
     
-    body['occ_with_more_number_jobs_name'] = rais_industry_occupation_service.occ_with_more_num_jobs_name()
-    body['occ_with_more_number_jobs_value'] = rais_industry_occupation_service.occ_with_more_num_jobs_value()
+    body['occ_with_more_number_jobs_name'] = industry_occupation_service.occ_with_more_num_jobs_name()
+    body['occ_with_more_number_jobs_value'] = industry_occupation_service.occ_with_more_num_jobs_value()
     
     
-    body['occ_with_more_wage_avg_name'] = rais_industry_occupation_service.occ_with_more_wage_avg_name()
-    body['occ_with_more_wage_avg_value'] = rais_industry_occupation_service.occ_with_more_wage_avg_value()
+    body['occ_with_more_wage_avg_name'] = industry_occupation_service.occ_with_more_wage_avg_name()
+    body['occ_with_more_wage_avg_value'] = industry_occupation_service.occ_with_more_wage_avg_value()
     
     if bra_id == None  or len(bra_id) != 9 :
-        body['municipality_with_more_num_jobs_value'] = rais_industry_municipality_service.municipality_with_more_num_jobs_value()
-        body['municipality_with_more_num_jobs_name'] = rais_industry_municipality_service.municipality_with_more_num_jobs_name()
+        body['municipality_with_more_num_jobs_value'] = industry_municipality_service.municipality_with_more_num_jobs_value()
+        body['municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs_name()
 
-        body['municipality_with_more_wage_avg_name'] = rais_industry_municipality_service.municipality_with_more_wage_avg_name()
-        body['municipality_with_more_wage_avg_value'] = rais_industry_municipality_service.municipality_with_more_wage_avg_value()
+        body['municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_avg_name()
+        body['municipality_with_more_wage_avg_value'] = industry_municipality_service.municipality_with_more_wage_avg_value()
              
     
 
