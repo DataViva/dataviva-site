@@ -272,7 +272,7 @@ class ProductMunicipalities(Product):
 
 
 class ProductLocations(Product):
-    def __init__(self, bra_id,  product_id, bra_id):
+    def __init__(self, product_id, bra_id):
         self._secex = None
         self.bra_id = bra_id
         self.product_id = product_id
