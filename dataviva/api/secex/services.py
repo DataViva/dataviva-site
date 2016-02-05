@@ -271,14 +271,13 @@ class ProductMunicipalities(Product):
         return secex.bra.name()
 
 
-'''
 class ProductLocations(Product):
-    def __init__(self, bra_id,  product_id):
+    def __init__(self, bra_id,  product_id, bra_id):
         self._secex = None
         self.bra_id = bra_id
         self.product_id = product_id
         self.max_year_query = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id)
-        ymbp_query = Ymbp.query.join(Bra).filter(
+        self.secex_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id==self.product_id,
             Ymbp.bra_id_len==9,
             Ymbp.bra_id.like(str(self.bra_id)+'%'),
@@ -299,10 +298,10 @@ class ProductLocations(Product):
 
 
 class ProductLocationsTradePartners(ProductLocations):
-    def __init__(self, product_id):
-        ProductLocations.__init__(self, product_id)
+    def __init__(self, product_id, bra_id):
+        ProductLocations.__init__(self, product_id, bra_id)
         self.max_year_query = db.session.query(func.max(Ymbpw.year)).filter_by(hs_id=product_id, bra_id=bra_id)
-        ymbpw_query = Ymbpw.query.join(Wld).filter(
+        self.secex_query = Ymbpw.query.join(Wld).filter(
             Ymbpw.hs_id==self.product_id,
             Ymbpw.year==self.ymbpw_max_year_query,
             Ymbpw.wld_id_len==5,
@@ -327,10 +326,10 @@ class ProductLocationsTradePartners(ProductLocations):
 
 
 class ProductLocationsMunicipalities(ProductLocations):
-    def __init__(self, product_id):
-        ProductLocations.__init__(self, product_id)
+    def __init__(self, product_id, bra_id):
+        ProductLocations.__init__(self, product_id, bra_id)
         self.ymbp_max_year_query = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id)
-        ymbp_query = Ymbp.query.join(Bra).filter(
+        self.secex_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id==self.product_id,
             Ymbp.year==self.ymbp_max_year_query,
             Ymbp.bra_id_len==9,
@@ -352,8 +351,6 @@ class ProductLocationsMunicipalities(ProductLocations):
     def highest_import_value_by_municipality(self):
         secex = self.__secex_sorted_by_imports__()[0]
         return secex.import_val
-
-'''
 
 
 
