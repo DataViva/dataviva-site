@@ -22,7 +22,7 @@ def index():
     universities_service = MajorUniversities(course_hedu_id='523E04')
     municipalities_service = MajorMunicipalities(course_hedu_id='523E04')
 
-    major = {
+    header = {
         'name' : major_service.name(),
         'enrolled' : major_service.enrolled(),
         'entrants' : major_service.entrants(),
@@ -31,7 +31,7 @@ def index():
         'year' : major_service.year()
     }
 
-    enrollments = {
+    content = {
         'university_with_more_enrolled' : universities_service.university_with_more_enrolled(),
         'highest_enrolled_number_by_university' : universities_service.highest_enrolled_number(),
         'municipality_with_more_enrolled' : municipalities_service.municipality_with_more_enrolled(),
@@ -46,6 +46,6 @@ def index():
         'highest_graduate_number_by_municipality' : municipalities_service.highest_graduates_number()
     }
     
-    return render_template('major/index.html', major=major, enrollments=enrollments, body_class='perfil-estado')
+    return render_template('major/index.html', header=header, content=content, body_class='perfil-estado')
 
 

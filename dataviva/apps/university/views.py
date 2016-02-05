@@ -25,7 +25,7 @@ def index():
     university_service = University(university_id='00575')
     majors_service = UniversityMajors(university_id='00575')
 
-    university = {
+    header = {
         'name' : university_service.name(),
         'enrolled' : university_service.enrolled(),
         'entrants' : university_service.entrants(),
@@ -34,7 +34,7 @@ def index():
         'year' : university_service.year()
     }
 
-    major = {
+    content = {
         'major_with_more_enrollments' : majors_service.major_with_more_enrollments(),
         'highest_enrollment_number_by_major' : majors_service.highest_enrolled_number(),
         'major_with_more_entrants' : majors_service.major_with_more_entrants(),
@@ -42,6 +42,6 @@ def index():
         'major_with_more_graduates' : majors_service.major_with_more_graduates(),
         'highest_graduate_number_by_major' : majors_service.highest_graduates_number()
     }
-    return render_template('index.html', university=university, major=major, body_class='perfil_estado')
+    return render_template('index.html', header=header, content=content, body_class='perfil_estado')
 
 
