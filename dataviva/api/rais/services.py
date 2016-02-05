@@ -216,7 +216,13 @@ class OccupationActivities(Occupation):
         num_jobs_of_activity_with_more_jobs = self.__rais_sorted_by_num_jobs__()[0]
         return num_jobs_of_activity_with_more_jobs.num_jobs
 
+    def activity_with_biggest_wage_average(self):
+        activity_with_biggest_wage_average = self.__rais_sorted_by_wage_average__()[0]
+        return activity_with_biggest_wage_average.cnae.name()
 
+    def num_jobs_of_activity_with_biggest_wage_average(self):
+        num_jobs_of_activity_with_biggest_wage_avg = self.__rais_sorted_by_wage_average__()[0]
+        return activity_with_biggest_wage_average.wage_avg
 
 
 
