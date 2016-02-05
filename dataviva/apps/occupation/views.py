@@ -5,6 +5,7 @@ from dataviva.api.rais.services import Occupation
 from dataviva.api.rais.services import OccupationMunicipalities
 from dataviva.api.rais.services import OccupationMunicipalitiesByLocation
 from dataviva.api.rais.services import OccupationActivities
+from dataviva.api.rais.services import OccupationActivitiesByLocation
 from dataviva.api.rais.services import OccupationByLocation
 
 mod = Blueprint('occupation', __name__,
@@ -55,7 +56,7 @@ def index(occupation_id):
     if bra_id:
         occupation_service = OccupationByLocation(occupation_id = occupation_id, bra_id = bra_id)
         occupation_municipalities_service = OccupationMunicipalitiesByLocation(occupation_id = occupation_id, bra_id=bra_id)
-        occupation_activities_service = OccupationActivities(occupation_id = occupation_id)
+        occupation_activities_service = OccupationActivitiesByLocation(occupation_id = occupation_id, bra_id = bra_id)
         if len(bra_id) == 9:
             context['is_not_municipality'] = False
 
