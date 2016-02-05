@@ -53,6 +53,8 @@ def index(occupation_id):
 
     if bra_id:
         occupation_service = OccupationByLocation(occupation_id = occupation_id, bra_id = bra_id)
+        occupation_municipalities_service = OccupationMunicipalities(occupation_id = occupation_id)
+        occupation_activities_service = OccupationActivities(occupation_id = occupation_id)
         if len(bra_id) == 9:
             context['is_not_municipality'] = False
 
@@ -77,11 +79,11 @@ def index(occupation_id):
         body['municipality_with_biggest_wage_avg'] = occupation_municipalities_service.municipality_with_biggest_wage_average()
         body['municipality_with_biggest_wage_avg_value'] = occupation_municipalities_service.biggest_wage_average()
 
-    #body['activity_with_more_jobs'] = occupation_activities_service.activity_with_more_jobs()
-    #body['activity_with_more_jobs_value'] = occupation_activities_service.num_jobs_of_activity_with_more_jobs()
-#
-#    #body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
-    #body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.num_jobs_of_activity_with_biggest_wage_average()
+    body['activity_with_more_jobs'] = occupation_activities_service.activity_with_more_jobs()
+    body['activity_with_more_jobs_value'] = occupation_activities_service.highest_number_of_jobs()
+
+    body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
+    body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.biggest_wage_average()
     
 
     return render_template('occupation/index.html', body_class='perfil-estado', context=context, header = header, body = body)

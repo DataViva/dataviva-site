@@ -115,32 +115,43 @@ class OccupationActivities(Occupation):
                             Yio.cbo_id == self.occupation_id,
                             Yio.year == self.max_year_query,
                             Yio.cnae_id_len == 6)
+        self._rais_sorted_by_num_jobs = None
+        self._rais_sorted_by_wage_average = None
 
-    def __activity_with_more_jobs__(self):
-        if not self._activity_with_more_jobs:
-            self._activity_with_more_jobs = self.___rais_sorted_by_num_jobs__()[0]
-        return self._activity_with_more_jobs
+    def __rais_list__(self):
+        if not self._rais:
+            rais = self.rais_query.all()
+            self._rais = rais
+        return self._rais
+
+    def __rais_sorted_by_num_jobs__(self):
+        if not self._rais_sorted_by_num_jobs:
+            self._rais_sorted_by_num_jobs = self.__rais_list__()
+            self._rais_sorted_by_num_jobs.sort(key=lambda rais: rais.num_jobs, reverse=True)
+        return self._rais_sorted_by_num_jobs
+
+    def __rais_sorted_by_wage_average__(self):
+        if not self._rais_sorted_by_wage_average:
+            self._rais_sorted_by_wage_average = self.__rais_list__()
+            self._rais_sorted_by_wage_average.sort(key=lambda rais: rais.wage_avg, reverse=True)
+        return self._rais_sorted_by_wage_average
+
 
     def activity_with_more_jobs(self):
-        activity_name = self.__activity_with_more_jobs__()
-        return activity_name.cnae.name()
+        rais = self.__rais_sorted_by_num_jobs__()[0]
+        return rais.cnae.name()
 
-    def num_jobs_of_activity_with_more_jobs(self):
-        num_jobs = self.__activity_with_more_jobs__()
-        return num_jobs.num_jobs
-
-    def __activity_with_biggest_wage_average__(self):
-        if not self._activity_with_biggest_wage_average:
-            self._activity_with_biggest_wage_average = self.__rais_sorted_by_wage_average__()[0]
-        return self._activity_with_biggest_wage_average
+    def highest_number_of_jobs(self):
+        rais = self.__rais_sorted_by_num_jobs__()[0]
+        return rais.num_jobs
 
     def activity_with_biggest_wage_average(self):
-        activity_name = self.__activity_with_biggest_wage_average__()
-        return activity_name.cnae.name()
+        rais = self.__rais_sorted_by_wage_average__()[0]
+        return rais.cnae.name()
 
-    def num_jobs_of_activity_with_biggest_wage_average(self):
-        wage_avg = self.__activity_with_biggest_wage_average__()
-        return wage_avg.wage_avg
+    def biggest_wage_average(self):
+        rais = self.__rais_sorted_by_wage_average__()[0]
+        return rais.wage_avg
 
 
 
