@@ -61,7 +61,7 @@ def index(occupation_id):
         occupation_municipalities_service = OccupationMunicipalities(occupation_id = occupation_id)
         occupation_activities_service = OccupationActivities(occupation_id = occupation_id)
 
-    header['name'] = occupation_service.name()
+    header['name'] = occupation_service.occupation_name()
     header['average_monthly_income'] = occupation_service.average_monthly_income()
     header['salary_mass'] = occupation_service.salary_mass()
     header['total_employment'] = occupation_service.total_employment()

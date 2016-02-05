@@ -4,10 +4,9 @@ from dataviva import db
 from sqlalchemy.sql.expression import func, desc, asc
 
 class Occupation:
-
     def __init__(self, occupation_id):
         self.occupation_id = occupation_id
-        self._data = None 
+        self._data = None
         self._municipality_with_more_jobs = None
         self._municipality_with_biggest_wage_average = None
         self._activity_with_more_jobs = None
@@ -38,9 +37,9 @@ class Occupation:
             self._data = rais_data
         return self._data
 
-    def name(self):
-        occupation_name = self.__rais_data__().cbo
-        return occupation_name.name() #self.__rais_data__()['name']
+    def occupation_name(self):
+        occupation = self.__rais_data__().cbo
+        return occupation.name() #self.__rais_data__()['name']
 
     def average_monthly_income(self):
         average_monthly_income = self.__rais_data__().wage_avg
@@ -68,7 +67,6 @@ class Occupation:
         self._rais_sorted_by_wage_average.sort(key=lambda rais: rais.wage_avg , reverse=True)
         return self._rais_sorted_by_wage_average
 
-#-----------------------------
 class OccupationMunicipalities(Occupation):
     def __init__ (self, occupation_id):
         Occupation.__init__(self, occupation_id)
@@ -81,7 +79,7 @@ class OccupationMunicipalities(Occupation):
     def __municipality_with_more_jobs__(self):
         if not self._municipality_with_more_jobs:
             self._municipality_with_more_jobs = self.__rais_sorted_by_num_jobs__()[0]
-        return self._municipality_with_more_jobs      
+        return self._municipality_with_more_jobs
 
     def municipality_with_more_jobs(self):
         municipality_name =self.__municipality_with_more_jobs__()
@@ -104,7 +102,6 @@ class OccupationMunicipalities(Occupation):
         wage_avg = self.__municipality_with_biggest_wage_average__()
         return wage_avg.wage_avg
 
-#-------------------
 class OccupationActivities(Occupation):
     def __init__(self, occupation_id):
         Occupation.__init__(self, occupation_id)
@@ -140,17 +137,16 @@ class OccupationActivities(Occupation):
         return wage_avg.wage_avg
 
 
-#-----------------------------
 class OccupationByLocation(Occupation):
 
     def __init__(self, occupation_id, bra_id):
-        
+
         Occupation.__init__(self, occupation_id)
         self.bra_id = bra_id
 
         year=0
         ybo_max_year= db.session.query(func.max(Ybo.year)).filter(
-            Ybo.cbo_id == occupation_id, 
+            Ybo.cbo_id == occupation_id,
             Ybo.bra_id == bra_id)\
             .one()
         for years in ybo_max_year:
@@ -167,8 +163,8 @@ class OccupationByLocation(Occupation):
 
     def __municipality_with_more_jobs__(self):
 
-        if not self._municipality_with_more_jobs: 
-            
+        if not self._municipality_with_more_jobs:
+
             ybo_municipality_num_jobs_generator = Ybo.query.join(Bra).filter(
                     Ybo.cbo_id == self.occupation_id,
                     Ybo.bra_id.like(self.bra_id+'%'),
@@ -176,7 +172,7 @@ class OccupationByLocation(Occupation):
                     Ybo.bra_id_len == 9)\
                 .order_by(desc(Ybo.num_jobs)).limit(1)\
                 .first_or_404()
-    
+
             municipality_with_more_jobs = {}
             municipality_with_more_jobs['municipality_with_more_jobs'] = ybo_municipality_num_jobs_generator.bra.name()
             municipality_with_more_jobs['municipality_with_more_jobs_value'] = ybo_municipality_num_jobs_generator.num_jobs
@@ -197,10 +193,10 @@ class OccupationByLocation(Occupation):
                     Ybo.bra_id_len == 9)\
                 .order_by(desc(Ybo.wage_avg)).limit(1)\
                 .first_or_404()
-    
+
             municipality_with_biggest_wage_avg = {}
             municipality_with_biggest_wage_avg['municipality_with_biggest_wage_avg'] = ybo_municipality_wage_avg_generator.bra.name()
-            municipality_with_biggest_wage_avg['municipality_with_biggest_wage_avg_value'] = ybo_municipality_wage_avg_generator.wage_avg  
+            municipality_with_biggest_wage_avg['municipality_with_biggest_wage_avg_value'] = ybo_municipality_wage_avg_generator.wage_avg
 
             self._municipality_with_biggest_wage_average = municipality_with_biggest_wage_avg
 
@@ -220,7 +216,7 @@ class OccupationByLocation(Occupation):
 
             activity_with_more_jobs = {}
             activity_with_more_jobs['activity_with_more_jobs'] = ybio_activity_num_jobs_generator.cnae.name()
-            activity_with_more_jobs['activity_with_more_jobs_value'] = ybio_activity_num_jobs_generator.num_jobs 
+            activity_with_more_jobs['activity_with_more_jobs_value'] = ybio_activity_num_jobs_generator.num_jobs
 
             self._activity_with_more_jobs = activity_with_more_jobs
 
@@ -240,12 +236,12 @@ class OccupationByLocation(Occupation):
 
             activity_with_biggest_wage_avg = {}
             activity_with_biggest_wage_avg['activity_with_biggest_wage_avg'] = ybio_activity_wage_avg_generator.cnae.name()
-            activity_with_biggest_wage_avg['activity_with_biggest_wage_avg_value'] = ybio_activity_wage_avg_generator.wage_avg 
+            activity_with_biggest_wage_avg['activity_with_biggest_wage_avg_value'] = ybio_activity_wage_avg_generator.wage_avg
 
             self._activity_with_biggest_wage_average = activity_with_biggest_wage_avg
 
-        return self._activity_with_biggest_wage_average  
-        
+        return self._activity_with_biggest_wage_average
+
 
 
 
