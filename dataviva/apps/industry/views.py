@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Industry as RaisIndustryService
-from dataviva.api.rais.services import IndustryByLocation as RaisIndustryByLocationService
+from dataviva.api.rais.services import IndustryOccupation as RaisIndustryOccupation
 from dataviva.apps.industry.controler import templates_preview_controler
 
 
@@ -48,6 +48,7 @@ def index(cnae_id):
         header['opportunity_gain'] = rais_industry_service.opportunity_gain()
     else:
         rais_industry_service = RaisIndustryService(cnae_id=cnae_id)
+        rais_industry_occupation_service = RaisIndustryOccupation(cnae_id=cnae_id)
    
     header['name'] = rais_industry_service.get_name() 
     header['year'] = rais_industry_service.get_year()
@@ -58,12 +59,14 @@ def index(cnae_id):
     header['num_establishments'] = rais_industry_service.num_establishments()
 
     
-    body['occ_with_more_number_jobs_name'] = rais_industry_service.get_occ_with_more_number_jobs_name()
-    body['occ_with_more_number_jobs_value'] = rais_industry_service.get_occ_with_more_number_jobs_value()
     
-    body['occ_with_more_wage_avg_name'] = rais_industry_service.get_occ_with_more_wage_avg_name()
-    body['occ_with_more_wage_avg_value'] = rais_industry_service.get_occ_with_more_wage_avg_value()
-
+    body['occ_with_more_number_jobs_name'] = rais_industry_occupation_service.occ_with_more_number_jobs_name()
+    body['occ_with_more_number_jobs_value'] = rais_industry_occupation_service.occ_with_more_number_jobs_value()
+    
+    
+    body['occ_with_more_wage_avg_name'] = rais_industry_occupation_service.occ_with_more_wage_avg_name()
+    body['occ_with_more_wage_avg_value'] = rais_industry_occupation_service.occ_with_more_wage_avg_value()
+    '''
     if bra_id == None  or len(bra_id) != 9 :
         body['municipality_with_more_num_jobs_value'] = rais_industry_service.get_municipality_with_more_num_jobs_value()
         body['municipality_with_more_num_jobs_name'] = rais_industry_service.get_municipality_with_more_num_jobs_name()
@@ -71,7 +74,8 @@ def index(cnae_id):
         body['municipality_with_more_wage_avg_name'] = rais_industry_service.get_municipality_with_more_wage_avg_name()
         body['municipality_with_more_wage_avg_value'] = rais_industry_service.get_municipality_with_more_wage_avg_value()
              
-            
+    '''
+
     return render_template('industry/index.html', body_class='perfil-estado', header=header, body=body, industry=industry)
 
 
