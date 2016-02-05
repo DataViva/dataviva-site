@@ -26,7 +26,7 @@ def add_language_code(endpoint, values):
 def index(bra_id):
 
     attrs_location_service = AttrsLocationService(bra_id=bra_id)
-    location_statistics = attrs_location_service.statistics()
+    location_statistics['gdp'] = attrs_location_service.gdp()
 
     ''' Query básica para SECEX'''
     location_statistics['eci'] = Ymb.query.filter_by(bra_id=bra_id, month=0) \
