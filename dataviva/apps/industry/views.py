@@ -2,9 +2,7 @@
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Industry
-from dataviva.api.rais.services import IndustryOccupation
-from dataviva.api.rais.services import IndustryMunicipality
-from dataviva.api.rais.services import IndustryByLocation
+from dataviva.api.rais.services import IndustryOccupation, IndustryMunicipality, IndustryByLocation, IndustyByLocationOcupation, IndustyByLocationMunicipality
 from dataviva.apps.industry.controler import templates_preview_controler
 
 
@@ -45,6 +43,9 @@ def index(cnae_id):
 
     if bra_id :
         industry_service = IndustryByLocation(bra_id=bra_id, cnae_id=cnae_id)
+        industry_occupation_service = IndustyByLocationOcupation(bra_id=bra_id, cnae_id=cnae_id)
+        industry_municipality_service = IndustyByLocationMunicipality(bra_id=bra_id, cnae_id=cnae_id)
+
         header['rca'] = industry_service.rca()
         header['distance'] = industry_service.distance()
         header['opportunity_gain'] = industry_service.opportunity_gain()
@@ -62,7 +63,7 @@ def index(cnae_id):
     header['num_establishments'] = industry_service.num_establishments()
 
     
-    '''
+    
     body['occ_with_more_number_jobs_name'] = industry_occupation_service.occ_with_more_num_jobs_name()
     body['occ_with_more_number_jobs_value'] = industry_occupation_service.occ_with_more_num_jobs_value()
     
@@ -77,7 +78,7 @@ def index(cnae_id):
         body['municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_avg_name()
         body['municipality_with_more_wage_avg_value'] = industry_municipality_service.municipality_with_more_wage_avg_value()
              
-    '''
+    
 
     return render_template('industry/index.html', body_class='perfil-estado', header=header, body=body, industry=industry)
 
