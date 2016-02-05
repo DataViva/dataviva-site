@@ -8,6 +8,7 @@ from sqlalchemy import func, desc, asc
 class Basic_course:
     def __init__(self, course_sc_id, bra_id):
         self._statistics = None
+        self._course = None
 
         self.course_sc_id = course_sc_id
         self.bra_id = bra_id
@@ -26,7 +27,7 @@ class Basic_course:
 
         if self.bra_id:
 
-            course_query = Ybc_sc.query.join(Course_sc).filter(
+            course_query = Ybc_sc.query.filter(
                 Ybc_sc.course_sc_id == self.course_sc_id,
                 Ybc_sc.year == self.ybc_max_year_subquery,
                 Ybc_sc.bra_id == self.bra_id)
@@ -36,13 +37,13 @@ class Basic_course:
                 Ybsc.year == self.ybsc_max_year_subquery,
                 Ybsc.bra_id == self.bra_id)
 
-            most_enrolled_school_query = Ybsc.query.join(School).filter(
+            most_enrolled_school_query = Ybsc.query.filter(
                 Ybsc.course_sc_id == self.course_sc_id,
                 Ybsc.year == self.ybsc_max_year_subquery,
                 Ybsc.bra_id == self.bra_id) \
                 .order_by(Ybsc.enrolled.desc()).limit(1)
 
-            most_enrolled_city_query = Ybc_sc.query.join(Bra).filter(
+            most_enrolled_city_query = Ybc_sc.query.filter(
                 Ybc_sc.course_sc_id == self.course_sc_id,
                 Ybc_sc.year == self.ybc_max_year_subquery,
                 Ybc_sc.bra_id.like(str(self.bra_id)+'%'),
@@ -69,7 +70,7 @@ class Basic_course:
 
         else:
 
-            course_query = Yc_sc.query.join(Course_sc).filter(
+            course_query = Yc_sc.query.filter(
                 Yc_sc.course_sc_id == self.course_sc_id,
                 Yc_sc.year == self.yc_max_year_subquery)
 
@@ -77,12 +78,12 @@ class Basic_course:
                 Ysc.course_sc_id == self.course_sc_id,
                 Ysc.year == self.ysc_max_year_subquery)
 
-            most_enrolled_school_query = Ysc.query.join(School).filter(
+            most_enrolled_school_query = Ysc.query.filter(
                 Ysc.course_sc_id == self.course_sc_id,
                 Ysc.year == self.ysc_max_year_subquery) \
                 .order_by(Ysc.enrolled.asc())
 
-            most_enrolled_city_query = Ybc_sc.query.join(Bra).filter(
+            most_enrolled_city_query = Ybc_sc.query.filter(
                 Ybc_sc.course_sc_id == self.course_sc_id,
                 Ybc_sc.year == self.ysc_max_year_subquery,
                 Ybc_sc.bra_id_len == 9) \
