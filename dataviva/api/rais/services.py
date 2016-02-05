@@ -15,7 +15,6 @@ class Occupation:
         self._activity_with_biggest_wage_average = None
 
         year=0
-
         yo_max_year= db.session.query(func.max(Yo.year)).filter(
             Ybo.cbo_id == occupation_id)\
             .one()
@@ -24,41 +23,35 @@ class Occupation:
 
         self.year = year
 
+        self.rais_query = Yo.query.filter(
+                                Yo.cbo_id == self.occupation_id,
+                                Yo.year == self.year)
+
     def __rais_data__(self):
-        
         if not self._data:
-
-            yo_data_generator = Yo.query.join(Cbo).filter(
-                    Yo.cbo_id == self.occupation_id,
-                    Yo.year == self.year)\
-                .first_or_404()
-
-            data = {}
-            data['name'] = yo_data_generator.cbo.name()
-            data['average_monthly_income'] = yo_data_generator.wage_avg
-            data['salary_mass'] = yo_data_generator.wage
-            data['total_employment'] = yo_data_generator.num_jobs
-            data['total_establishments'] = yo_data_generator.num_est              
-
-            self._data = data
-
+            rais_data = self.rais_query.first_or_404()
+            self._data = rais_data
         return self._data
 
-
     def name(self):
-        return self.__rais_data__()['name']
+        occupation_name = self.__rais_data__().cbo
+        return occupation_name.name() #self.__rais_data__()['name']
 
     def average_monthly_income(self):
-        return self.__rais_data__()['average_monthly_income']
+        average_monthly_income = self.__rais_data__().wage_avg
+        return average_monthly_income
 
     def salary_mass(self):
-        return self.__rais_data__()['salary_mass']
+        salary_mass = self.__rais_data__().wage
+        return salary_mass
 
     def total_employment(self):
-        return self.__rais_data__()['total_employment']
+        total_employment = self.__rais_data__().num_jobs
+        return total_employment
 
     def total_establishments(self):
-        return self.__rais_data__()['total_establishments']  
+        total_establishments = self.__rais_data__().num_est
+        return total_establishments
 
 
     def __municipality_with_more_jobs__(self):
@@ -165,7 +158,12 @@ class Occupation:
         return self.__activity_with_biggest_wage_average__()['activity_with_biggest_wage_avg_value']
 
 
+#-----------------------------
+#class OccupationMunicipalities(Occupation):
 
+
+
+#-----------------------------
 class OccupationByLocation(Occupation):
 
     def __init__(self, occupation_id, bra_id):
