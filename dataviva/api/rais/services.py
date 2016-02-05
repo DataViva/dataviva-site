@@ -38,7 +38,6 @@ class Occupation:
             self._data = rais_data
         return self._data
 
-
     def name(self):
         occupation_name = self.__rais_data__().cbo
         return occupation_name.name() #self.__rais_data__()['name']
@@ -58,7 +57,6 @@ class Occupation:
     def total_establishments(self):
         total_establishments = self.__rais_data__().num_est
         return total_establishments
-
 
     def __rais_sorted_by_num_jobs__(self):
         self._rais_sorted_by_num_jobs = self.__rais_list__()
@@ -80,21 +78,31 @@ class OccupationMunicipalities(Occupation):
                             Ybo.bra_id_len == 9)
         #self.municipality_data = None
 
+    def __municipality_with_more_jobs__(self):
+        if not self._municipality_with_more_jobs:
+            self._municipality_with_more_jobs = self.__rais_sorted_by_num_jobs__()[0]
+        return self._municipality_with_more_jobs      
+
     def municipality_with_more_jobs(self):
-        municipality_with_more_jobs = self.__rais_sorted_by_num_jobs__()[0]
-        return municipality_with_more_jobs.bra.name()
+        municipality_name =self.__municipality_with_more_jobs__()
+        return municipality_name.bra.name()
 
     def num_jobs_of_municipality_with_more_jobs(self):
-        num_jobs_of_municipality_with_more_jobs = self.__rais_sorted_by_num_jobs__()[0]
-        return num_jobs_of_municipality_with_more_jobs.num_jobs
+        num_jobs = self.__municipality_with_more_jobs__()
+        return num_jobs.num_jobs
+
+    def __municipality_with_biggest_wage_average__(self):
+        if not self._municipality_with_more_jobs:
+            self._municipality_with_more_jobs = self.__rais_sorted_by_wage_average__()[0]
+        return self._municipality_with_more_jobs
 
     def municipality_with_biggest_wage_average(self):
-        municipality_with_biggest_wage_average = self.__rais_sorted_by_wage_average__()[0]
-        return municipality_with_biggest_wage_average.bra.name()
+        municipality_name = self.__municipality_with_biggest_wage_average__()
+        return municipality_name.bra.name()
 
     def wage_average_of_municipality_with_biggest_wage_average(self):
-        wage_average_of_municipality_with_biggest_wage_average = self.__rais_sorted_by_wage_average__()[0]
-        return wage_average_of_municipality_with_biggest_wage_average.wage_avg
+        wage_avg = self.__municipality_with_biggest_wage_average__()
+        return wage_avg.wage_avg
 
 #-------------------
 class OccupationActivities(Occupation):
