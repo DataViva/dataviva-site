@@ -66,7 +66,7 @@ def index(occupation_id):
     header['salary_mass'] = occupation_service.salary_mass()
     header['total_employment'] = occupation_service.total_employment()
     header['total_establishments'] = occupation_service.total_establishments()
-    header['year'] = occupation_service.year
+    header['year'] = occupation_service.year()
 
     '''
     if context['is_not_municipality']:
