@@ -103,6 +103,11 @@ class UniversityMajors(University):
 class Major:
     def __init__(self, course_hedu_id):
         self._hedu = None
+
+        self._hedu_sorted_by_enrolled = None
+        self._hedu_sorted_by_entrants = None
+        self._hedu_sorted_by_graduates = None
+
         self.course_hedu_id = course_hedu_id
 
         self.max_year_query = db.session.query(func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
@@ -172,7 +177,7 @@ class Major:
     
 class MajorUniversities(Major):
     def __init__(self, course_hedu_id):
-        self._hedu = None
+        Major.__init__(self, course_hedu_id)
         self.course_hedu_id = course_hedu_id
 
         self.max_year_query = db.session.query(func.max(Yuc.year)).filter_by(course_hedu_id=course_hedu_id)
