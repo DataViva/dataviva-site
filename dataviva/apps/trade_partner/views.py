@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
+from dataviva.api.secex.services import TradePartner, \
+    TradePartnerMunicipalities, TradePartnerProducts
 
 mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
@@ -17,44 +19,39 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
-context = {
-	#index
-	'name' : unicode('China', 'utf8') ,
-	'text_profile': unicode('Texto sobre a parceria economica entre Brasil e China.'),
-	'background_image': unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
-	'year' : 2010,
-	#header 
-	'trade_balance' : 80, #balanca comercial 
-	'trade_balance_unity' : 'Bilhoes', 
-	'total_exported': 17.9, #'total exportado
-	'total_exported_unity' : 'milhoes',
-	'weight_exported_value' : 1.6, #pelo/valor exportado
-	'weight_exported_value_unity' : 'milhares', 
-	'total_imported': 17.9, #'total exportado
-	'total_imported_unity' : 'milhoes',
-	'weight_imported_value' : 1.6, #pelo/valor exportado
-	'weight_imported_value_unity' : 'milharess', 
-	#tab-geral e valores tab-comercio-internacional
-	'county_for_exported_value': unicode('Sāo Paulo', 'utf8'), #'municipio_por_valor exportado' 
-	'num_county_for_exported_value' : 1.62 , 
-	'county_for_imported_value': unicode('Municipio X', 'utf8'), #'municipio_por_valor importado' 
-	'num_county_for_imported_value' : 2.62 , 
-	'product_for_exported_value': unicode('Minerio', 'utf8'), #'produto_por_valor exportado' 
-	'num_product_for_exported_value' : 3.62 , 
-	'product_for_imported_value': unicode('Produto X', 'utf8'), #'produto_por_valor importado' 
-	'num_product_for_imported_value' : 4.62 , 
-	'product_bigger_trade_balance' : unicode('Produto Y', 'utf8'),
-	'value_product_bigger_trade_balance' : 10.88,
-	'product_smaller_trade_balance' : unicode('Produto Z', 'utf8'),
-	'value_product_smaller_trade_balance' : 1.88,
-	#tab-comercio-internacional
-	'text_comercio_internacional' : 'Texto sobre o comercio internacional. '
-	
-} 
-
 @mod.route('/')
 def index():
-	return render_template('trade_partner/index.html', body_class='perfil-estado', context=context)
+    wld_id = 'nausa'
 
+    trade_partner_service = TradePartner(wld_id=wld_id)
+    municipalities_service = TradePartnerMunicipalities(wld_id=wld_id)
+    products_service = TradePartnerProducts(wld_id=wld_id)
 
-	
+    header = {
+        'name': trade_partner_service.country_name(),
+        'year': trade_partner_service.year(),
+        'trade_balance': trade_partner_service.trade_balance(),
+        'total_exported': trade_partner_service.total_exported(),
+        'unity_weight_export_price': trade_partner_service.unity_weight_export_price(),
+        'total_imported': trade_partner_service.total_imported(),
+        'unity_weight_import_price': trade_partner_service.unity_weight_import_price()
+    }
+
+    body = {
+        'municipality_with_more_exports' : municipalities_service.municipality_with_more_exports(),
+        'highest_export_value' : municipalities_service.highest_export_value(),
+        'municipality_with_more_imports' : municipalities_service.municipality_with_more_imports(),
+        'highest_import_value' : municipalities_service.highest_import_value(),
+
+        'product_with_more_imports' : products_service.product_with_more_imports(),
+        'highest_import_value' : products_service.highest_import_value(),
+        'product_with_more_exports' : products_service.product_with_more_exports(),
+        'highest_export_value' : products_service.highest_export_value(),
+        'product_with_highest_balance' : products_service.product_with_highest_balance(),
+        'highest_balance' : products_service.highest_balance(),
+        'product_with_lowest_balance' : products_service.product_with_lowest_balance(),
+        'lowest_balance' : products_service.lowest_balance(),
+        'world_trade_description' : 'World trade description.',
+    }
+
+    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body)
