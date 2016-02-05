@@ -68,20 +68,20 @@ def index(occupation_id):
     header['total_establishments'] = occupation_service.total_establishments()
     header['year'] = occupation_service.year()
 
-    '''
+    
     if context['is_not_municipality']:
 
         body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()
-        body['municipality_with_more_jobs_value'] = occupation_municipalities_service.num_jobs_of_municipality_with_more_jobs()
+        body['municipality_with_more_jobs_value'] = occupation_municipalities_service.highest_number_of_jobs()
 
         body['municipality_with_biggest_wage_avg'] = occupation_municipalities_service.municipality_with_biggest_wage_average()
-        body['municipality_with_biggest_wage_avg_value'] = occupation_municipalities_service.wage_average_of_municipality_with_biggest_wage_average()
+        body['municipality_with_biggest_wage_avg_value'] = occupation_municipalities_service.biggest_wage_average()
 
-    body['activity_with_more_jobs'] = occupation_activities_service.activity_with_more_jobs()
-    body['activity_with_more_jobs_value'] = occupation_activities_service.num_jobs_of_activity_with_more_jobs()
-
-    body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
-    body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.num_jobs_of_activity_with_biggest_wage_average()
-    '''
+    #body['activity_with_more_jobs'] = occupation_activities_service.activity_with_more_jobs()
+    #body['activity_with_more_jobs_value'] = occupation_activities_service.num_jobs_of_activity_with_more_jobs()
+#
+#    #body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
+    #body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.num_jobs_of_activity_with_biggest_wage_average()
+    
 
     return render_template('occupation/index.html', body_class='perfil-estado', context=context, header = header, body = body)
