@@ -112,7 +112,7 @@ class Major:
 
         self.max_year_query = db.session.query(func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
 
-        self.hedu_query = Yc_hedu.query.join(Course_hedu).filter(
+        self.hedu_query = Yc_hedu.query.filter(
             Yc_hedu.course_hedu_id == self.course_hedu_id, 
             Yc_hedu.year == self.max_year_query)
 
@@ -181,7 +181,7 @@ class MajorUniversities(Major):
         self.course_hedu_id = course_hedu_id
 
         self.max_year_query = db.session.query(func.max(Yuc.year)).filter_by(course_hedu_id=course_hedu_id)
-        self.hedu_query = Yuc.query.join(uni).join(Course_hedu).filter(
+        self.hedu_query = Yuc.query.filter(
             Yuc.course_hedu_id == self.course_hedu_id,
             Yuc.year == self.max_year_query
         )
@@ -207,7 +207,7 @@ class MajorMunicipalities(Major):
 
         self.max_year_query = db.session.query(func.max(Ybc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
 
-        self.hedu_query =  Ybc_hedu.query.join(Bra).join(Course_hedu).filter(
+        self.hedu_query =  Ybc_hedu.query.filter(
             Ybc_hedu.course_hedu_id == self.course_hedu_id,
             Ybc_hedu.year == self.max_year_query,
             func.length(Ybc_hedu.bra_id) == 9)
