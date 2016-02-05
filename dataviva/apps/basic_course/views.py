@@ -38,10 +38,10 @@ def index(course_sc_id, bra_id):
         'course_enrolled' : sc_service.course_enrolled(),
         'course_average_class_size' : sc_service.course_average_class_size(),
         'course_year' : sc_service.course_year(),
+        'school_count' : school_service.school_count(),
     }
 
     body = {
-        'school_count' : school_service.school_count(),
         'enrollment_statistics_description' : sc_service.enrollment_statistics_description(),
         'school_name' : school_service.school_name(),
         'school_enrolled' : school_service.school_enrolled(),
