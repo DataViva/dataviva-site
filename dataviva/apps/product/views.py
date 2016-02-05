@@ -64,7 +64,7 @@ def index(product_id):
 
         if len(product_id) == 6:
             pass
-            #header['pci'] = secex_product_service.product_complexity()
+            header['pci'] = secex_product_service.product_complexity()
             #header['rca_wld'] = secex_product_service.rca_wld()
             #header['distance_wld'] = secex_product_service.distance_wld()
             #header['opp_gain_wld'] = secex_product_service.opp_gain_wld()
@@ -89,6 +89,9 @@ def index(product_id):
         body['dest_export_value'] = secex_product_trade_service.highest_export_value()
         body['src_name_import'] = secex_product_trade_service.origin_with_more_imports()
         body['src_import_value'] = secex_product_trade_service.highest_import_value()
+
+        if len(product_id) == 6:
+            header['pci'] = secex_product_service.product_complexity()
 
 
     header['name'] = secex_product_service.product_name()

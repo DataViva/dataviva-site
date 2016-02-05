@@ -227,8 +227,8 @@ class Product:
         return export_val - import_val
 
     def product_complexity(self):
-        product_complexity = self.__secex__().pci()
-        return product_complexity
+        product_complexity = self.__secex__()
+        return product_complexity.pci
 
 
 class ProductTradePartners(Product):
