@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.sc.services import Basic_course as ScBasicCourse
+from dataviva.api.sc.services import Basic_course
 from dataviva.api.attrs.models import School, Bra, Course_sc
 from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc
 from dataviva import db
@@ -26,9 +26,10 @@ def add_language_code(endpoint, values):
 @mod.route('/<course_sc_id>/<bra_id>')
 def index(course_sc_id, bra_id):
 
-    sc_service = ScBasicCourse(course_sc_id= course_sc_id,bra_id=bra_id)
+    sc_service = Basic_course(course_sc_id= course_sc_id,bra_id=bra_id)
 
-    basic_course_statistics = {
+    header = {
+
         'course_name' : sc_service.course_name(),
         'course_description' : sc_service.course_description(),
         'course_classes' : sc_service.course_classes(),
@@ -36,6 +37,10 @@ def index(course_sc_id, bra_id):
         'course_enrolled' : sc_service.course_enrolled(),
         'course_average_class_size' : sc_service.course_average_class_size(),
         'course_year' : sc_service.course_year(),
+
+    }
+
+    body = {
         'schools_count' : sc_service.schools_count(),
         'enrollment_statistics_description' : sc_service.enrollment_statistics_description(),
         'school_name' : sc_service.school_name(),
@@ -44,4 +49,4 @@ def index(course_sc_id, bra_id):
         'city_enrolled' : sc_service.city_enrolled(),
     }
 
-    return render_template('basic_course/index.html', basic_course_statistics=basic_course_statistics, body_class='perfil-estado')
+    return render_template('basic_course/index.html', header=header, body=body, body_class='perfil-estado')
