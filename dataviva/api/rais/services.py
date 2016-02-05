@@ -14,34 +14,34 @@ class Occupation:
             Yo.cbo_id == self.occupation_id,
             Yo.year == self.max_year_query)
 
-    def __rais_data__(self):
+    def __rais__(self):
         if not self._rais:
-            rais_data = self.rais_query.first_or_404()
-            self._rais = rais_data
+            rais = self.rais_query.first_or_404()
+            self._rais = rais
         return self._rais
 
     def year(self):
-        rais = self.__rais_data__()
+        rais = self.__rais__()
         return rais.year
 
     def occupation_name(self):
-        rais = self.__rais_data__()
+        rais = self.__rais__()
         return rais.cbo.name()
 
     def average_monthly_income(self):
-        average_monthly_income = self.__rais_data__().wage_avg
+        average_monthly_income = self.__rais__().wage_avg
         return average_monthly_income
 
     def salary_mass(self):
-        salary_mass = self.__rais_data__().wage
+        salary_mass = self.__rais__().wage
         return salary_mass
 
     def total_employment(self):
-        total_employment = self.__rais_data__().num_jobs
+        total_employment = self.__rais__().num_jobs
         return total_employment
 
     def total_establishments(self):
-        total_establishments = self.__rais_data__().num_est
+        total_establishments = self.__rais__().num_est
         return total_establishments
 
 class OccupationByLocation(Occupation):
@@ -57,7 +57,7 @@ class OccupationByLocation(Occupation):
             Ybo.year == self.max_year_query)
 
     def location_name(self):
-        rais = self.__rais_data__()
+        rais = self.__rais__()
         return rais.bra.name()
 
 class OccupationMunicipalities(Occupation):
@@ -69,6 +69,12 @@ class OccupationMunicipalities(Occupation):
                             Ybo.cbo_id == self.occupation_id,
                             Ybo.year == self.max_year_query,
                             Ybo.bra_id_len == 9)
+
+    def __rais_list__(self):
+        if not self._rais:
+            rais = self.rais_query.all()
+            self._rais = rais
+        return self._rais
 
     def __municipality_with_more_jobs__(self):
         if not self._municipality_with_more_jobs:
