@@ -82,13 +82,13 @@ def index(product_id):
         secex_product_munic_service = SecexProductMunicipalitiesService(product_id=product_id)
 
         body['municipality_name_export'] = secex_product_munic_service.municipality_with_more_exports()
-        body['municipality_export_value'] = secex_product_munic_service.highest_export_value_by_municipality()
+        body['municipality_export_value'] = secex_product_munic_service.highest_export_value()
         body['municipality_name_import'] = secex_product_munic_service.municipality_with_more_imports()
-        body['municipality_import_value'] = secex_product_munic_service.highest_import_value_by_municipality()
+        body['municipality_import_value'] = secex_product_munic_service.highest_import_value()
         body['dest_name_export'] = secex_product_trade_service.destination_with_more_exports()
-        body['dest_export_value'] = secex_product_trade_service.highest_export_value_by_destination()
+        body['dest_export_value'] = secex_product_trade_service.highest_export_value()
         body['src_name_import'] = secex_product_trade_service.origin_with_more_imports()
-        body['src_import_value'] = secex_product_trade_service.highest_import_value_by_origin()
+        body['src_import_value'] = secex_product_trade_service.highest_import_value()
 
 
     header['name'] = secex_product_service.product_name()
