@@ -140,7 +140,6 @@ class OccupationActivities(Occupation):
         return wage_avg.wage_avg
 
 
-
 #-----------------------------
 class OccupationByLocation(Occupation):
 
@@ -156,7 +155,6 @@ class OccupationByLocation(Occupation):
             .one()
         for years in ybo_max_year:
             year = years
-
         self.year = year
 
         self.rais_query = Ybo.query.filter(
@@ -164,13 +162,8 @@ class OccupationByLocation(Occupation):
                                 Ybo.bra_id == self.bra_id,
                                 Ybo.year == self.year)
 
-    def __rais_data__(self):
-        
-        if not self._data:
-            rais_data = self.rais_query.first_or_404()
-            self._data = rais_data
-        return self._data
 
+'''
 
     def __municipality_with_more_jobs__(self):
 
@@ -256,3 +249,4 @@ class OccupationByLocation(Occupation):
 
 
 
+'''
