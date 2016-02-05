@@ -2,7 +2,8 @@
 from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc
 from dataviva.api.attrs.models import School, Bra, Course_sc
 from dataviva import db
-from sqlalchemy import func
+from flask import g
+from sqlalchemy import func, desc, asc
 
 class Basic_course:
     def __init__(self, course_sc_id, bra_id):
@@ -111,7 +112,7 @@ class Basic_course:
             basic_course['course_enrolled'] = enrolled
             basic_course['course_year'] = year
 
-        basic_course['schools_count'] = total_schools_query.count()
+        basic_course['school_count'] = total_schools_query.count()
         basic_course['enrollment_statistics_description'] = 'Enrollment Statistics Description'
 
         for name_pt, enrolled in school_data:
@@ -154,17 +155,21 @@ class Basic_course:
     def course_year(self):
         return self.__statistics__()['course_year']
 
-    def schools_count(self):
-        return self.__statistics__()['schools_count']
-
     def enrollment_statistics_description(self):
         return self.__statistics__()['enrollment_statistics_description']
+
+class Basic_course_school(Basic_course):
 
     def school_name(self):
         return self.__statistics__()['school_name']
 
     def school_enrolled(self):
         return self.__statistics__()['school_enrolled']
+
+    def school_count(self):
+        return self.__statistics__()['school_count']
+
+class Basic_course_city(Basic_course):
 
     def city_name(self):
         return self.__statistics__()['city_name']
