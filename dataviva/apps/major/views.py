@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.hedu.services import Major, EnrolledByUniversity, \
-EnrolledByMunicipality, EntrantsByUniversity, EntrantsByMunicipality, \
-GraduatesByUniversity, GraduatesByMunicipality
+from dataviva.api.hedu.services import Major, MajorUniversities, MajorMunicipalities
 
 mod = Blueprint('major', __name__,
                 template_folder='templates',
@@ -21,12 +19,8 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
     major_service = Major(course_hedu_id='523E04')
-    enrolled_by_university = EnrolledByUniversity(course_hedu_id='523E04')
-    enrolled_by_municipality = EnrolledByMunicipality(course_hedu_id='523E04')
-    entrants_by_university = EntrantsByUniversity(course_hedu_id='523E04')
-    entrants_by_municipality = EntrantsByMunicipality(course_hedu_id='523E04')
-    graduates_by_university = GraduatesByUniversity(course_hedu_id='523E04')
-    graduates_by_municipality = GraduatesByMunicipality(course_hedu_id='523E04')
+    universities_service = MajorUniversities(course_hedu_id='523E04')
+    municipalities_service = MajorMunicipalities(course_hedu_id='523E04')
 
     major = {
         'name' : major_service.name(),
@@ -38,18 +32,18 @@ def index():
     }
 
     enrollments = {
-        'university_with_more_enrolled' : enrolled_by_university.university_with_more_enrolled(),
-        'highest_enrolled_number_by_university' : enrolled_by_university.highest_enrolled_number_by_university(),
-        'municipality_with_more_enrolled' : enrolled_by_municipality.municipality_with_more_enrolled(),
-        'highest_enrolled_number_by_municipality' : enrolled_by_municipality.highest_enrolled_number_by_municipality(), 
-        'university_with_more_entrants' : entrants_by_university.university_with_more_entrants(),
-        'highest_entrant_number_by_university' : entrants_by_university.highest_entrant_number_by_university(),
-        'municipality_with_more_entrants' : entrants_by_municipality.municipality_with_more_entrants(),
-        'highest_entrant_number_by_municipality' : entrants_by_municipality.highest_entrant_number_by_municipality(),
-        'university_with_more_graduates' : graduates_by_university.university_with_more_graduates(),
-        'highest_graduate_number_by_university' : graduates_by_university.highest_graduate_number_by_university(),
-        'municipality_with_more_graduates' : graduates_by_municipality.municipality_with_more_graduates(),
-        'highest_graduate_number_by_municipality' : graduates_by_municipality.highest_graduate_number_by_municipality()
+        'university_with_more_enrolled' : universities_service.university_with_more_enrolled(),
+        'highest_enrolled_number_by_university' : universities_service.highest_enrolled_number(),
+        'municipality_with_more_enrolled' : municipalities_service.municipality_with_more_enrolled(),
+        'highest_enrolled_number_by_municipality' : municipalities_service.highest_enrolled_number(), 
+        'university_with_more_entrants' : universities_service.university_with_more_entrants(),
+        'highest_entrant_number_by_university' : universities_service.highest_entrants_number(),
+        'municipality_with_more_entrants' : municipalities_service.municipality_with_more_entrants(),
+        'highest_entrant_number_by_municipality' : municipalities_service.highest_entrants_number(),
+        'university_with_more_graduates' : universities_service.university_with_more_graduates(),
+        'highest_graduate_number_by_university' : universities_service.highest_graduates_number(),
+        'municipality_with_more_graduates' : municipalities_service.municipality_with_more_graduates(),
+        'highest_graduate_number_by_municipality' : municipalities_service.highest_graduates_number()
     }
     
     return render_template('major/index.html', major=major, enrollments=enrollments, body_class='perfil-estado')
