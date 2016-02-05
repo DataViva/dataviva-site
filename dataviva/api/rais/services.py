@@ -113,21 +113,31 @@ class OccupationActivities(Occupation):
                             Yio.year == self.year,
                             Yio.cnae_id_len == 6)
 
+    def __activity_with_more_jobs__(self):
+        if not self._activity_with_more_jobs:
+            self._activity_with_more_jobs = self.__rais_sorted_by_num_jobs__()[0]
+        return self._activity_with_more_jobs
+
     def activity_with_more_jobs(self):
-        activity_with_more_jobs = self.__rais_sorted_by_num_jobs__()[0]
-        return activity_with_more_jobs.cnae.name()
+        activity_name = self.__activity_with_more_jobs__()
+        return activity_name.cnae.name()
 
     def num_jobs_of_activity_with_more_jobs(self):
-        num_jobs_of_activity_with_more_jobs = self.__rais_sorted_by_num_jobs__()[0]
-        return num_jobs_of_activity_with_more_jobs.num_jobs
+        num_jobs = self.__activity_with_more_jobs__()
+        return num_jobs.num_jobs
+
+    def __activity_with_biggest_wage_average__(self):
+        if not self._activity_with_biggest_wage_average:
+            self._activity_with_biggest_wage_average = self.__rais_sorted_by_wage_average__()[0]
+        return self._activity_with_biggest_wage_average
 
     def activity_with_biggest_wage_average(self):
-        activity_with_biggest_wage_average = self.__rais_sorted_by_wage_average__()[0]
-        return activity_with_biggest_wage_average.cnae.name()
+        activity_name = self.__activity_with_biggest_wage_average__()
+        return activity_name.cnae.name()
 
     def num_jobs_of_activity_with_biggest_wage_average(self):
-        wage_avg_of_activity_with_biggest_wage_avg = self.__rais_sorted_by_wage_average__()[0]
-        return wage_avg_of_activity_with_biggest_wage_avg.wage_avg
+        wage_avg = self.__activity_with_biggest_wage_average__()
+        return wage_avg.wage_avg
 
 
 
