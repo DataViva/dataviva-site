@@ -1,4 +1,4 @@
-from dataviva.api.attrs.models import Ybs, Stat
+from dataviva.api.attrs.models import Hs, Stat, Ybs
 from dataviva import db
 from sqlalchemy import func
 
@@ -21,3 +21,16 @@ class Location:
     def gdp(self):
         statistic_list = self.__attrs_list__()
         return next((s for s in statistic_list if s.id == 'gdp'), None)
+
+class Product:
+    def __init__(self, product_id):
+        self.product_id = product_id
+        self._name = None
+
+    def __product_name__(self):
+        if not self._name:
+            self._name = Hs.query.filter(Hs.id == self.product_id).first().name()
+        return self._name
+
+    def name(self):
+        return self.__product_name__()
