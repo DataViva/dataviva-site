@@ -130,18 +130,21 @@ class Major:
         return self._hedu
 
     def __hedu_sorted_by_enrolled__(self):
-        self._hedu_sorted_by_enrolled = self.__hedu_list__()
-        self._hedu_sorted_by_enrolled.sort(key=lambda hedu: hedu.enrolled, reverse=True)
+        if not self._hedu_sorted_by_enrolled:
+            self._hedu_sorted_by_enrolled = self.__hedu_list__()
+            self._hedu_sorted_by_enrolled.sort(key=lambda hedu: hedu.enrolled, reverse=True)
         return self._hedu_sorted_by_enrolled
 
     def __hedu_sorted_by_entrants__(self):
-        self._hedu_sorted_by_entrants = self.__hedu_list__()
-        self._hedu_sorted_by_entrants.sort(key=lambda hedu: hedu.entrants, reverse=True)
+        if not self._hedu_sorted_by_entrants:
+            self._hedu_sorted_by_entrants = self.__hedu_list__()
+            self._hedu_sorted_by_entrants.sort(key=lambda hedu: hedu.entrants, reverse=True)
         return self._hedu_sorted_by_entrants
 
     def __hedu_sorted_by_graduates__(self):
-        self._hedu_sorted_by_graduates = self.__hedu_list__()
-        self._hedu_sorted_by_graduates.sort(key=lambda hedu: hedu.graduates, reverse=True)
+        if not self._hedu_sorted_by_graduates: 
+            self._hedu_sorted_by_graduates = self.__hedu_list__()
+            self._hedu_sorted_by_graduates.sort(key=lambda hedu: hedu.graduates, reverse=True)
         return self._hedu_sorted_by_graduates
 
     def name(self):
@@ -202,7 +205,7 @@ class MajorUniversities(Major):
 
 class MajorMunicipalities(Major):
     def __init__(self, course_hedu_id):
-        self._hedu = None
+        Major.__init__(self, course_hedu_id)
         self.course_hedu_id = course_hedu_id
 
         self.max_year_query = db.session.query(func.max(Ybc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
