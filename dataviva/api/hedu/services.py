@@ -13,7 +13,7 @@ class University:
 
         self.university_id = university_id
         self.max_year_query = db.session.query(func.max(Yu.year)).filter_by(university_id=university_id)
-        self.hedu_query = Yu.query.join(uni).filter(
+        self.hedu_query = Yu.query.filter(
             Yu.university_id == self.university_id, 
             Yu.year == self.max_year_query)
 
@@ -82,7 +82,7 @@ class UniversityMajors(University):
     def __init__(self, university_id):
         University.__init__(self, university_id)
         self.max_year_query = db.session.query(func.max(Yuc.year))
-        self.hedu_query = Yuc.query.join(uni).join(Course_hedu).filter(
+        self.hedu_query = Yuc.query.filter(
             Yuc.university_id == self.university_id,
             Yuc.year == self.max_year_query,
             func.length(Yuc.course_hedu_id) == 6)
