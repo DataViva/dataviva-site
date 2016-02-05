@@ -5,43 +5,43 @@
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Número de matrículas</p>
                     <div class="number">
-                        <strong class="counter">{{basic_course_statistics["course_enrolled"]}}</strong><small>mil</small>
+                        <strong class="counter">{{header["course_enrolled"]}}</strong><small>mil</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Número de turmas</p>
                     <div class="number">
-                        <strong class="counter">{{basic_course_statistics["course_classes"]}}</strong><small>mil</small>
+                        <strong class="counter">{{header["course_classes"]}}</strong><small>mil</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Número de escolas</p>
                     <div class="number">
-                        <strong class="counter">{{basic_course_statistics["schools_count"]}}</strong><small>mil</small>
+                        <strong class="counter">{{header["schools_count"]}}</strong><small>mil</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Tamanho médio das turmas</p>
                     <div class="number">
-                        <strong class="counter">{{basic_course_statistics["course_average_class_size"]}}</strong><small>alunos</small>
+                        <strong class="counter">{{header["course_average_class_size"]}}</strong><small>alunos</small>
                     </div>
                 </div>
 
-                {% if basic_course_statistics["course_age"] %}
+                {% if header["course_age"] %}
                     <div class="col-xs-15 col-sm-2 item">
                         <p class="label">Média de idade</p>
                         <div class="number">
-                            <strong class="counter">{{basic_course_statistics["course_age"]}}</strong><small>anos</small>
+                            <strong class="counter">{{header["course_age"]}}</strong><small>anos</small>
                         </div>
                     </div>
                 {% endif %}
                 <div class="col-xs-15 col-sm-15 year">
-                    Ano: {{basic_course_statistics["course_year"]}}
+                    Ano: {{header["course_year"]}}
                 </div>
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>{{basic_course_statistics["course_description"]}}</p>
+        <p>{{body["course_description"]}}</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Matrículas</h3>
@@ -53,18 +53,18 @@
                                     Principal Escola por Número de Alunos Matriculados
                                 </th>
                                 <td>
-                                    <p class="label">{{basic_course_statistics["school_name"]}}</p>
-                                    <strong class="counter">{{basic_course_statistics["school_enrolled"]}}</strong> <span>mil</span>
+                                    <p class="label">{{body["school_name"]}}</p>
+                                    <strong class="counter">{{body["school_enrolled"]}}</strong> <span>mil</span>
                                 </td>
                             </tr>
                             <tr>
-                            {% if basic_course_statistics["city_enrolled"] %}
+                            {% if body["city_enrolled"] %}
                                 <th>
                                     Principal Município por Número de Alunos Matriculados
                                 </th>
                                 <td>
-                                    <p class="label">{{basic_course_statistics["city_name"]}}</p>
-                                    <strong class="counter">{{basic_course_statistics["city_enrolled"]}}</strong> <span>mil</span>
+                                    <p class="label">{{body["city_name"]}}</p>
+                                    <strong class="counter">{{body["city_enrolled"]}}</strong> <span>mil</span>
                                 </td>
                                 {% endif %}
                             </tr>
