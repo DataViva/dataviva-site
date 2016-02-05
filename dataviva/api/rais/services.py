@@ -178,7 +178,7 @@ class OccupationByLocation(Occupation):
 
         self.year = year
 
-        self.rais_query = Ybo.query.join(Cbo).filter(
+        self.rais_query = Ybo.query.filter(
                                 Ybo.cbo_id == self.occupation_id,
                                 Ybo.bra_id == self.bra_id,
                                 Ybo.year == self.year)
