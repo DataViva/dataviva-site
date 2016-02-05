@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Occupation as RaisOccupationService
+from dataviva.api.rais.services import OccupationMunicipalities as RaisOccupationMunicipalitiesService
 from dataviva.api.rais.services import OccupationByLocation as RaisOccupationByLocationService
 
 mod = Blueprint('occupation', __name__,
@@ -53,9 +54,10 @@ def index(occupation_id):
         rais_occupation_service = RaisOccupationByLocationService(occupation_id = occupation_id, bra_id = bra_id)
         if len(bra_id) == 9:
             context['is_not_municipality'] = False
-
+        
     else:
         rais_occupation_service = RaisOccupationService(occupation_id = occupation_id)
+        rais_occupation_municipalities_service = RaisOccupationMunicipalitiesService(occupation_id = occupation_id)
 
     header['name'] = rais_occupation_service.name()
     header['average_monthly_income'] = rais_occupation_service.average_monthly_income()
@@ -66,11 +68,11 @@ def index(occupation_id):
     
     if context['is_not_municipality']:
 
-        body['municipality_with_more_jobs'] = rais_occupation_service.municipality_with_more_jobs()
-        body['municipality_with_more_jobs_value'] = rais_occupation_service.num_jobs_of_municipality_with_more_jobs()
-    
-        body['municipality_with_biggest_wage_avg'] = rais_occupation_service.municipality_with_biggest_wage_average()
-        body['municipality_with_biggest_wage_avg_value'] = rais_occupation_service.wage_average_of_municipality_with_biggest_wage_average()
+        body['municipality_with_more_jobs'] = rais_occupation_municipalities_service.municipality_with_more_jobs()
+        body['municipality_with_more_jobs_value'] = rais_occupation_municipalities_service.num_jobs_of_municipality_with_more_jobs()
+
+        #body['municipality_with_biggest_wage_avg'] = rais_occupation_service.municipality_with_biggest_wage_average()
+        #body['municipality_with_biggest_wage_avg_value'] = rais_occupation_service.wage_average_of_municipality_with_biggest_wage_average()
 
     body['activity_with_more_jobs'] = rais_occupation_service.activity_with_more_jobs()
     body['activity_with_more_jobs_value'] = rais_occupation_service.num_jobs_of_activity_with_more_jobs()
