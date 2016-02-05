@@ -3,8 +3,7 @@ from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.models import Course_hedu
 from dataviva.api.hedu.models import Yuc
-from dataviva.api.hedu.services import University, UniversityMajorByEnrollments, \
-UniversityMajorByEntrants, UniversityMajorByGraduates
+from dataviva.api.hedu.services import University, UniversityMajors
 from dataviva import db
 from sqlalchemy.sql.expression import func, desc
 
@@ -24,9 +23,7 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
     university_service = University(university_id='00575')
-    university_major_by_enrollments = UniversityMajorByEnrollments(university_id='00575')
-    university_major_by_entrants = UniversityMajorByEntrants(university_id='00575')
-    university_major_by_graduates = UniversityMajorByGraduates(university_id='00575')
+    majors_service = UniversityMajors(university_id='00575')
 
     university = {
         'name' : university_service.name(),
@@ -38,12 +35,12 @@ def index():
     }
 
     major = {
-        'major_with_more_enrollments' : university_major_by_enrollments.major_with_more_enrollments(),
-        'highest_enrollment_number_by_major' : university_major_by_enrollments.highest_enrollment_number_by_major(),
-        'major_with_more_entrants' : university_major_by_entrants.major_with_more_entrants(),
-        'highest_entrant_number_by_major' : university_major_by_entrants.highest_entrant_number_by_major(),
-        'major_with_more_graduates' : university_major_by_graduates.major_with_more_graduates(),
-        'highest_graduate_number_by_major' : university_major_by_graduates.highest_graduate_number_by_major()
+        'major_with_more_enrollments' : majors_service.major_with_more_enrollments(),
+        'highest_enrollment_number_by_major' : majors_service.highest_enrolled_number(),
+        'major_with_more_entrants' : majors_service.major_with_more_entrants(),
+        'highest_entrant_number_by_major' : majors_service.highest_entrants_number(),
+        'major_with_more_graduates' : majors_service.major_with_more_graduates(),
+        'highest_graduate_number_by_major' : majors_service.highest_graduates_number()
     }
     return render_template('index.html', university=university, major=major, body_class='perfil_estado')
 
