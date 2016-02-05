@@ -6,14 +6,12 @@ from sqlalchemy.sql.expression import func, desc, asc
 class Occupation:
 
     def __init__(self, occupation_id):
-        
         self.occupation_id = occupation_id
         self._data = None 
         self._municipality_with_more_jobs = None
         self._municipality_with_biggest_wage_average = None
         self._activity_with_more_jobs = None
         self._activity_with_biggest_wage_average = None
-
         year=0
         yo_max_year= db.session.query(func.max(Yo.year)).filter(
             Ybo.cbo_id == occupation_id)\
@@ -22,7 +20,6 @@ class Occupation:
             year = years
 
         self.year = year
-
         self.rais_query = Yo.query.filter(
                                 Yo.cbo_id == self.occupation_id,
                                 Yo.year == self.year)
@@ -168,44 +165,29 @@ class OccupationByLocation(Occupation):
 
     def __init__(self, occupation_id, bra_id):
         
-        self.occupation_id = occupation_id
+        Occupation.__init__(self, occupation_id)
         self.bra_id = bra_id
-        self._data = None 
-        self._municipality_with_more_jobs = None
-        self._municipality_with_biggest_wage_average = None
-        self._activity_with_more_jobs = None
-        self._activity_with_biggest_wage_average = None
 
         year=0
         ybo_max_year= db.session.query(func.max(Ybo.year)).filter(
             Ybo.cbo_id == occupation_id, 
             Ybo.bra_id == bra_id)\
             .one()
-        
         for years in ybo_max_year:
             year = years
 
         self.year = year
 
+        self.rais_query = Ybo.query.join(Cbo).filter(
+                                Ybo.cbo_id == self.occupation_id,
+                                Ybo.bra_id == self.bra_id,
+                                Ybo.year == self.year)
+
     def __rais_data__(self):
         
         if not self._data:
-
-            ybo_data_generator = Ybo.query.join(Cbo).filter(
-                    Ybo.cbo_id == self.occupation_id,
-                    Ybo.bra_id == self.bra_id,
-                    Ybo.year == self.year)\
-                .first_or_404()
-
-            data = {}
-            data['name'] = ybo_data_generator.cbo.name()
-            data['average_monthly_income'] = ybo_data_generator.wage_avg
-            data['salary_mass'] = ybo_data_generator.wage
-            data['total_employment'] = ybo_data_generator.num_jobs
-            data['total_establishments'] = ybo_data_generator.num_est                
-
-            self._data = data
-
+            rais_data = self.rais_query.first_or_404()
+            self._data = rais_data
         return self._data
 
 
