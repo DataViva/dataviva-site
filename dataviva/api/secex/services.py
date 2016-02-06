@@ -305,8 +305,30 @@ class ProductLocationsTradePartners(Product, ProductLocations):
             Ymbpw.hs_id==self.product_id,
             Ymbpw.year==self.max_year_query,
             Ymbpw.wld_id_len==5,
-            Ymbpw.bra_id.like(self.bra_id),
+            Ymbpw.bra_id==self.bra_id,
             Ymbpw.month==0)
+        import pdb; pdb.set_trace()
+
+    '''
+    select name_pt, export_val
+    from secex_ymbpw ymbpw
+    inner join attrs_wld wld on wld.id = ymbpw.wld_id
+    where hs_id ='052601' and
+    bra_id = '4mg' and
+    year = (select max(year) from secex_ymbpw where hs_id ='052601' and bra_id = '4mg') and 
+    month = 0 and 
+    wld_id_len = 5
+    order by export_val desc
+    limit 1;
+
+    ymbpw_query = Ymbpw.query.join(Wld).filter(
+        Ymbpw.hs_id==self.product_id,
+        Ymbpw.year==self.ymbpw_max_year_query,
+        Ymbpw.wld_id_len==5,
+        Ymbpw.bra_id.like(str(self.bra_id)+'%'),
+        Ymbpw.month==0
+    ).order_by(desc(Ymbpw.import_val)).limit(1)
+    '''
 
     def destination_with_more_exports(self):
         secex = self.__secex_sorted_by_exports__()[0]
@@ -320,13 +342,35 @@ class ProductLocationsTradePartners(Product, ProductLocations):
 class ProductLocationsMunicipalities(Product, ProductLocations):
     def __init__(self, product_id, bra_id):
         ProductLocations.__init__(self, product_id, bra_id)
-        self.ymbp_max_year_query = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id, bra_id=bra_id)
+        self.max_year_query = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id, bra_id=bra_id)
         self.secex_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id==self.product_id,
             Ymbp.year==self.max_year_query,
             Ymbp.bra_id_len==9,
             Ymbp.bra_id.like(str(self.bra_id)+'%'),
             Ymbp.month==0)
+
+    '''
+    select name_pt, export_val
+    from secex_ymbp ymbp
+    inner join attrs_bra bra on bra.id = ymbp.bra_id 
+    where hs_id ='052601' and
+    year = (select max(year) from secex_ymbp where hs_id ='052601' and bra_id like '4mg01%') and 
+    month = 0 and 
+    bra_id_len = 9 and 
+    bra_id like '4mg01%' and
+    export_val is not NULL
+    order by export_val desc
+    limit 1;
+
+    ymbp_query = Ymbp.query.join(Bra).filter(
+        Ymbp.hs_id==self.product_id,
+        Ymbp.year==self.ymbp_max_year_query,
+        Ymbp.bra_id_len==9,
+        Ymbp.bra_id.like(str(self.bra_id)+'%'),
+        Ymbp.month==0
+    ).order_by(desc(Ymbp.import_val)).limit(1)
+    '''
 
     def municipality_with_more_exports(self):
         secex = self.__secex_sorted_by_exports__()[0]
@@ -335,6 +379,7 @@ class ProductLocationsMunicipalities(Product, ProductLocations):
     def municipality_with_more_imports(self):
         secex = self.__secex_sorted_by_imports__()[0]
         return secex.bra.name()
+
 
 
 

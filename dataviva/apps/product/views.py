@@ -57,7 +57,7 @@ def index(product_id):
     body = {}
 
     #verificar utilizacao dos metodos da classe Product
-    #trocar variaveis dest e src
+    #ajustar querys de comercio internacional para classe ProductLocations
 
     if len(product_id) == 6:
             secex_product_service = SecexProductService(product_id=product_id)
