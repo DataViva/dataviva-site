@@ -186,8 +186,8 @@ class Product:
         return self.__secex__().year
 
     def trade_balance(self):
-        export_val = self.__secex__().export_val
-        import_val = self.__secex__().import_val
+        export_val = self.__secex__().export_val or 0
+        import_val = self.__secex__().import_val or 0
         return export_val - import_val
 
     def total_exported(self):
@@ -196,7 +196,7 @@ class Product:
     def unity_weight_export_price(self):
         export_val = self.__secex__().export_val
         export_kg = self.__secex__().export_kg
-        return export_val / export_kg
+        return export_val if not export_val else export_kg / export_val
 
     def total_imported(self):
         return self.__secex__().import_val
@@ -204,7 +204,7 @@ class Product:
     def unity_weight_import_price(self):
         import_val = self.__secex__().import_val
         import_kg = self.__secex__().import_kg
-        return import_val / import_kg
+        return import_val if not import_val else import_kg / import_val
 
     def highest_import_value(self):
         secex = self.__secex_sorted_by_imports__()[0]
@@ -276,13 +276,13 @@ class ProductLocations(Product):
         self._secex = None
         self.bra_id = bra_id
         self.product_id = product_id
-        self.max_year_query = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id)
-        self.secex_query = Ymbp.query.join(Bra).filter(
+        self.max_year_query = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id, bra_id=bra_id)
+        self.secex_query = Ymbp.query.filter(
             Ymbp.hs_id==self.product_id,
-            Ymbp.bra_id_len==9,
-            Ymbp.bra_id.like(str(self.bra_id)+'%'),
+            Ymbp.bra_id==self.bra_id,
             Ymbp.month==0,
-            Ymbp.year==self.max_year_query)
+            Ymbp.year==self.max_year_query
+        )
 
     def rca_wld(self):
         secex = self.__secex__()
@@ -297,41 +297,33 @@ class ProductLocations(Product):
         return secex.opp_gain_wld
 
 
-class ProductLocationsTradePartners(ProductLocations):
+class ProductLocationsTradePartners(Product, ProductLocations):
     def __init__(self, product_id, bra_id):
         ProductLocations.__init__(self, product_id, bra_id)
         self.max_year_query = db.session.query(func.max(Ymbpw.year)).filter_by(hs_id=product_id, bra_id=bra_id)
         self.secex_query = Ymbpw.query.join(Wld).filter(
             Ymbpw.hs_id==self.product_id,
-            Ymbpw.year==self.ymbpw_max_year_query,
+            Ymbpw.year==self.max_year_query,
             Ymbpw.wld_id_len==5,
-            Ymbpw.bra_id.like(str(self.bra_id)+'%'),
+            Ymbpw.bra_id.like(self.bra_id),
             Ymbpw.month==0)
 
     def destination_with_more_exports(self):
         secex = self.__secex_sorted_by_exports__()[0]
         return secex.wld.name()
 
-    def highest_export_value_by_destination(self):
-        secex = self.__secex_sorted_by_exports__()[0]
-        return secex.export_val
-
     def origin_with_more_imports(self):
         secex = self.__secex_sorted_by_imports__()[0]
-        return secex.bra.name()
-
-    def highest_import_value_by_origin(self):
-        secex = self.__secex_sorted_by_imports__()[0]
-        return secex.import_val
+        return secex.wld.name()
 
 
-class ProductLocationsMunicipalities(ProductLocations):
+class ProductLocationsMunicipalities(Product, ProductLocations):
     def __init__(self, product_id, bra_id):
         ProductLocations.__init__(self, product_id, bra_id)
-        self.ymbp_max_year_query = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id)
+        self.ymbp_max_year_query = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id, bra_id=bra_id)
         self.secex_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id==self.product_id,
-            Ymbp.year==self.ymbp_max_year_query,
+            Ymbp.year==self.max_year_query,
             Ymbp.bra_id_len==9,
             Ymbp.bra_id.like(str(self.bra_id)+'%'),
             Ymbp.month==0)
@@ -340,17 +332,9 @@ class ProductLocationsMunicipalities(ProductLocations):
         secex = self.__secex_sorted_by_exports__()[0]
         return secex.bra.name()
 
-    def highest_export_value_by_municipality(self):
-        secex = self.__secex_sorted_by_exports__()[0]
-        return secex.export_val
-
     def municipality_with_more_imports(self):
         secex = self.__secex_sorted_by_imports__()[0]
         return secex.bra.name()
-
-    def highest_import_value_by_municipality(self):
-        secex = self.__secex_sorted_by_imports__()[0]
-        return secex.import_val
 
 
 
