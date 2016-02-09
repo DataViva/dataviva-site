@@ -1,6 +1,4 @@
-<link href="/static/css/libs/bootstrap.css" rel="stylesheet">
-<link href="/static/css/custom.css" rel="stylesheet">
-<div class="institucional search" ng-app="selector" ng-controller="LocationSelector">
+<div class="institucional search" ng-controller="LocationSelector">
     <h2>Escolha um localidade da lista abaixo ou busque pelo nome</h2>
     <form action="" class="form-dataviva form-inline filter">
         <div class="form-group">
@@ -32,7 +30,6 @@
                            name="regions_filter"
                            class="busca form-control"
                            ng-model="regions.filter_string"
-                           ng-keyup="filter(regions, $event)"
                            ng-trim="true"
                            autocomplete="false" />
                 </div>
@@ -46,7 +43,7 @@
                                 {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
                             </div>
                             <div class="col-md-3">
-                                <button class="btn btn-default">Selecionar</button>
+                                <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
                             </div>
                         </div>
                     </div>
@@ -74,7 +71,7 @@
                                 {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
                             </div>
                             <div class="col-md-3">
-                                <button class="btn btn-default">Selecionar</button>
+                                <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
                             </div>
                         </div>
                     </div>
@@ -101,7 +98,7 @@
                             {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
                         </div>
                         <div class="col-md-3">
-                            <button class="btn btn-default">Selecionar</button>
+                            <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
                         </div>
                     </div>
                 </div>
@@ -128,7 +125,7 @@
                                 {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
                             </div>
                             <div class="col-md-3">
-                                <button class="btn btn-default">Selecionar</button>
+                                <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
                             </div>
                         </div>
                     </div>
@@ -147,8 +144,8 @@
                            placeholder="Busque pelo nome ou pelo No. IBGE"/>
                 </div>
                 <div class="list-group list-stripped">
-                    <div class="list-group list-stripped">
-                        <div ng-repeat="loc in municipalities.entries | filter:municipalities.filter_string" class="list-group-item col-md-12" >
+                    <div class="list-group list-stripped" style="max-height: 300px; overflow-y: scroll">
+                        <div ng-repeat="loc in municipalities.entries | filter:municipalities.filter_string" class="list-group-item col-md-12">
                             <div class="col-md-1 hidden-xs hidden-sm">
                                 <img src="{$ loc.icon $}" class="loc-flag-icon"/>
                             </div>
@@ -156,7 +153,7 @@
                                 {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
                             </div>
                             <div class="col-md-3">
-                                <button class="btn btn-default">Selecionar</button>
+                                <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
                             </div>
                         </div>
                     </div>
@@ -165,7 +162,3 @@
         </div>
     </form>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="/static/js/libs/angular.min.js"></script>
-<script src="/static/js/libs/bootstrap.min.js"></script>
-<script src="/static/js/wizard/selector.js"></script>

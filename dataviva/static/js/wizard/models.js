@@ -1,12 +1,10 @@
 (function () {
     "use strict";
 
-    var app = angular.module("wizard.models", [
-        "wizard.remote",
-    ]);
+    var app = angular.module("wizard.models", []);
 
-    app.service('Question', ["$filter",  function ($filter) {
-        return function Question(args) {
+    app.service('Option', [ function () {
+        return function Option(args) {
 
             var self = this;
             var defaults = {
@@ -16,70 +14,70 @@
         }
     }]);
 
-    app.service('Wizard', ["Remote", "$http", "$filter", "Question", function (Remote, $http, $filter, Question) {
-        return function Wizard(session_name) {
-            var self = this;
+    app.service('Wizard', ["$http", '$rootScope', "Option",
+        function ($http, $rootScope, Option) {
+            
+            return function Wizard(session_name) {
+                var self = this;
 
-            self.session_name = session_name;
-            self.selected_question = null;
-            self.answers = [];
+                self.filter_string = ""
+                self.session_name = session_name;
+                self.session_title = "asdqwe11"
+                self.options = [];
 
-            /*
+                self.path_option = null;
+                self.selectors = [];
 
-            /en/wizard/session/enterpreneur/
-                ->return basic questions
-
-            /en/wizard/session/enterpreneur/?q1=1
-                ->return locations selector
-
-            /en/wizard/session/enterpreneur/?q1=1&q2=br123
-                ->return products selector
-
-            submit
-             ns
-            if(!next_steps)
-                goto_profile()
-            */
-            self.load = function(){
-                console.log("Entering Load()");
-                var params = {};
-
-                angular.forEach(self.answers, function(v, idx) {
-                    params["op" + (idx + 1)] = v.id;
-                });
-
-                $http({
-                    method: "GET",
-                    url: "/en/wizard/session/" + self.session_name,
-                    params: params,
-                })
-                .success(function(resp){
+                self.new_step = function(resp) {
                     self.title = resp.title;
-                    self.questions = resp.questions.map(function(val){
-                        console.log(val);
-                        return new Question(val);
+                    if(resp.options) {                            
+                        self.options = resp.options.map(function(val){
+                            return new Option(val);
+                        });
+
+                    } else {
+                        $rootScope.$broadcast('Wizard.load_selector', resp.selector_url);
+                    }
+                };
+
+                self.start_session = function(){
+                    $http({
+                        method: "GET",
+                        url: "/en/wizard/session/" + self.session_name,
+                    })
+                    .success(function(resp) {
+                        self.new_step(resp);                        
                     });
+                };
+
+
+                self.select_path_option = function(option) {
+                    self.path_option = option.id;
+                    self.selected_option = option;
+                };
+
+                $rootScope.$on("Selector.load_option", function(ev, id){
+                    self.selectors.push(id);
+                    self.selected_option = id;
                 });
+
+                self.submit = function() {
+
+                    var post_params = {
+                        "session_name": self.session_name,
+                        "path_option": self.path_option,
+                        "selectors": self.selectors,
+                    };
+
+                    $http.post("/en/wizard/submit_answer/", post_params)
+                    .success(function(resp){
+                        self.new_step(resp.current_step);
+                        self.selected_option = false;
+                    });
+
+                };
+
+                self.start_session();
             };
-
-            self.select = function(question) {
-                if(self.selected_question) {
-                    self.selected_question.selected = false;
-                }
-                question.selected = true;
-                self.selected_question = question;
-            };
-
-            self.submit = function() {
-
-                console.log("Entering submit");
-
-                self.answers.push(self.selected_question);
-                self.selected_question = null;
-                self.load();
-            };
-
-            self.load();
-        }
     }]);
 }());

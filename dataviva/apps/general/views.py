@@ -45,10 +45,10 @@ def before_request():
 
         # Check if the user is logged in, if so give the global object
         # a reference to the user from DB
-        if g.user.is_authenticated:
-            g.user.last_seen = datetime.utcnow()
-            db.session.add(g.user)
-            db.session.commit()
+        # if g.user.is_authenticated:
+        #     g.user.last_seen = datetime.utcnow()
+        #     db.session.add(g.user)
+        #     db.session.commit()
 
         if url_path[1] not in data_api:
             if g.locale not in url_path:
@@ -76,11 +76,11 @@ def get_locale(lang=None):
     if lang:
         if lang in supported_langs:
             new_lang = lang
-        if user.is_authenticated:
-            # set users preferred lang
-            user.language = new_lang
-            db.session.add(user)
-            db.session.commit()
+        # if user.is_authenticated:
+        #     # set users preferred lang
+        #     user.language = new_lang
+        #     db.session.add(user)
+        #     db.session.commit()
         else:
             session['locale'] = new_lang
     else:
@@ -95,8 +95,8 @@ def get_locale(lang=None):
             else:
                 # set users preferred lang
                 user.language = new_lang
-                db.session.add(user)
-                db.session.commit()
+                #db.session.add(user)
+                # db.session.commit()
         elif 'locale' in session:
             new_lang = session['locale']
         else:
@@ -161,7 +161,7 @@ def set_lang(lang):
 def redirect_short_url(slug):
     short = Short.query.filter_by(slug = slug).first_or_404()
     short.clicks += 1
-    db.session.add(short)
+    # db.session.add(short)
     db.session.commit()
 
     return redirect(short.long_url)

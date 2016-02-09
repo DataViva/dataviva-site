@@ -24,35 +24,42 @@
                 <div class="modal-content" id="wizcont" data-ng-controller="WizardController">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">{$ wizard.title $}</h4>
+                        <h4 class="modal-title">{$ wizard.session_title $}</h4>
                     </div>
-                    <div class="modal-body">
-                        <div class="institucional search">
-                            <h2>O que você gostaria de descobrir?</h2>
+                    <div class="modal-body clearfix">
+                        <div class="institucional search" data-ng-show="!selector">
+                            <h2>{$ wizard.title $}</h2>
                             <form class="form-dataviva form-inline filter">
                                 <div class="form-group">
                                     <i class="fa fa-search"></i>
-                                    <input id="field-search" type="text" class="busca form-control">
+                                    <input
+                                        id="field-search"
+                                        type="text"
+                                        name="questions_filter"    
+                                        ng-model="wizard.filter_string"
+                                        ng-trim="true"
+                                        class="busca form-control">
                                 </div>
                                 <div class="search-items">
-                                    <h4>Items</h4>
+                                    <h4>Options</h4>
                                     <div class="list-group list-stripped">
                                         <a href="#"
                                             class="list-group-item"
-                                            ng-repeat="question in wizard.questions"
-                                            ng-click="wizard.select(question)"
-                                            data-ng-class="{'selected': question.selected }"
-                                        >{$ question.label $}</a>
+                                            ng-click="wizard.select_path_option(option)"
+                                            data-ng-class="{'selected': selected_option == option }"
+                                        >{$ option.title $}</a>
                                     </div>
                                 </div>
                             </form>
                         </div>
+                        <div class="selector-aerea" data-ng-show="selector"></div>
+
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer clearfix">
                         <a class="pull-left btn btn-link" data-dismiss="modal" aria-label="Close">Cancelar</a>
                         <a class="pull-right btn"
-                            data-ng-disabled="!wizard.selected_question"
-                            data-ng-class="{'btn-dataviva': wizard.selected_question}"
+                            data-ng-disabled="!wizard.selected_option"
+                            data-ng-class="{'btn-dataviva': wizard.selected_option }"
                         data-ng-click="wizard.submit()">Avancar</a>
                     </div>
                 </div>
@@ -151,7 +158,6 @@
                                 </div><!-- /.modal -->
                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
                                 <script src="/static/js/libs/angular.min.js"></script>
-                                <script src="/static/js/wizard/remote.js"></script>
                                 <script src="/static/js/wizard/models.js"></script>
                                 <script src="/static/js/wizard/main.js"></script>
                                 <script src="/static/js/libs/bootstrap.min.js"></script>

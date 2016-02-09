@@ -13,37 +13,110 @@
     }]);
 
     app.controller('WizardController',[
-        '$scope', '$http', "Wizard", "Question",
-        function ($scope, $http, Wizard, Question) {
+        '$scope', '$rootScope', '$templateRequest', '$compile', '$http', "Wizard",
+        function ($scope, $rootScope, $templateRequest, $compile, $http, Wizard) {
+
+            $rootScope.$on("Wizard.load_selector", function(ev, selector_url) {
+                $(".selector-aerea").empty();
+                $templateRequest(selector_url).then(function(html){
+                    $scope.selector = true;d
+                    var template = angular.element(html);
+                    $(".selector-aerea").append(template);
+                    $compile(template)($scope);
+                });
+            });
 
             $scope.start_session = function(session_name) {
                 $scope.wizard = new Wizard(session_name);
             };
 
-            $scope.select = function(q) {
-                alert(q);
+        }]);
+    
+
+    app.controller('LocationSelector',[
+        '$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+
+            $scope.regions = {
+                depth_factor: 1,
+                filter_string: '',
+                entries: []
             };
 
-            $scope.submit = function() {
+            $scope.states = {
+                depth_factor: 3,
+                filter_string: '',
+                entries: []
+            };
 
-                var data = {
-                    "session_name": "locations",
-                    "previous_answers": [["COM_INTERNACIONAL_STEP", true], ["EXPORTACOES_STEP", true]],
-                    "current_answer": ["PRODUTO_STEP", true]
-                };
+            $scope.mesoregions = {
+                depth_factor: 5,
+                filter_string: '',
+                entries: []
+            };
+
+            $scope.mircroregions = {
+                depth_factor: 7,
+                filter_string: '',
+                entries: []
+            };
+
+            $scope.municipalities = {
+                depth_factor: 9,
+                filter_string: '',
+                entries: [],
+            };
+
+            $scope.load_depth_entries = function(group){
+                if(group.entries.length > 0) return;
 
                 $http({
-                    method: "POST",
-                    url: "/en/wizard/submit_answer/",
-                    data: data,
+                    method: "GET",
+                    url: "/attrs/location?depth=" + group.depth_factor,
                 })
                 .success(function(resp){
-                    $scope.wizard.current_step = resp.current_step;
+                     group.entries = resp;
                 });
             };
 
+            $scope.select = function(id) {
+                $rootScope.$broadcast('Selector.load_option', id);
+            }; 
+
         }]);
 
+        
+        app.controller('ProductSelector',[
+            '$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+
+            $scope.section = {
+                depth_factor: 2,
+                filter_string: '',
+                entries: []
+            };
+
+            $scope.position = {
+                depth_factor: 6,
+                filter_string: '',
+                entries: []
+            };
+
+            $scope.load_depth_entries = function(group){
+                if(group.entries.length > 0) return;
+
+                $http({
+                    method: "GET",
+                    url: "/attrs/product?depth=" + group.depth_factor,
+                })
+                .success(function(resp){
+                     group.entries = resp;
+                });
+            };
+
+            $scope.select = function(id) {
+                $rootScope.$broadcast('Selector.load_option', id);
+            }; 
+
+        }]);
 
 }());
 
