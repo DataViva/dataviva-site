@@ -88,7 +88,6 @@ class OccupationByLocation(Occupation):
         return location.name()
 
 
-
 class OccupationMunicipalities(Occupation):
     def __init__ (self, occupation_id, bra_id):
         Occupation.__init__(self, occupation_id)
