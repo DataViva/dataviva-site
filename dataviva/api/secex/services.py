@@ -1,7 +1,7 @@
 from dataviva.api.attrs.models import Bra, Hs, Wld
 from dataviva.api.secex.models import Ymw, Ymbw, Ympw, Ymp, Ymbp, Ymbpw
 from dataviva import db
-from flask import g
+from flask import g, abort
 from sqlalchemy.sql.expression import func, desc, asc
 
 class TradePartner:
@@ -179,7 +179,7 @@ class Product:
 
     def __secex_sorted_by_imports__(self):
         self._secex_sorted_by_imports = self.__secex_list__()
-        self._secex_sorted_by_exports = filter(lambda secex: secex.import_val, self._secex_sorted_by_imports)
+        self._secex_sorted_by_imports = filter(lambda secex: secex.import_val, self._secex_sorted_by_imports)
         self._secex_sorted_by_imports.sort(key=lambda secex: secex.import_val, reverse=True)
         return self._secex_sorted_by_imports
 
@@ -212,12 +212,20 @@ class Product:
         return import_val if not import_val else import_kg / import_val
 
     def highest_import_value(self):
-        secex = self.__secex_sorted_by_imports__()[0]
-        return secex.import_val
+        try:
+            secex = self.__secex_sorted_by_imports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.import_val
 
     def highest_export_value(self):
-        secex = self.__secex_sorted_by_exports__()[0]
-        return secex.export_val
+        try:
+            secex = self.__secex_sorted_by_exports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.export_val
 
     def product_complexity(self):
         product_complexity = self.__secex__()
@@ -246,13 +254,20 @@ class ProductTradePartners(Product):
                 Ymbpw.month==0)
 
     def destination_with_more_exports(self):
-        secex = self.__secex_sorted_by_exports__()[0]
-        return secex.wld.name()
+        try:
+            secex = self.__secex_sorted_by_exports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.wld.name()
 
     def origin_with_more_imports(self):
-        secex = self.__secex_sorted_by_imports__()[0]
-        return secex.wld.name()
-
+        try:
+            secex = self.__secex_sorted_by_imports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.wld.name()
 
 class ProductMunicipalities(Product):
     def __init__(self, product_id, bra_id):
@@ -277,13 +292,20 @@ class ProductMunicipalities(Product):
 
 
     def municipality_with_more_exports(self):
-        secex = self.__secex_sorted_by_exports__()[0]
-        return secex.bra.name()
+        try:
+            secex = self.__secex_sorted_by_exports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.bra.name()
 
     def municipality_with_more_imports(self):
-        secex = self.__secex_sorted_by_imports__()[0]
-        return secex.bra.name()
-
+        try:
+            secex = self.__secex_sorted_by_imports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.bra.name()
 
 class ProductLocations(Product):
     def __init__(self, product_id, bra_id):
