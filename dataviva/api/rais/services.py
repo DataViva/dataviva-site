@@ -88,9 +88,8 @@ class OccupationByLocation(Occupation):
         return location.name()
 
 
-
 class OccupationMunicipalities(Occupation):
-    def __init__ (self, occupation_id):
+    def __init__ (self, occupation_id, bra_id):
         Occupation.__init__(self, occupation_id)
         self.max_year_query= db.session.query(func.max(Ybo.year)).filter(
             Ybo.cbo_id == occupation_id)
@@ -101,6 +100,10 @@ class OccupationMunicipalities(Occupation):
         self._rais_sorted_by_num_jobs = None
         self._rais_sorted_by_wage_average = None
 
+        if bra_id:
+            self.bra_id = bra_id
+            self.max_year_query = self.max_year_query.filter(Ybo.bra_id == self.bra_id)
+            self.rais_query = self.rais_query.filter(Ybo.bra_id.like(self.bra_id+'%'))
 
     def municipality_with_more_jobs(self):
         rais = self.__rais_sorted_by_num_jobs__()[0]
@@ -109,33 +112,6 @@ class OccupationMunicipalities(Occupation):
     def municipality_with_biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.bra.name()
-
-
-
-class OccupationMunicipalitiesByLocation(Occupation):
-    def __init__ (self, occupation_id, bra_id):
-        Occupation.__init__(self, occupation_id)
-        self.bra_id = bra_id
-        self.max_year_query= db.session.query(func.max(Ybo.year)).filter(
-            Ybo.cbo_id == occupation_id,
-            Ybo.bra_id == self.bra_id)
-        self.rais_query = Ybo.query.filter(
-                    Ybo.cbo_id == self.occupation_id,
-                    Ybo.bra_id.like(self.bra_id+'%'),
-                    Ybo.year == self.max_year_query,
-                    Ybo.bra_id_len == 9)
-        self._rais_sorted_by_num_jobs = None
-        self._rais_sorted_by_wage_average = None
-
-
-    def municipality_with_more_jobs(self):
-        rais = self.__rais_sorted_by_num_jobs__()[0]
-        return rais.bra.name()
-
-    def municipality_with_biggest_wage_average(self):
-        rais = self.__rais_sorted_by_wage_average__()[0]
-        return rais.bra.name()
-
 
 
 
@@ -159,7 +135,6 @@ class OccupationActivities(Occupation):
     def activity_with_biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.cnae.name()
-
 
 
 
