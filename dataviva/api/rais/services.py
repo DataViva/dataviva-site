@@ -133,6 +133,23 @@ class IndustryByLocation :
             self._rais = rais_data
         return self._rais
 
+    def __rais_list__(self):
+        if not self._rais:
+            rais_data = self.rais_query.all()
+            self._rais = rais_data
+        return self._rais
+
+    def __rais_sorted_by_num_jobs__(self):
+        self._rais_sorted_by_num_jobs = self.__rais_list__()
+        self._rais_sorted_by_num_jobs.sort(key=lambda rais: rais.num_jobs, reverse=True)
+        return self._rais_sorted_by_num_jobs
+
+    def __rais_sorted_by_wage_avg__(self):
+        self._rais_sorted_by_wage_avg = self.__rais_list__()
+        self._rais_sorted_by_wage_avg.sort(key=lambda rais: rais.wage_avg, reverse=True)
+        return self._rais_sorted_by_wage_avg 
+
+
     def get_name(self):
         base_industry = self.__rais__().cnae
         return base_industry.name() 
@@ -163,7 +180,7 @@ class IndustryByLocation :
 
 
 
-class IndustyByLocationOcupation:
+class IndustyByLocationOcupation(IndustryByLocation):
     def __init__(self, bra_id, cnae_id):
         self.bra_id = bra_id
         self.cnae_id = cnae_id
@@ -177,22 +194,6 @@ class IndustyByLocationOcupation:
             Ybio.bra_id == self.bra_id,
             Ybio.year == self.ybio_max_year
             )
-
-    def __rais_list__(self):
-        if not self._rais:
-            rais_data = self.rais_query.all()
-            self._rais = rais_data
-        return self._rais
-
-    def __rais_sorted_by_num_jobs__(self):
-        self._rais_sorted_by_num_jobs = self.__rais_list__()
-        self._rais_sorted_by_num_jobs.sort(key=lambda rais: rais.num_jobs, reverse=True)
-        return self._rais_sorted_by_num_jobs
-
-    def __rais_sorted_by_wage_avg__(self):
-        self._rais_sorted_by_wage_avg = self.__rais_list__()
-        self._rais_sorted_by_wage_avg.sort(key=lambda rais: rais.wage_avg, reverse=True)
-        return self._rais_sorted_by_wage_avg 
 
     def occ_with_more_num_jobs_name(self):
         rais = self.__rais_sorted_by_num_jobs__()[0]
@@ -211,7 +212,7 @@ class IndustyByLocationOcupation:
         return rais.wage
 
 
-class IndustyByLocationMunicipality:
+class IndustyByLocationMunicipality(IndustryByLocation):
     def __init__(self, bra_id, cnae_id):
         self.bra_id = bra_id
         self.cnae_id = cnae_id
@@ -225,22 +226,6 @@ class IndustyByLocationMunicipality:
                 Ybi.bra_id.like(self.bra_id+'%'),
                 Ybi.year == self.ybi_max_year 
                 )
-
-    def __rais_list__(self):
-        if not self._rais:
-            rais_data = self.rais_query.all()
-            self._rais = rais_data
-        return self._rais
-
-    def __rais_sorted_by_num_jobs__(self):
-        self._rais_sorted_by_num_jobs = self.__rais_list__()
-        self._rais_sorted_by_num_jobs.sort(key=lambda rais: rais.num_jobs, reverse=True)
-        return self._rais_sorted_by_num_jobs
-
-    def __rais_sorted_by_wage_avg__(self):
-        self._rais_sorted_by_wage_avg = self.__rais_list__()
-        self._rais_sorted_by_wage_avg.sort(key=lambda rais: rais.wage_avg, reverse=True)
-        return self._rais_sorted_by_wage_avg         
 
     def municipality_with_more_num_jobs_name(self):
         rais = self.__rais_sorted_by_num_jobs__()[0]
