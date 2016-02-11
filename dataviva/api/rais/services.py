@@ -83,7 +83,7 @@ class IndustryOccupation(Industry):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.cbo.name()
 
-    def occ_with_more_wage_avg_value(self):
+    def biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.wage
     
@@ -108,7 +108,7 @@ class IndustryMunicipality(Industry):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.bra.name()
 
-    def municipality_with_more_wage_avg_value(self):
+    def biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.wage
 
@@ -161,7 +161,7 @@ class IndustyByLocationOcupation(IndustryByLocation):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.cbo.name()
 
-    def occ_with_more_wage_avg_value(self):
+    def biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.wage
 
@@ -190,6 +190,6 @@ class IndustyByLocationMunicipality(IndustryByLocation):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.bra.name()
 
-    def municipality_with_more_wage_avg_value(self):
+    def biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.wage        
