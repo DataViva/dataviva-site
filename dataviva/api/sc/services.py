@@ -13,13 +13,11 @@ class Basic_course:
         self.course_sc_id = course_sc_id
         '''self.ybsc_max_year_subquery = db.session.query(
             func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)'''
-        self.yc_max_year_subquery = db.session.query(
+        self.max_year_subquery = db.session.query(
             func.max(Yc_sc.year)).filter_by(course_sc_id=course_sc_id)
-        self.ysc_max_year_subquery = db.session.query(
-                func.max(Ysc.year)).filter_by(course_sc_id=course_sc_id)
         self.course_query = Yc_sc.query.join(Course_sc).filter(
                 Yc_sc.course_sc_id == self.course_sc_id,
-                Yc_sc.year == self.yc_max_year_subquery)
+                Yc_sc.year == self.max_year_subquery)
 
     def __sc__(self):
         if not self._sc:
@@ -27,8 +25,9 @@ class Basic_course:
             self._sc = sc
         return self._sc
 
-    #def course_name(self):
-    #    return self.__statistics__()['course_name']
+    def course_name(self):
+        course = self.__sc__()
+        return course.course_sc.name()
 
     #def course_description(self):
     #    return self.__statistics__()['course_description']
@@ -63,11 +62,6 @@ class Basic_course:
         basic_course = {}
 
         if self.bra_id:
-
-            course_query = Ybc_sc.query.join(Course_sc).filter(
-                Ybc_sc.course_sc_id == self.course_sc_id,
-                Ybc_sc.year == self.ybc_max_year_subquery,
-                Ybc_sc.bra_id == self.bra_id)
 
             total_schools_query = Ybsc.query.filter(
                 Ybsc.course_sc_id == self.course_sc_id,
@@ -106,10 +100,6 @@ class Basic_course:
                 city_data = None
 
         else:
-
-            course_query = Yc_sc.query.join(Course_sc).filter(
-                Yc_sc.course_sc_id == self.course_sc_id,
-                Yc_sc.year == self.yc_max_year_subquery)
 
             total_schools_query = Ysc.query.filter(
                 Ysc.course_sc_id == self.course_sc_id,
@@ -170,17 +160,50 @@ class Basic_course:
         return self._statistics
 
     def enrollment_statistics_description(self):
-        return self.__statistics__()['enrollment_statistics_description']
+        return self.__statistics__()['enrollment_statistics_description']'''
 
 class Basic_course_school(Basic_course):
+    def __init__(self, course_sc_id):
+        Basic_course.__init__(self, course_sc_id)
+        self._sc_count = None
+        self.max_year_subquery = db.session.query(
+                func.max(Ysc.year)).filter_by(course_sc_id=course_sc_id)
+        self._sc_sorted_by_enrollment = None
+        self.total_schools_query = Ysc.query.filter(
+                    Ysc.course_sc_id == self.course_sc_id,
+                    Ysc.year == self.max_year_subquery)
+
+    def __sc_list__(self):
+        if not self._sc:
+            sc = self.total_schools_query.all()
+            self._sc = sc
+        return self._sc
+    
+    def __sc_count__(self):
+        if not self._sc_count:
+            sc_count = self.__sc_list__().count()
+            self._sc_count = sc_count
+        return self._sc_count
+    
+    def __sc_sorted_by_enrollment__(self):
+        if not self._sc_sorted_by_enrollment:
+            self._sc_sorted_by_enrollment = self.__sc_list__()
+            self._sc_sorted_by_enrollment.sort(key=lambda sc: sc.enrolled, reverse=True)
+        return self._sc_sorted_by_enrollment
 
     def school_name(self):
-        return self.__statistics__()['school_name']
+        sc = self.__sc_sorted_by_enrollment__()[0]
+        return sc.school.name()
 
     def school_enrolled(self):
-        return self.__statistics__()['school_enrolled']
+        school_enrolled = self.__sc_sorted_by_enrollment__()[0]
+        return school_enrolled.enrolled
 
-class Basic_course_city(Basic_course):
+    def school_count(self):
+        return 
+
+
+'''class Basic_course_city(Basic_course):
 
     def city_name(self):
         return self.__statistics__()['city_name']
