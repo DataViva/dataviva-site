@@ -94,7 +94,7 @@ class OccupationMunicipalities(Occupation):
         Occupation.__init__(self, occupation_id)
         self.max_year_query= db.session.query(func.max(Ybo.year)).filter(
             Ybo.cbo_id == occupation_id)
-        self.rais_query = Ybo.query.join(Bra).filter(
+        self.rais_query = Ybo.query.filter(
                             Ybo.cbo_id == self.occupation_id,
                             Ybo.year == self.max_year_query,
                             Ybo.bra_id_len == 9)
@@ -112,7 +112,6 @@ class OccupationMunicipalities(Occupation):
 
 
 
-
 class OccupationMunicipalitiesByLocation(Occupation):
     def __init__ (self, occupation_id, bra_id):
         Occupation.__init__(self, occupation_id)
@@ -120,7 +119,7 @@ class OccupationMunicipalitiesByLocation(Occupation):
         self.max_year_query= db.session.query(func.max(Ybo.year)).filter(
             Ybo.cbo_id == occupation_id,
             Ybo.bra_id == self.bra_id)
-        self.rais_query = Ybo.query.join(Bra).filter(
+        self.rais_query = Ybo.query.filter(
                     Ybo.cbo_id == self.occupation_id,
                     Ybo.bra_id.like(self.bra_id+'%'),
                     Ybo.year == self.max_year_query,
@@ -145,7 +144,7 @@ class OccupationActivities(Occupation):
         Occupation.__init__(self, occupation_id)
         self.max_year_query= db.session.query(func.max(Yio.year)).filter(
             Yio.cbo_id == occupation_id)
-        self.rais_query = Yio.query.join(Cnae).filter(
+        self.rais_query = Yio.query.filter(
                             Yio.cbo_id == self.occupation_id,
                             Yio.year == self.max_year_query,
                             Yio.cnae_id_len == 6)
@@ -171,7 +170,7 @@ class OccupationActivitiesByLocation(Occupation):
         self.max_year_query= db.session.query(func.max(Ybio.year)).filter(
             Ybio.cbo_id == occupation_id,
             Ybio.bra_id == self.bra_id)
-        self.rais_query = Ybio.query.join(Cnae).filter(
+        self.rais_query = Ybio.query.filter(
             Ybio.cbo_id == self.occupation_id,
             Ybio.bra_id.like(self.bra_id+'%'),
             Ybio.year == self.max_year_query ,
