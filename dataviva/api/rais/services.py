@@ -44,6 +44,8 @@ class Occupation:
         total_establishments = self.__rais__().num_est
         return total_establishments
 
+
+
 class OccupationByLocation(Occupation):
     def __init__(self, occupation_id, bra_id):
         Occupation.__init__(self, occupation_id)
@@ -59,6 +61,7 @@ class OccupationByLocation(Occupation):
     def location_name(self):
         location = self.__rais__().bra
         return location.name()
+
 
 
 class OccupationMunicipalities(Occupation):
