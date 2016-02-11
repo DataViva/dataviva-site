@@ -125,14 +125,25 @@ class IndustryOccupation(Industry):
 
 
 class IndustryMunicipality(Industry):
-    def __init__(self, cnae_id):
+    def __init__(self, cnae_id, bra_id):
         Industry.__init__(self, cnae_id)
-        self.ybi_max_year_br = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
+        self.max_year = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
         self.rais_query = Ybi.query.join(Bra).filter(
                 Bra.id == Ybi.bra_id,
                 Ybi.cnae_id == self.cnae_id,
                 Ybi.bra_id_len == 9,
-                Ybi.year == self.ybi_max_year_br,      
+                Ybi.year == self.max_year,      
+                )
+
+        if bra_id : 
+            self.bra_id = bra_id
+            self.max_year = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
+            self.rais_query = Ybi.query.join(Bra).filter(
+                Bra.id == Ybi.bra_id,
+                Ybi.cnae_id == self.cnae_id,
+                Ybi.bra_id_len == 9,
+                Ybi.bra_id.like(self.bra_id+'%'),
+                Ybi.year == self.max_year 
                 )
         
     def municipality_with_more_num_jobs_name(self):
