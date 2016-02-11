@@ -5,8 +5,6 @@ from dataviva.api.secex.services import Product as SecexProductService
 from dataviva.api.secex.services import ProductTradePartners as SecexProductTradePartnersService
 from dataviva.api.secex.services import ProductMunicipalities as SecexProductMunicipalitiesService
 from dataviva.api.secex.services import ProductLocations as SecexProductLocationsService
-from dataviva.api.secex.services import ProductLocationsTradePartners as SecexProductLocationsTradePartnersService
-from dataviva.api.secex.services import ProductLocationsMunicipalities as SecexProductLocationsMunicipalitiesService
 
 
 mod = Blueprint('product', __name__,
@@ -59,14 +57,15 @@ def index(product_id):
     #verificar utilizacao dos metodos da classe Product
     #ajustar querys de comercio internacional para classe ProductLocations
 
+    secex_product_trade_partners_service = SecexProductTradePartnersService(product_id=product_id, bra_id=bra_id)
+    secex_product_municipalities_service = SecexProductMunicipalitiesService(product_id=product_id, bra_id=bra_id)
+
     if len(product_id) == 6:
             secex_product_service = SecexProductService(product_id=product_id)
             header['pci'] = secex_product_service.product_complexity()
 
     if bra_id:
         secex_product_service = SecexProductLocationsService(product_id=product_id, bra_id=bra_id)
-        secex_product_trade_partners_service = SecexProductLocationsTradePartnersService(product_id=product_id, bra_id=bra_id)
-        secex_product_municipalities_service = SecexProductLocationsMunicipalitiesService(product_id=product_id, bra_id=bra_id)
 
         body['destination_name_export'] = secex_product_trade_partners_service.destination_with_more_exports()
         body['destination_export_value'] = secex_product_trade_partners_service.highest_export_value()
@@ -86,8 +85,6 @@ def index(product_id):
 
     else:
         secex_product_service = SecexProductService(product_id=product_id)
-        secex_product_trade_partners_service = SecexProductTradePartnersService(product_id=product_id)
-        secex_product_municipalities_service = SecexProductMunicipalitiesService(product_id=product_id)
 
         body['municipality_name_export'] = secex_product_municipalities_service.municipality_with_more_exports()
         body['municipality_export_value'] = secex_product_municipalities_service.highest_export_value()

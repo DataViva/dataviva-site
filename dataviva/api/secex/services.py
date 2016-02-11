@@ -164,7 +164,7 @@ class Product:
         if not self._secex:
             secex_data = self.secex_query.all()
             self._secex = secex_data
-        return self._secex
+        return list(self._secex)
 
     def __secex_sorted_by_balance__(self):
         self._secex_sorted_by_balance = self.__secex_list__()
@@ -173,11 +173,13 @@ class Product:
 
     def __secex_sorted_by_exports__(self):
         self._secex_sorted_by_exports = self.__secex_list__()
+        self._secex_sorted_by_exports = filter(lambda secex: secex.export_val, self._secex_sorted_by_exports)
         self._secex_sorted_by_exports.sort(key=lambda secex: secex.export_val, reverse=True)
         return self._secex_sorted_by_exports
 
     def __secex_sorted_by_imports__(self):
         self._secex_sorted_by_imports = self.__secex_list__()
+        self._secex_sorted_by_exports = filter(lambda secex: secex.import_val, self._secex_sorted_by_imports)
         self._secex_sorted_by_imports.sort(key=lambda secex: secex.import_val, reverse=True)
         return self._secex_sorted_by_imports
 
@@ -235,7 +237,7 @@ class Product:
 
 
 class ProductTradePartners(Product):
-    def __init__(self, product_id):
+    def __init__(self, product_id, bra_id):
         Product.__init__(self, product_id)
         self.max_year_query = db.session.query(func.max(Ympw.year)).filter_by(hs_id=product_id)
         self.secex_query = Ympw.query.join(Wld).filter(
@@ -244,6 +246,16 @@ class ProductTradePartners(Product):
             Ympw.month==0,
             Ympw.year==self.max_year_query
         )
+
+        if bra_id:
+            self.bra_id = bra_id
+            self.max_year_query = db.session.query(func.max(Ymbpw.year)).filter_by(hs_id=product_id, bra_id=bra_id)
+            self.secex_query = Ymbpw.query.join(Wld).filter(
+                Ymbpw.hs_id==self.product_id,
+                Ymbpw.year==self.max_year_query,
+                Ymbpw.wld_id_len==5,
+                Ymbpw.bra_id==self.bra_id,
+                Ymbpw.month==0)
 
     def destination_with_more_exports(self):
         secex = self.__secex_sorted_by_exports__()[0]
@@ -255,7 +267,7 @@ class ProductTradePartners(Product):
 
 
 class ProductMunicipalities(Product):
-    def __init__(self, product_id):
+    def __init__(self, product_id, bra_id):
         Product.__init__(self, product_id)
         self.max_year_query = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id)
         self.secex_query = Ymbp.query.join(Bra).filter(
@@ -264,6 +276,17 @@ class ProductMunicipalities(Product):
             Ymbp.month==0,
             Ymbp.year==self.max_year_query,
         )
+
+        if bra_id:
+            self.bra_id = bra_id
+            self.max_year_query = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id, bra_id=bra_id)
+            self.secex_query = Ymbp.query.join(Bra).filter(
+                Ymbp.hs_id==self.product_id,
+                Ymbp.year==self.max_year_query,
+                Ymbp.bra_id_len==9,
+                Ymbp.bra_id.like(str(self.bra_id)+'%'),
+                Ymbp.month==0)
+
 
     def municipality_with_more_exports(self):
         secex = self.__secex_sorted_by_exports__()[0]
@@ -298,90 +321,6 @@ class ProductLocations(Product):
     def opp_gain_wld(self):
         secex = self.__secex__()
         return secex.opp_gain_wld
-
-
-class ProductLocationsTradePartners(Product, ProductLocations):
-    def __init__(self, product_id, bra_id):
-        ProductLocations.__init__(self, product_id, bra_id)
-        self.max_year_query = db.session.query(func.max(Ymbpw.year)).filter_by(hs_id=product_id, bra_id=bra_id)
-        self.secex_query = Ymbpw.query.join(Wld).filter(
-            Ymbpw.hs_id==self.product_id,
-            Ymbpw.year==self.max_year_query,
-            Ymbpw.wld_id_len==5,
-            Ymbpw.bra_id==self.bra_id,
-            Ymbpw.month==0)
-        import pdb; pdb.set_trace()
-
-    '''
-    select name_pt, export_val
-    from secex_ymbpw ymbpw
-    inner join attrs_wld wld on wld.id = ymbpw.wld_id
-    where hs_id ='052601' and
-    bra_id = '4mg' and
-    year = (select max(year) from secex_ymbpw where hs_id ='052601' and bra_id = '4mg') and 
-    month = 0 and 
-    wld_id_len = 5
-    order by export_val desc
-    limit 1;
-
-    ymbpw_query = Ymbpw.query.join(Wld).filter(
-        Ymbpw.hs_id==self.product_id,
-        Ymbpw.year==self.ymbpw_max_year_query,
-        Ymbpw.wld_id_len==5,
-        Ymbpw.bra_id.like(str(self.bra_id)+'%'),
-        Ymbpw.month==0
-    ).order_by(desc(Ymbpw.import_val)).limit(1)
-    '''
-
-    def destination_with_more_exports(self):
-        secex = self.__secex_sorted_by_exports__()[0]
-        return secex.wld.name()
-
-    def origin_with_more_imports(self):
-        secex = self.__secex_sorted_by_imports__()[0]
-        return secex.wld.name()
-
-
-class ProductLocationsMunicipalities(Product, ProductLocations):
-    def __init__(self, product_id, bra_id):
-        ProductLocations.__init__(self, product_id, bra_id)
-        self.max_year_query = db.session.query(func.max(Ymbp.year)).filter_by(hs_id=product_id, bra_id=bra_id)
-        self.secex_query = Ymbp.query.join(Bra).filter(
-            Ymbp.hs_id==self.product_id,
-            Ymbp.year==self.max_year_query,
-            Ymbp.bra_id_len==9,
-            Ymbp.bra_id.like(str(self.bra_id)+'%'),
-            Ymbp.month==0)
-
-    '''
-    select name_pt, export_val
-    from secex_ymbp ymbp
-    inner join attrs_bra bra on bra.id = ymbp.bra_id 
-    where hs_id ='052601' and
-    year = (select max(year) from secex_ymbp where hs_id ='052601' and bra_id like '4mg01%') and 
-    month = 0 and 
-    bra_id_len = 9 and 
-    bra_id like '4mg01%' and
-    export_val is not NULL
-    order by export_val desc
-    limit 1;
-
-    ymbp_query = Ymbp.query.join(Bra).filter(
-        Ymbp.hs_id==self.product_id,
-        Ymbp.year==self.ymbp_max_year_query,
-        Ymbp.bra_id_len==9,
-        Ymbp.bra_id.like(str(self.bra_id)+'%'),
-        Ymbp.month==0
-    ).order_by(desc(Ymbp.import_val)).limit(1)
-    '''
-
-    def municipality_with_more_exports(self):
-        secex = self.__secex_sorted_by_exports__()[0]
-        return secex.bra.name()
-
-    def municipality_with_more_imports(self):
-        secex = self.__secex_sorted_by_imports__()[0]
-        return secex.bra.name()
 
 
 
