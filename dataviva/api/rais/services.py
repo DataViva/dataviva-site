@@ -50,6 +50,12 @@ class Occupation:
             self._rais = rais
         return self._rais
 
+    def __rais_sorted_by_num_jobs__(self):
+        if not self._rais_sorted_by_num_jobs:
+            self._rais_sorted_by_num_jobs = self.__rais_list__()
+            self._rais_sorted_by_num_jobs.sort(key=lambda rais: rais.num_jobs, reverse=True)
+        return self._rais_sorted_by_num_jobs
+
 
 class OccupationByLocation(Occupation):
     def __init__(self, occupation_id, bra_id):
@@ -81,11 +87,6 @@ class OccupationMunicipalities(Occupation):
         self._rais_sorted_by_num_jobs = None
         self._rais_sorted_by_wage_average = None
 
-    def __rais_sorted_by_num_jobs__(self):
-        if not self._rais_sorted_by_num_jobs:
-            self._rais_sorted_by_num_jobs = self.__rais_list__()
-            self._rais_sorted_by_num_jobs.sort(key=lambda rais: rais.num_jobs, reverse=True)
-        return self._rais_sorted_by_num_jobs
 
     def __rais_sorted_by_wage_average__(self):
         if not self._rais_sorted_by_wage_average:
@@ -126,11 +127,6 @@ class OccupationMunicipalitiesByLocation(Occupation):
         self._rais_sorted_by_num_jobs = None
         self._rais_sorted_by_wage_average = None
 
-    def __rais_sorted_by_num_jobs__(self):
-        if not self._rais_sorted_by_num_jobs:
-            self._rais_sorted_by_num_jobs = self.__rais_list__()
-            self._rais_sorted_by_num_jobs.sort(key=lambda rais: rais.num_jobs, reverse=True)
-        return self._rais_sorted_by_num_jobs
 
     def __rais_sorted_by_wage_average__(self):
         if not self._rais_sorted_by_wage_average:
@@ -168,11 +164,6 @@ class OccupationActivities(Occupation):
         self._rais_sorted_by_num_jobs = None
         self._rais_sorted_by_wage_average = None
 
-    def __rais_sorted_by_num_jobs__(self):
-        if not self._rais_sorted_by_num_jobs:
-            self._rais_sorted_by_num_jobs = self.__rais_list__()
-            self._rais_sorted_by_num_jobs.sort(key=lambda rais: rais.num_jobs, reverse=True)
-        return self._rais_sorted_by_num_jobs
 
     def __rais_sorted_by_wage_average__(self):
         if not self._rais_sorted_by_wage_average:
@@ -214,11 +205,7 @@ class OccupationActivitiesByLocation(Occupation):
         self._rais_sorted_by_wage_average = None
 
 
-    def __rais_sorted_by_num_jobs__(self):
-        if not self._rais_sorted_by_num_jobs:
-            self._rais_sorted_by_num_jobs = self.__rais_list__()
-            self._rais_sorted_by_num_jobs.sort(key=lambda rais: rais.num_jobs, reverse=True)
-        return self._rais_sorted_by_num_jobs
+
 
     def __rais_sorted_by_wage_average__(self):
         if not self._rais_sorted_by_wage_average:
