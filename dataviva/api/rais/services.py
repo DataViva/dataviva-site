@@ -44,6 +44,11 @@ class Occupation:
         total_establishments = self.__rais__().num_est
         return total_establishments
 
+    def __rais_list__(self):
+        if not self._rais:
+            rais = self.rais_query.all()
+            self._rais = rais
+        return self._rais
 
 
 class OccupationByLocation(Occupation):
@@ -75,12 +80,6 @@ class OccupationMunicipalities(Occupation):
                             Ybo.bra_id_len == 9)
         self._rais_sorted_by_num_jobs = None
         self._rais_sorted_by_wage_average = None
-
-    def __rais_list__(self):
-        if not self._rais:
-            rais = self.rais_query.all()
-            self._rais = rais
-        return self._rais
 
     def __rais_sorted_by_num_jobs__(self):
         if not self._rais_sorted_by_num_jobs:
@@ -127,12 +126,6 @@ class OccupationMunicipalitiesByLocation(Occupation):
         self._rais_sorted_by_num_jobs = None
         self._rais_sorted_by_wage_average = None
 
-    def __rais_list__(self):
-        if not self._rais:
-            rais = self.rais_query.all()
-            self._rais = rais
-        return self._rais
-
     def __rais_sorted_by_num_jobs__(self):
         if not self._rais_sorted_by_num_jobs:
             self._rais_sorted_by_num_jobs = self.__rais_list__()
@@ -174,12 +167,6 @@ class OccupationActivities(Occupation):
                             Yio.cnae_id_len == 6)
         self._rais_sorted_by_num_jobs = None
         self._rais_sorted_by_wage_average = None
-
-    def __rais_list__(self):
-        if not self._rais:
-            rais = self.rais_query.all()
-            self._rais = rais
-        return self._rais
 
     def __rais_sorted_by_num_jobs__(self):
         if not self._rais_sorted_by_num_jobs:
@@ -226,11 +213,6 @@ class OccupationActivitiesByLocation(Occupation):
         self._rais_sorted_by_num_jobs = None
         self._rais_sorted_by_wage_average = None
 
-    def __rais_list__(self):
-        if not self._rais:
-            rais = self.rais_query.all()
-            self._rais = rais
-        return self._rais
 
     def __rais_sorted_by_num_jobs__(self):
         if not self._rais_sorted_by_num_jobs:
