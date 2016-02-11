@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
-from dataviva.api.secex.services import Product as SecexProductService
-from dataviva.api.secex.services import ProductTradePartners as SecexProductTradePartnersService
-from dataviva.api.secex.services import ProductMunicipalities as SecexProductMunicipalitiesService
-from dataviva.api.secex.services import ProductLocations as SecexProductLocationsService
+from dataviva.api.secex.services import Product as ProductService
+from dataviva.api.secex.services import ProductTradePartners as ProductTradePartnersService
+from dataviva.api.secex.services import ProductMunicipalities as ProductMunicipalitiesService
+from dataviva.api.secex.services import ProductLocations as ProductLocationsService
 
 
 mod = Blueprint('product', __name__,
@@ -54,51 +54,50 @@ def index(product_id):
     header = {}
     body = {}
 
-    secex_product_trade_partners_service = SecexProductTradePartnersService(product_id=product_id, bra_id=bra_id)
-    secex_product_municipalities_service = SecexProductMunicipalitiesService(product_id=product_id, bra_id=bra_id)
+    trade_partners_service = ProductTradePartnersService(product_id=product_id, bra_id=bra_id)
+    municipalities_service = ProductMunicipalitiesService(product_id=product_id, bra_id=bra_id)
 
     if len(product_id) == 6:
-            secex_product_service = SecexProductService(product_id=product_id)
-            header['pci'] = secex_product_service.product_complexity()
+            product_service = ProductService(product_id=product_id)
+            header['pci'] = product_service.complexity()
 
     if bra_id:
-        secex_product_service = SecexProductLocationsService(product_id=product_id, bra_id=bra_id)
+        product_service = ProductLocationsService(product_id=product_id, bra_id=bra_id)
 
-        body['destination_name_export'] = secex_product_trade_partners_service.destination_with_more_exports()
-        body['destination_export_value'] = secex_product_trade_partners_service.highest_export_value()
-        body['origin_name_import'] = secex_product_trade_partners_service.origin_with_more_imports()
-        body['origin_import_value'] = secex_product_trade_partners_service.highest_import_value()
+        body['destination_name_export'] = trade_partners_service.destination_with_more_exports()
+        body['destination_export_value'] = trade_partners_service.highest_export_value()
+        body['origin_name_import'] = trade_partners_service.origin_with_more_imports()
+        body['origin_import_value'] = trade_partners_service.highest_import_value()
 
         if len(product_id) == 6:
-            header['rca_wld'] = secex_product_service.rca_wld()
-            header['distance_wld'] = secex_product_service.distance_wld()
-            header['opp_gain_wld'] = secex_product_service.opp_gain_wld()
+            header['rca_wld'] = product_service.rca_wld()
+            header['distance_wld'] = product_service.distance_wld()
+            header['opp_gain_wld'] = product_service.opp_gain_wld()
 
         if len(bra_id) != 9:
-            body['municipality_name_export'] = secex_product_municipalities_service.municipality_with_more_exports()
-            body['municipality_export_value'] = secex_product_municipalities_service.highest_export_value()
-            body['municipality_name_import'] = secex_product_municipalities_service.municipality_with_more_imports()
-            body['municipality_import_value'] = secex_product_municipalities_service.highest_import_value()
+            body['municipality_name_export'] = municipalities_service.municipality_with_more_exports()
+            body['municipality_export_value'] = municipalities_service.highest_export_value()
+            body['municipality_name_import'] = municipalities_service.municipality_with_more_imports()
+            body['municipality_import_value'] = municipalities_service.highest_import_value()
 
     else:
-        secex_product_service = SecexProductService(product_id=product_id)
+        product_service = ProductService(product_id=product_id)
 
-        body['municipality_name_export'] = secex_product_municipalities_service.municipality_with_more_exports()
-        body['municipality_export_value'] = secex_product_municipalities_service.highest_export_value()
-        body['municipality_name_import'] = secex_product_municipalities_service.municipality_with_more_imports()
-        body['municipality_import_value'] = secex_product_municipalities_service.highest_import_value()
-        body['destination_name_export'] = secex_product_trade_partners_service.destination_with_more_exports()
-        body['destination_export_value'] = secex_product_trade_partners_service.highest_export_value()
-        body['origin_name_import'] = secex_product_trade_partners_service.origin_with_more_imports()
-        body['origin_import_value'] = secex_product_trade_partners_service.highest_import_value()
+        body['municipality_name_export'] = municipalities_service.municipality_with_more_exports()
+        body['municipality_export_value'] = municipalities_service.highest_export_value()
+        body['municipality_name_import'] = municipalities_service.municipality_with_more_imports()
+        body['municipality_import_value'] = municipalities_service.highest_import_value()
+        body['destination_name_export'] = trade_partners_service.destination_with_more_exports()
+        body['destination_export_value'] = trade_partners_service.highest_export_value()
+        body['origin_name_import'] = trade_partners_service.origin_with_more_imports()
+        body['origin_import_value'] = trade_partners_service.highest_import_value()
 
-
-    header['name'] = secex_product_service.product_name()
-    header['year'] = secex_product_service.year()
-    header['trade_balance'] = secex_product_service.trade_balance()
-    header['export_val'] = secex_product_service.total_exported()
-    header['export_net_weight'] = secex_product_service.unity_weight_export_price()
-    header['import_val'] = secex_product_service.total_imported()
-    header['import_net_weight'] = secex_product_service.unity_weight_import_price()
+    header['name'] = product_service.product_name()
+    header['year'] = product_service.year()
+    header['trade_balance'] = product_service.trade_balance()
+    header['export_val'] = product_service.total_exported()
+    header['export_net_weight'] = product_service.unity_weight_export_price()
+    header['import_val'] = product_service.total_imported()
+    header['import_net_weight'] = product_service.unity_weight_import_price()
 
     return render_template('product/index.html', body_class='perfil-estado', header=header, body=body, context=context)
