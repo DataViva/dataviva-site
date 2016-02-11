@@ -43,7 +43,7 @@ def index(cnae_id):
 
     if bra_id :
         industry_service = IndustryByLocation(bra_id=bra_id, cnae_id=cnae_id)
-        industry_occupation_service = IndustyByLocationOcupation(bra_id=bra_id, cnae_id=cnae_id)
+        industry_occupation_service = IndustryOccupation(bra_id=bra_id, cnae_id=cnae_id)
         industry_municipality_service = IndustyByLocationMunicipality(bra_id=bra_id, cnae_id=cnae_id)
 
         header['rca'] = industry_service.rca()
@@ -51,7 +51,7 @@ def index(cnae_id):
         header['opportunity_gain'] = industry_service.opportunity_gain()
     else:
         industry_service = Industry(cnae_id=cnae_id)
-        industry_occupation_service = IndustryOccupation(cnae_id=cnae_id)
+        industry_occupation_service = IndustryOccupation(cnae_id=cnae_id,bra_id=bra_id)
         industry_municipality_service = IndustryMunicipality(cnae_id=cnae_id)
    
     header['name'] = industry_service.get_name() 
@@ -69,14 +69,14 @@ def index(cnae_id):
     
     
     body['occ_with_more_wage_avg_name'] = industry_occupation_service.occ_with_more_wage_avg_name()
-    body['occ_with_more_wage_avg_value'] = industry_occupation_service.occ_with_more_wage_avg_value()
+    body['occ_with_more_wage_avg_value'] = industry_occupation_service.biggest_wage_average()
     
     if bra_id == None  or len(bra_id) != 9 :
         body['municipality_with_more_num_jobs_value'] = industry_municipality_service.highest_number_of_jobs()
         body['municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs_name()
 
         body['municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_avg_name()
-        body['municipality_with_more_wage_avg_value'] = industry_municipality_service.municipality_with_more_wage_avg_value()
+        body['municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
              
     
 

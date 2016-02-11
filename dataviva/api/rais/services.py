@@ -62,55 +62,10 @@ class Industry :
         rais = self.__rais_sorted_by_num_jobs__()[0]
         return rais.num_jobs
 
-
-class IndustryOccupation(Industry):
-    def __init__(self, cnae_id):
-        Industry.__init__(self, cnae_id)
-        self.yio_max_year = db.session.query(func.max(Yio.year)).filter_by(cnae_id=cnae_id)
-        self.rais_query = Yio.query.join(Cbo).filter(
-                Yio.cbo_id == Cbo.id,
-                Yio.cnae_id == self.cnae_id,
-                Yio.cbo_id_len == 4,                
-                Yio.year == self.yio_max_year 
-                )
-
-    def occ_with_more_num_jobs_name(self):
-        rais = self.__rais_sorted_by_num_jobs__()[0]
-        return rais.cbo.name()
-
-
-    def occ_with_more_wage_avg_name(self):
-        rais = self.__rais_sorted_by_wage_avg__()[0]
-        return rais.cbo.name()
-
     def biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.wage
-    
 
-class IndustryMunicipality(Industry):
-    def __init__(self, cnae_id):
-        Industry.__init__(self, cnae_id)
-        self.ybi_max_year_br = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
-        self.rais_query = Ybi.query.join(Bra).filter(
-                Bra.id == Ybi.bra_id,
-                Ybi.cnae_id == self.cnae_id,
-                Ybi.bra_id_len == 9,
-                Ybi.year == self.ybi_max_year_br,      
-                )
-        
-    def municipality_with_more_num_jobs_name(self):
-        rais = self.__rais_sorted_by_num_jobs__()[0]
-        return rais.bra.name()
-
-
-    def municipality_with_more_wage_avg_name(self):
-        rais = self.__rais_sorted_by_wage_avg__()[0]
-        return rais.bra.name()
-
-    def biggest_wage_average(self):
-        rais = self.__rais_sorted_by_wage_avg__()[0]
-        return rais.wage
 
 
 class IndustryByLocation(Industry) : 
@@ -136,20 +91,26 @@ class IndustryByLocation(Industry) :
         return self.__rais__().opp_gain 
 
 
+class IndustryOccupation(Industry):
+    def __init__(self, cnae_id, bra_id):
+        Industry.__init__(self, cnae_id)
+        self.max_year = db.session.query(func.max(Yio.year)).filter_by(cnae_id=cnae_id)
+        self.rais_query = Yio.query.join(Cbo).filter(
+                Yio.cbo_id == Cbo.id,
+                Yio.cnae_id == self.cnae_id,
+                Yio.cbo_id_len == 4,                
+                Yio.year == self.max_year 
+                )
 
-class IndustyByLocationOcupation(IndustryByLocation):
-    def __init__(self, bra_id, cnae_id):
-        self.bra_id = bra_id
-        self.cnae_id = cnae_id
-        self._rais = None
-        _rais_sorted_by_num_jobs = None
-        self.ybio_max_year=db.session.query(func.max(Ybio.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
-        self.rais_query = Ybio.query.join(Cbo).filter(
-            Cbo.id == Ybio.cbo_id,
-            Ybio.cnae_id == self.cnae_id,
-            Ybio.cbo_id_len == 4,
-            Ybio.bra_id == self.bra_id,
-            Ybio.year == self.ybio_max_year
+        if bra_id:
+            self.bra_id = bra_id
+            self.max_year=db.session.query(func.max(Ybio.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
+            self.rais_query = Ybio.query.join(Cbo).filter(
+                Cbo.id == Ybio.cbo_id,
+                Ybio.cnae_id == self.cnae_id,
+                Ybio.cbo_id_len == 4,
+                Ybio.bra_id == self.bra_id,
+                Ybio.year == self.max_year
             )
 
     def occ_with_more_num_jobs_name(self):
@@ -161,9 +122,28 @@ class IndustyByLocationOcupation(IndustryByLocation):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.cbo.name()
 
-    def biggest_wage_average(self):
+
+
+
+class IndustryMunicipality(Industry):
+    def __init__(self, cnae_id):
+        Industry.__init__(self, cnae_id)
+        self.ybi_max_year_br = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
+        self.rais_query = Ybi.query.join(Bra).filter(
+                Bra.id == Ybi.bra_id,
+                Ybi.cnae_id == self.cnae_id,
+                Ybi.bra_id_len == 9,
+                Ybi.year == self.ybi_max_year_br,      
+                )
+        
+    def municipality_with_more_num_jobs_name(self):
+        rais = self.__rais_sorted_by_num_jobs__()[0]
+        return rais.bra.name()
+
+
+    def municipality_with_more_wage_avg_name(self):
         rais = self.__rais_sorted_by_wage_avg__()[0]
-        return rais.wage
+        return rais.bra.name()
 
 
 class IndustyByLocationMunicipality(IndustryByLocation):
@@ -189,7 +169,4 @@ class IndustyByLocationMunicipality(IndustryByLocation):
     def municipality_with_more_wage_avg_name(self):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.bra.name()
-
-    def biggest_wage_average(self):
-        rais = self.__rais_sorted_by_wage_avg__()[0]
-        return rais.wage        
+        
