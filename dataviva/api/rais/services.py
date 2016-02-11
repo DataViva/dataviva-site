@@ -66,6 +66,10 @@ class Occupation:
         rais = self.__rais_sorted_by_num_jobs__()[0]
         return rais.num_jobs
 
+    def biggest_wage_average(self):
+        rais = self.__rais_sorted_by_wage_average__()[0]
+        return rais.wage_avg
+
 
 class OccupationByLocation(Occupation):
     def __init__(self, occupation_id, bra_id):
@@ -106,9 +110,6 @@ class OccupationMunicipalities(Occupation):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.bra.name()
 
-    def biggest_wage_average(self):
-        rais = self.__rais_sorted_by_wage_average__()[0]
-        return rais.wage_avg
 
 
 
@@ -136,9 +137,6 @@ class OccupationMunicipalitiesByLocation(Occupation):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.bra.name()
 
-    def biggest_wage_average(self):
-        rais = self.__rais_sorted_by_wage_average__()[0]
-        return rais.wage_avg
 
 
 
@@ -163,9 +161,6 @@ class OccupationActivities(Occupation):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.cnae.name()
 
-    def biggest_wage_average(self):
-        rais = self.__rais_sorted_by_wage_average__()[0]
-        return rais.wage_avg
 
 
 
@@ -193,6 +188,3 @@ class OccupationActivitiesByLocation(Occupation):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.cnae.name()
 
-    def biggest_wage_average(self):
-        rais = self.__rais_sorted_by_wage_average__()[0]
-        return rais.wage_avg
