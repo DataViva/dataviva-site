@@ -54,9 +54,6 @@ def index(product_id):
     header = {}
     body = {}
 
-    #verificar utilizacao dos metodos da classe Product
-    #ajustar querys de comercio internacional para classe ProductLocations
-
     secex_product_trade_partners_service = SecexProductTradePartnersService(product_id=product_id, bra_id=bra_id)
     secex_product_municipalities_service = SecexProductMunicipalitiesService(product_id=product_id, bra_id=bra_id)
 
