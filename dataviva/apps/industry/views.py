@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Industry
-from dataviva.api.rais.services import IndustryOccupation, IndustryMunicipality, IndustryByLocation, IndustyByLocationOcupation, IndustyByLocationMunicipality
+from dataviva.api.rais.services import IndustryOccupation, IndustryMunicipality, IndustryByLocation, IndustyByLocationMunicipality
 from dataviva.apps.industry.controler import templates_preview_controler
 
 
@@ -64,11 +64,11 @@ def index(cnae_id):
 
     
     
-    body['occ_with_more_number_jobs_name'] = industry_occupation_service.occ_with_more_num_jobs_name()
+    body['occ_with_more_number_jobs_name'] = industry_occupation_service.occupation_with_more_jobs()
     body['occ_with_more_number_jobs_value'] = industry_occupation_service.highest_number_of_jobs()
     
     
-    body['occ_with_more_wage_avg_name'] = industry_occupation_service.occ_with_more_wage_avg_name()
+    body['occ_with_more_wage_avg_name'] = industry_occupation_service.occupation_with_biggest_wage_average()
     body['occ_with_more_wage_avg_value'] = industry_occupation_service.biggest_wage_average()
     
     if bra_id == None  or len(bra_id) != 9 :

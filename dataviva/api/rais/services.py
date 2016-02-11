@@ -80,7 +80,6 @@ class IndustryByLocation(Industry) :
                 Ybi.year==self.ybi_max_year
                 )
     
-
     def rca(self):
         return self.__rais__().rca
 
@@ -113,12 +112,12 @@ class IndustryOccupation(Industry):
                 Ybio.year == self.max_year
             )
 
-    def occ_with_more_num_jobs_name(self):
+    def occupation_with_more_jobs(self):
         rais = self.__rais_sorted_by_num_jobs__()[0]
         return rais.cbo.name()
 
 
-    def occ_with_more_wage_avg_name(self):
+    def occupation_with_biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.cbo.name()
 
