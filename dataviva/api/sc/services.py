@@ -9,18 +9,81 @@ class Basic_course:
     def __init__(self, course_sc_id, bra_id):
         self._statistics = None
         self._course = None
-
+        self._sc_course = None
+        self._sc = None
         self.course_sc_id = course_sc_id
         self.bra_id = bra_id
-        self.ybc_max_year_subquery = db.session.query(
-            func.max(Ybc_sc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
-        self.ybsc_max_year_subquery = db.session.query(
-            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
+
         self.yc_max_year_subquery = db.session.query(
             func.max(Yc_sc.year)).filter_by(course_sc_id=course_sc_id)
+        self.ybc_max_year_subquery = db.session.query(
+            func.max(Ybc_sc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
         self.ysc_max_year_subquery = db.session.query(
-                func.max(Ysc.year)).filter_by(course_sc_id=course_sc_id)
+            func.max(Ysc.year)).filter_by(course_sc_id=course_sc_id)
+        self.ybsc_max_year_subquery = db.session.query(
+            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
 
+        '''
+        self.yc_query = Yc_sc.query.filter(
+                Yc_sc.course_sc_id == self.course_sc_id,
+                Yc_sc.year == self.yc_max_year_subquery)
+
+        self.ybc_query = Ybc_sc.query.filter(
+                Ybc_sc.course_sc_id == self.course_sc_id,
+                Ybc_sc.year == self.ybc_max_year_subquery)
+
+        self.ysc_query = Ysc.query.filter(
+                Ysc.course_sc_id == self.course_sc_id,
+                Ysc.year == self.ysc_max_year_subquery)
+
+        self.ybsc_query = Ybsc.query.filter(
+                Ybsc.course_sc_id == self.course_sc_id,
+                Ybsc.year == self.ybsc_max_year_subquery,
+                Ybsc.bra_id == self.bra_id)
+
+
+
+        self.course_from_brazil_query = Yc_sc.query.filter(
+                Yc_sc.course_sc_id == self.course_sc_id,
+                Yc_sc.year == self.yc_max_year_subquery)
+        self.course_from_location_query = Ybc_sc.query.filter(
+                Ybc_sc.course_sc_id == self.course_sc_id,
+                Ybc_sc.year == self.ybc_max_year_subquery,
+                Ybc_sc.bra_id == self.bra_id)
+
+        self.total_schools_from_brazil_query = Ysc.query.filter(
+                Ysc.course_sc_id == self.course_sc_id,
+                Ysc.year == self.ysc_max_year_subquery)
+        self.total_schools_from_location_query = self.ybsc_query
+
+        self.most_enrolled_school_from_brazil_query = Ysc.query.filter(
+                Ysc.course_sc_id == self.course_sc_id,
+                Ysc.year == self.ysc_max_year_subquery) \
+                .order_by(Ysc.enrolled.asc())
+        self.most_enrolled_school_from_location_query = self.ybsc_query \
+                .order_by(Ybsc.enrolled.desc()).limit(1)
+
+        self.most_enrolled_city_from_brazil_query = Ybc_sc.query.filter(
+                Ybc_sc.course_sc_id == self.course_sc_id,
+                Ybc_sc.year == self.ybc_max_year_subquery,
+                Ybc_sc.bra_id_len == 9) \
+                .order_by(Ybc_sc.enrolled.asc())
+        self.most_enrolled_city_from_location_query = Ybc_sc.query.filter(
+                Ybc_sc.course_sc_id == self.course_sc_id,
+                Ybc_sc.year == self.ybc_max_year_subquery,
+                Ybc_sc.bra_id.like(str(self.bra_id)+'%'),
+                Ybc_sc.bra_id_len == 9) \
+                .order_by(Ybc_sc.enrolled.desc()).limit(1)
+
+    def __sc_list__(self):
+        if not self._sc:
+            sc_data =
+
+
+    def __sc_course__(self):
+        if not self._sc_course:
+            self._sc_course =
+    '''
     def __statistics__(self):
 
         basic_course = {}
@@ -85,7 +148,7 @@ class Basic_course:
 
             most_enrolled_city_query = Ybc_sc.query.filter(
                 Ybc_sc.course_sc_id == self.course_sc_id,
-                Ybc_sc.year == self.ysc_max_year_subquery,
+                Ybc_sc.year == self.ybc_max_year_subquery,
                 Ybc_sc.bra_id_len == 9) \
                 .order_by(Ybc_sc.enrolled.asc())
 
@@ -172,8 +235,23 @@ class Basic_course_school(Basic_course):
 
 class Basic_course_city(Basic_course):
 
-    def city_name(self):
+    def __init__(self, course_sc_id, bra_id):
+        Basic_course.__init__(self, course_sc_id, bra_id)
+        if slef.bra_id:
+            self.max_year_query = db.session.query(
+                        func.max(Ybc.year)).filter_by(course_sc_id=course_sc_id, bra_id=bra_id)
+        else:
+            self.max_year_query = self.max_year_query = db.session.query(
+                        func.max(Ysc.year)).filter_by(course_sc_id=course_sc_id)
+
+    def city_name_from_location(self):
         return self.__statistics__()['city_name']
 
-    def city_enrolled(self):
+    def city_name_from_brazil(self):
+        return self.__statistics__()['city_name']
+
+    def city_enrolled_from_location(self):
+        return self.__statistics__()['city_enrolled']
+
+    def city_enrolled_from_brazil(self):
         return self.__statistics__()['city_enrolled']
