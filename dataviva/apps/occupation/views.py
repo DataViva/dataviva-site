@@ -2,10 +2,9 @@
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Occupation
+from dataviva.api.rais.services import OccupationByLocation
 from dataviva.api.rais.services import OccupationMunicipalities
 from dataviva.api.rais.services import OccupationActivities
-from dataviva.api.rais.services import OccupationActivitiesByLocation
-from dataviva.api.rais.services import OccupationByLocation
 
 mod = Blueprint('occupation', __name__,
                 template_folder='templates',
@@ -55,13 +54,13 @@ def index(occupation_id):
     if bra_id:
         occupation_service = OccupationByLocation(occupation_id = occupation_id, bra_id = bra_id)
         occupation_municipalities_service = OccupationMunicipalities(occupation_id = occupation_id, bra_id=bra_id)
-        occupation_activities_service = OccupationActivitiesByLocation(occupation_id = occupation_id, bra_id = bra_id)
+        occupation_activities_service = OccupationActivities(occupation_id = occupation_id, bra_id = bra_id)
         if len(bra_id) == 9:
             context['is_not_municipality'] = False
     else:
         occupation_service = Occupation(occupation_id = occupation_id)
         occupation_municipalities_service = OccupationMunicipalities(occupation_id = occupation_id, bra_id=bra_id)
-        occupation_activities_service = OccupationActivities(occupation_id = occupation_id)
+        occupation_activities_service = OccupationActivities(occupation_id = occupation_id, bra_id = bra_id)
 
     header['name'] = occupation_service.occupation_name()
     header['average_monthly_income'] = occupation_service.average_monthly_income()

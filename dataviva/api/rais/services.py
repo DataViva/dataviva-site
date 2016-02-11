@@ -88,6 +88,7 @@ class OccupationByLocation(Occupation):
         return location.name()
 
 
+
 class OccupationMunicipalities(Occupation):
     def __init__ (self, occupation_id, bra_id):
         Occupation.__init__(self, occupation_id)
@@ -114,9 +115,8 @@ class OccupationMunicipalities(Occupation):
         return rais.bra.name()
 
 
-
 class OccupationActivities(Occupation):
-    def __init__(self, occupation_id):
+    def __init__(self, occupation_id, bra_id):
         Occupation.__init__(self, occupation_id)
         self.max_year_query= db.session.query(func.max(Yio.year)).filter(
             Yio.cbo_id == occupation_id)
@@ -127,31 +127,16 @@ class OccupationActivities(Occupation):
         self._rais_sorted_by_num_jobs = None
         self._rais_sorted_by_wage_average = None
 
-
-    def activity_with_more_jobs(self):
-        rais = self.__rais_sorted_by_num_jobs__()[0]
-        return rais.cnae.name()
-
-    def activity_with_biggest_wage_average(self):
-        rais = self.__rais_sorted_by_wage_average__()[0]
-        return rais.cnae.name()
-
-
-
-class OccupationActivitiesByLocation(Occupation):
-    def __init__(self, occupation_id, bra_id):
-        Occupation.__init__(self, occupation_id)
-        self.bra_id = bra_id
-        self.max_year_query= db.session.query(func.max(Ybio.year)).filter(
-            Ybio.cbo_id == occupation_id,
-            Ybio.bra_id == self.bra_id)
-        self.rais_query = Ybio.query.filter(
-            Ybio.cbo_id == self.occupation_id,
-            Ybio.bra_id.like(self.bra_id+'%'),
-            Ybio.year == self.max_year_query ,
-            Ybio.cnae_id_len == 6)
-        self._rais_sorted_by_num_jobs = None
-        self._rais_sorted_by_wage_average = None
+        if bra_id:
+            self.bra_id = bra_id
+            self.max_year_query= db.session.query(func.max(Ybio.year)).filter(
+                Ybio.cbo_id == occupation_id,
+                Ybio.bra_id == self.bra_id)
+            self.rais_query = Ybio.query.filter(
+                Ybio.cbo_id == self.occupation_id,
+                Ybio.bra_id.like(self.bra_id+'%'),
+                Ybio.year == self.max_year_query ,
+                Ybio.cnae_id_len == 6)
 
 
     def activity_with_more_jobs(self):
@@ -161,4 +146,6 @@ class OccupationActivitiesByLocation(Occupation):
     def activity_with_biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.cnae.name()
+
+
 
