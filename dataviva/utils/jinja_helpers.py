@@ -4,6 +4,7 @@ from dataviva.translations.dictionary import dictionary
 from dataviva.utils.num_format import num_format
 from dataviva.utils.title_case import title_case
 from decimal import *
+import locale
 
 ''' A helper class for dealing with injecting times into the page using moment.js'''
 class jinja_momentjs:
@@ -69,11 +70,12 @@ def max_digits(number, digits):
         str_n = [1]
         for i in range(len(str(number)), 0, -3):
             if i > 3:
-                for i in range(0, 3):
-                    str_n.append(0)
+                str_n.append(0)
+                str_n.append(0)
+                str_n.append(0)
             else:
                 break
         num = int(''.join(map(str, str_n)))
-        number = float(number) / num
+        number = float(number)/num
     number_str = str(number)
     return number_str[0:digits+1]
