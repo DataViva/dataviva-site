@@ -219,18 +219,6 @@ class Product:
         secex = self.__secex_sorted_by_exports__()[0]
         return secex.export_val
 
-    def highest_balance(self):
-        secex = self.__secex_sorted_by_balance__()[0]
-        export_val = secex.export_val or 0
-        import_val = secex.import_val or 0
-        return export_val - import_val
-
-    def lowest_balance(self):
-        secex = self.__secex_sorted_by_balance__()[-1]
-        export_val = secex.export_val or 0
-        import_val = secex.import_val or 0
-        return export_val - import_val
-
     def product_complexity(self):
         product_complexity = self.__secex__()
         return product_complexity.pci
