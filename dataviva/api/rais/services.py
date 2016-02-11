@@ -146,12 +146,12 @@ class IndustryMunicipality(Industry):
                 Ybi.year == self.max_year 
                 )
         
-    def municipality_with_more_num_jobs_name(self):
+    def municipality_with_more_num_jobs(self):
         rais = self.__rais_sorted_by_num_jobs__()[0]
         return rais.bra.name()
 
 
-    def municipality_with_more_wage_avg_name(self):
+    def municipality_with_more_wage_average(self):
         rais = self.__rais_sorted_by_wage_avg__()[0]
         return rais.bra.name()
 

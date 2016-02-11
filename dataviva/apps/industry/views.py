@@ -73,9 +73,9 @@ def index(cnae_id):
     
     if bra_id == None  or len(bra_id) != 9 :
         body['municipality_with_more_num_jobs_value'] = industry_municipality_service.highest_number_of_jobs()
-        body['municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs_name()
+        body['municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs()
 
-        body['municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_avg_name()
+        body['municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
         body['municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
              
     
