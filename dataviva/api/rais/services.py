@@ -156,27 +156,4 @@ class IndustryMunicipality(Industry):
         return rais.bra.name()
 
 
-class IndustyByLocationMunicipality(IndustryByLocation):
-    def __init__(self, bra_id, cnae_id):
-        self.bra_id = bra_id
-        self.cnae_id = cnae_id
-        self._rais = None
-        self._rais_sorted_by_wage_avg = None
-        self.ybi_max_year = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
-        self.rais_query = Ybi.query.join(Bra).filter(
-                Bra.id == Ybi.bra_id,
-                Ybi.cnae_id == self.cnae_id,
-                Ybi.bra_id_len == 9,
-                Ybi.bra_id.like(self.bra_id+'%'),
-                Ybi.year == self.ybi_max_year 
-                )
-
-    def municipality_with_more_num_jobs_name(self):
-        rais = self.__rais_sorted_by_num_jobs__()[0]
-        return rais.bra.name()
-
-
-    def municipality_with_more_wage_avg_name(self):
-        rais = self.__rais_sorted_by_wage_avg__()[0]
-        return rais.bra.name()
         

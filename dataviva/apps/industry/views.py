@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Industry
-from dataviva.api.rais.services import IndustryOccupation, IndustryMunicipality, IndustryByLocation, IndustyByLocationMunicipality
+from dataviva.api.rais.services import IndustryOccupation, IndustryMunicipality, IndustryByLocation
 from dataviva.apps.industry.controler import templates_preview_controler
 
 
