@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, request
-from dataviva.apps.general.views import get_locale
-from dataviva.api.rais.services import Industry
-from dataviva.api.rais.services import IndustryOccupation, IndustryMunicipality, IndustryByLocation
+from dataviva.apps.general.views import get_locale 
+from dataviva.api.rais.services import Industry, IndustryOccupation, IndustryMunicipality, IndustryByLocation
 
 
 mod = Blueprint('industry', __name__,
@@ -37,7 +36,6 @@ def index(cnae_id):
         'text_salary_job' : unicode('Texto para Salários e empregos', 'utf8'),
         'text_economic_opportunity' : unicode('Texto para Oportunidades Econômicas', 'utf8'),
     }
-
 
     if bra_id == None :
         industry['flag_preview_headers'] = False
