@@ -30,18 +30,21 @@ class TradePartner:
         return self._secex
 
     def __secex_sorted_by_balance__(self):
-        self._secex_sorted_by_balance = self.__secex_list__()
-        self._secex_sorted_by_balance.sort(key=lambda secex: (secex.export_val or 0) - (secex.import_val or 0), reverse=True)
+        if not self._secex_sorted_by_balance:
+            self._secex_sorted_by_balance = self.__secex_list__()
+            self._secex_sorted_by_balance.sort(key=lambda secex: (secex.export_val or 0) - (secex.import_val or 0), reverse=True)
         return self._secex_sorted_by_balance
 
     def __secex_sorted_by_exports__(self):
-        self._secex_sorted_by_exports = self.__secex_list__()
-        self._secex_sorted_by_exports.sort(key=lambda secex: secex.export_val, reverse=True)
+        if not self._secex_sorted_by_exports:
+            self._secex_sorted_by_exports = self.__secex_list__()
+            self._secex_sorted_by_exports.sort(key=lambda secex: secex.export_val, reverse=True)
         return self._secex_sorted_by_exports
 
     def __secex_sorted_by_imports__(self):
-        self._secex_sorted_by_imports = self.__secex_list__()
-        self._secex_sorted_by_imports.sort(key=lambda secex: secex.import_val, reverse=True)
+        if not self._secex_sorted_by_imports:
+            self._secex_sorted_by_imports = self.__secex_list__()
+            self._secex_sorted_by_imports.sort(key=lambda secex: secex.import_val, reverse=True)
         return self._secex_sorted_by_imports
 
     def country_name(self):
