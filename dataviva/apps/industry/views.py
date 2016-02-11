@@ -3,7 +3,6 @@ from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Industry
 from dataviva.api.rais.services import IndustryOccupation, IndustryMunicipality, IndustryByLocation
-from dataviva.apps.industry.controler import templates_preview_controler
 
 
 mod = Blueprint('industry', __name__,
@@ -39,7 +38,23 @@ def index(cnae_id):
         'text_economic_opportunity' : unicode('Texto para Oportunidades Econômicas', 'utf8'),
     }
 
-    industry.update(templates_preview_controler(bra_id=bra_id, cnae_id=cnae_id))
+
+    if bra_id == None :
+        industry['flag_preview_headers'] = False
+        industry['county'] = True # view county where no country
+    else : 
+        industry['flag_preview_headers'] = True    
+     
+        if len(bra_id) == 9 : # municipatity
+            industry['county'] = False
+        else :
+            industry['county'] = True    
+
+    if len(cnae_id) == 6 : # class 
+        industry['class'] = True
+    else : 
+        industry['class'] = False
+
 
     if bra_id :
         industry_service = IndustryByLocation(bra_id=bra_id, cnae_id=cnae_id)
