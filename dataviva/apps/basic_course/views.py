@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.sc.services import Basic_course, Basic_course_by_location#, Basic_course_school, Basic_course_city
+from dataviva.api.sc.services import Basic_course, Basic_course_by_location, Basic_course_school#, Basic_course_city
 from dataviva.api.attrs.models import School, Bra, Course_sc
 from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc
 from dataviva import db
@@ -30,7 +30,7 @@ def index(course_sc_id, bra_id):
         sc_service = Basic_course_by_location(course_sc_id= course_sc_id,bra_id=bra_id)
     else:
         sc_service = Basic_course(course_sc_id= course_sc_id)
-    #school_service = Basic_course_school(course_sc_id= course_sc_id,bra_id=bra_id)
+    school_service = Basic_course_school(course_sc_id= course_sc_id)
     #city_service = Basic_course_city(course_sc_id= course_sc_id,bra_id=bra_id)
 
     header = {
@@ -47,7 +47,7 @@ def index(course_sc_id, bra_id):
     
     body = {
     #    'enrollment_statistics_description' : sc_service.enrollment_statistics_description(),
-   #     'school_name' : school_service.school_name(),
+         'school_name' : school_service.school_name(),
     #    'school_enrolled' : school_service.school_enrolled(),
    #     'city_name' : city_service.city_name(),
     #    'city_enrolled' : city_service.city_enrolled(),
