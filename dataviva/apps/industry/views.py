@@ -43,16 +43,15 @@ def index(cnae_id):
 
     if bra_id :
         industry_service = IndustryByLocation(bra_id=bra_id, cnae_id=cnae_id)
-        industry_occupation_service = IndustryOccupation(bra_id=bra_id, cnae_id=cnae_id)
-        industry_municipality_service = IndustryMunicipality(bra_id=bra_id, cnae_id=cnae_id)
 
         header['rca'] = industry_service.rca()
         header['distance'] = industry_service.distance()
         header['opportunity_gain'] = industry_service.opportunity_gain()
     else:
         industry_service = Industry(cnae_id=cnae_id)
-        industry_occupation_service = IndustryOccupation(cnae_id=cnae_id, bra_id=bra_id)
-        industry_municipality_service = IndustryMunicipality(bra_id=bra_id, cnae_id=cnae_id)
+  
+    industry_occupation_service = IndustryOccupation(bra_id=bra_id, cnae_id=cnae_id)
+    industry_municipality_service = IndustryMunicipality(bra_id=bra_id, cnae_id=cnae_id)
    
     header['name'] = industry_service.get_name() 
     header['year'] = industry_service.get_year()
