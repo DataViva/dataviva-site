@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
+from dataviva.api.sc.services import Basic_course as ScBasicCourse
+from dataviva.api.attrs.models import School, Bra, Course_sc
+from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc
+from dataviva import db
+from sqlalchemy import func
 
 mod = Blueprint('basic_course', __name__,
                 template_folder='templates',
@@ -18,32 +23,25 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/')
-def index():
+@mod.route('/<course_sc_id>/<bra_id>')
+def index(course_sc_id, bra_id):
 
-    context = {
-        'title': unicode('Quinta Série', 'utf8'),
-        'num_enrolled_br':10.3,
-        'num_enrolled_location':10.3,
-        'num_classes_br':6.8,
-        'num_classes_location':6.8,
-        'num_schools_br':11.3,
-        'num_schools_location':11.3,
-        'size_avg_classes_br':27.3,
-        'size_avg_classes_location':27.3,
-        'avg_age_br':12.7,
-        'avg_age_location':12.7,
-        'school_max_num_enrolled_br':unicode('Colégio Magnum', 'utf8'),
-        'school_max_num_enrolled_location':unicode('Colégio Magnum', 'utf8'),
-        'value_school_max_num_enrolled_br':2.2,
-        'value_school_max_num_enrolled_location':2.2,
-        'city_max_num_enrolled_br':unicode('Belo Horizonte', 'utf8'),
-        'city_max_num_enrolled_location':unicode('Belo Horizonte', 'utf8'),
-        'value_city_max_num_enrolled_br':15,
-        'value_city_max_num_enrolled_location':15,
-        'year':2014,
-        'general_description': unicode('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tellus magna, consectetur eu convallis sed, malesuada sed ipsum. Integer ligula sapien, ullamcorper id tristique eu, ullamcorper eget eros. Maecenas pretium consectetur tempus. Nam blandit vestibulum justo. Etiam quis dignissim magna, at lacinia enim. Mauris fermentum blandit dui ac pellentesque. Vivamus eget ullamcorper eros. Mauris in feugiat est. Suspendisse venenatis tincidunt tempor. Maecenas ut est id libero rutrum feugiat. Mauris at convallis odio.','utf8'),
-        'enrollment_statistics_description': unicode('O Censo Escolar é aplicado anualmente em todo o Brasil, coletando informações sobre diversos aspectos das escolas brasileiras, em especial as matrículas e infraestrutura. Todos os níveis de ensino são envolvidos: ensino infantil, ensino fundamental, ensino médio e EJA.', 'utf8'),        
-            }
+    sc_service = ScBasicCourse(course_sc_id= course_sc_id,bra_id=bra_id)
 
-    return render_template('basic_course/index.html', context=context, body_class='perfil-estado')
+    basic_course_statistics = {
+        'course_name' : sc_service.course_name(),
+        'course_description' : sc_service.course_description(),
+        'course_classes' : sc_service.course_classes(),
+        'course_age' : sc_service.course_age(),
+        'course_enrolled' : sc_service.course_enrolled(),
+        'course_average_class_size' : sc_service.course_average_class_size(),
+        'course_year' : sc_service.course_year(),
+        'schools_count' : sc_service.schools_count(),
+        'enrollment_statistics_description' : sc_service.enrollment_statistics_description(),
+        'school_name' : sc_service.school_name(),
+        'school_enrolled' : sc_service.school_enrolled(),
+        'city_name' : sc_service.city_name(),
+        'city_enrolled' : sc_service.city_enrolled(),
+    }
+
+    return render_template('basic_course/index.html', basic_course_statistics=basic_course_statistics, body_class='perfil-estado')

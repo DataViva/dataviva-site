@@ -5,40 +5,43 @@
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Número de matrículas</p>
                     <div class="number">
-                        <strong class="counter">{{context.num_enrolled_br}}</strong><small>mil</small>
+                        <strong class="counter">{{basic_course_statistics["course_enrolled"]}}</strong><small>mil</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Número de turmas</p>
                     <div class="number">
-                        <strong class="counter">{{context.num_classes_br}}</strong><small>mil</small>
+                        <strong class="counter">{{basic_course_statistics["course_classes"]}}</strong><small>mil</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Número de escolas</p>
                     <div class="number">
-                        <strong class="counter">{{context.num_schools_br}}</strong><small>mil</small>
+                        <strong class="counter">{{basic_course_statistics["schools_count"]}}</strong><small>mil</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Tamanho médio das turmas</p>
                     <div class="number">
-                        <strong class="counter">{{context.size_avg_classes_br}}</strong><small>alunos</small>
+                        <strong class="counter">{{basic_course_statistics["course_average_class_size"]}}</strong><small>alunos</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Média de idade</p>
-                    <div class="number">
-                        <strong class="counter">{{context.avg_age_br}}</strong><small>anos</small>
+
+                {% if basic_course_statistics["course_age"] %}
+                    <div class="col-xs-15 col-sm-2 item">
+                        <p class="label">Média de idade</p>
+                        <div class="number">
+                            <strong class="counter">{{basic_course_statistics["course_age"]}}</strong><small>anos</small>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
                 <div class="col-xs-15 col-sm-15 year">
-                    Ano: {{context.year}}
+                    Ano: {{basic_course_statistics["course_year"]}}
                 </div>
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>{{context.general_description}}</p>
+        <p>{{basic_course_statistics["course_description"]}}</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Matrículas</h3>
@@ -50,18 +53,20 @@
                                     Principal Escola por Número de Alunos Matriculados
                                 </th>
                                 <td>
-                                    <p class="label">{{context.school_max_num_enrolled_br}}</p>
-                                    <strong class="counter">{{context.value_school_max_num_enrolled_br}}</strong> <span>mil</span>
+                                    <p class="label">{{basic_course_statistics["school_name"]}}</p>
+                                    <strong class="counter">{{basic_course_statistics["school_enrolled"]}}</strong> <span>mil</span>
                                 </td>
                             </tr>
                             <tr>
+                            {% if basic_course_statistics["city_enrolled"] %}
                                 <th>
                                     Principal Município por Número de Alunos Matriculados
                                 </th>
                                 <td>
-                                    <p class="label">{{context.city_max_num_enrolled_br}}</p>
-                                    <strong class="counter">{{context.value_city_max_num_enrolled_br}}</strong> <span>mil</span>
+                                    <p class="label">{{basic_course_statistics["city_name"]}}</p>
+                                    <strong class="counter">{{basic_course_statistics["city_enrolled"]}}</strong> <span>mil</span>
                                 </td>
+                                {% endif %}
                             </tr>
                         </tbody>
                     </table>
@@ -70,7 +75,7 @@
                     </a>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
