@@ -3,6 +3,8 @@ from jinja2 import Markup
 from dataviva.translations.dictionary import dictionary
 from dataviva.utils.num_format import num_format
 from dataviva.utils.title_case import title_case
+from decimal import *
+import locale
 
 ''' A helper class for dealing with injecting times into the page using moment.js'''
 class jinja_momentjs:
@@ -53,9 +55,27 @@ class jinja_formatter:
                 return Markup(title_case(self.text))
 
 
-''' A helper funciton for stripping out html tags for showing snippets of user submitted content'''
+''' A helper function for stripping out html tags for showing snippets of user submitted content'''
 def jinja_strip_html(s):
     return sub('<[^<]+?>', '', s)
 
 def jinja_split(s, char):
     return s.split(char)
+
+def max_digits(number, digits):
+    if type(number) == Decimal:
+        if number > 1000:
+             number = int(number)
+    if number > 1000:
+        str_n = [1]
+        for i in range(len(str(number)), 0, -3):
+            if i > 3:
+                str_n.append(0)
+                str_n.append(0)
+                str_n.append(0)
+            else:
+                break
+        num = int(''.join(map(str, str_n)))
+        number = float(number)/num
+    number_str = str(number)
+    return number_str[0:digits+1]

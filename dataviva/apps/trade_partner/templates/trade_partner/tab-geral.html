@@ -5,31 +5,31 @@
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Saldo da Balança Comercial</p>
                     <div class="number">
-                        R$ <strong class="counter">{{header.trade_balance}}</strong><small>milhões</small>
+                        R$ <strong class="counter">{{header.trade_balance | max_digits(3) }}</strong><small>milhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Valor Total Exportado</p>
                     <div class="number">
-                        R$ <strong class="counter">{{header.total_exported}}</strong><small>milhões</small>
+                        R$ <strong class="counter">{{header.total_exported | max_digits(3) }}</strong><small>milhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Relação Peso Líquido(kg)/ Valor Total Exportado</p>
                     <div class="number">
-                        <strong class="counter">{{header.unity_weight_export_price}}</strong>
+                        <strong class="counter">{{header.unity_weight_export_price | max_digits(3) }}</strong>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Valor Total Importado</p>
                     <div class="number">
-                        R$ <strong class="counter">{{header.total_imported}}</strong><small>milhões</small>
+                        R$ <strong class="counter">{{header.total_imported | max_digits(3) }}</strong><small>milhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Relação Peso Líquido(kg)/ Valor Total Importado</p>
                     <div class="number">
-                        <strong class="counter">{{header.unity_weight_import_price}}</strong>
+                        <strong class="counter">{{header.unity_weight_import_price | max_digits(3) }}</strong>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-15 year">
@@ -51,7 +51,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{body.municipality_with_more_exports}}</p>
-                                    USD<strong class="counter">{{body.highest_export_value}}</strong> <span>milhões</span>
+                                    USD<strong class="counter">{{body.highest_export_value | max_digits(3) }}</strong> <span>milhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -60,7 +60,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{body.municipality_with_more_imports}}</p>
-                                    USD<strong class="counter">{{body.highest_import_value}}</strong> <span>milhões</span>
+                                    USD<strong class="counter">{{body.highest_import_value | max_digits(3) }}</strong> <span>milhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -69,7 +69,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{body.product_with_more_exports}}</p>
-                                    USD<strong class="counter">{{body.highest_export_value}}</strong> <span>milhões</span>
+                                    USD<strong class="counter">{{body.highest_export_value | max_digits(3) }}</strong> <span>milhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -78,7 +78,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{body.product_with_more_imports}}</p>
-                                    USD<strong class="counter">{{body.highest_import_value}}</strong> <span>milhões</span>
+                                    USD<strong class="counter">{{body.highest_import_value | max_digits(3) }}</strong> <span>milhões</span>
                                 </td>
                             </tr>
                             <tr>
@@ -87,7 +87,7 @@
                                 </th>
                                 <td>
                                     <p class = "label">{{body.product_with_highest_balance}}</p>
-                                    USD<strong class="counter">{{body.highest_balance}}</strong> <span>milhoes</span>
+                                    USD<strong class="counter">{{body.highest_balance | max_digits(3) }}</strong> <span>milhoes</span>
                                 </td>
                             </tr>
                             <tr>
@@ -96,7 +96,7 @@
                                 </th>
                                 <td>
                                     <p class = "label">{{body.product_with_lowest_balance}}</p>
-                                    USD<strong class="counter">{{body.lowest_balance}}</strong> <span>milhoes</span>
+                                    USD<strong class="counter">{{body.lowest_balance | max_digits(3) }}</strong> <span>milhoes</span>
                                 </td>
                             </tr>
                         </tbody>

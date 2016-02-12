@@ -245,6 +245,7 @@ class Bra(db.Model, AutoSerialize, BasicAttr):
 
     # HEDU relations
     ybu = db.relationship("Ybu", backref = 'bra', lazy = 'dynamic')
+    ybc = db.relationship("Ybc_hedu", backref = 'bra', lazy = 'dynamic')
 
     # SC relations
     ybc_sc = db.relationship("Ybc_sc", backref = 'bra', lazy = 'dynamic')
