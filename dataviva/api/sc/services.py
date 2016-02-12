@@ -11,8 +11,6 @@ class Basic_course:
         self._sc = None
 
         self.course_sc_id = course_sc_id
-        '''self.ybsc_max_year_subquery = db.session.query(
-            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)'''
         self.max_year_subquery = db.session.query(
             func.max(Yc_sc.year)).filter_by(course_sc_id=course_sc_id)
         self.course_query = Yc_sc.query.join(Course_sc).filter(
@@ -53,9 +51,6 @@ class Basic_course:
     def course_year(self):
         course_year = self.__sc__()
         return course_year.year
-
-    def school_count(self):
-        return self.__statistics__()['school_count']
 
     '''def __statistics__(self):
 
@@ -202,6 +197,17 @@ class Basic_course_school(Basic_course):
     def school_count(self):
         school_count = self.total_schools_query.count()
         return school_count
+
+class Basic_course_school_by_location(Basic_course_school):
+    def __init__(self, course_sc_id, bra_id):
+        Basic_course_school.__init__(self, course_sc_id)
+        self.bra_id = bra_id
+        self.max_year_subquery = db.session.query(
+            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
+        self.total_schools_query = Ybsc.query.filter(
+                Ybsc.course_sc_id == self.course_sc_id,
+                Ybsc.year == self.max_year_subquery,
+                Ybsc.bra_id == self.bra_id)
 
 '''class Basic_course_city(Basic_course):
 
