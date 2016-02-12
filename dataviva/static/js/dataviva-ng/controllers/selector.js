@@ -26,9 +26,10 @@
                     var template = angular.element(html);
                     $(".selector-area").append(template);
                     $compile(template)($scope);
+                    $('.nav-tabs button')[0].click();
+                    $scope.model = new selector.model(selection_callback);
                 });
 
-                $scope.model = new selector.model(selection_callback);
             };
             
         }]);

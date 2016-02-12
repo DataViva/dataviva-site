@@ -27,51 +27,44 @@
                 <div class="form-group">
                     <i class="fa fa-search"></i>
                     <input type="text"
-                           name="regions_filter"
-                           class="busca form-control"
-                           ng-model="model.regions.filter_string"
-                           ng-trim="true"
-                           autocomplete="false" />
+                    name="regions_filter"
+                    class="busca form-control"
+                    ng-model="model.regions.filter_string"
+                    ng-trim="true"
+                    autocomplete="false" />
                 </div>
-                <div class="list-group list-stripped">
-                    <div class="list-group list-stripped">
-                        <div ng-repeat="loc in model.regions.entries|filter:regions.filter_string" class="list-group-item col-md-12" >
-                            <div class="col-md-1 hidden-xs hidden-sm">
-                                <img src="{$ loc.icon $}" class="loc-flag-icon"/>
-                            </div>
-                            <div class="col-md-8">
-                                {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
-                            </div>
+                <div class="list-group list-stripped selector-list col-md-15">
+                    <div ng-repeat="loc in model.regions.entries|filter:regions.filter_string" class="list-group-item col-md-15">
+                        <div class="col-md-11">{$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
                         </div>
                     </div>
                 </div>
+                
             </div>
             <!-- TAB: STATES -->
             <div role="tabpanel" class="tab-pane search-items" id="states">
                 <div class="form-group">
                     <i class="fa fa-search"></i>
                     <input type="text"
-                           name="states_filter"
-                           class="busca form-control"
-                           ng-model="states.filter_string"
-                           ng-trim="true"
-                           autocomplete="false" />
+                    name="states_filter"
+                    class="busca form-control"
+                    ng-model="states.filter_string"
+                    ng-trim="true"
+                    autocomplete="false" />
                 </div>
-                <div class="list-group list-stripped">
-                    <div class="list-group list-stripped">
-                        <div ng-repeat="loc in model.states.entries | filter:states.filter_string" class="list-group-item col-md-12" >
-                            <div class="col-md-1 hidden-xs hidden-sm">
-                                <img src="{$ loc.icon $}" class="loc-flag-icon"/>
-                            </div>
-                            <div class="col-md-8">
-                                {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
-                            </div>
+                <div class="list-group list-stripped selector-list col-md-15">
+                    <div ng-repeat="loc in model.states.entries | filter:states.filter_string" ng-if="loc.id_ibge" class="list-group-item col-md-15" >
+                        <div class="col-md-1 hidden-xs hidden-sm">
+                            <img src="{$ loc.icon $}" class="loc-flag-icon"/>
+                        </div>
+                        <div class="col-md-10">
+                            {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
                         </div>
                     </div>
                 </div>
@@ -81,18 +74,18 @@
                 <div class="form-group">
                     <i class="fa fa-search"></i>
                     <input type="text"
-                           name="mesoregions_filter"
-                           class="busca form-control"
-                           ng-model="mesoregions.filter_string"
-                           ng-trim="true"
-                           placeholder="Busque pelo nome ou pelo No. IBGE"/>
+                    name="mesoregions_filter"
+                    class="busca form-control"
+                    P   ng-model="mesoregions.filter_string"
+                    ng-trim="true"
+                    placeholder="Busque pelo nome ou pelo No. IBGE"/>
                 </div>
-                <div class="list-group list-stripped">
-                    <div ng-repeat="loc in model.mesoregions.entries | filter:mesoregions.filter_string" class="list-group-item col-md-12" >
+                <div class="list-group list-stripped selector-list">
+                    <div ng-repeat="loc in model.mesoregions.entries | filter:mesoregions.filter_string" ng-if="loc.id_ibge" class="list-group-item col-md-15" >
                         <div class="col-md-1 hidden-xs hidden-sm">
                             <img src="{$ loc.icon $}" class="loc-flag-icon"/>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                             {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
                         </div>
                         <div class="col-md-3">
@@ -106,24 +99,22 @@
                 <div class="form-group">
                     <i class="fa fa-search"></i>
                     <input type="text"
-                           name="mircroregions_filter"
-                           class="busca form-control"
-                           ng-model="mircroregions.filter_string"
-                           ng-trim="true"
-                           placeholder="Busque pelo nome ou pelo No. IBGE"/>
+                    name="mircroregions_filter"
+                    class="busca form-control"
+                    ng-model="mircroregions.filter_string"
+                    ng-trim="true"
+                    placeholder="Busque pelo nome ou pelo No. IBGE"/>
                 </div>
-                <div class="list-group list-stripped">
-                    <div class="list-group list-stripped">
-                        <div ng-repeat="loc in model.mircroregions.entries | filter:mircroregions.filter_string" class="list-group-item col-md-12" >
-                            <div class="col-md-1 hidden-xs hidden-sm">
-                                <img src="{$ loc.icon $}" class="loc-flag-icon"/>
-                            </div>
-                            <div class="col-md-8">
-                                {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
-                            </div>
+                <div class="list-group list-stripped selector-list">
+                    <div ng-repeat="loc in model.mircroregions.entries | filter:mircroregions.filter_string" ng-if="loc.id_ibge" class="list-group-item col-md-15" >
+                        <div class="col-md-1 hidden-xs hidden-sm">
+                            <img src="{$ loc.icon $}" class="loc-flag-icon"/>
+                        </div>
+                        <div class="col-md-10">
+                            {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
                         </div>
                     </div>
                 </div>
@@ -133,24 +124,23 @@
                 <div class="form-group">
                     <i class="fa fa-search"></i>
                     <input type="text"
-                           name="states_filter"
-                           class="busca form-control"
-                           ng-model="municipalities.filter_string"                           
-                           ng-trim="true"
-                           placeholder="Busque pelo nome ou pelo No. IBGE"/>
+                    name="states_filter"
+                    class="busca form-control"
+                    ng-model="municipalities.filter_string"
+                    ng-trim="true"
+                    placeholder="Busque pelo nome ou pelo No. IBGE"/>
                 </div>
-                <div class="list-group list-stripped">
-                    <div class="list-group list-stripped" style="max-height: 300px; overflow-y: scroll">
-                        <div ng-repeat="loc in model.municipalities.entries | filter:municipalities.filter_string" class="list-group-item col-md-12">
-                            <div class="col-md-1 hidden-xs hidden-sm">
-                                <img src="{$ loc.icon $}" class="loc-flag-icon"/>
-                            </div>
-                            <div class="col-md-8">
-                                {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
-                            </div>
+                
+                <div class="list-group list-stripped selector-list">
+                    <div ng-repeat="loc in model.municipalities.entries | filter:municipalities.filter_string" ng-if="loc.id_ibge" class="list-group-item col-md-15">
+                        <div class="col-md-1 hidden-xs hidden-sm">
+                            <img src="{$ loc.icon $}" class="loc-flag-icon"/>
+                        </div>
+                        <div class="col-md-10">
+                            {$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default" ng-click="select(loc.id)">Selecionar</button>
                         </div>
                     </div>
                 </div>

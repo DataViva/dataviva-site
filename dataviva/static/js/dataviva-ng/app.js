@@ -2,7 +2,7 @@
     "use strict";
 
     var app = angular.module('dataviva', [
-        //"dataviva.services",
+        "dataviva.services",
         "dataviva.controllers",
     ]);
 
@@ -13,20 +13,19 @@
         $interpolateProvider.endSymbol('$}');
     }]);
 
-    alert();
-
 }());
 
 
 fire_wizard = function(session_name) {
     $("#modal-wizard").modal();
     var el = document.getElementById('wizcont');
+
     angular.element(el).scope().start_session(session_name);
-}
+};
 
-start_selector = function(selector_url, selection_callback) {
+start_selector = function(selector_name, selection_callback) {
     $("#modal-selector").modal();
+    $(".selector-area").empty();
     var el = document.getElementById('selectorCont');
-
-    angular.element(el).scope().initialize(selector_url, selection_callback);
-}
+    angular.element(el).scope().initialize(selector_name, selection_callback);
+};

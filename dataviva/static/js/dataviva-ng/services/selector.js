@@ -57,6 +57,8 @@
                         self.selected_entry = id;
                         self.selection_callback(id);
                     };
+
+                    self.load_depth_entries(self.regions);
                 };
 
                 var Product = function(selection_callback) {
@@ -92,6 +94,9 @@
                         self.selected_entry = id;
                         self.selection_callback(id);
                     };
+
+                    // NOTE: NECESSARY TO LOAD THE FIRST TAB CONTENT UPFRONT
+                    self.load_depth_entries(self.sections);
                 };
 
                 return {

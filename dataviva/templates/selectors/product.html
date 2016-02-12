@@ -1,12 +1,12 @@
-<div class="institucional search" ng-controller="prdationSelector">
+<div class="institucional search">
     <h2>Escolha um produto da lista abaixo ou busque pelo nome</h2>
     <form action="" class="form-dataviva form-inline filter">
         <div class="form-group">
             <ul class="btn-group nav nav-tabs" role="tablist">
-                <button type="button" href="#sections" aria-controls="sections" role="tab" data-toggle="tab" class="btn btn-default" ng-click="load_depth_entries(models.sections)">
+                <button type="button" href="#sections" aria-controls="sections" role="tab" data-toggle="tab" class="btn btn-default" ng-click="model.load_depth_entries(model.sections)">
                 Sećões
                 </button>
-                <button type="button" href="#positions" aria-controls="positions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="load_depth_entries(models.positions)">
+                <button type="button" href="#positions" aria-controls="positions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="model.load_depth_entries(model.positions)">
                 Posićões
                 </button>
             </ul>
@@ -18,26 +18,24 @@
                 <div class="form-group">
                     <i class="fa fa-search"></i>
                     <input type="text"
-                           name="sections_filter"
-                           class="busca form-control"
-                           ng-model="models.sections.filter_string"
-                           ng-trim="true"
-                           autocomplete="false" />
+                    name="sections_filter"
+                    class="busca form-control"
+                    ng-model="model.sections.filter_string"
+                    ng-trim="true"
+                    autocomplete="false" />
                 </div>
-                <div class="list-group list-stripped">
-                    <div class="list-group list-stripped">
-                        <div ng-repeat="prd in models.sections.entries|filter:models.sections.filter_string" class="list-group-item col-md-12" >
-                            <div class="col-md-1 hidden-xs hidden-sm">
-                                <img src="{$ prd.icon $}" class="loc-flag-icon"/>
-                            </div>
-                            <div class="col-md-8">
-                                {$ prd.name $}<BR>
-                                <strong>ID HS:</strong> {$ prd.id_hs $}<BR>
-                                <strong>Exp.:</strong> {$ prd.id_hs $}<BR>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-default" ng-click="select(prd.id)">Selecionar</button>
-                            </div>
+                <div class="list-group list-stripped selector-list">
+                    <div ng-repeat="prd in model.sections.entries|filter:model.sections.filter_string" class="list-group-item col-md-12" >
+                        <div class="col-md-1 hidden-xs hidden-sm">
+                            <img src="{$ prd.icon $}" class="loc-flag-icon"/>
+                        </div>
+                        <div class="col-md-10">
+                            {$ prd.name $}<BR>
+                            <strong>ID HS:</strong> {$ prd.id_hs $}<BR>
+                            <strong>Exp.:</strong> {$ prd.id_hs $}<BR>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default" ng-click="select(prd.id)">Selecionar</button>
                         </div>
                     </div>
                 </div>
@@ -47,24 +45,23 @@
                 <div class="form-group">
                     <i class="fa fa-search"></i>
                     <input type="text"
-                           name="positions_filter"
-                           class="busca form-control"
-                           ng-model="models.positions.filter_string"
-                           ng-trim="true"
-                           autocomplete="false" />
+                    name="positions_filter"
+                    class="busca form-control"
+                    ng-model="model.positions.filter_string"
+                    ng-trim="true"
+                    autocomplete="false" />
                 </div>
-                <div class="list-group list-stripped">
-                    <div class="list-group list-stripped">
-                        <div ng-repeat="prd in models.positions.entries | filter:models.positions.filter_string" class="list-group-item col-md-12" >
-                            <div class="col-md-1 hidden-xs hidden-sm">
-                                <img src="{$ prd.icon $}" class="loc-flag-icon"/>
-                            </div>
-                            <div class="col-md-8">
-                                {$ prd.name $}<BR><strong>IBGE:</strong> {$ prd.id_ibge $}
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-default" ng-click="select(prd.id)">Selecionar</button>
-                            </div>
+                
+                <div class="list-group list-stripped selector-list">
+                    <div ng-repeat="prd in model.positions.entries | filter:model.positions.filter_string" class="list-group-item col-md-12" >
+                        <div class="col-md-1 hidden-xs hidden-sm">
+                            <img src="{$ prd.icon $}" class="loc-flag-icon"/>
+                        </div>
+                        <div class="col-md-10">
+                            {$ prd.name $}<BR><strong>IBGE:</strong> {$ prd.id_ibge $}
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default" ng-click="select(prd.id)">Selecionar</button>
                         </div>
                     </div>
                 </div>
@@ -72,4 +69,3 @@
         </div>
     </form>
 </div>
-

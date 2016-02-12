@@ -1308,3 +1308,22 @@ table.data-2-columns > tbody th {
     padding: 0 20px;
   }
 }
+
+a.selected {
+  background-color: #23527c !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+img.loc-flag-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.selector-list {
+  height: 300px;
+  overflow-y: scroll;
+}
+.selector-list .list-group-item {
+  width: 100%;
+}
