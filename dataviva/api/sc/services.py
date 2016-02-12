@@ -178,13 +178,13 @@ class Basic_course_school(Basic_course):
             sc = self.total_schools_query.all()
             self._sc = sc
         return self._sc
-    
+
     def __sc_count__(self):
         if not self._sc_count:
             sc_count = self.__sc_list__().count()
             self._sc_count = sc_count
         return self._sc_count
-    
+
     def __sc_sorted_by_enrollment__(self):
         if not self._sc_sorted_by_enrollment:
             self._sc_sorted_by_enrollment = self.__sc_list__()
@@ -200,8 +200,8 @@ class Basic_course_school(Basic_course):
         return school_enrolled.enrolled
 
     def school_count(self):
-        return 
-
+        school_count = self.total_schools_query.count()
+        return school_count
 
 '''class Basic_course_city(Basic_course):
 
@@ -210,7 +210,7 @@ class Basic_course_school(Basic_course):
 
     def city_enrolled(self):
         return self.__statistics__()['city_enrolled']'''
- 
+
 class Basic_course_by_location(Basic_course):
     def __init__(self, course_sc_id, bra_id):
         Basic_course.__init__(self, course_sc_id)
