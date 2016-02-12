@@ -230,6 +230,20 @@ class Basic_course_city(Basic_course):
         city_enrolled = self.__city_sorted_by_enrollment__()[0]
         return city_enrolled.enrolled
 
+class Basic_course_city_by_location(Basic_course_city):
+    def __init__(self, course_sc_id, bra_id):
+        Basic_course_city.__init__(self, course_sc_id)
+        self.bra_id = bra_id
+        self.max_year_subquery = db.session.query(
+            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
+        self.most_enrolled_city_query = Ybc_sc.query.join(Bra).filter(
+                Ybc_sc.course_sc_id == self.course_sc_id,
+                Ybc_sc.year == self.max_year_subquery,
+                Ybc_sc.bra_id.like(str(self.bra_id)+'%'),
+                Ybc_sc.bra_id_len == 9) \
+                .order_by(Ybc_sc.enrolled.desc()).limit(1)
+
+
 class Basic_course_by_location(Basic_course):
     def __init__(self, course_sc_id, bra_id):
         Basic_course.__init__(self, course_sc_id)
