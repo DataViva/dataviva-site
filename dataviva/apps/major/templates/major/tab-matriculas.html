@@ -39,37 +39,37 @@
                             <td>
                                 <p class="label">{{ content.university_with_more_enrolled }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ content.highest_enrolled_number_by_university }}</strong>
+                                    <strong class="counter">{{ content.highest_enrolled_number_by_university | max_digits(3) }}</strong>
                                 </div>
                             </td>
                             <td>
                                 <p class="label">{{ content.municipality_with_more_enrolled }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ content.highest_enrolled_number_by_municipality }}</strong>
+                                    <strong class="counter">{{ content.highest_enrolled_number_by_municipality | max_digits(3) }}</strong>
                                 </div>
                             </td>
                             <td>
                                 <p class="label">{{ content.university_with_more_entrants}}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ content.highest_entrant_number_by_university }}</strong>
+                                    <strong class="counter">{{ content.highest_entrant_number_by_university | max_digits(3) }}</strong>
                                 </div>
                             </td>
                             <td>
                                 <p class="label">{{ content.municipality_with_more_entrants }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ content.highest_entrant_number_by_municipality }}</strong>
+                                    <strong class="counter">{{ content.highest_entrant_number_by_municipality | max_digits(3) }}</strong>
                                 </div>
                             </td>
                             <td>
                                 <p class="label">{{ content.university_with_more_graduates }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ content.highest_graduate_number_by_university }}</strong>
+                                    <strong class="counter">{{ content.highest_graduate_number_by_university | max_digits(3) }}</strong>
                                 </div>
                             </td>
                             <td>
                                 <p class="label">{{ content.municipality_with_more_graduates }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{ content.highest_graduate_number_by_municipality }}</strong>
+                                    <strong class="counter">{{ content.highest_graduate_number_by_municipality | max_digits(3) }}</strong>
                                 </div>
                             </td>
                         </tr>

@@ -15,7 +15,7 @@ from flask.ext.cache import Cache
 # for new filters, redis sessions
 from flask.ext.mail import Mail
 from utils.jinja_helpers import jinja_formatter, jinja_momentjs, jinja_split, \
- jinja_strip_html
+ jinja_strip_html, max_digits
 
 from utils.redis import RedisSessionInterface
 
@@ -78,6 +78,7 @@ app.jinja_env.globals['moment_js'] = jinja_momentjs
 app.jinja_env.globals['format'] = jinja_formatter
 app.jinja_env.filters['strip_html'] = jinja_strip_html
 app.jinja_env.filters['split'] = jinja_split
+app.jinja_env.filters['max_digits'] = max_digits
 
 # Load the modules for each different section of the site
 

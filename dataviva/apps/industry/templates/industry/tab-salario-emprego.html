@@ -35,28 +35,28 @@
                             <td>
                                 <p class="label">{{body.occ_with_more_number_jobs_name}}</p>
                                 <div class="number">
-                                    USD <strong class="counter">{{body.occ_with_more_number_jobs_value}}</strong><span>B</span>
+                                    USD <strong class="counter">{{body.occ_with_more_number_jobs_value | max_digits(3)}}</strong><span>B</span>
                                 </div>
                             </td>
                             {%if industry.county %}
                                 <td>
                                     <p class="label">{{body.municipality_with_more_num_jobs_name}}</p>
                                     <div class="number">
-                                        USD <strong class="counter">{{body.municipality_with_more_num_jobs_value}}</strong><span>B</span>
+                                        USD <strong class="counter">{{body.municipality_with_more_num_jobs_value | max_digits(3)}}</strong><span>B</span>
                                     </div>
                                 </td>
                             {% endif %}    
                             <td>
                                 <p class="label">{{body.occ_with_more_wage_avg_name}}</p>
                                 <div class="number">
-                                    USD <strong class="counter">{{body.occ_with_more_wage_avg_value}}</strong><span>B</span>
+                                    USD <strong class="counter">{{body.occ_with_more_wage_avg_value | max_digits(3)}}</strong><span>B</span>
                                 </div>
                             </td>
                             {%if industry.county %}
                                 <td>
                                     <p class="label">{{body.municipality_with_more_wage_avg_name}}</p>
                                     <div class="number">
-                                        USD <strong class="counter">{{body.municipality_with_more_wage_avg_value}}</strong><span>B</span>
+                                        USD <strong class="counter">{{body.municipality_with_more_wage_avg_value | max_digits(3)}}</strong><span>B</span>
                                     </div>
                                 </td>
                             {% endif %}

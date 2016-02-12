@@ -5,25 +5,25 @@
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Renda Média Mensal</p>
                     <div class="number">
-                        R$ <strong class="counter">{{header.average_monthly_income}}</strong><small>{{context.average_monthly_income_unity}}</small>
+                        R$ <strong class="counter">{{header.average_monthly_income | max_digits(3)}}</strong><small>{{context.average_monthly_income_unity}}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Massa Salarial</p>
                     <div class="number">
-                        R$ <strong class="counter">{{header.salary_mass}}</strong><small>{{context.salary_mass_unity}}</small>
+                        R$ <strong class="counter">{{header.salary_mass | max_digits(3)}}</strong><small>{{context.salary_mass_unity}}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Total de Empregos</p>
                     <div class="number">
-                        <strong class="counter">{{header.total_employment}}</strong><small>{{context.total_employment_unity}}</small>
+                        <strong class="counter">{{header.total_employment | max_digits(3)}}</strong><small>{{context.total_employment_unity}}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Total de Estabelecimentos</p>
                     <div class="number">
-                        <strong class="counter">{{header.total_establishments}}</strong><small>{{context.total_establishments_unity}}</small>
+                        <strong class="counter">{{header.total_establishments | max_digits(3)}}</strong><small>{{context.total_establishments_unity}}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-15 year">
@@ -46,7 +46,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{body.municipality_with_more_jobs}}</p>
-                                    <strong class="counter">{{body.municipality_with_more_jobs_value}}</strong> <span>{{context.jobs_county_unity}} empregos</span>
+                                    <strong class="counter">{{body.municipality_with_more_jobs_value | max_digits(3) }}</strong> <span>{{context.jobs_county_unity}} empregos</span>
                                 </td>
                             </tr>
                             {% endif %}
@@ -56,7 +56,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{body.activity_with_more_jobs}}</p>
-                                    <strong class="counter">{{body.activity_with_more_jobs_value}}</strong> <span>{{context.activity_for_job_unit}} empregos</span>
+                                    <strong class="counter">{{body.activity_with_more_jobs_value | max_digits(3)}}</strong> <span>{{context.activity_for_job_unit}} empregos</span>
                                 </td>
                             </tr>
                             {% if context.is_not_municipality %}
@@ -66,7 +66,7 @@
                                 </th>
                                 <td>
                                     <p class = "label">{{body.municipality_with_biggest_wage_avg}}</p>
-                                    USD <strong class="counter">{{body.municipality_with_biggest_wage_avg_value}}</strong> <span>{{context.biggest_average_monsthly_income_unity}}</span>
+                                    USD <strong class="counter">{{body.municipality_with_biggest_wage_avg_value | max_digits(3)}}</strong> <span>{{context.biggest_average_monsthly_income_unity}}</span>
                                 </td>
                             </tr>
                             {%endif%}
@@ -76,7 +76,7 @@
                                 </th>
                                 <td>
                                     <p class = "label">{{body.activity_with_biggest_wage_avg}}</p>
-                                    USD <strong class="counter">{{body.activity_with_biggest_wage_avg_value}}</strong> <span>{{context.activity_for_job_unity}}</span>
+                                    USD <strong class="counter">{{body.activity_with_biggest_wage_avg_value | max_digits(3)}}</strong> <span>{{context.activity_for_job_unity}}</span>
                                 </td>
                             </tr>
                         </tbody>
