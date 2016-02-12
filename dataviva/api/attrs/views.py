@@ -410,4 +410,3 @@ def product():
         json.dumps(map(lambda x: x.serialize(), returned_entries)),
         status=(200 if returned_entries.count() else 404)
     )
-

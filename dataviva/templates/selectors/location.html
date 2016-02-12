@@ -57,7 +57,6 @@
                            name="states_filter"
                            class="busca form-control"
                            ng-model="states.filter_string"
-                           ng-keyup="filter(states, $event)"
                            ng-trim="true"
                            autocomplete="false" />
                 </div>
@@ -85,7 +84,6 @@
                            name="mesoregions_filter"
                            class="busca form-control"
                            ng-model="mesoregions.filter_string"
-                           ng-keyup="filter(mesoregions, $event)"
                            ng-trim="true"
                            placeholder="Busque pelo nome ou pelo No. IBGE"/>
                 </div>
@@ -111,7 +109,6 @@
                            name="mircroregions_filter"
                            class="busca form-control"
                            ng-model="mircroregions.filter_string"
-                           ng-keyup="filter(mircroregions, $event)"
                            ng-trim="true"
                            placeholder="Busque pelo nome ou pelo No. IBGE"/>
                 </div>
@@ -138,8 +135,7 @@
                     <input type="text"
                            name="states_filter"
                            class="busca form-control"
-                           ng-model="municipalities.filter_string"
-                           ng-keyup="filter(municipalities, $event)"
+                           ng-model="municipalities.filter_string"                           
                            ng-trim="true"
                            placeholder="Busque pelo nome ou pelo No. IBGE"/>
                 </div>
