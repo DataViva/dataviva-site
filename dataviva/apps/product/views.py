@@ -59,7 +59,7 @@ def index(product_id):
 
     if len(product_id) == 6:
             product_service = ProductService(product_id=product_id)
-            header['pci'] = product_service.complexity()
+            header['pci'] = product_service.product_complexity()
 
     if bra_id:
         product_service = ProductLocationsService(product_id=product_id, bra_id=bra_id)
