@@ -5,19 +5,19 @@
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Número de Matrículas</p>
                     <div class="number">
-                        <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><small>mil</small>
+                        <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><small>{{ header.enrolled | magnitude }} </small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Número de Ingressantes</p>
                     <div class="number">
-                        <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><small>mil</small>
+                        <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><small>{{ header.entrants | magnitude }}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Número de Concluintes</p>
                     <div class="number">
-                        <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><small>mil</small>
+                        <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><small>{{ header.graduates | magnitude }}</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-15 year">
@@ -39,7 +39,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{ content.university_with_more_enrolled }}</p>
-                                    <strong class="counter">{{ content.highest_enrolled_number_by_university | max_digits(3) }}</strong>
+                                    <strong class="counter">{{ content.highest_enrolled_number_by_university | max_digits(3) }}</strong><span>{{ content.highest_enrolled_number_by_university | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -48,7 +48,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{ content.municipality_with_more_enrolled }}</p>
-                                    <strong class="counter">{{ content.highest_enrolled_number_by_municipality | max_digits(3) }}</strong>
+                                    <strong class="counter">{{ content.highest_enrolled_number_by_municipality | max_digits(3) }}</strong><span>{{ content.highest_enrolled_number_by_municipality | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -57,7 +57,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{ content.university_with_more_entrants }}</p>
-                                    <strong class="counter">{{ content.highest_entrant_number_by_university | max_digits(3) }}</strong>
+                                    <strong class="counter">{{ content.highest_entrant_number_by_university | max_digits(3) }}</strong><span>{{ content.highest_entrant_number_by_university | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -66,7 +66,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{ content.municipality_with_more_entrants }}</p>
-                                    <strong class="counter">{{ content.highest_entrant_number_by_municipality | max_digits(3) }}</strong>
+                                    <strong class="counter">{{ content.highest_entrant_number_by_municipality | max_digits(3) }}</strong><span>{{ content.highest_entrant_number_by_municipality | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -75,7 +75,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{ content.university_with_more_graduates }}</p>
-                                    <strong class="counter">{{ content.highest_graduate_number_by_university | max_digits(3) }}</strong>
+                                    <strong class="counter">{{ content.highest_graduate_number_by_university | max_digits(3) }}</strong><span>{{ content.highest_graduate_number_by_university | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -84,7 +84,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{ content.municipality_with_more_graduates }}</p>
-                                    <strong class="counter">{{ content.highest_graduate_number_by_municipality | max_digits(3) }}</strong>
+                                    <strong class="counter">{{ content.highest_graduate_number_by_municipality | max_digits(3) }}</strong><span>{{ content.highest_graduate_number_by_municipality | magnitude }}</span>
                                 </td>
                             </tr>
                         </tbody>

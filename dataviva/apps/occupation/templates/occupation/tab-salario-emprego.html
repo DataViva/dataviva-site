@@ -36,28 +36,28 @@
                             <td>
                                 <p class="label">{{body.municipality_with_more_jobs}}</p>
                                 <div class="number">
-                                    <strong class="counter">{{body.municipality_with_more_jobs_value | max_digits(3) }}</strong><span>EMPREGOS</span>
+                                    <strong class="counter">{{body.municipality_with_more_jobs_value | max_digits(3) }}</strong><span>{{body.municipality_with_more_jobs_value | magnitude }} EMPREGOS</span>
                                 </div>
                             </td>
                             {% endif %}
                             <td>
                                 <p class="label">{{body.activity_with_more_jobs}}</p>
                                 <div class="number">
-                                    <strong class="counter">{{body.activity_with_more_jobs_value | max_digits(3)}}</strong><span>EMPREGOS</span>
+                                    <strong class="counter">{{body.activity_with_more_jobs_value | max_digits(3)}}</strong><span>{{body.activity_with_more_jobs_value | magnitude }} EMPREGOS</span>
                                 </div>
                             </td>
                             {% if context.is_not_municipality %}
                             <td>
                                 <p class="label">{{body.municipality_with_biggest_wage_avg}}</p>
                                 <div class="number">
-                                    USD<strong class="counter">{{body.municipality_with_biggest_wage_avg_value | max_digits(3)}}</strong><span>Milhares</span>
+                                    USD<strong class="counter">{{body.municipality_with_biggest_wage_avg_value | max_digits(3)}}</strong><span>{{body.municipality_with_biggest_wage_avg_value | magnitude }}</span>
                                 </div>
                             </td>
                             {% endif %}
                             <td>
                                 <p class="label">{{body.activity_with_biggest_wage_avg}}</p>
                                 USD<div class="number">
-                                    <strong class="counter">{{body.activity_with_biggest_wage_avg_value | max_digits(3)}}</strong><span></span>
+                                    <strong class="counter">{{body.activity_with_biggest_wage_avg_value | max_digits(3)}}</strong><span>{{body.activity_with_biggest_wage_avg_value | magnitude }}</span>
                                 </div>
                             </td>
                         </tr>
