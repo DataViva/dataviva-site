@@ -5,6 +5,7 @@ from dataviva.utils.num_format import num_format
 from dataviva.utils.title_case import title_case
 from decimal import *
 import locale
+from flask.ext.babel import gettext
 
 ''' A helper class for dealing with injecting times into the page using moment.js'''
 class jinja_momentjs:

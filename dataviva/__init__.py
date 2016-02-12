@@ -79,7 +79,7 @@ app.jinja_env.globals['format'] = jinja_formatter
 app.jinja_env.filters['strip_html'] = jinja_strip_html
 app.jinja_env.filters['split'] = jinja_split
 app.jinja_env.filters['max_digits'] = max_digits
-app.jinja_env.filters['jinja_magnitude'] = magnitude
+app.jinja_env.filters['magnitude'] = jinja_magnitude
 
 # Load the modules for each different section of the site
 
