@@ -1,13 +1,14 @@
 (function () {
     "use strict";
 
-    var app = angular.module("dataviva.services", []);
+    var app = angular.module("dataviva.services");
 
     app.service('Selectors',[
             '$http', function ($http) {
 
                 var Location = function(selection_callback) {
                     var self = this;
+                    self.templateUrl = "/en/wizard/location_selector/";
                     self.selected_entry = null;
                     self.selection_callback = selection_callback;
 
@@ -63,6 +64,7 @@
 
                 var Product = function(selection_callback) {
                     var self = this;
+                    self.templateUrl = "/en/wizard/product_selector/";
                     self.selected_entry = null;
                     self.selection_callback = selection_callback;
 

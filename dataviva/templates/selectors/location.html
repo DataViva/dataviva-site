@@ -3,19 +3,19 @@
     <form action="" class="form-dataviva form-inline filter">
         <div class="form-group">
             <ul class="btn-group nav nav-tabs" role="tablist">
-                <button type="button" href="#regions" aria-controls="regions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="model.load_depth_entries(model.regions)">
+                <button type="button" href="#regions" aria-controls="regions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.regions)">
                 Regiões
                 </button>
-                <button type="button" href="#states" aria-controls="states" role="tab" data-toggle="tab" class="btn btn-default" ng-click="model.load_depth_entries(model.states)">
+                <button type="button" href="#states" aria-controls="states" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.states)">
                 Estados
                 </button>
-                <button type="button" href="#mesoregions" aria-controls="mesoregions" role="tab" data-toggle="tab" class="btn btn-default"  ng-click="model.load_depth_entries(model.mesoregions)">
+                <button type="button" href="#mesoregions" aria-controls="mesoregions" role="tab" data-toggle="tab" class="btn btn-default"  ng-click="selector_model.load_depth_entries(selector_model.mesoregions)">
                 Mesorregiões
                 </button>
-                <button type="button" href="#mircroregions" aria-controls="mircroregions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="model.load_depth_entries(model.mircroregions)">
+                <button type="button" href="#mircroregions" aria-controls="mircroregions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.mircroregions)">
                 Microregiões
                 </button>
-                <button type="button" href="#municipality" aria-controls="municipality" role="tab" data-toggle="tab" class="btn btn-default" ng-click="model.load_depth_entries(model.municipalities)">
+                <button type="button" href="#municipality" aria-controls="municipality" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.municipalities)">
                 Municípios
                 </button>
             </ul>
@@ -29,12 +29,12 @@
                     <input type="text"
                     name="regions_filter"
                     class="busca form-control"
-                    ng-model="model.regions.filter_string"
+                    ng-model="selector_model.regions.filter_string"
                     ng-trim="true"
                     autocomplete="false" />
                 </div>
                 <div class="list-group list-stripped selector-list col-md-15">
-                    <div ng-repeat="loc in model.regions.entries|filter:regions.filter_string" class="list-group-item col-md-15">
+                    <div ng-repeat="loc in selector_model.regions.entries|filter:regions.filter_string" class="list-group-item col-md-15">
                         <div class="col-md-11">{$ loc.name $}<BR><strong>IBGE:</strong> {$ loc.id_ibge $}
                         </div>
                         <div class="col-md-3">
@@ -56,7 +56,7 @@
                     autocomplete="false" />
                 </div>
                 <div class="list-group list-stripped selector-list col-md-15">
-                    <div ng-repeat="loc in model.states.entries | filter:states.filter_string" ng-if="loc.id_ibge" class="list-group-item col-md-15" >
+                    <div ng-repeat="loc in selector_model.states.entries | filter:states.filter_string" ng-if="loc.id_ibge" class="list-group-item col-md-15" >
                         <div class="col-md-1 hidden-xs hidden-sm">
                             <img src="{$ loc.icon $}" class="loc-flag-icon"/>
                         </div>
@@ -81,7 +81,7 @@
                     placeholder="Busque pelo nome ou pelo No. IBGE"/>
                 </div>
                 <div class="list-group list-stripped selector-list">
-                    <div ng-repeat="loc in model.mesoregions.entries | filter:mesoregions.filter_string" ng-if="loc.id_ibge" class="list-group-item col-md-15" >
+                    <div ng-repeat="loc in selector_model.mesoregions.entries | filter:mesoregions.filter_string" ng-if="loc.id_ibge" class="list-group-item col-md-15" >
                         <div class="col-md-1 hidden-xs hidden-sm">
                             <img src="{$ loc.icon $}" class="loc-flag-icon"/>
                         </div>
@@ -106,7 +106,7 @@
                     placeholder="Busque pelo nome ou pelo No. IBGE"/>
                 </div>
                 <div class="list-group list-stripped selector-list">
-                    <div ng-repeat="loc in model.mircroregions.entries | filter:mircroregions.filter_string" ng-if="loc.id_ibge" class="list-group-item col-md-15" >
+                    <div ng-repeat="loc in selector_model.mircroregions.entries | filter:mircroregions.filter_string" ng-if="loc.id_ibge" class="list-group-item col-md-15" >
                         <div class="col-md-1 hidden-xs hidden-sm">
                             <img src="{$ loc.icon $}" class="loc-flag-icon"/>
                         </div>
@@ -132,7 +132,7 @@
                 </div>
                 
                 <div class="list-group list-stripped selector-list">
-                    <div ng-repeat="loc in model.municipalities.entries | filter:municipalities.filter_string" ng-if="loc.id_ibge" class="list-group-item col-md-15">
+                    <div ng-repeat="loc in selector_model.municipalities.entries | filter:municipalities.filter_string" ng-if="loc.id_ibge" class="list-group-item col-md-15">
                         <div class="col-md-1 hidden-xs hidden-sm">
                             <img src="{$ loc.icon $}" class="loc-flag-icon"/>
                         </div>

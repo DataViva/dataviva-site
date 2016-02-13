@@ -19,7 +19,6 @@
 fire_wizard = function(session_name) {
     $("#modal-wizard").modal();
     var el = document.getElementById('wizcont');
-
     angular.element(el).scope().start_session(session_name);
 };
 

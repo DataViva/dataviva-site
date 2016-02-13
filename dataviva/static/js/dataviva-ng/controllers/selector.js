@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    var app = angular.module('dataviva.controllers', ['dataviva.services']);
+    var app = angular.module('dataviva.controllers');
 
         app.controller('SelectorController',[
         '$scope', '$http', '$templateRequest', '$compile', 'Selectors',
@@ -9,11 +9,9 @@
 
             $scope.selectors = {
                 location: {
-                    templateUrl: '/en/wizard/location_selector/',
                     model: Selectors.Location,
                 },
                 product: {
-                    templateUrl: '/en/wizard/product_selector/',
                     model: Selectors.Product,
                 },
             };
@@ -21,13 +19,13 @@
             $scope.initialize = function(selector_name, selection_callback) {
 
                 var selector = $scope.selectors[selector_name];
+                $scope.selector_model = new selector.model(selection_callback);
 
-                $templateRequest(selector.templateUrl).then(function(html){
+                $templateRequest($scope.selector_model.templateUrl).then(function(html){
                     var template = angular.element(html);
                     $(".selector-area").append(template);
                     $compile(template)($scope);
                     $('.nav-tabs button')[0].click();
-                    $scope.model = new selector.model(selection_callback);
                 });
 
             };
