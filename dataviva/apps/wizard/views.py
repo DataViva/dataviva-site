@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, g, jsonify, request, render_template
-from dataviva.apps.wizard.questions_tree import SESSIONS
+from flask import Blueprint, g, jsonify, request, render_template, redirect
+from dataviva.apps.wizard.sessions import SESSIONS
 
 mod = Blueprint('wizard', __name__, url_prefix='/<lang_code>/wizard')
 
@@ -27,14 +27,15 @@ def submit_answer():
     rjson = request.get_json()
     session_name = rjson["session_name"]
     path_option = rjson.get("path_option", None)
-    selectors = rjson.get("selectors", [])
+    selector_choices = rjson.get("selector_choices", [])
 
     session = SESSIONS.get(session_name)
     resp = {
         "session_name": session_name,
         "path_option": path_option,
-        "selectors": selectors,
-        "current_step": None
+        "selectors": selector_choices,
+        "current_step": None,
+        "redirect_url": None
     }
 
     if path_option:
@@ -43,7 +44,13 @@ def submit_answer():
             if op.id == path_option:
                 path = op
                 break
-        resp["current_step"] = path.selectors[len(selectors)]
+
+        if len(selector_choices) == len(path.selectors):
+            resp["current_step"] = {"title": ""}
+            resp["redirect_url"] = path.redirect % (
+                selector_choices[0], selector_choices[1])
+        else:
+            resp["current_step"] = path.selectors[len(selector_choices)]
 
     return jsonify(resp)
 

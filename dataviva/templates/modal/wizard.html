@@ -25,8 +25,9 @@
 								<a href="#"
 									class="list-group-item"
 									data-ng-repeat="option in wizard.options"
-									data-ng-click="wizard.select_path_option(option)"
-									data-ng-class="{'selected': selected_option == option }">
+									data-ng-click="wizard.select(option)"
+									data-ng-class="{'selected': option.id == wizard.selected_option }"
+									>
 									{$ option.title $}
 								</a>
 							</div>

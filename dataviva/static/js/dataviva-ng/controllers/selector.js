@@ -25,7 +25,7 @@
                     var template = angular.element(html);
                     $(".selector-area").append(template);
                     $compile(template)($scope);
-                    $('.nav-tabs button')[0].click();
+                    $('.nav-tabs li a')[0].click();
                 });
 
             };
