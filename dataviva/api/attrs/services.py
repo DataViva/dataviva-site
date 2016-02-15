@@ -1,4 +1,4 @@
-from dataviva.api.attrs.models import Ybs, Stat
+from dataviva.api.attrs.models import Ybs
 from dataviva import db
 from sqlalchemy import func
 
@@ -9,7 +9,7 @@ class Location:
         self.bra_id = bra_id
         self.max_year_query = db.session.query(
             func.max(Ybs.year)).filter_by(bra_id=bra_id)
-        self.attrs_query = Ybs.query.join(Stat).filter(
+        self.attrs_query = Ybs.query.filter(
             Ybs.bra_id == self.bra_id,
             Ybs.year == self.max_year_query)
 
