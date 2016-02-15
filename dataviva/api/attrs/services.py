@@ -21,4 +21,30 @@ class Location:
 
     def gdp(self):
         attrs = self.__attrs_list__()
-        return next((attr for attr in attrs if attr.stat_id == 'gdp'), None)
+        attr = next((attr for attr in attrs if attr.stat_id == 'gdp'),
+                    None)
+        return attr.stat_val
+
+    def life_expectation(self):
+        attrs = self.__attrs_list__()
+        attr = next((attr for attr in attrs if attr.stat_id == 'life_exp'),
+                    None)
+        return attr.stat_val
+
+    def population(self):
+        attrs = self.__attrs_list__()
+        attr = next((attr for attr in attrs if attr.stat_id == 'pop'),
+                    None)
+        return attr.stat_val
+
+    def gdp_per_capita(self):
+        attrs = self.__attrs_list__()
+        attr = next((attr for attr in attrs if attr.stat_id == 'gdp_pc'),
+                    None)
+        return attr.stat_val
+
+    def hdi(self):
+        attrs = self.__attrs_list__()
+        attr = next((attr for attr in attrs if attr.stat_id == 'hdi'),
+                    None)
+        return attr.stat_val
