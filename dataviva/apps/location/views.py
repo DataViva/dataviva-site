@@ -32,7 +32,11 @@ def index(bra_id):
 
     header = {
         'gdp': location_service.gdp(),
-        'eci': eci
+        'life_expectation': location_service.life_expectation(),
+        'population': location_service.population(),
+        'gdp_per_capita': location_service.gdp_per_capita(),
+        'hdi': location_service.hdi(),
+        'eci': eci,
     }
 
     return render_template('location/index.html',
