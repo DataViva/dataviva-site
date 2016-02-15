@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.attrs.services import Location as AttrsLocationService
-from dataviva.api.attrs.models import Bra
+from dataviva.api.attrs.services import Location as LocationService
 from dataviva.api.secex.models import Ymb
 from sqlalchemy import desc
 
@@ -25,11 +24,17 @@ def add_language_code(endpoint, values):
 @mod.route('/<bra_id>')
 def index(bra_id):
 
-    attrs_location_service = AttrsLocationService(bra_id=bra_id)
-    location_statistics['gdp'] = attrs_location_service.gdp()
+    location_service = LocationService(bra_id=bra_id)
 
     ''' Query básica para SECEX'''
-    location_statistics['eci'] = Ymb.query.filter_by(bra_id=bra_id, month=0) \
+    eci = Ymb.query.filter_by(bra_id=bra_id, month=0) \
         .order_by(desc(Ymb.year)).limit(1).first().eci
 
-    return render_template('location/index.html', location_statistics=location_statistics, body_class='perfil-estado')
+    header = {
+        'gdp': location_service.gdp(),
+        'eci': eci
+    }
+
+    return render_template('location/index.html',
+                           header=header,
+                           body_class='perfil-estado')

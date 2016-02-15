@@ -2,6 +2,7 @@ from dataviva.api.attrs.models import Ybs, Stat
 from dataviva import db
 from sqlalchemy import func
 
+
 class Location:
     def __init__(self, bra_id):
         self._attrs_list = None
@@ -19,5 +20,5 @@ class Location:
         return self._attrs_list
 
     def gdp(self):
-        statistic_list = self.__attrs_list__()
-        return next((s for s in statistic_list if s.id == 'gdp'), None)
+        attrs = self.__attrs_list__()
+        return next((attr for attr in attrs if attr.stat_id == 'gdp'), None)
