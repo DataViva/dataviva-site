@@ -145,6 +145,7 @@ class School(db.Model, AutoSerialize, ExpandedAttr):
     is_vocational = db.Column(db.Integer)
 
     ysc = db.relationship("Ysc", backref = 'school', lazy = 'dynamic')
+    ybsc = db.relationship("Ybsc", backref = 'school', lazy = 'dynamic')
 
     def icon(self):
         return "/static/img/icons/school/school_{}.png".format(self.school_type_id.lower())
