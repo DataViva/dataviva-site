@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g
+from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
-
-from dataviva.api.attrs.models import Cbo, Bra, Cnae
-from dataviva.api.rais.models import Yo, Ybo, Yio, Ybio
-
-from dataviva import db
-from sqlalchemy.sql.expression import func, desc, asc
+from dataviva.api.rais.services import Occupation
+from dataviva.api.rais.services import OccupationByLocation
+from dataviva.api.rais.services import OccupationMunicipalities
+from dataviva.api.rais.services import OccupationActivities
 
 mod = Blueprint('occupation', __name__,
                 template_folder='templates',
@@ -24,203 +22,65 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/')
-def index():
+@mod.route('/<occupation_id>')
+def index(occupation_id):
 
-    occupation_id = '2122'
-    bra_id = None #'4mg'
+    bra_id = request.args.get('bra_id')
     header = {}
     body = {}
 
-    #se tiver sido selecionada uma localidade especific
-    if bra_id:
-
-        #encontrando o ano mais recente 
-        ybo_max_year= db.session.query(func.max(Ybo.year)).filter(
-            Ybo.cbo_id == occupation_id, 
-            Ybo.bra_id == bra_id)\
-            .one()
-            
-        year = 0
-        for year in ybo_max_year:
-            year = year
-
-        ybo_header_generator = Ybo.query.join(Cbo).filter(
-            Ybo.cbo_id == occupation_id,
-            Ybo.bra_id == bra_id,
-            Ybo.year == year)\
-            .values(Cbo.name_pt,
-                    Ybo.wage_avg,
-                    Ybo.wage,
-                    Ybo.num_jobs,
-                    Ybo.num_est)
-
-        ybo_county_num_jobs_generator = Ybo.query.join(Bra).filter(
-                Ybo.cbo_id == occupation_id,
-                Ybo.bra_id.like(bra_id+'%'),
-                Ybo.year == year,
-                Ybo.bra_id_len == 9)\
-            .order_by(desc(Ybo.num_jobs)).limit(1)\
-            .values(Bra.name_pt,
-                    Ybo.num_jobs)
-
-        ybo_county_wage_avg_generator = Ybo.query.join(Bra).filter(
-                Ybo.cbo_id == occupation_id,
-                Ybo.bra_id.like(bra_id+'%'),
-                Ybo.year == year,
-                Ybo.bra_id_len == 9)\
-            .order_by(desc(Ybo.wage_avg)).limit(1)\
-            .values(Bra.name_pt,
-                    Ybo.wage_avg)
-        
-
-        ybio_activity_num_jobs_generator = Ybio.query.join(Cnae).filter(
-                Ybio.cbo_id == occupation_id,
-                Ybio.bra_id.like(bra_id+'%'),
-                Ybio.year == year,
-                Ybio.cnae_id_len == 6)\
-            .order_by(desc(Ybio.num_jobs)).limit(1)\
-            .values(Cnae.name_pt,
-                    Ybio.num_jobs)
-        
-
-        ybio_activity_wage_avg_generator = Ybio.query.join(Cnae).filter(
-                Ybio.cbo_id == occupation_id,
-                Ybio.bra_id.like(bra_id+'%'),
-                Ybio.year == year,
-                Ybio.cnae_id_len == 6)\
-            .order_by(desc(Ybio.wage_avg)).limit(1)\
-            .values(Cnae.name_pt,
-                    Ybio.wage_avg)
-
-        
-        header['year'] = year
-
-        for name_pt, wage_avg, wage, num_jobs, num_est in ybo_header_generator:
-            header['name'] = name_pt
-            header['average_monthly_income'] = wage_avg
-            header['salary_mass'] = wage
-            header['total_employment'] = num_jobs
-            header['total_establishments'] = num_est
-
-        for name_pt, num_jobs in ybo_county_num_jobs_generator:
-            body['county_for_jobs'] = name_pt
-            body['num_jobs_county'] = num_jobs
-
-        for name_pt, wage_avg in ybio_activity_wage_avg_generator:
-            body['activity_higher_income'] = name_pt
-            body['value_activity_higher_income'] = wage_avg     
-
-        for name_pt, wage_avg in ybo_county_wage_avg_generator:
-            body['county_bigger_average_monsthly_income'] = name_pt
-            body['bigger_average_monsthly_income'] = wage_avg   
-
-        for name_pt, num_jobs in ybio_activity_num_jobs_generator:
-            body['activity_for_job'] = name_pt
-            body['num_activity_for_job'] = num_jobs 
-
-    ######################## else ##########################
-    else: 
-        
-        #encontrando o ano mais recente 
-        yo_max_year= db.session.query(func.max(Yo.year)).filter(
-            Ybo.cbo_id == occupation_id)\
-            .one()
-            
-        year = 0
-        for year in yo_max_year:
-            year = year
-
-        #quando nao temos a localidade, buscamos em todo o brasil - rais_yo
-        yo_header_generator = Yo.query.join(Cbo).filter(
-            Yo.cbo_id == occupation_id,
-            Yo.year == year)\
-            .values(Cbo.name_pt,
-                    Yo.wage_avg,
-                    Yo.wage,
-                    Yo.num_jobs,
-                    Yo.num_est)
-
-        ybo_county_num_jobs_generator = Ybo.query.join(Bra).filter(
-                Ybo.cbo_id == occupation_id,
-                Ybo.year == year,
-                Ybo.bra_id_len == 9)\
-            .order_by(desc(Ybo.num_jobs)).limit(1)\
-            .values(Bra.name_pt,
-                    Ybo.num_jobs)
-
-        ybo_county_wage_avg_generator = Ybo.query.join(Bra).filter(
-                Ybo.cbo_id == occupation_id,
-                Ybo.year == year,
-                Ybo.bra_id_len == 9)\
-            .order_by(desc(Ybo.wage_avg)).limit(1)\
-            .values(Bra.name_pt,
-                    Ybo.wage_avg)
-        
-
-        yio_activity_num_jobs_generator = Yio.query.join(Cnae).filter(
-                Yio.cbo_id == occupation_id,
-                Yio.year == year,
-                Yio.cnae_id_len == 6)\
-            .order_by(desc(Yio.num_jobs)).limit(1)\
-            .values(Cnae.name_pt,
-                    Yio.num_jobs)
-        
-
-        yio_activity_wage_avg_generator = Yio.query.join(Cnae).filter(
-                Yio.cbo_id == occupation_id,
-                Yio.year == year,
-                Yio.cnae_id_len == 6)\
-            .order_by(desc(Yio.wage_avg)).limit(1)\
-            .values(Cnae.name_pt,
-                    Yio.wage_avg)
-
-        
-        header['year'] = year
-
-        for name_pt, wage_avg, wage, num_jobs, num_est in yo_header_generator:
-            header['name'] = name_pt
-            header['average_monthly_income'] = wage_avg
-            header['salary_mass'] = wage
-            header['total_employment'] = num_jobs
-            header['total_establishments'] = num_est
-
-        for name_pt, num_jobs in ybo_county_num_jobs_generator:
-            body['county_for_jobs'] = name_pt
-            body['num_jobs_county'] = num_jobs
-
-        for name_pt, wage_avg in yio_activity_wage_avg_generator:
-            body['activity_higher_income'] = name_pt
-            body['value_activity_higher_income'] = wage_avg     
-
-        for name_pt, wage_avg in ybo_county_wage_avg_generator:
-            body['county_bigger_average_monsthly_income'] = name_pt
-            body['bigger_average_monsthly_income'] = wage_avg   
-
-        for name_pt, num_jobs in yio_activity_num_jobs_generator:
-            body['activity_for_job'] = name_pt
-            body['num_activity_for_job'] = num_jobs 
-
-    #dados que ainda sofrerāo alteracoes  
     context = {
-        'family' : True,
-        #unidades
-        'average_monthly_income_unity' : 'Milhares', #'unidade_renda_media_mensal'
+        'portrait' : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110',
+        'average_monthly_income_unity' : 'Milhares',
         'salary_mass_unity' : 'mil',
-        'total_employment_unity' : 'milhares', 
-        'total_establishments_unity' : 'milhares', #'unidade_total_estabelecimentos' 
-        #unidades
-        'jobs_county_unity' : 'milhares de', #'unidade_empregos_principal_municipio'
-        'activity_for_job_unity': unicode('bilhões','utf8'), #unidade_atividade_por_empregos
-        'bigger_average_monsthly_income_unity': unicode('bilhões','utf8'),
-        'activity_for_job_unity' : unicode('bilhoes','utf8'),
-        #tab-salario-emprego
+        'total_employment_unity' : 'milhares',
+        'total_establishments_unity' : 'milhares',
+        'jobs_municipality_unity' : 'milhares de',
+        'activity_for_job_unity': unicode('milhares','utf8'),
+        'biggest_average_monsthly_income_unity': unicode('bilhões','utf8'),
+        'activity_for_job_unity' : unicode('milhares','utf8'),
         'text_salario_e_emprego': unicode('Minas Gerais é uma das 27 unidades feder...','utf8'),
-        #tab-oportunidades-economicas
-        'text_oportunidades_economicas' : unicode('Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste ','utf8')
+        'text_oportunidades_economicas' : unicode('Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste ','utf8'),
+    }
 
-    } 
-    #acessar o contex do diogo com context.id.oqeuquero
+    if len(occupation_id) == 4:
+        context['is_family'] = True
+    else:
+         context['is_family'] = False
 
+    #defaut
+    context['is_not_municipality'] = True
+
+    if bra_id:
+        occupation_service = OccupationByLocation(occupation_id = occupation_id, bra_id = bra_id)
+        if len(bra_id) == 9:
+            context['is_not_municipality'] = False
+    else:
+        occupation_service = Occupation(occupation_id = occupation_id)
+
+    occupation_municipalities_service = OccupationMunicipalities(occupation_id = occupation_id, bra_id=bra_id)
+    occupation_activities_service = OccupationActivities(occupation_id = occupation_id, bra_id = bra_id)
+
+    header['name'] = occupation_service.occupation_name()
+    header['average_monthly_income'] = occupation_service.average_monthly_income()
+    header['salary_mass'] = occupation_service.salary_mass()
+    header['total_employment'] = occupation_service.total_employment()
+    header['total_establishments'] = occupation_service.total_establishments()
+    header['year'] = occupation_service.year()
     
+    if context['is_not_municipality']:
+
+        body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()
+        body['municipality_with_more_jobs_value'] = occupation_municipalities_service.highest_number_of_jobs()
+
+        body['municipality_with_biggest_wage_avg'] = occupation_municipalities_service.municipality_with_biggest_wage_average()
+        body['municipality_with_biggest_wage_avg_value'] = occupation_municipalities_service.biggest_wage_average()
+
+    body['activity_with_more_jobs'] = occupation_activities_service.activity_with_more_jobs()
+    body['activity_with_more_jobs_value'] = occupation_activities_service.highest_number_of_jobs()
+
+    body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
+    body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.biggest_wage_average()
+    
+
     return render_template('occupation/index.html', body_class='perfil-estado', context=context, header = header, body = body)

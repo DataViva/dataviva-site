@@ -1,4 +1,4 @@
-from dataviva.api.attrs.models import Ybs, Stat
+from dataviva.api.attrs.models import Hs, Stat, Ybs
 from dataviva import db
 from sqlalchemy import func
 
