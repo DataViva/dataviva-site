@@ -5,37 +5,37 @@
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">PIB</p>
                     <div class="number">
-                        R$ <strong class="counter">{{header.gdp}}</strong><small>bilhões</small>
+                        R$ <strong class="counter">{{header.gdp|max_digits(3)}}</strong><small>bilhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Esperança de Vida</p>
                     <div class="number">
-                        <strong class="counter">{{header.life_expectation}}</strong><small>anos</small>
+                        <strong class="counter">{{header.life_expectation|max_digits(3)}}</strong><small>anos</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">População Total</p>
                     <div class="number">
-                        <strong class="counter">{{header.population}}</strong><small>milhões</small>
+                        <strong class="counter">{{header.population|max_digits(3)}}</strong><small>milhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">PIB Per Capta</p>
                     <div class="number">
-                        R$ <strong class="counter">{{header.gdp_per_capita}}</strong><small>mil</small>
+                        R$ <strong class="counter">{{header.gdp_per_capita|max_digits(3)}}</strong><small>mil</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">IDHM</p>
                     <div class="number">
-                        <strong class="counter">{{header.hdi}}</strong><small>milhões</small>
+                        <strong class="counter">{{header.hdi|max_digits(3)}}</strong><small>milhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">ECI</p>
                     <div class="number">
-                        <strong class="counter">{{header.eci}}</strong><small>milhões</small>
+                        <strong class="counter">{{header.eci|max_digits(3)}}</strong><small>milhões</small>
                     </div>
                 </div>
                 <div class="col-xs-15 col-sm-15 year">
