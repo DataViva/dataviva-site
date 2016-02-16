@@ -1,14 +1,14 @@
 <div role="tabpanel" class="tab-pane" id="matricula">
     <h2>Matrícula</h2>
-    <p>{{basic_course_statistics["enrollment_statistics_description"]}}</p>
+    <p>{{body["enrollment_statistics_description"]}}</p>
     <h3>Estatísticas de matrículas do Brasil</h3>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
-            <div class="table-responsive"> 
+            <div class="table-responsive">
                 <table class="table data-blue">
                     <thead>
                         <tr>
-                            {% if basic_course_statistics["city_enrolled"] %}
+                            {% if body["city_enrolled"] %}
                                 <th>
                                     Principal Município
                                     <small>por Número de Alunos Matriculados</small>
@@ -22,18 +22,18 @@
                     </thead>
                     <tbody>
                         <tr>
-                            {% if basic_course_statistics["city_enrolled"] %}
+                            {% if body["city_enrolled"] %}
                                 <td>
-                                    <p class="label">{{basic_course_statistics["city_name"]}}</p>
+                                    <p class="label">{{body["city_name"]}}</p>
                                     <div class="number">
-                                        <strong class="counter">{{basic_course_statistics["city_enrolled"]}}</strong><span> mil</span>
+                                        <strong class="counter">{{body["city_enrolled"]}}</strong><span> mil</span>
                                     </div>
                                 </td>
                             {% endif %}
                             <td>
-                                <p class="label">{{basic_course_statistics["school_name"]}}</p>
+                                <p class="label">{{body["school_name"]}}</p>
                                 <div class="number">
-                                    <strong class="counter">{{basic_course_statistics["school_enrolled"]}}</strong><span> mil</span>
+                                    <strong class="counter">{{body["school_enrolled"]}}</strong><span> mil</span>
                                 </div>
                             </td>
                         </tr>
