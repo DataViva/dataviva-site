@@ -34,6 +34,11 @@ class LOCATION_DEPTHS:
     MUNICIPALITY = 9
 
 
+class PRODUCT_DEPTHS:
+    SECTION = 2
+    POSITION = 6
+
+
 def fix_name(attr, lang):
 
     for col in ["desc", "name", "gender", "article", "keywords"]:
@@ -377,6 +382,27 @@ def location():
         returned_entries = query.filter(func.char_length(Bra.id) == depth)
     elif bra_id:
         returned_entries = query.filter(Bra.id == bra_id)
+    else:
+        return Response("You must specify a querying parameter!", status=400)
+
+    return Response(
+        json.dumps(map(lambda x: x.serialize(), returned_entries)),
+        status=(200 if returned_entries.count() else 404)
+    )
+
+
+@mod.route('/product/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_product"))
+def product():
+
+    depth = request.args.get('depth', None)
+    hs_id = request.args.get('hs', None)
+    query = db.session.query(Hs)
+
+    if depth:
+        returned_entries = query.filter(func.char_length(Hs.id) == depth)
+    elif hs_id:
+        returned_entries = query.filter(Hs.id == hs_id)
     else:
         return Response("You must specify a querying parameter!", status=400)
 

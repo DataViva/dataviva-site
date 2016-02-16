@@ -14,7 +14,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="{{body_class or 'home'}}">
+<body class="{{body_class or 'home'}}" data-ng-app="dataviva">
 
     {% include "include/header.html" %}
 
@@ -26,6 +26,8 @@
     {% include "modal/login.html" %}
     {% include "modal/signup.html" %}
     {% include "modal/video.html" %}
+    {% include "modal/selector.html" %}
+    {% include "modal/wizard.html" %}
 
     {% include "include/footer.html" %}
 
@@ -33,6 +35,15 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
     <script src="/static/dist/js/bootstrap.min.js"></script>
     <script src="/static/dist/js/jquery.counterup.min.js"></script>
+
+    <script src="/static/js/libs/angular.min.js"></script>
+    <script src="/static/js/dataviva-ng/init.js"></script>
+    <script src="/static/js/dataviva-ng/services/wizard.js"></script>
+    <script src="/static/js/dataviva-ng/services/selector.js"></script>
+    <script src="/static/js/dataviva-ng/controllers/wizard.js"></script>
+    <script src="/static/js/dataviva-ng/controllers/selector.js"></script>
+    <script src="/static/js/dataviva-ng/app.js"></script>
+
     <script type="text/javascript">
     $(function(){
         $('[data-toggle="popover"]').popover({
