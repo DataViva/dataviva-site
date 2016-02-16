@@ -5,6 +5,7 @@ from dataviva.utils.num_format import num_format
 from dataviva.utils.title_case import title_case
 from decimal import *
 import locale
+from flask.ext.babel import gettext
 
 ''' A helper class for dealing with injecting times into the page using moment.js'''
 class jinja_momentjs:
@@ -79,3 +80,8 @@ def max_digits(number, digits):
         number = float(number)/num
     number_str = str(number)
     return number_str[0:digits+1]
+
+def jinja_magnitude(number) : 
+    integer = str(int(number))
+    orders_of_magnitude = ['', gettext('Thousands'), gettext('Millions'), gettext('Billions'), gettext('Trillions')]
+    return orders_of_magnitude[len(integer[::3]) - 1]    
