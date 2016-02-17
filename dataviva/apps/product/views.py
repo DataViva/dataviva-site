@@ -72,7 +72,7 @@ def index(product_id):
         if len(product_id) == 6:
             header['rca_wld'] = product_service.rca_wld()
             header['distance_wld'] = product_service.distance_wld()
-            header['opp_gain_wld'] = product_service.opp_gain_wld()
+            header['opportunity_gain_wld'] = product_service.opp_gain_wld()
 
         if len(bra_id) != 9:
             body['municipality_name_export'] = municipalities_service.municipality_with_more_exports()
