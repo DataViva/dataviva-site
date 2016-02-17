@@ -32,7 +32,7 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>A ocupação de {{header.name}} emprega {{header.total_employment}} profissionais, ocupando o* [ranking]* lugar no ranking de ocupações no Brasil. O município que mais emprega nessa ocupação é {{body.municipality_with_more_jobs}} e a atividade de {{activity_with_more_jobs}} é a que mais possui {{header.name}}. A renda mensal média é de {{header.average_monthly_income}} e a idade média dos empregados é de [idade média empregado] .</p>
+        <p>A ocupação de {{header.name}} emprega {{header.total_employment}} profissionais, ocupando o* [ranking]* lugar no ranking de ocupações no Brasil. O município que mais emprega nessa ocupação é {{body.municipality_with_more_jobs}} e a atividade de {{activity_with_more_jobs}} é a que mais possui {{header.name}}. A renda mensal média é de {{header.average_monthly_income}} e a idade média dos empregados é de {{header.age_avg | max_digits(3)}} anos.</p> 
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Salário e Emprego</h3>

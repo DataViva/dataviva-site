@@ -59,6 +59,7 @@ def index(occupation_id):
     header['total_employment'] = occupation_service.total_employment()
     header['total_establishments'] = occupation_service.total_establishments()
     header['year'] = occupation_service.year()
+    header['age_avg'] = occupation_service.age_avg()
     
     if context['is_not_municipality']:
 
