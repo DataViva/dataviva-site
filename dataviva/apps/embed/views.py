@@ -203,8 +203,8 @@ def guide():
 def is_xhr():
     return request.is_xhr
 
-@mod.route("/embed/")
-@mod.route("/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
+@mod.route("/")
+@mod.route("/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
 @view_cache.cached(key_prefix=api_cache_key("apps:embed"), unless=is_xhr)
 def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
           filter1="all", filter2="all", output="cbo"):
