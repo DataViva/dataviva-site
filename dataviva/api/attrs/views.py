@@ -410,3 +410,23 @@ def product():
         json.dumps(map(lambda x: x.serialize(), returned_entries)),
         status=(200 if returned_entries.count() else 404)
     )
+
+@mod.route('/basic_course/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_basic_course"))
+def basic_course():
+
+    depth = request.args.get('depth', None)
+    course_id = request.args.get('course_id', None)
+    query = db.session.query(Course_sc)
+
+    if depth:
+        returned_entries = query.filter(func.char_length(Course_sc.id) == depth)
+    elif course_id:
+        returned_entries = query.filter(Course_sc.id == course_id)
+    else:
+        return Response("You must specify a querying parameter!", status=400)
+
+    return Response(
+        json.dumps(map(lambda x: x.serialize(), returned_entries)),
+        status=(200 if returned_entries.count() else 404)
+    )
