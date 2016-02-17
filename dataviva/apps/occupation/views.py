@@ -81,7 +81,7 @@ def index(occupation_id):
             Yo.cbo_id == occupation_id)
     rais_query = Yo.query.filter(
         Yo.year == max_year_query)\
-        .order_by(Yo.num_jobs)
+        .order_by(Yo.num_jobs.desc())
     rais = rais_query.all()
     for index, occ in enumerate(rais):
         if rais[index].cbo_id == occupation_id:
