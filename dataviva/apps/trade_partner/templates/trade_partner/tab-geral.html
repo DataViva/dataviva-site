@@ -38,7 +38,7 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>{{ header.profile}}</p>
+        <p>O país {{ header.name }} ocupa a posição de número [ranking importações] em importações para o Brasil e [ranking exportações] em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse país é o {{ body.product_with_more_exports }} e o total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Comércio Internacional</h3>
