@@ -30,7 +30,6 @@ def index():
         'enrolled' : university_service.enrolled(),
         'entrants' : university_service.entrants(),
         'graduates' : university_service.graduates(),
-        'profile' : university_service.profile(),
         'year' : university_service.year()
     }
 
