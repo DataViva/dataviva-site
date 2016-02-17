@@ -41,7 +41,6 @@ def index(product_id):
     context = {
         'background_image':'static/img/bg-profile-location.jpg',
         'portrait':'static/img/mineric_product.jpg',
-        'desc_general': 'Sample Text',
         'desc_international_trade': 'Sample Text',
         'desc_economic_opp': 'Sample Text'
     }
@@ -95,9 +94,9 @@ def index(product_id):
     header['name'] = product_service.product_name()
     header['year'] = product_service.year()
     header['trade_balance'] = product_service.trade_balance()
-    header['export_val'] = product_service.total_exported()
+    header['export_value'] = product_service.total_exported()
     header['export_net_weight'] = product_service.unity_weight_export_price()
-    header['import_val'] = product_service.total_imported()
+    header['import_value'] = product_service.total_imported()
     header['import_net_weight'] = product_service.unity_weight_import_price()
 
     return render_template('product/index.html', body_class='perfil-estado', header=header, body=body, context=context)
