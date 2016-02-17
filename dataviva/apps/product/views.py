@@ -28,8 +28,8 @@ def index(product_id):
 
     bra_id = request.args.get('bra_id')
 
-    #None database fields must be treated (/05?bra_id=2ce020008)
-    #and templates with no data shall be omitted...
+    #None database fields must be treated (/05?bra_id=2ce020008),
+    #templates with no data shall be omitted and verify usage of R$ and US$
 
     #Vars to do tests:
     #section (depth == 2)
@@ -100,5 +100,31 @@ def index(product_id):
     header['export_net_weight'] = product_service.unity_weight_export_price()
     header['import_value'] = product_service.total_imported()
     header['import_net_weight'] = product_service.unity_weight_import_price()
+
+    from dataviva.api.secex.models import Ymp
+    from dataviva import db
+    from sqlalchemy.sql.expression import func, desc
+
+    max_year_query = db.session.query(func.max(Ymp.year)).filter(Ymp.hs_id == product_id)
+
+    secex_query = Ymp.query.filter(
+        Ymp.year == max_year_query,
+        Ymp.month == 0).order_by(Ymp.export_val.desc())
+    secex = secex_query.all()
+
+    for ranking, product in enumerate(secex):
+        if secex[ranking].hs_id == product_id:
+            header['export_value_ranking'] = ranking + 1
+            break
+
+    secex_query = Ymp.query.filter(
+        Ymp.year == max_year_query,
+        Ymp.month == 0).order_by(Ymp.import_val.desc())
+    secex = secex_query.all()
+
+    for ranking, product in enumerate(secex):
+        if secex[ranking].hs_id == product_id:
+            header['import_value_ranking'] = ranking + 1
+            break
 
     return render_template('product/index.html', body_class='perfil-estado', header=header, body=body, context=context)
