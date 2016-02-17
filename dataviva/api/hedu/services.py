@@ -50,6 +50,9 @@ class University:
     def name(self):
         return self.__hedu__().university.name()
 
+    def university_type(self):
+        return self.__hedu__().university.school_type_pt
+
     def enrolled(self):
         return self.__hedu__().enrolled
 
