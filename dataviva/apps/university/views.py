@@ -27,6 +27,7 @@ def index():
 
     header = {
         'name' : university_service.name(),
+        'type' : university_service.university_type(),
         'enrolled' : university_service.enrolled(),
         'entrants' : university_service.entrants(),
         'graduates' : university_service.graduates(),
