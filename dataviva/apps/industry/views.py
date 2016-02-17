@@ -3,6 +3,10 @@ from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale 
 from dataviva.api.rais.services import Industry, IndustryOccupation, IndustryMunicipality, IndustryByLocation
 
+from dataviva import db
+from sqlalchemy import func, desc
+from dataviva.api.attrs.models import Cnae
+from dataviva.api.rais.models import Yi
 
 mod = Blueprint('industry', __name__,
                 template_folder='templates',
@@ -32,7 +36,6 @@ def index(cnae_id):
     industry = { 
         'background_image':  unicode("'static/img/bg-profile-location.jpg'", 'utf8'),
         'portrait' : unicode('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110', 'utf8') ,        
-        'text_profile' : unicode('Texto de perfil para Supermercados.', 'utf8'),
         'text_salary_job' : unicode('Texto para Salários e empregos', 'utf8'),
         'text_economic_opportunity' : unicode('Texto para Oportunidades Econômicas', 'utf8'),
     }
@@ -89,8 +92,18 @@ def index(cnae_id):
 
         body['municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
         body['municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
-             
     
+    
+    yi_max_year = db.session.query(func.max(Yi.year)).filter_by(cnae_id=cnae_id)         
+    list_rais = Yi.query.filter( 
+        Yi.year == yi_max_year
+        ).order_by(desc(Yi.num_jobs)).all()
+ 
+    for index, rais in enumerate(list_rais) : 
+        if rais.cnae_id == cnae_id :
+            header['ranking'] = index+1
+            break 
+
 
     return render_template('industry/index.html', body_class='perfil-estado', header=header, body=body, industry=industry)
 
