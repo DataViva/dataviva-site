@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
+from dataviva.api.hedu.models import Yc_hedu
 from dataviva.api.hedu.services import Major, MajorUniversities, MajorMunicipalities
+from dataviva import db
+from sqlalchemy.sql.expression import func
+
 
 mod = Blueprint('major', __name__,
                 template_folder='templates',
@@ -21,6 +25,14 @@ def index():
     major_service = Major(course_hedu_id='523E04')
     universities_service = MajorUniversities(course_hedu_id='523E04')
     municipalities_service = MajorMunicipalities(course_hedu_id='523E04')
+
+    max_year_query = db.session.query(func.max(Yc_hedu.year)).filter_by(course_hedu_id='523E04')
+
+    rank_query = Yc_hedu.query.filter(
+            Yc_hedu.year == max_year_query,
+            func.length(Yc_hedu.course_hedu_id) == 6).order_by(Yc_hedu.course_hedu_id.desc())
+
+    rank = rank_query.all()
 
     header = {
         'name' : major_service.name(),
@@ -45,6 +57,11 @@ def index():
         'municipality_with_more_graduates' : municipalities_service.municipality_with_more_graduates(),
         'highest_graduate_number_by_municipality' : municipalities_service.highest_graduates_number()
     }
+
+    for index, maj in enumerate(rank):
+        if rank[index].course_hedu_id == '523E04':
+            header['rank'] = index
+            break
     
     return render_template('major/index.html', header=header, content=content, body_class='perfil-estado')
 
