@@ -26,7 +26,7 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>{{ header.profile }}</p>
+        <p>O curso de {{ header.name }} é o [ranking no país] em número de matrículas no Brasil. A universidade que possui mais alunos é a {{ content.university_with_more_enrolled }}, com {{ content.highest_enrolled_number_by_university | max_digits(3) }} {{ content.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em todo o país e a ocupação que mais emprega os concluintes é .</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Matrículas</h3>
