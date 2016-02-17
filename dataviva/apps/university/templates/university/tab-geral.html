@@ -26,7 +26,7 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>{{ header.profile }}</p>
+        <p>A instituição {{ header.name }} é um estabelecimento de ensino [dependência administrativa], que tem como principal curso {{ content.major_with_more_enrollments }}, com {{ content.highest_enrollment_number_by_major }} estudantes. No total, a instituição possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} estudantes matriculados e {{ header.graduates | max_digits(3) }} {{ header.graduates | magnitude }} concluintes.</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Matrículas</h3>
