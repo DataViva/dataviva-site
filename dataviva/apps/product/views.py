@@ -67,6 +67,7 @@ def index(product_id):
         body['destination_export_value'] = trade_partners_service.highest_export_value()
         body['origin_name_import'] = trade_partners_service.origin_with_more_imports()
         body['origin_import_value'] = trade_partners_service.highest_import_value()
+        body['export_value_growth_in_five_years'] = product_service.export_value_growth_in_five_years()
 
         if len(product_id) == 6:
             header['rca_wld'] = product_service.rca_wld()
@@ -90,6 +91,7 @@ def index(product_id):
         body['destination_export_value'] = trade_partners_service.highest_export_value()
         body['origin_name_import'] = trade_partners_service.origin_with_more_imports()
         body['origin_import_value'] = trade_partners_service.highest_import_value()
+        body['export_value_growth_in_five_years'] = product_service.export_value_growth_in_five_years()
 
     header['name'] = product_service.product_name()
     header['year'] = product_service.year()
