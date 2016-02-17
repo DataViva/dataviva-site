@@ -14,7 +14,7 @@ from dataviva.apps.ask.forms import AskForm, ReplyForm, SearchForm
 from dataviva.utils.send_mail import send_mail
 from dataviva.utils.cached_query import cached_query, api_cache_key
 
-from dataviva.apps.graphs.models import Crosswalk_oc, Crosswalk_pi
+from dataviva.apps.embed.models import Crosswalk_oc, Crosswalk_pi
 
 from config import ADMINISTRATOR_EMAIL, basedir
 import os
