@@ -85,7 +85,7 @@ def index(occupation_id):
     rais = rais_query.all()
     for index, occ in enumerate(rais):
         if rais[index].cbo_id == occupation_id:
-            header['ranking'] = index
+            header['ranking'] = index + 1
             break
 
     return render_template('occupation/index.html', body_class='perfil-estado', context=context, header = header, body = body)
