@@ -36,27 +36,12 @@ def index(occupation_id):
     context = {
         'portrait' : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110',
     }
-
-    #query relativa a posicao do ranking
-    max_year_query= db.session.query(func.max(Yo.year)).filter(
-            Yo.cbo_id == occupation_id)
-    rais_query = Yo.query.filter(
-        Yo.year == max_year_query)\
-        .order_by(Yo.num_jobs)
-    rais = rais_query.all()
-    for index, occ in enumerate(rais):
-        if rais[index].cbo_id == occupation_id:
-            header['ranking'] = index
-            break
  
-
-
     if len(occupation_id) == 4:
         context['is_family'] = True
     else:
          context['is_family'] = False
 
-    #defaut
     context['is_not_municipality'] = True
 
     if bra_id:
@@ -90,6 +75,17 @@ def index(occupation_id):
 
     body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
     body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.biggest_wage_average()
-    
+
+    #query relativa a posicao do ranking
+    max_year_query= db.session.query(func.max(Yo.year)).filter(
+            Yo.cbo_id == occupation_id)
+    rais_query = Yo.query.filter(
+        Yo.year == max_year_query)\
+        .order_by(Yo.num_jobs)
+    rais = rais_query.all()
+    for index, occ in enumerate(rais):
+        if rais[index].cbo_id == occupation_id:
+            header['ranking'] = index
+            break
 
     return render_template('occupation/index.html', body_class='perfil-estado', context=context, header = header, body = body)
