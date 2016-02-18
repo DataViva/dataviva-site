@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane" id="matricula">
     <h2>Matrícula</h2>
-    <p>{{body["enrollment_statistics_description"]}}</p>
+    <p>{{ body.enrollment_statistics_description }}</p>
     <h3>Estatísticas de matrículas do Brasil</h3>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
@@ -8,7 +8,7 @@
                 <table class="table data-blue">
                     <thead>
                         <tr>
-                            {% if body["city_enrolled"] %}
+                            {% if body.city_enrolled  %}
                                 <th>
                                     Principal Município
                                     <small>por Número de Alunos Matriculados</small>
@@ -22,18 +22,18 @@
                     </thead>
                     <tbody>
                         <tr>
-                            {% if body["city_enrolled"] %}
+                            {% if body.city_enrolled  %}
                                 <td>
-                                    <p class="label">{{body["city_name"]}}</p>
+                                    <p class="label">{{ body.city_name }}</p>
                                     <div class="number">
-                                        <strong class="counter">{{body["city_enrolled"]}}</strong><span> mil</span>
+                                        <strong class="counter">{{ body.city_enrolled|max_digits(3) }}</strong><span> {{ body.city_enrolled|magnitude }}</span>
                                     </div>
                                 </td>
                             {% endif %}
                             <td>
-                                <p class="label">{{body["school_name"]}}</p>
+                                <p class="label">{{ body.school_name }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{body["school_enrolled"]}}</strong><span> mil</span>
+                                    <strong class="counter">{{ body.school_enrolled|max_digits(3) }}</strong><span> {{ body.school_enrolled|magnitude }}</span>
                                 </div>
                             </td>
                         </tr>

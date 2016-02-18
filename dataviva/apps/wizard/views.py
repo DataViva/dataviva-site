@@ -59,10 +59,37 @@ def submit_answer():
 def location_selector():
     return render_template("selectors/location.html")
 
+
 @mod.route('/basic_course_selector/', methods=['GET'])
 def basic_course():
     return render_template("selectors/basic_course.html")
 
+
 @mod.route('/product_selector/', methods=['GET'])
 def product_selector():
     return render_template("selectors/product.html")
+
+
+@mod.route('/major_selector/', methods=['GET'])
+def major_selector():
+    return render_template("selectors/major.html")
+
+
+@mod.route('/industry_selector/', methods=['GET'])
+def industry_selector():
+    return render_template("selectors/industry.html")
+
+
+@mod.route('/university_selector/', methods=['GET'])
+def university_selector():
+    return render_template("selectors/university.html")
+
+
+@mod.route('/occupation_selector/', methods=['GET'])
+def occupation_selector():
+    return render_template("selectors/occupation.html")
+
+
+@mod.route('/trading_partner_selector/', methods=['GET'])
+def trading_partner_selector():
+    return render_template("selectors/trading_partner.html")

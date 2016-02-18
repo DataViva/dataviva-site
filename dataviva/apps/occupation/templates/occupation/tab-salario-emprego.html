@@ -1,6 +1,5 @@
 <div role="tabpanel" class="tab-pane" id="salario-emprego">
     <h2>Salário e Emprego</h2>
-    <p>{{context.text_salario_e_emprego}}</p>
     <h3>Estatísticas de Salário e Emprego</h3>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
@@ -34,30 +33,30 @@
                         <tr>
                             {% if context.is_not_municipality %}
                             <td>
-                                <p class="label">{{body.municipality_with_more_jobs}}</p>
+                                <p class="label">{{ body.municipality_with_more_jobs }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{body.municipality_with_more_jobs_value | max_digits(3) }}</strong><span>{{body.municipality_with_more_jobs_value | magnitude }} EMPREGOS</span>
+                                    <strong class="counter">{{ body.municipality_with_more_jobs_value | max_digits(3) }}</strong><span>{{ body.municipality_with_more_jobs_value | magnitude }} EMPREGOS</span>
                                 </div>
                             </td>
                             {% endif %}
                             <td>
-                                <p class="label">{{body.activity_with_more_jobs}}</p>
+                                <p class="label">{{ body.activity_with_more_jobs }}</p>
                                 <div class="number">
-                                    <strong class="counter">{{body.activity_with_more_jobs_value | max_digits(3)}}</strong><span>{{body.activity_with_more_jobs_value | magnitude }} EMPREGOS</span>
+                                    <strong class="counter">{{ body.activity_with_more_jobs_value | max_digits(3) }}</strong><span>{{ body.activity_with_more_jobs_value | magnitude }} EMPREGOS</span>
                                 </div>
                             </td>
                             {% if context.is_not_municipality %}
                             <td>
-                                <p class="label">{{body.municipality_with_biggest_wage_avg}}</p>
+                                <p class="label">{{ body.municipality_with_biggest_wage_avg }}</p>
                                 <div class="number">
-                                    USD<strong class="counter">{{body.municipality_with_biggest_wage_avg_value | max_digits(3)}}</strong><span>{{body.municipality_with_biggest_wage_avg_value | magnitude }}</span>
+                                    USD<strong class="counter">{{ body.municipality_with_biggest_wage_avg_value | max_digits(3) }}</strong><span>{{ body.municipality_with_biggest_wage_avg_value | magnitude }}</span>
                                 </div>
                             </td>
                             {% endif %}
                             <td>
-                                <p class="label">{{body.activity_with_biggest_wage_avg}}</p>
+                                <p class="label">{{ body.activity_with_biggest_wage_avg }}</p>
                                 USD<div class="number">
-                                    <strong class="counter">{{body.activity_with_biggest_wage_avg_value | max_digits(3)}}</strong><span>{{body.activity_with_biggest_wage_avg_value | magnitude }}</span>
+                                    <strong class="counter">{{ body.activity_with_biggest_wage_avg_value | max_digits(3) }}</strong><span>{{ body.activity_with_biggest_wage_avg_value | magnitude }}</span>
                                 </div>
                             </td>
                         </tr>
