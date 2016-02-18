@@ -3,6 +3,7 @@
 
     var app = angular.module('dataviva', [
         "dataviva.services",
+        "dataviva.services.selectors",
         "dataviva.controllers",
     ]);
 
