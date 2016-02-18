@@ -8,7 +8,7 @@
                 <table class="table data-blue">
                     <thead>
                         <tr>
-                            {% if body["city_enrolled"] %}
+                            {% if body["bra_id"] | length < 9 %}
                                 <th>
                                     Principal Município
                                     <small>por Número de Alunos Matriculados</small>
@@ -22,7 +22,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            {% if body["city_enrolled"] %}
+                            {% if body["bra_id"] | length < 9 %}
                                 <td>
                                     <p class="label">{{body["city_name"]}}</p>
                                     <div class="number">
