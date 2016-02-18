@@ -32,7 +32,8 @@ def index(cnae_id):
     header = {}
     body = {}
 
-
+    industry['cnae_id'] = cnae_id
+    
     if bra_id == None :
         industry['flag_preview_headers'] = False
         industry['county'] = True # view county where no country
