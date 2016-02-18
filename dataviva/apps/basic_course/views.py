@@ -38,7 +38,6 @@ def index(course_sc_id, bra_id):
 
     header = {
         'course_name' : sc_service.course_name(),
-        #'course_description' : sc_service.course_description(),
         'course_classes' : sc_service.course_classes(),
         'course_age' : sc_service.course_age(),
         'course_enrolled' : sc_service.course_enrolled(),
@@ -49,7 +48,6 @@ def index(course_sc_id, bra_id):
 
 
     body = {
-    #    'enrollment_statistics_description' : sc_service.enrollment_statistics_description(),
          'school_name' : school_service.school_name(),
          'school_enrolled' : school_service.school_enrolled(),
          'city_name' : city_service.city_name(),
