@@ -40,9 +40,7 @@ def index(product_id):
 
     context = {
         'background_image':'static/img/bg-profile-location.jpg',
-        'portrait':'static/img/mineric_product.jpg',
-        'desc_international_trade': 'Sample Text',
-        'desc_economic_opp': 'Sample Text'
+        'portrait':'static/img/mineric_product.jpg'
     }
 
     context['bra_id'] = bra_id
