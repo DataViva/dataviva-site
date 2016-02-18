@@ -10,8 +10,7 @@ from sqlalchemy.sql.expression import func, desc
 
 mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
-                url_prefix='/<lang_code>/trade_partner',
-                static_folder=static_folder)
+                url_prefix='/<lang_code>/trade_partner')
 
 
 @mod.url_value_preprocessor
