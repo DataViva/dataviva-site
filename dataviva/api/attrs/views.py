@@ -401,3 +401,16 @@ def basic_course():
         json.dumps(map(lambda x: x.serialize(), returned_entries)),
         status=(200 if returned_entries.count() else 404)
     )
+
+
+@mod.route('/major/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_major"))
+def major():
+
+    depth = request.args.get('depth', None)
+    returned_entries = collection_by_depth(Course_hedu, depth)
+
+    return Response(
+        json.dumps(map(lambda x: x.serialize(), returned_entries)),
+        status=(200 if returned_entries.count() else 404)
+    )
