@@ -43,6 +43,8 @@ def index(occupation_id):
         'text_oportunidades_economicas' : unicode('Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste ','utf8'),
     }
 
+    header['cbo_id'] = occupation_id
+    
     if len(occupation_id) == 4:
         context['is_family'] = True
     else:
