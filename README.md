@@ -1,3 +1,5 @@
+[![Stories in Ready](https://badge.waffle.io/DataViva/dataviva-site.png?label=ready&title=Ready)](https://waffle.io/DataViva/dataviva-site)
+[![Stories in Code Review](https://badge.waffle.io/DataViva/dataviva-site.png?label=to+review&title=To+review)](https://waffle.io/DataViva/dataviva-site)
 #DataViva
 A Collaborative Planning Tool.
 [dataviva.info](http://www.dataviva.info)
@@ -39,11 +41,11 @@ Note: Internet Explorer versions 8 and below will not work as they do not have S
         gzip -dc DV2015_DB/*/schema/*.sql.gz | mysql -u USERNAME -p -h 127.0.0.1 DB_NAME
         # Import the content
         gzip -dc DV2015_DB/*/content/*.sql.gz | mysql -u USERNAME -p -h 127.0.0.1 DB_NAME
-        
+
 6.	Set the following environment variables
 
 	**(if using virtualenv)** add the following to to the bottom of your virtualenv activate file (virtualenv_root/bin/activate).
-	
+
         export DATAVIVA_SECRET_KEY=my-super-secret-k3y
         export DATAVIVA_DB_NAME=dataviva
         export DATAVIVA_DB_USER=root
@@ -55,7 +57,7 @@ Note: Internet Explorer versions 8 and below will not work as they do not have S
         export DATAVIVA_OAUTH_FACEBOOK_ID=
         export DATAVIVA_OAUTH_FACEBOOK_SECRET=
         * export DATAVIVA_ACCOUNTS=True
-        
+
         * only necessary if you want to enable user accounts
 
 7. Handle en/pt subdomains for translations. For example, when testing locally you may add these lines to /etc/hosts
