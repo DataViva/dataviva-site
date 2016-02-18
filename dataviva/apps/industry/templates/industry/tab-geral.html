@@ -56,7 +56,7 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>{{industry.text_profile}}</p>
+        <p>A atividade econômica {{header.name}} é a {{header.ranking}}ª em número de empregados no Brasil, que estão mais concentrados no município de {{body.municipality_with_more_num_jobs_name}}, com {{body.municipality_with_more_num_jobs_value | max_digits(3)}}  {{body.municipality_with_more_num_jobs_value | magnitude}} de empregados. A ocupação com maior número de empregos nessa atividade é a de {{body.occ_with_more_number_jobs_name}}. No total, o Brasil possui {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}} de estabelecimentos que trabalham com {{header.name}}.</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Salário e Emprego</h3>
