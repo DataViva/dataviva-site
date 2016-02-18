@@ -33,7 +33,7 @@ def index(cnae_id):
     body = {}
 
     industry['cnae_id'] = cnae_id
-    
+
     if bra_id == None :
         industry['flag_preview_headers'] = False
         industry['county'] = True # view county where no country
@@ -98,8 +98,8 @@ def index(cnae_id):
             header['ranking'] = index+1
             break        
     
-    industry_service_num_jobs = Industry(cnae_id=cnae_id)
-    header['num_establishments_brazil'] = industry_service_num_jobs.num_establishments()
+    industry_service_num_establishments = Industry(cnae_id=cnae_id)
+    header['num_establishments_brazil'] = industry_service_num_establishments.num_establishments()
 
 
     return render_template('industry/index.html', body_class='perfil-estado', header=header, body=body, industry=industry)
