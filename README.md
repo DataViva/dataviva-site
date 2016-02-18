@@ -1,4 +1,5 @@
 [![Stories in Ready](https://badge.waffle.io/DataViva/dataviva-site.png?label=ready&title=Ready)](https://waffle.io/DataViva/dataviva-site)
+[![Stories in Ready](https://badge.waffle.io/DataViva/dataviva-site.png?label=ready&title=Ready)](https://waffle.io/DataViva/dataviva-site)
 #DataViva
 A Collaborative Planning Tool.
 [dataviva.info](http://www.dataviva.info)
