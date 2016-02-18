@@ -41,7 +41,7 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>{{body["course_description"]}}</p>
+        <p>O maior número de matrículas para {{header["course_name"]}} do Brasil encontra-se no município de {{body["city_name"]}}, com {{body["city_enrolled"]}} alunos. No total, o país possui {{header["course_enrolled"]}} alunos matriculados nesse curso, com turmas médias de {{header["course_average_class_size"]}} alunos.</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Matrículas</h3>
@@ -58,7 +58,7 @@
                                 </td>
                             </tr>
                             <tr>
-                            {% if body["city_enrolled"] %}
+                            {% if body["bra_id"] | length < 9 %}
                                 <th>
                                     Principal Município por Número de Alunos Matriculados
                                 </th>
