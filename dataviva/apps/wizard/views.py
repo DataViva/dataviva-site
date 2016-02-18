@@ -78,3 +78,8 @@ def major_selector():
 @mod.route('/industry_selector/', methods=['GET'])
 def industry_selector():
     return render_template("selectors/industry.html")
+
+
+@mod.route('/university_selector/', methods=['GET'])
+def university_selector():
+    return render_template("selectors/university.html")

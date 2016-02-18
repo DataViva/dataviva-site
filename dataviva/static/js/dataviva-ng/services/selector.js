@@ -4,8 +4,8 @@
     var app = angular.module("dataviva.services.selectors");
 
     app.service('Selectors',[
-            '$http', 'Location', 'Product', 'Industry', 'Major', 'BasicCourse',
-                function ($http, Location, Product, Industry, Major, BasicCourse) {
+            '$http', 'Location', 'Product', 'Industry', 'Major', 'BasicCourse', 'University',
+                function ($http, Location, Product, Industry, Major, BasicCourse, University) {
 
                 return {
                     BasicCourse: BasicCourse,
@@ -13,6 +13,7 @@
                     Location: Location,
                     Major: Major,
                     Product: Product,
+                    University: University,
                 };
     }]);
 }());
