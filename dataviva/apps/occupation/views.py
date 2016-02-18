@@ -27,7 +27,6 @@ def index(occupation_id):
     bra_id = request.args.get('bra_id')
     header = {}
     body = {}
-
     context = {}
 
     header['cbo_id'] = occupation_id
