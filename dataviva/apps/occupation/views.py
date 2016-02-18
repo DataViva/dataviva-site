@@ -28,10 +28,7 @@ def index(occupation_id):
     header = {}
     body = {}
 
-    context = {
-        'text_salario_e_emprego': unicode('Minas Gerais é uma das 27 unidades feder...','utf8'),
-        'text_oportunidades_economicas' : unicode('Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste ','utf8'),
-    }
+    context = {}
 
     header['cbo_id'] = occupation_id
 
