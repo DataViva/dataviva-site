@@ -55,20 +55,20 @@ def index():
     }
 
     body = {
-        'municipality_with_more_exports' : municipalities_service.municipality_with_more_exports(),
-        'highest_export_value' : municipalities_service.highest_export_value(),
-        'municipality_with_more_imports' : municipalities_service.municipality_with_more_imports(),
-        'highest_import_value' : municipalities_service.highest_import_value(),
+        'municipality_with_more_exports': municipalities_service.municipality_with_more_exports(),
+        'highest_export_value': municipalities_service.highest_export_value(),
+        'municipality_with_more_imports': municipalities_service.municipality_with_more_imports(),
+        'highest_import_value': municipalities_service.highest_import_value(),
 
-        'product_with_more_imports' : products_service.product_with_more_imports(),
-        'highest_import_value' : products_service.highest_import_value(),
-        'product_with_more_exports' : products_service.product_with_more_exports(),
-        'highest_export_value' : products_service.highest_export_value(),
-        'product_with_highest_balance' : products_service.product_with_highest_balance(),
-        'highest_balance' : products_service.highest_balance(),
-        'product_with_lowest_balance' : products_service.product_with_lowest_balance(),
-        'lowest_balance' : products_service.lowest_balance(),
-        'world_trade_description' : 'World trade description.',
+        'product_with_more_imports': products_service.product_with_more_imports(),
+        'highest_import_value': products_service.highest_import_value(),
+        'product_with_more_exports': products_service.product_with_more_exports(),
+        'highest_export_value': products_service.highest_export_value(),
+        'product_with_highest_balance': products_service.product_with_highest_balance(),
+        'highest_balance': products_service.highest_balance(),
+        'product_with_lowest_balance': products_service.product_with_lowest_balance(),
+        'lowest_balance': products_service.lowest_balance(),
+        'world_trade_description': 'World trade description.',
     }
 
     for index, trp in enumerate(export_rank):
