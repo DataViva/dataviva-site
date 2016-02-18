@@ -26,6 +26,10 @@ def add_language_code(endpoint, values):
 @mod.route('/<product_id>')
 def index(product_id):
 
+    header = {}
+    body = {}
+
+    header['product_id'] = product_id
     bra_id = request.args.get('bra_id')
 
     #None database fields must be treated (/05?bra_id=2ce020008)
@@ -50,9 +54,6 @@ def index(product_id):
     if bra_id:
         context['bra_id_len'] = len(bra_id)
     context['depth'] = len(product_id)
-
-    header = {}
-    body = {}
 
     trade_partners_service = ProductTradePartnersService(product_id=product_id, bra_id=bra_id)
     municipalities_service = ProductMunicipalitiesService(product_id=product_id, bra_id=bra_id)
