@@ -43,9 +43,6 @@ def index(product_id):
     #bra_id = #None #4mg #4mg01 #4mg0000 #4mg010206 #2ce020008
 
     context = {
-        'background_image':'static/img/bg-profile-location.jpg',
-        'portrait':'static/img/mineric_product.jpg',
-        'desc_general': 'Sample Text',
         'desc_international_trade': 'Sample Text',
         'desc_economic_opp': 'Sample Text'
     }
