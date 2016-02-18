@@ -12,8 +12,7 @@ from sqlalchemy import func, desc
 
 mod = Blueprint('occupation', __name__,
                 template_folder='templates',
-                url_prefix='/<lang_code>/occupation',
-                static_folder='static')
+                url_prefix='/<lang_code>/occupation')
 
 
 @mod.url_value_preprocessor
@@ -33,11 +32,10 @@ def index(occupation_id):
     bra_id = request.args.get('bra_id')
     header = {}
     body = {}
+    context = {}
 
-    context = {
-        'portrait' : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110',
-    }
- 
+    header['cbo_id'] = occupation_id
+
     if len(occupation_id) == 4:
         context['is_family'] = True
     else:
@@ -62,7 +60,7 @@ def index(occupation_id):
     header['total_establishments'] = occupation_service.total_establishments()
     header['year'] = occupation_service.year()
     header['age_avg'] = occupation_service.age_avg()
-    
+
     if context['is_not_municipality']:
 
         body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()
