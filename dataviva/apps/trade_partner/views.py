@@ -3,11 +3,15 @@ from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.secex.services import TradePartner, \
     TradePartnerMunicipalities, TradePartnerProducts
+from dataviva.api.secex.models import Ymw
+from dataviva.api.attrs.models import Wld
+from dataviva import db
+from sqlalchemy.sql.expression import func, desc
 
 mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/trade_partner',
-                static_folder='static')
+                static_folder=static_folder)
 
 
 @mod.url_value_preprocessor
@@ -21,11 +25,24 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
+
     wld_id = 'nausa'
 
     trade_partner_service = TradePartner(wld_id=wld_id)
     municipalities_service = TradePartnerMunicipalities(wld_id=wld_id)
     products_service = TradePartnerProducts(wld_id=wld_id)
+
+    max_year_query = db.session.query(func.max(Ymw.year)).filter_by(wld_id=wld_id)
+    export_rank_query = Ymw.query.join(Wld).filter(
+        Ymw.month == 0,
+        Ymw.year == max_year_query).order_by(Ymw.export_val.desc())
+
+    import_rank_query = Ymw.query.join(Wld).filter(
+        Ymw.month == 0,
+        Ymw.year == max_year_query).order_by(Ymw.import_val.desc())
+
+    export_rank = export_rank_query.all()
+    import_rank = import_rank_query.all()
 
     header = {
         'name': trade_partner_service.country_name(),
@@ -34,7 +51,8 @@ def index():
         'total_exported': trade_partner_service.total_exported(),
         'unity_weight_export_price': trade_partner_service.unity_weight_export_price(),
         'total_imported': trade_partner_service.total_imported(),
-        'unity_weight_import_price': trade_partner_service.unity_weight_import_price()
+        'unity_weight_import_price': trade_partner_service.unity_weight_import_price(),
+        'wld_id': wld_id
     }
 
     body = {
@@ -53,5 +71,15 @@ def index():
         'lowest_balance' : products_service.lowest_balance(),
         'world_trade_description' : 'World trade description.',
     }
+
+    for index, trp in enumerate(export_rank):
+        if export_rank[index].wld_id == 'nausa':
+            header['export_rank'] = index
+            break
+
+    for index, trp in enumerate(import_rank):
+        if import_rank[index].wld_id == 'nausa':
+            header['import_rank'] = index
+            break
 
     return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body)

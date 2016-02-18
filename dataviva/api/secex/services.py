@@ -231,6 +231,10 @@ class Product:
         product_complexity = self.__secex__()
         return product_complexity.pci
 
+    def export_value_growth_in_five_years(self):
+        export_value_growth_in_five_years = self.__secex__()
+        return export_value_growth_in_five_years.export_val_growth_5
+
 
 class ProductTradePartners(Product):
     def __init__(self, product_id, bra_id):
