@@ -65,6 +65,7 @@ def index():
             header['rank'] = index
             break
     
-    return render_template('major/index.html', header=header, content=content, body_class='perfil-estado', static_folder=static_folder)
+    return render_template('major/index.html', header=header, content=content, \
+        body_class='perfil-estado', static_folder=static_folder)
 
 
