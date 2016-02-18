@@ -6,11 +6,11 @@ from dataviva.api.hedu.services import Major, MajorUniversities, MajorMunicipali
 from dataviva import db
 from sqlalchemy.sql.expression import func
 
-
+static_folder = '../../static/img/icons/course_hedu'
 mod = Blueprint('major', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/major',
-                static_folder='static')
+                static_folder=static_folder)
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
@@ -22,11 +22,12 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    major_service = Major(course_hedu_id='523E04')
-    universities_service = MajorUniversities(course_hedu_id='523E04')
-    municipalities_service = MajorMunicipalities(course_hedu_id='523E04')
+    course_hedu_id = '523E04'
+    major_service = Major(course_hedu_id=course_hedu_id)
+    universities_service = MajorUniversities(course_hedu_id=course_hedu_id)
+    municipalities_service = MajorMunicipalities(course_hedu_id=course_hedu_id)
 
-    max_year_query = db.session.query(func.max(Yc_hedu.year)).filter_by(course_hedu_id='523E04')
+    max_year_query = db.session.query(func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
 
     rank_query = Yc_hedu.query.filter(
             Yc_hedu.year == max_year_query,
@@ -40,7 +41,8 @@ def index():
         'entrants' : major_service.entrants(),
         'graduates' : major_service.graduates(),
         'profile' : major_service.profile(),
-        'year' : major_service.year()
+        'year' : major_service.year(),
+        'portrait_id': course_hedu_id[:2]
     }
 
     content = {
@@ -59,10 +61,11 @@ def index():
     }
 
     for index, maj in enumerate(rank):
-        if rank[index].course_hedu_id == '523E04':
+        if rank[index].course_hedu_id == course_hedu_id:
             header['rank'] = index
             break
     
-    return render_template('major/index.html', header=header, content=content, body_class='perfil-estado')
+    return render_template('major/index.html', header=header, content=content, \
+        body_class='perfil-estado', static_folder=static_folder)
 
 

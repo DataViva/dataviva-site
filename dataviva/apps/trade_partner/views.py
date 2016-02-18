@@ -11,7 +11,7 @@ from sqlalchemy.sql.expression import func, desc
 mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/trade_partner',
-                static_folder='static')
+                static_folder=static_folder)
 
 
 @mod.url_value_preprocessor
@@ -51,7 +51,8 @@ def index():
         'total_exported': trade_partner_service.total_exported(),
         'unity_weight_export_price': trade_partner_service.unity_weight_export_price(),
         'total_imported': trade_partner_service.total_imported(),
-        'unity_weight_import_price': trade_partner_service.unity_weight_import_price()
+        'unity_weight_import_price': trade_partner_service.unity_weight_import_price(),
+        'wld_id': wld_id
     }
 
     body = {
