@@ -49,6 +49,7 @@ def index(course_sc_id):
 
 
     body = {
+         'bra_id' : bra_id,
          'school_name' : school_service.school_name(),
          'school_enrolled' : school_service.school_enrolled(),
          'city_name' : city_service.city_name(),
