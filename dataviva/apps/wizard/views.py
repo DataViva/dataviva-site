@@ -59,10 +59,17 @@ def submit_answer():
 def location_selector():
     return render_template("selectors/location.html")
 
+
 @mod.route('/basic_course_selector/', methods=['GET'])
 def basic_course():
     return render_template("selectors/basic_course.html")
 
+
 @mod.route('/product_selector/', methods=['GET'])
 def product_selector():
     return render_template("selectors/product.html")
+
+
+@mod.route('/major_selector/', methods=['GET'])
+def major_selector():
+    return render_template("selectors/major.html")
