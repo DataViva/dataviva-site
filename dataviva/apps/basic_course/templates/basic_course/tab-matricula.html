@@ -26,14 +26,14 @@
                                 <td>
                                     <p class="label">{{body["city_name"]}}</p>
                                     <div class="number">
-                                        <strong class="counter">{{body["city_enrolled"]}}</strong><span> mil</span>
+                                        <strong class="counter">{{body["city_enrolled"] | max_digits(3)}}</strong><span> {{body["city_enrolled"] | magnitude}}</span>
                                     </div>
                                 </td>
                             {% endif %}
                             <td>
                                 <p class="label">{{body["school_name"]}}</p>
                                 <div class="number">
-                                    <strong class="counter">{{body["school_enrolled"]}}</strong><span> mil</span>
+                                    <strong class="counter">{{body["school_enrolled"] | max_digits(3)}}</strong><span> {{body["school_enrolled"] | magnitude}}</span>
                                 </div>
                             </td>
                         </tr>
