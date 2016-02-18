@@ -73,3 +73,8 @@ def product_selector():
 @mod.route('/major_selector/', methods=['GET'])
 def major_selector():
     return render_template("selectors/major.html")
+
+
+@mod.route('/industry_selector/', methods=['GET'])
+def industry_selector():
+    return render_template("selectors/industry.html")

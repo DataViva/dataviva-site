@@ -340,9 +340,9 @@ def dl_csv():
 
 
 @mod.route('/table/<attr>/<depth>/')
-def attrs_table(attr="bra",depth="2"):
+def attrs_table(attr="bra", depth="2"):
     g.page_type = "attrs"
-    data_url = "{0}/attrs/{1}/?depth={2}".format(g.locale, attr,depth)
+    data_url = "{0}/attrs/{1}/?depth={2}".format(g.locale, attr, depth)
     return render_template("general/table.html", data_url=data_url)
 
 
@@ -369,6 +369,8 @@ def collection_by_depth(base, depth=None):
 def location():
 
     depth = request.args.get('depth', None)
+    if not depth:
+        return Response("You must specify a querying parameter!", status=400)
     returned_entries = collection_by_depth(Bra, depth)
 
     return Response(
@@ -382,6 +384,8 @@ def location():
 def product():
 
     depth = request.args.get('depth', None)
+    if not depth:
+        return Response("You must specify a querying parameter!", status=400)
     returned_entries = collection_by_depth(Hs, depth)
 
     return Response(
@@ -395,6 +399,8 @@ def product():
 def basic_course():
 
     depth = request.args.get('depth', None)
+    if not depth:
+        return Response("You must specify a querying parameter!", status=400)
     returned_entries = collection_by_depth(Course_sc, depth)
 
     return Response(
@@ -408,7 +414,23 @@ def basic_course():
 def major():
 
     depth = request.args.get('depth', None)
+    if not depth:
+        return Response("You must specify a querying parameter!", status=400)
     returned_entries = collection_by_depth(Course_hedu, depth)
+    return Response(
+        json.dumps(map(lambda x: x.serialize(), returned_entries)),
+        status=(200 if returned_entries.count() else 404)
+    )
+
+
+@mod.route('/industry/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_industry"))
+def industry():
+
+    depth = request.args.get('depth', None)
+    if not depth:
+        return Response("You must specify a querying parameter!", status=400)
+    returned_entries = collection_by_depth(Cnae, depth)
 
     return Response(
         json.dumps(map(lambda x: x.serialize(), returned_entries)),
