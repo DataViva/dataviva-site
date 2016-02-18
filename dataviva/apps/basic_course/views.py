@@ -33,6 +33,7 @@ def index(course_sc_id):
         school_service = Basic_course_school_by_location(course_sc_id=course_sc_id, bra_id=bra_id)
         city_service = Basic_course_city_by_location(course_sc_id= course_sc_id, bra_id=bra_id)
     else:
+        bra_id = ''
         sc_service = Basic_course(course_sc_id= course_sc_id)
         school_service = Basic_course_school(course_sc_id= course_sc_id)
         city_service = Basic_course_city(course_sc_id= course_sc_id)
@@ -46,7 +47,6 @@ def index(course_sc_id):
         'course_year' : sc_service.course_year(),
         'school_count' : school_service.school_count(),
     }
-
 
     body = {
          'bra_id' : bra_id,
