@@ -46,7 +46,6 @@
                     })
                     .success(function(resp){
                          group.entries = resp;
-                         console.log(group.entries);
                          self.loading = false;
                     });
                 };
