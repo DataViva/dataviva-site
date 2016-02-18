@@ -23,17 +23,15 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/')
-def index():
-
-    course_sc_id = '01006'
-    bra_id = '4mg'
+@mod.route('/<course_sc_id>/<bra_id>')
+def index(course_sc_id, bra_id):
 
     if bra_id:
         sc_service = Basic_course_by_location(course_sc_id= course_sc_id,bra_id=bra_id)
         school_service = Basic_course_school_by_location(course_sc_id=course_sc_id, bra_id=bra_id)
         city_service = Basic_course_city_by_location(course_sc_id= course_sc_id, bra_id=bra_id)
     else:
+        bra_id = None
         sc_service = Basic_course(course_sc_id= course_sc_id)
         school_service = Basic_course_school(course_sc_id= course_sc_id)
         city_service = Basic_course_city(course_sc_id= course_sc_id)
