@@ -26,18 +26,6 @@ from dataviva.translations.translate import translate
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
 
-class LOCATION_DEPTHS:
-    REGION = 1
-    STATE = 3
-    MESOREGION = 5
-    MICROREGION = 7
-    MUNICIPALITY = 9
-
-
-class PRODUCT_DEPTHS:
-    SECTION = 2
-    POSITION = 6
-
 
 def fix_name(attr, lang):
 
@@ -368,6 +356,12 @@ def attrs_search(term=None):
     result = [p.serialize(lang == "pt") for p in profiles]
     ret = jsonify({"activities": result})
     return ret
+
+
+def collection_by_depth(base, depth=None):
+    return db.session.query(base).filter(
+        func.char_length(base.id) == depth
+    )
 
 
 @mod.route('/location/')
