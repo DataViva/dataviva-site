@@ -39,6 +39,7 @@ def index(course_sc_id):
         city_service = Basic_course_city(course_sc_id= course_sc_id)
 
     header = {
+        'course_sc_id' : course_sc_id,
         'course_name' : sc_service.course_name(),
         'course_classes' : sc_service.course_classes(),
         'course_age' : sc_service.course_age(),
