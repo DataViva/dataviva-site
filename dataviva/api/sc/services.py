@@ -27,9 +27,6 @@ class Basic_course:
         course = self.__sc__()
         return course.course_sc.name()
 
-    #def course_description(self):
-    #    return self.__statistics__()['course_description']
-
     def course_classes(self):
         course_classes = self.__sc__()
         return course_classes.classes
@@ -51,9 +48,6 @@ class Basic_course:
     def course_year(self):
         course_year = self.__sc__()
         return course_year.year
-
-    def enrollment_statistics_description(self):
-        return self.__statistics__()['enrollment_statistics_description']
 
 class Basic_course_by_location(Basic_course):
     def __init__(self, course_sc_id, bra_id):
