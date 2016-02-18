@@ -3,12 +3,12 @@
 
     var app = angular.module("dataviva.services.selectors");
 
-    app.service('University',[
+    app.service('TradingPartner',[
         '$http', function ($http) {
 
-            var University = function(selection_callback) {
+            var TradingPartner = function(selection_callback) {
                 var self = this;
-                self.templateUrl = "/en/wizard/university_selector/";
+                self.templateUrl = "/en/wizard/trading_partner_selector/";
                 self.selected_entry = null;
                 self.selection_callback = selection_callback;
 
@@ -19,18 +19,24 @@
                 if(selection_callback) {
                     self.selection_callback = selection_callback;
                 } else {
-                    self.selection_callback = function(id, event) {
+                    self.selection_callback = function(hs_id, event) {
                         window.location = (
                             window.location.protocol + 
                             "//" + 
                             window.location.host + 
-                            "/en/university/" + 
-                            id
+                            "/en/trading_partner/" + 
+                            hs_id
                         );
                     }
                 }
 
-                self.universities = {
+                self.continents = {
+                    depth_factor: 2,
+                    filter_string: '',
+                    entries: []
+                };
+
+                self.countries = {
                     depth_factor: 5,
                     filter_string: '',
                     entries: []
@@ -42,7 +48,7 @@
 
                     $http({
                         method: "GET",
-                        url: "/attrs/university?depth=" + group.depth_factor,
+                        url: "/attrs/trading_partner?depth=" + group.depth_factor,
                     })
                     .success(function(resp){
                          group.entries = resp;
@@ -56,9 +62,9 @@
                 };
 
                 // NOTE: NECESSARY TO LOAD THE FIRST TAB CONTENT UPFRONT
-                self.load_depth_entries(self.universities);
+                self.load_depth_entries(self.continents);
             };
 
-            return University;
+            return TradingPartner;
     }]);
 }());

@@ -466,3 +466,18 @@ def occupation():
         json.dumps(map(lambda x: x.serialize(), returned_entries)),
         status=(200 if returned_entries.count() else 404)
     )
+
+
+@mod.route('/trading_partner/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_trading_partner"))
+def trading_partner():
+
+    depth = request.args.get('depth', None)
+    if not depth:
+        return Response("You must specify a querying parameter!", status=400)
+    returned_entries = collection_by_depth(Wld, depth)
+
+    return Response(
+        json.dumps(map(lambda x: x.serialize(), returned_entries)),
+        status=(200 if returned_entries.count() else 404)
+    )

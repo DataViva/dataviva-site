@@ -88,3 +88,8 @@ def university_selector():
 @mod.route('/occupation_selector/', methods=['GET'])
 def occupation_selector():
     return render_template("selectors/occupation.html")
+
+
+@mod.route('/trading_partner_selector/', methods=['GET'])
+def trading_partner_selector():
+    return render_template("selectors/trading_partner.html")
