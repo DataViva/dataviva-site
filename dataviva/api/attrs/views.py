@@ -375,15 +375,9 @@ def attrs_search(term=None):
 def location():
 
     depth = request.args.get('depth', None)
-    bra_id = request.args.get('bra', None)
-    query = db.session.query(Bra)
-
-    if depth:
-        returned_entries = query.filter(func.char_length(Bra.id) == depth)
-    elif bra_id:
-        returned_entries = query.filter(Bra.id == bra_id)
-    else:
+    if not depth:
         return Response("You must specify a querying parameter!", status=400)
+    returned_entries = collection_by_depth(Bra, depth)
 
     return Response(
         json.dumps(map(lambda x: x.serialize(), returned_entries)),
@@ -396,35 +390,39 @@ def location():
 def product():
 
     depth = request.args.get('depth', None)
-    hs_id = request.args.get('hs', None)
-    query = db.session.query(Hs)
-
-    if depth:
-        returned_entries = query.filter(func.char_length(Hs.id) == depth)
-    elif hs_id:
-        returned_entries = query.filter(Hs.id == hs_id)
-    else:
+    if not depth:
         return Response("You must specify a querying parameter!", status=400)
+    returned_entries = collection_by_depth(Hs, depth)
 
     return Response(
         json.dumps(map(lambda x: x.serialize(), returned_entries)),
         status=(200 if returned_entries.count() else 404)
     )
 
+
 @mod.route('/basic_course/')
 @view_cache.cached(key_prefix=api_cache_key("attrs_basic_course"))
 def basic_course():
 
     depth = request.args.get('depth', None)
-    course_id = request.args.get('course_id', None)
-    query = db.session.query(Course_sc)
-
-    if depth:
-        returned_entries = query.filter(func.char_length(Course_sc.id) == depth)
-    elif course_id:
-        returned_entries = query.filter(Course_sc.id == course_id)
-    else:
+    if not depth:
         return Response("You must specify a querying parameter!", status=400)
+    returned_entries = collection_by_depth(Course_sc, depth)
+
+    return Response(
+        json.dumps(map(lambda x: x.serialize(), returned_entries)),
+        status=(200 if returned_entries.count() else 404)
+    )
+
+
+@mod.route('/industry/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_industry"))
+def industry():
+
+    depth = request.args.get('depth', None)
+    if not depth:
+        return Response("You must specify a querying parameter!", status=400)
+    returned_entries = collection_by_depth(Cnae, depth)
 
     return Response(
         json.dumps(map(lambda x: x.serialize(), returned_entries)),
