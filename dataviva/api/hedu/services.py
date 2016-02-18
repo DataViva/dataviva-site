@@ -110,6 +110,7 @@ class Major:
         self._hedu_sorted_by_enrolled = None
         self._hedu_sorted_by_entrants = None
         self._hedu_sorted_by_graduates = None
+        self._hedu_major_rank = None
 
         self.course_hedu_id = course_hedu_id
 
