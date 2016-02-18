@@ -20,7 +20,7 @@
                         // so we should check
                         var firstTab = $('.nav-tabs li a')[0];
                         if(typeof(firstTab) != "undefined") {
-                            $('.nav-tabs li a')[0].click();
+                            firstTab.click();
                         }
 
                     }, 300);
