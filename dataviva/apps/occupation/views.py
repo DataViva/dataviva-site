@@ -8,8 +8,7 @@ from dataviva.api.rais.services import OccupationActivities
 
 mod = Blueprint('occupation', __name__,
                 template_folder='templates',
-                url_prefix='/<lang_code>/occupation',
-                static_folder='static')
+                url_prefix='/<lang_code>/occupation')
 
 
 @mod.url_value_preprocessor
