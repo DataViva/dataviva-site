@@ -26,8 +26,8 @@
                                 <th>
                                     Município
                                     <small>com maior renda média mensal</small>
-                                </th> 
-                            {% endif %}                           
+                                </th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -45,7 +45,7 @@
                                         USD <strong class="counter">{{ body.municipality_with_more_num_jobs_value | max_digits(3) }}</strong><span>{{ body.municipality_with_more_num_jobs_value | magnitude }}</span>
                                     </div>
                                 </td>
-                            {% endif %}    
+                            {% endif %}
                             <td>
                                 <p class="label">{{ body.occ_with_more_wage_avg_name }}</p>
                                 <div class="number">
