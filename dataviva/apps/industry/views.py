@@ -102,7 +102,10 @@ def index(cnae_id):
     for index, rais in enumerate(list_rais) : 
         if rais.cnae_id == cnae_id :
             header['ranking'] = index+1
-            break 
+            break        
+    
+    industry_service_num_jobs = Industry(cnae_id=cnae_id)
+    header['num_establishments_brazil'] = industry_service_num_jobs.num_establishments()
 
 
     return render_template('industry/index.html', body_class='perfil-estado', header=header, body=body, industry=industry)
