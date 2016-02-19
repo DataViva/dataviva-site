@@ -20,4 +20,4 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    return render_template('partners/index.html')
+    return render_template('partners/index.html', body_class='parceiros')
