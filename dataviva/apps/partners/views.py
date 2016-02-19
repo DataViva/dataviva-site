@@ -21,3 +21,7 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
     return render_template('partners/index.html', body_class='parceiros')
+
+@mod.route('/be-a-partner')
+def be_a_partner():
+    return render_template('partners/be-a-partner.html', body_class='parceiros')
