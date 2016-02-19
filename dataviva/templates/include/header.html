@@ -27,16 +27,16 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pesquise <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="divisor">Recursos básicos</li>
-                        <li><a href="02-pesquisa-publico.html"><i class="fa fa-angle-right"></i> INICIE UMA PESQUISA</a></li>
-                        <li><a href="07-ranking.html"><i class="fa fa-angle-right"></i> VISUALIZE RANKINGS</a></li>
+                        <li><a href="inicie-uma-pesquisa"><i class="fa fa-angle-right"></i> INICIE UMA PESQUISA</a></li>
+                        <li><a href="{{ url_for('rankings.index') }}"><i class="fa fa-angle-right"></i> VISUALIZE RANKINGS</a></li>
                         <li role="separator" class="divider"></li>
                         <li class="divisor">Recursos avançados</li>
-                        <li><a href="22-construa-graficos.html"><i class="fa fa-angle-right"></i> CONSTRUA GRÁFICOS</a></li>
-                        <li><a href="18-download-banco-dados2.html"><i class="fa fa-angle-right"></i> DOWNLOAD DE BANCO DE DADOS</a></li>
+                        <li><a href="{{ url_for('build_graph.index') }}"><i class="fa fa-angle-right"></i> CONSTRUA GRÁFICOS</a></li>
+                        <li><a href="{{ url_for('data_download.index') }}"><i class="fa fa-angle-right"></i> DOWNLOAD DE BANCO DE DADOS</a></li>
                     </ul>
                 </li>
-                <li><a href="15-parcerias.html">Parcerias</a></li>
-                <li><a href="21-ajuda.html">Ajuda</a></li>
+                <li><a href="{{ url_for('partners.index') }}">Parcerias</a></li>
+                <li><a href="{{ url_for('help.index') }}">Ajuda</a></li>
 
             </ul>
             <div class="nav navbar-nav navbar-right">
