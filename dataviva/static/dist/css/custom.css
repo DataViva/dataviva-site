@@ -490,6 +490,9 @@ footer.main .sub-menu > li:not(:last-child) {
   color: #5a9dc4;
   cursor: pointer;
 }
+.mod-explore .item a p{
+  text-align: center;
+}
 .mod-explore .item img {
   background: #FFF;
   border: none;
