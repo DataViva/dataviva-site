@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g
+from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.sc.services import Basic_course, Basic_course_by_location, Basic_course_school, Basic_course_school_by_location, Basic_course_city, Basic_course_city_by_location
 from dataviva.api.attrs.models import School, Bra, Course_sc
@@ -23,15 +23,17 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/<course_sc_id>/<bra_id>')
-def index(course_sc_id, bra_id):
+@mod.route('/<course_sc_id>')
+def index(course_sc_id):
+
+    bra_id = request.args.get('bra_id')
 
     if bra_id:
         sc_service = Basic_course_by_location(course_sc_id= course_sc_id,bra_id=bra_id)
         school_service = Basic_course_school_by_location(course_sc_id=course_sc_id, bra_id=bra_id)
         city_service = Basic_course_city_by_location(course_sc_id= course_sc_id, bra_id=bra_id)
     else:
-        bra_id = None
+        bra_id = ''
         sc_service = Basic_course(course_sc_id= course_sc_id)
         school_service = Basic_course_school(course_sc_id= course_sc_id)
         city_service = Basic_course_city(course_sc_id= course_sc_id)
@@ -46,8 +48,8 @@ def index(course_sc_id, bra_id):
         'school_count' : school_service.school_count(),
     }
 
-
     body = {
+         'bra_id' : bra_id,
          'school_name' : school_service.school_name(),
          'school_enrolled' : school_service.school_enrolled(),
          'city_name' : city_service.city_name(),
