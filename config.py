@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import os
-from werkzeug.contrib.cache import RedisCache
-from redis import Redis, ConnectionError
 
 '''
     Used for finding environment variables through configuration
     if a default is not given, the site will raise an exception
 '''
+
+
 def get_env_variable(var_name, default=-1):
     try:
         return os.environ[var_name]
@@ -32,7 +32,7 @@ SQLALCHEMY_ECHO = True
 GZIP_DATA = get_env_variable("DATAVIVA_GZIP_DATA", True)
 
 ''' Whether or not to allow User Account Activity '''
-ACCOUNTS = get_env_variable("DATAVIVA_ACCOUNTS",True)
+ACCOUNTS = get_env_variable("DATAVIVA_ACCOUNTS", True)
 
 '''
     Details for connecting to the database, credentials set as environment
@@ -78,15 +78,16 @@ FACEBOOK_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_SECRET")
 '''
     Mail credentials to send automatic emails to users
 '''
-MAIL_SERVER = get_env_variable("DATAVIVA_MAIL_SERVER",'smtp.gmail.com')
-MAIL_PORT = get_env_variable("DATAVIVA_MAIL_PORT",465)
-MAIL_USE_TLS = get_env_variable("DATAVIVA_MAIL_USE_TLS",False)
-MAIL_USE_SSL = get_env_variable("DATAVIVA_MAIL_USE_SSL",True)
+MAIL_SERVER = get_env_variable("DATAVIVA_MAIL_SERVER", 'smtp.gmail.com')
+MAIL_PORT = get_env_variable("DATAVIVA_MAIL_PORT", 465)
+MAIL_USE_TLS = get_env_variable("DATAVIVA_MAIL_USE_TLS", False)
+MAIL_USE_SSL = get_env_variable("DATAVIVA_MAIL_USE_SSL", True)
 MAIL_USERNAME = get_env_variable("DATAVIVA_MAIL_USERNAME",'datavivaweb@gmail.com')
-MAIL_PASSWORD = get_env_variable("DATAVIVA_MAIL_PASSWORD","")
+MAIL_PASSWORD = get_env_variable("DATAVIVA_MAIL_PASSWORD", "")
 
 
 '''
     Administrator email
 '''
 ADMINISTRATOR_EMAIL = 'contato@dataviva.info'
+DEBUG = True

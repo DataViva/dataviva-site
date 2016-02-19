@@ -1,0 +1,110 @@
+<div class="institucional search">
+    <h2>Escolha um setor industrial da lista abaixo ou busque pelo nome</h2>
+    <form class="form-dataviva form-inline filter">
+        
+        <ul class="btn-group nav nav-tabs" role="tablist">
+            <li><a href="#classes" aria-controls="classes" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.classes)">
+            Classes
+            </a></li>
+            <li><a href="#divisions" aria-controls="divisions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.divisions)">
+            Divisões
+            </a></li>
+            <li><a href="#sections" aria-controls="sections" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.sections)">
+            Secões
+            </a></li>
+        </ul>
+        
+        <div class="search-items tab-content">
+            <!-- TAB: classes -->
+            <div role="tabpanel" class="tab-pane search-items" id="classes">
+                <div class="form-group">
+                    <i class="fa fa-search"></i>
+                    <input type="text"
+                    name="classes_filter"
+                    class="busca form-control"
+                    ng-model="selector_model.classes.filter_string"
+                    ng-trim="true"
+                    autocomplete="false" />
+                </div>
+                <div class="list-group list-stripped selector-list">
+                    <div class="loading" ng-show="selector_model.loading"></div>
+                    <div ng-repeat="ind in selector_model.classes.entries|filter:selector_model.classes.filter_string" class="list-group-item col-md-15" ng-class="{'selected': ind.id == selector_model.selected_entry }">
+                        <div class="col-md-1 hidden-xs hidden-sm">
+                            <img src="{$ ind.icon $}" class="flag-icon symbol"/>
+                        </div>
+                        <div class="col-md-10">
+                            {$ ind.name $}<BR>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="btn btn-default"
+                                 ng-click="selector_model.select(ind.id, $event)">Select</div>
+                        </div>
+                    </div>
+                </div>
+            
+                
+            </div>
+            <!-- TAB: divisions -->
+            <div role="tabpanel" class="tab-pane search-items" id="divisions">
+                <div class="form-group">
+                    <i class="fa fa-search"></i>
+                    <input type="text"
+                    name="divisions_filter"
+                    class="busca form-control"
+                    ng-model="selector_model.divisions.filter_string"
+                    ng-trim="true"
+                    autocomplete="false" />
+                </div>
+                
+                <div class="list-group list-stripped selector-list col-md-15">
+                    <div class="loading" ng-show="selector_model.loading"></div>
+                    <div ng-repeat="ind in selector_model.divisions.entries | filter:selector_model.divisions.filter_string"
+                         ng-class="{'selected': ind.id == selector_model.selected_entry }"
+                         class="list-group-item col-md-15">
+                            <div class="col-md-1 hidden-xs hidden-sm">
+                                <img src="{$ ind.icon $}" class="flag-icon symbol"/>
+                            </div>
+                            <div class="col-md-10">
+                                {$ ind.name $}
+                            </div>
+                        <div class="col-md-3">
+                            <div class="btn btn-default" 
+                                 ng-click="selector_model.select(ind.id, $event)">Select</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- TAB: sections -->
+            <div role="tabpanel" class="tab-pane search-items" id="sections">
+                <div class="form-group">
+                    <i class="fa fa-search"></i>
+                    <input type="text"
+                    name="sections_filter"
+                    class="busca form-control"
+                    ng-model="selector_model.sections.filter_string"
+                    ng-trim="true"
+                    autocomplete="false" />
+                </div>
+                <div class="list-group list-stripped selector-list col-md-15">
+                    <div class="loading" ng-show="selector_model.loading"></div>
+                    <div ng-repeat="ind in selector_model.sections.entries | filter:selector_model.sections.filter_string"
+                         ng-class="{'selected': ind.id == selector_model.selected_entry }"
+                         class="list-group-item col-md-15">
+                            <div class="col-md-1 hidden-xs hidden-sm">
+                                <img src="{$ ind.icon $}" class="flag-icon symbol"/>
+                            </div>
+                            <div class="col-md-10">
+                                {$ ind.name $}
+                            </div>
+                        <div class="col-md-3">
+                            <div class="btn btn-default" 
+                                 ng-click="selector_model.select(ind.id, $event)">Select</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </form>
+</div>

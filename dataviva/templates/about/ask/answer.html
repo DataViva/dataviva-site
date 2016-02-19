@@ -1,0 +1,240 @@
+<!-- extend from about base layout -->
+{% extends "about.html" %}
+
+{% block title %}: {{question.question}}{% endblock %}
+
+{% block about_content %}
+
+  {% with q = question %}
+
+    <!-- Display question -->
+    <div class="decision short answer">
+
+      <!-- Show vote count and buttons -->
+      <div class="vote_block answer">
+        <div class="vote_count">{% if q.votes.all()|length %}{{ q.votes.count() }}{% else %}0{% endif %}</div>
+        <div class="vote_label">
+          {% if q.votes.all()|length == 1 %}
+            {% trans %}Point{% endtrans %}
+          {% else %}
+            {% trans %}Points{% endtrans %}
+          {% endif %}
+        </div>
+        <a class="vote_up alt_tooltip" style="color: {% if q.vote == True %}green{% else %}#ccc{% endif %}" href="{{ url_for('ask.question_vote', slug=q.slug) }}" alt="{% trans %}This question contributes to a better understanding of the topic.{% endtrans %}">
+          <i class="fa fa-thumbs-up"></i>
+        </a>
+      </div>
+
+      <h1>{{ q.question }}</h1>
+    </div>
+
+    <div class="question_info active">
+
+      <!-- Body (clarification for question) -->
+      {% if q.body %}
+        <p class="question_body">{{ q.body|safe }}</p>
+      {% endif %}
+
+      <!-- Answer -->
+      <p class="question_answer">
+        {% if q.status_notes %}
+          {{ q.status_notes|safe }}
+        {% else %}
+          {% trans %}Sabrina has not answered this question yet. Feel free to start the conversation below.{% endtrans %}
+        {% endif %}
+      </p>
+
+      <!-- Question metadata -->
+      <p class="question_attr">
+        {% if q.user.role == 0 or (q.timestamp != None and q.user.role == 1) %}{% trans %}Asked{% endtrans %} {% if q.user.role == 0 %}{% trans %}by{% endtrans %} <a href="{{ url_for('account.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a>{% endif %} {% if q.timestamp != None %}{{ moment_js(q.timestamp).fromNow() }}{% endif %}{% endif %}
+      </p>
+
+      {% if q.status_notes %}
+        <div id="sabrina_head"></div>
+      {% endif %}
+
+    </div>
+
+    {% if q.replies.all()|length %}
+      <!-- The responses -->
+      <div class="reply_box">
+        <h2>{% trans %}Comments{% endtrans %}</h2>
+      </div>
+
+      {% for r in q.replies %}
+      	{% if r.hidden < 2 %}
+	        <div class="reply_box comment{% if r.id != r.parent_id %} child{% endif %}">
+
+	          <!-- Voting -->
+	          <div class="vote_block answer">
+	            <div class="vote_count">{% if r.votes.all()|length %}{{ r.votes.count() }}{% else %}0{% endif %}</div>
+	            <div class="vote_label">{% trans %}Points{% endtrans %}</div>
+	            <a class="vote_down alt_tooltip" style="color: {% if r.flagged() %}red{% else %}#333{% endif %}" href="{{ url_for('ask.reply_flag', id=r.id) }}" alt="{% trans %}Flagged replies are reviewed by DataViva staff to determine if they violate community guidelines. Accounts are penalized for violations and can lead to account termination.{% endtrans %}">
+	              <i class="fa fa-flag"></i>
+	            </a>
+	            <a class="vote_up alt_tooltip" style="color: {% if r.voted() %}green{% else %}#333{% endif %}" href="{{ url_for('ask.reply_vote', id=r.id) }}" alt="{% trans %}This question contributes to a better understanding of the topic.{% endtrans %}">
+	              <i class="fa fa-thumbs-up"></i>
+	            </a>
+	          </div> <!-- end voting -->
+
+	          <div class="reply_body">
+	          <!-- Reply text -->
+	            {% if r.hidden == 1%}
+	              <i>{% trans %}This reply has been flagged as inappropriate and hidden by an administrator.{% endtrans %}</i>
+	            {% else %}
+	              {{ r.body|safe }}
+	            {% endif %}
+	            <!-- User metadata -->
+	            <p class="question_attr">
+	              <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a>{% if r.timestamp != None %} {{ moment_js(r.timestamp).fromNow() }}{% endif %}
+	            </p>
+	          <!-- end reply text -->
+
+	          {% if r.id == r.parent_id %}
+	            <div class="leave_response decision short icon reply" data-parent="{{r.parent_id}}">{% trans %}Respond to{% endtrans %} {{r.user.fullname}}</div>
+	            </div><div class="reply_area">
+	          {% endif %}
+	          </div>
+
+	        </div> <!-- end reply -->
+	     {% endif %}
+      {% endfor %}
+
+    {% endif %}
+
+  {% endwith %}
+
+  <!-- Leave another response (not to a specify reply but in general) -->
+  <div id="new_response" class="reply_box">
+    <h2>{% trans %}New Comment{% endtrans %}</h2>
+    <div>
+    <div class="decision short icon reply leave_response" style="display: none;">{% trans %}Leave a Response{% endtrans %}</div>
+    </div>
+    <div class="reply_area">
+      <form class="reply_form" action="" method="post" name="login">
+        <!-- Reply form for the page that will be moved around-->
+
+        {{ reply_form.hidden_tag() }}
+
+        <!-- Reply texterea box -->
+        <p>
+          {{ reply_form.reply(class="reply", id="wysiwyg_textarea", placeholder="Enter your text...") }}
+
+          <!-- Errors! -->
+          {% for error in reply_form.errors.reply %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+        </p>
+
+        <!-- Submit button -->
+        <a href="#" class="submit">
+          <div class="decision short icon reply">
+            {% trans %}Reply{% endtrans %}
+          </div>
+        </a>
+
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block js %}
+
+  <script src="/static/js/libs/jquery-2.0.3.min.js"></script>
+  <script src="/static/js/libs/redactor.min.js"></script>
+  <script src="/static/js/libs/pt_br.js"></script>
+  <script>
+
+    // Initialize redactor wysiwyg textarea
+    $(document).ready(function() {
+
+    	var buttons = ['bold', 'italic', 'underline', 'deleted', '|', 'link']
+    	$('#wysiwyg_textarea').redactor({
+    		// focus: true // scrolls page to this textarea
+    		buttons: buttons,
+    		lang: "{{g.locale}}"
+    	});
+
+    });
+
+    // show/hide reply form
+    d3.selectAll("div.leave_response").on("click", function(){
+
+    	d3.selectAll("div.leave_response").style("display", "block")
+    	var reply_form = d3.select(".reply_form").node()
+      this.parentNode.parentNode.getElementsByClassName("reply_area")[0].appendChild(reply_form)
+    	d3.select(this).style("display", "none")
+
+    	// set the hidden parent input
+  		d3.select("input#parent").node().value = d3.select(this).attr("data-parent")
+    })
+
+    // submit form
+    d3.selectAll(".reply_form .submit").on(d3plus.client.pointer.click, function(){
+    	this.parentNode.submit()
+    	d3.event.preventDefault();
+    })
+
+    // Voting!
+    d3.selectAll(".vote_up").on("click", function(){
+    	var link_el = this;
+      d3.select(link_el).select("i").attr("class","fa fa-cog fa-spin")
+    	d3.json(link_el.href, function(resp){
+        d3.select(link_el).select("i").attr("class","fa fa-thumbs-up")
+    		if(resp.error) {
+    			dataviva.flash(resp.error)
+    		}
+    		else {
+    			d3.select(link_el.parentNode).select(".vote_count").text(function(){
+    				var new_count = 1
+    				if(d3.select(this).text()){
+    					new_count = parseInt(d3.select(this).text(), 10) + parseInt(resp.success);
+    				}
+    				return new_count;
+    			})
+    			// a new vote was added
+    			if(parseInt(resp.success) > 0){
+    				d3.select(link_el).style("color", "green")
+    				dataviva.flash(dataviva.format.text("voted"))
+    			}
+    			// user had already voted so it was removed
+    			else {
+            if (link_el.href.indexOf("reply") > 0) var c = "#333"
+            else var c = "#ccc"
+    				d3.select(link_el).style("color", c)
+    				dataviva.flash(dataviva.format.text("unvoted"))
+    			}
+    		}
+    	})
+    	d3.event.preventDefault();
+    })
+
+    // Flagging :(
+    d3.selectAll(".vote_down").on("click", function(){
+    	var link_el = this;
+      d3.select(link_el).select("i").attr("class","fa fa-cog fa-spin")
+    	d3.json(link_el.href, function(resp){
+        d3.select(link_el).select("i").attr("class","fa fa-flag")
+    		if(resp.error) {
+    			dataviva.flash(resp.error)
+    		}
+    		else {
+    			// item was able to be flagged
+    			if(parseInt(resp.success) > 0){
+    				d3.select(link_el).style("color", "#be1e2d")
+    				dataviva.flash(dataviva.format.text("flagged"))
+    			}
+    			// item was not able to be flagged
+    			else {
+    				d3.select(link_el).style("color", "#333")
+    				dataviva.flash(dataviva.format.text("unflagged"))
+    			}
+    		}
+    	})
+    	d3.event.preventDefault();
+    })
+
+  </script>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="01-index.html">Home</a></li>
+        <li><a href="#">Atividade Econômica</a></li>
+        <li class="active"><span>Teleatendimento<span></span></span></li>
+    </ol>
+    <div class="tit-area" style="background-image: url('/static/img/bgs/bg-pattern-dots.png')">
+        <div class="row">
+            <div class="col-xs-15 col-md-offset-4 col-md-11">
+                <h1>
+                    {{header.name}} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="sidebar has-img col-xs-15 col-md-4">
+            <iframe src="/static/img/icons/cnae/cnae_{{industry.cnae_id[0]}}.png" width="200" height="150" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
+            <ul class="nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
+                </li>
+                <li role="presentation">
+                    <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab">Salário e emprego</a>
+                </li>
+
+                {% if industry.class %}    
+                    <li role="presentation">
+                        <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidade Econômica</a>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </div>
+        <div class="main-content col-xs-15 col-md-11">
+            <div class="tab-content">
+                {% include "industry/tab-geral.html" %}
+                {% include "industry/tab-salario-emprego.html" %}
+                {% include "industry/tab-oportunidade-economica.html" %}
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
