@@ -1,6 +1,6 @@
-{% extends 'base/base.html' %}
+{% extends 'base.html' %}
 
-{% block main_content %}
+{% block content %}
 <div class="mod mod-two-columns">
     <div class="container">
         <div class="row">
@@ -47,77 +47,80 @@
         </div>
         <div class="row">
             <div class="col-xs-15 col-sm-7 col-md-offset-1 col-md-2 item">
-                <a href="02-pesquisa-publico.html?open-modal=modal-dataviva-localidade"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
+                <a href="#" onclick="start_selector('Location');">
+                <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
                     <span>Localidades Brasileiras</span>
                     <img src="/static/img/icons/categories/ico-search-localidades.png" />
                 </p></a>
             </div>
             <div class="col-xs-15 col-sm-7 col-md-2 item">
-                <a href="12-13-perfil-ocupacoes.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
+                <a href="#" onclick="start_selector('Occupation');">
+                <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
                     <span>Ocupações</span>
                     <img src="/static/img/icons/categories/ico-search-ocupacoes.png" />
                 </p></a>
             </div>
             <div class="col-xs-15 col-sm-7 col-md-2 item">
-                <a href="12-13-perfil-atividade-economica2.html">
-                    <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Atividades Econômicas</span>
-                        <img src="/static/img/icons/categories/ico-search-atividades.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <a href="12-13-perfil-produtos.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Produtos</span>
-                        <img src="/static/img/icons/categories/ico-search-produtos.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <a href="05-perfil-estado.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Parceiros Comerciais do Brasil</span>
-                        <img src="/static/img/icons/categories/ico-search-parceiros.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <a href="02-pesquisa-publico.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Universidades</span>
-                        <img src="/static/img/icons/categories/ico-search-universidades.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <a href="12-13-perfil-cursos.html"><span>Cursos do Ensino Superior</span>
-                        <img src="/static/img/icons/categories/ico-search-curso-superior.png" />
-                    </p></a>
-                </div>
+                <a href="#" onclick="start_selector('Industry');">
+                <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
+                    <span>Atividades Econômicas</span>
+                    <img src="/static/img/icons/categories/ico-search-atividades.png" />
+                </p></a>
             </div>
-            <div class="row">
-                <div class="col-xs-15 col-sm-7 col-md-offset-4 col-md-2 item">
-                    <a href="12-13-perfil-cursos-basicos.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Curso Básico e Ensino Técnico</span>
-                        <img src="/static/img/icons/categories/ico-search-curso-basico1.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <a href="12-13-perfil-cursos-basicos.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Curso Básico e Ensino Técnico</span>
-                        <img src="/static/img/icons/categories/ico-search-curso-basico2.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <a href="12-13-perfil-saude.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Saúde Pública</span>
-                        <img src="/static/img/icons/categories/ico-search-saude.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <a href="06-perfil-comercio.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Pequenas e Médias Empresas</span>
-                        <img src="/static/img/icons/categories/ico-search-pme.png" />
-                    </p></a>
-                </div>
+            <div class="col-xs-15 col-sm-7 col-md-2 item">
+                <a href="#" onclick="start_selector('Product');">
+                <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
+                    <span>Produtos</span>
+                    <img src="/static/img/icons/categories/ico-search-produtos.png" />
+                </p></a>
+            </div>
+            <div class="col-xs-15 col-sm-7 col-md-2 item">
+                <a href="#" onclick="start_selector('TradePartner');">
+                <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
+                    <span>Parceiros Comerciais do Brasil</span>
+                    <img src="/static/img/icons/categories/ico-search-parceiros.png" />
+                </p></a>
+            </div>
+            <div class="col-xs-15 col-sm-7 col-md-2 item">
+                <a href="#" onclick="start_selector('University');">
+                <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
+                    <span>Universidades</span>
+                    <img src="/static/img/icons/categories/ico-search-universidades.png" />
+                </p></a>
+            </div>
+            <div class="col-xs-15 col-sm-7 col-md-2 item">
+                <a href="#" onclick="start_selector('Major');">
+                <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
+                    <span>Cursos do Ensino Superior</span>
+                    <img src="/static/img/icons/categories/ico-search-curso-superior.png" />
+                </p></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-15 col-sm-7 col-md-offset-4 col-md-2 item">
+                <a href="#" onclick="start_selector('BasicCourse');">
+                <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
+                    <span>Curso Básico e Ensino Técnico</span>
+                    <img src="/static/img/icons/categories/ico-search-curso-basico1.png" />
+                </p></a>
+            </div>
+            <div class="col-xs-15 col-sm-7 col-md-2 item">
+                <a href="#">
+                <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
+                    <span>Saúde Pública</span>
+                    <img src="/static/img/icons/categories/ico-search-saude.png" />
+                </p></a>
+            </div>
+            <div class="col-xs-15 col-sm-7 col-md-2 item">
+                <a href="#">
+                <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
+                    <span>Pequenas e Médias Empresas</span>
+                    <img src="/static/img/icons/categories/ico-search-pme.png" />
+                </p></a>
             </div>
         </div>
     </div>
+
     <div class="mod mod-join">
         <div class="container text-center">
             <h2>Junte-se a milhares de pessoas que usam o Dataviva</h2>
@@ -126,5 +129,6 @@
             <h2>O DataViva na mídia</h2>
             <img src="/static/img/public_appearances.png" alt="O DataViva na mídia" class="img-responsive" />
         </div>
+    </div>
 </div>
-{% endblock main_content %}
+{% endblock content %}

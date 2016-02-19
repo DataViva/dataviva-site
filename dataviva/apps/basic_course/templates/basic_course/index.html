@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-xs-15 col-md-offset-4 col-md-11">
                 <h1>
-                    {{basic_course_statistics["course_name"]}} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
+                    {{header["course_name"]}} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
                 </h1>
             </div>
         </div>
@@ -27,13 +27,13 @@
                 </li>
                 <li role="presentation">
                     <a href="#matricula" aria-controls="matricula" role="tab" data-toggle="tab">Matrícula</a>
-                </li>                
+                </li>
             </ul>
         </div>
         <div class="main-content col-xs-15 col-md-11">
             <div class="tab-content">
                 {% include "basic_course/tab-geral.html" %}
-                {% include "basic_course/tab-matricula.html" %}                
+                {% include "basic_course/tab-matricula.html" %}
             </div>
         </div>
     </div>

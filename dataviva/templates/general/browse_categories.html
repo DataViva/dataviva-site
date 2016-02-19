@@ -1,6 +1,6 @@
-{% extends "base/base.html" %}
+{% extends "base.html" %}
 
-{% block main_content %}
+{% block content %}
 <div class="container">
     <ol class="breadcrumb">
         <li><a href="01-index.html">Home</a></li>
@@ -22,7 +22,7 @@
                     <h2 class="text-center">Selecione um perfil para começar:</h2>
                     <div class="row">
                         <div class="col-xs-15 col-sm-5 item">
-                            <a onclick="fire_wizard('locations')">
+                            <a onclick="fire_wizard('entrepreneur')">
 
                                 <img src="/static/img/icons/categories/ico-empresario.png" class="pull-left" />
                                 <span>Empreendedor</span>
@@ -48,7 +48,7 @@
                 <h3 class="text-center">... ou pesquise por:</h3>
                 <div class="row">
                     <div class="col-xs-15 col-sm-5 item">
-                        <a href="#" data-toggle="modal" data-target="#modal-dataviva-wizard">
+                        <a onclick="start_selector('Location')">
                             <span class="pull-left">Localidades Brasileiras</span>
                             <img src="/static/img/icons/categories/ico-search-localidades.png" class="pull-right" />
                             <div class="clearfix"></div>
@@ -56,7 +56,7 @@
                         </a>
                     </div>
                     <div class="col-xs-15 col-sm-5 item">
-                        <a href="#" data-toggle="modal" data-target="#modal-dataviva-wizard">
+                        <a onclick="start_selector('Occupation')">
                             <span class="pull-left">Ocupações</span>
                             <img src="/static/img/icons/categories/ico-search-ocupacoes.png" class="pull-right" />
                             <div class="clearfix"></div>
@@ -64,7 +64,7 @@
                         </a>
                     </div>
                     <div class="col-xs-15 col-sm-5 item">
-                        <a href="#" data-toggle="modal" data-target="#modal-dataviva-wizard">
+                        <a onclick="start_selector('Industry')">
                             <span class="pull-left">Atividades Econômicas</span>
                             <img src="/static/img/icons/categories/ico-search-atividades.png" class="pull-right" />
                             <div class="clearfix"></div>
@@ -72,7 +72,7 @@
                         </a>
                     </div>
                     <div class="col-xs-15 col-sm-5 item">
-                        <a href="#" data-toggle="modal" data-target="#modal-dataviva-wizard">
+                        <a onclick="start_selector('Product')">
                             <span class="pull-left">Produtos</span>
                             <img src="/static/img/icons/categories/ico-search-produtos.png" class="pull-right" />
                             <div class="clearfix"></div>
@@ -80,7 +80,7 @@
                         </a>
                     </div>
                     <div class="col-xs-15 col-sm-5 item">
-                        <a href="#" data-toggle="modal" data-target="#modal-dataviva-wizard">
+                        <a onclick="start_selector('TradingPartner')">
                             <span class="pull-left">Parceiros Comerciais</span>
                             <img src="/static/img/icons/categories/ico-search-parceiros.png" class="pull-right" />
                             <div class="clearfix"></div>
@@ -88,7 +88,7 @@
                         </a>
                     </div>
                     <div class="col-xs-15 col-sm-5 item">
-                        <a href="#" data-toggle="modal" data-target="#modal-dataviva-wizard">
+                        <a onclick="start_selector('University')">
                             <span class="pull-left">Universidades</span>
                             <img src="/static/img/icons/categories/ico-search-universidades.png" class="pull-right" />
                             <div class="clearfix"></div>
@@ -96,7 +96,7 @@
                         </a>
                     </div>
                     <div class="col-xs-15 col-sm-5 item">
-                        <a href="#" data-toggle="modal" data-target="#modal-dataviva-wizard">
+                        <a onclick="start_selector('Major')">
                             <span class="pull-left">Cursos Ensino Superior</span>
                             <img src="/static/img/icons/categories/ico-search-curso-superior.png" class="pull-right" />
                             <div class="clearfix"></div>
@@ -104,7 +104,7 @@
                         </a>
                     </div>
                     <div class="col-xs-15 col-sm-5 item">
-                        <a href="#" data-toggle="modal" data-target="#modal-dataviva-wizard">
+                        <a onclick="start_selector('BasicCourse')">
                             <span class="pull-left">Cursos Básicos</span>
                             <img src="/static/img/icons/categories/ico-search-curso-basico1.png" class="pull-right" />
                             <div class="clearfix"></div>
@@ -112,7 +112,7 @@
                         </a>
                     </div>
                     <div class="col-xs-15 col-sm-5 item">
-                        <a href="#" data-toggle="modal" data-target="#modal-dataviva-wizard">
+                        <a onclick="start_selector('Location')">
                             <span class="pull-left">Saúde</span>
                             <img src="/static/img/icons/categories/ico-search-saude.png" class="pull-right" />
                             <div class="clearfix"></div>
@@ -124,4 +124,4 @@
         </div>
     </div>
 </div>
-{% endblock main_content %}
+{% endblock content %}
