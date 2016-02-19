@@ -457,6 +457,7 @@ footer.main .sub-menu > li:not(:last-child) {
   display: block;
   text-align: left;
   white-space: normal;
+  min-height: 30px;
 }
 .mod-datainfo .smaller .item .label {
   font-size: 11px;
@@ -489,6 +490,9 @@ footer.main .sub-menu > li:not(:last-child) {
 .mod-explore .item {
   color: #5a9dc4;
   cursor: pointer;
+}
+.mod-explore .item a p{
+  text-align: center;
 }
 .mod-explore .item img {
   background: #FFF;
@@ -1138,6 +1142,7 @@ table.data-2-columns > tbody td .label {
   padding: 0;
   text-align: left;
   text-transform: uppercase;
+  white-space: normal;
 }
 table.data-2-columns > tbody td span {
   display: block;
