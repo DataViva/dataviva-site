@@ -457,6 +457,7 @@ footer.main .sub-menu > li:not(:last-child) {
   display: block;
   text-align: left;
   white-space: normal;
+  min-height: 30px;
 }
 .mod-datainfo .smaller .item .label {
   font-size: 11px;
@@ -1138,6 +1139,7 @@ table.data-2-columns > tbody td .label {
   padding: 0;
   text-align: left;
   text-transform: uppercase;
+  white-space: normal;
 }
 table.data-2-columns > tbody td span {
   display: block;
