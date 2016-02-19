@@ -18,14 +18,15 @@
 
 
 fire_wizard = function(session_name) {
-    $("#modal-wizard").modal();
+    $("#modal-wizard").modal();    
+    $(".wiz-selector-area").empty();
     var el = document.getElementById('wizcont');
     angular.element(el).scope().start_session(session_name);
 };
 
 start_selector = function(selector_name, selection_callback) {
     $("#modal-selector").modal();
-    $(".selector-area").empty();
     var el = document.getElementById('selectorCont');
+    $(".selector-area").empty();
     angular.element(el).scope().initialize(selector_name, selection_callback);
 };
