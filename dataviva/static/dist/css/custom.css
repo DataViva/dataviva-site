@@ -127,6 +127,9 @@ footer.main .sub-menu > li:not(:first-child) {
 footer.main .sub-menu > li:not(:last-child) {
   margin-bottom: 15px;
 }
+.modal-title{
+  font-weight: bold;
+}
 .form-dataviva input,
 .form-dataviva textarea {
   border-color: #5a9dc4;

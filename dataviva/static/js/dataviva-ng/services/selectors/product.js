@@ -8,6 +8,9 @@
 
             var Product = function(selection_callback) {
                 var self = this;
+
+                self.title = "Produtos";
+
                 self.templateUrl = "/en/wizard/product_selector/";
                 self.selected_entry = null;
                 self.selection_callback = selection_callback;

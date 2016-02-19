@@ -8,6 +8,9 @@
 
             var Industry = function(selection_callback) {
                 var self = this;
+
+                self.title = "Atividades Econômicas";
+
                 self.templateUrl = "/en/wizard/industry_selector/";
                 self.selected_entry = null;
                 self.selection_callback = selection_callback;

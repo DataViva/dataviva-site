@@ -8,6 +8,9 @@
 
             var Location = function(selection_callback) {
                 var self = this;
+
+                self.title = "Localidades Brasileiras";
+
                 self.templateUrl = "/en/wizard/location_selector/";
                 self.selected_entry = null;
 

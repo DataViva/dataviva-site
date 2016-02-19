@@ -8,6 +8,9 @@
 
             var BasicCourse = function(selection_callback) {
                     var self = this;
+
+                    self.title = "Cursos Básicos";
+
                     self.templateUrl = "/en/wizard/basic_course_selector/";
                     self.selected_entry = null;
                     self.selection_callback = selection_callback;

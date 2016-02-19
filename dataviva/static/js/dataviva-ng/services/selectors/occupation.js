@@ -8,6 +8,9 @@
 
             var Occupation = function(selection_callback) {
                 var self = this;
+
+                self.title = "Profissões";
+
                 self.templateUrl = "/en/wizard/occupation_selector/";
                 self.selected_entry = null;
                 self.selection_callback = selection_callback;

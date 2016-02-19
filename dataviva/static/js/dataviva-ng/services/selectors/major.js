@@ -8,6 +8,9 @@
 
             var Major = function(selection_callback) {
                 var self = this;
+
+                self.title = "Cursos de Ensino Superior";
+
                 self.templateUrl = "/en/wizard/major_selector/";
                 self.selected_entry = null;
                 self.selection_callback = selection_callback;
