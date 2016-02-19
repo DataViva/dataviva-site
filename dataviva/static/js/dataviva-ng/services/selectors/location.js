@@ -69,9 +69,12 @@
                         method: "GET",
                         url: "/attrs/location?depth=" + group.depth_factor,
                     })
-                    .success(function(resp){
-                        group.entries = resp;
+                    .then(function(resp){
+                        group.entries = resp.data;
                         self.loading = false;
+                    }, function(errorResp){
+                        self.loading = false;
+                        self.error = "Sorry. An error has occurred while loading the options.";
                     });
                 };
 

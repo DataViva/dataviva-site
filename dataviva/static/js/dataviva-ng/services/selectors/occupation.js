@@ -53,9 +53,12 @@
                         method: "GET",
                         url: "/attrs/occupation?depth=" + group.depth_factor,
                     })
-                    .success(function(resp){
-                         group.entries = resp;
-                         self.loading = false;
+                    .then(function(resp){
+                        group.entries = resp.data;
+                        self.loading = false;
+                    }, function(errorResp){
+                        self.loading = false;
+                        self.error = "Sorry. An error has occurred while loading the options.";
                     });
                 };
 

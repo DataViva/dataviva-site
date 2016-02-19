@@ -9,6 +9,8 @@
 
             $scope.start_session = function(session_name) {
                 $scope.wizard = new Wizard(session_name);
+                $scope.selector_model = null;
+
 
                  $http({
                     method: "GET",
