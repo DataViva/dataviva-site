@@ -1,8 +1,9 @@
-[![Stories in Ready](https://badge.waffle.io/DataViva/dataviva-site.png?label=ready&title=Ready)](https://github.com/DataViva/dataviva-site/issues?q=label%3Aready)
-[![Stories in Code Review](https://badge.waffle.io/DataViva/dataviva-site.png?label=to+review&title=Code+review)](https://github.com/DataViva/dataviva-site/issues?utf8=%E2%9C%93&q=label%3A%22to+review%22+)
-#DataViva
+#DataViva 
+
 A Collaborative Planning Tool.
 [dataviva.info](http://www.dataviva.info)
+
+[![Stories in Ready](https://badge.waffle.io/DataViva/dataviva-site.png?label=ready&title=Ready)](https://github.com/DataViva/dataviva-site/issues?q=label%3Aready) [![Stories in Code Review](https://badge.waffle.io/DataViva/dataviva-site.png?label=to+review&title=Code+review)](https://github.com/DataViva/dataviva-site/issues?utf8=%E2%9C%93&q=label%3A%22to+review%22+)
 
 #Support
 
