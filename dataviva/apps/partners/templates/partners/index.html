@@ -13,29 +13,10 @@
                 <h4>Por que ser parceiro DataViva?</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris imperdiet in magna nec malesuada. Maecenas odio arcu, tempor non efficitur eget, malesuada sit amet metus. Praesent vehicula nunc felis, in convallis augue pulvinar eu. Nulla nec auctor purus, non consectetur massa.</p>
                 <p>Morbi et imperdiet purus. Ut tristique sit amet felis vitae aliquet. Quisque id erat quis nisi faucibus eleifend et nec nunc. Maecenas quis augue vitae nisi accumsan congue. Curabitur justo nibh, pharetra et facilisis nec, viverra vitae urna.</p>
-                <a href="25-seja-parceiro.html" class="btn btn-default btn-dataviva" title="Seja um parceiro">Seja um parceiro</a>
+                <a href="{{ url_for('partners.be_a_partner') }}" class="btn btn-default btn-dataviva" title="Seja um parceiro">Seja um parceiro</a>
             </div>
         </div>
     </div>
 </div>
-<div class="text-center logos">
-    <h1>Parceiros</h1>
-    <div class="container text-center">
-        <div class="col-md-3">
-            <a href="http://www.bigdatacorp.info/" target="_blank"><img src="/static/img/partner/bigdata.png" width="200" height="102" alt=""/></a>
-        </div>
-        <div class="col-md-3">
-            <a href="http://www.datawheel.us/company/" target="_blank"><img src="/static/img/partner/datawheel.png" width="200" height="102" alt=""/></a>
-        </div>
-        <div class="col-md-3">
-            <a href="http://www.fapemig.br/" target="_blank"><img src="/static/img/partner/fapemig.png" width="200" height="102" alt=""/></a>
-        </div>
-        <div class="col-md-3">
-            <a href="https://github.com/" target="_blank"><img src="/static/img/partner/github.png" width="200" height="102" alt=""/></a>
-        </div>
-        <div class="col-md-3">
-            <a href="http://mg.gov.br" target="_blank"><img src="/static/img/partner/governo-mg.png" width="200" height="102" alt=""/></a>
-        </div>
-    </div>
-</div>
+{% include "include/partners.html" %}
 {% endblock content %}
