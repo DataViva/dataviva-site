@@ -126,7 +126,7 @@ def home():
 
 @mod.route('/inicie-uma-pesquisa/', methods=['GET'])
 @view_cache.cached(key_prefix=api_cache_key("browsecat"))
-def browse_categories():
+def search():
     return render_template("general/browse_categories.html")
 
 
@@ -228,3 +228,7 @@ if not DEBUG:
 
         return render_template('general/error.html',
             error = error, sabrina = sabrina), error_code
+
+@mod.route('contact/')
+def contact():
+    return render_template("general/contact.html")

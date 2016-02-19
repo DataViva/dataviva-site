@@ -110,7 +110,10 @@ from dataviva.apps.rankings.views import mod as rankings_module
 from dataviva.apps.university.views import mod as university_module
 from dataviva.apps.wizard.views import mod as wizard_module
 from dataviva.apps.industry.views import mod as industry_module
-
+from dataviva.apps.partners.views import mod as partners_module
+from dataviva.apps.help.views import mod as help_module
+from dataviva.apps.build_graph.views import mod as build_graph_module
+from dataviva.apps.data_dowload.views import mod as data_dowload_module
 
 ''' Register these modules as blueprints '''
 app.register_blueprint(attrs_module)
@@ -136,3 +139,7 @@ app.register_blueprint(university_module)
 app.register_blueprint(wizard_module)
 app.register_blueprint(basic_course_module)
 app.register_blueprint(industry_module)
+app.register_blueprint(partners_module)
+app.register_blueprint(help_module)
+app.register_blueprint(build_graph_module)
+app.register_blueprint(data_dowload_module)

@@ -616,7 +616,7 @@ footer.main .sub-menu > li:not(:last-child) {
   color: #5a9dc4;
 }
 .mod-two-columns {
-  background: url(../../../imgs/home-bg-ilustracao.png) no-repeat center bottom;
+  background: url(/static/img/bgs/bg-home.png) no-repeat center bottom;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -1167,7 +1167,7 @@ table.data-2-columns > tbody th {
   z-index: 1;
 }
 .tit-area {
-  background: #f3f6f4 url(../../../imgs/bg-pattern-dots.png);
+  background: #f3f6f4 url(/static/img/bgs/bg-pattern-dots.png);
   height: 90px;
   margin-bottom: 2rem;
   padding-top: 30px;

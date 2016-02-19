@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-xs-15 col-sm-5 col-md-3">
                 <ul class="sub-menu">
-                    <li><a href="16-sobre.html" title="Sobre">Sobre</a></li>
-                    <li><a href="16-sobre.html" title="O Dataviva">O Dataviva</a></li>
-                    <li><a href="15-parcerias.html" title="Parceiros">Parceiros</a></li>
-                    <li><a href="23-contato.html" title="Entre em contato">Entre em contato</a></li>
-                    <li><a href="23-contato.html" title="Imprensa">Imprensa</a></li>
+                    <li><a href="{{ url_for('about.index') }}" title="Sobre">Sobre</a></li>
+                    <li><a href="{{ url_for('about.index') }}" title="O Dataviva">O Dataviva</a></li>
+                    <li><a href="{{ url_for('partners.index') }}" title="Parceiros">Parceiros</a></li>
+                    <li><a href="{{ url_for('general.contact') }}" title="Entre em contato">Entre em contato</a></li>
+                    <li><a href="{{ url_for('general.contact') }}" title="Imprensa">Imprensa</a></li>
                 </ul>
             </div>
             <div class="col-xs-15 col-sm-5 col-md-3">
@@ -16,27 +16,27 @@
                     <li class="parent">
                         <a href="#" title="Pesquisa">Pesquisa</a>
                         <ul>
-                            <li><a href="02-pesquisa-publico.html" title="Localidades">Localidades</a></li>
-                            <li><a href="12-13-perfil-produtos.html" title="Produtos">Produtos</a></li>
-                            <li><a href="12-13-perfil-ocupacoes.html" title="Ocupações">Ocupações</a></li>
-                            <li><a href="12-13-perfil-atividade-economica2.html" title="Atividades econômicas">Atividades econômicas</a></li>
-                            <li><a href="06-perfil-comercio.html" title="Parceiros comerciais">Parceiros comerciais</a></li>
-                            <li><a href="12-13-perfil-cursos.html" title="Cursos">Cursos</a></li>
-                            <li><a href="12-13-perfil-cursos-basicos.html" title="Cursos básicos">Cursos básicos</a></li>
-                            <li><a href="12-13-perfil-saude.html" title="Saúde">Saúde</a></li>
+                            <li><a href="#" title="Localidades">Localidades</a></li>
+                            <li><a href="#" title="Produtos">Produtos</a></li>
+                            <li><a href="#" title="Ocupações">Ocupações</a></li>
+                            <li><a href="#" title="Atividades econômicas">Atividades econômicas</a></li>
+                            <li><a href="#" title="Parceiros comerciais">Parceiros comerciais</a></li>
+                            <li><a href="#" title="Cursos">Cursos</a></li>
+                            <li><a href="#" title="Cursos básicos">Cursos básicos</a></li>
+                            <li><a href="#" title="Saúde">Saúde</a></li>
                         </ul>
                     </li>
-                    <li><a href="07-ranking.html" title="Rankings">Rankings</a></li>
-                    <li><a href="22-construa-graficos.html" title="Crie seu gráfico">Crie seu gráfico</a></li>
-                    <li><a href="18-download-banco-dados2.html" title="Download de dados">Download de dados</a></li>
+                    <li><a href="{{ url_for('rankings.index') }}" title="Rankings">Rankings</a></li>
+                    <li><a href="{{ url_for('build_graph.index') }}" title="Crie seu gráfico">Crie seu gráfico</a></li>
+                    <li><a href="{{ url_for('data_download.index') }}" title="Download de dados">Download de dados</a></li>
                 </ul>
             </div>
             <div class="col-xs-15 col-sm-5 col-md-2">
                 <ul class="sub-menu">
                     <li><a href="#" title="Suporte">Suporte</a></li>
-                    <li><a href="21-ajuda.html" title="Ajuda">Ajuda</a></li>
-                    <li><a href="16-sobre.html" title="Tour Virtual">Tour Virtual</a></li>
-                    <li><a href="23-contato.html" title="Contato">Contato</a></li>
+                    <li><a href="{{ url_for('help.index') }}" title="Ajuda">Ajuda</a></li>
+                    <li><a href="{{ url_for('help.index') }}" title="Tour Virtual">Tour Virtual</a></li>
+                    <li><a href="{{ url_for('general.contact') }}" title="Contato">Contato</a></li>
                 </ul>
             </div>
             <div class="col-xs-15 col-sm-7 col-md-7" id="contato">
