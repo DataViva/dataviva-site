@@ -51,8 +51,9 @@
                         url: "/attrs/product?depth=" + group.depth_factor,
                     })
                     .then(function(resp){
-                         group.entries = resp;
-                         self.loading = false;
+
+                        group.entries = resp.data;
+                        self.loading = false;
                     }, function(errorResp){
                         self.loading = false;
                         self.error = "Sorry. An error has occurred while loading the options.";
