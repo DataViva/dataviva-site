@@ -15,8 +15,15 @@
                     $(".selector-area").append(template);
                     $timeout(function(){
                         $compile(template)($scope);
-                        $('.nav-tabs li a')[0].click();
-                    }, 300)
+                        
+                        // Some selectors might have no tabs (e.g: University)
+                        // so we should check
+                        var firstTab = $('.nav-tabs li a')[0];
+                        if(typeof(firstTab) != "undefined") {
+                            firstTab.click();
+                        }
+
+                    }, 300);
                 });
 
             };
