@@ -24,6 +24,8 @@
                         }
 
                     }, 300);
+                }, function(errorResp) {
+                    $scope.selector_model.error = "Sorry, a error has occurred.";
                 });
 
             };
