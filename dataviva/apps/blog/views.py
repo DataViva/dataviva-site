@@ -21,3 +21,8 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
     return render_template('blog/index.html')
+
+
+@mod.route('/post')
+def index():
+    return render_template('blog/post.html')
