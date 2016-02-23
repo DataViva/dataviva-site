@@ -1171,12 +1171,6 @@ table.data-2-columns > tbody th {
   font-size: 12px;
   font-weight: 600;
 }
-.tit-area.generic {
-  background: transparent url(../../../imgs/bg-estado-generico.jpg);
-}
-.tit-area.specific-state {
-  background: transparent url(../../../imgs/bg-minas-gerais.jpg);
-}
 .tit-img {
   margin-bottom: 3rem;
   position: relative;
