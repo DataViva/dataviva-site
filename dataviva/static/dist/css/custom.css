@@ -457,13 +457,12 @@ footer.main .sub-menu > li:not(:last-child) {
   display: block;
   text-align: left;
   white-space: normal;
-  min-height: 30px;
 }
 .mod-datainfo .smaller .item .label {
-  font-size: 11px;
+  font-size: 10.1px;
 }
 .mod-datainfo .smaller .item .number {
-  font-size: 21px;
+  font-size: 18px;
 }
 .mod-datainfo .smaller .item .number small {
   display: block;
@@ -491,9 +490,6 @@ footer.main .sub-menu > li:not(:last-child) {
   color: #5a9dc4;
   cursor: pointer;
 }
-.mod-explore .item a p{
-  text-align: center;
-}
 .mod-explore .item img {
   background: #FFF;
   border: none;
@@ -509,9 +505,6 @@ footer.main .sub-menu > li:not(:last-child) {
   height: 35px;
   line-height: 18px;
   margin: 0 -10px 10px;
-}
-.mod-explore .item p{
-  text-align: center;
 }
 .mod-explore .item .popover {
   font-size: 12px;
@@ -623,7 +616,7 @@ footer.main .sub-menu > li:not(:last-child) {
   color: #5a9dc4;
 }
 .mod-two-columns {
-  background: url(/static/img/bgs/bg-home.png) no-repeat center bottom;
+  background: url(../../../imgs/home-bg-ilustracao.png) no-repeat center bottom;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -831,19 +824,19 @@ footer.main .sub-menu > li:not(:last-child) {
 .nav .open > a:focus {
   background: none;
 }
-.parceiros .logos h1 {
+/*.parceiros .logos h1 {
   font-weight: 300;
   margin-bottom: 20px;
-}
-.parceiros .logos img {
+}*/
+.logos img {
   margin: 0 auto;
 }
-.parceiros .mod-two-columns {
+#parceiros {
   background: #7bccd0;
   color: #FFF;
   min-height: inherit;
 }
-.parceiros .mod-two-columns h4 {
+#parceiros  h4 {
   color: #a25a6d;
   font-size: 20px;
 }
@@ -859,23 +852,23 @@ footer.main .sub-menu > li:not(:last-child) {
 .parceiros .mod-two-columns + .logos {
   margin-top: 4rem;
 }
-.perfil-estado .mod-datainfo .item .label,
+/*.perfil-estado .mod-datainfo .item .label,
 .perfil-comercio .mod-datainfo .item .label {
   font-size: 10.1px;
-}
-.perfil-estado .mod-datainfo .item .number,
+}*/
+/*.perfil-estado .mod-datainfo .item .number,
 .perfil-comercio .mod-datainfo .item .number {
   font-size: 18px;
-}
-.ranking .main-content {
+}*/
+/*.ranking .main-content {
   padding-bottom: 2rem;
-}
-.ranking .mod-search-boxes .profile {
+}*/
+/*.ranking .mod-search-boxes .profile {
   margin-bottom: 25px;
 }
 .ranking .mod-search-boxes .profile h2 {
   margin-bottom: 0;
-}
+}*/
 .articles nav {
   text-align: center;
 }
@@ -1142,7 +1135,6 @@ table.data-2-columns > tbody td .label {
   padding: 0;
   text-align: left;
   text-transform: uppercase;
-  white-space: normal;
 }
 table.data-2-columns > tbody td span {
   display: block;
@@ -1175,7 +1167,7 @@ table.data-2-columns > tbody th {
   z-index: 1;
 }
 .tit-area {
-  background: #f3f6f4 url(/static/img/bgs/bg-pattern-dots.png);
+  background: #f3f6f4 url(../../../imgs/bg-pattern-dots.png);
   height: 90px;
   margin-bottom: 2rem;
   padding-top: 30px;
@@ -1269,16 +1261,16 @@ table.data-2-columns > tbody th {
   .mod-two-columns p.cta .btn {
     margin-right: 2.2rem;
   }
-  .home .navbar + hr {
+  .navbar + hr {
     margin: 0;
   }
   .navbar {
     border-radius: 0;
     margin-bottom: 0;
   }
-  .navbar + hr {
+  /*.navbar + hr {
     margin: 0 0 20px;
-  }
+  }*/
   .navbar-nav a {
     color: #5a9dc4;
   }
@@ -1317,6 +1309,7 @@ table.data-2-columns > tbody th {
   }
 }
 
+/* SELECTORS */
 .selector-list {
   height: 300px;
   overflow-y: scroll;
@@ -1380,3 +1373,4 @@ table.data-2-columns > tbody th {
       transform: rotate(360deg);
     }
   }
+/* END SELECTORS */
