@@ -506,6 +506,9 @@ footer.main .sub-menu > li:not(:last-child) {
   line-height: 18px;
   margin: 0 -10px 10px;
 }
+.mod-explore .item a p{
+  text-align: center;
+}
 .mod-explore .item .popover {
   font-size: 12px;
   margin: 0 -10px;
