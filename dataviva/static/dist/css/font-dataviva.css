@@ -1,0 +1,324 @@
+@font-face {
+    font-family: 'DataViva';
+    src:    url('/static/dist/fonts/DataViva.eot?sy6ccu');
+    src:    url('/static/dist/fonts/DataViva.eot?sy6ccu#iefix') format('embedded-opentype'),
+        url('/static/dist/fonts/DataViva.ttf?sy6ccu') format('truetype'),
+        url('/static/dist/fonts/DataViva.woff?sy6ccu') format('woff'),
+        url('/static/dist/fonts/DataViva.svg?sy6ccu#DataViva') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="dv"], [class*=" dv"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'DataViva' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.dv-course-sc-00:before {
+    content: "\e93a";
+}
+.dv-course-sc-01:before {
+    content: "\e93b";
+}
+.dv-course-sc-02:before {
+    content: "\e93c";
+}
+.dv-course-sc-03:before {
+    content: "\e93d";
+}
+.dv-course-sc-04:before {
+    content: "\e93e";
+}
+.dv-course-sc-05:before {
+    content: "\e93f";
+}
+.dv-course-sc-06:before {
+    content: "\e940";
+}
+.dv-course-sc-07:before {
+    content: "\e941";
+}
+.dv-course-sc-08:before {
+    content: "\e942";
+}
+.dv-course-sc-09:before {
+    content: "\e943";
+}
+.dv-course-sc-10:before {
+    content: "\e944";
+}
+.dv-course-sc-11:before {
+    content: "\e945";
+}
+.dv-course-sc-12:before {
+    content: "\e946";
+}
+.dv-course-sc-13:before {
+    content: "\e947";
+}
+.dv-course-sc-all:before {
+    content: "\e948";
+}
+.dv-course-sc-xx:before {
+    content: "\e949";
+}
+.dv-course-hedu-00:before {
+    content: "\e94a";
+}
+.dv-course-hedu-01:before {
+    content: "\e94b";
+}
+.dv-course-hedu-14:before {
+    content: "\e94c";
+}
+.dv-course-hedu-21:before {
+    content: "\e94d";
+}
+.dv-course-hedu-22:before {
+    content: "\e94e";
+}
+.dv-course-hedu-31:before {
+    content: "\e94f";
+}
+.dv-course-hedu-32:before {
+    content: "\e950";
+}
+.dv-course-hedu-34:before {
+    content: "\e951";
+}
+.dv-course-hedu-38:before {
+    content: "\e952";
+}
+.dv-course-hedu-42:before {
+    content: "\e953";
+}
+.dv-course-hedu-46:before {
+    content: "\e954";
+}
+.dv-course-hedu-44:before {
+    content: "\e955";
+}
+.dv-course-hedu-48:before {
+    content: "\e956";
+}
+.dv-course-hedu-52:before {
+    content: "\e957";
+}
+.dv-course-hedu-54:before {
+    content: "\e958";
+}
+.dv-course-hedu-58:before {
+    content: "\e959";
+}
+.dv-course-hedu-62:before {
+    content: "\e95a";
+}
+.dv-course-hedu-64:before {
+    content: "\e95b";
+}
+.dv-course-hedu-72:before {
+    content: "\e95c";
+}
+.dv-course-hedu-76:before {
+    content: "\e95d";
+}
+.dv-course-hedu-81:before {
+    content: "\e95e";
+}
+.dv-course-hedu-84:before {
+    content: "\e95f";
+}
+.dv-course-hedu-85:before {
+    content: "\e960";
+}
+.dv-course-hedu-86:before {
+    content: "\e961";
+}
+.dv-course-hedu-all:before {
+    content: "\e962";
+}
+.dv-hs-01:before {
+    content: "\e923";
+}
+.dv-hs-02:before {
+    content: "\e924";
+}
+.dv-hs-03:before {
+    content: "\e925";
+}
+.dv-hs-04:before {
+    content: "\e926";
+}
+.dv-hs-05:before {
+    content: "\e927";
+}
+.dv-hs-06:before {
+    content: "\e928";
+}
+.dv-hs-07:before {
+    content: "\e929";
+}
+.dv-hs-08:before {
+    content: "\e92a";
+}
+.dv-hs-09:before {
+    content: "\e92b";
+}
+.dv-hs-10:before {
+    content: "\e92c";
+}
+.dv-hs-11:before {
+    content: "\e92d";
+}
+.dv-hs-12:before {
+    content: "\e92e";
+}
+.dv-hs-13:before {
+    content: "\e92f";
+}
+.dv-hs-14:before {
+    content: "\e930";
+}
+.dv-hs-15:before {
+    content: "\e931";
+}
+.dv-hs-16:before {
+    content: "\e932";
+}
+.dv-hs-17:before {
+    content: "\e933";
+}
+.dv-hs-18:before {
+    content: "\e934";
+}
+.dv-hs-19:before {
+    content: "\e935";
+}
+.dv-hs-20:before {
+    content: "\e936";
+}
+.dv-hs-21:before {
+    content: "\e937";
+}
+.dv-hs-22:before {
+    content: "\e938";
+}
+.dv-hs-all:before {
+    content: "\e939";
+}
+.dv-cnae-a:before {
+    content: "\e90c";
+}
+.dv-cnae-all:before {
+    content: "\e90d";
+}
+.dv-cnae-b:before {
+    content: "\e90e";
+}
+.dv-cnae-c:before {
+    content: "\e90f";
+}
+.dv-cnae-d:before {
+    content: "\e910";
+}
+.dv-cnae-e:before {
+    content: "\e911";
+}
+.dv-cnae-f:before {
+    content: "\e912";
+}
+.dv-cnae-g:before {
+    content: "\e913";
+}
+.dv-cnae-h:before {
+    content: "\e914";
+}
+.dv-cnae-i:before {
+    content: "\e915";
+}
+.dv-cnae-j:before {
+    content: "\e916";
+}
+.dv-cnae-k:before {
+    content: "\e917";
+}
+.dv-cnae-l:before {
+    content: "\e918";
+}
+.dv-cnae-m:before {
+    content: "\e919";
+}
+.dv-cnae-n:before {
+    content: "\e91a";
+}
+.dv-cnae-o:before {
+    content: "\e91b";
+}
+.dv-cnae-p:before {
+    content: "\e91c";
+}
+.dv-cnae-q:before {
+    content: "\e91d";
+}
+.dv-cnae-r:before {
+    content: "\e91e";
+}
+.dv-cnae-s:before {
+    content: "\e91f";
+}
+.dv-cnae-t:before {
+    content: "\e920";
+}
+.dv-cnae-u:before {
+    content: "\e921";
+}
+.dv-cnae-x:before {
+    content: "\e922";
+}
+.dv-cbo-0:before {
+    content: "\e900";
+}
+.dv-cbo-1:before {
+    content: "\e901";
+}
+.dv-cbo-2:before {
+    content: "\e902";
+}
+.dv-cbo-3:before {
+    content: "\e903";
+}
+.dv-cbo-4:before {
+    content: "\e904";
+}
+.dv-cbo-5:before {
+    content: "\e905";
+}
+.dv-cbo-6:before {
+    content: "\e906";
+}
+.dv-cbo-7:before {
+    content: "\e907";
+}
+.dv-cbo-8:before {
+    content: "\e908";
+}
+.dv-cbo-9:before {
+    content: "\e909";
+}
+.dv-cbo-all:before {
+    content: "\e90a";
+}
+.dv-cbo-x:before {
+    content: "\e90b";
+}
+
