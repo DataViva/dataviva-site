@@ -29,7 +29,7 @@ def index(wld_id):
     municipalities_service = TradePartnerMunicipalities(wld_id)
     products_service = TradePartnerProducts(wld_id)
 
-    max_year_query = db.session.query(func.max(Ymw.year)).filter_by(wld_id)
+    max_year_query = db.session.query(func.max(Ymw.year)).filter_by(wld_id=wld_id)
     export_rank_query = Ymw.query.join(Wld).filter(
         Ymw.month == 0,
         Ymw.year == max_year_query).order_by(Ymw.export_val.desc())
