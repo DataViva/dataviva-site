@@ -22,13 +22,12 @@ def add_language_code(endpoint, values):
 
 @mod.route('/<course_hedu_id>')
 def index(course_hedu_id):
-    course_hedu_id_query = str(course_hedu_id)
     major_service = Major(course_hedu_id)
     universities_service = MajorUniversities(course_hedu_id)
     municipalities_service = MajorMunicipalities(course_hedu_id)
 
 
-    max_year_query = db.session.query(func.max(Yc_hedu.year)).filter_by(Yc_hedu.course_hedu_id = course_hedu_id)
+    max_year_query = db.session.query(func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
 
     rank_query = Yc_hedu.query.filter(
             Yc_hedu.year == max_year_query,
