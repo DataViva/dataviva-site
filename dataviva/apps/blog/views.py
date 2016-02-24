@@ -24,5 +24,5 @@ def index():
 
 
 @mod.route('/post')
-def index():
+def post():
     return render_template('blog/post.html')
