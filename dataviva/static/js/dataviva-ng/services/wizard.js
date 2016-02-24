@@ -22,39 +22,37 @@
 
                 self.filter_string = ""
                 self.session_name = session_name;
-                self.options = [];
+                self.questions = [];
+                self.selected_question = null;
+                self.step = 0;
 
                 self.path_option = null;
                 self.selector_choices = [];
 
-                self.select = function(option) {
-                    self.selected_option = option.id;
+                self.select = function(question) {
+                    self.selected_question = question;
                 };
 
-                self.new_step = function(current_step, scope) {
-                    self.title = current_step.title;
-                    self.step_type = null;
+                self.start = function(session){
+                    //self.step_type = "path_option";
+                    self.questions = session.questions.map(function(val){
+                        return new Option(val);
+                    });
+                };
 
-                    if(current_step.options) {
-                        self.step_type = "path_option";
-                        self.options = current_step.options.map(function(val){
-                            return new Option(val);
-                        });
+                self.load_selector = function(current_step, scope) {
+                    //self.step_type = "selector";
+                    scope.selector_model = new Selectors[current_step](function(id) {
+                        self.selector_choices.push(id);
+                    });
 
-                    } else {
-                        self.step_type = "selector";
-                        scope.selector_model = new Selectors[current_step.type](function(id) {
-                            self.selected_option = id;
-                        });
-
-                        $templateRequest(scope.selector_model.templateUrl).then(function(html){
-                            var template = angular.element(html);
-                            $(".wiz-selector-area").empty();
-                            $(".wiz-selector-area").append(template);
-                            $compile(template)(scope);
-                            $timeout(function(){$('.nav-tabs li a')[0].click()}, 500);
-                        });
-                    }
+                    $templateRequest(scope.selector_model.templateUrl).then(function(html){
+                        var template = angular.element(html);
+                        $(".wiz-selector-area").empty();
+                        $(".wiz-selector-area").append(template);
+                        $compile(template)(scope);
+                        $timeout(function(){$('.nav-tabs li a')[0].click()}, 500);
+                    });
                 };
             };
     }]);

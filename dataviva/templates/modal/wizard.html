@@ -14,7 +14,7 @@
 							<input
 							id="field-search"
 							type="text"
-							name="options_filter"
+							name="questions_filter"
 							ng-model="wizard.filter_string"
 							ng-trim="true"
 							class="busca form-control">
@@ -24,11 +24,11 @@
 							<div class="list-group list-stripped">
 								<a href="#"
 									class="list-group-item"
-									data-ng-repeat="option in wizard.options"
-									data-ng-click="wizard.select(option)"
-									data-ng-class="{'selected': option.id == wizard.selected_option }"
+									data-ng-repeat="question in wizard.questions"
+									data-ng-click="wizard.select(question)"
+									data-ng-class="{'selected': question == wizard.selected_question }"
 									>
-									{$ option.title $}
+									{$ question.title $}
 								</a>
 							</div>
 						</div>
