@@ -3,9 +3,12 @@
         <div class="modal-content" id="selectorCont" data-ng-controller="SelectorController">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">{$ selector.title $}</h4>
+                <h4 class="modal-title">{$ selector_model.title $}</h4>
             </div>
-            <div class="modal-body clearfix selector-area"></div>
+            <div class="modal-body clearfix selector-area" ng-show="!selector_model.error"></div>
+            <div class="modal-body text-center" ng-show="selector_model.error">
+                <h4>{$ selector_model.error $}</h4>  
+            </div>
          </div>
      </div>
 </div>

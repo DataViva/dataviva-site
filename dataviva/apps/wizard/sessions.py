@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
-class PathOption:
+class Question:
 
-    def __init__(self, id, title, selectors, redirect):
-        self.id = id
+    def __init__(self, title, selectors, redirect):
         self.title = title
         self.selectors = selectors
         self.redirect = redirect
@@ -12,7 +11,6 @@ class PathOption:
     @property
     def serialize(self):
         return {
-            "id": self.id,
             "title": self.title,
             "selectors": self.selectors,
             "redirect": self.redirect,
@@ -21,34 +19,132 @@ class PathOption:
 
 class Session:
 
-    def __init__(self, title, options):
+    def __init__(self, title, questions):
         self.title = title
-        self.options = options
+        self.questions = questions
 
 
-op1 = PathOption(
-    1,
-    "I want to analysis a product or product category in a given region",
-    selectors=[{"type": "Location", "resp": None},
-               {"type": "Product", "resp": None}],
-    redirect="/en/path_option_1/bra_id=%s&hs_id=%s"
-)
+development_agents_questions = [
+    Question('Qual a rede de produtos da Localidade Y?',
+             selectors=["Location"],
+             redirect="/location/%s"),
 
-op2 = PathOption(
-    2,
-    "I want to analysis a product by it's international trading stats",
-    selectors=[{"type": "Product", "resp": None},
-               {"type": "Location", "resp": None}],
-    redirect="/en/path_option_2/hs_id=%s&bra_id=%s"
-)
+    Question('Quais os produtos mais próximos da estrutura produtiva da Localidade Y?',
+             selectors=["Location"],
+             redirect="/location/%s"),
+
+    Question('Quais os produtos de maior complexidade exportados por uma Localidade Y?',
+             selectors=["Location"],
+             redirect="/location/%s"),
+
+    Question('Quais os produtos de maior complexidade importados por uma Localidade Y?',
+             selectors=["Location"],
+             redirect="/location/%s"),
+
+    Question('Qual a rede de atividades da Localidade Y?',
+             selectors=["Location"],
+             redirect="/location/%s"),
+
+    Question('Quais as atividades mais próximas da estrutura produtiva da Localidade Y?',
+             selectors=["Location"],
+             redirect="/location/%s"),
+
+    Question('Quais localidades concentram o emprego na Atividade X?',
+             selectors=["Industry"],
+             redirect="/industry/%s"),
+]
+
+student_questions = [
+    Question('Quais os cursos de nível superior oferecidos na Localidade Y?',
+             selectors=["Location"],
+             redirect="/location/%s"),
+
+    Question('Quais os cursos de nível técnico oferecidos na Localidade Y?',
+             selectors=["Location"],
+             redirect="/location/%s"),
+
+    Question('Qual o salário médio da Ocupação Z na Localidade Y?',
+             selectors=["Occupation", "Location"],
+             redirect="/occupation/%s?bra_id=%s"),
+
+    Question('Em quais localidades paga-se o maior salário médio da Ocupação Z?',
+             selectors=["Occupation"],
+             redirect="/occupation/%s"),
+
+    Question('Em quais localidades cresce o número de empregados da Ocupação Z?',
+             selectors=["Occupation"],
+             redirect="/occupation/%s"),
+
+    Question('Quais os principais produtos exportados pela Localidade Y?',
+             selectors=["Location"],
+             redirect="/location/%s"),
+
+    Question('Quais as principais atividades econômicas de uma Localidade Y?',
+             selectors=["Location"],
+             redirect="/location/%s"),
+]
+
+entrepreneur_questions = [
+    Question("Qual o número de estabelecimentos na Atividade X, na Localidade Y?",
+             selectors=["Industry", "Location"],
+             redirect="/industry/%s?bra_id=%s"),
+
+    Question("Qual o salário médio da Atividade X, na Localidade Y?",
+             selectors=["Industry", "Location"],
+             redirect="/industry/%s?bra_id=%s"),
+
+    Question("Qual o salário médio da Ocupação Z, na Atividade X, na Localidade Y?",
+             selectors=["Occupation", "Industry", "Location"],
+             redirect="/occupation/%s?cnae_id=%s?bra_id=%s"),
+
+    Question("Quais os principais parceiros comerciais de um Produto P na Localidade Y?",
+             selectors=["Product", "Location"],
+             redirect="/product/%s?bra_id=%s"),
+
+    Question("Quais localidades concentram o emprego na Atividade X?",
+             selectors=["Industry"],
+             redirect="/industry/%s"),
+
+    Question("Quais as localidades que mais importam o Produto P?",
+             selectors=["Product"],
+             redirect="/product/%s"),
+
+    Question("Quais as localidades que mais exportam o Produto P?",
+             selectors=["Product"],
+             redirect="/product/%s"),
+
+    Question("Quais os produtos mais próximos da estrutura produtiva da Localidade Y?",
+             selectors=["Location"],
+             redirect="/location/%s"),
+
+    Question("Quais os cursos de nível superior oferecidos na Localidade Y?",
+             selectors=["Location"],
+             redirect="/location/%s"),
+
+    Question("Quais os cursos de nível técnico oferecidos na Localidade Y?",
+             selectors=["Location"],
+             redirect="/location/%s"),
+]
+
 
 entrepreneur_session = Session(
-    "What kind of analysis you want to make?",
-    [op1, op2]
+    title="What kind of analysis you want to make?",
+    questions=entrepreneur_questions
+)
+
+
+development_agents_session = Session(
+    title="What kind of analysis you want to make?",
+    questions=development_agents_questions
+)
+
+student_session = Session(
+    title="What kind of analysis you want to make?",
+    questions=student_questions
 )
 
 SESSIONS = {
     'entrepreneur': entrepreneur_session,
-    # 'students': students_session,  TODO
-    # 'analyst': analyst_session,    TODO
+    'development_agents': development_agents_session,
+    'student': student_session,
 }

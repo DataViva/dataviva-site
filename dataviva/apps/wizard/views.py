@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, g, jsonify, request, render_template, redirect
 from dataviva.apps.wizard.sessions import SESSIONS
+from dataviva.apps.general.views import get_locale
 
 mod = Blueprint('wizard', __name__, url_prefix='/<lang_code>/wizard')
 
@@ -10,14 +11,19 @@ def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
 
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', get_locale())
+
+
 @mod.route('/session/<session_name>', methods=['GET'])
 def session(session_name):
-
     session_obj = SESSIONS.get(session_name, False)
+
     return jsonify({
         "session_name": session_name,
         "title": session_obj.title,
-        "options": map(lambda x: x.serialize, session_obj.options)
+        "questions": map(lambda x: x.serialize, session_obj.questions),
     })
 
 
@@ -40,7 +46,7 @@ def submit_answer():
 
     if path_option:
         path = None
-        for op in session.options:
+        for op in session.questions:
             if op.id == path_option:
                 path = op
                 break

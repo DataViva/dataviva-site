@@ -8,6 +8,9 @@
 
             var TradingPartner = function(selection_callback) {
                 var self = this;
+
+                self.title = "Parceiros Comerciais do Brasil";
+
                 self.templateUrl = "/en/wizard/trading_partner_selector/";
                 self.selected_entry = null;
                 self.selection_callback = selection_callback;
@@ -50,9 +53,12 @@
                         method: "GET",
                         url: "/attrs/trading_partner?depth=" + group.depth_factor,
                     })
-                    .success(function(resp){
-                         group.entries = resp;
-                         self.loading = false;
+                    .then(function(resp){
+                        group.entries = resp.data;
+                        self.loading = false;
+                    }, function(errorResp){
+                        self.loading = false;
+                        self.error = "Sorry. An error has occurred while loading the options.";
                     });
                 };
 

@@ -8,6 +8,9 @@
 
             var BasicCourse = function(selection_callback) {
                     var self = this;
+
+                    self.title = "Cursos Básicos";
+
                     self.templateUrl = "/en/wizard/basic_course_selector/";
                     self.selected_entry = null;
                     self.selection_callback = selection_callback;
@@ -50,9 +53,12 @@
                             method: "GET",
                             url: "/attrs/basic_course?depth=" + group.depth_factor,
                         })
-                        .success(function(resp){
-                             group.entries = resp;
-                             self.loading = false;
+                        .then(function(resp){
+                            group.entries = resp.data;
+                            self.loading = false;
+                        }, function(errorResp){
+                            self.loading = false;
+                            self.error = "Sorry. An error has occurred while loading the options.";
                         });
                     };
 
