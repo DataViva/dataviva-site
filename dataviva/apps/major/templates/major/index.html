@@ -1,0 +1,42 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="01-index.html">Home</a></li>
+        <li><a href="#">Inicie uma pesquisa</a></li>
+        <li class="active"><span>Cursos de Ensino Superior<span></span></span></li>
+    </ol>
+    <div class="tit-area" style="background-image: url('static/{{ header.background_name }}.jpg')">
+        <div class="row">
+            <div class="col-xs-15 col-md-offset-4 col-md-11">
+                <h1>
+                    {{ header.name }}<a href="#" title="Trocar" onclick="start_selector('Major');"> (trocar)</a>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="sidebar has-img col-xs-15 col-md-4">
+            <img src="{{ static_folder }}/course_hedu_{{ header.portrait_id }}_black.png" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
+            <ul class="nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
+                </li>
+                <li role="presentation">
+                    <a href="#matriculas" aria-controls="matriculas" role="tab" data-toggle="tab">Matrículas</a>
+                </li>
+            </ul>
+        </div>
+        <div class="main-content col-xs-15 col-md-11">
+            <div class="tab-content">
+                {% include "major/tab-geral.html" %}
+                {% include "major/tab-matriculas.html" %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

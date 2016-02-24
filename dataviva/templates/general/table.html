@@ -1,0 +1,678 @@
+{% extends "base.html" %}
+
+{% block title %}: {% trans %}Database Table{% endtrans %}{% endblock %}
+
+{% block head %}
+
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.tables.css" />
+
+{% endblock %}
+
+{% block content %}
+
+<div id="dt_query">
+  <div id="sticky"></div>
+  <div id="data"></div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+  <script src="/static/js/utils/utils.infinite_scroll.js"></script>
+  <script type="text/javascript">
+
+    var table_height = 0, table_width = 0, sticky_width = 0, x_scroll = 0
+
+    var columns = {}
+
+    var UNSORTABLE_COLUMNS = location.href.indexOf("/attrs/table/") >= 0 ?
+                             ["rank"] : ["rank","name","id_ibge","id_mdic"];
+
+    var DATA = [];
+    var ATTRS = {};
+    var CURRENT_DATASET = 'rais';
+    var PRETTY_COLUMNS = {
+      "id_ibge": "IBGE",
+    }
+    var STICKY_COLUMNS = [
+                    "rank",
+                    "year",
+                    "month",
+
+                    "id",
+
+                    "bra_id_r",
+                    "bra_id_s",
+                    "bra_id",
+                    "id_ibge",
+
+                    "cnae_id",
+                    "cbo_id",
+
+                    "hs_id",
+                    "wld_id",
+                    "id_mdic",
+
+                    "university_id",
+                    "course_hedu_id",
+                    "course_sc_id",
+
+                    "name"
+                ];
+
+    	var DATA_COLUMNS = [
+
+                    "population",
+
+                    "wage",
+                    "wage_avg",
+                    "num_jobs",
+                    "num_est",
+                    "num_jobs_est",
+
+                    "export_val",
+                    "import_val",
+
+                    "export_kg",
+                    "import_kg",
+
+                    "enrolled",
+                    "graduates",
+                    "entrants",
+
+                    "classes",
+                    "age",
+
+                    "rca",
+                    "rca_wld",
+
+                    "distance",
+                    "distance_wld",
+
+                    "opp_gain",
+                    "opp_gain_wld",
+
+                    "eci",
+                    "pci",
+                    "bra_diversity",
+                    "bra_diversity_eff",
+                    "cnae_diversity",
+                    "cnae_diversity_eff",
+                    "cbo_diversity",
+                    "cbo_diversity_eff",
+                    "hs_diversity",
+                    "hs_diversity_eff",
+                    "wld_diversity",
+                    "wld_diversity_eff",
+
+                    "importance",
+                    "required",
+
+                    "export_val_growth",
+                    "export_val_growth_5",
+                    "import_val_growth",
+                    "import_val_growth_5",
+
+                    "enrolled_growth",
+                    "graduates_growth",
+
+                    "wage_growth",
+                    "wage_growth_5",
+                    "num_emp_growth",
+                    "num_emp_growth_5",
+
+                    "color",
+
+                    "purchase_value",
+                    "transfer_value"
+
+                  ];
+
+    var current_data_cols = [], current_order = []
+    if (window.location.search.indexOf("cols=") > -1) {
+      current_data_cols = window.location.search.split("cols=")[1].split("&")[0].split(".")
+    }
+    if (window.location.search.indexOf("order=") > -1) {
+      current_order = window.location.search.split("order=")[1].split("&")[0].split(".")
+    }
+
+    var is = infinite_scroll().format_items(item_formatter);
+
+    function column_sort(d) {
+
+      if (!(d instanceof Array) && UNSORTABLE_COLUMNS.indexOf(d) < 0) {
+
+        if (d == current_order[0]) var direction = current_order[1]
+        else var direction = ""
+        if (direction == "desc") { direction = "asc"; }
+        else if (direction == "asc") { direction = ""; }
+        else { direction = "desc"; }
+
+        if (direction == "") current_order = []
+        else current_order = [d,direction]
+
+        update_url()
+
+        DATA = [];
+        d3.selectAll("tr").remove()
+        d3.select("#dt_query")
+          .call(is.order(current_order.join(".")).offset(0))
+      }
+
+      d3.event.preventDefault()
+    }
+
+    function load(attrs, sticky_cols, container_el, dataset, all_cols, active_data_cols){
+      if(attrs.length){
+        var attr = attrs.pop();
+        var attr_url = "/attrs/"+attr+"/?lang="+dataviva.language;
+        localforage.getItem(attr_url, function(error, resp){
+          if (resp)  {
+            ATTRS[attr] = resp.data.reduce(function(obj, d){
+              obj[d.id] = d;
+              return obj
+            }, {});
+            if(attrs.length){
+              load(attrs, sticky_cols, container_el, dataset, all_cols, active_data_cols)
+            }
+            else {
+              make_table(ATTRS, sticky_cols, container_el, dataset, all_cols, active_data_cols)
+            }
+          }
+          else {
+            d3.json(attr_url)
+              .header("X-Requested-With", "XMLHttpRequest")
+              .get(function(error, resp) {
+                localforage.setItem(attr_url, resp);
+                ATTRS[attr] = resp.data.reduce(function(obj, d){
+                  obj[d.id] = d;
+                  return obj
+                }, {});
+                if(attrs.length){
+                  load(attrs, sticky_cols, container_el, dataset, all_cols, active_data_cols)
+                }
+                else {
+                  make_table(ATTRS, sticky_cols, container_el, dataset, all_cols, active_data_cols)
+                }
+              })
+          }
+        })
+      }
+      else {
+        make_table(ATTRS, sticky_cols, container_el, dataset, all_cols, active_data_cols)
+      }
+    }
+
+    function make_table(attrs, sticky_cols, container_el, dataset, all_cols, active_data_cols){
+      var sticky_header_cols = make_sticky_header(attrs, sticky_cols, container_el);
+      make_sticky_data(attrs, sticky_header_cols, container_el, dataset, all_cols);
+      make_data_header(container_el, active_data_cols);
+      make_data(container_el, all_cols, active_data_cols);
+      reset_size();
+    }
+
+    /*
+      CREATE "STICKY" HEADER TABLE
+    */
+    function make_sticky_header(attrs, sticky_cols, container_el){
+      sticky_cols_w_names = []
+      var bra_id = (sticky_cols.indexOf("bra_id") > -1);
+      sticky_cols.forEach(function(col){
+        // sticky_cols_w_names.push(col)
+        // if(col.indexOf("_id") > -1){
+        //   var attr_type = col.replace("_id", "")
+        //   if(attr_type === "bra"){ var col_name = "Location" }
+        //   else if(attr_type === "hs"){ var col_name = "Product" }
+        //   else if(attr_type === "cbo"){ var col_name = "Occupation" }
+        //   else if(attr_type === "cnae"){ var col_name = "Industry" }
+        //   else if(attr_type === "wld"){ var col_name = "Destination" }
+        //   else if(attr_type === "university"){ var col_name = "University" }
+        //   else if(attr_type === "course_hedu"){ var col_name = "Major" }
+        //   else if(attr_type === "course_sc"){ var col_name = "Course" }
+        //   sticky_cols_w_names.push([attr_type, "name", col_name])
+        // }
+
+        if(col.indexOf("bra_id") > -1){
+          sticky_cols_w_names.push(["bra", "id_ibge", "IBGE ID"])
+          sticky_cols_w_names.push(["bra", "name", "{% trans %}Location{% endtrans %}"])
+        }
+        else if(col.indexOf("_id") > -1 && sticky_cols.indexOf("name") < 0){
+          var attr_type = col.replace("_id", "")
+          if(attr_type === "hs"){ var col_name = "Product" }
+          else if(attr_type === "cbo"){ var col_name = "Occupation" }
+          else if(attr_type === "cnae"){ var col_name = "Industry" }
+          else if(attr_type === "wld"){ var col_name = "Destination" }
+          else if(attr_type === "university"){ var col_name = "University" }
+          else if(attr_type === "course_hedu"){ var col_name = "Major" }
+          else if(attr_type === "course_sc"){ var col_name = "Course" }
+          sticky_cols_w_names.push([attr_type, "id", "ID"])
+          sticky_cols_w_names.push([attr_type, "name", col_name])
+        }
+        else {
+          if((col === "name" && bra_id) || (col === "id_ibge" && bra_id)) return
+          else sticky_cols_w_names.push(col)
+        }
+      })
+
+      var selection = d3.select(container_el).select("#sticky")
+      var table_elem = selection.selectAll('table.header').data([0])
+        .enter().append('table').attr("class", "header");
+      // var ids = sticky_cols.filter(function(c){return c.indexOf("_id") > 0});
+      // if (ids.length) {
+      //   table_elem.attr("id", ids[0].slice(0, ids[0].length - 3));
+      // }
+      var tbl_sticky_header = selection.select('table.header');
+
+      tbl_sticky_header.selectAll('thead').data([0]).enter().append('thead');
+      tbl_sticky_header = tbl_sticky_header.select('thead');
+
+      tbl_sticky_header.selectAll('tr').data([0]).enter().append('tr');
+      tbl_sticky_header = tbl_sticky_header.select('tr');
+
+      var ths = tbl_sticky_header.selectAll("th")
+        .data(sticky_cols_w_names)
+
+      ths
+        .attr("class",function(d){
+          if(d instanceof Array) d = d.join(" ");
+          var o = current_order || init_order
+          if (o.length && d == o[0]) var x = " "+o[1]
+          else var x = ""
+          return d+x
+        })
+
+      ths.enter().append("th")
+        .attr("class",function(d){
+          if(d instanceof Array) d = d.join(" ");
+          var o = current_order || init_order
+          if (o.length && d == o[0]) var x = " "+o[1]
+          else var x = ""
+          return d+x
+        })
+
+      ths
+        .text(function(d) {
+          if(d.constructor === Array){
+            return d[2];
+          }
+          return PRETTY_COLUMNS[d] || dataviva.format.text(d);
+        })
+        .on(d3plus.client.pointer.click, column_sort)
+
+      ths.exit().remove()
+
+      return sticky_cols_w_names;
+    }
+
+    /*
+      CREATE "STICKY" DATA TABLE
+    */
+    function make_sticky_data(attrs, sticky_cols, container_el, dataset, all_cols){
+      var selection = d3.select(container_el).select("#sticky")
+      var table_elem = selection.selectAll('table.data').data([0])
+        .enter().append('table').attr("class", "data");
+      // if (ids.length) {
+      //   table_elem.attr("id", ids[0].slice(0, ids[0].length - 3));
+      // }
+      var tbl_sticky_data = selection.select('table.data');
+
+      tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
+      tbl_sticky_data = tbl_sticky_data.select('tbody');
+
+      // create a row for each object in the data
+      var rows = tbl_sticky_data.selectAll("tr").data(dataset, JSON.stringify)
+      rows.enter().append("tr")
+
+      rows.each(function(d){
+        var self = d3.select(this)
+        data_printer(d,self,sticky_cols,all_cols,attrs)
+      })
+    }
+
+    /*
+      CREATE DATA HEADER TABLE
+    */
+    function make_data_header(container_el, active_data_cols){
+      var selection = d3.select(container_el).select("#data")
+      selection.selectAll('table.header').data([0])
+        .enter().append('table').attr("class", "header")
+
+      var tbl_data_header = selection.select('table.header');
+
+      tbl_data_header.selectAll('thead').data([0]).enter().append('thead');
+      tbl_data_header = tbl_data_header.select('thead');
+
+      tbl_data_header.selectAll('tr').data([0]).enter().append('tr');
+      tbl_data_header = tbl_data_header.select('tr');
+
+      var ths = tbl_data_header.selectAll("th")
+        .data(active_data_cols)
+
+      ths
+        .attr("class",function(d){
+          if(d instanceof Array) d = d.join(" ");
+          var o = current_order || init_order
+          if (o.length && d == o[0]) var x = " "+o[1]
+          else var x = ""
+          return d+x
+        })
+
+      ths.enter().append("th")
+        .attr("class",function(d){
+          if(d instanceof Array) d = d.join(" ");
+          var o = current_order || init_order
+          if (o.length && d == o[0]) var x = " "+o[1]
+          else var x = ""
+          return d+x
+        })
+
+      ths
+        .text(function(d) {
+          if (d == "color") d = "color_toggle"
+          return dataviva.format.text(d)
+        })
+        .on(d3plus.client.pointer.click, column_sort)
+
+      ths.exit().remove()
+    }
+
+    function make_data(container_el, all_cols, active_data_cols){
+      /*
+        CREATE DATA DATA TABLE
+      */
+      var selection = d3.select(container_el).select("#data")
+      selection.selectAll('table.data').data([0])
+        .enter().append('table').attr("class", "data")
+      var tbl_sticky_data = selection.select('table.data');
+
+      tbl_sticky_data.selectAll('tbody').data([0]).enter().append('tbody');
+      tbl_sticky_data = tbl_sticky_data.select('tbody');
+
+      // create a row for each object in the data
+      var rows = tbl_sticky_data.selectAll("tr").data(DATA, JSON.stringify)
+
+      rows.enter().append("tr")
+
+      rows.each(function(d){
+        var self = d3.select(this)
+        data_printer(d,self,active_data_cols,all_cols)
+      })
+    }
+
+    function reset_size(){
+
+      d3.select("#dt_query #sticky").style("width","5px")
+      d3.select("#dt_query #sticky").style("width", function(){
+        return d3.select("#sticky table.data").node().offsetWidth + "px";
+      })
+      sticky_width = d3.select("#dt_query #sticky").node().offsetWidth;
+      d3.select("#dt_query #data table.header thead").style("left", sticky_width+"px")
+
+      d3.selectAll("#dt_query table.data").style("margin-top", function(){
+        return d3.select("#data table.header tr").node().offsetHeight+"px";
+      })
+
+      d3.selectAll("#dt_query table.header th").style("height", function(){
+        var padding = parseInt(d3.select(this).style("padding-top")) * 2
+        var h = d3.select("#data table.header tr").node().offsetHeight;
+        return h - padding + "px";
+      })
+
+      d3.selectAll("#data table.data").style("width", function(){
+        return d3.select("#data table.header thead").node().offsetWidth + "px";
+      })
+
+      // d3.select("#sticky table.header th.name:last-child").style("width", function(){
+      //   return d3.select("td.name:last-child").node().offsetWidth-20 + "px";
+      // })
+
+      try {
+        var same_origin = window.parent.location.host == window.location.host;
+      }
+      catch (e) {
+        var same_origin = false
+      }
+
+      // Sends parent window column states
+      if(same_origin && window.parent.update_cols && !manual){
+        var data_col_status = []
+        all_data_cols.forEach(function(d){
+          var active = false;
+          if (active_data_cols.indexOf(d) > -1){
+            active = true;
+          }
+          data_col_status.push({"name":d, "active":active})
+        })
+        window.parent.update_cols(data_col_status)
+      }
+
+      var data_div = d3.select("div#data table.data")
+      table_width = data_div.node().offsetWidth + sticky_width
+      table_height = data_div.node().offsetHeight + parseFloat(data_div.style("margin-top"),10)
+
+      if (same_origin && window.parent.iframe_size) window.parent.iframe_size(table_width,table_height)
+
+      check_headers()
+      dataviva.resize()
+
+    }
+
+    function item_formatter(container_el, dataset, offset, manual, header){
+
+      if(dataset != DATA){
+        DATA = DATA.concat(dataset)
+      }
+
+      /*
+        FILTER COLUMNS
+      */
+
+      // Gets all possible columns from new 'dataset'
+      var all_cols = header;
+
+      // dataset.forEach(function(d){
+      //   all_cols = all_cols.concat(d3.keys(d))
+      // })
+      // all_cols = all_cols.filter(function(itm, i){
+      //     return all_cols.indexOf(itm)== i;
+      // });
+
+      var all_data_cols;
+      var data_url = "{{data_url}}";
+      var all_data_cols = DATA_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1 || i == current_order[0]});
+
+      // Filter data columns by user-specified columns
+      var active_data_cols = all_data_cols;
+      if(current_data_cols.length){
+        active_data_cols = all_data_cols.filter(function(i) {return current_data_cols.indexOf(i) > -1});
+      }
+
+      // Get sticky columns present in new 'dataset'
+      sticky_cols = STICKY_COLUMNS.filter(function(i) {return all_cols.indexOf(i) > -1});
+      // Get attr cols
+      attr_cols = sticky_cols
+                    .filter(function(col) {return col.indexOf("_id") > -1})
+                    .map(function(col) {return col.replace("_id", "")});
+
+      if (active_data_cols.indexOf(current_order[0]) >= 0) {
+        active_data_cols.splice(active_data_cols.indexOf(current_order[0]),1)
+        sticky_cols.push(current_order[0])
+      }
+
+      // console.log(attr_cols)
+      load(attr_cols, sticky_cols, container_el, dataset, all_cols, active_data_cols)
+
+    }
+
+    var init_order = null
+    if (window.location.search.indexOf("order=") >= 0) {
+      var o = window.location.search.split("order=")[1].split("&")[0]
+      is.order(o)
+      init_order = o.split(".")
+    }
+
+    d3.select("#dt_query")
+      .call(is.url("{{data_url}}").offset(0))
+
+    function data_printer(d, self, columns, all_cols, attrs){
+      var row_data = {};
+      var id_index;
+      var url_index;
+      var attr_type;
+
+      all_cols.forEach(function(c, i) {
+        if(c.indexOf("_id") > -1){
+          id_index = i;
+          var attr_id = c.split("_id");
+          attr_type = attr_id[0];
+        }
+        if(c.indexOf("url") > -1){
+          url_index = i;
+        }
+      })
+
+      columns.forEach(function(c){
+        var i = all_cols.indexOf(c);
+        if (c instanceof Array){
+          var id = c[0]+"_id";
+          var attr_id = d[all_cols.indexOf(id)];
+          var val = attrs[c[0]][attr_id][c[1]];
+          if(c[1] == "name" && val){
+            row_data[c] = "<a target='_top' href='"+attrs[c[0]][attr_id]['url']+"'>"+val+"</a>";
+          }
+          else {
+            row_data[c] = val || " &mdash; ";
+          }
+        }
+        else if (typeof d[i] == "string") {
+          var this_val = dataviva.format.text(d[i],{"key": c});
+          if(c == "name"){
+            if(id_index >- 1){
+              var this_id = d[id_index];
+              row_data[c] = "<a target='_top' href='/profiles/"+attr_type+"/"+this_id+"/'>"+this_val+"</a>"
+            }
+            if(url_index){
+              var this_url = d[url_index];
+              row_data[c] = "<a target='_top' href='"+this_url.toLowerCase()+"'>"+this_val+"</a>"
+            }
+          }
+          else {
+            row_data[c] = this_val
+          }
+        }
+        else if (typeof d[i] == "number") {
+          row_data[c] = dataviva.format.number(d[i],{"key": c})
+        }
+        else if (!d[i]) {
+          row_data[c] = " &mdash; "
+        }
+        else {
+          row_data[c] = d[i]
+        }
+      })
+      var row_keys = d3.keys(row_data)
+      var tds = self.selectAll("td")
+        .data(row_keys)
+
+      tds.enter().append("td")
+        .attr("class",function(dd){
+          dd = dd.split(",")
+          return dd.join(" ")
+        })
+
+      tds
+        .html(function(dd){return row_data[dd]})
+    }
+
+    function change_cols(cols){
+      d3.selectAll("tbody tr").remove();
+      columns = cols
+      current_data_cols = [];
+      for (c in columns) {
+        if (columns[c]) current_data_cols.push(c)
+      }
+      item_formatter("#dt_query", DATA, 0, true);
+      update_url()
+    }
+
+    function update_url() {
+      var args = {}
+      if (current_order.length) args.order = current_order[0]+"."+current_order[1]
+      if (current_data_cols.length > 0 && current_data_cols.length < Object.keys(columns).length) args.cols = current_data_cols.join(".")
+      dataviva.url(window.location.pathname,args)
+    }
+
+    var header_shadow = false
+    document.onscroll = check_headers
+
+    function check_headers() {
+
+      var pos = window.pageYOffset
+      if (pos > 0 && !header_shadow && table_height > window.innerHeight) {
+        d3.selectAll("#dt_query thead").attr("class","shadow")
+        header_shadow = true
+      }
+      else if (pos <= 0 && header_shadow) {
+        d3.selectAll("#dt_query thead").attr("class","")
+        header_shadow = false
+      }
+
+      x_scroll = window.pageXOffset
+
+      if ( d3.select("div#sticky").node().offsetWidth > window.innerWidth/2 ) {
+
+        if ( table_width > window.innerWidth ) {
+          d3.select("div#sticky").attr("class","")
+        }
+
+        d3.select("div#sticky")
+          .style("position","absolute")
+          .select("table.header thead")
+            .style("left", -(x_scroll)+"px")
+
+        d3.select("#dt_query #sticky table.data")
+          .style("top", "0px")
+
+      }
+      else {
+
+        if ( table_width > window.innerWidth ) {
+          d3.select("div#sticky").attr("class","shadow")
+        }
+
+        d3.select("div#sticky")
+          .style("position","fixed")
+          .select("table.header thead")
+            .style("left","0px")
+
+        d3.select("#dt_query #sticky table.data")
+          .style("top", -(window.pageYOffset)+"px")
+
+      }
+
+      d3.select("#dt_query #data table.header thead")
+        .style("left", -(x_scroll-sticky_width)+"px")
+
+    }
+
+    dataviva.resize = function() {
+      if (table_width <= window.innerWidth) {
+        d3.select("div#sticky").attr("class","")
+      }
+      else {
+        d3.select("div#sticky").attr("class","shadow")
+      }
+      d3.select("#dt_query #data")
+        .style("margin-left", function(){
+          if (table_width <= window.innerWidth) return sticky_width - 1 + "px"
+          return sticky_width + "px"
+        })
+      check_headers()
+    }
+    dataviva.resize_snap = true
+
+
+  </script>
+
+{% endblock %}

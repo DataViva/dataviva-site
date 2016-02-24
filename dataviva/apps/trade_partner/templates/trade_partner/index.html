@@ -1,0 +1,43 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="01-index.html">Home</a></li>
+        <li><a href="#">Atividade Econômica</a></li>
+        <li class="active"><span>Teleatendimento<span></span></span></li>
+    </ol>
+    <div class="tit-area" style="background-image: url({{header.background_image}})">
+        <div class="row">
+            <div class="col-xs-15 col-md-offset-4 col-md-11">
+                <h1>
+                    {{header.name}} <a href="#" title="Trocar" onclick="start_selector('TradePartner');"> (Trocar)</a>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="sidebar has-img col-xs-15 col-md-4">
+            <img src="/static/img/icons/wld/wld_{{ header.wld_id }}.png" frameborder="0" class="tit" style="border:0" allowfullscreen="">
+            <ul class="nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
+                </li>
+                <li role="presentation">
+                    <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab">Comércio com o Brasil</a>
+                </li>
+            </ul>
+        </div>
+        <div class="main-content col-xs-15 col-md-11">
+            <div class="tab-content">
+                {% include "trade_partner/tab-geral.html" %}
+                {% include "trade_partner/tab-comercio-internacional.html" %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

@@ -1,0 +1,45 @@
+<div role="tabpanel" class="tab-pane" id="matricula">
+    <h2>Matrícula</h2>
+    <p>{{ body.enrollment_statistics_description }}</p>
+    <h3>Estatísticas de matrículas do Brasil</h3>
+    <div class="row">
+        <div class="col-xs-15 col-sm-15 col-md-12">
+            <div class="table-responsive">
+                <table class="table data-blue">
+                    <thead>
+                        <tr>
+                            {% if body["bra_id"] | length < 9 %}
+                                <th>
+                                    Principal Município
+                                    <small>por Número de Alunos Matriculados</small>
+                                </th>
+                            {% endif %}
+                            <th>
+                                Principal Escola
+                                <small>por Número de Alunos Matriculados</small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% if body["bra_id"] | length < 9 %}
+                                <td>
+                                    <p class="label">{{ body.city_name }}</p>
+                                    <div class="number">
+                                        <strong class="counter">{{body["city_enrolled"] | max_digits(3)}}</strong><span> {{body["city_enrolled"] | magnitude}}</span>
+                                    </div>
+                                </td>
+                            {% endif %}
+                            <td>
+                                <p class="label">{{ body.school_name }}</p>
+                                <div class="number">
+                                    <strong class="counter">{{body["school_enrolled"] | max_digits(3)}}</strong><span> {{body["school_enrolled"] | magnitude}}</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

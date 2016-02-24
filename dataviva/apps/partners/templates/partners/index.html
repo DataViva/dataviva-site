@@ -1,0 +1,22 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mod mod-two-columns">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-15 col-sm-7">
+                <h2>Duis non mauris quis ex sodales laoreet eu eu risus. Phasellus laoreet turpis quis erat placerat fringilla. velaccumsan congue.</h2>
+                <p>O DataViva disponibiliza dados oficiais sobre exportações, atividades econômicas, localidades e ocupações de todo o Brasil, em onze visualizações e mais de 100 milhões de visualizações.</p>
+            </div>
+            <div class="col-xs-15 col-sm-7 col-sm-offset-1 col-2">
+                <h4>Por que ser parceiro DataViva?</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris imperdiet in magna nec malesuada. Maecenas odio arcu, tempor non efficitur eget, malesuada sit amet metus. Praesent vehicula nunc felis, in convallis augue pulvinar eu. Nulla nec auctor purus, non consectetur massa.</p>
+                <p>Morbi et imperdiet purus. Ut tristique sit amet felis vitae aliquet. Quisque id erat quis nisi faucibus eleifend et nec nunc. Maecenas quis augue vitae nisi accumsan congue. Curabitur justo nibh, pharetra et facilisis nec, viverra vitae urna.</p>
+                <a href="{{ url_for('partners.be_a_partner') }}" class="btn btn-default btn-dataviva" title="Seja um parceiro">Seja um parceiro</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "include/partners.html" %}
+{% endblock content %}
