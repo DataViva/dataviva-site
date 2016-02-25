@@ -9,7 +9,7 @@
         <li><a href="#">Atividade Econômica</a></li>
         <li class="active"><span>Teleatendimento<span></span></span></li>
     </ol>
-    <div class="tit-area" style="background-image: url('/static/img/bgs/bg-pattern-dots.png')">
+    <div class="tit-area" style="background-image: url('/static/img/bgs/dots.png')">
         <div class="row">
             <div class="col-xs-15 col-md-offset-4 col-md-11">
                 <h1>
@@ -29,7 +29,7 @@
                     <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab">Salário e emprego</a>
                 </li>
 
-                {% if industry.class %}    
+                {% if industry.class %}
                     <li role="presentation">
                         <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidade Econômica</a>
                     </li>
@@ -42,7 +42,7 @@
                 {% include "industry/tab-geral.html" %}
                 {% include "industry/tab-salario-emprego.html" %}
                 {% include "industry/tab-oportunidade-economica.html" %}
-                
+
             </div>
         </div>
     </div>
