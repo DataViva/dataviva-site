@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'DataViva';
-    src:    url('fonts/DataViva.eot?ti3myu');
-    src:    url('fonts/DataViva.eot?ti3myu#iefix') format('embedded-opentype'),
-        url('fonts/DataViva.ttf?ti3myu') format('truetype'),
-        url('fonts/DataViva.woff?ti3myu') format('woff'),
-        url('fonts/DataViva.svg?ti3myu#DataViva') format('svg');
+    src:    url('/static/dist/fonts/DataViva.eot?ti3myu');
+    src:    url('/static/dist/fonts/DataViva.eot?ti3myu#iefix') format('embedded-opentype'),
+        url('/static/dist/fonts/DataViva.ttf?ti3myu') format('truetype'),
+        url('/static/dist/fonts/DataViva.woff?ti3myu') format('woff'),
+        url('/static/dist/fonts/DataViva.svg?ti3myu#DataViva') format('svg');
     font-weight: normal;
     font-style: normal;
 }
