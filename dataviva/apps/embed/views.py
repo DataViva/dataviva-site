@@ -14,7 +14,7 @@ from dataviva.api.rais.views import rais_api
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.data.forms import DownloadForm
 from dataviva.apps.account.models import User, Starred
-from dataviva.apps.graphs.models import Build, UI, App, Crosswalk_oc, Crosswalk_pi
+from dataviva.apps.embed.models import Build, UI, App, Crosswalk_oc, Crosswalk_pi
 from dataviva.apps.general.models import Short
 
 from dataviva.translations.translate import translate
@@ -27,7 +27,7 @@ from config import FACEBOOK_OAUTH_ID, basedir,GZIP_DATA
 import os, urlparse, random, zipfile, sys, gzip
 from dataviva.utils.cached_query import api_cache_key
 
-mod = Blueprint('apps', __name__, url_prefix='/<lang_code>/apps')
+mod = Blueprint('embed', __name__, url_prefix='/<lang_code>/embed')
 
 @mod.before_request
 def before_request():
@@ -203,8 +203,8 @@ def guide():
 def is_xhr():
     return request.is_xhr
 
-@mod.route("/embed/")
-@mod.route("/embed/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
+@mod.route("/")
+@mod.route("/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
 @view_cache.cached(key_prefix=api_cache_key("apps:embed"), unless=is_xhr)
 def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
           filter1="all", filter2="all", output="cbo"):
