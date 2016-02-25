@@ -42,6 +42,7 @@ def index(wld_id):
     import_rank = import_rank_query.all()
 
     header = {
+        'continent_id': wld_id[0:2],
         'name': trade_partner_service.country_name(),
         'year': trade_partner_service.year(),
         'trade_balance': trade_partner_service.trade_balance(),

@@ -40,6 +40,7 @@ def index(course_sc_id):
 
     header = {
         'course_sc_id' : course_sc_id,
+        'field_id' : course_sc_id[0:2],
         'course_name' : sc_service.course_name(),
         'course_classes' : sc_service.course_classes(),
         'course_age' : sc_service.course_age(),

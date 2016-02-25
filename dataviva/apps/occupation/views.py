@@ -35,6 +35,7 @@ def index(occupation_id):
     context = {}
 
     header['cbo_id'] = occupation_id
+    header['family_id'] = occupation_id[0]
 
     if len(occupation_id) == 4:
         context['is_family'] = True
@@ -87,4 +88,4 @@ def index(occupation_id):
             header['ranking'] = index + 1
             break
 
-    return render_template('occupation/index.html', body_class='perfil-estado', context=context, header = header, body = body)
+    return render_template('occupation/index.html', context=context, header = header, body = body)

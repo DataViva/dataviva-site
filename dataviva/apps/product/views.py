@@ -31,6 +31,7 @@ def index(product_id):
     body = {}
 
     header['product_id'] = product_id
+    header['section_id'] = product_id[0:2]
     context['depth'] = len(product_id)
 
     bra_id = request.args.get('bra_id')
