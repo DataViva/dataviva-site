@@ -20,10 +20,13 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
-@mod.route('/')
-def index():
-    university_service = University(university_id='00575')
-    majors_service = UniversityMajors(university_id='00575')
+@mod.route('/<university_id>')
+def index(university_id):
+
+    #Use Example /university/00575
+
+    university_service = University(university_id)
+    majors_service = UniversityMajors(university_id)
 
     header = {
         'name' : university_service.name(),

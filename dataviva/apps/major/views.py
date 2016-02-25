@@ -20,12 +20,12 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
-@mod.route('/')
-def index():
-    course_hedu_id = '523E04'
-    major_service = Major(course_hedu_id=course_hedu_id)
-    universities_service = MajorUniversities(course_hedu_id=course_hedu_id)
-    municipalities_service = MajorMunicipalities(course_hedu_id=course_hedu_id)
+@mod.route('/<course_hedu_id>')
+def index(course_hedu_id):
+    major_service = Major(course_hedu_id)
+    universities_service = MajorUniversities(course_hedu_id)
+    municipalities_service = MajorMunicipalities(course_hedu_id)
+
 
     max_year_query = db.session.query(func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
 
