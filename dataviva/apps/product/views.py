@@ -27,30 +27,16 @@ def add_language_code(endpoint, values):
 def index(product_id):
 
     header = {}
+    context = {}
     body = {}
 
     header['product_id'] = product_id
+    context['depth'] = len(product_id)
+
     bra_id = request.args.get('bra_id')
-
-    #None database fields must be treated (/05?bra_id=2ce020008),
-    #templates with no data shall be omitted and verify usage of R$ and US$
-
-    #Vars to do tests:
-    #section (depth == 2)
-    #positon (depth == 6)
-    #brazil (bra_id == None)
-    #product_id = #05 #052601
-    #bra_id = #None #4mg #4mg01 #4mg0000 #4mg010206 #2ce020008
-
-    context = {
-        'background_image':'static/img/bg-profile-location.jpg',
-        'portrait':'static/img/mineric_product.jpg'
-    }
-
     context['bra_id'] = bra_id
     if bra_id:
         context['bra_id_len'] = len(bra_id)
-    context['depth'] = len(product_id)
 
     trade_partners_service = ProductTradePartnersService(product_id=product_id, bra_id=bra_id)
     municipalities_service = ProductMunicipalitiesService(product_id=product_id, bra_id=bra_id)
@@ -100,6 +86,7 @@ def index(product_id):
     header['import_value'] = product_service.total_imported()
     header['import_net_weight'] = product_service.unity_weight_import_price()
 
+    #Get rankings vars, code should be refactored
     from dataviva.api.secex.models import Ymp
     from dataviva import db
     from sqlalchemy.sql.expression import func, desc
