@@ -9,7 +9,7 @@
         <li><a href="#">Atividade Econômica</a></li>
         <li class="active"><span>Teleatendimento<span></span></span></li>
     </ol>
-    <div class="tit-area" style="background-image: url('/static/img/bgs/bg-pattern-dots.png')">
+    <div class="tit-area" style="background-image: url('/static/img/bgs/dots.png')">
         <div class="row">
             <div class="col-xs-15 col-md-offset-4 col-md-11">
                 <h1>
@@ -20,7 +20,7 @@
     </div>
     <div class="row">
         <div class="sidebar has-img col-xs-15 col-md-4">
-            <iframe src="/static/img/icons/cnae/cnae_{{industry.cnae_id[0]}}.png" width="200" height="150" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
+            <span width="200" height="150" frameborder="0" class="tit dv-cnae-{{ industry.cnae_id[0] }}"></span>
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active">
                     <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
@@ -29,7 +29,7 @@
                     <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab">Salário e emprego</a>
                 </li>
 
-                {% if industry.class %}    
+                {% if industry.class %}
                     <li role="presentation">
                         <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidade Econômica</a>
                     </li>
@@ -42,7 +42,7 @@
                 {% include "industry/tab-geral.html" %}
                 {% include "industry/tab-salario-emprego.html" %}
                 {% include "industry/tab-oportunidade-economica.html" %}
-                
+
             </div>
         </div>
     </div>
