@@ -885,7 +885,7 @@ footer.main .sub-menu > li:not(:last-child) {
   margin: 0;
 }
 .articles .item:before {
-  content: url('../../../imgs/ico-results.png');
+  content: url('/static/img/icons/scholar/ico-results.png');
   display: block;
   float: left;
   height: 40px;
