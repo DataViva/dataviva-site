@@ -18,6 +18,36 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/')
+@mod.route('/', methods=['GET'])
 def index():
     return render_template('scholar/index.html')
+
+
+@mod.route('/article/<id>', methods=['GET'])
+def show(id):
+    return render_template('scholar/show.html')
+
+
+@mod.route('/article/new', methods=['GET'])
+def new():
+    return render_template('scholar/new.html')
+
+
+@mod.route('/article/<id>/edit', methods=['GET'])
+def edit(id):
+    return render_template('scholar/edit.html')
+
+
+@mod.route('/article', methods=['POST'])
+def create():
+    pass
+
+
+@mod.route('/article/<id>', methods=['PATCH', 'PUT'])
+def update():
+    pass
+
+
+@mod.route('/article/<id>', methods=['DELETE'])
+def destroy():
+    pass
