@@ -18,11 +18,36 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/')
+@mod.route('/', methods=['GET'])
 def index():
     return render_template('blog/index.html')
 
 
-@mod.route('/post')
-def post():
-    return render_template('blog/post.html')
+@mod.route('/post/<id>', methods=['GET'])
+def show(id):
+    return render_template('blog/show.html')
+
+
+@mod.route('/post/new', methods=['GET'])
+def new():
+    return render_template('blog/new.html')
+
+
+@mod.route('/post/<id>/edit', methods=['GET'])
+def edit():
+    return render_template('blog/edit.html')
+
+
+@mod.route('/post', methods=['POST'])
+def create():
+    pass
+
+
+@mod.route('/post/<id>', methods=['PATCH', 'PUT'])
+def update():
+    pass
+
+
+@mod.route('/post/<id>', methods=['DELETE'])
+def destroy():
+    pass
