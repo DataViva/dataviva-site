@@ -196,6 +196,7 @@ class Product:
         return export_val - import_val
 
     def total_exported(self):
+        import pdb; pdb.set_trace()
         return self.__secex__().export_val
 
     def unity_weight_export_price(self):

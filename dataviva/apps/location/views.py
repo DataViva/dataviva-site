@@ -31,6 +31,8 @@ def index(bra_id):
         .order_by(desc(Ymb.year)).limit(1).first().eci
 
     header = {
+        'name': location_service.name(),
+        'bra_id' : bra_id[:3],
         'gdp': location_service.gdp(),
         'life_expectation': location_service.life_expectation(),
         'population': location_service.population(),
@@ -40,5 +42,4 @@ def index(bra_id):
     }
 
     return render_template('location/index.html',
-                           header=header,
-                           body_class='perfil-estado')
+                           header=header)
