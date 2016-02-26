@@ -63,7 +63,7 @@ class Industry :
 
     def biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_average__()[0]
-        return rais.wage
+        return rais.wage_avg
 
 
 class Occupation:
