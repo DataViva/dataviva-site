@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-
+from mock import posts
 
 mod = Blueprint('blog', __name__,
                 template_folder='templates',
@@ -20,7 +20,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    return render_template('blog/index.html')
+    return render_template('blog/index.html', posts=posts)
 
 
 @mod.route('/post/<id>', methods=['GET'])
