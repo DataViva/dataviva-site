@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.services import Location as LocationService
 from dataviva.api.secex.models import Ymb
+from dataviva.api.secex.services import Location as LocationBodyService
 from sqlalchemy import desc
 
 mod = Blueprint('location', __name__,
@@ -25,6 +26,7 @@ def add_language_code(endpoint, values):
 def index(bra_id):
 
     location_service = LocationService(bra_id=bra_id)
+    location_body_service = LocationBodyService(bra_id=bra_id)
 
     ''' Query básica para SECEX'''
     eci = Ymb.query.filter_by(bra_id=bra_id, month=0) \
@@ -41,5 +43,12 @@ def index(bra_id):
         'eci': eci,
     }
 
+    body = {
+        'main_product_by_export_value' : location_body_service.main_product_by_export_value()
+        #'main_product_by_export_value_name' : location_body_service.main_product_by_export_value_name()
+
+
+    }
+
     return render_template('location/index.html',
-                           header=header)
+                           header=header, body=body)

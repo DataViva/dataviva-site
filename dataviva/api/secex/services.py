@@ -196,7 +196,6 @@ class Product:
         return export_val - import_val
 
     def total_exported(self):
-        import pdb; pdb.set_trace()
         return self.__secex__().export_val
 
     def unity_weight_export_price(self):
@@ -337,10 +336,53 @@ class ProductLocations(Product):
         secex = self.__secex__()
         return secex.opp_gain_wld
 
+class Location:
+    def __init__(self, bra_id):
+        self._secex = None
+        self._secex_sorted_by_exports = None
+        self.bra_id = bra_id
+        self.max_year_query = db.session.query(
+            func.max(Ymbp.year)).filter_by(bra_id=self.bra_id)
+        self.secex_query = Ymbp.query.filter(
+            Ymbp.bra_id == self.bra_id,
+            Ymbp.month == 0,
+            Ymbp.hs_id_len == 6,
+            Ymbp.export_val != None,
+            Ymbp.year == self.max_year_query)
 
+    def __secex__(self):
+        if not self._secex:
+            secex_data = self.secex_query.first_or_404()
+            self._secex = secex_data
+        return self._secex
 
+    def __secex_list__(self):
+        if not self._secex:
+            secex_data = self.secex_query.all()
+            self._secex = secex_data
+        return list(self._secex)
 
+    def __secex_sorted_by_exports__(self):
+        if not self._secex_sorted_by_exports:
+            self._secex_sorted_by_exports = self.__secex_list__()
+            self._secex_sorted_by_exports.sort(key=lambda secex: secex.export_val, reverse=True)
+        return self._secex_sorted_by_exports
 
+    def main_product_by_export_value(self):
+        try:
+            secex = self.__secex_sorted_by_exports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.export_val
+
+    # def main_product_by_export_value_name(self):
+    #     try:
+    #         secex = self.__secex_sorted_by_exports__()[0]
+    #     except IndexError:
+    #         return None
+    #     else:
+    #         return secex.name_pt
 
 
 
