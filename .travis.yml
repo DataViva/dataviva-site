@@ -3,4 +3,8 @@ python:
   - "2.7"
 
 # command to install dependencies
-install: "pip install -r requirements.txt"
+install:
+  - pip install -v Flask==0.10.1
+  - pip install -r requirements.txt
+
+
