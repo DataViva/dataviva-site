@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Babel==2.1.1
 blinker==1.4
 Flask==0.10.1
