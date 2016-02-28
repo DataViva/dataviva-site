@@ -22,14 +22,12 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
-@mod.route('/')
-def index():
+@mod.route('/<wld_id>')
+def index(wld_id):
 
-    wld_id = 'nausa'
-
-    trade_partner_service = TradePartner(wld_id=wld_id)
-    municipalities_service = TradePartnerMunicipalities(wld_id=wld_id)
-    products_service = TradePartnerProducts(wld_id=wld_id)
+    trade_partner_service = TradePartner(wld_id)
+    municipalities_service = TradePartnerMunicipalities(wld_id)
+    products_service = TradePartnerProducts(wld_id)
 
     max_year_query = db.session.query(func.max(Ymw.year)).filter_by(wld_id=wld_id)
     export_rank_query = Ymw.query.join(Wld).filter(
@@ -44,6 +42,7 @@ def index():
     import_rank = import_rank_query.all()
 
     header = {
+        'continent_id': wld_id[0:2],
         'name': trade_partner_service.country_name(),
         'year': trade_partner_service.year(),
         'trade_balance': trade_partner_service.trade_balance(),

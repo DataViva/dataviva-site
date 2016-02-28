@@ -9,7 +9,7 @@
         <li><a href="#">Inicie uma pesquisa</a></li>
         <li class="active"><span>Cursos de Ensino Superior<span></span></span></li>
     </ol>
-    <div class="tit-area" style="background-image: url('static/{{ header.background_name }}.jpg')">
+    <div class="tit-area" style="background-image: url('/static/img/bgs/dots.png')">
         <div class="row">
             <div class="col-xs-15 col-md-offset-4 col-md-11">
                 <h1>
@@ -20,7 +20,9 @@
     </div>
     <div class="row">
         <div class="sidebar has-img col-xs-15 col-md-4">
-            <img src="{{ static_folder }}/course_hedu_{{ header.portrait_id }}_black.png" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
+            <div class="tit">
+                <span class="dv-course-hedu-{{ header.field_id }}"></span>
+            </div>
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active">
                     <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>

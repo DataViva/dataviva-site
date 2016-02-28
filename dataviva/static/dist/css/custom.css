@@ -1012,9 +1012,16 @@ footer.main .sub-menu > li:not(:last-child) {
 .sidebar.no-padding {
   padding-top: 0;
 }
-.sidebar.has-img img.tit {
+.sidebar.has-img div.tit {
   display: block;
-  margin: -8rem auto 5rem;
+  margin: -8rem 24% 5rem;
+  color: #9EDDBF;
+  font-size: 82px;
+  background: white;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #F2F5F3;
 }
 .sidebar .btn + h4 {
   margin-top: 4rem;
@@ -1242,7 +1249,7 @@ table.data-2-columns > tbody th {
     margin-right: 2.2rem;
   }
   .navbar + hr {
-    margin: 0;
+    margin: 0 0 20px;
   }
   .navbar {
     border-radius: 0;

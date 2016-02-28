@@ -20,12 +20,12 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
-@mod.route('/')
-def index():
-    course_hedu_id = '523E04'
-    major_service = Major(course_hedu_id=course_hedu_id)
-    universities_service = MajorUniversities(course_hedu_id=course_hedu_id)
-    municipalities_service = MajorMunicipalities(course_hedu_id=course_hedu_id)
+@mod.route('/<course_hedu_id>')
+def index(course_hedu_id):
+    major_service = Major(course_hedu_id)
+    universities_service = MajorUniversities(course_hedu_id)
+    municipalities_service = MajorMunicipalities(course_hedu_id)
+
 
     max_year_query = db.session.query(func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
 
@@ -42,14 +42,14 @@ def index():
         'graduates' : major_service.graduates(),
         'profile' : major_service.profile(),
         'year' : major_service.year(),
-        'portrait_id': course_hedu_id[:2]
+        'field_id': course_hedu_id[:2]
     }
 
     content = {
         'university_with_more_enrolled' : universities_service.university_with_more_enrolled(),
         'highest_enrolled_number_by_university' : universities_service.highest_enrolled_number(),
         'municipality_with_more_enrolled' : municipalities_service.municipality_with_more_enrolled(),
-        'highest_enrolled_number_by_municipality' : municipalities_service.highest_enrolled_number(), 
+        'highest_enrolled_number_by_municipality' : municipalities_service.highest_enrolled_number(),
         'university_with_more_entrants' : universities_service.university_with_more_entrants(),
         'highest_entrant_number_by_university' : universities_service.highest_entrants_number(),
         'municipality_with_more_entrants' : municipalities_service.municipality_with_more_entrants(),
@@ -64,7 +64,7 @@ def index():
         if rank[index].course_hedu_id == course_hedu_id:
             header['rank'] = index
             break
-    
+
     return render_template('major/index.html', header=header, content=content, \
         body_class='perfil-estado', static_folder=static_folder)
 
