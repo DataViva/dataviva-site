@@ -1,34 +1,34 @@
-<form action="" class="form-dataviva">
+<form method="post" action="{{ url_for('scholar.create') }}" class="form-dataviva">
     <p>
-        <label for="field-titulo">Título</label>
-        <input id="field-titulo" type="text" class="form-control" />
+        <label for="title">Título</label>
+        <input name="title" id="title" type="text" class="form-control" />
     </p>
     <p>
-        <label for="field-author">Tema</label>
-        <input id="field-author" type="text" class="form-control" />
+        <label for="theme">Tema</label>
+        <input name="theme" id="theme" type="text" class="form-control" />
     </p>
     <p>
-        <label for="field-author">Autor</label>
-        <input id="field-author" type="text" class="form-control" />
+        <label for="author">Autor</label>
+        <input name="author" id="author" type="text" class="form-control" />
     </p>
     <p>
-        <label for="field-author">Palavras-Chave</label>
-        <input id="field-author" type="text" class="form-control" />
+        <label for="key_words">Palavras-Chave</label>
+        <input name="key_words" id="key_words" type="text" class="form-control" />
     </p>
     <p>
-        <label for="field-descricao">Resumo</label>
-        <textarea id="field-descricao" rows="5" class="form-control"></textarea>
+        <label for="abstract">Resumo</label>
+        <textarea name="abstract" id="abstract" rows="5" class="form-control"></textarea>
     </p>
     <p>
-        <label for="field-author">Data de Publicação</label>
-        <input id="field-author" type="text" class="form-control" />
+        <label for="publication_date">Data de Publicação</label>
+        <input name="publication_date" id="publication_date" type="text" class="form-control" />
     </p>
     <p>
-        <label for="field-arquivo">
+        <label for="file">
             Formato<br />
             <small>Aceitamos artigos somente em formato PDF.</small>
         </label>
-        <input id="field-arquivo" type="file" />
+        <input name="file" id="file" type="file" />
     </p>
-    <button type="button" class="btn btn-default btn-dataviva pull-right">Enviar</button>
+    <button type="submit" class="btn btn-default btn-dataviva pull-right">Enviar</button>
 </form>
