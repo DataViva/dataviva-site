@@ -3,8 +3,9 @@ Flask==0.10.1
 Jinja2==2.7
 Werkzeug==0.9
 
-# Helper lib for running scripts locally without server
+# Helper libs for running scripts locally without server
 Flask-Script==0.5.3
+Flask-Runner==2.1.1
 
 # Make managing logged in users easier
 Flask-Login==0.2
@@ -17,6 +18,9 @@ Flask-WTF==0.8.3
 
 # Localization
 Flask-Babel==0.8
+
+# Testing helper
+Flask-Testing==0.4.2
 
 # DB libs for connecting to MySQL
 # WARNING: Must have MySQL server installed!
