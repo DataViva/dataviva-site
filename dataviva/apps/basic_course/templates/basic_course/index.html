@@ -9,31 +9,33 @@
         <li><a href="#">Atividade Econômica</a></li>
         <li class="active"><span>Teleatendimento<span></span></span></li>
     </ol>
-    <div class="tit-area" style="background-image: url('static/img/sala.jpg')">
+    <div class="tit-area" style="background-image: url('/static/img/bgs/dots.png')">
         <div class="row">
             <div class="col-xs-15 col-md-offset-4 col-md-11">
                 <h1>
-                    {{basic_course_statistics["course_name"]}} <a href="#" data-toggle="modal" data-target="#modal-dataviva" title="Trocar"> (trocar)</a>
+                    {{header["course_name"]}} <a href="#" title="Trocar" onclick="start_selector('BasicCourse');"> (trocar)</a>
                 </h1>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="sidebar has-img col-xs-15 col-md-4">
-            <iframe src="static/img/capelo.jpg" width="200" height="150" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
+            <div class="tit">
+                <span class="dv-course-sc-{{ header.field_id }}"></span>
+            </div>
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active">
                     <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
                 </li>
                 <li role="presentation">
                     <a href="#matricula" aria-controls="matricula" role="tab" data-toggle="tab">Matrícula</a>
-                </li>                
+                </li>
             </ul>
         </div>
         <div class="main-content col-xs-15 col-md-11">
             <div class="tab-content">
                 {% include "basic_course/tab-geral.html" %}
-                {% include "basic_course/tab-matricula.html" %}                
+                {% include "basic_course/tab-matricula.html" %}
             </div>
         </div>
     </div>

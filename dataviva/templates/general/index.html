@@ -1,14 +1,14 @@
-{% extends 'base/base.html' %}
+{% extends 'base.html' %}
 
-{% block main_content %}
+{% block content %}
 <div class="mod mod-two-columns">
     <div class="container">
         <div class="row">
-            <div class="col-xs-15 col-sm-6 col-sm-offset-1">
-                <h2>A maior plataforma de visualização de dados da economia brasileira.<br />Totalmente aberta e livre.</h2>
-                <p>O DataViva disponibiliza dados oficiais sobre exportações, atividades econômicas, localidades e ocupações de todo o Brasil, em onze visualizações e mais de 100 milhões de visualizações.</p>
+            <div class="col-xs-15 col-sm-5 col-sm-offset-1">
+                <h2>A maior plataforma de visualização de dados da economia brasileira.<br/>Totalmente aberta e livre.</h2>
+                <p>O DataViva é uma ferramenta de pesquisa que disponibiliza dados oficiais sobre exportações, atividade econômica, localidade, educação e ocupações de todo o Brasil. São 11 aplicativos, que, juntos, formam mais de 1 bilhão de possibilidades de visualizações.</p>
                 <p class="cta">
-                    <a href="inicie-uma-pesquisa" class="btn btn-default btn-dataviva" title="Inicie uma pesquisa">Inicie uma pesquisa <i class="fa fa-angle-right"></i></a>
+                    <a href="{{ url_for('general.search') }}" class="btn btn-default btn-dataviva" title="Inicie uma pesquisa">Inicie uma pesquisa <i class="fa fa-angle-right"></i></a>
                     <a href="#" title="Assista ao vídeo" data-toggle="modal" data-target="#modal-dataviva-video">Assista ao vídeo</a>
                 </p>
             </div>
@@ -17,19 +17,22 @@
                     <li>
                         <h3><a href="02-pesquisa-publico.html?open-modal=modal-dataviva-localidade">Empreendedores</a></h3>
                         <p>
-                            <strong>Identifique oportunidades de negócio:</strong><br />Perfil econômico de uma região, atividade econômica, emprego e renda de uma indústrica ou ocupação...
+                            <strong>Identifique o perfil econômico e as oportunidades de negócios de uma região:</strong><br/>
+                            Número de estabelecimentos por atividade econômica, porcentagem de profissionais graduados por ano em determinado curso por região, produtos similares por região, salário médio por segmento, e mais...
                         </p>
                     </li>
                     <li>
                         <h3><a href="02-pesquisa-publico.html?open-modal=modal-dataviva-localidade">Agentes de Desenvolvimento</a></h3>
                         <p>
-                            <strong>Analise e avalie oportunidades de criação de políticas de desenvolvimento:</strong><br /> Perfil econômico de uma região, atividade econômica, emprego e renda de uma indústrica ou ocupação, dados sobre educação...
+                            <strong>Avalie a criação de políticas de desenvolvimento de acordo com a localidade:</strong><br/>
+                            Principais parceiros comerciais de um produto por região, estados que mais importam um produto específico, atividade econômica por localidade, emprego e renda por segmento, e mais...
                         </p>
                     </li>
                     <li>
                         <h3><a href="02-pesquisa-publico.html?open-modal=modal-dataviva-localidade">Estudantes e Profissionais</a></h3>
                         <p>
-                            <strong>Descubra oportunidades de emprego, renda e educação</strong><br />Perfil econômico de uma região, atividade econômica, emprego e renda de uma indústrica ou ocupação, dados sobre educação...
+                            <strong>Descubra informações sobre empregos disponíveis, renda por ocupação e cursos:</strong><br/>
+                            Salário médio de uma atividade ou ocupação, cidades que concentram a maior taxa de empregos em uma atividade, cursos oferecidos por região, quantidade de matriculados em cada universidade, e mais...
                         </p>
                     </li>
                 </ul>
@@ -40,91 +43,79 @@
 <div class="mod mod-explore">
     <div class="container text-center">
         <h2>Explore nossos bancos de dados</h2>
-        <p class="tagline">O DataViva reúne dados de diversos bancos de dados: emprego e renda (RAIS), comércio exterior (SECEX), educação básica e ensino técnico (Censo escolar), Ensino Superior (MEC) e dados sobre comércio internacional (UN Contrade).</p>
+        <p class="tagline">O DataViva reúne dados de diversas fontes: Emprego e Renda (RAIS), Comércio Exterior Brasileiro (SECEX/MDCI), Educação Básica e Ensino Técnico (Censo Escolar), Ensino Superior (Censo da Educação Superior) e Comércio Internacional (UN Comtrade).</p>
         <div class="text-divider">
             <h3 class="inner">O que você gostaria de saber?</h3>
             <hr />
         </div>
         <div class="row">
-            <div class="col-xs-15 col-sm-7 col-md-offset-1 col-md-2 item">
-                <a href="02-pesquisa-publico.html?open-modal=modal-dataviva-localidade"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
+            <div class="col-xs-11 col-sm-5 col-md-3 col-xs-offset-2 col-sm-offset-0 item">
+                <a href="#" onclick="start_selector('Location');">
+                <p data-toggle="popover" data-placement="top" data-content="Perfil geral por região, estado, mesorregião, microrregião ou município brasileiro. Visualize dados de comércio exterior, atividade econômica, empregos e educação. Exemplos: Sudeste, Mato Grosso, Recife, Região Metropolitana de Porto Alegre.">
                     <span>Localidades Brasileiras</span>
                     <img src="/static/img/icons/categories/ico-search-localidades.png" />
                 </p></a>
             </div>
-            <div class="col-xs-15 col-sm-7 col-md-2 item">
-                <a href="12-13-perfil-ocupacoes.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
+            <div class="col-xs-11 col-sm-5 col-md-3 col-xs-offset-2 col-sm-offset-0 item">
+                <a href="#" onclick="start_selector('Occupation');">
+                <p data-toggle="popover" data-placement="top" data-content="Regiões que mais empregam por atividade profissional, cursos relacionados, salário médio e estatísticas de emprego por ano. Exemplos: Técnicos de Nível Médio, Trabalhadores da Indústria, Recepcionistas, Médicos Clínicos.">
                     <span>Ocupações</span>
                     <img src="/static/img/icons/categories/ico-search-ocupacoes.png" />
                 </p></a>
             </div>
-            <div class="col-xs-15 col-sm-7 col-md-2 item">
-                <a href="12-13-perfil-atividade-economica2.html">
-                    <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Atividades Econômicas</span>
-                        <img src="/static/img/icons/categories/ico-search-atividades.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <a href="12-13-perfil-produtos.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Produtos</span>
-                        <img src="/static/img/icons/categories/ico-search-produtos.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <a href="05-perfil-estado.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Parceiros Comerciais do Brasil</span>
-                        <img src="/static/img/icons/categories/ico-search-parceiros.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <a href="02-pesquisa-publico.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Universidades</span>
-                        <img src="/static/img/icons/categories/ico-search-universidades.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <a href="12-13-perfil-cursos.html"><span>Cursos do Ensino Superior</span>
-                        <img src="/static/img/icons/categories/ico-search-curso-superior.png" />
-                    </p></a>
-                </div>
+            <div class="col-xs-11 col-sm-5 col-md-3 col-xs-offset-2 col-sm-offset-0 item">
+                <a href="#" onclick="start_selector('Industry');">
+                <p data-toggle="popover" data-placement="top" data-content="Informações sobre taxa de empregos por região, salário médio por tipo de ocupação, renda mensal média e oportunidades econômicas. Exemplos: Comércio, Serviços Domésticos, Educação, Restaurantes, Teleatendimento, Organizações Religiosas.">
+                    <span>Atividades Econômicas</span>
+                    <img src="/static/img/icons/categories/ico-search-atividades.png" />
+                </p></a>
             </div>
-            <div class="row">
-                <div class="col-xs-15 col-sm-7 col-md-offset-4 col-md-2 item">
-                    <a href="12-13-perfil-cursos-basicos.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Curso Básico e Ensino Técnico</span>
-                        <img src="/static/img/icons/categories/ico-search-curso-basico1.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <a href="12-13-perfil-cursos-basicos.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Curso Básico e Ensino Técnico</span>
-                        <img src="/static/img/icons/categories/ico-search-curso-basico2.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <a href="12-13-perfil-saude.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Saúde Pública</span>
-                        <img src="/static/img/icons/categories/ico-search-saude.png" />
-                    </p></a>
-                </div>
-                <div class="col-xs-15 col-sm-7 col-md-2 item">
-                    <a href="06-perfil-comercio.html"><p data-toggle="popover" data-placement="top" data-content="Visualize perfil de exportação e importação, educação, estatísticas econômicas de uma cidades, estados ou municípios.">
-                        <span>Pequenas e Médias Empresas</span>
-                        <img src="/static/img/icons/categories/ico-search-pme.png" />
-                    </p></a>
-                </div>
+            <div class="col-xs-11 col-sm-5 col-md-3 col-xs-offset-2 col-sm-offset-0 item">
+                <a href="#" onclick="start_selector('Product');">
+                <p data-toggle="popover" data-placement="top" data-content="Dados da Balança Comercial por produto, origem das importações e destino das exportações, ranking por localidade, atividades econômicas e ocupações relacionadas. Exemplos: Gêneros Alimentícios, Artes e Antiguidades, Minério de Ferro, Café, Peças para Veículos.">
+                    <span>Produtos</span>
+                    <img src="/static/img/icons/categories/ico-search-produtos.png" />
+                </p></a>
+            </div>
+            <div class="col-xs-11 col-sm-5 col-md-3 col-xs-offset-2 col-sm-offset-0 item">
+                <a href="#" onclick="start_selector('TradePartner');">
+                <p data-toggle="popover" data-placement="top" data-content="Nações que importam ou exportam produtos para o Brasil, dados de comercialização por tipo de produto ou por município comercializador. Exemplos: Ásia, África, Europa, México, Japão, Estados Unidos, China, Holanda, Irã.">
+                    <span>Parceiros Comerciais do Brasil</span>
+                    <img src="/static/img/icons/categories/ico-search-parceiros.png" />
+                </p></a>
+            </div>
+            <div class="col-xs-11 col-sm-5 col-md-3 col-xs-offset-2 col-sm-offset-0 col-md-offset-3 item">
+                <a href="#" onclick="start_selector('University');">
+                <p data-toggle="popover" data-placement="top" data-content="Número de matrículas em cada curso ofertado, situação dos estudantes e perfis semelhantes de universidades. Exemplos: Universidade de São Paulo, Pontifícia Universidade Católica de Goiás, Universidade Federal de Minas Gerais.">
+                    <span>Universidades</span>
+                    <img src="/static/img/icons/categories/ico-search-universidades.png" />
+                </p></a>
+            </div>
+            <div class="col-xs-11 col-sm-5 col-md-3 col-xs-offset-2 col-sm-offset-3 col-md-offset-0 item">
+                <a href="#" onclick="start_selector('Major');">
+                <p data-toggle="popover" data-placement="top" data-content="Lista de universidades e municípios que ofertam o curso de Educação Superior ou o campo de estudo selecionado. Exemplos: Educação, Ciências da Saúde, Direito, Engenharia de Produção, Fisioterapia.">
+                    <span>Cursos do Ensino Superior</span>
+                    <img src="/static/img/icons/categories/ico-search-curso-superior.png" />
+                </p></a>
+            </div>
+            <div class="col-xs-11 col-sm-5 col-md-3 col-xs-offset-2 col-sm-offset-0 item">
+                <a href="#" onclick="start_selector('BasicCourse');">
+                <p data-toggle="popover" data-placement="top" data-content="Escolas do Brasil que oferecem educação profissional e ranking de matrículas na Educação Básica por município. Exemplos: Ensino Fundamental, Ensino Médio, Técnico em Enfermagem, Técnico em Agropecuária.">
+                    <span>Educação Básica</span>
+                    <img src="/static/img/icons/categories/ico-search-curso-basico1.png" />
+                </p></a>
             </div>
         </div>
     </div>
-    <div class="mod mod-join">
-        <div class="container text-center">
-            <h2>Junte-se a milhares de pessoas que usam o Dataviva</h2>
-            <p class="tagline">Cadastre-se gratuitamente e aproveite ao máximo o Dataviva. Ao fazer cadastro você terá acesso a recursos exclusivos para facilitar sua pesquisa.</p>
-            <a role="button" class="btn btn-default navbar-btn btn-dataviva" data-toggle="modal" data-target="#dataviva-signup">Cadastrar Gratuitamente</a>
-            <h2>O DataViva na mídia</h2>
-            <img src="/static/img/public_appearances.png" alt="O DataViva na mídia" class="img-responsive" />
-        </div>
 </div>
-{% endblock main_content %}
+<div class="mod mod-join">
+    <div class="container text-center">
+        <h2>Junte-se a milhares de pessoas que usam o Dataviva</h2>
+        <p class="tagline">Cadastre-se gratuitamente e aproveite ao máximo o Dataviva. Ao fazer cadastro você terá acesso a recursos exclusivos para facilitar sua pesquisa.</p>
+        <a role="button" class="btn btn-default navbar-btn btn-dataviva" data-toggle="modal" data-target="#dataviva-signup">Cadastrar Gratuitamente</a>
+        <h2>O DataViva na mídia</h2>
+        <img src="/static/img/public_appearances.png" alt="O DataViva na mídia" class="img-responsive" />
+    </div>
+</div>
+{% include "include/partners.html" %}
+{% endblock content %}

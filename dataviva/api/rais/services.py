@@ -107,6 +107,9 @@ class Occupation:
         total_establishments = self.__rais__().num_est
         return total_establishments
 
+    def age_avg(self):
+        return self.__rais__().age_avg
+
     def __rais_list__(self):
         if not self._rais:
             rais = self.rais_query.all()

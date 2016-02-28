@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, g, jsonify, request, render_template
-from dataviva.apps.wizard.questions_tree import (
-    WizTree,
-    get_next_step,
-    get_step_options
-)
+from flask import Blueprint, g, jsonify, request, render_template, redirect
+from dataviva.apps.wizard.sessions import SESSIONS
+from dataviva.apps.general.views import get_locale
 
 mod = Blueprint('wizard', __name__, url_prefix='/<lang_code>/wizard')
 
@@ -14,22 +11,19 @@ def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
 
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', get_locale())
+
+
 @mod.route('/session/<session_name>', methods=['GET'])
 def session(session_name):
-
-    # TEMP - filling out some random questions
-    from hashlib import md5
-
-    questions = map(lambda x: {
-        "id": x,
-        "label": md5(str(x)).hexdigest(),
-        "steps": ("product", "location",),
-    }, range(8))
+    session_obj = SESSIONS.get(session_name, False)
 
     return jsonify({
         "session_name": session_name,
-        "title": "%s title" % session_name,
-        "questions": questions,
+        "title": session_obj.title,
+        "questions": map(lambda x: x.serialize, session_obj.questions),
     })
 
 
@@ -37,27 +31,71 @@ def session(session_name):
 def submit_answer():
 
     rjson = request.get_json()
-
     session_name = rjson["session_name"]
-    prev = rjson.get("previous_answers", [])
-    curr = rjson.get("current_answer", None)
-    prev.append(curr)
+    path_option = rjson.get("path_option", None)
+    selector_choices = rjson.get("selector_choices", [])
 
-    wiz = WizTree.get(session_name, None)
-    next_step = get_next_step(wiz, prev)
-    ns = {
-        "title": next_step["title"],
-        "options": get_step_options(next_step),
+    session = SESSIONS.get(session_name)
+    resp = {
+        "session_name": session_name,
+        "path_option": path_option,
+        "selectors": selector_choices,
+        "current_step": None,
+        "redirect_url": None
     }
 
-    return jsonify({
-        "session_name": session_name,
-        "previous_answers": prev,
-        "current_step": ns,
-    })
+    if path_option:
+        path = None
+        for op in session.questions:
+            if op.id == path_option:
+                path = op
+                break
 
+        if len(selector_choices) == len(path.selectors):
+            resp["current_step"] = {"title": ""}
+            resp["redirect_url"] = path.redirect % (
+                selector_choices[0], selector_choices[1])
+        else:
+            resp["current_step"] = path.selectors[len(selector_choices)]
+
+    return jsonify(resp)
 
 
 @mod.route('/location_selector/', methods=['GET'])
 def location_selector():
     return render_template("selectors/location.html")
+
+
+@mod.route('/basic_course_selector/', methods=['GET'])
+def basic_course():
+    return render_template("selectors/basic_course.html")
+
+
+@mod.route('/product_selector/', methods=['GET'])
+def product_selector():
+    return render_template("selectors/product.html")
+
+
+@mod.route('/major_selector/', methods=['GET'])
+def major_selector():
+    return render_template("selectors/major.html")
+
+
+@mod.route('/industry_selector/', methods=['GET'])
+def industry_selector():
+    return render_template("selectors/industry.html")
+
+
+@mod.route('/university_selector/', methods=['GET'])
+def university_selector():
+    return render_template("selectors/university.html")
+
+
+@mod.route('/occupation_selector/', methods=['GET'])
+def occupation_selector():
+    return render_template("selectors/occupation.html")
+
+
+@mod.route('/trading_partner_selector/', methods=['GET'])
+def trading_partner_selector():
+    return render_template("selectors/trading_partner.html")

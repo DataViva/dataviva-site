@@ -6,10 +6,13 @@ from dataviva.api.rais.services import OccupationByLocation
 from dataviva.api.rais.services import OccupationMunicipalities
 from dataviva.api.rais.services import OccupationActivities
 
+from dataviva.api.rais.models import Yi, Yo, Ybo, Ybi, Yio, Ybio
+from dataviva import db
+from sqlalchemy import func, desc
+
 mod = Blueprint('occupation', __name__,
                 template_folder='templates',
-                url_prefix='/<lang_code>/occupation',
-                static_folder='static')
+                url_prefix='/<lang_code>/occupation')
 
 
 @mod.url_value_preprocessor
@@ -25,30 +28,20 @@ def add_language_code(endpoint, values):
 @mod.route('/<occupation_id>')
 def index(occupation_id):
 
+    #Use Example /occupation/2122 OR /occupation/2122?bra_id=4mg
     bra_id = request.args.get('bra_id')
     header = {}
     body = {}
+    context = {}
 
-    context = {
-        'portrait' : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110',
-        'average_monthly_income_unity' : 'Milhares',
-        'salary_mass_unity' : 'mil',
-        'total_employment_unity' : 'milhares',
-        'total_establishments_unity' : 'milhares',
-        'jobs_municipality_unity' : 'milhares de',
-        'activity_for_job_unity': unicode('milhares','utf8'),
-        'biggest_average_monsthly_income_unity': unicode('bilhões','utf8'),
-        'activity_for_job_unity' : unicode('milhares','utf8'),
-        'text_salario_e_emprego': unicode('Minas Gerais é uma das 27 unidades feder...','utf8'),
-        'text_oportunidades_economicas' : unicode('Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste ','utf8'),
-    }
+    header['cbo_id'] = occupation_id
+    header['family_id'] = occupation_id[0]
 
     if len(occupation_id) == 4:
         context['is_family'] = True
     else:
          context['is_family'] = False
 
-    #defaut
     context['is_not_municipality'] = True
 
     if bra_id:
@@ -67,7 +60,8 @@ def index(occupation_id):
     header['total_employment'] = occupation_service.total_employment()
     header['total_establishments'] = occupation_service.total_establishments()
     header['year'] = occupation_service.year()
-    
+    header['age_avg'] = occupation_service.age_avg()
+
     if context['is_not_municipality']:
 
         body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()
@@ -81,6 +75,17 @@ def index(occupation_id):
 
     body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
     body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.biggest_wage_average()
-    
 
-    return render_template('occupation/index.html', body_class='perfil-estado', context=context, header = header, body = body)
+    #query relativa a posicao do ranking
+    max_year_query= db.session.query(func.max(Yo.year)).filter(
+            Yo.cbo_id == occupation_id)
+    rais_query = Yo.query.filter(
+        Yo.year == max_year_query)\
+        .order_by(Yo.num_jobs.desc())
+    rais = rais_query.all()
+    for index, occ in enumerate(rais):
+        if rais[index].cbo_id == occupation_id:
+            header['ranking'] = index + 1
+            break
+
+    return render_template('occupation/index.html', context=context, header = header, body = body)

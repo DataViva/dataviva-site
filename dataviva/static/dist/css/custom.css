@@ -127,6 +127,9 @@ footer.main .sub-menu > li:not(:first-child) {
 footer.main .sub-menu > li:not(:last-child) {
   margin-bottom: 15px;
 }
+.modal-title{
+  font-weight: bold;
+}
 .form-dataviva input,
 .form-dataviva textarea {
   border-color: #5a9dc4;
@@ -459,10 +462,10 @@ footer.main .sub-menu > li:not(:last-child) {
   white-space: normal;
 }
 .mod-datainfo .smaller .item .label {
-  font-size: 11px;
+  font-size: 10.1px;
 }
 .mod-datainfo .smaller .item .number {
-  font-size: 21px;
+  font-size: 18px;
 }
 .mod-datainfo .smaller .item .number small {
   display: block;
@@ -505,6 +508,9 @@ footer.main .sub-menu > li:not(:last-child) {
   height: 35px;
   line-height: 18px;
   margin: 0 -10px 10px;
+}
+.mod-explore .item a p{
+  text-align: center;
 }
 .mod-explore .item .popover {
   font-size: 12px;
@@ -616,7 +622,7 @@ footer.main .sub-menu > li:not(:last-child) {
   color: #5a9dc4;
 }
 .mod-two-columns {
-  background: url(../../../imgs/home-bg-ilustracao.png) no-repeat center bottom;
+  background: url(/static/img/bgs/home.png) no-repeat center bottom;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -762,9 +768,6 @@ footer.main .sub-menu > li:not(:last-child) {
   box-shadow: none;
   -webkit-box-shadow: none;
 }
-
-
-
 .navbar-btn {
   margin-bottom: 28px;
   margin-top: 28px;
@@ -824,19 +827,19 @@ footer.main .sub-menu > li:not(:last-child) {
 .nav .open > a:focus {
   background: none;
 }
-.parceiros .logos h1 {
+/*.parceiros .logos h1 {
   font-weight: 300;
   margin-bottom: 20px;
-}
-.parceiros .logos img {
+}*/
+.logos img {
   margin: 0 auto;
 }
-.parceiros .mod-two-columns {
+#parceiros {
   background: #7bccd0;
   color: #FFF;
   min-height: inherit;
 }
-.parceiros .mod-two-columns h4 {
+#parceiros  h4 {
   color: #a25a6d;
   font-size: 20px;
 }
@@ -851,23 +854,6 @@ footer.main .sub-menu > li:not(:last-child) {
 }
 .parceiros .mod-two-columns + .logos {
   margin-top: 4rem;
-}
-.perfil-estado .mod-datainfo .item .label,
-.perfil-comercio .mod-datainfo .item .label {
-  font-size: 10.1px;
-}
-.perfil-estado .mod-datainfo .item .number,
-.perfil-comercio .mod-datainfo .item .number {
-  font-size: 18px;
-}
-.ranking .main-content {
-  padding-bottom: 2rem;
-}
-.ranking .mod-search-boxes .profile {
-  margin-bottom: 25px;
-}
-.ranking .mod-search-boxes .profile h2 {
-  margin-bottom: 0;
 }
 .articles nav {
   text-align: center;
@@ -1026,9 +1012,16 @@ footer.main .sub-menu > li:not(:last-child) {
 .sidebar.no-padding {
   padding-top: 0;
 }
-.sidebar.has-img img.tit {
+.sidebar.has-img div.tit {
   display: block;
-  margin: -8rem auto 5rem;
+  margin: -8rem 24% 5rem;
+  color: #9EDDBF;
+  font-size: 82px;
+  background: white;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #F2F5F3;
 }
 .sidebar .btn + h4 {
   margin-top: 4rem;
@@ -1167,7 +1160,7 @@ table.data-2-columns > tbody th {
   z-index: 1;
 }
 .tit-area {
-  background: #f3f6f4 url(../../../imgs/bg-pattern-dots.png);
+  background: #f3f6f4 url(/static/img/bgs/dots.png);
   height: 90px;
   margin-bottom: 2rem;
   padding-top: 30px;
@@ -1187,12 +1180,6 @@ table.data-2-columns > tbody th {
   color: #5a9dc4;
   font-size: 12px;
   font-weight: 600;
-}
-.tit-area.generic {
-  background: transparent url(../../../imgs/bg-estado-generico.jpg);
-}
-.tit-area.specific-state {
-  background: transparent url(../../../imgs/bg-minas-gerais.jpg);
 }
 .tit-img {
   margin-bottom: 3rem;
@@ -1261,16 +1248,16 @@ table.data-2-columns > tbody th {
   .mod-two-columns p.cta .btn {
     margin-right: 2.2rem;
   }
-  .home .navbar + hr {
-    margin: 0;
+  .navbar + hr {
+    margin: 0 0 20px;
   }
   .navbar {
     border-radius: 0;
     margin-bottom: 0;
   }
-  .navbar + hr {
+  /*.navbar + hr {
     margin: 0 0 20px;
-  }
+  }*/
   .navbar-nav a {
     color: #5a9dc4;
   }
@@ -1308,3 +1295,69 @@ table.data-2-columns > tbody th {
     padding: 0 20px;
   }
 }
+
+/* SELECTORS */
+.selector-list {
+  height: 300px;
+  overflow-y: scroll;
+  margin-top: 12px;
+}
+
+.selector-list .selected, .list-group .selected {
+  background-color: #337ab7 !important;
+  color: white;
+}
+
+.selector-list img.flag-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.selector-list img.symbol {
+  border-radius: 50%;
+  background-color: #337ab7;
+}
+
+.loading {
+    background-color: #e1eee6;
+    margin: 6px auto;
+    font-size: 8px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+    border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+    border-left: 1.1em solid #ffffff;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+  }
+  .loading,
+  .loading:after {
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+  }
+  @-webkit-keyframes load8 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes load8 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+/* END SELECTORS */

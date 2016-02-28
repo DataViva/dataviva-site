@@ -26,40 +26,25 @@ def add_language_code(endpoint, values):
 @mod.route('/<product_id>')
 def index(product_id):
 
+    header = {}
+    context = {}
+    body = {}
+
+    header['product_id'] = product_id
+    header['section_id'] = product_id[0:2]
+    context['depth'] = len(product_id)
+
     bra_id = request.args.get('bra_id')
-
-    #None database fields must be treated (/05?bra_id=2ce020008)
-    #and templates with no data shall be omitted...
-
-    #Vars to do tests:
-    #section (depth == 2)
-    #positon (depth == 6)
-    #brazil (bra_id == None)
-    #product_id = #05 #052601
-    #bra_id = #None #4mg #4mg01 #4mg0000 #4mg010206 #2ce020008
-
-    context = {
-        'background_image':'static/img/bg-profile-location.jpg',
-        'portrait':'static/img/mineric_product.jpg',
-        'desc_general': 'Sample Text',
-        'desc_international_trade': 'Sample Text',
-        'desc_economic_opp': 'Sample Text'
-    }
-
     context['bra_id'] = bra_id
     if bra_id:
         context['bra_id_len'] = len(bra_id)
-    context['depth'] = len(product_id)
-
-    header = {}
-    body = {}
 
     trade_partners_service = ProductTradePartnersService(product_id=product_id, bra_id=bra_id)
     municipalities_service = ProductMunicipalitiesService(product_id=product_id, bra_id=bra_id)
 
     if len(product_id) == 6:
             product_service = ProductService(product_id=product_id)
-            header['pci'] = product_service.complexity()
+            header['pci'] = product_service.product_complexity()
 
     if bra_id:
         product_service = ProductLocationsService(product_id=product_id, bra_id=bra_id)
@@ -68,11 +53,12 @@ def index(product_id):
         body['destination_export_value'] = trade_partners_service.highest_export_value()
         body['origin_name_import'] = trade_partners_service.origin_with_more_imports()
         body['origin_import_value'] = trade_partners_service.highest_import_value()
+        body['export_value_growth_in_five_years'] = product_service.export_value_growth_in_five_years()
 
         if len(product_id) == 6:
             header['rca_wld'] = product_service.rca_wld()
             header['distance_wld'] = product_service.distance_wld()
-            header['opp_gain_wld'] = product_service.opp_gain_wld()
+            header['opportunity_gain_wld'] = product_service.opp_gain_wld()
 
         if len(bra_id) != 9:
             body['municipality_name_export'] = municipalities_service.municipality_with_more_exports()
@@ -91,13 +77,41 @@ def index(product_id):
         body['destination_export_value'] = trade_partners_service.highest_export_value()
         body['origin_name_import'] = trade_partners_service.origin_with_more_imports()
         body['origin_import_value'] = trade_partners_service.highest_import_value()
+        body['export_value_growth_in_five_years'] = product_service.export_value_growth_in_five_years()
 
     header['name'] = product_service.product_name()
     header['year'] = product_service.year()
     header['trade_balance'] = product_service.trade_balance()
-    header['export_val'] = product_service.total_exported()
+    header['export_value'] = product_service.total_exported()
     header['export_net_weight'] = product_service.unity_weight_export_price()
-    header['import_val'] = product_service.total_imported()
+    header['import_value'] = product_service.total_imported()
     header['import_net_weight'] = product_service.unity_weight_import_price()
+
+    #Get rankings vars, code should be refactored
+    from dataviva.api.secex.models import Ymp
+    from dataviva import db
+    from sqlalchemy.sql.expression import func, desc
+
+    max_year_query = db.session.query(func.max(Ymp.year)).filter(Ymp.hs_id == product_id)
+
+    secex_query = Ymp.query.filter(
+        Ymp.year == max_year_query,
+        Ymp.month == 0).order_by(Ymp.export_val.desc())
+    secex = secex_query.all()
+
+    for ranking, product in enumerate(secex):
+        if secex[ranking].hs_id == product_id:
+            header['export_value_ranking'] = ranking + 1
+            break
+
+    secex_query = Ymp.query.filter(
+        Ymp.year == max_year_query,
+        Ymp.month == 0).order_by(Ymp.import_val.desc())
+    secex = secex_query.all()
+
+    for ranking, product in enumerate(secex):
+        if secex[ranking].hs_id == product_id:
+            header['import_value_ranking'] = ranking + 1
+            break
 
     return render_template('product/index.html', body_class='perfil-estado', header=header, body=body, context=context)

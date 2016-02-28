@@ -90,4 +90,3 @@ MAIL_PASSWORD = get_env_variable("DATAVIVA_MAIL_PASSWORD", "")
     Administrator email
 '''
 ADMINISTRATOR_EMAIL = 'contato@dataviva.info'
-DEBUG = True
