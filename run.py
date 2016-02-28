@@ -1,5 +1,5 @@
 from dataviva import app
-from flask.ext.script import Manager
+from flask.ext.runner import Manager
 app.debug = True
 manager = Manager(app)
 manager.run()
