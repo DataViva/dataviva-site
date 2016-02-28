@@ -39,64 +39,18 @@
         </div>
     </form>
     <div class="articles">
+        {% for article in articles %}
         <div class="item">
             <h4>
-                <a href="14-estudos-1-artigo.html" title="O uso do DataViva para políticas ambientais em Mariana">O uso do DataViva para políticas ambientais em Mariana</a>
+                <a href="{{url_for('scholar.show', id=article.id)}}" title="{{ article.title }}">{{ article.title }}</a>
             </h4>
             <p>
-                Autor(es): BARBOSA, J<br />
-                Palavras-Chave: Complexity, Industry, Product<br />
-                Data de Publicação: 24 Nov 2015
+                Autor(es): {{ article.author }}<br />
+                Palavras-Chave: {{ article.key_words }}<br />
+                Data de Publicação: {{ article.publication_date }}
             </p>
         </div>
-        <div class="item">
-            <h4>
-                <a href="14-estudos-1-artigo.html" title="O uso do DataViva para políticas ambientais em Mariana">O uso do DataViva para políticas ambientais em Mariana</a>
-            </h4>
-            <p>Autor: Jose Eustaquio Barbosa<br />Data: 24 Nov 2015</p>
-        </div>
-        <div class="item">
-            <h4>
-                <a href="14-estudos-1-artigo.html" title="O uso do DataViva para políticas ambientais em Mariana">O uso do DataViva para políticas ambientais em Mariana</a>
-            </h4>
-            <p>Autor: Jose Eustaquio Barbosa<br />Data: 24 Nov 2015</p>
-        </div>
-        <div class="item">
-            <h4>
-                <a href="14-estudos-1-artigo.html" title="O uso do DataViva para políticas ambientais em Mariana">O uso do DataViva para políticas ambientais em Mariana</a>
-            </h4>
-            <p>Autor: Jose Eustaquio Barbosa<br />Data: 24 Nov 2015</p>
-        </div>
-        <div class="item">
-            <h4>
-                <a href="14-estudos-1-artigo.html" title="O uso do DataViva para políticas ambientais em Mariana">O uso do DataViva para políticas ambientais em Mariana</a>
-            </h4>
-            <p>Autor: Jose Eustaquio Barbosa<br />Data: 24 Nov 2015</p>
-        </div>
-        <div class="item">
-            <h4>
-                <a href="14-estudos-1-artigo.html" title="O uso do DataViva para políticas ambientais em Mariana">O uso do DataViva para políticas ambientais em Mariana</a>
-            </h4>
-            <p>Autor: Jose Eustaquio Barbosa<br />Data: 24 Nov 2015</p>
-        </div>
-        <div class="item">
-            <h4>
-                <a href="14-estudos-1-artigo.html" title="O uso do DataViva para políticas ambientais em Mariana">O uso do DataViva para políticas ambientais em Mariana</a>
-            </h4>
-            <p>Autor: Jose Eustaquio Barbosa<br />Data: 24 Nov 2015</p>
-        </div>
-        <div class="item">
-            <h4>
-                <a href="14-estudos-1-artigo.html" title="O uso do DataViva para políticas ambientais em Mariana">O uso do DataViva para políticas ambientais em Mariana</a>
-            </h4>
-            <p>Autor: Jose Eustaquio Barbosa<br />Data: 24 Nov 2015</p>
-        </div>
-        <div class="item">
-            <h4>
-                <a href="14-estudos-1-artigo.html" title="O uso do DataViva para políticas ambientais em Mariana">O uso do DataViva para políticas ambientais em Mariana</a>
-            </h4>
-            <p>Autor: Jose Eustaquio Barbosa<br />Data: 24 Nov 2015</p>
-        </div>
+        {% endfor %}
         <nav>
             <ul class="pagination">
                 <li>
