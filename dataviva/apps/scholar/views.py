@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g
+from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 
-from mock import articles
+from mock import Article, articles
+from form import RegistrationForm
 
 
 mod = Blueprint('scholar', __name__,
@@ -44,7 +45,21 @@ def edit(id):
 
 @mod.route('/article', methods=['POST'])
 def create():
-    pass
+    if request.method == 'POST':
+        form_data = request.form.to_dict()
+        title = form_data['title']
+        theme = form_data['theme']
+        author = form_data['author']
+        key_words = form_data['key_words']
+        abstract = form_data['abstract']
+        publication_date = form_data['publication_date']
+
+        last_article_id = articles[-1].id
+        new_article_id = last_article_id + 1
+
+        articles.insert(new_article_id, Article(new_article_id, title, theme, author, key_words, abstract, publication_date))
+
+        return render_template('scholar/index.html', articles=articles)
 
 
 @mod.route('/article/<id>', methods=['PATCH', 'PUT'])
