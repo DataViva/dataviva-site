@@ -2,6 +2,8 @@
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 
+from mock import articles
+
 
 mod = Blueprint('scholar', __name__,
                 template_folder='templates',
@@ -20,12 +22,14 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    return render_template('scholar/index.html')
+    return render_template('scholar/index.html', articles=articles)
 
 
 @mod.route('/article/<id>', methods=['GET'])
 def show(id):
-    return render_template('scholar/show.html')
+    article_id = int(id) - 1
+    article = articles[article_id]
+    return render_template('scholar/show.html', article=article)
 
 
 @mod.route('/article/new', methods=['GET'])
