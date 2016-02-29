@@ -44,10 +44,12 @@ def index(bra_id):
     }
 
     body = {
-        'main_product_by_export_value' : location_body_service.main_product_by_export_value()
-        #'main_product_by_export_value_name' : location_body_service.main_product_by_export_value_name()
-
-
+        'main_product_by_export_value' : location_body_service.main_product_by_export_value(),
+        'main_product_by_export_value_name' : location_body_service.main_product_by_export_value_name(),
+        'main_product_by_import_value' : location_body_service.main_product_by_import_value(),
+        'main_product_by_import_value_name' : location_body_service.main_product_by_import_value_name(),
+        'total_exports' : location_body_service.total_exports(),
+        'total_imports' : location_body_service.total_imports()
     }
 
     return render_template('location/index.html',

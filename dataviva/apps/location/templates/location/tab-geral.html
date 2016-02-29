@@ -57,16 +57,16 @@
                                 </th>
                                 <td>
                                     <p class="label">{{ body.main_product_by_export_value_name }}</p>
-                                    USD <strong class="counter">{{ body.main_product_by_export_value }}</strong> <span>bilhões</span>
+                                    USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_export_value | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Principal Produto por Valor Exportado
+                                    Principal Produto por Valor Importado
                                 </th>
                                 <td>
-                                    <p class="label">China</p>
-                                    USD <strong class="counter">8.82</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.main_product_by_import_value_name }}</p>
+                                    USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_import_value | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -74,7 +74,7 @@
                                     Total de Exportações
                                 </th>
                                 <td>
-                                    USD <strong class="counter">29.3</strong> <span>bilhões</span>
+                                    USD <strong class="counter">{{ body.total_exports | max_digits(3) }}</strong> <span>{{ body.total_exports | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -82,7 +82,7 @@
                                     Total de Importações
                                 </th>
                                 <td>
-                                    USD <strong class="counter">11</strong> <span>bilhões</span>
+                                    USD <strong class="counter">{{ body.total_imports | max_digits(3) }}</strong> <span>{{ body.total_imports | magnitude }}</span>
                                 </td>
                             </tr>
                         </tbody>
