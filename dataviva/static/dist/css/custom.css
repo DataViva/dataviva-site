@@ -889,7 +889,7 @@ footer.main .sub-menu > li:not(:last-child) {
   margin: 0;
 }
 .articles .item:before {
-  content: url('../../../imgs/ico-results.png');
+  content: url('/static/img/icons/scholar/ico-results.png');
   display: block;
   float: left;
   height: 40px;
@@ -1364,4 +1364,10 @@ table.data-2-columns > tbody th {
       transform: rotate(360deg);
     }
   }
+/* Message flashing */
+.flash {
+  background-color: #FBB0B0;
+  padding: 10px;
+  width: 100%;
+}
 /* END SELECTORS */
