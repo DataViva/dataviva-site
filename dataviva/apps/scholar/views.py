@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 
 from mock import Article, articles
-from form import RegistrationForm
+from forms import RegistrationForm
 from flask.ext.wtf import Form
 
 
@@ -62,8 +62,12 @@ def create():
             last_article_id = articles[-1].id
             new_article_id = last_article_id + 1
 
+
             articles.insert(new_article_id, Article(new_article_id, title, theme, author, key_words, abstract, publication_date))
-            return "Success!"
+            return '''
+                    Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva.
+                    Em até 15 dias você receberá um retorno sobre sua publicação no site!
+                   '''
 
 
 @mod.route('/article/<id>', methods=['PATCH', 'PUT'])
