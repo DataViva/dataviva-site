@@ -1,27 +1,52 @@
 <form method="post" action="{{ url_for('scholar.create') }}" class="form-dataviva">
+    {{ form.hidden_tag() }}
     <p>
         <label for="title">Título</label>
-        <input name="title" id="title" type="text" class="form-control" />
+        {{ form.title(class="form-control")}}
+
+        {% for message in form.title.errors %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
     </p>
     <p>
         <label for="theme">Tema</label>
-        <input name="theme" id="theme" type="text" class="form-control" />
+        {{ form.theme(class="form-control")}}
+
+        {% for message in form.theme.errors %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
     </p>
     <p>
         <label for="author">Autor</label>
-        <input name="author" id="author" type="text" class="form-control" />
+        {{ form.author(class="form-control")}}
+
+        {% for message in form.author.errors %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
     </p>
     <p>
         <label for="key_words">Palavras-Chave</label>
-        <input name="key_words" id="key_words" type="text" class="form-control" />
+        {{ form.key_words(class="form-control")}}
+
+        {% for message in form.key_words.errors %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
     </p>
     <p>
         <label for="abstract">Resumo</label>
-        <textarea name="abstract" id="abstract" rows="5" class="form-control"></textarea>
+        {{ form.abstract(class="form-control")}}
+
+        {% for message in form.abstract.errors %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
     </p>
     <p>
         <label for="publication_date">Data de Publicação</label>
-        <input name="publication_date" id="publication_date" type="text" class="form-control" />
+        {{ form.publication_date(class="form-control")}}
+
+        {% for message in form.publication_date.errors %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
     </p>
     <p>
         <label for="file">
