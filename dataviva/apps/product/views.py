@@ -96,6 +96,7 @@ def index(product_id):
 
     secex_query = Ymp.query.filter(
         Ymp.year == max_year_query,
+        Ymp.hs_id_len==len(product_id),
         Ymp.month == 0).order_by(Ymp.export_val.desc())
     secex = secex_query.all()
 
@@ -106,6 +107,7 @@ def index(product_id):
 
     secex_query = Ymp.query.filter(
         Ymp.year == max_year_query,
+        Ymp.hs_id_len==len(product_id),
         Ymp.month == 0).order_by(Ymp.import_val.desc())
     secex = secex_query.all()
 
