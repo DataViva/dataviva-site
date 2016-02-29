@@ -4,6 +4,7 @@ from dataviva.apps.general.views import get_locale
 
 from mock import Article, articles
 from form import RegistrationForm
+from flask.ext.wtf import Form
 
 
 mod = Blueprint('scholar', __name__,
@@ -35,7 +36,8 @@ def show(id):
 
 @mod.route('/article/new', methods=['GET'])
 def new():
-    return render_template('scholar/new.html')
+    form = RegistrationForm()
+    return render_template('scholar/new.html', form=form)
 
 
 @mod.route('/article/<id>/edit', methods=['GET'])
@@ -45,21 +47,23 @@ def edit(id):
 
 @mod.route('/article', methods=['POST'])
 def create():
+    form = RegistrationForm()
     if request.method == 'POST':
-        form_data = request.form.to_dict()
-        title = form_data['title']
-        theme = form_data['theme']
-        author = form_data['author']
-        key_words = form_data['key_words']
-        abstract = form_data['abstract']
-        publication_date = form_data['publication_date']
+        if form.validate() == False:
+            return render_template('scholar/new.html', form=form)
+        else:
+            title = form.title.data
+            theme = form.theme.data
+            author = form.author.data
+            key_words = form.key_words.data
+            abstract = form.abstract.data
+            publication_date = form.publication_date.data
 
-        last_article_id = articles[-1].id
-        new_article_id = last_article_id + 1
+            last_article_id = articles[-1].id
+            new_article_id = last_article_id + 1
 
-        articles.insert(new_article_id, Article(new_article_id, title, theme, author, key_words, abstract, publication_date))
-
-        return render_template('scholar/index.html', articles=articles)
+            articles.insert(new_article_id, Article(new_article_id, title, theme, author, key_words, abstract, publication_date))
+            return "Success!"
 
 
 @mod.route('/article/<id>', methods=['PATCH', 'PUT'])
