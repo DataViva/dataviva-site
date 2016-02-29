@@ -24,4 +24,4 @@ def index():
 
 @mod.route('/be-a-partner')
 def be_a_partner():
-    return render_template('partners/be-a-partner.html', body_class='parceiros')
+    return render_template('partners/be-a-partner.html')
