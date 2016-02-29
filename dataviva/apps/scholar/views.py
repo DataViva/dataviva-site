@@ -57,7 +57,8 @@ def create():
             author = form.author.data
             key_words = form.key_words.data
             abstract = form.abstract.data
-            publication_date = form.publication_date.data
+            full_publication_date = form.publication_date.data
+            publication_date = str(full_publication_date.day).zfill(2)+'/'+str(full_publication_date.month).zfill(2)+'/'+str(full_publication_date.year)
 
             last_article_id = articles[-1].id
             new_article_id = last_article_id + 1
