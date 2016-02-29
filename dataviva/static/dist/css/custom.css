@@ -1360,4 +1360,10 @@ table.data-2-columns > tbody th {
       transform: rotate(360deg);
     }
   }
+/* Message flashing */
+.flash {
+  background-color: #FBB0B0;
+  padding: 10px;
+  width: 100%;
+}
 /* END SELECTORS */
