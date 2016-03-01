@@ -3,7 +3,9 @@ from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.services import Location as LocationService
 from dataviva.api.secex.models import Ymb
-from dataviva.api.secex.services import Location as LocationBodyService
+from dataviva.api.secex.services import Location as LocationBodyService, LocationWld
+from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
+                                       LocationJobs
 from sqlalchemy import desc
 
 mod = Blueprint('location', __name__,
@@ -26,7 +28,11 @@ def add_language_code(endpoint, values):
 def index(bra_id):
 
     location_service = LocationService(bra_id=bra_id)
+    location_wld_service = LocationWld(bra_id=bra_id)
     location_body_service = LocationBodyService(bra_id=bra_id)
+    location_industry_service = LocationIndustry(bra_id=bra_id)
+    location_occupation_service = LocationOccupation(bra_id=bra_id)
+    location_jobs_service = LocationJobs(bra_id=bra_id)
 
     ''' Query básica para SECEX'''
     eci = Ymb.query.filter_by(bra_id=bra_id, month=0) \
@@ -49,7 +55,18 @@ def index(bra_id):
         'main_product_by_import_value' : location_body_service.main_product_by_import_value(),
         'main_product_by_import_value_name' : location_body_service.main_product_by_import_value_name(),
         'total_exports' : location_body_service.total_exports(),
-        'total_imports' : location_body_service.total_imports()
+        'total_imports' : location_body_service.total_imports(),
+        'main_destination_by_export_value' : location_wld_service.main_destination_by_export_value(),
+        'main_destination_by_export_value_name' : location_wld_service.main_destination_by_export_value_name(),
+        'main_destination_by_import_value' : location_wld_service.main_destination_by_import_value(),
+        'main_destination_by_import_value_name' : location_wld_service.main_destination_by_import_value_name(),
+        'main_industry_by_num_jobs' : location_industry_service.main_industry_by_num_jobs(),
+        'main_industry_by_num_jobs_name' : location_industry_service.main_industry_by_num_jobs_name(),
+        'main_occupation_by_num_jobs' : location_occupation_service.main_occupation_by_num_jobs(),
+        'main_occupation_by_num_jobs_name' : location_occupation_service.main_occupation_by_num_jobs_name(),
+        'avg_wage' : location_jobs_service.avg_wage(),
+        'wage' : location_jobs_service.wage(),
+        'total_jobs' : location_jobs_service.total_jobs()
     }
 
     return render_template('location/index.html',

@@ -443,13 +443,37 @@ class LocationWld(Location):
             Ymbw.year == self.max_year_query)
 
 
-    def main_destination_by_exports(self):
+    def main_destination_by_export_value(self):
         try:
             secex = self.__secex_sorted_by_exports__()[0]
         except IndexError:
             return None
         else:
-            return secex.hs.name_pt
+            return secex.export_val
+
+    def main_destination_by_export_value_name(self):
+        try:
+            secex = self.__secex_sorted_by_exports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.wld.name_pt
+
+    def main_destination_by_import_value(self):
+        try:
+            secex = self.__secex_sorted_by_imports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.import_val
+
+    def main_destination_by_import_value_name(self):
+        try:
+            secex = self.__secex_sorted_by_imports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.wld.name_pt
 
 
 
