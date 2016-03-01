@@ -1,0 +1,30 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{{ url_for('general.home') }}">Home</a></li>
+        <li class="active"><span>Blog<span></li>
+    </ol>
+    <div class="row">
+        <div class="sidebar col-xs-15 col-md-4">
+            <h4>Assuntos</h4>
+            <ul class="sub-menu">
+                <li><a href="#" title="Todos"><strong>Todos</strong></a></li>
+                <li><a href="#" title="Visualizações">Visualizações</a></li>
+                <li><a href="#" title="Tecnologia da Informação">Tecnologia da Informação</a></li>
+                <li><a href="#" title="Economia">Economia</a></li>
+                <li><a href="#" title="Matemática">Matemática</a></li>
+                <li><a href="#" title="Estatística">Estatística</a></li>
+                <li><a href="#" title="Design">Design</a></li>
+                <li><a href="#" title="Políticas Públicas">Políticas Públicas</a></li>
+            </ul>
+        </div>
+        <div class="main-content col-xs-15 col-md-11">
+        {% block blog_content %}
+        {% endblock blog_content %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

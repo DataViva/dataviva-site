@@ -834,14 +834,18 @@ footer.main .sub-menu > li:not(:last-child) {
 .logos img {
   margin: 0 auto;
 }
-#parceiros {
+.parceiros {
   background: #7bccd0;
   color: #FFF;
   min-height: inherit;
 }
-#parceiros  h4 {
+.parceiros  h4 {
   color: #a25a6d;
   font-size: 20px;
+}
+.parceiros h2 {
+  font-size: 35px;
+  margin: 1rem 0 0rem;
 }
 .parceiros .mod-two-columns p {
   margin-bottom: 20px;
@@ -885,7 +889,7 @@ footer.main .sub-menu > li:not(:last-child) {
   margin: 0;
 }
 .articles .item:before {
-  content: url('../../../imgs/ico-results.png');
+  content: url('/static/img/icons/scholar/ico-results.png');
   display: block;
   float: left;
   height: 40px;
@@ -1249,7 +1253,7 @@ table.data-2-columns > tbody th {
     margin-right: 2.2rem;
   }
   .navbar + hr {
-    margin: 0 0 20px;
+    margin: 0 0 0px;
   }
   .navbar {
     border-radius: 0;
@@ -1360,4 +1364,10 @@ table.data-2-columns > tbody th {
       transform: rotate(360deg);
     }
   }
+/* Message flashing */
+.flash {
+  background-color: #FBB0B0;
+  padding: 10px;
+  width: 100%;
+}
 /* END SELECTORS */
