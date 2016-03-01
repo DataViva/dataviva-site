@@ -33,4 +33,3 @@ validators==0.10
 Werkzeug==0.11.3
 wheel==0.24.0
 WTForms==2.0.2
-WTForms-Components==0.10.0
