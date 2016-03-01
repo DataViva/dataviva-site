@@ -62,6 +62,19 @@
         });
         $('.counter').counterUp();
     });
+
+    $(document).ready(function() {
+        $("button[data-method='delete']").on('click', function(event) {
+            $.ajax({
+                url: this.value,
+                type: 'DELETE',
+                success: function(result) {
+                }
+            });
+
+        });
+    });
+
     </script>
 </body>
 </html>
