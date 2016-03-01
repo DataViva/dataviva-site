@@ -5,7 +5,9 @@ from dataviva.api.attrs.services import Location as LocationService
 from dataviva.api.secex.models import Ymb
 from dataviva.api.secex.services import Location as LocationBodyService, LocationWld
 from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
-                                       LocationJobs, LocationDistance, LocationOppGain                                       
+                                       LocationJobs, LocationDistance, LocationOppGain 
+from dataviva.api.hedu.services import LocationUniversity, LocationMajor  
+from dataviva.api.sc.services import LocationSchool, LocationBasicCourse
 from sqlalchemy import desc
 
 mod = Blueprint('location', __name__,
@@ -35,6 +37,11 @@ def index(bra_id):
     location_jobs_service = LocationJobs(bra_id=bra_id)
     location_distance_service = LocationDistance(bra_id=bra_id)
     location_opp_gain_service = LocationOppGain(bra_id=bra_id)
+    location_university_service = LocationUniversity(bra_id=bra_id)
+    location_major_service = LocationMajor(bra_id=bra_id)
+    location_school_service = LocationSchool(bra_id=bra_id)
+    location_basic_course_service = LocationBasicCourse(bra_id=bra_id)
+
 
     ''' Query básica para SECEX'''
     eci = Ymb.query.filter_by(bra_id=bra_id, month=0) \
@@ -77,7 +84,16 @@ def index(bra_id):
         'less_distance_by_product_name' : location_body_service.less_distance_by_product_name(),
         'biggest_opportunity_gain_by_product' : location_body_service.biggest_opportunity_gain_by_product(),
         'biggest_opportunity_gain_by_product_name' : location_body_service.biggest_opportunity_gain_by_product_name(),
+        'highest_enrolled_number_by_university' : location_university_service.highest_enrolled_number_by_university(),
+        'highest_enrolled_number_by_university_name' : location_university_service.highest_enrolled_number_by_university_name(),
+        'highest_enrolled_number_by_school' : location_school_service.highest_enrolled_number_by_school(),
+        'highest_enrolled_number_by_school_name' : location_school_service.highest_enrolled_number_by_school_name(),
+        'highest_enrolled_number_by_major' : location_major_service.highest_enrolled_number_by_major(),
+        'highest_enrolled_number_by_major_name' : location_major_service.highest_enrolled_number_by_major_name(),
+        'highest_enrolled_number_by_basic_course' : location_basic_course_service.highest_enrolled_number_by_basic_course(),
+        'highest_enrolled_number_by_basic_course_name' : location_basic_course_service.highest_enrolled_number_by_basic_course_name()
     }
+
 
     return render_template('location/index.html',
                            header=header, body=body)
