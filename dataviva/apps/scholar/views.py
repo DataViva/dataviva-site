@@ -70,7 +70,6 @@ def create():
                     Em até 15 dias você receberá um retorno sobre sua publicação no site!
                    '''
 
-
 @mod.route('/article/<id>', methods=['PATCH', 'PUT'])
 def update():
     pass
