@@ -1,317 +1,317 @@
 # Translations template for PROJECT.
-# Copyright (C) 2015 ORGANIZATION
+# Copyright (C) 2016 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-14 19:27-0200\n"
+"POT-Creation-Date: 2016-02-29 17:57-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.1.1\n"
+"Generated-By: Babel 2.2.0\n"
 
-#: dataviva/about/views.py:33 dataviva/html/templates/site.html:65
+#: dataviva/about/views.py:39 dataviva/html/templates/site.html:65
 #: dataviva/translations/dictionary.py:138
 #: dataviva/translations/dictionary.py:353
 msgid "Occupation"
 msgstr ""
 
-#: dataviva/about/views.py:33 dataviva/html/templates/site.html:67
+#: dataviva/about/views.py:39 dataviva/html/templates/site.html:67
 #: dataviva/translations/dictionary.py:170
 #: dataviva/translations/dictionary.py:172
 #: dataviva/translations/dictionary.py:363
 msgid "Major"
 msgstr ""
 
-#: dataviva/about/views.py:34 dataviva/html/templates/site.html:62
+#: dataviva/about/views.py:40 dataviva/html/templates/site.html:62
 #: dataviva/translations/dictionary.py:355
 msgid "Product"
 msgstr ""
 
-#: dataviva/about/views.py:34 dataviva/html/templates/site.html:64
+#: dataviva/about/views.py:40 dataviva/html/templates/site.html:64
 #: dataviva/translations/dictionary.py:357
 msgid "Industry"
 msgstr ""
 
-#: dataviva/about/views.py:64
+#: dataviva/about/views.py:70
 msgid " to "
 msgstr ""
 
-#: dataviva/about/views.py:120
+#: dataviva/about/views.py:126
 msgid "You need to be logged in to ask questions."
 msgstr ""
 
-#: dataviva/about/views.py:145
+#: dataviva/about/views.py:151
 msgid ""
 "Your message was sent successfully. Thank you for your contribution, it "
 "will be helpful to other users and is essential to improving our tool! "
 "Our team will contact you by e-mail shortly."
 msgstr ""
 
-#: dataviva/about/views.py:169
+#: dataviva/about/views.py:175
 msgid "You need to be signed in to reply to questions."
 msgstr ""
 
-#: dataviva/about/views.py:208
+#: dataviva/about/views.py:214
 msgid "Reply submitted. Your reply will show up after we review it."
 msgstr ""
 
-#: dataviva/about/views.py:212
+#: dataviva/about/views.py:218
 msgid "Your Reply was not sent. Try later, please."
 msgstr ""
 
-#: dataviva/about/views.py:229
+#: dataviva/about/views.py:235
 msgid "terms_of_use"
 msgstr ""
 
-#: dataviva/account/views.py:128 dataviva/account/views.py:140
+#: dataviva/account/views.py:137 dataviva/account/views.py:149
 msgid "Preferences updated."
 msgstr ""
 
-#: dataviva/admin/views.py:33 dataviva/html/general/error.html:17
+#: dataviva/admin/views.py:34 dataviva/html/general/error.html:17
 msgid "You dont have permission to view this page."
 msgstr ""
 
-#: dataviva/admin/views.py:176
+#: dataviva/admin/views.py:185
 msgid "DataViva Reply"
 msgstr ""
 
-#: dataviva/admin/views.py:182
+#: dataviva/admin/views.py:191
 msgid "This question has now been updated."
 msgstr ""
 
-#: dataviva/admin/views.py:207 dataviva/admin/views.py:308
-#: dataviva/admin/views.py:324
+#: dataviva/admin/views.py:216 dataviva/admin/views.py:317
+#: dataviva/admin/views.py:333
 msgid "The item was successfully deleted."
 msgstr ""
 
-#: dataviva/apps/views.py:91
+#: dataviva/apps/views.py:100
 msgid ""
 "A visualization using the height of bars to show the number of jobs in a "
 "specific wage bracket."
 msgstr ""
 
-#: dataviva/apps/views.py:93 dataviva/html/about/apps/bar.html:1
+#: dataviva/apps/views.py:102 dataviva/html/about/apps/bar.html:1
 #: dataviva/html/templates/about.html:134 dataviva/html/templates/site.html:82
 msgid "Bar Chart"
 msgstr ""
 
-#: dataviva/apps/views.py:101
+#: dataviva/apps/views.py:110
 msgid ""
 "A visualization using the area of rectangles to show shares of the "
 "specified value. The data is nested heirarchically by its given "
 "classificaiton."
 msgstr ""
 
-#: dataviva/apps/views.py:103 dataviva/html/about/apps/tree_map.html:1
+#: dataviva/apps/views.py:112 dataviva/html/about/apps/tree_map.html:1
 #: dataviva/html/templates/about.html:94 dataviva/html/templates/site.html:72
 #: dataviva/translations/dictionary.py:16
 msgid "Tree Map"
 msgstr ""
 
-#: dataviva/apps/views.py:110
+#: dataviva/apps/views.py:119
 msgid ""
 "Similar to to a line chart, stacked area charts use an X and Y axis to "
 "show values across time. The data is nested heirarchically by its given "
 "classificaiton."
 msgstr ""
 
-#: dataviva/apps/views.py:112 dataviva/html/about/apps/stacked.html:1
+#: dataviva/apps/views.py:121 dataviva/html/about/apps/stacked.html:1
 #: dataviva/html/templates/about.html:98 dataviva/html/templates/site.html:73
 #: dataviva/translations/dictionary.py:15
 msgid "Stacked"
 msgstr ""
 
-#: dataviva/apps/views.py:119
+#: dataviva/apps/views.py:128
 msgid ""
 "Data values overlayed on a geographic map varying their color by the "
 "value they represent."
 msgstr ""
 
-#: dataviva/apps/views.py:121 dataviva/html/about/apps/geo_map.html:1
+#: dataviva/apps/views.py:130 dataviva/html/about/apps/geo_map.html:1
 #: dataviva/html/templates/about.html:102 dataviva/html/templates/site.html:74
 #: dataviva/translations/dictionary.py:11
 msgid "Geo Map"
 msgstr ""
 
-#: dataviva/apps/views.py:128
+#: dataviva/apps/views.py:137
 msgid ""
 "A visualization showing the connections between a specified dataset. The "
 "specified attributes are then overlayed on this network to show their "
 "position in this fictional space."
 msgstr ""
 
-#: dataviva/apps/views.py:130 dataviva/html/about/apps/network.html:1
+#: dataviva/apps/views.py:139 dataviva/html/about/apps/network.html:1
 #: dataviva/html/templates/about.html:106 dataviva/html/templates/site.html:75
 #: dataviva/translations/dictionary.py:12
 msgid "Network"
 msgstr ""
 
-#: dataviva/apps/views.py:137
+#: dataviva/apps/views.py:146
 msgid "A type of chart which displays data as a time series with an X and Y axis."
 msgstr ""
 
-#: dataviva/apps/views.py:139
+#: dataviva/apps/views.py:148
 msgid "Line Chart"
 msgstr ""
 
-#: dataviva/apps/views.py:149
+#: dataviva/apps/views.py:158
 msgid ""
 "A visualization showing a network centered on a single node. The depth of"
 " nodes shown is computed by their distance from the root."
 msgstr ""
 
-#: dataviva/apps/views.py:151 dataviva/html/about/apps/rings.html:1
+#: dataviva/apps/views.py:160 dataviva/html/about/apps/rings.html:1
 #: dataviva/html/templates/about.html:110 dataviva/html/templates/site.html:77
 #: dataviva/translations/dictionary.py:13
 msgid "Rings"
 msgstr ""
 
-#: dataviva/apps/views.py:158
+#: dataviva/apps/views.py:167
 msgid "A visualization showing two variables plotted along an X and Y axis."
 msgstr ""
 
-#: dataviva/apps/views.py:160 dataviva/html/about/apps/scatter.html:1
+#: dataviva/apps/views.py:169 dataviva/html/about/apps/scatter.html:1
 #: dataviva/html/templates/about.html:114 dataviva/html/templates/site.html:78
 #: dataviva/translations/dictionary.py:14
 msgid "Scatter"
 msgstr ""
 
-#: dataviva/apps/views.py:167
+#: dataviva/apps/views.py:176
 msgid ""
 "Similar to the scatter visualization except this form of a scatter shows "
 "the same variable along both axes varrying the location for comparison "
 "purposes."
 msgstr ""
 
-#: dataviva/apps/views.py:169 dataviva/html/about/apps/compare.html:1
+#: dataviva/apps/views.py:178 dataviva/html/about/apps/compare.html:1
 #: dataviva/html/templates/about.html:118 dataviva/html/templates/site.html:79
 #: dataviva/translations/dictionary.py:9
 msgid "Compare"
 msgstr ""
 
-#: dataviva/apps/views.py:176
+#: dataviva/apps/views.py:185
 msgid ""
 "A visualization showing the main occupations employed in various "
 "industries, their importance to that industry and the number of employees"
 " who work in these activities."
 msgstr ""
 
-#: dataviva/apps/views.py:178 dataviva/html/about/apps/occugrid.html:1
+#: dataviva/apps/views.py:187 dataviva/html/about/apps/occugrid.html:1
 #: dataviva/html/templates/about.html:122 dataviva/html/templates/site.html:80
 #: dataviva/translations/dictionary.py:10
 msgid "Occugrid"
 msgstr ""
 
-#: dataviva/apps/views.py:185
+#: dataviva/apps/views.py:194
 msgid ""
 "A visualization, also known as box and whisker diagram, used to display "
 "the distribution of data based on the five number summary: minimum, first"
 " quartile, median, third quartile, and maximum."
 msgstr ""
 
-#: dataviva/apps/views.py:187 dataviva/html/about/apps/box.html:1
+#: dataviva/apps/views.py:196 dataviva/html/about/apps/box.html:1
 #: dataviva/html/templates/about.html:130 dataviva/html/templates/site.html:81
 msgid "Box Plot"
 msgstr ""
 
-#: dataviva/apps/views.py:307
+#: dataviva/apps/views.py:316
 msgid "You need to be logged in to star visualizations."
 msgstr ""
 
-#: dataviva/apps/views.py:497 dataviva/data/views.py:69
+#: dataviva/apps/views.py:506 dataviva/data/views.py:78
 #: dataviva/profiles/models.py:173 dataviva/profiles/models.py:244
 msgid "International Trade"
 msgstr ""
 
-#: dataviva/apps/views.py:498
+#: dataviva/apps/views.py:507
 msgid "Employment"
 msgstr ""
 
-#: dataviva/apps/views.py:499
+#: dataviva/apps/views.py:508
 msgid "Wages"
 msgstr ""
 
-#: dataviva/apps/views.py:500
+#: dataviva/apps/views.py:509
 msgid "Domestic Trade"
 msgstr ""
 
-#: dataviva/apps/views.py:501 dataviva/data/views.py:70
+#: dataviva/apps/views.py:510 dataviva/data/views.py:79
 #: dataviva/html/templates/about.html:38
 #: dataviva/translations/dictionary.py:293
 msgid "Higher Education"
 msgstr ""
 
-#: dataviva/apps/views.py:502 dataviva/data/views.py:71
+#: dataviva/apps/views.py:511 dataviva/data/views.py:80
 #: dataviva/html/templates/about.html:34
 #: dataviva/translations/dictionary.py:307
 msgid "School Census"
 msgstr ""
 
-#: dataviva/ask/views.py:103 dataviva/ask/views.py:131
+#: dataviva/ask/views.py:111 dataviva/ask/views.py:139
 msgid "You need to be logged in to vote."
 msgstr ""
 
-#: dataviva/ask/views.py:161
+#: dataviva/ask/views.py:169
 msgid "You need to be logged in to flag replies."
 msgstr ""
 
-#: dataviva/data/views.py:68 dataviva/profiles/models.py:198
+#: dataviva/data/views.py:77 dataviva/profiles/models.py:198
 #: dataviva/profiles/models.py:329 dataviva/profiles/models.py:376
 msgid "Wages and Employment"
 msgstr ""
 
-#: dataviva/general/views.py:138
+#: dataviva/general/views.py:135
 msgid "Top Exporting Municipalities"
 msgstr ""
 
-#: dataviva/general/views.py:149
+#: dataviva/general/views.py:146
 msgid "Most Complex Products"
 msgstr ""
 
-#: dataviva/general/views.py:150
+#: dataviva/general/views.py:147
 #, python-format
 msgid "%(link)s for more information on product complexity."
 msgstr ""
 
-#: dataviva/general/views.py:161
+#: dataviva/general/views.py:158
 msgid "Richest Municipalities"
 msgstr ""
 
-#: dataviva/general/views.py:162
+#: dataviva/general/views.py:159
 msgid ""
 "Municipalities with the highest average wage, excluding those with less "
 "than 50,000 people."
 msgstr ""
 
-#: dataviva/general/views.py:173
+#: dataviva/general/views.py:170
 msgid "Best Paid Occupations"
 msgstr ""
 
-#: dataviva/general/views.py:184
+#: dataviva/general/views.py:181
 msgid "Largest Industries by Employment"
 msgstr ""
 
-#: dataviva/general/views.py:195
+#: dataviva/general/views.py:192
 msgid "Industries by Employment Growth"
 msgstr ""
 
-#: dataviva/general/views.py:196
+#: dataviva/general/views.py:193
 msgid "Excluding industries with less than 10,000 employees."
 msgstr ""
 
-#: dataviva/general/views.py:207
+#: dataviva/general/views.py:204
 msgid "Most Popular Courses by Enrollment"
 msgstr ""
 
-#: dataviva/general/views.py:218
+#: dataviva/general/views.py:215
 msgid "Cities by Largest University Enrollment"
 msgstr ""
 
@@ -1667,7 +1667,7 @@ msgid "Where are people getting<br>hired in Minas Gerais?"
 msgstr ""
 
 #: dataviva/html/general/home.html:305
-msgid "Visualize employement data now."
+msgid "Visualize employment data now."
 msgstr ""
 
 #: dataviva/html/general/home.html:312
@@ -1703,36 +1703,36 @@ msgid "Quick<br>Links"
 msgstr ""
 
 #: dataviva/html/general/home.html:347 dataviva/html/rankings/index.html:17
-#: dataviva/html/templates/about.html:54 dataviva/profiles/views.py:50
+#: dataviva/html/templates/about.html:54 dataviva/profiles/views.py:59
 msgid "Brazilian Locations"
 msgstr ""
 
 #: dataviva/html/general/home.html:348 dataviva/html/rankings/index.html:29
-#: dataviva/html/templates/about.html:66 dataviva/profiles/views.py:82
+#: dataviva/html/templates/about.html:66 dataviva/profiles/views.py:91
 #: dataviva/translations/dictionary.py:356
 msgid "Products"
 msgstr ""
 
-#: dataviva/html/general/home.html:349 dataviva/profiles/views.py:92
+#: dataviva/html/general/home.html:349 dataviva/profiles/views.py:101
 #: dataviva/translations/dictionary.py:360
 msgid "Trade Partners"
 msgstr ""
 
 #: dataviva/html/general/home.html:350 dataviva/html/general/select.html:24
 #: dataviva/html/rankings/index.html:21 dataviva/html/templates/about.html:58
-#: dataviva/profiles/views.py:71 dataviva/translations/dictionary.py:358
+#: dataviva/profiles/views.py:80 dataviva/translations/dictionary.py:358
 msgid "Industries"
 msgstr ""
 
 #: dataviva/html/general/home.html:351 dataviva/html/general/select.html:29
 #: dataviva/html/rankings/index.html:25 dataviva/html/templates/about.html:62
-#: dataviva/profiles/views.py:61 dataviva/translations/dictionary.py:159
+#: dataviva/profiles/views.py:70 dataviva/translations/dictionary.py:159
 #: dataviva/translations/dictionary.py:354
 msgid "Occupations"
 msgstr ""
 
 #: dataviva/html/general/home.html:352 dataviva/html/rankings/index.html:37
-#: dataviva/html/templates/about.html:78 dataviva/profiles/views.py:103
+#: dataviva/html/templates/about.html:78 dataviva/profiles/views.py:112
 #: dataviva/translations/dictionary.py:184
 #: dataviva/translations/dictionary.py:185
 #: dataviva/translations/dictionary.py:362
@@ -1745,7 +1745,7 @@ msgid "New"
 msgstr ""
 
 #: dataviva/html/general/home.html:354 dataviva/html/rankings/index.html:41
-#: dataviva/html/templates/about.html:74 dataviva/profiles/views.py:113
+#: dataviva/html/templates/about.html:74 dataviva/profiles/views.py:122
 #: dataviva/translations/dictionary.py:173
 #: dataviva/translations/dictionary.py:175
 #: dataviva/translations/dictionary.py:364
@@ -1753,7 +1753,7 @@ msgid "Majors"
 msgstr ""
 
 #: dataviva/html/general/home.html:356 dataviva/html/rankings/index.html:45
-#: dataviva/html/templates/about.html:82 dataviva/profiles/views.py:124
+#: dataviva/html/templates/about.html:82 dataviva/profiles/views.py:133
 #: dataviva/translations/dictionary.py:368
 msgid "Basic Courses"
 msgstr ""
@@ -2024,111 +2024,111 @@ msgstr ""
 msgid "Common Occupations by Industry"
 msgstr ""
 
-#: dataviva/profiles/views.py:48
+#: dataviva/profiles/views.py:57
 msgid ""
 "Showing exports, employment and education data, statistics and "
 "visualizations about the chosen Brazilian location."
 msgstr ""
 
-#: dataviva/profiles/views.py:59
+#: dataviva/profiles/views.py:68
 msgid "Showing industries and locations that employ the selected occupation."
 msgstr ""
 
-#: dataviva/profiles/views.py:69
+#: dataviva/profiles/views.py:78
 msgid "Showing the occupations and locations with jobs in the selected industry."
 msgstr ""
 
-#: dataviva/profiles/views.py:80
+#: dataviva/profiles/views.py:89
 msgid ""
 "Showing locations in Brazil that export and import the selected product "
 "and their destinations and origins."
 msgstr ""
 
-#: dataviva/profiles/views.py:90
+#: dataviva/profiles/views.py:99
 msgid ""
 "Showing locations in brazil that trade with the selected country and the "
 "products they export and import from them."
 msgstr ""
 
-#: dataviva/profiles/views.py:101
+#: dataviva/profiles/views.py:110
 msgid "Showing the majors found in the selected univserity."
 msgstr ""
 
-#: dataviva/profiles/views.py:111
+#: dataviva/profiles/views.py:120
 msgid ""
 "Showing the university and locations in Brazil where the selected major "
 "is found."
 msgstr ""
 
-#: dataviva/profiles/views.py:122
+#: dataviva/profiles/views.py:131
 msgid "Showing the locations and schools in which these basic courses are taught."
 msgstr ""
 
-#: dataviva/profiles/views.py:138
+#: dataviva/profiles/views.py:147
 msgid "an occupation"
 msgstr ""
 
-#: dataviva/profiles/views.py:140
+#: dataviva/profiles/views.py:149
 msgid "an industry"
 msgstr ""
 
-#: dataviva/profiles/views.py:142
+#: dataviva/profiles/views.py:151
 msgid "a product"
 msgstr ""
 
-#: dataviva/profiles/views.py:144
+#: dataviva/profiles/views.py:153
 msgid "a location"
 msgstr ""
 
-#: dataviva/profiles/views.py:146
+#: dataviva/profiles/views.py:155
 msgid "a country"
 msgstr ""
 
-#: dataviva/profiles/views.py:148
+#: dataviva/profiles/views.py:157
 msgid "a university"
 msgstr ""
 
-#: dataviva/profiles/views.py:150
+#: dataviva/profiles/views.py:159
 msgid "a major"
 msgstr ""
 
-#: dataviva/profiles/views.py:152
+#: dataviva/profiles/views.py:161
 msgid "a course"
 msgstr ""
 
-#: dataviva/profiles/views.py:247
+#: dataviva/profiles/views.py:256
 msgid "Locations with Similar Product Exports"
 msgstr ""
 
-#: dataviva/profiles/views.py:248
+#: dataviva/profiles/views.py:257
 msgid "Locations with Similar Trade Partners"
 msgstr ""
 
-#: dataviva/profiles/views.py:249
+#: dataviva/profiles/views.py:258
 msgid "Locations with Similar Industries"
 msgstr ""
 
-#: dataviva/profiles/views.py:250
+#: dataviva/profiles/views.py:259
 msgid "Locations with Similar Occupations"
 msgstr ""
 
-#: dataviva/profiles/views.py:252
+#: dataviva/profiles/views.py:261
 msgid "Similar Industries by Co-location"
 msgstr ""
 
-#: dataviva/profiles/views.py:254
+#: dataviva/profiles/views.py:263
 msgid "Similar Occupations by Co-location"
 msgstr ""
 
-#: dataviva/profiles/views.py:256
+#: dataviva/profiles/views.py:265
 msgid "Similar Products by Co-location"
 msgstr ""
 
-#: dataviva/profiles/views.py:258
+#: dataviva/profiles/views.py:267
 msgid "Destinations with Similar Brazilian Origins"
 msgstr ""
 
-#: dataviva/profiles/views.py:260
+#: dataviva/profiles/views.py:269
 msgid "Universities with Similar Course Offerings"
 msgstr ""
 
