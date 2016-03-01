@@ -2,10 +2,9 @@
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 
-from mock import Article, articles
-from forms import RegistrationForm
 from flask.ext.wtf import Form
-
+from forms import RegistrationForm
+from mock import Article, articles, ids
 import time
 
 
@@ -31,9 +30,9 @@ def index():
 
 @mod.route('/article/<id>', methods=['GET'])
 def show(id):
-    article_id = int(id) - 1
-    article = articles[article_id]
-    return render_template('scholar/show.html', article=article)
+    id = int(id.encode())
+    article = articles[id]
+    return render_template('scholar/show.html', article=article, id=id)
 
 
 @mod.route('/article/new', methods=['GET'])
@@ -60,11 +59,11 @@ def create():
             key_words = form.key_words.data
             abstract = form.abstract.data
             postage_date = time.strftime("%d/%m/%Y")
+            id = ids[-1] + 1
 
-            last_article_id = articles[-1].id
-            new_article_id = last_article_id + 1
+            ids.append(id)
+            articles.update({id:Article(title, theme, author, key_words, abstract, postage_date)})
 
-            articles.insert(new_article_id, Article(new_article_id, title, theme, author, key_words, abstract, postage_date))
             return '''
                     Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva.
                     Em até 15 dias você receberá um retorno sobre sua publicação no site!
@@ -76,5 +75,5 @@ def update():
 
 
 @mod.route('/article/<id>', methods=['DELETE'])
-def destroy():
-    pass
+def destroy(id):
+    articles.pop(int(id.encode()))
