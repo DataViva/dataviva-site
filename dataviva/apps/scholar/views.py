@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request
+from flask import Blueprint, render_template, g, request, make_response
 from dataviva.apps.general.views import get_locale
 
 from flask.ext.wtf import Form
@@ -77,3 +77,5 @@ def update():
 @mod.route('/article/<id>', methods=['DELETE'])
 def destroy(id):
     articles.pop(int(id.encode()))
+    response = make_response()
+    return render_template('scholar/index.html', articles=articles, message=u'Artigo excluído com sucesso')
