@@ -6,6 +6,8 @@ from mock import Article, articles
 from forms import RegistrationForm
 from flask.ext.wtf import Form
 
+import time
+
 
 mod = Blueprint('scholar', __name__,
                 template_folder='templates',
@@ -57,14 +59,12 @@ def create():
             author = form.author.data
             key_words = form.key_words.data
             abstract = form.abstract.data
-            full_publication_date = form.publication_date.data
-            publication_date = str(full_publication_date.day).zfill(2)+'/'+str(full_publication_date.month).zfill(2)+'/'+str(full_publication_date.year)
+            postage_date = time.strftime("%d/%m/%Y")
 
             last_article_id = articles[-1].id
             new_article_id = last_article_id + 1
 
-
-            articles.insert(new_article_id, Article(new_article_id, title, theme, author, key_words, abstract, publication_date))
+            articles.insert(new_article_id, Article(new_article_id, title, theme, author, key_words, abstract, postage_date))
             return '''
                     Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva.
                     Em até 15 dias você receberá um retorno sobre sua publicação no site!
