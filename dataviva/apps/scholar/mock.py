@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import collections
 
-Article = collections.namedtuple('Article', ['id', 'title', 'theme', 'author', 'key_words', 'abstract', 'publication_date'])
+Article = collections.namedtuple('Article', ['id', 'title', 'theme', 'author', 'key_words', 'abstract', 'postage_date'])
 
 articles = [
    Article(1,
