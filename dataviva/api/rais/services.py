@@ -299,6 +299,8 @@ class LocationIndustry:
         self.bra_id = bra_id
         self._rais = None
         self._rais_sorted_by_num_jobs = None
+        self._rais_sorted_by_distance = None
+        self._rais_sorted_by_opp_gain = None
         self.max_year_query = db.session.query(func.max(Ybi.year)).filter(
             bra_id == self.bra_id)
         self.rais_query = Ybi.query.join(Cnae).filter(
@@ -325,6 +327,18 @@ class LocationIndustry:
             self._rais_sorted_by_num_jobs = self.__rais_list__()
             self._rais_sorted_by_num_jobs.sort(key=lambda rais: rais.num_jobs, reverse=True)
         return self._rais_sorted_by_num_jobs
+
+    def __rais_sorted_by_distance__(self):
+        if not self._rais_sorted_by_distance:
+            self._rais_sorted_by_distance = self.__rais_list__()
+            self._rais_sorted_by_distance.sort(key=lambda rais: rais.distance, reverse=False)
+        return self._rais_sorted_by_distance
+
+    def __rais_sorted_by_opp_gain__(self):
+        if not self._rais_sorted_by_opp_gain:
+            self._rais_sorted_by_opp_gain = self.__rais_list__()
+            self._rais_sorted_by_opp_gain.sort(key=lambda rais: rais.opp_gain, reverse=True)
+        return self._rais_sorted_by_opp_gain
 
     def main_industry_by_num_jobs(self):
         try:
@@ -389,3 +403,64 @@ class LocationJobs(LocationIndustry):
 
     def total_jobs(self):
         return self.__rais__().num_jobs
+
+class LocationDistance(LocationIndustry):
+    def __init__(self, bra_id):
+        LocationIndustry.__init__(self, bra_id)
+        self.bra_id = bra_id
+        self.max_year_query = db.session.query(func.max(Ybi.year)).filter(
+            bra_id == self.bra_id)
+        self.rais_query = Ybi.query.join(Cnae).filter(
+            Ybi.bra_id == self.bra_id,
+            Ybi.cnae_id_len == 6,
+            Ybi.year == self.max_year_query,
+            Ybi.distance != None)
+
+    def less_distance_by_occupation(self):
+        try:
+            rais = self.__rais_sorted_by_distance__()[0]
+        except IndexError:
+            return None
+        else:
+            return rais.distance
+
+    def less_distance_by_occupation_name(self):
+        try:
+            rais = self.__rais_sorted_by_distance__()[0]
+        except IndexError:
+            return None
+        else:
+            return rais.cnae.name()
+
+class LocationOppGain(LocationIndustry):
+    def __init__(self, bra_id):
+        LocationIndustry.__init__(self, bra_id)
+        self.bra_id = bra_id
+        self.max_year_query = db.session.query(func.max(Ybi.year)).filter(
+            bra_id == self.bra_id)
+        self.opp_gain_query = db.session.query(func.max(Ybi.opp_gain)).filter(
+            Ybi.bra_id == self.bra_id,
+            Ybi.year == self.max_year_query,
+            Ybi.opp_gain != None)
+        self.rais_query = Ybi.query.join(Cnae).filter(
+            Ybi.bra_id == self.bra_id,
+            Ybi.cnae_id_len == 6,
+            Ybi.year == self.max_year_query,
+            Ybi.opp_gain != None,
+            Ybi.opp_gain == self.opp_gain_query)
+
+    def biggest_opportunity_gain_by_occupation(self):
+        try:
+            rais = self.__rais_sorted_by_opp_gain__()[0]
+        except IndexError:
+            return None
+        else:
+            return rais.opp_gain
+
+    def biggest_opportunity_gain_by_occupation_name(self):
+        try:
+            rais = self.__rais_sorted_by_opp_gain__()[0]
+        except IndexError:
+            return None
+        else:
+            return rais.cnae.name()

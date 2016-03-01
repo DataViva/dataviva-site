@@ -5,7 +5,7 @@ from dataviva.api.attrs.services import Location as LocationService
 from dataviva.api.secex.models import Ymb
 from dataviva.api.secex.services import Location as LocationBodyService, LocationWld
 from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
-                                       LocationJobs
+                                       LocationJobs, LocationDistance, LocationOppGain                                       
 from sqlalchemy import desc
 
 mod = Blueprint('location', __name__,
@@ -33,6 +33,8 @@ def index(bra_id):
     location_industry_service = LocationIndustry(bra_id=bra_id)
     location_occupation_service = LocationOccupation(bra_id=bra_id)
     location_jobs_service = LocationJobs(bra_id=bra_id)
+    location_distance_service = LocationDistance(bra_id=bra_id)
+    location_opp_gain_service = LocationOppGain(bra_id=bra_id)
 
     ''' Query básica para SECEX'''
     eci = Ymb.query.filter_by(bra_id=bra_id, month=0) \
@@ -66,7 +68,15 @@ def index(bra_id):
         'main_occupation_by_num_jobs_name' : location_occupation_service.main_occupation_by_num_jobs_name(),
         'avg_wage' : location_jobs_service.avg_wage(),
         'wage' : location_jobs_service.wage(),
-        'total_jobs' : location_jobs_service.total_jobs()
+        'total_jobs' : location_jobs_service.total_jobs(),
+        'less_distance_by_occupation' : location_distance_service.less_distance_by_occupation(),
+        'less_distance_by_occupation_name' : location_distance_service.less_distance_by_occupation_name(),
+        'biggest_opportunity_gain_by_occupation' : location_opp_gain_service.biggest_opportunity_gain_by_occupation(),
+        'biggest_opportunity_gain_by_occupation_name' : location_opp_gain_service.biggest_opportunity_gain_by_occupation_name(),
+        'less_distance_by_product' : location_body_service.less_distance_by_product(),
+        'less_distance_by_product_name' : location_body_service.less_distance_by_product_name(),
+        'biggest_opportunity_gain_by_product' : location_body_service.biggest_opportunity_gain_by_product(),
+        'biggest_opportunity_gain_by_product_name' : location_body_service.biggest_opportunity_gain_by_product_name(),
     }
 
     return render_template('location/index.html',

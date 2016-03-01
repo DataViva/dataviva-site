@@ -171,36 +171,38 @@
                         <tbody>
                             <tr>
                                 <th>
-                                    Principal Produto por Valor Exportado
+                                    Produto com Menor Distância
                                 </th>
                                 <td>
-                                    <p class="label">Minério de Ferro</p>
-                                    USD <strong class="counter">12.2</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.less_distance_by_product_name }}</p>
+                                    <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong> <span>{{ body.less_distance_by_product | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Principal Produto por Valor Exportado
+                                    Atividade Econômica com Menor Distância
                                 </th>
                                 <td>
-                                    <p class="label">China</p>
-                                    USD <strong class="counter">8.82</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.less_distance_by_occupation_name }}</p>
+                                    <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong> <span>{{ body.less_distance_by_occupation | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Total de Exportações
+                                    Produto com Maior Ganho de Oportunidade
                                 </th>
                                 <td>
-                                    USD <strong class="counter">29.3</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.biggest_opportunity_gain_by_product_name }}</p>
+                                    <strong class="counter">{{ body.biggest_opportunity_gain_by_product | max_digits(3) }}</strong> <span>{{ body.biggest_opportunity_gain_by_product | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Total de Importações
+                                    Atividade Econômica com Maior Ganho de Oportunidade
                                 </th>
                                 <td>
-                                    USD <strong class="counter">11</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.biggest_opportunity_gain_by_occupation_name }}</p>
+                                    <strong class="counter">{{ body.biggest_opportunity_gain_by_occupation | max_digits(3) }}</strong> <span>{{ body.biggest_opportunity_gain_by_occupation | magnitude }}</span>
                                 </td>
                             </tr>
                         </tbody>

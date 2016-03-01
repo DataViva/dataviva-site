@@ -341,6 +341,8 @@ class Location:
         self._secex = None
         self._secex_sorted_by_exports = None
         self._secex_sorted_by_imports = None
+        self._secex_sorted_by_distance = None
+        self._secex_sorted_by_opp_gain = None
         self.bra_id = bra_id
         self.max_year_query = db.session.query(
             func.max(Ymbp.year)).filter_by(bra_id=self.bra_id)
@@ -373,6 +375,26 @@ class Location:
             self._secex_sorted_by_imports = self.__secex_list__()
             self._secex_sorted_by_imports.sort(key=lambda secex: secex.import_val, reverse=True)
         return self._secex_sorted_by_imports
+
+    def __secex_sorted_by_distance__(self):
+        if not self._secex_sorted_by_distance:
+            not_nulls_list = []
+            for i in self.__secex_list__():
+                if i.distance != None:
+                    not_nulls_list.append(i)
+            not_nulls_list.sort(key=lambda secex: secex.distance_wld, reverse=False)
+            self._secex_sorted_by_distance = not_nulls_list
+        return self._secex_sorted_by_distance
+
+    def __secex_sorted_by_opp_gain__(self):
+        if not self._secex_sorted_by_opp_gain:
+            not_nulls_list = []
+            for i in self.__secex_list__():
+                if i.opp_gain != None:
+                    not_nulls_list.append(i)
+            not_nulls_list.sort(key=lambda secex: secex.opp_gain_wld, reverse=True)
+            self._secex_sorted_by_opp_gain = not_nulls_list
+        return self._secex_sorted_by_opp_gain
 
     def main_product_by_export_value(self):
         try:
@@ -430,6 +452,38 @@ class Location:
         else:
             return import_sum
 
+    def less_distance_by_product(self):
+        try:
+            secex = self.__secex_sorted_by_distance__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.distance_wld
+
+    def less_distance_by_product_name(self):
+        try:
+            secex = self.__secex_sorted_by_distance__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.hs.name()
+
+    def biggest_opportunity_gain_by_product(self):
+        try:
+            secex = self.__secex_sorted_by_opp_gain__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.opp_gain_wld
+
+    def biggest_opportunity_gain_by_product_name(self):
+        try:
+            secex = self.__secex_sorted_by_opp_gain__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.hs.name()
+
 class LocationWld(Location):
     def __init__(self, bra_id):
         Location.__init__(self, bra_id)
@@ -474,8 +528,6 @@ class LocationWld(Location):
             return None
         else:
             return secex.wld.name_pt
-
-
 
 
 
