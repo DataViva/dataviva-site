@@ -18,18 +18,6 @@
     <p><a class="btn btn-default btn-lg btn-dataviva blue">Baixar arquivo (PDF)</a></p>
 </div>
 
-<script type="text/javascript">
-window.ScholarController = (function () {
-    return {
-        deleteArticle: deleteArticle
-    }
-
-    function deleteArticle(response) {
-            window.location = '/en/scholar/?message='+response;
-    }
-
-})();
-</script>
-
-<button type="button" class="btn btn-default btn-dataviva pull-right" data-method="delete" data-callback="ScholarController.deleteArticle" value="/scholar/article/{{ id }}">Deletar</button>
+<a class="btn btn-default btn-dataviva pull-right" href="/scholar/article/{{ id }}/delete">Deletar</a>
+<a class="btn btn-default btn-dataviva pull-right" href="/scholar/article/{{ id }}/edit">Editar</a>
 {% endblock scholar_content %}
