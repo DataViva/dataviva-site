@@ -83,6 +83,14 @@
 
             });
 
+            $("button[data-method='put']").on('click', function(event) {
+                $.ajax({
+                    url: this.value,
+                    type: 'PUT'
+                });
+
+            });
+
             {% if message %}
                 $.notify({
                     message: '{{message}}',
@@ -97,7 +105,6 @@
                     timer: 1000
                 });
             {% endif %}
-
         });
     </script>
 </body>
