@@ -65,20 +65,6 @@
         });
 
         $(document).ready(function() {
-            $("button[data-method]").on('click', function(event) {
-                var callback = eval(this.dataset.callback),
-                    method = this.dataset.method.toUpperCase();
-                $.ajax({
-                    url: this.value,
-                    type: method,
-                    success: function(response) {
-                        callback(response);
-                    }
-                });
-
-            });
-
-
             {% if message %}
                 $.notify({
                     message: '{{message}}',
