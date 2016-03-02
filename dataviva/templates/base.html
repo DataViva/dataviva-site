@@ -36,6 +36,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
     <script src="/static/dist/js/bootstrap.min.js"></script>
     <script src="/static/dist/js/jquery.counterup.min.js"></script>
+    <script src="/static/dist/js/bootstrap-notify.js"></script>
 
     <script src="/static/js/libs/angular.min.js"></script>
     <script src="/static/js/dataviva-ng/init.js"></script>
@@ -55,26 +56,49 @@
     <script src="/static/js/dataviva-ng/controllers/selector.js"></script>
     <script src="/static/js/dataviva-ng/app.js"></script>
 
-    <script type="text/javascript">
-    $(function(){
-        $('[data-toggle="popover"]').popover({
-            'trigger' : 'hover'
-        });
-        $('.counter').counterUp();
-    });
+<style type="text/css">
+    .alert {
+    width: 13%;
+}
+</style>
 
-    $(document).ready(function() {
-        $("button[data-method='delete']").on('click', function(event) {
-            $.ajax({
-                url: this.value,
-                type: 'DELETE',
-                success: function(result) {
-                }
+    <script type="text/javascript">
+        $(function(){
+            $('[data-toggle="popover"]').popover({
+                'trigger' : 'hover'
+            });
+            $('.counter').counterUp();
+        });
+
+        $(document).ready(function() {
+            $("button[data-method='delete']").on('click', function(event) {
+                var callback = eval(this.dataset.callback);
+                $.ajax({
+                    url: this.value,
+                    type: 'DELETE',
+                    success: function(response) {
+                        callback(response);
+                    }
+                });
+
             });
 
-        });
-    });
+            {% if message %}
+                $.notify({
+                    message: '{{message}}',
+                },{
+                    offset: {
+                            x: window.innerWidth * 18 / 100,
+                            y: window.innerHeight * 25 / 100
+                    },
+                    type: 'success',
+                    z_index: 1031,
+                    delay: 5000,
+                    timer: 1000
+                });
+            {% endif %}
 
+        });
     </script>
 </body>
 </html>
