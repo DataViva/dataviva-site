@@ -65,11 +65,12 @@
         });
 
         $(document).ready(function() {
-            $("button[data-method='delete']").on('click', function(event) {
-                var callback = eval(this.dataset.callback);
+            $("button[data-method]").on('click', function(event) {
+                var callback = eval(this.dataset.callback),
+                    method = this.dataset.method.toUpperCase();
                 $.ajax({
                     url: this.value,
-                    type: 'DELETE',
+                    type: method,
                     success: function(response) {
                         callback(response);
                     }
@@ -77,13 +78,6 @@
 
             });
 
-            $("button[data-method='put']").on('click', function(event) {
-                $.ajax({
-                    url: this.value,
-                    type: 'PUT'
-                });
-
-            });
 
             {% if message %}
                 $.notify({
