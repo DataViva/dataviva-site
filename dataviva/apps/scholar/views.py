@@ -25,7 +25,8 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    return render_template('scholar/index.html', articles=articles)
+    message = request.args.get('message')
+    return render_template('scholar/index.html', articles=articles, message=message)
 
 
 @mod.route('/article/<id>', methods=['GET'])
@@ -69,6 +70,7 @@ def create():
                     Em até 15 dias você receberá um retorno sobre sua publicação no site!
                    '''
 
+
 @mod.route('/article/<id>', methods=['PATCH', 'PUT'])
 def update():
     pass
@@ -76,6 +78,7 @@ def update():
 
 @mod.route('/article/<id>', methods=['DELETE'])
 def destroy(id):
-    articles.pop(int(id.encode()))
-    response = make_response()
-    return render_template('scholar/index.html', articles=articles, message=u'Artigo excluído com sucesso')
+    if articles.pop(int(id.encode())):
+        return make_response(u"Artigo excluído com sucesso!", 200)
+    else:
+        return make_response(render_template('not_found.html'), 404)
