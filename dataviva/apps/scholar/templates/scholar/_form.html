@@ -6,7 +6,7 @@
     {% endfor %}
 {%- endmacro %}
 
-<form method="post" action="{{ url_for('scholar.create') }}" class="form-dataviva">
+<form method="post" action="{{ action }}" class="form-dataviva">
     {{ form.hidden_tag() }}
     <p>
         <label for="title">Título</label>
