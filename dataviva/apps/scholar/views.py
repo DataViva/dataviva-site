@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request, make_response
+from flask import Blueprint, render_template, g, request, make_response, url_for
 from dataviva.apps.general.views import get_locale
 
 from flask.ext.wtf import Form
@@ -39,46 +39,65 @@ def show(id):
 @mod.route('/article/new', methods=['GET'])
 def new():
     form = RegistrationForm()
-    return render_template('scholar/new.html', form=form)
+    return render_template('scholar/new.html', form=form, action=url_for('scholar.create'))
 
 
 @mod.route('/article/<id>/edit', methods=['GET'])
 def edit(id):
-    return render_template('scholar/edit.html')
+    form = RegistrationForm()
+    id = int(id.encode())
+    article = articles[id]
+    form.title.data = article.title
+    form.theme.data = article.theme
+    form.author.data = article.author
+    form.key_words.data = article.key_words
+    form.abstract.data = article.abstract
+    return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id))
 
 
-@mod.route('/article', methods=['POST'])
+@mod.route('/article/new', methods=['POST'])
 def create():
     form = RegistrationForm()
-    if request.method == 'POST':
-        if form.validate() == False:
-            return render_template('scholar/new.html', form=form)
-        else:
-            title = form.title.data
-            theme = form.theme.data
-            author = form.author.data
-            key_words = form.key_words.data
-            abstract = form.abstract.data
-            postage_date = time.strftime("%d/%m/%Y")
-            id = ids[-1] + 1
+    if form.validate() == False:
+        return render_template('scholar/new.html', form=form)
+    else:
+        title = form.title.data
+        theme = form.theme.data
+        author = form.author.data
+        key_words = form.key_words.data
+        abstract = form.abstract.data
+        postage_date = time.strftime("%d/%m/%Y")
+        id = ids[-1] + 1
 
-            ids.append(id)
-            articles.update({id:Article(title, theme, author, key_words, abstract, postage_date)})
+        ids.append(id)
+        articles.update({id:Article(title, theme, author, key_words, abstract, postage_date)})
 
-            return '''
-                    Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva.
-                    Em até 15 dias você receberá um retorno sobre sua publicação no site!
-                   '''
+        message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. Em até 15 dias você receberá um retorno sobre sua publicação no site!'
+        return render_template('scholar/index.html', articles=articles, message=message)
+
+@mod.route('/article/<id>/edit', methods=['POST'])
+def update(id):
+    form = RegistrationForm()
+    id = int(id.encode())
+    if form.validate() == False:
+        return render_template('scholar/edit.html', form=form)
+    else:
+        title = form.title.data
+        theme = form.theme.data
+        author = form.author.data
+        key_words = form.key_words.data
+        abstract = form.abstract.data
+        postage_date = time.strftime("%d/%m/%Y")
+
+        articles[id] = Article(title, theme, author, key_words, abstract, postage_date)
+        message = u'Estudo editado com sucesso!'
+        return render_template('scholar/index.html', articles=articles, message=message)
 
 
-@mod.route('/article/<id>', methods=['PATCH', 'PUT'])
-def update():
-    pass
-
-
-@mod.route('/article/<id>', methods=['DELETE'])
-def destroy(id):
+@mod.route('/article/<id>/delete', methods=['GET'])
+def delete(id):
     if articles.pop(int(id.encode())):
-        return make_response(u"Artigo excluído com sucesso!", 200)
+        message = u"Estudo excluído com sucesso!"
+        return render_template('scholar/index.html', articles=articles, message=message)
     else:
         return make_response(render_template('not_found.html'), 404)
