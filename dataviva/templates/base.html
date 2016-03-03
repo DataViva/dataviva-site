@@ -36,6 +36,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
     <script src="/static/dist/js/bootstrap.min.js"></script>
     <script src="/static/dist/js/jquery.counterup.min.js"></script>
+    <script src="/static/dist/js/bootstrap-notify.js"></script>
 
     <script src="/static/js/libs/angular.min.js"></script>
     <script src="/static/js/dataviva-ng/init.js"></script>
@@ -56,12 +57,29 @@
     <script src="/static/js/dataviva-ng/app.js"></script>
 
     <script type="text/javascript">
-    $(function(){
-        $('[data-toggle="popover"]').popover({
-            'trigger' : 'hover'
+        $(function(){
+            $('[data-toggle="popover"]').popover({
+                'trigger' : 'hover'
+            });
+            $('.counter').counterUp();
         });
-        $('.counter').counterUp();
-    });
+
+        $(document).ready(function() {
+            {% if message %}
+                $.notify({
+                    message: '{{message}}',
+                },{
+                    offset: {
+                            x: window.innerWidth * 18 / 100,
+                            y: window.innerHeight * 25 / 100
+                    },
+                    type: 'success',
+                    z_index: 1031,
+                    delay: 5000,
+                    timer: 1000
+                });
+            {% endif %}
+        });
     </script>
 </body>
 </html>
