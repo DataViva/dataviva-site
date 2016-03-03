@@ -2151,7 +2151,7 @@ msgid "Where are people getting<br>hired in Minas Gerais?"
 msgstr "Quem foi contratado<br>em Minas Gerais?"
 
 #: dataviva/html/general/home.html:305
-msgid "Visualize employement data now."
+msgid "Visualize employment data now."
 msgstr "Visualize dados de emprego agora."
 
 #: dataviva/html/general/home.html:312
