@@ -56,17 +56,17 @@
                                     Principal Produto por Valor Exportado
                                 </th>
                                 <td>
-                                    <p class="label">Minério de Ferro</p>
-                                    USD <strong class="counter">12.2</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.main_product_by_export_value_name }}</p>
+                                    USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_export_value | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Principal Produto por Valor Exportado
+                                    Principal Produto por Valor Importado
                                 </th>
                                 <td>
-                                    <p class="label">China</p>
-                                    USD <strong class="counter">8.82</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.main_product_by_import_value_name }}</p>
+                                    USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_import_value | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -74,7 +74,7 @@
                                     Total de Exportações
                                 </th>
                                 <td>
-                                    USD <strong class="counter">29.3</strong> <span>bilhões</span>
+                                    USD <strong class="counter">{{ body.total_exports | max_digits(3) }}</strong> <span>{{ body.total_exports | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -82,7 +82,25 @@
                                     Total de Importações
                                 </th>
                                 <td>
-                                    USD <strong class="counter">11</strong> <span>bilhões</span>
+                                    USD <strong class="counter">{{ body.total_imports | max_digits(3) }}</strong> <span>{{ body.total_imports | magnitude }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Destino por Valor Exportado
+                                </th>
+                                <td>
+                                    <p class="label">{{ body.main_destination_by_export_value_name }}</p>
+                                    USD <strong class="counter">{{ body.main_destination_by_export_value | max_digits(3) }}</strong> <span>{{ body.main_destination_by_export_value | magnitude }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Principal Destino por Valor Importado
+                                </th>
+                                <td>
+                                    <p class="label">{{ body.main_destination_by_import_value_name }}</p>
+                                    USD <strong class="counter">{{ body.main_destination_by_import_value | max_digits(3) }}</strong> <span>{{ body.main_destination_by_import_value | magnitude }}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -99,36 +117,44 @@
                         <tbody>
                             <tr>
                                 <th>
-                                    Principal Produto por Valor Exportado
+                                    Principal Atividade Econômica por Número de Empregos
                                 </th>
                                 <td>
-                                    <p class="label">Minério de Ferro</p>
-                                    USD <strong class="counter">12.2</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.main_industry_by_num_jobs_name }}</p>
+                                    <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3) }}</strong> <span>{{ body.main_industry_by_num_jobs | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Principal Produto por Valor Exportado
+                                    Principal Ocupação por Número de Empregos
                                 </th>
                                 <td>
-                                    <p class="label">China</p>
-                                    USD <strong class="counter">8.82</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.main_occupation_by_num_jobs_name }}</p>
+                                    <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3) }}</strong> <span>{{ body.main_occupation_by_num_jobs | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Total de Exportações
+                                    Salário Médio
                                 </th>
                                 <td>
-                                    USD <strong class="counter">29.3</strong> <span>bilhões</span>
+                                    USD <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong> <span>{{ body.avg_wage | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Total de Importações
+                                    Massa Salarial
                                 </th>
                                 <td>
-                                    USD <strong class="counter">11</strong> <span>bilhões</span>
+                                    USD <strong class="counter">{{ body.wage | max_digits(3) }}</strong> <span>{{ body.wage | magnitude }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Total de Empregos
+                                </th>
+                                <td>
+                                    USD <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong> <span>{{ body.total_jobs | magnitude }}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -145,36 +171,38 @@
                         <tbody>
                             <tr>
                                 <th>
-                                    Principal Produto por Valor Exportado
+                                    Produto com Menor Distância
                                 </th>
                                 <td>
-                                    <p class="label">Minério de Ferro</p>
-                                    USD <strong class="counter">12.2</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.less_distance_by_product_name }}</p>
+                                    <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong> <span>{{ body.less_distance_by_product | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Principal Produto por Valor Exportado
+                                    Atividade Econômica com Menor Distância
                                 </th>
                                 <td>
-                                    <p class="label">China</p>
-                                    USD <strong class="counter">8.82</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.less_distance_by_occupation_name }}</p>
+                                    <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong> <span>{{ body.less_distance_by_occupation | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Total de Exportações
+                                    Produto com Maior Ganho de Oportunidade
                                 </th>
                                 <td>
-                                    USD <strong class="counter">29.3</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.biggest_opportunity_gain_by_product_name }}</p>
+                                    <strong class="counter">{{ body.biggest_opportunity_gain_by_product | max_digits(3) }}</strong> <span>{{ body.biggest_opportunity_gain_by_product | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Total de Importações
+                                    Atividade Econômica com Maior Ganho de Oportunidade
                                 </th>
                                 <td>
-                                    USD <strong class="counter">11</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.biggest_opportunity_gain_by_occupation_name }}</p>
+                                    <strong class="counter">{{ body.biggest_opportunity_gain_by_occupation | max_digits(3) }}</strong> <span>{{ body.biggest_opportunity_gain_by_occupation | magnitude }}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -191,36 +219,38 @@
                         <tbody>
                             <tr>
                                 <th>
-                                    Principal Produto por Valor Exportado
+                                    Universidade com Maior Número de Matrículas
                                 </th>
                                 <td>
-                                    <p class="label">Minério de Ferro</p>
-                                    USD <strong class="counter">12.2</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.highest_enrolled_number_by_university_name }}</p>
+                                    <strong class="counter">{{ body.highest_enrolled_number_by_university | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_number_by_university | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Principal Produto por Valor Exportado
+                                    Curso Superior com Maior Número de Matrículas
                                 </th>
                                 <td>
-                                    <p class="label">China</p>
-                                    USD <strong class="counter">8.82</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.highest_enrolled_number_by_major_name }}</p>
+                                    <strong class="counter">{{ body.highest_enrolled_number_by_major | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_number_by_major | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Total de Exportações
+                                    Escola com Maior Número de Matrículas em Cursos Técnicos
                                 </th>
                                 <td>
-                                    USD <strong class="counter">29.3</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.highest_enrolled_number_by_school_name }}</p>
+                                    <strong class="counter">{{ body.highest_enrolled_number_by_school | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_number_by_school | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Total de Importações
+                                    Curso Técnico com Maior Número de Matrículas
                                 </th>
                                 <td>
-                                    USD <strong class="counter">11</strong> <span>bilhões</span>
+                                    <p class="label">{{ body.highest_enrolled_number_by_basic_course_name }}</p>
+                                    <strong class="counter">{{ body.highest_enrolled_number_by_basic_course | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_number_by_basic_course | magnitude }}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -230,97 +260,6 @@
                     </a>
                 </div>
             </div>
-            <div class="col-xs-15 col-sm-15 col-md-5">
-                <h3>Saúde</h3>
-                <div class="table-responsive">
-                    <table class="table data-2-columns margin-none-bottom">
-                        <tbody>
-                            <tr>
-                                <th>
-                                    Principal Produto por Valor Exportado
-                                </th>
-                                <td>
-                                    <p class="label">Minério de Ferro</p>
-                                    USD <strong class="counter">12.2</strong> <span>bilhões</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Principal Produto por Valor Exportado
-                                </th>
-                                <td>
-                                    <p class="label">China</p>
-                                    USD <strong class="counter">8.82</strong> <span>bilhões</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Total de Exportações
-                                </th>
-                                <td>
-                                    USD <strong class="counter">29.3</strong> <span>bilhões</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Total de Importações
-                                </th>
-                                <td>
-                                    USD <strong class="counter">11</strong> <span>bilhões</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <a href="#saude" aria-controls="saude" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
-                        mais detalhes
-                    </a>
-                </div>
-            </div>
-            <div class="col-xs-15 col-sm-15 col-md-5">
-                <h3>Empresas</h3>
-                <div class="table-responsive">
-                    <table class="table data-2-columns margin-none-bottom">
-                        <tbody>
-                            <tr>
-                                <th>
-                                    Principal Produto por Valor Exportado
-                                </th>
-                                <td>
-                                    <p class="label">Minério de Ferro</p>
-                                    USD <strong class="counter">12.2</strong> <span>bilhões</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Principal Produto por Valor Exportado
-                                </th>
-                                <td>
-                                    <p class="label">China</p>
-                                    USD <strong class="counter">8.82</strong> <span>bilhões</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Total de Exportações
-                                </th>
-                                <td>
-                                    USD <strong class="counter">29.3</strong> <span>bilhões</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Total de Importações
-                                </th>
-                                <td>
-                                    USD <strong class="counter">11</strong> <span>bilhões</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <a href="#empresas" aria-controls="empresas" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
-                        mais detalhes
-                    </a>
-                </div>
             </div>
         </div>
     </div>

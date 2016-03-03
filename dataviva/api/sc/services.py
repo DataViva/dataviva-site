@@ -3,7 +3,7 @@ from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc
 from dataviva.api.attrs.models import School, Bra, Course_sc
 from dataviva import db
 from flask import g
-from sqlalchemy import func, desc, asc
+from sqlalchemy import func, desc, asc, not_
 
 class Basic_course:
     def __init__(self, course_sc_id):
@@ -153,3 +153,58 @@ class Basic_course_city_by_location(Basic_course_city):
                 Ybc_sc.year == self.max_year_subquery,
                 Ybc_sc.bra_id.like(str(self.bra_id)+'%'),
                 Ybc_sc.bra_id_len == 9)
+
+class LocationSchool:
+    def __init__(self, bra_id):
+        self.bra_id = bra_id
+        self._sc = None
+        self._sc_sorted_by_enrolled = None
+        self.max_year_query = db.session.query(func.max(Ybsc.year)).filter_by(bra_id=bra_id)
+        self.sc_query = Ybsc.query.join(School).filter(
+            Ybsc.bra_id == self.bra_id,
+            not_(Ybsc.course_sc_id.like('xx%')),
+            Ybsc.year == self.max_year_query).group_by(Ybsc.school_id, School.name_pt)
+
+    def __sc__(self):
+        if not self._sc:
+            sc_data = self.sc_query.first_or_404()
+            self._sc = sc_data
+        return self._sc
+
+    def __sc_list__(self):
+        if not self._sc:
+            sc_data = self.sc_query.all()
+            self._sc = sc_data
+        return self._sc
+
+    def __sc_sorted_by_enrolled__(self):
+        if not self._sc_sorted_by_enrolled:
+            self._sc_sorted_by_enrolled = self.__sc_list__()
+            self._sc_sorted_by_enrolled.sort(key=lambda sc: sc.enrolled, reverse=True)
+        return self._sc_sorted_by_enrolled
+
+    def highest_enrolled_number_by_school(self):
+        sc= self.__sc_sorted_by_enrolled__()[0]
+        return sc.enrolled
+
+    def highest_enrolled_number_by_school_name(self):
+        sc = self.__sc_sorted_by_enrolled__()[0]
+        return sc.school.name()
+
+class LocationBasicCourse(LocationSchool):
+    def __init__(self, bra_id):
+        LocationSchool.__init__(self, bra_id)
+        self.bra_id = bra_id
+        self.max_year_query = db.session.query(func.max(Ybsc.year)).filter_by(bra_id=bra_id)
+        self.sc_query = Ybsc.query.join(Course_sc).filter(
+            Ybsc.bra_id == self.bra_id,
+            not_(Ybsc.course_sc_id.like('xx%')),
+            Ybsc.year == self.max_year_query).group_by(Ybsc.course_sc_id, Course_sc.name_pt)
+
+    def highest_enrolled_number_by_basic_course(self):
+        sc= self.__sc_sorted_by_enrolled__()[0]
+        return sc.enrolled
+
+    def highest_enrolled_number_by_basic_course_name(self):
+        sc = self.__sc_sorted_by_enrolled__()[0]
+        return sc.course_sc.name()

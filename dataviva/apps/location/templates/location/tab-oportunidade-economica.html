@@ -9,36 +9,44 @@
                     <thead>
                         <tr>
                             <th>
-                                Principal Produto
-                                <small>por Valor Exportado</small>
+                                Produto
+                                <small>com Menor Distância</small>
                             </th>
                             <th>
-                                Principal Destino
-                                <small>por Valor Exportado</small>
+                                Atividade Econômica <small>com Menor Distância</small>
                             </th>
                             <th>
-                                Total de Exportações
+                                Produto <small>com Maior Ganho de Oportunidade</small>
+                            </th>
+                            <th>
+                                Atividade Econômica <small>com Maior Ganho de Oportunidade</small>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
-                                <p class="label">Minério de Ferro</p>
+                                <p class="label">{{ body.less_distance_by_product_name }}</p>
                                 <div class="number">
-                                    USD <strong class="counter">12.2</strong><span>B</span>
+                                    USD <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong><span>{{ body.less_distance_by_product | magnitude }}</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">China</p>
+                                <p class="label">{{ body.less_distance_by_occupation_name }}</p>
                                 <div class="number">
-                                    USD <strong class="counter">8.82</strong><span>B</span>
+                                    USD <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong><span>{{ body.less_distance_by_occupation | magnitude }}</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">Total de Exportações</p>
+                                <p class="label">{{ body.biggest_opportunity_gain_by_product_name }}</p>
                                 <div class="number">
-                                    USD <strong class="counter">29.3</strong><span>B</span>
+                                    USD <strong class="counter">{{ body.biggest_opportunity_gain_by_product | max_digits(3) }}</strong><span>{{ body.biggest_opportunity_gain_by_product | magnitude }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{ body.biggest_opportunity_gain_by_occupation_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.biggest_opportunity_gain_by_occupation | max_digits(3) }}</strong><span>{{ body.biggest_opportunity_gain_by_occupation | magnitude }}</span>
                                 </div>
                             </td>
                         </tr>
