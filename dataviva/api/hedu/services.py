@@ -1,4 +1,4 @@
-from dataviva.api.hedu.models import Yu, Yuc, Yc_hedu, Ybc_hedu
+from dataviva.api.hedu.models import Ybu, Ybc_hedu, Yu, Yuc, Yc_hedu, Ybc_hedu
 from dataviva.api.attrs.models import University as uni, Course_hedu, Bra
 from dataviva import db
 from sqlalchemy.sql.expression import func, desc
@@ -231,3 +231,57 @@ class MajorMunicipalities(Major):
         hedu = self.__hedu_sorted_by_graduates__()[0]
         return hedu.bra.name()
         
+class LocationUniversity:
+    def __init__(self, bra_id):
+        self._hedu_sorted_by_enrolled = None
+        self._hedu = None
+        self.bra_id = bra_id
+        self.max_year_query = db.session.query(func.max(Ybu.year)).filter_by(bra_id=bra_id)
+        self.hedu_query = Ybu.query.join(uni).filter(
+            Ybu.bra_id == self.bra_id, 
+            Ybu.year == self.max_year_query)
+
+    def __hedu__(self):
+        if not self._hedu:
+            hedu_data = self.hedu_query.one()
+            self._hedu = hedu_data
+        return self._hedu
+
+    def __hedu_list__(self):
+        if not self._hedu:
+            hedu_data = self.hedu_query.all()
+            self._hedu = hedu_data
+        return self._hedu
+
+    def __hedu_sorted_by_enrolled__(self):
+        if not self._hedu_sorted_by_enrolled:
+            self._hedu_sorted_by_enrolled = self.__hedu_list__()
+            self._hedu_sorted_by_enrolled.sort(key=lambda hedu: hedu.enrolled, reverse=True)
+        return self._hedu_sorted_by_enrolled
+        
+    def highest_enrolled_number_by_university(self):
+        hedu = self.__hedu_sorted_by_enrolled__()[0]
+        return hedu.enrolled
+
+    def highest_enrolled_number_by_university_name(self):
+        hedu = self.__hedu_sorted_by_enrolled__()[0]
+        return hedu.university.name()
+
+class LocationMajor(LocationUniversity):
+    def __init__(self, bra_id):
+        LocationUniversity.__init__(self, bra_id)
+        self._hedu = None
+        self.bra_id = bra_id
+        self.max_year_query = db.session.query(func.max(Ybc_hedu.year)).filter_by(bra_id=bra_id)
+        self.hedu_query = Ybc_hedu.query.join(Course_hedu).filter(
+            Ybc_hedu.bra_id == self.bra_id,
+            Ybc_hedu.course_hedu_id_len == 6,
+            Ybc_hedu.year == self.max_year_query)
+
+    def highest_enrolled_number_by_major(self):
+        hedu = self.__hedu_sorted_by_enrolled__()[0]
+        return hedu.enrolled
+
+    def highest_enrolled_number_by_major_name(self):
+        hedu = self.__hedu_sorted_by_enrolled__()[0]
+        return hedu.course_hedu.name()

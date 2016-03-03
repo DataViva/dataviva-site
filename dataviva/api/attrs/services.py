@@ -1,4 +1,4 @@
-from dataviva.api.attrs.models import Ybs
+from dataviva.api.attrs.models import Ybs, Bra
 from dataviva import db
 from sqlalchemy import func
 
@@ -48,3 +48,7 @@ class Location:
         attr = next((attr for attr in attrs if attr.stat_id == 'hdi'),
                     None)
         return attr.stat_val
+
+    def name(self):
+        bra_query = Bra.query.filter(Bra.id == self.bra_id).first()
+        return bra_query.name()
