@@ -1667,7 +1667,7 @@ msgid "Where are people getting<br>hired in Minas Gerais?"
 msgstr ""
 
 #: dataviva/html/general/home.html:305
-msgid "Visualize employement data now."
+msgid "Visualize employment data now."
 msgstr ""
 
 #: dataviva/html/general/home.html:312

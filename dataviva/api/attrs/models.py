@@ -289,7 +289,7 @@ class Bra(db.Model, AutoSerialize, BasicAttr):
         return q.all()
 
     def url(self):
-        return "profiles/bra/{}/".format(self.id)
+        return "/profiles/bra/{}/".format(self.id)
 
     def __repr__(self):
         return '<Bra %r>' % (self.name_en)
