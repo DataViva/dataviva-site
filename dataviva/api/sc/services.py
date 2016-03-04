@@ -157,54 +157,53 @@ class Basic_course_city_by_location(Basic_course_city):
 class LocationSchool:
     def __init__(self, bra_id):
         self.bra_id = bra_id
-        self._sc = None
-        self._sc_sorted_by_enrolled = None
+        self._sc_list = None
+        self._sc_sorted_by_enrollment = None
         self.max_year_query = db.session.query(func.max(Ybsc.year)).filter_by(bra_id=bra_id)
-        self.sc_query = Ybsc.query.join(School).filter(
-            Ybsc.bra_id == self.bra_id,
-            not_(Ybsc.course_sc_id.like('xx%')),
-            Ybsc.year == self.max_year_query).group_by(Ybsc.school_id, School.name_pt)
 
-    def __sc__(self):
-        if not self._sc:
-            sc_data = self.sc_query.first_or_404()
-            self._sc = sc_data
-        return self._sc
+        self.sc_query = db.session.query(
+                            func.sum(Ybsc.enrolled).label("enrolled"),
+                            School) \
+                        .join(School).filter(
+                            Ybsc.bra_id == self.bra_id,
+                            not_(Ybsc.course_sc_id.like('xx%')),
+                            Ybsc.year == self.max_year_query).group_by(Ybsc.school_id)
 
     def __sc_list__(self):
-        if not self._sc:
-            sc_data = self.sc_query.all()
-            self._sc = sc_data
-        return self._sc
+        if not self._sc_list:
+            sc = self.sc_query.all()
+            self._sc_list = sc
+        return self._sc_list
 
-    def __sc_sorted_by_enrolled__(self):
-        if not self._sc_sorted_by_enrolled:
-            self._sc_sorted_by_enrolled = self.__sc_list__()
-            self._sc_sorted_by_enrolled.sort(key=lambda sc: sc.enrolled, reverse=True)
-        return self._sc_sorted_by_enrolled
+    def __sc_sorted_by_enrollment__(self):
+        if not self._sc_sorted_by_enrollment:
+            self._sc_sorted_by_enrollment = self.__sc_list__()
+            self._sc_sorted_by_enrollment.sort(key=lambda sc: sc.enrolled, reverse=True)
+        return self._sc_sorted_by_enrollment
 
-    def highest_enrolled_number_by_school(self):
-        sc= self.__sc_sorted_by_enrolled__()[0]
-        return sc.enrolled
+    def highest_enrolled_by_school(self):
+        sc_list = self.__sc_sorted_by_enrollment__()
+        return sc_list[0].enrolled
 
-    def highest_enrolled_number_by_school_name(self):
-        sc = self.__sc_sorted_by_enrolled__()[0]
-        return sc.school.name()
+    def highest_enrolled_by_school_name(self):
+        sc_list = self.__sc_sorted_by_enrollment__()
+        return sc_list[0][1].name()
 
 class LocationBasicCourse(LocationSchool):
     def __init__(self, bra_id):
         LocationSchool.__init__(self, bra_id)
-        self.bra_id = bra_id
-        self.max_year_query = db.session.query(func.max(Ybsc.year)).filter_by(bra_id=bra_id)
-        self.sc_query = Ybsc.query.join(Course_sc).filter(
-            Ybsc.bra_id == self.bra_id,
-            not_(Ybsc.course_sc_id.like('xx%')),
-            Ybsc.year == self.max_year_query).group_by(Ybsc.course_sc_id, Course_sc.name_pt)
+        self.sc_query = db.session.query(
+                            func.sum(Ybsc.enrolled).label("enrolled"),
+                            Course_sc) \
+                        .join(Course_sc).filter(
+                            Ybsc.bra_id == self.bra_id,
+                            not_(Ybsc.course_sc_id.like('xx%')),
+                            Ybsc.year == self.max_year_query).group_by(Ybsc.course_sc_id)
 
-    def highest_enrolled_number_by_basic_course(self):
-        sc= self.__sc_sorted_by_enrolled__()[0]
-        return sc.enrolled
+    def highest_enrolled_by_basic_course(self):
+        sc_list = self.__sc_sorted_by_enrollment__()
+        return sc_list[0].enrolled
 
-    def highest_enrolled_number_by_basic_course_name(self):
-        sc = self.__sc_sorted_by_enrolled__()[0]
-        return sc.course_sc.name()
+    def highest_enrolled_by_basic_course_name(self):
+        sc_list = self.__sc_sorted_by_enrollment__()
+        return sc_list[0][1].name()

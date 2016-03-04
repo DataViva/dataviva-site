@@ -449,7 +449,7 @@ class LocationOppGain(LocationIndustry):
             Ybi.opp_gain != None,
             Ybi.opp_gain == self.opp_gain_query)
 
-    def biggest_opportunity_gain_by_occupation(self):
+    def opportunity_gain_by_occupation(self):
         try:
             rais = self.__rais_sorted_by_opp_gain__()[0]
         except IndexError:
@@ -457,7 +457,7 @@ class LocationOppGain(LocationIndustry):
         else:
             return rais.opp_gain
 
-    def biggest_opportunity_gain_by_occupation_name(self):
+    def opportunity_gain_by_occupation_name(self):
         try:
             rais = self.__rais_sorted_by_opp_gain__()[0]
         except IndexError:
