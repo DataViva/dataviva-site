@@ -8,30 +8,36 @@
                         R$ <strong class="counter">{{ header.gdp|max_digits(3) }}</strong><small>{{ header.gdp|magnitude }}</small>
                     </div>
                 </div>
+                {% if header.life_expectation %}
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">Esperança de Vida</p>
                     <div class="number">
                         <strong class="counter">{{ header.life_expectation|max_digits(3) }}</strong><small>{{ header.life_expectation|magnitude }}</small>
                     </div>
                 </div>
+                {% endif %}
+                {% if header.population %}
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">População Total</p>
                     <div class="number">
                         <strong class="counter">{{ header.population|max_digits(3) }}</strong><small>{{ header.population|magnitude }}</small>
                     </div>
                 </div>
+                {% endif %}
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">PIB Per Capta</p>
                     <div class="number">
                         R$ <strong class="counter">{{ header.gdp_per_capita|max_digits(3) }}</strong><small>{{ header.gdp_per_capita|magnitude }}</small>
                     </div>
                 </div>
+                {% if header.hdi %}
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">IDHM</p>
                     <div class="number">
                         <strong class="counter">{{ header.hdi|max_digits(3) }}</strong><small>{{ header.hdi|magnitude }}</small>
                     </div>
                 </div>
+                {% endif %}
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">ECI</p>
                     <div class="number">
