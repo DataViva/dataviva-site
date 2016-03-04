@@ -181,11 +181,11 @@ class LocationSchool:
             self._sc_sorted_by_enrollment.sort(key=lambda sc: sc.enrolled, reverse=True)
         return self._sc_sorted_by_enrollment
 
-    def highest_enrolled_number_by_school(self):
+    def highest_enrolled_by_school(self):
         sc_list = self.__sc_sorted_by_enrollment__()
         return sc_list[0].enrolled
 
-    def highest_enrolled_number_by_school_name(self):
+    def highest_enrolled_by_school_name(self):
         sc_list = self.__sc_sorted_by_enrollment__()
         return sc_list[0][1].name()
 
@@ -200,10 +200,10 @@ class LocationBasicCourse(LocationSchool):
                             not_(Ybsc.course_sc_id.like('xx%')),
                             Ybsc.year == self.max_year_query).group_by(Ybsc.course_sc_id)
 
-    def highest_enrolled_number_by_basic_course(self):
+    def highest_enrolled_by_basic_course(self):
         sc_list = self.__sc_sorted_by_enrollment__()
         return sc_list[0].enrolled
 
-    def highest_enrolled_number_by_basic_course_name(self):
+    def highest_enrolled_by_basic_course_name(self):
         sc_list = self.__sc_sorted_by_enrollment__()
         return sc_list[0][1].name()

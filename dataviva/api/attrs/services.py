@@ -16,10 +16,6 @@ class Location:
                 Ybs.bra_id.like(like_cond),
                 func.length(Ybs.bra_id) == 9,
                 Ybs.year == self.max_year_query).group_by(Ybs.stat_id)
-            # self.attrs_query = Ybs.query.filter(
-            #     func.length(Ybs.bra_id) == 9,
-            #     Ybs.bra_id.like(like_cond),
-            #     Ybs.year == self.max_year_query)
         else:
             self.max_year_query = db.session.query(
                 func.max(Ybs.year)).filter_by(bra_id=bra_id)
