@@ -1,18 +1,46 @@
-<form action="" class="form-dataviva">
+{% macro messages(input) -%}
+    {% for message in input.errors %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+{%- endmacro %}
+
+<form method="post" action="{{ action }}" class="form-dataviva">
+    {{ form.hidden_tag() }}
     <p>
-        <label for="field-titulo">Titulo</label>
-        <input id="field-titulo" type="text" class="form-control" />
+        <label for="title">Título</label>
+        {{ form.title(class="form-control")}}
+        {{ messages(form.title) }}
     </p>
     <p>
-        <label for="field-arquivo">
-            Formato<br />
-            <small>Aceitamos artigos em formato PDF.</small>
+        <label for="author">Autor</label>
+        {{ form.author(class="form-control")}}
+        {{ messages(form.author) }}
+    </p>
+    <p>
+        <label for="category">Categoria</label>
+        {{ form.category(class="form-control")}}
+        {{ messages(form.category) }}
+    </p>
+    <p>
+        <label for="text">Texto</label>
+        {{ form.text(class="form-control", rows=5)}}
+        {{ messages(form.text) }}
+    </p>
+    <p>
+        <label for="file">Image<br />
+            <small>Aceitamos artigos somente em formato PNG.</small>
         </label>
-        <input id="field-arquivo" type="file" />
+        {{ form.image}}
+        {{ messages(form.image) }}
     </p>
     <p>
-        <label for="field-descricao">Descrição</label>
-        <textarea id="field-descricao" rows="5" class="form-control"></textarea>
+        <label for="file">Thumb<br />
+            <small>Aceitamos artigos somente em formato PNG.</small>
+        </label>
+        {{ form.thumb}}
+        {{ messages(form.thumb) }}
     </p>
-    <button type="button" class="btn btn-default btn-dataviva pull-right">Enviar</button>
+    <button type="submit" class="btn btn-default btn-dataviva pull-right">Enviar</button>
 </form>
