@@ -468,7 +468,7 @@ class Location:
         else:
             return secex.hs.name()
 
-    def biggest_opportunity_gain_by_product(self):
+    def opportunity_gain_by_product(self):
         try:
             secex = self.__secex_sorted_by_opp_gain__()[0]
         except IndexError:
@@ -476,7 +476,7 @@ class Location:
         else:
             return secex.opp_gain_wld
 
-    def biggest_opportunity_gain_by_product_name(self):
+    def opportunity_gain_by_product_name(self):
         try:
             secex = self.__secex_sorted_by_opp_gain__()[0]
         except IndexError:

@@ -259,11 +259,11 @@ class LocationUniversity:
             self._hedu_sorted_by_enrolled.sort(key=lambda hedu: hedu.enrolled, reverse=True)
         return self._hedu_sorted_by_enrolled
         
-    def highest_enrolled_number_by_university(self):
+    def highest_enrolled_by_university(self):
         hedu = self.__hedu_sorted_by_enrolled__()[0]
         return hedu.enrolled
 
-    def highest_enrolled_number_by_university_name(self):
+    def highest_enrolled_by_university_name(self):
         hedu = self.__hedu_sorted_by_enrolled__()[0]
         return hedu.university.name()
 
@@ -278,10 +278,10 @@ class LocationMajor(LocationUniversity):
             Ybc_hedu.course_hedu_id_len == 6,
             Ybc_hedu.year == self.max_year_query)
 
-    def highest_enrolled_number_by_major(self):
+    def highest_enrolled_by_major(self):
         hedu = self.__hedu_sorted_by_enrolled__()[0]
         return hedu.enrolled
 
-    def highest_enrolled_number_by_major_name(self):
+    def highest_enrolled_by_major_name(self):
         hedu = self.__hedu_sorted_by_enrolled__()[0]
         return hedu.course_hedu.name()
