@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import DateField, FileField, TextField, TextAreaField, validators, ValidationError
+from wtforms import FileField, TextField, TextAreaField, validators, ValidationError
+
 
 class NumberOfWords(object):
     def __init__(self, max, message=None):
         self.max = max
         if not message:
-            message = u"Tema deve possuir no máximo %d palavras." % (max)
+            message = u"Campo deve possuir no máximo %d palavras." % (max)
         self.message = message
 
     def __call__(self, form, field):
