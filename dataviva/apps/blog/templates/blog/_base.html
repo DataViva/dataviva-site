@@ -22,6 +22,22 @@
             </ul>
         </div>
         <div class="main-content col-xs-15 col-md-11">
+
+        <script type="text/javascript">
+            window.BlogController = (function () {
+                return {
+                    deletePost: deletePost
+                }
+
+                function deletePost(response) {
+                    {% if form %}
+                        window.location = '/en/blog/?message='+response;
+                    {% endif %}
+                }
+
+            })();
+        </script>
+
         {% block blog_content %}
         {% endblock blog_content %}
         </div>
