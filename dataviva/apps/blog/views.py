@@ -43,11 +43,11 @@ def create():
     pass
 
 
-@mod.route('/post/<id>', methods=['PATCH', 'PUT'])
+@mod.route('/post/<id>', methods=['POST'])
 def update():
     pass
 
 
-@mod.route('/post/<id>', methods=['DELETE'])
+@mod.route('/post/<id>', methods=['GET'])
 def destroy():
     pass
