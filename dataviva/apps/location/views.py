@@ -46,16 +46,26 @@ def index(bra_id):
     eci = Ymb.query.filter_by(bra_id=bra_id, month=0) \
         .order_by(desc(Ymb.year)).limit(1).first().eci
 
-    header = {
-        'name': location_service.name(),
-        'bra_id': bra_id[:3],
-        'gdp': location_service.gdp(),
-        'life_expectation': location_service.life_expectation(),
-        'population': location_service.population(),
-        'gdp_per_capita': location_service.gdp_per_capita(),
-        'hdi': location_service.hdi(),
-        'eci': eci,
-    }
+    if len(bra_id) != 9 and len(bra_id) != 3:
+        header = {
+            'name': location_service.name(),
+            'bra_id': bra_id[:3],
+            'gdp': location_service.gdp(),
+            'population': location_service.population(),
+            'gdp_per_capita': location_service.gdp()/location_service.population(),
+            'eci': eci,
+        }
+    else:
+        header = {
+            'name': location_service.name(),
+            'bra_id': bra_id[:3],
+            'gdp': location_service.gdp(),
+            'life_expectation': location_service.life_expectation(),
+            'population': location_service.population(),
+            'gdp_per_capita': location_service.gdp_per_capita(),
+            'hdi': location_service.hdi(),
+            'eci': eci,
+        }
 
     body = {
         'main_product_by_export_value': location_body_service.main_product_by_export_value(),
