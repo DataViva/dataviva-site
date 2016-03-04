@@ -10,36 +10,43 @@
                     <thead>
                         <tr>
                             <th>
-                                Principal Produto
-                                <small>por Valor Exportado</small>
+                                Universidade <small>com Maior Número de Matrículas</small>
                             </th>
                             <th>
-                                Principal Destino
-                                <small>por Valor Exportado</small>
+                                Curso Superior com <small>Maior Número de Matrículas</small>
                             </th>
                             <th>
-                                Total de Exportações
+                                Escola <small>com Maior Número de Matrículas em Cursos Técnicos</small>
+                            </th>
+                            <th>
+                                Curso Técnico <small>com Maior Número de Matrículas</small>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
-                                <p class="label">Minério de Ferro</p>
+                                <p class="label">{{ body.highest_enrolled_by_university_name }}</p>
                                 <div class="number">
-                                    USD <strong class="counter">12.2</strong><span>B</span>
+                                    <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_university | magnitude }}</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">China</p>
+                                <p class="label">{{ body.highest_enrolled_by_major_name }}</p>
                                 <div class="number">
-                                    USD <strong class="counter">8.82</strong><span>B</span>
+                                    <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_major | magnitude }}</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">Total de Exportações</p>
+                                <p class="label">{{ body.highest_enrolled_by_school_name }}</p>
                                 <div class="number">
-                                    USD <strong class="counter">29.3</strong><span>B</span>
+                                    USD <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_school | magnitude }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{ body.highest_enrolled_by_basic_course_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
                                 </div>
                             </td>
                         </tr>

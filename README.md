@@ -1,9 +1,11 @@
-#DataViva 
+#DataViva [![Build Status](https://snap-ci.com/DataViva/dataviva-site/branch/release/3.0/build_image)](https://snap-ci.com/DataViva/dataviva-site/branch/release/3.0)
 
 A Collaborative Planning Tool.
 [dataviva.info](http://www.dataviva.info)
 
-[![Stories in Ready](https://badge.waffle.io/DataViva/dataviva-site.png?label=ready&title=Ready)](https://github.com/DataViva/dataviva-site/issues?q=label%3Aready) [![Stories in Code Review](https://badge.waffle.io/DataViva/dataviva-site.png?label=to+review&title=Code+review)](https://github.com/DataViva/dataviva-site/issues?utf8=%E2%9C%93&q=label%3A%22to+review%22+)
+[![Stories in Progress](https://badge.waffle.io/DataViva/dataviva-site.png?label=in+progress&title=In+Progress)](https://waffle.io/Dataviva/dataviva-site) [![Stories in Code Review](https://badge.waffle.io/DataViva/dataviva-site.png?label=to+review&title=Code+Review)](https://waffle.io/Dataviva/dataviva-site)	[![Stories Ready](https://badge.waffle.io/DataViva/dataviva-site.png?label=ready&title=Ready)](https://waffle.io/Dataviva/dataviva-site) 
+
+
 
 #Support
 

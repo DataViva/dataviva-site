@@ -5,9 +5,10 @@
     <h2>Estudos DataViva</h2>
     <div class="meta">
         <p>
+            Título: {{ article.title }}<br />
             Autor(es): {{ article.author }}<br />
             Palavras-Chave: {{ article.key_words }}<br />
-            Data de Publicação: {{ article.publication_date }}
+            Data de Publicação: {{ article.postage_date }}
         </p>
     </div>
     <p>
@@ -16,6 +17,7 @@
 
     <p><a class="btn btn-default btn-lg btn-dataviva blue">Baixar arquivo (PDF)</a></p>
 </div>
+
+<a class="btn btn-default btn-dataviva pull-right" href="/scholar/article/{{ id }}/delete">Deletar</a>
+<a class="btn btn-default btn-dataviva pull-right" href="/scholar/article/{{ id }}/edit">Editar</a>
 {% endblock scholar_content %}
-
-

@@ -336,16 +336,198 @@ class ProductLocations(Product):
         secex = self.__secex__()
         return secex.opp_gain_wld
 
+class Location:
+    def __init__(self, bra_id):
+        self._secex = None
+        self._secex_sorted_by_exports = None
+        self._secex_sorted_by_imports = None
+        self._secex_sorted_by_distance = None
+        self._secex_sorted_by_opp_gain = None
+        self.bra_id = bra_id
+        self.max_year_query = db.session.query(
+            func.max(Ymbp.year)).filter_by(bra_id=self.bra_id)
+        self.secex_query = Ymbp.query.join(Hs).filter(
+            Ymbp.bra_id == self.bra_id,
+            Ymbp.month == 0,
+            Ymbp.hs_id_len == 6,
+            Ymbp.year == self.max_year_query)
+
+    def __secex__(self):
+        if not self._secex:
+            secex_data = self.secex_query.first_or_404()
+            self._secex = secex_data
+        return self._secex
+
+    def __secex_list__(self):
+        if not self._secex:
+            secex_data = self.secex_query.all()
+            self._secex = secex_data
+        return self._secex
+
+    def __secex_sorted_by_exports__(self):
+        if not self._secex_sorted_by_exports:
+            self._secex_sorted_by_exports = self.__secex_list__()
+            self._secex_sorted_by_exports.sort(key=lambda secex: secex.export_val, reverse=True)
+        return self._secex_sorted_by_exports
+
+    def __secex_sorted_by_imports__(self):
+        if not self._secex_sorted_by_imports:
+            self._secex_sorted_by_imports = self.__secex_list__()
+            self._secex_sorted_by_imports.sort(key=lambda secex: secex.import_val, reverse=True)
+        return self._secex_sorted_by_imports
+
+    def __secex_sorted_by_distance__(self):
+        if not self._secex_sorted_by_distance:
+            not_nulls_list = []
+            for i in self.__secex_list__():
+                if i.distance != None:
+                    not_nulls_list.append(i)
+            not_nulls_list.sort(key=lambda secex: secex.distance_wld, reverse=False)
+            self._secex_sorted_by_distance = not_nulls_list
+        return self._secex_sorted_by_distance
+
+    def __secex_sorted_by_opp_gain__(self):
+        if not self._secex_sorted_by_opp_gain:
+            not_nulls_list = []
+            for i in self.__secex_list__():
+                if i.opp_gain != None:
+                    not_nulls_list.append(i)
+            not_nulls_list.sort(key=lambda secex: secex.opp_gain_wld, reverse=True)
+            self._secex_sorted_by_opp_gain = not_nulls_list
+        return self._secex_sorted_by_opp_gain
+
+    def main_product_by_export_value(self):
+        try:
+            secex = self.__secex_sorted_by_exports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.export_val
+
+    def main_product_by_export_value_name(self):
+        try:
+            secex = self.__secex_sorted_by_exports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.hs.name_pt
+
+    def main_product_by_import_value(self):
+        try:
+            secex = self.__secex_sorted_by_imports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.import_val
+
+    def main_product_by_import_value_name(self):
+        try:
+            secex = self.__secex_sorted_by_imports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.hs.name_pt
+
+    def total_exports(self):
+        try:
+            export_sum = 0
+            secex = self.__secex_sorted_by_exports__()
+            for i in secex:
+                if not i.export_val == None:
+                    export_sum += i.export_val
+        except IndexError:
+            return None
+        else:
+            return export_sum
+
+    def total_imports(self):
+        try:
+            import_sum = 0
+            secex = self.__secex_sorted_by_imports__()
+            for i in secex:
+                if not i.import_val == None:
+                    import_sum += i.import_val
+        except IndexError:
+            return None
+        else:
+            return import_sum
+
+    def less_distance_by_product(self):
+        try:
+            secex = self.__secex_sorted_by_distance__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.distance_wld
+
+    def less_distance_by_product_name(self):
+        try:
+            secex = self.__secex_sorted_by_distance__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.hs.name()
+
+    def opportunity_gain_by_product(self):
+        try:
+            secex = self.__secex_sorted_by_opp_gain__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.opp_gain_wld
+
+    def opportunity_gain_by_product_name(self):
+        try:
+            secex = self.__secex_sorted_by_opp_gain__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.hs.name()
+
+class LocationWld(Location):
+    def __init__(self, bra_id):
+        Location.__init__(self, bra_id)
+        self.bra_id = bra_id
+        self.max_year_query = db.session.query(
+            func.max(Ymbw.year)).filter_by(bra_id=self.bra_id)
+        self.secex_query = Ymbw.query.join(Wld).filter(
+            Ymbw.bra_id == self.bra_id,
+            Ymbw.month == 0,
+            Ymbw.wld_id_len == 5,
+            Ymbw.year == self.max_year_query)
 
 
+    def main_destination_by_export_value(self):
+        try:
+            secex = self.__secex_sorted_by_exports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.export_val
 
+    def main_destination_by_export_value_name(self):
+        try:
+            secex = self.__secex_sorted_by_exports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.wld.name_pt
 
+    def main_destination_by_import_value(self):
+        try:
+            secex = self.__secex_sorted_by_imports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.import_val
 
-
-
-
-
-
+    def main_destination_by_import_value_name(self):
+        try:
+            secex = self.__secex_sorted_by_imports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.wld.name_pt
 
 
 

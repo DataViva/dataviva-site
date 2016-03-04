@@ -1,17 +1,27 @@
-from dataviva.api.attrs.models import Ybs
+from dataviva.api.attrs.models import Ybs, Bra
 from dataviva import db
 from sqlalchemy import func
 
 
 class Location:
+
     def __init__(self, bra_id):
         self._attrs_list = None
         self.bra_id = bra_id
-        self.max_year_query = db.session.query(
-            func.max(Ybs.year)).filter_by(bra_id=bra_id)
-        self.attrs_query = Ybs.query.filter(
-            Ybs.bra_id == self.bra_id,
-            Ybs.year == self.max_year_query)
+        if len(bra_id) != 9 and len(bra_id) != 3:
+            like_cond = bra_id[:len(bra_id)]+'%'
+            self.max_year_query = db.session.query(
+                func.max(Ybs.year)).filter(Ybs.bra_id.like(like_cond))
+            self.attrs_query = db.session.query(func.sum(Ybs.stat_val).label("stat_val"), Ybs.stat_id).filter(
+                Ybs.bra_id.like(like_cond),
+                func.length(Ybs.bra_id) == 9,
+                Ybs.year == self.max_year_query).group_by(Ybs.stat_id)
+        else:
+            self.max_year_query = db.session.query(
+                func.max(Ybs.year)).filter_by(bra_id=bra_id)
+            self.attrs_query = Ybs.query.filter(
+                Ybs.bra_id == self.bra_id,
+                Ybs.year == self.max_year_query)
 
     def __attrs_list__(self):
         if not self._attrs_list:
@@ -22,6 +32,12 @@ class Location:
     def gdp(self):
         attrs = self.__attrs_list__()
         attr = next((attr for attr in attrs if attr.stat_id == 'gdp'),
+                    None)
+        return attr.stat_val
+
+    def hdi(self):
+        attrs = self.__attrs_list__()
+        attr = next((attr for attr in attrs if attr.stat_id == 'hdi'),
                     None)
         return attr.stat_val
 
@@ -43,8 +59,6 @@ class Location:
                     None)
         return attr.stat_val
 
-    def hdi(self):
-        attrs = self.__attrs_list__()
-        attr = next((attr for attr in attrs if attr.stat_id == 'hdi'),
-                    None)
-        return attr.stat_val
+    def name(self):
+        bra_query = Bra.query.filter(Bra.id == self.bra_id).first()
+        return bra_query.name()

@@ -13,14 +13,16 @@
         <div class="row">
             <div class="col-xs-15 col-md-offset-4 col-md-11">
                 <h1>
-                    Minas Gerais <a href="#" title="Trocar" onclick="start_selector('Location');"> (trocar)</a>
+                    {{ header.name }} <a href="#" title="Trocar" onclick="start_selector('Location');"> (trocar)</a>
                 </h1>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="sidebar has-img col-xs-15 col-md-4">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7748245.803118934!2d-49.94643868147362!3d-18.514293729997753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690a165324289%3A0x112170c9379de7b3!2sMinas+Gerais!5e0!3m2!1spt-BR!2sbr!4v1450524997110" width="200" height="150" frameborder="0" class="tit" style="border:0" allowfullscreen=""></iframe>
+            <div class="tit">
+                <span class="dv-bra-{{header.bra_id}}"></span>
+            </div>
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active">
                     <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
@@ -37,12 +39,6 @@
                 <li role="presentation">
                     <a href="#educacao" aria-controls="educacao" role="tab" data-toggle="tab">Educação</a>
                 </li>
-                <li role="presentation">
-                    <a href="#saude" aria-controls="saude" role="tab" data-toggle="tab">Saúde</a>
-                </li>
-                <li role="presentation">
-                    <a href="#empresas" aria-controls="empresas" role="tab" data-toggle="tab">Empresas</a>
-                </li>
             </ul>
         </div>
         <div class="main-content col-xs-15 col-md-11">
@@ -52,8 +48,6 @@
                 {% include "location/tab-salario-emprego.html" %}
                 {% include "location/tab-oportunidade-economica.html" %}
                 {% include "location/tab-educacao.html" %}
-                {% include "location/tab-saude.html" %}
-                {% include "location/tab-empresas.html" %}
             </div>
         </div>
     </div>
