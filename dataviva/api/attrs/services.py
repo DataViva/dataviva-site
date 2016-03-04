@@ -4,6 +4,7 @@ from sqlalchemy import func
 
 
 class Location:
+
     def __init__(self, bra_id):
         self._attrs_list = None
         self.bra_id = bra_id
