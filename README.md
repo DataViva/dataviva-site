@@ -3,7 +3,7 @@
 A Collaborative Planning Tool.
 [dataviva.info](http://www.dataviva.info)
 
-[![Stories in Progress](https://badge.waffle.io/DataViva/dataviva-site.png?label=in+progress&title=In+Progress)](https://waffle.io/Dataviva/dataviva-site)  	[![Stories Ready](https://badge.waffle.io/DataViva/dataviva-site.png?label=ready&title=Ready)](https://waffle.io/Dataviva/dataviva-site) 
+[![Stories in Progress](https://badge.waffle.io/DataViva/dataviva-site.png?label=in+progress&title=In+Progress)](https://waffle.io/Dataviva/dataviva-site) [![Stories in Code Review](https://badge.waffle.io/DataViva/dataviva-site.png?label=to+review&title=Code+Review)](https://waffle.io/Dataviva/dataviva-site)	[![Stories Ready](https://badge.waffle.io/DataViva/dataviva-site.png?label=ready&title=Ready)](https://waffle.io/Dataviva/dataviva-site) 
 
 
 
