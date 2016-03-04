@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g
+from flask import Blueprint, render_template, g, request, make_response, url_for
 from dataviva.apps.general.views import get_locale
-from mock import posts
-
-import random
+from forms import RegistrationForm
+from mock import Post, posts, ids
+import random, time
 
 mod = Blueprint('blog', __name__,
                 template_folder='templates',
@@ -41,7 +41,8 @@ def show(id):
 
 @mod.route('/post/new', methods=['GET'])
 def new():
-    return render_template('blog/new.html')
+    form = RegistrationForm()
+    return render_template('blog/new.html', form=form, action=url_for('blog.create'))
 
 
 @mod.route('/post/<id>/edit', methods=['GET'])
@@ -49,9 +50,26 @@ def edit():
     return render_template('blog/edit.html')
 
 
-@mod.route('/post', methods=['POST'])
+@mod.route('/post/new', methods=['POST'])
 def create():
-    pass
+    form = RegistrationForm()
+    if form.validate() is False:
+        return render_template('blog/new.html', form=form)
+    else:
+        title = form.title.data
+        author = form.author.data
+        category = form.category.data
+        text = form.text.data
+        image = 'image'
+        thumb = 'thumb'
+        postage_date = time.strftime("%d/%m/%Y")
+        id = ids[-1] + 1
+
+        ids.append(id)
+        posts.update({id: Post(title, author, image, thumb, category, text, postage_date)})
+
+        message = u'Muito obrigado! Seu artigo foi submetido com sucesso!'
+        return render_template('blog/index.html', posts=posts, message=message)
 
 
 @mod.route('/post/<id>', methods=['POST'])
