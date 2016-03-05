@@ -16,7 +16,6 @@
     <![endif]-->
 </head>
 <body data-ng-app="dataviva">
-
     {% include "include/header.html" %}
 
     {% block content %}
@@ -63,6 +62,8 @@
             });
             $('.counter').counterUp();
         });
+
+
 
         $(document).ready(function() {
             {% if message %}

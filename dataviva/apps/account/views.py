@@ -5,35 +5,41 @@ from dataviva.apps.account.models import User, Starred, ROLE_USER, ROLE_ADMIN
 from dataviva.apps.ask.forms import AskForm
 from dataviva.apps.ask.models import Question, Status, Reply
 from dataviva.utils.exist_or_404 import exist_or_404
+from dataviva.utils.encode import sha512
+from dataviva.utils.send_mail import send_mail
 from datetime import datetime
 from flask import Blueprint, request, render_template, flash, g, session, \
     redirect, url_for, jsonify, abort, current_app
 from flask.ext.babel import gettext
 from flask.ext.login import login_user, logout_user, current_user, \
     login_required
-from forms import LoginForm, UserEditForm
+from forms import LoginForm, UserEditForm, SignupForm
 from sqlalchemy import or_
 from urllib2 import Request, urlopen, URLError
 import json
-# models
-# forms
-# utils
-# login types
 
-# from config import SITE_MIRROR
-# import urllib2, urllib
 
-mod = Blueprint('account', __name__, url_prefix='/<lang_code>/account')
+mod = Blueprint('account', __name__,
+                template_folder='templates',
+                url_prefix='/<lang_code>/account',
+                static_folder='static')
 
 RESULTS_PER_PAGE = 10
+
+
+def _gen_confirmation_code(email):
+    return sha512("%s-%s" % (email, datetime.now()))
+
 
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
+
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
+
 
 @mod.route('/status/')
 def check_status():
@@ -54,6 +60,87 @@ def check_status():
         session['first_visit'] = True
 
     return jsonify(data)
+
+
+def send_confirmation(user):
+    confirmation_tpl = render_template('account/mail/confirmation.html',
+                                       user=user.serialize(),
+                                       confirmation_code=user.confirmation_code)
+    send_mail("Account confirmation", [user.email], confirmation_tpl)
+
+
+@mod.route('/signup/', methods=["GET"])
+def signup():
+    form = SignupForm()
+    return render_template('account/signup.html', form=form)
+
+
+@mod.route('/signup', methods=["POST"])
+def create_user():
+    form = SignupForm()
+
+    # if form.validate() is False:
+    #     return render_template('account/signup.html', form=form)
+
+    try:
+        confirmation_code = _gen_confirmation_code(form.email.data)
+        user = User(
+            fullname=form.fullname.data,
+            email=form.email.data,
+            password=sha512(form.password.data),
+            confirmation_code=confirmation_code
+        )
+        db.session.add(user)
+        db.session.commit()
+    except Exception as ee:
+        return render_template('account/signup.html',
+                               form=form,
+                               message="Sorry, an unexpected error has occured. Please try again.")
+
+    user_srl = user.serialize()
+    welcome_tpl = render_template('account/mail/welcome.html', user=user_srl)
+    send_mail("Welcome to datavivaiva!", [user.email], welcome_tpl)
+    send_confirmation(user)
+
+    return redirect('/confirm_pending')
+
+
+@mod.route('/confirm_pending/<user_email>', methods=["GET"])
+def confirm_pending(user_email):
+    ''' Used to inform to the user that its account is pending
+    '''
+
+    try:
+        user = User.query.filter_by(email=user_email)[-1]
+    except IndexError:
+        abort(404, 'Entry not found')
+
+    if user.confirmed:
+        return redirect('/')
+
+    return render_template('account/confirm_pending.html', user=user.serialize())
+
+
+@mod.route('/resend_confirmation/<user_email>', methods=["GET"])
+def resend_confirmation(user_email):
+    '''Used to regen the confirmation_code and send the email again to the user
+    '''
+
+    try:
+        user = User.query.filter_by(email=user_email, confirmed=False)[-1]
+    except IndexError:
+        abort(404, 'Entry not found')
+
+    user.confirmation_code = _gen_confirmation_code(user.email)
+    send_confirmation(user)
+
+    return redirect('/confirm_pending')
+
+
+@mod.route('/signin/')
+def signin():
+    return render_template('account/signin.html')
+
 
 ###############################
 # User management
