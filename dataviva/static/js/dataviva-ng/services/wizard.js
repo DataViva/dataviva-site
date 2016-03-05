@@ -16,7 +16,7 @@
 
     app.service('Wizard', ["Option", "Selectors", "$templateRequest", "$compile", "$timeout",
         function (Option, Selectors, $templateRequest, $compile, $timeout) {
-            
+
             return function Wizard(session_name) {
                 var self = this;
 
@@ -34,7 +34,8 @@
                 };
 
                 self.start = function(session){
-                    //self.step_type = "path_option";
+                    self.session_title = session.session_title;
+                    self.title = session.title;
                     self.questions = session.questions.map(function(val){
                         return new Option(val);
                     });
