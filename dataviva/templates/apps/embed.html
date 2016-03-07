@@ -71,7 +71,7 @@
 
       <!-- Hidden <FORM> to submit the SVG data to the server, which will convert it
            to SVG/PDF/PNG downloadable file. -->
-      <form id="svgform" action="/{{g.locale}}/apps/download/" method="post">
+      <form id="svgform" action="/{{g.locale}}/embed/download/" method="post">
           {{ form.hidden_tag() }}
       </form>
 
@@ -571,7 +571,7 @@
           rec_url = rec_url.join("/")
         }
         loading.text(dataviva.dictionary.wait).show();
-        return "/{{g.locale}}/apps/recommend/"+rec_url+location.search;
+        return "/{{g.locale}}/embed/recommend/"+rec_url+location.search;
       }
     }
 
@@ -1085,7 +1085,7 @@
                     app.networks[app.build.output_attr] = d
                     callback(error,d)
                   })
-              },"/{{g.locale}}/apps/networks/"+app.build.output_attr+"/")
+              },"/{{g.locale}}/embed/networks/"+app.build.output_attr+"/")
             }
 
                 d3.selectAll("#settings #file").style("display","inline-block");
@@ -1106,7 +1106,7 @@
                       app.coords[json_id] = d
                       callback(error,d)
                     })
-                },"/{{g.locale}}/apps/coords/"+json_id+"/")
+                },"/{{g.locale}}/embed/coords/"+json_id+"/")
               }
 
             }
@@ -2625,7 +2625,7 @@
         csrf_token = document.getElementById("csrf_token").value;
         form['data'].value = form['data'].value.replace(/&/g, "%26")
         progress = 0
-        d3.xhr("/{{g.locale}}/apps/download/")
+        d3.xhr("/{{g.locale}}/embed/download/")
         .header("Content-Type", "application/x-www-form-urlencoded")
             .post("output_format="+type+"&title="+ title+"&downloadToken="+ new Date().getTime() +"&data="+ form['data'].value +"&csrf_token="+ csrf_token, function(e, data){
           urlFile = data.response
@@ -2849,7 +2849,7 @@
           d3.select(pid).append("iframe")
             .attr("width","100%")
             .attr("height","100%")
-            .attr("src","/{{g.locale}}/apps/info/"+app.build.app.type+"/")
+            .attr("src","/{{g.locale}}/embed/info/"+app.build.app.type+"/")
 
         }
 
@@ -2877,7 +2877,7 @@
             var url = encodeURIComponent(window.location.pathname + window.location.search)
           }
 
-          d3.json("/{{g.locale}}/apps/shorten/")
+          d3.json("/{{g.locale}}/embed/shorten/")
             .header("Content-type","application/x-www-form-urlencoded")
             .post("url="+url, function(error,data) {
               if (data.error) {
