@@ -7,6 +7,7 @@ class Location:
 
     def __init__(self, bra_id):
         self._attrs_list = None
+        self._ybs_sorted_by_gdp = None
         self.bra_id = bra_id
         if len(bra_id) != 9 and len(bra_id) != 3:
             like_cond = bra_id[:len(bra_id)]+'%'
@@ -22,6 +23,12 @@ class Location:
             self.attrs_query = Ybs.query.filter(
                 Ybs.bra_id == self.bra_id,
                 Ybs.year == self.max_year_query)
+
+    def __ybs_sorted_by_gdp__(self):
+        if not self._ybs_sorted_by_gdp:
+            self._ybs_sorted_by_gdp = self.__attrs_list__()
+            self._ybs_sorted_by_gdp.sort(key=lambda ybs: ybs.stat_val, reverse=True)
+        return self._ybs_sorted_by_gdp
 
     def __attrs_list__(self):
         if not self._attrs_list:
@@ -85,7 +92,27 @@ class Location:
 
     def number_of_municipalities(self):
         bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
-                Bra.id.like(self.bra_id[:7]+'%'),
-                func.length(Bra.id) == 9)
+            Bra.id.like(self.bra_id[:7]+'%'),
+            func.length(Bra.id) == 9)
         bra = bra_query.one()
         return bra.total
+
+
+class LocationGdpRankings(Location):
+
+    def __init__(self, bra_id):
+        Location.__init__(self, bra_id)
+        self.attrs_query = Ybs.query.join(Bra).filter(
+            Ybs.stat_id == 'gdp',
+            Ybs.bra_id.like(self.bra_id[:3]+'%'),
+            Ybs.year == self.max_year_query,
+            func.length(Ybs.bra_id) == 9)
+
+    def gdp_rank(self):
+        gdp_list = self.__ybs_sorted_by_gdp__()
+        rank = 1
+        for gdp in gdp_list:
+            if gdp.bra_id == self.bra_id:
+                return rank
+                break
+            rank += 1
