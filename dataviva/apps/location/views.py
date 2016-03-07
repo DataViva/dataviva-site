@@ -131,7 +131,9 @@ def index(bra_id):
         }
     else:
         profile = {
-            'number_of_states' : location_service.number_of_locations(len(bra_id)),
+            'number_of_states': location_service.number_of_locations(len(bra_id)),
+            'region_name': location_service.location_name(1),
+            'number_of_municipalities': location_service.number_of_locations(9)
         }
 
     return render_template('location/index.html',

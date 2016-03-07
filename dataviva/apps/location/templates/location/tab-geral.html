@@ -62,7 +62,7 @@
         {% elif profile.bra_id|length == 1 %}
         <p>A região {{ header.name }} é uma das {{ profile.number_of_regions-1 }} divisões regionais brasileiras, composta pelos estados [estados componentes da região]. No total, a região {{ header.name }} possui {{ header.population|max_digits(3) }} {{ header.population|magnitude }} habitantes. É a [classificação PIB per Capita] região em PIB per Capita do país e a [classificação população] em população.</p>
         {% else %}
-        <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes. Limita-se ao sul e sudoeste com São Paulo, a oeste com o Mato Grosso do Sul, a noroeste com Goiás e Distrito Federal, a norte e nordeste com a Bahia, a leste com o Espírito Santo e a sudeste com o Rio de Janeiro. Seu território é subdividido em 853 municípios, a maior quantidade dentre os estados brasileiros.</p>
+        <p>{{ header.name }} é uma das {{ profile.number_of_states-1 }} unidades federativas do Brasil, localizada na {{ profile.region_name }} do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes. Limita-se ao sul e sudoeste com São Paulo, a oeste com o Mato Grosso do Sul, a noroeste com Goiás e Distrito Federal, a norte e nordeste com a Bahia, a leste com o Espírito Santo e a sudeste com o Rio de Janeiro. Seu território é subdividido em {{ profile.number_of_municipalities }} municípios, a maior quantidade dentre os estados brasileiros.</p>
         {% endif %}
         
 

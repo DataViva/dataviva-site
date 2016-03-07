@@ -64,7 +64,7 @@ class Location:
         return bra_query.name()
 
     def number_of_locations(self, bra_length):
-        if bra_length == 1:
+        if bra_length == 1 or bra_length == 3:
             bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
                 func.length(Bra.id) == bra_length)
         elif bra_length == 7:
