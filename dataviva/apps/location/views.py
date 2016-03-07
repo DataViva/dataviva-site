@@ -103,5 +103,13 @@ def index(bra_id):
         'highest_enrolled_by_basic_course_name': location_basic_course_service.highest_enrolled_by_basic_course_name()
     }
 
+    if len(bra_id) == 9:
+        profile = {
+            'number_of_municipalities': location_service.number_of_municipalities(),
+            'bra_id': bra_id,
+            'state_name': location_service.location_name(3),
+            'mesoregion_name': location_service.location_name(5)
+        }
+
     return render_template('location/index.html',
-                           header=header, body=body)
+                           header=header, body=body, profile=profile)

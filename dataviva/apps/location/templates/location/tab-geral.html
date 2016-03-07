@@ -53,7 +53,12 @@
 
 
         <h2>Perfil Geral</h2>
+        {% if profile.bra_id|length == 9 %}
+        <p>{{ header.name }} é um dos {{ profile.number_of_municipalities }} municípios do estado de/do/da {{ profile.state_name }}. Com área de km², possui {{ header.population|max_digits(3) }} {{ header.population|magnitude }} de habitantes e PIB per Capita de R$ {{ header.gdp_per_capita|max_digits(3) }} {{ header.gdp_per_capita|magnitude }}. Localizado na Mesorregião {{ profile.mesoregion_name }}, é o º município do estado em PIB.</p>
+        {% else %}
         <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes. Limita-se ao sul e sudoeste com São Paulo, a oeste com o Mato Grosso do Sul, a noroeste com Goiás e Distrito Federal, a norte e nordeste com a Bahia, a leste com o Espírito Santo e a sudeste com o Rio de Janeiro. Seu território é subdividido em 853 municípios, a maior quantidade dentre os estados brasileiros.</p>
+        {% endif %}
+        
 
 
         <div class="row">

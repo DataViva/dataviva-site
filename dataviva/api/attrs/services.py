@@ -62,3 +62,14 @@ class Location:
     def name(self):
         bra_query = Bra.query.filter(Bra.id == self.bra_id).first()
         return bra_query.name()
+
+    def number_of_municipalities(self):
+        bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
+                Bra.id.like(self.bra_id[:3]+'%'),
+                func.length(Bra.id) == 9)
+        bra = bra_query.first()
+        return bra.total
+
+    def location_name(self, bra_length):
+        bra_query = Bra.query.filter(Bra.id == self.bra_id[:bra_length]).first()
+        return bra_query.name()
