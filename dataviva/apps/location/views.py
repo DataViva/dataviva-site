@@ -105,10 +105,17 @@ def index(bra_id):
 
     if len(bra_id) == 9:
         profile = {
-            'number_of_municipalities': location_service.number_of_municipalities(),
+            'number_of_municipalities': location_service.number_of_locations(len(bra_id)),
             'bra_id': bra_id,
             'state_name': location_service.location_name(3),
             'mesoregion_name': location_service.location_name(5)
+        }
+    elif len(bra_id) == 5:
+        profile = {
+            'number_of_mesoregions': location_service.number_of_locations(len(bra_id)),
+            'bra_id': bra_id,
+            'state_name': location_service.location_name(3),
+            #'mesoregion_name': location_service.location_name(5)
         }
 
     return render_template('location/index.html',
