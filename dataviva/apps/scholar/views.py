@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request, make_response, url_for
+from flask import Blueprint, render_template, g, make_response, url_for, flash
 from dataviva.apps.general.views import get_locale
 
-from flask.ext.wtf import Form
 from forms import RegistrationForm
 from mock import Article, articles, ids
 import time
@@ -25,8 +24,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    message = request.args.get('message')
-    return render_template('scholar/index.html', articles=articles, message=message)
+    return render_template('scholar/index.html', articles=articles)
 
 
 @mod.route('/article/<id>', methods=['GET'])
@@ -74,7 +72,8 @@ def create():
 
         message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
                   Em até 15 dias você receberá um retorno sobre sua publicação no site!'
-        return render_template('scholar/index.html', articles=articles, message=message)
+        flash(message, 'success')
+        return render_template('scholar/index.html', articles=articles)
 
 
 @mod.route('/article/<id>/edit', methods=['POST'])
@@ -93,13 +92,15 @@ def update(id):
 
         articles[id] = Article(title, theme, author, key_words, abstract, postage_date)
         message = u'Estudo editado com sucesso!'
-        return render_template('scholar/index.html', articles=articles, message=message)
+        flash(message, 'success')
+        return render_template('scholar/index.html', articles=articles)
 
 
 @mod.route('/article/<id>/delete', methods=['GET'])
 def delete(id):
     if articles.pop(int(id.encode())):
         message = u"Estudo excluído com sucesso!"
-        return render_template('scholar/index.html', articles=articles, message=message)
+        flash(message, 'success')
+        return render_template('scholar/index.html', articles=articles)
     else:
         return make_response(render_template('not_found.html'), 404)
