@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, url_for
+from flask import Blueprint, render_template, g, make_response, url_for, flash
 from dataviva.apps.general.views import get_locale
 from forms import RegistrationForm
 from mock import Post, posts, ids
@@ -79,7 +79,8 @@ def create():
         posts.update({id: Post(title, author, image, thumb, category, text, postage_date)})
 
         message = u'Muito obrigado! Seu artigo foi submetido com sucesso!'
-        return render_template('blog/index.html', posts=posts, message=message)
+        flash(message, 'success')
+        return render_template('blog/index.html', posts=posts)
 
 
 @mod.route('/post/<id>/edit', methods=['POST'])
@@ -99,13 +100,15 @@ def update(id):
 
         posts[id] = Post(title, author, category, text, image, thumb, postage_date)
         message = u'Artigo editado com sucesso!'
-        return render_template('blog/index.html', posts=posts, message=message)
+        flash(message, 'success')
+        return render_template('blog/index.html', posts=posts)
 
 
 @mod.route('/post/<id>/delete', methods=['GET'])
 def delete(id):
     if posts.pop(int(id.encode())):
         message = u"Artigo excluído com sucesso!"
-        return render_template('blog/index.html', posts=posts, message=message)
+        flash(message, 'success')
+        return render_template('blog/index.html', posts=posts)
     else:
         return make_response(render_template('not_found.html'), 404)
