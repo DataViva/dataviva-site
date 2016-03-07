@@ -5,9 +5,9 @@
     <h2>Notícias</h2>
     <div class="articles">
         <div class="item post single">
-            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+            <h4>{{ post.title }}</h4>
             <div class="meta">
-                <p class="data">Por Kleiton Reis 26 de Outubro de 2015</p>
+                <p class="data">Por {{post.author}} {{post.date}}</p>
             </div>
             <ul class="social">
                 <li>
@@ -23,50 +23,25 @@
                 </li>
             </ul>
             <div class="tit-img">
-                <img src="http://placehold.it/1000x300" class="img-responsive" />
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+                <img src="{{ post.image }}" class="img-responsive" />
+                <span>{{ post.title }}</span>
             </div>
-            <p>Professores, gestores escolares e equipes de secretarias de educação podem participar do programa de formação da Fundação Lemann e Elos Educacional para promover o aprendizado efetivo dos alunos. Os cursos “Gestão para Aprendizagem” e “Gestão de Sala de Aula” estão com inscrições abertas até o dia 19 de novembro. As atividades devem iniciar em março de 2016.</p>
-            <p>O curso “Gestão de Sala de Aula” é aberto para professores e gestores escolares e o curso “Gestão para Aprendizagem” é voltado apenas para os gestores das escolas.</p>
-            <blockquote>Este ano, as secretarias de educação também poderão se inscrever nos cursos para implementar ações de impacto que envolvam todos os gestores de instituições de educação básica para melhorar o ambiente escolar, a gestão da sala de aula e o aprendizado dos alunos.</blockquote>
-            <p>Neste artigo, você verá sobre:</p>
-            <ul>
-                <li>Curso “Gestão de Sala de Aula” para professores;</li>
-                <li>Curso “Gestão de Sala de Aula” para gestores;</li>
-                <li>Curso “Gestão para Aprendizagem” para gestores;</li>
-                <li>Como inscrever toda a secretaria de educação.</li>
-            </ul>
-            <p><big>Professores</big></p>
-            <p>Para os docentes será oferecido o curso “Gestão de Sala de Aula”. O curso tem o objetivo de incentivar uma cultura escolar de planejamento e observação da sala de aula, altas expectativas de aprendizagem e um melhor uso do tempo. Conheça mais sobre o curso no vídeo abaixo.</p>
+            <p>{{ post.text}}</p>
         </div>
         <div class="clearfix"></div>
         <div class="related">
             <h4>Veja Também</h4>
             <div class="row">
+                {% for id, post in read_more_posts.iteritems() %}
                 <div class="col-xs-15 col-sm-6 col-md-5">
-                    <a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
-                        <img src="http://placehold.it/350x227?text=thumb" class="img-responsive">
+                    <a href="{{url_for('blog.show', id=id)}}" title="{{ post.title }}">
+                        <img src="{{post.thumb}}" class="img-responsive">
                     </a>
                     <p>
-                        <a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a>
+                        <a href="#" title="{{ post.title }}">{{ post.title }}</a>
                     </p>
                 </div>
-                <div class="col-xs-15 col-sm-6 col-md-5">
-                    <a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
-                        <img src="http://placehold.it/350x227?text=thumb" class="img-responsive">
-                    </a>
-                    <p>
-                        <a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a>
-                    </p>
-                </div>
-                <div class="col-xs-15 col-sm-6 col-md-5">
-                    <a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
-                        <img src="http://placehold.it/350x227?text=thumb" class="img-responsive">
-                    </a>
-                    <p>
-                        <a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a>
-                    </p>
-                </div>
+            {% endfor %}
             </div>
         </div>
         <div class="comments">
