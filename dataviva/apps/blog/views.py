@@ -46,8 +46,17 @@ def new():
 
 
 @mod.route('/post/<id>/edit', methods=['GET'])
-def edit():
-    return render_template('blog/edit.html')
+def edit(id):
+    form = RegistrationForm()
+    id = int(id.encode())
+    post = posts[id]
+    form.title.data = post.title
+    form.author.data = post.author
+    form.category.data = post.category
+    form.text.data = post.text
+    form.image.data = post.image
+    form.thumb.data = post.thumb
+    return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
 
 
 @mod.route('/post/new', methods=['POST'])
@@ -72,9 +81,24 @@ def create():
         return render_template('blog/index.html', posts=posts, message=message)
 
 
-@mod.route('/post/<id>', methods=['POST'])
-def update():
-    pass
+@mod.route('/post/<id>/edit', methods=['POST'])
+def update(id):
+    form = RegistrationForm()
+    id = int(id.encode())
+    if form.validate() is False:
+        return render_template('blog/edit.html', form=form)
+    else:
+        title = form.title.data
+        author = form.author.data
+        category = form.category.data
+        text = form.text.data
+        image = 'image'
+        thumb = 'thumb'
+        postage_date = time.strftime("%d/%m/%Y")
+
+        posts[id] = Post(title, author, category, text, image, thumb, postage_date)
+        message = u'Artigo editado com sucesso!'
+        return render_template('blog/index.html', posts=posts, message=message)
 
 
 @mod.route('/post/<id>', methods=['GET'])
