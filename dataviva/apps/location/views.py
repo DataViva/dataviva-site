@@ -110,17 +110,28 @@ def index(bra_id):
             'state_name': location_service.location_name(3),
             'mesoregion_name': location_service.location_name(5)
         }
+    elif len(bra_id) == 7:
+        profile = {
+            'number_of_microregions': location_service.number_of_locations(len(bra_id)),
+            'bra_id': bra_id,
+            'state_name': location_service.location_name(3),
+            'mesoregion_name': location_service.location_name(5),
+            'number_of_municipalities': location_service.number_of_municipalities()
+        }
     elif len(bra_id) == 5:
         profile = {
             'number_of_mesoregions': location_service.number_of_locations(len(bra_id)),
             'bra_id': bra_id,
             'state_name': location_service.location_name(3),
-            #'mesoregion_name': location_service.location_name(5)
         }
     elif len(bra_id) == 1:
         profile = {
             'number_of_regions': location_service.number_of_locations(len(bra_id)),
             'bra_id': bra_id
+        }
+    else:
+        profile = {
+            'number_of_states' : location_service.number_of_locations(len(bra_id)),
         }
 
     return render_template('location/index.html',

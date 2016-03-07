@@ -67,13 +67,25 @@ class Location:
         if bra_length == 1:
             bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
                 func.length(Bra.id) == bra_length)
+        elif bra_length == 7:
+            bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
+                Bra.id.like(self.bra_id[:5]+'%'),
+                func.length(Bra.id) == bra_length)
         else:
             bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
-                    Bra.id.like(self.bra_id[:3]+'%'),
-                    func.length(Bra.id) == bra_length)
+                Bra.id.like(self.bra_id[:3]+'%'),
+                func.length(Bra.id) == bra_length)
         bra = bra_query.first()
         return bra.total
 
     def location_name(self, bra_length):
-        bra_query = Bra.query.filter(Bra.id == self.bra_id[:bra_length]).first()
+        bra_query = Bra.query.filter(
+            Bra.id == self.bra_id[:bra_length]).first()
         return bra_query.name()
+
+    def number_of_municipalities(self):
+        bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
+                Bra.id.like(self.bra_id[:7]+'%'),
+                func.length(Bra.id) == 9)
+        bra = bra_query.one()
+        return bra.total

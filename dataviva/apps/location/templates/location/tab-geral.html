@@ -55,6 +55,8 @@
         <h2>Perfil Geral</h2>
         {% if profile.bra_id|length == 9 %}
         <p>{{ header.name }} é um dos {{ profile.number_of_municipalities }} municípios do estado de/do/da {{ profile.state_name }}. Com área de km², possui {{ header.population|max_digits(3) }} {{ header.population|magnitude }} de habitantes e PIB per Capita de R$ {{ header.gdp_per_capita|max_digits(3) }} {{ header.gdp_per_capita|magnitude }}. Localizado na Mesorregião {{ profile.mesoregion_name }}, é o º município do estado em PIB.</p>
+        {% elif profile.bra_id|length == 7 %}
+        <p>A Microrregião {{ header.name }} é uma das {{ profile.number_of_microregions }} subdivisões da Mesorregião {{ profile.mesoregion_name }}, localizada no estado de/do/da {{ profile.state_name }}. Compreende um total de {{ profile.number_of_municipalities }} municípios e possui população de {{ header.population|max_digits(3) }} {{ header.population|magnitude }} de habitantes. Seu PIB é de R$ {{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) e seu principal produto por valor exportado é {{ body.main_product_by_export_value_name }}.</p>
         {% elif profile.bra_id|length == 5 %}
         <p>A Mesorregião {{ header.name }} é uma das {{ profile.number_of_mesoregions }} subdivisões do estado de/do/da {{ profile.state_name }}. É a ª mesorregião brasileira em índice de complexidade e possui população de {{ header.population|max_digits(3) }} {{ header.population|magnitude }} habitantes. Seu PIB é de R$ {{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) e seu principal produto por valor exportado é {{ body.main_product_by_export_value_name }}.</p>
         {% elif profile.bra_id|length == 1 %}
