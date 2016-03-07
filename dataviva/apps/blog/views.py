@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request, make_response, url_for
+from flask import Blueprint, render_template, g, make_response, url_for
 from dataviva.apps.general.views import get_locale
 from forms import RegistrationForm
 from mock import Post, posts, ids
@@ -31,6 +31,7 @@ def show(id):
     post = posts[id]
 
     read_more_posts = {}
+    #loop if has less then 3 articles
     while len(read_more_posts) < 3:
         post_id = random.choice(posts.keys())
         if read_more_posts.has_key(post_id) is False and post_id != id:
@@ -101,6 +102,10 @@ def update(id):
         return render_template('blog/index.html', posts=posts, message=message)
 
 
-@mod.route('/post/<id>', methods=['GET'])
-def destroy():
-    pass
+@mod.route('/post/<id>/delete', methods=['GET'])
+def delete(id):
+    if posts.pop(int(id.encode())):
+        message = u"Artigo excluído com sucesso!"
+        return render_template('blog/index.html', posts=posts, message=message)
+    else:
+        return make_response(render_template('not_found.html'), 404)
