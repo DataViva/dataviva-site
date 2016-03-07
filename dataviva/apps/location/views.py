@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.attrs.services import Location as LocationService, LocationGdpRankings
+from dataviva.api.attrs.services import Location as LocationService, LocationGdpRankings, \
+    LocationGdpPerCapitaRankings, LocationPopRankings
 from dataviva.api.secex.models import Ymb
 from dataviva.api.secex.services import Location as LocationBodyService, LocationWld, LocationEciRankings
 from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
@@ -30,7 +31,11 @@ def add_language_code(endpoint, values):
 def index(bra_id):
 
     location_service = LocationService(bra_id=bra_id)
-    location_gdp_rankings_service = LocationGdpRankings(bra_id=bra_id)
+    location_gdp_rankings_service = LocationGdpRankings(
+        bra_id=bra_id, stat_id='gdp')
+    location_gdp_pc_rankings_service = LocationGdpPerCapitaRankings(
+        bra_id=bra_id)
+    location_pop_rankings_service = LocationPopRankings(bra_id=bra_id)
     location_eci_rankings_service = LocationEciRankings(bra_id=bra_id)
     location_wld_service = LocationWld(bra_id=bra_id)
     location_body_service = LocationBodyService(bra_id=bra_id)
@@ -111,7 +116,8 @@ def index(bra_id):
             'bra_id': bra_id,
             'state_name': location_service.location_name(3),
             'mesoregion_name': location_service.location_name(5),
-            'gdp_rank': location_gdp_rankings_service.gdp_rank()
+            'gdp_rank': location_gdp_rankings_service.gdp_rank(),
+            'area': location_service.area()
         }
     elif len(bra_id) == 7:
         profile = {
@@ -131,7 +137,9 @@ def index(bra_id):
     elif len(bra_id) == 1:
         profile = {
             'number_of_regions': location_service.number_of_locations(len(bra_id)),
-            'bra_id': bra_id
+            'bra_id': bra_id,
+            'gdp_pc_rank': location_gdp_pc_rankings_service.gdp_pc_rank(),
+            'pop_rank': location_pop_rankings_service.pop_rank()
         }
     else:
         profile = {

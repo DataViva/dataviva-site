@@ -1,4 +1,4 @@
-from dataviva.api.attrs.models import Ybs, Bra
+from dataviva.api.attrs.models import Ybs, Bra, Bs, Yb
 from dataviva import db
 from sqlalchemy import func
 
@@ -7,7 +7,7 @@ class Location:
 
     def __init__(self, bra_id):
         self._attrs_list = None
-        self._ybs_sorted_by_gdp = None
+        self._ybs_sorted_by_ranking = None
         self.bra_id = bra_id
         if len(bra_id) != 9 and len(bra_id) != 3:
             like_cond = bra_id[:len(bra_id)]+'%'
@@ -24,11 +24,21 @@ class Location:
                 Ybs.bra_id == self.bra_id,
                 Ybs.year == self.max_year_query)
 
-    def __ybs_sorted_by_gdp__(self):
-        if not self._ybs_sorted_by_gdp:
-            self._ybs_sorted_by_gdp = self.__attrs_list__()
-            self._ybs_sorted_by_gdp.sort(key=lambda ybs: ybs.stat_val, reverse=True)
-        return self._ybs_sorted_by_gdp
+    def __ybs_sorted_by_ranking__(self):
+        if not self._ybs_sorted_by_ranking:
+            self._ybs_sorted_by_ranking = self.__attrs_list__()
+            self._ybs_sorted_by_ranking.sort(
+                key=lambda ybs: ybs.stat_val, reverse=True)
+        return self._ybs_sorted_by_ranking
+
+    def ranking(self):
+        ranking_list = self.__ybs_sorted_by_ranking__()
+        rank = 1
+        for ranking in ranking_list:
+            if ranking.bra_id == self.bra_id:
+                return rank
+                break
+            rank += 1
 
     def __attrs_list__(self):
         if not self._attrs_list:
@@ -97,22 +107,53 @@ class Location:
         bra = bra_query.one()
         return bra.total
 
+    def area(self):
+        bs_query = Bs.query.filter(Bra.id == self.bra_id).first()
+        return bs_query.stat_val
+
 
 class LocationGdpRankings(Location):
 
-    def __init__(self, bra_id):
+    def __init__(self, bra_id, stat_id):
         Location.__init__(self, bra_id)
-        self.attrs_query = Ybs.query.join(Bra).filter(
-            Ybs.stat_id == 'gdp',
+        self.stat_id = stat_id
+        self.attrs_query = Ybs.query.filter(
+            Ybs.stat_id == self.stat_id,
             Ybs.bra_id.like(self.bra_id[:3]+'%'),
             Ybs.year == self.max_year_query,
-            func.length(Ybs.bra_id) == 9)
+            func.length(Ybs.bra_id) == len(self.bra_id))
 
     def gdp_rank(self):
-        gdp_list = self.__ybs_sorted_by_gdp__()
-        rank = 1
-        for gdp in gdp_list:
-            if gdp.bra_id == self.bra_id:
-                return rank
-                break
-            rank += 1
+        gdp_position = self.ranking()
+        return gdp_position
+
+
+class LocationGdpPerCapitaRankings(Location):
+
+    def __init__(self, bra_id):
+        Location.__init__(self, bra_id)
+        self.attrs_query = Ybs.query.filter(
+            Ybs.stat_id == 'gdp_pc',
+            Ybs.year == self.max_year_query,
+            func.length(Ybs.bra_id) == len(self.bra_id))
+
+    def gdp_pc_rank(self):
+        gdp_pc_position = self.ranking()
+        return gdp_pc_position
+
+
+class LocationPopRankings(Location):
+
+    def __init__(self, bra_id):
+        Location.__init__(self, bra_id)
+        self.attrs_query = Yb.query.filter(
+            Ybs.year == self.max_year_query,
+            func.length(Ybs.bra_id) == len(self.bra_id))
+
+    def pop_rank(self):
+        pop = self.attrs_query.all()
+        pop_position = 1
+        for r in pop:
+            if r.bra_id == self.bra_id:
+                return pop_position
+            pop_position += 1
