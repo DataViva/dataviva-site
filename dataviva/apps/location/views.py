@@ -117,6 +117,11 @@ def index(bra_id):
             'state_name': location_service.location_name(3),
             #'mesoregion_name': location_service.location_name(5)
         }
+    elif len(bra_id) == 1:
+        profile = {
+            'number_of_regions': location_service.number_of_locations(len(bra_id)),
+            'bra_id': bra_id
+        }
 
     return render_template('location/index.html',
                            header=header, body=body, profile=profile)

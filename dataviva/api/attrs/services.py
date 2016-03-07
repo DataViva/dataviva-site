@@ -64,9 +64,13 @@ class Location:
         return bra_query.name()
 
     def number_of_locations(self, bra_length):
-        bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
-                Bra.id.like(self.bra_id[:3]+'%'),
+        if bra_length == 1:
+            bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
                 func.length(Bra.id) == bra_length)
+        else:
+            bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
+                    Bra.id.like(self.bra_id[:3]+'%'),
+                    func.length(Bra.id) == bra_length)
         bra = bra_query.first()
         return bra.total
 
