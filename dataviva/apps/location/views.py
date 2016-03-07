@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.services import Location as LocationService, LocationGdpRankings
 from dataviva.api.secex.models import Ymb
-from dataviva.api.secex.services import Location as LocationBodyService, LocationWld
+from dataviva.api.secex.services import Location as LocationBodyService, LocationWld, LocationEciRankings
 from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
     LocationJobs, LocationDistance, LocationOppGain
 from dataviva.api.hedu.services import LocationUniversity, LocationMajor
@@ -30,7 +30,8 @@ def add_language_code(endpoint, values):
 def index(bra_id):
 
     location_service = LocationService(bra_id=bra_id)
-    location_rankings_service = LocationGdpRankings(bra_id=bra_id)
+    location_gdp_rankings_service = LocationGdpRankings(bra_id=bra_id)
+    location_eci_rankings_service = LocationEciRankings(bra_id=bra_id)
     location_wld_service = LocationWld(bra_id=bra_id)
     location_body_service = LocationBodyService(bra_id=bra_id)
     location_industry_service = LocationIndustry(bra_id=bra_id)
@@ -110,7 +111,7 @@ def index(bra_id):
             'bra_id': bra_id,
             'state_name': location_service.location_name(3),
             'mesoregion_name': location_service.location_name(5),
-            'gdp_rank': location_rankings_service.gdp_rank()
+            'gdp_rank': location_gdp_rankings_service.gdp_rank()
         }
     elif len(bra_id) == 7:
         profile = {
@@ -125,6 +126,7 @@ def index(bra_id):
             'number_of_mesoregions': location_service.number_of_locations(len(bra_id)),
             'bra_id': bra_id,
             'state_name': location_service.location_name(3),
+            'eci_rank': location_eci_rankings_service.eci_rank()
         }
     elif len(bra_id) == 1:
         profile = {

@@ -1,5 +1,5 @@
 from dataviva.api.attrs.models import Bra, Hs, Wld
-from dataviva.api.secex.models import Ymw, Ymbw, Ympw, Ymp, Ymbp, Ymbpw
+from dataviva.api.secex.models import Ymw, Ymbw, Ympw, Ymp, Ymbp, Ymbpw, Ymb
 from dataviva import db
 from flask import g, abort
 from sqlalchemy.sql.expression import func, desc, asc
@@ -530,4 +530,36 @@ class LocationWld(Location):
             return secex.wld.name_pt
 
 
+class LocationEciRankings:
 
+    def __init__(self, bra_id):
+        self._secex = None
+        self._secex_sorted_by_eci = None
+        self.bra_id = bra_id
+        self.max_year_query = db.session.query(
+            func.max(Ymb.year)).filter_by(bra_id=self.bra_id)
+        self.secex_query = Ymb.query.filter(
+            Ymb.year == self.max_year_query,
+            Ymb.month == 0,
+            func.length(Ymb.bra_id) == 5)
+
+    def __secex_sorted_by_eci__(self):
+        if not self._secex_sorted_by_eci:
+            self._secex_sorted_by_eci = self.__secex_list__()
+            self._secex_sorted_by_eci.sort(key=lambda secex: secex.eci, reverse=True)
+        return self._secex_sorted_by_eci
+
+    def __secex_list__(self):
+        if not self._secex:
+            secex_data = self.secex_query.all()
+            self._secex = secex_data
+        return self._secex
+
+    def eci_rank(self):
+        eci_list = self.__secex_sorted_by_eci__()
+        rank = 1
+        for eci in eci_list:
+            if eci.bra_id == self.bra_id:
+                return rank
+                break
+            rank += 1
