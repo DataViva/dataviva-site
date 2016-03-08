@@ -19,8 +19,7 @@ class Question:
 
 class Session:
 
-    def __init__(self, session_title, title, questions):
-        self.session_title = session_title
+    def __init__(self, title, questions):
         self.title = title
         self.questions = questions
 
@@ -129,20 +128,17 @@ entrepreneur_questions = [
 
 
 entrepreneur_session = Session(
-    session_title="Empreendedores",
     title="What kind of analysis you want to make?",
     questions=entrepreneur_questions
 )
 
 
 development_agents_session = Session(
-    session_title="Agentes de Desenvolvimento",
     title="What kind of analysis you want to make?",
     questions=development_agents_questions
 )
 
 student_session = Session(
-    session_title="Estudantes e Profissionais",
     title="What kind of analysis you want to make?",
     questions=student_questions
 )

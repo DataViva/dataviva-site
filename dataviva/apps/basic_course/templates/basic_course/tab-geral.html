@@ -2,25 +2,25 @@
     <div class="mod mod-datainfo">
         <div class="numbers-top smaller">
             <div class="row">
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Número de matrículas</p>
                     <div class="number">
                         <strong class="counter">{{header["course_enrolled"] | max_digits(3) }}</strong><small>{{header["course_enrolled"] | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Número de turmas</p>
                     <div class="number">
                         <strong class="counter">{{header["course_classes"] | max_digits(3)}}</strong><small>{{header["course_classes"] | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Número de escolas</p>
                     <div class="number">
                         <strong class="counter">{{header["school_count"] | max_digits(3)}}</strong><small>{{header["school_count"] | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Tamanho médio das turmas</p>
                     <div class="number">
                         <strong class="counter">{{ header.course_average_class_size|max_digits(3) }}</strong><small>alunos</small>
@@ -28,7 +28,7 @@
                 </div>
 
                 {% if header.course_age %}
-                    <div class="col-xs-15 col-sm-2 item">
+                    <div class="col-xs-15 col-sm-3 item">
                         <p class="label">Média de idade</p>
                         <div class="number">
                             <strong class="counter">{{ header.course_age|max_digits(3) }}</strong><small>anos</small>
@@ -43,7 +43,7 @@
         <h2>Perfil Geral</h2>
         <p>O maior número de matrículas para {{header["course_name"]}} do Brasil encontra-se no município de {{body["city_name"]}}, com {{body["city_enrolled"]}} alunos. No total, o país possui {{header["course_enrolled"]}} alunos matriculados nesse curso, com turmas médias de {{header["course_average_class_size"]}} alunos.</p>
         <div class="row">
-            <div class="col-xs-15 col-sm-15 col-md-5">
+            <div class="col-xs-15 col-sm-15 col-md-15">
                 <h3>Matrículas</h3>
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
