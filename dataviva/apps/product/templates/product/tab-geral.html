@@ -2,31 +2,31 @@
     <div class="mod mod-datainfo">
         <div class="numbers-top smaller">
             <div class="row">
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Saldo da Balança Comercial</p>
                     <div class="number">
                         R$ <strong class="counter">{{ header.trade_balance | max_digits(3) }}</strong><small>{{ header.trade_balance | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Valor Total Exportado</p>
                     <div class="number">
                         R$ <strong class="counter">{{ header.export_value | max_digits(3) }}</strong><small>{{ header.export_value | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Relação Peso Líquido(kg)/Valor Total Exportado</p>
                     <div class="number">
                         <strong class="counter">{{ header.export_net_weight | max_digits(3) }}</strong><small>{{ header.export_net_weight | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Valor Total Importado</p>
                     <div class="number">
                         <strong class="counter">{{ header.import_value | max_digits(3) }}</strong><small>{{ header.import_value | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Relação Peso Líquido(kg)/Valor Total Importado</p>
                     <div class="number">
                         <strong class="counter">{{ header.import_net_weight | max_digits(3) }}</strong><small>anos</small>
@@ -35,7 +35,7 @@
 
                 {% if context.depth == 6 %}
 
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Índice de Complexidade do Produto</p>
                     <div class="number">
                         <strong class="counter">{{ header.pci | max_digits(3) }}</strong><small>{{ header.pci | magnitude }}</small>
@@ -44,19 +44,19 @@
 
                     {% if context.bra_id %}
 
-                    <div class="col-xs-15 col-sm-2 item">
+                    <div class="col-xs-15 col-sm-3 item">
                         <p class="label">RCA internacional</p>
                         <div class="number">
                             <strong class="counter">{{ header.rca_wld | max_digits(3) }}</strong><small>{{ header.rca_wld | magnitude }}</small>
                         </div>
                     </div>
-                    <div class="col-xs-15 col-sm-2 item">
+                    <div class="col-xs-15 col-sm-3 item">
                         <p class="label">Distância internacional</p>
                         <div class="number">
                             <strong class="counter">{{ header.distance_wld | max_digits(3) }}</strong><small>{{ header.distance_wld | magnitude }}</small>
                         </div>
                     </div>
-                    <div class="col-xs-15 col-sm-2 item">
+                    <div class="col-xs-15 col-sm-3 item">
                         <p class="label">Ganho de Oportunidade internacional</p>
                         <div class="number">
                             <strong class="counter">{{ header.opportunity_gain_wld | max_digits(3) }}</strong><small>{{ header.opportunity_gain_wld | magnitude }}</small>
@@ -79,7 +79,7 @@
         representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos.
         O município que mais exporta esse produto é {{ body.municipality_name_export }} e o país para o qual o Brasil mais exporta é {{ body.destination_name_export }}.</p>
         <div class="row">
-            <div class="col-xs-15 col-sm-15 col-md-5">
+            <div class="col-xs-15 col-sm-15 col-md-15">
                 <h3>Comércio Internacional</h3>
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">

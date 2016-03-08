@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, g, jsonify, request, render_template
+from flask import Blueprint, g, jsonify, request, render_template, redirect
 from dataviva.apps.wizard.sessions import SESSIONS
 from dataviva.apps.general.views import get_locale
 
@@ -22,7 +22,6 @@ def session(session_name):
 
     return jsonify({
         "session_name": session_name,
-        "session_title": session_obj.session_title,
         "title": session_obj.title,
         "questions": map(lambda x: x.serialize, session_obj.questions),
     })
