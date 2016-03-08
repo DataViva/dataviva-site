@@ -2,19 +2,19 @@
     <div class="mod mod-datainfo">
         <div class="numbers-top smaller">
             <div class="row">
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Número de Matrículas</p>
                     <div class="number">
                         <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><small>{{ header.enrolled | magnitude }} </small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Número de Ingressantes</p>
                     <div class="number">
                         <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><small>{{ header.entrants | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Número de Concluintes</p>
                     <div class="number">
                         <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><small>{{ header.graduates | magnitude }}</small>
@@ -28,7 +28,7 @@
         <h2>Perfil Geral</h2>
         <p>O curso de {{ header.name }} é o {{ header.rank }}º em número de matrículas no Brasil. A universidade que possui mais alunos é a {{ content.university_with_more_enrolled }}, com {{ content.highest_enrolled_number_by_university | max_digits(3) }} {{ content.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em todo o país e a ocupação que mais emprega os concluintes é .</p>
         <div class="row">
-            <div class="col-xs-15 col-sm-15 col-md-5">
+            <div class="col-xs-15 col-sm-15 col-md-15">
                 <h3>Matrículas</h3>
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
