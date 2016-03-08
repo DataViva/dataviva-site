@@ -2,25 +2,25 @@
     <div class="mod mod-datainfo">
         <div class="numbers-top smaller">
             <div class="row">
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Renda Média Mensal</p>
                     <div class="number">
                         R$ <strong class="counter">{{header.average_monthly_income | max_digits(3)}}</strong><small>{{header.average_monthly_income | magnitude}}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Massa Salarial</p>
                     <div class="number">
                         R$ <strong class="counter">{{header.salary_mass | max_digits(3)}}</strong><small>{{header.salary_mass | magnitude}}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Total de Empregos</p>
                     <div class="number">
                         <strong class="counter">{{header.total_employment | max_digits(3)}}</strong><small>{{header.total_employment | magnitude}}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Total de Estabelecimentos</p>
                     <div class="number">
                         <strong class="counter">{{header.total_establishments | max_digits(3)}}</strong><small>{{header.total_establishments | magnitude}}</small>
@@ -34,7 +34,7 @@
         <h2>Perfil Geral</h2>
         <p>A ocupação de {{header.name}} emprega {{header.total_employment}} profissionais, ocupando o {{header.ranking}}&ordm lugar no ranking de ocupações no Brasil, por número de empregos. O município que mais emprega nessa ocupação é {{body.municipality_with_more_jobs}} e a atividade de {{body.activity_with_more_jobs}} é a que mais possui {{header.name}}. A renda mensal média é de R${{header.average_monthly_income}} e a idade média dos empregados é de {{header.age_avg | max_digits(3)}} anos.</p> 
         <div class="row">
-            <div class="col-xs-15 col-sm-15 col-md-5">
+            <div class="col-xs-15 col-sm-15 col-md-15">
                 <h3>Salário e Emprego</h3>
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">

@@ -2,37 +2,43 @@
     <div class="mod mod-datainfo">
         <div class="numbers-top smaller">
             <div class="row">
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">PIB</p>
                     <div class="number">
                         R$ <strong class="counter">{{ header.gdp|max_digits(3) }}</strong><small>{{ header.gdp|magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                {% if header.life_expectation %}
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Esperança de Vida</p>
                     <div class="number">
                         <strong class="counter">{{ header.life_expectation|max_digits(3) }}</strong><small>{{ header.life_expectation|magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                {% endif %}
+                {% if header.population %}
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">População Total</p>
                     <div class="number">
                         <strong class="counter">{{ header.population|max_digits(3) }}</strong><small>{{ header.population|magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                {% endif %}
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">PIB Per Capta</p>
                     <div class="number">
                         R$ <strong class="counter">{{ header.gdp_per_capita|max_digits(3) }}</strong><small>{{ header.gdp_per_capita|magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                {% if header.hdi %}
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">IDHM</p>
                     <div class="number">
                         <strong class="counter">{{ header.hdi|max_digits(3) }}</strong><small>{{ header.hdi|magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                {% endif %}
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">ECI</p>
                     <div class="number">
                         <strong class="counter">{{ header.eci|max_digits(3) }}</strong><small>{{ header.eci|magnitude }}</small>
@@ -43,10 +49,15 @@
                 </div>
             </div>
         </div>
+
+
+
         <h2>Perfil Geral</h2>
         <p>Minas Gerais é uma das 27 unidades federativas do Brasil, localizada na Região Sudeste do país, sendo o quarto estado com a maior área territorial e o segundo em quantidade de habitantes. Limita-se ao sul e sudoeste com São Paulo, a oeste com o Mato Grosso do Sul, a noroeste com Goiás e Distrito Federal, a norte e nordeste com a Bahia, a leste com o Espírito Santo e a sudeste com o Rio de Janeiro. Seu território é subdividido em 853 municípios, a maior quantidade dentre os estados brasileiros.</p>
+
+
         <div class="row">
-            <div class="col-xs-15 col-sm-15 col-md-5">
+            <div class="col-xs-15 col-sm-15 col-md-15">
                 <h3>Comércio Internacional</h3>
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
@@ -110,7 +121,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-xs-15 col-sm-15 col-md-5">
+            <div class="col-xs-15 col-sm-15 col-md-15">
                 <h3>Salário e Emprego</h3>
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
@@ -164,7 +175,8 @@
                     </a>
                 </div>
             </div>
-            <div class="col-xs-15 col-sm-15 col-md-5">
+
+            <div class="col-xs-15 col-sm-15 col-md-15">
                 <h3>Oportunidades Econômicas</h3>
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
@@ -192,8 +204,8 @@
                                     Produto com Maior Ganho de Oportunidade
                                 </th>
                                 <td>
-                                    <p class="label">{{ body.biggest_opportunity_gain_by_product_name }}</p>
-                                    <strong class="counter">{{ body.biggest_opportunity_gain_by_product | max_digits(3) }}</strong> <span>{{ body.biggest_opportunity_gain_by_product | magnitude }}</span>
+                                    <p class="label">{{ body.opportunity_gain_by_product_name }}</p>
+                                    <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3) }}</strong> <span>{{ body.opportunity_gain_by_product | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -201,8 +213,8 @@
                                     Atividade Econômica com Maior Ganho de Oportunidade
                                 </th>
                                 <td>
-                                    <p class="label">{{ body.biggest_opportunity_gain_by_occupation_name }}</p>
-                                    <strong class="counter">{{ body.biggest_opportunity_gain_by_occupation | max_digits(3) }}</strong> <span>{{ body.biggest_opportunity_gain_by_occupation | magnitude }}</span>
+                                    <p class="label">{{ body.opportunity_gain_by_occupation_name }}</p>
+                                    <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3) }}</strong> <span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -212,7 +224,8 @@
                     </a>
                 </div>
             </div>
-            <div class="col-xs-15 col-sm-15 col-md-5">
+
+            <div class="col-xs-15 col-sm-15 col-md-15">
                 <h3>Educação</h3>
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
@@ -222,8 +235,8 @@
                                     Universidade com Maior Número de Matrículas
                                 </th>
                                 <td>
-                                    <p class="label">{{ body.highest_enrolled_number_by_university_name }}</p>
-                                    <strong class="counter">{{ body.highest_enrolled_number_by_university | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_number_by_university | magnitude }}</span>
+                                    <p class="label">{{ body.highest_enrolled_by_university_name }}</p>
+                                    <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_university | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -231,8 +244,8 @@
                                     Curso Superior com Maior Número de Matrículas
                                 </th>
                                 <td>
-                                    <p class="label">{{ body.highest_enrolled_number_by_major_name }}</p>
-                                    <strong class="counter">{{ body.highest_enrolled_number_by_major | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_number_by_major | magnitude }}</span>
+                                    <p class="label">{{ body.highest_enrolled_by_major_name }}</p>
+                                    <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_major | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -240,8 +253,8 @@
                                     Escola com Maior Número de Matrículas em Cursos Técnicos
                                 </th>
                                 <td>
-                                    <p class="label">{{ body.highest_enrolled_number_by_school_name }}</p>
-                                    <strong class="counter">{{ body.highest_enrolled_number_by_school | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_number_by_school | magnitude }}</span>
+                                    <p class="label">{{ body.highest_enrolled_by_school_name }}</p>
+                                    <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_school | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -249,8 +262,8 @@
                                     Curso Técnico com Maior Número de Matrículas
                                 </th>
                                 <td>
-                                    <p class="label">{{ body.highest_enrolled_number_by_basic_course_name }}</p>
-                                    <strong class="counter">{{ body.highest_enrolled_number_by_basic_course | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_number_by_basic_course | magnitude }}</span>
+                                    <p class="label">{{ body.highest_enrolled_by_basic_course_name }}</p>
+                                    <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -259,7 +272,6 @@
                         mais detalhes
                     </a>
                 </div>
-            </div>
             </div>
         </div>
     </div>
