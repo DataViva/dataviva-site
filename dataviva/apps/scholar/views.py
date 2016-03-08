@@ -58,7 +58,7 @@ def edit(id):
 @mod.route('/article/new', methods=['POST'])
 def create():
     form = RegistrationForm()
-    if form.validate() is False:
+    if form.validate() == False:
         return render_template('scholar/new.html', form=form)
     else:
         title = form.title.data
@@ -70,18 +70,16 @@ def create():
         id = ids[-1] + 1
 
         ids.append(id)
-        articles.update({id: Article(title, theme, author, key_words, abstract, postage_date)})
+        articles.update({id:Article(title, theme, author, key_words, abstract, postage_date)})
 
-        message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
-                  Em até 15 dias você receberá um retorno sobre sua publicação no site!'
+        message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. Em até 15 dias você receberá um retorno sobre sua publicação no site!'
         return render_template('scholar/index.html', articles=articles, message=message)
-
 
 @mod.route('/article/<id>/edit', methods=['POST'])
 def update(id):
     form = RegistrationForm()
     id = int(id.encode())
-    if form.validate() is False:
+    if form.validate() == False:
         return render_template('scholar/edit.html', form=form)
     else:
         title = form.title.data
