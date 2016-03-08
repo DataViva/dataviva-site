@@ -111,6 +111,15 @@ class Location:
         bs_query = Bs.query.filter(Bra.id == self.bra_id).first()
         return bs_query.stat_val
 
+    def states_in_a_region(self):
+        bra_query = Bra.query.filter(Bra.id.like(self.bra_id+'%'),
+                                     func.length(Bra.id) == 3)
+        bra = bra_query.all()
+        states = []
+        for b in bra:
+            states.append(b.name())
+        return states
+
 
 class LocationGdpRankings(Location):
 
@@ -160,3 +169,15 @@ class LocationPopRankings(Location):
             if r.bra_id == self.bra_id:
                 return pop_position
             pop_position += 1
+
+class LocationAreaRankings(Location):
+
+    def __init__(self, bra_id):
+        Location.__init__(self, bra_id)
+        self.attrs_query = Bs.query.filter(
+            Bs.stat_id == 'area',
+            func.length(Bs.bra_id) == len(self.bra_id))
+
+    def area_rank(self):
+        area_position = self.ranking()
+        return area_position
