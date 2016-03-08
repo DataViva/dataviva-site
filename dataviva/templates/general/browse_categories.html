@@ -23,23 +23,34 @@
                     <div class="row">
                         <div class="col-xs-15 col-sm-5 item">
                             <a onclick="fire_wizard('entrepreneur')">
+								<div class="col-xs-3 col-sm-3">
                                 <img src="/static/img/icons/categories/ico-empresario.png" class="pull-left" />
-                                <span>Empreendedores</span>
-                                Identifique o perfil econômico e as oportunidades de negócios de uma região
+                                </div>
+                                <div class="col-xs-12 col-sm-12">
+                                <span>Empreendedor</span>
+                                Identifique oportunidades de negócio em uma região.
+                                </div>
                             </a>
                         </div>
                         <div class="col-xs-15 col-sm-5 item">
-                            <a onclick="fire_wizard('development_agents')">
-                                <img src="/static/img/icons/categories/ico-analista.png" class="pull-left" />
-                                <span>Agentes de Desenvolvimento</span>
-                                Avalie a criação de políticas de desenvolvimento de acordo com a localidade
-                            </a>
-                        </div>
-                        <div class="col-xs-15 col-sm-5 item">
-                            <a onclick="fire_wizard('student')">
+                        	
+                            <a href="#" data-toggle="modal" data-target="#modal-wizard">
+                            <div class="col-xs-3 col-sm-3">
                                 <img src="/static/img/icons/categories/ico-estudante.png" class="pull-left" />
+                            </div>
                                 <span>Estudantes e Profissionais</span>
-                                Descubra informações sobre empregos disponíveis, renda por ocupação e cursos
+                                Descubra oportunidades de emprego, renda e educação.
+                            </a>
+                        </div>
+                        <div class="col-xs-15 col-sm-5 item">
+                            <a href="#" data-toggle="modal" data-target="#modal-wizard">
+                            	<div class="col-xs-3 col-sm-3">
+                                <img src="/static/img/icons/categories/ico-analista.png" class="pull-left" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12">
+                                <span>Analista de políticas públicas</span>
+                                Analise oportunidades de políticas públicas
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -94,7 +105,7 @@
                             <p class="clearfix">Mostrando as exportações, o emprego e os dados de educação, estatísticas e visualizações sobre a localidade brasileira escolhida.</p>
                         </a>
                     </div>
-                    <div class="col-xs-15 col-sm-5 col-sm-offset-3 item">
+                    <div class="col-xs-15 col-sm-5 item">
                         <a onclick="start_selector('Major')">
                             <span class="pull-left">Cursos Ensino Superior</span>
                             <img src="/static/img/icons/categories/ico-search-curso-superior.png" class="pull-right" />
@@ -106,6 +117,14 @@
                         <a onclick="start_selector('BasicCourse')">
                             <span class="pull-left">Cursos Básicos</span>
                             <img src="/static/img/icons/categories/ico-search-curso-basico1.png" class="pull-right" />
+                            <div class="clearfix"></div>
+                            <p class="clearfix">Mostrando as exportações, o emprego e os dados de educação, estatísticas e visualizações sobre a localidade brasileira escolhida.</p>
+                        </a>
+                    </div>
+                    <div class="col-xs-15 col-sm-5 item">
+                        <a onclick="start_selector('Location')">
+                            <span class="pull-left">Saúde</span>
+                            <img src="/static/img/icons/categories/ico-search-saude.png" class="pull-right" />
                             <div class="clearfix"></div>
                             <p class="clearfix">Mostrando as exportações, o emprego e os dados de educação, estatísticas e visualizações sobre a localidade brasileira escolhida.</p>
                         </a>

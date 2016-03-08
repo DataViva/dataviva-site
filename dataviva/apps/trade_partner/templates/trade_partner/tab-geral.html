@@ -2,31 +2,31 @@
     <div class="mod mod-datainfo">
         <div class="numbers-top smaller">
             <div class="row">
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Saldo da Balança Comercial</p>
                     <div class="number">
                         R$ <strong class="counter">{{header.trade_balance | max_digits(3) }}</strong><small>{{header.trade_balance | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Valor Total Exportado</p>
                     <div class="number">
                         R$ <strong class="counter">{{header.total_exported | max_digits(3) }}</strong><small>{{header.total_exported | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Relação Peso Líquido(kg)/ Valor Total Exportado</p>
                     <div class="number">
                         <strong class="counter">{{header.unity_weight_export_price | max_digits(3) }}</strong>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Valor Total Importado</p>
                     <div class="number">
                         R$ <strong class="counter">{{header.total_imported | max_digits(3) }}</strong><small>{{header.total_imported | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Relação Peso Líquido(kg)/ Valor Total Importado</p>
                     <div class="number">
                         <strong class="counter">{{header.unity_weight_import_price | max_digits(3) }}</strong>
@@ -40,7 +40,7 @@
         <h2>Perfil Geral</h2>
         <p>O país {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse país é o {{ body.product_with_more_exports }} e o total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
         <div class="row">
-            <div class="col-xs-15 col-sm-15 col-md-5">
+            <div class="col-xs-15 col-sm-15 col-md-15">
                 <h3>Comércio Internacional</h3>
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">

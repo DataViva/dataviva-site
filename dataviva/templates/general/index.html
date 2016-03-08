@@ -9,33 +9,31 @@
                 <p>O DataViva é uma ferramenta de pesquisa que disponibiliza dados oficiais sobre exportações, atividade econômica, localidade, educação e ocupações de todo o Brasil. São 11 aplicativos, que, juntos, formam mais de 1 bilhão de possibilidades de visualizações.</p>
                 <p class="cta">
                     <a href="{{ url_for('general.search') }}" class="btn btn-default btn-dataviva" title="Inicie uma pesquisa">Inicie uma pesquisa <i class="fa fa-angle-right"></i></a>
-                </p>
-                <p class="cta">
-                    <a href="#" title="Assita ao vídeo Institucional" data-toggle="modal" data-target="#modal-dataviva-video">Assita ao vídeo Institucional</a>
-                </p>
-                <p class="cta">
-                    <a href="#" title="Assista a depoimentos" data-toggle="modal" data-target="#modal-dataviva-video">Assista a depoimentos</a>
+                    <a href="#" title="Assista ao vídeo" data-toggle="modal" data-target="#modal-dataviva-video">Assista ao vídeo</a>
                 </p>
             </div>
             <div class="col-xs-15 col-sm-7 col-sm-offset-1">
                 <ul>
-                    <li data-toggle="popover" data-placement="top" data-content="Número de estabelecimentos por atividade econômica, porcentagem de profissionais graduados por ano em determinado curso por região, produtos similares por região, salário médio por segmento, e mais...">
-                        <h3><a onclick="fire_wizard('entrepreneur')">Empreendedores</a></h3>
-                            <p>
-                                <strong>Identifique o perfil econômico e as oportunidades de negócios de uma região</strong><br/>
-                            </p>
+                    <li>
+                        <h3><a href="02-pesquisa-publico.html?open-modal=modal-dataviva-localidade">Empreendedores</a></h3>
+                        <p>
+                            <strong>Identifique o perfil econômico e as oportunidades de negócios de uma região:</strong><br/>
+                            Número de estabelecimentos por atividade econômica, porcentagem de profissionais graduados por ano em determinado curso por região, produtos similares por região, salário médio por segmento, e mais...
+                        </p>
                     </li>
-                    <li data-toggle="popover" data-placement="top" data-content="Principais parceiros comerciais de um produto por região, estados que mais importam um produto específico, atividade econômica por localidade, emprego e renda por segmento, e mais...">
-                        <h3><a onclick="fire_wizard('development_agents')">Agentes de Desenvolvimento</a></h3>
-                            <p>
-                                <strong>Avalie a criação de políticas de desenvolvimento de acordo com a localidade</strong><br/>
-                            </p>
+                    <li>
+                        <h3><a href="02-pesquisa-publico.html?open-modal=modal-dataviva-localidade">Agentes de Desenvolvimento</a></h3>
+                        <p>
+                            <strong>Avalie a criação de políticas de desenvolvimento de acordo com a localidade:</strong><br/>
+                            Principais parceiros comerciais de um produto por região, estados que mais importam um produto específico, atividade econômica por localidade, emprego e renda por segmento, e mais...
+                        </p>
                     </li>
-                    <li data-toggle="popover" data-placement="top" data-content="Salário médio de uma atividade ou ocupação, cidades que concentram a maior taxa de empregos em uma atividade, cursos oferecidos por região, quantidade de matriculados em cada universidade, e mais...">
-                        <h3><a onclick="fire_wizard('student')">Estudantes e Profissionais</a></h3>
-                            <p>
-                                <strong>Descubra informações sobre empregos disponíveis, renda por ocupação e cursos</strong><br/>
-                            </p>
+                    <li>
+                        <h3><a href="02-pesquisa-publico.html?open-modal=modal-dataviva-localidade">Estudantes e Profissionais</a></h3>
+                        <p>
+                            <strong>Descubra informações sobre empregos disponíveis, renda por ocupação e cursos:</strong><br/>
+                            Salário médio de uma atividade ou ocupação, cidades que concentram a maior taxa de empregos em uma atividade, cursos oferecidos por região, quantidade de matriculados em cada universidade, e mais...
+                        </p>
                     </li>
                 </ul>
             </div>
@@ -45,9 +43,9 @@
 <div class="mod mod-explore">
     <div class="container text-center">
         <h2>Explore nossos bancos de dados</h2>
-        <p class="tagline">O DataViva reúne dados de diversas fontes: Emprego e Renda (RAIS), Comércio Exterior Brasileiro (SECEX/MDCI), Educação Básica e Ensino Técnico (Censo Escolar), Ensino Superior (Censo da Educação Superior) e Comércio Internacional (UN Comtrade).</p>
+        <p class="tagline text-center">O DataViva reúne dados de diversas fontes: Emprego e Renda (RAIS), Comércio Exterior Brasileiro (SECEX/MDCI), Educação Básica e Ensino Técnico (Censo Escolar), Ensino Superior (Censo da Educação Superior) e Comércio Internacional (UN Comtrade).</p>
         <div class="text-divider">
-            <h3 class="inner">O que você gostaria de conhecer?</h3>
+            <h3 class="inner">O que você gostaria de saber?</h3>
             <hr />
         </div>
         <div class="row">
@@ -112,8 +110,8 @@
 </div>
 <div class="mod mod-join">
     <div class="container text-center">
-        <h2>Cadastre-se gratuitamente e aproveite o DataViva ao máximo</h2>
-        <p class="tagline">Salve os gráficos que precisar e crie análises personalizadas. Ao fazer o cadastro você terá acesso a recursos exclusivos para facilitar sua pesquisa.</p>
+        <h2>Junte-se a milhares de pessoas que usam o Dataviva</h2>
+        <p class="tagline">Cadastre-se gratuitamente e aproveite ao máximo o Dataviva. Ao fazer cadastro você terá acesso a recursos exclusivos para facilitar sua pesquisa.</p>
         <a role="button" class="btn btn-default navbar-btn btn-dataviva" data-toggle="modal" data-target="#dataviva-signup">Cadastrar Gratuitamente</a>
         <h2>O DataViva na mídia</h2>
         <img src="/static/img/public_appearances.png" alt="O DataViva na mídia" class="img-responsive" />

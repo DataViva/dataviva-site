@@ -2,19 +2,19 @@
     <div class="mod mod-datainfo">
         <div class="numbers-top smaller">
             <div class="row">
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Número de Matrículas</p>
                     <div class="number">
                         <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><small>{{ header.enrolled | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Número de Ingressantes</p>
                     <div class="number">
                         <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><small>{{ header.entrants | magnitude }}</small>
                     </div>
                 </div>
-                <div class="col-xs-15 col-sm-2 item">
+                <div class="col-xs-15 col-sm-3 item">
                     <p class="label">Número de Concluintes</p>
                     <div class="number">
                         <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><small>{{ header.graduates | magnitude }}</small>
@@ -28,7 +28,7 @@
         <h2>Perfil Geral</h2>
         <p>A instituição {{ header.name }} é um estabelecimento de ensino {{ header.type }}, que tem como principal curso {{ content.major_with_more_enrollments }}, com {{ content.highest_enrollment_number_by_major }} estudantes. No total, a instituição possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} estudantes matriculados e {{ header.graduates | max_digits(3) }} {{ header.graduates | magnitude }} concluintes.</p>
         <div class="row">
-            <div class="col-xs-15 col-sm-15 col-md-5">
+            <div class="col-xs-15 col-sm-15 col-md-15">
                 <h3>Matrículas</h3>
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
