@@ -1,0 +1,32 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="about container">
+    <ol class="breadcrumb">
+        <li><a href="{{ url_for('general.home') }}">Home</a></li>
+        <li class="active"><span>Sobre</span></li>
+    </ol>
+    <div class="row">
+        <div class="sidebar no-padding col-xs-15 col-md-4">
+            <h3 class="text-justify">DataViva é uma plataforma aberta de pesquisa, que permite ao usuário acessar mais de 1 bilhão de visualizações com dados socioeconômicos dos mais de 5 mil municípios brasileiros.</h3>
+        </div>
+        <div class="main-content col-xs-15 col-md-11">
+            <div class="institucional">
+                <h2>O DataViva</h2>
+                <div class="video-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/vqPoGAhch68" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p>Planejamento Colaborativo, diversificação da economia, competitividade e transparência: são esses os objetivos do DataViva, que foi criado para fortalecer a cultura do uso de dados e orientar o desenvolvimento do país. Uma ferramenta de informações e análises, que propõe uma nova forma de pensar a construção do futuro, a partir da transformação de dados em conhecimento e ação.</p>
+
+                <h2>História do Projeto</h2>
+                <p>O DataViva é uma iniciativa do Governo de Minas Gerais e da Fundação de Amparo à Pesquisa do Estado de Minas Gerais (FAPEMIG) que oferece ao usuário uma experiência dinâmica de acesso a um grande conjunto de dados públicos. Totalmente desenvolvido em software livre e aberto ao acesso de todos, o DataViva foi criado com o objetivo de contribuir para a implementação de políticas públicas, investimentos públicos e privados, bem como para a realização de estudos acadêmicos.</p>
+                <p>Elaborado inicialmente para auxiliar a política de desenvolvimento econômico do governo do Estado de Minas Gerais, o projeto surgiu a partir da necessidade de tornar o acesso aos dados sobre a economia brasileira mais fácil e intuitivo. Desenvolvida pelo Governo de Minas Gerais, em parceria com pesquisadores do MIT Media Lab (um dos principais centros de inovação do mundo), a plataforma apresenta uma solução inédita no país, a partir de bases de dados disponibilizadas pelo Ministério do Trabalho e Emprego (MTE), Ministério do Desenvolvimento, Indústria e Comércio Exterior (MDIC) e Ministério da Educação (MEC).</p>
+                <p>Um dos pilares de concepção do DataViva é a tecnologia do BigData, técnica de geração de conhecimento e inteligência a partir do processamento de um grande volume de dados. Baseado em referências internacionais, o projeto disponibiliza, na versão atual, dados nacionais dos últimos dez anos, referentes à economia, educação, indústria, mercado profissional, entre outras categorias, visualizadas por localidade. Ao proporcionar o acesso livre e gratuito a essas informações, o DataViva disponibiliza um conhecimento mais detalhado da economia brasileira, gerando insumos para o planejamento e a tomada de decisão por parte de empresários, estudantes, investidores e profissionais de qualquer setor econômico e a partir de qualquer lugar do mundo.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "include/partners.html" %}
+{% endblock content %}

@@ -1,0 +1,75 @@
+{% extends "scholar/_base.html" %}
+
+{% block scholar_content %}
+<div class="institucional search">
+    <h2>Estudos sobre o DataViva</h2>
+    <h3>Bem vindo a área de estudos do DataViva.</h3>
+    <p>Aqui você encontra publicações acadêmicas e estudos que envolvem o DataViva</p>
+    <div class="tit-stripe green">
+        Publicações mais recentes
+    </div>
+    <form action="" class="form-dataviva form-inline filter">
+        <div class="form-group">
+            <i class="fa fa-search"></i>
+            <input id="field-search" type="text" class="busca form-control" placeholder="Busque por título" />
+        </div>
+        <div class="form-group">
+            <strong class="pre-tit">Mostrar</strong>
+            <div class="checkbox-inline">
+                <label>
+                    <input type="checkbox" value="1">
+                    Vídeos
+                </label>
+            </div>
+            <div class="checkbox-inline">
+                <label>
+                    <input type="checkbox" value="2">
+                    Artigos
+                </label>
+            </div>
+            <div class="checkbox-inline">
+                <label>
+                    <input type="checkbox" value="3">
+                    Imagens
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-default btn-dataviva">Buscar</button>
+        </div>
+    </form>
+    <div class="articles">
+        {% for id, article in articles.iteritems() %}
+        <div class="item">
+            <h4>
+                <a href="{{url_for('scholar.show', id=id)}}" title="{{ article.title }}">{{ article.title }}</a>
+            </h4>
+            <p>
+                Autor(es): {{ article.author }}<br />
+                Palavras-Chave: {{ article.key_words }}<br />
+                Data de Publicação: {{ article.postage_date }}
+            </p>
+        </div>
+        {% endfor %}
+        <nav>
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock scholar_content %}
