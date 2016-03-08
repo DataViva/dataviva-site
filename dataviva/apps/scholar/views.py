@@ -5,6 +5,7 @@ from dataviva.apps.general.views import get_locale
 from forms import RegistrationForm
 from mock import Article, articles, ids
 import time
+from datetime import datetime
 
 
 mod = Blueprint('scholar', __name__,
@@ -69,6 +70,37 @@ def create():
 
         ids.append(id)
         articles.update({id: Article(title, theme, author, key_words, abstract, postage_date)})
+
+        #####
+
+        from models import Article as ArticleModel
+        from models import Theme as ThemeModel
+        from models import Author as AuthorModel
+        from models import KeyWord as KeyWordModel
+        from dataviva import db
+
+        title = form.title.data
+        theme = form.theme.data
+        author = form.author.data
+        first_name = 'A'
+        last_name = 'B'
+        key_word = form.key_words.data
+        abstract = form.abstract.data
+        file_path = 'test'
+        postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        article = ArticleModel(title, abstract, file_path, postage_date)
+        article_theme = ThemeModel(theme, id)
+        article_author = AuthorModel(first_name, last_name)
+        article_key_word = KeyWordModel(key_word)
+
+        db.session.add(article)
+        db.session.add(article_theme)
+        db.session.add(article_author)
+        db.session.add(article_key_word)
+        db.session.commit()
+
+        #####
 
         message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
                   Em até 15 dias você receberá um retorno sobre sua publicação no site!'
