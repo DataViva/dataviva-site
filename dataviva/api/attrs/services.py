@@ -146,12 +146,15 @@ class LocationPopRankings(Location):
 
     def __init__(self, bra_id):
         Location.__init__(self, bra_id)
+        self.max_year_query = db.session.query(
+            func.max(Yb.year)).filter(Yb.bra_id == bra_id)
         self.attrs_query = Yb.query.filter(
-            Ybs.year == self.max_year_query,
-            func.length(Ybs.bra_id) == len(self.bra_id))
+            Yb.year == self.max_year_query,
+            func.length(Yb.bra_id) == len(self.bra_id))
 
     def pop_rank(self):
-        pop = self.attrs_query.all()
+        pop = self.__attrs_list__()
+        pop.sort(key=lambda pop: pop.population, reverse=True)
         pop_position = 1
         for r in pop:
             if r.bra_id == self.bra_id:
