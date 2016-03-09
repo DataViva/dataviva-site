@@ -29,9 +29,8 @@ class Author(db.Model):
     name = db.Column(db.String(50))
     article_id = db.Column(db.Integer, ForeignKey('scholar_article.id'))
 
-    def __init__(self, name=None, article_id=None):
+    def __init__(self, name=None):
         self.name = name
-        self.article_id = article_id
 
     def __repr__(self):
         return '<Author %r>' % (self.name)
