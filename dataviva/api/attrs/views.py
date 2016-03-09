@@ -468,9 +468,9 @@ def occupation():
     )
 
 
-@mod.route('/trading_partner/')
-@view_cache.cached(key_prefix=api_cache_key("attrs_trading_partner"))
-def trading_partner():
+@mod.route('/trade_partner/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_trade_partner"))
+def trade_partner():
 
     depth = request.args.get('depth', None)
     if not depth:

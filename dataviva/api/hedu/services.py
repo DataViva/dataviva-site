@@ -260,12 +260,20 @@ class LocationUniversity:
         return self._hedu_sorted_by_enrolled
         
     def highest_enrolled_by_university(self):
-        hedu = self.__hedu_sorted_by_enrolled__()[0]
-        return hedu.enrolled
+        hedu_list = self.__hedu_sorted_by_enrolled__()
+        if len(hedu_list) != 0:
+            hedu = hedu_list[0]
+            return hedu.enrolled
+        else:
+            return None
 
     def highest_enrolled_by_university_name(self):
-        hedu = self.__hedu_sorted_by_enrolled__()[0]
-        return hedu.university.name()
+        hedu_list = self.__hedu_sorted_by_enrolled__()
+        if len(hedu_list) != 0:
+            hedu = hedu_list[0]
+            return hedu.university.name()
+        else:
+            return None
 
 class LocationMajor(LocationUniversity):
     def __init__(self, bra_id):

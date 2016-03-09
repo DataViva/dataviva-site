@@ -56,7 +56,7 @@ def edit(id):
 @mod.route('/article/new', methods=['POST'])
 def create():
     form = RegistrationForm()
-    if not form.validate():
+    if form.validate() is False:
         return render_template('scholar/new.html', form=form)
     else:
         title = form.title.data
@@ -80,7 +80,7 @@ def create():
 def update(id):
     form = RegistrationForm()
     id = int(id.encode())
-    if not form.validate():
+    if form.validate() is False:
         return render_template('scholar/edit.html', form=form)
     else:
         title = form.title.data

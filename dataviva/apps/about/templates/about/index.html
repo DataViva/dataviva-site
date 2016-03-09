@@ -3,14 +3,14 @@
 
 {% block content %}
 
-<div class="about container">
+<div class="container about">
     <ol class="breadcrumb">
         <li><a href="{{ url_for('general.home') }}">Home</a></li>
         <li class="active"><span>Sobre</span></li>
     </ol>
     <div class="row">
         <div class="sidebar no-padding col-xs-15 col-md-4">
-            <h3 class="text-justify">DataViva é uma plataforma aberta de pesquisa, que permite ao usuário acessar mais de 1 bilhão de visualizações com dados socioeconômicos dos mais de 5 mil municípios brasileiros.</h3>
+            <h3>DataViva é uma plataforma aberta de pesquisa, que permite ao usuário acessar mais de 1 bilhão de visualizações com dados socioeconômicos dos mais de 5 mil municípios brasileiros.</h3>
         </div>
         <div class="main-content col-xs-15 col-md-11">
             <div class="institucional">
@@ -28,5 +28,5 @@
         </div>
     </div>
 </div>
-{% include "include/partners.html" %}
+{% include "include/promoters.html" %}
 {% endblock content %}
