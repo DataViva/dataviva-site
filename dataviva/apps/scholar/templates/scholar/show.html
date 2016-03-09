@@ -6,8 +6,8 @@
     <div class="meta">
         <p>
             Título: {{ article.title }}<br />
-            Autor(es): {{ article.author }}<br />
-            Palavras-Chave: {{ article.key_words }}<br />
+            Autor(es): {% for author in article.authors %} {{ author.name }} {% endfor %}<br />
+            Palavras-Chave: {% for key_word in article.key_words %} {{ key_word.name }} {% endfor %}<br />
             Data de Publicação: {{ article.postage_date }}
         </p>
     </div>
@@ -18,6 +18,6 @@
     <p><a class="btn btn-default btn-lg btn-dataviva blue">Baixar arquivo (PDF)</a></p>
 </div>
 
-<a class="btn btn-default btn-dataviva pull-right" href="/scholar/article/{{ id }}/delete">Deletar</a>
-<a class="btn btn-default btn-dataviva pull-right" href="/scholar/article/{{ id }}/edit">Editar</a>
+<a class="btn btn-default btn-dataviva pull-right" href="/scholar/article/{{ article.id }}/delete">Deletar</a>
+<a class="btn btn-default btn-dataviva pull-right" href="/scholar/article/{{ article.id }}/edit">Editar</a>
 {% endblock scholar_content %}
