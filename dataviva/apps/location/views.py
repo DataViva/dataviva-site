@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.services import Location as LocationService, LocationGdpRankings, \
-    LocationGdpPerCapitaRankings, LocationPopRankings, LocationAreaRankings
+    LocationGdpPerCapitaRankings, LocationPopRankings, LocationAreaRankings, LocationMunicipalityRankings
 from dataviva.api.secex.models import Ymb
 from dataviva.api.secex.services import Location as LocationBodyService, LocationWld, LocationEciRankings
 from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
@@ -38,6 +38,7 @@ def index(bra_id):
     location_pop_rankings_service = LocationPopRankings(bra_id=bra_id)
     location_eci_rankings_service = LocationEciRankings(bra_id=bra_id)
     location_area_rankings_service = LocationAreaRankings(bra_id=bra_id)
+    location_municipality_rankings_service = LocationMunicipalityRankings(bra_id=bra_id)
     location_wld_service = LocationWld(bra_id=bra_id)
     location_body_service = LocationBodyService(bra_id=bra_id)
     location_industry_service = LocationIndustry(bra_id=bra_id)
@@ -149,7 +150,9 @@ def index(bra_id):
             'region_name': location_service.location_name(1),
             'number_of_municipalities': location_service.number_of_locations(9),
             'pop_rank': location_pop_rankings_service.pop_rank(),
-            'area_rank': location_area_rankings_service.area_rank()
+            'area_rank': location_area_rankings_service.area_rank(),
+            'neighbors': location_service.neighbors(),
+            'municipality_rank': location_municipality_rankings_service.municipality_rank()
         }
 
     return render_template('location/index.html',

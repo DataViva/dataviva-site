@@ -120,6 +120,18 @@ class Location:
             states.append(b.name())
         return states
 
+    def neighbors(self):
+        bs_query = Bs.query.filter(Bs.bra_id == self.bra_id,
+                                   Bs.stat_id == 'neighbors')
+        bs = bs_query.one()
+        neighbors_cod = bs.stat_val.split(',')
+        neighbors_name = []
+        for neighbor in neighbors_cod:
+            bra_query = Bra.query.filter(Bra.id == neighbor)
+            bra = bra_query.one()
+            neighbors_name.append(bra.name())
+        return neighbors_name
+
 
 class LocationGdpRankings(Location):
 
@@ -170,6 +182,7 @@ class LocationPopRankings(Location):
                 return pop_position
             pop_position += 1
 
+
 class LocationAreaRankings(Location):
 
     def __init__(self, bra_id):
@@ -181,3 +194,23 @@ class LocationAreaRankings(Location):
     def area_rank(self):
         area_position = self.ranking()
         return area_position
+
+
+class LocationMunicipalityRankings(Location):
+
+    def __init__(self, bra_id):
+        Location.__init__(self, bra_id)
+        self.attrs_query = db.session.query(func.count(Bra.id).label('count'),
+                                            func.left(Bra.id, 3).label('state'))\
+            .filter(func.length(Bra.id) == 9).group_by(func.left(Bra.id, 3))
+
+    def municipality_rank(self):
+        mun = self.__attrs_list__()
+        mun.sort(key=lambda mun: mun.count, reverse=True)
+        mun_position = 1
+        for r in mun:
+            if r.state == self.bra_id:
+                if r.state == '3df':
+                    return mun_position-1
+                return mun_position
+            mun_position += 1
