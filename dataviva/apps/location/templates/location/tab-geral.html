@@ -38,12 +38,14 @@
                     </div>
                 </div>
                 {% endif %}
+                {% if header.eci %}
                 <div class="col-xs-15 col-sm-2 item">
                     <p class="label">ECI</p>
                     <div class="number">
                         <strong class="counter">{{ header.eci|max_digits(3) }}</strong><small>{{ header.eci|magnitude }}</small>
                     </div>
                 </div>
+                {% endif %}
                 <div class="col-xs-15 col-sm-15 year">
                     Ano: 2010
                 </div>
@@ -241,6 +243,7 @@
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
                         <tbody>
+                            {% if body.highest_enrolled_by_university is not None %}
                             <tr>
                                 <th>
                                     Universidade com Maior Número de Matrículas
@@ -250,6 +253,7 @@
                                     <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_university | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% endif %}
                             <tr>
                                 <th>
                                     Curso Superior com Maior Número de Matrículas

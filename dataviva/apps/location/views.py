@@ -53,7 +53,7 @@ def index(bra_id):
 
     ''' Query básica para SECEX'''
     eci = Ymb.query.filter_by(bra_id=bra_id, month=0) \
-        .order_by(desc(Ymb.year)).limit(1).first().eci
+        .order_by(desc(Ymb.year)).limit(1).first()
 
     if len(bra_id) != 9 and len(bra_id) != 3:
         header = {
@@ -62,7 +62,6 @@ def index(bra_id):
             'gdp': location_service.gdp(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp()/location_service.population(),
-            'eci': eci,
         }
     else:
         header = {
@@ -73,8 +72,10 @@ def index(bra_id):
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
-            'eci': eci,
         }
+
+    if eci is not None:
+        header['eci'] = eci.eci
 
     body = {
         'main_product_by_export_value': location_body_service.main_product_by_export_value(),
