@@ -25,6 +25,8 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
+    from models import Article
+    articles = Article.query.all()
     return render_template('scholar/index.html', articles=articles)
 
 
@@ -60,47 +62,30 @@ def create():
     if not form.validate():
         return render_template('scholar/new.html', form=form)
     else:
-        title = form.title.data
-        theme = form.theme.data
-        author = form.author.data
-        key_words = form.key_words.data
-        abstract = form.abstract.data
-        postage_date = time.strftime("%d/%m/%Y")
-        id = ids[-1] + 1
-
-        ids.append(id)
-        articles.update({id: Article(title, theme, author, key_words, abstract, postage_date)})
-
-        #####
-
-        from models import Article as ArticleModel
-        from models import Theme as ThemeModel
-        from models import Author as AuthorModel
-        from models import KeyWord as KeyWordModel
+        from models import Article, Author, KeyWord
         from dataviva import db
 
-        title = form.title.data
-        theme = form.theme.data
-        author = form.author.data
-        first_name = 'A'
-        last_name = 'B'
-        key_word = form.key_words.data
-        abstract = form.abstract.data
-        file_path = 'test'
-        postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        article = Article()
+        article.title = form.title.data
+        article.theme = form.theme.data
+        article.abstract = form.abstract.data
+        article.file_path = 'test'
+        article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        article = ArticleModel(title, abstract, file_path, postage_date)
-        article_theme = ThemeModel(theme, id)
-        article_author = AuthorModel(first_name, last_name)
-        article_key_word = KeyWordModel(key_word)
+        author = form.author.data
+        author = [Author(author)]
+
+        key_word_input_list = form.key_words.data
+        for key_word_input in key_word_input_list:
+            key_word = KeyWord.query.filter_by(key_word=key_word_input).first()
+
+            if not key_word:
+                article.key_words.append(KeyWord(key_word_input))
+            else:
+                article.key_words.append(key_word)
 
         db.session.add(article)
-        db.session.add(article_theme)
-        db.session.add(article_author)
-        db.session.add(article_key_word)
         db.session.commit()
-
-        #####
 
         message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
                   Em até 15 dias você receberá um retorno sobre sua publicação no site!'
