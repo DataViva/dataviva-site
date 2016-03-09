@@ -19,14 +19,8 @@ CREATE TABLE scholar_author(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     first_name varchar (50) NULL,
     last_name varchar (50) NULL,
-    PRIMARY KEY (id)
-);
-​
-CREATE TABLE scholar_article_author(
-    article_id int UNSIGNED NOT NULL,
-    author_id int UNSIGNED NOT NULL,
-    FOREIGN KEY (article_id) REFERENCES scholar_article(id),
-    FOREIGN KEY (author_id) REFERENCES scholar_author(id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (article_id) REFERENCES scholar_article(id)
 );
 ​
 CREATE TABLE scholar_key_word(
