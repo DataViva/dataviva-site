@@ -70,17 +70,35 @@
         </div>
     </div>
 
-    <a href="url" target="frame">Balança Comercial</a></br>
+<a href="http://localhost:5000/en/embed/line/secex/4mg/{{header.product_id}}/all/balance/" 
+        target="frame">Balança Comercial</a></br>
+
 <a href="url" target="frame">Exportações por</a> </br>
-    <a href="url" target="frame">&nbsp Municipio</a> </br>
-    <a href="url" target="frame">&nbsp Destino</a> </br>
+    <a href="url" target="frame">&nbsp Municipio :</a> 
+
+        <a href="http://localhost:5000/en/embed/tree_map/secex/all/{{header.product_id}}/all/bra/?" target="frame">&nbsp TreeMap</a> 
+        
+        <a href="http://localhost:5000/en/embed/geo_map/secex/all/{{header.product_id}}/all/bra/?" 
+        target="frame">&nbsp Mapa</a>  
+        
+        <a href="http://localhost:5000/en/embed/stacked/secex/all/041701/all/bra/?" target="frame">&nbsp Evoluçāo</a> </br>
+    
+    <a href="url" target="frame">&nbsp Destino : </a> 
+        <a href="url" target="frame">&nbsp TreeMap</a> 
+        <a href="url" target="frame">&nbsp Linha</a> 
+        <a href="url" target="frame">&nbsp Evoluçāo</a> </br>
+
 <a href="url" target="frame">Importações por</a> </br>
-    <a href="url" target="frame">&nbsp Municipio</a> </br>
-    <a href="url" target="frame">&nbsp Origem</a> </br>
-
-
-
-
+    <a href="url" target="frame">&nbsp Municipio : </a> 
+        <a href="url" target="frame">&nbsp TreeMap</a> 
+        <a href="url" target="frame">&nbsp Mapa</a>  
+        <a href="url" target="frame">&nbsp Evoluçāo</a> </br>
+    <a href="url" target="frame">&nbsp Origem : </a> 
+        <a href="url" target="frame">&nbsp TreeMap</a> 
+        <a href="url" target="frame">&nbsp Linha</a> 
+        <a href="url" target="frame">&nbsp Evoluçāo</a> </br>
 </div>
 
-<iframe id="frame" width='684' height='350' src='http://localhost:5000/en/embed/line/secex/4mg/{{header.product_id}}/all/balance/?' frameborder='0'></iframe>
+
+<iframe name="frame" id="frame" width='684' height='350' src='http://localhost:5000/en/embed/line/secex/4mg/{{header.product_id}}/all/balance/?' frameborder='0'></iframe>
+
