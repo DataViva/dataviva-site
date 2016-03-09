@@ -66,7 +66,7 @@
         {% else %}
         <p>{{ header.name }} é uma das {{ profile.number_of_states-1 }} unidades federativas do Brasil, localizada na {{ profile.region_name }} do país, sendo o {{ profile.area_rank }}º estado com a maior área territorial e o {{ profile.pop_rank }}º em quantidade de habitantes. Limita-se a {% for neighbors in profile.neighbors %}{% if neighbors == profile.neighbors[profile.neighbors|length-1] %}e {{ neighbors }}{% else %}{{ neighbors }}, {% endif %}{% endfor %}. Seu território é subdividido em {{ profile.number_of_municipalities }} municípios, o {{ profile.municipality_rank }}º dentre os estados brasileiros.</p>
         {% endif %}
-        
+
 
 
         <div class="row">
@@ -243,7 +243,7 @@
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
                         <tbody>
-                            {% if body.highest_enrolled_by_university is not None %}
+                            {% if body.highest_enrolled_by_university %}
                             <tr>
                                 <th>
                                     Universidade com Maior Número de Matrículas
