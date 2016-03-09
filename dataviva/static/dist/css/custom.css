@@ -1246,6 +1246,10 @@ table.data-2-columns > tbody th {
   width: 100%;
   height: 100%;
 }
+.about > .row > .sidebar h3 {
+  text-align: center;
+}
+
 /*RESPONSIVE ADJUSTS*/
 @media (min-width: 768px) {
   select {
