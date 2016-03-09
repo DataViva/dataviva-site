@@ -731,7 +731,7 @@ footer.main .sub-menu > li:not(:last-child) {
 .modal.dataviva .modal-body .search-items .sublinks .list-group-item:nth-child(odd):hover{background-color: #5a9dc4!important;}
 
 .modal.dataviva .modal-body .search-items .list-group-item:nth-child(odd):hover{
-  background-color: rgba(225, 238, 230, 0.5);
+  background-color: #337ab7;
 }
 .modal.dataviva .modal-body .search-items .list-group-item:hover {
   background-color: #337ab7;
