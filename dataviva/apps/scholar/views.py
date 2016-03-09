@@ -47,7 +47,7 @@ def edit(id):
     article = Article.query.filter_by(id=id).first()
     form.title.data = article.title
     form.theme.data = article.theme
-    form.author.data = article.author
+    form.authors.data = article.authors
     form.key_words.data = article.key_words
     form.abstract.data = article.abstract
     return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id))
@@ -66,9 +66,9 @@ def create():
         article.file_path = 'test'
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        author_input_list = form.author.data.split(',')
+        author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
-            article.author.append(Author(author_input))
+            article.authors.append(Author(author_input))
 
         key_word_input_list = form.key_words.data.split(',')
         for key_word_input in key_word_input_list:
@@ -100,6 +100,10 @@ def update(id):
         article.abstract = form.abstract.data
         article.file_path = 'test'
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        author_input_list = form.authors.data.split(',')
+        for author_input in author_input_list:
+            article.authors.append(Author(author_input))
 
         key_word_input_list = form.key_words.data.split(',')
         for key_word_input in key_word_input_list:
