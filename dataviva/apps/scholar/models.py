@@ -16,7 +16,7 @@ class Article(db.Model):
     theme = db.Column(db.String(250))
     file_path = db.Column(db.String(255))
     postage_date = db.Column(db.DateTime)
-    author = db.relationship('Author', backref='scholar_article', lazy='dynamic')
+    authors = db.relationship('Author', backref='scholar_article', lazy='eager')
     key_words = db.relationship('KeyWord', secondary=article_key_word_table)
 
     def __repr__(self):
