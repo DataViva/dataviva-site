@@ -485,6 +485,9 @@ footer.main .sub-menu > li:not(:last-child) {
   background: #f2f6f4;
   padding: 3.5rem 0 5rem;
 }
+.mod-explore p {
+  text-align: center;
+}
 .mod-explore h2 {
   font-size: 30px;
   margin-top: 0;
@@ -505,12 +508,13 @@ footer.main .sub-menu > li:not(:last-child) {
 .mod-explore .item span {
   display: inline-block;
   font-size: 16px;
-  height: 35px;
+  height: 10px;
   line-height: 18px;
   margin: 0 -10px 10px;
 }
 .mod-explore .item a p{
   text-align: center;
+  margin-bottom: 25px;
 }
 .mod-explore .item .popover {
   font-size: 12px;
