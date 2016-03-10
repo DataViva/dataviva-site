@@ -6,6 +6,7 @@ from models import Post, AuthorBlog
 from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
+from random import randrange
 
 mod = Blueprint('blog', __name__,
                 template_folder='templates',
@@ -30,15 +31,12 @@ def index():
 
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
-    post = Post.query.filter_by(id=id).first()
-
-    read_more_posts = {}
-    #loop if has less then 3 articles
-#    while len(read_more_posts) < 3:
-#        post_id = random.choice(posts.keys())
-#        if read_more_posts.has_key(post_id) is False and post_id != id:
-#            read_more_posts.update({post_id: posts[post_id]})
-
+    post = Post.query.filter_by(id=id).first_or_404()
+    posts = Post.query.filter(Post.id != id).all()
+    if len(posts) > 3:
+        read_more_posts = [posts.pop(randrange(len(posts))) for _ in range(3)]
+    else:
+        read_more_posts = posts
     return render_template('blog/show.html', post=post, id=id, read_more_posts=read_more_posts)
 
 
@@ -51,7 +49,7 @@ def new():
 @mod.route('/post/<id>/edit', methods=['GET'])
 def edit(id):
     form = RegistrationForm()
-    post = Post.query.filter_by(id=id).first()
+    post = Post.query.filter_by(id=id).first_or_404()
     form.title.data = post.title
     form.authors.data = post.authors_str()
     form.subject.data = post.subject
@@ -94,7 +92,7 @@ def update(id):
     if form.validate() is False:
         return render_template('blog/edit.html', form=form)
     else:
-        post = Post.query.filter_by(id=id).first()
+        post = Post.query.filter_by(id=id).first_or_404()
         post.title = form.title.data
         post.subject = form.subject.data
         post.text_content = form.text_content.data
@@ -116,7 +114,7 @@ def update(id):
 
 @mod.route('/post/<id>/delete', methods=['GET'])
 def delete(id):
-    post = Post.query.filter_by(id=id).first()
+    post = Post.query.filter_by(id=id).first_or_404()
     if post:
         db.session.delete(post)
         db.session.commit()
