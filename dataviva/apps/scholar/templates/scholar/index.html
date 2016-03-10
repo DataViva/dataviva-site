@@ -39,15 +39,15 @@
         </div>
     </form>
     <div class="articles">
-        {% for id, article in articles.iteritems() %}
+        {% for article in articles %}
         <div class="item">
             <h4>
-                <a href="{{url_for('scholar.show', id=id)}}" title="{{ article.title }}">{{ article.title }}</a>
+                <a href="{{url_for('scholar.show', id=article.id)}}" title="{{ article.title }}">{{ article.title }}</a>
             </h4>
             <p>
-                Autor(es): {{ article.author }}<br />
-                Palavras-Chave: {{ article.key_words }}<br />
-                Data de Publicação: {{ article.postage_date }}
+                Autor(es): {{ article.authors_str() }}<br />
+                Palavras-Chave: {{ article.keywords_str() }}<br />
+                Data de Publicação: {{ article.date_str() }}
             </p>
         </div>
         {% endfor %}

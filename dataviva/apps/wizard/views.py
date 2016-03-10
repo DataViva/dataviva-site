@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, g, jsonify, request, render_template, redirect
+from flask import Blueprint, g, jsonify, request, render_template
 from dataviva.apps.wizard.sessions import SESSIONS
 from dataviva.apps.general.views import get_locale
 
@@ -22,6 +22,7 @@ def session(session_name):
 
     return jsonify({
         "session_name": session_name,
+        "session_title": session_obj.session_title,
         "title": session_obj.title,
         "questions": map(lambda x: x.serialize, session_obj.questions),
     })
@@ -96,6 +97,6 @@ def occupation_selector():
     return render_template("selectors/occupation.html")
 
 
-@mod.route('/trading_partner_selector/', methods=['GET'])
-def trading_partner_selector():
-    return render_template("selectors/trading_partner.html")
+@mod.route('/trade_partner_selector/', methods=['GET'])
+def trade_partner_selector():
+    return render_template("selectors/trade_partner.html")
