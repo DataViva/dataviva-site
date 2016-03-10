@@ -6,9 +6,9 @@
     <div class="meta">
         <p>
             Título: {{ article.title }}<br />
-            Autor(es): {% for author in article.authors %} {{ author.name }} {% endfor %}<br />
-            Palavras-Chave: {% for key_word in article.key_words %} {{ key_word.name }} {% endfor %}<br />
-            Data de Publicação: {{ article.postage_date }}
+            Autor(es): {{ article.authors_str() }}<br />
+            Palavras-Chave: {{ article.keywords_str() }}<br />
+            Data de Publicação: {{ article.date_str() }}
         </p>
     </div>
     <p>
