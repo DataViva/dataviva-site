@@ -18,8 +18,7 @@ CREATE TABLE blog_category(
 
 CREATE TABLE blog_author(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
-    first_name varchar (50) NULL,
-    last_name varchar (50) NULL,
+    name varchar (50) NULL,
     PRIMARY KEY (id)
 );
 ​
