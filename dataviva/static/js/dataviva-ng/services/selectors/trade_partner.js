@@ -3,15 +3,15 @@
 
     var app = angular.module("dataviva.services.selectors");
 
-    app.service('TradingPartner',[
+    app.service('TradePartner',[
         '$http', function ($http) {
 
-            var TradingPartner = function(selection_callback) {
+            var TradePartner = function(selection_callback) {
                 var self = this;
 
                 self.title = "Parceiros Comerciais do Brasil";
 
-                self.templateUrl = "/en/wizard/trading_partner_selector/";
+                self.templateUrl = "/en/wizard/trade_partner_selector/";
                 self.selected_entry = null;
                 self.selection_callback = selection_callback;
 
@@ -24,10 +24,10 @@
                 } else {
                     self.selection_callback = function(hs_id, event) {
                         window.location = (
-                            window.location.protocol + 
-                            "//" + 
-                            window.location.host + 
-                            "/en/trading_partner/" + 
+                            window.location.protocol +
+                            "//" +
+                            window.location.host +
+                            "/en/trade_partner/" +
                             hs_id
                         );
                     }
@@ -51,7 +51,7 @@
 
                     $http({
                         method: "GET",
-                        url: "/attrs/trading_partner?depth=" + group.depth_factor,
+                        url: "/attrs/trade_partner?depth=" + group.depth_factor,
                     })
                     .then(function(resp){
                         group.entries = resp.data;
@@ -71,6 +71,6 @@
                 self.load_depth_entries(self.continents);
             };
 
-            return TradingPartner;
+            return TradePartner;
     }]);
 }());

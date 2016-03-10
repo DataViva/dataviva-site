@@ -130,20 +130,20 @@ entrepreneur_questions = [
 
 entrepreneur_session = Session(
     session_title="Empreendedores",
-    title="What kind of analysis you want to make?",
+    title="Identifique o perfil econômico e as oportunidades de negócios de uma região",
     questions=entrepreneur_questions
 )
 
 
 development_agents_session = Session(
     session_title="Agentes de Desenvolvimento",
-    title="What kind of analysis you want to make?",
+    title="Avalie a criação de políticas de desenvolvimento de acordo com a localidade",
     questions=development_agents_questions
 )
 
 student_session = Session(
     session_title="Estudantes e Profissionais",
-    title="What kind of analysis you want to make?",
+    title="Descubra informações sobre empregos disponíveis, renda por ocupação e cursos",
     questions=student_questions
 )
 

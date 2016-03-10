@@ -97,6 +97,6 @@ def occupation_selector():
     return render_template("selectors/occupation.html")
 
 
-@mod.route('/trading_partner_selector/', methods=['GET'])
-def trading_partner_selector():
-    return render_template("selectors/trading_partner.html")
+@mod.route('/trade_partner_selector/', methods=['GET'])
+def trade_partner_selector():
+    return render_template("selectors/trade_partner.html")
