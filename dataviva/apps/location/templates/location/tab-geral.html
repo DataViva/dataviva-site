@@ -75,6 +75,7 @@
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
                         <tbody>
+                            {% if body.main_product_by_export_value %}
                             <tr>
                                 <th>
                                     Principal Produto por Valor Exportado
@@ -84,6 +85,8 @@
                                     USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_export_value | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% endif %}
+                            {% if body.main_product_by_import_value %}
                             <tr>
                                 <th>
                                     Principal Produto por Valor Importado
@@ -93,6 +96,7 @@
                                     USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_import_value | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% endif %}
                             <tr>
                                 <th>
                                     Total de Exportações
@@ -109,6 +113,7 @@
                                     USD <strong class="counter">{{ body.total_imports | max_digits(3) }}</strong> <span>{{ body.total_imports | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% if body.main_destination_by_export_value %}
                             <tr>
                                 <th>
                                     Principal Destino por Valor Exportado
@@ -118,6 +123,8 @@
                                     USD <strong class="counter">{{ body.main_destination_by_export_value | max_digits(3) }}</strong> <span>{{ body.main_destination_by_export_value | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% endif %}
+                            {% if body.main_destination_by_import_value %}
                             <tr>
                                 <th>
                                     Principal Destino por Valor Importado
@@ -127,6 +134,7 @@
                                     USD <strong class="counter">{{ body.main_destination_by_import_value | max_digits(3) }}</strong> <span>{{ body.main_destination_by_import_value | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                     <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
@@ -195,6 +203,7 @@
                     <table class="table data-2-columns margin-none-bottom">
                         <tbody>
                             <tr>
+                            {% if body.less_distance_by_product %}
                                 <th>
                                     Produto com Menor Distância
                                 </th>
@@ -203,6 +212,8 @@
                                     <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong> <span>{{ body.less_distance_by_product | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% endif %}
+                            {% if body.less_distance_by_occupation %}
                             <tr>
                                 <th>
                                     Atividade Econômica com Menor Distância
@@ -212,6 +223,8 @@
                                     <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong> <span>{{ body.less_distance_by_occupation | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% endif %}
+                            {% if body.opportunity_gain_by_product %}
                             <tr>
                                 <th>
                                     Produto com Maior Ganho de Oportunidade
@@ -221,6 +234,8 @@
                                     <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3) }}</strong> <span>{{ body.opportunity_gain_by_product | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% endif %}
+                            {% if body.opportunity_gain_by_occupation %}
                             <tr>
                                 <th>
                                     Atividade Econômica com Maior Ganho de Oportunidade
@@ -230,6 +245,7 @@
                                     <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3) }}</strong> <span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                     <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
@@ -254,6 +270,7 @@
                                 </td>
                             </tr>
                             {% endif %}
+                            {% if body.highest_enrolled_by_major %}
                             <tr>
                                 <th>
                                     Curso Superior com Maior Número de Matrículas
@@ -263,6 +280,8 @@
                                     <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_major | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% endif %}
+                            {% if body.highest_enrolled_by_school %}
                             <tr>
                                 <th>
                                     Escola com Maior Número de Matrículas em Cursos Técnicos
@@ -272,6 +291,8 @@
                                     <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_school | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% endif %}
+                            {% if body.highest_enrolled_by_basic_course %}
                             <tr>
                                 <th>
                                     Curso Técnico com Maior Número de Matrículas
@@ -281,6 +302,7 @@
                                     <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
                                 </td>
                             </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                     <a href="#educacao" aria-controls="educacao" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
