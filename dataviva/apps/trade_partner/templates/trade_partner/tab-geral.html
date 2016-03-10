@@ -69,7 +69,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{body.product_with_more_exports}}</p>
-                                    USD<strong class="counter">{{body.highest_export_value | max_digits(3) }}</strong> <span>{{body.highest_export_value | magnitude }}</span>
+                                    USD<strong class="counter">{{body.product_with_highest_export_value | max_digits(3) }}</strong> <span>{{body.product_with_highest_export_value | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -78,7 +78,7 @@
                                 </th>
                                 <td>
                                     <p class="label">{{body.product_with_more_imports}}</p>
-                                    USD<strong class="counter">{{body.highest_import_value | max_digits(3) }}</strong> <span>{{body.highest_import_value | magnitude }}</span>
+                                    USD<strong class="counter">{{body.product_with_highest_import_value | max_digits(3) }}</strong> <span>{{body.product_with_highest_import_value | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
