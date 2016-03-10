@@ -25,30 +25,38 @@
                     </thead>
                     <tbody>
                         <tr>
+                            {% if body.less_distance_by_product %}
                             <td>
                                 <p class="label">{{ body.less_distance_by_product_name }}</p>
                                 <div class="number">
                                     USD <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong><span>{{ body.less_distance_by_product | magnitude }}</span>
                                 </div>
                             </td>
+                            {% endif %}
+                            {% if body.less_distance_by_occupation %}
                             <td>
                                 <p class="label">{{ body.less_distance_by_occupation_name }}</p>
                                 <div class="number">
                                     USD <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong><span>{{ body.less_distance_by_occupation | magnitude }}</span>
                                 </div>
                             </td>
+                            {% endif %}
+                            {% if body.opportunity_gain_by_product %}
                             <td>
                                 <p class="label">{{ body.opportunity_gain_by_product_name }}</p>
                                 <div class="number">
                                     USD <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3) }}</strong><span>{{ body.opportunity_gain_by_product | magnitude }}</span>
                                 </div>
                             </td>
+                            {% endif %}
+                            {% if body.opportunity_gain_by_occupation %}
                             <td>
                                 <p class="label">{{ body.opportunity_gain_by_occupation_name }}</p>
                                 <div class="number">
                                     USD <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3) }}</strong><span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
                                 </div>
                             </td>
+                            {% endif %}
                         </tr>
                     </tbody>
                 </table>
