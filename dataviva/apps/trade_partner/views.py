@@ -60,9 +60,9 @@ def index(wld_id):
         'highest_import_value': municipalities_service.highest_import_value(),
 
         'product_with_more_imports': products_service.product_with_more_imports(),
-        'highest_import_value': products_service.highest_import_value(),
+        'product_with_highest_import_value': products_service.highest_import_value(),
         'product_with_more_exports': products_service.product_with_more_exports(),
-        'highest_export_value': products_service.highest_export_value(),
+        'product_with_highest_export_value': products_service.highest_export_value(),
         'product_with_highest_balance': products_service.product_with_highest_balance(),
         'highest_balance': products_service.highest_balance(),
         'product_with_lowest_balance': products_service.product_with_lowest_balance(),
