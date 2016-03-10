@@ -48,7 +48,7 @@ def edit(id):
     form.title.data = article.title
     form.theme.data = article.theme
     form.authors.data = article.authors
-    form.key_words.data = article.key_words
+    form.keywords.data = article.keywords
     form.abstract.data = article.abstract
     return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id))
 
@@ -70,14 +70,14 @@ def create():
         for author_input in author_input_list:
             article.authors.append(Author(author_input))
 
-        key_word_input_list = form.key_words.data.split(',')
-        for key_word_input in key_word_input_list:
-            key_word = KeyWord.query.filter_by(name=key_word_input).first()
+        keyword_input_list = form.keywords.data.split(',')
+        for keyword_input in keyword_input_list:
+            keyword = KeyWord.query.filter_by(name=keyword_input).first()
 
-            if not key_word:
-                article.key_words.append(KeyWord(key_word_input))
+            if not keyword:
+                article.keywords.append(KeyWord(keyword_input))
             else:
-                article.key_words.append(key_word)
+                article.keywords.append(keyword)
 
         db.session.add(article)
         db.session.commit()
@@ -105,14 +105,14 @@ def update(id):
         for author_input in author_input_list:
             article.authors.append(Author(author_input))
 
-        key_word_input_list = form.key_words.data.split(',')
-        for key_word_input in key_word_input_list:
-            key_word = KeyWord.query.filter_by(name=key_word_input).first()
+        keyword_input_list = form.keywords.data.split(',')
+        for keyword_input in keyword_input_list:
+            keyword = KeyWord.query.filter_by(name=keyword_input).first()
 
-            if not key_word:
-                article.key_words.append(KeyWord(key_word_input))
+            if not keyword:
+                article.keywords.append(KeyWord(keyword_input))
             else:
-                article.key_words.append(key_word)
+                article.keywords.append(keyword)
 
         db.session.commit()
 
