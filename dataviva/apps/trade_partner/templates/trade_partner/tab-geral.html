@@ -38,7 +38,7 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>O país {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse país é o {{ body.product_with_more_exports }} e o total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
+        <p>O país {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse país é o {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e o total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Comércio Internacional</h3>
