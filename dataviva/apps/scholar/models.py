@@ -1,10 +1,10 @@
 from dataviva import db
 from sqlalchemy import ForeignKey
 
-article_key_word_table = db.Table(
-    'scholar_article_key_word',
+article_keyword_table = db.Table(
+    'scholar_article_keyword',
     db.Column('article_id', db.Integer(), db.ForeignKey('scholar_article.id')),
-    db.Column('key_word_id', db.Integer(), db.ForeignKey('scholar_key_word.id'))
+    db.Column('keyword_id', db.Integer(), db.ForeignKey('scholar_keyword.id'))
 )
 
 
@@ -17,7 +17,18 @@ class Article(db.Model):
     file_path = db.Column(db.String(255))
     postage_date = db.Column(db.DateTime)
     authors = db.relationship('Author', backref='scholar_article', lazy='eager')
-    key_words = db.relationship('KeyWord', secondary=article_key_word_table)
+    keywords = db.relationship('KeyWord', secondary=article_keyword_table)
+
+    def authors_str(self):
+        author_names = [author.name for author in self.authors]
+        return ', '.join(author_names)
+
+    def keywords_str(self):
+        keyword_names = [keyword.name for keyword in self.keywords]
+        return ', '.join(keyword_names)
+
+    def date_str(self):
+        return self.postage_date.strftime('%d/%m/%Y')
 
     def __repr__(self):
         return '<Article %r>' % (self.title)
@@ -37,7 +48,7 @@ class Author(db.Model):
 
 
 class KeyWord(db.Model):
-    __tablename__ = 'scholar_key_word'
+    __tablename__ = 'scholar_keyword'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
 
@@ -45,4 +56,4 @@ class KeyWord(db.Model):
         self.name = name
 
     def __repr__(self):
-        return '<Key-Word %r>' % (self.name)
+        return '<Keyword %r>' % (self.name)
