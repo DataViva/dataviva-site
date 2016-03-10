@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, url_for, flash
+from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash
 from dataviva.apps.general.views import get_locale
+
+from models import Post, AuthorBlog
+from dataviva import db
 from forms import RegistrationForm
-from mock import Post, posts, ids
-import random, time
+from datetime import datetime
 
 mod = Blueprint('blog', __name__,
                 template_folder='templates',
@@ -22,20 +24,20 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
+    posts = Post.query.all()
     return render_template('blog/index.html', posts=posts)
 
 
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
-    id = int(id.encode())
-    post = posts[id]
+    post = Post.query.filter_by(id=id).first()
 
     read_more_posts = {}
     #loop if has less then 3 articles
-    while len(read_more_posts) < 3:
-        post_id = random.choice(posts.keys())
-        if read_more_posts.has_key(post_id) is False and post_id != id:
-            read_more_posts.update({post_id: posts[post_id]})
+#    while len(read_more_posts) < 3:
+#        post_id = random.choice(posts.keys())
+#        if read_more_posts.has_key(post_id) is False and post_id != id:
+#            read_more_posts.update({post_id: posts[post_id]})
 
     return render_template('blog/show.html', post=post, id=id, read_more_posts=read_more_posts)
 
@@ -49,14 +51,13 @@ def new():
 @mod.route('/post/<id>/edit', methods=['GET'])
 def edit(id):
     form = RegistrationForm()
-    id = int(id.encode())
-    post = posts[id]
+    post = Post.query.filter_by(id=id).first()
     form.title.data = post.title
-    form.author.data = post.author
-    form.category.data = post.category
-    form.text.data = post.text
-    form.image.data = post.image
-    form.thumb.data = post.thumb
+    form.authors.data = post.authors_str()
+    form.subject.data = post.subject
+    form.text_content.data = post.text_content
+    form.image_path.data = post.image_path
+    form.thumb_path.data = post.thumb_path
     return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
 
 
@@ -66,21 +67,24 @@ def create():
     if form.validate() is False:
         return render_template('blog/new.html', form=form)
     else:
-        title = form.title.data
-        author = form.author.data
-        category = form.category.data
-        text = form.text.data
-        image = 'image'
-        thumb = 'thumb'
-        postage_date = time.strftime("%d/%m/%Y")
-        id = ids[-1] + 1
+        post = Post()
+        post.title = form.title.data
+        post.subject = form.subject.data
+        post.text_content = form.text_content.data
+        post.image_path = 'http://agenciatarrafa.com.br/2015/wp-content/uploads/2015/09/google-ads-1000x300.jpg'
+        post.thumb_path = 'http://1un1ba2fg8v82k48vu4by3q7.wpengine.netdna-cdn.com/wp-content/uploads/2014/05/Mobile-Analytics-Picture-e1399568637490-350x227.jpg'
+        post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        ids.append(id)
-        posts.update({id: Post(title, author, image, thumb, category, text, postage_date)})
+        author_input_list = form.authors.data.split(',')
+        for author_input in author_input_list:
+            post.authors.append(AuthorBlog(author_input))
+
+        db.session.add(post)
+        db.session.commit()
 
         message = u'Muito obrigado! Seu artigo foi submetido com sucesso!'
         flash(message, 'success')
-        return render_template('blog/index.html', posts=posts)
+        return redirect(url_for('blog.index'))
 
 
 @mod.route('/post/<id>/edit', methods=['POST'])
@@ -90,25 +94,34 @@ def update(id):
     if form.validate() is False:
         return render_template('blog/edit.html', form=form)
     else:
-        title = form.title.data
-        author = form.author.data
-        category = form.category.data
-        text = form.text.data
-        image = 'image'
-        thumb = 'thumb'
-        postage_date = time.strftime("%d/%m/%Y")
+        post = Post.query.filter_by(id=id).first()
+        post.title = form.title.data
+        post.subject = form.subject.data
+        post.text_content = form.text_content.data
+        post.image_path = 'http://agenciatarrafa.com.br/2015/wp-content/uploads/2015/09/google-ads-1000x300.jpg'
+        post.thumb_path = 'http://1un1ba2fg8v82k48vu4by3q7.wpengine.netdna-cdn.com/wp-content/uploads/2014/05/Mobile-Analytics-Picture-e1399568637490-350x227.jpg'
+        post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        post.authors = []
 
-        posts[id] = Post(title, author, category, text, image, thumb, postage_date)
+        author_input_list = form.authors.data.split(',')
+        for author_input in author_input_list:
+            post.authors.append(AuthorBlog(author_input))
+
+        db.session.commit()
+
         message = u'Artigo editado com sucesso!'
         flash(message, 'success')
-        return render_template('blog/index.html', posts=posts)
+        return redirect(url_for('blog.index'))
 
 
 @mod.route('/post/<id>/delete', methods=['GET'])
 def delete(id):
-    if posts.pop(int(id.encode())):
+    post = Post.query.filter_by(id=id).first()
+    if post:
+        db.session.delete(post)
+        db.session.commit()
         message = u"Artigo excluído com sucesso!"
         flash(message, 'success')
-        return render_template('blog/index.html', posts=posts)
+        return redirect(url_for('blog.index'))
     else:
         return make_response(render_template('not_found.html'), 404)
