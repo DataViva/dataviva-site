@@ -2,8 +2,8 @@ CREATE TABLE blog_post(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     title varchar (400) NULL,
     text_desc text NULL,
-    image_path varchar (100) NULL,
-    thumb_path varchar (100) NULL,
+    image_path varchar (250) NULL,
+    thumb_path varchar (250) NULL,
     postage_date datetime NULL,
     PRIMARY KEY (id)
 );
