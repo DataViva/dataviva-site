@@ -47,8 +47,8 @@ def edit(id):
     article = Article.query.filter_by(id=id).first()
     form.title.data = article.title
     form.theme.data = article.theme
-    form.authors.data = article.authors
-    form.keywords.data = article.keywords
+    form.authors.data = article.authors_str()
+    form.keywords.data = article.keywords_str()
     form.abstract.data = article.abstract
     return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id))
 
@@ -100,6 +100,8 @@ def update(id):
         article.abstract = form.abstract.data
         article.file_path = 'test'
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        article.authors = []
+        article.keywords = []
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
