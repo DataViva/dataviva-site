@@ -2,7 +2,7 @@ CREATE TABLE scholar_article(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     title varchar (400) NULL,
     theme varchar (250) NULL,
-    abstract varchar (250) NULL,
+    abstract text NULL,
     file_path varchar (250) NULL,
     postage_date datetime NULL,
     PRIMARY KEY (id)
