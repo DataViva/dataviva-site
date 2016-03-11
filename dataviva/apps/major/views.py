@@ -43,6 +43,7 @@ def index(course_hedu_id):
         'profile' : major_service.profile(),
         'year' : major_service.year(),
         'field_id': course_hedu_id[:2]
+        'id': course_hedu_id,
     }
 
     content = {
