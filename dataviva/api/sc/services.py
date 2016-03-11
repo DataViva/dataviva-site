@@ -183,11 +183,19 @@ class LocationSchool:
 
     def highest_enrolled_by_school(self):
         sc_list = self.__sc_sorted_by_enrollment__()
-        return sc_list[0].enrolled
+        if len(sc_list) != 0:
+            sc = sc_list[0]
+            return sc.enrolled
+        else:
+            return None
 
     def highest_enrolled_by_school_name(self):
         sc_list = self.__sc_sorted_by_enrollment__()
-        return sc_list[0][1].name()
+        if len(sc_list) != 0:
+            sc = sc_list[0][1]
+            return sc.name()
+        else:
+            return None
 
 class LocationBasicCourse(LocationSchool):
     def __init__(self, bra_id):
@@ -202,8 +210,16 @@ class LocationBasicCourse(LocationSchool):
 
     def highest_enrolled_by_basic_course(self):
         sc_list = self.__sc_sorted_by_enrollment__()
-        return sc_list[0].enrolled
+        if len(sc_list) != 0:
+            sc = sc_list[0]
+            return sc.enrolled
+        else:
+            return None
 
     def highest_enrolled_by_basic_course_name(self):
         sc_list = self.__sc_sorted_by_enrollment__()
-        return sc_list[0][1].name()
+        if len(sc_list) != 0:
+            sc = sc_list[0][1]
+            return sc.name()
+        else:
+            return None

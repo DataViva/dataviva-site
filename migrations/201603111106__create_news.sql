@@ -1,4 +1,4 @@
-CREATE TABLE blog_post(
+CREATE TABLE news_post(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     title varchar (400) NULL,
     subject varchar (100) NULL,
@@ -9,10 +9,10 @@ CREATE TABLE blog_post(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE blog_author(
+CREATE TABLE news_author(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     name varchar (50) NULL,
     post_id int UNSIGNED NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (post_id) REFERENCES blog_post(id)
+    FOREIGN KEY (post_id) REFERENCES news_post(id)
 );

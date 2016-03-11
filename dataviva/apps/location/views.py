@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.attrs.services import Location as LocationService
+from dataviva.api.attrs.services import Location as LocationService, LocationGdpRankings, \
+    LocationGdpPerCapitaRankings, LocationPopRankings, LocationAreaRankings, LocationMunicipalityRankings
 from dataviva.api.secex.models import Ymb
-from dataviva.api.secex.services import Location as LocationBodyService, LocationWld
+from dataviva.api.secex.services import Location as LocationBodyService, LocationWld, LocationEciRankings
 from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
     LocationJobs, LocationDistance, LocationOppGain
 from dataviva.api.hedu.services import LocationUniversity, LocationMajor
@@ -30,6 +31,14 @@ def add_language_code(endpoint, values):
 def index(bra_id):
 
     location_service = LocationService(bra_id=bra_id)
+    location_gdp_rankings_service = LocationGdpRankings(
+        bra_id=bra_id, stat_id='gdp')
+    location_gdp_pc_rankings_service = LocationGdpPerCapitaRankings(
+        bra_id=bra_id)
+    location_pop_rankings_service = LocationPopRankings(bra_id=bra_id)
+    location_eci_rankings_service = LocationEciRankings(bra_id=bra_id)
+    location_area_rankings_service = LocationAreaRankings(bra_id=bra_id)
+    location_municipality_rankings_service = LocationMunicipalityRankings(bra_id=bra_id)
     location_wld_service = LocationWld(bra_id=bra_id)
     location_body_service = LocationBodyService(bra_id=bra_id)
     location_industry_service = LocationIndustry(bra_id=bra_id)
@@ -44,7 +53,7 @@ def index(bra_id):
 
     ''' Query básica para SECEX'''
     eci = Ymb.query.filter_by(bra_id=bra_id, month=0) \
-        .order_by(desc(Ymb.year)).limit(1).first().eci
+        .order_by(desc(Ymb.year)).limit(1).first()
 
     if len(bra_id) != 9 and len(bra_id) != 3:
         header = {
@@ -53,7 +62,6 @@ def index(bra_id):
             'gdp': location_service.gdp(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp()/location_service.population(),
-            'eci': eci,
         }
     else:
         header = {
@@ -64,8 +72,10 @@ def index(bra_id):
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
-            'eci': eci,
         }
+
+    if eci is not None:
+        header['eci'] = eci.eci
 
     body = {
         'main_product_by_export_value': location_body_service.main_product_by_export_value(),
@@ -103,5 +113,48 @@ def index(bra_id):
         'highest_enrolled_by_basic_course_name': location_basic_course_service.highest_enrolled_by_basic_course_name()
     }
 
+    if len(bra_id) == 9:
+        profile = {
+            'number_of_municipalities': location_service.number_of_locations(len(bra_id)),
+            'bra_id': bra_id,
+            'state_name': location_service.location_name(3),
+            'mesoregion_name': location_service.location_name(5),
+            'gdp_rank': location_gdp_rankings_service.gdp_rank(),
+            'area': location_service.area()
+        }
+    elif len(bra_id) == 7:
+        profile = {
+            'number_of_microregions': location_service.number_of_locations(len(bra_id)),
+            'bra_id': bra_id,
+            'state_name': location_service.location_name(3),
+            'mesoregion_name': location_service.location_name(5),
+            'number_of_municipalities': location_service.number_of_municipalities()
+        }
+    elif len(bra_id) == 5:
+        profile = {
+            'number_of_mesoregions': location_service.number_of_locations(len(bra_id)),
+            'bra_id': bra_id,
+            'state_name': location_service.location_name(3),
+            'eci_rank': location_eci_rankings_service.eci_rank()
+        }
+    elif len(bra_id) == 1:
+        profile = {
+            'number_of_regions': location_service.number_of_locations(len(bra_id)),
+            'bra_id': bra_id,
+            'gdp_pc_rank': location_gdp_pc_rankings_service.gdp_pc_rank(),
+            'pop_rank': location_pop_rankings_service.pop_rank(),
+            'region_states': location_service.states_in_a_region()
+        }
+    else:
+        profile = {
+            'number_of_states': location_service.number_of_locations(len(bra_id)),
+            'region_name': location_service.location_name(1),
+            'number_of_municipalities': location_service.number_of_locations(9),
+            'pop_rank': location_pop_rankings_service.pop_rank(),
+            'area_rank': location_area_rankings_service.area_rank(),
+            'neighbors': location_service.neighbors(),
+            'municipality_rank': location_municipality_rankings_service.municipality_rank()
+        }
+
     return render_template('location/index.html',
-                           header=header, body=body)
+                           header=header, body=body, profile=profile)
