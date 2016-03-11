@@ -137,7 +137,7 @@ class Major:
 
     def __hedu__(self):
         if not self._hedu:
-            hedu_data = self.hedu_query.one()
+            hedu_data = self.hedu_query.first_or_404()
             self._hedu = hedu_data
 
         return self._hedu
