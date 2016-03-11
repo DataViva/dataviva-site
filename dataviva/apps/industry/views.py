@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Industry, IndustryOccupation, IndustryMunicipality, IndustryByLocation
+from dataviva.api.attrs.models import Bra
 
 from dataviva import db
 from sqlalchemy import func, desc
@@ -41,6 +42,7 @@ def index(cnae_id):
     else :
         industry['flag_preview_headers'] = True
         industry['bra_id'] = bra_id
+        industry['name_bra'] = IndustryByLocation.name()
 
         if len(bra_id) == 9 : # municipatity
             industry['county'] = False
@@ -88,7 +90,6 @@ def index(cnae_id):
 
         body['municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
         body['municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
-
 
     yi_max_year = db.session.query(func.max(Yi.year)).filter_by(cnae_id=cnae_id)
     list_rais = Yi.query.filter(
