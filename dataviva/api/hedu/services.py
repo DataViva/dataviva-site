@@ -287,9 +287,17 @@ class LocationMajor(LocationUniversity):
             Ybc_hedu.year == self.max_year_query)
 
     def highest_enrolled_by_major(self):
-        hedu = self.__hedu_sorted_by_enrolled__()[0]
-        return hedu.enrolled
+        hedu_list = self.__hedu_sorted_by_enrolled__()
+        if len(hedu_list) != 0:
+            hedu = hedu_list[0]
+            return hedu.enrolled
+        else:
+            return None
 
     def highest_enrolled_by_major_name(self):
-        hedu = self.__hedu_sorted_by_enrolled__()[0]
-        return hedu.course_hedu.name()
+        hedu_list = self.__hedu_sorted_by_enrolled__()
+        if len(hedu_list) != 0:
+            hedu = hedu_list[0]
+            return hedu.course_hedu.name()
+        else:
+            return None
