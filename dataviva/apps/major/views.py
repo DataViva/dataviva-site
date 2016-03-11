@@ -42,7 +42,7 @@ def index(course_hedu_id):
         'graduates' : major_service.graduates(),
         'profile' : major_service.profile(),
         'year' : major_service.year(),
-        'field_id': course_hedu_id[:2]
+        'field_id': course_hedu_id[:2],
         'id': course_hedu_id,
     }
 
