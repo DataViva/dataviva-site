@@ -14,7 +14,7 @@ class Article(db.Model):
     title = db.Column(db.String(400))
     abstract = db.Column(db.Text())
     theme = db.Column(db.String(250))
-    file_path = db.Column(db.String(255))
+    file_path = db.Column(db.String(250))
     postage_date = db.Column(db.DateTime)
     authors = db.relationship('Author', backref='scholar_article', lazy='eager')
     keywords = db.relationship('KeyWord', secondary=article_keyword_table)
