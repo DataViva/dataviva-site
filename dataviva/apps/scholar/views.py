@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash
 from dataviva.apps.general.views import get_locale
 
-from models import Article, Author, KeyWord
+from models import Article, AuthorScholar, KeyWord
 from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
@@ -68,7 +68,7 @@ def create():
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
-            article.authors.append(Author(author_input))
+            article.authors.append(AuthorScholar(author_input))
 
         keyword_input_list = form.keywords.data.split(',')
         for keyword_input in keyword_input_list:
@@ -105,7 +105,7 @@ def update(id):
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
-            article.authors.append(Author(author_input))
+            article.authors.append(AuthorScholar(author_input))
 
         keyword_input_list = form.keywords.data.split(',')
         for keyword_input in keyword_input_list:
