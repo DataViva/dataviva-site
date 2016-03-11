@@ -12,7 +12,7 @@ class Article(db.Model):
     __tablename__ = 'scholar_article'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(400))
-    abstract = db.Column(db.String(250))
+    abstract = db.Column(db.Text())
     theme = db.Column(db.String(250))
     file_path = db.Column(db.String(255))
     postage_date = db.Column(db.DateTime)
