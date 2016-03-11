@@ -158,6 +158,9 @@ class IndustryByLocation(Industry) :
     def opportunity_gain(self):
         return self.__rais__().opp_gain
 
+    def name(self):
+        bra_query = Bra.query.filter(Bra.id == self.bra_id).first()
+        return bra_query.name()
 
 class IndustryOccupation(Industry):
     def __init__(self, cnae_id, bra_id):
