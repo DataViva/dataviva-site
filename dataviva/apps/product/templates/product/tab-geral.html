@@ -72,106 +72,26 @@
                 </div>
             </div>
         </div>
-
+        <h2>Perfil Geral</h2>
+            
         {% if context.bra_id_len == 0 %}
             {% if context.depth == 6 %}
-                O produto [posição] ocupa a [ranking importações]ª posição em importações e a [ranking exportações]ª posição
-                em exportações no Brasil. Em [ano máximo], rendeu U$ [valor de comércio] em valor de comércio, representando variação de [valor de crescimento ou diminuição] 
-                em cinco anos. O estado brasileiro que mais exporta [posição] é [artigo/genero] [estado que mais exporta] e o que mais importa é 
-                [artigo/genero] [estado que mais importa].
+                <p>O produto {{ header.name }} ocupa a {{ header.export_value_ranking }}&ordm posição em importações e a {{ header.import_value_ranking }}&ordm posição
+                em exportações [artigo/genero/plural] {{ header.location_name }}. Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, 
+                representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
+                em cinco anos. O município [artigo/genero/plural] {{ header.location_name }} que mais exporta [artigo/genero/plural]  {{ header.name }} é [artigo/genero] {{ body.municipality_name_export }} e o que mais importa é 
+                [artigo/genero] {{ body.municipality_name_import }}.</p>
             {% endif %}
 
             {% if context.depth == 2 %}
-                [artigo/genero/plural] [seção] ocupam a [ranking importações]ª posição em importações e a [ranking exportações]ª posição em exportações no Brasil. 
-                Em [ano máximo], rendeu U$ [valor de comércio] em valor de comércio, representando variação de [valor de crescimento ou diminuição] em cinco anos. 
-                O estado brasileiro que mais exporta [artigo/genero/plural] [seção] é [artigo/genero] [estado que mais exporta] e o que mais importa é 
-                [artigo/genero] [estado que mais importa].
+                <p>[artigo/genero/plural] {{ header.name }} ocupam a {{ header.import_value_ranking }}&ordm posição em importações e a {{ header.export_value_ranking }}&ordm posição em exportações no Brasil. 
+                Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos. 
+                O município [artigo/genero/plural] {{ header.location_name }} que mais exporta [artigo/genero/plural] {{ header.name }} é [artigo/genero] {{ body.municipality_name_export }} e o que mais importa é 
+                [artigo/genero] {{ body.municipality_name_import }}.</p>
             {% endif %}    
 
         {% endif %}
 
-        
-        {% if context.bra_id_len == 1 %}
-            {% if context.depth == 6 %}
-                O produto [posição] ocupa a [ranking importações]ª posição em importações e a [ranking exportações]ª posição
-                em exportações na região. Em [ano máximo], rendeu U$ [valor de comércio] em valor de comércio, representando variação de [valor de crescimento ou diminuição] 
-                em cinco anos. O estado brasileiro que mais exporta [posição] é [artigo/genero] [estado que mais exporta] e o que mais importa é 
-                [artigo/genero] [estado que mais importa].   
-            {% endif %}
-
-            {% if context.depth == 2 %}
-                [artigo/genero/plural] [seção] ocupam a [ranking importações]ª posição em importações e a [ranking exportações]ª posição em exportações na região. 
-                Em [ano máximo], rendeu U$ [valor de comércio] em valor de comércio, representando variação de [valor de crescimento ou diminuição] em cinco anos. 
-                O estado brasileiro que mais exporta [artigo/genero/plural] [seção] é [artigo/genero] [estado que mais exporta] e o que mais importa é 
-                [artigo/genero] [estado que mais importa].
-            {% endif %} 
-        {% endif %}
-
-        
-        {% if context.bra_id_len == 3 %}
-            {% if context.depth == 6 %}
-                O produto [posição] ocupa a [ranking importações]ª posição em importações e a [ranking exportações]ª posição
-                em exportações no estado. Em [ano máximo], rendeu U$ [valor de comércio] em valor de comércio, representando variação de [valor de crescimento ou diminuição] 
-                em cinco anos. O município do estado que mais exporta [posição] é [artigo/genero] [município que mais exporta] e o que mais importa é 
-                [artigo/genero] [município que mais importa].
-            {% endif %}
-
-            {% if context.depth == 2 %}
-                [artigo/genero/plural] [seção] ocupa a [ranking importações]ª posição em importações e a [ranking exportações]ª posição
-                em exportações no estado. Em [ano máximo], rendeu U$ [valor de comércio] em valor de comércio, representando variação de [valor de crescimento ou diminuição] 
-                em cinco anos. O município do estado que mais exporta [seção] é [artigo/genero] [município que mais exporta] e o que mais importa é 
-                [artigo/genero] [município que mais importa].
-            {% endif %}
-        {% endif %}
-
-        
-        {% if context.bra_id_len == 5 %}
-            {% if context.depth == 6 %}
-                O produto [posição] ocupa a [ranking importações]ª posição em importações e a [ranking exportações]ª posição
-                em exportações na mesorregião. Em [ano máximo], rendeu U$* [valor de comércio]* em valor de comércio, representando variação
-                de [valor de crescimento ou diminuição] em cinco anos. O município da mesorregião que mais exporta [posição] é 
-                [artigo/genero] [município que mais exporta] e o que mais importa é [artigo/genero] [município que mais importa].       
-            {% endif %}
-
-            {% if context.depth == 2 %}
-                [artigo/genero/plural] [seção] ocupa a [ranking importações]ª posição em importações e a [ranking exportações]ª posição
-                em exportações na mesorregião. Em [ano máximo], rendeu U$ [valor de comércio] em valor de comércio, representando variação de [valor de crescimento ou diminuição] 
-                em cinco anos. O município da mesorregião que mais exporta [seção] é [artigo/genero] [município que mais exporta] e o que mais importa é 
-                [artigo/genero] [município que mais importa].
-            {% endif %}
-        {% endif %}
-
-        
-        {% if context.bra_id_len == 7 %}
-            {% if context.depth == 6 %}
-                O produto [posição] ocupa a [ranking importações]ª posição em importações e a [ranking exportações]ª posição
-                em exportações na microrregião.Em [ano máximo], rendeu U$* [valor de comércio]* em valor de comércio, representando variação
-                de [valor de crescimento ou diminuição] em cinco anos. O município da microrregião que mais exporta [posição] é 
-                [artigo/genero] [município que mais exporta] e o que mais importa é [artigo/genero] [município que mais importa].    
-            {% endif %}
-
-            {% if context.depth == 2 %}
-                [artigo/genero/plural] [seção] ocupa a [ranking importações]ª posição em importações e a [ranking exportações]ª posição
-                em exportações na microrregião. Em [ano máximo], rendeu U$ [valor de comércio] em valor de comércio, representando variação de [valor de crescimento ou diminuição] 
-                em cinco anos. O município da microrregião que mais exporta [seção] é [artigo/genero] [município que mais exporta] e o que mais importa é 
-                [artigo/genero] [município que mais importa].
-            {% endif %}
-        {% endif %}
-
-        
-        {% if context.bra_id_len == 9 %}
-            {% if context.depth == 6 %}
-                O produto [posição] ocupa a [ranking importações]ª posição em importações e a [ranking exportações]ª posição
-                em exportações no município. Em [ano máximo], rendeu U$ [valor de comércio] em valor de comércio, representando variação de [valor de crescimento ou diminuição] 
-                em cinco anos.  
-            {% endif %}
-
-            {% if context.depth == 2 %}
-                [artigo/genero/plural] [seção] ocupa a [ranking importações]ª posição em importações e a [ranking exportações]ª posição
-                em exportações no município. Em [ano máximo], rendeu U$ [valor de comércio] em valor de comércio, representando variação de [valor de crescimento ou diminuição] 
-                em cinco anos.
-            {% endif %}
-        {% endif %}
 
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
