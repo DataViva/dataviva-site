@@ -87,15 +87,27 @@ class TradePartner:
     def trade_balance(self):
         export_val = self.__secex__().export_val
         import_val = self.__secex__().import_val
-        return export_val - import_val
+        if export_val is None:
+            return import_val
+        elif import_val is None:
+            return export_val
+        else:
+            return export_val - import_val
 
     def total_exported(self):
-        return self.__secex__().export_val
+        export_val = self.__secex__().export_val
+        if export_val is None:
+            return 0
+        else:
+            return export_val
 
     def unity_weight_export_price(self):
         export_val = self.__secex__().export_val
         export_kg = self.__secex__().export_kg
-        return export_val / export_kg
+        if export_val is None:
+            return None
+        else:
+            return export_val / export_kg
 
     def total_imported(self):
         return self.__secex__().import_val
@@ -103,7 +115,10 @@ class TradePartner:
     def unity_weight_import_price(self):
         import_val = self.__secex__().import_val
         import_kg = self.__secex__().import_kg
-        return import_val / import_kg
+        if import_val is None:
+            return None
+        else:
+            return import_val / import_kg
 
     def highest_import_value(self):
         secex = self.__secex_sorted_by_imports__()[0]
