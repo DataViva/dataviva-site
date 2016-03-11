@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash
 from dataviva.apps.general.views import get_locale
 
-from models import Article, Author, KeyWord
+from models import Article, AuthorScholar, KeyWord
 from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
@@ -31,7 +31,7 @@ def index():
 
 @mod.route('/article/<id>', methods=['GET'])
 def show(id):
-    article = Article.query.filter_by(id=id).first()
+    article = Article.query.filter_by(id=id).first_or_404()
     return render_template('scholar/show.html', article=article)
 
 
@@ -44,7 +44,7 @@ def new():
 @mod.route('/article/<id>/edit', methods=['GET'])
 def edit(id):
     form = RegistrationForm()
-    article = Article.query.filter_by(id=id).first()
+    article = Article.query.filter_by(id=id).first_or_404()
     form.title.data = article.title
     form.theme.data = article.theme
     form.authors.data = article.authors_str()
@@ -68,11 +68,11 @@ def create():
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
-            article.authors.append(Author(author_input))
+            article.authors.append(AuthorScholar(author_input))
 
         keyword_input_list = form.keywords.data.split(',')
         for keyword_input in keyword_input_list:
-            keyword = KeyWord.query.filter_by(name=keyword_input).first()
+            keyword = KeyWord.query.filter_by(name=keyword_input).first_or_404()
 
             if not keyword:
                 article.keywords.append(KeyWord(keyword_input))
@@ -94,7 +94,7 @@ def update(id):
     if form.validate() is False:
         return render_template('scholar/edit.html', form=form)
     else:
-        article = Article.query.filter_by(id=id).first()
+        article = Article.query.filter_by(id=id).first_or_404()
         article.title = form.title.data
         article.theme = form.theme.data
         article.abstract = form.abstract.data
@@ -105,11 +105,11 @@ def update(id):
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
-            article.authors.append(Author(author_input))
+            article.authors.append(AuthorScholar(author_input))
 
         keyword_input_list = form.keywords.data.split(',')
         for keyword_input in keyword_input_list:
-            keyword = KeyWord.query.filter_by(name=keyword_input).first()
+            keyword = KeyWord.query.filter_by(name=keyword_input).first_or_404()
 
             if not keyword:
                 article.keywords.append(KeyWord(keyword_input))
@@ -125,7 +125,7 @@ def update(id):
 
 @mod.route('/article/<id>/delete', methods=['GET'])
 def delete(id):
-    article = Article.query.filter_by(id=id).first()
+    article = Article.query.filter_by(id=id).first_or_404()
     if article:
         db.session.delete(article)
         db.session.commit()
