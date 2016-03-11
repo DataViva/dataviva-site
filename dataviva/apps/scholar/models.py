@@ -16,7 +16,7 @@ class Article(db.Model):
     theme = db.Column(db.String(250))
     file_path = db.Column(db.String(250))
     postage_date = db.Column(db.DateTime)
-    authors = db.relationship('Author', backref='scholar_article', lazy='eager')
+    authors = db.relationship('AuthorScholar', backref='scholar_article', lazy='eager')
     keywords = db.relationship('KeyWord', secondary=article_keyword_table)
 
     def authors_str(self):
@@ -34,7 +34,7 @@ class Article(db.Model):
         return '<Article %r>' % (self.title)
 
 
-class Author(db.Model):
+class AuthorScholar(db.Model):
     __tablename__ = 'scholar_author'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
@@ -44,7 +44,7 @@ class Author(db.Model):
         self.name = name
 
     def __repr__(self):
-        return '<Author %r>' % (self.name)
+        return '<AuthorScholar %r>' % (self.name)
 
 
 class KeyWord(db.Model):
