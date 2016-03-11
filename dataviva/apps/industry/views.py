@@ -40,6 +40,7 @@ def index(cnae_id):
         industry['county'] = True # view county where no country
     else :
         industry['flag_preview_headers'] = True
+        industry['bra_id'] = bra_id
 
         if len(bra_id) == 9 : # municipatity
             industry['county'] = False
@@ -101,7 +102,6 @@ def index(cnae_id):
 
     industry_service_num_establishments = Industry(cnae_id=cnae_id)
     header['num_establishments_brazil'] = industry_service_num_establishments.num_establishments()
-
 
     return render_template('industry/index.html', body_class='perfil-estado', header=header, body=body, industry=industry)
 
