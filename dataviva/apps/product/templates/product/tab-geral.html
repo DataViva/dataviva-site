@@ -74,23 +74,20 @@
         </div>
         <h2>Perfil Geral</h2>
             
-        {% if context.bra_id_len == 0 %}
-            {% if context.depth == 6 %}
-                <p>O produto {{ header.name }} ocupa a {{ header.export_value_ranking }}&ordm posição em importações e a {{ header.import_value_ranking }}&ordm posição
-                em exportações [artigo/genero/plural] {{ header.location_name }}. Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, 
-                representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
-                em cinco anos. O município [artigo/genero/plural] {{ header.location_name }} que mais exporta [artigo/genero/plural]  {{ header.name }} é [artigo/genero] {{ body.municipality_name_export }} e o que mais importa é 
-                [artigo/genero] {{ body.municipality_name_import }}.</p>
-            {% endif %}
-
-            {% if context.depth == 2 %}
-                <p>[artigo/genero/plural] {{ header.name }} ocupam a {{ header.import_value_ranking }}&ordm posição em importações e a {{ header.export_value_ranking }}&ordm posição em exportações no Brasil. 
-                Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos. 
-                O município [artigo/genero/plural] {{ header.location_name }} que mais exporta [artigo/genero/plural] {{ header.name }} é [artigo/genero] {{ body.municipality_name_export }} e o que mais importa é 
-                [artigo/genero] {{ body.municipality_name_import }}.</p>
-            {% endif %}    
-
+        {% if context.depth == 6 %}
+            <p>O produto {{ header.name }} ocupa a {{ header.export_value_ranking }}&ordm posição em importações e a {{ header.import_value_ranking }}&ordm posição
+            em exportações [artigo/genero/plural] {{ header.location_name }}. Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, 
+            representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
+            em cinco anos. O município [artigo/genero/plural] {{ header.location_name }} que mais exporta [artigo/genero/plural]  {{ header.name }} é [artigo/genero] {{ body.municipality_name_export }} e o que mais importa é 
+            [artigo/genero] {{ body.municipality_name_import }}.</p>
         {% endif %}
+
+        {% if context.depth == 2 %}
+            <p>[artigo/genero/plural] {{ header.name }} ocupam a {{ header.import_value_ranking }}&ordm posição em importações e a {{ header.export_value_ranking }}&ordm posição em exportações no Brasil. 
+            Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos. 
+            O município [artigo/genero/plural] {{ header.location_name }} que mais exporta [artigo/genero/plural] {{ header.name }} é [artigo/genero] {{ body.municipality_name_export }} e o que mais importa é 
+            [artigo/genero] {{ body.municipality_name_import }}.</p>
+        {% endif %}    
 
 
         <div class="row">
