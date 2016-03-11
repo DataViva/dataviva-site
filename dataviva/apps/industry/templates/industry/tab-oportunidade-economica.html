@@ -1,4 +1,8 @@
 <div role="tabpanel" class="tab-pane" id="oportunidade-economica">
     <h2>Oportunidade Econômica</h2>
     <p>{{ industry.text_economic_opportunity }}</p>
+
+</br><a target="frame-tab-salario-emprego">Atividades Econômicas</a></br>
+
+         <a href="/pt/embed/rings/rais/{% if industry.bra_id %}{{industry.bra_id}}{% else %}all{%endif%}/{{ industry.cnae_id }}/all/cnae" target="frame-tab-salario-emprego">&nbsp Anéis: Conexões para Atividade Econômica por Região</a></br>
 </div>
