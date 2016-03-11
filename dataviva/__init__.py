@@ -116,6 +116,7 @@ from dataviva.apps.build_graph.views import mod as build_graph_module
 from dataviva.apps.data_dowload.views import mod as data_dowload_module
 from dataviva.apps.blog.views import mod as blog_module
 from dataviva.apps.scholar.views import mod as scholar_module
+from dataviva.apps.news.views import mod as news_module
 
 ''' Register these modules as blueprints '''
 app.register_blueprint(attrs_module)
@@ -147,3 +148,4 @@ app.register_blueprint(build_graph_module)
 app.register_blueprint(data_dowload_module)
 app.register_blueprint(blog_module)
 app.register_blueprint(scholar_module)
+app.register_blueprint(news_module)
