@@ -80,7 +80,7 @@ def create():
         db.session.add(post)
         db.session.commit()
 
-        message = u'Muito obrigado! Seu artigo foi submetido com sucesso!'
+        message = u'Muito obrigado! Seu post foi submetido com sucesso!'
         flash(message, 'success')
         return redirect(url_for('blog.index'))
 
@@ -107,7 +107,7 @@ def update(id):
 
         db.session.commit()
 
-        message = u'Artigo editado com sucesso!'
+        message = u'Post editado com sucesso!'
         flash(message, 'success')
         return redirect(url_for('blog.index'))
 
@@ -118,7 +118,7 @@ def delete(id):
     if post:
         db.session.delete(post)
         db.session.commit()
-        message = u"Artigo excluído com sucesso!"
+        message = u"Post excluído com sucesso!"
         flash(message, 'success')
         return redirect(url_for('blog.index'))
     else:
