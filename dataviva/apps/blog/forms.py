@@ -17,8 +17,8 @@ class NumberOfWords(object):
 
 class RegistrationForm(Form):
     title = TextField('title', [validators.Required(u"Por favor, insira o título do post."), validators.Length(max=400)])
-    author = TextField('author', [validators.Required(u"Por favor, insira o(s) autor(es) do post."), validators.Length(max=50)])
-    category = TextField('category', [validators.Required(u"Por favor, insira a categoria do post.")])
-    text = TextAreaField('text', [validators.Required(u"Por favor, insira o texto do post."), NumberOfWords(max=500)])
-    image = FileField('image', [validators.Required(u"Por favor, insira a imagem do post.")])
-    thumb = FileField('thumb', [validators.Required(u"Por favor, insira o thumb do post.")])
+    authors= TextField('authors', [validators.Required(u"Por favor, insira o(s) autor(es) do post."), validators.Length(max=100)])
+    subject = TextField('subject', [validators.Required(u"Por favor, insira a categoria do post.")])
+    text_content = TextAreaField('text_content', [validators.Required(u"Por favor, insira o texto do post."), NumberOfWords(max=500)])
+    image_path = FileField('image_path', [validators.Required(u"Por favor, insira a imagem do post.")])
+    thumb_path = FileField('thumb_path', [validators.Required(u"Por favor, insira o thumb do post.")])
