@@ -38,6 +38,8 @@ def index(product_id):
     context['bra_id'] = bra_id
     if bra_id:
         context['bra_id_len'] = len(bra_id)
+    else:
+        context['bra_id_len'] = 0
 
     trade_partners_service = ProductTradePartnersService(product_id=product_id, bra_id=bra_id)
     municipalities_service = ProductMunicipalitiesService(product_id=product_id, bra_id=bra_id)
