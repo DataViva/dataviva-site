@@ -476,7 +476,7 @@ def get_facebook_oauth_token():
 """
 @mod.route('/google_authorized/')
 @google.authorized_handler
-def google_authorized(resp):
+def google_authorized(resp):    
     access_token = resp['access_token']
     session['google_token'] = access_token, ''
 

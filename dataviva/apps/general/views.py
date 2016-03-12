@@ -169,7 +169,7 @@ def redirect_short_url(slug):
 # ###############################
 # # 404 view
 # # ---------------------------
-if False:
+if not DEBUG:
     @app.errorhandler(Exception)
     @app.errorhandler(404)
     @app.errorhandler(500)
