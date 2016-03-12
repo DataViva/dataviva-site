@@ -15,7 +15,7 @@ from flask.ext.cache import Cache
 # for new filters, redis sessions
 from flask.ext.mail import Mail
 from utils.jinja_helpers import jinja_formatter, jinja_momentjs, jinja_split, \
- jinja_strip_html, max_digits , jinja_magnitude
+ jinja_strip_html, max_digits, jinja_magnitude
 
 from utils.redis import RedisSessionInterface
 
@@ -66,8 +66,9 @@ if redis_sesh.redis:
 from dataviva.api.stats.util import get_or_set_years
 __year_range__ = get_or_set_years(view_cache, "general:data_years")
 
-# login manager for user management
+
 lm = LoginManager()
+lm.login_view = "/account/signin"
 lm.init_app(app)
 
 # babel configuration for lang support
