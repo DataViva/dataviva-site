@@ -349,7 +349,6 @@ def preferences():
 @mod.route('/complete_login/', methods=['GET', 'POST'])
 def after_login(**user_fields):
     import re
-    import pdb; pdb.set_trace()
 
     if request.method == "POST":
         user_fields = {k:v for k,v in request.form.items() if v is not None}
@@ -478,7 +477,6 @@ def get_facebook_oauth_token():
 @mod.route('/google_authorized/')
 @google.authorized_handler
 def google_authorized(resp):
-    import pdb; pdb.set_trace()
     access_token = resp['access_token']
     session['google_token'] = access_token, ''
 
