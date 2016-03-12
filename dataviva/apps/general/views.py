@@ -120,7 +120,6 @@ def after_request(response):
 
 @mod.route('/', methods=['GET'])
 @view_cache.cached(key_prefix=api_cache_key("homepage"))
-@login_required
 def home():
     return render_template("general/index.html")
 

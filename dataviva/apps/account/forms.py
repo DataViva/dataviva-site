@@ -31,6 +31,10 @@ class LoginForm(Form):
     remember_me = BooleanField('remember_me', default=False)
 
 
+class ForgotPasswordForm(Form):
+    email = TextField('email', validators=[validators.Required(), validators.Email()])
+
+
 class UserEditForm(Form):
     nickname = TextField('nickname', validators=[validators.Required()])
     bio = TextAreaField('bio', validators=[validators.Length(min=0, max=256)])
