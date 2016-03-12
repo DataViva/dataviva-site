@@ -25,30 +25,38 @@
                     </thead>
                     <tbody>
                         <tr>
+                            {% if body.highest_enrolled_by_university %}
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_university_name }}</p>
                                 <div class="number">
                                     <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_university | magnitude }}</span>
                                 </div>
                             </td>
+                            {% endif %}
+                            {% if body.highest_enrolled_by_major %}
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_major_name }}</p>
                                 <div class="number">
                                     <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_major | magnitude }}</span>
                                 </div>
                             </td>
+                            {% endif %}
+                            {% if body.highest_enrolled_by_school %}
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_school_name }}</p>
                                 <div class="number">
                                     USD <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_school | magnitude }}</span>
                                 </div>
                             </td>
+                            {% endif %}
+                            {% if body.highest_enrolled_by_basic_course %}
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_basic_course_name }}</p>
                                 <div class="number">
                                     USD <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
                                 </div>
                             </td>
+                            {% endif %}
                         </tr>
                     </tbody>
                 </table>
