@@ -46,7 +46,7 @@
                 <a class="btn btn-default navbar-btn btn-dataviva" href="/account/signup">Cadastre-se</a>
                 
                 {% else %}
-                    <p>Bem vindo, {{ g.user.firstname }}! | <a href="/account/logout">Sair</a></p>                     
+                    <p>Welcome, <b>{{ g.user.firstname }}</b>! | <a href="/account/edit_profile">Edit profile</a></p> | <a href="/account/logout">Logout</a></p>
                 {% endif %}
 
                 <select name="language">

@@ -14,7 +14,7 @@ from flask.ext.babel import gettext
 from flask.ext.login import login_user, logout_user, current_user, \
     login_required, LoginManager
 from forms import (LoginForm, UserEditForm, SignupForm, SigninForm, ChangePasswordForm,
-                   ForgotPasswordForm)
+                   ForgotPasswordForm, ProfileForm)
 from sqlalchemy import or_
 from urllib2 import Request, urlopen, URLError
 import json
@@ -92,10 +92,11 @@ def create_user():
         )
         db.session.add(user)
         db.session.commit()
-    except Exception as ee:
-        return render_template('account/signup.html',
-                               form=form,
-                               message="Sorry, an unexpected error has occured. Please try again.")
+        flash("Check your inbox at %s" % user.email, "success")
+    except:
+        flash("Sorry, an unexpected error has occured. Please try again.", "danger")
+
+        return render_template('account/signup.html', form=form)
 
     user_srl = user.serialize()
     welcome_tpl = render_template('account/mail/welcome.html', user=user_srl)
@@ -132,13 +133,13 @@ def authenticate():
         )[-1]
         login_user(user, remember=True)
     except:
+        flash("Invalid email or password.", "danger")
         return render_template(
             'account/signin.html',
             form=form,
-            message="Invalid email or password."
         )
 
-    return redirect("/account/change_password")
+    return redirect("/account/edit_profile")
 
 
 @mod.route('/confirm_pending/<user_email>', methods=["GET"])
@@ -164,10 +165,13 @@ def confirm(code):
         user = User.query.filter_by(confirmation_code=code)[-1]
         user.confirmed = True
         db.session.commit()
+
+        flash("Lest us know more about you. Please complete your profile.", "info")
+
     except IndexError:
         abort(404, 'User not found')
 
-    return redirect('/')
+    return redirect('/account/edit_profile')
 
 
 @mod.route('/resend_confirmation/<user_email>', methods=["GET"])
@@ -187,6 +191,37 @@ def resend_confirmation(user_email):
     return redirect('/account/confirm_pending/%s' % user.email)
 
 
+@mod.route('/edit_profile', methods=["GET"])
+@login_required
+def edit_profile():
+    form = ProfileForm()
+    form.fullname.data = g.user.fullname
+    form.gender.data = g.user.gender
+    form.website.data = g.user.website
+    form.bio.data = g.user.bio
+
+    return render_template("account/edit_profile.html", form=form)
+
+
+@mod.route('/edit_profile', methods=["POST"])
+@login_required
+def change_profile():
+    form = ProfileForm()
+
+    try:
+        user = g.user
+        user.fullname = form.fullname.data
+        user.gender = form.gender.data
+        user.website = form.website.data
+        user.bio = form.bio.data
+        db.session.commit()
+        flash("Profile updated successfully!", "success")
+    except:
+        flash("Something went wrong!", "danger")
+
+    return render_template("account/edit_profile.html", form=form)
+
+
 @mod.route('/change_password', methods=["GET"])
 @login_required
 def change_password():
@@ -204,13 +239,12 @@ def change():
     if user.password == sha512(form.current_password.data):
         user.password = sha512(form.new_password.data)
         db.session.commit()
-        msg = "Password successfully update!"
-        danger = ''
+        flash("Password successfully update!", "success")
     else:
-        msg = "The current password is invalid"
+        flash("The current password is invalid", "danger")
 
     flash(msg, danger)
-    return render_template("account/change_password.html", form=form, message=msg)
+    return render_template("account/change_password.html", form=form)
 
 
 @mod.route('/forgot_password', methods=["GET"])
@@ -233,15 +267,11 @@ def reset_password():
                                    user=user.serialize(),
                                    new_pwd=pwd)
         send_mail("Forgot Password", [user.email], email_tp)
-
-        flash("A new password has been sent to you! Please check you inbox!")
-
+        flash("A new password has been sent to you! Please check you inbox!", "success")
     except Exception as e:
-        return render_template(
-            "account/forgot_password.html",
-            form=form,
-            message="We couldnt find any user with the informed email address"
-        )
+        flash("We couldnt find any user with the informed email address", "danger")
+
+        return render_template("account/forgot_password.html", form=form)
 
     return redirect("account/signin")
 

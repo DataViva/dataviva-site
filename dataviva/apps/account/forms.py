@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import TextField, TextAreaField, BooleanField, HiddenField, validators, PasswordField
+from wtforms import TextField, TextAreaField, BooleanField, HiddenField, validators, PasswordField, SelectField
 from wtforms.fields.html5 import URLField
 
 
@@ -39,3 +39,25 @@ class UserEditForm(Form):
     nickname = TextField('nickname', validators=[validators.Required()])
     bio = TextAreaField('bio', validators=[validators.Length(min=0, max=256)])
     website = URLField(validators=[validators.url()])
+
+
+class ProfileForm(Form):
+    fullname = TextField(
+        'fullname',
+        validators=[validators.Required(), validators.Length(min=3, max=128)]
+    )
+
+    gender = SelectField(
+        'gender',
+         choices=[('male', 'Male'), ('female', 'Female')]
+    )
+
+    website = TextField(
+        'website',
+        validators=[validators.URL(), validators.Length(min=10, max=150)]
+    )
+
+    bio = TextField(
+        'bio',
+        validators=[validators.Length(max=256)]
+    )
