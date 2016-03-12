@@ -12,11 +12,12 @@ from flask import Blueprint, request, render_template, flash, g, session, \
     redirect, url_for, jsonify, abort, current_app
 from flask.ext.babel import gettext
 from flask.ext.login import login_user, logout_user, current_user, \
-    login_required
-from forms import LoginForm, UserEditForm, SignupForm
+    login_required, LoginManager
+from forms import LoginForm, UserEditForm, SignupForm, SigninForm, ChangePasswordForm
 from sqlalchemy import or_
 from urllib2 import Request, urlopen, URLError
 import json
+from hashlib import md5
 
 
 mod = Blueprint('account', __name__,
@@ -24,11 +25,9 @@ mod = Blueprint('account', __name__,
                 url_prefix='/<lang_code>/account',
                 static_folder='static')
 
-RESULTS_PER_PAGE = 10
-
 
 def _gen_confirmation_code(email):
-    return sha512("%s-%s" % (email, datetime.now()))
+    return md5("%s-%s" % (email, datetime.now())).hexdigest()
 
 
 @mod.url_defaults
@@ -63,13 +62,14 @@ def check_status():
 
 
 def send_confirmation(user):
+    confirmation_url = "http://localhost:5000/en/account/confirm/%s" % user.confirmation_code
     confirmation_tpl = render_template('account/mail/confirmation.html',
                                        user=user.serialize(),
-                                       confirmation_code=user.confirmation_code)
+                                       confirmation_url=confirmation_url)
     send_mail("Account confirmation", [user.email], confirmation_tpl)
 
 
-@mod.route('/signup/', methods=["GET"])
+@mod.route('/signup', methods=["GET"])
 def signup():
     form = SignupForm()
     return render_template('account/signup.html', form=form)
@@ -102,7 +102,22 @@ def create_user():
     send_mail("Welcome to datavivaiva!", [user.email], welcome_tpl)
     send_confirmation(user)
 
-    return redirect('/confirm_pending')
+    return redirect('/account/confirm_pending/%s' % user.email)
+
+
+@mod.route('/signin', methods=["GET"])
+def signin():
+    form = SigninForm()
+    return render_template('account/signin.html', form=form)
+
+
+@mod.route('/signin', methods=["POST"])
+def authenticate():
+    form = SigninForm()
+    user = User.query.filter_by(email=form.email.data, password=sha512(form.password.data))[-1]
+    login_user(user, remember=True)
+
+    return redirect("/")
 
 
 @mod.route('/confirm_pending/<user_email>', methods=["GET"])
@@ -113,12 +128,25 @@ def confirm_pending(user_email):
     try:
         user = User.query.filter_by(email=user_email)[-1]
     except IndexError:
-        abort(404, 'Entry not found')
+        abort(404, 'User not found')
 
     if user.confirmed:
         return redirect('/')
 
     return render_template('account/confirm_pending.html', user=user.serialize())
+
+
+@mod.route('/confirm/<code>', methods=["GET"])
+def confirm(code):
+
+    try:
+        user = User.query.filter_by(confirmation_code=code)[-1]
+        user.confirmed = True
+        db.session.commit()
+    except IndexError:
+        abort(404, 'User not found')
+
+    return redirect('/')
 
 
 @mod.route('/resend_confirmation/<user_email>', methods=["GET"])
@@ -132,14 +160,36 @@ def resend_confirmation(user_email):
         abort(404, 'Entry not found')
 
     user.confirmation_code = _gen_confirmation_code(user.email)
+    db.session.commit()
     send_confirmation(user)
 
-    return redirect('/confirm_pending')
+    return redirect('/account/confirm_pending/%s' % user.email)
 
 
-@mod.route('/signin/')
-def signin():
-    return render_template('account/signin.html')
+@mod.route('/change_password', methods=["GET"])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    return render_template("account/change_password.html", form=form)
+
+
+@mod.route('/change_password', methods=["POST"])
+@login_required
+def change():
+    form = ChangePasswordForm()
+    user = load_user(session["user_id"])
+    danger = 'error'
+
+    if user.password == sha512(form.current_password.data):
+        user.password = sha512(form.new_password.data)
+        db.session.commit()
+        msg = "Password successfully update!"
+        danger = ''
+    else:
+        msg = "The current password is invalid"
+
+    flash(msg, danger)
+    return render_template("account/change_password.html", form=form, message=msg)
 
 
 ###############################
