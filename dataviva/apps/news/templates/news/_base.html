@@ -5,7 +5,7 @@
 <div class="container">
     <ol class="breadcrumb">
         <li><a href="{{ url_for('general.home') }}">Home</a></li>
-        <li class="active"><span>Blog<span></li>
+        <li class="active"><span>News<span></li>
     </ol>
     <div class="row">
         <div class="sidebar col-xs-15 col-md-4">
@@ -24,22 +24,22 @@
         <div class="main-content col-xs-15 col-md-11">
 
         <script type="text/javascript">
-            window.BlogController = (function () {
+            window.NewsController = (function () {
                 return {
                     deletePost: deletePost
                 }
 
                 function deletePost(response) {
                     {% if form %}
-                        window.location = '/en/blog/?message='+response;
+                        window.location = '/en/news/?message='+response;
                     {% endif %}
                 }
 
             })();
         </script>
 
-        {% block blog_content %}
-        {% endblock blog_content %}
+        {% block news_content %}
+        {% endblock news_content %}
         </div>
     </div>
 </div>

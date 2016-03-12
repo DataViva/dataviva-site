@@ -2,15 +2,15 @@
 from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash
 from dataviva.apps.general.views import get_locale
 
-from models import Post, AuthorBlog
+from models import Post, AuthorNews
 from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
 from random import randrange
 
-mod = Blueprint('blog', __name__,
+mod = Blueprint('news', __name__,
                 template_folder='templates',
-                url_prefix='/<lang_code>/blog')
+                url_prefix='/<lang_code>/news')
 
 
 @mod.url_value_preprocessor
@@ -26,7 +26,7 @@ def add_language_code(endpoint, values):
 @mod.route('/', methods=['GET'])
 def index():
     posts = Post.query.all()
-    return render_template('blog/index.html', posts=posts)
+    return render_template('news/index.html', posts=posts)
 
 
 @mod.route('/post/<id>', methods=['GET'])
@@ -37,13 +37,13 @@ def show(id):
         read_more_posts = [posts.pop(randrange(len(posts))) for _ in range(3)]
     else:
         read_more_posts = posts
-    return render_template('blog/show.html', post=post, id=id, read_more_posts=read_more_posts)
+    return render_template('news/show.html', post=post, id=id, read_more_posts=read_more_posts)
 
 
 @mod.route('/post/new', methods=['GET'])
 def new():
     form = RegistrationForm()
-    return render_template('blog/new.html', form=form, action=url_for('blog.create'))
+    return render_template('news/new.html', form=form, action=url_for('news.create'))
 
 
 @mod.route('/post/<id>/edit', methods=['GET'])
@@ -56,14 +56,14 @@ def edit(id):
     form.text_content.data = post.text_content
     form.image_path.data = post.image_path
     form.thumb_path.data = post.thumb_path
-    return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
+    return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
 
 @mod.route('/post/new', methods=['POST'])
 def create():
     form = RegistrationForm()
     if form.validate() is False:
-        return render_template('blog/new.html', form=form)
+        return render_template('news/new.html', form=form)
     else:
         post = Post()
         post.title = form.title.data
@@ -75,14 +75,14 @@ def create():
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
-            post.authors.append(AuthorBlog(author_input))
+            post.authors.append(AuthorNews(author_input))
 
         db.session.add(post)
         db.session.commit()
 
         message = u'Muito obrigado! Seu post foi submetido com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('blog.index'))
+        return redirect(url_for('news.index'))
 
 
 @mod.route('/post/<id>/edit', methods=['POST'])
@@ -90,7 +90,7 @@ def update(id):
     form = RegistrationForm()
     id = int(id.encode())
     if form.validate() is False:
-        return render_template('blog/edit.html', form=form)
+        return render_template('news/edit.html', form=form)
     else:
         post = Post.query.filter_by(id=id).first_or_404()
         post.title = form.title.data
@@ -103,13 +103,13 @@ def update(id):
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
-            post.authors.append(AuthorBlog(author_input))
+            post.authors.append(AuthorNews(author_input))
 
         db.session.commit()
 
         message = u'Post editado com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('blog.index'))
+        return redirect(url_for('news.index'))
 
 
 @mod.route('/post/<id>/delete', methods=['GET'])
@@ -120,6 +120,6 @@ def delete(id):
         db.session.commit()
         message = u"Post excluído com sucesso!"
         flash(message, 'success')
-        return redirect(url_for('blog.index'))
+        return redirect(url_for('news.index'))
     else:
         return make_response(render_template('not_found.html'), 404)

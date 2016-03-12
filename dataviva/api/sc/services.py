@@ -49,6 +49,12 @@ class Basic_course:
         course_year = self.__sc__()
         return course_year.year
 
+    def location_name(self):
+        return Bra.query.filter(Bra.id == self.bra_id).one().name()
+
+    def state_name(self):
+        return Bra.query.filter(Bra.id == self.bra_id[:3]).one().name()
+
 class Basic_course_by_location(Basic_course):
     def __init__(self, course_sc_id, bra_id):
         Basic_course.__init__(self, course_sc_id)
@@ -142,6 +148,26 @@ class Basic_course_city(Basic_course):
         city_enrolled = self.__city_sorted_by_enrollment__()[0]
         return city_enrolled.enrolled
 
+class Basic_course_by_state(Basic_course_city):
+    def __init__(self, course_sc_id, bra_id):
+        Basic_course_city.__init__(self, course_sc_id)
+        self.bra_id = bra_id
+        self.max_year_subquery = db.session.query(
+            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
+        self.most_enrolled_city_query = Ybc_sc.query.join(Bra).filter(
+                Ybc_sc.course_sc_id == self.course_sc_id,
+                Ybc_sc.year == self.max_year_subquery,
+                Ybc_sc.bra_id.like(self.bra_id+'%'),
+                Ybc_sc.bra_id_len == 3)
+
+    def location_rank(self):
+        state_name = self.__city_sorted_by_enrollment__()[0]
+        return state_name.bra.name()
+
+    def location_enrolled(self):
+        state_enrolled = self.__city_sorted_by_enrollment__()[0]
+        return state_enrolled.enrolled
+
 class Basic_course_city_by_location(Basic_course_city):
     def __init__(self, course_sc_id, bra_id):
         Basic_course_city.__init__(self, course_sc_id)
@@ -183,11 +209,19 @@ class LocationSchool:
 
     def highest_enrolled_by_school(self):
         sc_list = self.__sc_sorted_by_enrollment__()
-        return sc_list[0].enrolled
+        if len(sc_list) != 0:
+            sc = sc_list[0]
+            return sc.enrolled
+        else:
+            return None
 
     def highest_enrolled_by_school_name(self):
         sc_list = self.__sc_sorted_by_enrollment__()
-        return sc_list[0][1].name()
+        if len(sc_list) != 0:
+            sc = sc_list[0][1]
+            return sc.name()
+        else:
+            return None
 
 class LocationBasicCourse(LocationSchool):
     def __init__(self, bra_id):
@@ -202,8 +236,16 @@ class LocationBasicCourse(LocationSchool):
 
     def highest_enrolled_by_basic_course(self):
         sc_list = self.__sc_sorted_by_enrollment__()
-        return sc_list[0].enrolled
+        if len(sc_list) != 0:
+            sc = sc_list[0]
+            return sc.enrolled
+        else:
+            return None
 
     def highest_enrolled_by_basic_course_name(self):
         sc_list = self.__sc_sorted_by_enrollment__()
-        return sc_list[0][1].name()
+        if len(sc_list) != 0:
+            sc = sc_list[0][1]
+            return sc.name()
+        else:
+            return None

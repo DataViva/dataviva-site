@@ -19,7 +19,8 @@ class Question:
 
 class Session:
 
-    def __init__(self, title, questions):
+    def __init__(self, session_title, title, questions):
+        self.session_title = session_title
         self.title = title
         self.questions = questions
 
@@ -128,18 +129,21 @@ entrepreneur_questions = [
 
 
 entrepreneur_session = Session(
-    title="What kind of analysis you want to make?",
+    session_title="Empreendedores",
+    title="Identifique o perfil econômico e as oportunidades de negócios de uma região",
     questions=entrepreneur_questions
 )
 
 
 development_agents_session = Session(
-    title="What kind of analysis you want to make?",
+    session_title="Agentes de Desenvolvimento",
+    title="Avalie a criação de políticas de desenvolvimento de acordo com a localidade",
     questions=development_agents_questions
 )
 
 student_session = Session(
-    title="What kind of analysis you want to make?",
+    session_title="Estudantes e Profissionais",
+    title="Descubra informações sobre empregos disponíveis, renda por ocupação e cursos",
     questions=student_questions
 )
 

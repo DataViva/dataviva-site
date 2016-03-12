@@ -47,7 +47,7 @@
     <script src="/static/js/dataviva-ng/services/selectors/major.js"></script>
     <script src="/static/js/dataviva-ng/services/selectors/occupation.js"></script>
     <script src="/static/js/dataviva-ng/services/selectors/product.js"></script>
-    <script src="/static/js/dataviva-ng/services/selectors/trading_partner.js"></script>
+    <script src="/static/js/dataviva-ng/services/selectors/trade_partner.js"></script>
     <script src="/static/js/dataviva-ng/services/selectors/university.js"></script>
 
     <script src="/static/js/dataviva-ng/services/selector.js"></script>
@@ -66,20 +66,24 @@
 
 
         $(document).ready(function() {
-            {% if message %}
-                $.notify({
-                    message: '{{message}}',
-                },{
-                    offset: {
-                            x: window.innerWidth * 18 / 100,
-                            y: window.innerHeight * 25 / 100
-                    },
-                    type: 'success',
-                    z_index: 1031,
-                    delay: 5000,
-                    timer: 1000
-                });
-            {% endif %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        $.notify({
+                            message: '{{message}}',
+                        },{
+                            offset: {
+                                    x: window.innerWidth * 18 / 100,
+                                    y: window.innerHeight * 25 / 100
+                            },
+                            type: '{{category}}',
+                            z_index: 1031,
+                            delay: 5000,
+                            timer: 1000
+                        });
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
         });
     </script>
 </body>
