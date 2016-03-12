@@ -89,11 +89,9 @@ MAIL_PASSWORD = get_env_variable("DATAVIVA_MAIL_PASSWORD", "")
 MAIL_PORT = 587
 MAIL_USE_TLS = False
 MAIL_USE_SSL = False
-MAIL_SERVER = 'smtp.mandrillapp.com'
-MAIL_PASSWORD = 'pjn5GrE41BzoeuAO_yxGnw'
-MAIL_USERNAME = 'monitor@2xt.com.br'
-GOOGLE_OAUTH_ID = "767103030107-cb7chjif5o5rdikg82hnikrdlf82bcc8.apps.googleusercontent.com"
-GOOGLE_OAUTH_SECRET = "rQR0Y4o1QI-c7jPuRbNu_u0f"
+MAIL_SERVER = 'smtp.sendgrid.net'
+MAIL_USERNAME = 'wartog'
+MAIL_PASSWORD = 'asdasd123'
 
 
 '''

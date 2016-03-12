@@ -113,8 +113,7 @@ def signin():
 
 @mod.route('/social_auth/<provider>', methods=["GET"])
 def social_auth(provider):
-    import pdb; pdb.set_trace()
-
+    # TODO
     if provider == "google":
         callback = url_for('account.google_authorized', _external=True)
         return google.authorize(callback=callback)
@@ -130,7 +129,7 @@ def authenticate():
         user = User.query.filter_by(
             email=form.email.data,
             password=sha512(form.password.data)
-        ).last()
+        )[-1]
         login_user(user, remember=True)
     except:
         return render_template(
@@ -148,7 +147,7 @@ def confirm_pending(user_email):
     '''
 
     try:
-        user = User.query.filter_by(email=user_email).last()
+        user = User.query.filter_by(email=user_email)[-1]
     except IndexError:
         abort(404, 'User not found')
 
@@ -162,7 +161,7 @@ def confirm_pending(user_email):
 def confirm(code):
 
     try:
-        user = User.query.filter_by(confirmation_code=code).last()
+        user = User.query.filter_by(confirmation_code=code)[-1]
         user.confirmed = True
         db.session.commit()
     except IndexError:
@@ -177,7 +176,7 @@ def resend_confirmation(user_email):
     '''
 
     try:
-        user = User.query.filter_by(email=user_email, confirmed=False).last()
+        user = User.query.filter_by(email=user_email, confirmed=False)[-1]
     except IndexError:
         abort(404, 'Entry not found')
 
@@ -225,13 +224,14 @@ def reset_password():
     form = ForgotPasswordForm()
 
     try:
-        user = User.query.filter_by(email=form.email.data).last()
-        user.password = sha512(str(datetime.now()) + form.email.data)[0:5]
+        user = User.query.filter_by(email=form.email.data)[-1]
+        pwd = md5(str(datetime.now()) + form.email.data).hexdigest()[0:5]
+        user.password = sha512(pwd)
         db.session.commit()
 
         email_tp = render_template('account/mail/forgot.html',
                                    user=user.serialize(),
-                                   new_pwd=user.password)
+                                   new_pwd=pwd)
         send_mail("Forgot Password", [user.email], email_tp)
 
         flash("A new password has been sent to you! Please check you inbox!")

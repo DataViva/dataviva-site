@@ -40,12 +40,13 @@
             </ul>
             <div class="nav navbar-nav navbar-right">
 
-                {% if not g.user %}
-                <a class="btn" data-toggle="modal" data-target="#dataviva-login">Entre</a>
+                {% if not g.user.is_authenticated %}
+                <a class="btn" href="/account/signin" >Entre</a>
                 ou
-                <a class="btn btn-default navbar-btn btn-dataviva" data-toggle="modal" data-target="#dataviva-signup">Cadastre-se</a>
+                <a class="btn btn-default navbar-btn btn-dataviva" href="/account/signup">Cadastre-se</a>
+                
                 {% else %}
-                <p>Bem vindo, {{ g.user.firstname }}!</p>
+                    <p>Bem vindo, {{ g.user.firstname }}! | <a href="/account/logout">Sair</a></p>                     
                 {% endif %}
 
                 <select name="language">
