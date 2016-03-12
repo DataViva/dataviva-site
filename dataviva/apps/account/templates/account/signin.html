@@ -1,7 +1,6 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 
-
 {% macro messages(input) -%}
     {% for message in input.errors %}
         <div class="alert alert-danger">
@@ -32,9 +31,8 @@
 		.btn-facebook{ background-color: #0000BA; }
 		.btn-twitter{ background-color: #42BAFF; }
 	</style>
-	<div class="container">
-
-		<form class="form-dataviva mt-lg" method="post" action="/en/account/signin" style="margin-top: 24px;">
+	<div class="container">		
+		<form class="form-dataviva mt-lg" method="post" action="{{ url_for('account.signin', next=next) }}" style="margin-top: 24px;">
 			<ul id="regular-signup" class="col-md-6 pull-left" style="list-style: none;">
 				<p>
 					<label for="email">Email</label>

@@ -106,10 +106,6 @@ def create_user():
     return redirect('/account/confirm_pending/%s' % user.email)
 
 
-@mod.route('/signin', methods=["GET"])
-def signin():
-    form = SigninForm()
-    return render_template('account/signin.html', form=form)
 
 
 @mod.route('/social_auth/<provider>', methods=["GET"])
@@ -122,24 +118,30 @@ def social_auth(provider):
     return render_template('account/signin.html', form=form)
 
 
-@mod.route('/signin', methods=["POST"])
-def authenticate():
+@mod.route('/signin', methods=["GET", "POST"])
+def signin():
+
     form = SigninForm()
 
-    try:
-        user = User.query.filter_by(
-            email=form.email.data,
-            password=sha512(form.password.data)
-        )[-1]
-        login_user(user, remember=True)
-    except:
-        flash("Invalid email or password.", "danger")
-        return render_template(
-            'account/signin.html',
-            form=form,
-        )
+    if request.method == "POST":
+        try:
+            user = User.query.filter_by(
+                email=form.email.data,
+                password=sha512(form.password.data)
+            )[-1]
+            login_user(user, remember=True)
+            redir = request.args.get("next", "/")
+            return redirect(redir)
+        except:
+            flash("Invalid email or password.", "danger")
+            return render_template(
+                'account/signin.html',
+                form=form,
+            )
+    else:
+        next = request.args.get("next", "")
 
-    return redirect("/account/edit_profile")
+        return render_template('account/signin.html', form=form, next=next)
 
 
 @mod.route('/confirm_pending/<user_email>', methods=["GET"])
@@ -165,9 +167,8 @@ def confirm(code):
         user = User.query.filter_by(confirmation_code=code)[-1]
         user.confirmed = True
         db.session.commit()
-
+        login_user(user, remember=True)
         flash("Lest us know more about you. Please complete your profile.", "info")
-
     except IndexError:
         abort(404, 'User not found')
 
