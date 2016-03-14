@@ -7,7 +7,7 @@ from dataviva.api.rais.services import OccupationMunicipalities
 from dataviva.api.rais.services import OccupationActivities
 
 from dataviva.api.rais.models import Yo
-from dataviva.api.attrs.models import Cbo
+from dataviva.api.attrs.models import Cbo, Bra
 from dataviva import db
 from sqlalchemy import func
 
@@ -30,8 +30,10 @@ def add_language_code(endpoint, values):
 def index(occupation_id):
 
     occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
-    # Use Example /occupation/2122 OR /occupation/2122?bra_id=4mg
+
     bra_id = request.args.get('bra_id')
+    location = Bra.query.filter_by(id= bra_id).first_or_404()
+
     header = {}
     body = {}
     body = {}
@@ -61,7 +63,7 @@ def index(occupation_id):
     occupation_activities_service = OccupationActivities(
         occupation_id=occupation_id, bra_id=bra_id)
 
-    header['name'] = occupation_service.occupation_name()
+    #header['name'] = occupation_service.occupation_name()
     header[
         'average_monthly_income'] = occupation_service.average_monthly_income()
     header['salary_mass'] = occupation_service.salary_mass()
@@ -96,7 +98,7 @@ def index(occupation_id):
     max_year_query = db.session.query(func.max(Yo.year)).filter(
         Yo.cbo_id == occupation_id)
     rais_query = Yo.query.filter(
-        Yo.year == max_year_query)\
+        Yo.year == max_year_query)\s
         .order_by(Yo.num_jobs.desc())
     rais = rais_query.all()
     for index, occ in enumerate(rais):
@@ -104,4 +106,4 @@ def index(occupation_id):
             header['ranking'] = index + 1
             break
 
-    return render_template('occupation/index.html', header=header, body=body, attr=occupation, bra_id = bra_id)
+    return render_template('occupation/index.html', header=header, body=body, attr=occupation, location=location)
