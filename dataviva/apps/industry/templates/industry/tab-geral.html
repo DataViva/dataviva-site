@@ -58,7 +58,7 @@
         <h2>Perfil Geral</h2>
 
         {% if not industry.bra_id %}
-        <p>A atividade econômica de {{header.name}} é a {{header.ranking}}ª em número de empregados no Brasil, os quais estão mais concentrados no estado de/da/do [ESTADO], com {{body.municipality_with_more_num_jobs_value | max_digits(3)}}  {{body.municipality_with_more_num_jobs_value | magnitude}} empregados. A ocupação com maior número de empregados nessa atividade é a de {{body.occ_with_more_number_jobs_name}}. No total, o Brasil possui {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}} estabelecimentos que trabalham com {{header.name}}.
+        <p>A atividade econômica de {{header.name}} é a {{header.ranking}}ª em número de empregados no Brasil, os quais estão mais concentrados no estado de/da/do {{body.state_with_more_jobs}}, com {{body.state_with_more_jobs_value | max_digits(3)}}  {{body.state_with_more_jobs_value | magnitude}} empregados. A ocupação com maior número de empregados nessa atividade é a de {{body.occ_with_more_number_jobs_name}}. No total, o Brasil possui {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}} estabelecimentos que trabalham com {{header.name}}.
         </p>
         {% else %}
 
