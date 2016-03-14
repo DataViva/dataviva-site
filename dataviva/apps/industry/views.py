@@ -82,6 +82,10 @@ def index(cnae_id):
         'occ_with_more_wage_avg_name'] = industry_occupation_service.occupation_with_biggest_wage_average()
     body[
         'occ_with_more_wage_avg_value'] = industry_occupation_service.biggest_wage_average()
+    body[
+        'state_with_more_jobs'] = industry_municipality_service.state()
+    body[
+        'state_with_more_jobs_value'] = industry_municipality_service.state_num_jobs()
 
     if bra_id is None or len(bra_id) != 9:
         body[
