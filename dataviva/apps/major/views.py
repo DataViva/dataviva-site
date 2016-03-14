@@ -73,7 +73,7 @@ def index(course_hedu_id):
             'location_name': major_service.location_name()
         }
 
-    content = {
+    body = {
         'university_with_more_enrolled': universities_service.university_with_more_enrolled(),
         'highest_enrolled_number_by_university': universities_service.highest_enrolled_number(),
         'municipality_with_more_enrolled': municipalities_service.municipality_with_more_enrolled(),
@@ -93,5 +93,5 @@ def index(course_hedu_id):
             header['rank'] = index
             break
 
-    return render_template('major/index.html', header=header, content=content,
+    return render_template('major/index.html', header=header, body=body,
                            body_class='perfil-estado', static_folder=static_folder)
