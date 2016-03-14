@@ -36,6 +36,7 @@ def index(occupation_id):
 
     header['cbo_id'] = occupation_id
     header['family_id'] = occupation_id[0]
+    header['bra_id'] = bra_id
 
     if len(occupation_id) == 4:
         context['is_family'] = True
@@ -46,6 +47,7 @@ def index(occupation_id):
 
     if bra_id:
         occupation_service = OccupationByLocation(occupation_id = occupation_id, bra_id = bra_id)
+        header['location_name'] = occupation_service.location_name()
         if len(bra_id) == 9:
             context['is_not_municipality'] = False
     else:

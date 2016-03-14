@@ -1,10 +1,11 @@
-from dataviva.api.hedu.models import Ybu, Ybc_hedu, Yu, Yuc, Yc_hedu, Ybc_hedu
+from dataviva.api.hedu.models import Ybu, Ybc_hedu, Yu, Yuc, Yc_hedu, Ybuc
 from dataviva.api.attrs.models import University as uni, Course_hedu, Bra
 from dataviva import db
 from sqlalchemy.sql.expression import func, desc
 
 
 class University:
+
     def __init__(self, university_id):
         self._hedu = None
         self._hedu_sorted_by_enrolled = None
@@ -12,9 +13,10 @@ class University:
         self._hedu_sorted_by_graduates = None
 
         self.university_id = university_id
-        self.max_year_query = db.session.query(func.max(Yu.year)).filter_by(university_id=university_id)
+        self.max_year_query = db.session.query(
+            func.max(Yu.year)).filter_by(university_id=university_id)
         self.hedu_query = Yu.query.filter(
-            Yu.university_id == self.university_id, 
+            Yu.university_id == self.university_id,
             Yu.year == self.max_year_query)
 
     def __hedu__(self):
@@ -32,19 +34,22 @@ class University:
     def __hedu_sorted_by_enrolled__(self):
         if not self._hedu_sorted_by_enrolled:
             self._hedu_sorted_by_enrolled = self.__hedu_list__()
-            self._hedu_sorted_by_enrolled.sort(key=lambda hedu: hedu.enrolled, reverse=True)
+            self._hedu_sorted_by_enrolled.sort(
+                key=lambda hedu: hedu.enrolled, reverse=True)
         return self._hedu_sorted_by_enrolled
 
     def __hedu_sorted_by_entrants__(self):
         if not self._hedu_sorted_by_entrants:
             self._hedu_sorted_by_entrants = self.__hedu_list__()
-            self._hedu_sorted_by_entrants.sort(key=lambda hedu: hedu.entrants, reverse=True)
+            self._hedu_sorted_by_entrants.sort(
+                key=lambda hedu: hedu.entrants, reverse=True)
         return self._hedu_sorted_by_entrants
 
     def __hedu_sorted_by_graduates__(self):
         if not self._hedu_sorted_by_graduates:
             self._hedu_sorted_by_graduates = self.__hedu_list__()
-            self._hedu_sorted_by_graduates.sort(key=lambda hedu: hedu.graduates, reverse=True)
+            self._hedu_sorted_by_graduates.sort(
+                key=lambda hedu: hedu.graduates, reverse=True)
         return self._hedu_sorted_by_graduates
 
     def name(self):
@@ -80,6 +85,7 @@ class University:
         hedu = self.__hedu_sorted_by_graduates__()[0]
         return hedu.graduates
 
+
 class UniversityMajors(University):
 
     def __init__(self, university_id):
@@ -104,7 +110,8 @@ class UniversityMajors(University):
 
 
 class Major:
-    def __init__(self, course_hedu_id):
+
+    def __init__(self, course_hedu_id, bra_id):
         self._hedu = None
 
         self._hedu_sorted_by_enrolled = None
@@ -113,16 +120,24 @@ class Major:
         self._hedu_major_rank = None
 
         self.course_hedu_id = course_hedu_id
+        self.bra_id = bra_id
 
-        self.max_year_query = db.session.query(func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
+        self.max_year_query = db.session.query(
+            func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
 
-        self.hedu_query = Yc_hedu.query.filter(
-            Yc_hedu.course_hedu_id == self.course_hedu_id, 
-            Yc_hedu.year == self.max_year_query)
+        if bra_id != '':
+            self.hedu_query = Ybc_hedu.query.filter(
+                Ybc_hedu.course_hedu_id == self.course_hedu_id,
+                Ybc_hedu.bra_id == self.bra_id,
+                Ybc_hedu.year == self.max_year_query)
+        else:
+            self.hedu_query = Yc_hedu.query.filter(
+                Yc_hedu.course_hedu_id == self.course_hedu_id,
+                Yc_hedu.year == self.max_year_query)
 
     def __hedu__(self):
         if not self._hedu:
-            hedu_data = self.hedu_query.one()
+            hedu_data = self.hedu_query.first_or_404()
             self._hedu = hedu_data
 
         return self._hedu
@@ -136,19 +151,22 @@ class Major:
     def __hedu_sorted_by_enrolled__(self):
         if not self._hedu_sorted_by_enrolled:
             self._hedu_sorted_by_enrolled = self.__hedu_list__()
-            self._hedu_sorted_by_enrolled.sort(key=lambda hedu: hedu.enrolled, reverse=True)
+            self._hedu_sorted_by_enrolled.sort(
+                key=lambda hedu: hedu.enrolled, reverse=True)
         return self._hedu_sorted_by_enrolled
 
     def __hedu_sorted_by_entrants__(self):
         if not self._hedu_sorted_by_entrants:
             self._hedu_sorted_by_entrants = self.__hedu_list__()
-            self._hedu_sorted_by_entrants.sort(key=lambda hedu: hedu.entrants, reverse=True)
+            self._hedu_sorted_by_entrants.sort(
+                key=lambda hedu: hedu.entrants, reverse=True)
         return self._hedu_sorted_by_entrants
 
     def __hedu_sorted_by_graduates__(self):
-        if not self._hedu_sorted_by_graduates: 
+        if not self._hedu_sorted_by_graduates:
             self._hedu_sorted_by_graduates = self.__hedu_list__()
-            self._hedu_sorted_by_graduates.sort(key=lambda hedu: hedu.graduates, reverse=True)
+            self._hedu_sorted_by_graduates.sort(
+                key=lambda hedu: hedu.graduates, reverse=True)
         return self._hedu_sorted_by_graduates
 
     def name(self):
@@ -181,17 +199,27 @@ class Major:
         hedu = self.__hedu_sorted_by_graduates__()[0]
         return hedu.graduates
 
-    
+    def location_name(self):
+        return Bra.query.filter(Bra.id == self.bra_id).first().name()
+
+
 class MajorUniversities(Major):
-    def __init__(self, course_hedu_id):
-        Major.__init__(self, course_hedu_id)
+
+    def __init__(self, course_hedu_id, bra_id):
+        Major.__init__(self, course_hedu_id, bra_id)
         self.course_hedu_id = course_hedu_id
 
-        self.max_year_query = db.session.query(func.max(Yuc.year)).filter_by(course_hedu_id=course_hedu_id)
-        self.hedu_query = Yuc.query.filter(
-            Yuc.course_hedu_id == self.course_hedu_id,
-            Yuc.year == self.max_year_query
-        )
+        self.max_year_query = db.session.query(
+            func.max(Yuc.year)).filter_by(course_hedu_id=course_hedu_id)
+        if bra_id == '':
+            self.hedu_query = Yuc.query.filter(
+                Yuc.course_hedu_id == self.course_hedu_id,
+                Yuc.year == self.max_year_query)
+        else:
+            self.hedu_query = Ybuc.query.filter(
+                Ybuc.course_hedu_id == self.course_hedu_id,
+                Ybuc.bra_id == self.bra_id,
+                Ybuc.year == self.max_year_query)
 
     def university_with_more_enrolled(self):
         hedu = self.__hedu_sorted_by_enrolled__()[0]
@@ -206,39 +234,50 @@ class MajorUniversities(Major):
         return hedu.university.name()
 
 
-
 class MajorMunicipalities(Major):
-    def __init__(self, course_hedu_id):
-        Major.__init__(self, course_hedu_id)
+
+    def __init__(self, course_hedu_id, bra_id):
+        Major.__init__(self, course_hedu_id, bra_id)
         self.course_hedu_id = course_hedu_id
 
-        self.max_year_query = db.session.query(func.max(Ybc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
+        self.max_year_query = db.session.query(
+            func.max(Ybc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
 
-        self.hedu_query =  Ybc_hedu.query.filter(
-            Ybc_hedu.course_hedu_id == self.course_hedu_id,
-            Ybc_hedu.year == self.max_year_query,
-            func.length(Ybc_hedu.bra_id) == 9)
+        if bra_id == '':
+            self.hedu_query = Ybc_hedu.query.filter(
+                Ybc_hedu.course_hedu_id == self.course_hedu_id,
+                Ybc_hedu.year == self.max_year_query,
+                func.length(Ybc_hedu.bra_id) == 9)
+        else:
+            self.hedu_query = Ybc_hedu.query.filter(
+                Ybc_hedu.course_hedu_id == self.course_hedu_id,
+                Ybc_hedu.year == self.max_year_query,
+                Ybc_hedu.bra_id.like(self.bra_id+'%'),
+                func.length(Ybc_hedu.bra_id) == 9)
 
     def municipality_with_more_enrolled(self):
         hedu = self.__hedu_sorted_by_enrolled__()[0]
         return hedu.bra.name()
-    
+
     def municipality_with_more_entrants(self):
         hedu = self.__hedu_sorted_by_entrants__()[0]
         return hedu.bra.name()
-    
+
     def municipality_with_more_graduates(self):
         hedu = self.__hedu_sorted_by_graduates__()[0]
         return hedu.bra.name()
-        
+
+
 class LocationUniversity:
+
     def __init__(self, bra_id):
         self._hedu_sorted_by_enrolled = None
         self._hedu = None
         self.bra_id = bra_id
-        self.max_year_query = db.session.query(func.max(Ybu.year)).filter_by(bra_id=bra_id)
+        self.max_year_query = db.session.query(
+            func.max(Ybu.year)).filter_by(bra_id=bra_id)
         self.hedu_query = Ybu.query.join(uni).filter(
-            Ybu.bra_id == self.bra_id, 
+            Ybu.bra_id == self.bra_id,
             Ybu.year == self.max_year_query)
 
     def __hedu__(self):
@@ -256,9 +295,10 @@ class LocationUniversity:
     def __hedu_sorted_by_enrolled__(self):
         if not self._hedu_sorted_by_enrolled:
             self._hedu_sorted_by_enrolled = self.__hedu_list__()
-            self._hedu_sorted_by_enrolled.sort(key=lambda hedu: hedu.enrolled, reverse=True)
+            self._hedu_sorted_by_enrolled.sort(
+                key=lambda hedu: hedu.enrolled, reverse=True)
         return self._hedu_sorted_by_enrolled
-        
+
     def highest_enrolled_by_university(self):
         hedu_list = self.__hedu_sorted_by_enrolled__()
         if len(hedu_list) != 0:
@@ -275,12 +315,15 @@ class LocationUniversity:
         else:
             return None
 
+
 class LocationMajor(LocationUniversity):
+
     def __init__(self, bra_id):
         LocationUniversity.__init__(self, bra_id)
         self._hedu = None
         self.bra_id = bra_id
-        self.max_year_query = db.session.query(func.max(Ybc_hedu.year)).filter_by(bra_id=bra_id)
+        self.max_year_query = db.session.query(
+            func.max(Ybc_hedu.year)).filter_by(bra_id=bra_id)
         self.hedu_query = Ybc_hedu.query.join(Course_hedu).filter(
             Ybc_hedu.bra_id == self.bra_id,
             Ybc_hedu.course_hedu_id_len == 6,

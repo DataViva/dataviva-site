@@ -263,6 +263,9 @@ class Product:
     def year(self):
         return self.__secex__().year
 
+    def location_name(self):
+        return "Brasil"
+
     def trade_balance(self):
         export_val = self.__secex__().export_val or 0
         import_val = self.__secex__().import_val or 0
@@ -405,6 +408,9 @@ class ProductLocations(Product):
             Ymbp.month == 0,
             Ymbp.year == self.max_year_query
         )
+
+    def location_name(self):
+        return Bra.query.filter(Bra.id == self.bra_id).first().name()
 
     def rca_wld(self):
         secex = self.__secex__()
