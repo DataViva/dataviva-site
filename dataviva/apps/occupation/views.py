@@ -52,7 +52,7 @@ def index(occupation_id):
     if bra_id:
         occupation_service = OccupationByLocation(
             occupation_id=occupation_id, bra_id=bra_id)
-        header['location_name'] = occupation_service.location_name()
+        #header['location_name'] = occupation_service.location_name()
         if len(bra_id) == 9:
             body['is_not_municipality'] = False
     else:
