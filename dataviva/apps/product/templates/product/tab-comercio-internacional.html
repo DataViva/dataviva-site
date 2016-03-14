@@ -7,9 +7,7 @@
                 <table class="table data-blue">
                     <thead>
                         <tr>
-
-                            {% if context.bra_id_len != 9 %}
-
+                            {% if (bra_id|length) != 9 %}
                             <th>
                                 Principal Município
                                 <small>por Valor Total Exportado</small>
@@ -18,9 +16,7 @@
                                 Principal Município
                                 <small>por Valor Total Importado</small>
                             </th>
-
                             {% endif %}
-
                             <th>
                                 Principal Destino
                                 <small>por Valor Total Exportado</small>
@@ -33,9 +29,7 @@
                     </thead>
                     <tbody>
                         <tr>
-
-                            {% if context.bra_id_len != 9 %}
-
+                            {% if (bra_id|length) != 9 %}
                             <td>
                                 <p class="label">{{ body.municipality_name_export }}</p>
                                 <div class="number">
@@ -48,9 +42,7 @@
                                     USD <strong class="counter">{{ body.municipality_import_value | max_digits(3) }}</strong><span>{{ body.municipality_import_value | magnitude }}</span>
                                 </div>
                             </td>
-
                             {% endif %}
-
                             <td>
                                 <p class="label">{{ body.destination_name_export }}</p>
                                 <div class="number">
@@ -70,46 +62,46 @@
         </div>
     </div>
 
-<a href="/pt/embed/line/secex/all/{{header.product_id}}/all/balance/" 
+<a href="/pt/embed/line/secex/all/{{product.id}}/all/balance/"
         target="frame-tab-comercio-internacional">Balança Comercial</a></br>
 
 <a href="" target="frame-tab-comercio-internacional">Exportações por</a> </br>
-    <a href="" target="frame-tab-comercio-internacional">&nbsp Municipio :</a> 
-        
-        <a href="/pt/embed/tree_map/secex/all/{{header.product_id}}/all/bra/?size=export_val" target="frame-tab-comercio-internacional">&nbsp TreeMap</a> 
-        
-        <a href="/pt/embed/geo_map/secex/all/{{header.product_id}}/all/bra/?color=export_val" 
-        target="frame-tab-comercio-internacional">&nbsp Mapa</a>  
-        
-        <a href="/pt/embed/stacked/secex/all/{{header.product_id}}/all/bra/?y=export_val&layout=value&sort=asc" target="frame-tab-comercio-internacional">&nbsp Evoluçāo</a></br>
-    
-    <a href="" target="frame-tab-comercio-internacional">&nbsp Destino : </a> 
-        
-        <a href="/pt/embed/tree_map/secex/all/{{header.product_id}}/all/wld/?size=export_val&depth=wld_5" target="frame-tab-comercio-internacional">&nbsp TreeMap</a> 
+    <a href="" target="frame-tab-comercio-internacional">&nbsp Municipio :</a>
 
-        <a href="/pt/embed/line/secex/all/{{header.product_id}}/all/wld/?y=export_val&color=color" target="frame-tab-comercio-internacional">&nbsp Linha</a> 
+        <a href="/pt/embed/tree_map/secex/all/{{product.id}}/all/bra/?size=export_val" target="frame-tab-comercio-internacional">&nbsp TreeMap</a>
 
-        <a href="/pt/embed/stacked/secex/all/{{header.product_id}}/all/wld/?y=export_val?y=export_val&time=year&order=color&layout=value&sort=asc&color=color" target="frame-tab-comercio-internacional">&nbsp Evoluçāo</a> </br>
+        <a href="/pt/embed/geo_map/secex/all/{{product.id}}/all/bra/?color=export_val"
+        target="frame-tab-comercio-internacional">&nbsp Mapa</a>
+
+        <a href="/pt/embed/stacked/secex/all/{{product.id}}/all/bra/?y=export_val&layout=value&sort=asc" target="frame-tab-comercio-internacional">&nbsp Evoluçāo</a></br>
+
+    <a href="" target="frame-tab-comercio-internacional">&nbsp Destino : </a>
+
+        <a href="/pt/embed/tree_map/secex/all/{{product.id}}/all/wld/?size=export_val&depth=wld_5" target="frame-tab-comercio-internacional">&nbsp TreeMap</a>
+
+        <a href="/pt/embed/line/secex/all/{{product.id}}/all/wld/?y=export_val&color=color" target="frame-tab-comercio-internacional">&nbsp Linha</a>
+
+        <a href="/pt/embed/stacked/secex/all/{{product.id}}/all/wld/?y=export_val?y=export_val&time=year&order=color&layout=value&sort=asc&color=color" target="frame-tab-comercio-internacional">&nbsp Evoluçāo</a> </br>
 
 <a href="" target="frame-tab-comercio-internacional">Importações por</a> </br>
-    <a href="" target="frame-tab-comercio-internacional">&nbsp Municipio : </a> 
-        
-        <a href="/pt/embed/tree_map/secex/all/{{header.product_id}}/all/bra/?size=import_val&depth=bra_9&color=color" target="frame-tab-comercio-internacional">&nbsp TreeMap</a> 
+    <a href="" target="frame-tab-comercio-internacional">&nbsp Municipio : </a>
 
-        <a href="/pt/embed/geo_map/secex/all/{{header.product_id}}/all/bra/?color=import_val" target="frame-tab-comercio-internacional">&nbsp Mapa</a>  
+        <a href="/pt/embed/tree_map/secex/all/{{product.id}}/all/bra/?size=import_val&depth=bra_9&color=color" target="frame-tab-comercio-internacional">&nbsp TreeMap</a>
 
-        <a href="/pt/embed/stacked/secex/all/{{header.product_id}}/all/bra/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color" target="frame-tab-comercio-internacional">&nbsp Evoluçāo</a></br>
+        <a href="/pt/embed/geo_map/secex/all/{{product.id}}/all/bra/?color=import_val" target="frame-tab-comercio-internacional">&nbsp Mapa</a>
 
-    
-    <a href="" target="frame-tab-comercio-internacional">&nbsp Origem : </a> 
-        
-        <a href="/pt/embed/tree_map/secex/all/{{header.product_id}}/all/wld/?size=import_val&depth=wld_5" target="frame-tab-comercio-internacional">&nbsp TreeMap</a> 
+        <a href="/pt/embed/stacked/secex/all/{{product.id}}/all/bra/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color" target="frame-tab-comercio-internacional">&nbsp Evoluçāo</a></br>
 
-        <a href="/pt/embed/line/secex/all/{{header.product_id}}/all/wld/?y=import_val&time=year&color=color" target="frame-tab-comercio-internacional">&nbsp Linha</a> 
 
-        <a href="/pt/embed/stacked/secex/all/{{header.product_id}}/all/wld/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color" target="frame-tab-comercio-internacional">&nbsp Evoluçāo</a></br>
+    <a href="" target="frame-tab-comercio-internacional">&nbsp Origem : </a>
+
+        <a href="/pt/embed/tree_map/secex/all/{{product.id}}/all/wld/?size=import_val&depth=wld_5" target="frame-tab-comercio-internacional">&nbsp TreeMap</a>
+
+        <a href="/pt/embed/line/secex/all/{{product.id}}/all/wld/?y=import_val&time=year&color=color" target="frame-tab-comercio-internacional">&nbsp Linha</a>
+
+        <a href="/pt/embed/stacked/secex/all/{{product.id}}/all/wld/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color" target="frame-tab-comercio-internacional">&nbsp Evoluçāo</a></br>
 </div>
 
 
-<iframe name="frame-tab-comercio-internacional" id="frame-tab-comercio-internacional" width='684' height='350' src='/pt/embed/line/secex/all/{{header.product_id}}/all/balance/?' frameborder='0'></iframe>
+<iframe name="frame-tab-comercio-internacional" id="frame-tab-comercio-internacional" width='684' height='350' src='/pt/embed/line/secex/all/{{product.id}}/all/balance/?' frameborder='0'></iframe>
 
