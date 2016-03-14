@@ -1,7 +1,7 @@
 from dataviva.api.attrs.models import Cnae, Cbo, Bra
 from dataviva.api.rais.models import Yi, Yo, Ybo, Ybi, Yio, Ybio, Yb_rais
 from dataviva import db
-from sqlalchemy import func
+from sqlalchemy import func, desc
 
 
 class Industry:
@@ -64,7 +64,6 @@ class Industry:
     def biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.wage_avg
-
 
 class Occupation:
     def __init__(self, occupation_id):
@@ -162,7 +161,6 @@ class IndustryByLocation(Industry):
         bra_query = Bra.query.filter(Bra.id == self.bra_id).first()
         return bra_query.name()
 
-
 class IndustryOccupation(Industry):
     def __init__(self, cnae_id, bra_id):
         Industry.__init__(self, cnae_id)
@@ -204,6 +202,11 @@ class IndustryMunicipality(Industry):
                 Ybi.bra_id_len == 9,
                 Ybi.year == self.max_year,
                 )
+        self.state_query = Ybi.query.join(Bra).filter(
+                Ybi.cnae_id == self.cnae_id,
+                Ybi.year == self.max_year,
+                Ybi.bra_id_len == 3
+                ).order_by(desc(Ybi.num_jobs)).first()
 
         if bra_id:
             self.bra_id = bra_id
@@ -223,6 +226,12 @@ class IndustryMunicipality(Industry):
     def municipality_with_more_wage_average(self):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.bra.name()
+
+    def state(self):
+        return self.state_query.bra.name()
+
+    def state_num_jobs(self):
+        return self.state_query.num_jobs
 
 
 class OccupationByLocation(Occupation):
