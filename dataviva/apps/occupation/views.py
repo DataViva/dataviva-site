@@ -31,9 +31,9 @@ def index(occupation_id):
 
     occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
 
+    # Use Example /occupation/2122 OR /occupation/2122?bra_id=4mg
     bra_id = request.args.get('bra_id')
-    location = Bra.query.filter_by(id= bra_id).first_or_404()
-
+    location = Bra.query.filter_by(id= bra_id).first()
     header = {}
     body = {}
     body = {}
@@ -98,7 +98,7 @@ def index(occupation_id):
     max_year_query = db.session.query(func.max(Yo.year)).filter(
         Yo.cbo_id == occupation_id)
     rais_query = Yo.query.filter(
-        Yo.year == max_year_query)\s
+        Yo.year == max_year_query)\
         .order_by(Yo.num_jobs.desc())
     rais = rais_query.all()
     for index, occ in enumerate(rais):
@@ -106,4 +106,4 @@ def index(occupation_id):
             header['ranking'] = index + 1
             break
 
-    return render_template('occupation/index.html', header=header, body=body, attr=occupation, location=location)
+    return render_template('occupation/index.html', header=header, body=body, attr=occupation, bra_id = bra_id)
