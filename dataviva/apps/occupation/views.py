@@ -38,7 +38,7 @@ def index(occupation_id):
     body = {}
     body = {}
 
-    header['cbo_id'] = occupation_id
+    #header['cbo_id'] = occupation.id
     header['family_id'] = occupation_id[0]
     header['bra_id'] = bra_id
 
