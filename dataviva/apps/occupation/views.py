@@ -40,7 +40,7 @@ def index(occupation_id):
 
     #header['cbo_id'] = occupation.id
     header['family_id'] = occupation_id[0]
-    header['bra_id'] = bra_id
+    header['bra_id'] = location.id
 
     if len(occupation_id) == 4:
         body['is_family'] = True
