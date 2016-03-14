@@ -68,16 +68,16 @@
         <h2>Perfil Geral</h2>
         {% if (product.id|length) == 6 %}
             <p>O produto {{ product.name() }} ocupa a {{ header.export_value_ranking }}&ordm posição em importações e a {{ header.import_value_ranking }}&ordm posição
-            em exportações [artigo/genero/plural] {{ location.name() }}. Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio,
+            em exportações {{ location.preposition('em')}} {{ location.name() }}. Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio,
             representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}}
-            em cinco anos. O município [artigo/genero/plural] {{ location.name() }} que mais exporta [artigo/genero/plural]  {{ product.name() }} é [artigo/genero] {{ body.municipality_name_export }} e o que mais importa é
-            [artigo/genero] {{ body.municipality_name_import }}.</p>
+            em cinco anos. O município {{ location.preposition('de') }} {{ location.name() }} que mais exporta {{ product.article() }} {{ product.name() }} é {{ location.article() }} {{ body.municipality_name_export }} e o que mais importa é
+            {{ location.article() }} {{ body.municipality_name_import }}.</p>
         {% endif %}
         {% if (product.id|length) == 2 %}
-            <p>[artigo/genero/plural] {{ product.name() }} ocupam a {{ header.import_value_ranking }}&ordm posição em importações e a {{ header.export_value_ranking }}&ordm posição em exportações no Brasil.
+            <p>{{ product.article() | capitalize }} {{ product.name() }} ocupam a {{ header.import_value_ranking }}&ordm posição em importações e a {{ header.export_value_ranking }}&ordm posição em exportações no Brasil.
             Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos.
-            O município [artigo/genero/plural] {{ location.name() }} que mais exporta [artigo/genero/plural] {{ product.name() }} é [artigo/genero] {{ body.municipality_name_export }} e o que mais importa é
-            [artigo/genero] {{ body.municipality_name_import }}.</p>
+            O município {{ location.article() }} {{ location.name() }} que mais exporta {{ product.article() }} {{ product.name() }} é {{ location.article() }} {{ body.municipality_name_export }} e o que mais importa é
+            {{ location.article() }} {{ body.municipality_name_import }}.</p>
         {% endif %}
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
