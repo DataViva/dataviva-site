@@ -7,6 +7,7 @@ from dataviva.api.rais.services import OccupationMunicipalities
 from dataviva.api.rais.services import OccupationActivities
 
 from dataviva.api.rais.models import Yo
+from dataviva.api.attrs.models import Cbo
 from dataviva import db
 from sqlalchemy import func
 
@@ -28,6 +29,7 @@ def add_language_code(endpoint, values):
 @mod.route('/<occupation_id>')
 def index(occupation_id):
 
+    occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
     # Use Example /occupation/2122 OR /occupation/2122?bra_id=4mg
     bra_id = request.args.get('bra_id')
     header = {}
@@ -102,4 +104,4 @@ def index(occupation_id):
             header['ranking'] = index + 1
             break
 
-    return render_template('occupation/index.html', header=header, body=body, attr = attr, bra_id = bra_id)
+    return render_template('occupation/index.html', header=header, body=body, attr=occupation, bra_id = bra_id)
