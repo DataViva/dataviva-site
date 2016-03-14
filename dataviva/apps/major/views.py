@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.hedu.models import Yc_hedu, Ybc_hedu
+from dataviva.api.attrs.models import Bra, Course_hedu
 from dataviva.api.hedu.services import Major, MajorUniversities, MajorMunicipalities
 from dataviva import db
 from sqlalchemy.sql.expression import func
@@ -93,4 +94,9 @@ def index(course_hedu_id):
             header['rank'] = index
             break
 
-    return render_template('major/index.html', static_folder=static_folder, header=header, body=body)
+    
+    location = Bra.query.filter(Bra.id==bra_id).first()
+
+    major = Course_hedu.query.filter(Course_hedu.id == course_hedu_id).first()
+
+    return render_template('major/index.html', static_folder=static_folder, header=header, body=body, location=location, major=major)
