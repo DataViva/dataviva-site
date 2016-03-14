@@ -65,6 +65,7 @@ class Industry:
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.wage_avg
 
+
 class Occupation:
     def __init__(self, occupation_id):
         self.occupation_id = occupation_id
@@ -160,6 +161,7 @@ class IndustryByLocation(Industry):
     def name(self):
         bra_query = Bra.query.filter(Bra.id == self.bra_id).first()
         return bra_query.name()
+
 
 class IndustryOccupation(Industry):
     def __init__(self, cnae_id, bra_id):
