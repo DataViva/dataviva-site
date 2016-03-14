@@ -93,5 +93,4 @@ def index(course_hedu_id):
             header['rank'] = index
             break
 
-    return render_template('major/index.html', header=header, body=body,
-                           body_class='perfil-estado', static_folder=static_folder)
+    return render_template('major/index.html', static_folder=static_folder, header=header, body=body)
