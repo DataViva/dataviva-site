@@ -33,7 +33,7 @@ def index(occupation_id):
 
     # Use Example /occupation/2122 OR /occupation/2122?bra_id=4mg
     bra_id = request.args.get('bra_id')
-    location = Bra.query.filter_by(id= bra_id).first()
+    location = Bra.query.filter_by(id=bra_id).first()
     header = {}
     body = {}
     body = {}
@@ -52,7 +52,6 @@ def index(occupation_id):
     if bra_id:
         occupation_service = OccupationByLocation(
             occupation_id=occupation_id, bra_id=bra_id)
-        #header['location_name'] = occupation_service.location_name()
         if len(bra_id) == 9:
             body['is_not_municipality'] = False
     else:
