@@ -107,7 +107,7 @@ def index(wld_id):
         'product_with_lowest_balance': products_service.product_with_lowest_balance(),
         'lowest_balance': products_service.lowest_balance(),
         'world_trade_description': 'World trade description.',
-    }
+    }    
 
     for index, trp in enumerate(export_rank):
         if export_rank[index].wld_id == wld_id:
@@ -117,6 +117,6 @@ def index(wld_id):
     for index, trp in enumerate(import_rank):
         if import_rank[index].wld_id == wld_id:
             header['import_rank'] = index
-            break
+            break            
 
     return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body)

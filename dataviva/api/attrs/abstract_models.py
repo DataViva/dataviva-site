@@ -13,7 +13,13 @@ class BasicAttr(object):
 
     def name(self):
         lang = getattr(g, "locale", "en")
-        return title_case(getattr(self,"name_"+lang))
+        return title_case(getattr(self, "name_"+lang))
+
+    def preposition(self, prepositon):
+        return "de"
+
+    def article(self):
+        return "a"
 
 
 class ExpandedAttr(BasicAttr):

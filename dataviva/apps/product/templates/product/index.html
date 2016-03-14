@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-xs-15 col-md-offset-4 col-md-11">
                 <h1>
-                    {{ header.name }} <a href="#" title="Trocar" onclick="start_selector('Product');"> (trocar)</a>
+                    {{ product.name() }} <a href="#" title="Trocar" onclick="start_selector('Product');"> (trocar)</a>
                 </h1>
             </div>
         </div>
@@ -21,7 +21,7 @@
     <div class="row">
         <div class="sidebar has-img col-xs-15 col-md-4">
             <div class="tit">
-                <span class="dv-hs-{{ header.section_id }}"></span>
+                <span class="dv-hs-{{ product.id[0:2] }}"></span>
             </div>
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active">
@@ -30,28 +30,20 @@
                 <li role="presentation">
                     <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab">Comércio Internacional</a>
                 </li>
-
-                {% if context.depth == 6 %}
-
+                {% if (product.id|length) == 6 %}
                     <li role="presentation">
                         <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidade Econômica</a>
                     </li>
-
                 {% endif %}
-
             </ul>
         </div>
         <div class="main-content col-xs-15 col-md-11">
             <div class="tab-content">
                 {% include "product/tab-geral.html" %}
                 {% include "product/tab-comercio-internacional.html" %}
-
-                {% if context.depth == 6 %}
-
+                {% if (product.id|length) == 6 %}
                     {% include "product/tab-oportunidade-economica.html" %}
-
                 {% endif %}
-
             </div>
         </div>
     </div>
