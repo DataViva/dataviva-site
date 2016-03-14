@@ -5,6 +5,7 @@ from dataviva.api.secex.services import Product as ProductService
 from dataviva.api.secex.services import ProductTradePartners as ProductTradePartnersService
 from dataviva.api.secex.services import ProductMunicipalities as ProductMunicipalitiesService
 from dataviva.api.secex.services import ProductLocations as ProductLocationsService
+from dataviva.api.attrs.models import Bra
 
 
 mod = Blueprint('product', __name__,
@@ -38,6 +39,8 @@ def index(product_id):
     context['bra_id'] = bra_id
     if bra_id:
         context['bra_id_len'] = len(bra_id)
+    else:
+        context['bra_id_len'] = 0
 
     trade_partners_service = ProductTradePartnersService(product_id=product_id, bra_id=bra_id)
     municipalities_service = ProductMunicipalitiesService(product_id=product_id, bra_id=bra_id)
@@ -115,5 +118,10 @@ def index(product_id):
         if secex[ranking].hs_id == product_id:
             header['import_value_ranking'] = ranking + 1
             break
+    
+
+    header['location_name'] = product_service.location_name();        
+
+    #print header['location_name']
 
     return render_template('product/index.html', body_class='perfil-estado', header=header, body=body, context=context)

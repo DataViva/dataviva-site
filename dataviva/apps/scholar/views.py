@@ -72,7 +72,7 @@ def create():
 
         keyword_input_list = form.keywords.data.split(',')
         for keyword_input in keyword_input_list:
-            keyword = KeyWord.query.filter_by(name=keyword_input).first_or_404()
+            keyword = KeyWord.query.filter_by(name=keyword_input).first()
 
             if not keyword:
                 article.keywords.append(KeyWord(keyword_input))
@@ -109,7 +109,7 @@ def update(id):
 
         keyword_input_list = form.keywords.data.split(',')
         for keyword_input in keyword_input_list:
-            keyword = KeyWord.query.filter_by(name=keyword_input).first_or_404()
+            keyword = KeyWord.query.filter_by(name=keyword_input).first()
 
             if not keyword:
                 article.keywords.append(KeyWord(keyword_input))
