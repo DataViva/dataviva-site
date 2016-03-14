@@ -4,7 +4,7 @@ from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Industry, IndustryOccupation, IndustryMunicipality, IndustryByLocation
 from dataviva import db
 from sqlalchemy import func, desc
-from dataviva.api.rais.models import Yi
+from dataviva.api.rais.models import Yi, Ybi
 
 mod = Blueprint('industry', __name__,
                 template_folder='templates',
@@ -94,16 +94,31 @@ def index(cnae_id):
         body[
             'municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
 
-    yi_max_year = db.session.query(
-        func.max(Yi.year)).filter_by(cnae_id=cnae_id)
-    list_rais = Yi.query.filter(
-        Yi.year == yi_max_year
-    ).order_by(desc(Yi.num_jobs)).all()
+    if bra_id:
+
+        ybi_max_year = db.session.query(
+            func.max(Ybi.year)).filter_by(cnae_id=cnae_id, bra_id=bra_id)
+        list_rais = Ybi.query.filter(
+            Ybi.year == ybi_max_year,
+            Ybi.bra_id == bra_id,
+            Ybi.cnae_id_len == func.length(cnae_id)
+        ).order_by(desc(Ybi.num_jobs)).all()
+
+    else:
+
+        yi_max_year = db.session.query(
+            func.max(Yi.year)).filter_by(cnae_id=cnae_id)
+        list_rais = Yi.query.filter(
+            Yi.year == yi_max_year,
+            Yi.cnae_id_len == func.length(cnae_id)
+        ).order_by(desc(Yi.num_jobs)).all()
 
     for index, rais in enumerate(list_rais):
         if rais.cnae_id == cnae_id:
             header['ranking'] = index+1
             break
+
+    header['RAIS'] = rais.cnae_id
 
     industry_service_num_establishments = Industry(cnae_id=cnae_id)
     header[
