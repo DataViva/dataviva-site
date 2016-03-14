@@ -59,6 +59,7 @@ def index(bra_id):
         header = {
             'name': location_service.name(),
             'bra_id': bra_id[:3],
+            'id':bra_id,
             'gdp': location_service.gdp(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp()/location_service.population(),
@@ -67,6 +68,7 @@ def index(bra_id):
         header = {
             'name': location_service.name(),
             'bra_id': bra_id[:3],
+            'id':bra_id,
             'gdp': location_service.gdp(),
             'life_expectation': location_service.life_expectation(),
             'population': location_service.population(),

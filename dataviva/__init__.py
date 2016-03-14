@@ -15,7 +15,7 @@ from flask.ext.cache import Cache
 # for new filters, redis sessions
 from flask.ext.mail import Mail
 from utils.jinja_helpers import jinja_formatter, jinja_momentjs, jinja_split, \
- jinja_strip_html, max_digits , jinja_magnitude
+    jinja_strip_html, max_digits, jinja_magnitude
 
 from utils.redis import RedisSessionInterface
 
