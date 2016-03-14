@@ -106,4 +106,4 @@ def index(occupation_id):
             header['ranking'] = index + 1
             break
 
-    return render_template('occupation/index.html', header=header, body=body, attr=occupation, bra_id = bra_id)
+    return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location)
