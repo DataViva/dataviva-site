@@ -29,6 +29,7 @@ def index(university_id):
     majors_service = UniversityMajors(university_id)
 
     header = {
+        'university_id' : university_id,
         'sector_id' : university_id[0],
         'name' : university_service.name(),
         'type' : university_service.university_type(),
