@@ -32,16 +32,16 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        {% if not header.bra_id %}
+        {% if not bra_id %}
             <p>A ocupação {{header.name}} emprega {{header.total_employment}} de profissionais, ocupando o {{header.ranking}}&ordm lugar no ranking de ocupações no Brasil. O município brasileiro que mais emprega nessa ocupação é {{body.municipality_with_more_jobs}} e a atividade de {{body.activity_with_more_jobs}} é a que mais possui {{header.name}}. A renda mensal média é de {{header.average_monthly_income}} e a idade média dos empregados é de {{header.age_avg | max_digits(3)}} ({{header.year}}).</p>
         {% else %}
-            {% if header.bra_id|length == 1 %}
+            {% if bra_id|length == 1 %}
                 <p>A ocupação de {{header.name}} emprega {{header.total_employment}} de profissionais na região {{header.location_name}}, ocupando o {{header.ranking}}&ordm lugar no ranking de ocupações da região. A renda mensal média dos trabalhadores dessa ocupação na região {{header.location_name}} é de {{header.average_monthly_income}} reais e a idade média dos empregados é de {{header.age_avg | max_digits(3)}} ({{header.year}}). O município que mais emprega nessa ocupação é a/o {{body.municipality_with_biggest_wage_avg}}.</p>
-            {% elif header.bra_id|length == 3 %}
+            {% elif bra_id|length == 3 %}
                 <p>A ocupação de {{header.name}} emprega {{header.total_employment}} de profissionais na/no/em {{header.location_name}} ocupando o {{header.ranking}}&ordm lugar no ranking de ocupações do estado. A renda mensal média dos trabalhadores dessa ocupação no estado é de {{header.average_monthly_income}} reais e a idade média dos empregados é de {{header.age_avg | max_digits(3)}} ({{header.year}}). O município que mais emprega nessa ocupação é a/o {{body.municipality_with_biggest_wage_avg}}.</p>
-            {% elif header.bra_id|length == 5 %}
+            {% elif bra_id|length == 5 %}
                 <p>A ocupação de {{header.name}} emprega {{header.total_employment}} de profissionais na mesorrregião de/da/do {{header.location_name}}, ocupando o {{header.ranking}}&ordm lugar em seu ranking de ocupações. A renda mensal média dos trabalhadores dessa ocupação nesta localidade é de {{header.average_monthly_income}} reais e a idade média dos empregados é de {{header.age_avg | max_digits(3)}} ({{header.year}}). O município que mais emprega nessa ocupação é a/o {{body.municipality_with_biggest_wage_avg}}.</p>
-                {% elif header.bra_id|length == 7 %}
+                {% elif bra_id|length == 7 %}
                 <p>A ocupação de {{header.name}} emprega {{header.total_employment}} de profissionais na microrregião de/da/do {{header.location_name}}, ocupando o {{header.ranking}}&ordm lugar em seu ranking de ocupações. A renda mensal média dos trabalhadores dessa ocupação nesta localidade é de {{header.average_monthly_income}} reais e a idade média dos empregados é de {{header.age_avg | max_digits(3)}} ({{header.year}}). O município que mais emprega nessa ocupação é a/o {{body.municipality_with_biggest_wage_avg}}.</p>
             {% else %}
                 <p>A ocupação de {{header.name}} emprega {{header.total_employment}} de profissionais no município de/da/do {{header.location_name}}, ocupando o {{header.ranking}}&ordm lugar em seu ranking de ocupações. A renda mensal média dos trabalhadores dessa ocupação nesta localidade é de {{header.average_monthly_income}} reais e a idade média dos empregados é de {{header.age_avg | max_digits(3)}} ({{header.year}}).</p>
