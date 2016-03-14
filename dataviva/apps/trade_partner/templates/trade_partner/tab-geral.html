@@ -43,13 +43,13 @@
         </div>
         <h2>Perfil Geral</h2>
         {% if header.bra_id %}
-        <p>A/O/OS {{ header.name }} ocupa/ocupam a posição de número {{ header.import_rank }}º em importações para -/o/a {{ header.location_name }} e {{ header.export_rank }}º em exportações realizadas pelo/a {{ header.location_type }}. O produto mais exportado da localidade para esse país é/são {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e seu total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
+            <p>A/O/OS {{ header.name }} ocupa/ocupam a posição de número {{ header.import_rank }}º em importações para -/o/a {{ header.location_name }} e {{ header.export_rank }}º em exportações realizadas pelo/a {{ header.location_type }}. O produto mais exportado da localidade para esse país é/são {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e seu total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
         {% else %}
-        {% if header.wld_id|length == 2 %}
-        <p>A {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse continente é/são {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e seu total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
-        {% else %}
-        <p>O país {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {% if header.total_exported == 0 %} não há exportações realizadas pelo Brasil. O total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}{% else %}{{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse país é o {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e o total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }} {% endif %}</p>
-        {% endif %}
+            {% if header.wld_id|length == 2 %}
+                <p>A {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse continente é/são {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e seu total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
+            {% else %}
+                <p>O país {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {% if header.total_exported == 0 %} não há exportações realizadas pelo Brasil. O total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}{% else %}{{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse país é o {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e o total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }} {% endif %}</p>
+            {% endif %}
         {% endif %}
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
@@ -57,7 +57,7 @@
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
                         <tbody>
-                            {% if body.highest_export_value %}                         
+                            {% if body.highest_export_value %}
                             <tr>
                                 <th>
                                     Principal Município por Valor Total Exportado
@@ -68,7 +68,7 @@
                                 </td>
                             </tr>
                             {% endif %}
-                            {% if body.highest_import_value %}                         
+                            {% if body.highest_import_value %}
                             <tr>
                                 <th>
                                     Principal Município por Valor Total Importado
