@@ -32,24 +32,24 @@ def index(occupation_id):
     bra_id = request.args.get('bra_id')
     header = {}
     body = {}
-    context = {}
+    body = {}
 
     header['cbo_id'] = occupation_id
     header['family_id'] = occupation_id[0]
     header['bra_id'] = bra_id
 
     if len(occupation_id) == 4:
-        context['is_family'] = True
+        body['is_family'] = True
     else:
-         context['is_family'] = False
+         body['is_family'] = False
 
-    context['is_not_municipality'] = True
+    body['is_not_municipality'] = True
 
     if bra_id:
         occupation_service = OccupationByLocation(occupation_id = occupation_id, bra_id = bra_id)
         header['location_name'] = occupation_service.location_name()
         if len(bra_id) == 9:
-            context['is_not_municipality'] = False
+            body['is_not_municipality'] = False
     else:
         occupation_service = Occupation(occupation_id = occupation_id)
 
@@ -64,7 +64,7 @@ def index(occupation_id):
     header['year'] = occupation_service.year()
     header['age_avg'] = occupation_service.age_avg()
 
-    if context['is_not_municipality']:
+    if body['is_not_municipality']:
 
         body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()
         body['municipality_with_more_jobs_value'] = occupation_municipalities_service.highest_number_of_jobs()
@@ -90,4 +90,4 @@ def index(occupation_id):
             header['ranking'] = index + 1
             break
 
-    return render_template('occupation/index.html', context=context, header = header, body = body)
+    return render_template('occupation/index.html', header = header, body = body)
