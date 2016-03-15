@@ -84,6 +84,11 @@
                 {% endif %}
             {% endwith %}
         });
+
+        function selectorCallback(id, event) {
+            url = window.location.origin + window.location.pathname + '?bra_id='+id;
+            window.location = url;
+        }
     </script>
 </body>
 </html>
