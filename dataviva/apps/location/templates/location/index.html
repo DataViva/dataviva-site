@@ -1,0 +1,56 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="01-index.html">Home</a></li>
+        <li><a href="#">Atividade Econômica</a></li>
+        <li class="active"><span>Teleatendimento<span></span></span></li>
+    </ol>
+    <div class="tit-area" style="background-image: url('static/img/bg-profile-location.jpg')">
+        <div class="row">
+            <div class="col-xs-15 col-md-offset-4 col-md-11">
+                <h1>
+                    {{ header.name }} <a href="#" title="Trocar" onclick="start_selector('Location');"> (trocar)</a>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="sidebar has-img col-xs-15 col-md-4">
+            <div class="tit">
+                <span class="dv-bra-{{header.bra_id}}"></span>
+            </div>
+            <ul class="nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
+                </li>
+                <li role="presentation">
+                    <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab">Comércio Internacional</a>
+                </li>
+                <li role="presentation">
+                    <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab">Salário e emprego</a>
+                </li>
+                <li role="presentation">
+                    <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidade Econômica</a>
+                </li>
+                <li role="presentation">
+                    <a href="#educacao" aria-controls="educacao" role="tab" data-toggle="tab">Educação</a>
+                </li>
+            </ul>
+        </div>
+        <div class="main-content col-xs-15 col-md-11">
+            <div class="tab-content">
+                {% include "location/tab-geral.html" %}
+                {% include "location/tab-comercio-internacional.html" %}
+                {% include "location/tab-salario-emprego.html" %}
+                {% include "location/tab-oportunidade-economica.html" %}
+                {% include "location/tab-educacao.html" %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

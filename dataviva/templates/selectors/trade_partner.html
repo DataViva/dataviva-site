@@ -1,0 +1,76 @@
+<div class="institucional search">
+    <h2>Escolha um parceiro comercial da lista abaixo ou busque pelo nome</h2>
+    <form class="form-dataviva form-inline filter">
+        
+        <ul class="btn-group nav nav-tabs" role="tablist">
+            <li><a href="#continents" aria-controls="continents" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.continents)">
+            Continentes
+            </a></li>
+            <li><a href="#countries" aria-controls="countries" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.countries)">
+            Países
+            </a></li>
+        </ul>
+        
+        <div class="search-items tab-content">
+            <!-- TAB: continents -->
+            <div role="tabpanel" class="tab-pane search-items" id="continents">
+                <div class="form-group">
+                    <i class="fa fa-search"></i>
+                    <input type="text"
+                    name="continents_filter"
+                    class="busca form-control"
+                    ng-model="selector_model.continents.filter_string"
+                    ng-trim="true"
+                    autocomplete="false" />
+                </div>
+                <div class="list-group list-stripped selector-list">
+                    <div class="loading" ng-show="selector_model.loading"></div>
+                    <div ng-repeat="ptn in selector_model.continents.entries|filter:selector_model.continents.filter_string" class="list-group-item col-md-15" ng-class="{'selected': ptn.id == selector_model.selected_entry }">
+                        <div class="col-md-1 hidden-xs hidden-sm">
+                            <img src="{$ ptn.icon $}" class="flag-icon symbol"/>
+                        </div>
+                        <div class="col-md-10">
+                            {$ ptn.name $}<BR>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="btn btn-default"
+                                 ng-click="selector_model.select(ptn.id, $event)">Select</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: countries -->
+            <div role="tabpanel" class="tab-pane search-items" id="countries">
+                <div class="form-group">
+                    <i class="fa fa-search"></i>
+                    <input type="text"
+                    name="countries_filter"
+                    class="busca form-control"
+                    ng-model="selector_model.countries.filter_string"
+                    ng-trim="true"
+                    autocomplete="false" />
+                </div>
+                
+                <div class="list-group list-stripped selector-list col-md-15">
+                    <div class="loading" ng-show="selector_model.loading"></div>
+                    <div ng-repeat="ptn in selector_model.countries.entries | filter:selector_model.countries.filter_string"
+                         ng-class="{'selected': ptn.id == selector_model.selected_entry }"
+                         class="list-group-item col-md-15">
+                            <div class="col-md-1 hidden-xs hidden-sm">
+                                <img src="{$ ptn.icon $}" class="flag-icon symbol"/>
+                            </div>
+                            <div class="col-md-10">
+                                {$ ptn.name $}
+                            </div>
+                        <div class="col-md-3">
+                            <div class="btn btn-default" 
+                                 ng-click="selector_model.select(ptn.id, $event)">Select</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </form>
+</div>
