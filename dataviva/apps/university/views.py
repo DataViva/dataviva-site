@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.api.attrs.models import Course_hedu
-from dataviva.api.hedu.models import Yuc
 from dataviva.api.hedu.services import University, UniversityMajors
-from dataviva import db
-from sqlalchemy.sql.expression import func, desc
+from dataviva.api.attrs.models import Course_hedu
 
 mod = Blueprint('university', __name__,
                 template_folder='templates/university',
