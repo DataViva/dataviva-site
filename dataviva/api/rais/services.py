@@ -1,10 +1,10 @@
-from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.models import Cnae, Cbo, Bra
 from dataviva.api.rais.models import Yi, Yo, Ybo, Ybi, Yio, Ybio, Yb_rais
 from dataviva import db
 from sqlalchemy import func, desc
 
-class Industry :
+
+class Industry:
     def __init__(self, cnae_id):
         self.cnae_id = cnae_id
         self._rais = None
@@ -71,7 +71,7 @@ class Occupation:
         self.occupation_id = occupation_id
         self._rais = None
 
-        self.max_year_query= db.session.query(func.max(Yo.year)).filter(
+        self.max_year_query = db.session.query(func.max(Yo.year)).filter(
             Yo.cbo_id == occupation_id)
         self.rais_query = Yo.query.filter(
             Yo.cbo_id == self.occupation_id,
@@ -137,16 +137,16 @@ class Occupation:
         return rais.wage_avg
 
 
-class IndustryByLocation(Industry) :
+class IndustryByLocation(Industry):
     def __init__(self, bra_id, cnae_id):
         self.bra_id = bra_id
         self.cnae_id = cnae_id
         self._rais = None
-        self.ybi_max_year=db.session.query(func.max(Ybi.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
+        self.ybi_max_year = db.session.query(func.max(Ybi.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
         self.rais_query = Ybi.query.filter(
-                Ybi.cnae_id==self.cnae_id,
+                Ybi.cnae_id == self.cnae_id,
                 Ybi.bra_id == self.bra_id,
-                Ybi.year==self.ybi_max_year
+                Ybi.year == self.ybi_max_year
                 )
 
     def rca(self):
@@ -157,6 +157,10 @@ class IndustryByLocation(Industry) :
 
     def opportunity_gain(self):
         return self.__rais__().opp_gain
+
+    def name(self):
+        bra_query = Bra.query.filter(Bra.id == self.bra_id).first()
+        return bra_query.name()
 
 
 class IndustryOccupation(Industry):
@@ -172,7 +176,7 @@ class IndustryOccupation(Industry):
 
         if bra_id:
             self.bra_id = bra_id
-            self.max_year=db.session.query(func.max(Ybio.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
+            self.max_year = db.session.query(func.max(Ybio.year)).filter_by(bra_id=bra_id, cnae_id=cnae_id)
             self.rais_query = Ybio.query.join(Cbo).filter(
                 Cbo.id == Ybio.cbo_id,
                 Ybio.cnae_id == self.cnae_id,
@@ -189,6 +193,7 @@ class IndustryOccupation(Industry):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.cbo.name()
 
+
 class IndustryMunicipality(Industry):
     def __init__(self, cnae_id, bra_id):
         Industry.__init__(self, cnae_id)
@@ -199,8 +204,13 @@ class IndustryMunicipality(Industry):
                 Ybi.bra_id_len == 9,
                 Ybi.year == self.max_year,
                 )
+        self.state_query = Ybi.query.join(Bra).filter(
+                Ybi.cnae_id == self.cnae_id,
+                Ybi.year == self.max_year,
+                Ybi.bra_id_len == 3
+                ).order_by(desc(Ybi.num_jobs)).first()
 
-        if bra_id :
+        if bra_id:
             self.bra_id = bra_id
             self.max_year = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=cnae_id)
             self.rais_query = Ybi.query.join(Bra).filter(
@@ -219,11 +229,18 @@ class IndustryMunicipality(Industry):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.bra.name()
 
+    def state(self):
+        return self.state_query.bra.name()
+
+    def state_num_jobs(self):
+        return self.state_query.num_jobs
+
+
 class OccupationByLocation(Occupation):
     def __init__(self, occupation_id, bra_id):
         Occupation.__init__(self, occupation_id)
         self.bra_id = bra_id
-        self.max_year_query= db.session.query(func.max(Ybo.year)).filter(
+        self.max_year_query = db.session.query(func.max(Ybo.year)).filter(
             Ybo.cbo_id == occupation_id,
             Ybo.bra_id == self.bra_id)
         self.rais_query = Ybo.query.filter(
@@ -237,9 +254,9 @@ class OccupationByLocation(Occupation):
 
 
 class OccupationMunicipalities(Occupation):
-    def __init__ (self, occupation_id, bra_id):
+    def __init__(self, occupation_id, bra_id):
         Occupation.__init__(self, occupation_id)
-        self.max_year_query= db.session.query(func.max(Ybo.year)).filter(
+        self.max_year_query = db.session.query(func.max(Ybo.year)).filter(
             Ybo.cbo_id == occupation_id)
         self.rais_query = Ybo.query.filter(
                             Ybo.cbo_id == self.occupation_id,
@@ -265,7 +282,7 @@ class OccupationMunicipalities(Occupation):
 class OccupationActivities(Occupation):
     def __init__(self, occupation_id, bra_id):
         Occupation.__init__(self, occupation_id)
-        self.max_year_query= db.session.query(func.max(Yio.year)).filter(
+        self.max_year_query = db.session.query(func.max(Yio.year)).filter(
             Yio.cbo_id == occupation_id)
         self.rais_query = Yio.query.filter(
                             Yio.cbo_id == self.occupation_id,
@@ -276,15 +293,14 @@ class OccupationActivities(Occupation):
 
         if bra_id:
             self.bra_id = bra_id
-            self.max_year_query= db.session.query(func.max(Ybio.year)).filter(
+            self.max_year_query = db.session.query(func.max(Ybio.year)).filter(
                 Ybio.cbo_id == occupation_id,
                 Ybio.bra_id == self.bra_id)
             self.rais_query = Ybio.query.filter(
                 Ybio.cbo_id == self.occupation_id,
                 Ybio.bra_id.like(self.bra_id+'%'),
-                Ybio.year == self.max_year_query ,
+                Ybio.year == self.max_year_query,
                 Ybio.cnae_id_len == 6)
-
 
     def activity_with_more_jobs(self):
         rais = self.__rais_sorted_by_num_jobs__()[0]
@@ -293,6 +309,7 @@ class OccupationActivities(Occupation):
     def activity_with_biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.cnae.name()
+
 
 class LocationIndustry:
     def __init__(self, bra_id):
@@ -306,7 +323,7 @@ class LocationIndustry:
         self.rais_query = Ybi.query.join(Cnae).filter(
                 Ybi.bra_id == self.bra_id,
                 Ybi.cnae_id_len == 6,
-                Ybi.num_jobs != None,
+                Ybi.num_jobs is not None,
                 Ybi.year == self.max_year_query
         )
 
@@ -356,6 +373,7 @@ class LocationIndustry:
         else:
             return rais.cnae.name()
 
+
 class LocationOccupation(LocationIndustry):
     def __init__(self, bra_id):
         LocationIndustry.__init__(self, bra_id)
@@ -365,7 +383,7 @@ class LocationOccupation(LocationIndustry):
         self.rais_query = Ybo.query.join(Cbo).filter(
                 Ybo.bra_id == self.bra_id,
                 Ybo.cbo_id_len == 4,
-                Ybo.num_jobs != None,
+                Ybo.num_jobs is not None,
                 Ybo.year == self.max_year_query
         )
 
@@ -384,6 +402,7 @@ class LocationOccupation(LocationIndustry):
             return None
         else:
             return rais.cbo.name()
+
 
 class LocationJobs(LocationIndustry):
     def __init__(self, bra_id):
@@ -404,6 +423,7 @@ class LocationJobs(LocationIndustry):
     def total_jobs(self):
         return self.__rais__().num_jobs
 
+
 class LocationDistance(LocationIndustry):
     def __init__(self, bra_id):
         LocationIndustry.__init__(self, bra_id)
@@ -414,7 +434,7 @@ class LocationDistance(LocationIndustry):
             Ybi.bra_id == self.bra_id,
             Ybi.cnae_id_len == 6,
             Ybi.year == self.max_year_query,
-            Ybi.distance != None)
+            Ybi.distance is not None)
 
     def less_distance_by_occupation(self):
         try:
@@ -432,6 +452,7 @@ class LocationDistance(LocationIndustry):
         else:
             return rais.cnae.name()
 
+
 class LocationOppGain(LocationIndustry):
     def __init__(self, bra_id):
         LocationIndustry.__init__(self, bra_id)
@@ -441,12 +462,12 @@ class LocationOppGain(LocationIndustry):
         self.opp_gain_query = db.session.query(func.max(Ybi.opp_gain)).filter(
             Ybi.bra_id == self.bra_id,
             Ybi.year == self.max_year_query,
-            Ybi.opp_gain != None)
+            Ybi.opp_gain is not None)
         self.rais_query = Ybi.query.join(Cnae).filter(
             Ybi.bra_id == self.bra_id,
             Ybi.cnae_id_len == 6,
             Ybi.year == self.max_year_query,
-            Ybi.opp_gain != None,
+            Ybi.opp_gain is not None,
             Ybi.opp_gain == self.opp_gain_query)
 
     def opportunity_gain_by_occupation(self):

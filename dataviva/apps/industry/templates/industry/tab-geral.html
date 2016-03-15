@@ -56,7 +56,34 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        <p>A atividade econômica {{header.name}} é a {{header.ranking}}ª em número de empregados no Brasil, que estão mais concentrados no município de {{body.municipality_with_more_num_jobs_name}}, com {{body.municipality_with_more_num_jobs_value | max_digits(3)}}  {{body.municipality_with_more_num_jobs_value | magnitude}} de empregados. A ocupação com maior número de empregos nessa atividade é a de {{body.occ_with_more_number_jobs_name}}. No total, o Brasil possui {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}} de estabelecimentos que trabalham com {{header.name}}.</p>
+
+        {% if not industry.bra_id %}
+        <p>A atividade econômica de {{header.name}} é a {{header.ranking}}ª em número de empregados no Brasil, os quais estão mais concentrados no estado de/da/do {{body.state_with_more_jobs}}, com {{body.state_with_more_jobs_value | max_digits(3)}}  {{body.state_with_more_jobs_value | magnitude}} empregados. A ocupação com maior número de empregados nessa atividade é a de {{body.occ_with_more_number_jobs_name}}. No total, o Brasil possui {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}} estabelecimentos que trabalham com {{header.name}}.
+        </p>
+        {% else %}
+
+        {% if industry.bra_id|length == 1 %}
+
+        <p>A atividade econômica de {{header.name}} é a {{header.ranking}}ª em número de empregados na {{header.name_bra}}, os quais estão mais concentrados no município de/da/do {{body.municipality_with_more_num_jobs_name}}, com {{body.municipality_with_more_num_jobs_value | max_digits(3)}}  {{body.municipality_with_more_num_jobs_value | magnitude}} empregados. A ocupação com maior número de empregados nessa atividade na região é a de {{body.occ_with_more_number_jobs_name}}. No total, a {{header.name_bra}} possui {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}} estabelecimentos que trabalham com {{header.name}}.</p>
+
+        {% elif industry.bra_id|length == 3 %}
+
+        <p>A atividade econômica de {{header.name}} é a {{header.ranking}}ª em número de empregados em/na/no {{header.name_bra}}, os quais estão mais concentrados no município de/da/do {{body.municipality_with_more_num_jobs_name}}, com {{body.municipality_with_more_num_jobs_value | max_digits(3)}}  {{body.municipality_with_more_num_jobs_value | magnitude}} empregados. A ocupação com maior número de empregados nessa atividade no estado é a de {{body.occ_with_more_number_jobs_name}}. No total, o/a {{header.name_bra}} possui {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}} estabelecimentos que trabalham com {{header.name}}.</p>
+
+        {% elif industry.bra_id|length == 5 %}
+
+        <p>A atividade econômica de {{header.name}} é a {{header.ranking}}ª em número de empregados na mesorregião de/da/do {{header.name_bra}}, os quais estão mais concentrados no município de/da/do {{body.municipality_with_more_num_jobs_name}}, com {{body.municipality_with_more_num_jobs_value | max_digits(3)}}  {{body.municipality_with_more_num_jobs_value | magnitude}} empregados. A ocupação com maior número de empregados nessa atividade na mesorregião é a de {{body.occ_with_more_number_jobs_name}}. No total, a localidade possui {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}} estabelecimentos que trabalham com {{header.name}}</p>
+
+        {% elif industry.bra_id|length == 7 %}
+
+        <p>A atividade econômica de {{header.name}} é a {{header.ranking}}ª em número de empregados na microrregião de/da/do {{header.name_bra}}, os quais estão mais concentrados no município de/da/do {{body.municipality_with_more_num_jobs_name}}, com {{body.municipality_with_more_num_jobs_value | max_digits(3)}}  {{body.municipality_with_more_num_jobs_value | magnitude}} empregados. A ocupação com maior número de empregados nessa atividade na mesorregião é a de {{body.occ_with_more_number_jobs_name}}. No total, a localidade possui {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}} estabelecimentos que trabalham com {{header.name}}.</p>
+
+        {% else %}
+
+        <p>A atividade econômica de {{header.name}} é a {{header.ranking}}ª em número de empregados no munidípio de/da/do {{header.name_bra}}, com {{ header.num_jobs | max_digits(3) }}  {{header.num_jobs | magnitude}} empregados. A ocupação com maior número de empregados nessa atividade no município é a de {{body.occ_with_more_number_jobs_name}}. No total, -/o/a {{header.name_bra}} possui {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}} estabelecimentos que trabalham com {{header.name}}.</p>
+        {% endif %}
+        {% endif %}
+
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
                 <h3>Salário e Emprego</h3>
