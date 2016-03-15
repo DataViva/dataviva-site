@@ -30,16 +30,21 @@ def index(product_id):
     body = {}
     product = Hs.query.filter_by(id=product_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
+    
+    if location:
+        location_id = location.id
+    else:
+        location_id = None
 
-    trade_partners_service = ProductTradePartnersService(product_id=product.id, bra_id=location.id)
-    municipalities_service = ProductMunicipalitiesService(product_id=product.id, bra_id=location.id)
+    trade_partners_service = ProductTradePartnersService(product_id=product.id, bra_id=location_id)
+    municipalities_service = ProductMunicipalitiesService(product_id=product.id, bra_id=location_id)
 
     if len(product.id) == 6:
         product_service = ProductService(product_id=product.id)
         header['pci'] = product_service.product_complexity()
 
     if location:
-        product_service = ProductLocationsService(product_id=product.id, bra_id=location.id)
+        product_service = ProductLocationsService(product_id=product.id, bra_id=location_id)
 
         body['destination_name_export'] = trade_partners_service.destination_with_more_exports()
         body['destination_export_value'] = trade_partners_service.highest_export_value()
@@ -52,7 +57,7 @@ def index(product_id):
             header['distance_wld'] = product_service.distance_wld()
             header['opportunity_gain_wld'] = product_service.opp_gain_wld()
 
-        if len(location.id) != 9:
+        if len(location_id) != 9:
             body['municipality_name_export'] = municipalities_service.municipality_with_more_exports()
             body['municipality_export_value'] = municipalities_service.highest_export_value()
             body['municipality_name_import'] = municipalities_service.municipality_with_more_imports()

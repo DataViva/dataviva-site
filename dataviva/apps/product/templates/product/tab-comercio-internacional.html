@@ -7,7 +7,7 @@
                 <table class="table data-blue">
                     <thead>
                         <tr>
-                            {% if (bra_id|length) != 9 %}
+                            {% if (location_id|length) != 9 %}
                             <th>
                                 Principal Município
                                 <small>por Valor Total Exportado</small>
@@ -29,7 +29,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            {% if (bra_id|length) != 9 %}
+                            {% if (location_id|length) != 9 %}
                             <td>
                                 <p class="label">{{ body.municipality_name_export }}</p>
                                 <div class="number">

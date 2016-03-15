@@ -39,7 +39,7 @@
                         <strong class="counter">{{ header.pci | max_digits(3) }}</strong><small>{{ header.pci | magnitude }}</small>
                     </div>
                 </div>
-                    {% if bra_id %}
+                    {% if location %}
                     <div class="col-xs-15 col-sm-2 item">
                         <p class="label">RCA internacional</p>
                         <div class="number">
@@ -66,18 +66,21 @@
             </div>
         </div>
         <h2>Perfil Geral</h2>
-        {% if (product.id|length) == 6 %}
-            <p>O produto {{ product.name() }} ocupa a {{ header.export_value_ranking }}&ordm posição em importações e a {{ header.import_value_ranking }}&ordm posição
-            em exportações {{ location.preposition('em')}} {{ location.name() }}. Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio,
-            representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}}
-            em cinco anos. O município {{ location.preposition('de') }} {{ location.name() }} que mais exporta {{ product.article() }} {{ product.name() }} é {{ location.article() }} {{ body.municipality_name_export }} e o que mais importa é
-            {{ location.article() }} {{ body.municipality_name_import }}.</p>
-        {% endif %}
-        {% if (product.id|length) == 2 %}
-            <p>{{ product.article() | capitalize }} {{ product.name() }} ocupam a {{ header.import_value_ranking }}&ordm posição em importações e a {{ header.export_value_ranking }}&ordm posição em exportações no Brasil.
-            Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos.
-            O município {{ location.article() }} {{ location.name() }} que mais exporta {{ product.article() }} {{ product.name() }} é {{ location.article() }} {{ body.municipality_name_export }} e o que mais importa é
-            {{ location.article() }} {{ body.municipality_name_import }}.</p>
+        {% if not location %}
+            {% if (product.id|length) == 6 %}
+                O produto {{ product.name() }} ocupa a {{ header.export_value_ranking }}&ordm posição em importações e a {{ header.import_value_ranking }}&ordm posição em exportações no Brasil. Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos. O município no Brasil que mais exporta {{ product.article() }} {{ product.name() }} é {{ body.municipality_name_export }} e o que mais importa é {{ body.municipality_name_import }}.
+            {% endif %}
+            {% if (product.id|length) == 2 %}
+                <p>{{ product.article() | capitalize }} {{ product.name() }} ocupam a {{ header.import_value_ranking }}&ordm posição em importações e a {{ header.export_value_ranking }}&ordm posição em exportações no Brasil.
+                Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos. O município no Brasil que mais exporta {{ product.article() }} {{ product.name() }} é {{ body.municipality_name_export }} e o que mais importa é {{ body.municipality_name_import }}.</p>
+            {% endif %}
+        {% else %}
+            {% if (product.id|length) == 6 %}
+                <p>O produto {{ product.name() }} ocupa a {{ header.export_value_ranking }}&ordm posição em importações e a {{ header.import_value_ranking }}&ordm posição em exportações {{ location.preposition('em')}} {{ location.name() }}. Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos. O município {{ location.preposition('de') }} {{ location.name() }} que mais exporta {{ product.article() }} {{ product.name() }} é {{ location.article() }} {{ body.municipality_name_export }} e o que mais importa é {{ location.article() }} {{ body.municipality_name_import }}.</p>
+            {% endif %}
+            {% if (product.id|length) == 2 %}
+                <p>{{ product.article() | capitalize }} {{ product.name() }} ocupam a {{ header.import_value_ranking }}&ordm posição em importações e a {{ header.export_value_ranking }}&ordm posição em exportações na região. Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos. O município {{ location.preposition('de') }} {{ location.name() }} que mais exporta {{ product.article() }} {{ product.name() }} é {{ location.article() }} {{ body.municipality_name_export }} e o que mais importa é {{ location.article() }} {{ body.municipality_name_import }}.</p>
+            {% endif %}
         {% endif %}
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
@@ -85,7 +88,7 @@
                 <div class="table-responsive">
                     <table class="table data-2-columns margin-none-bottom">
                         <tbody>
-                            {% if (bra_id|length) != 9 %}
+                            {% if (location_id|length) != 9 %}
                             <tr>
                                 <th>
                                     Principal Município por valor total exportado
