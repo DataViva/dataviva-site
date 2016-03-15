@@ -12,7 +12,7 @@
                                 Ocupação
                                 <small>com maior número de empregos</small>
                             </th>
-                            {%if (location|length) != 9 %}
+                            {%if (location_id|length) != 9 %}
                                 <th>
                                     Município
                                     <small>com maior número de empregos</small>
@@ -22,7 +22,7 @@
                                 Ocupação
                                 <small>com maior renda média mensal</small>
                             </th>
-                            {%if (location|length) != 9 %}
+                            {%if (location_id|length) != 9 %}
                                 <th>
                                     Município
                                     <small>com maior renda média mensal</small>
@@ -38,7 +38,7 @@
                                     USD <strong class="counter">{{ body.occ_with_more_number_jobs_value | max_digits(3) }}</strong><span>{{ body.occ_with_more_number_jobs_value | magnitude }}</span>
                                 </div>
                             </td>
-                            {%if (location|length) != 9 %}
+                            {%if (location_id|length) != 9 %}
                                 <td>
                                     <p class="label">{{ body.municipality_with_more_num_jobs_name }}</p>
                                     <div class="number">
@@ -52,7 +52,7 @@
                                     USD <strong class="counter">{{ body.occ_with_more_wage_avg_value | max_digits(3) }}</strong><span>{{ body.occ_with_more_wage_avg_value | magnitude  }}</span>
                                 </div>
                             </td>
-                            {%if (location|length) != 9 %}
+                            {%if (location_id|length) != 9 %}
                                 <td>
                                     <p class="label">{{ body.municipality_with_more_wage_avg_name }}</p>
                                     <div class="number">
