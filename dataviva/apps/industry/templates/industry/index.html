@@ -27,7 +27,7 @@
                 <li role="presentation">
                     <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab">Salário e emprego</a>
                 </li>
-                {% if industry.class %}
+                {% if industry.id|length == 6 %}
                     <li role="presentation">
                         <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidade Econômica</a>
                     </li>
@@ -45,7 +45,9 @@
             <div class="tab-content">
                 {% include "industry/tab-geral.html" %}
                 {% include "industry/tab-salario-emprego.html" %}
-                {% include "industry/tab-oportunidade-economica.html" %}
+                {% if industry.id|length == 6 %}
+                    {% include "industry/tab-oportunidade-economica.html" %}
+                {% endif %}
             </div>
         </div>
     </div>
