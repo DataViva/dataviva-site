@@ -27,3 +27,9 @@ class AttrModelTests(BaseTestCase):
     def test_paraiba_preposition_de_should_be_da(self):
         paraiba = Bra.query.filter_by(id='2pb').first()
         assert 'da' == paraiba.preposition('de')
+
+    def test_colinas_do_sul_preposition_de_should_be_das(self):
+        colinas_do_sul = Bra.query.filter_by(id='3go030003').first()
+        assert 'das' == colinas_do_sul.preposition('de')
+
+     
