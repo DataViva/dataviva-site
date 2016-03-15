@@ -24,7 +24,7 @@ def add_language_code(endpoint, values):
 def index(cnae_id):
 
     #industry.cnae_id = industry.id
-    #bra_id = location.id
+    #bra_id = location_id
 
     header = {}
     body = {}
@@ -32,44 +32,49 @@ def index(cnae_id):
     industry = Cnae.query.filter_by(id=cnae_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
 
-    industry_service = Industry(cnae_id=industry.id)
+    if location:
+        location_id = location.id
+    else:
+        location_id = None
 
-    industry_occupation_service = IndustryOccupation(bra_id=location.id, cnae_id=industry.id)
-    industry_municipality_service = IndustryMunicipality(bra_id=location.id, cnae_id=industry.id)
+    industry_occupation_service = IndustryOccupation(bra_id=location_id, cnae_id=industry.id)
+    industry_municipality_service = IndustryMunicipality(bra_id=location_id, cnae_id=industry.id)
 
+    if location:
+        industry_service = IndustryByLocation(bra_id=location_id, cnae_id=industry.id)
+        
+        if len(industry.id) == 6:
+                header['rca'] = industry_service.rca()
+                header['distance'] = industry_service.distance()
+                header['opportunity_gain'] = industry_service.opportunity_gain()
 
-    if len(industry.id) == 6:
-        if location:
-            industry_service = IndustryByLocation(bra_id=location.id, cnae_id=industry.id)
-            header['rca'] = industry_service.rca()
-            header['distance'] = industry_service.distance()
-            header['opportunity_gain'] = industry_service.opportunity_gain()
+        if len(location_id) != 9:
+            body['municipality_with_more_num_jobs_value'] = industry_municipality_service.highest_number_of_jobs()
+            body['municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs()
+            body['municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
+            body['municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
 
-    gerais:
-        body['occ_with_more_wage_avg_name'] = industry_occupation_service.occupation_with_biggest_wage_average()
-        body['occ_with_more_wage_avg_value'] = industry_occupation_service.biggest_wage_average()
-        body['occ_with_more_number_jobs_name'] = industry_occupation_service.occupation_with_more_jobs()
-        body['occ_with_more_number_jobs_value'] = industry_occupation_service.highest_number_of_jobs()
+    else:
+        industry_service = Industry(cnae_id=industry.id)
 
-    if len(location.id) != 9:
+        body['state_with_more_jobs'] = industry_municipality_service.state()
+        body['state_with_more_jobs_value'] = industry_municipality_service.state_num_jobs()
+
         body['municipality_with_more_num_jobs_value'] = industry_municipality_service.highest_number_of_jobs()
         body['municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs()
         body['municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
         body['municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
 
-
-    if not location:
-    body['state_with_more_jobs'] = industry_municipality_service.state()
-    body['state_with_more_jobs_value'] = industry_municipality_service.state_num_jobs()
+    body['occ_with_more_wage_avg_name'] = industry_occupation_service.occupation_with_biggest_wage_average()
+    body['occ_with_more_wage_avg_value'] = industry_occupation_service.biggest_wage_average()
+    body['occ_with_more_number_jobs_name'] = industry_occupation_service.occupation_with_more_jobs()
+    body['occ_with_more_number_jobs_value'] = industry_occupation_service.highest_number_of_jobs()
 
     header['average_monthly_income'] = industry_service.average_monthly_income()
     header['salary_mass'] = industry_service.salary_mass()
     header['num_jobs'] = industry_service.num_jobs()
     header['num_establishments'] = industry_service.num_establishments()
-
-
     #header['name_bra'] = industry_service.name()
-
 
     # Get rankings vars, code should be refactored
     from dataviva import db
@@ -95,8 +100,6 @@ def index(cnae_id):
         if rais.cnae_id == cnae_id:
             header['ranking'] = index+1
             break
-
-    header['RAIS'] = rais.cnae_id
 
     industry_service_num_establishments = Industry(cnae_id=industry.id)
     header['num_establishments_brazil'] = industry_service_num_establishments.num_establishments()
