@@ -11,3 +11,7 @@ class AttrModelTests(BaseTestCase):
     def test_rio_de_janeiro_preposition_em_should_be_no(self):
         rio_de_janeiro = Bra.query.filter_by(id='4rj').first()
         assert 'no' == rio_de_janeiro.preposition('em')
+
+    def test_paraiba_preposition_em_should_be_na(self):
+        paraiba = Bra.query.filter_by(id='2pb').first()
+        assert 'na' == paraiba.preposition('em')
