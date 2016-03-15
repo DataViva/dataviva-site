@@ -20,12 +20,29 @@
                 <td>{{ article.title }}</td>
                 <td>{{ article.authors_str() }}</td>
                 <td>{{ article.date_str() }}</td>
-                <td><input type="checkbox" name="approval"/></td>
+                <td><input type="checkbox" name="checkboxApproval"/></td>
             </tr>
         {% endfor %}
         </table>
     </div>
-<a class="btn btn-default btn-dataviva pull-right" href="#">Enviar</a>
+<a class="btn btn-default btn-dataviva pull-right" href="#" onclick="verifyChecks()">Enviar</a>
 <a class="btn btn-default btn-dataviva pull-right" href="/scholar">Cancelar</a>
 </div>
+
+
+
+<script type="text/javascript">
+    //if($('input[name=checkboxApproval]').prop("checked")){
+
+    function verifyChecks(){
+        var checkboxApprovalArray = document.getElementsByName("checkboxApproval");
+        for(var i=0;i<checkboxApprovalArray.length;i++){
+            if(checkboxApprovalArray[i].checked == true){
+                alert(checkboxApprovalArray[i].value + i +" marcado.");
+            }
+            else{
+            }
+        }
+    }
+</script>
 {% endblock scholar_content %}
