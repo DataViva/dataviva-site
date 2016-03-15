@@ -134,3 +134,9 @@ def delete(id):
         return redirect(url_for('scholar.index'))
     else:
         return make_response(render_template('not_found.html'), 404)
+
+
+@mod.route('/approval', methods=['GET'])
+def approval():
+    articles = Article.query.all()
+    return render_template('scholar/approval.html', articles=articles)
