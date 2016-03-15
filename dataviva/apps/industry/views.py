@@ -23,9 +23,6 @@ def add_language_code(endpoint, values):
 @mod.route('/<cnae_id>')
 def index(cnae_id):
 
-    #industry.cnae_id = industry.id
-    #bra_id = location_id
-
     header = {}
     body = {}
 
@@ -42,7 +39,6 @@ def index(cnae_id):
 
     if location:
         industry_service = IndustryByLocation(bra_id=location_id, cnae_id=industry.id)
-        
         if len(industry.id) == 6:
                 header['rca'] = industry_service.rca()
                 header['distance'] = industry_service.distance()
@@ -56,9 +52,6 @@ def index(cnae_id):
 
     else:
         industry_service = Industry(cnae_id=industry.id)
-
-        body['state_with_more_jobs'] = industry_municipality_service.state()
-        body['state_with_more_jobs_value'] = industry_municipality_service.state_num_jobs()
 
         body['municipality_with_more_num_jobs_value'] = industry_municipality_service.highest_number_of_jobs()
         body['municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs()
@@ -82,8 +75,7 @@ def index(cnae_id):
     from dataviva.api.rais.models import Yi, Ybi
 
     if location:
-        ybi_max_year = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=industry.id, bra_id=location.id,)
-        
+        ybi_max_year = db.session.query(func.max(Ybi.year)).filter_by(cnae_id=industry.id, bra_id=location.id)
         list_rais = Ybi.query.filter(
             Ybi.year == ybi_max_year,
             Ybi.bra_id == location.id,
@@ -91,7 +83,6 @@ def index(cnae_id):
 
     else:
         yi_max_year = db.session.query(func.max(Yi.year)).filter_by(cnae_id=industry.id)
-        
         list_rais = Yi.query.filter(
             Yi.year == yi_max_year,
             Yi.cnae_id_len == func.length(industry.id)).order_by(desc(Yi.num_jobs)).all()
