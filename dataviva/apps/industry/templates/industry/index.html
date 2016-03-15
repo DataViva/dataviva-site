@@ -41,7 +41,7 @@
 
         <div class="top-filter">
             <label for="filter">Localidade:</label>
-            <label for="filter">Minas Gerais</label>
+            <label for="filter">{{ location.name() if location else 'Brasil' }}</label>
             <a href="#" title="Trocar" onclick="start_selector('Location', selectorCallback);"> (trocar)</a>
         </div>
 
