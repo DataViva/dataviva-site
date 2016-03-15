@@ -16,7 +16,9 @@ class BasicAttr(object):
         return title_case(getattr(self, "name_"+lang))
 
     def preposition(self, prepositon):
-        return "em"
+        if self.article_pt:
+            return 'no'
+        return 'em'
 
     def article(self):
         return "a"
