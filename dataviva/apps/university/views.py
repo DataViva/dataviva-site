@@ -47,6 +47,6 @@ def index(university_id):
         'major_with_more_graduates' : majors_service.major_with_more_graduates(),
         'highest_graduate_number_by_major' : majors_service.highest_graduates_number()
     }
-    return render_template('index.html', header=header, content=content, body_class='perfil_estado')
+    return render_template('index.html', header=header, content=content)
 
 
