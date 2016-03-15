@@ -17,17 +17,17 @@ class BasicAttr(object):
 
     def preposition(self, preposition):
         if self.article_pt:
-
-            contraction = ''
-
             if preposition == 'de':
-                contraction = 'do' if self.gender_pt == 'm' else 'da'
+                contraction = {
+                    'f': 'da',
+                    'm': 'do',
+                }
             elif preposition == 'em':
-                contraction = 'no' if self.gender_pt == 'm' else 'na'
-
-            if self.plural_pt:
-                contraction += 's'
-            return contraction
+                contraction = {
+                    'f': 'na',
+                    'm': 'no',
+                }
+            return contraction[self.gender_pt] + ('s' if self.plural_pt else '')
         else:
             return preposition
 
