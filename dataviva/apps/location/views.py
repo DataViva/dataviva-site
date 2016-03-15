@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.services import Location as LocationService, LocationGdpRankings, \
-    LocationGdpPerCapitaRankings, LocationPopRankings, LocationAreaRankings, LocationMunicipalityRankings
+    LocationGdpPerCapitaRankings, LocationPopRankings, LocationAreaRankings, LocationMunicipalityRankings, Bra
 from dataviva.api.secex.models import Ymb
 from dataviva.api.secex.services import Location as LocationBodyService, LocationWld, LocationEciRankings
 from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
@@ -29,6 +29,8 @@ def add_language_code(endpoint, values):
 
 @mod.route('/<bra_id>')
 def index(bra_id):
+
+    location = Bra.query.filter_by(id=bra_id).first_or_404()
 
     location_service = LocationService(bra_id=bra_id)
     location_gdp_rankings_service = LocationGdpRankings(
@@ -59,7 +61,7 @@ def index(bra_id):
         header = {
             'name': location_service.name(),
             'bra_id': bra_id[:3],
-            'id':bra_id,
+            'id': bra_id,
             'gdp': location_service.gdp(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp()/location_service.population(),
@@ -68,7 +70,7 @@ def index(bra_id):
         header = {
             'name': location_service.name(),
             'bra_id': bra_id[:3],
-            'id':bra_id,
+            'id': bra_id,
             'gdp': location_service.gdp(),
             'life_expectation': location_service.life_expectation(),
             'population': location_service.population(),
@@ -159,4 +161,4 @@ def index(bra_id):
         }
 
     return render_template('location/index.html',
-                           header=header, body=body, profile=profile)
+                           header=header, body=body, profile=profile, location=location)

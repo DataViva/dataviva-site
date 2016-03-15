@@ -37,6 +37,13 @@
                 {% endif %}
             </ul>
         </div>
+
+        <div class="top-filter">
+            <label for="filter">Localidade:</label>
+            <label for="filter">{{ location.name() if location else 'Brasil' }}</label>
+            <a href="#" title="Trocar" onclick="start_selector('Location', selectorCallback);"> (trocar)</a>
+        </div>
+
         <div class="main-content col-xs-15 col-md-11">
             <div class="tab-content">
                 {% include "product/tab-geral.html" %}
