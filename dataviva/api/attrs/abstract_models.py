@@ -16,14 +16,13 @@ class BasicAttr(object):
         return title_case(getattr(self, "name_"+lang))
 
     def preposition(self, preposition):
-        if preposition == 'de':
-            if self.article_pt:
+        if self.article_pt:
+            if preposition == 'de':
                 return 'do' if self.gender_pt == 'm' else 'da'
-            return 'de'
-        elif preposition == 'em':
-            if self.article_pt:
+            elif preposition == 'em':
                 return 'no' if self.gender_pt == 'm' else 'na'
-            return 'em'
+        else:
+            return preposition
 
     def article(self):
         return "a"
