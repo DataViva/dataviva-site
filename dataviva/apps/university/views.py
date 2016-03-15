@@ -39,7 +39,7 @@ def index(university_id):
         'year' : university_service.year()
     }
 
-    content = {
+    body = {
         'major_with_more_enrollments' : majors_service.major_with_more_enrollments(),
         'highest_enrollment_number_by_major' : majors_service.highest_enrolled_number(),
         'major_with_more_entrants' : majors_service.major_with_more_entrants(),
@@ -47,6 +47,6 @@ def index(university_id):
         'major_with_more_graduates' : majors_service.major_with_more_graduates(),
         'highest_graduate_number_by_major' : majors_service.highest_graduates_number()
     }
-    return render_template('index.html', header=header, content=content)
+    return render_template('index.html', header=header, body=body)
 
 
