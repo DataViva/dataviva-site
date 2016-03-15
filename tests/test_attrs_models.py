@@ -32,4 +32,6 @@ class AttrModelTests(BaseTestCase):
         colinas_do_sul = Bra.query.filter_by(id='3go030003').first()
         assert 'das' == colinas_do_sul.preposition('de')
 
-     
+    def test_sertoes_cearenses_preposition_de_should_be_dos(self):
+        sertoes_cearenses = Bra.query.filter_by(id='2ce05').first()
+        assert 'dos' == sertoes_cearenses.preposition('de')
