@@ -32,7 +32,13 @@ class BasicAttr(object):
             return preposition
 
     def article(self):
-        return "a"
+        if self.article_pt:
+            if self.gender_pt == 'm':
+                return 'o' + ('s' if self.plural_pt else '')
+            else:
+                return 'a' + ('s' if self.plural_pt else '')
+        else:
+            return ''
 
 
 class ExpandedAttr(BasicAttr):
