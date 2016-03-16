@@ -1,8 +1,8 @@
 <div role="tabpanel" class="tab-pane" id="oportunidade-economica">
     <h2>Oportunidade Econômica</h2>
 
-    <a target="frame-tab-oportunidade-economica" href="/pt/embed/rings/secex/all/{{header.product_id}}/all/hs/?rca_scope=wld_rca">Produtos Similares</a></br>
-    
+    <a target="frame-tab-oportunidade-economica" href="/pt/embed/rings/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/hs/?rca_scope=wld_rca">Produtos Similares</a></br>
+
 </div>
 
-    <iframe name="frame-tab-oportunidade-economica" id="frame-tab-oportunidade-economica" width='684' height='350' src='/pt/embed/rings/secex/all/{{header.product_id}}/all/hs/?rca_scope=wld_rca' frameborder='0'></iframe>
+    <iframe name="frame-tab-oportunidade-economica" id="frame-tab-oportunidade-economica" width='684' height='350' src='/pt/embed/rings/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/hs/?rca_scope=wld_rca' frameborder='0'></iframe>
