@@ -7,29 +7,37 @@
     <h3>Aprovação dos estudos</h3>
     <div class="meta">
         <table id="approvalTable" class="table" cellspacing="0" width="100%">
-          <tr>
-            <th>Article ID</th>
-            <th>Title</th>
-            <th>Author(s)</th>
-            <th>Publication Date</th>
-            <th>Approve</th>
-        </tr>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td><a href="/scholar/article/{{ article.id }}">{{ article.title }}</td>
-                <td>{{ article.authors_str() }}</td>
-                <td>{{ article.date_str() }}</td>
-                <td><input type="checkbox" name="checkboxApproval"/></td>
-            </tr>
-        {% endfor %}
+            <thead>
+                <tr>
+                    <th>Article ID</th>
+                    <th>Title</th>
+                    <th>Author(s)</th>
+                    <th>Publication Date</th>
+                </tr>
+            </thead>
         </table>
     </div>
 <a class="btn btn-default btn-dataviva pull-right" href="#" onclick="verifyChecks()">Enviar</a>
 <a class="btn btn-default btn-dataviva pull-right" href="/scholar">Cancelar</a>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function($) {
+            var table = $('#approvalTable').DataTable( {
+                "sAjaxSource": "/scholar/all",
+                "sAjaxDataProp": "articles",
+                "aoColumnsDefs": [
+                    { "data": "id" },
+                    { "data": "title" },
+                    { "data": "authors" },
+                    { "data": "publicationDate" }
+                ],
+            });
+    });
+</script>
 
 <script type="text/javascript">
     function verifyChecks(){
