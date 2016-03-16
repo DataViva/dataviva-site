@@ -3,6 +3,14 @@
 
 {% block content %}
 
+{% macro messages(input) -%}
+    {% for message in input.errors %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+{%- endmacro %}
+
 
 	<div class="container">
 		<ol class="breadcrumb">
@@ -18,23 +26,27 @@
 						<h2>Contato</h2>
 						<p>Ficou com alguma dúvida ou quer enviar uma sugestão? Entre em contato com a equipe do DataViva pelo formulário abaixo: </p>
 						<div class="row">
-							<form class="form-horizontal">
+							<form method="post" action="{{ action }}" class="form-horizontal">
+							{{ form.hidden_tag() }}
 								<div class="form-group">
 									<label for="footer-nome" class="col-xs-15 col-sm-5 col-md-3 control-label">Nome</label>
 									<div class="col-xs-15 col-sm-10 col-md-11">
-										<input type="text" class="form-control" id="footer-name" placeholder="Nome">
+										{{ form.name(class="form-control")}}
+        								{{ messages(form.name) }}
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="footer-email" class="col-xs-15 col-sm-5 col-md-3 control-label">Email</label>
 									<div class="col-xs-15 col-sm-10 col-md-11">
-										<input type="email" class="form-control" id="footer-email" placeholder="Email">
+										{{ form.email(class="form-control")}}
+        								{{ messages(form.email) }}
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="footer-txt" class="col-xs-15 col-sm-5 col-md-3 control-label">Mensagem</label>
 									<div class="col-xs-15 col-sm-10 col-md-11">
-										<textarea class="form-control" rows="3" id="footer-txt" placeholder="Mensagem" style="margin: 0px -18px 0px 0px; width: 661px; height: 77px;"></textarea>
+										{{ form.message(class="form-control", rows=5)}}
+        								{{ messages(form.message) }}
 									</div>
 								</div>
 								<div class="form-group">
