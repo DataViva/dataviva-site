@@ -29,18 +29,18 @@
 <a class="btn btn-default btn-dataviva pull-right" href="/scholar">Cancelar</a>
 </div>
 
-<script type="text/javascript">
-    //if($('input[name=checkboxApproval]').prop("checked")){
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+<script type="text/javascript">
     function verifyChecks(){
-        var checkboxApprovalArray = document.getElementsByName("checkboxApproval");
-        for(var i=0;i<checkboxApprovalArray.length;i++){
-            if(checkboxApprovalArray[i].checked == true){
-                alert(checkboxApprovalArray[i].value + i +" marcado.");
+        var articleIdsChecked = [];
+        $("input[name='checkboxApproval']").each(function() {
+            if(this.checked){
+                var currentRow = $(this).closest('tr');
+                articleIdsChecked.push(parseInt(currentRow[0].cells[0].textContent))
             }
-            else{
-            }
-        }
+        });
+        console.log(articleIdsChecked)
     }
 </script>
 {% endblock scholar_content %}
