@@ -4,7 +4,7 @@ from dataviva.apps.general.views import get_locale
 from dataviva.api.secex.services import TradePartner, \
     TradePartnerMunicipalities, TradePartnerProducts
 from dataviva.api.secex.models import Ymw, Ymbw
-from dataviva.api.attrs.models import Wld
+from dataviva.api.attrs.models import Wld, Bra
 from dataviva import db
 from sqlalchemy.sql.expression import func
 
@@ -27,7 +27,8 @@ def add_language_code(endpoint, values):
 def index(wld_id):
 
     bra_id = request.args.get('bra_id')
-
+    trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
+    location = Bra.query.filter_by(id=bra_id).first()
     max_year_query = db.session.query(
         func.max(Ymw.year)).filter_by(wld_id=wld_id)
 
@@ -107,7 +108,7 @@ def index(wld_id):
         'product_with_lowest_balance': products_service.product_with_lowest_balance(),
         'lowest_balance': products_service.lowest_balance(),
         'world_trade_description': 'World trade description.',
-    }    
+    }
 
     for index, trp in enumerate(export_rank):
         if export_rank[index].wld_id == wld_id:
@@ -117,6 +118,10 @@ def index(wld_id):
     for index, trp in enumerate(import_rank):
         if import_rank[index].wld_id == wld_id:
             header['import_rank'] = index
-            break            
+            break
 
-    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body)
+    if location:
+        return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location)
+    else:
+        return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner)
+

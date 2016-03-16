@@ -27,19 +27,48 @@
         </div>
         <h2>Perfil Geral</h2>
         {% if not header.bra_id %}
-        <p>O curso de {{ header.name }} é o {{ header.rank }}º em número de matrículas no Brasil. A universidade que possui mais alunos é a {{ content.university_with_more_enrolled }}, com {{ content.highest_enrolled_number_by_university | max_digits(3) }} {{ content.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em todo o país.</p>
+            <p>O curso/campo de {{ header.name }} é o {{ header.rank }}º em número de matrículas no Brasil. A universidade que possui mais alunos é {{ major.article() }} 
+            {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }} 
+            {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso possui {{ header.enrolled | max_digits(3) }} 
+            {{ header.enrolled | magnitude }} alunos matriculados em todo o país.</p>
+        
         {% else %}
-        {% if header.bra_id|length == 1 %}
-        <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas na {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é a {{ content.university_with_more_enrolled }}, com {{ content.highest_enrolled_number_by_university | max_digits(3) }} {{ content.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em toda a região.</p>
-        {% elif header.bra_id|length == 3 %}
-        <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas no estado de/da/do {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é a {{ content.university_with_more_enrolled }}, com {{ content.highest_enrolled_number_by_university | max_digits(3) }} {{ content.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em todo o estado.</p>
-        {% elif header.bra_id|length == 5 %}
-        <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas na mesorregião de/da/do {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é a {{ content.university_with_more_enrolled }}, com {{ content.highest_enrolled_number_by_university | max_digits(3) }} {{ content.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em toda a mesorregião.</p>
-        {% elif header.bra_id|length == 7 %}
-        <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas na microrregião de/da/do {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é a {{ content.university_with_more_enrolled }}, com {{ content.highest_enrolled_number_by_university | max_digits(3) }} {{ content.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em toda a microrregião.</p>
-        {% else %}
-        <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas no município de/da/do {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é a {{ content.university_with_more_enrolled }}, com {{ content.highest_enrolled_number_by_university | max_digits(3) }} {{ content.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em todo o município.</p>
-        {% endif %}
+            {% if header.bra_id|length == 1 %}
+                <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas {{ location.preposition("de") }} {{ header.location_name }}. 
+                A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }} {{ body.university_with_more_enrolled }}, com 
+                {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
+                estudantes. No total, o curso/campo possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos 
+                matriculados em toda a região.</p>
+                
+            {% elif header.bra_id|length == 3 %}
+                <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas no estado {{ location.preposition("de") }}
+                {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }} 
+                {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }} 
+                {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui 
+                {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em todo o estado.</p>
+            
+            {% elif header.bra_id|length == 5 %}
+                <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas na mesorregião 
+                {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }} 
+                {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }} 
+                {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui 
+                {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em toda a mesorregião.</p>
+            
+            {% elif header.bra_id|length == 7 %}
+                <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas na microrregião {{ location.preposition("de") }}
+                 {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }} 
+                 {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }} 
+                 {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui 
+                 {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em toda a microrregião.</p>
+            
+            {% else %}
+                <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas no município {{ location.preposition("de") }} 
+                {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }} 
+                {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }} 
+                {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui 
+                {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em todo o município.</p>
+            
+            {% endif %}
         {% endif %}
         <div class="row">
             <div class="col-xs-15 col-sm-15 col-md-5">
@@ -52,8 +81,8 @@
                                     Principal Universidade por Número de Alunos Matriculados
                                 </th>
                                 <td>
-                                    <p class="label">{{ content.university_with_more_enrolled }}</p>
-                                    <strong class="counter">{{ content.highest_enrolled_number_by_university | max_digits(3) }}</strong><span>{{ content.highest_enrolled_number_by_university | magnitude }}</span>
+                                    <p class="label">{{ body.university_with_more_enrolled }}</p>
+                                    <strong class="counter">{{ body.highest_enrolled_number_by_university | max_digits(3) }}</strong><span>{{ body.highest_enrolled_number_by_university | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -61,8 +90,8 @@
                                     Principal Município por Número de Alunos Matriculados
                                 </th>
                                 <td>
-                                    <p class="label">{{ content.municipality_with_more_enrolled }}</p>
-                                    <strong class="counter">{{ content.highest_enrolled_number_by_municipality | max_digits(3) }}</strong><span>{{ content.highest_enrolled_number_by_municipality | magnitude }}</span>
+                                    <p class="label">{{ body.municipality_with_more_enrolled }}</p>
+                                    <strong class="counter">{{ body.highest_enrolled_number_by_municipality | max_digits(3) }}</strong><span>{{ body.highest_enrolled_number_by_municipality | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -70,8 +99,8 @@
                                     Principal Universidade por Número de Alunos Ingressantes
                                 </th>
                                 <td>
-                                    <p class="label">{{ content.university_with_more_entrants }}</p>
-                                    <strong class="counter">{{ content.highest_entrant_number_by_university | max_digits(3) }}</strong><span>{{ content.highest_entrant_number_by_university | magnitude }}</span>
+                                    <p class="label">{{ body.university_with_more_entrants }}</p>
+                                    <strong class="counter">{{ body.highest_entrant_number_by_university | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_university | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -79,8 +108,8 @@
                                     Principal Município por Número de Alunos Ingressantes
                                 </th>
                                 <td>
-                                    <p class="label">{{ content.municipality_with_more_entrants }}</p>
-                                    <strong class="counter">{{ content.highest_entrant_number_by_municipality | max_digits(3) }}</strong><span>{{ content.highest_entrant_number_by_municipality | magnitude }}</span>
+                                    <p class="label">{{ body.municipality_with_more_entrants }}</p>
+                                    <strong class="counter">{{ body.highest_entrant_number_by_municipality | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_municipality | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -88,8 +117,8 @@
                                     Principal Universidade por Número de Alunos Concluintes
                                 </th>
                                 <td>
-                                    <p class="label">{{ content.university_with_more_graduates }}</p>
-                                    <strong class="counter">{{ content.highest_graduate_number_by_university | max_digits(3) }}</strong><span>{{ content.highest_graduate_number_by_university | magnitude }}</span>
+                                    <p class="label">{{ body.university_with_more_graduates }}</p>
+                                    <strong class="counter">{{ body.highest_graduate_number_by_university | max_digits(3) }}</strong><span>{{ body.highest_graduate_number_by_university | magnitude }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -97,8 +126,8 @@
                                     Principal Município por Número de Alunos Concluintes
                                 </th>
                                 <td>
-                                    <p class="label">{{ content.municipality_with_more_graduates }}</p>
-                                    <strong class="counter">{{ content.highest_graduate_number_by_municipality | max_digits(3) }}</strong><span>{{ content.highest_graduate_number_by_municipality | magnitude }}</span>
+                                    <p class="label">{{ body.municipality_with_more_graduates }}</p>
+                                    <strong class="counter">{{ body.highest_graduate_number_by_municipality | max_digits(3) }}</strong><span>{{ body.highest_graduate_number_by_municipality | magnitude }}</span>
                                 </td>
                             </tr>
                         </tbody>
