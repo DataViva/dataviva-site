@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash
+from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash, jsonify
 from dataviva.apps.general.views import get_locale
 
 from models import Article, AuthorScholar, KeyWord
@@ -140,3 +140,12 @@ def delete(id):
 def approval():
     articles = Article.query.all()
     return render_template('scholar/approval.html', articles=articles)
+
+
+@mod.route('/all', methods=['GET'])
+def all():
+    result = Article.query.all()
+    articles = []
+    for row in result:
+        articles += [(row.id, row.title, row.authors_str(), row.postage_date.strftime('%d-%m-%Y'))]
+    return jsonify(articles=articles)
