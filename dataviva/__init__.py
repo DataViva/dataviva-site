@@ -96,6 +96,7 @@ from dataviva.api.stats.views import mod as stats_module
 from dataviva.apps.about.views import mod as about_module
 from dataviva.apps.account.views import mod as account_module
 from dataviva.apps.admin.views import mod as admin_module
+from dataviva.apps.users.views import mod as users_module
 from dataviva.apps.ask.views import mod as ask_module
 from dataviva.apps.basic_course.views import mod as basic_course_module
 from dataviva.apps.data.views import mod as data_module
@@ -127,6 +128,7 @@ app.register_blueprint(secex_module)
 app.register_blueprint(stats_module)
 app.register_blueprint(general_module)
 app.register_blueprint(admin_module)
+app.register_blueprint(users_module)
 app.register_blueprint(account_module)
 app.register_blueprint(embed_module)
 app.register_blueprint(data_module)

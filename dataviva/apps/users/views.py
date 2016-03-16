@@ -21,7 +21,7 @@ from functools import wraps
 # import urllib2, urllib
 # from config import SITE_MIRROR
 
-mod = Blueprint('admin', __name__, url_prefix='/<lang_code>/admin')
+mod = Blueprint('users', __name__, url_prefix='/<lang_code>/users')
 
 def get_current_user_role():
     return g.user.role
@@ -54,7 +54,7 @@ def pull_lang_code(endpoint, values):
 @mod.route('/')
 #@login_required
 #@required_roles(1)
-def admin():
+def users():
     return redirect(url_for('.admin_users'))
 
 @mod.route('/users/')
