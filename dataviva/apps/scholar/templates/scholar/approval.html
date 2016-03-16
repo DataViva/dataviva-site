@@ -17,7 +17,7 @@
         {% for article in articles %}
             <tr>
                 <td>{{ article.id }}</td>
-                <td>{{ article.title }}</td>
+                <td><a href="/scholar/article/{{ article.id }}">{{ article.title }}</td>
                 <td>{{ article.authors_str() }}</td>
                 <td>{{ article.date_str() }}</td>
                 <td><input type="checkbox" name="checkboxApproval"/></td>
@@ -28,8 +28,6 @@
 <a class="btn btn-default btn-dataviva pull-right" href="#" onclick="verifyChecks()">Enviar</a>
 <a class="btn btn-default btn-dataviva pull-right" href="/scholar">Cancelar</a>
 </div>
-
-
 
 <script type="text/javascript">
     //if($('input[name=checkboxApproval]').prop("checked")){
