@@ -1,7 +1,9 @@
 # -*- coding: utf8 -*-
-from flask import Blueprint, render_template, g
+from flask import Blueprint, render_template, g, redirect, url_for, flash
 from dataviva.apps.general.views import get_locale
 from forms import RegistrationForm
+from models import Edict
+from dataviva import db
 
 
 mod = Blueprint('partners', __name__,
@@ -45,7 +47,17 @@ def create():
     form = RegistrationForm()
     if form.validate() is False:
         return render_template('partners/new.html', form=form)
-    pass
+    else:
+        edict = Edict()
+        edict.title = form.title.data
+        edict.link = form.title.data
+
+        db.session.add(edict)
+        db.session.commit()
+
+        message = u'Muito obrigado! Seu edital foi submetido com sucesso!'
+        flash(message, 'success')
+        return redirect(url_for('partners.index'))
 
 
 @mod.route('/edict/<id>/edit', methods=['GET'])
