@@ -28,21 +28,22 @@ def index():
     return render_template('contact/index.html', form=form, action=url_for('contact.create'))
 
 
-@mod.route('/contact/new', methods=['POST'])
+@mod.route('/', methods=['POST'])
 def create():
     form = RegistrationForm()
     if form.validate() is False:
         return render_template('contact/index.html', form=form)
     else:
-        form = Form()
-        form.name = form.name.data
-        form.email = form.email.data
-        form.message = form.message.data
-        form.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        contact = Form()
+        contact.name = form.name.data
+        contact.email = form.email.data
+        contact.subject = form.subject.data
+        contact.message = form.message.data
+        contact.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        db.session.add(form)
+        db.session.add(contact)
         db.session.commit()
 
         message = u'Sua mensagem foi enviada com sucesso. Em breve retornaremos.'
         flash(message, 'success')
-        return redirect(url_for('scholar.index'))
+        return redirect(url_for('contact.index'))
