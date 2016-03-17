@@ -12,6 +12,7 @@
                     <th>Name<i class="fa fa-fw fa-sort"></i></th>
                     <th>Email<i class="fa fa-fw fa-sort"></i></th>
                     <th>Type<i class="fa fa-fw fa-sort"></i></th>
+                    <th>Admin <input name="select_all" value="1" id="select-all" type="checkbox"/> </th>
                 </tr>
             </thead>
         </table>
@@ -35,18 +36,52 @@
                     { "data": "authors" },
                     { "data": "role"},
                 ],
+                "columnDefs": [ {
+                    'className' : 'dt-body-center',
+                    'targets':   4,
+                    'render': function(data, type,full, meta){
+                        return '<input type="checkbox" name="checkboxApproval" value="">'
+                    }
+                } ],
                 "columns": [
-                   { "width": "20%" },
+                   { "width": "10%" },
                    { "width": "30%" },
                    null,
                    { "width": "19%" },
-                 ],
+                 ],              
                "paging": false,
                "bFilter": false,
                "info": false //number of rows in footer table
+            });
 
+            // Select all control
+            $('#select-all').on('click', function(){
+               var rows = table.rows({ 'search': 'applied' }).nodes();
+               $('input[type="checkbox"]', rows).prop('checked', this.checked);
+            });
+            $('#approvalTable tbody').on('change', 'input[type="checkbox"]', function(){
+               if(!this.checked){
+                  var el = $('#select-all').get(0);
+                  if(el && el.checked && ('indeterminate' in el)){
+                     el.indeterminate = true;
+                    }
+                }
             });
     });
+
+
+
+    // Verify Checks
+    function verifyChecks(){
+        var articleIdsChecked = [];
+        $("input[name='checkboxApproval']").each(function() {
+            if(this.checked){
+                var currentRow = $(this).closest('tr');
+                articleIdsChecked.push(parseInt(currentRow[0].cells[0].textContent))
+            }
+        });
+        console.log(articleIdsChecked)
+    }
 </script>
 
 <script type="text/javascript">
