@@ -37,10 +37,11 @@ def admin_users():
     return render_template('index.html', articles=users)
 
 
-@mod.route('/users/all', methods=['GET'])
+@mod.route('/all/', methods=['GET'])
 def all():
     result = User.query.all()
+    #import pdb; pdb.set_trace()
     users = []
     for row in result:
-        users+=[(row.id, row.fullname,row.email)]
-    return jsonify(users)
+        users+=[(row.id, row.fullname,row.email, row.id)]
+    return jsonify(users=users)
