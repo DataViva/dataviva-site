@@ -94,4 +94,8 @@ def delete(id):
         return make_response(render_template('not_found.html'), 404) 
        
 
+@mod.route('/call/approval')
+def approval():
+    calls = Call.query.all()
+    return render_template('partners/approval.html')
 

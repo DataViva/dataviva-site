@@ -1,6 +1,6 @@
-{% extends "scholar/_base.html" %}
+{% extends "partners/_base.html" %}
 
-{% block scholar_content %}
+{% block partners_content %}
 
 <div class="institucional">
     <h2>Estudos sobre o DataViva</h2>
@@ -9,10 +9,10 @@
         <table id="approvalTable" class="table" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Article ID</th>
+                    <th>Call ID</th>
                     <th>Title</th>
-                    <th>Author(s)</th>
-                    <th>Publication Date</th>
+                    <th>Link</th>
+                    <th>Active</th>
                 </tr>
             </thead>
         </table>
@@ -20,4 +20,4 @@
 <a class="btn btn-default btn-dataviva pull-right" href="#" onclick="verifyChecks()">Enviar</a>
 <a class="btn btn-default btn-dataviva pull-right" href="/scholar">Cancelar</a>
 </div>
-{% endblock scholar_content %}
+{% endblock partners_content %}
