@@ -147,5 +147,5 @@ def all():
     result = Article.query.all()
     articles = []
     for row in result:
-        articles += [(row.id, row.title, row.authors_str(), row.postage_date.strftime('%d-%m-%Y'))]
+        articles += [(row.id, row.title, row.authors_str(), row.postage_date.strftime('%d/%m/%Y'))]
     return jsonify(articles=articles)
