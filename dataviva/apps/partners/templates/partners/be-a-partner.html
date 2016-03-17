@@ -14,9 +14,10 @@
                 <p> Leia também, na íntegra, a Deliberação nº 92 do Conselho Curador da FAPEMIG que institui as diretrizes e normas para a formalização de parcerias voluntárias entre a FAPEMIG e entidades públicas, organizações da sociedade civil e demais pessoas de direito privado com objetivos comuns, no âmbito do projeto DataViva.</p>
 
                 <h2> Editais</h2>
-                <p><a href={{edicts[0]['link']}}>{{edicts[0]['title']}}</a></p>
 
-                <p> <a href={{edicts[1]['link']}}>{{edicts[1]['title']}}</a></p>
+                {% for edict in edicts %}
+                    <p><a href={{edict.link}}>{{edict.title}}</a></p>
+                {%endfor%}    
             </div>
         {% include "include/partners.html" %}
         </div>

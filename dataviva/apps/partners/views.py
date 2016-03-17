@@ -29,10 +29,7 @@ def index():
 
 @mod.route('/be-a-partner')
 def be_a_partner():
-    edicts = [ 
-    {"id":1, "link" : ("http://www.fapemig.br/admin/editais/upload/20151215143334-Horizon%202020%20FAPEMIG%20guidelines.pdf").decode("utf-8"), "title" : ("Bolsa de Incentivo ao Pesquisador Público Estadual -  BIPDT.").decode("utf-8")},
-    {"id":2, "link": ("http://www.fapemig.br/admin/editais/upload/20160212152041-Versao%20retificada%20PPM%202016.pdf").decode("utf-8"), "title" : ("Apoio a Núcleo de Inovação Tecnológica").decode("utf-8")}]
-
+    edicts = Edict.query.all()
     return render_template('partners/be-a-partner.html', edicts=edicts)
 
 
@@ -42,6 +39,10 @@ def new():
     return render_template('partners/new.html', form=form)
 
 
+@mod.route('/edict/<id>/edit', methods=['GET'])
+def edit(id):
+    pass
+
 @mod.route('/edict/new', methods=['POST'])
 def create():
     form = RegistrationForm()
@@ -50,7 +51,7 @@ def create():
     else:
         edict = Edict()
         edict.title = form.title.data
-        edict.link = form.title.data
+        edict.link = form.link.data
 
         db.session.add(edict)
         db.session.commit()
@@ -59,10 +60,6 @@ def create():
         flash(message, 'success')
         return redirect(url_for('partners.index'))
 
-
-@mod.route('/edict/<id>/edit', methods=['GET'])
-def edit(id):
-    pass
 
 
 @mod.route('/edict/<id>/edit', methods=['POST'])
