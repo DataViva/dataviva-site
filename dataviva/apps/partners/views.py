@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
+from forms import RegistrationForm
 
 
 mod = Blueprint('partners', __name__,
@@ -35,7 +36,8 @@ def be_a_partner():
 
 @mod.route('/edict/new', methods=['GET'])
 def new():
-    return render_template('partners/new.html')
+    form = RegistrationForm();
+    return render_template('partners/new.html', form=form)
 
 
 @mod.route('/edict/<id>/edit', methods=['GET'])
