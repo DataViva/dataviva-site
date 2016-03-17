@@ -1,5 +1,5 @@
 # -*- coding: utf8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash
+from flask import Blueprint, render_template, g, redirect, url_for, flash, make_response
 from dataviva.apps.general.views import get_locale
 from forms import RegistrationForm
 from models import Edict
@@ -51,7 +51,7 @@ def create():
 
         message = u'Muito obrigado! Seu edital foi submetido com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('partners.index'))
+        return redirect(url_for('partners.be_a_partner'))
 
 
 @mod.route('/edict/<id>/edit', methods=['GET'])
@@ -78,14 +78,22 @@ def update(id):
 
         message = u'Edital editado com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('partners.index'))
+        return redirect(url_for('partners.be_a_partner'))
 
 
 @mod.route('/edict/<id>/delete', methods=['GET'])
 def delete(id):
-    pass
+    edict = Edict.query.filter_by(id=id).first_or_404()
+    if edict:
+        db.session.delete(edict)
+        db.session.commit()
+        message = u"Edital excluído com sucesso!"
+        flash(message, 'success')
+        return redirect(url_for('partners.be_a_partner'))
+    else:
+        return make_response(render_template('not_found.html'), 404) 
+       
 
 
 
 
-    
