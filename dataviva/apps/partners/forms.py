@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import FileField, TextField, TextAreaField, validators, ValidationError
+from wtforms import TextField,validators
 
 class RegistrationForm(Form):
-    title = TextField('title', [validators.Required(u"Por favor, insira o título do artigo."), validators.Length(max=400)])
-    link = TextField('link', [validators.Required(u"Por favor, insira o tema do artigo.")])
+    title = TextField('title', [validators.Required(u"Por favor, insira o título do edital."), validators.Length(max=400)])
+    link = TextField('link', [validators.Required(u"Por favor, insira o link do edital.")])
    
 
 '''
