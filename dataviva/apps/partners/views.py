@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g, redirect, url_for, flash, make_response
 from dataviva.apps.general.views import get_locale
 from forms import RegistrationForm
-from models import Edict
+from models import Call
 from dataviva import db
 
 
@@ -27,73 +27,71 @@ def index():
 
 @mod.route('/be-a-partner')
 def be_a_partner():
-    edicts = Edict.query.all()
-    return render_template('partners/be-a-partner.html', edicts=edicts)
+    calls = Call.query.all()
+    return render_template('partners/be-a-partner.html', calls=calls)
 
 
-@mod.route('/edict/new', methods=['GET'])
+@mod.route('/call/new', methods=['GET'])
 def new():
     form = RegistrationForm();
     return render_template('partners/new.html', form=form)
 
-@mod.route('/edict/new', methods=['POST'])
+@mod.route('/call/new', methods=['POST'])
 def create():
     form = RegistrationForm()
     if form.validate() is False:
         return render_template('partners/new.html', form=form)
     else:
-        edict = Edict()
-        edict.title = form.title.data
-        edict.link = form.link.data
+        call = Call()
+        call.title = form.title.data
+        call.link = form.link.data
 
-        db.session.add(edict)
+        db.session.add(call)
         db.session.commit()
 
-        message = u'Muito obrigado! Seu edital foi submetido com sucesso!'
+        message = u'Muito obrigado! sua Chamada foi submetida com sucesso!'
         flash(message, 'success')
         return redirect(url_for('partners.be_a_partner'))
 
 
-@mod.route('/edict/<id>/edit', methods=['GET'])
+@mod.route('/call/<id>/edit', methods=['GET'])
 def edit(id):
     form = RegistrationForm()
-    edict = Edict.query.filter_by(id=id).first_or_404()
-    form.title.data = edict.title
-    form.link.data = edict.link
+    call = Call.query.filter_by(id=id).first_or_404()
+    form.title.data = call.title
+    form.link.data = call.link
     return render_template('partners/edit.html', form=form, action=url_for('partners.update', id=id))
 
 
 
-@mod.route('/edict/<id>/edit', methods=['POST'])
+@mod.route('/call/<id>/edit', methods=['POST'])
 def update(id):
     form = RegistrationForm()
     if form.validate() is False:
         return render_template('partners/new.html', form=form)
     else:
-        edict = Edict.query.filter_by(id=id).first_or_404()
-        edict.title = form.title.data
-        edict.link = form.link.data
+        call = Call.query.filter_by(id=id).first_or_404()
+        call.title = form.title.data
+        call.link = form.link.data
 
         db.session.commit()
 
-        message = u'Edital editado com sucesso!'
+        message = u'Chamada editada com sucesso!'
         flash(message, 'success')
         return redirect(url_for('partners.be_a_partner'))
 
 
-@mod.route('/edict/<id>/delete', methods=['GET'])
+@mod.route('/call/<id>/delete', methods=['GET'])
 def delete(id):
-    edict = Edict.query.filter_by(id=id).first_or_404()
-    if edict:
-        db.session.delete(edict)
+    call = Call.query.filter_by(id=id).first_or_404()
+    if call:
+        db.session.delete(call)
         db.session.commit()
-        message = u"Edital excluído com sucesso!"
+        message = u"Chamada excluída com sucesso!"
         flash(message, 'success')
         return redirect(url_for('partners.be_a_partner'))
     else:
         return make_response(render_template('not_found.html'), 404) 
        
-
-
 
 

@@ -1,0 +1,23 @@
+{% extends "scholar/_base.html" %}
+
+{% block scholar_content %}
+
+<div class="institucional">
+    <h2>Estudos sobre o DataViva</h2>
+    <h3>Aprovação dos estudos</h3>
+    <div class="meta">
+        <table id="approvalTable" class="table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Article ID</th>
+                    <th>Title</th>
+                    <th>Author(s)</th>
+                    <th>Publication Date</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+<a class="btn btn-default btn-dataviva pull-right" href="#" onclick="verifyChecks()">Enviar</a>
+<a class="btn btn-default btn-dataviva pull-right" href="/scholar">Cancelar</a>
+</div>
+{% endblock scholar_content %}
