@@ -43,5 +43,5 @@ def all():
     #import pdb; pdb.set_trace()
     users = []
     for row in result:
-        users+=[(row.id, row.fullname,row.email, row.id)]
+        users+=[(row.id, row.fullname,row.email, row.role)]
     return jsonify(users=users)
