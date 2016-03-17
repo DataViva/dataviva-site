@@ -1,5 +1,4 @@
 from dataviva import db
-#import smtplib
 
 
 class Form(db.Model):
@@ -16,13 +15,3 @@ class Form(db.Model):
 
     def __repr__(self):
         return '<Form %r>' % (self.name)
-
-    #sender = email
-    #receivers = ['contato@dataviva.info']
-
-#       try:
-#       smtpObj = smtplib.SMTP('localhost')
-#       smtpObj.sendmail(sender, receivers, message)
-#       print "Successfully sent e-mail"
-#    except SMTPException:
-#       print "Error: unable to send e-mail"
