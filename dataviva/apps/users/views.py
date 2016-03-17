@@ -37,3 +37,10 @@ def admin_users():
     return render_template('index.html', articles=users)
 
 
+@mod.route('/users/all', methods=['GET'])
+def all():
+    result = User.query.all()
+    users = []
+    for row in result:
+        users+=[(row.id, row.fullname,row.email)]
+    return jsonify(users)
