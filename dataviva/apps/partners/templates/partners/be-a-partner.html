@@ -16,7 +16,7 @@
                 <h2> Editais</h2>
 
                 {% for edict in edicts %}
-                    <p><a href={{edict.link}}>{{edict.title}}</a></p>
+                    <p><a href={{edict.link}} target="_blank">{{edict.title}}</a></p>
                 {%endfor%}    
             </div>
         {% include "include/partners.html" %}
