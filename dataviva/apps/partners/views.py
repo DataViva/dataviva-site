@@ -40,13 +40,16 @@ def new():
     return render_template('partners/new.html', form=form)
 
 
-@mod.route('/edict/<id>/edit', methods=['GET'])
-def edit(id):
+@mod.route('/edict/new', methods=['POST'])
+def create():
+    form = RegistrationForm()
+    if form.validate() is False:
+        return render_template('partners/new.html', form=form)
     pass
 
 
-@mod.route('/edict/new', methods=['POST'])
-def create():
+@mod.route('/edict/<id>/edit', methods=['GET'])
+def edit(id):
     pass
 
 
