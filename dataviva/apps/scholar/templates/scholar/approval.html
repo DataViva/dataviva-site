@@ -38,35 +38,36 @@
                 { "data": "authors" },
                 { "data": "publicationDate" },
             ],
-            'columnDefs': [
-                { 'targets': 1,
-                'className': 'body-title'
+            "columnDefs": [
+                {
+                    "targets": 1,
+                    "className": "body-title"
                 },
                 {
-                     'targets': 4,
-                     'className': 'body-checkbox',
-                     'render': function (data, type, full, meta){
+                     "targets": 4,
+                     "className": "body-checkbox",
+                     "render": function (data, type, full, meta){
                          return '<input type="checkbox" name="checkboxApproval" value="">';
                      }
                   }],
             "columns": [
-                { "width": "8%" },
-                null,
-                null,
-                { "width": "20%" },
-              ],
+                    { "width": "8%" },
+                    null,
+                    null,
+                    { "width": "20%" },
+            ],
             "paging": false,
             "bFilter": false,
             "info": false,
         });
 
-        //Article links
+        //Title article links
         $('#approvalTable tbody').on('click','.body-title', function () {
             var articleId = parseInt($(this).closest('tr')[0].cells[0].textContent)
             window.location.href = '/scholar/article/'+articleId
         });
 
-        // Select all control
+        //Checkbox control
         $('#select-all').on('click', function(){
            var rows = table.rows({ 'search': 'applied' }).nodes();
            $('input[type="checkbox"]', rows).prop('checked', this.checked);
@@ -82,10 +83,10 @@
         });
     });
 
-    // Verify Checks
+    //Verify Checks
     function verifyChecks(){
         var articleIdsChecked = [];
-        $("input[name='checkboxApproval']").each(function() {
+        $('input[name="checkboxApproval"]').each(function() {
             if(this.checked){
                 var currentRow = $(this).closest('tr');
                 articleIdsChecked.push(parseInt(currentRow[0].cells[0].textContent))
