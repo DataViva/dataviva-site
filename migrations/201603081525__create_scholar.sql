@@ -5,6 +5,7 @@ CREATE TABLE scholar_article(
     abstract text NULL,
     file_path varchar (250) NULL,
     postage_date datetime NULL,
+    approved_status TINYINT(1) NULL,
     PRIMARY KEY (id)
 );
 ​​
