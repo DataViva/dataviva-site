@@ -34,18 +34,21 @@
             "sAjaxDataProp": "articles",
             "aoColumnsDefs": [
                 { "data": "id" },
-                { "data": "title", "type": "html" },
+                { "data": "title" },
                 { "data": "authors" },
                 { "data": "publicationDate" },
             ],
             'columnDefs': [
-            {
-                 'targets': 4,
-                 'className': 'dt-body-center',
-                 'render': function (data, type, full, meta){
-                     return '<input type="checkbox" name="checkboxApproval" value="">';
-                 }
-              }],
+                { 'targets': 1,
+                'className': 'body-title'
+                },
+                {
+                     'targets': 4,
+                     'className': 'body-checkbox',
+                     'render': function (data, type, full, meta){
+                         return '<input type="checkbox" name="checkboxApproval" value="">';
+                     }
+                  }],
             "columns": [
                 { "width": "8%" },
                 null,
@@ -58,7 +61,7 @@
         });
 
         //Article links
-        $('#approvalTable').on('click','tbody tr', function () {
+        $('#approvalTable tbody').on('click','.body-title', function () {
             var articleId = parseInt($(this).closest('tr')[0].cells[0].textContent)
             window.location.href = '/scholar/article/'+articleId
         });
