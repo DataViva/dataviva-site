@@ -38,14 +38,17 @@
                 { "data": "link" },
                 { "data": "active" },
             ],
-            "columns": [
-                { "width": "8%" },
-                null,
-                null,
-                { "width": "20%" },
-              ]
+            'columnDefs': [
+            {
+                 'targets': 3,
+                 'className': 'dt-body-center',
+                 'render': function (data, type, full){
+                     return '<input type="checkbox" name="checkboxApproval" value="">';
+                 }
+              }],
         });
     });
+
 
 
 
