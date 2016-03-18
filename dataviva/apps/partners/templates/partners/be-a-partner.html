@@ -13,13 +13,18 @@
                 <p>As parcerias no âmbito do Projeto DataViva são formalizadas por meio de instrumento específico e mediante procedimento de Chamamento Público, nos termos do art. 23 da Lei nº 13.019, de 31 de julho de 2014. Veja abaixo os chamamentos em aberto e aqueles realizados até o momento. Caso tenha alguma sugestão de objeto de parceria que não esteja contemplada nos chamamentos abertos, <a href="{{url_for('general.contact')}}">entre em contato conosco.</a></p>
                 <p> Leia também, na íntegra, a Deliberação nº 92 do Conselho Curador da FAPEMIG que institui as diretrizes e normas para a formalização de parcerias voluntárias entre a FAPEMIG e entidades públicas, organizações da sociedade civil e demais pessoas de direito privado com objetivos comuns, no âmbito do projeto DataViva.</p>
 
-                <h2>Editais</h2>
-                <p><a href="http://www.fapemig.br/admin/editais/upload/20151215143334-Horizon%202020%20FAPEMIG%20guidelines.pdf">Bolsa de Incentivo ao Pesquisador Público Estadual -  BIPDT.</a></p>
+                <h2> Chamadas</h2>
 
-                <p> <a href="http://www.fapemig.br/admin/editais/upload/20160212152041-Versao%20retificada%20PPM%202016.pdf">Apoio a Núcleo de Inovação Tecnológica.</a></p>
+                {% for call in calls %}
+                    <p><a href={{call.link}} target="_blank">{{call.title}}</a></p>
+                {%endfor%}    
             </div>
         {% include "include/partners.html" %}
         </div>
     </div>
 </div>
 {% endblock content %}
+<p>
+    Título : Edital 1 <br /> 
+
+</p>
