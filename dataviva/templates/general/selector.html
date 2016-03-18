@@ -1,0 +1,51 @@
+{% extends "site.html" %}
+
+{% block title %}: {% trans %}Filter Selection{% endtrans %}{% endblock %}
+
+{% block body %}
+
+  <div class="darkbox"><h1>{{ _('Please choose %(name)s', name = article) }}</h1></div>
+  <br>
+  <div id="selector"></div>
+
+{% endblock %}
+
+{% block js %}
+
+  <script src="/static/js/utils/utils.selector.js"></script>
+
+  <script>
+
+    d3.select("#selector").style("height",window.innerHeight-242+"px")
+    // window.onresize = function(){
+    //   d3.select("#selector").style("height",window.innerHeight-290+"px")
+    // }
+
+    var value = "{{ selector }}", limit = null;
+
+    if (value === "hs" || value === "wld") {
+      limit = 2;
+    }
+    else if (value === "cnae" || value === "cbo") {
+      limit = 1;
+    }
+    else if (value == "bra" && window.location.href.indexOf("profiles") < 0) {
+      limit = 1;
+    }
+
+    selector_return = function(value) {
+      window.location = "{{ g.path }}".replace("select",value.id)
+    }
+
+    var selector = Selector()
+      .callback(selector_return)
+      .type(value)
+      // .initial_value("00322")
+      // .limit(limit);
+
+    d3.select("#selector")
+      .call(selector);
+
+  </script>
+
+{% endblock %}

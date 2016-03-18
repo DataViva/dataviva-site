@@ -1,0 +1,12 @@
+<div role="tabpanel" class="tab-pane" id="oportunidade-economica">
+    <h2>Oportunidade Econômica</h2>
+    <p>{{ industry.text_economic_opportunity }}</p>
+
+</br><a target="frame-tab-oportunidade-economica">Atividades Econômicas</a></br>
+
+         <a href="/pt/embed/rings/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae"
+         target="frame-tab-oportunidade-economica">&nbsp Anéis</a></br>
+</div>
+
+<iframe name="frame-tab-oportunidade-economica" id="frame-tab-oportunidade-economica" width='684' height='350'
+src='/pt/embed/rings/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae' frameborder='0'></iframe>
