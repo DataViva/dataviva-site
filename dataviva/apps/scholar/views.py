@@ -65,6 +65,7 @@ def create():
         article.abstract = form.abstract.data
         article.file_path = 'test'
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        article.approved_status = 0
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
@@ -147,5 +148,5 @@ def all():
     result = Article.query.all()
     articles = []
     for row in result:
-        articles += [(row.id, row.title, row.authors_str(), row.postage_date.strftime('%d/%m/%Y'))]
+        articles += [(row.id, row.title, row.authors_str(), row.postage_date.strftime('%d/%m/%Y'), row.approved_status)]
     return jsonify(articles=articles)
