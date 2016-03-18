@@ -20,4 +20,35 @@
 <a class="btn btn-default btn-dataviva pull-right" href="#" onclick="verifyChecks()">Enviar</a>
 <a class="btn btn-default btn-dataviva pull-right" href="/scholar">Cancelar</a>
 </div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script type="text/javascript">
+    $(document).ready(function($) {
+        var table = $('#approvalTable').DataTable( {
+            "sAjaxSource": "/partners/all",
+            "sAjaxDataProp": "calls",
+            "aoColumnsDefs": [
+                { "data": "id" },
+                { "data": "title", "type": "html" },
+                { "data": "link" },
+                { "data": "active" },
+            ],
+            "columns": [
+                { "width": "8%" },
+                null,
+                null,
+                { "width": "20%" },
+              ]
+        });
+    });
+
+
+
+
+</script>
 {% endblock partners_content %}
