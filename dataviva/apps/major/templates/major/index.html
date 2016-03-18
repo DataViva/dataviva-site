@@ -32,6 +32,13 @@
                 </li>
             </ul>
         </div>
+
+        <div class="top-filter">
+            <label for="filter">Localidade:</label>
+            <label for="filter">{{ header.location_name  if header.location_name else "Brasil"}}</label>
+            <a href="#" title="Trocar" onclick="start_selector('Location', selectorCallback);"> (trocar)</a>
+        </div>
+
         <div class="main-content col-xs-15 col-md-11">
             <div class="tab-content">
                 {% include "major/tab-geral.html" %}

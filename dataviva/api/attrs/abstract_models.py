@@ -13,7 +13,32 @@ class BasicAttr(object):
 
     def name(self):
         lang = getattr(g, "locale", "en")
-        return title_case(getattr(self,"name_"+lang))
+        return title_case(getattr(self, "name_"+lang))
+
+    def preposition(self, preposition):
+        if self.article_pt:
+            if preposition == 'de':
+                contraction = {
+                    'f': 'da',
+                    'm': 'do',
+                }
+            elif preposition == 'em':
+                contraction = {
+                    'f': 'na',
+                    'm': 'no',
+                }
+            return contraction[self.gender_pt] + ('s' if self.plural_pt else '')
+        else:
+            return preposition
+
+    def article(self):
+        if self.article_pt:
+            if self.gender_pt == 'm':
+                return 'o' + ('s' if self.plural_pt else '')
+            else:
+                return 'a' + ('s' if self.plural_pt else '')
+        else:
+            return ''
 
 
 class ExpandedAttr(BasicAttr):

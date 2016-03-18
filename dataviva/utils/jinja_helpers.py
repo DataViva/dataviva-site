@@ -81,7 +81,7 @@ def max_digits(number, digits):
     number_str = str(number)
     return number_str[0:digits+1]
 
-def jinja_magnitude(number) : 
+def jinja_magnitude(number):
     integer = str(int(number))
     orders_of_magnitude = ['', gettext('Thousands'), gettext('Millions'), gettext('Billions'), gettext('Trillions')]
-    return orders_of_magnitude[len(integer[::3]) - 1]    
+    return orders_of_magnitude[len(integer[::3]) - 1]
