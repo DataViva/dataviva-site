@@ -16,7 +16,7 @@ class Article(db.Model):
     theme = db.Column(db.String(250))
     file_path = db.Column(db.String(250))
     postage_date = db.Column(db.DateTime)
-    approved_status = db.Column(db.Integer(1))
+    approval_status = db.Column(db.Integer(1))
     authors = db.relationship('AuthorScholar', backref='scholar_article', lazy='eager')
     keywords = db.relationship('KeyWord', secondary=article_keyword_table)
 
