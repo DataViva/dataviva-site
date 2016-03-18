@@ -37,6 +37,7 @@
                 { "data": "title" },
                 { "data": "authors" },
                 { "data": "publicationDate" },
+                { "data": "approvedStatus" },
             ],
             "columnDefs": [
                 {
@@ -47,7 +48,12 @@
                      "targets": 4,
                      "className": "body-checkbox",
                      "render": function (data, type, full, meta){
-                         return '<input type="checkbox" name="checkboxApproval" value="">';
+                         if (data){
+                            return '<input type="checkbox" name="checkboxApproval" value="" checked>';
+                         }
+                         else {
+                            return '<input type="checkbox" name="checkboxApproval" value="">';
+                         }
                      }
                   }],
             "columns": [
