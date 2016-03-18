@@ -1,5 +1,5 @@
 # -*- coding: utf8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash, make_response
+from flask import Blueprint, render_template, g, redirect, url_for, flash, make_response, jsonify
 from dataviva.apps.general.views import get_locale
 from forms import RegistrationForm
 from models import Call
@@ -25,6 +25,7 @@ def add_language_code(endpoint, values):
 def index():
     return render_template('partners/index.html')
 
+
 @mod.route('/be-a-partner')
 def be_a_partner():
     calls = Call.query.all()
@@ -33,8 +34,9 @@ def be_a_partner():
 
 @mod.route('/call/new', methods=['GET'])
 def new():
-    form = RegistrationForm();
+    form = RegistrationForm()
     return render_template('partners/new.html', form=form)
+
 
 @mod.route('/call/new', methods=['POST'])
 def create():
@@ -61,7 +63,6 @@ def edit(id):
     form.title.data = call.title
     form.link.data = call.link
     return render_template('partners/edit.html', form=form, action=url_for('partners.update', id=id))
-
 
 
 @mod.route('/call/<id>/edit', methods=['POST'])
@@ -97,5 +98,13 @@ def delete(id):
 @mod.route('/call/approval')
 def approval():
     calls = Call.query.all()
-    return render_template('partners/approval.html')
+    return render_template('partners/approval.html', calls=calls)
+
+@mod.route('/all', methods=['GET'])
+def all():
+    result = Call.query.all()
+    calls = []
+    for row in result:
+        calls += [(row.id, row.title, row.link, row.active)]
+    return jsonify(calls=calls)
 
