@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash, jsonify
+from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash, jsonify, request
 from dataviva.apps.general.views import get_locale
 
 from models import Article, AuthorScholar, KeyWord
@@ -141,6 +141,16 @@ def delete(id):
 def approval():
     articles = Article.query.all()
     return render_template('scholar/approval.html', articles=articles)
+
+
+@mod.route('/approval', methods=['POST'])
+def approval_update():
+    for id, approval_status in request.form.iteritems():
+        article = Article.query.filter_by(id=id).first_or_404()
+        article.approval_status = approval_status == u'true'
+        db.session.commit()
+    message = u"Estudo(s) atualizados com sucesso!"
+    return message
 
 
 @mod.route('/all', methods=['GET'])
