@@ -18,7 +18,7 @@
             </thead>
         </table>
     </div>
-<a class="btn btn-default btn-dataviva pull-right" href="#" onclick="verifyChecks()">Enviar</a>
+<a class="btn btn-default btn-dataviva pull-right" href="" onclick="verifyChecks()">Enviar</a>
 <a class="btn btn-default btn-dataviva pull-right" href="/scholar">Cancelar</a>
 </div>
 
@@ -47,12 +47,12 @@
                 {
                      "targets": 4,
                      "className": "body-checkbox",
-                     "render": function (data, type, full, meta){
+                     "render": function (data, type, article, meta){
                          if (data){
-                            return '<input type="checkbox" name="checkboxApproval" value="" checked>';
+                            return '<input type="checkbox" name="checkboxApproval" value="'+article[0]+'" checked>';
                          }
                          else {
-                            return '<input type="checkbox" name="checkboxApproval" value="">';
+                            return '<input type="checkbox" name="checkboxApproval" value="'+article[0]+'">';
                          }
                      }
                   }],
@@ -91,14 +91,31 @@
 
     //Verify Checks
     function verifyChecks(){
-        var articleIdsChecked = [];
+        var articlesApproval = {};
         $('input[name="checkboxApproval"]').each(function() {
-            if(this.checked){
-                var currentRow = $(this).closest('tr');
-                articleIdsChecked.push(parseInt(currentRow[0].cells[0].textContent))
-            }
+            articlesApproval[this.value] = this.checked;
         });
-        console.log(articleIdsChecked)
+
+        $.ajax({
+          method: "POST",
+          url: "/en/scholar/approval",
+          data: articlesApproval,
+          success: function (msg) {
+
+                $.notify({
+                    message: msg,
+                },{
+                    offset: {
+                            x: window.innerWidth * 18 / 100,
+                            y: window.innerHeight * 25 / 100
+                    },
+                    type: 'success',
+                    z_index: 1031,
+                    delay: 5000,
+                    timer: 1000
+                });
+          }
+        })
     }
 
 </script>
