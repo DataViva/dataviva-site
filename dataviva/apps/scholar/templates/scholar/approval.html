@@ -13,7 +13,7 @@
                     <th>Title<i class="fa fa-fw fa-sort"></i></th>
                     <th>Author(s)<i class="fa fa-fw fa-sort"></i></th>
                     <th>Publication Date<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Approve <input name="select_all" value="1" id="select-all" type="checkbox"/></th>
+                    <th>Approve <input name="selectAll" value="1" id="selectAll" type="checkbox"/></th>
                 </tr>
             </thead>
         </table>
@@ -23,7 +23,6 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 <script type="text/javascript">
@@ -41,11 +40,11 @@
             "columnDefs": [
                 {
                     "targets": 1,
-                    "className": "body-title"
+                    "className": "bodyTitle"
                 },
                 {
                      "targets": 4,
-                     "className": "body-checkbox",
+                     "className": "bodyCheckbox",
                      "render": function (data, type, article, meta){
                          if (data){
                             return '<input type="checkbox" name="checkboxApproval" value="'+article[0]+'" checked>';
@@ -60,6 +59,7 @@
                     null,
                     null,
                     { "width": "20%" },
+                    { "width": "12%" }
             ],
             "paging": false,
             "bFilter": false,
@@ -67,30 +67,30 @@
         });
 
         //Title article links
-        $('#approvalTable tbody').on('click','.body-title', function () {
+        $('#approvalTable tbody').on('click','.bodyTitle', function () {
             var articleId = parseInt($(this).closest('tr')[0].cells[0].textContent)
             window.location.href = '/scholar/article/'+articleId
         });
 
         //Single Checkbox
-        $('#approvalTable tbody').on('click','.body-checkbox', function () {
+        $('#approvalTable tbody').on('click','.bodyCheckbox', function () {
             verifyChecks();
         });
 
         //Multiple Checkbox
-        $('#approvalTable thead').on('click','input[name="select_all"]', function () {
+        $('#approvalTable thead').on('click','#selectAll', function () {
             verifyChecks();
         });
 
         //Checkbox control
-        $('#select-all').on('click', function(){
+        $('#selectAll').on('click', function(){
            var rows = table.rows({ 'search': 'applied' }).nodes();
            $('input[type="checkbox"]', rows).prop('checked', this.checked);
         });
 
         $('#approvalTable tbody').on('change', 'input[type="checkbox"]', function(){
            if(!this.checked){
-              var el = $('#select-all').get(0);
+              var el = $('#selectAll').get(0);
               if(el && el.checked && ('indeterminate' in el)){
                  el.indeterminate = true;
                 }
