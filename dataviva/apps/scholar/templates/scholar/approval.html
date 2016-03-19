@@ -18,8 +18,7 @@
             </thead>
         </table>
     </div>
-<a class="btn btn-default btn-dataviva pull-right" href="" onclick="verifyChecks()">Enviar</a>
-<a class="btn btn-default btn-dataviva pull-right" href="/scholar">Cancelar</a>
+<a class="btn btn-default btn-dataviva pull-right" href="/scholar">Voltar</a>
 </div>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -71,6 +70,16 @@
         $('#approvalTable tbody').on('click','.body-title', function () {
             var articleId = parseInt($(this).closest('tr')[0].cells[0].textContent)
             window.location.href = '/scholar/article/'+articleId
+        });
+
+        //Single Checkbox
+        $('#approvalTable tbody').on('click','.body-checkbox', function () {
+            verifyChecks();
+        });
+
+        //Multiple Checkbox
+        $('#approvalTable thead').on('click','input[name="select_all"]', function () {
+            verifyChecks();
         });
 
         //Checkbox control
