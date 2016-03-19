@@ -25,7 +25,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    articles = Article.query.all()
+    articles = Article.query.filter_by(approval_status=True).all()
     return render_template('scholar/index.html', articles=articles)
 
 
