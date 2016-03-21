@@ -59,7 +59,7 @@
             $('#usersTable tbody').on('click','.body-checkbox', function () {
                 var admin = {};
                 admin[this.firstElementChild.value] = this.firstElementChild.checked;
-                verifyChecks(admin);
+                sendChecks(admin);
             });
 
             //Multiple Checkbox
@@ -68,7 +68,7 @@
                 $('input[name="checkboxAdmin"]').each(function() {
                     admin[this.value] = this.checked;
                 });
-                verifyChecks(admin);
+                sendChecks(admin);
             });
 
             // Select all control
@@ -89,7 +89,7 @@
     });
 
     //Verify Checks
-    function verifyChecks(admin){
+    function sendChecks(admin){
 
         $.ajax({
           method: "POST",
