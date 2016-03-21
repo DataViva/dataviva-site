@@ -1,5 +1,5 @@
 # -*- coding: utf8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash, make_response, jsonify
+from flask import Blueprint, render_template, g, redirect, url_for, flash, make_response, jsonify, request
 from dataviva.apps.general.views import get_locale
 from forms import RegistrationForm
 from models import Call
@@ -28,7 +28,7 @@ def index():
 
 @mod.route('/be-a-partner')
 def be_a_partner():
-    calls = Call.query.all()
+    calls = Call.query.filter_by(active=True).all()
     return render_template('partners/be-a-partner.html', calls=calls)
 
 
@@ -95,10 +95,21 @@ def delete(id):
         return make_response(render_template('not_found.html'), 404) 
        
 
-@mod.route('/call/approval')
+@mod.route('/call/approval', methods=['GET'])
 def approval():
     calls = Call.query.all()
     return render_template('partners/approval.html', calls=calls)
+
+
+@mod.route('/approval', methods=['POST'])
+def approval_update():
+    for id, active in request.form.iteritems():
+        call = Call.query.filter_by(id=id).first_or_404()
+        call.active = active == u'true'
+        db.session.commit()
+    message = u"Estudo(s) atualizados com sucesso!"
+    return message
+
 
 @mod.route('/all', methods=['GET'])
 def all():

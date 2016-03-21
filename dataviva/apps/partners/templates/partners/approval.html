@@ -9,16 +9,16 @@
         <table id="approvalTable" class="table" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Call ID</th>
-                    <th>Title</th>
-                    <th>Link</th>
-                    <th>Active</th>
+                    <th>Call ID<i class="fa fa-fw fa-sort"></i></th>
+                    <th>Title<i class="fa fa-fw fa-sort"></i></th>
+                    <th>Link<i class="fa fa-fw fa-sort"></i></th>
+                    <th>Active<input name="select-all" value="1" id="select-all" type="checkbox"/></th>
                 </tr>
             </thead>
         </table>
     </div>
 <a class="btn btn-default btn-dataviva pull-right" href="#" onclick="verifyChecks()">Enviar</a>
-<a class="btn btn-default btn-dataviva pull-right" href="/scholar">Cancelar</a>
+<a class="btn btn-default btn-dataviva pull-right" href="/partners">Cancelar</a>
 </div>
 
 
@@ -39,11 +39,19 @@
                 { "data": "active" },
             ],
             'columnDefs': [
+             {
+                "targets": 1,
+                "className": "body-title"
+            },
             {
                  'targets': 3,
-                 'className': 'dt-body-center',
-                 'render': function (data, type, full){
-                     return '<input type="checkbox" name="checkboxApproval" value="">';
+                 'className': 'body-checkbox',
+                 'render': function (data, type, call, meta){
+                    if(data){
+                        return '<input type="checkbox" name="checkboxApproval" value="'+call[0]+'" checked>';
+                    }else{
+                        return '<input type="checkbox" name="checkboxApproval" value="'+call[0]+'">';
+                    }
                  }
               }],
             "columns": [
@@ -57,11 +65,62 @@
             "info": false,
         });
 
-
+        //Title article links
+        $('#approvalTable tbody').on('click','.body-title', function () {
+            var callId = parseInt($(this).closest('tr')[0].cells[0].textContent)
+            window.location.href = '/partners/article/'+callId
+        });
         
+        //Single Checkbox
+        $('#approvalTable tbody').on('click','.body-checkbox', function () {
+            verifyChecks();
+        });
+        //Multiple Checkbox
+        $('#approvalTable thead').on('click','#select-all', function () {
+            verifyChecks();
+        });
+        //Checkbox control
+        $('#select-all').on('click', function(){
+           var rows = table.rows({ 'search': 'applied' }).nodes();
+           $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        });
+        $('#approvalTable tbody').on('change', 'input[type="checkbox"]', function(){
+           if(!this.checked){
+              var el = $('#select-all').get(0);
+              if(el && el.checked && ('indeterminate' in el)){
+                 el.indeterminate = true;
+                }
+            }
+        });
+
     });
 
-
+    //Verify Checks
+    function verifyChecks(){
+        var callsApproval = {};
+        $('input[name="checkboxApproval"]').each(function() {
+            callsApproval[this.value] = this.checked;
+        });
+        $.ajax({
+          method: "POST",
+          url: "/en/partners/approval",
+          data: callsApproval,
+          success: function (msg) {
+                $.notify({
+                    message: msg,
+                },{
+                    offset: {
+                            x: window.innerWidth * 18 / 100,
+                            y: window.innerHeight * 25 / 100
+                    },
+                    type: 'success',
+                    z_index: 1031,
+                    delay: 5000,
+                    timer: 1000
+                });
+          }
+        })
+    }
 
 
 
