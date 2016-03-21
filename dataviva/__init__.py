@@ -66,8 +66,9 @@ if redis_sesh.redis:
 from dataviva.api.stats.util import get_or_set_years
 __year_range__ = get_or_set_years(view_cache, "general:data_years")
 
-# login manager for user management
+
 lm = LoginManager()
+lm.login_view = "/account/signin"
 lm.init_app(app)
 
 # babel configuration for lang support
@@ -117,6 +118,7 @@ from dataviva.apps.data_dowload.views import mod as data_dowload_module
 from dataviva.apps.blog.views import mod as blog_module
 from dataviva.apps.scholar.views import mod as scholar_module
 from dataviva.apps.news.views import mod as news_module
+from dataviva.apps.contact.views import mod as contact_module
 
 ''' Register these modules as blueprints '''
 app.register_blueprint(attrs_module)
@@ -149,3 +151,4 @@ app.register_blueprint(data_dowload_module)
 app.register_blueprint(blog_module)
 app.register_blueprint(scholar_module)
 app.register_blueprint(news_module)
+app.register_blueprint(contact_module)
