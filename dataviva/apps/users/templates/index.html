@@ -103,7 +103,7 @@
 
     //Verify Checks
     function sendChecks(admin){
-        var lang = document.firstElementChild.lang
+        var lang = $('html').attr('lang');
         $.ajax({
           method: "POST",
           url: "/"+lang+"/users/users/",
