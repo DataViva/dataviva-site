@@ -11,21 +11,6 @@
 
         <div class="main-content col-xs-15 col-md-11">
 
-        <script type="text/javascript">
-            window.ScholarController = (function () {
-                return {
-                    deleteArticle: deleteArticle
-                }
-
-                function deleteArticle(response) {
-                    {% if form %}
-                        window.location = '/en/scholar/?message='+response;
-                    {% endif %}
-                }
-
-            })();
-        </script>
-
         {% block index_content %}
         {% endblock index_content %}
         </div>
