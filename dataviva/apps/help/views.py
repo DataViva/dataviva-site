@@ -4,7 +4,7 @@ from dataviva.apps.general.views import get_locale
 
 
 mod = Blueprint('help', __name__,
-                template_folder='templates',
+                template_folder='templates/help',
                 url_prefix='/<lang_code>/help')
 
 
@@ -20,4 +20,4 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    return render_template('help/index.html')
+    return render_template('index.html')
