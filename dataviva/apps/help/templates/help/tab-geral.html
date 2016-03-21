@@ -1,14 +1,3 @@
-<script type="text/javascript" src="/static/js/utils/utils.hilitor.js"></script>
-<script type="text/javascript">
-
-function highlightWord() {
-    var myHilitor; // global variable
-    var match = document.getElementById("field-search").value;
-    myHilitor = new Hilitor("content");
-    myHilitor.apply(match);
-}
-
-</script>
 <div role="tabpanel" class="tab-pane active" id="geral">
         <div class="institucional search ajuda">
             <h2>Central de Ajuda</h2>
@@ -16,7 +5,7 @@ function highlightWord() {
             <form action="" class="form-dataviva form-inline filter">
                 <div class="form-group">
                     <i class="fa fa-search"></i>
-                    <input id="field-search" type="text" class="busca form-control" placeholder="Pesquisar na Central de Ajuda" /><a class="btn btn-default navbar-btn btn-dataviva" onclick="highlightWord()">Pesquisar</a>
+                    <input id="help-search" type="text" class="busca form-control" placeholder="Pesquisar na Central de Ajuda" /><a class="btn btn-default navbar-btn btn-dataviva" onclick="highlightHelpWord()">Pesquisar</a>
                 </div>
             </form>
             <div class="row duvidas">
