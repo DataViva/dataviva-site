@@ -107,7 +107,6 @@ def index(wld_id):
         'highest_balance': products_service.highest_balance(),
         'product_with_lowest_balance': products_service.product_with_lowest_balance(),
         'lowest_balance': products_service.lowest_balance(),
-        'world_trade_description': 'World trade description.',
     }
 
     for index, trp in enumerate(export_rank):
