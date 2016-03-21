@@ -26,7 +26,7 @@ articles = {
         u'19/01/2016'),
    3 : Article(
         u'A MODELAGEM MATEMÁTICA ATRAVÉS DE CONCEITOS CIENTÍFICOS',
-        u'Mamtemática',
+        u'Matemática',
         u'EINSTEIN, A',
         u'Matemática, Educação, Conceitos Científicos',
         u'''
