@@ -11,7 +11,6 @@
                     <th>User ID<i class="fa fa-fw fa-sort"></i></th>
                     <th>Name<i class="fa fa-fw fa-sort"></i></th>
                     <th>Email<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Type<i class="fa fa-fw fa-sort"></i></th>
                     <th>Admin <input name="select_all" value="1" id="select-all" type="checkbox"/> </th>
                 </tr>
             </thead>
@@ -38,9 +37,13 @@
                 ],
                 "columnDefs": [ {
                     'className' : 'dt-body-center',
-                    'targets':   4,
-                    'render': function(data, type,full, meta){
-                        return '<input type="checkbox" name="checkboxApproval" value="">'
+                    'targets':   3,
+                    'render': function(data, type,users, meta){
+                        if(data){
+                            return '<input type="checkbox" name="checkboxApproval" value="'+users[0]+'" checked>'
+                        }else{
+                            return '<input type="checkbox" name="checkboxApproval" value="'+users[0]+'>'
+                        }
                     }
                 } ],
                 "columns": [
