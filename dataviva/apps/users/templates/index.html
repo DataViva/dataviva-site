@@ -23,8 +23,9 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 <script type="text/javascript">
-    $(document).ready(function($) {
-            var table = $('#usersTable').DataTable( {
+    
+    var Admin = function() {
+         this.table = $('#usersTable').DataTable( {
                 "sAjaxSource": "/users/all",
                 "sAjaxDataProp": "users",
                 "aoColumnsDefs": [
@@ -55,38 +56,50 @@
                "info": false //number of rows in footer table
             });
 
-            //Single Checkbox
-            $('#usersTable tbody').on('click','.body-checkbox', function () {
-                var admin = {};
-                admin[this.firstElementChild.value] = this.firstElementChild.checked;
-                sendChecks(admin);
-            });
+    };
+            
 
+    Admin.prototype.singleCheckbox = function(){
+        //Single Checkbox
+        $('#usersTable tbody').on('click','.body-checkbox', function () {
+            var admin = {};
+            admin[this.firstElementChild.value] = this.firstElementChild.checked;
+            sendChecks(admin);
+        });
+    };
+
+    Admin.prototype.multipleCheckbox = function(){
             //Multiple Checkbox
-            $('#usersTable thead').on('click','#select-all', function () {
-                var admin = {};
-                $('input[name="checkboxAdmin"]').each(function() {
-                    admin[this.value] = this.checked;
-                });
-                sendChecks(admin);
+        $('#usersTable thead').on('click','#select-all', function () {
+            var admin = {};
+            $('input[name="checkboxAdmin"]').each(function() {
+                admin[this.value] = this.checked;
             });
+            sendChecks(admin);
+        });
+    };
 
+    Admin.prototype.controlCheckbox = function(usersTable){
             // Select all control
-            $('#select-all').on('click', function(){
-               var rows = table.rows({ 'search': 'applied' }).nodes();
-               $('input[type="checkbox"]', rows).prop('checked', this.checked);
-            });
+        $('#select-all').on('click', function(){
+           var rows = table.rows({ 'search': 'applied' }).nodes();
+           $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        });
 
-
-            $('#usersTable tbody').on('change', 'input[type="checkbox"]', function(){
-               if(!this.checked){
-                  var el = $('#select-all').get(0);
-                  if(el && el.checked && ('indeterminate' in el)){
-                     el.indeterminate = true;
-                    }
+        $('#usersTable tbody').on('change', 'input[type="checkbox"]', function(){
+           if(!this.checked){
+              var el = $('#select-all').get(0);
+              if(el && el.checked && ('indeterminate' in el)){
+                 el.indeterminate = true;
                 }
-            });
-    });
+            }
+        });
+    };
+
+    var admin = new Admin();
+    admin.singleCheckbox();
+    admin.multipleCheckbox();
+    admin.controlCheckbox(usersTable);
 
     //Verify Checks
     function sendChecks(admin){
