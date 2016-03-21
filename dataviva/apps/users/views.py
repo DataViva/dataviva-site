@@ -37,6 +37,8 @@ def admin_users():
     return render_template('index.html', articles=users)
 
 @mod.route('/users/', methods=['POST'])
+#@login_required
+#@required_roles(1)
 def admin_update():
     for id, role in request.form.iteritems():
         user = User.query.filter_by(id=id).first_or_404()
