@@ -26,8 +26,8 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 <script type="text/javascript">
-    $(document).ready(function($) {
-        var table = $('#approvalTable').DataTable( {
+    var ScholarApproval = function () {
+        this.table = $('#approvalTable').DataTable( {
             "sAjaxSource": "/scholar/all",
             "sAjaxDataProp": "articles",
             "aoColumnsDefs": [
@@ -65,26 +65,30 @@
             "bFilter": false,
             "info": false,
         });
+    };
 
-        //Title article links
+    ScholarApproval.prototype.links = function(){
         $('#approvalTable tbody').on('click','.body-title', function () {
             var articleId = parseInt($(this).closest('tr')[0].cells[0].textContent)
             window.location.href = '/scholar/article/'+articleId
         });
+    };
 
-        //Single Checkbox
-        $('#approvalTable tbody').on('click','.body-checkbox', function () {
-            verifyChecks();
-        });
-
-        //Multiple Checkbox
+    ScholarApproval.prototype.multipleCheckbox = function(){
         $('#approvalTable thead').on('click','#select-all', function () {
             verifyChecks();
         });
+    };
 
-        //Checkbox control
+    ScholarApproval.prototype.singleCheckbox = function(){
+        $('#approvalTable tbody').on('click','.body-checkbox', function () {
+            verifyChecks();
+        });
+    };
+
+    ScholarApproval.prototype.controlCheckbox = function(approvalTable){
         $('#select-all').on('click', function(){
-           var rows = table.rows({ 'search': 'applied' }).nodes();
+           var rows = approvalTable.table.rows({ 'search': 'applied' }).nodes();
            $('input[type="checkbox"]', rows).prop('checked', this.checked);
         });
 
@@ -96,9 +100,14 @@
                 }
             }
         });
-    });
+    };
 
-    //Verify Checks
+    var approvalTable = new ScholarApproval();
+    approvalTable.links();
+    approvalTable.multipleCheckbox();
+    approvalTable.singleCheckbox();
+    approvalTable.controlCheckbox(approvalTable);
+
     function verifyChecks(){
         var articlesApproval = {};
         $('input[name="checkboxApproval"]').each(function() {
@@ -110,7 +119,6 @@
           url: "/en/scholar/approval",
           data: articlesApproval,
           success: function (msg) {
-
                 $.notify({
                     message: msg,
                 },{
@@ -126,6 +134,5 @@
           }
         })
     }
-
 </script>
 {% endblock scholar_content %}
