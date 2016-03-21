@@ -51,7 +51,6 @@ def admin_update():
 @mod.route('/all/', methods=['GET'])
 def all():
     result = User.query.all()
-    #import pdb; pdb.set_trace()
     users = []
     for row in result:
         users+=[(row.id, row.fullname,row.email, row.role)]
