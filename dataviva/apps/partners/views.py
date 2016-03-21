@@ -120,3 +120,8 @@ def all():
         calls += [(row.id, row.title, row.link, row.active)]
     return jsonify(calls=calls)
 
+@mod.route('/call/manage', methods=['GET'])
+def manage():
+    calls = Call.query.all()
+    return render_template('partners/manage.html', calls=calls)
+
