@@ -1,39 +1,45 @@
-from dataviva import db, lm
+from dataviva import db, lm, app
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.account.login_providers import facebook, twitter, google
 from dataviva.apps.account.models import User, Starred, ROLE_USER, ROLE_ADMIN
 from dataviva.apps.ask.forms import AskForm
 from dataviva.apps.ask.models import Question, Status, Reply
 from dataviva.utils.exist_or_404 import exist_or_404
+from dataviva.utils.encode import sha512
+from dataviva.utils.send_mail import send_mail
 from datetime import datetime
 from flask import Blueprint, request, render_template, flash, g, session, \
     redirect, url_for, jsonify, abort, current_app
 from flask.ext.babel import gettext
 from flask.ext.login import login_user, logout_user, current_user, \
-    login_required
-from forms import LoginForm, UserEditForm
+    login_required, LoginManager
+from forms import (LoginForm, UserEditForm, SignupForm, SigninForm, ChangePasswordForm,
+                   ForgotPasswordForm, ProfileForm)
 from sqlalchemy import or_
 from urllib2 import Request, urlopen, URLError
 import json
-# models
-# forms
-# utils
-# login types
+from hashlib import md5
 
-# from config import SITE_MIRROR
-# import urllib2, urllib
 
-mod = Blueprint('account', __name__, url_prefix='/<lang_code>/account')
+mod = Blueprint('account', __name__,
+                template_folder='templates',
+                url_prefix='/<lang_code>/account',
+                static_folder='static')
 
-RESULTS_PER_PAGE = 10
+
+def _gen_confirmation_code(email):
+    return md5("%s-%s" % (email, datetime.now())).hexdigest()
+
 
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
+
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
+
 
 @mod.route('/status/')
 def check_status():
@@ -50,10 +56,226 @@ def check_status():
     if 'first_visit' in session:
         session['first_visit'] = False
     else:
-        # data["flash"] = gettext("Welcome to the new version of DataViva! %(click_here)s for the complete list of new features.", click_here="<a target='_blank' href='https://github.com/DataViva/dataviva-site/releases/tag/v2.0'>{}</a>".format(gettext("Click here")))
         session['first_visit'] = True
 
     return jsonify(data)
+
+
+def send_confirmation(user):
+    confirmation_url = "http://localhost:5000/en/account/confirm/%s" % user.confirmation_code
+    confirmation_tpl = render_template('account/mail/confirmation.html',
+                                       user=user.serialize(),
+                                       confirmation_url=confirmation_url)
+    send_mail("Account confirmation", [user.email], confirmation_tpl)
+
+
+@mod.route('/signup', methods=["GET"])
+def signup():
+    form = SignupForm()
+    return render_template('account/signup.html', form=form)
+
+
+@mod.route('/signup', methods=["POST"])
+def create_user():
+    form = SignupForm()
+
+    # if form.validate() is False:
+    #     return render_template('account/signup.html', form=form)
+
+    try:
+        confirmation_code = _gen_confirmation_code(form.email.data)
+        user = User(
+            fullname=form.fullname.data,
+            email=form.email.data,
+            password=sha512(form.password.data),
+            confirmation_code=confirmation_code
+        )
+        db.session.add(user)
+        db.session.commit()
+        flash("Check your inbox at %s" % user.email, "success")
+    except:
+        flash("Sorry, an unexpected error has occured. Please try again.", "danger")
+
+        return render_template('account/signup.html', form=form)
+
+    user_srl = user.serialize()
+    welcome_tpl = render_template('account/mail/welcome.html', user=user_srl)
+    send_mail("Welcome to datavivaiva!", [user.email], welcome_tpl)
+    send_confirmation(user)
+
+    return redirect('/account/confirm_pending/%s' % user.email)
+
+
+
+
+@mod.route('/social_auth/<provider>', methods=["GET"])
+def social_auth(provider):
+    # TODO
+    if provider == "google":
+        callback = url_for('account.google_authorized', _external=True)
+        return google.authorize(callback=callback)
+
+    return render_template('account/signin.html', form=form)
+
+
+@mod.route('/signin', methods=["GET", "POST"])
+def signin():
+
+    form = SigninForm()
+
+    if request.method == "POST":
+        try:
+            user = User.query.filter_by(
+                email=form.email.data,
+                password=sha512(form.password.data)
+            )[-1]
+            login_user(user, remember=True)
+            redir = request.args.get("next", "/")
+            return redirect(redir)
+        except:
+            flash("Invalid email or password.", "danger")
+            return render_template(
+                'account/signin.html',
+                form=form,
+            )
+    else:
+        next = request.args.get("next", "")
+
+        return render_template('account/signin.html', form=form, next=next)
+
+
+@mod.route('/confirm_pending/<user_email>', methods=["GET"])
+def confirm_pending(user_email):
+    ''' Used to inform to the user that its account is pending
+    '''
+
+    try:
+        user = User.query.filter_by(email=user_email)[-1]
+    except IndexError:
+        abort(404, 'User not found')
+
+    if user.confirmed:
+        return redirect('/')
+
+    return render_template('account/confirm_pending.html', user=user.serialize())
+
+
+@mod.route('/confirm/<code>', methods=["GET"])
+def confirm(code):
+
+    try:
+        user = User.query.filter_by(confirmation_code=code)[-1]
+        user.confirmed = True
+        db.session.commit()
+        login_user(user, remember=True)
+        flash("Lest us know more about you. Please complete your profile.", "info")
+    except IndexError:
+        abort(404, 'User not found')
+
+    return redirect('/account/edit_profile')
+
+
+@mod.route('/resend_confirmation/<user_email>', methods=["GET"])
+def resend_confirmation(user_email):
+    '''Used to regen the confirmation_code and send the email again to the user
+    '''
+
+    try:
+        user = User.query.filter_by(email=user_email, confirmed=False)[-1]
+    except IndexError:
+        abort(404, 'Entry not found')
+
+    user.confirmation_code = _gen_confirmation_code(user.email)
+    db.session.commit()
+    send_confirmation(user)
+
+    return redirect('/account/confirm_pending/%s' % user.email)
+
+
+@mod.route('/edit_profile', methods=["GET"])
+@login_required
+def edit_profile():
+    form = ProfileForm()
+    form.fullname.data = g.user.fullname
+    form.gender.data = g.user.gender
+    form.website.data = g.user.website
+    form.bio.data = g.user.bio
+
+    return render_template("account/edit_profile.html", form=form)
+
+
+@mod.route('/edit_profile', methods=["POST"])
+@login_required
+def change_profile():
+    form = ProfileForm()
+
+    try:
+        user = g.user
+        user.fullname = form.fullname.data
+        user.gender = form.gender.data
+        user.website = form.website.data
+        user.bio = form.bio.data
+        db.session.commit()
+        flash("Profile updated successfully!", "success")
+    except:
+        flash("Something went wrong!", "danger")
+
+    return render_template("account/edit_profile.html", form=form)
+
+
+@mod.route('/change_password', methods=["GET"])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    return render_template("account/change_password.html", form=form)
+
+
+@mod.route('/change_password', methods=["POST"])
+@login_required
+def change():
+    form = ChangePasswordForm()
+    user = load_user(session["user_id"])
+    danger = 'error'
+
+    if user.password == sha512(form.current_password.data):
+        user.password = sha512(form.new_password.data)
+        db.session.commit()
+        flash("Password successfully update!", "success")
+    else:
+        flash("The current password is invalid", "danger")
+
+    flash(msg, danger)
+    return render_template("account/change_password.html", form=form)
+
+
+@mod.route('/forgot_password', methods=["GET"])
+def forgot_password():
+    form = ForgotPasswordForm()
+    return render_template("account/forgot_password.html", form=form)
+
+
+@mod.route('/forgot_password', methods=["POST"])
+def reset_password():
+    form = ForgotPasswordForm()
+
+    try:
+        user = User.query.filter_by(email=form.email.data)[-1]
+        pwd = md5(str(datetime.now()) + form.email.data).hexdigest()[0:5]
+        user.password = sha512(pwd)
+        db.session.commit()
+
+        email_tp = render_template('account/mail/forgot.html',
+                                   user=user.serialize(),
+                                   new_pwd=pwd)
+        send_mail("Forgot Password", [user.email], email_tp)
+        flash("A new password has been sent to you! Please check you inbox!", "success")
+    except Exception as e:
+        flash("We couldnt find any user with the informed email address", "danger")
+
+        return render_template("account/forgot_password.html", form=form)
+
+    return redirect("account/signin")
+
 
 ###############################
 # User management
@@ -61,6 +283,7 @@ def check_status():
 @lm.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
 
 ###############################
 # Views for ALL logged in users
@@ -73,6 +296,7 @@ def logout():
     logout_user()
     return redirect('/')
 
+
 @mod.route('/login/', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -82,23 +306,24 @@ def login():
         provider = form.provider.data
         session['remember_me'] = form.remember_me.data
         session['provider'] = provider
+
         if provider == "google":
-            callback=url_for('account.google_authorized', _external=True)
+            callback = url_for('account.google_authorized', _external=True)
             return google.authorize(callback=callback)
         elif provider == "twitter":
-            callback=url_for('account.twitter_authorized',
+            callback = url_for('account.twitter_authorized',
                 next=request.args.get('next') or request.referrer or None,
                 _external=True)
             return twitter.authorize(callback=callback)
         elif provider == "facebook":
-            callback=url_for('account.facebook_authorized',
+            callback = url_for('account.facebook_authorized',
                 next=request.args.get('next') or request.referrer or None,
                 _external=True)
             return facebook.authorize(callback=callback)
 
-    return render_template('account/login.html',
-        form = form,
-        providers = providers)
+    return render_template(
+        'account/login.html', form=form, providers=providers)
+
 
 @mod.route('/<nickname>/')
 def user(nickname):
@@ -269,10 +494,10 @@ def facebook_authorized(resp):
 
     return after_login(facebook_id=id, fullname=fullname, email=email, language=language, country=country, image=image)
 
+
 @facebook.tokengetter
 def get_facebook_oauth_token():
     return session.get('facebook_token')
-
 
 
 """
@@ -282,8 +507,7 @@ def get_facebook_oauth_token():
 """
 @mod.route('/google_authorized/')
 @google.authorized_handler
-def google_authorized(resp):
-
+def google_authorized(resp):    
     access_token = resp['access_token']
     session['google_token'] = access_token, ''
 
@@ -306,7 +530,9 @@ def google_authorized(resp):
     gender = response["gender"] if "gender" in response else None
     image = response["picture"] if "picture" in response else None
     id = response["id"] if "id" in response else None
+
     return after_login(google_id=id, email=email, fullname=fullname, language=language, gender=gender, image=image)
+
 
 @google.tokengetter
 def get_access_token():

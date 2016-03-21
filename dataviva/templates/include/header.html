@@ -37,13 +37,18 @@
                 </li>
                 <li><a href="{{ url_for('partners.index') }}">Parcerias</a></li>
                 <li><a href="{{ url_for('help.index') }}">Ajuda</a></li>
-
             </ul>
             <div class="nav navbar-nav navbar-right">
 
-                <a class="btn" data-toggle="modal" data-target="#dataviva-login">Entre</a>
+                {% if not g.user.is_authenticated %}
+                <a class="btn" href="/account/signin" >Entre</a>
                 ou
-                <a class="btn btn-default navbar-btn btn-dataviva" data-toggle="modal" data-target="#dataviva-signup">Cadastre-se</a>
+                <a class="btn btn-default navbar-btn btn-dataviva" href="/account/signup">Cadastre-se</a>
+                
+                {% else %}
+                    <p>Welcome, <b>{{ g.user.firstname }}</b>! | <a href="/account/edit_profile">Edit profile</a></p> | <a href="/account/logout">Logout</a></p>
+                {% endif %}
+
                 <select name="language">
                     <option value="en-us">Inglês</option>
                     <option value="pt-br" selected="selected">Português</option>

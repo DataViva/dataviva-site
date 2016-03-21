@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 
-'''
-    Used for finding environment variables through configuration
-    if a default is not given, the site will raise an exception
-'''
+'''Used for finding environment variables through configuration
+   if a default is not given, the site will raise an exception'''
 
 
 def get_env_variable(var_name, default=-1):
@@ -15,6 +13,7 @@ def get_env_variable(var_name, default=-1):
             return default
         error_msg = "Set the %s os.environment variable" % var_name
         raise Exception(error_msg)
+
 
 ''' Base directory of where the site is held '''
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -82,8 +81,17 @@ MAIL_SERVER = get_env_variable("DATAVIVA_MAIL_SERVER", 'smtp.gmail.com')
 MAIL_PORT = get_env_variable("DATAVIVA_MAIL_PORT", 465)
 MAIL_USE_TLS = get_env_variable("DATAVIVA_MAIL_USE_TLS", False)
 MAIL_USE_SSL = get_env_variable("DATAVIVA_MAIL_USE_SSL", True)
-MAIL_USERNAME = get_env_variable("DATAVIVA_MAIL_USERNAME",'datavivaweb@gmail.com')
+MAIL_USERNAME = get_env_variable("DATAVIVA_MAIL_USERNAME", 'datavivaweb@gmail.com')
 MAIL_PASSWORD = get_env_variable("DATAVIVA_MAIL_PASSWORD", "")
+
+
+# TEMP
+MAIL_PORT = 587
+MAIL_USE_TLS = False
+MAIL_USE_SSL = False
+MAIL_SERVER = 'smtp.sendgrid.net'
+MAIL_USERNAME = 'wartog'
+MAIL_PASSWORD = 'asdasd123'
 
 
 '''

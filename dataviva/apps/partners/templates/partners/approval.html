@@ -1,0 +1,23 @@
+{% extends "partners/_base.html" %}
+
+{% block partners_content %}
+
+<div class="institucional">
+    <h2>Estudos sobre o DataViva</h2>
+    <h3>Aprovação dos estudos</h3>
+    <div class="meta">
+        <table id="approvalTable" class="table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Call ID</th>
+                    <th>Title</th>
+                    <th>Link</th>
+                    <th>Active</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+<a class="btn btn-default btn-dataviva pull-right" href="#" onclick="verifyChecks()">Enviar</a>
+<a class="btn btn-default btn-dataviva pull-right" href="/scholar">Cancelar</a>
+</div>
+{% endblock partners_content %}
