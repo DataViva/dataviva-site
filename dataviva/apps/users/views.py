@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash, jsonify
+from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash, jsonify, request
 from dataviva.apps.general.views import get_locale
 
 from dataviva.apps.account.models import User
@@ -35,6 +35,15 @@ def admin_users():
 
     users = User.query.all()
     return render_template('index.html', articles=users)
+
+@mod.route('/users/', methods=['POST'])
+def admin_update():
+    for id, role in request.form.iteritems():
+        user = User.query.filter_by(id=id).first_or_404()
+        user.role = role == u'true'
+        db.session.commit()
+    message = u"Administradores(s) atualizados com sucesso!"
+    return message
 
 
 @mod.route('/all/', methods=['GET'])
