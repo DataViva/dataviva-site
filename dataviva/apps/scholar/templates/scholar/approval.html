@@ -76,13 +76,19 @@
 
     ScholarApproval.prototype.multipleCheckbox = function(){
         $('#approvalTable thead').on('click','#select-all', function () {
-            verifyChecks();
+            var articles = {};
+            $('input[name="checkboxApproval"]').each(function() {
+                articles[this.value] = this.checked;
+            });
+            sendCheckedArticle(articles);
         });
     };
 
     ScholarApproval.prototype.singleCheckbox = function(){
         $('#approvalTable tbody').on('click','.body-checkbox', function () {
-            verifyChecks();
+            var article = {};
+            article[this.firstElementChild.value] = this.firstElementChild.checked;
+            sendCheckedArticle(article);
         });
     };
 
@@ -108,12 +114,7 @@
     approvalTable.singleCheckbox();
     approvalTable.controlCheckbox(approvalTable);
 
-    function verifyChecks(){
-        var articlesApproval = {};
-        $('input[name="checkboxApproval"]').each(function() {
-            articlesApproval[this.value] = this.checked;
-        });
-
+    function sendCheckedArticle(articlesApproval){
         $.ajax({
           method: "POST",
           url: "/en/scholar/approval",
