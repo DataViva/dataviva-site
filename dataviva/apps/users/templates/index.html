@@ -103,10 +103,10 @@
 
     //Verify Checks
     function sendChecks(admin){
-
+        var lang = document.firstElementChild.lang
         $.ajax({
           method: "POST",
-          url: "/en/users/users/",
+          url: "/"+lang+"/users/users/",
           data: admin,
           success: function (msg) {
                 $.notify({
