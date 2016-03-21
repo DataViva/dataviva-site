@@ -47,6 +47,7 @@ def create():
         call = Call()
         call.title = form.title.data
         call.link = form.link.data
+        call.active = 0
 
         db.session.add(call)
         db.session.commit()
