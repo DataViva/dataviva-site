@@ -115,9 +115,10 @@
     approvalTable.controlCheckbox(approvalTable);
 
     function sendCheckedArticle(articlesApproval){
+        var lang = $('html').attr('lang');
         $.ajax({
           method: "POST",
-          url: "/en/scholar/approval",
+          url: "/"+lang+"/scholar/approval",
           data: articlesApproval,
           success: function (msg) {
                 $.notify({
