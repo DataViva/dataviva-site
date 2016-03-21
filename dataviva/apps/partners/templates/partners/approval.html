@@ -3,8 +3,8 @@
 {% block partners_content %}
 
 <div class="institucional">
-    <h2>Estudos sobre o DataViva</h2>
-    <h3>Aprovação dos estudos</h3>
+    <h2>Chamadas do DataViva</h2>
+    <h3>Gerenciamento de Chamadas</h3>
     <div class="meta">
         <table id="approvalTable" class="table" cellspacing="0" width="100%">
             <thead>
@@ -19,8 +19,7 @@
     </div>
 <a class="btn btn-default btn-dataviva pull-right" href="/partners/be-a-partner">Voltar</a>
 <a class="btn btn-default btn-dataviva pull-right" href="/partners/call/new">Adicionar Chamada</a>
-</div>
-
+<a class="btn btn-default btn-dataviva pull-right" href="#" onclick="verifyChecks()">Enviar</a>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
@@ -41,7 +40,7 @@
             'columnDefs': [
              {
                 "targets": 1,
-                "className": "body-title"
+                "className": "body-title",
             },
             {
                  'targets': 3,
@@ -63,22 +62,12 @@
             "paging": false,
             "bFilter": false,
             "info": false,
+            "selectable": "multiple, row",
+            change: function (e) {
+                rowSelect(e)
+            }     
         });
 
-        //Title article links
-        $('#approvalTable tbody').on('click','.body-title', function () {
-            var callId = parseInt($(this).closest('tr')[0].cells[0].textContent)
-            window.location.href = '/partners/article/'+callId
-        });
-        
-        //Single Checkbox
-        $('#approvalTable tbody').on('click','.body-checkbox', function () {
-            verifyChecks();
-        });
-        //Multiple Checkbox
-        $('#approvalTable thead').on('click','#select-all', function () {
-            verifyChecks();
-        });
         //Checkbox control
         $('#select-all').on('click', function(){
            var rows = table.rows({ 'search': 'applied' }).nodes();
@@ -93,7 +82,17 @@
             }
         });
 
+
     });
+
+    function rowSelect(e) {
+        var rows = table.select();
+        var record;
+        rows.each(function () {
+            record = table.dataItem($(this));
+            mapShowBounds(record.bbox);
+        });
+    }
 
     //Verify Checks
     function verifyChecks(){
