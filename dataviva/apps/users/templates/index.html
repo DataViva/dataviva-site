@@ -57,12 +57,18 @@
 
             //Single Checkbox
             $('#usersTable tbody').on('click','.body-checkbox', function () {
-                verifyChecksSingle(this.firstElementChild.value, this.firstElementChild.checked);
+                var admin = {};
+                admin[this.firstElementChild.value] = this.firstElementChild.checked;
+                verifyChecks(admin);
             });
 
             //Multiple Checkbox
             $('#usersTable thead').on('click','#select-all', function () {
-                verifyChecks();
+                var admin = {};
+                $('input[name="checkboxAdmin"]').each(function() {
+                    admin[this.value] = this.checked;
+                });
+                verifyChecks(admin);
             });
 
             // Select all control
@@ -83,11 +89,8 @@
     });
 
     //Verify Checks
-    function verifyChecks(){
-        var admin = {};
-        $('input[name="checkboxAdmin"]').each(function() {
-            admin[this.value] = this.checked;
-        });
+    function verifyChecks(admin){
+
         $.ajax({
           method: "POST",
           url: "/en/users/users/",
@@ -109,30 +112,6 @@
         })
     }
 
-    //Verify Checks
-    function verifyChecksSingle(value, checked){
-        var admin = {};
-            admin[value] = checked;
-        $.ajax({
-          method: "POST",
-          url: "/en/users/users/",
-          data: admin,
-          success: function (msg) {
-                $.notify({
-                    message: msg,
-                },{
-                    offset: {
-                            x: window.innerWidth * 18 / 100,
-                            y: window.innerHeight * 25 / 100
-                    },
-                    type: 'success',
-                    z_index: 1031,
-                    delay: 5000,
-                    timer: 1000
-                });
-          }
-        })
-    }
 
 </script>
 
