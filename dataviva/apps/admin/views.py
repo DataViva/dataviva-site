@@ -38,7 +38,7 @@ def required_roles(*roles):
 
 @mod.before_request
 def before_request():
-    g.page_type = "admin"
+    g.page_type = mod.name
 
 @mod.url_defaults
 def add_language_code(endpoint, values):
