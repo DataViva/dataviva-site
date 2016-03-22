@@ -1,5 +1,4 @@
 import os
-import subprocess
 from importlib import import_module
 
 # general flask library
@@ -20,6 +19,7 @@ from utils.jinja_helpers import jinja_formatter, jinja_momentjs, jinja_split, \
     jinja_strip_html, max_digits, jinja_magnitude
 
 from utils.redis import RedisSessionInterface
+from dataviva.api.stats.util import get_or_set_years
 
 
 def get_env_variable(var_name, default=-1):
@@ -65,7 +65,6 @@ if redis_sesh.redis:
     app.session_interface = redis_sesh
 
 # Global Latest Year Variables
-from dataviva.api.stats.util import get_or_set_years
 __year_range__ = get_or_set_years(view_cache, "general:data_years")
 
 
@@ -85,11 +84,10 @@ app.jinja_env.filters['max_digits'] = max_digits
 app.jinja_env.filters['magnitude'] = jinja_magnitude
 
 
-
-
 # Load the modules for each different section of the site
 data_viva_apis = [api_module for api_module in os.listdir(os.getcwd()+'/dataviva/api') if '.' not in api_module]
 data_viva_modules = [app_module for app_module in os.listdir(os.getcwd()+'/dataviva/apps') if '.' not in app_module]
+
 
 for api_module in data_viva_apis:
     views = import_module('dataviva.api.'+api_module+'.views')
@@ -98,26 +96,3 @@ for api_module in data_viva_apis:
 for app_module in data_viva_modules:
     views = import_module('dataviva.apps.'+app_module+'.views')
     app.register_blueprint(views.mod)
-
-
-def lesscss(app):
-    @app.before_request
-    def _render_less_css():
-        static_dir = app.root_path + app.static_url_path
-
-        less_paths = []
-        for path, subdirs, filenames in os.walk(static_dir):
-            less_paths.extend([
-                os.path.join(path, f)
-                for f in filenames if os.path.splitext(f)[1] == '.less'
-            ])
-
-        for less_path in less_paths:
-            css_path = os.path.splitext(less_path)[0] + '.css'
-            if not os.path.isfile(css_path):
-                css_mtime = -1
-            else:
-                css_mtime = os.path.getmtime(css_path)
-            less_mtime = os.path.getmtime(less_path)
-            if less_mtime >= css_mtime:
-                subprocess.call(['lessc', less_path, css_path], shell=False)
