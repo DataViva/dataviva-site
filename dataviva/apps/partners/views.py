@@ -54,7 +54,7 @@ def create():
 
         message = u'Muito obrigado! sua Chamada foi submetida com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('partners.be_a_partner'))
+        return redirect(url_for('partners.manage'))
 
 
 @mod.route('/call/<id>/edit', methods=['GET'])
@@ -80,7 +80,7 @@ def update(id):
 
         message = u'Chamada editada com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('partners.be_a_partner'))
+        return redirect(url_for('partners.manage'))
 
 
 @mod.route('/call/<id>/delete', methods=['GET'])
@@ -91,7 +91,7 @@ def delete(id):
         db.session.commit()
         message = u"Chamada excluída com sucesso!"
         flash(message, 'success')
-        return redirect(url_for('partners.be_a_partner'))
+        return redirect(url_for('partners.manage'))
     else:
         return make_response(render_template('not_found.html'), 404) 
        

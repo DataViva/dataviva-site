@@ -5,26 +5,25 @@
 <div class="institucional">
     <h2>Chamadas do DataViva</h2>
     <h3>Gerenciamento de Chamadas</h3>
+    
+    <a class="btn btn-default btn-dataviva pull-right" href="/partners/call/new" >Nova Chamada </a>
+    <button class="btn btn-default btn-dataviva pull-right" id="edit">Editar </button>
+    <button class="btn btn-default btn-dataviva pull-right" id="delete">Deletar </button>
+    <a class="btn btn-default btn-dataviva pull-right" href="/partners/call/approval">Aprovar Chamadas </a>
+    
     <div class="meta">
-        <table id="callsTable" class="table" cellspacing="0" width="100%">
+        <table id="approvalTable" class="table" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>Call ID<i class="fa fa-fw fa-sort"></i></th>
                     <th>Title<i class="fa fa-fw fa-sort"></i></th>
                     <th>Link<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Active<i class="fa fa-fw fa-sort"></i></th>
                 </tr>
             </thead>
         </table>
     </div>
 
-    <a class="btn btn-default btn-dataviva pull-right" href="/partners/call/new">Nova Chamada </a>
-    <button class="btn btn-default btn-dataviva pull-right" id="edit">Editar </button>
-    <button class="btn btn-default btn-dataviva pull-right" id="delete">Deletar </button>
 
-<!-- <a class="btn btn-default btn-dataviva pull-right" href="#" onclick="verifyChecks()">Enviar</a>
-<a class="btn btn-default btn-dataviva pull-right" href="/partners/be-a-partner">Voltar</a>
--->
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
@@ -33,34 +32,34 @@
 
 <script type="text/javascript">
     $(document).ready(function($) {
-        var table = $('#callsTable').DataTable( {
+        var table = $('#approvalTable').DataTable( {
             "sAjaxSource": "/partners/all",
             "sAjaxDataProp": "calls",
             "aoColumnsDefs": [
                 { "data": "id" },
                 { "data": "title", "type": "html" },
-                { "data": "link" },
-                { "data": "active" },
-            ],
-            "columns": [
-                    { "width": "8%" },
-                    null,
-                    null,
-                    { "width": "12%" }
-            ]
+                { "data": "link" }
+            ],   
         });
-
-        $('#callsTable tbody').on('click', 'tr', function(){
+    
+        $('#approvalTable tbody').on('click', 'tr', function(){
             if ($(this).hasClass('selected')){
+                $(this).css("backgroundColor", "#FFF");
                 $(this).removeClass('selected');
             }
             else {
+                $(this).css("backgroundColor", "#9eddbf");
                 table.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
-            }
-            });
+            }           
+        });
 
+
+ 
     });
+
+
+
 
 </script>
 {% endblock partners_content %}
