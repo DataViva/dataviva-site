@@ -87,6 +87,7 @@ app.jinja_env.filters['magnitude'] = jinja_magnitude
 data_viva_apis = [api_module for api_module in os.listdir(os.getcwd()+'/dataviva/api') if '.' not in api_module]
 data_viva_modules = [app_module for app_module in os.listdir(os.getcwd()+'/dataviva/apps') if '.' not in app_module]
 
+
 for api_module in data_viva_apis:
     views = import_module('dataviva.api.'+api_module+'.views')
     app.register_blueprint(views.mod)
@@ -94,3 +95,4 @@ for api_module in data_viva_apis:
 for app_module in data_viva_modules:
     views = import_module('dataviva.apps.'+app_module+'.views')
     app.register_blueprint(views.mod)
+
