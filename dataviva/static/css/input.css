@@ -1,9 +1,3 @@
-@primary-color: #A25A6D;
-@primary-hover: #905262;
-@primary-dim: #824A58;
-
-@success-color: #1AB394;
-
 /* INPUTS */
 .inline {
   display: inline-block !important;
@@ -35,10 +29,10 @@
 }
 .form-control:focus,
 .single-line:focus {
-  border-color: @primary-color !important;
+  border-color: #A25A6D !important;
 }
 .has-success .form-control {
-  border-color: @success-color;
+  border-color: #1AB394;
 }
 .has-warning .form-control {
   border-color: #f8ac59;
@@ -47,7 +41,7 @@
   border-color: #ed5565;
 }
 .has-success .control-label {
-  color: @success-color;
+  color: #1AB394;
 }
 .has-warning .control-label {
   color: #f8ac59;
@@ -73,7 +67,7 @@
   width: 20%;
 }
 .noUi-connect {
-  background: none repeat scroll 0 0 @primary-color;
+  background: none repeat scroll 0 0 #A25A6D;
   box-shadow: none;
 }
 .slider_red .noUi-connect {
@@ -82,10 +76,9 @@
 }
 .checkbox input[type="checkbox"]:focus + label::before,
 .radio input[type="radio"]:focus + label::before {
-    outline: 0px !important;
-    -webkit-appearance:none !important;
-
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
+  outline: 0px !important;
+  -webkit-appearance: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
 }
