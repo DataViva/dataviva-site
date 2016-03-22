@@ -61,7 +61,11 @@
             
         });
 
-
+        $('#delete').click(function(){
+            table_line = table.row('.selected')[0]
+            row_id = table.data()[table_line][0]
+            window.location.href = "/partners/call/"+row_id+"/delete";
+        });
  
     });
 
