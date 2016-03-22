@@ -34,7 +34,7 @@ def users():
 def admin_users():
 
     users = User.query.all()
-    return render_template('index.html', articles=users)
+    return render_template('/users/control.html', users=users)
 
 @mod.route('/users/', methods=['POST'])
 #@login_required
