@@ -85,21 +85,25 @@ app.jinja_env.filters['max_digits'] = max_digits
 app.jinja_env.filters['magnitude'] = jinja_magnitude
 
 
+
+
+# Load the modules for each different section of the site
+data_viva_apis = [api_module for api_module in os.listdir(os.getcwd()+'/dataviva/api') if '.' not in api_module]
+data_viva_modules = [app_module for app_module in os.listdir(os.getcwd()+'/dataviva/apps') if '.' not in app_module]
+
+for api_module in data_viva_apis:
+    views = import_module('dataviva.api.'+api_module+'.views')
+    app.register_blueprint(views.mod)
+
+for app_module in data_viva_modules:
+    views = import_module('dataviva.apps.'+app_module+'.views')
+    app.register_blueprint(views.mod)
+
+
 def lesscss(app):
     @app.before_request
     def _render_less_css():
-        if not hasattr(app, 'static_url_path'):
-            from warnings import warn
-            warn(DeprecationWarning('static_path is called '
-                                    'static_url_path since Flask 0.7'),
-                 stacklevel=2)
-
-            static_url_path = app.static_path
-
-        else:
-            static_url_path = app.static_url_path
-
-        static_dir = app.root_path + static_url_path
+        static_dir = app.root_path + app.static_url_path
 
         less_paths = []
         for path, subdirs, filenames in os.walk(static_dir):
@@ -117,16 +121,3 @@ def lesscss(app):
             less_mtime = os.path.getmtime(less_path)
             if less_mtime >= css_mtime:
                 subprocess.call(['lessc', less_path, css_path], shell=False)
-
-
-# Load the modules for each different section of the site
-data_viva_apis = [api_module for api_module in os.listdir(os.getcwd()+'/dataviva/api') if '.' not in api_module]
-data_viva_modules = [app_module for app_module in os.listdir(os.getcwd()+'/dataviva/apps') if '.' not in app_module]
-
-for api_module in data_viva_apis:
-    views = import_module('dataviva.api.'+api_module+'.views')
-    app.register_blueprint(views.mod)
-
-for app_module in data_viva_modules:
-    views = import_module('dataviva.apps.'+app_module+'.views')
-    app.register_blueprint(views.mod)

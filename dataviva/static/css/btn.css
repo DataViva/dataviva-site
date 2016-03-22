@@ -1,40 +1,3 @@
-@primary-color: #A25A6D;
-@primary-hover: #905262;
-@primary-dim: #824A58;
-
-@success-color: #5A9DC4;
-@success-hover: #1A7BB9;
-@success-dim: #1872AB;
-
-@info-color: #23C6C8;
-@info-hover: #21b9bb;
-@info-dim: #1EACAE;
-
-@warning-color: #F8AC59;
-@warning-hover: #F7A54A;
-@warning-dim: #F79D3C;
-
-@danger-color: #ED5565;
-@danger-hover: #EC4758;
-@danger-dim: #EA394C;
-
-@default-color: #ED5565;
-@default-hover: #EC4758;
-@default-dim: #B3B3B3;
-
-@default-border: #E7EAEC;
-@default-border-active: #D2D2D2;
-@default-border-disabled: #cacaca;
-
-@dim-shadow: #999999;
-
-@link: #337AB7;
-@link-hover: #23527C;
-
-@link-light: #5A9DC4;
-@link-light-hover: #A5CADF;
-
-
 .btn {
   border-radius: 3px;
 }
@@ -45,19 +8,19 @@
   min-width: 120px;
 }
 .btn-primary.btn-outline {
-  color: @primary-color;
+  color: #A25A6D;
 }
 .btn-success.btn-outline {
-  color: @success-color;
+  color: #5A9DC4;
 }
 .btn-info.btn-outline {
-  color: @info-color;
+  color: #23C6C8;
 }
 .btn-warning.btn-outline {
-  color: @warning-color;
+  color: #F8AC59;
 }
 .btn-danger.btn-outline {
-  color: @danger-color;
+  color: #ED5565;
 }
 .btn-primary.btn-outline:hover,
 .btn-success.btn-outline:hover,
@@ -67,25 +30,23 @@
   color: #fff;
 }
 .btn-primary {
-  background-color: @primary-color;
-  border-color: @primary-color;
+  background-color: #A25A6D;
+  border-color: #A25A6D;
   color: #FFFFFF;
 }
-
 .btn-primary.active.focus,
 .btn-primary.active:focus,
 .btn-primary.active:hover,
 .btn-primary:active.focus,
 .btn-primary:active:focus,
 .btn-primary:active:hover,
-.open>.dropdown-toggle.btn-primary.focus,
-.open>.dropdown-toggle.btn-primary:focus,
-.open>.dropdown-toggle.btn-primary:hover {
-    color: #fff;
-    background-color: @primary-hover;
-    border-color: @primary-dim;
+.open > .dropdown-toggle.btn-primary.focus,
+.open > .dropdown-toggle.btn-primary:focus,
+.open > .dropdown-toggle.btn-primary:hover {
+  color: #fff;
+  background-color: #905262;
+  border-color: #824A58;
 }
-
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
@@ -95,8 +56,8 @@
 .btn-primary:active:hover,
 .btn-primary.active:hover,
 .btn-primary.active:focus {
-  background-color: @primary-hover;
-  border-color: @primary-hover;
+  background-color: #905262;
+  border-color: #905262;
   color: #FFFFFF;
 }
 .btn-primary:active,
@@ -119,12 +80,12 @@ fieldset[disabled] .btn-primary:hover,
 fieldset[disabled] .btn-primary:focus,
 fieldset[disabled] .btn-primary:active,
 fieldset[disabled] .btn-primary.active {
-  background-color: @primary-color;
-  border-color: @primary-color;
+  background-color: #A25A6D;
+  border-color: #A25A6D;
 }
 .btn-success {
-  background-color: @success-color;
-  border-color: @success-color;
+  background-color: #5A9DC4;
+  border-color: #5A9DC4;
   color: #FFFFFF;
 }
 .btn-success:hover,
@@ -136,8 +97,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success:active:hover,
 .btn-success.active:hover,
 .btn-success.active:focus {
-  background-color: @success-hover;
-  border-color: @success-hover;
+  background-color: #1A7BB9;
+  border-color: #1A7BB9;
   color: #FFFFFF;
 }
 .btn-success:active,
@@ -160,12 +121,12 @@ fieldset[disabled] .btn-success:hover,
 fieldset[disabled] .btn-success:focus,
 fieldset[disabled] .btn-success:active,
 fieldset[disabled] .btn-success.active {
-  background-color: @success-color;
-  border-color: @success-color;
+  background-color: #5A9DC4;
+  border-color: #5A9DC4;
 }
 .btn-info {
-  background-color: @info-color;
-  border-color: @info-color;
+  background-color: #23C6C8;
+  border-color: #23C6C8;
   color: #FFFFFF;
 }
 .btn-info:hover,
@@ -177,8 +138,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info:active:hover,
 .btn-info.active:hover,
 .btn-info.active:focus {
-  background-color: @info-hover;
-  border-color: @info-hover;
+  background-color: #21b9bb;
+  border-color: #21b9bb;
   color: #FFFFFF;
 }
 .btn-info:active,
@@ -201,13 +162,13 @@ fieldset[disabled] .btn-info:hover,
 fieldset[disabled] .btn-info:focus,
 fieldset[disabled] .btn-info:active,
 fieldset[disabled] .btn-info.active {
-  background-color: @info-color;
-  border-color: @info-color;
+  background-color: #23C6C8;
+  border-color: #23C6C8;
 }
 .btn-default {
   color: inherit;
   background: white;
-  border: 1px solid @default-border;
+  border: 1px solid #E7EAEC;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -219,7 +180,7 @@ fieldset[disabled] .btn-info.active {
 .btn-default.active:hover,
 .btn-default.active:focus {
   color: inherit;
-  border: 1px solid @default-border-active;
+  border: 1px solid #D2D2D2;
 }
 .btn-default:active,
 .btn-default.active,
@@ -241,8 +202,8 @@ fieldset[disabled] .btn-default:hover,
 fieldset[disabled] .btn-default:focus,
 fieldset[disabled] .btn-default:active,
 fieldset[disabled] .btn-default.active {
-  color: @default-border-disabled;
-  border: 1px solid @default-border;
+  color: #cacaca;
+  border: 1px solid #E7EAEC;
 }
 .btn-warning {
   background-color: #f8ac59;
@@ -327,14 +288,14 @@ fieldset[disabled] .btn-danger.active {
   border-color: #ef6776;
 }
 .btn-link {
-  color: @link;
+  color: #337AB7;
 }
 .btn-link:hover,
 .btn-link:focus,
 .btn-link:active,
 .btn-link.active,
 .open .dropdown-toggle.btn-link {
-  color: @link-hover;
+  color: #23527C;
   text-decoration: none;
 }
 .btn-link:active,
@@ -357,12 +318,12 @@ fieldset[disabled] .btn-link:hover,
 fieldset[disabled] .btn-link:focus,
 fieldset[disabled] .btn-link:active,
 fieldset[disabled] .btn-link.active {
-  color: @default-border-disabled;
+  color: #cacaca;
 }
 .btn-white {
   color: inherit;
   background: white;
-  border: 1px solid @default-border;
+  border: 1px solid #E7EAEC;
 }
 .btn-white:hover,
 .btn-white:focus,
@@ -374,7 +335,7 @@ fieldset[disabled] .btn-link.active {
 .btn-white.active:hover,
 .btn-white.active:focus {
   color: inherit;
-  border: 1px solid @default-border-active;
+  border: 1px solid #D2D2D2;
 }
 .btn-white:active,
 .btn-white.active {
@@ -400,8 +361,8 @@ fieldset[disabled] .btn-white:hover,
 fieldset[disabled] .btn-white:focus,
 fieldset[disabled] .btn-white:active,
 fieldset[disabled] .btn-white.active {
-  color: @default-border-disabled;
-  border: 1px solid @default-border;
+  color: #cacaca;
+  border: 1px solid #E7EAEC;
 }
 .form-control,
 .form-control:focus,
@@ -448,40 +409,40 @@ button.dim:active {
   top: 3px;
 }
 button.btn-primary.dim {
-  box-shadow: inset 0 0 0 @primary-dim, 0 5px 0 0 @primary-dim, 0 10px 5px @dim-shadow;
+  box-shadow: inset 0 0 0 #824A58, 0 5px 0 0 #824A58, 0 10px 5px #999999;
 }
 button.btn-primary.dim:active {
-  box-shadow: inset 0 0 0 @primary-dim, 0 2px 0 0 @primary-dim, 0 5px 3px @dim-shadow;
+  box-shadow: inset 0 0 0 #824A58, 0 2px 0 0 #824A58, 0 5px 3px #999999;
 }
 button.btn-default.dim {
-  box-shadow: inset 0 0 0 @default-dim, 0 5px 0 0 @default-dim, 0 10px 5px @dim-shadow;
+  box-shadow: inset 0 0 0 #B3B3B3, 0 5px 0 0 #B3B3B3, 0 10px 5px #999999;
 }
 button.btn-default.dim:active {
-  box-shadow: inset 0 0 0 @default-dim, 0 2px 0 0 @default-dim, 0 5px 3px @dim-shadow;
+  box-shadow: inset 0 0 0 #B3B3B3, 0 2px 0 0 #B3B3B3, 0 5px 3px #999999;
 }
 button.btn-warning.dim {
-  box-shadow: inset 0 0 0 @warning-dim, 0 5px 0 0 @warning-dim, 0 10px 5px @dim-shadow;
+  box-shadow: inset 0 0 0 #F79D3C, 0 5px 0 0 #F79D3C, 0 10px 5px #999999;
 }
 button.btn-warning.dim:active {
-  box-shadow: inset 0 0 0 @warning-dim, 0 2px 0 0 @warning-dim, 0 5px 3px @dim-shadow;
+  box-shadow: inset 0 0 0 #F79D3C, 0 2px 0 0 #F79D3C, 0 5px 3px #999999;
 }
 button.btn-info.dim {
-  box-shadow: inset 0 0 0 @info-dim, 0 5px 0 0 @info-dim, 0 10px 5px @dim-shadow;
+  box-shadow: inset 0 0 0 #1EACAE, 0 5px 0 0 #1EACAE, 0 10px 5px #999999;
 }
 button.btn-info.dim:active {
-  box-shadow: inset 0 0 0 @info-dim, 0 2px 0 0 @info-dim, 0 5px 3px @dim-shadow;
+  box-shadow: inset 0 0 0 #1EACAE, 0 2px 0 0 #1EACAE, 0 5px 3px #999999;
 }
 button.btn-success.dim {
-  box-shadow: inset 0 0 0 @success-dim, 0 5px 0 0 @success-dim, 0 10px 5px @dim-shadow;
+  box-shadow: inset 0 0 0 #1872AB, 0 5px 0 0 #1872AB, 0 10px 5px #999999;
 }
 button.btn-success.dim:active {
-  box-shadow: inset 0 0 0 @success-dim, 0 2px 0 0 @success-dim, 0 5px 3px @dim-shadow;
+  box-shadow: inset 0 0 0 #1872AB, 0 2px 0 0 #1872AB, 0 5px 3px #999999;
 }
 button.btn-danger.dim {
-  box-shadow: inset 0 0 0 @danger-dim, 0 5px 0 0 @danger-dim, 0 10px 5px @dim-shadow;
+  box-shadow: inset 0 0 0 #EA394C, 0 5px 0 0 #EA394C, 0 10px 5px #999999;
 }
 button.btn-danger.dim:active {
-  box-shadow: inset 0 0 0 @danger-dim, 0 2px 0 0 @danger-dim, 0 5px 3px @dim-shadow;
+  box-shadow: inset 0 0 0 #EA394C, 0 2px 0 0 #EA394C, 0 5px 3px #999999;
 }
 button.dim:before {
   font-size: 50px;
