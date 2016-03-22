@@ -4,3 +4,9 @@ $(document).ready(function () {
     $('.counter').counterUp();
     $.stellar();
 });
+
+
+function selectorCallback(id, event) {
+    url = window.location.origin + window.location.pathname + '?bra_id='+id;
+    window.location = url;
+}
