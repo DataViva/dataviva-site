@@ -7,7 +7,7 @@ import time
 
 mod = Blueprint('general', __name__, url_prefix='/<lang_code>')
 
-from dataviva import app, db, babel, view_cache, data_api
+from dataviva import app, db, babel, view_cache, data_viva_apis
 from dataviva.apps.general.forms import AccessForm
 from dataviva.apps.general.models import Short
 from dataviva.apps.account.models import User
@@ -32,7 +32,6 @@ def before_request():
     g.user = current_user
     g.accounts = True if ACCOUNTS in ["True","true","Yes","yes","Y","y",1] else False
     g.color = "#af1f24"
-    g.page_type = mod.name
     g.dictionary = json.dumps(dictionary())
     g.attr_version = 14
     g.production = False if DEBUG else True
@@ -50,7 +49,7 @@ def before_request():
         #     db.session.add(g.user)
         #     db.session.commit()
 
-        if url_path[1] not in data_api:
+        if url_path[1] not in data_viva_apis:
             if g.locale not in url_path:
                 if url.query:
                     new_url= "{}://{}/{}{}?{}".format(url.scheme, url.netloc, g.locale, url.path, url.query)
@@ -117,10 +116,10 @@ def get_timezone():
 def after_request(response):
     return response
 
-
 @mod.route('/', methods=['GET'])
 @view_cache.cached(key_prefix=api_cache_key("homepage"))
 def home():
+    g.page_type = 'home'
     return render_template("general/index.html")
 
 
