@@ -23,22 +23,16 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 @mod.route('/')
-#@login_required
-#@required_roles(1)
 def users():
     return redirect(url_for('.admin_users'))
 
 @mod.route('/users/', methods=['GET'])
-#@login_required
-#@required_roles(1)
 def admin_users():
 
     users = User.query.all()
     return render_template('/users/control.html', users=users)
 
 @mod.route('/users/', methods=['POST'])
-#@login_required
-#@required_roles(1)
 def admin_update():
     for id, role in request.form.iteritems():
         user = User.query.filter_by(id=id).first_or_404()
