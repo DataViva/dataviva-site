@@ -32,7 +32,6 @@ def before_request():
     g.user = current_user
     g.accounts = True if ACCOUNTS in ["True","true","Yes","yes","Y","y",1] else False
     g.color = "#af1f24"
-    g.page_type = mod.name
     g.dictionary = json.dumps(dictionary())
     g.attr_version = 14
     g.production = False if DEBUG else True
@@ -117,10 +116,10 @@ def get_timezone():
 def after_request(response):
     return response
 
-
 @mod.route('/', methods=['GET'])
 @view_cache.cached(key_prefix=api_cache_key("homepage"))
 def home():
+    g.page_type = 'home'
     return render_template("general/index.html")
 
 
