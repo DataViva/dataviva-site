@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash
+from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash, jsonify, request
 from dataviva.apps.general.views import get_locale
 
 from models import Article, AuthorScholar, KeyWord
@@ -25,7 +25,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    articles = Article.query.all()
+    articles = Article.query.filter_by(approval_status=True).all()
     return render_template('scholar/index.html', articles=articles)
 
 
@@ -65,6 +65,7 @@ def create():
         article.abstract = form.abstract.data
         article.file_path = 'test'
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        article.approval_status = 0
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
@@ -134,3 +135,28 @@ def delete(id):
         return redirect(url_for('scholar.index'))
     else:
         return make_response(render_template('not_found.html'), 404)
+
+
+@mod.route('/approval', methods=['GET'])
+def approval():
+    articles = Article.query.all()
+    return render_template('scholar/approval.html', articles=articles)
+
+
+@mod.route('/approval', methods=['POST'])
+def approval_update():
+    for id, approval_status in request.form.iteritems():
+        article = Article.query.filter_by(id=id).first_or_404()
+        article.approval_status = approval_status == u'true'
+        db.session.commit()
+    message = u"Estudo(s) atualizados com sucesso!"
+    return message
+
+
+@mod.route('/all', methods=['GET'])
+def all():
+    result = Article.query.all()
+    articles = []
+    for row in result:
+        articles += [(row.id, row.title, row.authors_str(), row.postage_date.strftime('%d/%m/%Y'), row.approval_status)]
+    return jsonify(articles=articles)
