@@ -19,6 +19,7 @@ from utils.jinja_helpers import jinja_formatter, jinja_momentjs, jinja_split, \
     jinja_strip_html, max_digits, jinja_magnitude
 
 from utils.redis import RedisSessionInterface
+from dataviva.api.stats.util import get_or_set_years
 
 
 def get_env_variable(var_name, default=-1):
@@ -64,7 +65,6 @@ if redis_sesh.redis:
     app.session_interface = redis_sesh
 
 # Global Latest Year Variables
-from dataviva.api.stats.util import get_or_set_years
 __year_range__ = get_or_set_years(view_cache, "general:data_years")
 
 
@@ -83,6 +83,7 @@ app.jinja_env.filters['split'] = jinja_split
 app.jinja_env.filters['max_digits'] = max_digits
 app.jinja_env.filters['magnitude'] = jinja_magnitude
 
+
 # Load the modules for each different section of the site
 data_viva_apis = [api_module for api_module in os.listdir(os.getcwd()+'/dataviva/api') if '.' not in api_module]
 data_viva_modules = [app_module for app_module in os.listdir(os.getcwd()+'/dataviva/apps') if '.' not in app_module]
@@ -95,4 +96,3 @@ for api_module in data_viva_apis:
 for app_module in data_viva_modules:
     views = import_module('dataviva.apps.'+app_module+'.views')
     app.register_blueprint(views.mod)
-
