@@ -11,7 +11,7 @@
                     <th>User ID<i class="fa fa-fw fa-sort"></i></th>
                     <th>Name<i class="fa fa-fw fa-sort"></i></th>
                     <th>Email<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Administradores <input name="select_all" value="1" id="select-all" type="checkbox"/> </th>
+                    <th>Administradores </th>
                 </tr>
             </thead>
         </table>
@@ -64,17 +64,6 @@
         $('#usersTable tbody').on('click','.body-checkbox', function () {
             var admin = {};
             admin[this.firstElementChild.value] = this.firstElementChild.checked;
-            sendChecks(admin);
-        });
-    };
-
-    Admin.prototype.multipleCheckbox = function(){
-            //Multiple Checkbox
-        $('#usersTable thead').on('click','#select-all', function () {
-            var admin = {};
-            $('input[name="checkboxAdmin"]').each(function() {
-                admin[this.value] = this.checked;
-            });
             sendChecks(admin);
         });
     };
