@@ -4,18 +4,35 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>DataViva</title>
-    <link href="/static/dist/css/font-dataviva.css" rel="stylesheet">
-    <link href="/static/dist/css/bootstrap.css" rel="stylesheet">
-    <link href="/static/dist/css/custom.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
+    <link rel='shortcut icon' href='img/favicon.ico' type='image/x-icon' />
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/libs/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Animation CSS -->
+    <link href="static/css/libs/animate.css" rel="stylesheet">
+    <link href="static/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="static/font-dataviva/css/font-dataviva.css" rel="stylesheet">
+
+    <!-- CSS bower-dependencies -->
+    <link href="static/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="static/css/plugins/cropper/cropper.min.css" rel="stylesheet">
+    <link href="static/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="static/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+
+    <!-- Dataviva custom styles -->
+    <link href="static/css/main.css" rel="stylesheet">
+    <link href="static/css/btn.css" rel="stylesheet">
+    <link href="static/css/input.css" rel="stylesheet">
+
+    <!-- Custom styles for this module -->
+    <link href="static/css/modules/home.css" rel="stylesheet">
 </head>
-<body data-ng-app="dataviva">
+<body class="{{ g.page_type }}" data-ng-app="dataviva">
     {% include "include/header.html" %}
 
     {% block content %}
@@ -31,11 +48,24 @@
 
     {% include "include/footer.html" %}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+
+
+    <!-- Mainly scripts -->
+    <script src="static/js/libs/jquery-2.1.1.js"></script>
+    <script src="static/js/libs/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
-    <script src="/static/dist/js/bootstrap.min.js"></script>
-    <script src="/static/dist/js/jquery.counterup.min.js"></script>
-    <script src="/static/dist/js/bootstrap-notify.js"></script>
+
+    <!-- Javascript plugins -->
+    <script src="static/js/plugins/pace/pace.min.js"></script>
+    <script src="static/js/plugins/wow/wow.min.js"></script>
+    <script src="static/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+    <script src="static/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="static/js/plugins/cropper/cropper.min.js"></script>
+    <script src="static/js/plugins/jquery.stellar.js"></script>
+    <script src="static/js/plugins/jquery.counterup.min.js"></script>
+    <script src="static/js/plugins/jquery.jcarousel.js"></script>
 
     <script src="/static/js/libs/angular.min.js"></script>
     <script src="/static/js/dataviva-ng/init.js"></script>
@@ -55,41 +85,7 @@
     <script src="/static/js/dataviva-ng/controllers/selector.js"></script>
     <script src="/static/js/dataviva-ng/app.js"></script>
 
-    <script type="text/javascript">
-        $(function(){
-            $('[data-toggle="popover"]').popover({
-                'trigger' : 'hover'
-            });
-            $('.counter').counterUp();
-        });
-
-
-
-        $(document).ready(function() {
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        $.notify({
-                            message: '{{message}}',
-                        },{
-                            offset: {
-                                    x: window.innerWidth * 18 / 100,
-                                    y: window.innerHeight * 25 / 100
-                            },
-                            type: '{{category}}',
-                            z_index: 1031,
-                            delay: 5000,
-                            timer: 1000
-                        });
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        });
-
-        function selectorCallback(id, event) {
-            url = window.location.origin + window.location.pathname + '?bra_id='+id;
-            window.location = url;
-        }
-    </script>
+    <script src="static/js/base.js"></script>
+    <script src="static/js/modules/{{ g.page_type }}.js"></script>
 </body>
 </html>
