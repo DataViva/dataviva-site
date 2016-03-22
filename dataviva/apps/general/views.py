@@ -7,7 +7,7 @@ import time
 
 mod = Blueprint('general', __name__, url_prefix='/<lang_code>')
 
-from dataviva import app, db, babel, view_cache, data_api
+from dataviva import app, db, babel, view_cache, data_viva_apis
 from dataviva.apps.general.forms import AccessForm
 from dataviva.apps.general.models import Short
 from dataviva.apps.account.models import User
@@ -50,7 +50,7 @@ def before_request():
         #     db.session.add(g.user)
         #     db.session.commit()
 
-        if url_path[1] not in data_api:
+        if url_path[1] not in data_viva_apis:
             if g.locale not in url_path:
                 if url.query:
                     new_url= "{}://{}/{}{}?{}".format(url.scheme, url.netloc, g.locale, url.path, url.query)
