@@ -28,6 +28,16 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+@mod.route('/graph/opportunities/<product_id>', methods=['POST'])
+def graph_opportunities(product_id):
+    return render_template('product/graph-opportunities.html')
+
+
+@mod.route('/graph/trade-partner/<product_id>', methods=['POST'])
+def graph_trade_partner(product_id):
+    return render_template('product/graph-trade-partner.html')
+
+
 @mod.route('/<product_id>')
 def index(product_id):
 
