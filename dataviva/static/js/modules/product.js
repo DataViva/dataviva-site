@@ -27,4 +27,15 @@ $(document).ready(function () {
             target: '+=1'
         });
     });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("href")
+            $.ajax({
+                method: "POST",
+                url: "/graph/trade-partner/",
+                success: function (msg) {
+
+                }
+            })
+    });
 });
