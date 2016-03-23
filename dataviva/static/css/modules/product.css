@@ -95,6 +95,7 @@
 .product .widget h2 {
   font-size: 10px;
   font-weight: 400;
+  height: 10px;
 }
 .product .widget .number {
   color: #5a9dc4;
@@ -110,6 +111,7 @@
   display: block;
   font-size: 12px;
   margin-top: -7px;
+  height: 15px;
 }
 /** Carousel **/
 .product .jcarousel-wrapper {
