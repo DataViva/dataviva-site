@@ -45,6 +45,8 @@ body {
   font-size: 14px;
 }
 /*BODY END*/
+
+/* BACKGROUNDS */
 .bg-green {
   background-color: #F2F6F4;
 }
@@ -65,6 +67,13 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
+
+.bg-dots {
+    background-image: url('/static/img/bgs/dots.png');
+}
+
+/* BACKGROUNDS */
+
 .font-bold {
   font-weight: 600;
 }

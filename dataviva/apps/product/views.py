@@ -13,6 +13,11 @@ mod = Blueprint('product', __name__,
                 static_folder='static')
 
 
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
+
+
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
@@ -30,7 +35,7 @@ def index(product_id):
     body = {}
     product = Hs.query.filter_by(id=product_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    
+
     if location:
         location_id = location.id
     else:
