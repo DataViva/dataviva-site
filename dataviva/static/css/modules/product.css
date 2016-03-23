@@ -222,62 +222,62 @@
 .product .graphs .embed-responsive {
   max-height: 900px;
 }
-.product .graph-filters button {
+.product .nav-graph button {
   background: none;
   border-radius: 0;
 }
-.product .graph-filters button + button:not(.list-group-item) {
+.product .nav-graph button + button:not(.list-group-item) {
   margin-left: -4px;
 }
-.product .graph-filters h4 {
+.product .nav-graph h4 {
   font-size: 14px;
   font-weight: 700;
   margin-top: 0;
   text-transform: uppercase;
 }
-.product .graph-filters label {
+.product .nav-graph label {
   display: block;
   font-weight: 400;
   text-transform: uppercase;
 }
-.product .graph-filters select {
+.product .nav-graph select {
   border-radius: 0;
   width: auto;
 }
-.product .graph-filters > .form-group + .form-group {
+.product .nav-graph > .form-group + .form-group {
   margin-top: 4rem;
 }
-.product .graph-filters .form-control {
+.product .nav-graph .form-control {
   background: none;
   display: inline-block;
 }
-.product .graph-filters .list-group button {
+.product .nav-graph .list-group button {
   text-indent: 20px;
 }
-.product .graph-filters .list-group-item {
+.product .nav-graph .list-group-item {
   border: none;
   border-radius: 0;
   font-size: 14px;
 }
-.product .graph-filters .list-group-item:active,
-.product .graph-filters .list-group-item:focus {
+.product .nav-graph .list-group-item:active,
+.product .nav-graph .list-group-item:focus {
   background: #5a9dc4;
   color: #FFF;
 }
-.product .graph-filters .list-wrap {
+.product .nav-graph .list-wrap {
   border: 1px solid #000;
   border-width: 1px 1px 0;
 }
-.product .graph-filters .list-wrap:last-child {
+.product .nav-graph .list-wrap:last-child {
   border-bottom-width: 1px;
 }
-.product .graph-filters .list-wrap + .list-wrap {
+.product .nav-graph .list-wrap + .list-wrap {
   border-top: 0;
 }
-.product .graph-filters .list-wrap > .list-group {
+.product .nav-graph .list-wrap > .list-group {
   margin-bottom: 0;
 }
-.product .graph-filters .list-wrap > .list-group-item {
+.product .nav-graph .list-wrap > .list-group-item {
   font-weight: 700;
   text-transform: uppercase;
 }
