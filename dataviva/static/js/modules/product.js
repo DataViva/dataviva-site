@@ -8,12 +8,12 @@ $(document).ready(function () {
                     width = carousel.innerWidth();
 
                 if (width >= 600) {
-                    width = 140;
+                    width = 200;
                 } else if (width >= 350) {
-                    width = 100;
+                    width = 170;
                 }
 
-                carousel.jcarousel('items').css('width','140px');
+                carousel.jcarousel('items').css('width',width);
             })
             .jcarousel({
                 wrap: 'circular'
