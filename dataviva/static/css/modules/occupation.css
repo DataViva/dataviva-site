@@ -1,13 +1,13 @@
-.product .header .name {
+.occupation .header .name {
   height: 90px;
 }
 @media (max-width: 767px) {
-  .product .header .name {
+  .occupation .header .name {
     height: 200px;
     margin-bottom: 10px;
   }
 }
-.product .header h1 {
+.occupation .header h1 {
   display: inline-block;
   background: #FFF;
   color: #5a9dc4;
@@ -17,17 +17,17 @@
   margin-top: 29px;
 }
 @media (max-width: 767px) {
-  .product .header h1 {
+  .occupation .header h1 {
     margin-left: 20px;
     margin-top: 130px;
   }
 }
-.product .header h1 a {
+.occupation .header h1 a {
   color: #5a9dc4;
   font-size: 12px;
   font-weight: 600;
 }
-.product .portrait {
+.occupation .portrait {
   background: white;
   color: #9EDDBF;
   font-size: 130px;
@@ -41,105 +41,105 @@
   padding: 10px;
   margin-left: 60px;
 }
-.product .nav-tabs {
+.occupation .nav-tabs {
   list-style-type: none;
   list-style: none;
   margin: 0;
   padding: 0;
   border: none;
 }
-.product .nav-tabs li {
+.occupation .nav-tabs li {
   background: rgba(229, 241, 233, 0.37);
   float: none;
   margin: 0px;
   font-size: 13px;
   font-weight: 300;
 }
-.product .nav-tabs li a {
+.occupation .nav-tabs li a {
   text-decoration: none;
   border: none;
   margin: 0;
 }
-.product .nav-tabs li.active a {
+.occupation .nav-tabs li.active a {
   background: #5a9dc4;
   text-decoration: none;
   border: none;
   color: #FFF;
   margin: 0;
 }
-.product .nav-tabs li:nth-child(odd) {
+.occupation .nav-tabs li:nth-child(odd) {
   background: #dfe7e2;
 }
-.product .nav-tabs li a {
+.occupation .nav-tabs li a {
   border-radius: 0;
   display: block;
   font-size: 16px;
   line-height: 40px;
   padding: 0 2rem;
 }
-.product .tab-content {
+.occupation .tab-content {
   margin-top: -130px;
 }
 @media (max-width: 767px) {
-  .product .tab-content {
+  .occupation .tab-content {
     margin-top: 0px;
   }
 }
 /* WIDGETS */
-.product .widget {
+.occupation .widget {
   font-size: 10px;
   font-weight: 400;
   border-bottom: 3px solid rgba(190, 230, 205, 0.37);
   margin: 0px 10px;
 }
-.product .widget h2 {
+.occupation .widget h2 {
   font-size: 10px;
   font-weight: 400;
   height: 10px;
 }
-.product .widget .number {
+.occupation .widget .number {
   color: #5a9dc4;
   font-size: 18px;
   font-weight: 300;
   margin-top: -5px;
 }
-.product .widget .number .counter {
+.occupation .widget .number .counter {
   font-size: 29px;
   font-weight: 700;
 }
-.product .widget .number .magnitude {
+.occupation .widget .number .magnitude {
   display: block;
   font-size: 12px;
   margin-top: -7px;
   height: 15px;
 }
 /** Carousel **/
-.product .jcarousel-wrapper {
+.occupation .jcarousel-wrapper {
   position: relative;
   padding-right: 20px;
 }
 @media (max-width: 767px) {
-  .product .jcarousel-wrapper {
+  .occupation .jcarousel-wrapper {
     padding: 0px 40px;
   }
 }
-.product .jcarousel {
+.occupation .jcarousel {
   position: relative;
   overflow: hidden;
   width: 100%;
 }
-.product .jcarousel ul {
+.occupation .jcarousel ul {
   width: 20000em;
   position: relative;
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.product .jcarousel li {
+.occupation .jcarousel li {
   float: left;
 }
-.product .jcarousel-control-prev,
-.product .jcarousel-control-next {
+.occupation .jcarousel-control-prev,
+.occupation .jcarousel-control-next {
   position: absolute;
   top: 50%;
   margin-top: -15px;
@@ -150,47 +150,47 @@
   font-size: 45px;
   color: #5A9DC4;
 }
-.product .jcarousel-control-prev:hover,
-.product .jcarousel-control-prev:focus,
-.product .jcarousel-control-next:hover,
-.product .jcarousel-control-next:focus {
+.occupation .jcarousel-control-prev:hover,
+.occupation .jcarousel-control-prev:focus,
+.occupation .jcarousel-control-next:hover,
+.occupation .jcarousel-control-next:focus {
   text-decoration: none;
 }
-.product .jcarousel-control-prev {
+.occupation .jcarousel-control-prev {
   left: -25px;
 }
 @media (max-width: 767px) {
-  .product .jcarousel-control-prev {
+  .occupation .jcarousel-control-prev {
     left: 0px;
   }
 }
-.product .jcarousel-control-next {
+.occupation .jcarousel-control-next {
   right: -10px;
 }
 @media (max-width: 767px) {
-  .product .jcarousel-control-next {
+  .occupation .jcarousel-control-next {
     right: 0px;
   }
 }
-.product .table {
+.occupation .table {
   margin-bottom: 0px;
 }
-.product table > tbody td,
-.product table > tbody th {
+.occupation table > tbody td,
+.occupation table > tbody th {
   border-top: none;
   vertical-align: top;
   width: 50%;
 }
-.product table > tbody td {
+.occupation table > tbody td {
   font-size: 18px;
   font-weight: 700;
   line-height: 20px;
 }
-.product table > tbody td,
-.product table > tbody td .label {
+.occupation table > tbody td,
+.occupation table > tbody td .label {
   color: #5a9dc4;
 }
-.product table > tbody td .label {
+.occupation table > tbody td .label {
   display: block;
   font-size: 14px;
   margin: 0;
@@ -198,88 +198,88 @@
   text-align: left;
   text-transform: uppercase;
 }
-.product table > tbody td span {
+.occupation table > tbody td span {
   display: block;
 }
-.product table > tbody th {
+.occupation table > tbody th {
   font-size: 13px;
   font-weight: 400;
   line-height: 15px;
   text-align: right;
 }
-.product .profile h3 {
+.occupation .profile h3 {
   margin: 20px 20px 0px 20px;
   height: 30px;
 }
-.product .table-responsive {
+.occupation .table-responsive {
   height: 280px;
 }
-.product .graphs {
+.occupation .graphs {
   margin-top: 40px;
 }
-.product .graphs .container {
+.occupation .graphs .container {
   width: 90%;
   padding: 20px;
 }
-.product .graphs .embed-responsive {
+.occupation .graphs .embed-responsive {
   max-height: 900px;
 }
-.product .nav-graph button {
+.occupation .nav-graph button {
   background: none;
   border-radius: 0;
 }
-.product .nav-graph button + button:not(.list-group-item) {
+.occupation .nav-graph button + button:not(.list-group-item) {
   margin-left: -4px;
 }
-.product .nav-graph h4 {
+.occupation .nav-graph h4 {
   font-size: 14px;
   font-weight: 700;
   margin-top: 0;
   text-transform: uppercase;
 }
-.product .nav-graph label {
+.occupation .nav-graph label {
   display: block;
   font-weight: 400;
   text-transform: uppercase;
 }
-.product .nav-graph select {
+.occupation .nav-graph select {
   border-radius: 0;
   width: auto;
 }
-.product .nav-graph > .form-group + .form-group {
+.occupation .nav-graph > .form-group + .form-group {
   margin-top: 4rem;
 }
-.product .nav-graph .form-control {
+.occupation .nav-graph .form-control {
   background: none;
   display: inline-block;
 }
-.product .nav-graph .list-group button {
+.occupation .nav-graph .list-group button {
   text-indent: 20px;
 }
-.product .nav-graph .list-group-item {
+.occupation .nav-graph .list-group-item {
   border: none;
   border-radius: 0;
   font-size: 14px;
 }
-.product .nav-graph .list-group-item:active,
-.product .nav-graph .list-group-item:focus {
+.occupation .nav-graph .list-group-item:active,
+.occupation .nav-graph .list-group-item:focus {
   background: #5a9dc4;
   color: #FFF;
 }
-.product .nav-graph .list-wrap {
+.occupation .nav-graph .list-wrap {
   border: 1px solid #000;
   border-width: 1px 1px 0;
 }
-.product .nav-graph .list-wrap:last-child {
+.occupation .nav-graph .list-wrap:last-child {
   border-bottom-width: 1px;
 }
-.product .nav-graph .list-wrap + .list-wrap {
+.occupation .nav-graph .list-wrap + .list-wrap {
   border-top: 0;
 }
-.product .nav-graph .list-wrap > .list-group {
+.occupation .nav-graph .list-wrap > .list-group {
   margin-bottom: 0;
 }
-.product .nav-graph .list-wrap > .list-group-item {
+.occupation .nav-graph .list-wrap > .list-group-item {
   font-weight: 700;
   text-transform: uppercase;
 }
