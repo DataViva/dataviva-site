@@ -71,16 +71,7 @@
     </div>
 </section>
 
-<section class="graphs bg-gray">
-    <div class="container">
-        <div class="nav-graph col-xs-12 col-md-3">
-            {% include "product/nav-graph-opportunities.html" %}
-            {% include "product/nav-graph-trade-partner.html" %}
-        </div>
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe name="graphs-trade-partner" id="graphs-trade-partner" class="embed-responsive-item" src="/pt/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?"></iframe>
-        </div>
-    </div>
+<section id="graphs" class="graphs bg-gray">
 </section>
 
 {% endblock content %}

@@ -1,0 +1,58 @@
+<div id="graph-trade-partner" class="container">
+    <div class="nav-graph col-xs-12 col-md-3">
+        <div class="form-group">
+            <h4>Visualize:</h4>
+            <div class="list-wrap">
+                <button type="button" class="list-group-item">Ensino Superior por</button>
+                <div class="list-group">
+                    <a target="category-frame"
+                       class="list-group-item"
+                       href="http://pt.dataviva.info/apps/embed/tree_map/hedu/4mg/all/all/university/?color=color&depth=university_5&size=enrolled">
+                        Universidades - TreeMap
+                    </a>
+
+                    <a target="category-frame"
+                       class="list-group-item"
+                       href="http://pt.dataviva.info/apps/embed/tree_map/hedu/4mg/all/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled">
+                        Cursos - TreeMap
+                    </a>
+                </div>
+            </div>
+            <div class="list-wrap">
+                <button type="button" class="list-group-item">Educaçāo Profissional por</button>
+                <div class="list-group">
+                    <a target="category-frame"
+                       class="list-group-item"
+                       href="http://pt.dataviva.info/apps/embed/tree_map/sc/4mg/all/all/school/?color=color&depth=school_type_id&size=enrolled">
+                        Universidades - TreeMap
+                    </a>
+
+                    <a target="category-frame"
+                       class="list-group-item"
+                       href="http://pt.dataviva.info/apps/embed/tree_map/hedu/4mg/all/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled">
+                        Cursos - TreeMap
+                    </a>
+                </div>
+            </div>
+            <div class="list-wrap">
+                <button type="button" class="list-group-item">Educaçāo Básica por</button>
+                <div class="list-group">
+                    <a target="category-frame"
+                       class="list-group-item"
+                       href="http://pt.dataviva.info/apps/embed/tree_map/hedu/4mg/all/all/university/?color=color&depth=university_5&size=enrolled">
+                        Universidades - TreeMap
+                    </a>
+
+                    <a target="category-frame"
+                       class="list-group-item"
+                       href="http://pt.dataviva.info/apps/embed/tree_map/hedu/4mg/all/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled">
+                        Cursos - TreeMap
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe name="graphs-trade-partner" id="graphs-trade-partner" class="embed-responsive-item" src="/pt/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?"></iframe>
+    </div>
+</div>
