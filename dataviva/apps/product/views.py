@@ -28,11 +28,11 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/<product_id>/graphs/<graph_page>', methods=['POST'])
-def graphs(product_id, graph_page):
+@mod.route('/<product_id>/graphs/<tab>', methods=['POST'])
+def graphs(product_id, tab):
     product = Hs.query.filter_by(id=product_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('product/graph-'+graph_page+'.html', product=product, location=location)
+    return render_template('product/graphs-'+tab+'.html', product=product, location=location)
 
 
 @mod.route('/<product_id>')
