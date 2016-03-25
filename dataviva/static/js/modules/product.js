@@ -1,3 +1,17 @@
+window.showGraph = function(product, location, tab) {
+    if ($('#graphs #graphs-' + tab).length === 0) {
+        $.ajax({
+            method: "POST",
+            url: product+"/graphs/"+tab+"?bra_id="+location,
+            success: function (graphs) {
+                $('#graphs').append(graphs);
+            }
+        });
+    }
+    $("#graphs").children().hide();
+    $('#graphs #graphs-' + tab).show();
+}
+
 $(document).ready(function () {
     $(function() {
         var jcarousel = $('.jcarousel');
@@ -29,21 +43,20 @@ $(document).ready(function () {
     });
 
     if(document.location.hash) {
-        alert('#' + document.location.hash.substring(1));
+        var tab = document.location.hash.substring(1),
+            product = document.location.pathname.split('/')[3],
+            location = getParameterByName('bra_id');
+
+        $('[href=#' + tab + ']').tab('show');
+
+        showGraph(product, location, tab);
     }
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         var product = this.dataset.product,
             location = this.dataset.location,
-            graph = $(this).attr('aria-controls');
+            tab = $(this).attr('aria-controls');
 
-        $.ajax({
-            method: "POST",
-            url: product+"/graphs/"+graph+"?bra_id="+location,
-            success: function (msg) {
-
-            }
-        })
-
+        showGraph(product, location, tab);
     });
 });
