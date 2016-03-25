@@ -28,14 +28,22 @@ $(document).ready(function () {
         });
     });
 
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        var target = $(e.target).attr("href")
-            $.ajax({
-                method: "POST",
-                url: "/graph/trade-partner/",
-                success: function (msg) {
+    if(document.location.hash) {
+        alert('#' + document.location.hash.substring(1));
+    }
 
-                }
-            })
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var product = this.dataset.product,
+            location = this.dataset.location,
+            graph = $(this).attr('aria-controls');
+
+        $.ajax({
+            method: "POST",
+            url: product+"/graphs/"+graph+"?bra_id="+location,
+            success: function (msg) {
+
+            }
+        })
+
     });
 });
