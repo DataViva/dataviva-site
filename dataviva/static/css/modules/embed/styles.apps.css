@@ -9,12 +9,10 @@ body {
 }
 
 #app {
-  background-color: #ffffff;
   display: block;
   padding: 5px;
   position: relative;
   z-index: 10;
-  /*top: 0px;*/
 }
 
 div.loading {
