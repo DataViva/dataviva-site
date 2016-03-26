@@ -53,10 +53,12 @@ $(document).ready(function () {
     }
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        var product = this.dataset.product,
-            location = this.dataset.location,
-            tab = $(this).attr('aria-controls');
+        if ($(this).attr('graph') != null) {
+            var product = this.dataset.product,
+                location = this.dataset.location,
+                tab = $(this).attr('aria-controls');
 
-        showGraph(product, location, tab);
+            showGraph(product, location, tab);
+        }
     });
 });
