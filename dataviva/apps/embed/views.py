@@ -34,7 +34,10 @@ import sys
 import gzip
 from dataviva.utils.cached_query import api_cache_key
 
-mod = Blueprint('embed', __name__, url_prefix='/<lang_code>/embed')
+
+mod = Blueprint('embed', __name__,
+                template_folder='templates',
+                url_prefix='/<lang_code>/embed')
 
 
 @mod.before_request
@@ -184,7 +187,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
 
         year_range = json.dumps(__year_range__)
 
-        ret = make_response(render_template("apps/embed.html",
+        ret = make_response(render_template("embed/embed.html",
                                             # apps = App.query.all(),
                                             # all_builds = all_builds,
                                             starred=starred,
@@ -429,7 +432,7 @@ def download():
 
 @mod.route('/info/<app_name>/')
 def info(app_name="tree_map"):
-    return render_template("apps/info.html", app_name=app_name)
+    return render_template("embed/info.html", app_name=app_name)
 
 
 @mod.route('/coords/<id>/')
