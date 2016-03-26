@@ -40,14 +40,29 @@
         <nav class="col-sm-5 col-md-4 col-lg-3">
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                    <a href="#general" aria-controls="general" role="tab" data-toggle="tab">Geral</a>
+                    <a href="#general"
+                       aria-controls="general"
+                       role="tab"
+                       data-product="{{ product.id }}"
+                       data-location="{{ location.id }}"
+                       data-toggle="tab">Geral</a>
                 </li>
                 <li role="presentation">
-                    <a href="#trade-partner" aria-controls="trade-partner" role="tab" data-toggle="tab">Comércio Internacional</a>
+                    <a href="#trade-partner"
+                       aria-controls="trade-partner"
+                       role="tab"
+                       data-product="{{ product.id }}"
+                       data-location="{{ location.id }}"
+                       data-toggle="tab">Comércio Internacional</a>
                 </li>
                 {% if (product.id|length) == 6 %}
                 <li role="presentation">
-                    <a href="#opportunities" aria-controls="opportunities" role="tab" data-toggle="tab">Oportunidade Econômica</a>
+                    <a href="#opportunities"
+                       aria-controls="opportunities"
+                       role="tab"
+                       data-product="{{ product.id }}"
+                       data-location="{{ location.id }}"
+                       data-toggle="tab">Oportunidade Econômica</a>
                 </li>
                 {% endif %}
             </ul>
@@ -63,16 +78,7 @@
     </div>
 </section>
 
-<section class="graphs bg-gray">
-    <div class="container">
-        <div class="nav-graph col-xs-12 col-md-3">
-            {% include "product/nav-graph-trade-partner.html" %}
-            {% include "product/nav-graph-opportunities.html" %}
-        </div>
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe name="graphs-trade-partner" id="graphs-trade-partner" class="embed-responsive-item" src="/pt/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?"></iframe>
-        </div>
-    </div>
+<section id="graphs" class="graphs bg-gray">
 </section>
 
 {% endblock content %}

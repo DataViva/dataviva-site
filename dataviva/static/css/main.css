@@ -48,13 +48,16 @@ body {
 
 /* BACKGROUNDS */
 .bg-green {
-  background-color: #F2F6F4;
+  background-color: #9EDDBF;
 }
 .bg-white {
   background-color: #ffffff;
 }
 .bg-gray {
-  background-color: #f3f3f4;
+  background-color: #f3f6f4;
+}
+.bg-greeny {
+  background-color: #f3f6f3;
 }
 .bg-city-scratched {
   background: url(/static/img/bgs/city_scratched.png) no-repeat center bottom;
@@ -117,7 +120,6 @@ body {
 /* BREADCRUMB END */
 /*NAVBAR BEGIN*/
 .navpre {
-  background: #9EDDBF;
   line-height: 26px;
   max-height: 26px;
   text-align: right;
@@ -356,6 +358,9 @@ footer .form-control:focus,
 }
 /* PACE LOADBAR END */
 /* MARGINS & PADDINGS */
+.p-n {
+  padding: 0 !important;
+}
 .p-xxs {
   padding: 5px;
 }
