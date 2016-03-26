@@ -73,6 +73,10 @@
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe name="graphs-frame-trade-partner" id="graphs-trade-partner" class="embed-responsive-item" src="/pt/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?"></iframe>
+        <iframe src="/pt/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?"
+                name="graphs-frame-trade-partner"
+                id="graphs-trade-partner"
+                class="embed-responsive-item" >
+        </iframe>
     </div>
 </div>
