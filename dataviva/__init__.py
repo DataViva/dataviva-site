@@ -9,7 +9,6 @@ from flask.ext.babel import Babel
 from flask.ext.cache import Cache
 from flask.ext.mail import Mail
 
-
 from utils.jinja_helpers import jinja_formatter, jinja_momentjs, jinja_split, \
     jinja_strip_html, max_digits, jinja_magnitude
 
@@ -33,7 +32,6 @@ lm.login_view = "/account/signin"
 lm.init_app(app)
 
 babel = Babel(app)
-
 
 app.jinja_env.globals['moment_js'] = jinja_momentjs
 app.jinja_env.globals['format'] = jinja_formatter
