@@ -1,29 +1,26 @@
 {% extends "news/_base.html" %}
 
 {% block news_content %}
-<div class="institucional search">
-    <h1>Notícias</h1>
-
-    <div class="post-list">
-    {% for post in posts %}
-        <div class="item post">
-            <div class="thumbnail">
-                <a href="{{url_for('news.show', id=post.id)}}" title="{{post.title}}">
-                    <img src="{{post.thumb_path}}" class="img-responsive">
-                </a>
-                <span>{{post.subject}}</span>
+    <div class="publication-list">
+        {% for publication in publications %}
+            <div class="item publication">
+                <div class="thumbnail">
+                    <a href="{{url_for('news.show', id=publication.id)}}" title="{{publication.title}}">
+                        <img src="{{publication.thumb_path}}" class="img-responsive">
+                    </a>
+                    <span>{{publication.subject}}</span>
+                </div>
+                <h4>
+                    <a href="{{url_for('news.show', id=publication.id)}}" title="{{publication.title}}">{{publication.title}}</a>
+                </h4>
+                <p>{{ publication.text_content | truncate(450, killwords=True) }}</p>
+                <div class="meta">
+                    <p class="read-more"><a href="{{url_for('news.show', id=publication.id)}}" title="{{publication.title}}">Continue lendo</a></p>
+                    <p class="data">Por {{ publication.authors_str() }} {{ publication.date_str() }}</p>
+                </div>
             </div>
-            <h4>
-                <a href="{{url_for('news.show', id=post.id)}}" title="{{post.title}}">{{post.title}}</a>
-            </h4>
-            <p>{{ post.text_content | truncate(450, killwords=True) }}</p>
-            <div class="meta">
-                <p class="read-more"><a href="{{url_for('news.show', id=post.id)}}" title="{{post.title}}">Continue lendo</a></p>
-                <p class="data">Por {{ post.authors_str() }} {{ post.date_str() }}</p>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    {% endfor %}
+            <div class="clearfix"></div>
+        {% endfor %}
         <nav>
             <ul class="pagination">
                 <li>
@@ -44,5 +41,4 @@
             </ul>
         </nav>
     </div>
-</div>
 {% endblock news_content %}

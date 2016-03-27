@@ -6,18 +6,17 @@
   text-decoration: none;
 }
 .news h1 {
-    font-size: 25px;
-    font-weight: 300;
+    margin: 0px 0px 30px 0px;
 }
 
-.news .post .thumbnail {
+.news .publication .thumbnail {
   border: none;
   float: left;
   margin-right: 20px;
   padding: 0;
   position: relative;
 }
-.news .post .thumbnail span {
+.news .publication .thumbnail span {
   background: #5a9dc4;
   bottom: 0;
   color: #FFF;
@@ -91,34 +90,34 @@
 .news .item + .item {
   margin-top: 2rem;
 }
-.news .post h4 {
+.news .publication h4 {
   font-size: 25px;
   font-weight: 300;
 }
-.news .post h4,
-.news .post h4 a {
+.news .publication h4,
+.news .publication h4 a {
   color: #666;
 }
-.news .post p {
+.news .publication p {
   color: #666;
   font-size: 13px;
 }
-.news .post p.data {
+.news .publication p.data {
   color: #5a9dc4;
   text-transform: uppercase;
 }
-.news .post h4,
-.news .post p {
+.news .publication h4,
+.news .publication p {
   margin: 0 0 10px;
 }
-.news .post:before {
+.news .publication:before {
   display: none;
 }
-.news .post-list nav {
+.news .publication-list nav {
     text-align: center;
 }
 
-.news .post-list nav .pagination {
+.news .publication-list nav .pagination {
     font-size: 10px;
     display: inline-block;
 }
