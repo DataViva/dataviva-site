@@ -1,4 +1,124 @@
+.news .main-content {
+    padding-bottom: 2rem;
+}
+
+.news a {
+  text-decoration: none;
+}
 .news h1 {
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.news .post .thumbnail {
+  border: none;
+  float: left;
+  margin-right: 20px;
+  padding: 0;
+  position: relative;
+}
+.news .post .thumbnail span {
+  background: #5a9dc4;
+  bottom: 0;
+  color: #FFF;
+  font-size: 13px;
+  font-weight: 300;
+  height: 33px;
+  line-height: 33px;
+  padding: 0 10px;
+  position: absolute;
+  right: 0;
+  text-transform: uppercase;
+}
+.news .related h4 {
+  color: #666;
   font-size: 25px;
   font-weight: 300;
+}
+.news .related p {
+  font-size: 14px;
+  font-weight: 300;
+}
+.news .related p,
+.news .related p a {
+  color: #666;
+}
+.news .single big {
+  color: #5a9dc4;
+}
+.news .single blockquote {
+  border: none;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 600;
+  padding-bottom: 0;
+}
+.news .single p {
+  color: #666;
+  font-size: 14px;
+}
+.news .social {
+  margin-bottom: 2rem;
+  padding: 0;
+}
+.news .social li {
+  display: inline-block;
+  height: 20px;
+  margin-right: 5px;
+  overflow: hidden;
+}
+
+.news .comments h4 {
+  color: #666;
+  font-size: 25px;
+  font-weight: 300;
+}
+.news .item h4 {
+  font-size: 20px;
+  margin: 0;
+}
+.news .item h4 a {
+  color: #423434;
+}
+.news .item h4 a:hover {
+  opacity: 0.8;
+}
+.news .item p {
+  color: #9c9c9c;
+  font-size: 13px;
+  margin: 0;
+}
+.news .item + .item {
+  margin-top: 2rem;
+}
+.news .post h4 {
+  font-size: 25px;
+  font-weight: 300;
+}
+.news .post h4,
+.news .post h4 a {
+  color: #666;
+}
+.news .post p {
+  color: #666;
+  font-size: 13px;
+}
+.news .post p.data {
+  color: #5a9dc4;
+  text-transform: uppercase;
+}
+.news .post h4,
+.news .post p {
+  margin: 0 0 10px;
+}
+.news .post:before {
+  display: none;
+}
+.news .post-list nav {
+    text-align: center;
+}
+
+.news .post-list nav .pagination {
+    font-size: 10px;
+    display: inline-block;
 }
