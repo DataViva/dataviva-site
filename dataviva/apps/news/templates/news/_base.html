@@ -8,7 +8,7 @@
     <div class="row bg-white">
         <ol class="breadcrumb">
             <li><a href="{{ url_for('general.home') }}">Home</a></li>
-            <li class="active">News</li>
+            <li class="active">Notícias</li>
         </ol>
     </div>
 </div>
@@ -17,7 +17,7 @@
 
 <div class="container">
     <nav class="sidebar col-md-3">
-        <h2>Assuntos</h2>
+        <h3>Assuntos</h3>
         <ul class="sub-menu">
             <li><a href="#" title="Todos"><strong>Todos</strong></a></li>
             <li><a href="#" title="Visualizações">Visualizações</a></li>
@@ -30,6 +30,7 @@
         </ul>
     </nav>
     <section id="news" class="col-md-9">
+        <h1>Notícias</h1>
         {% block news_content %}
         {% endblock news_content %}
     </section>
