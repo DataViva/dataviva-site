@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+import os
 from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash
 from dataviva.apps.general.views import get_locale
 
 from models import Publication, AuthorNews
-from dataviva import db
+from dataviva import db, app
 from forms import RegistrationForm
 from datetime import datetime
 from random import randrange
@@ -11,6 +12,8 @@ from random import randrange
 mod = Blueprint('news', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/news')
+
+UPLOAD_FOLDER = os.path.join(app.config['UPLOAD_FOLDER'], mod.name)
 
 
 @mod.before_request
@@ -39,10 +42,11 @@ def show(id):
     publication = Publication.query.filter_by(id=id).first_or_404()
     publications = Publication.query.filter(Publication.id != id).all()
     if len(publications) > 3:
-        read_more_publications = [publications.pop(randrange(len(publications))) for _ in range(3)]
+        read_more = [
+            publications.pop(randrange(len(publications))) for _ in range(3)]
     else:
-        read_more_publications = publications
-    return render_template('news/show.html', publication=publication, id=id, read_more_publications=read_more_publications)
+        read_more = publications
+    return render_template('news/show.html', publication=publication, id=id, read_more=read_more)
 
 
 @mod.route('/publication/new', methods=['GET'])
@@ -59,8 +63,10 @@ def edit(id):
     form.authors.data = publication.authors_str()
     form.subject.data = publication.subject
     form.text_content.data = publication.text_content
+
     form.image_path.data = publication.image_path
     form.thumb_path.data = publication.thumb_path
+
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
 
@@ -74,8 +80,6 @@ def create():
         publication.title = form.title.data
         publication.subject = form.subject.data
         publication.text_content = form.text_content.data
-        publication.image_path = 'http://agenciatarrafa.com.br/2015/wp-content/uploads/2015/09/google-ads-1000x300.jpg'
-        publication.thumb_path = 'http://1un1ba2fg8v82k48vu4by3q7.wpengine.netdna-cdn.com/wp-content/uploads/2014/05/Mobile-Analytics-Picture-e1399568637490-350x227.jpg'
         publication.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         author_input_list = form.authors.data.split(',')
@@ -83,6 +87,19 @@ def create():
             publication.authors.append(AuthorNews(author_input))
 
         db.session.add(publication)
+        db.session.flush()
+
+        image_ext = os.path.splitext(form.image.data.filename)[-1]
+        thumb_ext = os.path.splitext(form.thumb.data.filename)[-1]
+        image_name = 'image' + str(publication.id) + image_ext
+        thumb_name = 'thumb' + str(publication.id) + thumb_ext
+
+        form.image.data.save(UPLOAD_FOLDER + '/' + image_name)
+        form.thumb.data.save(UPLOAD_FOLDER + '/' + thumb_name)
+
+        publication.image_path = '/static/uploads/news/' + image_name
+        publication.thumb_path = '/static/uploads/news/' + thumb_name
+
         db.session.commit()
 
         message = u'Muito obrigado! Seu publication foi submetido com sucesso!'
@@ -94,7 +111,7 @@ def create():
 def update(id):
     form = RegistrationForm()
     id = int(id.encode())
-    if form.validate() is False:
+    if not form.validate_on_submit():
         return render_template('news/edit.html', form=form)
     else:
         publication = Publication.query.filter_by(id=id).first_or_404()
