@@ -236,6 +236,30 @@ nav > li span:not(.caret) {
 .navbar-nav > li > .dropdown-menu {
   margin-top: -20px;
 }
+
+.sidebar h2 {
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 0;
+  padding-bottom: 5px;
+}
+.sidebar h2 + ul {
+  margin-top: 2rem;
+}
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebar ul li {
+  font-size: 13px;
+  font-weight: 300;
+  margin-bottom: 5px;
+}
+
+
+
 .popover {
   z-index: 2;
 }
