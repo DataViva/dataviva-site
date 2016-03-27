@@ -237,14 +237,14 @@ nav > li span:not(.caret) {
   margin-top: -20px;
 }
 
-.sidebar h2 {
+.sidebar h3 {
   border-bottom: 1px solid #f2f2f2;
   font-size: 18px;
   font-weight: 300;
   margin-bottom: 0;
   padding-bottom: 5px;
 }
-.sidebar h2 + ul {
+.sidebar h3 + ul {
   margin-top: 2rem;
 }
 .sidebar ul {
