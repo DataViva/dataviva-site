@@ -14,7 +14,6 @@ $(document).ready(function(){
         $('#text-content-editor').summernote('destroy');
     });
 
-//10x3
     var inputThumbCallback = function() {
         $($('#thumb-crop')).cropper({
             aspectRatio: 350/227,
@@ -23,9 +22,9 @@ $(document).ready(function(){
         });
 
         $('#thumb-img').hide();
-        $('#thumb-crop').show();
-        $('.thumb .crop-controls').show();
         $('.thumb label').hide();
+        $('.thumb .crop-controls').show();
+        $('#thumb-crop').show();
     }
 
     cropInput($('#thumb-crop'), $('#thumb-input'), inputThumbCallback)
@@ -42,6 +41,7 @@ $(document).ready(function(){
     $('#thumb-rotateRight').click(function() {
         $('#thumb-crop').cropper('rotate', -45);
     });
+
     $('#thumb-save').click(function() {
         var thumbDataURL = $('#thumb-crop').cropper('getDataURL');
         $('#thumb').val(thumbDataURL);
@@ -52,10 +52,6 @@ $(document).ready(function(){
         $('.thumb label').show();
         $('.thumb .crop-controls').hide();
     });
-
-
-
-
 
     $(function() {
         $('#news-form').submit(function() {
