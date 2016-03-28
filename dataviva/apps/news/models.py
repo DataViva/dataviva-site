@@ -7,7 +7,7 @@ class Publication(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(400))
     subject = db.Column(db.String(100))
-    text_content = db.Column(db.Text())
+    text_content = db.Column(db.Text(4194304))
     image_path = db.Column(db.String(250))
     thumb_path = db.Column(db.String(250))
     postage_date = db.Column(db.DateTime)

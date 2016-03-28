@@ -2,7 +2,7 @@ CREATE TABLE news_publication(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     title varchar (400) NULL,
     subject varchar (100) NULL,
-    text_content text NULL,
+    text_content longtext NULL,
     image_path varchar (250) NULL,
     thumb_path varchar (250) NULL,
     postage_date datetime NULL,
