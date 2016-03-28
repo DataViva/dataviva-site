@@ -12,7 +12,7 @@
                     <th>Call ID<i class="fa fa-fw fa-sort"></i></th>
                     <th>Title<i class="fa fa-fw fa-sort"></i></th>
                     <th>Link<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Active <input name="select-all" value="1" id="select-all" type="checkbox"/></th>
+                    <th>Active </th>
                 </tr>
             </thead>
         </table>
@@ -65,6 +65,14 @@
         });
     };
 
+    Call.prototype.singleCheckbox = function() {
+        // Single Checkbox 
+        $('#approvalTable tbody').on('click', '.body-checkbox', function () {
+            var call = {};
+            call[this.firstElementChild.value] = this.firstElementChild.checked;
+            sendChecks(call);
+        });
+    };
     Call.prototype.controlCheckbox = function(approvalTable){ 
         //Checkbox control
         $('#select-all').on('click', function(){
@@ -83,18 +91,16 @@
 
     var call = new Call();
     call.controlCheckbox(approvalTable);
+    call.singleCheckbox()
 
 
     //Verify Checks
-    function verifyChecks(){
-        var callsApproval = {};
-        $('input[name="checkboxApproval"]').each(function() {
-            callsApproval[this.value] = this.checked;
-        });
+    function sendChecks(call){
+        var lang = $('html').attr('lang');
         $.ajax({
           method: "POST",
-          url: "/en/partners/approval",
-          data: callsApproval,
+          url: "/"+lang+"/partners/approval",
+          data: call,
           success: function (msg) {
                 $.notify({
                     message: msg,
