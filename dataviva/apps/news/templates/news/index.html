@@ -1,5 +1,9 @@
 {% extends "news/_base.html" %}
 
+{% block breadcrumb %}
+    <li class="active">Notícias</li>
+{% endblock %}
+
 {% block news_content %}
     <div class="publication-list">
         {% for publication in publications %}
