@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ g.locale }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,6 +23,7 @@
     <link href="/static/css/plugins/cropper/cropper.min.css" rel="stylesheet">
     <link href="/static/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="/static/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/plugins/summernote/summernote.css" rel="stylesheet">
 
     <!-- Dataviva custom styles -->
     <link href="/static/css/main.css" rel="stylesheet">
@@ -60,6 +61,10 @@
     <script src="/static/js/plugins/jquery.stellar.js"></script>
     <script src="/static/js/plugins/jquery.counterup.min.js"></script>
     <script src="/static/js/plugins/jquery.jcarousel.js"></script>
+    <script src="/static/js/plugins/summernote/summernote.js"></script>
+    {% if g.locale == 'pt' %}
+        <script src="/static/js/plugins/summernote/summernote-pt-BR.js"></script>
+    {% endif %}
 
     <script src="/static/js/libs/angular.min.js"></script>
     <script src="/static/js/dataviva-ng/init.js"></script>
