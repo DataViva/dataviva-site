@@ -37,7 +37,7 @@ def index():
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
     post = Post.query.filter_by(id=id).first_or_404()
-    posts = Post.query.filter(Post.id != id).all()
+    posts = Post.query.filter(Post.id != id, Post.active == 1).all()
     if len(posts) > 3:
         read_more_posts = [posts.pop(randrange(len(posts))) for _ in range(3)]
     else:
