@@ -147,4 +147,10 @@ def index(product_id):
             header['import_value_ranking'] = ranking + 1
             break
 
-    return render_template('product/index.html', header=header, body=body, product=product, location=location)
+    translation_names = {
+        gettext("General"),
+        gettext("International Trade"),
+        gettext("Economic Opportunities"),
+    }
+
+    return render_template('product/index.html', header=header, body=body, product=product, location=location, translation_names=translation_names)

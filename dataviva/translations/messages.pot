@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-23 15:02-0300\n"
+"POT-Creation-Date: 2016-03-28 13:13-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -235,166 +235,82 @@ msgstr ""
 msgid "Wages and Employment"
 msgstr ""
 
-#: dataviva/apps/data/views.py:81 dataviva/apps/embed/views.py:561
+#: dataviva/apps/data/views.py:81 dataviva/apps/product/views.py:152
+#: dataviva/apps/product/templates/product/index.html:57
 msgid "International Trade"
 msgstr ""
 
-#: dataviva/apps/data/views.py:82 dataviva/apps/embed/views.py:565
-#: dataviva/templates/about.html:38 dataviva/translations/dictionary.py:293
+#: dataviva/apps/data/views.py:82 dataviva/templates/about.html:38
+#: dataviva/translations/dictionary.py:293
 msgid "Higher Education"
 msgstr ""
 
-#: dataviva/apps/data/views.py:83 dataviva/apps/embed/views.py:566
-#: dataviva/templates/about.html:34 dataviva/translations/dictionary.py:307
+#: dataviva/apps/data/views.py:83 dataviva/templates/about.html:34
+#: dataviva/translations/dictionary.py:307
 msgid "School Census"
 msgstr ""
 
-#: dataviva/apps/embed/views.py:112
-msgid ""
-"A visualization using the height of bars to show the number of jobs in a "
-"specific wage bracket."
-msgstr ""
-
-#: dataviva/apps/embed/views.py:114 dataviva/templates/about.html:134
-#: dataviva/templates/site.html:82 dataviva/templates/about/apps/bar.html:1
-msgid "Bar Chart"
-msgstr ""
-
-#: dataviva/apps/embed/views.py:123
-msgid ""
-"A visualization using the area of rectangles to show shares of the "
-"specified value. The data is nested heirarchically by its given "
-"classificaiton."
-msgstr ""
-
-#: dataviva/apps/embed/views.py:125 dataviva/templates/about.html:94
-#: dataviva/templates/site.html:72
-#: dataviva/templates/about/apps/tree_map.html:1
-#: dataviva/translations/dictionary.py:16
-msgid "Tree Map"
-msgstr ""
-
-#: dataviva/apps/embed/views.py:134
-msgid ""
-"Similar to to a line chart, stacked area charts use an X and Y axis to "
-"show values across time. The data is nested heirarchically by its given "
-"classificaiton."
-msgstr ""
-
-#: dataviva/apps/embed/views.py:136 dataviva/templates/about.html:98
-#: dataviva/templates/site.html:73 dataviva/templates/about/apps/stacked.html:1
-#: dataviva/translations/dictionary.py:15
-msgid "Stacked"
-msgstr ""
-
-#: dataviva/apps/embed/views.py:145
-msgid ""
-"Data values overlayed on a geographic map varying their color by the "
-"value they represent."
-msgstr ""
-
-#: dataviva/apps/embed/views.py:147 dataviva/templates/about.html:102
-#: dataviva/templates/site.html:74 dataviva/templates/about/apps/geo_map.html:1
-#: dataviva/translations/dictionary.py:11
-msgid "Geo Map"
-msgstr ""
-
-#: dataviva/apps/embed/views.py:155
-msgid ""
-"A visualization showing the connections between a specified dataset. The "
-"specified attributes are then overlayed on this network to show their "
-"position in this fictional space."
-msgstr ""
-
-#: dataviva/apps/embed/views.py:157 dataviva/templates/about.html:106
-#: dataviva/templates/site.html:75 dataviva/templates/about/apps/network.html:1
-#: dataviva/translations/dictionary.py:12
-msgid "Network"
-msgstr ""
-
-#: dataviva/apps/embed/views.py:165
-msgid "A type of chart which displays data as a time series with an X and Y axis."
-msgstr ""
-
-#: dataviva/apps/embed/views.py:167
-msgid "Line Chart"
-msgstr ""
-
-#: dataviva/apps/embed/views.py:178
-msgid ""
-"A visualization showing a network centered on a single node. The depth of"
-" nodes shown is computed by their distance from the root."
-msgstr ""
-
-#: dataviva/apps/embed/views.py:180 dataviva/templates/about.html:110
-#: dataviva/templates/site.html:77 dataviva/templates/about/apps/rings.html:1
-#: dataviva/translations/dictionary.py:13
-msgid "Rings"
-msgstr ""
-
-#: dataviva/apps/embed/views.py:188
-msgid "A visualization showing two variables plotted along an X and Y axis."
-msgstr ""
-
-#: dataviva/apps/embed/views.py:190 dataviva/templates/about.html:114
-#: dataviva/templates/site.html:78 dataviva/templates/about/apps/scatter.html:1
-#: dataviva/translations/dictionary.py:14
-msgid "Scatter"
-msgstr ""
-
-#: dataviva/apps/embed/views.py:198
-msgid ""
-"Similar to the scatter visualization except this form of a scatter shows "
-"the same variable along both axes varrying the location for comparison "
-"purposes."
-msgstr ""
-
-#: dataviva/apps/embed/views.py:200 dataviva/templates/about.html:118
-#: dataviva/templates/site.html:79 dataviva/templates/about/apps/compare.html:1
-#: dataviva/translations/dictionary.py:9
-msgid "Compare"
-msgstr ""
-
-#: dataviva/apps/embed/views.py:209
-msgid ""
-"A visualization showing the main occupations employed in various "
-"industries, their importance to that industry and the number of employees"
-" who work in these activities."
-msgstr ""
-
-#: dataviva/apps/embed/views.py:211 dataviva/templates/about.html:122
-#: dataviva/templates/site.html:80
-#: dataviva/templates/about/apps/occugrid.html:1
-#: dataviva/translations/dictionary.py:10
-msgid "Occugrid"
-msgstr ""
-
-#: dataviva/apps/embed/views.py:219
-msgid ""
-"A visualization, also known as box and whisker diagram, used to display "
-"the distribution of data based on the five number summary: minimum, first"
-" quartile, median, third quartile, and maximum."
-msgstr ""
-
-#: dataviva/apps/embed/views.py:221 dataviva/templates/about.html:130
-#: dataviva/templates/site.html:81 dataviva/templates/about/apps/box.html:1
-msgid "Box Plot"
-msgstr ""
-
-#: dataviva/apps/embed/views.py:350
+#: dataviva/apps/embed/views.py:220
 msgid "You need to be logged in to star visualizations."
 msgstr ""
 
-#: dataviva/apps/embed/views.py:562
-msgid "Employment"
+#: dataviva/apps/embed/templates/embed/embed.html:6
+#: dataviva/apps/embed/templates/embed/embed.html:2931
+msgid ""
+"DataViva is opening up data for the entire formal sector of the Brazilian"
+" economy"
 msgstr ""
 
-#: dataviva/apps/embed/views.py:563
-msgid "Wages"
+#: dataviva/apps/embed/templates/embed/embed.html:6
+#: dataviva/apps/embed/templates/embed/embed.html:2933
+msgid "through more than 100 million interactive visualizations."
 msgstr ""
 
-#: dataviva/apps/embed/views.py:564
-msgid "Domestic Trade"
+#: dataviva/apps/embed/templates/embed/embed.html:58
+msgid "Refresh the Visualization"
+msgstr ""
+
+#: dataviva/apps/embed/templates/embed/embed.html:59
+msgid "Download this Visualization"
+msgstr ""
+
+#: dataviva/apps/embed/templates/embed/embed.html:60
+msgid "Save this Visualization"
+msgstr ""
+
+#: dataviva/apps/embed/templates/embed/embed.html:61
+msgid "Share/Embed"
+msgstr ""
+
+#: dataviva/apps/embed/templates/embed/embed.html:62
+msgid "Show Visualization Tutorial"
+msgstr ""
+
+#: dataviva/apps/embed/templates/embed/embed.html:64
+msgid "Show/Hide Controls"
+msgstr ""
+
+#: dataviva/apps/embed/templates/embed/info.html:4
+msgid "Visualizations"
+msgstr ""
+
+#: dataviva/apps/embed/templates/embed/info.html:28
+msgid "Previous"
+msgstr ""
+
+#: dataviva/apps/embed/templates/embed/info.html:29
+#: dataviva/templates/profiles/profile.html:299
+msgid "Next"
+msgstr ""
+
+#: dataviva/apps/product/views.py:151
+#: dataviva/apps/product/templates/product/index.html:48
+msgid "General"
+msgstr ""
+
+#: dataviva/apps/product/views.py:153
+#: dataviva/apps/product/templates/product/index.html:67
+msgid "Economic Opportunities"
 msgstr ""
 
 #: dataviva/templates/about.html:16 dataviva/templates/about/ask/ask.html:4
@@ -463,9 +379,67 @@ msgstr ""
 msgid "About the Visualizations"
 msgstr ""
 
+#: dataviva/templates/about.html:94 dataviva/templates/site.html:72
+#: dataviva/templates/about/apps/tree_map.html:1
+#: dataviva/translations/dictionary.py:16
+msgid "Tree Map"
+msgstr ""
+
+#: dataviva/templates/about.html:98 dataviva/templates/site.html:73
+#: dataviva/templates/about/apps/stacked.html:1
+#: dataviva/translations/dictionary.py:15
+msgid "Stacked"
+msgstr ""
+
+#: dataviva/templates/about.html:102 dataviva/templates/site.html:74
+#: dataviva/templates/about/apps/geo_map.html:1
+#: dataviva/translations/dictionary.py:11
+msgid "Geo Map"
+msgstr ""
+
+#: dataviva/templates/about.html:106 dataviva/templates/site.html:75
+#: dataviva/templates/about/apps/network.html:1
+#: dataviva/translations/dictionary.py:12
+msgid "Network"
+msgstr ""
+
+#: dataviva/templates/about.html:110 dataviva/templates/site.html:77
+#: dataviva/templates/about/apps/rings.html:1
+#: dataviva/translations/dictionary.py:13
+msgid "Rings"
+msgstr ""
+
+#: dataviva/templates/about.html:114 dataviva/templates/site.html:78
+#: dataviva/templates/about/apps/scatter.html:1
+#: dataviva/translations/dictionary.py:14
+msgid "Scatter"
+msgstr ""
+
+#: dataviva/templates/about.html:118 dataviva/templates/site.html:79
+#: dataviva/templates/about/apps/compare.html:1
+#: dataviva/translations/dictionary.py:9
+msgid "Compare"
+msgstr ""
+
+#: dataviva/templates/about.html:122 dataviva/templates/site.html:80
+#: dataviva/templates/about/apps/occugrid.html:1
+#: dataviva/translations/dictionary.py:10
+msgid "Occugrid"
+msgstr ""
+
 #: dataviva/templates/about.html:126 dataviva/templates/site.html:76
 #: dataviva/templates/about/apps/line.html:1
 msgid "Line"
+msgstr ""
+
+#: dataviva/templates/about.html:130 dataviva/templates/site.html:81
+#: dataviva/templates/about/apps/box.html:1
+msgid "Box Plot"
+msgstr ""
+
+#: dataviva/templates/about.html:134 dataviva/templates/site.html:82
+#: dataviva/templates/about/apps/bar.html:1
+msgid "Bar Chart"
 msgstr ""
 
 #: dataviva/templates/about.html:140
@@ -1158,7 +1132,6 @@ msgid "Ex. Where does the data come from?"
 msgstr ""
 
 #: dataviva/templates/about/ask/ask.html:39
-#: dataviva/templates/apps/builder.html:134
 msgid "Visualization"
 msgstr ""
 
@@ -1786,73 +1759,6 @@ msgstr ""
 
 #: dataviva/templates/admin/mail/ask_feedback.html:16
 msgid "The DataViva Team"
-msgstr ""
-
-#: dataviva/templates/apps/builder.html:127
-msgid "Advanced Visualization Builder"
-msgstr ""
-
-#: dataviva/templates/apps/builder.html:160
-msgid "Build visualization"
-msgstr ""
-
-#: dataviva/templates/apps/builder.html:163 dataviva/templates/apps/info.html:4
-msgid "Visualizations"
-msgstr ""
-
-#: dataviva/templates/apps/embed.html:6 dataviva/templates/apps/embed.html:2931
-msgid ""
-"DataViva is opening up data for the entire formal sector of the Brazilian"
-" economy"
-msgstr ""
-
-#: dataviva/templates/apps/embed.html:6 dataviva/templates/apps/embed.html:2933
-msgid "through more than 100 million interactive visualizations."
-msgstr ""
-
-#: dataviva/templates/apps/embed.html:58
-msgid "Refresh the Visualization"
-msgstr ""
-
-#: dataviva/templates/apps/embed.html:59
-msgid "Download this Visualization"
-msgstr ""
-
-#: dataviva/templates/apps/embed.html:60
-msgid "Save this Visualization"
-msgstr ""
-
-#: dataviva/templates/apps/embed.html:61
-msgid "Share/Embed"
-msgstr ""
-
-#: dataviva/templates/apps/embed.html:62
-msgid "Show Visualization Tutorial"
-msgstr ""
-
-#: dataviva/templates/apps/embed.html:64
-msgid "Show/Hide Controls"
-msgstr ""
-
-#: dataviva/templates/apps/index.html:3
-msgid "Advanced Builder"
-msgstr ""
-
-#: dataviva/templates/apps/index.html:83
-msgid "Which visualization would you like to build?"
-msgstr ""
-
-#: dataviva/templates/apps/index.html:92
-msgid "Here are some commonly built examples:"
-msgstr ""
-
-#: dataviva/templates/apps/info.html:28
-msgid "Previous"
-msgstr ""
-
-#: dataviva/templates/apps/info.html:29
-#: dataviva/templates/profiles/profile.html:299
-msgid "Next"
 msgstr ""
 
 #: dataviva/templates/data/index.html:3

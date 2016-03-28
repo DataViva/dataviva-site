@@ -45,7 +45,7 @@
                        role="tab"
                        data-product="{{ product.id }}"
                        data-location="{{ location.id }}"
-                       data-toggle="tab">Geral</a>
+                       data-toggle="tab">{%trans%}General{%endtrans%}</a>
                 </li>
                 <li role="presentation">
                     <a href="#trade-partner"
@@ -54,7 +54,7 @@
                        graph
                        data-product="{{ product.id }}"
                        data-location="{{ location.id }}"
-                       data-toggle="tab">Comércio Internacional</a>
+                       data-toggle="tab">{%trans%}International Trade{%endtrans%}</a>
                 </li>
                 {% if (product.id|length) == 6 %}
                 <li role="presentation">
@@ -64,7 +64,7 @@
                        graph
                        data-product="{{ product.id }}"
                        data-location="{{ location.id }}"
-                       data-toggle="tab">Oportunidade Econômica</a>
+                       data-toggle="tab">{%trans%}Economic Opportunities{%endtrans%}</a>
                 </li>
                 {% endif %}
             </ul>
