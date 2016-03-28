@@ -56,7 +56,7 @@
     <div class="form-group">
         <label class="control-label col-md-2 col-lg-1" for="subject">Imagem reduzida</label>
         <div class="col-md-3 col-lg-3 thumb">
-            <img id="thumb-img" src="{{ form.thumb.data|default('http://placehold.it/350x227?text=Insira+uma+imagem')}}">
+            <img id="thumb-img" src="{{ form.thumb.data if form.thumb.data else 'http://placehold.it/350x227?text=Insira+uma+imagem'}}">
             {{ form.thumb }}
             <label title="Upload image file" for="thumb-input" class="btn btn-primary m-t-sm">
                 <input type="file" accept="image/*" name="file" id="thumb-input" class="hide">
