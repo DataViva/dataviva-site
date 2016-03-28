@@ -25,6 +25,12 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+@mod.route('/<university_id>/graphs/<tab>', methods=['POST'])
+def graphs(university_id, tab):
+    university = UniversityModel.query.filter_by(id=university_id).first_or_404()
+    return render_template('university/graphs-'+tab+'.html', university=university)
+
+
 @mod.route('/<university_id>')
 def index(university_id):
 
