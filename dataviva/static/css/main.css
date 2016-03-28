@@ -712,3 +712,17 @@ footer .form-control:focus,
 .panel-default > .panel-heading {
     border-color: #E7EAEC;
 }
+
+
+/* Image cropper style */
+.img-container,
+.img-preview {
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+}
+.img-preview-sm {
+  height: 227px;
+  width: 350px;
+}
+
