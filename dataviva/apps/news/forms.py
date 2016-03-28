@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask_wtf import Form
-from wtforms import TextField, HiddenField, validators, ValidationError
-from flask_wtf.file import FileField, FileAllowed, FileRequired
-
-IMAGES = ('png', 'jpeg', 'jpg')
+from wtforms import TextAreaField, TextField, HiddenField, validators, ValidationError
 
 
 class NumberOfWords(object):
@@ -22,27 +19,29 @@ class NumberOfWords(object):
 class RegistrationForm(Form):
     title = TextField('title', validators=[
         validators.Required(
-            u"Por favor, insira o título do post."), validators.Length(max=400)
+            u"Por favor, insira o título da notícia."), validators.Length(max=400)
     ])
 
     authors = TextField('authors', validators=[
         validators.Required(
-            u"Por favor, insira o(s) autor(es) do post."), validators.Length(max=100)
+            u"Por favor, insira o(s) autor(es) da notícia."), validators.Length(max=100)
     ])
 
     subject = TextField('subject', validators=[
-        validators.Required(u"Por favor, insira a categoria do post.")
+        validators.Required(u"Por favor, insira a categoria da notícia.")
+    ])
+
+    text_call = TextAreaField('subject', validators=[
+        validators.Required(u"Por favor, insira uma chamada para a notícia."),
+        NumberOfWords(max=500)
     ])
 
     text_content = HiddenField('text_content', validators=[
-        validators.Required(u"Por favor, insira o texto do post.")
+        validators.Required(u"Por favor, insira o conteúdo da notícia.")
     ])
 
-    image = FileField('featured-image', validators=[
-        FileAllowed(IMAGES, 'Images only!')
-    ])
+    image = HiddenField('image')
 
-    thumb = FileField('thumb-image', validators=[
-        FileRequired(u"Por favor, insira o thumb do post."),
-        FileAllowed(IMAGES, 'Images only!')
+    thumb = HiddenField('thumb', validators=[
+        validators.Required(u"Por favor, insira uma imagem reduzida.")
     ])
