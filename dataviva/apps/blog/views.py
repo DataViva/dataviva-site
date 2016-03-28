@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash
+from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash, jsonify, request
 from dataviva.apps.general.views import get_locale
 
 from models import Post, AuthorBlog
@@ -11,6 +11,11 @@ from random import randrange
 mod = Blueprint('blog', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/blog')
+
+
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
 
 
 @mod.url_value_preprocessor
@@ -25,14 +30,14 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    posts = Post.query.all()
+    posts = Post.query.filter_by(active=True).all()
     return render_template('blog/index.html', posts=posts)
 
 
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
     post = Post.query.filter_by(id=id).first_or_404()
-    posts = Post.query.filter(Post.id != id).all()
+    posts = Post.query.filter(Post.id != id, Post.active == 1).all()
     if len(posts) > 3:
         read_more_posts = [posts.pop(randrange(len(posts))) for _ in range(3)]
     else:
@@ -54,8 +59,8 @@ def edit(id):
     form.authors.data = post.authors_str()
     form.subject.data = post.subject
     form.text_content.data = post.text_content
-    form.image_path.data = post.image_path
-    form.thumb_path.data = post.thumb_path
+    form.text_call.data = post.text_call
+    form.thumb.data = post.thumb
     return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
 
 
@@ -69,9 +74,10 @@ def create():
         post.title = form.title.data
         post.subject = form.subject.data
         post.text_content = form.text_content.data
-        post.image_path = 'http://agenciatarrafa.com.br/2015/wp-content/uploads/2015/09/google-ads-1000x300.jpg'
-        post.thumb_path = 'http://1un1ba2fg8v82k48vu4by3q7.wpengine.netdna-cdn.com/wp-content/uploads/2014/05/Mobile-Analytics-Picture-e1399568637490-350x227.jpg'
+        post.text_call = form.text_call.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        post.thumb = form.thumb.data
+        post.active = 0
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
@@ -96,9 +102,8 @@ def update(id):
         post.title = form.title.data
         post.subject = form.subject.data
         post.text_content = form.text_content.data
-        post.image_path = 'http://agenciatarrafa.com.br/2015/wp-content/uploads/2015/09/google-ads-1000x300.jpg'
-        post.thumb_path = 'http://1un1ba2fg8v82k48vu4by3q7.wpengine.netdna-cdn.com/wp-content/uploads/2014/05/Mobile-Analytics-Picture-e1399568637490-350x227.jpg'
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        post.thumb = form.thumb.data
         post.authors = []
 
         author_input_list = form.authors.data.split(',')
@@ -123,3 +128,28 @@ def delete(id):
         return redirect(url_for('blog.index'))
     else:
         return make_response(render_template('not_found.html'), 404)
+
+
+@mod.route('/approval', methods=['GET'])
+def approval():
+    posts = Post.query.all()
+    return render_template('blog/approval.html', posts=posts)
+
+
+@mod.route('/approval', methods=['POST'])
+def approval_update():
+    for id, active in request.form.iteritems():
+        post = Post.query.filter_by(id=id).first_or_404()
+        post.active = active == u'true'
+        db.session.commit()
+    message = u"Post(s) atualizados com sucesso!"
+    return message
+
+
+@mod.route('/all', methods=['GET'])
+def all():
+    result = Post.query.all()
+    posts = []
+    for row in result:
+        posts += [(row.id, row.title, row.authors_str(), row.postage_date.strftime('%d/%m/%Y'), row.active)]
+    return jsonify(posts=posts)
