@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Saldo da Balança Comercial</h2>
+                        <h2 class="text-left text-uppercase">{%trans%}Trade Balance{%endtrans%}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.trade_balance | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.trade_balance | magnitude }}</small>
@@ -13,7 +13,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Valor Total Exportado</h2>
+                        <h2 class="text-left text-uppercase">{%trans%}Total Value Exported{%endtrans%}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.export_value | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.export_value | magnitude }}</small>
@@ -22,7 +22,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Relação Peso Líquido/Valor Total Exportado</h2>
+                        <h2 class="text-left text-uppercase">{%trans%}Ratio Net Weight / Total Value Exported{%endtrans%}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.export_net_weight | max_digits(3) }}</strong><br/>
                             <small class="magnitude">kg / USD</small>
@@ -31,7 +31,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Valor Total Importado</h2>
+                        <h2 class="text-left text-uppercase">{%trans%}Total Value Imported{%endtrans%}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.import_value | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.import_value | magnitude }}</small>
@@ -40,7 +40,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Relação Peso Líquido/Valor Total Importado</h2>
+                        <h2 class="text-left text-uppercase">{%trans%}Ratio Net Weight / Total Value Imported{%endtrans%}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.import_net_weight | max_digits(3) }}</strong><br/>
                             <small class="magnitude">kg / USD</small>
@@ -50,7 +50,7 @@
                 {% if (product.id|length) == 6 %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Índice de Complexidade do Produto</h2>
+                        <h2 class="text-left text-uppercase">{%trans%}Product Complexity{%endtrans%}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.pci | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.pci | magnitude }}</small>
@@ -60,7 +60,7 @@
                     {% if location %}
                     <li>
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">RCA internacional</h2>
+                            <h2 class="text-left text-uppercase">{%trans%}International RCA{%endtrans%}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.rca_wld | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.rca_wld | magnitude }}</small>
@@ -69,7 +69,7 @@
                     </li>
                     <li>
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">Distância internacional</h2>
+                            <h2 class="text-left text-uppercase">{%trans%}International Distance{%endtrans%}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.distance_wld | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.distance_wld | magnitude }}</small>
@@ -78,7 +78,7 @@
                     </li>
                     <li>
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">Ganho de Oportunidade internacional</h2>
+                            <h2 class="text-left text-uppercase">{%trans%}International Opportunity Gain{%endtrans%}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.opportunity_gain_wld | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.opportunity_gain_wld | magnitude }}</small>
@@ -95,37 +95,36 @@
     </div>
 
     <div class="m-t-sm col-xs-12 year">
-        Ano: {{ header.year }}
+        {%trans%}Year{%endtrans%}: {{ header.year }}
     </div>
 
     <h2 class="m-t-xl">Perfil Geral</h2>
     {% if not location %}
         {% if (product.id|length) == 6 %}
-            O produto {{ product.name() }} ocupa a {{ header.export_value_ranking }}&ordm posição em importações e a {{ header.import_value_ranking }}&ordm posição em exportações no Brasil. Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos. O município no Brasil que mais exporta {{ product.article() }} {{ product.name() }} é {{ body.municipality_name_export }} e o que mais importa é {{ body.municipality_name_import }}.
+            {%trans%}The product {%endtrans%}{{ product.name() }} {%trans%}occupy the{%endtrans%} {{ header.export_value_ranking }}&ordm {%trans%}position in imports and the{%endtrans%} {{ header.import_value_ranking }}&ordm {%trans%}position in exports in Brazil. In{%endtrans%} {{ header.year }}, {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} {%trans%}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} {%trans%}is{%endtrans%} {{ body.municipality_name_export }} {%trans%}and that imports more is{%endtrans%} {{ body.municipality_name_import }}.
         {% endif %}
         {% if (product.id|length) == 2 %}
-            <p>{{ product.article() | capitalize }} {{ product.name() }} ocupam a {{ header.import_value_ranking }}&ordm posição em importações e a {{ header.export_value_ranking }}&ordm posição em exportações no Brasil.
-            Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos. O município no Brasil que mais exporta {{ product.article() }} {{ product.name() }} é {{ body.municipality_name_export }} e o que mais importa é {{ body.municipality_name_import }}.</p>
+            <p>{{ product.article() | capitalize }} {{ product.name() }} {%trans%}occupies the{%endtrans%} {{ header.import_value_ranking }}&ordm {%trans%}position in imports and the{%endtrans%} {{ header.export_value_ranking }}&ordm {%trans%}position in exports in Brazil. In{%endtrans%} {{ header.year }}, {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} {%trans%}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} {%trans%}is{%endtrans%} {{ body.municipality_name_export }} {%trans%}and that imports more is{%endtrans%} {{ body.municipality_name_import }}.</p>
         {% endif %}
     {% else %}
         {% if (product.id|length) == 6 %}
-            <p>O produto {{ product.name() }} ocupa a {{ header.export_value_ranking }}&ordm posição em importações e a {{ header.import_value_ranking }}&ordm posição em exportações {{ location.preposition('em')}} {{ location.name() }}. Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos. O município {{ location.preposition('de') }} {{ location.name() }} que mais exporta {{ product.article() }} {{ product.name() }} é {{ location.article() }} {{ body.municipality_name_export }} e o que mais importa é {{ location.article() }} {{ body.municipality_name_import }}.</p>
+            <p>{%trans%}The product {%endtrans%} {{ product.name() }} {%trans%}occupy the{%endtrans%} {{ header.export_value_ranking }}&ordm {%trans%}position in imports and the{%endtrans%} {{ header.import_value_ranking }}&ordm {%trans%}position in exports{%endtrans%} {{ location.preposition('em')}} {{ location.name() }}. {%trans%}In{%endtrans%} {{ header.year }}, {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} {%trans%}in trade value, representing a variation of{%endtrans%}  {{ body.export_value_growth_in_five_years | max_digits(3 )}} {%trans%}in five years. The municipality{%endtrans%} {{ location.preposition('de') }} {{ location.name() }} {%trans%}which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} {%trans%}is{%endtrans%} {{ location.article() }} {{ body.municipality_name_export }} {%trans%}and that imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
         {% endif %}
         {% if (product.id|length) == 2 %}
-            <p>{{ product.article() | capitalize }} {{ product.name() }} ocupam a {{ header.import_value_ranking }}&ordm posição em importações e a {{ header.export_value_ranking }}&ordm posição em exportações na região. Em {{ header.year }}, rendeu R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} em valor de comércio, representando variação de {{ body.export_value_growth_in_five_years | max_digits(3 )}} em cinco anos. O município {{ location.preposition('de') }} {{ location.name() }} que mais exporta {{ product.article() }} {{ product.name() }} é {{ location.article() }} {{ body.municipality_name_export }} e o que mais importa é {{ location.article() }} {{ body.municipality_name_import }}.</p>
+            <p>{{ product.article() | capitalize }} {{ product.name() }} {%trans%}occupies the{%endtrans%} {{ header.import_value_ranking }}&ordm {%trans%}position in imports and the{%endtrans%} {{ header.export_value_ranking }}&ordm {%trans%}position in exports{%endtrans%} {%trans%}in this location{%endtrans%}. {%trans%}In{%endtrans%} {{ header.year }}, {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} {%trans%}in five years. The municipality{%endtrans%} {{ location.preposition('de') }} {{ location.name() }} {%trans%}which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} {%trans%}is{%endtrans%} {{ location.article() }} {{ body.municipality_name_export }} {%trans%}and that imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
         {% endif %}
     {% endif %}
 
     <div class="row">
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>Comércio Internacional</h3>
+            <h3>{%trans%}International Trade{%endtrans%}</h3>
             <div class="table-responsive">
                 <table class="table">
                     <tbody>
                         {% if (location.id|length) != 9 %}
                         <tr>
                             <th>
-                                Principal Município por valor total exportado
+                                {%trans%}Main municipality by total value exported{%endtrans%}
                             </th>
                             <td>
                                 <p class="label">{{ body.municipality_name_import}}</p>
@@ -134,7 +133,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Município por valor total importado
+                                {%trans%}Main municipality by total value imported{%endtrans%}
                             </th>
                             <td>
                                 <p class="label">{{ body.municipality_name_import}}</p>
@@ -144,7 +143,7 @@
                         {% endif %}
                         <tr>
                             <th>
-                                Principal Destino por valor total exportado
+                                {%trans%}Main Destination by total value exported{%endtrans%}
                             </th>
                             <td>
                                 <p class="label">{{ body.destination_name_export }}</p>
@@ -153,7 +152,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Origem por valor total importado
+                                {%trans%}Main Origin by total value exported{%endtrans%}
                             </th>
                             <td>
                                 <p class="label">{{ body.origin_name_import }}</p>
@@ -164,7 +163,7 @@
                 </table>
             </div>
             <a href="#trade-partner" aria-controls="trade-partner" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                mais detalhes
+                {%trans%}More details{%endtrans%}
             </a>
         </div>
     </div>
