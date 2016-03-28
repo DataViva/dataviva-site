@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask_wtf import Form
-from wtforms import TextField, TextAreaField, validators, ValidationError
+from wtforms import TextField, HiddenField, validators, ValidationError
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 IMAGES = ('png', 'jpeg', 'jpg')
@@ -34,9 +34,8 @@ class RegistrationForm(Form):
         validators.Required(u"Por favor, insira a categoria do post.")
     ])
 
-    text_content = TextAreaField('text_content', validators=[
-        validators.Required(
-            u"Por favor, insira o texto do post."), NumberOfWords(max=500)
+    text_content = HiddenField('text_content', validators=[
+        validators.Required(u"Por favor, insira o texto do post.")
     ])
 
     image = FileField('featured-image', validators=[
