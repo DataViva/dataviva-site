@@ -1,0 +1,44 @@
+{% macro messages(input) -%}
+    {% for message in input.errors %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+{%- endmacro %}
+
+<form method="post" action="{{ action }}" class="form-dataviva">
+    {{ form.hidden_tag() }}
+    <p>
+        <label for="title">Título</label>
+        {{ form.title(class="form-control")}}
+        {{ messages(form.title) }}
+    </p>
+    <p>
+        <label for="theme">Tema</label>
+        {{ form.theme(class="form-control")}}
+        {{ messages(form.theme) }}
+    </p>
+    <p>
+        <label for="author">Autor</label>
+        {{ form.authors(class="form-control")}}
+        {{ messages(form.authors) }}
+    </p>
+    <p>
+        <label for="keywords">Palavras-Chave</label>
+        {{ form.keywords(class="form-control")}}
+        {{ messages(form.keywords) }}
+    </p>
+    <p>
+        <label for="abstract">Resumo</label>
+        {{ form.abstract(class="form-control", rows=5)}}
+        {{ messages(form.abstract) }}
+    </p>
+    <p>
+        <label for="file">Formato<br />
+            <small>Aceitamos artigos somente em formato PDF.</small>
+        </label>
+        {{ form.article_file}}
+        {{ messages(form.article_file) }}
+    </p>
+    <button type="submit" class="btn btn-default btn-dataviva pull-right">Enviar</button>
+</form>

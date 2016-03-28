@@ -1,3 +1,5 @@
+DELETE FROM crosswalk_pi;
+
 INSERT INTO crosswalk_pi(hs_id, cnae_id) VALUES('010101', 'a01521');
 INSERT INTO crosswalk_pi(hs_id, cnae_id) VALUES('010102', 'a01512');
 INSERT INTO crosswalk_pi(hs_id, cnae_id) VALUES('010102', 'a01521');

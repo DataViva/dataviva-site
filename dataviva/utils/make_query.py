@@ -27,8 +27,8 @@ def parse_years(year_str):
 ''' Returns array of ECIs given location '''
 def location_values(ret,cat):
 
-    from dataviva.secex.models import Ymb
-    from dataviva.rais.models import Yb_rais
+    from dataviva.api.secex.models import Ymb
+    from dataviva.api.rais.models import Yb_rais
 
     bra_id = ret[cat][0]["id"]
     if bra_id != "all":
@@ -41,7 +41,7 @@ def location_values(ret,cat):
 ''' Returns modified query and return variable for data calls '''
 def parse_filter(kwargs,id_type,query,data_table,ret):
 
-    from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu, Course_sc
+    from dataviva.api.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu, Course_sc
 
     query = query.group_by(getattr(data_table, id_type))
     cat = id_type[:-3]
@@ -206,7 +206,7 @@ def compile_query(query):
 def make_query(data_table, url_args, lang, **kwargs):
 
     from dataviva import db
-    from dataviva.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu, Course_sc
+    from dataviva.api.attrs.models import Bra, Cnae, Cbo, Hs, Wld, University, Course_hedu, Course_sc
 
     ops = {">": operator.gt,
            ">=": operator.ge,

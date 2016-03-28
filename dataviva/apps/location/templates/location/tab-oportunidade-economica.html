@@ -1,0 +1,83 @@
+<div role="tabpanel" class="tab-pane" id="oportunidade-economica">
+    <h2>Estatísticas de Oportunidades Econômicas</h2>
+    <div class="row">
+        <div class="col-xs-15 col-sm-15 col-md-12">
+            <div class="table-responsive">
+                <table class="table data-blue">
+                    <thead>
+                        <tr>
+                            <th>
+                                Produto
+                                <small>com Menor Distância</small>
+                            </th>
+                            <th>
+                                Atividade Econômica <small>com Menor Distância</small>
+                            </th>
+                            <th>
+                                Produto <small>com Maior Ganho de Oportunidade</small>
+                            </th>
+                            <th>
+                                Atividade Econômica <small>com Maior Ganho de Oportunidade</small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% if body.less_distance_by_product %}
+                            <td>
+                                <p class="label">{{ body.less_distance_by_product_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong><span>{{ body.less_distance_by_product | magnitude }}</span>
+                                </div>
+                            </td>
+                            {% endif %}
+                            {% if body.less_distance_by_occupation %}
+                            <td>
+                                <p class="label">{{ body.less_distance_by_occupation_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong><span>{{ body.less_distance_by_occupation | magnitude }}</span>
+                                </div>
+                            </td>
+                            {% endif %}
+                            {% if body.opportunity_gain_by_product %}
+                            <td>
+                                <p class="label">{{ body.opportunity_gain_by_product_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3) }}</strong><span>{{ body.opportunity_gain_by_product | magnitude }}</span>
+                                </div>
+                            </td>
+                            {% endif %}
+                            {% if body.opportunity_gain_by_occupation %}
+                            <td>
+                                <p class="label">{{ body.opportunity_gain_by_occupation_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3) }}</strong><span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
+                                </div>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<a href=""
+        target="frame-tab-oportunidade-economica">Expaço de Produtos</a></br>
+
+        <a href="/pt/embed/network/secex/{{header.id}}/all/all/hs/?rca_scope=wld_rca&color=color&spotlight=true&size=export_val"
+        target="frame-tab-oportunidade-economica">&nbsp Rede</a>
+        <a href="/pt/embed/scatter/secex/{{header.id}}/all/all/hs/?rca_scope=wld_rca&color=color&controls=true&depth=hs_2&year=2014&y=pci&x=distance&size=export_val"
+        target="frame-tab-oportunidade-economica">&nbsp Disperçāo</a></br>
+
+<a href=""
+        target="frame-tab-oportunidade-economica">Expaço de Atividades</a></br>
+
+        <a href="/pt/embed/network/rais/{{header.id}}/all/all/cnae/?color=color&size=wage&spotlight=true"
+        target="frame-tab-oportunidade-economica">&nbsp Rede</a>
+        <a href="/pt/embed/scatter/secex/{{header.id}}/all/all/hs/?rca_scope=wld_rca&color=color&controls=true&depth=hs_2&y=opp_gain&x=distance&size=export_val"
+        target="frame-tab-oportunidade-economica">&nbsp Disperçāo</a>
+
+</div>
+
+
+<iframe name="frame-tab-oportunidade-economica" id="frame-tab-oportunidade-economica" width='684' height='350' src='/pt/embed/network/secex/{{header.id}}/all/all/hs/?rca_scope=wld_rca&color=color&spotlight=true&size=export_val' frameborder='0'></iframe>
