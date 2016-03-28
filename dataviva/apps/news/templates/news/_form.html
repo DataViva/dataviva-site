@@ -30,9 +30,18 @@
         </div>
         {{ messages(form.subject) }}
     </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2 col-lg-1" for="text_call">Chamada</label>
+        <div class="col-md-10 col-lg-11">
+            {{ form.text_call(class="form-control", rows=5)}}
+        </div>
+        {{ messages(form.text_call) }}
+    </div>
+
     <div class="form-group">
         <label class="control-label col-md-2 col-lg-1" for="text_content">Conteúdo</label>
-        {{ form.text_content(class="form-control", rows=5)}}
+        {{ form.text_content }}
         <div class="col-md-10 col-lg-11">
             <button id="news-edit" class="btn btn-primary" type="button">Editar</button>
             <button id="news-preview" class="btn btn-primary " type="button">Visualizar</button>
@@ -46,54 +55,29 @@
 
     <div class="form-group">
         <label class="control-label col-md-2 col-lg-1" for="subject">Imagem reduzida</label>
-        <div class="col-md-3 col-lg-3 thumb-image-preview">
-            <img id="thumb-image-preview" src="http://placehold.it/350x227?text=Insira+uma+imagem">
+        <div class="col-md-3 col-lg-3 thumb">
+            <img id="thumb-img" src="http://placehold.it/350x227?text=Insira+uma+imagem">
+            {{ form.thumb }}
             <label title="Upload image file" for="thumb-input" class="btn btn-primary m-t-sm">
                 <input type="file" accept="image/*" name="file" id="thumb-input" class="hide">
                 Nova imagem
             </label>
-        </div>
-        <div class="col-md-8 col-lg-8 thumb-image-crop">
-            <div id="thumb-image-crop">
-                <img src="/static/img/facebook.jpg">
+
+            <div class="crop-controls">
+                <div id="thumb-preview" class="crop-preview"></div>
+                <div class="btn-group m-t-sm">
+                    <button class="btn btn-white" id="thumb-zoomIn" type="button"><i class="fa fa-search-plus"></i></button>
+                    <button class="btn btn-white" id="thumb-zoomOut" type="button"><i class="fa fa-search-minus"></i></button>
+                    <button class="btn btn-white" id="thumb-rotateRight" type="button"><i class="fa fa-undo"></i></button>
+                    <button class="btn btn-white" id="thumb-rotateLeft" type="button"><i class="fa fa-repeat"></i></button>
+                </div>
+                <button id="thumb-save" class="btn btn-primary m-t-sm" type="button">Finalizar edição</button>
             </div>
         </div>
-    </div>
-
-    <button class="btn btn-primary" id="download" type="button">GO</button>
-
-
-            <div class="img-preview img-preview-sm"></div>
-
-
-
-            <div class="btn-group">
-                <button class="btn btn-white" id="zoomIn" type="button"><i class="fa fa-search-plus"></i></button>
-                <button class="btn btn-white" id="zoomOut" type="button"><i class="fa fa-search-minus"></i></button>
-                <button class="btn btn-white" id="rotateRight" type="button"><i class="fa fa-undo"></i></button>
-                <button class="btn btn-white" id="rotateLeft" type="button"><i class="fa fa-repeat"></i></button>
-            </div>
+        <div class="col-md-8 col-lg-8 thumb-crop">
+            <img id="thumb-crop" src="" class="img-responsive">
         </div>
-        {{ messages(form.subject) }}
-    </div>
-
-
-
-    <div class="col-lg-12">
-        <div class="form-group">
-            <label class="control-label col-md-2 col-lg-1" for="featured-image">Imagem em destaque<br />
-                <small>Aceitamos artigos somente em formato PNG.</small>
-            </label>
-            {{ form.image}}
-            {{ messages(form.image) }}
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-2 col-lg-1" for="thumb-image">Imagem reduzida<br />
-                <small>Aceitamos artigos somente em formato PNG.</small>
-            </label>
-            {{ form.thumb}}
-            {{ messages(form.thumb) }}
-        </div>
+        {{ messages(form.thumb) }}
     </div>
 
     <button type="submit" class="btn btn-primary pull-right">Enviar</button>

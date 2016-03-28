@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     $('#text-content-editor').append($('#text_content').val())
     $('#text-content-editor').summernote(summernoteConfig);
 
@@ -13,71 +14,44 @@ $(document).ready(function(){
         $('#text-content-editor').summernote('destroy');
     });
 
-
-
-
 //10x3
-
-    var $image = $("#thumb-image-crop > img")
-    $($image).cropper({
-        aspectRatio: 350/227,
-        preview: ".img-preview",
-        viewMode: 3,
-        done: function(data) {
-            // Output the result data for cropping image.
-        }
-    });
-
-    var $thumbInput = $("#thumb-input");
-    if (window.FileReader) {
-        $thumbInput.change(function() {
-            var fileReader = new FileReader(),
-                    files = this.files,
-                    file;
-
-            if (!files.length) {
-                return;
-            }
-
-            file = files[0];
-
-            if (/^image\/\w+$/.test(file.type)) {
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function () {
-                    $thumbInput.val("");
-                    $image.cropper("reset", true).cropper("replace", this.result);
-                };
-            } else {
-                showMessage("Please choose an image file.");
-            }
+    var inputThumbCallback = function() {
+        $($('#thumb-crop')).cropper({
+            aspectRatio: 350/227,
+            preview: '#thumb-preview',
+            viewMode: 3
         });
-    } else {
-        $thumbInput.addClass("hide");
+
+        $('#thumb-img').hide();
+        $('#thumb-crop').show();
+        $('.thumb .crop-controls').show();
+        $('.thumb label').hide();
     }
 
-    $("#download").click(function() {
-        $("#thumb-image").attr("src",$image.cropper("getDataURL"));
+    cropInput($('#thumb-crop'), $('#thumb-input'), inputThumbCallback)
+
+    $('#thumb-zoomIn').click(function() {
+        $('#thumb-crop').cropper('zoom', 0.1);
     });
-
-    $("#zoomIn").click(function() {
-        $image.cropper("zoom", 0.1);
+    $('#thumb-zoomOut').click(function() {
+        $('#thumb-crop').cropper('zoom', -0.1);
     });
-
-    $("#zoomOut").click(function() {
-        $image.cropper("zoom", -0.1);
+    $('#thumb-rotateLeft').click(function() {
+        $('#thumb-crop').cropper('rotate', 45);
     });
-
-    $("#rotateLeft").click(function() {
-        $image.cropper("rotate", 45);
+    $('#thumb-rotateRight').click(function() {
+        $('#thumb-crop').cropper('rotate', -45);
     });
-
-    $("#rotateRight").click(function() {
-        $image.cropper("rotate", -45);
+    $('#thumb-save').click(function() {
+        var thumbDataURL = $('#thumb-crop').cropper('getDataURL');
+        $('#thumb').val(thumbDataURL);
+        $('#thumb-img').attr('src', thumbDataURL);
+        $('#thumb-crop').cropper('destroy');
+        $('#thumb-crop').attr('src', '');
+        $('#thumb-img').show();
+        $('.thumb label').show();
+        $('.thumb .crop-controls').hide();
     });
-
-
-
-
 
 
 

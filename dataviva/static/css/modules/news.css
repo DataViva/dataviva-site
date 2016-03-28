@@ -116,27 +116,34 @@
 .news .publication-list nav {
     text-align: center;
 }
-
 .news .publication-list nav .pagination {
     font-size: 10px;
     display: inline-block;
 }
 
-.news .thumb-image-preview {
+.news .crop-controls {
+    display: none;
+}
+
+.news .crop-controls .crop-preview {
+    overflow: hidden;
     text-align: center;
 }
 
-.news .thumb-image-preview img {
+
+.news .thumb {
+    text-align: center;
+}
+.news .thumb img {
     width:227px;
     height: auto;
 }
-
-.news .thumb-image-preview label {
+.news .thumb label {
     display: inline-block;
 }
 
-.news .thumb-image-crop {
-
+.news .thumb .crop-preview {
+    width: 262px;
+    height: 170px;
 }
-
 

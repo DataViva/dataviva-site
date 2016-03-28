@@ -24,8 +24,13 @@ if (lang == 'pt') {
     lang = 'en-US';
 }
 
-window.summernoteConfig = {
+var summernoteConfig = {
     lang: lang,
+    fontNames: [
+        'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New',
+        'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande',
+        'Open Sans', 'Tahoma', 'Times New Roman', 'Verdana'
+      ],
     toolbar: [
         ['style', ['style']],
         ['font', ['bold', 'italic', 'underline', 'clear']],
@@ -36,11 +41,6 @@ window.summernoteConfig = {
         ['table', ['table']],
         ['insert', ['link', 'picture', 'video']],
         ['view', ['fullscreen', 'codeview', 'help']]
-      ],
-    fontNames: [
-        'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New',
-        'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande',
-        'Open Sans', 'Tahoma', 'Times New Roman', 'Verdana'
       ],
     placeholder: 'Escreva aqui o conteúdo desta publicação'
 }
@@ -60,4 +60,37 @@ function getParameterByName(name, url) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function cropInput(crop, input, callback) {
+    if (window.FileReader) {
+        input.change(function() {
+            var fileReader = new FileReader(),
+                    files = this.files,
+                    file;
+
+            if (!files.length) {
+                return;
+            }
+
+            file = files[0];
+
+            if (/^image\/\w+$/.test(file.type)) {
+                fileReader.readAsDataURL(file);
+                fileReader.onload = function () {
+                    input.val("");
+                    crop.cropper("reset", true).cropper("replace", this.result);
+                };
+
+            if (callback !== null) {
+                callback();
+            }
+
+            } else {
+                showMessage("Please choose an image file.");
+            }
+        });
+    } else {
+        input.addClass("hide");
+    }
 }
