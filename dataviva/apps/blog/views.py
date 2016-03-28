@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash
+from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash, jsonify, request
 from dataviva.apps.general.views import get_locale
 
 from models import Post, AuthorBlog
@@ -30,7 +30,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    posts = Post.query.all()
+    posts = Post.query.filter_by(active=True).all()
     return render_template('blog/index.html', posts=posts)
 
 
@@ -79,6 +79,7 @@ def create():
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.image = form.image.data
         post.thumb = form.thumb.data
+        post.active = 0
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
@@ -130,3 +131,28 @@ def delete(id):
         return redirect(url_for('blog.index'))
     else:
         return make_response(render_template('not_found.html'), 404)
+
+
+@mod.route('/approval', methods=['GET'])
+def approval():
+    posts = Post.query.all()
+    return render_template('blog/approval.html', posts=posts)
+
+
+@mod.route('/approval', methods=['POST'])
+def approval_update():
+    for id, active in request.form.iteritems():
+        post = Post.query.filter_by(id=id).first_or_404()
+        post.active = active == u'true'
+        db.session.commit()
+    message = u"Post(s) atualizados com sucesso!"
+    return message
+
+
+@mod.route('/all', methods=['GET'])
+def all():
+    result = Post.query.all()
+    posts = []
+    for row in result:
+        posts += [(row.id, row.title, row.authors_str(), row.postage_date.strftime('%d/%m/%Y'), row.active)]
+    return jsonify(posts=posts)
