@@ -7,9 +7,10 @@ class Publication(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(400))
     subject = db.Column(db.String(100))
+    text_call = db.Column(db.String(500))
     text_content = db.Column(db.Text(4194304))
-    image_path = db.Column(db.String(250))
-    thumb_path = db.Column(db.String(250))
+    image = db.Column(db.Text(4194304))
+    thumb = db.Column(db.Text(4194304))
     postage_date = db.Column(db.DateTime)
     authors = db.relationship('AuthorNews', backref='news_publication', lazy='eager')
 

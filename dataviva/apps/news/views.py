@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-import os
 from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash
 from dataviva.apps.general.views import get_locale
 
 from models import Publication, AuthorNews
-from dataviva import db, app
+from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
 from random import randrange
@@ -12,9 +11,6 @@ from random import randrange
 mod = Blueprint('news', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/news')
-
-UPLOAD_FOLDER = os.path.join(app.config['UPLOAD_FOLDER'], mod.name)
-STATIC_UPLOAD_FOLDER = '/static/uploads/' + mod.name
 
 
 @mod.before_request
@@ -64,9 +60,9 @@ def edit(id):
     form.authors.data = publication.authors_str()
     form.subject.data = publication.subject
     form.text_content.data = publication.text_content
-
-    form.image.data = publication.image_path
-    form.thumb.data = publication.thumb_path
+    form.text_call.data = publication.text_call
+    form.image.data = publication.image
+    form.thumb.data = publication.path
 
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
@@ -81,36 +77,21 @@ def create():
         publication.title = form.title.data
         publication.subject = form.subject.data
         publication.text_content = form.text_content.data
+        publication.text_call = form.text_call.data
         publication.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.image = form.image.data
+        publication.thumb = form.thumb.data
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
             publication.authors.append(AuthorNews(author_input))
 
         db.session.add(publication)
-        db.session.flush()
-
-        if form.image.data.filename:
-            import pdb; pdb.set_trace()
-            publication.image_path = save_file(
-                form.image.data, 'image' + str(publication.id))
-
-        if form.thumb.data.filename:
-            publication.thumb_path = save_file(
-                form.thumb.data, 'thumb' + str(publication.id))
-
         db.session.commit()
 
         message = u'Muito obrigado! Seu publication foi submetido com sucesso!'
         flash(message, 'success')
         return redirect(url_for('news.index'))
-
-
-def save_file(file, name):
-    file_ext = os.path.splitext(file.filename)[-1]
-    file_name = name + file_ext
-    file.save(UPLOAD_FOLDER + '/' + file_name)
-    return STATIC_UPLOAD_FOLDER + '/' + file_name
 
 
 @mod.route('/publication/<id>/edit', methods=['POST'])
@@ -124,8 +105,8 @@ def update(id):
         publication.title = form.title.data
         publication.subject = form.subject.data
         publication.text_content = form.text_content.data
-        publication.image_path = 'http://agenciatarrafa.com.br/2015/wp-content/uploads/2015/09/google-ads-1000x300.jpg'
-        publication.thumb_path = 'http://1un1ba2fg8v82k48vu4by3q7.wpengine.netdna-cdn.com/wp-content/uploads/2014/05/Mobile-Analytics-Picture-e1399568637490-350x227.jpg'
+        publication.image = form.image.data
+        publication.thumb = form.thumb.data
         publication.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.authors = []
 
