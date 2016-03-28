@@ -6,41 +6,79 @@
     {% endfor %}
 {%- endmacro %}
 
-<form method="post" action="{{ action }}" class="form-dataviva">
+<form id="blog-form" method="POST" action="{{ action }}" class="form-horizontal" enctype="multipart/form-data">
+
     {{ form.hidden_tag() }}
-    <p>
-        <label for="title">Título</label>
-        {{ form.title(class="form-control")}}
+    <div class="form-group">
+        <label class="control-label col-md-2 col-lg-1" for="title">Título</label>
+        <div class="col-md-10 col-lg-11">
+            {{ form.title(class="form-control")}}
+        </div>
         {{ messages(form.title) }}
-    </p>
-    <p>
-        <label for="authors">Autor</label>
-        {{ form.authors(class="form-control")}}
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2 col-lg-1" for="authors">Autor</label>
+        <div class="col-md-10 col-lg-11">
+            {{ form.authors(class="form-control")}}
+        </div>
         {{ messages(form.authors) }}
-    </p>
-    <p>
-        <label for="subject">Categoria</label>
-        {{ form.subject(class="form-control")}}
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2 col-lg-1" for="subject">Categoria</label>
+        <div class="col-md-10 col-lg-11">
+            {{ form.subject(class="form-control")}}
+        </div>
         {{ messages(form.subject) }}
-    </p>
-    <p>
-        <label for="text_content">Texto</label>
-        {{ form.text_content(class="form-control", rows=5)}}
-        {{ messages(form.text_content) }}
-    </p>
-    <p>
-        <label for="file">Image<br />
-            <small>Aceitamos artigos somente em formato PNG.</small>
-        </label>
-        {{ form.image_path}}
-        {{ messages(form.image_path) }}
-    </p>
-    <p>
-        <label for="file">Thumb<br />
-            <small>Aceitamos artigos somente em formato PNG.</small>
-        </label>
-        {{ form.thumb_path}}
-        {{ messages(form.thumb_path) }}
-    </p>
-    <button type="submit" class="btn btn-default btn-dataviva pull-right">Enviar</button>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2 col-lg-1" for="text_call">Chamada</label>
+        <div class="col-md-10 col-lg-11">
+            {{ form.text_call(class="form-control", rows=5)}}
+        </div>
+        {{ messages(form.text_call) }}
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2 col-lg-1" for="text_content">Conteúdo</label>
+        {{ form.text_content }}
+        <div class="col-md-10 col-lg-11">
+            <button id="blog-edit" class="btn btn-primary" type="button">Editar</button>
+            <button id="blog-preview" class="btn btn-primary" type="button">Visualizar</button>
+            {{ messages(form.text_content) }}
+        </div>
+    </div>
+
+    <div class="col-md-10 col-lg-11 col-md-offset-2 col-lg-offset-1 summernote-wrapper">
+        <div id="text-content-editor" class="summernote"></div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2 col-lg-1" for="subject">Imagem reduzida</label>
+        <div class="col-md-3 col-lg-3 thumb">
+            <img id="thumb-img" src="{{ form.thumb.data|default('http://placehold.it/350x227?text=Insira+uma+imagem')}}">
+            {{ form.thumb }}
+            <label title="Upload image file" for="thumb-input" class="btn btn-primary m-t-sm">
+                <input type="file" accept="image/*" name="file" id="thumb-input" class="hide">
+                Nova Imagem
+            </label>
+
+            <div class="crop-controls">
+                <div id="thumb-preview" class="crop-preview"></div>
+                <div class="btn-group m-t-sm">
+                    <button class="btn btn-white" id="thumb-zoomIn" type="button"><i class="fa fa-search-plus"></i></button>
+                    <button class="btn btn-white" id="thumb-zoomOut" type="button"><i class="fa fa-search-minus"></i></button>
+                    <button class="btn btn-white" id="thumb-rotateRight" type="button"><i class="fa fa-undo"></i></button>
+                    <button class="btn btn-white" id="thumb-rotateLeft" type="button"><i class="fa fa-repeat"></i></button>
+                </div>
+                <button id="thumb-save" class="btn btn-primary m-t-sm" type="button">Finalizar edição</button>
+            </div>
+        </div>
+        <div class="col-md-8 col-lg-8 thumb-crop">
+            <img id="thumb-crop" src="" class="img-responsive">
+        </div>
+        {{ messages(form.thumb) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary pull-right">Enviar</button>
 </form>
