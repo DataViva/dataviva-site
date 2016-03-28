@@ -14,6 +14,7 @@ mod = Blueprint('news', __name__,
                 url_prefix='/<lang_code>/news')
 
 UPLOAD_FOLDER = os.path.join(app.config['UPLOAD_FOLDER'], mod.name)
+STATIC_UPLOAD_FOLDER = '/static/uploads/' + mod.name
 
 
 @mod.before_request
@@ -64,8 +65,8 @@ def edit(id):
     form.subject.data = publication.subject
     form.text_content.data = publication.text_content
 
-    form.image_path.data = publication.image_path
-    form.thumb_path.data = publication.thumb_path
+    form.image.data = publication.image_path
+    form.thumb.data = publication.thumb_path
 
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
@@ -89,22 +90,27 @@ def create():
         db.session.add(publication)
         db.session.flush()
 
-        image_ext = os.path.splitext(form.image.data.filename)[-1]
-        thumb_ext = os.path.splitext(form.thumb.data.filename)[-1]
-        image_name = 'image' + str(publication.id) + image_ext
-        thumb_name = 'thumb' + str(publication.id) + thumb_ext
+        if form.image.data.filename:
+            import pdb; pdb.set_trace()
+            publication.image_path = save_file(
+                form.image.data, 'image' + str(publication.id))
 
-        form.image.data.save(UPLOAD_FOLDER + '/' + image_name)
-        form.thumb.data.save(UPLOAD_FOLDER + '/' + thumb_name)
-
-        publication.image_path = '/static/uploads/news/' + image_name
-        publication.thumb_path = '/static/uploads/news/' + thumb_name
+        if form.thumb.data.filename:
+            publication.thumb_path = save_file(
+                form.thumb.data, 'thumb' + str(publication.id))
 
         db.session.commit()
 
         message = u'Muito obrigado! Seu publication foi submetido com sucesso!'
         flash(message, 'success')
         return redirect(url_for('news.index'))
+
+
+def save_file(file, name):
+    file_ext = os.path.splitext(file.filename)[-1]
+    file_name = name + file_ext
+    file.save(UPLOAD_FOLDER + '/' + file_name)
+    return STATIC_UPLOAD_FOLDER + '/' + file_name
 
 
 @mod.route('/publication/<id>/edit', methods=['POST'])
