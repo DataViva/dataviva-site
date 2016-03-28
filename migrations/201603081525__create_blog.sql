@@ -8,6 +8,7 @@ CREATE TABLE blog_post(
     thumb longtext NULL,
     postage_date datetime NULL,
     release_date datetime NULL,
+    active TINYINT(1) NULL,
     PRIMARY KEY (id)
 );
 
