@@ -6,7 +6,7 @@
     <h2>Chamadas do DataViva</h2>
     <h3>Aprovação de Chamadas</h3>
     <div class="meta">
-        <table id="activateTable" class="table" cellspacing="0" width="100%">
+        <table id="activateTable" class="table table-striped table-borde" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>Call ID<i class="fa fa-fw fa-sort"></i></th>
@@ -20,7 +20,8 @@
 </div>
 
 <a class="btn btn-w-m btn-primary pull-right" href="/calls/call/new" >Nova Chamada </a>
-
+<button class="btn btn-w-m btn-primary pull-right" id="edit">Editar </button>
+<button class="btn btn-w-m btn-primary pull-right" id="delete">Excluir </button>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
@@ -30,6 +31,7 @@
 <script type="text/javascript">
 
     var Call = function() {
+        this.callsSelected = {};
         this.table = $('#activateTable').DataTable( {
             "sAjaxSource": "/calls/all",
             "sAjaxDataProp": "calls",
@@ -45,16 +47,27 @@
                 "className": "body-title",
             },
             {
-                 'targets': 3,
-                 'className': 'body-checkbox',
-                 'render': function (data, type, call, meta){
+                'targets': 3,
+                'className': 'body-checkbox',
+                'render': function (data, type, call, meta){
                     if(data){
                         return '<input type="checkbox" name="checkboxApproval" value="'+call[0]+'" checked>';
                     }else{
                         return '<input type="checkbox" name="checkboxApproval" value="'+call[0]+'">';
                     }
+                }
+            },
+            {
+                "targets": 0,
+                "className": "body-selected",
+                'render': function (data, type, call, meta){
+                    if(data){
+                        return '<input type="checkbox" name="checkboxApproval" value="'+call[0]+'">';    
+                    }else{
+                        return '<input type="checkbox" name="checkboxApproval" value="'+call[0]+'" checked>';
+                    }
                  }
-              }],
+            }],
             "columns": [
                     { "width": "8%" },
                     null,
@@ -75,6 +88,7 @@
             sendChecks(call);
         });
     };
+    
     Call.prototype.controlCheckbox = function(activateTable){ 
         //Checkbox control
         $('#select-all').on('click', function(){
@@ -89,11 +103,21 @@
                 }
             }
         });
+
+        Call.prototype.singleSelectedDelete = function(){
+            $('#activateTable tbody').on('click', '.body-selected',function(){    
+                var call = {};
+                call[this.firstElementChild.value] = this.firstElementChild.checked;
+                saveSelecteds(call);
+            });
+        };
+
     };
 
     var call = new Call();
     call.controlCheckbox(activateTable);
-    call.singleCheckbox()
+    call.singleCheckbox();
+    call.singleSelectedDelete();
 
 
     //Verify Checks
@@ -120,6 +144,11 @@
         })
     }
 
+    //Save Selects
+    function saveSelecteds(call){
+        this.call.callsSelected=call;
+        debugger;
+    }
 
 
 </script>
