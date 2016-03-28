@@ -6,7 +6,7 @@
     <h2>Chamadas do DataViva</h2>
     <h3>Aprovação de Chamadas</h3>
     <div class="meta">
-        <table id="approvalTable" class="table" cellspacing="0" width="100%">
+        <table id="activateTable" class="table" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>Call ID<i class="fa fa-fw fa-sort"></i></th>
@@ -28,7 +28,7 @@
 <script type="text/javascript">
 
     var Call = function() {
-        this.table = $('#approvalTable').DataTable( {
+        this.table = $('#activateTable').DataTable( {
             "sAjaxSource": "/partners/all",
             "sAjaxDataProp": "calls",
             "aoColumnsDefs": [
@@ -67,19 +67,19 @@
 
     Call.prototype.singleCheckbox = function() {
         // Single Checkbox 
-        $('#approvalTable tbody').on('click', '.body-checkbox', function () {
+        $('#activateTable tbody').on('click', '.body-checkbox', function () {
             var call = {};
             call[this.firstElementChild.value] = this.firstElementChild.checked;
             sendChecks(call);
         });
     };
-    Call.prototype.controlCheckbox = function(approvalTable){ 
+    Call.prototype.controlCheckbox = function(activateTable){ 
         //Checkbox control
         $('#select-all').on('click', function(){
            var rows = table.rows({ 'search': 'applied' }).nodes();
            $('input[type="checkbox"]', rows).prop('checked', this.checked);
         });
-        $('#approvalTable tbody').on('change', 'input[type="checkbox"]', function(){
+        $('#activateTable tbody').on('change', 'input[type="checkbox"]', function(){
            if(!this.checked){
               var el = $('#select-all').get(0);
               if(el && el.checked && ('indeterminate' in el)){
@@ -90,7 +90,7 @@
     };
 
     var call = new Call();
-    call.controlCheckbox(approvalTable);
+    call.controlCheckbox(activateTable);
     call.singleCheckbox()
 
 
@@ -99,7 +99,7 @@
         var lang = $('html').attr('lang');
         $.ajax({
           method: "POST",
-          url: "/"+lang+"/partners/approval",
+          url: "/"+lang+"/partners/activate",
           data: call,
           success: function (msg) {
                 $.notify({

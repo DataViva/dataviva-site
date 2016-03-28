@@ -96,14 +96,14 @@ def delete(id):
         return make_response(render_template('not_found.html'), 404) 
        
 
-@mod.route('/call/approval', methods=['GET'])
-def approval():
+@mod.route('/call/activate', methods=['GET'])
+def activate():
     calls = Call.query.all()
-    return render_template('partners/approval.html', calls=calls)
+    return render_template('partners/activate.html', calls=calls)
 
 
-@mod.route('/approval', methods=['POST'])
-def approval_update():
+@mod.route('/activate', methods=['POST'])
+def activate_update():
     for id, active in request.form.iteritems():
         call = Call.query.filter_by(id=id).first_or_404()
         call.active = active == u'true'
