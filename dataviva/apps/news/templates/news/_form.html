@@ -44,6 +44,41 @@
         <div id="text-content-editor" class="summernote"></div>
     </div>
 
+    <div class="form-group">
+        <label class="control-label col-md-2 col-lg-1" for="subject">Imagem reduzida</label>
+        <div class="col-md-3 col-lg-3 thumb-image-preview">
+            <img id="thumb-image-preview" src="http://placehold.it/350x227?text=Insira+uma+imagem">
+            <label title="Upload image file" for="thumb-input" class="btn btn-primary m-t-sm">
+                <input type="file" accept="image/*" name="file" id="thumb-input" class="hide">
+                Nova imagem
+            </label>
+        </div>
+        <div class="col-md-8 col-lg-8 thumb-image-crop">
+            <div id="thumb-image-crop">
+                <img src="/static/img/facebook.jpg">
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" id="download" type="button">GO</button>
+
+
+            <div class="img-preview img-preview-sm"></div>
+
+
+
+            <div class="btn-group">
+                <button class="btn btn-white" id="zoomIn" type="button"><i class="fa fa-search-plus"></i></button>
+                <button class="btn btn-white" id="zoomOut" type="button"><i class="fa fa-search-minus"></i></button>
+                <button class="btn btn-white" id="rotateRight" type="button"><i class="fa fa-undo"></i></button>
+                <button class="btn btn-white" id="rotateLeft" type="button"><i class="fa fa-repeat"></i></button>
+            </div>
+        </div>
+        {{ messages(form.subject) }}
+    </div>
+
+
+
     <div class="col-lg-12">
         <div class="form-group">
             <label class="control-label col-md-2 col-lg-1" for="featured-image">Imagem em destaque<br />

@@ -121,3 +121,22 @@
     font-size: 10px;
     display: inline-block;
 }
+
+.news .thumb-image-preview {
+    text-align: center;
+}
+
+.news .thumb-image-preview img {
+    width:227px;
+    height: auto;
+}
+
+.news .thumb-image-preview label {
+    display: inline-block;
+}
+
+.news .thumb-image-crop {
+
+}
+
+
