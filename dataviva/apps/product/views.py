@@ -6,6 +6,7 @@ from dataviva.api.secex.services import ProductTradePartners as ProductTradePart
 from dataviva.api.secex.services import ProductMunicipalities as ProductMunicipalitiesService
 from dataviva.api.secex.services import ProductLocations as ProductLocationsService
 from dataviva.api.attrs.models import Bra, Hs
+from flask.ext.babel import gettext
 
 mod = Blueprint('product', __name__,
                 template_folder='templates',
