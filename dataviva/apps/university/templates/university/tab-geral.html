@@ -1,30 +1,45 @@
 <div role="tabpanel" class="tab-pane active" id="geral">
     <div class="mod mod-datainfo">
-        <div class="numbers-top smaller">
-            <div class="row">
-                <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Número de Matrículas</p>
-                    <div class="number">
-                        <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><small>{{ header.enrolled | magnitude }}</small>
-                    </div>
-                </div>
-                <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Número de Ingressantes</p>
-                    <div class="number">
-                        <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><small>{{ header.entrants | magnitude }}</small>
-                    </div>
-                </div>
-                <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Número de Concluintes</p>
-                    <div class="number">
-                        <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><small>{{ header.graduates | magnitude }}</small>
-                    </div>
-                </div>
-                <div class="col-xs-15 col-sm-15 year">
-                    Ano: {{ header.year }}
-                </div>
+        <div class="jcarousel-wrapper">
+            <div class="jcarousel">
+                <ul>
+                    <li>
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">Número de Matrículas</h2>
+                            <div class="number">
+                                R$ <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.enrolled | magnitude }}</small>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">Número de Ingressantes</h2>
+                            <div class="number">
+                                R$ <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.entrants | magnitude }}</small>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">Número de Concluintes</h2>
+                            <div class="number">
+                                <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.graduates | magnitude }}</small>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
+            <a href="#" class="fa fa-angle-left jcarousel-control-prev"></a>
+            <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
         </div>
+
+        <div class="m-t-sm col-xs-12 year">
+            Ano: {{ header.year }}
+        </div>
+
         <h2>Perfil Geral</h2>
         <p>A instituição {{ university.name() }} é um estabelecimento de ensino {{ header.type }}, que tem como principal curso {{ body.major_with_more_enrollments }}, com {{ body.highest_enrollment_number_by_major }} estudantes. No total, a instituição possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} estudantes matriculados e {{ header.graduates | max_digits(3) }} {{ header.graduates | magnitude }} concluintes.</p>
         <div class="row">
