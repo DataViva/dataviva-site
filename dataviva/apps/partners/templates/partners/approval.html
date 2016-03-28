@@ -1,0 +1,124 @@
+{% extends "partners/_base.html" %}
+
+{% block partners_content %}
+
+<div class="institucional">
+    <h2>Chamadas do DataViva</h2>
+    <h3>Aprovação de Chamadas</h3>
+    <div class="meta">
+        <table id="approvalTable" class="table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Call ID<i class="fa fa-fw fa-sort"></i></th>
+                    <th>Title<i class="fa fa-fw fa-sort"></i></th>
+                    <th>Link<i class="fa fa-fw fa-sort"></i></th>
+                    <th>Active </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script type="text/javascript">
+
+    var Call = function() {
+        this.table = $('#approvalTable').DataTable( {
+            "sAjaxSource": "/partners/all",
+            "sAjaxDataProp": "calls",
+            "aoColumnsDefs": [
+                { "data": "id" },
+                { "data": "title", "type": "html" },
+                { "data": "link" },
+                { "data": "active" },
+            ],
+            'columnDefs': [
+             {
+                "targets": 1,
+                "className": "body-title",
+            },
+            {
+                 'targets': 3,
+                 'className': 'body-checkbox',
+                 'render': function (data, type, call, meta){
+                    if(data){
+                        return '<input type="checkbox" name="checkboxApproval" value="'+call[0]+'" checked>';
+                    }else{
+                        return '<input type="checkbox" name="checkboxApproval" value="'+call[0]+'">';
+                    }
+                 }
+              }],
+            "columns": [
+                    { "width": "8%" },
+                    null,
+                    null,
+                    { "width": "12%" }
+            ],
+            "paging": false,
+            "bFilter": false,
+            "info": false    
+        });
+    };
+
+    Call.prototype.singleCheckbox = function() {
+        // Single Checkbox 
+        $('#approvalTable tbody').on('click', '.body-checkbox', function () {
+            var call = {};
+            call[this.firstElementChild.value] = this.firstElementChild.checked;
+            sendChecks(call);
+        });
+    };
+    Call.prototype.controlCheckbox = function(approvalTable){ 
+        //Checkbox control
+        $('#select-all').on('click', function(){
+           var rows = table.rows({ 'search': 'applied' }).nodes();
+           $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        });
+        $('#approvalTable tbody').on('change', 'input[type="checkbox"]', function(){
+           if(!this.checked){
+              var el = $('#select-all').get(0);
+              if(el && el.checked && ('indeterminate' in el)){
+                 el.indeterminate = true;
+                }
+            }
+        });
+    };
+
+    var call = new Call();
+    call.controlCheckbox(approvalTable);
+    call.singleCheckbox()
+
+
+    //Verify Checks
+    function sendChecks(call){
+        var lang = $('html').attr('lang');
+        $.ajax({
+          method: "POST",
+          url: "/"+lang+"/partners/approval",
+          data: call,
+          success: function (msg) {
+                $.notify({
+                    message: msg,
+                },{
+                    offset: {
+                            x: window.innerWidth * 18 / 100,
+                            y: window.innerHeight * 25 / 100
+                    },
+                    type: 'success',
+                    z_index: 1031,
+                    delay: 5000,
+                    timer: 1000
+                });
+          }
+        })
+    }
+
+
+
+</script>
+{% endblock partners_content %}

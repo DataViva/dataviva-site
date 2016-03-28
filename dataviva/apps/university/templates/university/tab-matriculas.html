@@ -1,0 +1,66 @@
+<div role="tabpanel" class="tab-pane" id="matriculas">
+    <p>{{ body.profile }}</p>
+    <h2>Estatísticas de Matrículas</h2>
+    <div class="row">
+        <div class="col-xs-15 col-sm-15 col-md-12">
+            <div class="table-responsive">
+                <table class="table data-blue">
+                    <thead>
+                        <tr>
+                            <th>
+                                Principal Curso
+                                <small>por Número de Alunos Matriculados</small>
+                            </th>
+                            <th>
+                                Principal Curso
+                                <small>por Número de Alunos Ingressantes</small>
+                            </th>
+                            <th>
+                                Principal Curso
+                                <small>por Número de Alunos Concluintes</small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p class="label">{{ body.major_with_more_enrollments }}</p>
+                                <div class="number">
+                                    <strong class="counter">{{ body.highest_enrollment_number_by_major | max_digits(3) }}</strong><span>{{ body.highest_enrollment_number_by_major | magnitude }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{ body.major_with_more_entrants}}</p>
+                                <div class="number">
+                                    <strong class="counter">{{ body.highest_entrant_number_by_major | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_major | magnitude }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{ body.major_with_more_graduates }}</p>
+                                <div class="number">
+                                    <strong class="counter">{{ body.highest_graduate_number_by_major | max_digits(3) }}</strong><span>{{ body.highest_graduate_number_by_major | magnitude }}</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <a href="" target="frame-tab-matriculas">Curso</a></br>
+
+        <a href="/pt/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled" target="frame-tab-matriculas">&nbsp TreeMap</a>
+        <a href="/pt/embed/stacked/hedu/all/{{university.id}}/all/course_hedu/?y=enrolled&layout=value&order=color" target="frame-tab-matriculas">&nbsp Evoluçāo</a></br>
+
+    <a href="" target="frame-tab-matriculas">Situaçāo dos Estudantes</a> </br>
+
+        <a href="/pt/embed/line/hedu/all/{{university.id}}/all/type/?y=students&scale=linear" target="frame-tab-matriculas">&nbsp Linhas</a> </br>
+
+    <a href="" target="frame-tab-matriculas">Turno</a> </br>
+
+        <a href="/pt/embed/stacked/hedu/all/{{university.id}}/all/time/?y=students&layout=share&order=color" target="frame-tab-matriculas">&nbsp Evoluçāo</a>
+
+</div>
+
+<iframe name="frame-tab-matriculas" id="frame-tab-matriculas" width='684' height='350' src='/pt/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled' frameborder='0'></iframe>

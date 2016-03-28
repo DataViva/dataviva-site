@@ -1,0 +1,37 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{{ url_for('general.home') }}">Home</a></li>
+        <li class="active"><span>Central de Ajuda</span></li>
+    </ol>
+    <div class="row">
+        <div class="sidebar col-xs-15 col-md-4">
+            <ul class="sub-menu">
+                <li><a href="#geral" aria-controls="geral" role="tab" data-toggle="tab" title="Todos"><strong>Central de Ajuda</strong></a></li>
+                <li><a href="#glossario" aria-controls="glossario" role="tab" data-toggle="tab" title="Glossário"><strong>Glossário</strong></a></li>
+            </ul>
+            <hr />
+            <h5>Tópicos Recentes</h5>
+            <ul class="sub-menu">
+                <li><a href="#" title="Tópico"><strong>Tópico</strong></a></li>
+                <li><a href="#" title="Tópico"><strong>Tópico</strong></a></li>
+                <li><a href="#" title="Tópico"><strong>Tópico</strong></a></li>
+            </ul>
+            <hr />
+            <h5>Assista Vídeo Tutorial</h5>
+            <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/zZr5Tid3Qw4" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="main-content col-xs-15 col-md-11">
+            <div class="tab-content">
+                {% include "tab-geral.html" %}
+                {% include "tab-glossario.html" %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
