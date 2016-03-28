@@ -6,41 +6,60 @@
     {% endfor %}
 {%- endmacro %}
 
-<form method="POST" action="{{ action }}" class="form-dataviva" enctype="multipart/form-data">
+<form id="news-form" method="POST" action="{{ action }}" class="form-horizontal" enctype="multipart/form-data">
+
     {{ form.hidden_tag() }}
-    <p>
-        <label for="title">Título</label>
-        {{ form.title(class="form-control")}}
+    <div class="form-group">
+        <label class="control-label col-md-2 col-lg-1" for="title">Título</label>
+        <div class="col-md-10 col-lg-11">
+            {{ form.title(class="form-control")}}
+        </div>
         {{ messages(form.title) }}
-    </p>
-    <p>
-        <label for="authors">Autor</label>
-        {{ form.authors(class="form-control")}}
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2 col-lg-1" for="authors">Autor</label>
+        <div class="col-md-10 col-lg-11">
+            {{ form.authors(class="form-control")}}
+        </div>
         {{ messages(form.authors) }}
-    </p>
-    <p>
-        <label for="subject">Categoria</label>
-        {{ form.subject(class="form-control")}}
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2 col-lg-1" for="subject">Categoria</label>
+        <div class="col-md-10 col-lg-11">
+            {{ form.subject(class="form-control")}}
+        </div>
         {{ messages(form.subject) }}
-    </p>
-    <p>
-        <label for="text_content">Texto</label>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2 col-lg-1" for="text_content">Conteúdo</label>
         {{ form.text_content(class="form-control", rows=5)}}
-        {{ messages(form.text_content) }}
-    </p>
-    <p>
-        <label for="featured-image">Imagem em destaque<br />
-            <small>Aceitamos artigos somente em formato PNG.</small>
-        </label>
-        {{ form.image}}
-        {{ messages(form.image) }}
-    </p>
-    <p>
-        <label for="thumb-image">Imagem reduzida<br />
-            <small>Aceitamos artigos somente em formato PNG.</small>
-        </label>
-        {{ form.thumb}}
-        {{ messages(form.thumb) }}
-    </p>
+        <div class="col-md-10 col-lg-11">
+            <button id="news-edit" class="btn btn-primary" type="button">Editar</button>
+            <button id="news-preview" class="btn btn-primary " type="button">Visualizar</button>
+            {{ messages(form.text_content) }}
+        </div>
+    </div>
+
+    <div class="col-md-10 col-lg-11 col-md-offset-2 col-lg-offset-1 summernote-wrapper">
+        <div id="text-content-editor" class="summernote"></div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label class="control-label col-md-2 col-lg-1" for="featured-image">Imagem em destaque<br />
+                <small>Aceitamos artigos somente em formato PNG.</small>
+            </label>
+            {{ form.image}}
+            {{ messages(form.image) }}
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2 col-lg-1" for="thumb-image">Imagem reduzida<br />
+                <small>Aceitamos artigos somente em formato PNG.</small>
+            </label>
+            {{ form.thumb}}
+            {{ messages(form.thumb) }}
+        </div>
+    </div>
+
     <button type="submit" class="btn btn-primary pull-right">Enviar</button>
 </form>

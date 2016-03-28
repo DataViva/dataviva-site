@@ -1,5 +1,10 @@
 {% extends "news/_base.html" %}
 
+{% block breadcrumb %}
+    <li><a href="{{ url_for('news.index') }}">Notícias</a></li>
+    <li class="active">Visualizar</li>
+{% endblock %}
+
 {% block news_content %}
 <div class="institucional search">
     <div class="articles">
@@ -22,10 +27,12 @@
                 </li>
             </ul>
             <div class="tit-img">
-                <img src="{{ publication.image_path }}" class="img-responsive" />
+                {% if publication.image_path %}
+                    <img src="{{ publication.image_path }}" class="img-responsive" />
+                {% endif %}
                 <span>{{ publication.title }}</span>
             </div>
-            <p>{{ publication.text_content }}</p>
+            {{ publication.text_content|safe }}
         </div>
         <div class="clearfix"></div>
         <div class="related">
