@@ -178,6 +178,11 @@ def index(product_id):
         gettext("Main Municipality by total value imported"),
         gettext("Main Destination by total value exported"),
         gettext("Main Origin by total value exported"),
+        gettext("Main Municipality"),
+        gettext("by Total Value Exported"),
+        gettext("by Total Value Imported"),
+        gettext("Main Destination"),
+        gettext("Main Origin"),
 
     }
 
