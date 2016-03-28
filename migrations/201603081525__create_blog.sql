@@ -4,7 +4,6 @@ CREATE TABLE blog_post(
     subject varchar (100) NULL,
     text_call varchar (500) NULL,
     text_content longtext NULL,
-    image longtext NULL,
     thumb longtext NULL,
     postage_date datetime NULL,
     release_date datetime NULL,

@@ -60,7 +60,6 @@ def edit(id):
     form.subject.data = post.subject
     form.text_content.data = post.text_content
     form.text_call.data = post.text_call
-    form.image.data = post.image
     form.thumb.data = post.thumb
     return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
 
@@ -77,7 +76,6 @@ def create():
         post.text_content = form.text_content.data
         post.text_call = form.text_call.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        post.image = form.image.data
         post.thumb = form.thumb.data
         post.active = 0
 
@@ -105,7 +103,6 @@ def update(id):
         post.subject = form.subject.data
         post.text_content = form.text_content.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        post.image = form.image.data
         post.thumb = form.thumb.data
         post.authors = []
 

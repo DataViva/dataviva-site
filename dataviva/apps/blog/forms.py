@@ -41,8 +41,6 @@ class RegistrationForm(Form):
         validators.Required(u"Por favor, insira uma chamada para o post."), NumberOfWords(max=500)
     ])
 
-    image = HiddenField('image')
-
     thumb = HiddenField('thumb', validators=[
         validators.Required(u"Por favor, insira uma imagem reduzida.")
     ])
