@@ -14,7 +14,6 @@ $(document).ready(function(){
         $('#text-content-editor').summernote('destroy');
     });
 
-//10x3
     var inputThumbCallback = function() {
         $($('#thumb-crop')).cropper({
             aspectRatio: 350/227,
