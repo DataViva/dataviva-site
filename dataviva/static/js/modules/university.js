@@ -44,7 +44,7 @@ $(document).ready(function () {
 
     if(document.location.hash) {
         var tab = document.location.hash.substring(1),
-            university = document.location.pathname.split('/')[3],
+            university = document.location.pathname.split('/')[3]
 
         $('[href=#' + tab + ']').tab('show');
 
