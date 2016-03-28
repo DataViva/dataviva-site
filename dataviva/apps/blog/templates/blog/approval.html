@@ -51,7 +51,10 @@
                 },
                 {
                     "targets": 1,
-                    "className": "body-title"
+                    "className": "body-title",
+                    "render": function (data, type, post, meta){
+                        return '<a href="/blog/post/'+post[0]+'">'+post[1]+'</a>';
+                    }
                 },
                 {
                      "targets": 4,
@@ -75,13 +78,6 @@
             "paging": false,
             "bFilter": false,
             "info": false,
-        });
-    };
-
-    ScholarApproval.prototype.links = function(){
-        $('#approvalTable tbody').on('click','.body-title', function () {
-            var postId = parseInt($(this).closest('tr')[0].cells[0].textContent)
-            window.location.href = '/blog/post/'+postId
         });
     };
 
