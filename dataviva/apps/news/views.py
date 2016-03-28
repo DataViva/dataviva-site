@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g, make_response, redirect, url_fo
 from dataviva.apps.general.views import get_locale
 
 from models import Publication, AuthorNews
-from dataviva import db
+from dataviva import db, app
 from forms import RegistrationForm
 from datetime import datetime
 from random import randrange
@@ -32,6 +32,11 @@ def add_language_code(endpoint, values):
 def index():
     publications = Publication.query.all()
     return render_template('news/index.html', publications=publications)
+
+
+@mod.route('/admin', methods=['GET'])
+def admin():
+    return render_template('news/admin.html')
 
 
 @mod.route('/publication/<id>', methods=['GET'])
