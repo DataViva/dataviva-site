@@ -8,7 +8,7 @@
     <div class="row bg-white">
         <ol class="breadcrumb">
             <li><a href="{{ url_for('general.home') }}">Home</a></li>
-            <li class="active">Notícias</li>
+            {% block breadcrumb %}{% endblock %}
         </ol>
     </div>
 </div>
