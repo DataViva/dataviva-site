@@ -147,43 +147,5 @@ def index(product_id):
             header['import_value_ranking'] = ranking + 1
             break
 
-    translation_names = {
-        gettext("General"),
-        gettext("International Trade"),
-        gettext("Economic Opportunities"),
-        gettext("More details"),
-        gettext("Total Value Exported"),
-        gettext("Ratio Net Weight / Total Value Exported"),
-        gettext("Total Value Imported"),
-        gettext("Ratio Net Weight / Total Value Imported"),
-        gettext("Product Complexity"),
-        gettext("International RCA"),
-        gettext("International Distance"),
-        gettext("International Opportunity Gain"),
-        gettext("The product "),
-        gettext("occupy the"),
-        gettext("position in imports and the"),
-        gettext("position in exports in Brazil. In"),
-        gettext("earned"),
-        gettext("in trade value, representing a variation of"),
-        gettext("in five years. The municipality in Brazil which exports more"),
-        gettext("and that imports more is"),
-        gettext("occupies the"),
-        gettext("position in exports"),
-        gettext("in this location"),
-        gettext("In"),
-        gettext("in five years. The municipality"),
-        gettext("which exports more"),
-        gettext("Main Municipality by total value exported"),
-        gettext("Main Municipality by total value imported"),
-        gettext("Main Destination by total value exported"),
-        gettext("Main Origin by total value exported"),
-        gettext("Main Municipality"),
-        gettext("by Total Value Exported"),
-        gettext("by Total Value Imported"),
-        gettext("Main Destination"),
-        gettext("Main Origin"),
 
-    }
-
-    return render_template('product/index.html', header=header, body=body, product=product, location=location, translation_names=translation_names)
+    return render_template('product/index.html', header=header, body=body, product=product, location=location)

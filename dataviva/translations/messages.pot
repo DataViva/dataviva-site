@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-28 17:07-0300\n"
+"POT-Creation-Date: 2016-03-28 17:25-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -235,9 +235,10 @@ msgstr ""
 msgid "Wages and Employment"
 msgstr ""
 
-#: dataviva/apps/data/views.py:81 dataviva/apps/product/views.py:152
+#: dataviva/apps/data/views.py:81
 #: dataviva/apps/product/templates/product/index.html:57
-#: dataviva/apps/product/templates/product/tab-general.html:158
+#: dataviva/apps/product/templates/product/tab-general.html:157
+#: dataviva/translations/dictionary.py:480
 msgid "International Trade"
 msgstr ""
 
@@ -304,203 +305,15 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: dataviva/apps/product/views.py:151
 #: dataviva/apps/product/templates/product/index.html:48
+#: dataviva/translations/dictionary.py:479
 msgid "General"
 msgstr ""
 
-#: dataviva/apps/product/views.py:153
 #: dataviva/apps/product/templates/product/index.html:67
 #: dataviva/apps/product/templates/product/tab-opportunities.html:2
+#: dataviva/translations/dictionary.py:481
 msgid "Economic Opportunities"
-msgstr ""
-
-#: dataviva/apps/product/views.py:154
-#: dataviva/apps/product/templates/product/tab-general.html:204
-msgid "More details"
-msgstr ""
-
-#: dataviva/apps/product/views.py:155
-#: dataviva/apps/product/templates/product/tab-general.html:16
-msgid "Total Value Exported"
-msgstr ""
-
-#: dataviva/apps/product/views.py:156
-#: dataviva/apps/product/templates/product/tab-general.html:25
-msgid "Ratio Net Weight / Total Value Exported"
-msgstr ""
-
-#: dataviva/apps/product/views.py:157
-#: dataviva/apps/product/templates/product/tab-general.html:34
-msgid "Total Value Imported"
-msgstr ""
-
-#: dataviva/apps/product/views.py:158
-#: dataviva/apps/product/templates/product/tab-general.html:43
-msgid "Ratio Net Weight / Total Value Imported"
-msgstr ""
-
-#: dataviva/apps/product/views.py:159
-#: dataviva/apps/product/templates/product/tab-general.html:53
-#: dataviva/templates/about/glossary/complexity.html:3
-#: dataviva/translations/dictionary.py:192
-msgid "Product Complexity"
-msgstr ""
-
-#: dataviva/apps/product/views.py:160
-#: dataviva/apps/product/templates/product/tab-general.html:63
-#: dataviva/translations/dictionary.py:237
-msgid "International RCA"
-msgstr ""
-
-#: dataviva/apps/product/views.py:161
-#: dataviva/apps/product/templates/product/tab-general.html:72
-#: dataviva/translations/dictionary.py:222
-msgid "International Distance"
-msgstr ""
-
-#: dataviva/apps/product/views.py:162
-#: dataviva/apps/product/templates/product/tab-general.html:81
-#: dataviva/translations/dictionary.py:241
-msgid "International Opportunity Gain"
-msgstr ""
-
-#: dataviva/apps/product/views.py:163
-#: dataviva/apps/product/templates/product/tab-general.html:104
-#: dataviva/apps/product/templates/product/tab-general.html:128
-msgid "The product "
-msgstr ""
-
-#: dataviva/apps/product/views.py:164
-#: dataviva/apps/product/templates/product/tab-general.html:105
-#: dataviva/apps/product/templates/product/tab-general.html:129
-msgid "occupy the"
-msgstr ""
-
-#: dataviva/apps/product/views.py:165
-#: dataviva/apps/product/templates/product/tab-general.html:106
-#: dataviva/apps/product/templates/product/tab-general.html:117
-#: dataviva/apps/product/templates/product/tab-general.html:130
-#: dataviva/apps/product/templates/product/tab-general.html:143
-msgid "position in imports and the"
-msgstr ""
-
-#: dataviva/apps/product/views.py:166
-#: dataviva/apps/product/templates/product/tab-general.html:107
-#: dataviva/apps/product/templates/product/tab-general.html:118
-msgid "position in exports in Brazil. In"
-msgstr ""
-
-#: dataviva/apps/product/views.py:167
-#: dataviva/apps/product/templates/product/tab-general.html:107
-#: dataviva/apps/product/templates/product/tab-general.html:119
-#: dataviva/apps/product/templates/product/tab-general.html:133
-#: dataviva/apps/product/templates/product/tab-general.html:147
-msgid "earned"
-msgstr ""
-
-#: dataviva/apps/product/views.py:168
-#: dataviva/apps/product/templates/product/tab-general.html:108
-#: dataviva/apps/product/templates/product/tab-general.html:120
-#: dataviva/apps/product/templates/product/tab-general.html:134
-#: dataviva/apps/product/templates/product/tab-general.html:148
-msgid "in trade value, representing a variation of"
-msgstr ""
-
-#: dataviva/apps/product/views.py:169
-#: dataviva/apps/product/templates/product/tab-general.html:109
-#: dataviva/apps/product/templates/product/tab-general.html:121
-msgid "in five years. The municipality in Brazil which exports more"
-msgstr ""
-
-#: dataviva/apps/product/views.py:170
-#: dataviva/apps/product/templates/product/tab-general.html:111
-#: dataviva/apps/product/templates/product/tab-general.html:123
-#: dataviva/apps/product/templates/product/tab-general.html:138
-#: dataviva/apps/product/templates/product/tab-general.html:152
-msgid "and that imports more is"
-msgstr ""
-
-#: dataviva/apps/product/views.py:171
-#: dataviva/apps/product/templates/product/tab-general.html:116
-#: dataviva/apps/product/templates/product/tab-general.html:142
-msgid "occupies the"
-msgstr ""
-
-#: dataviva/apps/product/views.py:172
-#: dataviva/apps/product/templates/product/tab-general.html:131
-#: dataviva/apps/product/templates/product/tab-general.html:144
-msgid "position in exports"
-msgstr ""
-
-#: dataviva/apps/product/views.py:173
-#: dataviva/apps/product/templates/product/tab-general.html:145
-msgid "in this location"
-msgstr ""
-
-#: dataviva/apps/product/views.py:174
-#: dataviva/apps/product/templates/product/tab-general.html:132
-#: dataviva/apps/product/templates/product/tab-general.html:146
-msgid "In"
-msgstr ""
-
-#: dataviva/apps/product/views.py:175
-#: dataviva/apps/product/templates/product/tab-general.html:135
-#: dataviva/apps/product/templates/product/tab-general.html:149
-msgid "in five years. The municipality"
-msgstr ""
-
-#: dataviva/apps/product/views.py:176
-#: dataviva/apps/product/templates/product/tab-general.html:136
-#: dataviva/apps/product/templates/product/tab-general.html:150
-msgid "which exports more"
-msgstr ""
-
-#: dataviva/apps/product/views.py:177
-#: dataviva/apps/product/templates/product/tab-general.html:165
-msgid "Main Municipality by total value exported"
-msgstr ""
-
-#: dataviva/apps/product/views.py:178
-msgid "Main Municipality by total value imported"
-msgstr ""
-
-#: dataviva/apps/product/views.py:179
-#: dataviva/apps/product/templates/product/tab-general.html:184
-msgid "Main Destination by total value exported"
-msgstr ""
-
-#: dataviva/apps/product/views.py:180
-#: dataviva/apps/product/templates/product/tab-general.html:193
-msgid "Main Origin by total value exported"
-msgstr ""
-
-#: dataviva/apps/product/views.py:181
-#: dataviva/apps/product/templates/product/tab-trade-partner.html:11
-#: dataviva/apps/product/templates/product/tab-trade-partner.html:15
-msgid "Main Municipality"
-msgstr ""
-
-#: dataviva/apps/product/views.py:182
-#: dataviva/apps/product/templates/product/tab-trade-partner.html:12
-#: dataviva/apps/product/templates/product/tab-trade-partner.html:21
-msgid "by Total Value Exported"
-msgstr ""
-
-#: dataviva/apps/product/views.py:183
-#: dataviva/apps/product/templates/product/tab-trade-partner.html:16
-#: dataviva/apps/product/templates/product/tab-trade-partner.html:25
-msgid "by Total Value Imported"
-msgstr ""
-
-#: dataviva/apps/product/views.py:184
-#: dataviva/apps/product/templates/product/tab-trade-partner.html:20
-msgid "Main Destination"
-msgstr ""
-
-#: dataviva/apps/product/views.py:185
-#: dataviva/apps/product/templates/product/tab-trade-partner.html:24
-msgid "Main Origin"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:7
@@ -508,20 +321,204 @@ msgstr ""
 msgid "Trade Balance"
 msgstr ""
 
+#: dataviva/apps/product/templates/product/tab-general.html:16
+#: dataviva/translations/dictionary.py:483
+msgid "Total Value Exported"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:25
+#: dataviva/translations/dictionary.py:484
+msgid "Ratio Net Weight / Total Value Exported"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:34
+#: dataviva/translations/dictionary.py:485
+msgid "Total Value Imported"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:43
+#: dataviva/translations/dictionary.py:486
+msgid "Ratio Net Weight / Total Value Imported"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:53
+#: dataviva/templates/about/glossary/complexity.html:3
+#: dataviva/translations/dictionary.py:192
+#: dataviva/translations/dictionary.py:487
+msgid "Product Complexity"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:63
+#: dataviva/translations/dictionary.py:237
+#: dataviva/translations/dictionary.py:488
+msgid "International RCA"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:72
+#: dataviva/translations/dictionary.py:222
+#: dataviva/translations/dictionary.py:489
+msgid "International Distance"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:81
+#: dataviva/translations/dictionary.py:241
+#: dataviva/translations/dictionary.py:490
+msgid "International Opportunity Gain"
+msgstr ""
+
 #: dataviva/apps/product/templates/product/tab-general.html:98
 #: dataviva/translations/dictionary.py:102
 msgid "Year"
 msgstr ""
 
+#: dataviva/apps/product/templates/product/tab-general.html:104
+#: dataviva/apps/product/templates/product/tab-general.html:127
+#: dataviva/translations/dictionary.py:491
+msgid "The product "
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:105
+#: dataviva/apps/product/templates/product/tab-general.html:128
+#: dataviva/translations/dictionary.py:492
+msgid "occupy the"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:106
+#: dataviva/apps/product/templates/product/tab-general.html:116
+#: dataviva/apps/product/templates/product/tab-general.html:129
+#: dataviva/apps/product/templates/product/tab-general.html:142
+#: dataviva/translations/dictionary.py:493
+msgid "position in imports and the"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:107
+#: dataviva/apps/product/templates/product/tab-general.html:117
+#: dataviva/translations/dictionary.py:494
+msgid "position in exports in Brazil. In"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:107
+#: dataviva/apps/product/templates/product/tab-general.html:118
+#: dataviva/apps/product/templates/product/tab-general.html:132
+#: dataviva/apps/product/templates/product/tab-general.html:146
+#: dataviva/translations/dictionary.py:495
+msgid "earned"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:108
+#: dataviva/apps/product/templates/product/tab-general.html:119
+#: dataviva/apps/product/templates/product/tab-general.html:133
+#: dataviva/apps/product/templates/product/tab-general.html:147
+#: dataviva/translations/dictionary.py:496
+msgid "in trade value, representing a variation of"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:109
+#: dataviva/apps/product/templates/product/tab-general.html:120
+#: dataviva/translations/dictionary.py:497
+msgid "in five years. The municipality in Brazil which exports more"
+msgstr ""
+
 #: dataviva/apps/product/templates/product/tab-general.html:110
-#: dataviva/apps/product/templates/product/tab-general.html:122
-#: dataviva/apps/product/templates/product/tab-general.html:137
-#: dataviva/apps/product/templates/product/tab-general.html:151
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:136
+#: dataviva/apps/product/templates/product/tab-general.html:150
 msgid "is"
 msgstr ""
 
-#: dataviva/apps/product/templates/product/tab-general.html:174
+#: dataviva/apps/product/templates/product/tab-general.html:111
+#: dataviva/apps/product/templates/product/tab-general.html:122
+#: dataviva/apps/product/templates/product/tab-general.html:137
+#: dataviva/apps/product/templates/product/tab-general.html:151
+#: dataviva/translations/dictionary.py:498
+msgid "and that imports more is"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:115
+#: dataviva/apps/product/templates/product/tab-general.html:141
+#: dataviva/translations/dictionary.py:499
+msgid "occupies the"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:130
+#: dataviva/apps/product/templates/product/tab-general.html:143
+#: dataviva/translations/dictionary.py:500
+msgid "position in exports"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:131
+#: dataviva/apps/product/templates/product/tab-general.html:145
+#: dataviva/translations/dictionary.py:502
+msgid "In"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:134
+#: dataviva/apps/product/templates/product/tab-general.html:148
+#: dataviva/translations/dictionary.py:503
+msgid "in five years. The municipality"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:135
+#: dataviva/apps/product/templates/product/tab-general.html:149
+#: dataviva/translations/dictionary.py:504
+msgid "which exports more"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:144
+#: dataviva/translations/dictionary.py:501
+msgid "in this location"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:164
+#: dataviva/translations/dictionary.py:505
+msgid "Main Municipality by total value exported"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:173
 msgid "Main Msunicipality by total value imported"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:183
+#: dataviva/translations/dictionary.py:507
+msgid "Main Destination by total value exported"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:192
+#: dataviva/translations/dictionary.py:508
+msgid "Main Origin by total value exported"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:203
+#: dataviva/translations/dictionary.py:482
+msgid "More details"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-trade-partner.html:11
+#: dataviva/apps/product/templates/product/tab-trade-partner.html:15
+#: dataviva/translations/dictionary.py:509
+msgid "Main Municipality"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-trade-partner.html:12
+#: dataviva/apps/product/templates/product/tab-trade-partner.html:21
+#: dataviva/translations/dictionary.py:510
+msgid "by Total Value Exported"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-trade-partner.html:16
+#: dataviva/apps/product/templates/product/tab-trade-partner.html:25
+#: dataviva/translations/dictionary.py:511
+msgid "by Total Value Imported"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-trade-partner.html:20
+#: dataviva/translations/dictionary.py:512
+msgid "Main Destination"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-trade-partner.html:24
+#: dataviva/translations/dictionary.py:513
+msgid "Main Origin"
 msgstr ""
 
 #: dataviva/templates/about.html:16 dataviva/templates/about/ask/ask.html:4
@@ -3267,25 +3264,29 @@ msgstr ""
 msgid "in"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:484
+#: dataviva/translations/dictionary.py:506
+msgid "Main Municipality by total value imported"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:522
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:485
+#: dataviva/translations/dictionary.py:523
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:486
+#: dataviva/translations/dictionary.py:524
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:487
+#: dataviva/translations/dictionary.py:525
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""

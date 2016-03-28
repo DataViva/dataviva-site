@@ -112,7 +112,6 @@
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
-
             {%trans%}occupies the{%endtrans%} {{ header.import_value_ranking }}&ordm 
             {%trans%}position in imports and the{%endtrans%} {{ header.export_value_ranking }}&ordm 
             {%trans%}position in exports in Brazil. In{%endtrans%} {{ header.year }}, 
@@ -142,7 +141,7 @@
             {%trans%}occupies the{%endtrans%} {{ header.import_value_ranking }}&ordm 
             {%trans%}position in imports and the{%endtrans%} {{ header.export_value_ranking }}&ordm 
             {%trans%}position in exports{%endtrans%} 
-            {%trans%}in this location{%endtrans%}. 
+            {%trans%}in this location{%endtrans%} 
             {%trans%}In{%endtrans%} {{ header.year }}, 
             {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
             {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
