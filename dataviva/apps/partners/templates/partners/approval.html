@@ -27,8 +27,9 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 <script type="text/javascript">
-    $(document).ready(function($) {
-        var table = $('#approvalTable').DataTable( {
+
+    var Call = function() {
+        this.table = $('#approvalTable').DataTable( {
             "sAjaxSource": "/partners/all",
             "sAjaxDataProp": "calls",
             "aoColumnsDefs": [
@@ -63,7 +64,9 @@
             "bFilter": false,
             "info": false    
         });
+    };
 
+    Call.prototype.controlCheckbox = function(approvalTable){ 
         //Checkbox control
         $('#select-all').on('click', function(){
            var rows = table.rows({ 'search': 'applied' }).nodes();
@@ -77,9 +80,11 @@
                 }
             }
         });
+    };
 
+    var call = new Call();
+    call.controlCheckbox(approvalTable);
 
-    });
 
     //Verify Checks
     function verifyChecks(){
