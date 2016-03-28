@@ -101,17 +101,55 @@
     <h2 class="m-t-xl">Perfil Geral</h2>
     {% if not location %}
         {% if (product.id|length) == 6 %}
-            {%trans%}The product {%endtrans%}{{ product.name() }} {%trans%}occupy the{%endtrans%} {{ header.export_value_ranking }}&ordm {%trans%}position in imports and the{%endtrans%} {{ header.import_value_ranking }}&ordm {%trans%}position in exports in Brazil. In{%endtrans%} {{ header.year }}, {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} {%trans%}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} {%trans%}is{%endtrans%} {{ body.municipality_name_export }} {%trans%}and that imports more is{%endtrans%} {{ body.municipality_name_import }}.
+            {%trans%}The product {%endtrans%}{{ product.name() }}
+            {%trans%}occupy the{%endtrans%} {{ header.export_value_ranking }}&ordm 
+            {%trans%}position in imports and the{%endtrans%} {{ header.import_value_ranking }}&ordm 
+            {%trans%}position in exports in Brazil. In{%endtrans%} {{ header.year }}, {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
+            {%trans%}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
+            {%trans%}is{%endtrans%} {{ body.municipality_name_export }} 
+            {%trans%}and that imports more is{%endtrans%} {{ body.municipality_name_import }}.
         {% endif %}
         {% if (product.id|length) == 2 %}
-            <p>{{ product.article() | capitalize }} {{ product.name() }} {%trans%}occupies the{%endtrans%} {{ header.import_value_ranking }}&ordm {%trans%}position in imports and the{%endtrans%} {{ header.export_value_ranking }}&ordm {%trans%}position in exports in Brazil. In{%endtrans%} {{ header.year }}, {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} {%trans%}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} {%trans%}is{%endtrans%} {{ body.municipality_name_export }} {%trans%}and that imports more is{%endtrans%} {{ body.municipality_name_import }}.</p>
+            <p>{{ product.article() | capitalize }} {{ product.name() }} 
+
+            {%trans%}occupies the{%endtrans%} {{ header.import_value_ranking }}&ordm 
+            {%trans%}position in imports and the{%endtrans%} {{ header.export_value_ranking }}&ordm 
+            {%trans%}position in exports in Brazil. In{%endtrans%} {{ header.year }}, 
+            {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
+            {%trans%}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
+            {%trans%}is{%endtrans%} {{ body.municipality_name_export }} 
+            {%trans%}and that imports more is{%endtrans%} {{ body.municipality_name_import }}.</p>
         {% endif %}
     {% else %}
         {% if (product.id|length) == 6 %}
-            <p>{%trans%}The product {%endtrans%} {{ product.name() }} {%trans%}occupy the{%endtrans%} {{ header.export_value_ranking }}&ordm {%trans%}position in imports and the{%endtrans%} {{ header.import_value_ranking }}&ordm {%trans%}position in exports{%endtrans%} {{ location.preposition('em')}} {{ location.name() }}. {%trans%}In{%endtrans%} {{ header.year }}, {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} {%trans%}in trade value, representing a variation of{%endtrans%}  {{ body.export_value_growth_in_five_years | max_digits(3 )}} {%trans%}in five years. The municipality{%endtrans%} {{ location.preposition('de') }} {{ location.name() }} {%trans%}which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} {%trans%}is{%endtrans%} {{ location.article() }} {{ body.municipality_name_export }} {%trans%}and that imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
+            <p>
+            {%trans%}The product {%endtrans%} {{ product.name() }} 
+            {%trans%}occupy the{%endtrans%} {{ header.export_value_ranking }}&ordm 
+            {%trans%}position in imports and the{%endtrans%} {{ header.import_value_ranking }}&ordm 
+            {%trans%}position in exports{%endtrans%} {{ location.preposition('em')}} {{ location.name() }}. 
+            {%trans%}In{%endtrans%} {{ header.year }}, 
+            {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {%trans%}in trade value, representing a variation of{%endtrans%}  {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
+            {%trans%}in five years. The municipality{%endtrans%} {{ location.preposition('de') }} {{ location.name() }} 
+            {%trans%}which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
+            {%trans%}is{%endtrans%} {{ location.article() }} {{ body.municipality_name_export }} 
+            {%trans%}and that imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
         {% endif %}
         {% if (product.id|length) == 2 %}
-            <p>{{ product.article() | capitalize }} {{ product.name() }} {%trans%}occupies the{%endtrans%} {{ header.import_value_ranking }}&ordm {%trans%}position in imports and the{%endtrans%} {{ header.export_value_ranking }}&ordm {%trans%}position in exports{%endtrans%} {%trans%}in this location{%endtrans%}. {%trans%}In{%endtrans%} {{ header.year }}, {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} {%trans%}in five years. The municipality{%endtrans%} {{ location.preposition('de') }} {{ location.name() }} {%trans%}which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} {%trans%}is{%endtrans%} {{ location.article() }} {{ body.municipality_name_export }} {%trans%}and that imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
+            <p>{{ product.article() | capitalize }} {{ product.name() }} 
+            {%trans%}occupies the{%endtrans%} {{ header.import_value_ranking }}&ordm 
+            {%trans%}position in imports and the{%endtrans%} {{ header.export_value_ranking }}&ordm 
+            {%trans%}position in exports{%endtrans%} 
+            {%trans%}in this location{%endtrans%}. 
+            {%trans%}In{%endtrans%} {{ header.year }}, 
+            {%trans%}earned{%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
+            {%trans%}in five years. The municipality{%endtrans%} {{ location.preposition('de') }} {{ location.name() }} 
+            {%trans%}which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
+            {%trans%}is{%endtrans%} {{ location.article() }} {{ body.municipality_name_export }} 
+            {%trans%}and that imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
         {% endif %}
     {% endif %}
 
@@ -133,7 +171,7 @@
                         </tr>
                         <tr>
                             <th>
-                                {%trans%}Main Municipality by total value imported{%endtrans%}
+                                {%trans%}Main Msunicipality by total value imported{%endtrans%}
                             </th>
                             <td>
                                 <p class="label">{{ body.municipality_name_import}}</p>
