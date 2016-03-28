@@ -2,6 +2,23 @@
 {% extends "base.html" %}
 
 {% block content %}
+<script type="text/javascript" src="/static/js/utils/utils.hilitor.js"></script>
+<script type="text/javascript">
+
+function highlightHelpWord() {
+    var myHilitor; // global variable
+    var match = document.getElementById("help-search").value;
+    myHilitor = new Hilitor("content");
+    myHilitor.apply(match);   
+}
+function highlightGlossaryWord() {
+    var myGlossaryHilitor; // global variable
+    var match = document.getElementById("glossary-search").value;
+    myGlossaryHilitor = new Hilitor("content");
+    myGlossaryHilitor.apply(match);    
+}
+
+</script>
 <div class="container">
     <ol class="breadcrumb">
         <li><a href="{{ url_for('general.home') }}">Home</a></li>
