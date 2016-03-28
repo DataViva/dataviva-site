@@ -12,6 +12,7 @@ class Post(db.Model):
     image = db.Column(db.Text(4194304))
     thumb = db.Column(db.Text(4194304))
     postage_date = db.Column(db.DateTime)
+    active = db.Column(db.Boolean)
     authors = db.relationship('AuthorBlog', backref='blog_post', lazy='eager')
 
     def authors_str(self):
