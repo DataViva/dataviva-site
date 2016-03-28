@@ -50,7 +50,7 @@
 </section>
 
 
-<section id="databases" class="databases bg-green">
+<section id="databases" class="databases bg-greeny">
     <div class="container text-center wow fadeInDown">
         <div class="navy-line"></div>
         <h2>Explore nossos bancos de dados</h2>
@@ -113,23 +113,9 @@
     </div>
 </section>
 
-<section id="partners" class="partners bg-white">
-    <div class="navy-line wow fadeInDown"></div>
-    <div class="container text-center">
-        <h2 class="m-b-lg wow fadeInDown">Parceiros</h2>
-        <div class="col-sm-4 wow fadeInLeft">
-            <a href="http://www.bigdatacorp.info/" target="_blank"><img src="/static/img/partner/bigdata.png" width="200" height="80" alt=""/></a>
-        </div>
-        <div class="col-sm-4">
-            <a href="http://www.datawheel.us/" target="_blank"><img src="/static/img/partner/datawheel.png" width="157" height="80" alt=""/></a>
-        </div>
-        <div class="col-sm-4 wow fadeInRight">
-            <a href="http://web.mit.edu" target="_blank"><img src="/static/img/partner/mit.jpg" width="300" height="80" alt=""/></a>
-        </div>
-    </div>
-</section>
+{% include "include/partners.html" %}
 
-<section id="signup" class="signup bg-green">
+<section id="signup" class="signup bg-greeny">
     <div class="navy-line"></div>
     <div class="container text-center wow fadeInDown">
         <h2>Cadastre-se gratuitamente e aproveite o DataViva ao máximo</h2>
@@ -170,5 +156,4 @@
         </div>
     </div>
 </section>
-{% include "include/partners.html" %}
 {% endblock content %}

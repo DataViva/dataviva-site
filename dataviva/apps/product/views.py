@@ -28,6 +28,13 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+@mod.route('/<product_id>/graphs/<tab>', methods=['POST'])
+def graphs(product_id, tab):
+    product = Hs.query.filter_by(id=product_id).first_or_404()
+    location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
+    return render_template('product/graphs-'+tab+'.html', product=product, location=location)
+
+
 @mod.route('/<product_id>')
 def index(product_id):
 
@@ -41,21 +48,29 @@ def index(product_id):
     else:
         location_id = None
 
-    trade_partners_service = ProductTradePartnersService(product_id=product.id, bra_id=location_id)
-    municipalities_service = ProductMunicipalitiesService(product_id=product.id, bra_id=location_id)
+    trade_partners_service = ProductTradePartnersService(
+        product_id=product.id, bra_id=location_id)
+    municipalities_service = ProductMunicipalitiesService(
+        product_id=product.id, bra_id=location_id)
 
     if len(product.id) == 6:
         product_service = ProductService(product_id=product.id)
         header['pci'] = product_service.product_complexity()
 
     if location:
-        product_service = ProductLocationsService(product_id=product.id, bra_id=location_id)
+        product_service = ProductLocationsService(
+            product_id=product.id, bra_id=location_id)
 
-        body['destination_name_export'] = trade_partners_service.destination_with_more_exports()
-        body['destination_export_value'] = trade_partners_service.highest_export_value()
-        body['origin_name_import'] = trade_partners_service.origin_with_more_imports()
-        body['origin_import_value'] = trade_partners_service.highest_import_value()
-        body['export_value_growth_in_five_years'] = product_service.export_value_growth_in_five_years()
+        body[
+            'destination_name_export'] = trade_partners_service.destination_with_more_exports()
+        body[
+            'destination_export_value'] = trade_partners_service.highest_export_value()
+        body[
+            'origin_name_import'] = trade_partners_service.origin_with_more_imports()
+        body[
+            'origin_import_value'] = trade_partners_service.highest_import_value()
+        body[
+            'export_value_growth_in_five_years'] = product_service.export_value_growth_in_five_years()
 
         if len(product.id) == 6:
             header['rca_wld'] = product_service.rca_wld()
@@ -63,23 +78,36 @@ def index(product_id):
             header['opportunity_gain_wld'] = product_service.opp_gain_wld()
 
         if len(location_id) != 9:
-            body['municipality_name_export'] = municipalities_service.municipality_with_more_exports()
-            body['municipality_export_value'] = municipalities_service.highest_export_value()
-            body['municipality_name_import'] = municipalities_service.municipality_with_more_imports()
-            body['municipality_import_value'] = municipalities_service.highest_import_value()
+            body[
+                'municipality_name_export'] = municipalities_service.municipality_with_more_exports()
+            body[
+                'municipality_export_value'] = municipalities_service.highest_export_value()
+            body[
+                'municipality_name_import'] = municipalities_service.municipality_with_more_imports()
+            body[
+                'municipality_import_value'] = municipalities_service.highest_import_value()
 
     else:
         product_service = ProductService(product_id=product.id)
 
-        body['municipality_name_export'] = municipalities_service.municipality_with_more_exports()
-        body['municipality_export_value'] = municipalities_service.highest_export_value()
-        body['municipality_name_import'] = municipalities_service.municipality_with_more_imports()
-        body['municipality_import_value'] = municipalities_service.highest_import_value()
-        body['destination_name_export'] = trade_partners_service.destination_with_more_exports()
-        body['destination_export_value'] = trade_partners_service.highest_export_value()
-        body['origin_name_import'] = trade_partners_service.origin_with_more_imports()
-        body['origin_import_value'] = trade_partners_service.highest_import_value()
-        body['export_value_growth_in_five_years'] = product_service.export_value_growth_in_five_years()
+        body[
+            'municipality_name_export'] = municipalities_service.municipality_with_more_exports()
+        body[
+            'municipality_export_value'] = municipalities_service.highest_export_value()
+        body[
+            'municipality_name_import'] = municipalities_service.municipality_with_more_imports()
+        body[
+            'municipality_import_value'] = municipalities_service.highest_import_value()
+        body[
+            'destination_name_export'] = trade_partners_service.destination_with_more_exports()
+        body[
+            'destination_export_value'] = trade_partners_service.highest_export_value()
+        body[
+            'origin_name_import'] = trade_partners_service.origin_with_more_imports()
+        body[
+            'origin_import_value'] = trade_partners_service.highest_import_value()
+        body[
+            'export_value_growth_in_five_years'] = product_service.export_value_growth_in_five_years()
 
     header['year'] = product_service.year()
     header['trade_balance'] = product_service.trade_balance()
@@ -93,7 +121,8 @@ def index(product_id):
     from dataviva import db
     from sqlalchemy.sql.expression import func, desc
 
-    max_year_query = db.session.query(func.max(Ymp.year)).filter(Ymp.hs_id == product.id)
+    max_year_query = db.session.query(
+        func.max(Ymp.year)).filter(Ymp.hs_id == product.id)
 
     secex_query = Ymp.query.filter(
         Ymp.year == max_year_query,

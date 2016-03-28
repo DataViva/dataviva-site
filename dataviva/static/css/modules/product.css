@@ -214,6 +214,7 @@
 .product .table-responsive {
   height: 280px;
 }
+
 .product .graphs {
   margin-top: 40px;
 }
@@ -224,39 +225,29 @@
 .product .graphs .embed-responsive {
   max-height: 900px;
 }
-.product .nav-graph button {
-  background: none;
-  border-radius: 0;
-}
-.product .nav-graph button + button:not(.list-group-item) {
-  margin-left: -4px;
-}
+
+
 .product .nav-graph h4 {
   font-size: 14px;
   font-weight: 700;
-  margin-top: 0;
   text-transform: uppercase;
+  margin: 10px;
 }
-.product .nav-graph label {
-  display: block;
-  font-weight: 400;
-  text-transform: uppercase;
+.product .nav-graph h4 a {
+    padding-left: 10px;
+    color: inherit;
 }
-.product .nav-graph select {
-  border-radius: 0;
-  width: auto;
+.product .nav-graph .panel {
+   border: 1px solid #000;
+   border-radius: 0px;
+   margin: 0px;
 }
-.product .nav-graph > .form-group + .form-group {
-  margin-top: 4rem;
-}
-.product .nav-graph .form-control {
-  background: none;
-  display: inline-block;
-}
-.product .nav-graph .list-group button {
-  text-indent: 20px;
+.product .nav-graph .collapse a,
+.product .nav-graph .collapsing a {
+    padding: 5px 10px 5px 40px;
 }
 .product .nav-graph .list-group-item {
+  margin: 0px;
   border: none;
   border-radius: 0;
   font-size: 14px;
@@ -266,20 +257,6 @@
   background: #5a9dc4;
   color: #FFF;
 }
-.product .nav-graph .list-wrap {
-  border: 1px solid #000;
-  border-width: 1px 1px 0;
-}
-.product .nav-graph .list-wrap:last-child {
-  border-bottom-width: 1px;
-}
-.product .nav-graph .list-wrap + .list-wrap {
-  border-top: 0;
-}
-.product .nav-graph .list-wrap > .list-group {
-  margin-bottom: 0;
-}
-.product .nav-graph .list-wrap > .list-group-item {
-  font-weight: 700;
-  text-transform: uppercase;
-}
+
+
+
