@@ -5,9 +5,14 @@ from dataviva.api.hedu.services import University, UniversityMajors
 from dataviva.api.attrs.models import University as UniversityModel
 
 mod = Blueprint('university', __name__,
-                template_folder='templates/university',
+                template_folder='templates',
                 url_prefix='/<lang_code>/university',
                 static_folder='static')
+
+
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
 
 
 @mod.url_value_preprocessor
@@ -48,4 +53,4 @@ def index(university_id):
         'highest_graduate_number_by_major': majors_service.highest_graduates_number()
     }
 
-    return render_template('index.html', university=university, header=header, body=body)
+    return render_template('university/index.html', university=university, header=header, body=body)
