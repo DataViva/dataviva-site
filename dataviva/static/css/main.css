@@ -39,7 +39,7 @@ button {
 }
 /*BODY INIT*/
 body {
-  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #FFF;
   color: #676a6c;
   font-size: 14px;
@@ -236,6 +236,30 @@ nav > li span:not(.caret) {
 .navbar-nav > li > .dropdown-menu {
   margin-top: -20px;
 }
+
+.sidebar h3 {
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 0;
+  padding-bottom: 5px;
+}
+.sidebar h3 + ul {
+  margin-top: 2rem;
+}
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebar ul li {
+  font-size: 13px;
+  font-weight: 300;
+  margin-bottom: 5px;
+}
+
+
+
 .popover {
   z-index: 2;
 }
@@ -671,3 +695,22 @@ footer .form-control:focus,
 }
 /* Medium devices (desktops, 992px and up) */
 /* Large devices (large desktops, 1200px and up) */
+
+
+/* SUMMERNOTE */
+.note-editor {
+    height: auto !important;
+    border: 1px solid #E7EAEC !important;;
+    border-radius: 5px;
+}
+.note-editor .note-toolbar {
+    background: none;
+}
+.summernote-wrapper {
+    padding: 0px;
+}
+.panel-default > .panel-heading {
+    border-color: #E7EAEC;
+}
+
+

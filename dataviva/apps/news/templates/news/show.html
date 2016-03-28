@@ -1,13 +1,17 @@
 {% extends "news/_base.html" %}
 
+{% block breadcrumb %}
+    <li><a href="{{ url_for('news.index') }}">Notícias</a></li>
+    <li class="active">Visualizar</li>
+{% endblock %}
+
 {% block news_content %}
 <div class="institucional search">
-    <h2>Notícias</h2>
     <div class="articles">
-        <div class="item post single">
-            <h4>{{ post.title }}</h4>
+        <div class="item publication single">
+            <h4>{{ publication.title }}</h4>
             <div class="meta">
-                <p class="data">Por {{ post.authors_str() }} {{ post.date_str() }}</p>
+                <p class="data">Por {{ publication.authors_str() }} {{ publication.date_str() }}</p>
             </div>
             <ul class="social">
                 <li>
@@ -23,22 +27,24 @@
                 </li>
             </ul>
             <div class="tit-img">
-                <img src="{{ post.image_path }}" class="img-responsive" />
-                <span>{{ post.title }}</span>
+                {% if publication.image_path %}
+                    <img src="{{ publication.image_path }}" class="img-responsive" />
+                {% endif %}
+                <span>{{ publication.title }}</span>
             </div>
-            <p>{{ post.text_content }}</p>
+            {{ publication.text_content|safe }}
         </div>
         <div class="clearfix"></div>
         <div class="related">
             <h4>Veja Também</h4>
             <div class="row">
-                {% for post in read_more_posts %}
+                {% for publication in read_more %}
                 <div class="col-xs-15 col-sm-6 col-md-5">
-                    <a href="{{url_for('news.show', id=post.id)}}" title="{{ post.title }}">
-                        <img src="{{post.thumb_path}}" class="img-responsive">
+                    <a href="{{url_for('news.show', id=publication.id)}}" title="{{ publication.title }}">
+                        <img src="{{publication.thumb_path}}" class="img-responsive">
                     </a>
                     <p>
-                        <a href="#" title="{{ post.title }}">{{ post.title }}</a>
+                        <a href="#" title="{{ publication.title }}">{{ publication.title }}</a>
                     </p>
                 </div>
             {% endfor %}
