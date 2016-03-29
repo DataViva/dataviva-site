@@ -70,7 +70,7 @@ def index(course_hedu_id):
             'profile': major_service.profile(),
             'year': major_service.year(),
             'field_id': course_hedu_id[:2],
-            'id' : course_hedu_id,
+            'id': course_hedu_id,
             'bra_id': bra_id,
             'location_name': major_service.location_name()
         }
@@ -95,9 +95,9 @@ def index(course_hedu_id):
             header['rank'] = index
             break
 
-    
-    location = Bra.query.filter(Bra.id==bra_id).first()
+    location = Bra.query.filter(Bra.id == bra_id).first()
 
     major = Course_hedu.query.filter(Course_hedu.id == course_hedu_id).first()
 
-    return render_template('major/index.html', static_folder=static_folder, header=header, body=body, location=location, major=major)
+    return render_template('major/index.html', static_folder=static_folder, header=header, body=body,
+                           location=location, major=major)
