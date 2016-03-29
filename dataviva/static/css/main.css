@@ -713,4 +713,19 @@ footer .form-control:focus,
     border-color: #E7EAEC;
 }
 
-
+/* DATATABLE */
+.dataTable {
+    border-radius: 5px;
+}
+.dataTable > tbody > tr:last-child > td:last-child {
+    border-bottom-right-radius: 5px;
+}
+.dataTable > tbody > tr:last-child > td:first-child {
+    border-bottom-left-radius: 5px;
+}
+.dataTable > thead > tr > th {
+    border-bottom: none;
+}
+.dataTable > thead > tr > td {
+    border-bottom-width: 1px;
+}
