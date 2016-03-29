@@ -98,7 +98,7 @@
         {%trans%}Year{%endtrans%}: {{ header.year }}
     </div>
 
-    <h2 class="m-t-xl">Perfil Geral</h2>
+    <h2 class="m-t-xl">{%trans%}General Profile{%endtrans%}</h2>
     {% if not location %}
         {% if (product.id|length) == 6 %}
             {%trans%}The product {%endtrans%}{{ product.name() }}
@@ -108,7 +108,7 @@
             {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {%trans%}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
             {%trans%}is{%endtrans%} {{ body.municipality_name_export }} 
-            {%trans%}and that imports more is{%endtrans%} {{ body.municipality_name_import }}.
+            {%trans%}and witch imports more is{%endtrans%} {{ body.municipality_name_import }}.
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
@@ -119,7 +119,7 @@
             {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {%trans%}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
             {%trans%}is{%endtrans%} {{ body.municipality_name_export }} 
-            {%trans%}and that imports more is{%endtrans%} {{ body.municipality_name_import }}.</p>
+            {%trans%}and witch imports more is{%endtrans%} {{ body.municipality_name_import }}.</p>
         {% endif %}
     {% else %}
         {% if (product.id|length) == 6 %}
@@ -134,7 +134,7 @@
             {%trans%}in five years. The municipality{%endtrans%} {{ location.preposition('de') }} {{ location.name() }} 
             {%trans%}which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
             {%trans%}is{%endtrans%} {{ location.article() }} {{ body.municipality_name_export }} 
-            {%trans%}and that imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
+            {%trans%}and witch imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
@@ -148,7 +148,7 @@
             {%trans%}in five years. The municipality{%endtrans%} {{ location.preposition('de') }} {{ location.name() }} 
             {%trans%}which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
             {%trans%}is{%endtrans%} {{ location.article() }} {{ body.municipality_name_export }} 
-            {%trans%}and that imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
+            {%trans%}and witch imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
         {% endif %}
     {% endif %}
 
@@ -161,7 +161,7 @@
                         {% if (location.id|length) != 9 %}
                         <tr>
                             <th>
-                                {%trans%}Main Municipality by total value exported{%endtrans%}
+                                {%trans%}Main Municipality by Total Value Exported{%endtrans%}
                             </th>
                             <td>
                                 <p class="label">{{ body.municipality_name_import}}</p>
@@ -170,7 +170,7 @@
                         </tr>
                         <tr>
                             <th>
-                                {%trans%}Main Msunicipality by total value imported{%endtrans%}
+                                {%trans%}Main Municipality by Total Value Imported{%endtrans%}
                             </th>
                             <td>
                                 <p class="label">{{ body.municipality_name_import}}</p>
@@ -180,7 +180,7 @@
                         {% endif %}
                         <tr>
                             <th>
-                                {%trans%}Main Destination by total value exported{%endtrans%}
+                                {%trans%}Main Destination by Total Value Exported{%endtrans%}
                             </th>
                             <td>
                                 <p class="label">{{ body.destination_name_export }}</p>
@@ -189,7 +189,7 @@
                         </tr>
                         <tr>
                             <th>
-                                {%trans%}Main Origin by total value exported{%endtrans%}
+                                {%trans%}Main Origin by Total Value Exported{%endtrans%}
                             </th>
                             <td>
                                 <p class="label">{{ body.origin_name_import }}</p>
