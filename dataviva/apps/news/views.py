@@ -34,6 +34,11 @@ def index():
     return render_template('news/index.html', publications=publications)
 
 
+@mod.route('/admin', methods=['GET'])
+def admin():
+    return render_template('news/admin.html')
+
+
 @mod.route('/publication/<id>', methods=['GET'])
 def show(id):
     publication = Publication.query.filter_by(id=id).first_or_404()

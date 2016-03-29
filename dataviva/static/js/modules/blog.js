@@ -3,17 +3,18 @@ $(document).ready(function(){
     $('#text-content-editor').append($('#text_content').val())
     $('#text-content-editor').summernote(summernoteConfig);
 
-    $('#news-edit').click(function() {
+    $('#blog-edit').click(function() {
         summernoteConfig['focus'] = true;
         $('#text-content-editor').summernote(summernoteConfig);
     });
 
-    $('#news-preview').click(function() {
+    $('#blog-preview').click(function() {
         var aHTML = $('#text-content-editor').summernote('code');
         $('#text_content').val(aHTML);
         $('#text-content-editor').summernote('destroy');
     });
 
+//10x3
     var inputThumbCallback = function() {
         $($('#thumb-crop')).cropper({
             aspectRatio: 350/227,
@@ -22,9 +23,9 @@ $(document).ready(function(){
         });
 
         $('#thumb-img').hide();
-        $('.thumb label').hide();
-        $('.thumb .crop-controls').show();
         $('#thumb-crop').show();
+        $('.thumb .crop-controls').show();
+        $('.thumb label').hide();
     }
 
     cropInput($('#thumb-crop'), $('#thumb-input'), inputThumbCallback)
@@ -41,7 +42,6 @@ $(document).ready(function(){
     $('#thumb-rotateRight').click(function() {
         $('#thumb-crop').cropper('rotate', -45);
     });
-
     $('#thumb-save').click(function() {
         var thumbDataURL = $('#thumb-crop').cropper('getDataURL');
         $('#thumb').val(thumbDataURL);
@@ -54,7 +54,7 @@ $(document).ready(function(){
     });
 
     $(function() {
-        $('#news-form').submit(function() {
+        $('#blog-form').submit(function() {
             var aHTML = $('#text-content-editor').summernote('code');
             $('#text_content').val(aHTML);
             return true;
