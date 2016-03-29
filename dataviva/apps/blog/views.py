@@ -41,14 +41,41 @@ def admin():
 
 
 @mod.route('/admin/activate', methods=['POST'])
-def approval_update():
-    for id, active in request.form.iteritems():
+def admin_activate():
+    for id in request.form.get('ids[]'):
         post = Post.query.filter_by(id=id).first_or_404()
-        post.active = active == u'true'
+        post.active = True
         db.session.commit()
 
-    message = u"Post(s) atualizado(s) com sucesso!"
+    message = u"Post(s) ativos(s) com sucesso!"
     return message, 200
+
+
+@mod.route('/admin/delete', methods=['POST'])
+def admin_delete():
+
+    ids = request.form.get('ids')
+    if ids:
+        Post.query().filter(Post.id.in_(ids)).delete()
+
+        message = u"Post excluído com sucesso!"
+        flash(message, 'success')
+        return redirect(url_for('blog.admin'))
+    else:
+        return make_response(render_template('not_found.html'), 404)
+
+
+@mod.route('/post/<id>/delete', methods=['POST'])
+def delete(id):
+    post = Post.query.filter_by(id=id).first_or_404()
+    if post:
+        db.session.delete(post)
+        db.session.commit()
+        message = u"Post excluído com sucesso!"
+        flash(message, 'success')
+        return redirect(url_for('blog.index'))
+    else:
+        return make_response(render_template('not_found.html'), 404)
 
 
 @mod.route('/all', methods=['GET'])
@@ -141,18 +168,3 @@ def update(id):
         message = u'Post editado com sucesso!'
         flash(message, 'success')
         return redirect(url_for('blog.index'))
-
-
-@mod.route('/post/<id>/delete', methods=['GET'])
-def delete(id):
-    post = Post.query.filter_by(id=id).first_or_404()
-    if post:
-        db.session.delete(post)
-        db.session.commit()
-        message = u"Post excluído com sucesso!"
-        flash(message, 'success')
-        return redirect(url_for('blog.index'))
-    else:
-        return make_response(render_template('not_found.html'), 404)
-
-
