@@ -6,33 +6,31 @@
 {% endblock %}
 
 {% block admin_content %}
-<h2>Estudos sobre o DataViva</h2>
-<h3>Aprovação dos estudos</h3>
-<div class="meta">
+<h1>Blog</h1>
 
-    <div class="alert alert-warning">
-        How quickly daft jumping zebras vex. <a class="alert-link" href="#">Alert Link</a>.
-    </div>
-    <table id="approvalTable" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th class="column-checkbox">
-                    <div class="checkbox checkbox-success">
-                        <input name="postselector" id="check-all" type="checkbox">
-                        <label for="check-all"></label>
-                    </div>
-                </th>
-                <th>Title</th>
-                <th>Author(s)</th>
-                <th>Publication Date</th>
-                <th>Active</th>
-            </tr>
-        </thead>
-    </table>
+<div class="alert alert-warning">
+    How quickly daft jumping zebras vex. <a class="alert-link" href="#">Alert Link</a>.
 </div>
-<a class="btn btn-primary pull-right" href="/blog">Voltar</a>
-<a class="btn btn-primary pull-right" href="#">Excluir</a>
-<a class="btn btn-primary pull-right" href="#">Editar</a>
-<a class="btn btn-primary pull-right" href="/blog/post/new">Novo</a>
+<table id="blog-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th class="column-checkbox">
+                <div class="checkbox checkbox-success">
+                    <input name="postselector" type="checkbox">
+                    <label for="check-all"></label>
+                </div>
+            </th>
+            <th>Title</th>
+            <th>Author(s)</th>
+            <th>Publication Date</th>
+            <th>Active</th>
+        </tr>
+    </thead>
+</table>
+
+<button id="admin-delete" class="btn btn-primary">Excluir</button>
+<button id="admin-edit" class="btn btn-primary">Editar</button>
+<a id="admin-new" class="btn btn-primary" href="/blog/post/new">Novo</a>
+<button id="admin-activate" class="btn btn-primary">Ativar/Desativar</button>
 
 {% endblock admin_content %}

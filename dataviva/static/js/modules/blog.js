@@ -1,69 +1,7 @@
-$(document).ready(function(){
+var BlogTable = function () {
+    this.tableId = '#blog-table';
 
-    $('#text-content-editor').append($('#text_content').val())
-    $('#text-content-editor').summernote(summernoteConfig);
-
-    $('#blog-edit').click(function() {
-        summernoteConfig['focus'] = true;
-        $('#text-content-editor').summernote(summernoteConfig);
-    });
-
-    $('#blog-preview').click(function() {
-        var aHTML = $('#text-content-editor').summernote('code');
-        $('#text_content').val(aHTML);
-        $('#text-content-editor').summernote('destroy');
-    });
-
-    var inputThumbCallback = function() {
-        $($('#thumb-crop')).cropper({
-            aspectRatio: 350/227,
-            preview: '#thumb-preview',
-            viewMode: 3
-        });
-
-        $('#thumb-img').hide();
-        $('#thumb-crop').show();
-        $('.thumb .crop-controls').show();
-        $('.thumb label').hide();
-    }
-
-    cropInput($('#thumb-crop'), $('#thumb-input'), inputThumbCallback)
-
-    $('#thumb-zoomIn').click(function() {
-        $('#thumb-crop').cropper('zoom', 0.1);
-    });
-    $('#thumb-zoomOut').click(function() {
-        $('#thumb-crop').cropper('zoom', -0.1);
-    });
-    $('#thumb-rotateLeft').click(function() {
-        $('#thumb-crop').cropper('rotate', 45);
-    });
-    $('#thumb-rotateRight').click(function() {
-        $('#thumb-crop').cropper('rotate', -45);
-    });
-    $('#thumb-save').click(function() {
-        var thumbDataURL = $('#thumb-crop').cropper('getDataURL');
-        $('#thumb').val(thumbDataURL);
-        $('#thumb-img').attr('src', thumbDataURL);
-        $('#thumb-crop').cropper('destroy');
-        $('#thumb-crop').attr('src', '');
-        $('#thumb-img').show();
-        $('.thumb label').show();
-        $('.thumb .crop-controls').hide();
-    });
-
-    $(function() {
-        $('#blog-form').submit(function() {
-            var aHTML = $('#text-content-editor').summernote('code');
-            $('#text_content').val(aHTML);
-            return true;
-        });
-    });
-});
-
-
-var ScholarApproval = function () {
-    this.table = $('#approvalTable').DataTable({
+    this.table = $(this.tableId).DataTable({
         "sAjaxSource": "/blog/all",
         "sAjaxDataProp": "posts",
         "order": [],
@@ -82,7 +20,7 @@ var ScholarApproval = function () {
                 "render": function (data, type, post, meta){
 
                     var checkbox = '<div class="checkbox checkbox-success">' +
-                                   '    <input name="postselector" id="'+post[0]+'" type="checkbox">' +
+                                   '    <input name="selected-item" id="item'+post[0]+'" value="'+post[0]+'" type="checkbox">' +
                                    '    <label for="'+post[0]+'"></label>'
                                    '</div>';
 
@@ -129,57 +67,123 @@ var ScholarApproval = function () {
         }
     });
 
-};
+    $('#blog-table thead tr th').first().addClass('check-all')
 
-ScholarApproval.prototype.multipleCheckbox = function(){
-    $('#approvalTable thead').on('click','#select-all', function () {
-        var posts = {};
-        $('input[name="checkboxApproval"]').each(function() {
-            posts[this.value] = this.checked;
+    $('#blog-table .check-all').click(function() {
+        var checked = $('#blog-table .check-all input:checkbox').get(0).checked;
+        $('input[name="selected-item"]').each(function() {
+            $(this).prop('checked', checked);
         });
-        sendCheckedArticle(posts);
-    });
+    })
+
 };
 
-ScholarApproval.prototype.singleCheckbox = function(){
-    $('#approvalTable tbody').on('click','.body-checkbox', function () {
-        var post = {};
-        post[this.firstElementChild.value] = this.firstElementChild.checked;
-        sendCheckedArticle(post);
-    });
-};
-
-
-ScholarApproval.prototype.controlCheckbox = function(approvalTable){
-    $('#select-all').on('click', function(){
-       var rows = approvalTable.table.rows({ 'search': 'applied' }).nodes();
-       $('input[type="checkbox"]', rows).prop('checked', this.checked);
-    });
-
-    $('#approvalTable tbody').on('change', 'input[type="checkbox"]', function(){
-       if(!this.checked){
-          var el = $('#select-all').get(0);
-          if(el && el.checked && ('indeterminate' in el)){
-             el.indeterminate = true;
-            }
+BlogTable.prototype.getCheckedIds = function(first_argument) {
+    var checkedIds = [];
+    $('#blog-table input[name="selected-item"]').each(function() {
+        if (this.checked) {
+            checkedIds.push(this.value);
         }
     });
+    return checkedIds;
 };
 
-var approvalTable = new ScholarApproval();
-approvalTable.multipleCheckbox();
-approvalTable.singleCheckbox();
-approvalTable.controlCheckbox(approvalTable);
+var blogTable = new BlogTable();
 
-
-
-function sendCheckedArticle(postsApproval){
-    var lang = $('html').attr('lang');
+var activate = function(ids){
     $.ajax({
       method: "POST",
       url: "/"+lang+"/blog/admin/activate",
-      data: postsApproval,
+      data: {ids:ids},
       success: function (msg) {
       }
-    })
+    });
 }
+
+var destroy = function(ids){
+    $.ajax({
+      method: "POST",
+      url: "/"+lang+"/blog/admin/delete",
+      data: {ids:ids},
+      success: function (msg) {
+      }
+    });
+}
+var edit = function(ids){
+    window.location = '/'+lang+'/blog/post/'+ids[0]+'/edit';
+}
+
+var inputThumbCallback = function() {
+    $($('#thumb-crop')).cropper({
+        aspectRatio: 350/227,
+        preview: '#thumb-preview',
+        viewMode: 3
+    });
+
+    $('#thumb-img').hide();
+    $('#thumb-crop').show();
+    $('.thumb .crop-controls').show();
+    $('.thumb label').hide();
+}
+
+$(document).ready(function(){
+
+    $('#text-content-editor').append($('#text_content').val())
+    $('#text-content-editor').summernote(summernoteConfig);
+
+    $('#blog-edit').click(function() {
+        summernoteConfig['focus'] = true;
+        $('#text-content-editor').summernote(summernoteConfig);
+    });
+
+    $('#blog-preview').click(function() {
+        var aHTML = $('#text-content-editor').summernote('code');
+        $('#text_content').val(aHTML);
+        $('#text-content-editor').summernote('destroy');
+    });
+
+    cropInput($('#thumb-crop'), $('#thumb-input'), inputThumbCallback)
+
+    $('#thumb-zoomIn').click(function() {
+        $('#thumb-crop').cropper('zoom', 0.1);
+    });
+    $('#thumb-zoomOut').click(function() {
+        $('#thumb-crop').cropper('zoom', -0.1);
+    });
+    $('#thumb-rotateLeft').click(function() {
+        $('#thumb-crop').cropper('rotate', 45);
+    });
+    $('#thumb-rotateRight').click(function() {
+        $('#thumb-crop').cropper('rotate', -45);
+    });
+    $('#thumb-save').click(function() {
+        var thumbDataURL = $('#thumb-crop').cropper('getDataURL');
+        $('#thumb').val(thumbDataURL);
+        $('#thumb-img').attr('src', thumbDataURL);
+        $('#thumb-crop').cropper('destroy');
+        $('#thumb-crop').attr('src', '');
+        $('#thumb-img').show();
+        $('.thumb label').show();
+        $('.thumb .crop-controls').hide();
+    });
+
+
+    $('#admin-delete').click(function() {
+        destroy(blogTable.getCheckedIds());
+    });
+    $('#admin-edit').click(function() {
+        edit(blogTable.getCheckedIds());
+    });
+    $('#admin-activate').click(function() {
+        activate(blogTable.getCheckedIds());
+    });
+
+
+    $(function() {
+        $('#blog-form').submit(function() {
+            var aHTML = $('#text-content-editor').summernote('code');
+            $('#text_content').val(aHTML);
+            return true;
+        });
+    });
+});
