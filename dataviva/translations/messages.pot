@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-29 13:59-0300\n"
+"POT-Creation-Date: 2016-03-29 14:45-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -308,9 +308,50 @@ msgstr ""
 msgid "Exports By"
 msgstr ""
 
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:12
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:43
+#: dataviva/translations/dictionary.py:133
+msgid "Municipality"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:20
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:51
+#: dataviva/templates/about.html:102 dataviva/templates/site.html:74
+#: dataviva/templates/about/apps/geo_map.html:1
+#: dataviva/translations/dictionary.py:11
+msgid "Geo Map"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:24
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:39
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:55
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:70
+#: dataviva/templates/about.html:98 dataviva/templates/site.html:73
+#: dataviva/templates/about/apps/stacked.html:1
+#: dataviva/translations/dictionary.py:15
+msgid "Stacked"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:27
+#: dataviva/translations/dictionary.py:286
+msgid "Destination"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:35
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:66
+#: dataviva/templates/about.html:126 dataviva/templates/site.html:76
+#: dataviva/templates/about/apps/line.html:1
+msgid "Line"
+msgstr ""
+
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:42
 #: dataviva/translations/dictionary.py:518
 msgid "Imports By"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:58
+#: dataviva/translations/dictionary.py:285
+msgid "Origin"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/index.html:48
@@ -374,6 +415,11 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
+#: dataviva/apps/product/templates/product/tab-general.html:101
+#: dataviva/translations/dictionary.py:519
+msgid "General Profile"
+msgstr ""
+
 #: dataviva/apps/product/templates/product/tab-general.html:104
 #: dataviva/apps/product/templates/product/tab-general.html:127
 #: dataviva/translations/dictionary.py:491
@@ -433,8 +479,7 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:122
 #: dataviva/apps/product/templates/product/tab-general.html:137
 #: dataviva/apps/product/templates/product/tab-general.html:151
-#: dataviva/translations/dictionary.py:498
-msgid "and that imports more is"
+msgid "and witch imports more is"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:115
@@ -474,21 +519,22 @@ msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:164
 #: dataviva/translations/dictionary.py:505
-msgid "Main Municipality by total value exported"
+msgid "Main Municipality by Total Value Exported"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:173
-msgid "Main Msunicipality by total value imported"
+#: dataviva/translations/dictionary.py:506
+msgid "Main Municipality by Total Value Imported"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:183
 #: dataviva/translations/dictionary.py:507
-msgid "Main Destination by total value exported"
+msgid "Main Destination by Total Value Exported"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:192
 #: dataviva/translations/dictionary.py:508
-msgid "Main Origin by total value exported"
+msgid "Main Origin by Total Value Exported"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:203
@@ -596,18 +642,6 @@ msgstr ""
 msgid "Tree Map"
 msgstr ""
 
-#: dataviva/templates/about.html:98 dataviva/templates/site.html:73
-#: dataviva/templates/about/apps/stacked.html:1
-#: dataviva/translations/dictionary.py:15
-msgid "Stacked"
-msgstr ""
-
-#: dataviva/templates/about.html:102 dataviva/templates/site.html:74
-#: dataviva/templates/about/apps/geo_map.html:1
-#: dataviva/translations/dictionary.py:11
-msgid "Geo Map"
-msgstr ""
-
 #: dataviva/templates/about.html:106 dataviva/templates/site.html:75
 #: dataviva/templates/about/apps/network.html:1
 #: dataviva/translations/dictionary.py:12
@@ -636,11 +670,6 @@ msgstr ""
 #: dataviva/templates/about/apps/occugrid.html:1
 #: dataviva/translations/dictionary.py:10
 msgid "Occugrid"
-msgstr ""
-
-#: dataviva/templates/about.html:126 dataviva/templates/site.html:76
-#: dataviva/templates/about/apps/line.html:1
-msgid "Line"
 msgstr ""
 
 #: dataviva/templates/about.html:130 dataviva/templates/site.html:81
@@ -2362,10 +2391,6 @@ msgstr ""
 msgid "Planning Region"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:133
-msgid "Municipality"
-msgstr ""
-
 #: dataviva/translations/dictionary.py:134
 msgid "Main Group"
 msgstr ""
@@ -2746,14 +2771,6 @@ msgstr ""
 
 #: dataviva/translations/dictionary.py:282
 msgid "Exports/Imports"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:285
-msgid "Origin"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:286
-msgid "Destination"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:287
@@ -3246,29 +3263,29 @@ msgstr ""
 msgid "in"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:506
-msgid "Main Municipality by total value imported"
+#: dataviva/translations/dictionary.py:498
+msgid "and that imports more is"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:527
+#: dataviva/translations/dictionary.py:528
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:528
+#: dataviva/translations/dictionary.py:529
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:529
+#: dataviva/translations/dictionary.py:530
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:530
+#: dataviva/translations/dictionary.py:531
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""
