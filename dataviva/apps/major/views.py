@@ -18,6 +18,7 @@ mod = Blueprint('major', __name__,
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
+
 @mod.before_request
 def before_request():
     g.page_type = mod.name
@@ -26,6 +27,12 @@ def before_request():
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
+
+
+@mod.route('/<major_id>/graphs/<tab>', methods=['POST'])
+def graphs(major_id, tab):
+    major = Major.query.filter_by(id=major_id).first_or_404()
+    return render_template('major/graphs-'+tab+'.html', major=major)
 
 
 @mod.route('/<course_hedu_id>')
