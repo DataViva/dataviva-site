@@ -128,8 +128,5 @@ def index(wld_id):
             header['import_rank'] = index
             break
 
-    if location:
-        return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location)
-    else:
-        return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner)
-
+    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location)
+  
