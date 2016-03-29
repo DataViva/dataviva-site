@@ -1,28 +1,30 @@
-{% extends "blog/_base.html" %}
+{% extends "admin.html" %}
 
-{% block blog_content %}
+{% block breadcrumb %}
+    <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
+    <li class="active">Blog</li>
+{% endblock %}
 
-<div class="institucional">
-    <h2>Estudos sobre o DataViva</h2>
-    <h3>Aprovação dos estudos</h3>
-    <div class="meta">
-        <table id="approvalTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Title<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Author(s)<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Publication Date<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Active <input name="select-all" value="1" id="select-all" type="checkbox"/></th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+{% block admin_content %}
+<h2>Estudos sobre o DataViva</h2>
+<h3>Aprovação dos estudos</h3>
+<div class="meta">
+    <table id="approvalTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title<i class="fa fa-fw fa-sort"></i></th>
+                <th>Author(s)<i class="fa fa-fw fa-sort"></i></th>
+                <th>Publication Date<i class="fa fa-fw fa-sort"></i></th>
+                <th>Active <input name="select-all" value="1" id="select-all" type="checkbox"/></th>
+            </tr>
+        </thead>
+    </table>
+</div>
 <a class="btn btn-primary pull-right" href="/blog">Voltar</a>
 <a class="btn btn-primary pull-right" href="#">Excluir</a>
 <a class="btn btn-primary pull-right" href="#">Editar</a>
 <a class="btn btn-primary pull-right" href="/blog/post/new">Novo</a>
-</div>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
@@ -30,7 +32,7 @@
 
 <script type="text/javascript">
     var ScholarApproval = function () {
-        this.table = $('#approvalTable').DataTable( {
+        this.table = $('#approvalTable').DataTable({
             "sAjaxSource": "/blog/all",
             "sAjaxDataProp": "posts",
             "aoColumnsDefs": [
@@ -79,6 +81,9 @@
             "bFilter": false,
             "info": false,
         });
+
+
+
     };
 
     ScholarApproval.prototype.multipleCheckbox = function(){
@@ -98,6 +103,7 @@
             sendCheckedArticle(post);
         });
     };
+
 
     ScholarApproval.prototype.controlCheckbox = function(approvalTable){
         $('#select-all').on('click', function(){
@@ -125,11 +131,11 @@
         var lang = $('html').attr('lang');
         $.ajax({
           method: "POST",
-          url: "/"+lang+"/blog/approval",
+          url: "/"+lang+"/blog/admin/activate",
           data: postsApproval,
           success: function (msg) {
           }
         })
     }
 </script>
-{% endblock blog_content %}
+{% endblock admin_content %}

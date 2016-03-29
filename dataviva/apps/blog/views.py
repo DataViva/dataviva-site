@@ -34,6 +34,32 @@ def index():
     return render_template('blog/index.html', posts=posts)
 
 
+@mod.route('/admin', methods=['GET'])
+def admin():
+    posts = Post.query.all()
+    return render_template('blog/admin.html', posts=posts)
+
+
+@mod.route('/admin/activate', methods=['POST'])
+def approval_update():
+    for id, active in request.form.iteritems():
+        post = Post.query.filter_by(id=id).first_or_404()
+        post.active = active == u'true'
+        db.session.commit()
+
+    message = u"Post(s) atualizado(s) com sucesso!"
+    return message, 200
+
+
+@mod.route('/all', methods=['GET'])
+def all():
+    result = Post.query.all()
+    posts = []
+    for row in result:
+        posts += [(row.id, row.title, row.authors_str(), row.postage_date.strftime('%d/%m/%Y'), row.active)]
+    return jsonify(posts=posts)
+
+
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
     post = Post.query.filter_by(id=id).first_or_404()
@@ -130,26 +156,3 @@ def delete(id):
         return make_response(render_template('not_found.html'), 404)
 
 
-@mod.route('/approval', methods=['GET'])
-def approval():
-    posts = Post.query.all()
-    return render_template('blog/approval.html', posts=posts)
-
-
-@mod.route('/approval', methods=['POST'])
-def approval_update():
-    for id, active in request.form.iteritems():
-        post = Post.query.filter_by(id=id).first_or_404()
-        post.active = active == u'true'
-        db.session.commit()
-    message = u"Post(s) atualizados com sucesso!"
-    return message
-
-
-@mod.route('/all', methods=['GET'])
-def all():
-    result = Post.query.all()
-    posts = []
-    for row in result:
-        posts += [(row.id, row.title, row.authors_str(), row.postage_date.strftime('%d/%m/%Y'), row.active)]
-    return jsonify(posts=posts)
