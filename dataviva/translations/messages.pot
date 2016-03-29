@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-28 17:25-0300\n"
+"POT-Creation-Date: 2016-03-29 13:59-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -206,21 +206,8 @@ msgstr ""
 msgid "Preferences updated."
 msgstr ""
 
-#: dataviva/apps/admin/views.py:34 dataviva/templates/general/error.html:17
+#: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:17
 msgid "You dont have permission to view this page."
-msgstr ""
-
-#: dataviva/apps/admin/views.py:185
-msgid "DataViva Reply"
-msgstr ""
-
-#: dataviva/apps/admin/views.py:191
-msgid "This question has now been updated."
-msgstr ""
-
-#: dataviva/apps/admin/views.py:216 dataviva/apps/admin/views.py:317
-#: dataviva/apps/admin/views.py:333
-msgid "The item was successfully deleted."
 msgstr ""
 
 #: dataviva/apps/ask/views.py:111 dataviva/apps/ask/views.py:139
@@ -305,6 +292,27 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
+#: dataviva/translations/dictionary.py:516
+msgid "Preview"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:8
+#: dataviva/apps/product/templates/product/tab-general.html:7
+#: dataviva/translations/dictionary.py:281
+msgid "Trade Balance"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:11
+#: dataviva/translations/dictionary.py:517
+msgid "Exports By"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:42
+#: dataviva/translations/dictionary.py:518
+msgid "Imports By"
+msgstr ""
+
 #: dataviva/apps/product/templates/product/index.html:48
 #: dataviva/translations/dictionary.py:479
 msgid "General"
@@ -314,11 +322,6 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-opportunities.html:2
 #: dataviva/translations/dictionary.py:481
 msgid "Economic Opportunities"
-msgstr ""
-
-#: dataviva/apps/product/templates/product/tab-general.html:7
-#: dataviva/translations/dictionary.py:281
-msgid "Trade Balance"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:16
@@ -716,37 +719,6 @@ msgstr ""
 #: dataviva/templates/about.html:198
 #: dataviva/templates/about/glossary/required.html:1
 msgid "Estimated Employment"
-msgstr ""
-
-#: dataviva/templates/admin.html:24
-msgid "Users"
-msgstr ""
-
-#: dataviva/templates/admin.html:25 dataviva/templates/account/index.html:28
-#: dataviva/translations/dictionary.py:441
-msgid "Questions"
-msgstr ""
-
-#: dataviva/templates/admin.html:26
-#: dataviva/templates/admin/admin_questions.html:30
-#: dataviva/translations/dictionary.py:438
-msgid "Replies"
-msgstr ""
-
-#: dataviva/templates/admin.html:29
-msgid "Pending"
-msgstr ""
-
-#: dataviva/templates/admin.html:30
-msgid "Approved"
-msgstr ""
-
-#: dataviva/templates/admin.html:31
-msgid "Rejected"
-msgstr ""
-
-#: dataviva/templates/admin.html:32
-msgid "Duplicate"
 msgstr ""
 
 #: dataviva/templates/mail.html:26
@@ -1825,6 +1797,11 @@ msgstr ""
 msgid "Starred Visualizations"
 msgstr ""
 
+#: dataviva/templates/account/index.html:28
+#: dataviva/translations/dictionary.py:441
+msgid "Questions"
+msgstr ""
+
 #: dataviva/templates/account/index.html:33
 msgid "Preferences"
 msgstr ""
@@ -1860,6 +1837,11 @@ msgstr ""
 #: dataviva/templates/admin/admin_users.html:12
 #: dataviva/translations/dictionary.py:454
 msgid "User"
+msgstr ""
+
+#: dataviva/templates/admin/admin_questions.html:30
+#: dataviva/translations/dictionary.py:438
+msgid "Replies"
 msgstr ""
 
 #: dataviva/templates/admin/admin_questions.html:31
@@ -3268,25 +3250,25 @@ msgstr ""
 msgid "Main Municipality by total value imported"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:522
+#: dataviva/translations/dictionary.py:527
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:523
+#: dataviva/translations/dictionary.py:528
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:524
+#: dataviva/translations/dictionary.py:529
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:525
+#: dataviva/translations/dictionary.py:530
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""

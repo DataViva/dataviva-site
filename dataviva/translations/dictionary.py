@@ -512,6 +512,11 @@ def dictionary():
         "Main Destination": gettext("Main Destination"),
         "Main Origin": gettext("Main Origin"),
 
+        #all
+        "preview": gettext("Preview"),
+        "exports_by": gettext("Exports By"),
+        "imports_by": gettext("Imports By"), 
+
     }
 
 def plurals(key=None, n=1):

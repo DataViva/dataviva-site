@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-28 17:25-0300\n"
+"POT-Creation-Date: 2016-03-29 13:59-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -207,22 +207,9 @@ msgstr "Idade Média"
 msgid "Preferences updated."
 msgstr "Preferências atualizadas."
 
-#: dataviva/apps/admin/views.py:34 dataviva/templates/general/error.html:17
+#: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:17
 msgid "You dont have permission to view this page."
 msgstr "Você não tem permissão para ver essa página."
-
-#: dataviva/apps/admin/views.py:185
-msgid "DataViva Reply"
-msgstr "Resposta DataViva"
-
-#: dataviva/apps/admin/views.py:191
-msgid "This question has now been updated."
-msgstr "Esta pergunta foi atualizada."
-
-#: dataviva/apps/admin/views.py:216 dataviva/apps/admin/views.py:317
-#: dataviva/apps/admin/views.py:333
-msgid "The item was successfully deleted."
-msgstr "O item foi excluído com sucesso."
 
 #: dataviva/apps/ask/views.py:111 dataviva/apps/ask/views.py:139
 msgid "You need to be logged in to vote."
@@ -308,6 +295,29 @@ msgstr "Anterior"
 msgid "Next"
 msgstr "Próximo"
 
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
+#: dataviva/translations/dictionary.py:516
+msgid "Preview"
+msgstr "Visualize"
+
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:8
+#: dataviva/apps/product/templates/product/tab-general.html:7
+#: dataviva/translations/dictionary.py:281
+msgid "Trade Balance"
+msgstr "Balança Comercial"
+
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:11
+#: dataviva/translations/dictionary.py:517
+#, fuzzy
+msgid "Exports By"
+msgstr "Exportações por"
+
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:42
+#: dataviva/translations/dictionary.py:518
+#, fuzzy
+msgid "Imports By"
+msgstr "Importações por"
+
 #: dataviva/apps/product/templates/product/index.html:48
 #: dataviva/translations/dictionary.py:479
 #, fuzzy
@@ -319,11 +329,6 @@ msgstr "Estatísticas Gerais"
 #: dataviva/translations/dictionary.py:481
 msgid "Economic Opportunities"
 msgstr "Oportunidades Econômicas"
-
-#: dataviva/apps/product/templates/product/tab-general.html:7
-#: dataviva/translations/dictionary.py:281
-msgid "Trade Balance"
-msgstr "Balança Comercial"
 
 #: dataviva/apps/product/templates/product/tab-general.html:16
 #: dataviva/translations/dictionary.py:483
@@ -735,37 +740,6 @@ msgstr "Vantagem Comparativa"
 #: dataviva/templates/about/glossary/required.html:1
 msgid "Estimated Employment"
 msgstr "Emprego Estimado"
-
-#: dataviva/templates/admin.html:24
-msgid "Users"
-msgstr "Usuários"
-
-#: dataviva/templates/admin.html:25 dataviva/templates/account/index.html:28
-#: dataviva/translations/dictionary.py:441
-msgid "Questions"
-msgstr "Perguntas"
-
-#: dataviva/templates/admin.html:26
-#: dataviva/templates/admin/admin_questions.html:30
-#: dataviva/translations/dictionary.py:438
-msgid "Replies"
-msgstr "Respostas"
-
-#: dataviva/templates/admin.html:29
-msgid "Pending"
-msgstr "Pendente"
-
-#: dataviva/templates/admin.html:30
-msgid "Approved"
-msgstr "Aprovado"
-
-#: dataviva/templates/admin.html:31
-msgid "Rejected"
-msgstr "Rejeitado"
-
-#: dataviva/templates/admin.html:32
-msgid "Duplicate"
-msgstr "Duplicado"
 
 #: dataviva/templates/mail.html:26
 msgid "If you don't want to receive these updates,"
@@ -2279,6 +2253,11 @@ msgstr "Atividades ordenadas por data"
 msgid "Starred Visualizations"
 msgstr "Visualizações Favoritadas"
 
+#: dataviva/templates/account/index.html:28
+#: dataviva/translations/dictionary.py:441
+msgid "Questions"
+msgstr "Perguntas"
+
 #: dataviva/templates/account/index.html:33
 msgid "Preferences"
 msgstr "Preferrências"
@@ -2321,6 +2300,11 @@ msgstr "Lembrar-me"
 #: dataviva/translations/dictionary.py:454
 msgid "User"
 msgstr "Usuário"
+
+#: dataviva/templates/admin/admin_questions.html:30
+#: dataviva/translations/dictionary.py:438
+msgid "Replies"
+msgstr "Respostas"
 
 #: dataviva/templates/admin/admin_questions.html:31
 msgid "Date"
@@ -3780,25 +3764,25 @@ msgstr "em"
 msgid "Main Municipality by total value imported"
 msgstr "Principal Município por valor total importado"
 
-#: dataviva/translations/dictionary.py:522
+#: dataviva/translations/dictionary.py:527
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:523
+#: dataviva/translations/dictionary.py:528
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:524
+#: dataviva/translations/dictionary.py:529
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:525
+#: dataviva/translations/dictionary.py:530
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"
@@ -4123,4 +4107,28 @@ msgstr "com"
 
 #~ msgid "Main municipality by total value exported"
 #~ msgstr "Principal Município por valor total exportado"
+
+#~ msgid "DataViva Reply"
+#~ msgstr "Resposta DataViva"
+
+#~ msgid "This question has now been updated."
+#~ msgstr "Esta pergunta foi atualizada."
+
+#~ msgid "The item was successfully deleted."
+#~ msgstr "O item foi excluído com sucesso."
+
+#~ msgid "Users"
+#~ msgstr "Usuários"
+
+#~ msgid "Pending"
+#~ msgstr "Pendente"
+
+#~ msgid "Approved"
+#~ msgstr "Aprovado"
+
+#~ msgid "Rejected"
+#~ msgstr "Rejeitado"
+
+#~ msgid "Duplicate"
+#~ msgstr "Duplicado"
 
