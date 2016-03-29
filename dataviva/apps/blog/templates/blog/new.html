@@ -1,10 +1,19 @@
-{% extends "blog/_base.html" %}
+<!-- extend from base layout -->
+{% extends "base.html" %}
 
-{% block blog_content %}
-<div class="institucional">
-    <h2>Posts sobre o DataViva</h2>
-    <h3>Publique um Post</h3>
+{% block content %}
+    <div class="container">
+        <div class="row bg-white">
+            <ol class="breadcrumb">
+                <li><a href="{{ url_for('general.home') }}">Home</a></li>
+                <li><a href="{{ url_for('blog.index') }}">Blog</a></li>
+                <li class="active">Publicar</li>
+            </ol>
+        </div>
+    </div>
 
-    {% include "blog/_form.html" %}
-</div>
-{% endblock blog_content %}
+    <div class="container">
+        <h1>Publique um post</h1>
+        {% include "blog/_form.html" %}
+    </div>
+{% endblock content %}

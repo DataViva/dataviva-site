@@ -44,6 +44,9 @@ body {
   color: #676a6c;
   font-size: 14px;
 }
+section {
+  padding: 4.5rem 0;
+}
 /*BODY END*/
 
 /* BACKGROUNDS */
