@@ -108,7 +108,7 @@
             {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {%trans%}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
             {%trans%}is{%endtrans%} {{ body.municipality_name_export }} 
-            {%trans%}and witch imports more is{%endtrans%} {{ body.municipality_name_import }}.
+            {%trans%}and which imports more is{%endtrans%} {{ body.municipality_name_import }}.
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
@@ -119,7 +119,7 @@
             {%trans%}in trade value, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {%trans%}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
             {%trans%}is{%endtrans%} {{ body.municipality_name_export }} 
-            {%trans%}and witch imports more is{%endtrans%} {{ body.municipality_name_import }}.</p>
+            {%trans%}and which imports more is{%endtrans%} {{ body.municipality_name_import }}.</p>
         {% endif %}
     {% else %}
         {% if (product.id|length) == 6 %}
@@ -134,7 +134,7 @@
             {%trans%}in five years. The municipality{%endtrans%} {{ location.preposition('de') }} {{ location.name() }} 
             {%trans%}which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
             {%trans%}is{%endtrans%} {{ location.article() }} {{ body.municipality_name_export }} 
-            {%trans%}and witch imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
+            {%trans%}and which imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
@@ -148,7 +148,7 @@
             {%trans%}in five years. The municipality{%endtrans%} {{ location.preposition('de') }} {{ location.name() }} 
             {%trans%}which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
             {%trans%}is{%endtrans%} {{ location.article() }} {{ body.municipality_name_export }} 
-            {%trans%}and witch imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
+            {%trans%}and which imports more is{%endtrans%} {{ location.article() }} {{ body.municipality_name_import }}.</p>
         {% endif %}
     {% endif %}
 

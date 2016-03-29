@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-29 14:45-0300\n"
+"POT-Creation-Date: 2016-03-29 15:01-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -225,6 +225,7 @@ msgstr ""
 #: dataviva/apps/data/views.py:81
 #: dataviva/apps/product/templates/product/index.html:57
 #: dataviva/apps/product/templates/product/tab-general.html:157
+#: dataviva/apps/product/templates/product/tab-trade-partner.html:2
 #: dataviva/translations/dictionary.py:480
 msgid "International Trade"
 msgstr ""
@@ -479,7 +480,7 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:122
 #: dataviva/apps/product/templates/product/tab-general.html:137
 #: dataviva/apps/product/templates/product/tab-general.html:151
-msgid "and witch imports more is"
+msgid "and which imports more is"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:115

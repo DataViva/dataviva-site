@@ -495,7 +495,7 @@ def dictionary():
         "earned": gettext("earned"),
         "in trade value, representing a variation of": gettext("in trade value, representing a variation of"),
         "in five years. The municipality in Brazil which exports more": gettext("in five years. The municipality in Brazil which exports more"),
-        "and witch imports more is": gettext("and that imports more is"),
+        "and which imports more is": gettext("and that imports more is"),
         "occupies the": gettext("occupies the"),
         "position in exports": gettext("position in exports"),
         "in this location": gettext("in this location"),
