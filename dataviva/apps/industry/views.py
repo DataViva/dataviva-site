@@ -24,6 +24,12 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
+@mod.route('/<industry_id>/graphs/<tab>', methods=['POST'])
+def graphs(industry_id, tab):
+    industry = Cnae.query.filter_by(id=industry_id).first_or_404()
+    location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
+    return render_template('industry/graphs-'+tab+'.html', industry=industry, location=location)
+
 
 @mod.route('/<cnae_id>')
 def index(cnae_id):
