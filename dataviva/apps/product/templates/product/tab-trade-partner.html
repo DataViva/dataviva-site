@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane" id="trade-partner">
-    <h2>Estatísticas de Salário e Emprego</h2>
+    <h2>{%trans%}International Trade{%endtrans%}</h2>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
             <div class="table-responsive">
@@ -8,21 +8,21 @@
                         <tr>
                             {% if (location.id|length) != 9 %}
                             <th>
-                                Principal Município
-                                <small>por Valor Total Exportado</small>
+                                {%trans%}Main Municipality{%endtrans%}
+                                <small>{%trans%}by Total Value Exported{%endtrans%}</small>
                             </th>
                             <th>
-                                Principal Município
-                                <small>por Valor Total Importado</small>
+                                {%trans%}Main Municipality{%endtrans%}
+                                <small>{%trans%}by Total Value Imported{%endtrans%}</small>
                             </th>
                             {% endif %}
                             <th>
-                                Principal Destino
-                                <small>por Valor Total Exportado</small>
+                                {%trans%}Main Destination{%endtrans%}
+                                <small>{%trans%}by Total Value Exported{%endtrans%}</small>
                             </th>
                             <th>
-                                Principal Origem
-                                <small>por Valor Total Importado</small>
+                                {%trans%}Main Origin{%endtrans%}
+                                <small>{%trans%}by Total Value Imported{%endtrans%}</small>
                             </th>
                         </tr>
                     </thead>

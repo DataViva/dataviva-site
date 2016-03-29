@@ -1,15 +1,15 @@
 <div id="graphs-trade-partner" class="container">
     <nav class="nav-graph col-xs-12 col-md-3" >
-        <h3>Visualize:</h3>
+        <h3>{%trans%}Preview{%endtrans%}:</h3>
         <div class="list-group panel">
             <h4 class="m-n">
                 <a href="/pt/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?"
                    class="list-group-item" target="graphs-frame-trade-partner">
-                    Balança Comercial
+                    {%trans%}Trade Balance{%endtrans%}
                 </a>
             </h4>
-            <h4>Exportações por</h4>
-            <a href="#exports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#exports-municipality">Município</a>
+            <h4>{%trans%}Exports By{%endtrans%}</h4>
+            <a href="#exports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#exports-municipality">{%trans%}Municipality{%endtrans%}</a>
             <div class="collapse" id="exports-municipality">
                 <a href="/pt/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?size=export_val"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-municipality">
@@ -17,14 +17,14 @@
                 </a>
                 <a href="/pt/embed/geo_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?color=export_val"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-municipality">
-                    Mapa
+                    {%trans%}Geo Map{%endtrans%}
                </a>
                 <a href="/pt/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?y=export_val&layout=value&sort=asc"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-municipality">
-                    Evoluçāo
+                    {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
-            <a href="#exports-destination" class="list-group-item" data-toggle="collapse" data-parent="#exports-destination">Destino</a>
+            <a href="#exports-destination" class="list-group-item" data-toggle="collapse" data-parent="#exports-destination">{%trans%}Destination{%endtrans%}</a>
             <div class="collapse" id="exports-destination">
                 <a href="/pt/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?size=export_val&depth=wld_5"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-destination">
@@ -32,15 +32,15 @@
                 </a>
                 <a href="/pt/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=export_val&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-destination">
-                    Linha
+                    {%trans%}Line{%endtrans%}
                </a>
                 <a href="/pt/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=export_val?y=export_val&time=year&order=color&layout=value&sort=asc&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-destination">
-                    Evoluçāo
+                    {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
-            <h4>Importações por</h4>
-            <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">Município</a>
+            <h4>{%trans%}Imports By{%endtrans%}</h4>
+            <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">{%trans%}Municipality{%endtrans%}</a>
             <div class="collapse" id="imports-municipality">
                 <a href="/pt/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?size=import_val&depth=bra_9&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-municipality">
@@ -48,14 +48,14 @@
                 </a>
                 <a href="/pt/embed/geo_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?color=import_val"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-municipality">
-                    Mapa
+                    {%trans%}Geo Map{%endtrans%}
                </a>
                 <a href="/pt/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-municipality">
-                    Evoluçāo
+                    {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
-            <a href="#imports-origin" class="list-group-item" data-toggle="collapse" data-parent="#imports-origin">Origem</a>
+            <a href="#imports-origin" class="list-group-item" data-toggle="collapse" data-parent="#imports-origin">{%trans%}Origin{%endtrans%}</a>
             <div class="collapse" id="imports-origin">
                 <a href="/pt/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?size=import_val&depth=wld_5"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-origin">
@@ -63,11 +63,11 @@
                 </a>
                 <a href="/pt/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=import_val&time=year&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-origin">
-                    Linha
+                    {%trans%}Line{%endtrans%}
                </a>
                 <a href="/pt/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-origin">
-                    Evoluçāo
+                    {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
         </div>
