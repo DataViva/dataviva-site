@@ -104,11 +104,22 @@
             }
         });
 
-        Call.prototype.singleSelectedDelete = function(){
+        Call.prototype.singleSelected = function(){
             $('#activateTable tbody').on('click', '.body-selected',function(){    
-                var call = {};
-                call[this.firstElementChild.value] = this.firstElementChild.checked;
-                saveSelecteds(call);
+                id=this.firstElementChild.value;
+                selected=this.firstElementChild.checked;
+                saveSelecteds(id,selected);
+            });
+        };
+
+        Call.prototype.delete = function(){
+            listCalls=this.callsSelected;
+            $('#delete').click(function(){
+                for(call in listCalls){
+                    if(listCalls[call] == true){
+                        window.location.href = "/calls/call/"+call+"/delete";
+                    } /*delete only marked last*/
+                }
             });
         };
 
@@ -117,7 +128,8 @@
     var call = new Call();
     call.controlCheckbox(activateTable);
     call.singleCheckbox();
-    call.singleSelectedDelete();
+    call.singleSelected();
+    call.delete(this.call.callsSelected);
 
 
     //Verify Checks
@@ -145,9 +157,8 @@
     }
 
     //Save Selects
-    function saveSelecteds(call){
-        this.call.callsSelected=call;
-        debugger;
+    function saveSelecteds(id,selected){
+        this.call.callsSelected[id]=selected;
     }
 
 
