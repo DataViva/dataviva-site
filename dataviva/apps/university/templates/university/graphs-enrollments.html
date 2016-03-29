@@ -1,0 +1,22 @@
+<div id="graphs-enrollments" class="container">
+    <nav class="nav-graph col-xs-12 col-md-3" >
+        <h3>Visualize:</h3>
+        <div class="list-group panel">
+            <h4>Curso</h4>
+            <a href="/pt/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled" target="graphs-frame-enrollments" class="list-group-item">TreeMap</a>
+            <a href="/pt/embed/stacked/hedu/all/{{university.id}}/all/course_hedu/?y=enrolled&layout=value&order=color" target="graphs-frame-enrollments" class="list-group-item">Evolução</a>
+            <h4>Situação dos Estudantes</h4>
+            <a href="/pt/embed/line/hedu/all/{{university.id}}/all/type/?y=students&scale=linear" target="graphs-frame-enrollments" class="list-group-item">Linhas</a>
+            <h4>Turno</h4>
+            <a href="/pt/embed/stacked/hedu/all/{{university.id}}/all/time/?y=students&layout=share&order=color" target="graphs-frame-enrollments" class="list-group-item">Evolução</a>
+        </div>
+    </nav>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="/pt/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled"
+                name="graphs-frame-enrollments"
+                id="graphs-frame-enrollments"
+                class="embed-responsive-item" >
+        </iframe>
+    </div>
+</div>
+
