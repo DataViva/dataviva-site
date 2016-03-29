@@ -1,131 +1,168 @@
-<div role="tabpanel" class="tab-pane active" id="geral">
-    <div class="mod mod-datainfo">
-        <div class="numbers-top smaller">
-            <div class="row">
-                <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Saldo da Balança Comercial</p>
-                    <div class="number">
-                        R$ <strong class="counter">{{header.trade_balance | max_digits(3) }}</strong><small>{{header.trade_balance | magnitude }}</small>
+<div role="tabpanel" class="tab-pane active" id="general">
+    <div class="jcarousel-wrapper">
+        <div class="jcarousel">
+            <ul>
+                <li>
+                    <div class="widget">
+                        <h2 class="text-left text-uppercase">Saldo da Balança Comercial</h2>
+                        <div class="number">
+                            R$ <strong class="counter">{{ header.trade_balance | max_digits(3) }}</strong><br/>
+                            <small class="magnitude">{{ header.trade_balance | magnitude }}</small>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Valor Total Exportado</p>
-                    <div class="number">
-                        R$ <strong class="counter">{{header.total_exported | max_digits(3) }}</strong><small>{{header.total_exported | magnitude }}</small>
+                </li>
+                <li>
+                    <div class="widget">
+                        <h2 class="text-left text-uppercase">Valor Total Exportado</h2>
+                        <div class="number">
+                            R$ <strong class="counter">{{header.total_exported | max_digits(3) }}</strong><br/>
+                            <small class="magnitude">{{header.total_exported | magnitude }}</small>
+                        </div>
                     </div>
-                </div>
+                </li>
                 {% if header.unity_weight_export_price %}
-                <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Relação Peso Líquido(kg)/ Valor Total Exportado</p>
-                    <div class="number">
-                        <strong class="counter">{{header.unity_weight_export_price | max_digits(3) }}</strong>
+                <li>
+                    <div class="widget">
+                        <h2 class="text-left text-uppercase">Relação Peso Líquido(kg)/ Valor Total Exportado</h2>
+                        <div class="number">
+                            <strong class="counter">{{header.unity_weight_export_price | max_digits(3) }}</strong><br/>
+                            <small class="magnitude">kg / USD</small>
+                        </div>
                     </div>
-                </div>
+                </li>
                 {% endif %}
-                <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Valor Total Importado</p>
-                    <div class="number">
-                        R$ <strong class="counter">{{header.total_imported | max_digits(3) }}</strong><small>{{header.total_imported | magnitude }}</small>
+                <li>
+                    <div class="widget">
+                        <h2 class="text-left text-uppercase">Valor Total Importado</h2>
+                        <div class="number">
+                            R$ <strong class="counter">{{header.total_imported | max_digits(3) }}</strong><br/>
+                            <small class="magnitude">{{header.total_imported | magnitude }}</small>
+                        </div>
                     </div>
-                </div>
+                </li>
                 {% if header.unity_weight_import_price %}
-                <div class="col-xs-15 col-sm-2 item">
-                    <p class="label">Relação Peso Líquido(kg)/ Valor Total Importado</p>
-                    <div class="number">
-                        <strong class="counter">{{header.unity_weight_import_price | max_digits(3) }}</strong>
+                <li>
+                    <div class="widget">
+                        <h2 class="text-left text-uppercase">Relação Peso Líquido(kg)/ Valor Total Importado</h2>
+                        <div class="number">
+                            <strong class="counter">{{header.unity_weight_import_price | max_digits(3) }}</strong><br/>
+                            <small class="magnitude">{{header.unity_weight_import_price | magnitude }}</small>
+                        </div>
                     </div>
-                </div>
-                {% endif %}
-                <div class="col-xs-15 col-sm-15 year">
-                    Ano: {{header.year}}
-                </div>
-            </div>
+                </li>
+                {%endif%}
+            
+            </ul>
         </div>
-        <h2>Perfil Geral</h2>
-        {% if header.bra_id %}
-            <p>{{ trade_partner.article() | capitalize }} {{ header.name }} ocupa/ocupam a posição de número {{ header.import_rank }}º em importações para {{ location.article() }} {{ header.location_name }} e {{ header.export_rank }}º em exportações realizadas {{ location.preposition("em") }} {{ header.location_type }}. O produto mais exportado da localidade para esse país {{ trade_partner.preposition("em") }} {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e seu total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
+
+        <a href="#" class="fa fa-angle-left jcarousel-control-prev"></a>
+        <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
+    </div>
+
+    <div class="col-xs-15 col-sm-15 year">
+        Ano: {{header.year}}
+    </div>
+
+    <h2 class="m-t-xl">Perfil Geral</h2>
+    {% if header.bra_id %}
+        <p>{{ trade_partner.article() | capitalize }} {{ header.name }} ocupa/ocupam a posição de número {{ header.import_rank }}º em importações para {{ location.article() }} {{ header.location_name }} e {{ header.export_rank }}º em exportações realizadas {{ location.preposition("em") }} {{ header.location_type }}. O produto mais exportado da localidade para esse país {{ trade_partner.preposition("em") }} {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e seu total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
+    {% else %}
+        {% if header.wld_id|length == 2 %}
+            <p>{{ trade_partner.article() | capitalize }} {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse continente é/são {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e seu total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
         {% else %}
-            {% if header.wld_id|length == 2 %}
-                <p>{{ trade_partner.article() | capitalize }} {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse continente é/são {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e seu total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
-            {% else %}
-                <p>{{ trade_partner.article() | capitalize }} país {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {% if header.total_exported == 0 %} não há exportações realizadas pelo Brasil. O total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}{% else %}{{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse país é o {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e o total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }} {% endif %}</p>
-            {% endif %}
+            <p>{{ trade_partner.article() | capitalize }} país {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {% if header.total_exported == 0 %} não há exportações realizadas pelo Brasil. O total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}{% else %}{{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse país é o {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e o total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }} {% endif %}</p>
         {% endif %}
-        <div class="row">
-            <div class="col-xs-15 col-sm-15 col-md-5">
-                <h3>Comércio Internacional</h3>
-                <div class="table-responsive">
-                    <table class="table data-2-columns margin-none-bottom">
-                        <tbody>
-                            {% if body.highest_export_value %}
-                            <tr>
-                                <th>
-                                    Principal Município por Valor Total Exportado
-                                </th>
-                                <td>
-                                    <p class="label">{{body.municipality_with_more_exports}}</p>
-                                    USD<strong class="counter">{{body.highest_export_value | max_digits(3) }}</strong> <span>{{body.highest_export_value | magnitude }}</span>
-                                </td>
-                            </tr>
-                            {% endif %}
-                            {% if body.highest_import_value %}
-                            <tr>
-                                <th>
-                                    Principal Município por Valor Total Importado
-                                </th>
-                                <td>
-                                    <p class="label">{{body.municipality_with_more_imports}}</p>
-                                    USD<strong class="counter">{{body.highest_import_value | max_digits(3) }}</strong> <span>{{body.highest_import_value | magnitude }}</span>
-                                </td>
-                            </tr>
-                            {% endif %}
-                            {% if body.product_with_highest_export_value %}
-                            <tr>
-                                <th>
-                                    Principal Produto por Valor Total Exportado
-                                </th>
-                                <td>
-                                    <p class="label">{{body.product_with_more_exports}}</p>
-                                    USD<strong class="counter">{{body.product_with_highest_export_value | max_digits(3) }}</strong> <span>{{body.product_with_highest_export_value | magnitude }}</span>
-                                </td>
-                            </tr>
-                            {% endif %}
-                            {% if body.product_with_highest_import_value %}
-                            <tr>
-                                <th>
-                                    Principal Produto por Valor Total Importado
-                                </th>
-                                <td>
-                                    <p class="label">{{body.product_with_more_imports}}</p>
-                                    USD<strong class="counter">{{body.product_with_highest_import_value | max_digits(3) }}</strong> <span>{{body.product_with_highest_import_value | magnitude }}</span>
-                                </td>
-                            </tr>
-                            {% endif %}
-                            <tr>
-                                <th>
-                                    Produto com maior Saldo da Balança Comercial
-                                </th>
-                                <td>
-                                    <p class = "label">{{body.product_with_highest_balance}}</p>
-                                    USD<strong class="counter">{{body.highest_balance | max_digits(3) }}</strong> <span>{{body.highest_balance | magnitude }}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Produto com menor Saldo da Balança Comercial
-                                </th>
-                                <td>
-                                    <p class = "label">{{body.product_with_lowest_balance}}</p>
-                                    USD<strong class="counter">{{body.lowest_balance | max_digits(3) }}</strong> <span>{{body.lowest_balance | magnitude }}</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
-                        mais detalhes
-                    </a>
-                </div>
+    {% endif %}
+        
+
+    <div class="row">
+        <div class="col-xs-15 col-sm-15 col-md-5">
+            <h3>Comércio Internacional</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        {% if body.highest_export_value %}
+                        <tr>
+                            <th>
+                                Principal Município por Valor Total Exportado
+                            </th>
+                            <td>
+                                <p class="label">{{body.municipality_with_more_exports}}</p>
+                                USD<strong class="counter">{{body.highest_export_value | max_digits(3) }}</strong> <span>{{body.highest_export_value | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if body.highest_import_value %}
+                        <tr>
+                            <th>
+                                Principal Município por Valor Total Importado
+                            </th>
+                            <td>
+                                <p class="label">{{body.municipality_with_more_imports}}</p>
+                                USD<strong class="counter">{{body.highest_import_value | max_digits(3) }}</strong> <span>{{body.highest_import_value | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if body.product_with_highest_export_value %}
+                        <tr>
+                            <th>
+                                Principal Produto por Valor Total Exportado
+                            </th>
+                            <td>
+                                <p class="label">{{body.product_with_more_exports}}</p>
+                                USD<strong class="counter">{{body.product_with_highest_export_value | max_digits(3) }}</strong> <span>{{body.product_with_highest_export_value | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if body.product_with_highest_import_value %}
+                        <tr>
+                            <th>
+                                Principal Produto por Valor Total Importado
+                            </th>
+                            <td>
+                                <p class="label">{{body.product_with_more_imports}}</p>
+                                USD<strong class="counter">{{body.product_with_highest_import_value | max_digits(3) }}</strong> <span>{{body.product_with_highest_import_value | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <th>
+                                Produto com maior Saldo da Balança Comercial
+                            </th>
+                            <td>
+                                <p class = "label">{{body.product_with_highest_balance}}</p>
+                                USD<strong class="counter">{{body.highest_balance | max_digits(3) }}</strong> <span>{{body.highest_balance | magnitude }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Produto com menor Saldo da Balança Comercial
+                            </th>
+                            <td>
+                                <p class = "label">{{body.product_with_lowest_balance}}</p>
+                                USD<strong class="counter">{{body.lowest_balance | max_digits(3) }}</strong> <span>{{body.lowest_balance | magnitude }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
+                    mais detalhes
+            </a>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
