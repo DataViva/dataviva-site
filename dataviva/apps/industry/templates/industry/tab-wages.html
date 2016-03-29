@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane" id="salario-emprego">
+<div role="tabpanel" class="tab-pane" id="wages">
     <p>{{industry.text_salary_job }}</p>
     <h2>Estatísticas de Salário e Emprego</h2>
     <div class="row">
@@ -66,30 +66,30 @@
         </div>
     </div>
 
-</br><a target="frame-tab-salario-emprego">Emprego por:</a></br>
+</br><a target="frame-tab-wages">Emprego por:</a></br>
 
          <a href="/pt/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&size=num_jobs"
-         target="frame-tab-salario-emprego">&nbsp TreeMap</a>
+         target="frame-tab-wages">&nbsp TreeMap</a>
          <a href="/pt/embed/line/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?y=num_jobs"
-         target="frame-tab-salario-emprego">&nbsp Evoluçāo</a></br>
+         target="frame-tab-wages">&nbsp Evoluçāo</a></br>
 
-<a target="frame-tab-salario-emprego">Salários por:</a> </br>
+<a target="frame-tab-wages">Salários por:</a> </br>
 
          <a href="/pt/embed/geo_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=num_jobs"
-         target="frame-tab-salario-emprego">&nbsp Mapa </a>
+         target="frame-tab-wages">&nbsp Mapa </a>
 
          <a href="/pt/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=color&depth=bra_9&size=num_jobs"
-         target="frame-tab-salario-emprego">&nbsp TreeMap</a>
+         target="frame-tab-wages">&nbsp TreeMap</a>
 
          <a href="/pt/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?y=num_jobs&layout=value&sort=asc"
-         target="frame-tab-salario-emprego">&nbsp Evolução</a></br>
+         target="frame-tab-wages">&nbsp Evolução</a></br>
 
-<a target="frame-tab-salario-emprego">Distribuição:</a></br>
+<a target="frame-tab-wages">Distribuição:</a></br>
 
         <a href="/pt/embed/bar/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae/"
-        target="frame-tab-salario-emprego">&nbsp Barras</a>
+        target="frame-tab-wages">&nbsp Barras</a>
 
  </div>
 
- <iframe name="frame-tab-salario-emprego" id="frame-salario-emprego" width='684' height='350'
+ <iframe name="frame-tab-wages" id="frame-wages" width='684' height='350'
  src='/pt/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&size=num_jobs' frameborder='0'></iframe>
