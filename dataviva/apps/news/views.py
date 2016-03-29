@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g, make_response, redirect, url_fo
 from dataviva.apps.general.views import get_locale
 
 from models import Publication, AuthorNews
-from dataviva import db, app
+from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
 from random import randrange
