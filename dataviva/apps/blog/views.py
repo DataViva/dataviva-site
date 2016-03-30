@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash, jsonify, request
+from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request
 from dataviva.apps.general.views import get_locale
 
 from models import Post, AuthorBlog
@@ -76,11 +76,12 @@ def admin_activate(status_change):
 
 @mod.route('/admin/delete', methods=['POST'])
 def admin_delete():
-    ids = request.form.getlist('ids')
+    ids = request.form.getlist('ids[]')
     if ids:
-        Post.query().filter(Post.id.in_(ids)).delete()
-        message = u"Post(s) excluído(s) com sucesso!"
-    return message, 200
+        Post.query.filter(Post.id.in_(ids)).delete()
+        return u"Post(s) excluído(s) com sucesso!", 200
+    else:
+        return u'Selecione algum post para excluí-lo.', 205
 
 
 @mod.route('/admin/post/new', methods=['GET'])
@@ -113,7 +114,7 @@ def create():
 
         message = u'Muito obrigado! Seu post foi submetido com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('blog.index'))
+        return redirect(url_for('blog.admin'))
 
 
 @mod.route('/admin/post/<id>/edit', methods=['GET'])
@@ -152,4 +153,4 @@ def update(id):
 
         message = u'Post editado com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('blog.index'))
+        return redirect(url_for('blog.admin'))
