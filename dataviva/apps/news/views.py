@@ -67,7 +67,7 @@ def edit(id):
     form.text_content.data = publication.text_content
     form.text_call.data = publication.text_call
     form.image.data = publication.image
-    form.thumb.data = publication.path
+    form.thumb.data = publication.thumb
 
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
