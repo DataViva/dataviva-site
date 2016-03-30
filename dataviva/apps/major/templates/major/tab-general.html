@@ -6,7 +6,7 @@
                     <div class="widget">
                         <h2 class="text-left text-uppercase">Número de Matrículas</h2>
                         <div class="number">
-                            R$ <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><br/>
+                            <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.enrolled | magnitude }}</small>
                         </div>
                     </div>
@@ -15,7 +15,7 @@
                     <div class="widget">
                         <h2 class="text-left text-uppercase">Número de Ingressantes</h2>
                         <div class="number">
-                            R$ <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><br/>
+                            <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.entrants | magnitude }}</small>
                         </div>
                     </div>
@@ -144,10 +144,10 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <a href="#enrollments" aria-controls="enrollments" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
                     mais detalhes
                 </a>
             </div>
         </div>
     </div>
-</div>

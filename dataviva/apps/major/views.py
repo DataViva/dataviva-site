@@ -29,10 +29,12 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/<major_id>/graphs/<tab>', methods=['POST'])
-def graphs(major_id, tab):
-    major = Major.query.filter_by(id=major_id).first_or_404()
-    return render_template('major/graphs-'+tab+'.html', major=major)
+@mod.route('/<course_hedu_id>/graphs/<tab>', methods=['POST'])
+def graphs(course_hedu_id, tab):
+    major = Course_hedu.query.filter_by(id=course_hedu_id).first_or_404()
+    location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
+    import pdb; pdb.set_trace()
+    return render_template('major/graphs-'+tab+'.html', major=major, location=location)
 
 
 @mod.route('/<course_hedu_id>')

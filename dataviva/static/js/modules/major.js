@@ -1,8 +1,8 @@
-window.showGraph = function(major, tab) {
+window.showGraph = function(major, location, tab) {
     if ($('#graphs #graphs-' + tab).length === 0) {
         $.ajax({
             method: "POST",
-            url: major+"/graphs/"+tab,
+            url: major+"/graphs/"+tab+"?bra_id="+location,
             success: function (graphs) {
                 $('#graphs').append(graphs);
             }
@@ -44,19 +44,21 @@ $(document).ready(function () {
 
     if(document.location.hash) {
         var tab = document.location.hash.substring(1),
-            major = document.location.pathname.split('/')[3]
+            major = document.location.pathname.split('/')[3],
+            location = getParameterByName('bra_id');
 
         $('[href=#' + tab + ']').tab('show');
 
-        showGraph(major, tab);
+        showGraph(major, location, tab);
     }
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         if ($(this).attr('graph') != null) {
             var major = this.dataset.major,
+                location = this.dataset.location,
                 tab = $(this).attr('aria-controls');
 
-            showGraph(major, tab);
+            showGraph(major, location, tab);
         }
     });
 });
