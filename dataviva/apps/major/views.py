@@ -28,14 +28,6 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/<course_hedu_id>/graphs/<tab>', methods=['POST'])
-def graphs(course_hedu_id, tab):
-    bra_id = request.args.get('bra_id')
-    major = Course_hedu.query.filter_by(id=course_hedu_id).first_or_404()
-    location = Bra.query.filter_by(id=bra_id).first()
-    return render_template('major/graphs-'+tab+'.html', major=major, location=location)
-
-
 @mod.route('/<course_hedu_id>')
 def index(course_hedu_id):
     bra_id = request.args.get('bra_id')
@@ -112,3 +104,11 @@ def index(course_hedu_id):
     major = Course_hedu.query.filter(Course_hedu.id == course_hedu_id).first()
 
     return render_template('major/index.html', header=header, body=body, location=location, major=major)
+
+
+@mod.route('/<course_hedu_id>/graphs/<tab>', methods=['POST'])
+def graphs(course_hedu_id, tab):
+    bra = request.args.get('bra_id')
+    major = Course_hedu.query.filter_by(id=course_hedu_id).first_or_404()
+    location = Bra.query.filter_by(id=bra).first()
+    return render_template('major/graphs-'+tab+'.html', major=major, location=location)
