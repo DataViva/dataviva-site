@@ -15,6 +15,12 @@ $(document).ready(function () {
         js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.5&appId=222520191136295";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+    window.setTimeout(function() {
+      $(".alert").fadeTo(500, 0).slideUp(500, function(){
+          $(this).remove();
+      });
+    }, 8000);
 });
 
 function showMessage(message, category) {
@@ -27,6 +33,12 @@ function showMessage(message, category) {
         message +
         '</div>'
     );
+
+    window.setTimeout(function() {
+      $(".alert").fadeTo(500, 0).slideUp(500, function(){
+          $(this).remove();
+      });
+    }, 8000);
 }
 
 var lang = document.documentElement.lang
