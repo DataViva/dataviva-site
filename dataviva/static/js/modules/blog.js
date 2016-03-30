@@ -105,7 +105,7 @@ BlogTable.prototype.getCheckedIds = function(first_argument) {
 
 var blogTable = new BlogTable();
 
-var activate = function(ids, refreshButtons){
+var activate = function(ids){
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -136,7 +136,7 @@ var activate = function(ids, refreshButtons){
     }
 }
 
-var deactivate = function(ids, refreshButtons){
+var deactivate = function(ids){
     if (ids.length) {
         $.ajax({
             method: "POST",
