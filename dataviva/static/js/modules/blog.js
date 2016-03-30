@@ -207,16 +207,18 @@ var checkManySelected = function() {
 }
 
 var inputThumbCallback = function() {
+    $('#thumb-img').hide();
+    $('.thumb-buttons').hide();
+
+    $('#thumb-preview').show();
+    $('.crop-buttons').show();
+    $('.thumb-crop').show();
+
     $($('#thumb-crop')).cropper({
         aspectRatio: 350/227,
         preview: '#thumb-preview',
         viewMode: 3
     });
-
-    $('#thumb-img').hide();
-    $('#thumb-crop').show();
-    $('.thumb .crop-controls').show();
-    $('.thumb label').hide();
 }
 
 $(document).ready(function(){
@@ -234,6 +236,8 @@ $(document).ready(function(){
         $('#text_content').val(aHTML);
         $('#text-content-editor').summernote('destroy');
     });
+
+
 
     cropInput($('#thumb-crop'), $('#thumb-input'), inputThumbCallback)
 
@@ -253,11 +257,16 @@ $(document).ready(function(){
         var thumbDataURL = $('#thumb-crop').cropper('getDataURL');
         $('#thumb').val(thumbDataURL);
         $('#thumb-img').attr('src', thumbDataURL);
+
+        $('#thumb-img').show();
+        $('.thumb-buttons').show();
+
+        $('#thumb-preview').hide();
+        $('.crop-buttons').hide();
+        $('.thumb-crop').hide();
+
         $('#thumb-crop').cropper('destroy');
         $('#thumb-crop').attr('src', '');
-        $('#thumb-img').show();
-        $('.thumb label').show();
-        $('.thumb .crop-controls').hide();
     });
 
     $('#admin-delete').click(function() {
@@ -273,11 +282,26 @@ $(document).ready(function(){
         deactivate(blogTable.getCheckedIds(), true);
     });
 
+    var text_max = 500;
+    $('#textarea-feedback').html(text_max + ' caracteres restantes');
+
+    $('#text_call').keyup(function() {
+        var text_length = $('#text_call').val().length;
+        var text_remaining = text_max - text_length;
+
+        $('#textarea-feedback').html(text_remaining + ' caracteres restantes');
+    });
+
     $(function() {
         $('#blog-form').submit(function() {
             var aHTML = $('#text-content-editor').summernote('code');
             $('#text_content').val(aHTML);
+            if ($('.summernote').summernote('isEmpty')) {
+                $('#text_content').val('');
+            }
             return true;
         });
     });
+
+    setAlertTimeOut(8000);
 });
