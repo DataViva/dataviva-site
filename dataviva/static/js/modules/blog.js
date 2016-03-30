@@ -2,7 +2,7 @@ var BlogTable = function () {
     this.tableId = '#blog-table';
 
     this.table = $(this.tableId).DataTable({
-        "sAjaxSource": "/blog/all",
+        "sAjaxSource": "/blog/post/all",
         "sAjaxDataProp": "posts",
         "order": [],
         "aoColumnsDefs": [
@@ -100,6 +100,16 @@ var activate = function(ids){
     });
 }
 
+var deactivate = function(ids){
+    $.ajax({
+      method: "POST",
+      url: "/"+lang+"/blog/admin/deactivate",
+      data: {ids:ids},
+      success: function (msg) {
+      }
+    });
+}
+
 var destroy = function(ids){
     $.ajax({
       method: "POST",
@@ -109,8 +119,9 @@ var destroy = function(ids){
       }
     });
 }
+
 var edit = function(ids){
-    window.location = '/'+lang+'/blog/post/'+ids[0]+'/edit';
+    window.location = '/'+lang+'/blog/admin/post/'+ids[0]+'/edit';
 }
 
 var inputThumbCallback = function() {
@@ -176,6 +187,9 @@ $(document).ready(function(){
     });
     $('#admin-activate').click(function() {
         activate(blogTable.getCheckedIds());
+    });
+    $('#admin-deactivate').click(function() {
+        deactivate(blogTable.getCheckedIds());
     });
 
 

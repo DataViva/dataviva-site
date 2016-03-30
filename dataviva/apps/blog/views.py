@@ -34,59 +34,6 @@ def index():
     return render_template('blog/index.html', posts=posts)
 
 
-@mod.route('/admin', methods=['GET'])
-def admin():
-    posts = Post.query.all()
-    return render_template('blog/admin.html', posts=posts)
-
-
-@mod.route('/admin/activate', methods=['POST'])
-def admin_activate():
-    for id in request.form.get('ids[]'):
-        post = Post.query.filter_by(id=id).first_or_404()
-        post.active = True
-        db.session.commit()
-
-    message = u"Post(s) ativos(s) com sucesso!"
-    return message, 200
-
-
-@mod.route('/admin/delete', methods=['POST'])
-def admin_delete():
-
-    ids = request.form.get('ids')
-    if ids:
-        Post.query().filter(Post.id.in_(ids)).delete()
-
-        message = u"Post excluído com sucesso!"
-        flash(message, 'success')
-        return redirect(url_for('blog.admin'))
-    else:
-        return make_response(render_template('not_found.html'), 404)
-
-
-@mod.route('/post/<id>/delete', methods=['POST'])
-def delete(id):
-    post = Post.query.filter_by(id=id).first_or_404()
-    if post:
-        db.session.delete(post)
-        db.session.commit()
-        message = u"Post excluído com sucesso!"
-        flash(message, 'success')
-        return redirect(url_for('blog.index'))
-    else:
-        return make_response(render_template('not_found.html'), 404)
-
-
-@mod.route('/all', methods=['GET'])
-def all():
-    result = Post.query.all()
-    posts = []
-    for row in result:
-        posts += [(row.id, row.title, row.authors_str(), row.postage_date.strftime('%d/%m/%Y'), row.active)]
-    return jsonify(posts=posts)
-
-
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
     post = Post.query.filter_by(id=id).first_or_404()
@@ -98,26 +45,51 @@ def show(id):
     return render_template('blog/show.html', post=post, id=id, read_more_posts=read_more_posts)
 
 
-@mod.route('/post/new', methods=['GET'])
+@mod.route('/post/all', methods=['GET'])
+def all_posts():
+    result = Post.query.all()
+    posts = []
+    for row in result:
+        posts += [(row.id, row.title, row.authors_str(),
+                   row.postage_date.strftime('%d/%m/%Y'), row.active)]
+    return jsonify(posts=posts)
+
+
+@mod.route('/admin', methods=['GET'])
+def admin():
+    posts = Post.query.all()
+    return render_template('blog/admin.html', posts=posts)
+
+
+@mod.route('/admin/<status_change>', methods=['POST'])
+def admin_activate(status_change):
+    for id in request.form.getlist('ids[]'):
+        post = Post.query.filter_by(id=id).first_or_404()
+        post.active = status_change == 'activate'
+
+    db.session.commit()
+    message = u"Post(s) ativado(s) com sucesso!"
+    return message, 200
+
+
+@mod.route('/admin/delete', methods=['POST'])
+def admin_delete():
+    ids = request.form.getlist('ids[]')
+    if ids:
+        Post.query.filter(Post.id.in_(ids)).delete()
+        db.session.commit()
+
+    message = u"Post(s) excluídos(s) com sucesso!"
+    return message, 200
+
+
+@mod.route('/admin/post/new', methods=['GET'])
 def new():
     form = RegistrationForm()
     return render_template('blog/new.html', form=form, action=url_for('blog.create'))
 
 
-@mod.route('/post/<id>/edit', methods=['GET'])
-def edit(id):
-    form = RegistrationForm()
-    post = Post.query.filter_by(id=id).first_or_404()
-    form.title.data = post.title
-    form.authors.data = post.authors_str()
-    form.subject.data = post.subject
-    form.text_content.data = post.text_content
-    form.text_call.data = post.text_call
-    form.thumb.data = post.thumb
-    return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
-
-
-@mod.route('/post/new', methods=['POST'])
+@mod.route('/admin/post/new', methods=['POST'])
 def create():
     form = RegistrationForm()
     if form.validate() is False:
@@ -141,10 +113,23 @@ def create():
 
         message = u'Muito obrigado! Seu post foi submetido com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('blog.index'))
+        return redirect(url_for('blog.admin'))
 
 
-@mod.route('/post/<id>/edit', methods=['POST'])
+@mod.route('/admin/post/<id>/edit', methods=['GET'])
+def edit(id):
+    form = RegistrationForm()
+    post = Post.query.filter_by(id=id).first_or_404()
+    form.title.data = post.title
+    form.authors.data = post.authors_str()
+    form.subject.data = post.subject
+    form.text_content.data = post.text_content
+    form.text_call.data = post.text_call
+    form.thumb.data = post.thumb
+    return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
+
+
+@mod.route('/admin/post/<id>/edit', methods=['POST'])
 def update(id):
     form = RegistrationForm()
     id = int(id.encode())
@@ -167,4 +152,4 @@ def update(id):
 
         message = u'Post editado com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('blog.index'))
+        return redirect(url_for('blog.admin'))
