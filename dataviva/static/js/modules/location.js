@@ -1,3 +1,17 @@
+window.showGraph = function(location, tab) {
+    if ($('#graphs #graphs-' + tab).length === 0) {
+        $.ajax({
+            method: "POST",
+            url: location+"/graphs/"+tab,
+            success: function (graphs) {
+                $('#graphs').append(graphs);
+            }
+        });
+    }
+    $("#graphs").children().hide();
+    $('#graphs #graphs-' + tab).show();
+}
+
 $(document).ready(function () {
     $(function() {
         var jcarousel = $('.jcarousel');
@@ -27,4 +41,22 @@ $(document).ready(function () {
             target: '+=1'
         });
     });
+
+    if(document.location.hash) {
+        var tab = document.location.hash.substring(1),
+            location = getParameterByName('bra_id');
+
+        $('[href=#' + tab + ']').tab('show');
+
+        showGraph(location, tab);
+    }
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        if ($(this).attr('graph') != null) {
+            var location = this.dataset.location,
+                tab = $(this).attr('aria-controls');
+            showGraph(location, tab);
+        }
+    });
+
 });

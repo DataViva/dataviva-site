@@ -32,6 +32,12 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+@mod.route('/<bra_id>/graphs/<tab>', methods=['POST'])
+def graphs(bra_id, tab):
+    location = Bra.query.filter_by(id=bra_id).first()
+    return render_template('location/graphs-'+tab+'.html', location=location)
+
+
 @mod.route('/<bra_id>')
 def index(bra_id):
 
