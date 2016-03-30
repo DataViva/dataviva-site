@@ -37,7 +37,9 @@ function showMessage(message, category, timeout) {
         message +
         '</div>'
     );
-    setAlertTimeOut(timeout);
+    if (timeout) {
+        setAlertTimeOut(timeout);
+    }
 }
 
 var lang = document.documentElement.lang
