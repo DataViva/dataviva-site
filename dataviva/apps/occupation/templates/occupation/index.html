@@ -40,21 +40,38 @@
         <nav class="col-sm-5 col-md-4 col-lg-3">
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                    <a href="#general" aria-controls="general" role="tab" data-toggle="tab">Geral</a>
+                    <a href="#general"
+                       aria-controls="general"
+                       role="tab"
+                       data-occupation="{{ occupation.id }}"
+                       data-location="{{ location.id }}"
+                       data-toggle="tab">Geral</a>
                 </li>
                 <li role="presentation">
-                    <a href="#wages" aria-controls="trade-partner" role="tab" data-toggle="tab">Salário e emprego</a>
+                    <a href="#wages"
+                       aria-controls="wages"
+                       role="tab"
+                       graph
+                       data-occupation="{{ occupation.id }}"
+                       data-location="{{ location.id }}"
+                       data-toggle="tab">Salário e Emprego</a>
                 </li>
                 {% if body.is_family %}
                 <li role="presentation">
-                    <a href="#opportunities" aria-controls="opportunities" role="tab" data-toggle="tab">Oportunidade Econômica</a>
+                    <a href="#opportunities"
+                       aria-controls="opportunities"
+                       role="tab"
+                       graph
+                       data-occupation="{{ occupation.id }}"
+                       data-location="{{ location.id }}"
+                       data-toggle="tab">Oportunidade Econômica</a>
                 </li>
                 {% endif %}
             </ul>
         </nav>
 
         <div class="tab-content col-sm-7 col-md-8 col-lg-9">
-            {% include "occupation/tab-geral.html" %}
+            {% include "occupation/tab-general.html" %}
             {% include "occupation/tab-wages.html" %}
             {% if body.is_family %}
                 {% include "occupation/tab-opportunities.html" %}
