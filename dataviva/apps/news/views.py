@@ -39,8 +39,7 @@ def show(id):
     publication = Publication.query.filter_by(id=id).first_or_404()
     publications = Publication.query.filter(Publication.id != id, Publication.active).all()
     if len(publications) > 3:
-        read_more = [
-            publications.pop(randrange(len(publications))) for _ in range(3)]
+        read_more = [publications.pop(randrange(len(publications))) for _ in range(3)]
     else:
         read_more = publications
     return render_template('news/show.html', publication=publication, id=id, read_more=read_more)
