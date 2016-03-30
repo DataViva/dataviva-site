@@ -7,11 +7,15 @@ from dataviva.api.hedu.services import Major, MajorUniversities, MajorMunicipali
 from dataviva import db
 from sqlalchemy.sql.expression import func
 
-static_folder = '../../static/img/icons/course_hedu'
 mod = Blueprint('major', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/major',
-                static_folder=static_folder)
+                static_folder='static')
+
+
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
 
 
 @mod.url_value_preprocessor
@@ -70,7 +74,7 @@ def index(course_hedu_id):
             'profile': major_service.profile(),
             'year': major_service.year(),
             'field_id': course_hedu_id[:2],
-            'id' : course_hedu_id,
+            'id': course_hedu_id,
             'bra_id': bra_id,
             'location_name': major_service.location_name()
         }
@@ -95,9 +99,16 @@ def index(course_hedu_id):
             header['rank'] = index
             break
 
-    
-    location = Bra.query.filter(Bra.id==bra_id).first()
+    location = Bra.query.filter(Bra.id == bra_id).first()
 
     major = Course_hedu.query.filter(Course_hedu.id == course_hedu_id).first()
 
-    return render_template('major/index.html', static_folder=static_folder, header=header, body=body, location=location, major=major)
+    return render_template('major/index.html', header=header, body=body, location=location, major=major)
+
+
+@mod.route('/<course_hedu_id>/graphs/<tab>', methods=['POST'])
+def graphs(course_hedu_id, tab):
+    bra = request.args.get('bra_id')
+    major = Course_hedu.query.filter_by(id=course_hedu_id).first_or_404()
+    location = Bra.query.filter_by(id=bra).first()
+    return render_template('major/graphs-'+tab+'.html', major=major, location=location)
