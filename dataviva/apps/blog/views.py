@@ -79,7 +79,11 @@ def admin_activate(status_change):
 def admin_delete():
     ids = request.form.getlist('ids[]')
     if ids:
-        Post.query.filter(Post.id.in_(ids)).delete()
+        posts = Post.query.filter(Post.id.in_(ids)).all()
+        for post in posts:
+            db.session.delete(post)
+
+        db.session.commit()
         return u"Post(s) excluído(s) com sucesso!", 200
     else:
         return u'Selecione algum post para excluí-lo.', 205
