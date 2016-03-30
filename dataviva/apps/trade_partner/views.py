@@ -25,9 +25,9 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
-@mod.route('/<trade_partner_id>/graphs/<tab>', methods=['POST'])
-def graphs(trade_partner_id, tab):
-    trade_partner = Hs.query.filter_by(id=trade_partner_id).first_or_404()
+@mod.route('/<wld_id>/graphs/<tab>', methods=['POST'])
+def graphs(wld_id, tab):
+    trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
     return render_template('trade_partner/graphs-'+tab+'.html', trade_partner=trade_partner, location=location)
 
