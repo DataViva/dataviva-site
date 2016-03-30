@@ -73,12 +73,8 @@ var BlogTable = function () {
                 });
             });
 
-//$('input:checkbox.class').each(function () {
-//       var sThisVal = (this.checked ? $(this).val() : "");
-//  });
-
             $('input[name="selected-item"]').change(function() {
-                console.log('alterou');
+                checkManySelected();
             });
         }
     });
@@ -90,6 +86,7 @@ var BlogTable = function () {
         $('input[name="selected-item"]').each(function() {
             $(this).prop('checked', checked);
         });
+        checkManySelected();
     })
 };
 
@@ -105,7 +102,7 @@ BlogTable.prototype.getCheckedIds = function(first_argument) {
 
 var blogTable = new BlogTable();
 
-var activate = function(ids, refreshButtons){
+var activate = function(ids){
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -136,7 +133,7 @@ var activate = function(ids, refreshButtons){
     }
 }
 
-var deactivate = function(ids, refreshButtons){
+var deactivate = function(ids){
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -201,6 +198,14 @@ var edit = function(ids){
         window.location = '/'+lang+'/blog/admin/post/'+ids[0]+'/edit';
     } else {
         showMessage('Selecione algum post para edita-lo.', 'warning');
+    }
+}
+
+var checkManySelected = function() {
+    if (blogTable.getCheckedIds().length > 1) {
+        $('#admin-edit').prop('disabled', true);
+    } else {
+        $('#admin-edit').prop('disabled', false);
     }
 }
 
