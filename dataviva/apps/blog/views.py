@@ -37,12 +37,12 @@ def index():
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
     post = Post.query.filter_by(id=id).first_or_404()
-    posts = Post.query.filter(Post.id != id, Post.active == 1).all()
+    posts = Post.query.filter(Post.id != id, Post.active).all()
     if len(posts) > 3:
-        read_more_posts = [posts.pop(randrange(len(posts))) for _ in range(3)]
+        read_more = [posts.pop(randrange(len(posts))) for _ in range(3)]
     else:
-        read_more_posts = posts
-    return render_template('blog/show.html', post=post, id=id, read_more_posts=read_more_posts)
+        read_more = posts
+    return render_template('blog/show.html', post=post, id=id, read_more=read_more)
 
 
 @mod.route('/post/all', methods=['GET'])

@@ -1,0 +1,16 @@
+<div id="graphs-oportunities" class="container">
+    <nav class="nav-graph col-xs-12 col-md-3" >
+        <h3>Visualize:</h3>
+        <div class="list-group panel">
+            <h4>Atividades Econômicas</h4>
+            <a href="/pt/embed/rings/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae" target="graphs-frame-oportunities" class="list-group-item">Anéis</a>
+        </div>
+    </nav>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="/pt/embed/rings/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae"
+                name="graphs-frame-oportunities"
+                id="graphs-frame-oportunities"
+                class="embed-responsive-item" >
+        </iframe>
+    </div>
+</div>
