@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash
+from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request
 from dataviva.apps.general.views import get_locale
 
 from models import Publication, AuthorNews
@@ -37,7 +37,7 @@ def index():
 @mod.route('/publication/<id>', methods=['GET'])
 def show(id):
     publication = Publication.query.filter_by(id=id).first_or_404()
-    publications = Publication.query.filter(Publication.id != id).all()
+    publications = Publication.query.filter(Publication.id != id, Publication.active).all()
     if len(publications) > 3:
         read_more = [
             publications.pop(randrange(len(publications))) for _ in range(3)]
@@ -45,13 +45,14 @@ def show(id):
         read_more = publications
     return render_template('news/show.html', publication=publication, id=id, read_more=read_more)
 
+
 @mod.route('/publication/all', methods=['GET'])
 def all_publications():
-    result = publication.query.all()
+    result = Publication.query.all()
     publications = []
     for row in result:
         publications += [(row.id, row.title, row.authors_str(),
-                   row.publicationage_date.strftime('%d/%m/%Y'), row.active)]
+                          row.postage_date.strftime('%d/%m/%Y'), row.active)]
     return jsonify(publications=publications)
 
 
@@ -89,7 +90,7 @@ def admin_delete():
         return u'Selecione alguma publicação para excluí-la.', 205
 
 
-@mod.route('/admin/post/new', methods=['GET'])
+@mod.route('/admin/publication/new', methods=['GET'])
 def new():
     form = RegistrationForm()
     return render_template('news/new.html', form=form, action=url_for('news.create'))
@@ -108,7 +109,7 @@ def create():
         publication.text_call = form.text_call.data
         publication.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.thumb = form.thumb.data
-        post.active = 0
+        publication.active = 0
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
@@ -159,7 +160,3 @@ def update(id):
         message = u'Publicação editada com sucesso!'
         flash(message, 'success')
         return redirect(url_for('news.admin'))
-
-
-
-
