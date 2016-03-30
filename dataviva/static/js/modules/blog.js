@@ -66,11 +66,19 @@ var BlogTable = function () {
 
                 $(this).next().click(function() {
                     if($(this).siblings().get(0).checked) {
-                        activate($(this).siblings().get(0).value);
+                        activate([$(this).siblings().get(0).value]);
                     } else {
-                        deactivate($(this).siblings().get(0).value);
+                        deactivate([$(this).siblings().get(0).value]);
                     }
                 });
+            });
+
+//$('input:checkbox.class').each(function () {
+//       var sThisVal = (this.checked ? $(this).val() : "");
+//  });
+
+            $('input[name="selected-item"]').change(function() {
+                console.log('alterou');
             });
         }
     });
@@ -83,7 +91,6 @@ var BlogTable = function () {
             $(this).prop('checked', checked);
         });
     })
-
 };
 
 BlogTable.prototype.getCheckedIds = function(first_argument) {
