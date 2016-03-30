@@ -55,8 +55,8 @@
                        data-toggle="tab">Comércio Internacional</a>
                 </li>
                 <li role="presentation">
-                    <a href="#opportunities"
-                       aria-controls="opportunities"
+                    <a href="#wages"
+                       aria-controls="wages"
                        role="tab"
                        graph
                        data-location="{{ location.id }}"
@@ -71,8 +71,8 @@
                        data-toggle="tab">Oportunidades Econômicas</a>
                 </li>
                 <li role="presentation">
-                    <a href="#opportunities"
-                       aria-controls="opportunities"
+                    <a href="#education"
+                       aria-controls="education"
                        role="tab"
                        graph
                        data-location="{{ location.id }}"
@@ -83,11 +83,11 @@
         </nav>
 
         <div class="tab-content col-sm-7 col-md-8 col-lg-9">
-          {% include "location/tab-geral.html" %}
-          {% include "location/tab-comercio-internacional.html" %}
-          {% include "location/tab-salario-emprego.html" %}
-          {% include "location/tab-oportunidade-economica.html" %}
-          {% include "location/tab-educacao.html" %}
+          {% include "location/tab-general.html" %}
+          {% include "location/tab-trade-partner.html" %}
+          {% include "location/tab-wages.html" %}
+          {% include "location/tab-opportunities.html" %}
+          {% include "location/tab-education.html" %}
         </div>
     </div>
 </section>
