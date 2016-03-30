@@ -2,7 +2,7 @@ var BlogTable = function () {
     this.tableId = '#blog-table';
 
     this.table = $(this.tableId).DataTable({
-        "sAjaxSource": "/blog/all",
+        "sAjaxSource": "/blog/post/all",
         "sAjaxDataProp": "posts",
         "order": [],
         "aoColumnsDefs": [
@@ -142,6 +142,16 @@ var deactivate = function(ids){
     } else {
         showMessage('Selecione algum post para desativa-lo.', 'warning');
     }
+}
+
+var deactivate = function(ids){
+    $.ajax({
+      method: "POST",
+      url: "/"+lang+"/blog/admin/deactivate",
+      data: {ids:ids},
+      success: function (msg) {
+      }
+    });
 }
 
 var destroy = function(ids){

@@ -45,12 +45,13 @@ def show(id):
     return render_template('blog/show.html', post=post, id=id, read_more_posts=read_more_posts)
 
 
-@mod.route('/all', methods=['GET'])
-def all():
+@mod.route('/post/all', methods=['GET'])
+def all_posts():
     result = Post.query.all()
     posts = []
     for row in result:
-        posts += [(row.id, row.title, row.authors_str(), row.postage_date.strftime('%d/%m/%Y'), row.active)]
+        posts += [(row.id, row.title, row.authors_str(),
+                   row.postage_date.strftime('%d/%m/%Y'), row.active)]
     return jsonify(posts=posts)
 
 
