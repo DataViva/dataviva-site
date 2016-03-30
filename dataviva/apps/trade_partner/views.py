@@ -12,6 +12,9 @@ mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/trade_partner')
 
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
@@ -21,6 +24,12 @@ def pull_lang_code(endpoint, values):
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
+
+@mod.route('/<wld_id>/graphs/<tab>', methods=['POST'])
+def graphs(wld_id, tab):
+    trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
+    location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
+    return render_template('trade_partner/graphs-'+tab+'.html', trade_partner=trade_partner, location=location)
 
 
 @mod.route('/<wld_id>')
@@ -119,8 +128,5 @@ def index(wld_id):
             header['import_rank'] = index
             break
 
-    if location:
-        return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location)
-    else:
-        return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner)
-
+    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location)
+  
