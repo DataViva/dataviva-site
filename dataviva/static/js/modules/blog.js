@@ -296,7 +296,12 @@ $(document).ready(function(){
         $('#blog-form').submit(function() {
             var aHTML = $('#text-content-editor').summernote('code');
             $('#text_content').val(aHTML);
+            if ($('.summernote').summernote('isEmpty')) {
+                $('#text_content').val('');
+            }
             return true;
         });
     });
+
+    setAlertTimeOut(8000);
 });
