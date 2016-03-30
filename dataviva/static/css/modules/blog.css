@@ -1,7 +1,9 @@
+.blog section {
+  margin-bottom: 4.5rem;
+}
 .blog .main-content {
     padding-bottom: 2rem;
 }
-
 .blog a {
   text-decoration: none;
 }
@@ -131,7 +133,6 @@
 .blog .crop-controls {
     display: none;
 }
-
 .blog .crop-controls .crop-preview {
     overflow: hidden;
     text-align: center;
@@ -148,7 +149,6 @@
 .blog .thumb label {
     display: inline-block;
 }
-
 .blog .thumb .crop-preview {
     width: 262px;
     height: 170px;

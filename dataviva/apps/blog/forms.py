@@ -32,13 +32,13 @@ class RegistrationForm(Form):
             u"Por favor, insira a categoria do post.")
     ])
 
-    text_content = HiddenField('text_content', validators=[
-        validators.Required(
-            u"Por favor, insira o texto do post."), NumberOfWords(max=500)
+    text_call = TextAreaField('text_call', validators=[
+        validators.Required(u"Por favor, insira uma chamada para o post."), NumberOfWords(max=500)
     ])
 
-    text_call = TextAreaField('subject', validators=[
-        validators.Required(u"Por favor, insira uma chamada para o post."), NumberOfWords(max=500)
+    text_content = HiddenField('text_content', validators=[
+        validators.Required(
+            u"Por favor, insira o texto do post.")
     ])
 
     thumb = HiddenField('thumb', validators=[

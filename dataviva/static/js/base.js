@@ -1,11 +1,12 @@
-
-
 $(document).ready(function () {
     new WOW().init();
     $("[data-toggle=popover]").popover({ trigger: "hover" });
     $('.counter').counterUp();
     $.stellar();
 
+    $( ".js-switch" ).each(function() {
+      var switchery = new Switchery(this);
+    });
 
     (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -14,18 +15,42 @@ $(document).ready(function () {
         js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.5&appId=222520191136295";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+    window.setTimeout(function() {
+      $(".alert").fadeTo(500, 0).slideUp(500, function(){
+          $(this).remove();
+      });
+    }, 8000);
 });
+
+function showMessage(message, category) {
+    if (category == null) {
+        category = 'info';
+    }
+    $('#message').append(
+        '<div class="alert alert-' + category + ' alert-dismissable animated fadeInDown">' +
+        '<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>' +
+        message +
+        '</div>'
+    );
+
+    window.setTimeout(function() {
+      $(".alert").fadeTo(500, 0).slideUp(500, function(){
+          $(this).remove();
+      });
+    }, 8000);
+}
 
 var lang = document.documentElement.lang
 
 if (lang == 'pt') {
-    lang = 'pt-BR';
+    lang_code = 'pt-BR';
 } else if (lang == 'en') {
-    lang = 'en-US';
+    lang_code = 'en-US';
 }
 
 var summernoteConfig = {
-    lang: lang,
+    lang: lang_code,
     fontNames: [
         'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New',
         'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande',

@@ -472,7 +472,51 @@ def dictionary():
         "No municipalities within that distance.": gettext("No municipalities within that distance."),
         "Including": gettext("Including"),
         "in": gettext("in"),
-        "no_items": gettext("No Data Available")
+        "no_items": gettext("No Data Available"),
+
+
+        #product profile 
+        "General": gettext("General"),
+        "International Trade": gettext("International Trade"),
+        "Economic Opportunities": gettext("Economic Opportunities"),
+        "More details": gettext("More details"),
+        "Total Value Exported": gettext("Total Value Exported"),
+        "Ratio Net Weight / Total Value Exported": gettext("Ratio Net Weight / Total Value Exported"),
+        "Total Value Imported": gettext("Total Value Imported"),
+        "Ratio Net Weight / Total Value Imported": gettext("Ratio Net Weight / Total Value Imported"),
+        "Product Complexity": gettext("Product Complexity"),
+        "International RCA": gettext("International RCA"),
+        "International Distance": gettext("International Distance"),
+        "International Opportunity Gain": gettext("International Opportunity Gain"),
+        "The product ": gettext("The product "),
+        "occupy the": gettext("occupy the"),
+        "position in imports and the": gettext("position in imports and the"),
+        "position in exports in Brazil. In": gettext("position in exports in Brazil. In"),
+        "earned": gettext("earned"),
+        "in trade value, representing a variation of": gettext("in trade value, representing a variation of"),
+        "in five years. The municipality in Brazil which exports more": gettext("in five years. The municipality in Brazil which exports more"),
+        "and which imports more is": gettext("and that imports more is"),
+        "occupies the": gettext("occupies the"),
+        "position in exports": gettext("position in exports"),
+        "in this location": gettext("in this location"),
+        "In": gettext("In"),
+        "in five years. The municipality": gettext("in five years. The municipality"),
+        "which exports more": gettext("which exports more"),
+        "Main Municipality by total value exported": gettext("Main Municipality by Total Value Exported"),
+        "Main Municipality by total value imported": gettext("Main Municipality by Total Value Imported"),
+        "Main Destination by total value exported": gettext("Main Destination by Total Value Exported"),
+        "Main Origin by total value exported": gettext("Main Origin by Total Value Exported"),
+        "Main Municipality": gettext("Main Municipality"),
+        "by Total Value Exported": gettext("by Total Value Exported"),
+        "by Total Value Imported": gettext("by Total Value Imported"),
+        "Main Destination": gettext("Main Destination"),
+        "Main Origin": gettext("Main Origin"),
+
+        #all
+        "preview": gettext("Preview"),
+        "exports_by": gettext("Exports By"),
+        "imports_by": gettext("Imports By"), 
+        "general_profile": gettext("General Profile"),
 
     }
 

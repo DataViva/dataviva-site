@@ -82,3 +82,7 @@
   -moz-box-shadow: none !important;
   box-shadow: none !important;
 }
+.checkbox input[type="checkbox"],
+.checkbox input[type="radio"] {
+    cursor: pointer;
+}
