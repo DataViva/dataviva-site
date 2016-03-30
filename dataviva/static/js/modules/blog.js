@@ -63,6 +63,14 @@ var BlogTable = function () {
                     size: 'small',
                     color: '#5A9DC4'
                 });
+
+                $(this).change(function() {
+                    if(this.checked) {
+                        activate([this.value]);
+                    } else {
+                        deactivate([this.value]);
+                    }
+                });
             });
         }
     });
@@ -96,20 +104,24 @@ var activate = function(ids){
             method: "POST",
             url: "/"+lang+"/blog/admin/activate",
             data: {ids:ids},
+            statusCode: {
+                500: function () {
+                    showMessage('Não foi possível ativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
+                },
+                404: function () {
+                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
+                    blogTable.table.fnReloadAjax();
+                }
+            },
             success: function (message) {
                 for (item in ids) {
                     itemName = 'activate'+ids[item];
-                    $("[name='"+itemName+"']").click();
+                    if (!$("[name='"+itemName+"']")[0].checked) {
+                        $("[name='"+itemName+"']").click();
+                    }
                 }
 
                 showMessage(message, 'success');
-            },
-            500: function (response) {
-                showMessage('Não foi possível ativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
-            },
-            404: function (response) {
-                showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
-                blogTable.table.fnReloadAjax();
             }
         });
     } else {
@@ -123,35 +135,29 @@ var deactivate = function(ids){
             method: "POST",
             url: "/"+lang+"/blog/admin/deactivate",
             data: {ids:ids},
-            success: function (message) {
+            statusCode: {
+                500: function () {
+                    showMessage('Não foi possível desativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
+                },
+                404: function () {
+                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
+                    blogTable.table.fnReloadAjax();
+                }
+            },
+            success: function (message, textStatus, xhr) {
                 for (item in ids) {
                     itemName = 'activate'+ids[item];
-                    $("[name='"+itemName+"']").click();
+                    if ($("[name='"+itemName+"']")[0].checked) {
+                        $("[name='"+itemName+"']").click();
+                    }
                 }
 
                 showMessage(message, 'success');
             },
-            500: function (response) {
-                showMessage('Não foi possível desativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
-            },
-            404: function (response) {
-                showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
-                blogTable.table.fnReloadAjax();
-            }
         });
     } else {
         showMessage('Selecione algum post para desativa-lo.', 'warning');
     }
-}
-
-var deactivate = function(ids){
-    $.ajax({
-      method: "POST",
-      url: "/"+lang+"/blog/admin/deactivate",
-      data: {ids:ids},
-      success: function (msg) {
-      }
-    });
 }
 
 var destroy = function(ids){
@@ -160,20 +166,22 @@ var destroy = function(ids){
             method: "POST",
             url: "/"+lang+"/blog/admin/delete",
             data: {ids:ids},
+            statusCode: {
+                500: function () {
+                    showMessage('Não foi possível excluir o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
+                },
+                404: function () {
+                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
+                    blogTable.table.fnReloadAjax();
+                }
+            },
             success: function (message) {
                 for (item in ids) {
-                    itemId = '#'+ids[item];
+                    itemId = '#item'+ids[item];
                     blogTable.table.row($(itemId).parents('tr')).remove().draw();
                 }
 
                 showMessage(message, 'success');
-            },
-            500: function (response) {
-                showMessage('Não foi possível excluir o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
-            },
-            404: function (response) {
-                showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
-                blogTable.table.fnReloadAjax();
             }
         });
     } else {
@@ -256,6 +264,7 @@ $(document).ready(function(){
     $('#admin-deactivate').click(function() {
         deactivate(blogTable.getCheckedIds());
     });
+
 
 
     $(function() {
