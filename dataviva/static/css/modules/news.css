@@ -1,7 +1,9 @@
+.news section {
+  margin-bottom: 4.5rem;
+}
 .news .main-content {
     padding-bottom: 2rem;
 }
-
 .news a {
   text-decoration: none;
 }
@@ -16,6 +18,12 @@
   padding: 0;
   position: relative;
 }
+
+.news .thumbnail {
+    height: 227px;
+    width: 350px;
+}
+
 .news .publication .thumbnail span {
   background: #5a9dc4;
   bottom: 0;
@@ -110,6 +118,7 @@
 .news .publication p {
   margin: 0 0 10px;
 }
+
 .news .publication:before {
   display: none;
 }
@@ -140,9 +149,7 @@
 .news .thumb label {
     display: inline-block;
 }
-
 .news .thumb .crop-preview {
     width: 262px;
     height: 170px;
 }
-
