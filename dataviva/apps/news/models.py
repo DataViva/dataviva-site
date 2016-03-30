@@ -12,6 +12,7 @@ class Publication(db.Model):
     image = db.Column(db.Text(4194304))
     thumb = db.Column(db.Text(4194304))
     postage_date = db.Column(db.DateTime)
+    release_date = db.Column(db.DateTime)
     authors = db.relationship('AuthorNews', backref='news_publication', lazy='eager')
 
     def authors_str(self):
