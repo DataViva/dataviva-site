@@ -2,7 +2,7 @@ var BlogTable = function () {
     this.tableId = '#blog-table';
 
     this.table = $(this.tableId).DataTable({
-        "sAjaxSource": "/blog/all",
+        "sAjaxSource": "/blog/post/all",
         "sAjaxDataProp": "posts",
         "order": [],
         "aoColumnsDefs": [
@@ -40,10 +40,10 @@ var BlogTable = function () {
                 "className": "column-checkbox",
                 "render": function (data, type, post, meta){
                     if (data){
-                       return '<input type="checkbox" class="js-switch" name="checkboxApproval" value="'+post[0]+'" checked>';
+                       return '<input type="checkbox" class="js-switch" name="activate'+post[0]+'" value="'+post[0]+'" checked>';
                     }
                     else {
-                       return '<input type="checkbox" class="js-switch" name="checkboxApproval" value="'+post[0]+'">';
+                       return '<input type="checkbox" class="js-switch" name="activate'+post[0]+'" value="'+post[0]+'">';
                     }
                 }
               }],
@@ -62,6 +62,14 @@ var BlogTable = function () {
                 var switchery = new Switchery(this, {
                     size: 'small',
                     color: '#5A9DC4'
+                });
+
+                $(this).change(function() {
+                    if(this.checked) {
+                        activate([this.value]);
+                    } else {
+                        deactivate([this.value]);
+                    }
                 });
             });
         }
@@ -91,26 +99,102 @@ BlogTable.prototype.getCheckedIds = function(first_argument) {
 var blogTable = new BlogTable();
 
 var activate = function(ids){
-    $.ajax({
-      method: "POST",
-      url: "/"+lang+"/blog/admin/activate",
-      data: {ids:ids},
-      success: function (msg) {
-      }
-    });
+    if (ids.length) {
+        $.ajax({
+            method: "POST",
+            url: "/"+lang+"/blog/admin/activate",
+            data: {ids:ids},
+            statusCode: {
+                500: function () {
+                    showMessage('Não foi possível ativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
+                },
+                404: function () {
+                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
+                    blogTable.table.fnReloadAjax();
+                }
+            },
+            success: function (message) {
+                for (item in ids) {
+                    itemName = 'activate'+ids[item];
+                    if (!$("[name='"+itemName+"']")[0].checked) {
+                        $("[name='"+itemName+"']").click();
+                    }
+                }
+
+                showMessage(message, 'success');
+            }
+        });
+    } else {
+        showMessage('Selecione algum post para ativa-lo.', 'warning');
+    }
+}
+
+var deactivate = function(ids){
+    if (ids.length) {
+        $.ajax({
+            method: "POST",
+            url: "/"+lang+"/blog/admin/deactivate",
+            data: {ids:ids},
+            statusCode: {
+                500: function () {
+                    showMessage('Não foi possível desativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
+                },
+                404: function () {
+                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
+                    blogTable.table.fnReloadAjax();
+                }
+            },
+            success: function (message, textStatus, xhr) {
+                for (item in ids) {
+                    itemName = 'activate'+ids[item];
+                    if ($("[name='"+itemName+"']")[0].checked) {
+                        $("[name='"+itemName+"']").click();
+                    }
+                }
+
+                showMessage(message, 'success');
+            },
+        });
+    } else {
+        showMessage('Selecione algum post para desativa-lo.', 'warning');
+    }
 }
 
 var destroy = function(ids){
-    $.ajax({
-      method: "POST",
-      url: "/"+lang+"/blog/admin/delete",
-      data: {ids:ids},
-      success: function (msg) {
-      }
-    });
+    if (ids.length) {
+        $.ajax({
+            method: "POST",
+            url: "/"+lang+"/blog/admin/delete",
+            data: {ids:ids},
+            statusCode: {
+                500: function () {
+                    showMessage('Não foi possível excluir o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
+                },
+                404: function () {
+                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
+                    blogTable.table.fnReloadAjax();
+                }
+            },
+            success: function (message) {
+                for (item in ids) {
+                    itemId = '#item'+ids[item];
+                    blogTable.table.row($(itemId).parents('tr')).remove().draw();
+                }
+
+                showMessage(message, 'success');
+            }
+        });
+    } else {
+        showMessage('Selecione algum post para excluí-lo.', 'warning');
+    }
 }
+
 var edit = function(ids){
-    window.location = '/'+lang+'/blog/post/'+ids[0]+'/edit';
+    if (ids.length) {
+        window.location = '/'+lang+'/blog/admin/post/'+ids[0]+'/edit';
+    } else {
+        showMessage('Selecione algum post para edita-lo.', 'warning');
+    }
 }
 
 var inputThumbCallback = function() {
@@ -177,6 +261,10 @@ $(document).ready(function(){
     $('#admin-activate').click(function() {
         activate(blogTable.getCheckedIds());
     });
+    $('#admin-deactivate').click(function() {
+        deactivate(blogTable.getCheckedIds());
+    });
+
 
 
     $(function() {
