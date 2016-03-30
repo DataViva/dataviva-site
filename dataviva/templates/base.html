@@ -13,17 +13,21 @@
     <!-- Bootstrap core CSS -->
     <link href="/static/css/libs/bootstrap/css/bootstrap.css" rel="stylesheet">
 
-    <!-- Animation CSS -->
+    <!-- CSS Libs -->
     <link href="/static/css/libs/animate.css" rel="stylesheet">
     <link href="/static/css/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="/static/css/libs/font-dataviva/css/font-dataviva.css" rel="stylesheet">
 
-    <!-- CSS bower-dependencies -->
+    <!-- CSS Plugins -->
     <link href="/static/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
     <link href="/static/css/plugins/cropper/cropper.min.css" rel="stylesheet">
     <link href="/static/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="/static/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="/static/css/plugins/switchery/switchery.css" rel="stylesheet">
+    <link href="/static/css/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="/static/css/plugins/datatables/responsive/responsive.bootstrap.css" rel="stylesheet">
+    <link href="/static/css/plugins/datatables/scroller/scroller.bootstrap.css" rel="stylesheet">
 
     <!-- Dataviva custom styles -->
     <link href="/static/css/main.css" rel="stylesheet">
@@ -47,7 +51,7 @@
 
     {% include "include/footer.html" %}
 
-    <!-- Mainly scripts -->
+    <!-- Javascript Libs -->
     <script src="/static/js/libs/jquery-2.1.1.js"></script>
     <script src="/static/js/libs/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
@@ -65,7 +69,14 @@
     {% if g.locale == 'pt' %}
         <script src="/static/js/plugins/summernote/summernote-pt-BR.js"></script>
     {% endif %}
+    <script src="/static/js/plugins/switchery/switchery.js"></script>
+    <script src="/static/js/plugins/datatables/dataTables.js"></script>
+    <script src="/static/js/plugins/datatables/bootstrap.js"></script>
+    <script src="/static/js/plugins/datatables/responsive/responsive.js"></script>
+    <script src="/static/js/plugins/datatables/scroller/scroller.js"></script>
+    <script src="/static/js/plugins/datatables/reloadajax/fnReloadAjax.js"></script>
 
+    <!-- Angular -->
     <script src="/static/js/libs/angular.min.js"></script>
     <script src="/static/js/dataviva-ng/init.js"></script>
     <script src="/static/js/dataviva-ng/services/wizard.js"></script>
@@ -84,6 +95,7 @@
     <script src="/static/js/dataviva-ng/controllers/selector.js"></script>
     <script src="/static/js/dataviva-ng/app.js"></script>
 
+    <!-- Javascript modules -->
     <script src="/static/js/base.js"></script>
     <script src="/static/js/modules/{{ g.page_type }}.js"></script>
 </body>

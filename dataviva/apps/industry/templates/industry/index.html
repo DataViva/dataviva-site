@@ -2,54 +2,85 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<!-- BREADCRUMB -->
 <div class="container">
-    <ol class="breadcrumb">
-        <li><a href="01-index.html">Home</a></li>
-        <li><a href="#">Atividade Econômica</a></li>
-        <li class="active"><span>Teleatendimento<span></span></span></li>
-    </ol>
-    <div class="tit-area" style="background-image: url('/static/img/bgs/dots.png')">
-        <div class="row">
-            <div class="col-xs-15 col-md-offset-4 col-md-11">
-                <h1>{{ industry.name()}} <a href="#" title="Trocar"onclick="start_selector('Industry');"> (trocar)</a></h1>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="sidebar has-img col-xs-15 col-md-4">
-            <div class="tit">
-                <span class="dv-cnae-{{ industry.id[0] }}"></span>
-            </div>
-            <ul class="nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a>
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ url_for('general.home') }}">Home</a>
+            </li>
+            <li {{ 'class="active"' if not location else '' }}>
+                <a href="#" title="Trocar" onclick="start_selector('Industry');"> {{ industry.name() }}</a>
+            </li>
+            {% if location %}
+                <li class="active">
+                    <a href="#" title="Trocar" onclick="start_selector('Location', selectorCallback);"> {{ location.name() }}</a>
                 </li>
-                <li role="presentation">
-                    <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab">Salário e emprego</a>
-                </li>
-                {% if industry.id|length == 6 %}
-                    <li role="presentation">
-                        <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab">Oportunidade Econômica</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-
-        <div class="top-filter">
-            <label for="filter">Localidade:</label>
-            <label for="filter">{{ location.name() if location else 'Brasil' }}</label>
-            <a href="#" title="Trocar" onclick="start_selector('Location', selectorCallback);"> (trocar)</a>
-        </div>
-
-        <div class="main-content col-xs-15 col-md-11">
-            <div class="tab-content">
-                {% include "industry/tab-geral.html" %}
-                {% include "industry/tab-salario-emprego.html" %}
-                {% if industry.id|length == 6 %}
-                    {% include "industry/tab-oportunidade-economica.html" %}
-                {% endif %}
-            </div>
-        </div>
+            {% endif %}
+        </ol>
     </div>
 </div>
+<!-- BREADCRUMB -->
+
+<section id="header" class="header">
+    <div class="container">
+        <div class="name bg-dots" data-stellar-background-ratio="0.2">
+            <h1 class="col-xs-offset-0 col-sm-offset-4 col-md-offset-3 p-w-xs">
+                {{ industry.name() }} <a href="#" title="Trocar" onclick="start_selector('Industry');"> (trocar)</a>
+            </h1>
+        </div>
+        <span class="portrait dv-cnae-{{ industry.id[0] }} hidden-xs"></span>
+    </div>
+</section>
+
+
+<section id="profile" class="profile">
+    <div class="container">
+        <nav class="col-sm-5 col-md-4 col-lg-3">
+            <ul class="nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a  href="#general" 
+                        aria-controls="general" 
+                        role="tab" 
+                        data-industry="{{ industry.id }}"
+                        data-location="{{ location.id }}"
+                        data-toggle="tab">Geral</a>
+                </li>
+                <li role="presentation">
+                    <a  href="#wages" 
+                        aria-controls="wages" 
+                        role="tab"
+                        graph
+                        data-industry="{{ industry.id }}"
+                        data-location="{{ location.id }}" 
+                        data-toggle="tab">Salário e emprego</a>
+                </li>
+                {% if (industry.id|length) == 6 %}
+                <li role="presentation">
+                    <a  href="#opportunities" 
+                        aria-controls="opportunities" 
+                        role="tab" 
+                        graph
+                        data-industry="{{ industry.id }}"
+                        data-location="{{ location.id }}"
+                        data-toggle="tab">Oportunidade Econômica</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <div class="tab-content col-sm-7 col-md-8 col-lg-9">
+            {% include "industry/tab-general.html" %}
+            {% include "industry/tab-wages.html" %}
+            {% if (industry.id|length) == 6 %}
+                {% include "industry/tab-opportunities.html" %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section id="graphs" class="graphs bg-gray">
+</section>
+
 {% endblock content %}
