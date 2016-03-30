@@ -700,7 +700,7 @@ footer .form-control:focus,
 /* SUMMERNOTE */
 .note-editor {
     height: auto !important;
-    border: 1px solid #E7EAEC !important;;
+    border: 1px solid #E7EAEC !important;
     border-radius: 5px;
 }
 .note-editor .note-toolbar {

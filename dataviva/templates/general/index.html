@@ -129,31 +129,18 @@
         <div class="navy-line wow fadeInDown"></div>
         <h2 class="m-b-lg wow fadeInDown">Notícias</h2>
         <div class="row">
-            <div class="col-sm-4 wow fadeInLeftBig">
-                <a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
-                    <img src="http://placehold.it/350x227?text=thumb" class="img-responsive">
-                </a>
-                <p>
-                    <a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a>
-                </p>
-            </div>
-            <div class="col-sm-4 wow fadeInDown">
-                <a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
-                    <img src="http://placehold.it/350x227?text=thumb" class="img-responsive">
-                </a>
-                <p>
-                    <a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a>
-                </p>
-            </div>
-            <div class="col-sm-4 wow fadeInRightBig">
-                <a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
-                    <img src="http://placehold.it/350x227?text=thumb" class="img-responsive">
-                </a>
-                <p>
-                    <a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a>
-                </p>
-            </div>
+            {% for publication in news %}
+                <div class="col-sm-4 wow {% if loop.first %} fadeInLeftBig {% elif loop.last %} fadeInRightBig {% else %} fadeInDown {% endif %}">
+                    <a href="{{url_for('news.show', id=publication.id)}}" title="{{ publication.title }}">
+                        <img src="{{publication.thumb}}" class="img-responsive">
+                    </a>
+                    <p>
+                        {{ publication.title }}
+                    </p>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 {% endblock content %}
+

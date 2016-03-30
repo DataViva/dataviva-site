@@ -18,7 +18,6 @@ var BlogTable = function () {
                 "orderable": false,
                 "className": "column-checkbox",
                 "render": function (data, type, post, meta){
-
                     var checkbox = '<div class="checkbox checkbox-success">' +
                                    '    <input name="selected-item" id="item'+post[0]+'" value="'+post[0]+'" type="checkbox">' +
                                    '    <label for="'+post[0]+'"></label>'
@@ -41,8 +40,7 @@ var BlogTable = function () {
                 "render": function (data, type, post, meta){
                     if (data){
                        return '<input type="checkbox" class="js-switch" name="activate'+post[0]+'" value="'+post[0]+'" checked>';
-                    }
-                    else {
+                    } else {
                        return '<input type="checkbox" class="js-switch" name="activate'+post[0]+'" value="'+post[0]+'">';
                     }
                 }
@@ -73,12 +71,8 @@ var BlogTable = function () {
                 });
             });
 
-//$('input:checkbox.class').each(function () {
-//       var sThisVal = (this.checked ? $(this).val() : "");
-//  });
-
             $('input[name="selected-item"]').change(function() {
-                console.log('alterou');
+                checkManySelected();
             });
         }
     });
@@ -90,6 +84,7 @@ var BlogTable = function () {
         $('input[name="selected-item"]').each(function() {
             $(this).prop('checked', checked);
         });
+        checkManySelected();
     })
 };
 
@@ -105,7 +100,7 @@ BlogTable.prototype.getCheckedIds = function(first_argument) {
 
 var blogTable = new BlogTable();
 
-var activate = function(ids, refreshButtons){
+var activate = function(ids){
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -113,10 +108,10 @@ var activate = function(ids, refreshButtons){
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível ativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
+                    showMessage('Não foi possível ativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
-                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
+                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info', 8000);
                     blogTable.table.fnReloadAjax();
                 }
             },
@@ -128,15 +123,15 @@ var activate = function(ids, refreshButtons){
                     }
                 }
 
-                showMessage(message, 'success');
+                showMessage(message, 'success', 8000);
             }
         });
     } else {
-        showMessage('Selecione algum post para ativa-lo.', 'warning');
+        showMessage('Por favor selecione algum post para ativar.', 'warning', 8000);
     }
 }
 
-var deactivate = function(ids, refreshButtons){
+var deactivate = function(ids){
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -144,10 +139,10 @@ var deactivate = function(ids, refreshButtons){
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível desativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
+                    showMessage('Não foi possível desativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
-                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
+                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info', 8000);
                     blogTable.table.fnReloadAjax();
                 }
             },
@@ -158,12 +153,11 @@ var deactivate = function(ids, refreshButtons){
                         $("[name='"+itemName+"']").click();
                     }
                 }
-
-                showMessage(message, 'success');
+                showMessage(message, 'success', 8000);
             },
         });
     } else {
-        showMessage('Selecione algum post para desativa-lo.', 'warning');
+        showMessage('Por favor selecione para desativar.', 'warning', 8000);
     }
 }
 
@@ -175,10 +169,10 @@ var destroy = function(ids){
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível excluir o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
+                    showMessage('Não foi possível excluir o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
-                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
+                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info', 8000);
                     blogTable.table.fnReloadAjax();
                 }
             },
@@ -188,11 +182,11 @@ var destroy = function(ids){
                     blogTable.table.row($(itemId).parents('tr')).remove().draw();
                 }
 
-                showMessage(message, 'success');
+                showMessage(message, 'success', 8000);
             }
         });
     } else {
-        showMessage('Selecione algum post para excluí-lo.', 'warning');
+        showMessage('Por favor selecione para excluir.', 'warning', 8000);
     }
 }
 
@@ -200,21 +194,31 @@ var edit = function(ids){
     if (ids.length) {
         window.location = '/'+lang+'/blog/admin/post/'+ids[0]+'/edit';
     } else {
-        showMessage('Selecione algum post para edita-lo.', 'warning');
+        showMessage('Por favor selecione para editar.', 'warning', 8000);
+    }
+}
+
+var checkManySelected = function() {
+    if (blogTable.getCheckedIds().length > 1) {
+        $('#admin-edit').prop('disabled', true);
+    } else {
+        $('#admin-edit').prop('disabled', false);
     }
 }
 
 var inputThumbCallback = function() {
+    $('#thumb-img').hide();
+    $('.thumb-buttons').hide();
+
+    $('#thumb-preview').show();
+    $('.crop-buttons').show();
+    $('.thumb-crop').show();
+
     $($('#thumb-crop')).cropper({
         aspectRatio: 350/227,
         preview: '#thumb-preview',
         viewMode: 3
     });
-
-    $('#thumb-img').hide();
-    $('#thumb-crop').show();
-    $('.thumb .crop-controls').show();
-    $('.thumb label').hide();
 }
 
 $(document).ready(function(){
@@ -232,6 +236,8 @@ $(document).ready(function(){
         $('#text_content').val(aHTML);
         $('#text-content-editor').summernote('destroy');
     });
+
+
 
     cropInput($('#thumb-crop'), $('#thumb-input'), inputThumbCallback)
 
@@ -251,13 +257,17 @@ $(document).ready(function(){
         var thumbDataURL = $('#thumb-crop').cropper('getDataURL');
         $('#thumb').val(thumbDataURL);
         $('#thumb-img').attr('src', thumbDataURL);
+
+        $('#thumb-img').show();
+        $('.thumb-buttons').show();
+
+        $('#thumb-preview').hide();
+        $('.crop-buttons').hide();
+        $('.thumb-crop').hide();
+
         $('#thumb-crop').cropper('destroy');
         $('#thumb-crop').attr('src', '');
-        $('#thumb-img').show();
-        $('.thumb label').show();
-        $('.thumb .crop-controls').hide();
     });
-
 
     $('#admin-delete').click(function() {
         destroy(blogTable.getCheckedIds());
@@ -272,13 +282,26 @@ $(document).ready(function(){
         deactivate(blogTable.getCheckedIds(), true);
     });
 
+    var text_max = 500;
+    $('#textarea-feedback').html(text_max + ' caracteres restantes');
 
+    $('#text_call').keyup(function() {
+        var text_length = $('#text_call').val().length;
+        var text_remaining = text_max - text_length;
+
+        $('#textarea-feedback').html(text_remaining + ' caracteres restantes');
+    });
 
     $(function() {
         $('#blog-form').submit(function() {
             var aHTML = $('#text-content-editor').summernote('code');
             $('#text_content').val(aHTML);
+            if ($('.summernote').summernote('isEmpty')) {
+                $('#text_content').val('');
+            }
             return true;
         });
     });
+
+    setAlertTimeOut(8000);
 });

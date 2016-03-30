@@ -26,12 +26,6 @@
                     <g:plusone size="medium"></g:plusone>
                 </li>
             </ul>
-            <div class="tit-img">
-                {% if publication.image_path %}
-                    <img src="{{ publication.image_path }}" class="img-responsive" />
-                {% endif %}
-                <span>{{ publication.title }}</span>
-            </div>
             {{ publication.text_content|safe }}
         </div>
         <div class="clearfix"></div>
