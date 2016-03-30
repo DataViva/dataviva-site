@@ -37,17 +37,20 @@
 .has-warning .form-control {
   border-color: #f8ac59;
 }
-.has-error .form-control {
-  border-color: #ed5565;
-}
 .has-success .control-label {
   color: #1AB394;
 }
 .has-warning .control-label {
   color: #f8ac59;
 }
+.has-error .note-editor {
+  border-color: #A94442 !important;
+}
+.has-error .error {
+  color: #A94436;
+}
 .has-error .control-label {
-  color: #ed5565;
+  color: #676a6c;
 }
 .input-group-addon {
   background-color: #fff;
