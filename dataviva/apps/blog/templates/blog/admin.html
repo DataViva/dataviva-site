@@ -30,18 +30,18 @@
                     <label for="check-all"></label>
                 </div>
             </th>
-            <th>Title</th>
-            <th>Author(s)</th>
-            <th>Publication Date</th>
-            <th>Active</th>
+            <th>Título</th>
+            <th>Autor(es)</th>
+            <th>Data</th>
+            <th>Ativo</th>
         </tr>
     </thead>
 </table>
 
-<button id="admin-delete" class="btn btn-primary">Excluir</button>
-<button id="admin-edit" class="btn btn-primary">Editar</button>
-<a id="admin-new" class="btn btn-primary" href="/blog/admin/post/new">Publicar</a>
-<button id="admin-activate" class="btn btn-primary">Ativar</button>
-<button id="admin-deactivate" class="btn btn-primary">Desativar</button>
+<a id="admin-new" class="btn btn-success" href="/blog/admin/post/new"><i class="fa fa-plus m-r-sm"></i>Novo</a>
+<button id="admin-edit" class="btn btn-primary"><i class="fa fa-pencil-square-o m-r-sm"></i>Editar</button>
+<button id="admin-delete" class="btn btn-danger"><i class="fa fa-trash-o m-r-sm"></i>Excluir</button>
+<button id="admin-activate" class="btn btn-success pull-right">Ativar</button>
+<button id="admin-deactivate" class="btn btn-white pull-right m-r-sm">Desativar</button>
 
 {% endblock admin_content %}

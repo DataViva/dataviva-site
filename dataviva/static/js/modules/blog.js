@@ -64,11 +64,11 @@ var BlogTable = function () {
                     color: '#5A9DC4'
                 });
 
-                $(this).change(function() {
-                    if(this.checked) {
-                        activate([this.value]);
+                $(this).next().click(function() {
+                    if($(this).siblings().get(0).checked) {
+                        activate($(this).siblings().get(0).value);
                     } else {
-                        deactivate([this.value]);
+                        deactivate($(this).siblings().get(0).value);
                     }
                 });
             });
@@ -98,7 +98,7 @@ BlogTable.prototype.getCheckedIds = function(first_argument) {
 
 var blogTable = new BlogTable();
 
-var activate = function(ids){
+var activate = function(ids, refreshButtons){
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -129,7 +129,7 @@ var activate = function(ids){
     }
 }
 
-var deactivate = function(ids){
+var deactivate = function(ids, refreshButtons){
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -259,10 +259,10 @@ $(document).ready(function(){
         edit(blogTable.getCheckedIds());
     });
     $('#admin-activate').click(function() {
-        activate(blogTable.getCheckedIds());
+        activate(blogTable.getCheckedIds(), true);
     });
     $('#admin-deactivate').click(function() {
-        deactivate(blogTable.getCheckedIds());
+        deactivate(blogTable.getCheckedIds(), true);
     });
 
 
