@@ -15,9 +15,19 @@ $(document).ready(function () {
         js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.5&appId=222520191136295";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+
 });
 
-function showMessage(message, category) {
+function setAlertTimeOut(time) {
+    window.setTimeout(function() {
+      $(".alert").fadeTo(500, 0).slideUp(500, function(){
+          $(this).remove();
+      });
+    }, time);
+}
+
+function showMessage(message, category, timeout) {
     if (category == null) {
         category = 'info';
     }
@@ -27,6 +37,9 @@ function showMessage(message, category) {
         message +
         '</div>'
     );
+    if (timeout) {
+        setAlertTimeOut(timeout);
+    }
 }
 
 var lang = document.documentElement.lang
@@ -88,19 +101,19 @@ function cropInput(crop, input, callback) {
 
             file = files[0];
 
-            if (/^image\/\w+$/.test(file.type)) {
+            if (/^image\/\w+$/.test(file.type) && file.size <= 5242880) {
                 fileReader.readAsDataURL(file);
                 fileReader.onload = function () {
                     input.val("");
                     crop.cropper("reset", true).cropper("replace", this.result);
                 };
 
-            if (callback !== null) {
-                callback();
-            }
+                if (callback !== null) {
+                    callback();
+                }
 
             } else {
-                showMessage("Please choose an image file.");
+                showMessage("Por favor escolha um arquivo de imagem, com no máximo 5 MB.");
             }
         });
     } else {

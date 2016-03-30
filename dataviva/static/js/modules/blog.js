@@ -18,7 +18,6 @@ var BlogTable = function () {
                 "orderable": false,
                 "className": "column-checkbox",
                 "render": function (data, type, post, meta){
-
                     var checkbox = '<div class="checkbox checkbox-success">' +
                                    '    <input name="selected-item" id="item'+post[0]+'" value="'+post[0]+'" type="checkbox">' +
                                    '    <label for="'+post[0]+'"></label>'
@@ -41,8 +40,7 @@ var BlogTable = function () {
                 "render": function (data, type, post, meta){
                     if (data){
                        return '<input type="checkbox" class="js-switch" name="activate'+post[0]+'" value="'+post[0]+'" checked>';
-                    }
-                    else {
+                    } else {
                        return '<input type="checkbox" class="js-switch" name="activate'+post[0]+'" value="'+post[0]+'">';
                     }
                 }
@@ -66,11 +64,15 @@ var BlogTable = function () {
 
                 $(this).next().click(function() {
                     if($(this).siblings().get(0).checked) {
-                        activate($(this).siblings().get(0).value);
+                        activate([$(this).siblings().get(0).value]);
                     } else {
-                        deactivate($(this).siblings().get(0).value);
+                        deactivate([$(this).siblings().get(0).value]);
                     }
                 });
+            });
+
+            $('input[name="selected-item"]').change(function() {
+                checkManySelected();
             });
         }
     });
@@ -82,8 +84,8 @@ var BlogTable = function () {
         $('input[name="selected-item"]').each(function() {
             $(this).prop('checked', checked);
         });
+        checkManySelected();
     })
-
 };
 
 BlogTable.prototype.getCheckedIds = function(first_argument) {
@@ -98,7 +100,7 @@ BlogTable.prototype.getCheckedIds = function(first_argument) {
 
 var blogTable = new BlogTable();
 
-var activate = function(ids, refreshButtons){
+var activate = function(ids){
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -106,10 +108,10 @@ var activate = function(ids, refreshButtons){
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível ativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
+                    showMessage('Não foi possível ativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
-                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
+                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info', 8000);
                     blogTable.table.fnReloadAjax();
                 }
             },
@@ -121,15 +123,15 @@ var activate = function(ids, refreshButtons){
                     }
                 }
 
-                showMessage(message, 'success');
+                showMessage(message, 'success', 8000);
             }
         });
     } else {
-        showMessage('Selecione algum post para ativa-lo.', 'warning');
+        showMessage('Por favor selecione algum post para ativar.', 'warning', 8000);
     }
 }
 
-var deactivate = function(ids, refreshButtons){
+var deactivate = function(ids){
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -137,10 +139,10 @@ var deactivate = function(ids, refreshButtons){
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível desativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
+                    showMessage('Não foi possível desativar o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
-                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
+                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info', 8000);
                     blogTable.table.fnReloadAjax();
                 }
             },
@@ -151,12 +153,11 @@ var deactivate = function(ids, refreshButtons){
                         $("[name='"+itemName+"']").click();
                     }
                 }
-
-                showMessage(message, 'success');
+                showMessage(message, 'success', 8000);
             },
         });
     } else {
-        showMessage('Selecione algum post para desativa-lo.', 'warning');
+        showMessage('Por favor selecione para desativar.', 'warning', 8000);
     }
 }
 
@@ -168,10 +169,10 @@ var destroy = function(ids){
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível excluir o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger');
+                    showMessage('Não foi possível excluir o(s) post(s) selecionado(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
-                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info');
+                    showMessage('Um ou mais posts selecionados não puderam ser encontrados, a lista de posts será atualizada.', 'info', 8000);
                     blogTable.table.fnReloadAjax();
                 }
             },
@@ -181,11 +182,11 @@ var destroy = function(ids){
                     blogTable.table.row($(itemId).parents('tr')).remove().draw();
                 }
 
-                showMessage(message, 'success');
+                showMessage(message, 'success', 8000);
             }
         });
     } else {
-        showMessage('Selecione algum post para excluí-lo.', 'warning');
+        showMessage('Por favor selecione para excluir.', 'warning', 8000);
     }
 }
 
@@ -193,7 +194,15 @@ var edit = function(ids){
     if (ids.length) {
         window.location = '/'+lang+'/blog/admin/post/'+ids[0]+'/edit';
     } else {
-        showMessage('Selecione algum post para edita-lo.', 'warning');
+        showMessage('Por favor selecione para editar.', 'warning', 8000);
+    }
+}
+
+var checkManySelected = function() {
+    if (blogTable.getCheckedIds().length > 1) {
+        $('#admin-edit').prop('disabled', true);
+    } else {
+        $('#admin-edit').prop('disabled', false);
     }
 }
 
@@ -251,7 +260,6 @@ $(document).ready(function(){
         $('.thumb .crop-controls').hide();
     });
 
-
     $('#admin-delete').click(function() {
         destroy(blogTable.getCheckedIds());
     });
@@ -264,8 +272,6 @@ $(document).ready(function(){
     $('#admin-deactivate').click(function() {
         deactivate(blogTable.getCheckedIds(), true);
     });
-
-
 
     $(function() {
         $('#blog-form').submit(function() {

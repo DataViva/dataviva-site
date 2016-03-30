@@ -4,10 +4,10 @@ CREATE TABLE news_publication(
     subject varchar (100) NULL,
     text_call varchar (500) NULL,
     text_content longtext NULL,
-    image longtext NULL,
     thumb longtext NULL,
     postage_date datetime NULL,
     release_date datetime NULL,
+    active TINYINT(1) NULL,
     PRIMARY KEY (id)
 );
 

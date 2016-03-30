@@ -40,8 +40,6 @@ class RegistrationForm(Form):
         validators.Required(u"Por favor, insira o conteúdo da notícia.")
     ])
 
-    image = HiddenField('image')
-
     thumb = HiddenField('thumb', validators=[
         validators.Required(u"Por favor, insira uma imagem reduzida.")
     ])

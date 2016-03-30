@@ -10,6 +10,11 @@ mod = Blueprint('industry', __name__,
                 url_prefix='/<lang_code>/industry')
 
 
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
+
+
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
@@ -18,6 +23,12 @@ def pull_lang_code(endpoint, values):
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
+
+@mod.route('/<industry_id>/graphs/<tab>', methods=['POST'])
+def graphs(industry_id, tab):
+    industry = Cnae.query.filter_by(id=industry_id).first_or_404()
+    location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
+    return render_template('industry/graphs-'+tab+'.html', industry=industry, location=location)
 
 
 @mod.route('/<cnae_id>')
