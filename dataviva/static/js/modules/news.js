@@ -205,9 +205,9 @@ var inputThumbCallback = function() {
     });
 
     $('#thumb-img').hide();
-    $('.thumb label').hide();
-    $('.thumb .crop-controls').show();
     $('#thumb-crop').show();
+    $('.thumb .crop-controls').show();
+    $('.thumb label').hide();
 }
 
 $(document).ready(function(){
@@ -249,6 +249,19 @@ $(document).ready(function(){
         $('#thumb-img').show();
         $('.thumb label').show();
         $('.thumb .crop-controls').hide();
+    });
+
+    $('#admin-delete').click(function() {
+        destroy(newsTable.getCheckedIds());
+    });
+    $('#admin-edit').click(function() {
+        edit(newsTable.getCheckedIds());
+    });
+    $('#admin-activate').click(function() {
+        activate(newsTable.getCheckedIds(), true);
+    });
+    $('#admin-deactivate').click(function() {
+        deactivate(newsTable.getCheckedIds(), true);
     });
 
     $(function() {
