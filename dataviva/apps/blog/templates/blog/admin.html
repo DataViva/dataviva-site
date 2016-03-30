@@ -8,8 +8,17 @@
 {% block admin_content %}
 <h1>Blog</h1>
 
-<div class="alert alert-warning">
-    How quickly daft jumping zebras vex. <a class="alert-link" href="#">Alert Link</a>.
+<div id="message">
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            {{ message }}
+        </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 </div>
 <table id="blog-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
@@ -30,7 +39,8 @@
 
 <button id="admin-delete" class="btn btn-primary">Excluir</button>
 <button id="admin-edit" class="btn btn-primary">Editar</button>
-<a id="admin-new" class="btn btn-primary" href="/blog/post/new">Novo</a>
-<button id="admin-activate" class="btn btn-primary">Ativar/Desativar</button>
+<a id="admin-new" class="btn btn-primary" href="/blog/admin/post/new">Publicar</a>
+<button id="admin-activate" class="btn btn-primary">Ativar</button>
+<button id="admin-deactivate" class="btn btn-primary">Desativar</button>
 
 {% endblock admin_content %}
