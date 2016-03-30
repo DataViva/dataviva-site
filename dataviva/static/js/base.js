@@ -17,6 +17,18 @@ $(document).ready(function () {
     }(document, 'script', 'facebook-jssdk'));
 });
 
+function showMessage(message, category) {
+    if (category == null) {
+        category = 'info';
+    }
+    $('#message').append(
+        '<div class="alert alert-' + category + ' alert-dismissable animated fadeInDown">' +
+        '<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>' +
+        message +
+        '</div>'
+    );
+}
+
 var lang = document.documentElement.lang
 
 if (lang == 'pt') {
