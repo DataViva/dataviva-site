@@ -10,6 +10,9 @@
 .blog h1 {
     margin: 0px 0px 30px 0px;
 }
+.blog textarea {
+    resize: none;
+}
 .blog .post .thumbnail {
   border: none;
   float: left;
