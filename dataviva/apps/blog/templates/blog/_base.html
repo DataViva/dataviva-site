@@ -30,24 +30,9 @@
         </ul>
     </nav>
     <section id="blog" class="col-md-9">
-        <h1>Posts</h1>
+        <h1>Blog</h1>
         {% block blog_content %}
         {% endblock blog_content %}
     </section>
-
-    <script type="text/javascript">
-        window.NewsController = (function () {
-            return {
-                deletePost: deletePost
-            }
-
-            function deletePost(response) {
-                {% if form %}
-                    window.location = '/en/blog/?message='+response;
-                {% endif %}
-            }
-
-        })();
-    </script>
 </div>
 {% endblock content %}
