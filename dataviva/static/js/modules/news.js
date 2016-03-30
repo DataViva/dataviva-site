@@ -66,11 +66,15 @@ var NewsTable = function () {
 
                 $(this).next().click(function() {
                     if($(this).siblings().get(0).checked) {
-                        activate($(this).siblings().get(0).value);
+                        activate([$(this).siblings().get(0).value]);
                     } else {
-                        deactivate($(this).siblings().get(0).value);
+                        deactivate([$(this).siblings().get(0).value]);
                     }
                 });
+            });
+
+            $('input[name="selected-item"]').change(function() {
+                checkManySelected();
             });
         }
     });
@@ -82,8 +86,8 @@ var NewsTable = function () {
         $('input[name="selected-item"]').each(function() {
             $(this).prop('checked', checked);
         });
+        checkManySelected();
     })
-
 };
 
 NewsTable.prototype.getCheckedIds = function(first_argument) {
@@ -194,6 +198,14 @@ var edit = function(ids){
         window.location = '/'+lang+'/news/admin/publication/'+ids[0]+'/edit';
     } else {
         showMessage('Selecione alguma publicação para editá-la.', 'warning');
+    }
+}
+
+var checkManySelected = function() {
+    if (newsTable.getCheckedIds().length > 1) {
+        $('#admin-edit').prop('disabled', true);
+    } else {
+        $('#admin-edit').prop('disabled', false);
     }
 }
 
