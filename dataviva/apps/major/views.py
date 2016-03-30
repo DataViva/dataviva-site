@@ -7,21 +7,20 @@ from dataviva.api.hedu.services import Major, MajorUniversities, MajorMunicipali
 from dataviva import db
 from sqlalchemy.sql.expression import func
 
-static_folder = '../../static/img/icons/course_hedu'
 mod = Blueprint('major', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/major',
-                static_folder=static_folder)
-
-
-@mod.url_value_preprocessor
-def pull_lang_code(endpoint, values):
-    g.locale = values.pop('lang_code')
+                static_folder='static')
 
 
 @mod.before_request
 def before_request():
     g.page_type = mod.name
+
+
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.locale = values.pop('lang_code')
 
 
 @mod.url_defaults
@@ -31,9 +30,9 @@ def add_language_code(endpoint, values):
 
 @mod.route('/<course_hedu_id>/graphs/<tab>', methods=['POST'])
 def graphs(course_hedu_id, tab):
+    bra_id = request.args.get('bra_id')
     major = Course_hedu.query.filter_by(id=course_hedu_id).first_or_404()
-    location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    import pdb; pdb.set_trace()
+    location = Bra.query.filter_by(id=bra_id).first()
     return render_template('major/graphs-'+tab+'.html', major=major, location=location)
 
 
@@ -112,5 +111,4 @@ def index(course_hedu_id):
 
     major = Course_hedu.query.filter(Course_hedu.id == course_hedu_id).first()
 
-    return render_template('major/index.html', static_folder=static_folder, header=header, body=body,
-                           location=location, major=major)
+    return render_template('major/index.html', header=header, body=body, location=location, major=major)
