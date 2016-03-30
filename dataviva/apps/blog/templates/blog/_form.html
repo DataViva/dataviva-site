@@ -1,37 +1,30 @@
 {% macro messages(input) -%}
     {% for message in input.errors %}
-        <div class="alert alert-danger">
-            {{ message }}
-        </div>
+        <label class="m-l-md error" for="{{ input.name }}">{{ message }}</label>
     {% endfor %}
 {%- endmacro %}
 
 <form id="blog-form" method="POST" action="{{ action }}" enctype="multipart/form-data">
 
     {{ form.hidden_tag() }}
-    <div class="form-group">
+    <div class="form-group {{ 'has-error' if form.title.errors else '' }} ">
         <label class="control-label" for="title">Título</label>
-        <div class="">
-            {{ form.title(class="form-control", maxlength=400)}}
-        </div>
         {{ messages(form.title) }}
+        {{ form.title(class="form-control", maxlength=400)}}
     </div>
-    <div class="form-group">
+    <div class="form-group {{ 'has-error' if form.authors.errors else '' }} ">
         <label class="control-label" for="authors">Autor</label>
-        <div class="">
-            {{ form.authors(class="form-control", maxlength=100)}}
-        </div>
         {{ messages(form.authors) }}
+        {{ form.authors(class="form-control", maxlength=100)}}
     </div>
-    <div class="form-group">
+    <div class="form-group {{ 'has-error' if form.subject.errors else '' }} ">
         <label class="control-label" for="subject">Categoria</label>
-        <div class="">
-            {{ form.subject(class="form-control")}}
-        </div>
         {{ messages(form.subject) }}
+        {{ form.subject(class="form-control")}}
     </div>
-    <div class="form-group">
+    <div class="form-group {{ 'has-error' if form.thumb.errors else '' }} ">
         <label class="control-label" for="thumb-input">Imagem da Chamada</label>
+        {{ messages(form.thumb) }}
         <div class="thumb">
             <div class="thumb-controls col-md-4">
                 <div id="thumb-preview" class="crop-preview"></div>
@@ -57,19 +50,16 @@
                 <img id="thumb-crop" src="" class="img-responsive">
             </div>
         </div>
-        {{ messages(form.thumb) }}
     </div>
     <div class="clearfix"></div>
-    <div class="form-group m-t-sm">
+    <div class="form-group m-t-sm {{ 'has-error' if form.text_call.errors else '' }}">
         <label class="control-label" for="text_call">Chamada</label>
-        <div class="">
-            {{ form.text_call(class="form-control", rows=5, maxlength=500)}}
-        </div>
-        <div id="textarea-feedback"></div>
         {{ messages(form.text_call) }}
+        {{ form.text_call(class="form-control", rows=5, maxlength=500)}}
+        <div id="textarea-feedback"></div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group {{ 'has-error' if form.text_content.errors else '' }}">
         <label class="control-label" for="text_content">Conteúdo</label>
         <button id="blog-edit" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>Editar</button>
         <button id="blog-preview" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>Visualizar</button>

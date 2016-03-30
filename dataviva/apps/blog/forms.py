@@ -24,9 +24,9 @@ class RegistrationForm(Form):
     ])
 
     text_content = HiddenField('text_content', validators=[
-        validators.Required(u"Por favor, insira o texto do post.")
+        validators.Required(u"Por favor, insira o conteúdo do post.")
     ])
 
     thumb = HiddenField('thumb', validators=[
-        validators.Required(u"Por favor, insira uma imagem reduzida.")
+        validators.Required(u"Por favor, insira uma imagem para a chamada.")
     ])
