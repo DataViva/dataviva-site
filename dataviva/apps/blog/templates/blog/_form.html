@@ -12,14 +12,14 @@
     <div class="form-group">
         <label class="control-label" for="title">Título</label>
         <div class="">
-            {{ form.title(class="form-control")}}
+            {{ form.title(class="form-control", maxlength=400)}}
         </div>
         {{ messages(form.title) }}
     </div>
     <div class="form-group">
         <label class="control-label" for="authors">Autor</label>
         <div class="">
-            {{ form.authors(class="form-control")}}
+            {{ form.authors(class="form-control", maxlength=100)}}
         </div>
         {{ messages(form.authors) }}
     </div>
@@ -30,10 +30,8 @@
         </div>
         {{ messages(form.subject) }}
     </div>
-
-
     <div class="form-group">
-        <label class="control-label" for="thumb-input">Imagem reduzida</label>
+        <label class="control-label" for="thumb-input">Imagem da Chamada</label>
         <div class="thumb">
             <div class="thumb-controls col-md-4">
                 <div id="thumb-preview" class="crop-preview"></div>
@@ -65,8 +63,9 @@
     <div class="form-group m-t-sm">
         <label class="control-label" for="text_call">Chamada</label>
         <div class="">
-            {{ form.text_call(class="form-control", rows=5)}}
+            {{ form.text_call(class="form-control", rows=5, maxlength=500)}}
         </div>
+        <div id="textarea-feedback"></div>
         {{ messages(form.text_call) }}
     </div>
 

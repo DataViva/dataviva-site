@@ -282,6 +282,16 @@ $(document).ready(function(){
         deactivate(blogTable.getCheckedIds(), true);
     });
 
+    var text_max = 500;
+    $('#textarea-feedback').html(text_max + ' caracteres restantes');
+
+    $('#text_call').keyup(function() {
+        var text_length = $('#text_call').val().length;
+        var text_remaining = text_max - text_length;
+
+        $('#textarea-feedback').html(text_remaining + ' caracteres restantes');
+    });
+
     $(function() {
         $('#blog-form').submit(function() {
             var aHTML = $('#text-content-editor').summernote('code');
