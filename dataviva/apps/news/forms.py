@@ -15,8 +15,10 @@ class RegistrationForm(Form):
     ])
 
     publish_date = DateField('publish_date', validators=[
-        validators.Required(u"Por favor, insira a data da notícia.")
-    ])
+        validators.Required(u"Por favor, insira a data da notícia.")],
+        format='%d/%m/%Y',
+        description='Formato da data: dia/mês/ano'
+    )
 
     subject = TextField('subject', validators=[
         validators.Required(u"Por favor, insira a categoria da notícia.")
