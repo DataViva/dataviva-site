@@ -9,9 +9,10 @@ class Publication(db.Model):
     subject = db.Column(db.String(100))
     text_call = db.Column(db.String(500))
     text_content = db.Column(db.Text(4194304))
-    image = db.Column(db.Text(4194304))
     thumb = db.Column(db.Text(4194304))
     postage_date = db.Column(db.DateTime)
+    release_date = db.Column(db.DateTime)
+    active = db.Column(db.Boolean)
     authors = db.relationship('AuthorNews', backref='news_publication', lazy='eager')
 
     def authors_str(self):

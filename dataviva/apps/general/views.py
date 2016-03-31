@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, g, request, current_app, session, 
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.babel import gettext
 from urlparse import urlparse
+from random import randrange
 import time
 
 mod = Blueprint('general', __name__, url_prefix='/<lang_code>')
@@ -11,6 +12,8 @@ from dataviva import app, db, babel, view_cache, data_viva_apis
 from dataviva.apps.general.forms import AccessForm
 from dataviva.apps.general.models import Short
 from dataviva.apps.account.models import User
+from dataviva.apps.news.models import Publication
+
 from dataviva.api.attrs.models import Bra, Hs, Cbo, Cnae, Course_hedu
 from dataviva.translations.dictionary import dictionary
 from dataviva.api.stats.helper import stats_list, make_items
@@ -120,7 +123,13 @@ def after_request(response):
 @view_cache.cached(key_prefix=api_cache_key("homepage"))
 def home():
     g.page_type = 'home'
-    return render_template("general/index.html")
+
+    publications = Publication.query.filter(Publication.id != id, Publication.active).all()
+    if len(publications) > 3:
+        news = [publications.pop(randrange(len(publications))) for _ in range(3)]
+    else:
+        news = publications
+    return render_template("general/index.html", news=news)
 
 
 @mod.route('/inicie-uma-pesquisa/', methods=['GET'])
