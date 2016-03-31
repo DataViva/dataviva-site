@@ -25,7 +25,7 @@
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <input type="text"
                     name="regions_filter"
-                    class="busca form-control"
+                    class="form-control"
                     ng-model="selector_model.regions.filter_string"
                     ng-trim="true"
                     autocomplete="false"
@@ -33,6 +33,7 @@
                 </div>
             </div>
             <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
                 <div ng-repeat="loc in selector_model.regions.entries|filter:selector_model.regions.filter_string"
                     class="selector-list-item"
                     ng-if="loc.id != '0'"
@@ -52,7 +53,7 @@
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <input type="text"
                     name="states_filter"
-                    class="busca form-control"
+                    class="form-control"
                     ng-model="selector_model.states.filter_string"
                     ng-trim="true"
                     autocomplete="false"
@@ -60,12 +61,13 @@
                 </div>
             </div>
             <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
                 <div ng-repeat="loc in selector_model.states.entries | filter:selector_model.states.filter_string"
                     class="selector-list-item"
                     ng-if="loc.id_ibge"
                     ng-class="{'selected': loc.id == selector_model.selected_entry }"
                     ng-click="selector_model.select(loc.id, $event)" >
-                    <img src="{$ loc.icon $}" class="flag-icon"/>
+                    <img src="{$ loc.icon $}" class="selector-img"/>
                     <div class="item-title">
                         {$ loc.name $}
                         <div class="pull-right">IBGE: {$ loc.id_ibge $}</div>
@@ -81,7 +83,7 @@
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <input type="text"
                     name="mesoregions_filter"
-                    class="busca form-control"
+                    class="form-control"
                     ng-model="selector_model.mesoregions.filter_string"
                     ng-trim="true"
                     autocomplete="false"
@@ -89,12 +91,13 @@
                 </div>
             </div>
             <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
                 <div ng-repeat="loc in selector_model.mesoregions.entries | filter:selector_model.mesoregions.filter_string"
                     class="selector-list-item"
                     ng-if="loc.id_ibge"
                     ng-class="{'selected': loc.id == selector_model.selected_entry }"
                     ng-click="selector_model.select(loc.id, $event)" >
-                    <img src="{$ loc.icon $}" class="flag-icon"/>
+                    <img src="{$ loc.icon $}" class="selector-img"/>
                     <div class="item-title">
                         {$ loc.name $}
                         <div class="pull-right">IBGE: {$ loc.id_ibge $}</div>
@@ -110,7 +113,7 @@
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <input type="text"
                     name="mircroregions_filter"
-                    class="busca form-control"
+                    class="form-control"
                     ng-model="selector_model.mircroregions.filter_string"
                     ng-trim="true"
                     autocomplete="false"
@@ -118,12 +121,13 @@
                 </div>
             </div>
             <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
                 <div ng-repeat="loc in selector_model.mircroregions.entries | filter:selector_model.mircroregions.filter_string"
                     class="selector-list-item"
                     ng-if="loc.id_ibge"
                     ng-class="{'selected': loc.id == selector_model.selected_entry }"
                     ng-click="selector_model.select(loc.id, $event)" >
-                    <img src="{$ loc.icon $}" class="flag-icon"/>
+                    <img src="{$ loc.icon $}" class="selector-img"/>
                     <div class="item-title">
                         {$ loc.name $}
                         <div class="pull-right">IBGE: {$ loc.id_ibge $}</div>
@@ -139,7 +143,7 @@
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <input type="text"
                     name="municipalities_filter"
-                    class="busca form-control"
+                    class="form-control"
                     ng-model="selector_model.municipalities.filter_string"
                     ng-trim="true"
                     autocomplete="false"
@@ -147,12 +151,13 @@
                 </div>
             </div>
             <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
                 <div ng-repeat="loc in selector_model.municipalities.entries | filter:selector_model.municipalities.filter_string"
                     class="selector-list-item"
                     ng-if="loc.id_ibge"
                     ng-class="{'selected': loc.id == selector_model.selected_entry }"
                     ng-click="selector_model.select(loc.id, $event)" >
-                    <img src="{$ loc.icon $}" class="flag-icon"/>
+                    <img src="{$ loc.icon $}" class="selector-img"/>
                     <div class="item-title">
                         {$ loc.name $}
                         <div class="pull-right">IBGE: {$ loc.id_ibge $}</div>
