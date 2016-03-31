@@ -57,7 +57,6 @@
 
 
 /* SELECTORS */
-
 .selector-list .selected, .list-group .selected {
   background-color: #337ab7 !important;
   color: white;
@@ -67,11 +66,17 @@
   display: inline;
 }
 
-.selector-list .selector-list-item  .flag-icon {
+.selector-list .selector-list-item .selector-img {
   height: 50px;
   display: inline;
 }
 
+.selector-list .selector-list-item .selector-icon {
+    display: inline-block;
+    width: 35px;
+    text-align: center;
+    font-size: 20px;
+}
 .selector-list img.symbol {
   border-radius: 50%;
   background-color: #337ab7;
