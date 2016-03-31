@@ -32,7 +32,7 @@
                      ng-class="{'selected': prd.id == selector_model.selected_entry }"
                      ng-click="selector_model.select(prd.id, $event)">
                     <div class="selector-icon">
-                        <i class="dv-hs-{$ prd.icon $}"></i>
+                        <i class="dv-hs-{$ prd.id $}"></i>
                     </div>
                     <div class="item-title">
                         {$ prd.name $}
@@ -63,7 +63,7 @@
                      class="selector-list-item"
                      ng-click="selector_model.select(prd.id, $event)">
                     <div class="selector-icon">
-                        <i class="dv-hs-{$ prd.icon $}"></i>
+                        <i class="dv-hs-{$ prd.id.substring(0,2) $}"></i>
                     </div>
                     <div class="item-title">
                         {$ prd.name $}
