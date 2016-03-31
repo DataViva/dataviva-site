@@ -51,7 +51,7 @@ def all_publications():
     publications = []
     for row in result:
         publications += [(row.id, row.title, row.authors_str(),
-                          row.postage_date.strftime('%d/%m/%Y'), row.active)]
+                          row.last_modification.strftime('%d/%m/%Y'), row.active)]
     return jsonify(publications=publications)
 
 
@@ -69,9 +69,9 @@ def admin_activate(status_change):
         db.session.commit()
 
     if status_change == u'activate':
-        message = u"Publicação(s) ativado(s) com sucesso!"
+        message = u"Notícia(s) ativada(s) com sucesso!"
     else:
-        message = u"Publicação(s) desativado(s) com sucesso!"
+        message = u"Notícia(s) desativada(s) com sucesso!"
     return message, 200
 
 
@@ -84,9 +84,9 @@ def admin_delete():
             db.session.delete(publication)
 
         db.session.commit()
-        return u"Publicação(s) excluído(s) com sucesso!", 200
+        return u"Notícia(s) excluída(s) com sucesso!", 200
     else:
-        return u'Selecione alguma publicação para excluí-la.', 205
+        return u'Selecione alguma notícia para excluí-la.', 205
 
 
 @mod.route('/admin/publication/new', methods=['GET'])
@@ -106,7 +106,7 @@ def create():
         publication.subject = form.subject.data
         publication.text_content = form.text_content.data
         publication.text_call = form.text_call.data
-        publication.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.thumb = form.thumb.data
         publication.active = 0
 
@@ -117,7 +117,7 @@ def create():
         db.session.add(publication)
         db.session.commit()
 
-        message = u'Muito obrigado! Sua publicação foi submetida com sucesso!'
+        message = u'Muito obrigado! Sua notícia foi submetida com sucesso!'
         flash(message, 'success')
         return redirect(url_for('news.admin'))
 
@@ -147,7 +147,7 @@ def update(id):
         publication.subject = form.subject.data
         publication.text_content = form.text_content.data
         publication.thumb = form.thumb.data
-        publication.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.authors = []
 
         author_input_list = form.authors.data.split(',')
@@ -156,6 +156,6 @@ def update(id):
 
         db.session.commit()
 
-        message = u'Publicação editada com sucesso!'
+        message = u'Notícia editada com sucesso!'
         flash(message, 'success')
         return redirect(url_for('news.admin'))

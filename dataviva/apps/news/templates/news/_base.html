@@ -1,9 +1,7 @@
-<!-- extend from base layout -->
 {% extends "base.html" %}
 
 {% block content %}
 
-<!-- BREADCRUMB -->
 <div class="container">
     <div class="row bg-white">
         <ol class="breadcrumb">
@@ -12,8 +10,6 @@
         </ol>
     </div>
 </div>
-<!-- BREADCRUMB -->
-
 
 <div class="container">
     <nav class="sidebar col-md-3">
@@ -34,20 +30,5 @@
         {% block news_content %}
         {% endblock news_content %}
     </section>
-
-    <script type="text/javascript">
-        window.NewsController = (function () {
-            return {
-                deletePost: deletePost
-            }
-
-            function deletePost(response) {
-                {% if form %}
-                    window.location = '/en/news/?message='+response;
-                {% endif %}
-            }
-
-        })();
-    </script>
 </div>
 {% endblock content %}

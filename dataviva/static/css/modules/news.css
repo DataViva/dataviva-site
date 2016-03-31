@@ -10,7 +10,9 @@
 .news h1 {
     margin: 0px 0px 30px 0px;
 }
-
+.news textarea {
+    resize: none;
+}
 .news .publication .thumbnail {
   border: none;
   float: left;
@@ -130,26 +132,28 @@
     display: inline-block;
 }
 
-.news .crop-controls {
-    display: none;
+
+.news .thumb .thumb-controls img {
+    width: 350px;
+    height: 227px;
 }
-.news .crop-controls .crop-preview {
+.news .thumb .thumb-controls .crop-preview {
     overflow: hidden;
     text-align: center;
+    display: none;
+    width: 350px;
+    height: 227px;
 }
-
-
-.news .thumb {
+.news .thumb .thumb-controls .crop-buttons {
+    display: none;
+}
+.news .thumb .thumb-controls .thumb-buttons,
+.news .thumb .thumb-controls .crop-buttons {
     text-align: center;
 }
-.news .thumb img {
-    width:227px;
-    height: auto;
-}
-.news .thumb label {
+.news .thumb .thumb-controls label {
     display: inline-block;
 }
-.news .thumb .crop-preview {
-    width: 262px;
-    height: 170px;
+.news .thumb .thumb-crop {
+    max-height: 550px;
 }

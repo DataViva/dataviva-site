@@ -5,9 +5,10 @@ CREATE TABLE news_publication(
     text_call varchar (500) NULL,
     text_content longtext NULL,
     thumb longtext NULL,
-    postage_date datetime NULL,
-    release_date datetime NULL,
+    publish_date datetime NULL,
+    last_modification datetime NULL,
     active TINYINT(1) NULL,
+    show_home TINYINT(1) NULL,
     PRIMARY KEY (id)
 );
 
