@@ -10,6 +10,7 @@ from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
 from dataviva.api.hedu.services import LocationUniversity, LocationMajor
 from dataviva.api.sc.services import LocationSchool, LocationBasicCourse
 from sqlalchemy import desc
+from random import randint
 
 mod = Blueprint('location', __name__,
                 template_folder='templates',
@@ -76,6 +77,7 @@ def index(bra_id):
             'gdp': location_service.gdp(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp()/location_service.population(),
+            'bg_location' : "bg-"+location.id[:3]+"_"+str(randint(1,2))
         }
     else:
         header = {
@@ -87,6 +89,7 @@ def index(bra_id):
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
+            'bg_location' : "bg-"+location.id[:3]+"_"+str(randint(1,2))
         }
 
     if eci is not None:
