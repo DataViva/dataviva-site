@@ -5,6 +5,7 @@
 .modal.dataviva .modal-header,
 .modal.dataviva .modal-header button {
     color: #FFF;
+    opacity: 1;
 }
 .modal.dataviva .modal-header h4 {
     font-size: 18px;
@@ -15,129 +16,60 @@
     font-size:20px;
     margin:1rem 0;
 }
-
 .modal.dataviva .nav-tabs {
     border: 0px;
-}
-.modal.dataviva .nav-tabs > li {
-    margin: 0px;
-}
-.modal.dataviva .nav-tabs > li > a{
-    border-radius: 0px;
-    border: 1px solid #ddd;
-    border-right: 0px solid #ddd;
-    margin: 0px;
-    padding: 6px 15px;
-}
-.modal.dataviva .nav-tabs > li:first-child > a{
-    border-radius: 5px 0px 0px 5px;
-}
-.modal.dataviva .nav-tabs > li:last-child > a{
-    border-radius: 0px 5px 5px 0px;
-    border-right: 1px solid #ddd;
+    margin: 10px 0px;
 }
 
-
-.modal.dataviva .modal-body h2 {
-  font-size: 20px;
-  margin: 1rem 0;
+.modal.dataviva .tab-content .form-group.search input,
+.modal.dataviva .tab-content .form-group.search input:focus {
+    min-width: 310px;
+    border: 1px solid #e5e6e7 !important;
+    border-left: 0px !important;
+    padding-left: 10px;
 }
-.modal.dataviva .modal-body .search .btn-default:active,
-.modal.dataviva .modal-body .search .btn-default.active {
-  background-color: #9eddbf;
-}
-.modal.dataviva .modal-body .search-items {
-  margin-top: 1rem;
-}
-.modal.dataviva .modal-body .search-items h4 {
-  font-size: 12px;
-  font-weight: 600;
-  margin: 0;
-  padding: 1rem 0;
-  text-transform: uppercase;
+.modal.dataviva .tab-content .form-group.search .input-group-addon {
+    color:#9eddbf;
+    border-right: 0px;
+    padding-right: 0px;
 }
 
-.modal.dataviva .modal-body .foco a{margin:4px 0;}
-
-.modal.dataviva .modal-body .search-items .list-group-item {
-  border: none;
-  border-radius: 0;
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 45px;
-  padding-bottom: 0;
-  padding-top: 0;
-}
-
-.modal.dataviva .modal-body .search-items .graphs .list-group-item{font-size:100%; line-height:15px!important;}
-
-.modal.dataviva .modal-body .search-items .graphs .list-group-item small{display:block; margin:15px;}
-
-.modal.dataviva .modal-body .search-items .graphs a.list-group-item small span{color:#5c9ec5;display:block; line-height:15px;}
-
-.modal.dataviva .modal-body .search-items .graphs a.list-group-item:hover small span{color:#fff!important;}
-
-.modal.dataviva .modal-body .search-items .list-group-item a {
-  color: #423434;
-}
-.modal.dataviva .modal-body .search-items .list-group-item:nth-child(odd){
-  background-color: #e1eee6;
-}
-
-.modal.dataviva .modal-body .search-items .sublinks .list-group-item:nth-child(odd){background-color:#fff!important;}
-
-.modal.dataviva .modal-body .search-items .sublinks .list-group-item:nth-child(odd):hover{background-color: #5a9dc4!important;}
-
-.modal.dataviva .modal-body .search-items .list-group-item:nth-child(odd):hover{
-  background-color: #337ab7;
-}
-.modal.dataviva .modal-body .search-items .list-group-item:hover {
-  background-color: #337ab7;
-}
-.modal.dataviva .modal-body .search-items .list-group-item.more {
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-.modal.dataviva .carousel-indicators{bottom:-100px;}
-
-.modal.dataviva .carousel-indicators li {
-  background-color: #ededeb;
-}
-.modal.dataviva  .carousel-indicators .active {
-  background-color: #a25a6d;
-}
-.modal.dataviva .modal-video button.close {
-  font-size: 2.8rem;
-}
-.modal.dataviva .modal-video h1 {
-  font-size: 1.8em;
-  margin-top: 0;
-}
-.modal-clear .modal-content {
-  background: none;
-  border: none;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-}
-
-
-
-/* SELECTORS */
-.selector-list {
-  height: 300px;
+.modal.dataviva .selector-list {
+  max-height: 300px;
   overflow-y: scroll;
   margin-top: 12px;
 }
+
+.modal.dataviva .selector-list-item {
+    padding: 0px 15px;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 60px;
+}
+.modal.dataviva .selector-list-item:hover {
+    background-color: #5a9dc4 !important;
+    color: #FFF;
+    cursor: pointer;
+}
+.modal.dataviva .selector-list .selector-list-item:nth-child(odd){
+  background-color: #e1eee6;
+}
+
+
+/* SELECTORS */
 
 .selector-list .selected, .list-group .selected {
   background-color: #337ab7 !important;
   color: white;
 }
 
-.selector-list img.flag-icon {
-  width: 26px;
-  height: 26px;
+.selector-list .selector-list-item .item-title {
+  display: inline;
+}
+
+.selector-list .selector-list-item  .flag-icon {
+  height: 50px;
+  display: inline;
 }
 
 .selector-list img.symbol {
