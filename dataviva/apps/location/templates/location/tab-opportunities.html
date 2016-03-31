@@ -1,0 +1,64 @@
+<div role="tabpanel" class="tab-pane" id="opportunities">
+    <h2>Estatísticas de Oportunidades Econômicas</h2>
+    <div class="row">
+        <div class="col-xs-15 col-sm-15 col-md-12">
+            <div class="table-responsive">
+                <table class="table data-blue">
+                    <thead>
+                        <tr>
+                            <th>
+                                Produto
+                                <small>com Menor Distância</small>
+                            </th>
+                            <th>
+                                Atividade Econômica <small>com Menor Distância</small>
+                            </th>
+                            <th>
+                                Produto <small>com Maior Ganho de Oportunidade</small>
+                            </th>
+                            <th>
+                                Atividade Econômica <small>com Maior Ganho de Oportunidade</small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% if body.less_distance_by_product %}
+                            <td>
+                                <p class="label">{{ body.less_distance_by_product_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong><span>{{ body.less_distance_by_product | magnitude }}</span>
+                                </div>
+                            </td>
+                            {% endif %}
+                            {% if body.less_distance_by_occupation %}
+                            <td>
+                                <p class="label">{{ body.less_distance_by_occupation_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong><span>{{ body.less_distance_by_occupation | magnitude }}</span>
+                                </div>
+                            </td>
+                            {% endif %}
+                            {% if body.opportunity_gain_by_product %}
+                            <td>
+                                <p class="label">{{ body.opportunity_gain_by_product_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3) }}</strong><span>{{ body.opportunity_gain_by_product | magnitude }}</span>
+                                </div>
+                            </td>
+                            {% endif %}
+                            {% if body.opportunity_gain_by_occupation %}
+                            <td>
+                                <p class="label">{{ body.opportunity_gain_by_occupation_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3) }}</strong><span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
+                                </div>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
