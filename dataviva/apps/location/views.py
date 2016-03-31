@@ -9,12 +9,18 @@ from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
     LocationJobs, LocationDistance, LocationOppGain
 from dataviva.api.hedu.services import LocationUniversity, LocationMajor
 from dataviva.api.sc.services import LocationSchool, LocationBasicCourse
-from sqlalchemy import desc
+from sqlalchemy import desc, func
+from random import randint
 
 mod = Blueprint('location', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/location',
                 static_folder='static')
+
+
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
 
 
 @mod.url_value_preprocessor
@@ -25,6 +31,12 @@ def pull_lang_code(endpoint, values):
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
+
+
+@mod.route('/<bra_id>/graphs/<tab>', methods=['POST'])
+def graphs(bra_id, tab):
+    location = Bra.query.filter_by(id=bra_id).first()
+    return render_template('location/graphs-'+tab+'.html', location=location)
 
 
 @mod.route('/<bra_id>')
@@ -57,6 +69,14 @@ def index(bra_id):
     eci = Ymb.query.filter_by(bra_id=bra_id, month=0) \
         .order_by(desc(Ymb.year)).limit(1).first()
 
+    ''' Background Image'''
+    if len(bra_id)==1:
+        countys = Bra.query.filter(Bra.id.like(bra_id+'%'), func.length(Bra.id)==3).all()
+        background_image="bg-"+str(countys[randint(0,len(countys)-1)].id)+"_"+str(randint(1,2))
+    else :
+        background_image="bg-"+location.id[:3]+"_"+str(randint(1,2))
+
+
     if len(bra_id) != 9 and len(bra_id) != 3:
         header = {
             'name': location_service.name(),
@@ -65,6 +85,7 @@ def index(bra_id):
             'gdp': location_service.gdp(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp()/location_service.population(),
+            'bg_class_image' : background_image
         }
     else:
         header = {
@@ -76,6 +97,7 @@ def index(bra_id):
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
+            'bg_class_image' : background_image
         }
 
     if eci is not None:
