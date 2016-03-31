@@ -72,9 +72,10 @@ def index(bra_id):
     ''' Background Image'''
     if len(bra_id)==1:
         countys = Bra.query.filter(Bra.id.like(bra_id+'%'), func.length(Bra.id)==3).all()
-        brakground_image="bg-"+str(countys[randint(1,len(countys))].id)+"_"+str(randint(1,2))
+        brakground_image="bg-"+str(countys[randint(0,len(countys)-1)].id)+"_"+str(randint(1,2))
     else :
         brakground_image="bg-"+location.id[:3]+"_"+str(randint(1,2))
+
 
     if len(bra_id) != 9 and len(bra_id) != 3:
         header = {
