@@ -107,6 +107,7 @@ def create():
         publication.text_content = form.text_content.data
         publication.text_call = form.text_call.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.thumb = form.thumb.data
         publication.active = 0
 
@@ -130,6 +131,7 @@ def edit(id):
     form.authors.data = publication.authors_str()
     form.subject.data = publication.subject
     form.text_content.data = publication.text_content
+    form.publish_date.data = publication.publish_date
     form.text_call.data = publication.text_call
     form.thumb.data = publication.thumb
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
@@ -148,6 +150,7 @@ def update(id):
         publication.text_content = form.text_content.data
         publication.thumb = form.thumb.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.authors = []
 
         author_input_list = form.authors.data.split(',')

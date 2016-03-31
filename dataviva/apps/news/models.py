@@ -19,8 +19,8 @@ class Publication(db.Model):
         author_names = [author.name for author in self.authors]
         return ', '.join(author_names)
 
-    def date_str(self):
-        return self.last_modification.strftime('%d/%m/%Y')
+    def date(self):
+        return self.publish_date.strftime('%d/%m/%Y')
 
     def __repr__(self):
         return '<Publication %r>' % (self.title)
