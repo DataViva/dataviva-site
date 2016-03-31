@@ -72,9 +72,9 @@ def index(bra_id):
     ''' Background Image'''
     if len(bra_id)==1:
         countys = Bra.query.filter(Bra.id.like(bra_id+'%'), func.length(Bra.id)==3).all()
-        brakground_image="bg-"+str(countys[randint(0,len(countys)-1)].id)+"_"+str(randint(1,2))
+        background_image="bg-"+str(countys[randint(0,len(countys)-1)].id)+"_"+str(randint(1,2))
     else :
-        brakground_image="bg-"+location.id[:3]+"_"+str(randint(1,2))
+        background_image="bg-"+location.id[:3]+"_"+str(randint(1,2))
 
 
     if len(bra_id) != 9 and len(bra_id) != 3:
@@ -85,7 +85,7 @@ def index(bra_id):
             'gdp': location_service.gdp(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp()/location_service.population(),
-            'bg_location' : brakground_image
+            'bg_class_image' : background_image
         }
     else:
         header = {
@@ -97,7 +97,7 @@ def index(bra_id):
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
-            'bg_location' : brakground_image
+            'bg_class_image' : background_image
         }
 
     if eci is not None:
