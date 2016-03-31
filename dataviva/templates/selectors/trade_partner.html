@@ -71,10 +71,10 @@
                 <div class="loading" ng-show="selector_model.loading"></div>
                 <div ng-repeat="ptn in selector_model.countries.entries | filter:selector_model.countries.filter_string"
                      ng-class="{'selected': ptn.id == selector_model.selected_entry }"
-                     class="list-group-item col-md-15"
+                     class="selector-list-item"
                      ng-click="selector_model.select(ptn.id, $event)">
                     <div class="selector-icon">
-                        <i class="dv-wld-{$ ptn.id.substring(0,1) $}"></i>
+                        <i class="dv-wld-{$ ptn.id.substring(0,2) $}"></i>
                     </div>
                     <div class="item-title">
 
