@@ -34,14 +34,14 @@
                             <td>
                                 <p class="label">{{ body.municipality_with_more_jobs }}</p>
                                 <div class="number">
-                                    USD <strong class="counter">{{ body.municipality_with_more_jobs_value | max_digits(3) }}</strong><span>{{ body.municipality_with_more_jobs_value | magnitude }} EMPREGOS</span>
+                                    <strong class="counter">{{ body.municipality_with_more_jobs_value | max_digits(3) }}</strong><span>{{ body.municipality_with_more_jobs_value | magnitude }}</span>
                                 </div>
                             </td>
                             {% endif %}
                             <td>
                                 <p class="label">{{ body.activity_with_more_jobs }}</p>
                                 <div class="number">
-                                    USD <strong class="counter">{{ body.activity_with_more_jobs_value | max_digits(3) }}</strong><span>{{ body.activity_with_more_jobs_value | magnitude }}</span>
+                                    <strong class="counter">{{ body.activity_with_more_jobs_value | max_digits(3) }}</strong><span>{{ body.activity_with_more_jobs_value | magnitude }}</span>
                                 </div>
                             </td>
                             {% if body.is_not_municipality %}
@@ -64,3 +64,4 @@
             </div>
         </div>
     </div>
+</div>

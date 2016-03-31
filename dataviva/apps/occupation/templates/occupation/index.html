@@ -56,7 +56,7 @@
                        data-location="{{ location.id }}"
                        data-toggle="tab">Salário e Emprego</a>
                 </li>
-                {% if body.is_family %}
+                {% if location.id %}
                 <li role="presentation">
                     <a href="#opportunities"
                        aria-controls="opportunities"
@@ -73,7 +73,7 @@
         <div class="tab-content col-sm-7 col-md-8 col-lg-9">
             {% include "occupation/tab-general.html" %}
             {% include "occupation/tab-wages.html" %}
-            {% if body.is_family %}
+            {% if location.id %}
                 {% include "occupation/tab-opportunities.html" %}
             {% endif %}
         </div>

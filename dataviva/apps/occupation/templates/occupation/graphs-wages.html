@@ -3,9 +3,9 @@
         <h3>Visualize</h3>
         <div class="list-group panel">
             <h4>Emprego por:</h4>
-            <a href="#jobs-opportunities" class="list-group-item" data-toggle="collapse" data-parent="#jobs-opportunities">{%trans%}Atividade Econômica{%endtrans%}</a>
+            <a href="#jobs-opportunities" class="list-group-item" data-toggle="collapse" data-parent="#jobs-opportunities">Atividade Econômica</a>
             <div class="collapse" id="jobs-opportunities">
-                <a href="//pt/embed/tree_map/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/cnae/?color=color&depth=cnae_6&size=num_jobs"
+                <a href="/pt/embed/tree_map/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/cnae/?color=color&depth=cnae_6&size=num_jobs"
                    target="graphs-frame-wages" class="list-group-item" data-parent="#jobs-opportunities">
                     TreeMap
                 </a>
