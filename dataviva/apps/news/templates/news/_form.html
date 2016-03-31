@@ -16,8 +16,9 @@
 
         <div class="form-group col-md-2">
             <label class="control-label" for="authors">Exibir na Home</label>
+            {{ messages(form.show_home) }}
             <div class="form-control checkbox-switch">
-                <input type="checkbox" class="js-switch" name="activate3" value="3">
+                {{ form.show_home(class="js-switch") }}
             </div>
         </div>
     </div>

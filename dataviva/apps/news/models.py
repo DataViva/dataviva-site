@@ -13,6 +13,7 @@ class Publication(db.Model):
     last_modification = db.Column(db.DateTime)
     publish_date = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
+    show_home = db.Column(db.Boolean)
     authors = db.relationship('AuthorNews', backref='news_publication', lazy='eager')
 
     def authors_str(self):

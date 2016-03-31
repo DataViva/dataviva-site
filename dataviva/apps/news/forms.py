@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import HiddenField, TextField, TextAreaField, validators, DateField
+from wtforms import HiddenField, TextField, TextAreaField, validators, DateField, BooleanField
 
 
 class RegistrationForm(Form):
@@ -8,6 +8,8 @@ class RegistrationForm(Form):
         validators.Required(u"Por favor, insira o título da notícia."),
         validators.Length(max=400)
     ])
+
+    show_home = BooleanField('show_home')
 
     authors = TextField('authors', validators=[
         validators.Required(u"Por favor, insira o(s) autor(es) da notícia."),
