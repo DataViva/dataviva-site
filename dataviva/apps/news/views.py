@@ -51,7 +51,7 @@ def all_publications():
     publications = []
     for row in result:
         publications += [(row.id, row.title, row.authors_str(),
-                          row.postage_date.strftime('%d/%m/%Y'), row.active)]
+                          row.last_modification.strftime('%d/%m/%Y'), row.active)]
     return jsonify(publications=publications)
 
 
@@ -106,7 +106,7 @@ def create():
         publication.subject = form.subject.data
         publication.text_content = form.text_content.data
         publication.text_call = form.text_call.data
-        publication.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.thumb = form.thumb.data
         publication.active = 0
 
@@ -147,7 +147,7 @@ def update(id):
         publication.subject = form.subject.data
         publication.text_content = form.text_content.data
         publication.thumb = form.thumb.data
-        publication.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.authors = []
 
         author_input_list = form.authors.data.split(',')

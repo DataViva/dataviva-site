@@ -268,6 +268,14 @@ $(document).ready(function(){
         $('#thumb-crop').attr('src', '');
     });
 
+    $('#publish-date').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
+
     $('#admin-delete').click(function() {
         destroy(newsTable.getCheckedIds());
     });

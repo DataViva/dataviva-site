@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import HiddenField, TextField, TextAreaField, validators
+from wtforms import HiddenField, TextField, TextAreaField, validators, DateField
 
 
 class RegistrationForm(Form):
@@ -12,6 +12,10 @@ class RegistrationForm(Form):
     authors = TextField('authors', validators=[
         validators.Required(u"Por favor, insira o(s) autor(es) da notícia."),
         validators.Length(max=100)
+    ])
+
+    publish_date = DateField('publish_date', validators=[
+        validators.Required(u"Por favor, insira a data da notícia.")
     ])
 
     subject = TextField('subject', validators=[
