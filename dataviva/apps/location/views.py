@@ -9,7 +9,7 @@ from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
     LocationJobs, LocationDistance, LocationOppGain
 from dataviva.api.hedu.services import LocationUniversity, LocationMajor
 from dataviva.api.sc.services import LocationSchool, LocationBasicCourse
-from sqlalchemy import desc
+from sqlalchemy import desc, func
 from random import randint
 
 mod = Blueprint('location', __name__,
@@ -69,6 +69,13 @@ def index(bra_id):
     eci = Ymb.query.filter_by(bra_id=bra_id, month=0) \
         .order_by(desc(Ymb.year)).limit(1).first()
 
+    ''' Background Image'''
+    if len(bra_id)==1:
+        countys = Bra.query.filter(Bra.id.like(bra_id+'%'), func.length(Bra.id)==3).all()
+        brakground_image="bg-"+str(countys[randint(1,len(countys))].id)+"_"+str(randint(1,2))
+    else :
+        brakground_image="bg-"+location.id[:3]+"_"+str(randint(1,2))
+
     if len(bra_id) != 9 and len(bra_id) != 3:
         header = {
             'name': location_service.name(),
@@ -77,7 +84,7 @@ def index(bra_id):
             'gdp': location_service.gdp(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp()/location_service.population(),
-            'bg_location' : "bg-"+location.id[:3]+"_"+str(randint(1,2))
+            'bg_location' : brakground_image
         }
     else:
         header = {
@@ -89,7 +96,7 @@ def index(bra_id):
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
-            'bg_location' : "bg-"+location.id[:3]+"_"+str(randint(1,2))
+            'bg_location' : brakground_image
         }
 
     if eci is not None:
