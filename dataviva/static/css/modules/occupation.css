@@ -214,6 +214,7 @@
 .occupation .table-responsive {
   height: 280px;
 }
+
 .occupation .graphs {
   margin-top: 40px;
 }
@@ -224,39 +225,29 @@
 .occupation .graphs .embed-responsive {
   max-height: 900px;
 }
-.occupation .nav-graph button {
-  background: none;
-  border-radius: 0;
-}
-.occupation .nav-graph button + button:not(.list-group-item) {
-  margin-left: -4px;
-}
+
+
 .occupation .nav-graph h4 {
   font-size: 14px;
   font-weight: 700;
-  margin-top: 0;
   text-transform: uppercase;
+  margin: 10px;
 }
-.occupation .nav-graph label {
-  display: block;
-  font-weight: 400;
-  text-transform: uppercase;
+.occupation .nav-graph h4 a {
+    padding-left: 10px;
+    color: inherit;
 }
-.occupation .nav-graph select {
-  border-radius: 0;
-  width: auto;
+.occupation .nav-graph .panel {
+   border: 1px solid #000;
+   border-radius: 0px;
+   margin: 0px;
 }
-.occupation .nav-graph > .form-group + .form-group {
-  margin-top: 4rem;
-}
-.occupation .nav-graph .form-control {
-  background: none;
-  display: inline-block;
-}
-.occupation .nav-graph .list-group button {
-  text-indent: 20px;
+.occupation .nav-graph .collapse a,
+.occupation .nav-graph .collapsing a {
+    padding: 5px 10px 5px 40px;
 }
 .occupation .nav-graph .list-group-item {
+  margin: 0px;
   border: none;
   border-radius: 0;
   font-size: 14px;
@@ -265,21 +256,4 @@
 .occupation .nav-graph .list-group-item:focus {
   background: #5a9dc4;
   color: #FFF;
-}
-.occupation .nav-graph .list-wrap {
-  border: 1px solid #000;
-  border-width: 1px 1px 0;
-}
-.occupation .nav-graph .list-wrap:last-child {
-  border-bottom-width: 1px;
-}
-.occupation .nav-graph .list-wrap + .list-wrap {
-  border-top: 0;
-}
-.occupation .nav-graph .list-wrap > .list-group {
-  margin-bottom: 0;
-}
-.occupation .nav-graph .list-wrap > .list-group-item {
-  font-weight: 700;
-  text-transform: uppercase;
 }
