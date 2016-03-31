@@ -1,0 +1,64 @@
+<div role="tabpanel" class="tab-pane" id="wages">
+    <h2>Estatísticas de Salário e Emprego</h2>
+    <div class="row">
+        <div class="col-xs-15 col-sm-15 col-md-12">
+            <div class="table-responsive">
+                <table class="table data-blue">
+                    <thead>
+                        <tr>
+                            <th>
+                                Principal Atividade Econômica <small>por Número de Empregos</small>
+                            </th>
+                            <th>
+                                Principal Ocupação <small>por Número de Empregos</small>
+                            </th>
+                            <th>
+                                Salário Médio
+                            </th>
+                            <th>
+                                Massa Salarial
+                            </th>
+                            <th>
+                                Total de Empregos
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p class="label">{{ body.main_industry_by_num_jobs_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3) }}</strong><span>{{ body.main_industry_by_num_jobs | magnitude }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">{{ body.main_occupation_by_num_jobs_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3) }}</strong><span>{{ body.main_occupation_by_num_jobs | magnitude }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">Salário Médio</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong><span>{{ body.avg_wage | magnitude }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">Massa Salarial</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.wage | max_digits(3) }}</strong><span>{{ body.wage | magnitude }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="label">Total de Empregos</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong><span>{{ body.total_jobs | magnitude }}</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

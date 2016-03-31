@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{% if title %}{{ title }}{% else %}DataViva{% endif %}</title>
+  </head>
+
+  <body style="margin:0px;padding:0px;">
+
+    <table border="0" cellpadding="0" cellspacing="0" style="margin:0px auto;">
+      <tr>
+        <td background="http://dataviva.info/static/img/bgs/city_small.jpg" style="background-color:#c6ebff; padding:60px; margin:0px;">
+
+          <table border="0" width="550" cellpadding="0" cellspacing="0" align="center">
+            <tr>
+              <td style="background-color:rgba(255,255,255,0.9);padding:30px;font-family:'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight: lighter;color:#333">
+
+                <a href="http://www.dataviva.info" style="display:block;margin-bottom:20px;text-align:center;">
+                  <img src="http://dataviva.info/static/img/nav/DataViva.png" width="120" alt="DataViva" style="border:0;">
+                </a>
+
+                {% block mail_body %}
+                {% endblock %}
+
+                {% if user %}
+                  <br/><br/>
+                  <span style="font-size:12px;color:#888;text-align:center;display:block;">{% trans %}If you don't want to receive these updates,{% endtrans %} <a href="http://dataviva.info/account/remove_email/{{ user.id }}/{{ user.nickname }}">{% trans %}click here.{% endtrans %}</a></span>
+                {% endif %}
+              </td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
