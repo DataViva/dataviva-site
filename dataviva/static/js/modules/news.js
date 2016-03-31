@@ -18,7 +18,6 @@ var NewsTable = function () {
                 "orderable": false,
                 "className": "column-checkbox",
                 "render": function (data, type, publication, meta){
-
                     var checkbox = '<div class="checkbox checkbox-success">' +
                                    '    <input name="selected-item" id="item'+publication[0]+'" value="'+publication[0]+'" type="checkbox">' +
                                    '    <label for="'+publication[0]+'"></label>'
@@ -102,7 +101,7 @@ NewsTable.prototype.getCheckedIds = function(first_argument) {
 
 var newsTable = new NewsTable();
 
-var activate = function(ids, refreshButtons){
+var activate = function(ids){
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -110,10 +109,10 @@ var activate = function(ids, refreshButtons){
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível ativar a(s) publicações(s) selecionada(s) devido a um erro no servidor.', 'danger');
+                    showMessage('Não foi possível ativar a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
-                    showMessage('Uma ou mais publicações selecionadas não puderam ser encontradas, a lista de publicações será atualizada.', 'info');
+                    showMessage('Uma ou mais notícias selecionadas não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
                     newsTable.table.fnReloadAjax();
                 }
             },
@@ -125,15 +124,15 @@ var activate = function(ids, refreshButtons){
                     }
                 }
 
-                showMessage(message, 'success');
+                showMessage(message, 'success', 8000);
             }
         });
     } else {
-        showMessage('Selecione alguma publicação para ativá-la.', 'warning');
+        showMessage('Por favor selecione algum post para ativar.', 'warning', 8000);
     }
 }
 
-var deactivate = function(ids, refreshButtons){
+var deactivate = function(ids){
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -141,10 +140,10 @@ var deactivate = function(ids, refreshButtons){
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível excluir a(s) publicações(s) selecionada(s) devido a um erro no servidor.', 'danger');
+                    showMessage('Não foi possível excluir a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
-                    showMessage('Uma ou mais publicações selecionados não puderam ser encontradas, a lista de publicações será atualizada.', 'info');
+                    showMessage('Uma ou mais notícias selecionados não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
                     newsTable.table.fnReloadAjax();
                 }
             },
@@ -155,12 +154,11 @@ var deactivate = function(ids, refreshButtons){
                         $("[name='"+itemName+"']").click();
                     }
                 }
-
-                showMessage(message, 'success');
+                showMessage(message, 'success', 8000);
             },
         });
     } else {
-        showMessage('Selecione alguma publicação para desativá-lo.', 'warning');
+        showMessage('Por favor selecione para desativar.', 'warning', 8000);
     }
 }
 
@@ -172,10 +170,10 @@ var destroy = function(ids){
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível excluir a(s) publicações(s) selecionada(s) devido a um erro no servidor.', 'danger');
+                    showMessage('Não foi possível excluir a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
-                    showMessage('Uma ou mais publicações selecionados não puderam ser encontradas, a lista de publicações será atualizada.', 'info');
+                    showMessage('Uma ou mais notícias selecionados não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
                     newsTable.table.fnReloadAjax();
                 }
             },
@@ -185,11 +183,11 @@ var destroy = function(ids){
                     newsTable.table.row($(itemId).parents('tr')).remove().draw();
                 }
 
-                showMessage(message, 'success');
+                showMessage(message, 'success', 8000);
             }
         });
     } else {
-        showMessage('Selecione alguma publicação para excluí-lo.', 'warning');
+        showMessage('Por favor selecione para excluir.', 'warning', 8000);
     }
 }
 
@@ -197,7 +195,7 @@ var edit = function(ids){
     if (ids.length) {
         window.location = '/'+lang+'/news/admin/publication/'+ids[0]+'/edit';
     } else {
-        showMessage('Selecione alguma publicação para editá-la.', 'warning');
+        showMessage('Por favor selecione para editar.', 'warning', 8000);
     }
 }
 
@@ -210,16 +208,18 @@ var checkManySelected = function() {
 }
 
 var inputThumbCallback = function() {
+    $('#thumb-img').hide();
+    $('.thumb-buttons').hide();
+
+    $('#thumb-preview').show();
+    $('.crop-buttons').show();
+    $('.thumb-crop').show();
+
     $($('#thumb-crop')).cropper({
         aspectRatio: 350/227,
         preview: '#thumb-preview',
         viewMode: 3
     });
-
-    $('#thumb-img').hide();
-    $('#thumb-crop').show();
-    $('.thumb .crop-controls').show();
-    $('.thumb label').hide();
 }
 
 $(document).ready(function(){
@@ -256,11 +256,16 @@ $(document).ready(function(){
         var thumbDataURL = $('#thumb-crop').cropper('getDataURL');
         $('#thumb').val(thumbDataURL);
         $('#thumb-img').attr('src', thumbDataURL);
+
+        $('#thumb-img').show();
+        $('.thumb-buttons').show();
+
+        $('#thumb-preview').hide();
+        $('.crop-buttons').hide();
+        $('.thumb-crop').hide();
+
         $('#thumb-crop').cropper('destroy');
         $('#thumb-crop').attr('src', '');
-        $('#thumb-img').show();
-        $('.thumb label').show();
-        $('.thumb .crop-controls').hide();
     });
 
     $('#admin-delete').click(function() {
@@ -276,11 +281,26 @@ $(document).ready(function(){
         deactivate(newsTable.getCheckedIds(), true);
     });
 
+    var text_max = 500;
+    $('#textarea-feedback').html(text_max + ' caracteres restantes');
+
+    $('#text_call').keyup(function() {
+        var text_length = $('#text_call').val().length;
+        var text_remaining = text_max - text_length;
+
+        $('#textarea-feedback').html(text_remaining + ' caracteres restantes');
+    });
+
     $(function() {
         $('#news-form').submit(function() {
             var aHTML = $('#text-content-editor').summernote('code');
             $('#text_content').val(aHTML);
+            if ($('.summernote').summernote('isEmpty')) {
+                $('#text_content').val('');
+            }
             return true;
         });
     });
+
+    setAlertTimeOut(8000);
 });
