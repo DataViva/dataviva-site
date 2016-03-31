@@ -157,3 +157,16 @@
 .news .thumb .thumb-crop {
     max-height: 550px;
 }
+.news .checkbox-switch {
+    padding: 0px;
+    border: none;
+}
+
+.news .checkbox-switch .switchery{
+    height: 33px;
+}
+
+.news .checkbox-switch .switchery > small {
+    height: 33px;
+    width: 33px;
+}
