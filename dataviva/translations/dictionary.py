@@ -522,6 +522,8 @@ def dictionary():
         "studies": gettext("Studies"),
         "news": gettext("News"),
         "contact": gettext("Contact"),
+        "english": gettext("English"),
+        "portuguese": gettext("Portuguese"),
 
     }
 
