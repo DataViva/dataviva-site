@@ -1,76 +1,74 @@
-<div class="institucional search">
-    <h2>Escolha um curso da lista abaixo ou busque pelo nome</h2>
-    <form class="form-dataviva form-inline filter">
-        
-        <ul class="btn-group nav nav-tabs" role="tablist">
-            <li><a href="#fields" aria-controls="fields" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.fields)">
-            Campos
-            </a></li>
-            <li><a href="#courses" aria-controls="courses" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.courses)">
-            Cursos
-            </a></li>
-        </ul>
-        
-        <div class="search-items tab-content">
-            <!-- TAB: fields -->
-            <div role="tabpanel" class="tab-pane search-items" id="fields">
-                <div class="form-group">
-                    <i class="fa fa-search"></i>
-                    <input type="text"
-                    name="fields_filter"
-                    class="busca form-control"
-                    ng-model="selector_model.fields.filter_string"
-                    ng-trim="true"
-                    autocomplete="false" />
-                </div>
-                <div class="list-group list-stripped selector-list">
-                    <div class="loading" ng-show="selector_model.loading"></div>
-                    <div ng-repeat="prd in selector_model.fields.entries|filter:selector_model.fields.filter_string" class="list-group-item col-md-15" ng-class="{'selected': prd.id == selector_model.selected_entry }">
+<h2>Escolha um curso da lista abaixo ou busque pelo nome</h2>
+<form action="" class="form-dataviva form-inline filter">
+    
+    <div class="btn-group nav nav-tabs" role="tablist">
+        <a href="#fields" aria-controls="fields" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.fields)">
+        Campos
+        </a>
+        <a href="#courses" aria-controls="courses" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.courses)">
+        Cursos
+        </a>
+    </div>
+    
+    <div class="search-items tab-content">
+        <!-- TAB: fields -->
+        <div role="tabpanel" class="tab-pane search-items" id="fields">
+                      name="fields_filter"
+                class="busca form-control"
+      <div class="form-group">
+                <i class="fa fa-search"></i>
+                <input type="text"
+                ng-model="selector_model.fields.filter_string"
+                ng-trim="true"
+                autocomplete="false" />
+            </div>
+            <div class="list-group list-stripped selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="prd in selector_model.fields.entries|filter:selector_model.fields.filter_string" class="list-group-item col-md-15" ng-class="{'selected': prd.id == selector_model.selected_entry }">
 
+                    <div class="col-md-1 hidden-xs hidden-sm">
+                        <img src="{$ prd.icon $}" class="flag-icon symbol"/>
+                    </div>
+                    <div class="col-md-10">
+                        {$ prd.name $}<BR>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="btn btn-default"
+                             ng-click="selector_model.select(prd.id, $event)">Select</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- TAB: courses -->
+        <div role="tabpanel" class="tab-pane search-items" id="courses">
+            <div class="form-group">
+                <i class="fa fa-search"></i>
+                <input type="text"
+                name="courses_filter"
+                class="busca form-control"
+                ng-model="selector_model.courses.filter_string"
+                ng-trim="true"
+                autocomplete="false" />
+            </div>
+            
+            <div class="list-group list-stripped selector-list col-md-15">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="prd in selector_model.courses.entries | filter:selector_model.courses.filter_string"
+                     ng-class="{'selected': prd.id == selector_model.selected_entry }"
+                     class="list-group-item col-md-15">
                         <div class="col-md-1 hidden-xs hidden-sm">
                             <img src="{$ prd.icon $}" class="flag-icon symbol"/>
                         </div>
                         <div class="col-md-10">
-                            {$ prd.name $}<BR>
+                            {$ prd.name $}
                         </div>
-                        <div class="col-md-3">
-                            <div class="btn btn-default"
-                                 ng-click="selector_model.select(prd.id, $event)">Select</div>
-                        </div>
+                    <div class="col-md-3">
+                        <div class="btn btn-default" 
+                             ng-click="selector_model.select(prd.id, $event)">Select</div>
                     </div>
                 </div>
             </div>
-            <!-- TAB: courses -->
-            <div role="tabpanel" class="tab-pane search-items" id="courses">
-                <div class="form-group">
-                    <i class="fa fa-search"></i>
-                    <input type="text"
-                    name="courses_filter"
-                    class="busca form-control"
-                    ng-model="selector_model.courses.filter_string"
-                    ng-trim="true"
-                    autocomplete="false" />
-                </div>
-                
-                <div class="list-group list-stripped selector-list col-md-15">
-                    <div class="loading" ng-show="selector_model.loading"></div>
-                    <div ng-repeat="prd in selector_model.courses.entries | filter:selector_model.courses.filter_string"
-                         ng-class="{'selected': prd.id == selector_model.selected_entry }"
-                         class="list-group-item col-md-15">
-                            <div class="col-md-1 hidden-xs hidden-sm">
-                                <img src="{$ prd.icon $}" class="flag-icon symbol"/>
-                            </div>
-                            <div class="col-md-10">
-                                {$ prd.name $}
-                            </div>
-                        <div class="col-md-3">
-                            <div class="btn btn-default" 
-                                 ng-click="selector_model.select(prd.id, $event)">Select</div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
+            
         </div>
-    </form>
-</div>
+    </div>
+</form>
