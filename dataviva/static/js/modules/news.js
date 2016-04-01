@@ -2,16 +2,12 @@ var NewsTable = function () {
     this.tableId = '#news-table';
 
     this.table = $(this.tableId).DataTable({
+        "oLanguage": {
+          "sSearch": "Pesquisar "
+        },
         "sAjaxSource": "/news/publication/all",
         "sAjaxDataProp": "publications",
         "order": [],
-        "aoColumnsDefs": [
-            { "data": "publicationselector" },
-            { "data": "title" },
-            { "data": "authors" },
-            { "data": "publicationDate" },
-            { "data": "active" },
-        ],
         "columnDefs": [
             {
                 "targets": 0,
@@ -51,15 +47,8 @@ var NewsTable = function () {
                    '" value="'+publication[0]+ (data ? '" checked>' : '" >');
                 }
             }],
-        "columns": [
-                { "width": "8%" },
-                null,
-                null,
-                { "width": "20%" },
-                { "width": "12%" }
-        ],
         "paging": false,
-        "bFilter": false,
+        "bFilter": true,
         "info": false,
         "initComplete": function(settings, json) {
             $( 'input[name="show_home"]' ).each(function() {
