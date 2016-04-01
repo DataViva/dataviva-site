@@ -13,14 +13,14 @@
 
 <section id="admin">
     <div class="container">
-        <nav class="sidebar col-md-3">
+        <nav class="sidebar col-md-2">
             <h3>Módulos</h3>
             <ul class="sub-menu">
                 <li><a href="{{ url_for('news.admin') }}" title="Todos">Notícias</a></li>
                 <li><a href="{{ url_for('blog.admin') }}" title="Todos">Blog</a></li>
             </ul>
         </nav>
-        <div id="admin-content" class="col-md-9">
+        <div id="admin-content" class="col-md-10">
             {% block admin_content %}
             {% endblock admin_content %}
         </div>
@@ -28,3 +28,6 @@
 </section>
 
 {% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
