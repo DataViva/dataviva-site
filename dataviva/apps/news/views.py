@@ -51,7 +51,7 @@ def all():
     publications = []
     for row in result:
         publications += [(row.id, row.title, row.authors_str(),
-                          row.last_modification.strftime('%d/%m/%Y'), row.active)]
+                          row.last_modification.strftime('%d/%m/%Y'), row.show_home, row.active)]
     return jsonify(publications=publications)
 
 
@@ -61,17 +61,14 @@ def admin():
     return render_template('news/admin.html', publications=publications)
 
 
-@mod.route('/admin/<status_change>', methods=['POST'])
-def admin_activate(status_change):
+@mod.route('/admin/publication/<status>/<status_value>', methods=['POST'])
+def admin_activate(status, status_value):
     for id in request.form.getlist('ids[]'):
         publication = Publication.query.filter_by(id=id).first_or_404()
-        publication.active = status_change == u'activate'
+        setattr(publication, status, status_value == u'true')
         db.session.commit()
 
-    if status_change == u'activate':
-        message = u"Notícia(s) ativada(s) com sucesso!"
-    else:
-        message = u"Notícia(s) desativada(s) com sucesso!"
+    message = u"Notícia(s) alterada(s) com sucesso!"
     return message, 200
 
 
