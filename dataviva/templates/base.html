@@ -101,6 +101,8 @@
 
     <!-- Javascript modules -->
     <script src="/static/js/base.js"></script>
-    <script src="/static/js/modules/{{ g.page_type }}.js"></script>
+    {% block js_assets %}
+        <script src="/static/js/modules/{{ g.page_type }}.js"></script>
+    {% endblock js_assets %}
 </body>
 </html>
