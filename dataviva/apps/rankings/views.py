@@ -22,4 +22,9 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    return render_template('rankings/index.html')
+    pass
+
+
+@mod.route('/secex/ymb', methods=['GET'])
+def secex_ymb():
+    return render_template('rankings/secex_ymb.html')

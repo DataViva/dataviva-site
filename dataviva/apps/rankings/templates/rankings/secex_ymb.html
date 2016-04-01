@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<button id="rankings-states" class="btn btn-success"><i class="fa fa-building m-r-sm"></i>Estados</button>
-<button id="rankings-municipality" class="btn btn-success"><i class="fa fa-building-o m-r-sm"></i>Municípios</button>
+<button id="secex-ymb-states" class="btn btn-success"><i class="fa fa-building m-r-sm"></i>Estados</button>
+<button id="secex-ymb-municipality" class="btn btn-success"><i class="fa fa-building-o m-r-sm"></i>Municípios</button>
 
 <div id="year-selector">
 <select><option value="">Year</option></select>
 </div>
 
-<table id="rankings-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="secex-ymb-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>year</th>
@@ -32,3 +32,7 @@
     </thead>
 </table>
 {% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/rankings/secex_ymb.js"></script>
+{% endblock js_assets %}

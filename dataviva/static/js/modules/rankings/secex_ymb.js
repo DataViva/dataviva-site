@@ -1,5 +1,5 @@
-var RankingsTable = function (depth) {
-    this.tableId = '#rankings-table';
+var SecexYmbTable = function () {
+    this.tableId = '#secex-ymb-table';
 
     this.table = $(this.tableId).DataTable({
         "sAjaxSource": "/secex/all-0/show.3/all/all/?order=eci.desc",
@@ -23,14 +23,14 @@ var RankingsTable = function (depth) {
             null,
             null
         ],
-        "deferRender":    true,
-        "scrollY":        500,
+        "deferRender": true,
+        "scrollY": 500,
         "scrollCollapse": true,
-        "scroller":       true,
+        "scroller": true,
         initComplete: function () {
             var select = $('#year-selector select')
 
-            rankingTable.table
+            secexYmbTable.table
                 .column( 0 )
                 .cache( 'search' )
                 .sort()
@@ -40,7 +40,7 @@ var RankingsTable = function (depth) {
                 } );
 
             select.on( 'change', function () {
-               rankingTable.table
+               secexYmbTable.table
                     .column( 0 )
                     .search( $(this).val() )
                     .draw();
@@ -51,24 +51,24 @@ var RankingsTable = function (depth) {
     });
 };
 
-var rankingTable = new RankingsTable();
+var secexYmbTable = new SecexYmbTable();
 
-var rankingsStates = function() {
-    rankingTable.table.ajax.url("/secex/all-0/show.3/all/all/?order=eci.desc").load();
+var secexYmbStates = function() {
+    secexYmbTable.table.ajax.url("/secex/all-0/show.3/all/all/?order=eci.desc").load();
 };
 
-var rankingsMunicipality = function() {
-    rankingTable.table.ajax.url("/secex/all-0/show.9/all/all/?order=eci.desc").load();
+var secexYmbMunicipality = function() {
+    secexYmbTable.table.ajax.url("/secex/all-0/show.9/all/all/?order=eci.desc").load();
 };
 
 $(document).ready(function(){
 
-    $('#rankings-states').click(function() {
-        rankingsStates();
+    $('#secex-ymb-states').click(function() {
+        secexYmbStates();
     });
 
-    $('#rankings-municipality').click(function() {
-        rankingsMunicipality();
+    $('#secex-ymb-municipality').click(function() {
+        secexYmbMunicipality();
     });
 
 });
