@@ -157,4 +157,12 @@
 .blog .thumb .thumb-crop {
     max-height: 550px;
 }
+.blog .form-horizontal .form-group {
+    margin: 0px;
+}
 
+@media (max-width: 767px) {
+  .blog .form-horizontal .form-group {
+    margin-bottom: 20px;
+  }
+}
