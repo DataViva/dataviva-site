@@ -56,8 +56,7 @@ $(document).ready(function () {
         if ($(this).attr('graph') != null) {
             var basic_course = this.dataset.basic_course,
                 location = this.dataset.location,
-                tab = $(this).attr('aria-controls');
-
+                tab = $(this).attr('aria-controls');    
             showGraph(basic_course, location, tab);
         }
     });
