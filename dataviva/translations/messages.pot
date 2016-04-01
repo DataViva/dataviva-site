@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-29 15:01-0300\n"
+"POT-Creation-Date: 2016-04-01 15:40-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -294,6 +294,7 @@ msgid "Next"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:3
 #: dataviva/translations/dictionary.py:516
 msgid "Preview"
 msgstr ""
@@ -356,6 +357,7 @@ msgid "Origin"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/index.html:48
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:49
 #: dataviva/translations/dictionary.py:479
 msgid "General"
 msgstr ""
@@ -1432,6 +1434,8 @@ msgid "Comment"
 msgstr ""
 
 #: dataviva/templates/about/ask/index.html:57
+#: dataviva/templates/include/header.html:7
+#: dataviva/translations/dictionary.py:524
 msgid "Contact"
 msgstr ""
 
@@ -2089,6 +2093,16 @@ msgid ""
 "Because of the technology used, we cannot support versions of Internet "
 "Explorer older than version 9. Please update your browser to use the "
 "site."
+msgstr ""
+
+#: dataviva/templates/include/header.html:4
+#: dataviva/translations/dictionary.py:522
+msgid "Studies"
+msgstr ""
+
+#: dataviva/templates/include/header.html:5
+#: dataviva/translations/dictionary.py:523
+msgid "News"
 msgstr ""
 
 #: dataviva/templates/profiles/index.html:3
@@ -3268,25 +3282,25 @@ msgstr ""
 msgid "and that imports more is"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:528
+#: dataviva/translations/dictionary.py:533
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:529
+#: dataviva/translations/dictionary.py:534
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:530
+#: dataviva/translations/dictionary.py:535
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:531
+#: dataviva/translations/dictionary.py:536
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""

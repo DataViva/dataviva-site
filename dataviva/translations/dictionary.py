@@ -518,6 +518,11 @@ def dictionary():
         "imports_by": gettext("Imports By"), 
         "general_profile": gettext("General Profile"),
 
+        #header
+        "studies": gettext("Studies"),
+        "news": gettext("News"),
+        "contact": gettext("Contact"),
+
     }
 
 def plurals(key=None, n=1):
