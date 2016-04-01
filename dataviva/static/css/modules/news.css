@@ -157,3 +157,13 @@
 .news .thumb .thumb-crop {
     max-height: 550px;
 }
+
+.news .form-horizontal .form-group {
+    margin: 0px;
+}
+
+@media (max-width: 767px) {
+  .news .form-horizontal .form-group {
+    margin-bottom: 20px;
+  }
+}
