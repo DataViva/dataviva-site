@@ -77,30 +77,30 @@
             
         </div>
         <!-- TAB: sections -->
-        <div role="tabpanel" class="tab-pane search-items" id="sections">
-            <div class="form-group">
-                <i class="fa fa-search"></i>
-                <input type="text"
-                name="sections_filter"
-                class="busca form-control"
-                ng-model="selector_model.sections.filter_string"
-                ng-trim="true"
-                autocomplete="false" />
+        <div role="tabpanel" class="tab-pane" id="sections">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                    name="sections_filter"
+                    class="form-control"
+                    ng-model="selector_model.sections.filter_string"
+                    ng-trim="true"
+                    autocomplete="false" 
+                    placeholder="Busque pelo nome ou pelo No. CNAE"/>
             </div>
-            <div class="list-group list-stripped selector-list col-md-15">
+            <div class="selector-list">
                 <div class="loading" ng-show="selector_model.loading"></div>
                 <div ng-repeat="ind in selector_model.sections.entries | filter:selector_model.sections.filter_string"
                      ng-class="{'selected': ind.id == selector_model.selected_entry }"
-                     class="list-group-item col-md-15">
-                        <div class="col-md-1 hidden-xs hidden-sm">
-                            <img src="{$ ind.icon $}" class="flag-icon symbol"/>
-                        </div>
-                        <div class="col-md-10">
-                            {$ ind.name $}
-                        </div>
-                    <div class="col-md-3">
-                        <div class="btn btn-default" 
-                             ng-click="selector_model.select(ind.id, $event)">Select</div>
+                     class="selector-list-item"
+                     ng-click="selector_model.select(ind.id, $event)">
+                    <div class="selector-icon">
+                        <i class="dv-cnae-{$ ind.id.substring(0,1) $}"></i>
+                    </div>
+                    <div class="item-title">
+                        {$ ind.name $}
+                        <div class="pull-right">CNAE: {$ ind.id $}</div>
                     </div>
                 </div>
             </div>
