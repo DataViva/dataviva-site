@@ -50,7 +50,10 @@
     {% include "modal/selector.html" %}
     {% include "modal/wizard.html" %}
 
-    {% include "include/footer.html" %}
+    {% block footer %}
+        {% include "include/footer.html" %}
+    {% endblock footer %}
+
 
     <!-- Javascript Libs -->
     <script src="/static/js/libs/jquery-2.1.1.js"></script>
