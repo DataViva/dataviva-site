@@ -19,9 +19,20 @@ def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
 
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
+
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
+
+
+@mod.route('/<basic_course_id>/graphs/<tab>', methods=['POST'])
+def graphs(basic_course_id, tab):
+    basic_course = Course_sc.query.filter_by(id=basic_course_id).first_or_404()
+    location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
+    return render_template('basic_course/graphs-'+tab+'.html', basic_course=basic_course, location=location)
 
 
 @mod.route('/<course_sc_id>')
