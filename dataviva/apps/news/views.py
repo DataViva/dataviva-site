@@ -46,7 +46,7 @@ def show(id):
 
 
 @mod.route('/publication/all', methods=['GET'])
-def all_publications():
+def all():
     result = Publication.query.all()
     publications = []
     for row in result:
