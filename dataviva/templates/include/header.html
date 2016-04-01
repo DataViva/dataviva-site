@@ -25,12 +25,12 @@
 
         <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="{{ url_for('about.index') }}">SOBRE</a></li>
+                <li><a href="{{ url_for('about.index') }}">{% trans %}ABOUT{% endtrans %}</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PESQUISE <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}SEARCH{% endtrans %}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="divisor">Recursos básicos</li>
-                        <li><a href="{{ url_for('general.search') }}"><i class="fa fa-angle-right"></i> INICIE UMA PESQUISA</a></li>
+                        <li><a href="{{ url_for('general.search') }}"><i class="fa fa-angle-right"></i> {% trans %}START YOUR SEARCH{% endtrans %}</a></li>
                         <li><a href="{{ url_for('rankings.index') }}"><i class="fa fa-angle-right"></i> VISUALIZE RANKINGS</a></li>
                         <li role="separator" class="divider"></li>
                         <li class="divisor">Recursos avançados </li>
@@ -38,15 +38,15 @@
                         <li><a href="{{ url_for('data_download.index') }}"><i class="fa fa-angle-right"></i> DOWNLOAD DE BANCO DE DADOS</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ url_for('partners.index') }}">PARCERIAS</a></li>
-                <li><a href="{{ url_for('help.index') }}">AJUDA</a></li>
+                <li><a href="{{ url_for('partners.index') }}">{% trans %}PARTNERS{% endtrans %}</a></li>
+                <li><a href="{{ url_for('help.index') }}">{% trans %}HELP{% endtrans %}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right visible-md visible-lg form-inline">
                 <li class="input-group">
                     {% if not g.user.is_authenticated %}
-                    <a data-toggle="modal" data-target="#dataviva-login">Entre</a>
-                    ou
-                    <button class="btn btn-primary m-l m-r">Cadastre-se</button>
+                    <a data-toggle="modal" data-target="#dataviva-login">{% trans %}Login{% endtrans %}</a>
+                    {% trans %}or{% endtrans %}
+                    <button class="btn btn-primary m-l m-r">{% trans %}Sing Up{% endtrans %}</button>
                     {% else %}
                         <p>Welcome, <b>{{ g.user.firstname }}</b>! | <a href="/account/edit_profile">Edit profile</a></p> | <a href="/account/logout">Logout</a></p>
                     {% endif %}

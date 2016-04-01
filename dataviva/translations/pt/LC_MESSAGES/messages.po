@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-01 15:47-0300\n"
+"POT-Creation-Date: 2016-04-01 17:06-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -815,8 +815,10 @@ msgstr "Pesquisar"
 #: dataviva/templates/site.html:36 dataviva/templates/account/login.html:4
 #: dataviva/templates/general/access.html:3
 #: dataviva/templates/general/upgrade.html:3
+#: dataviva/templates/include/header.html:47
+#: dataviva/translations/dictionary.py:532
 msgid "Login"
-msgstr "Login"
+msgstr "Entre"
 
 #: dataviva/templates/site.html:51
 msgid "Profile"
@@ -2578,6 +2580,42 @@ msgstr "Estudos"
 msgid "News"
 msgstr "Notícias"
 
+#: dataviva/templates/include/header.html:28
+#: dataviva/translations/dictionary.py:527
+msgid "ABOUT"
+msgstr "Sobre"
+
+#: dataviva/templates/include/header.html:30
+#: dataviva/translations/dictionary.py:528
+#, fuzzy
+msgid "SEARCH"
+msgstr "Pesquise"
+
+#: dataviva/templates/include/header.html:33
+#: dataviva/translations/dictionary.py:529
+msgid "START YOUR SEARCH"
+msgstr "INICIE UMA PESQUISA"
+
+#: dataviva/templates/include/header.html:41
+#: dataviva/translations/dictionary.py:530
+msgid "PARTNERS"
+msgstr "PARCERIAS"
+
+#: dataviva/templates/include/header.html:42
+#: dataviva/translations/dictionary.py:531
+msgid "HELP"
+msgstr "AJUDA"
+
+#: dataviva/templates/include/header.html:48
+#: dataviva/translations/dictionary.py:534
+msgid "or"
+msgstr "ou"
+
+#: dataviva/templates/include/header.html:49
+#: dataviva/translations/dictionary.py:533
+msgid "Sing Up"
+msgstr "Cadastre-se"
+
 #: dataviva/templates/include/header.html:56
 #: dataviva/translations/dictionary.py:525
 #, fuzzy
@@ -3809,25 +3847,25 @@ msgstr "em"
 msgid "and that imports more is"
 msgstr "e o que mais importa é"
 
-#: dataviva/translations/dictionary.py:535
+#: dataviva/translations/dictionary.py:543
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:536
+#: dataviva/translations/dictionary.py:544
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:537
+#: dataviva/translations/dictionary.py:545
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:538
+#: dataviva/translations/dictionary.py:546
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"

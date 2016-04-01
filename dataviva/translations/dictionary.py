@@ -524,6 +524,14 @@ def dictionary():
         "contact": gettext("Contact"),
         "english": gettext("English"),
         "portuguese": gettext("Portuguese"),
+        "about": gettext("ABOUT"),
+        "search": gettext("SEARCH"),
+        "star_search": gettext("START YOUR SEARCH"),
+        "partners": gettext("PARTNERS"),
+        "help": gettext("HELP"),
+        "login": gettext("Login"),
+        "singup": gettext("Sing Up"),
+        "or": gettext("or"),
 
     }
 
