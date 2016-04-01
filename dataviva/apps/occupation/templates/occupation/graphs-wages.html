@@ -1,8 +1,8 @@
 <div id="graphs-wages" class="container">
     <nav class="nav-graph col-xs-12 col-md-3" >
-        <h3>Visualize</h3>
+        <h3>Visualize:</h3>
         <div class="list-group panel">
-            <h4>Emprego por:</h4>
+            <h4>Emprego por </h4>
             <a href="#jobs-opportunities" class="list-group-item" data-toggle="collapse" data-parent="#jobs-opportunities">Atividade Econômica</a>
             <div class="collapse" id="jobs-opportunities">
                 <a href="/pt/embed/tree_map/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/cnae/?color=color&depth=cnae_6&size=num_jobs"
@@ -29,7 +29,7 @@
                     Evolução
                 </a>
             </div>
-            <h4>Salário por:</h4>
+            <h4>Salário por </h4>
             <a href="#wages-opportunities" class="list-group-item" data-toggle="collapse" data-parent="#wages-opportunities">Atividade Econômica</a>
             <div class="collapse" id="wages-opportunities">
                 <a href="/pt/embed/tree_map/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/cnae/?color=color&depth=cnae_6&size=wage"
