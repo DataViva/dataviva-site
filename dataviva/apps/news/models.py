@@ -13,14 +13,15 @@ class Publication(db.Model):
     last_modification = db.Column(db.DateTime)
     publish_date = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
+    show_home = db.Column(db.Boolean)
     authors = db.relationship('AuthorNews', backref='news_publication', lazy='eager')
 
     def authors_str(self):
         author_names = [author.name for author in self.authors]
         return ', '.join(author_names)
 
-    def date_str(self):
-        return self.last_modification.strftime('%d/%m/%Y')
+    def date(self):
+        return self.publish_date.strftime('%d/%m/%Y')
 
     def __repr__(self):
         return '<Publication %r>' % (self.title)

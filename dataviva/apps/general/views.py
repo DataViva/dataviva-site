@@ -124,7 +124,7 @@ def after_request(response):
 def home():
     g.page_type = 'home'
 
-    publications = Publication.query.filter(Publication.id != id, Publication.active).all()
+    publications = Publication.query.filter(Publication.id != id, Publication.active, Publication.show_home).all()
     if len(publications) > 3:
         news = [publications.pop(randrange(len(publications))) for _ in range(3)]
     else:

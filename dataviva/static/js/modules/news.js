@@ -2,16 +2,12 @@ var NewsTable = function () {
     this.tableId = '#news-table';
 
     this.table = $(this.tableId).DataTable({
+        "oLanguage": {
+          "sSearch": "Pesquisar "
+        },
         "sAjaxSource": "/news/publication/all",
         "sAjaxDataProp": "publications",
         "order": [],
-        "aoColumnsDefs": [
-            { "data": "publicationselector" },
-            { "data": "title" },
-            { "data": "authors" },
-            { "data": "publicationDate" },
-            { "data": "active" },
-        ],
         "columnDefs": [
             {
                 "targets": 0,
@@ -38,37 +34,53 @@ var NewsTable = function () {
                 "orderable": false,
                 "className": "column-checkbox",
                 "render": function (data, type, publication, meta){
-                    if (data){
-                       return '<input type="checkbox" class="js-switch" name="activate'+publication[0]+'" value="'+publication[0]+'" checked>';
-                    }
-                    else {
-                       return '<input type="checkbox" class="js-switch" name="activate'+publication[0]+'" value="'+publication[0]+'">';
-                    }
+                   return '<input type="checkbox" name="show_home" id="show_home'+publication[0]+
+                   '" value="'+publication[0]+ (data ? '" checked>' : '" >');
                 }
-              }],
-        "columns": [
-                { "width": "8%" },
-                null,
-                null,
-                { "width": "20%" },
-                { "width": "12%" }
-        ],
+            },
+            {
+                "targets": 5,
+                "orderable": false,
+                "className": "column-checkbox",
+                "render": function (data, type, publication, meta){
+                   return '<input type="checkbox" name="active" id="active'+publication[0]+
+                   '" value="'+publication[0]+ (data ? '" checked>' : '" >');
+                }
+            }],
         "paging": false,
-        "bFilter": false,
+        "bFilter": true,
         "info": false,
         "initComplete": function(settings, json) {
-            $( ".js-switch" ).each(function() {
+            $( 'input[name="show_home"]' ).each(function() {
+                var switchery = new Switchery(this, {
+                    size: 'small'
+                });
+
+                $(this).next().click(function() {
+                    var checkbox = $(this).siblings().get(0);
+
+                    var ids = [checkbox.value],
+                        status = $(checkbox).attr('name'),
+                        status_value = checkbox.checked;
+
+                    changeStatus(ids, status, status_value);
+                });
+            });
+
+            $( 'input[name="active"]' ).each(function() {
                 var switchery = new Switchery(this, {
                     size: 'small',
                     color: '#5A9DC4'
                 });
 
                 $(this).next().click(function() {
-                    if($(this).siblings().get(0).checked) {
-                        activate([$(this).siblings().get(0).value]);
-                    } else {
-                        deactivate([$(this).siblings().get(0).value]);
-                    }
+                    var checkbox = $(this).siblings().get(0);
+
+                    var ids = [checkbox.value],
+                        status = $(checkbox).attr('name'),
+                        status_value = checkbox.checked;
+
+                    changeStatus(ids, status, status_value);
                 });
             });
 
@@ -101,15 +113,15 @@ NewsTable.prototype.getCheckedIds = function(first_argument) {
 
 var newsTable = new NewsTable();
 
-var activate = function(ids){
+var changeStatus = function(ids, status, status_value){
     if (ids.length) {
         $.ajax({
             method: "POST",
-            url: "/"+lang+"/news/admin/activate",
+            url: "/"+lang+"/news/admin/publication/"+status+"/"+status_value,
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível ativar a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
+                    showMessage('Não foi possível alterar a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
                     showMessage('Uma ou mais notícias selecionadas não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
@@ -118,9 +130,8 @@ var activate = function(ids){
             },
             success: function (message) {
                 for (item in ids) {
-                    itemName = 'activate'+ids[item];
-                    if (!$("[name='"+itemName+"']")[0].checked) {
-                        $("[name='"+itemName+"']").click();
+                    if ($('#'+status+ids[item])[0].checked !== status_value) {
+                        $('#'+status+ids[item]).click();
                     }
                 }
 
@@ -128,37 +139,7 @@ var activate = function(ids){
             }
         });
     } else {
-        showMessage('Por favor selecione algum post para ativar.', 'warning', 8000);
-    }
-}
-
-var deactivate = function(ids){
-    if (ids.length) {
-        $.ajax({
-            method: "POST",
-            url: "/"+lang+"/news/admin/deactivate",
-            data: {ids:ids},
-            statusCode: {
-                500: function () {
-                    showMessage('Não foi possível excluir a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
-                },
-                404: function () {
-                    showMessage('Uma ou mais notícias selecionados não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
-                    newsTable.table.fnReloadAjax();
-                }
-            },
-            success: function (message, textStatus, xhr) {
-                for (item in ids) {
-                    itemName = 'activate'+ids[item];
-                    if ($("[name='"+itemName+"']")[0].checked) {
-                        $("[name='"+itemName+"']").click();
-                    }
-                }
-                showMessage(message, 'success', 8000);
-            },
-        });
-    } else {
-        showMessage('Por favor selecione para desativar.', 'warning', 8000);
+        showMessage('Por favor selecione algum post para alterar.', 'warning', 8000);
     }
 }
 
@@ -170,7 +151,7 @@ var destroy = function(ids){
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível excluir a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
+                    showMessage('Não foi possível alterar a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
                     showMessage('Uma ou mais notícias selecionados não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
@@ -268,7 +249,9 @@ $(document).ready(function(){
         $('#thumb-crop').attr('src', '');
     });
 
+
     $('#publish-date').datepicker({
+        format: "dd/mm/yyyy",
         todayBtn: "linked",
         keyboardNavigation: false,
         forceParse: false,
@@ -283,10 +266,10 @@ $(document).ready(function(){
         edit(newsTable.getCheckedIds());
     });
     $('#admin-activate').click(function() {
-        activate(newsTable.getCheckedIds(), true);
+        changeStatus(newsTable.getCheckedIds(), 'active', true);
     });
     $('#admin-deactivate').click(function() {
-        deactivate(newsTable.getCheckedIds(), true);
+        changeStatus(newsTable.getCheckedIds(), 'active', false);
     });
 
     var text_max = 500;

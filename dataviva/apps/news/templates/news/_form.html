@@ -7,33 +7,36 @@
 <form id="news-form" method="POST" action="{{ action }}" class="form-horizontal" enctype="multipart/form-data">
 
     {{ form.hidden_tag() }}
-    <div class="form-group {{ 'has-error' if form.title.errors else '' }} ">
-        <label class="control-label" for="title">Título</label>
-        {{ messages(form.title) }}
-        {{ form.title(class="form-control", maxlength=400)}}
-    </div>
     <div class="row">
-        <div class="form-group col-md-6">
-            <label class="control-label">Data da Notícia</label>
-            {{ messages(form.publish_date) }}
-            <div id="publish-date" class="input-group date">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                {{ form.publish_date(class="form-control")}}
-            </div>
+        <div class="form-group col-md-10 {{ 'has-error' if form.title.errors else '' }} ">
+            <label class="control-label" for="title">Título</label>
+            {{ messages(form.title) }}
+            {{ form.title(class="form-control", maxlength=400)}}
         </div>
-        <div class="form-group col-md-6">
-            <label class="control-label">Data da Notícia</label>
-            {{ messages(form.publish_date) }}
-            <div id="publish-date" class="input-group date">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                {{ form.publish_date(class="form-control")}}
+
+        <div class="form-group col-md-2">
+            <label class="control-label" for="authors">Exibir na Home</label>
+            {{ messages(form.show_home) }}
+            <div class="form-control checkbox-switch">
+                {{ form.show_home(class="js-switch") }}
             </div>
         </div>
     </div>
-    <div class="form-group {{ 'has-error' if form.authors.errors else '' }} ">
-        <label class="control-label" for="authors">Autor</label>
-        {{ messages(form.authors) }}
-        {{ form.authors(class="form-control", maxlength=100)}}
+
+    <div class="row">
+        <div class="form-group col-md-7 {{ 'has-error' if form.authors.errors else '' }}">
+            <label class="control-label" for="authors">Autor</label>
+            {{ messages(form.authors) }}
+            {{ form.authors(class="form-control", maxlength=100)}}
+        </div>
+        <div class="form-group col-md-5 {{ 'has-error' if form.authors.errors else '' }}">
+            <label class="control-label">Data da Notícia</label>
+            {{ messages(form.publish_date) }}
+            <div id="publish-date" class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                {{ form.publish_date(class="form-control")}}
+            </div>
+        </div>
     </div>
     <div class="form-group {{ 'has-error' if form.subject.errors else '' }} ">
         <label class="control-label" for="subject">Categoria</label>
