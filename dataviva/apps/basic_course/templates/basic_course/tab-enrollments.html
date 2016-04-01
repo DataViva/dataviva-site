@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane" id="matricula">
+<div role="tabpanel" class="tab-pane" id="enrollments">
     <p>{{ body.enrollment_statistics_description }}</p>
     <h2>Estatísticas de matrículas do Brasil</h2>
     <div class="row">
@@ -41,14 +41,14 @@
             </div>
         </div>
     </div>
- <a href="" target="frame-tab-matricula">Curso</a></br>
+ <a href="" target="frame-tab-enrollments">Curso</a></br>
 
-        <a href="/pt/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{header.course_sc_id}}/bra/?color=enrolled" target="frame-tab-matricula">&nbsp Mapa</a>
-        <a href="/pt/embed/stacked/sc/{{ location.id if location else 'all' }}/all/{{header.course_sc_id}}/bra/?y=enrolled&layout=value&order=color" target="frame-tab-matricula">&nbsp Evoluçāo</a>
-        <a href="/pt/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{header.course_sc_id}}/bra/?color=color&depth=bra_9&size=enrolled&controls=true&year=2014" target="frame-tab-matricula">&nbsp TreeMap</a> </br>
+        <a href="/pt/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{header.course_sc_id}}/bra/?color=enrolled" target="frame-tab-enrollments">&nbsp Mapa</a>
+        <a href="/pt/embed/stacked/sc/{{ location.id if location else 'all' }}/all/{{header.course_sc_id}}/bra/?y=enrolled&layout=value&order=color" target="frame-tab-enrollments">&nbsp Evoluçāo</a>
+        <a href="/pt/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{header.course_sc_id}}/bra/?color=color&depth=bra_9&size=enrolled&controls=true&year=2014" target="frame-tab-enrollments">&nbsp TreeMap</a> </br>
 
 
 </div>
 
-<iframe name="frame-tab-matricula" id="frame-tab-matricula" width='684' height='350' src='/pt/embed/geo_map/sc/all/all/{{header.course_sc_id}}/bra/?color=enrolled" target="frame-tab-matricula' frameborder='0'></iframe>
+<iframe name="frame-tab-enrollments" id="frame-tab-enrollments" width='684' height='350' src='/pt/embed/geo_map/sc/all/all/{{header.course_sc_id}}/bra/?color=enrolled" target="frame-tab-enrollments' frameborder='0'></iframe>
 
