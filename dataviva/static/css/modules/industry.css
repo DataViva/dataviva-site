@@ -214,6 +214,7 @@
 .industry .table-responsive {
   height: 280px;
 }
+
 .industry .graphs {
   margin-top: 40px;
 }
@@ -224,39 +225,29 @@
 .industry .graphs .embed-responsive {
   max-height: 900px;
 }
-.industry .nav-graph button {
-  background: none;
-  border-radius: 0;
-}
-.industry .nav-graph button + button:not(.list-group-item) {
-  margin-left: -4px;
-}
+
+
 .industry .nav-graph h4 {
   font-size: 14px;
   font-weight: 700;
-  margin-top: 0;
   text-transform: uppercase;
+  margin: 10px;
 }
-.industry .nav-graph label {
-  display: block;
-  font-weight: 400;
-  text-transform: uppercase;
+.industry .nav-graph h4 a {
+    padding-left: 10px;
+    color: inherit;
 }
-.industry .nav-graph select {
-  border-radius: 0;
-  width: auto;
+.industry .nav-graph .panel {
+   border: 1px solid #000;
+   border-radius: 0px;
+   margin: 0px;
 }
-.industry .nav-graph > .form-group + .form-group {
-  margin-top: 4rem;
-}
-.industry .nav-graph .form-control {
-  background: none;
-  display: inline-block;
-}
-.industry .nav-graph .list-group button {
-  text-indent: 20px;
+.industry .nav-graph .collapse a,
+.industry .nav-graph .collapsing a {
+    padding: 5px 10px 5px 40px;
 }
 .industry .nav-graph .list-group-item {
+  margin: 0px;
   border: none;
   border-radius: 0;
   font-size: 14px;
@@ -266,20 +257,6 @@
   background: #5a9dc4;
   color: #FFF;
 }
-.industry .nav-graph .list-wrap {
-  border: 1px solid #000;
-  border-width: 1px 1px 0;
-}
-.industry .nav-graph .list-wrap:last-child {
-  border-bottom-width: 1px;
-}
-.industry .nav-graph .list-wrap + .list-wrap {
-  border-top: 0;
-}
-.industry .nav-graph .list-wrap > .list-group {
-  margin-bottom: 0;
-}
-.industry .nav-graph .list-wrap > .list-group-item {
-  font-weight: 700;
-  text-transform: uppercase;
-}
+
+
+
