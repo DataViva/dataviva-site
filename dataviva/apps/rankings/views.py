@@ -28,3 +28,8 @@ def index():
 @mod.route('/location/international-trade', methods=['GET'])
 def location_international_trade():
     return render_template('rankings/location-international-trade.html')
+
+
+@mod.route('/economic-activities', methods=['GET'])
+def economic_activities():
+    return render_template('rankings/economic-activities.html')
