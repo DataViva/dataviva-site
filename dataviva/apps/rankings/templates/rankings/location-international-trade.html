@@ -1,19 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 <div class="container">
     <div class="btn-group">
-        <button id="secex-ymb-regions" class="btn btn-white">Regiões</button>
-        <button id="secex-ymb-states" class="btn btn-white">Estados</button>
-        <button id="secex-ymb-mesoregions" class="btn btn-white">Mesoregiões</button>
-        <button id="secex-ymb-microregions" class="btn btn-white">Microregiões</button>
-        <button id="secex-ymb-municipalities" class="btn btn-white">Municípios</button>
+        <button id="location-international-trade-regions" class="btn btn-white">Regiões</button>
+        <button id="location-international-trade-states" class="btn btn-white">Estados</button>
+        <button id="location-international-trade-mesoregions" class="btn btn-white">Mesoregiões</button>
+        <button id="location-international-trade-microregions" class="btn btn-white">Microregiões</button>
+        <button id="location-international-trade-municipalities" class="btn btn-white">Municípios</button>
     </div>
     <select class="btn btn-white year-selector" id="year-selector"><option value="">Year</option></select>
 </div>
 
-<table id="secex-ymb-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="location-international-trade-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>year</th>
@@ -38,5 +37,5 @@
 {% endblock content %}
 
 {% block js_assets %}
-    <script src="/static/js/modules/rankings/secex_ymb.js"></script>
+    <script src="/static/js/modules/rankings/location-international-trade.js"></script>
 {% endblock js_assets %}
