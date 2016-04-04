@@ -538,7 +538,21 @@ def dictionary():
         "welcome": gettext("Welcome"),
         "view_rankings": gettext("VIEW RANKINGS"),
         "make_graphs": gettext("MAKE GRAPHS"),
-        "database_download": gettext("DATABASE DOWNLOAD")
+        "database_download": gettext("DATABASE DOWNLOAD"),
+
+        #home
+        "largest_plataform": gettext("Brazils largest platform for social and economic data search."),
+        "totaly_open_and_free": gettext("Totally open and free."),
+        "description": gettext("DataViva is a research tool that provides official data about exportation, economic activity, locality, education and occupation in Brazil. It consists of 11 apps that combined enable more than 1 billion visualizations."),
+        "get_started": gettext("Get started "),
+        "watch_videos": gettext("Watch the site video"),
+        "testemonials":gettext("watch the testimonials"),
+        "entrepreneurs": gettext("Entrepreneurs"),
+        "entrepreneurs_text": gettext("Identify the economic profile and business opportunities of a region"),
+        "development_agents": gettext("DEVELOPMENT AGENTS"),
+        "developments_agents_text": gettext("Assess development policies setting by location"),
+        "STUDENTS_AND_PROFESSIONALS": gettext("STUDENTS AND PROFESSIONALS"),
+        "students_and_professionals": gettext("Find information about available jobs, income per occupation and courses"),
 
 
         

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-04 15:13-0300\n"
+"POT-Creation-Date: 2016-04-04 16:19-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -2505,6 +2505,86 @@ msgstr "Este erro já foi notificado à nossa equipe técnica"
 msgid "informing this error and will fix it as soon as possible."
 msgstr "e em breve o problema será resolvido."
 
+#: dataviva/templates/general/index.html:8
+msgid "Brazil's largest platform for social and economic data search."
+msgstr ""
+"A maior plataforma de visualização de dados sociais e econômicos do "
+"Brasil."
+
+#: dataviva/templates/general/index.html:8
+#: dataviva/translations/dictionary.py:545
+msgid "Totally open and free."
+msgstr "Totalmente aberta e livre."
+
+#: dataviva/templates/general/index.html:9
+#: dataviva/translations/dictionary.py:546
+msgid ""
+"DataViva is a research tool that provides official data about "
+"exportation, economic activity, locality, education and occupation in "
+"Brazil. It consists of 11 apps that combined enable more than 1 billion "
+"visualizations."
+msgstr ""
+"O DataViva é uma ferramenta de pesquisa que disponibiliza dados oficiais "
+"sobre exportações, atividade econômica, localidade, educação e ocupações "
+"de todo o Brasil. São 11 aplicativos, que, juntos, formam mais de 1 "
+"bilhão de possibilidades de visualizações."
+
+#: dataviva/templates/general/index.html:15
+#: dataviva/translations/dictionary.py:550
+msgid "Entrepreneurs"
+msgstr "Empreendedores"
+
+#: dataviva/templates/general/index.html:17
+#: dataviva/translations/dictionary.py:551
+msgid "Identify the economic profile and business opportunities of a region"
+msgstr ""
+"Identifique o perfil econômico e as oportunidades de negócios de uma "
+"região"
+
+#: dataviva/templates/general/index.html:23
+#: dataviva/translations/dictionary.py:552
+msgid "DEVELOPMENT AGENTS"
+msgstr "Agentes de Desenvolvimento"
+
+#: dataviva/templates/general/index.html:25
+#: dataviva/translations/dictionary.py:553
+msgid "Assess development policies setting by location"
+msgstr ""
+"Avalie a criação de políticas de desenvolvimento de acordo com a "
+"localidade"
+
+#: dataviva/templates/general/index.html:31
+#: dataviva/translations/dictionary.py:554
+msgid "STUDENTS AND PROFESSIONALS"
+msgstr "Estudantes e Profissionais"
+
+#: dataviva/templates/general/index.html:33
+#: dataviva/translations/dictionary.py:555
+msgid "Find information about available jobs, income per occupation and courses"
+msgstr ""
+"Descubra informações sobre empregos disponíveis, renda por ocupação e "
+"cursos"
+
+#: dataviva/templates/general/index.html:41
+msgid "Get started"
+msgstr "Inicie uma pesquisa"
+
+#: dataviva/templates/general/index.html:44
+#: dataviva/translations/dictionary.py:548
+msgid "Watch the site video"
+msgstr "Assita ao vídeo Institucional"
+
+#: dataviva/templates/general/index.html:45
+#: dataviva/templates/include/header.html:48
+#: dataviva/translations/dictionary.py:534
+msgid "or"
+msgstr "ou"
+
+#: dataviva/templates/general/index.html:46
+#: dataviva/translations/dictionary.py:549
+msgid "watch the testimonials"
+msgstr "veja depoimentos"
+
 #: dataviva/templates/general/select.html:3
 msgid "Choose a Classification"
 msgstr "Selecionar uma Classificação"
@@ -2624,11 +2704,6 @@ msgstr "PARCERIAS"
 #: dataviva/translations/dictionary.py:531
 msgid "HELP"
 msgstr "AJUDA"
-
-#: dataviva/templates/include/header.html:48
-#: dataviva/translations/dictionary.py:534
-msgid "or"
-msgstr "ou"
 
 #: dataviva/templates/include/header.html:49
 #: dataviva/translations/dictionary.py:533
@@ -3840,25 +3915,36 @@ msgstr "em"
 msgid "and that imports more is"
 msgstr "e o que mais importa é"
 
-#: dataviva/translations/dictionary.py:553
+#: dataviva/translations/dictionary.py:544
+#, fuzzy
+msgid "Brazils largest platform for social and economic data search."
+msgstr ""
+"A maior plataforma de visualização de dados sociais e econômicos do "
+"Brasil."
+
+#: dataviva/translations/dictionary.py:547
+msgid "Get started "
+msgstr ""
+
+#: dataviva/translations/dictionary.py:567
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:554
+#: dataviva/translations/dictionary.py:568
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:555
+#: dataviva/translations/dictionary.py:569
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:556
+#: dataviva/translations/dictionary.py:570
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"

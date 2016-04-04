@@ -5,32 +5,32 @@
 <section id="welcome" class="welcome bg-city-scratched">
     <div class="container">
         <div class="col-xs-12 col-sm-6 wow fadeInLeft">
-            <h2 class="m-b-md">A maior plataforma de visualização de dados sociais e econômicos do Brasil.<br/>Totalmente aberta e livre.</h2>
-            <p class="visible-md visible-lg">O DataViva é uma ferramenta de pesquisa que disponibiliza dados oficiais sobre exportações, atividade econômica, localidade, educação e ocupações de todo o Brasil. São 11 aplicativos, que, juntos, formam mais de 1 bilhão de possibilidades de visualizações.</p>
+            <h2 class="m-b-md">{% trans %}Brazil's largest platform for social and economic data search.{% endtrans %}<br/>{% trans %}Totally open and free.{% endtrans %}</h2>
+            <p class="visible-md visible-lg">{% trans %}DataViva is a research tool that provides official data about exportation, economic activity, locality, education and occupation in Brazil. It consists of 11 apps that combined enable more than 1 billion visualizations.{% endtrans %}</p>
         </div>
         <div class="m-t-lg col-xs-12 col-sm-6 wow fadeInRight">
             <ul>
                 <li data-toggle="popover" data-placement="top" data-content="Número de estabelecimentos por atividade econômica, porcentagem de profissionais graduados por ano em determinado curso por região, produtos similares por região, salário médio por segmento, e mais...">
                     <a onclick="fire_wizard('entrepreneur')">
-                        <h3 class="text-uppercase">Empreendedores</h3>
+                        <h3 class="text-uppercase">{% trans %}Entrepreneurs{% endtrans %}</h3>
                         <p>
-                            Identifique o perfil econômico e as oportunidades de negócios de uma região
+                            {% trans %}Identify the economic profile and business opportunities of a region{% endtrans %}
                         </p>
                     </a>
                 </li>
                 <li data-toggle="popover" data-placement="top" data-content="Principais parceiros comerciais de um produto por região, estados que mais importam um produto específico, atividade econômica por localidade, emprego e renda por segmento, e mais...">
                     <a onclick="fire_wizard('development_agents')">
-                        <h3 class="text-uppercase">Agentes de Desenvolvimento</h3>
+                        <h3 class="text-uppercase">{%trans%}DEVELOPMENT AGENTS{%endtrans%}</h3>
                         <p>
-                            Avalie a criação de políticas de desenvolvimento de acordo com a localidade
+                            {% trans %}Assess development policies setting by location{% endtrans %}
                         </p>
                     </a>
                 </li>
                 <li data-toggle="popover" data-placement="top" data-content="Salário médio de uma atividade ou ocupação, cidades que concentram a maior taxa de empregos em uma atividade, cursos oferecidos por região, quantidade de matriculados em cada universidade, e mais...">
                     <a onclick="fire_wizard('student')">
-                        <h3 class="text-uppercase">Estudantes e Profissionais</h3>
+                        <h3 class="text-uppercase">{% trans %}STUDENTS AND PROFESSIONALS{% endtrans %}</h3>
                         <p>
-                            Descubra informações sobre empregos disponíveis, renda por ocupação e cursos
+                            {% trans %}Find information about available jobs, income per occupation and courses{% endtrans %}
                         </p>
                     </a>
                 </li>
@@ -38,12 +38,12 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 wow fadeInLeft">
             <p>
-                <a href="{{ url_for('general.search') }}" class="btn btn-primary" title="Inicie uma pesquisa">Inicie uma pesquisa <i class="m-l-xl fa fa-angle-right"></i></a>
+                <a href="{{ url_for('general.search') }}" class="btn btn-primary" title="Inicie uma pesquisa">{% trans %}Get started{% endtrans %} <i class="m-l-xl fa fa-angle-right"></i></a>
             </p>
             <p>
-                <a href="#" title="Assita ao vídeo Institucional" data-toggle="modal" data-target="#modal-dataviva-video">Assita ao vídeo Institucional</a>
-                ou
-                <a href="#" title="Assista a depoimentos" data-toggle="modal" data-target="#modal-dataviva-video">veja depoimentos</a>
+                <a href="#" title="Assita ao vídeo Institucional" data-toggle="modal" data-target="#modal-dataviva-video">{% trans %}Watch the site video{% endtrans %}</a>
+                {%trans%}or{%endtrans%}
+                <a href="#" title="Assista a depoimentos" data-toggle="modal" data-target="#modal-dataviva-video">{% trans %}watch the testimonials{% endtrans %}</a>
             </p>
         </div>
     </div>
