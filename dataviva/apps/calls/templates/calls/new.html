@@ -1,0 +1,11 @@
+<!-- extend from base layout -->
+{% extends "calls/_base.html" %}
+
+{% block calls_content %}
+<div class="institucional">
+    <h2>Chamadas</h2>
+    <h3>Publique uma Chamada</h3>
+    <p>Esta área foi especialmente criada para a publicação de Chamadas relacionados ao DataViva.</p>
+    {% include "calls/_form.html" %}
+</div>
+{% endblock  calls_content %}

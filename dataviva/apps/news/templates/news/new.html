@@ -1,10 +1,18 @@
-{% extends "news/_base.html" %}
+{% extends "base.html" %}
 
-{% block news_content %}
-<div class="institucional">
-    <h2>Posts sobre o DataViva</h2>
-    <h3>Publique um Post</h3>
+{% block content %}
+    <div class="container">
+        <div class="row bg-white">
+            <ol class="breadcrumb">
+                <li><a href="{{ url_for('general.home') }}">Home</a></li>
+                <li><a href="{{ url_for('news.index') }}">Notícias</a></li>
+                <li class="active">Publicar</li>
+            </ol>
+        </div>
+    </div>
 
-    {% include "news/_form.html" %}
-</div>
-{% endblock news_content %}
+    <div class="container m-b-lg">
+        <h1>Publique uma notícia</h1>
+        {% include "news/_form.html" %}
+    </div>
+{% endblock content %}

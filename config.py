@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 
-'''
-    Used for finding environment variables through configuration
-    if a default is not given, the site will raise an exception
-'''
+'''Used for finding environment variables through configuration
+   if a default is not given, the site will raise an exception'''
 
 
 def get_env_variable(var_name, default=-1):
@@ -16,14 +14,20 @@ def get_env_variable(var_name, default=-1):
         error_msg = "Set the %s os.environment variable" % var_name
         raise Exception(error_msg)
 
+
 ''' Base directory of where the site is held '''
 basedir = os.path.abspath(os.path.dirname(__file__))
+
+
+UPLOAD_FOLDER = os.path.join(basedir, 'dataviva/static/uploads/')
+
 
 ''' CSRF (cross site forgery) for signing POST requests to server '''
 CSRF_EN = True
 
 ''' Secret key should be set in environment var '''
-SECRET_KEY = get_env_variable("DATAVIVA_SECRET_KEY", "default-dataviva.mg-secr3t")
+SECRET_KEY = get_env_variable(
+    "DATAVIVA_SECRET_KEY", "default-dataviva.mg-secr3t")
 
 ''' Default debugging to True '''
 DEBUG = True
@@ -46,7 +50,8 @@ SQLALCHEMY_DATABASE_URI = "mysql://{0}:{1}@{2}/{3}".format(
 
 ''' If user prefers to connect via socket set env var '''
 if "DATAVIVA_DB_SOCKET" in os.environ:
-    SQLALCHEMY_DATABASE_URI += "?unix_socket=" + get_env_variable("DATAVIVA_DB_SOCKET")
+    SQLALCHEMY_DATABASE_URI += "?unix_socket=" + \
+        get_env_variable("DATAVIVA_DB_SOCKET")
 
 ''' If an env var for production is set turn off all debugging support '''
 if "DATAVIVA_PRODUCTION" in os.environ:
@@ -82,8 +87,18 @@ MAIL_SERVER = get_env_variable("DATAVIVA_MAIL_SERVER", 'smtp.gmail.com')
 MAIL_PORT = get_env_variable("DATAVIVA_MAIL_PORT", 465)
 MAIL_USE_TLS = get_env_variable("DATAVIVA_MAIL_USE_TLS", False)
 MAIL_USE_SSL = get_env_variable("DATAVIVA_MAIL_USE_SSL", True)
-MAIL_USERNAME = get_env_variable("DATAVIVA_MAIL_USERNAME",'datavivaweb@gmail.com')
+MAIL_USERNAME = get_env_variable(
+    "DATAVIVA_MAIL_USERNAME", 'contato@dataviva.info')
 MAIL_PASSWORD = get_env_variable("DATAVIVA_MAIL_PASSWORD", "")
+
+
+# TEMP
+MAIL_PORT = 587
+MAIL_USE_TLS = False
+MAIL_USE_SSL = False
+MAIL_SERVER = 'smtp.sendgrid.net'
+MAIL_USERNAME = 'wartog'
+MAIL_PASSWORD = 'asdasd123'
 
 
 '''

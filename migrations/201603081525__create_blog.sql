@@ -2,10 +2,12 @@ CREATE TABLE blog_post(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     title varchar (400) NULL,
     subject varchar (100) NULL,
-    text_content text NULL,
-    image_path varchar (250) NULL,
-    thumb_path varchar (250) NULL,
+    text_call varchar (500) NULL,
+    text_content longtext NULL,
+    thumb longtext NULL,
     postage_date datetime NULL,
+    release_date datetime NULL,
+    active TINYINT(1) NULL,
     PRIMARY KEY (id)
 );
 

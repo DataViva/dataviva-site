@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash
+from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request
 from dataviva.apps.general.views import get_locale
 
-from models import Post, AuthorNews
+from models import Publication, AuthorNews
 from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
@@ -11,6 +11,11 @@ from random import randrange
 mod = Blueprint('news', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/news')
+
+
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
 
 
 @mod.url_value_preprocessor
@@ -25,101 +30,135 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    posts = Post.query.all()
-    return render_template('news/index.html', posts=posts)
+    publications = Publication.query.filter_by(active=True).all()
+    return render_template('news/index.html', publications=publications)
 
 
-@mod.route('/post/<id>', methods=['GET'])
+@mod.route('/publication/<id>', methods=['GET'])
 def show(id):
-    post = Post.query.filter_by(id=id).first_or_404()
-    posts = Post.query.filter(Post.id != id).all()
-    if len(posts) > 3:
-        read_more_posts = [posts.pop(randrange(len(posts))) for _ in range(3)]
+    publication = Publication.query.filter_by(id=id).first_or_404()
+    publications = Publication.query.filter(Publication.id != id, Publication.active).all()
+    if len(publications) > 3:
+        read_more = [publications.pop(randrange(len(publications))) for _ in range(3)]
     else:
-        read_more_posts = posts
-    return render_template('news/show.html', post=post, id=id, read_more_posts=read_more_posts)
+        read_more = publications
+    return render_template('news/show.html', publication=publication, id=id, read_more=read_more)
 
 
-@mod.route('/post/new', methods=['GET'])
+@mod.route('/publication/all', methods=['GET'])
+def all():
+    result = Publication.query.all()
+    publications = []
+    for row in result:
+        publications += [(row.id, row.title, row.authors_str(),
+                          row.last_modification.strftime('%d/%m/%Y'), row.show_home, row.active)]
+    return jsonify(publications=publications)
+
+
+@mod.route('/admin', methods=['GET'])
+def admin():
+    publications = Publication.query.all()
+    return render_template('news/admin.html', publications=publications)
+
+
+@mod.route('/admin/publication/<status>/<status_value>', methods=['POST'])
+def admin_activate(status, status_value):
+    for id in request.form.getlist('ids[]'):
+        publication = Publication.query.filter_by(id=id).first_or_404()
+        setattr(publication, status, status_value == u'true')
+        db.session.commit()
+
+    message = u"Notícia(s) alterada(s) com sucesso!"
+    return message, 200
+
+
+@mod.route('/admin/delete', methods=['POST'])
+def admin_delete():
+    ids = request.form.getlist('ids[]')
+    if ids:
+        publications = Publication.query.filter(Publication.id.in_(ids)).all()
+        for publication in publications:
+            db.session.delete(publication)
+
+        db.session.commit()
+        return u"Notícia(s) excluída(s) com sucesso!", 200
+    else:
+        return u'Selecione alguma notícia para excluí-la.', 205
+
+
+@mod.route('/admin/publication/new', methods=['GET'])
 def new():
     form = RegistrationForm()
     return render_template('news/new.html', form=form, action=url_for('news.create'))
 
 
-@mod.route('/post/<id>/edit', methods=['GET'])
-def edit(id):
-    form = RegistrationForm()
-    post = Post.query.filter_by(id=id).first_or_404()
-    form.title.data = post.title
-    form.authors.data = post.authors_str()
-    form.subject.data = post.subject
-    form.text_content.data = post.text_content
-    form.image_path.data = post.image_path
-    form.thumb_path.data = post.thumb_path
-    return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
-
-
-@mod.route('/post/new', methods=['POST'])
+@mod.route('/admin/publication/new', methods=['POST'])
 def create():
     form = RegistrationForm()
     if form.validate() is False:
         return render_template('news/new.html', form=form)
     else:
-        post = Post()
-        post.title = form.title.data
-        post.subject = form.subject.data
-        post.text_content = form.text_content.data
-        post.image_path = 'http://agenciatarrafa.com.br/2015/wp-content/uploads/2015/09/google-ads-1000x300.jpg'
-        post.thumb_path = 'http://1un1ba2fg8v82k48vu4by3q7.wpengine.netdna-cdn.com/wp-content/uploads/2014/05/Mobile-Analytics-Picture-e1399568637490-350x227.jpg'
-        post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication = Publication()
+        publication.title = form.title.data
+        publication.subject = form.subject.data
+        publication.text_content = form.text_content.data
+        publication.text_call = form.text_call.data
+        publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
+        publication.show_home = form.show_home.data
+        publication.thumb = form.thumb.data
+        publication.active = 0
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
-            post.authors.append(AuthorNews(author_input))
+            publication.authors.append(AuthorNews(author_input))
 
-        db.session.add(post)
+        db.session.add(publication)
         db.session.commit()
 
-        message = u'Muito obrigado! Seu post foi submetido com sucesso!'
+        message = u'Muito obrigado! Sua notícia foi submetida com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('news.index'))
+        return redirect(url_for('news.admin'))
 
 
-@mod.route('/post/<id>/edit', methods=['POST'])
+@mod.route('/admin/publication/<id>/edit', methods=['GET'])
+def edit(id):
+    form = RegistrationForm()
+    publication = Publication.query.filter_by(id=id).first_or_404()
+    form.title.data = publication.title
+    form.authors.data = publication.authors_str()
+    form.subject.data = publication.subject
+    form.text_content.data = publication.text_content
+    form.publish_date.data = publication.publish_date
+    form.text_call.data = publication.text_call
+    form.show_home.data = publication.show_home
+    form.thumb.data = publication.thumb
+    return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
+
+
+@mod.route('/publication/<id>/edit', methods=['POST'])
 def update(id):
     form = RegistrationForm()
     id = int(id.encode())
     if form.validate() is False:
         return render_template('news/edit.html', form=form)
     else:
-        post = Post.query.filter_by(id=id).first_or_404()
-        post.title = form.title.data
-        post.subject = form.subject.data
-        post.text_content = form.text_content.data
-        post.image_path = 'http://agenciatarrafa.com.br/2015/wp-content/uploads/2015/09/google-ads-1000x300.jpg'
-        post.thumb_path = 'http://1un1ba2fg8v82k48vu4by3q7.wpengine.netdna-cdn.com/wp-content/uploads/2014/05/Mobile-Analytics-Picture-e1399568637490-350x227.jpg'
-        post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        post.authors = []
+        publication = Publication.query.filter_by(id=id).first_or_404()
+        publication.title = form.title.data
+        publication.subject = form.subject.data
+        publication.text_content = form.text_content.data
+        publication.thumb = form.thumb.data
+        publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
+        publication.show_home = form.show_home.data
+        publication.authors = []
 
         author_input_list = form.authors.data.split(',')
         for author_input in author_input_list:
-            post.authors.append(AuthorNews(author_input))
+            publication.authors.append(AuthorNews(author_input))
 
         db.session.commit()
 
-        message = u'Post editado com sucesso!'
+        message = u'Notícia editada com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('news.index'))
-
-
-@mod.route('/post/<id>/delete', methods=['GET'])
-def delete(id):
-    post = Post.query.filter_by(id=id).first_or_404()
-    if post:
-        db.session.delete(post)
-        db.session.commit()
-        message = u"Post excluído com sucesso!"
-        flash(message, 'success')
-        return redirect(url_for('news.index'))
-    else:
-        return make_response(render_template('not_found.html'), 404)
+        return redirect(url_for('news.admin'))

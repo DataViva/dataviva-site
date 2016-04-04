@@ -1,0 +1,305 @@
+<div role="tabpanel" class="tab-pane active" id="general">
+    <div class="jcarousel-wrapper">
+        <div class="jcarousel">
+            <ul>
+                <li>
+                    <div class="widget">
+                        <h2 class="text-left text-uppercase">PIB</h2>
+                        <div class="number">
+                            R$ <strong class="counter">{{ header.gdp|max_digits(3) }}</strong><br/>
+                            <small class="magnitude">{{ header.gdp|magnitude }}</small>
+                        </div>
+                    </div>
+                </li>
+                {% if header.life_expectation %}
+                <li>
+                    <div class="widget">
+                        <h2 class="text-left text-uppercase">Esperança de Vida</h2>
+                        <div class="number">
+                            R$ <strong class="counter">{{ header.life_expectation|max_digits(3) }}</strong><br/>
+                            <small class="magnitude">{{ header.life_expectation|magnitude }}</small>
+                        </div>
+                    </div>
+                </li>
+                {% endif %}
+                {% if header.population %}
+                <li>
+                    <div class="widget">
+                        <h2 class="text-left text-uppercase">População Total</h2>
+                        <div class="number">
+                            <strong class="counter">{{ header.population|max_digits(3) }}</strong><br/>
+                            <small class="magnitude">{{ header.population|magnitude }}</small>
+                        </div>
+                    </div>
+                </li>
+                {% endif %}
+                <li>
+                    <div class="widget">
+                        <h2 class="text-left text-uppercase">PIB Per Capta</h2>
+                        <div class="number">
+                            R$ <strong class="counter">{{ header.gdp_per_capita|max_digits(3) }}</strong><br/>
+                            <small class="magnitude">{{ header.gdp_per_capita|magnitude }}</small>
+                        </div>
+                    </div>
+                </li>
+                {% if header.hdi %}
+                <li>
+                    <div class="widget">
+                        <h2 class="text-left text-uppercase">IDHM</h2>
+                        <div class="number">
+                            <strong class="counter">{{ header.hdi|max_digits(3) }}</strong><br/>
+                            <small class="magnitude">{{ header.hdi|magnitude }}</small>
+                        </div>
+                    </div>
+                </li>
+                {% endif %}
+                {% if header.eci %}
+                <li>
+                    <div class="widget">
+                        <h2 class="text-left text-uppercase">ECI</h2>
+                        <div class="number">
+                            <strong class="counter">{{ header.eci|max_digits(3) }}</strong><br/>
+                            <small class="magnitude">{{ header.eci|magnitude }} {{"de" }} KM</small>
+                        </div>
+                    </div>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <a href="#" class="fa fa-angle-left jcarousel-control-prev"></a>
+        <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
+    </div>
+
+    <div class="m-t-sm col-xs-12 year">
+        Ano: {{ header.year }}
+    </div>
+
+    <h2 class="m-t-xl">Perfil Geral</h2>
+        {% if profile.bra_id|length == 9 %}
+        <p>{{ header.name }} é um dos {{ profile.number_of_municipalities }} municípios do estado {{ location.preposition('em') }} {{ profile.state_name }}. Com área de {{ profile.area }} km², possui {{ header.population|max_digits(3) }} {{ header.population|magnitude }} de habitantes e PIB per Capita de R$ {{ header.gdp_per_capita|max_digits(3) }} {{ header.gdp_per_capita|magnitude }}. Localizado na Mesorregião {{ profile.mesoregion_name }}, é o {{ profile.gdp_rank }}º município do estado em PIB.</p>
+        {% elif profile.bra_id|length == 7 %}
+        <p>A Microrregião {{ header.name }} é uma das {{ profile.number_of_microregions }} subdivisões da Mesorregião {{ profile.mesoregion_name }}, localizada no estado {{ location.preposition('em') }} {{ profile.state_name }}. Compreende um total de {{ profile.number_of_municipalities }} municípios e possui população de {{ header.population|max_digits(3) }} {{ header.population|magnitude }} de habitantes. Seu PIB é de R$ {{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) e seu principal produto por valor exportado é {{ body.main_product_by_export_value_name }}.</p>
+        {% elif profile.bra_id|length == 5 %}
+        <p>A Mesorregião {{ header.name }} é uma das {{ profile.number_of_mesoregions }} subdivisões do estado {{ location.preposition('em') }} {{ profile.state_name }}. É a {{ profile.eci_rank }}ª mesorregião brasileira em índice de complexidade e possui população de {{ header.population|max_digits(3) }} {{ header.population|magnitude }} habitantes. Seu PIB é de R$ {{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) e seu principal produto por valor exportado é {{ body.main_product_by_export_value_name }}.</p>
+        {% elif profile.bra_id|length == 1 %}
+        <p>A região {{ header.name }} é uma das {{ profile.number_of_regions-1 }} divisões regionais brasileiras, composta pelos estados {% for states in profile.region_states %}{% if states == profile.region_states[profile.region_states|length-1] %}e {{ states }}{% else %}{{ states }}, {% endif %}{% endfor %}. No total, a região {{ header.name }} possui {{ header.population|max_digits(3) }} {{ header.population|magnitude }} habitantes. É a {{ profile.gdp_pc_rank }}ª região em PIB per Capita do país e a {{ profile.pop_rank }}ª em população.</p>
+        {% else %}
+        <p>{{ header.name }} é uma das {{ profile.number_of_states-1 }} unidades federativas do Brasil, localizada na {{ profile.region_name }} do país, sendo o {{ profile.area_rank }}º estado com a maior área territorial e o {{ profile.pop_rank }}º em quantidade de habitantes. Limita-se a {% for neighbors in profile.neighbors %}{% if neighbors == profile.neighbors[profile.neighbors|length-1] %}e {{ neighbors }}{% else %}{{ neighbors }}, {% endif %}{% endfor %}. Seu território é subdividido em {{ profile.number_of_municipalities }} municípios, o {{ profile.municipality_rank }}º dentre os estados brasileiros.</p>
+        {% endif %}
+
+
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-6">
+            <h3>Comércio Internacional</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        {% if body.main_product_by_export_value %}
+                        <tr>
+                            <th>
+                                Principal Produto por Valor Exportado
+                            </th>
+                            <td>
+                                <p class="label">{{ body.main_product_by_export_value_name }}</p>
+                                USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_export_value | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if body.main_product_by_import_value %}
+                        <tr>
+                            <th>
+                                Principal Produto por Valor Importado
+                            </th>
+                            <td>
+                                <p class="label">{{ body.main_product_by_import_value_name }}</p>
+                                USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_import_value | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <th>
+                                Total de Exportações
+                            </th>
+                            <td>
+                                USD <strong class="counter">{{ body.total_exports | max_digits(3) }}</strong> <span>{{ body.total_exports | magnitude }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Total de Importações
+                            </th>
+                            <td>
+                                USD <strong class="counter">{{ body.total_imports | max_digits(3) }}</strong> <span>{{ body.total_imports | magnitude }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
+                mais detalhes
+            </a>
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-6">
+            <h3>Salário e Emprego</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>
+                                Principal Atividade Econômica
+                            </th>
+                            <td>
+                                <p class="label">{{ body.main_industry_by_num_jobs_name | truncate(length=30, killwords=False, end='...')}}</p>
+                                <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3) }}</strong> <span>{{ body.main_industry_by_num_jobs | magnitude }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Principal Ocupação
+                            </th>
+                            <td>
+                                <p class="label">{{ body.main_occupation_by_num_jobs_name | truncate(length=30, killwords=False, end='...')}}</p>
+                                <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3) }}</strong> <span>{{ body.main_occupation_by_num_jobs | magnitude }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Salário Médio
+                            </th>
+                            <td>
+                                USD <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong> <span>{{ body.avg_wage | magnitude }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Total de Empregos
+                            </th>
+                            <td>
+                                USD <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong> <span>{{ body.total_jobs | magnitude }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
+                mais detalhes
+            </a>
+        </div>
+
+        <div class="col-xs-12 col-md-6 col-lg-6">
+            <h3>Oportunidades Econômicas</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                        {% if body.less_distance_by_product %}
+                            <th>
+                                Produto com Menor Distância
+                            </th>
+                            <td>
+                                <p class="label">{{ body.less_distance_by_product_name | truncate(length=30, killwords=False, end='...')}}</p>
+                                <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong> <span>{{ body.less_distance_by_product | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if body.less_distance_by_occupation %}
+                        <tr>
+                            <th>
+                                Atividade Econômica com Menor Distância
+                            </th>
+                            <td>
+                                <p class="label">{{ body.less_distance_by_occupation_name | truncate(length=30, killwords=False, end='...')}}</p>
+                                <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong> <span>{{ body.less_distance_by_occupation | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if body.opportunity_gain_by_product %}
+                        <tr>
+                            <th>
+                                Produto com Maior Ganho de Oportunidade
+                            </th>
+                            <td>
+                                <p class="label">{{ body.opportunity_gain_by_product_name | truncate(length=30, killwords=False, end='...')}}</p>
+                                <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3) }}</strong> <span>{{ body.opportunity_gain_by_product | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if body.opportunity_gain_by_occupation %}
+                        <tr>
+                            <th>
+                                Atividade Econômica com Maior Ganho de Oportunidade
+                            </th>
+                            <td>
+                                <p class="label">{{ body.opportunity_gain_by_occupation_name | truncate(length=30, killwords=False, end='...')}}</p>
+                                <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3) }}</strong> <span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
+                mais detalhes
+            </a>
+        </div>
+
+        <div class="col-xs-12 col-md-6 col-lg-6">
+            <h3>Educação</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        {% if body.highest_enrolled_by_university %}
+                        <tr>
+                            <th>
+                                Universidade com Maior Número de Matrículas
+                            </th>
+                            <td>
+                                <p class="label">{{ body.highest_enrolled_by_university_name | truncate(length=30, killwords=False, end='...')}}</p>
+                                <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_university | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if body.highest_enrolled_by_major %}
+                        <tr>
+                            <th>
+                                Curso Superior com Maior Número de Matrículas
+                            </th>
+                            <td>
+                                <p class="label">{{ body.highest_enrolled_by_major_name | truncate(length=30, killwords=False, end='...')}}</p>
+                                <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_major | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if body.highest_enrolled_by_school %}
+                        <tr>
+                            <th>
+                                Escola com Maior Número de Matrículas em Cursos Técnicos
+                            </th>
+                            <td>
+                                <p class="label">{{ body.highest_enrolled_by_school_name | truncate(length=30, killwords=False, end='...')}}</p>
+                                <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_school | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if body.highest_enrolled_by_basic_course %}
+                        <tr>
+                            <th>
+                                Curso Técnico com Maior Número de Matrículas
+                            </th>
+                            <td>
+                                <p class="label">{{ body.highest_enrolled_by_basic_course_name | truncate(length=30, killwords=False, end='...')}}</p>
+                                <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <a href="#educacao" aria-controls="educacao" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
+                mais detalhes
+            </a>
+        </div>
+    </div>
+</div>

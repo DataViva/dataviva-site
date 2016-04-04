@@ -1,11 +1,17 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
+from dataviva.apps.calls.models import Call
 
 
 mod = Blueprint('partners', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/partners')
+
+
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
 
 
 @mod.url_value_preprocessor
@@ -20,8 +26,10 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    return render_template('partners/index.html', body_class='parceiros')
+    return render_template('partners/index.html')
+
 
 @mod.route('/be-a-partner')
 def be_a_partner():
-    return render_template('partners/be-a-partner.html')
+    calls = Call.query.filter_by(active=True).all()
+    return render_template('partners/be-a-partner.html', calls=calls)

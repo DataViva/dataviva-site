@@ -1,51 +1,35 @@
-<!-- extend from site layout -->
-{% extends "site.html" %}
+{% extends 'base.html' %}
 
-{% block head %}
+{% block content %}
 
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.admin.css" />
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/redactor.css" />
-
-{% endblock %}
-
-
-{% block body %}
-
-  <div id="admin_content">
-    <div class="lightbox">
-      {% block admin_content %}
-      {% endblock %}
+<div class="container">
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('general.home') }}">Home</a></li>
+            {% block breadcrumb %}{% endblock %}
+        </ol>
     </div>
-  </div>
-
-  <div id="admin_nav">
-
-    {% set navigation_bar = [
-        ('admin.admin_users', _('Users')),
-        ('admin.admin_questions', _('Questions')),
-        ('admin.admin_replies', _('Replies')),
-    ] -%}
-    {% set question_navigation_bar = [
-        ('pending', _('Pending')),
-        ('approved', _('Approved')),
-        ('rejected', _('Rejected')),
-        ('duplicate', _('Duplicate'))
-    ] -%}
-    {% set active_page = request.endpoint -%}
-    {% set active_question_page = request.view_args.status -%}
-
-    {% for id, caption in navigation_bar %}
-      <a href="{{ url_for(id) }}" class="{% if id == active_page %}decision{% else %}help{% endif %}">{{ caption|e }}</a>
-      {% if active_page == 'admin.admin_questions' and id == 'admin.admin_questions' %}
-        <ul>
-        {% for q_id, q_caption in question_navigation_bar %}
-          <a href="{{ url_for(id, status=q_id) }}" class="{% if q_id == active_question_page %}decision{% else %}help{% endif %} icon short {{q_id}}">{{ q_caption|e }}</a>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endfor %}
-
-  </div>
-
 </div>
-{% endblock %}
+
+<section id="admin">
+    <div class="container">
+        <nav class="sidebar col-md-2">
+            <h3>Módulos</h3>
+            <ul class="sub-menu">
+                <li><a href="{{ url_for('news.admin') }}" title="Notícias">Notícias</a></li>
+                <li><a href="{{ url_for('blog.admin') }}" title="Blog">Blog</a></li>
+                <li><a href="{{ url_for('blog.admin') }}" title="Chamadas">Chamadas</a></li>
+                <li><a href="{{ url_for('blog.admin') }}" title="Perguntas">Perguntas</a></li>
+            </ul>
+        </nav>
+        <div id="admin-content" class="col-md-10">
+            {% block admin_content %}
+            {% endblock admin_content %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}

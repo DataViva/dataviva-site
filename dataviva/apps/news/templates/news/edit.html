@@ -1,7 +1,17 @@
-{% extends "news/_base.html" %}
+{% extends "base.html" %}
 
-{% block news_content %}
-<div class="institucional">
-    {% include "news/_form.html" %}
-</div>
-{% endblock news_content %}
+{% block content %}
+    <div class="container">
+        <div class="row bg-white">
+            <ol class="breadcrumb">
+                <li><a href="{{ url_for('general.home') }}">Home</a></li>
+                <li><a href="{{ url_for('news.index') }}">Notícias</a></li>
+                <li class="active">Editar</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="container m-b-lg">
+        {% include "news/_form.html" %}
+    </div>
+{% endblock content %}

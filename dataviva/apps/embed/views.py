@@ -34,7 +34,10 @@ import sys
 import gzip
 from dataviva.utils.cached_query import api_cache_key
 
-mod = Blueprint('embed', __name__, url_prefix='/<lang_code>/embed')
+
+mod = Blueprint('embed', __name__,
+                template_folder='templates',
+                url_prefix='/<lang_code>/embed')
 
 
 @mod.before_request
@@ -90,139 +93,6 @@ def filler(dataset, filter1, filter2):
             filler2 = "course_sc"
 
     return filler1, filler2
-
-
-@mod.route('/')
-@view_cache.cached(key_prefix=api_cache_key("apps:guide"))
-def guide():
-    apps = []
-    default_bra = Bra.query.get("4mg")
-    compare_bra = Bra.query.get("4sp")
-    default_cnae = Cnae.query.get("i56112")
-    default_cbo = Cbo.query.get("2235")
-    default_hs = Hs.query.get("052601")
-    build_list = Build.query.all()
-
-    # Bar Chart
-    builds = [b for b in build_list if b.id in (176, 177, 178)]
-    builds[0].set_bra(default_bra)
-    builds[1].set_filter1(default_cnae)
-    builds[2].set_filter2(default_cbo)
-    apps.append({
-        "summary": gettext("A visualization using the height of bars to show the number of jobs in a specific wage bracket."),
-        "builds": builds,
-        "title": gettext(u"Bar Chart"),
-        "type": "bar"
-    })
-
-    # Tree Map
-    builds = [b for b in build_list if b.id in (3, 95, 117)]
-    for b in builds:
-        b.set_bra(default_bra)
-    apps.append({
-        "summary": gettext("A visualization using the area of rectangles to show shares of the specified value. The data is nested heirarchically by its given classificaiton."),
-        "builds": builds,
-        "title": gettext(u"Tree Map"),
-        "type": "tree_map"
-    })
-    # Stacked
-    builds = [b for b in build_list if b.id in (20, 27, 150)]
-    for b in builds:
-        b.set_bra(default_bra)
-        b.set_filter1(default_cnae)
-    apps.append({
-        "summary": gettext("Similar to to a line chart, stacked area charts use an X and Y axis to show values across time. The data is nested heirarchically by its given classificaiton."),
-        "builds": builds,
-        "title": gettext(u"Stacked"),
-        "type": "stacked"
-    })
-    # Geo Map
-    builds = [b for b in build_list if b.id in (36, 41, 123)]
-    for b in builds:
-        b.set_bra(default_bra)
-        b.set_filter1(default_hs)
-    apps.append({
-        "summary": gettext("Data values overlayed on a geographic map varying their color by the value they represent."),
-        "builds": builds,
-        "title": gettext(u"Geo Map"),
-        "type": "geo_map"
-    })
-    # Network
-    builds = [b for b in build_list if b.id in (33, 35)]
-    for b in builds:
-        b.set_bra(default_bra)
-    apps.append({
-        "summary": gettext("A visualization showing the connections between a specified dataset. The specified attributes are then overlayed on this network to show their position in this fictional space."),
-        "builds": builds,
-        "title": gettext(u"Network"),
-        "type": "network"
-    })
-    # Line
-    builds = [b for b in build_list if b.id in (91, 115, 154)]
-    for b in builds:
-        b.set_bra(default_bra)
-    apps.append({
-        "summary": gettext("A type of chart which displays data as a time series with an X and Y axis."),
-        "builds": builds,
-        "title": gettext(u"Line Chart"),
-        "type": "line"
-    })
-    # Rings
-    builds = [b for b in build_list if b.id in (48, 49, 50)]
-    for b in builds:
-        b.set_bra(default_bra)
-    builds[0].set_filter1("f41204")
-    builds[1].set_filter2(default_cbo)
-    builds[2].set_filter1(default_hs)
-    apps.append({
-        "summary": gettext("A visualization showing a network centered on a single node. The depth of nodes shown is computed by their distance from the root."),
-        "builds": builds,
-        "title": gettext(u"Rings"),
-        "type": "rings"
-    })
-    # Scatter
-    builds = [b for b in build_list if b.id in (44, 46)]
-    for b in builds:
-        b.set_bra(default_bra)
-    apps.append({
-        "summary": gettext("A visualization showing two variables plotted along an X and Y axis."),
-        "builds": builds,
-        "title": gettext(u"Scatter"),
-        "type": "scatter"
-    })
-    # Compare
-    builds = [b for b in build_list if b.id in (52, 53, 113)]
-    for b in builds:
-        b.set_bra([default_bra, compare_bra])
-    apps.append({
-        "summary": gettext("Similar to the scatter visualization except this form of a scatter shows the same variable along both axes varrying the location for comparison purposes."),
-        "builds": builds,
-        "title": gettext(u"Compare"),
-        "type": "compare"
-    })
-    # Occugrid
-    builds = [b for b in build_list if b.id == 51]
-    for b in builds:
-        b.set_bra(default_bra)
-        b.set_filter1(default_cnae)
-    apps.append({
-        "summary": gettext("A visualization showing the main occupations employed in various industries, their importance to that industry and the number of employees who work in these activities."),
-        "builds": builds,
-        "title": gettext(u"Occugrid"),
-        "type": "occugrid"
-    })
-    # Box Plot
-    builds = [b for b in build_list if b.id in (160, 161)]
-    for b in builds:
-        b.set_bra(default_bra)
-    apps.append({
-        "summary": gettext("A visualization, also known as box and whisker diagram, used to display the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum."),
-        "builds": builds,
-        "title": gettext(u"Box Plot"),
-        "type": "box"
-    })
-
-    return render_template("apps/index.html", apps=apps)
 
 
 def is_xhr():
@@ -317,7 +187,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
 
         year_range = json.dumps(__year_range__)
 
-        ret = make_response(render_template("apps/embed.html",
+        ret = make_response(render_template("embed/embed.html",
                                             # apps = App.query.all(),
                                             # all_builds = all_builds,
                                             starred=starred,
@@ -496,154 +366,6 @@ def get_geo_location(ip):
     return None
 
 
-@mod.route('/builder/')
-@mod.route('/builder/tree_map/', defaults={"app_name": "tree_map", "dataset": "secex", "bra_id": "4mg",
-                                           "filter1": "all", "filter2": "all", "output": "hs", "params": ""})
-@mod.route('/builder/stacked/', defaults={"app_name": "stacked", "dataset": "rais", "bra_id": "4mg",
-                                          "filter1": "all", "filter2": "all", "output": "cbo", "params": ""})
-@mod.route('/builder/geo_map/', defaults={"app_name": "geo_map", "dataset": "rais", "bra_id": "4mg",
-                                          "filter1": "all", "filter2": "all", "output": "bra", "params": "?value_var=wage"})
-@mod.route('/builder/network/', defaults={"app_name": "network", "dataset": "secex", "bra_id": "4mg",
-                                          "filter1": "all", "filter2": "all", "output": "hs", "params": ""})
-@mod.route('/builder/rings/', defaults={"app_name": "rings", "dataset": "rais", "bra_id": "4mg",
-                                        "filter1": "all", "filter2": "2211", "output": "cbo", "params": ""})
-@mod.route('/builder/scatter/', defaults={"app_name": "scatter", "dataset": "secex", "bra_id": "4mg",
-                                          "filter1": "all", "filter2": "all", "output": "hs", "params": "?rca_scope=wld_rca"})
-@mod.route('/builder/compare/', defaults={"app_name": "compare", "dataset": "rais", "bra_id": "4mg_4rj",
-                                          "filter1": "all", "filter2": "all", "output": "cbo", "params": "?depth=cbo_4&axes=wage_avg"})
-@mod.route('/builder/occugrid/', defaults={"app_name": "occugrid", "dataset": "rais", "bra_id": "4mg",
-                                           "filter1": "c14126", "filter2": "all", "output": "cbo", "params": ""})
-@mod.route('/builder/line/', defaults={"app_name": "line", "dataset": "secex", "bra_id": "4mg",
-                                       "filter1": "all", "filter2": "all", "output": "balance", "params": ""})
-@mod.route('/builder/box/', defaults={"app_name": "box", "dataset": "sc", "bra_id": "4mg",
-                                      "filter1": "all", "filter2": "all", "output": "age", "params": ""})
-@mod.route('/builder/bar/', defaults={"app_name": "bar", "dataset": "rais", "bra_id": "4mg",
-                                      "filter1": "all", "filter2": "all", "output": "bra", "params": ""})
-@mod.route('/builder/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/')
-@view_cache.cached(key_prefix=api_cache_key("apps:builder"))
-def builder(app_name=None, dataset=None, bra_id=None, filter1=None,
-            filter2=None, output=None, params=None):
-    if bra_id == 'bra':
-        bra_id = 'all'
-        return redirect('/{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}?{8}'.format(g.locale, 'apps/builder', app_name, dataset, bra_id, filter1, filter2, output, request.query_string))
-    if len(request.path.split("/")) == 6:
-        return redirect('{0}{1}/{2}/{3}/{4}/{5}/{6}'.format(request.path, dataset, bra_id, filter1, filter2, output, request.query_string))
-    g.page_type = "builder"
-    builds = Build.query.all()
-    builds = [b.json(fill=False) for b in builds]
-    rais_builds = [b.copy() for b in builds if b["dataset"] == "rais" and b[
-        "app"]["type"] not in ("network", "occugrid", "rings")]
-    builds = [b for b in builds if b["app"]["type"]
-              not in ("bar", "box") or b["dataset"] != "rais"]
-
-    def size_var(b):
-        app = b["app"]["type"]
-        if app in ["line", "stacked"]:
-            return "y"
-        elif app == "geo_map":
-            return "color"
-        elif app == "compare":
-            return "axes"
-        return "size"
-    for b in builds:
-        if b["dataset"] == "rais":
-            b["url"] = "{}?{}=num_jobs".format(b["url"], size_var(b))
-    for b in rais_builds:
-        if b["app"]["type"] not in ("bar", "box"):
-            b["id"] = "{}b".format(int(b["id"]))
-            b["url"] = "{}?{}=wage".format(b["url"], size_var(b))
-        b["dataset"] = "rais_wages"
-    builds = rais_builds + builds
-    dataset_sort = ["rais_wages", "rais", "hedu", "sc", "secex"]
-    builds.sort(
-        key=lambda x: (x["app"]["id"], dataset_sort.index(x["dataset"])))
-    datatset_names = {
-        "secex": gettext("International Trade"),
-        "rais": gettext("Employment"),
-        "rais_wages": gettext("Wages"),
-        "ei": gettext("Domestic Trade"),
-        "hedu": gettext("Higher Education"),
-        "sc": gettext("School Census")
-    }
-    if "_" in bra_id:
-        bra_id, bra_1_id = bra_id.split("_")
-    else:
-        bra_1_id = "all"
-    filters = [
-        ["bra", str(bra_id)],
-        ["bra_1", str(bra_1_id)],
-        ["cnae", "all"],
-        ["cbo", "all"],
-        ["hs", "all"],
-        ["wld", "all"],
-        ["university", "all"],
-        ["course_hedu", "all"],
-        ["school", "all"],
-        ["course_sc", "all"]
-    ]
-    if dataset == "secex":
-        filters[4][1] = str(filter1)
-        filters[5][1] = str(filter2)
-    elif dataset == "rais":
-        filters[2][1] = str(filter1)
-        filters[3][1] = str(filter2)
-    elif dataset == "hedu":
-        filters[6][1] = str(filter1)
-        filters[7][1] = str(filter2)
-    elif dataset == "sc":
-        filters[8][1] = str(filter1)
-        filters[9][1] = str(filter2)
-
-    build_filter1, build_filter2 = filler(dataset, filter1, filter2)
-
-    '''Grab attrs for bra and filters
-    '''
-    if bra_id == "all":
-        bra_attr = Wld.query.get_or_404("sabra")
-    else:
-        bra_attr = [Bra.query.get_or_404(bra_id)]
-        if bra_1_id != "all":
-            bra_attr.append(Bra.query.get_or_404(bra_1_id))
-    filter1_attr = filter1
-    filter2_attr = filter2
-    if filter1 != "all":
-        filter1_attr = globals()[build_filter1.capitalize()].query.get_or_404(
-            filter1)
-    if filter2 != "all":
-        filter2_attr = globals()[build_filter2.capitalize()].query.get_or_404(
-            filter2)
-
-    if build_filter1 != "all":
-        build_filter1 = "<{}>".format(build_filter1)
-    if build_filter2 != "all":
-        build_filter2 = "<{}>".format(build_filter2)
-
-    '''This is an instance of the Build class for the selected app,
-    determined by the combination of app_type, dataset, filters and output.
-    '''
-    current_app = App.query.filter_by(type=app_name).first_or_404()
-    build = Build.query.filter_by(
-        app=current_app, dataset=dataset, filter1=build_filter1, filter2=build_filter2, output=output).first_or_404()
-    build.set_filter1(filter1_attr)
-    build.set_filter2(filter2_attr)
-    build.set_bra(bra_attr)
-    build = build.serialize()
-    if build["dataset"] == "rais" and build["app"]["type"] in ("bar", "box"):
-        build["dataset"] = "rais_wages"
-    else:
-        for p, v in request.args.items():
-            if (v == "wage" or v == "wage_avg") and build["dataset"] == "rais" and build["app"]["type"] in ("bar", "box") and b["app"]["type"] not in ("network", "occugrid", "rings"):
-                build["id"] = "{}b".format(int(build["id"]))
-                build["url"] = "{}?{}={}".format(
-                    build["url"], size_var(build), v)
-                build["dataset"] = "rais_wages"
-                break
-
-    return render_template("apps/builder.html",
-                           app=app_name, apps=App.query.all(), builds=builds, build=build,
-                           filters=filters, dataset=dataset, datatset_names=datatset_names)
-
-
 @mod.route('/download/', methods=['GET', 'POST'])
 def download():
     import tempfile
@@ -710,7 +432,7 @@ def download():
 
 @mod.route('/info/<app_name>/')
 def info(app_name="tree_map"):
-    return render_template("apps/info.html", app_name=app_name)
+    return render_template("embed/info.html", app_name=app_name)
 
 
 @mod.route('/coords/<id>/')

@@ -3,8 +3,8 @@ from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.sc.services import Basic_course, Basic_course_by_location, Basic_course_school, \
     Basic_course_school_by_location, Basic_course_city, Basic_course_city_by_location, Basic_course_by_state
-from dataviva.api.attrs.models import School, Bra, Course_sc
-from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc
+from dataviva.api.attrs.models import Bra, Course_sc
+from dataviva.api.sc.models import Ybc_sc
 from dataviva import db
 from sqlalchemy import func
 
@@ -19,14 +19,26 @@ def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
 
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
+
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+@mod.route('/<basic_course_id>/graphs/<tab>', methods=['POST'])
+def graphs(basic_course_id, tab):
+    basic_course = Course_sc.query.filter_by(id=basic_course_id).first_or_404()
+    location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
+    return render_template('basic_course/graphs-'+tab+'.html', basic_course=basic_course, location=location)
+
+
 @mod.route('/<course_sc_id>')
 def index(course_sc_id):
 
+    basic_course = Course_sc.query.filter_by(id=course_sc_id).first_or_404()
     bra_id = request.args.get('bra_id')
 
     max_year_query = db.session.query(
@@ -48,19 +60,18 @@ def index(course_sc_id):
             Ybc_sc.bra_id.like(bra_id[:3]+'%'),
             Ybc_sc.bra_id_len == 9).order_by(Ybc_sc.enrolled.desc())
 
-        import pdb; pdb.set_trace()
-
         rank = rank_query.all()
+        location = Bra.query.filter_by(id=bra_id).first()
     else:
         bra_id = ''
         sc_service = Basic_course(course_sc_id=course_sc_id)
         school_service = Basic_course_school(course_sc_id=course_sc_id)
         city_service = Basic_course_city(course_sc_id=course_sc_id)
+        location = None
 
     header = {
         'course_sc_id': course_sc_id,
         'field_id': course_sc_id[0:2],
-        'course_name': sc_service.course_name(),
         'course_classes': sc_service.course_classes(),
         'course_age': sc_service.course_age(),
         'course_enrolled': sc_service.course_enrolled(),
@@ -71,15 +82,15 @@ def index(course_sc_id):
     }
 
     if bra_id:
-        header.update({'location_name': sc_service.location_name()})
+        header.update({'location_name': sc_service.location_name(),
+                       'state_name': sc_service.state_name()})
 
     if len(bra_id) == 1:
         header.update({'location_rank': state_service.location_rank(),
                        'location_enrolled': state_service.location_enrolled()})
     else:
         header.update({'location_rank': city_service.city_name(),
-                       'location_enrolled': city_service.city_enrolled(),
-                       'state_name': sc_service.state_name()})
+                       'location_enrolled': city_service.city_enrolled()})
 
     body = {
         'bra_id': bra_id,
@@ -95,4 +106,10 @@ def index(course_sc_id):
                 header['rank'] = index+1
                 break
 
-    return render_template('basic_course/index.html', header=header, body=body, body_class='perfil-estado')
+    return render_template(
+        'basic_course/index.html',
+        header=header,
+        body=body,
+        body_class='perfil-estado',
+        location=location,
+        basic_course=basic_course)

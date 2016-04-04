@@ -1,0 +1,168 @@
+.blog section {
+  margin-bottom: 4.5rem;
+}
+.blog .main-content {
+    padding-bottom: 2rem;
+}
+.blog a {
+  text-decoration: none;
+}
+.blog h1 {
+    margin: 0px 0px 30px 0px;
+}
+.blog textarea {
+    resize: none;
+}
+.blog .post .thumbnail {
+  border: none;
+  float: left;
+  margin-right: 20px;
+  padding: 0;
+  position: relative;
+}
+
+.blog .thumbnail {
+    height: 227px;
+    width: 350px;
+}
+
+.blog .post .thumbnail span {
+  background: #5a9dc4;
+  bottom: 0;
+  color: #FFF;
+  font-size: 13px;
+  font-weight: 300;
+  height: 33px;
+  line-height: 33px;
+  padding: 0 10px;
+  position: absolute;
+  right: 0;
+  text-transform: uppercase;
+}
+.blog .related h4 {
+  color: #666;
+  font-size: 25px;
+  font-weight: 300;
+}
+.blog .related p {
+  font-size: 14px;
+  font-weight: 300;
+}
+.blog .related p,
+.blog .related p a {
+  color: #666;
+}
+.blog .single big {
+  color: #5a9dc4;
+}
+.blog .single blockquote {
+  border: none;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 600;
+  padding-bottom: 0;
+}
+.blog .single p {
+  color: #666;
+  font-size: 14px;
+}
+.blog .social {
+  margin-bottom: 2rem;
+  padding: 0;
+}
+.blog .social li {
+  display: inline-block;
+  height: 20px;
+  margin-right: 5px;
+  overflow: hidden;
+}
+
+.blog .comments h4 {
+  color: #666;
+  font-size: 25px;
+  font-weight: 300;
+}
+.blog .item h4 {
+  font-size: 20px;
+  margin: 0;
+}
+.blog .item h4 a {
+  color: #423434;
+}
+.blog .item h4 a:hover {
+  opacity: 0.8;
+}
+.blog .item p {
+  color: #9c9c9c;
+  font-size: 13px;
+  margin: 0;
+}
+.blog .item + .item {
+  margin-top: 2rem;
+}
+.blog .post h4 {
+  font-size: 25px;
+  font-weight: 300;
+}
+.blog .post h4,
+.blog .post h4 a {
+  color: #666;
+}
+.blog .post p {
+  color: #666;
+  font-size: 13px;
+}
+.blog .post p.data {
+  color: #5a9dc4;
+  text-transform: uppercase;
+}
+.blog .post h4,
+.blog .post p {
+  margin: 0 0 10px;
+}
+
+.blog .post:before {
+  display: none;
+}
+.blog .post-list nav {
+    text-align: center;
+}
+.blog .post-list nav .pagination {
+    font-size: 10px;
+    display: inline-block;
+}
+
+
+.blog .thumb .thumb-controls img {
+    width: 350px;
+    height: 227px;
+}
+.blog .thumb .thumb-controls .crop-preview {
+    overflow: hidden;
+    text-align: center;
+    display: none;
+    width: 350px;
+    height: 227px;
+}
+.blog .thumb .thumb-controls .crop-buttons {
+    display: none;
+}
+.blog .thumb .thumb-controls .thumb-buttons,
+.blog .thumb .thumb-controls .crop-buttons {
+    text-align: center;
+}
+.blog .thumb .thumb-controls label {
+    display: inline-block;
+}
+.blog .thumb .thumb-crop {
+    max-height: 550px;
+}
+.blog .form-horizontal .form-group {
+    margin: 0px;
+}
+
+@media (max-width: 767px) {
+  .blog .form-horizontal .form-group {
+    margin-bottom: 20px;
+  }
+}
