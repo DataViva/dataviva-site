@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-04 13:20-0300\n"
+"POT-Creation-Date: 2016-04-04 15:13-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2111,17 +2111,32 @@ msgstr ""
 
 #: dataviva/templates/include/header.html:32
 #: dataviva/translations/dictionary.py:535
-msgid "Basic Resources"
+msgid "Basic Features"
 msgstr ""
 
 #: dataviva/templates/include/header.html:33
 #: dataviva/translations/dictionary.py:529
-msgid "START YOUR SEARCH"
+msgid "START A SEARCH"
+msgstr ""
+
+#: dataviva/templates/include/header.html:34
+#: dataviva/translations/dictionary.py:539
+msgid "VIEW RANKINGS"
 msgstr ""
 
 #: dataviva/templates/include/header.html:36
 #: dataviva/translations/dictionary.py:536
-msgid "Advanced Resources"
+msgid "Advanced Features"
+msgstr ""
+
+#: dataviva/templates/include/header.html:37
+#: dataviva/translations/dictionary.py:540
+msgid "MAKE GRAPHS"
+msgstr ""
+
+#: dataviva/templates/include/header.html:38
+#: dataviva/translations/dictionary.py:541
+msgid "DATABASE DOWNLOAD"
 msgstr ""
 
 #: dataviva/templates/include/header.html:41
@@ -3307,25 +3322,25 @@ msgstr ""
 msgid "and that imports more is"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:547
+#: dataviva/translations/dictionary.py:553
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:548
+#: dataviva/translations/dictionary.py:554
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:549
+#: dataviva/translations/dictionary.py:555
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:550
+#: dataviva/translations/dictionary.py:556
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""

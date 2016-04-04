@@ -526,16 +526,22 @@ def dictionary():
         "portuguese": gettext("Portuguese"),
         "about": gettext("ABOUT"),
         "search": gettext("SEARCH"),
-        "star_search": gettext("START YOUR SEARCH"),
+        "star_search": gettext("START A SEARCH"),
         "partners": gettext("PARTNERS"),
         "help": gettext("HELP"),
         "login": gettext("Login"),
         "singup": gettext("Sing Up"),
         "or": gettext("or"),
-        "basic_resources": gettext("Basic Resources"),
-        "advanced_resources": gettext("Advanced Resources"),
+        "basic_features": gettext("Basic Features"),
+        "advanced_features": gettext("Advanced Features"),
         "edit_profile": gettext("Edit profile"),
         "welcome": gettext("Welcome"),
+        "view_rankings": gettext("VIEW RANKINGS"),
+        "make_graphs": gettext("MAKE GRAPHS"),
+        "database_download": gettext("DATABASE DOWNLOAD")
+
+
+        
 
     }
 

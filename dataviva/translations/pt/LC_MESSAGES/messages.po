@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-04 13:20-0300\n"
+"POT-Creation-Date: 2016-04-04 15:13-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -2575,30 +2575,45 @@ msgstr "Notícias"
 #: dataviva/templates/include/header.html:28
 #: dataviva/translations/dictionary.py:527
 msgid "ABOUT"
-msgstr "Sobre"
+msgstr "SOBRE"
 
 #: dataviva/templates/include/header.html:30
 #: dataviva/translations/dictionary.py:528
 #, fuzzy
 msgid "SEARCH"
-msgstr "Pesquise"
+msgstr "PESQUISE"
 
 #: dataviva/templates/include/header.html:32
 #: dataviva/translations/dictionary.py:535
 #, fuzzy
-msgid "Basic Resources"
+msgid "Basic Features"
 msgstr "Recursos Básicos"
 
 #: dataviva/templates/include/header.html:33
 #: dataviva/translations/dictionary.py:529
-msgid "START YOUR SEARCH"
+msgid "START A SEARCH"
 msgstr "INICIE UMA PESQUISA"
+
+#: dataviva/templates/include/header.html:34
+#: dataviva/translations/dictionary.py:539
+#, fuzzy
+msgid "VIEW RANKINGS"
+msgstr "VISUALIZE RANKINGS"
 
 #: dataviva/templates/include/header.html:36
 #: dataviva/translations/dictionary.py:536
-#, fuzzy
-msgid "Advanced Resources"
+msgid "Advanced Features"
 msgstr "Recursos Avançados"
+
+#: dataviva/templates/include/header.html:37
+#: dataviva/translations/dictionary.py:540
+msgid "MAKE GRAPHS"
+msgstr "CONSTRUA GRÁFICOS"
+
+#: dataviva/templates/include/header.html:38
+#: dataviva/translations/dictionary.py:541
+msgid "DATABASE DOWNLOAD"
+msgstr "DOWNLOAD DE BANCO DE DADOS"
 
 #: dataviva/templates/include/header.html:41
 #: dataviva/translations/dictionary.py:530
@@ -3825,25 +3840,25 @@ msgstr "em"
 msgid "and that imports more is"
 msgstr "e o que mais importa é"
 
-#: dataviva/translations/dictionary.py:547
+#: dataviva/translations/dictionary.py:553
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:548
+#: dataviva/translations/dictionary.py:554
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:549
+#: dataviva/translations/dictionary.py:555
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:550
+#: dataviva/translations/dictionary.py:556
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"
@@ -4216,4 +4231,19 @@ msgstr "com"
 
 #~ msgid "Similar"
 #~ msgstr "Semelhante"
+
+#~ msgid "Basic Resources"
+#~ msgstr "Recursos Básicos"
+
+#~ msgid "Advanced Resources"
+#~ msgstr "Recursos Avançados"
+
+#~ msgid "VISUALIZE RANKINGS"
+#~ msgstr "Visualizações"
+
+#~ msgid "CONSTRUA GRÁFICOS"
+#~ msgstr ""
+
+#~ msgid "DOWNLOAD DE BANCO DE DADOS"
+#~ msgstr ""
 

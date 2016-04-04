@@ -29,13 +29,13 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}SEARCH{% endtrans %}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="divisor">{% trans %}Basic Resources{% endtrans %}</li>
-                        <li><a href="{{ url_for('general.search') }}"><i class="fa fa-angle-right"></i> {% trans %}START YOUR SEARCH{% endtrans %}</a></li>
-                        <li><a href="{{ url_for('rankings.index') }}"><i class="fa fa-angle-right"></i> VISUALIZE RANKINGS</a></li>
+                        <li class="divisor">{% trans %}Basic Features{% endtrans %}</li>
+                        <li><a href="{{ url_for('general.search') }}"><i class="fa fa-angle-right"></i> {% trans %}START A SEARCH{% endtrans %}</a></li>
+                        <li><a href="{{ url_for('rankings.index') }}"><i class="fa fa-angle-right"></i> {% trans %}VIEW RANKINGS{% endtrans %}</a></li>
                         <li role="separator" class="divider"></li>
-                        <li class="divisor">{% trans %}Advanced Resources{% endtrans %}</li>
-                        <li><a href="{{ url_for('build_graph.index') }}"><i class="fa fa-angle-right"></i> CONSTRUA GRÁFICOS</a></li>
-                        <li><a href="{{ url_for('data_download.index') }}"><i class="fa fa-angle-right"></i> DOWNLOAD DE BANCO DE DADOS</a></li>
+                        <li class="divisor">{% trans %}Advanced Features{% endtrans %}</li>
+                        <li><a href="{{ url_for('build_graph.index') }}"><i class="fa fa-angle-right"></i> {% trans %}MAKE GRAPHS{% endtrans %}</a></li>
+                        <li><a href="{{ url_for('data_download.index') }}"><i class="fa fa-angle-right"></i> {% trans %}DATABASE DOWNLOAD{% endtrans %}</a></li>
                     </ul>
                 </li>
                 <li><a href="{{ url_for('partners.index') }}">{% trans %}PARTNERS{% endtrans %}</a></li>
