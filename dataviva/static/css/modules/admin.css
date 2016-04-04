@@ -1,5 +1,10 @@
+.admin #admin {
+    min-width: 440px;
+}
+
 .admin .admin-main {
     text-align: center;
+    min-width: 440px;
 }
 
 .admin .admin-main img {
@@ -9,6 +14,11 @@
 
 .admin .admin-main .btn {
     font-size: 30px;
-    line-height: 80px;
     min-width: 180px;
+}
+
+@media (max-width: 991px) {
+  .admin .admin-main .btn {
+    margin: 15px;
+  }
 }
