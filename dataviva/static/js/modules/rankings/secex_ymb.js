@@ -2,7 +2,7 @@ var SecexYmbTable = function () {
     this.tableId = '#secex-ymb-table';
 
     this.table = $(this.tableId).DataTable({
-        "sAjaxSource": "/secex/all-0/show.3/all/all/?order=eci.desc",
+        "sAjaxSource": "/secex/all-0/show.1/all/all/?order=eci.desc",
         "sAjaxDataProp": "data",
         "order": [],
         "aoColumns": [
@@ -28,7 +28,7 @@ var SecexYmbTable = function () {
         "scrollCollapse": true,
         "scroller": true,
         initComplete: function () {
-            var select = $('#year-selector select')
+            var select = $('#year-selector')
 
             secexYmbTable.table
                 .column( 0 )
@@ -53,22 +53,46 @@ var SecexYmbTable = function () {
 
 var secexYmbTable = new SecexYmbTable();
 
+var secexYmbRegions = function() {
+    secexYmbTable.table.ajax.url("/secex/all-0/show.1/all/all/?order=eci.desc").load();
+};
+
 var secexYmbStates = function() {
     secexYmbTable.table.ajax.url("/secex/all-0/show.3/all/all/?order=eci.desc").load();
 };
 
-var secexYmbMunicipality = function() {
+var secexYmbMesoregions = function() {
+    secexYmbTable.table.ajax.url("/secex/all-0/show.5/all/all/?order=eci.desc").load();
+};
+
+var secexYmbMicroRegions = function() {
+    secexYmbTable.table.ajax.url("/secex/all-0/show.7/all/all/?order=eci.desc").load();
+};
+
+var secexYmbMunicipalities = function() {
     secexYmbTable.table.ajax.url("/secex/all-0/show.9/all/all/?order=eci.desc").load();
 };
 
 $(document).ready(function(){
 
+    $('#secex-ymb-regions').click(function() {
+        secexYmbStates();
+    });
+
     $('#secex-ymb-states').click(function() {
         secexYmbStates();
     });
 
-    $('#secex-ymb-municipality').click(function() {
-        secexYmbMunicipality();
+    $('#secex-ymb-mesoregions').click(function() {
+        secexYmbMesoregions();
+    });
+
+    $('#secex-ymb-microregions').click(function() {
+        secexYmbMicroRegions();
+    });
+
+    $('#secex-ymb-municipalities').click(function() {
+        secexYmbMunicipalities();
     });
 
 });
