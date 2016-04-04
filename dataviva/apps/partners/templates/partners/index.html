@@ -2,26 +2,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="mod parceiros mod-two-columns">
+<section id="partnership" class="bg-dark-green">
     <div class="container">
-        <div class="row">
-            <div class="col-xs-15 col-sm-7">
-                <h2>Atue em conjunto conosco com o objetivo de fortalecer a cultura do uso de dados para o desenvolvimento socioeconômico do Brasil.</h2>
-            </div>
-            <div class="col-xs-15 col-sm-7 col-sm-offset-1 col-2">
-                <h4>Confira os temas de interesse para parcerias no âmbito do projeto DataViva:</h4>
-                <p>a) Suporte à formulação, implementação e avaliação de políticas públicas;</p>
-                <p>b) Desenvolvimento econômico;</p>
-                <p>c) Ciência, tecnologia e inovação;</p>
-                <p>d) Transparência pública e controle da Administração Pública;</p>
-                <p>e) Big Data, armazenamento, tratamento e visualização de bases de dados.</p>
-                <p>f) Diversificação da economia de Minas Gerais e outras regiões do Brasil;</p>
-                <p>g) Complexidade econômica de Minas Gerais e de outras regiões do Brasil;</p>
-                <p>h) Redução da desigualdade socioeconômica do Estado de Minas Gerais e de outras regiões do Brasil.</p>
-                <a class="btn btn-dataviva" href=" {{url_for('partners.be_a_partner')}} ">Seja um Parceiro</a>
-            </div>
+        <div class="col-md-6">
+            <h2>Atue em conjunto conosco com o objetivo de fortalecer a cultura do uso de dados para o desenvolvimento socioeconômico do Brasil.</h2>
+        </div>
+        <div class="col-md-6">
+            <h4>Confira os temas de interesse para parcerias no âmbito do projeto DataViva:</h4>
+            <p>a) Suporte à formulação, implementação e avaliação de políticas públicas;</p>
+            <p>b) Desenvolvimento econômico;</p>
+            <p>c) Ciência, tecnologia e inovação;</p>
+            <p>d) Transparência pública e controle da Administração Pública;</p>
+            <p>e) Big Data, armazenamento, tratamento e visualização de bases de dados.</p>
+            <p>f) Diversificação da economia de Minas Gerais e outras regiões do Brasil;</p>
+            <p>g) Complexidade econômica de Minas Gerais e de outras regiões do Brasil;</p>
+            <p>h) Redução da desigualdade socioeconômica do Estado de Minas Gerais e de outras regiões do Brasil.</p>
+            <a class="btn btn-w-m btn-primary" href=" {{url_for('partners.be_a_partner')}} ">Seja um Parceiro</a>
         </div>
     </div>
-</div>
+</section>
 {% include "include/partners.html" %}
 {% endblock content %}

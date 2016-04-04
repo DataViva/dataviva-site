@@ -50,15 +50,19 @@ body {
 .bg-green {
   background-color: #9EDDBF;
 }
+.bg-greeny {
+  background-color: #f3f6f3;
+}
+.bg-dark-green {
+  background-color: #7bccd0;
+}
 .bg-white {
   background-color: #ffffff;
 }
 .bg-gray {
   background-color: #f3f6f4;
 }
-.bg-greeny {
-  background-color: #f3f6f3;
-}
+
 .bg-city-scratched {
   background: url(/static/img/bgs/city_scratched.png) no-repeat center bottom;
   background-size: cover;
@@ -705,7 +709,6 @@ nav > li span:not(.caret) {
 /* DROPDOWN END */
 /* FOOTER BEGIN */
 footer {
-  background: #7bccd0;
   font-size: 13px;
   padding: 3rem 0;
 }
