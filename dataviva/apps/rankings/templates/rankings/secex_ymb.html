@@ -2,11 +2,15 @@
 
 {% block content %}
 
-<button id="secex-ymb-states" class="btn btn-success"><i class="fa fa-building m-r-sm"></i>Estados</button>
-<button id="secex-ymb-municipality" class="btn btn-success"><i class="fa fa-building-o m-r-sm"></i>Municípios</button>
-
-<div id="year-selector">
-<select><option value="">Year</option></select>
+<div class="container">
+    <div class="btn-group">
+        <button id="secex-ymb-regions" class="btn btn-white">Regiões</button>
+        <button id="secex-ymb-states" class="btn btn-white">Estados</button>
+        <button id="secex-ymb-mesoregions" class="btn btn-white">Mesoregiões</button>
+        <button id="secex-ymb-microregions" class="btn btn-white">Microregiões</button>
+        <button id="secex-ymb-municipalities" class="btn btn-white">Municípios</button>
+    </div>
+    <select class="btn btn-white year-selector" id="year-selector"><option value="">Year</option></select>
 </div>
 
 <table id="secex-ymb-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
