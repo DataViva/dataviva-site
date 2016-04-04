@@ -28,3 +28,7 @@ def index():
 @mod.route('/secex/ymb', methods=['GET'])
 def secex_ymb():
     return render_template('rankings/secex_ymb.html')
+
+@mod.route('/wages', methods=['GET'])
+def wages():
+    return render_template('rankings/wages.html')

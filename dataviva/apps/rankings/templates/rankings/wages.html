@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<button id="wages-states" class="btn btn-success"><i class="fa fa-building m-r-sm"></i>Estados</button>
+<button id="wages-municipality" class="btn btn-success"><i class="fa fa-building-o m-r-sm"></i>Municípios</button>
+
+<div id="year-selector">
+<select><option value="">Year</option></select>
+</div>
+
+<table id="wages-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>year</th>
+            <th>wage</th>
+            <th>num_emp</th>
+            <th>num_jobs</th>
+            <th>num_est</th>            
+            <th>wage_avg</th>
+            <th>age_avg</th>
+            <th>wage_growth</th>
+            <th>wage_growth_5</th>
+            <th>num_emp_growth</th>
+            <th>num_emp_growth_5</th>
+            <th>bra_id</th>
+            <th>cnae_diversity</th>
+            <th>cnae_diversity_eff</th>
+            <th>cbo_diversity</th>
+            <th>cbo_diversity_eff</th>
+            <th>hist</th>
+            <th>gini</th>
+        </tr>
+    </thead>
+</table>
+{% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/rankings/wages.js"></script>
+{% endblock js_assets %}
