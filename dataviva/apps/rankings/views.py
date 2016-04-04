@@ -25,6 +25,6 @@ def index():
     pass
 
 
-@mod.route('/secex/ymb', methods=['GET'])
-def secex_ymb():
-    return render_template('rankings/secex_ymb.html')
+@mod.route('/location/international-trade', methods=['GET'])
+def location_international_trade():
+    return render_template('rankings/location-international-trade.html')
