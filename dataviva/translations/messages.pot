@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-29 15:01-0300\n"
+"POT-Creation-Date: 2016-04-04 15:13-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -289,11 +289,11 @@ msgid "Previous"
 msgstr ""
 
 #: dataviva/apps/embed/templates/embed/info.html:29
-#: dataviva/templates/profiles/profile.html:299
 msgid "Next"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:3
 #: dataviva/translations/dictionary.py:516
 msgid "Preview"
 msgstr ""
@@ -356,6 +356,7 @@ msgid "Origin"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/index.html:48
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:49
 #: dataviva/translations/dictionary.py:479
 msgid "General"
 msgstr ""
@@ -585,50 +586,43 @@ msgstr ""
 msgid "Classifications"
 msgstr ""
 
-#: dataviva/templates/about.html:54 dataviva/templates/rankings/index.html:17
+#: dataviva/templates/about.html:54
 msgid "Brazilian Locations"
 msgstr ""
 
 #: dataviva/templates/about.html:58 dataviva/templates/general/select.html:24
-#: dataviva/templates/rankings/index.html:21
 #: dataviva/translations/dictionary.py:358
 msgid "Industries"
 msgstr ""
 
 #: dataviva/templates/about.html:62 dataviva/templates/general/select.html:29
-#: dataviva/templates/rankings/index.html:25
 #: dataviva/translations/dictionary.py:159
 #: dataviva/translations/dictionary.py:354
 msgid "Occupations"
 msgstr ""
 
-#: dataviva/templates/about.html:66 dataviva/templates/rankings/index.html:29
-#: dataviva/translations/dictionary.py:356
+#: dataviva/templates/about.html:66 dataviva/translations/dictionary.py:356
 msgid "Products"
 msgstr ""
 
 #: dataviva/templates/about.html:70 dataviva/templates/general/select.html:39
-#: dataviva/templates/rankings/index.html:33
 #: dataviva/translations/dictionary.py:288
 msgid "Export Destinations"
 msgstr ""
 
-#: dataviva/templates/about.html:74 dataviva/templates/rankings/index.html:41
-#: dataviva/translations/dictionary.py:173
+#: dataviva/templates/about.html:74 dataviva/translations/dictionary.py:173
 #: dataviva/translations/dictionary.py:175
 #: dataviva/translations/dictionary.py:364
 msgid "Majors"
 msgstr ""
 
-#: dataviva/templates/about.html:78 dataviva/templates/rankings/index.html:37
-#: dataviva/translations/dictionary.py:184
+#: dataviva/templates/about.html:78 dataviva/translations/dictionary.py:184
 #: dataviva/translations/dictionary.py:185
 #: dataviva/translations/dictionary.py:362
 msgid "Universities"
 msgstr ""
 
-#: dataviva/templates/about.html:82 dataviva/templates/rankings/index.html:45
-#: dataviva/translations/dictionary.py:368
+#: dataviva/templates/about.html:82 dataviva/translations/dictionary.py:368
 msgid "Basic Courses"
 msgstr ""
 
@@ -759,7 +753,7 @@ msgstr ""
 msgid "click here."
 msgstr ""
 
-#: dataviva/templates/site.html:18 dataviva/templates/profiles/index.html:100
+#: dataviva/templates/site.html:18
 msgid "What would you like to learn more about?"
 msgstr ""
 
@@ -775,7 +769,7 @@ msgstr ""
 msgid "Data"
 msgstr ""
 
-#: dataviva/templates/site.html:27 dataviva/templates/rankings/index.html:4
+#: dataviva/templates/site.html:27
 msgid "Rankings"
 msgstr ""
 
@@ -792,6 +786,8 @@ msgstr ""
 #: dataviva/templates/site.html:36 dataviva/templates/account/login.html:4
 #: dataviva/templates/general/access.html:3
 #: dataviva/templates/general/upgrade.html:3
+#: dataviva/templates/include/header.html:47
+#: dataviva/translations/dictionary.py:532
 msgid "Login"
 msgstr ""
 
@@ -1432,6 +1428,8 @@ msgid "Comment"
 msgstr ""
 
 #: dataviva/templates/about/ask/index.html:57
+#: dataviva/templates/include/header.html:7
+#: dataviva/translations/dictionary.py:524
 msgid "Contact"
 msgstr ""
 
@@ -2091,38 +2089,94 @@ msgid ""
 "site."
 msgstr ""
 
-#: dataviva/templates/profiles/index.html:3
-msgid "Generate a Profile"
+#: dataviva/templates/include/header.html:4
+#: dataviva/translations/dictionary.py:522
+msgid "Studies"
 msgstr ""
 
-#: dataviva/templates/profiles/index.html:111
-msgid "Common searches"
+#: dataviva/templates/include/header.html:5
+#: dataviva/translations/dictionary.py:523
+msgid "News"
 msgstr ""
 
-#: dataviva/templates/profiles/index.html:112
-msgid "Ex"
+#: dataviva/templates/include/header.html:28
+#: dataviva/translations/dictionary.py:527
+msgid "ABOUT"
 msgstr ""
 
-#: dataviva/templates/profiles/profile.html:295
-msgid "Prev"
+#: dataviva/templates/include/header.html:30
+#: dataviva/translations/dictionary.py:528
+msgid "SEARCH"
 msgstr ""
 
-#: dataviva/templates/profiles/profile.html:297
-msgid "Random"
+#: dataviva/templates/include/header.html:32
+#: dataviva/translations/dictionary.py:535
+msgid "Basic Features"
 msgstr ""
 
-#: dataviva/templates/profiles/profile.html:371
-msgid "Show Related Profiles"
+#: dataviva/templates/include/header.html:33
+#: dataviva/translations/dictionary.py:529
+msgid "START A SEARCH"
 msgstr ""
 
-#: dataviva/templates/profiles/profile.html:405
-msgid ""
-"To view additional data regarding world trade, click here to visit the "
-"Observatory."
+#: dataviva/templates/include/header.html:34
+#: dataviva/translations/dictionary.py:539
+msgid "VIEW RANKINGS"
 msgstr ""
 
-#: dataviva/templates/profiles/profile.html:438
-msgid "Similar"
+#: dataviva/templates/include/header.html:36
+#: dataviva/translations/dictionary.py:536
+msgid "Advanced Features"
+msgstr ""
+
+#: dataviva/templates/include/header.html:37
+#: dataviva/translations/dictionary.py:540
+msgid "MAKE GRAPHS"
+msgstr ""
+
+#: dataviva/templates/include/header.html:38
+#: dataviva/translations/dictionary.py:541
+msgid "DATABASE DOWNLOAD"
+msgstr ""
+
+#: dataviva/templates/include/header.html:41
+#: dataviva/translations/dictionary.py:530
+msgid "PARTNERS"
+msgstr ""
+
+#: dataviva/templates/include/header.html:42
+#: dataviva/translations/dictionary.py:531
+msgid "HELP"
+msgstr ""
+
+#: dataviva/templates/include/header.html:48
+#: dataviva/translations/dictionary.py:534
+msgid "or"
+msgstr ""
+
+#: dataviva/templates/include/header.html:49
+#: dataviva/translations/dictionary.py:533
+msgid "Sing Up"
+msgstr ""
+
+#: dataviva/templates/include/header.html:51
+#: dataviva/translations/dictionary.py:538
+msgid "Welcome"
+msgstr ""
+
+#: dataviva/templates/include/header.html:51
+#: dataviva/translations/dictionary.py:537
+msgid "Edit profile"
+msgstr ""
+
+#: dataviva/templates/include/header.html:56
+#: dataviva/translations/dictionary.py:525
+msgid "English"
+msgstr ""
+
+#: dataviva/templates/include/header.html:57
+#: dataviva/translations/dictionary.py:526
+msgid "Portuguese"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:19
@@ -3268,25 +3322,25 @@ msgstr ""
 msgid "and that imports more is"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:528
+#: dataviva/translations/dictionary.py:553
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:529
+#: dataviva/translations/dictionary.py:554
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:530
+#: dataviva/translations/dictionary.py:555
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:531
+#: dataviva/translations/dictionary.py:556
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""
