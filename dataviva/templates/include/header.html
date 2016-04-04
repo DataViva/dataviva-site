@@ -48,7 +48,7 @@
                     {% trans %}or{% endtrans %}
                     <button class="btn btn-primary m-l m-r">{% trans %}Sing Up{% endtrans %}</button>
                     {% else %}
-                        <p>Welcome, <b>{{ g.user.firstname }}</b>! | <a href="/account/edit_profile">Edit profile</a></p> | <a href="/account/logout">Logout</a></p>
+                        <p>{% trans %}Welcome{% endtrans %}, <b>{{ g.user.firstname }}</b>! | <a href="/account/edit_profile">{% trans %}Edit profile{% endtrans %}</a></p> | <a href="/account/logout">Logout</a></p>
                     {% endif %}
 
                     <div class="form-group">

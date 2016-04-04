@@ -534,6 +534,8 @@ def dictionary():
         "or": gettext("or"),
         "basic_resources": gettext("Basic Resources"),
         "advanced_resources": gettext("Advanced Resources"),
+        "edit_profile": gettext("Edit profile"),
+        "welcome": gettext("Welcome"),
 
     }
 
