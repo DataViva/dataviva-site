@@ -1,0 +1,14 @@
+.admin .admin-main {
+    text-align: center;
+}
+
+.admin .admin-main img {
+    display: inline-block;
+    height: 100px;
+}
+
+.admin .admin-main .btn {
+    font-size: 30px;
+    line-height: 80px;
+    min-width: 180px;
+}
