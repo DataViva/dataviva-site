@@ -532,6 +532,8 @@ def dictionary():
         "login": gettext("Login"),
         "singup": gettext("Sing Up"),
         "or": gettext("or"),
+        "basic_resources": gettext("Basic Resources"),
+        "advanced_resources": gettext("Advanced Resources"),
 
     }
 

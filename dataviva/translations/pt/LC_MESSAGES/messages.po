@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-01 17:06-0300\n"
+"POT-Creation-Date: 2016-04-04 13:10-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -292,7 +292,6 @@ msgid "Previous"
 msgstr "Anterior"
 
 #: dataviva/apps/embed/templates/embed/info.html:29
-#: dataviva/templates/profiles/profile.html:299
 msgid "Next"
 msgstr "Próximo"
 
@@ -608,50 +607,43 @@ msgstr "Sobre os Dados"
 msgid "Classifications"
 msgstr "Classificações"
 
-#: dataviva/templates/about.html:54 dataviva/templates/rankings/index.html:17
+#: dataviva/templates/about.html:54
 msgid "Brazilian Locations"
 msgstr "Localidades Brasileiras"
 
 #: dataviva/templates/about.html:58 dataviva/templates/general/select.html:24
-#: dataviva/templates/rankings/index.html:21
 #: dataviva/translations/dictionary.py:358
 msgid "Industries"
 msgstr "Atividades Econômicas"
 
 #: dataviva/templates/about.html:62 dataviva/templates/general/select.html:29
-#: dataviva/templates/rankings/index.html:25
 #: dataviva/translations/dictionary.py:159
 #: dataviva/translations/dictionary.py:354
 msgid "Occupations"
 msgstr "Ocupações"
 
-#: dataviva/templates/about.html:66 dataviva/templates/rankings/index.html:29
-#: dataviva/translations/dictionary.py:356
+#: dataviva/templates/about.html:66 dataviva/translations/dictionary.py:356
 msgid "Products"
 msgstr "Produtos"
 
 #: dataviva/templates/about.html:70 dataviva/templates/general/select.html:39
-#: dataviva/templates/rankings/index.html:33
 #: dataviva/translations/dictionary.py:288
 msgid "Export Destinations"
 msgstr "Destinos das Exportações"
 
-#: dataviva/templates/about.html:74 dataviva/templates/rankings/index.html:41
-#: dataviva/translations/dictionary.py:173
+#: dataviva/templates/about.html:74 dataviva/translations/dictionary.py:173
 #: dataviva/translations/dictionary.py:175
 #: dataviva/translations/dictionary.py:364
 msgid "Majors"
 msgstr "Cursos"
 
-#: dataviva/templates/about.html:78 dataviva/templates/rankings/index.html:37
-#: dataviva/translations/dictionary.py:184
+#: dataviva/templates/about.html:78 dataviva/translations/dictionary.py:184
 #: dataviva/translations/dictionary.py:185
 #: dataviva/translations/dictionary.py:362
 msgid "Universities"
 msgstr "Universidades"
 
-#: dataviva/templates/about.html:82 dataviva/templates/rankings/index.html:45
-#: dataviva/translations/dictionary.py:368
+#: dataviva/templates/about.html:82 dataviva/translations/dictionary.py:368
 msgid "Basic Courses"
 msgstr "Cursos Básicos"
 
@@ -782,7 +774,7 @@ msgstr "Se você não deseja mais receber atualizações,"
 msgid "click here."
 msgstr "clique aqui."
 
-#: dataviva/templates/site.html:18 dataviva/templates/profiles/index.html:100
+#: dataviva/templates/site.html:18
 msgid "What would you like to learn more about?"
 msgstr "O que você gostaria de saber mais a respeito?"
 
@@ -798,7 +790,7 @@ msgstr "Avançado"
 msgid "Data"
 msgstr "Dados"
 
-#: dataviva/templates/site.html:27 dataviva/templates/rankings/index.html:4
+#: dataviva/templates/site.html:27
 msgid "Rankings"
 msgstr "Rankings"
 
@@ -2591,10 +2583,22 @@ msgstr "Sobre"
 msgid "SEARCH"
 msgstr "Pesquise"
 
+#: dataviva/templates/include/header.html:32
+#: dataviva/translations/dictionary.py:535
+#, fuzzy
+msgid "Basic Resources"
+msgstr "Recursos Básicos"
+
 #: dataviva/templates/include/header.html:33
 #: dataviva/translations/dictionary.py:529
 msgid "START YOUR SEARCH"
 msgstr "INICIE UMA PESQUISA"
+
+#: dataviva/templates/include/header.html:36
+#: dataviva/translations/dictionary.py:536
+#, fuzzy
+msgid "Advanced Resources"
+msgstr "Recursos Avançados"
 
 #: dataviva/templates/include/header.html:41
 #: dataviva/translations/dictionary.py:530
@@ -2627,42 +2631,6 @@ msgstr "Inglês"
 #, fuzzy
 msgid "Portuguese"
 msgstr "Português"
-
-#: dataviva/templates/profiles/index.html:3
-msgid "Generate a Profile"
-msgstr "Gerar um Perfil"
-
-#: dataviva/templates/profiles/index.html:111
-msgid "Common searches"
-msgstr "Pesquisas comuns"
-
-#: dataviva/templates/profiles/index.html:112
-msgid "Ex"
-msgstr "Ex"
-
-#: dataviva/templates/profiles/profile.html:295
-msgid "Prev"
-msgstr "Anterior"
-
-#: dataviva/templates/profiles/profile.html:297
-msgid "Random"
-msgstr "Aleatório"
-
-#: dataviva/templates/profiles/profile.html:371
-msgid "Show Related Profiles"
-msgstr "Exibir Perfis Relacionados"
-
-#: dataviva/templates/profiles/profile.html:405
-msgid ""
-"To view additional data regarding world trade, click here to visit the "
-"Observatory."
-msgstr ""
-"Para visualizar os dados adicionais sobre o comércio mundial, clique aqui"
-" para visitar o Observatório."
-
-#: dataviva/templates/profiles/profile.html:438
-msgid "Similar"
-msgstr "Semelhante"
 
 #: dataviva/translations/dictionary.py:19
 msgid "Time Resolution"
@@ -3847,25 +3815,25 @@ msgstr "em"
 msgid "and that imports more is"
 msgstr "e o que mais importa é"
 
-#: dataviva/translations/dictionary.py:543
+#: dataviva/translations/dictionary.py:545
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:544
+#: dataviva/translations/dictionary.py:546
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:545
+#: dataviva/translations/dictionary.py:547
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:546
+#: dataviva/translations/dictionary.py:548
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"
@@ -4217,4 +4185,25 @@ msgstr "com"
 
 #~ msgid "Main Msunicipality by total value imported"
 #~ msgstr "Principal Município por valor total importado"
+
+#~ msgid "Generate a Profile"
+#~ msgstr "Gerar um Perfil"
+
+#~ msgid "Common searches"
+#~ msgstr "Pesquisas comuns"
+
+#~ msgid "Ex"
+#~ msgstr "Ex"
+
+#~ msgid "Prev"
+#~ msgstr "Anterior"
+
+#~ msgid "Random"
+#~ msgstr "Aleatório"
+
+#~ msgid "Show Related Profiles"
+#~ msgstr "Exibir Perfis Relacionados"
+
+#~ msgid "Similar"
+#~ msgstr "Semelhante"
 
