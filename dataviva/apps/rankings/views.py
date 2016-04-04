@@ -31,6 +31,6 @@ def secex_ymb():
     return render_template('rankings/secex_ymb.html')
 
 
-@mod.route('location/wages-and-employment', methods=['GET'])
+@mod.route('/location/wages-and-employment', methods=['GET'])
 def wages():
     return render_template('rankings/wages.html')
