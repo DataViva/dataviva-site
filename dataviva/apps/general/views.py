@@ -132,8 +132,8 @@ def home():
 
 
 @mod.route('/inicie-uma-pesquisa/', methods=['GET'])
-@view_cache.cached(key_prefix=api_cache_key("browsecat"))
 def search():
+    g.page_type = 'search'
     return render_template("general/browse_categories.html")
 
 

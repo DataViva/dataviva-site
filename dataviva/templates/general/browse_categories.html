@@ -1,118 +1,127 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
+
 <div class="container">
-    <ol class="breadcrumb">
-        <li><a href="01-index.html">Home</a></li>
-        <li class="active"><span>Inicie uma pesquisa<span></li>
-    </ol>
-    <div class="row">
-        <div class="sidebar col-xs-15 col-md-4">
-            <h4>Outros Recursos</h4>
-            <ul class="sub-menu">
-                <li><a href="07-ranking.html" title="Visualize rankings">Visualize rankings</a></li>
-                <li><a href="22-construa-graficos.html" title="Construa gráficos">Construa gráficos</a></li>
-                <li><a href="18-download-banco-de-dados.html" title="Download de banco de dados">Download de banco de dados</a></li>
-            </ul>
-        </div>
-        <div class="main-content col-xs-15 col-md-11">
-            <div class="mod mod-search-boxes">
-                <h1 class="text-center">Inicie uma pesquisa</h1>
-                <div class="profile">
-                    <h2 class="text-center">Selecione um perfil para começar:</h2>
-                    <div class="row">
-                        <div class="col-xs-15 col-sm-5 item">
-                            <a onclick="fire_wizard('entrepreneur')">
-                                <img src="/static/img/icons/categories/ico-empresario.png" class="pull-left" />
-                                <span>Empreendedores</span>
-                                Identifique o perfil econômico e as oportunidades de negócios de uma região
-                            </a>
-                        </div>
-                        <div class="col-xs-15 col-sm-5 item">
-                            <a onclick="fire_wizard('development_agents')">
-                                <img src="/static/img/icons/categories/ico-analista.png" class="pull-left" />
-                                <span>Agentes de Desenvolvimento</span>
-                                Avalie a criação de políticas de desenvolvimento de acordo com a localidade
-                            </a>
-                        </div>
-                        <div class="col-xs-15 col-sm-5 item">
-                            <a onclick="fire_wizard('student')">
-                                <img src="/static/img/icons/categories/ico-estudante.png" class="pull-left" />
-                                <span>Estudantes e Profissionais</span>
-                                Descubra informações sobre empregos disponíveis, renda por ocupação e cursos
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <h3 class="text-center">... ou pesquise por:</h3>
-                <div class="row">
-                    <div class="col-xs-15 col-sm-5 item">
-                        <a onclick="start_selector('Location')">
-                            <span class="pull-left">Localidades Brasileiras</span>
-                            <img src="/static/img/icons/categories/ico-search-localidades.png" class="pull-right" />
-                            <div class="clearfix"></div>
-                            <p class="clearfix">Mostrando as exportações, o emprego e os dados de educação, estatísticas e visualizações sobre a localidade brasileira escolhida.</p>
-                        </a>
-                    </div>
-                    <div class="col-xs-15 col-sm-5 item">
-                        <a onclick="start_selector('Occupation')">
-                            <span class="pull-left">Ocupações</span>
-                            <img src="/static/img/icons/categories/ico-search-ocupacoes.png" class="pull-right" />
-                            <div class="clearfix"></div>
-                            <p class="clearfix">Mostrando as exportações, o emprego e os dados de educação, estatísticas e visualizações sobre a localidade brasileira escolhida.</p>
-                        </a>
-                    </div>
-                    <div class="col-xs-15 col-sm-5 item">
-                        <a onclick="start_selector('Industry')">
-                            <span class="pull-left">Atividades Econômicas</span>
-                            <img src="/static/img/icons/categories/ico-search-atividades.png" class="pull-right" />
-                            <div class="clearfix"></div>
-                            <p class="clearfix">Mostrando as exportações, o emprego e os dados de educação, estatísticas e visualizações sobre a localidade brasileira escolhida.</p>
-                        </a>
-                    </div>
-                    <div class="col-xs-15 col-sm-5 item">
-                        <a onclick="start_selector('Product')">
-                            <span class="pull-left">Produtos</span>
-                            <img src="/static/img/icons/categories/ico-search-produtos.png" class="pull-right" />
-                            <div class="clearfix"></div>
-                            <p class="clearfix">Mostrando as exportações, o emprego e os dados de educação, estatísticas e visualizações sobre a localidade brasileira escolhida.</p>
-                        </a>
-                    </div>
-                    <div class="col-xs-15 col-sm-5 item">
-                        <a onclick="start_selector('TradingPartner')">
-                            <span class="pull-left">Parceiros Comerciais</span>
-                            <img src="/static/img/icons/categories/ico-search-parceiros.png" class="pull-right" />
-                            <div class="clearfix"></div>
-                            <p class="clearfix">Mostrando as exportações, o emprego e os dados de educação, estatísticas e visualizações sobre a localidade brasileira escolhida.</p>
-                        </a>
-                    </div>
-                    <div class="col-xs-15 col-sm-5 item">
-                        <a onclick="start_selector('University')">
-                            <span class="pull-left">Universidades</span>
-                            <img src="/static/img/icons/categories/ico-search-universidades.png" class="pull-right" />
-                            <div class="clearfix"></div>
-                            <p class="clearfix">Mostrando as exportações, o emprego e os dados de educação, estatísticas e visualizações sobre a localidade brasileira escolhida.</p>
-                        </a>
-                    </div>
-                    <div class="col-xs-15 col-sm-5 col-sm-offset-3 item">
-                        <a onclick="start_selector('Major')">
-                            <span class="pull-left">Cursos Ensino Superior</span>
-                            <img src="/static/img/icons/categories/ico-search-curso-superior.png" class="pull-right" />
-                            <div class="clearfix"></div>
-                            <p class="clearfix">Mostrando as exportações, o emprego e os dados de educação, estatísticas e visualizações sobre a localidade brasileira escolhida.</p>
-                        </a>
-                    </div>
-                    <div class="col-xs-15 col-sm-5 item">
-                        <a onclick="start_selector('BasicCourse')">
-                            <span class="pull-left">Cursos Básicos</span>
-                            <img src="/static/img/icons/categories/ico-search-curso-basico1.png" class="pull-right" />
-                            <div class="clearfix"></div>
-                            <p class="clearfix">Mostrando as exportações, o emprego e os dados de educação, estatísticas e visualizações sobre a localidade brasileira escolhida.</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('general.home') }}">Home</a></li>
+            <li class="active">Inicie uma pesquisa</li>
+        </ol>
     </div>
 </div>
+
+
+
+<div class="container m-b-lg">
+    <nav class="sidebar col-md-3">
+        <h3>Outros Recursos</h3>
+        <ul class="sub-menu">
+            <li><a href="{{ url_for('rankings.index') }}" title="Visualize rankings">Visualize rankings</a></li>
+            <li><a href="{{ url_for('build_graph.index') }}" title="Construa gráficos">Construa gráficos</a></li>
+            <li><a href="{{ url_for('data_download.index') }}" title="Download de banco de dados">Download de banco de dados</a></li>
+        </ul>
+    </nav>
+
+    <div class="col-md-9">
+        <h1 class="text-center">Inicie uma pesquisa</h1>
+        <section id="profiles" class="profiles bg-blue">
+            <h2 class="text-center">Selecione um perfil para começar:</h2>
+            <div class="row">
+                <div class="col-md-4 profile">
+                    <a onclick="fire_wizard('entrepreneur')">
+                        <i class="pull-left dv-entrepreneur"></i>
+                        <h3>Empreendedores</h3>
+                        <h4>Identifique o perfil econômico e as oportunidades de negócios de uma região</h4>
+                    </a>
+                </div>
+                <div class="col-md-4 profile">
+                    <a onclick="fire_wizard('development_agents')">
+                        <i class="pull-left dv-dev-agents"></i>
+                        <h3>Agentes de Desenvolvimento</h3>
+                        <h4>Avalie a criação de políticas de desenvolvimento de acordo com a localidade</h4>
+                    </a>
+                </div>
+                <div class="col-md-4 profile">
+                    <a onclick="fire_wizard('student')">
+                        <i class="pull-left dv-students"></i>
+                        <h3>Estudantes e Profissionais</h3>
+                        <h4>Descubra informações sobre empregos disponíveis, renda por ocupação e cursos</h4>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="search" class="search-options">
+            <h2 class="text-center">... ou pesquise por:</h2>
+            <div class="col-md-6 col-lg-4 search-option">
+                <a onclick="start_selector('Location')">
+                    <i class="btn btn-white btn-circle dv-bra"></i>
+                    <h3 class="pull-left">Localidades Brasileiras</h3>
+                    <div class="clearfix"></div>
+                    <p class="clearfix">Perfil geral por região, estado, mesorregião, microrregião ou município brasileiro. Visualize dados de comércio exterior, atividade econômica, empregos e educação.</p>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4 search-option">
+                <a onclick="start_selector('Occupation')">
+                    <i class="btn btn-white btn-circle dv-occupation"></i>
+                    <h3 class="pull-left">Ocupações</h3>
+                    <div class="clearfix"></div>
+                    <p class="clearfix">Regiões que mais empregam por atividade profissional, cursos relacionados, salário médio e estatísticas de emprego por ano.</p>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4 search-option">
+                <a onclick="start_selector('Industry')">
+                    <i class="btn btn-white btn-circle dv-industry"></i>
+                    <h3 class="pull-left">Atividades Econômicas</h3>
+                    <div class="clearfix"></div>
+                    <p class="clearfix">Informações sobre taxa de empregos por região, salário médio por tipo de ocupação, renda mensal média e oportunidades econômicas.</p>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4 search-option">
+                <a onclick="start_selector('Product')">
+                    <i class="btn btn-white btn-circle dv-product"></i>
+                    <h3 class="pull-left">Produtos</h3>
+                    <div class="clearfix"></div>
+                    <p class="clearfix">Dados da Balança Comercial por produto, origem das importações e destino das exportações, ranking por localidade, atividades econômicas e ocupações relacionadas.</p>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4 search-option">
+                <a onclick="start_selector('TradePartner')">
+                    <i class="btn btn-white btn-circle dv-trade-partner"></i>
+                    <h3 class="pull-left">Parceiros Comerciais</h3>
+                    <div class="clearfix"></div>
+                    <p class="clearfix">Nações que importam ou exportam produtos para o Brasil, dados de comercialização por tipo de produto ou por município comercializador.</p>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4 search-option">
+                <a onclick="start_selector('University')">
+                    <i class="btn btn-white btn-circle dv-university"></i>
+                    <h3 class="pull-left">Universidades</h3>
+                    <div class="clearfix"></div>
+                    <p class="clearfix">Número de matrículas em cada curso ofertado, situação dos estudantes e perfis semelhantes de universidades.</p>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4 search-option col-lg-offset-2">
+                <a onclick="start_selector('Major')">
+                    <i class="btn btn-white btn-circle dv-major"></i>
+                    <h3 class="pull-left">Ensino Superior</h3>
+                    <div class="clearfix"></div>
+                    <p class="clearfix">Lista de universidades e municípios que ofertam o curso de Educação Superior ou o campo de estudo selecionado.</p>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4 search-option">
+                <a onclick="start_selector('BasicCourse')">
+                    <i class="btn btn-white btn-circle dv-basic-course"></i>
+                    <h3 class="pull-left">Educação Básica</h3>
+                    <div class="clearfix"></div>
+                    <p class="clearfix">Escolas do Brasil que oferecem educação profissional e ranking de matrículas na Educação Básica por município.</p>
+                </a>
+            </div>
+        </section>
+    </div>
+</div>
+
 {% endblock content %}

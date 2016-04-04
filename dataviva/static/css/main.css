@@ -62,6 +62,9 @@ body {
 .bg-gray {
   background-color: #f3f6f4;
 }
+.bg-blue {
+  background-color: #5a9dc4;
+}
 
 .bg-city-scratched {
   background: url(/static/img/bgs/city_scratched.png) no-repeat center bottom;
