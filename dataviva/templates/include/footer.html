@@ -1,0 +1,72 @@
+<footer class="bg-dark-green">
+    <div class="container">
+    <div class="col-sm-3 col-md-2 col-sm-offset-2 col-md-offset-1 col-lg-offset-0">
+        <ul>
+            <li><h3>Sobre</h3></li>
+            <li><a href="{{ url_for('about.index') }}" title="O Dataviva">O Dataviva</a></li>
+            <li><a href="{{ url_for('partners.index') }}" title="Parcerias">Parcerias</a></li>
+            <li><a href="{{ url_for('news.index') }}" title="Notícias">Notícias</a></li>
+            <li><a href="{{ url_for('blog.index') }}" title="Blog">Blog</a></li>
+        </ul>
+    </div>
+    <div class="col-sm-3 col-md-2">
+        <ul>
+            <li><h3>Explore</h3></li>
+            <li>
+                <ul>
+                    <li><a href="#" title="Pesquisa">Pesquisa</a></li>
+                    <li><a href="#" title="Localidades">Localidades</a></li>
+                    <li><a href="#" title="Produtos">Produtos</a></li>
+                    <li><a href="#" title="Ocupações">Ocupações</a></li>
+                    <li><a href="#" title="Atividades econômicas">Atividades econômicas</a></li>
+                    <li><a href="#" title="Parceiros comerciais">Parceiros comerciais</a></li>
+                    <li><a href="#" title="Cursos do Ensino Superior">Cursos do Ensino Superior</a></li>
+                    <li><a href="#" title="Cursos básicos">Cursos básicos</a></li>
+                </ul>
+            </li>
+            <li><a href="{{ url_for('rankings.index') }}" title="Visualize Rankings">Visualize Rankings</a></li>
+            <li><a href="{{ url_for('build_graph.index') }}" title="Crie seu gráfico">Crie seu gráfico</a></li>
+            <li><a href="{{ url_for('data_download.index') }}" title="Download de dados">Download de dados</a></li>
+        </ul>
+    </div>
+    <div class="col-sm-3 col-md-2">
+        <ul>
+            <li><h3>Suporte</h3></li>
+            <li><a href="{{ url_for('help.index') }}" title="Ajuda">Ajuda</a></li>
+            <li><a href="{{ url_for('help.index') }}" title="Tour Virtual">Tour Virtual</a></li>
+            <li><a class="visible-sm btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">Entre em contato</a></li>
+        </ul>
+    </div>
+    <a class="visible-xs col-xs-offset-3 col-xs-6 btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">Entre em contato</a>
+    <div class="col-xs-12 col-md-5 col-lg-6 visible-md visible-lg">
+        <h3>ENTRE EM CONTATO</h3>
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                <label for="footer-name" class="col-sm-3 control-label">Nome</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="footer-name" placeholder="Nome">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="footer-email" class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="footer-email" placeholder="E-mail">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="footer-message" class="col-sm-3 control-label">Mensagem</label>
+                <div class="col-sm-9">
+                    <textarea type="text" class="form-control" id="footer-message" placeholder="Mensagem"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-5 col-md-offset-3 col-xs-15 col-sm-10 col-md-11">
+                    <button type="submit" class="btn btn-white">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</footer>

@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section id="welcome" class="welcome bg-city-scratched">
+    <div class="container">
+        <div class="col-xs-12 col-sm-6 wow fadeInLeft">
+            <h2 class="m-b-md">A maior plataforma de visualização de dados sociais e econômicos do Brasil.<br/>Totalmente aberta e livre.</h2>
+            <p class="visible-md visible-lg">O DataViva é uma ferramenta de pesquisa que disponibiliza dados oficiais sobre exportações, atividade econômica, localidade, educação e ocupações de todo o Brasil. São 11 aplicativos, que, juntos, formam mais de 1 bilhão de possibilidades de visualizações.</p>
+        </div>
+        <div class="m-t-lg col-xs-12 col-sm-6 wow fadeInRight">
+            <ul>
+                <li data-toggle="popover" data-placement="top" data-content="Número de estabelecimentos por atividade econômica, porcentagem de profissionais graduados por ano em determinado curso por região, produtos similares por região, salário médio por segmento, e mais...">
+                    <a onclick="fire_wizard('entrepreneur')">
+                        <h3 class="text-uppercase">Empreendedores</h3>
+                        <p>
+                            Identifique o perfil econômico e as oportunidades de negócios de uma região
+                        </p>
+                    </a>
+                </li>
+                <li data-toggle="popover" data-placement="top" data-content="Principais parceiros comerciais de um produto por região, estados que mais importam um produto específico, atividade econômica por localidade, emprego e renda por segmento, e mais...">
+                    <a onclick="fire_wizard('development_agents')">
+                        <h3 class="text-uppercase">Agentes de Desenvolvimento</h3>
+                        <p>
+                            Avalie a criação de políticas de desenvolvimento de acordo com a localidade
+                        </p>
+                    </a>
+                </li>
+                <li data-toggle="popover" data-placement="top" data-content="Salário médio de uma atividade ou ocupação, cidades que concentram a maior taxa de empregos em uma atividade, cursos oferecidos por região, quantidade de matriculados em cada universidade, e mais...">
+                    <a onclick="fire_wizard('student')">
+                        <h3 class="text-uppercase">Estudantes e Profissionais</h3>
+                        <p>
+                            Descubra informações sobre empregos disponíveis, renda por ocupação e cursos
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 wow fadeInLeft">
+            <p>
+                <a href="{{ url_for('general.search') }}" class="btn btn-primary" title="Inicie uma pesquisa">Inicie uma pesquisa <i class="m-l-xl fa fa-angle-right"></i></a>
+            </p>
+            <p>
+                <a href="#" title="Assita ao vídeo Institucional" data-toggle="modal" data-target="#modal-dataviva-video">Assita ao vídeo Institucional</a>
+                ou
+                <a href="#" title="Assista a depoimentos" data-toggle="modal" data-target="#modal-dataviva-video">veja depoimentos</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<section id="databases" class="databases bg-greeny">
+    <div class="container text-center wow fadeInDown">
+        <div class="navy-line"></div>
+        <h2>Explore nossos bancos de dados</h2>
+        <p class="tagline">O DataViva reúne dados de diversas fontes: Emprego e Renda (RAIS), Comércio Exterior Brasileiro (SECEX/MDCI), Educação Básica e Ensino Técnico (Censo Escolar), Ensino Superior (Censo da Educação Superior) e Comércio Internacional (UN Comtrade).</p>
+        <div class="text-divider">
+            <h3 class="inner">O que você gostaria de conhecer?</h3>
+            <hr/>
+        </div>
+
+        <div class="row database-icons wow fadeInDown">
+            <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <a href="#" onclick="start_selector('Location');" data-toggle="popover" data-placement="top" data-content="Perfil geral por região, estado, mesorregião, microrregião ou município brasileiro. Visualize dados de comércio exterior, atividade econômica, empregos e educação. Exemplos: Sudeste, Mato Grosso, Recife, Região Metropolitana de Porto Alegre.">
+                    <p>Localidades Brasileiras</p>
+                    <button class="btn btn-white btn-circle" type="button"><i class="dv-bra"></i></button>
+                </a>
+            </div>
+            <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <a href="#" onclick="start_selector('Occupation');" data-toggle="popover" data-placement="top" data-content="Regiões que mais empregam por atividade profissional, cursos relacionados, salário médio e estatísticas de emprego por ano. Exemplos: Técnicos de Nível Médio, Trabalhadores da Indústria, Recepcionistas, Médicos Clínicos.">
+                    <p>Ocupações</p>
+                    <button class="btn btn-white btn-circle" type="button"><i class="dv-occupation"></i></button>
+                </a>
+            </div>
+            <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <a href="#" onclick="start_selector('Industry');" data-toggle="popover" data-placement="top" data-content="Informações sobre taxa de empregos por região, salário médio por tipo de ocupação, renda mensal média e oportunidades econômicas. Exemplos: Comércio, Serviços Domésticos, Educação, Restaurantes, Teleatendimento, Organizações Religiosas.">
+                    <p>Atividades Econômicas</p>
+                    <button class="btn btn-white btn-circle" type="button"><i class="dv-industry"></i></button>
+                </a>
+            </div>
+            <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <a href="#" onclick="start_selector('Product');" data-toggle="popover" data-placement="top" data-content="Dados da Balança Comercial por produto, origem das importações e destino das exportações, ranking por localidade, atividades econômicas e ocupações relacionadas. Exemplos: Gêneros Alimentícios, Artes e Antiguidades, Minério de Ferro, Café, Peças para Veículos.">
+                    <p>Produtos</p>
+                    <button class="btn btn-white btn-circle" type="button"><i class="dv-product"></i></button>
+                </a>
+            </div>
+            <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <a href="#" onclick="start_selector('TradePartner');" data-toggle="popover" data-placement="top" data-content="Nações que importam ou exportam produtos para o Brasil, dados de comercialização por tipo de produto ou por município comercializador. Exemplos: Ásia, África, Europa, México, Japão, Estados Unidos, China, Holanda, Irã.">
+                    <p>Parceiros Comerciais</p>
+                    <button class="btn btn-white btn-circle" type="button"><i class="dv-trade-partner"></i></button>
+                </a>
+            </div>
+            <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <a href="#" onclick="start_selector('University');" data-toggle="popover" data-placement="top" data-content="Número de matrículas em cada curso ofertado, situação dos estudantes e perfis semelhantes de universidades. Exemplos: Universidade de São Paulo, Pontifícia Universidade Católica de Goiás, Universidade Federal de Minas Gerais.">
+                    <p>Universidades</p>
+                    <button class="btn btn-white btn-circle" type="button"><i class="dv-university"></i></button>
+                </a>
+            </div>
+            <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2 col-sm-offset-2 col-md-offset-0 col-lg-offset-4">
+                <a href="#" onclick="start_selector('Major');" data-toggle="popover" data-placement="top" data-content="Lista de universidades e municípios que ofertam o curso de Educação Superior ou o campo de estudo selecionado. Exemplos: Educação, Ciências da Saúde, Direito, Engenharia de Produção, Fisioterapia.">
+                    <p>Ensino Superior</p>
+                    <button class="btn btn-white btn-circle" type="button"><i class="dv-major"></i></button>
+                </a>
+            </div>
+            <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <a href="#" onclick="start_selector('BasicCourse');" data-toggle="popover" data-placement="top" data-content="Escolas do Brasil que oferecem educação profissional e ranking de matrículas na Educação Básica por município. Exemplos: Ensino Fundamental, Ensino Médio, Técnico em Enfermagem, Técnico em Agropecuária.">
+                    <p>Educação Básica</p>
+                    <button class="btn btn-white btn-circle" type="button"><i class="dv-basic-course"></i></button>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "include/partners.html" %}
+
+<section id="signup" class="signup bg-greeny">
+    <div class="navy-line"></div>
+    <div class="container text-center wow fadeInDown">
+        <h2>Cadastre-se gratuitamente e aproveite o DataViva ao máximo</h2>
+        <p class="tagline">Salve os gráficos que precisar e crie análises personalizadas. Ao fazer o cadastro você terá acesso a recursos exclusivos para facilitar sua pesquisa.</p>
+        <a role="button" class="m-t-lg btn btn-primary" data-toggle="modal" data-target="#dataviva-signup">Cadastrar Gratuitamente</a>
+    </div>
+</section>
+
+<section id="midia" class="midia bg-white">
+    <div class="container text-center">
+        <div class="navy-line wow fadeInDown"></div>
+        <h2 class="m-b-lg wow fadeInDown">Notícias</h2>
+        <div class="row">
+            {% for publication in news %}
+                <div class="col-sm-4 wow {% if loop.first %} fadeInLeftBig {% elif loop.last %} fadeInRightBig {% else %} fadeInDown {% endif %}">
+                    <a href="{{url_for('news.show', id=publication.id)}}" title="{{ publication.title }}">
+                        <img src="{{publication.thumb}}" class="img-responsive">
+                    </a>
+                    <p>
+                        {{ publication.title }}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %}
+

@@ -1,0 +1,63 @@
+<div role="tabpanel" class="tab-pane" id="education">
+    <h2>Estatísticas de Educação</h2>
+    <div class="row">
+        <div class="col-xs-15 col-sm-15 col-md-12">
+            <div class="table-responsive">
+                <table class="table data-blue">
+                    <thead>
+                        <tr>
+                            <th>
+                                Universidade <small>com Maior Número de Matrículas</small>
+                            </th>
+                            <th>
+                                Curso Superior com <small>Maior Número de Matrículas</small>
+                            </th>
+                            <th>
+                                Escola <small>com Maior Número de Matrículas em Cursos Técnicos</small>
+                            </th>
+                            <th>
+                                Curso Técnico <small>com Maior Número de Matrículas</small>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% if body.highest_enrolled_by_university %}
+                            <td>
+                                <p class="label">{{ body.highest_enrolled_by_university_name }}</p>
+                                <div class="number">
+                                    <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_university | magnitude }}</span>
+                                </div>
+                            </td>
+                            {% endif %}
+                            {% if body.highest_enrolled_by_major %}
+                            <td>
+                                <p class="label">{{ body.highest_enrolled_by_major_name }}</p>
+                                <div class="number">
+                                    <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_major | magnitude }}</span>
+                                </div>
+                            </td>
+                            {% endif %}
+                            {% if body.highest_enrolled_by_school %}
+                            <td>
+                                <p class="label">{{ body.highest_enrolled_by_school_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_school | magnitude }}</span>
+                                </div>
+                            </td>
+                            {% endif %}
+                            {% if body.highest_enrolled_by_basic_course %}
+                            <td>
+                                <p class="label">{{ body.highest_enrolled_by_basic_course_name }}</p>
+                                <div class="number">
+                                    USD <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
+                                </div>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
