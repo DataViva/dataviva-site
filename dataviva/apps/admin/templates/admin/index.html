@@ -4,7 +4,36 @@
     <li class="active">Admin</li>
 {% endblock %}
 
-
 {% block admin_content %}
+
+<div class="admin-main">
+    <div class="row m-b-xl">
+        <img src="/static/img/logo-dataviva.png" alt="Dataviva logo" class="img-responsive">
+    </div>
+    <div class="col-md-3">
+        <a  class="btn btn-white btn-square" href="{{ url_for('news.admin') }}" title="Notícias">
+            <i class="fa fa-commenting-o"></i>
+            Notícias
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a  class="btn btn-white btn-square" href="{{ url_for('blog.admin') }}" title="Blog">
+            <i class="fa fa-commenting-o"></i>
+            Blog
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a  class="btn btn-white btn-square" href="#" title="Chamadas">
+            <i class="fa fa-commenting-o"></i>
+            Chamadas
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a  class="btn btn-white btn-square" href="#" title="Perguntas">
+            <i class="fa fa-commenting-o"></i>
+            Perguntas
+        </a>
+    </div>
+</div>
 
 {% endblock admin_content %}
