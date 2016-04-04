@@ -120,7 +120,6 @@ def after_request(response):
     return response
 
 @mod.route('/', methods=['GET'])
-@view_cache.cached(key_prefix=api_cache_key("homepage"))
 def home():
     g.page_type = 'home'
 
