@@ -23,12 +23,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    pass
-
-
-@mod.route('/location/wages-and-employment', methods=['GET'])
-def location_wages():
-    return render_template('rankings/location-wages.html')
+    return render_template('rankings/index.html')
 
 
 @mod.route('/location/international-trade', methods=['GET'])
@@ -36,14 +31,24 @@ def location_international_trade():
     return render_template('rankings/location-international-trade.html')
 
 
-@mod.route('/economic-activities', methods=['GET'])
-def economic_activities():
-    return render_template('rankings/economic-activities.html')
+@mod.route('/location/wages-and-employment', methods=['GET'])
+def location_wages():
+    return render_template('rankings/location-wages.html')
 
 
 @mod.route('/occupation', methods=['GET'])
 def occupation():
     return render_template('rankings/occupation.html')
+
+
+@mod.route('/economic-activities', methods=['GET'])
+def economic_activities():
+    return render_template('rankings/economic-activities.html')
+
+
+@mod.route('/product', methods=['GET'])
+def product():
+    return render_template('rankings/product.html')
 
 
 @mod.route('/trade-partner', methods=['GET'])
@@ -54,11 +59,6 @@ def trade_partner():
 @mod.route('/university', methods=['GET'])
 def university():
     return render_template('rankings/university.html')
-
-
-@mod.route('/product', methods=['GET'])
-def product():
-    return render_template('rankings/product.html')
 
 
 @mod.route('/major', methods=['GET'])
