@@ -538,10 +538,30 @@ def dictionary():
         "welcome": gettext("Welcome"),
         "view_rankings": gettext("VIEW RANKINGS"),
         "make_graphs": gettext("MAKE GRAPHS"),
-        "database_download": gettext("DATABASE DOWNLOAD")
+        "database_download": gettext("DATABASE DOWNLOAD"),
 
-
-        
+        #home
+        "largest_plataform": gettext("Brazils largest platform for social and economic data search."),
+        "totaly_open_and_free": gettext("Totally open and free."),
+        "description": gettext("DataViva is a research tool that provides official data about exportation, economic activity, locality, education and occupation in Brazil. It consists of 11 apps that combined enable more than 1 billion visualizations."),
+        "get_started": gettext("Get started "),
+        "watch_videos": gettext("Watch the site video"),
+        "testemonials":gettext("watch the testimonials"),
+        "entrepreneurs": gettext("Entrepreneurs"),
+        "entrepreneurs_text": gettext("Identify the economic profile and business opportunities of a region"),
+        "development_agents": gettext("DEVELOPMENT AGENTS"),
+        "developments_agents_text": gettext("Assess development policies setting by location"),
+        "STUDENTS_AND_PROFESSIONALS": gettext("STUDENTS AND PROFESSIONALS"),
+        "students_and_professionals": gettext("Find information about available jobs, income per occupation and courses"),
+        "explore_our_database": gettext("Explore our database"),
+        "explore_our_database_text": gettext(u"DataViva gathers data from several sources: Employment and Income (RAIS), Brazilian International Trade (SECEX/MDCI), Basic and Technical Education (Censo Escolar), Post-Secondary Education (Censo da Educação Superior) and UN Comtrade International Trade."),
+        "what_would_you_like_to_know": gettext("What would you like to know?"),
+        "brasilian_locations": gettext("Brazilian Locations"),
+        "econimic_activities": gettext("Economic Activities"),
+        "sing_up_free_and": gettext("Sign Up free and make the most of DataViva"),
+        "save_graphs": gettext("Save the graphs you need and get our free content in your e-mail. Signing up gives you access to exclusive resources to facilitate your research."),
+        "free_sing_up": gettext("Free Sign Up"),
+        "partners": gettext("Parceiros"),
 
     }
 

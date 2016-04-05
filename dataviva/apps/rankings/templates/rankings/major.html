@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="btn-group">
+        <button id="major-fields" class="btn btn-white">Campos</button>
+        <button id="major-majors" class="btn btn-white">Ensino Superior</button>
+    </div>
+    <select class="btn btn-white year-selector" id="year-selector"><option value="">Year</option></select>
+</div>
+
+<table id="major-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>enrolled</th>
+            <th>graduates</th>
+            <th>entrants</th>
+            <th>morning</th>
+            <th>afternoon</th>
+            <th>night</th>
+            <th>full_time</th>
+            <th>age</th>
+            <th>graduates_growth</th>
+            <th>enrolled_growth</th>
+            <th>year</th>
+            <th>course_hedu_id</th>
+        </tr>
+    </thead>
+</table>
+{% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/rankings/major.js"></script>
+{% endblock js_assets %}
