@@ -3,13 +3,13 @@
 {% block content %}
 <div class="container">
     <div class="btn-group">
-        <button id="occupation-wages-families" class="btn btn-white">Famílias</button>
-        <button id="occupation-wages-groups" class="btn btn-white">Grandes Grupos</button>
+        <button id="occupation-families" class="btn btn-white">Famílias</button>
+        <button id="occupation-groups" class="btn btn-white">Grandes Grupos</button>
     </div>
     <select class="btn btn-white year-selector" id="year-selector"><option value="">Ano</option></select>
 </div>
 
-<table id="occupation-wages-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="occupation-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>year</th>
@@ -36,5 +36,5 @@
 {% endblock content %}
 
 {% block js_assets %}
-    <script src="/static/js/modules/rankings/occupation-wages.js"></script>
+    <script src="/static/js/modules/rankings/occupation.js"></script>
 {% endblock js_assets %}
