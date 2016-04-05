@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="btn-group">
+        <button id="economic-activities-sections" class="btn btn-white">Seções</button>
+        <button id="economic-activities-divisions" class="btn btn-white">Divisões</button>
+        <button id="economic-activities-classes" class="btn btn-white">Classes</button>
+    </div>
+    <select class="btn btn-white year-selector" id="year-selector"><option value="">Year</option></select>
+</div>
+
+<table id="economic-activities-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>wage</th>
+            <th>num_emp</th>
+            <th>num_jobs</th>
+            <th>num_est</th>
+            <th>wage_avg</th>
+            <th>age_avg</th>
+            <th>wage_growth</th>
+            <th>wage_growth_5</th>
+            <th>num_emp_growth</th>
+            <th>num_emp_growth_5</th>
+            <th>year</th>
+            <th>cnae_id</th>
+            <th>cbo_diversity</th>
+            <th>cbo_diversity_eff</th>
+            <th>bra_diversity</th>
+            <th>bra_diversity_eff</th>
+            <th>hist</th>
+            <th>gin</th>
+        </tr>
+    </thead>
+</table>
+{% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/rankings/economic-activities.js"></script>
+{% endblock js_assets %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
