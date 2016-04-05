@@ -59,7 +59,7 @@
                         <h2 class="text-left text-uppercase">ECI</h2>
                         <div class="number">
                             <strong class="counter">{{ header.eci|max_digits(3) }}</strong><br/>
-                            <small class="magnitude">{{ header.eci|magnitude }} {{"de" }} KM</small>
+                            <small class="magnitude">{{ header.eci|magnitude }}</small>
                         </div>
                     </div>
                 </li>
@@ -70,7 +70,6 @@
         <a href="#" class="fa fa-angle-left jcarousel-control-prev"></a>
         <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
     </div>
-
     <div class="m-t-sm col-xs-12 year">
         Ano: {{ header.year }}
     </div>

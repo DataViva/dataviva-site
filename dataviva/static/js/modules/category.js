@@ -40,6 +40,10 @@ $(document).ready(function () {
         $('.jcarousel-control-next').jcarouselControl({
             target: '+=1'
         });
+
+        if ($('.jcarousel-wrapper .jcarousel ul li') > 4) {
+
+        }
     });
 
     if(document.location.hash) {
@@ -54,7 +58,7 @@ $(document).ready(function () {
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         if ($(this).attr('graph') != null) {
-            var category = this.dataset.category,
+            var category = this.dataset.id,
                 location = this.dataset.location,
                 tab = $(this).attr('aria-controls');
 
