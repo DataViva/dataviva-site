@@ -3,9 +3,9 @@
     <div class="col-sm-3 col-md-2 col-sm-offset-2 col-md-offset-1 col-lg-offset-0">
         <ul>
             <li><h3>{% trans %}About{% endtrans %}</h3></li>
-            <li><a href="{{ url_for('about.index') }}" title="O Dataviva">O Dataviva</a></li>
-            <li><a href="{{ url_for('partners.index') }}" title="Parcerias">Parcerias</a></li>
-            <li><a href="{{ url_for('news.index') }}" title="Notícias">Notícias</a></li>
+            <li><a href="{{ url_for('about.index') }}" title="O Dataviva">{% trans %}The{% endtrans %} Dataviva</a></li>
+            <li><a href="{{ url_for('partners.index') }}" title="Parcerias">{% trans %}Partners{% endtrans %}</a></li>
+            <li><a href="{{ url_for('news.index') }}" title="Notícias">{% trans %}News{% endtrans %}</a></li>
             <li><a href="{{ url_for('blog.index') }}" title="Blog">Blog</a></li>
         </ul>
     </div>

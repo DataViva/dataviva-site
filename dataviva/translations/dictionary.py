@@ -567,6 +567,7 @@ def dictionary():
         "about_min": gettext("About"),
         "support": gettext("Support"),
         "contact_us": gettext("Contact Us"),
+        "the": gettext("The"),
 
     }
 

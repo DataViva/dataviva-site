@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-05 14:33-0300\n"
+"POT-Creation-Date: 2016-04-05 14:38-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2219,6 +2219,11 @@ msgstr ""
 msgid "About"
 msgstr ""
 
+#: dataviva/templates/include/footer.html:6
+#: dataviva/translations/dictionary.py:570
+msgid "The"
+msgstr ""
+
 #: dataviva/templates/include/footer.html:14
 msgid "Explore"
 msgstr ""
@@ -3463,25 +3468,25 @@ msgstr ""
 msgid "Parceiros"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:578
+#: dataviva/translations/dictionary.py:579
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:579
+#: dataviva/translations/dictionary.py:580
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:580
+#: dataviva/translations/dictionary.py:581
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:581
+#: dataviva/translations/dictionary.py:582
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""
