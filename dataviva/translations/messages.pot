@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-05 14:38-0300\n"
+"POT-Creation-Date: 2016-04-05 14:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -232,6 +232,7 @@ msgstr ""
 
 #: dataviva/apps/data/views.py:82 dataviva/templates/about.html:38
 #: dataviva/templates/general/index.html:102
+#: dataviva/templates/include/footer.html:23
 #: dataviva/translations/dictionary.py:293
 msgid "Higher Education"
 msgstr ""
@@ -601,12 +602,14 @@ msgstr ""
 
 #: dataviva/templates/about.html:62 dataviva/templates/general/index.html:72
 #: dataviva/templates/general/select.html:29
+#: dataviva/templates/include/footer.html:20
 #: dataviva/translations/dictionary.py:159
 #: dataviva/translations/dictionary.py:354
 msgid "Occupations"
 msgstr ""
 
 #: dataviva/templates/about.html:66 dataviva/templates/general/index.html:84
+#: dataviva/templates/include/footer.html:19
 #: dataviva/translations/dictionary.py:356
 msgid "Products"
 msgstr ""
@@ -629,7 +632,8 @@ msgstr ""
 msgid "Universities"
 msgstr ""
 
-#: dataviva/templates/about.html:82 dataviva/translations/dictionary.py:368
+#: dataviva/templates/about.html:82 dataviva/templates/include/footer.html:24
+#: dataviva/translations/dictionary.py:368
 msgid "Basic Courses"
 msgstr ""
 
@@ -786,6 +790,7 @@ msgstr ""
 
 #: dataviva/templates/site.html:30 dataviva/templates/about/crosswalk.html:10
 #: dataviva/templates/about/ask/index.html:27
+#: dataviva/templates/include/footer.html:17
 #: dataviva/translations/dictionary.py:460
 msgid "Search"
 msgstr ""
@@ -2130,11 +2135,13 @@ msgid ""
 msgstr ""
 
 #: dataviva/templates/general/index.html:78
+#: dataviva/templates/include/footer.html:21
 #: dataviva/translations/dictionary.py:560
 msgid "Economic Activities"
 msgstr ""
 
 #: dataviva/templates/general/index.html:90
+#: dataviva/templates/include/footer.html:22
 #: dataviva/translations/dictionary.py:360
 msgid "Trade Partners"
 msgstr ""
@@ -2157,6 +2164,7 @@ msgid "Free Sign Up"
 msgstr ""
 
 #: dataviva/templates/general/index.html:130
+#: dataviva/templates/include/footer.html:8
 #: dataviva/templates/include/header.html:5
 #: dataviva/translations/dictionary.py:523
 msgid "News"
@@ -2224,8 +2232,33 @@ msgstr ""
 msgid "The"
 msgstr ""
 
+#: dataviva/templates/include/footer.html:7
+#: dataviva/templates/include/partners.html:4
+msgid "Partners"
+msgstr ""
+
 #: dataviva/templates/include/footer.html:14
 msgid "Explore"
+msgstr ""
+
+#: dataviva/templates/include/footer.html:18
+#: dataviva/translations/dictionary.py:352
+msgid "Locations"
+msgstr ""
+
+#: dataviva/templates/include/footer.html:27
+#: dataviva/translations/dictionary.py:573
+msgid "View Rankings"
+msgstr ""
+
+#: dataviva/templates/include/footer.html:28
+#: dataviva/translations/dictionary.py:572
+msgid "Make Graphs"
+msgstr ""
+
+#: dataviva/templates/include/footer.html:29
+#: dataviva/translations/dictionary.py:571
+msgid "Database Download"
 msgstr ""
 
 #: dataviva/templates/include/footer.html:34
@@ -2311,10 +2344,6 @@ msgstr ""
 #: dataviva/templates/include/header.html:57
 #: dataviva/translations/dictionary.py:526
 msgid "Portuguese"
-msgstr ""
-
-#: dataviva/templates/include/partners.html:4
-msgid "Partners"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:19
@@ -3127,10 +3156,6 @@ msgstr ""
 msgid "MDIC ID"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:352
-msgid "Locations"
-msgstr ""
-
 #: dataviva/translations/dictionary.py:369
 msgid "Sending Location"
 msgstr ""
@@ -3468,25 +3493,25 @@ msgstr ""
 msgid "Parceiros"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:579
+#: dataviva/translations/dictionary.py:582
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:580
+#: dataviva/translations/dictionary.py:583
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:581
+#: dataviva/translations/dictionary.py:584
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:582
+#: dataviva/translations/dictionary.py:585
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""

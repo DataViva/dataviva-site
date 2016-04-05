@@ -538,7 +538,7 @@ def dictionary():
         "welcome": gettext("Welcome"),
         "view_rankings": gettext("VIEW RANKINGS"),
         "make_graphs": gettext("MAKE GRAPHS"),
-        "database_download": gettext("DATABASE DOWNLOAD"),
+        "DATABASE_download": gettext("DATABASE DOWNLOAD"),
 
         #home
         "largest_plataform": gettext("Brazils largest platform for social and economic data search."),
@@ -568,6 +568,9 @@ def dictionary():
         "support": gettext("Support"),
         "contact_us": gettext("Contact Us"),
         "the": gettext("The"),
+        "database_download": gettext("Database Download"),
+        "make_grohs": gettext("Make Graphs"),
+        "view_rankings": gettext("View Rankings"),
 
     }
 
