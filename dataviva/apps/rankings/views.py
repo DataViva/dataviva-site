@@ -36,9 +36,14 @@ def location_international_trade():
     return render_template('rankings/location-international-trade.html')
 
 
-@mod.route('/occupation/wages-and-employment', methods=['GET'])
-def occupation_wages():
-    return render_template('rankings/occupation-wages.html')
+@mod.route('/economic-activities', methods=['GET'])
+def economic_activities():
+    return render_template('rankings/economic-activities.html')
+
+
+@mod.route('/occupation', methods=['GET'])
+def occupation():
+    return render_template('rankings/occupation.html')
 
 
 @mod.route('/trade-partner', methods=['GET'])
