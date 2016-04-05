@@ -10,25 +10,35 @@
     </div>
 </div>
 
-<div class="container">
-    <nav class="sidebar col-md-3">
-        <ul class="sub-menu">
-            <li><a href="" title="Location">Localidades</a></li>
-            <li><a href="{{ url_for('rankings.location_international_trade') }}" title="International Trade">Comércio Internacional</a></li>
-            <li><a href="{{ url_for('rankings.location_wages') }}" title="Wages">Salário e Emprego</a></li>
-            <li><a href="{{ url_for('rankings.occupation') }}" title="Ocuppation">Ocupações</a></li>
-            <li><a href="{{ url_for('rankings.economic_activities') }}" title="Economic Activities">Atividades Econômicas</a></li>
-            <li><a href="{{ url_for('rankings.product') }}" title="Product">Produtos</a></li>
-            <li><a href="{{ url_for('rankings.trade_partner') }}" title="Trade Partner">Parceiros Comerciais</a></li>
-            <li><a href="{{ url_for('rankings.university') }}" title="University">Universidades</a></li>
-            <li><a href="{{ url_for('rankings.major') }}" title="Major">Curso Superior</a></li>
-            <li><a href="{{ url_for('rankings.basic_course') }}" title="Basic Course">Curso Básico</a></li>
-        </ul>
-    </nav>
-    <section id="rankings" class="col-md-9">
-        <h1>Rankings</h1>
-        {% block rankings_content %}
-        {% endblock rankings_content %}
-    </section>
-</div>
+<section id="rankings">
+    <div class="container">
+        <nav class="nav-rankings col-xs-12 col-md-3">
+            <div class="list-group panel">
+                <a href="#locations" class="list-group-item" data-toggle="collapse" data-parent="#locations">Localidades</a>
+                <div class="collapse" id="locations">
+                    <a class="list-subgroup-item" href="{{ url_for('rankings.location_international_trade') }}" data-parent="#locations">
+                        Comércio Internacional
+                    </a>
+                    <a class="list-subgroup-item" href="{{ url_for('rankings.location_wages') }}" data-parent="#locations">
+                        Salário e Emprego
+                   </a>
+                </div>
+                <a href="{{ url_for('rankings.occupation') }}" class="list-group-item">Ocupações</a>
+                <a href="{{ url_for('rankings.economic_activities') }}" class="list-group-item">Atividades Econômicas</a>
+                <a href="{{ url_for('rankings.product') }}" class="list-group-item">Produtos</a>
+                <a href="{{ url_for('rankings.trade_partner') }}" class="list-group-item">Parceiros Comerciais</a>
+                <a href="{{ url_for('rankings.university') }}" class="list-group-item">Universidades</a>
+                <a href="{{ url_for('rankings.major') }}" class="list-group-item">Curso Superior</a>
+                <a href="{{ url_for('rankings.basic_course') }}" class="list-group-item">Curso Básico</a>
+            </div>
+        </nav>
+
+        <div id="ranking" class="col-md-9">
+            <h1>Rankings</h1>
+            {% block rankings_content %}
+            {% endblock rankings_content %}
+        </div>
+
+    </div>
+</section>
 {% endblock content %}
