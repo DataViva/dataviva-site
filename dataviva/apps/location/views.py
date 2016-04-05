@@ -20,7 +20,7 @@ mod = Blueprint('location', __name__,
 
 @mod.before_request
 def before_request():
-    g.page_type = mod.name
+    g.page_type = 'category'
 
 
 @mod.url_value_preprocessor
