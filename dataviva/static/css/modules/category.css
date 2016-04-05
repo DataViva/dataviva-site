@@ -1,13 +1,13 @@
-.location .header .name {
+.category .header .name {
   height: 90px;
 }
 @media (max-width: 767px) {
-  .location .header .name {
+  .category .header .name {
     height: 200px;
     margin-bottom: 10px;
   }
 }
-.location .header h1 {
+.category .header h1 {
   display: inline-block;
   background: #FFF;
   color: #5a9dc4;
@@ -17,17 +17,17 @@
   margin-top: 29px;
 }
 @media (max-width: 767px) {
-  .location .header h1 {
+  .category .header h1 {
     margin-left: 20px;
     margin-top: 130px;
   }
 }
-.location .header h1 a {
+.category .header h1 a {
   color: #5a9dc4;
   font-size: 12px;
   font-weight: 600;
 }
-.location .portrait {
+.category .portrait {
   background: white;
   color: #9EDDBF;
   font-size: 130px;
@@ -41,105 +41,105 @@
   padding: 10px;
   margin-left: 60px;
 }
-.location .nav-tabs {
+.category .nav-tabs {
   list-style-type: none;
   list-style: none;
   margin: 0;
   padding: 0;
   border: none;
 }
-.location .nav-tabs li {
+.category .nav-tabs li {
   background: rgba(229, 241, 233, 0.37);
   float: none;
   margin: 0px;
   font-size: 13px;
   font-weight: 300;
 }
-.location .nav-tabs li a {
+.category .nav-tabs li a {
   text-decoration: none;
   border: none;
   margin: 0;
 }
-.location .nav-tabs li.active a {
+.category .nav-tabs li.active a {
   background: #5a9dc4;
   text-decoration: none;
   border: none;
   color: #FFF;
   margin: 0;
 }
-.location .nav-tabs li:nth-child(odd) {
+.category .nav-tabs li:nth-child(odd) {
   background: #dfe7e2;
 }
-.location .nav-tabs li a {
+.category .nav-tabs li a {
   border-radius: 0;
   display: block;
   font-size: 16px;
   line-height: 40px;
   padding: 0 2rem;
 }
-.location .profile .tab-content {
+.category .profile .tab-content {
   margin-top: -130px;
 }
 @media (max-width: 767px) {
-  .location .profile .tab-content {
+  .category .profile .tab-content {
     margin-top: 0px;
   }
 }
 /* WIDGETS */
-.location .widget {
+.category .widget {
   font-size: 10px;
   font-weight: 400;
   border-bottom: 3px solid rgba(190, 230, 205, 0.37);
   margin: 0px 10px;
 }
-.location .widget h2 {
+.category .widget h2 {
   font-size: 10px;
   font-weight: 400;
   height: 10px;
 }
-.location .widget .number {
+.category .widget .number {
   color: #5a9dc4;
   font-size: 18px;
   font-weight: 300;
   margin-top: -5px;
 }
-.location .widget .number .counter {
+.category .widget .number .counter {
   font-size: 29px;
   font-weight: 700;
 }
-.location .widget .number .magnitude {
+.category .widget .number .magnitude {
   display: block;
   font-size: 12px;
   margin-top: -7px;
   height: 15px;
 }
 /** Carousel **/
-.location .jcarousel-wrapper {
+.category .jcarousel-wrapper {
   position: relative;
   padding-right: 20px;
 }
 @media (max-width: 767px) {
-  .location .jcarousel-wrapper {
+  .category .jcarousel-wrapper {
     padding: 0px 40px;
   }
 }
-.location .jcarousel {
+.category .jcarousel {
   position: relative;
   overflow: hidden;
   width: 100%;
 }
-.location .jcarousel ul {
+.category .jcarousel ul {
   width: 20000em;
   position: relative;
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.location .jcarousel li {
+.category .jcarousel li {
   float: left;
 }
-.location .jcarousel-control-prev,
-.location .jcarousel-control-next {
+.category .jcarousel-control-prev,
+.category .jcarousel-control-next {
   position: absolute;
   top: 50%;
   margin-top: -15px;
@@ -150,47 +150,47 @@
   font-size: 45px;
   color: #5A9DC4;
 }
-.location .jcarousel-control-prev:hover,
-.location .jcarousel-control-prev:focus,
-.location .jcarousel-control-next:hover,
-.location .jcarousel-control-next:focus {
+.category .jcarousel-control-prev:hover,
+.category .jcarousel-control-prev:focus,
+.category .jcarousel-control-next:hover,
+.category .jcarousel-control-next:focus {
   text-decoration: none;
 }
-.location .jcarousel-control-prev {
+.category .jcarousel-control-prev {
   left: -25px;
 }
 @media (max-width: 767px) {
-  .location .jcarousel-control-prev {
+  .category .jcarousel-control-prev {
     left: 0px;
   }
 }
-.location .jcarousel-control-next {
+.category .jcarousel-control-next {
   right: -10px;
 }
 @media (max-width: 767px) {
-  .location .jcarousel-control-next {
+  .category .jcarousel-control-next {
     right: 0px;
   }
 }
-.location .table.data-detail {
+.category .table.data-detail {
   margin-bottom: 0px;
 }
-.location table.data-detail > tbody td,
-.location table.data-detail > tbody th {
+.category table.data-detail > tbody td,
+.category table.data-detail > tbody th {
   border-top: none;
   vertical-align: top;
   width: 50%;
 }
-.location table.data-detail > tbody td {
+.category table.data-detail > tbody td {
   font-size: 18px;
   font-weight: 700;
   line-height: 20px;
 }
-.location table.data-detail > tbody td,
-.location table.data-detail > tbody td .label {
+.category table.data-detail > tbody td,
+.category table.data-detail > tbody td .label {
   color: #5a9dc4;
 }
-.location table.data-detail > tbody td .label {
+.category table.data-detail > tbody td .label {
   display: block;
   font-size: 14px;
   margin: 0;
@@ -198,65 +198,62 @@
   text-align: left;
   text-transform: uppercase;
 }
-.location table.data-detail > tbody td span {
+.category table.data-detail > tbody td span {
   display: block;
 }
-.location table.data-detail > tbody th {
+.category table.data-detail > tbody th {
   font-size: 13px;
   font-weight: 400;
   line-height: 15px;
   text-align: right;
 }
-.location .profile h3 {
+.category .profile h3 {
   margin: 20px 20px 0px 20px;
   height: 30px;
 }
-.location .table-responsive {
+.category .table-responsive {
   height: 280px;
 }
 
-.location .graphs {
+.category .graphs {
   margin-top: 40px;
 }
-.location .graphs .container {
+.category .graphs .container {
   width: 90%;
   padding: 20px;
 }
-.location .graphs .embed-responsive {
+.category .graphs .embed-responsive {
   max-height: 900px;
 }
 
 
-.location .nav-graph h4 {
+.category .nav-graph h4 {
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
   margin: 10px;
 }
-.location .nav-graph h4 a {
+.category .nav-graph h4 a {
     padding-left: 10px;
     color: inherit;
 }
-.location .nav-graph .panel {
+.category .nav-graph .panel {
    border: 1px solid #000;
    border-radius: 0px;
    margin: 0px;
 }
-.location .nav-graph .collapse a,
-.location .nav-graph .collapsing a {
+.category .nav-graph .collapse a,
+.category .nav-graph .collapsing a {
     padding: 5px 10px 5px 40px;
 }
-.location .nav-graph .list-group-item {
+.category .nav-graph .list-group-item {
   margin: 0px;
   border: none;
   border-radius: 0;
   font-size: 14px;
 }
-.location .nav-graph .list-group-item:active,
-.location .nav-graph .list-group-item:focus {
+.category .nav-graph .list-group-item:active,
+.category .nav-graph .list-group-item:focus {
   background: #5a9dc4;
   color: #FFF;
 }
-
-
-
