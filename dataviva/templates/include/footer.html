@@ -2,50 +2,50 @@
     <div class="container">
     <div class="col-sm-3 col-md-2 col-sm-offset-2 col-md-offset-1 col-lg-offset-0">
         <ul>
-            <li><h3>Sobre</h3></li>
-            <li><a href="{{ url_for('about.index') }}" title="O Dataviva">O Dataviva</a></li>
-            <li><a href="{{ url_for('partners.index') }}" title="Parcerias">Parcerias</a></li>
-            <li><a href="{{ url_for('news.index') }}" title="Notícias">Notícias</a></li>
+            <li><h3>{% trans %}About{% endtrans %}</h3></li>
+            <li><a href="{{ url_for('about.index') }}" title="O Dataviva">{% trans %}The{% endtrans %} Dataviva</a></li>
+            <li><a href="{{ url_for('partners.index') }}" title="Parcerias">{% trans %}Partners{% endtrans %}</a></li>
+            <li><a href="{{ url_for('news.index') }}" title="Notícias">{% trans %}News{% endtrans %}</a></li>
             <li><a href="{{ url_for('blog.index') }}" title="Blog">Blog</a></li>
         </ul>
     </div>
     <div class="col-sm-3 col-md-2">
         <ul>
-            <li><h3>Explore</h3></li>
+            <li><h3>{% trans %}Explore{%endtrans%}</h3></li>
             <li>
                 <ul>
-                    <li><a href="#" title="Pesquisa">Pesquisa</a></li>
-                    <li><a href="#" title="Localidades">Localidades</a></li>
-                    <li><a href="#" title="Produtos">Produtos</a></li>
-                    <li><a href="#" title="Ocupações">Ocupações</a></li>
-                    <li><a href="#" title="Atividades econômicas">Atividades econômicas</a></li>
-                    <li><a href="#" title="Parceiros comerciais">Parceiros comerciais</a></li>
-                    <li><a href="#" title="Cursos do Ensino Superior">Cursos do Ensino Superior</a></li>
-                    <li><a href="#" title="Cursos básicos">Cursos básicos</a></li>
+                    <li><a href="#" title="Pesquisa">{% trans %}Search{% endtrans %}</a></li>
+                    <li><a href="#" title="Localidades">{% trans %}Locations{% endtrans %}</a></li>
+                    <li><a href="#" title="Produtos">{% trans %}Products{% endtrans %}</a></li>
+                    <li><a href="#" title="Ocupações">{% trans %}Occupations{% endtrans %}</a></li>
+                    <li><a href="#" title="Atividades econômicas">{% trans %}Economic Activities{% endtrans %}</a></li>
+                    <li><a href="#" title="Parceiros comerciais">{% trans %}Trade Partners{% endtrans %}</a></li>
+                    <li><a href="#" title="Cursos do Ensino Superior">{% trans %}Higher Education{% endtrans %}</a></li>
+                    <li><a href="#" title="Cursos básicos">{% trans %}Basic Courses{% endtrans %}</a></li>
                 </ul>
             </li>
-            <li><a href="{{ url_for('rankings.index') }}" title="Visualize Rankings">Visualize Rankings</a></li>
-            <li><a href="{{ url_for('build_graph.index') }}" title="Crie seu gráfico">Crie seu gráfico</a></li>
-            <li><a href="{{ url_for('data_download.index') }}" title="Download de dados">Download de dados</a></li>
+            <li><a href="{{ url_for('rankings.index') }}" title="Visualize Rankings">{% trans %}View Rankings{% endtrans %}</a></li>
+            <li><a href="{{ url_for('build_graph.index') }}" title="Crie seu gráfico">{% trans %}Make Graphs{% endtrans %}</a></li>
+            <li><a href="{{ url_for('data_download.index') }}" title="Download de dados">{% trans %}Database Download{% endtrans %}</a></li>
         </ul>
     </div>
     <div class="col-sm-3 col-md-2">
         <ul>
-            <li><h3>Suporte</h3></li>
-            <li><a href="{{ url_for('help.index') }}" title="Ajuda">Ajuda</a></li>
-            <li><a href="{{ url_for('help.index') }}" title="Tour Virtual">Tour Virtual</a></li>
+            <li><h3>{% trans %}Support{% endtrans %}</h3></li>
+            <li><a href="{{ url_for('help.index') }}" title="Ajuda">{% trans %}Help{% endtrans %}</a></li>
+            <li><a href="{{ url_for('help.index') }}" title="Tour Virtual">{% trans %}Virtual Tour{% endtrans %}</a></li>
             <li><a class="visible-sm btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">Entre em contato</a></li>
         </ul>
     </div>
-    <a class="visible-xs col-xs-offset-3 col-xs-6 btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">Entre em contato</a>
+    <a class="visible-xs col-xs-offset-3 col-xs-6 btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">{%trans%}Contact Us{%endtrans%}</a>
     <div class="col-xs-12 col-md-5 col-lg-6 visible-md visible-lg">
-        <h3>ENTRE EM CONTATO</h3>
+        <h3>{%trans%}Contact Us{%endtrans%}</h3>
         <form class="form-horizontal">
 
             <div class="form-group">
-                <label for="footer-name" class="col-sm-3 control-label">Nome</label>
+                <label for="footer-name" class="col-sm-3 control-label">{% trans %}Name{% endtrans %}</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="footer-name" placeholder="Nome">
+                    <input type="text" class="form-control" id="footer-name" placeholder="{% trans %}Name{% endtrans %}">
                 </div>
             </div>
             <div class="form-group">
@@ -55,15 +55,15 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="footer-message" class="col-sm-3 control-label">Mensagem</label>
+                <label for="footer-message" class="col-sm-3 control-label">{% trans %}Message{% endtrans %}</label>
                 <div class="col-sm-9">
-                    <textarea type="text" class="form-control" id="footer-message" placeholder="Mensagem"></textarea>
+                    <textarea type="text" class="form-control" id="footer-message" placeholder="{% trans %}Message{% endtrans %}"></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-offset-5 col-md-offset-3 col-xs-15 col-sm-10 col-md-11">
-                    <button type="submit" class="btn btn-white">Enviar</button>
+                    <button type="submit" class="btn btn-white">{% trans %}Send{% endtrans %}</button>
                 </div>
             </div>
         </form>
