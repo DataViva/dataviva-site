@@ -553,8 +553,11 @@ def dictionary():
         "developments_agents_text": gettext("Assess development policies setting by location"),
         "STUDENTS_AND_PROFESSIONALS": gettext("STUDENTS AND PROFESSIONALS"),
         "students_and_professionals": gettext("Find information about available jobs, income per occupation and courses"),
-
-
+        "explore_our_database": gettext("Explore our database"),
+        "explore_our_database_text": gettext(u"DataViva gathers data from several sources: Employment and Income (RAIS), Brazilian International Trade (SECEX/MDCI), Basic and Technical Education (Censo Escolar), Post-Secondary Education (Censo da Educação Superior) and UN Comtrade International Trade."),
+        "what_would_you_like_to_know": gettext("What would you like to know?"),
+        "brasilian_locations": gettext("Brazilian Locations"),
+        "econimic_activities": gettext("Economic Activities"),
         
 
     }

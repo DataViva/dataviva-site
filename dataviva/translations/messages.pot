@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-04 16:19-0300\n"
+"POT-Creation-Date: 2016-04-05 13:50-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -586,7 +586,8 @@ msgstr ""
 msgid "Classifications"
 msgstr ""
 
-#: dataviva/templates/about.html:54
+#: dataviva/templates/about.html:54 dataviva/templates/general/index.html:66
+#: dataviva/translations/dictionary.py:559
 msgid "Brazilian Locations"
 msgstr ""
 
@@ -595,13 +596,15 @@ msgstr ""
 msgid "Industries"
 msgstr ""
 
-#: dataviva/templates/about.html:62 dataviva/templates/general/select.html:29
+#: dataviva/templates/about.html:62 dataviva/templates/general/index.html:72
+#: dataviva/templates/general/select.html:29
 #: dataviva/translations/dictionary.py:159
 #: dataviva/translations/dictionary.py:354
 msgid "Occupations"
 msgstr ""
 
-#: dataviva/templates/about.html:66 dataviva/translations/dictionary.py:356
+#: dataviva/templates/about.html:66 dataviva/templates/general/index.html:84
+#: dataviva/translations/dictionary.py:356
 msgid "Products"
 msgstr ""
 
@@ -823,7 +826,8 @@ msgstr ""
 msgid "Occupation"
 msgstr ""
 
-#: dataviva/templates/site.html:66 dataviva/translations/dictionary.py:182
+#: dataviva/templates/site.html:66 dataviva/templates/general/index.html:96
+#: dataviva/translations/dictionary.py:182
 #: dataviva/translations/dictionary.py:183
 #: dataviva/translations/dictionary.py:361
 msgid "University"
@@ -1321,6 +1325,8 @@ msgid "Reply"
 msgstr ""
 
 #: dataviva/templates/about/ask/ask.html:10
+#: dataviva/templates/general/index.html:59
+#: dataviva/translations/dictionary.py:558
 msgid "What would you like to know?"
 msgstr ""
 
@@ -2103,6 +2109,30 @@ msgstr ""
 #: dataviva/templates/general/index.html:46
 #: dataviva/translations/dictionary.py:549
 msgid "watch the testimonials"
+msgstr ""
+
+#: dataviva/templates/general/index.html:56
+#: dataviva/translations/dictionary.py:556
+msgid "Explore our database"
+msgstr ""
+
+#: dataviva/templates/general/index.html:57
+#: dataviva/translations/dictionary.py:557
+msgid ""
+"DataViva gathers data from several sources: Employment and Income (RAIS),"
+" Brazilian International Trade (SECEX/MDCI), Basic and Technical "
+"Education (Censo Escolar), Post-Secondary Education (Censo da Educação "
+"Superior) and UN Comtrade International Trade."
+msgstr ""
+
+#: dataviva/templates/general/index.html:78
+#: dataviva/translations/dictionary.py:560
+msgid "Economic Activities"
+msgstr ""
+
+#: dataviva/templates/general/index.html:90
+#: dataviva/translations/dictionary.py:360
+msgid "Trade Partners"
 msgstr ""
 
 #: dataviva/templates/general/select.html:3
@@ -3056,10 +3086,6 @@ msgstr ""
 msgid "Locations"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:360
-msgid "Trade Partners"
-msgstr ""
-
 #: dataviva/translations/dictionary.py:369
 msgid "Sending Location"
 msgstr ""
@@ -3393,25 +3419,25 @@ msgstr ""
 msgid "Get started "
 msgstr ""
 
-#: dataviva/translations/dictionary.py:567
+#: dataviva/translations/dictionary.py:570
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:568
+#: dataviva/translations/dictionary.py:571
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:569
+#: dataviva/translations/dictionary.py:572
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:570
+#: dataviva/translations/dictionary.py:573
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""

@@ -53,59 +53,59 @@
 <section id="databases" class="databases bg-greeny">
     <div class="container text-center wow fadeInDown">
         <div class="navy-line"></div>
-        <h2>Explore nossos bancos de dados</h2>
-        <p class="tagline">O DataViva reúne dados de diversas fontes: Emprego e Renda (RAIS), Comércio Exterior Brasileiro (SECEX/MDCI), Educação Básica e Ensino Técnico (Censo Escolar), Ensino Superior (Censo da Educação Superior) e Comércio Internacional (UN Comtrade).</p>
+        <h2>{% trans %}Explore our database{% endtrans %}</h2>
+        <p class="tagline">{% trans %}DataViva gathers data from several sources: Employment and Income (RAIS), Brazilian International Trade (SECEX/MDCI), Basic and Technical Education (Censo Escolar), Post-Secondary Education (Censo da Educação Superior) and UN Comtrade International Trade.{% endtrans %}</p>
         <div class="text-divider">
-            <h3 class="inner">O que você gostaria de conhecer?</h3>
+            <h3 class="inner">{% trans %}What would you like to know?{% endtrans %}</h3>
             <hr/>
         </div>
 
         <div class="row database-icons wow fadeInDown">
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <a href="#" onclick="start_selector('Location');" data-toggle="popover" data-placement="top" data-content="Perfil geral por região, estado, mesorregião, microrregião ou município brasileiro. Visualize dados de comércio exterior, atividade econômica, empregos e educação. Exemplos: Sudeste, Mato Grosso, Recife, Região Metropolitana de Porto Alegre.">
-                    <p>Localidades Brasileiras</p>
+                    <p>{% trans %}Brazilian Locations{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-bra"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <a href="#" onclick="start_selector('Occupation');" data-toggle="popover" data-placement="top" data-content="Regiões que mais empregam por atividade profissional, cursos relacionados, salário médio e estatísticas de emprego por ano. Exemplos: Técnicos de Nível Médio, Trabalhadores da Indústria, Recepcionistas, Médicos Clínicos.">
-                    <p>Ocupações</p>
+                    <p>{% trans %}Occupations{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-occupation"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <a href="#" onclick="start_selector('Industry');" data-toggle="popover" data-placement="top" data-content="Informações sobre taxa de empregos por região, salário médio por tipo de ocupação, renda mensal média e oportunidades econômicas. Exemplos: Comércio, Serviços Domésticos, Educação, Restaurantes, Teleatendimento, Organizações Religiosas.">
-                    <p>Atividades Econômicas</p>
+                    <p>{% trans %}Economic Activities{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-industry"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <a href="#" onclick="start_selector('Product');" data-toggle="popover" data-placement="top" data-content="Dados da Balança Comercial por produto, origem das importações e destino das exportações, ranking por localidade, atividades econômicas e ocupações relacionadas. Exemplos: Gêneros Alimentícios, Artes e Antiguidades, Minério de Ferro, Café, Peças para Veículos.">
-                    <p>Produtos</p>
+                    <p>{% trans %}Products{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-product"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <a href="#" onclick="start_selector('TradePartner');" data-toggle="popover" data-placement="top" data-content="Nações que importam ou exportam produtos para o Brasil, dados de comercialização por tipo de produto ou por município comercializador. Exemplos: Ásia, África, Europa, México, Japão, Estados Unidos, China, Holanda, Irã.">
-                    <p>Parceiros Comerciais</p>
+                    <p>{% trans %}Trade Partners{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-trade-partner"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <a href="#" onclick="start_selector('University');" data-toggle="popover" data-placement="top" data-content="Número de matrículas em cada curso ofertado, situação dos estudantes e perfis semelhantes de universidades. Exemplos: Universidade de São Paulo, Pontifícia Universidade Católica de Goiás, Universidade Federal de Minas Gerais.">
-                    <p>Universidades</p>
+                    <p>{% trans %}Universities{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-university"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2 col-sm-offset-2 col-md-offset-0 col-lg-offset-4">
                 <a href="#" onclick="start_selector('Major');" data-toggle="popover" data-placement="top" data-content="Lista de universidades e municípios que ofertam o curso de Educação Superior ou o campo de estudo selecionado. Exemplos: Educação, Ciências da Saúde, Direito, Engenharia de Produção, Fisioterapia.">
-                    <p>Ensino Superior</p>
+                    <p>{% trans %}Higher Education{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-major"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <a href="#" onclick="start_selector('BasicCourse');" data-toggle="popover" data-placement="top" data-content="Escolas do Brasil que oferecem educação profissional e ranking de matrículas na Educação Básica por município. Exemplos: Ensino Fundamental, Ensino Médio, Técnico em Enfermagem, Técnico em Agropecuária.">
-                    <p>Educação Básica</p>
+                    <p>{% trans %}Basic Course{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-basic-course"></i></button>
                 </a>
             </div>
