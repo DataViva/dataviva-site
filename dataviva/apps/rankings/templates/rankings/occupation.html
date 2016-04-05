@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "rankings/index.html" %}
 
-{% block content %}
+{% block rankings_content %}
 <div class="container">
     <div class="btn-group">
         <button id="occupation-families" class="btn btn-white">Famílias</button>
@@ -33,7 +33,7 @@
         </tr>
     </thead>
 </table>
-{% endblock content %}
+{% endblock rankings_content %}
 
 {% block js_assets %}
     <script src="/static/js/modules/rankings/occupation.js"></script>

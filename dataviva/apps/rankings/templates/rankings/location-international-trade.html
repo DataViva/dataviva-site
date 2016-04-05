@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "rankings/index.html" %}
 
-{% block content %}
+{% block rankings_content %}
 <div class="container">
     <div class="btn-group">
         <button id="location-international-trade-regions" class="btn btn-white">Regiões</button>
@@ -34,7 +34,7 @@
         </tr>
     </thead>
 </table>
-{% endblock content %}
+{% endblock rankings_content %}
 
 {% block js_assets %}
     <script src="/static/js/modules/rankings/location-international-trade.js"></script>
