@@ -27,7 +27,7 @@ def index():
 
 
 @mod.route('/location/wages-and-employment', methods=['GET'])
-def wages():
+def location_wages():
     return render_template('rankings/location-wages.html')
 
 
@@ -54,3 +54,18 @@ def trade_partner():
 @mod.route('/university', methods=['GET'])
 def university():
     return render_template('rankings/university.html')
+
+
+@mod.route('/product', methods=['GET'])
+def product():
+    return render_template('rankings/product.html')
+
+
+@mod.route('/major', methods=['GET'])
+def major():
+    return render_template('rankings/major.html')
+
+
+@mod.route('/basic-course', methods=['GET'])
+def basic_course():
+    return render_template('rankings/basic-course.html')
