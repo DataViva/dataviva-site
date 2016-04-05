@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-05 14:10-0300\n"
+"POT-Creation-Date: 2016-04-05 14:15-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -2643,6 +2643,12 @@ msgstr ""
 msgid "Free Sign Up"
 msgstr "Cadastrar Gratuitamente"
 
+#: dataviva/templates/general/index.html:130
+#: dataviva/templates/include/header.html:5
+#: dataviva/translations/dictionary.py:523
+msgid "News"
+msgstr "Notícias"
+
 #: dataviva/templates/general/select.html:3
 msgid "Choose a Classification"
 msgstr "Selecionar uma Classificação"
@@ -2704,11 +2710,6 @@ msgstr ""
 #: dataviva/translations/dictionary.py:522
 msgid "Studies"
 msgstr "Estudos"
-
-#: dataviva/templates/include/header.html:5
-#: dataviva/translations/dictionary.py:523
-msgid "News"
-msgstr "Notícias"
 
 #: dataviva/templates/include/header.html:28
 #: dataviva/translations/dictionary.py:527
@@ -2789,6 +2790,11 @@ msgstr "Inglês"
 #, fuzzy
 msgid "Portuguese"
 msgstr "Português"
+
+#: dataviva/templates/include/partners.html:4
+#, fuzzy
+msgid "Partners"
+msgstr "Parceiros"
 
 #: dataviva/translations/dictionary.py:19
 msgid "Time Resolution"
@@ -3980,25 +3986,29 @@ msgstr ""
 msgid "Get started "
 msgstr ""
 
-#: dataviva/translations/dictionary.py:572
+#: dataviva/translations/dictionary.py:564
+msgid "Parceiros"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:573
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:573
+#: dataviva/translations/dictionary.py:574
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:574
+#: dataviva/translations/dictionary.py:575
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:575
+#: dataviva/translations/dictionary.py:576
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"

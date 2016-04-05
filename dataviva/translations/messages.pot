@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-05 14:10-0300\n"
+"POT-Creation-Date: 2016-04-05 14:15-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2154,6 +2154,12 @@ msgstr ""
 msgid "Free Sign Up"
 msgstr ""
 
+#: dataviva/templates/general/index.html:130
+#: dataviva/templates/include/header.html:5
+#: dataviva/translations/dictionary.py:523
+msgid "News"
+msgstr ""
+
 #: dataviva/templates/general/select.html:3
 msgid "Choose a Classification"
 msgstr ""
@@ -2209,11 +2215,6 @@ msgstr ""
 #: dataviva/templates/include/header.html:4
 #: dataviva/translations/dictionary.py:522
 msgid "Studies"
-msgstr ""
-
-#: dataviva/templates/include/header.html:5
-#: dataviva/translations/dictionary.py:523
-msgid "News"
 msgstr ""
 
 #: dataviva/templates/include/header.html:28
@@ -2289,6 +2290,10 @@ msgstr ""
 #: dataviva/templates/include/header.html:57
 #: dataviva/translations/dictionary.py:526
 msgid "Portuguese"
+msgstr ""
+
+#: dataviva/templates/include/partners.html:4
+msgid "Partners"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:19
@@ -3438,25 +3443,29 @@ msgstr ""
 msgid "Get started "
 msgstr ""
 
-#: dataviva/translations/dictionary.py:572
+#: dataviva/translations/dictionary.py:564
+msgid "Parceiros"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:573
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:573
+#: dataviva/translations/dictionary.py:574
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:574
+#: dataviva/translations/dictionary.py:575
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:575
+#: dataviva/translations/dictionary.py:576
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""

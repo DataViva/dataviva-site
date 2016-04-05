@@ -561,6 +561,7 @@ def dictionary():
         "sing_up_free_and": gettext("Sign Up free and make the most of DataViva"),
         "save_graphs": gettext("Save the graphs you need and get our free content in your e-mail. Signing up gives you access to exclusive resources to facilitate your research."),
         "free_sing_up": gettext("Free Sign Up"),
+        "partners": gettext("Parceiros"),
 
     }
 
