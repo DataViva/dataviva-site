@@ -64,3 +64,8 @@ def product():
 @mod.route('/major', methods=['GET'])
 def major():
     return render_template('rankings/major.html')
+
+
+@mod.route('/basic-course', methods=['GET'])
+def basic_course():
+    return render_template('rankings/basic-course.html')
