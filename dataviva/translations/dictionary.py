@@ -538,7 +538,7 @@ def dictionary():
         "welcome": gettext("Welcome"),
         "view_rankings": gettext("VIEW RANKINGS"),
         "make_graphs": gettext("MAKE GRAPHS"),
-        "database_download": gettext("DATABASE DOWNLOAD"),
+        "DATABASE_download": gettext("DATABASE DOWNLOAD"),
 
         #home
         "largest_plataform": gettext("Brazils largest platform for social and economic data search."),
@@ -562,6 +562,19 @@ def dictionary():
         "save_graphs": gettext("Save the graphs you need and get our free content in your e-mail. Signing up gives you access to exclusive resources to facilitate your research."),
         "free_sing_up": gettext("Free Sign Up"),
         "partners": gettext("Parceiros"),
+
+        #footer
+        "about_min": gettext("About"),
+        "support": gettext("Support"),
+        "contact_us": gettext("Contact Us"),
+        "the": gettext("The"),
+        "database_download": gettext("Database Download"),
+        "make_grohs": gettext("Make Graphs"),
+        "view_rankings_min": gettext("View Rankings"),
+        "help": gettext("Help"),
+        "virtual_tour": gettext("Virtual Tour"),
+        "message": gettext("Message"),
+
 
     }
 
