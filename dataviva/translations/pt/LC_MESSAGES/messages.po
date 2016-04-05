@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-05 13:50-0300\n"
+"POT-Creation-Date: 2016-04-05 14:10-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -232,6 +232,7 @@ msgid "International Trade"
 msgstr "Comércio Internacional"
 
 #: dataviva/apps/data/views.py:82 dataviva/templates/about.html:38
+#: dataviva/templates/general/index.html:102
 #: dataviva/translations/dictionary.py:293
 msgid "Higher Education"
 msgstr "Ensino Superior"
@@ -641,7 +642,8 @@ msgstr "Destinos das Exportações"
 msgid "Majors"
 msgstr "Cursos"
 
-#: dataviva/templates/about.html:78 dataviva/translations/dictionary.py:184
+#: dataviva/templates/about.html:78 dataviva/templates/general/index.html:96
+#: dataviva/translations/dictionary.py:184
 #: dataviva/translations/dictionary.py:185
 #: dataviva/translations/dictionary.py:362
 msgid "Universities"
@@ -848,8 +850,7 @@ msgstr "Atividade Econômica"
 msgid "Occupation"
 msgstr "Ocupação"
 
-#: dataviva/templates/site.html:66 dataviva/templates/general/index.html:96
-#: dataviva/translations/dictionary.py:182
+#: dataviva/templates/site.html:66 dataviva/translations/dictionary.py:182
 #: dataviva/translations/dictionary.py:183
 #: dataviva/translations/dictionary.py:361
 msgid "University"
@@ -861,7 +862,8 @@ msgstr "Universidade"
 msgid "Major"
 msgstr "Curso"
 
-#: dataviva/templates/site.html:68 dataviva/translations/dictionary.py:367
+#: dataviva/templates/site.html:68 dataviva/templates/general/index.html:108
+#: dataviva/translations/dictionary.py:367
 msgid "Basic Course"
 msgstr "Cursos Básicos"
 
@@ -2621,6 +2623,26 @@ msgstr "Atividades Econômicas"
 msgid "Trade Partners"
 msgstr "Parceiros Comerciais"
 
+#: dataviva/templates/general/index.html:121
+#: dataviva/translations/dictionary.py:561
+msgid "Sign Up free and make the most of DataViva"
+msgstr "Cadastre-se gratuitamente e aproveite o DataViva ao máximo"
+
+#: dataviva/templates/general/index.html:122
+#: dataviva/translations/dictionary.py:562
+msgid ""
+"Save the graphs you need and get our free content in your e-mail. Signing"
+" up gives you access to exclusive resources to facilitate your research."
+msgstr ""
+"Salve os gráficos que precisar e crie análises personalizadas. Ao fazer o"
+" cadastro você terá acesso a recursos exclusivos para facilitar sua "
+"pesquisa."
+
+#: dataviva/templates/general/index.html:123
+#: dataviva/translations/dictionary.py:563
+msgid "Free Sign Up"
+msgstr "Cadastrar Gratuitamente"
+
 #: dataviva/templates/general/select.html:3
 msgid "Choose a Classification"
 msgstr "Selecionar uma Classificação"
@@ -3958,25 +3980,25 @@ msgstr ""
 msgid "Get started "
 msgstr ""
 
-#: dataviva/translations/dictionary.py:570
+#: dataviva/translations/dictionary.py:572
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:571
+#: dataviva/translations/dictionary.py:573
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:572
+#: dataviva/translations/dictionary.py:574
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:573
+#: dataviva/translations/dictionary.py:575
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"

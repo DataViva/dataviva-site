@@ -558,7 +558,9 @@ def dictionary():
         "what_would_you_like_to_know": gettext("What would you like to know?"),
         "brasilian_locations": gettext("Brazilian Locations"),
         "econimic_activities": gettext("Economic Activities"),
-        
+        "sing_up_free_and": gettext("Sign Up free and make the most of DataViva"),
+        "save_graphs": gettext("Save the graphs you need and get our free content in your e-mail. Signing up gives you access to exclusive resources to facilitate your research."),
+        "free_sing_up": gettext("Free Sign Up"),
 
     }
 
