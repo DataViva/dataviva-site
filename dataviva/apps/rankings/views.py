@@ -26,6 +26,11 @@ def index():
     pass
 
 
+@mod.route('/location/wages-and-employment', methods=['GET'])
+def wages():
+    return render_template('rankings/location-wages.html')
+
+
 @mod.route('/location/international-trade', methods=['GET'])
 def location_international_trade():
     return render_template('rankings/location-international-trade.html')
