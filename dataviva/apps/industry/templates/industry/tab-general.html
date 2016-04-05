@@ -1,7 +1,5 @@
 <div role="tabpanel" class="tab-pane active" id="general">
-    {% if location and industry.id | length == 6%}
     <div class="jcarousel-wrapper">
-    {% endif %}
         <div class="jcarousel">
             <ul>
                 <li>
@@ -72,11 +70,9 @@
             </ul>
         </div>
 
-        <a href="#" class="fa fa-angle-left jcarousel-control-prev"></a>
-        <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
-    {% if location and industry.id | length == 6%}
+        <a href="#" class="hidden-lg fa fa-angle-left jcarousel-control-prev"></a>
+        <a href="#" class="hidden-lg fa fa-angle-right jcarousel-control-next"></a>
     </div>
-    {% endif %}
 
     <div class="m-t-sm col-xs-12 year">
         Ano: {{ header.year }}
