@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-04 15:13-0300\n"
+"POT-Creation-Date: 2016-04-05 14:15-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -232,6 +232,7 @@ msgid "International Trade"
 msgstr "Comércio Internacional"
 
 #: dataviva/apps/data/views.py:82 dataviva/templates/about.html:38
+#: dataviva/templates/general/index.html:102
 #: dataviva/translations/dictionary.py:293
 msgid "Higher Education"
 msgstr "Ensino Superior"
@@ -607,7 +608,9 @@ msgstr "Sobre os Dados"
 msgid "Classifications"
 msgstr "Classificações"
 
-#: dataviva/templates/about.html:54
+#: dataviva/templates/about.html:54 dataviva/templates/general/index.html:66
+#: dataviva/translations/dictionary.py:559
+#, fuzzy
 msgid "Brazilian Locations"
 msgstr "Localidades Brasileiras"
 
@@ -616,13 +619,15 @@ msgstr "Localidades Brasileiras"
 msgid "Industries"
 msgstr "Atividades Econômicas"
 
-#: dataviva/templates/about.html:62 dataviva/templates/general/select.html:29
+#: dataviva/templates/about.html:62 dataviva/templates/general/index.html:72
+#: dataviva/templates/general/select.html:29
 #: dataviva/translations/dictionary.py:159
 #: dataviva/translations/dictionary.py:354
 msgid "Occupations"
 msgstr "Ocupações"
 
-#: dataviva/templates/about.html:66 dataviva/translations/dictionary.py:356
+#: dataviva/templates/about.html:66 dataviva/templates/general/index.html:84
+#: dataviva/translations/dictionary.py:356
 msgid "Products"
 msgstr "Produtos"
 
@@ -637,7 +642,8 @@ msgstr "Destinos das Exportações"
 msgid "Majors"
 msgstr "Cursos"
 
-#: dataviva/templates/about.html:78 dataviva/translations/dictionary.py:184
+#: dataviva/templates/about.html:78 dataviva/templates/general/index.html:96
+#: dataviva/translations/dictionary.py:184
 #: dataviva/translations/dictionary.py:185
 #: dataviva/translations/dictionary.py:362
 msgid "Universities"
@@ -856,7 +862,8 @@ msgstr "Universidade"
 msgid "Major"
 msgstr "Curso"
 
-#: dataviva/templates/site.html:68 dataviva/translations/dictionary.py:367
+#: dataviva/templates/site.html:68 dataviva/templates/general/index.html:108
+#: dataviva/translations/dictionary.py:367
 msgid "Basic Course"
 msgstr "Cursos Básicos"
 
@@ -1569,8 +1576,10 @@ msgid "Reply"
 msgstr "Responder"
 
 #: dataviva/templates/about/ask/ask.html:10
+#: dataviva/templates/general/index.html:59
+#: dataviva/translations/dictionary.py:558
 msgid "What would you like to know?"
-msgstr "O que você gostaria de saber?"
+msgstr "O que você gostaria de conhecer?"
 
 #: dataviva/templates/about/ask/ask.html:12
 msgid "You need to login for this functionality."
@@ -2505,6 +2514,141 @@ msgstr "Este erro já foi notificado à nossa equipe técnica"
 msgid "informing this error and will fix it as soon as possible."
 msgstr "e em breve o problema será resolvido."
 
+#: dataviva/templates/general/index.html:8
+msgid "Brazil's largest platform for social and economic data search."
+msgstr ""
+"A maior plataforma de visualização de dados sociais e econômicos do "
+"Brasil."
+
+#: dataviva/templates/general/index.html:8
+#: dataviva/translations/dictionary.py:545
+msgid "Totally open and free."
+msgstr "Totalmente aberta e livre."
+
+#: dataviva/templates/general/index.html:9
+#: dataviva/translations/dictionary.py:546
+msgid ""
+"DataViva is a research tool that provides official data about "
+"exportation, economic activity, locality, education and occupation in "
+"Brazil. It consists of 11 apps that combined enable more than 1 billion "
+"visualizations."
+msgstr ""
+"O DataViva é uma ferramenta de pesquisa que disponibiliza dados oficiais "
+"sobre exportações, atividade econômica, localidade, educação e ocupações "
+"de todo o Brasil. São 11 aplicativos, que, juntos, formam mais de 1 "
+"bilhão de possibilidades de visualizações."
+
+#: dataviva/templates/general/index.html:15
+#: dataviva/translations/dictionary.py:550
+msgid "Entrepreneurs"
+msgstr "Empreendedores"
+
+#: dataviva/templates/general/index.html:17
+#: dataviva/translations/dictionary.py:551
+msgid "Identify the economic profile and business opportunities of a region"
+msgstr ""
+"Identifique o perfil econômico e as oportunidades de negócios de uma "
+"região"
+
+#: dataviva/templates/general/index.html:23
+#: dataviva/translations/dictionary.py:552
+msgid "DEVELOPMENT AGENTS"
+msgstr "Agentes de Desenvolvimento"
+
+#: dataviva/templates/general/index.html:25
+#: dataviva/translations/dictionary.py:553
+msgid "Assess development policies setting by location"
+msgstr ""
+"Avalie a criação de políticas de desenvolvimento de acordo com a "
+"localidade"
+
+#: dataviva/templates/general/index.html:31
+#: dataviva/translations/dictionary.py:554
+msgid "STUDENTS AND PROFESSIONALS"
+msgstr "Estudantes e Profissionais"
+
+#: dataviva/templates/general/index.html:33
+#: dataviva/translations/dictionary.py:555
+msgid "Find information about available jobs, income per occupation and courses"
+msgstr ""
+"Descubra informações sobre empregos disponíveis, renda por ocupação e "
+"cursos"
+
+#: dataviva/templates/general/index.html:41
+msgid "Get started"
+msgstr "Inicie uma pesquisa"
+
+#: dataviva/templates/general/index.html:44
+#: dataviva/translations/dictionary.py:548
+msgid "Watch the site video"
+msgstr "Assita ao vídeo Institucional"
+
+#: dataviva/templates/general/index.html:45
+#: dataviva/templates/include/header.html:48
+#: dataviva/translations/dictionary.py:534
+msgid "or"
+msgstr "ou"
+
+#: dataviva/templates/general/index.html:46
+#: dataviva/translations/dictionary.py:549
+msgid "watch the testimonials"
+msgstr "veja depoimentos"
+
+#: dataviva/templates/general/index.html:56
+#: dataviva/translations/dictionary.py:556
+msgid "Explore our database"
+msgstr "Explore nossos bancos de dados"
+
+#: dataviva/templates/general/index.html:57
+#: dataviva/translations/dictionary.py:557
+msgid ""
+"DataViva gathers data from several sources: Employment and Income (RAIS),"
+" Brazilian International Trade (SECEX/MDCI), Basic and Technical "
+"Education (Censo Escolar), Post-Secondary Education (Censo da Educação "
+"Superior) and UN Comtrade International Trade."
+msgstr ""
+"O DataViva reúne dados de diversas fontes: Emprego e Renda (RAIS), "
+"Comércio Exterior Brasileiro (SECEX/MDCI), Educação Básica e Ensino "
+"Técnico (Censo Escolar), Ensino Superior (Censo da Educação Superior) e "
+"Comércio Internacional (UN Comtrade)."
+
+#: dataviva/templates/general/index.html:78
+#: dataviva/translations/dictionary.py:560
+#, fuzzy
+msgid "Economic Activities"
+msgstr "Atividades Econômicas"
+
+#: dataviva/templates/general/index.html:90
+#: dataviva/translations/dictionary.py:360
+msgid "Trade Partners"
+msgstr "Parceiros Comerciais"
+
+#: dataviva/templates/general/index.html:121
+#: dataviva/translations/dictionary.py:561
+msgid "Sign Up free and make the most of DataViva"
+msgstr "Cadastre-se gratuitamente e aproveite o DataViva ao máximo"
+
+#: dataviva/templates/general/index.html:122
+#: dataviva/translations/dictionary.py:562
+msgid ""
+"Save the graphs you need and get our free content in your e-mail. Signing"
+" up gives you access to exclusive resources to facilitate your research."
+msgstr ""
+"Salve os gráficos que precisar e crie análises personalizadas. Ao fazer o"
+" cadastro você terá acesso a recursos exclusivos para facilitar sua "
+"pesquisa."
+
+#: dataviva/templates/general/index.html:123
+#: dataviva/translations/dictionary.py:563
+msgid "Free Sign Up"
+msgstr "Cadastrar Gratuitamente"
+
+#: dataviva/templates/general/index.html:130
+#: dataviva/templates/include/header.html:5
+#: dataviva/translations/dictionary.py:523
+msgid "News"
+msgstr "Notícias"
+
 #: dataviva/templates/general/select.html:3
 msgid "Choose a Classification"
 msgstr "Selecionar uma Classificação"
@@ -2567,11 +2711,6 @@ msgstr ""
 msgid "Studies"
 msgstr "Estudos"
 
-#: dataviva/templates/include/header.html:5
-#: dataviva/translations/dictionary.py:523
-msgid "News"
-msgstr "Notícias"
-
 #: dataviva/templates/include/header.html:28
 #: dataviva/translations/dictionary.py:527
 msgid "ABOUT"
@@ -2625,11 +2764,6 @@ msgstr "PARCERIAS"
 msgid "HELP"
 msgstr "AJUDA"
 
-#: dataviva/templates/include/header.html:48
-#: dataviva/translations/dictionary.py:534
-msgid "or"
-msgstr "ou"
-
 #: dataviva/templates/include/header.html:49
 #: dataviva/translations/dictionary.py:533
 msgid "Sing Up"
@@ -2656,6 +2790,11 @@ msgstr "Inglês"
 #, fuzzy
 msgid "Portuguese"
 msgstr "Português"
+
+#: dataviva/templates/include/partners.html:4
+#, fuzzy
+msgid "Partners"
+msgstr "Parceiros"
 
 #: dataviva/translations/dictionary.py:19
 msgid "Time Resolution"
@@ -3496,10 +3635,6 @@ msgstr "ID MDIC"
 msgid "Locations"
 msgstr "Localidades"
 
-#: dataviva/translations/dictionary.py:360
-msgid "Trade Partners"
-msgstr "Parceiros Comerciais"
-
 #: dataviva/translations/dictionary.py:369
 msgid "Sending Location"
 msgstr "Localização de Envio"
@@ -3840,25 +3975,40 @@ msgstr "em"
 msgid "and that imports more is"
 msgstr "e o que mais importa é"
 
-#: dataviva/translations/dictionary.py:553
+#: dataviva/translations/dictionary.py:544
+#, fuzzy
+msgid "Brazils largest platform for social and economic data search."
+msgstr ""
+"A maior plataforma de visualização de dados sociais e econômicos do "
+"Brasil."
+
+#: dataviva/translations/dictionary.py:547
+msgid "Get started "
+msgstr ""
+
+#: dataviva/translations/dictionary.py:564
+msgid "Parceiros"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:573
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:554
+#: dataviva/translations/dictionary.py:574
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:555
+#: dataviva/translations/dictionary.py:575
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:556
+#: dataviva/translations/dictionary.py:576
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"
