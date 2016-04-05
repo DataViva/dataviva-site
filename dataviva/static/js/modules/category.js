@@ -42,7 +42,8 @@ $(document).ready(function () {
         });
 
         if ($('.jcarousel-wrapper .jcarousel ul li') > 4) {
-
+            $('.jcarousel-control-prev').removeClass("hidden-lg")
+            $('.jcarousel-control-next').removeClass("hidden-lg")
         }
     });
 
