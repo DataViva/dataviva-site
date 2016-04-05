@@ -2,7 +2,8 @@
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 
-mod = Blueprint('rankings', __name__, template_folder='templates', url_prefix='/<lang_code>/rankings')
+mod = Blueprint('rankings', __name__, template_folder='templates',
+                url_prefix='/<lang_code>/rankings')
 
 
 @mod.before_request
@@ -28,3 +29,8 @@ def index():
 @mod.route('/location/international-trade', methods=['GET'])
 def location_international_trade():
     return render_template('rankings/location-international-trade.html')
+
+
+@mod.route('/occupation/wages-and-employment', methods=['GET'])
+def occupation_wages():
+    return render_template('rankings/occupation-wages.html')
