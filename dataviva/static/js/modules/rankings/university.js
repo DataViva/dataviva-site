@@ -13,16 +13,10 @@ var universityTable = function () {
             null,
             null,
             null,
-            { "bVisible": false },
-            { "bVisible": false },
+            null,
             { "bVisible": false },
             { "bVisible": false },
             null,
-            null,
-            null,
-            null,
-            null,
-            { "bVisible": false },
             null
         ],
         "deferRender": true,
@@ -33,7 +27,7 @@ var universityTable = function () {
             var select = $('#year-selector')
 
             universityTable.table
-                .column( 0 )
+                .column( 10 )
                 .cache( 'search' )
                 .sort()
                 .unique()
@@ -43,7 +37,7 @@ var universityTable = function () {
 
             select.on( 'change', function () {
                universityTable.table
-                    .column( 0 )
+                    .column( 10 )
                     .search( $(this).val() )
                     .draw();
             });
