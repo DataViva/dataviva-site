@@ -563,6 +563,11 @@ def dictionary():
         "free_sing_up": gettext("Free Sign Up"),
         "partners": gettext("Parceiros"),
 
+        #footer
+        "about_min": gettext("About"),
+        "support": gettext("Support"),
+        "contact_us": gettext("Contact Us"),
+
     }
 
 def plurals(key=None, n=1):

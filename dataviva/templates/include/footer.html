@@ -2,7 +2,7 @@
     <div class="container">
     <div class="col-sm-3 col-md-2 col-sm-offset-2 col-md-offset-1 col-lg-offset-0">
         <ul>
-            <li><h3>Sobre</h3></li>
+            <li><h3>{% trans %}About{% endtrans %}</h3></li>
             <li><a href="{{ url_for('about.index') }}" title="O Dataviva">O Dataviva</a></li>
             <li><a href="{{ url_for('partners.index') }}" title="Parcerias">Parcerias</a></li>
             <li><a href="{{ url_for('news.index') }}" title="Notícias">Notícias</a></li>
@@ -11,7 +11,7 @@
     </div>
     <div class="col-sm-3 col-md-2">
         <ul>
-            <li><h3>Explore</h3></li>
+            <li><h3>{% trans %}Explore{%endtrans%}</h3></li>
             <li>
                 <ul>
                     <li><a href="#" title="Pesquisa">Pesquisa</a></li>
@@ -31,7 +31,7 @@
     </div>
     <div class="col-sm-3 col-md-2">
         <ul>
-            <li><h3>Suporte</h3></li>
+            <li><h3>{% trans %}Support{% endtrans %}</h3></li>
             <li><a href="{{ url_for('help.index') }}" title="Ajuda">Ajuda</a></li>
             <li><a href="{{ url_for('help.index') }}" title="Tour Virtual">Tour Virtual</a></li>
             <li><a class="visible-sm btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">Entre em contato</a></li>
@@ -39,7 +39,7 @@
     </div>
     <a class="visible-xs col-xs-offset-3 col-xs-6 btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">Entre em contato</a>
     <div class="col-xs-12 col-md-5 col-lg-6 visible-md visible-lg">
-        <h3>ENTRE EM CONTATO</h3>
+        <h3>{%trans%}Contact Us{%endtrans%}</h3>
         <form class="form-horizontal">
 
             <div class="form-group">
