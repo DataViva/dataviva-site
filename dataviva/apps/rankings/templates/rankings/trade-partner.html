@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="btn-group">
+        <button id="location-international-trade-regions" class="btn btn-white">Regiões</button>
+        <button id="location-international-trade-states" class="btn btn-white">Estados</button>
+        <button id="location-international-trade-mesoregions" class="btn btn-white">Mesoregiões</button>
+        <button id="location-international-trade-microregions" class="btn btn-white">Microregiões</button>
+        <button id="location-international-trade-municipalities" class="btn btn-white">Municípios</button>
+    </div>
+    <select class="btn btn-white year-selector" id="year-selector"><option value="">Year</option></select>
+</div>
+
+<table id="location-international-trade-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>year</th>
+            <th>month</th>
+            <th>import_val</th>
+            <th>export_val</th>
+            <th>import_kg</th>
+            <th>export_kg</th>
+            <th>import_val_growth</th>
+            <th>import_val_growth_5</th>
+            <th>export_val_growth</th>
+            <th>export_val_growth_5</th>
+            <th>bra_diversity</th>
+            <th>bra_diversity_eff</th>
+            <th>hs_diversity</th>
+            <th>hs_diversity_eff</th>
+            <th>eci</th>
+            <th>wld_id</th>
+        </tr>
+    </thead>
+</table>
+{% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/rankings/location-international-trade.js"></script>
+{% endblock js_assets %}8
