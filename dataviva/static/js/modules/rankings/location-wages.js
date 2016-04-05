@@ -30,7 +30,7 @@ var WagesTable = function () {
         "scrollCollapse": true,
         "scroller": true,
         initComplete: function () {
-            var select = $('#year-selector select')
+            var select = $('#year-selector')
 
             wagesTable.table
                 .column( 0 )
@@ -55,22 +55,46 @@ var WagesTable = function () {
 
 var wagesTable = new WagesTable();
 
+var wagesRegions = function() {
+    wagesTable.table.ajax.url("/rais/all/show.1/all/all/?order=num_jobs.desc").load();
+};
+
 var wagesStates = function() {
     wagesTable.table.ajax.url("/rais/all/show.3/all/all/?order=num_jobs.desc").load();
 };
 
-var wagesMunicipality = function() {
+var wagesMesoregions = function() {
+    wagesTable.table.ajax.url("/rais/all/show.5/all/all/?order=num_jobs.desc").load();
+};
+
+var wagesMicroregions = function() {
+    wagesTable.table.ajax.url("/rais/all/show.7/all/all/?order=num_jobs.desc").load();
+};
+
+var wagesMunicipalities = function() {
     wagesTable.table.ajax.url("/rais/all/show.9/all/all/?order=num_jobs.desc").load();
 };
 
 $(document).ready(function(){
 
-    $('#wages-states').click(function() {
+    $('#location-wages-regions').click(function() {
+        wagesRegions();
+    });
+
+    $('#location-wages-states').click(function() {
         wagesStates();
     });
 
-    $('#wages-municipality').click(function() {
-        wagesMunicipality();
+    $('#location-wages-mesoregions').click(function() {
+        wagesMesoregions();
+    });
+
+    $('#location-wages-microregions').click(function() {
+        wagesMicroRegions();
+    });
+
+    $('#location-wages-municipalities').click(function() {
+        wagesMunicipalities();
     });
 
 });

@@ -21,14 +21,14 @@
     margin: 10px 0px;
 }
 
-.modal.dataviva .tab-content .form-group.search input,
-.modal.dataviva .tab-content .form-group.search input:focus {
+.modal.dataviva .form-group.search input,
+.modal.dataviva .form-group.search input:focus {
     min-width: 310px;
     border: 1px solid #e5e6e7 !important;
     border-left: 0px !important;
     padding-left: 10px;
 }
-.modal.dataviva .tab-content .form-group.search .input-group-addon {
+.modal.dataviva .form-group.search .input-group-addon {
     color:#9eddbf;
     border-right: 0px;
     padding-right: 0px;

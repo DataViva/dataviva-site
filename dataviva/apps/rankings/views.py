@@ -26,11 +26,16 @@ def index():
     pass
 
 
-@mod.route('/secex/ymb', methods=['GET'])
-def secex_ymb():
-    return render_template('rankings/secex_ymb.html')
-
-
 @mod.route('/location/wages-and-employment', methods=['GET'])
 def wages():
-    return render_template('rankings/wages.html')
+    return render_template('rankings/location-wages.html')
+
+
+@mod.route('/location/international-trade', methods=['GET'])
+def location_international_trade():
+    return render_template('rankings/location-international-trade.html')
+
+
+@mod.route('/occupation/wages-and-employment', methods=['GET'])
+def occupation_wages():
+    return render_template('rankings/occupation-wages.html')

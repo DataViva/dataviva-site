@@ -1,8 +1,8 @@
-var SecexYmbTable = function () {
-    this.tableId = '#secex-ymb-table';
+var OccupationWagesTable = function () {
+    this.tableId = '#occupation-wages-table';
 
     this.table = $(this.tableId).DataTable({
-        "sAjaxSource": "/secex/all-0/show.3/all/all/?order=eci.desc",
+        "sAjaxSource": "/rais/all/all/all/show.1/?order=num_jobs.desc",
         "sAjaxDataProp": "data",
         "order": [],
         "aoColumns": [
@@ -12,8 +12,7 @@ var SecexYmbTable = function () {
             null,
             null,
             null,
-            { "bVisible": false },
-            { "bVisible": false },
+            null,
             { "bVisible": false },
             { "bVisible": false },
             { "bVisible": false },
@@ -21,6 +20,9 @@ var SecexYmbTable = function () {
             null,
             null,
             null,
+            null,
+            null,
+            { "bVisible": false },
             null
         ],
         "deferRender": true,
@@ -28,9 +30,9 @@ var SecexYmbTable = function () {
         "scrollCollapse": true,
         "scroller": true,
         initComplete: function () {
-            var select = $('#year-selector select')
+            var select = $('#year-selector')
 
-            secexYmbTable.table
+            occupationWagesTable.table
                 .column( 0 )
                 .cache( 'search' )
                 .sort()
@@ -40,7 +42,7 @@ var SecexYmbTable = function () {
                 } );
 
             select.on( 'change', function () {
-               secexYmbTable.table
+               occupationWagesTable.table
                     .column( 0 )
                     .search( $(this).val() )
                     .draw();
@@ -51,25 +53,24 @@ var SecexYmbTable = function () {
     });
 };
 
-var secexYmbTable = new SecexYmbTable();
+var occupationWagesTable = new OccupationWagesTable();
 
-var secexYmbStates = function() {
-    secexYmbTable.table.ajax.url("/secex/all-0/show.3/all/all/?order=eci.desc").load();
+var occupationWagesFamilies = function() {
+    occupationWagesTable.table.ajax.url("/rais/all/all/all/show.1/?order=num_jobs.desc").load();
 };
 
-var secexYmbMunicipality = function() {
-    secexYmbTable.table.ajax.url("/secex/all-0/show.9/all/all/?order=eci.desc").load();
+var occupationWagesGroups = function() {
+    occupationWagesTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load();
 };
 
 $(document).ready(function(){
 
-    $('#secex-ymb-states').click(function() {
-        secexYmbStates();
+    $('#occupation-wages-families').click(function() {
+        occupationWagesFamilies();
     });
 
-    $('#secex-ymb-municipality').click(function() {
-        secexYmbMunicipality();
+    $('#occupation-wages-groups').click(function() {
+        occupationWagesGroups();
     });
 
 });
-

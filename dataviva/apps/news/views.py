@@ -46,12 +46,12 @@ def show(id):
 
 
 @mod.route('/publication/all', methods=['GET'])
-def all_publications():
+def all():
     result = Publication.query.all()
     publications = []
     for row in result:
         publications += [(row.id, row.title, row.authors_str(),
-                          row.last_modification.strftime('%d/%m/%Y'), row.active)]
+                          row.last_modification.strftime('%d/%m/%Y'), row.show_home, row.active)]
     return jsonify(publications=publications)
 
 
@@ -61,17 +61,14 @@ def admin():
     return render_template('news/admin.html', publications=publications)
 
 
-@mod.route('/admin/<status_change>', methods=['POST'])
-def admin_activate(status_change):
+@mod.route('/admin/publication/<status>/<status_value>', methods=['POST'])
+def admin_activate(status, status_value):
     for id in request.form.getlist('ids[]'):
         publication = Publication.query.filter_by(id=id).first_or_404()
-        publication.active = status_change == u'activate'
+        setattr(publication, status, status_value == u'true')
         db.session.commit()
 
-    if status_change == u'activate':
-        message = u"Notícia(s) ativada(s) com sucesso!"
-    else:
-        message = u"Notícia(s) desativada(s) com sucesso!"
+    message = u"Notícia(s) alterada(s) com sucesso!"
     return message, 200
 
 
@@ -107,6 +104,8 @@ def create():
         publication.text_content = form.text_content.data
         publication.text_call = form.text_call.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
+        publication.show_home = form.show_home.data
         publication.thumb = form.thumb.data
         publication.active = 0
 
@@ -130,7 +129,9 @@ def edit(id):
     form.authors.data = publication.authors_str()
     form.subject.data = publication.subject
     form.text_content.data = publication.text_content
+    form.publish_date.data = publication.publish_date
     form.text_call.data = publication.text_call
+    form.show_home.data = publication.show_home
     form.thumb.data = publication.thumb
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
@@ -148,6 +149,8 @@ def update(id):
         publication.text_content = form.text_content.data
         publication.thumb = form.thumb.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
+        publication.show_home = form.show_home.data
         publication.authors = []
 
         author_input_list = form.authors.data.split(',')

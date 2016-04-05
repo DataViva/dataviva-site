@@ -157,13 +157,16 @@
 .news .thumb .thumb-crop {
     max-height: 550px;
 }
-
-.news .form-horizontal .form-group {
-    margin: 0px;
+.news .checkbox-switch {
+    padding: 0px;
+    border: none;
 }
 
-@media (max-width: 767px) {
-  .news .form-horizontal .form-group {
-    margin-bottom: 20px;
-  }
+.news .checkbox-switch .switchery{
+    height: 33px;
+}
+
+.news .checkbox-switch .switchery > small {
+    height: 33px;
+    width: 33px;
 }

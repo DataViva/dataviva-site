@@ -89,3 +89,14 @@
 .checkbox input[type="radio"] {
     cursor: pointer;
 }
+
+.form-horizontal .form-group {
+    margin: 0px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+  .form-horizontal .form-group {
+    margin-bottom: 20px;
+  }
+}

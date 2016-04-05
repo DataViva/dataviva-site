@@ -5,13 +5,6 @@ var BlogTable = function () {
         "sAjaxSource": "/blog/post/all",
         "sAjaxDataProp": "posts",
         "order": [],
-        "aoColumnsDefs": [
-            { "data": "postselector" },
-            { "data": "title" },
-            { "data": "authors" },
-            { "data": "publicationDate" },
-            { "data": "active" },
-        ],
         "columnDefs": [
             {
                 "targets": 0,
@@ -45,15 +38,8 @@ var BlogTable = function () {
                     }
                 }
               }],
-        "columns": [
-                { "width": "8%" },
-                null,
-                null,
-                { "width": "20%" },
-                { "width": "12%" }
-        ],
         "paging": false,
-        "bFilter": false,
+        "bFilter": true,
         "info": false,
         "initComplete": function(settings, json) {
             $( ".js-switch" ).each(function() {

@@ -5,7 +5,9 @@ $(document).ready(function () {
     $.stellar();
 
     $( ".js-switch" ).each(function() {
-      var switchery = new Switchery(this);
+        var switchery = new Switchery(this, {
+            color: '#5A9DC4'
+        });
     });
 
     (function(d, s, id) {

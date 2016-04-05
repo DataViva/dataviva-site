@@ -120,11 +120,10 @@ def after_request(response):
     return response
 
 @mod.route('/', methods=['GET'])
-@view_cache.cached(key_prefix=api_cache_key("homepage"))
 def home():
     g.page_type = 'home'
 
-    publications = Publication.query.filter(Publication.id != id, Publication.active).all()
+    publications = Publication.query.filter(Publication.id != id, Publication.active, Publication.show_home).all()
     if len(publications) > 3:
         news = [publications.pop(randrange(len(publications))) for _ in range(3)]
     else:
@@ -133,8 +132,8 @@ def home():
 
 
 @mod.route('/inicie-uma-pesquisa/', methods=['GET'])
-@view_cache.cached(key_prefix=api_cache_key("browsecat"))
 def search():
+    g.page_type = 'search'
     return render_template("general/browse_categories.html")
 
 
