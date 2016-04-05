@@ -1,5 +1,5 @@
-var LocationInternationalTradeTable = function () {
-    this.tableId = '#location-international-trade-table';
+var TradePartnerTable = function () {
+    this.tableId = '#trade-partner-table';
 
     this.table = $(this.tableId).DataTable({
         "sAjaxSource": "/secex/all-0/all/all/show.5/?order=export_val.desc",
@@ -30,7 +30,7 @@ var LocationInternationalTradeTable = function () {
         initComplete: function () {
             var select = $('#year-selector')
 
-            locationInternationalTradeTable.table
+            tradePartnerTable.table
                 .column( 0 )
                 .cache( 'search' )
                 .sort()
@@ -40,7 +40,7 @@ var LocationInternationalTradeTable = function () {
                 } );
 
             select.on( 'change', function () {
-               locationInternationalTradeTable.table
+               tradePartnerTable.table
                     .column( 0 )
                     .search( $(this).val() )
                     .draw();
@@ -51,48 +51,24 @@ var LocationInternationalTradeTable = function () {
     });
 };
 
-var locationInternationalTradeTable = new LocationInternationalTradeTable();
+var tradePartnerTable = new TradePartnerTable();
 
-var locationInternationalTradeRegions = function() {
-    locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.1/all/all/?order=eci.desc").load();
+var tradePartnerCountries = function() {
+    tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.5/?order=eci.desc").load();
 };
 
-var locationInternationalTradeStates = function() {
-    locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.3/all/all/?order=eci.desc").load();
-};
-
-var locationInternationalTradeMesoregions = function() {
-    locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.5/all/all/?order=eci.desc").load();
-};
-
-var locationInternationalTradeMicroRegions = function() {
-    locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.7/all/all/?order=eci.desc").load();
-};
-
-var locationInternationalTradeMunicipalities = function() {
-    locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.9/all/all/?order=eci.desc").load();
+var tradePartnerContinents = function() {
+    tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.2/?order=export_val.desc").load();
 };
 
 $(document).ready(function(){
 
-    $('#location-international-trade-regions').click(function() {
-        locationInternationalTradeStates();
+    $('#trade-partner-countries').click(function() {
+        tradePartnerCountries();
     });
 
-    $('#location-international-trade-states').click(function() {
-        locationInternationalTradeStates();
-    });
-
-    $('#location-international-trade-mesoregions').click(function() {
-        locationInternationalTradeMesoregions();
-    });
-
-    $('#location-international-trade-microregions').click(function() {
-        locationInternationalTradeMicroRegions();
-    });
-
-    $('#location-international-trade-municipalities').click(function() {
-        locationInternationalTradeMunicipalities();
+    $('#trade-partner-continents').click(function() {
+        tradePartnerContinents();
     });
 
 });
