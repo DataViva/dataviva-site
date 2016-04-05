@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="btn-group">
+        <button id="location-wages-regions" class="btn btn-white">Regiões</button>
+        <button id="location-wages-states" class="btn btn-white">Estados</button>
+        <button id="location-wages-mesoregions" class="btn btn-white">Mesoregiões</button>
+        <button id="location-wages-microregions" class="btn btn-white">Microregiões</button>
+        <button id="location-wages-municipalities" class="btn btn-white">Municípios</button>
+    </div>
+    <select class="btn btn-white year-selector" id="year-selector"><option value="">Ano</option></select>
+</div>
+
+<table id="wages-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>year</th>
+            <th>wage</th>
+            <th>num_emp</th>
+            <th>num_jobs</th>
+            <th>num_est</th>            
+            <th>wage_avg</th>
+            <th>age_avg</th>
+            <th>wage_growth</th>
+            <th>wage_growth_5</th>
+            <th>num_emp_growth</th>
+            <th>num_emp_growth_5</th>
+            <th>bra_id</th>
+            <th>cnae_diversity</th>
+            <th>cnae_diversity_eff</th>
+            <th>cbo_diversity</th>
+            <th>cbo_diversity_eff</th>
+            <th>hist</th>
+            <th>gini</th>
+        </tr>
+    </thead>
+</table>
+{% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/rankings/location-wages.js"></script>
+{% endblock js_assets %}
