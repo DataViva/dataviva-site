@@ -570,7 +570,11 @@ def dictionary():
         "the": gettext("The"),
         "database_download": gettext("Database Download"),
         "make_grohs": gettext("Make Graphs"),
-        "view_rankings": gettext("View Rankings"),
+        "view_rankings_min": gettext("View Rankings"),
+        "help": gettext("Help"),
+        "virtual_tour": gettext("Virtual Tour"),
+        "message": gettext("Message"),
+
 
     }
 
