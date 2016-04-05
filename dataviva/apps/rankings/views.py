@@ -59,3 +59,8 @@ def university():
 @mod.route('/product', methods=['GET'])
 def product():
     return render_template('rankings/product.html')
+
+
+@mod.route('/major', methods=['GET'])
+def major():
+    return render_template('rankings/major.html')
