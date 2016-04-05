@@ -44,3 +44,8 @@ def occupation_wages():
 @mod.route('/trade-partner', methods=['GET'])
 def trade_partner():
     return render_template('rankings/trade-partner.html')
+
+
+@mod.route('/university', methods=['GET'])
+def university():
+    return render_template('rankings/university.html')
