@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="btn-group">
+        <button id="occupation-wages-families" class="btn btn-white">Famílias</button>
+        <button id="occupation-wages-groups" class="btn btn-white">Grandes Grupos</button>
+    </div>
+    <select class="btn btn-white year-selector" id="year-selector"><option value="">Ano</option></select>
+</div>
+
+<table id="occupation-wages-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>year</th>
+            <th>wage</th>
+            <th>num_emp</th>
+            <th>num_jobs</th>
+            <th>num_est</th>
+            <th>wage_avg</th>
+            <th>age_avg</th>
+            <th>wage_growth</th>
+            <th>wage_growth_5</th>
+            <th>num_emp_growth</th>
+            <th>num_emp_growth_5</th>
+            <th>cbo_id</th>
+            <th>cnae_diversity</th>
+            <th>cnae_diversity_eff</th>
+            <th>bra_diversity</th>
+            <th>bra_diversity_eff</th>
+            <th>hist</th>
+            <th>gini</th>
+        </tr>
+    </thead>
+</table>
+{% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/rankings/occupation-wages.js"></script>
+{% endblock js_assets %}

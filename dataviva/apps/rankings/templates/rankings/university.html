@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <select class="btn btn-white year-selector" id="year-selector"><option value="">Ano</option></select>
+</div>
+
+<table id="university-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>enrolled</th>
+            <th>graduates</th>
+            <th>entrants</th>
+            <th>morning</th>
+            <th>afternoon</th>
+            <th>night</th>
+            <th>full_time</th>
+            <th>age</th>
+            <th>graduates_growth</th>
+            <th>enrolled_growth</th>
+            <th>year</th>
+            <th>university_id</th>
+        </tr>
+    </thead>
+</table>
+{% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/rankings/university.js"></script>
+{% endblock js_assets %}
