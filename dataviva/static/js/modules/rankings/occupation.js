@@ -1,5 +1,5 @@
-var OccupationWagesTable = function () {
-    this.tableId = '#occupation-wages-table';
+var OccupationTable = function () {
+    this.tableId = '#occupation-table';
 
     this.table = $(this.tableId).DataTable({
         "sAjaxSource": "/rais/all/all/all/show.1/?order=num_jobs.desc",
@@ -32,7 +32,7 @@ var OccupationWagesTable = function () {
         initComplete: function () {
             var select = $('#year-selector')
 
-            occupationWagesTable.table
+            occupationTable.table
                 .column( 0 )
                 .cache( 'search' )
                 .sort()
@@ -42,7 +42,7 @@ var OccupationWagesTable = function () {
                 } );
 
             select.on( 'change', function () {
-               occupationWagesTable.table
+               occupationTable.table
                     .column( 0 )
                     .search( $(this).val() )
                     .draw();
@@ -53,24 +53,24 @@ var OccupationWagesTable = function () {
     });
 };
 
-var occupationWagesTable = new OccupationWagesTable();
+var occupationTable = new OccupationTable();
 
-var occupationWagesFamilies = function() {
-    occupationWagesTable.table.ajax.url("/rais/all/all/all/show.1/?order=num_jobs.desc").load();
+var occupationFamilies = function() {
+    occupationTable.table.ajax.url("/rais/all/all/all/show.1/?order=num_jobs.desc").load();
 };
 
-var occupationWagesGroups = function() {
-    occupationWagesTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load();
+var occupationGroups = function() {
+    occupationTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load();
 };
 
 $(document).ready(function(){
 
-    $('#occupation-wages-families').click(function() {
-        occupationWagesFamilies();
+    $('#occupation-families').click(function() {
+        occupationFamilies();
     });
 
-    $('#occupation-wages-groups').click(function() {
-        occupationWagesGroups();
+    $('#occupation-groups').click(function() {
+        occupationGroups();
     });
 
 });
