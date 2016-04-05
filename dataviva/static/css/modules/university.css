@@ -77,11 +77,11 @@
   line-height: 40px;
   padding: 0 2rem;
 }
-.university .tab-content {
+.university .profile .tab-content {
   margin-top: -130px;
 }
 @media (max-width: 767px) {
-  .university .tab-content {
+  .university .profile .tab-content {
     margin-top: 0px;
   }
 }

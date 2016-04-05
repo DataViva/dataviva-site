@@ -172,25 +172,25 @@
     right: 0px;
   }
 }
-.location .table {
+.location .table.data-detail {
   margin-bottom: 0px;
 }
-.location table > tbody td,
-.location table > tbody th {
+.location table.data-detail > tbody td,
+.location table.data-detail > tbody th {
   border-top: none;
   vertical-align: top;
   width: 50%;
 }
-.location table > tbody td {
+.location table.data-detail > tbody td {
   font-size: 18px;
   font-weight: 700;
   line-height: 20px;
 }
-.location table > tbody td,
-.location table > tbody td .label {
+.location table.data-detail > tbody td,
+.location table.data-detail > tbody td .label {
   color: #5a9dc4;
 }
-.location table > tbody td .label {
+.location table.data-detail > tbody td .label {
   display: block;
   font-size: 14px;
   margin: 0;
@@ -198,10 +198,10 @@
   text-align: left;
   text-transform: uppercase;
 }
-.location table > tbody td span {
+.location table.data-detail > tbody td span {
   display: block;
 }
-.location table > tbody th {
+.location table.data-detail > tbody th {
   font-size: 13px;
   font-weight: 400;
   line-height: 15px;

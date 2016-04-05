@@ -77,11 +77,11 @@
   line-height: 40px;
   padding: 0 2rem;
 }
-.occupation .tab-content {
+.occupation .profile .tab-content {
   margin-top: -130px;
 }
 @media (max-width: 767px) {
-  .occupation .tab-content {
+  .occupation .profile .tab-content {
     margin-top: 0px;
   }
 }
