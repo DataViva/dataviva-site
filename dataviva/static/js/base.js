@@ -19,6 +19,22 @@ $(document).ready(function () {
     }(document, 'script', 'facebook-jssdk'));
 
 
+    $("[name='language-selector']").val(document.documentElement.lang);
+
+    $("[name='language-selector']").change(function() {
+        var path = window.location.pathname.split('/'),
+            lang = path[1];
+
+        if (lang !== this.value) {
+            if (['pt','en'].indexOf(lang) > -1) {
+                path.splice(1, 1, this.value);
+            } else {
+                path.splice(1, 0, this.value);
+            }
+            window.location.href = path.join('/') + window.location.search + window.location.hash;
+        }
+    });
+
 });
 
 function setAlertTimeOut(time) {
