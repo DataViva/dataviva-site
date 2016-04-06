@@ -562,6 +562,7 @@ def dictionary():
         "save_graphs": gettext("Save the graphs you need and get our free content in your e-mail. Signing up gives you access to exclusive resources to facilitate your research."),
         "free_sing_up": gettext("Free Sign Up"),
         "partners": gettext("Partners"),
+        "promoters": gettext("Promoters"),
 
         #footer
         "about_min": gettext("About"),
