@@ -14,14 +14,15 @@ mod = Blueprint('basic_course', __name__,
                 static_folder='static')
 
 
+@mod.before_request
+def before_request():
+    g.page_type = 'category'
+
+
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
-
-@mod.before_request
-def before_request():
-    g.page_type = mod.name
 
 @mod.url_defaults
 def add_language_code(endpoint, values):
