@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-06 14:11-0300\n"
+"POT-Creation-Date: 2016-04-06 14:21-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -2766,13 +2766,14 @@ msgstr "O"
 
 #: dataviva/templates/include/footer.html:7
 #: dataviva/templates/include/partners.html:4
+#: dataviva/translations/dictionary.py:564
 #, fuzzy
 msgid "Partners"
 msgstr "Parceiros"
 
 #: dataviva/templates/include/footer.html:14
 msgid "Explore"
-msgstr ""
+msgstr "Explore"
 
 #: dataviva/templates/include/footer.html:18
 #: dataviva/translations/dictionary.py:352
@@ -4092,10 +4093,6 @@ msgstr ""
 msgid "Get started "
 msgstr ""
 
-#: dataviva/translations/dictionary.py:564
-msgid "Parceiros"
-msgstr ""
-
 #: dataviva/translations/dictionary.py:596
 msgid "Trillion"
 msgid_plural "Trillions"
@@ -4498,8 +4495,11 @@ msgstr "com"
 #~ msgstr "Visualizações"
 
 #~ msgid "CONSTRUA GRÁFICOS"
-#~ msgstr ""
+#~ msgstr "MAKE GRAPHS"
 
 #~ msgid "DOWNLOAD DE BANCO DE DADOS"
+#~ msgstr "DATABASE DOWNLOAD"
+
+#~ msgid "Parceiros"
 #~ msgstr ""
 

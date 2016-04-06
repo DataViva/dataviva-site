@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-06 14:11-0300\n"
+"POT-Creation-Date: 2016-04-06 14:21-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2270,6 +2270,7 @@ msgstr ""
 
 #: dataviva/templates/include/footer.html:7
 #: dataviva/templates/include/partners.html:4
+#: dataviva/translations/dictionary.py:564
 msgid "Partners"
 msgstr ""
 
@@ -3545,10 +3546,6 @@ msgstr ""
 
 #: dataviva/translations/dictionary.py:547
 msgid "Get started "
-msgstr ""
-
-#: dataviva/translations/dictionary.py:564
-msgid "Parceiros"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:596
