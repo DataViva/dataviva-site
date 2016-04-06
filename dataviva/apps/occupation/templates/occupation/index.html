@@ -45,7 +45,7 @@
                        role="tab"
                        data-id="{{ occupation.id }}"
                        data-location="{{ location.id }}"
-                       data-toggle="tab">Geral</a>
+                       data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
                 <li role="presentation">
                     <a href="#wages"
@@ -54,7 +54,7 @@
                        graph
                        data-id="{{ occupation.id }}"
                        data-location="{{ location.id }}"
-                       data-toggle="tab">Salário e Emprego</a>
+                       data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
                 </li>
                 {% if location.id %}
                 <li role="presentation">
@@ -64,7 +64,7 @@
                        graph
                        data-occupation="{{ occupation.id }}"
                        data-location="{{ location.id }}"
-                       data-toggle="tab">Oportunidade Econômica</a>
+                       data-toggle="tab">{% trans %}Economic Opportunities{% endtrans %}</a>
                 </li>
                 {% endif %}
             </ul>
