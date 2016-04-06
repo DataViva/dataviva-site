@@ -1,13 +1,15 @@
 {% extends "rankings/index.html" %}
 
 {% block rankings_content %}
-<div class="container">
+<div class="rankings-control">
     <div class="btn-group">
         <button id="economic-activities-sections" class="btn btn-white">Seções</button>
         <button id="economic-activities-divisions" class="btn btn-white">Divisões</button>
         <button id="economic-activities-classes" class="btn btn-white">Classes</button>
     </div>
-    <select class="btn btn-white year-selector" id="year-selector"><option value="">Year</option></select>
+    <select class="year-selector form-control" id="year-selector">
+        <option value="">Ano</option>
+    </select>
 </div>
 
 <table id="economic-activities-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
