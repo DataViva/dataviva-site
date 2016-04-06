@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Renda Média Mensal</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Average Monthly Income{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{header.average_monthly_income | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header.average_monthly_income | magnitude}}</small>
@@ -13,7 +13,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Massa Salarial</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Payroll{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{header.salary_mass | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header.salary_mass | magnitude}}</small>
@@ -22,7 +22,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Total de Empregos</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Total Employment{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{header.total_employment | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header.total_employment | magnitude}}</small>
@@ -31,7 +31,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Total de Estabelecimentos</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Total of Establishments{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{header.total_establishments | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header.total_establishments | magnitude}}</small>
@@ -46,7 +46,7 @@
     </div>
 
     <div class="m-t-sm col-xs-12 year">
-        Ano: {{ header.year }}
+        {% trans %}Year{% endtrans %}: {{ header.year }}
     </div>
 
     <h2 class="m-t-xl">Perfil Geral</h2>

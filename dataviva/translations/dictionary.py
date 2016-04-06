@@ -585,6 +585,12 @@ def dictionary():
         "best_regards": gettext("Best Regards,"),
         "team": gettext("Team"),
 
+        #product
+        "wages_and_jobs": gettext("Wages and Jobs"),
+        "avg_month_income": gettext("Average Monthly Income"),
+        "payroll": gettext("Payroll"),
+        "total_employment": gettext("Total Employment"),
+        "total_establishment": gettext("Total of Establishments"),
 
 
     }

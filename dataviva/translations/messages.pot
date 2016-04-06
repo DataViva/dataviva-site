@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-06 14:34-0300\n"
+"POT-Creation-Date: 2016-04-06 15:22-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -294,6 +294,45 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
+#: dataviva/apps/occupation/templates/occupation/index.html:48
+#: dataviva/apps/product/templates/product/index.html:48
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:49
+#: dataviva/translations/dictionary.py:479
+msgid "General"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/index.html:57
+#: dataviva/translations/dictionary.py:589
+msgid "Wages and Jobs"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/index.html:67
+#: dataviva/apps/product/templates/product/index.html:67
+#: dataviva/apps/product/templates/product/tab-opportunities.html:2
+#: dataviva/translations/dictionary.py:481
+msgid "Economic Opportunities"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:7
+#: dataviva/translations/dictionary.py:590
+msgid "Average Monthly Income"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:16
+#: dataviva/translations/dictionary.py:591
+msgid "Payroll"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:25
+#: dataviva/translations/dictionary.py:592
+msgid "Total Employment"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:34
+#: dataviva/translations/dictionary.py:593
+msgid "Total of Establishments"
+msgstr ""
+
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:3
 #: dataviva/translations/dictionary.py:516
@@ -355,18 +394,6 @@ msgstr ""
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:58
 #: dataviva/translations/dictionary.py:285
 msgid "Origin"
-msgstr ""
-
-#: dataviva/apps/product/templates/product/index.html:48
-#: dataviva/apps/trade_partner/templates/trade_partner/index.html:49
-#: dataviva/translations/dictionary.py:479
-msgid "General"
-msgstr ""
-
-#: dataviva/apps/product/templates/product/index.html:67
-#: dataviva/apps/product/templates/product/tab-opportunities.html:2
-#: dataviva/translations/dictionary.py:481
-msgid "Economic Opportunities"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:16
@@ -3553,25 +3580,25 @@ msgstr ""
 msgid "Get started "
 msgstr ""
 
-#: dataviva/translations/dictionary.py:597
+#: dataviva/translations/dictionary.py:603
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:598
+#: dataviva/translations/dictionary.py:604
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:599
+#: dataviva/translations/dictionary.py:605
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:600
+#: dataviva/translations/dictionary.py:606
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""
