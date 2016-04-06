@@ -18,11 +18,15 @@
                     <a href="#locations" data-toggle="collapse" data-parent="#locations">
                         Localidades
                     </a>
-                    <div class="list-subgroup collapse" id="locations">
-                        <a href="{{ url_for('rankings.location_international_trade') }}" data-parent="#locations">
+                    <div class="list-subgroup collapse {{'in' if tab == 'location-international-trade' or tab == 'location-wages'}}" id="locations">
+                        <a href="{{ url_for('rankings.location_international_trade') }}"
+                           data-parent="#locations"
+                           class="{{'active' if tab == 'location-international-trade'}}">
                             Comércio Internacional
                         </a>
-                        <a href="{{ url_for('rankings.location_wages') }}" data-parent="#locations">
+                        <a href="{{ url_for('rankings.location_wages') }}"
+                           data-parent="#locations"
+                           class="{{'active' if tab == 'location-wages'}}">
                             Salário e Emprego
                        </a>
                     </div>

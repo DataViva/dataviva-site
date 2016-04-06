@@ -51,3 +51,10 @@
     display: block;
     line-height: 25px;
 }
+.rankings .nav-rankings .list-group-item .list-subgroup a.active,
+.rankings .nav-rankings .list-group-item .list-subgroup a:active,
+.rankings .nav-rankings .list-group-item .list-subgroup a:focus {
+    font-weight: bold;
+    background-color: #FFF;
+    color: #337AB7;
+}

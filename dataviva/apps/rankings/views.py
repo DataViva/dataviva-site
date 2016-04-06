@@ -28,12 +28,12 @@ def index():
 
 @mod.route('/location/international-trade', methods=['GET'])
 def location_international_trade():
-    return render_template('rankings/location-international-trade.html')
+    return render_template('rankings/location-international-trade.html', tab='location-international-trade')
 
 
 @mod.route('/location/wages-and-employment', methods=['GET'])
 def location_wages():
-    return render_template('rankings/location-wages.html')
+    return render_template('rankings/location-wages.html', tab='location-wages')
 
 
 @mod.route('/occupation', methods=['GET'])
