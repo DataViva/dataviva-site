@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-06 15:51-0300\n"
+"POT-Creation-Date: 2016-04-06 15:58-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -430,24 +430,29 @@ msgid "The product of the position of "
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:105
+#: dataviva/apps/product/templates/product/tab-general.html:116
 #: dataviva/translations/dictionary.py:492
 msgid "are number "
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:106
+#: dataviva/apps/product/templates/product/tab-general.html:117
 msgid " in imports and number"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:107
+#: dataviva/apps/product/templates/product/tab-general.html:118
 #: dataviva/translations/dictionary.py:494
 msgid " in exports in Brazil. In "
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:108
+#: dataviva/apps/product/templates/product/tab-general.html:119
 msgid " its commercial value was of "
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:109
+#: dataviva/apps/product/templates/product/tab-general.html:120
 msgid ", representing a variation of"
 msgstr ""
 
@@ -464,40 +469,8 @@ msgid "is"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:112
-msgid "and the one that imports the most is "
-msgstr ""
-
-#: dataviva/apps/product/templates/product/tab-general.html:116
-#: dataviva/apps/product/templates/product/tab-general.html:142
-#: dataviva/translations/dictionary.py:499
-msgid "occupies the"
-msgstr ""
-
-#: dataviva/apps/product/templates/product/tab-general.html:117
-#: dataviva/apps/product/templates/product/tab-general.html:130
-#: dataviva/apps/product/templates/product/tab-general.html:143
-msgid "position in imports and the"
-msgstr ""
-
-#: dataviva/apps/product/templates/product/tab-general.html:118
-msgid "position in exports in Brazil. In"
-msgstr ""
-
-#: dataviva/apps/product/templates/product/tab-general.html:119
-#: dataviva/apps/product/templates/product/tab-general.html:133
-#: dataviva/apps/product/templates/product/tab-general.html:147
-msgid "earned"
-msgstr ""
-
-#: dataviva/apps/product/templates/product/tab-general.html:120
-#: dataviva/apps/product/templates/product/tab-general.html:134
-#: dataviva/apps/product/templates/product/tab-general.html:148
-msgid "in trade value, representing a variation of"
-msgstr ""
-
 #: dataviva/apps/product/templates/product/tab-general.html:123
-#: dataviva/translations/dictionary.py:498
-msgid " and the one that imports the most is "
+msgid "and the one that imports the most is "
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:128
@@ -506,6 +479,11 @@ msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:129
 msgid "occupy the"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:130
+#: dataviva/apps/product/templates/product/tab-general.html:143
+msgid "position in imports and the"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:131
@@ -518,6 +496,16 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:146
 #: dataviva/translations/dictionary.py:502
 msgid "In"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:133
+#: dataviva/apps/product/templates/product/tab-general.html:147
+msgid "earned"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:134
+#: dataviva/apps/product/templates/product/tab-general.html:148
+msgid "in trade value, representing a variation of"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:135
@@ -535,6 +523,11 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:138
 #: dataviva/apps/product/templates/product/tab-general.html:152
 msgid "and which imports more is"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:142
+#: dataviva/translations/dictionary.py:499
+msgid "occupies the"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:145
@@ -3535,6 +3528,10 @@ msgstr ""
 
 #: dataviva/translations/dictionary.py:497
 msgid "in five years. The Brazilian state that most exports"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:498
+msgid " and the one that imports the most is "
 msgstr ""
 
 #: dataviva/translations/dictionary.py:544
