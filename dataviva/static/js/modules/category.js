@@ -41,9 +41,19 @@ $(document).ready(function () {
             target: '+=1'
         });
 
-        if ($('.jcarousel-wrapper .jcarousel ul li') > 4) {
-            $('.jcarousel-control-prev').removeClass("hidden-lg")
-            $('.jcarousel-control-next').removeClass("hidden-lg")
+        if ($('.jcarousel-wrapper .jcarousel ul li').length <= 4) {
+            $('.jcarousel-control-prev').addClass("hidden-lg")
+            $('.jcarousel-control-next').addClass("hidden-lg")
+        }
+
+        if ($('.jcarousel-wrapper .jcarousel ul li').length <= 3) {
+            $('.jcarousel-control-prev').addClass("hidden-md")
+            $('.jcarousel-control-next').addClass("hidden-md")
+        }
+
+        if ($('.jcarousel-wrapper .jcarousel ul li').length <= 2) {
+            $('.jcarousel-control-prev').addClass("hidden-sm")
+            $('.jcarousel-control-next').addClass("hidden-sm")
         }
     });
 
