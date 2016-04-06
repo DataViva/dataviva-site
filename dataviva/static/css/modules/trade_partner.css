@@ -77,11 +77,11 @@
   line-height: 40px;
   padding: 0 2rem;
 }
-.trade_partner .tab-content {
+.trade_partner .profile .tab-content {
   margin-top: -130px;
 }
 @media (max-width: 767px) {
-  .trade_partner .tab-content {
+  .trade_partner .profile .tab-content {
     margin-top: 0px;
   }
 }

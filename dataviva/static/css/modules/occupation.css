@@ -77,11 +77,11 @@
   line-height: 40px;
   padding: 0 2rem;
 }
-.occupation .tab-content {
+.occupation .profile .tab-content {
   margin-top: -130px;
 }
 @media (max-width: 767px) {
-  .occupation .tab-content {
+  .occupation .profile .tab-content {
     margin-top: 0px;
   }
 }
@@ -172,25 +172,25 @@
     right: 0px;
   }
 }
-.occupation .table {
+.occupation .table.data-detail {
   margin-bottom: 0px;
 }
-.occupation table > tbody td,
-.occupation table > tbody th {
+.occupation table.data-detail > tbody td,
+.occupation table.data-detail > tbody th {
   border-top: none;
   vertical-align: top;
   width: 50%;
 }
-.occupation table > tbody td {
+.occupation table.data-detail > tbody td {
   font-size: 18px;
   font-weight: 700;
   line-height: 20px;
 }
-.occupation table > tbody td,
-.occupation table > tbody td .label {
+.occupation table.data-detail > tbody td,
+.occupation table.data-detail > tbody td .label {
   color: #5a9dc4;
 }
-.occupation table > tbody td .label {
+.occupation table.data-detail > tbody td .label {
   display: block;
   font-size: 14px;
   margin: 0;
@@ -198,10 +198,10 @@
   text-align: left;
   text-transform: uppercase;
 }
-.occupation table > tbody td span {
+.occupation table.data-detail > tbody td span {
   display: block;
 }
-.occupation table > tbody th {
+.occupation table.data-detail > tbody th {
   font-size: 13px;
   font-weight: 400;
   line-height: 15px;

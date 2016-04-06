@@ -6,7 +6,6 @@ from dataviva.api.secex.services import ProductTradePartners as ProductTradePart
 from dataviva.api.secex.services import ProductMunicipalities as ProductMunicipalitiesService
 from dataviva.api.secex.services import ProductLocations as ProductLocationsService
 from dataviva.api.attrs.models import Bra, Hs
-from flask.ext.babel import gettext
 
 mod = Blueprint('product', __name__,
                 template_folder='templates',
@@ -16,7 +15,7 @@ mod = Blueprint('product', __name__,
 
 @mod.before_request
 def before_request():
-    g.page_type = mod.name
+    g.page_type = 'category'
 
 
 @mod.url_value_preprocessor
@@ -146,6 +145,5 @@ def index(product_id):
         if secex[ranking].hs_id == product_id:
             header['import_value_ranking'] = ranking + 1
             break
-
 
     return render_template('product/index.html', header=header, body=body, product=product, location=location)

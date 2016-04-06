@@ -12,7 +12,7 @@ mod = Blueprint('industry', __name__,
 
 @mod.before_request
 def before_request():
-    g.page_type = mod.name
+    g.page_type = 'category'
 
 
 @mod.url_value_preprocessor
@@ -23,6 +23,7 @@ def pull_lang_code(endpoint, values):
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
+
 
 @mod.route('/<industry_id>/graphs/<tab>', methods=['POST'])
 def graphs(industry_id, tab):
@@ -51,14 +52,16 @@ def index(cnae_id):
     if location:
         industry_service = IndustryByLocation(bra_id=location_id, cnae_id=industry.id)
         if len(industry.id) == 6:
-                header['rca'] = industry_service.rca()
-                header['distance'] = industry_service.distance()
-                header['opportunity_gain'] = industry_service.opportunity_gain()
+            header['rca'] = industry_service.rca()
+            header['distance'] = industry_service.distance()
+            header['opportunity_gain'] = industry_service.opportunity_gain()
 
         if len(location_id) != 9:
             body['municipality_with_more_num_jobs_value'] = industry_municipality_service.highest_number_of_jobs()
-            body['municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs()
-            body['municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
+            body[
+                'municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs()
+            body[
+                'municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
             body['municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
 
     else:
@@ -66,7 +69,8 @@ def index(cnae_id):
 
         body['municipality_with_more_num_jobs_value'] = industry_municipality_service.highest_number_of_jobs()
         body['municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs()
-        body['municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
+        body[
+            'municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
         body['municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
 
     body['occ_with_more_wage_avg_name'] = industry_occupation_service.occupation_with_biggest_wage_average()
