@@ -38,34 +38,34 @@ def location_wages():
 
 @mod.route('/occupation', methods=['GET'])
 def occupation():
-    return render_template('rankings/occupation.html')
+    return render_template('rankings/occupation.html', tab='occupation')
 
 
 @mod.route('/economic-activities', methods=['GET'])
 def economic_activities():
-    return render_template('rankings/economic-activities.html')
+    return render_template('rankings/economic-activities.html', tab='economic_activities')
 
 
 @mod.route('/product', methods=['GET'])
 def product():
-    return render_template('rankings/product.html')
+    return render_template('rankings/product.html', tab='product')
 
 
 @mod.route('/trade-partner', methods=['GET'])
 def trade_partner():
-    return render_template('rankings/trade-partner.html')
+    return render_template('rankings/trade-partner.html', tab='trade_partner')
 
 
 @mod.route('/university', methods=['GET'])
 def university():
-    return render_template('rankings/university.html')
+    return render_template('rankings/university.html', tab='university')
 
 
 @mod.route('/major', methods=['GET'])
 def major():
-    return render_template('rankings/major.html')
+    return render_template('rankings/major.html', tab='major')
 
 
 @mod.route('/basic-course', methods=['GET'])
 def basic_course():
-    return render_template('rankings/basic-course.html')
+    return render_template('rankings/basic-course.html', tab='basic_course')

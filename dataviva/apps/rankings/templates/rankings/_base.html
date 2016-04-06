@@ -27,25 +27,25 @@
                        </a>
                     </div>
                 </div>
-                <div class="list-group-item">
+                <div class="list-group-item {{ 'active' if tab == 'occupation' else ''}}">
                     <a href="{{ url_for('rankings.occupation') }}">Ocupações</a>
                 </div>
-                <div class="list-group-item">
+                <div class="list-group-item {{ 'active' if tab == 'economic_activities' else ''}}">
                     <a href="{{ url_for('rankings.economic_activities') }}">Atividades Econômicas</a>
                 </div>
-                <div class="list-group-item">
+                <div class="list-group-item {{ 'active' if tab == 'product' else ''}}">
                     <a href="{{ url_for('rankings.product') }}">Produtos</a>
                 </div>
-                <div class="list-group-item">
+                <div class="list-group-item {{ 'active' if tab == 'trade_partner' else ''}}">
                     <a href="{{ url_for('rankings.trade_partner') }}">Parceiros Comerciais</a>
                 </div>
-                <div class="list-group-item">
+                <div class="list-group-item {{ 'active' if tab == 'university' else ''}}">
                     <a href="{{ url_for('rankings.university') }}">Universidades</a>
                 </div>
-                <div class="list-group-item">
+                <div class="list-group-item {{ 'active' if tab == 'major' else ''}}">
                     <a href="{{ url_for('rankings.major') }}">Curso Superior</a>
                 </div>
-                <div class="list-group-item">
+                <div class="list-group-item {{ 'active' if tab == 'basic_course' else ''}}">
                     <a href="{{ url_for('rankings.basic_course') }}">Curso Básico</a>
                 </div>
             </div>
