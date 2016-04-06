@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-05 16:06-0300\n"
+"POT-Creation-Date: 2016-04-06 14:21-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1369,6 +1369,41 @@ msgstr ""
 msgid "Click here to login"
 msgstr ""
 
+#: dataviva/templates/about/ask/ask_feedback.html:4
+#: dataviva/translations/dictionary.py:579
+msgid "DataViva Answer"
+msgstr ""
+
+#: dataviva/templates/about/ask/ask_feedback.html:17
+#: dataviva/translations/dictionary.py:580
+msgid "Dear Administrator."
+msgstr ""
+
+#: dataviva/templates/about/ask/ask_feedback.html:18
+#: dataviva/translations/dictionary.py:581
+msgid "The question"
+msgstr ""
+
+#: dataviva/templates/about/ask/ask_feedback.html:18
+#: dataviva/translations/dictionary.py:582
+msgid "was published/commented on DataViva."
+msgstr ""
+
+#: dataviva/templates/about/ask/ask_feedback.html:20
+#: dataviva/translations/dictionary.py:583
+msgid "Check here."
+msgstr ""
+
+#: dataviva/templates/about/ask/ask_feedback.html:22
+#: dataviva/translations/dictionary.py:584
+msgid "Best Regards,"
+msgstr ""
+
+#: dataviva/templates/about/ask/ask_feedback.html:23
+#: dataviva/translations/dictionary.py:585
+msgid "Team"
+msgstr ""
+
 #: dataviva/templates/about/ask/index.html:7
 msgid ""
 "DataViva is a visualization tool that provides official data on trade, "
@@ -2235,6 +2270,7 @@ msgstr ""
 
 #: dataviva/templates/include/footer.html:7
 #: dataviva/templates/include/partners.html:4
+#: dataviva/translations/dictionary.py:564
 msgid "Partners"
 msgstr ""
 
@@ -3512,29 +3548,25 @@ msgstr ""
 msgid "Get started "
 msgstr ""
 
-#: dataviva/translations/dictionary.py:564
-msgid "Parceiros"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:586
+#: dataviva/translations/dictionary.py:596
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:587
+#: dataviva/translations/dictionary.py:597
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:588
+#: dataviva/translations/dictionary.py:598
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:589
+#: dataviva/translations/dictionary.py:599
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""

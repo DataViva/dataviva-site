@@ -561,7 +561,7 @@ def dictionary():
         "sing_up_free_and": gettext("Sign Up free and make the most of DataViva"),
         "save_graphs": gettext("Save the graphs you need and get our free content in your e-mail. Signing up gives you access to exclusive resources to facilitate your research."),
         "free_sing_up": gettext("Free Sign Up"),
-        "partners": gettext("Parceiros"),
+        "partners": gettext("Partners"),
 
         #footer
         "about_min": gettext("About"),
@@ -574,6 +574,16 @@ def dictionary():
         "help": gettext("Help"),
         "virtual_tour": gettext("Virtual Tour"),
         "message": gettext("Message"),
+
+        #about
+        "dataviva_answer": gettext("DataViva Answer"),
+        "dear_admin": gettext("Dear Administrator."),
+        "the_question": gettext("The question"),
+        "was_publish/comented": gettext("was published/commented on DataViva."),
+        "check_here": gettext("Check here."),
+        "best_regards": gettext("Best Regards,"),
+        "team": gettext("Team"),
+
 
 
     }
