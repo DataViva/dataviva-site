@@ -683,6 +683,10 @@ nav > li span:not(.caret) {
   margin-top: -20px;
 }
 
+.sidebar {
+    margin-top: 50px;
+}
+
 .sidebar h3 {
   border-bottom: 1px solid #f2f2f2;
   font-size: 18px;

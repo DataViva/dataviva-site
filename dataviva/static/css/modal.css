@@ -55,8 +55,6 @@
   background-color: #e1eee6;
 }
 
-
-/* SELECTORS */
 .selector-list .selected, .list-group .selected {
   background-color: #337ab7 !important;
   color: white;
