@@ -1,3 +1,7 @@
+.rankings .nav-rankings {
+    margin-top: 45px;
+}
+
 .rankings .nav-rankings .list-group .list-group-item {
     background-color: #f5f5f5;
     color: #337AB7;
@@ -59,11 +63,13 @@
     color: #337AB7;
 }
 
-
-
-
 .rankings .rankings-content {
     text-align: center;
+    margin-top:
+}
+
+.rankings .rankings-wrapper{
+    margin-top: -40px;
 }
 
 .rankings .rankings-control {
@@ -73,9 +79,13 @@
 
 .rankings .rankings-control .year-selector {
     display: inline;
-    width: 60px;
+    width: 75px;
     margin-left: 5px;
 }
 .rankings .rankings-control .btn-group .btn {
     margin-top: -2px;
+}
+
+.rankings .dataTables_wrapper {
+    width: 100%;
 }
