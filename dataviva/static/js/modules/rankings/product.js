@@ -2,12 +2,13 @@ var ProductTable = function () {
     this.tableId = '#product-table';
 
     this.table = $(this.tableId).DataTable({
+        "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/secex/all-0/all/show.6/all/?order=pci.desc",
         "sAjaxDataProp": "data",
         "order": [],
         "aoColumns": [
             null, //year
-            null, //month
+            { "bVisible": false }, //month
             null, //import_val
             null, //export_val
             { "bVisible": false }, //import_kg
@@ -29,7 +30,15 @@ var ProductTable = function () {
         "scrollCollapse": true,
         "scroller": true,
         initComplete: function () {
-            var select = $('#year-selector')
+            var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control"),
+                buttons = $("<div></div>").addClass("btn-group");
+
+            select.append( $('<option value="">Ano</option>') );
+            buttons.append($("<button>Seções</button>").attr("id", 'product-sections').addClass("btn btn-white"));
+            buttons.append($("<button>Posições</button>").attr("id", 'product-postions').addClass("btn btn-white"));
+
+            $('.rankings-content .rankings-control').append(buttons);
+            $('.rankings-content .rankings-control').append(select);
 
             product.table
                 .column( 0 )
@@ -47,7 +56,17 @@ var ProductTable = function () {
                     .draw();
             });
 
-            $('#year-selector').append(select);
+            $('#product-table_filter input').removeClass('input-sm');
+            $('#product-table_filter').addClass('pull-right');
+
+
+            $('#product-sections').click(function() {
+                productSections();
+            });
+
+            $('#product-postions').click(function() {
+                productPositions();
+            });
         }
     });
 };
@@ -61,15 +80,3 @@ var productSections = function() {
 var productPositions = function() {
     product.table.ajax.url("/secex/all-0/all/show.6/all/?order=pci.desc").load();
 };
-
-$(document).ready(function(){
-
-    $('#product-sections').click(function() {
-        productSections();
-    });
-
-    $('#product-postions').click(function() {
-        productPositions();
-    });
-
-});

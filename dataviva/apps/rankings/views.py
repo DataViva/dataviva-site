@@ -23,7 +23,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    return render_template('rankings/index.html')
+    return render_template('rankings/location-international-trade.html', tab='location-international-trade')
 
 
 @mod.route('/location/international-trade', methods=['GET'])
