@@ -58,3 +58,12 @@
     background-color: #FFF;
     color: #337AB7;
 }
+.rankings .year-selector {
+    display: inline;
+    width: 60px;
+    margin-left: 5px;
+}
+
+.rankings .btn-group .btn {
+    margin-top: -2px;
+}
