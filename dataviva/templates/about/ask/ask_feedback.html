@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Resposta DataViva</title>
+		<title>{% trans %}DataViva Answer{% endtrans %}</title>
 	</head>
 	<body>
 		<table border="0" align="center" width="550" cellpadding="0" cellspacing="0">
@@ -14,13 +14,13 @@
 						</tr>
 						<tr>
 							<td bgcolor="#FFFFFF" colspan="2" style="padding:10px; font-family:'Trebuchet MS'; font-size:18px; color:#000000">
-								Caro(a) administrador(a).<br/><br/>
-								A pergunta "{{ question.question }}" foi publicada/commentada no DataViva.
+								{% trans %}Dear Administrator.{% endtrans %}<br/><br/>
+								{% trans %}The question{% endtrans %} "{{ question.question }}" {% trans %}was published/commented on DataViva.{% endtrans %}
 								<br/>
-								<a href="http://dataviva.info/about/question/{{ question.slug }}">Confira aqui.</a>
+								<a href="http://dataviva.info/about/question/{{ question.slug }}">{% trans %}Check here.{% endtrans %}</a>
 								<br/><br/>
-								Atenciosamente,<br/><br/>
-								Equipe DataViva
+								{% trans %}Best Regards,{% endtrans %}<br/><br/>
+								{% trans %}Team{% endtrans %} DataViva
 								<a style="color:#333333; text-decoration: none" href="http://dataviva.info">dataviva.info</a>
 							</td>
 						</tr>

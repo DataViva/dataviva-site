@@ -575,6 +575,16 @@ def dictionary():
         "virtual_tour": gettext("Virtual Tour"),
         "message": gettext("Message"),
 
+        #about
+        "dataviva_answer": gettext("DataViva Answer"),
+        "dear_admin": gettext("Dear Administrator."),
+        "the_question": gettext("The question"),
+        "was_publish/comented": gettext("was published/commented on DataViva."),
+        "check_here": gettext("Check here."),
+        "best_regards": gettext("Best Regards,"),
+        "team": gettext("Team"),
+
+
 
     }
 
