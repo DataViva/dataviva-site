@@ -51,7 +51,7 @@
                     </div>
                 </li>
                 {%endif%}
-            
+
             </ul>
         </div>
 
@@ -73,13 +73,13 @@
             <p>{{ trade_partner.article() | capitalize }} país {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {% if header.total_exported == 0 %} não há exportações realizadas pelo Brasil. O total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}{% else %}{{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse país é o {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e o total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }} {% endif %}</p>
         {% endif %}
     {% endif %}
-        
+
 
     <div class="row">
         <div class="col-xs-12 col-md-10 col-lg-8">
             <h3>Comércio Internacional</h3>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table data-detail">
                     <tbody>
                         {% if body.highest_export_value %}
                         <tr>

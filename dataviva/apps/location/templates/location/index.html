@@ -11,13 +11,8 @@
                 <a href="{{ url_for('general.home') }}">Home</a>
             </li>
             <li {{ 'class="active"' if not location else '' }}>
-                <a href="#" title="Trocar" onclick="start_selector('Product');"> {{ location.name() }}</a>
+                <a href="#" title="Trocar" onclick="start_selector('Location');"> {{ location.name() }}</a>
             </li>
-            {% if location %}
-                <li class="active">
-                    <a href="#" title="Trocar" onclick="start_selector('Location', selectorCallback);"> {{ location.name() }}</a>
-                </li>
-            {% endif %}
         </ol>
     </div>
 </div>
@@ -28,10 +23,10 @@
     <div class="container">
         <div class="{{header.bg_class_image}}" data-stellar-background-ratio="0.2">
             <h1 class="col-xs-offset-0 col-sm-offset-4 col-md-offset-3 p-w-xs">
-                {{ location.name() }} <a href="#" title="Trocar" onclick="start_selector('Product');"> (trocar)</a>
+                {{ location.name() }} <a href="#" title="Trocar" onclick="start_selector('Location');"> (trocar)</a>
             </h1>
         </div>
-        <span class="portrait dv-bra-{{header.bra_id}} hidden-xs"></span>
+        <span class="portrait dv-bra-{{location.id}} hidden-xs"></span>
     </div>
 </section>
 
@@ -43,7 +38,7 @@
                     <a href="#general"
                        aria-controls="general"
                        role="tab"
-                       data-location="{{ location.id }}"
+                       data-id="{{ location.id }}"
                        data-toggle="tab">Geral</a>
                 </li>
                 <li role="presentation">
@@ -51,7 +46,7 @@
                        aria-controls="trade-partner"
                        role="tab"
                        graph
-                       data-location="{{ location.id }}"
+                       data-id="{{ location.id }}"
                        data-toggle="tab">Comércio Internacional</a>
                 </li>
                 <li role="presentation">
@@ -59,7 +54,7 @@
                        aria-controls="wages"
                        role="tab"
                        graph
-                       data-location="{{ location.id }}"
+                       data-id="{{ location.id }}"
                        data-toggle="tab">Salário e Emprego</a>
                 </li>
                 <li role="presentation">
@@ -67,7 +62,7 @@
                        aria-controls="opportunities"
                        role="tab"
                        graph
-                       data-location="{{ location.id }}"
+                       data-id="{{ location.id }}"
                        data-toggle="tab">Oportunidades Econômicas</a>
                 </li>
                 <li role="presentation">
@@ -75,7 +70,7 @@
                        aria-controls="education"
                        role="tab"
                        graph
-                       data-location="{{ location.id }}"
+                       data-id="{{ location.id }}"
                        data-toggle="tab">Educação</a>
                 </li>
 
