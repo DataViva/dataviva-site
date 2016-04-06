@@ -7,7 +7,7 @@ var ProductTable = function () {
         "order": [],
         "aoColumns": [
             null, //year
-            null, //month
+            { "bVisible": false }, //month
             null, //import_val
             null, //export_val
             { "bVisible": false }, //import_kg
