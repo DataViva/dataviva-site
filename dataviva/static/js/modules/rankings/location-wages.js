@@ -1,7 +1,8 @@
 var WagesTable = function () {
-    this.tableId = '#wages-table';
+    this.tableId = '#location-wages-table';
 
     this.table = $(this.tableId).DataTable({
+        "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/rais/all/show.1/all/all/?order=num_jobs.desc",
         "sAjaxDataProp": "data",
         "order": [],
@@ -30,7 +31,18 @@ var WagesTable = function () {
         "scrollCollapse": true,
         "scroller": true,
         initComplete: function () {
-            var select = $('#year-selector')
+            var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control"),
+                buttons = $("<div></div>").addClass("btn-group");
+
+            select.append( $('<option value="">Ano</option>') );
+            buttons.append($("<button>Regiões</button>").attr("id", 'location-wages-regions').addClass("btn btn-white"));
+            buttons.append($("<button>Estados</button>").attr("id", 'location-wages-states').addClass("btn btn-white"));
+            buttons.append($("<button>Mesoregiões</button>").attr("id", 'location-wages-mesoregions').addClass("btn btn-white"));
+            buttons.append($("<button>Microregiões</button>").attr("id", 'location-wages-microregions').addClass("btn btn-white"));
+            buttons.append($("<button>Municípios</button>").attr("id", 'location-wages-municipalities').addClass("btn btn-white"));
+
+            $('.rankings-content .rankings-control').append(buttons);
+            $('.rankings-content .rankings-control').append(select);
 
             wagesTable.table
                 .column( 0 )
@@ -48,7 +60,28 @@ var WagesTable = function () {
                     .draw();
             });
 
-            $('#year-selector').append(select);
+            $('#location-wages-table_filter input').removeClass('input-sm');
+            $('#location-wages-table_filter').addClass('pull-right');
+
+            $('#location-wages-regions').click(function() {
+                wagesRegions();
+            });
+
+            $('#location-wages-states').click(function() {
+                wagesStates();
+            });
+
+            $('#location-wages-mesoregions').click(function() {
+                wagesMesoregions();
+            });
+
+            $('#location-wages-microregions').click(function() {
+                wagesMicroregions();
+            });
+
+            $('#location-wages-municipalities').click(function() {
+                wagesMunicipalities();
+            });
         }
     });
 };
@@ -74,27 +107,3 @@ var wagesMicroregions = function() {
 var wagesMunicipalities = function() {
     wagesTable.table.ajax.url("/rais/all/show.9/all/all/?order=num_jobs.desc").load();
 };
-
-$(document).ready(function(){
-
-    $('#location-wages-regions').click(function() {
-        wagesRegions();
-    });
-
-    $('#location-wages-states').click(function() {
-        wagesStates();
-    });
-
-    $('#location-wages-mesoregions').click(function() {
-        wagesMesoregions();
-    });
-
-    $('#location-wages-microregions').click(function() {
-        wagesMicroRegions();
-    });
-
-    $('#location-wages-municipalities').click(function() {
-        wagesMunicipalities();
-    });
-
-});

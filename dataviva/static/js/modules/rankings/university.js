@@ -2,6 +2,7 @@ var universityTable = function () {
     this.tableId = '#university-table';
 
     this.table = $(this.tableId).DataTable({
+        "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/hedu/all/all/show/all/?order=enrolled.desc",
         "sAjaxDataProp": "data",
         "order": [],
@@ -24,7 +25,11 @@ var universityTable = function () {
         "scrollCollapse": true,
         "scroller": true,
         initComplete: function () {
-            var select = $('#year-selector')
+
+            var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control");
+
+            select.append( $('<option value="">Ano</option>') );
+            $('.rankings-content .rankings-control').append(select);
 
             universityTable.table
                 .column( 10 )
@@ -42,7 +47,8 @@ var universityTable = function () {
                     .draw();
             });
 
-            $('#year-selector').append(select);
+            $('#university-table_filter input').removeClass('input-sm');
+            $('#university-table_filter').addClass('pull-right');
         }
     });
 };

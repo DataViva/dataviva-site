@@ -2,6 +2,7 @@ var OccupationTable = function () {
     this.tableId = '#occupation-table';
 
     this.table = $(this.tableId).DataTable({
+        "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/rais/all/all/all/show.1/?order=num_jobs.desc",
         "sAjaxDataProp": "data",
         "order": [],
@@ -30,7 +31,15 @@ var OccupationTable = function () {
         "scrollCollapse": true,
         "scroller": true,
         initComplete: function () {
-            var select = $('#year-selector')
+            var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control"),
+                buttons = $("<div></div>").addClass("btn-group");
+
+            select.append( $('<option value="">Ano</option>') );
+            buttons.append($("<button>Grandes Grupos</button>").attr("id", 'occupation-groups').addClass("btn btn-white"));
+            buttons.append($("<button>Famílias</button>").attr("id", 'occupation-families').addClass("btn btn-white"));
+
+            $('.rankings-content .rankings-control').append(buttons);
+            $('.rankings-content .rankings-control').append(select);
 
             occupationTable.table
                 .column( 0 )
@@ -48,7 +57,16 @@ var OccupationTable = function () {
                     .draw();
             });
 
-            $('#year-selector').append(select);
+            $('#occupation-table_filter input').removeClass('input-sm');
+            $('#occupation-table_filter').addClass('pull-right');
+
+            $('#occupation-groups').click(function() {
+                occupationGroups();
+            });
+
+            $('#occupation-families').click(function() {
+                occupationFamilies();
+            });
         }
     });
 };
@@ -62,16 +80,3 @@ var occupationGroups = function() {
 var occupationFamilies = function() {
     occupationTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load();
 };
-
-
-$(document).ready(function(){
-
-    $('#occupation-groups').click(function() {
-        occupationGroups();
-    });
-
-    $('#occupation-families').click(function() {
-        occupationFamilies();
-    });
-
-});
