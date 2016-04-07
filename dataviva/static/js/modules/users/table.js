@@ -1,5 +1,5 @@
 var UsersTable = function () {
-    this.tableId = '#news-table';
+    this.tableId = '#users-table';
 
     this.table = $(this.tableId).DataTable({
         "oLanguage": {
@@ -90,10 +90,10 @@ var UsersTable = function () {
         }
     });
 
-    $('#news-table thead tr th').first().addClass('check-all')
+    $('#users-table thead tr th').first().addClass('check-all')
 
-    $('#news-table .check-all').click(function() {
-        var checked = $('#news-table .check-all input:checkbox').get(0).checked;
+    $('#users-table .check-all').click(function() {
+        var checked = $('#users-table .check-all input:checkbox').get(0).checked;
         $('input[name="selected-item"]').each(function() {
             $(this).prop('checked', checked);
         });
@@ -103,7 +103,7 @@ var UsersTable = function () {
 
 UsersTable.prototype.getCheckedIds = function(first_argument) {
     var checkedIds = [];
-    $('#news-table input[name="selected-item"]').each(function() {
+    $('#users-table input[name="selected-item"]').each(function() {
         if (this.checked) {
             checkedIds.push(this.value);
         }
