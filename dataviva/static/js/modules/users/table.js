@@ -1,94 +1,36 @@
 var UsersTable = function () {
     this.tableId = '#users-table';
 
-    this.table = $(this.tableId).DataTable({
-        "oLanguage": {
-          "sSearch": "Pesquisar "
-        },
-        "sAjaxSource": "/users/all",
-        "sAjaxDataProp": "users",
-        "order": [],
-        "columnDefs": [
-            {
-                "targets": 0,
-                "orderable": false,
-                "className": "column-checkbox",
-                "render": function (data, type, users, meta){
-                    var checkbox = '<div class="checkbox checkbox-success">' +
-                                   '    <input name="selected-item" id="item'+users[0]+'" value="'+users[0]+'" type="checkbox">' +
-                                   '    <label for="'+users[0]+'"></label>'
-                                   '</div>';
-
-                    return checkbox;
-                }
-            },
-            {
-                "targets": 1,
-                "className": "column-title",
-                "render": function (data, type, users, meta){
-                    return '<a href="/users/'+users[0]+'">'+users[1]+'</a>';
-                }
-            },
-            {
-                "targets": 4,
-                "orderable": false,
-                "className": "column-checkbox",
-                "render": function (data, type, users, meta){
-                   return '<input type="checkbox" name="show_home" id="show_home'+users[0]+
-                   '" value="'+users[0]+ (data ? '" checked>' : '" >');
-                }
-            },
-            {
-                "targets": 5,
-                "orderable": false,
-                "className": "column-checkbox",
-                "render": function (data, type, users, meta){
-                   return '<input type="checkbox" name="active" id="active'+users[0]+
-                   '" value="'+users[0]+ (data ? '" checked>' : '" >');
-                }
-            }],
-        "paging": false,
-        "bFilter": true,
-        "info": false,
-        "initComplete": function(settings, json) {
-            $( 'input[name="show_home"]' ).each(function() {
-                var switchery = new Switchery(this, {
-                    size: 'small'
-                });
-
-                $(this).next().click(function() {
-                    var checkbox = $(this).siblings().get(0);
-
-                    var ids = [checkbox.value],
-                        status = $(checkbox).attr('name'),
-                        status_value = checkbox.checked;
-
-                    changeStatus(ids, status, status_value);
-                });
+    this.table = $('#users-table').DataTable( {
+                "sAjaxSource": "/users/all",
+                "sAjaxDataProp": "users",
+                "aoColumnsDefs": [
+                    { "data": "id" },
+                    { "data": "title" },
+                    { "data": "authors" },
+                    { "data": "role"},
+                ],
+                "columnDefs": [ {
+                    'className' : 'body-checkbox',
+                    'targets':   3,
+                    'render': function(data, type,users, meta){
+                        if(data){
+                            return '<input type="checkbox" name="checkboxAdmin" value="'+users[0]+'" checked>'
+                        }else{
+                            return '<input type="checkbox" name="checkboxAdmin" value="'+users[0]+'">'
+                        }
+                    }
+                } ],
+                "columns": [
+                   { "width": "10%" },
+                   { "width": "30%" },
+                   null,
+                   { "width": "19%" },
+                 ],              
+               "paging": false,
+               "bFilter": false,
+               "info": false //number of rows in footer table
             });
-
-            $( 'input[name="active"]' ).each(function() {
-                var switchery = new Switchery(this, {
-                    size: 'small',
-                    color: '#5A9DC4'
-                });
-
-                $(this).next().click(function() {
-                    var checkbox = $(this).siblings().get(0);
-
-                    var ids = [checkbox.value],
-                        status = $(checkbox).attr('name'),
-                        status_value = checkbox.checked;
-
-                    changeStatus(ids, status, status_value);
-                });
-            });
-
-            $('input[name="selected-item"]').change(function() {
-                checkManySelected();
-            });
-        }
-    });
 
     $('#users-table thead tr th').first().addClass('check-all')
 

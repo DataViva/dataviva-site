@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, jsonify
+from flask import Blueprint, render_template, g, redirect, url_for, jsonify, request
 from dataviva.apps.general.views import get_locale
 
 from dataviva.apps.account.models import User
+from dataviva import db
 
 
 mod = Blueprint('users', __name__,
