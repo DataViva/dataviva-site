@@ -85,13 +85,13 @@ def delete(id):
         return make_response(render_template('not_found.html'), 404) 
        
 
-@mod.route('/', methods=['GET'])
+@mod.route('/admin', methods=['GET'])
 def control():
     calls = Call.query.all()
-    return render_template('calls/control.html', calls=calls)
+    return render_template('calls/admin.html', calls=calls)
 
 
-@mod.route('/', methods=['POST'])
+@mod.route('/admin', methods=['POST'])
 def control_update():
     for id, active in request.form.iteritems():
         call = Call.query.filter_by(id=id).first_or_404()

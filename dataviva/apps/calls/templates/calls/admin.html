@@ -1,24 +1,57 @@
-{% extends "calls/_base.html" %}
+{% extends "admin.html" %}
 
-{% block calls_content %}
+{% block breadcrumb %}
+    <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
+    <li class="active">Calls</li>
+{% endblock %}
 
-<div class="institucional">
-    <h2>Chamadas do DataViva</h2>
-    <h3>Aprovação de Chamadas</h3>
-    <div class="meta">
-        <table id="activateTable" class="table table-striped table-borde" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>Call ID<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Title<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Link<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Active </th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+{% block admin_content %}
+<h1>Calls</h1>
+
+<div id="message">
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            {{ message }}
+        </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 </div>
 
+<table id="news-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th class="column-checkbox">
+                <div class="checkbox checkbox-success">
+                    <input name="postselector" type="checkbox">
+                    <label for="check-all"></label>
+                </div>
+            </th>    
+            <th>Call ID</th>
+            <th>Title</th>
+            <th>Link</th>
+            <th>Active</th>
+        </tr>
+    </thead>
+</table>
+
+<a id="admin-new" class="btn btn-success" href="/news/admin/publication/new"><i class="fa fa-plus m-r-sm"></i>Novo</a>
+<button id="admin-edit" class="btn btn-primary"><i class="fa fa-pencil-square-o m-r-sm"></i>Editar</button>
+<button id="admin-delete" class="btn btn-danger"><i class="fa fa-trash-o m-r-sm"></i>Excluir</button>
+<button id="admin-activate" class="btn btn-success pull-right">Ativar</button>
+<button id="admin-deactivate" class="btn btn-white pull-right m-r-sm">Desativar</button>
+
+
+{% endblock admin_content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/calls/table.js"></script>
+{% endblock js_assets %}
+
+<!--
 <a class="btn btn-w-m btn-primary pull-right" href="/calls/call/new" >Nova Chamada </a>
 <button class="btn btn-w-m btn-primary pull-right" id="edit">Editar </button>
 <button class="btn btn-w-m btn-primary pull-right" id="delete">Excluir </button>
@@ -163,4 +196,5 @@
 
 
 </script>
-{% endblock calls_content %}
+
+-->
