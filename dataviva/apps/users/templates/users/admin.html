@@ -30,9 +30,9 @@
                     <label for="check-all"></label>
                 </div>
             </th>
-            <th>Título</th>
-            <th>Autor(es)</th>
-            <th>Data</th>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>E-mail</th>
             <th>Ativo</th>
         </tr>
     </thead>
@@ -45,3 +45,7 @@
 <button id="admin-deactivate" class="btn btn-white pull-right m-r-sm">Desativar</button>
 
 {% endblock admin_content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/users/table.js"></script>
+{% endblock js_assets %}
