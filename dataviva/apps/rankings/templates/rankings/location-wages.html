@@ -1,7 +1,10 @@
-{% extends "rankings/index.html" %}
+{% extends "rankings/_base.html" %}
+
+{% block breadcrumb %}
+    <li class="active">Rankings</li>
+{% endblock %}
 
 {% block rankings_content %}
-
 <table id="location-wages-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
