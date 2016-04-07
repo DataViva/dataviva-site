@@ -488,7 +488,7 @@ def dictionary():
         "International RCA": gettext("International RCA"),
         "International Distance": gettext("International Distance"),
         "International Opportunity Gain": gettext("International Opportunity Gain"),
-        "The_product": gettext("The product of the position of "),
+        "The_product": gettext("The products of the position of "),
         "are_number": gettext("are number "),
         " in imports and number": gettext(" in imports and number "),
         " in exports in Brazil. In ": gettext(" in exports in Brazil. In "),
