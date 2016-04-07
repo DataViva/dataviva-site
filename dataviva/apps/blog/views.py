@@ -61,17 +61,14 @@ def admin():
     return render_template('blog/admin.html', posts=posts)
 
 
-@mod.route('/admin/<status_change>', methods=['POST'])
-def admin_activate(status_change):
+@mod.route('/admin/post/<status>/<status_value>', methods=['POST'])
+def admin_activate(status, status_value):
     for id in request.form.getlist('ids[]'):
         post = Post.query.filter_by(id=id).first_or_404()
-        post.active = status_change == u'activate'
+        setattr(post, status, status_value == u'true')
         db.session.commit()
 
-    if status_change == u'activate':
-        message = u"Post(s) ativado(s) com sucesso!"
-    else:
-        message = u"Post(s) desativado(s) com sucesso!"
+    message = u"Post(s) alterado(s) com sucesso!"
     return message, 200
 
 
