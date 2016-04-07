@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash, jsonify, request
+from flask import Blueprint, render_template, g, redirect, url_for, jsonify
 from dataviva.apps.general.views import get_locale
 
 from dataviva.apps.account.models import User
-from dataviva.apps.ask.models import Question, Status, Reply, Flag, Vote
-from dataviva import db
-from datetime import datetime
 
 
 mod = Blueprint('users', __name__,
@@ -31,7 +28,7 @@ def users():
 @mod.route('/admin', methods=['GET'])
 def admin():
     users = User.query.all()
-    return render_template('blog/admin.html', users=users)
+    return render_template('users/admin.html', users=users)
 
 
 @mod.route('/all/', methods=['GET'])
