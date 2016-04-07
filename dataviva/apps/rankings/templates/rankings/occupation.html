@@ -1,13 +1,6 @@
-{% extends "base.html" %}
+{% extends "rankings/index.html" %}
 
-{% block content %}
-<div class="container">
-    <div class="btn-group">
-        <button id="occupation-families" class="btn btn-white">Famílias</button>
-        <button id="occupation-groups" class="btn btn-white">Grandes Grupos</button>
-    </div>
-    <select class="btn btn-white year-selector" id="year-selector"><option value="">Ano</option></select>
-</div>
+{% block rankings_content %}
 
 <table id="occupation-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
@@ -33,7 +26,7 @@
         </tr>
     </thead>
 </table>
-{% endblock content %}
+{% endblock rankings_content %}
 
 {% block js_assets %}
     <script src="/static/js/modules/rankings/occupation.js"></script>

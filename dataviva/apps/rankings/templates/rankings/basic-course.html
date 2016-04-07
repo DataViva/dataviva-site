@@ -1,13 +1,6 @@
-{% extends "base.html" %}
+{% extends "rankings/index.html" %}
 
-{% block content %}
-<div class="container">
-    <div class="btn-group">
-        <button id="basic-course-fields" class="btn btn-white">Campos</button>
-        <button id="basic-course-courses" class="btn btn-white">Cursos</button>
-    </div>
-    <select class="btn btn-white year-selector" id="year-selector"><option value="">Year</option></select>
-</div>
+{% block rankings_content %}
 
 <table id="basic-course-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
@@ -22,7 +15,7 @@
         </tr>
     </thead>
 </table>
-{% endblock content %}
+{% endblock rankings_content %}
 
 {% block js_assets %}
     <script src="/static/js/modules/rankings/basic-course.js"></script>

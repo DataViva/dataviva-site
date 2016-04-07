@@ -1,9 +1,6 @@
-{% extends "base.html" %}
+{% extends "rankings/index.html" %}
 
-{% block content %}
-<div class="container">
-    <select class="btn btn-white year-selector" id="year-selector"><option value="">Ano</option></select>
-</div>
+{% block rankings_content %}
 
 <table id="university-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
@@ -23,7 +20,7 @@
         </tr>
     </thead>
 </table>
-{% endblock content %}
+{% endblock rankings_content %}
 
 {% block js_assets %}
     <script src="/static/js/modules/rankings/university.js"></script>

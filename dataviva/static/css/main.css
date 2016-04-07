@@ -683,6 +683,10 @@ nav > li span:not(.caret) {
   margin-top: -20px;
 }
 
+.sidebar {
+    margin-top: 50px;
+}
+
 .sidebar h3 {
   border-bottom: 1px solid #f2f2f2;
   font-size: 18px;
@@ -1173,4 +1177,39 @@ footer .form-control:focus,
 }
 .dataTable > thead > tr > td {
     border-bottom-width: 1px;
+}
+
+/* BLUE TABLE */
+table.data-blue td,
+table.data-blue th {
+  background: #5a9dc4;
+  border: 2px solid #FFF;
+  color: #FFF;
+  vertical-align: middle;
+}
+table.data-blue tbody td .label {
+  font-size: 14px;
+  padding: 0;
+  text-transform: uppercase;
+}
+table.data-blue tbody .number {
+  font-size: 18px;
+}
+table.data-blue tbody .number span {
+  font-weight: 700;
+}
+table.data-blue tbody .number strong {
+  font-size: 35px;
+  line-height: 35px;
+  padding-right: 3px;
+}
+table.data-blue thead th {
+  font-size: 18px;
+  line-height: 18px;
+  vertical-align: middle;
+}
+table.data-blue thead th small {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
 }

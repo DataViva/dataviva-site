@@ -2,6 +2,7 @@ var BasicCourseTable = function () {
     this.tableId = '#basic-course-table';
 
     this.table = $(this.tableId).DataTable({
+        "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/sc/all/all/all/show.2/?order=enrolled.desc",
         "sAjaxDataProp": "data",
         "order": [],
@@ -19,7 +20,15 @@ var BasicCourseTable = function () {
         "scrollCollapse": true,
         "scroller": true,
         initComplete: function () {
-            var select = $('#year-selector')
+            var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control"),
+                buttons = $("<div></div>").addClass("btn-group");
+
+            select.append( $('<option value="">Ano</option>') );
+            buttons.append($("<button>Campos</button>").attr("id", 'basic-course-fields').addClass("btn btn-white"));
+            buttons.append($("<button>Cursos</button>").attr("id", 'basic-course-courses').addClass("btn btn-white"));
+
+            $('.rankings-content .rankings-control').append(buttons);
+            $('.rankings-content .rankings-control').append(select);
 
             basicCourseTable.table
                 .column( 0 )
@@ -37,7 +46,16 @@ var BasicCourseTable = function () {
                     .draw();
             });
 
-            $('#year-selector').append(select);
+            $('#basic-course-table_filter input').removeClass('input-sm');
+            $('#basic-course-table_filter').addClass('pull-right');
+
+            $('#basic-course-fields').click(function() {
+                basicCourseFields();
+            });
+
+            $('#basic-course-courses').click(function() {
+                basicCourseCourses();
+            });
         }
     });
 };
@@ -51,15 +69,3 @@ var basicCourseFields = function() {
 var basicCourseCourses = function() {
     basicCourseTable.table.ajax.url("/sc/all/all/all/show.5/?order=enrolled.desc").load();
 };
-
-$(document).ready(function(){
-
-    $('#basic-course-fields').click(function() {
-        basicCourseFields();
-    });
-
-    $('#basic-course-courses').click(function() {
-        basicCourseCourses();
-    });
-
-});

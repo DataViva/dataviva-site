@@ -23,49 +23,49 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    pass
-
-
-@mod.route('/location/wages-and-employment', methods=['GET'])
-def location_wages():
-    return render_template('rankings/location-wages.html')
+    return render_template('rankings/location-international-trade.html', tab='location-international-trade')
 
 
 @mod.route('/location/international-trade', methods=['GET'])
 def location_international_trade():
-    return render_template('rankings/location-international-trade.html')
+    return render_template('rankings/location-international-trade.html', tab='location-international-trade')
 
 
-@mod.route('/economic-activities', methods=['GET'])
-def economic_activities():
-    return render_template('rankings/economic-activities.html')
+@mod.route('/location/wages-and-employment', methods=['GET'])
+def location_wages():
+    return render_template('rankings/location-wages.html', tab='location-wages')
 
 
 @mod.route('/occupation', methods=['GET'])
 def occupation():
-    return render_template('rankings/occupation.html')
+    return render_template('rankings/occupation.html', tab='occupation')
 
 
-@mod.route('/trade-partner', methods=['GET'])
-def trade_partner():
-    return render_template('rankings/trade-partner.html')
-
-
-@mod.route('/university', methods=['GET'])
-def university():
-    return render_template('rankings/university.html')
+@mod.route('/economic-activities', methods=['GET'])
+def economic_activities():
+    return render_template('rankings/economic-activities.html', tab='economic_activities')
 
 
 @mod.route('/product', methods=['GET'])
 def product():
-    return render_template('rankings/product.html')
+    return render_template('rankings/product.html', tab='product')
+
+
+@mod.route('/trade-partner', methods=['GET'])
+def trade_partner():
+    return render_template('rankings/trade-partner.html', tab='trade_partner')
+
+
+@mod.route('/university', methods=['GET'])
+def university():
+    return render_template('rankings/university.html', tab='university')
 
 
 @mod.route('/major', methods=['GET'])
 def major():
-    return render_template('rankings/major.html')
+    return render_template('rankings/major.html', tab='major')
 
 
 @mod.route('/basic-course', methods=['GET'])
 def basic_course():
-    return render_template('rankings/basic-course.html')
+    return render_template('rankings/basic-course.html', tab='basic_course')
