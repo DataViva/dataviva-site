@@ -21,7 +21,7 @@
 {% endwith %}
 </div>
 
-<table id="news-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="calls-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th class="column-checkbox">
@@ -30,7 +30,6 @@
                     <label for="check-all"></label>
                 </div>
             </th>    
-            <th>Call ID</th>
             <th>Title</th>
             <th>Link</th>
             <th>Active</th>
@@ -38,7 +37,7 @@
     </thead>
 </table>
 
-<a id="admin-new" class="btn btn-success" href="/news/admin/publication/new"><i class="fa fa-plus m-r-sm"></i>Novo</a>
+<a id="admin-new" class="btn btn-success" href="/calls/admin/call/new"><i class="fa fa-plus m-r-sm"></i>Novo</a>
 <button id="admin-edit" class="btn btn-primary"><i class="fa fa-pencil-square-o m-r-sm"></i>Editar</button>
 <button id="admin-delete" class="btn btn-danger"><i class="fa fa-trash-o m-r-sm"></i>Excluir</button>
 <button id="admin-activate" class="btn btn-success pull-right">Ativar</button>
@@ -51,150 +50,3 @@
     <script src="/static/js/modules/calls/table.js"></script>
 {% endblock js_assets %}
 
-<!--
-<a class="btn btn-w-m btn-primary pull-right" href="/calls/call/new" >Nova Chamada </a>
-<button class="btn btn-w-m btn-primary pull-right" id="edit">Editar </button>
-<button class="btn btn-w-m btn-primary pull-right" id="delete">Excluir </button>
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
-<script type="text/javascript">
-
-    var Call = function() {
-        this.callsSelected = {};
-        this.table = $('#activateTable').DataTable( {
-            "sAjaxSource": "/calls/all",
-            "sAjaxDataProp": "calls",
-            "aoColumnsDefs": [
-                { "data": "id" },
-                { "data": "title", "type": "html" },
-                { "data": "link" },
-                { "data": "active" },
-            ],
-            'columnDefs': [
-             {
-                "targets": 1,
-                "className": "body-title",
-            },
-            {
-                'targets': 3,
-                'className': 'body-checkbox',
-                'render': function (data, type, call, meta){
-                    if(data){
-                        return '<input type="checkbox" name="checkboxApproval" value="'+call[0]+'" checked>';
-                    }else{
-                        return '<input type="checkbox" name="checkboxApproval" value="'+call[0]+'">';
-                    }
-                }
-            },
-            {
-                "targets": 0,
-                "className": "body-selected",
-                'render': function (data, type, call, meta){
-                    if(data){
-                        return '<input type="checkbox" name="checkboxApproval" value="'+call[0]+'">';    
-                    }else{
-                        return '<input type="checkbox" name="checkboxApproval" value="'+call[0]+'" checked>';
-                    }
-                 }
-            }],
-            "columns": [
-                    { "width": "8%" },
-                    null,
-                    null,
-                    { "width": "12%" }
-            ],
-            "paging": false,
-            "bFilter": false,
-            "info": false    
-        });
-    };
-
-    Call.prototype.singleCheckbox = function() {
-        // Single Checkbox 
-        $('#activateTable tbody').on('click', '.body-checkbox', function () {
-            var call = {};
-            call[this.firstElementChild.value] = this.firstElementChild.checked;
-            sendChecks(call);
-        });
-    };
-    
-    Call.prototype.controlCheckbox = function(activateTable){ 
-        //Checkbox control
-        $('#select-all').on('click', function(){
-           var rows = table.rows({ 'search': 'applied' }).nodes();
-           $('input[type="checkbox"]', rows).prop('checked', this.checked);
-        });
-        $('#activateTable tbody').on('change', 'input[type="checkbox"]', function(){
-           if(!this.checked){
-              var el = $('#select-all').get(0);
-              if(el && el.checked && ('indeterminate' in el)){
-                 el.indeterminate = true;
-                }
-            }
-        });
-
-        Call.prototype.singleSelected = function(){
-            $('#activateTable tbody').on('click', '.body-selected',function(){    
-                id=this.firstElementChild.value;
-                selected=this.firstElementChild.checked;
-                saveSelecteds(id,selected);
-            });
-        };
-
-        Call.prototype.delete = function(){
-            listCalls=this.callsSelected;
-            $('#delete').click(function(){
-                for(call in listCalls){
-                    if(listCalls[call] == true){
-                        window.location.href = "/calls/call/"+call+"/delete";
-                    } /*delete only marked last*/
-                }
-            });
-        };
-
-    };
-
-    var call = new Call();
-    call.controlCheckbox(activateTable);
-    call.singleCheckbox();
-    call.singleSelected();
-    call.delete(this.call.callsSelected);
-
-
-    //Verify Checks
-    function sendChecks(call){
-        var lang = $('html').attr('lang');
-        $.ajax({
-          method: "POST",
-          url: "/"+lang+"/calls/",
-          data: call,
-          success: function (msg) {
-                $.notify({
-                    message: msg,
-                },{
-                    offset: {
-                            x: window.innerWidth * 18 / 100,
-                            y: window.innerHeight * 25 / 100
-                    },
-                    type: 'success',
-                    z_index: 1031,
-                    delay: 5000,
-                    timer: 1000
-                });
-          }
-        })
-    }
-
-    //Save Selects
-    function saveSelecteds(id,selected){
-        this.call.callsSelected[id]=selected;
-    }
-
-
-</script>
-
--->
