@@ -30,7 +30,7 @@ def users():
 def admin_users():
 
     users = User.query.all()
-    return render_template('/users/control.html', users=users)
+    return render_template('/users/admin.html', users=users)
 
 @mod.route('/users/', methods=['POST'])
 def admin_update():

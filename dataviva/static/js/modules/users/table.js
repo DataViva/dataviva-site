@@ -1,22 +1,22 @@
-var NewsTable = function () {
+var UsersTable = function () {
     this.tableId = '#news-table';
 
     this.table = $(this.tableId).DataTable({
         "oLanguage": {
           "sSearch": "Pesquisar "
         },
-        "sAjaxSource": "/news/publication/all",
-        "sAjaxDataProp": "publications",
+        "sAjaxSource": "/users/all",
+        "sAjaxDataProp": "users",
         "order": [],
         "columnDefs": [
             {
                 "targets": 0,
                 "orderable": false,
                 "className": "column-checkbox",
-                "render": function (data, type, publication, meta){
+                "render": function (data, type, users, meta){
                     var checkbox = '<div class="checkbox checkbox-success">' +
-                                   '    <input name="selected-item" id="item'+publication[0]+'" value="'+publication[0]+'" type="checkbox">' +
-                                   '    <label for="'+publication[0]+'"></label>'
+                                   '    <input name="selected-item" id="item'+users[0]+'" value="'+users[0]+'" type="checkbox">' +
+                                   '    <label for="'+users[0]+'"></label>'
                                    '</div>';
 
                     return checkbox;
@@ -25,26 +25,26 @@ var NewsTable = function () {
             {
                 "targets": 1,
                 "className": "column-title",
-                "render": function (data, type, publication, meta){
-                    return '<a href="/news/publication/'+publication[0]+'">'+publication[1]+'</a>';
+                "render": function (data, type, users, meta){
+                    return '<a href="/users/'+users[0]+'">'+users[1]+'</a>';
                 }
             },
             {
                 "targets": 4,
                 "orderable": false,
                 "className": "column-checkbox",
-                "render": function (data, type, publication, meta){
-                   return '<input type="checkbox" name="show_home" id="show_home'+publication[0]+
-                   '" value="'+publication[0]+ (data ? '" checked>' : '" >');
+                "render": function (data, type, users, meta){
+                   return '<input type="checkbox" name="show_home" id="show_home'+users[0]+
+                   '" value="'+users[0]+ (data ? '" checked>' : '" >');
                 }
             },
             {
                 "targets": 5,
                 "orderable": false,
                 "className": "column-checkbox",
-                "render": function (data, type, publication, meta){
-                   return '<input type="checkbox" name="active" id="active'+publication[0]+
-                   '" value="'+publication[0]+ (data ? '" checked>' : '" >');
+                "render": function (data, type, users, meta){
+                   return '<input type="checkbox" name="active" id="active'+users[0]+
+                   '" value="'+users[0]+ (data ? '" checked>' : '" >');
                 }
             }],
         "paging": false,
@@ -101,7 +101,7 @@ var NewsTable = function () {
     })
 };
 
-NewsTable.prototype.getCheckedIds = function(first_argument) {
+UsersTable.prototype.getCheckedIds = function(first_argument) {
     var checkedIds = [];
     $('#news-table input[name="selected-item"]').each(function() {
         if (this.checked) {
@@ -111,17 +111,17 @@ NewsTable.prototype.getCheckedIds = function(first_argument) {
     return checkedIds;
 };
 
-var newsTable = new NewsTable();
+var newsTable = new UsersTable();
 
 var changeStatus = function(ids, status, status_value){
     if (ids.length) {
         $.ajax({
             method: "POST",
-            url: "/"+lang+"/news/admin/publication/"+status+"/"+status_value,
+            url: "/"+lang+"/news/admin/users/"+status+"/"+status_value,
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível alterar a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
+                    showMessage('Não foi possível alterar o(s) usuário(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
                     showMessage('Uma ou mais notícias selecionadas não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
@@ -174,7 +174,7 @@ var destroy = function(ids){
 
 var edit = function(ids){
     if (ids.length) {
-        window.location = '/'+lang+'/news/admin/publication/'+ids[0]+'/edit';
+        window.location = '/'+lang+'/news/admin/users/'+ids[0]+'/edit';
     } else {
         showMessage('Por favor selecione para editar.', 'warning', 8000);
     }
