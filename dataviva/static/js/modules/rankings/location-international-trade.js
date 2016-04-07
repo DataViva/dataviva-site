@@ -1,3 +1,16 @@
+function loadAttrs(callBack) {
+    $.ajax({
+        dataType: "json",
+        method: "GET",
+        url: "/attrs/bra/?lang="+lang,
+        success: function (attrs) {
+            localforage.setItem("attrs", attrs.data);
+        }
+    });
+}
+
+
+
 var LocationInternationalTradeTable = function () {
     this.tableId = '#location-international-trade-table';
 
@@ -75,24 +88,27 @@ var LocationInternationalTradeTable = function () {
     });
 };
 
-var locationInternationalTradeTable = new LocationInternationalTradeTable();
+window.locationInternationalTradeTable = new LocationInternationalTradeTable();
+
+loadAttrs();
+
 
 var locationInternationalTradeRegions = function() {
     locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.1/all/all/?order=eci.desc").load();
-};
+}
 
 var locationInternationalTradeStates = function() {
     locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.3/all/all/?order=eci.desc").load();
-};
+}
 
 var locationInternationalTradeMesoregions = function() {
     locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.5/all/all/?order=eci.desc").load();
-};
+}
 
 var locationInternationalTradeMicroRegions = function() {
     locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.7/all/all/?order=eci.desc").load();
-};
+}
 
 var locationInternationalTradeMunicipalities = function() {
     locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.9/all/all/?order=eci.desc").load();
-};
+}
