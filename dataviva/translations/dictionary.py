@@ -511,6 +511,11 @@ def dictionary():
         "by Total Value Imported": gettext("by Total Value Imported"),
         "Main Destination": gettext("Main Destination"),
         "Main Origin": gettext("Main Origin"),
+        "municipality_in": gettext("in five years. The municipality in "),
+        "product_state": gettext("in imports in the state of"),
+        "mesoregions_in": gettext(" in imports in the mesoregions of"),
+        "microregions_in": gettext(" in imports in the microregion of"),
+        "five_years": gettext("in five years."),
 
         #all
         "preview": gettext("Preview"),
