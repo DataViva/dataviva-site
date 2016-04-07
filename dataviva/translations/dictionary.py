@@ -516,6 +516,7 @@ def dictionary():
         "mesoregions_in": gettext(" in imports in the mesoregions of"),
         "microregions_in": gettext(" in imports in the microregion of"),
         "five_years": gettext("in five years."),
+        "and_number": gettext(" and number"),
 
         #all
         "preview": gettext("Preview"),
