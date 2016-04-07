@@ -6,23 +6,14 @@ var LocationInternationalTradeTable = function () {
         "sAjaxSource": "/secex/all-0/show.1/all/all/?order=eci.desc",
         "sAjaxDataProp": "data",
         "order": [],
-        "aoColumns": [
-            null, //year
-            { "bVisible": false }, //month
-            null, //import_val
-            null, //export_val
-            { "bVisible": false }, //import_kg
-            { "bVisible": false }, //export_kg
-            { "bVisible": false }, //import_val_growth
-            { "bVisible": false }, //import_val_growth_5
-            { "bVisible": false }, //export_val_growth
-            { "bVisible": false }, //export_val_growth_5
-            { "bVisible": false }, //wld_diversity
-            { "bVisible": false }, //wld_diversity_eff
-            null, //hs_diversity
-            null, //hs_diversity_eff
-            null, //eci
-            null //bra_id
+        "columns": [
+            {data: 0},
+            {data: 15},
+            {data: 2},
+            {data: 3},
+            {data: 12},
+            {data: 13},
+            {data: 14}
         ],
         "deferRender": true,
         "scrollY": 500,
