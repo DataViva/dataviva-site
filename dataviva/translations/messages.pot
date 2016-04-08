@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-08 15:04-0300\n"
+"POT-Creation-Date: 2016-04-08 15:44-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -303,6 +303,7 @@ msgid "General"
 msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/index.html:57
+#: dataviva/apps/occupation/templates/occupation/tab-wages.html:2
 #: dataviva/translations/dictionary.py:589
 msgid "Wages and Jobs"
 msgstr ""
@@ -370,6 +371,38 @@ msgstr ""
 #: dataviva/apps/occupation/templates/occupation/tab-opportunities.html:4
 #: dataviva/translations/dictionary.py:600
 msgid "Show Related Occupations"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-wages.html:11
+#: dataviva/apps/occupation/templates/occupation/tab-wages.html:16
+#: dataviva/translations/dictionary.py:602
+msgid "Main"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-wages.html:12
+#: dataviva/translations/dictionary.py:603
+msgid "Employer City"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-wages.html:17
+#: dataviva/translations/dictionary.py:604
+msgid "Employer Activity"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-wages.html:21
+#: dataviva/translations/dictionary.py:605
+msgid "City with Highest"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-wages.html:22
+#: dataviva/apps/occupation/templates/occupation/tab-wages.html:27
+#: dataviva/translations/dictionary.py:606
+msgid "Monthly Average Income"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-wages.html:26
+#: dataviva/translations/dictionary.py:607
+msgid "Activity with Highest"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
@@ -3609,25 +3642,29 @@ msgstr ""
 msgid "Get started "
 msgstr ""
 
-#: dataviva/translations/dictionary.py:609
+#: dataviva/translations/dictionary.py:601
+msgid "by Number of Jobs"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:618
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:610
+#: dataviva/translations/dictionary.py:619
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:611
+#: dataviva/translations/dictionary.py:620
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:612
+#: dataviva/translations/dictionary.py:621
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""
