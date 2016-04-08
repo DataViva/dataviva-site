@@ -605,6 +605,7 @@ def dictionary():
         "city_highest": gettext("City with Highest"),
         "monthly_average_income": gettext("Monthly Average Income"),
         "activity": gettext("Activity with Highest"),
+        "jobs_by": gettext("Jobs by")
 
 
 
