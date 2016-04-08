@@ -597,7 +597,7 @@ def dictionary():
         "main_employer_activiy": gettext("Main employer activity"),
         "city_highest_avg_income": gettext("City with highest monthly average income"),
         "activity_highest_avg_income": gettext("Activity with highest monthly average income"),
-
+        "related_profiles": gettext("Show Related Occupations"),
 
     }
 

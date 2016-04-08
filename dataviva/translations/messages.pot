@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-08 14:50-0300\n"
+"POT-Creation-Date: 2016-04-08 15:04-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -308,6 +308,7 @@ msgid "Wages and Jobs"
 msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/index.html:67
+#: dataviva/apps/occupation/templates/occupation/tab-opportunities.html:2
 #: dataviva/apps/product/templates/product/index.html:67
 #: dataviva/apps/product/templates/product/tab-opportunities.html:2
 #: dataviva/translations/dictionary.py:481
@@ -364,6 +365,11 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:203
 #: dataviva/translations/dictionary.py:482
 msgid "More details"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-opportunities.html:4
+#: dataviva/translations/dictionary.py:600
+msgid "Show Related Occupations"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
