@@ -1,41 +1,59 @@
-$(document).ready(function () {
-    new WOW().init();
-    $("[data-toggle=popover]").popover({ trigger: "hover" });
-    $('.counter').counterUp();
-    $.stellar();
+var dataviva = {};
 
-    $( ".js-switch" ).each(function() {
-        var switchery = new Switchery(this, {
-            color: '#5A9DC4'
-        });
-    });
-
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.5&appId=222520191136295";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-
-    $("[name='language-selector']").val(document.documentElement.lang);
-
-    $("[name='language-selector']").change(function() {
-        var path = window.location.pathname.split('/'),
-            lang = path[1];
-
-        if (lang !== this.value) {
-            if (['pt','en'].indexOf(lang) > -1) {
-                path.splice(1, 1, this.value);
-            } else {
-                path.splice(1, 0, this.value);
-            }
-            window.location.href = path.join('/') + window.location.search + window.location.hash;
+dataviva.load = function(name, url, callBack) {
+    var parseAttr = function(data) {
+        var attr = {};
+        for (var i = 0; i < data.length; ++i) {
+            attr[data[i].id] = data[i];
         }
-    });
 
-});
+        return attr;
+    }
+
+    var requestData = function(loadData) {
+        $.ajax({
+            dataType: 'json',
+            method: 'GET',
+            url: url,
+            success: function (response) {
+                localforage.setItem(url, parseAttr(response.data), loadData);
+            }
+        });
+    }
+
+    var loadData = function() {
+        localforage.getItem(url, function(err, data) {
+            if(data) {
+                window.dataviva[name] = data;
+                if (callBack) {
+                    callBack(name);
+                }
+            } else {
+                requestData(loadData);
+            }
+        });
+    }
+
+    loadData();
+}
+
+dataviva.requireAttrs = function(attrs, callBack) {
+    var queue = attrs;
+
+    var ready = function(attr) {
+
+        queue.splice(queue.indexOf(attr), 1);
+
+        if (queue.length == 0) {
+            callBack();
+        }
+    }
+
+    attrs.forEach(function(attr) {
+        dataviva.load(attr, '/attrs/'+attr+'/?lang='+lang, ready);
+    });
+}
+
 
 function setAlertTimeOut(time) {
     window.setTimeout(function() {
@@ -138,3 +156,43 @@ function cropInput(crop, input, callback) {
         input.addClass("hide");
     }
 }
+
+$(document).ready(function () {
+    new WOW().init();
+    $("[data-toggle=popover]").popover({ trigger: "hover" });
+    $('.counter').counterUp();
+    $.stellar();
+
+    $( ".js-switch" ).each(function() {
+        var switchery = new Switchery(this, {
+            color: '#5A9DC4'
+        });
+    });
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.5&appId=222520191136295";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
+    $("[name='language-selector']").val(document.documentElement.lang);
+
+    $("[name='language-selector']").change(function() {
+        var path = window.location.pathname.split('/'),
+            lang = path[1];
+
+        if (lang !== this.value) {
+            if (['pt','en'].indexOf(lang) > -1) {
+                path.splice(1, 1, this.value);
+            } else {
+                path.splice(1, 0, this.value);
+            }
+            window.location.href = path.join('/') + window.location.search + window.location.hash;
+        }
+    });
+
+});
+

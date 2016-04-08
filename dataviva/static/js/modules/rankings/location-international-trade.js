@@ -1,18 +1,6 @@
-function loadAttrs(callBack) {
-    $.ajax({
-        dataType: "json",
-        method: "GET",
-        url: "/attrs/bra/?lang="+lang,
-        success: function (attrs) {
-            localforage.setItem("attrs", attrs.data);
-        }
-    });
-}
-
-
-
-var LocationInternationalTradeTable = function () {
+var LocationTradeRanking = function () {
     this.tableId = '#location-international-trade-table';
+
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
@@ -28,6 +16,14 @@ var LocationInternationalTradeTable = function () {
             {data: 13},
             {data: 14}
         ],
+        "columnDefs": [
+            {
+                "targets": 1,
+                "render": function (data, type, row, meta){
+                    return dataviva.bra[row[15]].name
+                }
+            },
+        ],
         "deferRender": true,
         "scrollY": 500,
         "scrollCollapse": true,
@@ -36,17 +32,24 @@ var LocationInternationalTradeTable = function () {
             var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control"),
                 buttons = $("<div></div>").addClass("btn-group");
 
-            select.append( $('<option value="">Ano</option>') );
-            buttons.append($("<button>Regiões</button>").attr("id", 'location-international-trade-regions').addClass("btn btn-white"));
-            buttons.append($("<button>Estados</button>").attr("id", 'location-international-trade-states').addClass("btn btn-white"));
-            buttons.append($("<button>Mesoregiões</button>").attr("id", 'location-international-trade-mesoregions').addClass("btn btn-white"));
-            buttons.append($("<button>Microregiões</button>").attr("id", 'location-international-trade-microregions').addClass("btn btn-white"));
-            buttons.append($("<button>Municípios</button>").attr("id", 'location-international-trade-municipalities').addClass("btn btn-white"));
+            var bra_1 = dataviva.dictionary['bra_1'],
+                bra_3 = dataviva.dictionary['bra_3'],
+                bra_5 = dataviva.dictionary['bra_5'],
+                bra_7 = dataviva.dictionary['bra_7'],
+                bra_9 = dataviva.dictionary['bra_9'],
+                year = dataviva.dictionary['year'];
+
+            select.append( $('<option value="">'+year+'</option>') );
+            buttons.append($("<button>"+bra_1+"</button>").attr("id", 'location-international-trade-regions').addClass("btn btn-white"));
+            buttons.append($("<button>"+bra_3+"</button>").attr("id", 'location-international-trade-states').addClass("btn btn-white"));
+            buttons.append($("<button>"+bra_5+"</button>").attr("id", 'location-international-trade-mesoregions').addClass("btn btn-white"));
+            buttons.append($("<button>"+bra_7+"</button>").attr("id", 'location-international-trade-microregions').addClass("btn btn-white"));
+            buttons.append($("<button>"+bra_9+"</button>").attr("id", 'location-international-trade-municipalities').addClass("btn btn-white"));
 
             $('.rankings-content .rankings-control').append(buttons);
             $('.rankings-content .rankings-control').append(select);
 
-            locationInternationalTradeTable.table
+            locationTradeRanking.table
                 .column( 0 )
                 .cache( 'search' )
                 .sort()
@@ -56,7 +59,7 @@ var LocationInternationalTradeTable = function () {
                 } );
 
             select.on( 'change', function () {
-               locationInternationalTradeTable.table
+               locationTradeRanking.table
                     .column( 0 )
                     .search( $(this).val() )
                     .draw();
@@ -66,49 +69,30 @@ var LocationInternationalTradeTable = function () {
             $('#location-international-trade-table_filter').addClass('pull-right');
 
             $('#location-international-trade-regions').click(function() {
-                locationInternationalTradeStates();
+                locationTradeRanking.table.ajax.url("/secex/all-0/show.1/all/all/?order=eci.desc").load();
             });
 
             $('#location-international-trade-states').click(function() {
-                locationInternationalTradeStates();
+                locationTradeRanking.table.ajax.url("/secex/all-0/show.3/all/all/?order=eci.desc").load();
             });
 
             $('#location-international-trade-mesoregions').click(function() {
-                locationInternationalTradeMesoregions();
+                locationTradeRanking.table.ajax.url("/secex/all-0/show.5/all/all/?order=eci.desc").load();
             });
 
             $('#location-international-trade-microregions').click(function() {
-                locationInternationalTradeMicroRegions();
+                locationTradeRanking.table.ajax.url("/secex/all-0/show.7/all/all/?order=eci.desc").load();
             });
 
             $('#location-international-trade-municipalities').click(function() {
-                locationInternationalTradeMunicipalities();
+                locationTradeRanking.table.ajax.url("/secex/all-0/show.9/all/all/?order=eci.desc").load();
             });
         }
     });
 };
 
-window.locationInternationalTradeTable = new LocationInternationalTradeTable();
-
-loadAttrs();
-
-
-var locationInternationalTradeRegions = function() {
-    locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.1/all/all/?order=eci.desc").load();
-}
-
-var locationInternationalTradeStates = function() {
-    locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.3/all/all/?order=eci.desc").load();
-}
-
-var locationInternationalTradeMesoregions = function() {
-    locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.5/all/all/?order=eci.desc").load();
-}
-
-var locationInternationalTradeMicroRegions = function() {
-    locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.7/all/all/?order=eci.desc").load();
-}
-
-var locationInternationalTradeMunicipalities = function() {
-    locationInternationalTradeTable.table.ajax.url("/secex/all-0/show.9/all/all/?order=eci.desc").load();
-}
+$(document).ready(function() {
+    dataviva.requireAttrs(['bra', 'hs', 'university'], function() {
+        window.locationTradeRanking = new LocationTradeRanking();
+    });
+});
