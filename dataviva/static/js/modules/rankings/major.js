@@ -2,6 +2,7 @@ var MajorTable = function () {
     this.tableId = '#major-table';
 
     this.table = $(this.tableId).DataTable({
+        "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/hedu/all/all/all/show.2/?order=enrolled.desc",
         "sAjaxDataProp": "data",
         "order": [],
@@ -24,10 +25,18 @@ var MajorTable = function () {
         "scrollCollapse": true,
         "scroller": true,
         initComplete: function () {
-            var select = $('#year-selector')
+            var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control"),
+                buttons = $("<div></div>").addClass("btn-group");
+
+            select.append( $('<option value="">Ano</option>') );
+            buttons.append($("<button>Campos</button>").attr("id", 'major-fields').addClass("btn btn-white"));
+            buttons.append($("<button>Ensino Superior</button>").attr("id", 'major-majors').addClass("btn btn-white"));
+
+            $('.rankings-content .rankings-control').append(buttons);
+            $('.rankings-content .rankings-control').append(select);
 
             majorTable.table
-                .column( 11 )
+                .column( 10 )
                 .cache( 'search' )
                 .sort()
                 .unique()
@@ -37,12 +46,21 @@ var MajorTable = function () {
 
             select.on( 'change', function () {
                majorTable.table
-                    .column( 11 )
+                    .column( 10 )
                     .search( $(this).val() )
                     .draw();
             });
 
-            $('#year-selector').append(select);
+            $('#major-table_filter input').removeClass('input-sm');
+            $('#major-table_filter').addClass('pull-right');
+
+            $('#major-fields').click(function() {
+                majorFields();
+            });
+
+            $('#major-majors').click(function() {
+                majorMajors();
+            });
         }
     });
 };
@@ -56,15 +74,3 @@ var majorFields = function() {
 var majorMajors = function() {
     majorTable.table.ajax.url("/hedu/all/all/all/show.6/?order=enrolled.desc").load();
 };
-
-$(document).ready(function(){
-
-    $('#major-fields').click(function() {
-        majorFields();
-    });
-
-    $('#major-majors').click(function() {
-        majorMajors();
-    });
-
-});

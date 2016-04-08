@@ -1,18 +1,8 @@
 {% extends "rankings/index.html" %}
 
 {% block rankings_content %}
-<div class="container">
-    <div class="btn-group">
-        <button id="location-wages-regions" class="btn btn-white">Regiões</button>
-        <button id="location-wages-states" class="btn btn-white">Estados</button>
-        <button id="location-wages-mesoregions" class="btn btn-white">Mesoregiões</button>
-        <button id="location-wages-microregions" class="btn btn-white">Microregiões</button>
-        <button id="location-wages-municipalities" class="btn btn-white">Municípios</button>
-    </div>
-    <select class="btn btn-white year-selector" id="year-selector"><option value="">Ano</option></select>
-</div>
 
-<table id="wages-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="location-wages-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>year</th>

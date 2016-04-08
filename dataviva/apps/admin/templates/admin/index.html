@@ -10,45 +10,74 @@
     <div class="row m-b-xl">
         <img src="/static/img/logo-dataviva.png" alt="Dataviva logo" class="img-responsive">
     </div>
-    <div class="col-xs-6 col-sm-5 col-md-3 col-sm-offset-1 col-md-offset-0">
-        <a  class="btn btn-outline btn-success" href="{{ url_for('news.admin') }}" title="Notícias">
-            <div class="admin-icon">
-                <i class="fa fa-newspaper-o"></i>
-            </div>
-            <div class="admin-btn-description">
-                Notícias
-            </div>
-        </a>
-    </div>
-    <div class="col-xs-6 col-sm-5 col-md-3">
-        <a  class="btn btn-outline btn-success" href="{{ url_for('blog.admin') }}" title="Blog">
-            <div class="admin-icon">
-                <i class="fa fa-commenting-o"></i>
-            </div>
-            <div class="admin-btn-description">
-                Blog
-            </div>
-        </a>
-    </div>
-    <div class="col-xs-6 col-sm-5 col-md-3 col-sm-offset-1 col-md-offset-0">
-        <a  class="btn btn-outline btn-success" href="#" title="Chamadas">
-            <div class="admin-icon">
-                <i class="fa fa-file-text-o"></i>
-            </div>
-            <div class="admin-btn-description">
-                Chamadas
-            </div>
-        </a>
-    </div>
-    <div class="col-xs-6 col-sm-5 col-md-3">
-        <a  class="btn btn-outline btn-success" href="#" title="Perguntas">
-            <div class="admin-icon">
-                <i class="fa fa-question"></i>
-            </div>
-            <div class="admin-btn-description">
-                Perguntas
-            </div>
-        </a>
+
+    <div class="row m-b-xl">
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+            <a  class="btn btn-outline btn-success" href="{{ url_for('blog.admin') }}" title="Blog">
+                <div class="admin-icon">
+                    <i class="fa fa-commenting-o"></i>
+                </div>
+                <div class="admin-btn-description">
+                    Blog
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+            <a  class="btn btn-outline btn-success" href="{{ url_for('calls.admin') }}" title="Chamadas">
+                <div class="admin-icon">
+                    <i class="fa fa-file-text-o"></i>
+                </div>
+                <div class="admin-btn-description">
+                    Chamadas
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+            <a  class="btn btn-outline btn-success" href="#" title="Estudos">
+                <div class="admin-icon">
+                    <i class="fa fa-book"></i>
+                </div>
+                <div class="admin-btn-description">
+                    Estudos
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+            <a  class="btn btn-outline btn-success" href="{{ url_for('search.admin') }}" title="Inicie uma Pesquisa">
+                <div class="admin-icon">
+                    <i class="fa fa-question"></i>
+                </div>
+                <div class="admin-btn-description">
+                    Inicie uma Pesquisa
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+            <a  class="btn btn-outline btn-success" href="{{ url_for('news.admin') }}" title="Notícias">
+                <div class="admin-icon">
+                    <i class="fa fa-newspaper-o"></i>
+                </div>
+                <div class="admin-btn-description">
+                    Notícias
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+            <a  class="btn btn-outline btn-success" href="#" title="Usuários">
+                <div class="admin-icon">
+                    <i class="fa fa-users"></i>
+                </div>
+                <div class="admin-btn-description">
+                    Usuários
+                </div>
+            </a>
+        </div>
+
     </div>
 </div>
 

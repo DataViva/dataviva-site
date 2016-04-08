@@ -2,11 +2,11 @@
 
 {% block breadcrumb %}
     <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
-    <li class="active">Notícias</li>
+    <li class="active">Inicie uma Pesquisa</li>
 {% endblock %}
 
 {% block admin_content %}
-<h1>Notícias</h1>
+<h1>Inicie uma Pesquisa</h1>
 
 <div id="message">
 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -21,7 +21,7 @@
 {% endwith %}
 </div>
 
-<table id="news-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="search-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th class="column-checkbox">
@@ -30,24 +30,22 @@
                     <label for="check-all"></label>
                 </div>
             </th>
-            <th>Título</th>
-            <th>Autor(es)</th>
-            <th>Data</th>
-            <th>Exibir Home</th>
+            <th>Pergunta</th>
+            <th>Seletor(es)</th>
+            <th>Resposta</th>
             <th>Ativo</th>
         </tr>
     </thead>
 </table>
 
-<a id="admin-new" class="btn btn-success" href="/news/admin/publication/new"><i class="fa fa-plus m-r-sm"></i>Novo</a>
-<button id="admin-edit" class="btn btn-primary"><i class="fa fa-pencil-square-o m-r-sm"></i>Editar</button>
-<button id="admin-delete" class="btn btn-danger"><i class="fa fa-trash-o m-r-sm"></i>Excluir</button>
-<button id="admin-activate" class="btn btn-success pull-right">Ativar</button>
-<button id="admin-deactivate" class="btn btn-white pull-right m-r-sm">Desativar</button>
+<a id="search-new" class="btn btn-success" href="/search/admin/question/new"><i class="fa fa-plus m-r-sm"></i>Novo</a>
+<button id="search-edit" class="btn btn-primary"><i class="fa fa-pencil-square-o m-r-sm"></i>Editar</button>
+<button id="search-delete" class="btn btn-danger"><i class="fa fa-trash-o m-r-sm"></i>Excluir</button>
+<button id="search-activate" class="btn btn-success pull-right">Ativar</button>
+<button id="search-deactivate" class="btn btn-white pull-right m-r-sm">Desativar</button>
 
 {% endblock admin_content %}
 
-
 {% block js_assets %}
-    <script src="/static/js/modules/news/table.js"></script>
+    <script src="/static/js/modules/search/table.js"></script>
 {% endblock js_assets %}

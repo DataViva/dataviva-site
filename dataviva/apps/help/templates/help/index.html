@@ -2,36 +2,45 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
 <div class="container">
-    <ol class="breadcrumb">
-        <li><a href="{{ url_for('general.home') }}">Home</a></li>
-        <li class="active"><span>Central de Ajuda</span></li>
-    </ol>
-    <div class="row">
-        <div class="sidebar col-xs-15 col-md-4">
-            <ul class="sub-menu">
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('general.home') }}">Home</a></li>
+            <li class="active">Central de Ajuda</li>
+        </ol>
+    </div>
+</div>
+
+
+<section id="help">
+    <div class="container">
+        <nav class="sidebar col-md-3">
+            <ul>
                 <li><a href="#geral" aria-controls="geral" role="tab" data-toggle="tab" title="Todos"><strong>Central de Ajuda</strong></a></li>
-                <li><a href="#glossario" aria-controls="glossario" role="tab" data-toggle="tab" title="Glossário"><strong>Glossário</strong></a></li>
+                <li><a href="#glossario" aria-controls="glossario" role="tab" data-toggle="tab" title="Glossário">Glossário</a></li>
             </ul>
             <hr />
-            <h5>Tópicos Recentes</h5>
-            <ul class="sub-menu">
+            <h4>Tópicos Recentes</h4>
+            <ul>
                 <li><a href="#" title="Tópico"><strong>Tópico</strong></a></li>
                 <li><a href="#" title="Tópico"><strong>Tópico</strong></a></li>
                 <li><a href="#" title="Tópico"><strong>Tópico</strong></a></li>
             </ul>
             <hr />
             <h5>Assista Vídeo Tutorial</h5>
-            <div class="video-wrapper">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/zZr5Tid3Qw4" frameborder="0" allowfullscreen></iframe>
+
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zZr5Tid3Qw4"></iframe>
             </div>
-        </div>
-        <div class="main-content col-xs-15 col-md-11">
+        </nav>
+        <div class="main-content col-md-9">
             <div class="tab-content">
                 {% include "tab-geral.html" %}
                 {% include "tab-glossario.html" %}
             </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock content %}
