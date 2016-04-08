@@ -103,7 +103,7 @@ def admin_update(status, status_value):
         call = Call.query.filter_by(id=id).first_or_404()
         setattr(call, status, status_value == u'true')
         db.session.commit()
-    message = u"Estudo(s) atualizados com sucesso!"
+    message = u"Chamada(s) atualizados com sucesso!"
     return message
 
 
