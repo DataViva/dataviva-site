@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-08 15:59-0300\n"
+"POT-Creation-Date: 2016-04-08 16:07-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -407,7 +407,8 @@ msgstr "Ano"
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:78
 #: dataviva/translations/dictionary.py:596
-msgid "Main employer city"
+#, fuzzy
+msgid "Main employer Municipality"
 msgstr "Principal Município por Empregos"
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:88
@@ -417,7 +418,7 @@ msgstr "Principal Atividade por Empregos"
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:98
 #: dataviva/translations/dictionary.py:598
-msgid "City with highest monthly average income"
+msgid "Municipality with highest monthly average income"
 msgstr "Município com maior renda média mensal"
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:108
@@ -445,7 +446,8 @@ msgstr "Principal"
 
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:12
 #: dataviva/translations/dictionary.py:603
-msgid "Employer City"
+#, fuzzy
+msgid "Employer Municipality"
 msgstr "Município por Empregos"
 
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:17
@@ -455,8 +457,9 @@ msgstr "Atividade por Empregos"
 
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:21
 #: dataviva/translations/dictionary.py:605
-msgid "City with Highest"
-msgstr "Cidade com Maior"
+#, fuzzy
+msgid "Municipality with Highest"
+msgstr "Município com Maior"
 
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:22
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:27
@@ -4633,4 +4636,13 @@ msgstr "com"
 
 #~ msgid "Activity"
 #~ msgstr ""
+
+#~ msgid "City with highest monthly average income"
+#~ msgstr "Município com maior renda média mensal"
+
+#~ msgid "Employer City"
+#~ msgstr "Município por Empregos"
+
+#~ msgid "City with Highest"
+#~ msgstr "Cidade com Maior"
 

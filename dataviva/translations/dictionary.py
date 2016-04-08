@@ -593,16 +593,16 @@ def dictionary():
         "total_establishment": gettext("Total of Establishments"),
 
         #occupation
-        "main_employer_city": gettext("Main employer city"),
+        "main_employer_Municipality": gettext("Main employer Municipality"),
         "main_employer_activiy": gettext("Main employer activity"),
-        "city_highest_avg_income": gettext("City with highest monthly average income"),
+        "Municipality_highest_avg_income": gettext("Municipality with highest monthly average income"),
         "activity_highest_avg_income": gettext("Activity with highest monthly average income"),
         "related_profiles": gettext("Show Related Occupations"),
         "by_jobs": gettext("by Number of Jobs"),
         "main": gettext("Main"),
-        "employer_city": gettext("Employer City"),
+        "employer_Municipality": gettext("Employer Municipality"),
         "employer_activiy": gettext("Employer Activity"),
-        "city_highest": gettext("City with Highest"),
+        "Municipality_highest": gettext("Municipality with Highest"),
         "monthly_average_income": gettext("Monthly Average Income"),
         "activity": gettext("Activity with Highest"),
         "jobs_by": gettext("Jobs by")

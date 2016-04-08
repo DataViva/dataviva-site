@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-08 15:59-0300\n"
+"POT-Creation-Date: 2016-04-08 16:07-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -400,7 +400,7 @@ msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:78
 #: dataviva/translations/dictionary.py:596
-msgid "Main employer city"
+msgid "Main employer Municipality"
 msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:88
@@ -410,7 +410,7 @@ msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:98
 #: dataviva/translations/dictionary.py:598
-msgid "City with highest monthly average income"
+msgid "Municipality with highest monthly average income"
 msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:108
@@ -437,7 +437,7 @@ msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:12
 #: dataviva/translations/dictionary.py:603
-msgid "Employer City"
+msgid "Employer Municipality"
 msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:17
@@ -447,7 +447,7 @@ msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:21
 #: dataviva/translations/dictionary.py:605
-msgid "City with Highest"
+msgid "Municipality with Highest"
 msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:22
