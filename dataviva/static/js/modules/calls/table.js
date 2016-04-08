@@ -78,13 +78,7 @@ var CallsTable = function () {
             $('input[name="selected-item"]').change(function() {
                 checkManySelected();
             });
-        },
-        "columns": [
-            { "width": "8%" },
-            null,
-            null,
-            { "width": "8%" }
-        ],
+        }
     });
 
     $('#calls-table thead tr th').first().addClass('check-all')
