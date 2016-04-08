@@ -591,8 +591,6 @@ def dictionary():
         "best_regards": gettext("Best Regards,"),
         "team": gettext("Team"),
 
-
-
     }
 
 def plurals(key=None, n=1):

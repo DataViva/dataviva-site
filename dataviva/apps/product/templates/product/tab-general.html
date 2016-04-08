@@ -103,7 +103,9 @@
         {% if (product.id|length) == 6 %}
             {% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
             {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in imports and number{%endtrans%} {{ header.import_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
@@ -113,8 +115,10 @@
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
-            {% trans %}are number {%endtrans%} {{ header.import_value_ranking }} 
+            {% trans %}are number {%endtrans%} {{ header.import_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in imports and number{%endtrans%} {{ header.export_value_ranking }} 
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
@@ -127,8 +131,10 @@
         {% if (product.id|length) == 6 %}
             {% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
             {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in imports in the state of{%endtrans%} {{location.name()}}
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
@@ -140,8 +146,10 @@
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
             {% trans %}are number {%endtrans%} {{ header.export_value_ranking }} 
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in imports in the state of{%endtrans%} {{location.name()}}
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
@@ -155,8 +163,10 @@
         {% if (product.id|length) == 6 %}
             {% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
             {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in imports in the mesoregion of{%endtrans%} {{location.name()}}
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
@@ -168,8 +178,10 @@
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
             {% trans %}are number {%endtrans%} {{ header.export_value_ranking }} 
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in imports in the mesoregion of{%endtrans%} {{location.name()}}
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
@@ -183,8 +195,10 @@
         {% if (product.id|length) == 6 %}
             {% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
             {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in imports in the microregion of{%endtrans%} {{location.name()}}
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
@@ -196,8 +210,10 @@
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
             {% trans %}are number {%endtrans%} {{ header.export_value_ranking }} 
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in imports in the microregion of{%endtrans%} {{location.name()}}
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
@@ -211,7 +227,9 @@
         {% if (product.id|length) == 6 %}
             {% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
             {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in imports and number{%endtrans%} {{ header.import_value_ranking }}
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
@@ -220,7 +238,9 @@
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
             {% trans %}are number {%endtrans%} {{ header.import_value_ranking }} 
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in imports and number{%endtrans%} {{ header.export_value_ranking }} 
+            {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
