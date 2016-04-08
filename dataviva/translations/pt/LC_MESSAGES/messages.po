@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-08 15:56-0300\n"
+"POT-Creation-Date: 2016-04-08 15:59-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -298,12 +298,29 @@ msgstr "Anterior"
 msgid "Next"
 msgstr "Próximo"
 
+#: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:3
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:3
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:3
 #: dataviva/translations/dictionary.py:516
 msgid "Preview"
 msgstr "Visualize"
+
+#: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:5
+#: dataviva/apps/occupation/templates/occupation/index.html:67
+#: dataviva/apps/occupation/templates/occupation/tab-opportunities.html:2
+#: dataviva/apps/product/templates/product/index.html:67
+#: dataviva/apps/product/templates/product/tab-opportunities.html:2
+#: dataviva/translations/dictionary.py:481
+msgid "Economic Opportunities"
+msgstr "Oportunidades Econômicas"
+
+#: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:6
+#: dataviva/templates/about.html:106 dataviva/templates/site.html:75
+#: dataviva/templates/about/apps/network.html:1
+#: dataviva/translations/dictionary.py:12
+msgid "Network"
+msgstr "Rede"
 
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:5
 #: dataviva/translations/dictionary.py:608
@@ -359,14 +376,6 @@ msgstr "Estatísticas Gerais"
 #: dataviva/translations/dictionary.py:589
 msgid "Wages and Jobs"
 msgstr "Salário e Emprego"
-
-#: dataviva/apps/occupation/templates/occupation/index.html:67
-#: dataviva/apps/occupation/templates/occupation/tab-opportunities.html:2
-#: dataviva/apps/product/templates/product/index.html:67
-#: dataviva/apps/product/templates/product/tab-opportunities.html:2
-#: dataviva/translations/dictionary.py:481
-msgid "Economic Opportunities"
-msgstr "Oportunidades Econômicas"
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:7
 #: dataviva/translations/dictionary.py:590
@@ -790,12 +799,6 @@ msgstr "Sobre as Visualizações"
 #: dataviva/translations/dictionary.py:16
 msgid "Tree Map"
 msgstr "Tree Map"
-
-#: dataviva/templates/about.html:106 dataviva/templates/site.html:75
-#: dataviva/templates/about/apps/network.html:1
-#: dataviva/translations/dictionary.py:12
-msgid "Network"
-msgstr "Rede"
 
 #: dataviva/templates/about.html:110 dataviva/templates/site.html:77
 #: dataviva/templates/about/apps/rings.html:1
