@@ -68,14 +68,14 @@
 
     <div class="row">
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>Comércio Internacional</h3>
+            <h3>{% trans %}International Trade{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                         {% if body.is_not_municipality %}
                         <tr>
                             <th>
-                               Principal Município por Empregos
+                               {% trans %}Main employer city{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{body.municipality_with_more_jobs}}</p>
@@ -85,7 +85,7 @@
                         {% endif %}
                         <tr>
                             <th>
-                                Principal Atividade por Empregos
+                                {% trans %}Main employer activity{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{body.activity_with_more_jobs}}</p>
@@ -95,7 +95,7 @@
                         {% if body.is_not_municipality %}
                         <tr>
                             <th>
-                                Município com maior renda média mensal
+                                {% trans %}City with highest monthly average income{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{body.municipality_with_biggest_wage_avg}}</p>
@@ -105,7 +105,7 @@
                         {% endif %}
                         <tr>
                             <th>
-                                Atividade com maior renda média mensal
+                                {% trans %}Activity with highest monthly average income{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{body.activity_with_biggest_wage_avg}}</p>
@@ -116,7 +116,7 @@
                 </table>
             </div>
             <a href="#wages" aria-controls="wages" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                mais detalhes
+                {% trans %}More details{% endtrans %}
             </a>
         </div>
     </div>

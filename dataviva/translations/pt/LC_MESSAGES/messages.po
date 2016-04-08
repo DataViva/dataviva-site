@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-06 15:22-0300\n"
+"POT-Creation-Date: 2016-04-08 14:50-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -224,6 +224,7 @@ msgid "Wages and Employment"
 msgstr "Salários e Emprego"
 
 #: dataviva/apps/data/views.py:81
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:71
 #: dataviva/apps/product/templates/product/index.html:57
 #: dataviva/apps/product/templates/product/tab-general.html:157
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:2
@@ -339,6 +340,39 @@ msgstr "Total de Empregos"
 msgid "Total of Establishments"
 msgstr "Total de Estabelecimentos"
 
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:49
+#: dataviva/apps/product/templates/product/tab-general.html:98
+#: dataviva/translations/dictionary.py:102
+msgid "Year"
+msgstr "Ano"
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:78
+#: dataviva/translations/dictionary.py:596
+msgid "Main employer city"
+msgstr "Principal Município por Empregos"
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:88
+#: dataviva/translations/dictionary.py:597
+msgid "Main employer activity"
+msgstr "Principal Atividade por Empregos"
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:98
+#: dataviva/translations/dictionary.py:598
+msgid "City with highest monthly average income"
+msgstr "Município com maior renda média mensal"
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:108
+#: dataviva/translations/dictionary.py:599
+#, fuzzy
+msgid "Activity with highest monthly average income"
+msgstr "Atividade com maior renda média mensal"
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:119
+#: dataviva/apps/product/templates/product/tab-general.html:203
+#: dataviva/translations/dictionary.py:482
+msgid "More details"
+msgstr "Mais detalhes"
+
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:3
 #: dataviva/translations/dictionary.py:516
@@ -451,11 +485,6 @@ msgstr "Distância Internacional"
 #: dataviva/translations/dictionary.py:490
 msgid "International Opportunity Gain"
 msgstr "Ganho de Oportunidade Internacional"
-
-#: dataviva/apps/product/templates/product/tab-general.html:98
-#: dataviva/translations/dictionary.py:102
-msgid "Year"
-msgstr "Ano"
 
 #: dataviva/apps/product/templates/product/tab-general.html:101
 #: dataviva/translations/dictionary.py:519
@@ -586,11 +615,6 @@ msgstr "Principal Destino por Valor Total Exportado"
 #, fuzzy
 msgid "Main Origin by Total Value Exported"
 msgstr "Principal Origem por Valor Total Exportado"
-
-#: dataviva/apps/product/templates/product/tab-general.html:203
-#: dataviva/translations/dictionary.py:482
-msgid "More details"
-msgstr "Mais detalhes"
 
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:11
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:15
@@ -4127,25 +4151,25 @@ msgstr ""
 msgid "Get started "
 msgstr ""
 
-#: dataviva/translations/dictionary.py:603
+#: dataviva/translations/dictionary.py:609
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:604
+#: dataviva/translations/dictionary.py:610
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:605
+#: dataviva/translations/dictionary.py:611
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:606
+#: dataviva/translations/dictionary.py:612
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"
