@@ -2,11 +2,11 @@
 
 {% block breadcrumb %}
     <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
-    <li class="active">Blog</li>
+    <li class="active">Calls</li>
 {% endblock %}
 
 {% block admin_content %}
-<h1>Blog</h1>
+<h1>Calls</h1>
 
 <div id="message">
 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -21,7 +21,7 @@
 {% endwith %}
 </div>
 
-<table id="blog-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="calls-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th class="column-checkbox">
@@ -29,23 +29,24 @@
                     <input name="postselector" type="checkbox">
                     <label for="check-all"></label>
                 </div>
-            </th>
-            <th>Título</th>
-            <th>Autor(es)</th>
-            <th>Data</th>
-            <th>Ativo</th>
+            </th>    
+            <th>Title</th>
+            <th>Link</th>
+            <th>Active</th>
         </tr>
     </thead>
 </table>
 
-<a id="admin-new" class="btn btn-success" href="/blog/admin/post/new"><i class="fa fa-plus m-r-sm"></i>Novo</a>
+<a id="admin-new" class="btn btn-success" href="/calls/admin/call/new"><i class="fa fa-plus m-r-sm"></i>Novo</a>
 <button id="admin-edit" class="btn btn-primary"><i class="fa fa-pencil-square-o m-r-sm"></i>Editar</button>
 <button id="admin-delete" class="btn btn-danger"><i class="fa fa-trash-o m-r-sm"></i>Excluir</button>
 <button id="admin-activate" class="btn btn-success pull-right">Ativar</button>
 <button id="admin-deactivate" class="btn btn-white pull-right m-r-sm">Desativar</button>
 
+
 {% endblock admin_content %}
 
 {% block js_assets %}
-    <script src="/static/js/modules/blog/table.js"></script>
+    <script src="/static/js/modules/calls/table.js"></script>
 {% endblock js_assets %}
+

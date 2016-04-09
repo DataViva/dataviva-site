@@ -11,6 +11,11 @@ mod = Blueprint('calls', __name__,
                 url_prefix='/<lang_code>/calls')
 
 
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
+
+
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
@@ -21,13 +26,13 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/call/new', methods=['GET'])
+@mod.route('/admin/call/new', methods=['GET'])
 def new():
     form = RegistrationForm()
     return render_template('calls/new.html', form=form)
 
 
-@mod.route('/call/new', methods=['POST'])
+@mod.route('/admin/call/new', methods=['POST'])
 def create():
     form = RegistrationForm()
     if form.validate() is False:
@@ -43,10 +48,10 @@ def create():
 
         message = u'Muito obrigado! sua Chamada foi submetida com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('calls.control'))
+        return redirect(url_for('calls.admin'))
 
 
-@mod.route('/call/<id>/edit', methods=['GET'])
+@mod.route('/admin/call/<id>/edit', methods=['GET'])
 def edit(id):
     form = RegistrationForm()
     call = Call.query.filter_by(id=id).first_or_404()
@@ -55,7 +60,7 @@ def edit(id):
     return render_template('calls/edit.html', form=form, action=url_for('calls.update', id=id))
 
 
-@mod.route('/call/<id>/edit', methods=['POST'])
+@mod.route('/admin/call/<id>/edit', methods=['POST'])
 def update(id):
     form = RegistrationForm()
     if form.validate() is False:
@@ -69,35 +74,36 @@ def update(id):
 
         message = u'Chamada editada com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('calls.control'))
+        return redirect(url_for('calls.admin'))
 
 
-@mod.route('/call/<id>/delete', methods=['GET'])
-def delete(id):
-    call = Call.query.filter_by(id=id).first_or_404()
-    if call:
-        db.session.delete(call)
+@mod.route('/admin/delete', methods=['POST'])
+def admin_delete():
+    ids = request.form.getlist('ids[]')
+    if ids:
+        calls = Call.query.filter(Call.id.in_(ids)).all()
+        for call in calls:
+            db.session.delete(call)
+
         db.session.commit()
-        message = u"Chamada excluída com sucesso!"
-        flash(message, 'success')
-        return redirect(url_for('calls.control'))
+        return u"Chamada(s) excluída(s) com sucesso!", 200
     else:
-        return make_response(render_template('not_found.html'), 404) 
-       
+        return u'Selecione alguma chamada para excluí-la.', 205
 
-@mod.route('/', methods=['GET'])
-def control():
+
+@mod.route('/admin', methods=['GET'])
+def admin():
     calls = Call.query.all()
-    return render_template('calls/control.html', calls=calls)
+    return render_template('calls/admin.html', calls=calls)
 
 
-@mod.route('/', methods=['POST'])
-def control_update():
-    for id, active in request.form.iteritems():
+@mod.route('/admin/call/<status>/<status_value>', methods=['POST'])
+def admin_update(status, status_value):
+    for id in request.form.getlist('ids[]'):
         call = Call.query.filter_by(id=id).first_or_404()
-        call.active = active == u'true'
+        setattr(call, status, status_value == u'true')
         db.session.commit()
-    message = u"Estudo(s) atualizados com sucesso!"
+    message = u"Chamada(s) atualizados com sucesso!"
     return message
 
 
