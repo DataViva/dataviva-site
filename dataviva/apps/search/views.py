@@ -76,6 +76,60 @@ def create():
         db.session.add(question)
         db.session.commit()
 
-        message = u'Muito obrigado! Sua pesquisa foi submetida com sucesso!'
+        message = u'Muito obrigado! Sua pergunta foi submetida com sucesso!'
         flash(message, 'success')
         return redirect(url_for('search.admin'))
+
+
+@mod.route('/admin/question/<id>/edit', methods=['GET'])
+def edit(id):
+    form = RegistrationForm()
+    question = SearchQuestion.query.filter_by(id=id).first_or_404()
+    form.profile.data = question.profile_id
+    form.description.data = question.description
+    form.answer.data = question.answer
+    form.selector.data = question.selectors_str()
+    return render_template('search/edit.html', form=form, action=url_for('search.update', id=id))
+
+
+@mod.route('admin/question/<id>/edit', methods=['POST'])
+def update(id):
+    form = RegistrationForm()
+    id = int(id.encode())
+    if form.validate() is False:
+        return render_template('search/edit.html', form=form)
+    else:
+        question = SearchQuestion.query.filter_by(id=id).first_or_404()
+        profile_id = form.profile.data
+        #Id=1, profile=Entrepreneurs / Empreendedores
+        #Id=2, profile=Development Agents / Agentes de Desenvolvimento
+        #Id=3, profile=Students and Professionals / Estudantes e Profissionais
+        profile_id = 1
+        question.profile_id = profile_id
+        question.description = form.description.data
+        question.answer = form.answer.data
+        question.selectors = []
+
+        selector_input_list = form.selector.data.split(',')
+        for selector_input in selector_input_list:
+            question.selectors.append(SearchSelector(selector_input))
+
+        db.session.commit()
+
+        message = u'Pergunta editada com sucesso!'
+        flash(message, 'success')
+        return redirect(url_for('search.admin'))
+
+
+@mod.route('/admin/delete', methods=['POST'])
+def admin_delete():
+    ids = request.form.getlist('ids[]')
+    if ids:
+        questions = SearchQuestion.query.filter(SearchQuestion.id.in_(ids)).all()
+        for question in questions:
+            db.session.delete(question)
+
+        db.session.commit()
+        return u"Pergunta(s) excluída(s) com sucesso!", 200
+    else:
+        return u'Selecione alguma pergunta para excluí-la.', 205
