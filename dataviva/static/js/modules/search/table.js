@@ -63,10 +63,10 @@ var destroy = function(ids){
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível alterar a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
+                    showMessage('Não foi possível alterar a(s) questão(ões) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
-                    showMessage('Uma ou mais notícias selecionados não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
+                    showMessage('Uma ou mais questões selecionados não puderam ser encontradas, a lista de questões será atualizada.', 'info', 8000);
                     searchTable.table.fnReloadAjax();
                 }
             },
