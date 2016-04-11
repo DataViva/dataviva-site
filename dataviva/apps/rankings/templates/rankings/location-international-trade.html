@@ -1,26 +1,20 @@
-{% extends "rankings/index.html" %}
+{% extends "rankings/_base.html" %}
+
+{% block breadcrumb %}
+    <li class="active">Rankings</li>
+{% endblock %}
 
 {% block rankings_content %}
-
 <table id="location-international-trade-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
-            <th>year</th>
-            <th>month</th>
-            <th>import_val</th>
-            <th>export_val</th>
-            <th>import_kg</th>
-            <th>export_kg</th>
-            <th>import_val_growth</th>
-            <th>import_val_growth_5</th>
-            <th>export_val_growth</th>
-            <th>export_val_growth_5</th>
-            <th>wld_diversity</th>
-            <th>wld_diversity_eff</th>
-            <th>hs_diversity</th>
-            <th>hs_diversity_eff</th>
-            <th>eci</th>
-            <th>bra_id</th>
+            <th>{% trans %}Year{% endtrans %}</th>
+            <th>{% trans %}Location{% endtrans %}</th>
+            <th>{% trans %}Imports{% endtrans %}</th>
+            <th>{% trans %}Exports{% endtrans %}</th>
+            <th>{% trans %}Product Diversity{% endtrans %}</th>
+            <th>{% trans %}Effective Product Diversity{% endtrans %}</th>
+            <th>{% trans %}Economic Complexity{% endtrans %}</th>
         </tr>
     </thead>
 </table>

@@ -136,7 +136,7 @@ def edit(id):
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
 
-@mod.route('/publication/<id>/edit', methods=['POST'])
+@mod.route('admin/publication/<id>/edit', methods=['POST'])
 def update(id):
     form = RegistrationForm()
     id = int(id.encode())

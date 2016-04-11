@@ -24,10 +24,10 @@
                 } else {
                     self.selection_callback = function(id, event) {
                         window.location = (
-                            window.location.protocol + 
-                            "//" + 
-                            window.location.host + 
-                            "/en/university/" + 
+                            window.location.protocol +
+                            "//" +
+                            window.location.host +
+                            "/en/university/" +
                             id
                         );
                     }
@@ -48,7 +48,7 @@
                         url: "/attrs/university?depth=" + group.depth_factor,
                     })
                     .then(function(resp){
-                        group.entries = resp.data;
+                        group.entries = resp.data.data;
                         self.loading = false;
                     }, function(errorResp){
                         self.loading = false;

@@ -74,7 +74,7 @@ body {
 /* begin backgrounds location */
 
 .bg-1ac_1 {
-  background: url(/static/img/bgs/1ac_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1ac_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -82,7 +82,7 @@ body {
 }
 
 .bg-1ac_2 {
-  background: url(/static/img/bgs/1ac_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1ac_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -90,7 +90,7 @@ body {
 }
 
 .bg-2al_1 {
-  background: url(/static/img/bgs/2al_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2al_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -98,7 +98,7 @@ body {
 }
 
 .bg-2al_2 {
-  background: url(/static/img/bgs/2al_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2al_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -106,7 +106,7 @@ body {
 }
 
 .bg-1ap_1 {
-  background: url(/static/img/bgs/1ap_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1ap_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -114,7 +114,7 @@ body {
 }
 
 .bg-1ap_2 {
-  background: url(/static/img/bgs/1ap_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1ap_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -122,7 +122,7 @@ body {
 }
 
 .bg-1am_1 {
-  background: url(/static/img/bgs/1am_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1am_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -130,7 +130,7 @@ body {
 }
 
 .bg-1am_2 {
-  background: url(/static/img/bgs/1am_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1am_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -138,7 +138,7 @@ body {
 }
 
 .bg-2ba_1 {
-  background: url(/static/img/bgs/2ba_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2ba_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -146,7 +146,7 @@ body {
 }
 
 .bg-2ba_2 {
-  background: url(/static/img/bgs/2ba_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2ba_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -154,7 +154,7 @@ body {
 }
 
 .bg-2ce_1 {
-  background: url(/static/img/bgs/2ce_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2ce_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -162,7 +162,7 @@ body {
 }
 
 .bg-2ce_2 {
-  background: url(/static/img/bgs/2ce_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2ce_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -170,7 +170,7 @@ body {
 }
 
 .bg-3df_1 {
-  background: url(/static/img/bgs/3df_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/3df_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -178,7 +178,7 @@ body {
 }
 
 .bg-3df_2 {
-  background: url(/static/img/bgs/3df_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/3df_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -186,7 +186,7 @@ body {
 }
 
 .bg-4es_1 {
-  background: url(/static/img/bgs/4es_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/4es_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -194,7 +194,7 @@ body {
 }
 
 .bg-4es_2 {
-  background: url(/static/img/bgs/4es_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/4es_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -202,7 +202,7 @@ body {
 }
 
 .bg-3go_1 {
-  background: url(/static/img/bgs/3go_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/3go_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -210,7 +210,7 @@ body {
 }
 
 .bg-3go_2 {
-  background: url(/static/img/bgs/3go_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/3go_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -218,7 +218,7 @@ body {
 }
 
 .bg-2ma_1 {
-  background: url(/static/img/bgs/2ma_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2ma_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -226,7 +226,7 @@ body {
 }
 
 .bg-2ma_2 {
-  background: url(/static/img/bgs/2ma_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2ma_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -234,7 +234,7 @@ body {
 }
 
 .bg-3mt_1 {
-  background: url(/static/img/bgs/3mt_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/3mt_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -242,7 +242,7 @@ body {
 }
 
 .bg-3mt_2 {
-  background: url(/static/img/bgs/3mt_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/3mt_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -250,7 +250,7 @@ body {
 }
 
 .bg-3ms_1 {
-  background: url(/static/img/bgs/3ms_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/3ms_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -258,7 +258,7 @@ body {
 }
 
 .bg-3ms_2 {
-  background: url(/static/img/bgs/3ms_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/3ms_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -274,7 +274,7 @@ body {
 }
 
 .bg-4mg_1 {
-  background: url(/static/img/bgs/4mg_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/4mg_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -282,7 +282,7 @@ body {
 }
 
 .bg-4mg_2 {
-  background: url(/static/img/bgs/4mg_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/4mg_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -290,7 +290,7 @@ body {
 }
 
 .bg-1pa_1 {
-  background: url(/static/img/bgs/1pa_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1pa_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -298,7 +298,7 @@ body {
 }
 
 .bg-1pa_2 {
-  background: url(/static/img/bgs/1pa_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1pa_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -306,7 +306,7 @@ body {
 }
 
 .bg-2pb_1 {
-  background: url(/static/img/bgs/2pb_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2pb_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -314,7 +314,7 @@ body {
 }
 
 .bg-2pb_2 {
-  background: url(/static/img/bgs/2pb_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2pb_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -322,7 +322,7 @@ body {
 }
 
 .bg-5pr_1 {
-  background: url(/static/img/bgs/5pr_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/5pr_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -330,7 +330,7 @@ body {
 }
 
 .bg-5pr_2 {
-  background: url(/static/img/bgs/5pr_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/5pr_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -338,7 +338,7 @@ body {
 }
 
 .bg-2pe_1 {
-  background: url(/static/img/bgs/2pe_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2pe_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -346,7 +346,7 @@ body {
 }
 
 .bg-2pe_2 {
-  background: url(/static/img/bgs/2pe_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2pe_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -354,7 +354,7 @@ body {
 }
 
 .bg-2pi_1 {
-  background: url(/static/img/bgs/2pi_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2pi_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -362,7 +362,7 @@ body {
 }
 
 .bg-2pi_2 {
-  background: url(/static/img/bgs/2pi_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2pi_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -370,7 +370,7 @@ body {
 }
 
 .bg-4rj_1 {
-  background: url(/static/img/bgs/4rj_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/4rj_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -378,7 +378,7 @@ body {
 }
 
 .bg-4rj_2 {
-  background: url(/static/img/bgs/4rj_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/4rj_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -386,7 +386,7 @@ body {
 }
 
 .bg-2rn_1 {
-  background: url(/static/img/bgs/2rn_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2rn_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -394,7 +394,7 @@ body {
 }
 
 .bg-2rn_2 {
-  background: url(/static/img/bgs/2rn_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2rn_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -402,7 +402,7 @@ body {
 }
 
 .bg-5rs_1 {
-  background: url(/static/img/bgs/5rs_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/5rs_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -410,7 +410,7 @@ body {
 }
 
 .bg-5rs_2 {
-  background: url(/static/img/bgs/5rs_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/5rs_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -418,7 +418,7 @@ body {
 }
 
 .bg-1ro_1 {
-  background: url(/static/img/bgs/1ro_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1ro_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -426,7 +426,7 @@ body {
 }
 
 .bg-1ro_2 {
-  background: url(/static/img/bgs/1ro_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1ro_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -434,7 +434,7 @@ body {
 }
 
 .bg-1rr_1 {
-  background: url(/static/img/bgs/1rr_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1rr_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -442,7 +442,7 @@ body {
 }
 
 .bg-1rr_2 {
-  background: url(/static/img/bgs/1rr_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1rr_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -450,7 +450,7 @@ body {
 }
 
 .bg-5sc_1 {
-  background: url(/static/img/bgs/5sc_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/5sc_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -458,7 +458,7 @@ body {
 }
 
 .bg-5sc_2 {
-  background: url(/static/img/bgs/5sc_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/5sc_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -466,7 +466,7 @@ body {
 }
 
 .bg-4sp_1 {
-  background: url(/static/img/bgs/4sp_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/4sp_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -474,7 +474,7 @@ body {
 }
 
 .bg-4sp_2 {
-  background: url(/static/img/bgs/4sp_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/4sp_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -482,7 +482,7 @@ body {
 }
 
 .bg-2se_1 {
-  background: url(/static/img/bgs/2se_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2se_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -490,7 +490,7 @@ body {
 }
 
 .bg-2se_2 {
-  background: url(/static/img/bgs/2se_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/2se_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -498,7 +498,7 @@ body {
 }
 
 .bg-1to_1 {
-  background: url(/static/img/bgs/1to_1.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1to_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -506,7 +506,7 @@ body {
 }
 
 .bg-1to_2 {
-  background: url(/static/img/bgs/1to_2.jpg) no-repeat center center fixed;
+  background: url(https://dataviva.s3.amazonaws.com/img/1to_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
